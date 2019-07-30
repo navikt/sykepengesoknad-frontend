@@ -285,3 +285,7 @@ export interface OppsummeringSporsmal {
     sporsmalstekst: string,
     tag: string
 }
+
+export interface Ledetekster {
+    [s:string]: string
+}
