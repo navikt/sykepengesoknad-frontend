@@ -1,0 +1,53 @@
+@import '../../index';
+
+.brodsmulerWrapper {
+    padding-top: 2em;
+}
+
+.brodsmuler {
+    margin-bottom: 2em;
+    line-height: 2em;
+    display: flex;
+
+    @media print {
+        display: none;
+    }
+}
+
+.brodsmuler__smule {
+    white-space: nowrap;
+}
+
+.brodsmuler__ikon {
+    display: none;
+}
+
+.brodsmule__skille {
+    padding-left: .5em;
+    padding-right: .5em;
+}
+
+.brodsmuler__duErHer {
+    position: absolute;
+    overflow: hidden;
+    clip: rect(0 0 0 0);
+    height: 1px;
+    width: 1px;
+    margin: -1px;
+    padding: 0;
+    border: 0;
+}
+
+@media (min-width: 24em) {
+    .brodsmuler {
+        display: flex;
+        position: relative;
+    }
+
+    .brodsmuler__ikon {
+        width: 2em;
+        height: 2em;
+        display: inline-block;
+        margin-right: 1em;
+    }
+}

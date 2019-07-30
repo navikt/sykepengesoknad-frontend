@@ -1,14 +1,14 @@
 import * as React from 'react';
+import { BrowserRouter } from 'react-router-dom';
+import Routes from './routes';
+
+import './app.less';
 
 const App = () => {
     return (
-        <div className="app">
-            <header className="app-header">
-                <p>
-                    Edit <code>src/app.js</code> and save to reload.
-                </p>
-            </header>
-        </div>
+        <BrowserRouter>
+            <Routes />
+        </BrowserRouter>
     );
 };
 

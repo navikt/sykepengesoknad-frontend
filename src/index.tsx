@@ -1,13 +1,15 @@
 import * as React from 'react';
 import * as ReactDOM from 'react-dom';
-import * as serviceWorker from './serviceWorker';
+import env from './utils/environment';
 import App from './app';
+import * as dayjs from 'dayjs';
+import 'dayjs/locale/nb';
 
 import './index.less';
 
-ReactDOM.render(<App />, document.getElementById('root') as HTMLElement);
+dayjs.locale('nb');
 
-// If you want your app to work offline and load faster, you can change
-// unregister() to register() below. Note this comes with some pitfalls.
-// Learn more about service workers: https://bit.ly/CRA-PWA
-serviceWorker.unregister();
+if (env.isDevelopment || env.isRunningOnHeroku) {
+    require('./mock');
+}
+ReactDOM.render(<App />, document.getElementById('app-root') as HTMLElement);
