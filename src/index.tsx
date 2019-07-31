@@ -12,4 +12,4 @@ dayjs.locale('nb');
 if (env.isDevelopment || env.isRunningOnHeroku) {
     require('./mock');
 }
-ReactDOM.render(<App />, document.getElementById('app-root') as HTMLElement);
+ReactDOM.render(<App />, document.getElementById('maincontent') as HTMLElement);
