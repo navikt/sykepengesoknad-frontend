@@ -1,9 +1,10 @@
 import * as React from 'react';
 import { ReactElement } from 'react';
-import Banner from '../components/banner';
+import Banner from '../components/banner/banner';
 import { RouteComponentProps } from 'react-router';
-import beregnBrodsmulesti from '../components/brodsmuler/beregn-brodsmulesti';
 import { Brodsmule, Soknad } from '../types/types';
+import { getLedetekst } from '@navikt/digisyfo-npm';
+import beregnBrodsmulesti from '../components/brodsmuler/beregn-brodsmulesti';
 import { AvgittAvTyper, SoknadStatuser, SoknadTyper, SvarTyper } from '../types/enums';
 
 interface SoknadWrapperProps {
@@ -48,6 +49,7 @@ const SoknadSide = ({ sti, soknadId }: AllProps): any => {
         status: SoknadStatuser.NY,
         fom: new Date(),
         tom: new Date(),
+        avbruttDato: new Date(),
         opprettetDato: new Date(),
         innsendtDato: new Date(),
         sendtTilNAVDato: new Date(),
@@ -71,7 +73,9 @@ const SoknadSide = ({ sti, soknadId }: AllProps): any => {
 
     return (
         <SoknadWrapper brodsmuler={brodsmuler} soknad={soknad} >
-            <h1>Hei på dere</h1>
+            <h1>
+                {getLedetekst('aktivitetskrav-varsel.alt.MED_ARBEIDSGIVER')}
+            </h1>
         </SoknadWrapper>
     )
 };
