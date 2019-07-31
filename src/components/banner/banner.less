@@ -1,0 +1,51 @@
+@import '../../basic';
+
+.sidebanner {
+	border-bottom: 5px solid #87d5ee;
+	background-color: #c2eaf7;
+	position: relative;
+	margin-bottom: 2rem;
+}
+
+.sidebanner--utenramme {
+	border-bottom: 0;
+}
+
+.sidebanner__illustrasjon {
+	display: none;
+}
+
+.sidebanner__innhold {
+	.begrensning();
+	position: relative;
+	padding-top: 1rem;
+	padding-bottom: 1rem;
+
+	.brodsmuler {
+		margin-bottom: 1rem;
+	}
+}
+
+.sidebanner__tittel {
+	margin: 0;
+	text-align: center;
+}
+
+@media(min-width: @skjermMedium) {
+	.sidebanner__innhold .brodsmuler {
+		margin-bottom: 2rem; // default
+	}
+
+	.sidebanner__tittel {
+		padding-bottom: 1rem;
+		text-align: left;
+	}
+
+	.sidebanner__illustrasjon {
+		position: absolute;
+		right: .5rem;
+		left: auto;
+		bottom: -5px;
+		display: block;
+	}
+}

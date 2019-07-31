@@ -1,10 +1,12 @@
 import * as React from 'react';
-import { SoknadTyper } from '../types/enums';
-import Brodsmuler from './brodsmuler/brodsmuler';
-import { Brodsmule, Soknad } from '../types/types';
+import { SoknadTyper } from '../../types/enums';
+import Brodsmuler from '../brodsmuler/brodsmuler';
+import { Brodsmule, Soknad } from '../../types/types';
 import Hjelpetekst from 'nav-frontend-hjelpetekst';
 import { Sidetittel } from 'nav-frontend-typografi';
 import { getLedetekst, tilLesbarPeriodeMedArstall } from '@navikt/digisyfo-npm';
+
+import './banner.less';
 
 interface BannerProps {
     soknad: Soknad,

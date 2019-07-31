@@ -1,6 +1,7 @@
 import { getLedetekst } from '@navikt/digisyfo-npm';
-import beregnSteg, { KVITTERING } from './beregn-steg';
+import beregnSteg from './beregn-steg';
 import { getSykefravaerUrl, getUrlTilSoknad } from '../../utils/url-utils';
+import { Steg } from '../../types/enums';
 
 interface BrodSmule {
     tittel: string;
@@ -28,7 +29,7 @@ const beregnBrodsmulesti = (sti: string, id: string) => {
     };
 
     switch (beregnSteg(sti)) {
-        case KVITTERING: {
+        case Steg.KVITTERING: {
             const kvitteringSmule: BrodSmule = {
                 tittel: 'Kvittering',
                 sti: '/kvittering',
