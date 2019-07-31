@@ -4,6 +4,10 @@ export const lagHentLedeteksterInfo = (params?: any): FetchInfo => ({
     url: '/syfotekster/api/tekster',
 });
 
+export const lagHentSoknaderInfo = (params?: any): FetchInfo => ({
+    url: '/syfoapi/syfosoknad/api',
+});
+
 export const hentApiUrl = () => {
     const url = window
     && window.location

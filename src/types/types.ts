@@ -228,6 +228,7 @@ export interface Soknad {
     status: string,
     fom: Date,
     tom: Date,
+    avbruttDato: Date,
     opprettetDato: Date,
     innsendtDato: Date,
     sendtTilNAVDato: Date,
