@@ -1,0 +1,5 @@
+export enum RSArbeidssituasjon {
+    NAERINGSDRIVENDE = 'NAERINGSDRIVENDE',
+    FRILANSER = 'FRILANSER',
+    ARBEIDSTAKER = 'ARBEIDSTAKER'
+}

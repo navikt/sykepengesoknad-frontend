@@ -50,20 +50,20 @@ export enum SporsmalsTyper {
 
 export enum SvarTyper {
     JA_NEI = 'JA_NEI',
-    DATO = 'DATO',
-    TIMER = 'TIMER',
-    PROSENT = 'PROSENT',
     CHECKBOX = 'CHECKBOX',
     CHECKBOX_GRUPPE = 'CHECKBOX_GRUPPE',
     CHECKBOX_PANEL = 'CHECKBOX_PANEL',
+    DATO = 'DATO',
     PERIODER = 'PERIODER',
+    TIMER = 'TIMER',
     FRITEKST = 'FRITEKST',
     LAND = 'LAND',
     IKKE_RELEVANT = 'IKKE_RELEVANT',
-    TALL = 'TALL',
+    PROSENT = 'PROSENT',
     RADIO_GRUPPE = 'RADIO_GRUPPE',
     RADIO_GRUPPE_TIMER_PROSENT = 'RADIO_GRUPPE_TIMER_PROSENT',
-    RADIO = 'RADIO'
+    RADIO = 'RADIO',
+    TALL = 'TALL'
 }
 
 export enum SoknadStatuser {

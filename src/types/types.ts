@@ -1,10 +1,11 @@
-import {
-    ArbeidsSituasjoner, AvgittAvTyper,
-    InntektskildeTyper,
-    SporsmalsTyper, SvarTyper,
-    SykepengesoknadSvartyper,
-    SykmeldingStatuser
-} from './enums';
+import { InntektskildeTyper, SporsmalsTyper, SykepengesoknadSvartyper, SykmeldingStatuser } from './enums';
+import { RSArbeidssituasjon } from './rs-types/rs-arbeidssituasjon';
+import { RSSvartype } from './rs-types/rs-svartype';
+import { RSSoknadstype } from './rs-types/rs-soknadstype';
+import { RSSoknadstatus } from './rs-types/rs-soknadstatus';
+import dayjs from 'dayjs';
+import { RSSporsmal } from './rs-types/rs-sporsmal';
+import { RSSvar } from './rs-types/rs-svar';
 
 export interface SykepengesoknadOppsummeringLedetekst {
     nokkel: string,
@@ -73,7 +74,7 @@ export interface NaermesteLeder {
 export interface Arbeidsgiver {
     navn: string,
     orgnummer: string,
-    naermesteLeder: NaermesteLeder
+    naermesteLeder?: NaermesteLeder
 }
 
 export interface SoknadsAktivitet {
@@ -111,7 +112,7 @@ export interface Sykmelding {
     status: SykmeldingStatuser,
     naermesteLederStatus: string,
     innsendtArbeidsgivernavn: string,
-    valgtArbeidssituasjon: ArbeidsSituasjoner,
+    valgtArbeidssituasjon: RSArbeidssituasjon,
     mottakendeArbeidsgiver: {
         navn: string,
         virksomhetsnummer: string,
@@ -221,37 +222,93 @@ export interface SykeforlopPeriode {
     avventende: string,
 }
 
-export interface Soknad {
-    id: string,
-    sykmeldingId: string,
-    soknadstype: string,
-    status: string,
-    fom: Date,
-    tom: Date,
-    avbruttDato: Date,
-    opprettetDato: Date,
-    innsendtDato: Date,
-    sendtTilNAVDato: Date,
-    sendtTilArbeidsgiverDato: Date,
-    sporsmal: Sporsmal[]
+export class Soknad {
+    id: string;
+    sykmeldingId?: string;
+    soknadstype: RSSoknadstype;
+    status: RSSoknadstatus;
+    fom?: Date;
+    tom?: Date;
+    avbruttDato?: Date;
+    opprettetDato: Date;
+    innsendtDato: Date;
+    sendtTilNAVDato?: Date;
+    sendtTilArbeidsgiverDato: Date;
+    arbeidsgiver: Arbeidsgiver;
+    sporsmal: Sporsmal[];
+
+    constructor(
+        id: string,
+        sykmeldingId: string,
+        soknadstype: string,
+        status: string,
+        fom: string, // yyyy-mm-dd
+        tom: string,
+        avbruttDato: string,
+        opprettetDato: string,
+        innsendtDato: string,
+        sendtTilNAVDato: string,
+        sendtTilArbeidsgiverDato: string,
+        arbeidsgiver: Arbeidsgiver,
+        sporsmal: RSSporsmal[],
+    ) {
+        this.id = id;
+        this.sykmeldingId = sykmeldingId;
+        const type = soknadstype as keyof typeof RSSoknadstype;
+        this.soknadstype = RSSoknadstype[type];
+        const stat = status as keyof typeof RSSoknadstatus;
+        this.status = RSSoknadstatus[stat];
+        this.fom = dayjs(fom).toDate();
+        this.tom = dayjs(tom).toDate();
+        this.avbruttDato = dayjs(avbruttDato).toDate();
+        this.opprettetDato = dayjs(opprettetDato).toDate();
+        this.innsendtDato = dayjs(innsendtDato).toDate();
+        this.sendtTilNAVDato = dayjs(sendtTilNAVDato).toDate();
+        this.sendtTilArbeidsgiverDato = dayjs(sendtTilArbeidsgiverDato).toDate();
+        this.arbeidsgiver = {
+            naermesteLeder: arbeidsgiver.naermesteLeder,
+            navn: arbeidsgiver.navn,
+            orgnummer: arbeidsgiver.orgnummer
+        };
+        this.sporsmal = rsToSporsmal(sporsmal);
+    }
 }
 
-export interface Sporsmal {
-    id: string,
-    kriterieForVisningAvUndersporsmal: string,
-    max: Date | number | string,
-    min: Date | number | string,
-    sporsmalstekst: string,
-    svar: Svar,
-    svartype: SvarTyper,
-    tag: string,
-    undertekst: string,
-    pavirkerAndreSporsmal: boolean
+export class Sporsmal {
+    id: string;
+    tag: string;
+    sporsmalstekst: string;
+    undertekst: string;
+    svartype: RSSvartype;
+    min: Date;
+    max: Date;
+    pavirkerAndreSporsmal: boolean;
+    kriterieForVisningAvUndersporsmal: string;
+    svar: RSSvar[];
+    undersporsmal: Sporsmal[];
+
+    constructor(spm: RSSporsmal) {
+        this.id = spm.id;
+        this.tag = spm.tag;
+        this.sporsmalstekst = spm.sporsmalstekst;
+        this.undertekst = spm.undertekst;
+        this.svartype = spm.svartype;
+        this.min = dayjs(spm.min).toDate();
+        this.max = dayjs(spm.max).toDate();
+        this.pavirkerAndreSporsmal = spm.pavirkerAndreSporsmal;
+        this.kriterieForVisningAvUndersporsmal = spm.kriterieForVisningAvUndersporsmal;
+        this.svar = spm.svar;
+        this.undersporsmal = rsToSporsmal(spm.undersporsmal);
+    }
 }
 
-export interface Svar {
-    verdi: string | Date,
-    avgittAv?: AvgittAvTyper
+function rsToSporsmal(spms: RSSporsmal[]) {
+    let sporsmals: Sporsmal[] = [];
+    spms.forEach(rssp => {
+        const spm: Sporsmal = new Sporsmal(rssp);
+        sporsmals.push(spm);
+    });
+    return sporsmals;
 }
 
 export interface Brodsmule {
@@ -282,11 +339,11 @@ export interface Fields {
 }
 
 export interface OppsummeringSporsmal {
-    svar: Svar,
+    svar: RSSvar,
     sporsmalstekst: string,
     tag: string
 }
 
 export interface Ledetekster {
-    [s:string]: string
+    [s: string]: string
 }

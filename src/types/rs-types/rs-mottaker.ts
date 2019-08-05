@@ -1,0 +1,5 @@
+export enum RSMottaker {
+    NAV = 'NAV',
+    ARBEIDSGIVER = 'ARBEIDSGIVER',
+    ARBEIDSGIVER_OG_NAV = 'ARBEIDSGIVER_OG_NAV'
+}
