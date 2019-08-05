@@ -34,22 +34,19 @@ interface SoknadArbeidstakerProps {
 const SoknadArbeidstaker = ({ soknad, sti }: SoknadArbeidstakerProps) => {
     return <Systemtittel tag="h1">SoknadArbeidstakerSkjema inn her</Systemtittel>;
 
+/*
     switch (soknad.status) {
         case SoknadStatuser.NY:
-        /*
                     case SoknadStatuser.UTKAST_TIL_KORRIGERING: {
                         return <SoknadArbeidstakerSkjema {...props} />;
                     }
-        */
         case SoknadStatuser.SENDT:
-        /*
                     case SoknadStatuser.KORRIGERT: {
                         if (beregnSteg(sti) === Steg.KVITTERING) {
                             return <SoknadKvitteringSjekker {...props} />;
                         }
                         return <SendtSoknadArbeidstaker {...props} />;
                     }
-        */
         case SoknadStatuser.AVBRUTT: {
             return <AvbruttSoknadArbeidstaker {...{soknad, sti}} />;
         }
@@ -57,6 +54,7 @@ const SoknadArbeidstaker = ({ soknad, sti }: SoknadArbeidstakerProps) => {
             return <Feilmelding melding="Søknaden har ukjent status"/>;
         }
     }
+*/
 };
 
 export default SoknadArbeidstaker;

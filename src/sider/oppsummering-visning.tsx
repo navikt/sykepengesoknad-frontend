@@ -16,12 +16,12 @@ const OppsummeringVisning = ({ soknad }: OppsummeringVisningProps) => {
             {
                 soknad.sporsmal
                     .filter((sporsmal) => {
-                        return (
+                        return (true
 /*
                             sporsmal.svar.length > 0 ||
                             sporsmal.undersporsmal.length > 0 ||
-*/
                             sporsmal.svartype === SvarTyper.IKKE_RELEVANT
+*/
                         );
                     })
                     .map((sporsmal) => {

@@ -1,11 +1,10 @@
 import * as React from 'react';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import SoknadSide from './sider/soknad-side';
-import StoreProvider from './stores/store-provider';
 import SoknaderSide from './sider/soknader-side';
-
-import './app.less';
+import StoreProvider from './stores/store-provider';
 import { DataFetcher } from './components/data-fetcher';
+import './app.less';
 
 const App = () => {
     return (
