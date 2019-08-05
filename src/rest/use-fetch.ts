@@ -1,43 +1,39 @@
 import { useCallback, useMemo, useState } from 'react';
-import { FetchInfo, FetchState, FetchStatus } from './utils';
-import { logger } from '../utils/logger';
+import { FetchState, FetchStatus } from './utils';
 
 export interface Fetch<D = any, FP = any> extends FetchState<D> {
-    fetch: (fetchParams: FP, onFinished?: (fetchState: FetchState<D>) => void) => void;
+    fetch: (url: string, request?: RequestInit, onFinished?: (fetchState: FetchState<D>) => void) => void;
     reset: () => void;
 }
 
 const createInitialFetchState = (): FetchState<any> => ({
     status: FetchStatus.NOT_STARTED,
     error: null,
-    data: null as any,
+    data: null,
     httpCode: -1,
 });
 
 const createPendingFetchState = (): FetchState<any> => ({
     status: FetchStatus.PENDING,
     error: null,
-    data: null as any,
+    data: null,
     httpCode: -1
 });
 
-const createFinishedFetchState = <D = {}>(data: D | null, error: any | null, httpCode: number): FetchState<D> => ({
+const createFinishedFetchState = <D = {}>(data: D | null, error: any, httpCode: number): FetchState<any> => ({
     status: FetchStatus.FINISHED,
     error,
-    data: data as D,
+    data: data,
     httpCode,
 });
 
-const useFetch = <D = {}, FP = any>(createFetchInfo: (fetchParams: FP) => FetchInfo): Fetch<D, FP> => {
+const useFetch = <D = {}>(): Fetch<D> => {
     const [fetchState, setFetchState] = useState<FetchState<D>>(createInitialFetchState());
-
-    const apiFetch = (fetchParams: FP, onFinished?: (fetchState: FetchState<D>) => void) => {
-        const fetchInfo = createFetchInfo(fetchParams);
-        const { url, ...restInfo } = fetchInfo;
+    const apiFetch = (url: string, request?: RequestInit, onFinished?: (fetchState: FetchState<D>) => void) => {
 
         setFetchState(createPendingFetchState());
 
-        fetch(url, restInfo)
+        fetch(url, request)
             .then(async (res) => {
 
                 const httpCode = res.status;
@@ -48,21 +44,17 @@ const useFetch = <D = {}, FP = any>(createFetchInfo: (fetchParams: FP) => FetchI
                         const data = await res.json();
                         state = createFinishedFetchState(data, null, httpCode);
                     } catch (error) {
-                        state = createFinishedFetchState(null as any, error, httpCode);
+                        state = createFinishedFetchState(null, error, httpCode);
                     }
                 } else {
-                    state = createFinishedFetchState(null as any, null, httpCode);
+                    state = createFinishedFetchState(null, null, httpCode);
                 }
 
                 return state;
             })
             .catch(error => {
-                return createFinishedFetchState(null as any, error, -1);
+                return createFinishedFetchState(null, error, -1);
             }).then(state => {
-
-            if (state.httpCode >= 400) {
-                logger.error('API kall feilet', state);
-            }
 
             if (onFinished) {
                 onFinished(state);

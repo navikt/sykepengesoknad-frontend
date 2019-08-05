@@ -1,9 +1,10 @@
 import * as React from 'react';
-import { BrowserRouter } from 'react-router-dom';
-import Routes from './routes';
+import { BrowserRouter, Route, Switch } from 'react-router-dom';
+import SoknadSide from './sider/soknad-side';
+import StoreProvider from './stores/store-provider';
+import SoknaderSide from './sider/soknader-side';
 
 import './app.less';
-import StoreProvider from './stores/store-provider';
 import { DataFetcher } from './components/data-fetcher';
 
 const App = () => {
@@ -11,7 +12,11 @@ const App = () => {
         <StoreProvider>
             <DataFetcher>
                 <BrowserRouter>
-                    <Routes/>
+                    <Switch>
+                        <Route path={`${process.env.REACT_APP_CONTEXT_ROOT}/soknader/:sykepengesoknadId`} component={SoknadSide}/>
+                        <Route path={`${process.env.REACT_APP_CONTEXT_ROOT}/soknader/:sykepengesoknadId/:steg`} component={SoknadSide}/>
+                        <Route path="*" component={SoknaderSide}/>
+                    </Switch>
                 </BrowserRouter>
             </DataFetcher>
         </StoreProvider>

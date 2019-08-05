@@ -4,21 +4,23 @@ import { AlertStripeFeil } from 'nav-frontend-alertstriper';
 import useFetch from '../rest/use-fetch';
 import { Ledetekster, Soknad } from '../types/types';
 import { setLedetekster } from '@navikt/digisyfo-npm';
-import { lagHentLedeteksterInfo, lagHentSoknaderInfo } from '../rest/api';
-import { hasAnyFailed, isAnyNotStartedOrPending, isNotStarted } from '../rest/utils';
+import { hasAnyFailed, hasData, isAnyNotStartedOrPending, isNotStarted } from '../rest/utils';
+import { useAppStore } from '../stores/app-store';
 
 export function DataFetcher(props: { children: any }) {
-    const ledetekster = useFetch<Ledetekster>(lagHentLedeteksterInfo);
-    const soknader = useFetch<Soknad[]>(lagHentSoknaderInfo);
+    const { setSoknader } = useAppStore();
+    const ledetekster = useFetch<Ledetekster>();
+    const soknader = useFetch<Soknad[]>();
 
     useEffect(() => {
         if (isNotStarted(ledetekster)) {
-            ledetekster.fetch({});
+            ledetekster.fetch('/syfotekster/api/tekster');
         }
         if (isNotStarted(soknader)) {
-            soknader.fetch({})
+            soknader.fetch('/syfoapi/syfosoknad/api/soknader')
         }
-    }, [ledetekster, soknader]);
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, []);
 
     if (isAnyNotStartedOrPending([ledetekster])) {
         return <Spinner/>;
@@ -32,5 +34,10 @@ export function DataFetcher(props: { children: any }) {
         );
     }
     setLedetekster(ledetekster.data);
+    if (hasData(soknader)) {
+        setSoknader(soknader.data);
+    }
+
     return props.children;
 }
+

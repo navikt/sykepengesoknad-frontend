@@ -1,18 +1,18 @@
-import { frontendlogger } from '../utils/frontend-logger';
-
-export type FetchInfo = RequestInit & { url: string };
-
 export enum FetchStatus {
     NOT_STARTED = 'NOT_STARTED',
     PENDING = 'PENDING',
     FINISHED = 'FINISHED'
 }
 
-export interface FetchState<D = any> {
+export interface FetchState<D = {}> {
     status: FetchStatus;
     error: any;
-    data: D;
+    data: D | null;
     httpCode: number;
+}
+
+export interface FetchStateWithData<D = {}> extends FetchState<D> {
+    data: D;
 }
 
 export const isAnyNotStartedOrPending = (fetch: FetchState | FetchState[]): boolean => {
@@ -47,22 +47,6 @@ export const hasFailed = (fetch: FetchState): boolean => {
     return fetch.error != null || fetch.httpCode >= 400;
 };
 
-export const hasData = (fetch: FetchState): boolean => {
+export const hasData = <D = {}>(fetch: FetchState<D>): fetch is FetchStateWithData<D> => {
     return fetch.data != null;
-};
-
-export const fetchWithInfo = (fetchInfo: FetchInfo) => {
-    const { url, ...rest } = fetchInfo;
-    return fetch(url, rest).then((res) => {
-
-        if (res.status >= 400) {
-            res.clone().text()
-                .then(txt => {
-                    frontendlogger.logError({ error: txt });
-                })
-                .catch();
-        }
-
-        return res;
-    });
 };
