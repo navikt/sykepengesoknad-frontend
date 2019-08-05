@@ -1,5 +1,4 @@
 import * as React from 'react';
-import { SoknadTyper } from '../../types/enums';
 import Brodsmuler from '../brodsmuler/brodsmuler';
 import { Brodsmule, Soknad } from '../../types/types';
 import Hjelpetekst from 'nav-frontend-hjelpetekst';
@@ -7,6 +6,7 @@ import { Sidetittel } from 'nav-frontend-typografi';
 import { getLedetekst, tilLesbarPeriodeMedArstall } from '@navikt/digisyfo-npm';
 
 import './banner.less';
+import { RSSoknadstype } from '../../types/rs-types/rs-soknadstype';
 
 interface BannerProps {
     soknad: Soknad,
@@ -14,7 +14,7 @@ interface BannerProps {
 }
 
 const Banner = ({ soknad, brodsmuler }: BannerProps) => {
-    const tittel = soknad && soknad.soknadstype === SoknadTyper.OPPHOLD_UTLAND
+    const tittel = soknad && soknad.soknadstype === RSSoknadstype.OPPHOLD_UTLAND
         ? getLedetekst('sykepengesoknad-utland.tittel')
         : getLedetekst('sykepengesoknad.sidetittel');
 
