@@ -1,3 +1,4 @@
+import dayjs from 'dayjs';
 import { senesteTom } from '@navikt/digisyfo-npm';
 import { Soknad, Sporsmal } from '../types/types';
 import { TagTyper } from '../types/enums';
@@ -32,13 +33,22 @@ export const sorterEtterPerioder = (soknad1: Soknad, soknad2: Soknad) => {
 };
 
 export const sorterEtterOpprettetDato = (soknad1: Soknad, soknad2: Soknad) => {
-    return soknad1.opprettetDato.getTime() - soknad2.opprettetDato.getTime() !== 0
-        ? soknad1.opprettetDato.getTime() - soknad2.opprettetDato.getTime()
-        : soknad1.fom!.getTime() - soknad2.fom!.getTime();
+    console.log('soknad1', soknad1); //tslint:disable-line
+    return lagDato(soknad1.opprettetDato).getTime() !== lagDato(soknad2.opprettetDato).getTime()
+        ? lagDato(soknad1.opprettetDato).getTime() - lagDato(soknad2.opprettetDato).getTime()
+        : lagDato(soknad1.fom!).getTime() - lagDato(soknad2.fom!).getTime();
+};
+
+const lagDato = (dato: string | Date): Date => {
+    if (typeof dato === 'string') {
+        return dayjs(dato).toDate();
+    } else {
+        return dato;
+    }
 };
 
 export const getTidligsteSendtDato = (soknad: Soknad) => {
-    const sendtTilNAVDato = soknad.innsendtDato || soknad.sendtTilNAVDato;
+    const sendtTilNAVDato = soknad.sendtTilNAVDato;
     if (sendtTilNAVDato && soknad.sendtTilArbeidsgiverDato) {
         return sendtTilNAVDato > soknad.sendtTilArbeidsgiverDato
             ? soknad.sendtTilArbeidsgiverDato
