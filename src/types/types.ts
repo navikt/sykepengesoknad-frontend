@@ -6,6 +6,7 @@ import { RSSoknadstatus } from './rs-types/rs-soknadstatus';
 import dayjs from 'dayjs';
 import { RSSporsmal } from './rs-types/rs-sporsmal';
 import { RSSvar } from './rs-types/rs-svar';
+import { RSSoknad } from './rs-types/rs-soknad';
 
 export interface SykepengesoknadOppsummeringLedetekst {
     nokkel: string,
@@ -231,46 +232,34 @@ export class Soknad {
     tom?: Date;
     avbruttDato?: Date;
     opprettetDato: Date;
-    innsendtDato: Date;
     sendtTilNAVDato?: Date;
     sendtTilArbeidsgiverDato: Date;
-    arbeidsgiver: Arbeidsgiver;
+    arbeidsgiver?: Arbeidsgiver;
     sporsmal: Sporsmal[];
 
     constructor(
-        id: string,
-        sykmeldingId: string,
-        soknadstype: string,
-        status: string,
-        fom: string, // yyyy-mm-dd
-        tom: string,
-        avbruttDato: string,
-        opprettetDato: string,
-        innsendtDato: string,
-        sendtTilNAVDato: string,
-        sendtTilArbeidsgiverDato: string,
-        arbeidsgiver: Arbeidsgiver,
-        sporsmal: RSSporsmal[],
+        soknad: RSSoknad
     ) {
-        this.id = id;
-        this.sykmeldingId = sykmeldingId;
-        const type = soknadstype as keyof typeof RSSoknadstype;
+        this.id = soknad.id;
+        this.sykmeldingId = soknad.sykmeldingId;
+        const type = soknad.soknadstype as keyof typeof RSSoknadstype;
         this.soknadstype = RSSoknadstype[type];
-        const stat = status as keyof typeof RSSoknadstatus;
+        const stat = soknad.status as keyof typeof RSSoknadstatus;
         this.status = RSSoknadstatus[stat];
-        this.fom = dayjs(fom).toDate();
-        this.tom = dayjs(tom).toDate();
-        this.avbruttDato = dayjs(avbruttDato).toDate();
-        this.opprettetDato = dayjs(opprettetDato).toDate();
-        this.innsendtDato = dayjs(innsendtDato).toDate();
-        this.sendtTilNAVDato = dayjs(sendtTilNAVDato).toDate();
-        this.sendtTilArbeidsgiverDato = dayjs(sendtTilArbeidsgiverDato).toDate();
-        this.arbeidsgiver = {
-            naermesteLeder: arbeidsgiver.naermesteLeder,
-            navn: arbeidsgiver.navn,
-            orgnummer: arbeidsgiver.orgnummer
-        };
-        this.sporsmal = rsToSporsmal(sporsmal);
+        this.fom = dayjs(soknad.fom).toDate();
+        this.tom = dayjs(soknad.tom).toDate();
+        this.avbruttDato = dayjs(soknad.avbruttDato).toDate();
+        this.opprettetDato = dayjs(soknad.opprettetDato).toDate();
+        this.sendtTilNAVDato = dayjs(soknad.sendtTilNAVDato).toDate();
+        this.sendtTilArbeidsgiverDato = dayjs(soknad.sendtTilArbeidsgiverDato).toDate();
+        if (soknad.arbeidsgiver) {
+            this.arbeidsgiver = {
+                naermesteLeder: soknad.arbeidsgiver.naermesteLeder,
+                navn: soknad.arbeidsgiver.navn,
+                orgnummer: soknad.arbeidsgiver.orgnummer
+            };
+        }
+        this.sporsmal = rsToSporsmal(soknad.sporsmal);
     }
 }
 
@@ -336,12 +325,6 @@ export interface Fields {
     push: Function,
     map: Function,
     length: number
-}
-
-export interface OppsummeringSporsmal {
-    svar: RSSvar,
-    sporsmalstekst: string,
-    tag: string
 }
 
 export interface Ledetekster {

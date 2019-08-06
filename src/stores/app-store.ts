@@ -4,5 +4,9 @@ import { Soknad } from '../types/types';
 
 export const useAppStore = createUseContext(() => {
     const [soknader, setSoknader] = useState<Soknad[]>([]);
-    return { soknader, setSoknader };
+    const [visFeil, setVisFeil] = useState<boolean>(true);
+    return {
+        soknader, setSoknader,
+        visFeil, setVisFeil
+    };
 });
