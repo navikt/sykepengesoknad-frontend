@@ -39,8 +39,7 @@ const FremtidigSoknadTeaser = ({ soknad }: FremtidigSoknadTeaserProps) => {
 
     return (
         <article aria-labelledby={`soknader-header-${soknad.id}`}>
-            <button
-                className="inngangspanel inngangspanel--inaktivt"
+            <button className="inngangspanel inngangspanel--inaktivt"
                 onClick={(e) => {
                     e.preventDefault();
                     setVis(true);
@@ -73,7 +72,7 @@ const FremtidigSoknadTeaser = ({ soknad }: FremtidigSoknadTeaserProps) => {
                     ? <SoknadLightbox
                         soknad={soknad}
                         onClose={() => setVis(false)}/>
-                : null
+                    : null
             }
         </article>
     );

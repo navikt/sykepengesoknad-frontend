@@ -1,20 +1,16 @@
 import * as React from 'react';
-import { getLedetekst } from '@navikt/digisyfo-npm';
 import { useAppStore } from '../stores/app-store';
+import Soknader from './soknader';
 
 const SoknaderSide = () => {
-    const { soknader } = useAppStore();
+    const { soknader, visFeil } = useAppStore();
+
     return (
-        <>
-            <h1>{getLedetekst('sykepengesoknad.sidetittel.hjelpetekst.tekst')}</h1>
+        <div className="limit">
             {
-                soknader.map(soknad => {
-                    return (
-                        <div>{soknad.sporsmal[0].id}</div>
-                    )
-                })
+                <Soknader soknader={soknader} visFeil={visFeil}/>
             }
-        </>
+        </div>
     )
 };
 

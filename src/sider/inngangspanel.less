@@ -1,0 +1,51 @@
+@import '../basic';
+
+.inngangspanel {
+    display: flex;
+    background-color: @white;
+    margin-top: 1px;
+    padding: 2rem 3rem 2rem 0;
+    color: @navMorkGra;
+    text-decoration: none;
+
+    .inngangspanel__ikon--hover {
+        display: none;
+    }
+
+    &:hover {
+        position: relative;
+        z-index: 100;
+        box-shadow: #ccc 0 0 4px 2px;
+
+        .inngangspanel__ikon--hover {
+            display: flex;
+        }
+
+        .inngangspanel__ikon--normal {
+            display: none;
+        }
+    }
+
+    &.inngangspanel--ekstern {
+        border: 5px solid #669db4;
+        background-position: 97% center;
+        padding-top: 1.5rem;
+        padding-bottom: 1.5rem;
+        margin: 2.5rem 0;
+    }
+}
+
+.inngangspanelerHeader {
+    padding: 1rem 2rem;
+    background-color: @white;
+}
+
+.inngangspanel__ikon {
+    display: flex;
+    width: 60px;
+    justify-content: flex-start;
+    align-items: center;
+    flex-direction: column;
+    margin-left: 18px;
+}
+

@@ -1,7 +1,9 @@
 import * as React from 'react';
 import { Link } from 'react-router-dom';
-import cn from 'classnames';
-import { ReactNode } from 'react';
+import cls from 'classnames';
+import { Normaltekst, Systemtittel } from 'nav-frontend-typografi';
+
+import './inngangspanel.less';
 
 interface InngangspanelIkonProps {
     ikon: string,
@@ -27,23 +29,15 @@ export const InngangspanelIkon = ({ ikon, ikonHover }: InngangspanelIkonProps) =
 
 interface InngangspanelProps {
     to: string,
-    children: ReactNode,
+    children: React.ReactNode,
     className: string
 }
 
 export const Inngangspanel = ({ to, children, className, ...rest }: InngangspanelProps) => {
     return (
-        <Link to={to} className={cn('inngangspanel', className)} {...rest}>
+        <Link to={to} className={cls('inngangspanel', className)} {...rest}>
             {children}
         </Link>
-    );
-};
-
-export const InngangspanelInnhold = (children: ReactNode) => {
-    return (
-        <div className="inngangspanel__innhold">
-            {children}
-        </div>
     );
 };
 
@@ -57,29 +51,19 @@ interface InngangspanelHeaderProps {
 export const InngangspanelHeader = ({ meta, tittel, status, id }: InngangspanelHeaderProps) => {
     return (
         <header className="inngangspanel__header">
-            <h3 className="js-title" id={id}>
-                <small className="inngangspanel__meta">
-                    {meta}
-                </small>
-                <span className="inngangspanel__tittel">
-                    {tittel}
-                </span>
-            </h3>
+            <Normaltekst className="inngangspanel__meta">
+                {meta}
+            </Normaltekst>
+            <Systemtittel tag="h3" className="inngangspanel__tittel">
+                {tittel}
+            </Systemtittel>
             {
                 status
-                    ? <p className="inngangspanel__status js-status">{status}</p>
+                    ? <Normaltekst className="inngangspanel__status">{status}</Normaltekst>
                     : null
             }
         </header>
     );
-};
-
-interface InngangspanelTekstProps {
-    children: ReactNode
-}
-
-export const InngangspanelTekst = ({ children }: InngangspanelTekstProps) => {
-    return (<div className="inngangspanel__tekst">{children}</div>);
 };
 
 interface InngangspanelUndertekstProps {
@@ -88,5 +72,5 @@ interface InngangspanelUndertekstProps {
 }
 
 export const InngangspanelUndertekst = ({ children, className }: InngangspanelUndertekstProps) => {
-    return (<p className={cn('inngangspanel__undertekst js-undertekst mute', className)}>{children}</p>);
+    return (<Normaltekst className={cls('inngangspanel__undertekst', className)}>{children}</Normaltekst>);
 };

@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { getLedetekst } from '@navikt/digisyfo-npm';
-import { Innholdstittel } from 'nav-frontend-typografi';
+import { Systemtittel } from 'nav-frontend-typografi';
 import utbetalingIkon from './utbetalinger.svg';
 import utbetalingHover from './utbetalinger--hover.svg';
 
@@ -12,14 +12,14 @@ const UtbetalingerLenke = () => {
         <a href={URL} target="_blank" rel="noreferrer noopener"
             onMouseEnter={() => setIkon(utbetalingHover)}
             onMouseLeave={() => setIkon(utbetalingIkon)}
-            className="inngangspanel">
+            className="inngangspanel inngangspanel--ekstern">
             <span className="inngangspanel__ikon">
                 <img alt="" className="js-ikon" src={ikon}/>
             </span>
             <div className="inngangspanel__innhold">
-                <Innholdstittel className="inngangspanel__tittel" tag="h2">
+                <Systemtittel className="inngangspanel__tittel" tag="h2">
                     {getLedetekst('soknader.sykepenger.tittel')}
-                </Innholdstittel>
+                </Systemtittel>
             </div>
         </a>
     );

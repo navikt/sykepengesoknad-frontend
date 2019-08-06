@@ -9,6 +9,11 @@ import {
     InngangspanelUndertekst
 } from './inngangspanel';
 import { getUrlTilSoknad } from '../utils/url-utils';
+import GlobeIkon from './globe.svg';
+import GlobeHoverIkon from './globe-hover.svg';
+import SoknaderIkon from './soknader.svg';
+import SoknaderHoverIkon from './soknader-hover.svg';
+
 // import { erSendtTilBeggeMenIkkeSamtidig } from './sykepengesoknad-utils';
 
 const finnArbeidsgivernavn = (soknad: Soknad) => {
@@ -40,15 +45,11 @@ export const SendtUlikt = (soknad: Soknad) => {
 */
 
 const hentIkon = (soknadstype: RSSoknadstype) => {
-    return soknadstype === RSSoknadstype.OPPHOLD_UTLAND
-        ? `${process.env.REACT_APP_CONTEXT_ROOT}/img/svg/globe.svg`
-        : `${process.env.REACT_APP_CONTEXT_ROOT}/img/svg/soknader.svg`;
+    return soknadstype === RSSoknadstype.OPPHOLD_UTLAND ? GlobeIkon : SoknaderIkon;
 };
 
 const hentIkonHover = (soknadstype: RSSoknadstype) => {
-    return soknadstype === RSSoknadstype.OPPHOLD_UTLAND
-        ? `${process.env.REACT_APP_CONTEXT_ROOT}/img/svg/globe-hover.svg`
-        : `${process.env.REACT_APP_CONTEXT_ROOT}/img/svg/soknader_hover-blue.svg`;
+    return soknadstype === RSSoknadstype.OPPHOLD_UTLAND ? GlobeHoverIkon : SoknaderHoverIkon;
 };
 
 const beregnUndertekst = (soknad: Soknad) => {
@@ -69,23 +70,24 @@ const beregnUndertekst = (soknad: Soknad) => {
         case RSSoknadstype.SELVSTENDIGE_OG_FRILANSERE: {
             return soknad.status === RSSoknadstatus.SENDT
                 ? getLedetekst('soknad.teaser.status.SENDT.til-nav', {
-                    '%DATO%': dayjs(soknad.innsendtDato).format(),
+                    '%DATO%': dayjs(soknad.sendtTilNAVDato).format(),
                 })
                 : null;
         }
         default: {
             switch (soknad.status) {
                 case RSSoknadstatus.SENDT:
-/* TODO: Avklare om dette bare gjelder gammel søknad
-                case RSSoknadstatus.TIL_SENDING: {
-                    return sendtTilBeggeMenIkkeSamtidig
-                        ? <SendtUlikt soknad={soknad}/>
-                        : getLedetekst(`soknad.teaser.status.${soknad.status}${getSendtTilSuffix(soknad)}`, {
-                            '%DATO%': dayjs(soknad.sendtTilArbeidsgiverDato || soknad.sendtTilNAVDato).format(),
-                            '%ARBEIDSGIVER%': finnArbeidsgivernavn(soknad),
-                        });
-                }
-*/
+                    /* TODO: Avklare om dette bare gjelder gammel søknad
+                                    case RSSoknadstatus.TIL_SENDING: {
+                                        return sendtTilBeggeMenIkkeSamtidig
+                                            ? <SendtUlikt soknad={soknad}/>
+                                            : getLedetekst(`soknad.teaser.status.${soknad.status}${getSendtTilSuffix(soknad)}`, {
+                                                '%DATO%': dayjs(soknad.sendtTilArbeidsgiverDato || soknad.sendtTilNAVDato).format(),
+                                                '%ARBEIDSGIVER%': finnArbeidsgivernavn(soknad),
+                                            });
+                                    }
+                    */
+                    break;
                 case RSSoknadstatus.NY:
                 case RSSoknadstatus.UTKAST_TIL_KORRIGERING: {
                     return getLedetekst('soknad.teaser.undertekst', {
@@ -143,13 +145,12 @@ interface SykepengesoknadTeaserProps {
     soknad: Soknad;
 }
 
-const SykepengesoknadTeaser = ({ soknad }: SykepengesoknadTeaserProps) => {
+const SoknadTeaser = ({ soknad }: SykepengesoknadTeaserProps) => {
     const status = soknad.status ? soknad.status.toLowerCase() : '';
 
     return (
         <article aria-labelledby={`soknader-header-${soknad.id}`}>
-            <Inngangspanel
-                className={`js-panel js-soknad-${status}`}
+            <Inngangspanel className={`js-panel js-soknad-${status}`}
                 to={getUrlTilSoknad(soknad.id, '')}>
                 <InngangspanelIkon
                     ikon={hentIkon(soknad.soknadstype)}
@@ -173,4 +174,4 @@ const SykepengesoknadTeaser = ({ soknad }: SykepengesoknadTeaserProps) => {
     );
 };
 
-export default SykepengesoknadTeaser;
+export default SoknadTeaser;

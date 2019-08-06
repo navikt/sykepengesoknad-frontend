@@ -1,8 +1,7 @@
 import React from 'react';
 import { Soknad } from '../types/types';
-import { Innholdstittel } from 'nav-frontend-typografi';
-import Infotekst from 'nav-frontend-typografi/lib/infotekst';
-import SykepengesoknadTeaser from './sykepengesoknad-teaser';
+import { Element } from 'nav-frontend-typografi';
+import SoknadTeaser from './soknad-teaser';
 
 interface SoknaderTeasereProps {
     soknader: Soknad[],
@@ -14,22 +13,22 @@ interface SoknaderTeasereProps {
 
 const SoknaderTeasere = ({ soknader, className, tittel, tomListeTekst, id }: SoknaderTeasereProps) => {
     return (
-        <div className="blokk--l">
+        <>
             <header className="inngangspanelerHeader">
-                <Innholdstittel className="inngangspanelerHeader__tittel" tag="h2">{tittel}</Innholdstittel>
+                <Element className="inngangspanelerHeader__tittel" tag="h2">{tittel}</Element>
             </header>
-            <div id={id} className={className || 'js-content'}>
+            <div id={id} className={className}>
                 {soknader.length
                     ?
                     soknader.map((soknad, idx) => {
-                            return <SykepengesoknadTeaser key={idx} soknad={soknad} />;
+                            return <SoknadTeaser key={idx} soknad={soknad} />;
                         }
                     )
                     :
-                    <Infotekst className="panel">{tomListeTekst}</Infotekst>
+                    <Element className="panel">{tomListeTekst}</Element>
                 }
             </div>
-        </div>
+        </>
     );
 };
 

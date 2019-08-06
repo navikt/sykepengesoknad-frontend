@@ -4,9 +4,8 @@ import { getLedetekst, sykepengesoknadstatuser } from '@navikt/digisyfo-npm';
 import { Soknad } from '../types/types';
 import Sidetopp from '../components/sidetopp';
 import SoknaderTeasere from './soknader-teasere';
-import FremtidigSoknadTeaser from './fremtidig-soknad-teaser';
 import UtbetalingerLenke from '../components/utbetalinger/utbetalinger-lenke';
-import { sorterEtterOpprettetDato, sorterEtterPerioder } from './sorter-soknader';
+import { sorterEtterOpprettetDato, sorterEtterPerioder } from '../utils/sorter-soknader';
 
 interface SoknaderProps {
     soknader: Soknad[],
