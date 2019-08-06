@@ -3,6 +3,8 @@ import cls from 'classnames';
 import parser from 'html-react-parser';
 import { Sidetittel } from 'nav-frontend-typografi';
 
+import './sidetopp.less';
+
 interface SidetoppProps {
     tittel: string,
     htmlTekst?: string,
@@ -13,19 +15,17 @@ const Sidetopp = ({ tittel, htmlTekst = undefined, className }: SidetoppProps) =
     const classNames = cls('sidetopp', className);
 
     return (
-        <header className={classNames}>
+        <div className={classNames}>
             <Sidetittel tag="h1" className="sidetopp__tittel">
                 {tittel}
             </Sidetittel>
             {htmlTekst
                 ?
-                <div className="sidetopp__intro js-intro">
-                    <p>{parser({ htmlTekst })}</p>
-                </div>
+                <p className="sidetopp__intro">{parser({ htmlTekst })}</p>
                 :
                 null
             }
-        </header>
+        </div>
     );
 };
 
