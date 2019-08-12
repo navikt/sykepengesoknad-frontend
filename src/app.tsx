@@ -10,11 +10,11 @@ const App = () => {
     return (
         <StoreProvider>
             <DataFetcher>
-                <BrowserRouter>
+                <BrowserRouter basename={process.env.REACT_APP_CONTEXT_ROOT}>
                     <Switch>
-                        <Route path={`${process.env.REACT_APP_CONTEXT_ROOT}/soknader/:sykepengesoknadId`} component={SoknadSide}/>
-                        <Route path={`${process.env.REACT_APP_CONTEXT_ROOT}/soknader/:sykepengesoknadId/:steg`} component={SoknadSide}/>
-                        <Route path="*" component={SoknaderSide}/>
+                        <Route exact={true} path="/" component={SoknaderSide}/>
+                        <Route path={'/soknader/:id'} component={SoknadSide}/>
+                        <Route path={'/soknader/:id/:steg'} component={SoknadSide}/>
                     </Switch>
                 </BrowserRouter>
             </DataFetcher>

@@ -2,6 +2,7 @@ import { RSSoknadstype } from './rs-soknadstype';
 import { RSSoknadstatus } from './rs-soknadstatus';
 import { RSSporsmal } from './rs-sporsmal';
 import { Arbeidsgiver } from '../types';
+import { RSSoknadsperiode } from './rs-soknadsperiode';
 
 export interface RSSoknad {
     id: string;
@@ -16,5 +17,6 @@ export interface RSSoknad {
     sendtTilArbeidsgiverDato: string;
     arbeidsgiver: Arbeidsgiver;
     sporsmal: RSSporsmal[];
+    soknadPerioder: RSSoknadsperiode[];
 }
 

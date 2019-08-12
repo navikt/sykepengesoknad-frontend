@@ -1,0 +1,47 @@
+# ref https://raw.githubusercontent.com/nais/naisd/master/nais_example.yaml
+image: docker.adeo.no:5000/helse/sykepengesok
+team: soknad
+replicas:
+  min: 2
+  max: 4
+  cpuThresholdPercentage: 50
+port: 8080
+healthcheck:
+  # NB: pus-decorator sine helsesjekker
+  liveness:
+    path: sykepengesok/internal/isAlive
+  readiness:
+    path: sykepengesok/internal/isReady
+prometheus:
+  # NB: pus-decorator sine metrikker
+  enabled: true
+  path: sykepengesok/internal/metrics
+resources:
+  limits:
+    cpu: 3
+    memory: 1024Mi
+  requests:
+    cpu: 200m
+    memory: 512Mi
+fasitResources:
+  used:
+  - alias: appres.cms
+    resourceType: baseUrl
+  - alias: appdynamics
+    resourceType: applicationproperties
+  - alias: loadbalancer:tiltakinfo
+    resourceType: loadbalancerconfig
+  # oidc med AzureAD B2C
+  - alias: aad_b2c_clientid
+    resourceType: credential
+  - alias: aad_b2c_discovery
+    resourceType: baseurl
+  - alias: syforest
+    resourceType: baseurl
+  - alias: veilarbstepup_oidc
+    resourceType: baseurl
+
+webproxy: true
+
+alertProfiles:
+  - pus-decorator

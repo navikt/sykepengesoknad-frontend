@@ -1,4 +1,4 @@
-import { InntektskildeTyper, SporsmalsTyper, SykepengesoknadSvartyper, SykmeldingStatuser } from './enums';
+import { InntektskildeTyper, SporsmalsTyper, SykepengesoknadSvartyper, SykmeldingStatuser, TagTyper } from './enums';
 import { RSArbeidssituasjon } from './rs-types/rs-arbeidssituasjon';
 import { RSSvartype } from './rs-types/rs-svartype';
 import { RSSoknadstype } from './rs-types/rs-soknadstype';
@@ -7,6 +7,7 @@ import dayjs from 'dayjs';
 import { RSSporsmal } from './rs-types/rs-sporsmal';
 import { RSSvar } from './rs-types/rs-svar';
 import { RSSoknad } from './rs-types/rs-soknad';
+import { RSSoknadsperiode } from './rs-types/rs-soknadsperiode';
 
 export interface SykepengesoknadOppsummeringLedetekst {
     nokkel: string,
@@ -54,6 +55,11 @@ export interface TidslinjeHendelse {
 }
 
 export interface SoknadPeriode {
+    fom: Date,
+    tom: Date
+}
+
+export interface TidsPeriode {
     fom: Date,
     tom: Date
 }
@@ -107,6 +113,7 @@ export interface SykmeldingPeriode {
 
 export interface Sykmelding {
     id: string,
+    sporsmal: any, // TODO: Riktig format på sporsmal. Lagt til any for å unngå feil i sykmelding-utdrag-for-selvstendige.tsx
     startLegemeldtFravaer: Date,
     skalViseSkravertFelt: boolean,
     identdato: Date,
@@ -236,6 +243,7 @@ export class Soknad {
     sendtTilArbeidsgiverDato: Date;
     arbeidsgiver?: Arbeidsgiver;
     sporsmal: Sporsmal[];
+    soknadPerioder: RSSoknadsperiode[];
 
     constructor(
         soknad: RSSoknad
@@ -260,17 +268,18 @@ export class Soknad {
             };
         }
         this.sporsmal = rsToSporsmal(soknad.sporsmal);
+        this.soknadPerioder = soknad.soknadPerioder;
     }
 }
 
 export class Sporsmal {
     id: string;
-    tag: string;
+    tag: TagTyper;
     sporsmalstekst: string;
     undertekst: string;
     svartype: RSSvartype;
-    min: Date;
-    max: Date;
+    min: string;
+    max: string;
     pavirkerAndreSporsmal: boolean;
     kriterieForVisningAvUndersporsmal: string;
     svar: RSSvar[];
@@ -278,12 +287,13 @@ export class Sporsmal {
 
     constructor(spm: RSSporsmal) {
         this.id = spm.id;
-        this.tag = spm.tag;
+        const tag = spm.tag as keyof typeof TagTyper;
+        this.tag = TagTyper[tag];
         this.sporsmalstekst = spm.sporsmalstekst;
         this.undertekst = spm.undertekst;
         this.svartype = spm.svartype;
-        this.min = dayjs(spm.min).toDate();
-        this.max = dayjs(spm.max).toDate();
+        this.min = spm.min;
+        this.max = spm.max;
         this.pavirkerAndreSporsmal = spm.pavirkerAndreSporsmal;
         this.kriterieForVisningAvUndersporsmal = spm.kriterieForVisningAvUndersporsmal;
         this.svar = spm.svar;
@@ -329,4 +339,14 @@ export interface Fields {
 
 export interface Ledetekster {
     [s: string]: string
+}
+
+export interface SvarVerdi {
+    key: RSSvartype,
+    value: any
+}
+
+export interface Feil {
+    tom: string,
+    fom: string
 }

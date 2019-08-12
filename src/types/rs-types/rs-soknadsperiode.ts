@@ -1,5 +1,5 @@
 export interface RSSoknadsperiode {
-    fom: string;
-    tom: string;
+    fom: Date;
+    tom: Date;
     grad: number;
 }

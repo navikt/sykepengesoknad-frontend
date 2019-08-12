@@ -163,3 +163,30 @@ export enum Steg {
     KVITTERING = 'KVITTERING',
     ETT_SPORSMAL_PER_SIDE = 'ETT_SPORSMAL_PER_SIDE'
 }
+
+export enum HotjarTriggerType {
+    SOKNAD_ARBEIDSTAKER = 'SOKNAD_ARBEIDSTAKER',
+    SOKNAD_FRILANSER_NAERINGSDRIVENDE = 'SOKNAD_FRILANSER_NAERINGSDRIVENDE',
+    SOKNAD_OPPHOLD_UTENFOR_NORGE = 'SOKNAD_OPPHOLD_UTENFOR_NORGE',
+    SELVSTENDIG_FRILANS_JULI_2018 = 'SELVSTENDIG_FRILANS_JULI_2018',
+}
+
+export const OPPHOLD_UTLAND_SKJEMA = 'OPPHOLD_UTLAND_SKJEMA';
+
+export const getSoknadSkjemanavn = (id: string) => {
+    return `SOKNAD___${id}`;
+};
+
+export enum SvarEnums {
+    JA = 'JA',
+    NEI = 'NEI',
+    CHECKED = 'CHECKED',
+    UNCHECKED = 'UNCHECKED'
+}
+
+export enum UnleashToggles {
+    SYKMELDING_ARBEIDSSITUASJON = 'syfo.syfofront.angre.bekreft.sykmelding',
+    SELVSTENDIG_KORRIGER = 'syfo.syfofront.korriger.selvstendig.soknad',
+    NY_ARBEIDSTAKERSOKNAD = 'syfo.ag.soknad.ny.platform',
+    NYTT_SYKMELDINGSMOTTAK = 'syfo.syfofront.nytt.sykmeldingsmottak',
+}
