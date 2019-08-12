@@ -1,62 +1,61 @@
-import React, { Component, ReactNode } from 'react';
+import * as React from 'react';
 import { log } from '@navikt/digisyfo-npm';
+import { useEffect } from 'react';
+import { HotjarTriggerType } from '../types/enums';
 
 interface HotjarTriggerProps {
-    hotjarTrigger: string,
-    children: ReactNode
+    hotjarTrigger: HotjarTriggerType,
+    children: any,
 }
 
-class HotjarTrigger extends Component<HotjarTriggerProps> {
-    componentDidMount() {
-/*
-        if (window.hj instanceof Function
+interface HotjarWindow extends Window {
+    hj: (name: string, value: string) => void;
+}
+
+export const HotjarTrigger = ({ hotjarTrigger, children }: HotjarTriggerProps) => {
+    useEffect(() => {
+        const hotJarWindow = (window as HotjarWindow);
+        if (typeof hotJarWindow.hj === 'function'
             && window.location.href.indexOf('herokuapp') === -1) {
-            window.hj('trigger', this.props.hotjarTrigger);
+            hotJarWindow.hj('trigger', hotjarTrigger);
         }
-*/
-        log(`Trigger hotjar: ${this.props.hotjarTrigger}`);
-    }
+        log(`Trigger hotjar: ${hotjarTrigger}`);
+    }, [hotjarTrigger, children]);
 
-    render() {
-        return this.props.children;
-    }
+    return children;
+};
+
+interface HotjarGeneralProps {
+    children: React.ReactNode;
 }
 
-export const FrilanserSelvstendigKvitteringHotjarTrigger = ({ children }: HotjarTriggerProps) => {
+export const FrilanserSelvstendigKvitteringHotjarTrigger = ({ children }: HotjarGeneralProps) => {
     return (
-        <HotjarTrigger hotjarTrigger="SELVSTENDIG_FRILANS_JULI_2018">
+        <HotjarTrigger hotjarTrigger={HotjarTriggerType.SELVSTENDIG_FRILANS_JULI_2018}>
             {children}
         </HotjarTrigger>
     );
 };
 
-export const FrilanserSoknadHotjarTrigger = ({ children }: HotjarTriggerProps) => {
+export const FrilanserSoknadHotjarTrigger = ({ children }: HotjarGeneralProps) => {
     return (
-        <HotjarTrigger hotjarTrigger="SOKNAD_FRILANSER_NAERINGSDRIVENDE">
+        <HotjarTrigger hotjarTrigger={HotjarTriggerType.SOKNAD_FRILANSER_NAERINGSDRIVENDE}>
             {children}
         </HotjarTrigger>
     );
 };
 
-export const ArbeidstakerSoknadHotjarTrigger = ({ children }: HotjarTriggerProps) => {
+export const ArbeidstakerSoknadHotjarTrigger = ({ children }: HotjarGeneralProps) => {
     return (
-        <HotjarTrigger hotjarTrigger="SOKNAD_ARBEIDSTAKER">
+        <HotjarTrigger hotjarTrigger={HotjarTriggerType.SOKNAD_ARBEIDSTAKER}>
             {children}
         </HotjarTrigger>
     );
 };
 
-export const NyArbeidstakerSoknadHotjarTrigger = ({ children }: HotjarTriggerProps) => {
+export const SykepengerUtlandSoknadTrigger = ({ children }: HotjarGeneralProps) => {
     return (
-        <HotjarTrigger hotjarTrigger="SOKNAD_ARBEIDSTAKER_NY">
-            {children}
-        </HotjarTrigger>
-    );
-};
-
-export const SykepengerUtlandSoknadTrigger = ({ children }: HotjarTriggerProps) => {
-    return (
-        <HotjarTrigger hotjarTrigger="SOKNAD_OPPHOLD_UTENFOR_NORGE">
+        <HotjarTrigger hotjarTrigger={HotjarTriggerType.SOKNAD_OPPHOLD_UTENFOR_NORGE}>
             {children}
         </HotjarTrigger>
     );

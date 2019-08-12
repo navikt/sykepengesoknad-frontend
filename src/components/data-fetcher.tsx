@@ -2,16 +2,17 @@ import React, { useEffect } from 'react';
 import Spinner from 'nav-frontend-spinner';
 import { AlertStripeFeil } from 'nav-frontend-alertstriper';
 import useFetch from '../rest/use-fetch';
-import { Ledetekster, Soknad } from '../types/types';
+import { Ledetekster, Soknad, Sykmelding } from '../types/types';
 import { setLedetekster } from '@navikt/digisyfo-npm';
 import { FetchState, hasAnyFailed, hasData, isAnyNotStartedOrPending, isNotStarted } from '../rest/utils';
 import { useAppStore } from '../stores/app-store';
 import { RSSoknad } from '../types/rs-types/rs-soknad';
 
 export function DataFetcher(props: { children: any }) {
-    const { setSoknader, setVisFeil } = useAppStore();
+    const { setSoknader, setVisFeil, setSykmeldinger } = useAppStore();
     const ledetekster = useFetch<Ledetekster>();
     const soknader = useFetch<RSSoknad[]>();
+    const sykmeldinger = useFetch<Sykmelding[]>();
 
     useEffect(() => {
         if (isNotStarted(ledetekster)) {
@@ -23,6 +24,13 @@ export function DataFetcher(props: { children: any }) {
                     return new Soknad(soknad);
                 }));
             })
+        }
+        if (isNotStarted(sykmeldinger)) {
+            sykmeldinger.fetch('/syforest/sykmeldinger', undefined, (fetchState: FetchState<Sykmelding[]>) => {
+                setSykmeldinger(fetchState.data!.map(sykmelding => {
+                    return sykmelding;
+                }))
+            });
         }
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);

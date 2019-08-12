@@ -4,7 +4,7 @@ import cls from 'classnames';
 
 interface StatusNokkelopplysningProps {
     children: ReactNode,
-    overskrift: string,
+    overskrift?: string,
     tittel: string
 }
 
@@ -31,7 +31,7 @@ export const Statusopplysninger = ({ children }: StatusopplysningerProps) => {
 interface StatuspanelProps {
     children: ReactNode,
     enKolonne: boolean,
-    className: string,
+    className?: string,
 }
 
 const Statuspanel = ({ children, enKolonne = false, className = 'blokk' }: StatuspanelProps) => {
