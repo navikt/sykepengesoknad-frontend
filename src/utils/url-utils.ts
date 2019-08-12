@@ -1,4 +1,4 @@
-export const getUrlTilSoknad = (soknadId: string, side: string) => {
+export const getUrlTilSoknad = (soknadId: string, side: string | undefined) => {
     const baseUrl = `${process.env.REACT_APP_CONTEXT_ROOT}/soknader/${soknadId}`;
     return side
         ? `${baseUrl}/${side}`
@@ -22,7 +22,7 @@ export const getUrlTilKvittering = (soknadId: string) => {
 };
 
 export const getUrlTilSykmelding = (sykmeldingId: string) => {
-    return `${process.env.REACT_APP_SYKEFRAVAER_CONTEXT_ROOT}/sykmeldinger/${sykmeldingId}/`;
+    return `/sykmeldinger/${sykmeldingId}/`;
 };
 export const erHerokuApp = () => {
     const url = window
@@ -34,8 +34,7 @@ export const erHerokuApp = () => {
     return url.indexOf('herokuapp') > -1;
 };
 export const getSykefravaerUrl = (): string => {
-    const contextRoot = process.env.REACT_APP_SYKEFRAVAER_CONTEXT_ROOT;
     return erHerokuApp()
         ? 'https://sykefravaer.herokuapp.com'
-        : contextRoot === undefined ? '' : contextRoot;
+        : '';
 };

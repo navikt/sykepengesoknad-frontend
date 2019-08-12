@@ -3,7 +3,7 @@ import Alertstripe from 'nav-frontend-alertstriper';
 import { getLedetekst, sykepengesoknadstatuser } from '@navikt/digisyfo-npm';
 import { Soknad } from '../types/types';
 import Sidetopp from '../components/sidetopp';
-import SoknaderTeasere from './soknader-teasere';
+import SoknaderTeasere from '../components/soknad/teaser/soknader-teasere';
 import UtbetalingerLenke from '../components/utbetalinger/utbetalinger-lenke';
 import { sorterEtterOpprettetDato, sorterEtterPerioder } from '../utils/sorter-soknader';
 

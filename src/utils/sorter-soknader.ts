@@ -33,7 +33,6 @@ export const sorterEtterPerioder = (soknad1: Soknad, soknad2: Soknad) => {
 };
 
 export const sorterEtterOpprettetDato = (soknad1: Soknad, soknad2: Soknad) => {
-    console.log('soknad1', soknad1); //tslint:disable-line
     return lagDato(soknad1.opprettetDato).getTime() !== lagDato(soknad2.opprettetDato).getTime()
         ? lagDato(soknad1.opprettetDato).getTime() - lagDato(soknad2.opprettetDato).getTime()
         : lagDato(soknad1.fom!).getTime() - lagDato(soknad2.fom!).getTime();
