@@ -1,18 +1,18 @@
 import dayjs from 'dayjs';
 import * as React from 'react';
-import { Soknad } from '../types/types';
+import { Soknad } from '../../../types/types';
 import { getLedetekst, tilLesbarPeriodeMedArstall } from '@navikt/digisyfo-npm';
-import { RSSoknadstatus } from '../types/rs-types/rs-soknadstatus';
-import { RSSoknadstype } from '../types/rs-types/rs-soknadstype';
+import { RSSoknadstatus } from '../../../types/rs-types/rs-soknadstatus';
+import { RSSoknadstype } from '../../../types/rs-types/rs-soknadstype';
 import {
     Inngangspanel, InngangspanelHeader, InngangspanelIkon,
     InngangspanelUndertekst
-} from './inngangspanel';
-import { getUrlTilSoknad } from '../utils/url-utils';
-import GlobeIkon from './globe.svg';
-import GlobeHoverIkon from './globe-hover.svg';
-import SoknaderIkon from './soknader.svg';
-import SoknaderHoverIkon from './soknader-hover.svg';
+} from '../../../sider/inngangspanel';
+import { getUrlTilSoknad } from '../../../utils/url-utils';
+import GlobeIkon from '../../../sider/globe.svg';
+import GlobeHoverIkon from '../../../sider/globe-hover.svg';
+import SoknaderIkon from '../../../sider/soknader.svg';
+import SoknaderHoverIkon from '../../../sider/soknader-hover.svg';
 
 // import { erSendtTilBeggeMenIkkeSamtidig } from './sykepengesoknad-utils';
 
@@ -77,7 +77,8 @@ const beregnUndertekst = (soknad: Soknad) => {
         default: {
             switch (soknad.status) {
                 case RSSoknadstatus.SENDT:
-                    /* TODO: Avklare om dette bare gjelder gammel søknad
+                    // TODO: Avklare om dette bare gjelder gammel søknad
+                    /*
                                     case RSSoknadstatus.TIL_SENDING: {
                                         return sendtTilBeggeMenIkkeSamtidig
                                             ? <SendtUlikt soknad={soknad}/>

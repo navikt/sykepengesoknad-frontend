@@ -1,5 +1,5 @@
 import React from 'react';
-import { Soknad } from '../types/types';
+import { Soknad } from '../../../types/types';
 import { Element } from 'nav-frontend-typografi';
 import SoknadTeaser from './soknad-teaser';
 

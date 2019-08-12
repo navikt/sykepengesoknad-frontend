@@ -5,9 +5,10 @@ import {
     InngangspanelHeader,
     InngangspanelIkon,
     InngangspanelUndertekst,
-} from './inngangspanel';
-import { Soknad } from '../types/types';
-import Lightbox from '../components/lightbox';
+} from '../../../sider/inngangspanel';
+import { Soknad } from '../../../types/types';
+import Lightbox from '../../lightbox';
+import { Innholdstittel, Normaltekst } from 'nav-frontend-typografi';
 
 interface SoknadLightboxProps {
     soknad: Soknad,
@@ -17,12 +18,12 @@ interface SoknadLightboxProps {
 const SoknadLightbox = ({ soknad, onClose }: SoknadLightboxProps) => {
     return (
         <Lightbox onClose={onClose}>
-            <h3 className="modal__tittel">{getLedetekst('soknader.teaser.fremtidig.dato-tittel')}</h3>
-            <p>{
+            <Innholdstittel tag="h3" className="modal__tittel">{getLedetekst('soknader.teaser.fremtidig.dato-tittel')}</Innholdstittel>
+            <Normaltekst>{
                 getLedetekst('soknader.teaser.fremtidig.dato-info', {
                     '%DATO%': tilLesbarDatoMedArstall(soknad.tom),
                 })
-            }</p>
+            }</Normaltekst>
             <div className="knapperad">
                 <Knapp onClick={onClose}>Lukk</Knapp>
             </div>
