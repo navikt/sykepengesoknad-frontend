@@ -1,6 +1,6 @@
-import React, { useState } from 'react';
-import { getLedetekst } from '@navikt/digisyfo-npm';
-import { Sykmelding } from '../../../types/types';
+import React, {useState} from 'react';
+import {getLedetekst} from '@navikt/digisyfo-npm';
+import {Sykmelding} from '../../../types/types';
 import EndreArbeidssituasjonLightbox from './endre-arbeidssituasjon-lightbox';
 
 interface EndreArbeidssituasjonProps {
@@ -12,6 +12,7 @@ interface EndreArbeidssituasjonProps {
 
 const EndreArbeidssituasjon = ({ sykmelding, angreBekreftSykmelding, angreBekreftSykmeldingFeilet, vis }: EndreArbeidssituasjonProps) => {
     const [visLightbox, setVisLightbox] = useState(false);
+    const onClose = () => {};
 
     // TODO: vis, angreBekreftSykmeldingFeilet og angrerBekreftSykmelding må settes på global state (useAppStore)
 /*
@@ -30,6 +31,7 @@ const EndreArbeidssituasjon = ({ sykmelding, angreBekreftSykmelding, angreBekref
             <>
                 <EndreArbeidssituasjonLightbox
                     isOpen={visLightbox}
+                    onClose={onClose}
                     sykmelding={sykmelding}
                     angreBekreftSykmelding={angreBekreftSykmelding}
                     angreBekreftSykmeldingFeilet={angreBekreftSykmeldingFeilet}

@@ -1,14 +1,14 @@
-import { getLedetekst } from '@navikt/digisyfo-npm';
+import {getLedetekst} from '@navikt/digisyfo-npm';
 import Knapp from 'nav-frontend-knapper';
 import React from 'react';
 import Lightbox from '../../../components/lightbox';
-import { Sykmelding } from '../../../types/types';
-import { Normaltekst, Systemtittel } from 'nav-frontend-typografi';
+import {Sykmelding} from '../../../types/types';
+import {Normaltekst, Systemtittel} from 'nav-frontend-typografi';
 import Feilstripe from '../../feilstripe';
 
 interface EndreArbeidssituasjonLightboxProps {
     isOpen: boolean,
-    onClose?: () => void,
+    onClose: () => void,
     angreBekreftSykmelding: (id: string) => void,
     angreBekreftSykmeldingFeilet: boolean,
     angrerBekreftSykmelding?: boolean,

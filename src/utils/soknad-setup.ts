@@ -1,5 +1,5 @@
-import { Soknad, Sykmelding } from '../types/types';
-import { ReactNode } from 'react';
+import {Soknad, Sykmelding} from '../types/types';
+import {ReactNode} from 'react';
 
 export const finnSoknad = (state: any, ownProps: any) => {
     const soknader = state.soknader.data.filter((s: Soknad) => {
@@ -18,7 +18,7 @@ export const finnSykmelding = (state: any, ownProps: any) => {
 
 const soknadSetup = (validate: Function, Component: ReactNode, initialize = false) => {
 
-    return compose(
+    return null /*compose(
         connected,
         reduxForm({
             validate,
@@ -30,7 +30,7 @@ const soknadSetup = (validate: Function, Component: ReactNode, initialize = fals
                 onSubmitFail(errors, dispatch, getSoknadSkjemanavn(props.soknad.id));
             },
         }),
-    )(Component);
+    )(Component);*/
 };
 
 export default soknadSetup;

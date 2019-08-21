@@ -1,5 +1,5 @@
 import React from 'react';
-import OppsummeringPerioder from './OppsummeringPerioder';
+/*import OppsummeringPerioder from './OppsummeringPerioder';
 import OppsummeringDato from './OppsummeringDato';
 import OppsummeringCheckboxgruppe from './OppsummeringCheckboxgruppe';
 import OppsummeringTall from './OppsummeringTall';
@@ -7,9 +7,8 @@ import OppsummeringJaEllerNei from './OppsummeringJaEllerNei';
 import OppsummeringFritekst from './OppsummeringFritekst';
 import OppsummeringUndertekst from './OppsummeringUndertekst';
 import OppsummeringRadioGruppe from './OppsummeringRadioGruppe';
-import OppsummeringLand from './OppsummeringLand';
-import { RSSvartype } from '../../../types/rs-types/rs-svartype';
-import OppsummeringCheckbox from './oppsummering-checkbox';
+import OppsummeringLand from './OppsummeringLand';*/
+import {RSSvartype} from '../../../types/rs-types/rs-svartype';
 
 interface OppsummeringSporsmalProps {
     svartype: RSSvartype,
@@ -18,7 +17,7 @@ interface OppsummeringSporsmalProps {
 
 const OppsummeringSporsmal = ({ svartype, overskriftsnivaa }: OppsummeringSporsmalProps) => {
     switch (svartype) {
-        case RSSvartype.CHECKBOX_PANEL:
+        /*case RSSvartype.CHECKBOX_PANEL:
         case RSSvartype.CHECKBOX: {
             return <OppsummeringCheckbox svartype={svartype} overskriftsnivaa={overskriftsnivaa} />;
         }
@@ -51,7 +50,7 @@ const OppsummeringSporsmal = ({ svartype, overskriftsnivaa }: OppsummeringSporsm
         case RSSvartype.RADIO_GRUPPE_TIMER_PROSENT:
         case RSSvartype.RADIO_GRUPPE: {
             return <OppsummeringRadioGruppe {...props} />;
-        }
+        }*/
         default: {
             return null;
         }

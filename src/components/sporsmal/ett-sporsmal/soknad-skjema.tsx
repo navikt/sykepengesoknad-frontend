@@ -1,14 +1,13 @@
-import React, { useEffect } from 'react';
-import { Link } from 'react-router-dom';
-import { scrollTo } from '@navikt/digisyfo-npm';
-import { Soknad } from '../../../types/types';
-import { RSSoknadstatus } from '../../../types/rs-types/rs-soknadstatus';
-import { Innholdstittel } from 'nav-frontend-typografi';
-import { getUrlTilSoknad } from '../../../utils/url-utils';
+import React, {useEffect} from 'react';
+import {Link} from 'react-router-dom';
+import {scrollTo} from '@navikt/digisyfo-npm';
+import {Soknad} from '../../../types/types';
+import {RSSoknadstatus} from '../../../types/rs-types/rs-soknadstatus';
+import {Innholdstittel} from 'nav-frontend-typografi';
+import {getUrlTilSoknad} from '../../../utils/url-utils';
 import StegindikatorEttSporsmalPerSide from './stegindikator-ett-sporsmal-per-side';
 import KorrigerVarsel from '../../soknad/felles/korriger-varsel';
 import TidligSoknad from '../../soknad/felles/tidlig-soknad';
-import SykmeldingUtdrag from './sykmelding-utdrag';
 
 interface SoknadskjemaProps {
     children: React.ReactNode,
@@ -58,7 +57,6 @@ const SoknadSkjema = ({ children, tittel, soknad, intro, sidenummer, scroll = tr
 
             <TidligSoknad soknad={soknad}/>
             {intro}
-            <SykmeldingUtdrag soknad={soknad} erApen={sidenummer === 1}/>
 
             {
                 tittel &&

@@ -8,9 +8,8 @@ import {
     tilLesbarPeriodeMedArstall,
     Utvidbar,
 } from '@navikt/digisyfo-npm';
-import { Normaltekst } from 'nav-frontend-typografi';
-import { Sykmelding, TidsPeriode } from '../../../types/types';
-import EndreArbeidssituasjon from '../../soknad/selvstendige/endre-arbeidssituasjon';
+import {Normaltekst} from 'nav-frontend-typografi';
+import {Sykmelding, TidsPeriode} from '../../../types/types';
 
 interface SykmeldingopplysningForsikringProps {
     sykmelding: Sykmelding,
@@ -87,11 +86,8 @@ const SykmeldingUtdragForSelvstendige = ({ erApen, sykmelding, erOppdelt }: Sykm
                         <Normaltekst className="js-arbeidssituasjon blokk--s">
                             {getLedetekst(`din-sykmelding.arbeidssituasjon.alternativ.${sykmelding.valgtArbeidssituasjon.toLowerCase()}`)}
                         </Normaltekst>
-                        <EndreArbeidssituasjon sykmelding={sykmelding}/>
                     </>
                 </SykmeldingNokkelOpplysning>
-                <SykmeldingopplysningFravaersperioder sykmelding={sykmelding}/>
-                <SykmeldingopplysningForsikring sykmelding={sykmelding}/>
             </div>
         </Utvidbar>
     );

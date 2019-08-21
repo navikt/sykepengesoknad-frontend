@@ -1,8 +1,8 @@
 import React from 'react';
-import { SykmeldingUtdrag as SykmeldingUtdragForArbeidstakere } from '@navikt/digisyfo-npm';
-import { Soknad, Sykmelding } from '../../../types/types';
-import { RSSoknadstype } from '../../../types/rs-types/rs-soknadstype';
-import { useAppStore } from '../../../stores/app-store';
+import {SykmeldingUtdrag as SykmeldingUtdragForArbeidstakere} from '@navikt/digisyfo-npm';
+import {Soknad, Sykmelding} from '../../../types/types';
+import {RSSoknadstype} from '../../../types/rs-types/rs-soknadstype';
+import {useAppStore} from '../../../stores/app-store';
 import SykmeldingUtdragForSelvstendige from './sykmelding-utdrag-for-selvstendige';
 
 interface UtdragProps {
@@ -12,7 +12,7 @@ interface UtdragProps {
 }
 
 const SykmeldingUtdrag = ({ soknad, erApen, erOppdelt }: UtdragProps) => {
-    const [sykmeldinger, setSykmelding] = useAppStore();
+    const {sykmeldinger, setSykmelding} = useAppStore();
     const sykmelding = sykmeldinger.filter((melding: Sykmelding) => melding.id === soknad.sykmeldingId)[0];
     setSykmelding(sykmelding);
 

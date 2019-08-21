@@ -1,8 +1,8 @@
 import React from 'react';
-import { getLedetekst, Utvidbar } from '@navikt/digisyfo-npm';
-import { Hovedknapp } from 'nav-frontend-knapper';
-import { Soknad, Sykmelding } from '../../../types/types';
-import { TagTyper } from '../../../types/enums';
+import {getLedetekst, Utvidbar} from '@navikt/digisyfo-npm';
+import {Hovedknapp} from 'nav-frontend-knapper';
+import {Soknad, Sykmelding} from '../../../types/types';
+import {TagTyper} from '../../../types/enums';
 import OppsummeringVisning from '../oppsummering/oppsummering-visning';
 import populerSoknadMedSvar from '../../../utils/populer-soknad-med-svar';
 
@@ -58,28 +58,28 @@ export const SoknadArbeidstakerOppsummering = ({ handleSubmit, soknad, skjemasva
     });
 
     const onSubmit = () => {
-        sendSoknad(populertSoknad);
+        //TODO sendSoknad(populertSoknad);
     };
 
     return (
-        <form className="soknadskjema" id="oppsummering-skjema" onSubmit={handleSubmit(onSubmit)}>
+        <form className="soknadskjema" id="oppsummering-skjema" onSubmit={handleSubmit}>
             {skjemasvar && <OppsummeringUtvidbar soknad={populertSoknad}/>}
             <div className="blokk oppsummering__vaerKlarOverAt">
-                <OppsummeringUndertekst {...vaerKlarOverAtSpm} />
+                {/*<OppsummeringUndertekst {...vaerKlarOverAtSpm} />*/}
             </div>
             <div className="blokk">
-                <Sporsmal sporsmal={bekreftOpplysningerSpm} name={bekreftOpplysningerSpm.tag} soknad={soknad}/>
+                {/*<Sporsmal sporsmal={bekreftOpplysningerSpm} name={bekreftOpplysningerSpm.tag} soknad={soknad}/>*/}
             </div>
-            <SoknadMottaker soknad={soknad} skjemasvar={skjemasvar}
+            {/*<SoknadMottaker soknad={soknad} skjemasvar={skjemasvar}
                 mottakernavn={sykmelding ? sykmelding.mottakendeArbeidsgiver.navn : null}
-            />
+            />*/}
             {/*
             <Feilstripe vis={sendingFeilet}/>
             <Knapperad variant="blokk">
                 <ConnectedSendknapp className="js-send" sender={sender} soknad={soknad}/>
             </Knapperad>
             */}
-            <AvbrytSoknadContainer sykepengesoknad={soknad}/>
+            {/*<AvbrytSoknadContainer sykepengesoknad={soknad}/>*/}
         </form>
     );
 };

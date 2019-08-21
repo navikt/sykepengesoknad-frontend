@@ -1,10 +1,10 @@
 import * as React from 'react';
-import { Soknad } from '../../../types/types';
+import {Soknad} from '../../../types/types';
 import Feilmelding from '../../feilmelding';
 import AvbruttSoknadArbeidstaker from '../../../soknad/avbrutt-soknad-arbeidstaker';
 import beregnSteg from '../../brodsmuler/beregn-steg';
-import { RSSoknadstatus } from '../../../types/rs-types/rs-soknadstatus';
-import { Steg } from '../../../types/enums';
+import {RSSoknadstatus} from '../../../types/rs-types/rs-soknadstatus';
+import {Steg} from '../../../types/enums';
 import SoknadKvitteringSjekker from '../../kvittering/soknad-kvittering-sjekker';
 
 interface SoknadArbeidstakerProps {
@@ -20,7 +20,8 @@ const SoknadArbeidstakerSkjema = ({sti, soknad}: SoknadArbeidstakerProps) => {
             return <SoknadKvitteringSjekker soknad={soknad} />;
         }
         default: {
-            return <EttSporsmalPerSideContainer {...props} />;
+            //TODO return <EttSporsmalPerSideContainer {...props} />;
+            return null
         }
     }
 };

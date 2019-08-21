@@ -1,7 +1,6 @@
 import React from 'react';
-import OppsummeringSporsmal from './oppsummering-sporsmal';
-import { RSSvartype } from '../../../types/rs-types/rs-svartype';
-import { Soknad, Sporsmal } from '../../../types/types';
+import {RSSvartype} from '../../../types/rs-types/rs-svartype';
+import {Soknad, Sporsmal} from '../../../types/types';
 
 export const getKey = (tag: string, id: string) => {
     return `${tag}_${id}`;
@@ -22,7 +21,7 @@ const OppsummeringVisning = ({ soknad }: OppsummeringVisningProps) => {
                     .map((sporsmal) => {
                         return (
                             <div className="oppsummering__seksjon" key={getKey(sporsmal.tag, sporsmal.id)}>
-                                <OppsummeringSporsmal {...sporsmal} />
+                                {/*<OppsummeringSporsmal {...sporsmal} />*/}
                             </div>
                         );
                     })

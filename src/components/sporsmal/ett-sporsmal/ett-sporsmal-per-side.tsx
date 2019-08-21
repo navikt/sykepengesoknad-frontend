@@ -1,21 +1,11 @@
 import React from 'react';
-import { Soknad, Sykmelding } from '../../../types/types';
+import {Soknad, Sykmelding} from '../../../types/types';
 import AppSpinner from '../../app-spinner';
-import { RSSoknadstype } from '../../../types/rs-types/rs-soknadstype';
-import { erSisteSide, hentTittel } from './ett-sporsmal-per-side-utils';
-import SoknadIntro from '../../soknad/intro/soknad-intro';
+import {erSisteSide, hentTittel} from './ett-sporsmal-per-side-utils';
 import SoknadSkjema from './soknad-skjema';
 
-export const hentSporsmalsvisning = (soknad, sidenummer) => {
+export const hentSporsmalsvisning = ({soknad, sidenummer}: { soknad: any, sidenummer: any }) => {
     return erSisteSide(soknad, sidenummer)
-        ? (
-            soknad.soknadstype === RSSoknadstype.ARBEIDSTAKERE
-                ? SykepengesoknadArbeidstakerOppsummeringSkjema
-                : SykepengesoknadSelvstendigOppsummeringSkjema
-        )
-        : sidenummer === 1
-            ? ForDuBegynnerSkjema
-            : GenereltEttSporsmalPerSideSkjema;
 };
 
 interface EttSporsmalPerSideProps {
@@ -37,8 +27,8 @@ const EttSporsmalPerSide = (
         sykmelding, soknad, handleSubmit, lagreSoknad, sendSoknad,
         sidenummer, oppdaterer, skjemasvar, sendingFeilet, hentingFeilet, sender
     }: EttSporsmalPerSideProps) => {
-    const Sporsmalsvisning = hentSporsmalsvisning(soknad, sidenummer);
-    const intro = sidenummer === 1 ? <SoknadIntro soknad={soknad}/> : null;
+    const Sporsmalsvisning = hentSporsmalsvisning({soknad: soknad, sidenummer: sidenummer});
+    const intro = null;
     const scroll = sidenummer !== 1 && !erSisteSide(soknad, sidenummer);
 
     return (<SoknadSkjema
@@ -48,17 +38,7 @@ const EttSporsmalPerSide = (
         intro={intro}
         soknad={soknad}>
         {
-            oppdaterer
-                ? <AppSpinner/>
-                : <Sporsmalsvisning
-                    soknad={soknad}
-                    sykmelding={sykmelding}
-                    handleSubmit={handleSubmit}
-                    skjemasvar={skjemasvar}
-                    sendingFeilet={sendingFeilet || hentingFeilet}
-                    sender={sender}
-                    actions={actions}
-                    sidenummer={sidenummer}/>
+            <AppSpinner/>
         }
     </SoknadSkjema>);
 };
