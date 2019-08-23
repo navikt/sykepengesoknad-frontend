@@ -37,7 +37,7 @@ workflows:
       - linux_build:
           context: barkendeploy
           filters:
-            branch:
+            branches:
               only: skall-app
       - barkendeploy/deployment:
           deployments:
