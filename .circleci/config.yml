@@ -1,0 +1,48 @@
+version: 2.1
+orbs:
+  barkendeploy: navikt/barkendeploy@dev:master
+jobs:
+  linux_build:
+    docker:
+      - image: "circleci/node:latest"
+    steps:
+      - checkout
+      - setup_remote_docker
+      - barkendeploy/init
+      - run:
+          name: Update npm
+          command: 'sudo npm install -g npm'
+      - restore_cache:
+          key: dependency-cashe-{{ checksum "package.json" }}
+      - run:
+          name: Run npm install
+          command: npm install
+      - save_cache:
+          key: dependency-cache-{{ checksum "package.json" }}
+          paths:
+            - ./node_modules
+      - run:
+          name: Test
+          command: npm test
+      - run:
+          name: Bygg
+          command: npm run build
+      - barkendeploy/docker-build
+      - barkendeploy/docker-login
+      - barkendeploy/docker-push
+workflows:
+  version: 2
+  build_and_release:
+    jobs:
+      - linux_build:
+          context: barkendeploy
+          filters:
+            branch:
+              only: skall-app
+      - barkendeploy/deployment:
+          deployments:
+            - barkendeploy/deploy-create:
+                cluster: dev-sbs
+          context: barkendeploy
+          requires:
+            - linux_build
