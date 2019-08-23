@@ -15,6 +15,7 @@ export const Sendknapp = ({ sender, henter }: SendknappProps) => {
     return (
         <Hovedknapp
             className="js-send"
+            type="hoved"
             disabled={sender || henter}
             spinner={sender}>{getLedetekst('sykepengesoknad.send')}
         </Hovedknapp>);

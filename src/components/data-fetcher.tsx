@@ -9,7 +9,7 @@ import {useAppStore} from '../stores/app-store';
 import {RSSoknad} from '../types/rs-types/rs-soknad';
 
 export function DataFetcher(props: { children: any }) {
-    const { setSoknader, setVisFeil, setSykmeldinger } = useAppStore();
+    const { setSoknader, setVisFeil } = useAppStore();
     const ledetekster = useFetch<Ledetekster>();
     const soknader = useFetch<RSSoknad[]>();
     const sykmeldinger = useFetch<Sykmelding[]>();

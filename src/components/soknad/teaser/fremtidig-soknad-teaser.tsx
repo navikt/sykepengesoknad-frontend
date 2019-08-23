@@ -1,14 +1,10 @@
-import React, { useState } from 'react';
-import { Knapp } from 'nav-frontend-knapper';
-import { getLedetekst, tilLesbarDatoMedArstall, tilLesbarPeriodeMedArstall } from '@navikt/digisyfo-npm';
-import {
-    InngangspanelHeader,
-    InngangspanelIkon,
-    InngangspanelUndertekst,
-} from '../../../sider/inngangspanel';
-import { Soknad } from '../../../types/types';
+import React, {useState} from 'react';
+import {Knapp} from 'nav-frontend-knapper';
+import {getLedetekst, tilLesbarDatoMedArstall, tilLesbarPeriodeMedArstall} from '@navikt/digisyfo-npm';
+import {InngangspanelHeader, InngangspanelIkon, InngangspanelUndertekst,} from '../../../sider/inngangspanel';
+import {Soknad} from '../../../types/types';
 import Lightbox from '../../lightbox';
-import { Innholdstittel, Normaltekst } from 'nav-frontend-typografi';
+import {Innholdstittel, Normaltekst} from 'nav-frontend-typografi';
 
 interface SoknadLightboxProps {
     soknad: Soknad,
@@ -25,7 +21,7 @@ const SoknadLightbox = ({ soknad, onClose }: SoknadLightboxProps) => {
                 })
             }</Normaltekst>
             <div className="knapperad">
-                <Knapp onClick={onClose}>Lukk</Knapp>
+                <Knapp type="standard" onClick={onClose}>Lukk</Knapp>
             </div>
         </Lightbox>
     );
