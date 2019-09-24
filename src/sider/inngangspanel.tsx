@@ -4,6 +4,7 @@ import cls from 'classnames';
 import { Normaltekst, Systemtittel } from 'nav-frontend-typografi';
 
 import './inngangspanel.less';
+import Vis from '../utils/vis';
 
 interface InngangspanelIkonProps {
     ikon: string,
@@ -16,13 +17,11 @@ export const InngangspanelIkon = ({ ikon, ikonHover }: InngangspanelIkonProps) =
             <span className="inngangspanel__ikon inngangspanel__ikon--normal">
                 <img alt="" src={ikon}/>
             </span>
-            {ikonHover
-                ?
+            <Vis hvis={ikonHover !== undefined}>
                 <span className="inngangspanel__ikon inngangspanel__ikon--hover">
                     <img alt="" src={ikonHover || ikon}/>
                 </span>
-                :
-                null}
+            </Vis>
         </>
     );
 };
@@ -57,11 +56,9 @@ export const InngangspanelHeader = ({ meta, tittel, status, id }: InngangspanelH
             <Systemtittel tag="h3" className="inngangspanel__tittel">
                 {tittel}
             </Systemtittel>
-            {
-                status
-                    ? <Normaltekst className="inngangspanel__status">{status}</Normaltekst>
-                    : null
-            }
+            <Vis hvis={status !== null}>
+                <Normaltekst className="inngangspanel__status">{status}</Normaltekst>
+            </Vis>
         </header>
     );
 };
