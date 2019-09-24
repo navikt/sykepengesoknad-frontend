@@ -11,15 +11,15 @@ import { RSSoknad } from '../types/rs-types/rs-soknad';
 export function DataFetcher(props: { children: any }) {
     const { setSoknader, setVisFeil, setSykmeldinger } = useAppStore();
     const ledetekster = useFetch<Ledetekster>();
-    const soknader = useFetch<RSSoknad[]>();
+    const rssoknader = useFetch<RSSoknad[]>();
     const sykmeldinger = useFetch<Sykmelding[]>();
 
     useEffect(() => {
         if (isNotStarted(ledetekster)) {
             ledetekster.fetch('/syfotekster/api/tekster');
         }
-        if (isNotStarted(soknader)) {
-            soknader.fetch('/syfoapi/syfosoknad/api/soknader', undefined, (fetchState: FetchState<RSSoknad[]>) => {
+        if (isNotStarted(rssoknader)) {
+            rssoknader.fetch('/syfoapi/syfosoknad/api/soknader', undefined, (fetchState: FetchState<RSSoknad[]>) => {
                 setSoknader(fetchState.data!.map(soknad => {
                     return new Soknad(soknad);
                 }));
@@ -27,28 +27,28 @@ export function DataFetcher(props: { children: any }) {
         }
         if (isNotStarted(sykmeldinger)) {
             sykmeldinger.fetch('/syforest/sykmeldinger', undefined, (fetchState: FetchState<Sykmelding[]>) => {
-                setSykmeldinger(fetchState.data!.map(sykmelding => {
-                    return sykmelding;
-                }))
+                if (hasData(fetchState)) {
+                    setSykmeldinger(fetchState.data);
+                }
             });
         }
         // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, []);
+    }, [ledetekster, rssoknader, sykmeldinger]);
 
-    if (isAnyNotStartedOrPending([ledetekster])) {
+    if (isAnyNotStartedOrPending([ledetekster, rssoknader, sykmeldinger])) {
         return <Spinner/>;
 
-    } else if (hasAnyFailed([ledetekster])) {
+    } else if (hasAnyFailed([ledetekster, rssoknader, sykmeldinger])) {
         return (
             <AlertStripeFeil>
-                Det oppnås for tiden ikke kontakt med alle baksystemer.
+                Vi får akkurat nå ikke hentet alle data.
                 Vi jobber med å løse saken. Vennligst prøv igjen senere.
             </AlertStripeFeil>
         );
     }
     setLedetekster(ledetekster.data);
 
-    if (hasData(soknader)) {
+    if (hasData(rssoknader) && hasData(sykmeldinger)) {
         setVisFeil(false);
     }
 

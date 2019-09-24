@@ -13,14 +13,12 @@ import GlobeIkon from '../../../sider/globe.svg';
 import GlobeHoverIkon from '../../../sider/globe-hover.svg';
 import SoknaderIkon from '../../../sider/soknader.svg';
 import SoknaderHoverIkon from '../../../sider/soknader-hover.svg';
+import Vis from '../../../utils/vis';
 
 // import { erSendtTilBeggeMenIkkeSamtidig } from './sykepengesoknad-utils';
 
 const finnArbeidsgivernavn = (soknad: Soknad) => {
-    return soknad.arbeidsgiver
-    && soknad.arbeidsgiver.navn
-        ? soknad.arbeidsgiver.navn
-        : null;
+    return soknad.arbeidsgiver && soknad.arbeidsgiver.navn ? soknad.arbeidsgiver.navn : '';
 };
 
 /*
@@ -72,7 +70,7 @@ const beregnUndertekst = (soknad: Soknad) => {
                 ? getLedetekst('soknad.teaser.status.SENDT.til-nav', {
                     '%DATO%': dayjs(soknad.sendtTilNAVDato).format(),
                 })
-                : null;
+                : '';
         }
         default: {
             switch (soknad.status) {
@@ -96,7 +94,7 @@ const beregnUndertekst = (soknad: Soknad) => {
                     });
                 }
                 default: {
-                    return null;
+                    return '';
                 }
             }
         }
@@ -109,11 +107,13 @@ interface TeaserUndertekstProps {
 
 export const TeaserUndertekst = ({ soknad }: TeaserUndertekstProps) => {
     const tekst = beregnUndertekst(soknad);
-    return tekst ? (
-        <InngangspanelUndertekst>
-            {tekst}
-        </InngangspanelUndertekst>
-    ) : null;
+    return (
+        <Vis hvis={tekst}>
+            <InngangspanelUndertekst>
+                {tekst}
+            </InngangspanelUndertekst>
+        </Vis>
+    );
 };
 
 export const hentTeaserStatustekst = (soknad: Soknad) => {

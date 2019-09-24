@@ -2,6 +2,7 @@ import React from 'react';
 import { Soknad } from '../../../types/types';
 import { Element } from 'nav-frontend-typografi';
 import SoknadTeaser from './soknad-teaser';
+import Vis from '../../../utils/vis';
 
 interface SoknaderTeasereProps {
     soknader: Soknad[],
@@ -18,15 +19,12 @@ const SoknaderTeasere = ({ soknader, className, tittel, tomListeTekst, id }: Sok
                 <Element className="inngangspanelerHeader__tittel" tag="h2">{tittel}</Element>
             </header>
             <div id={id} className={className}>
-                {soknader.length
-                    ?
-                    soknader.map((soknad, idx) => {
-                            return <SoknadTeaser key={idx} soknad={soknad} />;
-                        }
-                    )
-                    :
+                {soknader.map((soknad, idx) => {
+                    return <SoknadTeaser key={idx} soknad={soknad}/>;
+                })}
+                <Vis hvis={soknader.length === 0}>
                     <Element className="panel">{tomListeTekst}</Element>
-                }
+                </Vis>
             </div>
         </>
     );
