@@ -1,25 +1,24 @@
 import { fraInputdatoTilJSDato } from '@navikt/digisyfo-npm';
-import { CHECKBOX, CHECKBOX_GRUPPE, DATO, IKKE_RELEVANT, PERIODER, RADIO, RADIO_GRUPPE, RADIO_GRUPPE_TIMER_PROSENT } from '../enums/svartyper';
-import { CHECKED } from '../enums/svarEnums';
-import { HVOR_MYE_PROSENT, HVOR_MYE_TIMER } from '../enums/tagtyper';
 import { Soknad, Sporsmal } from '../types/types';
+import { RSSvartype } from '../types/rs-types/rs-svartype';
+import { SvarEnums, TagTyper } from '../types/enums';
 
-const fraJSDatoTilBackendDato = (jsDato) => {
+const fraJSDatoTilBackendDato = (jsDato: Date) => {
     return jsDato.toJSON().substr(0, 10);
 };
 
-const fraInputDatoTilBackendDato = (inputdato) => {
+const fraInputDatoTilBackendDato = (inputdato: Date) => {
     return fraJSDatoTilBackendDato(fraInputdatoTilJSDato(inputdato));
 };
 
-const tilPeriodesvar = (perioder, konverterPerioder) => {
+const tilPeriodesvar = (perioder: any, konverterPerioder: any) => {
     return perioder
-        .filter((periode) => {
+        .filter((periode: any) => {
             return konverterPerioder
                 ? periode.tom && periode.tom
                 : true;
         })
-        .map((periode) => {
+        .map((periode: any) => {
             return {
                 verdi: JSON.stringify({
                     fom: konverterPerioder ? fraInputDatoTilBackendDato(periode.fom) : periode.fom,
@@ -30,9 +29,9 @@ const tilPeriodesvar = (perioder, konverterPerioder) => {
         });
 };
 
-const tilDatoSvar = (svar) => {
+const tilDatoSvar = (svar: any) => {
     return svar
-        ? svar.svarverdier.map((s) => {
+        ? svar.svarverdier.map((s: any) => {
             return {
                 ...s,
                 verdi: fraInputDatoTilBackendDato(s.verdi),
@@ -41,30 +40,30 @@ const tilDatoSvar = (svar) => {
         : [];
 };
 
-const tilBackendMinMax = (minMax) => {
+const tilBackendMinMax = (minMax: any) => {
     return minMax && typeof minMax.getFullYear === 'function'
         ? fraJSDatoTilBackendDato(minMax)
         : minMax;
 };
 
-const populerSporsmalMedSvar = (sporsmal, svarFraSkjema, options) => {
+const populerSporsmalMedSvar = (sporsmal: Sporsmal, svarFraSkjema: any, options: any) => {
     const svar = (() => {
         switch (sporsmal.svartype) {
-            case PERIODER: {
+            case RSSvartype.PERIODER: {
                 return tilPeriodesvar(svarFraSkjema, options.konverterPerioder);
             }
-            case DATO: {
+            case RSSvartype.DATO: {
                 return tilDatoSvar(svarFraSkjema);
             }
-            case RADIO_GRUPPE:
-            case RADIO_GRUPPE_TIMER_PROSENT: {
+            case RSSvartype.RADIO_GRUPPE:
+            case RSSvartype.RADIO_GRUPPE_TIMER_PROSENT: {
                 return [];
             }
-            case RADIO:
-            case CHECKBOX: {
+            case RSSvartype.RADIO:
+            case RSSvartype.CHECKBOX: {
                 return svarFraSkjema
-                    ? svarFraSkjema.svarverdier.filter((svarverdi) => {
-                        return svarverdi.verdi === CHECKED;
+                    ? svarFraSkjema.svarverdier.filter((svarverdi: any) => {
+                        return svarverdi.verdi === SvarEnums.CHECKED;
                     })
                     : [];
             }
@@ -87,20 +86,20 @@ const populerSporsmalMedSvar = (sporsmal, svarFraSkjema, options) => {
 const erUndersporsmalStilt = (sporsmal: Sporsmal, values: any) => {
     const svarValue = values[sporsmal.tag];
     const svarverdiliste = svarValue && svarValue.svarverdier ? svarValue.svarverdier : [];
-    const svarverdistrenger = svarverdiliste.map((svarverdi) => {
+    const svarverdistrenger = svarverdiliste.map((svarverdi: any) => {
         return svarverdi.verdi;
     });
-    return sporsmal.svartype === CHECKBOX_GRUPPE
-        || sporsmal.svartype === IKKE_RELEVANT
-        || sporsmal.svartype === RADIO_GRUPPE
-        || sporsmal.svartype === RADIO_GRUPPE_TIMER_PROSENT
+    return sporsmal.svartype === RSSvartype.CHECKBOX_GRUPPE
+        || sporsmal.svartype === RSSvartype.IKKE_RELEVANT
+        || sporsmal.svartype === RSSvartype.RADIO_GRUPPE
+        || sporsmal.svartype === RSSvartype.RADIO_GRUPPE_TIMER_PROSENT
         || svarverdistrenger.indexOf(sporsmal.kriterieForVisningAvUndersporsmal) > -1;
 };
 
 const settMinMax = (sporsmal: Sporsmal): Sporsmal => {
     switch (sporsmal.svartype) {
-        case DATO:
-        case PERIODER: {
+        case RSSvartype.DATO:
+        case RSSvartype.PERIODER: {
             return {
                 ...sporsmal,
                 min: tilBackendMinMax(sporsmal.min),
@@ -119,8 +118,7 @@ const settMinMax = (sporsmal: Sporsmal): Sporsmal => {
 
 const whipeSvar = (sporsmalsliste: Sporsmal[]): Sporsmal[] => {
     return sporsmalsliste.map((sporsmal) => {
-        const svar = sporsmal.tag.indexOf(HVOR_MYE_PROSENT) > -1
-            || HVOR_MYE_TIMER > -1
+        const svar = sporsmal.tag === TagTyper.HVOR_MYE_PROSENT || sporsmal.tag === TagTyper.HVOR_MYE_TIMER
             ? sporsmal.svar
             : [];
         return {
@@ -159,7 +157,7 @@ const populerSoknadMedSvar = (soknad: Soknad, values: any, optionsParam = {}) =>
     };
 };
 
-export const populerSoknadMedSvarUtenKonvertertePerioder = (soknad: Soknad, values: {} ) => {
+export const populerSoknadMedSvarUtenKonvertertePerioder = (soknad: Soknad, values: {}) => {
     return populerSoknadMedSvar(soknad, values, {
         konverterPerioder: false,
     });

@@ -16,6 +16,7 @@ export const finnSykmelding = (state: any, ownProps: any) => {
     return sykmeldinger.length === 1 ? sykmeldinger[0] : undefined;
 };
 
+/*
 const soknadSetup = (validate: Function, Component: ReactNode, initialize = false) => {
 
     return compose(
@@ -32,5 +33,6 @@ const soknadSetup = (validate: Function, Component: ReactNode, initialize = fals
         }),
     )(Component);
 };
+*/
 
-export default soknadSetup;
+//export default soknadSetup;
