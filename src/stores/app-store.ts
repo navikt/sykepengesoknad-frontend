@@ -8,11 +8,20 @@ export const useAppStore = createUseContext(() => {
     const [soknad, setSoknad] = useState<Soknad>();
     const [sykmeldinger, setSykmeldinger] = useState<Sykmelding[]>([]);
     const [sykmelding, setSykmelding] = useState<Sykmelding>();
+    const [vis, setVis] = useState<boolean>(false);
+    const [angreBekreftSykmeldingFeilet, setAngreBekreftSykmeldingFeilet] = useState<Function>();
+    const [angrerBekreftSykmelding, setAngrerBekreftSykmelding] = useState<boolean>(false);
+    const [oppdaterFeilet, setOppdaterFeilet] = useState<boolean>(false);
+
     return {
         soknader, setSoknader,
         visFeil, setVisFeil,
         soknad, setSoknad,
         sykmeldinger, setSykmeldinger,
         sykmelding, setSykmelding,
+        vis, setVis,
+        angreBekreftSykmeldingFeilet, setAngreBekreftSykmeldingFeilet,
+        angrerBekreftSykmelding, setAngrerBekreftSykmelding,
+        oppdaterFeilet, setOppdaterFeilet
     };
 });

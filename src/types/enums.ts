@@ -169,6 +169,7 @@ export enum HotjarTriggerType {
     SOKNAD_FRILANSER_NAERINGSDRIVENDE = 'SOKNAD_FRILANSER_NAERINGSDRIVENDE',
     SOKNAD_OPPHOLD_UTENFOR_NORGE = 'SOKNAD_OPPHOLD_UTENFOR_NORGE',
     SELVSTENDIG_FRILANS_JULI_2018 = 'SELVSTENDIG_FRILANS_JULI_2018',
+    SOKNAD_ARBEIDSLEDIG = 'SOKNAD_ARBEIDSLEDIG',
 }
 
 export const OPPHOLD_UTLAND_SKJEMA = 'OPPHOLD_UTLAND_SKJEMA';
@@ -189,4 +190,10 @@ export enum UnleashToggles {
     SELVSTENDIG_KORRIGER = 'syfo.syfofront.korriger.selvstendig.soknad',
     NY_ARBEIDSTAKERSOKNAD = 'syfo.ag.soknad.ny.platform',
     NYTT_SYKMELDINGSMOTTAK = 'syfo.syfofront.nytt.sykmeldingsmottak',
+}
+
+export enum SoknadMottakere {
+    ARBEIDSGIVER_OG_NAV = 'ARBEIDSGIVER_OG_NAV',
+    ARBEIDSGIVER = 'ARBEIDSGIVER',
+    NAV = 'NAV',
 }

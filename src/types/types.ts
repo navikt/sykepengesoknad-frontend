@@ -113,7 +113,7 @@ export interface SykmeldingPeriode {
 
 export interface Sykmelding {
     id: string,
-    sporsmal: any, // TODO: Riktig format på sporsmal. Lagt til any for å unngå feil i sykmelding-utdrag-for-selvstendige.tsx
+    sporsmal: any,
     startLegemeldtFravaer: Date,
     skalViseSkravertFelt: boolean,
     identdato: Date,
