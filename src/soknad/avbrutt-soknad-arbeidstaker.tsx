@@ -2,7 +2,7 @@ import cls from 'classnames';
 import * as React from 'react';
 import SoknadHeader from './soknad-header';
 import { Soknad, Sykmelding } from '../types/types';
-import { Statusopplysninger } from '../components/statuspanel';
+import { Statusopplysninger } from '../../ubrukt/components/statuspanel';
 import { getLedetekst, tilLesbarDatoMedArstall, SykmeldingUtdrag, SykmeldingNokkelOpplysning } from '@navikt/digisyfo-npm';
 import GjenapneSoknad from './gjenapne-soknad';
 
