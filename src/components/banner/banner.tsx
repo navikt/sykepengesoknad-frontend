@@ -3,7 +3,7 @@ import * as React from 'react';
 import Hjelpetekst from 'nav-frontend-hjelpetekst';
 import { Normaltekst, Sidetittel } from 'nav-frontend-typografi';
 import Brodsmuler from '../brodsmuler/brodsmuler';
-import { Brodsmule, Soknad } from '../../types/types';
+import { Brodsmule, Soknad } from '../../../src/types/types';
 
 import { getLedetekst } from '@navikt/digisyfo-npm';
 import './banner.less';
