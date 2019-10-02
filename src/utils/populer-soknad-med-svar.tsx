@@ -1,7 +1,7 @@
-import { fraInputdatoTilJSDato } from '@navikt/digisyfo-npm';
 import { Soknad, Sporsmal } from '../types/types';
 import { RSSvartype } from '../types/rs-types/rs-svartype';
 import { SvarEnums, TagTyper } from '../types/enums';
+import { fraInputdatoTilJSDato } from './datoUtils';
 
 const fraJSDatoTilBackendDato = (jsDato: Date) => {
     return jsDato.toJSON().substr(0, 10);

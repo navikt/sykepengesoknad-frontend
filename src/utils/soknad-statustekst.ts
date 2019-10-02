@@ -1,7 +1,7 @@
-import { getLedetekst, tilLesbarDatoMedArstall } from '@navikt/digisyfo-npm';
 import { Soknad } from '../types/types';
 import { RSSoknadstatus } from '../types/rs-types/rs-soknadstatus';
-import { formaterOrgnr } from './utils';
+import { formaterOrgnr, getLedetekst } from './utils';
+import { tilLesbarDatoMedArstall } from './datoUtils';
 
 const hentSoknadStatustekst = (soknad: Soknad) => {
     const soknadSendtTilNav = soknad.sendtTilNAVDato !== null;

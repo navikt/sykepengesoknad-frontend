@@ -40,3 +40,15 @@ export const getObjectValueByString = (o: {}, s: string) => {
 export const formaterOrgnr = (orgnr: string) => {
     return orgnr.replace(/(...)(...)(...)/g, '$1 $2 $3');
 };
+
+export const getLedetekst = (text: string, data: any): string => {
+    if (text === undefined || data === undefined) {
+        return '';
+    }
+    let newtext = '';
+    Object.keys(data).forEach(key => {
+        const regex = new RegExp(key, 'g');
+        newtext = text.replace(regex, data[key]);
+    });
+    return newtext;
+};

@@ -1,4 +1,3 @@
-import { formaterEnkeltverdi } from '../../ubrukt/components/sporsmal/field-utils';
 import { erGyldigDato } from './datoUtils';
 
 export const getOnChange = (props: any) => {
@@ -10,6 +9,7 @@ export const getOnChange = (props: any) => {
     return null;
 };
 
+/*
 export const getOnChangeForDato = (props: any) => {
     if (props.pavirkerAndreSporsmal) {
         return (event: any, newValue: any) => {
@@ -21,6 +21,7 @@ export const getOnChangeForDato = (props: any) => {
     }
     return null;
 };
+*/
 
 export const getOnChangeForPerioder = (props: any) => {
     if (props.pavirkerAndreSporsmal) {

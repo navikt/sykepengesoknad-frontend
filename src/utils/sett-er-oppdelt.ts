@@ -1,5 +1,5 @@
-import { tidligsteFom, senesteTom } from '@navikt/digisyfo-npm';
 import { Soknad, Sykmelding } from '../types/types';
+import { senesteTom, tidligsteFom } from './periode-utils';
 
 export const settErOppdelt = (soknad: Soknad, sykmelding: Sykmelding | undefined) => {
     if (!sykmelding) {

@@ -1,11 +1,6 @@
-import {
-    erGyldigDatoformat,
-    fraInputdatoTilJSDato,
-    periodeOverlapperMedPeriode,
-    tidligsteFom,
-    tilDatePeriode,
-} from '@navikt/digisyfo-npm';
 import { Soknad } from '../types/types';
+import { periodeOverlapperMedPeriode, tidligsteFom, tilDatePeriode } from './periode-utils';
+import { erGyldigDatoformat, fraInputdatoTilJSDato } from './datoUtils';
 
 export const filtrerAktuelleAktiviteter = (aktiviteter: any, gjenopptattArbeidFulltUtDato: any) => {
     if (gjenopptattArbeidFulltUtDato && aktiviteter) {

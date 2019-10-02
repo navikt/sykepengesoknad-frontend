@@ -1,9 +1,9 @@
 import dayjs from 'dayjs';
-import { senesteTom } from '@navikt/digisyfo-npm';
 import { Soknad, Sporsmal } from '../types/types';
 import { TagTyper } from '../types/enums';
 import { RSSoknadstype } from '../types/rs-types/rs-soknadstype';
 import { RSSoknadstatus } from '../types/rs-types/rs-soknadstatus';
+import { senesteTom } from './periode-utils';
 
 const getTomFraSoknad = (soknad: Soknad) => {
     const getTomForUtland = (_soknad: Soknad) => {
