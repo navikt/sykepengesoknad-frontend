@@ -1,0 +1,1 @@
+Sendt til NAV og %ARBEIDSGIVER% (org. nr. %ORGNR%): %SENDTTILNAVDATO%

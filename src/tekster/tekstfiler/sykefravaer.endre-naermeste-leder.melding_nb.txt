@@ -1,0 +1,2 @@
+<p>Er du sikker på at du vil fjerne <strong>%LEDER%</strong> som din nærmeste leder i <strong>%ARBEIDSGIVER%</strong>?</p>
+<p>Hvis du er usikker på om navnet er riktig, bør du spørre arbeidsgiveren din om hvorfor de har valgt det.</p>

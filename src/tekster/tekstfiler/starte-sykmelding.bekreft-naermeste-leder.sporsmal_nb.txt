@@ -1,0 +1,1 @@
+Vi sender sykmeldingen til din nærmeste leder. Stemmer det at dette er %NAERMESTELEDER%?

@@ -62,12 +62,3 @@ export const InngangspanelHeader = ({ meta, tittel, status, id }: InngangspanelH
         </header>
     );
 };
-
-interface InngangspanelUndertekstProps {
-    children: string,
-    className?: string,
-}
-
-export const InngangspanelUndertekst = ({ children, className }: InngangspanelUndertekstProps) => {
-    return (<Normaltekst className={cls('inngangspanel__undertekst', className)}>{children}</Normaltekst>);
-};

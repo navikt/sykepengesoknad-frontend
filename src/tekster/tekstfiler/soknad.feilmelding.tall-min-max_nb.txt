@@ -1,0 +1,1 @@
+Vennligst fyll ut et tall mellom %MIN% og %MAX%

@@ -1,0 +1,3 @@
+<p>Søknaden er sendt til %ARBEIDSGIVER%.</p>
+<p>Vi har beregnet at varigheten på sykefraværet er innenfor de 16 dagene som arbeidsgiveren skal dekke. Derfor sendes denne søknaden kun til arbeidsgiveren din og ikke til NAV.</p>
+<p>Sykepenger utbetales av arbeidsgiveren din.</p>

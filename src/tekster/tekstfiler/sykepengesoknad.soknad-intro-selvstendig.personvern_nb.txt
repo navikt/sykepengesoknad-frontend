@@ -1,0 +1,2 @@
+<p>Ifølge folketrygdloven kan du få sykepenger hvis du oppfyller kravene. For å utbetale riktig trenger vi å vite hva som skjedde i perioden du var sykmeldt. Derfor må du søke hver gang vi ber deg om det. </p>
+<p class="sist">Les mer om <a target="_blank" href="https://www.nav.no/personvern">hvordan NAV behandler personopplysninger</a></p>

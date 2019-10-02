@@ -1,0 +1,1 @@
+Timene du skrev inn tyder på at du har jobbet mindre enn %MIN% %. Du må enten svare nei på spørsmålet over eller endre antall timer her.

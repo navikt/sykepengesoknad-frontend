@@ -1,0 +1,1 @@
+I perioden %PERIODE% skulle du jobbe %ARBEIDSGRAD% % av ditt normale arbeid hos %ARBEIDSGIVER%. Jobbet du mer enn dette?

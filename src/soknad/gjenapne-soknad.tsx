@@ -1,15 +1,15 @@
 import React from 'react';
 import Knapp from 'nav-frontend-knapper';
-import { getLedetekst } from '@navikt/digisyfo-npm';
 import { logger } from '../utils/logger';
 import { Soknad } from '../types/types';
+import tekster from './gjenapne-soknad-tekster';
 
 interface GjenapneSoknadProps {
     soknad: Soknad,
     tekst?: string
 }
 
-const GjenapneSoknad = ({ soknad, tekst = getLedetekst('sykepengesoknad.gjenapne.knapp') }: GjenapneSoknadProps) => {
+const GjenapneSoknad = ({ soknad, tekst }: GjenapneSoknadProps) => {
     logger.info(`GjenapneSoknad-1 - sykepengesoknad.id: ${soknad.id}`);
     const gjenapner = false; // TODO: State må settes når data hentes
     const gjenapneFeilet = false; // TODO: State må settes når data hentes
@@ -31,7 +31,7 @@ const GjenapneSoknad = ({ soknad, tekst = getLedetekst('sykepengesoknad.gjenapne
                             // gjenapneSoknad(soknad);
                         }}
                         className="js-gjenapne">
-                        {tekst}
+                        {tekster['sykepengesoknad.gjenapne.knapp']}
                     </Knapp>
                 </div>
             </div>

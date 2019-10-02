@@ -1,6 +1,6 @@
 import * as React from 'react';
-import { log } from '@navikt/digisyfo-npm';
 import { useEffect } from 'react';
+import { log } from '../utils/logger';
 import { HotjarTriggerType } from '../types/enums';
 
 interface HotjarTriggerProps {

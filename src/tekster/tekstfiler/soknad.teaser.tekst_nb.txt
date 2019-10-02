@@ -1,0 +1,1 @@
+Gjelder perioden %PERIODE%

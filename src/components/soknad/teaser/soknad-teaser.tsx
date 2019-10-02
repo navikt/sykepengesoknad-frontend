@@ -1,12 +1,10 @@
 import dayjs from 'dayjs';
 import * as React from 'react';
 import { Soknad } from '../../../types/types';
-import { getLedetekst, tilLesbarPeriodeMedArstall } from '@navikt/digisyfo-npm';
 import { RSSoknadstatus } from '../../../types/rs-types/rs-soknadstatus';
 import { RSSoknadstype } from '../../../types/rs-types/rs-soknadstype';
 import {
-    Inngangspanel, InngangspanelHeader, InngangspanelIkon,
-    InngangspanelUndertekst
+    Inngangspanel, InngangspanelHeader, InngangspanelIkon
 } from '../../../sider/inngangspanel';
 import { getUrlTilSoknad } from '../../../utils/url-utils';
 import GlobeIkon from '../../../sider/globe.svg';
@@ -14,33 +12,41 @@ import GlobeHoverIkon from '../../../sider/globe-hover.svg';
 import SoknaderIkon from '../../../sider/soknader.svg';
 import SoknaderHoverIkon from '../../../sider/soknader-hover.svg';
 import Vis from '../../../utils/vis';
+import { getLedetekst } from '../../../utils/utils';
+import { tilLesbarDatoMedArstall, tilLesbarPeriodeMedArstall } from '../../../utils/datoUtils';
+import tekster from './soknad-teaser-tekster';
+import { Normaltekst } from 'nav-frontend-typografi';
+import { getSendtTilSuffix } from '../../../utils/soknad-utils';
+import parser from 'html-react-parser';
 
-// import { erSendtTilBeggeMenIkkeSamtidig } from './sykepengesoknad-utils';
+const erSendtTilBeggeMenIkkeSamtidig = (soknad: Soknad) => {
+    return soknad.sendtTilNAVDato
+        && soknad.sendtTilArbeidsgiverDato
+        && soknad.sendtTilNAVDato.getTime() !== soknad.sendtTilArbeidsgiverDato.getTime();
+};
 
 const finnArbeidsgivernavn = (soknad: Soknad) => {
     return soknad.arbeidsgiver && soknad.arbeidsgiver.navn ? soknad.arbeidsgiver.navn : '';
 };
 
-/*
-export const SendtUlikt = (soknad: Soknad) => {
+interface SendtUliktProps {
+    soknad: Soknad;
+}
+
+export const SendtUlikt = ({ soknad }: SendtUliktProps) => {
     return (
         <span>
-            {
-                getLedetekst('soknad.teaser.status.SENDT.til-arbeidsgiver', {
-                    '%DATO%': dayjs(soknad.sendtTilArbeidsgiverDato).format(),
-                    '%ARBEIDSGIVER%': soknad.arbeidsgiver.navn,
-                })
-            }
+            {getLedetekst(tekster['soknad.teaser.status.SENDT.til-arbeidsgiver'], {
+                '%DATO%': dayjs(soknad.sendtTilArbeidsgiverDato).format('DD.MM.YYYY'),
+                '%ARBEIDSGIVER%': soknad.arbeidsgiver.navn,
+            })}
             <br/>
-            {
-                getLedetekst('soknad.teaser.status.SENDT.til-nav', {
-                    '%DATO%': dayjs(soknad.sendtTilNAVDato).format(),
-                })
-            }
+            {getLedetekst(tekster['soknad.teaser.status.SENDT.til-nav'], {
+                '%DATO%': dayjs(soknad.sendtTilNAVDato).format('DD.MM.YYYY'),
+            })}
         </span>
     );
 };
-*/
 
 const hentIkon = (soknadstype: RSSoknadstype) => {
     return soknadstype === RSSoknadstype.OPPHOLD_UTLAND ? GlobeIkon : SoknaderIkon;
@@ -54,42 +60,40 @@ const beregnUndertekst = (soknad: Soknad) => {
     // const sendtTilBeggeMenIkkeSamtidig = erSendtTilBeggeMenIkkeSamtidig(soknad);
 
     if (soknad.status === RSSoknadstatus.AVBRUTT) {
-        return getLedetekst('soknad.teaser.status.AVBRUTT', {
-            '%DATO%': dayjs(soknad.avbruttDato).format(),
-        });
+        return getLedetekst(
+            tekster['soknad.teaser.status.AVBRUTT'],
+            { '%DATO%': dayjs(soknad.avbruttDato).format('DD.MM.YYYY') }
+        );
     }
 
     if (soknad.status === RSSoknadstatus.FREMTIDIG) {
-        return getLedetekst(`soknad.teaser.status.${RSSoknadstatus.FREMTIDIG}`);
+        return tekster['soknad.teaser.status.FREMTIDIG'];
     }
+
+    console.log('suffix', getSendtTilSuffix(soknad)); //tslint:disable-line
 
     switch (soknad.soknadstype) {
         case RSSoknadstype.OPPHOLD_UTLAND:
+        case RSSoknadstype.ARBEIDSLEDIG:
         case RSSoknadstype.SELVSTENDIGE_OG_FRILANSERE: {
             return soknad.status === RSSoknadstatus.SENDT
-                ? getLedetekst('soknad.teaser.status.SENDT.til-nav', {
-                    '%DATO%': dayjs(soknad.sendtTilNAVDato).format(),
+                ? getLedetekst(tekster['soknad.teaser.status.SENDT.til-nav'], {
+                    '%DATO%': dayjs(soknad.sendtTilNAVDato).format('DD.MM.YYYY'),
                 })
                 : '';
         }
         default: {
             switch (soknad.status) {
                 case RSSoknadstatus.SENDT:
-                    // TODO: Avklare om dette bare gjelder gammel søknad
-                    /*
-                                    case RSSoknadstatus.TIL_SENDING: {
-                                        return sendtTilBeggeMenIkkeSamtidig
-                                            ? <SendtUlikt soknad={soknad}/>
-                                            : getLedetekst(`soknad.teaser.status.${soknad.status}${getSendtTilSuffix(soknad)}`, {
-                                                '%DATO%': dayjs(soknad.sendtTilArbeidsgiverDato || soknad.sendtTilNAVDato).format(),
-                                                '%ARBEIDSGIVER%': finnArbeidsgivernavn(soknad),
-                                            });
-                                    }
-                    */
-                    break;
+                    return erSendtTilBeggeMenIkkeSamtidig(soknad)
+                        ? <SendtUlikt soknad={soknad}/>
+                        : getLedetekst(tekster[`soknad.teaser.status.${soknad.status}${getSendtTilSuffix(soknad)}`], {
+                            '%DATO%': tilLesbarDatoMedArstall(soknad.sendtTilArbeidsgiverDato || soknad.sendtTilNAVDato),
+                            '%ARBEIDSGIVER%': finnArbeidsgivernavn(soknad),
+                        });
                 case RSSoknadstatus.NY:
                 case RSSoknadstatus.UTKAST_TIL_KORRIGERING: {
-                    return getLedetekst('soknad.teaser.undertekst', {
+                    return getLedetekst(tekster['soknad.teaser.undertekst'], {
                         '%ARBEIDSGIVER%': finnArbeidsgivernavn(soknad),
                     });
                 }
@@ -101,44 +105,12 @@ const beregnUndertekst = (soknad: Soknad) => {
     }
 };
 
-interface TeaserUndertekstProps {
-    soknad: Soknad;
-}
-
-export const TeaserUndertekst = ({ soknad }: TeaserUndertekstProps) => {
-    const tekst = beregnUndertekst(soknad);
-    return (
-        <Vis hvis={tekst}>
-            <InngangspanelUndertekst>
-                {tekst}
-            </InngangspanelUndertekst>
-        </Vis>
-    );
-};
-
 export const hentTeaserStatustekst = (soknad: Soknad) => {
     const visStatus = [RSSoknadstatus.NY, RSSoknadstatus.SENDT, RSSoknadstatus.AVBRUTT].indexOf(soknad.status) === -1;
     return visStatus
         ? getLedetekst(`soknad.teaser.status.${soknad.status}`, {
-            '%DATO%': dayjs(soknad.sendtTilArbeidsgiverDato || soknad.sendtTilNAVDato).format(),
+            '%DATO%': dayjs(soknad.sendtTilArbeidsgiverDato || soknad.sendtTilNAVDato).format('DD.MM.YYYY'),
         })
-        : null;
-};
-
-interface TeaserPeriodeProps {
-    soknad: Soknad;
-}
-
-export const TeaserPeriode = ({ soknad }: TeaserPeriodeProps) => {
-    return soknad.soknadstype !== RSSoknadstype.OPPHOLD_UTLAND
-        ?
-        <p className="inngangspanel__tekst">
-            {
-                getLedetekst('soknad.teaser.tekst', {
-                    '%PERIODE%': tilLesbarPeriodeMedArstall(soknad.fom, soknad.tom),
-                })
-            }
-        </p>
         : null;
 };
 
@@ -148,6 +120,7 @@ interface SykepengesoknadTeaserProps {
 
 const SoknadTeaser = ({ soknad }: SykepengesoknadTeaserProps) => {
     const status = soknad.status ? soknad.status.toLowerCase() : '';
+    const undertekst = beregnUndertekst(soknad);
 
     return (
         <article aria-labelledby={`soknader-header-${soknad.id}`}>
@@ -160,15 +133,25 @@ const SoknadTeaser = ({ soknad }: SykepengesoknadTeaserProps) => {
                 <div className="inngangspanel__innhold">
                     <InngangspanelHeader
                         id={`soknad-header-${soknad.id}`}
-                        meta={getLedetekst('soknad.teaser.dato', {
-                            '%DATO%': dayjs(soknad.opprettetDato).format(),
+                        meta={getLedetekst(tekster['soknad.teaser.dato'], {
+                            '%DATO%': dayjs(soknad.opprettetDato).format('DD.MM.YYYY'),
                         })}
-                        tittel={getLedetekst(soknad.soknadstype === RSSoknadstype.OPPHOLD_UTLAND
-                            ? 'soknad.utland.teaser.tittel'
-                            : 'soknad.teaser.tittel')}
+                        tittel={soknad.soknadstype === RSSoknadstype.OPPHOLD_UTLAND
+                            ? parser(tekster['soknad.utland.teaser.tittel'])
+                            : tekster['soknad.teaser.tittel']}
                         status={hentTeaserStatustekst(soknad)}/>
-                    <TeaserPeriode soknad={soknad}/>
-                    <TeaserUndertekst soknad={soknad}/>
+                    <Vis hvis={soknad.soknadstype !== RSSoknadstype.OPPHOLD_UTLAND}>
+                        <p className="inngangspanel__tekst">
+                            {getLedetekst(tekster['soknad.teaser.tekst'], {
+                                '%PERIODE%': tilLesbarPeriodeMedArstall(soknad.fom, soknad.tom),
+                            })}
+                        </p>
+                    </Vis>
+                    <Vis hvis={undertekst !== undefined}>
+                        <Normaltekst className="inngangspanel__undertekst">
+                            {undertekst}
+                        </Normaltekst>
+                    </Vis>
                 </div>
             </Inngangspanel>
         </article>

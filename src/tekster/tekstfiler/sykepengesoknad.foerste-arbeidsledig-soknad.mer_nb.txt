@@ -1,0 +1,6 @@
+<ul>
+<li>Her kan du søke om sykepenger. Søknaden erstatter del D av sykmeldingen på papir. Har du allerede sendt papiret til NAV, skal du avbryte denne digitale søknaden. Får vi dobbelt opp, går saksbehandlingen saktere.</li>
+<li>Ifølge folketrygdloven kan du få sykepenger hvis du oppfyller kravene. For å utbetale riktig trenger vi å vite hva som skjedde i perioden du var sykmeldt. Derfor må du søke hver gang vi ber deg om det. 
+</li>
+</ul>
+<p class="sist"><a target="_blank" href="https://www.nav.no/personvern">Les mer om hvordan NAV behandler personopplysninger</a></p>

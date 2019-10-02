@@ -1,24 +1,24 @@
 import * as React from 'react';
+import { RouteComponentProps } from 'react-router';
+import { Innholdstittel } from 'nav-frontend-typografi';
 import { Brodsmule, Soknad } from '../types/types';
 import { RSSoknadstatus } from '../types/rs-types/rs-soknadstatus';
 import Banner from '../components/banner/banner';
-import { getLedetekst } from "@navikt/digisyfo-npm";
 import Feilmelding from '../components/feilmelding';
 import { HotjarTrigger } from '../components/hotjar-trigger';
 import { HotjarTriggerType } from '../types/enums';
-import { RouteComponentProps } from 'react-router';
 import { useAppStore } from '../stores/app-store';
 import { IdParams } from '../utils/util-props';
 import { RSSoknadstype } from '../types/rs-types/rs-soknadstype';
 import Vis from '../utils/vis';
-import { Innholdstittel } from 'nav-frontend-typografi';
+import tekster from './soknad-side-tekster';
 
 const brodsmuler: Brodsmule[] = [{
-    tittel: getLedetekst('landingsside.sidetittel'),
+    tittel: tekster['landingsside.sidetittel'],
     sti: '/sykefravaer',
     erKlikkbar: true,
 }, {
-    tittel: getLedetekst('soknader.sidetittel'),
+    tittel: tekster['soknader.sidetittel'],
     sti: '/soknader',
     erKlikkbar: false
 }];

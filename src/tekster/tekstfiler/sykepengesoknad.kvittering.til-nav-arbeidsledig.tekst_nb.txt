@@ -1,0 +1,4 @@
+<p>Sendt til NAV: %DATO%.</p>
+<p><strong>Nå er søknaden sendt til NAV</strong></p>
+<p>Sender du allerede meldekort, fortsetter du med det.</p>
+<p>Ring <strong>%TELEFON%</strong> hvis du er i tvil.</p>

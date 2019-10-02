@@ -1,4 +1,3 @@
-import { getLedetekst } from '@navikt/digisyfo-npm';
 import beregnSteg from './beregn-steg';
 import { getSykefravaerUrl, getUrlTilSoknad } from '../../utils/url-utils';
 import { Steg } from '../../types/enums';
@@ -11,7 +10,7 @@ interface BrodSmule {
 
 const beregnBrodsmulesti = (sti: string, id: string) => {
     const dittSykefravaerSmule: BrodSmule = {
-        tittel: getLedetekst('landingsside.sidetittel'),
+        tittel: 'Ditt sykefravær',
         sti: getSykefravaerUrl(),
         erKlikkbar: true,
     };

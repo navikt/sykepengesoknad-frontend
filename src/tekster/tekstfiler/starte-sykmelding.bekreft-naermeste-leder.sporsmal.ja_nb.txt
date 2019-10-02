@@ -1,0 +1,1 @@
+ Vi sender sykmeldingen til %NAERMESTELEDER%, som finner den ved å logge inn på nav.no.

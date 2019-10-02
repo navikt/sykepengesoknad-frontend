@@ -2,22 +2,17 @@ import React, { useEffect } from 'react';
 import Spinner from 'nav-frontend-spinner';
 import { AlertStripeFeil } from 'nav-frontend-alertstriper';
 import useFetch from '../rest/use-fetch';
-import { Ledetekster, Soknad, Sykmelding } from '../types/types';
-import { setLedetekster } from '@navikt/digisyfo-npm';
+import { Soknad, Sykmelding } from '../types/types';
 import { FetchState, hasAnyFailed, hasData, isAnyNotStartedOrPending, isNotStarted } from '../rest/utils';
 import { useAppStore } from '../stores/app-store';
 import { RSSoknad } from '../types/rs-types/rs-soknad';
 
 export function DataFetcher(props: { children: any }) {
     const { setSoknader, setVisFeil, setSykmeldinger } = useAppStore();
-    const ledetekster = useFetch<Ledetekster>();
     const rssoknader = useFetch<RSSoknad[]>();
     const sykmeldinger = useFetch<Sykmelding[]>();
 
     useEffect(() => {
-        if (isNotStarted(ledetekster)) {
-            ledetekster.fetch('/syfotekster/api/tekster');
-        }
         if (isNotStarted(rssoknader)) {
             rssoknader.fetch('/syfoapi/syfosoknad/api/soknader', undefined, (fetchState: FetchState<RSSoknad[]>) => {
                 setSoknader(fetchState.data!.map(soknad => {
@@ -33,12 +28,12 @@ export function DataFetcher(props: { children: any }) {
             });
         }
         // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [ledetekster, rssoknader, sykmeldinger]);
+    }, [rssoknader, sykmeldinger]);
 
-    if (isAnyNotStartedOrPending([ledetekster, rssoknader, sykmeldinger])) {
+    if (isAnyNotStartedOrPending([rssoknader, sykmeldinger])) {
         return <Spinner/>;
 
-    } else if (hasAnyFailed([ledetekster, rssoknader, sykmeldinger])) {
+    } else if (hasAnyFailed([rssoknader, sykmeldinger])) {
         return (
             <AlertStripeFeil>
                 Vi får akkurat nå ikke hentet alle data.
@@ -46,7 +41,6 @@ export function DataFetcher(props: { children: any }) {
             </AlertStripeFeil>
         );
     }
-    setLedetekster(ledetekster.data);
 
     if (hasData(rssoknader) && hasData(sykmeldinger)) {
         setVisFeil(false);

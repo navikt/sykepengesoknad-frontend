@@ -2,26 +2,28 @@ import * as React from 'react';
 import { Soknad } from '../types/types';
 import Hjelpetekst from 'nav-frontend-hjelpetekst';
 import { Systemtittel } from 'nav-frontend-typografi';
-import { getLedetekst, tilLesbarPeriodeMedArstall } from "@navikt/digisyfo-npm";
+import { getLedetekst } from '../utils/utils';
+import tekster from './soknad-header-tekster';
+import { tilLesbarPeriodeMedArstall } from '../utils/datoUtils';
 
 interface SoknadHeaderProps {
     soknad: Soknad
 }
 
-const SoknadHeader = ({soknad}: SoknadHeaderProps) => {
+const SoknadHeader = ({ soknad }: SoknadHeaderProps) => {
     return (
         <header className="sidetopp">
             <Systemtittel tag="h1" className="sidetopp__tittel">
-                {getLedetekst('sykepengesoknad.sidetittel')}
+                {tekster['sykepengesoknad.sidetittel']}
             </Systemtittel>
             <div className="medHjelpetekst sidetopp__meta">
-                <p>{
-                    getLedetekst('sykepengesoknad.sidetittel.periode-2', {
+                <p>
+                    {getLedetekst(tekster['sykepengesoknad.sidetittel.periode-2'], {
                         '%PERIODE%': tilLesbarPeriodeMedArstall(soknad.fom, soknad.tom),
-                    })
-                }</p>
+                    })}
+                </p>
                 <Hjelpetekst id="oppdelt-soknad-hjelpetekst">
-                    {getLedetekst('sykepengesoknad.sidetittel.hjelpetekst.tekst')}
+                    {tekster['sykepengesoknad.sidetittel.hjelpetekst.tekst']}
                 </Hjelpetekst>
             </div>
         </header>

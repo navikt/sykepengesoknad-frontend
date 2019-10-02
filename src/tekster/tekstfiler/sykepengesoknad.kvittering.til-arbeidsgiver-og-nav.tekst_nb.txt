@@ -1,0 +1,3 @@
+<p>Søknaden er sendt til %ARBEIDSGIVER% og til NAV.</p>
+<p>For å kunne behandle søknaden om sykepenger, trenger NAV også inntektsopplysninger fra arbeidsgiveren din. Dette skal arbeidsgiveren sende inn én gang per sammenhengende sykefravær. </p>
+<p><a href="https://www.nav.no/no/NAV+og+samfunn/Kontakt+NAV/Utbetalinger/Utbetalinger/Utbetalingsdatoer%2C+feriepenger+og+skattetrekk?kap=499628" target="_blank">Les om utbetaling av sykepenger og saksbehandlingstider.</a></p>

@@ -1,0 +1,1 @@
+Hvilke dager før %DATO% var du borte fra jobb?

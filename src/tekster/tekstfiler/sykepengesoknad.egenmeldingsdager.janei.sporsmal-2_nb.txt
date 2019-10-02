@@ -1,0 +1,1 @@
+Vi har registrert at du ble sykmeldt %DATO%. Brukte du egenmeldinger og/eller var du sykmeldt i perioden %FOM% til %TOM%?

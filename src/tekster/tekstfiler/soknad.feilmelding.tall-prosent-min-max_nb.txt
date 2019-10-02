@@ -1,0 +1,2 @@
+Prosenten du skrev inn tyder på at du ikke har jobbet mer enn %ANDEL% %.
+Du må enten svare nei på spørsmålet over eller endre prosenten til et tall mellom %MIN% og %MAX%.

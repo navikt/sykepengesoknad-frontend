@@ -1,0 +1,1 @@
+Tjenesten er dessverre utilgjengelig på grunn av vedlikehold i tidsrommet %FRA% til %TIL%.

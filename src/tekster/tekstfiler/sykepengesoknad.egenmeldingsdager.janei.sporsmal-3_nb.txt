@@ -1,0 +1,1 @@
+Vi har registrert at du ble sykmeldt %DATO%. Var du borte med egenmelding eller sykmelding mellom %PERIODE%?

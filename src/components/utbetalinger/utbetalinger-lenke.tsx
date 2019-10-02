@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
-import { getLedetekst } from '@navikt/digisyfo-npm';
 import { Systemtittel } from 'nav-frontend-typografi';
 import utbetalingIkon from './utbetalinger.svg';
 import utbetalingHover from './utbetalinger--hover.svg';
+import tekster from './utbetalinger-tekster';
 
 const UtbetalingerLenke = () => {
     const [ikon, setIkon] = useState(utbetalingIkon);
@@ -18,7 +18,7 @@ const UtbetalingerLenke = () => {
             </span>
             <div className="inngangspanel__innhold">
                 <Systemtittel className="inngangspanel__tittel" tag="h2">
-                    {getLedetekst('soknader.sykepenger.tittel')}
+                    {tekster['soknader.sykepenger.tittel']}
                 </Systemtittel>
             </div>
         </a>

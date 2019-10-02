@@ -1,0 +1,3 @@
+Du velger hvilken arbeidsgiver sykmeldingen skal sendes til i neste spørsmål.
+
+Obs! Arbeidsgiveren som står i sykmeldingen fra før endres ikke, og vil være synlig for arbeidsgiveren du sender sykmeldingen til. Får du flere sykmeldinger må du gi beskjed til den som sykmelder deg om at det er lagt inn feil arbeidsgiver. 

@@ -1,0 +1,5 @@
+<ul>
+<li>Søknaden erstatter del D av sykmeldingen på papir. Har papiret allerede blitt sendt til NAV, skal du avbryte denne digitale søknaden. Får vi dobbelt opp, går saksbehandlingen saktere.</li>
+<li>Du må søke hver gang vi ber deg om det. For å utbetale riktig trenger vi å vite hva som skjedde i perioden du var sykmeldt.</li>
+<li>Vi sørger for at søknaden blir sendt til riktig sted. Hvis sykefraværet er kort, sendes den bare til arbeidsgiveren din.</li>
+</ul>

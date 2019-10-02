@@ -1,0 +1,3 @@
+<p>Husk at du må ha godkjenning fra NAV for å beholde sykepengene.
+Velger du å reise før godkjenningen er kommet, kan du risikere at sykepengene stanses, eller at sykepengene blir beregnet etter et lavere grunnlag.</p>
+<p> <a target="_blank"href="https://www.nav.no/no/Person/Arbeid/Sykmeldt%2C+arbeidsavklaringspenger+og+yrkesskade/Sykepenger/sykepenger-ved-utenlandsopphold#chapter-2">Les om hva som kan skje hvis du reiser uten godkjenning</a>.</p>
