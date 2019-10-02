@@ -6,13 +6,12 @@
   "private": true,
   "dependencies": {
     "@craco/craco": "^5.2.4",
-    "@navikt/digisyfo-npm": "^17.2.0",
+    "@types/react-intl": "^3.0.0",
     "@types/react-maskedinput": "^4.0.4",
     "classnames": "^2.2.6",
     "constate": "^1.2.0",
     "craco-less": "^1.9.0",
     "dayjs": "^1.8.15",
-    "formik": "^1.5.8",
     "html-react-parser": "^0.9.1",
     "less-plugin-npm-import": "^2.1.0",
     "lodash.throttle": "^4.1.1",
@@ -41,17 +40,15 @@
     "nav-frontend-stegindikator-style": "^1.0.21",
     "nav-frontend-typografi": "^2.0.12",
     "nav-frontend-typografi-style": "^1.0.13",
+    "query-string": "^6.8.3",
     "react": "^16.8.6",
     "react-day-picker": "^7.3.2",
     "react-dom": "^16.8.6",
     "react-maskedinput": "^4.0.1",
     "react-modal": "^3.9.1",
-    "react-redux": "^7.1.1",
     "react-router": "^5.0.1",
     "react-router-dom": "^5.0.1",
     "react-scripts": "3.0.1",
-    "redux": "^4.0.4",
-    "redux-saga": "^1.0.5",
     "simple-ajax": "^2.6.0"
   },
   "devDependencies": {
@@ -61,13 +58,15 @@
     "@types/react": "^16.8.24",
     "@types/react-dom": "^16.8.5",
     "@types/react-router-dom": "^4.3.4",
+    "react-test-renderer": "^16.10.1",
     "typescript": "^3.5.3",
     "yet-another-fetch-mock": "^3.2.0"
   },
   "scripts": {
     "start": "craco start",
     "build": "craco build",
-    "test": "craco test"
+    "test": "craco test",
+    "build-text": "node ./src/tekster/bygg-tekster.js"
   },
   "eslintConfig": {
     "extends": "react-app"
