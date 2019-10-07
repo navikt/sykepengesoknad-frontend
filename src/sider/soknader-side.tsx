@@ -1,6 +1,6 @@
 import React from 'react';
 import Alertstripe from 'nav-frontend-alertstriper';
-import { Soknad } from '../types/types';
+import { Brodsmule, Soknad } from '../types/types';
 import Sidetopp from '../components/sidetopp';
 import SoknaderTeasere from '../components/soknad/teaser/soknader-teasere';
 import UtbetalingerLenke from '../components/utbetalinger/utbetalinger-lenke';
@@ -9,12 +9,19 @@ import Vis from '../utils/vis';
 import { useAppStore } from '../stores/app-store';
 import { RSSoknadstatus } from '../types/rs-types/rs-soknadstatus';
 import tekster from './soknader-side-tekster';
+import Brodsmuler from '../components/brodsmuler/brodsmuler';
 
 export const filtrerOgSorterNyeSoknader = (soknader: Soknad[]) => {
     return soknader.filter((soknad) => {
         return soknad.status === RSSoknadstatus.NY || soknad.status === RSSoknadstatus.UTKAST_TIL_KORRIGERING;
     }).sort(sorterEtterOpprettetDato);
 };
+
+const brodsmuler: Brodsmule[] = [{
+    tittel: tekster['soknader.sidetittel'],
+    sti: '/soknader',
+    erKlikkbar: false
+}];
 
 const SoknaderSide = () => {
     const { soknader, visFeil } = useAppStore();
@@ -25,6 +32,7 @@ const SoknaderSide = () => {
             return soknad.status === RSSoknadstatus.SENDT || soknad.status === RSSoknadstatus.AVBRUTT;
         })
         .sort(sorterEtterPerioder);
+
     const fremtidigeSoknader = soknader
         .filter((soknad) => {
             return soknad.status === RSSoknadstatus.FREMTIDIG;
@@ -34,6 +42,7 @@ const SoknaderSide = () => {
 
     return (
         <div className="limit">
+            <Brodsmuler brodsmuler={brodsmuler}/>
             <Sidetopp tittel={tekster['soknader.sidetittel']}/>
 
             <Vis hvis={visFeil}>
@@ -55,7 +64,6 @@ const SoknaderSide = () => {
 
             <Vis hvis={fremtidigeSoknader.length > 0}>
                 <SoknaderTeasere
-                    // Child={FremtidigSoknadTeaser} TODO: Hvordan hente inn udefinert Child?
                     soknader={fremtidigeSoknader}
                     tittel={tekster['soknader.planlagt.tittel']}
                     className="js-planlagt"

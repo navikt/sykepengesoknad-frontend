@@ -45,10 +45,10 @@ export const getLedetekst = (text: string, data: any): string => {
     if (text === undefined || data === undefined) {
         return '';
     }
-    let newtext = '';
-    Object.keys(data).forEach(key => {
+    let newtext = text;
+    Object.keys(data).forEach((key, index) => {
         const regex = new RegExp(key, 'g');
-        newtext = text.replace(regex, data[key]);
+        newtext = newtext.replace(regex, data[key]);
     });
     return newtext;
 };

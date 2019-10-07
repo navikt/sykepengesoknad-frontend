@@ -5,7 +5,7 @@ import 'dayjs/locale/nb';
 
 it('Returns text from bundle', () => {
     const text = tekster['sykepengesoknad.sidetittel.periode-2'];
-    console.log('text', text); //tslint:disable-line
+    console.log('text', text); //eslint-disable-line
     expect(text).toEqual('Gjelder for perioden %PERIODE%');
 });
 

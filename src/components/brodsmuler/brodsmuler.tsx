@@ -3,37 +3,34 @@ import React, { useState } from 'react';
 import Lenke from 'nav-frontend-lenker';
 import { Brodsmule } from '../../types/types';
 import personIkon from '../../img/person.svg';
-
 import './brodsmuler.less';
+import { Normaltekst } from 'nav-frontend-typografi';
 
 const BrodsmuleBit = ({ sti, tittel, sisteSmule, erKlikkbar }: Brodsmule) => {
     const erEkstern = sti && sti.includes(process.env.REACT_APP_SYKEFRAVAER_CONTEXT_ROOT!);
     const link = erEkstern
-        ? <Lenke className="js-smule js-smule-a brodsmuler__smule" href={sti}>{tittel}</Lenke>
-        : <Link className="js-smule brodsmuler__smule" to={sti}>{tittel}</Link>;
+        ? <Lenke href={sti}>{tittel}</Lenke>
+        : <Link to={sti} className="lenke">{tittel}</Link>;
 
     if (sisteSmule) {
         return (
-            <span className="js-smuletekst">
+            <li className="smule">
                 <span className="vekk">Du er her:</span>
-                <span className="brodsmule">{tittel}</span>
-            </span>
+                <span>{tittel}</span>
+            </li>
         );
     } else if (erKlikkbar) {
         return (
-            <span className="js-smuletekst">
-                {link}
-                <span className="brodsmule__skille"> / </span>
-            </span>
+            <li className="smule">{link}</li>
         );
     }
     return (
-        <span>
-            <span className="brodsmuler__smule">{tittel}</span>
-            <span className="brodsmule__skille"> / </span>
-        </span>
+        <li className="smule">
+            <span>{tittel}</span>
+        </li>
     );
 };
+
 
 interface BrodsmulerProps {
     brodsmuler: Brodsmule[],
@@ -61,17 +58,22 @@ const Brodsmuler = ({ brodsmuler }: BrodsmulerProps) => {
     return (
         <nav className="brodsmuler" aria-label="Du er her: ">
             <img src={personIkon} alt="Du" className="brodsmuler__ikon"/>
-            <div className="brodsmuler__smuler">
-                <Lenke href="/dittnav" className="js-smule brodsmuler__smule">Ditt NAV</Lenke>
+            <Normaltekst tag="ul" className="brodsmuler__smuler">
+                <li className="smule">
+                    <Lenke href="/dittnav">Ditt NAV</Lenke>
+                </li>
+                <li className="smule">
+                    <Lenke href="/sykefravaer">Ditt Sykefravær</Lenke>
+                </li>
                 {
                     getVisCollapsed() &&
-                    <span>
+                    <li className="smule">
                         <button aria-label="Vis hele brødsmulestien"
-                            className="js-toggle brodsmuler__smule"
+                            className="js-toggle"
                             onClick={() => setVisCollapsed(false)}>
                             ...
                         </button>
-                    </span>
+                    </li>
                 }
                 {
                     synligeBrodsmuler
@@ -85,7 +87,7 @@ const Brodsmuler = ({ brodsmuler }: BrodsmulerProps) => {
                             return <BrodsmuleBit key={index} {...smule} />;
                         })
                 }
-            </div>
+            </Normaltekst>
         </nav>
     );
 };

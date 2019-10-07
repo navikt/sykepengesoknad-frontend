@@ -1,4 +1,4 @@
-/* tslint:disable:max-line-length */
+/* eslint-disable:max-line-length */
 export const AlleTekster = { 'nb': {
 '404.tekst': 'Fant ikke siden du lette etter. Er du sikker på at du er på riktig sted?',
 '404.tittel': 'Ooops!',

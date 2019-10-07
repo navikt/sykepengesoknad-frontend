@@ -14,13 +14,13 @@ import Vis from '../utils/vis';
 import tekster from './soknad-side-tekster';
 
 const brodsmuler: Brodsmule[] = [{
-    tittel: tekster['landingsside.sidetittel'],
-    sti: '/sykefravaer',
-    erKlikkbar: true,
-}, {
     tittel: tekster['soknader.sidetittel'],
-    sti: '/soknader',
-    erKlikkbar: false
+    sti: '/sykepengesoknad',
+    erKlikkbar: true
+}, {
+    tittel: tekster['soknad.sidetittel'],
+    sti: null,
+    erKlikkbar: false,
 }];
 
 const SoknadSide = (props: RouteComponentProps<IdParams>) => {
@@ -31,9 +31,7 @@ const SoknadSide = (props: RouteComponentProps<IdParams>) => {
         <Vis hvis={soknad.status === RSSoknadstatus.NY || soknad.status === RSSoknadstatus.UTKAST_TIL_KORRIGERING}>
             <div className="limit">
                 <Banner soknad={soknad} brodsmuler={brodsmuler}/>
-                <div className="begrensning begrensning--soknad">
-                    <TriggerByType soknad={soknad} sti={props.location.pathname}/>
-                </div>
+                <TriggerByType soknad={soknad} sti={props.location.pathname}/>
             </div>
         </Vis>
     )
@@ -47,7 +45,7 @@ interface TriggerProps {
 }
 
 const TriggerByType = ({ soknad, sti }: TriggerProps) => {
-    console.log('soknad.soknadstype', soknad.soknadstype); //tslint:disable-line FJERNES
+    console.log('soknad.soknadstype', soknad.soknadstype); //eslint-disable-line FJERNES
     switch (soknad.soknadstype) {
         case RSSoknadstype.ARBEIDSTAKERE: {
             return (

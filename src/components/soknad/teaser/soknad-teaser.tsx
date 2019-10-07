@@ -3,9 +3,7 @@ import * as React from 'react';
 import { Soknad } from '../../../types/types';
 import { RSSoknadstatus } from '../../../types/rs-types/rs-soknadstatus';
 import { RSSoknadstype } from '../../../types/rs-types/rs-soknadstype';
-import {
-    Inngangspanel, InngangspanelHeader, InngangspanelIkon
-} from '../../../sider/inngangspanel';
+import { Inngangspanel, InngangspanelHeader, InngangspanelIkon } from '../../../sider/inngangspanel';
 import { getUrlTilSoknad } from '../../../utils/url-utils';
 import GlobeIkon from '../../../sider/globe.svg';
 import GlobeHoverIkon from '../../../sider/globe-hover.svg';
@@ -13,15 +11,14 @@ import SoknaderIkon from '../../../sider/soknader.svg';
 import SoknaderHoverIkon from '../../../sider/soknader-hover.svg';
 import Vis from '../../../utils/vis';
 import { getLedetekst } from '../../../utils/utils';
-import { tilLesbarDatoMedArstall, tilLesbarPeriodeMedArstall } from '../../../utils/datoUtils';
+import { tilLesbarPeriodeMedArstall } from '../../../utils/datoUtils';
 import tekster from './soknad-teaser-tekster';
 import { Normaltekst } from 'nav-frontend-typografi';
-import { getSendtTilSuffix } from '../../../utils/soknad-utils';
-import parser from 'html-react-parser';
+import { getRiktigDato, getSendtTilSuffix } from '../../../utils/soknad-utils';
+import { HoyreChevron } from 'nav-frontend-chevron';
 
 const erSendtTilBeggeMenIkkeSamtidig = (soknad: Soknad) => {
-    return soknad.sendtTilNAVDato
-        && soknad.sendtTilArbeidsgiverDato
+    return soknad.sendtTilNAVDato && soknad.sendtTilArbeidsgiverDato
         && soknad.sendtTilNAVDato.getTime() !== soknad.sendtTilArbeidsgiverDato.getTime();
 };
 
@@ -35,16 +32,16 @@ interface SendtUliktProps {
 
 export const SendtUlikt = ({ soknad }: SendtUliktProps) => {
     return (
-        <span>
+        <Normaltekst tag="span">
             {getLedetekst(tekster['soknad.teaser.status.SENDT.til-arbeidsgiver'], {
                 '%DATO%': dayjs(soknad.sendtTilArbeidsgiverDato).format('DD.MM.YYYY'),
-                '%ARBEIDSGIVER%': soknad.arbeidsgiver.navn,
+                '%ARBEIDSGIVER%': finnArbeidsgivernavn(soknad),
             })}
             <br/>
             {getLedetekst(tekster['soknad.teaser.status.SENDT.til-nav'], {
                 '%DATO%': dayjs(soknad.sendtTilNAVDato).format('DD.MM.YYYY'),
             })}
-        </span>
+        </Normaltekst>
     );
 };
 
@@ -70,7 +67,8 @@ const beregnUndertekst = (soknad: Soknad) => {
         return tekster['soknad.teaser.status.FREMTIDIG'];
     }
 
-    console.log('suffix', getSendtTilSuffix(soknad)); //tslint:disable-line
+    const endelse = getSendtTilSuffix(soknad);
+    const datoher = getRiktigDato(soknad);
 
     switch (soknad.soknadstype) {
         case RSSoknadstype.OPPHOLD_UTLAND:
@@ -78,7 +76,7 @@ const beregnUndertekst = (soknad: Soknad) => {
         case RSSoknadstype.SELVSTENDIGE_OG_FRILANSERE: {
             return soknad.status === RSSoknadstatus.SENDT
                 ? getLedetekst(tekster['soknad.teaser.status.SENDT.til-nav'], {
-                    '%DATO%': dayjs(soknad.sendtTilNAVDato).format('DD.MM.YYYY'),
+                    '%DATO%': dayjs(datoher).format('DD.MM.YYYY'),
                 })
                 : '';
         }
@@ -87,8 +85,8 @@ const beregnUndertekst = (soknad: Soknad) => {
                 case RSSoknadstatus.SENDT:
                     return erSendtTilBeggeMenIkkeSamtidig(soknad)
                         ? <SendtUlikt soknad={soknad}/>
-                        : getLedetekst(tekster[`soknad.teaser.status.${soknad.status}${getSendtTilSuffix(soknad)}`], {
-                            '%DATO%': tilLesbarDatoMedArstall(soknad.sendtTilArbeidsgiverDato || soknad.sendtTilNAVDato),
+                        : getLedetekst(tekster[`soknad.teaser.status.${soknad.status}${endelse}`], {
+                            '%DATO%': dayjs(datoher).format('DD.MM.YYYY'),
                             '%ARBEIDSGIVER%': finnArbeidsgivernavn(soknad),
                         });
                 case RSSoknadstatus.NY:
@@ -106,12 +104,16 @@ const beregnUndertekst = (soknad: Soknad) => {
 };
 
 export const hentTeaserStatustekst = (soknad: Soknad) => {
-    const visStatus = [RSSoknadstatus.NY, RSSoknadstatus.SENDT, RSSoknadstatus.AVBRUTT].indexOf(soknad.status) === -1;
-    return visStatus
-        ? getLedetekst(`soknad.teaser.status.${soknad.status}`, {
-            '%DATO%': dayjs(soknad.sendtTilArbeidsgiverDato || soknad.sendtTilNAVDato).format('DD.MM.YYYY'),
+    if (
+        soknad.status !== RSSoknadstatus.NY &&
+        soknad.status !== RSSoknadstatus.SENDT &&
+        soknad.status !== RSSoknadstatus.AVBRUTT
+    ) {
+        return getLedetekst(tekster[`soknad.teaser.status.${soknad.status}`], {
+            '%DATO%': dayjs(getRiktigDato(soknad)).format('DD.MM.YYYY'),
         })
-        : null;
+    }
+    return '';
 };
 
 interface SykepengesoknadTeaserProps {
@@ -124,28 +126,28 @@ const SoknadTeaser = ({ soknad }: SykepengesoknadTeaserProps) => {
 
     return (
         <article aria-labelledby={`soknader-header-${soknad.id}`}>
-            <Inngangspanel className={`js-panel js-soknad-${status}`}
-                to={getUrlTilSoknad(soknad.id, '')}>
+            <Inngangspanel className={`js-panel js-soknad-${status}`} to={getUrlTilSoknad(soknad.id, '')}>
                 <InngangspanelIkon
                     ikon={hentIkon(soknad.soknadstype)}
                     ikonHover={hentIkonHover(soknad.soknadstype)}
                 />
+                <HoyreChevron />
                 <div className="inngangspanel__innhold">
-                    <InngangspanelHeader
-                        id={`soknad-header-${soknad.id}`}
+                    <InngangspanelHeader id={`soknad-header-${soknad.id}`}
                         meta={getLedetekst(tekster['soknad.teaser.dato'], {
                             '%DATO%': dayjs(soknad.opprettetDato).format('DD.MM.YYYY'),
                         })}
                         tittel={soknad.soknadstype === RSSoknadstype.OPPHOLD_UTLAND
-                            ? parser(tekster['soknad.utland.teaser.tittel'])
+                            ? tekster['soknad.utland.teaser.tittel']
                             : tekster['soknad.teaser.tittel']}
-                        status={hentTeaserStatustekst(soknad)}/>
+                        status={hentTeaserStatustekst(soknad)}
+                    />
                     <Vis hvis={soknad.soknadstype !== RSSoknadstype.OPPHOLD_UTLAND}>
-                        <p className="inngangspanel__tekst">
+                        <Normaltekst className="inngangspanel__tekst">
                             {getLedetekst(tekster['soknad.teaser.tekst'], {
                                 '%PERIODE%': tilLesbarPeriodeMedArstall(soknad.fom, soknad.tom),
                             })}
-                        </p>
+                        </Normaltekst>
                     </Vis>
                     <Vis hvis={undertekst !== undefined}>
                         <Normaltekst className="inngangspanel__undertekst">

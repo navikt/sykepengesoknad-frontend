@@ -1,12 +1,34 @@
 @import '../basic';
 
+.inngangspanelerHeader {
+    padding: 1rem 2rem;
+    background-color: @white;
+}
+
 .inngangspanel {
     display: flex;
+    position: relative;
     background-color: @white;
     margin-top: 1px;
     padding: 2rem 3rem 2rem 0;
     color: @navMorkGra;
     text-decoration: none;
+
+    .chevronboks {
+        position: absolute;
+        right: 1rem;
+        top: 2.4rem;
+        color: @grayIcon;
+    }
+
+    .inngangspanel__ikon {
+        display: flex;
+        width: 60px;
+        justify-content: flex-start;
+        align-items: center;
+        flex-direction: column;
+        margin-left: 18px;
+    }
 
     .inngangspanel__ikon--hover {
         display: none;
@@ -16,6 +38,10 @@
         position: relative;
         z-index: 100;
         box-shadow: #ccc 0 0 4px 2px;
+
+        .chevronboks {
+            color: @navBla;
+        }
 
         .inngangspanel__ikon--hover {
             display: flex;
@@ -33,19 +59,8 @@
         padding-bottom: 1.5rem;
         margin: 2.5rem 0;
     }
-}
 
-.inngangspanelerHeader {
-    padding: 1rem 2rem;
-    background-color: @white;
+    .inngangspanel__undertekst {
+        margin-top: 0.7rem;
+    }
 }
-
-.inngangspanel__ikon {
-    display: flex;
-    width: 60px;
-    justify-content: flex-start;
-    align-items: center;
-    flex-direction: column;
-    margin-left: 18px;
-}
-

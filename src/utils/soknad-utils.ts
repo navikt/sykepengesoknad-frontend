@@ -97,6 +97,19 @@ export const getSendtTilSuffix = (soknad: Soknad) => {
     return '';
 };
 
+export const getRiktigDato = (soknad: Soknad) => {
+    if (soknad.sendtTilArbeidsgiverDato && soknad.sendtTilNAVDato) {
+        return soknad.sendtTilNAVDato;
+    }
+    if (soknad.sendtTilArbeidsgiverDato) {
+        return soknad.sendtTilArbeidsgiverDato;
+    }
+    if (soknad.sendtTilNAVDato) {
+        return soknad.sendtTilNAVDato;
+    }
+    return '';
+};
+
 export const getFeriePermisjonPerioder = (values: any) => {
     let ferieOgPermisjonPerioder: any = [];
     if (values.harHattFeriePermisjonEllerUtenlandsopphold) {

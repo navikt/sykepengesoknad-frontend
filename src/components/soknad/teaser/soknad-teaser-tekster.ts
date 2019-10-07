@@ -10,9 +10,10 @@ const SoknadTeaserTekster: any = {
         'soknad.teaser.status.UTGAATT': 'Ikke brukt på nett',
         'soknad.teaser.status.UTKAST': 'Utkast til endring',
         'soknad.teaser.dato': 'Opprettet %DATO%',
-        'soknad.utland.teaser.tittel': 'Søknad om å beholde<br/>sykepenger utenfor Norge',
+        'soknad.utland.teaser.tittel': 'Søknad om å beholde sykepenger utenfor Norge',
         'soknad.teaser.tittel': 'Søknad om sykepenger',
         'soknad.teaser.tekst': 'Gjelder perioden %PERIODE%',
+        'soknad.teaser.undertekst': '%ARBEIDSGIVER%',
     }, 'en': {}
 };
 

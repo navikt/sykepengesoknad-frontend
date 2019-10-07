@@ -15,7 +15,7 @@ interface BannerProps {
 }
 
 const Banner = ({ soknad, brodsmuler }: BannerProps) => {
-    console.log('soknad', soknad); //tslint:disable-line
+    console.log('soknad', soknad); //eslint-disable-line
     const tittel = soknad && soknad.soknadstype === RSSoknadstype.OPPHOLD_UTLAND
         ? tekster['sykepengesoknad-utland.tittel']
         : tekster['sykepengesoknad.sidetittel'];

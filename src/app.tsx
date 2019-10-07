@@ -15,6 +15,7 @@ const App = () => {
                         <Route exact={true} path="/" component={SoknaderSide}/>
                         <Route path={'/sykepengesoknad/soknader/:id'} component={SoknadSide}/>
                         <Route path={'/sykepengesoknad/soknader/:id/:steg'} component={SoknadSide}/>
+                        <Route path="/sykepengesoknad" component={SoknaderSide}/>
                     </Switch>
                 </BrowserRouter>
             </DataFetcher>
