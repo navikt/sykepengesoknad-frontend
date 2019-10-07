@@ -14,7 +14,7 @@ interface HotjarWindow extends Window {
 
 export const HotjarTrigger = ({ hotjarTrigger, children }: HotjarTriggerProps) => {
     useEffect(() => {
-        const hotJarWindow = (window as HotjarWindow);
+        const hotJarWindow = (window as unknown as HotjarWindow);
         if (typeof hotJarWindow.hj === 'function'
             && window.location.href.indexOf('herokuapp') === -1) {
             hotJarWindow.hj('trigger', hotjarTrigger);

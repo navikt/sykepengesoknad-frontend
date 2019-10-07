@@ -45,7 +45,7 @@ interface TriggerProps {
 }
 
 const TriggerByType = ({ soknad, sti }: TriggerProps) => {
-    console.log('soknad.soknadstype', soknad.soknadstype); //eslint-disable-line FJERNES
+    console.log('soknad.soknadstype', soknad.soknadstype); //eslint-disable-line
     switch (soknad.soknadstype) {
         case RSSoknadstype.ARBEIDSTAKERE: {
             return (
