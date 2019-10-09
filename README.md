@@ -4,7 +4,9 @@
     * bootstrappet med [Create React App](https://github.com/facebook/create-react-app)
     * utvidet med [craco](https://github.com/gsoft-inc/craco) for typescript og less
 * express-server er fjenet
-    * decorator hentes via docker
+    * decorator hentes som en react-komponent
+        * navikt/react-decorator inntil videre
+        * personbrukers nye decorator når den er ferdig
     * mock kjøres fra frontend
         * se /mock
     * data hentes via `use-fetch`
