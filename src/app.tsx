@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
-import SoknadSide from './sider/soknad-side';
-import SoknaderSide from './sider/soknader-side';
+import Soknad from './sider/soknad/soknad-side';
+import Soknader from './sider/soknader/soknader-side';
 import StoreProvider from './data/stores/store-provider';
 import { DataFetcher } from './data/data-fetcher';
 import Decorator from '@navikt/react-decorator';
@@ -20,10 +20,10 @@ const App = (): any => {
                     <main id="maincontent" role="main" tabIndex={-1}>
                         <BrowserRouter>
                             <Switch>
-                                <Route exact={true} path="/" component={SoknaderSide}/>
-                                <Route path={'/sykepengesoknad/soknader/:id'} component={SoknadSide}/>
-                                <Route path={'/sykepengesoknad/soknader/:id/:steg'} component={SoknadSide}/>
-                                <Route path="/sykepengesoknad" component={SoknaderSide}/>
+                                <Route exact={true} path="/" component={Soknader}/>
+                                <Route path={'/sykepengesoknad/soknader/:id'} component={Soknad}/>
+                                <Route path={'/sykepengesoknad/soknader/:id/:steg'} component={Soknad}/>
+                                <Route path="/sykepengesoknad" component={Soknader}/>
                             </Switch>
                         </BrowserRouter>
                     </main>

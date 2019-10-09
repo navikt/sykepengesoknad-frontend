@@ -1,15 +1,15 @@
 import React from 'react';
 import Alertstripe from 'nav-frontend-alertstriper';
-import { Brodsmule, Soknad } from '../types/types';
-import Sidetopp from '../components/sidetopp';
-import Teasere from '../components/teaser/teasere';
-import UtbetalingerLenke from '../components/utbetalinger/utbetalinger-lenke';
-import { sorterEtterOpprettetDato, sorterEtterPerioder } from '../utils/sorter-soknader';
-import Vis from '../utils/vis';
-import { useAppStore } from '../data/stores/app-store';
-import { RSSoknadstatus } from '../types/rs-types/rs-soknadstatus';
+import { Brodsmule, Soknad } from '../../types/types';
+import Sidetopp from '../../components/sidetopp';
+import Teasere from '../../components/teaser/teasere';
+import UtbetalingerLenke from '../../components/utbetalinger/utbetalinger-lenke';
+import { sorterEtterOpprettetDato, sorterEtterPerioder } from '../../utils/sorter-soknader';
+import Vis from '../../utils/vis';
+import { useAppStore } from '../../data/stores/app-store';
+import { RSSoknadstatus } from '../../types/rs-types/rs-soknadstatus';
 import tekster from './soknader-side-tekster';
-import Brodsmuler from '../components/brodsmuler/brodsmuler';
+import Brodsmuler from '../../components/brodsmuler/brodsmuler';
 
 export const filtrerOgSorterNyeSoknader = (soknader: Soknad[]) => {
     return soknader.filter((soknad) => {
@@ -23,7 +23,7 @@ const brodsmuler: Brodsmule[] = [{
     erKlikkbar: false
 }];
 
-const SoknaderSide = () => {
+const Soknader = () => {
     const { soknader, visFeil } = useAppStore();
 
     const nyeSoknader = filtrerOgSorterNyeSoknader(soknader);
@@ -85,4 +85,4 @@ const SoknaderSide = () => {
     );
 };
 
-export default SoknaderSide;
+export default Soknader;

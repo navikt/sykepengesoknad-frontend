@@ -1,4 +1,4 @@
-const SoknaderSideTekster: any = {
+const SoknaderTekster: any = {
     'nb': {
         'soknader.sidetittel': 'Søknader om sykepenger',
         'soknader.venter-paa-behandling.tittel': 'Nye søknader',
@@ -9,6 +9,6 @@ const SoknaderSideTekster: any = {
     }, 'en': {}
 };
 
-const tekster = SoknaderSideTekster.nb;
+const tekster = SoknaderTekster.nb;
 
 export default tekster;

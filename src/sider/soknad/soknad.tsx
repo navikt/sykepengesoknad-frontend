@@ -1,16 +1,16 @@
 import * as React from 'react';
 import { RouteComponentProps } from 'react-router';
 import { Innholdstittel } from 'nav-frontend-typografi';
-import { Brodsmule, Soknad } from '../types/types';
-import { RSSoknadstatus } from '../types/rs-types/rs-soknadstatus';
-import Banner from '../components/banner/banner';
-import Feilmelding from '../components/feilmelding';
-import { HotjarTrigger } from '../components/hotjar-trigger';
-import { HotjarTriggerType } from '../types/enums';
-import { useAppStore } from '../data/stores/app-store';
-import { IdParams } from '../utils/util-props';
-import { RSSoknadstype } from '../types/rs-types/rs-soknadstype';
-import Vis from '../utils/vis';
+import { Brodsmule, Soknad } from '../../types/types';
+import { RSSoknadstatus } from '../../types/rs-types/rs-soknadstatus';
+import Banner from '../../components/banner/banner';
+import Feilmelding from '../../components/feilmelding';
+import { HotjarTrigger } from '../../components/hotjar-trigger';
+import { HotjarTriggerType } from '../../types/enums';
+import { useAppStore } from '../../data/stores/app-store';
+import { IdParams } from '../../utils/util-props';
+import { RSSoknadstype } from '../../types/rs-types/rs-soknadstype';
+import Vis from '../../utils/vis';
 import tekster from './soknad-side-tekster';
 
 const brodsmuler: Brodsmule[] = [{
@@ -23,7 +23,7 @@ const brodsmuler: Brodsmule[] = [{
     erKlikkbar: false,
 }];
 
-const SoknadSide = (props: RouteComponentProps<IdParams>) => {
+const Soknad = (props: RouteComponentProps<IdParams>) => {
     const { soknader } = useAppStore();
     const soknad = soknader.filter(soknad => soknad.id === props.match.params.id)[0];
 
@@ -37,7 +37,7 @@ const SoknadSide = (props: RouteComponentProps<IdParams>) => {
     )
 };
 
-export default SoknadSide;
+export default Soknad;
 
 interface TriggerProps {
     soknad: Soknad;
