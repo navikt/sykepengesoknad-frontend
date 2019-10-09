@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
-import Soknad from './sider/soknad/soknad-side';
-import Soknader from './sider/soknader/soknader-side';
+import Soknad from './sider/soknad/soknaden';
+import Soknader from './sider/soknader/soknader';
 import StoreProvider from './data/stores/store-provider';
 import { DataFetcher } from './data/data-fetcher';
 import Decorator from '@navikt/react-decorator';

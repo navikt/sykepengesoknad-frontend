@@ -8,7 +8,7 @@ import { sorterEtterOpprettetDato, sorterEtterPerioder } from '../../utils/sorte
 import Vis from '../../utils/vis';
 import { useAppStore } from '../../data/stores/app-store';
 import { RSSoknadstatus } from '../../types/rs-types/rs-soknadstatus';
-import tekster from './soknader-side-tekster';
+import tekster from './soknader-tekster';
 import Brodsmuler from '../../components/brodsmuler/brodsmuler';
 
 export const filtrerOgSorterNyeSoknader = (soknader: Soknad[]) => {

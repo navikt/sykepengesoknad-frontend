@@ -1,4 +1,4 @@
-import * as React from 'react';
+import React from 'react';
 import { RouteComponentProps } from 'react-router';
 import { Innholdstittel } from 'nav-frontend-typografi';
 import { Brodsmule, Soknad } from '../../types/types';
@@ -11,7 +11,7 @@ import { useAppStore } from '../../data/stores/app-store';
 import { IdParams } from '../../utils/util-props';
 import { RSSoknadstype } from '../../types/rs-types/rs-soknadstype';
 import Vis from '../../utils/vis';
-import tekster from './soknad-side-tekster';
+import tekster from './soknaden-tekster';
 
 const brodsmuler: Brodsmule[] = [{
     tittel: tekster['soknader.sidetittel'],
@@ -23,7 +23,7 @@ const brodsmuler: Brodsmule[] = [{
     erKlikkbar: false,
 }];
 
-const Soknad = (props: RouteComponentProps<IdParams>) => {
+const Soknaden = (props: RouteComponentProps<IdParams>) => {
     const { soknader } = useAppStore();
     const soknad = soknader.filter(soknad => soknad.id === props.match.params.id)[0];
 
@@ -37,7 +37,7 @@ const Soknad = (props: RouteComponentProps<IdParams>) => {
     )
 };
 
-export default Soknad;
+export default Soknaden;
 
 interface TriggerProps {
     soknad: Soknad;
