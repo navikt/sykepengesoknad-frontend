@@ -1,5 +1,5 @@
 export const getUrlTilSoknad = (soknadId: string, side: string | undefined) => {
-    const baseUrl = `${process.env.REACT_APP_CONTEXT_ROOT}/soknader/${soknadId}`;
+    const baseUrl = `/soknader/${soknadId}`;
     return side
         ? `${baseUrl}/${side}`
         : baseUrl;

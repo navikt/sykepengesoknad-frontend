@@ -6,6 +6,8 @@ import StoreProvider from './data/stores/store-provider';
 import { DataFetcher } from './data/data-fetcher';
 import Decorator from '@navikt/react-decorator';
 import './app.less';
+import Sporsmalene from './sider/sporsmal/sporsmalene';
+import Kvittering from './sider/kvittering/kvittering';
 
 type Miljo = 'LOCAL' | 'DEV' | 'PROD';
 
@@ -18,12 +20,12 @@ const App = (): any => {
             <StoreProvider>
                 <DataFetcher>
                     <main id="maincontent" role="main" tabIndex={-1}>
-                        <BrowserRouter>
+                        <BrowserRouter basename={'/sykepengesoknad'}>
                             <Switch>
                                 <Route exact={true} path="/" component={Soknader}/>
-                                <Route path={'/sykepengesoknad/soknader/:id'} component={Soknad}/>
-                                <Route path={'/sykepengesoknad/soknader/:id/:steg'} component={Soknad}/>
-                                <Route path="/sykepengesoknad" component={Soknader}/>
+                                <Route path={'/soknader/:id'} component={Soknad}/>
+                                <Route path={'/sporsmal/:id/:steg'} component={Sporsmalene}/>
+                                <Route path={'/kvittering/:id'} component={Kvittering}/>
                             </Switch>
                         </BrowserRouter>
                     </main>

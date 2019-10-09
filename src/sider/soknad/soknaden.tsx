@@ -15,7 +15,7 @@ import tekster from './soknaden-tekster';
 
 const brodsmuler: Brodsmule[] = [{
     tittel: tekster['soknader.sidetittel'],
-    sti: '/sykepengesoknad',
+    sti: '/',
     erKlikkbar: true
 }, {
     tittel: tekster['soknad.sidetittel'],
