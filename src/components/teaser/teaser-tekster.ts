@@ -1,4 +1,4 @@
-const SoknadTeaserTekster: any = {
+const TeaserTekster: any = {
     'nb': {
         'soknad.teaser.status.AVBRUTT': 'Avbrutt av deg %DATO%',
         'soknad.teaser.status.FREMTIDIG': 'Planlagt',
@@ -17,6 +17,6 @@ const SoknadTeaserTekster: any = {
     }, 'en': {}
 };
 
-const tekster = SoknadTeaserTekster.nb;
+const tekster = TeaserTekster.nb;
 
 export default tekster;

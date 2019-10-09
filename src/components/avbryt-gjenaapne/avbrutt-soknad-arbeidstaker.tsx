@@ -1,7 +1,7 @@
 import React from 'react';
 import cls from 'classnames';
 import SoknadHeader from './soknad-header';
-import { Soknad, Sykmelding } from '../types/types';
+import { Soknad, Sykmelding } from '../../types/types';
 
 interface AvbruttSoknadArbeidstakerProps {
     soknad: Soknad,

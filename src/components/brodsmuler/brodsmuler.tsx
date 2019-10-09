@@ -2,9 +2,9 @@ import { Link } from 'react-router-dom';
 import React, { useState } from 'react';
 import Lenke from 'nav-frontend-lenker';
 import { Brodsmule } from '../../types/types';
-import personIkon from '../../img/person.svg';
-import './brodsmuler.less';
+import personIkon from './person.svg';
 import { Normaltekst } from 'nav-frontend-typografi';
+import './brodsmuler.less';
 
 const BrodsmuleBit = ({ sti, tittel, sisteSmule, erKlikkbar }: Brodsmule) => {
     const erEkstern = sti && sti.includes(process.env.REACT_APP_SYKEFRAVAER_CONTEXT_ROOT!);

@@ -1,20 +1,20 @@
 import dayjs from 'dayjs';
-import * as React from 'react';
-import { Soknad } from '../../../types/types';
-import { RSSoknadstatus } from '../../../types/rs-types/rs-soknadstatus';
-import { RSSoknadstype } from '../../../types/rs-types/rs-soknadstype';
-import { Inngangspanel, InngangspanelHeader, InngangspanelIkon } from '../../../sider/inngangspanel';
-import { getUrlTilSoknad } from '../../../utils/url-utils';
-import GlobeIkon from '../../../sider/globe.svg';
-import GlobeHoverIkon from '../../../sider/globe-hover.svg';
-import SoknaderIkon from '../../../sider/soknader.svg';
-import SoknaderHoverIkon from '../../../sider/soknader-hover.svg';
-import Vis from '../../../utils/vis';
-import { getLedetekst } from '../../../utils/utils';
-import { tilLesbarPeriodeMedArstall } from '../../../utils/datoUtils';
-import tekster from './soknad-teaser-tekster';
+import React from 'react';
+import { Soknad } from '../../types/types';
+import { RSSoknadstatus } from '../../types/rs-types/rs-soknadstatus';
+import { RSSoknadstype } from '../../types/rs-types/rs-soknadstype';
+import { Inngangspanel, InngangspanelHeader, InngangspanelIkon } from '../../sider/inngangspanel';
+import { getUrlTilSoknad } from '../../utils/url-utils';
+import GlobeIkon from '../../sider/globe.svg';
+import GlobeHoverIkon from '../../sider/globe-hover.svg';
+import SoknaderIkon from '../../sider/soknader.svg';
+import SoknaderHoverIkon from '../../sider/soknader-hover.svg';
+import Vis from '../../utils/vis';
+import { getLedetekst } from '../../utils/utils';
+import { tilLesbarPeriodeMedArstall } from '../../utils/datoUtils';
+import tekster from './teaser-tekster';
 import { Normaltekst } from 'nav-frontend-typografi';
-import { getRiktigDato, getSendtTilSuffix } from '../../../utils/soknad-utils';
+import { getRiktigDato, getSendtTilSuffix } from '../../utils/soknad-utils';
 import { HoyreChevron } from 'nav-frontend-chevron';
 
 const erSendtTilBeggeMenIkkeSamtidig = (soknad: Soknad) => {
@@ -120,7 +120,7 @@ interface SykepengesoknadTeaserProps {
     soknad: Soknad;
 }
 
-const SoknadTeaser = ({ soknad }: SykepengesoknadTeaserProps) => {
+const Teaser = ({ soknad }: SykepengesoknadTeaserProps) => {
     const status = soknad.status ? soknad.status.toLowerCase() : '';
     const undertekst = beregnUndertekst(soknad);
 
@@ -160,4 +160,4 @@ const SoknadTeaser = ({ soknad }: SykepengesoknadTeaserProps) => {
     );
 };
 
-export default SoknadTeaser;
+export default Teaser;

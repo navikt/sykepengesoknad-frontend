@@ -1,7 +1,7 @@
 import React from 'react';
 import Knapp from 'nav-frontend-knapper';
-import { logger } from '../utils/logger';
-import { Soknad } from '../types/types';
+import { logger } from '../../utils/logger';
+import { Soknad } from '../../types/types';
 import tekster from './gjenapne-soknad-tekster';
 
 interface GjenapneSoknadProps {

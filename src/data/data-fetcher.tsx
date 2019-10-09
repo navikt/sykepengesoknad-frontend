@@ -1,10 +1,10 @@
 import React, { useEffect } from 'react';
 import Spinner from 'nav-frontend-spinner';
 import { AlertStripeFeil } from 'nav-frontend-alertstriper';
-import useFetch from '../rest/use-fetch';
+import useFetch from './rest/use-fetch';
 import { Soknad, Sykmelding } from '../types/types';
-import { FetchState, hasAnyFailed, hasData, isAnyNotStartedOrPending, isNotStarted } from '../rest/utils';
-import { useAppStore } from '../stores/app-store';
+import { FetchState, hasAnyFailed, hasData, isAnyNotStartedOrPending, isNotStarted } from './rest/utils';
+import { useAppStore } from './stores/app-store';
 import { RSSoknad } from '../types/rs-types/rs-soknad';
 
 export function DataFetcher(props: { children: any }) {

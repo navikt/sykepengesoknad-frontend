@@ -1,10 +1,10 @@
 import * as React from 'react';
-import { Soknad } from '../types/types';
+import { Soknad } from '../../types/types';
 import Hjelpetekst from 'nav-frontend-hjelpetekst';
 import { Systemtittel } from 'nav-frontend-typografi';
-import { getLedetekst } from '../utils/utils';
+import { getLedetekst } from '../../utils/utils';
 import tekster from './soknad-header-tekster';
-import { tilLesbarPeriodeMedArstall } from '../utils/datoUtils';
+import { tilLesbarPeriodeMedArstall } from '../../utils/datoUtils';
 
 interface SoknadHeaderProps {
     soknad: Soknad

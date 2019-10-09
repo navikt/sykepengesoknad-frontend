@@ -1,8 +1,8 @@
 import React from 'react';
-import { Soknad } from '../../../types/types';
+import { Soknad } from '../../types/types';
 import { Element } from 'nav-frontend-typografi';
-import SoknadTeaser from './soknad-teaser';
-import Vis from '../../../utils/vis';
+import Teaser from './teaser';
+import Vis from '../../utils/vis';
 
 interface SoknaderTeasereProps {
     soknader: Soknad[];
@@ -12,7 +12,7 @@ interface SoknaderTeasereProps {
     id: string;
 }
 
-const SoknaderTeasere = ({ soknader, className, tittel, tomListeTekst, id }: SoknaderTeasereProps) => {
+const Teasere = ({ soknader, className, tittel, tomListeTekst, id }: SoknaderTeasereProps) => {
     return (
         <>
             <header className="inngangspanelerHeader">
@@ -20,7 +20,7 @@ const SoknaderTeasere = ({ soknader, className, tittel, tomListeTekst, id }: Sok
             </header>
             <div id={id} className={className}>
                 {soknader.map((soknad, idx) => {
-                    return <SoknadTeaser key={idx} soknad={soknad}/>;
+                    return <Teaser key={idx} soknad={soknad}/>;
                 })}
                 <Vis hvis={soknader.length === 0}>
                     <Element className="panel">{tomListeTekst}</Element>
@@ -30,4 +30,4 @@ const SoknaderTeasere = ({ soknader, className, tittel, tomListeTekst, id }: Sok
     );
 };
 
-export default SoknaderTeasere;
+export default Teasere;

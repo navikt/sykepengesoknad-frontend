@@ -1,6 +1,6 @@
 import createUseContext from 'constate';
 import { useState } from 'react';
-import { Soknad, Sykmelding } from '../types/types';
+import { Soknad, Sykmelding } from '../../types/types';
 
 export const useAppStore = createUseContext(() => {
     const [decorator, setDecorator] = useState<string>();

@@ -7,7 +7,7 @@ import Banner from '../components/banner/banner';
 import Feilmelding from '../components/feilmelding';
 import { HotjarTrigger } from '../components/hotjar-trigger';
 import { HotjarTriggerType } from '../types/enums';
-import { useAppStore } from '../stores/app-store';
+import { useAppStore } from '../data/stores/app-store';
 import { IdParams } from '../utils/util-props';
 import { RSSoknadstype } from '../types/rs-types/rs-soknadstype';
 import Vis from '../utils/vis';

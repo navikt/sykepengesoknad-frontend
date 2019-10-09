@@ -2,11 +2,11 @@ import React from 'react';
 import Alertstripe from 'nav-frontend-alertstriper';
 import { Brodsmule, Soknad } from '../types/types';
 import Sidetopp from '../components/sidetopp';
-import SoknaderTeasere from '../components/soknad/teaser/soknader-teasere';
+import Teasere from '../components/teaser/teasere';
 import UtbetalingerLenke from '../components/utbetalinger/utbetalinger-lenke';
 import { sorterEtterOpprettetDato, sorterEtterPerioder } from '../utils/sorter-soknader';
 import Vis from '../utils/vis';
-import { useAppStore } from '../stores/app-store';
+import { useAppStore } from '../data/stores/app-store';
 import { RSSoknadstatus } from '../types/rs-types/rs-soknadstatus';
 import tekster from './soknader-side-tekster';
 import Brodsmuler from '../components/brodsmuler/brodsmuler';
@@ -54,7 +54,7 @@ const SoknaderSide = () => {
                 </Alertstripe>
             </Vis>
 
-            <SoknaderTeasere
+            <Teasere
                 soknader={nyeSoknader}
                 tittel={tekster['soknader.venter-paa-behandling.tittel']}
                 tomListeTekst={tekster['soknader.venter-paa-behandling.ingen-soknader']}
@@ -63,7 +63,7 @@ const SoknaderSide = () => {
             />
 
             <Vis hvis={fremtidigeSoknader.length > 0}>
-                <SoknaderTeasere
+                <Teasere
                     soknader={fremtidigeSoknader}
                     tittel={tekster['soknader.planlagt.tittel']}
                     className="js-planlagt"
@@ -74,7 +74,7 @@ const SoknaderSide = () => {
             <UtbetalingerLenke/>
 
             <Vis hvis={tidligereSoknader.length > 0}>
-                <SoknaderTeasere
+                <Teasere
                     soknader={tidligereSoknader}
                     tittel={tekster['soknader.sendt.tittel']}
                     className="js-sendt"

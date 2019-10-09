@@ -2,8 +2,8 @@ import * as React from 'react';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import SoknadSide from './sider/soknad-side';
 import SoknaderSide from './sider/soknader-side';
-import StoreProvider from './stores/store-provider';
-import { DataFetcher } from './components/data-fetcher';
+import StoreProvider from './data/stores/store-provider';
+import { DataFetcher } from './data/data-fetcher';
 import Decorator from '@navikt/react-decorator';
 import './app.less';
 
