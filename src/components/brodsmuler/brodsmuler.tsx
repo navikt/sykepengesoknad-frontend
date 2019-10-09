@@ -33,11 +33,15 @@ const BrodsmuleBit = ({ sti, tittel, sisteSmule, erKlikkbar }: Brodsmule) => {
 
 
 interface BrodsmulerProps {
-    brodsmuler: Brodsmule[],
+    brodsmuler: Brodsmule[];
 }
 
 const Brodsmuler = ({ brodsmuler }: BrodsmulerProps) => {
     const [visCollapsed, setVisCollapsed] = useState(true);
+
+    const getVisCollapsed = () => {
+        return brodsmuler.length > 3 && visCollapsed;
+    };
 
     const getSynligeBrodsmuler = () => {
         if (getVisCollapsed()) {
@@ -47,10 +51,6 @@ const Brodsmuler = ({ brodsmuler }: BrodsmulerProps) => {
             ];
         }
         return brodsmuler;
-    };
-
-    const getVisCollapsed = () => {
-        return brodsmuler.length > 3 && visCollapsed;
     };
 
     const synligeBrodsmuler = getSynligeBrodsmuler();

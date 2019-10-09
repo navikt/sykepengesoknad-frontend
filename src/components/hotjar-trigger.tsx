@@ -4,8 +4,8 @@ import { log } from '../utils/logger';
 import { HotjarTriggerType } from '../types/enums';
 
 interface HotjarTriggerProps {
-    hotjarTrigger: HotjarTriggerType,
-    children: any,
+    hotjarTrigger: HotjarTriggerType;
+    children: any;
 }
 
 interface HotjarWindow extends Window {

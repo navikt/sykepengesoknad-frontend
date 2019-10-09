@@ -133,7 +133,7 @@ const SoknadTeaser = ({ soknad }: SykepengesoknadTeaserProps) => {
                 />
                 <HoyreChevron />
                 <div className="inngangspanel__innhold">
-                    <InngangspanelHeader id={`soknad-header-${soknad.id}`}
+                    <InngangspanelHeader
                         meta={getLedetekst(tekster['soknad.teaser.dato'], {
                             '%DATO%': dayjs(soknad.opprettetDato).format('DD.MM.YYYY'),
                         })}

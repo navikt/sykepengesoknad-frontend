@@ -10,8 +10,8 @@ import './banner.less';
 import tekster from './banner-tekster';
 
 interface BannerProps {
-    soknad: Soknad,
-    brodsmuler: Brodsmule[],
+    soknad: Soknad;
+    brodsmuler: Brodsmule[];
 }
 
 const Banner = ({ soknad, brodsmuler }: BannerProps) => {

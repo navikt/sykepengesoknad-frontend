@@ -11,7 +11,7 @@ export function DataFetcher(props: { children: any }) {
     const { setSoknader, setVisFeil, setSykmeldinger } = useAppStore();
     const rssoknader = useFetch<RSSoknad[]>();
     const sykmeldinger = useFetch<Sykmelding[]>();
-
+    // `${process.env.APPRES_CMS_URL}/common-html/v4/navno?header=true&styles=true&scripts=true&footer=true`
     useEffect(() => {
         if (isNotStarted(rssoknader)) {
             rssoknader.fetch('/syfoapi/syfosoknad/api/soknader', undefined, (fetchState: FetchState<RSSoknad[]>) => {
@@ -27,7 +27,7 @@ export function DataFetcher(props: { children: any }) {
                 }
             });
         }
-        // eslint-disable-next-line react-hooks/exhaustive-deps
+        // eslint-disable-next-line
     }, [rssoknader, sykmeldinger]);
 
     if (isAnyNotStartedOrPending([rssoknader, sykmeldinger])) {

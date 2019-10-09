@@ -7,8 +7,8 @@ import './inngangspanel.less';
 import Vis from '../utils/vis';
 
 interface InngangspanelIkonProps {
-    ikon: string,
-    ikonHover?: string,
+    ikon: string;
+    ikonHover?: string;
 }
 
 export const InngangspanelIkon = ({ ikon, ikonHover }: InngangspanelIkonProps) => {
@@ -27,9 +27,9 @@ export const InngangspanelIkon = ({ ikon, ikonHover }: InngangspanelIkonProps) =
 };
 
 interface InngangspanelProps {
-    to: string,
-    children: React.ReactNode,
-    className: string
+    to: string;
+    children: React.ReactNode;
+    className: string;
 }
 
 export const Inngangspanel = ({ to, children, className, ...rest }: InngangspanelProps) => {
@@ -41,13 +41,12 @@ export const Inngangspanel = ({ to, children, className, ...rest }: Inngangspane
 };
 
 interface InngangspanelHeaderProps {
-    meta: string,
-    tittel: string,
-    status: string,
-    id: string,
+    meta: string;
+    tittel: string;
+    status: string;
 }
 
-export const InngangspanelHeader = ({ meta, tittel, status, id }: InngangspanelHeaderProps) => {
+export const InngangspanelHeader = ({ meta, tittel, status }: InngangspanelHeaderProps) => {
     return (
         <header className="inngangspanel__header">
             <Normaltekst className="inngangspanel__meta">

@@ -5,11 +5,11 @@ import SoknadTeaser from './soknad-teaser';
 import Vis from '../../../utils/vis';
 
 interface SoknaderTeasereProps {
-    soknader: Soknad[],
-    className: string,
-    tittel: string,
-    tomListeTekst?: string,
-    id: string
+    soknader: Soknad[];
+    className: string;
+    tittel: string;
+    tomListeTekst?: string;
+    id: string;
 }
 
 const SoknaderTeasere = ({ soknader, className, tittel, tomListeTekst, id }: SoknaderTeasereProps) => {

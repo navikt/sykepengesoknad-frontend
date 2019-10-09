@@ -2,9 +2,9 @@ import React, { ReactNode } from 'react';
 import { Systemtittel } from 'nav-frontend-typografi';
 
 interface FeilmeldingProps {
-    tittel?: string,
-    melding?: string,
-    children?: ReactNode,
+    tittel?: string;
+    melding?: string;
+    children?: ReactNode;
 }
 
 const Feilmelding = (

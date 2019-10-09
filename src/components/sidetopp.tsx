@@ -6,9 +6,9 @@ import { Sidetittel } from 'nav-frontend-typografi';
 import './sidetopp.less';
 
 interface SidetoppProps {
-    tittel: string,
-    htmlTekst?: string,
-    className?: string
+    tittel: string;
+    htmlTekst?: string;
+    className?: string;
 }
 
 const Sidetopp = ({ tittel, htmlTekst = undefined, className }: SidetoppProps) => {
