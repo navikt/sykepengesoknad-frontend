@@ -6,13 +6,16 @@
   "private": true,
   "dependencies": {
     "@craco/craco": "^5.5.0",
+    "@navikt/react-decorator": "^1.0.12",
     "@types/react-intl": "^3.0.0",
     "@types/react-maskedinput": "^4.0.4",
     "classnames": "^2.2.6",
     "constate": "^1.2.0",
     "craco-less": "^1.13.0",
     "dayjs": "^1.8.16",
+    "fetch-mock": "~7.5.1",
     "html-react-parser": "^0.9.1",
+    "jsdom": "^15.1.1",
     "less-plugin-npm-import": "^2.1.0",
     "lodash.throttle": "^4.1.1",
     "nav-frontend-alertstriper": "^3.0.6",
@@ -56,6 +59,7 @@
   "devDependencies": {
     "@types/classnames": "^2.2.9",
     "@types/jest": "^24.0.18",
+    "@types/jsdom": "^12.2.4",
     "@types/node": "^12.7.11",
     "@types/react": "^16.9.5",
     "@types/react-dom": "^16.9.1",
@@ -63,10 +67,7 @@
     "@typescript-eslint/eslint-plugin": "^2.3.2",
     "@typescript-eslint/parser": "^2.3.2",
     "eslint": "^6.5.1",
-    "eslint-config-prettier": "^6.4.0",
     "eslint-config-react": "^1.1.7",
-    "eslint-plugin-prettier": "^3.1.1",
-    "prettier": "^1.18.2",
     "react-test-renderer": "^16.10.2",
     "typescript": "^3.6.3",
     "yet-another-fetch-mock": "^3.2.0"
@@ -75,7 +76,7 @@
     "start": "craco start",
     "build": "craco build",
     "test": "craco test",
-    "lint": "eslint --ext=ts,tsx src/app.tsx",
+    "lint": "eslint --ext=ts,tsx src",
     "lint:fix": "eslint './src/**/*.{ts,tsx}'"
   },
   "eslintConfig": {

@@ -42,6 +42,3 @@ fasitResources:
     resourceType: baseurl
 
 webproxy: true
-
-alertProfiles:
-  - pus-decorator
