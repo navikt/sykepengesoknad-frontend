@@ -1,9 +1,9 @@
-const GjenapneSoknadTekster: any = {
+const GjenapneTekster: any = {
     'nb': {
         'sykepengesoknad.gjenapne.knapp': 'Gjenåpne søknad',
     }, 'en': {}
 };
 
-const tekster = GjenapneSoknadTekster.nb;
+const tekster = GjenapneTekster.nb;
 
 export default tekster;

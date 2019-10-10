@@ -5,9 +5,9 @@ import Soknader from './sider/soknader/soknader';
 import StoreProvider from './data/stores/store-provider';
 import { DataFetcher } from './data/data-fetcher';
 import Decorator from '@navikt/react-decorator';
-import './app.less';
 import Sporsmalene from './sider/sporsmal/sporsmalene';
 import Kvittering from './sider/kvittering/kvittering';
+import './app.less';
 
 type Miljo = 'LOCAL' | 'DEV' | 'PROD';
 

@@ -1,16 +1,16 @@
-import * as React from 'react';
+import React from 'react';
 import { Soknad } from '../../types/types';
 import Hjelpetekst from 'nav-frontend-hjelpetekst';
 import { Systemtittel } from 'nav-frontend-typografi';
 import { getLedetekst } from '../../utils/utils';
-import tekster from './soknad-header-tekster';
+import tekster from './avbrutt-header-tekster';
 import { tilLesbarPeriodeMedArstall } from '../../utils/datoUtils';
 
 interface SoknadHeaderProps {
     soknad: Soknad
 }
 
-const SoknadHeader = ({ soknad }: SoknadHeaderProps) => {
+const AvbruttHeader = ({ soknad }: SoknadHeaderProps) => {
     return (
         <header className="sidetopp">
             <Systemtittel tag="h1" className="sidetopp__tittel">
@@ -30,4 +30,4 @@ const SoknadHeader = ({ soknad }: SoknadHeaderProps) => {
     )
 };
 
-export default SoknadHeader;
+export default AvbruttHeader;

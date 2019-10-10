@@ -1,4 +1,4 @@
-const SoknadHeaderTekster: any = {
+const AvbruttHeaderTekster: any = {
     'nb': {
         'sykepengesoknad.sidetittel': 'Søknad om sykepenger',
         'sykepengesoknad.sidetittel.periode-2': 'Gjelder for perioden %PERIODE%',
@@ -6,6 +6,6 @@ const SoknadHeaderTekster: any = {
     }, 'en': {}
 };
 
-const tekster = SoknadHeaderTekster.nb;
+const tekster = AvbruttHeaderTekster.nb;
 
 export default tekster;

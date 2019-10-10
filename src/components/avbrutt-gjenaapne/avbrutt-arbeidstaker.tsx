@@ -1,6 +1,6 @@
 import React from 'react';
 import cls from 'classnames';
-import SoknadHeader from './soknad-header';
+import AvbruttHeader from './avbrutt-header';
 import { Soknad, Sykmelding } from '../../types/types';
 
 interface AvbruttSoknadArbeidstakerProps {
@@ -8,7 +8,7 @@ interface AvbruttSoknadArbeidstakerProps {
     sykmelding?: Sykmelding
 }
 
-const AvbruttSoknadArbeidstaker = ({ soknad, sykmelding }: AvbruttSoknadArbeidstakerProps) => {
+const AvbruttArbeidstaker = ({ soknad, sykmelding }: AvbruttSoknadArbeidstakerProps) => {
     const classNames = cls('panel statuspanel statuspanel--enKol');
     if (!sykmelding) {
         // TODO: State må settes når dineSykmeldinger hentes
@@ -20,7 +20,7 @@ const AvbruttSoknadArbeidstaker = ({ soknad, sykmelding }: AvbruttSoknadArbeidst
     }
     return (
         <>
-            <SoknadHeader soknad={soknad}/>
+            <AvbruttHeader soknad={soknad}/>
 {/*
             <div className={classNames}>
                 <Statusopplysninger>
@@ -41,4 +41,4 @@ const AvbruttSoknadArbeidstaker = ({ soknad, sykmelding }: AvbruttSoknadArbeidst
     );
 };
 
-export default AvbruttSoknadArbeidstaker;
+export default AvbruttArbeidstaker;
