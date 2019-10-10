@@ -7,8 +7,8 @@ import { Inngangspanel, InngangspanelHeader, InngangspanelIkon } from '../inngan
 import { getUrlTilSoknad } from '../../utils/url-utils';
 import GlobeIkon from './globe.svg';
 import GlobeHoverIkon from './globe-hover.svg';
-import SoknaderIkon from '../../sider/soknader/soknader.svg';
-import SoknaderHoverIkon from '../../sider/soknader/soknader-hover.svg';
+import SoknaderIkon from '../../pages/soknader/soknader.svg';
+import SoknaderHoverIkon from '../../pages/soknader/soknader-hover.svg';
 import Vis from '../../utils/vis';
 import { getLedetekst } from '../../utils/utils';
 import { tilLesbarPeriodeMedArstall } from '../../utils/datoUtils';

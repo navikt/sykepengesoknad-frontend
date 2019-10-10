@@ -1,12 +1,12 @@
 import * as React from 'react';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
-import Soknad from './sider/soknad/soknaden';
-import Soknader from './sider/soknader/soknader';
+import Soknad from './pages/soknad/soknaden';
+import Soknader from './pages/soknader/soknader';
 import StoreProvider from './data/stores/store-provider';
 import { DataFetcher } from './data/data-fetcher';
 import Decorator from '@navikt/react-decorator';
-import Sporsmalene from './sider/sporsmal/sporsmalene';
-import Kvittering from './sider/kvittering/kvittering';
+import Sporsmalene from './pages/sporsmal/sporsmalene';
+import Kvittering from './pages/kvittering/kvittering';
 import './app.less';
 
 type Miljo = 'LOCAL' | 'DEV' | 'PROD';
