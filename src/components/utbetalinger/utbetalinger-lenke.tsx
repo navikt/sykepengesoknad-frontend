@@ -6,10 +6,9 @@ import tekster from './utbetalinger-tekster';
 
 const UtbetalingerLenke = () => {
     const [ikon, setIkon] = useState(utbetalingIkon);
-    const URL = 'https://www.nav.no/no/NAV+og+samfunn/Kontakt+NAV/Utbetalinger/Utbetalinger/Utbetalingsdatoer%2C+feriepenger+og+skattetrekk?kap=499628';
 
     return (
-        <a href={URL} target="_blank" rel="noreferrer noopener"
+        <a href={tekster['utbetaliner.lenke.url']} target="_blank" rel="noreferrer noopener"
             onMouseEnter={() => setIkon(utbetalingHover)}
             onMouseLeave={() => setIkon(utbetalingIkon)}
             className="inngangspanel inngangspanel--ekstern">
