@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
-import Soknad from './pages/soknad/soknaden';
+import Soknad from './pages/soknaden/soknaden';
 import Soknader from './pages/soknader/soknader';
 import StoreProvider from './data/stores/store-provider';
 import { DataFetcher } from './data/data-fetcher';

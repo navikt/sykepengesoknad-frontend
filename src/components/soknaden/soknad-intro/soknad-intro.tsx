@@ -16,9 +16,6 @@ const SoknadIntro = () => {
                     </Normaltekst>
                 </Veilederpanel>
             </div>
-            <div className="redaksjonelt-innhold">
-                {parser(tekster['sykepengesoknad.foerste-soknad.mer_v2'])}
-            </div>
         </div>
     );
 };

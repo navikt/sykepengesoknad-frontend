@@ -7,7 +7,7 @@ import { useAppStore } from '../../data/stores/app-store';
 import { IdParams } from '../../utils/util-props';
 import tekster from './soknaden-tekster';
 import { HotjarTrigger } from '../../components/hotjar-trigger';
-import SoknadIntro from '../../components/soknaddeler/soknad-intro/soknad-intro';
+import SoknadIntro from '../../components/soknaden/soknad-intro/soknad-intro';
 
 const brodsmuler: Brodsmule[] = [{
     tittel: tekster['soknader.sidetittel'],
