@@ -13,7 +13,6 @@ healthcheck:
   readiness:
     path: sykepengesok/internal/isReady
 prometheus:
-  # NB: pus-decorator sine metrikker
   enabled: true
   path: sykepengesok/internal/metrics
 resources:

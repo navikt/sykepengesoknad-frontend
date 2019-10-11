@@ -9,5 +9,6 @@ const mock = FetchMock.configure({
         MiddlewareUtils.loggingMiddleware()
     )
 });
+
 mock.get('/syfoapi/syfosoknad/api/soknader', soknader);
 mock.get('/syforest/sykmeldinger', sykmeldinger);

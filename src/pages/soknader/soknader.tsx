@@ -1,7 +1,7 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import Alertstripe from 'nav-frontend-alertstriper';
+import { Sidetittel } from 'nav-frontend-typografi';
 import { Brodsmule, Soknad } from '../../types/types';
-import Sidetopp from '../../components/sidetopp';
 import Teasere from '../../components/teaser/teasere';
 import UtbetalingerLenke from '../../components/utbetalinger/utbetalinger-lenke';
 import { sorterEtterOpprettetDato, sorterEtterPerioder } from '../../utils/sorter-soknader';
@@ -10,6 +10,8 @@ import { useAppStore } from '../../data/stores/app-store';
 import { RSSoknadstatus } from '../../types/rs-types/rs-soknadstatus';
 import tekster from './soknader-tekster';
 import Brodsmuler from '../../components/brodsmuler/brodsmuler';
+import './soknader.less';
+import { setBodyClass } from '../../utils/utils';
 
 export const filtrerOgSorterNyeSoknader = (soknader: Soknad[]) => {
     return soknader.filter((soknad) => {
@@ -25,8 +27,8 @@ const brodsmuler: Brodsmule[] = [{
 
 const Soknader = () => {
     const { soknader, visFeil } = useAppStore();
-
     const nyeSoknader = filtrerOgSorterNyeSoknader(soknader);
+
     const tidligereSoknader = soknader
         .filter((soknad) => {
             return soknad.status === RSSoknadstatus.SENDT || soknad.status === RSSoknadstatus.AVBRUTT;
@@ -40,10 +42,16 @@ const Soknader = () => {
         .sort(sorterEtterPerioder)
         .reverse();
 
+    useEffect(() => {
+        setBodyClass('soknader');
+    });
+
     return (
         <div className="limit">
             <Brodsmuler brodsmuler={brodsmuler}/>
-            <Sidetopp tittel={tekster['soknader.sidetittel']}/>
+            <Sidetittel tag="h1" className="sidetopp__tittel">
+                {tekster['soknader.sidetittel']}
+            </Sidetittel>
 
             <Vis hvis={visFeil}>
                 <Alertstripe type="advarsel" className="blokk">

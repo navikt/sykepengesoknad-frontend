@@ -3,7 +3,6 @@ import { useState } from 'react';
 import { Soknad, Sykmelding } from '../../types/types';
 
 export const useAppStore = createUseContext(() => {
-    const [decorator, setDecorator] = useState<string>();
     const [soknader, setSoknader] = useState<Soknad[]>([]);
     const [visFeil, setVisFeil] = useState<boolean>(true);
     const [soknad, setSoknad] = useState<Soknad>();
@@ -15,7 +14,6 @@ export const useAppStore = createUseContext(() => {
     const [oppdaterFeilet, setOppdaterFeilet] = useState<boolean>(false);
 
     return {
-        decorator, setDecorator,
         soknader, setSoknader,
         visFeil, setVisFeil,
         soknad, setSoknad,
