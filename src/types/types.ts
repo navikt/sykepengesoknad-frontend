@@ -232,15 +232,15 @@ export interface SykeforlopPeriode {
 
 export class Soknad {
     id: string;
-    sykmeldingId?: string;
+    sykmeldingId: string;
     soknadstype: RSSoknadstype;
     status: RSSoknadstatus;
-    fom?: Date;
-    tom?: Date;
+    fom: Date;
+    tom: Date;
     avbruttDato?: Date;
     opprettetDato: Date;
     sendtTilNAVDato?: Date;
-    sendtTilArbeidsgiverDato: Date;
+    sendtTilArbeidsgiverDato?: Date;
     arbeidsgiver?: Arbeidsgiver;
     sporsmal: Sporsmal[];
     soknadPerioder: RSSoknadsperiode[];

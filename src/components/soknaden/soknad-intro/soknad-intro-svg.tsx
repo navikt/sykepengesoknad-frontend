@@ -6,7 +6,7 @@ const SoknadIntroSvg = () => {
         <defs>
             <circle id="a" cx="50" cy="50" r="50"/>
         </defs>
-        <g fill="none" fill-rule="evenodd">
+        <g fill="none" fillRule="evenodd">
             <mask id="b" fill="#fff">
                 <use xlinkHref="#a"/>
             </mask>

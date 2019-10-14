@@ -1,6 +1,6 @@
 import { TidsPeriode } from '../types/types';
 import { RSSoknadsperiode } from '../types/rs-types/rs-soknadsperiode';
-import { fraInputdatoTilJSDato } from './datoUtils';
+import { fraInputdatoTilJSDato } from './dato-utils';
 
 const ETT_DOGN = 1000 * 60 * 60 * 24;
 

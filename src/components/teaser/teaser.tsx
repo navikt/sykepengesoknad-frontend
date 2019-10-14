@@ -11,7 +11,7 @@ import SoknaderIkon from '../../pages/soknader/soknader.svg';
 import SoknaderHoverIkon from '../../pages/soknader/soknader-hover.svg';
 import Vis from '../../utils/vis';
 import { getLedetekst } from '../../utils/utils';
-import { tilLesbarPeriodeMedArstall } from '../../utils/datoUtils';
+import { tilLesbarPeriodeMedArstall } from '../../utils/dato-utils';
 import tekster from './teaser-tekster';
 import { Normaltekst } from 'nav-frontend-typografi';
 import { getRiktigDato, getSendtTilSuffix } from '../../utils/soknad-utils';

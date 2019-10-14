@@ -1,7 +1,7 @@
 import { Soknad, Sporsmal } from '../types/types';
 import { RSSvartype } from '../types/rs-types/rs-svartype';
 import { SvarEnums, TagTyper } from '../types/enums';
-import { fraInputdatoTilJSDato } from './datoUtils';
+import { fraInputdatoTilJSDato } from './dato-utils';
 
 const fraJSDatoTilBackendDato = (jsDato: Date) => {
     return jsDato.toJSON().substr(0, 10);

@@ -1,4 +1,4 @@
-import { erGyldigDato } from './datoUtils';
+import { erGyldigDato } from './dato-utils';
 
 export const getOnChange = (props: any) => {
     if (props.pavirkerAndreSporsmal) {

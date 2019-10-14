@@ -4,7 +4,7 @@ import Hjelpetekst from 'nav-frontend-hjelpetekst';
 import { Systemtittel } from 'nav-frontend-typografi';
 import { getLedetekst } from '../../utils/utils';
 import tekster from './avbrutt-header-tekster';
-import { tilLesbarPeriodeMedArstall } from '../../utils/datoUtils';
+import { tilLesbarPeriodeMedArstall } from '../../utils/dato-utils';
 
 interface SoknadHeaderProps {
     soknad: Soknad

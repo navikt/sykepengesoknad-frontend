@@ -1,6 +1,6 @@
 import { Soknad } from '../types/types';
 import { periodeOverlapperMedPeriode, tidligsteFom, tilDatePeriode } from './periode-utils';
-import { erGyldigDatoformat, fraInputdatoTilJSDato } from './datoUtils';
+import { erGyldigDatoformat, fraInputdatoTilJSDato } from './dato-utils';
 
 export const filtrerAktuelleAktiviteter = (aktiviteter: any, gjenopptattArbeidFulltUtDato: any) => {
     if (gjenopptattArbeidFulltUtDato && aktiviteter) {

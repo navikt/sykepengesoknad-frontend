@@ -6,6 +6,7 @@ import { Soknad, Sykmelding } from '../types/types';
 import { FetchState, hasAnyFailed, hasData, isAnyNotStartedOrPending, isNotStarted } from './rest/utils';
 import { useAppStore } from './stores/app-store';
 import { RSSoknad } from '../types/rs-types/rs-soknad';
+import { fixSykmeldingDatoer } from '../utils/dato-utils';
 
 export function DataFetcher(props: { children: any }) {
     const { setSoknader, setVisFeil, setSykmeldinger } = useAppStore();
@@ -22,7 +23,9 @@ export function DataFetcher(props: { children: any }) {
         if (isNotStarted(sykmeldinger)) {
             sykmeldinger.fetch('/syforest/sykmeldinger', undefined, (fetchState: FetchState<Sykmelding[]>) => {
                 if (hasData(fetchState)) {
-                    setSykmeldinger(fetchState.data);
+                    setSykmeldinger(fetchState.data!.map(sykmelding => {
+                        return fixSykmeldingDatoer(sykmelding);
+                    }));
                 }
             });
         }

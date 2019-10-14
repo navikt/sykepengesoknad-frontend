@@ -1,7 +1,7 @@
 import { Soknad } from '../types/types';
 import { RSSoknadstatus } from '../types/rs-types/rs-soknadstatus';
 import { formaterOrgnr, getLedetekst } from './utils';
-import { tilLesbarDatoMedArstall } from './datoUtils';
+import { tilLesbarDatoMedArstall } from './dato-utils';
 
 const hentSoknadStatustekst = (soknad: Soknad) => {
     const soknadSendtTilNav = soknad.sendtTilNAVDato !== null;

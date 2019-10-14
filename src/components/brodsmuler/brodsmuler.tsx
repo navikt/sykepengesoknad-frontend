@@ -10,7 +10,9 @@ const BrodsmuleBit = ({ sti, tittel, sisteSmule, erKlikkbar }: Brodsmule) => {
     const erEkstern = sti && sti.includes(process.env.REACT_APP_SYKEFRAVAER_CONTEXT_ROOT!);
     const link = erEkstern
         ? <Lenke href={sti}>{tittel}</Lenke>
-        : <Link to={sti} className="lenke">{tittel}</Link>;
+        : sti
+            ? <Link to={sti} className="lenke">{tittel}</Link>
+            : <span>{tittel}</span>;
 
     if (sisteSmule) {
         return (

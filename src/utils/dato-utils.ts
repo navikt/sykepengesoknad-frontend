@@ -1,3 +1,5 @@
+import { Sykmelding } from '../types/types';
+
 export const fraInputdatoTilJSDato = (inputDato: any) => {
     const datoSplit = inputDato.split('.');
     let ar = datoSplit[2];
@@ -87,3 +89,28 @@ export const tilLesbarPeriodeUtenArstall = (fomArg: any, tomArg: any) => {
         : `${tilLesbarDatoUtenAarstall(fom)} ${SKILLETEGN_PERIODE} ${tilLesbarDatoUtenAarstall(tom)}`;
 };
 
+export function getDuration(from: Date, to: Date) {
+    return Math.round(Math.floor(to.getTime() - from.getTime()) / (1000 * 60 * 60 * 24)) + 1;
+}
+
+export const fixDateType = (date: any) => {
+    return date ? new Date(date) : date;
+};
+
+export const fixSykmeldingDatoer = (sykmelding: Sykmelding) => {
+    sykmelding.startLegemeldtFravaer = fixDateType(sykmelding.startLegemeldtFravaer);
+    sykmelding.identdato = fixDateType(sykmelding.identdato);
+    sykmelding.sendtDato = fixDateType(sykmelding.sendtDato);
+    sykmelding.diagnose.yrkesskadeDato = fixDateType(sykmelding.diagnose.yrkesskadeDato);
+    sykmelding.mulighetForArbeid.perioder.forEach((periode, idx) => {
+        sykmelding.mulighetForArbeid.perioder[idx].fom = fixDateType(sykmelding.mulighetForArbeid.perioder[idx].fom);
+        sykmelding.mulighetForArbeid.perioder[idx].tom = fixDateType(sykmelding.mulighetForArbeid.perioder[idx].tom);
+    });
+    sykmelding.friskmelding.antattDatoReturSammeArbeidsgiver = fixDateType(sykmelding.friskmelding.antattDatoReturSammeArbeidsgiver);
+    sykmelding.friskmelding.tilbakemeldingReturArbeid = fixDateType(sykmelding.friskmelding.tilbakemeldingReturArbeid);
+    sykmelding.friskmelding.utenArbeidsgiverAntarTilbakeIArbeidDato = fixDateType(sykmelding.friskmelding.utenArbeidsgiverAntarTilbakeIArbeidDato);
+    sykmelding.friskmelding.utenArbeidsgiverTilbakemelding = fixDateType(sykmelding.friskmelding.utenArbeidsgiverTilbakemelding);
+    sykmelding.tilbakedatering.dokumenterbarPasientkontakt = fixDateType(sykmelding.tilbakedatering.dokumenterbarPasientkontakt);
+    sykmelding.bekreftelse.utstedelsesdato = fixDateType(sykmelding.bekreftelse.utstedelsesdato);
+    return sykmelding;
+};

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { RouteComponentProps } from 'react-router';
 import { Brodsmule, Soknad } from '../../types/types';
 import { RSSoknadstatus } from '../../types/rs-types/rs-soknadstatus';
@@ -8,6 +8,7 @@ import { IdParams } from '../../utils/util-props';
 import tekster from './soknaden-tekster';
 import { HotjarTrigger } from '../../components/hotjar-trigger';
 import SoknadIntro from '../../components/soknaden/soknad-intro/soknad-intro';
+import Opplysninger from '../../components/soknaden/opplysninger/opplysninger';
 
 const brodsmuler: Brodsmule[] = [{
     tittel: tekster['soknader.sidetittel'],
@@ -20,14 +21,28 @@ const brodsmuler: Brodsmule[] = [{
 }];
 
 const Soknaden = (props: RouteComponentProps<IdParams>) => {
-    const { soknader } = useAppStore();
-    const soknad = soknader.filter(soknad => soknad.id === props.match.params.id)[0];
+    const { soknader, soknad, setSoknad, sykmeldinger, setSykmelding } = useAppStore();
+
+    useEffect(() => {
+        let petisjon: Soknad;
+        soknader.filter(soknad => soknad.id === props.match.params.id).map(soknad => {
+            petisjon = soknad;
+            setSoknad(soknad);
+        });
+        sykmeldinger.filter(sm => sm.id === petisjon.sykmeldingId).map(melding => {
+            setSykmelding(melding);
+        });
+        console.log('soknad', soknad); // eslint-disable-line
+        // eslint-disable-next-line
+    }, [soknader, sykmeldinger]);
+
+    if (!soknad) return null;
 
     return (
         <div className="limit">
-            <Banner soknad={soknad} brodsmuler={brodsmuler}/>
+            <Banner brodsmuler={brodsmuler}/>
             <HotjarTrigger trigger={soknad.soknadstype}>
-                <Fordeling soknad={soknad}/>
+                <Fordeling/>
             </HotjarTrigger>
         </div>
     )
@@ -35,11 +50,9 @@ const Soknaden = (props: RouteComponentProps<IdParams>) => {
 
 export default Soknaden;
 
-interface FordelingProps {
-    soknad: Soknad;
-}
+const Fordeling = () => {
+    const { soknad } = useAppStore();
 
-const Fordeling = ({ soknad }: FordelingProps) => {
     switch (soknad.status) {
 
         // Nye søknader
@@ -47,7 +60,8 @@ const Fordeling = ({ soknad }: FordelingProps) => {
             return (
                 <>
                     <SoknadIntro/>
-                    opplysninger<br/>
+                    <Opplysninger/>
+
                     før du begynner<br/> disclaimer<br/>
                     gå videre<br/> ønsker ikke å bruke<br/>
                 </>
@@ -57,7 +71,8 @@ const Fordeling = ({ soknad }: FordelingProps) => {
         case RSSoknadstatus.SENDT || RSSoknadstatus.AVBRUTT:
             return (
                 <>
-                    status<br/> opplysninger<br/>
+                    status<br/>
+                    <Opplysninger/>
                     oppsummeringer<br/> viktig å være klar over<br/>
                 </>
             );
