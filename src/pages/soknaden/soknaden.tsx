@@ -9,6 +9,7 @@ import tekster from './soknaden-tekster';
 import { HotjarTrigger } from '../../components/hotjar-trigger';
 import SoknadIntro from '../../components/soknaden/soknad-intro/soknad-intro';
 import Opplysninger from '../../components/soknaden/opplysninger/opplysninger';
+import Nederst from '../../components/soknaden/nederst/nederst';
 
 const brodsmuler: Brodsmule[] = [{
     tittel: tekster['soknader.sidetittel'],
@@ -61,9 +62,7 @@ const Fordeling = () => {
                 <>
                     <SoknadIntro/>
                     <Opplysninger/>
-
-                    før du begynner<br/> disclaimer<br/>
-                    gå videre<br/> ønsker ikke å bruke<br/>
+                    <Nederst/>
                 </>
             );
 
