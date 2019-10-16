@@ -4,22 +4,18 @@ import { Soknad, Sykmelding } from '../../types/types';
 
 export const useAppStore = createUseContext(() => {
     const [soknader, setSoknader] = useState<Soknad[]>([]);
-    const [visFeil, setVisFeil] = useState<boolean>(true);
-    const [soknad, setSoknad] = useState<Soknad>();
     const [sykmeldinger, setSykmeldinger] = useState<Sykmelding[]>([]);
-    const [sykmelding, setSykmelding] = useState<Sykmelding>();
-    const [vis, setVis] = useState<boolean>(false);
+    const [valgtSoknad, setValgtSoknad] = useState<Soknad>();
+    const [valgtSykmelding, setValgtSykmelding] = useState<Sykmelding>();
     const [angreBekreftSykmeldingFeilet, setAngreBekreftSykmeldingFeilet] = useState<Function>();
     const [angrerBekreftSykmelding, setAngrerBekreftSykmelding] = useState<boolean>(false);
     const [oppdaterFeilet, setOppdaterFeilet] = useState<boolean>(false);
 
     return {
         soknader, setSoknader,
-        visFeil, setVisFeil,
-        soknad, setSoknad,
+        valgtSoknad, setValgtSoknad,
         sykmeldinger, setSykmeldinger,
-        sykmelding, setSykmelding,
-        vis, setVis,
+        valgtSykmelding, setValgtSykmelding,
         angreBekreftSykmeldingFeilet, setAngreBekreftSykmeldingFeilet,
         angrerBekreftSykmelding, setAngrerBekreftSykmelding,
         oppdaterFeilet, setOppdaterFeilet

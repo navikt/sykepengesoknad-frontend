@@ -9,7 +9,7 @@ import { RSSoknad } from '../types/rs-types/rs-soknad';
 import { fixSykmeldingDatoer } from '../utils/dato-utils';
 
 export function DataFetcher(props: { children: any }) {
-    const { setSoknader, setVisFeil, setSykmeldinger } = useAppStore();
+    const { setSoknader, setSykmeldinger } = useAppStore();
     const rssoknader = useFetch<RSSoknad[]>();
     const sykmeldinger = useFetch<Sykmelding[]>();
     useEffect(() => {
@@ -30,7 +30,7 @@ export function DataFetcher(props: { children: any }) {
             });
         }
         // eslint-disable-next-line
-    }, [rssoknader, sykmeldinger]);
+    }, []);
 
     if (isAnyNotStartedOrPending([rssoknader, sykmeldinger])) {
         return <Spinner/>;
@@ -42,10 +42,6 @@ export function DataFetcher(props: { children: any }) {
                 Vi jobber med å løse saken. Vennligst prøv igjen senere.
             </AlertStripeFeil>
         );
-    }
-
-    if (hasData(rssoknader) && hasData(sykmeldinger)) {
-        setVisFeil(false);
     }
 
     return props.children;
