@@ -1,1 +1,0 @@
-Har du vært under utdanning i løpet av perioden %STARTDATO% – %SLUTTDATO%?
