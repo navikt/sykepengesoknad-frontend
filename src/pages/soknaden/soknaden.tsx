@@ -10,6 +10,9 @@ import { HotjarTrigger } from '../../components/hotjar-trigger';
 import SoknadIntro from '../../components/soknaden/soknad-intro/soknad-intro';
 import Opplysninger from '../../components/soknaden/opplysninger/opplysninger';
 import Nederst from '../../components/soknaden/nederst/nederst';
+import StatusPanel from '../../components/soknaden/status/status-panel';
+import VaerKlarOver from '../../components/soknaden/vaer-klar-over/vaer-klar-over';
+import Oppsummering from '../../components/soknaden/oppsummering/oppsummering';
 
 const brodsmuler: Brodsmule[] = [{
     tittel: tekster['soknader.sidetittel'],
@@ -22,27 +25,28 @@ const brodsmuler: Brodsmule[] = [{
 }];
 
 const Soknaden = (props: RouteComponentProps<IdParams>) => {
-    const { soknader, soknad, setSoknad, sykmeldinger, setSykmelding } = useAppStore();
+    const { soknader, valgtSoknad, setValgtSoknad, sykmeldinger, setValgtSykmelding } = useAppStore();
 
     useEffect(() => {
         let petisjon: Soknad;
-        soknader.filter(soknad => soknad.id === props.match.params.id).map(soknad => {
-            petisjon = soknad;
-            setSoknad(soknad);
+        soknader.filter(soknad => soknad.id === props.match.params.id).forEach(sok => {
+            petisjon = sok;
+            setValgtSoknad(sok);
+            console.log('valgtSoknad', sok); // eslint-disable-line
         });
-        sykmeldinger.filter(sm => sm.id === petisjon.sykmeldingId).map(melding => {
-            setSykmelding(melding);
+        sykmeldinger.filter(sm => sm.id === petisjon.sykmeldingId).forEach(melding => {
+            setValgtSykmelding(melding);
+            console.log('valgtSykmelding', melding); // eslint-disable-line
         });
-        console.log('soknad', soknad); // eslint-disable-line
         // eslint-disable-next-line
-    }, [soknader, sykmeldinger]);
+    }, []);
 
-    if (!soknad) return null;
+    if (!valgtSoknad) return null;
 
     return (
         <div className="limit">
             <Banner brodsmuler={brodsmuler}/>
-            <HotjarTrigger trigger={soknad.soknadstype}>
+            <HotjarTrigger trigger={valgtSoknad.soknadstype}>
                 <Fordeling/>
             </HotjarTrigger>
         </div>
@@ -52,9 +56,9 @@ const Soknaden = (props: RouteComponentProps<IdParams>) => {
 export default Soknaden;
 
 const Fordeling = () => {
-    const { soknad } = useAppStore();
+    const { valgtSoknad } = useAppStore();
 
-    switch (soknad.status) {
+    switch (valgtSoknad.status) {
 
         // Nye søknader
         case RSSoknadstatus.NY || RSSoknadstatus.UTKAST_TIL_KORRIGERING:
@@ -70,9 +74,10 @@ const Fordeling = () => {
         case RSSoknadstatus.SENDT || RSSoknadstatus.AVBRUTT:
             return (
                 <>
-                    status<br/>
+                    <StatusPanel/>
                     <Opplysninger/>
-                    oppsummeringer<br/> viktig å være klar over<br/>
+                    <Oppsummering/>
+                    <VaerKlarOver/>
                 </>
             );
 

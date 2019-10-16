@@ -2,16 +2,16 @@ import React, { useEffect } from 'react';
 import Alertstripe from 'nav-frontend-alertstriper';
 import { Sidetittel } from 'nav-frontend-typografi';
 import { Brodsmule, Soknad } from '../../types/types';
-import Teasere from '../../components/teaser/teasere';
-import UtbetalingerLenke from '../../components/utbetalinger/utbetalinger-lenke';
+import Teasere from '../../components/soknader/teaser/teasere';
+import UtbetalingerLenke from '../../components/soknader/utbetalinger/utbetalinger-lenke';
 import { sorterEtterOpprettetDato, sorterEtterPerioder } from '../../utils/sorter-soknader';
 import Vis from '../../utils/vis';
 import { useAppStore } from '../../data/stores/app-store';
 import { RSSoknadstatus } from '../../types/rs-types/rs-soknadstatus';
 import tekster from './soknader-tekster';
 import Brodsmuler from '../../components/brodsmuler/brodsmuler';
-import './soknader.less';
 import { setBodyClass } from '../../utils/utils';
+import './soknader.less';
 
 export const filtrerOgSorterNyeSoknader = (soknader: Soknad[]) => {
     return soknader.filter((soknad) => {
@@ -26,7 +26,7 @@ const brodsmuler: Brodsmule[] = [{
 }];
 
 const Soknader = () => {
-    const { soknader, visFeil } = useAppStore();
+    const { soknader } = useAppStore();
     const nyeSoknader = filtrerOgSorterNyeSoknader(soknader);
 
     const tidligereSoknader = soknader
@@ -53,7 +53,7 @@ const Soknader = () => {
                 {tekster['soknader.sidetittel']}
             </Sidetittel>
 
-            <Vis hvis={visFeil}>
+            <Vis hvis={false}>
                 <Alertstripe type="advarsel" className="blokk">
                     <p className="sist">
                         <strong>Oops!</strong>

@@ -1,8 +1,9 @@
 import React, { useEffect } from 'react';
 import { Link } from 'react-router-dom';
+import { Panel } from 'nav-frontend-paneler';
+import { Normaltekst, Sidetittel } from 'nav-frontend-typografi';
 import { Soknad } from '../types/types';
 import { logger } from '../utils/logger';
-import { Normaltekst, Sidetittel } from 'nav-frontend-typografi';
 import { getUrlTilSoknad } from '../utils/url-utils';
 
 interface StartIgjenProps {
@@ -22,7 +23,7 @@ const StartIgjen = ({ soknad }: StartIgjenProps) => {
     }, []);
 
     return (
-        <div className="panel">
+        <Panel>
             <div className="hode hode--informasjon">
                 <Sidetittel tag="h2" className="hode__tittel">Oops, nå har vi mistet dataene dine</Sidetittel>
                 <Normaltekst className="hode__melding">
@@ -32,7 +33,7 @@ const StartIgjen = ({ soknad }: StartIgjenProps) => {
                     </Link>.
                 </Normaltekst>
             </div>
-        </div>
+        </Panel>
     );
 };
 
