@@ -1,6 +1,6 @@
 export const sykmeldinger: any = [
   {
-    "id": "e9a99b9a-73e3-4998-82d1-063ca70866b2",
+    "id": "ef081c8b-2aac-4f8d-8c64-5f629053f0c1",
     "startLegemeldtFravaer": "2019-03-31",
     "skalViseSkravertFelt": true,
     "identdato": "2019-03-22",
