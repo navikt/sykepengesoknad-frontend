@@ -12,8 +12,8 @@ interface BannerProps {
 }
 
 const Banner = ({ brodsmuler }: BannerProps) => {
-    const { soknad } = useAppStore();
-    const tittel = soknad && soknad.soknadstype === RSSoknadstype.OPPHOLD_UTLAND
+    const { valgtSoknad } = useAppStore();
+    const tittel = valgtSoknad && valgtSoknad.soknadstype === RSSoknadstype.OPPHOLD_UTLAND
         ? tekster['sykepengesoknad-utland.tittel']
         : tekster['sykepengesoknad.sidetittel'];
 

@@ -5,9 +5,9 @@ import tekster from './opplysninger-tekster';
 import { RSSoknadstype } from '../../../types/rs-types/rs-soknadstype';
 
 const SelvstendigInfo = () => {
-    const { soknad } = useAppStore();
+    const { valgtSoknad } = useAppStore();
 
-    if (soknad.soknadstype !== RSSoknadstype.SELVSTENDIGE_OG_FRILANSERE) return null;
+    if (valgtSoknad.soknadstype !== RSSoknadstype.SELVSTENDIGE_OG_FRILANSERE) return null;
 
     return (
         <div className="avsnitt">

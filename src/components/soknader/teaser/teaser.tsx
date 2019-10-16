@@ -1,20 +1,20 @@
 import dayjs from 'dayjs';
 import React from 'react';
-import { Soknad } from '../../types/types';
-import { RSSoknadstatus } from '../../types/rs-types/rs-soknadstatus';
-import { RSSoknadstype } from '../../types/rs-types/rs-soknadstype';
+import { Soknad } from '../../../types/types';
+import { RSSoknadstatus } from '../../../types/rs-types/rs-soknadstatus';
+import { RSSoknadstype } from '../../../types/rs-types/rs-soknadstype';
 import { Inngangspanel, InngangspanelHeader, InngangspanelIkon } from '../inngang/inngangspanel';
-import { getUrlTilSoknad } from '../../utils/url-utils';
+import { getUrlTilSoknad } from '../../../utils/url-utils';
 import GlobeIkon from './globe.svg';
 import GlobeHoverIkon from './globe-hover.svg';
-import SoknaderIkon from '../../pages/soknader/soknader.svg';
-import SoknaderHoverIkon from '../../pages/soknader/soknader-hover.svg';
-import Vis from '../../utils/vis';
-import { getLedetekst } from '../../utils/utils';
-import { tilLesbarPeriodeMedArstall } from '../../utils/dato-utils';
+import SoknaderIkon from '../../../pages/soknader/soknader.svg';
+import SoknaderHoverIkon from '../../../pages/soknader/soknader-hover.svg';
+import Vis from '../../../utils/vis';
+import { getLedetekst } from '../../../utils/utils';
+import { tilLesbarPeriodeMedArstall } from '../../../utils/dato-utils';
 import tekster from './teaser-tekster';
 import { Normaltekst } from 'nav-frontend-typografi';
-import { getRiktigDato, getSendtTilSuffix } from '../../utils/soknad-utils';
+import { getRiktigDato, getSendtTilSuffix } from '../../../utils/soknad-utils';
 import { HoyreChevron } from 'nav-frontend-chevron';
 
 const erSendtTilBeggeMenIkkeSamtidig = (soknad: Soknad) => {

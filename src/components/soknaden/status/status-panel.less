@@ -1,0 +1,39 @@
+@import '../../../basic';
+
+.status-panel {
+    margin: 2rem 0;
+
+    .avsnitt {
+        margin: 2rem 0;
+
+        &:first-child {
+            margin-top: 0;
+        }
+    }
+
+    .knapperad {
+        display: flex;
+        justify-content: flex-start;
+        align-items: flex-start;
+        flex-wrap: wrap;
+
+        .knapp {
+            margin-right: 1rem;
+            margin-bottom: 1rem;
+
+            &:last-child {
+                margin-bottom: 0.5rem;
+            }
+        }
+    }
+}
+
+@media (min-width: @screen-sm) {
+    .status-panel {
+        .knapperad {
+            .knapp {
+                margin-bottom: 0;
+            }
+        }
+    }
+}

@@ -1,25 +1,20 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import tekster from './opplysninger-tekster';
 import Ekspanderbartpanel from 'nav-frontend-ekspanderbartpanel';
 import SykmeldingPerioder from './sykmelding-perioder';
-import { useAppStore } from '../../../data/stores/app-store';
 import ArbeidsgiverInfo from './arbeidsgiver-info';
 import './opplysninger.less';
 import SykmeldingDato from './sykmelding-dato';
 import SelvstendigInfo from './selvstendig-info';
+import { useAppStore } from '../../../data/stores/app-store';
+import { RSSoknadstatus } from '../../../types/rs-types/rs-soknadstatus';
 
 const Opplysninger = () => {
-    const { soknad, sykmeldinger, setSykmelding } = useAppStore();
-
-    useEffect(() => {
-        const melding = sykmeldinger.filter(sm => sm.id === soknad.sykmeldingId)[0];
-        setSykmelding(melding);
-
-        // eslint-disable-next-line
-    }, [sykmeldinger]);
+    const { valgtSoknad } = useAppStore();
+    const tidligere: boolean = valgtSoknad.status === RSSoknadstatus.SENDT || valgtSoknad.status === RSSoknadstatus.AVBRUTT;
 
     return (
-        <Ekspanderbartpanel tittel={tekster['sykmelding-utdrag.tittel']} tittelProps="element">
+        <Ekspanderbartpanel tittel={tekster['sykmelding-utdrag.tittel']} tittelProps="element" apen={!tidligere}>
             <div className="opplysninger">
                 <SykmeldingPerioder/>
                 <ArbeidsgiverInfo/>

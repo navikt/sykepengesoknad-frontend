@@ -5,12 +5,16 @@ import tekster from './opplysninger-tekster';
 import dayjs from 'dayjs';
 
 const SykmeldingDato = () => {
-    const { sykmelding } = useAppStore();
+    const { valgtSykmelding } = useAppStore();
+
+    if (valgtSykmelding === undefined) {
+        return null;
+    }
 
     return (
         <div className="avsnitt">
             <EtikettLiten tag="h3" className="avsnitt-hode">{tekster['sykmelding-dato.tittel']}</EtikettLiten>
-            <Normaltekst>{dayjs(sykmelding.startLegemeldtFravaer).format('D. MMM YYYY')}</Normaltekst>
+            <Normaltekst>{dayjs(valgtSykmelding.startLegemeldtFravaer).format('D. MMM YYYY')}</Normaltekst>
         </div>
     );
 };
