@@ -34,7 +34,7 @@ class DayPickerComponent extends Component<DayPickerComponentProps> {
 
     componentDidUpdate(prevProps: any) {
         if (!prevProps.erApen && this.props.erApen) {
-            scrollTo(this.kalender);
+            window.scrollTo(this.kalender);
             this.kalender.focus();
         }
     }

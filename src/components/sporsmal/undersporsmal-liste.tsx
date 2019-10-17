@@ -1,33 +1,34 @@
 import React from 'react';
 import Undersporsmal from './undersporsmal';
-import { Soknad, Sporsmal } from '../../types/types';
+import { Sporsmal } from '../../types/types';
+import Vis from '../../utils/vis';
 
 interface UndersporsmalslisteProps {
     undersporsmal: Sporsmal[],
-    soknad: Soknad,
 }
 
-const UndersporsmalListe = ({ undersporsmal, soknad }: UndersporsmalslisteProps) => {
+const UndersporsmalListe = ({ undersporsmal }: UndersporsmalslisteProps) => {
+
     const sporsmalsliste = undersporsmal
         .filter((underspm) => {
             return underspm.svar !== null;
         })
-        .map((underspm) => {
-            return underspm.kriterieForVisningAvUndersporsmal
-                ? <Undersporsmal
-                    sporsmal={underspm}
-                    key={underspm.tag}
-                    soknad={soknad}
-                />
-                : null;
+        .map((underspm: Sporsmal) => {
+            return (
+                <Vis hvis={underspm.kriterieForVisningAvUndersporsmal !== undefined}>
+                    <Undersporsmal sporsmal={underspm} key={underspm.tag}/>
+                </Vis>
+            );
         })
         .filter((underspm) => {
             return underspm !== null;
         });
 
-    return sporsmalsliste.length > 0
-        ? <div>{sporsmalsliste}</div>
-        : null;
+    return (
+        <Vis hvis={sporsmalsliste.length > 0}>
+            <div>{sporsmalsliste}</div>
+        </Vis>
+    );
 };
 
 export default UndersporsmalListe;

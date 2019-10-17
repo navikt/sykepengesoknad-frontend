@@ -33,7 +33,7 @@ const CheckboxComp = (props: CheckboxProps) => {
             id={name === undefined ? soknad.soknadstype : name}>
             {
                 usporsmal.map((spm, index) => {
-                    return <Undersporsmal sporsmal={spm} key={`${spm.tag}-${index}`} soknad={soknad}/>;
+                    return <Undersporsmal sporsmal={spm} key={`${spm.tag}-${index}`}/>;
                 })
             }
         </Field>

@@ -1,31 +1,30 @@
 import React from 'react';
-import { Soknad, Sporsmal } from '../../types/types';
+import { Sporsmal } from '../../types/types';
 import { RSSvartype } from '../../types/rs-types/rs-svartype';
 import UndersporsmalListe from './undersporsmal-liste';
 import Dato from './dato';
 import Tall from './tall';
 import tekster from './sporsmal-tekster';
 import CheckboxComp from './checkbox-comp';
+import { useAppStore } from '../../data/stores/app-store';
 
 interface SporsmalProps {
     sporsmal?: Sporsmal,
     name: string,
-    hovedsporsmal?: boolean,
-    ekstraProps?: {},
-    actions?: {},
-    soknad: Soknad,
 }
 
-const SporsmalComponent = ({ sporsmal, name, hovedsporsmal, ekstraProps, actions, soknad }: SporsmalProps) => {
+const SporsmalComponent = ({ sporsmal, name }: SporsmalProps) => {
+    const { valgtSoknad } = useAppStore();
+
     if (!sporsmal || !name) {
         return null;
     }
-    const undersporsmalsliste = <UndersporsmalListe undersporsmal={sporsmal.undersporsmal} soknad={soknad}/>;
+    const undersporsmalsliste = <UndersporsmalListe undersporsmal={sporsmal.undersporsmal} />;
 
     switch (sporsmal.svartype) {
         case RSSvartype.DATO: {
             return (
-                <Dato {...sporsmal} name={name} min={soknad.fom} max={soknad.tom}>
+                <Dato {...sporsmal} name={name} min={valgtSoknad.fom} max={valgtSoknad.tom}>
                     {undersporsmalsliste}
                 </Dato>
             );
@@ -53,7 +52,7 @@ const SporsmalComponent = ({ sporsmal, name, hovedsporsmal, ekstraProps, actions
         }
         case RSSvartype.CHECKBOX: {
             return (
-                <CheckboxComp {...sporsmal} name={name} soknad={soknad}>
+                <CheckboxComp {...sporsmal} name={name} soknad={valgtSoknad}>
                     {undersporsmalsliste}
                 </CheckboxComp>
             );

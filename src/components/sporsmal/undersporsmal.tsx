@@ -1,6 +1,6 @@
 import React from 'react';
 import SporsmalComponent from './sporsmal-component';
-import { Soknad, Sporsmal } from '../../types/types';
+import { Sporsmal } from '../../types/types';
 import { RSSvartype } from '../../types/rs-types/rs-svartype';
 import UkjentSporsmal from './ukjent-sporsmal';
 
@@ -14,14 +14,13 @@ const SoknadUndersporsmal = ({ children }: SoknadUndersporsmalProps) => {
 
 interface UndersporsmalProps {
     sporsmal: Sporsmal,
-    soknad: Soknad,
 }
 
-const Undersporsmal = ({ sporsmal, soknad }: UndersporsmalProps) => {
+const Undersporsmal = ({ sporsmal }: UndersporsmalProps) => {
     switch (sporsmal.svartype) {
         case RSSvartype.CHECKBOX:
         case RSSvartype.CHECKBOX_PANEL: {
-            return <SporsmalComponent sporsmal={sporsmal} name={sporsmal.tag} soknad={soknad}/>;
+            return <SporsmalComponent sporsmal={sporsmal} name={sporsmal.tag}/>;
         }
         case RSSvartype.DATO:
         case RSSvartype.TIMER:
@@ -35,14 +34,14 @@ const Undersporsmal = ({ sporsmal, soknad }: UndersporsmalProps) => {
         case RSSvartype.FRITEKST: {
             return (
                 <SoknadUndersporsmal>
-                    <SporsmalComponent sporsmal={sporsmal} name={sporsmal.tag} soknad={soknad}/>
+                    <SporsmalComponent sporsmal={sporsmal} name={sporsmal.tag}/>
                 </SoknadUndersporsmal>
             );
         }
         case RSSvartype.IKKE_RELEVANT: {
             return (
                 <div className="ekstrasporsmal">
-                    <SporsmalComponent sporsmal={sporsmal} name={sporsmal.tag} soknad={soknad}/>
+                    <SporsmalComponent sporsmal={sporsmal} name={sporsmal.tag}/>
                 </div>
             );
         }
