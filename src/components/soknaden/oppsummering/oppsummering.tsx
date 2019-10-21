@@ -29,9 +29,9 @@ const Oppsummering = () => {
                 .filter((sporsmal) => {
                     return (sporsmal.svar.length > 0 || sporsmal.undersporsmal.length > 0 || sporsmal.svartype === RSSvartype.IKKE_RELEVANT);
                 })
-                .map((sporsmal) => {
+                .map((sporsmal, index) => {
                     return (
-                        <div className="oppsummering__seksjon">
+                        <div className="oppsummering__seksjon" key={index}>
                             <SporsmalVarianter sporsmal={sporsmal}/>
                         </div>
                     )
