@@ -12,7 +12,7 @@ const Utbetaling = () => {
     return (
         <div className="avsnitt">
             <EtikettLiten tag="h3" className="avsnitt-hode">{tekster['statuspanel.utbetaling.tittel']}</EtikettLiten>
-            <Normaltekst>{parser(tekster['statuspanel.info.til-nav'])}</Normaltekst>
+            <Normaltekst>{parser(tekster['sykepengesoknad.sykepengeinfo.til-nav'])}</Normaltekst>
         </div>
     );
 };

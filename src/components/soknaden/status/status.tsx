@@ -12,9 +12,9 @@ const Status = () => {
 
     return (
         <div className="avsnitt">
-            <EtikettLiten tag="h3" className="avsnitt-hode">{tekster['statuspanel.status.tittel']}</EtikettLiten>
+            <EtikettLiten tag="h3" className="avsnitt-hode">{tekster['statuspanel.status']}</EtikettLiten>
             <Normaltekst>{
-                getLedetekst(tekster['statuspanel.sendt-til-nav'], {
+                getLedetekst(tekster['soknad.teaser.status.SENDT.til-nav'], {
                     '%DATO%': dayjs(valgtSoknad.sendtTilNAVDato).format('DD.MM.YYYY'),
                 })}
             </Normaltekst>
