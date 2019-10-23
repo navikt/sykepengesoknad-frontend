@@ -23,7 +23,7 @@ const SykmeldingPerioder = () => {
 
                 return (
                     <div className="avsnitt" key={index}>
-                        <EtikettLiten tag="h3" className="avsnitt-hode">{tekster['periode.tittel']}</EtikettLiten>
+                        <EtikettLiten tag="h3" className="avsnitt-hode">{tekster['din-sykmelding.periode.tittel']}</EtikettLiten>
                         <Normaltekst><strong>{fom} - {tom}</strong> &bull; {dager}</Normaltekst>
                     </div>
                 );

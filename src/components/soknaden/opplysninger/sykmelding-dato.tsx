@@ -13,7 +13,7 @@ const SykmeldingDato = () => {
 
     return (
         <div className="avsnitt">
-            <EtikettLiten tag="h3" className="avsnitt-hode">{tekster['sykmelding-dato.tittel']}</EtikettLiten>
+            <EtikettLiten tag="h3" className="avsnitt-hode">{tekster['sykepengesoknad.sykmelding-utdrag.dato-sykmeldingen-ble-skrevet']}</EtikettLiten>
             <Normaltekst>{dayjs(valgtSykmelding.startLegemeldtFravaer).format('D. MMM YYYY')}</Normaltekst>
         </div>
     );

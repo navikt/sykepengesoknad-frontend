@@ -1,14 +1,15 @@
 const OpplysningerTekster: any = {
     'nb': {
-        'sykmelding-utdrag.tittel': 'Opplysninger fra sykmeldingen',
-        'periode.tittel': 'Periode',
-        'arbeidsgiver.tittel': 'Arbeidsgiver',
-        'selvstendig.tittel': 'Hva passer best for deg?',
-        'arbeidssituasjon.selvstendig': 'Jeg er frilanser',
-        'sykmelding-dato.tittel': 'Dato sykmeldingen ble skrevet',
+        'sykepengesoknad.sykmelding-utdrag.tittel': 'Opplysninger fra sykmeldingen',
+        'din-sykmelding.periode.tittel': 'Periode',
+        'sykepengesoknad.sykmelding-utdrag.arbeidsgiver': 'Arbeidsgiver',
+        'din-sykmelding.arbeidssituasjon.tittel.2': 'Hva passer best for deg?',
+        'din-sykmelding.arbeidssituasjon.alternativ.frilanser': 'Jeg er frilanser',
+        'sykepengesoknad.sykmelding-utdrag.dato-sykmeldingen-ble-skrevet': 'Dato sykmeldingen ble skrevet',
     }, 'en': {}
 };
 
 const tekster = OpplysningerTekster.nb;
 
 export default tekster;
+

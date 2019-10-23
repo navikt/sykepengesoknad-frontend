@@ -12,7 +12,7 @@ const ArbeidsgiverInfo = () => {
 
     return (
         <div className="avsnitt">
-            <EtikettLiten tag="h3" className="avsnitt-hode">{tekster['arbeidsgiver.tittel']}</EtikettLiten>
+            <EtikettLiten tag="h3" className="avsnitt-hode">{tekster['sykepengesoknad.sykmelding-utdrag.arbeidsgiver']}</EtikettLiten>
             <Normaltekst>{valgtSykmelding.arbeidsgiver}</Normaltekst>
         </div>
     );

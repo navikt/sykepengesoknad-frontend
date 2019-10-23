@@ -14,7 +14,7 @@ const Opplysninger = () => {
     const tidligere: boolean = valgtSoknad.status === RSSoknadstatus.SENDT || valgtSoknad.status === RSSoknadstatus.AVBRUTT;
 
     return (
-        <Ekspanderbartpanel tittel={tekster['sykmelding-utdrag.tittel']} tittelProps="element" apen={!tidligere}>
+        <Ekspanderbartpanel tittel={tekster['sykepengesoknad.sykmelding-utdrag.tittel']} tittelProps="element" apen={!tidligere}>
             <div className="opplysninger">
                 <SykmeldingPerioder/>
                 <ArbeidsgiverInfo/>

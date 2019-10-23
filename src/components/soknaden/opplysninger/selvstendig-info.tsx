@@ -11,8 +11,8 @@ const SelvstendigInfo = () => {
 
     return (
         <div className="avsnitt">
-            <EtikettLiten tag="h3" className="avsnitt-hode">{tekster['selvstendig.tittel']}</EtikettLiten>
-            <Normaltekst>{tekster['arbeidssituasjon.selvstendig']}</Normaltekst>
+            <EtikettLiten tag="h3" className="avsnitt-hode">{tekster['din-sykmelding.arbeidssituasjon.tittel.2']}</EtikettLiten>
+            <Normaltekst>{tekster['din-sykmelding.arbeidssituasjon.alternativ.frilanser']}</Normaltekst>
         </div>
     );
 };
