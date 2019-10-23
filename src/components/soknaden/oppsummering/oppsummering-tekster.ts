@@ -1,6 +1,6 @@
 const OppsummeringTekster: any = {
     'nb': {
-        'oppsummering.tittel': 'Oppsummering',
+        'sykepengesoknad.oppsummering.tittel': 'Oppsummering',
         'soknad.ja': 'Ja',
         'soknad.nei': 'Nei',
     }, 'en': {}

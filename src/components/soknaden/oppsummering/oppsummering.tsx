@@ -24,7 +24,7 @@ const Oppsummering = () => {
     const { valgtSoknad } = useAppStore();
 
     return (
-        <Ekspanderbartpanel apen={true} tittel={tekster['oppsummering.tittel']} tittelProps="element">
+        <Ekspanderbartpanel apen={true} tittel={tekster['sykepengesoknad.oppsummering.tittel']} tittelProps="element">
             {valgtSoknad.sporsmal
                 .filter((sporsmal) => {
                     return (sporsmal.svar.length > 0 || sporsmal.undersporsmal.length > 0 || sporsmal.svartype === RSSvartype.IKKE_RELEVANT);
