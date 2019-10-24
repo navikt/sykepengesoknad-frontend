@@ -8,8 +8,6 @@ import dayjs from 'dayjs';
 const Status = () => {
     const { valgtSoknad } = useAppStore();
 
-    if (valgtSoknad.sendtTilNAVDato === undefined) return null;
-
     return (
         <div className="avsnitt">
             <EtikettLiten tag="h3" className="avsnitt-hode">{tekster['statuspanel.status']}</EtikettLiten>

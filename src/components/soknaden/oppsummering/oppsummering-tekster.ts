@@ -2,7 +2,7 @@ const OppsummeringTekster: any = {
     'nb': {
         'sykepengesoknad.oppsummering.tittel': 'Oppsummering',
         'soknad.ja': 'Ja',
-        'soknad.nei': 'Nei',
+        'soknad.nei': 'Nei'
     }, 'en': {}
 };
 

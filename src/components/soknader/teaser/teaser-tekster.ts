@@ -13,7 +13,7 @@ const TeaserTekster: any = {
         'soknad.utland.teaser.tittel': 'Søknad om å beholde sykepenger utenfor Norge',
         'soknad.teaser.tittel': 'Søknad om sykepenger',
         'soknad.teaser.tekst': 'Gjelder perioden %PERIODE%',
-        'soknad.teaser.undertekst': '%ARBEIDSGIVER%',
+        'soknad.teaser.undertekst': '%ARBEIDSGIVER%'
     }, 'en': {}
 };
 

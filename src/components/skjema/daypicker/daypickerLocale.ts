@@ -1,4 +1,3 @@
-import { LocaleUtils } from 'react-day-picker';
 import { tilLesbarDatoMedArstall } from '../../../utils/dato-utils';
 
 export const MONTHS = ['januar', 'februar', 'mars', 'april', 'mai', 'juni', 'juli', 'august', 'september', 'oktober', 'november', 'desember'];
@@ -11,6 +10,5 @@ export const formatDay = (date: Date) => {
 };
 
 export const localeUtils = {
-    ...LocaleUtils,
     formatDay,
 };
