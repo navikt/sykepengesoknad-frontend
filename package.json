@@ -1,7 +1,6 @@
 {
   "name": "sykepengesok",
   "version": "1.0.0",
-  "homepage": "/sykepengesok",
   "description": "Digitalisering av sykepengesoknad",
   "private": true,
   "dependencies": {
