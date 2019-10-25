@@ -13,7 +13,7 @@ jobs:
         uses: actions/checkout@v1
       - name: Create Docker tag
         env:
-          NAME: sykefravaer
+          NAME: sykepengesok
         run: |
           echo "docker.pkg.github.com"/"$GITHUB_REPOSITORY"/"$NAME" > .docker_image
           echo "$(date "+%Y.%m.%d")-$(git rev-parse --short HEAD)" > .docker_tag
