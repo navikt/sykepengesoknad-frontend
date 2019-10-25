@@ -11,13 +11,6 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v1
-      - name: Use Node
-        uses: actions/setup-node@v1
-        with:
-          node-version: '12.x'
-      - name: Lint
-        run: |
-          npm run lint
       - name: Create Docker tag
         env:
           NAME: sykefravaer
