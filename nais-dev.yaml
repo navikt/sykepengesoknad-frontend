@@ -1,5 +1,5 @@
 apiVersion: "nais.io/v1alpha1"
-kind: Application
+kind: "Application"
 metadata:
   name: sykepengesok
   namespace: default
@@ -15,14 +15,3 @@ spec:
     path: internal/isAlive
   readiness:
     path: internal/isReady
-  replicas:
-    min: 2
-    max: 4
-    cpuThresholdPercentage: 50
-  resources:
-    limits:
-      cpu: 3
-      memory: 1024Mi
-    requests:
-      cpu: 200m
-      memory: 512Mi
