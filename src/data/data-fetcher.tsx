@@ -3,16 +3,25 @@ import Spinner from 'nav-frontend-spinner';
 import { AlertStripeFeil } from 'nav-frontend-alertstriper';
 import useFetch from './rest/use-fetch';
 import { Soknad, Sykmelding } from '../types/types';
-import { FetchState, hasAnyFailed, hasData, isAnyNotStartedOrPending, isNotStarted } from './rest/utils';
+import { FetchState, hasAny401, hasAnyFailed, hasData, isAnyNotStartedOrPending, isNotStarted } from './rest/utils';
 import { useAppStore } from './stores/app-store';
 import { RSSoknad } from '../types/rs-types/rs-soknad';
 import { fixSykmeldingDatoer } from '../utils/dato-utils';
 
 export function DataFetcher(props: { children: any }) {
-    const { setSoknader, setSykmeldinger } = useAppStore();
+
+    const { setUnleash, setSoknader, setSykmeldinger } = useAppStore();
+
+    const unleash = useFetch<{}>();
     const rssoknader = useFetch<RSSoknad[]>();
     const sykmeldinger = useFetch<Sykmelding[]>();
+
     useEffect(() => {
+        if (isNotStarted(unleash)) {
+            unleash.fetch('/syfounleash/', undefined, (fetchState: FetchState<{}>) => {
+                setUnleash(fetchState.data);
+            })
+        }
         if (isNotStarted(rssoknader)) {
             rssoknader.fetch('/syfoapi/syfosoknad/api/soknader', undefined, (fetchState: FetchState<RSSoknad[]>) => {
                 setSoknader(fetchState.data!.map(soknad => {
@@ -32,10 +41,14 @@ export function DataFetcher(props: { children: any }) {
         // eslint-disable-next-line
     }, []);
 
-    if (isAnyNotStartedOrPending([rssoknader, sykmeldinger])) {
-        return <Spinner/>;
 
-    } else if (hasAnyFailed([rssoknader, sykmeldinger])) {
+    if (isAnyNotStartedOrPending([unleash, rssoknader, sykmeldinger])) {
+        return <Spinner />;
+
+    } else if (hasAny401([unleash, rssoknader, sykmeldinger])) {
+        window.location.href = `${hentLoginUrl()}?redirect=${window.location.origin}/sykepengesoknad`;
+
+    } else if (hasAnyFailed([unleash, rssoknader, sykmeldinger])) {
         return (
             <AlertStripeFeil>
                 Vi får akkurat nå ikke hentet alle data.
@@ -47,3 +60,15 @@ export function DataFetcher(props: { children: any }) {
     return props.children;
 }
 
+export const hentLoginUrl = () => {
+    window.localStorage.setItem('REDIRECT_ETTER_LOGIN', window.location.href);
+    if (window.location.href.indexOf('tjenester.nav') > -1) {
+        // Prod
+        return 'https://loginservice.nav.no/login';
+    } else if (window.location.href.indexOf('localhost') > -1) {
+        // Lokalt
+        return 'http://localhost:8080/syfoapi/local/cookie';
+    }
+    // Preprod
+    return 'https://loginservice-q.nav.no/login';
+};

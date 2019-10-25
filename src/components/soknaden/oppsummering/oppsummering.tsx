@@ -27,7 +27,11 @@ const Oppsummering = () => {
         <Ekspanderbartpanel apen={true} tittel={tekster['sykepengesoknad.oppsummering.tittel']} tittelProps="element">
             {valgtSoknad.sporsmal
                 .filter((sporsmal) => {
-                    return (sporsmal.svar.length > 0 || sporsmal.undersporsmal.length > 0 || sporsmal.svartype === RSSvartype.IKKE_RELEVANT);
+                    return (
+                        sporsmal.svar.length > 0 ||
+                        sporsmal.undersporsmal.length > 0 ||
+                        sporsmal.svartype === RSSvartype.IKKE_RELEVANT
+                    );
                 })
                 .map((sporsmal, index) => {
                     return (

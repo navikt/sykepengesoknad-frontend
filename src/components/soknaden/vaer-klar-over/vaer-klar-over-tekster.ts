@@ -1,6 +1,6 @@
 const VaerKlarOverTekster: any = {
     'nb': {
-        'vaer-klar-over.tittel': 'Viktig å være klar over:',
+        'vaer-klar-over.tittel': 'Viktig å være klar over:'
     }, 'en': {}
 };
 
