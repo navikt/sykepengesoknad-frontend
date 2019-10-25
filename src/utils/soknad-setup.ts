@@ -1,5 +1,4 @@
 import { Soknad, Sykmelding } from '../types/types';
-import { ReactNode } from 'react';
 
 export const finnSoknad = (state: any, ownProps: any) => {
     const soknader = state.soknader.data.filter((s: Soknad) => {

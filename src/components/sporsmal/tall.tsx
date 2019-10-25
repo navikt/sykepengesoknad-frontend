@@ -6,12 +6,12 @@ import TekstfeltMedEnhet from '../skjema/tekstfelt-med-enhet';
 import { lagDesimaltall, lagHeltall } from '../../../src/utils/utils';
 
 interface TallProps {
-    sporsmalstekst: string,
-    name: string,
-    label: string,
-    undertekst: string,
-    kunHeltall: boolean,
-    children: React.ReactNode
+    sporsmalstekst: string;
+    name: string;
+    label: string;
+    undertekst: string;
+    kunHeltall: boolean;
+    children: React.ReactNode;
 }
 
 const Tall = ({ sporsmalstekst, name, label, undertekst, kunHeltall }: TallProps) => {

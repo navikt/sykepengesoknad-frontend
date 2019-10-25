@@ -9,10 +9,10 @@ const onKeyDown = (e: any) => {
 };
 
 interface NavBarProps {
-    onNextClick: Function,
-    onPreviousClick: Function,
-    showPreviousButton: boolean,
-    showNextButton: boolean,
+    onNextClick: Function;
+    onPreviousClick: Function;
+    showPreviousButton: boolean;
+    showNextButton: boolean;
 }
 
 const DayPickerNavBar = ({ onNextClick, onPreviousClick, showPreviousButton, showNextButton }: NavBarProps) => {

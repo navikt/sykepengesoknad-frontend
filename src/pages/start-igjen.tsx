@@ -7,7 +7,7 @@ import { logger } from '../utils/logger';
 import { getUrlTilSoknad } from '../utils/url-utils';
 
 interface StartIgjenProps {
-    soknad: Soknad
+    soknad: Soknad;
 }
 
 const StartIgjen = ({ soknad }: StartIgjenProps) => {
@@ -19,7 +19,7 @@ const StartIgjen = ({ soknad }: StartIgjenProps) => {
             message: `Ugyldig tilstand i søknad av typen ${type} med ID: ${soknad.id}`,
             sporsmalsliste,
         });
-        // eslint-disable-next-line react-hooks/exhaustive-deps
+        // eslint-disable-next-line
     }, []);
 
     return (

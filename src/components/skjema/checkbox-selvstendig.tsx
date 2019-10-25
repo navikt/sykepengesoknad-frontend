@@ -3,11 +3,11 @@ import { BekreftCheckboksPanel } from 'nav-frontend-skjema';
 import SkjemaFeilmelding from './skjema-feilmelding';
 
 interface CheckboxSelvstendigProps {
-    input: any,
-    meta: any,
-    label: string,
-    id: string,
-    disabled: boolean,
+    input: any;
+    meta: any;
+    label: string;
+    id: string;
+    disabled: boolean;
 }
 
 const CheckboxSelvstendig = ({ input, meta, label, id, disabled }: CheckboxSelvstendigProps) => {

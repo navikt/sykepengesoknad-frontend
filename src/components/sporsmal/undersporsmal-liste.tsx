@@ -4,7 +4,7 @@ import { Sporsmal } from '../../types/types';
 import Vis from '../../utils/vis';
 
 interface UndersporsmalslisteProps {
-    undersporsmal: Sporsmal[],
+    undersporsmal: Sporsmal[];
 }
 
 const UndersporsmalListe = ({ undersporsmal }: UndersporsmalslisteProps) => {
@@ -13,9 +13,9 @@ const UndersporsmalListe = ({ undersporsmal }: UndersporsmalslisteProps) => {
         .filter((underspm) => {
             return underspm.svar !== null;
         })
-        .map((underspm: Sporsmal) => {
+        .map((underspm: Sporsmal, idx: number) => {
             return (
-                <Vis hvis={underspm.kriterieForVisningAvUndersporsmal !== undefined}>
+                <Vis hvis={underspm.kriterieForVisningAvUndersporsmal !== undefined} key={idx}>
                     <Undersporsmal sporsmal={underspm} key={underspm.tag}/>
                 </Vis>
             );

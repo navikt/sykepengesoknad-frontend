@@ -2,10 +2,10 @@ import React from 'react';
 import SkjemaFeilmelding from './skjema-feilmelding';
 
 interface FeilomradeProps {
-    touched: boolean,
-    error: string,
-    children: React.ReactNode,
-    id: string
+    touched: boolean;
+    error: string;
+    children: React.ReactNode;
+    id: string;
 }
 
 const Feilomrade = ({ touched, error, children, id }: FeilomradeProps) => {

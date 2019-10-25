@@ -4,11 +4,11 @@ import { erSynligIViewport, getTop } from '../../utils/browser-utils';
 import { Sporsmal } from '../../types/types';
 
 interface SporsmalMedTilleggProps {
-    children: React.ReactNode,
-    sporsmal: Sporsmal,
-    visTillegg: Function,
-    className: string,
-    informasjon: React.ReactElement,
+    children: React.ReactNode;
+    sporsmal: Sporsmal;
+    visTillegg: Function;
+    className: string;
+    informasjon: React.ReactElement;
 }
 
 const SporsmalMedTillegg = (props: SporsmalMedTilleggProps) => {
@@ -20,7 +20,7 @@ const SporsmalMedTillegg = (props: SporsmalMedTilleggProps) => {
     const [harAnimasjon, setHarAnimasjon] = useState(false);
     let gammelHoyde: string;
     let hovedsporsmal: HTMLDivElement;
-    let container: HTMLDivElement;
+    let container: HTMLDivElement; // eslint-disable-line
     let tilleggsinnhold: HTMLDivElement;
 
     useEffect(() => {
@@ -29,7 +29,7 @@ const SporsmalMedTillegg = (props: SporsmalMedTilleggProps) => {
         } else {
             lukk();
         }
-        // eslint-disable-next-line react-hooks/exhaustive-deps
+        // eslint-disable-next-line
     }, []);
 
     function onHoydeTransitionEnd() {

@@ -8,22 +8,22 @@ import SkjemaFeilmelding from '../skjema-feilmelding';
 import dayjs from 'dayjs';
 
 export type Meta = {
-    touched: boolean,
-    error: string,
-    form: HTMLFormElement
+    touched: boolean;
+    error: string;
+    form: HTMLFormElement;
 }
 
 interface DatoFieldProps {
-    id: string,
-    meta: Meta,
-    input: HTMLInputElement,
-    touch: Function,
-    change: Function,
-    oppdaterSporsmal: Function,
-    parseVerdi: Function,
-    tidligsteFom: Date,
-    senesteTom: Date,
-    inputValue: string,
+    id: string;
+    meta: Meta;
+    input: HTMLInputElement;
+    touch: Function;
+    change: Function;
+    oppdaterSporsmal: Function;
+    parseVerdi: Function;
+    tidligsteFom: Date;
+    senesteTom: Date;
+    inputValue: string;
 }
 
 const DatoField = (props: DatoFieldProps) => {
@@ -34,7 +34,7 @@ const DatoField = (props: DatoFieldProps) => {
         if (props.oppdaterSporsmal) {
             props.oppdaterSporsmal(null, props.inputValue);
         }
-        // eslint-disable-next-line react-hooks/exhaustive-deps
+        // eslint-disable-next-line
     }, [props.input.value]);
 
     function onKeyUp(e: KeyboardEvent) {
@@ -169,14 +169,14 @@ export const genererValidate = (props: DatoVelgerProps) => {
 };
 
 interface DatoVelgerProps {
-    tidligsteFom?: Date,
-    senesteTom?: Date,
-    oppdaterSporsmal: ((event: any, newValue: any) => void) | null,
-    format: Function,
-    parse: Function,
-    parseVerdi: Function,
-    name: string,
-    id: string
+    tidligsteFom?: Date;
+    senesteTom?: Date;
+    oppdaterSporsmal: ((event: any, newValue: any) => void) | null;
+    format: Function;
+    parse: Function;
+    parseVerdi: Function;
+    name: string;
+    id: string;
 }
 
 const DatoVelger = (props: DatoVelgerProps) => {

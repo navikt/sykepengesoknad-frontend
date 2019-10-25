@@ -5,7 +5,7 @@ import { RSSvartype } from '../../types/rs-types/rs-svartype';
 import UkjentSporsmal from './ukjent-sporsmal';
 
 interface SoknadUndersporsmalProps {
-    children: React.ReactNode,
+    children: React.ReactNode;
 }
 
 const SoknadUndersporsmal = ({ children }: SoknadUndersporsmalProps) => {
@@ -13,7 +13,7 @@ const SoknadUndersporsmal = ({ children }: SoknadUndersporsmalProps) => {
 };
 
 interface UndersporsmalProps {
-    sporsmal: Sporsmal,
+    sporsmal: Sporsmal;
 }
 
 const Undersporsmal = ({ sporsmal }: UndersporsmalProps) => {

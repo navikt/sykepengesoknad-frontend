@@ -4,8 +4,8 @@ import Vis from '../../../../src/utils/vis';
 import { erSynligIViewport, getTop } from '../../../utils/browser-utils';
 
 interface FeillisteMelding {
-    feltnavn: string,
-    feilmelding: string,
+    feltnavn: string;
+    feilmelding: string;
 }
 
 const FeillisteMelding = ({ feltnavn, feilmelding }: FeillisteMelding) => {
@@ -21,13 +21,13 @@ const getFeilmeldinger = (props: any) => {
 };
 
 interface FeiloppsummeringProps {
-    settFokus?: boolean,
-    skjemanavn?: string,
-    visFeilliste: boolean,
+    settFokus?: boolean;
+    skjemanavn?: string;
+    visFeilliste: boolean;
     feilmeldinger?: {
-        feltnavn: string,
-        feilmelding: string,
-    },
+        feltnavn: string;
+        feilmelding: string;
+    };
 }
 
 const FeilOppsummering = (props: FeiloppsummeringProps) => {

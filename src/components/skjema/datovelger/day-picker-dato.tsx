@@ -10,13 +10,13 @@ export const leggTilNullForan = (nr: number) => {
 };
 
 interface DayPickerComponentProps {
-    input: HTMLInputElement,
-    onKeyUp: Function,
-    lukk: Function,
-    onDayClick: Function,
-    senesteTom: Date,
-    tidligsteFom: Date,
-    erApen: boolean,
+    input: HTMLInputElement;
+    onKeyUp: Function;
+    lukk: Function;
+    onDayClick: Function;
+    senesteTom: Date;
+    tidligsteFom: Date;
+    erApen: boolean;
 }
 
 class DayPickerComponent extends Component<DayPickerComponentProps> {

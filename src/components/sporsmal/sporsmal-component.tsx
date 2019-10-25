@@ -9,8 +9,8 @@ import CheckboxComp from './checkbox-comp';
 import { useAppStore } from '../../data/stores/app-store';
 
 interface SporsmalProps {
-    sporsmal?: Sporsmal,
-    name: string,
+    sporsmal?: Sporsmal;
+    name: string;
 }
 
 const SporsmalComponent = ({ sporsmal, name }: SporsmalProps) => {

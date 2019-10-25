@@ -5,11 +5,11 @@ import SporsmalTekst from './sporsmal-tekst';
 import { getOnChangeForDato } from '../../utils/get-on-change';
 
 interface DatoProps {
-    sporsmalstekst: string,
-    min?: Date,
-    max?: Date,
-    name: string,
-    children: React.ReactNode
+    sporsmalstekst: string;
+    min?: Date;
+    max?: Date;
+    name: string;
+    children: React.ReactNode;
 }
 
 const Dato = (props: DatoProps) => {

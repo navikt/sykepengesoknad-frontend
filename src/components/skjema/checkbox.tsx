@@ -2,10 +2,10 @@ import React from 'react';
 import { Checkbox } from 'nav-frontend-skjema';
 
 interface BoxProps {
-    input: HTMLInputElement
-    label: string,
-    id: string,
-    children: React.ReactNode,
+    input: HTMLInputElement;
+    label: string;
+    id: string;
+    children: React.ReactNode;
 }
 
 const Box = ({ input, label, id, children }: BoxProps) => {

@@ -4,12 +4,12 @@ import { Meta } from './datovelger/dato-velger';
 import SkjemaFeilmelding from './skjema-feilmelding';
 
 interface TekstfeltMedEnhetProps {
-    label: string,
-    id: string,
-    input: HTMLInputElement,
-    meta: Meta,
-    undertekst: string,
-    kunHeltall: boolean,
+    label: string;
+    id: string;
+    input: HTMLInputElement;
+    meta: Meta;
+    undertekst: string;
+    kunHeltall: boolean;
 }
 
 const TekstfeltMedEnhet = ({ label, id, input, meta, undertekst, kunHeltall }: TekstfeltMedEnhetProps) => {

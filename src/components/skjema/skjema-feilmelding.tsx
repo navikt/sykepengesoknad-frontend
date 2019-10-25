@@ -2,8 +2,8 @@ import React from 'react';
 import { Normaltekst } from 'nav-frontend-typografi';
 
 interface FeilmeldingProps {
-    touched: boolean,
-    error: string,
+    touched: boolean;
+    error: string;
 }
 
 const SkjemaFeilmelding = ({ touched, error }: FeilmeldingProps) => {

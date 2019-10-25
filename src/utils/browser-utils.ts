@@ -1,5 +1,4 @@
 // Get the top position of an element in the document
-import { number } from 'prop-types';
 
 export const getTop = function (element: HTMLElement, start: number) {
     // return value of html.getBoundingClientRect().top ... IE : 0, other browsers : -pageYOffset

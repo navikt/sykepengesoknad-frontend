@@ -7,12 +7,12 @@ import { getOnChange } from '../../utils/get-on-change';
 import { formaterEnkeltverdi, genererParseForCheckbox } from './field-utils';
 
 interface CheckboxProps {
-    sporsmalstekst?: string,
-    undersporsmal?: Sporsmal[],
-    name?: string,
-    renderComponent?: Function,
-    soknad: Soknad,
-    children?: React.ReactNode
+    sporsmalstekst?: string;
+    undersporsmal?: Sporsmal[];
+    name?: string;
+    renderComponent?: Function;
+    soknad: Soknad;
+    children?: React.ReactNode;
 }
 
 const CheckboxComp = (props: CheckboxProps) => {

@@ -29,7 +29,7 @@ export const hasAnyFailed = (fetch: FetchState | FetchState[]): boolean => {
     return hasFailed(fetch);
 };
 
-export const hasAny401 = (fetch: FetchState | FetchState[]):boolean => {
+export const hasAny401 = (fetch: FetchState | FetchState[]): boolean => {
     if (Array.isArray(fetch)) {
         return fetch.some(f => has401(f));
     }

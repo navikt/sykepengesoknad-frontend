@@ -4,7 +4,7 @@ import Vis from '../../../../utils/vis';
 import { SporsmalVarianter } from '../oppsummering';
 
 interface UndersporsmalProps {
-    sporsmalsliste: Sporsmal[],
+    sporsmalsliste: Sporsmal[];
 }
 
 const UndersporsmalSum = ({ sporsmalsliste = [] }: UndersporsmalProps) => {
