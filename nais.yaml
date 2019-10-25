@@ -1,0 +1,28 @@
+apiVersion: "nais.io/v1alpha1"
+kind: Application
+metadata:
+  name: sykepengesok
+  namespace: default
+  labels:
+    team: flex
+spec:
+  image: {{ image }}:{{ tag }}
+  port: 8080
+  ingresses:
+    - "https://sykepengesok.nais.oera-q.local/"
+    - "https://tjenester-q1.nav.no/sykepengesok"
+  liveness:
+    path: internal/isAlive
+  readiness:
+    path: internal/isReady
+  replicas:
+    min: 2
+    max: 4
+    cpuThresholdPercentage: 50
+  resources:
+    limits:
+      cpu: 3
+      memory: 1024Mi
+    requests:
+      cpu: 200m
+      memory: 512Mi
