@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useRef } from 'react';
 import { Innholdstittel } from 'nav-frontend-typografi';
 import Vis from '../../../../src/utils/vis';
 import { erSynligIViewport, getTop } from '../../../utils/browser-utils';
@@ -31,7 +31,7 @@ interface FeiloppsummeringProps {
 }
 
 const FeilOppsummering = (props: FeiloppsummeringProps) => {
-    let oppsummering: HTMLDivElement;
+    const oppsummering = useRef<HTMLDivElement>(null);
 
     useEffect(() => {
         const { settFokus } = props;
@@ -40,8 +40,8 @@ const FeilOppsummering = (props: FeiloppsummeringProps) => {
             fokuser = true;
         }
         if (fokuser && oppsummering) {
-            if (!erSynligIViewport(oppsummering)) {
-                const end = getTop(oppsummering, 600);
+            if (!erSynligIViewport(oppsummering.current)) {
+                const end = getTop(oppsummering.current, 600);
                 scrollTo(end, 300);
                 setTimeout(() => {
                     fokuserOppsummering();
@@ -53,7 +53,7 @@ const FeilOppsummering = (props: FeiloppsummeringProps) => {
     });
 
     function fokuserOppsummering() {
-        oppsummering.focus();
+        oppsummering.current.focus();
     }
 
     const feilmeldinger = getFeilmeldinger(props);
@@ -61,9 +61,7 @@ const FeilOppsummering = (props: FeiloppsummeringProps) => {
         <div aria-live="polite" role="alert">
             <Vis hvis={feilmeldinger.length > 0 && props.visFeilliste}>
                 <div className="feiloppsummering blokk"
-                    ref={(c) => {
-                        oppsummering = c as HTMLDivElement;
-                    }}
+                    ref={oppsummering}
                     tabIndex={-1}>
                     <Innholdstittel tag="h3" className="feiloppsummering__tittel">
                         Det er {feilmeldinger.length} feil i skjemaet

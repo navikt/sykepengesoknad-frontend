@@ -13,7 +13,7 @@ type Miljo = 'LOCAL' | 'DEV' | 'PROD';
 
 const App = (): any => {
     const {hostname} = window.location;
-    const miljo = (hostname.indexOf("localhost") > -1 ? "LOCAL" : "DEV") as Miljo;
+    const miljo = (hostname.indexOf('localhost') > -1 ? 'LOCAL' : 'DEV') as Miljo;
 
     return (
         <Decorator miljo={miljo}>

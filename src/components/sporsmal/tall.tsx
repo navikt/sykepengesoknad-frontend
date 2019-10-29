@@ -3,7 +3,7 @@ import { formaterEnkeltverdi, genererParseForEnkeltverdi } from './field-utils';
 import { Field } from 'formik';
 import SporsmalTekst from './sporsmal-tekst';
 import TekstfeltMedEnhet from '../skjema/tekstfelt-med-enhet';
-import { lagDesimaltall, lagHeltall } from '../../../src/utils/utils';
+import { lagDesimaltall, lagHeltall } from '../../utils/utils';
 
 interface TallProps {
     sporsmalstekst: string;
