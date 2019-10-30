@@ -1,3 +1,4 @@
+@import '../../node_modules/nav-frontend-core/less/_variabler';
 @import '../basic';
 
 .utvidbar {
@@ -5,13 +6,14 @@
     border-radius: 2px;
 
     .utvidbar__toggle {
-        color: @navMorkGra;
         display: flex;
         justify-content: space-between;
         align-items: center;
-        background-color: @navLillaLighten80;
         width: 100%;
         padding: 0.7rem 1rem;
+        border: 0;
+        background-color: @navLillaLighten80;
+        color: @navMorkGra;
     }
 
     .utvidbar__toggle:focus {

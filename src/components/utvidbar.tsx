@@ -17,9 +17,11 @@ interface UtvidbarProps {
 
 const Utvidbar = (props: UtvidbarProps) => {
     const [erApen, setErApen] = useState<boolean>(props.erApen);
+    const [innholdHeight, setInnholdHeight] = useState<number>(0);
     const utvidbar = useRef<HTMLDivElement>(null);
     const jsToggle = useRef<HTMLButtonElement>(null);
     const btnImage = useRef<HTMLImageElement>(null);
+    const container = useRef<HTMLDivElement>(null);
     const innhold = useRef<HTMLDivElement>(null);
 
     useEffect(() => {
@@ -28,15 +30,16 @@ const Utvidbar = (props: UtvidbarProps) => {
         } else {
             setErApen(false);
         }
+        setInnholdHeight(innhold.current.offsetHeight)
         // eslint-disable-next-line
     }, []);
 
     function onTransitionEnd() {
         if (erApen) {
-            window.scrollTo({top: 600, left: utvidbar.current.offsetWidth, behavior: 'smooth'});
+            window.scrollTo({top: utvidbar.current.offsetTop, left: 0, behavior: 'smooth'});
         } else {
             if (!erSynligIViewport(utvidbar.current)) {
-                window.scrollTo({top: 600, left: utvidbar.current.offsetWidth, behavior: 'smooth'});
+                window.scrollTo({top: utvidbar.current.offsetTop, left: 0, behavior: 'smooth'});
             }
             jsToggle.current.focus();
         }
@@ -66,8 +69,8 @@ const Utvidbar = (props: UtvidbarProps) => {
                     <Chevron type={erApen ? 'opp' : 'ned'} />
                 </div>
             </button>
-            <div className={'utvidbar__innholdContainer' + (erApen ? ' apen' : '')}
-                onTransitionEnd={() => onTransitionEnd()} style={{maxHeight: erApen ? innhold.current.offsetHeight + 'px' : '0'}}
+            <div ref={container} className={'utvidbar__innholdContainer' + (erApen ? ' apen' : '')}
+                onTransitionEnd={() => onTransitionEnd()} style={{maxHeight: erApen ? innholdHeight + 'px' : '0'}}
             >
                 <div ref={innhold} className="utvidbar__innhold">
                     {props.children}
