@@ -19,7 +19,11 @@ export function DataFetcher(props: { children: any }) {
 
     useEffect(() => {
         if (isNotStarted(unleash)) {
-            unleash.fetch('/syfounleash/', {method: 'POST', body: unleashKeys}, (fetchState: FetchState<{}>) => {
+            unleash.fetch('/syfounleash/', {
+                method: 'POST',
+                body: unleashKeys,
+                headers: {'Content-Type': 'application/json'}
+            }, (fetchState: FetchState<{}>) => {
                 setUnleash(fetchState.data);
             })
         }

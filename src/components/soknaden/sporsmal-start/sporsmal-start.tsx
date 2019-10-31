@@ -35,6 +35,8 @@ const SporsmalStart = () => {
                 <FeilOppsummering visFeilliste={true} errors={errors}/>
 
                 <div className="skjemaelement skjemaelement--horisontal bekreft">
+                    <input type="text" name="navn" id="navn"
+                        ref={register({required: 'Navn må fylles ut'})}/>
                     <input
                         type="checkbox"
                         className="skjemaelement__input checkboks"
