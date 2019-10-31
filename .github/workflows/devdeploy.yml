@@ -2,8 +2,7 @@ name: Deploy to dev
 on:
   push:
     branches:
-      - '*'
-      - '!master'
+      - 'master'
 jobs:
   build-push-deploy:
     name: Checkout code and create docker tag
