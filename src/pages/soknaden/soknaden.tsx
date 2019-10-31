@@ -9,7 +9,7 @@ import tekster from './soknaden-tekster';
 import { HotjarTrigger } from '../../components/hotjar-trigger';
 import SoknadIntro from '../../components/soknaden/soknad-intro/soknad-intro';
 import Opplysninger from '../../components/soknaden/opplysninger/opplysninger';
-import Nederst from '../../components/soknaden/nederst/nederst';
+import SporsmalStart from '../../components/soknaden/sporsmal-start/sporsmal-start';
 import StatusPanel from '../../components/soknaden/status/status-panel';
 import VaerKlarOver from '../../components/soknaden/vaer-klar-over/vaer-klar-over';
 import Oppsummering from '../../components/soknaden/oppsummering/oppsummering';
@@ -66,7 +66,7 @@ const Fordeling = () => {
                 <>
                     <SoknadIntro/>
                     <Opplysninger/>
-                    <Nederst/>
+                    <SporsmalStart/>
                 </>
             );
 

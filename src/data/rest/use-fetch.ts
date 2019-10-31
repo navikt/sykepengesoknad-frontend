@@ -29,13 +29,12 @@ const createFinishedFetchState = <D = {}>(data: D | null, error: any, httpCode: 
 
 const useFetch = <D = {}>(): Fetch<D> => {
     const [fetchState, setFetchState] = useState<FetchState<D>>(createInitialFetchState());
-    const apiFetch = (url: string, request?: RequestInit, onFinished?: (fetchState: FetchState<D>) => void) => {
 
+    const apiFetch = (url: string, request?: RequestInit, onFinished?: (fetchState: FetchState<D>) => void) => {
         setFetchState(createPendingFetchState());
 
         fetch(url, request)
             .then(async (res) => {
-
                 const httpCode = res.status;
                 let state: FetchState<D>;
 
@@ -52,14 +51,15 @@ const useFetch = <D = {}>(): Fetch<D> => {
 
                 return state;
             })
+
             .catch(error => {
                 return createFinishedFetchState(null, error, -1);
+
             }).then(state => {
 
             if (onFinished) {
                 onFinished(state);
             }
-
             setFetchState(state);
         });
     };

@@ -1,14 +1,15 @@
 import React, { useEffect, useRef } from 'react';
-import { Innholdstittel } from 'nav-frontend-typografi';
+import { Undertittel } from 'nav-frontend-typografi';
 import Vis from '../../../../src/utils/vis';
 import { erSynligIViewport, getTop } from '../../../utils/browser-utils';
+import './feil-oppsummering.less';
 
 interface FeillisteMelding {
     feltnavn: string;
     feilmelding: string;
 }
 
-const FeillisteMelding = ({ feltnavn, feilmelding }: FeillisteMelding) => {
+const FeillisteMelding = ({feltnavn, feilmelding}: FeillisteMelding) => {
     return (
         <li className="feiloppsummering__feil">
             <a href={`#${feltnavn}`}>{feilmelding}</a>
@@ -16,33 +17,36 @@ const FeillisteMelding = ({ feltnavn, feilmelding }: FeillisteMelding) => {
     );
 };
 
-const getFeilmeldinger = (props: any) => {
-    return props.feilmeldinger || [];
-};
-
 interface FeiloppsummeringProps {
     settFokus?: boolean;
     skjemanavn?: string;
     visFeilliste: boolean;
-    feilmeldinger?: {
-        feltnavn: string;
-        feilmelding: string;
+    errors?: {};
+/*
+    errors?: {
+        felt: string;
+        melding: {
+            prop: string;
+            mess: string;
+        };
     };
+*/
 }
 
 const FeilOppsummering = (props: FeiloppsummeringProps) => {
     const oppsummering = useRef<HTMLDivElement>(null);
+    console.log('props.errors', props.errors); // eslint-disable-line
 
     useEffect(() => {
-        const { settFokus } = props;
+        const {settFokus} = props;
         let fokuser = settFokus;
         if (fokuser === undefined) {
             fokuser = true;
         }
-        if (fokuser && oppsummering) {
+        if (fokuser && oppsummering.current) {
             if (!erSynligIViewport(oppsummering.current)) {
                 const end = getTop(oppsummering.current, 600);
-                scrollTo(end, 300);
+                window.scrollTo(end, 300);
                 setTimeout(() => {
                     fokuserOppsummering();
                 }, 300);
@@ -56,22 +60,23 @@ const FeilOppsummering = (props: FeiloppsummeringProps) => {
         oppsummering.current.focus();
     }
 
-    const feilmeldinger = getFeilmeldinger(props);
+    const feilmeldinger = Object.entries(props.errors);
+    console.log('feilmeldinger', feilmeldinger); // eslint-disable-line
     return (
         <div aria-live="polite" role="alert">
             <Vis hvis={feilmeldinger.length > 0 && props.visFeilliste}>
-                <div className="feiloppsummering blokk"
+                <div className="feiloppsummering"
                     ref={oppsummering}
                     tabIndex={-1}>
-                    <Innholdstittel tag="h3" className="feiloppsummering__tittel">
+                    <Undertittel tag="h3" className="feiloppsummering__tittel">
                         Det er {feilmeldinger.length} feil i skjemaet
-                    </Innholdstittel>
+                    </Undertittel>
                     <ul className="feiloppsummering__liste">
-                        {
-                            feilmeldinger.map((feilmld: string, index: number) => {
-                                return <FeillisteMelding key={index} feltnavn={feilmld} feilmelding={feilmld}/>;
-                            })
-                        }
+                        <Vis hvis={feilmeldinger.length > 0}>
+                            {feilmeldinger.map((felt: any, index: number) => {
+                                return <FeillisteMelding key={index} feltnavn={felt} feilmelding={felt} />;
+                            })}
+                        </Vis>
                     </ul>
                 </div>
             </Vis>

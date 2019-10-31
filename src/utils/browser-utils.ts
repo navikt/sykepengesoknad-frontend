@@ -2,6 +2,9 @@
 
 export const getTop = function (element: HTMLElement, start: number) {
     // return value of html.getBoundingClientRect().top ... IE : 0, other browsers : -pageYOffset
+    if (!element) {
+        return 0;
+    }
     if (element.nodeName === 'HTML') {
         return -start;
     }
@@ -50,6 +53,9 @@ export function scrollTo(end: number, duration = 500, callback: any) {
 }
 
 export function erSynligIViewport(element: HTMLElement) {
+    if (!element) {
+        return false;
+    }
     const rect = element.getBoundingClientRect();
     return (
         rect.top >= 0 &&

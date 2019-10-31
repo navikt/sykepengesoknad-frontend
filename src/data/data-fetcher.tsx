@@ -7,10 +7,11 @@ import { FetchState, hasAny401, hasAnyFailed, hasData, isAnyNotStartedOrPending,
 import { useAppStore } from './stores/app-store';
 import { RSSoknad } from '../types/rs-types/rs-soknad';
 import { fixSykmeldingDatoer } from '../utils/dato-utils';
+import { unleashKeys } from './mock/data/toggles';
 
 export function DataFetcher(props: { children: any }) {
 
-    const { setUnleash, setSoknader, setSykmeldinger } = useAppStore();
+    const {setUnleash, setSoknader, setSykmeldinger} = useAppStore();
 
     const unleash = useFetch<{}>();
     const rssoknader = useFetch<RSSoknad[]>();
@@ -18,7 +19,7 @@ export function DataFetcher(props: { children: any }) {
 
     useEffect(() => {
         if (isNotStarted(unleash)) {
-            unleash.fetch('/syfounleash/', undefined, (fetchState: FetchState<{}>) => {
+            unleash.fetch('/syfounleash/', {method: 'POST', body: unleashKeys}, (fetchState: FetchState<{}>) => {
                 setUnleash(fetchState.data);
             })
         }

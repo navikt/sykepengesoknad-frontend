@@ -4,3 +4,10 @@ export const unleashToggles: any = {
     "syfo.ag.soknad.ny.platform": true,
     "syfo.syfofront.nytt.sykmeldingsmottak": true
 };
+
+export const unleashKeys: any = [
+    "syfo.syfofront.angre.bekreft.sykmelding",
+    "syfo.syfofront.korriger.selvstendig.soknad",
+    "syfo.ag.soknad.ny.platform",
+    "syfo.syfofront.nytt.sykmeldingsmottak"
+];
