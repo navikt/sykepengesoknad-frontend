@@ -3,6 +3,7 @@
   "version": "1.0.0",
   "description": "Digitalisering av sykepengesoknad",
   "private": true,
+  "homepage": "/sykepengesok",
   "dependencies": {
     "@craco/craco": "^5.5.0",
     "@navikt/react-decorator": "^1.0.12",
