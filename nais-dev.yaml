@@ -10,7 +10,7 @@ spec:
   port: 8080
   ingresses:
     - "https://sykepengesok.nais.oera-q.local/"
-    - "https://tjenester-q1.nav.no/sykepengesok/"
+    - "https://tjenester-q1.nav.no/sykepengesok"
   liveness:
     path: internal/isAlive
   readiness:
