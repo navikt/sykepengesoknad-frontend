@@ -1,9 +1,9 @@
 {
   "name": "sykepengesok",
   "version": "1.0.0",
-  "homepage": "/sykepengesoknad",
   "description": "Digitalisering av sykepengesoknad",
   "private": true,
+  "homepage": "/sykepengesok",
   "dependencies": {
     "@craco/craco": "^5.5.0",
     "@navikt/react-decorator": "^1.0.12",
