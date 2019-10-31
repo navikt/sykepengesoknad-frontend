@@ -12,6 +12,6 @@ const mock = FetchMock.configure({
 });
 
 mock.get('/login', '/sykepengesoknad');
-mock.get('/syfounleash/', unleashToggles);
+mock.post('/syfounleash/', unleashToggles);
 mock.get('/syfoapi/syfosoknad/api/soknader', soknader);
 mock.get('/syforest/sykmeldinger', sykmeldinger);
