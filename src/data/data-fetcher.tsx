@@ -21,7 +21,7 @@ export function DataFetcher(props: { children: any }) {
         if (isNotStarted(unleash)) {
             unleash.fetch('/syfounleash/', {
                 method: 'POST',
-                body: unleashKeys,
+                body: JSON.stringify(unleashKeys),
                 headers: {'Content-Type': 'application/json'}
             }, (fetchState: FetchState<{}>) => {
                 setUnleash(fetchState.data);
