@@ -28,7 +28,7 @@ export function DataFetcher(props: { children: any }) {
             })
         }
         if (isNotStarted(rssoknader)) {
-            rssoknader.fetch('/syfoapi/syfosoknad/api/soknader', undefined, (fetchState: FetchState<RSSoknad[]>) => {
+            rssoknader.fetch('https://syfoapi-q.nav.no/syfosoknad/api/soknader', undefined, (fetchState: FetchState<RSSoknad[]>) => {
                 setSoknader(fetchState.data!.map(soknad => {
                     return new Soknad(soknad);
                 }));
