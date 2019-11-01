@@ -22,6 +22,7 @@ export function DataFetcher(props: { children: any }) {
         if (isNotStarted(unleash)) {
             unleash.fetch('/syfounleash/', {
                 method: 'POST',
+                credentials: 'include',
                 body: JSON.stringify(unleashKeys),
                 headers: {'Content-Type': 'application/json'}
             }, (fetchState: FetchState<{}>) => {
@@ -29,7 +30,9 @@ export function DataFetcher(props: { children: any }) {
             })
         }
         if (isNotStarted(rssoknader)) {
-            rssoknader.fetch(SYFO_API_SOKNADER, undefined, (fetchState: FetchState<RSSoknad[]>) => {
+            rssoknader.fetch(SYFO_API_SOKNADER, {
+                credentials: 'include',
+            }, (fetchState: FetchState<RSSoknad[]>) => {
                 if (hasData(fetchState)) {
                     setSoknader(fetchState.data!.map(soknad => {
                         return new Soknad(soknad);
@@ -38,7 +41,9 @@ export function DataFetcher(props: { children: any }) {
             })
         }
         if (isNotStarted(sykmeldinger)) {
-            sykmeldinger.fetch('/syforest/sykmeldinger', undefined, (fetchState: FetchState<Sykmelding[]>) => {
+            sykmeldinger.fetch('/syforest/sykmeldinger', {
+                credentials: 'include',
+            }, (fetchState: FetchState<Sykmelding[]>) => {
                 if (hasData(fetchState)) {
                     setSykmeldinger(fetchState.data!.map(sykmelding => {
                         return fixSykmeldingDatoer(sykmelding);
