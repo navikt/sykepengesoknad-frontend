@@ -30,9 +30,11 @@ export function DataFetcher(props: { children: any }) {
         }
         if (isNotStarted(rssoknader)) {
             rssoknader.fetch(SYFO_API_SOKNADER, undefined, (fetchState: FetchState<RSSoknad[]>) => {
-                setSoknader(fetchState.data!.map(soknad => {
-                    return new Soknad(soknad);
-                }));
+                if (hasData(fetchState)) {
+                    setSoknader(fetchState.data!.map(soknad => {
+                        return new Soknad(soknad);
+                    }));
+                }
             })
         }
         if (isNotStarted(sykmeldinger)) {
@@ -45,7 +47,7 @@ export function DataFetcher(props: { children: any }) {
             });
         }
         // eslint-disable-next-line
-    }, []);
+    }, [rssoknader]);
 
 
     if (isAnyNotStartedOrPending([unleash, rssoknader, sykmeldinger])) {
