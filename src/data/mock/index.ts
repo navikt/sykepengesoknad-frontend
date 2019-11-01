@@ -2,6 +2,7 @@ import FetchMock, { MiddlewareUtils } from 'yet-another-fetch-mock';
 import { soknader } from './data/soknader';
 import { sykmeldinger } from './data/sykmeldinger';
 import { unleashToggles } from './data/toggles';
+import { SYFO_API_SOKNADER } from '../../utils/constants';
 
 const mock = FetchMock.configure({
     enableFallback: true,
@@ -13,5 +14,5 @@ const mock = FetchMock.configure({
 
 mock.get('/login', '/sykepengesoknad');
 mock.post('/syfounleash/', unleashToggles);
-mock.get('/syfoapi/syfosoknad/api/soknader', soknader);
+mock.get(SYFO_API_SOKNADER, soknader);
 mock.get('/syforest/sykmeldinger', sykmeldinger);

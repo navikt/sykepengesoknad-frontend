@@ -8,6 +8,7 @@ import { useAppStore } from './stores/app-store';
 import { RSSoknad } from '../types/rs-types/rs-soknad';
 import { fixSykmeldingDatoer } from '../utils/dato-utils';
 import { unleashKeys } from './mock/data/toggles';
+import { SYFO_API_SOKNADER } from '../utils/constants';
 
 export function DataFetcher(props: { children: any }) {
 
@@ -28,7 +29,7 @@ export function DataFetcher(props: { children: any }) {
             })
         }
         if (isNotStarted(rssoknader)) {
-            rssoknader.fetch('https://syfoapi-q.nav.no/syfosoknad/api/soknader', undefined, (fetchState: FetchState<RSSoknad[]>) => {
+            rssoknader.fetch(SYFO_API_SOKNADER, undefined, (fetchState: FetchState<RSSoknad[]>) => {
                 setSoknader(fetchState.data!.map(soknad => {
                     return new Soknad(soknad);
                 }));
