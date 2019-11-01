@@ -17,7 +17,7 @@ const App = (): any => {
                             <Switch>
                                 <Route exact={true} path="/" component={Soknader} />
                                 <Route path={'/soknader/:id'} component={Soknad} />
-                                <Route path={'/sporsmal/:id/:steg'} component={Sporsmalene} />
+                                <Route path={'/soknader/:id/:steg'} component={Sporsmalene} />
                                 <Route path={'/kvittering/:id'} component={Kvittering} />
                             </Switch>
                         </BrowserRouter>
