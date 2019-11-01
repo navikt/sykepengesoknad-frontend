@@ -13,7 +13,7 @@ const App = (): any => {
             <StoreProvider>
                 <DataFetcher>
                     <main id="maincontent" role="main" tabIndex={-1}>
-                        <BrowserRouter basename={'/'}>
+                        <BrowserRouter basename={'/sykepengesok'}>
                             <Switch>
                                 <Route exact={true} path="/" component={Soknader} />
                                 <Route path={'/soknader/:id'} component={Soknad} />
