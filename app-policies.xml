@@ -4,11 +4,11 @@
         "jar://com/sun/identity/policy/policyAdmin.dtd">
 
 <Policies>
-    <Policy name="sykepengesok_001" referralPolicy="false" active="true" >
+    <Policy name="nysykepengesoknad_001" referralPolicy="false" active="true" >
 
-        <Rule name="rule_sykepengesok__001_02">
+        <Rule name="rule_nysykepengesoknad__001_02">
             <ServiceName name="iPlanetAMWebAgentService" />
-            <ResourceName name="https://${DomainName}/sykepengesok/*?*" />
+            <ResourceName name="https://${DomainName}/nysykepengesoknad/*?*" />
             <AttributeValuePair>
                 <Attribute name="POST" />
                 <Value>allow</Value>
@@ -31,9 +31,9 @@
             </AttributeValuePair>
         </Rule>
 
-        <Rule name="rule_sykepengesok_001_01">
+        <Rule name="rule_nysykepengesoknad_001_01">
             <ServiceName name="iPlanetAMWebAgentService" />
-            <ResourceName name="https://${DomainName}/sykepengesok/*" />
+            <ResourceName name="https://${DomainName}/nysykepengesoknad/*" />
             <AttributeValuePair>
                 <Attribute name="POST" />
                 <Value>allow</Value>
@@ -56,9 +56,9 @@
             </AttributeValuePair>
         </Rule>
 
-        <Rule name="rule_sykepengesok_001_04">
+        <Rule name="rule_nysykepengesoknad_001_04">
             <ServiceName name="iPlanetAMWebAgentService" />
-            <ResourceName name="https://${DomainName}/sykepengesok/" />
+            <ResourceName name="https://${DomainName}/nysykepengesoknad/" />
             <AttributeValuePair>
                 <Attribute name="POST" />
                 <Value>allow</Value>
@@ -81,9 +81,9 @@
             </AttributeValuePair>
         </Rule>
 
-        <Rule name="rule_sykepengesok_001_03">
+        <Rule name="rule_nysykepengesoknad_001_03">
             <ServiceName name="iPlanetAMWebAgentService" />
-            <ResourceName name="https://${DomainName}/sykepengesok" />
+            <ResourceName name="https://${DomainName}/nysykepengesoknad" />
             <AttributeValuePair>
                 <Attribute name="POST" />
                 <Value>allow</Value>
@@ -107,11 +107,11 @@
         </Rule>
 
         <Subjects>
-            <Subject name="subject_sykepengesok_001_01" type="AuthenticatedUsers" includeType="inclusive">
+            <Subject name="subject_nysykepengesoknad_001_01" type="AuthenticatedUsers" includeType="inclusive">
             </Subject>
         </Subjects>
         <Conditions>
-            <Condition name="condition_sykepengesok_001_AuthenticationLevel" type="AuthLevelCondition">
+            <Condition name="condition_nysykepengesoknad_001_AuthenticationLevel" type="AuthLevelCondition">
                 <AttributeValuePair>
                     <Attribute name="AuthLevel"/>
                     <Value>4</Value>

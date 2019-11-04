@@ -9,8 +9,8 @@ RUN npm run build
 
 
 FROM nginx:alpine
-RUN mkdir /usr/share/nginx/html/sykepengesok
+RUN mkdir /usr/share/nginx/html/nysykepengesoknad
 COPY nginx.conf /etc/nginx/conf.d/default.conf
-COPY --from=builder /app/build /usr/share/nginx/html/sykepengesok
+COPY --from=builder /app/build /usr/share/nginx/html/nysykepengesoknad
 EXPOSE 8080
 CMD ["nginx", "-g", "daemon off;"]

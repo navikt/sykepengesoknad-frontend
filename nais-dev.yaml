@@ -9,8 +9,8 @@ spec:
   image: {{ image }}:{{ tag }}
   port: 8080
   ingresses:
-    - "https://sykepengesok.nais.oera-q.local/"
-    - "https://tjenester-q1.nav.no/sykepengesok"
+    - "https://nysykepengesoknad.nais.oera-q.local/"
+    - "https://tjenester-q1.nav.no/nysykepengesoknad"
   liveness:
     path: internal/isAlive
   readiness:
