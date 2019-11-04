@@ -1,0 +1,3 @@
+https://${DomainName}/sykepengesok/img/*
+https://${DomainName}/sykepengesok/resources/*
+
