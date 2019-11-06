@@ -14,9 +14,8 @@ import { setBodyClass } from '../../utils/utils';
 import './soknader.less';
 
 export const filtrerOgSorterNyeSoknader = (soknader: Soknad[]) => {
-    return soknader.filter((soknad) => {
-        return soknad.status === RSSoknadstatus.NY || soknad.status === RSSoknadstatus.UTKAST_TIL_KORRIGERING;
-    }).sort(sorterEtterOpprettetDato);
+    return soknader.filter((soknad) => soknad.status === RSSoknadstatus.NY || soknad.status === RSSoknadstatus.UTKAST_TIL_KORRIGERING)
+        .sort(sorterEtterOpprettetDato);
 };
 
 const brodsmuler: Brodsmule[] = [{
@@ -30,21 +29,17 @@ const Soknader = () => {
     const nyeSoknader = filtrerOgSorterNyeSoknader(soknader);
 
     const tidligereSoknader = soknader
-        .filter((soknad) => {
-            return soknad.status === RSSoknadstatus.SENDT || soknad.status === RSSoknadstatus.AVBRUTT;
-        })
+        .filter((soknad) => soknad.status === RSSoknadstatus.SENDT || soknad.status === RSSoknadstatus.AVBRUTT)
         .sort(sorterEtterPerioder);
 
     const fremtidigeSoknader = soknader
-        .filter((soknad) => {
-            return soknad.status === RSSoknadstatus.FREMTIDIG;
-        })
+        .filter((soknad) => soknad.status === RSSoknadstatus.FREMTIDIG)
         .sort(sorterEtterPerioder)
         .reverse();
 
     useEffect(() => {
         setBodyClass('soknader');
-    });
+    }, []);
 
     return (
         <div className="limit">
@@ -66,7 +61,6 @@ const Soknader = () => {
                 soknader={nyeSoknader}
                 tittel={tekster['soknader.venter-paa-behandling.tittel']}
                 tomListeTekst={tekster['soknader.venter-paa-behandling.ingen-soknader']}
-                className="js-til-behandling"
                 id="soknader-list-til-behandling"
             />
 
@@ -74,7 +68,6 @@ const Soknader = () => {
                 <Teasere
                     soknader={fremtidigeSoknader}
                     tittel={tekster['soknader.planlagt.tittel']}
-                    className="js-planlagt"
                     id="soknader-planlagt"
                 />
             </Vis>
@@ -85,7 +78,6 @@ const Soknader = () => {
                 <Teasere
                     soknader={tidligereSoknader}
                     tittel={tekster['soknader.sendt.tittel']}
-                    className="js-sendt"
                     id="soknader-sendt"
                 />
             </Vis>
