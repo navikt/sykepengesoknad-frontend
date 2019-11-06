@@ -6,7 +6,7 @@ import Vis from '../../../utils/vis';
 
 interface SoknaderTeasereProps {
     soknader: Soknad[];
-    className: string;
+    className?: string;
     tittel: string;
     tomListeTekst?: string;
     id: string;

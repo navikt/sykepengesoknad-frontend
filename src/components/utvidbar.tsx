@@ -25,14 +25,9 @@ const Utvidbar = (props: UtvidbarProps) => {
     const innhold = useRef<HTMLDivElement>(null);
 
     useEffect(() => {
-        if (erApen) {
-            setErApen(true);
-        } else {
-            setErApen(false);
-        }
+        setErApen(props.erApen);
         setInnholdHeight(innhold.current.offsetHeight)
-        // eslint-disable-next-line
-    }, []);
+    }, [props.erApen]);
 
     function onTransitionEnd() {
         if (erApen) {
@@ -78,7 +73,7 @@ const Utvidbar = (props: UtvidbarProps) => {
                         <button type="button" className="lenke" aria-pressed={!erApen}
                             tabIndex={erApen ? null : -1} onClick={() => setErApen(!erApen)}
                         >
-                            Lukk
+                            <Normaltekst tag="span">Lukk</Normaltekst>
                         </button>
                     </div>
                 </div>

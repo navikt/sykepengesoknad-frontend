@@ -28,7 +28,7 @@ export const InngangspanelIkon = ({ ikon, ikonHover }: InngangspanelIkonProps) =
 interface InngangspanelProps {
     to: string;
     children: React.ReactNode;
-    className: string;
+    className?: string;
 }
 
 export const Inngangspanel = ({ to, children, className, ...rest }: InngangspanelProps) => {

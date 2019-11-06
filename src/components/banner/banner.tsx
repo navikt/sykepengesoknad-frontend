@@ -3,9 +3,9 @@ import { Sidetittel } from 'nav-frontend-typografi';
 import Brodsmuler from '../brodsmuler/brodsmuler';
 import { Brodsmule } from '../../types/types';
 import { RSSoknadstype } from '../../types/rs-types/rs-soknadstype';
-import './banner.less';
 import tekster from './banner-tekster';
 import { useAppStore } from '../../data/stores/app-store';
+import './banner.less';
 
 interface BannerProps {
     brodsmuler: Brodsmule[];

@@ -121,12 +121,12 @@ interface SykepengesoknadTeaserProps {
 }
 
 const Teaser = ({ soknad }: SykepengesoknadTeaserProps) => {
-    const status = soknad.status ? soknad.status.toLowerCase() : '';
+    const stegId = soknad.status === RSSoknadstatus.NY ? '1' : '';
     const undertekst = beregnUndertekst(soknad);
 
     return (
         <article aria-labelledby={`soknader-header-${soknad.id}`}>
-            <Inngangspanel className={`js-panel js-soknad-${status}`} to={getUrlTilSoknad(soknad.id, '')}>
+            <Inngangspanel to={getUrlTilSoknad(soknad.id, stegId)}>
                 <InngangspanelIkon
                     ikon={hentIkon(soknad.soknadstype)}
                     ikonHover={hentIkonHover(soknad.soknadstype)}
