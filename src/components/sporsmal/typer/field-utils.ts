@@ -1,7 +1,7 @@
-import { SvarEnums } from '../../types/enums';
+import { SvarEnums } from '../../../types/enums';
 
 export const genererParseForEnkeltverdi = () => {
-    return (verdi: any) => {
+    return (verdi: string) => {
         return verdi || verdi === ''
             ? {
                 svarverdier: [{
@@ -26,7 +26,7 @@ export const genererParseForFlereVerdier = () => {
 
 export const genererParseForCheckbox = () => {
     const parse = genererParseForEnkeltverdi();
-    return (value: string) => {
+    return (value: boolean) => {
         const checkedVerdi = value ? SvarEnums.CHECKED : SvarEnums.UNCHECKED;
         return parse(checkedVerdi);
     };
@@ -51,7 +51,7 @@ export const formaterFlereVerdier = (verdi: any) => {
         });
 };
 
-export const fjernIndexFraTag = (tag: any) => {
+export const fjernIndexFraTag = (tag: string) => {
     const separator = '_';
     const tagdeler = tag.split(separator);
     if (!isNaN(parseInt(tagdeler[tagdeler.length - 1], 10))) {
@@ -61,8 +61,8 @@ export const fjernIndexFraTag = (tag: any) => {
     return tag;
 };
 
-export const tagMatcher = (tags: any, inputTag: any) => {
-    return tags.filter((tag: any) => {
+export const tagMatcher = (tags: string[], inputTag: any) => {
+    return tags.filter((tag) => {
         return inputTag.indexOf(tag) > -1;
     }).length > 0;
 };

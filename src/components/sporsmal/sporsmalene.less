@@ -1,0 +1,48 @@
+@import '../../../node_modules/nav-frontend-core/less/_variabler';
+
+.sporsmal__form {
+    .skjema-feilmelding {
+        color: @redError;
+        font-style: italic;
+        margin-top: 0.65rem;
+    }
+
+    .spm_1 {
+        .skjemaelement__input + .skjemaelement__label {
+            background-color: @navOransjeLighten80;
+            padding: 1rem 1rem 1rem 3.3rem;
+
+            &:before {
+                top: 1rem;
+                left: 1rem;
+            }
+        }
+
+        .skjemaelement__input:checked + .skjemaelement__label {
+            background-color: @navGronnLighten80;
+        }
+    }
+
+    .inputPanelGruppe__inner {
+        display: flex;
+        justify-content: space-between;
+
+        .inputPanel {
+            width: 39%;
+        }
+    }
+}
+
+.knapperad {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    margin: 2rem 0;
+    padding: 2rem 0;
+
+    .lenke {
+        display: inline-block;
+        margin-top: 1.3rem;
+    }
+}

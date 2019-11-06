@@ -1,7 +1,7 @@
 import React from 'react';
 import Undersporsmal from './undersporsmal';
-import { Sporsmal } from '../../types/types';
-import Vis from '../../utils/vis';
+import { Sporsmal } from '../../../types/types';
+import Vis from '../../../utils/vis';
 
 interface UndersporsmalslisteProps {
     undersporsmal: Sporsmal[];

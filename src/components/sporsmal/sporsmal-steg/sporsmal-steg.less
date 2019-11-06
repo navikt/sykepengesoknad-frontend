@@ -1,0 +1,47 @@
+@import '../../../../node_modules/nav-frontend-core/less/_variabler';
+
+.stegindikator-med-fremdriftsbar {
+    margin: 2rem 0;
+
+    .stegindikator {
+        display: none;
+    }
+
+    .fremdriftsbar {
+        margin: 1rem auto 0 auto;
+        max-width: calc(100vw - 5rem);
+        position: relative;
+
+        .fremdriftsbar__fullbredde {
+            background-color: @navGra20;
+            border-radius: 10px;
+            height: 6px;
+        }
+
+        .fremdriftsbar__fremdrift {
+            background-color: @navDypBla;
+            border-radius: 10px;
+            height: 6px;
+            margin-top: -6px;
+        }
+
+        .fremdriftsbar__tekst {
+            position: relative;
+            display: block;
+            text-align: right;
+        }
+    }
+}
+
+
+@media (min-width: 34rem) {
+    .stegindikator-med-fremdriftsbar {
+        .stegindikator {
+            display: block;
+        }
+
+        .fremdriftsbar {
+            display: none;
+        }
+    }
+}

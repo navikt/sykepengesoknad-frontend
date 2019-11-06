@@ -1,16 +1,19 @@
 import React from 'react';
-import SporsmalComponent from './sporsmal-component';
-import { Sporsmal } from '../../types/types';
-import { RSSvartype } from '../../types/rs-types/rs-svartype';
-import UkjentSporsmal from './ukjent-sporsmal';
+import { Sporsmal } from '../../../types/types';
+import { RSSvartype } from '../../../types/rs-types/rs-svartype';
+import UkjentSporsmal from '../ukjent-sporsmal';
 
+/*
 interface SoknadUndersporsmalProps {
     children: React.ReactNode;
 }
+*/
 
+/*
 const SoknadUndersporsmal = ({ children }: SoknadUndersporsmalProps) => {
     return <div className="soknad__undersporsmal">{children}</div>;
 };
+*/
 
 interface UndersporsmalProps {
     sporsmal: Sporsmal;
@@ -20,7 +23,8 @@ const Undersporsmal = ({ sporsmal }: UndersporsmalProps) => {
     switch (sporsmal.svartype) {
         case RSSvartype.CHECKBOX:
         case RSSvartype.CHECKBOX_PANEL: {
-            return <SporsmalComponent sporsmal={sporsmal} name={sporsmal.tag}/>;
+            return <h1>CHECKBOX_PANEL</h1>
+            // return <CheckboxComp feilmelding={''} />;
         }
         case RSSvartype.DATO:
         case RSSvartype.TIMER:
@@ -32,18 +36,24 @@ const Undersporsmal = ({ sporsmal }: UndersporsmalProps) => {
         case RSSvartype.RADIO_GRUPPE:
         case RSSvartype.RADIO_GRUPPE_TIMER_PROSENT:
         case RSSvartype.FRITEKST: {
+            return <h1>FRITEKST</h1>
+/*
             return (
                 <SoknadUndersporsmal>
-                    <SporsmalComponent sporsmal={sporsmal} name={sporsmal.tag}/>
+                    <Sporsmalene />
                 </SoknadUndersporsmal>
             );
+*/
         }
         case RSSvartype.IKKE_RELEVANT: {
+            return <h1>IKKE_RELEVANT</h1>
+/*
             return (
                 <div className="ekstrasporsmal">
-                    <SporsmalComponent sporsmal={sporsmal} name={sporsmal.tag}/>
+                    <Sporsmalene />
                 </div>
             );
+*/
         }
         default: {
             return <UkjentSporsmal sporsmal={sporsmal}/>;
