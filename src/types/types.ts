@@ -275,6 +275,7 @@ export class Soknad {
 export class Sporsmal {
     id: string;
     tag: TagTyper;
+    tagIndex?: number;
     sporsmalstekst: string;
     undertekst: string;
     svartype: RSSvartype;
@@ -287,8 +288,15 @@ export class Sporsmal {
 
     constructor(spm: RSSporsmal) {
         this.id = spm.id;
-        const tag = spm.tag as keyof typeof TagTyper;
-        this.tag = TagTyper[tag];
+        const orgarr: string[] = spm.tag.split('_');
+        const numtag: number = parseInt(orgarr.pop());
+        let tag = spm.tag;
+        if (!isNaN(numtag)) {
+            this.tagIndex = numtag;
+            tag = orgarr.join('_');
+        }
+        const idtag = tag as keyof typeof TagTyper;
+        this.tag = TagTyper[idtag];
         this.sporsmalstekst = spm.sporsmalstekst;
         this.undertekst = spm.undertekst;
         this.svartype = spm.svartype;
