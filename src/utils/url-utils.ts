@@ -1,7 +1,7 @@
-export const getUrlTilSoknad = (soknadId: string, side: string | undefined) => {
+export const getUrlTilSoknad = (soknadId: string, stegId: string | undefined) => {
     const baseUrl = `/soknader/${soknadId}`;
-    return side
-        ? `${baseUrl}/${side}`
+    return stegId
+        ? `${baseUrl}/${stegId}`
         : baseUrl;
 };
 

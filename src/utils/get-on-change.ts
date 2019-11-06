@@ -1,5 +1,5 @@
 import { erGyldigDato } from './dato-utils';
-import { formaterEnkeltverdi } from '../components/sporsmal/field-utils';
+import { formaterEnkeltverdi } from '../components/sporsmal/typer/field-utils';
 
 export const getOnChange = (props: any) => {
     if (props.pavirkerAndreSporsmal) {
