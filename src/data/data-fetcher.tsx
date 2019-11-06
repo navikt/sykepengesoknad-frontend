@@ -1,6 +1,5 @@
 import React, { useEffect } from 'react';
 import Spinner from 'nav-frontend-spinner';
-import { AlertStripeFeil } from 'nav-frontend-alertstriper';
 import useFetch from './rest/use-fetch';
 import { Soknad, Sykmelding } from '../types/types';
 import { FetchState, hasAny401, hasAnyFailed, hasData, isAnyNotStartedOrPending, isNotStarted } from './rest/utils';
@@ -9,6 +8,7 @@ import { RSSoknad } from '../types/rs-types/rs-soknad';
 import { fixSykmeldingDatoer } from '../utils/dato-utils';
 import { unleashKeys } from './mock/data/toggles';
 import { SYFO_API_SOKNADER } from '../utils/constants';
+import IngenData from '../pages/feil/ingen-data';
 
 export function DataFetcher(props: { children: any }) {
 
@@ -62,12 +62,7 @@ export function DataFetcher(props: { children: any }) {
         window.location.href = `${hentLoginUrl()}?redirect=${window.location.origin}/sykepengesok`;
 
     } else if (hasAnyFailed([unleash, rssoknader, sykmeldinger])) {
-        return (
-            <AlertStripeFeil>
-                Vi får akkurat nå ikke hentet alle data.
-                Vi jobber med å løse saken. Vennligst prøv igjen senere.
-            </AlertStripeFeil>
-        );
+        return <IngenData />;
     }
 
     return props.children;
