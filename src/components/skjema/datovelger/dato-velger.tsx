@@ -3,7 +3,6 @@ import cls from 'classnames';
 import MaskedInput from 'react-maskedinput';
 import DayPickerComponent from './day-picker-dato';
 import validerDatoField from './valider-dato-field';
-import { Field } from 'formik';
 import SkjemaFeilmelding from '../skjema-feilmelding';
 import dayjs from 'dayjs';
 
@@ -26,8 +25,9 @@ interface DatoFieldProps {
     inputValue: string;
 }
 
+// eslint-disable-next-line
 const DatoField = (props: DatoFieldProps) => {
-    const [erApen, setErApen] = useState(false);
+    const [ erApen, setErApen ] = useState(false);
     let toggle: HTMLElement;
 
     useEffect(() => {
@@ -35,7 +35,7 @@ const DatoField = (props: DatoFieldProps) => {
             props.oppdaterSporsmal(null, props.inputValue);
         }
         // eslint-disable-next-line
-    }, [props.input.value]);
+    }, [ props.input.value ]);
 
     function onKeyUp(e: KeyboardEvent) {
         const ESCAPE_KEYCODE = 27;
@@ -156,11 +156,11 @@ const mapStateToProps = (state, ownProps) => {
 export const genererValidate = (props: DatoVelgerProps) => {
     return (verdi: string) => {
         // TODO: Sjekk .format
-/*
-        const formatertVerdi = props.format
-            ? props.format(verdi)
-            : verdi;
-*/
+        /*
+                const formatertVerdi = props.format
+                    ? props.format(verdi)
+                    : verdi;
+        */
         return validerDatoField(verdi, {
             fra: props.tidligsteFom,
             til: props.senesteTom,
@@ -180,13 +180,8 @@ interface DatoVelgerProps {
 }
 
 const DatoVelger = (props: DatoVelgerProps) => {
-    const validate = genererValidate(props);
     return (
-        <Field
-            component={DatoField}
-            validate={validate}
-            {...props}
-        />
+        <input type="date" />
     );
 };
 

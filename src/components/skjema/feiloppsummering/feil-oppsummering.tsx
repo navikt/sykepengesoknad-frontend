@@ -1,33 +1,23 @@
 import React, { useEffect, useRef } from 'react';
-import { Undertittel } from 'nav-frontend-typografi';
+import { Normaltekst, Undertittel } from 'nav-frontend-typografi';
+import Lenke from 'nav-frontend-lenker';
 import Vis from '../../../../src/utils/vis';
 import { erSynligIViewport, getTop } from '../../../utils/browser-utils';
 import './feil-oppsummering.less';
-
-interface FeillisteMelding {
-    feltnavn: string;
-    feilmelding: string;
-}
-
-const FeillisteMelding = ({feltnavn, feilmelding}: FeillisteMelding) => {
-    return (
-        <li className="feiloppsummering__feil">
-            <a href={`#${feltnavn}`}>{feilmelding}</a>
-        </li>
-    );
-};
 
 interface FeiloppsummeringProps {
     settFokus?: boolean;
     skjemanavn?: string;
     visFeilliste: boolean;
-    errors?: {};
+    errors: any;
 /*
     errors?: {
-        felt: string;
-        melding: {
-            prop: string;
-            mess: string;
+        felt: {
+            navn: {
+                type: string;
+                message: string;
+                ref: HTMLInputElement;
+            };
         };
     };
 */
@@ -35,7 +25,7 @@ interface FeiloppsummeringProps {
 
 const FeilOppsummering = (props: FeiloppsummeringProps) => {
     const oppsummering = useRef<HTMLDivElement>(null);
-    console.log('props.errors', props.errors); // eslint-disable-line
+    const feilmeldinger = Object.entries(props.errors);
 
     useEffect(() => {
         const {settFokus} = props;
@@ -60,8 +50,6 @@ const FeilOppsummering = (props: FeiloppsummeringProps) => {
         oppsummering.current.focus();
     }
 
-    const feilmeldinger = Object.entries(props.errors);
-    console.log('feilmeldinger', feilmeldinger); // eslint-disable-line
     return (
         <div aria-live="polite" role="alert">
             <Vis hvis={feilmeldinger.length > 0 && props.visFeilliste}>
@@ -74,7 +62,13 @@ const FeilOppsummering = (props: FeiloppsummeringProps) => {
                     <ul className="feiloppsummering__liste">
                         <Vis hvis={feilmeldinger.length > 0}>
                             {feilmeldinger.map((felt: any, index: number) => {
-                                return <FeillisteMelding key={index} feltnavn={felt} feilmelding={felt} />;
+                                return (
+                                    <li className="feiloppsummering__feil" key={index}>
+                                        <Lenke href={`#${felt[0]}`}>
+                                            <Normaltekst tag="span">{felt[1].message}</Normaltekst>
+                                        </Lenke>
+                                    </li>
+                                );
                             })}
                         </Vis>
                     </ul>
