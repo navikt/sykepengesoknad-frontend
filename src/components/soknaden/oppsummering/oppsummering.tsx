@@ -24,7 +24,10 @@ const Oppsummering = () => {
     const { valgtSoknad } = useAppStore();
 
     return (
-        <Ekspanderbartpanel apen={true} tittel={tekster['sykepengesoknad.oppsummering.tittel']} tittelProps="element">
+        <Ekspanderbartpanel apen={false} border={true}
+            tittel={tekster['sykepengesoknad.oppsummering.tittel']}
+            tittelProps="element"
+        >
             {valgtSoknad.sporsmal
                 .filter((sporsmal) => {
                     return (

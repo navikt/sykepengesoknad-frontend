@@ -10,7 +10,7 @@ import tekster from './opplysninger-tekster';
 const SykmeldingPerioder = () => {
     const { valgtSykmelding } = useAppStore();
 
-    if (valgtSykmelding === undefined) {
+    if (!valgtSykmelding) {
         return null;
     }
 
