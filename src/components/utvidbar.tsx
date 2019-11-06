@@ -69,7 +69,7 @@ const Utvidbar = (props: UtvidbarProps) => {
             >
                 <div ref={innhold} className="utvidbar__innhold">
                     {props.children}
-                    <div className="knapperad ikke-print">
+                    <div className="lenkerad ikke-print">
                         <button type="button" className="lenke" aria-pressed={!erApen}
                             tabIndex={erApen ? null : -1} onClick={() => setErApen(!erApen)}
                         >

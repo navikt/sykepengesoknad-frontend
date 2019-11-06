@@ -1,13 +1,13 @@
 import React from 'react';
 import { useHistory, useParams } from 'react-router-dom';
-import Vis from '../../../utils/vis';
 import { useAppStore } from '../../../data/stores/app-store';
 import useForm from 'react-hook-form';
 import FeilOppsummering from '../../skjema/feiloppsummering/feil-oppsummering';
+import Knapperad from '../sporsmal-form/knapperad';
+import { pathUtenSteg } from '../sporsmal-utils';
 
 interface JaNeiRadioProps {
     feilmelding: string;
-    intro: string;
 }
 
 export const JaNeiRadio = (props: JaNeiRadioProps) => {
@@ -23,7 +23,7 @@ export const JaNeiRadio = (props: JaNeiRadioProps) => {
         const svar: any = { verdi: data['sporsmal_' + stegId] };
         valgtSoknad.sporsmal[spmIndex].svar = [ svar ];
         setValgtSoknad(valgtSoknad);
-        history.push(history.location.pathname + '/' + (stegId + 1));
+        history.push(pathUtenSteg(history.location.pathname, spmIndex));
     };
 
     return (
@@ -50,11 +50,9 @@ export const JaNeiRadio = (props: JaNeiRadioProps) => {
                         </label>
                     </div>
                 </fieldset>
-
-                <Vis hvis={props.intro !== undefined}>
-                    <p className="skjema__sporsmal">{props.intro}</p>
-                </Vis>
             </div>
+
+            <Knapperad onSubmit={onSubmit} />
         </form>
     );
 };

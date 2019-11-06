@@ -1,6 +1,7 @@
 const SporsmalTekster: any = {
     'nb': {
         'oppsummering.tittel': 'Oppsummering',
+        'soknad.feilmelding.ansvarserklaring': 'Du må bekrefte dette før du går videre',
         'sykepengesoknad.til-slutt.tittel': 'Til slutt',
         'sykepengesoknad.ferie.tittel': 'Ferie',
         'sykepengesoknad.permisjon.tittel': 'Permisjon',

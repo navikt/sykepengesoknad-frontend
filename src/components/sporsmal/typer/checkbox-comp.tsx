@@ -5,6 +5,8 @@ import useForm from 'react-hook-form';
 import FeilOppsummering from '../../skjema/feiloppsummering/feil-oppsummering';
 import { useAppStore } from '../../../data/stores/app-store';
 import { useHistory, useParams } from 'react-router-dom';
+import Knapperad from '../sporsmal-form/knapperad';
+import { pathUtenSteg } from '../sporsmal-utils';
 
 interface CheckboxProps {
     feilmelding: string;
@@ -23,7 +25,7 @@ const CheckboxComp = ({ feilmelding }: CheckboxProps) => {
         const svar: any = { verdi: data['sporsmal_' + stegId] };
         valgtSoknad.sporsmal[spmIndex].svar = [ svar ];
         setValgtSoknad(valgtSoknad);
-        history.push(history.location.pathname + '/' + (stegId + 1));
+        history.push(pathUtenSteg(history.location.pathname, spmIndex));
     };
 
     return (
@@ -51,6 +53,8 @@ const CheckboxComp = ({ feilmelding }: CheckboxProps) => {
                     </div>
                 </Vis>
             </div>
+
+            <Knapperad onSubmit={onSubmit} />
         </form>
     );
 };

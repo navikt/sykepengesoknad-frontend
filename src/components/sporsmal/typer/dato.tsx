@@ -2,7 +2,7 @@ import React from 'react';
 import dayjs from 'dayjs';
 import { useParams } from 'react-router-dom';
 import { Innholdstittel } from 'nav-frontend-typografi';
-import { formaterEnkeltverdi, genererParseForEnkeltverdi } from './field-utils';
+import { formaterEnkeltverdi, genererParseForEnkeltverdi } from '../field-utils';
 import DatoVelger from '../../skjema/datovelger/dato-velger';
 import { getOnChangeForDato } from '../../../utils/get-on-change';
 import { useAppStore } from '../../../data/stores/app-store';

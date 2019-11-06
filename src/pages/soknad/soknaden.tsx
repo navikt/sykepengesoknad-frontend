@@ -20,7 +20,6 @@ import Sporsmalene from '../../components/sporsmal/sporsmalene';
 import SporsmalSteg from '../../components/sporsmal/sporsmal-steg/sporsmal-steg';
 import { hentTittel } from '../../components/sporsmal/sporsmal-utils';
 import './soknaden.less';
-import Knapperad from '../../components/sporsmal/sporsmal-form/knapperad';
 
 const brodsmuler: Brodsmule[] = [ {
     tittel: tekster['soknader.sidetittel'],
@@ -91,7 +90,6 @@ const Fordeling = ({ stegId }: FordelingProps) => {
                     </Vis>
 
                     <Sporsmalene />
-                    <Knapperad />
                 </>
             );
 

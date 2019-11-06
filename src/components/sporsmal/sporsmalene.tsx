@@ -14,7 +14,6 @@ const Sporsmalene = () => {
     const { stegId } = useParams();
     const spmIndex = parseInt(stegId) - 1;
     const sporsmal = valgtSoknad.sporsmal[spmIndex];
-    console.log('sporsmal.svartype', sporsmal.svartype); // eslint-disable-line
 
     switch (sporsmal.svartype) {
         case RSSvartype.DATO: {
@@ -36,7 +35,7 @@ const Sporsmalene = () => {
             return null;
         }
         case RSSvartype.JA_NEI: {
-            return <JaNeiRadio feilmelding={''} intro={''} />;
+            return <JaNeiRadio feilmelding={''} />;
         }
         case RSSvartype.CHECKBOX_GRUPPE: {
             return null;
@@ -48,7 +47,7 @@ const Sporsmalene = () => {
             return null;
         }
         case RSSvartype.CHECKBOX_PANEL: {
-            return <CheckboxComp feilmelding={''} />;
+            return <CheckboxComp feilmelding={tekster['soknad.feilmelding.ansvarserklaring']} />;
         }
         case RSSvartype.RADIO_GRUPPE:
         case RSSvartype.RADIO_GRUPPE_TIMER_PROSENT: {
