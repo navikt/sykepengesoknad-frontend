@@ -10,7 +10,7 @@ import { Sporsmal } from '../../../../types/types';
 
 const RadioGruppe = ({ sporsmal }: OppsummeringProps) => {
     const besvartUndersporsmal: Sporsmal = sporsmal.undersporsmal.find((s) => {
-        return s.svar.length > 0 && s.svar[0].verdi === SvarEnums.CHECKED;
+        return s.svarliste.svar.length > 0 && s.svarliste.svar[0].verdi === SvarEnums.CHECKED;
     });
     return (
         <>

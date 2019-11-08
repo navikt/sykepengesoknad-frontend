@@ -3,16 +3,13 @@ import Undersporsmal from './undersporsmal';
 import { Sporsmal } from '../../../types/types';
 import Vis from '../../../utils/vis';
 
-interface UndersporsmalslisteProps {
+interface UndersporsmalProps {
     undersporsmal: Sporsmal[];
 }
 
-const UndersporsmalListe = ({ undersporsmal }: UndersporsmalslisteProps) => {
+const UndersporsmalListe = ({ undersporsmal }: UndersporsmalProps) => {
 
     const sporsmalsliste = undersporsmal
-        .filter((underspm) => {
-            return underspm.svar !== null;
-        })
         .map((underspm: Sporsmal, idx: number) => {
             return (
                 <Vis hvis={underspm.kriterieForVisningAvUndersporsmal !== undefined} key={idx}>

@@ -6,24 +6,20 @@ import FeilOppsummering from '../../skjema/feiloppsummering/feil-oppsummering';
 import Knapperad from '../sporsmal-form/knapperad';
 import { pathUtenSteg } from '../sporsmal-utils';
 
-interface JaNeiRadioProps {
-    feilmelding: string;
-}
-
-export const JaNeiRadio = (props: JaNeiRadioProps) => {
-    const { handleSubmit, errors } = useForm();
-    const { valgtSoknad, setValgtSoknad } = useAppStore();
+export const JaNeiKomp = () => {
+    const {handleSubmit, errors} = useForm();
+    const {valgtSoknad, setValgtSoknad} = useAppStore();
     const history = useHistory();
-    const { stegId } = useParams();
-    const spmIndex = parseInt(stegId);
+    const {stegId} = useParams();
+    const spmIndex = parseInt(stegId) - 1;
     const sporsmal = valgtSoknad.sporsmal[spmIndex];
     const compId = 'spm_' + stegId;
 
     const onSubmit = (data: any) => {
-        const svar: any = { verdi: data['sporsmal_' + stegId] };
-        valgtSoknad.sporsmal[spmIndex].svar = [ svar ];
+        const svar: any = {verdi: data.verdi};
+        sporsmal.svarliste = {sporsmalId: sporsmal.id, svar: [ svar ]};
         setValgtSoknad(valgtSoknad);
-        history.push(pathUtenSteg(history.location.pathname, spmIndex));
+        history.push(pathUtenSteg(history.location.pathname) + '/' + (spmIndex + 2));
     };
 
     return (
@@ -34,18 +30,18 @@ export const JaNeiRadio = (props: JaNeiRadioProps) => {
                 <fieldset className="skjema__fieldset">
                     <legend className="skjema__legend">
                         <div className="medHjelpetekst">
-                            <h3>{sporsmal.sporsmalstekst} {sporsmal.tag}</h3>
+                            <h3>{sporsmal.sporsmalstekst}</h3>
                             <div className="hjelpetekst">
                             </div>
                         </div>
                     </legend>
                     <div className="inputPanelGruppe__inner">
                         <label className="inputPanel radioPanel" htmlFor={compId + '_ja'}>
-                            <input id={compId + '_ja'} className="inputPanel__field" type="radio" name={compId} aria-checked="false" value="ja" />
+                            <input id={compId + '_ja'} className="inputPanel__field" type="radio" name="verdi" aria-checked="false" value="ja" />
                             <span className="inputPanel__label">Ja</span>
                         </label>
                         <label className="inputPanel radioPanel inputPanel--checked" htmlFor={compId + '_nei'}>
-                            <input id={compId + '_nei'} className="inputPanel__field" type="radio" name={compId} aria-checked="true" value="nei" />
+                            <input id={compId + '_nei'} className="inputPanel__field" type="radio" name="verdi" aria-checked="true" value="nei" />
                             <span className="inputPanel__label">Nei</span>
                         </label>
                     </div>
@@ -57,4 +53,4 @@ export const JaNeiRadio = (props: JaNeiRadioProps) => {
     );
 };
 
-export default JaNeiRadio;
+export default JaNeiKomp;

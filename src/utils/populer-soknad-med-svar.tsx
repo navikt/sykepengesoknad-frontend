@@ -119,8 +119,8 @@ const settMinMax = (sporsmal: Sporsmal): Sporsmal => {
 const whipeSvar = (sporsmalsliste: Sporsmal[]): Sporsmal[] => {
     return sporsmalsliste.map((sporsmal) => {
         const svar = sporsmal.tag === TagTyper.HVOR_MYE_PROSENT || sporsmal.tag === TagTyper.HVOR_MYE_TIMER
-            ? sporsmal.svar
-            : [];
+            ? sporsmal.svarliste
+            : {};
         return {
             ...settMinMax(sporsmal),
             svar,

@@ -1,11 +1,6 @@
 import { fjernIndexFraTag } from './field-utils';
-import { Soknad } from '../../types/types';
+import { Soknad, Sporsmal } from '../../types/types';
 import { TagTyper } from '../../types/enums';
-
-export const hentSporsmalForDenneSiden = (soknad: Soknad, sidenummer: number) => {
-    const sporsmal = soknad.sporsmal[sidenummer - 1];
-    return [ sporsmal ];
-};
 
 export const hentSporsmalForOppsummering = (soknad: Soknad) => {
     return soknad.sporsmal.filter((s) => {
@@ -15,22 +10,29 @@ export const hentSporsmalForOppsummering = (soknad: Soknad) => {
 };
 
 export const erSisteSide = (soknad: Soknad, sidenummer: number) => {
-    const sporsmal = hentSporsmalForDenneSiden(soknad, sidenummer);
-    const tag = sporsmal[0].tag;
+    const sporsmal = soknad.sporsmal[sidenummer - 1];
+    const tag = sporsmal.tag;
     return [ TagTyper.VAER_KLAR_OVER_AT, TagTyper.BEKREFT_OPPLYSNINGER ].indexOf(tag) > -1;
 };
 
-export const hentTittel = (soknad: Soknad, sidenummer: number) => {
-    const sporsmal = hentSporsmalForDenneSiden(soknad, sidenummer)[0];
+export const hentNokkel = (soknad: Soknad, sidenummer: number) => {
+    const sporsmal = soknad.sporsmal[sidenummer - 1];
     return sidenummer === 1
-        ? 'sykepengesoknad.for-du-begynner.tittel'
+        ? 'sykepengesoknad.foer-du-begynner.tittel'
         : erSisteSide(soknad, sidenummer)
             ? 'sykepengesoknad.til-slutt.tittel'
             : `sykepengesoknad.${fjernIndexFraTag(sporsmal.tag).toLowerCase()}.tittel`;
 };
 
-export const pathUtenSteg = (pathname: string, spmIndex: number) => {
+export const hentSvarVerdi = (sporsmal: Sporsmal): string => {
+    if (sporsmal.svarliste.svar[0] !== undefined) {
+        return sporsmal.svarliste.svar[0].verdi;
+    }
+    return '';
+};
+
+export const pathUtenSteg = (pathname: string) => {
     const arr: string[] = pathname.split('/');
     arr.pop();
-    return arr.join('/') + '/' + (spmIndex + 2)
+    return arr.join('/');
 };

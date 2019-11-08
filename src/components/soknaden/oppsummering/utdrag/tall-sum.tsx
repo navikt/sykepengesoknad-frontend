@@ -11,7 +11,7 @@ const TallSum = ({ sporsmal }: OppsummeringProps) => {
         <div className="oppsummering__sporsmal">
             <Element tag="h3">{sporsmal.sporsmalstekst}</Element>
             <div className="oppsummering__svar">
-                {sporsmal.svar.map((svarverdi, index) => {
+                {sporsmal.svarliste.svar.map((svarverdi, index) => {
                     return (
                         <Normaltekst className="oppsummering__tekst" key={index}>
                             {svarverdi.verdi} {label}

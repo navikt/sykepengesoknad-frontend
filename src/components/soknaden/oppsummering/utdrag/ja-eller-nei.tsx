@@ -8,13 +8,13 @@ import { Sporsmal } from '../../../../types/types';
 import Vis from '../../../../utils/vis';
 
 const erUndersporsmalStilt = (sporsmal: Sporsmal): boolean => {
-    return sporsmal.svar.map((s) => {
+    return sporsmal.svarliste.svar.map((s) => {
         return s.verdi;
     }).indexOf(sporsmal.kriterieForVisningAvUndersporsmal) > -1;
 };
 
 const JaEllerNei = ({ sporsmal }: OppsummeringProps) => {
-    const svartekst = tekster[`soknad.${sporsmal.svar[0].verdi.toLowerCase()}`];
+    const svartekst = tekster[`soknad.${sporsmal.svarliste.svar[0].verdi.toLowerCase()}`];
     return (
         <div className="oppsummering-sporsmal">
             <Element tag="h3">{sporsmal.sporsmalstekst}</Element>

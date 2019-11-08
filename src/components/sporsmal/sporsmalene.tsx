@@ -1,12 +1,12 @@
 import React from 'react';
 import { RSSvartype } from '../../types/rs-types/rs-svartype';
-import Dato from './typer/dato';
-import Tall from './typer/tall';
+import DatoKomp from './typer/dato-komp';
+import TallKomp from './typer/tall-komp';
 import tekster from './sporsmal-tekster';
-import CheckboxComp from './typer/checkbox-comp';
+import CheckboxPanel from './typer/checkbox-panel';
 import { useParams } from 'react-router-dom';
 import { useAppStore } from '../../data/stores/app-store';
-import JaNeiRadio from './typer/ja-nei-radio';
+import JaNeiKomp from './typer/ja-nei-komp';
 import './sporsmalene.less';
 
 const Sporsmalene = () => {
@@ -16,29 +16,17 @@ const Sporsmalene = () => {
     const sporsmal = valgtSoknad.sporsmal[spmIndex];
 
     switch (sporsmal.svartype) {
-        case RSSvartype.DATO: {
-            return <Dato feilmelding={''} />;
-        }
-        case RSSvartype.TIMER: {
-            return <Tall label={tekster['soknad.timer-totalt']} kunHeltall={false} feilmelding={''} />;
-        }
-        case RSSvartype.PROSENT: {
-            return <Tall label={tekster['soknad.prosent']} kunHeltall={true} feilmelding={''} />;
-        }
-        case RSSvartype.TALL: {
-            return <Tall label={sporsmal.undertekst} kunHeltall={false} feilmelding={''} />;
-        }
         case RSSvartype.CHECKBOX: {
-            return <CheckboxComp feilmelding={''} />;
-        }
-        case RSSvartype.PERIODER: {
-            return null;
-        }
-        case RSSvartype.JA_NEI: {
-            return <JaNeiRadio feilmelding={''} />;
+            return <CheckboxPanel />;
         }
         case RSSvartype.CHECKBOX_GRUPPE: {
             return null;
+        }
+        case RSSvartype.CHECKBOX_PANEL: {
+            return <CheckboxPanel />;
+        }
+        case RSSvartype.DATO: {
+            return <DatoKomp />;
         }
         case RSSvartype.FRITEKST: {
             return null;
@@ -46,15 +34,31 @@ const Sporsmalene = () => {
         case RSSvartype.IKKE_RELEVANT: {
             return null;
         }
-        case RSSvartype.CHECKBOX_PANEL: {
-            return <CheckboxComp feilmelding={tekster['soknad.feilmelding.ansvarserklaring']} />;
+        case RSSvartype.JA_NEI: {
+            return <JaNeiKomp />;
         }
+        case RSSvartype.LAND: {
+            return null;
+        }
+        case RSSvartype.PERIODE: {
+            return null;
+        }
+        case RSSvartype.PERIODER: {
+            return null;
+        }
+        case RSSvartype.PROSENT: {
+            return <TallKomp label={tekster['soknad.prosent']} desimaler={1} />;
+        }
+        case RSSvartype.RADIO:
         case RSSvartype.RADIO_GRUPPE:
         case RSSvartype.RADIO_GRUPPE_TIMER_PROSENT: {
             return null;
         }
-        case RSSvartype.LAND: {
-            return null;
+        case RSSvartype.TALL: {
+            return <TallKomp label={sporsmal.undertekst} desimaler={2} />;
+        }
+        case RSSvartype.TIMER: {
+            return <TallKomp label={tekster['soknad.timer-totalt']} desimaler={0} />;
         }
         default: {
             return null;

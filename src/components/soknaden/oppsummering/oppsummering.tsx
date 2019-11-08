@@ -31,7 +31,7 @@ const Oppsummering = () => {
             {valgtSoknad.sporsmal
                 .filter((sporsmal) => {
                     return (
-                        sporsmal.svar.length > 0 ||
+                        sporsmal.svarliste.svar.length > 0 ||
                         sporsmal.undersporsmal.length > 0 ||
                         sporsmal.svartype === RSSvartype.IKKE_RELEVANT
                     );

@@ -5,6 +5,7 @@ import DayPickerComponent from './day-picker-dato';
 import validerDatoField from './valider-dato-field';
 import SkjemaFeilmelding from '../skjema-feilmelding';
 import dayjs from 'dayjs';
+import Vis from '../../../utils/vis';
 
 export type Meta = {
     touched: boolean;
@@ -113,8 +114,8 @@ const DatoField = (props: DatoFieldProps) => {
                         {erApen ? 'Skjul datovelger' : 'Vis datovelger'}
                     </button>
                 </div>
-                {
-                    erApen &&
+
+                <Vis hvis={erApen}>
                     <DayPickerComponent
                         {...props}
                         erApen={erApen}
@@ -133,25 +134,12 @@ const DatoField = (props: DatoFieldProps) => {
                             lukk();
                         }}
                     />
-                }
+                </Vis>
                 <SkjemaFeilmelding {...meta} />
             </div>
         </div>
     );
 };
-
-// TODO: Hvordan håndtere state her?
-/*
-const mapStateToProps = (state, ownProps) => {
-    const inputName = ownProps.input.name;
-    const skjemanavn = ownProps.meta.form;
-    const selector = formValueSelector(skjemanavn);
-    const inputValue = selector(state, inputName);
-    return {
-        inputValue,
-    };
-};
-*/
 
 export const genererValidate = (props: DatoVelgerProps) => {
     return (verdi: string) => {
@@ -177,6 +165,7 @@ interface DatoVelgerProps {
     parseVerdi: Function;
     name: string;
     id: string;
+    ref: any;
 }
 
 const DatoVelger = (props: DatoVelgerProps) => {

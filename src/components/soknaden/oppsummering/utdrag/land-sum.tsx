@@ -3,11 +3,11 @@ import { OppsummeringProps } from '../oppsummering';
 import { Element } from 'nav-frontend-typografi';
 
 const LandSum = ({ sporsmal }: OppsummeringProps) => {
-    const svarliste = sporsmal.svar.length === 1
-        ? <p className="sist">{sporsmal.svar[0].verdi}</p>
+    const svarliste = sporsmal.svarliste.svar.length === 1
+        ? <p className="sist">{sporsmal.svarliste.svar[0].verdi}</p>
         : (
             <ul className="oppsummering__landliste">
-                {sporsmal.svar.map((s) => {
+                {sporsmal.svarliste.svar.map((s) => {
                     return <li className="oppsummering__land" key={s.verdi}>{s.verdi}</li>;
                 })}
             </ul>

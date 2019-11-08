@@ -12,7 +12,7 @@ const PerioderSum = ({ sporsmal }: OppsummeringProps) => {
         <div className="oppsummering__sporsmal">
             <Element tag="h3">{sporsmal.sporsmalstekst}</Element>
             <div className="oppsummering__tekstsvar">
-                {sporsmal.svar.map((p, i) => {
+                {sporsmal.svarliste.svar.map((p, i) => {
                     const periode = JSON.parse(p.verdi);
                     return (
                         <Vis hvis={p.verdi !== empty} key={i}>

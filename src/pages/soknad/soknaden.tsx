@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import { VenstreChevron } from 'nav-frontend-chevron';
-import { Link, RouteComponentProps } from 'react-router-dom';
+import { Link, RouteComponentProps, useParams } from 'react-router-dom';
 import { Normaltekst, Systemtittel } from 'nav-frontend-typografi';
 import { Brodsmule, Soknad } from '../../types/types';
 import { RSSoknadstatus } from '../../types/rs-types/rs-soknadstatus';
@@ -18,7 +18,7 @@ import { setBodyClass } from '../../utils/utils';
 import Vis from '../../utils/vis';
 import Sporsmalene from '../../components/sporsmal/sporsmalene';
 import SporsmalSteg from '../../components/sporsmal/sporsmal-steg/sporsmal-steg';
-import { hentTittel } from '../../components/sporsmal/sporsmal-utils';
+import { hentNokkel } from '../../components/sporsmal/sporsmal-utils';
 import './soknaden.less';
 
 const brodsmuler: Brodsmule[] = [ {
@@ -33,7 +33,6 @@ const brodsmuler: Brodsmule[] = [ {
 
 const Soknaden = (props: RouteComponentProps<IdParams>) => {
     const { valgtSoknad } = useAppStore();
-    const stegId = parseInt(props.match.params.stegId);
     useGlobaleData(props.match.params);
 
     useEffect(() => {
@@ -46,7 +45,7 @@ const Soknaden = (props: RouteComponentProps<IdParams>) => {
         <div className="limit">
             <Banner brodsmuler={brodsmuler} />
             <HotjarTrigger trigger={valgtSoknad.soknadstype}>
-                <Fordeling stegId={stegId} />
+                <Fordeling />
             </HotjarTrigger>
         </div>
     )
@@ -54,26 +53,25 @@ const Soknaden = (props: RouteComponentProps<IdParams>) => {
 
 export default Soknaden;
 
-interface FordelingProps {
-    stegId: number;
-}
-
-const Fordeling = ({ stegId }: FordelingProps) => {
+const Fordeling = () => {
     const { valgtSoknad } = useAppStore();
-    const tittel = tekster[hentTittel(valgtSoknad, stegId)];
+    const { stegId } = useParams();
+    const stegNo = parseInt(stegId);
+    const tittel = tekster[hentNokkel(valgtSoknad, stegNo)];
+    const sporsmal = valgtSoknad.sporsmal[stegNo - 1];
 
     switch (valgtSoknad.status) {
         // Nye søknader
         case RSSoknadstatus.NY || RSSoknadstatus.UTKAST_TIL_KORRIGERING:
             return (
                 <>
-                    <Vis hvis={stegId === 1}>
+                    <Vis hvis={stegNo === 1}>
                         <SoknadIntro />
                     </Vis>
 
-                    <Vis hvis={stegId > 1}>
+                    <Vis hvis={stegNo > 1}>
                         <SporsmalSteg />
-                        <Link to={'/soknader/' + valgtSoknad.id + '/' + (stegId - 1)} className="lenke tilbakelenke">
+                        <Link to={'/soknader/' + valgtSoknad.id + '/' + (stegNo - 1)} className="lenke tilbakelenke">
                             <VenstreChevron />
                             <Normaltekst tag="span">{tekster['soknad.tilbakeknapp']}</Normaltekst>
                         </Link>
@@ -81,11 +79,13 @@ const Fordeling = ({ stegId }: FordelingProps) => {
 
                     <Opplysninger ekspandert={true} />
 
+                    <h3>{sporsmal.tag} - {sporsmal.svartype}</h3>
+
                     <Vis hvis={tittel !== undefined}>
                         <Systemtittel className="sporsmal__tittel">{tittel}</Systemtittel>
                     </Vis>
 
-                    <Vis hvis={stegId === 1}>
+                    <Vis hvis={stegNo === 1}>
                         <Normaltekst tag="p" className="sporsmal__intro">{tekster['sykepengesoknad.foer-du-begynner.introtekst']}</Normaltekst>
                     </Vis>
 

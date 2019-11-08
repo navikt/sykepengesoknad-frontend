@@ -10,7 +10,7 @@ const DatoSum = ({ sporsmal }: OppsummeringProps) => {
         <div className="oppsummering__sporsmal">
             <Element tag="h3">{sporsmal.sporsmalstekst}</Element>
             <div className="oppsummering__tekstsvar">
-                {sporsmal.svar.map((svarverdi, index) => {
+                {sporsmal.svarliste.svar.map((svarverdi, index) => {
                     return (
                         <Vis hvis={svarverdi.verdi !== empty} key={index}>
                             <Normaltekst className="oppsummering__dato">

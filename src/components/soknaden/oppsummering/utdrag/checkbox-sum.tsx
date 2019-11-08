@@ -8,7 +8,7 @@ import Vis from '../../../../utils/vis';
 const CheckboxSum = ({ sporsmal }: OppsummeringProps) => {
     const uspm = sporsmal.undersporsmal;
     return (
-        <Vis hvis={sporsmal.svar[0] && sporsmal.svar[0].verdi === SvarEnums.CHECKED}>
+        <Vis hvis={sporsmal.svarliste.svar[0] && sporsmal.svarliste.svar[0].verdi === SvarEnums.CHECKED}>
             <Avkrysset tekst={sporsmal.sporsmalstekst}/>
             <UndersporsmalSum sporsmalsliste={uspm}/>
         </Vis>

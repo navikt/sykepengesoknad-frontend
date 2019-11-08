@@ -6,7 +6,7 @@ import Stegindikator from 'nav-frontend-stegindikator';
 import { Sporsmal } from '../../../types/types';
 import { TagTyper } from '../../../types/enums';
 import tekster from '../sporsmal-tekster';
-import { hentTittel } from '../sporsmal-utils';
+import { hentNokkel, pathUtenSteg } from '../sporsmal-utils';
 import StegindikatorSteg from 'nav-frontend-stegindikator/lib/stegindikator-steg';
 import { useAppStore } from '../../../data/stores/app-store';
 import './sporsmal-steg.less';
@@ -45,19 +45,20 @@ const SporsmalSteg = () => {
             aria-valuenow={aktivtSteg} aria-valuemin={1} aria-valuemax={steg.length}
         >
             <Stegindikator kompakt
-                onChange={(stegindex) => {
-                    history.push(history.location.pathname + '/' + stegindex + 1);
-                }}>
+                onChange={(stegIndex) => {
+                    history.push(pathUtenSteg(history.location.pathname) + '/' + (stegIndex + 1));
+                }}
+            >
                 {steg.map((sporsmal: Sporsmal, index) => {
                     const erPassert = (aktivtSteg - 1) > index;
                     const erAktiv = (aktivtSteg - 1) === index;
 
                     return (
                         <StegindikatorSteg aktiv={erAktiv} index={index}
-                            label={tekster[hentTittel(valgtSoknad, index + 1)]}
+                            label={tekster[hentNokkel(valgtSoknad, index + 1)]}
                             disabled={!erPassert && !erAktiv} key={`${valgtSoknad.id}-steg-${index}`}
                         >
-                            {sporsmal.id + 1}
+                            {index + 1}
                         </StegindikatorSteg>
                     );
                 })}

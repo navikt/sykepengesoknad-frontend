@@ -8,7 +8,7 @@ import { senesteTom } from './periode-utils';
 const getTomFraSoknad = (soknad: Soknad) => {
     const getTomForUtland = (_soknad: Soknad) => {
         const perioder = _soknad.sporsmal.find((spm: Sporsmal) => spm.tag === TagTyper.PERIODEUTLAND)!
-            .svar
+            .svarliste.svar
             .map((periode) => {
                 const jsonPeriode = JSON.parse(periode.verdi);
                 return {

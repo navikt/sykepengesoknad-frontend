@@ -1,13 +1,13 @@
+import dayjs from 'dayjs';
 import { InntektskildeTyper, SporsmalsTyper, SykepengesoknadSvartyper, SykmeldingStatuser, TagTyper } from './enums';
 import { RSArbeidssituasjon } from './rs-types/rs-arbeidssituasjon';
 import { RSSvartype } from './rs-types/rs-svartype';
 import { RSSoknadstype } from './rs-types/rs-soknadstype';
 import { RSSoknadstatus } from './rs-types/rs-soknadstatus';
-import dayjs from 'dayjs';
 import { RSSporsmal } from './rs-types/rs-sporsmal';
-import { RSSvar } from './rs-types/rs-svar';
 import { RSSoknad } from './rs-types/rs-soknad';
 import { RSSoknadsperiode } from './rs-types/rs-soknadsperiode';
+import { RSSvarliste } from './rs-types/rs-svarliste';
 
 export interface SykepengesoknadOppsummeringLedetekst {
     nokkel: string;
@@ -283,7 +283,7 @@ export class Sporsmal {
     max: string;
     pavirkerAndreSporsmal: boolean;
     kriterieForVisningAvUndersporsmal: string;
-    svar: RSSvar[];
+    svarliste: RSSvarliste;
     undersporsmal: Sporsmal[];
 
     constructor(spm: RSSporsmal) {
@@ -304,7 +304,7 @@ export class Sporsmal {
         this.max = spm.max;
         this.pavirkerAndreSporsmal = spm.pavirkerAndreSporsmal;
         this.kriterieForVisningAvUndersporsmal = spm.kriterieForVisningAvUndersporsmal;
-        this.svar = spm.svar;
+        this.svarliste = { sporsmalId: spm.id, svar: spm.svar };
         this.undersporsmal = rsToSporsmal(spm.undersporsmal);
     }
 }
