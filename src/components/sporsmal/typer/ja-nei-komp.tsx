@@ -1,23 +1,33 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useHistory, useParams } from 'react-router-dom';
 import { useAppStore } from '../../../data/stores/app-store';
 import useForm from 'react-hook-form';
 import FeilOppsummering from '../../skjema/feiloppsummering/feil-oppsummering';
 import Knapperad from '../sporsmal-form/knapperad';
 import { pathUtenSteg } from '../sporsmal-utils';
+import { Normaltekst } from 'nav-frontend-typografi';
+
+const jaNeiValg = [ {
+    value: 'ja',
+    label: 'Ja',
+}, {
+    value: 'nei',
+    label: 'Nei',
+} ];
 
 export const JaNeiKomp = () => {
-    const {handleSubmit, errors} = useForm();
-    const {valgtSoknad, setValgtSoknad} = useAppStore();
+    const { handleSubmit, errors } = useForm();
+    const { valgtSoknad, setValgtSoknad } = useAppStore();
+    const [ valgt, setValgt ] = useState<string>();
     const history = useHistory();
-    const {stegId} = useParams();
+    const { stegId } = useParams();
     const spmIndex = parseInt(stegId) - 1;
     const sporsmal = valgtSoknad.sporsmal[spmIndex];
     const compId = 'spm_' + stegId;
 
     const onSubmit = (data: any) => {
-        const svar: any = {verdi: data.verdi};
-        sporsmal.svarliste = {sporsmalId: sporsmal.id, svar: [ svar ]};
+        const svar: any = { verdi: data.verdi };
+        sporsmal.svarliste = { sporsmalId: sporsmal.id, svar: [ svar ] };
         setValgtSoknad(valgtSoknad);
         history.push(pathUtenSteg(history.location.pathname) + '/' + (spmIndex + 2));
     };
@@ -30,20 +40,34 @@ export const JaNeiKomp = () => {
                 <fieldset className="skjema__fieldset">
                     <legend className="skjema__legend">
                         <div className="medHjelpetekst">
-                            <h3>{sporsmal.sporsmalstekst}</h3>
+                            <Normaltekst className="skjema__sporsmal">
+                                <strong>{sporsmal.sporsmalstekst}</strong>
+                            </Normaltekst>
                             <div className="hjelpetekst">
                             </div>
                         </div>
                     </legend>
                     <div className="inputPanelGruppe__inner">
-                        <label className="inputPanel radioPanel" htmlFor={compId + '_ja'}>
-                            <input id={compId + '_ja'} className="inputPanel__field" type="radio" name="verdi" aria-checked="false" value="ja" />
-                            <span className="inputPanel__label">Ja</span>
-                        </label>
-                        <label className="inputPanel radioPanel inputPanel--checked" htmlFor={compId + '_nei'}>
-                            <input id={compId + '_nei'} className="inputPanel__field" type="radio" name="verdi" aria-checked="true" value="nei" />
-                            <span className="inputPanel__label">Nei</span>
-                        </label>
+                        {jaNeiValg.map((valg, idx) => {
+                            const alt = '_' + valg.label.toLowerCase();
+                            const OK = valgt === valg.value;
+                            return (
+                                <label className={'inputPanel radioPanel' + (OK ? ' inputPanel--checked' : '')}
+                                    htmlFor={compId + alt} key={idx}
+                                >
+                                    <input type="radio"
+                                        name="verdi"
+                                        id={compId + alt}
+                                        className="inputPanel__field"
+                                        aria-checked={OK}
+                                        checked={OK}
+                                        value={valg.value}
+                                        onChange={() => setValgt(valg.value)}
+                                    />
+                                    <span className="inputPanel__label">{valg.label}</span>
+                                </label>
+                            )
+                        })}
                     </div>
                 </fieldset>
             </div>
