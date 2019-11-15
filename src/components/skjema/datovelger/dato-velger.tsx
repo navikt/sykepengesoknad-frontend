@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { ChangeEvent, useEffect, useRef, useState } from 'react';
 import cls from 'classnames';
 import MaskedInput from 'react-maskedinput';
 import DayPickerComponent from './day-picker-dato';
@@ -7,36 +7,24 @@ import SkjemaFeilmelding from '../skjema-feilmelding';
 import dayjs from 'dayjs';
 import Vis from '../../../utils/vis';
 
-export type Meta = {
-    touched: boolean;
-    error: string;
-    form: HTMLFormElement;
-}
-
 interface DatoFieldProps {
     id: string;
-    meta: Meta;
-    input: HTMLInputElement;
-    touch: Function;
-    change: Function;
-    oppdaterSporsmal: Function;
+    name: string;
+    onChange: (e: ChangeEvent<any>, newValue?: any) => void;
     parseVerdi: Function;
     tidligsteFom: Date;
     senesteTom: Date;
-    inputValue: string;
+    ref: any;
 }
 
-// eslint-disable-next-line
 const DatoField = (props: DatoFieldProps) => {
     const [ erApen, setErApen ] = useState(false);
-    let toggle: HTMLElement;
+    const toggle = useRef<HTMLButtonElement>(null);
+    const input = useRef<HTMLInputElement>(null);
 
     useEffect(() => {
-        if (props.oppdaterSporsmal) {
-            props.oppdaterSporsmal(null, props.inputValue);
-        }
         // eslint-disable-next-line
-    }, [ props.input.value ]);
+    }, [ input.current.value ]);
 
     function onKeyUp(e: KeyboardEvent) {
         const ESCAPE_KEYCODE = 27;
@@ -59,8 +47,8 @@ const DatoField = (props: DatoFieldProps) => {
 
     function lukk() {
         setErApen(false);
-        if (toggle) {
-            toggle.focus();
+        if (toggle.current) {
+            toggle.current.focus();
         }
     }
 
@@ -71,9 +59,9 @@ const DatoField = (props: DatoFieldProps) => {
             : props.parseVerdi(verdi);
     }
 
-    const { meta, input, id, tidligsteFom, senesteTom } = props;
+    const { id, tidligsteFom, senesteTom } = props;
     const classNameMaskedInput = cls('skjemaelement__input  datovelger__input', {
-        'skjemaelement__input--harFeil': meta.touched && meta.error,
+        'skjemaelement__input--harFeil': true,
     });
 
     return (
@@ -88,23 +76,22 @@ const DatoField = (props: DatoFieldProps) => {
                 }}>
                 <div className="datovelger__inputContainer">
                     <MaskedInput
+                        name={props.name}
                         id={id}
                         type="tel"
+                        onChange={props.onChange}
                         mask="11.11.1111"
                         autoComplete="off"
                         placeholder="dd.mm.åååå"
-                        onKeyUp={() => {
-                            setErApen(false);
-                        }}
+                        ref={props.ref}
+                        onKeyUp={() => setErApen(false)}
                         className={classNameMaskedInput}
-                        {...input.value}
+                        {...input.current.value}
                     />
                     <button
                         type="button"
                         className="js-toggle datovelger__toggleDayPicker"
-                        ref={(c) => {
-                            toggle = c as HTMLButtonElement;
-                        }}
+                        ref={toggle}
                         id={`toggle-${id}`}
                         onClick={(e) => {
                             e.preventDefault();
@@ -121,27 +108,26 @@ const DatoField = (props: DatoFieldProps) => {
                         erApen={erApen}
                         tidligsteFom={tidligsteFom}
                         senesteTom={senesteTom}
+                        input={null}
                         onDayClick={(event: MouseEvent, jsDato: string) => {
-                            const verdi = parseVerdi(jsDato);
-                            props.change(meta.form, props.input.name, verdi);
-                            props.touch(meta.form, props.input.name);
+                            /*
+                                                        const verdi = parseVerdi(jsDato);
+                                                        props.change(meta.form, input.current.name, verdi);
+                                                        props.touch(meta.form, input.current.name);
+                            */
                             lukk();
                         }}
-                        onKeyUp={(e: KeyboardEvent) => {
-                            onKeyUp(e);
-                        }}
-                        lukk={() => {
-                            lukk();
-                        }}
+                        onKeyUp={(e: KeyboardEvent) => onKeyUp(e)}
+                        lukk={() => lukk()}
                     />
                 </Vis>
-                <SkjemaFeilmelding {...meta} />
+                <SkjemaFeilmelding error={''} touched={true} />
             </div>
         </div>
     );
 };
 
-export const genererValidate = (props: DatoVelgerProps) => {
+export const genererValidate = (props: DatoFieldProps) => {
     return (verdi: string) => {
         // TODO: Sjekk .format
         /*
@@ -156,22 +142,11 @@ export const genererValidate = (props: DatoVelgerProps) => {
     };
 };
 
-interface DatoVelgerProps {
-    tidligsteFom?: Date;
-    senesteTom?: Date;
-    oppdaterSporsmal: ((event: any, newValue: any) => void) | null;
-    format: Function;
-    parse: Function;
-    parseVerdi: Function;
-    name: string;
-    id: string;
-    ref: any;
-}
-
-const DatoVelger = (props: DatoVelgerProps) => {
+const DatoVelger = React.forwardRef((props: DatoFieldProps, ref) => {
     return (
-        <input type="date" />
+        <DatoField ref={ref} {...props} />
     );
-};
+});
+DatoVelger.displayName = 'DatoVelger';
 
 export default DatoVelger;

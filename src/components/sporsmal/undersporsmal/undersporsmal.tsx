@@ -1,51 +1,45 @@
 import React from 'react';
-import { Sporsmal } from '../../../types/types';
-import { RSSvartype } from '../../../types/rs-types/rs-svartype';
-import UkjentSporsmal from '../ukjent-sporsmal';
-import CheckboxPanel from '../typer/checkbox-panel';
 import Sporsmalene from '../sporsmalene';
+import { Sporsmal } from '../../../types/types';
+import UkjentSporsmal from '../ukjent-sporsmal';
+import { RSSvartype } from '../../../types/rs-types/rs-svartype';
+import CheckboxPanel from '../typer/checkbox-panel';
+import DatoKomp from '../typer/dato-komp';
 import JaNeiKomp from '../typer/ja-nei-komp';
 import TallKomp from '../typer/tall-komp';
-import DatoKomp from '../typer/dato-komp';
-
-interface SoknadUndersporsmalProps {
-    children: React.ReactNode;
-}
-
-const SoknadUndersporsmal = ({ children }: SoknadUndersporsmalProps) => {
-    return <div className="soknad__undersporsmal">{children}</div>;
-};
 
 interface UndersporsmalProps {
     sporsmal: Sporsmal;
+    register?: Function;
+    errors?: any;
 }
 
-const Undersporsmal = ({ sporsmal }: UndersporsmalProps) => {
+const Undersporsmal = ({ sporsmal, register, errors }: UndersporsmalProps) => {
     switch (sporsmal.svartype) {
         case RSSvartype.CHECKBOX:
         case RSSvartype.CHECKBOX_PANEL:
-            return <CheckboxPanel />;
+            return <CheckboxPanel sporsmal={sporsmal} register={register} errors={errors} />;
 
         case RSSvartype.DATO:
-            return <DatoKomp />;
+            return <DatoKomp sporsmal={sporsmal} register={register} errors={errors} />;
 
         case RSSvartype.TIMER:
         case RSSvartype.PROSENT:
         case RSSvartype.PERIODER:
         case RSSvartype.JA_NEI:
-            return <JaNeiKomp />;
+            return <JaNeiKomp sporsmal={sporsmal} register={register} errors={errors} />;
 
         case RSSvartype.CHECKBOX_GRUPPE:
         case RSSvartype.TALL:
-            return <TallKomp desimaler={0} />;
+            return <TallKomp sporsmal={sporsmal} register={register} errors={errors} desimaler={0} />;
 
         case RSSvartype.RADIO_GRUPPE:
         case RSSvartype.RADIO_GRUPPE_TIMER_PROSENT:
         case RSSvartype.FRITEKST: {
             return (
-                <SoknadUndersporsmal>
+                <div className="soknad__undersporsmal">
                     <Sporsmalene />
-                </SoknadUndersporsmal>
+                </div>
             );
         }
         case RSSvartype.IKKE_RELEVANT: {

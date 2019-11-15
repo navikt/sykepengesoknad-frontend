@@ -1,70 +1,84 @@
-import React from 'react';
+import React, { useState } from 'react';
 import dayjs from 'dayjs';
-import useForm from 'react-hook-form';
-import { useHistory, useParams } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 import { Normaltekst } from 'nav-frontend-typografi';
-import { formaterEnkeltverdi, genererParseForEnkeltverdi } from '../field-utils';
-import DatoVelger from '../../skjema/datovelger/dato-velger';
-import { getOnChangeForDato } from '../../../utils/get-on-change';
-import { useAppStore } from '../../../data/stores/app-store';
-import { pathUtenSteg } from '../sporsmal-utils';
-import FeilOppsummering from '../../skjema/feiloppsummering/feil-oppsummering';
-import Vis from '../../../utils/vis';
-import Knapperad from '../sporsmal-form/knapperad';
 import tekster from '../sporsmal-tekster';
+import { Sporsmal } from '../../../types/types';
+import FeilOppsummering from '../../skjema/feiloppsummering/feil-oppsummering';
+import DateRangePicker from '@wojtekmaj/react-daterange-picker/dist/entry.nostyle';
+import './react-calendar.less';
+import './react-daterange-picker.less';
 
-const DatoKomp = () => {
-    const { handleSubmit, register, errors } = useForm();
-    const { valgtSoknad, setValgtSoknad } = useAppStore();
-    const history = useHistory();
+interface DatoProps {
+    sporsmal: Sporsmal;
+    register: Function;
+    errors: any;
+}
+
+const startDato = dayjs('2019-11-11').toDate();
+const stoppDato = dayjs('2019-11-12').toDate();
+
+const DatoKomp = ({ sporsmal, register, errors }: DatoProps) => {
     const { stegId } = useParams();
-    const spmIndex = parseInt(stegId) - 1;
-    const sporsmal = valgtSoknad.sporsmal[spmIndex];
     const compId = 'spm_' + stegId;
     const feilmelding = tekster['soknad.feilmelding.' + sporsmal.tag.toLowerCase()];
+    const [ value, setValue ] = useState<Date[]>([ dayjs(sporsmal.min).toDate(), dayjs(sporsmal.max).toDate() ]);
+    const [ open, setOpen ] = useState<boolean>(false);
 
-    const parse = genererParseForEnkeltverdi();
-    const onChange = getOnChangeForDato({});
-
-    const onSubmit = (data: any) => {
-        const svar: any = { verdi: data['sporsmal_' + stegId] };
-        sporsmal.svarliste = { sporsmalId: sporsmal.id, svar: [ svar ]};
-        setValgtSoknad(valgtSoknad);
-        history.push(pathUtenSteg(history.location.pathname) + '/' + (spmIndex + 2));
+    const onChange = (value: any) => {
+        setValue(value);
+        setOpen(true);
     };
 
+    const onClose = () => {
+        setOpen(false)
+    };
+
+    const onOpen = () => {
+        const cal: HTMLDivElement = document.querySelector('.react-calendar');
+        cal.setAttribute('tabindex', '-1');
+        cal.focus();
+    };
+
+    console.log('sporsmal.min', dayjs(sporsmal.min).toDate()); // eslint-disable-line
+    console.log('sporsmal.max', dayjs(sporsmal.max).toDate()); // eslint-disable-line
+    // const parse = genererParseForEnkeltverdi();
+    // const onChange = getOnChangeForDato({});
+
     return (
-        <form onSubmit={handleSubmit(onSubmit)} className="sporsmal__form">
+        <>
             <FeilOppsummering visFeilliste={true} errors={errors} />
 
             <Normaltekst tag="label" className="skjema__sporsmal">
                 {sporsmal.sporsmalstekst}
             </Normaltekst>
 
-            <DatoVelger
-                oppdaterSporsmal={onChange}
-                format={formaterEnkeltverdi}
-                parse={parse}
-                parseVerdi={parse}
-                name="verdi"
+            <DateRangePicker
                 id={compId}
-                tidligsteFom={dayjs(sporsmal.min).toDate()}
-                senesteTom={dayjs(sporsmal.max).toDate()}
+                name="verdi"
+                locale="nb-NO"
+                format="dd.MM.yyyy"
+                /*
+                                minDate={dayjs(sporsmal.min).toDate()}
+                                maxDate={dayjs(sporsmal.max).toDate()}
+                */
+                onChange={onChange}
+                onCalendarClose={onClose}
+                isOpen={open}
+                value={value}
                 ref={register({
-                    validate: value => value === true || feilmelding
+                    validate: (value: any) => value === true || feilmelding,
+                    required: true
                 })}
+                calendarAriaLabel="Åpne/lukk kalender"
+                clearAriaLabel="Tøm"
+                dayAriaLabel="Dag"
+                monthAriaLabel="Mnd"
+                yearAriaLabel="År"
+                nativeInputAriaLabel="Dato"
+                onCalendarOpen={onOpen}
             />
-
-            <div role="alert" aria-live="assertive">
-                <Vis hvis={errors[compId] !== undefined}>
-                    <div className="skjemaelement__feilmelding">
-                        <Normaltekst tag="span">{feilmelding}</Normaltekst>
-                    </div>
-                </Vis>
-            </div>
-
-            <Knapperad onSubmit={onSubmit} />
-        </form>
+        </>
     );
 };
 

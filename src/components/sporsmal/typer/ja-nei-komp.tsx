@@ -1,11 +1,10 @@
-import React, { useState } from 'react';
-import { useHistory, useParams } from 'react-router-dom';
-import { useAppStore } from '../../../data/stores/app-store';
 import useForm from 'react-hook-form';
-import FeilOppsummering from '../../skjema/feiloppsummering/feil-oppsummering';
-import Knapperad from '../sporsmal-form/knapperad';
-import { pathUtenSteg } from '../sporsmal-utils';
+import React, { useState } from 'react';
 import { Normaltekst } from 'nav-frontend-typografi';
+import { useParams } from 'react-router-dom';
+import { Sporsmal } from '../../../types/types';
+import { hentSvarVerdi } from '../sporsmal-utils';
+import FeilOppsummering from '../../skjema/feiloppsummering/feil-oppsummering';
 
 const jaNeiValg = [ {
     value: 'ja',
@@ -15,25 +14,23 @@ const jaNeiValg = [ {
     label: 'Nei',
 } ];
 
-export const JaNeiKomp = () => {
-    const { handleSubmit, errors } = useForm();
-    const { valgtSoknad, setValgtSoknad } = useAppStore();
-    const [ valgt, setValgt ] = useState<string>();
-    const history = useHistory();
+interface JaNeiProps {
+    sporsmal: Sporsmal;
+    register: Function;
+    errors: any;
+}
+
+export const JaNeiKomp = ({ sporsmal, register, errors }: JaNeiProps) => {
+    const [ valgt, setValgt ] = useState<string>('');
     const { stegId } = useParams();
-    const spmIndex = parseInt(stegId) - 1;
-    const sporsmal = valgtSoknad.sporsmal[spmIndex];
     const compId = 'spm_' + stegId;
 
-    const onSubmit = (data: any) => {
-        const svar: any = { verdi: data.verdi };
-        sporsmal.svarliste = { sporsmalId: sporsmal.id, svar: [ svar ] };
-        setValgtSoknad(valgtSoknad);
-        history.push(pathUtenSteg(history.location.pathname) + '/' + (spmIndex + 2));
-    };
+    useForm({
+        defaultValues: { verdi: hentSvarVerdi(sporsmal) }
+    });
 
     return (
-        <form onSubmit={handleSubmit(onSubmit)} className="sporsmal__form">
+        <>
             <FeilOppsummering visFeilliste={true} errors={errors} />
 
             <div className="inputPanelGruppe inputPanelGruppe--horisontal">
@@ -63,6 +60,9 @@ export const JaNeiKomp = () => {
                                         checked={OK}
                                         value={valg.value}
                                         onChange={() => setValgt(valg.value)}
+                                        ref={register({
+                                            validate: (value: any) => value !== undefined || 'Må fylles ut!'
+                                        })}
                                     />
                                     <span className="inputPanel__label">{valg.label}</span>
                                 </label>
@@ -71,9 +71,7 @@ export const JaNeiKomp = () => {
                     </div>
                 </fieldset>
             </div>
-
-            <Knapperad onSubmit={onSubmit} />
-        </form>
+        </>
     );
 };
 

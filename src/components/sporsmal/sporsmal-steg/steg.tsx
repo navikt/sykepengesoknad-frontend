@@ -1,7 +1,8 @@
 import React from 'react';
 import cls from 'classnames';
-import { useParams } from 'react-router';
+import { useParams, useHistory } from 'react-router';
 import Vis from '../../../utils/vis';
+import { pathUtenSteg } from '../sporsmal-utils';
 
 const innerCls = (aktiv: boolean, ferdig: boolean, disabled: boolean) =>
     cls('stegindikator__steg-inner', {
@@ -11,7 +12,7 @@ const innerCls = (aktiv: boolean, ferdig: boolean, disabled: boolean) =>
         'stegindikator__steg-inner--interaktiv': !aktiv
     });
 
-interface StegProps {
+export interface StegProps {
     label: string;
     index: number;
 }
@@ -23,11 +24,16 @@ const Steg = ({ label, index }: StegProps) => {
     const erAktiv = aktivtSteg === num;
     const erPassert = aktivtSteg > num;
     const disabled = !erPassert && !erAktiv;
+    const history = useHistory();
+
+    function goTo(index: number) {
+        history.push(pathUtenSteg(history.location.pathname) + '/' + (index + 1));
+    }
 
     return (
         <li className="stegindikator__steg" aria-current={(erAktiv) ? 'step' : undefined}>
             <Vis hvis={aktivtSteg === index + 2}>
-                <button className={innerCls(erAktiv, erPassert, disabled)} title={label} disabled={disabled}>
+                <button className={innerCls(erAktiv, erPassert, disabled)} title={label} disabled={disabled} onClick={() => goTo(index)}>
                     <div className="stegindikator__steg-num">{num}</div>
                     {label}
                 </button>

@@ -1,12 +1,10 @@
 import React from 'react';
-import { RSSvartype } from '../../types/rs-types/rs-svartype';
-import DatoKomp from './typer/dato-komp';
-import TallKomp from './typer/tall-komp';
-import tekster from './sporsmal-tekster';
-import CheckboxPanel from './typer/checkbox-panel';
 import { useParams } from 'react-router-dom';
+import { SpmKomp } from '../../types/enums';
+//import { RSSvar } from '../../types/rs-types/rs-svar';
+import SporsmalForm from './sporsmal-form/sporsmal-form';
 import { useAppStore } from '../../data/stores/app-store';
-import JaNeiKomp from './typer/ja-nei-komp';
+import { RSSvartype } from '../../types/rs-types/rs-svartype';
 import './sporsmalene.less';
 
 const Sporsmalene = () => {
@@ -15,18 +13,27 @@ const Sporsmalene = () => {
     const spmIndex = parseInt(stegId) - 1;
     const sporsmal = valgtSoknad.sporsmal[spmIndex];
 
+    /*
+        valgtSoknad.sporsmal.map((spm, idx) => {
+            console.log('index, spørsmål', idx + ' ' + spm.sporsmalstekst.substring(0, 25)); // eslint-disable-line
+            spm.svarliste.svar.map((svar: RSSvar) => {
+                console.log('svar', svar.verdi); // eslint-disable-line
+            })
+        });
+    */
+
     switch (sporsmal.svartype) {
         case RSSvartype.CHECKBOX: {
-            return <CheckboxPanel />;
+            return <SporsmalForm sporsmal={sporsmal} type={SpmKomp.CHECKBOX_PANEL} />
         }
         case RSSvartype.CHECKBOX_GRUPPE: {
             return null;
         }
         case RSSvartype.CHECKBOX_PANEL: {
-            return <CheckboxPanel />;
+            return <SporsmalForm sporsmal={sporsmal} type={SpmKomp.CHECKBOX_PANEL} />
         }
         case RSSvartype.DATO: {
-            return <DatoKomp />;
+            return <SporsmalForm sporsmal={sporsmal} type={SpmKomp.DATO} />
         }
         case RSSvartype.FRITEKST: {
             return null;
@@ -35,7 +42,7 @@ const Sporsmalene = () => {
             return null;
         }
         case RSSvartype.JA_NEI: {
-            return <JaNeiKomp />;
+            return <SporsmalForm sporsmal={sporsmal} type={SpmKomp.JA_NEI} />
         }
         case RSSvartype.LAND: {
             return null;
@@ -47,7 +54,7 @@ const Sporsmalene = () => {
             return null;
         }
         case RSSvartype.PROSENT: {
-            return <TallKomp label={tekster['soknad.prosent']} desimaler={1} />;
+            return <SporsmalForm sporsmal={sporsmal} type={SpmKomp.TALL} desimaler={1} />
         }
         case RSSvartype.RADIO:
         case RSSvartype.RADIO_GRUPPE:
@@ -55,10 +62,10 @@ const Sporsmalene = () => {
             return null;
         }
         case RSSvartype.TALL: {
-            return <TallKomp label={sporsmal.undertekst} desimaler={2} />;
+            return <SporsmalForm sporsmal={sporsmal} type={SpmKomp.TALL} desimaler={2} />
         }
         case RSSvartype.TIMER: {
-            return <TallKomp label={tekster['soknad.timer-totalt']} desimaler={0} />;
+            return <SporsmalForm sporsmal={sporsmal} type={SpmKomp.TALL} desimaler={0} />
         }
         default: {
             return null;

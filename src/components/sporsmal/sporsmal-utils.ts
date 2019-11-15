@@ -1,6 +1,6 @@
+import { TagTyper } from '../../types/enums';
 import { fjernIndexFraTag } from './field-utils';
 import { Soknad, Sporsmal } from '../../types/types';
-import { TagTyper } from '../../types/enums';
 
 export const hentSporsmalForOppsummering = (soknad: Soknad) => {
     return soknad.sporsmal.filter((s) => {

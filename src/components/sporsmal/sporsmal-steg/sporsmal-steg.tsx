@@ -1,14 +1,14 @@
 import React from 'react';
 import parser from 'html-react-parser';
-import { useHistory, useParams } from 'react-router-dom';
 import { Normaltekst } from 'nav-frontend-typografi';
-import Stegindikator from 'nav-frontend-stegindikator';
+import { useParams } from 'react-router-dom';
+import Steg from './steg';
+import tekster from '../sporsmal-tekster';
 import { Sporsmal } from '../../../types/types';
 import { TagTyper } from '../../../types/enums';
-import tekster from '../sporsmal-tekster';
-import { hentNokkel, pathUtenSteg } from '../sporsmal-utils';
-import Steg from './steg';
+import { hentNokkel } from '../sporsmal-utils';
 import { useAppStore } from '../../../data/stores/app-store';
+import 'nav-frontend-stegindikator-style';
 import './sporsmal-steg.less';
 
 interface FremdriftsbarProps {
@@ -35,7 +35,6 @@ const Fremdriftsbar = ({ antallSteg }: FremdriftsbarProps) => {
 
 const SporsmalSteg = () => {
     const { valgtSoknad } = useAppStore();
-    const history = useHistory();
     const { stegId } = useParams();
     const aktivtSteg = parseInt(stegId);
     const steg = valgtSoknad.sporsmal.filter(s => s.tag !== TagTyper.VAER_KLAR_OVER_AT);
@@ -44,15 +43,13 @@ const SporsmalSteg = () => {
         <div className="stegindikator-med-fremdriftsbar" role="progressbar"
             aria-valuenow={aktivtSteg} aria-valuemin={1} aria-valuemax={steg.length}
         >
-            <Stegindikator kompakt onChange={(stegIndex) => {
-                history.push(pathUtenSteg(history.location.pathname) + '/' + (stegIndex + 1));
-            }}>
-                {steg.map((sporsmal: Sporsmal, index) => {
-                    return (
-                        <Steg index={index} key={index} label={tekster[hentNokkel(valgtSoknad, index + 1)]} />
-                    );
-                })}
-            </Stegindikator>
+            <div className={'stegindikator stegindikator--kompakt'}>
+                <ol className="stegindikator__liste">
+                    {steg.map((sporsmal: Sporsmal, idx: number) => {
+                        return <Steg index={idx} key={idx} label={tekster[hentNokkel(valgtSoknad, idx + 1)]} />;
+                    })}
+                </ol>
+            </div>
             <Fremdriftsbar antallSteg={steg.length} />
         </div>
     );
