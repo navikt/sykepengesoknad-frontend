@@ -1,37 +1,36 @@
 import React from 'react';
 import Sporsmalene from '../sporsmalene';
-import { Sporsmal } from '../../../types/types';
-import UkjentSporsmal from '../ukjent-sporsmal';
-import { RSSvartype } from '../../../types/rs-types/rs-svartype';
-import CheckboxPanel from '../typer/checkbox-panel';
+import TallKomp from '../typer/tall-komp';
 import DatoKomp from '../typer/dato-komp';
 import JaNeiKomp from '../typer/ja-nei-komp';
-import TallKomp from '../typer/tall-komp';
+import { Sporsmal } from '../../../types/types';
+import UkjentSporsmal from '../ukjent-sporsmal';
+import CheckboxPanel from '../typer/checkbox-panel';
+import { RSSvartype } from '../../../types/rs-types/rs-svartype';
+import './undersporsmal.less';
 
 interface UndersporsmalProps {
     sporsmal: Sporsmal;
-    register?: Function;
-    errors?: any;
 }
 
-const Undersporsmal = ({ sporsmal, register, errors }: UndersporsmalProps) => {
+const Undersporsmal = ({ sporsmal }: UndersporsmalProps) => {
     switch (sporsmal.svartype) {
         case RSSvartype.CHECKBOX:
         case RSSvartype.CHECKBOX_PANEL:
-            return <CheckboxPanel sporsmal={sporsmal} register={register} errors={errors} />;
+            return <CheckboxPanel sporsmal={sporsmal} />;
 
         case RSSvartype.DATO:
-            return <DatoKomp sporsmal={sporsmal} register={register} errors={errors} />;
+            return <DatoKomp sporsmal={sporsmal} />;
 
         case RSSvartype.TIMER:
         case RSSvartype.PROSENT:
         case RSSvartype.PERIODER:
         case RSSvartype.JA_NEI:
-            return <JaNeiKomp sporsmal={sporsmal} register={register} errors={errors} />;
+            return <JaNeiKomp sporsmal={sporsmal} />;
 
         case RSSvartype.CHECKBOX_GRUPPE:
         case RSSvartype.TALL:
-            return <TallKomp sporsmal={sporsmal} register={register} errors={errors} desimaler={0} />;
+            return <TallKomp sporsmal={sporsmal} desimaler={0} />;
 
         case RSSvartype.RADIO_GRUPPE:
         case RSSvartype.RADIO_GRUPPE_TIMER_PROSENT:

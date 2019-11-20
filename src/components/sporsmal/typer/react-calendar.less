@@ -8,8 +8,8 @@
     width: 310px;
     max-width: 100%;
     padding: 0 1rem 1rem;
-    background: white;
-    border: 1px solid #a0a096;
+    background: @white;
+    border: 1px solid @navGra40;
     font-family: @font-family;
     line-height: 1.125rem;
 
@@ -19,9 +19,9 @@
         position: absolute;
         top: -9px;
         transform: rotate(-45deg);
-        border-top: 1px solid #b7b1a9;
-        border-right: 1px solid #b7b1a9;
-        background-color: #fff;
+        border-top: 1px solid @navGra40;
+        border-right: 1px solid @navGra40;
+        background-color: @white;
         width: 1rem;
         height: 1rem;
     }
@@ -63,7 +63,7 @@
             }
 
             &[disabled] {
-                background-color: #f0f0f0;
+                background-color: @navLysGra;
             }
 
             &.react-calendar__navigation__label {
@@ -112,11 +112,11 @@
     }
 
     &__month-view__days__day--weekend {
-        color: #d10000;
+        color: @navRod;
     }
 
     &__month-view__days__day--neighboringMonth {
-        color: #757575;
+        color: @navGra60;
     }
 
     &__year-view, &__decade-view, &__century-view {
@@ -134,32 +134,32 @@
         font-size: @font-size;
 
         &:disabled {
-            background-color: #f0f0f0;
+            background-color: @navLysGra;
         }
 
         &:enabled {
             &:hover, &:focus {
-                background-color: #e6e6e6;
+                background-color: @navLysGra;
             }
         }
 
         &--hasActive {
-            background: #76baff;
+            background: @navBlaLighten40;
 
             &:enabled {
                 &:hover, &:focus {
-                    background: #a9d4ff;
+                    background: @navBlaLighten60;
                 }
             }
         }
 
         &--active {
-            background: #006edc;
+            background: @navBla;
             color: @white;
 
             &:enabled {
                 &:hover, &:focus {
-                    background: #1087ff;
+                    background: @navBla;
                 }
             }
         }
@@ -167,7 +167,7 @@
 
     &--selectRange {
         .react-calendar__tile--hover {
-            background-color: #e6e6e6;
+            background-color: @navLysGra;
         }
     }
 }

@@ -1,9 +1,14 @@
 import useForm from 'react-hook-form';
 import React, { useState } from 'react';
 import { Normaltekst } from 'nav-frontend-typografi';
-import { useParams } from 'react-router-dom';
-import { Sporsmal } from '../../../types/types';
-import { hentSvarVerdi } from '../sporsmal-utils';
+import { useHistory, useParams } from 'react-router-dom';
+import Vis from '../../../utils/vis';
+import tekster from '../sporsmal-tekster';
+import { SpmProps } from '../sporsmalene';
+import Knapperad from '../sporsmal-form/knapperad';
+import { useAppStore } from '../../../data/stores/app-store';
+import { hentSvarVerdi, pathUtenSteg } from '../sporsmal-utils';
+import UndersporsmalListe from '../undersporsmal/undersporsmal-liste';
 import FeilOppsummering from '../../skjema/feiloppsummering/feil-oppsummering';
 
 const jaNeiValg = [ {
@@ -14,25 +19,51 @@ const jaNeiValg = [ {
     label: 'Nei',
 } ];
 
-interface JaNeiProps {
-    sporsmal: Sporsmal;
-    register: Function;
-    errors: any;
-}
-
-export const JaNeiKomp = ({ sporsmal, register, errors }: JaNeiProps) => {
-    const [ valgt, setValgt ] = useState<string>('');
+export const JaNeiKomp = ({ sporsmal }: SpmProps) => {
+    const { valgtSoknad, setValgtSoknad } = useAppStore();
+    const history = useHistory();
     const { stegId } = useParams();
-    const compId = 'spm_' + stegId;
+    const spmIndex = parseInt(stegId) - 1;
 
-    useForm({
+    const { handleSubmit, register, errors, watch } = useForm({
         defaultValues: { verdi: hentSvarVerdi(sporsmal) }
     });
 
+    const onSubmit = (data: any) => {
+        const svar: any = { verdi: data.verdi };
+        sporsmal.svarliste = { sporsmalId: sporsmal.id, svar: [ svar ] };
+        setValgtSoknad(valgtSoknad);
+        history.push(pathUtenSteg(history.location.pathname) + '/' + (spmIndex + 2));
+    };
+
     return (
         <>
-            <FeilOppsummering visFeilliste={true} errors={errors} />
+            <Vis hvis={sporsmal.erHovedSporsmal}>
+                <form onSubmit={handleSubmit(onSubmit)} className="sporsmal__form">
+                    <FeilOppsummering visFeilliste={true} errors={errors} />
+                    <JaNeiInput sporsmal={sporsmal} formProps={{ register, errors, watch }} />
+                    <Knapperad onSubmit={onSubmit} />
+                </form>
+            </Vis>
 
+            <Vis hvis={!sporsmal.erHovedSporsmal}>
+                <JaNeiInput sporsmal={sporsmal} formProps={{ register, errors, watch }} />
+            </Vis>
+        </>
+    );
+};
+
+export default JaNeiKomp;
+
+const JaNeiInput = ({ sporsmal, formProps }: SpmProps) => {
+    const [ valgt, setValgt ] = useState<string>('');
+    const { stegId } = useParams();
+    const compId = 'spm_' + stegId;
+    const feilmelding = tekster['soknad.feilmelding.' + sporsmal.tag.toLowerCase()];
+    const watchVerdi = formProps.watch('verdi');
+
+    return (
+        <>
             <div className="inputPanelGruppe inputPanelGruppe--horisontal">
                 <fieldset className="skjema__fieldset">
                     <legend className="skjema__legend">
@@ -60,8 +91,8 @@ export const JaNeiKomp = ({ sporsmal, register, errors }: JaNeiProps) => {
                                         checked={OK}
                                         value={valg.value}
                                         onChange={() => setValgt(valg.value)}
-                                        ref={register({
-                                            validate: (value: any) => value !== undefined || 'Må fylles ut!'
+                                        ref={formProps.register({
+                                            validate: (value: any) => value !== undefined || feilmelding
                                         })}
                                     />
                                     <span className="inputPanel__label">{valg.label}</span>
@@ -71,8 +102,18 @@ export const JaNeiKomp = ({ sporsmal, register, errors }: JaNeiProps) => {
                     </div>
                 </fieldset>
             </div>
-        </>
-    );
-};
 
-export default JaNeiKomp;
+            <div role="alert" aria-live="assertive">
+                <Vis hvis={formProps.errors.verdi !== undefined}>
+                    <Normaltekst tag="span" className="skjemaelement__feilmelding">
+                        {formProps.errors.verdi && formProps.errors.verdi.message}
+                    </Normaltekst>
+                </Vis>
+            </div>
+
+            <Vis hvis={watchVerdi === 'ja'}>
+                <UndersporsmalListe undersporsmal={sporsmal.undersporsmal} />
+            </Vis>
+        </>
+    )
+};

@@ -5,18 +5,16 @@ import { Sporsmal } from '../../../types/types';
 
 export interface UndersporsmalProps {
     undersporsmal: Sporsmal[];
-    register: Function;
-    errors: any;
 }
 
-const UndersporsmalListe = ({ undersporsmal, register, errors }: UndersporsmalProps) => {
+const UndersporsmalListe = ({ undersporsmal }: UndersporsmalProps) => {
     return (
         <Vis hvis={undersporsmal.length > 0}>
             <div className="undersporsmal">
                 {undersporsmal.map((underspm: Sporsmal, idx: number) => {
                     return (
                         <Vis hvis={underspm.kriterieForVisningAvUndersporsmal !== undefined} key={idx}>
-                            <Undersporsmal sporsmal={underspm} key={idx} register={register} errors={errors} />
+                            <Undersporsmal sporsmal={underspm} key={idx} />
                         </Vis>
                     );
                 }).filter((underspm) => underspm !== null)}

@@ -1,4 +1,5 @@
 declare module 'html-react-parser';
+declare module 'react-date-picker';
 declare module '@wojtekmaj/react-daterange-picker';
 declare module '@wojtekmaj/react-daterange-picker/dist/entry.nostyle';
 

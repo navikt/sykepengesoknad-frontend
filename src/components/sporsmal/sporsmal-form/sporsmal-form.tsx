@@ -2,13 +2,8 @@ import React from 'react';
 import useForm from 'react-hook-form';
 import { useHistory, useParams } from 'react-router-dom';
 import Vis from '../../../utils/vis';
-import TallKomp from '../typer/tall-komp';
-import DatoKomp from '../typer/dato-komp';
-import JaNeiKomp from '../typer/ja-nei-komp';
-import { SpmKomp } from '../../../types/enums';
 import { Sporsmal } from '../../../types/types';
 import Knapperad from '../sporsmal-form/knapperad';
-import CheckboxPanel from '../typer/checkbox-panel';
 import { useAppStore } from '../../../data/stores/app-store';
 import { pathUtenSteg } from '../sporsmal-utils';
 import UndersporsmalListe from '../undersporsmal/undersporsmal-liste';
@@ -17,11 +12,10 @@ import tekster from '../sporsmal-tekster';
 
 interface FormProps {
     sporsmal: Sporsmal;
-    type: SpmKomp;
-    desimaler?: number;
+    children: any;
 }
 
-export const SporsmalForm = ({ sporsmal, type, desimaler }: FormProps) => {
+export const SporsmalForm = ({ sporsmal, children }: FormProps) => {
     const { valgtSoknad, setValgtSoknad } = useAppStore();
     const history = useHistory();
     const { stegId } = useParams();
@@ -29,7 +23,8 @@ export const SporsmalForm = ({ sporsmal, type, desimaler }: FormProps) => {
     const compId = 'spm_' + stegId;
     const feilmelding = tekster['soknad.feilmelding.' + sporsmal.tag.toLowerCase()];
 
-    const { handleSubmit, register, errors } = useForm();
+    const { handleSubmit, register, errors, watch } = useForm();
+    const formProps = { handleSubmit, register, errors, watch }
 
     const onSubmit = (data: any) => {
         const svar: any = { verdi: data.verdi };
@@ -40,21 +35,8 @@ export const SporsmalForm = ({ sporsmal, type, desimaler }: FormProps) => {
 
     return (
         <form onSubmit={handleSubmit(onSubmit)} className="sporsmal__form">
-            <Vis hvis={type === SpmKomp.CHECKBOX_PANEL}>
-                <CheckboxPanel sporsmal={sporsmal} register={register} errors={errors}/>
-            </Vis>
 
-            <Vis hvis={type === SpmKomp.DATO}>
-                <DatoKomp sporsmal={sporsmal} register={register} errors={errors}/>
-            </Vis>
-
-            <Vis hvis={type === SpmKomp.JA_NEI}>
-                <JaNeiKomp sporsmal={sporsmal} register={register} errors={errors}/>
-            </Vis>
-
-            <Vis hvis={type === SpmKomp.TALL}>
-                <TallKomp sporsmal={sporsmal} register={register} errors={errors} desimaler={desimaler}/>
-            </Vis>
+            {React.cloneElement(children, { formProps: formProps })}
 
             <div role="alert" aria-live="assertive">
                 <Vis hvis={errors[compId] !== undefined}>
@@ -64,7 +46,7 @@ export const SporsmalForm = ({ sporsmal, type, desimaler }: FormProps) => {
                 </Vis>
             </div>
 
-            <UndersporsmalListe undersporsmal={sporsmal.undersporsmal} register={register} errors={errors} />
+            <UndersporsmalListe undersporsmal={sporsmal.undersporsmal} />
 
             <Vis hvis={sporsmal.erHovedSporsmal}>
                 <Knapperad onSubmit={onSubmit} />

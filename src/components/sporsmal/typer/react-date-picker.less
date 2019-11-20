@@ -1,9 +1,15 @@
 @import '../../../../node_modules/nav-frontend-core/less/_variabler';
 @import '../../../basic';
 
-.react-daterange-picker {
+.react-date-picker {
     display: inline-flex;
     position: relative;
+
+    &, & *, & *:before, & *:after {
+        -moz-box-sizing: border-box;
+        -webkit-box-sizing: border-box;
+        box-sizing: border-box;
+    }
 
     &--disabled {
         background-color: @navLysGra;
@@ -12,28 +18,33 @@
 
     &__wrapper {
         display: flex;
-        padding-left: 4px;
-        border: thin solid @navGra60
+        border: thin solid @navGra60;
     }
 
     &__inputGroup {
-        @digit-width: .54rem;
-        @dot-width: .217rem;
+        @digit-width: .54em;
+        @dot-width: .217em;
+        // own padding + inputs padding + digits width + dots width
+        min-width: calc(~"(4px * 3) + " @digit-width * 8 ~" + " @dot-width * 2);
         flex-grow: 1;
         display: flex;
         padding: 0 2px;
         align-items: baseline;
         box-sizing: content-box;
 
+        &__divider {
+            padding: 1px 0;
+            white-space: pre;
+        }
+
         &__input {
-            font-family: @font-family;
-            font-size: @font-size;
             min-width: @digit-width;
             height: 100%;
             position: relative;
             padding: 0 1px;
             border: 0;
             background: none;
+            font: inherit;
             box-sizing: content-box;
             -moz-appearance: textfield;
 
@@ -54,10 +65,6 @@
         }
     }
 
-    &__range-divider {
-        line-height: 25px;
-    }
-
     &__button {
         border: 0;
         background: transparent;
@@ -67,14 +74,14 @@
             cursor: pointer;
 
             &:hover, &:focus {
-                .react-daterange-picker__button__icon {
+                .react-date-picker__button__icon {
                     stroke: @navBla;
                 }
             }
         }
 
         &:disabled {
-            .react-daterange-picker__button__icon {
+            .react-date-picker__button__icon {
                 stroke: @navGra60;
             }
         }
@@ -95,6 +102,9 @@
         &--closed {
             display: none;
         }
+
+        .react-calendar {
+            border-width: thin;
+        }
     }
 }
-
