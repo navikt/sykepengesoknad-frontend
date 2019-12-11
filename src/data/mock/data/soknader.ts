@@ -18,8 +18,8 @@ export const soknader: any = [
         "korrigerer": null,
         "korrigertAv": null,
         "arbeidssituasjon": "ARBEIDSTAKER",
-        "soknadPerioder": [{ "fom": "2019-09-01", "tom": "2019-09-20", "grad": 100 }],
-        "sporsmal": [{
+        "soknadPerioder": [ { "fom": "2019-09-01", "tom": "2019-09-20", "grad": 100 } ],
+        "sporsmal": [ {
             "id": "581279",
             "tag": "ANSVARSERKLARING",
             "sporsmalstekst": "Jeg vet at jeg kan miste retten til sykepenger hvis opplysningene jeg gir ikke er riktige eller fullstendige. Jeg vet også at NAV kan holde igjen eller kreve tilbake penger, og at å gi feil opplysninger kan være straffbart.",
@@ -42,7 +42,7 @@ export const soknader: any = [
             "pavirkerAndreSporsmal": false,
             "kriterieForVisningAvUndersporsmal": "JA",
             "svar": [],
-            "undersporsmal": [{
+            "undersporsmal": [ {
                 "id": "581281",
                 "tag": "TIDLIGERE_SYK",
                 "sporsmalstekst": null,
@@ -53,7 +53,7 @@ export const soknader: any = [
                 "pavirkerAndreSporsmal": false,
                 "kriterieForVisningAvUndersporsmal": null,
                 "svar": [],
-                "undersporsmal": [{
+                "undersporsmal": [ {
                     "id": "581282",
                     "tag": "TIDLIGERE_EGENMELDING",
                     "sporsmalstekst": "Jeg var syk med egenmelding",
@@ -64,7 +64,7 @@ export const soknader: any = [
                     "pavirkerAndreSporsmal": false,
                     "kriterieForVisningAvUndersporsmal": "CHECKED",
                     "svar": [],
-                    "undersporsmal": [{
+                    "undersporsmal": [ {
                         "id": "581283",
                         "tag": "EGENMELDINGER_NAR",
                         "sporsmalstekst": "Hvilke dager var du syk med egenmelding? Du trenger bare oppgi dager før 1. september 2019.",
@@ -76,7 +76,7 @@ export const soknader: any = [
                         "kriterieForVisningAvUndersporsmal": null,
                         "svar": [],
                         "undersporsmal": []
-                    }]
+                    } ]
                 }, {
                     "id": "581284",
                     "tag": "TIDLIGERE_PAPIRSYKMELDING",
@@ -88,7 +88,7 @@ export const soknader: any = [
                     "pavirkerAndreSporsmal": false,
                     "kriterieForVisningAvUndersporsmal": "CHECKED",
                     "svar": [],
-                    "undersporsmal": [{
+                    "undersporsmal": [ {
                         "id": "581285",
                         "tag": "PAPIRSYKMELDING_NAR",
                         "sporsmalstekst": "Hvilke dager var du syk med papirsykmelding? Du trenger bare oppgi dager før 1. september 2019.",
@@ -100,9 +100,9 @@ export const soknader: any = [
                         "kriterieForVisningAvUndersporsmal": null,
                         "svar": [],
                         "undersporsmal": []
-                    }]
-                }]
-            }]
+                    } ]
+                } ]
+            } ]
         }, {
             "id": "581286",
             "tag": "TILBAKE_I_ARBEID",
@@ -114,7 +114,7 @@ export const soknader: any = [
             "pavirkerAndreSporsmal": true,
             "kriterieForVisningAvUndersporsmal": "JA",
             "svar": [],
-            "undersporsmal": [{
+            "undersporsmal": [ {
                 "id": "581287",
                 "tag": "TILBAKE_NAR",
                 "sporsmalstekst": "Når begynte du å jobbe igjen?",
@@ -126,7 +126,7 @@ export const soknader: any = [
                 "kriterieForVisningAvUndersporsmal": null,
                 "svar": [],
                 "undersporsmal": []
-            }]
+            } ]
         }, {
             "id": "581288",
             "tag": "FERIE_V2",
@@ -138,7 +138,7 @@ export const soknader: any = [
             "pavirkerAndreSporsmal": false,
             "kriterieForVisningAvUndersporsmal": "JA",
             "svar": [],
-            "undersporsmal": [{
+            "undersporsmal": [ {
                 "id": "581289",
                 "tag": "FERIE_NAR_V2",
                 "sporsmalstekst": "Når tok du ut ferie?",
@@ -150,7 +150,7 @@ export const soknader: any = [
                 "kriterieForVisningAvUndersporsmal": null,
                 "svar": [],
                 "undersporsmal": []
-            }]
+            } ]
         }, {
             "id": "581290",
             "tag": "PERMISJON_V2",
@@ -162,7 +162,7 @@ export const soknader: any = [
             "pavirkerAndreSporsmal": false,
             "kriterieForVisningAvUndersporsmal": "JA",
             "svar": [],
-            "undersporsmal": [{
+            "undersporsmal": [ {
                 "id": "581291",
                 "tag": "PERMISJON_NAR_V2",
                 "sporsmalstekst": "Når tok du permisjon?",
@@ -174,7 +174,7 @@ export const soknader: any = [
                 "kriterieForVisningAvUndersporsmal": null,
                 "svar": [],
                 "undersporsmal": []
-            }]
+            } ]
         }, {
             "id": "581292",
             "tag": "UTLAND_V2",
@@ -186,7 +186,7 @@ export const soknader: any = [
             "pavirkerAndreSporsmal": false,
             "kriterieForVisningAvUndersporsmal": "JA",
             "svar": [],
-            "undersporsmal": [{
+            "undersporsmal": [ {
                 "id": "581293",
                 "tag": "UTLAND_NAR_V2",
                 "sporsmalstekst": "Når var du utenfor Norge?",
@@ -198,7 +198,7 @@ export const soknader: any = [
                 "kriterieForVisningAvUndersporsmal": null,
                 "svar": [],
                 "undersporsmal": []
-            }]
+            } ]
         }, {
             "id": "581294",
             "tag": "JOBBET_DU_100_PROSENT_0",
@@ -210,7 +210,7 @@ export const soknader: any = [
             "pavirkerAndreSporsmal": false,
             "kriterieForVisningAvUndersporsmal": "JA",
             "svar": [],
-            "undersporsmal": [{
+            "undersporsmal": [ {
                 "id": "581295",
                 "tag": "HVOR_MANGE_TIMER_PER_UKE_0",
                 "sporsmalstekst": "Hvor mange timer i uken jobber du vanligvis? Varierer det, kan du oppgi gjennomsnittet.",
@@ -233,56 +233,59 @@ export const soknader: any = [
                 "pavirkerAndreSporsmal": false,
                 "kriterieForVisningAvUndersporsmal": null,
                 "svar": [],
-                "undersporsmal": [{
-                    "id": "581297",
-                    "tag": "HVOR_MYE_PROSENT_0",
-                    "sporsmalstekst": "prosent",
-                    "undertekst": null,
-                    "svartype": "RADIO",
-                    "min": null,
-                    "max": null,
-                    "pavirkerAndreSporsmal": false,
-                    "kriterieForVisningAvUndersporsmal": "CHECKED",
-                    "svar": [{ "verdi": "CHECKED", "avgittAv": null }],
-                    "undersporsmal": [{
-                        "id": "581298",
-                        "tag": "HVOR_MYE_PROSENT_VERDI_0",
-                        "sporsmalstekst": null,
-                        "undertekst": "prosent",
-                        "svartype": "TALL",
-                        "min": "1",
-                        "max": "99",
+                "undersporsmal": [
+                    {
+                        "id": "581297",
+                        "tag": "HVOR_MYE_PROSENT_0",
+                        "sporsmalstekst": "prosent",
+                        "undertekst": null,
+                        "svartype": "RADIO",
+                        "min": null,
+                        "max": null,
                         "pavirkerAndreSporsmal": false,
-                        "kriterieForVisningAvUndersporsmal": null,
-                        "svar": [],
-                        "undersporsmal": []
-                    }]
-                }, {
-                    "id": "581299",
-                    "tag": "HVOR_MYE_TIMER_0",
-                    "sporsmalstekst": "timer",
-                    "undertekst": null,
-                    "svartype": "RADIO",
-                    "min": null,
-                    "max": null,
-                    "pavirkerAndreSporsmal": false,
-                    "kriterieForVisningAvUndersporsmal": "CHECKED",
-                    "svar": [],
-                    "undersporsmal": [{
-                        "id": "581300",
-                        "tag": "HVOR_MYE_TIMER_VERDI_0",
-                        "sporsmalstekst": null,
-                        "undertekst": "timer totalt",
-                        "svartype": "TALL",
-                        "min": "1",
-                        "max": "429",
+                        "kriterieForVisningAvUndersporsmal": "CHECKED",
+                        "svar": [ { "verdi": "CHECKED", "avgittAv": null } ],
+                        "undersporsmal": [ {
+                            "id": "581298",
+                            "tag": "HVOR_MYE_PROSENT_VERDI_0",
+                            "sporsmalstekst": null,
+                            "undertekst": "prosent",
+                            "svartype": "TALL",
+                            "min": "1",
+                            "max": "99",
+                            "pavirkerAndreSporsmal": false,
+                            "kriterieForVisningAvUndersporsmal": null,
+                            "svar": [],
+                            "undersporsmal": []
+                        } ]
+                    },
+                    {
+                        "id": "581299",
+                        "tag": "HVOR_MYE_TIMER_0",
+                        "sporsmalstekst": "timer",
+                        "undertekst": null,
+                        "svartype": "RADIO",
+                        "min": null,
+                        "max": null,
                         "pavirkerAndreSporsmal": false,
-                        "kriterieForVisningAvUndersporsmal": null,
+                        "kriterieForVisningAvUndersporsmal": "CHECKED",
                         "svar": [],
-                        "undersporsmal": []
-                    }]
-                }]
-            }]
+                        "undersporsmal": [ {
+                            "id": "581300",
+                            "tag": "HVOR_MYE_TIMER_VERDI_0",
+                            "sporsmalstekst": null,
+                            "undertekst": "timer totalt",
+                            "svartype": "TALL",
+                            "min": "1",
+                            "max": "429",
+                            "pavirkerAndreSporsmal": false,
+                            "kriterieForVisningAvUndersporsmal": null,
+                            "svar": [],
+                            "undersporsmal": []
+                        } ]
+                    }
+                ]
+            } ]
         }, {
             "id": "581301",
             "tag": "ANDRE_INNTEKTSKILDER",
@@ -294,7 +297,7 @@ export const soknader: any = [
             "pavirkerAndreSporsmal": false,
             "kriterieForVisningAvUndersporsmal": "JA",
             "svar": [],
-            "undersporsmal": [{
+            "undersporsmal": [ {
                 "id": "581302",
                 "tag": "HVILKE_ANDRE_INNTEKTSKILDER",
                 "sporsmalstekst": "Hvilke andre inntektskilder har du?",
@@ -305,7 +308,7 @@ export const soknader: any = [
                 "pavirkerAndreSporsmal": false,
                 "kriterieForVisningAvUndersporsmal": null,
                 "svar": [],
-                "undersporsmal": [{
+                "undersporsmal": [ {
                     "id": "581303",
                     "tag": "INNTEKTSKILDE_ANDRE_ARBEIDSFORHOLD",
                     "sporsmalstekst": "andre arbeidsforhold",
@@ -316,7 +319,7 @@ export const soknader: any = [
                     "pavirkerAndreSporsmal": false,
                     "kriterieForVisningAvUndersporsmal": "CHECKED",
                     "svar": [],
-                    "undersporsmal": [{
+                    "undersporsmal": [ {
                         "id": "581304",
                         "tag": "INNTEKTSKILDE_ANDRE_ARBEIDSFORHOLD_ER_DU_SYKMELDT",
                         "sporsmalstekst": "Er du sykmeldt fra dette?",
@@ -328,7 +331,7 @@ export const soknader: any = [
                         "kriterieForVisningAvUndersporsmal": null,
                         "svar": [],
                         "undersporsmal": []
-                    }]
+                    } ]
                 }, {
                     "id": "581305",
                     "tag": "INNTEKTSKILDE_SELVSTENDIG",
@@ -340,7 +343,7 @@ export const soknader: any = [
                     "pavirkerAndreSporsmal": false,
                     "kriterieForVisningAvUndersporsmal": "CHECKED",
                     "svar": [],
-                    "undersporsmal": [{
+                    "undersporsmal": [ {
                         "id": "581306",
                         "tag": "INNTEKTSKILDE_SELVSTENDIG_ER_DU_SYKMELDT",
                         "sporsmalstekst": "Er du sykmeldt fra dette?",
@@ -352,7 +355,7 @@ export const soknader: any = [
                         "kriterieForVisningAvUndersporsmal": null,
                         "svar": [],
                         "undersporsmal": []
-                    }]
+                    } ]
                 }, {
                     "id": "581307",
                     "tag": "INNTEKTSKILDE_SELVSTENDIG_DAGMAMMA",
@@ -364,7 +367,7 @@ export const soknader: any = [
                     "pavirkerAndreSporsmal": false,
                     "kriterieForVisningAvUndersporsmal": "CHECKED",
                     "svar": [],
-                    "undersporsmal": [{
+                    "undersporsmal": [ {
                         "id": "581308",
                         "tag": "INNTEKTSKILDE_SELVSTENDIG_DAGMAMMA_ER_DU_SYKMELDT",
                         "sporsmalstekst": "Er du sykmeldt fra dette?",
@@ -376,7 +379,7 @@ export const soknader: any = [
                         "kriterieForVisningAvUndersporsmal": null,
                         "svar": [],
                         "undersporsmal": []
-                    }]
+                    } ]
                 }, {
                     "id": "581309",
                     "tag": "INNTEKTSKILDE_JORDBRUKER",
@@ -388,7 +391,7 @@ export const soknader: any = [
                     "pavirkerAndreSporsmal": false,
                     "kriterieForVisningAvUndersporsmal": "CHECKED",
                     "svar": [],
-                    "undersporsmal": [{
+                    "undersporsmal": [ {
                         "id": "581310",
                         "tag": "INNTEKTSKILDE_JORDBRUKER_ER_DU_SYKMELDT",
                         "sporsmalstekst": "Er du sykmeldt fra dette?",
@@ -400,7 +403,7 @@ export const soknader: any = [
                         "kriterieForVisningAvUndersporsmal": null,
                         "svar": [],
                         "undersporsmal": []
-                    }]
+                    } ]
                 }, {
                     "id": "581311",
                     "tag": "INNTEKTSKILDE_FRILANSER",
@@ -412,7 +415,7 @@ export const soknader: any = [
                     "pavirkerAndreSporsmal": false,
                     "kriterieForVisningAvUndersporsmal": "CHECKED",
                     "svar": [],
-                    "undersporsmal": [{
+                    "undersporsmal": [ {
                         "id": "581312",
                         "tag": "INNTEKTSKILDE_FRILANSER_ER_DU_SYKMELDT",
                         "sporsmalstekst": "Er du sykmeldt fra dette?",
@@ -424,7 +427,7 @@ export const soknader: any = [
                         "kriterieForVisningAvUndersporsmal": null,
                         "svar": [],
                         "undersporsmal": []
-                    }]
+                    } ]
                 }, {
                     "id": "581313",
                     "tag": "INNTEKTSKILDE_ANNET",
@@ -437,8 +440,8 @@ export const soknader: any = [
                     "kriterieForVisningAvUndersporsmal": null,
                     "svar": [],
                     "undersporsmal": []
-                }]
-            }]
+                } ]
+            } ]
         }, {
             "id": "581314",
             "tag": "UTDANNING",
@@ -450,31 +453,34 @@ export const soknader: any = [
             "pavirkerAndreSporsmal": false,
             "kriterieForVisningAvUndersporsmal": "JA",
             "svar": [],
-            "undersporsmal": [{
-                "id": "581315",
-                "tag": "UTDANNING_START",
-                "sporsmalstekst": "Når startet du på utdanningen?",
-                "undertekst": null,
-                "svartype": "DATO",
-                "min": null,
-                "max": "2019-09-20",
-                "pavirkerAndreSporsmal": false,
-                "kriterieForVisningAvUndersporsmal": null,
-                "svar": [],
-                "undersporsmal": []
-            }, {
-                "id": "581316",
-                "tag": "FULLTIDSSTUDIUM",
-                "sporsmalstekst": "Er utdanningen et fulltidsstudium?",
-                "undertekst": null,
-                "svartype": "JA_NEI",
-                "min": null,
-                "max": null,
-                "pavirkerAndreSporsmal": false,
-                "kriterieForVisningAvUndersporsmal": null,
-                "svar": [],
-                "undersporsmal": []
-            }]
+            "undersporsmal": [
+                {
+                    "id": "581315",
+                    "tag": "UTDANNING_START",
+                    "sporsmalstekst": "Når startet du på utdanningen?",
+                    "undertekst": null,
+                    "svartype": "DATO",
+                    "min": null,
+                    "max": "2019-09-20",
+                    "pavirkerAndreSporsmal": false,
+                    "kriterieForVisningAvUndersporsmal": null,
+                    "svar": [],
+                    "undersporsmal": []
+                },
+                {
+                    "id": "581316",
+                    "tag": "FULLTIDSSTUDIUM",
+                    "sporsmalstekst": "Er utdanningen et fulltidsstudium?",
+                    "undertekst": null,
+                    "svartype": "JA_NEI",
+                    "min": null,
+                    "max": null,
+                    "pavirkerAndreSporsmal": false,
+                    "kriterieForVisningAvUndersporsmal": null,
+                    "svar": [],
+                    "undersporsmal": []
+                }
+            ]
         }, {
             "id": "581317",
             "tag": "VAER_KLAR_OVER_AT",
@@ -499,7 +505,7 @@ export const soknader: any = [
             "kriterieForVisningAvUndersporsmal": null,
             "svar": [],
             "undersporsmal": []
-        }]
+        } ]
     },
     {
         "id": "1e1935ba-ceab-472d-bb25-88d1bc1d8f1c",
@@ -520,8 +526,8 @@ export const soknader: any = [
         "korrigerer": null,
         "korrigertAv": null,
         "arbeidssituasjon": "ARBEIDSTAKER",
-        "soknadPerioder": [{ "fom": "2019-09-21", "tom": "2019-10-10", "grad": 100 }],
-        "sporsmal": [{
+        "soknadPerioder": [ { "fom": "2019-09-21", "tom": "2019-10-10", "grad": 100 } ],
+        "sporsmal": [ {
             "id": "583673",
             "tag": "ANSVARSERKLARING",
             "sporsmalstekst": "Jeg vet at jeg kan miste retten til sykepenger hvis opplysningene jeg gir ikke er riktige eller fullstendige. Jeg vet også at NAV kan holde igjen eller kreve tilbake penger, og at å gi feil opplysninger kan være straffbart.",
@@ -531,7 +537,7 @@ export const soknader: any = [
             "max": null,
             "pavirkerAndreSporsmal": false,
             "kriterieForVisningAvUndersporsmal": null,
-            "svar": [{ "verdi": "CHECKED", "avgittAv": null }],
+            "svar": [ { "verdi": "CHECKED", "avgittAv": null } ],
             "undersporsmal": []
         }, {
             "id": "583674",
@@ -543,8 +549,8 @@ export const soknader: any = [
             "max": null,
             "pavirkerAndreSporsmal": false,
             "kriterieForVisningAvUndersporsmal": "JA",
-            "svar": [{ "verdi": "JA", "avgittAv": null }],
-            "undersporsmal": [{
+            "svar": [ { "verdi": "JA", "avgittAv": null } ],
+            "undersporsmal": [ {
                 "id": "583675",
                 "tag": "TIDLIGERE_SYK",
                 "sporsmalstekst": null,
@@ -555,7 +561,7 @@ export const soknader: any = [
                 "pavirkerAndreSporsmal": false,
                 "kriterieForVisningAvUndersporsmal": null,
                 "svar": [],
-                "undersporsmal": [{
+                "undersporsmal": [ {
                     "id": "583676",
                     "tag": "TIDLIGERE_EGENMELDING",
                     "sporsmalstekst": "Jeg var syk med egenmelding",
@@ -565,8 +571,8 @@ export const soknader: any = [
                     "max": null,
                     "pavirkerAndreSporsmal": false,
                     "kriterieForVisningAvUndersporsmal": "CHECKED",
-                    "svar": [{ "verdi": "CHECKED", "avgittAv": null }],
-                    "undersporsmal": [{
+                    "svar": [ { "verdi": "CHECKED", "avgittAv": null } ],
+                    "undersporsmal": [ {
                         "id": "583677",
                         "tag": "EGENMELDINGER_NAR",
                         "sporsmalstekst": "Hvilke dager var du syk med egenmelding? Du trenger bare oppgi dager før 1. september 2019.",
@@ -576,9 +582,9 @@ export const soknader: any = [
                         "max": "2019-08-31",
                         "pavirkerAndreSporsmal": false,
                         "kriterieForVisningAvUndersporsmal": null,
-                        "svar": [{ "verdi": "{\"fom\":\"2019-08-15\",\"tom\":\"2019-08-16\"}", "avgittAv": null }],
+                        "svar": [ { "verdi": "{\"fom\":\"2019-08-15\",\"tom\":\"2019-08-16\"}", "avgittAv": null } ],
                         "undersporsmal": []
-                    }]
+                    } ]
                 }, {
                     "id": "583678",
                     "tag": "TIDLIGERE_PAPIRSYKMELDING",
@@ -590,7 +596,7 @@ export const soknader: any = [
                     "pavirkerAndreSporsmal": false,
                     "kriterieForVisningAvUndersporsmal": "CHECKED",
                     "svar": [],
-                    "undersporsmal": [{
+                    "undersporsmal": [ {
                         "id": "583679",
                         "tag": "PAPIRSYKMELDING_NAR",
                         "sporsmalstekst": "Hvilke dager var du syk med papirsykmelding? Du trenger bare oppgi dager før 1. september 2019.",
@@ -602,9 +608,9 @@ export const soknader: any = [
                         "kriterieForVisningAvUndersporsmal": null,
                         "svar": [],
                         "undersporsmal": []
-                    }]
-                }]
-            }]
+                    } ]
+                } ]
+            } ]
         }, {
             "id": "583680",
             "tag": "TILBAKE_I_ARBEID",
@@ -615,8 +621,8 @@ export const soknader: any = [
             "max": null,
             "pavirkerAndreSporsmal": true,
             "kriterieForVisningAvUndersporsmal": "JA",
-            "svar": [{ "verdi": "JA", "avgittAv": null }],
-            "undersporsmal": [{
+            "svar": [ { "verdi": "JA", "avgittAv": null } ],
+            "undersporsmal": [ {
                 "id": "583681",
                 "tag": "TILBAKE_NAR",
                 "sporsmalstekst": "Når begynte du å jobbe igjen?",
@@ -626,9 +632,9 @@ export const soknader: any = [
                 "max": "2019-10-10",
                 "pavirkerAndreSporsmal": true,
                 "kriterieForVisningAvUndersporsmal": null,
-                "svar": [{ "verdi": "2019-10-09", "avgittAv": null }],
+                "svar": [ { "verdi": "2019-10-09", "avgittAv": null } ],
                 "undersporsmal": []
-            }]
+            } ]
         }, {
             "id": "583682",
             "tag": "FERIE_V2",
@@ -639,8 +645,8 @@ export const soknader: any = [
             "max": null,
             "pavirkerAndreSporsmal": false,
             "kriterieForVisningAvUndersporsmal": "JA",
-            "svar": [{ "verdi": "NEI", "avgittAv": null }],
-            "undersporsmal": [{
+            "svar": [ { "verdi": "NEI", "avgittAv": null } ],
+            "undersporsmal": [ {
                 "id": "583683",
                 "tag": "FERIE_NAR_V2",
                 "sporsmalstekst": "Når tok du ut ferie?",
@@ -652,7 +658,7 @@ export const soknader: any = [
                 "kriterieForVisningAvUndersporsmal": null,
                 "svar": [],
                 "undersporsmal": []
-            }]
+            } ]
         }, {
             "id": "583684",
             "tag": "PERMISJON_V2",
@@ -663,8 +669,8 @@ export const soknader: any = [
             "max": null,
             "pavirkerAndreSporsmal": false,
             "kriterieForVisningAvUndersporsmal": "JA",
-            "svar": [{ "verdi": "NEI", "avgittAv": null }],
-            "undersporsmal": [{
+            "svar": [ { "verdi": "NEI", "avgittAv": null } ],
+            "undersporsmal": [ {
                 "id": "583685",
                 "tag": "PERMISJON_NAR_V2",
                 "sporsmalstekst": "Når tok du permisjon?",
@@ -676,7 +682,7 @@ export const soknader: any = [
                 "kriterieForVisningAvUndersporsmal": null,
                 "svar": [],
                 "undersporsmal": []
-            }]
+            } ]
         }, {
             "id": "583686",
             "tag": "UTLAND_V2",
@@ -687,8 +693,8 @@ export const soknader: any = [
             "max": null,
             "pavirkerAndreSporsmal": false,
             "kriterieForVisningAvUndersporsmal": "JA",
-            "svar": [{ "verdi": "NEI", "avgittAv": null }],
-            "undersporsmal": [{
+            "svar": [ { "verdi": "NEI", "avgittAv": null } ],
+            "undersporsmal": [ {
                 "id": "583687",
                 "tag": "UTLAND_NAR_V2",
                 "sporsmalstekst": "Når var du utenfor Norge?",
@@ -700,7 +706,7 @@ export const soknader: any = [
                 "kriterieForVisningAvUndersporsmal": null,
                 "svar": [],
                 "undersporsmal": []
-            }]
+            } ]
         }, {
             "id": "583688",
             "tag": "JOBBET_DU_100_PROSENT_0",
@@ -711,8 +717,8 @@ export const soknader: any = [
             "max": null,
             "pavirkerAndreSporsmal": false,
             "kriterieForVisningAvUndersporsmal": "JA",
-            "svar": [{ "verdi": "NEI", "avgittAv": null }],
-            "undersporsmal": [{
+            "svar": [ { "verdi": "NEI", "avgittAv": null } ],
+            "undersporsmal": [ {
                 "id": "583689",
                 "tag": "HVOR_MANGE_TIMER_PER_UKE_0",
                 "sporsmalstekst": "Hvor mange timer i uken jobber du vanligvis? Varierer det, kan du oppgi gjennomsnittet.",
@@ -735,7 +741,7 @@ export const soknader: any = [
                 "pavirkerAndreSporsmal": false,
                 "kriterieForVisningAvUndersporsmal": null,
                 "svar": [],
-                "undersporsmal": [{
+                "undersporsmal": [ {
                     "id": "583691",
                     "tag": "HVOR_MYE_PROSENT_0",
                     "sporsmalstekst": "prosent",
@@ -745,8 +751,8 @@ export const soknader: any = [
                     "max": null,
                     "pavirkerAndreSporsmal": false,
                     "kriterieForVisningAvUndersporsmal": "CHECKED",
-                    "svar": [{ "verdi": "CHECKED", "avgittAv": null }],
-                    "undersporsmal": [{
+                    "svar": [ { "verdi": "CHECKED", "avgittAv": null } ],
+                    "undersporsmal": [ {
                         "id": "583692",
                         "tag": "HVOR_MYE_PROSENT_VERDI_0",
                         "sporsmalstekst": null,
@@ -758,7 +764,7 @@ export const soknader: any = [
                         "kriterieForVisningAvUndersporsmal": null,
                         "svar": [],
                         "undersporsmal": []
-                    }]
+                    } ]
                 }, {
                     "id": "583693",
                     "tag": "HVOR_MYE_TIMER_0",
@@ -770,7 +776,7 @@ export const soknader: any = [
                     "pavirkerAndreSporsmal": false,
                     "kriterieForVisningAvUndersporsmal": "CHECKED",
                     "svar": [],
-                    "undersporsmal": [{
+                    "undersporsmal": [ {
                         "id": "583694",
                         "tag": "HVOR_MYE_TIMER_VERDI_0",
                         "sporsmalstekst": null,
@@ -782,9 +788,9 @@ export const soknader: any = [
                         "kriterieForVisningAvUndersporsmal": null,
                         "svar": [],
                         "undersporsmal": []
-                    }]
-                }]
-            }]
+                    } ]
+                } ]
+            } ]
         }, {
             "id": "583695",
             "tag": "ANDRE_INNTEKTSKILDER",
@@ -795,8 +801,8 @@ export const soknader: any = [
             "max": null,
             "pavirkerAndreSporsmal": false,
             "kriterieForVisningAvUndersporsmal": "JA",
-            "svar": [{ "verdi": "NEI", "avgittAv": null }],
-            "undersporsmal": [{
+            "svar": [ { "verdi": "NEI", "avgittAv": null } ],
+            "undersporsmal": [ {
                 "id": "583696",
                 "tag": "HVILKE_ANDRE_INNTEKTSKILDER",
                 "sporsmalstekst": "Hvilke andre inntektskilder har du?",
@@ -807,7 +813,7 @@ export const soknader: any = [
                 "pavirkerAndreSporsmal": false,
                 "kriterieForVisningAvUndersporsmal": null,
                 "svar": [],
-                "undersporsmal": [{
+                "undersporsmal": [ {
                     "id": "583697",
                     "tag": "INNTEKTSKILDE_ANDRE_ARBEIDSFORHOLD",
                     "sporsmalstekst": "andre arbeidsforhold",
@@ -818,7 +824,7 @@ export const soknader: any = [
                     "pavirkerAndreSporsmal": false,
                     "kriterieForVisningAvUndersporsmal": "CHECKED",
                     "svar": [],
-                    "undersporsmal": [{
+                    "undersporsmal": [ {
                         "id": "583698",
                         "tag": "INNTEKTSKILDE_ANDRE_ARBEIDSFORHOLD_ER_DU_SYKMELDT",
                         "sporsmalstekst": "Er du sykmeldt fra dette?",
@@ -830,7 +836,7 @@ export const soknader: any = [
                         "kriterieForVisningAvUndersporsmal": null,
                         "svar": [],
                         "undersporsmal": []
-                    }]
+                    } ]
                 }, {
                     "id": "583699",
                     "tag": "INNTEKTSKILDE_SELVSTENDIG",
@@ -842,7 +848,7 @@ export const soknader: any = [
                     "pavirkerAndreSporsmal": false,
                     "kriterieForVisningAvUndersporsmal": "CHECKED",
                     "svar": [],
-                    "undersporsmal": [{
+                    "undersporsmal": [ {
                         "id": "583700",
                         "tag": "INNTEKTSKILDE_SELVSTENDIG_ER_DU_SYKMELDT",
                         "sporsmalstekst": "Er du sykmeldt fra dette?",
@@ -854,7 +860,7 @@ export const soknader: any = [
                         "kriterieForVisningAvUndersporsmal": null,
                         "svar": [],
                         "undersporsmal": []
-                    }]
+                    } ]
                 }, {
                     "id": "583701",
                     "tag": "INNTEKTSKILDE_SELVSTENDIG_DAGMAMMA",
@@ -866,7 +872,7 @@ export const soknader: any = [
                     "pavirkerAndreSporsmal": false,
                     "kriterieForVisningAvUndersporsmal": "CHECKED",
                     "svar": [],
-                    "undersporsmal": [{
+                    "undersporsmal": [ {
                         "id": "583702",
                         "tag": "INNTEKTSKILDE_SELVSTENDIG_DAGMAMMA_ER_DU_SYKMELDT",
                         "sporsmalstekst": "Er du sykmeldt fra dette?",
@@ -878,7 +884,7 @@ export const soknader: any = [
                         "kriterieForVisningAvUndersporsmal": null,
                         "svar": [],
                         "undersporsmal": []
-                    }]
+                    } ]
                 }, {
                     "id": "583703",
                     "tag": "INNTEKTSKILDE_JORDBRUKER",
@@ -890,7 +896,7 @@ export const soknader: any = [
                     "pavirkerAndreSporsmal": false,
                     "kriterieForVisningAvUndersporsmal": "CHECKED",
                     "svar": [],
-                    "undersporsmal": [{
+                    "undersporsmal": [ {
                         "id": "583704",
                         "tag": "INNTEKTSKILDE_JORDBRUKER_ER_DU_SYKMELDT",
                         "sporsmalstekst": "Er du sykmeldt fra dette?",
@@ -902,7 +908,7 @@ export const soknader: any = [
                         "kriterieForVisningAvUndersporsmal": null,
                         "svar": [],
                         "undersporsmal": []
-                    }]
+                    } ]
                 }, {
                     "id": "583705",
                     "tag": "INNTEKTSKILDE_FRILANSER",
@@ -914,7 +920,7 @@ export const soknader: any = [
                     "pavirkerAndreSporsmal": false,
                     "kriterieForVisningAvUndersporsmal": "CHECKED",
                     "svar": [],
-                    "undersporsmal": [{
+                    "undersporsmal": [ {
                         "id": "583706",
                         "tag": "INNTEKTSKILDE_FRILANSER_ER_DU_SYKMELDT",
                         "sporsmalstekst": "Er du sykmeldt fra dette?",
@@ -926,7 +932,7 @@ export const soknader: any = [
                         "kriterieForVisningAvUndersporsmal": null,
                         "svar": [],
                         "undersporsmal": []
-                    }]
+                    } ]
                 }, {
                     "id": "583707",
                     "tag": "INNTEKTSKILDE_ANNET",
@@ -939,8 +945,8 @@ export const soknader: any = [
                     "kriterieForVisningAvUndersporsmal": null,
                     "svar": [],
                     "undersporsmal": []
-                }]
-            }]
+                } ]
+            } ]
         }, {
             "id": "583708",
             "tag": "UTDANNING",
@@ -951,8 +957,8 @@ export const soknader: any = [
             "max": null,
             "pavirkerAndreSporsmal": false,
             "kriterieForVisningAvUndersporsmal": "JA",
-            "svar": [{ "verdi": "NEI", "avgittAv": null }],
-            "undersporsmal": [{
+            "svar": [ { "verdi": "NEI", "avgittAv": null } ],
+            "undersporsmal": [ {
                 "id": "583709",
                 "tag": "UTDANNING_START",
                 "sporsmalstekst": "Når startet du på utdanningen?",
@@ -976,7 +982,7 @@ export const soknader: any = [
                 "kriterieForVisningAvUndersporsmal": null,
                 "svar": [],
                 "undersporsmal": []
-            }]
+            } ]
         }, {
             "id": "583711",
             "tag": "VAER_KLAR_OVER_AT",
@@ -999,8 +1005,8 @@ export const soknader: any = [
             "max": null,
             "pavirkerAndreSporsmal": false,
             "kriterieForVisningAvUndersporsmal": null,
-            "svar": [{ "verdi": "CHECKED", "avgittAv": null }],
+            "svar": [ { "verdi": "CHECKED", "avgittAv": null } ],
             "undersporsmal": []
-        }]
+        } ]
     }
 ];

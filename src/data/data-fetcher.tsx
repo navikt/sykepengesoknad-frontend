@@ -12,7 +12,7 @@ import IngenData from '../pages/feil/ingen-data';
 
 export function DataFetcher(props: { children: any }) {
 
-    const {setUnleash, setSoknader, setSykmeldinger} = useAppStore();
+    const { setUnleash, setSoknader, setSykmeldinger } = useAppStore();
 
     const unleash = useFetch<{}>();
     const rssoknader = useFetch<RSSoknad[]>();
@@ -24,7 +24,7 @@ export function DataFetcher(props: { children: any }) {
                 method: 'POST',
                 credentials: 'include',
                 body: JSON.stringify(unleashKeys),
-                headers: {'Content-Type': 'application/json'}
+                headers: { 'Content-Type': 'application/json' }
             }, (fetchState: FetchState<{}>) => {
                 setUnleash(fetchState.data);
             })
@@ -52,16 +52,16 @@ export function DataFetcher(props: { children: any }) {
             });
         }
         // eslint-disable-next-line
-    }, [rssoknader]);
+    }, [ rssoknader ]);
 
 
-    if (isAnyNotStartedOrPending([unleash, rssoknader, sykmeldinger])) {
+    if (isAnyNotStartedOrPending([ unleash, rssoknader, sykmeldinger ])) {
         return <Spinner />;
 
-    } else if (hasAny401([unleash, rssoknader, sykmeldinger])) {
+    } else if (hasAny401([ unleash, rssoknader, sykmeldinger ])) {
         window.location.href = `${hentLoginUrl()}?redirect=${window.location.origin}/sykepengesok`;
 
-    } else if (hasAnyFailed([unleash, rssoknader, sykmeldinger])) {
+    } else if (hasAnyFailed([ unleash, rssoknader, sykmeldinger ])) {
         return <IngenData />;
     }
 
