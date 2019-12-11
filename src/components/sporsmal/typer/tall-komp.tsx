@@ -1,11 +1,11 @@
-import React from 'react';
-import useForm from 'react-hook-form';
+import React, { useEffect, useRef } from 'react';
+import useForm, { FormContext, useFormContext } from 'react-hook-form';
 import { Normaltekst } from 'nav-frontend-typografi';
 import { useHistory, useParams } from 'react-router-dom';
 import Vis from '../../../utils/vis';
 import tekster from '../sporsmal-tekster';
 import { SpmProps } from '../sporsmalene';
-import { hentSvarVerdi, pathUtenSteg } from '../sporsmal-utils';
+import { hentSvar, pathUtenSteg, settSvar } from '../sporsmal-utils';
 import Knapperad from '../sporsmal-form/knapperad';
 import { useAppStore } from '../../../data/stores/app-store';
 import UndersporsmalListe from '../undersporsmal/undersporsmal-liste';
@@ -22,32 +22,27 @@ const TallKomp = ({ sporsmal, desimaler }: AllTallKompProps) => {
     const history = useHistory();
     const { stegId } = useParams();
     const spmIndex = parseInt(stegId) - 1;
-
-    const { handleSubmit, register, errors, watch } = useForm({
-        defaultValues: { verdi: hentSvarVerdi(sporsmal) }
-    });
+    const methods = useForm();
 
     const onSubmit = (data: any) => {
-        const svar: any = { verdi: data.verdi };
-        sporsmal.svarliste = { sporsmalId: sporsmal.id, svar: [ svar ] };
+        settSvar(sporsmal, data);
+        methods.reset();
         setValgtSoknad(valgtSoknad);
         history.push(pathUtenSteg(history.location.pathname) + '/' + (spmIndex + 2));
     };
 
     return (
-        <>
-            <Vis hvis={sporsmal.erHovedSporsmal}>
-                <form onSubmit={handleSubmit(onSubmit)} className="sporsmal__form">
-                    <FeilOppsummering visFeilliste={true} errors={errors} />
-                    <TallInput sporsmal={sporsmal} formProps={{ register, errors, watch }} desimaler={desimaler} />
+        sporsmal.erHovedSporsmal
+            ?
+            <FormContext {...methods}>
+                <form onSubmit={methods.handleSubmit(onSubmit)} className="sporsmal__form">
+                    <FeilOppsummering visFeilliste={true} errors={methods.errors} />
+                    <TallInput sporsmal={sporsmal} desimaler={desimaler} />
                     <Knapperad onSubmit={onSubmit} />
                 </form>
-            </Vis>
-
-            <Vis hvis={!sporsmal.erHovedSporsmal}>
-                <TallInput sporsmal={sporsmal} formProps={{ register, errors, watch }} desimaler={desimaler} />
-            </Vis>
-        </>
+            </FormContext>
+            :
+            <TallInput sporsmal={sporsmal} desimaler={desimaler} />
     );
 };
 
@@ -55,11 +50,25 @@ export default TallKomp;
 
 type AllTallProps = SpmProps & TallKompProps;
 
-const TallInput = ({ sporsmal, formProps, desimaler }: AllTallProps) => {
-    const { stegId } = useParams();
-    const compId = 'spm_' + stegId;
+const TallInput = ({ sporsmal, desimaler }: AllTallProps) => {
+    const compId = 'spm_' + sporsmal.id;
     const feilmelding = tekster['soknad.feilmelding.' + sporsmal.tag.toLowerCase()];
-    const watchVerdi = formProps.watch('verdi');
+    const { register, setValue, watch, errors } = useFormContext();
+    const watchVerdi = watch(compId);
+    const undersporsmal = useRef<HTMLDivElement>(null);
+
+    const handleChange = () => {
+        if (watchVerdi === 'ja') {
+            undersporsmal.current.classList.add('aapen');
+        } else {
+            undersporsmal.current.classList.remove('aapen');
+        }
+    };
+
+    useEffect(() => {
+        setValue(compId, hentSvar(sporsmal));
+        // eslint-disable-next-line
+    }, []);
 
     return (
         <>
@@ -71,24 +80,27 @@ const TallInput = ({ sporsmal, formProps, desimaler }: AllTallProps) => {
 
             <input type="number"
                 className="input--s"
-                name="verdi"
+                name={compId}
                 id={compId}
-                ref={formProps.register({
+                ref={register({
                     validate: (value: any) => value === true || feilmelding
                 })}
+                onChange={() => handleChange}
             />
 
             <div role="alert" aria-live="assertive">
-                <Vis hvis={formProps.errors.verdi !== undefined}>
+                <Vis hvis={errors[compId] !== undefined}>
                     <Normaltekst tag="span" className="skjemaelement__feilmelding">
-                        {formProps.errors.verdi && formProps.errors.verdi.message}
+                        {errors[compId] && errors[compId].message}
                     </Normaltekst>
                 </Vis>
             </div>
 
-            <Vis hvis={watchVerdi > 0}>
-                <UndersporsmalListe undersporsmal={sporsmal.undersporsmal} />
-            </Vis>
+            <div className="undersporsmal" ref={undersporsmal}>
+                <Vis hvis={watchVerdi > 0}>
+                    <UndersporsmalListe undersporsmal={sporsmal.undersporsmal} />
+                </Vis>
+            </div>
         </>
     )
 };

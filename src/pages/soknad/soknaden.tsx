@@ -58,7 +58,6 @@ const Fordeling = () => {
     const { stegId } = useParams();
     const stegNo = parseInt(stegId);
     const tittel = tekster[hentNokkel(valgtSoknad, stegNo)];
-    const sporsmal = valgtSoknad.sporsmal[stegNo - 1];
 
     switch (valgtSoknad.status) {
         // Nye søknader
@@ -78,8 +77,6 @@ const Fordeling = () => {
                     </Vis>
 
                     <Opplysninger ekspandert={true} />
-
-                    <h3>{sporsmal.tag} - {sporsmal.svartype}</h3>
 
                     <Vis hvis={tittel !== undefined}>
                         <Systemtittel className="sporsmal__tittel">{tittel}</Systemtittel>

@@ -6,18 +6,22 @@ import CheckboxPanel from './typer/checkbox-panel';
 import DatoKomp from './typer/dato-komp';
 import JaNeiKomp from './typer/ja-nei-komp';
 import TallKomp from './typer/tall-komp';
-import './sporsmalene.less';
 import { Sporsmal } from '../../types/types';
 import PeriodeKomp from './typer/periode-komp';
+import { useFormContext } from 'react-hook-form';
+import './sporsmal-form/sporsmal-form.less';
 
 export interface SpmProps {
     sporsmal: Sporsmal;
-    formProps?: {
-        register: any;
-        errors: any;
-        watch: any;
-    };
 }
+
+export const ConnectForm = ({ children }: any) => {
+    const methods = useFormContext();
+
+    return children({
+        ...methods
+    });
+};
 
 const Sporsmalene = () => {
     const { valgtSoknad } = useAppStore();
@@ -25,15 +29,10 @@ const Sporsmalene = () => {
     const spmIndex = parseInt(stegId) - 1;
     const sporsmal = valgtSoknad.sporsmal[spmIndex];
 
-    console.log('sporsmal', sporsmal); // eslint-disable-line
-    /*
-        valgtSoknad.sporsmal.map((spm, idx) => {
-            console.log('index, spørsmål', idx + ' ' + spm.sporsmalstekst.substring(0, 25)); // eslint-disable-line
-            spm.svarliste.svar.map((svar: RSSvar) => {
-                console.log('svar', svar.verdi); // eslint-disable-line
-            })
-        });
-    */
+    const forrige = valgtSoknad.sporsmal[spmIndex - 1];
+    // console.log('forrige sporsmal', forrige ? forrige : 'null'); // eslint-disable-line
+    console.log('forrige.id', forrige ? forrige.id : 'null'); // eslint-disable-line
+    console.log('forrige.svar', forrige ? forrige.svarliste.svar[0].verdi : 'null'); // eslint-disable-line
 
     switch (sporsmal.svartype) {
         case RSSvartype.CHECKBOX: {

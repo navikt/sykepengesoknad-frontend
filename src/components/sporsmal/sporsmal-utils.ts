@@ -1,6 +1,7 @@
 import { TagTyper } from '../../types/enums';
 import { fjernIndexFraTag } from './field-utils';
 import { Soknad, Sporsmal } from '../../types/types';
+import { RSSvar } from '../../types/rs-types/rs-svar';
 
 export const hentSporsmalForOppsummering = (soknad: Soknad) => {
     return soknad.sporsmal.filter((s) => {
@@ -24,9 +25,34 @@ export const hentNokkel = (soknad: Soknad, sidenummer: number) => {
             : `sykepengesoknad.${fjernIndexFraTag(sporsmal.tag).toLowerCase()}.tittel`;
 };
 
-export const hentSvarVerdi = (sporsmal: Sporsmal): string => {
+export const settSvar = (sporsmal: Sporsmal, verdi: any): void => {
+    if (verdi === undefined) {
+        return;
+    }
+
+    if (Array.isArray(verdi)) {
+        const svarene: RSSvar[] = [];
+        verdi.forEach(v => {
+            const svar: RSSvar = { verdi: v };
+            svarene.push(svar);
+        });
+        sporsmal.svarliste = {
+            sporsmalId: sporsmal.id,
+            svar: svarene
+        };
+    } else {
+        sporsmal.svarliste = {
+            sporsmalId: sporsmal.id,
+            svar: [ { verdi: verdi } ]
+        }
+    }
+};
+
+export const hentSvar = (sporsmal: Sporsmal): any => {
     if (sporsmal.svarliste.svar[0] !== undefined) {
-        return sporsmal.svarliste.svar[0].verdi;
+        const svar = sporsmal.svarliste.svar[0].verdi;
+        console.log('hentSvar', svar); // eslint-disable-line
+        return svar;
     }
     return '';
 };

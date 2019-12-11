@@ -10,15 +10,13 @@ export interface UndersporsmalProps {
 const UndersporsmalListe = ({ undersporsmal }: UndersporsmalProps) => {
     return (
         <Vis hvis={undersporsmal.length > 0}>
-            <div className="undersporsmal">
-                {undersporsmal.map((underspm: Sporsmal, idx: number) => {
-                    return (
-                        <Vis hvis={underspm.kriterieForVisningAvUndersporsmal !== undefined} key={idx}>
-                            <Undersporsmal sporsmal={underspm} key={idx} />
-                        </Vis>
-                    );
-                }).filter((underspm) => underspm !== null)}
-            </div>
+            {undersporsmal.map((underspm: Sporsmal, idx: number) => {
+                return (
+                    <Vis hvis={underspm.kriterieForVisningAvUndersporsmal !== undefined} key={idx}>
+                        <Undersporsmal sporsmal={underspm} key={idx} />
+                    </Vis>
+                );
+            }).filter((underspm) => underspm !== null)}
         </Vis>
     );
 };

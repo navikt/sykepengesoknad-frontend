@@ -7,6 +7,7 @@ import { Sporsmal } from '../../../types/types';
 import UkjentSporsmal from '../ukjent-sporsmal';
 import CheckboxPanel from '../typer/checkbox-panel';
 import { RSSvartype } from '../../../types/rs-types/rs-svartype';
+import PeriodeKomp from '../typer/periode-komp';
 import './undersporsmal.less';
 
 interface UndersporsmalProps {
@@ -25,6 +26,8 @@ const Undersporsmal = ({ sporsmal }: UndersporsmalProps) => {
         case RSSvartype.TIMER:
         case RSSvartype.PROSENT:
         case RSSvartype.PERIODER:
+            return <PeriodeKomp sporsmal={sporsmal} />;
+
         case RSSvartype.JA_NEI:
             return <JaNeiKomp sporsmal={sporsmal} />;
 

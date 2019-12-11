@@ -1,4 +1,25 @@
 .undersporsmal {
-    max-height: 500px;
-    transition: max-height 0.25s ease-in;
+    max-height: 0;
+    height: 100px;
+    transition: all .5s cubic-bezier(0.465, 0.183, 0.153, 0.946);
+
+    &.aapen {
+        max-height: 100px;
+    }
+}
+
+.tilleggssporsmal__innholdContainer--medAnimasjon {
+    overflow: hidden;
+    transition: .3s height cubic-bezier(0.465, 0.183, 0.153, 0.946);
+    transform: translate3d(0, 0, 0);
+}
+
+.tilleggsinnhold__innhold {
+    position: relative;
+    transition: .3s opacity cubic-bezier(0.465, 0.183, 0.153, 0.946);
+    opacity: 0;
+
+    .hjelpeboble--horisontal.press {
+        margin-bottom: 1rem;
+    }
 }

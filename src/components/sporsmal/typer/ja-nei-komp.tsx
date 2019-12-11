@@ -1,13 +1,12 @@
-import useForm from 'react-hook-form';
-import React, { useState } from 'react';
-import { Normaltekst } from 'nav-frontend-typografi';
+import useForm, { FormContext, useFormContext } from 'react-hook-form';
+import React, { useEffect, useRef } from 'react';
+import { Element, Normaltekst } from 'nav-frontend-typografi';
 import { useHistory, useParams } from 'react-router-dom';
 import Vis from '../../../utils/vis';
-import tekster from '../sporsmal-tekster';
 import { SpmProps } from '../sporsmalene';
 import Knapperad from '../sporsmal-form/knapperad';
 import { useAppStore } from '../../../data/stores/app-store';
-import { hentSvarVerdi, pathUtenSteg } from '../sporsmal-utils';
+import { hentSvar, pathUtenSteg, settSvar } from '../sporsmal-utils';
 import UndersporsmalListe from '../undersporsmal/undersporsmal-liste';
 import FeilOppsummering from '../../skjema/feiloppsummering/feil-oppsummering';
 
@@ -24,43 +23,55 @@ export const JaNeiKomp = ({ sporsmal }: SpmProps) => {
     const history = useHistory();
     const { stegId } = useParams();
     const spmIndex = parseInt(stegId) - 1;
-
-    const { handleSubmit, register, errors, watch } = useForm({
-        defaultValues: { verdi: hentSvarVerdi(sporsmal) }
-    });
+    const methods = useForm();
 
     const onSubmit = (data: any) => {
-        const svar: any = { verdi: data.verdi };
-        sporsmal.svarliste = { sporsmalId: sporsmal.id, svar: [ svar ] };
+        settSvar(sporsmal, data);
+        methods.reset();
         setValgtSoknad(valgtSoknad);
         history.push(pathUtenSteg(history.location.pathname) + '/' + (spmIndex + 2));
     };
 
     return (
-        <>
-            <Vis hvis={sporsmal.erHovedSporsmal}>
-                <form onSubmit={handleSubmit(onSubmit)} className="sporsmal__form">
-                    <FeilOppsummering visFeilliste={true} errors={errors} />
-                    <JaNeiInput sporsmal={sporsmal} formProps={{ register, errors, watch }} />
+        sporsmal.erHovedSporsmal
+            ?
+            <FormContext {...methods}>
+                <form onSubmit={methods.handleSubmit(onSubmit)} className="sporsmal__form">
+                    <FeilOppsummering visFeilliste={true} errors={methods.errors} />
+                    <JaNeiInput sporsmal={sporsmal} />
                     <Knapperad onSubmit={onSubmit} />
                 </form>
-            </Vis>
-
-            <Vis hvis={!sporsmal.erHovedSporsmal}>
-                <JaNeiInput sporsmal={sporsmal} formProps={{ register, errors, watch }} />
-            </Vis>
-        </>
+            </FormContext>
+            :
+            <JaNeiInput sporsmal={sporsmal} />
     );
 };
 
 export default JaNeiKomp;
 
-const JaNeiInput = ({ sporsmal, formProps }: SpmProps) => {
-    const [ valgt, setValgt ] = useState<string>('');
-    const { stegId } = useParams();
-    const compId = 'spm_' + stegId;
-    const feilmelding = tekster['soknad.feilmelding.' + sporsmal.tag.toLowerCase()];
-    const watchVerdi = formProps.watch('verdi');
+const JaNeiInput = ({ sporsmal }: SpmProps) => {
+    const compId = 'spm_' + sporsmal.id;
+    const undersporsmal = useRef<HTMLDivElement>(null);
+    const { register, setValue, watch, errors, formState: { dirty } } = useFormContext();
+    const watchVerdi = watch(compId);
+
+    useEffect(() => {
+        setValue(compId, hentSvar(sporsmal));
+        // eslint-disable-next-line
+    }, [ compId ]);
+
+    useEffect(() => {
+        if (watchVerdi === 'ja') {
+            undersporsmal.current.classList.add('aapen');
+        } else {
+            undersporsmal.current.classList.remove('aapen');
+        }
+    }, [ watchVerdi ]);
+
+    const changeValue = (value: string) => {
+        setValue(compId, value);
+        settSvar(sporsmal, value);
+    };
 
     return (
         <>
@@ -68,9 +79,9 @@ const JaNeiInput = ({ sporsmal, formProps }: SpmProps) => {
                 <fieldset className="skjema__fieldset">
                     <legend className="skjema__legend">
                         <div className="medHjelpetekst">
-                            <Normaltekst className="skjema__sporsmal">
-                                <strong>{sporsmal.sporsmalstekst}</strong>
-                            </Normaltekst>
+                            <Element className="skjema__sporsmal">
+                                {sporsmal.sporsmalstekst}
+                            </Element>
                             <div className="hjelpetekst">
                             </div>
                         </div>
@@ -78,24 +89,22 @@ const JaNeiInput = ({ sporsmal, formProps }: SpmProps) => {
                     <div className="inputPanelGruppe__inner">
                         {jaNeiValg.map((valg, idx) => {
                             const alt = '_' + valg.label.toLowerCase();
-                            const OK = valgt === valg.value;
+                            const OK = hentSvar(sporsmal)[compId] === valg.value;
+                            console.log('OK', OK); // eslint-disable-line
                             return (
-                                <label className={'inputPanel radioPanel' + (OK ? ' inputPanel--checked' : '')}
-                                    htmlFor={compId + alt} key={idx}
-                                >
+                                <label className={'inputPanel radioPanel' + (OK ? ' inputPanel--checked' : '')} key={idx}>
                                     <input type="radio"
-                                        name="verdi"
+                                        name={compId}
                                         id={compId + alt}
                                         className="inputPanel__field"
                                         aria-checked={OK}
                                         checked={OK}
                                         value={valg.value}
-                                        onChange={() => setValgt(valg.value)}
-                                        ref={formProps.register({
-                                            validate: (value: any) => value !== undefined || feilmelding
-                                        })}
+                                        onChange={() => changeValue(valg.value)}
+                                        ref={register({ required: 'Et alternativ må velges' })}
                                     />
                                     <span className="inputPanel__label">{valg.label}</span>
+                                    {dirty && <p>This field is dirty</p>}
                                 </label>
                             )
                         })}
@@ -104,16 +113,18 @@ const JaNeiInput = ({ sporsmal, formProps }: SpmProps) => {
             </div>
 
             <div role="alert" aria-live="assertive">
-                <Vis hvis={formProps.errors.verdi !== undefined}>
+                <Vis hvis={errors[compId] !== undefined}>
                     <Normaltekst tag="span" className="skjemaelement__feilmelding">
-                        {formProps.errors.verdi && formProps.errors.verdi.message}
+                        {errors[compId] && errors[compId].message}
                     </Normaltekst>
                 </Vis>
             </div>
 
-            <Vis hvis={watchVerdi === 'ja'}>
-                <UndersporsmalListe undersporsmal={sporsmal.undersporsmal} />
-            </Vis>
+            <div className="undersporsmal" ref={undersporsmal}>
+                <Vis hvis={watchVerdi === 'ja'}>
+                    <UndersporsmalListe undersporsmal={sporsmal.undersporsmal} />
+                </Vis>
+            </div>
         </>
     )
 };

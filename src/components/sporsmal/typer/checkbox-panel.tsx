@@ -1,8 +1,8 @@
-import React from 'react';
-import useForm from 'react-hook-form';
+import React, { useEffect } from 'react';
+import useForm, { FormContext, useFormContext } from 'react-hook-form';
 import { useHistory, useParams } from 'react-router-dom';
 import tekster from '../sporsmal-tekster';
-import { hentSvarVerdi, pathUtenSteg } from '../sporsmal-utils';
+import { hentSvar, pathUtenSteg, settSvar } from '../sporsmal-utils';
 import FeilOppsummering from '../../skjema/feiloppsummering/feil-oppsummering';
 import Vis from '../../../utils/vis';
 import { Normaltekst } from 'nav-frontend-typografi';
@@ -16,42 +16,43 @@ const CheckboxPanel = ({ sporsmal }: SpmProps) => {
     const history = useHistory();
     const { stegId } = useParams();
     const spmIndex = parseInt(stegId) - 1;
-
-    const { handleSubmit, register, errors, watch } = useForm({
-        defaultValues: { verdi: hentSvarVerdi(sporsmal) }
-    });
+    const methods = useForm();
 
     const onSubmit = (data: any) => {
-        const svar: any = { verdi: data.verdi };
-        sporsmal.svarliste = { sporsmalId: sporsmal.id, svar: [ svar ] };
+        settSvar(sporsmal, data);
+        methods.reset();
         setValgtSoknad(valgtSoknad);
         history.push(pathUtenSteg(history.location.pathname) + '/' + (spmIndex + 2));
     };
 
     return (
-        <>
-            <Vis hvis={sporsmal.erHovedSporsmal}>
-                <form onSubmit={handleSubmit(onSubmit)} className="sporsmal__form">
-                    <FeilOppsummering visFeilliste={true} errors={errors} />
-                    <CheckboxInput sporsmal={sporsmal} formProps={{ register, errors, watch }} />
+        sporsmal.erHovedSporsmal
+            ?
+            <FormContext {...methods}>
+                <form onSubmit={methods.handleSubmit(onSubmit)} className="sporsmal__form">
+                    <FeilOppsummering visFeilliste={true} errors={methods.errors} />
+                    <CheckboxInput sporsmal={sporsmal} />
                     <Knapperad onSubmit={onSubmit} />
                 </form>
-            </Vis>
-
-            <Vis hvis={!sporsmal.erHovedSporsmal}>
-                <CheckboxInput sporsmal={sporsmal} formProps={{ register, errors, watch }} />
-            </Vis>
-        </>
+            </FormContext>
+            :
+            <CheckboxInput sporsmal={sporsmal} />
     );
 };
 
 export default CheckboxPanel;
 
-const CheckboxInput = ({ sporsmal, formProps }: SpmProps) => {
+const CheckboxInput = ({ sporsmal }: SpmProps) => {
     const { stegId } = useParams();
-    const compId = 'spm_' + stegId;
+    const compId = 'spm_' + sporsmal.id;
     const feilmelding = tekster['soknad.feilmelding.' + sporsmal.tag.toLowerCase()];
-    const watchVerdi = formProps.watch('verdi');
+    const { register, setValue, watch, errors } = useFormContext();
+    const watchVerdi = watch('verdi');
+
+    useEffect(() => {
+        setValue(compId, hentSvar(sporsmal));
+        // eslint-disable-next-line
+    }, []);
 
     return (
         <>
@@ -60,7 +61,7 @@ const CheckboxInput = ({ sporsmal, formProps }: SpmProps) => {
                     className="skjemaelement__input checkboks"
                     name="verdi"
                     id={compId}
-                    ref={formProps.register({
+                    ref={register({
                         validate: (value: any) => value === true || feilmelding
                     })}
                 />
@@ -70,16 +71,18 @@ const CheckboxInput = ({ sporsmal, formProps }: SpmProps) => {
             </div>
 
             <div role="alert" aria-live="assertive">
-                <Vis hvis={formProps.errors.verdi !== undefined}>
+                <Vis hvis={errors.verdi !== undefined}>
                     <Normaltekst tag="span" className="skjemaelement__feilmelding">
-                        {formProps.errors.verdi && formProps.errors.verdi.message}
+                        {errors.verdi && errors.verdi.message}
                     </Normaltekst>
                 </Vis>
             </div>
 
-            <Vis hvis={watchVerdi === true}>
-                <UndersporsmalListe undersporsmal={sporsmal.undersporsmal} />
-            </Vis>
+            <div className="undersporsmal">
+                <Vis hvis={watchVerdi === true}>
+                    <UndersporsmalListe undersporsmal={sporsmal.undersporsmal} />
+                </Vis>
+            </div>
         </>
     )
 };
