@@ -59,11 +59,9 @@ const CheckboxInput = ({ sporsmal }: SpmProps) => {
             <div className={'skjemaelement skjemaelement--horisontal spm_' + stegId}>
                 <input type="checkbox"
                     className="skjemaelement__input checkboks"
-                    name="verdi"
+                    name={compId}
                     id={compId}
-                    ref={register({
-                        validate: (value: any) => value === true || feilmelding
-                    })}
+                    ref={register({ required: feilmelding })}
                 />
                 <label className="skjemaelement__label" htmlFor={compId}>
                     {sporsmal.sporsmalstekst}

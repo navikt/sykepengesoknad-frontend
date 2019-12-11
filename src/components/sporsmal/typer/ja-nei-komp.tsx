@@ -24,9 +24,10 @@ export const JaNeiKomp = ({ sporsmal }: SpmProps) => {
     const { stegId } = useParams();
     const spmIndex = parseInt(stegId) - 1;
     const methods = useForm();
+    const compId = 'spm_' + sporsmal.id;
 
     const onSubmit = (data: any) => {
-        settSvar(sporsmal, data);
+        settSvar(sporsmal, data[compId]);
         methods.reset();
         setValgtSoknad(valgtSoknad);
         history.push(pathUtenSteg(history.location.pathname) + '/' + (spmIndex + 2));
@@ -56,17 +57,14 @@ const JaNeiInput = ({ sporsmal }: SpmProps) => {
     const watchVerdi = watch(compId);
 
     useEffect(() => {
-        setValue(compId, hentSvar(sporsmal));
-        // eslint-disable-next-line
-    }, [ compId ]);
-
-    useEffect(() => {
+        setValue(compId, hentSvar(sporsmal)[compId]);
         if (watchVerdi === 'ja') {
             undersporsmal.current.classList.add('aapen');
         } else {
             undersporsmal.current.classList.remove('aapen');
         }
-    }, [ watchVerdi ]);
+        // eslint-disable-next-line
+    }, []);
 
     const changeValue = (value: string) => {
         setValue(compId, value);
@@ -88,14 +86,11 @@ const JaNeiInput = ({ sporsmal }: SpmProps) => {
                     </legend>
                     <div className="inputPanelGruppe__inner">
                         {jaNeiValg.map((valg, idx) => {
-                            const alt = '_' + valg.label.toLowerCase();
-                            const OK = hentSvar(sporsmal)[compId] === valg.value;
-                            console.log('OK', OK); // eslint-disable-line
+                            const OK = hentSvar(sporsmal) === valg.value;
                             return (
                                 <label className={'inputPanel radioPanel' + (OK ? ' inputPanel--checked' : '')} key={idx}>
                                     <input type="radio"
                                         name={compId}
-                                        id={compId + alt}
                                         className="inputPanel__field"
                                         aria-checked={OK}
                                         checked={OK}

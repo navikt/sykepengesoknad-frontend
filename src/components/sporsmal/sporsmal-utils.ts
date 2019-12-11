@@ -51,7 +51,6 @@ export const settSvar = (sporsmal: Sporsmal, verdi: any): void => {
 export const hentSvar = (sporsmal: Sporsmal): any => {
     if (sporsmal.svarliste.svar[0] !== undefined) {
         const svar = sporsmal.svarliste.svar[0].verdi;
-        console.log('hentSvar', svar); // eslint-disable-line
         return svar;
     }
     return '';

@@ -26,21 +26,21 @@ const Steg = ({ label, index }: StegProps) => {
     const disabled = !erPassert && !erAktiv;
     const history = useHistory();
 
-    function goTo(index: number) {
-        history.push(pathUtenSteg(history.location.pathname) + '/' + (index + 1));
+    function goTo(idx: number) {
+        history.push(pathUtenSteg(history.location.pathname) + '/' + (idx));
     }
 
     return (
         <li className="stegindikator__steg" aria-current={(erAktiv) ? 'step' : undefined}>
-            <Vis hvis={aktivtSteg === index + 2}>
-                <button className={innerCls(erAktiv, erPassert, disabled)} title={label} disabled={disabled} onClick={() => goTo(index)}>
+            <Vis hvis={aktivtSteg >= index + 2}>
+                <button className={innerCls(erAktiv, erPassert, disabled)} title={label} disabled={disabled} onClick={() => goTo(num)}>
                     <div className="stegindikator__steg-num">{num}</div>
                     {label}
                 </button>
             </Vis>
 
-            <Vis hvis={aktivtSteg !== index + 2}>
-                <div className={innerCls(erAktiv, erPassert, disabled)} title={label}>
+            <Vis hvis={aktivtSteg < index + 2}>
+                <div className={innerCls(erAktiv, erPassert, disabled)} title={label} >
                     <div className="stegindikator__steg-num">{num}</div>
                     {label}
                 </div>
