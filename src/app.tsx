@@ -1,4 +1,4 @@
-import * as React from 'react';
+import React from 'react';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import Soknad from './pages/soknad/soknaden';
 import Soknader from './pages/soknader/soknader';
@@ -9,20 +9,20 @@ import './app.less';
 
 const App = (): any => {
     return (
-            <StoreProvider>
-                <DataFetcher>
-                    <main id="maincontent" role="main" tabIndex={-1}>
-                        <BrowserRouter basename={'/nysykepengesoknad'}>
-                            <Switch>
-                                <Route exact={true} path="/" component={Soknader} />
-                                <Route path={'/soknader/:id/:stegId'} component={Soknad} />
-                                <Route path={'/soknader/:id'} component={Soknad} />
-                                <Route path={'/kvittering/:id'} component={Kvittering} />
-                            </Switch>
-                        </BrowserRouter>
-                    </main>
-                </DataFetcher>
-            </StoreProvider>
+        <StoreProvider>
+            <DataFetcher>
+                <main id="maincontent" role="main" tabIndex={-1}>
+                    <BrowserRouter basename={'/nysykepengesoknad'}>
+                        <Switch>
+                            <Route exact={true} path="/" component={Soknader} />
+                            <Route path={'/soknader/:id/:stegId'} component={Soknad} />
+                            <Route path={'/soknader/:id'} component={Soknad} />
+                            <Route path={'/kvittering/:id'} component={Kvittering} />
+                        </Switch>
+                    </BrowserRouter>
+                </main>
+            </DataFetcher>
+        </StoreProvider>
     );
 };
 

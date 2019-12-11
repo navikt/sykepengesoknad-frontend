@@ -1,8 +1,8 @@
-import * as React from 'react';
-import * as ReactDOM from 'react-dom';
+import React from 'react';
+import ReactDOM from 'react-dom';
 import env from './utils/environment';
 import App from './app';
-import * as dayjs from 'dayjs';
+import dayjs from 'dayjs';
 import 'dayjs/locale/nb';
 dayjs.locale('nb');
 

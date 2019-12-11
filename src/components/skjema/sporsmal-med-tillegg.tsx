@@ -1,27 +1,28 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import Vis from '../../../src/utils/vis';
 import { erSynligIViewport, getTop } from '../../utils/browser-utils';
 import { Sporsmal } from '../../types/types';
+
 
 interface SporsmalMedTilleggProps {
     children: React.ReactNode;
     sporsmal: Sporsmal;
     visTillegg: Function;
-    className: string;
-    informasjon: React.ReactElement;
+    className?: string;
+    informasjon?: React.ReactElement;
 }
 
 const SporsmalMedTillegg = (props: SporsmalMedTilleggProps) => {
-    const [erApen, setErApen] = useState(getErApen(props));
-    const [containerClassName, setContainerClassName] = useState('');
-    const [hoyde, setHoyde] = useState(!erApen ? '0' : 'auto');
-    const [visInnhold, setVisInnhold] = useState(erApen);
-    const [opacity, setOpacity] = useState(erApen ? 1 : 0);
-    const [harAnimasjon, setHarAnimasjon] = useState(false);
+    const [ erApen, setErApen ] = useState<boolean>(getErApen(props));
+    const [ containerClassName, setContainerClassName ] = useState<string>('');
+    const [ hoyde, setHoyde ] = useState<string>(!erApen ? '0' : 'auto');
+    const [ visInnhold, setVisInnhold ] = useState<boolean>(erApen);
+    const [ opacity, setOpacity ] = useState<number>(erApen ? 1 : 0);
+    const [ harAnimasjon, setHarAnimasjon ] = useState<boolean>(false);
     let gammelHoyde: string;
-    let hovedsporsmal: HTMLDivElement;
-    let container: HTMLDivElement; // eslint-disable-line
-    let tilleggsinnhold: HTMLDivElement;
+    const hovedsporsmal = useRef<HTMLDivElement>(null);
+    const container = useRef<HTMLDivElement>(null);
+    const tilleggsinnhold = useRef<HTMLDivElement>(null);
 
     useEffect(() => {
         if (erApen) {
@@ -29,8 +30,7 @@ const SporsmalMedTillegg = (props: SporsmalMedTilleggProps) => {
         } else {
             lukk();
         }
-        // eslint-disable-next-line
-    }, []);
+    }, [erApen]);
 
     function onHoydeTransitionEnd() {
         if (!harAnimasjon) {
@@ -67,7 +67,6 @@ const SporsmalMedTillegg = (props: SporsmalMedTilleggProps) => {
         tegner komponenten på nytt når høyde settes til 'auto': */
         gammelHoyde = hoyde;
         setContainerClassName('');
-        // Setter høyde til auto:
         setTimeout(() => {
             setHoyde('auto');
             setContainerClassName('');
@@ -75,9 +74,9 @@ const SporsmalMedTillegg = (props: SporsmalMedTilleggProps) => {
     }
 
     function scrollToHovedsporsmal() {
-        if (!erSynligIViewport(hovedsporsmal)) {
-            const end = getTop(hovedsporsmal, 600);
-            scrollTo(end, 600);
+        if (!erSynligIViewport(hovedsporsmal.current)) {
+            const end = getTop(hovedsporsmal.current, 600);
+            window.scrollTo(end, 600);
         }
     }
 
@@ -92,7 +91,7 @@ const SporsmalMedTillegg = (props: SporsmalMedTilleggProps) => {
         setHarAnimasjon(true);
 
         setTimeout(() => {
-            const hoyde: string = tilleggsinnhold ? tilleggsinnhold.offsetHeight.toString() : 'auto';
+            const hoyde: string = tilleggsinnhold ? tilleggsinnhold.current.offsetHeight.toString() : 'auto';
             setErApen(true);
             setHoyde(hoyde);
             setContainerClassName(`${containerClassName} animerer`);
@@ -100,7 +99,7 @@ const SporsmalMedTillegg = (props: SporsmalMedTilleggProps) => {
     }
 
     function lukk() {
-        const hoyde = tilleggsinnhold && tilleggsinnhold.offsetHeight ? tilleggsinnhold.offsetHeight.toString() : gammelHoyde;
+        const hoyde = tilleggsinnhold.current.offsetHeight ? tilleggsinnhold.current.offsetHeight.toString() : gammelHoyde;
         setHoyde(hoyde);
         setOpacity(0);
 
@@ -113,27 +112,19 @@ const SporsmalMedTillegg = (props: SporsmalMedTilleggProps) => {
     }
 
     const { children, sporsmal, className, informasjon } = props;
+
     return (
         <div className={className}>
-            <div ref={(c) => {
-                hovedsporsmal = c as HTMLDivElement;
-            }}>
+            <div ref={hovedsporsmal}>
                 {sporsmal}
             </div>
-            <div ref={(c) => {
-                container = c as HTMLDivElement;
-            }}
+            <div ref={container}
                 style={{ height: hoyde }}
                 className={getContainerClass()}
-                onTransitionEnd={() => {
-                    onHoydeTransitionEnd();
-                }}
+                onTransitionEnd={() => onHoydeTransitionEnd()}
             >
                 <Vis hvis={visInnhold}>
-                    <div className="js-tillegg"
-                        ref={(c) => {
-                            tilleggsinnhold = c as HTMLDivElement;
-                        }}>
+                    <div className="js-tillegg" ref={tilleggsinnhold}>
                         <div className="tilleggsinnhold__innhold" style={{ opacity: opacity }}>
                             {children}
                         </div>
