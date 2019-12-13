@@ -13,7 +13,7 @@ interface UndersporsmalProps {
     sporsmal: Sporsmal;
 }
 
-const Undersporsmal = ({ sporsmal }: UndersporsmalProps) => {
+const SporsmalSwitch = ({ sporsmal }: UndersporsmalProps) => {
     switch (sporsmal.svartype) {
         case RSSvartype.CHECKBOX:
         case RSSvartype.CHECKBOX_PANEL:
@@ -60,4 +60,4 @@ const Undersporsmal = ({ sporsmal }: UndersporsmalProps) => {
     }
 };
 
-export default Undersporsmal;
+export default SporsmalSwitch;

@@ -4,7 +4,7 @@ import React, { useEffect } from 'react';
 import { Element, Normaltekst } from 'nav-frontend-typografi';
 import Vis from '../../../utils/vis';
 import tekster from '../sporsmal-tekster';
-import { SpmProps } from '../sporsmalene';
+import { SpmProps } from '../sporsmal-form';
 import { hentSvar } from '../sporsmal-utils';
 import UndersporsmalListe from '../undersporsmal/undersporsmal-liste';
 import Flatpickr from 'react-flatpickr';

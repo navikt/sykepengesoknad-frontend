@@ -1,46 +1,12 @@
 import React, { useEffect } from 'react';
-import useForm, { FormContext, useFormContext } from 'react-hook-form';
-import { useHistory, useParams } from 'react-router-dom';
+import { useFormContext } from 'react-hook-form';
+import { useParams } from 'react-router-dom';
 import tekster from '../sporsmal-tekster';
-import { hentSvar, pathUtenSteg, settSvar } from '../sporsmal-utils';
-import FeilOppsummering from '../../skjema/feiloppsummering/feil-oppsummering';
+import { hentSvar } from '../sporsmal-utils';
 import Vis from '../../../utils/vis';
 import { Normaltekst } from 'nav-frontend-typografi';
 import UndersporsmalListe from '../undersporsmal/undersporsmal-liste';
-import Knapperad from '../sporsmal-form/knapperad';
-import { useAppStore } from '../../../data/stores/app-store';
-import { SpmProps } from '../sporsmalene';
-
-const CheckboxPanel = ({ sporsmal }: SpmProps) => {
-    const { valgtSoknad, setValgtSoknad } = useAppStore();
-    const history = useHistory();
-    const { stegId } = useParams();
-    const spmIndex = parseInt(stegId) - 1;
-    const methods = useForm();
-
-    const onSubmit = (data: any) => {
-        settSvar(sporsmal, data);
-        methods.reset();
-        setValgtSoknad(valgtSoknad);
-        history.push(pathUtenSteg(history.location.pathname) + '/' + (spmIndex + 2));
-    };
-
-    return (
-        sporsmal.erHovedSporsmal
-            ?
-            <FormContext {...methods}>
-                <form onSubmit={methods.handleSubmit(onSubmit)} className="sporsmal__form">
-                    <FeilOppsummering visFeilliste={true} errors={methods.errors} />
-                    <CheckboxInput sporsmal={sporsmal} />
-                    <Knapperad onSubmit={onSubmit} />
-                </form>
-            </FormContext>
-            :
-            <CheckboxInput sporsmal={sporsmal} />
-    );
-};
-
-export default CheckboxPanel;
+import { SpmProps } from '../sporsmal-form';
 
 const CheckboxInput = ({ sporsmal }: SpmProps) => {
     const { stegId } = useParams();
@@ -51,6 +17,7 @@ const CheckboxInput = ({ sporsmal }: SpmProps) => {
 
     useEffect(() => {
         setValue(compId, hentSvar(sporsmal));
+        console.log('hentSvar CheckboxInput', hentSvar(sporsmal)); // eslint-disable-line
         // eslint-disable-next-line
     }, []);
 
@@ -71,7 +38,7 @@ const CheckboxInput = ({ sporsmal }: SpmProps) => {
             <div role="alert" aria-live="assertive">
                 <Vis hvis={errors.verdi !== undefined}>
                     <Normaltekst tag="span" className="skjemaelement__feilmelding">
-                        {errors.verdi && errors.verdi.message}
+                        {errors.verdi && errors[compId].message}
                     </Normaltekst>
                 </Vis>
             </div>
@@ -84,3 +51,5 @@ const CheckboxInput = ({ sporsmal }: SpmProps) => {
         </>
     )
 };
+
+export default CheckboxInput;

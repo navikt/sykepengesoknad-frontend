@@ -1,7 +1,7 @@
 import React from 'react';
 import { Element } from 'nav-frontend-typografi';
 import parser from 'html-react-parser';
-import Undersporsmal from '../../../sporsmal/undersporsmal/undersporsmal';
+import SporsmalSwitch from '../../../sporsmal/undersporsmal/sporsmal-switch';
 import { OppsummeringProps } from '../oppsummering';
 
 const UndertekstSum = ({ sporsmal }: OppsummeringProps) => {
@@ -11,7 +11,7 @@ const UndertekstSum = ({ sporsmal }: OppsummeringProps) => {
             <div className="redaksjonelt-innhold">
                 {parser(sporsmal.undertekst)}
             </div>
-            <Undersporsmal sporsmal={sporsmal} />
+            <SporsmalSwitch sporsmal={sporsmal} />
         </div>
     );
 };

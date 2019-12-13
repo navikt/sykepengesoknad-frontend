@@ -1,23 +1,21 @@
 import React from 'react';
 import Vis from '../../../utils/vis';
-import Undersporsmal from './undersporsmal';
+import SporsmalSwitch from './sporsmal-switch';
 import { Sporsmal } from '../../../types/types';
 
 export interface UndersporsmalProps {
     undersporsmal: Sporsmal[];
 }
 
-const UndersporsmalListe = ({ undersporsmal }: UndersporsmalProps) => {
+const UndersporsmalListe = ({ undersporsmal }: any) => {
     return (
-        <Vis hvis={undersporsmal.length > 0}>
-            {undersporsmal.map((underspm: Sporsmal, idx: number) => {
-                return (
-                    <Vis hvis={underspm.kriterieForVisningAvUndersporsmal !== undefined} key={idx}>
-                        <Undersporsmal sporsmal={underspm} key={idx} />
-                    </Vis>
-                );
-            }).filter((underspm) => underspm !== null)}
-        </Vis>
+        undersporsmal.map((underspm: Sporsmal, idx: number) => {
+            return (
+                <Vis hvis={underspm.kriterieForVisningAvUndersporsmal !== undefined} key={idx}>
+                    <SporsmalSwitch sporsmal={underspm} />
+                </Vis>
+            );
+        }).filter((underspm: any) => underspm !== null)
     );
 };
 

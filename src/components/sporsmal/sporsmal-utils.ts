@@ -2,6 +2,7 @@ import { TagTyper } from '../../types/enums';
 import { fjernIndexFraTag } from './field-utils';
 import { Soknad, Sporsmal } from '../../types/types';
 import { RSSvar } from '../../types/rs-types/rs-svar';
+import { RSSvarliste } from '../../types/rs-types/rs-svarliste';
 
 export const hentSporsmalForOppsummering = (soknad: Soknad) => {
     return soknad.sporsmal.filter((s) => {
@@ -25,33 +26,26 @@ export const hentNokkel = (soknad: Soknad, sidenummer: number) => {
             : `sykepengesoknad.${fjernIndexFraTag(sporsmal.tag).toLowerCase()}.tittel`;
 };
 
-export const settSvar = (sporsmal: Sporsmal, verdi: any): void => {
-    if (verdi === undefined) {
+export const settSvar = (sporsmal: Sporsmal, verdier: Record<string, string | number | boolean | Date >): void => {
+    if (verdier === undefined) {
         return;
     }
 
-    if (Array.isArray(verdi)) {
-        const svarene: RSSvar[] = [];
-        verdi.forEach(v => {
-            const svar: RSSvar = { verdi: v };
-            svarene.push(svar);
-        });
+    const svarene: RSSvarliste[] = [];
+    Object.entries(verdier).forEach(([key, value]) => {
+        const svar: RSSvar = { verdi: value ? value.toString() : '' };
         sporsmal.svarliste = {
-            sporsmalId: sporsmal.id,
-            svar: svarene
+            sporsmalId: key,
+            svar: [ svar ]
         };
-    } else {
-        sporsmal.svarliste = {
-            sporsmalId: sporsmal.id,
-            svar: [ { verdi: verdi } ]
-        }
-    }
+        svarene.push(sporsmal.svarliste)
+    });
+    console.log('svarene', svarene); // eslint-disable-line
 };
 
 export const hentSvar = (sporsmal: Sporsmal): any => {
     if (sporsmal.svarliste.svar[0] !== undefined) {
-        const svar = sporsmal.svarliste.svar[0].verdi;
-        return svar;
+        return sporsmal.svarliste.svar[0].verdi;
     }
     return '';
 };

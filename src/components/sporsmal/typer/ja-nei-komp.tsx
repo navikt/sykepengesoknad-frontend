@@ -1,14 +1,11 @@
-import useForm, { FormContext, useFormContext } from 'react-hook-form';
+import { useFormContext } from 'react-hook-form';
 import React, { useEffect, useRef } from 'react';
 import { Element, Normaltekst } from 'nav-frontend-typografi';
-import { useHistory, useParams } from 'react-router-dom';
 import Vis from '../../../utils/vis';
-import { SpmProps } from '../sporsmalene';
-import Knapperad from '../sporsmal-form/knapperad';
-import { useAppStore } from '../../../data/stores/app-store';
-import { hentSvar, pathUtenSteg, settSvar } from '../sporsmal-utils';
+import { SpmProps } from '../sporsmal-form';
+import { hentSvar, settSvar } from '../sporsmal-utils';
 import UndersporsmalListe from '../undersporsmal/undersporsmal-liste';
-import FeilOppsummering from '../../skjema/feiloppsummering/feil-oppsummering';
+
 
 const jaNeiValg = [ {
     value: 'ja',
@@ -18,38 +15,6 @@ const jaNeiValg = [ {
     label: 'Nei',
 } ];
 
-export const JaNeiKomp = ({ sporsmal }: SpmProps) => {
-    const { valgtSoknad, setValgtSoknad } = useAppStore();
-    const history = useHistory();
-    const { stegId } = useParams();
-    const spmIndex = parseInt(stegId) - 1;
-    const methods = useForm();
-    const compId = 'spm_' + sporsmal.id;
-
-    const onSubmit = (data: any) => {
-        settSvar(sporsmal, data[compId]);
-        methods.reset();
-        setValgtSoknad(valgtSoknad);
-        history.push(pathUtenSteg(history.location.pathname) + '/' + (spmIndex + 2));
-    };
-
-    return (
-        sporsmal.erHovedSporsmal
-            ?
-            <FormContext {...methods}>
-                <form onSubmit={methods.handleSubmit(onSubmit)} className="sporsmal__form">
-                    <FeilOppsummering visFeilliste={true} errors={methods.errors} />
-                    <JaNeiInput sporsmal={sporsmal} />
-                    <Knapperad onSubmit={onSubmit} />
-                </form>
-            </FormContext>
-            :
-            <JaNeiInput sporsmal={sporsmal} />
-    );
-};
-
-export default JaNeiKomp;
-
 const JaNeiInput = ({ sporsmal }: SpmProps) => {
     const compId = 'spm_' + sporsmal.id;
     const undersporsmal = useRef<HTMLDivElement>(null);
@@ -58,6 +23,7 @@ const JaNeiInput = ({ sporsmal }: SpmProps) => {
 
     useEffect(() => {
         setValue(compId, hentSvar(sporsmal)[compId]);
+        console.log('hentSvar JaNeiInput', hentSvar(sporsmal)[compId]); // eslint-disable-line
         if (watchVerdi === 'ja') {
             undersporsmal.current.classList.add('aapen');
         } else {
@@ -68,7 +34,7 @@ const JaNeiInput = ({ sporsmal }: SpmProps) => {
 
     const changeValue = (value: string) => {
         setValue(compId, value);
-        settSvar(sporsmal, value);
+        settSvar(sporsmal, {[compId]: value})
     };
 
     return (
@@ -99,7 +65,9 @@ const JaNeiInput = ({ sporsmal }: SpmProps) => {
                                         ref={register({ required: 'Et alternativ må velges' })}
                                     />
                                     <span className="inputPanel__label">{valg.label}</span>
+{/*
                                     {dirty && <p>This field is dirty</p>}
+*/}
                                 </label>
                             )
                         })}
@@ -123,3 +91,5 @@ const JaNeiInput = ({ sporsmal }: SpmProps) => {
         </>
     )
 };
+
+export default JaNeiInput;

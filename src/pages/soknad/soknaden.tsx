@@ -16,7 +16,7 @@ import Oppsummering from '../../components/soknaden/oppsummering/oppsummering';
 import tekster from './soknaden-tekster';
 import { setBodyClass } from '../../utils/utils';
 import Vis from '../../utils/vis';
-import Sporsmalene from '../../components/sporsmal/sporsmalene';
+import SporsmalForm from '../../components/sporsmal/sporsmal-form';
 import SporsmalSteg from '../../components/sporsmal/sporsmal-steg/sporsmal-steg';
 import { hentNokkel } from '../../components/sporsmal/sporsmal-utils';
 import './soknaden.less';
@@ -86,7 +86,7 @@ const Fordeling = () => {
                         <Normaltekst tag="p" className="sporsmal__intro">{tekster['sykepengesoknad.foer-du-begynner.introtekst']}</Normaltekst>
                     </Vis>
 
-                    <Sporsmalene />
+                    <SporsmalForm />
                 </>
             );
 
