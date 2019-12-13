@@ -1,26 +1,16 @@
 .undersporsmal {
     max-height: 0;
-    height: 100px;
-    transition: all .5s cubic-bezier(0.465, 0.183, 0.153, 0.946);
-
-    &.aapen {
-        max-height: 100px;
-        margin: 2rem 0;
-    }
-}
-
-.tilleggssporsmal__innholdContainer--medAnimasjon {
     overflow: hidden;
-    transition: .3s height cubic-bezier(0.465, 0.183, 0.153, 0.946);
-    transform: translate3d(0, 0, 0);
+    opacity: 0;
 }
 
-.tilleggsinnhold__innhold {
-    position: relative;
-    transition: .3s opacity cubic-bezier(0.465, 0.183, 0.153, 0.946);
-    opacity: 0;
+.undersporsmal--vis {
+    height: auto;
+    max-height: 200px;
+    transition: max-height 1.5s ease, opacity 1s ease;
+    opacity: 1;
+}
 
-    .hjelpeboble--horisontal.press {
-        margin-bottom: 1rem;
-    }
+.undersporsmal--skjul {
+    transition: max-height 0.4s ease, opacity 1s ease;
 }

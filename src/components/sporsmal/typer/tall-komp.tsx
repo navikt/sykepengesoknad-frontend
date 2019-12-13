@@ -42,7 +42,7 @@ const TallInput = ({ sporsmal, desimaler }: AllTallProps) => {
             </Vis>
 
             <input type="number"
-                className="input--s"
+                className="skjemaelement__input input--s"
                 name={compId}
                 id={compId}
                 ref={register({

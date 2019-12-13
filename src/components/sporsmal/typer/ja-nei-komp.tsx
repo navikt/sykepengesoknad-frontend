@@ -1,10 +1,11 @@
 import { useFormContext } from 'react-hook-form';
-import React, { useEffect, useRef } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Element, Normaltekst } from 'nav-frontend-typografi';
 import Vis from '../../../utils/vis';
 import { SpmProps } from '../sporsmal-form';
 import { hentSvar, settSvar } from '../sporsmal-utils';
 import UndersporsmalListe from '../undersporsmal/undersporsmal-liste';
+import AnimateOnMount from '../../animate-on-mount';
 
 
 const jaNeiValg = [ {
@@ -16,25 +17,19 @@ const jaNeiValg = [ {
 } ];
 
 const JaNeiInput = ({ sporsmal }: SpmProps) => {
+    const [ lokal, setLokal ] = useState<string>('nei');
     const compId = 'spm_' + sporsmal.id;
-    const undersporsmal = useRef<HTMLDivElement>(null);
-    const { register, setValue, watch, errors, formState: { dirty } } = useFormContext();
-    const watchVerdi = watch(compId);
+    const { register, setValue, errors, formState: { dirty } } = useFormContext();
 
     useEffect(() => {
         setValue(compId, hentSvar(sporsmal)[compId]);
-        console.log('hentSvar JaNeiInput', hentSvar(sporsmal)[compId]); // eslint-disable-line
-        if (watchVerdi === 'ja') {
-            undersporsmal.current.classList.add('aapen');
-        } else {
-            undersporsmal.current.classList.remove('aapen');
-        }
         // eslint-disable-next-line
-    }, []);
+    }, [ lokal ]);
 
     const changeValue = (value: string) => {
+        setLokal(value);
         setValue(compId, value);
-        settSvar(sporsmal, {[compId]: value})
+        settSvar(sporsmal, { [compId]: value })
     };
 
     return (
@@ -65,9 +60,7 @@ const JaNeiInput = ({ sporsmal }: SpmProps) => {
                                         ref={register({ required: 'Et alternativ må velges' })}
                                     />
                                     <span className="inputPanel__label">{valg.label}</span>
-{/*
                                     {dirty && <p>This field is dirty</p>}
-*/}
                                 </label>
                             )
                         })}
@@ -83,11 +76,9 @@ const JaNeiInput = ({ sporsmal }: SpmProps) => {
                 </Vis>
             </div>
 
-            <div className="undersporsmal" ref={undersporsmal}>
-                <Vis hvis={watchVerdi === 'ja'}>
-                    <UndersporsmalListe undersporsmal={sporsmal.undersporsmal} />
-                </Vis>
-            </div>
+            <AnimateOnMount mounted={lokal === 'ja'} enter="undersporsmal--vis" leave="undersporsmal--skjul" start="undersporsmal">
+                <UndersporsmalListe undersporsmal={sporsmal.undersporsmal} />
+            </AnimateOnMount>
         </>
     )
 };

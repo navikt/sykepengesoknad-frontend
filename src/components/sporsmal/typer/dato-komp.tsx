@@ -46,6 +46,7 @@ const DatoInput = ({ sporsmal }: SpmProps) => {
                 name={compId}
                 onChange={onChange}
                 value={watchVerdi}
+                className="skjemaelement__input input--s"
                 options={{
                     minDate: sporsmal.min ? dayjs(sporsmal.min).toDate() : '',
                     maxDate: sporsmal.max ? dayjs(sporsmal.max).toDate() : '',
@@ -54,7 +55,8 @@ const DatoInput = ({ sporsmal }: SpmProps) => {
                     dateFormat: 'Y-m-d',
                     altInput: true,
                     altFormat: 'd.m.Y',
-                    locale: Norwegian
+                    locale: Norwegian,
+                    allowInput: true
                 }}
             />
 
