@@ -5,15 +5,16 @@ import { Normaltekst } from 'nav-frontend-typografi';
 import BjornBildeStor from './bjorn-bilde-stor';
 import BjornBildeLiten from './bjorn-bilde-liten';
 import tekster from './bjorn-tekster';
+import './bjorn.less';
 
 interface BjornProps {
-    bildeAlt: string;
+    bildeAlt?: string;
     nokkel: string;
-    children: React.ReactElement;
-    hvit: boolean;
-    stor: boolean;
-    vertikal: boolean;
-    className: string;
+    children?: React.ReactElement;
+    hvit?: boolean;
+    stor?: boolean;
+    vertikal?: boolean;
+    className?: string;
 }
 
 export const Bjorn = ({ bildeAlt = 'NAV-ansatt', nokkel, children, hvit = false, stor = false, vertikal = false, className = '' }: BjornProps) => {

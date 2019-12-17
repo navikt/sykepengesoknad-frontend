@@ -1,4 +1,4 @@
-import { TidsPeriode } from '../types/types';
+import { Soknad, Sykmelding, TidsPeriode } from '../types/types';
 import { RSSoknadsperiode } from '../types/rs-types/rs-soknadsperiode';
 import { fraInputdatoTilJSDato } from './dato-utils';
 
@@ -187,4 +187,16 @@ export const periodeOverlapperMedPeriode = (periodeA_: TidsPeriode, periodeB_: T
     } catch (e) {
         return false;
     }
+};
+
+export const erOppdelt = (soknad: Soknad, sykmelding: Sykmelding) => {
+    if (!sykmelding) {
+        return false;
+    }
+
+    const tomSykmelding = senesteTom(sykmelding.mulighetForArbeid.perioder);
+    const fomSykmelding = tidligsteFom(sykmelding.mulighetForArbeid.perioder);
+
+    return !(soknad.fom.getTime() === fomSykmelding.getTime()
+        && soknad.tom.getTime() === tomSykmelding.getTime());
 };

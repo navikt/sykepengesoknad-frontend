@@ -6,9 +6,14 @@ import { EtikettLiten, Normaltekst } from 'nav-frontend-typografi';
 import dayjs from 'dayjs';
 import { useAppStore } from '../../../data/stores/app-store';
 import tekster from './opplysninger-tekster';
+import Bjorn from '../../sporsmal/bjorn/bjorn';
+import Vis from '../../../utils/vis';
+import { erOppdelt } from '../../../utils/periode-utils';
+import { RSSoknadstype } from '../../../types/rs-types/rs-soknadstype';
 
 const SykmeldingPerioder = () => {
-    const { valgtSykmelding } = useAppStore();
+    const { valgtSoknad, valgtSykmelding } = useAppStore();
+    const visBjorn = valgtSoknad.soknadstype === RSSoknadstype.ARBEIDSLEDIG || valgtSoknad.soknadstype === RSSoknadstype.SELVSTENDIGE_OG_FRILANSERE;
 
     if (!valgtSykmelding) {
         return null;
@@ -28,6 +33,9 @@ const SykmeldingPerioder = () => {
                     </div>
                 );
             })}
+            <Vis hvis={erOppdelt(valgtSoknad, valgtSykmelding) && visBjorn}>
+                <Bjorn className="" nokkel="sykepengesoknad.sykmelding-utdrag.oppdelt.bjorn" />
+            </Vis>
         </div>
     );
 };
