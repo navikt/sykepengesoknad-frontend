@@ -53,10 +53,9 @@ export const formaterFlereVerdier = (verdi: any) => {
 
 export const fjernIndexFraTag = (tag: string) => {
     const separator = '_';
-    const tagdeler = tag.split(separator);
-    if (!isNaN(parseInt(tagdeler[tagdeler.length - 1], 10))) {
-        tagdeler.splice(-1, 1);
-        return tagdeler.join(separator);
+    const index = tag.lastIndexOf(separator);
+    if(index === (tag.length - 2) || index === (tag.length - 1)) {
+        tag = tag.slice(0, index);
     }
     return tag;
 };

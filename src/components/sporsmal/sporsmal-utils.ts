@@ -40,7 +40,6 @@ export const settSvar = (sporsmal: Sporsmal, verdier: Record<string, string | nu
         };
         svarene.push(sporsmal.svarliste)
     });
-    console.log('svarene', svarene); // eslint-disable-line
 };
 
 export const hentSvar = (sporsmal: Sporsmal): any => {

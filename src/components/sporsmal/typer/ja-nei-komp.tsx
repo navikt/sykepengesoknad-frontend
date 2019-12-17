@@ -1,12 +1,12 @@
 import { useFormContext } from 'react-hook-form';
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import { Element, Normaltekst } from 'nav-frontend-typografi';
 import Vis from '../../../utils/vis';
-import { SpmProps } from '../sporsmal-form';
+import { SpmProps } from '../sporsmal-form/sporsmal-form';
 import { hentSvar, settSvar } from '../sporsmal-utils';
 import UndersporsmalListe from '../undersporsmal/undersporsmal-liste';
 import AnimateOnMount from '../../animate-on-mount';
-
+import { useAppStore } from '../../../data/stores/app-store';
 
 const jaNeiValg = [ {
     value: 'ja',
@@ -17,17 +17,17 @@ const jaNeiValg = [ {
 } ];
 
 const JaNeiInput = ({ sporsmal }: SpmProps) => {
-    const [ lokal, setLokal ] = useState<string>('nei');
+    const { visUnderspm, setVisUnderspm } = useAppStore();
     const compId = 'spm_' + sporsmal.id;
-    const { register, setValue, errors, formState: { dirty } } = useFormContext();
+    const { register, setValue, errors } = useFormContext();
 
     useEffect(() => {
         setValue(compId, hentSvar(sporsmal)[compId]);
         // eslint-disable-next-line
-    }, [ lokal ]);
+    }, [visUnderspm]);
 
     const changeValue = (value: string) => {
-        setLokal(value);
+        setVisUnderspm(value === 'ja');
         setValue(compId, value);
         settSvar(sporsmal, { [compId]: value })
     };
@@ -60,7 +60,6 @@ const JaNeiInput = ({ sporsmal }: SpmProps) => {
                                         ref={register({ required: 'Et alternativ må velges' })}
                                     />
                                     <span className="inputPanel__label">{valg.label}</span>
-                                    {dirty && <p>This field is dirty</p>}
                                 </label>
                             )
                         })}
@@ -76,7 +75,7 @@ const JaNeiInput = ({ sporsmal }: SpmProps) => {
                 </Vis>
             </div>
 
-            <AnimateOnMount mounted={lokal === 'ja'} enter="undersporsmal--vis" leave="undersporsmal--skjul" start="undersporsmal">
+            <AnimateOnMount mounted={visUnderspm} enter="undersporsmal--vis" leave="undersporsmal--skjul" start="undersporsmal">
                 <UndersporsmalListe undersporsmal={sporsmal.undersporsmal} />
             </AnimateOnMount>
         </>

@@ -2,15 +2,21 @@
     max-height: 0;
     overflow: hidden;
     opacity: 0;
+
+    .skjema__sporsmal {
+        display: block;
+        margin: 2rem 0 1rem;
+    }
 }
 
 .undersporsmal--vis {
     height: auto;
     max-height: 200px;
-    transition: max-height 1.5s ease, opacity 1s ease;
+    overflow: visible;
+    transition: max-height 0.8s ease-in, opacity 0.4s ease-in;
     opacity: 1;
 }
 
 .undersporsmal--skjul {
-    transition: max-height 0.4s ease, opacity 1s ease;
+    transition: max-height 0.3s ease-out, opacity 0.7s ease-out;
 }

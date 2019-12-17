@@ -6,7 +6,7 @@ import { hentSvar } from '../sporsmal-utils';
 import Vis from '../../../utils/vis';
 import { Normaltekst } from 'nav-frontend-typografi';
 import UndersporsmalListe from '../undersporsmal/undersporsmal-liste';
-import { SpmProps } from '../sporsmal-form';
+import { SpmProps } from '../sporsmal-form/sporsmal-form';
 
 const CheckboxInput = ({ sporsmal }: SpmProps) => {
     const { stegId } = useParams();
@@ -17,7 +17,6 @@ const CheckboxInput = ({ sporsmal }: SpmProps) => {
 
     useEffect(() => {
         setValue(compId, hentSvar(sporsmal));
-        console.log('hentSvar CheckboxInput', hentSvar(sporsmal)); // eslint-disable-line
         // eslint-disable-next-line
     }, []);
 

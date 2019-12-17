@@ -4,7 +4,7 @@ import React, { useEffect } from 'react';
 import { Element, Normaltekst } from 'nav-frontend-typografi';
 import Vis from '../../../utils/vis';
 import tekster from '../sporsmal-tekster';
-import { SpmProps } from '../sporsmal-form';
+import { SpmProps } from '../sporsmal-form/sporsmal-form';
 import { hentSvar } from '../sporsmal-utils';
 import UndersporsmalListe from '../undersporsmal/undersporsmal-liste';
 import Flatpickr from 'react-flatpickr';
@@ -47,6 +47,7 @@ const DatoInput = ({ sporsmal }: SpmProps) => {
                 onChange={onChange}
                 value={watchVerdi}
                 className="skjemaelement__input input--s"
+                placeholder="dd.mm.yyyy"
                 options={{
                     minDate: sporsmal.min ? dayjs(sporsmal.min).toDate() : '',
                     maxDate: sporsmal.max ? dayjs(sporsmal.max).toDate() : '',

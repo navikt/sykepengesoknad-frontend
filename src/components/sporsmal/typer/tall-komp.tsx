@@ -3,7 +3,7 @@ import { useFormContext } from 'react-hook-form';
 import { Normaltekst } from 'nav-frontend-typografi';
 import Vis from '../../../utils/vis';
 import tekster from '../sporsmal-tekster';
-import { SpmProps } from '../sporsmal-form';
+import { SpmProps } from '../sporsmal-form/sporsmal-form';
 import { hentSvar } from '../sporsmal-utils';
 import UndersporsmalListe from '../undersporsmal/undersporsmal-liste';
 
