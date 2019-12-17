@@ -7,20 +7,23 @@
         margin-top: 0.65rem;
     }
 
-    .spm_1 {
-        .skjemaelement__input + .skjemaelement__label {
-            background-color: @navOransjeLighten80;
-            padding: 1rem 1rem 1rem 3.3rem;
+    .skjemaelement__input {
+        font-family: 'Source Sans Pro', Arial, sans-serif;
+        font-size: 1rem;
+    }
 
-            &:before {
-                top: 1rem;
-                left: 1rem;
-            }
-        }
+    .skjemaelement__input + .skjemaelement__label {
+        background-color: @navOransjeLighten80;
+        padding: 1rem 1rem 1rem 3.3rem;
 
-        .skjemaelement__input:checked + .skjemaelement__label {
-            background-color: @navGronnLighten80;
+        &:before {
+            top: 1rem;
+            left: 1rem;
         }
+    }
+
+    .skjemaelement__input:checked + .skjemaelement__label {
+        background-color: @navGronnLighten80;
     }
 
     .inputPanelGruppe__inner {
