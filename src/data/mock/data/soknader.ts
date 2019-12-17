@@ -19,7 +19,8 @@ export const soknader: any = [
         "korrigertAv": null,
         "arbeidssituasjon": "ARBEIDSTAKER",
         "soknadPerioder": [ { "fom": "2019-09-01", "tom": "2019-09-20", "grad": 100 } ],
-        "sporsmal": [ {
+        "sporsmal": [
+            {
             "id": "581279",
             "tag": "ANSVARSERKLARING",
             "sporsmalstekst": "Jeg vet at jeg kan miste retten til sykepenger hvis opplysningene jeg gir ikke er riktige eller fullstendige. Jeg vet også at NAV kan holde igjen eller kreve tilbake penger, og at å gi feil opplysninger kan være straffbart.",
@@ -31,7 +32,8 @@ export const soknader: any = [
             "kriterieForVisningAvUndersporsmal": null,
             "svar": [],
             "undersporsmal": []
-        }, {
+        },
+            {
             "id": "581280",
             "tag": "EGENMELDINGER",
             "sporsmalstekst": "Vi har registrert at du ble sykmeldt søndag 1. september 2019. Var du syk og borte fra jobb i perioden 16. - 31. august 2019?",
@@ -103,7 +105,8 @@ export const soknader: any = [
                     } ]
                 } ]
             } ]
-        }, {
+        },
+            {
             "id": "581286",
             "tag": "TILBAKE_I_ARBEID",
             "sporsmalstekst": "Var du tilbake i fullt arbeid hos ÅSEN BOFELLESSKAP i løpet av perioden 1. - 20. september 2019?",
@@ -127,7 +130,8 @@ export const soknader: any = [
                 "svar": [],
                 "undersporsmal": []
             } ]
-        }, {
+        },
+            {
             "id": "581288",
             "tag": "FERIE_V2",
             "sporsmalstekst": "Tok du ut ferie mens du var sykmeldt 1. - 20. september 2019?",
@@ -151,7 +155,8 @@ export const soknader: any = [
                 "svar": [],
                 "undersporsmal": []
             } ]
-        }, {
+        },
+            {
             "id": "581290",
             "tag": "PERMISJON_V2",
             "sporsmalstekst": "Tok du permisjon mens du var sykmeldt 1. - 20. september 2019?",
@@ -175,7 +180,8 @@ export const soknader: any = [
                 "svar": [],
                 "undersporsmal": []
             } ]
-        }, {
+        },
+            {
             "id": "581292",
             "tag": "UTLAND_V2",
             "sporsmalstekst": "Var du på reise utenfor Norge mens du var sykmeldt 1. - 20. september 2019?",
@@ -199,7 +205,8 @@ export const soknader: any = [
                 "svar": [],
                 "undersporsmal": []
             } ]
-        }, {
+        },
+            {
             "id": "581294",
             "tag": "JOBBET_DU_100_PROSENT_0",
             "sporsmalstekst": "I perioden 1. - 20. september 2019 var du 100 % sykmeldt fra ÅSEN BOFELLESSKAP. Jobbet du noe i denne perioden?",
@@ -286,7 +293,8 @@ export const soknader: any = [
                     }
                 ]
             } ]
-        }, {
+        },
+            {
             "id": "581301",
             "tag": "ANDRE_INNTEKTSKILDER",
             "sporsmalstekst": "Har du andre inntektskilder enn ÅSEN BOFELLESSKAP?",
@@ -442,7 +450,8 @@ export const soknader: any = [
                     "undersporsmal": []
                 } ]
             } ]
-        }, {
+        },
+            {
             "id": "581314",
             "tag": "UTDANNING",
             "sporsmalstekst": "Har du vært under utdanning i løpet av perioden 1. - 20. september 2019?",
@@ -481,7 +490,8 @@ export const soknader: any = [
                     "undersporsmal": []
                 }
             ]
-        }, {
+        },
+            {
             "id": "581317",
             "tag": "VAER_KLAR_OVER_AT",
             "sporsmalstekst": "Viktig å være klar over:",
@@ -493,7 +503,8 @@ export const soknader: any = [
             "kriterieForVisningAvUndersporsmal": null,
             "svar": [],
             "undersporsmal": []
-        }, {
+        },
+            {
             "id": "581318",
             "tag": "BEKREFT_OPPLYSNINGER",
             "sporsmalstekst": "Jeg har lest all informasjonen jeg har fått i søknaden og bekrefter at opplysningene jeg har gitt er korrekte.",

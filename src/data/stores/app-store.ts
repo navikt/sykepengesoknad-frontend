@@ -8,6 +8,7 @@ export const useAppStore = createUseContext(() => {
     const [ sykmeldinger, setSykmeldinger ] = useState<Sykmelding[]>([]);
     const [ valgtSoknad, setValgtSoknad ] = useState<Soknad>();
     const [ valgtSykmelding, setValgtSykmelding ] = useState<Sykmelding>();
+    const [ visUnderspm, setVisUnderspm ] = useState<boolean>(false);
 
     return {
         unleash, setUnleash,
@@ -15,5 +16,6 @@ export const useAppStore = createUseContext(() => {
         valgtSoknad, setValgtSoknad,
         sykmeldinger, setSykmeldinger,
         valgtSykmelding, setValgtSykmelding,
+        visUnderspm, setVisUnderspm
     };
 });
