@@ -20,6 +20,7 @@ const SporsmalForm = () => {
     const spmIndex = parseInt(stegId) - 1;
     const methods = useForm();
     const sporsmal = valgtSoknad.sporsmal[spmIndex];
+    console.log('valgtSoknad', valgtSoknad); // eslint-disable-line
 
     const onSubmit = (data: Record<string, any>) => {
         setVisUnderspm(false);

@@ -1,6 +1,6 @@
 import FetchMock, { MiddlewareUtils } from 'yet-another-fetch-mock';
-import { soknader } from './data/soknader';
-import { sykmeldinger } from './data/sykmeldinger';
+import { soknader } from './data/soknader-arbeidstaker-15086801482';
+import { sykmeldinger } from './data/sykmeldinger-arbeidstaker-15086801482';
 import { unleashToggles } from './data/toggles';
 import { SYFO_API_SOKNADER } from '../../utils/constants';
 

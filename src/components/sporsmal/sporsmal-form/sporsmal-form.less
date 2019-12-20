@@ -1,6 +1,11 @@
 @import '../../../../node_modules/nav-frontend-core/less/_variabler';
 
 .sporsmal__form {
+    .skjemaelement--horisontal {
+        display: flex;
+        flex-direction: row;
+    }
+
     .skjema-feilmelding {
         color: @redError;
         font-style: italic;
@@ -13,17 +18,22 @@
     }
 
     .skjemaelement__input + .skjemaelement__label {
-        background-color: @navOransjeLighten80;
-        padding: 1rem 1rem 1rem 3.3rem;
+        padding: 0.5rem 1rem 0.5rem 2.3rem;
 
         &:before {
-            top: 1rem;
-            left: 1rem;
+            top: 0.5rem;
         }
     }
 
-    .skjemaelement__input:checked + .skjemaelement__label {
-        background-color: @navGronnLighten80;
+    .medEnhet {
+        display: flex;
+        justify-content: flex-start;
+        align-items: center;
+        font-family: 'Source Sans Pro', Arial, sans-serif;
+
+        &__enhet {
+            margin-left: 0.5rem;
+        }
     }
 
     .inputPanelGruppe__inner {

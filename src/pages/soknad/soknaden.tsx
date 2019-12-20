@@ -2,7 +2,7 @@ import React, { useEffect } from 'react';
 import { VenstreChevron } from 'nav-frontend-chevron';
 import { Link, RouteComponentProps, useParams } from 'react-router-dom';
 import { Normaltekst, Systemtittel } from 'nav-frontend-typografi';
-import { Brodsmule, Soknad } from '../../types/types';
+import { Brodsmule, Soknad, Sykmelding } from '../../types/types';
 import { RSSoknadstatus } from '../../types/rs-types/rs-soknadstatus';
 import Banner from '../../components/banner/banner';
 import { useAppStore } from '../../data/stores/app-store';
@@ -112,18 +112,16 @@ const Fordeling = () => {
 };
 
 export const useGlobaleData = (params: any) => {
-    const { soknader, valgtSoknad, setValgtSoknad, sykmeldinger, valgtSykmelding, setValgtSykmelding } = useAppStore();
+    const { soknader, valgtSoknad, setValgtSoknad, sykmeldinger, setValgtSykmelding } = useAppStore();
 
-    let petisjon: Soknad;
     if (!valgtSoknad) {
         soknader.filter(soknad => soknad.id === params.id).forEach(sok => {
-            petisjon = sok;
             setValgtSoknad(sok);
+            setValgtSykmelding(sykmeldingFraSoknad(sykmeldinger, sok));
         });
     }
-    if (!valgtSykmelding) {
-        sykmeldinger.filter(sm => sm.id === petisjon.sykmeldingId).forEach(melding => {
-            setValgtSykmelding(melding);
-        });
-    }
+};
+
+const sykmeldingFraSoknad = (sykmeldinger: Sykmelding[], sok: Soknad) => {
+    return sykmeldinger.filter(sm => sm.id === sok.sykmeldingId)[0];
 };

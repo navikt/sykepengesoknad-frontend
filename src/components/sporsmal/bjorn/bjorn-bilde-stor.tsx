@@ -15,6 +15,7 @@ const BjornBildeStor = ({ alt }: BjornBildeProps) => {
     const [ timeout1, setTimeout1 ] = useState<number>();
     const [ timeout2, setTimeout2 ] = useState<number>();
 
+    // eslint-disable-next-line
     useEffect(() => {
         const handle1 = window.setTimeout(() => {
             blink();
