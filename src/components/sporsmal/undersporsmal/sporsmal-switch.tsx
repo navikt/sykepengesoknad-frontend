@@ -8,6 +8,9 @@ import CheckboxPanel from '../typer/checkbox-panel';
 import { RSSvartype } from '../../../types/rs-types/rs-svartype';
 import PeriodeInput from '../typer/periode-komp';
 import './undersporsmal.less';
+import IkkeRelevant from '../typer/ikke-relevant';
+import CheckboxKomp from '../typer/checkbox-komp';
+import RadioKomp from '../typer/radio-komp';
 
 interface UndersporsmalProps {
     sporsmal: Sporsmal;
@@ -22,7 +25,7 @@ const SporsmalSwitch = ({ sporsmal }: UndersporsmalProps) => {
         case RSSvartype.CHECKBOX_GRUPPE:
             return (
                 <div className="soknad__undersporsmal">
-                    CheckboxGruppe
+                    <CheckboxKomp sporsmal={sporsmal} />
                 </div>
             );
 
@@ -44,14 +47,14 @@ const SporsmalSwitch = ({ sporsmal }: UndersporsmalProps) => {
         case RSSvartype.RADIO_GRUPPE_TIMER_PROSENT:
             return (
                 <div className="soknad__undersporsmal">
-                    RadioPanel
+                    <RadioKomp sporsmal={sporsmal} />
                 </div>
             );
 
         case RSSvartype.IKKE_RELEVANT:
             return (
                 <div className="ekstrasporsmal">
-                    IkkeRelevant
+                    <IkkeRelevant sporsmal={sporsmal} />
                 </div>
             );
 

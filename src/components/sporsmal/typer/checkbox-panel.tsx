@@ -1,32 +1,46 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { useFormContext } from 'react-hook-form';
-import { useParams } from 'react-router-dom';
 import tekster from '../sporsmal-tekster';
 import { hentSvar } from '../sporsmal-utils';
 import Vis from '../../../utils/vis';
 import { Normaltekst } from 'nav-frontend-typografi';
-import UndersporsmalListe from '../undersporsmal/undersporsmal-liste';
 import { SpmProps } from '../sporsmal-form/sporsmal-form';
 
 const CheckboxInput = ({ sporsmal }: SpmProps) => {
-    const { stegId } = useParams();
+    const [ lokal, setLokal ] = useState<string>('false');
     const compId = 'spm_' + sporsmal.id;
     const feilmelding = tekster['soknad.feilmelding.' + sporsmal.tag.toLowerCase()];
-    const { register, setValue, watch, errors } = useFormContext();
-    const watchVerdi = watch('verdi');
+    const { register, setValue, errors, getValues } = useFormContext();
+    const bekreft = useRef<HTMLDivElement>(null);
 
     useEffect(() => {
-        setValue(compId, hentSvar(sporsmal));
+        const svar = hentSvar(sporsmal);
+        setLokal(svar);
+        setValue(compId, svar);
         // eslint-disable-next-line
     }, []);
 
+    const handleChange = () => {
+        setLokal(lokal === 'true' ? 'false' : 'true');
+        bekreft.current.classList.toggle('bekreftCheckboksPanel--checked');
+        console.log('getValues', getValues()); // eslint-disable-line
+    };
+
+    const makeClassName = () => {
+        const cls = 'bekreftCheckboksPanel';
+        return lokal === 'true' ? cls + ' ' + cls + '--checked' : cls;
+    };
+
     return (
-        <>
-            <div className={'skjemaelement skjemaelement--horisontal spm_' + stegId}>
+        <div className={makeClassName()} ref={bekreft}>
+            <div className={'skjemaelement skjemaelement--horisontal'}>
                 <input type="checkbox"
                     className="skjemaelement__input checkboks"
                     name={compId}
                     id={compId}
+                    checked={lokal === 'true'}
+                    aria-checked={lokal === 'true'}
+                    onChange={handleChange}
                     ref={register({ required: feilmelding })}
                 />
                 <label className="skjemaelement__label" htmlFor={compId}>
@@ -41,13 +55,7 @@ const CheckboxInput = ({ sporsmal }: SpmProps) => {
                     </Normaltekst>
                 </Vis>
             </div>
-
-            <div className="undersporsmal">
-                <Vis hvis={watchVerdi === true}>
-                    <UndersporsmalListe undersporsmal={sporsmal.undersporsmal} />
-                </Vis>
-            </div>
-        </>
+        </div>
     )
 };
 

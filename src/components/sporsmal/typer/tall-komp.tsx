@@ -36,20 +36,26 @@ const TallInput = ({ sporsmal, desimaler }: AllTallProps) => {
     return (
         <>
             <Vis hvis={sporsmal.sporsmalstekst !== null}>
-                <label className="skjema__sporsmal" htmlFor={compId}>
+                <div className="skjema__sporsmal">
                     <Normaltekst tag="span">{sporsmal.sporsmalstekst}</Normaltekst>
-                </label>
+                </div>
             </Vis>
 
-            <input type="number"
-                className="skjemaelement__input input--s"
-                name={compId}
-                id={compId}
-                ref={register({
-                    validate: (value: any) => value === true || feilmelding
-                })}
-                onChange={() => handleChange}
-            />
+            <div className="medEnhet">
+                <input type="number"
+                    className="skjemaelement__input input--s"
+                    name={compId}
+                    id={compId}
+                    min={sporsmal.min}
+                    max={sporsmal.max}
+                    ref={register({
+                        validate: (value: any) => value === true || feilmelding
+                    })}
+                    onChange={() => handleChange}
+                    autoComplete="off"
+                />
+                <label className="medEnhet__enhet" htmlFor={compId}>{sporsmal.undertekst}</label>
+            </div>
 
             <div role="alert" aria-live="assertive">
                 <Vis hvis={errors[compId] !== undefined}>
