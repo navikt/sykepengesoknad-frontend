@@ -8,22 +8,20 @@ import { SpmProps } from '../sporsmal-form/sporsmal-form';
 
 const CheckboxInput = ({ sporsmal }: SpmProps) => {
     const [ lokal, setLokal ] = useState<string>('false');
-    const compId = 'spm_' + sporsmal.id;
     const feilmelding = tekster['soknad.feilmelding.' + sporsmal.tag.toLowerCase()];
-    const { register, setValue, errors, getValues } = useFormContext();
+    const { register, setValue, errors } = useFormContext();
     const bekreft = useRef<HTMLDivElement>(null);
 
     useEffect(() => {
         const svar = hentSvar(sporsmal);
         setLokal(svar);
-        setValue(compId, svar);
+        setValue(sporsmal.id, svar);
         // eslint-disable-next-line
     }, []);
 
     const handleChange = () => {
         setLokal(lokal === 'true' ? 'false' : 'true');
         bekreft.current.classList.toggle('bekreftCheckboksPanel--checked');
-        console.log('getValues', getValues()); // eslint-disable-line
     };
 
     const makeClassName = () => {
@@ -36,14 +34,14 @@ const CheckboxInput = ({ sporsmal }: SpmProps) => {
             <div className={'skjemaelement skjemaelement--horisontal'}>
                 <input type="checkbox"
                     className="skjemaelement__input checkboks"
-                    name={compId}
-                    id={compId}
+                    name={sporsmal.id}
+                    id={sporsmal.id}
                     checked={lokal === 'true'}
                     aria-checked={lokal === 'true'}
                     onChange={handleChange}
                     ref={register({ required: feilmelding })}
                 />
-                <label className="skjemaelement__label" htmlFor={compId}>
+                <label className="skjemaelement__label" htmlFor={sporsmal.id}>
                     {sporsmal.sporsmalstekst}
                 </label>
             </div>
@@ -51,7 +49,7 @@ const CheckboxInput = ({ sporsmal }: SpmProps) => {
             <div role="alert" aria-live="assertive">
                 <Vis hvis={errors.verdi !== undefined}>
                     <Normaltekst tag="span" className="skjemaelement__feilmelding">
-                        {errors.verdi && errors[compId].message}
+                        {errors.verdi && errors[sporsmal.id].message}
                     </Normaltekst>
                 </Vis>
             </div>

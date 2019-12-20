@@ -11,27 +11,23 @@ import { Norwegian } from 'flatpickr/dist/l10n/no.js'
 import './flatpickr.less';
 
 const PeriodeInput = ({ sporsmal }: SpmProps) => {
-    const compId = 'spm_' + sporsmal.id;
     const feilmelding = tekster['soknad.feilmelding.' + sporsmal.tag.toLowerCase()];
     const { register, setValue, watch, errors } = useFormContext();
-    const watchVerdi = watch(compId);
+    const watchVerdi = watch(sporsmal.id);
 
     const onChange = (value: any) => {
-        setValue(compId, value);
+        setValue(sporsmal.id, value);
     };
 
     useEffect(() => {
-        setValue(compId, hentSvar(sporsmal));
-        // eslint-disable-next-line
-    }, []);
-
-    useEffect(() => {
+        setValue(sporsmal.id, hentSvar(sporsmal));
         register({
-            name: compId,
+            name: sporsmal.id,
             validate: { required: feilmelding },
             required: true
         });
-    }, [ register, compId, feilmelding ]);
+        // eslint-disable-next-line
+    }, [ sporsmal.id ]);
 
     return (
         <>
@@ -40,10 +36,10 @@ const PeriodeInput = ({ sporsmal }: SpmProps) => {
             </Normaltekst>
 
             <Flatpickr
-                id={compId}
-                name={compId}
+                id={sporsmal.id}
+                name={sporsmal.id}
                 onChange={onChange}
-                value={watchVerdi}
+                value={hentSvar(sporsmal)}
                 className="skjemaelement__input input--m"
                 options={{
                     minDate: new Date(sporsmal.min),
@@ -58,9 +54,9 @@ const PeriodeInput = ({ sporsmal }: SpmProps) => {
             />
 
             <div role="alert" aria-live="assertive">
-                <Vis hvis={errors[compId] !== undefined}>
+                <Vis hvis={errors[sporsmal.id] !== undefined}>
                     <Normaltekst tag="span" className="skjemaelement__feilmelding">
-                        {errors[compId] && errors[compId].message}
+                        {errors[sporsmal.id] && errors[sporsmal.id].message}
                     </Normaltekst>
                 </Vis>
             </div>

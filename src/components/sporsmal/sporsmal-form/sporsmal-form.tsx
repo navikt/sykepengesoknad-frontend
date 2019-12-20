@@ -14,19 +14,18 @@ export interface SpmProps {
 }
 
 const SporsmalForm = () => {
-    const { setValgtSoknad, valgtSoknad, setVisUnderspm } = useAppStore();
+    const { setValgtSoknad, valgtSoknad } = useAppStore();
     const { stegId } = useParams();
     const history = useHistory();
     const spmIndex = parseInt(stegId) - 1;
     const methods = useForm();
     const sporsmal = valgtSoknad.sporsmal[spmIndex];
-    console.log('valgtSoknad', valgtSoknad); // eslint-disable-line
 
     const onSubmit = (data: Record<string, any>) => {
-        setVisUnderspm(false);
         settSvar(sporsmal, data);
         methods.reset();
-        methods.unregister('spm_' + sporsmal.id);
+        methods.unregister(sporsmal.id);
+        console.log('sporsmal', sporsmal); // eslint-disable-line
         setValgtSoknad(valgtSoknad);
         history.push(pathUtenSteg(history.location.pathname) + '/' + (spmIndex + 2));
     };

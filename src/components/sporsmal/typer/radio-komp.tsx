@@ -1,8 +1,7 @@
 import React, { useEffect } from 'react';
 import { SpmProps } from '../sporsmal-form/sporsmal-form';
 import { RSSvartype } from '../../../types/rs-types/rs-svartype';
-import { hentSvar, settSvar } from '../sporsmal-utils';
-import { useAppStore } from '../../../data/stores/app-store';
+import { hentSvar } from '../sporsmal-utils';
 import { useFormContext } from 'react-hook-form';
 import Vis from '../../../utils/vis';
 import { Normaltekst } from 'nav-frontend-typografi';
@@ -12,19 +11,15 @@ export const erHorisontal = (svartype: RSSvartype) => {
 };
 
 const RadioKomp = ({ sporsmal }: SpmProps) => {
-    const { visUnderspm, setVisUnderspm } = useAppStore();
-    const compId = 'spm_' + sporsmal.id;
     const { register, setValue, errors } = useFormContext();
 
     useEffect(() => {
-        setValue(compId, hentSvar(sporsmal)[compId]);
+        setValue(sporsmal.id, hentSvar(sporsmal)[sporsmal.id]);
         // eslint-disable-next-line
-    }, [ visUnderspm ]);
+    }, [ sporsmal.id ] );
 
     const changeValue = (value: string) => {
-        setVisUnderspm(value === 'ja');
-        setValue(compId, value);
-        settSvar(sporsmal, { [compId]: value })
+        setValue(sporsmal.id, value);
     };
 
     return (
@@ -55,9 +50,9 @@ const RadioKomp = ({ sporsmal }: SpmProps) => {
             </div>
 
             <div role="alert" aria-live="assertive">
-                <Vis hvis={errors[compId] !== undefined}>
+                <Vis hvis={errors[sporsmal.id] !== undefined}>
                     <Normaltekst tag="span" className="skjemaelement__feilmelding">
-                        {errors[compId] && errors[compId].message}
+                        {errors[sporsmal.id] && errors[sporsmal.id].message}
                     </Normaltekst>
                 </Vis>
             </div>

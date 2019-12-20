@@ -3,7 +3,6 @@ import cls from 'classnames';
 import { useParams, useHistory } from 'react-router';
 import Vis from '../../../utils/vis';
 import { pathUtenSteg } from '../sporsmal-utils';
-import { useAppStore } from '../../../data/stores/app-store';
 
 const innerCls = (aktiv: boolean, ferdig: boolean, disabled: boolean) =>
     cls('stegindikator__steg-inner', {
@@ -19,7 +18,6 @@ export interface StegProps {
 }
 
 const Steg = ({ label, index }: StegProps) => {
-    const { setVisUnderspm } = useAppStore();
     const { stegId } = useParams();
     const aktivtSteg = parseInt(stegId);
     const num = index + 1;
@@ -29,7 +27,6 @@ const Steg = ({ label, index }: StegProps) => {
     const history = useHistory();
 
     function goTo(idx: number) {
-        setVisUnderspm(false);
         history.push(pathUtenSteg(history.location.pathname) + '/' + (idx));
     }
 

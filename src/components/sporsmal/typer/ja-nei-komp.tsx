@@ -3,10 +3,9 @@ import React, { useEffect } from 'react';
 import { Element, Normaltekst } from 'nav-frontend-typografi';
 import Vis from '../../../utils/vis';
 import { SpmProps } from '../sporsmal-form/sporsmal-form';
-import { hentSvar, settSvar } from '../sporsmal-utils';
+import { hentSvar } from '../sporsmal-utils';
 import UndersporsmalListe from '../undersporsmal/undersporsmal-liste';
 import AnimateOnMount from '../../animate-on-mount';
-import { useAppStore } from '../../../data/stores/app-store';
 
 const jaNeiValg = [ {
     value: 'ja',
@@ -17,19 +16,17 @@ const jaNeiValg = [ {
 } ];
 
 const JaNeiInput = ({ sporsmal }: SpmProps) => {
-    const { visUnderspm, setVisUnderspm } = useAppStore();
-    const compId = 'spm_' + sporsmal.id;
-    const { register, setValue, errors } = useFormContext();
+    const { register, setValue, errors, watch } = useFormContext();
+    const watchVerdi = watch(sporsmal.id);
 
     useEffect(() => {
-        setValue(compId, hentSvar(sporsmal)[compId]);
+        setValue(sporsmal.id, hentSvar(sporsmal));
         // eslint-disable-next-line
-    }, [visUnderspm]);
+    }, [sporsmal.id]);
 
     const changeValue = (value: string) => {
-        setVisUnderspm(value === 'ja');
-        setValue(compId, value);
-        settSvar(sporsmal, { [compId]: value })
+        setValue(sporsmal.id, value);
+        console.log('changeValue: watchVerdi', watchVerdi); // eslint-disable-line
     };
 
     return (
@@ -47,11 +44,11 @@ const JaNeiInput = ({ sporsmal }: SpmProps) => {
                     </legend>
                     <div className="inputPanelGruppe__inner">
                         {jaNeiValg.map((valg, idx) => {
-                            const OK = hentSvar(sporsmal) === valg.value;
+                            const OK = watchVerdi === valg.value;
                             return (
                                 <label className={'inputPanel radioPanel' + (OK ? ' inputPanel--checked' : '')} key={idx}>
                                     <input type="radio"
-                                        name={compId}
+                                        name={sporsmal.id}
                                         className="inputPanel__field"
                                         aria-checked={OK}
                                         checked={OK}
@@ -68,14 +65,14 @@ const JaNeiInput = ({ sporsmal }: SpmProps) => {
             </div>
 
             <div role="alert" aria-live="assertive">
-                <Vis hvis={errors[compId] !== undefined}>
+                <Vis hvis={errors[sporsmal.id] !== undefined}>
                     <Normaltekst tag="span" className="skjemaelement__feilmelding">
-                        {errors[compId] && errors[compId].message}
+                        {errors[sporsmal.id] && errors[sporsmal.id].message}
                     </Normaltekst>
                 </Vis>
             </div>
 
-            <AnimateOnMount mounted={visUnderspm} enter="undersporsmal--vis" leave="undersporsmal--skjul" start="undersporsmal">
+            <AnimateOnMount mounted={watchVerdi === 'ja'} enter="undersporsmal--vis" leave="undersporsmal--skjul" start="undersporsmal">
                 <UndersporsmalListe undersporsmal={sporsmal.undersporsmal} />
             </AnimateOnMount>
         </>

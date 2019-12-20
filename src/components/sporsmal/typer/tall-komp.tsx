@@ -14,10 +14,9 @@ interface TallKompProps {
 type AllTallProps = SpmProps & TallKompProps;
 
 const TallInput = ({ sporsmal, desimaler }: AllTallProps) => {
-    const compId = 'spm_' + sporsmal.id;
     const feilmelding = tekster['soknad.feilmelding.' + sporsmal.tag.toLowerCase()];
     const { register, setValue, watch, errors } = useFormContext();
-    const watchVerdi = watch(compId);
+    const watchVerdi = watch(sporsmal.id);
     const undersporsmal = useRef<HTMLDivElement>(null);
 
     const handleChange = () => {
@@ -29,7 +28,7 @@ const TallInput = ({ sporsmal, desimaler }: AllTallProps) => {
     };
 
     useEffect(() => {
-        setValue(compId, hentSvar(sporsmal));
+        setValue(sporsmal.id, hentSvar(sporsmal));
         // eslint-disable-next-line
     }, []);
 
@@ -44,8 +43,8 @@ const TallInput = ({ sporsmal, desimaler }: AllTallProps) => {
             <div className="medEnhet">
                 <input type="number"
                     className="skjemaelement__input input--s"
-                    name={compId}
-                    id={compId}
+                    name={sporsmal.id}
+                    id={sporsmal.id}
                     min={sporsmal.min}
                     max={sporsmal.max}
                     ref={register({
@@ -54,13 +53,13 @@ const TallInput = ({ sporsmal, desimaler }: AllTallProps) => {
                     onChange={() => handleChange}
                     autoComplete="off"
                 />
-                <label className="medEnhet__enhet" htmlFor={compId}>{sporsmal.undertekst}</label>
+                <label className="medEnhet__enhet" htmlFor={sporsmal.id}>{sporsmal.undertekst}</label>
             </div>
 
             <div role="alert" aria-live="assertive">
-                <Vis hvis={errors[compId] !== undefined}>
+                <Vis hvis={errors[sporsmal.id] !== undefined}>
                     <Normaltekst tag="span" className="skjemaelement__feilmelding">
-                        {errors[compId] && errors[compId].message}
+                        {errors[sporsmal.id] && errors[sporsmal.id].message}
                     </Normaltekst>
                 </Vis>
             </div>

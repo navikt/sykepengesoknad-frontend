@@ -1,8 +1,7 @@
 import { TagTyper } from '../../types/enums';
 import { fjernIndexFraTag } from './field-utils';
 import { Soknad, Sporsmal } from '../../types/types';
-import { RSSvar } from '../../types/rs-types/rs-svar';
-import { RSSvarliste } from '../../types/rs-types/rs-svarliste';
+import { RSSvartype } from '../../types/rs-types/rs-svartype';
 
 export const hentSporsmalForOppsummering = (soknad: Soknad) => {
     return soknad.sporsmal.filter((s) => {
@@ -30,23 +29,39 @@ export const settSvar = (sporsmal: Sporsmal, verdier: Record<string, string | nu
     if (verdier === undefined) {
         return;
     }
+    const verdi = verdier[sporsmal.id];
 
-    const svarene: RSSvarliste[] = [];
-    Object.entries(verdier).forEach(([key, value]) => {
-        const svar: RSSvar = { verdi: value ? value.toString() : '' };
+    if (Array.isArray(verdi)) {
         sporsmal.svarliste = {
-            sporsmalId: key,
-            svar: [ svar ]
+            sporsmalId: sporsmal.id,
+            svar: verdi.map(element => { return element.toString() }),
+        }
+    } else {
+        sporsmal.svarliste = {
+            sporsmalId: sporsmal.id,
+            svar: [
+                {
+                    verdi: verdi ? verdi.toString() : ''
+                }
+            ]
         };
-        svarene.push(sporsmal.svarliste)
+    }
+    sporsmal.undersporsmal.map(spm => {
+        return settSvar(spm, verdier);
     });
 };
 
 export const hentSvar = (sporsmal: Sporsmal): any => {
-    if (sporsmal.svarliste.svar[0] !== undefined) {
-        return sporsmal.svarliste.svar[0].verdi;
+    if (sporsmal.svarliste.svar[0] === undefined) {
+        return '';
     }
-    return '';
+    if (sporsmal.svartype === RSSvartype.PERIODER || sporsmal.svartype === RSSvartype.PERIODE) {
+        return sporsmal.svarliste.svar.map(sv => {
+            return sv;
+        });
+    }
+    return sporsmal.svarliste.svar[0].verdi;
+
 };
 
 export const pathUtenSteg = (pathname: string) => {

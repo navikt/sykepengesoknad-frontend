@@ -1555,7 +1555,8 @@ export const soknader: any = [
             "pavirkerAndreSporsmal": false,
             "kriterieForVisningAvUndersporsmal": null,
             "svar": [],
-            "undersporsmal": [ {
+            "undersporsmal": [
+                {
                 "id": "631158",
                 "tag": "TIDLIGERE_EGENMELDING",
                 "sporsmalstekst": "Jeg var syk med egenmelding",
@@ -1566,7 +1567,8 @@ export const soknader: any = [
                 "pavirkerAndreSporsmal": false,
                 "kriterieForVisningAvUndersporsmal": "CHECKED",
                 "svar": [],
-                "undersporsmal": [ {
+                "undersporsmal": [
+                    {
                     "id": "631159",
                     "tag": "EGENMELDINGER_NAR",
                     "sporsmalstekst": "Hvilke dager var du syk med egenmelding? Du trenger bare oppgi dager før 1. juli 2019.",
@@ -1579,7 +1581,8 @@ export const soknader: any = [
                     "svar": [],
                     "undersporsmal": []
                 } ]
-            }, {
+            },
+                {
                 "id": "631160",
                 "tag": "TIDLIGERE_PAPIRSYKMELDING",
                 "sporsmalstekst": "Jeg var syk med papirsykmelding",
