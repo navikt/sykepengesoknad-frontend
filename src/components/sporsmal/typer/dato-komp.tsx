@@ -1,6 +1,6 @@
 import dayjs from 'dayjs';
 import { useFormContext } from 'react-hook-form';
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Element, Normaltekst } from 'nav-frontend-typografi';
 import Vis from '../../../utils/vis';
 import tekster from '../sporsmal-tekster';
@@ -14,11 +14,12 @@ import './flatpickr.less';
 
 const DatoInput = ({ sporsmal }: SpmProps) => {
     const feilmelding = tekster['soknad.feilmelding.' + sporsmal.tag.toLowerCase()];
-    const { register, setValue, watch, errors } = useFormContext();
-    const watchVerdi = watch(sporsmal.id);
+    const [ lokal, setLokal ] = useState<Date>(hentSvar(sporsmal));
+    const { register, setValue, errors } = useFormContext();
 
     const onChange = (value: any) => {
         setValue(sporsmal.id, value);
+        setLokal(value);
     };
 
     useEffect(() => {
@@ -41,12 +42,12 @@ const DatoInput = ({ sporsmal }: SpmProps) => {
                 id={sporsmal.id}
                 name={sporsmal.id}
                 onChange={onChange}
-                value={watchVerdi}
+                value={lokal}
                 className="skjemaelement__input input--s"
                 placeholder="dd.mm.yyyy"
                 options={{
-                    minDate: sporsmal.min ? dayjs(sporsmal.min).toDate() : '',
-                    maxDate: sporsmal.max ? dayjs(sporsmal.max).toDate() : '',
+                    minDate: sporsmal.min,
+                    maxDate: sporsmal.max,
                     mode: 'single',
                     enableTime: false,
                     dateFormat: 'Y-m-d',
@@ -66,7 +67,7 @@ const DatoInput = ({ sporsmal }: SpmProps) => {
             </div>
 
             <div className="undersporsmal">
-                <Vis hvis={watchVerdi !== undefined}>
+                <Vis hvis={lokal !== undefined}>
                     <UndersporsmalListe undersporsmal={sporsmal.undersporsmal} />
                 </Vis>
             </div>

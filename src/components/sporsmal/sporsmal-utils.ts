@@ -57,11 +57,14 @@ export const hentSvar = (sporsmal: Sporsmal): any => {
     }
     if (sporsmal.svartype === RSSvartype.PERIODER || sporsmal.svartype === RSSvartype.PERIODE) {
         return sporsmal.svarliste.svar.map(sv => {
-            return sv;
+            return new Date(sv.toString());
         });
     }
+    if (sporsmal.svartype === RSSvartype.DATO) {
+        console.log('svar[0]', sporsmal.svarliste.svar[0]); // eslint-disable-line
+        return new Date(sporsmal.svarliste.svar[0].toString());
+    }
     return sporsmal.svarliste.svar[0].verdi;
-
 };
 
 export const pathUtenSteg = (pathname: string) => {

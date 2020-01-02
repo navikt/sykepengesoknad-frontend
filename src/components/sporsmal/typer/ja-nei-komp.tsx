@@ -26,7 +26,6 @@ const JaNeiInput = ({ sporsmal }: SpmProps) => {
 
     const changeValue = (value: string) => {
         setValue(sporsmal.id, value);
-        console.log('changeValue: watchVerdi', watchVerdi); // eslint-disable-line
     };
 
     return (

@@ -3,10 +3,6 @@ import Vis from '../../../utils/vis';
 import SporsmalSwitch from './sporsmal-switch';
 import { Sporsmal } from '../../../types/types';
 
-export interface UndersporsmalProps {
-    undersporsmal: Sporsmal[];
-}
-
 const UndersporsmalListe = ({ undersporsmal }: any) => {
     return (
         undersporsmal.map((underspm: Sporsmal, idx: number) => {

@@ -267,7 +267,7 @@ export class Soknad {
                 orgnummer: soknad.arbeidsgiver.orgnummer
             };
         }
-        this.sporsmal = rsToSporsmal(soknad.sporsmal);
+        this.sporsmal = rsToSporsmal(soknad.sporsmal, undefined);
         this.soknadPerioder = soknad.soknadPerioder;
     }
 }
@@ -285,8 +285,9 @@ export class Sporsmal {
     kriterieForVisningAvUndersporsmal: string;
     svarliste: RSSvarliste;
     undersporsmal: Sporsmal[];
+    parentKriterie?: string;
 
-    constructor(spm: RSSporsmal) {
+    constructor(spm: RSSporsmal, kriterie: string) {
         this.id = spm.id;
         const orgarr: string[] = spm.tag.split('_');
         const numtag: number = parseInt(orgarr.pop());
@@ -305,14 +306,15 @@ export class Sporsmal {
         this.pavirkerAndreSporsmal = spm.pavirkerAndreSporsmal;
         this.kriterieForVisningAvUndersporsmal = spm.kriterieForVisningAvUndersporsmal;
         this.svarliste = { sporsmalId: spm.id, svar: spm.svar };
-        this.undersporsmal = rsToSporsmal(spm.undersporsmal);
+        this.undersporsmal = rsToSporsmal(spm.undersporsmal, spm.kriterieForVisningAvUndersporsmal);
+        this.parentKriterie = kriterie;
     }
 }
 
-function rsToSporsmal(spms: RSSporsmal[]) {
+function rsToSporsmal(spms: RSSporsmal[], kriterie: string) {
     const sporsmals: Sporsmal[] = [];
     spms.forEach(rssp => {
-        const spm: Sporsmal = new Sporsmal(rssp);
+        const spm: Sporsmal = new Sporsmal(rssp, kriterie);
         sporsmals.push(spm);
     });
     return sporsmals;

@@ -1,6 +1,6 @@
 import { useFormContext } from 'react-hook-form';
-import React, { useEffect } from 'react';
-import { Normaltekst } from 'nav-frontend-typografi';
+import React, { useEffect, useState } from 'react';
+import { Normaltekst, Element } from 'nav-frontend-typografi';
 import Vis from '../../../utils/vis';
 import tekster from '../sporsmal-tekster';
 import { SpmProps } from '../sporsmal-form/sporsmal-form';
@@ -12,15 +12,16 @@ import './flatpickr.less';
 
 const PeriodeInput = ({ sporsmal }: SpmProps) => {
     const feilmelding = tekster['soknad.feilmelding.' + sporsmal.tag.toLowerCase()];
-    const { register, setValue, watch, errors } = useFormContext();
-    const watchVerdi = watch(sporsmal.id);
+    const [ lokal, setLokal ] = useState<Date[]>(hentSvar(sporsmal));
+    const { register, setValue, errors } = useFormContext();
 
     const onChange = (value: any) => {
         setValue(sporsmal.id, value);
+        setLokal(value);
     };
 
     useEffect(() => {
-        setValue(sporsmal.id, hentSvar(sporsmal));
+        setValue(sporsmal.id, lokal);
         register({
             name: sporsmal.id,
             validate: { required: feilmelding },
@@ -30,20 +31,20 @@ const PeriodeInput = ({ sporsmal }: SpmProps) => {
     }, [ sporsmal.id ]);
 
     return (
-        <>
-            <Normaltekst className="skjema__sporsmal">
+        <div className={sporsmal.parentKriterie ? 'kriterie--' + sporsmal.parentKriterie.toLowerCase() : ''}>
+            <Element className="skjema__sporsmal">
                 {sporsmal.sporsmalstekst}
-            </Normaltekst>
+            </Element>
 
             <Flatpickr
                 id={sporsmal.id}
                 name={sporsmal.id}
+                value={lokal}
                 onChange={onChange}
-                value={hentSvar(sporsmal)}
                 className="skjemaelement__input input--m"
                 options={{
-                    minDate: new Date(sporsmal.min),
-                    maxDate: new Date(sporsmal.max),
+                    minDate: sporsmal.min,
+                    maxDate: sporsmal.max,
                     mode: 'range',
                     enableTime: false,
                     dateFormat: 'F j, Y',
@@ -62,11 +63,11 @@ const PeriodeInput = ({ sporsmal }: SpmProps) => {
             </div>
 
             <div className="undersporsmal">
-                <Vis hvis={watchVerdi !== undefined}>
+                <Vis hvis={lokal !== undefined}>
                     <UndersporsmalListe undersporsmal={sporsmal.undersporsmal} />
                 </Vis>
             </div>
-        </>
+        </div>
     )
 };
 

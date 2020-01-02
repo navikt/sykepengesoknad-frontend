@@ -1,3 +1,5 @@
+@import '../../../../node_modules/nav-frontend-core/less/_variabler';
+
 .undersporsmal {
     max-height: 0;
     overflow: hidden;
@@ -7,11 +9,35 @@
         display: block;
         margin: 2rem 0 1rem;
     }
+
+    .kriterie--checked {
+        position: relative;
+        margin: 1rem 0;
+        padding: 1rem;
+        background-color: @navLysGra;
+
+        &:after {
+            content: '';
+            width: 1rem;
+            height: 1rem;
+            position: absolute;
+            display: block;
+            left: 1.3rem;
+            top: 0;
+            transform: translateY(-50%) rotate(45deg) skew(5deg, 5deg);
+            transform-origin: 50% 50%;
+            background-color: @navLysGra;
+        }
+
+        .skjema__sporsmal {
+            margin-top: 0;
+        }
+    }
 }
 
 .undersporsmal--vis {
     height: auto;
-    max-height: 200px;
+    max-height: 300px;
     overflow: visible;
     transition: max-height 0.8s ease-in, opacity 0.4s ease-in;
     opacity: 1;
