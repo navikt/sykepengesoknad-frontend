@@ -25,16 +25,21 @@ export const hentNokkel = (soknad: Soknad, sidenummer: number) => {
             : `sykepengesoknad.${fjernIndexFraTag(sporsmal.tag).toLowerCase()}.tittel`;
 };
 
-export const settSvar = (sporsmal: Sporsmal, verdier: Record<string, string | number | boolean | Date >): void => {
+export const settSvar = (sporsmal: Sporsmal, verdier: Record<string, string | number | boolean | Date>): void => {
+
+    const verdi = verdier[sporsmal.id];
+    //if (verdier === undefined || (verdi === undefined && sporsmal.svartype === RSSvartype.PERIODE || sporsmal.svartype === RSSvartype.PERIODER || sporsmal.svartype === RSSvartype.DATO)) {
     if (verdier === undefined) {
         return;
     }
-    const verdi = verdier[sporsmal.id];
+    //console.log('verdi ' + sporsmal.id, verdi); // eslint-disable-line
 
     if (Array.isArray(verdi)) {
         sporsmal.svarliste = {
             sporsmalId: sporsmal.id,
-            svar: verdi.map(element => { return element.toString() }),
+            svar: verdi.map(element => {
+                return element.toString()
+            }),
         }
     } else {
         sporsmal.svarliste = {
@@ -46,7 +51,8 @@ export const settSvar = (sporsmal: Sporsmal, verdier: Record<string, string | nu
             ]
         };
     }
-    sporsmal.undersporsmal.map(spm => {
+    sporsmal.undersporsmal.map((spm, idx) => {
+        //console.log('index ' + spm.id, idx); // eslint-disable-line
         return settSvar(spm, verdier);
     });
 };
@@ -57,13 +63,15 @@ export const hentSvar = (sporsmal: Sporsmal): any => {
     }
     if (sporsmal.svartype === RSSvartype.PERIODER || sporsmal.svartype === RSSvartype.PERIODE) {
         return sporsmal.svarliste.svar.map(sv => {
-            return new Date(sv.toString());
+            //console.log('hentSvar sv ' + sporsmal.id, typeof sv === 'string' ? new Date(sv) : null); // eslint-disable-line
+            return typeof sv === 'string' ? new Date(sv) : null;
         });
     }
     if (sporsmal.svartype === RSSvartype.DATO) {
-        console.log('svar[0]', sporsmal.svarliste.svar[0]); // eslint-disable-line
+        console.log('hentSvar new Date ' + sporsmal.id, sporsmal.svarliste.svar[0]); // eslint-disable-line
         return new Date(sporsmal.svarliste.svar[0].toString());
     }
+    //console.log('hentSvar sporsmal.svarliste.svar[0].verdi ' + sporsmal.id, sporsmal.svarliste.svar[0].verdi); // eslint-disable-line
     return sporsmal.svarliste.svar[0].verdi;
 };
 

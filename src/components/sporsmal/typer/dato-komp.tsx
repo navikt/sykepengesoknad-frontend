@@ -1,4 +1,3 @@
-import dayjs from 'dayjs';
 import { useFormContext } from 'react-hook-form';
 import React, { useEffect, useState } from 'react';
 import { Element, Normaltekst } from 'nav-frontend-typografi';

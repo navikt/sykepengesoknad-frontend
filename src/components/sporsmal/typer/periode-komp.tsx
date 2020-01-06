@@ -12,7 +12,8 @@ import './flatpickr.less';
 
 const PeriodeInput = ({ sporsmal }: SpmProps) => {
     const feilmelding = tekster['soknad.feilmelding.' + sporsmal.tag.toLowerCase()];
-    const [ lokal, setLokal ] = useState<Date[]>(hentSvar(sporsmal));
+    const svar = hentSvar(sporsmal);
+    const [ lokal, setLokal ] = useState<Date[]>(svar);
     const { register, setValue, errors } = useFormContext();
 
     const onChange = (value: any) => {
@@ -42,6 +43,7 @@ const PeriodeInput = ({ sporsmal }: SpmProps) => {
                 value={lokal}
                 onChange={onChange}
                 className="skjemaelement__input input--m"
+                placeholder="dd.mm.yyyy til dd.mm.yyyy"
                 options={{
                     minDate: sporsmal.min,
                     maxDate: sporsmal.max,
@@ -50,7 +52,8 @@ const PeriodeInput = ({ sporsmal }: SpmProps) => {
                     dateFormat: 'F j, Y',
                     altInput: true,
                     altFormat: 'd.m.Y',
-                    locale: Norwegian
+                    locale: Norwegian,
+                    allowInput: true,
                 }}
             />
 
