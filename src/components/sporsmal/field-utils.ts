@@ -1,4 +1,4 @@
-import { SvarEnums } from '../../types/enums';
+import { SvarEnums, TagTyper } from '../../types/enums';
 
 export const genererParseForEnkeltverdi = () => {
     return (verdi: string) => {
@@ -51,13 +51,14 @@ export const formaterFlereVerdier = (verdi: any) => {
         });
 };
 
-export const fjernIndexFraTag = (tag: string) => {
+export const fjernIndexFraTag = (tag: TagTyper): TagTyper => {
+    let stringtag: string = tag.toString();
     const separator = '_';
-    const index = tag.lastIndexOf(separator);
-    if(index === (tag.length - 2) || index === (tag.length - 1)) {
-        tag = tag.slice(0, index);
+    const index = stringtag.lastIndexOf(separator);
+    if(index === (stringtag.length - 2) || index === (stringtag.length - 1)) {
+        stringtag = stringtag.slice(0, index);
     }
-    return tag;
+    return TagTyper[stringtag as keyof typeof TagTyper];
 };
 
 export const tagMatcher = (tags: string[], inputTag: any) => {

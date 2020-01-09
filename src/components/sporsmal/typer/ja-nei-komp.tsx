@@ -12,6 +12,7 @@ import Bjorn from '../bjorn/bjorn';
 import SporsmalBjorn from '../bjorn/sporsmal-bjorn';
 import { useAppStore } from '../../../data/stores/app-store';
 import { RSSoknadstype } from '../../../types/rs-types/rs-soknadstype';
+import SporsmalHjelpetekst from '../sporsmal-hjelpetekst';
 
 const jaNeiValg = [ {
     value: 'ja',
@@ -56,8 +57,7 @@ const JaNeiInput = ({ sporsmal }: SpmProps) => {
                             <Element className="skjema__sporsmal">
                                 {sporsmal.sporsmalstekst}
                             </Element>
-                            <div className="hjelpetekst">
-                            </div>
+                            <SporsmalHjelpetekst sporsmal={sporsmal} />
                         </div>
                     </legend>
                     <div className="inputPanelGruppe__inner">

@@ -13,7 +13,6 @@ const SoknadenTekster: any = {
         "sykepengesoknad.ferie.hjelpetekst.tekst": "Du skal bare oppgi feriedager som du har brukt. Hvis du har avtalt å utsette ferien, skriver du ikke noe her.\n\nJobber du vanligvis bare noen dager i uken? Da gjelder ferien likevel hele uker, ikke bare de enkeltdagene du skulle vært på jobb.",
         "sykepengesoknad.ferie.hjelpetekst.tittel": "Ferie",
         "sykepengesoknad.ferie_v2.tittel": "Ferie",
-        "soknad.hjelpetekst.ferie_v2": "Vi spør om ferie fordi du ikke kan få sykepenger og feriepenger samtidig. Tar du ferie, får du i stedet feriepenger.",
         "sykepengesoknad.ferie_v2.bjorn": "Måtte du avbryte ferien fordi du ble syk? Du kan avtale med arbeidsgiveren at du utsetter ferien. Fikk du tatt noen feriedager, svarer du ja nedenfor, og så spør vi deg hvilke dager. Ble hele ferien ødelagt fordi du ble syk, svarer du nei.",
 
         'sykepengesoknad.permisjon.tittel': 'Permisjon',
