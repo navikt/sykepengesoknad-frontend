@@ -114,7 +114,7 @@ const PeriodeInput = ({ sporsmal }: SpmProps) => {
                                 }}
                             />
                             <Vis hvis={idx > 0}>
-                                <button role="link" id={'btn_' + idx} className="periodeknapp lenke" onClick={slettPeriode}>
+                                <button role="link" id={'btn_' + idx} className="periodeknapp lenke slett" onClick={slettPeriode}>
                                     {tekster['sykepengesoknad.periodevelger.slett']}
                                 </button>
                             </Vis>

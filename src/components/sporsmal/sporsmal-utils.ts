@@ -35,9 +35,11 @@ export const settSvar = (sporsmal: Sporsmal, verdier: Record<string, string | nu
     if (Array.isArray(verdi)) {
         sporsmal.svarliste = {
             sporsmalId: sporsmal.id,
-            svar: verdi.map((p: Periode) => {
-                return { verdi: p.fom.toString() + '%%' + p.tom.toString() }
-            }),
+            svar: verdi
+                .filter((p: Periode) => p.fom !== undefined && p.tom !== undefined)
+                .map((p: Periode) => {
+                    return { verdi: p.fom.toString() + '%%' + p.tom.toString() }
+                }),
         };
     } else if (verdi !== undefined) {
         sporsmal.svarliste = {
