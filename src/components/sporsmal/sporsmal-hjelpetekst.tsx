@@ -13,7 +13,7 @@ const SporsmalHjelpetekst = ({ sporsmal }: SpmProps) => {
         sporsmal.tag === TagTyper.FERIE_V2;
 
     const nokkel = fjernIndexFraTag(sporsmal.tag).toLowerCase();
-console.log('nokkel', nokkel); // eslint-disable-line
+
     return (
         <Vis hvis={vis}>
             <Hjelpetekst>

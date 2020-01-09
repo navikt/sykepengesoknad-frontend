@@ -91,14 +91,15 @@ const JaNeiInput = ({ sporsmal }: SpmProps) => {
             </div>
 
             <AnimateOnMount mounted={watchVerdi === 'ja'} enter="undersporsmal--vis" leave="undersporsmal--skjul" start="undersporsmal">
-                <UndersporsmalListe undersporsmal={sporsmal.undersporsmal} />
+                <>
+                    <UndersporsmalListe undersporsmal={sporsmal.undersporsmal} />
+                    <TagBjorn sporsmal={sporsmal} className="press" />
+                </>
             </AnimateOnMount>
 
             <Vis hvis={visAvgittAvBjorn()}>
                 <Bjorn className="press" nokkel="sykepengesoknad.egenmeldingsdager.preutfylt-melding" />
             </Vis>
-
-            <TagBjorn sporsmal={sporsmal} className="press" />
 
             <SporsmalBjorn sporsmal={sporsmal} />
         </>

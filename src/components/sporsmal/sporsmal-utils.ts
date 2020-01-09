@@ -19,11 +19,12 @@ export const erSisteSide = (soknad: Soknad, sidenummer: number) => {
 
 export const hentNokkel = (soknad: Soknad, sidenummer: number) => {
     const sporsmal = soknad.sporsmal[sidenummer - 1];
+    const nokkel = fjernIndexFraTag(sporsmal.tag).toLowerCase();
     return sidenummer === 1
         ? 'sykepengesoknad.foer-du-begynner.tittel'
         : erSisteSide(soknad, sidenummer)
             ? 'sykepengesoknad.til-slutt.tittel'
-            : `sykepengesoknad.${fjernIndexFraTag(sporsmal.tag).toLowerCase()}.tittel`;
+            : `sykepengesoknad.${nokkel}.tittel`;
 };
 
 export const settSvar = (sporsmal: Sporsmal, verdier: Record<string, string | number | boolean | Date>): void => {
