@@ -42,9 +42,7 @@ export const Bjorn = ({ bildeAlt = 'NAV-ansatt', nokkel, children, hvit = false,
     return (
         <div className={classNames}>
             <div className={bobleClassNames}>
-                {nokkel
-                    ? <Normaltekst>{parser(tekster[nokkel])}</Normaltekst>
-                    : children}
+                {nokkel ? <Normaltekst>{parser(tekster[nokkel])}</Normaltekst> : children}
             </div>
             <div className={bildeClassNames}>
                 <Bilde alt={bildeAlt} />

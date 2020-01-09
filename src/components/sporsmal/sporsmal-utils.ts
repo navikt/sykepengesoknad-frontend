@@ -2,6 +2,7 @@ import { TagTyper } from '../../types/enums';
 import { fjernIndexFraTag } from './field-utils';
 import { Soknad, Sporsmal } from '../../types/types';
 import { RSSvartype } from '../../types/rs-types/rs-svartype';
+import { Periode } from './typer/periode-komp';
 
 export const hentSporsmalForOppsummering = (soknad: Soknad) => {
     return soknad.sporsmal.filter((s) => {
@@ -26,53 +27,52 @@ export const hentNokkel = (soknad: Soknad, sidenummer: number) => {
 };
 
 export const settSvar = (sporsmal: Sporsmal, verdier: Record<string, string | number | boolean | Date>): void => {
-
     const verdi = verdier[sporsmal.id];
-    //if (verdier === undefined || (verdi === undefined && sporsmal.svartype === RSSvartype.PERIODE || sporsmal.svartype === RSSvartype.PERIODER || sporsmal.svartype === RSSvartype.DATO)) {
     if (verdier === undefined) {
         return;
     }
-    //console.log('verdi ' + sporsmal.id, verdi); // eslint-disable-line
 
     if (Array.isArray(verdi)) {
         sporsmal.svarliste = {
             sporsmalId: sporsmal.id,
-            svar: verdi.map(element => {
-                return element.toString()
+            svar: verdi.map((p: Periode) => {
+                return { verdi: p.fom.toString() + '%%' + p.tom.toString() }
             }),
-        }
-    } else {
+        };
+    } else if (verdi !== undefined) {
         sporsmal.svarliste = {
             sporsmalId: sporsmal.id,
-            svar: [
-                {
-                    verdi: verdi ? verdi.toString() : ''
-                }
-            ]
+            svar: [ { verdi: verdi ? verdi.toString() : '' } ]
         };
     }
-    sporsmal.undersporsmal.map((spm, idx) => {
-        //console.log('index ' + spm.id, idx); // eslint-disable-line
+
+    sporsmal.undersporsmal.map((spm) => {
         return settSvar(spm, verdier);
     });
 };
 
 export const hentSvar = (sporsmal: Sporsmal): any => {
-    if (sporsmal.svarliste.svar[0] === undefined) {
-        return '';
+    const svarliste = sporsmal.svarliste;
+    const svar = svarliste.svar[0];
+    if (svar === undefined) {
+        return sporsmal.svartype.toString().startsWith('PERIODE') ? [] : '';
     }
+
     if (sporsmal.svartype === RSSvartype.PERIODER || sporsmal.svartype === RSSvartype.PERIODE) {
-        return sporsmal.svarliste.svar.map(sv => {
-            //console.log('hentSvar sv ' + sporsmal.id, typeof sv === 'string' ? new Date(sv) : null); // eslint-disable-line
-            return typeof sv === 'string' ? new Date(sv) : null;
+        const perioder: Periode[] = [];
+        svarliste.svar.map(svar => {
+            const datoer = svar.verdi.split('%%');
+            const periode = new Periode();
+            periode.fom = new Date(datoer[0]);
+            periode.tom = new Date(datoer[1]);
+            perioder.push(periode);
         });
+        return perioder;
     }
     if (sporsmal.svartype === RSSvartype.DATO) {
-        console.log('hentSvar new Date ' + sporsmal.id, sporsmal.svarliste.svar[0]); // eslint-disable-line
-        return new Date(sporsmal.svarliste.svar[0].toString());
+        return new Date(svar.toString());
     }
-    //console.log('hentSvar sporsmal.svarliste.svar[0].verdi ' + sporsmal.id, sporsmal.svarliste.svar[0].verdi); // eslint-disable-line
-    return sporsmal.svarliste.svar[0].verdi;
+    return svar.verdi;
 };
 
 export const pathUtenSteg = (pathname: string) => {

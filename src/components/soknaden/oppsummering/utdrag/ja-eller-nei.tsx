@@ -14,7 +14,12 @@ const erUndersporsmalStilt = (sporsmal: Sporsmal): boolean => {
 };
 
 const JaEllerNei = ({ sporsmal }: OppsummeringProps) => {
-    const svartekst = tekster[`soknad.${sporsmal.svarliste.svar[0].verdi.toLowerCase()}`];
+    const svar = sporsmal.svarliste.svar[0];
+    if (typeof svar.verdi !== 'string') {
+        return null;
+    }
+
+    const svartekst = tekster[`soknad.${svar.verdi.toLowerCase()}`];
     return (
         <div className="oppsummering-sporsmal">
             <Element tag="h3">{sporsmal.sporsmalstekst}</Element>

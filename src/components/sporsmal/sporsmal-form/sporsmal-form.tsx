@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { useHistory, useParams } from 'react-router-dom';
 import { useAppStore } from '../../../data/stores/app-store';
 import { Sporsmal } from '../../../types/types';
@@ -23,16 +23,12 @@ const SporsmalForm = () => {
 
     const onSubmit = () => {
         settSvar(sporsmal, methods.getValues());
-        //console.log('values', methods.getValues());
-        //console.log('touched', methods.formState.touched); // eslint-disable-line
         methods.reset();
-        //methods.formState.touched = [];
         methods.unregister(sporsmal.id);
-        console.log('sporsmal', sporsmal); // eslint-disable-line
         setValgtSoknad(valgtSoknad);
         history.push(pathUtenSteg(history.location.pathname) + '/' + (spmIndex + 2));
+        console.log('sporsmal', sporsmal); // eslint-disable-line
     };
-
     return (
         <FormContext {...methods}>
             <form onSubmit={methods.handleSubmit(onSubmit)} className="sporsmal__form">

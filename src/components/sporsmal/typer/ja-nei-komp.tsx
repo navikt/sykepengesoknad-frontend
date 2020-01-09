@@ -6,6 +6,12 @@ import { SpmProps } from '../sporsmal-form/sporsmal-form';
 import { hentSvar } from '../sporsmal-utils';
 import UndersporsmalListe from '../undersporsmal/undersporsmal-liste';
 import AnimateOnMount from '../../animate-on-mount';
+import TagBjorn from '../bjorn/tag-bjorn';
+import { AvgittAvTyper, TagTyper } from '../../../types/enums';
+import Bjorn from '../bjorn/bjorn';
+import SporsmalBjorn from '../bjorn/sporsmal-bjorn';
+import { useAppStore } from '../../../data/stores/app-store';
+import { RSSoknadstype } from '../../../types/rs-types/rs-soknadstype';
 
 const jaNeiValg = [ {
     value: 'ja',
@@ -16,13 +22,22 @@ const jaNeiValg = [ {
 } ];
 
 const JaNeiInput = ({ sporsmal }: SpmProps) => {
+    const { valgtSoknad } = useAppStore();
     const { register, setValue, errors, watch } = useFormContext();
     const watchVerdi = watch(sporsmal.id);
+
+    const visAvgittAvBjorn = () => {
+        const undersporsmal = sporsmal.undersporsmal.find(uspm => uspm.tag === TagTyper.EGENMELDINGER_NAR);
+        if (undersporsmal) {
+            return undersporsmal.svarliste.svar.some(svaret => svaret.avgittAv === AvgittAvTyper.TIDLIGERE_SOKNAD);
+        }
+        return false;
+    };
 
     useEffect(() => {
         setValue(sporsmal.id, hentSvar(sporsmal));
         // eslint-disable-next-line
-    }, [sporsmal.id]);
+    }, [ sporsmal.id ]);
 
     const changeValue = (value: string) => {
         setValue(sporsmal.id, value);
@@ -30,6 +45,10 @@ const JaNeiInput = ({ sporsmal }: SpmProps) => {
 
     return (
         <>
+            <Vis hvis={valgtSoknad.soknadstype === RSSoknadstype.ARBEIDSTAKERE && sporsmal.tag === TagTyper.FERIE_V2}>
+                <Bjorn nokkel="sykepengesoknad.ferie_v2.bjorn" className="blokk-m" />
+            </Vis>
+
             <div className="inputPanelGruppe inputPanelGruppe--horisontal">
                 <fieldset className="skjema__fieldset">
                     <legend className="skjema__legend">
@@ -74,6 +93,14 @@ const JaNeiInput = ({ sporsmal }: SpmProps) => {
             <AnimateOnMount mounted={watchVerdi === 'ja'} enter="undersporsmal--vis" leave="undersporsmal--skjul" start="undersporsmal">
                 <UndersporsmalListe undersporsmal={sporsmal.undersporsmal} />
             </AnimateOnMount>
+
+            <Vis hvis={visAvgittAvBjorn()}>
+                <Bjorn className="press" nokkel="sykepengesoknad.egenmeldingsdager.preutfylt-melding" />
+            </Vis>
+
+            <TagBjorn sporsmal={sporsmal} className="press" />
+
+            <SporsmalBjorn sporsmal={sporsmal} />
         </>
     )
 };
