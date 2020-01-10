@@ -43,7 +43,8 @@ const PeriodeInput = ({ sporsmal }: SpmProps) => {
             required: true
         });
         lagIdForPerioder();
-    }, [ sporsmal.id, feilmelding, lokal, register, setValue ]);
+        // eslint-disable-next-line
+    }, [ sporsmal.id, feilmelding, lokal ]);
 
     const lagIdForPerioder = () => {
         const perioder = periodeliste.current.querySelectorAll('.periode');

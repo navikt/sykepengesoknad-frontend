@@ -1,25 +1,26 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { SpmProps } from '../sporsmal-form/sporsmal-form';
 import { RSSvartype } from '../../../types/rs-types/rs-svartype';
 import { hentSvar } from '../sporsmal-utils';
 import { useFormContext } from 'react-hook-form';
 import Vis from '../../../utils/vis';
 import { Normaltekst } from 'nav-frontend-typografi';
-
-export const erHorisontal = (svartype: RSSvartype) => {
-    return svartype === RSSvartype.RADIO_GRUPPE_TIMER_PROSENT;
-};
+import AnimateOnMount from '../../animate-on-mount';
+import UndersporsmalListe from '../undersporsmal/undersporsmal-liste';
 
 const RadioKomp = ({ sporsmal }: SpmProps) => {
+    const [ lokal, setLokal ] = useState<string>();
     const { register, setValue, errors } = useFormContext();
 
     useEffect(() => {
-        setValue(sporsmal.id, hentSvar(sporsmal)[sporsmal.id]);
-        // eslint-disable-next-line
-    }, [ sporsmal.id ] );
+        const lagret = hentSvar(sporsmal);
+        setValue(sporsmal.id, lagret);
+        setLokal(lagret);
+    }, [ sporsmal, setValue ]);
 
     const changeValue = (value: string) => {
         setValue(sporsmal.id, value);
+        setLokal(lokal === value ? '' : value);
     };
 
     return (
@@ -30,20 +31,35 @@ const RadioKomp = ({ sporsmal }: SpmProps) => {
                 </div>
             </Vis>
 
-            <div className={erHorisontal(sporsmal.svartype) ? 'skjemaelement skjemaelement--horisontal' : 'skjemaelement'}>
+            <div className={erHorisontal(sporsmal.svartype)
+                ? 'skjemaelement skjemaelement--horisontal'
+                : 'skjemaelement'}
+            >
                 {sporsmal.undersporsmal.map((uspm, idx) => {
                     return (
                         <div className="radioContainer" key={idx}>
                             <input type="radio"
-                                id={uspm.tag}
-                                name={uspm.tag}
-                                onChange={() => changeValue(uspm.tag)}
+                                id={uspm.id}
+                                name={sporsmal.id}
+                                value={uspm.sporsmalstekst}
+                                checked={lokal === uspm.sporsmalstekst}
+                                aria-checked={lokal === uspm.sporsmalstekst}
+                                onChange={() => changeValue(uspm.sporsmalstekst)}
                                 ref={register({ required: 'Et alternativ må velges' })}
                                 className="skjemaelement__input radioknapp"
                             />
-                            <label key={idx} className="skjemaelement__label">
+                            <label className="skjemaelement__label" htmlFor={uspm.id}>
                                 {uspm.sporsmalstekst}
                             </label>
+
+                            <AnimateOnMount
+                                mounted={lokal === uspm.sporsmalstekst}
+                                enter="undersporsmal--vis"
+                                leave="undersporsmal--skjul"
+                                start="undersporsmal"
+                            >
+                                <UndersporsmalListe undersporsmal={uspm.undersporsmal} />
+                            </AnimateOnMount>
                         </div>
                     )
                 })}
@@ -57,7 +73,11 @@ const RadioKomp = ({ sporsmal }: SpmProps) => {
                 </Vis>
             </div>
         </>
-    );
+    )
 };
 
 export default RadioKomp;
+
+export const erHorisontal = (svartype: RSSvartype) => {
+    return svartype === RSSvartype.RADIO_GRUPPE_TIMER_PROSENT;
+};

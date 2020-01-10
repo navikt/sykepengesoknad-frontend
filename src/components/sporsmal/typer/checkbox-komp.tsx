@@ -8,6 +8,8 @@ import AnimateOnMount from '../../animate-on-mount';
 import UndersporsmalListe from '../undersporsmal/undersporsmal-liste';
 
 const CheckboxKomp = ({ sporsmal }: SpmProps) => {
+    const { errors } = useFormContext();
+
     return (
         <>
             <Vis hvis={sporsmal.sporsmalstekst !== null}>
@@ -18,10 +20,16 @@ const CheckboxKomp = ({ sporsmal }: SpmProps) => {
 
             <div className="skjemaelement">
                 {sporsmal.undersporsmal.map((uspm, idx) => {
-                    return (
-                        <CheckboxSingle sporsmal={uspm} key={idx} />
-                    )
+                    return <CheckboxSingle sporsmal={uspm} key={idx} />
                 })}
+            </div>
+
+            <div role="alert" aria-live="assertive">
+                <Vis hvis={errors[sporsmal.id] !== undefined}>
+                    <Normaltekst tag="span" className="skjemaelement__feilmelding">
+                        {errors[sporsmal.id] && errors[sporsmal.id].message}
+                    </Normaltekst>
+                </Vis>
             </div>
         </>
     )
@@ -31,7 +39,7 @@ export default CheckboxKomp;
 
 const CheckboxSingle = ({ sporsmal }: SpmProps) => {
     const [ lokal, setLokal ] = useState<string>('false');
-    const { register, setValue, errors } = useFormContext();
+    const { register, setValue } = useFormContext();
 
     useEffect(() => {
         const lagret = hentSvar(sporsmal);
@@ -60,17 +68,14 @@ const CheckboxSingle = ({ sporsmal }: SpmProps) => {
                 {sporsmal.sporsmalstekst}
             </label>
 
-            <AnimateOnMount mounted={lokal === 'true'} enter="undersporsmal--vis" leave="undersporsmal--skjul" start="undersporsmal">
+            <AnimateOnMount
+                mounted={lokal === 'true'}
+                enter="undersporsmal--vis"
+                leave="undersporsmal--skjul"
+                start="undersporsmal"
+            >
                 <UndersporsmalListe undersporsmal={sporsmal.undersporsmal} />
             </AnimateOnMount>
-
-            <div role="alert" aria-live="assertive">
-                <Vis hvis={errors[sporsmal.id] !== undefined}>
-                    <Normaltekst tag="span" className="skjemaelement__feilmelding">
-                        {errors[sporsmal.id] && errors[sporsmal.id].message}
-                    </Normaltekst>
-                </Vis>
-            </div>
         </div>
     )
 };

@@ -7,10 +7,11 @@ import UkjentSporsmal from '../ukjent-sporsmal';
 import CheckboxPanel from '../typer/checkbox-panel';
 import { RSSvartype } from '../../../types/rs-types/rs-svartype';
 import PeriodeInput from '../typer/periode-komp';
-import './undersporsmal.less';
 import IkkeRelevant from '../typer/ikke-relevant';
 import CheckboxKomp from '../typer/checkbox-komp';
 import RadioKomp from '../typer/radio-komp';
+import JaNeiRadio from '../typer/ja-nei-radio';
+import './undersporsmal.less';
 
 interface UndersporsmalProps {
     sporsmal: Sporsmal;
@@ -24,9 +25,7 @@ const SporsmalSwitch = ({ sporsmal }: UndersporsmalProps) => {
 
         case RSSvartype.CHECKBOX_GRUPPE:
             return (
-                <div className="soknad__undersporsmal">
-                    <CheckboxKomp sporsmal={sporsmal} />
-                </div>
+                <CheckboxKomp sporsmal={sporsmal} />
             );
 
         case RSSvartype.DATO:
@@ -36,19 +35,20 @@ const SporsmalSwitch = ({ sporsmal }: UndersporsmalProps) => {
             return <PeriodeInput sporsmal={sporsmal} />;
 
         case RSSvartype.JA_NEI:
+            if (sporsmal.parentKriterie === 'CHECKED' || sporsmal.undersporsmal.length === 0) {
+                return <JaNeiRadio sporsmal={sporsmal} />
+            }
             return <JaNeiKomp sporsmal={sporsmal} />;
 
         case RSSvartype.TIMER:
         case RSSvartype.PROSENT:
         case RSSvartype.TALL:
-            return <TallKomp sporsmal={sporsmal} desimaler={0} />;
+            return <TallKomp sporsmal={sporsmal} />;
 
         case RSSvartype.RADIO_GRUPPE:
         case RSSvartype.RADIO_GRUPPE_TIMER_PROSENT:
             return (
-                <div className="soknad__undersporsmal">
-                    <RadioKomp sporsmal={sporsmal} />
-                </div>
+                <RadioKomp sporsmal={sporsmal} />
             );
 
         case RSSvartype.IKKE_RELEVANT:

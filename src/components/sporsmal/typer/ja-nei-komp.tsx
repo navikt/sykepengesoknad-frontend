@@ -90,7 +90,12 @@ const JaNeiInput = ({ sporsmal }: SpmProps) => {
                 </Vis>
             </div>
 
-            <AnimateOnMount mounted={watchVerdi === 'ja'} enter="undersporsmal--vis" leave="undersporsmal--skjul" start="undersporsmal">
+            <AnimateOnMount
+                mounted={watchVerdi === 'ja'}
+                enter="undersporsmal--vis"
+                leave="undersporsmal--skjul"
+                start="undersporsmal"
+            >
                 <>
                     <UndersporsmalListe undersporsmal={sporsmal.undersporsmal} />
                     <TagBjorn sporsmal={sporsmal} className="press" />

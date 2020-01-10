@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { useFormContext } from 'react-hook-form';
 import { Normaltekst } from 'nav-frontend-typografi';
 import Vis from '../../../utils/vis';
@@ -7,24 +7,17 @@ import { SpmProps } from '../sporsmal-form/sporsmal-form';
 import { hentSvar } from '../sporsmal-utils';
 import UndersporsmalListe from '../undersporsmal/undersporsmal-liste';
 
-interface TallKompProps {
-    desimaler: number;
-}
-
-type AllTallProps = SpmProps & TallKompProps;
-
-const TallInput = ({ sporsmal, desimaler }: AllTallProps) => {
+const TallInput = ({ sporsmal }: SpmProps) => {
     const feilmelding = tekster['soknad.feilmelding.' + sporsmal.tag.toLowerCase()];
-    const { register, setValue, watch, errors } = useFormContext();
-    const watchVerdi = watch(sporsmal.id);
+    const [ lokal, setLokal ] = useState<string>(hentSvar(sporsmal));
+    const { register, setValue, errors } = useFormContext();
     const undersporsmal = useRef<HTMLDivElement>(null);
 
-    const handleChange = () => {
-        if (watchVerdi === 'ja') {
-            undersporsmal.current.classList.add('aapen');
-        } else {
-            undersporsmal.current.classList.remove('aapen');
-        }
+    const onChange = (e: any) => {
+        const value = e.target.value;
+        console.log('value', value); // eslint-disable-line
+        setValue(sporsmal.id, value);
+        setLokal(value);
     };
 
     useEffect(() => {
@@ -41,16 +34,12 @@ const TallInput = ({ sporsmal, desimaler }: AllTallProps) => {
             </Vis>
 
             <div className="medEnhet">
-                <input type="number"
-                    className="skjemaelement__input input--s"
+                <input type="text"
+                    className="skjemaelement__input input--xs"
                     name={sporsmal.id}
                     id={sporsmal.id}
-                    min={sporsmal.min}
-                    max={sporsmal.max}
-                    ref={register({
-                        validate: (value: any) => value === true || feilmelding
-                    })}
-                    onChange={() => handleChange}
+                    ref={register({ required: feilmelding })}
+                    onChange={onChange}
                     autoComplete="off"
                 />
                 <label className="medEnhet__enhet" htmlFor={sporsmal.id}>{sporsmal.undertekst}</label>
@@ -65,7 +54,7 @@ const TallInput = ({ sporsmal, desimaler }: AllTallProps) => {
             </div>
 
             <div className="undersporsmal" ref={undersporsmal}>
-                <Vis hvis={watchVerdi > 0}>
+                <Vis hvis={lokal !== undefined}>
                     <UndersporsmalListe undersporsmal={sporsmal.undersporsmal} />
                 </Vis>
             </div>

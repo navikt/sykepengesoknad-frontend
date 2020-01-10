@@ -34,14 +34,23 @@ export const settSvar = (sporsmal: Sporsmal, verdier: Record<string, string | nu
     }
 
     if (Array.isArray(verdi)) {
-        sporsmal.svarliste = {
-            sporsmalId: sporsmal.id,
-            svar: verdi
-                .filter((p: Periode) => p.fom !== undefined && p.tom !== undefined)
-                .map((p: Periode) => {
-                    return { verdi: p.fom.toString() + '%%' + p.tom.toString() }
+        if (sporsmal.svartype === RSSvartype.DATO) {
+            sporsmal.svarliste = {
+                sporsmalId: sporsmal.id,
+                svar: verdi.map(element => {
+                    return element.toString()
                 }),
-        };
+            };
+        } else {
+            sporsmal.svarliste = {
+                sporsmalId: sporsmal.id,
+                svar: verdi
+                    .filter((p: Periode) => p.fom !== undefined && p.tom !== undefined)
+                    .map((p: Periode) => {
+                        return { verdi: p.fom.toString() + '%%' + p.tom.toString() }
+                    }),
+            };
+        }
     } else if (verdi !== undefined) {
         sporsmal.svarliste = {
             sporsmalId: sporsmal.id,
@@ -63,7 +72,7 @@ export const hentSvar = (sporsmal: Sporsmal): any => {
 
     if (sporsmal.svartype === RSSvartype.PERIODER || sporsmal.svartype === RSSvartype.PERIODE) {
         const perioder: Periode[] = [];
-        svarliste.svar.map(svar => {
+        svarliste.svar.forEach(function (svar) {
             const datoer = svar.verdi.split('%%');
             const periode = new Periode();
             periode.fom = new Date(datoer[0]);
