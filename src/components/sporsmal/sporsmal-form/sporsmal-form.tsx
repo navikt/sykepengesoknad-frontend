@@ -5,7 +5,7 @@ import { Sporsmal } from '../../../types/types';
 import FeilOppsummering from '../../skjema/feiloppsummering/feil-oppsummering';
 import useForm, { FormContext } from 'react-hook-form';
 import Knapperad from './knapperad';
-import SporsmalSwitch from '../undersporsmal/sporsmal-switch';
+import SporsmalSwitch from '../sporsmal-switch';
 import { pathUtenSteg, settSvar } from '../sporsmal-utils';
 import './sporsmal-form.less';
 

@@ -1,15 +1,7 @@
 import { TagTyper } from '../../types/enums';
-import { fjernIndexFraTag } from './field-utils';
 import { Soknad, Sporsmal } from '../../types/types';
 import { RSSvartype } from '../../types/rs-types/rs-svartype';
 import { Periode } from './typer/periode-komp';
-
-export const hentSporsmalForOppsummering = (soknad: Soknad) => {
-    return soknad.sporsmal.filter((s) => {
-        return s.tag === TagTyper.VAER_KLAR_OVER_AT
-            || s.tag === TagTyper.BEKREFT_OPPLYSNINGER;
-    });
-};
 
 export const erSisteSide = (soknad: Soknad, sidenummer: number) => {
     const sporsmal = soknad.sporsmal[sidenummer - 1];
@@ -91,4 +83,14 @@ export const pathUtenSteg = (pathname: string) => {
     const arr: string[] = pathname.split('/');
     arr.pop();
     return arr.join('/');
+};
+
+export const fjernIndexFraTag = (tag: TagTyper): TagTyper => {
+    let stringtag: string = tag.toString();
+    const separator = '_';
+    const index = stringtag.lastIndexOf(separator);
+    if(index === (stringtag.length - 2) || index === (stringtag.length - 1)) {
+        stringtag = stringtag.slice(0, index);
+    }
+    return TagTyper[stringtag as keyof typeof TagTyper];
 };
