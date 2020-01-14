@@ -3,6 +3,7 @@ import cls from 'classnames';
 import { useParams, useHistory } from 'react-router';
 import Vis from '../../vis';
 import { pathUtenSteg } from '../sporsmal-utils';
+import { SEPARATOR } from '../../../utils/constants';
 
 const innerCls = (aktiv: boolean, ferdig: boolean, disabled: boolean) =>
     cls('stegindikator__steg-inner', {
@@ -27,7 +28,7 @@ const Steg = ({ label, index }: StegProps) => {
     const history = useHistory();
 
     function goTo(idx: number) {
-        history.push(pathUtenSteg(history.location.pathname) + '/' + (idx));
+        history.push(pathUtenSteg(history.location.pathname) + SEPARATOR + (idx));
     }
 
     return (

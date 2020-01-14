@@ -3,6 +3,7 @@ const SoknadenTekster: any = {
         'landingsside.sidetittel': 'Ditt sykefravær',
         'soknader.sidetittel': 'Søknader om sykepenger',
         'soknad.sidetittel': 'Søknad',
+        'kvittering.sidetittel': 'Kvittering',
         'soknad.tilbakeknapp': 'Tilbake',
         'sykepengesoknad.foer-du-begynner.tittel': 'Før du begynner',
         'sykepengesoknad.foer-du-begynner.introtekst': 'Det du fyller ut brukes til å vurdere om du har rett til sykepenger, og eventuelt hvor mye. Derfor ber vi deg bekrefte at opplysningene er riktige:',
@@ -26,7 +27,6 @@ const SoknadenTekster: any = {
         "sykepengesoknad.aktiviteter.gradert.hjelpetekst.tittel": "Gradert sykmelding",
         "sykepengesoknad.avbryt.kvittering.tittel": "Søknaden er avbrutt",
         "sykepengesoknad.egenmeldingsdager.hjelpetekst.tittel": "Egenmelding",
-        "sykepengesoknad.kvittering.tittel": "Søknaden er sendt!",
         "sykepengesoknad.oppsummering.tittel": "Oppsummering",
         "sykepengesoknad.oppsummering.undertittel": "Oppsummering av søknaden",
         "sykepengesoknad.sykepengeinfo.tittel": "Utbetaling av sykepenger",
@@ -57,6 +57,17 @@ const SoknadenTekster: any = {
         'sykepengesoknad.oppsummering.nav-som-mottaker': 'Søknaden sendes til NAV.',
         'sykepengesoknad.oppsummering.arbeidsgiver-som-mottaker': 'Søknaden sendes til %ARBEIDSGIVER%.',
         'sykepengesoknad.oppsummering.nav-arbeidsgiver-som-mottaker': 'Søknaden sendes til NAV. Kopi av søknaden sendes til %ARBEIDSGIVER%.',
+
+        "sykepengesoknad.kvittering.tekst": "<p>Søknaden er sendt til arbeidsgiveren din via Altinn. Det vil kunne ta noe tid før meldingen ligger i din arbeidsgivers innboks. Arbeidsgiveren vil ved behov videresende søknaden til NAV. Si gjerne fra til arbeidsgiveren din at du har sendt søknaden siden dette foreløpig er nytt for alle.</p><p>Du trenger ikke å sende inn del D av sykmeldingen på papir, med mindre arbeidsgiveren eller NAV senere ber deg om det.</p>",
+        "sykepengesoknad.kvittering.til-nav-arbeidsgiver.tekst": "<p>Søknaden er sendt til %ARBEIDSGIVER% og til NAV.</p>\n<p>For å kunne behandle søknaden om sykepenger, trenger NAV også inntektsopplysninger fra arbeidsgiveren din. Dette skal arbeidsgiveren sende inn én gang per sammenhengende sykefravær. </p>\n<p><a href=\"https://www.nav.no/no/NAV+og+samfunn/Kontakt+NAV/Utbetalinger/Utbetalinger/Utbetalingsdatoer%2C+feriepenger+og+skattetrekk?kap=499628\" target=\"_blank\">Les om utbetaling av sykepenger og saksbehandlingstider.</a></p>",
+        "sykepengesoknad.kvittering.til-nav-arbeidsgiver.tittel": "Søknaden er sendt!",
+        "sykepengesoknad.kvittering.til-arbeidsgiver.tekst": "<p>Søknaden er sendt til %ARBEIDSGIVER%.</p>\n<p>Vi har beregnet at varigheten på sykefraværet er innenfor de 16 dagene som arbeidsgiveren skal dekke. Derfor sendes denne søknaden kun til arbeidsgiveren din og ikke til NAV.</p>\n<p>Sykepenger utbetales av arbeidsgiveren din.</p>",
+        "sykepengesoknad.kvittering.til-arbeidsgiver.tittel": "Søknaden er sendt!",
+        "sykepengesoknad.kvittering.til-nav.tekst": "<p>Søknaden er sendt til NAV.</p>\n<p>For å kunne behandle søknaden om sykepenger trenger NAV også inntektsopplysninger fra arbeidsgiveren din. Dette skal arbeidsgiveren din sende inn én gang per sammenhengende sykefravær. </p>\n<p>Sykepenger utbetales etter at NAV har innvilget søknaden. <a href=\"https://www.nav.no/no/NAV+og+samfunn/Kontakt+NAV/Utbetalinger/Utbetalinger/Utbetalingsdatoer%2C+feriepenger+og+skattetrekk?kap=499628\" target=\"_blank\">Les om sykepenger og saksbehandlingstider.</a></p>",
+        "sykepengesoknad.kvittering.til-nav.tittel": "Søknaden er sendt!",
+        "sykepengesoknad.kvittering.til-nav-arbeidsledig.tekst": "<p>Takk for søknaden</p>\n<p>Sendt til NAV: %DATO%.</p>\n<p><strong>Nå er soknaden sendt til NAV</strong></p>\n<p>Sender du allerede meldekort, fortsetter du med det.</p>\n<p>Ring <strong>%TELEFON%</strong> hvis du er i tvil.</p>\n",
+        "sykepengesoknad.kvittering.til-nav-arbeidsledig.tittel": "Søknaden er sendt!",
+        "sykepengesoknad.kvittering.tittel": "Søknaden er sendt!",
 
     }, 'en': {}
 };

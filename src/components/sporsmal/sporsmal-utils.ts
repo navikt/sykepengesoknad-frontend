@@ -2,7 +2,7 @@ import { TagTyper } from '../../types/enums';
 import { Soknad, Sporsmal } from '../../types/types';
 import { RSSvartype } from '../../types/rs-types/rs-svartype';
 import { Periode } from './typer/periode-komp';
-import { PERIODE_SKILLE } from '../../utils/constants';
+import { PERIODE_SKILLE, SEPARATOR } from '../../utils/constants';
 
 export const erSisteSide = (soknad: Soknad, sidenummer: number) => {
     const sporsmal = soknad.sporsmal[sidenummer - 1];
@@ -12,6 +12,9 @@ export const erSisteSide = (soknad: Soknad, sidenummer: number) => {
 
 export const hentNokkel = (soknad: Soknad, sidenummer: number) => {
     const sporsmal = soknad.sporsmal[sidenummer - 1];
+    if (sporsmal === undefined) {
+        return '';
+    }
     const nokkel = fjernIndexFraTag(sporsmal.tag).toLowerCase();
     return sidenummer === 1
         ? 'sykepengesoknad.foer-du-begynner.tittel'
@@ -81,9 +84,9 @@ export const hentSvar = (sporsmal: Sporsmal): any => {
 };
 
 export const pathUtenSteg = (pathname: string) => {
-    const arr: string[] = pathname.split('/');
+    const arr: string[] = pathname.split(SEPARATOR);
     arr.pop();
-    return arr.join('/');
+    return arr.join(SEPARATOR);
 };
 
 export const fjernIndexFraTag = (tag: TagTyper): TagTyper => {

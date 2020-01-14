@@ -19,11 +19,12 @@ import SporsmalForm from '../../components/sporsmal/sporsmal-form/sporsmal-form'
 import SporsmalSteg from '../../components/sporsmal/sporsmal-steg/sporsmal-steg';
 import { hentNokkel } from '../../components/sporsmal/sporsmal-utils';
 import { lagSendTil } from '../../utils/soknad-utils';
+import { SEPARATOR } from '../../utils/constants';
 import './soknaden.less';
 
 const brodsmuler: Brodsmule[] = [ {
     tittel: tekster['soknader.sidetittel'],
-    sti: '/',
+    sti: SEPARATOR,
     erKlikkbar: true
 }, {
     tittel: tekster['soknad.sidetittel'],
@@ -73,7 +74,7 @@ const Fordeling = () => {
 
                     <Vis hvis={stegNo > 1}>
                         <SporsmalSteg />
-                        <Link to={'/soknader/' + valgtSoknad.id + '/' + (stegNo - 1)} className="lenke tilbakelenke">
+                        <Link to={'/soknader/' + valgtSoknad.id + SEPARATOR + (stegNo - 1)} className="lenke tilbakelenke">
                             <VenstreChevron />
                             <Normaltekst tag="span">{tekster['soknad.tilbakeknapp']}</Normaltekst>
                         </Link>
@@ -86,7 +87,9 @@ const Fordeling = () => {
                     </Vis>
 
                     <Vis hvis={stegNo === 1}>
-                        <Normaltekst tag="p" className="sporsmal__intro">{tekster['sykepengesoknad.foer-du-begynner.introtekst']}</Normaltekst>
+                        <Normaltekst tag="p" className="sporsmal__intro">
+                            {tekster['sykepengesoknad.foer-du-begynner.introtekst']}
+                        </Normaltekst>
                     </Vis>
 
                     <SporsmalForm />

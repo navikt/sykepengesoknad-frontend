@@ -2,7 +2,8 @@ const BannerTekster: any = {
     'nb': {
         'sykepengesoknad-utland.tittel': 'Søknad om å beholde sykepenger utenfor Norge',
         'sykepengesoknad.sidetittel': 'Søknad om sykepenger',
-        'sykepengesoknad.sidetittel.periode-2': 'Gjelder for perioden %PERIODE%'
+        'sykepengesoknad.sidetittel.periode-2': 'Gjelder for perioden %PERIODE%',
+        'kvittering.sidetittel': 'Kvittering',
     }, 'en': {}
 };
 
