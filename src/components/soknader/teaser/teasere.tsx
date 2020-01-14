@@ -2,7 +2,7 @@ import React from 'react';
 import { Soknad } from '../../../types/types';
 import { Element } from 'nav-frontend-typografi';
 import Teaser from './teaser';
-import Vis from '../../../utils/vis';
+import Vis from '../../vis';
 
 interface SoknaderTeasereProps {
     soknader: Soknad[];

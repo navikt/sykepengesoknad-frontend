@@ -53,6 +53,11 @@ const SoknadenTekster: any = {
         "sykepengesoknad.andre-inntektskilder.hvilke-inntektskilder.informasjon": "Du trenger ikke oppgi andre ytelser fra NAV.",
         "sykepengesoknad.andre-inntektskilder.hvilke-inntektskilder.sporsmal": "Hvilke andre inntektskilder har du?",
         "sykepengesoknad.andre-inntektskilder.janei.sporsmal": "Har du andre inntektskilder, eller jobber du for andre enn %ARBEIDSGIVER%?",
+
+        'sykepengesoknad.oppsummering.nav-som-mottaker': 'Søknaden sendes til NAV.',
+        'sykepengesoknad.oppsummering.arbeidsgiver-som-mottaker': 'Søknaden sendes til %ARBEIDSGIVER%.',
+        'sykepengesoknad.oppsummering.nav-arbeidsgiver-som-mottaker': 'Søknaden sendes til NAV. Kopi av søknaden sendes til %ARBEIDSGIVER%.',
+
     }, 'en': {}
 };
 

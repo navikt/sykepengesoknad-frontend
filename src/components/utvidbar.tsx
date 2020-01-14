@@ -65,7 +65,7 @@ const Utvidbar = (props: UtvidbarProps) => {
                 </div>
             </button>
             <div ref={container} className={'utvidbar__innholdContainer' + (erApen ? ' apen' : '')}
-                onTransitionEnd={() => onTransitionEnd()} style={{maxHeight: erApen ? innholdHeight + 'px' : '0'}}
+                onTransitionEnd={() => onTransitionEnd()} style={{maxHeight: erApen ? (innholdHeight + 2) + 'px' : '0'}}
             >
                 <div ref={innhold} className="utvidbar__innhold">
                     {props.children}

@@ -19,14 +19,12 @@ interface UndersporsmalProps {
 
 const SporsmalSwitch = ({ sporsmal }: UndersporsmalProps) => {
     switch (sporsmal.svartype) {
-        case RSSvartype.CHECKBOX:
         case RSSvartype.CHECKBOX_PANEL:
             return <CheckboxPanel sporsmal={sporsmal} />;
 
+        case RSSvartype.CHECKBOX:
         case RSSvartype.CHECKBOX_GRUPPE:
-            return (
-                <CheckboxKomp sporsmal={sporsmal} />
-            );
+            return <CheckboxKomp sporsmal={sporsmal} />;
 
         case RSSvartype.DATO:
             return <DatoInput sporsmal={sporsmal} />;
@@ -47,19 +45,13 @@ const SporsmalSwitch = ({ sporsmal }: UndersporsmalProps) => {
 
         case RSSvartype.RADIO_GRUPPE:
         case RSSvartype.RADIO_GRUPPE_TIMER_PROSENT:
-            return (
-                <RadioKomp sporsmal={sporsmal} />
-            );
+            return <RadioKomp sporsmal={sporsmal} />;
 
         case RSSvartype.IKKE_RELEVANT:
-            return (
-                <div className="ekstrasporsmal">
-                    <IkkeRelevant sporsmal={sporsmal} />
-                </div>
-            );
+            return <IkkeRelevant sporsmal={sporsmal} />;
 
         default:
-            return <UkjentSporsmal sporsmal={sporsmal}/>;
+            return <UkjentSporsmal sporsmal={sporsmal} />;
     }
 };
 

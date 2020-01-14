@@ -1,7 +1,7 @@
 import React from 'react';
 import { OppsummeringProps } from '../oppsummering';
 import { Element } from 'nav-frontend-typografi';
-import Vis from '../../../../utils/vis';
+import Vis from '../../../vis';
 import { RSSvartype } from '../../../../types/rs-types/rs-svartype';
 import UndersporsmalSum from './undersporsmal-sum';
 import { SvarEnums } from '../../../../types/enums';

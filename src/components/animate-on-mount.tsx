@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import Vis from '../utils/vis';
+import Vis from './vis';
 
 interface AnimateOnMountProps {
     mounted: boolean;

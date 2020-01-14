@@ -45,20 +45,3 @@ const lagDato = (dato: string | Date): Date => {
         return dato;
     }
 };
-
-export const getTidligsteSendtDato = (soknad: Soknad) => {
-    const sendtTilNAVDato = soknad.sendtTilNAVDato;
-    if (sendtTilNAVDato && soknad.sendtTilArbeidsgiverDato) {
-        return sendtTilNAVDato > soknad.sendtTilArbeidsgiverDato
-            ? soknad.sendtTilArbeidsgiverDato
-            : sendtTilNAVDato;
-    }
-    return sendtTilNAVDato
-        || soknad.sendtTilArbeidsgiverDato;
-};
-
-export const sorterEtterSendtDato = (soknad1: Soknad, soknad2: Soknad) => {
-    const dato1 = getTidligsteSendtDato(soknad1);
-    const dato2 = getTidligsteSendtDato(soknad2);
-    return dato2.getTime() - dato1.getTime();
-};

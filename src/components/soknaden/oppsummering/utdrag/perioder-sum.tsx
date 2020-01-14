@@ -4,7 +4,7 @@ import { OppsummeringProps } from '../oppsummering';
 import tekster from '../oppsummering-tekster';
 import { getLedetekst } from '../../../../utils/utils';
 import dayjs from 'dayjs';
-import Vis from '../../../../utils/vis';
+import Vis from '../../../vis';
 import { empty } from '../../../../utils/constants';
 
 const PerioderSum = ({ sporsmal }: OppsummeringProps) => {

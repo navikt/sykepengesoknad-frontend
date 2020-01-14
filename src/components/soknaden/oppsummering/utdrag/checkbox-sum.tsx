@@ -3,7 +3,7 @@ import Avkrysset from './avkrysset';
 import { SvarEnums } from '../../../../types/enums';
 import { OppsummeringProps } from '../oppsummering';
 import UndersporsmalSum from './undersporsmal-sum';
-import Vis from '../../../../utils/vis';
+import Vis from '../../../vis';
 
 const CheckboxSum = ({ sporsmal }: OppsummeringProps) => {
     const uspm = sporsmal.undersporsmal;

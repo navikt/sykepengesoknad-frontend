@@ -5,7 +5,7 @@ import Avkrysset from './avkrysset';
 import { OppsummeringProps } from '../oppsummering';
 import UndersporsmalSum from './undersporsmal-sum';
 import { Sporsmal } from '../../../../types/types';
-import Vis from '../../../../utils/vis';
+import Vis from '../../../vis';
 
 const erUndersporsmalStilt = (sporsmal: Sporsmal): boolean => {
     return sporsmal.svarliste.svar.map((s) => {

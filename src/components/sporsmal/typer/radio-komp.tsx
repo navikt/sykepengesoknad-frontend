@@ -3,7 +3,7 @@ import { SpmProps } from '../sporsmal-form/sporsmal-form';
 import { RSSvartype } from '../../../types/rs-types/rs-svartype';
 import { hentSvar } from '../sporsmal-utils';
 import { useFormContext } from 'react-hook-form';
-import Vis from '../../../utils/vis';
+import Vis from '../../vis';
 import { Normaltekst } from 'nav-frontend-typografi';
 import AnimateOnMount from '../../animate-on-mount';
 import UndersporsmalListe from '../undersporsmal/undersporsmal-liste';

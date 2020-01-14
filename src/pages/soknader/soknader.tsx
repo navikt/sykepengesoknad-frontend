@@ -5,7 +5,7 @@ import { Brodsmule, Soknad } from '../../types/types';
 import Teasere from '../../components/soknader/teaser/teasere';
 import UtbetalingerLenke from '../../components/soknader/utbetalinger/utbetalinger-lenke';
 import { sorterEtterOpprettetDato, sorterEtterPerioder } from '../../utils/sorter-soknader';
-import Vis from '../../utils/vis';
+import Vis from '../../components/vis';
 import { useAppStore } from '../../data/stores/app-store';
 import { RSSoknadstatus } from '../../types/rs-types/rs-soknadstatus';
 import tekster from './soknader-tekster';

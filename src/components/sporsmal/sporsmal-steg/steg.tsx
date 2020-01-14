@@ -1,7 +1,7 @@
 import React from 'react';
 import cls from 'classnames';
 import { useParams, useHistory } from 'react-router';
-import Vis from '../../../utils/vis';
+import Vis from '../../vis';
 import { pathUtenSteg } from '../sporsmal-utils';
 
 const innerCls = (aktiv: boolean, ferdig: boolean, disabled: boolean) =>

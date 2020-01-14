@@ -2,7 +2,7 @@ import React from 'react';
 import { OppsummeringProps } from '../oppsummering';
 import { Element, Normaltekst } from 'nav-frontend-typografi';
 import dayjs from 'dayjs';
-import Vis from '../../../../utils/vis';
+import Vis from '../../../vis';
 import { empty } from '../../../../utils/constants';
 
 const DatoSum = ({ sporsmal }: OppsummeringProps) => {

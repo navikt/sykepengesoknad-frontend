@@ -4,7 +4,7 @@ import { TagTyper } from '../../../types/enums';
 import Bjorn from './bjorn';
 import { fjernIndexFraTag } from '../sporsmal-utils';
 import { useAppStore } from '../../../data/stores/app-store';
-import Vis from '../../../utils/vis';
+import Vis from '../../vis';
 import { Sporsmal } from '../../../types/types';
 
 const tagsMedBjorn = {

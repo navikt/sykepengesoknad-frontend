@@ -2,6 +2,7 @@ import { TagTyper } from '../../types/enums';
 import { Soknad, Sporsmal } from '../../types/types';
 import { RSSvartype } from '../../types/rs-types/rs-svartype';
 import { Periode } from './typer/periode-komp';
+import { PERIODE_SKILLE } from '../../utils/constants';
 
 export const erSisteSide = (soknad: Soknad, sidenummer: number) => {
     const sporsmal = soknad.sporsmal[sidenummer - 1];
@@ -39,7 +40,7 @@ export const settSvar = (sporsmal: Sporsmal, verdier: Record<string, string | nu
                 svar: verdi
                     .filter((p: Periode) => p.fom !== undefined && p.tom !== undefined)
                     .map((p: Periode) => {
-                        return { verdi: p.fom.toString() + '%%' + p.tom.toString() }
+                        return { verdi: p.fom.toString() + PERIODE_SKILLE + p.tom.toString() }
                     }),
             };
         }
@@ -65,7 +66,7 @@ export const hentSvar = (sporsmal: Sporsmal): any => {
     if (sporsmal.svartype === RSSvartype.PERIODER || sporsmal.svartype === RSSvartype.PERIODE) {
         const perioder: Periode[] = [];
         svarliste.svar.forEach(function (svar) {
-            const datoer = svar.verdi.split('%%');
+            const datoer = svar.verdi.split(PERIODE_SKILLE);
             const periode = new Periode();
             periode.fom = new Date(datoer[0]);
             periode.tom = new Date(datoer[1]);

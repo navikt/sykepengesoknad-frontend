@@ -4,7 +4,7 @@ import { TagTyper } from '../../types/enums';
 import { fjernIndexFraTag } from './sporsmal-utils';
 import tekster from './sporsmal-tekster';
 import { SpmProps } from './sporsmal-form/sporsmal-form';
-import Vis from '../../utils/vis';
+import Vis from '../vis';
 
 const SporsmalHjelpetekst = ({ sporsmal }: SpmProps) => {
 

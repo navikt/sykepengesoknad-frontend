@@ -1,88 +1,8 @@
-import { Soknad } from '../types/types';
-import { periodeOverlapperMedPeriode, tidligsteFom, tilDatePeriode } from './periode-utils';
-import { erGyldigDatoformat, fraInputdatoTilJSDato } from './dato-utils';
-
-export const filtrerAktuelleAktiviteter = (aktiviteter: any, gjenopptattArbeidFulltUtDato: any) => {
-    if (gjenopptattArbeidFulltUtDato && aktiviteter) {
-        return aktiviteter
-            .filter((aktivitet: any) => {
-                return aktivitet.periode.fom < gjenopptattArbeidFulltUtDato;
-            })
-            .map((aktivitet: any) => {
-                const justertTOM = gjenopptattArbeidFulltUtDato <= aktivitet.periode.tom
-                    ? new Date(gjenopptattArbeidFulltUtDato.getTime() - (24 * 60 * 60 * 1000))
-                    : aktivitet.periode.tom;
-
-                return Object.assign({}, aktivitet, {
-                    periode: {
-                        fom: aktivitet.periode.fom,
-                        tom: justertTOM,
-                    },
-                });
-            });
-    }
-    return aktiviteter;
-};
-
-export const mapAktiviteter = (soknad: any) => {
-    const aktiviteter = soknad.aktiviteter
-        .filter((aktivitet: any) => {
-            return periodeOverlapperMedPeriode(aktivitet.periode, {
-                fom: soknad.fom,
-                tom: soknad.tom,
-            });
-        })
-        .map((aktivitet: any) => {
-            const fom = aktivitet.periode.fom.getTime() < soknad.fom.getTime() ? soknad.fom : aktivitet.periode.fom;
-            const tom = aktivitet.periode.tom.getTime() > soknad.tom.getTime() ? soknad.tom : aktivitet.periode.tom;
-            return {
-                ...aktivitet,
-                periode: { fom, tom },
-            };
-        });
-    return {
-        ...soknad,
-        aktiviteter,
-    };
-};
-
-export const getTomDato = (sykepengesoknad: any) => {
-    const perioder = sykepengesoknad.aktiviteter.map((a: any) => {
-        return a.periode;
-    });
-    if (sykepengesoknad.gjenopptattArbeidFulltUtDato) {
-        const tidligsteFomFraPerioder = new Date(tidligsteFom(perioder));
-        const gjenopptattArbeidFulltUtDato: Date = new Date(sykepengesoknad.gjenopptattArbeidFulltUtDato);
-        if (gjenopptattArbeidFulltUtDato.getTime() === tidligsteFomFraPerioder.getTime()) {
-            return gjenopptattArbeidFulltUtDato;
-        }
-        return new Date(gjenopptattArbeidFulltUtDato.getTime() - (1000 * 60 * 60 * 24));
-    }
-    return sykepengesoknad.tom;
-};
-
-export const getGjenopptattArbeidFulltUtDato = (skjemasoknad: any) => {
-    let gjenopptattArbeidFulltUtDato = skjemasoknad.gjenopptattArbeidFulltUtDato;
-    if (!skjemasoknad.harGjenopptattArbeidFulltUt || !gjenopptattArbeidFulltUtDato || !erGyldigDatoformat(gjenopptattArbeidFulltUtDato)) {
-        gjenopptattArbeidFulltUtDato = null;
-    } else {
-        try {
-            gjenopptattArbeidFulltUtDato = fraInputdatoTilJSDato(gjenopptattArbeidFulltUtDato);
-        } catch (e) {
-            gjenopptattArbeidFulltUtDato = null;
-        }
-        if (gjenopptattArbeidFulltUtDato && isNaN(gjenopptattArbeidFulltUtDato.getTime())) {
-            gjenopptattArbeidFulltUtDato = null;
-        }
-    }
-    return gjenopptattArbeidFulltUtDato;
-};
-
-export const erSendtTilBeggeMenIkkeSamtidig = (soknad: Soknad) => {
-    return soknad.sendtTilNAVDato
-        && soknad.sendtTilArbeidsgiverDato
-        && soknad.sendtTilNAVDato.getTime() !== soknad.sendtTilArbeidsgiverDato.getTime();
-};
+import { Soknad, Sporsmal, Sykmelding } from '../types/types';
+import { PERIODE_SKILLE } from './constants';
+import dayjs from 'dayjs';
+import { SvarTil, TagTyper } from '../types/enums';
+import { RSSoknadstype } from '../types/rs-types/rs-soknadstype';
 
 export const getSendtTilSuffix = (soknad: Soknad) => {
     if (soknad.sendtTilArbeidsgiverDato && soknad.sendtTilNAVDato) {
@@ -110,21 +30,77 @@ export const getRiktigDato = (soknad: Soknad) => {
     return '';
 };
 
-export const getFeriePermisjonPerioder = (values: any) => {
-    let ferieOgPermisjonPerioder: any = [];
-    if (values.harHattFeriePermisjonEllerUtenlandsopphold) {
-        if (values.harHattFerie) {
-            ferieOgPermisjonPerioder = [...ferieOgPermisjonPerioder, ...values.ferie];
-        }
-        if (values.harHattPermisjon) {
-            ferieOgPermisjonPerioder = [...ferieOgPermisjonPerioder, ...values.permisjon];
-        }
+export const svarVerdi = (sporsmal: Sporsmal): string => {
+    if (sporsmal.svarliste.svar.length > 0) {
+        return sporsmal.svarliste.svar[0].verdi;
     }
-    return ferieOgPermisjonPerioder.map(tilDatePeriode);
+    return '';
 };
 
-export const getGjenopptattArbeidFulltUtDatoFraSkjema = (skjemasoknad: any) => {
-    return skjemasoknad.harGjenopptattArbeidFulltUt && skjemasoknad.gjenopptattArbeidFulltUtDato
-        ? fraInputdatoTilJSDato(skjemasoknad.gjenopptattArbeidFulltUtDato)
-        : null;
+export const periodeVerdi = (sporsmal: Sporsmal): string[] => {
+    const svar = svarVerdi(sporsmal);
+    if (svar.includes(PERIODE_SKILLE)) {
+        return svar.split(PERIODE_SKILLE);
+    }
+    return [];
+};
+
+const flattenSporsmal = (sporsmal: Sporsmal[]) => {
+    let flatArr: Sporsmal[] = [];
+    for (let i = 0; i < sporsmal.length; i++) {
+        flatArr.push(sporsmal[i]);
+        flatArr = flatArr.concat(flattenSporsmal(sporsmal[i].undersporsmal));
+    }
+    return flatArr;
+};
+
+const sporsmalEtterTag = (sporsmal: Sporsmal[], tag: TagTyper) => {
+    return sporsmal.filter((spm: Sporsmal) => spm.tag === tag);
+};
+
+const tellDager = (sporsmal: Sporsmal[], tag: TagTyper) => {
+    const meldinger: Sporsmal[] = sporsmalEtterTag(sporsmal, tag);
+    let dager = 0;
+    if (meldinger.length > 0) {
+        const arr = periodeVerdi(meldinger[0]);
+        dager = dayjs(arr[0]).diff(dayjs(arr[1]), 'day');
+    }
+    return dager;
+};
+
+const beregnSoknadsdager = (soknad: Soknad): number => {
+    let soknadDager = 0;
+    if (soknad.tom !== null && soknad.fom !== null) {
+        soknadDager = dayjs(soknad.tom).diff(dayjs(soknad.fom), 'day');
+    }
+
+    const flateSporsmal = flattenSporsmal(soknad.sporsmal);
+    const egneDager = tellDager(flateSporsmal, TagTyper.EGENMELDINGER_NAR);
+    const papirDager = tellDager(flateSporsmal, TagTyper.PAPIRSYKMELDING_NAR);
+    return soknadDager + egneDager + papirDager;
+};
+
+export const lagSendTil = (soknad: Soknad, sykmelding: Sykmelding) => {
+    console.log('soknad', soknad); // eslint-disable-line
+    if (soknad === undefined) {
+        return [];
+    }
+    const totalDager = beregnSoknadsdager(soknad);
+
+    switch (soknad.soknadstype) {
+        case RSSoknadstype.ARBEIDSTAKERE:
+            if (totalDager > 16) {
+                return [ SvarTil.NAV, SvarTil.ARBEIDSGIVER ];
+            }
+            return [ SvarTil.ARBEIDSGIVER ];
+
+        case RSSoknadstype.ARBEIDSLEDIG:
+            return [ SvarTil.NAV ];
+
+        case RSSoknadstype.SELVSTENDIGE_OG_FRILANSERE:
+            if (totalDager > 16 && sykmelding.sporsmal.harSykmelding) {
+                return [ SvarTil.NAV ];
+            }
+            return [];
+    }
 };

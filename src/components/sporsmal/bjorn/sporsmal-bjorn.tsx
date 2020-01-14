@@ -1,7 +1,7 @@
 import React from 'react';
 import Bjorn from './bjorn';
 import { SvarEnums, TagTyper } from '../../../types/enums';
-import Vis from '../../../utils/vis';
+import Vis from '../../vis';
 import { SpmProps } from '../sporsmal-form/sporsmal-form';
 
 export const SporsmalBjorn = ({ sporsmal }: SpmProps) => {

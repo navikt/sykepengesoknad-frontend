@@ -360,3 +360,8 @@ export interface Feil {
     tom: string;
     fom: string;
 }
+
+export interface IdParams {
+    id: string;
+    stegId: string;
+}

@@ -1,12 +1,3 @@
-export enum ArbeidsSituasjoner {
-    ARBEIDSTAKER = 'ARBEIDSTAKER',
-    NAERINGSDRIVENDE = 'NAERINGSDRIVENDE',
-    FRILANSER = 'FRILANSER',
-    ARBEIDSLEDIG = 'ARBEIDSLEDIG',
-    ANNET = 'ANNET',
-    DEFAULT = 'DEFAULT'
-}
-
 export enum FeilaktigeOpplysninger {
     PERIODE = 'PERIODE',
     SYKMELDINGSGRAD = 'SYKMELDINGSGRAD',
@@ -48,36 +39,6 @@ export enum SporsmalsTyper {
     ARBEIDSGIVER_FORSKUTTERER = 'ARBEIDSGIVER_FORSKUTTERER'
 }
 
-export enum SvarTyper {
-    JA_NEI = 'JA_NEI',
-    CHECKBOX = 'CHECKBOX',
-    CHECKBOX_GRUPPE = 'CHECKBOX_GRUPPE',
-    CHECKBOX_PANEL = 'CHECKBOX_PANEL',
-    DATO = 'DATO',
-    PERIODER = 'PERIODER',
-    TIMER = 'TIMER',
-    FRITEKST = 'FRITEKST',
-    LAND = 'LAND',
-    IKKE_RELEVANT = 'IKKE_RELEVANT',
-    PROSENT = 'PROSENT',
-    RADIO_GRUPPE = 'RADIO_GRUPPE',
-    RADIO_GRUPPE_TIMER_PROSENT = 'RADIO_GRUPPE_TIMER_PROSENT',
-    RADIO = 'RADIO',
-    TALL = 'TALL'
-}
-
-export enum SoknadStatuser {
-    SENDT = 'SENDT',
-    NY = 'NY',
-    TIL_SENDING = 'TIL_SENDING',
-    UTGAATT = 'UTGAATT',
-    UTKAST_TIL_KORRIGERING = 'UTKAST_TIL_KORRIGERING',
-    KORRIGERT = 'KORRIGERT',
-    FREMTIDIG = 'FREMTIDIG',
-    AVBRUTT = 'AVBRUTT',
-    SLETTET_UTKAST = 'SLETTET_UTKAST'
-}
-
 export enum SykepengesoknadSvartyper {
     CHECKBOX = 'CHECKBOX',
     RADIOKNAPPER = 'RADIOKNAPPER',
@@ -98,12 +59,6 @@ export enum SykmeldingStatuser {
 
 export enum AvgittAvTyper {
     TIDLIGERE_SOKNAD = 'TIDLIGERE_SOKNAD'
-}
-
-export enum SoknadTyper {
-    SELVSTENDIGE_OG_FRILANSERE = 'SELVSTENDIGE_OG_FRILANSERE',
-    OPPHOLD_UTLAND = 'OPPHOLD_UTLAND',
-    ARBEIDSTAKERE = 'ARBEIDSTAKERE'
 }
 
 export enum TagTyper {
@@ -213,15 +168,14 @@ export enum UnleashToggles {
     NYTT_SYKMELDINGSMOTTAK = 'syfo.syfofront.nytt.sykmeldingsmottak',
 }
 
-export enum SoknadMottakere {
-    ARBEIDSGIVER_OG_NAV = 'ARBEIDSGIVER_OG_NAV',
-    ARBEIDSGIVER = 'ARBEIDSGIVER',
-    NAV = 'NAV',
-}
-
 export enum SpmKomp {
     CHECKBOX_PANEL = 'CHECKBOX_PANEL',
     JA_NEI = 'JA_NEI',
     DATO = 'DATO',
     TALL = 'TALL',
+}
+
+export enum SvarTil {
+    NAV = 'NAV',
+    ARBEIDSGIVER = 'ARBEIDSGIVER',
 }

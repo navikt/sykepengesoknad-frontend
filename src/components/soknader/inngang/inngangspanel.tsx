@@ -2,7 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import cls from 'classnames';
 import { Normaltekst, Systemtittel } from 'nav-frontend-typografi';
-import Vis from '../../../utils/vis';
+import Vis from '../../vis';
 import './inngangspanel.less';
 
 interface InngangspanelIkonProps {

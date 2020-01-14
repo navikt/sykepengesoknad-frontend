@@ -24,6 +24,7 @@ export const getUrlTilKvittering = (soknadId: string) => {
 export const getUrlTilSykmelding = (sykmeldingId: string) => {
     return `/sykmeldinger/${sykmeldingId}/`;
 };
+
 export const erHerokuApp = () => {
     const url = window
     && window.location
@@ -33,6 +34,7 @@ export const erHerokuApp = () => {
 
     return url.indexOf('herokuapp') > -1;
 };
+
 export const getSykefravaerUrl = (): string => {
     return erHerokuApp()
         ? 'https://sykefravaer.herokuapp.com'

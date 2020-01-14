@@ -2,11 +2,10 @@ import React, { useEffect } from 'react';
 import { VenstreChevron } from 'nav-frontend-chevron';
 import { Link, RouteComponentProps, useParams } from 'react-router-dom';
 import { Normaltekst, Systemtittel } from 'nav-frontend-typografi';
-import { Brodsmule, Soknad, Sykmelding } from '../../types/types';
+import { Brodsmule, IdParams, Soknad, Sykmelding } from '../../types/types';
 import { RSSoknadstatus } from '../../types/rs-types/rs-soknadstatus';
 import Banner from '../../components/banner/banner';
 import { useAppStore } from '../../data/stores/app-store';
-import { IdParams } from '../../utils/util-props';
 import { HotjarTrigger } from '../../components/hotjar-trigger';
 import SoknadIntro from '../../components/soknaden/soknad-intro/soknad-intro';
 import Opplysninger from '../../components/soknaden/opplysninger/opplysninger';
@@ -15,10 +14,11 @@ import VaerKlarOver from '../../components/soknaden/vaer-klar-over/vaer-klar-ove
 import Oppsummering from '../../components/soknaden/oppsummering/oppsummering';
 import tekster from './soknaden-tekster';
 import { setBodyClass } from '../../utils/utils';
-import Vis from '../../utils/vis';
+import Vis from '../../components/vis';
 import SporsmalForm from '../../components/sporsmal/sporsmal-form/sporsmal-form';
 import SporsmalSteg from '../../components/sporsmal/sporsmal-steg/sporsmal-steg';
 import { hentNokkel } from '../../components/sporsmal/sporsmal-utils';
+import { lagSendTil } from '../../utils/soknad-utils';
 import './soknaden.less';
 
 const brodsmuler: Brodsmule[] = [ {
@@ -32,12 +32,15 @@ const brodsmuler: Brodsmule[] = [ {
 } ];
 
 const Soknaden = (props: RouteComponentProps<IdParams>) => {
-    const { valgtSoknad } = useAppStore();
+    const { valgtSykmelding, valgtSoknad, setSendTil } = useAppStore();
     useGlobaleData(props.match.params);
 
     useEffect(() => {
         setBodyClass('soknaden');
-    }, []);
+        const send = lagSendTil(valgtSoknad, valgtSykmelding);
+        setSendTil(send);
+        // eslint-disable-next-line
+    }, [valgtSoknad, valgtSykmelding]);
 
     if (!valgtSoknad) return null;
 

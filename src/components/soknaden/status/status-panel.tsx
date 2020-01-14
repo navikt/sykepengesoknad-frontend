@@ -4,7 +4,7 @@ import Utbetaling from './utbetaling';
 import { Knapp } from 'nav-frontend-knapper';
 import tekster from './status-panel-tekster';
 import './status-panel.less';
-import Vis from '../../../utils/vis';
+import Vis from '../../vis';
 import { useAppStore } from '../../../data/stores/app-store';
 
 const StatusPanel = () => {

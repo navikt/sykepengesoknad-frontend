@@ -1,7 +1,7 @@
 import React, { useEffect, useRef } from 'react';
 import { Normaltekst, Undertittel } from 'nav-frontend-typografi';
 import Lenke from 'nav-frontend-lenker';
-import Vis from '../../../../src/utils/vis';
+import Vis from '../../vis';
 import { erSynligIViewport, getTop } from '../../../utils/browser-utils';
 import './feil-oppsummering.less';
 
