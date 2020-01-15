@@ -1,8 +1,8 @@
 import React, { useEffect, useRef } from 'react';
 import { Normaltekst, Undertittel } from 'nav-frontend-typografi';
-import Lenke from 'nav-frontend-lenker';
 import Vis from '../../vis';
 import { erSynligIViewport, getTop } from '../../../utils/browser-utils';
+import { Link } from 'react-router-dom';
 import './feil-oppsummering.less';
 
 interface FeiloppsummeringProps {
@@ -64,9 +64,9 @@ const FeilOppsummering = (props: FeiloppsummeringProps) => {
                             {feilmeldinger.map((felt: any, index: number) => {
                                 return (
                                     <li className="feiloppsummering__feil" key={index}>
-                                        <Lenke href={`#${felt[0]}`}>
+                                        <Link to={`#${felt[0]}`}>
                                             <Normaltekst tag="span">{felt[1].message}</Normaltekst>
-                                        </Lenke>
+                                        </Link>
                                     </li>
                                 );
                             })}

@@ -81,7 +81,6 @@ const beregnSoknadsdager = (soknad: Soknad): number => {
 };
 
 export const lagSendTil = (soknad: Soknad, sykmelding: Sykmelding) => {
-    console.log('soknad', soknad); // eslint-disable-line
     if (soknad === undefined) {
         return [];
     }

@@ -14,23 +14,25 @@ import { setBodyClass } from '../../utils/utils';
 import './soknader.less';
 
 export const filtrerOgSorterNyeSoknader = (soknader: Soknad[]) => {
-    return soknader.filter((soknad) => soknad.status === RSSoknadstatus.NY || soknad.status === RSSoknadstatus.UTKAST_TIL_KORRIGERING)
-        .sort(sorterEtterOpprettetDato);
+    return soknader.filter(soknad =>
+        soknad.status === RSSoknadstatus.NY || soknad.status === RSSoknadstatus.UTKAST_TIL_KORRIGERING
+    ).sort(sorterEtterOpprettetDato);
 };
 
-const brodsmuler: Brodsmule[] = [{
+const brodsmuler: Brodsmule[] = [ {
     tittel: tekster['soknader.sidetittel'],
     sti: '/soknader',
     erKlikkbar: false
-}];
+} ];
 
 const Soknader = () => {
     const { soknader } = useAppStore();
     const nyeSoknader = filtrerOgSorterNyeSoknader(soknader);
 
     const tidligereSoknader = soknader
-        .filter((soknad) => soknad.status === RSSoknadstatus.SENDT || soknad.status === RSSoknadstatus.AVBRUTT)
-        .sort(sorterEtterPerioder);
+        .filter((soknad) =>
+            soknad.status === RSSoknadstatus.SENDT || soknad.status === RSSoknadstatus.AVBRUTT
+        ).sort(sorterEtterPerioder);
 
     const fremtidigeSoknader = soknader
         .filter((soknad) => soknad.status === RSSoknadstatus.FREMTIDIG)
@@ -43,7 +45,7 @@ const Soknader = () => {
 
     return (
         <div className="limit">
-            <Brodsmuler brodsmuler={brodsmuler}/>
+            <Brodsmuler brodsmuler={brodsmuler} />
             <Sidetittel tag="h1" className="sidetopp__tittel">
                 {tekster['soknader.sidetittel']}
             </Sidetittel>
@@ -72,7 +74,7 @@ const Soknader = () => {
                 />
             </Vis>
 
-            <UtbetalingerLenke/>
+            <UtbetalingerLenke />
 
             <Vis hvis={tidligereSoknader.length > 0}>
                 <Teasere

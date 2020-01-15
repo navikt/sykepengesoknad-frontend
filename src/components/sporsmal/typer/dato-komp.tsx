@@ -20,11 +20,9 @@ const DatoInput = ({ sporsmal }: SpmProps) => {
     const onChange = (value: any) => {
         setValue(sporsmal.id, value);
         setLokal(value);
-        console.log('lokal onChange', lokal); // eslint-disable-line
     };
 
     useEffect(() => {
-        console.log('lokal useEffect', lokal); // eslint-disable-line
         setValue(sporsmal.id, lokal);
         register({
             name: sporsmal.id,

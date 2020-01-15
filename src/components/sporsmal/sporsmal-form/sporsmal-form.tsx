@@ -29,7 +29,6 @@ const SporsmalForm = () => {
     const sporsmal = valgtSoknad.sporsmal[spmIndex];
 
     useEffect(() => {
-        console.log('useEffect', 'useEffect'); // eslint-disable-line
         setErSiste(sporsmal.svartype === RSSvartype.IKKE_RELEVANT && spmIndex === valgtSoknad.sporsmal.length - 2);
     }, [ spmIndex, sporsmal, valgtSoknad ]);
 

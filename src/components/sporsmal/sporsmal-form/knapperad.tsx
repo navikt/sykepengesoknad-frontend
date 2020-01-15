@@ -1,9 +1,8 @@
 import React from 'react';
-import Lenke from 'nav-frontend-lenker';
 import { Knapp } from 'nav-frontend-knapper';
 import { Normaltekst } from 'nav-frontend-typografi';
 import tekster from './knapperad-tekster';
-import { useParams } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
 
 interface KnapperadProps {
     onSubmit: Function;
@@ -19,9 +18,9 @@ const Knapperad = ({ onSubmit }: KnapperadProps) => {
     return (
         <div className="knapperad">
             <Knapp type="hoved" onClick={() => onSubmit}>{tekster[nokkel]}</Knapp>
-            <Lenke href={'asdf'}>
-                <Normaltekst>{tekster['sykepengesoknad.avbryt.trigger']}</Normaltekst>
-            </Lenke>
+            <Link to={'asdf'} className="avbrytlenke">
+                <Normaltekst tag="span">{tekster['sykepengesoknad.avbryt.trigger']}</Normaltekst>
+            </Link>
         </div>
     )
 };

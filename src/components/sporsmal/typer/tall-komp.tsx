@@ -15,7 +15,6 @@ const TallInput = ({ sporsmal }: SpmProps) => {
 
     const onChange = (e: any) => {
         const value = e.target.value;
-        console.log('value', value); // eslint-disable-line
         setValue(sporsmal.id, value);
         setLokal(value);
     };

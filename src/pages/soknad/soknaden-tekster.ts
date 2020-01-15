@@ -36,6 +36,7 @@ const SoknadenTekster: any = {
         "sykepengesoknad.utdanning.ja-nei.sporsmal-2": "Har du vært under utdanning i løpet av perioden %PERIODE%?",
         "sykepengesoknad.utdanning.startdato.sporsmal": "Når startet du på utdanningen?",
         "sykepengesoknad.utdanning.tittel": "Utdanning",
+        "sykepengesoknad.arbeidsledig_utland.tittel": "Reise",
 
         "sykepengesoknad.andre_inntektskilder.tittel": "Andre inntektskilder",
         "sykepengesoknad.andre-inntektskilder.ANDRE_ARBEIDSFORHOLD.label": "Andre arbeidsforhold",
@@ -68,6 +69,7 @@ const SoknadenTekster: any = {
         "sykepengesoknad.kvittering.til-nav-arbeidsledig.tekst": "<p>Takk for søknaden</p>\n<p>Sendt til NAV: %DATO%.</p>\n<p><strong>Nå er soknaden sendt til NAV</strong></p>\n<p>Sender du allerede meldekort, fortsetter du med det.</p>\n<p>Ring <strong>%TELEFON%</strong> hvis du er i tvil.</p>\n",
         "sykepengesoknad.kvittering.til-nav-arbeidsledig.tittel": "Søknaden er sendt!",
         "sykepengesoknad.kvittering.tittel": "Søknaden er sendt!",
+        'sykepengesoknad.navigasjon.gaa-til': 'Gå til dine sykepengesøknader',
 
     }, 'en': {}
 };
