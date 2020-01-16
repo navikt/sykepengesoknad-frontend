@@ -11,11 +11,12 @@ import './sendt-til.less';
 const SendtTil = () => {
     const { valgtSoknad, sendTil } = useAppStore();
     const erSiste = valgtSoknad.status === RSSoknadstatus.SENDT;
-    const mottaker = sendTil.sort().reverse().join('-').toLowerCase();
+    const mottaker = sendTil.length > 0 ? sendTil.sort().reverse().join('-').toLowerCase() : undefined;
 
     const nokkel = erSiste
         ? `sykepengesoknad.kvittering.til-${mottaker}.tekst`
         : `sykepengesoknad.oppsummering.${mottaker}-som-mottaker`;
+
     const className = erSiste ? 'bottom_line kvittering' : 'bottom_line';
 
     return (
@@ -25,14 +26,16 @@ const SendtTil = () => {
                     {tekster['sykepengesoknad.kvittering.tittel']}
                 </Systemtittel>
             </Vis>
-            <Normaltekst tag="div">
-                {valgtSoknad.arbeidsgiver !== undefined
-                    ? parser(getLedetekst(tekster[nokkel], {
-                        '%ARBEIDSGIVER%': valgtSoknad.arbeidsgiver.navn,
-                    }))
-                    : parser(tekster[nokkel])
-                }
-            </Normaltekst>
+            {mottaker !== undefined ?
+                <Normaltekst tag="div">
+                    {valgtSoknad.arbeidsgiver !== undefined
+                        ? parser(getLedetekst(tekster[nokkel], {
+                            '%ARBEIDSGIVER%': valgtSoknad.arbeidsgiver.navn,
+                        }))
+                        : parser(tekster[nokkel])
+                    }
+                </Normaltekst> : null
+            }
         </div>
     )
 };

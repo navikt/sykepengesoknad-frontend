@@ -97,7 +97,7 @@ export const lagSendTil = (soknad: Soknad, sykmelding: Sykmelding) => {
             return [ SvarTil.NAV ];
 
         case RSSoknadstype.SELVSTENDIGE_OG_FRILANSERE:
-            if (totalDager > 16 && sykmelding.sporsmal.harSykmelding) {
+            if (totalDager > 16 && sykmelding.sporsmal.harForsikring) {
                 return [ SvarTil.NAV ];
             }
             return [];

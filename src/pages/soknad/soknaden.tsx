@@ -34,7 +34,6 @@ const brodsmuler: Brodsmule[] = [ {
 
 export const useGlobaleData = (params: any) => {
     const { soknader, setValgtSoknad, sykmeldinger, setValgtSykmelding } = useAppStore();
-    console.log('useGlobaleData'); //tslint:disable-line
     soknader.filter(soknad => soknad.id === params.id).forEach(sok => {
         setValgtSoknad(sok);
         const sykmelding = sykmeldinger.filter(sm => sm.id === sok.sykmeldingId)[0];
@@ -49,6 +48,7 @@ const Soknaden = (props: RouteComponentProps<IdParams>) => {
     useEffect(() => {
         setBodyClass('soknaden');
         const send = lagSendTil(valgtSoknad, valgtSykmelding);
+        console.log('sendTil', send); // eslint-disable-line
         setSendTil(send);
         // eslint-disable-next-line
     }, [ valgtSoknad, valgtSykmelding ]);

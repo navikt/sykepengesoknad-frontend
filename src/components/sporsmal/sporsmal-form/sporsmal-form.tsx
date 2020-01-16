@@ -14,13 +14,15 @@ import SendtTil from '../../../pages/soknad/sendt-til';
 import { SEPARATOR } from '../../../utils/constants';
 import './sporsmal-form.less';
 import { RSSoknadstatus } from '../../../types/rs-types/rs-soknadstatus';
+import { SvarTil } from '../../../types/enums';
+import dayjs from 'dayjs';
 
 export interface SpmProps {
     sporsmal: Sporsmal;
 }
 
 const SporsmalForm = () => {
-    const { setValgtSoknad, valgtSoknad } = useAppStore();
+    const { setValgtSoknad, valgtSoknad, sendTil } = useAppStore();
     const [ erSiste, setErSiste ] = useState<boolean>(false);
     const { stegId } = useParams();
     const history = useHistory();
@@ -29,17 +31,19 @@ const SporsmalForm = () => {
     const sporsmal = valgtSoknad.sporsmal[spmIndex];
 
     useEffect(() => {
-        setErSiste(sporsmal.svartype === RSSvartype.IKKE_RELEVANT && spmIndex === valgtSoknad.sporsmal.length - 2);
+        const snartSlutt = sporsmal.svartype === RSSvartype.IKKE_RELEVANT || sporsmal.svartype === RSSvartype.CHECKBOX_PANEL;
+        setErSiste(snartSlutt && spmIndex === valgtSoknad.sporsmal.length - 2);
     }, [ spmIndex, sporsmal, valgtSoknad ]);
-
-    useEffect(() => {
-        document.body.focus();
-    }, []);
 
     const onSubmit = () => {
         settSvar(sporsmal, methods.getValues());
         if (erSiste) {
             settSvar(valgtSoknad.sporsmal[spmIndex + 1], methods.getValues());
+            sendTil.map(svar => {
+                svar === SvarTil.NAV
+                    ? valgtSoknad.sendtTilNAVDato = new Date()
+                    : valgtSoknad.sendtTilArbeidsgiverDato = new Date()
+            });
             valgtSoknad.status = RSSoknadstatus.SENDT;
             setValgtSoknad(valgtSoknad);
         }

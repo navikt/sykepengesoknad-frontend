@@ -3,15 +3,19 @@ import { Knapp } from 'nav-frontend-knapper';
 import { Normaltekst } from 'nav-frontend-typografi';
 import tekster from './knapperad-tekster';
 import { Link, useParams } from 'react-router-dom';
+import { useAppStore } from '../../../data/stores/app-store';
 
 interface KnapperadProps {
     onSubmit: Function;
 }
 
 const Knapperad = ({ onSubmit }: KnapperadProps) => {
+    const { valgtSoknad } = useAppStore();
     const { stegId } = useParams();
-    const spmIndex = parseInt(stegId) - 1;
-    const nokkel = spmIndex === 9 ? 'sykepengesoknad.send' : 'sykepengesoknad.ga-videre';
+    const spmIndex = parseInt(stegId) - 2;
+    const nokkel = spmIndex === valgtSoknad.sporsmal.length - 3
+        ? 'sykepengesoknad.send'
+        : 'sykepengesoknad.ga-videre';
 
     // TODO: Lenke i avbryt-knapp mangler
 

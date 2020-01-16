@@ -113,7 +113,6 @@ export interface SykmeldingPeriode {
 
 export interface Sykmelding {
     id: string;
-    sporsmal: any;
     startLegemeldtFravaer: Date;
     skalViseSkravertFelt: boolean;
     identdato: Date;
@@ -128,6 +127,9 @@ export interface Sykmelding {
     };
     orgnummer: string;
     sendtDato: Date;
+    sporsmal: {
+        harForsikring: boolean;
+    };
     pasient: {
         fnr: string;
         fornavn: string;
