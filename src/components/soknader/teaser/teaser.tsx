@@ -3,7 +3,7 @@ import React from 'react';
 import { Soknad } from '../../../types/types';
 import { RSSoknadstatus } from '../../../types/rs-types/rs-soknadstatus';
 import { RSSoknadstype } from '../../../types/rs-types/rs-soknadstype';
-import { Inngangspanel, InngangspanelHeader, InngangspanelIkon } from '../inngang/inngangspanel';
+import { Inngangspanel, InngangsHeader, InngangsIkon } from '../inngang/inngangspanel';
 import { getUrlTilSoknad } from '../../../utils/url-utils';
 import GlobeIkon from './globe.svg';
 import GlobeHoverIkon from './globe-hover.svg';
@@ -127,13 +127,13 @@ const Teaser = ({ soknad }: SykepengesoknadTeaserProps) => {
     return (
         <article aria-labelledby={`soknader-header-${soknad.id}`}>
             <Inngangspanel to={getUrlTilSoknad(soknad.id, stegId)}>
-                <InngangspanelIkon
+                <InngangsIkon
                     ikon={hentIkon(soknad.soknadstype)}
                     ikonHover={hentIkonHover(soknad.soknadstype)}
                 />
                 <HoyreChevron />
                 <div className="inngangspanel__innhold">
-                    <InngangspanelHeader
+                    <InngangsHeader
                         meta={getLedetekst(tekster['soknad.teaser.dato'], {
                             '%DATO%': dayjs(soknad.opprettetDato).format('DD.MM.YYYY'),
                         })}
@@ -154,6 +154,9 @@ const Teaser = ({ soknad }: SykepengesoknadTeaserProps) => {
                             {undertekst}
                         </Normaltekst>
                     </Vis>
+                    <br/>
+                    {soknad.soknadstype // TODO: Fjerne søknadstype
+                    }
                 </div>
             </Inngangspanel>
         </article>

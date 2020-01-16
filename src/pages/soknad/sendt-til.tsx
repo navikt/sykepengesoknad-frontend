@@ -25,7 +25,7 @@ const SendtTil = () => {
                     {tekster['sykepengesoknad.kvittering.tittel']}
                 </Systemtittel>
             </Vis>
-            <Normaltekst>
+            <Normaltekst tag="div">
                 {valgtSoknad.arbeidsgiver !== undefined
                     ? parser(getLedetekst(tekster[nokkel], {
                         '%ARBEIDSGIVER%': valgtSoknad.arbeidsgiver.navn,

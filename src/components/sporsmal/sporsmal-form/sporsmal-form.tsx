@@ -32,6 +32,10 @@ const SporsmalForm = () => {
         setErSiste(sporsmal.svartype === RSSvartype.IKKE_RELEVANT && spmIndex === valgtSoknad.sporsmal.length - 2);
     }, [ spmIndex, sporsmal, valgtSoknad ]);
 
+    useEffect(() => {
+        document.body.focus();
+    }, []);
+
     const onSubmit = () => {
         settSvar(sporsmal, methods.getValues());
         if (erSiste) {

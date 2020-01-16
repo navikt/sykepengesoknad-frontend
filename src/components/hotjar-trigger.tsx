@@ -1,5 +1,5 @@
 import { useEffect } from 'react';
-import { log } from '../utils/logger';
+// import { log } from '../utils/logger';
 import { RSSoknadstype } from '../types/rs-types/rs-soknadstype';
 
 interface HotjarTriggerProps {
@@ -18,7 +18,7 @@ export const HotjarTrigger = ({ trigger, children }: HotjarTriggerProps) => {
             && window.location.href.indexOf('herokuapp') === -1) {
             hotJarWindow.hj('trigger', trigger);
         }
-        log(`Trigger hotjar: ${trigger}`);
+        // log(`Trigger hotjar: ${trigger}`); TODO: Må denne logges?
     }, [trigger, children]);
 
     return children;

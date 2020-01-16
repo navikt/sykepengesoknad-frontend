@@ -1,51 +1,49 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import cls from 'classnames';
 import { Normaltekst, Systemtittel } from 'nav-frontend-typografi';
 import Vis from '../../vis';
 import './inngangspanel.less';
 
-interface InngangspanelIkonProps {
+interface InngangsIkonProps {
     ikon: string;
     ikonHover?: string;
 }
 
-export const InngangspanelIkon = ({ ikon, ikonHover }: InngangspanelIkonProps) => {
+export const InngangsIkon = ({ ikon, ikonHover }: InngangsIkonProps) => {
     return (
         <>
             <span className="inngangspanel__ikon inngangspanel__ikon--normal">
-                <img alt="" src={ikon}/>
+                <img alt="" src={ikon} />
             </span>
             <Vis hvis={ikonHover !== undefined}>
                 <span className="inngangspanel__ikon inngangspanel__ikon--hover">
-                    <img alt="" src={ikonHover || ikon}/>
+                    <img alt="" src={ikonHover || ikon} />
                 </span>
             </Vis>
         </>
     );
 };
 
-interface InngangspanelProps {
+interface InngangsProps {
     to: string;
     children: React.ReactNode;
-    className?: string;
 }
 
-export const Inngangspanel = ({ to, children, className, ...rest }: InngangspanelProps) => {
+export const Inngangspanel = ({ to, children, }: InngangsProps) => {
     return (
-        <Link to={to} className={cls('inngangspanel', className)} {...rest}>
+        <Link to={to} className="inngangspanel">
             {children}
         </Link>
     );
 };
 
-interface InngangspanelHeaderProps {
+interface InngangsHeaderProps {
     meta: string;
     tittel: string;
     status: string;
 }
 
-export const InngangspanelHeader = ({ meta, tittel, status }: InngangspanelHeaderProps) => {
+export const InngangsHeader = ({ meta, tittel, status }: InngangsHeaderProps) => {
     return (
         <header className="inngangspanel__header">
             <Normaltekst className="inngangspanel__meta">

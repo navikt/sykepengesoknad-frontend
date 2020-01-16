@@ -50,7 +50,7 @@ const Soknader = () => {
                 {tekster['soknader.sidetittel']}
             </Sidetittel>
 
-            <Vis hvis={false}>
+            <Vis hvis={soknader === undefined}>
                 <Alertstripe type="advarsel" className="blokk">
                     <p className="sist">
                         <strong>Oops!</strong>

@@ -5,6 +5,7 @@ import { Brodsmule } from '../../types/types';
 import personIkon from './person.svg';
 import { Normaltekst } from 'nav-frontend-typografi';
 import './brodsmuler.less';
+import { useAppStore } from '../../data/stores/app-store';
 
 const BrodsmuleBit = ({ sti, tittel, sisteSmule, erKlikkbar }: Brodsmule) => {
     const erEkstern = sti && sti.includes(process.env.REACT_APP_SYKEFRAVAER_CONTEXT_ROOT!);
@@ -39,7 +40,8 @@ interface BrodsmulerProps {
 }
 
 const Brodsmuler = ({ brodsmuler }: BrodsmulerProps) => {
-    const [visCollapsed, setVisCollapsed] = useState(true);
+    const { valgtSoknad, valgtSykmelding } = useAppStore();
+    const [ visCollapsed, setVisCollapsed ] = useState(true);
 
     const getVisCollapsed = () => {
         return brodsmuler.length > 3 && visCollapsed;
@@ -58,8 +60,9 @@ const Brodsmuler = ({ brodsmuler }: BrodsmulerProps) => {
     const synligeBrodsmuler = getSynligeBrodsmuler();
 
     return (
+        <>
         <nav className="brodsmuler" aria-label="Du er her: ">
-            <img src={personIkon} alt="Du" className="brodsmuler__ikon"/>
+            <img src={personIkon} alt="Du" className="brodsmuler__ikon" />
             <Normaltekst tag="ul" className="brodsmuler__smuler">
                 <li className="smule">
                     <Lenke href="/dittnav">Ditt NAV</Lenke>
@@ -91,6 +94,18 @@ const Brodsmuler = ({ brodsmuler }: BrodsmulerProps) => {
                 }
             </Normaltekst>
         </nav>
+            <span>sok <strong>{
+                valgtSoknad &&
+                valgtSoknad.id.substring(valgtSoknad.id.length - 6, valgtSoknad.id.length)
+            }</strong></span>
+            &nbsp;&nbsp;
+            <span>syk <strong>{
+                valgtSykmelding &&
+                valgtSykmelding.id.substring(valgtSykmelding.id.length - 6, valgtSykmelding.id.length)
+            }</strong></span>
+            <br />
+            <br />
+            </>
     );
 };
 

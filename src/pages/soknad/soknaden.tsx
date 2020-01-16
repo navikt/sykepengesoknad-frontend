@@ -2,7 +2,7 @@ import React, { useEffect } from 'react';
 import { VenstreChevron } from 'nav-frontend-chevron';
 import { Link, RouteComponentProps, useParams } from 'react-router-dom';
 import { Normaltekst, Systemtittel } from 'nav-frontend-typografi';
-import { Brodsmule, IdParams, Soknad, Sykmelding } from '../../types/types';
+import { Brodsmule, IdParams } from '../../types/types';
 import { RSSoknadstatus } from '../../types/rs-types/rs-soknadstatus';
 import Banner from '../../components/banner/banner';
 import { useAppStore } from '../../data/stores/app-store';
@@ -32,6 +32,16 @@ const brodsmuler: Brodsmule[] = [ {
     erKlikkbar: false,
 } ];
 
+export const useGlobaleData = (params: any) => {
+    const { soknader, setValgtSoknad, sykmeldinger, setValgtSykmelding } = useAppStore();
+    console.log('useGlobaleData'); //tslint:disable-line
+    soknader.filter(soknad => soknad.id === params.id).forEach(sok => {
+        setValgtSoknad(sok);
+        const sykmelding = sykmeldinger.filter(sm => sm.id === sok.sykmeldingId)[0];
+        setValgtSykmelding(sykmelding);
+    });
+};
+
 const Soknaden = (props: RouteComponentProps<IdParams>) => {
     const { valgtSykmelding, valgtSoknad, setSendTil } = useAppStore();
     useGlobaleData(props.match.params);
@@ -41,7 +51,7 @@ const Soknaden = (props: RouteComponentProps<IdParams>) => {
         const send = lagSendTil(valgtSoknad, valgtSykmelding);
         setSendTil(send);
         // eslint-disable-next-line
-    }, [valgtSoknad, valgtSykmelding]);
+    }, [ valgtSoknad, valgtSykmelding ]);
 
     if (!valgtSoknad) return null;
 
@@ -115,19 +125,4 @@ const Fordeling = () => {
         case RSSoknadstatus.KORRIGERT || RSSoknadstatus.SLETTET:
             break;
     }
-};
-
-export const useGlobaleData = (params: any) => {
-    const { soknader, valgtSoknad, setValgtSoknad, sykmeldinger, setValgtSykmelding } = useAppStore();
-
-    if (!valgtSoknad) {
-        soknader.filter(soknad => soknad.id === params.id).forEach(sok => {
-            setValgtSoknad(sok);
-            setValgtSykmelding(sykmeldingFraSoknad(sykmeldinger, sok));
-        });
-    }
-};
-
-const sykmeldingFraSoknad = (sykmeldinger: Sykmelding[], sok: Soknad) => {
-    return sykmeldinger.filter(sm => sm.id === sok.sykmeldingId)[0];
 };

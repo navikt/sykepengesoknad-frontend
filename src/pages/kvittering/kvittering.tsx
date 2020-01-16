@@ -15,7 +15,7 @@ import { Link } from 'react-router-dom';
 import './kvittering.less';
 
 const brodsmuler: Brodsmule[] = [ {
-    tittel: tekster['soknad.sidetittel'],
+    tittel: tekster['soknader.sidetittel'],
     sti: SEPARATOR,
     erKlikkbar: true
 }, {
