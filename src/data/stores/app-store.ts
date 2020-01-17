@@ -4,6 +4,7 @@ import { Soknad, Sykmelding } from '../../types/types';
 import { SvarTil } from '../../types/enums';
 
 export const useAppStore = createUseContext(() => {
+    const [ decorator, setDecorator ] = useState<string>();
     const [ unleash, setUnleash ] = useState<{}>([]);
     const [ soknader, setSoknader ] = useState<Soknad[]>([]);
     const [ sykmeldinger, setSykmeldinger ] = useState<Sykmelding[]>([]);
@@ -12,6 +13,7 @@ export const useAppStore = createUseContext(() => {
     const [ sendTil, setSendTil ] = useState<SvarTil[]>();
 
     return {
+        decorator, setDecorator,
         unleash, setUnleash,
         soknader, setSoknader,
         valgtSoknad, setValgtSoknad,

@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import useForm, { FormContext } from 'react-hook-form';
+import { useForm, FormContext } from 'react-hook-form';
 import { useHistory, useParams } from 'react-router-dom';
 import Knapperad from './knapperad';
 import { Sporsmal } from '../../../types/types';
@@ -12,10 +12,9 @@ import { RSSvartype } from '../../../types/rs-types/rs-svartype';
 import CheckboxPanel from '../typer/checkbox-panel';
 import SendtTil from '../../../pages/soknad/sendt-til';
 import { SEPARATOR } from '../../../utils/constants';
-import './sporsmal-form.less';
 import { RSSoknadstatus } from '../../../types/rs-types/rs-soknadstatus';
 import { SvarTil } from '../../../types/enums';
-import dayjs from 'dayjs';
+import './sporsmal-form.less';
 
 export interface SpmProps {
     sporsmal: Sporsmal;
@@ -42,7 +41,8 @@ const SporsmalForm = () => {
             sendTil.map(svar => {
                 svar === SvarTil.NAV
                     ? valgtSoknad.sendtTilNAVDato = new Date()
-                    : valgtSoknad.sendtTilArbeidsgiverDato = new Date()
+                    : valgtSoknad.sendtTilArbeidsgiverDato = new Date();
+                return svar;
             });
             valgtSoknad.status = RSSoknadstatus.SENDT;
             setValgtSoknad(valgtSoknad);

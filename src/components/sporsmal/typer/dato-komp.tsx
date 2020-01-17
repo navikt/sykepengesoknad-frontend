@@ -1,4 +1,4 @@
-import { useFormContext } from 'react-hook-form';
+import { ErrorMessage, useFormContext } from 'react-hook-form';
 import React, { useEffect, useRef, useState } from 'react';
 import { Element, Normaltekst } from 'nav-frontend-typografi';
 import Vis from '../../vis';
@@ -68,7 +68,7 @@ const DatoInput = ({ sporsmal }: SpmProps) => {
             <div role="alert" aria-live="assertive">
                 <Vis hvis={errors[sporsmal.id] !== undefined}>
                     <Normaltekst tag="span" className="skjemaelement__feilmelding">
-                        {errors[sporsmal.id] && errors[sporsmal.id].message}
+                        <ErrorMessage errors={errors} name={sporsmal.id} />
                     </Normaltekst>
                 </Vis>
             </div>

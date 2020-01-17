@@ -1,5 +1,5 @@
 import React, { useEffect, useRef, useState } from 'react';
-import { useFormContext } from 'react-hook-form';
+import { ErrorMessage, useFormContext } from 'react-hook-form';
 import { Normaltekst } from 'nav-frontend-typografi';
 import Vis from '../../vis';
 import tekster from '../sporsmal-tekster';
@@ -47,7 +47,7 @@ const TallInput = ({ sporsmal }: SpmProps) => {
             <div role="alert" aria-live="assertive">
                 <Vis hvis={errors[sporsmal.id] !== undefined}>
                     <Normaltekst tag="span" className="skjemaelement__feilmelding">
-                        {errors[sporsmal.id] && errors[sporsmal.id].message}
+                        <ErrorMessage errors={errors} name={sporsmal.id} />
                     </Normaltekst>
                 </Vis>
             </div>

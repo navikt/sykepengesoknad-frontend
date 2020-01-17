@@ -1,5 +1,5 @@
 import React, { useEffect, useRef, useState } from 'react';
-import { useFormContext } from 'react-hook-form';
+import { ErrorMessage, useFormContext } from 'react-hook-form';
 import tekster from '../sporsmal-tekster';
 import { hentSvar } from '../sporsmal-utils';
 import Vis from '../../vis';
@@ -49,7 +49,7 @@ const CheckboxInput = ({ sporsmal }: SpmProps) => {
             <div role="alert" aria-live="assertive">
                 <Vis hvis={errors.verdi !== undefined}>
                     <Normaltekst tag="span" className="skjemaelement__feilmelding">
-                        {errors.verdi && errors[sporsmal.id].message}
+                        <ErrorMessage errors={errors} name={sporsmal.id} />
                     </Normaltekst>
                 </Vis>
             </div>

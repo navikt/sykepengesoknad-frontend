@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { SpmProps } from '../sporsmal-form/sporsmal-form';
 import { RSSvartype } from '../../../types/rs-types/rs-svartype';
 import { hentSvar } from '../sporsmal-utils';
-import { useFormContext } from 'react-hook-form';
+import { ErrorMessage, useFormContext } from 'react-hook-form';
 import Vis from '../../vis';
 import { Normaltekst } from 'nav-frontend-typografi';
 import AnimateOnMount from '../../animate-on-mount';
@@ -68,7 +68,7 @@ const RadioKomp = ({ sporsmal }: SpmProps) => {
             <div role="alert" aria-live="assertive">
                 <Vis hvis={errors[sporsmal.id] !== undefined}>
                     <Normaltekst tag="span" className="skjemaelement__feilmelding">
-                        {errors[sporsmal.id] && errors[sporsmal.id].message}
+                        <ErrorMessage errors={errors} name={sporsmal.id} />
                     </Normaltekst>
                 </Vis>
             </div>
