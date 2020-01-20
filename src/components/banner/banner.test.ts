@@ -12,7 +12,7 @@ it('Returns text from bundle', () => {
 it('Returns text from bundle', () => {
     expect(getLedetekst(tekster['sykepengesoknad.sidetittel.periode-2'],
         {
-            '%PERIODE%': dayjs(new Date()).locale('nb').format('DD. MMMM YYYY') + ' - ' +
-                dayjs(new Date()).locale('nb').format('DD. MMMM YYYY')
-        })).toEqual('Gjelder for perioden 01. oktober 2019 - 01. oktober 2019');
+            '%PERIODE%': dayjs('2019-10-01').locale('nb').format('DD. MMMM YYYY') + ' - ' +
+                dayjs('2020-01-20').locale('nb').format('DD. MMMM YYYY')
+        })).toEqual('Gjelder for perioden 01. oktober 2019 - 20. januar 2020');
 });

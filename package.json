@@ -63,6 +63,7 @@
     "use-force-update": "^1.0.7"
   },
   "devDependencies": {
+    "@testing-library/react": "^9.4.0",
     "@types/classnames": "^2.2.9",
     "@types/jest": "^24.9.0",
     "@types/jsdom": "^12.2.4",
@@ -74,6 +75,7 @@
     "@typescript-eslint/parser": "^2.16.0",
     "eslint": "^6.8.0",
     "eslint-config-react": "^1.1.7",
+    "jest-environment-jsdom-fifteen": "^1.0.2",
     "react-test-renderer": "^16.12.0",
     "typescript": "^3.7.5",
     "yet-another-fetch-mock": "^3.4.0"

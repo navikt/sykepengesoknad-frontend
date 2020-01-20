@@ -48,7 +48,6 @@ const Soknaden = (props: RouteComponentProps<IdParams>) => {
     useEffect(() => {
         setBodyClass('soknaden');
         const send = lagSendTil(valgtSoknad, valgtSykmelding);
-        console.log('sendTil', send); // eslint-disable-line
         setSendTil(send);
         // eslint-disable-next-line
     }, [ valgtSoknad, valgtSykmelding ]);
