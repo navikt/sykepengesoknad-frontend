@@ -1,5 +1,5 @@
 import React from 'react';
-import { Sporsmal } from '../../types/types';
+import { Sporsmal } from '../../../types/types';
 
 interface UkjentSporsmalProps {
     sporsmal: Sporsmal;

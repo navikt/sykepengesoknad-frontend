@@ -9,7 +9,15 @@ interface AnimateOnMountProps {
     children: React.ReactElement;
 }
 
-const AnimateOnMount = ({ mounted, enter, leave, start, children }: AnimateOnMountProps) => {
+const AnimateOnMount = (
+    {
+        mounted,
+        enter,
+        leave,
+        start,
+        children
+    }: AnimateOnMountProps) => {
+
     const [ styles, setStyles ] = useState<string>(null);
     const [ show, setShow ] = useState<boolean>(mounted);
 
@@ -31,7 +39,7 @@ const AnimateOnMount = ({ mounted, enter, leave, start, children }: AnimateOnMou
 
     return (
         <div className={`${start} ${styles}`} onTransitionEnd={onTransitionEnd}>
-            <Vis hvis={show} >
+            <Vis hvis={show}>
                 {children}
             </Vis>
         </div>

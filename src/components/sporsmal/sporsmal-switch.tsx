@@ -3,7 +3,7 @@ import TallKomp from './typer/tall-komp';
 import DatoInput from './typer/dato-komp';
 import JaNeiKomp from './typer/ja-nei-komp';
 import { Sporsmal } from '../../types/types';
-import UkjentSporsmal from './ukjent-sporsmal';
+import UkjentSporsmal from './typer/ukjent-sporsmal';
 import CheckboxPanel from './typer/checkbox-panel';
 import { RSSvartype } from '../../types/rs-types/rs-svartype';
 import PeriodeInput from './typer/periode-komp';
