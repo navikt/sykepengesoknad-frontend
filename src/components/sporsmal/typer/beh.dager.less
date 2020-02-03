@@ -1,0 +1,59 @@
+@import '../../../../node_modules/nav-frontend-core/less/_variabler';
+@import '../../../basic';
+
+.skjema__beh-dager {
+    margin-top: 1.5rem;
+
+    .ukedager {
+        width: 300px;
+
+        span {
+            display: inline-block;
+            text-align: center;
+            border-bottom: 1px solid @navGra40;
+            padding: 0.5rem 0;
+            min-width: 40px;
+        }
+    }
+
+    .tomdag {
+        min-width: 40px;
+    }
+
+    .kalenderdag {
+        display: inline-block;
+
+        label {
+            display: inline-block;
+            min-width: 40px;
+            padding: 0.5rem 0;
+            text-align: center;
+            color: @navBla;
+
+            &:hover {
+                background-color: @navLysGra;
+                cursor: pointer;
+            }
+
+            &.fjern {
+                display: none;
+            }
+
+            &.visfjern {
+                margin-left: 2rem;
+
+                &:hover {
+                    background-color: transparent;
+                    text-decoration: underline;
+                }
+            }
+        }
+
+        input {
+            &:checked + label {
+                background-color: @navBla;
+                color: @white;
+            }
+        }
+    }
+}

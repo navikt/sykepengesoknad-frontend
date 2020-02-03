@@ -1,6 +1,15 @@
 @import '../../../../node_modules/nav-frontend-core/less/_variabler';
 
 .sporsmal__form {
+    .skjema__fieldset {
+        border: 0;
+        padding: 0;
+
+        legend {
+            margin-bottom: 1rem;
+        }
+    }
+
     .skjemaelement--horisontal {
         display: flex;
         flex-direction: row;
@@ -70,6 +79,12 @@
 
         .popover {
             max-width: 20rem;
+        }
+    }
+
+    .inputPanelGruppe {
+        .inputPanel:not(:last-child) {
+            margin-bottom: 0;
         }
     }
 

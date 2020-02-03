@@ -1,6 +1,6 @@
 import FetchMock, { MiddlewareUtils } from 'yet-another-fetch-mock';
-import { soknader } from './data/soknader-felles';
-import { sykmeldinger } from './data/sykmeldinger-felles';
+import { soknader } from './data/soknader-beh-dager';
+import { sykmeldinger } from './data/sykmeldinger-beh-dager';
 import { unleashToggles } from './data/toggles';
 import { SYFO_API_SOKNADER, DECORATOR_URL } from '../../utils/constants';
 import { DecoratorHtml } from './data/decorator-html';

@@ -12,6 +12,7 @@ import CheckboxKomp from './typer/checkbox-komp';
 import RadioKomp from './typer/radio-komp';
 import JaNeiRadio from './typer/ja-nei-radio';
 import './undersporsmal/undersporsmal.less';
+import BehDager from './typer/beh-dager';
 
 interface UndersporsmalProps {
     sporsmal: Sporsmal;
@@ -46,6 +47,9 @@ const SporsmalSwitch = ({ sporsmal }: UndersporsmalProps) => {
         case RSSvartype.RADIO_GRUPPE:
         case RSSvartype.RADIO_GRUPPE_TIMER_PROSENT:
             return <RadioKomp sporsmal={sporsmal} />;
+
+        case RSSvartype.BEHANDLINGSDAGER:
+            return <BehDager sporsmal={sporsmal} />;
 
         case RSSvartype.IKKE_RELEVANT:
             return <IkkeRelevant sporsmal={sporsmal} />;

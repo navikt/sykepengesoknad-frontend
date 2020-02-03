@@ -54,7 +54,7 @@ const JaNeiInput = ({ sporsmal }: SpmProps) => {
                 <fieldset className="skjema__fieldset">
                     <legend className="skjema__legend">
                         <div className="medHjelpetekst">
-                            <Element className="skjema__sporsmal">
+                            <Element tag="h3" className="skjema__sporsmal">
                                 {sporsmal.sporsmalstekst}
                             </Element>
                             <SporsmalHjelpetekst sporsmal={sporsmal} />

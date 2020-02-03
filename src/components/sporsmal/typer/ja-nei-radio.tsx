@@ -29,15 +29,13 @@ const JaNeiRadio = ({ sporsmal }: SpmProps) => {
     };
 
     return (
-        <>
+        <React.Fragment>
             <div className={sporsmal.parentKriterie
                 ? 'kriterie--' + sporsmal.parentKriterie.toLowerCase() + ' skjemaelement'
                 : 'skjemaelement'
             }>
 
-                <div className="skjema__sporsmal">
-                    <Element tag="span">{sporsmal.sporsmalstekst}</Element>
-                </div>
+                <Element tag="h3" className="skjema__sporsmal">{sporsmal.sporsmalstekst}</Element>
 
                 {jaNeiValg.map((valg, idx) => {
                     const OK = lokal === valg.value;
@@ -68,7 +66,7 @@ const JaNeiRadio = ({ sporsmal }: SpmProps) => {
                     </Normaltekst>
                 </Vis>
             </div>
-        </>
+        </React.Fragment>
     )
 };
 

@@ -315,6 +315,9 @@ export class Sporsmal {
 
 function rsToSporsmal(spms: RSSporsmal[], kriterie: string) {
     const sporsmals: Sporsmal[] = [];
+    if (spms === undefined) {
+        return sporsmals;
+    }
     spms.forEach(rssp => {
         const spm: Sporsmal = new Sporsmal(rssp, kriterie);
         sporsmals.push(spm);

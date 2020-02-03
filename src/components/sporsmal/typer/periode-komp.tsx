@@ -79,7 +79,7 @@ const PeriodeInput = ({ sporsmal }: SpmProps) => {
 
     return (
         <div className={sporsmal.parentKriterie ? 'kriterie--' + sporsmal.parentKriterie.toLowerCase() : ''}>
-            <Element className="skjema__sporsmal">
+            <Element tag="h3" className="skjema__sporsmal">
                 {sporsmal.sporsmalstekst}
             </Element>
 

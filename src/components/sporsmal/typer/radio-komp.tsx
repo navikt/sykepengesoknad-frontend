@@ -4,7 +4,7 @@ import { RSSvartype } from '../../../types/rs-types/rs-svartype';
 import { hentSvar } from '../sporsmal-utils';
 import { ErrorMessage, useFormContext } from 'react-hook-form';
 import Vis from '../../vis';
-import { Normaltekst } from 'nav-frontend-typografi';
+import { Element, Normaltekst } from 'nav-frontend-typografi';
 import AnimateOnMount from '../../animate-on-mount';
 import UndersporsmalListe from '../undersporsmal/undersporsmal-liste';
 
@@ -24,11 +24,9 @@ const RadioKomp = ({ sporsmal }: SpmProps) => {
     };
 
     return (
-        <>
+        <React.Fragment>
             <Vis hvis={sporsmal.sporsmalstekst !== null}>
-                <div className="skjema__sporsmal">
-                    <Normaltekst tag="span">{sporsmal.sporsmalstekst}</Normaltekst>
-                </div>
+                <Element tag="h3" className="skjema__sporsmal">{sporsmal.sporsmalstekst}</Element>
             </Vis>
 
             <div className={erHorisontal(sporsmal.svartype)
@@ -72,7 +70,7 @@ const RadioKomp = ({ sporsmal }: SpmProps) => {
                     </Normaltekst>
                 </Vis>
             </div>
-        </>
+        </React.Fragment>
     )
 };
 

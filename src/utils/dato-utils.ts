@@ -1,4 +1,5 @@
 import { Sykmelding } from '../types/types';
+import dayjs from 'dayjs';
 
 export const fraInputdatoTilJSDato = (inputDato: any) => {
     const datoSplit = inputDato.split('.');
@@ -100,4 +101,15 @@ export const fixSykmeldingDatoer = (sykmelding: Sykmelding) => {
     sykmelding.tilbakedatering.dokumenterbarPasientkontakt = fixDateType(sykmelding.tilbakedatering.dokumenterbarPasientkontakt);
     sykmelding.bekreftelse.utstedelsesdato = fixDateType(sykmelding.bekreftelse.utstedelsesdato);
     return sykmelding;
+};
+
+export const ukeDatoListe = (min: string, max: string) => {
+    let ukeListe = [];
+    let dato = dayjs(min);
+    while (dato.toDate() <= dayjs(max).toDate()) {
+        ukeListe.push(dato);
+        dato = dato.add(1, 'day');
+        console.log('dato', dato); // eslint-disable-line
+    }
+    return ukeListe;
 };

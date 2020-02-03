@@ -23,6 +23,8 @@ const SoknadenTekster: any = {
         'sykepengesoknad.egenmeldinger.tittel': 'Fravær før sykmeldingen',
         'sykepengesoknad.tilbake_i_arbeid.tittel': 'Tilbake i arbeid',
 
+        'sykepengesoknad.enkeltstaende_behandlingsdager.tittel': 'Behandlingsdager',
+
         "sykepengesoknad.jobbet_du_100_prosent.tittel": "Jobb underveis i sykefraværet",
         "sykepengesoknad.aktiviteter.gradert.hjelpetekst.tittel": "Gradert sykmelding",
         "sykepengesoknad.avbryt.kvittering.tittel": "Søknaden er avbrutt",

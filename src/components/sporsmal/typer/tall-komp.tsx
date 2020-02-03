@@ -1,6 +1,6 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { ErrorMessage, useFormContext } from 'react-hook-form';
-import { Normaltekst } from 'nav-frontend-typografi';
+import { Element, Normaltekst } from 'nav-frontend-typografi';
 import Vis from '../../vis';
 import tekster from '../sporsmal-tekster';
 import { SpmProps } from '../sporsmal-form/sporsmal-form';
@@ -25,11 +25,9 @@ const TallInput = ({ sporsmal }: SpmProps) => {
     }, []);
 
     return (
-        <>
+        <React.Fragment>
             <Vis hvis={sporsmal.sporsmalstekst !== null}>
-                <div className="skjema__sporsmal">
-                    <Normaltekst tag="span">{sporsmal.sporsmalstekst}</Normaltekst>
-                </div>
+                <Element tag="h3" className="skjema__sporsmal">{sporsmal.sporsmalstekst}</Element>
             </Vis>
 
             <div className="medEnhet">
@@ -57,7 +55,7 @@ const TallInput = ({ sporsmal }: SpmProps) => {
                     <UndersporsmalListe undersporsmal={sporsmal.undersporsmal} />
                 </Vis>
             </div>
-        </>
+        </React.Fragment>
     )
 };
 
