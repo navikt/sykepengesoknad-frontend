@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { useForm, FormContext } from 'react-hook-form';
+import { FormContext, useForm } from 'react-hook-form';
 import { useHistory, useParams } from 'react-router-dom';
 import Knapperad from './knapperad';
 import { Sporsmal } from '../../../types/types';
@@ -35,6 +35,11 @@ const SporsmalForm = () => {
     }, [ spmIndex, sporsmal, valgtSoknad ]);
 
     const onSubmit = () => {
+        if (sporsmal.svartype === RSSvartype.BEHANDLINGSDAGER) {
+            sporsmal.undersporsmal.forEach(uspm => {
+                settSvar(uspm, methods.getValues());
+            })
+        }
         settSvar(sporsmal, methods.getValues());
         if (erSiste) {
             settSvar(valgtSoknad.sporsmal[spmIndex + 1], methods.getValues());
@@ -53,6 +58,7 @@ const SporsmalForm = () => {
         erSiste
             ? history.push(pathUtenSteg(history.location.pathname).replace('soknader', 'kvittering'))
             : history.push(pathUtenSteg(history.location.pathname) + SEPARATOR + (spmIndex + 2));
+        console.log('valgtSoknad', valgtSoknad); // eslint-disable-line
     };
 
     return (

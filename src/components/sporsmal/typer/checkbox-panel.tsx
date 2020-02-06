@@ -49,7 +49,7 @@ const CheckboxInput = ({ sporsmal }: SpmProps) => {
             <div role="alert" aria-live="assertive">
                 <Vis hvis={errors.verdi !== undefined}>
                     <Normaltekst tag="span" className="skjemaelement__feilmelding">
-                        <ErrorMessage errors={errors} name={sporsmal.id} />
+                        <ErrorMessage as="p" errors={errors} name={sporsmal.id} />
                     </Normaltekst>
                 </Vis>
             </div>

@@ -44,6 +44,7 @@ const JaNeiInput = ({ sporsmal }: SpmProps) => {
         setValue(sporsmal.id, value);
     };
 
+    // eslint-disable-next-line
     return (
         <>
             <Vis hvis={valgtSoknad.soknadstype === RSSoknadstype.ARBEIDSTAKERE && sporsmal.tag === TagTyper.FERIE_V2}>
@@ -85,7 +86,7 @@ const JaNeiInput = ({ sporsmal }: SpmProps) => {
             <div role="alert" aria-live="assertive">
                 <Vis hvis={errors[sporsmal.id] !== undefined}>
                     <Normaltekst tag="span" className="skjemaelement__feilmelding">
-                        <ErrorMessage errors={errors} name={sporsmal.id} />
+                        <ErrorMessage as="p" errors={errors} name={sporsmal.id} />
                     </Normaltekst>
                 </Vis>
             </div>

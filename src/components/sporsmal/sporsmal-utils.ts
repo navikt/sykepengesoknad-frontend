@@ -3,6 +3,7 @@ import { Soknad, Sporsmal } from '../../types/types';
 import { RSSvartype } from '../../types/rs-types/rs-svartype';
 import { Periode } from './typer/periode-komp';
 import { PERIODE_SKILLE, SEPARATOR } from '../../utils/constants';
+import { RSSvarliste } from '../../types/rs-types/rs-svarliste';
 
 export const erSisteSide = (soknad: Soknad, sidenummer: number) => {
     const sporsmal = soknad.sporsmal[sidenummer - 1];
@@ -62,6 +63,15 @@ export const settSvar = (sporsmal: Sporsmal, verdier: Record<string, string | nu
 export const hentSvar = (sporsmal: Sporsmal): any => {
     const svarliste = sporsmal.svarliste;
     const svar = svarliste.svar[0];
+
+    if (sporsmal.svartype === RSSvartype.BEHANDLINGSDAGER) {
+        const ukeliste: RSSvarliste[] = [];
+        sporsmal.undersporsmal.forEach(uspm => {
+            ukeliste.push(uspm.svarliste);
+        });
+        return ukeliste;
+    }
+
     if (svar === undefined) {
         return sporsmal.svartype.toString().startsWith('PERIODE') ? [] : '';
     }
@@ -93,7 +103,7 @@ export const fjernIndexFraTag = (tag: TagTyper): TagTyper => {
     let stringtag: string = tag.toString();
     const separator = '_';
     const index = stringtag.lastIndexOf(separator);
-    if(index === (stringtag.length - 2) || index === (stringtag.length - 1)) {
+    if (index === (stringtag.length - 2) || index === (stringtag.length - 1)) {
         stringtag = stringtag.slice(0, index);
     }
     return TagTyper[stringtag as keyof typeof TagTyper];

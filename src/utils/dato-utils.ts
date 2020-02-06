@@ -109,7 +109,6 @@ export const ukeDatoListe = (min: string, max: string) => {
     while (dato.toDate() <= dayjs(max).toDate()) {
         ukeListe.push(dato);
         dato = dato.add(1, 'day');
-        console.log('dato', dato); // eslint-disable-line
     }
     return ukeListe;
 };

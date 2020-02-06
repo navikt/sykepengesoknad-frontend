@@ -68,7 +68,7 @@ const DatoInput = ({ sporsmal }: SpmProps) => {
             <div role="alert" aria-live="assertive">
                 <Vis hvis={errors[sporsmal.id] !== undefined}>
                     <Normaltekst tag="span" className="skjemaelement__feilmelding">
-                        <ErrorMessage errors={errors} name={sporsmal.id} />
+                        <ErrorMessage as="p" errors={errors} name={sporsmal.id} />
                     </Normaltekst>
                 </Vis>
             </div>
