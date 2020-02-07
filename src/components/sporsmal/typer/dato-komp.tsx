@@ -12,18 +12,15 @@ import './flatpickr.less';
 
 
 const DatoInput = ({ sporsmal }: SpmProps) => {
-    const [ lokal, setLokal ] = useState<Date>(hentSvar(sporsmal));
+    const [ lokal, setLokal ] = useState<Date>();
     const { register, setValue, errors } = useFormContext();
     const datoRef = useRef<HTMLDivElement>(null);
     const feilmelding = tekster['soknad.feilmelding.' + sporsmal.tag.toLowerCase()];
 
-    const onChange = (value: any) => {
-        setValue(sporsmal.id, value);
-        setLokal(value);
-    };
-
     useEffect(() => {
-        setValue(sporsmal.id, lokal);
+        const verdi = hentSvar(sporsmal);
+        setValue(sporsmal.id, verdi);
+        setLokal(verdi);
         register({
             name: sporsmal.id,
             validate: { required: feilmelding },
@@ -31,7 +28,12 @@ const DatoInput = ({ sporsmal }: SpmProps) => {
         });
         lagIdForDato();
         // eslint-disable-next-line
-    }, [ sporsmal.id, feilmelding, lokal ]);
+    }, [ sporsmal ]);
+
+    const onChange = (value: any) => {
+        setValue(sporsmal.id, value);
+        setLokal(value);
+    };
 
     const lagIdForDato = () => {
         const input = datoRef.current.querySelector('.input--s[type=text]');

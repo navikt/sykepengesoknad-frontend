@@ -16,7 +16,7 @@ const RadioKomp = ({ sporsmal }: SpmProps) => {
         const lagret = hentSvar(sporsmal);
         setValue(sporsmal.id, lagret);
         setLokal(lagret);
-    }, [ sporsmal, setValue ]);
+    }, [ sporsmal ]);
 
     const changeValue = (value: string) => {
         setValue(sporsmal.id, value);

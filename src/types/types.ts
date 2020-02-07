@@ -1,5 +1,5 @@
 import dayjs from 'dayjs';
-import { InntektskildeTyper, SporsmalsTyper, SykepengesoknadSvartyper, SykmeldingStatuser, TagTyper } from './enums';
+import { SykmeldingStatuser, TagTyper } from './enums';
 import { RSArbeidssituasjon } from './rs-types/rs-arbeidssituasjon';
 import { RSSvartype } from './rs-types/rs-svartype';
 import { RSSoknadstype } from './rs-types/rs-soknadstype';
@@ -9,64 +9,9 @@ import { RSSoknad } from './rs-types/rs-soknad';
 import { RSSoknadsperiode } from './rs-types/rs-soknadsperiode';
 import { RSSvarliste } from './rs-types/rs-svarliste';
 
-export interface SykepengesoknadOppsummeringLedetekst {
-    nokkel: string;
-    tekst: string;
-    verdier: {};
-}
-
-export interface SykepengesoknadOppsummeringTilleggstekst {
-    ledetekst: SykepengesoknadOppsummeringLedetekst;
-    type: SykepengesoknadSvartyper;
-}
-
-export interface SykepengesoknadOppsummeringSvar {
-    ledetekst: SykepengesoknadOppsummeringLedetekst;
-    type: SykepengesoknadSvartyper;
-    tilleggstekst: SykepengesoknadOppsummeringTilleggstekst;
-}
-
-export interface SykepengesoknadOppsummeringSporsmal {
-    ledetekst: SykepengesoknadOppsummeringLedetekst;
-    svar: SykepengesoknadOppsummeringSvar[];
-    type: SporsmalsTyper;
-}
-
-export interface OppsummeringSoknad {
-    bekreftetKorrektInformasjon: SykepengesoknadOppsummeringSporsmal;
-    oppsummering: SykepengesoknadOppsummeringSporsmal[];
-    vaerKlarOverAt: SykepengesoknadOppsummeringTilleggstekst;
-}
-
-export interface TidslinjeHendelse {
-    antallDager: number;
-    bilde: string;
-    data: {};
-    id: string;
-    inntruffetdato: Date;
-    tekstkey: string;
-    type: string;
-    erApen: boolean;
-    medAnimasjon: boolean;
-    hindreToggle: boolean;
-    hoyde: string;
-    visBudskap: boolean;
-    alt: number;
-}
-
-export interface SoknadPeriode {
-    fom: Date;
-    tom: Date;
-}
-
 export interface TidsPeriode {
     fom: Date;
     tom: Date;
-}
-
-export interface AnnenInntektskilde {
-    sykmeldt: boolean;
-    annenInntektskildeType: InntektskildeTyper;
 }
 
 export interface NaermesteLeder {
@@ -82,18 +27,6 @@ export interface Arbeidsgiver {
     navn: string;
     orgnummer: string;
     naermesteLeder?: NaermesteLeder;
-}
-
-export interface SoknadsAktivitet {
-    periode: SoknadPeriode;
-    grad: number;
-    avvik: {
-        arbeidstimerNormalUke: number;
-        arbeidsgrad: number;
-        timer: number;
-        beregnetArbeidsgrad: number;
-    };
-    id: number;
 }
 
 export interface SykmeldingDiagnose {
@@ -199,39 +132,6 @@ export interface Sykmelding {
     };
 }
 
-export interface Toggles {
-    data: Map<string, boolean>;
-    henter: boolean;
-    hentingFeilet: boolean;
-    hentet: boolean;
-}
-
-export interface SykeForloep {
-    senesteTom: {
-        grad: number;
-        dato: Date;
-    };
-    tidligsteFom: {
-        grad: number;
-        dato: Date;
-        identdato: Date;
-    };
-}
-
-export interface FnrVirksomhetsNummer {
-    fnr: string;
-    virksomhetsnummer: string;
-}
-
-export interface SykeforlopPeriode {
-    fom: string | Date;
-    tom: string | Date;
-    grad: number;
-    behandlingsdager: number;
-    reisetilskudd: boolean;
-    avventende: string;
-}
-
 export class Soknad {
     id: string;
     sykmeldingId: string;
@@ -269,7 +169,7 @@ export class Soknad {
                 orgnummer: soknad.arbeidsgiver.orgnummer
             };
         }
-        this.sporsmal = rsToSporsmal(soknad.sporsmal, undefined);
+        this.sporsmal = rsToSporsmal(soknad.sporsmal, undefined, true);
         this.soknadPerioder = soknad.soknadPerioder;
     }
 }
@@ -288,8 +188,9 @@ export class Sporsmal {
     svarliste: RSSvarliste;
     undersporsmal: Sporsmal[];
     parentKriterie?: string;
+    erHovedsporsmal: boolean;
 
-    constructor(spm: RSSporsmal, kriterie: string) {
+    constructor(spm: RSSporsmal, kriterie: string, erHovedsporsmal: boolean) {
         this.id = spm.id;
         const orgarr: string[] = spm.tag.split('_');
         const numtag: number = parseInt(orgarr.pop());
@@ -308,18 +209,19 @@ export class Sporsmal {
         this.pavirkerAndreSporsmal = spm.pavirkerAndreSporsmal;
         this.kriterieForVisningAvUndersporsmal = spm.kriterieForVisningAvUndersporsmal;
         this.svarliste = { sporsmalId: spm.id, svar: spm.svar };
-        this.undersporsmal = rsToSporsmal(spm.undersporsmal, spm.kriterieForVisningAvUndersporsmal);
+        this.undersporsmal = rsToSporsmal(spm.undersporsmal, spm.kriterieForVisningAvUndersporsmal, false);
         this.parentKriterie = kriterie;
+        this.erHovedsporsmal = erHovedsporsmal;
     }
 }
 
-function rsToSporsmal(spms: RSSporsmal[], kriterie: string) {
+function rsToSporsmal(spms: RSSporsmal[], kriterie: string, erHovedsporsmal: boolean) {
     const sporsmals: Sporsmal[] = [];
     if (spms === undefined) {
         return sporsmals;
     }
     spms.forEach(rssp => {
-        const spm: Sporsmal = new Sporsmal(rssp, kriterie);
+        const spm: Sporsmal = new Sporsmal(rssp, kriterie, erHovedsporsmal);
         sporsmals.push(spm);
     });
     return sporsmals;
@@ -330,40 +232,6 @@ export interface Brodsmule {
     tittel: string;
     sisteSmule?: boolean;
     erKlikkbar?: boolean;
-}
-
-interface Meta {
-    error: string;
-    touched: boolean;
-}
-
-interface Input {
-    name: string;
-    onBlur: Function;
-    onChange: Function;
-    onDragStart: Function;
-    onDrop: Function;
-    onFocus: Function;
-}
-
-export interface Fields {
-    push: Function;
-    map: Function;
-    length: number;
-}
-
-export interface Ledetekster {
-    [s: string]: string;
-}
-
-export interface SvarVerdi {
-    key: RSSvartype;
-    value: any;
-}
-
-export interface Feil {
-    tom: string;
-    fom: string;
 }
 
 export interface IdParams {

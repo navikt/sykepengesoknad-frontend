@@ -14,10 +14,10 @@ const CheckboxInput = ({ sporsmal }: SpmProps) => {
 
     useEffect(() => {
         const svar = hentSvar(sporsmal);
-        setLokal(svar);
         setValue(sporsmal.id, svar);
+        setLokal(svar);
         // eslint-disable-next-line
-    }, []);
+    }, [ sporsmal ]);
 
     const handleChange = () => {
         setLokal(lokal === 'true' ? 'false' : 'true');

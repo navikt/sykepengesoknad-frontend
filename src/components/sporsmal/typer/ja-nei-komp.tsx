@@ -3,7 +3,7 @@ import React, { useEffect } from 'react';
 import { Element, Normaltekst } from 'nav-frontend-typografi';
 import Vis from '../../vis';
 import { SpmProps } from '../sporsmal-form/sporsmal-form';
-import { hentSvar } from '../sporsmal-utils';
+import { hentFormState, hentSvar } from '../sporsmal-utils';
 import UndersporsmalListe from '../undersporsmal/undersporsmal-liste';
 import AnimateOnMount from '../../animate-on-mount';
 import TagBjorn from '../bjorn/tag-bjorn';
@@ -24,8 +24,18 @@ const jaNeiValg = [ {
 
 const JaNeiInput = ({ sporsmal }: SpmProps) => {
     const { valgtSoknad } = useAppStore();
-    const { register, setValue, errors, watch } = useFormContext();
+    const { register, setValue, errors, watch, reset } = useFormContext();
     const watchVerdi = watch(sporsmal.id);
+
+
+    useEffect(() => {
+        if (sporsmal.erHovedsporsmal) {
+            reset(hentFormState(valgtSoknad.sporsmal, sporsmal.id));
+        } else {
+            setValue(sporsmal.id, hentSvar(sporsmal));
+        }
+        // eslint-disable-next-line
+    }, [ sporsmal ]);
 
     const visAvgittAvBjorn = () => {
         const undersporsmal = sporsmal.undersporsmal.find(uspm => uspm.tag === TagTyper.EGENMELDINGER_NAR);
@@ -34,11 +44,6 @@ const JaNeiInput = ({ sporsmal }: SpmProps) => {
         }
         return false;
     };
-
-    useEffect(() => {
-        setValue(sporsmal.id, hentSvar(sporsmal));
-        // eslint-disable-next-line
-    }, [ sporsmal.id ]);
 
     const changeValue = (value: string) => {
         setValue(sporsmal.id, value);

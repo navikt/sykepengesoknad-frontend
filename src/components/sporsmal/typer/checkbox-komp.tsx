@@ -18,7 +18,7 @@ const CheckboxKomp = ({ sporsmal }: SpmProps) => {
 
             <div className="skjemaelement">
                 {sporsmal.undersporsmal.map((uspm, idx) => {
-                    return <CheckboxSingle sporsmal={uspm} key={idx} />
+                    return <CheckboxSingle sporsmal={uspm} key={idx}/>
                 })}
             </div>
 
@@ -44,7 +44,7 @@ const CheckboxSingle = ({ sporsmal }: SpmProps) => {
         setValue(sporsmal.id, lagret);
         setLokal(lagret);
         // eslint-disable-next-line
-    }, [ sporsmal.id ]);
+    }, [ sporsmal ]);
 
     const changeValue = (value: string) => {
         setValue(sporsmal.id, value);

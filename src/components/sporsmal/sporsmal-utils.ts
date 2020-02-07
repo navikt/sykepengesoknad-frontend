@@ -35,7 +35,7 @@ export const settSvar = (sporsmal: Sporsmal, verdier: Record<string, string | nu
             sporsmal.svarliste = {
                 sporsmalId: sporsmal.id,
                 svar: verdi.map(element => {
-                    return element.toString()
+                    return { verdi: element.toString() }
                 }),
             };
         } else {
@@ -88,9 +88,47 @@ export const hentSvar = (sporsmal: Sporsmal): any => {
         return perioder;
     }
     if (sporsmal.svartype === RSSvartype.DATO) {
-        return new Date(svar.toString());
+        return new Date(svar.verdi.toString());
     }
     return svar.verdi;
+};
+
+export const hentFormState = (spmliste: Sporsmal[], id: string) => {
+    let hovedSporsmal: Sporsmal = null;
+    spmliste.forEach((spm) => {
+        const fantHovedsporsmal = finnSporsmal(spm, id);
+        if (fantHovedsporsmal) {
+            hovedSporsmal = spm;
+        }
+    });
+    return hentSvarliste(hovedSporsmal);
+};
+
+const finnSporsmal = (sporsmal: Sporsmal, id: string): boolean => {
+    if (sporsmal.id === id) {
+        return true;
+    }
+    let fantUndersporsmal = false;
+    sporsmal.undersporsmal.forEach((uspm) => {
+        if (finnSporsmal(uspm, id)) {
+            fantUndersporsmal = true;
+        }
+    });
+    return fantUndersporsmal;
+};
+
+
+const hentSvarliste = (sporsmal: Sporsmal) => {
+    let svar: any = {};
+
+    if (sporsmal.svarliste.svar[0] !== undefined) {
+        svar[sporsmal.id] = sporsmal.svarliste.svar[0].verdi;
+    }
+    sporsmal.undersporsmal.forEach((spm) => {
+        const alleUndersporsmalSvar: any = hentSvarliste(spm);
+        svar = { ...svar, ...alleUndersporsmalSvar };
+    });
+    return svar;
 };
 
 export const pathUtenSteg = (pathname: string) => {

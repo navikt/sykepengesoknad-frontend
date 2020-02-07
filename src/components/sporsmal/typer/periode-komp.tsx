@@ -1,6 +1,6 @@
 import { ErrorMessage, useFormContext } from 'react-hook-form';
 import React, { useEffect, useRef, useState } from 'react';
-import { Normaltekst, Element } from 'nav-frontend-typografi';
+import { Element, Normaltekst } from 'nav-frontend-typografi';
 import Vis from '../../vis';
 import tekster from '../sporsmal-tekster';
 import { SpmProps } from '../sporsmal-form/sporsmal-form';
@@ -27,16 +27,10 @@ const PeriodeInput = ({ sporsmal }: SpmProps) => {
     const forceUpdate = useForceUpdate();
     const feilmelding = tekster['soknad.feilmelding.' + sporsmal.tag.toLowerCase()];
 
-    const onChange = (dates: Date[], a: any, b: any) => {
-        const index = b.input.id.split('_')[1];
-        lokal[index].fom = dates[0];
-        lokal[index].tom = dates[1];
-        setLokal(lokal);
-        setValue(sporsmal.id, lokal);
-    };
-
     useEffect(() => {
-        setValue(sporsmal.id, lokal);
+        const svar = hentSvar(sporsmal);
+        setValue(sporsmal.id, svar);
+        setLokal(svar);
         register({
             name: sporsmal.id,
             validate: { required: feilmelding },
@@ -44,7 +38,16 @@ const PeriodeInput = ({ sporsmal }: SpmProps) => {
         });
         lagIdForPerioder();
         // eslint-disable-next-line
-    }, [ sporsmal.id, feilmelding, lokal ]);
+    }, [ sporsmal ]);
+
+    const onChange = (dates: Date[], a: any, b: any) => {
+        const index = b.input.id.split('_')[1];
+        lokal[index].fom = dates[0];
+        lokal[index].tom = dates[1];
+        setLokal(lokal);
+        setValue(sporsmal.id, lokal);
+
+    };
 
     const lagIdForPerioder = () => {
         const perioder = periodeliste.current.querySelectorAll('.periode');

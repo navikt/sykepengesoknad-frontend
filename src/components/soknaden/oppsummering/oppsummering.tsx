@@ -2,6 +2,7 @@ import React from 'react';
 import Ekspanderbartpanel from 'nav-frontend-ekspanderbartpanel';
 import { useAppStore } from '../../../data/stores/app-store';
 import { RSSvartype } from '../../../types/rs-types/rs-svartype';
+import { TagTyper } from "../../../types/enums";
 import tekster from './oppsummering-tekster';
 import './oppsummering.less';
 import { Sporsmal } from '../../../types/types';
@@ -15,6 +16,7 @@ import UndertekstSum from './utdrag/undertekst-sum';
 import CheckboxGruppe from './utdrag/checkbox-gruppe';
 import TallSum from './utdrag/tall-sum';
 import RadioGruppe from './utdrag/radio-gruppe';
+import Behandlingsdager from "./utdrag/behandlingsdager";
 
 export interface OppsummeringProps {
     sporsmal: Sporsmal;
@@ -30,11 +32,7 @@ const Oppsummering = () => {
         >
             {valgtSoknad.sporsmal
                 .filter((sporsmal) => {
-                    return (
-                        sporsmal.svarliste.svar.length > 0 ||
-                        sporsmal.undersporsmal.length > 0 ||
-                        sporsmal.svartype === RSSvartype.IKKE_RELEVANT
-                    );
+                    return skalIkkeVisesIOppsummering(sporsmal);
                 })
                 .map((sporsmal, index) => {
                     return (
@@ -86,8 +84,25 @@ export const SporsmalVarianter = ({ sporsmal }: OppsummeringProps) => {
         case RSSvartype.RADIO_GRUPPE: {
             return <RadioGruppe sporsmal={sporsmal}/>;
         }
+        case RSSvartype.BEHANDLINGSDAGER: {
+            return <Behandlingsdager sporsmal={sporsmal}/>;
+        }
+        case RSSvartype.RADIO_GRUPPE_UKEKALENDER: {
+            return <DatoSum sporsmal={sporsmal}/>
+        }
         default: {
             return null;
         }
     }
 };
+
+function skalIkkeVisesIOppsummering(sporsmal: Sporsmal) {
+    switch (sporsmal.tag) {
+        case TagTyper.VAER_KLAR_OVER_AT: {
+            return false;
+        }
+        default: {
+            return true;
+        }
+    }
+}

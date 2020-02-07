@@ -15,6 +15,7 @@ import { SEPARATOR } from '../../../utils/constants';
 import { RSSoknadstatus } from '../../../types/rs-types/rs-soknadstatus';
 import { SvarTil } from '../../../types/enums';
 import './sporsmal-form.less';
+import Oppsummering from "../../soknaden/oppsummering/oppsummering";
 
 export interface SpmProps {
     sporsmal: Sporsmal;
@@ -53,12 +54,11 @@ const SporsmalForm = () => {
             setValgtSoknad(valgtSoknad);
         }
         methods.reset();
-        methods.unregister(sporsmal.id);
+        //methods.unregister(sporsmal.id);
         setValgtSoknad(valgtSoknad);
         erSiste
             ? history.push(pathUtenSteg(history.location.pathname).replace('soknader', 'kvittering'))
             : history.push(pathUtenSteg(history.location.pathname) + SEPARATOR + (spmIndex + 2));
-        console.log('valgtSoknad', valgtSoknad); // eslint-disable-line
     };
 
     return (
@@ -68,8 +68,9 @@ const SporsmalForm = () => {
                 <SporsmalSwitch sporsmal={sporsmal} />
 
                 <Vis hvis={erSiste}>
-                    <CheckboxPanel sporsmal={valgtSoknad.sporsmal[spmIndex + 1]} />
-                    <SendtTil />
+                    <Oppsummering/>
+                    <CheckboxPanel sporsmal={valgtSoknad.sporsmal[spmIndex + 1]}/>
+                    <SendtTil/>
                 </Vis>
 
                 <Knapperad onSubmit={onSubmit} />

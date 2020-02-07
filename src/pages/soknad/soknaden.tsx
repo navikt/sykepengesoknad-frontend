@@ -10,7 +10,6 @@ import { HotjarTrigger } from '../../components/hotjar-trigger';
 import SoknadIntro from '../../components/soknaden/soknad-intro/soknad-intro';
 import Opplysninger from '../../components/soknaden/opplysninger/opplysninger';
 import StatusPanel from '../../components/soknaden/status/status-panel';
-import VaerKlarOver from '../../components/soknaden/vaer-klar-over/vaer-klar-over';
 import Oppsummering from '../../components/soknaden/oppsummering/oppsummering';
 import tekster from './soknaden-tekster';
 import { setBodyClass } from '../../utils/utils';
@@ -112,7 +111,6 @@ const Fordeling = () => {
                     <StatusPanel />
                     <Opplysninger ekspandert={false} />
                     <Oppsummering />
-                    <VaerKlarOver />
                 </>
             );
 
