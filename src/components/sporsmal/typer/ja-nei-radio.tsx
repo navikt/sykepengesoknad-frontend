@@ -4,12 +4,13 @@ import { Element, Normaltekst } from 'nav-frontend-typografi';
 import Vis from '../../vis';
 import { SpmProps } from '../sporsmal-form/sporsmal-form';
 import { hentSvar } from '../sporsmal-utils';
+import tekster from '../sporsmal-tekster';
 
 const jaNeiValg = [ {
-    value: 'ja',
+    value: 'JA',
     label: 'Ja',
 }, {
-    value: 'nei',
+    value: 'NEI',
     label: 'Nei',
 } ];
 
@@ -40,21 +41,32 @@ const JaNeiRadio = ({ sporsmal }: SpmProps) => {
                 {jaNeiValg.map((valg, idx) => {
                     const OK = lokal === valg.value;
                     return (
-                        <div className="radioContainer" key={idx}>
-                            <input type="radio"
-                                id={sporsmal.id + '_' + idx}
-                                name={sporsmal.id}
-                                value={valg.value}
-                                checked={OK}
-                                aria-checked={OK}
-                                onChange={() => changeValue(valg.value)}
-                                ref={register({ required: 'Et alternativ må velges' })}
-                                className="skjemaelement__input radioknapp"
-                            />
-                            <label className="skjemaelement__label" htmlFor={sporsmal.id + '_' + idx}>
-                                {valg.label}
-                            </label>
-                        </div>
+                        <>
+                            <div className="radioContainer" key={idx}>
+                                <input type="radio"
+                                       id={sporsmal.id + '_' + idx}
+                                       name={sporsmal.id}
+                                       value={valg.value}
+                                       checked={OK}
+                                       aria-checked={OK}
+                                       onChange={() => changeValue(valg.value)}
+                                       ref={register({ required: 'Et alternativ må velges' })}
+                                       className="skjemaelement__input radioknapp"
+                                />
+                                <label className="skjemaelement__label" htmlFor={sporsmal.id + '_' + idx}>
+                                    {valg.label}
+                                </label>
+                            </div>
+                            <Vis
+                                hvis={sporsmal.tag && sporsmal.tag.startsWith('INNTEKTSKILDE_') && lokal === 'JA' && OK}>
+                                <div className="presisering">
+                                    <Normaltekst tag="span">
+                                        {tekster['soknad.presisering.' + sporsmal.tag]}
+                                    </Normaltekst>
+                                </div>
+                            </Vis>
+                        </>
+
                     )
                 })}
             </div>
@@ -62,7 +74,7 @@ const JaNeiRadio = ({ sporsmal }: SpmProps) => {
             <div role="alert" aria-live="assertive">
                 <Vis hvis={errors[sporsmal.id] !== undefined}>
                     <Normaltekst tag="span" className="skjemaelement__feilmelding">
-                        <ErrorMessage as="p" errors={errors} name={sporsmal.id} />
+                        <ErrorMessage as="p" errors={errors} name={sporsmal.id}/>
                     </Normaltekst>
                 </Vis>
             </div>

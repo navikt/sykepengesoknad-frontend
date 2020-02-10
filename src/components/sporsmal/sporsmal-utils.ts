@@ -48,6 +48,13 @@ export const settSvar = (sporsmal: Sporsmal, verdier: Record<string, string | nu
                     }),
             };
         }
+    } else if (sporsmal.svartype === RSSvartype.CHECKBOX_PANEL ||
+        sporsmal.svartype === RSSvartype.CHECKBOX ||
+        sporsmal.svartype === RSSvartype.CHECKBOX_GRUPPE) {
+        sporsmal.svarliste = {
+            sporsmalId: sporsmal.id,
+            svar: [ { verdi: verdi ? 'CHECKED' : 'UNCHECKED' } ]
+        }
     } else if (verdi !== undefined) {
         sporsmal.svarliste = {
             sporsmalId: sporsmal.id,

@@ -1,19 +1,25 @@
 @import '../../../../node_modules/nav-frontend-core/less/_variabler';
 
 .sporsmal__form {
-    .skjema__fieldset {
-        border: 0;
-        padding: 0;
-
-        legend {
-            margin-bottom: 1rem;
-        }
+  &.bekreft_opplysninger {
+    .feiloppsummering {
+      display: none;
     }
+  }
 
-    .skjemaelement--horisontal {
-        display: flex;
-        flex-direction: row;
+  .skjema__fieldset {
+    border: 0;
+    padding: 0;
+
+    legend {
+      margin-bottom: 1rem;
     }
+  }
+
+  .skjemaelement--horisontal {
+    display: flex;
+    flex-direction: row;
+  }
 
     .skjema-feilmelding {
         color: @redError;

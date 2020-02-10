@@ -29,6 +29,7 @@ const SporsmalForm = () => {
     const spmIndex = parseInt(stegId) - 1;
     const methods = useForm();
     const sporsmal = valgtSoknad.sporsmal[spmIndex];
+    const nesteSporsmal = valgtSoknad.sporsmal[spmIndex + 1];
 
     useEffect(() => {
         const snartSlutt = sporsmal.svartype === RSSvartype.IKKE_RELEVANT || sporsmal.svartype === RSSvartype.CHECKBOX_PANEL;
@@ -43,7 +44,7 @@ const SporsmalForm = () => {
         }
         settSvar(sporsmal, methods.getValues());
         if (erSiste) {
-            settSvar(valgtSoknad.sporsmal[spmIndex + 1], methods.getValues());
+            settSvar(nesteSporsmal, methods.getValues());
             sendTil.map(svar => {
                 svar === SvarTil.NAV
                     ? valgtSoknad.sendtTilNAVDato = new Date()
@@ -63,17 +64,18 @@ const SporsmalForm = () => {
 
     return (
         <FormContext {...methods}>
-            <form onSubmit={methods.handleSubmit(onSubmit)} className="sporsmal__form">
-                <FeilOppsummering visFeilliste={true} errors={methods.errors} />
-                <SporsmalSwitch sporsmal={sporsmal} />
+            <form onSubmit={methods.handleSubmit(onSubmit)}
+                  className={'sporsmal__form ' + nesteSporsmal.tag.toLowerCase()}>
+                <FeilOppsummering visFeilliste={true} errors={methods.errors}/>
+                <SporsmalSwitch sporsmal={sporsmal}/>
 
                 <Vis hvis={erSiste}>
                     <Oppsummering/>
-                    <CheckboxPanel sporsmal={valgtSoknad.sporsmal[spmIndex + 1]}/>
+                    <CheckboxPanel sporsmal={nesteSporsmal}/>
                     <SendtTil/>
                 </Vis>
 
-                <Knapperad onSubmit={onSubmit} />
+                <Knapperad onSubmit={onSubmit}/>
             </form>
         </FormContext>
     )

@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useEffect, useRef } from 'react';
 import { ErrorMessage, useFormContext } from 'react-hook-form';
 import tekster from '../sporsmal-tekster';
 import { hentSvar } from '../sporsmal-utils';
@@ -7,53 +7,51 @@ import { Normaltekst } from 'nav-frontend-typografi';
 import { SpmProps } from '../sporsmal-form/sporsmal-form';
 
 const CheckboxInput = ({ sporsmal }: SpmProps) => {
-    const [ lokal, setLokal ] = useState<string>('false');
     const feilmelding = tekster['soknad.feilmelding.' + sporsmal.tag.toLowerCase()];
-    const { register, setValue, errors } = useFormContext();
+    const { register, setValue, errors, watch } = useFormContext();
     const bekreft = useRef<HTMLDivElement>(null);
+    const checkWatch = watch(sporsmal.id);
 
     useEffect(() => {
         const svar = hentSvar(sporsmal);
-        setValue(sporsmal.id, svar);
-        setLokal(svar);
+        setValue(sporsmal.id, svar === 'CHECKED');
         // eslint-disable-next-line
     }, [ sporsmal ]);
 
     const handleChange = () => {
-        setLokal(lokal === 'true' ? 'false' : 'true');
         bekreft.current.classList.toggle('bekreftCheckboksPanel--checked');
+        setValue(sporsmal.id, !checkWatch);
     };
 
     const makeClassName = () => {
         const cls = 'bekreftCheckboksPanel';
-        return lokal === 'true' ? cls + ' ' + cls + '--checked' : cls;
+        return watch(sporsmal.id) ? cls + ' ' + cls + '--checked' : cls;
     };
 
     return (
-        <div className={makeClassName()} ref={bekreft}>
-            <div className={'skjemaelement skjemaelement--horisontal'}>
-                <input type="checkbox"
-                    className="skjemaelement__input checkboks"
-                    name={sporsmal.id}
-                    id={sporsmal.id}
-                    checked={lokal === 'true'}
-                    aria-checked={lokal === 'true'}
-                    onChange={handleChange}
-                    ref={register({ required: feilmelding })}
-                />
-                <label className="skjemaelement__label" htmlFor={sporsmal.id}>
-                    {sporsmal.sporsmalstekst}
-                </label>
+        <>
+            <div className={makeClassName()} ref={bekreft}>
+                <div className={'skjemaelement skjemaelement--horisontal'}>
+                    <input type="checkbox"
+                           className="skjemaelement__input checkboks"
+                           name={sporsmal.id}
+                           id={sporsmal.id}
+                           onChange={handleChange}
+                           ref={register({ required: feilmelding })}
+                    />
+                    <label className="skjemaelement__label" htmlFor={sporsmal.id}>
+                        {sporsmal.sporsmalstekst}
+                    </label>
+                </div>
             </div>
-
             <div role="alert" aria-live="assertive">
-                <Vis hvis={errors.verdi !== undefined}>
+                <Vis hvis={errors[sporsmal.id] !== undefined}>
                     <Normaltekst tag="span" className="skjemaelement__feilmelding">
-                        <ErrorMessage as="p" errors={errors} name={sporsmal.id} />
+                        <ErrorMessage as="span" errors={errors} name={sporsmal.id}/>
                     </Normaltekst>
                 </Vis>
             </div>
-        </div>
+        </>
     )
 };
 

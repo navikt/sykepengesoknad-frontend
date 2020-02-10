@@ -17,11 +17,7 @@ export class Periode {
 }
 
 const PeriodeInput = ({ sporsmal }: SpmProps) => {
-    const svar = hentSvar(sporsmal);
-    if (svar.length === 0) {
-        svar.push(new Periode());
-    }
-    const [ lokal, setLokal ] = useState<Periode[]>(svar);
+    const [ lokal, setLokal ] = useState<Periode[]>([ new Periode() ]);
     const { register, setValue, errors } = useFormContext();
     const periodeliste = useRef<HTMLUListElement>(null);
     const forceUpdate = useForceUpdate();
@@ -29,8 +25,9 @@ const PeriodeInput = ({ sporsmal }: SpmProps) => {
 
     useEffect(() => {
         const svar = hentSvar(sporsmal);
-        setValue(sporsmal.id, svar);
-        setLokal(svar);
+        setLokal(svar.length > 0 ? svar : lokal);
+        setValue(sporsmal.id, lokal);
+        //oppdaterPerioder();
         register({
             name: sporsmal.id,
             validate: { required: feilmelding },
@@ -140,8 +137,8 @@ const PeriodeInput = ({ sporsmal }: SpmProps) => {
             </div>
 
             <div className="undersporsmal">
-                <Vis hvis={lokal !== undefined}>
-                    <UndersporsmalListe undersporsmal={sporsmal.undersporsmal} />
+                <Vis hvis={lokal.length > 0 && lokal[0].fom !== undefined}>
+                    <UndersporsmalListe undersporsmal={sporsmal.undersporsmal}/>
                 </Vis>
             </div>
         </div>

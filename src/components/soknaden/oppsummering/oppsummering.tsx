@@ -32,7 +32,7 @@ const Oppsummering = () => {
         >
             {valgtSoknad.sporsmal
                 .filter((sporsmal) => {
-                    return skalIkkeVisesIOppsummering(sporsmal);
+                    return skalVisesIOppsummering(sporsmal);
                 })
                 .map((sporsmal, index) => {
                     return (
@@ -96,8 +96,9 @@ export const SporsmalVarianter = ({ sporsmal }: OppsummeringProps) => {
     }
 };
 
-function skalIkkeVisesIOppsummering(sporsmal: Sporsmal) {
+function skalVisesIOppsummering(sporsmal: Sporsmal) {
     switch (sporsmal.tag) {
+        case TagTyper.BEKREFT_OPPLYSNINGER:
         case TagTyper.VAER_KLAR_OVER_AT: {
             return false;
         }

@@ -34,10 +34,10 @@ const SporsmalSwitch = ({ sporsmal }: UndersporsmalProps) => {
             return <PeriodeInput sporsmal={sporsmal} />;
 
         case RSSvartype.JA_NEI:
-            if (sporsmal.parentKriterie === 'CHECKED' || sporsmal.undersporsmal.length === 0) {
-                return <JaNeiRadio sporsmal={sporsmal} />
+            if (sporsmal.parentKriterie === 'CHECKED' || sporsmal.parentKriterie === 'JA' || sporsmal.undersporsmal.length === 0) {
+                return <JaNeiRadio sporsmal={sporsmal}/>
             }
-            return <JaNeiKomp sporsmal={sporsmal} />;
+            return <JaNeiKomp sporsmal={sporsmal}/>;
 
         case RSSvartype.TIMER:
         case RSSvartype.PROSENT:

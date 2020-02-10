@@ -21,7 +21,6 @@ const BehDager = ({ sporsmal }: SpmProps) => {
                 lokal[idx] = liste.svar[0].verdi;
                 const radio = document.querySelector('.radioknapp[value="' + lokal[idx] + '"]');
                 radio.setAttribute('checked', 'checked');
-                //console.log('radio.parentElement', radio.parentElement); // eslint-disable-line
                 radio.parentElement.parentElement.querySelector('.fjern').classList.remove('skjul');
             }
         });

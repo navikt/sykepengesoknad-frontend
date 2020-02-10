@@ -15,16 +15,16 @@ import { RSSoknadstype } from '../../../types/rs-types/rs-soknadstype';
 import SporsmalHjelpetekst from '../sporsmal-hjelpetekst';
 
 const jaNeiValg = [ {
-    value: 'ja',
+    value: 'JA',
     label: 'Ja',
 }, {
-    value: 'nei',
+    value: 'NEI',
     label: 'Nei',
 } ];
 
 const JaNeiInput = ({ sporsmal }: SpmProps) => {
     const { valgtSoknad } = useAppStore();
-    const { register, setValue, errors, watch, reset } = useFormContext();
+    const { register, setValue, errors, watch, reset, getValues } = useFormContext();
     const watchVerdi = watch(sporsmal.id);
 
 
@@ -35,7 +35,7 @@ const JaNeiInput = ({ sporsmal }: SpmProps) => {
             setValue(sporsmal.id, hentSvar(sporsmal));
         }
         // eslint-disable-next-line
-    }, [ sporsmal ]);
+    }, [ sporsmal.id ]);
 
     const visAvgittAvBjorn = () => {
         const undersporsmal = sporsmal.undersporsmal.find(uspm => uspm.tag === TagTyper.EGENMELDINGER_NAR);
@@ -68,17 +68,18 @@ const JaNeiInput = ({ sporsmal }: SpmProps) => {
                     </legend>
                     <div className="inputPanelGruppe__inner">
                         {jaNeiValg.map((valg, idx) => {
-                            const OK = watchVerdi === valg.value;
+                            const OK = getValues()[sporsmal.id] === valg.value;
                             return (
-                                <label className={'inputPanel radioPanel' + (OK ? ' inputPanel--checked' : '')} key={idx}>
+                                <label className={'inputPanel radioPanel' + (OK ? ' inputPanel--checked' : '')}
+                                       key={idx}>
                                     <input type="radio"
-                                        name={sporsmal.id}
-                                        className="inputPanel__field"
-                                        aria-checked={OK}
-                                        checked={OK}
-                                        value={valg.value}
-                                        onChange={() => changeValue(valg.value)}
-                                        ref={register({ required: 'Et alternativ må velges' })}
+                                           name={sporsmal.id}
+                                           className="inputPanel__field"
+                                           aria-checked={OK}
+                                           checked={OK}
+                                           value={valg.value}
+                                           onChange={() => changeValue(valg.value)}
+                                           ref={register({ required: 'Et alternativ må velges' })}
                                     />
                                     <span className="inputPanel__label">{valg.label}</span>
                                 </label>
@@ -97,7 +98,7 @@ const JaNeiInput = ({ sporsmal }: SpmProps) => {
             </div>
 
             <AnimateOnMount
-                mounted={watchVerdi === 'ja'}
+                mounted={watchVerdi === 'JA'}
                 enter="undersporsmal--vis"
                 leave="undersporsmal--skjul"
                 start="undersporsmal"

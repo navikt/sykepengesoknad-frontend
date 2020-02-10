@@ -47,6 +47,12 @@ const SporsmalTekster: any = {
         'sykepengesoknad.periodevelger.fom': 'Fra og med',
         'sykepengesoknad.periodevelger.tom': 'Til og med',
 
+        "soknad.presisering.INNTEKTSKILDE_ANDRE_ARBEIDSFORHOLD_ER_DU_SYKMELDT": "Du må sende egen sykepengesøknad for dette. Det betyr også at legen må skrive en sykmelding for hvert arbeidsforhold du er sykmeldt fra.",
+        "soknad.presisering.INNTEKTSKILDE_SELVSTENDIG_ER_DU_SYKMELDT": "Legen må sende inn én sykmelding for hver arbeidssituasjon du er sykmeldt fra, og du må søke om sykepenger for hver av dem. Foreløpig støtter ikke den digitale løsningen søknad om sykepenger for selvstendig næringsdrivende. Søknaden om sykepenger for dette må du derfor sende på papir.",
+        "soknad.presisering.INNTEKTSKILDE_FRILANSER_ER_DU_SYKMELDT": "Legen må sende inn én sykmelding for hver arbeidssituasjon du er sykmeldt fra, og du må søke om sykepenger for hver av dem. Foreløpig støtter ikke den digitale løsningen søknad om sykepenger for frilansere. Søknaden om sykepenger for frilanser må du derfor sende på papir.",
+        "soknad.presisering.INNTEKTSKILDE_JORDBRUKER_ER_DU_SYKMELDT": "Legen må sende inn én sykmelding for hver arbeidssituasjon du er sykmeldt fra, og du må søke om sykepenger for hver av dem . Foreløpig støtter ikke den digitale løsningen søknad om sykepenger for disse gruppene. Søknaden om sykepenger for dette må du derfor sende på papir.",
+        "soknad.presisering.INNTEKTSKILDE_SELVSTENDIG_DAGMAMMA_ER_DU_SYKMELDT": "Legen må sende inn én sykmelding for hver arbeidssituasjon du er sykmeldt fra, og du må søke om sykepenger for hver av dem. Foreløpig støtter ikke den digitale løsningen søknad om sykepenger for selvstendig næringsdrivende. Søknaden om sykepenger for dagmamma må du derfor sende på papir.",
+
     }, 'en': {}
 };
 

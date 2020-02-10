@@ -1,9 +1,8 @@
 import React, { useEffect, useRef } from 'react';
-import { Normaltekst, Undertittel } from 'nav-frontend-typografi';
 import Vis from '../../vis';
 import { erSynligIViewport, getTop } from '../../../utils/browser-utils';
-import { Link } from 'react-router-dom';
 import './feil-oppsummering.less';
+import { Feiloppsummering } from 'nav-frontend-skjema';
 
 interface FeiloppsummeringProps {
     settFokus?: boolean;
@@ -25,10 +24,15 @@ interface FeiloppsummeringProps {
 
 const FeilOppsummering = (props: FeiloppsummeringProps) => {
     const oppsummering = useRef<HTMLDivElement>(null);
-    const feilmeldinger = Object.entries(props.errors);
+    const feilmeldinger = Object.entries(props.errors).map((error: any) => {
+        return {
+            skjemaelementId: error[0],
+            feilmelding: error[1]['message']
+        };
+    });
 
     useEffect(() => {
-        const {settFokus} = props;
+        const { settFokus } = props;
         let fokuser = settFokus;
         if (fokuser === undefined) {
             fokuser = true;
@@ -53,26 +57,7 @@ const FeilOppsummering = (props: FeiloppsummeringProps) => {
     return (
         <div aria-live="polite" role="alert">
             <Vis hvis={feilmeldinger.length > 0 && props.visFeilliste}>
-                <div className="feiloppsummering"
-                    ref={oppsummering}
-                    tabIndex={-1}>
-                    <Undertittel tag="h3" className="feiloppsummering__tittel">
-                        Det er {feilmeldinger.length} feil i skjemaet
-                    </Undertittel>
-                    <ul className="feiloppsummering__liste">
-                        <Vis hvis={feilmeldinger.length > 0}>
-                            {feilmeldinger.map((felt: any, index: number) => {
-                                return (
-                                    <li className="feiloppsummering__feil" key={index}>
-                                        <Link to={`#${felt[0]}`}>
-                                            <Normaltekst tag="span">{felt[1].message}</Normaltekst>
-                                        </Link>
-                                    </li>
-                                );
-                            })}
-                        </Vis>
-                    </ul>
-                </div>
+                <Feiloppsummering tittel={'Det er ' + feilmeldinger.length + ' feil i skjemaet'} feil={feilmeldinger}/>
             </Vis>
         </div>
     );
