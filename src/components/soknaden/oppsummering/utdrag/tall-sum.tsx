@@ -3,6 +3,8 @@ import { Element, Normaltekst } from 'nav-frontend-typografi';
 import tekster from '../oppsummering-tekster';
 import { RSSvartype } from '../../../../types/rs-types/rs-svartype';
 import { OppsummeringProps } from '../oppsummering';
+import { empty } from '../../../../utils/constants';
+import Vis from '../../../vis';
 
 const TallSum = ({ sporsmal }: OppsummeringProps) => {
     const labelnokkel = sporsmal.svartype === RSSvartype.TIMER ? 'soknad.timer-totalt' : 'soknad.prosent';
@@ -13,9 +15,11 @@ const TallSum = ({ sporsmal }: OppsummeringProps) => {
             <div className="oppsummering__svar">
                 {sporsmal.svarliste.svar.map((svarverdi, index) => {
                     return (
-                        <Normaltekst className="oppsummering__tekst" key={index}>
-                            {svarverdi.verdi} {label}
-                        </Normaltekst>
+                        <Vis hvis={svarverdi.verdi !== empty && typeof svarverdi.verdi === 'string'} key={index}>
+                            <Normaltekst className="oppsummering__tekst">
+                                {svarverdi.verdi} {label}
+                            </Normaltekst>
+                        </Vis>
                     );
                 })}
             </div>

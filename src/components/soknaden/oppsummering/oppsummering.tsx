@@ -24,7 +24,6 @@ export interface OppsummeringProps {
 
 const Oppsummering = () => {
     const { valgtSoknad } = useAppStore();
-
     return (
         <Ekspanderbartpanel apen={false} border={true}
             tittel={tekster['sykepengesoknad.oppsummering.tittel']}

@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import { SpmProps } from '../sporsmal-form/sporsmal-form';
 import { RSSvartype } from '../../../types/rs-types/rs-svartype';
 import { hentSvar } from '../sporsmal-utils';
@@ -9,18 +9,16 @@ import AnimateOnMount from '../../animate-on-mount';
 import UndersporsmalListe from '../undersporsmal/undersporsmal-liste';
 
 const RadioKomp = ({ sporsmal }: SpmProps) => {
-    const [ lokal, setLokal ] = useState<string>();
-    const { register, setValue, errors } = useFormContext();
+    const { register, setValue, errors, watch } = useFormContext();
+    const radioWatch = watch(sporsmal.id);
 
     useEffect(() => {
-        const lagret = hentSvar(sporsmal);
-        setValue(sporsmal.id, lagret);
-        setLokal(lagret);
+        const svar = hentSvar(sporsmal);
+        setValue(sporsmal.id, svar);
     }, [ sporsmal ]);
 
     const changeValue = (value: string) => {
         setValue(sporsmal.id, value);
-        setLokal(lokal === value ? '' : value);
     };
 
     return (
@@ -37,26 +35,26 @@ const RadioKomp = ({ sporsmal }: SpmProps) => {
                     return (
                         <div className="radioContainer" key={idx}>
                             <input type="radio"
-                                id={uspm.id}
-                                name={sporsmal.id}
-                                value={uspm.sporsmalstekst}
-                                checked={lokal === uspm.sporsmalstekst}
-                                aria-checked={lokal === uspm.sporsmalstekst}
-                                onChange={() => changeValue(uspm.sporsmalstekst)}
-                                ref={register({ required: 'Et alternativ må velges' })}
-                                className="skjemaelement__input radioknapp"
+                                   id={uspm.id}
+                                   name={sporsmal.id}
+                                   value={uspm.sporsmalstekst}
+                                   checked={radioWatch === uspm.sporsmalstekst}
+                                   aria-checked={radioWatch === uspm.sporsmalstekst}
+                                   onChange={() => changeValue(uspm.sporsmalstekst)}
+                                   ref={register({ required: 'Et alternativ må velges' })}
+                                   className="skjemaelement__input radioknapp"
                             />
                             <label className="skjemaelement__label" htmlFor={uspm.id}>
                                 {uspm.sporsmalstekst}
                             </label>
 
                             <AnimateOnMount
-                                mounted={lokal === uspm.sporsmalstekst}
+                                mounted={radioWatch === uspm.sporsmalstekst}
                                 enter="undersporsmal--vis"
                                 leave="undersporsmal--skjul"
                                 start="undersporsmal"
                             >
-                                <UndersporsmalListe undersporsmal={uspm.undersporsmal} />
+                                <UndersporsmalListe undersporsmal={uspm.undersporsmal}/>
                             </AnimateOnMount>
                         </div>
                     )
@@ -66,7 +64,7 @@ const RadioKomp = ({ sporsmal }: SpmProps) => {
             <div role="alert" aria-live="assertive">
                 <Vis hvis={errors[sporsmal.id] !== undefined}>
                     <Normaltekst tag="span" className="skjemaelement__feilmelding">
-                        <ErrorMessage as="p" errors={errors} name={sporsmal.id} />
+                        <ErrorMessage as="p" errors={errors} name={sporsmal.id}/>
                     </Normaltekst>
                 </Vis>
             </div>

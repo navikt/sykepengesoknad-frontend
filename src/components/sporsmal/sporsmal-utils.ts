@@ -4,6 +4,7 @@ import { RSSvartype } from '../../types/rs-types/rs-svartype';
 import { Periode } from './typer/periode-komp';
 import { PERIODE_SKILLE, SEPARATOR } from '../../utils/constants';
 import { RSSvarliste } from '../../types/rs-types/rs-svarliste';
+import { RSVisningskriterie } from '../../types/rs-types/rs-visningskriterie';
 
 export const erSisteSide = (soknad: Soknad, sidenummer: number) => {
     const sporsmal = soknad.sporsmal[sidenummer - 1];
@@ -26,10 +27,9 @@ export const hentNokkel = (soknad: Soknad, sidenummer: number) => {
 
 export const settSvar = (sporsmal: Sporsmal, verdier: Record<string, string | number | boolean | Date>): void => {
     const verdi = verdier[sporsmal.id];
-    if (verdier === undefined) {
+    if (verdi === undefined) {
         return;
     }
-
     if (Array.isArray(verdi)) {
         if (sporsmal.svartype === RSSvartype.DATO) {
             sporsmal.svarliste = {
@@ -55,15 +55,28 @@ export const settSvar = (sporsmal: Sporsmal, verdier: Record<string, string | nu
             sporsmalId: sporsmal.id,
             svar: [ { verdi: verdi ? 'CHECKED' : 'UNCHECKED' } ]
         }
-    } else if (verdi !== undefined) {
+    } else if (sporsmal.svartype.startsWith('RADIO_GRUPPE')) {
+        sporsmal.undersporsmal.forEach(uspm => {
+            const erValgt = (uspm.sporsmalstekst === verdi);
+            uspm.svarliste = {
+                sporsmalId: uspm.id,
+                svar: [ { verdi: erValgt ? 'CHECKED' : '' } ]
+            };
+            const timerProsentSporsmal = uspm.undersporsmal[0];
+            timerProsentSporsmal.svarliste = {
+                sporsmalId: timerProsentSporsmal.id,
+                svar: [ { verdi: erValgt ? verdier[timerProsentSporsmal.id].toString() : '' } ]
+            };
+        });
+    } else {
         sporsmal.svarliste = {
             sporsmalId: sporsmal.id,
             svar: [ { verdi: verdi ? verdi.toString() : '' } ]
         };
     }
 
-    sporsmal.undersporsmal.map((spm) => {
-        return settSvar(spm, verdier);
+    sporsmal.undersporsmal.forEach((spm) => {
+        settSvar(spm, verdier);
     });
 };
 
@@ -77,6 +90,13 @@ export const hentSvar = (sporsmal: Sporsmal): any => {
             ukeliste.push(uspm.svarliste);
         });
         return ukeliste;
+    }
+
+    if (sporsmal.svartype.startsWith('RADIO_GRUPPE')) {
+        const besvartSporsmal = sporsmal.undersporsmal.find((spm: Sporsmal) => {
+            return spm.svarliste.svar[0] && spm.svarliste.svar[0].verdi === RSVisningskriterie.CHECKED;
+        });
+        return besvartSporsmal.sporsmalstekst;
     }
 
     if (svar === undefined) {
@@ -94,9 +114,11 @@ export const hentSvar = (sporsmal: Sporsmal): any => {
         });
         return perioder;
     }
+
     if (sporsmal.svartype === RSSvartype.DATO) {
         return new Date(svar.verdi.toString());
     }
+
     return svar.verdi;
 };
 

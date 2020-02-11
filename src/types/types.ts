@@ -201,7 +201,7 @@ export class Sporsmal {
         }
         const idtag = tag as keyof typeof TagTyper;
         this.tag = TagTyper[idtag];
-        this.sporsmalstekst = spm.sporsmalstekst;
+        this.sporsmalstekst = spm.sporsmalstekst === null ? '' : spm.sporsmalstekst;
         this.undertekst = spm.undertekst;
         this.svartype = spm.svartype;
         this.min = spm.min;
