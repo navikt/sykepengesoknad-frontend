@@ -1,17 +1,7 @@
-# gjør det mulig å bytte base-image slik at vi får bygd både innenfor og utenfor NAV
-FROM node as builder
-WORKDIR /app
-
-COPY . ./
-
-RUN npm install
-RUN npm run build
-
-
 FROM nginx:alpine
 RUN mkdir /usr/share/nginx/html/nysykepengesoknad
 COPY nginx.conf /etc/nginx/conf.d/default.conf
-COPY --from=builder /app/build /usr/share/nginx/html/nysykepengesoknad
+COPY /build /usr/share/nginx/html/nysykepengesoknad
 
 
 # Copy .env file and shell script to container

@@ -104,7 +104,7 @@ export const fixSykmeldingDatoer = (sykmelding: Sykmelding) => {
 };
 
 export const ukeDatoListe = (min: string, max: string) => {
-    let ukeListe = [];
+    const ukeListe = [];
     let dato = dayjs(min);
     while (dato.toDate() <= dayjs(max).toDate()) {
         ukeListe.push(dato);

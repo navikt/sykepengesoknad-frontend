@@ -6,7 +6,7 @@ metadata:
   labels:
     team: flex
 spec:
-  image: {{ image }}:{{ tag }}
+  image: {{ image }}
   port: 8080
   ingresses:
     - "https://nysykepengesoknad.nais.oera-q.local/"
