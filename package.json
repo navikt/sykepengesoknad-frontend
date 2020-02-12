@@ -78,13 +78,17 @@
     "@typescript-eslint/parser": "^2.17.0",
     "eslint": "^6.8.0",
     "eslint-config-react": "^1.1.7",
+    "express": "^4.17.1",
+    "http-proxy-middleware": "^0.20.0",
     "jest-environment-jsdom-fifteen": "^1.0.2",
     "react-test-renderer": "^16.12.0",
     "typescript": "^3.7.5",
     "yet-another-fetch-mock": "^3.4.0"
   },
   "scripts": {
-    "start": "craco start",
+    "start-mock": "craco start",
+    "start": "REACT_APP_BACKEND_PROXY=true craco start",
+    "backend-proxy": "node local-backend-proxy/server.js",
     "build": "craco build",
     "test": "craco test",
     "lint": "eslint --ext=ts,tsx src",
