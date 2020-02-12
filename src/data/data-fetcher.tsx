@@ -1,18 +1,18 @@
-import React, { useEffect } from 'react';
+import React, {useEffect} from 'react';
 import Spinner from 'nav-frontend-spinner';
 import useFetch from './rest/use-fetch';
-import { Soknad, Sykmelding } from '../types/types';
-import { FetchState, hasAny401, hasAnyFailed, hasData, isAnyNotStartedOrPending, isNotStarted } from './rest/utils';
-import { useAppStore } from './stores/app-store';
-import { RSSoknad } from '../types/rs-types/rs-soknad';
-import { fixSykmeldingDatoer } from '../utils/dato-utils';
-import { unleashKeys } from './mock/data/toggles';
-import { SYFO_API_SOKNADER } from '../utils/constants';
+import {Soknad, Sykmelding} from '../types/types';
+import {FetchState, hasAny401, hasAnyFailed, hasData, isAnyNotStartedOrPending, isNotStarted} from './rest/utils';
+import {useAppStore} from './stores/app-store';
+import {RSSoknad} from '../types/rs-types/rs-soknad';
+import {fixSykmeldingDatoer} from '../utils/dato-utils';
+import {unleashKeys} from './mock/data/toggles';
 import IngenData from '../pages/feil/ingen-data';
+import environment from "../environment/environment";
 
 export function DataFetcher(props: { children: any }) {
 
-    const { setUnleash, setSoknader, setSykmeldinger } = useAppStore();
+    const {setUnleash, setSoknader, setSykmeldinger} = useAppStore();
 
     const unleash = useFetch<{}>();
     const rssoknader = useFetch<RSSoknad[]>();
@@ -20,17 +20,17 @@ export function DataFetcher(props: { children: any }) {
 
     useEffect(() => {
         if (isNotStarted(unleash)) {
-            unleash.fetch('/syfounleash/', {
+            unleash.fetch(environment.unleashRoot + '/syfounleash/', {
                 method: 'POST',
                 credentials: 'include',
                 body: JSON.stringify(unleashKeys),
-                headers: { 'Content-Type': 'application/json' }
+                headers: {'Content-Type': 'application/json'}
             }, (fetchState: FetchState<{}>) => {
                 setUnleash(fetchState.data);
             })
         }
         if (isNotStarted(rssoknader)) {
-            rssoknader.fetch(SYFO_API_SOKNADER, {
+            rssoknader.fetch(environment.syfoapiRoot + '/syfosoknad/api/soknader', {
                 credentials: 'include',
             }, (fetchState: FetchState<RSSoknad[]>) => {
                 if (hasData(fetchState)) {
@@ -41,7 +41,7 @@ export function DataFetcher(props: { children: any }) {
             })
         }
         if (isNotStarted(sykmeldinger)) {
-            sykmeldinger.fetch('/syforest/sykmeldinger', {
+            sykmeldinger.fetch(environment.syforestRoot + '/sykmeldinger', {
                 credentials: 'include',
             }, (fetchState: FetchState<Sykmelding[]>) => {
                 if (hasData(fetchState)) {
@@ -52,17 +52,17 @@ export function DataFetcher(props: { children: any }) {
             });
         }
         // eslint-disable-next-line
-    }, [ rssoknader ]);
+    }, [rssoknader]);
 
 
-    if (isAnyNotStartedOrPending([ unleash, rssoknader, sykmeldinger ])) {
-        return <Spinner />;
+    if (isAnyNotStartedOrPending([unleash, rssoknader, sykmeldinger])) {
+        return <Spinner/>;
 
-    } else if (hasAny401([ unleash, rssoknader, sykmeldinger ])) {
+    } else if (hasAny401([unleash, rssoknader, sykmeldinger])) {
         window.location.href = `${hentLoginUrl()}?redirect=${window.location.origin}/sykepengesok`;
 
-    } else if (hasAnyFailed([ unleash, rssoknader, sykmeldinger ])) {
-        return <IngenData />;
+    } else if (hasAnyFailed([unleash, rssoknader, sykmeldinger])) {
+        return <IngenData/>;
     }
 
     return props.children;

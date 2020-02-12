@@ -1,9 +1,10 @@
-import FetchMock, { MiddlewareUtils } from 'yet-another-fetch-mock';
-import { soknader } from './data/soknader-felles';
-import { sykmeldinger } from './data/sykmeldinger-felles';
-import { unleashToggles } from './data/toggles';
-import { DECORATOR_URL, SYFO_API_SOKNADER } from '../../utils/constants';
-import { DecoratorHtml } from './data/decorator-html';
+import FetchMock, {MiddlewareUtils} from 'yet-another-fetch-mock';
+import {soknader} from './data/soknader-felles';
+import {sykmeldinger} from './data/sykmeldinger-felles';
+import {unleashToggles} from './data/toggles';
+import {DECORATOR_URL} from '../../utils/constants';
+import {DecoratorHtml} from './data/decorator-html';
+import environment from "../../environment/environment";
 
 const mock = FetchMock.configure({
     enableFallback: true,
@@ -15,6 +16,6 @@ const mock = FetchMock.configure({
 
 mock.get(DECORATOR_URL, DecoratorHtml);
 mock.get('/login', '/sykepengesoknad');
-mock.post('/syfounleash/', unleashToggles);
-mock.get(SYFO_API_SOKNADER, soknader);
-mock.get('/syforest/sykmeldinger', sykmeldinger);
+mock.post(`${environment.unleashRoot}/syfounleash`, unleashToggles);
+mock.get(`${environment.syfoapiRoot}/syfosoknad/api/soknader`, soknader);
+mock.get(`${environment.syforestRoot}/sykmeldinger`, sykmeldinger);
