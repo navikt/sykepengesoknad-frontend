@@ -9,6 +9,7 @@ const SporsmalTekster: any = {
         "soknad.feilmelding.bekreft_opplysninger_utland": "Du må bekrefte at du oppfyller punktene over for å søke om å beholde sykepenger utenfor Norge",
         "soknad.feilmelding.betaler_arbeidsgiver": "Du må svare på om arbeidsgiveren betaler lønnen din når du er syk",
         "soknad.feilmelding.egenmeldinger": "Du må svare på om du brukte egenmeldinger eller var sykmeldt i denne perioden",
+        "soknad.feilmelding.egenmeldinger_nar": "Du må svare på om du var sykmeldt i denne perioden",
         "soknad.feilmelding.ferie": "Du må svare på om du skal ha ferie i hele perioden",
         "soknad.feilmelding.ferie_permisjon_utland": "Du må svare på om har hatt ferie, permisjon eller oppholdt deg utenfor Norge i denne perioden",
         "soknad.feilmelding.ferie_permisjon_utland_hva": "Du må krysse av det som gjelder deg",

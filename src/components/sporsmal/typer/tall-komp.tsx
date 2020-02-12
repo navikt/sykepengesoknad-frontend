@@ -6,6 +6,7 @@ import tekster from '../sporsmal-tekster';
 import { SpmProps } from '../sporsmal-form/sporsmal-form';
 import { hentSvar } from '../sporsmal-utils';
 import UndersporsmalListe from '../undersporsmal/undersporsmal-liste';
+import { getLedetekst } from '../../../utils/utils';
 
 const TallInput = ({ sporsmal }: SpmProps) => {
     const feilmelding = tekster['soknad.feilmelding.' + sporsmal.tag.toLowerCase()];
@@ -31,13 +32,26 @@ const TallInput = ({ sporsmal }: SpmProps) => {
             </Vis>
 
             <div className="medEnhet">
-                <input type="text"
-                    className="skjemaelement__input input--xs"
-                    name={sporsmal.id}
-                    id={sporsmal.id}
-                    ref={register({ required: feilmelding })}
-                    onChange={onChange}
-                    autoComplete="off"
+                <input type="number"
+                       className="skjemaelement__input input--xs"
+                       name={sporsmal.id}
+                       id={sporsmal.id}
+                       ref={register({
+                           required: feilmelding,
+                           min: {
+                               value: sporsmal.min,
+                               message: getLedetekst(tekster['soknad.feilmelding.tall-min-max'],
+                                   { '%MIN%': sporsmal.min, '%MAX%': sporsmal.max })
+                           },
+                           max: {
+                               value: sporsmal.max,
+                               message: getLedetekst(tekster['soknad.feilmelding.tall-min-max'],
+                                   { '%MIN%': sporsmal.min, '%MAX%': sporsmal.max }
+                               )
+                           }
+                       })}
+                       onChange={onChange}
+                       autoComplete="off"
                 />
                 <label className="medEnhet__enhet" htmlFor={sporsmal.id}>{sporsmal.undertekst}</label>
             </div>
@@ -45,14 +59,14 @@ const TallInput = ({ sporsmal }: SpmProps) => {
             <div role="alert" aria-live="assertive">
                 <Vis hvis={errors[sporsmal.id] !== undefined}>
                     <Normaltekst tag="span" className="skjemaelement__feilmelding">
-                        <ErrorMessage as="p" errors={errors} name={sporsmal.id} />
+                        <ErrorMessage as="p" errors={errors} name={sporsmal.id}/>
                     </Normaltekst>
                 </Vis>
             </div>
 
             <div className="undersporsmal" ref={undersporsmal}>
                 <Vis hvis={lokal !== undefined}>
-                    <UndersporsmalListe undersporsmal={sporsmal.undersporsmal} />
+                    <UndersporsmalListe undersporsmal={sporsmal.undersporsmal}/>
                 </Vis>
             </div>
         </React.Fragment>

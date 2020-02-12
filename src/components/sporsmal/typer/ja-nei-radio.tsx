@@ -41,8 +41,8 @@ const JaNeiRadio = ({ sporsmal }: SpmProps) => {
                 {jaNeiValg.map((valg, idx) => {
                     const OK = lokal === valg.value;
                     return (
-                        <>
-                            <div className="radioContainer" key={idx}>
+                        <div key={idx}>
+                            <div className="radioContainer">
                                 <input type="radio"
                                        id={sporsmal.id + '_' + idx}
                                        name={sporsmal.id}
@@ -65,7 +65,7 @@ const JaNeiRadio = ({ sporsmal }: SpmProps) => {
                                     </Normaltekst>
                                 </div>
                             </Vis>
-                        </>
+                        </div>
 
                     )
                 })}

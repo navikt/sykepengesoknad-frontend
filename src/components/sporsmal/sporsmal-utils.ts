@@ -1,8 +1,7 @@
 import { TagTyper } from '../../types/enums';
 import { Soknad, Sporsmal } from '../../types/types';
 import { RSSvartype } from '../../types/rs-types/rs-svartype';
-import { Periode } from './typer/periode-komp';
-import { PERIODE_SKILLE, SEPARATOR } from '../../utils/constants';
+import { empty, PERIODE_SKILLE, SEPARATOR } from '../../utils/constants';
 import { RSSvarliste } from '../../types/rs-types/rs-svarliste';
 import { RSVisningskriterie } from '../../types/rs-types/rs-visningskriterie';
 
@@ -25,10 +24,19 @@ export const hentNokkel = (soknad: Soknad, sidenummer: number) => {
             : `sykepengesoknad.${nokkel}.tittel`;
 };
 
-export const settSvar = (sporsmal: Sporsmal, verdier: Record<string, string | number | boolean | Date>): void => {
-    const verdi = verdier[sporsmal.id];
+const hentVerdier = (sporsmal: Sporsmal, verdier: Record<string, any>) => {
+    return Object.entries(verdier)
+        .filter(([ key ]) => key.startsWith(sporsmal.id))
+        .map(([ key ]) => verdier[key]);
+};
+
+export const settSvar = (sporsmal: Sporsmal, verdier: Record<string, any>): void => {
+    let verdi = verdier[sporsmal.id];
     if (verdi === undefined) {
-        return;
+        verdi = hentVerdier(sporsmal, verdier);
+        if (verdi === undefined) {
+            return;
+        }
     }
     if (Array.isArray(verdi)) {
         if (sporsmal.svartype === RSSvartype.DATO) {
@@ -42,9 +50,9 @@ export const settSvar = (sporsmal: Sporsmal, verdier: Record<string, string | nu
             sporsmal.svarliste = {
                 sporsmalId: sporsmal.id,
                 svar: verdi
-                    .filter((p: Periode) => p.fom !== undefined && p.tom !== undefined)
-                    .map((p: Periode) => {
-                        return { verdi: p.fom.toString() + PERIODE_SKILLE + p.tom.toString() }
+                    .filter((p) => p[0] !== undefined && p[1] !== undefined)
+                    .map((p) => {
+                        return { verdi: p[0].toString() + PERIODE_SKILLE + p[1].toString() }
                     }),
             };
         }
@@ -103,23 +111,32 @@ export const hentSvar = (sporsmal: Sporsmal): any => {
         return sporsmal.svartype.toString().startsWith('PERIODE') ? [] : '';
     }
 
-    if (sporsmal.svartype === RSSvartype.PERIODER || sporsmal.svartype === RSSvartype.PERIODE) {
-        const perioder: Periode[] = [];
-        svarliste.svar.forEach(function (svar) {
-            const datoer = svar.verdi.split(PERIODE_SKILLE);
-            const periode = new Periode();
-            periode.fom = new Date(datoer[0]);
-            periode.tom = new Date(datoer[1]);
-            perioder.push(periode);
-        });
-        return perioder;
-    }
-
     if (sporsmal.svartype === RSSvartype.DATO) {
         return new Date(svar.verdi.toString());
     }
 
     return svar.verdi;
+};
+
+export const hentPerioder = (sporsmal: Sporsmal) => {
+    const svarliste = sporsmal.svarliste;
+    const perioder: number[] = [];
+    svarliste.svar.forEach(function (svar, idx) {
+        perioder.push(idx);
+    });
+    return perioder;
+};
+
+export const hentPeriode = (sporsmal: Sporsmal, index: number) => {
+    const svarliste = sporsmal.svarliste;
+    const periode: Date[] = [];
+    if (svarliste.svar[index] === empty) {
+        return periode;
+    }
+    const datoer = svarliste.svar[index].verdi.split(PERIODE_SKILLE);
+    periode[0] = new Date(datoer[0]);
+    periode[1] = new Date(datoer[1]);
+    return periode;
 };
 
 export const hentFormState = (spmliste: Sporsmal[], id: string) => {

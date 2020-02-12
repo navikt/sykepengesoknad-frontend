@@ -6,13 +6,13 @@ import { Sporsmal } from '../../types/types';
 import UkjentSporsmal from './typer/ukjent-sporsmal';
 import CheckboxPanel from './typer/checkbox-panel';
 import { RSSvartype } from '../../types/rs-types/rs-svartype';
-import PeriodeInput from './typer/periode-komp';
 import IkkeRelevant from './typer/ikke-relevant';
 import CheckboxKomp from './typer/checkbox-komp';
 import RadioKomp from './typer/radio-komp';
 import JaNeiRadio from './typer/ja-nei-radio';
 import './undersporsmal/undersporsmal.less';
 import BehDager from './typer/beh-dager';
+import Perioder from './typer/perioder';
 
 interface UndersporsmalProps {
     sporsmal: Sporsmal;
@@ -31,7 +31,7 @@ const SporsmalSwitch = ({ sporsmal }: UndersporsmalProps) => {
             return <DatoInput sporsmal={sporsmal} />;
 
         case RSSvartype.PERIODER:
-            return <PeriodeInput sporsmal={sporsmal} />;
+            return <Perioder sporsmal={sporsmal}/>;
 
         case RSSvartype.JA_NEI:
             if (sporsmal.parentKriterie === 'CHECKED' || sporsmal.parentKriterie === 'JA' || sporsmal.undersporsmal.length === 0) {
