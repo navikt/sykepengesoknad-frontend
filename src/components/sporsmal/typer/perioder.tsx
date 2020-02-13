@@ -3,12 +3,12 @@ import { Element } from 'nav-frontend-typografi';
 import Vis from '../../vis';
 import tekster from '../sporsmal-tekster';
 import { SpmProps } from '../sporsmal-form/sporsmal-form';
-import { hentPerioder } from '../sporsmal-utils';
 import UndersporsmalListe from '../undersporsmal/undersporsmal-liste';
 import './flatpickr.less';
 import useForceUpdate from 'use-force-update';
 import PeriodeKomp from './periode-komp';
 import { empty } from '../../../utils/constants';
+import { hentPerioder } from '../hent-svar';
 
 const Perioder = ({ sporsmal }: SpmProps) => {
     const [ lokal, setLokal ] = useState<number[]>([ 0 ]);
@@ -19,6 +19,7 @@ const Perioder = ({ sporsmal }: SpmProps) => {
         const svar = hentPerioder(sporsmal);
         setLokal(svar.length > 0 ? svar : lokal);
         lagIdForPerioder();
+        // eslint-disable-next-line
     }, [ sporsmal ]);
 
     const lagIdForPerioder = () => {
@@ -28,6 +29,7 @@ const Perioder = ({ sporsmal }: SpmProps) => {
             input.setAttribute('id', sporsmal.id + '_t_' + key);
             input.setAttribute('autoComplete', 'off');
         })
+
     };
 
     const oppdaterPerioder = () => {
@@ -46,7 +48,7 @@ const Perioder = ({ sporsmal }: SpmProps) => {
 
     const leggTilPeriode = (e: any) => {
         e.preventDefault();
-        lokal.push(lokal.length);
+        lokal.push(lokal[lokal.length - 1] + 1);
         setLokal(lokal);
         oppdaterPerioder();
     };

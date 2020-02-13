@@ -39,6 +39,7 @@ const SporsmalTekster: any = {
         "soknad.feilmelding.utdanning": "Du må svare på om du har vært under utdanning i denne perioden",
         "soknad.feilmelding.utdanning_start": "Du må svare på når du startet på utdanningen",
         "soknad.feilmelding.utland": "Du må svare på om du har oppholdt deg i utlandet i denne perioden",
+        "soknad.feilmelding.utland_nar_v2": "Du må svare på om du har vært utenfor EØS i denne perioden",
         "soknad.feilmelding.utlandsopphold_sokt_sykepenger": "Du må svare på om du har søkt om å beholde sykepenger under dette oppholdet utenfor Norge",
 
         "soknad.hjelpetekst.ferie_v2": "Vi spør om ferie fordi du ikke kan få sykepenger og feriepenger samtidig. Tar du ferie, får du i stedet feriepenger.",

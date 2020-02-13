@@ -3,8 +3,8 @@ import React, { useEffect, useState } from 'react';
 import { Element, Normaltekst } from 'nav-frontend-typografi';
 import Vis from '../../vis';
 import { SpmProps } from '../sporsmal-form/sporsmal-form';
-import { hentSvar } from '../sporsmal-utils';
 import tekster from '../sporsmal-tekster';
+import { hentSvar } from '../hent-svar';
 
 const jaNeiValg = [ {
     value: 'JA',
@@ -22,6 +22,7 @@ const JaNeiRadio = ({ sporsmal }: SpmProps) => {
         const lagret = hentSvar(sporsmal);
         setValue(sporsmal.id, lagret);
         setLokal(lagret);
+        // eslint-disable-next-line
     }, [ sporsmal ]);
 
     const changeValue = (value: string) => {

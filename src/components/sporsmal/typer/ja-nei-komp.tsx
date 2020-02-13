@@ -3,7 +3,7 @@ import React, { useEffect } from 'react';
 import { Element, Normaltekst } from 'nav-frontend-typografi';
 import Vis from '../../vis';
 import { SpmProps } from '../sporsmal-form/sporsmal-form';
-import { hentFormState, hentSvar } from '../sporsmal-utils';
+import { hentFormState, hentSvar } from '../hent-svar';
 import UndersporsmalListe from '../undersporsmal/undersporsmal-liste';
 import AnimateOnMount from '../../animate-on-mount';
 import TagBjorn from '../bjorn/tag-bjorn';
