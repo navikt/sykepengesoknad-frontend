@@ -1,6 +1,8 @@
 class Environment {
 
-    get nodeEnv() {
+    private env = (window as any)._env_ || {};
+
+    private get nodeEnv() {
         return process.env.NODE_ENV;
     }
 
@@ -12,8 +14,20 @@ class Environment {
         return this.nodeEnv === 'development';
     }
 
-    get isRunningOnHeroku() {
-        return window.location.hostname.endsWith('herokuapp.com');
+    get syfoapiRoot() {
+        return this.env.SYFOAPI_ROOT
+    }
+
+    get syforestRoot() {
+        return this.env.SYFOREST_ROOT
+    }
+
+    get unleashUrl() {
+        return this.env.UNLEASH_URL
+    }
+
+    get mockBackend() {
+        return this.env.MOCK_BACKEND
     }
 }
 
