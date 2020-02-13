@@ -1,6 +1,6 @@
 class Environment {
 
-    private env = (window as any)._env_;
+    private env = (window as any)._env_ || {};
 
     private get nodeEnv() {
         return process.env.NODE_ENV;
