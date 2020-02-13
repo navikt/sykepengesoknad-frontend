@@ -8,7 +8,7 @@ import {RSSoknad} from '../types/rs-types/rs-soknad';
 import {fixSykmeldingDatoer} from '../utils/dato-utils';
 import {unleashKeys} from './mock/data/toggles';
 import IngenData from '../pages/feil/ingen-data';
-import environment from "../environment/environment";
+import env from "../utils/environment";
 
 export function DataFetcher(props: { children: any }) {
 
@@ -20,7 +20,7 @@ export function DataFetcher(props: { children: any }) {
 
     useEffect(() => {
         if (isNotStarted(unleash)) {
-            unleash.fetch(environment.unleashRoot + '/syfounleash/', {
+            unleash.fetch(env.unleashUrl, {
                 method: 'POST',
                 credentials: 'include',
                 body: JSON.stringify(unleashKeys),
@@ -30,7 +30,7 @@ export function DataFetcher(props: { children: any }) {
             })
         }
         if (isNotStarted(rssoknader)) {
-            rssoknader.fetch(environment.syfoapiRoot + '/syfosoknad/api/soknader', {
+            rssoknader.fetch(env.syfoapiRoot + '/syfosoknad/api/soknader', {
                 credentials: 'include',
             }, (fetchState: FetchState<RSSoknad[]>) => {
                 if (hasData(fetchState)) {
@@ -41,7 +41,7 @@ export function DataFetcher(props: { children: any }) {
             })
         }
         if (isNotStarted(sykmeldinger)) {
-            sykmeldinger.fetch(environment.syforestRoot + '/sykmeldinger', {
+            sykmeldinger.fetch(env.syforestRoot + '/sykmeldinger', {
                 credentials: 'include',
             }, (fetchState: FetchState<Sykmelding[]>) => {
                 if (hasData(fetchState)) {

@@ -4,7 +4,7 @@ import {sykmeldinger} from './data/sykmeldinger-felles';
 import {unleashToggles} from './data/toggles';
 import {DECORATOR_URL} from '../../utils/constants';
 import {DecoratorHtml} from './data/decorator-html';
-import environment from "../../environment/environment";
+import env from "../../utils/environment";
 
 const mock = FetchMock.configure({
     enableFallback: true,
@@ -16,6 +16,6 @@ const mock = FetchMock.configure({
 
 mock.get(DECORATOR_URL, DecoratorHtml);
 mock.get('/login', '/sykepengesoknad');
-mock.post(`${environment.unleashRoot}/syfounleash`, unleashToggles);
-mock.get(`${environment.syfoapiRoot}/syfosoknad/api/soknader`, soknader);
-mock.get(`${environment.syforestRoot}/sykmeldinger`, sykmeldinger);
+mock.post(env.unleashUrl, unleashToggles);
+mock.get(`${env.syfoapiRoot}/syfosoknad/api/soknader`, soknader);
+mock.get(`${env.syforestRoot}/sykmeldinger`, sykmeldinger);

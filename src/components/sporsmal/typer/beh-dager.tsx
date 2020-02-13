@@ -10,7 +10,7 @@ import './beh.dager.less';
 import { RSSvarliste } from '../../../types/rs-types/rs-svarliste';
 
 const BehDager = ({ sporsmal }: SpmProps) => {
-    const { register, errors, setValue, watch } = useFormContext();
+    const { register, errors, setValue } = useFormContext();
     const antallUker = sporsmal.undersporsmal.length;
     const [ lokal, setLokal ] = useState<string[]>(new Array(antallUker).fill(''));
 

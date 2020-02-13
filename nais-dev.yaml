@@ -6,7 +6,7 @@ metadata:
   labels:
     team: flex
 spec:
-  image: {{ image }}:{{ tag }}
+  image: {{ image }}
   port: 8080
   ingresses:
     - "https://nysykepengesoknad.nais.oera-q.local/"
@@ -15,3 +15,13 @@ spec:
     path: internal/isAlive
   readiness:
     path: internal/isReady
+  env:
+    - name: SYFOAPI_ROOT
+      value: "https://syfoapi-q.nav.no"
+    - name: SYFOREST_ROOT
+      value: "https://tjenester-q1.nav.no/syforest"
+    - name: LOGINSERVICE_URL
+      value: "https://loginservice-q.nav.no/login"
+    - name: UNLEASH_URL
+      value: "https://tjenester-q1.nav.no/syfounleash"
+
