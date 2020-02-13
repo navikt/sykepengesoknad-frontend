@@ -1,7 +1,7 @@
 import React, { useEffect, useRef } from 'react';
 import { ErrorMessage, useFormContext } from 'react-hook-form';
 import tekster from '../sporsmal-tekster';
-import { hentSvar } from '../sporsmal-utils';
+import { hentSvar } from '../hent-svar';
 import Vis from '../../vis';
 import { Normaltekst } from 'nav-frontend-typografi';
 import { SpmProps } from '../sporsmal-form/sporsmal-form';

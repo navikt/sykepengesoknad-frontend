@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import { SpmProps } from '../sporsmal-form/sporsmal-form';
-import { hentSvar } from '../sporsmal-utils';
+import { hentSvar } from '../hent-svar';
 import { ErrorMessage, useFormContext } from 'react-hook-form';
 import Vis from '../../vis';
 import { Element, Normaltekst } from 'nav-frontend-typografi';

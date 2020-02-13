@@ -4,7 +4,7 @@ import { Element, Normaltekst } from 'nav-frontend-typografi';
 import Vis from '../../vis';
 import tekster from '../sporsmal-tekster';
 import { SpmProps } from '../sporsmal-form/sporsmal-form';
-import { hentSvar } from '../sporsmal-utils';
+import { hentSvar } from '../hent-svar';
 import UndersporsmalListe from '../undersporsmal/undersporsmal-liste';
 import Flatpickr from 'react-flatpickr';
 import { Norwegian } from 'flatpickr/dist/l10n/no.js'
@@ -38,9 +38,6 @@ const DatoInput = ({ sporsmal }: SpmProps) => {
                 rules={{ required: feilmelding }}
                 id={sporsmal.id}
                 name={sporsmal.id}
-                onChange={(data: any) => {
-                    return data[0]
-                }}
                 className="skjemaelement__input input--s"
                 placeholder="dd.mm.yyyy"
                 options={{

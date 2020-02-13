@@ -1,6 +1,6 @@
 import { Element, Normaltekst } from 'nav-frontend-typografi';
 import React, { useEffect, useState } from 'react';
-import { hentSvar } from '../sporsmal-utils';
+import { hentSvar } from '../hent-svar';
 import { SpmProps } from '../sporsmal-form/sporsmal-form';
 import { ErrorMessage, useFormContext } from 'react-hook-form';
 import Vis from '../../vis';
@@ -25,6 +25,7 @@ const BehDager = ({ sporsmal }: SpmProps) => {
             }
         });
         setLokal(lokal);
+        // eslint-disable-next-line
     }, [ sporsmal ]);
 
     const dagerSidenMandag = (spm: Sporsmal) => {

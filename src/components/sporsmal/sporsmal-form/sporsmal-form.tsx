@@ -4,7 +4,7 @@ import { useHistory, useParams } from 'react-router-dom';
 import Knapperad from './knapperad';
 import { Sporsmal } from '../../../types/types';
 import SporsmalSwitch from '../sporsmal-switch';
-import { pathUtenSteg, settSvar } from '../sporsmal-utils';
+import { pathUtenSteg } from '../sporsmal-utils';
 import { useAppStore } from '../../../data/stores/app-store';
 import FeilOppsummering from '../../skjema/feiloppsummering/feil-oppsummering';
 import Vis from '../../vis';
@@ -16,6 +16,7 @@ import { RSSoknadstatus } from '../../../types/rs-types/rs-soknadstatus';
 import { SvarTil } from '../../../types/enums';
 import './sporsmal-form.less';
 import Oppsummering from "../../soknaden/oppsummering/oppsummering";
+import { settSvar } from '../sett-svar';
 
 export interface SpmProps {
     sporsmal: Sporsmal;

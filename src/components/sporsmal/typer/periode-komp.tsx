@@ -4,8 +4,9 @@ import Flatpickr from 'react-flatpickr';
 import React, { useEffect } from 'react';
 import { SpmProps } from '../sporsmal-form/sporsmal-form';
 import { Norwegian } from 'flatpickr/dist/l10n/no.js'
-import { hentPeriode } from '../sporsmal-utils';
 import { Normaltekst } from 'nav-frontend-typografi';
+import Vis from '../../vis';
+import { hentPeriode } from '../hent-svar';
 
 interface PeriodeProps {
     index: number;
@@ -21,16 +22,8 @@ const PeriodeKomp = ({ sporsmal, index, slettPeriode }: AllProps) => {
 
     useEffect(() => {
         setValue(id, hentPeriode(sporsmal, index));
+        // eslint-disable-next-line
     }, [ sporsmal ]);
-
-    const onChange = (data: any) => {
-        if (data[0][1] !== undefined) {
-            const fom: Date = data[0][0];
-            const tom: Date = data[0][1];
-            return [ fom, tom ];
-        }
-        return data[0][0];
-    };
 
     return (
         <li className="periode">
@@ -49,7 +42,6 @@ const PeriodeKomp = ({ sporsmal, index, slettPeriode }: AllProps) => {
                 }}
                 id={id}
                 name={id}
-                onChange={onChange}
                 className="skjemaelement__input input--m"
                 placeholder="dd.mm.yyyy til dd.mm.yyyy"
                 options={{
@@ -65,10 +57,12 @@ const PeriodeKomp = ({ sporsmal, index, slettPeriode }: AllProps) => {
                 }}
             />
 
-            <button role="link" id={'btn_' + index} className="periodeknapp lenke slett"
-                    onClick={(e) => slettPeriode(e, index)}>
-                {tekster['sykepengesoknad.periodevelger.slett']}
-            </button>
+            <Vis hvis={index > 0}>
+                <button role="link" id={'btn_' + id} className="periodeknapp lenke slett"
+                        onClick={(e) => slettPeriode(e, index)}>
+                    {tekster['sykepengesoknad.periodevelger.slett']}
+                </button>
+            </Vis>
 
             <div role="alert" aria-live="assertive">
                 <Normaltekst tag="span" className="skjemaelement__feilmelding">

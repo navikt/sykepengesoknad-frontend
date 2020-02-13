@@ -4,9 +4,9 @@ import { Element, Normaltekst } from 'nav-frontend-typografi';
 import Vis from '../../vis';
 import tekster from '../sporsmal-tekster';
 import { SpmProps } from '../sporsmal-form/sporsmal-form';
-import { hentSvar } from '../sporsmal-utils';
 import UndersporsmalListe from '../undersporsmal/undersporsmal-liste';
 import { getLedetekst } from '../../../utils/utils';
+import { hentSvar } from '../hent-svar';
 
 const TallInput = ({ sporsmal }: SpmProps) => {
     const feilmelding = tekster['soknad.feilmelding.' + sporsmal.tag.toLowerCase()];

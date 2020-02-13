@@ -1,28 +1,24 @@
 import React, { useEffect } from 'react';
 import { SpmProps } from '../sporsmal-form/sporsmal-form';
 import { RSSvartype } from '../../../types/rs-types/rs-svartype';
-import { hentSvar } from '../sporsmal-utils';
 import { ErrorMessage, useFormContext } from 'react-hook-form';
 import Vis from '../../vis';
 import { Element, Normaltekst } from 'nav-frontend-typografi';
 import AnimateOnMount from '../../animate-on-mount';
 import UndersporsmalListe from '../undersporsmal/undersporsmal-liste';
+import { hentSvar } from '../hent-svar';
 
 const RadioKomp = ({ sporsmal }: SpmProps) => {
     const { register, setValue, errors, watch } = useFormContext();
     const radioWatch = watch(sporsmal.id);
 
     useEffect(() => {
-        const svar = hentSvar(sporsmal);
-        setValue(sporsmal.id, svar);
-    }, [ sporsmal ]);
-
-    const changeValue = (value: string) => {
-        setValue(sporsmal.id, value);
-    };
+        setValue(sporsmal.id, hentSvar(sporsmal));
+        // eslint-disable-next-line
+    }, [ sporsmal.id ]);
 
     return (
-        <React.Fragment>
+        <>
             <Vis hvis={sporsmal.sporsmalstekst !== null}>
                 <Element tag="h3" className="skjema__sporsmal">{sporsmal.sporsmalstekst}</Element>
             </Vis>
@@ -38,9 +34,6 @@ const RadioKomp = ({ sporsmal }: SpmProps) => {
                                    id={uspm.id}
                                    name={sporsmal.id}
                                    value={uspm.sporsmalstekst}
-                                   checked={radioWatch === uspm.sporsmalstekst}
-                                   aria-checked={radioWatch === uspm.sporsmalstekst}
-                                   onChange={() => changeValue(uspm.sporsmalstekst)}
                                    ref={register({ required: 'Et alternativ må velges' })}
                                    className="skjemaelement__input radioknapp"
                             />
@@ -68,7 +61,7 @@ const RadioKomp = ({ sporsmal }: SpmProps) => {
                     </Normaltekst>
                 </Vis>
             </div>
-        </React.Fragment>
+        </>
     )
 };
 
