@@ -25,18 +25,20 @@ export const hentNokkel = (soknad: Soknad, sidenummer: number) => {
 };
 
 const hentVerdier = (sporsmal: Sporsmal, verdier: Record<string, any>) => {
-    return Object.entries(verdier)
-        .filter(([ key ]) => key.startsWith(sporsmal.id))
-        .map(([ key ]) => verdier[key]);
+    let verdi = verdier[sporsmal.id];
+    if (verdi === undefined) {
+        verdi = Object.entries(verdier)
+            .filter(([ key ]) => key.startsWith(sporsmal.id))
+            .map(([ key ]) => verdier[key])
+            .filter((verdi) => verdi !== empty);
+    }
+    return verdi;
 };
 
 export const settSvar = (sporsmal: Sporsmal, verdier: Record<string, any>): void => {
-    let verdi = verdier[sporsmal.id];
+    const verdi = hentVerdier(sporsmal, verdier);
     if (verdi === undefined) {
-        verdi = hentVerdier(sporsmal, verdier);
-        if (verdi === undefined) {
-            return;
-        }
+        return;
     }
     if (Array.isArray(verdi)) {
         if (sporsmal.svartype === RSSvartype.DATO) {
@@ -50,9 +52,9 @@ export const settSvar = (sporsmal: Sporsmal, verdier: Record<string, any>): void
             sporsmal.svarliste = {
                 sporsmalId: sporsmal.id,
                 svar: verdi
-                    .filter((p) => p[0] !== undefined && p[1] !== undefined)
-                    .map((p) => {
-                        return { verdi: p[0].toString() + PERIODE_SKILLE + p[1].toString() }
+                    .filter((periode) => periode[0] !== undefined && periode[1] !== undefined)
+                    .map((periode) => {
+                        return { verdi: periode[0].toString() + PERIODE_SKILLE + periode[1].toString() }
                     }),
             };
         }
@@ -61,7 +63,7 @@ export const settSvar = (sporsmal: Sporsmal, verdier: Record<string, any>): void
         sporsmal.svartype === RSSvartype.CHECKBOX_GRUPPE) {
         sporsmal.svarliste = {
             sporsmalId: sporsmal.id,
-            svar: [ { verdi: verdi ? 'CHECKED' : 'UNCHECKED' } ]
+            svar: [ { verdi: verdi ? 'CHECKED' : '' } ]
         }
     } else if (sporsmal.svartype.startsWith('RADIO_GRUPPE')) {
         sporsmal.undersporsmal.forEach(uspm => {
@@ -119,18 +121,17 @@ export const hentSvar = (sporsmal: Sporsmal): any => {
 };
 
 export const hentPerioder = (sporsmal: Sporsmal) => {
-    const svarliste = sporsmal.svarliste;
     const perioder: number[] = [];
-    svarliste.svar.forEach(function (svar, idx) {
-        perioder.push(idx);
-    });
+    sporsmal.svarliste.svar.forEach((svar, idx) =>
+        perioder.push(idx)
+    );
     return perioder;
 };
 
 export const hentPeriode = (sporsmal: Sporsmal, index: number) => {
     const svarliste = sporsmal.svarliste;
     const periode: Date[] = [];
-    if (svarliste.svar[index] === empty) {
+    if (svarliste.svar.length === 0) {
         return periode;
     }
     const datoer = svarliste.svar[index].verdi.split(PERIODE_SKILLE);

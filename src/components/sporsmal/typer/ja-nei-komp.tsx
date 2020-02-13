@@ -98,7 +98,7 @@ const JaNeiInput = ({ sporsmal }: SpmProps) => {
             </div>
 
             <AnimateOnMount
-                mounted={watchVerdi === 'JA'}
+                mounted={watchVerdi === sporsmal.kriterieForVisningAvUndersporsmal}
                 enter="undersporsmal--vis"
                 leave="undersporsmal--skjul"
                 start="undersporsmal"

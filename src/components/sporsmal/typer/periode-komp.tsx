@@ -65,7 +65,7 @@ const PeriodeKomp = ({ sporsmal, index, slettPeriode }: AllProps) => {
                 }}
             />
 
-            <button role="link" id={'btn_' + index} className="periodeknapp lenke slett"
+            <button role="link" id={'btn_' + id} className="periodeknapp lenke slett"
                     onClick={(e) => slettPeriode(e, index)}>
                 {tekster['sykepengesoknad.periodevelger.slett']}
             </button>
