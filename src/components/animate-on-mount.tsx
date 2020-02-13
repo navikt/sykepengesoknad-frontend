@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import Vis from './vis';
 
 interface AnimateOnMountProps {
@@ -20,6 +20,7 @@ const AnimateOnMount = (
 
     const [ styles, setStyles ] = useState<string>(null);
     const [ show, setShow ] = useState<boolean>(mounted);
+    const animRef = useRef<HTMLDivElement>(null);
 
     useEffect(() => {
         if (mounted) {
@@ -32,13 +33,14 @@ const AnimateOnMount = (
     }, [ mounted ]);
 
     const onTransitionEnd = () => {
+        window.scrollTo({top: animRef.current.offsetTop, left: 0, behavior: 'smooth'});
         if (styles === leave) {
             setShow(false);
         }
     };
 
     return (
-        <div className={`${start} ${styles}`} onTransitionEnd={onTransitionEnd}>
+        <div ref={animRef} className={`${start} ${styles}`} onTransitionEnd={onTransitionEnd}>
             <Vis hvis={show}>
                 {children}
             </Vis>
