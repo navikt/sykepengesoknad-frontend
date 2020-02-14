@@ -19,7 +19,6 @@ export const settSvar = (sporsmal: Sporsmal, verdier: Record<string, any>): void
     if (verdi === undefined) {
         return;
     }
-    console.log('sporsmal.id', [ sporsmal.id, sporsmal.svartype, verdi ]); // eslint-disable-line
     switch (sporsmal.svartype) {
         case RSSvartype.CHECKBOX_PANEL:
         case RSSvartype.CHECKBOX:

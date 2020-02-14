@@ -83,11 +83,8 @@ export const SporsmalVarianter = ({ sporsmal }: OppsummeringProps) => {
         case RSSvartype.RADIO_GRUPPE: {
             return <RadioGruppe sporsmal={sporsmal}/>;
         }
-        case RSSvartype.BEHANDLINGSDAGER: {
+        case RSSvartype.INFO_BEHANDLINGSDAGER: {
             return <Behandlingsdager sporsmal={sporsmal}/>;
-        }
-        case RSSvartype.RADIO_GRUPPE_UKEKALENDER: {
-            return <DatoSum sporsmal={sporsmal}/>
         }
         default: {
             return null;
