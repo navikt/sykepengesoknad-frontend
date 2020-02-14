@@ -10,9 +10,9 @@ import IkkeRelevant from './typer/ikke-relevant';
 import CheckboxKomp from './typer/checkbox-komp';
 import RadioKomp from './typer/radio-komp';
 import JaNeiRadio from './typer/ja-nei-radio';
-import './undersporsmal/undersporsmal.less';
 import BehDager from './typer/beh-dager';
 import Perioder from './typer/perioder';
+import './undersporsmal/undersporsmal.less';
 
 interface UndersporsmalProps {
     sporsmal: Sporsmal;

@@ -2,9 +2,8 @@ import React from 'react';
 import Ekspanderbartpanel from 'nav-frontend-ekspanderbartpanel';
 import { useAppStore } from '../../../data/stores/app-store';
 import { RSSvartype } from '../../../types/rs-types/rs-svartype';
-import { TagTyper } from "../../../types/enums";
+import { TagTyper } from '../../../types/enums';
 import tekster from './oppsummering-tekster';
-import './oppsummering.less';
 import { Sporsmal } from '../../../types/types';
 import CheckboxSum from './utdrag/checkbox-sum';
 import JaEllerNei from './utdrag/ja-eller-nei';
@@ -16,7 +15,8 @@ import UndertekstSum from './utdrag/undertekst-sum';
 import CheckboxGruppe from './utdrag/checkbox-gruppe';
 import TallSum from './utdrag/tall-sum';
 import RadioGruppe from './utdrag/radio-gruppe';
-import Behandlingsdager from "./utdrag/behandlingsdager";
+import Behandlingsdager from './utdrag/behandlingsdager';
+import './oppsummering.less';
 
 export interface OppsummeringProps {
     sporsmal: Sporsmal;

@@ -14,16 +14,16 @@ import SendtTil from '../../../pages/soknad/sendt-til';
 import { SEPARATOR } from '../../../utils/constants';
 import { RSSoknadstatus } from '../../../types/rs-types/rs-soknadstatus';
 import { SvarTil } from '../../../types/enums';
-import './sporsmal-form.less';
-import Oppsummering from "../../soknaden/oppsummering/oppsummering";
+import Oppsummering from '../../soknaden/oppsummering/oppsummering';
 import { settSvar } from '../sett-svar';
+import './sporsmal-form.less';
 
 export interface SpmProps {
     sporsmal: Sporsmal;
 }
 
 const SporsmalForm = () => {
-    const { setValgtSoknad, valgtSoknad, sendTil } = useAppStore();
+    const { setValgtSoknad, valgtSoknad, sendTil, setTop } = useAppStore();
     const [ erSiste, setErSiste ] = useState<boolean>(false);
     const { stegId } = useParams();
     const history = useHistory();
@@ -56,8 +56,8 @@ const SporsmalForm = () => {
             setValgtSoknad(valgtSoknad);
         }
         methods.reset();
-        //methods.unregister(sporsmal.id);
         setValgtSoknad(valgtSoknad);
+        setTop(0);
         erSiste
             ? history.push(pathUtenSteg(history.location.pathname).replace('soknader', 'kvittering'))
             : history.push(pathUtenSteg(history.location.pathname) + SEPARATOR + (spmIndex + 2));
@@ -67,7 +67,7 @@ const SporsmalForm = () => {
         <FormContext {...methods}>
             <form onSubmit={methods.handleSubmit(onSubmit)}
                   className={'sporsmal__form ' + nesteSporsmal.tag.toLowerCase()}>
-                <FeilOppsummering visFeilliste={true} errors={methods.errors}/>
+                <FeilOppsummering errors={methods.errors}/>
                 <SporsmalSwitch sporsmal={sporsmal}/>
 
                 <Vis hvis={erSiste}>

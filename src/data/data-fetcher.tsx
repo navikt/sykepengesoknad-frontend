@@ -8,7 +8,7 @@ import {RSSoknad} from '../types/rs-types/rs-soknad';
 import {fixSykmeldingDatoer} from '../utils/dato-utils';
 import {unleashKeys} from './mock/data/toggles';
 import IngenData from '../pages/feil/ingen-data';
-import env from "../utils/environment";
+import env from '../utils/environment';
 
 export function DataFetcher(props: { children: any }) {
 

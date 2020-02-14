@@ -10,6 +10,7 @@ export const useAppStore = createUseContext(() => {
     const [ valgtSoknad, setValgtSoknad ] = useState<Soknad>();
     const [ valgtSykmelding, setValgtSykmelding ] = useState<Sykmelding>();
     const [ sendTil, setSendTil ] = useState<SvarTil[]>([]);
+    const [ top, setTop ] = useState<number>(0);
 
     return {
         unleash, setUnleash,
@@ -18,5 +19,6 @@ export const useAppStore = createUseContext(() => {
         sykmeldinger, setSykmeldinger,
         valgtSykmelding, setValgtSykmelding,
         sendTil, setSendTil,
+        top, setTop,
     };
 });

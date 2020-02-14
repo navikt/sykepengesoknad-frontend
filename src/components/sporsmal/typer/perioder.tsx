@@ -4,11 +4,11 @@ import Vis from '../../vis';
 import tekster from '../sporsmal-tekster';
 import { SpmProps } from '../sporsmal-form/sporsmal-form';
 import UndersporsmalListe from '../undersporsmal/undersporsmal-liste';
-import './flatpickr.less';
 import useForceUpdate from 'use-force-update';
 import PeriodeKomp from './periode-komp';
 import { empty } from '../../../utils/constants';
 import { hentPerioder } from '../hent-svar';
+import './flatpickr.less';
 
 const Perioder = ({ sporsmal }: SpmProps) => {
     const [ lokal, setLokal ] = useState<number[]>([ 0 ]);

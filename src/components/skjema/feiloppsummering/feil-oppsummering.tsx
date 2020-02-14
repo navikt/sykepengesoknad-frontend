@@ -1,38 +1,21 @@
 import React, { useEffect, useRef } from 'react';
 import Vis from '../../vis';
 import { erSynligIViewport, getTop } from '../../../utils/browser-utils';
+import { Undertittel } from 'nav-frontend-typografi';
+import Lenke from 'nav-frontend-lenker';
 import './feil-oppsummering.less';
-import { Feiloppsummering } from 'nav-frontend-skjema';
 
 interface FeiloppsummeringProps {
     settFokus?: boolean;
-    skjemanavn?: string;
-    visFeilliste: boolean;
     errors: any;
-/*
-    errors?: {
-        felt: {
-            navn: {
-                type: string;
-                message: string;
-                ref: HTMLInputElement;
-            };
-        };
-    };
-*/
 }
 
 const FeilOppsummering = (props: FeiloppsummeringProps) => {
     const oppsummering = useRef<HTMLDivElement>(null);
-    const feilmeldinger = Object.entries(props.errors).map((error: any) => {
-        return {
-            skjemaelementId: error[0],
-            feilmelding: error[1]['message']
-        };
-    });
+    const { settFokus, errors } = props;
+    let entries: any[] = Object.entries(errors);
 
     useEffect(() => {
-        const { settFokus } = props;
         let fokuser = settFokus;
         if (fokuser === undefined) {
             fokuser = true;
@@ -56,8 +39,17 @@ const FeilOppsummering = (props: FeiloppsummeringProps) => {
 
     return (
         <div aria-live="polite" role="alert">
-            <Vis hvis={feilmeldinger.length > 0 && props.visFeilliste}>
-                <Feiloppsummering tittel={'Det er ' + feilmeldinger.length + ' feil i skjemaet'} feil={feilmeldinger}/>
+            <Vis hvis={entries.length > 0}>
+                <div tabIndex={0} role="region" className="feiloppsummering">
+                    <Undertittel>{'Det er ' + entries.length + ' feil i skjemaet'}</Undertittel>
+                    <ul className="feiloppsummering__liste">
+                        {entries.map((list, index) => (
+                            <li key={index}>
+                                <Lenke href={`#${list[0]}`}>{list[1].message}</Lenke>
+                            </li>
+                        ))}
+                    </ul>
+                </div>
             </Vis>
         </div>
     );

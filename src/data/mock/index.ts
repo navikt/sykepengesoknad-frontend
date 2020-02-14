@@ -4,7 +4,7 @@ import {sykmeldinger} from './data/sykmeldinger-felles';
 import {unleashToggles} from './data/toggles';
 import {DECORATOR_URL} from '../../utils/constants';
 import {DecoratorHtml} from './data/decorator-html';
-import env from "../../utils/environment";
+import env from '../../utils/environment';
 
 const mock = FetchMock.configure({
     enableFallback: true,

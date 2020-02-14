@@ -5,7 +5,6 @@ import { Brodsmule } from '../../types/types';
 import personIkon from './person.svg';
 import { Normaltekst } from 'nav-frontend-typografi';
 import './brodsmuler.less';
-import SykSokLokalt from './syk-sok-lokalt';
 
 const BrodsmuleBit = ({ sti, tittel, sisteSmule, erKlikkbar }: Brodsmule) => {
     const erEkstern = sti && sti.includes(process.env.REACT_APP_SYKEFRAVAER_CONTEXT_ROOT!);
@@ -91,7 +90,6 @@ const Brodsmuler = ({ brodsmuler }: BrodsmulerProps) => {
                         })}
                 </Normaltekst>
             </nav>
-            <SykSokLokalt />
         </>
     );
 };

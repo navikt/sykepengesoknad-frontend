@@ -6,8 +6,8 @@ import { ErrorMessage, useFormContext } from 'react-hook-form';
 import Vis from '../../vis';
 import { Sporsmal } from '../../../types/types';
 import { ukeDatoListe } from '../../../utils/dato-utils';
-import './beh.dager.less';
 import { RSSvarliste } from '../../../types/rs-types/rs-svarliste';
+import './beh.dager.less';
 
 const BehDager = ({ sporsmal }: SpmProps) => {
     const { register, errors, setValue } = useFormContext();

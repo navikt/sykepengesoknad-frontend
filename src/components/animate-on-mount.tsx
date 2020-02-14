@@ -1,5 +1,6 @@
 import React, { useEffect, useRef, useState } from 'react';
 import Vis from './vis';
+import { useAppStore } from '../data/stores/app-store';
 
 interface AnimateOnMountProps {
     mounted: boolean;
@@ -9,20 +10,17 @@ interface AnimateOnMountProps {
     children: React.ReactElement;
 }
 
-const AnimateOnMount = (
-    {
-        mounted,
-        enter,
-        leave,
-        start,
-        children
-    }: AnimateOnMountProps) => {
-
+const AnimateOnMount = (props: AnimateOnMountProps) => {
+    const { mounted, enter, leave, start, children } = props;
+    const { top, setTop } = useAppStore();
     const [ styles, setStyles ] = useState<string>(null);
     const [ show, setShow ] = useState<boolean>(mounted);
     const animRef = useRef<HTMLDivElement>(null);
 
     useEffect(() => {
+        if (animRef.current.offsetTop > top) {
+            setTop(animRef.current.offsetTop);
+        }
         if (mounted) {
             setShow(true);
             setStyles(enter);
@@ -33,7 +31,7 @@ const AnimateOnMount = (
     }, [ mounted ]);
 
     const onTransitionEnd = () => {
-        window.scrollTo({top: animRef.current.offsetTop, left: 0, behavior: 'smooth'});
+        window.scrollTo({ top: top, behavior: 'smooth' });
         if (styles === leave) {
             setShow(false);
         }

@@ -3,9 +3,9 @@ import Status from './status';
 import Utbetaling from './utbetaling';
 import { Knapp } from 'nav-frontend-knapper';
 import tekster from './status-panel-tekster';
-import './status-panel.less';
 import Vis from '../../vis';
 import { useAppStore } from '../../../data/stores/app-store';
+import './status-panel.less';
 
 const StatusPanel = () => {
     const { valgtSoknad, sendTil } = useAppStore();

@@ -76,7 +76,7 @@ const SporsmalMedTillegg = (props: SporsmalMedTilleggProps) => {
     function scrollToHovedsporsmal() {
         if (!erSynligIViewport(hovedsporsmal.current)) {
             const end = getTop(hovedsporsmal.current, 600);
-            window.scrollTo(end, 600);
+            //window.scrollTo(end, 600);
         }
     }
 
