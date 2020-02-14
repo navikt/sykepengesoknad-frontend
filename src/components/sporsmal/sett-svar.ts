@@ -19,6 +19,7 @@ export const settSvar = (sporsmal: Sporsmal, verdier: Record<string, any>): void
     if (verdi === undefined) {
         return;
     }
+    console.log('sporsmal.id', [ sporsmal.id, sporsmal.svartype, verdi ]); // eslint-disable-line
     switch (sporsmal.svartype) {
         case RSSvartype.CHECKBOX_PANEL:
         case RSSvartype.CHECKBOX:
@@ -27,7 +28,6 @@ export const settSvar = (sporsmal: Sporsmal, verdier: Record<string, any>): void
             break;
         case RSSvartype.RADIO_GRUPPE:
         case RSSvartype.RADIO_GRUPPE_TIMER_PROSENT:
-        case RSSvartype.RADIO_GRUPPE_UKEKALENDER:
             radiogruppeSvar(sporsmal, verdi);
             break;
         case RSSvartype.RADIO:

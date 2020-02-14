@@ -7,8 +7,7 @@ import { empty, PERIODE_SKILLE } from '../../utils/constants';
 export const hentSvar = (sporsmal: Sporsmal): any => {
     const svarliste = sporsmal.svarliste;
     const svar = svarliste.svar[0];
-
-    if (sporsmal.svartype === RSSvartype.BEHANDLINGSDAGER) {
+    if (sporsmal.svartype === RSSvartype.INFO_BEHANDLINGSDAGER) {
         const ukeliste: RSSvarliste[] = [];
         sporsmal.undersporsmal.forEach(uspm => {
             ukeliste.push(uspm.svarliste);
