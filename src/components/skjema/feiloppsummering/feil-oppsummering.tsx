@@ -13,7 +13,7 @@ interface FeiloppsummeringProps {
 const FeilOppsummering = (props: FeiloppsummeringProps) => {
     const oppsummering = useRef<HTMLDivElement>(null);
     const { settFokus, errors } = props;
-    let entries: any[] = Object.entries(errors);
+    const entries: any[] = Object.entries(errors);
 
     useEffect(() => {
         let fokuser = settFokus;

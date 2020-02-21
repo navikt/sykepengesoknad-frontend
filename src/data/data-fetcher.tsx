@@ -70,13 +70,5 @@ export function DataFetcher(props: { children: any }) {
 
 export const hentLoginUrl = () => {
     window.localStorage.setItem('REDIRECT_ETTER_LOGIN', window.location.href);
-    if (window.location.href.indexOf('tjenester.nav') > -1) {
-        // Prod
-        return 'https://loginservice.nav.no/login';
-    } else if (window.location.href.indexOf('localhost') > -1) {
-        // Lokalt
-        return 'http://localhost:8080/syfoapi/local/cookie';
-    }
-    // Preprod
-    return 'https://loginservice-q.nav.no/login';
+    return env.loginServiceUrl
 };

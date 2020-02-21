@@ -29,6 +29,10 @@ class Environment {
     get mockBackend() {
         return this.env.MOCK_BACKEND
     }
+
+    get loginServiceUrl() {
+        return this.env.LOGINSERVICE_URL
+    }
 }
 
 const env = new Environment();

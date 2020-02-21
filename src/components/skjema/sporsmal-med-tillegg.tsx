@@ -1,6 +1,6 @@
 import React, { useEffect, useRef, useState } from 'react';
 import Vis from '../vis';
-import { erSynligIViewport, getTop } from '../../utils/browser-utils';
+import { erSynligIViewport } from '../../utils/browser-utils';
 import { Sporsmal } from '../../types/types';
 
 
@@ -75,7 +75,7 @@ const SporsmalMedTillegg = (props: SporsmalMedTilleggProps) => {
 
     function scrollToHovedsporsmal() {
         if (!erSynligIViewport(hovedsporsmal.current)) {
-            const end = getTop(hovedsporsmal.current, 600);
+            //const end = getTop(hovedsporsmal.current, 600);
             //window.scrollTo(end, 600);
         }
     }
