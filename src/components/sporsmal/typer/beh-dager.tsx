@@ -55,7 +55,7 @@ const BehDager = ({ sporsmal }: SpmProps) => {
 
             <div className="skjemaelement">
                 <div className="skjema__beh-dager">
-                    <div className={'ukedager'}>
+                    <div className="ukedager">
                         <span>Man</span>
                         <span>Tir</span>
                         <span>Ons</span>

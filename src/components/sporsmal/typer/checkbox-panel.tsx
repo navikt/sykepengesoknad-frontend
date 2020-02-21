@@ -25,32 +25,33 @@ const CheckboxInput = ({ sporsmal }: SpmProps) => {
 
     const makeClassName = () => {
         const cls = 'bekreftCheckboksPanel';
-        return watch(sporsmal.id) ? cls + ' ' + cls + '--checked' : cls;
+        const err = errors[sporsmal.id] ? ' skjemaelement__input--harFeil' : '';
+        const all = watch(sporsmal.id) ? cls + ' ' + cls + '--checked' : cls;
+        return all + err;
     };
 
     return (
         <>
             <div className={makeClassName()} ref={bekreft}>
-                <div className={'skjemaelement skjemaelement--horisontal'}>
+                <div className="skjemaelement skjemaelement--horisontal">
                     <input type="checkbox"
-                           className="skjemaelement__input checkboks"
-                           name={sporsmal.id}
-                           id={sporsmal.id}
-                           onChange={handleChange}
-                           ref={register({ required: feilmelding })}
+                        className="skjemaelement__input checkboks"
+                        name={sporsmal.id}
+                        id={sporsmal.id}
+                        onChange={handleChange}
+                        ref={register({ required: feilmelding })}
                     />
                     <label className="skjemaelement__label" htmlFor={sporsmal.id}>
                         {sporsmal.sporsmalstekst}
                     </label>
                 </div>
             </div>
-            <div role="alert" aria-live="assertive">
+
+            <Normaltekst tag="div" role="alert" aria-live="assertive" className="skjemaelement__feilmelding">
                 <Vis hvis={errors[sporsmal.id] !== undefined}>
-                    <Normaltekst tag="span" className="skjemaelement__feilmelding">
-                        <ErrorMessage as="span" errors={errors} name={sporsmal.id}/>
-                    </Normaltekst>
+                    <ErrorMessage as="span" errors={errors} name={sporsmal.id} />
                 </Vis>
-            </div>
+            </Normaltekst>
         </>
     )
 };

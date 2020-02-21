@@ -56,9 +56,9 @@ const TallInput = ({ sporsmal }: SpmProps) => {
                 <label className="medEnhet__enhet" htmlFor={sporsmal.id}>{sporsmal.undertekst}</label>
             </div>
 
-            <div role="alert" aria-live="assertive">
+            <div role="alert" aria-live="assertive" className="skjemaelement__feilmelding">
                 <Vis hvis={errors[sporsmal.id] !== undefined}>
-                    <Normaltekst tag="span" className="skjemaelement__feilmelding">
+                    <Normaltekst tag="span">
                         <ErrorMessage as="p" errors={errors} name={sporsmal.id}/>
                     </Normaltekst>
                 </Vis>

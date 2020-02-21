@@ -66,17 +66,17 @@ const SporsmalForm = () => {
     return (
         <FormContext {...methods}>
             <form onSubmit={methods.handleSubmit(onSubmit)}
-                  className={'sporsmal__form ' + nesteSporsmal.tag.toLowerCase()}>
-                <FeilOppsummering errors={methods.errors}/>
-                <SporsmalSwitch sporsmal={sporsmal}/>
+                className={'sporsmal__form ' + nesteSporsmal.tag.toLowerCase()}>
+                <SporsmalSwitch sporsmal={sporsmal} />
 
                 <Vis hvis={erSiste}>
-                    <Oppsummering/>
-                    <CheckboxPanel sporsmal={nesteSporsmal}/>
-                    <SendtTil/>
+                    <Oppsummering />
+                    <CheckboxPanel sporsmal={nesteSporsmal} />
+                    <SendtTil />
                 </Vis>
 
-                <Knapperad onSubmit={onSubmit}/>
+                <FeilOppsummering errors={methods.errors} />
+                <Knapperad onSubmit={onSubmit} />
             </form>
         </FormContext>
     )

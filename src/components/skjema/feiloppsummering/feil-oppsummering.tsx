@@ -1,8 +1,8 @@
 import React, { useEffect, useRef } from 'react';
 import Vis from '../../vis';
-import { erSynligIViewport, getTop } from '../../../utils/browser-utils';
+import { erSynligIViewport } from '../../../utils/browser-utils';
 import { Undertittel } from 'nav-frontend-typografi';
-import Lenke from 'nav-frontend-lenker';
+import { HashLink } from 'react-router-hash-link';
 import './feil-oppsummering.less';
 
 interface FeiloppsummeringProps {
@@ -22,8 +22,6 @@ const FeilOppsummering = (props: FeiloppsummeringProps) => {
         }
         if (fokuser && oppsummering.current) {
             if (!erSynligIViewport(oppsummering.current)) {
-                const end = getTop(oppsummering.current, 600);
-                window.scrollTo(end, 300);
                 setTimeout(() => {
                     fokuserOppsummering();
                 }, 300);
@@ -35,6 +33,7 @@ const FeilOppsummering = (props: FeiloppsummeringProps) => {
 
     function fokuserOppsummering() {
         oppsummering.current.focus();
+        console.log('fokus'); // eslint-disable-line
     }
 
     return (
@@ -45,7 +44,7 @@ const FeilOppsummering = (props: FeiloppsummeringProps) => {
                     <ul className="feiloppsummering__liste">
                         {entries.map((list, index) => (
                             <li key={index}>
-                                <Lenke href={`#${list[0]}`}>{list[1].message}</Lenke>
+                                <HashLink smooth to={`#${list[0]}`}>{list[1].message}</HashLink>
                             </li>
                         ))}
                     </ul>

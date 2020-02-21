@@ -22,6 +22,14 @@ const DatoInput = ({ sporsmal }: SpmProps) => {
         // eslint-disable-next-line
     }, [ sporsmal ]);
 
+    useEffect(() => {
+        const cls = errors[sporsmal.id]
+            ? ['skjemaelement__input', 'skjemaelement__input--harFeil']
+            : ['skjemaelement__input'];
+        const input = datoRef.current.querySelector('.input--s[type=text]');
+        input.classList.add(...cls);
+    }, [errors[sporsmal.id]]);
+
     const lagIdForDato = () => {
         const input = datoRef.current.querySelector('.input--s[type=text]');
         input.setAttribute('id', 'input' + sporsmal.id);
@@ -53,16 +61,14 @@ const DatoInput = ({ sporsmal }: SpmProps) => {
                 }}
             />
 
-            <div role="alert" aria-live="assertive">
-                <Vis hvis={errors[sporsmal.id] !== undefined}>
-                    <Normaltekst tag="span" className="skjemaelement__feilmelding">
-                        <ErrorMessage as="span" errors={errors} name={sporsmal.id}/>
-                    </Normaltekst>
+            <Normaltekst tag="div" role="alert" aria-live="assertive" className="skjemaelement__feilmelding">
+                <Vis hvis={errors[sporsmal.id]}>
+                    <ErrorMessage as="span" errors={errors} name={sporsmal.id}/>
                 </Vis>
-            </div>
+            </Normaltekst>
 
             <div className="undersporsmal">
-                <Vis hvis={watch(sporsmal.id) !== undefined}>
+                <Vis hvis={watch(sporsmal.id)}>
                     <UndersporsmalListe undersporsmal={sporsmal.undersporsmal}/>
                 </Vis>
             </div>

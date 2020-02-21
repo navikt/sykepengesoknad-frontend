@@ -20,6 +20,8 @@ const SporsmalTekster: any = {
         "soknad.feilmelding.hvor_mye_har_du_jobbet": "Du må svare på hvor mye du jobbet totalt",
         "soknad.feilmelding.hvor_mye_prosent_verdi": "Du må svare på hvor mye du jobbet totalt",
         "soknad.feilmelding.hvor_mye_timer_verdi": "Du må svare på hvor mye du jobbet totalt",
+        "soknad.feilmelding.tidligere_syk": "Du må svare på om du var syk med egenmelding eller papirsykmelding",
+        "soknad.feilmelding.tidligere_syk_lokal": "Du må velge et av alternativene",
         "soknad.feilmelding.inntektskilde_andre_arbeidsforhold_er_du_sykmeldt": "Du må svare på om du er sykmeldt fra dette",
         "soknad.feilmelding.inntektskilde_annet_er_du_sykmeldt": "Du må svare på om du er sykmeldt fra dette",
         "soknad.feilmelding.inntektskilde_arbeidsforhold_er_du_sykmeldt": "Du må svare på om du er sykmeldt fra dette",

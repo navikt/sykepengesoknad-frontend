@@ -57,7 +57,7 @@ const JaNeiInput = ({ sporsmal }: SpmProps) => {
             </Vis>
 
             <div className="inputPanelGruppe inputPanelGruppe--horisontal">
-                <fieldset className="skjema__fieldset">
+                <fieldset className={'skjema__fieldset' + (errors[sporsmal.id] ? ' skjemagruppe--feil' : '')}>
                     <legend className="skjema__legend">
                         <div className="medHjelpetekst">
                             <Element tag="h3" className="skjema__sporsmal">
@@ -89,13 +89,11 @@ const JaNeiInput = ({ sporsmal }: SpmProps) => {
                 </fieldset>
             </div>
 
-            <div role="alert" aria-live="assertive">
+            <Normaltekst tag="div" role="alert" aria-live="assertive" className="skjemaelement__feilmelding">
                 <Vis hvis={errors[sporsmal.id] !== undefined}>
-                    <Normaltekst tag="span" className="skjemaelement__feilmelding">
-                        <ErrorMessage as="p" errors={errors} name={sporsmal.id} />
-                    </Normaltekst>
+                    <ErrorMessage as="p" errors={errors} name={sporsmal.id} />
                 </Vis>
-            </div>
+            </Normaltekst>
 
             <AnimateOnMount
                 mounted={watchVerdi === sporsmal.kriterieForVisningAvUndersporsmal}
