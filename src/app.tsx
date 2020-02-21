@@ -1,5 +1,6 @@
 import React from 'react';
-import { BrowserRouter, Route, Switch } from 'react-router-dom';
+import { Route, Switch, useLocation } from 'react-router-dom';
+import { TransitionGroup, CSSTransition } from 'react-transition-group';
 import Soknad from './pages/soknad/soknaden';
 import Soknader from './pages/soknader/soknader';
 import StoreProvider from './data/stores/store-provider';
@@ -8,18 +9,25 @@ import Kvittering from './pages/kvittering/kvittering';
 import './app.less';
 
 const App = (): any => {
+    const location = useLocation();
     return (
         <StoreProvider>
             <DataFetcher>
                 <main id="maincontent" role="main" tabIndex={-1}>
-                    <BrowserRouter basename={'/nysykepengesoknad'}>
-                        <Switch>
-                            <Route exact={true} path="/" component={Soknader} />
-                            <Route path={'/soknader/:id/:stegId'} component={Soknad} />
-                            <Route path={'/soknader/:id'} component={Soknad} />
-                            <Route path={'/kvittering/:id'} component={Kvittering} />
-                        </Switch>
-                    </BrowserRouter>
+                    <TransitionGroup>
+                        <CSSTransition
+                            key={location.key}
+                            timeout={{ enter: 300, exit: 300 }}
+                            classNames={'fade'}
+                        >
+                            <Switch location={location}>
+                                <Route exact={true} path="/" component={Soknader} />
+                                <Route path={'/soknader/:id/:stegId'} component={Soknad} />
+                                <Route path={'/soknader/:id'} component={Soknad} />
+                                <Route path={'/kvittering/:id'} component={Kvittering} />
+                            </Switch>
+                        </CSSTransition>
+                    </TransitionGroup>
                 </main>
             </DataFetcher>
         </StoreProvider>
