@@ -54,15 +54,8 @@ export const hentPeriode = (sporsmal: Sporsmal, index: number) => {
     return periode;
 };
 
-export const hentFormState = (spmliste: Sporsmal[], id: string) => {
-    let hovedSporsmal: Sporsmal = null;
-    spmliste.forEach((spm) => {
-        const fantHovedsporsmal = finnSporsmal(spm, id);
-        if (fantHovedsporsmal) {
-            hovedSporsmal = spm;
-        }
-    });
-    return hentSvarliste(hovedSporsmal);
+export const hentFormState = (sporsmal: Sporsmal) => {
+    return hentSvarliste(sporsmal);
 };
 
 const finnSporsmal = (sporsmal: Sporsmal, id: string): boolean => {

@@ -2,9 +2,12 @@ import React from 'react';
 import { useAppStore } from '../../data/stores/app-store';
 import env from '../../utils/environment';
 import Vis from '../vis';
+import { useParams } from 'react-router';
 
 const SykSokLokalt = () => {
     const { valgtSoknad, valgtSykmelding } = useAppStore();
+    const { stegId } = useParams();
+
     return (
         <Vis hvis={env.isDevelopment}>
             <div>
@@ -17,6 +20,15 @@ const SykSokLokalt = () => {
                     valgtSykmelding &&
                     valgtSykmelding.id.substring(valgtSykmelding.id.length - 6, valgtSykmelding.id.length)
                 }</strong></span>
+                &nbsp;&nbsp;
+                <span>spm
+                    <strong> {
+                        valgtSoknad && valgtSoknad.sporsmal[Number(stegId) - 1].id
+                    } </strong>
+                    <strong> {
+                        valgtSoknad && valgtSoknad.sporsmal[Number(stegId) - 1].tag
+                    } </strong>
+                </span>
                 <br />
                 <br />
             </div>

@@ -7,6 +7,7 @@ import tekster from './banner-tekster';
 import { useAppStore } from '../../data/stores/app-store';
 import { useHistory } from 'react-router';
 import './banner.less';
+import SykSokLokalt from '../brodsmuler/syk-sok-lokalt';
 
 interface BannerProps {
     brodsmuler: Brodsmule[];
@@ -26,7 +27,8 @@ const Banner = ({ brodsmuler }: BannerProps) => {
 
     return (
         <header className="soknadtopp">
-            <Brodsmuler brodsmuler={brodsmuler}/>
+            <Brodsmuler brodsmuler={brodsmuler} />
+            <SykSokLokalt />
             <Sidetittel tag="h1" className="soknadtopp__tittel">{tittel}</Sidetittel>
         </header>
     );

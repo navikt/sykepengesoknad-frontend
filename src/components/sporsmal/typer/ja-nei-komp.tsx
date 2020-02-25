@@ -27,10 +27,10 @@ const JaNeiInput = ({ sporsmal }: SpmProps) => {
     const { register, setValue, errors, watch, reset, getValues } = useFormContext();
     const watchVerdi = watch(sporsmal.id);
 
-
     useEffect(() => {
         if (sporsmal.erHovedsporsmal) {
-            reset(hentFormState(valgtSoknad.sporsmal, sporsmal.id));
+            const state = hentFormState(sporsmal);
+            reset(hentFormState(sporsmal));
         } else {
             setValue(sporsmal.id, hentSvar(sporsmal));
         }

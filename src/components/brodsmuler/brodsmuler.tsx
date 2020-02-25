@@ -33,7 +33,6 @@ const BrodsmuleBit = ({ sti, tittel, sisteSmule, erKlikkbar }: Brodsmule) => {
     );
 };
 
-
 interface BrodsmulerProps {
     brodsmuler: Brodsmule[];
 }

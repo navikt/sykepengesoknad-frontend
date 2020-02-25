@@ -55,9 +55,11 @@ const SporsmalForm = () => {
             valgtSoknad.status = RSSoknadstatus.SENDT;
             setValgtSoknad(valgtSoknad);
         }
+
         methods.reset();
         setValgtSoknad(valgtSoknad);
         setTop(0);
+        console.log('valgtSoknad', valgtSoknad.sporsmal); // eslint-disable-line
         erSiste
             ? history.push(pathUtenSteg(history.location.pathname).replace('soknader', 'kvittering'))
             : history.push(pathUtenSteg(history.location.pathname) + SEPARATOR + (spmIndex + 2));
@@ -65,8 +67,7 @@ const SporsmalForm = () => {
 
     return (
         <FormContext {...methods}>
-            <form onSubmit={methods.handleSubmit(onSubmit)}
-                className={'sporsmal__form ' + nesteSporsmal.tag.toLowerCase()}>
+            <form onSubmit={methods.handleSubmit(onSubmit)} className={'sporsmal__form ' + nesteSporsmal.tag.toLowerCase()}>
                 <SporsmalSwitch sporsmal={sporsmal} />
 
                 <Vis hvis={erSiste}>

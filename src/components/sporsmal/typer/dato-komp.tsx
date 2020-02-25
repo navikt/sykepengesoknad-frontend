@@ -28,6 +28,7 @@ const DatoInput = ({ sporsmal }: SpmProps) => {
             : ['skjemaelement__input'];
         const input = datoRef.current.querySelector('.input--s[type=text]');
         input.classList.add(...cls);
+        // eslint-disable-next-line
     }, [errors[sporsmal.id]]);
 
     const lagIdForDato = () => {

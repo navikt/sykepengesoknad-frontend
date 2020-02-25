@@ -22,6 +22,7 @@ const SporsmalTekster: any = {
         "soknad.feilmelding.hvor_mye_timer_verdi": "Du må svare på hvor mye du jobbet totalt",
         "soknad.feilmelding.tidligere_syk": "Du må svare på om du var syk med egenmelding eller papirsykmelding",
         "soknad.feilmelding.tidligere_syk_lokal": "Du må velge et av alternativene",
+
         "soknad.feilmelding.inntektskilde_andre_arbeidsforhold_er_du_sykmeldt": "Du må svare på om du er sykmeldt fra dette",
         "soknad.feilmelding.inntektskilde_annet_er_du_sykmeldt": "Du må svare på om du er sykmeldt fra dette",
         "soknad.feilmelding.inntektskilde_arbeidsforhold_er_du_sykmeldt": "Du må svare på om du er sykmeldt fra dette",
@@ -30,6 +31,19 @@ const SporsmalTekster: any = {
         "soknad.feilmelding.inntektskilde_jordbruker_er_du_sykmeldt": "Du må svare på om du er sykmeldt fra dette",
         "soknad.feilmelding.inntektskilde_selvstendig_dagmamma_er_du_sykmeldt": "Du må svare på om du er sykmeldt fra dette",
         "soknad.feilmelding.inntektskilde_selvstendig_er_du_sykmeldt": "Du må svare på om du er sykmeldt fra dette",
+
+        "soknad.feilmelding.INNTEKTSKILDE_ANDRE_ARBEIDSFORHOLD": "Du må svare på om du er sykmeldt fra andre arbeidsforhold",
+        "soknad.feilmelding.INNTEKTSKILDE_ANDRE_ARBEIDSFORHOLD_lokal": "Du må velge ja eller nei",
+        "soknad.feilmelding.INNTEKTSKILDE_SELVSTENDIG": "Du må svare på om du er sykmeldt som selvstendig næringsdrivende",
+        "soknad.feilmelding.INNTEKTSKILDE_SELVSTENDIG_lokal": "Du må velge ja eller nei",
+        "soknad.feilmelding.INNTEKTSKILDE_SELVSTENDIG_DAGMAMMA": "Du må svare på om du er sykmeldt som dagmamma",
+        "soknad.feilmelding.INNTEKTSKILDE_SELVSTENDIG_DAGMAMMA_lokal": "Du må velge ja eller nei",
+        "soknad.feilmelding.INNTEKTSKILDE_JORDBRUKER": "Du må svare på om du er sykmeldt som jordbruker",
+        "soknad.feilmelding.INNTEKTSKILDE_JORDBRUKER_lokal": "Du må velge ja eller nei",
+        "soknad.feilmelding.INNTEKTSKILDE_FRILANSER": "Du må svare på om du er sykmeldt som frilanser",
+        "soknad.feilmelding.INNTEKTSKILDE_FRILANSER_lokal": "Du må velge ja eller nei",
+        "soknad.feilmelding.INNTEKTSKILDE_ANNET": "Du må svare på om du er sykmeldt fra dette",
+
         "soknad.feilmelding.jobbet_du_100_prosent": "Du må svare på om du jobbet noe i denne perioden",
         "soknad.feilmelding.jobbet_du_gradert": "Vennligst svar på om du jobbet mer enn sykmeldingen tilsier",
         "soknad.feilmelding.land": "Du må oppgi hvilket land du skal reise til",
