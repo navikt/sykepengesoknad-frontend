@@ -33,7 +33,6 @@ const FeilOppsummering = (props: FeiloppsummeringProps) => {
 
     function fokuserOppsummering() {
         oppsummering.current.focus();
-        console.log('fokus'); // eslint-disable-line
     }
 
     return (
