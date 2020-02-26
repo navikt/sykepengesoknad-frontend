@@ -8,10 +8,11 @@ import AnimateOnMount from '../../animate-on-mount';
 import UndersporsmalListe from '../undersporsmal/undersporsmal-liste';
 import tekster from '../sporsmal-tekster';
 import { Sporsmal } from '../../../types/types';
-import { useAppStore } from '../../../data/stores/app-store';
+import { TagTyper } from '../../../types/enums';
 
 const CheckboxKomp = ({ sporsmal }: SpmProps) => {
-    const { errors } = useFormContext();
+    const { errors, getValues } = useFormContext();
+    const feilmelding = tekster['soknad.feilmelding.' + sporsmal.tag.toLowerCase()];
 
     return (
         <>
@@ -23,6 +24,12 @@ const CheckboxKomp = ({ sporsmal }: SpmProps) => {
                 {sporsmal.undersporsmal.map((uspm, idx) => {
                     return <CheckboxSingle parent={sporsmal} sporsmal={uspm} key={idx} />;
                 })}
+
+                <Normaltekst tag="div" role="alert" aria-live="assertive" className="skjemaelement__feilmelding">
+                    <Vis hvis={!harValgtEtt(sporsmal, getValues()) && !harValgtAnnet(sporsmal, getValues())}>
+                        <span>{feilmelding}</span>
+                    </Vis>
+                </Normaltekst>
             </div>
         </>
     )
@@ -37,8 +44,7 @@ interface CheckboxProps {
 type AllProps = SpmProps & CheckboxProps;
 
 const CheckboxSingle = ({ parent, sporsmal }: AllProps) => {
-    const { register, setValue, watch, errors } = useFormContext();
-    const { valgtSoknad } = useAppStore();
+    const { register, setValue, watch, getValues, clearError } = useFormContext();
 
     useEffect(() => {
         const svar = hentSvar(sporsmal);
@@ -46,14 +52,14 @@ const CheckboxSingle = ({ parent, sporsmal }: AllProps) => {
         // eslint-disable-next-line
     }, [ sporsmal ]);
 
-    const valider = (value: any) => {
-        const hoved: Sporsmal[] = valgtSoknad.sporsmal.filter(spm => spm.id = parent.id);
-        // const sieblings = hoved.undersporsmal;
-        // console.log('valgtSoknad', valgtSoknad); // eslint-disable-line
-        // console.log('parent.id', parent.id); // eslint-disable-line
-        // console.log('sporsmal.id', sporsmal.id); // eslint-disable-line
-        // console.log('hoved', hoved); // eslint-disable-line
-        return true;
+    const valider = () => {
+        const valid = harValgtEtt(parent, getValues()) || harValgtAnnet(parent, getValues());
+        if (valid) {
+            clearError(parent.undersporsmal.filter(spm => spm.tag === TagTyper.INNTEKTSKILDE_ANNET)[0].id);
+            const fields = sporsmal.undersporsmal.map(spm => spm.id);
+            clearError(fields);
+        }
+        return valid;
     };
 
     return (
@@ -61,18 +67,12 @@ const CheckboxSingle = ({ parent, sporsmal }: AllProps) => {
             <input type="checkbox"
                 id={sporsmal.id}
                 name={sporsmal.id}
-                ref={register({ validate: value => valider(value) })}
+                ref={register({ validate: () => valider() })}
                 className="skjemaelement__input checkboks"
             />
             <label className="skjemaelement__label" htmlFor={sporsmal.id}>
                 {sporsmal.sporsmalstekst}
             </label>
-
-            <Normaltekst tag="div" role="alert" aria-live="assertive" className="skjemaelement__feilmelding">
-                <Vis hvis={errors[parent.id]}>
-                    <span>{sporsmal.tag && tekster['soknad.feilmelding.' + sporsmal.tag + '_lokal']}</span>
-                </Vis>
-            </Normaltekst>
 
             <AnimateOnMount
                 mounted={watch(sporsmal.id)}
@@ -84,4 +84,16 @@ const CheckboxSingle = ({ parent, sporsmal }: AllProps) => {
             </AnimateOnMount>
         </div>
     )
+};
+
+const harValgtEtt = (sporsmal: Sporsmal, values: any): boolean => {
+    return sporsmal.undersporsmal.filter(spm => {
+        return spm.undersporsmal[0] && values[spm.undersporsmal[0].id]
+    }).length > 0;
+};
+
+const harValgtAnnet = (parent: Sporsmal, values: any): boolean => {
+    return parent.undersporsmal.filter(uspm => {
+        return values[uspm.id] && uspm.tag === TagTyper.INNTEKTSKILDE_ANNET
+    }).length > 0;
 };
