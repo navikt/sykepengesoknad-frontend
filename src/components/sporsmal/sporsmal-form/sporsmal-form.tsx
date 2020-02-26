@@ -59,7 +59,6 @@ const SporsmalForm = () => {
         methods.reset();
         setValgtSoknad(valgtSoknad);
         setTop(0);
-        console.log('valgtSoknad', valgtSoknad.sporsmal); // eslint-disable-line
         erSiste
             ? history.push(pathUtenSteg(history.location.pathname).replace('soknader', 'kvittering'))
             : history.push(pathUtenSteg(history.location.pathname) + SEPARATOR + (spmIndex + 2));
