@@ -27,7 +27,6 @@ const brodsmuler: Brodsmule[] = [ {
 
 const Soknader = () => {
     const { soknader } = useAppStore();
-    console.log('soknader', soknader); // eslint-disable-line
     const nyeSoknader = filtrerOgSorterNyeSoknader(soknader);
 
     const tidligereSoknader = soknader

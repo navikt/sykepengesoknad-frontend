@@ -1,5 +1,5 @@
 import React, { useEffect, useRef } from 'react';
-import { ErrorMessage, useFormContext } from 'react-hook-form';
+import { useFormContext } from 'react-hook-form';
 import tekster from '../sporsmal-tekster';
 import { hentSvar } from '../hent-svar';
 import Vis from '../../vis';
@@ -7,10 +7,14 @@ import { Normaltekst } from 'nav-frontend-typografi';
 import { SpmProps } from '../sporsmal-form/sporsmal-form';
 
 const CheckboxInput = ({ sporsmal }: SpmProps) => {
-    const feilmelding = tekster['soknad.feilmelding.' + sporsmal.tag];
     const { register, setValue, errors, watch } = useFormContext();
     const bekreft = useRef<HTMLDivElement>(null);
     const checkWatch = watch(sporsmal.id);
+    const feilmelding = tekster['soknad.feilmelding.' + sporsmal.tag];
+    let feilmelding_lokal = tekster['soknad.feilmelding.' + sporsmal.tag + '.lokal'];
+    if (feilmelding_lokal === undefined) {
+        feilmelding_lokal = tekster['soknad.feilmelding.checkbox.lokal'];
+    }
 
     useEffect(() => {
         const svar = hentSvar(sporsmal);
@@ -49,7 +53,7 @@ const CheckboxInput = ({ sporsmal }: SpmProps) => {
 
             <Normaltekst tag="div" role="alert" aria-live="assertive" className="skjemaelement__feilmelding">
                 <Vis hvis={errors[sporsmal.id] !== undefined}>
-                    <ErrorMessage as="span" errors={errors} name={sporsmal.id} />
+                    <p>{feilmelding_lokal}</p>
                 </Vis>
             </Normaltekst>
         </>

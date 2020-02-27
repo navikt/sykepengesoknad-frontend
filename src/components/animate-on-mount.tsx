@@ -31,7 +31,7 @@ const AnimateOnMount = (props: AnimateOnMountProps) => {
     }, [ mounted ]);
 
     const onTransitionEnd = () => {
-        window.scrollTo({ top: top, behavior: 'smooth' });
+        window.scrollTo({ top: top, behavior: 'auto' });
         if (styles === leave) {
             setShow(false);
         }

@@ -58,20 +58,6 @@ export const hentFormState = (sporsmal: Sporsmal) => {
     return hentSvarliste(sporsmal);
 };
 
-const finnSporsmal = (sporsmal: Sporsmal, id: string): boolean => {
-    if (sporsmal.id === id) {
-        return true;
-    }
-    let fantUndersporsmal = false;
-    sporsmal.undersporsmal.forEach((uspm) => {
-        if (finnSporsmal(uspm, id)) {
-            fantUndersporsmal = true;
-        }
-    });
-    return fantUndersporsmal;
-};
-
-
 const hentSvarliste = (sporsmal: Sporsmal) => {
     let svar: any = {};
 

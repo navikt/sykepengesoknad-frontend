@@ -36,7 +36,6 @@ const JaNeiInput = ({ sporsmal }: SpmProps) => {
 
     useEffect(() => {
         if (sporsmal.erHovedsporsmal) {
-            const state = hentFormState(sporsmal);
             reset(hentFormState(sporsmal));
         } else {
             setValue(sporsmal.id, hentSvar(sporsmal));
@@ -64,7 +63,6 @@ const JaNeiInput = ({ sporsmal }: SpmProps) => {
         return false;
     };
 
-    // eslint-disable-next-line
     return (
         <>
             <Vis hvis={valgtSoknad.soknadstype === RSSoknadstype.ARBEIDSTAKERE && sporsmal.tag === TagTyper.FERIE_V2}>

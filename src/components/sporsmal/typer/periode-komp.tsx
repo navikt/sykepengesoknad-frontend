@@ -18,6 +18,7 @@ type AllProps = SpmProps & PeriodeProps;
 const PeriodeKomp = ({ sporsmal, index, slettPeriode }: AllProps) => {
     const { setValue, errors } = useFormContext();
     const id = sporsmal.id + '_' + index;
+    const htmlfor = sporsmal.id + '_t_' + index;
     const feilmelding = tekster['soknad.feilmelding.' + sporsmal.tag];
     let feilmelding_lokal = tekster['soknad.feilmelding.' + sporsmal.tag + '.lokal'];
     if (feilmelding_lokal === undefined) {
@@ -32,10 +33,10 @@ const PeriodeKomp = ({ sporsmal, index, slettPeriode }: AllProps) => {
     return (
         <li className="periode">
             <div className="periodelabel">
-                <label htmlFor={id} className="fom">
+                <label htmlFor={htmlfor} className="fom">
                     {tekster['sykepengesoknad.periodevelger.fom']}
                 </label>
-                <label htmlFor={id} className="tom">
+                <label htmlFor={htmlfor} className="tom">
                     {tekster['sykepengesoknad.periodevelger.tom']}
                 </label>
             </div>

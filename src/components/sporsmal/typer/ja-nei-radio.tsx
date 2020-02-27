@@ -63,8 +63,7 @@ const JaNeiRadio = ({ sporsmal }: SpmProps) => {
                                     {valg.label}
                                 </label>
                             </div>
-                            <Vis
-                                hvis={sporsmal.tag && sporsmal.tag.startsWith('INNTEKTSKILDE_') && lokal === 'JA' && OK}>
+                            <Vis hvis={sporsmal.tag && sporsmal.tag.startsWith('INNTEKTSKILDE_') && lokal === 'JA' && OK}>
                                 <div className="presisering">
                                     <Normaltekst tag="span">
                                         {tekster['soknad.presisering.' + sporsmal.tag]}

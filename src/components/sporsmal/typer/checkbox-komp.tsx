@@ -8,11 +8,12 @@ import AnimateOnMount from '../../animate-on-mount';
 import UndersporsmalListe from '../undersporsmal/undersporsmal-liste';
 import tekster from '../sporsmal-tekster';
 import { Sporsmal } from '../../../types/types';
-import { TagTyper } from '../../../types/enums';
+import { useAppStore } from '../../../data/stores/app-store';
 
 const CheckboxKomp = ({ sporsmal }: SpmProps) => {
-    const { errors, getValues } = useFormContext();
-    const feilmelding = tekster['soknad.feilmelding.' + sporsmal.tag];
+    const { errors } = useFormContext();
+    let feilmelding_lokal = tekster['soknad.feilmelding.' + sporsmal.tag + '.lokal'];
+    const { validCheck } = useAppStore();
 
     return (
         <>
@@ -26,8 +27,8 @@ const CheckboxKomp = ({ sporsmal }: SpmProps) => {
                 })}
 
                 <Normaltekst tag="div" role="alert" aria-live="assertive" className="skjemaelement__feilmelding">
-                    <Vis hvis={!harValgtEtt(sporsmal, getValues()) && !harValgtAnnet(sporsmal, getValues())}>
-                        <span>{feilmelding}</span>
+                    <Vis hvis={Object.entries(errors).length > 0 && !validCheck}>
+                        <p>{feilmelding_lokal}</p>
                     </Vis>
                 </Normaltekst>
             </div>
@@ -45,6 +46,8 @@ type AllProps = SpmProps & CheckboxProps;
 
 const CheckboxSingle = ({ parent, sporsmal }: AllProps) => {
     const { register, setValue, watch, getValues, clearError } = useFormContext();
+    let feilmelding = tekster['soknad.feilmelding.' + parent.tag];
+    const { setValidCheck } = useAppStore();
 
     useEffect(() => {
         const svar = hentSvar(sporsmal);
@@ -53,13 +56,14 @@ const CheckboxSingle = ({ parent, sporsmal }: AllProps) => {
     }, [ sporsmal ]);
 
     const valider = () => {
-        const valid = harValgtEtt(parent, getValues()) || harValgtAnnet(parent, getValues());
-        if (valid) {
-            clearError(parent.undersporsmal.filter(spm => spm.tag === TagTyper.INNTEKTSKILDE_ANNET)[0].id);
-            const fields = sporsmal.undersporsmal.map(spm => spm.id);
-            clearError(fields);
+        const valid = harValgtNoe(parent, getValues());
+        let fields = parent.undersporsmal.map(spm => spm.id);
+        if (!valid) {
+            fields.shift();
         }
-        return valid;
+        clearError(fields);
+        setValidCheck(valid);
+        return valid ? valid : feilmelding;
     };
 
     return (
@@ -86,14 +90,8 @@ const CheckboxSingle = ({ parent, sporsmal }: AllProps) => {
     )
 };
 
-const harValgtEtt = (sporsmal: Sporsmal, values: any): boolean => {
-    return sporsmal.undersporsmal.filter(spm => {
-        return spm.undersporsmal[0] && values[spm.undersporsmal[0].id]
-    }).length > 0;
-};
-
-const harValgtAnnet = (parent: Sporsmal, values: any): boolean => {
+const harValgtNoe = (parent: Sporsmal, values: any): boolean => {
     return parent.undersporsmal.filter(uspm => {
-        return values[uspm.id] && uspm.tag === TagTyper.INNTEKTSKILDE_ANNET
+        return values[uspm.id]
     }).length > 0;
 };
