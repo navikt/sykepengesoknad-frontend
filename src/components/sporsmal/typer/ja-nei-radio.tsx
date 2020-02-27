@@ -1,4 +1,4 @@
-import { ErrorMessage, useFormContext } from 'react-hook-form';
+import { useFormContext } from 'react-hook-form';
 import React, { useEffect, useState } from 'react';
 import { Element, Normaltekst } from 'nav-frontend-typografi';
 import Vis from '../../vis';
@@ -17,6 +17,11 @@ const jaNeiValg = [ {
 const JaNeiRadio = ({ sporsmal }: SpmProps) => {
     const [ lokal, setLokal ] = useState<string>(hentSvar(sporsmal));
     const { register, setValue, errors } = useFormContext();
+    const feilmelding = tekster['soknad.feilmelding.' + sporsmal.tag];
+    let feilmelding_lokal = tekster['soknad.feilmelding.' + sporsmal.tag + '.lokal'];
+    if (feilmelding_lokal === undefined) {
+        feilmelding_lokal = tekster['soknad.feilmelding.ja_nei_radio.lokal'];
+    }
 
     useEffect(() => {
         const lagret = hentSvar(sporsmal);
@@ -31,7 +36,7 @@ const JaNeiRadio = ({ sporsmal }: SpmProps) => {
     };
 
     return (
-        <React.Fragment>
+        <>
             <div className={sporsmal.parentKriterie
                 ? 'kriterie--' + sporsmal.parentKriterie.toLowerCase() + ' skjemaelement'
                 : 'skjemaelement'
@@ -45,14 +50,14 @@ const JaNeiRadio = ({ sporsmal }: SpmProps) => {
                         <div key={idx}>
                             <div className="radioContainer">
                                 <input type="radio"
-                                       id={sporsmal.id + '_' + idx}
-                                       name={sporsmal.id}
-                                       value={valg.value}
-                                       checked={OK}
-                                       aria-checked={OK}
-                                       onChange={() => changeValue(valg.value)}
-                                       ref={register({ required: 'Et alternativ må velges' })}
-                                       className="skjemaelement__input radioknapp"
+                                    id={sporsmal.id + '_' + idx}
+                                    name={sporsmal.id}
+                                    value={valg.value}
+                                    checked={OK}
+                                    aria-checked={OK}
+                                    onChange={() => changeValue(valg.value)}
+                                    ref={register({ required: feilmelding })}
+                                    className="skjemaelement__input radioknapp"
                                 />
                                 <label className="skjemaelement__label" htmlFor={sporsmal.id + '_' + idx}>
                                     {valg.label}
@@ -67,19 +72,18 @@ const JaNeiRadio = ({ sporsmal }: SpmProps) => {
                                 </div>
                             </Vis>
                         </div>
-
                     )
                 })}
             </div>
 
             <div role="alert" aria-live="assertive">
-                <Vis hvis={errors[sporsmal.id] !== undefined}>
+                <Vis hvis={errors[sporsmal.id]}>
                     <Normaltekst tag="span" className="skjemaelement__feilmelding">
-                        <ErrorMessage as="p" errors={errors} name={sporsmal.id}/>
+                        <p>{feilmelding_lokal}</p>
                     </Normaltekst>
                 </Vis>
             </div>
-        </React.Fragment>
+        </>
     )
 };
 

@@ -1,4 +1,4 @@
-import { ErrorMessage, useFormContext } from 'react-hook-form';
+import { useFormContext } from 'react-hook-form';
 import React, { useEffect } from 'react';
 import { Element, Normaltekst } from 'nav-frontend-typografi';
 import Vis from '../../vis';
@@ -13,6 +13,8 @@ import SporsmalBjorn from '../bjorn/sporsmal-bjorn';
 import { useAppStore } from '../../../data/stores/app-store';
 import { RSSoknadstype } from '../../../types/rs-types/rs-soknadstype';
 import SporsmalHjelpetekst from '../sporsmal-hjelpetekst';
+import tekster from '../sporsmal-tekster';
+import { sporsmalIdListe } from '../sporsmal-utils';
 
 const jaNeiValg = [ {
     value: 'JA',
@@ -24,7 +26,12 @@ const jaNeiValg = [ {
 
 const JaNeiInput = ({ sporsmal }: SpmProps) => {
     const { valgtSoknad } = useAppStore();
-    const { register, setValue, errors, watch, reset, getValues } = useFormContext();
+    const { register, setValue, errors, watch, reset, getValues, clearError } = useFormContext();
+    const feilmelding = tekster['soknad.feilmelding.' + sporsmal.tag];
+    let feilmelding_lokal = tekster['soknad.feilmelding.' + sporsmal.tag + '.lokal'];
+    if (feilmelding_lokal === undefined) {
+        feilmelding_lokal = tekster['soknad.feilmelding.ja_nei_radio.lokal'];
+    }
     const watchVerdi = watch(sporsmal.id);
 
     useEffect(() => {
@@ -49,6 +56,14 @@ const JaNeiInput = ({ sporsmal }: SpmProps) => {
         setValue(sporsmal.id, value);
     };
 
+    const valider = (value: any) => {
+        if (value === 'JA' || value === 'NEI') {
+            clearError(sporsmalIdListe(sporsmal.undersporsmal));
+            return true;
+        }
+        return false;
+    };
+
     // eslint-disable-next-line
     return (
         <>
@@ -71,15 +86,18 @@ const JaNeiInput = ({ sporsmal }: SpmProps) => {
                             const OK = getValues()[sporsmal.id] === valg.value;
                             return (
                                 <label className={'inputPanel radioPanel' + (OK ? ' inputPanel--checked' : '')}
-                                       key={idx}>
+                                    key={idx}>
                                     <input type="radio"
-                                           name={sporsmal.id}
-                                           className="inputPanel__field"
-                                           aria-checked={OK}
-                                           checked={OK}
-                                           value={valg.value}
-                                           onChange={() => changeValue(valg.value)}
-                                           ref={register({ required: 'Et alternativ må velges' })}
+                                        name={sporsmal.id}
+                                        className="inputPanel__field"
+                                        aria-checked={OK}
+                                        checked={OK}
+                                        value={valg.value}
+                                        onChange={() => changeValue(valg.value)}
+                                        ref={register({
+                                            validate: (value) => valider(value),
+                                            required: feilmelding
+                                        })}
                                     />
                                     <span className="inputPanel__label">{valg.label}</span>
                                 </label>
@@ -91,7 +109,7 @@ const JaNeiInput = ({ sporsmal }: SpmProps) => {
 
             <Normaltekst tag="div" role="alert" aria-live="assertive" className="skjemaelement__feilmelding">
                 <Vis hvis={errors[sporsmal.id] !== undefined}>
-                    <ErrorMessage as="p" errors={errors} name={sporsmal.id} />
+                    <p>{feilmelding_lokal}</p>
                 </Vis>
             </Normaltekst>
 

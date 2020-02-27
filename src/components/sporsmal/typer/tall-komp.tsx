@@ -9,7 +9,7 @@ import { getLedetekst } from '../../../utils/utils';
 import { hentSvar } from '../hent-svar';
 
 const TallInput = ({ sporsmal }: SpmProps) => {
-    const feilmelding = tekster['soknad.feilmelding.' + sporsmal.tag.toLowerCase()];
+    const feilmelding = tekster['soknad.feilmelding.' + sporsmal.tag];
     const [ lokal, setLokal ] = useState<string>(hentSvar(sporsmal));
     const { register, setValue, errors } = useFormContext();
     const undersporsmal = useRef<HTMLDivElement>(null);
@@ -40,12 +40,12 @@ const TallInput = ({ sporsmal }: SpmProps) => {
                            required: feilmelding,
                            min: {
                                value: sporsmal.min,
-                               message: getLedetekst(tekster['soknad.feilmelding.tall-min-max'],
+                               message: getLedetekst(tekster['soknad.feilmelding.TALL_MIN_MAX'],
                                    { '%MIN%': sporsmal.min, '%MAX%': sporsmal.max })
                            },
                            max: {
                                value: sporsmal.max,
-                               message: getLedetekst(tekster['soknad.feilmelding.tall-min-max'],
+                               message: getLedetekst(tekster['soknad.feilmelding.TALL_MIN_MAX'],
                                    { '%MIN%': sporsmal.min, '%MAX%': sporsmal.max }
                                )
                            }

@@ -12,7 +12,7 @@ import { TagTyper } from '../../../types/enums';
 
 const CheckboxKomp = ({ sporsmal }: SpmProps) => {
     const { errors, getValues } = useFormContext();
-    const feilmelding = tekster['soknad.feilmelding.' + sporsmal.tag.toLowerCase()];
+    const feilmelding = tekster['soknad.feilmelding.' + sporsmal.tag];
 
     return (
         <>

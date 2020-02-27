@@ -1,10 +1,10 @@
-import tekster from '../sporsmal-tekster';
-import { Controller, ErrorMessage, useFormContext } from 'react-hook-form';
-import Flatpickr from 'react-flatpickr';
+import { Controller, useFormContext } from 'react-hook-form';
+import { Normaltekst } from 'nav-frontend-typografi';
 import React, { useEffect } from 'react';
+import Flatpickr from 'react-flatpickr';
+import tekster from '../sporsmal-tekster';
 import { SpmProps } from '../sporsmal-form/sporsmal-form';
 import { Norwegian } from 'flatpickr/dist/l10n/no.js'
-import { Normaltekst } from 'nav-frontend-typografi';
 import Vis from '../../vis';
 import { hentPeriode } from '../hent-svar';
 
@@ -18,7 +18,11 @@ type AllProps = SpmProps & PeriodeProps;
 const PeriodeKomp = ({ sporsmal, index, slettPeriode }: AllProps) => {
     const { setValue, errors } = useFormContext();
     const id = sporsmal.id + '_' + index;
-    const feilmelding = tekster['soknad.feilmelding.' + sporsmal.tag.toLowerCase()];
+    const feilmelding = tekster['soknad.feilmelding.' + sporsmal.tag];
+    let feilmelding_lokal = tekster['soknad.feilmelding.' + sporsmal.tag + '.lokal'];
+    if (feilmelding_lokal === undefined) {
+        feilmelding_lokal = tekster['soknad.feilmelding.periode.lokal']
+    }
 
     useEffect(() => {
         setValue(id, hentPeriode(sporsmal, index));
@@ -43,7 +47,7 @@ const PeriodeKomp = ({ sporsmal, index, slettPeriode }: AllProps) => {
                 id={id}
                 name={id}
                 className="skjemaelement__input input--m"
-                placeholder="dd.mm.yyyy - dd.mm.yyyy"
+                placeholder="dd.mm.yyyy til dd.mm.yyyy"
                 options={{
                     minDate: sporsmal.min,
                     maxDate: sporsmal.max,
@@ -59,16 +63,16 @@ const PeriodeKomp = ({ sporsmal, index, slettPeriode }: AllProps) => {
 
             <Vis hvis={index > 0}>
                 <button role="link" id={'btn_' + id} className="periodeknapp lenke slett"
-                        onClick={(e) => slettPeriode(e, index)}>
+                    onClick={(e) => slettPeriode(e, index)}>
                     {tekster['sykepengesoknad.periodevelger.slett']}
                 </button>
             </Vis>
 
-            <div role="alert" aria-live="assertive">
-                <Normaltekst tag="span" className="skjemaelement__feilmelding">
-                    <ErrorMessage as="p" errors={errors} name={id}/>
-                </Normaltekst>
-            </div>
+            <Normaltekst tag="div" role="alert" aria-live="assertive" className="skjemaelement__feilmelding">
+                <Vis hvis={errors[id]}>
+                    <p>{feilmelding_lokal}</p>
+                </Vis>
+            </Normaltekst>
         </li>
     )
 };

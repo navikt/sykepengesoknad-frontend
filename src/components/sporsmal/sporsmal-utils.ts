@@ -1,5 +1,5 @@
 import { TagTyper } from '../../types/enums';
-import { Soknad } from '../../types/types';
+import { Soknad, Sporsmal } from '../../types/types';
 import { SEPARATOR } from '../../utils/constants';
 
 export const erSisteSide = (soknad: Soknad, sidenummer: number) => {
@@ -35,4 +35,14 @@ export const fjernIndexFraTag = (tag: TagTyper): TagTyper => {
         stringtag = stringtag.slice(0, index);
     }
     return TagTyper[stringtag as keyof typeof TagTyper];
+};
+
+export const sporsmalIdListe = (sporsmal: Sporsmal[]) => {
+    let svar: any = [];
+    sporsmal.forEach(spm => {
+        svar.push(spm.id);
+        const alleUndersporsmalId: any = sporsmalIdListe(spm.undersporsmal);
+        svar = [ ...svar, ...alleUndersporsmalId ];
+    });
+    return svar;
 };

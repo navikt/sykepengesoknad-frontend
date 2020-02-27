@@ -23,25 +23,21 @@ const FeilOppsummering = (props: FeiloppsummeringProps) => {
         if (fokuser && oppsummering.current) {
             if (!erSynligIViewport(oppsummering.current)) {
                 setTimeout(() => {
-                    fokuserOppsummering();
+                    oppsummering.current?.focus();
                 }, 300);
             } else {
-                fokuserOppsummering();
+                oppsummering.current?.focus();
             }
         }
     });
 
-    function fokuserOppsummering() {
-        oppsummering.current.focus();
-    }
-
     return (
         <div aria-live="polite" role="alert">
             <Vis hvis={entries.length > 0}>
-                <div tabIndex={0} role="region" className="feiloppsummering">
+                <div ref={oppsummering} tabIndex={0} role="region" className="feiloppsummering">
                     <Undertittel>{'Det er ' + entries.length + ' feil i skjemaet'}</Undertittel>
                     <ul className="feiloppsummering__liste">
-                        {entries.map((list, index) => (
+                        {entries.sort(list => list[0][0]).map((list, index) => (
                             <li key={index}>
                                 <HashLink smooth to={`#${list[0]}`}>{list[1].message}</HashLink>
                             </li>

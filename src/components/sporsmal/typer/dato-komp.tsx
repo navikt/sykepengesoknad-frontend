@@ -1,4 +1,4 @@
-import { Controller, ErrorMessage, useFormContext } from 'react-hook-form';
+import { Controller, useFormContext } from 'react-hook-form';
 import React, { useEffect, useRef } from 'react';
 import { Element, Normaltekst } from 'nav-frontend-typografi';
 import Vis from '../../vis';
@@ -13,7 +13,11 @@ import './flatpickr.less';
 const DatoInput = ({ sporsmal }: SpmProps) => {
     const { setValue, errors, watch } = useFormContext();
     const datoRef = useRef<HTMLDivElement>(null);
-    const feilmelding = tekster['soknad.feilmelding.' + sporsmal.tag.toLowerCase()];
+    const feilmelding = tekster['soknad.feilmelding.' + sporsmal.tag];
+    let feilmelding_lokal = tekster['soknad.feilmelding.' + sporsmal.tag + '.lokal'];
+    if (feilmelding_lokal === undefined) {
+        feilmelding_lokal = tekster['soknad.feilmelding.dato.lokal'];
+    }
 
     useEffect(() => {
         const verdi = hentSvar(sporsmal);
@@ -64,7 +68,7 @@ const DatoInput = ({ sporsmal }: SpmProps) => {
 
             <Normaltekst tag="div" role="alert" aria-live="assertive" className="skjemaelement__feilmelding">
                 <Vis hvis={errors[sporsmal.id]}>
-                    <ErrorMessage as="span" errors={errors} name={sporsmal.id}/>
+                    <p>{feilmelding_lokal}</p>
                 </Vis>
             </Normaltekst>
 

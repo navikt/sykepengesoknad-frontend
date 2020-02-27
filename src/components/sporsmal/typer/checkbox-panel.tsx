@@ -7,7 +7,7 @@ import { Normaltekst } from 'nav-frontend-typografi';
 import { SpmProps } from '../sporsmal-form/sporsmal-form';
 
 const CheckboxInput = ({ sporsmal }: SpmProps) => {
-    const feilmelding = tekster['soknad.feilmelding.' + sporsmal.tag.toLowerCase()];
+    const feilmelding = tekster['soknad.feilmelding.' + sporsmal.tag];
     const { register, setValue, errors, watch } = useFormContext();
     const bekreft = useRef<HTMLDivElement>(null);
     const checkWatch = watch(sporsmal.id);
