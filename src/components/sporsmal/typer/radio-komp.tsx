@@ -7,13 +7,12 @@ import { Element, Normaltekst } from 'nav-frontend-typografi';
 import AnimateOnMount from '../../animate-on-mount';
 import UndersporsmalListe from '../undersporsmal/undersporsmal-liste';
 import { hentSvar } from '../hent-svar';
-import tekster from '../sporsmal-tekster';
+import { hentFeilmelding } from "../sporsmal-utils";
 
 const RadioKomp = ({ sporsmal }: SpmProps) => {
     const { register, setValue, errors, watch } = useFormContext();
     const radioWatch = watch(sporsmal.id);
-    const feilmelding = tekster['soknad.feilmelding.' + sporsmal.tag];
-    const feilmelding_lokal = tekster['soknad.feilmelding.' + sporsmal.tag + '.lokal'];
+    const feilmelding = hentFeilmelding(sporsmal);
 
     useEffect(() => {
         setValue(sporsmal.id, hentSvar(sporsmal));
@@ -37,7 +36,7 @@ const RadioKomp = ({ sporsmal }: SpmProps) => {
                                    id={uspm.id}
                                    name={sporsmal.id}
                                    value={uspm.sporsmalstekst}
-                                   ref={register({ required: feilmelding })}
+                                   ref={register({ required: feilmelding.global })}
                                    className="skjemaelement__input radioknapp"
                             />
                             <label className="skjemaelement__label" htmlFor={uspm.id}>
@@ -60,7 +59,7 @@ const RadioKomp = ({ sporsmal }: SpmProps) => {
             <div role="alert" aria-live="assertive">
                 <Vis hvis={errors[sporsmal.id] !== undefined}>
                     <Normaltekst tag="span" className="skjemaelement__feilmelding">
-                        <p>{feilmelding_lokal}</p>
+                        <p>{feilmelding.lokal}</p>
                     </Normaltekst>
                 </Vis>
             </div>

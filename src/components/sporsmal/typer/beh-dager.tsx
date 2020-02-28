@@ -16,6 +16,7 @@ const BehDager = ({ sporsmal }: SpmProps) => {
 
     useEffect(() => {
         const lagret: RSSvarliste[] = hentSvar(sporsmal);
+        console.log('lagret', lagret);
         lagret.forEach((liste, idx) => {
             if (liste.svar[0] !== undefined) {
                 lokal[idx] = liste.svar[0].verdi;

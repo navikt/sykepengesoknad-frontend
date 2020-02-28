@@ -5,6 +5,7 @@ import Vis from '../../vis';
 import { SpmProps } from '../sporsmal-form/sporsmal-form';
 import tekster from '../sporsmal-tekster';
 import { hentSvar } from '../hent-svar';
+import { hentFeilmelding } from "../sporsmal-utils";
 
 const jaNeiValg = [ {
     value: 'JA',
@@ -17,11 +18,7 @@ const jaNeiValg = [ {
 const JaNeiRadio = ({ sporsmal }: SpmProps) => {
     const [ lokal, setLokal ] = useState<string>(hentSvar(sporsmal));
     const { register, setValue, errors } = useFormContext();
-    const feilmelding = tekster['soknad.feilmelding.' + sporsmal.tag];
-    let feilmelding_lokal = tekster['soknad.feilmelding.' + sporsmal.tag + '.lokal'];
-    if (feilmelding_lokal === undefined) {
-        feilmelding_lokal = tekster['soknad.feilmelding.ja_nei_radio.lokal'];
-    }
+    const feilmelding = hentFeilmelding(sporsmal);
 
     useEffect(() => {
         const lagret = hentSvar(sporsmal);
@@ -56,7 +53,7 @@ const JaNeiRadio = ({ sporsmal }: SpmProps) => {
                                     checked={OK}
                                     aria-checked={OK}
                                     onChange={() => changeValue(valg.value)}
-                                    ref={register({ required: feilmelding })}
+                                    ref={register({ required: feilmelding.global })}
                                     className="skjemaelement__input radioknapp"
                                 />
                                 <label className="skjemaelement__label" htmlFor={sporsmal.id + '_' + idx}>
@@ -78,7 +75,7 @@ const JaNeiRadio = ({ sporsmal }: SpmProps) => {
             <div role="alert" aria-live="assertive">
                 <Vis hvis={errors[sporsmal.id]}>
                     <Normaltekst tag="span" className="skjemaelement__feilmelding">
-                        <p>{feilmelding_lokal}</p>
+                        <p>{feilmelding.lokal}</p>
                     </Normaltekst>
                 </Vis>
             </div>

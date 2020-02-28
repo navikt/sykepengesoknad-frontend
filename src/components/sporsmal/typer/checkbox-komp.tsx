@@ -6,13 +6,13 @@ import Vis from '../../vis';
 import { Element, Normaltekst } from 'nav-frontend-typografi';
 import AnimateOnMount from '../../animate-on-mount';
 import UndersporsmalListe from '../undersporsmal/undersporsmal-liste';
-import tekster from '../sporsmal-tekster';
 import { Sporsmal } from '../../../types/types';
 import { useAppStore } from '../../../data/stores/app-store';
+import { hentFeilmelding } from "../sporsmal-utils";
 
 const CheckboxKomp = ({ sporsmal }: SpmProps) => {
     const { errors } = useFormContext();
-    let feilmelding_lokal = tekster['soknad.feilmelding.' + sporsmal.tag + '.lokal'];
+    const feilmelding = hentFeilmelding(sporsmal);
     const { validCheck } = useAppStore();
 
     return (
@@ -28,7 +28,7 @@ const CheckboxKomp = ({ sporsmal }: SpmProps) => {
 
                 <Normaltekst tag="div" role="alert" aria-live="assertive" className="skjemaelement__feilmelding">
                     <Vis hvis={Object.entries(errors).length > 0 && !validCheck}>
-                        <p>{feilmelding_lokal}</p>
+                        <p>{feilmelding["lokal"]}</p>
                     </Vis>
                 </Normaltekst>
             </div>
@@ -46,7 +46,7 @@ type AllProps = SpmProps & CheckboxProps;
 
 const CheckboxSingle = ({ parent, sporsmal }: AllProps) => {
     const { register, setValue, watch, getValues, clearError } = useFormContext();
-    let feilmelding = tekster['soknad.feilmelding.' + parent.tag];
+    const feilmelding = hentFeilmelding(parent);
     const { setValidCheck } = useAppStore();
 
     useEffect(() => {
@@ -63,7 +63,7 @@ const CheckboxSingle = ({ parent, sporsmal }: AllProps) => {
         }
         clearError(fields);
         setValidCheck(valid);
-        return valid ? valid : feilmelding;
+        return valid ? valid : feilmelding.global;
     };
 
     return (

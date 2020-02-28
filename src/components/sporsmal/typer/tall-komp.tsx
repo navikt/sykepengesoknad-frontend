@@ -7,11 +7,10 @@ import { SpmProps } from '../sporsmal-form/sporsmal-form';
 import UndersporsmalListe from '../undersporsmal/undersporsmal-liste';
 import { getLedetekst } from '../../../utils/utils';
 import { hentSvar } from '../hent-svar';
+import { hentFeilmelding } from "../sporsmal-utils";
 
 const TallInput = ({ sporsmal }: SpmProps) => {
-    const feilmelding = tekster['soknad.feilmelding.' + sporsmal.tag];
-    const feilmelding_lokal = tekster['soknad.feilmelding.' + sporsmal.tag + '.lokal'];
-    console.log('sporsmal.tag', sporsmal.tag); // eslint-disable-line
+    const feilmelding = hentFeilmelding(sporsmal);
     const [ lokal, setLokal ] = useState<string>(hentSvar(sporsmal));
     const { register, setValue, errors } = useFormContext();
     const undersporsmal = useRef<HTMLDivElement>(null);
@@ -39,7 +38,7 @@ const TallInput = ({ sporsmal }: SpmProps) => {
                     name={sporsmal.id}
                     id={sporsmal.id}
                     ref={register({
-                        required: feilmelding,
+                        required: feilmelding.global,
                         min: {
                             value: sporsmal.min,
                             message: getLedetekst(tekster['soknad.feilmelding.TALL_MIN_MAX'],
@@ -61,13 +60,13 @@ const TallInput = ({ sporsmal }: SpmProps) => {
             <div role="alert" aria-live="assertive" className="skjemaelement__feilmelding">
                 <Vis hvis={errors[sporsmal.id]}>
                     <Normaltekst tag="span">
-                        <p>{feilmelding_lokal}</p>
+                        <p>{feilmelding.lokal}</p>
                     </Normaltekst>
                 </Vis>
             </div>
 
             <div className="undersporsmal" ref={undersporsmal}>
-                <Vis hvis={lokal !== undefined}>
+                <Vis hvis={lokal}>
                     <UndersporsmalListe undersporsmal={sporsmal.undersporsmal} />
                 </Vis>
             </div>

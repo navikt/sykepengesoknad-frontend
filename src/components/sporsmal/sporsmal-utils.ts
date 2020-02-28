@@ -1,6 +1,8 @@
-import { TagTyper } from '../../types/enums';
-import { Soknad, Sporsmal } from '../../types/types';
-import { SEPARATOR } from '../../utils/constants';
+import {TagTyper} from '../../types/enums';
+import {Soknad, Sporsmal} from '../../types/types';
+import {SEPARATOR} from '../../utils/constants';
+import tekster from "./sporsmal-tekster";
+import {RSSvartype} from "../../types/rs-types/rs-svartype";
 
 export const erSisteSide = (soknad: Soknad, sidenummer: number) => {
     const sporsmal = soknad.sporsmal[sidenummer - 1];
@@ -45,4 +47,59 @@ export const sporsmalIdListe = (sporsmal: Sporsmal[]) => {
         svar = [ ...svar, ...alleUndersporsmalId ];
     });
     return svar;
+};
+
+interface FeilmeldingProps {
+    global: string;
+    lokal: string;
+}
+
+export const hentFeilmelding = (sporsmal: Sporsmal): FeilmeldingProps => {
+    const feilmelding: FeilmeldingProps = {
+        global: tekster['soknad.feilmelding.' + sporsmal.tag],
+        lokal: tekster['soknad.feilmelding.' + sporsmal.tag + '.lokal']
+    };
+    if (feilmelding.lokal === '') {
+        switch(sporsmal.svartype) {
+            case RSSvartype.JA_NEI:
+            case RSSvartype.RADIO:
+            case RSSvartype.RADIO_GRUPPE:
+            case RSSvartype.RADIO_GRUPPE_TIMER_PROSENT:
+            case RSSvartype.CHECKBOX:
+            case RSSvartype.CHECKBOX_GRUPPE:
+            case RSSvartype.CHECKBOX_PANEL: {
+                feilmelding.lokal = 'Du må velge et alternativ';
+                break;
+            }
+            case RSSvartype.PROSENT:
+            case RSSvartype.TIMER:
+            case RSSvartype.TALL: {
+                feilmelding.lokal = 'Du må oppgi en verdi';
+                break;
+            }
+            case RSSvartype.PERIODER:
+            case RSSvartype.PERIODE: {
+                feilmelding.lokal = 'Du må oppgi en periode';
+                break;
+            }
+            case RSSvartype.FRITEKST: {
+                feilmelding.lokal = 'Du må skrive inn en tekst';
+                break;
+            }
+            case RSSvartype.LAND: {
+                feilmelding.lokal = 'Du må velge ett land';
+                break;
+            }
+            case RSSvartype.DATO: {
+                feilmelding.lokal = 'Du må oppgi en dato';
+                break;
+            }
+            //TODO: Legg til behandlingsdager når den er merget
+            default: {
+                feilmelding.lokal = '';
+                break;
+            }
+        }
+    }
+    return feilmelding;
 };

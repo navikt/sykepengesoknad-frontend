@@ -7,6 +7,7 @@ import { SpmProps } from '../sporsmal-form/sporsmal-form';
 import { Norwegian } from 'flatpickr/dist/l10n/no.js'
 import Vis from '../../vis';
 import { hentPeriode } from '../hent-svar';
+import { hentFeilmelding } from "../sporsmal-utils";
 
 interface PeriodeProps {
     index: number;
@@ -19,11 +20,7 @@ const PeriodeKomp = ({ sporsmal, index, slettPeriode }: AllProps) => {
     const { setValue, errors } = useFormContext();
     const id = sporsmal.id + '_' + index;
     const htmlfor = sporsmal.id + '_t_' + index;
-    const feilmelding = tekster['soknad.feilmelding.' + sporsmal.tag];
-    let feilmelding_lokal = tekster['soknad.feilmelding.' + sporsmal.tag + '.lokal'];
-    if (feilmelding_lokal === undefined) {
-        feilmelding_lokal = tekster['soknad.feilmelding.periode.lokal']
-    }
+    const feilmelding = hentFeilmelding(sporsmal);
 
     useEffect(() => {
         setValue(id, hentPeriode(sporsmal, index));
@@ -43,7 +40,7 @@ const PeriodeKomp = ({ sporsmal, index, slettPeriode }: AllProps) => {
             <Controller
                 as={Flatpickr}
                 rules={{
-                    pattern: { value: /\d/, message: feilmelding }
+                    pattern: { value: /\d/, message: feilmelding.global }
                 }}
                 id={id}
                 name={id}
@@ -71,7 +68,7 @@ const PeriodeKomp = ({ sporsmal, index, slettPeriode }: AllProps) => {
 
             <Normaltekst tag="div" role="alert" aria-live="assertive" className="skjemaelement__feilmelding">
                 <Vis hvis={errors[id]}>
-                    <p>{feilmelding_lokal}</p>
+                    <p>{feilmelding.lokal}</p>
                 </Vis>
             </Normaltekst>
         </li>

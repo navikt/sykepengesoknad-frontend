@@ -13,7 +13,6 @@ import SporsmalBjorn from '../bjorn/sporsmal-bjorn';
 import { useAppStore } from '../../../data/stores/app-store';
 import { RSSoknadstype } from '../../../types/rs-types/rs-soknadstype';
 import SporsmalHjelpetekst from '../sporsmal-hjelpetekst';
-import tekster from '../sporsmal-tekster';
 import { sporsmalIdListe } from '../sporsmal-utils';
 
 const jaNeiValg = [ {
@@ -27,11 +26,7 @@ const jaNeiValg = [ {
 const JaNeiInput = ({ sporsmal }: SpmProps) => {
     const { valgtSoknad } = useAppStore();
     const { register, setValue, errors, watch, reset, getValues, clearError } = useFormContext();
-    const feilmelding = tekster['soknad.feilmelding.' + sporsmal.tag];
-    let feilmelding_lokal = tekster['soknad.feilmelding.' + sporsmal.tag + '.lokal'];
-    if (feilmelding_lokal === undefined) {
-        feilmelding_lokal = tekster['soknad.feilmelding.ja_nei_radio.lokal'];
-    }
+    const feilmelding = hentFeilmelding(sporsmal);
     const watchVerdi = watch(sporsmal.id);
 
     useEffect(() => {
@@ -94,7 +89,7 @@ const JaNeiInput = ({ sporsmal }: SpmProps) => {
                                         onChange={() => changeValue(valg.value)}
                                         ref={register({
                                             validate: (value) => valider(value),
-                                            required: feilmelding
+                                            required: feilmelding.global
                                         })}
                                     />
                                     <span className="inputPanel__label">{valg.label}</span>
@@ -107,7 +102,7 @@ const JaNeiInput = ({ sporsmal }: SpmProps) => {
 
             <Normaltekst tag="div" role="alert" aria-live="assertive" className="skjemaelement__feilmelding">
                 <Vis hvis={errors[sporsmal.id] !== undefined}>
-                    <p>{feilmelding_lokal}</p>
+                    <p>{feilmelding.lokal}</p>
                 </Vis>
             </Normaltekst>
 

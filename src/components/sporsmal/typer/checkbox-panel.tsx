@@ -1,20 +1,16 @@
 import React, { useEffect, useRef } from 'react';
 import { useFormContext } from 'react-hook-form';
-import tekster from '../sporsmal-tekster';
 import { hentSvar } from '../hent-svar';
 import Vis from '../../vis';
 import { Normaltekst } from 'nav-frontend-typografi';
 import { SpmProps } from '../sporsmal-form/sporsmal-form';
+import { hentFeilmelding } from "../sporsmal-utils";
 
 const CheckboxInput = ({ sporsmal }: SpmProps) => {
     const { register, setValue, errors, watch } = useFormContext();
     const bekreft = useRef<HTMLDivElement>(null);
     const checkWatch = watch(sporsmal.id);
-    const feilmelding = tekster['soknad.feilmelding.' + sporsmal.tag];
-    let feilmelding_lokal = tekster['soknad.feilmelding.' + sporsmal.tag + '.lokal'];
-    if (feilmelding_lokal === undefined) {
-        feilmelding_lokal = tekster['soknad.feilmelding.checkbox.lokal'];
-    }
+    const feilmelding = hentFeilmelding(sporsmal);
 
     useEffect(() => {
         const svar = hentSvar(sporsmal);
@@ -43,7 +39,7 @@ const CheckboxInput = ({ sporsmal }: SpmProps) => {
                         name={sporsmal.id}
                         id={sporsmal.id}
                         onChange={handleChange}
-                        ref={register({ required: feilmelding })}
+                        ref={register({ required: feilmelding.global })}
                     />
                     <label className="skjemaelement__label" htmlFor={sporsmal.id}>
                         {sporsmal.sporsmalstekst}
@@ -53,7 +49,7 @@ const CheckboxInput = ({ sporsmal }: SpmProps) => {
 
             <Normaltekst tag="div" role="alert" aria-live="assertive" className="skjemaelement__feilmelding">
                 <Vis hvis={errors[sporsmal.id] !== undefined}>
-                    <p>{feilmelding_lokal}</p>
+                    <p>{feilmelding.lokal}</p>
                 </Vis>
             </Normaltekst>
         </>
