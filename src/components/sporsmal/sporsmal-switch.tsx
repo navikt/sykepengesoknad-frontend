@@ -48,8 +48,8 @@ const SporsmalSwitch = ({ sporsmal }: UndersporsmalProps) => {
         case RSSvartype.RADIO_GRUPPE_TIMER_PROSENT:
             return <RadioKomp sporsmal={sporsmal} />;
 
-        case RSSvartype.BEHANDLINGSDAGER:
-            return <BehDager sporsmal={sporsmal} />;
+        case RSSvartype.INFO_BEHANDLINGSDAGER:
+            return <BehDager sporsmal={sporsmal}/>;
 
         case RSSvartype.IKKE_RELEVANT:
             return <IkkeRelevant sporsmal={sporsmal} />;

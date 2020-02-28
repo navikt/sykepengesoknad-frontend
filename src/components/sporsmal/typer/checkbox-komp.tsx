@@ -57,7 +57,7 @@ const CheckboxSingle = ({ parent, sporsmal }: AllProps) => {
 
     const valider = () => {
         const valid = harValgtNoe(parent, getValues());
-        let fields = parent.undersporsmal.map(spm => spm.id);
+        const fields: string[] = parent.undersporsmal.map(spm => spm.id);
         if (!valid) {
             fields.shift();
         }

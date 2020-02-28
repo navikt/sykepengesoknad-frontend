@@ -27,7 +27,6 @@ export const settSvar = (sporsmal: Sporsmal, verdier: Record<string, any>): void
             break;
         case RSSvartype.RADIO_GRUPPE:
         case RSSvartype.RADIO_GRUPPE_TIMER_PROSENT:
-        case RSSvartype.RADIO_GRUPPE_UKEKALENDER:
             radiogruppeSvar(sporsmal, verdi);
             break;
         case RSSvartype.RADIO:
