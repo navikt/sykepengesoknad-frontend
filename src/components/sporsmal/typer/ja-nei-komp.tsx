@@ -13,7 +13,7 @@ import SporsmalBjorn from '../bjorn/sporsmal-bjorn';
 import { useAppStore } from '../../../data/stores/app-store';
 import { RSSoknadstype } from '../../../types/rs-types/rs-soknadstype';
 import SporsmalHjelpetekst from '../sporsmal-hjelpetekst';
-import { sporsmalIdListe } from '../sporsmal-utils';
+import { hentFeilmelding, sporsmalIdListe } from '../sporsmal-utils';
 
 const jaNeiValg = [ {
     value: 'JA',
