@@ -59,7 +59,7 @@ export const hentFeilmelding = (sporsmal: Sporsmal): FeilmeldingProps => {
         global: tekster['soknad.feilmelding.' + sporsmal.tag],
         lokal: tekster['soknad.feilmelding.' + sporsmal.tag + '.lokal']
     };
-    if (feilmelding.lokal === '') {
+    if (feilmelding.lokal === undefined) {
         switch(sporsmal.svartype) {
             case RSSvartype.JA_NEI:
             case RSSvartype.RADIO:
@@ -82,6 +82,11 @@ export const hentFeilmelding = (sporsmal: Sporsmal): FeilmeldingProps => {
                 feilmelding.lokal = 'Du må oppgi en periode';
                 break;
             }
+            case RSSvartype.BEHANDLINGSDAGER:
+            case RSSvartype.RADIO_GRUPPE_UKEKALENDER: {
+                feilmelding.lokal = 'Du må oppgi en dag';
+                break;
+            }
             case RSSvartype.FRITEKST: {
                 feilmelding.lokal = 'Du må skrive inn en tekst';
                 break;
@@ -94,12 +99,14 @@ export const hentFeilmelding = (sporsmal: Sporsmal): FeilmeldingProps => {
                 feilmelding.lokal = 'Du må oppgi en dato';
                 break;
             }
-            //TODO: Legg til behandlingsdager når den er merget
+            case RSSvartype.IKKE_RELEVANT:
+            case RSSvartype.INFO_BEHANDLINGSDAGER:
             default: {
                 feilmelding.lokal = '';
                 break;
             }
         }
     }
+    console.log(sporsmal.tag, feilmelding);
     return feilmelding;
 };
