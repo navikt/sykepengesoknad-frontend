@@ -4,6 +4,7 @@ import { Element, Normaltekst } from 'nav-frontend-typografi';
 import Vis from '../../../vis';
 import dayjs from 'dayjs';
 import { empty } from '../../../../utils/constants';
+import { tilLesbarPeriodeUtenArstall } from "../../../../utils/dato-utils";
 
 const datoEllerIkkeTilBehandling = (verdi: string) => {
     if (verdi === '') {
@@ -23,12 +24,12 @@ const Behandlingsdager = ({ sporsmal }: OppsummeringProps) => {
                             {sporsmal.undersporsmal.map((uspm, idx) => {
                                 return (
                                     <div className='oppsummering__sporsmal' key={idx}>
-                                        <Element tag='h3'>{uspm.sporsmalstekst}</Element>
+                                        <Element tag='h3'>{tilLesbarPeriodeUtenArstall(uspm.min, uspm.max)}</Element>
                                         <div className='oppsummering__tekstsvar'>
                                             {uspm.svarliste.svar.map((svarverdi, index) => {
                                                 return (
                                                     <Vis
-                                                        hvis={svarverdi.verdi !== empty && typeof svarverdi.verdi === 'string'}
+                                                        hvis={svarverdi.verdi !== empty}
                                                         key={index}>
                                                         <Normaltekst className='oppsummering__dato'>
                                                             {datoEllerIkkeTilBehandling(svarverdi.verdi.toString())}
