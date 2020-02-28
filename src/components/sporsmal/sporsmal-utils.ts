@@ -107,5 +107,6 @@ export const hentFeilmelding = (sporsmal: Sporsmal): FeilmeldingProps => {
             }
         }
     }
+    console.log(sporsmal.tag, feilmelding);
     return feilmelding;
 };
