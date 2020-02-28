@@ -84,7 +84,6 @@ const SporsmalTekster: any = {
         'soknad.feilmelding.INNTEKTSKILDE_OMSORGSLONN': 'Du må svare på om du er sykmeldt med omsorgslønn',
         'soknad.feilmelding.INNTEKTSKILDE_FOSTERHJEM': 'Du må svare på om du er sykmeldt med fosterhjemgodtgjørelse',
 
-
         'soknad.feilmelding.JOBBET_DU_100_PROSENT': 'Du må svare på om du jobbet noe i denne perioden',
         'soknad.feilmelding.JOBBET_DU_GRADERT': 'Vennligst svar på om du jobbet mer enn sykmeldingen tilsier',
         'soknad.feilmelding.LAND': 'Du må oppgi hvilket land du skal reise til',
