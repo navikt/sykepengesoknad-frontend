@@ -1,9 +1,7 @@
 import FetchMock, { MiddlewareUtils } from 'yet-another-fetch-mock';
-import { soknader } from './data/soknader-felles';
-import { sykmeldinger } from './data/sykmeldinger-felles';
+import { soknader } from './data/soknader';
+import { sykmeldinger } from './data/sykmeldinger';
 import { unleashToggles } from './data/toggles';
-import { DECORATOR_URL } from '../../utils/constants';
-import { DecoratorHtml } from './data/decorator-html';
 import env from '../../utils/environment';
 
 const mock = FetchMock.configure({
@@ -14,7 +12,6 @@ const mock = FetchMock.configure({
     )
 });
 
-mock.get(DECORATOR_URL, DecoratorHtml);
 mock.get('/login', '/sykepengesoknad');
 mock.post(env.unleashUrl, unleashToggles);
 mock.get(`${env.syfoapiRoot}/syfosoknad/api/soknader`, soknader);
