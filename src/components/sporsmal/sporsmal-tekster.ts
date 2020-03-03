@@ -20,7 +20,7 @@ const SporsmalTekster: any = {
         "soknad.feilmelding.FERIE_PERMISJON_UTLAND_HVA": "Du må krysse av det som gjelder deg",
         "soknad.feilmelding.FULLTIDSSTUDIUM": "Du må svare på om utdanningen er et fulltidsstudium",
         "soknad.feilmelding.HVILKE_ANDRE_INNTEKTSKILDER": "Du må oppgi hvilke inntektskilder du har",
-        "soknad.feilmelding.HVILKE_ANDRE_INNTEKTSKILDER.lokal": "Du må oppgi hvilke inntektskilder du har",
+        "soknad.feilmelding.HVILKE_ANDRE_INNTEKTSKILDER.lokal": "Du må velge minst et alternativ",
 
         "soknad.feilmelding.HVOR_MANGE_TIMER": "Du må svare på hvor mange timer du jobber normalt per uke",
         "soknad.feilmelding.HVOR_MANGE_TIMER.lokal": "Du må oppgi antall timer",

@@ -1,14 +1,14 @@
 import React, { useEffect } from 'react';
-import { SpmProps } from '../sporsmal-form/sporsmal-form';
-import { hentSvar } from '../hent-svar';
 import { useFormContext } from 'react-hook-form';
-import Vis from '../../vis';
 import { Element, Normaltekst } from 'nav-frontend-typografi';
-import AnimateOnMount from '../../animate-on-mount';
-import UndersporsmalListe from '../undersporsmal/undersporsmal-liste';
+import Vis from '../../vis';
+import { hentSvar } from '../hent-svar';
 import { Sporsmal } from '../../../types/types';
+import { hentFeilmelding } from '../sporsmal-utils';
+import AnimateOnMount from '../../animate-on-mount';
+import { SpmProps } from '../sporsmal-form/sporsmal-form';
 import { useAppStore } from '../../../data/stores/app-store';
-import { hentFeilmelding } from "../sporsmal-utils";
+import UndersporsmalListe from '../undersporsmal/undersporsmal-liste';
 
 const CheckboxKomp = ({ sporsmal }: SpmProps) => {
     const { errors } = useFormContext();

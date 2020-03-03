@@ -1,13 +1,13 @@
-import React, { useEffect, useRef, useState } from 'react';
+import useForceUpdate from 'use-force-update';
 import { Element } from 'nav-frontend-typografi';
+import React, { useEffect, useRef, useState } from 'react';
 import Vis from '../../vis';
+import PeriodeKomp from './periode-komp';
 import tekster from '../sporsmal-tekster';
+import { hentPerioder } from '../hent-svar';
+import { empty } from '../../../utils/constants';
 import { SpmProps } from '../sporsmal-form/sporsmal-form';
 import UndersporsmalListe from '../undersporsmal/undersporsmal-liste';
-import useForceUpdate from 'use-force-update';
-import PeriodeKomp from './periode-komp';
-import { empty } from '../../../utils/constants';
-import { hentPerioder } from '../hent-svar';
 import './flatpickr.less';
 
 const Perioder = ({ sporsmal }: SpmProps) => {

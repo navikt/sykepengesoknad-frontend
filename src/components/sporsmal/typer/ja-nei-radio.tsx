@@ -2,10 +2,10 @@ import { useFormContext } from 'react-hook-form';
 import React, { useEffect, useState } from 'react';
 import { Element, Normaltekst } from 'nav-frontend-typografi';
 import Vis from '../../vis';
-import { SpmProps } from '../sporsmal-form/sporsmal-form';
-import tekster from '../sporsmal-tekster';
 import { hentSvar } from '../hent-svar';
-import { hentFeilmelding } from "../sporsmal-utils";
+import tekster from '../sporsmal-tekster';
+import { hentFeilmelding } from '../sporsmal-utils';
+import { SpmProps } from '../sporsmal-form/sporsmal-form';
 
 const jaNeiValg = [ {
     value: 'JA',

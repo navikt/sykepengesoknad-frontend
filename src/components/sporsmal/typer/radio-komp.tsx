@@ -1,13 +1,13 @@
 import React, { useEffect } from 'react';
+import { useFormContext } from 'react-hook-form';
+import { Element, Normaltekst } from 'nav-frontend-typografi';
+import Vis from '../../vis';
+import { hentSvar } from '../hent-svar';
+import AnimateOnMount from '../../animate-on-mount';
+import { hentFeilmelding } from '../sporsmal-utils';
 import { SpmProps } from '../sporsmal-form/sporsmal-form';
 import { RSSvartype } from '../../../types/rs-types/rs-svartype';
-import { useFormContext } from 'react-hook-form';
-import Vis from '../../vis';
-import { Element, Normaltekst } from 'nav-frontend-typografi';
-import AnimateOnMount from '../../animate-on-mount';
 import UndersporsmalListe from '../undersporsmal/undersporsmal-liste';
-import { hentSvar } from '../hent-svar';
-import { hentFeilmelding } from "../sporsmal-utils";
 
 const RadioKomp = ({ sporsmal }: SpmProps) => {
     const { register, setValue, errors, watch } = useFormContext();
@@ -49,7 +49,7 @@ const RadioKomp = ({ sporsmal }: SpmProps) => {
                                 leave="undersporsmal--skjul"
                                 start="undersporsmal"
                             >
-                                <UndersporsmalListe undersporsmal={uspm.undersporsmal}/>
+                                <UndersporsmalListe undersporsmal={uspm.undersporsmal} />
                             </AnimateOnMount>
                         </div>
                     )

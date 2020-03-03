@@ -1,13 +1,13 @@
-import React, { useEffect, useRef, useState } from 'react';
 import { useFormContext } from 'react-hook-form';
+import React, { useEffect, useRef, useState } from 'react';
 import { Element, Normaltekst } from 'nav-frontend-typografi';
 import Vis from '../../vis';
+import { hentSvar } from '../hent-svar';
 import tekster from '../sporsmal-tekster';
+import { getLedetekst } from '../../../utils/utils';
+import { hentFeilmelding } from '../sporsmal-utils';
 import { SpmProps } from '../sporsmal-form/sporsmal-form';
 import UndersporsmalListe from '../undersporsmal/undersporsmal-liste';
-import { getLedetekst } from '../../../utils/utils';
-import { hentSvar } from '../hent-svar';
-import { hentFeilmelding } from "../sporsmal-utils";
 
 const TallInput = ({ sporsmal }: SpmProps) => {
     const feilmelding = hentFeilmelding(sporsmal);
@@ -27,7 +27,7 @@ const TallInput = ({ sporsmal }: SpmProps) => {
     }, []);
 
     return (
-        <React.Fragment>
+        <>
             <Vis hvis={sporsmal.sporsmalstekst !== null}>
                 <Element tag="h3" className="skjema__sporsmal">{sporsmal.sporsmalstekst}</Element>
             </Vis>
@@ -70,7 +70,7 @@ const TallInput = ({ sporsmal }: SpmProps) => {
                     <UndersporsmalListe undersporsmal={sporsmal.undersporsmal} />
                 </Vis>
             </div>
-        </React.Fragment>
+        </>
     )
 };
 

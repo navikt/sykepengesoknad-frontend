@@ -75,7 +75,7 @@ const SporsmalForm = () => {
                     <SendtTil />
                 </Vis>
 
-                <FeilOppsummering errors={methods.errors} />
+                <FeilOppsummering errors={methods.errors} sporsmal={sporsmal} />
                 <Knapperad onSubmit={onSubmit} />
             </form>
         </FormContext>

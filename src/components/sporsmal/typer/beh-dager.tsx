@@ -1,11 +1,11 @@
-import { Element, Normaltekst } from 'nav-frontend-typografi';
 import React, { useEffect, useState } from 'react';
-import { hentSvar } from '../hent-svar';
-import { SpmProps } from '../sporsmal-form/sporsmal-form';
-import { ErrorMessage, useFormContext } from 'react-hook-form';
+import { Element, Normaltekst } from 'nav-frontend-typografi';
 import Vis from '../../vis';
+import { hentSvar } from '../hent-svar';
 import { Sporsmal } from '../../../types/types';
 import { ukeDatoListe } from '../../../utils/dato-utils';
+import { SpmProps } from '../sporsmal-form/sporsmal-form';
+import { ErrorMessage, useFormContext } from 'react-hook-form';
 import { RSSvarliste } from '../../../types/rs-types/rs-svarliste';
 import './beh.dager.less';
 
@@ -16,7 +16,6 @@ const BehDager = ({ sporsmal }: SpmProps) => {
 
     useEffect(() => {
         const lagret: RSSvarliste[] = hentSvar(sporsmal);
-        console.log('lagret', lagret);
         lagret.forEach((liste, idx) => {
             if (liste.svar[0] !== undefined) {
                 lokal[idx] = liste.svar[0].verdi;

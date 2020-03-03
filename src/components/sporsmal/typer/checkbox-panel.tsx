@@ -1,10 +1,10 @@
 import React, { useEffect, useRef } from 'react';
 import { useFormContext } from 'react-hook-form';
-import { hentSvar } from '../hent-svar';
-import Vis from '../../vis';
 import { Normaltekst } from 'nav-frontend-typografi';
+import Vis from '../../vis';
+import { hentSvar } from '../hent-svar';
+import { hentFeilmelding } from '../sporsmal-utils';
 import { SpmProps } from '../sporsmal-form/sporsmal-form';
-import { hentFeilmelding } from "../sporsmal-utils";
 
 const CheckboxInput = ({ sporsmal }: SpmProps) => {
     const { register, setValue, errors, watch } = useFormContext();

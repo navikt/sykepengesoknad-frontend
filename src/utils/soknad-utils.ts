@@ -45,7 +45,7 @@ export const periodeVerdi = (sporsmal: Sporsmal): string[] => {
     return [];
 };
 
-const flattenSporsmal = (sporsmal: Sporsmal[]) => {
+export const flattenSporsmal = (sporsmal: Sporsmal[]) => {
     let flatArr: Sporsmal[] = [];
     for (let i = 0; i < sporsmal.length; i++) {
         flatArr.push(sporsmal[i]);

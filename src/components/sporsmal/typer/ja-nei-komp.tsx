@@ -1,18 +1,18 @@
-import { useFormContext } from 'react-hook-form';
 import React, { useEffect } from 'react';
+import { useFormContext } from 'react-hook-form';
 import { Element, Normaltekst } from 'nav-frontend-typografi';
 import Vis from '../../vis';
-import { SpmProps } from '../sporsmal-form/sporsmal-form';
-import { hentFormState, hentSvar } from '../hent-svar';
-import UndersporsmalListe from '../undersporsmal/undersporsmal-liste';
-import AnimateOnMount from '../../animate-on-mount';
-import TagBjorn from '../bjorn/tag-bjorn';
-import { AvgittAvTyper, TagTyper } from '../../../types/enums';
 import Bjorn from '../bjorn/bjorn';
+import TagBjorn from '../bjorn/tag-bjorn';
 import SporsmalBjorn from '../bjorn/sporsmal-bjorn';
-import { useAppStore } from '../../../data/stores/app-store';
-import { RSSoknadstype } from '../../../types/rs-types/rs-soknadstype';
+import AnimateOnMount from '../../animate-on-mount';
+import { hentFormState, hentSvar } from '../hent-svar';
+import { SpmProps } from '../sporsmal-form/sporsmal-form';
 import SporsmalHjelpetekst from '../sporsmal-hjelpetekst';
+import { useAppStore } from '../../../data/stores/app-store';
+import { AvgittAvTyper, TagTyper } from '../../../types/enums';
+import UndersporsmalListe from '../undersporsmal/undersporsmal-liste';
+import { RSSoknadstype } from '../../../types/rs-types/rs-soknadstype';
 import { hentFeilmelding, sporsmalIdListe } from '../sporsmal-utils';
 
 const jaNeiValg = [ {
@@ -78,10 +78,10 @@ const JaNeiInput = ({ sporsmal }: SpmProps) => {
                         {jaNeiValg.map((valg, idx) => {
                             const OK = getValues()[sporsmal.id] === valg.value;
                             return (
-                                <label className={'inputPanel radioPanel' + (OK ? ' inputPanel--checked' : '')}
-                                    key={idx}>
+                                <label className={'inputPanel radioPanel' + (OK ? ' inputPanel--checked' : '')} key={idx}>
                                     <input type="radio"
                                         name={sporsmal.id}
+                                        id={sporsmal.id + '_' + idx}
                                         className="inputPanel__field"
                                         aria-checked={OK}
                                         checked={OK}

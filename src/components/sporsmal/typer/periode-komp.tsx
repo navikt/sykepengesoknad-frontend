@@ -1,13 +1,13 @@
-import { Controller, useFormContext } from 'react-hook-form';
-import { Normaltekst } from 'nav-frontend-typografi';
 import React, { useEffect } from 'react';
+import { Normaltekst } from 'nav-frontend-typografi';
+import { Controller, useFormContext } from 'react-hook-form';
 import Flatpickr from 'react-flatpickr';
-import tekster from '../sporsmal-tekster';
-import { SpmProps } from '../sporsmal-form/sporsmal-form';
-import { Norwegian } from 'flatpickr/dist/l10n/no.js'
 import Vis from '../../vis';
+import tekster from '../sporsmal-tekster';
 import { hentPeriode } from '../hent-svar';
-import { hentFeilmelding } from "../sporsmal-utils";
+import { hentFeilmelding } from '../sporsmal-utils';
+import { Norwegian } from 'flatpickr/dist/l10n/no.js';
+import { SpmProps } from '../sporsmal-form/sporsmal-form';
 
 interface PeriodeProps {
     index: number;
