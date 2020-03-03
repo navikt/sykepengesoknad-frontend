@@ -23,12 +23,12 @@ const Fremdriftsbar = ({ antallSteg }: FremdriftsbarProps) => {
     };
 
     return (
-        <div className="fremdriftsbar">
-            <Normaltekst tag="span" className="fremdriftsbar__tekst" style={style}>
+        <div className='fremdriftsbar'>
+            <Normaltekst tag='span' className='fremdriftsbar__tekst' style={style}>
                 {parser(`${stegId}&nbsp;av&nbsp;${antallSteg}`)}
             </Normaltekst>
-            <div className="fremdriftsbar__fullbredde" />
-            <div className="fremdriftsbar__fremdrift" style={style} />
+            <div className='fremdriftsbar__fullbredde' />
+            <div className='fremdriftsbar__fremdrift' style={style} />
         </div>
     );
 };
@@ -40,11 +40,11 @@ const SporsmalSteg = () => {
     const steg = valgtSoknad.sporsmal.filter(s => s.tag !== TagTyper.VAER_KLAR_OVER_AT);
 
     return (
-        <div className="stegindikator-med-fremdriftsbar" role="progressbar"
+        <div className='stegindikator-med-fremdriftsbar' role='progressbar'
             aria-valuenow={aktivtSteg} aria-valuemin={1} aria-valuemax={steg.length}
         >
             <div className={'stegindikator stegindikator--kompakt'}>
-                <ol className="stegindikator__liste">
+                <ol className='stegindikator__liste'>
                     {steg.map((sporsmal: Sporsmal, idx: number) => {
                         return <Steg index={idx} key={idx} label={tekster[hentNokkel(valgtSoknad, idx + 1)]} />;
                     })}

@@ -16,10 +16,10 @@ const TekstfeltMedEnhet = ({ label, id, input, undertekst, kunHeltall }: Tekstfe
         'skjemaelement__input--harFeil': true,
     });
     return (
-        <div className="skjemaelement">
-            <div className="medEnhet">
-                <input autoComplete="off" id={id} type={inputType} value={input.value} className={className} />
-                <label htmlFor={id} className="medEnhet__enhet">{label}</label>
+        <div className='skjemaelement'>
+            <div className='medEnhet'>
+                <input autoComplete='off' id={id} type={inputType} value={input.value} className={className} />
+                <label htmlFor={id} className='medEnhet__enhet'>{label}</label>
             </div>
             <SkjemaFeilmelding touched={true} error={''} />
         </div>

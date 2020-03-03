@@ -28,12 +28,12 @@ const PeriodeKomp = ({ sporsmal, index, slettPeriode }: AllProps) => {
     }, [ sporsmal ]);
 
     return (
-        <li className="periode">
-            <div className="periodelabel">
-                <label htmlFor={htmlfor} className="fom">
+        <li className='periode'>
+            <div className='periodelabel'>
+                <label htmlFor={htmlfor} className='fom'>
                     {tekster['sykepengesoknad.periodevelger.fom']}
                 </label>
-                <label htmlFor={htmlfor} className="tom">
+                <label htmlFor={htmlfor} className='tom'>
                     {tekster['sykepengesoknad.periodevelger.tom']}
                 </label>
             </div>
@@ -44,8 +44,8 @@ const PeriodeKomp = ({ sporsmal, index, slettPeriode }: AllProps) => {
                 }}
                 id={id}
                 name={id}
-                className="skjemaelement__input input--m"
-                placeholder="dd.mm.yyyy til dd.mm.yyyy"
+                className='skjemaelement__input input--m'
+                placeholder='dd.mm.yyyy til dd.mm.yyyy'
                 options={{
                     minDate: sporsmal.min,
                     maxDate: sporsmal.max,
@@ -60,13 +60,13 @@ const PeriodeKomp = ({ sporsmal, index, slettPeriode }: AllProps) => {
             />
 
             <Vis hvis={index > 0}>
-                <button role="link" id={'btn_' + id} className="periodeknapp lenke slett"
+                <button role='link' id={'btn_' + id} className='periodeknapp lenke slett'
                     onClick={(e) => slettPeriode(e, index)}>
                     {tekster['sykepengesoknad.periodevelger.slett']}
                 </button>
             </Vis>
 
-            <Normaltekst tag="div" role="alert" aria-live="assertive" className="skjemaelement__feilmelding">
+            <Normaltekst tag='div' role='alert' aria-live='assertive' className='skjemaelement__feilmelding'>
                 <Vis hvis={errors[id]}>
                     <p>{feilmelding.lokal}</p>
                 </Vis>

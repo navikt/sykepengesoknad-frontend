@@ -26,10 +26,10 @@ const Banner = ({ brodsmuler }: BannerProps) => {
     }
 
     return (
-        <header className="soknadtopp">
+        <header className='soknadtopp'>
             <Brodsmuler brodsmuler={brodsmuler} />
             <SykSokLokalt />
-            <Sidetittel tag="h1" className="soknadtopp__tittel">{tittel}</Sidetittel>
+            <Sidetittel tag='h1' className='soknadtopp__tittel'>{tittel}</Sidetittel>
         </header>
     );
 };

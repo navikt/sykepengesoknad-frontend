@@ -39,14 +39,14 @@ const JaNeiRadio = ({ sporsmal }: SpmProps) => {
                 : 'skjemaelement'
             }>
 
-                <Element tag="h3" className="skjema__sporsmal">{sporsmal.sporsmalstekst}</Element>
+                <Element tag='h3' className='skjema__sporsmal'>{sporsmal.sporsmalstekst}</Element>
 
                 {jaNeiValg.map((valg, idx) => {
                     const OK = lokal === valg.value;
                     return (
                         <div key={idx}>
-                            <div className="radioContainer">
-                                <input type="radio"
+                            <div className='radioContainer'>
+                                <input type='radio'
                                     id={sporsmal.id + '_' + idx}
                                     name={sporsmal.id}
                                     value={valg.value}
@@ -54,15 +54,15 @@ const JaNeiRadio = ({ sporsmal }: SpmProps) => {
                                     aria-checked={OK}
                                     onChange={() => changeValue(valg.value)}
                                     ref={register({ required: feilmelding.global })}
-                                    className="skjemaelement__input radioknapp"
+                                    className='skjemaelement__input radioknapp'
                                 />
-                                <label className="skjemaelement__label" htmlFor={sporsmal.id + '_' + idx}>
+                                <label className='skjemaelement__label' htmlFor={sporsmal.id + '_' + idx}>
                                     {valg.label}
                                 </label>
                             </div>
                             <Vis hvis={sporsmal.tag && sporsmal.tag.startsWith('INNTEKTSKILDE_') && lokal === 'JA' && OK}>
-                                <div className="presisering">
-                                    <Normaltekst tag="span">
+                                <div className='presisering'>
+                                    <Normaltekst tag='span'>
                                         {tekster['soknad.presisering.' + sporsmal.tag]}
                                     </Normaltekst>
                                 </div>
@@ -72,9 +72,9 @@ const JaNeiRadio = ({ sporsmal }: SpmProps) => {
                 })}
             </div>
 
-            <div role="alert" aria-live="assertive">
+            <div role='alert' aria-live='assertive'>
                 <Vis hvis={errors[sporsmal.id]}>
-                    <Normaltekst tag="span" className="skjemaelement__feilmelding">
+                    <Normaltekst tag='span' className='skjemaelement__feilmelding'>
                         <p>{feilmelding.lokal}</p>
                     </Normaltekst>
                 </Vis>

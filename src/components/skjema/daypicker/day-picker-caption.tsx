@@ -7,7 +7,7 @@ interface CaptionProps {
 
 const DayPickerCaption = ({ date }: CaptionProps) => {
     return (
-        <div className="DayPicker-Caption" role="heading" aria-live="assertive" aria-atomic="true">
+        <div className='DayPicker-Caption' role='heading' aria-live='assertive' aria-atomic='true'>
             {`${MONTHS[date.getMonth()]} ${date.getFullYear()}`}
         </div>
     );

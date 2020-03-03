@@ -33,15 +33,15 @@ const Kvittering = () => {
     }, [ valgtSoknad ]);
 
     return (
-        <div className="limit">
+        <div className='limit'>
             <Banner brodsmuler={brodsmuler} />
             <PanelBase border={true}>
                 <SendtTil />
             </PanelBase>
 
             <Vis hvis={erSiste}>
-                <Link to="/" className="gaa-videre">
-                    <Normaltekst tag="span">
+                <Link to='/' className='gaa-videre'>
+                    <Normaltekst tag='span'>
                         <VenstreChevron />
                         {tekster['sykepengesoknad.navigasjon.gaa-til']}
                     </Normaltekst>

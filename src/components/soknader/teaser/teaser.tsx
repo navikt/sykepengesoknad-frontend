@@ -32,7 +32,7 @@ interface SendtUliktProps {
 
 export const SendtUlikt = ({ soknad }: SendtUliktProps) => {
     return (
-        <Normaltekst tag="span">
+        <Normaltekst tag='span'>
             {getLedetekst(tekster['soknad.teaser.status.SENDT.til-arbeidsgiver'], {
                 '%DATO%': dayjs(soknad.sendtTilArbeidsgiverDato).format('DD.MM.YYYY'),
                 '%ARBEIDSGIVER%': finnArbeidsgivernavn(soknad),
@@ -132,7 +132,7 @@ const Teaser = ({ soknad }: SykepengesoknadTeaserProps) => {
                     ikonHover={hentIkonHover(soknad.soknadstype)}
                 />
                 <HoyreChevron />
-                <div className="inngangspanel__innhold">
+                <div className='inngangspanel__innhold'>
                     <InngangsHeader
                         meta={getLedetekst(tekster['soknad.teaser.dato'], {
                             '%DATO%': dayjs(soknad.opprettetDato).format('DD.MM.YYYY'),
@@ -143,14 +143,14 @@ const Teaser = ({ soknad }: SykepengesoknadTeaserProps) => {
                         status={hentTeaserStatustekst(soknad)}
                     />
                     <Vis hvis={soknad.soknadstype !== RSSoknadstype.OPPHOLD_UTLAND}>
-                        <Normaltekst className="inngangspanel__tekst">
+                        <Normaltekst className='inngangspanel__tekst'>
                             {getLedetekst(tekster['soknad.teaser.tekst'], {
                                 '%PERIODE%': tilLesbarPeriodeMedArstall(soknad.fom, soknad.tom),
                             })}
                         </Normaltekst>
                     </Vis>
                     <Vis hvis={undertekst !== undefined}>
-                        <Normaltekst className="inngangspanel__undertekst">
+                        <Normaltekst className='inngangspanel__undertekst'>
                             {undertekst}
                         </Normaltekst>
                     </Vis>

@@ -18,7 +18,7 @@ const CheckboxKomp = ({ sporsmal }: SpmProps) => {
     return (
         <>
             <Vis hvis={sporsmal.sporsmalstekst !== null}>
-                <Element tag="h3" className="skjema__sporsmal">{sporsmal.sporsmalstekst}</Element>
+                <Element tag='h3' className='skjema__sporsmal'>{sporsmal.sporsmalstekst}</Element>
             </Vis>
 
             <div className={'skjemagruppe checkboxgruppe' + (errors[sporsmal.id] ? ' skjemagruppe--feil' : '')}>
@@ -26,9 +26,9 @@ const CheckboxKomp = ({ sporsmal }: SpmProps) => {
                     return <CheckboxSingle parent={sporsmal} sporsmal={uspm} key={idx} />;
                 })}
 
-                <Normaltekst tag="div" role="alert" aria-live="assertive" className="skjemaelement__feilmelding">
+                <Normaltekst tag='div' role='alert' aria-live='assertive' className='skjemaelement__feilmelding'>
                     <Vis hvis={Object.entries(errors).length > 0 && !validCheck}>
-                        <p>{feilmelding["lokal"]}</p>
+                        <p>{feilmelding['lokal']}</p>
                     </Vis>
                 </Normaltekst>
             </div>
@@ -67,22 +67,22 @@ const CheckboxSingle = ({ parent, sporsmal }: AllProps) => {
     };
 
     return (
-        <div className="checkboksContainer">
-            <input type="checkbox"
+        <div className='checkboksContainer'>
+            <input type='checkbox'
                 id={sporsmal.id}
                 name={sporsmal.id}
                 ref={register({ validate: () => valider() })}
-                className="skjemaelement__input checkboks"
+                className='skjemaelement__input checkboks'
             />
-            <label className="skjemaelement__label" htmlFor={sporsmal.id}>
+            <label className='skjemaelement__label' htmlFor={sporsmal.id}>
                 {sporsmal.sporsmalstekst}
             </label>
 
             <AnimateOnMount
                 mounted={watch(sporsmal.id)}
-                enter="undersporsmal--vis"
-                leave="undersporsmal--skjul"
-                start="undersporsmal"
+                enter='undersporsmal--vis'
+                leave='undersporsmal--skjul'
+                start='undersporsmal'
             >
                 <UndersporsmalListe undersporsmal={sporsmal.undersporsmal} />
             </AnimateOnMount>

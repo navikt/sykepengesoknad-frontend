@@ -8,10 +8,10 @@ import './soknad-intro.less';
 
 const SoknadIntro = () => {
     return (
-        <div className="soknad-intro">
-            <div className="blokk-s">
+        <div className='soknad-intro'>
+            <div className='blokk-s'>
                 <Veilederpanel kompakt svg={<ForsteSoknadSvg/>}>
-                    <Normaltekst tag="h2" className="panel__tittel sist">
+                    <Normaltekst tag='h2' className='panel__tittel sist'>
                         {parser(tekster['sykepengesoknad.soknad-intro.personvern'])}
                     </Normaltekst>
                 </Veilederpanel>

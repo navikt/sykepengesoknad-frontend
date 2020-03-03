@@ -55,21 +55,21 @@ const Perioder = ({ sporsmal }: SpmProps) => {
 
     return (
         <div className={sporsmal.parentKriterie ? 'kriterie--' + sporsmal.parentKriterie.toLowerCase() : ''}>
-            <Element tag="h3" className="skjema__sporsmal">
+            <Element tag='h3' className='skjema__sporsmal'>
                 {sporsmal.sporsmalstekst}
             </Element>
 
-            <ul className="periodeliste" ref={periodeliste}>
+            <ul className='periodeliste' ref={periodeliste}>
                 {lokal.map((idx) => {
                     return <PeriodeKomp sporsmal={sporsmal} index={idx} slettPeriode={slettPeriode} key={idx}/>
                 })}
             </ul>
 
-            <button role="link" className="periodeknapp lenke" onClick={leggTilPeriode}>
+            <button role='link' className='periodeknapp lenke' onClick={leggTilPeriode}>
                 {tekster['sykepengesoknad.periodevelger.legg-til-ekstra']}
             </button>
 
-            <div className="undersporsmal">
+            <div className='undersporsmal'>
                 <Vis hvis={lokal.length > 0 && lokal[0] !== empty}>
                     <UndersporsmalListe undersporsmal={sporsmal.undersporsmal}/>
                 </Vis>

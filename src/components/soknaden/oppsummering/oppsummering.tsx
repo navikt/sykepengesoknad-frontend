@@ -27,7 +27,7 @@ const Oppsummering = () => {
     return (
         <Ekspanderbartpanel apen={false} border={true}
             tittel={tekster['sykepengesoknad.oppsummering.tittel']}
-            tittelProps="element"
+            tittelProps='element'
         >
             {valgtSoknad.sporsmal
                 .filter((sporsmal) => {
@@ -35,7 +35,7 @@ const Oppsummering = () => {
                 })
                 .map((sporsmal, index) => {
                     return (
-                        <div className="oppsummering__seksjon" key={index}>
+                        <div className='oppsummering__seksjon' key={index}>
                             <SporsmalVarianter sporsmal={sporsmal}/>
                         </div>
                     )

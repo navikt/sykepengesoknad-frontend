@@ -8,7 +8,7 @@ interface FeilmeldingProps {
 
 const SkjemaFeilmelding = ({ touched, error }: FeilmeldingProps) => {
     return (
-        <Normaltekst className="skjemaelement__feilmelding" aria-live="polite">
+        <Normaltekst className='skjemaelement__feilmelding' aria-live='polite'>
             {touched && error}
         </Normaltekst>
     );

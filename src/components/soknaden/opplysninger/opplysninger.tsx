@@ -31,9 +31,9 @@ const Opplysninger = ({ ekspandert }: OpplysningerProps) => {
         <Utvidbar className={'ekspander' + (apen ? ' apen' : '')}
             ikon={plaster} ikonHover={plasterHover} erApen={apen}
             tittel={tekster['sykepengesoknad.sykmelding-utdrag.tittel']}
-            ikonAltTekst=""
+            ikonAltTekst=''
         >
-            <div className="opplysninger">
+            <div className='opplysninger'>
                 {apen}
                 <SykmeldingPerioder />
                 <ArbeidsgiverInfo />

@@ -22,12 +22,12 @@ const SendtTil = () => {
     return (
         <div className={className}>
             <Vis hvis={erSiste}>
-                <Systemtittel tag="h2">
+                <Systemtittel tag='h2'>
                     {tekster['sykepengesoknad.kvittering.tittel']}
                 </Systemtittel>
             </Vis>
             {mottaker !== undefined ?
-                <Normaltekst tag="div">
+                <Normaltekst tag='div'>
                     {valgtSoknad.arbeidsgiver !== undefined
                         ? parser(getLedetekst(tekster[nokkel], {
                             '%ARBEIDSGIVER%': valgtSoknad.arbeidsgiver.navn,

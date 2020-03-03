@@ -20,10 +20,10 @@ const Knapperad = ({ onSubmit }: KnapperadProps) => {
     // TODO: Lenke i avbryt-knapp mangler
 
     return (
-        <div className="knapperad">
-            <Knapp type="hoved" onClick={() => onSubmit}>{tekster[nokkel]}</Knapp>
-            <Link to={'asdf'} className="avbrytlenke">
-                <Normaltekst tag="span">{tekster['sykepengesoknad.avbryt.trigger']}</Normaltekst>
+        <div className='knapperad'>
+            <Knapp type='hoved' onClick={() => onSubmit}>{tekster[nokkel]}</Knapp>
+            <Link to={'asdf'} className='avbrytlenke'>
+                <Normaltekst tag='span'>{tekster['sykepengesoknad.avbryt.trigger']}</Normaltekst>
             </Link>
         </div>
     )

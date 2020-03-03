@@ -70,14 +70,14 @@ const FeilOppsummering = (props: FeilProps) => {
     };
 
     return (
-        <div aria-live="polite" role="alert">
+        <div aria-live='polite' role='alert'>
             <Vis hvis={entries.length > 0}>
-                <div ref={oppsummering} tabIndex={0} role="region" className="feiloppsummering">
+                <div ref={oppsummering} tabIndex={0} role='region' className='feiloppsummering'>
                     <Undertittel>{'Det er ' + entries.length + ' feil i skjemaet'}</Undertittel>
-                    <ul className="feiloppsummering__liste">
+                    <ul className='feiloppsummering__liste'>
                         {entries.sort(list => list[0][0]).map((list, index) => (
                             <li key={index}>
-                                <div role="link" className="lenke" onClick={() => handleClick(list)}>{list[1].message}</div>
+                                <div role='link' className='lenke' onClick={() => handleClick(list)}>{list[1].message}</div>
                             </li>
                         ))}
                     </ul>

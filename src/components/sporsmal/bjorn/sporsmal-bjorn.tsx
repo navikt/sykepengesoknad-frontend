@@ -14,7 +14,7 @@ export const SporsmalBjorn = ({ sporsmal }: SpmProps) => {
 
     return (
         <Vis hvis={vis}>
-            <Bjorn className="press" nokkel={nokkel} />
+            <Bjorn className='press' nokkel={nokkel} />
         </Vis>
     )
 };

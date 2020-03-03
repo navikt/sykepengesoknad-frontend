@@ -8,7 +8,7 @@ import { BrowserRouter } from 'react-router-dom';
 
 dayjs.locale('nb');
 
-if (env.mockBackend === "true") {
+if (env.mockBackend === 'true') {
     require('./data/mock');
 }
 

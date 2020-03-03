@@ -49,16 +49,16 @@ const Utvidbar = (props: UtvidbarProps) => {
                 onMouseEnter={() => btnImage.current.src = props.ikonHover}
                 onMouseLeave={() => btnImage.current.src = props.ikon}
                 onClick={() => setErApen(!erApen)}
-                className="utvidbar__toggle"
+                className='utvidbar__toggle'
             >
-                <img aria-hidden="true" className="utvidbar__ikon"
+                <img aria-hidden='true' className='utvidbar__ikon'
                     ref={btnImage}
                     alt={props.ikonAltTekst}
                     src={props.ikon}
                 />
-                <Element tag="h3">{props.tittel}</Element>
-                <div className="utvidbar__handling">
-                    <Normaltekst tag="em">
+                <Element tag='h3'>{props.tittel}</Element>
+                <div className='utvidbar__handling'>
+                    <Normaltekst tag='em'>
                         {erApen ? 'Lukk' : 'Åpne'}
                     </Normaltekst>
                     <Chevron type={erApen ? 'opp' : 'ned'} />
@@ -67,13 +67,13 @@ const Utvidbar = (props: UtvidbarProps) => {
             <div ref={container} className={'utvidbar__innholdContainer' + (erApen ? ' apen' : '')}
                 onTransitionEnd={() => onTransitionEnd()} style={{ maxHeight: erApen ? (innholdHeight + 2) + 'px' : '0' }}
             >
-                <div ref={innhold} className="utvidbar__innhold">
+                <div ref={innhold} className='utvidbar__innhold'>
                     {props.children}
-                    <div className="lenkerad ikke-print">
-                        <button type="button" className="lenke" aria-pressed={!erApen}
+                    <div className='lenkerad ikke-print'>
+                        <button type='button' className='lenke' aria-pressed={!erApen}
                             tabIndex={erApen ? null : -1} onClick={() => setErApen(!erApen)}
                         >
-                            <Normaltekst tag="span">Lukk</Normaltekst>
+                            <Normaltekst tag='span'>Lukk</Normaltekst>
                         </button>
                     </div>
                 </div>

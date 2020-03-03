@@ -44,15 +44,15 @@ const Soknader = () => {
     }, []);
 
     return (
-        <div className="limit">
+        <div className='limit'>
             <Brodsmuler brodsmuler={brodsmuler} />
-            <Sidetittel tag="h1" className="sidetopp__tittel">
+            <Sidetittel tag='h1' className='sidetopp__tittel'>
                 {tekster['soknader.sidetittel']}
             </Sidetittel>
 
             <Vis hvis={soknader === undefined}>
-                <Alertstripe type="advarsel" className="blokk">
-                    <p className="sist">
+                <Alertstripe type='advarsel' className='blokk'>
+                    <p className='sist'>
                         <strong>Oops!</strong>
                         Vi kunne ikke hente alle dine sykepengesøknader.
                     </p>
@@ -63,14 +63,14 @@ const Soknader = () => {
                 soknader={nyeSoknader}
                 tittel={tekster['soknader.venter-paa-behandling.tittel']}
                 tomListeTekst={tekster['soknader.venter-paa-behandling.ingen-soknader']}
-                id="soknader-list-til-behandling"
+                id='soknader-list-til-behandling'
             />
 
             <Vis hvis={fremtidigeSoknader.length > 0}>
                 <Teasere
                     soknader={fremtidigeSoknader}
                     tittel={tekster['soknader.planlagt.tittel']}
-                    id="soknader-planlagt"
+                    id='soknader-planlagt'
                 />
             </Vis>
 
@@ -80,7 +80,7 @@ const Soknader = () => {
                 <Teasere
                     soknader={tidligereSoknader}
                     tittel={tekster['soknader.sendt.tittel']}
-                    id="soknader-sendt"
+                    id='soknader-sendt'
                 />
             </Vis>
         </div>

@@ -14,8 +14,8 @@ const RadioGruppe = ({ sporsmal }: OppsummeringProps) => {
     });
     return (
         <Vis hvis={besvartUndersporsmal !== undefined}>
-            <div className="oppsummering__sporsmal">
-                <Element tag="h3" className="oppsummering__overskrift">{sporsmal.sporsmalstekst}</Element>
+            <div className='oppsummering__sporsmal'>
+                <Element tag='h3' className='oppsummering__overskrift'>{sporsmal.sporsmalstekst}</Element>
                 {sporsmal.svartype === RSSvartype.RADIO_GRUPPE &&
                 <Avkrysset tekst={besvartUndersporsmal.sporsmalstekst}/>}
                 <UndersporsmalSum sporsmalsliste={besvartUndersporsmal.undersporsmal}/>

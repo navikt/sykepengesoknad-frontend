@@ -13,7 +13,7 @@ const App = (): any => {
     return (
         <StoreProvider>
             <DataFetcher>
-                <main id="maincontent" role="main" tabIndex={-1}>
+                <main id='maincontent' role='main' tabIndex={-1}>
                     <TransitionGroup>
                         <CSSTransition
                             key={location.key}
@@ -21,7 +21,7 @@ const App = (): any => {
                             classNames={'fade'}
                         >
                             <Switch location={location}>
-                                <Route exact={true} path="/" component={Soknader} />
+                                <Route exact={true} path='/' component={Soknader} />
                                 <Route path={'/soknader/:id/:stegId'} component={Soknad} />
                                 <Route path={'/soknader/:id'} component={Soknad} />
                                 <Route path={'/kvittering/:id'} component={Kvittering} />

@@ -54,7 +54,7 @@ const Soknaden = (props: RouteComponentProps<IdParams>) => {
     if (!valgtSoknad) return null;
 
     return (
-        <div className="limit">
+        <div className='limit'>
             <Banner brodsmuler={brodsmuler} />
             <HotjarTrigger trigger={valgtSoknad.soknadstype}>
                 <Fordeling />
@@ -82,20 +82,20 @@ const Fordeling = () => {
 
                     <Vis hvis={stegNo > 1}>
                         <SporsmalSteg />
-                        <Link to={'/soknader/' + valgtSoknad.id + SEPARATOR + (stegNo - 1)} className="lenke tilbakelenke">
+                        <Link to={'/soknader/' + valgtSoknad.id + SEPARATOR + (stegNo - 1)} className='lenke tilbakelenke'>
                             <VenstreChevron />
-                            <Normaltekst tag="span">{tekster['soknad.tilbakeknapp']}</Normaltekst>
+                            <Normaltekst tag='span'>{tekster['soknad.tilbakeknapp']}</Normaltekst>
                         </Link>
                     </Vis>
 
                     <Opplysninger ekspandert={true} />
 
                     <Vis hvis={tittel !== undefined}>
-                        <Systemtittel className="sporsmal__tittel">{tittel}</Systemtittel>
+                        <Systemtittel className='sporsmal__tittel'>{tittel}</Systemtittel>
                     </Vis>
 
                     <Vis hvis={stegNo === 1}>
-                        <Normaltekst tag="p" className="sporsmal__intro">
+                        <Normaltekst tag='p' className='sporsmal__intro'>
                             {tekster['sykepengesoknad.foer-du-begynner.introtekst']}
                         </Normaltekst>
                     </Vis>

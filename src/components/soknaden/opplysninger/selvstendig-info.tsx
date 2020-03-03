@@ -10,8 +10,8 @@ const SelvstendigInfo = () => {
     if (valgtSoknad.soknadstype !== RSSoknadstype.SELVSTENDIGE_OG_FRILANSERE) return null;
 
     return (
-        <div className="avsnitt">
-            <EtikettLiten tag="h3" className="avsnitt-hode">{tekster['din-sykmelding.arbeidssituasjon.tittel.2']}</EtikettLiten>
+        <div className='avsnitt'>
+            <EtikettLiten tag='h3' className='avsnitt-hode'>{tekster['din-sykmelding.arbeidssituasjon.tittel.2']}</EtikettLiten>
             <Normaltekst>{tekster['din-sykmelding.arbeidssituasjon.alternativ.frilanser']}</Normaltekst>
         </div>
     );

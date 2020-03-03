@@ -50,12 +50,12 @@ const BehDager = ({ sporsmal }: SpmProps) => {
     return (
         <>
             <Vis hvis={sporsmal.sporsmalstekst !== null}>
-                <Element tag="h3" className="skjema__sporsmal">{sporsmal.sporsmalstekst}</Element>
+                <Element tag='h3' className='skjema__sporsmal'>{sporsmal.sporsmalstekst}</Element>
             </Vis>
 
-            <div className="skjemaelement">
-                <div className="skjema__beh-dager">
-                    <div className="ukedager">
+            <div className='skjemaelement'>
+                <div className='skjema__beh-dager'>
+                    <div className='ukedager'>
                         <span>Man</span>
                         <span>Tir</span>
                         <span>Ons</span>
@@ -66,22 +66,22 @@ const BehDager = ({ sporsmal }: SpmProps) => {
                     {sporsmal.undersporsmal.map((ukespm, ukeidx) => {
 
                         return (
-                            <div className="kalenderuke" key={ukeidx}>
+                            <div className='kalenderuke' key={ukeidx}>
 
                                 {Array(dagerSidenMandag(ukespm)).fill(0).map((i, idx) => {
-                                    return <div className="kalenderdag tomdag" key={idx} />;
+                                    return <div className='kalenderdag tomdag' key={idx} />;
                                 })}
 
                                 {ukeDatoListe(ukespm.min, ukespm.max).map((dagspm, idx) => {
                                     return (
-                                        <div className="kalenderdag" key={idx}>
-                                            <input type="radio"
+                                        <div className='kalenderdag' key={idx}>
+                                            <input type='radio'
                                                 id={ukespm.id + '_' + idx}
                                                 name={ukespm.id}
                                                 value={dagspm.format('YYYY-MM-DD')}
                                                 ref={register}
                                                 onChange={() => radioKlikk(dagspm.format(('YYYY-MM-DD')), ukeidx, ukespm.id)}
-                                                className="radioknapp"
+                                                className='radioknapp'
                                             />
                                             <label htmlFor={ukespm.id + '_' + idx}
                                                 onClick={() =>
@@ -95,19 +95,19 @@ const BehDager = ({ sporsmal }: SpmProps) => {
                                 })}
 
                                 {Array(dagerTilFredag(ukespm)).fill(0).map((i, idx) => {
-                                    return <div className="kalenderdag tomdag" key={idx} />;
+                                    return <div className='kalenderdag tomdag' key={idx} />;
                                 })}
 
-                                <div className="kalenderdag">
-                                    <input type="radio"
+                                <div className='kalenderdag'>
+                                    <input type='radio'
                                         name={ukespm.id}
-                                        className="radioknapp"
-                                        value=""
+                                        className='radioknapp'
+                                        value=''
                                         id={ukespm.id + '_fjern'}
                                     />
                                     <label htmlFor={ukespm.id + '_fjern'}
                                         id={ukespm.id + '_label'}
-                                        className="fjern skjul"
+                                        className='fjern skjul'
                                         onClick={() => fjernKlikk(ukespm, ukeidx)}
                                     >
                                         fjern
@@ -119,10 +119,10 @@ const BehDager = ({ sporsmal }: SpmProps) => {
                 </div>
             </div>
 
-            <div role="alert" aria-live="assertive">
+            <div role='alert' aria-live='assertive'>
                 <Vis hvis={errors[sporsmal.id] !== undefined}>
-                    <Normaltekst tag="span" className="skjemaelement__feilmelding">
-                        <ErrorMessage as="p" errors={errors} name={sporsmal.id} />
+                    <Normaltekst tag='span' className='skjemaelement__feilmelding'>
+                        <ErrorMessage as='p' errors={errors} name={sporsmal.id} />
                     </Normaltekst>
                 </Vis>
             </div>

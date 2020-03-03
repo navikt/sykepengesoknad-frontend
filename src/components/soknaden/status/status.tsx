@@ -10,8 +10,8 @@ const Status = () => {
     const { valgtSoknad, sendTil } = useAppStore();
 
     return (
-        <div className="avsnitt">
-            <EtikettLiten tag="h3" className="avsnitt-hode">{tekster['statuspanel.status']}</EtikettLiten>
+        <div className='avsnitt'>
+            <EtikettLiten tag='h3' className='avsnitt-hode'>{tekster['statuspanel.status']}</EtikettLiten>
             {sendTil.map((svar, idx) => {
                 return (
                     <Normaltekst key={idx}>

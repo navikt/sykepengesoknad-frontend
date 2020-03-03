@@ -29,12 +29,12 @@ const TallInput = ({ sporsmal }: SpmProps) => {
     return (
         <>
             <Vis hvis={sporsmal.sporsmalstekst !== null}>
-                <Element tag="h3" className="skjema__sporsmal">{sporsmal.sporsmalstekst}</Element>
+                <Element tag='h3' className='skjema__sporsmal'>{sporsmal.sporsmalstekst}</Element>
             </Vis>
 
-            <div className="medEnhet">
-                <input type="number"
-                    className="skjemaelement__input input--xs"
+            <div className='medEnhet'>
+                <input type='number'
+                    className='skjemaelement__input input--xs'
                     name={sporsmal.id}
                     id={sporsmal.id}
                     ref={register({
@@ -52,20 +52,20 @@ const TallInput = ({ sporsmal }: SpmProps) => {
                         }
                     })}
                     onChange={onChange}
-                    autoComplete="off"
+                    autoComplete='off'
                 />
-                <label className="medEnhet__enhet" htmlFor={sporsmal.id}>{sporsmal.undertekst}</label>
+                <label className='medEnhet__enhet' htmlFor={sporsmal.id}>{sporsmal.undertekst}</label>
             </div>
 
-            <div role="alert" aria-live="assertive" className="skjemaelement__feilmelding">
+            <div role='alert' aria-live='assertive' className='skjemaelement__feilmelding'>
                 <Vis hvis={errors[sporsmal.id]}>
-                    <Normaltekst tag="span">
+                    <Normaltekst tag='span'>
                         <p>{feilmelding.lokal}</p>
                     </Normaltekst>
                 </Vis>
             </div>
 
-            <div className="undersporsmal" ref={undersporsmal}>
+            <div className='undersporsmal' ref={undersporsmal}>
                 <Vis hvis={lokal}>
                     <UndersporsmalListe undersporsmal={sporsmal.undersporsmal} />
                 </Vis>

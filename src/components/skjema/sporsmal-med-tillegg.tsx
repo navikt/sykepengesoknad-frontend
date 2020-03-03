@@ -124,8 +124,8 @@ const SporsmalMedTillegg = (props: SporsmalMedTilleggProps) => {
                 onTransitionEnd={() => onHoydeTransitionEnd()}
             >
                 <Vis hvis={visInnhold}>
-                    <div className="js-tillegg" ref={tilleggsinnhold}>
-                        <div className="tilleggsinnhold__innhold" style={{ opacity: opacity }}>
+                    <div className='js-tillegg' ref={tilleggsinnhold}>
+                        <div className='tilleggsinnhold__innhold' style={{ opacity: opacity }}>
                             {children}
                         </div>
                     </div>

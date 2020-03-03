@@ -19,12 +19,12 @@ const DayPickerNavBar = ({ onNextClick, onPreviousClick, showPreviousButton, sho
     const className = 'DayPicker-NavButton';
 
     return (
-        <div role="toolbar">
+        <div role='toolbar'>
             <button
                 tabIndex={0}
                 className={`${className} DayPicker-NavButton--prev`}
                 disabled={!showPreviousButton}
-                type="button"
+                type='button'
                 onKeyDown={onKeyDown}
                 onClick={(e) => {
                     e.preventDefault();
@@ -37,7 +37,7 @@ const DayPickerNavBar = ({ onNextClick, onPreviousClick, showPreviousButton, sho
                 tabIndex={0}
                 className={`${className} DayPicker-NavButton--next`}
                 disabled={!showNextButton}
-                type="button"
+                type='button'
                 onKeyDown={onKeyDown}
                 onClick={(e) => {
                     e.preventDefault();

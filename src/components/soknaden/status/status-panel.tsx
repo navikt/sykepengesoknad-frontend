@@ -11,17 +11,17 @@ const StatusPanel = () => {
     const { valgtSoknad, sendTil } = useAppStore();
 
     return (
-        <div className="panel status-panel">
+        <div className='panel status-panel'>
             <Vis hvis={sendTil.length > 0}>
                 <Status />
                 <Utbetaling />
             </Vis>
 
-            <div className="knapperad">
-                <Knapp mini type="standard">{tekster['statuspanel.knapp.endre']}</Knapp>
-                <Knapp mini type="standard">{tekster['statuspanel.knapp.send-nav']}</Knapp>
+            <div className='knapperad'>
+                <Knapp mini type='standard'>{tekster['statuspanel.knapp.endre']}</Knapp>
+                <Knapp mini type='standard'>{tekster['statuspanel.knapp.send-nav']}</Knapp>
                 <Vis hvis={valgtSoknad.arbeidsgiver !== undefined}>
-                    <Knapp mini type="standard">{tekster['statuspanel.knapp.send-arbeidsgiver']}</Knapp>
+                    <Knapp mini type='standard'>{tekster['statuspanel.knapp.send-arbeidsgiver']}</Knapp>
                 </Vis>
             </div>
         </div>

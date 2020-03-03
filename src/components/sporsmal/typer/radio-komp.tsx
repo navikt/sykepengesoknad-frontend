@@ -22,7 +22,7 @@ const RadioKomp = ({ sporsmal }: SpmProps) => {
     return (
         <>
             <Vis hvis={sporsmal.sporsmalstekst !== null}>
-                <Element tag="h3" className="skjema__sporsmal">{sporsmal.sporsmalstekst}</Element>
+                <Element tag='h3' className='skjema__sporsmal'>{sporsmal.sporsmalstekst}</Element>
             </Vis>
 
             <div className={erHorisontal(sporsmal.svartype)
@@ -31,23 +31,23 @@ const RadioKomp = ({ sporsmal }: SpmProps) => {
             >
                 {sporsmal.undersporsmal.map((uspm, idx) => {
                     return (
-                        <div className="radioContainer" key={idx}>
-                            <input type="radio"
+                        <div className='radioContainer' key={idx}>
+                            <input type='radio'
                                 id={uspm.id}
                                 name={sporsmal.id}
                                 value={uspm.sporsmalstekst}
                                 ref={register({ required: feilmelding.global })}
-                                className="skjemaelement__input radioknapp"
+                                className='skjemaelement__input radioknapp'
                             />
-                            <label className="skjemaelement__label" htmlFor={uspm.id}>
+                            <label className='skjemaelement__label' htmlFor={uspm.id}>
                                 {uspm.sporsmalstekst}
                             </label>
 
                             <AnimateOnMount
                                 mounted={radioWatch === uspm.sporsmalstekst}
-                                enter="undersporsmal--vis"
-                                leave="undersporsmal--skjul"
-                                start="undersporsmal"
+                                enter='undersporsmal--vis'
+                                leave='undersporsmal--skjul'
+                                start='undersporsmal'
                             >
                                 <UndersporsmalListe undersporsmal={uspm.undersporsmal} />
                             </AnimateOnMount>
@@ -56,9 +56,9 @@ const RadioKomp = ({ sporsmal }: SpmProps) => {
                 })}
             </div>
 
-            <div role="alert" aria-live="assertive">
+            <div role='alert' aria-live='assertive'>
                 <Vis hvis={errors[sporsmal.id] !== undefined}>
-                    <Normaltekst tag="span" className="skjemaelement__feilmelding">
+                    <Normaltekst tag='span' className='skjemaelement__feilmelding'>
                         <p>{feilmelding.lokal}</p>
                     </Normaltekst>
                 </Vis>

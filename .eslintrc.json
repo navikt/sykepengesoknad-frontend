@@ -23,7 +23,8 @@
     "react/display-name": 0,
     "arrow-body-style": "off",
     "array-bracket-spacing": [2, "always"],
-    "object-curly-spacing": [2, "always"]
+    "object-curly-spacing": [2, "always"],
+    "quotes": [2, "single", { "avoidEscape": true }]
   },
   "settings": {
     "react": {

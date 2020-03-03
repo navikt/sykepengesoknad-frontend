@@ -33,21 +33,21 @@ const CheckboxInput = ({ sporsmal }: SpmProps) => {
     return (
         <>
             <div className={makeClassName()} ref={bekreft}>
-                <div className="skjemaelement skjemaelement--horisontal">
-                    <input type="checkbox"
-                        className="skjemaelement__input checkboks"
+                <div className='skjemaelement skjemaelement--horisontal'>
+                    <input type='checkbox'
+                        className='skjemaelement__input checkboks'
                         name={sporsmal.id}
                         id={sporsmal.id}
                         onChange={handleChange}
                         ref={register({ required: feilmelding.global })}
                     />
-                    <label className="skjemaelement__label" htmlFor={sporsmal.id}>
+                    <label className='skjemaelement__label' htmlFor={sporsmal.id}>
                         {sporsmal.sporsmalstekst}
                     </label>
                 </div>
             </div>
 
-            <Normaltekst tag="div" role="alert" aria-live="assertive" className="skjemaelement__feilmelding">
+            <Normaltekst tag='div' role='alert' aria-live='assertive' className='skjemaelement__feilmelding'>
                 <Vis hvis={errors[sporsmal.id] !== undefined}>
                     <p>{feilmelding.lokal}</p>
                 </Vis>

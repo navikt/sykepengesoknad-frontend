@@ -5,8 +5,8 @@ import tekster from './status-panel-tekster'
 
 const Utbetaling = () => {
     return (
-        <div className="avsnitt">
-            <EtikettLiten tag="h3" className="avsnitt-hode">{tekster['statuspanel.utbetaling.tittel']}</EtikettLiten>
+        <div className='avsnitt'>
+            <EtikettLiten tag='h3' className='avsnitt-hode'>{tekster['statuspanel.utbetaling.tittel']}</EtikettLiten>
             <Normaltekst>{parser(tekster['sykepengesoknad.sykepengeinfo.til-nav'])}</Normaltekst>
         </div>
     );
