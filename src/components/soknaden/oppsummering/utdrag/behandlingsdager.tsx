@@ -4,7 +4,7 @@ import { Element, Normaltekst } from 'nav-frontend-typografi';
 import Vis from '../../../vis';
 import dayjs from 'dayjs';
 import { empty } from '../../../../utils/constants';
-import { tilLesbarPeriodeUtenArstall } from "../../../../utils/dato-utils";
+import { tilLesbarPeriodeUtenArstall } from '../../../../utils/dato-utils';
 
 const datoEllerIkkeTilBehandling = (verdi: string) => {
     if (verdi === '') {
