@@ -470,22 +470,20 @@ export const soknader: any = [
                     "kriterieForVisningAvUndersporsmal": null,
                     "svar": [],
                     "undersporsmal": []
-                },
-                    {
-                        "id": "631072",
-                        "tag": "FULLTIDSSTUDIUM",
-                        "sporsmalstekst": "Er utdanningen et fulltidsstudium?",
-                        "undertekst": null,
-                        "svartype": "JA_NEI",
-                        "min": null,
-                        "max": null,
-                        "pavirkerAndreSporsmal": false,
-                        "kriterieForVisningAvUndersporsmal": null,
-                        "svar": [],
-                        "undersporsmal": []
-                    } ]
-            },
-            {
+                }, {
+                    "id": "631072",
+                    "tag": "FULLTIDSSTUDIUM",
+                    "sporsmalstekst": "Er utdanningen et fulltidsstudium?",
+                    "undertekst": null,
+                    "svartype": "JA_NEI",
+                    "min": null,
+                    "max": null,
+                    "pavirkerAndreSporsmal": false,
+                    "kriterieForVisningAvUndersporsmal": null,
+                    "svar": [],
+                    "undersporsmal": []
+                } ]
+            }, {
                 "id": "631073",
                 "tag": "VAER_KLAR_OVER_AT",
                 "sporsmalstekst": "Viktig å være klar over:",
@@ -497,8 +495,7 @@ export const soknader: any = [
                 "kriterieForVisningAvUndersporsmal": null,
                 "svar": [],
                 "undersporsmal": []
-            },
-            {
+            }, {
                 "id": "631074",
                 "tag": "BEKREFT_OPPLYSNINGER",
                 "sporsmalstekst": "Jeg har lest all informasjonen jeg har fått i søknaden og bekrefter at opplysningene jeg har gitt er korrekte.",
@@ -512,8 +509,7 @@ export const soknader: any = [
                 "undersporsmal": []
             }
         ]
-    },
-    {
+    }, {
         "id": "e0ba915c-c9fb-4abf-a989-7cafff2e4808",
         "sykmeldingId": "efdf6587-e3b1-4d83-8823-6c861f2c0d06",
         "soknadstype": "ARBEIDSTAKERE",

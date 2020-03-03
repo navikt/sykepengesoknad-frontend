@@ -3662,7 +3662,7 @@ export const soknader: any = [
         "korrigerer": null,
         "korrigertAv": null,
         "arbeidssituasjon": "ARBEIDSLEDIG",
-        "soknadPerioder": [{ "fom": "2019-08-08", "tom": "2019-08-12", "grad": 100 }, { "fom": "2019-08-13", "tom": "2019-08-17", "grad": 40 }],
+        "soknadPerioder": [ { "fom": "2019-08-08", "tom": "2019-08-12", "grad": 100 }, { "fom": "2019-08-13", "tom": "2019-08-17", "grad": 40 } ],
         "sporsmal": [
             {
                 "id": "1",

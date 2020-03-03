@@ -1,8 +1,8 @@
 {
   "extends": [
+    "plugin:@typescript-eslint/recommended",
     "eslint:recommended",
-    "plugin:react/recommended",
-    "plugin:@typescript-eslint/recommended"
+    "plugin:react/recommended"
   ],
   "plugins": ["react", "@typescript-eslint"],
   "env": {
@@ -12,13 +12,17 @@
     "node": true
   },
   "rules": {
+    "@typescript-eslint/indent": ["error", 4],
     "@typescript-eslint/no-explicit-any": 0,
     "@typescript-eslint/explicit-function-return-type": 0,
     "@typescript-eslint/no-non-null-assertion": 0,
     "@typescript-eslint/no-use-before-define": 0,
+    "@typescript-eslint/space-before-function-paren": [0, "always"],
     "no-fallthrough": 0,
     "no-useless-escape": 0,
-      "react/display-name": 0
+    "react/display-name": 0,
+    "arrow-body-style": "off",
+    "array-bracket-spacing": "off"
   },
   "settings": {
     "react": {

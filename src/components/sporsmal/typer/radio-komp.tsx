@@ -33,11 +33,11 @@ const RadioKomp = ({ sporsmal }: SpmProps) => {
                     return (
                         <div className="radioContainer" key={idx}>
                             <input type="radio"
-                                   id={uspm.id}
-                                   name={sporsmal.id}
-                                   value={uspm.sporsmalstekst}
-                                   ref={register({ required: feilmelding.global })}
-                                   className="skjemaelement__input radioknapp"
+                                id={uspm.id}
+                                name={sporsmal.id}
+                                value={uspm.sporsmalstekst}
+                                ref={register({ required: feilmelding.global })}
+                                className="skjemaelement__input radioknapp"
                             />
                             <label className="skjemaelement__label" htmlFor={uspm.id}>
                                 {uspm.sporsmalstekst}

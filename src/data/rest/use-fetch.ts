@@ -28,7 +28,7 @@ const createFinishedFetchState = <D = {}>(data: D | null, error: any, httpCode: 
 });
 
 const useFetch = <D = {}>(): Fetch<D> => {
-    const [fetchState, setFetchState] = useState<FetchState<D>>(createInitialFetchState());
+    const [ fetchState, setFetchState ] = useState<FetchState<D>>(createInitialFetchState());
 
     const apiFetch = (url: string, request?: RequestInit, onFinished?: (fetchState: FetchState<D>) => void) => {
         setFetchState(createPendingFetchState());
@@ -38,7 +38,7 @@ const useFetch = <D = {}>(): Fetch<D> => {
                 const httpCode = res.status;
                 let state: FetchState<D>;
 
-                if ([200, 201, 203, 206].includes(httpCode)) {
+                if ([ 200, 201, 203, 206 ].includes(httpCode)) {
                     try {
                         const data = await res.json();
                         state = createFinishedFetchState(data, null, httpCode);
@@ -54,14 +54,13 @@ const useFetch = <D = {}>(): Fetch<D> => {
 
             .catch(error => {
                 return createFinishedFetchState(null, error, -1);
-
-            }).then(state => {
-
-            if (onFinished) {
-                onFinished(state);
-            }
-            setFetchState(state);
-        });
+            })
+            .then(state => {
+                if (onFinished) {
+                    onFinished(state);
+                }
+                setFetchState(state);
+            });
     };
 
     const apiFetchCallback = useCallback(apiFetch, []);
@@ -69,7 +68,7 @@ const useFetch = <D = {}>(): Fetch<D> => {
 
     return useMemo(() => {
         return { ...fetchState, fetch: apiFetchCallback, reset: resetCallback };
-    }, [fetchState, apiFetchCallback, resetCallback]);
+    }, [ fetchState, apiFetchCallback, resetCallback ]);
 };
 
 export default useFetch;

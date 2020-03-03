@@ -36,7 +36,7 @@ const FeilOppsummering = (props: FeilProps) => {
     });
 
     const handleClick = (list: any) => {
-        let id = `${list[0]}`;
+        const id = `${list[0]}`;
         const idarr = id.split('_');
 
         let detteSpm = flattenSporsmal(sporsmal.undersporsmal).filter((uspm: Sporsmal) => uspm.id === idarr[0])[0];
@@ -59,7 +59,7 @@ const FeilOppsummering = (props: FeilProps) => {
             elmid = 'input' + idarr[0];
         }
 
-        let element = document.getElementById(elmid);
+        const element = document.getElementById(elmid);
         if (element) {
             if (detteSpm.erHovedsporsmal && detteSpm.svartype.includes('JA_NEI')) {
                 element!.parentElement.classList.add('inputPanel--focused');

@@ -51,7 +51,6 @@
     "nav-frontend-veileder-style": "^2.0.12",
     "nav-frontend-veilederpanel": "^0.1.21",
     "nav-frontend-veilederpanel-style": "0.0.24",
-    "query-string": "^6.11.0",
     "react": "^16.12.0",
     "react-collapse": "^5.0.1",
     "react-dom": "^16.12.0",
