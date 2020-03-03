@@ -16,11 +16,19 @@ const addHeaders = (proxyReq) => {
 
 app.use(function (req, res, next) {
     res.header('Access-Control-Allow-Origin', 'http://localhost:8080');
+    res.header('Access-Control-Allow-Methods", "DELETE, POST, PUT, GET, OPTIONS');
     res.header('Access-Control-Allow-Credentials', 'true');
     res.header('Access-Control-Allow-Headers', 'Content-Type, Accept');
-    next();
-});
+    res.header("Content-Type: application/json");
 
+    if (req.method === 'OPTIONS') {
+        res.sendStatus(200);
+        res.end();
+    }
+    else {
+        next();
+    }
+});
 
 app.use('/syfoapi/syfosoknad', proxy({
     target: 'http://localhost:7070',
@@ -42,6 +50,5 @@ app.all('/syfounleash', (req, res) => res.json({
     'syfo.ag.soknad.ny.platform': true,
     'syfo.syfofront.nytt.sykmeldingsmottak': true
 }));
-
 
 app.listen(port, () => console.log(`Example app listening on port ${port}!`));

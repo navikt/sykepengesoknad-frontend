@@ -12,6 +12,7 @@ export const useAppStore = createUseContext(() => {
     const [ sendTil, setSendTil ] = useState<SvarTil[]>([]);
     const [ top, setTop ] = useState<number>(0);
     const [ validCheck, setValidCheck ] = useState<boolean>();
+    const [ oppdaterSporsmalId, setOppdaterSporsmalId ] = useState<number>();
 
     return {
         unleash, setUnleash,
@@ -21,6 +22,7 @@ export const useAppStore = createUseContext(() => {
         valgtSykmelding, setValgtSykmelding,
         sendTil, setSendTil,
         top, setTop,
-        validCheck, setValidCheck
+        validCheck, setValidCheck,
+        oppdaterSporsmalId, setOppdaterSporsmalId,
     };
 });
