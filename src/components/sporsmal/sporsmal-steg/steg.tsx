@@ -4,6 +4,8 @@ import { useParams, useHistory } from 'react-router';
 import Vis from '../../vis';
 import { pathUtenSteg } from '../sporsmal-utils';
 import { SEPARATOR } from '../../../utils/constants';
+import { useAmplitudeInstance } from '../../amplitude/amplitude';
+import { useAppStore } from '../../../data/stores/app-store';
 
 const innerCls = (aktiv: boolean, ferdig: boolean, disabled: boolean) =>
     cls('stegindikator__steg-inner', {
@@ -20,6 +22,8 @@ export interface StegProps {
 
 const Steg = ({ label, index }: StegProps) => {
     const { stegId } = useParams();
+    const { valgtSoknad } = useAppStore();
+    const { logEvent } = useAmplitudeInstance();
     const aktivtSteg = parseInt(stegId);
     const num = index + 1;
     const erAktiv = aktivtSteg === num;
@@ -28,6 +32,7 @@ const Steg = ({ label, index }: StegProps) => {
     const history = useHistory();
 
     function goTo (idx: number) {
+        logEvent('Trykt på spørsmålssteg', { fra: valgtSoknad.sporsmal[aktivtSteg - 1].tag, til: valgtSoknad.sporsmal[idx - 1].tag });
         history.push(pathUtenSteg(history.location.pathname) + SEPARATOR + (idx));
     }
 

@@ -33,6 +33,14 @@ class Environment {
     get loginServiceUrl () {
         return this.env.LOGINSERVICE_URL
     }
+
+    get amplitudeKey () {
+        return this.env.AMPLITUDE_KEY
+    }
+
+    get amplitudeEnabled () {
+        return this.env.AMPLITUDE_ENABLED === 'true'
+    }
 }
 
 const env = new Environment();

@@ -169,13 +169,6 @@ export enum SvarEnums {
     UNCHECKED = 'UNCHECKED'
 }
 
-export enum UnleashToggles {
-    SYKMELDING_ARBEIDSSITUASJON = 'syfo.syfofront.angre.bekreft.sykmelding',
-    SELVSTENDIG_KORRIGER = 'syfo.syfofront.korriger.selvstendig.soknad',
-    NY_ARBEIDSTAKERSOKNAD = 'syfo.ag.soknad.ny.platform',
-    NYTT_SYKMELDINGSMOTTAK = 'syfo.syfofront.nytt.sykmeldingsmottak',
-}
-
 export enum SpmKomp {
     CHECKBOX_PANEL = 'CHECKBOX_PANEL',
     JA_NEI = 'JA_NEI',

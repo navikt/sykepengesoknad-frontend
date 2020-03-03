@@ -17,6 +17,7 @@ import { SvarTil } from '../../../types/enums';
 import Oppsummering from '../../soknaden/oppsummering/oppsummering';
 import { settSvar } from '../sett-svar';
 import './sporsmal-form.less';
+import { useAmplitudeInstance } from '../../amplitude/amplitude';
 
 export interface SpmProps {
     sporsmal: Sporsmal;
@@ -24,6 +25,7 @@ export interface SpmProps {
 
 const SporsmalForm = () => {
     const { setValgtSoknad, valgtSoknad, sendTil, setTop } = useAppStore();
+    const { logEvent } = useAmplitudeInstance();
     const [ erSiste, setErSiste ] = useState<boolean>(false);
     const { stegId } = useParams();
     const history = useHistory();
@@ -52,8 +54,11 @@ const SporsmalForm = () => {
                     : valgtSoknad.sendtTilArbeidsgiverDato = new Date();
                 return svar;
             });
+            logEvent('Søknad sendt', { soknadstype: valgtSoknad.soknadstype });
             valgtSoknad.status = RSSoknadstatus.SENDT;
             setValgtSoknad(valgtSoknad);
+        } else {
+            logEvent('Spørsmål svart', { soknadstype: valgtSoknad.soknadstype, sporsmalstag: sporsmal.tag, svar: sporsmal.svarliste.svar[0].verdi })
         }
 
         methods.reset();
