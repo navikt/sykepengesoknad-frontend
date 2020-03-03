@@ -34,11 +34,11 @@ class Environment {
         return this.env.LOGINSERVICE_URL
     }
 
-    get amplitudeKey() {
+    get amplitudeKey () {
         return this.env.AMPLITUDE_KEY
     }
 
-    get amplitudeEnabled() {
+    get amplitudeEnabled () {
         return this.env.AMPLITUDE_ENABLED === 'true'
     }
 }

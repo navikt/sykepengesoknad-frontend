@@ -16,7 +16,7 @@ import tekster from './teaser-tekster';
 import { Normaltekst } from 'nav-frontend-typografi';
 import { getRiktigDato, getSendtTilSuffix } from '../../../utils/soknad-utils';
 import { HoyreChevron } from 'nav-frontend-chevron';
-import { useAmplitudeInstance } from "../../amplitude/amplitude";
+import { useAmplitudeInstance } from '../../amplitude/amplitude';
 
 const erSendtTilBeggeMenIkkeSamtidig = (soknad: Soknad) => {
     return soknad.sendtTilNAVDato && soknad.sendtTilArbeidsgiverDato
@@ -128,7 +128,7 @@ const Teaser = ({ soknad }: SykepengesoknadTeaserProps) => {
 
     return (
         <article aria-labelledby={`soknader-header-${soknad.id}`} onClick={() => {
-            logEvent("Velger søknad", {soknadstype: soknad.soknadstype});
+            logEvent('Velger søknad', { soknadstype: soknad.soknadstype });
         }}>
             <Inngangspanel to={getUrlTilSoknad(soknad.id, stegId)}>
                 <InngangsIkon

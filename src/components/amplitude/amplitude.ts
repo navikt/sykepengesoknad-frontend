@@ -1,8 +1,8 @@
-import amplitude, { Config } from 'amplitude-js';
+import amplitude from 'amplitude-js';
 import env from '../../utils/environment';
-import { useEffect } from "react";
+import { useEffect } from 'react';
 import createUseContext from 'constate';
-import { useAppStore } from "../../data/stores/app-store";
+import { useAppStore } from '../../data/stores/app-store';
 
 export const useAmplitudeInstance = createUseContext(() => {
     const { unleash } = useAppStore();
@@ -18,7 +18,7 @@ export const useAmplitudeInstance = createUseContext(() => {
             }
             return 1;
         },
-        init: (apiKey: string, userId?: string, config?: Config, callback?: (client: any) => void) => {
+        init: () => {
             // eslint-disable-next-line no-console
             console.log('Initialiserer mockAmplitude');
         }
@@ -47,11 +47,11 @@ export const useAmplitudeInstance = createUseContext(() => {
             },
         );
         instance._userAgent = '';
-        }, []
+    }, []
     );
 
 
-    function logEvent(eventName: string, eventProperties: any) {
+    function logEvent (eventName: string, eventProperties: any) {
         instance.logEvent(eventName, eventProperties);
     }
 

@@ -1,5 +1,5 @@
-import React from "react";
-import { useAmplitudeInstance } from "./amplitude";
+import React from 'react';
+import { useAmplitudeInstance } from './amplitude';
 
 interface AmplitudeProps {
     children: React.ReactNode;

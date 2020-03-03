@@ -9,7 +9,7 @@ import { fixSykmeldingDatoer } from '../utils/dato-utils';
 import { unleashKeys } from './mock/data/toggles';
 import IngenData from '../pages/feil/ingen-data';
 import env from '../utils/environment';
-import { UnleashToggles } from "../types/types";
+import { UnleashToggles } from '../types/types';
 
 export function DataFetcher (props: { children: any }) {
 
@@ -25,7 +25,7 @@ export function DataFetcher (props: { children: any }) {
                 method: 'POST',
                 credentials: 'include',
                 body: JSON.stringify(unleashKeys),
-                headers: {'Content-Type': 'application/json'}
+                headers: { 'Content-Type': 'application/json' }
             }, (fetchState: FetchState<UnleashToggles>) => {
                 setUnleash(fetchState.data);
             })
