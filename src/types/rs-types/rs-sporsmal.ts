@@ -1,7 +1,7 @@
 import { RSSvartype } from './rs-svartype';
 import { RSVisningskriterie } from './rs-visningskriterie';
 import { RSSvar } from './rs-svar';
-import { Sporsmal } from "../types";
+import { Sporsmal } from '../types';
 
 export interface RSSporsmal {
     id: string;

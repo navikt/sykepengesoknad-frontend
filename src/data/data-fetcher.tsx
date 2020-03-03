@@ -10,9 +10,8 @@ import { unleashKeys } from './mock/data/toggles';
 import IngenData from '../pages/feil/ingen-data';
 import env from '../utils/environment';
 import { UnleashToggles } from '../types/types';
-import { sporsmalToRS } from "../types/rs-types/rs-sporsmal";
+import { sporsmalToRS } from '../types/rs-types/rs-sporsmal';
 import { RSOppdaterSporsmalResponse } from '../types/rs-types/oppdatersporsmalresponse'
-import { useParams } from "react-router";
 
 export function DataFetcher(props: { children: any }) {
 
@@ -22,8 +21,6 @@ export function DataFetcher(props: { children: any }) {
     const rssoknader = useFetch<RSSoknad[]>();
     const sykmeldinger = useFetch<Sykmelding[]>();
     const oppdaterSporsmal = useFetch<RSOppdaterSporsmalResponse>();
-
-    const { stegId } = useParams();
 
     useEffect(() => {
         if (isNotStarted(unleash)) {
@@ -70,7 +67,7 @@ export function DataFetcher(props: { children: any }) {
                 method: 'PUT',
                 credentials: 'include',
                 body: JSON.stringify(sporsmalToRS(sporsmal)),
-                headers: {'Content-Type': 'application/json'}
+                headers: { 'Content-Type': 'application/json' }
             }, (fetchState: FetchState<RSOppdaterSporsmalResponse>) => {
                 if (hasData(fetchState)) {
                     if (fetchState.data.mutertSoknad) {
@@ -85,7 +82,7 @@ export function DataFetcher(props: { children: any }) {
                     setValgtSoknad(soknad);
                 }
                 else {
-                    // TODO: Brude håndtere dette med en feilmeldingskomponent, ala <IngenData/>
+                    // TODO: Brude håndtere dette med en feilmeldingskomponent, nå vises <IngenData/>
                     console.log('Feilmelding fra backend:', fetchState);
                 }})
         }
