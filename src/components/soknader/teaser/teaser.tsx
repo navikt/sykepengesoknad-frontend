@@ -16,6 +16,7 @@ import tekster from './teaser-tekster';
 import { Normaltekst } from 'nav-frontend-typografi';
 import { getRiktigDato, getSendtTilSuffix } from '../../../utils/soknad-utils';
 import { HoyreChevron } from 'nav-frontend-chevron';
+import { useAmplitudeInstance } from "../../amplitude/amplitude";
 
 const erSendtTilBeggeMenIkkeSamtidig = (soknad: Soknad) => {
     return soknad.sendtTilNAVDato && soknad.sendtTilArbeidsgiverDato
@@ -121,11 +122,14 @@ interface SykepengesoknadTeaserProps {
 }
 
 const Teaser = ({ soknad }: SykepengesoknadTeaserProps) => {
+    const { logEvent } = useAmplitudeInstance();
     const stegId = soknad.status === RSSoknadstatus.NY ? '1' : '';
     const undertekst = beregnUndertekst(soknad);
 
     return (
-        <article aria-labelledby={`soknader-header-${soknad.id}`}>
+        <article aria-labelledby={`soknader-header-${soknad.id}`} onClick={() => {
+            logEvent("Velger søknad", {soknadstype: soknad.soknadstype});
+        }}>
             <Inngangspanel to={getUrlTilSoknad(soknad.id, stegId)}>
                 <InngangsIkon
                     ikon={hentIkon(soknad.soknadstype)}

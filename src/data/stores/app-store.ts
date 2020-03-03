@@ -1,10 +1,10 @@
 import createUseContext from 'constate';
 import { useState } from 'react';
-import { Soknad, Sykmelding } from '../../types/types';
+import { Soknad, Sykmelding, UnleashToggles } from '../../types/types';
 import { SvarTil } from '../../types/enums';
 
 export const useAppStore = createUseContext(() => {
-    const [ unleash, setUnleash ] = useState<{}>([]);
+    const [ unleash, setUnleash ] = useState<UnleashToggles>();
     const [ soknader, setSoknader ] = useState<Soknad[]>([]);
     const [ sykmeldinger, setSykmeldinger ] = useState<Sykmelding[]>([]);
     const [ valgtSoknad, setValgtSoknad ] = useState<Soknad>();

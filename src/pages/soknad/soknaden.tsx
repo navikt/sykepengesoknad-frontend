@@ -6,6 +6,7 @@ import { Brodsmule, IdParams } from '../../types/types';
 import { RSSoknadstatus } from '../../types/rs-types/rs-soknadstatus';
 import Banner from '../../components/banner/banner';
 import { useAppStore } from '../../data/stores/app-store';
+import { useAmplitudeInstance } from "../../components/amplitude/amplitude";
 import { HotjarTrigger } from '../../components/hotjar-trigger';
 import SoknadIntro from '../../components/soknaden/soknad-intro/soknad-intro';
 import Opplysninger from '../../components/soknaden/opplysninger/opplysninger';

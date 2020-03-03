@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import { Normaltekst, Systemtittel } from 'nav-frontend-typografi';
 import Vis from '../../vis';
 import './inngangspanel.less';
+import {useAmplitudeInstance} from "../../amplitude/amplitude";
 
 interface InngangsIkonProps {
     ikon: string;

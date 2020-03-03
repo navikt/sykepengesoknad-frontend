@@ -24,4 +24,8 @@ spec:
       value: "https://loginservice-q.nav.no/login"
     - name: UNLEASH_URL
       value: "https://tjenester-q1.nav.no/syfounleash"
+    - name: AMPLITUDE_KEY
+      value: "7a887ba3e5a07c755526c6591810101a" # prod key: d5b43a81941b61a3b06059197807a25a
+    - name: AMPLITUDE_ENABLED
+      value: "true"
 
