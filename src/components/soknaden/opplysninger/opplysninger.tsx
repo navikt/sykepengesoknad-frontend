@@ -25,7 +25,7 @@ const Opplysninger = ({ ekspandert }: OpplysningerProps) => {
         const tidligere = valgtSoknad.status === RSSoknadstatus.SENDT || valgtSoknad.status === RSSoknadstatus.AVBRUTT;
         const stegNo = parseInt(stegId);
         setApen(!tidligere && stegNo === 1);
-    }, [valgtSoknad.status, stegId]);
+    }, [ valgtSoknad.status, stegId ]);
 
     return (
         <Utvidbar className={'ekspander' + (apen ? ' apen' : '')}

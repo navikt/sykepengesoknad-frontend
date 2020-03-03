@@ -2,35 +2,35 @@ class Environment {
 
     private env = (window as any)._env_ || {};
 
-    private get nodeEnv() {
+    private get nodeEnv () {
         return process.env.NODE_ENV;
     }
 
-    get isProduction() {
+    get isProduction () {
         return this.nodeEnv === 'production';
     }
 
-    get isDevelopment() {
+    get isDevelopment () {
         return this.nodeEnv === 'development';
     }
 
-    get syfoapiRoot() {
+    get syfoapiRoot () {
         return this.env.SYFOAPI_ROOT
     }
 
-    get syforestRoot() {
+    get syforestRoot () {
         return this.env.SYFOREST_ROOT
     }
 
-    get unleashUrl() {
+    get unleashUrl () {
         return this.env.UNLEASH_URL
     }
 
-    get mockBackend() {
+    get mockBackend () {
         return this.env.MOCK_BACKEND
     }
 
-    get loginServiceUrl() {
+    get loginServiceUrl () {
         return this.env.LOGINSERVICE_URL
     }
 }

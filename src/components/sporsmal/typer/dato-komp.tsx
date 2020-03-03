@@ -24,12 +24,12 @@ const DatoInput = ({ sporsmal }: SpmProps) => {
 
     useEffect(() => {
         const cls = errors[sporsmal.id]
-            ? ['skjemaelement__input', 'skjemaelement__input--harFeil']
-            : ['skjemaelement__input'];
+            ? [ 'skjemaelement__input', 'skjemaelement__input--harFeil' ]
+            : [ 'skjemaelement__input' ];
         const input = datoRef.current.querySelector('.input--s[type=text]');
         input.classList.add(...cls);
         // eslint-disable-next-line
-    }, [errors[sporsmal.id]]);
+    }, [ errors[sporsmal.id] ]);
 
     const lagIdForDato = () => {
         const input = datoRef.current.querySelector('.input--s[type=text]');
@@ -70,7 +70,7 @@ const DatoInput = ({ sporsmal }: SpmProps) => {
 
             <div className="undersporsmal">
                 <Vis hvis={watch(sporsmal.id)}>
-                    <UndersporsmalListe undersporsmal={sporsmal.undersporsmal}/>
+                    <UndersporsmalListe undersporsmal={sporsmal.undersporsmal} />
                 </Vis>
             </div>
         </div>

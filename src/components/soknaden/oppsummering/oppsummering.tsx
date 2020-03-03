@@ -92,7 +92,7 @@ export const SporsmalVarianter = ({ sporsmal }: OppsummeringProps) => {
     }
 };
 
-function skalVisesIOppsummering(sporsmal: Sporsmal) {
+function skalVisesIOppsummering (sporsmal: Sporsmal) {
     switch (sporsmal.tag) {
         case TagTyper.BEKREFT_OPPLYSNINGER:
         case TagTyper.VAER_KLAR_OVER_AT: {

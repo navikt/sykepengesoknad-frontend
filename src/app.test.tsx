@@ -5,7 +5,7 @@ import App from './app';
 
 it('Rendrer søknadens startside', async () => {
     render(
-        <MemoryRouter initialEntries={["/"]}>
+        <MemoryRouter initialEntries={[ "/" ]}>
             <App/>
         </MemoryRouter>);
 

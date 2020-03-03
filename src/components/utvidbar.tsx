@@ -16,8 +16,8 @@ interface UtvidbarProps {
 }
 
 const Utvidbar = (props: UtvidbarProps) => {
-    const [erApen, setErApen] = useState<boolean>(props.erApen);
-    const [innholdHeight, setInnholdHeight] = useState<number>(0);
+    const [ erApen, setErApen ] = useState<boolean>(props.erApen);
+    const [ innholdHeight, setInnholdHeight ] = useState<number>(0);
     const utvidbar = useRef<HTMLDivElement>(null);
     const jsToggle = useRef<HTMLButtonElement>(null);
     const btnImage = useRef<HTMLImageElement>(null);
@@ -27,14 +27,14 @@ const Utvidbar = (props: UtvidbarProps) => {
     useEffect(() => {
         setErApen(props.erApen);
         setInnholdHeight(innhold.current.offsetHeight)
-    }, [props.erApen]);
+    }, [ props.erApen ]);
 
-    function onTransitionEnd() {
+    function onTransitionEnd () {
         if (erApen) {
-            window.scrollTo({top: utvidbar.current.offsetTop, left: 0, behavior: 'smooth'});
+            window.scrollTo({ top: utvidbar.current.offsetTop, left: 0, behavior: 'smooth' });
         } else {
             if (!erSynligIViewport(utvidbar.current)) {
-                window.scrollTo({top: utvidbar.current.offsetTop, left: 0, behavior: 'smooth'});
+                window.scrollTo({ top: utvidbar.current.offsetTop, left: 0, behavior: 'smooth' });
             }
             jsToggle.current.focus();
         }
@@ -65,7 +65,7 @@ const Utvidbar = (props: UtvidbarProps) => {
                 </div>
             </button>
             <div ref={container} className={'utvidbar__innholdContainer' + (erApen ? ' apen' : '')}
-                onTransitionEnd={() => onTransitionEnd()} style={{maxHeight: erApen ? (innholdHeight + 2) + 'px' : '0'}}
+                onTransitionEnd={() => onTransitionEnd()} style={{ maxHeight: erApen ? (innholdHeight + 2) + 'px' : '0' }}
             >
                 <div ref={innhold} className="utvidbar__innhold">
                     {props.children}

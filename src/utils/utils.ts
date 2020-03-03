@@ -12,7 +12,7 @@ export const lagDesimaltall = (streng: string) => {
     s = `${s}`.replace(/\./g, ',');
     if (s.indexOf(',') > -1) {
         let a = s.split(',');
-        a = [s[0], s[1].substr(0, 2)];
+        a = [ s[0], s[1].substr(0, 2) ];
         return a.join(',');
     }
     return s;

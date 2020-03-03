@@ -1,8 +1,8 @@
-import {TagTyper} from '../../types/enums';
-import {Soknad, Sporsmal} from '../../types/types';
-import {SEPARATOR} from '../../utils/constants';
+import { TagTyper } from '../../types/enums';
+import { Soknad, Sporsmal } from '../../types/types';
+import { SEPARATOR } from '../../utils/constants';
 import tekster from './sporsmal-tekster';
-import {RSSvartype} from '../../types/rs-types/rs-svartype';
+import { RSSvartype } from '../../types/rs-types/rs-svartype';
 
 export const erSisteSide = (soknad: Soknad, sidenummer: number) => {
     const sporsmal = soknad.sporsmal[sidenummer - 1];

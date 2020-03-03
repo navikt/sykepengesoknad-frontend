@@ -27,7 +27,7 @@ const Steg = ({ label, index }: StegProps) => {
     const disabled = !erPassert && !erAktiv;
     const history = useHistory();
 
-    function goTo(idx: number) {
+    function goTo (idx: number) {
         history.push(pathUtenSteg(history.location.pathname) + SEPARATOR + (idx));
     }
 

@@ -3,7 +3,7 @@ import React from 'react';
 const onKeyDown = (e: any) => {
     const OPP = 40;
     const NED = 38;
-    if ([OPP, NED].indexOf(e.keyCode) > -1) {
+    if ([ OPP, NED ].indexOf(e.keyCode) > -1) {
         e.preventDefault();
     }
 };

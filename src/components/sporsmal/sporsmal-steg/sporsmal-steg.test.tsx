@@ -7,7 +7,7 @@ import SporsmalSteg from './sporsmal-steg';
 import StoreProvider from '../../../data/stores/store-provider';
 import { BrowserRouter } from 'react-router-dom';
 import { useAppStore } from '../../../data/stores/app-store';
-import { soknader} from '../../../data/mock/data/soknader-felles';
+import { soknader } from '../../../data/mock/data/soknader-felles';
 
 xit('Rendrer sporsmal-steg', async () => {
     const { result } = renderHook(() => useAppStore());

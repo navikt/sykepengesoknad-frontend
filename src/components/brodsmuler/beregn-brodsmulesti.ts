@@ -34,10 +34,10 @@ const beregnBrodsmulesti = (sti: string, id: string) => {
                 sti: '/kvittering',
                 erKlikkbar: false
             };
-            return [dittSykefravaerSmule, soknaderSmule, soknadSmule, kvitteringSmule];
+            return [ dittSykefravaerSmule, soknaderSmule, soknadSmule, kvitteringSmule ];
         }
         default: {
-            return [dittSykefravaerSmule, soknaderSmule, soknadSmule];
+            return [ dittSykefravaerSmule, soknaderSmule, soknadSmule ];
         }
     }
 };

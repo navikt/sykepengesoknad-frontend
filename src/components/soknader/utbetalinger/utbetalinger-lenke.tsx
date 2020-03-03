@@ -5,7 +5,7 @@ import utbetalingHover from './utbetalinger--hover.svg';
 import tekster from './utbetalinger-tekster';
 
 const UtbetalingerLenke = () => {
-    const [ikon, setIkon] = useState(utbetalingIkon);
+    const [ ikon, setIkon ] = useState(utbetalingIkon);
 
     return (
         <a href={tekster['utbetaliner.lenke.url']} target="_blank" rel="noreferrer noopener"

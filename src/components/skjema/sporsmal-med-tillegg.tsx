@@ -30,9 +30,9 @@ const SporsmalMedTillegg = (props: SporsmalMedTilleggProps) => {
         } else {
             lukk();
         }
-    }, [erApen]);
+    }, [ erApen ]);
 
-    function onHoydeTransitionEnd() {
+    function onHoydeTransitionEnd () {
         if (!harAnimasjon) {
             return;
         }
@@ -54,15 +54,15 @@ const SporsmalMedTillegg = (props: SporsmalMedTilleggProps) => {
         scrollToHovedsporsmal();
     }
 
-    function getContainerClass() {
+    function getContainerClass () {
         return `tilleggssporsmal__innholdContainer${containerClassName}`;
     }
 
-    function getErApen(props: SporsmalMedTilleggProps) {
+    function getErApen (props: SporsmalMedTilleggProps) {
         return props.visTillegg(props);
     }
 
-    function setAutoHoyde() {
+    function setAutoHoyde () {
         /* Fjerner animasjonsklassen slik at Safari ikke
         tegner komponenten på nytt når høyde settes til 'auto': */
         gammelHoyde = hoyde;
@@ -73,18 +73,18 @@ const SporsmalMedTillegg = (props: SporsmalMedTilleggProps) => {
         }, 0);
     }
 
-    function scrollToHovedsporsmal() {
+    function scrollToHovedsporsmal () {
         if (!erSynligIViewport(hovedsporsmal.current)) {
             //const end = getTop(hovedsporsmal.current, 600);
             //window.scrollTo(end, 600);
         }
     }
 
-    function fadeIn() {
+    function fadeIn () {
         setOpacity(1);
     }
 
-    function apne() {
+    function apne () {
         setHoyde('0');
         setContainerClassName(' tilleggssporsmal__innholdContainer--medAnimasjon');
         setVisInnhold(true);
@@ -98,7 +98,7 @@ const SporsmalMedTillegg = (props: SporsmalMedTilleggProps) => {
         }, 0);
     }
 
-    function lukk() {
+    function lukk () {
         const hoyde = tilleggsinnhold.current.offsetHeight ? tilleggsinnhold.current.offsetHeight.toString() : gammelHoyde;
         setHoyde(hoyde);
         setOpacity(0);

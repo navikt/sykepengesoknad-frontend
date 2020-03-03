@@ -19,7 +19,7 @@ export const HotjarTrigger = ({ trigger, children }: HotjarTriggerProps) => {
             hotJarWindow.hj('trigger', trigger);
         }
         // log(`Trigger hotjar: ${trigger}`); TODO: Må denne logges?
-    }, [trigger, children]);
+    }, [ trigger, children ]);
 
     return children;
 };

@@ -96,7 +96,7 @@
     "build": "craco build",
     "test": "craco test",
     "lint": "eslint --ext=ts,tsx src",
-    "lint:fix": "eslint './src/**/*.{ts,tsx}'"
+    "lint:fix": "eslint --ext=ts,tsx src --fix"
   },
   "eslintConfig": {
     "extends": "react-app"

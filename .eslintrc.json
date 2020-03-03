@@ -17,12 +17,13 @@
     "@typescript-eslint/explicit-function-return-type": 0,
     "@typescript-eslint/no-non-null-assertion": 0,
     "@typescript-eslint/no-use-before-define": 0,
-    "@typescript-eslint/space-before-function-paren": [0, "always"],
+    "@typescript-eslint/space-before-function-paren": [2, "always"],
     "no-fallthrough": 0,
     "no-useless-escape": 0,
     "react/display-name": 0,
     "arrow-body-style": "off",
-    "array-bracket-spacing": "off"
+    "array-bracket-spacing": [2, "always"],
+    "object-curly-spacing": [2, "always"]
   },
   "settings": {
     "react": {

@@ -25,7 +25,7 @@ const position = function (start: number, end: number, elapsed: number, duration
     return start + ((end - start) * easeInOutCubic(elapsed / duration));
 };
 
-export function scrollTo(end: number, duration = 500, callback: any) {
+export function scrollTo (end: number, duration = 500, callback: any) {
     const start = window.pageYOffset;
     if (!end) {
         return;
@@ -52,7 +52,7 @@ export function scrollTo(end: number, duration = 500, callback: any) {
     step();
 }
 
-export function erSynligIViewport(element: HTMLElement) {
+export function erSynligIViewport (element: HTMLElement) {
     if (!element) {
         return false;
     }
@@ -65,7 +65,7 @@ export function erSynligIViewport(element: HTMLElement) {
     );
 }
 
-export function harLocalStorageStotte() {
+export function harLocalStorageStotte () {
     try {
         return 'localStorage' in window && window.localStorage !== null;
     } catch (e) {
