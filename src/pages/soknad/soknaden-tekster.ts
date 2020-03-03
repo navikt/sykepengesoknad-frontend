@@ -22,6 +22,7 @@ const SoknadenTekster: any = {
         'sykepengesoknad.utland_v2.tittel': 'Opphold i utlandet',
         'sykepengesoknad.egenmeldinger.tittel': 'Fravær før sykmeldingen',
         'sykepengesoknad.tilbake_i_arbeid.tittel': 'Tilbake i arbeid',
+        'sykepengesoknad.friskmeldt.tittel': 'Friskmeldt',
 
         'sykepengesoknad.enkeltstaende_behandlingsdager.tittel': 'Behandlingsdager',
 
