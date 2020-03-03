@@ -31,7 +31,7 @@ const Steg = ({ label, index }: StegProps) => {
     const disabled = !erPassert && !erAktiv;
     const history = useHistory();
 
-    function goTo (idx: number) {
+    function goTo(idx: number) {
         logEvent('Trykt på spørsmålssteg', { fra: valgtSoknad.sporsmal[aktivtSteg - 1].tag, til: valgtSoknad.sporsmal[idx - 1].tag });
         history.push(pathUtenSteg(history.location.pathname) + SEPARATOR + (idx));
     }

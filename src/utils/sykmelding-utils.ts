@@ -2,7 +2,7 @@ import { SykmeldingPeriode } from '../types/types';
 import dayjs from 'dayjs';
 
 // TODO: Det skjer noe rart her. Browser og kompilator sier at tom og fom verken er dato eller string
-export function sorterPerioderEldsteFoerst (perioder: SykmeldingPeriode[]) {
+export function sorterPerioderEldsteFoerst(perioder: SykmeldingPeriode[]) {
     return perioder.sort((a: SykmeldingPeriode, b: SykmeldingPeriode) => {
         if (s2d(a.fom).getTime() !== s2d(b.fom).getTime()) {
             return s2d(a.fom).getTime() - s2d(b.fom).getTime();

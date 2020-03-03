@@ -11,7 +11,7 @@ import IngenData from '../pages/feil/ingen-data';
 import env from '../utils/environment';
 import { UnleashToggles } from '../types/types';
 
-export function DataFetcher (props: { children: any }) {
+export function DataFetcher(props: { children: any }) {
 
     const { setUnleash, setSoknader, setSykmeldinger } = useAppStore();
 

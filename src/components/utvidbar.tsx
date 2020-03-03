@@ -29,7 +29,7 @@ const Utvidbar = (props: UtvidbarProps) => {
         setInnholdHeight(innhold.current.offsetHeight)
     }, [ props.erApen ]);
 
-    function onTransitionEnd () {
+    function onTransitionEnd() {
         if (erApen) {
             window.scrollTo({ top: utvidbar.current.offsetTop, left: 0, behavior: 'smooth' });
         } else {

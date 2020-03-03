@@ -44,7 +44,7 @@ const DatoInput = ({ sporsmal }: SpmProps) => {
             </label>
             <Controller
                 as={Flatpickr}
-                rules={{ required: feilmelding.global }}
+                rules={{ required:feilmelding.global }}
                 id={sporsmal.id}
                 name={sporsmal.id}
                 className='skjemaelement__input input--s'

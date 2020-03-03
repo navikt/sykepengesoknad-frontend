@@ -34,7 +34,7 @@ const BjornBildeStor = ({ alt }: BjornBildeProps) => {
         window.clearTimeout(timeout2);
     }, [ timeout1, timeout2 ]);
 
-    function blink () {
+    function blink() {
         setOyefarge(fargeLukket);
         const handle1 = window.setTimeout(() => {
             setOyefarge(fargeApen);
@@ -46,7 +46,7 @@ const BjornBildeStor = ({ alt }: BjornBildeProps) => {
         setTimeout2(handle2);
     }
 
-    function bevegMunn () {
+    function bevegMunn() {
         setMunnform(alvorligmunn);
         const handle1 = window.setTimeout(() => {
             setMunnform(smilemunn);

@@ -34,7 +34,7 @@ const useFetch = <D = {}>(): Fetch<D> => {
         setFetchState(createPendingFetchState());
 
         fetch(url, request)
-            .then(async (res) => {
+            .then(async(res) => {
                 const httpCode = res.status;
                 let state: FetchState<D>;
 

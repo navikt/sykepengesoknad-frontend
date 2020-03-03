@@ -77,7 +77,7 @@ export const tilLesbarPeriodeUtenArstall = (fomArg: any, tomArg: any) => {
         : `${tilLesbarDatoUtenAarstall(fom)} ${SKILLETEGN_PERIODE} ${tilLesbarDatoUtenAarstall(tom)}`;
 };
 
-export function getDuration (from: Date, to: Date) {
+export function getDuration(from: Date, to: Date) {
     return Math.round(Math.floor(to.getTime() - from.getTime()) / (1000 * 60 * 60 * 24)) + 1;
 }
 

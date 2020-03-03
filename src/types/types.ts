@@ -147,7 +147,7 @@ export class Soknad {
     sporsmal: Sporsmal[];
     soknadPerioder: RSSoknadsperiode[];
 
-    constructor (
+    constructor(
         soknad: RSSoknad
     ) {
         this.id = soknad.id;
@@ -190,7 +190,7 @@ export class Sporsmal {
     parentKriterie?: string;
     erHovedsporsmal: boolean;
 
-    constructor (spm: RSSporsmal, kriterie: string, erHovedsporsmal: boolean) {
+    constructor(spm: RSSporsmal, kriterie: string, erHovedsporsmal: boolean) {
         this.id = spm.id;
         const orgarr: string[] = spm.tag.split('_');
         const numtag: number = parseInt(orgarr.pop());
@@ -215,7 +215,7 @@ export class Sporsmal {
     }
 }
 
-function rsToSporsmal (spms: RSSporsmal[], kriterie: string, erHovedsporsmal: boolean) {
+function rsToSporsmal(spms: RSSporsmal[], kriterie: string, erHovedsporsmal: boolean) {
     const sporsmals: Sporsmal[] = [];
     if (spms === undefined) {
         return sporsmals;

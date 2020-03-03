@@ -3,7 +3,7 @@ import { render, screen } from '@testing-library/react';
 import { MemoryRouter } from 'react-router-dom';
 import App from './app';
 
-it('Rendrer søknadens startside', async () => {
+it('Rendrer søknadens startside', async() => {
     render(
         <MemoryRouter initialEntries={[ '/' ]}>
             <App/>

@@ -9,7 +9,7 @@ import { BrowserRouter } from 'react-router-dom';
 import { useAppStore } from '../../../data/stores/app-store';
 import { soknader } from '../../../data/mock/data/soknader';
 
-xit('Rendrer sporsmal-steg', async () => {
+xit('Rendrer sporsmal-steg', async() => {
     const { result } = renderHook(() => useAppStore());
     const div = document.createElement('div');
 

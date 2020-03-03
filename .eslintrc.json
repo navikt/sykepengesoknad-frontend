@@ -17,7 +17,6 @@
     "@typescript-eslint/explicit-function-return-type": 0,
     "@typescript-eslint/no-non-null-assertion": 0,
     "@typescript-eslint/no-use-before-define": 0,
-    "@typescript-eslint/space-before-function-paren": [2, "always"],
     "@typescript-eslint/camelcase": 1,
     "no-fallthrough": 0,
     "no-useless-escape": 0,
@@ -25,7 +24,9 @@
     "arrow-body-style": "off",
     "array-bracket-spacing": [2, "always"],
     "object-curly-spacing": [2, "always"],
-    "quotes": [2, "single", { "avoidEscape": true }]
+    "quotes": [2, "single", { "avoidEscape": true }],
+    "space-before-function-paren": [2, "never"],
+    "switch-colon-spacing": [2, {"after": true, "before": false}]
   },
   "settings": {
     "react": {

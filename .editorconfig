@@ -8,6 +8,9 @@ trim_trailing_whitespace = true
 insert_final_newline = true
 ij_typescript_spaces_within_brackets = true
 
+[*.ts]
+js_space_after_property_colon = true
+
 [*.md]
 trim_trailing_whitespace = false
 

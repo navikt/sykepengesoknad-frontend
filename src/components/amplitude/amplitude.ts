@@ -8,7 +8,6 @@ export const useAmplitudeInstance = createUseContext(() => {
     const { unleash } = useAppStore();
     const unleashAmplitudeEnabled = unleash['syfo.amplitude'];
 
-
     let instance: any = {
         _userAgent: '',
         logEvent: (eventName: string, data?: any) => {
@@ -38,8 +37,8 @@ export const useAmplitudeInstance = createUseContext(() => {
                 includeReferrer: true,
                 trackingOptions: {
                     city: false,
-                    ip_address: false,
-                    version_name: false,
+                    ip_address: false, // eslint-disable-line
+                    version_name: false, // eslint-disable-line
                     region: false,
                     country: false,
                     dma: false,
@@ -47,11 +46,10 @@ export const useAmplitudeInstance = createUseContext(() => {
             },
         );
         instance._userAgent = '';
-    }, []
-    );
+    }, []);
 
 
-    function logEvent (eventName: string, eventProperties: any) {
+    function logEvent(eventName: string, eventProperties: any) {
         instance.logEvent(eventName, eventProperties);
     }
 
