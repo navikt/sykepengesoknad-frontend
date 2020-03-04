@@ -6,6 +6,7 @@ import { SpmProps } from '../../sporsmal/sporsmal-form/sporsmal-form';
 import { flattenSporsmal } from '../../../utils/soknad-utils';
 import { Sporsmal } from '../../../types/types';
 import './feil-oppsummering.less';
+import { useAmplitudeInstance } from '../../amplitude/amplitude';
 
 interface FeiloppsummeringProps {
     settFokus?: boolean;
@@ -16,8 +17,15 @@ type FeilProps = FeiloppsummeringProps & SpmProps;
 
 const FeilOppsummering = (props: FeilProps) => {
     const oppsummering = useRef<HTMLDivElement>(null);
+    const { logEvent } = useAmplitudeInstance();
     const { settFokus, errors, sporsmal } = props;
     const entries: any[] = Object.entries(errors);
+
+    useEffect(() => {
+        if (Object.entries(errors).length > 0) {
+            logEvent('Fikk feilmelding', { sporsmalstag: sporsmal.tag })
+        }
+    }, [ errors ])
 
     useEffect(() => {
         let fokuser = settFokus;
