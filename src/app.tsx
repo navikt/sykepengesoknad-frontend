@@ -23,10 +23,10 @@ const App = (): any => {
                                 classNames={'fade'}
                             >
                                 <Switch location={location}>
-                                    <Route exact={true} path="/" component={Soknader}/>
-                                    <Route path={'/soknader/:id/:stegId'} component={Soknad}/>
-                                    <Route path={'/soknader/:id'} component={Soknad}/>
-                                    <Route path={'/kvittering/:id'} component={Kvittering}/>
+                                    <Route exact={true} path="/" component={Soknader} />
+                                    <Route path={'/soknader/:id/:stegId'} component={Soknad} />
+                                    <Route path={'/soknader/:id'} component={Soknad} />
+                                    <Route path={'/kvittering/:id'} component={Kvittering} />
                                 </Switch>
                             </CSSTransition>
                         </TransitionGroup>

@@ -1,6 +1,6 @@
 import amplitude from 'amplitude-js';
 import env from '../../utils/environment';
-import { useEffect } from 'react';
+import { useEffect, useRef } from 'react';
 import createUseContext from 'constate';
 import { useAppStore } from '../../data/stores/app-store';
 
@@ -8,7 +8,7 @@ export const useAmplitudeInstance = createUseContext(() => {
     const { unleash } = useAppStore();
     const unleashAmplitudeEnabled = unleash['syfo.amplitude'];
 
-    let instance: any = {
+    const instance: any = useRef({
         _userAgent: '',
         logEvent: (eventName: string, data?: any) => {
             // eslint-disable-next-line no-console
@@ -21,14 +21,13 @@ export const useAmplitudeInstance = createUseContext(() => {
             // eslint-disable-next-line no-console
             console.log('Initialiserer mockAmplitude');
         }
-    };
+    });
 
-    useEffect(() => {
+    useEffect(() => { 
         if (unleashAmplitudeEnabled && env.amplitudeEnabled) {
-            instance = amplitude.getInstance()
+            instance.current = amplitude.getInstance()
         }
-
-        instance.init(
+        instance.current.init(
             env.amplitudeKey, null, {
                 apiEndpoint: 'amplitude.nav.no/collect',
                 saveEvents: false,
@@ -45,12 +44,12 @@ export const useAmplitudeInstance = createUseContext(() => {
                 },
             },
         );
-        instance._userAgent = '';
+        instance.current._userAgent = '';
     }, []);
 
 
     function logEvent(eventName: string, eventProperties: any) {
-        instance.logEvent(eventName, eventProperties);
+        instance.current.logEvent(eventName, eventProperties);
     }
 
     return {
