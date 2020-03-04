@@ -24,7 +24,7 @@ export interface SpmProps {
 }
 
 const SporsmalForm = () => {
-    const { setValgtSoknad, valgtSoknad, sendTil, setTop } = useAppStore();
+    const { setValgtSoknad, valgtSoknad, sendTil, setTop, setOppdaterSporsmalId } = useAppStore();
     const { logEvent } = useAmplitudeInstance();
     const [ erSiste, setErSiste ] = useState<boolean>(false);
     const { stegId } = useParams();
@@ -40,11 +40,6 @@ const SporsmalForm = () => {
     }, [ spmIndex, sporsmal, valgtSoknad ]);
 
     const onSubmit = () => {
-        if (sporsmal.svartype === RSSvartype.BEHANDLINGSDAGER) {
-            sporsmal.undersporsmal.forEach(uspm => {
-                settSvar(uspm, methods.getValues());
-            })
-        }
         settSvar(sporsmal, methods.getValues());
         if (erSiste) {
             settSvar(nesteSporsmal, methods.getValues());
@@ -63,6 +58,7 @@ const SporsmalForm = () => {
 
         methods.reset();
         setValgtSoknad(valgtSoknad);
+        setOppdaterSporsmalId(spmIndex);
         setTop(0);
         erSiste
             ? history.push(pathUtenSteg(history.location.pathname).replace('soknader', 'kvittering'))

@@ -2,7 +2,8 @@ import { Sporsmal } from '../../types/types';
 import { RSSvartype } from '../../types/rs-types/rs-svartype';
 import { RSSvarliste } from '../../types/rs-types/rs-svarliste';
 import { SvarEnums } from '../../types/enums';
-import { empty, PERIODE_SKILLE } from '../../utils/constants';
+import { empty } from '../../utils/constants';
+import { fraBackendTilDate } from '../../utils/dato-utils';
 
 export const hentSvar = (sporsmal: Sporsmal): any => {
     const svarliste = sporsmal.svarliste;
@@ -28,7 +29,7 @@ export const hentSvar = (sporsmal: Sporsmal): any => {
     }
 
     if (sporsmal.svartype === RSSvartype.DATO) {
-        return new Date(svar.verdi.toString());
+        return fraBackendTilDate(svar.verdi);
     }
 
     return svar.verdi;
@@ -48,10 +49,8 @@ export const hentPeriode = (sporsmal: Sporsmal, index: number) => {
     if (svar === empty) {
         return periode;
     }
-    const datoer = svar.verdi.split(PERIODE_SKILLE);
-    periode[0] = new Date(datoer[0]);
-    periode[1] = new Date(datoer[1]);
-    return periode;
+    const datoer = JSON.parse(svar.verdi);
+    return [ fraBackendTilDate(datoer.fom), fraBackendTilDate(datoer.tom) ];
 };
 
 export const hentFormState = (sporsmal: Sporsmal) => {

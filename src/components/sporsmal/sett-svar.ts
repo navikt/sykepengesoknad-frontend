@@ -1,7 +1,8 @@
 import { Sporsmal } from '../../types/types';
 import { SvarEnums } from '../../types/enums';
-import { empty, PERIODE_SKILLE } from '../../utils/constants';
+import { empty } from '../../utils/constants';
 import { RSSvartype } from '../../types/rs-types/rs-svartype';
+import { tilBackendDato } from '../../utils/dato-utils';
 
 const hentVerdier = (sporsmal: Sporsmal, verdier: Record<string, any>) => {
     let verdi = verdier[sporsmal.id];
@@ -38,6 +39,11 @@ export const settSvar = (sporsmal: Sporsmal, verdier: Record<string, any>): void
         case RSSvartype.PERIODER:
             periodeSvar(sporsmal, verdi);
             break;
+        case RSSvartype.BEHANDLINGSDAGER:
+            sporsmal.undersporsmal.forEach(uspm => {
+                settSvar(uspm, verdier);
+            });
+            break;
         default:
             sporsmal.svarliste = {
                 sporsmalId: sporsmal.id,
@@ -72,7 +78,7 @@ const datoSvar = (sporsmal: Sporsmal, verdi: any) => {
         sporsmal.svarliste = {
             sporsmalId: sporsmal.id,
             svar: verdi.map(element => {
-                return { verdi: element.toString() }
+                return { verdi: tilBackendDato(element) }
             }),
         };
     }
@@ -85,7 +91,7 @@ const periodeSvar = (sporsmal: Sporsmal, verdi: any) => {
             svar: verdi
                 .filter((periode) => periode[0] !== undefined && periode[1] !== undefined)
                 .map((periode) => {
-                    return { verdi: periode[0].toString() + PERIODE_SKILLE + periode[1].toString() }
+                    return { verdi: JSON.stringify({ fom: tilBackendDato(periode[0]), tom: tilBackendDato(periode[1]) }) }
                 }),
         };
     }
