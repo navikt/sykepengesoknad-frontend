@@ -18,13 +18,18 @@ import Oppsummering from '../../soknaden/oppsummering/oppsummering';
 import { settSvar } from '../sett-svar';
 import './sporsmal-form.less';
 import { useAmplitudeInstance } from '../../amplitude/amplitude';
+import env from '../../../utils/environment';
+import { FetchState, hasData } from '../../../data/rest/utils';
+import { RSMottakerResponse } from '../../../types/rs-types/rest-response/rs-mottakerresponse';
+import { RSMottaker } from '../../../types/rs-types/rs-mottaker';
+import useFetch from '../../../data/rest/use-fetch';
 
 export interface SpmProps {
     sporsmal: Sporsmal;
 }
 
 const SporsmalForm = () => {
-    const { setValgtSoknad, valgtSoknad, sendTil, setTop, setOppdaterSporsmalId } = useAppStore();
+    const { setValgtSoknad, valgtSoknad, sendTil, setTop, setOppdaterSporsmalId, setSendTil } = useAppStore();
     const { logEvent } = useAmplitudeInstance();
     const [ erSiste, setErSiste ] = useState<boolean>(false);
     const { stegId } = useParams();
@@ -33,25 +38,52 @@ const SporsmalForm = () => {
     const methods = useForm();
     const sporsmal = valgtSoknad.sporsmal[spmIndex];
     const nesteSporsmal = valgtSoknad.sporsmal[spmIndex + 1];
+    const mottaker = useFetch<RSMottakerResponse>();
 
     useEffect(() => {
         const snartSlutt = sporsmal.svartype === RSSvartype.IKKE_RELEVANT || sporsmal.svartype === RSSvartype.CHECKBOX_PANEL;
-        setErSiste(snartSlutt && spmIndex === valgtSoknad.sporsmal.length - 2);
-    }, [ spmIndex, sporsmal, valgtSoknad ]);
+        const sisteSide = snartSlutt && spmIndex === valgtSoknad.sporsmal.length - 2;
+        setErSiste(sisteSide);
+        if (sisteSide) hentMottaker();
+        // eslint-disable-next-line
+    }, [ spmIndex ]);
+
+    const hentMottaker = () => {
+        mottaker.fetch(env.syfoapiRoot + `/syfosoknad/api/soknader/${valgtSoknad.id}/finnMottaker`, {
+            method: 'POST',
+            credentials: 'include',
+            headers: { 'Content-Type': 'application/json' }
+        }, (fetchState: FetchState<RSMottakerResponse>) => {
+            if (hasData(fetchState)) {
+                const m = fetchState.data.mottaker;
+                if (m === RSMottaker.NAV) {
+                    setSendTil([ SvarTil.NAV ]);
+                }
+                else if (m === RSMottaker.ARBEIDSGIVER) {
+                    setSendTil([ SvarTil.ARBEIDSGIVER ]);
+                }
+                else if (m === RSMottaker.ARBEIDSGIVER_OG_NAV) {
+                    setSendTil([ SvarTil.NAV, SvarTil.ARBEIDSGIVER ]);
+                }
+            }
+        })
+    };
 
     const onSubmit = () => {
         settSvar(sporsmal, methods.getValues());
         if (erSiste) {
             settSvar(nesteSporsmal, methods.getValues());
-            sendTil.map(svar => {
-                svar === SvarTil.NAV
-                    ? valgtSoknad.sendtTilNAVDato = new Date()
-                    : valgtSoknad.sendtTilArbeidsgiverDato = new Date();
-                return svar;
+            sendTil.forEach(mottaker => {
+                if (mottaker === SvarTil.NAV) {
+                    valgtSoknad.sendtTilNAVDato = new Date()
+                }
+                if (mottaker === SvarTil.ARBEIDSGIVER) {
+                    valgtSoknad.sendtTilArbeidsgiverDato = new Date();
+                }
             });
             logEvent('Søknad sendt', { soknadstype: valgtSoknad.soknadstype });
             valgtSoknad.status = RSSoknadstatus.SENDT;
-            setValgtSoknad(valgtSoknad);
+            // TODO: Legg inn /soknader/{id}/send kall
         } else {
             logEvent('Spørsmål svart', { soknadstype: valgtSoknad.soknadstype, sporsmalstag: sporsmal.tag, svar: sporsmal.svarliste.svar[0].verdi })
         }

@@ -1,8 +1,5 @@
-import { Soknad, Sporsmal, Sykmelding } from '../types/types';
+import { Soknad, Sporsmal } from '../types/types';
 import { PERIODE_SKILLE } from './constants';
-import dayjs from 'dayjs';
-import { SvarTil, TagTyper } from '../types/enums';
-import { RSSoknadstype } from '../types/rs-types/rs-soknadstype';
 
 export const getSendtTilSuffix = (soknad: Soknad) => {
     if (soknad.sendtTilArbeidsgiverDato && soknad.sendtTilNAVDato) {
@@ -52,54 +49,4 @@ export const flattenSporsmal = (sporsmal: Sporsmal[]) => {
         flatArr = flatArr.concat(flattenSporsmal(sporsmal[i].undersporsmal));
     }
     return flatArr;
-};
-
-const sporsmalEtterTag = (sporsmal: Sporsmal[], tag: TagTyper) => {
-    return sporsmal.filter((spm: Sporsmal) => spm.tag === tag);
-};
-
-const tellDager = (sporsmal: Sporsmal[], tag: TagTyper) => {
-    const meldinger: Sporsmal[] = sporsmalEtterTag(sporsmal, tag);
-    let dager = 0;
-    if (meldinger.length > 0) {
-        const arr = periodeVerdi(meldinger[0]);
-        dager = dayjs(arr[0]).diff(dayjs(arr[1]), 'day');
-    }
-    return dager;
-};
-
-const beregnSoknadsdager = (soknad: Soknad): number => {
-    let soknadDager = 0;
-    if (soknad.tom !== null && soknad.fom !== null) {
-        soknadDager = dayjs(soknad.tom).diff(dayjs(soknad.fom), 'day');
-    }
-
-    const flateSporsmal = flattenSporsmal(soknad.sporsmal);
-    const egneDager = tellDager(flateSporsmal, TagTyper.EGENMELDINGER_NAR);
-    const papirDager = tellDager(flateSporsmal, TagTyper.PAPIRSYKMELDING_NAR);
-    return soknadDager + egneDager + papirDager;
-};
-
-export const lagSendTil = (soknad: Soknad, sykmelding: Sykmelding) => {
-    if (soknad === undefined) {
-        return [];
-    }
-    const totalDager = beregnSoknadsdager(soknad);
-
-    switch (soknad.soknadstype) {
-        case RSSoknadstype.ARBEIDSTAKERE:
-            if (totalDager > 16) {
-                return [ SvarTil.NAV, SvarTil.ARBEIDSGIVER ];
-            }
-            return [ SvarTil.ARBEIDSGIVER ];
-
-        case RSSoknadstype.ARBEIDSLEDIG:
-            return [ SvarTil.NAV ];
-
-        case RSSoknadstype.SELVSTENDIGE_OG_FRILANSERE:
-            if (totalDager > 16 && sykmelding.sporsmal.harForsikring) {
-                return [ SvarTil.NAV ];
-            }
-            return [];
-    }
 };

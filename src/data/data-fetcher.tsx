@@ -11,7 +11,7 @@ import IngenData from '../pages/feil/ingen-data';
 import env from '../utils/environment';
 import { UnleashToggles } from '../types/types';
 import { sporsmalToRS } from '../types/rs-types/rs-sporsmal';
-import { RSOppdaterSporsmalResponse } from '../types/rs-types/oppdatersporsmalresponse'
+import { RSOppdaterSporsmalResponse } from '../types/rs-types/rest-response/rs-oppdatersporsmalresponse'
 
 export function DataFetcher(props: { children: any }) {
 
