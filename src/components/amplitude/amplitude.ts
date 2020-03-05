@@ -22,7 +22,7 @@ export const useAmplitudeInstance = createUseContext(() => {
         }
     });
 
-    useEffect(() => { 
+    useEffect(() => {
         if (unleashAmplitudeEnabled && env.amplitudeEnabled) {
             instance.current = amplitude.getInstance()
         }
@@ -44,6 +44,7 @@ export const useAmplitudeInstance = createUseContext(() => {
             },
         );
         instance.current._userAgent = '';
+        // eslint-disable-next-line
     }, []);
 
     function logEvent(eventName: string, eventProperties: any) {

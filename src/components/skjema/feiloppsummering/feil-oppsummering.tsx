@@ -25,6 +25,7 @@ const FeilOppsummering = (props: FeilProps) => {
         if (Object.entries(errors).length > 0) {
             logEvent('Fikk feilmelding', { sporsmalstag: sporsmal.tag })
         }
+        // eslint-disable-next-line
     }, [ errors ]);
 
     useEffect(() => {
