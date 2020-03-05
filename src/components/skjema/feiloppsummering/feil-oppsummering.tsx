@@ -25,7 +25,7 @@ const FeilOppsummering = (props: FeilProps) => {
         if (Object.entries(errors).length > 0) {
             logEvent('Fikk feilmelding', { sporsmalstag: sporsmal.tag })
         }
-    }, [ errors ])
+    }, [ errors ]);
 
     useEffect(() => {
         let fokuser = settFokus;
@@ -77,6 +77,12 @@ const FeilOppsummering = (props: FeilProps) => {
         }
     };
 
+    const handleKeyDown = (e: any, list: any) => {
+        if (e.key === 'Enter') {
+            handleClick(list);
+        }
+    };
+
     return (
         <div aria-live='polite' role='alert'>
             <Vis hvis={entries.length > 0}>
@@ -85,7 +91,12 @@ const FeilOppsummering = (props: FeilProps) => {
                     <ul className='feiloppsummering__liste'>
                         {entries.sort(list => list[0][0]).map((list, index) => (
                             <li key={index}>
-                                <div role='link' className='lenke' onClick={() => handleClick(list)}>{list[1].message}</div>
+                                <div role='link' className='lenke' tabIndex={0}
+                                    onKeyDown={(e) => handleKeyDown(e, list)}
+                                    onClick={() => handleClick(list)}
+                                >
+                                    {list[1].message}
+                                </div>
                             </li>
                         ))}
                     </ul>

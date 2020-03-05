@@ -11,15 +11,14 @@ export const useAmplitudeInstance = createUseContext(() => {
     const instance: any = useRef({
         _userAgent: '',
         logEvent: (eventName: string, data?: any) => {
-            // eslint-disable-next-line no-console
             if (unleashAmplitudeEnabled) {
+                // eslint-disable-next-line
                 console.log(`Logger ${eventName} - Event properties: ${JSON.stringify(data)}!`);
             }
             return 1;
         },
         init: () => {
-            // eslint-disable-next-line no-console
-            console.log('Initialiserer mockAmplitude');
+            console.log('Initialiserer mockAmplitude'); // eslint-disable-line
         }
     });
 
@@ -47,12 +46,9 @@ export const useAmplitudeInstance = createUseContext(() => {
         instance.current._userAgent = '';
     }, []);
 
-
     function logEvent(eventName: string, eventProperties: any) {
         instance.current.logEvent(eventName, eventProperties);
     }
 
-    return {
-        logEvent
-    }
+    return { logEvent };
 });
