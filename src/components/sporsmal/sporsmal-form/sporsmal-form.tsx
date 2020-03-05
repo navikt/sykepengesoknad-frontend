@@ -39,6 +39,7 @@ const SporsmalForm = () => {
     const sporsmal = valgtSoknad.sporsmal[spmIndex];
     const nesteSporsmal = valgtSoknad.sporsmal[spmIndex + 1];
     const mottaker = useFetch<RSMottakerResponse>();
+    const send = useFetch<{}>();
 
     useEffect(() => {
         const snartSlutt = sporsmal.svartype === RSSvartype.IKKE_RELEVANT || sporsmal.svartype === RSSvartype.CHECKBOX_PANEL;
@@ -69,21 +70,38 @@ const SporsmalForm = () => {
         })
     };
 
+    const sendSoknad = () => {
+        send.fetch(env.syfoapiRoot + `/syfosoknad/api/soknader/${valgtSoknad.id}/send`, {
+            method: 'POST',
+            credentials: 'include',
+            headers: { 'Content-Type': 'application/json' }
+        }, (fetchState: FetchState<{}>) => {
+            if (hasData(fetchState) === false) {
+                // TODO: Burde håndtere dette med en feilmeldingskomponent, så den blir stående igjen på siste side
+                console.log('Feilmelding fra backend:', fetchState);
+            }
+        })
+    };
+
+    const oppdaterVedInnsending = () => {
+        sendTil.forEach(mottaker => {
+            if (mottaker === SvarTil.NAV) {
+                valgtSoknad.sendtTilNAVDato = new Date()
+            }
+            if (mottaker === SvarTil.ARBEIDSGIVER) {
+                valgtSoknad.sendtTilArbeidsgiverDato = new Date();
+            }
+        });
+        valgtSoknad.status = RSSoknadstatus.SENDT;
+    };
+
     const onSubmit = () => {
         settSvar(sporsmal, methods.getValues());
         if (erSiste) {
             settSvar(nesteSporsmal, methods.getValues());
-            sendTil.forEach(mottaker => {
-                if (mottaker === SvarTil.NAV) {
-                    valgtSoknad.sendtTilNAVDato = new Date()
-                }
-                if (mottaker === SvarTil.ARBEIDSGIVER) {
-                    valgtSoknad.sendtTilArbeidsgiverDato = new Date();
-                }
-            });
+            sendSoknad();
+            oppdaterVedInnsending();
             logEvent('Søknad sendt', { soknadstype: valgtSoknad.soknadstype });
-            valgtSoknad.status = RSSoknadstatus.SENDT;
-            // TODO: Legg inn /soknader/{id}/send kall
         } else {
             logEvent('Spørsmål svart', { soknadstype: valgtSoknad.soknadstype, sporsmalstag: sporsmal.tag, svar: sporsmal.svarliste.svar[0].verdi })
         }
