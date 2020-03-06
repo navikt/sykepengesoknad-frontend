@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { FormContext, useForm } from 'react-hook-form';
 import { useHistory, useParams } from 'react-router-dom';
 import Knapperad from './knapperad';
-import { Sporsmal } from '../../../types/types';
+import { Soknad, Sporsmal } from '../../../types/types';
 import SporsmalSwitch from '../sporsmal-switch';
 import { pathUtenSteg } from '../sporsmal-utils';
 import { useAppStore } from '../../../data/stores/app-store';
@@ -19,25 +19,28 @@ import { settSvar } from '../sett-svar';
 import './sporsmal-form.less';
 import { useAmplitudeInstance } from '../../amplitude/amplitude';
 import env from '../../../utils/environment';
-import { FetchState, hasData } from '../../../data/rest/utils';
+import { FetchState, hasAnyFailed, hasData } from '../../../data/rest/utils';
 import { RSMottakerResponse } from '../../../types/rs-types/rest-response/rs-mottakerresponse';
 import { RSMottaker } from '../../../types/rs-types/rs-mottaker';
 import useFetch from '../../../data/rest/use-fetch';
+import { sporsmalToRS } from '../../../types/rs-types/rs-sporsmal';
+import { RSOppdaterSporsmalResponse } from '../../../types/rs-types/rest-response/rs-oppdatersporsmalresponse';
 
 export interface SpmProps {
     sporsmal: Sporsmal;
 }
 
 const SporsmalForm = () => {
-    const { setValgtSoknad, valgtSoknad, sendTil, setTop, setOppdaterSporsmalId, setSendTil } = useAppStore();
+    const { soknader, setSoknader, setValgtSoknad, valgtSoknad, sendTil, setTop, setSendTil } = useAppStore();
     const { logEvent } = useAmplitudeInstance();
     const [ erSiste, setErSiste ] = useState<boolean>(false);
     const { stegId } = useParams();
     const history = useHistory();
     const spmIndex = parseInt(stegId) - 1;
     const methods = useForm();
-    const sporsmal = valgtSoknad.sporsmal[spmIndex];
+    let sporsmal = valgtSoknad.sporsmal[spmIndex];
     const nesteSporsmal = valgtSoknad.sporsmal[spmIndex + 1];
+    const oppdaterSporsmal = useFetch<RSOppdaterSporsmalResponse>();
     const mottaker = useFetch<RSMottakerResponse>();
     const send = useFetch<{}>();
 
@@ -48,6 +51,30 @@ const SporsmalForm = () => {
         if (sisteSide) hentMottaker();
         // eslint-disable-next-line
     }, [ spmIndex ]);
+
+    const sendOppdaterSporsmal = (innsending?: any) => {
+        let soknad = valgtSoknad;
+        oppdaterSporsmal.fetch( env.syfoapiRoot + `/syfosoknad/api/soknader/${soknad.id}/sporsmal/${sporsmal.id}`, {
+            method: 'PUT',
+            credentials: 'include',
+            body: JSON.stringify(sporsmalToRS(sporsmal)),
+            headers: { 'Content-Type': 'application/json' }
+        }, (fetchState: FetchState<RSOppdaterSporsmalResponse>) => {
+            if (hasData(fetchState)) {
+                if (fetchState.data.mutertSoknad) {
+                    soknad = new Soknad(fetchState.data.mutertSoknad);
+                }
+                else {
+                    const spm = fetchState.data.oppdatertSporsmal;
+                    soknad.sporsmal[spmIndex] = new Sporsmal(spm, undefined, true);
+                }
+                soknader[soknader.findIndex(sok => sok.id === soknad.id)] = soknad;
+                setSoknader(soknader);
+                setValgtSoknad(soknad);
+                if(innsending) innsending();
+            }
+        })
+    };
 
     const hentMottaker = () => {
         mottaker.fetch(env.syfoapiRoot + `/syfosoknad/api/soknader/${valgtSoknad.id}/finnMottaker`, {
@@ -76,43 +103,47 @@ const SporsmalForm = () => {
             credentials: 'include',
             headers: { 'Content-Type': 'application/json' }
         }, (fetchState: FetchState<{}>) => {
-            if (hasData(fetchState) === false) {
-                // TODO: Burde håndtere dette med en feilmeldingskomponent, så den blir stående igjen på siste side
-                console.log('Feilmelding fra backend:', fetchState);
+            if (hasData(fetchState)) {
+                sendTil.forEach(mottaker => {
+                    if (mottaker === SvarTil.NAV) {
+                        valgtSoknad.sendtTilNAVDato = new Date()
+                    }
+                    if (mottaker === SvarTil.ARBEIDSGIVER) {
+                        valgtSoknad.sendtTilArbeidsgiverDato = new Date();
+                    }
+                });
+                valgtSoknad.status = RSSoknadstatus.SENDT;
+                setValgtSoknad(valgtSoknad);
+                soknader[soknader.findIndex(sok => sok.id === valgtSoknad.id)] = valgtSoknad;
+                setSoknader(soknader);
             }
         })
-    };
-
-    const oppdaterVedInnsending = () => {
-        sendTil.forEach(mottaker => {
-            if (mottaker === SvarTil.NAV) {
-                valgtSoknad.sendtTilNAVDato = new Date()
-            }
-            if (mottaker === SvarTil.ARBEIDSGIVER) {
-                valgtSoknad.sendtTilArbeidsgiverDato = new Date();
-            }
-        });
-        valgtSoknad.status = RSSoknadstatus.SENDT;
     };
 
     const onSubmit = () => {
         settSvar(sporsmal, methods.getValues());
         if (erSiste) {
             settSvar(nesteSporsmal, methods.getValues());
-            sendSoknad();
-            oppdaterVedInnsending();
+            sporsmal = nesteSporsmal;
+            sendOppdaterSporsmal(() => sendSoknad());
             logEvent('Søknad sendt', { soknadstype: valgtSoknad.soknadstype });
         } else {
+            sendOppdaterSporsmal();
             logEvent('Spørsmål svart', { soknadstype: valgtSoknad.soknadstype, sporsmalstag: sporsmal.tag, svar: sporsmal.svarliste.svar[0].verdi })
         }
 
-        methods.reset();
-        setValgtSoknad(valgtSoknad);
-        setOppdaterSporsmalId(spmIndex);
-        setTop(0);
-        erSiste
-            ? history.push(pathUtenSteg(history.location.pathname).replace('soknader', 'kvittering'))
-            : history.push(pathUtenSteg(history.location.pathname) + SEPARATOR + (spmIndex + 2));
+        if (hasAnyFailed([ oppdaterSporsmal, mottaker, send ])) {
+            // TODO: fix
+            console.log('Fetch mot backend feilet:', [ oppdaterSporsmal, mottaker, send ]);
+            history.push(pathUtenSteg(history.location.pathname) + SEPARATOR + (spmIndex + 1));
+        }
+        else {
+            methods.reset();
+            setTop(0);
+            erSiste
+                ? history.push(pathUtenSteg(history.location.pathname).replace('soknader', 'kvittering'))
+                : history.push(pathUtenSteg(history.location.pathname) + SEPARATOR + (spmIndex + 2));
+        }
     };
 
     return (

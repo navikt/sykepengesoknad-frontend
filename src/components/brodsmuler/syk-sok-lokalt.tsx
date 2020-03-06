@@ -8,6 +8,10 @@ const SykSokLokalt = () => {
     const { valgtSoknad, valgtSykmelding } = useAppStore();
     const { stegId } = useParams();
 
+    if (!valgtSoknad || !valgtSoknad.sporsmal || !stegId || Number(stegId) >= valgtSoknad.sporsmal.length) {
+        return null;
+    }
+
     return (
         <Vis hvis={env.isDevelopment}>
             <div>

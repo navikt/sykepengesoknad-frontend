@@ -17,7 +17,7 @@ export const hentSvar = (sporsmal: Sporsmal): any => {
         return ukeliste;
     }
 
-    if (sporsmal.svartype.startsWith('RADIO_GRUPPE')) {
+    if (sporsmal.svartype.toString().startsWith('RADIO_GRUPPE')) {
         const besvartSporsmal = sporsmal.undersporsmal.find((spm: Sporsmal) => {
             return spm.svarliste.svar[0] && spm.svarliste.svar[0].verdi === SvarEnums.CHECKED;
         });

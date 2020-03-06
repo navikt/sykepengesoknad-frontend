@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import Spinner from 'nav-frontend-spinner';
 import useFetch from './rest/use-fetch';
-import { Soknad, Sporsmal, Sykmelding } from '../types/types';
+import { Soknad, Sykmelding } from '../types/types';
 import { FetchState, hasAny401, hasAnyFailed, hasData, isAnyNotStartedOrPending, isNotStarted } from './rest/utils';
 import { useAppStore } from './stores/app-store';
 import { RSSoknad } from '../types/rs-types/rs-soknad';
@@ -10,17 +10,14 @@ import { unleashKeys } from './mock/data/toggles';
 import IngenData from '../pages/feil/ingen-data';
 import env from '../utils/environment';
 import { UnleashToggles } from '../types/types';
-import { sporsmalToRS } from '../types/rs-types/rs-sporsmal';
-import { RSOppdaterSporsmalResponse } from '../types/rs-types/rest-response/rs-oppdatersporsmalresponse'
 
 export function DataFetcher(props: { children: any }) {
 
-    const { setUnleash, soknader, setSoknader, setSykmeldinger, valgtSoknad, setValgtSoknad, oppdaterSporsmalId } = useAppStore();
+    const { setUnleash, setSoknader, setSykmeldinger } = useAppStore();
 
     const unleash = useFetch<{}>();
     const rssoknader = useFetch<RSSoknad[]>();
     const sykmeldinger = useFetch<Sykmelding[]>();
-    const oppdaterSporsmal = useFetch<RSOppdaterSporsmalResponse>();
 
     useEffect(() => {
         if (isNotStarted(unleash)) {
@@ -58,44 +55,13 @@ export function DataFetcher(props: { children: any }) {
         // eslint-disable-next-line
     }, [ rssoknader ]);
 
-    useEffect(() => {
-        if (valgtSoknad && oppdaterSporsmalId >= 0) {
-            let soknad = valgtSoknad;
-            const sporsmal = valgtSoknad.sporsmal[oppdaterSporsmalId];
-
-            oppdaterSporsmal.fetch( env.syfoapiRoot + `/syfosoknad/api/soknader/${valgtSoknad.id}/sporsmal/${sporsmal.id}`, {
-                method: 'PUT',
-                credentials: 'include',
-                body: JSON.stringify(sporsmalToRS(sporsmal)),
-                headers: { 'Content-Type': 'application/json' }
-            }, (fetchState: FetchState<RSOppdaterSporsmalResponse>) => {
-                if (hasData(fetchState)) {
-                    if (fetchState.data.mutertSoknad) {
-                        soknad = new Soknad(fetchState.data.mutertSoknad);
-                    }
-                    else {
-                        const spm = fetchState.data.oppdatertSporsmal;
-                        soknad.sporsmal[oppdaterSporsmalId] = new Sporsmal(spm, undefined, true);
-                    }
-                    soknader[soknader.findIndex(sok => sok.id === soknad.id)] = soknad;
-                    setSoknader(soknader);
-                    setValgtSoknad(soknad);
-                }
-                else {
-                    // TODO: Brude håndtere dette med en feilmeldingskomponent, nå vises <IngenData/>
-                    console.log('Feilmelding fra backend:', fetchState);
-                }})
-        }
-        // eslint-disable-next-line
-    }, [ oppdaterSporsmalId ]);
-
     if (isAnyNotStartedOrPending([ unleash, rssoknader, sykmeldinger ])) {
         return <Spinner />;
 
-    } else if (hasAny401([ unleash, rssoknader, sykmeldinger, oppdaterSporsmal ])) {
+    } else if (hasAny401([ unleash, rssoknader, sykmeldinger ])) {
         window.location.href = `${hentLoginUrl()}?redirect=${window.location.origin}/sykepengesok`;
 
-    } else if (hasAnyFailed([ unleash, rssoknader, sykmeldinger, oppdaterSporsmal ])) {
+    } else if (hasAnyFailed([ unleash, rssoknader, sykmeldinger ])) {
         return <IngenData />;
     }
 
