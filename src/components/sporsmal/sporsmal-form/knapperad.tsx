@@ -2,10 +2,11 @@ import React, { MouseEvent, useEffect, useRef, useState } from 'react';
 import { Knapp } from 'nav-frontend-knapper';
 import { Normaltekst } from 'nav-frontend-typografi';
 import tekster from './knapperad-tekster';
-import { useParams } from 'react-router-dom';
+import { useParams, Link } from 'react-router-dom';
 import { useAppStore } from '../../../data/stores/app-store';
 import Vis from '../../vis';
-import { getTop } from '../../../utils/browser-utils';
+import env from '../../../utils/environment';
+import { RSSoknadstatus } from '../../../types/rs-types/rs-soknadstatus';
 
 type Event = MouseEvent<HTMLAnchorElement | HTMLButtonElement>;
 
@@ -14,7 +15,7 @@ interface KnapperadProps {
 }
 
 const Knapperad = ({ onSubmit }: KnapperadProps) => {
-    const { valgtSoknad } = useAppStore();
+    const { valgtSoknad, soknader, setSoknader } = useAppStore();
     const { stegId } = useParams();
     const spmIndex = parseInt(stegId) - 2;
     const nokkel = spmIndex === valgtSoknad.sporsmal.length - 3
@@ -25,8 +26,7 @@ const Knapperad = ({ onSubmit }: KnapperadProps) => {
 
     useEffect(() => {
         if (vilAvbryte) {
-            const end = getTop(avbrytDialog.current, 600);
-            window.scrollTo(end, 800);
+            window.scrollTo({ top: avbrytDialog.current.offsetTop, left: 0, behavior: 'smooth' });
         }
     }, [ vilAvbryte ]);
 
@@ -35,9 +35,19 @@ const Knapperad = ({ onSubmit }: KnapperadProps) => {
         setVilAvbryte(!vilAvbryte);
     };
 
-    const handleAvbryt = (event: Event) => {
-        event.preventDefault();
-        alert(`Nå vil jeg avbryte ${valgtSoknad.id}!!!`);
+    const handleAvbryt = () => {
+        fetch(env.syfoapiRoot + `/syfosoknad/api/soknader/${valgtSoknad.id}/avbryt`, {
+            method: 'POST',
+            credentials: 'include',
+        }).then((response) => {
+            return response.status
+        }).then(status => {
+            if (status === 200) {
+                setSoknader(soknader.map(s => s.id === valgtSoknad.id ? { ...s, status: RSSoknadstatus.AVBRUTT } : s));
+            } else {
+                console.log('not cool');
+            }
+        })
     };
 
     return (
@@ -48,7 +58,9 @@ const Knapperad = ({ onSubmit }: KnapperadProps) => {
                 <Vis hvis={vilAvbryte}>
                     <div ref={avbrytDialog} className="avbrytDialog__dialog pekeboble">
                         <Normaltekst className="blokk-s">{tekster['sykepengesoknad.avbryt.sporsmal']}</Normaltekst>
-                        <Knapp className="blokk-xs" onClick={handleAvbryt} type="fare">{tekster['sykepengesoknad.avbryt.ja']}</Knapp>
+                        <div className="blokk-xs">
+                            <Link className="knapp knapp--fare" onClick={handleAvbryt} to={`/soknader/${valgtSoknad.id}`} type="fare" >{tekster['sykepengesoknad.avbryt.ja']}</Link>
+                        </div>
                         <a className="lenke" onClick={handleVilAvbryte}>{tekster['sykepengesoknad.avbryt.angre']}</a>
                     </div>
                 </Vis>

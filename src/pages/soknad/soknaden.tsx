@@ -45,9 +45,11 @@ const Soknaden = (props: RouteComponentProps<IdParams>) => {
     useGlobaleData(props.match.params);
 
     useEffect(() => {
-        setBodyClass('soknaden');
-        const send = lagSendTil(valgtSoknad, valgtSykmelding);
-        setSendTil(send);
+        if (valgtSoknad !== null && valgtSoknad !== undefined && valgtSykmelding !== null && valgtSykmelding !== undefined) {
+            setBodyClass('soknaden');
+            const send = lagSendTil(valgtSoknad, valgtSykmelding);
+            setSendTil(send);
+        }
         // eslint-disable-next-line
     }, [ valgtSoknad, valgtSykmelding ]);
 
