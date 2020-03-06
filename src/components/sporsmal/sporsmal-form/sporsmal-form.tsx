@@ -102,21 +102,19 @@ const SporsmalForm = () => {
             method: 'POST',
             credentials: 'include',
             headers: { 'Content-Type': 'application/json' }
-        }, (fetchState: FetchState<{}>) => {
-            if (hasData(fetchState)) {
-                sendTil.forEach(mottaker => {
-                    if (mottaker === SvarTil.NAV) {
-                        valgtSoknad.sendtTilNAVDato = new Date()
-                    }
-                    if (mottaker === SvarTil.ARBEIDSGIVER) {
-                        valgtSoknad.sendtTilArbeidsgiverDato = new Date();
-                    }
-                });
-                valgtSoknad.status = RSSoknadstatus.SENDT;
-                setValgtSoknad(valgtSoknad);
-                soknader[soknader.findIndex(sok => sok.id === valgtSoknad.id)] = valgtSoknad;
-                setSoknader(soknader);
-            }
+        }, () => {
+            sendTil.forEach(mottaker => {
+                if (mottaker === SvarTil.NAV) {
+                    valgtSoknad.sendtTilNAVDato = new Date()
+                }
+                if (mottaker === SvarTil.ARBEIDSGIVER) {
+                    valgtSoknad.sendtTilArbeidsgiverDato = new Date();
+                }
+            });
+            valgtSoknad.status = RSSoknadstatus.SENDT;
+            setValgtSoknad(valgtSoknad);
+            soknader[soknader.findIndex(sok => sok.id === valgtSoknad.id)] = valgtSoknad;
+            setSoknader(soknader);
         })
     };
 
