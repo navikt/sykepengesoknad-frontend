@@ -30,8 +30,6 @@ export const settSvar = (sporsmal: Sporsmal, verdier: Record<string, any>): void
         case RSSvartype.RADIO_GRUPPE_TIMER_PROSENT:
             radiogruppeSvar(sporsmal, verdi);
             break;
-        case RSSvartype.RADIO:
-            break;
         case RSSvartype.DATO:
             datoSvar(sporsmal, verdi);
             break;
@@ -43,6 +41,11 @@ export const settSvar = (sporsmal: Sporsmal, verdier: Record<string, any>): void
             sporsmal.undersporsmal.forEach(uspm => {
                 settSvar(uspm, verdier);
             });
+            break;
+        case RSSvartype.RADIO:
+        case RSSvartype.IKKE_RELEVANT:
+        case RSSvartype.INFO_BEHANDLINGSDAGER:
+            // Skal ikke ha svarverdi
             break;
         default:
             sporsmal.svarliste = {
