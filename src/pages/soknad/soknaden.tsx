@@ -117,11 +117,11 @@ const Fordeling = () => {
 
         // Fremtidige søknader
         case RSSoknadstatus.FREMTIDIG:
-            break;
+            return null;
 
         // Utgåtte søknader
         case RSSoknadstatus.KORRIGERT:
         case RSSoknadstatus.SLETTET:
-            break;
+            return null;
     }
 };
