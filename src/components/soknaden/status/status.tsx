@@ -12,17 +12,17 @@ const Status = () => {
     return (
         <div className='avsnitt'>
             <EtikettLiten tag='h3' className='avsnitt-hode'>{tekster['statuspanel.status']}</EtikettLiten>
-            <Vis hvis={valgtSoknad.sendtTilNAVDato}>
+            <Vis hvis={valgtSoknad!.sendtTilNAVDato}>
                 <Normaltekst>
                     {getLedetekst(tekster['soknad.teaser.status.SENDT.til-nav'], {
-                        '%DATO%':  tilLesbarDatoMedArstall(valgtSoknad.sendtTilNAVDato) })}
+                        '%DATO%':  tilLesbarDatoMedArstall(valgtSoknad!.sendtTilNAVDato) })}
                 </Normaltekst>
             </Vis>
-            <Vis hvis={valgtSoknad.sendtTilArbeidsgiverDato}>
+            <Vis hvis={valgtSoknad!.sendtTilArbeidsgiverDato}>
                 <Normaltekst>
                     {getLedetekst(tekster['soknad.teaser.status.SENDT.til-arbeidsgiver'], {
-                        '%DATO%': tilLesbarDatoMedArstall(valgtSoknad.sendtTilArbeidsgiverDato),
-                        '%ARBEIDSGIVER%': valgtSoknad.arbeidsgiver ? valgtSoknad.arbeidsgiver.navn : '' })}
+                        '%DATO%': tilLesbarDatoMedArstall(valgtSoknad!.sendtTilArbeidsgiverDato),
+                        '%ARBEIDSGIVER%': valgtSoknad!.arbeidsgiver ? valgtSoknad!.arbeidsgiver.navn : '' })}
                 </Normaltekst>
             </Vis>
         </div>

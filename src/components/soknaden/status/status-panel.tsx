@@ -12,6 +12,7 @@ import { RSSoknad } from '../../../types/rs-types/rs-soknad';
 import { FetchState, hasData } from '../../../data/rest/utils';
 import { Soknad } from '../../../types/types';
 import { useHistory } from 'react-router';
+import Ettersending from './ettersending';
 
 const StatusPanel = () => {
     const { valgtSoknad, soknader, setSoknader } = useAppStore();
@@ -34,37 +35,20 @@ const StatusPanel = () => {
         });
     };
 
-    const ettersendNav = () => {
-        const res = fetch(env.syfoapiRoot + `/syfosoknad/api/soknader/${valgtSoknad.id}/ettersendTilNav`, {
-            method: 'POST',
-            credentials: 'include',
-            headers: { 'Content-Type': 'application/json' }
-        });
-        console.log('ETTERSEND_NAV', res);
-    };
-
-    const ettersendArbeidsgiver = () => {
-        const res = fetch(env.syfoapiRoot + `/syfosoknad/api/soknader/${valgtSoknad.id}/ettersendTilArbeidsgiver`, {
-            method: 'POST',
-            credentials: 'include',
-            headers: { 'Content-Type': 'application/json' }
-        });
-        console.log('ETTERSEND_ARB', res);
-    };
-
     return (
         <div className='panel status-panel'>
             <Vis hvis={valgtSoknad.sendtTilNAVDato || valgtSoknad.sendtTilArbeidsgiverDato}>
-                <Status />
-                <Utbetaling />
+                <Status/>
+                <Utbetaling/>
             </Vis>
 
             <div className='knapperad'>
-                <Knapp mini type='standard' onClick={() => korriger() } >{tekster['statuspanel.knapp.endre']}</Knapp>
-                <Knapp mini type='standard' onClick={() => ettersendNav() }>{tekster['statuspanel.knapp.send-nav']}</Knapp>
-                <Vis hvis={valgtSoknad.arbeidsgiver}>
-                    <Knapp mini type='standard' onClick={() => ettersendArbeidsgiver() }>{tekster['statuspanel.knapp.send-arbeidsgiver']}</Knapp>
-                </Vis>
+                <Knapp mini type='standard' onClick={() => korriger()}>{tekster[ 'statuspanel.knapp.endre' ]}</Knapp>
+
+                <Ettersending gjelder='nav' />
+
+                <Ettersending gjelder='arbeidsgiver' />
+
             </div>
         </div>
     );
