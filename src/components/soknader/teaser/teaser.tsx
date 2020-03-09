@@ -123,7 +123,7 @@ interface SykepengesoknadTeaserProps {
 
 const Teaser = ({ soknad }: SykepengesoknadTeaserProps) => {
     const { logEvent } = useAmplitudeInstance();
-    const stegId = soknad.status === RSSoknadstatus.NY ? '1' : '';
+    const stegId = soknad.status === RSSoknadstatus.NY || RSSoknadstatus.UTKAST_TIL_KORRIGERING ? '1' : '';
     const undertekst = beregnUndertekst(soknad);
 
     return (

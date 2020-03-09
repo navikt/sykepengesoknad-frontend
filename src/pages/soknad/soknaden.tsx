@@ -44,7 +44,9 @@ const Soknaden = (props: RouteComponentProps<IdParams>) => {
     useGlobaleData(props.match.params);
 
     useEffect(() => {
-        setBodyClass('soknaden');
+        if (valgtSoknad !== null && valgtSoknad !== undefined && valgtSykmelding !== null && valgtSykmelding !== undefined) {
+            setBodyClass('soknaden');
+        }
         // eslint-disable-next-line
     }, [ valgtSoknad, valgtSykmelding ]);
 
@@ -70,7 +72,8 @@ const Fordeling = () => {
 
     switch (valgtSoknad.status) {
         // Nye søknader
-        case RSSoknadstatus.NY || RSSoknadstatus.UTKAST_TIL_KORRIGERING:
+        case RSSoknadstatus.NY:
+        case RSSoknadstatus.UTKAST_TIL_KORRIGERING:
             return (
                 <>
                     <Vis hvis={stegNo === 1}>
@@ -102,7 +105,8 @@ const Fordeling = () => {
             );
 
         // Tidligere søknader
-        case RSSoknadstatus.SENDT || RSSoknadstatus.AVBRUTT:
+        case RSSoknadstatus.SENDT:
+        case RSSoknadstatus.AVBRUTT:
             return (
                 <>
                     <StatusPanel />
@@ -116,7 +120,8 @@ const Fordeling = () => {
             break;
 
         // Utgåtte søknader
-        case RSSoknadstatus.KORRIGERT || RSSoknadstatus.SLETTET:
+        case RSSoknadstatus.KORRIGERT:
+        case RSSoknadstatus.SLETTET:
             break;
     }
 };

@@ -148,4 +148,66 @@
             margin-top: 2.2rem;
         }
     }
+
+  .presisering, .pekeboble {
+    padding: 1rem;
+    background-color: @white;
+    position: relative;
+
+    @media(min-width: 30rem) {
+      padding: 2rem;
+    }
+  }
+
+  .ekstrasporsmal, .presisering, .pekeboble {
+    &:after {
+      content: "";
+      width: 1rem;
+      height: 1rem;
+      position: absolute;
+      display: block;
+      left: 1rem;
+      transform-origin: 50% 50%;
+
+      @media(min-width: 30rem) {
+        left: 1.5rem;
+      }
+    }
+  }
+  .pekeboble {
+    &:after {
+      font-size: 1.3333333333333333rem;
+      left: 50%;
+      top: 0;
+      transform: translate(-50%, -50%) rotate(45deg) skew(5deg, 5deg);
+    }
+  }
+
+  .pekeboble, .pekeboble:after {
+    background-color: @grayBackground;
+  }
+
+  .pekeboble {
+    margin-top: 2rem;
+  }
+
+  .avbrytDialog {
+    text-align: center;
+  }
+
+  .avbrytDialog__trigger {
+    margin: 0;
+  }
+
+  .avbrytDialog__dialog {
+    display: inline-block;
+
+    .panel-relatert:before {
+      left: 50%;
+    }
+
+    .varselstripe__innhold {
+      text-align: left;
+    }
+  }
 }
