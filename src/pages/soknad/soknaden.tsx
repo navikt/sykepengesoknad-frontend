@@ -46,8 +46,6 @@ const Soknaden = (props: RouteComponentProps<IdParams>) => {
     useEffect(() => {
         if (valgtSoknad !== null && valgtSoknad !== undefined && valgtSykmelding !== null && valgtSykmelding !== undefined) {
             setBodyClass('soknaden');
-            const send = lagSendTil(valgtSoknad, valgtSykmelding);
-            setSendTil(send);
         }
         // eslint-disable-next-line
     }, [ valgtSoknad, valgtSykmelding ]);
