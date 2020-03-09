@@ -17,7 +17,6 @@ import Vis from '../../components/vis';
 import SporsmalForm from '../../components/sporsmal/sporsmal-form/sporsmal-form';
 import SporsmalSteg from '../../components/sporsmal/sporsmal-steg/sporsmal-steg';
 import { hentNokkel } from '../../components/sporsmal/sporsmal-utils';
-import { lagSendTil } from '../../utils/soknad-utils';
 import { SEPARATOR } from '../../utils/constants';
 import './soknaden.less';
 
@@ -41,7 +40,7 @@ export const useGlobaleData = (params: any) => {
 };
 
 const Soknaden = (props: RouteComponentProps<IdParams>) => {
-    const { valgtSykmelding, valgtSoknad, setSendTil } = useAppStore();
+    const { valgtSykmelding, valgtSoknad } = useAppStore();
     useGlobaleData(props.match.params);
 
     useEffect(() => {
