@@ -1,8 +1,8 @@
 import React, { MouseEvent, useEffect, useRef, useState } from 'react';
-import { Knapp } from 'nav-frontend-knapper';
+import { Knapp, Fareknapp } from 'nav-frontend-knapper';
 import { Normaltekst } from 'nav-frontend-typografi';
 import tekster from './knapperad-tekster';
-import { useParams, Link } from 'react-router-dom';
+import { useParams, useHistory } from 'react-router-dom';
 import { useAppStore } from '../../../data/stores/app-store';
 import Vis from '../../vis';
 import env from '../../../utils/environment';
@@ -15,7 +15,8 @@ interface KnapperadProps {
 }
 
 const Knapperad = ({ onSubmit }: KnapperadProps) => {
-    const { valgtSoknad, soknader, setSoknader } = useAppStore();
+    const { valgtSoknad, setValgtSoknad, soknader, setSoknader } = useAppStore();
+    const history = useHistory();
     const { stegId } = useParams();
 
     const spmIndex = parseInt(stegId) - 2;
@@ -36,7 +37,8 @@ const Knapperad = ({ onSubmit }: KnapperadProps) => {
         setVilAvbryte(!vilAvbryte);
     };
 
-    const handleAvbryt = () => {
+    const handleAvbryt = (event: Event) => {
+        event.preventDefault();
         fetch(env.syfoapiRoot + `/syfosoknad/api/soknader/${valgtSoknad.id}/avbryt`, {
             method: 'POST',
             credentials: 'include',
@@ -44,7 +46,10 @@ const Knapperad = ({ onSubmit }: KnapperadProps) => {
             return response.status
         }).then(status => {
             if (status === 200) {
-                setSoknader(soknader.map(s => s.id === valgtSoknad.id ? { ...s, status: RSSoknadstatus.AVBRUTT } : s));
+                const nySoknad = { ...valgtSoknad, status: RSSoknadstatus.AVBRUTT };
+                setSoknader(soknader.map(s => s.id === valgtSoknad.id ? nySoknad : s));
+                setValgtSoknad(nySoknad);
+                history.push(`/soknader/${valgtSoknad.id}/1`);
             } else {
                 console.log('not cool');
             }
@@ -60,7 +65,7 @@ const Knapperad = ({ onSubmit }: KnapperadProps) => {
                     <div ref={avbrytDialog} className="avbrytDialog__dialog pekeboble">
                         <Normaltekst className="blokk-s">{tekster['sykepengesoknad.avbryt.sporsmal']}</Normaltekst>
                         <div className="blokk-xs">
-                            <Link className="knapp knapp--fare" onClick={handleAvbryt} to={`/soknader/${valgtSoknad.id}`} type="fare" >{tekster['sykepengesoknad.avbryt.ja']}</Link>
+                            <Fareknapp onClick={handleAvbryt}>{tekster['sykepengesoknad.avbryt.ja']}</Fareknapp>
                         </div>
                         <a className="lenke" onClick={handleVilAvbryte}>{tekster['sykepengesoknad.avbryt.angre']}</a>
                     </div>
