@@ -19,6 +19,7 @@ import SporsmalSteg from '../../components/sporsmal/sporsmal-steg/sporsmal-steg'
 import { hentNokkel } from '../../components/sporsmal/sporsmal-utils';
 import { SEPARATOR } from '../../utils/constants';
 import './soknaden.less';
+import AlertStripe from 'nav-frontend-alertstriper';
 
 const brodsmuler: Brodsmule[] = [ {
     tittel: tekster['soknader.sidetittel'],
@@ -76,6 +77,12 @@ const Fordeling = () => {
         case RSSoknadstatus.UTKAST_TIL_KORRIGERING:
             return (
                 <>
+                    <Vis hvis={valgtSoknad.status === RSSoknadstatus.UTKAST_TIL_KORRIGERING}>
+                        <AlertStripe type='info' className='blokk-s'>
+                            <span>Rediger det som er feil i søknaden, og send den inn på nytt.</span>
+                        </AlertStripe>
+                    </Vis>
+
                     <Vis hvis={stegNo === 1}>
                         <SoknadIntro />
                     </Vis>

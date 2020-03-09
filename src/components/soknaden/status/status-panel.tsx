@@ -13,6 +13,7 @@ import { FetchState, hasData } from '../../../data/rest/utils';
 import { Soknad } from '../../../types/types';
 import { useHistory } from 'react-router';
 import Ettersending from './ettersending';
+import { getUrlTilSoknad } from '../../../utils/url-utils';
 
 const StatusPanel = () => {
     const { valgtSoknad, soknader, setSoknader } = useAppStore();
@@ -29,8 +30,7 @@ const StatusPanel = () => {
                 const soknad = new Soknad(fetchState.data);
                 soknader.push(soknad);
                 setSoknader(soknader);
-                console.log('location', history.location.pathname);
-                history.push(soknad.id);
+                history.push(getUrlTilSoknad(soknad.id, '1'));
             }
         });
     };
