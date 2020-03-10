@@ -7,7 +7,8 @@ it('Rendrer søknadens startside', async() => {
     render(
         <MemoryRouter initialEntries={[ '/' ]}>
             <App/>
-        </MemoryRouter>);
+        </MemoryRouter>
+    );
 
     expect(screen.queryAllByTitle('Søknad om sykepenger'));
 });
