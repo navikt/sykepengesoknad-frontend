@@ -79,7 +79,7 @@ const Fordeling = () => {
                 <>
                     <Vis hvis={valgtSoknad.status === RSSoknadstatus.UTKAST_TIL_KORRIGERING}>
                         <AlertStripe type='info' className='blokk-s'>
-                            <span>Rediger det som er feil i søknaden, og send den inn på nytt.</span>
+                            <span>{tekster['sykepengesoknad.utkast-til-korrigering.info']}</span>
                         </AlertStripe>
                     </Vis>
 
