@@ -47,8 +47,9 @@ const StatusPanel = () => {
 
                 <Ettersending gjelder='nav' />
 
-                <Ettersending gjelder='arbeidsgiver' />
-
+                <Vis hvis={valgtSoknad.arbeidsgiver !== undefined}>
+                    <Ettersending gjelder='arbeidsgiver' />
+                </Vis>
             </div>
         </div>
     );
