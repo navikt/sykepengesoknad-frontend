@@ -6,12 +6,15 @@ import { Soknad, Sykmelding } from './types/types';
 import { sykmeldinger } from './data/mock/data/sykmeldinger';
 import { fixSykmeldingDatoer } from './utils/dato-utils';
 import { unleashToggles } from './data/mock/data/toggles';
+import { MemoryRouter } from 'react-router-dom';
+import StoreProvider from './data/stores/store-provider';
+import { Amplitude } from './components/amplitude/amplitudeProvider';
 
 interface TestProps {
     children: React.ReactElement;
 }
 
-const TestProvider = ({ children }: TestProps) => {
+export const TestData = ({ children }: TestProps) => {
     const { setUnleash, setSoknader, setSykmeldinger } = useAppStore();
 
     useEffect(() => {
@@ -31,7 +34,19 @@ const TestProvider = ({ children }: TestProps) => {
     )
 };
 
-export default TestProvider;
+export const TestProvider = ({ children }: TestProps) => {
+    return (
+        <MemoryRouter initialEntries={[ '/' ]}>
+            <StoreProvider>
+                <TestData>
+                    <Amplitude>
+                        {children}
+                    </Amplitude>
+                </TestData>
+            </StoreProvider>
+        </MemoryRouter>
+    )
+};
 
 /*
 * Hva bør testes?

@@ -6,7 +6,7 @@ import { useAppStore } from '../../data/stores/app-store';
 
 export const useAmplitudeInstance = createUseContext(() => {
     const { unleash } = useAppStore();
-    const unleashAmplitudeEnabled = unleash['syfo.amplitude'];
+    const unleashAmplitudeEnabled = unleash === undefined ? false : unleash['syfo.amplitude'];
 
     const instance: any = useRef({
         _userAgent: '',

@@ -1,10 +1,10 @@
 import React from 'react';
 import { render, screen } from '@testing-library/react';
+import { TargetElement } from '@testing-library/user-event';
 import FetchMock, { SpyMiddleware } from 'yet-another-fetch-mock';
 import Soknader from './soknader';
-import StoreProvider from '../../data/stores/store-provider';
-import TestProvider from '../../test-provider';
-import { MemoryRouter } from 'react-router-dom';
+import { TestProvider } from '../../test-provider';
+import '@testing-library/jest-dom/extend-expect';
 
 describe('<Soknader/>', () => {
     let mock: FetchMock;
@@ -22,20 +22,16 @@ describe('<Soknader/>', () => {
         mock.restore();
     });
 
-    it('Rendrer app', () => {
+    test('Rendrer side', () => {
         const { container } = render(
-            <MemoryRouter initialEntries={[ '/' ]}>
-                <StoreProvider>
-                    <TestProvider>
-                        <Soknader />
-                    </TestProvider>
-                </StoreProvider>
-            </MemoryRouter>
+            <TestProvider>
+                <Soknader />
+            </TestProvider>
         );
 
         expect(screen.getAllByText('Søknader om sykepenger'));
-        container.querySelectorAll('.inngangspanel');
 
-        console.log('container', container.querySelectorAll('.inngangspanel')[0].outerHTML); // eslint-disable-line
+        const elm: TargetElement = container.querySelector('a.inngangspanel[href*="710acaea-abef-4e6f-be83-bd9e0c3c1e3a"]');
+        expect(elm).toBeInTheDocument();
     });
 });
