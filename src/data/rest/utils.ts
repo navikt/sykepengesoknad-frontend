@@ -59,4 +59,3 @@ export const has401 = (fetch: FetchState): boolean => {
 export const hasData = <D = {}>(fetch: FetchState<D>): fetch is FetchStateWithData<D> => {
     return fetch.data != null;
 };
-
