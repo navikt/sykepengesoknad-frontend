@@ -8,6 +8,7 @@ const SoknadenTekster: any = {
         'sykepengesoknad.foer-du-begynner.tittel': 'Før du begynner',
         'sykepengesoknad.foer-du-begynner.introtekst': 'Det du fyller ut brukes til å vurdere om du har rett til sykepenger, og eventuelt hvor mye. Derfor ber vi deg bekrefte at opplysningene er riktige:',
         'sykepengesoknad.til-slutt.tittel': 'Til slutt',
+        'sykepengesoknad.utkast-til-korrigering.info': 'Rediger det som er feil i søknaden, og send den inn på nytt.',
 
         'sykepengesoknad.ferie.tittel': 'Ferie',
         'sykepengesoknad.ferie.bjorn': 'Du lurer kanskje på hvorfor vi spør om ferie før du ble sykmeldt? Det er fordi vi må se om dette sykefraværet henger sammen med forrige periode du var syk.',

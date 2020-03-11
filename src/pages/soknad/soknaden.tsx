@@ -19,6 +19,7 @@ import SporsmalSteg from '../../components/sporsmal/sporsmal-steg/sporsmal-steg'
 import { hentNokkel } from '../../components/sporsmal/sporsmal-utils';
 import { SEPARATOR } from '../../utils/constants';
 import './soknaden.less';
+import AlertStripe from 'nav-frontend-alertstriper';
 
 const brodsmuler: Brodsmule[] = [ {
     tittel: tekster['soknader.sidetittel'],
@@ -76,6 +77,12 @@ const Fordeling = () => {
         case RSSoknadstatus.UTKAST_TIL_KORRIGERING:
             return (
                 <>
+                    <Vis hvis={valgtSoknad.status === RSSoknadstatus.UTKAST_TIL_KORRIGERING}>
+                        <AlertStripe type='info' className='blokk-s'>
+                            <span>{tekster['sykepengesoknad.utkast-til-korrigering.info']}</span>
+                        </AlertStripe>
+                    </Vis>
+
                     <Vis hvis={stegNo === 1}>
                         <SoknadIntro />
                     </Vis>
@@ -117,11 +124,11 @@ const Fordeling = () => {
 
         // Fremtidige søknader
         case RSSoknadstatus.FREMTIDIG:
-            break;
+            return null;
 
         // Utgåtte søknader
         case RSSoknadstatus.KORRIGERT:
         case RSSoknadstatus.SLETTET:
-            break;
+            return null;
     }
 };

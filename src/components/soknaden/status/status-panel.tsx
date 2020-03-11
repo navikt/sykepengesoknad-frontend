@@ -6,22 +6,49 @@ import tekster from './status-panel-tekster';
 import Vis from '../../vis';
 import { useAppStore } from '../../../data/stores/app-store';
 import './status-panel.less';
+import env from '../../../utils/environment';
+import useFetch from '../../../data/rest/use-fetch';
+import { RSSoknad } from '../../../types/rs-types/rs-soknad';
+import { FetchState, hasData } from '../../../data/rest/utils';
+import { Soknad } from '../../../types/types';
+import { useHistory } from 'react-router';
+import Ettersending from './ettersending';
+import { getUrlTilSoknad } from '../../../utils/url-utils';
 
 const StatusPanel = () => {
-    const { valgtSoknad, sendTil } = useAppStore();
+    const { valgtSoknad, soknader, setSoknader } = useAppStore();
+    const korrigerSoknad = useFetch<RSSoknad>();
+    const history = useHistory();
+
+    const korriger = () => {
+        korrigerSoknad.fetch(env.syfoapiRoot + `/syfosoknad/api/soknader/${valgtSoknad.id}/korriger`, {
+            method: 'POST',
+            credentials: 'include',
+            headers: { 'Content-Type': 'application/json' }
+        }, (fetchState: FetchState<RSSoknad>) => {
+            if (hasData(fetchState)) {
+                const soknad = new Soknad(fetchState.data);
+                soknader.push(soknad);
+                setSoknader(soknader);
+                history.push(getUrlTilSoknad(soknad.id, '1'));
+            }
+        });
+    };
 
     return (
         <div className='panel status-panel'>
-            <Vis hvis={sendTil.length > 0}>
-                <Status />
-                <Utbetaling />
+            <Vis hvis={valgtSoknad.sendtTilNAVDato || valgtSoknad.sendtTilArbeidsgiverDato}>
+                <Status/>
+                <Utbetaling/>
             </Vis>
 
             <div className='knapperad'>
-                <Knapp mini type='standard'>{tekster['statuspanel.knapp.endre']}</Knapp>
-                <Knapp mini type='standard'>{tekster['statuspanel.knapp.send-nav']}</Knapp>
+                <Knapp mini type='standard' onClick={() => korriger()}>{tekster[ 'statuspanel.knapp.endre' ]}</Knapp>
+
+                <Ettersending gjelder='nav' />
+
                 <Vis hvis={valgtSoknad.arbeidsgiver !== undefined}>
-                    <Knapp mini type='standard'>{tekster['statuspanel.knapp.send-arbeidsgiver']}</Knapp>
+                    <Ettersending gjelder='arbeidsgiver' />
                 </Vis>
             </div>
         </div>
