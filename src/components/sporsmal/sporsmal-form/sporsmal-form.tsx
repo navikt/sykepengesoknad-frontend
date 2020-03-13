@@ -55,7 +55,7 @@ const SporsmalForm = () => {
     const sendOppdaterSporsmal = async() => {
         let soknad = valgtSoknad;
 
-        const res = await fetch( env.syfoapiRoot + `/syfosoknad/api/soknader/${soknad.id}/sporsmal/${sporsmal.id}`, {
+        const res = await fetch(env.syfoapiRoot + `/syfosoknad/api/soknader/${soknad.id}/sporsmal/${sporsmal.id}`, {
             method: 'PUT',
             credentials: 'include',
             body: JSON.stringify(sporsmalToRS(sporsmal)),
@@ -70,13 +70,12 @@ const SporsmalForm = () => {
                     soknad = new Soknad(data.mutertSoknad);
                 } else {
                     const spm = data.oppdatertSporsmal;
-                    soknad.sporsmal[ spmIndex ] = new Sporsmal(spm, undefined, true);
+                    soknad.sporsmal[spmIndex] = new Sporsmal(spm, undefined, true);
                 }
-                soknader[ soknader.findIndex(sok => sok.id === soknad.id) ] = soknad;
+                soknader[soknader.findIndex(sok => sok.id === soknad.id)] = soknad;
                 setSoknader(soknader);
                 setValgtSoknad(soknad);
-            }
-            else {
+            } else {
                 restFeilet = true;
                 methods.setError('syfosoknad', 'rest-feilet', 'Opps');
             }
@@ -112,7 +111,7 @@ const SporsmalForm = () => {
             headers: { 'Content-Type': 'application/json' }
         });
 
-        try{
+        try {
             const httpCode = res.status;
             if ([ 200, 201, 203, 206 ].includes(httpCode)) {
                 sendTil.forEach(mottaker => {
@@ -125,10 +124,9 @@ const SporsmalForm = () => {
                 });
                 valgtSoknad.status = RSSoknadstatus.SENDT;
                 setValgtSoknad(valgtSoknad);
-                soknader[ soknader.findIndex(sok => sok.id === valgtSoknad.id) ] = valgtSoknad;
+                soknader[soknader.findIndex(sok => sok.id === valgtSoknad.id)] = valgtSoknad;
                 setSoknader(soknader);
-            }
-            else {
+            } else {
                 restFeilet = true;
                 methods.setError('syfosoknad', 'rest-feilet', 'Opps');
             }
@@ -160,8 +158,7 @@ const SporsmalForm = () => {
 
         if (restFeilet) {
             methods.setError('syfosoknad', 'rest-feilet', 'Opps')
-        }
-        else {
+        } else {
             methods.clearError();
             methods.reset();
             setTop(0);
