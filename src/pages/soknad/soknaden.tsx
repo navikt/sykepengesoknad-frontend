@@ -44,7 +44,7 @@ const Soknaden = () => {
     const { valgtSykmelding, valgtSoknad } = useAppStore();
     const { id } = useParams();
     useGlobaleData(id);
-console.log('useParams()', useParams()); // eslint-disable-line
+
     useEffect(() => {
         if (valgtSoknad !== null && valgtSoknad !== undefined && valgtSykmelding !== null && valgtSykmelding !== undefined) {
             setBodyClass('soknaden');
