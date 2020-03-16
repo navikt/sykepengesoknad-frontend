@@ -28,7 +28,7 @@ describe('<Soknader />', () => {
                 <Soknader />
             </TestProvider>
         );
-console.log('container', container.outerHTML); // eslint-disable-line
+
         expect(screen.getAllByText('Søknader om sykepenger')).toBeTruthy();
 
         const inngangspanel = 'a.inngangspanel[href*="710acaea-abef-4e6f-be83-bd9e0c3c1e3a"]';
