@@ -1,8 +1,8 @@
 import React, { useEffect } from 'react';
 import { VenstreChevron } from 'nav-frontend-chevron';
-import { Link, RouteComponentProps, useParams } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
 import { Normaltekst, Systemtittel } from 'nav-frontend-typografi';
-import { Brodsmule, IdParams } from '../../types/types';
+import { Brodsmule } from '../../types/types';
 import { RSSoknadstatus } from '../../types/rs-types/rs-soknadstatus';
 import Banner from '../../components/banner/banner';
 import { useAppStore } from '../../data/stores/app-store';
@@ -18,8 +18,8 @@ import SporsmalForm from '../../components/sporsmal/sporsmal-form/sporsmal-form'
 import SporsmalSteg from '../../components/sporsmal/sporsmal-steg/sporsmal-steg';
 import { hentNokkel } from '../../components/sporsmal/sporsmal-utils';
 import { SEPARATOR } from '../../utils/constants';
-import './soknaden.less';
 import AlertStripe from 'nav-frontend-alertstriper';
+import './soknaden.less';
 
 const brodsmuler: Brodsmule[] = [ {
     tittel: tekster['soknader.sidetittel'],
@@ -31,19 +31,20 @@ const brodsmuler: Brodsmule[] = [ {
     erKlikkbar: false,
 } ];
 
-export const useGlobaleData = (params: any) => {
+export const useGlobaleData = (soknadId: string) => {
     const { soknader, setValgtSoknad, sykmeldinger, setValgtSykmelding } = useAppStore();
-    soknader.filter(soknad => soknad.id === params.id).forEach(sok => {
+    soknader.filter(soknad => soknad.id === soknadId).forEach(sok => {
         setValgtSoknad(sok);
         const sykmelding = sykmeldinger.filter(sm => sm.id === sok.sykmeldingId)[0];
         setValgtSykmelding(sykmelding);
     });
 };
 
-const Soknaden = (props: RouteComponentProps<IdParams>) => {
+const Soknaden = () => {
     const { valgtSykmelding, valgtSoknad } = useAppStore();
-    useGlobaleData(props.match.params);
-
+    const { id } = useParams();
+    useGlobaleData(id);
+console.log('useParams()', useParams()); // eslint-disable-line
     useEffect(() => {
         if (valgtSoknad !== null && valgtSoknad !== undefined && valgtSykmelding !== null && valgtSykmelding !== undefined) {
             setBodyClass('soknaden');

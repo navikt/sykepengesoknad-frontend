@@ -11,6 +11,7 @@ import StoreProvider from './data/stores/store-provider';
 import { Amplitude } from './components/amplitude/amplitudeProvider';
 
 interface TestProps {
+    path?: string;
     children: React.ReactElement;
 }
 
@@ -34,9 +35,9 @@ export const TestData = ({ children }: TestProps) => {
     )
 };
 
-export const TestProvider = ({ children }: TestProps) => {
+export const TestProvider = ({ path, children }: TestProps) => {
     return (
-        <MemoryRouter initialEntries={[ '/' ]}>
+        <MemoryRouter initialEntries={[ path ]}>
             <StoreProvider>
                 <TestData>
                     <Amplitude>
