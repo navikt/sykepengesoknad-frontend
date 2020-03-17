@@ -2,7 +2,6 @@ import React from 'react';
 import { render, screen } from '@testing-library/react';
 import { TargetElement } from '@testing-library/user-event';
 import FetchMock, { SpyMiddleware } from 'yet-another-fetch-mock';
-import Soknader from './soknader';
 import { TestProvider } from '../../test-provider';
 import '@testing-library/jest-dom/extend-expect';
 
@@ -24,9 +23,7 @@ describe('<Soknader />', () => {
 
     test('Rendrer side', () => {
         const { container } = render(
-            <TestProvider path="/">
-                <Soknader />
-            </TestProvider>
+            <TestProvider path="/" />
         );
 
         expect(screen.getAllByText('Søknader om sykepenger')).toBeTruthy();

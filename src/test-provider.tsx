@@ -6,49 +6,54 @@ import { Soknad, Sykmelding } from './types/types';
 import { sykmeldinger } from './data/mock/data/sykmeldinger';
 import { fixSykmeldingDatoer } from './utils/dato-utils';
 import { unleashToggles } from './data/mock/data/toggles';
-import { MemoryRouter } from 'react-router-dom';
+import { MemoryRouter, Switch, Route } from 'react-router-dom';
 import StoreProvider from './data/stores/store-provider';
 import { Amplitude } from './components/amplitude/amplitudeProvider';
-
-interface TestProps {
-    path?: string;
-    children: React.ReactElement;
+import SoknadComp from './pages/soknad/soknaden';
+import Soknader from './pages/soknader/soknader';
+import Kvittering from './pages/kvittering/kvittering';
+interface DataProps {
+    children: React.ReactNode;
 }
-
-export const TestData = ({ children }: TestProps) => {
+const TestData = (props: DataProps) => {
     const { setUnleash, setSoknader, setSykmeldinger } = useAppStore();
-
     useEffect(() => {
         setSoknader(soknader!.map((soknad: RSSoknad) => {
             return new Soknad(soknad);
         }));
-
         setSykmeldinger(sykmeldinger!.map((sykmelding: Sykmelding) => {
             return fixSykmeldingDatoer(sykmelding);
         }));
-
         setUnleash(unleashToggles);
     }, []);
-
     return (
-        <>{children}</>
+        <>{ props.children }</>
     )
 };
-
-export const TestProvider = ({ path, children }: TestProps) => {
+interface ProviderProps {
+    path?: string;
+}
+export const TestProvider = ({ path }: ProviderProps) => {
+    console.log('laster inn =>', path);
     return (
-        <MemoryRouter initialEntries={[ path ]}>
-            <StoreProvider>
-                <TestData>
-                    <Amplitude>
-                        {children}
-                    </Amplitude>
-                </TestData>
-            </StoreProvider>
-        </MemoryRouter>
+        <div id="root">
+            <MemoryRouter initialEntries={[ path ]}>
+                <StoreProvider>
+                    <TestData>
+                        <Amplitude>
+                            <Switch>
+                                <Route exact={true} path="/" component={Soknader} />
+                                <Route path={'/soknader/:id/:stegId'} component={SoknadComp} />
+                                <Route path={'/soknader/:id'} component={SoknadComp} />
+                                <Route path={'/kvittering/:id'} component={Kvittering} />
+                            </Switch>
+                        </Amplitude>
+                    </TestData>
+                </StoreProvider>
+            </MemoryRouter>
+        </div>
     )
 };
-
 /*
 * Hva bør testes?
 * Render - at det rendrer
