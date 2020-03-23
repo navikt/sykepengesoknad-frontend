@@ -10,6 +10,7 @@ const SporsmalTekster: any = {
         'soknad.feilmelding.ANSVARSERKLARING': 'Du må bekrefte dette før du går videre',
         'soknad.feilmelding.ANDRE_INNTEKTSKILDER': 'Du må svare på om du har andre inntektskilder eller arbeidsforhold',
         'soknad.feilmelding.ARBEIDSGIVER': 'Du må oppgi om du har arbeidsgiver',
+        'soknad.feilmelding.ARBEID_UTENFOR_NORGE': 'Du må svare på om du har arbeidet i utlandet i løpet av de siste 12 månedene.',
         'soknad.feilmelding.BEKREFT_OPPLYSNINGER': 'Du må bekrefte at du har lest all informasjonen du har fått i søknaden og at opplysningene du har gitt er korrekte.',
         'soknad.feilmelding.BEKREFT_OPPLYSNINGER_UTLAND': 'Du må bekrefte at du oppfyller punktene over for å søke om å beholde sykepenger utenfor Norge',
         'soknad.feilmelding.BETALER_ARBEIDSGIVER': 'Du må svare på om arbeidsgiveren betaler lønnen din når du er syk',
@@ -29,10 +30,10 @@ const SporsmalTekster: any = {
         'soknad.feilmelding.HVILKE_ANDRE_INNTEKTSKILDER': 'Du må oppgi hvilke inntektskilder du har',
         'soknad.feilmelding.HVILKE_ANDRE_INNTEKTSKILDER.lokal': 'Du må velge minst et alternativ',
 
-        'sykepengesoknad.feilmelding.PERMITTERT_NAA': 'Du må svare på om du er permittert nå',
-        'sykepengesoknad.feilmelding.PERMITTERT_NAA.lokal': 'Du må svare på om du er permittert nå',
-        'sykepengesoknad.feilmelding.PERMITTERT_PERIODE': 'Du må svare på om du har vært permittert',
-        'sykepengesoknad.feilmelding.PERMITTERT_PERIODE.lokal': 'Du må svare på om du har vært permittert',
+        'soknad.feilmelding.PERMITTERT_NAA': 'Du må svare på om du er permittert nå',
+        'soknad.feilmelding.PERMITTERT_NAA.lokal': 'Du må svare på om du er permittert nå',
+        'soknad.feilmelding.PERMITTERT_PERIODE': 'Du må svare på om du har vært permittert',
+        'soknad.feilmelding.PERMITTERT_PERIODE.lokal': 'Du må svare på om du har vært permittert',
 
         'soknad.feilmelding.HVOR_MANGE_TIMER': 'Du må svare på hvor mange timer du jobber normalt per uke',
         'soknad.feilmelding.HVOR_MANGE_TIMER.lokal': 'Du må oppgi antall timer',

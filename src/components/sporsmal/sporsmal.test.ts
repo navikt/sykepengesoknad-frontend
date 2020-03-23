@@ -1,7 +1,9 @@
 import { TagTyper } from '../../types/enums';
 import tekster from './sporsmal-tekster';
+import { RSSvartype } from '../../types/rs-types/rs-svartype';
+import { hentGeneriskFeilmelding } from './sporsmal-utils';
 
-it('Alle tags har global feilmelding', async() => {
+test('Alle tags har global feilmelding', () => {
     let tags = Object.values(TagTyper);
     let manglerFeilmelding = false;
 
@@ -15,6 +17,11 @@ it('Alle tags har global feilmelding', async() => {
             && skipTag !== TagTyper.ER_DU_SYKMELDT
             && skipTag !== TagTyper.ENKELTSTAENDE_BEHANDLINGSDAGER
             && skipTag !== TagTyper.BEKREFT_OPPLYSNINGER_UTLAND_INFO
+
+            // TODO: Sjekk om disse faktisk ikke skal ha feilmelding
+            && skipTag !== TagTyper.PERMITTERT_NAA_NAR
+            && skipTag !== TagTyper.PERMITTERT_PERIODE_NAR
+            && skipTag !== TagTyper.ENKELTSTAENDE_BEHANDLINGSDAGER_DAG_NAR
     });
 
     tags.forEach(tag => {
@@ -24,5 +31,19 @@ it('Alle tags har global feilmelding', async() => {
         }
     });
 
-    expect(manglerFeilmelding).toBe(false);
+    expect(manglerFeilmelding).toBeFalsy();
+});
+
+test('Alle svartyper har generiskfeilmelding', () => {
+    const svartyper = Object.values(RSSvartype);
+    let manglerFeilmelding = false;
+
+    svartyper.forEach(svartype => {
+        if(hentGeneriskFeilmelding(svartype) === undefined) {
+            console.log('Mangler generisk feilmelding for svartype:', svartype);
+            manglerFeilmelding = true;
+        }
+    });
+
+    expect(manglerFeilmelding).toBeFalsy();
 });

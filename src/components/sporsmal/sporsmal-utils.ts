@@ -60,52 +60,50 @@ export const hentFeilmelding = (sporsmal: Sporsmal): FeilmeldingProps => {
         lokal: tekster['soknad.feilmelding.' + sporsmal.tag + '.lokal']
     };
     if (feilmelding.lokal === undefined) {
-        switch(sporsmal.svartype) {
-            case RSSvartype.JA_NEI:
-            case RSSvartype.RADIO:
-            case RSSvartype.RADIO_GRUPPE:
-            case RSSvartype.RADIO_GRUPPE_TIMER_PROSENT:
-            case RSSvartype.CHECKBOX:
-            case RSSvartype.CHECKBOX_GRUPPE:
-            case RSSvartype.CHECKBOX_PANEL: {
-                feilmelding.lokal = 'Du må velge et alternativ';
-                break;
-            }
-            case RSSvartype.PROSENT:
-            case RSSvartype.TIMER:
-            case RSSvartype.TALL: {
-                feilmelding.lokal = 'Du må oppgi en verdi';
-                break;
-            }
-            case RSSvartype.PERIODER:
-            case RSSvartype.PERIODE: {
-                feilmelding.lokal = 'Du må oppgi en periode';
-                break;
-            }
-            case RSSvartype.BEHANDLINGSDAGER:
-            case RSSvartype.RADIO_GRUPPE_UKEKALENDER: {
-                feilmelding.lokal = 'Du må oppgi en dag';
-                break;
-            }
-            case RSSvartype.FRITEKST: {
-                feilmelding.lokal = 'Du må skrive inn en tekst';
-                break;
-            }
-            case RSSvartype.LAND: {
-                feilmelding.lokal = 'Du må velge ett land';
-                break;
-            }
-            case RSSvartype.DATO: {
-                feilmelding.lokal = 'Du må oppgi en dato';
-                break;
-            }
-            case RSSvartype.IKKE_RELEVANT:
-            case RSSvartype.INFO_BEHANDLINGSDAGER:
-            default: {
-                feilmelding.lokal = '';
-                break;
-            }
-        }
+        feilmelding.lokal = hentGeneriskFeilmelding(sporsmal.svartype);
     }
     return feilmelding;
+};
+
+export const hentGeneriskFeilmelding = (svartype: RSSvartype) => {
+    switch(svartype) {
+        case RSSvartype.JA_NEI:
+        case RSSvartype.RADIO:
+        case RSSvartype.RADIO_GRUPPE:
+        case RSSvartype.RADIO_GRUPPE_TIMER_PROSENT:
+        case RSSvartype.CHECKBOX:
+        case RSSvartype.CHECKBOX_GRUPPE:
+        case RSSvartype.CHECKBOX_PANEL: {
+            return 'Du må velge et alternativ';
+        }
+        case RSSvartype.PROSENT:
+        case RSSvartype.TIMER:
+        case RSSvartype.TALL: {
+            return 'Du må oppgi en verdi';
+        }
+        case RSSvartype.PERIODER:
+        case RSSvartype.PERIODE: {
+            return 'Du må oppgi en periode';
+        }
+        case RSSvartype.BEHANDLINGSDAGER:
+        case RSSvartype.RADIO_GRUPPE_UKEKALENDER: {
+            return 'Du må oppgi en dag';
+        }
+        case RSSvartype.FRITEKST: {
+            return 'Du må skrive inn en tekst';
+        }
+        case RSSvartype.LAND: {
+            return 'Du må velge ett land';
+        }
+        case RSSvartype.DATO: {
+            return 'Du må oppgi en dato';
+        }
+        case RSSvartype.IKKE_RELEVANT:
+        case RSSvartype.INFO_BEHANDLINGSDAGER: {
+            return '';
+        }
+        default: {
+            return undefined;
+        }
+    }
 };

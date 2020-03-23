@@ -22,10 +22,10 @@ describe('<Soknaden /> som er sendt', () => {
     });
 
     test('Rendrer side', () => {
-        const { container } = render(<TestProvider path="soknader/2d1b9ab0-fa76-4738-9e07-3a684d141628/1" />);
+        const { container } = render(<TestProvider path="/" />);
         expect(screen.getAllByText('Søknader om sykepenger')).toBeTruthy();
 
-        const inngangspanel = 'a.inngangspanel[href*="710acaea-abef-4e6f-be83-bd9e0c3c1e3a"]';
+        const inngangspanel = 'a.inngangspanel[href*="977ce8fc-a83a-4454-ab81-893ff0284437"]';
         const elm: TargetElement = container.querySelector(inngangspanel);
         expect(elm).toBeInTheDocument();
     });

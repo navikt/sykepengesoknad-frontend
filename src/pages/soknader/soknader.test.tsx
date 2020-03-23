@@ -1,5 +1,5 @@
 import React from 'react';
-import { fireEvent, render, screen } from '@testing-library/react';
+import { render, screen } from '@testing-library/react';
 import { TargetElement } from '@testing-library/user-event';
 import FetchMock, { SpyMiddleware } from 'yet-another-fetch-mock';
 import { TestProvider } from '../../test-provider';

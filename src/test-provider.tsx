@@ -38,7 +38,6 @@ interface ProviderProps {
 }
 
 export const TestProvider = ({ path }: ProviderProps) => {
-    console.log('laster inn =>', path);
     return (
         <div id="root">
             <MemoryRouter initialEntries={[ path ]}>
