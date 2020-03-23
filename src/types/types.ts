@@ -200,7 +200,6 @@ export class Sporsmal {
             tag = orgarr.join('_');
         }
         const idtag = tag as keyof typeof TagTyper;
-        console.log('idtag', idtag ? idtag : ': '+spm.tag); // eslint-disable-line
         this.tag = TagTyper[idtag];
         this.sporsmalstekst = spm.sporsmalstekst === null ? '' : spm.sporsmalstekst;
         this.undertekst = spm.undertekst;

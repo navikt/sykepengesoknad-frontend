@@ -42,6 +42,7 @@ describe('<Soknaden /> ansvarserklæring', () => {
 
     test('Ansvarserklæringen må aksepteres', async() => {
         const { container } = render(<TestProvider path={path} />);
+
         const knapp = container.querySelector('.knapperad .knapp--hoved');
         expect(knapp).toBeInTheDocument();
         await act(async() => {
@@ -51,11 +52,26 @@ describe('<Soknaden /> ansvarserklæring', () => {
             return container.querySelector('.skjemaelement__feilmelding');
         });
         expect(feilmelding).toBeInTheDocument();
+        console.log('feilmelding', feilmelding.outerHTML); // eslint-disable-line
+    });
 
+    test('Ansvarserklæringen er akseptert', async() => {
+        const { container } = render(<TestProvider path={path} />);
+
+        const knapp = container.querySelector('.knapperad .knapp--hoved');
+        expect(knapp).toBeInTheDocument();
         const checkboks = container.querySelector('.bekreftCheckboksPanel .skjemaelement__input.checkboks');
         expect(checkboks).toBeInTheDocument();
+
         await act(async() => {
             userEvent.click(checkboks);
+            fireEvent.click(knapp);
         });
-    });
+
+        const sporsmal = await waitForElement(() => {
+            return container.querySelector('.sporsmal__tittel');
+        });
+        expect(sporsmal).toBeInTheDocument();
+        console.log('sporsmal', sporsmal.outerHTML); // eslint-disable-line
+    })
 });
