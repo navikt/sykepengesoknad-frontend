@@ -10,6 +10,9 @@ const SoknadenTekster: any = {
         'sykepengesoknad.til-slutt.tittel': 'Til slutt',
         'sykepengesoknad.utkast-til-korrigering.info': 'Rediger det som er feil i søknaden, og send den inn på nytt.',
 
+        'sykepengesoknad.permittert_naa.tittel': 'Permittert',
+        'sykepengesoknad.permittert_periode.tittel': 'Permittert',
+
         'sykepengesoknad.ferie.tittel': 'Ferie',
         'sykepengesoknad.ferie.bjorn': 'Du lurer kanskje på hvorfor vi spør om ferie før du ble sykmeldt? Det er fordi vi må se om dette sykefraværet henger sammen med forrige periode du var syk.',
         'sykepengesoknad.ferie.hjelpetekst.tekst': 'Du skal bare oppgi feriedager som du har brukt. Hvis du har avtalt å utsette ferien, skriver du ikke noe her.\n\nJobber du vanligvis bare noen dager i uken? Da gjelder ferien likevel hele uker, ikke bare de enkeltdagene du skulle vært på jobb.',

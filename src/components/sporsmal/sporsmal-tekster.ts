@@ -29,6 +29,11 @@ const SporsmalTekster: any = {
         'soknad.feilmelding.HVILKE_ANDRE_INNTEKTSKILDER': 'Du må oppgi hvilke inntektskilder du har',
         'soknad.feilmelding.HVILKE_ANDRE_INNTEKTSKILDER.lokal': 'Du må velge minst et alternativ',
 
+        'sykepengesoknad.feilmelding.PERMITTERT_NAA': 'Du må svare på om du er permittert nå',
+        'sykepengesoknad.feilmelding.PERMITTERT_NAA.lokal': 'Du må svare på om du er permittert nå',
+        'sykepengesoknad.feilmelding.PERMITTERT_PERIODE': 'Du må svare på om du har vært permittert',
+        'sykepengesoknad.feilmelding.PERMITTERT_PERIODE.lokal': 'Du må svare på om du har vært permittert',
+
         'soknad.feilmelding.HVOR_MANGE_TIMER': 'Du må svare på hvor mange timer du jobber normalt per uke',
         'soknad.feilmelding.HVOR_MANGE_TIMER.lokal': 'Du må oppgi antall timer',
 

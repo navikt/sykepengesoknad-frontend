@@ -4,6 +4,7 @@ import FetchMock, { SpyMiddleware } from 'yet-another-fetch-mock';
 import '@testing-library/jest-dom/extend-expect';
 import { TestProvider } from '../../test-provider';
 import 'mutationobserver-shim';
+import userEvent from '@testing-library/user-event';
 
 describe('<Soknaden /> ansvarserklæring', () => {
     let mock: FetchMock;
@@ -46,10 +47,15 @@ describe('<Soknaden /> ansvarserklæring', () => {
         await act(async() => {
             fireEvent.click(knapp);
         });
-        const node = await waitForElement(() => {
+        const feilmelding = await waitForElement(() => {
             return container.querySelector('.skjemaelement__feilmelding');
         });
-        console.log('node', node.innerHTML); // eslint-disable-line
-        expect(node).toBeInTheDocument();
+        expect(feilmelding).toBeInTheDocument();
+
+        const checkboks = container.querySelector('.bekreftCheckboksPanel .skjemaelement__input.checkboks');
+        expect(checkboks).toBeInTheDocument();
+        await act(async() => {
+            userEvent.click(checkboks);
+        });
     });
 });
