@@ -6,7 +6,7 @@ import { TestProvider } from '../../test-provider';
 import 'mutationobserver-shim';
 import userEvent from '@testing-library/user-event';
 
-describe('<Soknaden /> ansvarserklæring', () => {
+describe('<Soknaden /> spørsmål', () => {
     let mock: FetchMock;
     let spy: SpyMiddleware;
     const soknadsId = '977ce8fc-a83a-4454-ab81-893ff0284437';
