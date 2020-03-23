@@ -18,7 +18,7 @@ export const useAmplitudeInstance = createUseContext(() => {
             return 1;
         },
         init: () => {
-            console.log('Initialiserer mockAmplitude'); // eslint-disable-line
+            // console.log('Initialiserer mockAmplitude'); // eslint-disable-line
         }
     });
 

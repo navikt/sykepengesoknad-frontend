@@ -1,21 +1,23 @@
 import React, { useEffect } from 'react';
 import { useAppStore } from './data/stores/app-store';
-import { soknader } from './data/mock/data/soknader';
+import { soknader } from './data/mock/data/soknader-felles';
+import { sykmeldinger } from './data/mock/data/sykmeldinger-felles';
 import { RSSoknad } from './types/rs-types/rs-soknad';
 import { Soknad, Sykmelding } from './types/types';
-import { sykmeldinger } from './data/mock/data/sykmeldinger';
 import { fixSykmeldingDatoer } from './utils/dato-utils';
 import { unleashToggles } from './data/mock/data/toggles';
 import { MemoryRouter, Switch, Route } from 'react-router-dom';
 import StoreProvider from './data/stores/store-provider';
 import { Amplitude } from './components/amplitude/amplitudeProvider';
-import SoknadComp from './pages/soknad/soknaden';
+import Soknaden from './pages/soknad/soknaden';
 import Soknader from './pages/soknader/soknader';
 import Kvittering from './pages/kvittering/kvittering';
+
 interface DataProps {
     children: React.ReactNode;
 }
-const TestData = (props: DataProps) => {
+
+export const TestData = (props: DataProps) => {
     const { setUnleash, setSoknader, setSykmeldinger } = useAppStore();
     useEffect(() => {
         setSoknader(soknader!.map((soknad: RSSoknad) => {
@@ -30,9 +32,11 @@ const TestData = (props: DataProps) => {
         <>{ props.children }</>
     )
 };
+
 interface ProviderProps {
     path?: string;
 }
+
 export const TestProvider = ({ path }: ProviderProps) => {
     console.log('laster inn =>', path);
     return (
@@ -43,8 +47,8 @@ export const TestProvider = ({ path }: ProviderProps) => {
                         <Amplitude>
                             <Switch>
                                 <Route exact={true} path="/" component={Soknader} />
-                                <Route path={'/soknader/:id/:stegId'} component={SoknadComp} />
-                                <Route path={'/soknader/:id'} component={SoknadComp} />
+                                <Route path={'/soknader/:id/:stegId'} component={Soknaden} />
+                                <Route path={'/soknader/:id'} component={Soknaden} />
                                 <Route path={'/kvittering/:id'} component={Kvittering} />
                             </Switch>
                         </Amplitude>
@@ -54,6 +58,7 @@ export const TestProvider = ({ path }: ProviderProps) => {
         </div>
     )
 };
+
 /*
 * Hva bør testes?
 * Render - at det rendrer

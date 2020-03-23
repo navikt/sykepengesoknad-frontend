@@ -74,6 +74,7 @@ const beregnUndertekst = (soknad: Soknad) => {
     switch (soknad.soknadstype) {
         case RSSoknadstype.OPPHOLD_UTLAND:
         case RSSoknadstype.ARBEIDSLEDIG:
+        case RSSoknadstype.ANNET_ARBEIDSFORHOLD:
         case RSSoknadstype.SELVSTENDIGE_OG_FRILANSERE: {
             return soknad.status === RSSoknadstatus.SENDT
                 ? getLedetekst(tekster['soknad.teaser.status.SENDT.til-nav'], {
