@@ -1,5 +1,5 @@
 import React from 'react';
-import { useAppStore } from './app-store';
+import { AppStoreProvider } from './app-store';
 
 interface StoreProviderProps {
     children: React.ReactNode;
@@ -7,9 +7,9 @@ interface StoreProviderProps {
 
 const StoreProvider = (props: StoreProviderProps) => {
     return (
-        <useAppStore.Provider>
+        <AppStoreProvider>
             {props.children}
-        </useAppStore.Provider>
+        </AppStoreProvider>
     );
 };
 

@@ -60,14 +60,18 @@ const Knapperad = ({ onSubmit }: KnapperadProps) => {
         <div className="knapperad">
             <Knapp type="hoved" onClick={() => onSubmit}>{tekster[nokkel]}</Knapp>
             <div className="avbrytDialog blokk-l">
-                <a className="lenke avbrytlenke avbrytDialog__trigger" onClick={handleVilAvbryte}>{tekster['sykepengesoknad.avbryt.trigger']}</a>
+                <button className="lenke avbrytlenke avbrytDialog__trigger" onClick={handleVilAvbryte}>
+                    {tekster['sykepengesoknad.avbryt.trigger']}
+                </button>
                 <Vis hvis={vilAvbryte}>
                     <div ref={avbrytDialog} className="avbrytDialog__dialog pekeboble">
                         <Normaltekst className="blokk-s">{tekster['sykepengesoknad.avbryt.sporsmal']}</Normaltekst>
                         <div className="blokk-xs">
                             <Fareknapp onClick={handleAvbryt}>{tekster['sykepengesoknad.avbryt.ja']}</Fareknapp>
                         </div>
-                        <a className="lenke" onClick={handleVilAvbryte}>{tekster['sykepengesoknad.avbryt.angre']}</a>
+                        <button className="lenke" onClick={handleVilAvbryte}>
+                            {tekster['sykepengesoknad.avbryt.angre']}
+                        </button>
                     </div>
                 </Vis>
             </div>

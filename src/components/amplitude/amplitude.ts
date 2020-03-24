@@ -1,10 +1,10 @@
 import amplitude from 'amplitude-js';
 import env from '../../utils/environment';
 import { useEffect, useRef } from 'react';
-import createUseContext from 'constate';
+import constate from 'constate';
 import { useAppStore } from '../../data/stores/app-store';
 
-export const useAmplitudeInstance = createUseContext(() => {
+export const useAmplitudeInstance = constate(() => {
     const { unleash } = useAppStore();
     const unleashAmplitudeEnabled = unleash === undefined ? false : unleash['syfo.amplitude'];
 

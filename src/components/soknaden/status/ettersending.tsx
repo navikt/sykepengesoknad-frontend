@@ -4,8 +4,8 @@ import Alertstripe from 'nav-frontend-alertstriper';
 import React, { useState } from 'react';
 import ModalWrapper from 'nav-frontend-modal';
 import { useAppStore } from '../../../data/stores/app-store';
-import './ettersending.less';
 import env from '../../../utils/environment';
+import './ettersending.less';
 
 interface EttersendingProps {
     gjelder: string;
@@ -49,17 +49,27 @@ const Ettersending = ({ gjelder }: EttersendingProps) => {
     };
 
     return (<>
-        <Knapp mini type='standard' onClick={() => {setVilEttersende(true)}}>
-            {tekster[ `statuspanel.knapp.send-${gjelder}` ]}
+        <Knapp mini type='standard' onClick={() => {
+            setVilEttersende(true)
+        }}>
+            {tekster[`statuspanel.knapp.send-${gjelder}`]}
         </Knapp>
 
-        <ModalWrapper onRequestClose={() => { setVilEttersende(false) }} className='ettersending' contentLabel='ettersending' isOpen={vilEttersende} >
+        <ModalWrapper onRequestClose={() => setVilEttersende(false)}
+            className='ettersending'
+            contentLabel='ettersending'
+            isOpen={vilEttersende}
+        >
             <h3 className="modal__tittel">{hentTekst('statuspanel.tittel.send-til')}</h3>
             <Alertstripe type="info">{hentTekst('statuspanel.info.send-til')}</Alertstripe>
             <div className="blokk-xs">
-                <a className="knapp knapp--hoved lenke" onClick={() => ettersend()}>{hentTekst('statuspanel.knapp.bekreft.send-til')}</a>
+                <button className="knapp knapp--hoved lenke" onClick={() => ettersend()}>
+                    {hentTekst('statuspanel.knapp.bekreft.send-til')}
+                </button>
             </div>
-            <a className="lenke" onClick={() => {setVilEttersende(false)}}>{tekster[ 'statuspanel.knapp.angre' ]}</a>
+            <button className="lenke" onClick={() => setVilEttersende(false)}>
+                {tekster['statuspanel.knapp.angre']}
+            </button>
         </ModalWrapper>
     </>);
 };

@@ -12,6 +12,9 @@ const SoknadenTekster: any = {
 
         'sykepengesoknad.permittert_naa.tittel': 'Permittert',
         'sykepengesoknad.permittert_periode.tittel': 'Permittert',
+        'sykepengesoknad.bekreft_opplysninger_utland.tittel': 'Bekreft opplysninger',
+        'sykepengesoknad.bekreft_opplysninger_utland_info.tittel': 'Bekreft opplysninger',
+        'sykepengesoknad.arbeid_utenfor_norge.tittel': 'Arbeid utenfor Norge',
 
         'sykepengesoknad.ferie.tittel': 'Ferie',
         'sykepengesoknad.ferie.bjorn': 'Du lurer kanskje på hvorfor vi spør om ferie før du ble sykmeldt? Det er fordi vi må se om dette sykefraværet henger sammen med forrige periode du var syk.',

@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-var-requires */
 const express = require('express');
-const proxy = require('http-proxy-middleware');
+const { createProxyMiddleware } = require('http-proxy-middleware');
 const fs = require('fs');
 
 const app = express();
@@ -14,30 +14,29 @@ const addHeaders = (proxyReq) => {
     proxyReq.setHeader('Authorization', `Bearer ${jwt}`);
 };
 
-app.use(function (req, res, next) {
+app.use(function(req, res, next) {
     res.header('Access-Control-Allow-Origin', 'http://localhost:8080');
     res.header('Access-Control-Allow-Methods", "DELETE, POST, PUT, GET, OPTIONS');
     res.header('Access-Control-Allow-Credentials', 'true');
     res.header('Access-Control-Allow-Headers', 'Content-Type, Accept');
-    res.header("Content-Type: application/json");
+    res.header('Content-Type: application/json');
 
     if (req.method === 'OPTIONS') {
         res.sendStatus(200);
         res.end();
-    }
-    else {
+    } else {
         next();
     }
 });
 
-app.use('/syfoapi/syfosoknad', proxy({
+app.use('/syfoapi/syfosoknad', createProxyMiddleware({
     target: 'http://localhost:7070',
     changeOrigin: true,
     pathRewrite: { '^/syfoapi/syfosoknad': '/syfosoknad' },
     onProxyReq: addHeaders,
 }));
 
-app.use('/syforest/sykmeldinger', proxy({
+app.use('/syforest/sykmeldinger', createProxyMiddleware({
     target: 'http://localhost:7070',
     changeOrigin: true,
     pathRewrite: { '^/syforest/sykmeldinger': '/syfosoknad/api/sykmeldingmockup' },

@@ -9,7 +9,7 @@ const SporsmalTekster: any = {
 
         'soknad.feilmelding.ANSVARSERKLARING': 'Du må bekrefte dette før du går videre',
         'soknad.feilmelding.ANDRE_INNTEKTSKILDER': 'Du må svare på om du har andre inntektskilder eller arbeidsforhold',
-        'soknad.feilmelding.ARBEID_UTENFOR_NORGE': 'Du må svare på om du har jobbet utenfor Norge',
+        'soknad.feilmelding.ARBEID_UTENFOR_NORGE.lokal': 'Du må svare på om du har jobbet utenfor Norge',
         'soknad.feilmelding.ARBEIDSGIVER': 'Du må oppgi om du har arbeidsgiver',
         'soknad.feilmelding.ARBEID_UTENFOR_NORGE': 'Du må svare på om du har arbeidet i utlandet i løpet av de siste 12 månedene.',
         'soknad.feilmelding.BEKREFT_OPPLYSNINGER': 'Du må bekrefte at du har lest all informasjonen du har fått i søknaden og at opplysningene du har gitt er korrekte.',

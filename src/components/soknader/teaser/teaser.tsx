@@ -159,9 +159,6 @@ const Teaser = ({ soknad }: SykepengesoknadTeaserProps) => {
                             {undertekst}
                         </Normaltekst>
                     </Vis>
-                    <br/>
-                    {soknad.soknadstype // TODO: Fjerne søknadstype
-                    }
                 </div>
             </Inngangspanel>
         </article>

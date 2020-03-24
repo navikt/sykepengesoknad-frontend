@@ -33,6 +33,7 @@ const brodsmuler: Brodsmule[] = [ {
 
 export const useGlobaleData = (soknadId: string) => {
     const { soknader, setValgtSoknad, sykmeldinger, setValgtSykmelding } = useAppStore();
+    console.log('sykmeldinger', sykmeldinger); // eslint-disable-line
     soknader.filter(soknad => soknad.id === soknadId).forEach(sok => {
         setValgtSoknad(sok);
         const sykmelding = sykmeldinger.filter(sm => sm.id === sok.sykmeldingId)[0];
