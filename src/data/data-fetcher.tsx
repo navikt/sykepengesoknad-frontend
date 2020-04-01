@@ -12,7 +12,6 @@ import env from '../utils/environment';
 import { UnleashToggles } from '../types/types';
 
 export function DataFetcher(props: { children: any }) {
-
     const { setUnleash, setSoknader, setSykmeldinger } = useAppStore();
 
     const unleash = useFetch<{}>();
@@ -56,7 +55,7 @@ export function DataFetcher(props: { children: any }) {
     }, [ rssoknader ]);
 
     if (isAnyNotStartedOrPending([ unleash, rssoknader, sykmeldinger ])) {
-        return <Spinner />;
+        return <Spinner type={'XXL'} />;
 
     } else if (hasAny401([ unleash, rssoknader, sykmeldinger ])) {
         window.location.href = `${hentLoginUrl()}?redirect=${window.location.origin}/sykepengesok`;
