@@ -5,7 +5,6 @@
     * utvidet med [craco](https://github.com/gsoft-inc/craco) for typescript og less
 * express-server er fjenet
     * decorator hentes som en react-komponent
-        * navikt/react-decorator inntil videre
         * personbrukers nye decorator når den er ferdig
     * mock kjøres fra frontend
         * se /mock
