@@ -4,7 +4,7 @@ import { useEffect, useRef } from 'react';
 import constate from 'constate';
 import { useAppStore } from '../../data/stores/app-store';
 
-export const useAmplitudeInstance = constate(() => {
+export const [ AmplitudeProvider, useAmplitudeInstance ] = constate(() => {
     const { unleash } = useAppStore();
     const unleashAmplitudeEnabled = unleash === undefined ? false : unleash['syfo.amplitude'];
 

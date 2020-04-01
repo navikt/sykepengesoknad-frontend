@@ -1,5 +1,5 @@
 import React from 'react';
-import { useAmplitudeInstance } from './amplitude';
+import { AmplitudeProvider } from './amplitude';
 
 interface AmplitudeProps {
     children: React.ReactNode;
@@ -7,8 +7,8 @@ interface AmplitudeProps {
 
 export const Amplitude = (props: AmplitudeProps) => {
     return (
-        <useAmplitudeInstance.Provider>
+        <AmplitudeProvider>
             { props.children }
-        </useAmplitudeInstance.Provider>
+        </AmplitudeProvider>
     )
 };
