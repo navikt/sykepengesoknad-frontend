@@ -31,27 +31,23 @@ const brodsmuler: Brodsmule[] = [ {
     erKlikkbar: false,
 } ];
 
-export const useGlobaleData = (soknadId: string) => {
-    const { soknader, setValgtSoknad, sykmeldinger, setValgtSykmelding } = useAppStore();
-    console.log('sykmeldinger', sykmeldinger); // eslint-disable-line
-    soknader.filter(soknad => soknad.id === soknadId).forEach(sok => {
-        setValgtSoknad(sok);
-        const sykmelding = sykmeldinger.filter(sm => sm.id === sok.sykmeldingId)[0];
-        setValgtSykmelding(sykmelding);
-    });
-};
-
 const Soknaden = () => {
+    const { soknader, setValgtSoknad, sykmeldinger, setValgtSykmelding } = useAppStore();
     const { valgtSykmelding, valgtSoknad } = useAppStore();
     const { id } = useParams();
-    useGlobaleData(id);
 
     useEffect(() => {
+        const filtrertSoknad = soknader.filter(soknad => soknad.id === id)[0];
+        setValgtSoknad(filtrertSoknad);
+
+        const sykmelding = sykmeldinger.filter(sm => sm.id === filtrertSoknad.sykmeldingId)[0];
+        setValgtSykmelding(sykmelding);
+
         if (valgtSoknad !== null && valgtSoknad !== undefined && valgtSykmelding !== null && valgtSykmelding !== undefined) {
             setBodyClass('soknaden');
         }
         // eslint-disable-next-line
-    }, [ valgtSoknad, valgtSykmelding ]);
+    }, []);
 
     if (!valgtSoknad) return null;
 

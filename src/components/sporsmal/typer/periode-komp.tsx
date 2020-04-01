@@ -68,7 +68,7 @@ const PeriodeKomp = ({ sporsmal, index, slettPeriode }: AllProps) => {
 
             <Normaltekst tag='div' role='alert' aria-live='assertive' className='skjemaelement__feilmelding'>
                 <Vis hvis={errors[id]}>
-                    <p>{feilmelding.lokal}</p>
+                    <p>{errors[id]}</p>
                 </Vis>
             </Normaltekst>
         </li>
