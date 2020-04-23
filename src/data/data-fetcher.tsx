@@ -58,7 +58,7 @@ export function DataFetcher(props: { children: any }) {
         return <Spinner type={'XXL'} />;
 
     } else if (hasAny401([ unleash, rssoknader, sykmeldinger ])) {
-        window.location.href = `${hentLoginUrl()}?redirect=${window.location.origin}/sykepengesok`;
+        window.location.href = `${hentLoginUrl()}?redirect=${window.location.href}`;
 
     } else if (hasAnyFailed([ unleash, rssoknader, sykmeldinger ])) {
         return <IngenData />;
