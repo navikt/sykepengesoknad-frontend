@@ -34,7 +34,7 @@ jobs:
       - name: Run lint
         run: npm run lint
       - name: Run tests
-        run: CI=true npm run test-craco
+        run: CI=true npm run test
       - name: Build application
         run: npm run build
       - name: Build and publish Docker image
