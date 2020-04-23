@@ -504,7 +504,8 @@ export const soknader: any = [
             'svar': [ { 'verdi': 'CHECKED', 'avgittAv': null } ],
             'undersporsmal': []
         } ]
-    }, {
+    },
+    {
         'id': '710acaea-abef-4e6f-be83-bd9e0c3c1e3a',
         'sykmeldingId': '9e6a1a54-0736-43fb-b521-de5ae8bc7cb9',
         'soknadstype': 'ARBEIDSTAKERE',
