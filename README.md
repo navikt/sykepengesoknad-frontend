@@ -30,11 +30,3 @@
     * IKKE definer egne farger
 * `digisyfo-npm` brukes ikke lenger
 
-# Kjøre mot lokal backend
-Applikasjonen kan kjøre mot en lokal syfosoknad backend.
-Start lokal syfosoknad backend ved å kjøre main metoden i `no.nav.syfo.TestApplication.kt` i IntelliJ
-
-* For å kjøre frontend koden: 
-    - `$ npm run backend-proxy`
-    - I et annet vindu `$ npm run start`
-    - Åpne `http://localhost:8080` i en nettleser
