@@ -1,4 +1,4 @@
-import FetchMock, { MiddlewareUtils } from 'yet-another-fetch-mock';
+import FetchMock, { HandlerArgument, MiddlewareUtils } from 'yet-another-fetch-mock';
 import { soknader } from './data/soknader';
 import { sykmeldinger } from './data/sykmeldinger';
 import { unleashToggles } from './data/toggles';
@@ -12,6 +12,9 @@ const mock = FetchMock.configure({
     )
 });
 
+mock.put(`${env.syfoapiRoot}/syfosoknad/api/soknader/:soknad/sporsmal/:sporsmal`, (args: HandlerArgument) => {
+    return { 'oppdatertSporsmal': args.body };
+});
 mock.get('/login', '/sykepengesoknad');
 mock.post(env.unleashUrl, unleashToggles);
 mock.get(`${env.syfoapiRoot}/syfosoknad/api/soknader`, soknader);
