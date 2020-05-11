@@ -15,7 +15,7 @@ const mock = FetchMock.configure({
 mock.put(`${env.syfoapiRoot}/syfosoknad/api/soknader/:soknad/sporsmal/:sporsmal`, (args: HandlerArgument) => {
     return { 'oppdatertSporsmal': args.body };
 });
-mock.get('/login', '/sykepengesoknad');
+mock.get('/login', '/nysykepengesoknad');
 mock.post(env.unleashUrl, unleashToggles);
 mock.get(`${env.syfoapiRoot}/syfosoknad/api/soknader`, soknader);
 mock.get(`${env.syforestRoot}/sykmeldinger`, sykmeldinger);
