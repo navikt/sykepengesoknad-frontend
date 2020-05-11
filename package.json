@@ -101,7 +101,7 @@
     "scripts": {
         "start-mock": "MOCK_BACKEND=true npm run generate-env-config && craco start",
         "start": "npm run generate-env-config && craco start",
-        "generate-env-config": "chmod +x ./env.sh && ./env.sh && cp env-config.js ./public/",
+        "generate-env-config": "chmod +x ./env.sh && ./env.sh && mv env-config.js ./public/",
         "build": "craco build",
         "test": "MOCK_BACKEND=true craco test",
         "lint": "eslint --ext=ts,tsx src",

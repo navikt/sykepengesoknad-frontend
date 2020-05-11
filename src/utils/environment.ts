@@ -1,5 +1,6 @@
 class Environment {
 
+    // TODO: Flytt til test-koden:
     private env = (window as any)._env_ || {
         PORT: '8080',
         MOCK_BACKEND: 'true',

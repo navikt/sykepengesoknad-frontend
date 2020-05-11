@@ -1,0 +1,12 @@
+apiVersion: "nais.io/v1alpha1"
+kind: "Application"
+metadata:
+  name: sykepengesok
+  namespace: flex
+  labels:
+    team: flex
+spec:
+  image: {{ image }}
+  port: 8080
+  ingresses:
+    - "https://sykepengesok.dev-gcp.nais.io/"
