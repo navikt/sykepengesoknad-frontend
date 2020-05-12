@@ -131,3 +131,7 @@ export const ukeDatoListe = (min: string, max: string) => {
     }
     return ukeListe;
 };
+
+export const dayjsToDate = (dato: string) => {
+    return dato !== null ? dayjs(dato).toDate() : null
+}

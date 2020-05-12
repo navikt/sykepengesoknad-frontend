@@ -55,8 +55,6 @@ const hentIkonHover = (soknadstype: RSSoknadstype) => {
 };
 
 const beregnUndertekst = (soknad: Soknad) => {
-    // const sendtTilBeggeMenIkkeSamtidig = erSendtTilBeggeMenIkkeSamtidig(soknad);
-
     if (soknad.status === RSSoknadstatus.AVBRUTT) {
         return getLedetekst(
             tekster['soknad.teaser.status.AVBRUTT'],
