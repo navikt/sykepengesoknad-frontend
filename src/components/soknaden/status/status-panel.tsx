@@ -43,7 +43,7 @@ const StatusPanel = () => {
             </Vis>
 
             <div className='knapperad'>
-                <Knapp mini type='standard' onClick={() => korriger()}>{tekster[ 'statuspanel.knapp.endre' ]}</Knapp>
+                <Knapp mini type='standard' onClick={korriger}>{tekster[ 'statuspanel.knapp.endre' ]}</Knapp>
 
                 <Ettersending gjelder='nav' />
 

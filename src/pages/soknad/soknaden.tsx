@@ -47,7 +47,7 @@ const Soknaden = () => {
             setBodyClass('soknaden');
         }
         // eslint-disable-next-line
-    }, []);
+    }, [ id ]);
 
     if (!valgtSoknad) return null;
 

@@ -62,7 +62,7 @@ export const settSvar = (sporsmal: Sporsmal, verdier: Record<string, any>): void
 const checkboxSvar = (sporsmal: Sporsmal, verdi: any) => {
     sporsmal.svarliste = {
         sporsmalId: sporsmal.id,
-        svar: [ { verdi: verdi ? SvarEnums.CHECKED : '' } ]
+        svar: [ { verdi: verdi === SvarEnums.CHECKED ? SvarEnums.CHECKED : '' } ]
     };
 };
 
