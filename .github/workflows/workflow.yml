@@ -69,8 +69,8 @@ jobs:
           CLUSTER: dev-sbs
           RESOURCE: nais-dev.yaml
 
-  deploy-to-gcp:
-    name: Deploy to dev-gcp
+  deploy-to-labs-gcp:
+    name: Deploy to labs-gcp (Demo)
     needs: build-and-publish
     # if: "github.ref == 'refs/heads/master'"
     runs-on: ubuntu-latest
