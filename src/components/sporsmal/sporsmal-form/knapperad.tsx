@@ -51,6 +51,7 @@ const Knapperad = ({ onSubmit }: KnapperadProps) => {
                 setValgtSoknad(nySoknad);
                 history.push(`/soknader/${valgtSoknad.id}/1`);
             } else {
+                // TODO: Feilmelding
                 console.log('not cool');
             }
         })

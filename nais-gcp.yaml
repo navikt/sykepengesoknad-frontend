@@ -9,7 +9,7 @@ spec:
   image: {{ image }}
   port: 8080
   ingresses:
-    - "https://sykepengesok.dev-gcp.nais.io/"
+    - "https://sykepengesok.labs.nais.io/"
   liveness:
     path: internal/isAlive
   readiness:

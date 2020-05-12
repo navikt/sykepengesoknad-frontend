@@ -1,4 +1,3 @@
-import dayjs from 'dayjs';
 import { SykmeldingStatuser, TagTyper } from './enums';
 import { RSArbeidssituasjon } from './rs-types/rs-arbeidssituasjon';
 import { RSSvartype } from './rs-types/rs-svartype';
@@ -8,6 +7,7 @@ import { RSSporsmal } from './rs-types/rs-sporsmal';
 import { RSSoknad } from './rs-types/rs-soknad';
 import { RSSoknadsperiode } from './rs-types/rs-soknadsperiode';
 import { RSSvarliste } from './rs-types/rs-svarliste';
+import { dayjsToDate } from '../utils/dato-utils';
 
 export interface TidsPeriode {
     fom: Date;
@@ -156,12 +156,12 @@ export class Soknad {
         this.soknadstype = RSSoknadstype[type];
         const stat = soknad.status as keyof typeof RSSoknadstatus;
         this.status = RSSoknadstatus[stat];
-        this.fom = dayjs(soknad.fom).toDate();
-        this.tom = dayjs(soknad.tom).toDate();
-        this.avbruttDato = dayjs(soknad.avbruttDato).toDate();
-        this.opprettetDato = dayjs(soknad.opprettetDato).toDate();
-        this.sendtTilNAVDato = dayjs(soknad.sendtTilNAVDato).toDate();
-        this.sendtTilArbeidsgiverDato = dayjs(soknad.sendtTilArbeidsgiverDato).toDate();
+        this.fom = dayjsToDate(soknad.fom);
+        this.tom = dayjsToDate(soknad.tom);
+        this.avbruttDato = dayjsToDate(soknad.avbruttDato);
+        this.opprettetDato = dayjsToDate(soknad.opprettetDato);
+        this.sendtTilNAVDato = dayjsToDate(soknad.sendtTilNAVDato);
+        this.sendtTilArbeidsgiverDato = dayjsToDate(soknad.sendtTilArbeidsgiverDato);
         if (soknad.arbeidsgiver) {
             this.arbeidsgiver = {
                 naermesteLeder: soknad.arbeidsgiver.naermesteLeder,
