@@ -1,6 +1,6 @@
 import FetchMock, { HandlerArgument, MiddlewareUtils } from 'yet-another-fetch-mock';
-import { soknader } from './data/soknader-felles';
-import { sykmeldinger } from './data/sykmeldinger-felles';
+import { soknader } from './data/soknader';
+import { sykmeldinger } from './data/sykmeldinger';
 import { unleashToggles } from './data/toggles';
 import env from '../../utils/environment';
 import { RSSoknad } from '../../types/rs-types/rs-soknad';
