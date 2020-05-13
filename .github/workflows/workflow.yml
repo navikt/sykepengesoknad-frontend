@@ -42,6 +42,7 @@ jobs:
       - name: Cypress run
         uses: cypress-io/github-action@v1
         with:
+            record: false
             start: npm run start-mock
             wait-on: http://localhost:8080
       - name: Build and publish Docker image
