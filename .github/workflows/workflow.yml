@@ -39,6 +39,11 @@ jobs:
         run: CI=true npm run test
       - name: Build application
         run: npm run build
+      - name: Cypress run
+        uses: cypress-io/github-action@v1
+        with:
+            start: npm run start-mock
+            wait-on: http://localhost:8080
       - name: Build and publish Docker image
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_ACCESS_TOKEN }}
