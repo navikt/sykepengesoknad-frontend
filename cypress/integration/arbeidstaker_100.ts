@@ -13,10 +13,9 @@ describe('Tester arbeidstakersøknad', () => {
         cy.visit('http://localhost:8080/nysykepengesoknad');
         cy.get('.sidetopp__tittel').should('be.visible').and('have.text', 'Søknader om sykepenger');
         cy.get(`#soknader-list-til-behandling article a[href*=${soknad.id}]`).click();
-    })
+    });
 
 
-    const spm1 = soknad.sporsmal[0];
     it('Søknad ANSVARSERKLARING - steg 1', function() {
         cy.url().should('include', `${soknad.id}/1`);
 
@@ -32,7 +31,7 @@ describe('Tester arbeidstakersøknad', () => {
         cy.get('.skjemaelement__label').click({ force: true });
 
         cy.contains('Gå videre').click();
-    })
+    });
 
 
     it('Søknad PERMITTERT_NAA - steg 2', function() {
@@ -54,7 +53,7 @@ describe('Tester arbeidstakersøknad', () => {
         cy.get('.inputPanelGruppe__inner label:nth-child(2) > input[value=NEI]').click({ force: true });
 
         cy.contains('Gå videre').click();
-    })
+    });
 
 
     it('Søknad PERMITTERT_PERIODE - steg 3', function() {
@@ -71,7 +70,7 @@ describe('Tester arbeidstakersøknad', () => {
         cy.get('.flatpickr-calendar').contains('24').click({ force: true });
 
         cy.contains('Gå videre').click();
-    })
+    });
 
 
     it('Søknad TILBAKE_I_ARBEID - steg 4', function() {
@@ -84,7 +83,7 @@ describe('Tester arbeidstakersøknad', () => {
         cy.get('.flatpickr-calendar').contains('20').click({ force: true });
 
         cy.contains('Gå videre').click();
-    })
+    });
 
 
     it('Søknad FERIE_V2 - steg 5', function() {
@@ -98,7 +97,7 @@ describe('Tester arbeidstakersøknad', () => {
         cy.get('.flatpickr-calendar').contains('23').click({ force: true });
 
         cy.contains('Gå videre').click();
-    })
+    });
 
 
     it('Søknad PERMISJON_V2 - steg 6', function() {
@@ -112,7 +111,7 @@ describe('Tester arbeidstakersøknad', () => {
         cy.get('.flatpickr-calendar').contains('22').click({ force: true });
 
         cy.contains('Gå videre').click();
-    })
+    });
 
 
     it('Søknad UTLAND_V2 - steg 7', function() {
@@ -126,7 +125,7 @@ describe('Tester arbeidstakersøknad', () => {
         cy.get('.flatpickr-calendar').contains('22').click({ force: true });
 
         cy.contains('Gå videre').click();
-    })
+    });
 
 
     it('Søknad JOBBET_DU_100_PROSENT - steg 8', function() {
@@ -149,7 +148,7 @@ describe('Tester arbeidstakersøknad', () => {
         cy.get('.undersporsmal .skjemaelement__input#687355').focus().type('21');
 
         cy.contains('Gå videre').click();
-    })
+    });
 
 
     it('Søknad ANDRE_INNTEKTSKILDER - steg 9', function() {
@@ -166,7 +165,7 @@ describe('Tester arbeidstakersøknad', () => {
         // Underspørsmål nivå 2 - radio
         cy.get('.undersporsmal .checkboxgruppe .radioContainer .radioknapp#687359_0').click();
         cy.contains('Du må sende egen sykepengesøknad for dette. ' +
-            'Det betyr også at legen må skrive en sykmelding for hvert arbeidsforhold du er sykmeldt fra.')
+            'Det betyr også at legen må skrive en sykmelding for hvert arbeidsforhold du er sykmeldt fra.');
 
         // Svarer NEI
         // Underspørsmål nivå 1 - checkbox
@@ -177,7 +176,7 @@ describe('Tester arbeidstakersøknad', () => {
         cy.get('.undersporsmal .checkboxgruppe .radioContainer .radioknapp#687361_1').click();
 
         cy.contains('Gå videre').click();
-    })
+    });
 
     it('Søknad UTDANNING - steg 10', function() {
         cy.url().should('include', `${soknad.id}/10`);
@@ -196,7 +195,7 @@ describe('Tester arbeidstakersøknad', () => {
         cy.get('.undersporsmal .skjemaelement .radioContainer .radioknapp#687371_0').click({ force: true });
 
         cy.contains('Gå videre').click();
-    })
+    });
 
 
     it('Søknad ANSVARSERKLARING - steg 11', function() {
@@ -207,8 +206,7 @@ describe('Tester arbeidstakersøknad', () => {
         cy.contains('Send søknaden').click();
     })
 
-    // Arbeidstaker Gradert (syk: ee4540e3-eba6-46cb-b90f-05747ddb1537) (sok: 5b769c04-e171-47c9-b79b-23ab8fce331e)
     // Arbeidstaker Behnadlingsdager (syk: e876fe08-2765-4bd6-966c-922eefe99382) (sok: bcb032ac-b6dd-4ae7-8e73-9e64f1b35182)
     // Arbeidsledig/Annet (syk: 470c9e25-e112-4060-be61-7a24af530889) (sok: 934f39f4-cb47-459f-8209-0dbef6d36059)
     // Frilanser/Selvstendig (syk: baf4a9ab-cc9b-42af-bba3-67cd6ca06388) (sok: a8e40578-682b-4a04-bfda-b7768af2ae13)
-})
+});
