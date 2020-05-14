@@ -1,7 +1,6 @@
 /* eslint-disable no-undef */
 
 import { soknader } from '../../src/data/mock/data/soknader';
-import { Sporsmal } from '../../src/types/types';
 
 describe('Tester arbeidstakersøknad', () => {
     //-----
@@ -10,10 +9,6 @@ describe('Tester arbeidstakersøknad', () => {
     //-----
     const soknad = soknader[0];
 
-    soknad.sporsmal.map((spm: Sporsmal) => {
-        return spm.id;
-    });
-
     it('Laster startside', function() {
         cy.visit('http://localhost:8080/nysykepengesoknad');
         cy.get('.sidetopp__tittel').should('be.visible').and('have.text', 'Søknader om sykepenger');
@@ -21,6 +16,7 @@ describe('Tester arbeidstakersøknad', () => {
     })
 
 
+    const spm1 = soknad.sporsmal[0];
     it('Søknad ANSVARSERKLARING - steg 1', function() {
         cy.url().should('include', `${soknad.id}/1`);
 
