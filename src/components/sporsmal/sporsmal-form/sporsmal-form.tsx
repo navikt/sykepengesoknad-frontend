@@ -25,6 +25,7 @@ import useFetch from '../../../data/rest/use-fetch';
 import { sporsmalToRS } from '../../../types/rs-types/rs-sporsmal';
 import { RSOppdaterSporsmalResponse } from '../../../types/rs-types/rest-response/rs-oppdatersporsmalresponse';
 import './sporsmal-form.less';
+import { hentSvar } from '../hent-svar';
 
 export interface SpmProps {
     sporsmal: Sporsmal;
@@ -129,7 +130,7 @@ const SporsmalForm = () => {
                 {
                     soknadstype: valgtSoknad.soknadstype,
                     sporsmalstag: sporsmal.tag,
-                    svar: sporsmal.svarliste.svar[0].verdi
+                    svar: hentSvar(sporsmal)
                 }
             )
         }
