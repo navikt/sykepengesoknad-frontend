@@ -113,7 +113,8 @@
         "extends": "react-app"
     },
     "resolutions": {
-        "minimist": "^1.2.5"
+        "minimist": "^1.2.5",
+        "webpack-dev-server": "3.10.3"
     },
     "browserslist": [
         ">0.2%",
