@@ -1,13 +1,14 @@
 /* eslint-disable no-undef */
 
 import { soknader } from '../../src/data/mock/data/soknader';
+import { Soknad } from '../../src/types/types';
 
 describe('Tester arbeidstakersøknad', () => {
     //-----
     // Sykmelding: 7e90121c-b64b-4a1c-b7a5-93c9d95aba47, arbeidstaker - 100%
     // Søknad: faba11f5-c4f2-4647-8c8a-58b28ce2f3ef, fom: 1.4.20, tom: 24.4.20
     //-----
-    const soknad = soknader[0];
+    const soknad = soknader.find((sok: Soknad) => sok.id === 'faba11f5-c4f2-4647-8c8a-58b28ce2f3ef');
 
     it('Laster startside', function() {
         cy.visit('http://localhost:8080/nysykepengesoknad');
@@ -205,8 +206,4 @@ describe('Tester arbeidstakersøknad', () => {
 
         cy.contains('Send søknaden').click();
     })
-
-    // Arbeidstaker Behnadlingsdager (syk: e876fe08-2765-4bd6-966c-922eefe99382) (sok: bcb032ac-b6dd-4ae7-8e73-9e64f1b35182)
-    // Arbeidsledig/Annet (syk: 470c9e25-e112-4060-be61-7a24af530889) (sok: 934f39f4-cb47-459f-8209-0dbef6d36059)
-    // Frilanser/Selvstendig (syk: baf4a9ab-cc9b-42af-bba3-67cd6ca06388) (sok: a8e40578-682b-4a04-bfda-b7768af2ae13)
 });

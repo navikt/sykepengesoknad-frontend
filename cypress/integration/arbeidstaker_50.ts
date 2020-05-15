@@ -1,21 +1,24 @@
 /* eslint-disable no-undef */
 
+import { soknader } from '../../src/data/mock/data/soknader';
+import { Soknad } from '../../src/types/types';
+
 describe('Tester arbeidstakersøknad - gradert 50%', () => {
     //-----
     // Sykmelding: ee4540e3-eba6-46cb-b90f-05747ddb1537, arbeidstaker - 50%
     // Søknad: 5b769c04-e171-47c9-b79b-23ab8fce331e, fom: 1.4.20, tom: 24.4.20
     //-----
-    const soknad = '5b769c04-e171-47c9-b79b-23ab8fce331e';
+    const soknad = soknader.find((sok: Soknad) => sok.id === '5b769c04-e171-47c9-b79b-23ab8fce331e');
 
     it('Laster startside', function() {
         cy.visit('http://localhost:8080/nysykepengesoknad');
         cy.get('.sidetopp__tittel').should('be.visible').and('have.text', 'Søknader om sykepenger');
-        cy.get(`#soknader-list-til-behandling article a[href*=${soknad}]`).click();
+        cy.get(`#soknader-list-til-behandling article a[href*=${soknad.id}]`).click();
     })
 
 
     it('Søknad ANSVARSERKLARING - steg 1', function() {
-        cy.url().should('include', `${soknad}/1`);
+        cy.url().should('include', `${soknad.id}/1`);
 
         // Sykmelding
         cy.contains('1. april - 24. april 2020 • 24 dager');
@@ -33,7 +36,7 @@ describe('Tester arbeidstakersøknad - gradert 50%', () => {
 
 
     it('Søknad PERMITTERT_NAA - steg 2', function() {
-        cy.url().should('include', `${soknad}/2`);
+        cy.url().should('include', `${soknad.id}/2`);
 
         // Sjekk at sykmelding er minimert
         cy.get('.sykmelding-perioder').should('not.be.visible');
@@ -46,7 +49,7 @@ describe('Tester arbeidstakersøknad - gradert 50%', () => {
 
         // Gå til neste, så tilbake å svar nei
         cy.contains('Gå videre').click();
-        cy.url().should('include', `${soknad}/3`);
+        cy.url().should('include', `${soknad.id}/3`);
         cy.contains('Tilbake').click();
         cy.get('.inputPanelGruppe__inner label:nth-child(2) > input[value=NEI]').click({ force: true });
 
@@ -55,7 +58,7 @@ describe('Tester arbeidstakersøknad - gradert 50%', () => {
 
 
     it('Søknad PERMITTERT_PERIODE - steg 3', function() {
-        cy.url().should('include', `${soknad}/3`);
+        cy.url().should('include', `${soknad.id}/3`);
 
         // Må velge ja/nei
         cy.contains('Gå videre').click();
@@ -72,7 +75,7 @@ describe('Tester arbeidstakersøknad - gradert 50%', () => {
 
 
     it('Søknad EGENMELDINGER - steg 4', function() {
-        cy.url().should('include', `${soknad}/4`);
+        cy.url().should('include', `${soknad.id}/4`);
 
         // Test spørsmål
         cy.get('.inputPanelGruppe__inner label:first-child > input[value=JA]').click({ force: true });
@@ -88,7 +91,7 @@ describe('Tester arbeidstakersøknad - gradert 50%', () => {
 
 
     it('Søknad TILBAKE_I_ARBEID - steg 5', function() {
-        cy.url().should('include', `${soknad}/5`);
+        cy.url().should('include', `${soknad.id}/5`);
 
         // Test spørsmål
         cy.get('.inputPanelGruppe__inner label:first-child > input[value=JA]').click({ force: true });
@@ -101,7 +104,7 @@ describe('Tester arbeidstakersøknad - gradert 50%', () => {
 
 
     it('Søknad FERIE_V2 - steg 6', function() {
-        cy.url().should('include', `${soknad}/6`);
+        cy.url().should('include', `${soknad.id}/6`);
 
         // Test spørsmål
         cy.get('.inputPanelGruppe__inner label:first-child > input[value=JA]').click({ force: true });
@@ -115,7 +118,7 @@ describe('Tester arbeidstakersøknad - gradert 50%', () => {
 
 
     it('Søknad PERMISJON_V2 - steg 7', function() {
-        cy.url().should('include', `${soknad}/7`);
+        cy.url().should('include', `${soknad.id}/7`);
 
         // Test spørsmål
         cy.get('.inputPanelGruppe__inner label:first-child > input[value=JA]').click({ force: true });
@@ -129,7 +132,7 @@ describe('Tester arbeidstakersøknad - gradert 50%', () => {
 
 
     it('Søknad UTLAND_V2 - steg 8', function() {
-        cy.url().should('include', `${soknad}/8`);
+        cy.url().should('include', `${soknad.id}/8`);
 
         // Test spørsmål
         cy.get('.inputPanelGruppe__inner label:first-child > input[value=JA]').click({ force: true });
@@ -143,7 +146,7 @@ describe('Tester arbeidstakersøknad - gradert 50%', () => {
 
 
     it('Søknad ARBEID_UTENFOR_NORGE - steg 9', function() {
-        cy.url().should('include', `${soknad}/9`);
+        cy.url().should('include', `${soknad.id}/9`);
 
         // Test spørsmål
         cy.contains('Har du arbeidet i utlandet i løpet av de siste 12 månedene?');
@@ -154,7 +157,7 @@ describe('Tester arbeidstakersøknad - gradert 50%', () => {
 
 
     it('Søknad JOBBET_DU_GRADERT - steg 10', function() {
-        cy.url().should('include', `${soknad}/10`);
+        cy.url().should('include', `${soknad.id}/10`);
 
         // Test spørsmål
         cy.get('.inputPanelGruppe__inner label:first-child > input[value=JA]').click({ force: true });
@@ -177,7 +180,7 @@ describe('Tester arbeidstakersøknad - gradert 50%', () => {
 
 
     it('Søknad ANDRE_INNTEKTSKILDER - steg 11', function() {
-        cy.url().should('include', `${soknad}/11`);
+        cy.url().should('include', `${soknad.id}/11`);
 
         // Test spørsmål
         cy.get('.inputPanelGruppe__inner label:first-child > input[value=JA]').click({ force: true });
@@ -204,7 +207,7 @@ describe('Tester arbeidstakersøknad - gradert 50%', () => {
     })
 
     it('Søknad UTDANNING - steg 12', function() {
-        cy.url().should('include', `${soknad}/12`);
+        cy.url().should('include', `${soknad.id}/12`);
 
         // Test spørsmål
         cy.get('.inputPanelGruppe__inner label:first-child > input[value=JA]').click({ force: true });
@@ -224,15 +227,10 @@ describe('Tester arbeidstakersøknad - gradert 50%', () => {
 
 
     it('Søknad ANSVARSERKLARING - steg 13', function() {
-        cy.url().should('include', `${soknad}/13`);
+        cy.url().should('include', `${soknad.id}/13`);
         cy.get('.skjemaelement__label').click({ force: true });
         cy.contains('Jeg har lest all informasjonen jeg har fått i søknaden og bekrefter at opplysningene jeg har gitt er korrekte.');
 
         cy.contains('Send søknaden').click();
     })
-
-    // Arbeidstaker Gradert (syk: ee4540e3-eba6-46cb-b90f-05747ddb1537) (sok: 5b769c04-e171-47c9-b79b-23ab8fce331e)
-    // Arbeidstaker Behnadlingsdager (syk: e876fe08-2765-4bd6-966c-922eefe99382) (sok: bcb032ac-b6dd-4ae7-8e73-9e64f1b35182)
-    // Arbeidsledig/Annet (syk: 470c9e25-e112-4060-be61-7a24af530889) (sok: 934f39f4-cb47-459f-8209-0dbef6d36059)
-    // Frilanser/Selvstendig (syk: baf4a9ab-cc9b-42af-bba3-67cd6ca06388) (sok: a8e40578-682b-4a04-bfda-b7768af2ae13)
 })
