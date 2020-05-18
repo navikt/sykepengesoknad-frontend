@@ -25,8 +25,9 @@ describe('Tester arbeidstakersøknad', () => {
         cy.contains('LOMMEN BARNEHAVE');
         cy.contains('Opplysninger fra sykmeldingen').click();
 
-        // Må godkjenne ANSVARSERKLARING først
-        cy.get('.skjemaelement__label').click({ force: true });
+        // Godkjenne ANSVARSERKLARING
+        cy.contains('Jeg vet at jeg kan miste retten til sykepenger hvis opplysningene jeg gir ikke er riktige eller fullstendige.')
+            .click({ force: true });
 
         cy.contains('Gå videre').click();
     });
@@ -137,4 +138,6 @@ describe('Tester arbeidstakersøknad', () => {
 
         cy.contains('Send søknaden').click();
     });
+
+    // TODO: Sett opp test for kvittering når den er fastsatt
 });

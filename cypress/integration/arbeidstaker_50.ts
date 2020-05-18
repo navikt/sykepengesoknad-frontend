@@ -25,11 +25,9 @@ describe('Tester arbeidstakersøknad - gradert 50%', () => {
         cy.contains('LOMMEN BARNEHAVE');
         cy.contains('Opplysninger fra sykmeldingen').click();
 
-        // Må godkjenne ANSVARSERKLARING først
-        cy.contains('Gå videre').click();
-        cy.contains('Det er 1 feil i skjemaet');
-        cy.contains('Du må bekrefte dette før du går videre');
-        cy.get('.skjemaelement__label').click({ force: true });
+        // Godkjenne ANSVARSERKLARING
+        cy.contains('Jeg vet at jeg kan miste retten til sykepenger hvis opplysningene jeg gir ikke er riktige eller fullstendige.')
+            .click({ force: true });
 
         cy.contains('Gå videre').click();
     })
@@ -233,4 +231,6 @@ describe('Tester arbeidstakersøknad - gradert 50%', () => {
 
         cy.contains('Send søknaden').click();
     })
+
+    // TODO: Sett opp test for kvittering når den er fastsatt
 })

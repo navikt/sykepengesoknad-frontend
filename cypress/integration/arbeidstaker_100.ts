@@ -25,6 +25,11 @@ describe('Tester arbeidstakersøknad', () => {
         cy.contains('LOMMEN BARNEHAVE');
         cy.contains('Opplysninger fra sykmeldingen').click();
 
+        // Avbryt dialog vises
+        cy.contains('Jeg ønsker ikke å bruke denne søknaden').click();
+        cy.get('.avbrytDialog__dialog button.lenke:contains(Angre)').click();
+        cy.get('.avbrytDialog__dialog button.lenke:contains(Angre)').should('not.be.visible');
+
         // Må godkjenne ANSVARSERKLARING først
         cy.contains('Gå videre').click();
         cy.contains('Det er 1 feil i skjemaet');
@@ -206,4 +211,6 @@ describe('Tester arbeidstakersøknad', () => {
 
         cy.contains('Send søknaden').click();
     })
+
+    // TODO: Sett opp test for kvittering når den er fastsatt
 });
