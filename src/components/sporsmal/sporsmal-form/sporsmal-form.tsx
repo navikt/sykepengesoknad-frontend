@@ -40,8 +40,8 @@ const SporsmalForm = () => {
     const spmIndex = parseInt(stegId) - 1;
     const methods = useForm();
     let restFeilet = false;
-    let sporsmal = valgtSoknad.sporsmal[spmIndex];
-    const nesteSporsmal = valgtSoknad.sporsmal[spmIndex + 1];
+    let sporsmal = valgtSoknad.sporsmal[ spmIndex ];
+    const nesteSporsmal = valgtSoknad.sporsmal[ spmIndex + 1 ];
     const mottaker = useFetch<RSMottakerResponse>();
 
     useEffect(() => {
@@ -70,18 +70,18 @@ const SporsmalForm = () => {
                     soknad = new Soknad(data.mutertSoknad);
                 } else {
                     const spm = data.oppdatertSporsmal;
-                    soknad.sporsmal[spmIndex] = new Sporsmal(spm, undefined, true);
+                    erSiste ?
+                        soknad.sporsmal[ spmIndex + 1 ] = new Sporsmal(spm, undefined, true) :
+                        soknad.sporsmal[ spmIndex ] = new Sporsmal(spm, undefined, true);
                 }
-                soknader[soknader.findIndex(sok => sok.id === soknad.id)] = soknad;
+                soknader[ soknader.findIndex(sok => sok.id === soknad.id) ] = soknad;
                 setSoknader(soknader);
                 setValgtSoknad(soknad);
             } else {
                 restFeilet = true;
-                methods.setError('syfosoknad', 'rest-feilet', 'Opps');
             }
         } catch (e) {
             restFeilet = true;
-            methods.setError('syfosoknad', 'rest-feilet', 'Opps');
         }
     };
 
@@ -124,15 +124,13 @@ const SporsmalForm = () => {
                 });
                 valgtSoknad.status = RSSoknadstatus.SENDT;
                 setValgtSoknad(valgtSoknad);
-                soknader[soknader.findIndex(sok => sok.id === valgtSoknad.id)] = valgtSoknad;
+                soknader[ soknader.findIndex(sok => sok.id === valgtSoknad.id) ] = valgtSoknad;
                 setSoknader(soknader);
             } else {
                 restFeilet = true;
-                methods.setError('syfosoknad', 'rest-feilet', 'Opps');
             }
         } catch (e) {
             restFeilet = true;
-            methods.setError('syfosoknad', 'rest-feilet', 'Opps');
         }
     };
 
@@ -157,7 +155,8 @@ const SporsmalForm = () => {
         }
 
         if (restFeilet) {
-            methods.setError('syfosoknad', 'rest-feilet', 'Opps')
+            methods.setError('syfosoknad', 'rest-feilet', 'Opps');
+            sporsmal = valgtSoknad.sporsmal[ spmIndex ];
         } else {
             methods.clearError();
             methods.reset();
@@ -171,16 +170,16 @@ const SporsmalForm = () => {
     return (
         <FormContext {...methods}>
             <form onSubmit={methods.handleSubmit(onSubmit)} className={'sporsmal__form ' + nesteSporsmal.tag.toLowerCase()}>
-                <SporsmalSwitch sporsmal={sporsmal} />
+                <SporsmalSwitch sporsmal={sporsmal}/>
 
                 <Vis hvis={erSiste}>
-                    <Oppsummering />
-                    <CheckboxPanel sporsmal={nesteSporsmal} />
-                    <SendtTil />
+                    <Oppsummering/>
+                    <CheckboxPanel sporsmal={nesteSporsmal}/>
+                    <SendtTil/>
                 </Vis>
 
-                <FeilOppsummering errors={methods.errors} sporsmal={sporsmal} />
-                <Knapperad onSubmit={onSubmit} />
+                <FeilOppsummering errors={methods.errors} sporsmal={sporsmal}/>
+                <Knapperad onSubmit={onSubmit}/>
             </form>
         </FormContext>
     )
