@@ -46,7 +46,7 @@ const Knapperad = ({ onSubmit }: KnapperadProps) => {
             return response.status
         }).then(status => {
             if (status === 200) {
-                const nySoknad = { ...valgtSoknad, status: RSSoknadstatus.AVBRUTT };
+                const nySoknad = { ...valgtSoknad, status: RSSoknadstatus.AVBRUTT, avbruttDato: new Date() };
                 setSoknader(soknader.map(s => s.id === valgtSoknad.id ? nySoknad : s));
                 setValgtSoknad(nySoknad);
                 history.push(`/soknader/${valgtSoknad.id}/1`);

@@ -10,7 +10,8 @@ class Environment {
         LOGINSERVICE_URL: 'http://localhost:5001',
         AMPLITUDE_KEY: '7a887ba3e5a07c755526c6591810101a',
         AMPLITUDE_ENABLED: 'true',
-        NODE_ENV: 'development'
+        NODE_ENV: 'development',
+        REACT_APP_DECORATOR_URL: 'https://www.nav.no/dekoratoren',
     };
 
     private get nodeEnv() {

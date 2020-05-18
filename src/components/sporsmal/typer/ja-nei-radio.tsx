@@ -44,22 +44,20 @@ const JaNeiRadio = ({ sporsmal }: SpmProps) => {
                 {jaNeiValg.map((valg, idx) => {
                     const OK = lokal === valg.value;
                     return (
-                        <div key={idx}>
-                            <div className='radioContainer'>
-                                <input type='radio'
-                                    id={sporsmal.id + '_' + idx}
-                                    name={sporsmal.id}
-                                    value={valg.value}
-                                    checked={OK}
-                                    aria-checked={OK}
-                                    onChange={() => changeValue(valg.value)}
-                                    ref={register({ required: feilmelding.global })}
-                                    className='skjemaelement__input radioknapp'
-                                />
-                                <label className='skjemaelement__label' htmlFor={sporsmal.id + '_' + idx}>
-                                    {valg.label}
-                                </label>
-                            </div>
+                        <div className="radioContainer" key={idx}>
+                            <input type='radio'
+                                id={sporsmal.id + '_' + idx}
+                                name={sporsmal.id}
+                                value={valg.value}
+                                checked={OK}
+                                aria-checked={OK}
+                                onChange={() => changeValue(valg.value)}
+                                ref={register({ required: feilmelding.global })}
+                                className='skjemaelement__input radioknapp'
+                            />
+                            <label className='skjemaelement__label' htmlFor={sporsmal.id + '_' + idx}>
+                                {valg.label}
+                            </label>
                             <Vis hvis={sporsmal.tag && sporsmal.tag.startsWith('INNTEKTSKILDE_') && lokal === 'JA' && OK}>
                                 <div className='presisering'>
                                     <Normaltekst tag='span'>
