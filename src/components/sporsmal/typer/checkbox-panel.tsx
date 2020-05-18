@@ -14,7 +14,7 @@ const CheckboxInput = ({ sporsmal }: SpmProps) => {
 
     useEffect(() => {
         const svar = hentSvar(sporsmal);
-        setValue(sporsmal.id, svar === 'CHECKED');
+        setValue(sporsmal.id, svar);
         // eslint-disable-next-line
     }, [ sporsmal ]);
 
