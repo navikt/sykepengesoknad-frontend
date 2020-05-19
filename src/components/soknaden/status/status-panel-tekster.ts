@@ -10,6 +10,8 @@ const StatusPanelTekster: any = {
         'statuspanel.knapp.send-arbeidsgiver': 'Send til arbeidsgiver',
 
         'statuspanel.knapp.angre': 'Angre',
+        'statuspanel.korrigering.feilet': 'Beklager, søknaden kunne ikke endres',
+        'statuspanel.ettersending.feilet': 'Beklager, søknaden kunne ikke ettersendes',
 
         'statuspanel.tittel.send-til-arbeidsgiver': 'Send søknaden til arbeidsgiveren din',
         'statuspanel.tittel.send-til-arbeidsgiver-ettersending': 'Søknaden er allerede sendt til arbeidsgiveren din',

@@ -29,6 +29,13 @@ jobs:
           key: ${{ runner.OS }}-npm-cache-${{ hashFiles('**/package-lock.json') }}
           restore-keys: |
             ${{ runner.OS }}-npm-cache-
+      - name: Cache Cypress binary
+        uses: actions/cache@v1
+        with:
+          path: ~/.cache/Cypress
+          key: cypress-${{ runner.os }}-cypress-${{ hashFiles('**/package.json') }}
+          restore-keys: |
+            cypress-${{ runner.os }}-cypress-
       - name: Install npm dependencies
         run: npm ci
       - name: Run npx npm-force-resolutions
@@ -44,10 +51,10 @@ jobs:
       - name: Run cypress
         uses: cypress-io/github-action@v1
         with:
-            install: false
-            record: false
-            start: npm run start-mock
-            wait-on: http://localhost:8080
+          install: false
+          record: false
+          start: npm run start-mock
+          wait-on: http://localhost:8080
       - name: Build and publish Docker image
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_ACCESS_TOKEN }}
@@ -79,9 +86,9 @@ jobs:
           RESOURCE: nais-dev.yaml
 
   deploy-to-labs-gcp:
+    if: github.ref == 'refs/heads/master'
     name: Deploy to labs-gcp (Demo)
     needs: build-and-publish
-    if: "github.ref == 'refs/heads/master'"
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v1

@@ -13,7 +13,7 @@ interface EttersendingProps {
 
 const Ettersending = ({ gjelder }: EttersendingProps) => {
     const [ vilEttersende, setVilEttersende ] = useState<boolean>(false);
-    const { valgtSoknad } = useAppStore();
+    const { valgtSoknad, setFeilmeldingTekst } = useAppStore();
 
     ModalWrapper.setAppElement('#root');
 
@@ -28,6 +28,12 @@ const Ettersending = ({ gjelder }: EttersendingProps) => {
             method: 'POST',
             credentials: 'include',
             headers: { 'Content-Type': 'application/json' }
+        }).then((res: Response) => {
+            if (res.ok) {
+                setFeilmeldingTekst('')
+            } else {
+                setFeilmeldingTekst(tekster[ 'statuspanel.ettersending.feilet' ])
+            }
         });
     };
 
@@ -36,6 +42,12 @@ const Ettersending = ({ gjelder }: EttersendingProps) => {
             method: 'POST',
             credentials: 'include',
             headers: { 'Content-Type': 'application/json' }
+        }).then((res: Response) => {
+            if (res.ok) {
+                setFeilmeldingTekst('')
+            } else {
+                setFeilmeldingTekst(tekster[ 'statuspanel.ettersending.feilet' ])
+            }
         });
     };
 
@@ -45,14 +57,14 @@ const Ettersending = ({ gjelder }: EttersendingProps) => {
             ? (valgtSoknad!.sendtTilNAVDato !== undefined) ? '-ettersending' : ''
             : (valgtSoknad!.sendtTilArbeidsgiverDato !== undefined) ? '-ettersending' : '';
 
-        return tekster[`${tekst}${tilSuffix}${ettersendingSuffix}`];
+        return tekster[ `${tekst}${tilSuffix}${ettersendingSuffix}` ];
     };
 
     return (<>
         <Knapp mini type='standard' onClick={() => {
             setVilEttersende(true)
         }}>
-            {tekster[`statuspanel.knapp.send-${gjelder}`]}
+            {tekster[ `statuspanel.knapp.send-${gjelder}` ]}
         </Knapp>
 
         <ModalWrapper onRequestClose={() => setVilEttersende(false)}
@@ -68,7 +80,7 @@ const Ettersending = ({ gjelder }: EttersendingProps) => {
                 </button>
             </div>
             <button className="lenke" onClick={() => setVilEttersende(false)}>
-                {tekster['statuspanel.knapp.angre']}
+                {tekster[ 'statuspanel.knapp.angre' ]}
             </button>
         </ModalWrapper>
     </>);

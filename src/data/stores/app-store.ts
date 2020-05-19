@@ -12,6 +12,7 @@ export const [ AppStoreProvider, useAppStore ] = constate(() => {
     const [ sendTil, setSendTil ] = useState<SvarTil[]>([]);
     const [ top, setTop ] = useState<number>(0);
     const [ validCheck, setValidCheck ] = useState<boolean>();
+    const [ feilmeldingTekst, setFeilmeldingTekst ] = useState<string>('');
 
     return {
         unleash, setUnleash,
@@ -22,5 +23,6 @@ export const [ AppStoreProvider, useAppStore ] = constate(() => {
         sendTil, setSendTil,
         top, setTop,
         validCheck, setValidCheck,
+        feilmeldingTekst, setFeilmeldingTekst,
     };
 });

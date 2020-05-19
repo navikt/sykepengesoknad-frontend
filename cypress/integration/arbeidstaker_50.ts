@@ -14,7 +14,7 @@ describe('Tester arbeidstakersøknad - gradert 50%', () => {
         cy.visit('http://localhost:8080/nysykepengesoknad');
         cy.get('.sidetopp__tittel').should('be.visible').and('have.text', 'Søknader om sykepenger');
         cy.get(`#soknader-list-til-behandling article a[href*=${soknad.id}]`).click();
-    })
+    });
 
 
     it('Søknad ANSVARSERKLARING - steg 1', function() {
@@ -30,7 +30,7 @@ describe('Tester arbeidstakersøknad - gradert 50%', () => {
             .click({ force: true });
 
         cy.contains('Gå videre').click();
-    })
+    });
 
 
     it('Søknad PERMITTERT_NAA - steg 2', function() {
@@ -52,7 +52,7 @@ describe('Tester arbeidstakersøknad - gradert 50%', () => {
         cy.get('.inputPanelGruppe__inner label:nth-child(2) > input[value=NEI]').click({ force: true });
 
         cy.contains('Gå videre').click();
-    })
+    });
 
 
     it('Søknad PERMITTERT_PERIODE - steg 3', function() {
@@ -69,7 +69,7 @@ describe('Tester arbeidstakersøknad - gradert 50%', () => {
         cy.get('.flatpickr-calendar').contains('24').click({ force: true });
 
         cy.contains('Gå videre').click();
-    })
+    });
 
 
     it('Søknad EGENMELDINGER - steg 4', function() {
@@ -85,7 +85,7 @@ describe('Tester arbeidstakersøknad - gradert 50%', () => {
         cy.get('.flatpickr-calendar').contains('22').click({ force: true });
 
         cy.contains('Gå videre').click();
-    })
+    });
 
 
     it('Søknad TILBAKE_I_ARBEID - steg 5', function() {
@@ -98,7 +98,7 @@ describe('Tester arbeidstakersøknad - gradert 50%', () => {
         cy.get('.flatpickr-calendar').contains('20').click({ force: true });
 
         cy.contains('Gå videre').click();
-    })
+    });
 
 
     it('Søknad FERIE_V2 - steg 6', function() {
@@ -112,7 +112,7 @@ describe('Tester arbeidstakersøknad - gradert 50%', () => {
         cy.get('.flatpickr-calendar').contains('23').click({ force: true });
 
         cy.contains('Gå videre').click();
-    })
+    });
 
 
     it('Søknad PERMISJON_V2 - steg 7', function() {
@@ -126,7 +126,7 @@ describe('Tester arbeidstakersøknad - gradert 50%', () => {
         cy.get('.flatpickr-calendar').contains('22').click({ force: true });
 
         cy.contains('Gå videre').click();
-    })
+    });
 
 
     it('Søknad UTLAND_V2 - steg 8', function() {
@@ -140,7 +140,7 @@ describe('Tester arbeidstakersøknad - gradert 50%', () => {
         cy.get('.flatpickr-calendar').contains('22').click({ force: true });
 
         cy.contains('Gå videre').click();
-    })
+    });
 
 
     it('Søknad ARBEID_UTENFOR_NORGE - steg 9', function() {
@@ -151,7 +151,7 @@ describe('Tester arbeidstakersøknad - gradert 50%', () => {
         cy.get('.skjemaelement__label[for=687310_0]').click({ force: true });
 
         cy.contains('Gå videre').click();
-    })
+    });
 
 
     it('Søknad JOBBET_DU_GRADERT - steg 10', function() {
@@ -168,13 +168,13 @@ describe('Tester arbeidstakersøknad - gradert 50%', () => {
         cy.contains('Hvor mye jobbet du totalt 1. - 24. april 2020 hos POSTEN NORGE AS, BÆRUM?');
         // Svarer prosent
         cy.get('.undersporsmal .skjemaelement__input.radioknapp[value=prosent]').focus().click({ force: true });
-        cy.get('.undersporsmal .skjemaelement__input#687315').focus().type('21');
+        cy.get('.undersporsmal .skjemaelement__input#687315').focus().type('51');
         // Svarer timer
         cy.get('.undersporsmal .skjemaelement__input.radioknapp[value=timer]').focus().click({ force: true });
         cy.get('.undersporsmal .skjemaelement__input#687317').focus().type('21');
 
         cy.contains('Gå videre').click();
-    })
+    });
 
 
     it('Søknad ANDRE_INNTEKTSKILDER - steg 11', function() {
@@ -191,7 +191,7 @@ describe('Tester arbeidstakersøknad - gradert 50%', () => {
         // Underspørsmål nivå 2 - radio
         cy.get('.undersporsmal .checkboxgruppe .radioContainer .radioknapp#687321_0').click();
         cy.contains('Du må sende egen sykepengesøknad for dette. ' +
-            'Det betyr også at legen må skrive en sykmelding for hvert arbeidsforhold du er sykmeldt fra.')
+            'Det betyr også at legen må skrive en sykmelding for hvert arbeidsforhold du er sykmeldt fra.');
 
         // Svarer NEI
         // Underspørsmål nivå 1 - checkbox
@@ -202,7 +202,7 @@ describe('Tester arbeidstakersøknad - gradert 50%', () => {
         cy.get('.undersporsmal .checkboxgruppe .radioContainer .radioknapp#687323_1').click();
 
         cy.contains('Gå videre').click();
-    })
+    });
 
     it('Søknad UTDANNING - steg 12', function() {
         cy.url().should('include', `${soknad.id}/12`);
@@ -221,7 +221,7 @@ describe('Tester arbeidstakersøknad - gradert 50%', () => {
         cy.get('.undersporsmal .skjemaelement .radioContainer .radioknapp#687333_0').click({ force: true });
 
         cy.contains('Gå videre').click();
-    })
+    });
 
 
     it('Søknad ANSVARSERKLARING - steg 13', function() {
@@ -230,7 +230,7 @@ describe('Tester arbeidstakersøknad - gradert 50%', () => {
         cy.contains('Jeg har lest all informasjonen jeg har fått i søknaden og bekrefter at opplysningene jeg har gitt er korrekte.');
 
         cy.contains('Send søknaden').click();
-    })
+    });
 
     // TODO: Sett opp test for kvittering når den er fastsatt
-})
+});
