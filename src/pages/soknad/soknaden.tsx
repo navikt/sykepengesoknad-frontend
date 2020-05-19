@@ -42,12 +42,12 @@ const Soknaden = () => {
 
         const sykmelding = sykmeldinger.filter(sm => sm.id === filtrertSoknad.sykmeldingId)[0];
         setValgtSykmelding(sykmelding);
-
-        if (valgtSoknad !== null && valgtSoknad !== undefined && valgtSykmelding !== null && valgtSykmelding !== undefined) {
-            setBodyClass('soknaden');
-        }
         // eslint-disable-next-line
     }, [ id ]);
+
+    useEffect(() => {
+        setBodyClass('soknaden')
+    }, []);
 
     if (!valgtSoknad) return null;
 
