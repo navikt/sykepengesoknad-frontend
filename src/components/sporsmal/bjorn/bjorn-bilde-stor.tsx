@@ -33,6 +33,7 @@ const BjornBildeStor = ({ alt }: BjornBildeProps) => {
             window.clearTimeout(timeout1);
             window.clearTimeout(timeout2);
         }
+        // eslint-disable-next-line
     }, []);
 
     function blink() {
