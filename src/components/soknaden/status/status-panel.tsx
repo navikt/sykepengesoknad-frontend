@@ -14,9 +14,10 @@ import { Soknad } from '../../../types/types';
 import { useHistory } from 'react-router';
 import Ettersending from './ettersending';
 import { getUrlTilSoknad } from '../../../utils/url-utils';
+import Alertstripe from 'nav-frontend-alertstriper';
 
 const StatusPanel = () => {
-    const { valgtSoknad, soknader, setSoknader } = useAppStore();
+    const { valgtSoknad, soknader, setSoknader, feilmeldingTekst, setFeilmeldingTekst } = useAppStore();
     const korrigerSoknad = useFetch<RSSoknad>();
     const history = useHistory();
 
@@ -31,6 +32,9 @@ const StatusPanel = () => {
                 soknader.push(soknad);
                 setSoknader(soknader);
                 history.push(getUrlTilSoknad(soknad.id, '1'));
+                setFeilmeldingTekst('');
+            } else {
+                setFeilmeldingTekst(tekster[ 'statuspanel.korrigering.feilet' ]);
             }
         });
     };
@@ -45,10 +49,16 @@ const StatusPanel = () => {
             <div className='knapperad'>
                 <Knapp mini type='standard' onClick={korriger}>{tekster[ 'statuspanel.knapp.endre' ]}</Knapp>
 
-                <Ettersending gjelder='nav' />
+                <Ettersending gjelder='nav'/>
 
                 <Vis hvis={valgtSoknad.arbeidsgiver !== undefined}>
-                    <Ettersending gjelder='arbeidsgiver' />
+                    <Ettersending gjelder='arbeidsgiver'/>
+                </Vis>
+            </div>
+
+            <div aria-live="polite">
+                <Vis hvis={feilmeldingTekst !== ''}>
+                    <Alertstripe type="feil">{feilmeldingTekst}</Alertstripe>
                 </Vis>
             </div>
         </div>

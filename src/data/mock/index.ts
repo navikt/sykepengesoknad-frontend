@@ -9,7 +9,7 @@ import { RSSoknadstatus } from '../../types/rs-types/rs-soknadstatus';
 const mock = FetchMock.configure({
     enableFallback: true,
     middleware: MiddlewareUtils.combine(
-        MiddlewareUtils.delayMiddleware(500),
+        MiddlewareUtils.delayMiddleware(300),
         MiddlewareUtils.loggingMiddleware()
     )
 });
@@ -18,15 +18,12 @@ mock.put(`${env.syfoapiRoot}/syfosoknad/api/soknader/:soknad/sporsmal/:sporsmal`
     return { 'oppdatertSporsmal': args.body };
 });
 mock.post(`${env.syfoapiRoot}/syfosoknad/api/soknader/:soknad/korriger`, (args: HandlerArgument) => {
-    return soknader
-        .find((sok: RSSoknad) => {
-            return sok.id === args.pathParams.soknad;
-        })
-        .map((sok: RSSoknad) => {
-            sok.id = sok.id + '1';
-            sok.status = RSSoknadstatus.UTKAST_TIL_KORRIGERING;
-            return sok;
-        });
+    const soknad = soknader.find((sok: RSSoknad) => {
+        return sok.id === args.pathParams.soknad;
+    })
+    soknad.id = soknad.id + '1';
+    soknad.status = RSSoknadstatus.UTKAST_TIL_KORRIGERING;
+    return soknad;
 });
 mock.get('/login', '/nysykepengesoknad');
 mock.post(env.unleashUrl, unleashToggles);

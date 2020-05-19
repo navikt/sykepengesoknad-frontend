@@ -7,6 +7,7 @@ import { useAppStore } from '../../../data/stores/app-store';
 import Vis from '../../vis';
 import env from '../../../utils/environment';
 import { RSSoknadstatus } from '../../../types/rs-types/rs-soknadstatus';
+import Alertstripe from 'nav-frontend-alertstriper';
 
 type Event = MouseEvent<HTMLAnchorElement | HTMLButtonElement>;
 
@@ -15,7 +16,7 @@ interface KnapperadProps {
 }
 
 const Knapperad = ({ onSubmit }: KnapperadProps) => {
-    const { valgtSoknad, setValgtSoknad, soknader, setSoknader } = useAppStore();
+    const { valgtSoknad, setValgtSoknad, soknader, setSoknader, feilmeldingTekst, setFeilmeldingTekst } = useAppStore();
     const history = useHistory();
     const { stegId } = useParams();
 
@@ -50,9 +51,9 @@ const Knapperad = ({ onSubmit }: KnapperadProps) => {
                 setSoknader(soknader.map(s => s.id === valgtSoknad.id ? nySoknad : s));
                 setValgtSoknad(nySoknad);
                 history.push(`/soknader/${valgtSoknad.id}/1`);
+                setFeilmeldingTekst('');
             } else {
-                // TODO: Feilmelding
-                console.log('not cool');
+                setFeilmeldingTekst(tekster['sykepengesoknad.avbryt.feilet'])
             }
         })
     };
@@ -69,6 +70,11 @@ const Knapperad = ({ onSubmit }: KnapperadProps) => {
                         <Normaltekst className="blokk-s">{tekster['sykepengesoknad.avbryt.sporsmal']}</Normaltekst>
                         <div className="blokk-xs">
                             <Fareknapp onClick={handleAvbryt}>{tekster['sykepengesoknad.avbryt.ja']}</Fareknapp>
+                        </div>
+                        <div aria-live="polite">
+                            <Vis hvis={feilmeldingTekst !== ''}>
+                                <Alertstripe type="feil">{feilmeldingTekst}</Alertstripe>
+                            </Vis>
                         </div>
                         <button className="lenke" onClick={handleVilAvbryte}>
                             {tekster['sykepengesoknad.avbryt.angre']}
