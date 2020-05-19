@@ -125,14 +125,16 @@ const SporsmalForm = () => {
             logEvent('Søknad sendt', { soknadstype: valgtSoknad.soknadstype });
         } else {
             sendOppdaterSporsmal();
-            logEvent(
-                'Spørsmål svart',
-                {
-                    soknadstype: valgtSoknad.soknadstype,
-                    sporsmalstag: sporsmal.tag,
-                    svar: hentSvar(sporsmal)
-                }
-            )
+            /*
+                        logEvent(
+                            'Spørsmål svart',
+                            {
+                                soknadstype: valgtSoknad.soknadstype,
+                                sporsmalstag: sporsmal.tag,
+                                svar: hentSvar(sporsmal)
+                            }
+                        )
+            */
         }
 
         if (hasAnyFailed([ oppdaterSporsmal, mottaker, send ])) {

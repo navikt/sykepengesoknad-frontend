@@ -9,6 +9,7 @@ describe('Tester arbeidstakersøknad', () => {
     //-----
     const soknad = soknader[0];
 
+
     it('Laster startside', function() {
         cy.visit('http://localhost:8080/nysykepengesoknad');
         cy.get('.sidetopp__tittel').should('be.visible').and('have.text', 'Søknader om sykepenger');
