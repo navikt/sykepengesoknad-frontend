@@ -4,8 +4,8 @@ import parser from 'html-react-parser';
 import { Normaltekst } from 'nav-frontend-typografi';
 import BjornBildeStor from './bjorn-bilde-stor';
 import BjornBildeLiten from './bjorn-bilde-liten';
-import tekster from './bjorn-tekster';
 import './bjorn.less';
+import { tekst } from '../../../utils/tekster';
 
 interface BjornProps {
     bildeAlt?: string;
@@ -42,7 +42,7 @@ export const Bjorn = ({ bildeAlt = 'NAV-ansatt', nokkel, children, hvit = false,
     return (
         <div className={classNames}>
             <div className={bobleClassNames}>
-                {nokkel !== undefined ? <Normaltekst>{parser(tekster[nokkel])}</Normaltekst> : children}
+                {nokkel !== undefined ? <Normaltekst>{parser(tekst(nokkel))}</Normaltekst> : children}
             </div>
             <div className={bildeClassNames}>
                 <Bilde alt={bildeAlt} />

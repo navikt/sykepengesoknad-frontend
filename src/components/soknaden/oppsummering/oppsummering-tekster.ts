@@ -6,6 +6,4 @@ const OppsummeringTekster: any = {
     }, 'en': {}
 };
 
-const tekster = OppsummeringTekster.nb;
-
-export default tekster;
+export default OppsummeringTekster;

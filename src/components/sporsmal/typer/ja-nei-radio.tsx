@@ -3,9 +3,9 @@ import React, { useEffect, useState } from 'react';
 import { Element, Normaltekst } from 'nav-frontend-typografi';
 import Vis from '../../vis';
 import { hentSvar } from '../hent-svar';
-import tekster from '../sporsmal-tekster';
 import { hentFeilmelding } from '../sporsmal-utils';
 import { SpmProps } from '../sporsmal-form/sporsmal-form';
+import { tekst } from '../../../utils/tekster';
 
 const jaNeiValg = [ {
     value: 'JA',
@@ -61,7 +61,7 @@ const JaNeiRadio = ({ sporsmal }: SpmProps) => {
                             <Vis hvis={sporsmal.tag && sporsmal.tag.startsWith('INNTEKTSKILDE_') && lokal === 'JA' && OK}>
                                 <div className='presisering'>
                                     <Normaltekst tag='span'>
-                                        {tekster['soknad.presisering.' + sporsmal.tag]}
+                                        {tekst('soknad.presisering.' + sporsmal.tag)}
                                     </Normaltekst>
                                 </div>
                             </Vis>

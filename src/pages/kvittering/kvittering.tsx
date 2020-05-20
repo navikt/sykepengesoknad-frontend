@@ -2,7 +2,6 @@ import React, { useEffect } from 'react';
 import Banner from '../../components/banner/banner';
 import { VenstreChevron } from 'nav-frontend-chevron';
 import { Brodsmule } from '../../types/types';
-import tekster from '../soknad/soknaden-tekster';
 import { SEPARATOR } from '../../utils/constants';
 import { setBodyClass } from '../../utils/utils';
 import { useAppStore } from '../../data/stores/app-store';
@@ -13,13 +12,14 @@ import { RSSoknadstatus } from '../../types/rs-types/rs-soknadstatus';
 import { Normaltekst } from 'nav-frontend-typografi';
 import { Link } from 'react-router-dom';
 import './kvittering.less';
+import { tekst } from '../../utils/tekster';
 
 const brodsmuler: Brodsmule[] = [ {
-    tittel: tekster['soknader.sidetittel'],
+    tittel: tekst('soknader.sidetittel'),
     sti: SEPARATOR,
     erKlikkbar: true
 }, {
-    tittel: tekster['kvittering.sidetittel'],
+    tittel: tekst('kvittering.sidetittel'),
     sti: null,
     erKlikkbar: false,
 } ];
@@ -43,7 +43,7 @@ const Kvittering = () => {
                 <Link to='/' className='gaa-videre'>
                     <Normaltekst tag='span'>
                         <VenstreChevron />
-                        {tekster['sykepengesoknad.navigasjon.gaa-til']}
+                        {tekst('sykepengesoknad.navigasjon.gaa-til')}
                     </Normaltekst>
                 </Link>
             </Vis>

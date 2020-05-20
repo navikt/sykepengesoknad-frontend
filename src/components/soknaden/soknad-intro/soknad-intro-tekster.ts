@@ -7,6 +7,4 @@ const SoknadIntroTekster: any = {
     }, 'en': {}
 };
 
-const tekster = SoknadIntroTekster.nb;
-
-export default tekster;
+export default SoknadIntroTekster;

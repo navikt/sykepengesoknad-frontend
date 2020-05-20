@@ -9,6 +9,4 @@ const SoknaderTekster: any = {
     }, 'en': {}
 };
 
-const tekster = SoknaderTekster.nb;
-
-export default tekster;
+export default SoknaderTekster;

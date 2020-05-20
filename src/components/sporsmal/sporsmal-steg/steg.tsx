@@ -41,14 +41,12 @@ const Steg = ({ label, index }: StegProps) => {
             <Vis hvis={aktivtSteg >= index + 2}>
                 <button className={innerCls(erAktiv, erPassert, disabled)} title={label} disabled={disabled} onClick={() => goTo(num)}>
                     <div className='stegindikator__steg-num'>{num}</div>
-                    {label}
                 </button>
             </Vis>
 
             <Vis hvis={aktivtSteg < index + 2}>
                 <div className={innerCls(erAktiv, erPassert, disabled)} title={label} >
                     <div className='stegindikator__steg-num'>{num}</div>
-                    {label}
                 </div>
             </Vis>
         </li>

@@ -3,11 +3,11 @@ import { Normaltekst } from 'nav-frontend-typografi';
 import { Controller, useFormContext } from 'react-hook-form';
 import Flatpickr from 'react-flatpickr';
 import Vis from '../../vis';
-import tekster from '../sporsmal-tekster';
 import { hentPeriode } from '../hent-svar';
 import { hentFeilmelding } from '../sporsmal-utils';
 import { Norwegian } from 'flatpickr/dist/l10n/no.js';
 import { SpmProps } from '../sporsmal-form/sporsmal-form';
+import { tekst } from '../../../utils/tekster';
 
 interface PeriodeProps {
     index: number;
@@ -31,10 +31,10 @@ const PeriodeKomp = ({ sporsmal, index, slettPeriode }: AllProps) => {
         <li className='periode'>
             <div className='periodelabel'>
                 <label htmlFor={htmlfor} className='fom'>
-                    {tekster['sykepengesoknad.periodevelger.fom']}
+                    {tekst('sykepengesoknad.periodevelger.fom')}
                 </label>
                 <label htmlFor={htmlfor} className='tom'>
-                    {tekster['sykepengesoknad.periodevelger.tom']}
+                    {tekst('sykepengesoknad.periodevelger.tom')}
                 </label>
             </div>
             <Controller
@@ -62,7 +62,7 @@ const PeriodeKomp = ({ sporsmal, index, slettPeriode }: AllProps) => {
             <Vis hvis={index > 0}>
                 <button role='link' id={'btn_' + id} className='periodeknapp lenke slett'
                     onClick={(e) => slettPeriode(e, index)}>
-                    {tekster['sykepengesoknad.periodevelger.slett']}
+                    {tekst('sykepengesoknad.periodevelger.slett')}
                 </button>
             </Vis>
 

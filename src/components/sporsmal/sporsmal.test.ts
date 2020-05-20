@@ -1,7 +1,7 @@
 import { TagTyper } from '../../types/enums';
-import tekster from './sporsmal-tekster';
 import { RSSvartype } from '../../types/rs-types/rs-svartype';
 import { hentGeneriskFeilmelding } from './sporsmal-utils';
+import { tekst } from '../../utils/tekster';
 
 test('Alle tags har global feilmelding', () => {
     let tags = Object.values(TagTyper);
@@ -25,7 +25,7 @@ test('Alle tags har global feilmelding', () => {
     });
 
     tags.forEach(tag => {
-        if (tekster[`soknad.feilmelding.${tag}`] === undefined) {
+        if (tekst(`soknad.feilmelding.${tag}`) === undefined) {
             console.log('Mangler feilmelding for tag:', tag);
             manglerFeilmelding = true;
         }

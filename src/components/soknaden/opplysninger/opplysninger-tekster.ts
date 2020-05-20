@@ -9,7 +9,5 @@ const OpplysningerTekster: any = {
     }, 'en': {}
 };
 
-const tekster = OpplysningerTekster.nb;
-
-export default tekster;
+export default OpplysningerTekster;
 

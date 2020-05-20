@@ -5,11 +5,11 @@ import { getDuration } from '../../../utils/dato-utils';
 import { EtikettLiten, Normaltekst } from 'nav-frontend-typografi';
 import dayjs from 'dayjs';
 import { useAppStore } from '../../../data/stores/app-store';
-import tekster from './opplysninger-tekster';
 import Bjorn from '../../sporsmal/bjorn/bjorn';
 import Vis from '../../vis';
 import { erOppdelt } from '../../../utils/periode-utils';
 import { RSSoknadstype } from '../../../types/rs-types/rs-soknadstype';
+import { tekst } from '../../../utils/tekster';
 
 const SykmeldingPerioder = () => {
     const { valgtSoknad, valgtSykmelding } = useAppStore();
@@ -28,7 +28,7 @@ const SykmeldingPerioder = () => {
 
                 return (
                     <div className='avsnitt' key={index}>
-                        <EtikettLiten tag='h3' className='avsnitt-hode'>{tekster['din-sykmelding.periode.tittel']}</EtikettLiten>
+                        <EtikettLiten tag='h3' className='avsnitt-hode'>{tekst('din-sykmelding.periode.tittel')}</EtikettLiten>
                         <Normaltekst><strong>{fom} - {tom}</strong> &bull; {dager}</Normaltekst>
                     </div>
                 );

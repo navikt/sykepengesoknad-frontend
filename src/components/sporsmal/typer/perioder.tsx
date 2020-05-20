@@ -3,12 +3,12 @@ import { Element } from 'nav-frontend-typografi';
 import React, { useEffect, useRef, useState } from 'react';
 import Vis from '../../vis';
 import PeriodeKomp from './periode-komp';
-import tekster from '../sporsmal-tekster';
 import { hentPerioder } from '../hent-svar';
 import { empty } from '../../../utils/constants';
 import { SpmProps } from '../sporsmal-form/sporsmal-form';
 import UndersporsmalListe from '../undersporsmal/undersporsmal-liste';
 import './flatpickr.less';
+import { tekst } from '../../../utils/tekster';
 
 const Perioder = ({ sporsmal }: SpmProps) => {
     const [ lokal, setLokal ] = useState<number[]>([ 0 ]);
@@ -66,7 +66,7 @@ const Perioder = ({ sporsmal }: SpmProps) => {
             </ul>
 
             <button role='link' className='periodeknapp lenke' onClick={leggTilPeriode}>
-                {tekster['sykepengesoknad.periodevelger.legg-til-ekstra']}
+                {tekst('sykepengesoknad.periodevelger.legg-til-ekstra')}
             </button>
 
             <div className='undersporsmal'>

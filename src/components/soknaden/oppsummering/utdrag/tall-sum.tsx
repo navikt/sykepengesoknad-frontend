@@ -1,14 +1,14 @@
 import React from 'react';
 import { Element, Normaltekst } from 'nav-frontend-typografi';
-import tekster from '../oppsummering-tekster';
 import { RSSvartype } from '../../../../types/rs-types/rs-svartype';
 import { OppsummeringProps } from '../oppsummering';
 import { empty } from '../../../../utils/constants';
 import Vis from '../../../vis';
+import { tekst } from '../../../../utils/tekster';
 
 const TallSum = ({ sporsmal }: OppsummeringProps) => {
     const labelnokkel = sporsmal.svartype === RSSvartype.TIMER ? 'soknad.timer-totalt' : 'soknad.prosent';
-    const label = sporsmal.undertekst || tekster[labelnokkel];
+    const label = sporsmal.undertekst || tekst(labelnokkel);
     return (
         <div className='oppsummering__sporsmal'>
             <Element tag='h3'>{sporsmal.sporsmalstekst}</Element>

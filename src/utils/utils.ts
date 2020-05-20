@@ -41,18 +41,6 @@ export const formaterOrgnr = (orgnr: string) => {
     return orgnr.replace(/(...)(...)(...)/g, '$1 $2 $3');
 };
 
-export const getLedetekst = (text: string, data: any): string => {
-    if (text === undefined || data === undefined) {
-        return '';
-    }
-    let newtext = text;
-    Object.keys(data).forEach((key) => {
-        const regex = new RegExp(key, 'g');
-        newtext = newtext.replace(regex, data[key]);
-    });
-    return newtext;
-};
-
 export const setBodyClass = (name: string) => {
     if (document.body.className !== '') {
         document.body.classList.remove(document.body.className);

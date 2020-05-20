@@ -3,8 +3,7 @@ import React, { useEffect, useRef, useState } from 'react';
 import { Element, Normaltekst } from 'nav-frontend-typografi';
 import Vis from '../../vis';
 import { hentSvar } from '../hent-svar';
-import tekster from '../sporsmal-tekster';
-import { getLedetekst } from '../../../utils/utils';
+import { getLedetekst, tekst } from '../../../utils/tekster';
 import { hentFeilmelding } from '../sporsmal-utils';
 import { SpmProps } from '../sporsmal-form/sporsmal-form';
 import UndersporsmalListe from '../undersporsmal/undersporsmal-liste';
@@ -41,12 +40,12 @@ const TallInput = ({ sporsmal }: SpmProps) => {
                         required: feilmelding.global,
                         min: {
                             value: sporsmal.min,
-                            message: getLedetekst(tekster['soknad.feilmelding.TALL_MIN_MAX'],
+                            message: getLedetekst(tekst('soknad.feilmelding.TALL_MIN_MAX'),
                                 { '%MIN%': sporsmal.min, '%MAX%': sporsmal.max })
                         },
                         max: {
                             value: sporsmal.max,
-                            message: getLedetekst(tekster['soknad.feilmelding.TALL_MIN_MAX'],
+                            message: getLedetekst(tekst('soknad.feilmelding.TALL_MIN_MAX'),
                                 { '%MIN%': sporsmal.min, '%MAX%': sporsmal.max }
                             )
                         }
