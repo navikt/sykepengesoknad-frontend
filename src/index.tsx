@@ -18,3 +18,12 @@ ReactDOM.render(
     </BrowserRouter>
     , document.getElementById('root') as HTMLElement
 );
+
+if (env.isProduction) {
+    ReactDOM.render(
+        <script type="application/javascript" src="/frontendlogger/logger.js"></script>
+        , document.getElementById('logger') as HTMLElement
+    );
+}
+
+

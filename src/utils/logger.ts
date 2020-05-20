@@ -22,6 +22,7 @@ export const info = (...args: any[]): void => {
 export const error = (...args: any[]): void => {
     if (env.isDevelopment) {
         console.error(...args); // eslint-disable-line
+        frontendlogger.logError({ error: JSON.stringify(args) });
     } else if (env.isProduction) {
         frontendlogger.logError({ error: JSON.stringify(args) });
     }
