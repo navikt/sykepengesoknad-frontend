@@ -12,6 +12,7 @@ class Environment {
         AMPLITUDE_ENABLED: 'true',
         NODE_ENV: 'development',
         REACT_APP_DECORATOR_URL: 'https://www.nav.no/dekoratoren',
+        BASE_NAME: '/'
     };
 
     private get nodeEnv() {
@@ -52,6 +53,10 @@ class Environment {
 
     get amplitudeEnabled() {
         return this.env.AMPLITUDE_ENABLED === 'true'
+    }
+
+    get baseName() {
+        return this.env.BASE_NAME
     }
 }
 

@@ -1,6 +1,6 @@
 FROM nginx:alpine
-RUN mkdir /usr/share/nginx/html/nysykepengesoknad
-COPY nginx.conf /etc/nginx/conf.d/default.conf
+
+COPY nginx_nysykepengesoknad.conf /etc/nginx/conf.d/default.conf
 COPY /build /usr/share/nginx/html/nysykepengesoknad
 
 
@@ -16,5 +16,7 @@ RUN apk add --no-cache bash
 RUN chmod +x env.sh
 
 EXPOSE 8080
+
+ENV BASE_NAME=/nysykepengesoknad
 
 CMD ["/bin/bash", "-c", "/usr/share/nginx/html/nysykepengesoknad/env.sh && nginx -g \"daemon off;\""]

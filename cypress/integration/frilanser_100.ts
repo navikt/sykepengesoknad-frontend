@@ -11,7 +11,7 @@ describe('Tester arbeidstakersøknad', () => {
     const soknad = soknader.find((sok: Soknad) => sok.id === 'a8e40578-682b-4a04-bfda-b7768af2ae13');
 
     it('Laster startside', function() {
-        cy.visit('http://localhost:8080/nysykepengesoknad');
+        cy.visit('http://localhost:8080');
         cy.get('.sidetopp__tittel').should('be.visible').and('have.text', 'Søknader om sykepenger');
         cy.get(`#soknader-list-til-behandling article a[href*=${soknad.id}]`).click();
     });
