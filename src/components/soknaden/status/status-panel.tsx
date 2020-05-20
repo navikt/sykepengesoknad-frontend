@@ -2,7 +2,6 @@ import React from 'react';
 import Status from './status';
 import Utbetaling from './utbetaling';
 import { Knapp } from 'nav-frontend-knapper';
-import tekster from './status-panel-tekster';
 import Vis from '../../vis';
 import { useAppStore } from '../../../data/stores/app-store';
 import './status-panel.less';
@@ -15,6 +14,7 @@ import { useHistory } from 'react-router';
 import Ettersending from './ettersending';
 import { getUrlTilSoknad } from '../../../utils/url-utils';
 import Alertstripe from 'nav-frontend-alertstriper';
+import { tekst } from '../../../utils/tekster';
 
 const StatusPanel = () => {
     const { valgtSoknad, soknader, setSoknader, feilmeldingTekst, setFeilmeldingTekst } = useAppStore();
@@ -34,7 +34,7 @@ const StatusPanel = () => {
                 history.push(getUrlTilSoknad(soknad.id, '1'));
                 setFeilmeldingTekst('');
             } else {
-                setFeilmeldingTekst(tekster[ 'statuspanel.korrigering.feilet' ]);
+                setFeilmeldingTekst(tekst('statuspanel.korrigering.feilet'));
             }
         });
     };
@@ -47,7 +47,7 @@ const StatusPanel = () => {
             </Vis>
 
             <div className='knapperad'>
-                <Knapp mini type='standard' onClick={korriger}>{tekster[ 'statuspanel.knapp.endre' ]}</Knapp>
+                <Knapp mini type='standard' onClick={korriger}>{tekst('statuspanel.knapp.endre')}</Knapp>
 
                 <Ettersending gjelder='nav'/>
 

@@ -11,7 +11,6 @@ import SoknadIntro from '../../components/soknaden/soknad-intro/soknad-intro';
 import Opplysninger from '../../components/soknaden/opplysninger/opplysninger';
 import StatusPanel from '../../components/soknaden/status/status-panel';
 import Oppsummering from '../../components/soknaden/oppsummering/oppsummering';
-import tekster from './soknaden-tekster';
 import { setBodyClass } from '../../utils/utils';
 import Vis from '../../components/vis';
 import SporsmalForm from '../../components/sporsmal/sporsmal-form/sporsmal-form';
@@ -20,13 +19,14 @@ import { hentNokkel } from '../../components/sporsmal/sporsmal-utils';
 import { SEPARATOR } from '../../utils/constants';
 import AlertStripe from 'nav-frontend-alertstriper';
 import './soknaden.less';
+import { tekst } from '../../utils/tekster';
 
 const brodsmuler: Brodsmule[] = [ {
-    tittel: tekster['soknader.sidetittel'],
+    tittel: tekst('soknader.sidetittel'),
     sti: SEPARATOR,
     erKlikkbar: true
 }, {
-    tittel: tekster['soknad.sidetittel'],
+    tittel: tekst('soknad.sidetittel'),
     sti: null,
     erKlikkbar: false,
 } ];
@@ -67,7 +67,7 @@ const Fordeling = () => {
     const { valgtSoknad } = useAppStore();
     const { stegId } = useParams();
     const stegNo = parseInt(stegId);
-    const tittel = tekster[hentNokkel(valgtSoknad, stegNo)];
+    const tittel = tekst(hentNokkel(valgtSoknad, stegNo));
 
     switch (valgtSoknad.status) {
         // Nye søknader
@@ -77,7 +77,7 @@ const Fordeling = () => {
                 <>
                     <Vis hvis={valgtSoknad.status === RSSoknadstatus.UTKAST_TIL_KORRIGERING}>
                         <AlertStripe type='info' className='blokk-s'>
-                            <span>{tekster['sykepengesoknad.utkast-til-korrigering.info']}</span>
+                            <span>{tekst('sykepengesoknad.utkast-til-korrigering.info')}</span>
                         </AlertStripe>
                     </Vis>
 
@@ -89,7 +89,7 @@ const Fordeling = () => {
                         <SporsmalSteg />
                         <Link to={'/soknader/' + valgtSoknad.id + SEPARATOR + (stegNo - 1)} className='lenke tilbakelenke'>
                             <VenstreChevron />
-                            <Normaltekst tag='span'>{tekster['soknad.tilbakeknapp']}</Normaltekst>
+                            <Normaltekst tag='span'>{tekst('soknad.tilbakeknapp')}</Normaltekst>
                         </Link>
                     </Vis>
 
@@ -101,7 +101,7 @@ const Fordeling = () => {
 
                     <Vis hvis={stegNo === 1}>
                         <Normaltekst tag='p' className='sporsmal__intro'>
-                            {tekster['sykepengesoknad.foer-du-begynner.introtekst']}
+                            {tekst('sykepengesoknad.foer-du-begynner.introtekst')}
                         </Normaltekst>
                     </Vis>
 

@@ -3,13 +3,13 @@ import parser from 'html-react-parser';
 import { Normaltekst } from 'nav-frontend-typografi';
 import { useParams } from 'react-router-dom';
 import Steg from './steg';
-import tekster from '../sporsmal-tekster';
 import { Sporsmal } from '../../../types/types';
 import { TagTyper } from '../../../types/enums';
 import { hentNokkel } from '../sporsmal-utils';
 import { useAppStore } from '../../../data/stores/app-store';
 import 'nav-frontend-stegindikator-style';
 import './sporsmal-steg.less';
+import { tekst } from '../../../utils/tekster';
 
 interface FremdriftsbarProps {
     antallSteg: number;
@@ -46,7 +46,8 @@ const SporsmalSteg = () => {
             <div className={'stegindikator stegindikator--kompakt'}>
                 <ol className='stegindikator__liste'>
                     {steg.map((sporsmal: Sporsmal, idx: number) => {
-                        return <Steg index={idx} key={idx} label={tekster[hentNokkel(valgtSoknad, idx + 1)]} />;
+                        console.log('spørsmål: ', hentNokkel(valgtSoknad, idx + 1))
+                        return <Steg index={idx} key={idx} label={tekst(hentNokkel(valgtSoknad, idx + 1))} />;
                     })}
                 </ol>
             </div>

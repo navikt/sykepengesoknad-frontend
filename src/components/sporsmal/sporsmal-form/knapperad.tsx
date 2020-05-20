@@ -1,13 +1,13 @@
 import React, { MouseEvent, useEffect, useRef, useState } from 'react';
 import { Knapp, Fareknapp } from 'nav-frontend-knapper';
 import { Normaltekst } from 'nav-frontend-typografi';
-import tekster from './knapperad-tekster';
 import { useParams, useHistory } from 'react-router-dom';
 import { useAppStore } from '../../../data/stores/app-store';
 import Vis from '../../vis';
 import env from '../../../utils/environment';
 import { RSSoknadstatus } from '../../../types/rs-types/rs-soknadstatus';
 import Alertstripe from 'nav-frontend-alertstriper';
+import { tekst } from '../../../utils/tekster';
 
 type Event = MouseEvent<HTMLAnchorElement | HTMLButtonElement>;
 
@@ -53,23 +53,23 @@ const Knapperad = ({ onSubmit }: KnapperadProps) => {
                 history.push(`/soknader/${valgtSoknad.id}/1`);
                 setFeilmeldingTekst('');
             } else {
-                setFeilmeldingTekst(tekster['sykepengesoknad.avbryt.feilet'])
+                setFeilmeldingTekst(tekst('sykepengesoknad.avbryt.feilet'))
             }
         })
     };
 
     return (
         <div className="knapperad">
-            <Knapp type="hoved" onClick={() => onSubmit}>{tekster[nokkel]}</Knapp>
+            <Knapp type="hoved" onClick={() => onSubmit}>{tekst(nokkel)}</Knapp>
             <div className="avbrytDialog blokk-l">
                 <button className="lenke avbrytlenke avbrytDialog__trigger" onClick={handleVilAvbryte}>
-                    {tekster['sykepengesoknad.avbryt.trigger']}
+                    {tekst('sykepengesoknad.avbryt.trigger')}
                 </button>
                 <Vis hvis={vilAvbryte}>
                     <div ref={avbrytDialog} className="avbrytDialog__dialog pekeboble">
-                        <Normaltekst className="blokk-s">{tekster['sykepengesoknad.avbryt.sporsmal']}</Normaltekst>
+                        <Normaltekst className="blokk-s">{tekst('sykepengesoknad.avbryt.sporsmal')}</Normaltekst>
                         <div className="blokk-xs">
-                            <Fareknapp onClick={handleAvbryt}>{tekster['sykepengesoknad.avbryt.ja']}</Fareknapp>
+                            <Fareknapp onClick={handleAvbryt}>{tekst('sykepengesoknad.avbryt.ja')}</Fareknapp>
                         </div>
                         <div aria-live="polite">
                             <Vis hvis={feilmeldingTekst !== ''}>
@@ -77,7 +77,7 @@ const Knapperad = ({ onSubmit }: KnapperadProps) => {
                             </Vis>
                         </div>
                         <button className="lenke" onClick={handleVilAvbryte}>
-                            {tekster['sykepengesoknad.avbryt.angre']}
+                            {tekst('sykepengesoknad.avbryt.angre')}
                         </button>
                     </div>
                 </Vis>

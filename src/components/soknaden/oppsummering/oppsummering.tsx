@@ -4,7 +4,6 @@ import Ekspanderbartpanel from 'nav-frontend-ekspanderbartpanel';
 import { useAppStore } from '../../../data/stores/app-store';
 import { RSSvartype } from '../../../types/rs-types/rs-svartype';
 import { TagTyper } from '../../../types/enums';
-import tekster from './oppsummering-tekster';
 import { Sporsmal } from '../../../types/types';
 import CheckboxSum from './utdrag/checkbox-sum';
 import JaEllerNei from './utdrag/ja-eller-nei';
@@ -18,6 +17,7 @@ import TallSum from './utdrag/tall-sum';
 import RadioGruppe from './utdrag/radio-gruppe';
 import Behandlingsdager from './utdrag/behandlingsdager';
 import './oppsummering.less';
+import { tekst } from '../../../utils/tekster';
 
 export interface OppsummeringProps {
     sporsmal: Sporsmal;
@@ -27,7 +27,7 @@ const Oppsummering = () => {
     const { valgtSoknad } = useAppStore();
     return (
         <Ekspanderbartpanel apen={false} border={true}
-            tittel={<Element>{tekster['sykepengesoknad.oppsummering.tittel']}</Element>}
+            tittel={<Element>{tekst('sykepengesoknad.oppsummering.tittel')}</Element>}
         >
             {valgtSoknad.sporsmal
                 .filter((sporsmal) => {

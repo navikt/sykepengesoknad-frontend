@@ -7,6 +7,4 @@ const BannerTekster: any = {
     }, 'en': {}
 };
 
-const tekster = BannerTekster.nb;
-
-export default tekster;
+export default BannerTekster;

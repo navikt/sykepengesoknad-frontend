@@ -15,6 +15,4 @@ const BjornTekster: any = {
     }, 'en': {}
 };
 
-const tekster = BjornTekster.nb;
-
-export default tekster;
+export default BjornTekster;

@@ -1,8 +1,8 @@
 import { TagTyper } from '../../types/enums';
 import { Soknad, Sporsmal } from '../../types/types';
 import { SEPARATOR } from '../../utils/constants';
-import tekster from './sporsmal-tekster';
 import { RSSvartype } from '../../types/rs-types/rs-svartype';
+import { tekst } from '../../utils/tekster';
 
 export const erSisteSide = (soknad: Soknad, sidenummer: number) => {
     const sporsmal = soknad.sporsmal[sidenummer - 1];
@@ -56,8 +56,8 @@ interface FeilmeldingProps {
 
 export const hentFeilmelding = (sporsmal: Sporsmal): FeilmeldingProps => {
     const feilmelding: FeilmeldingProps = {
-        global: tekster['soknad.feilmelding.' + sporsmal.tag],
-        lokal: tekster['soknad.feilmelding.' + sporsmal.tag + '.lokal']
+        global: tekst('soknad.feilmelding.' + sporsmal.tag),
+        lokal: tekst('soknad.feilmelding.' + sporsmal.tag + '.lokal')
     };
     if (feilmelding.lokal === undefined) {
         feilmelding.lokal = hentGeneriskFeilmelding(sporsmal.svartype);

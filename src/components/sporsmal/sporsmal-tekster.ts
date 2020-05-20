@@ -134,6 +134,4 @@ const SporsmalTekster: any = {
     }, 'en': {}
 };
 
-const tekster = SporsmalTekster.nb;
-
-export default tekster;
+export default SporsmalTekster;

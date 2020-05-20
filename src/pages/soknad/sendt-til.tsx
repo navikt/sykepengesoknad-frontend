@@ -1,8 +1,7 @@
 import React from 'react';
 import { useAppStore } from '../../data/stores/app-store';
 import { Normaltekst, Systemtittel } from 'nav-frontend-typografi';
-import tekster from './soknaden-tekster';
-import { getLedetekst } from '../../utils/utils';
+import { getLedetekst, tekst } from '../../utils/tekster';
 import { RSSoknadstatus } from '../../types/rs-types/rs-soknadstatus';
 import Vis from '../../components/vis';
 import parser from 'html-react-parser';
@@ -23,16 +22,16 @@ const SendtTil = () => {
         <div className={className}>
             <Vis hvis={erSiste}>
                 <Systemtittel tag='h2'>
-                    {tekster['sykepengesoknad.kvittering.tittel']}
+                    {tekst('sykepengesoknad.kvittering.tittel')}
                 </Systemtittel>
             </Vis>
             {mottaker !== undefined ?
                 <Normaltekst tag='div'>
                     {valgtSoknad.arbeidsgiver !== undefined
-                        ? parser(getLedetekst(tekster[nokkel], {
+                        ? parser(getLedetekst(tekst(nokkel), {
                             '%ARBEIDSGIVER%': valgtSoknad.arbeidsgiver.navn,
                         }))
-                        : parser(tekster[nokkel])
+                        : parser(tekst(nokkel))
                     }
                 </Normaltekst> : null
             }

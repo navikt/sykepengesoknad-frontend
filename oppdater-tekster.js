@@ -53,5 +53,4 @@ fil_liste.forEach(fil => {
     netto = netto.replace(/'/g, '"');
     const tekster = JSON.parse(netto);
     console.log(tekster.nb["sykepengesoknad-utland.tittel"])
-    //console.log('tekster', tekster);
 });

@@ -1,8 +1,8 @@
 import React from 'react';
 import { EtikettLiten, Normaltekst } from 'nav-frontend-typografi';
 import { useAppStore } from '../../../data/stores/app-store';
-import tekster from './opplysninger-tekster';
 import { RSSoknadstype } from '../../../types/rs-types/rs-soknadstype';
+import { tekst } from '../../../utils/tekster';
 
 const SelvstendigInfo = () => {
     const { valgtSoknad } = useAppStore();
@@ -11,8 +11,8 @@ const SelvstendigInfo = () => {
 
     return (
         <div className='avsnitt'>
-            <EtikettLiten tag='h3' className='avsnitt-hode'>{tekster['din-sykmelding.arbeidssituasjon.tittel.2']}</EtikettLiten>
-            <Normaltekst>{tekster['din-sykmelding.arbeidssituasjon.alternativ.frilanser']}</Normaltekst>
+            <EtikettLiten tag='h3' className='avsnitt-hode'>{tekst('din-sykmelding.arbeidssituasjon.tittel.2')}</EtikettLiten>
+            <Normaltekst>{tekst('din-sykmelding.arbeidssituasjon.alternativ.frilanser')}</Normaltekst>
         </div>
     );
 };

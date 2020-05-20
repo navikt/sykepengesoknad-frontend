@@ -29,6 +29,4 @@ const StatusPanelTekster: any = {
     }, 'en': {}
 };
 
-const tekster = StatusPanelTekster.nb;
-
-export default tekster;
+export default StatusPanelTekster;

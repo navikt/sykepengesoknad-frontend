@@ -10,6 +10,4 @@ const KnapperadTekster: any = {
     }, 'en': {}
 };
 
-const tekster = KnapperadTekster.nb;
-
-export default tekster;
+export default KnapperadTekster;

@@ -10,9 +10,8 @@ import GlobeHoverIkon from './globe-hover.svg';
 import SoknaderIkon from '../../../pages/soknader/soknader.svg';
 import SoknaderHoverIkon from '../../../pages/soknader/soknader-hover.svg';
 import Vis from '../../vis';
-import { getLedetekst } from '../../../utils/utils';
+import { getLedetekst, tekst } from '../../../utils/tekster';
 import { tilLesbarPeriodeMedArstall } from '../../../utils/dato-utils';
-import tekster from './teaser-tekster';
 import { Normaltekst } from 'nav-frontend-typografi';
 import { getRiktigDato, getSendtTilSuffix } from '../../../utils/soknad-utils';
 import { HoyreChevron } from 'nav-frontend-chevron';
@@ -34,12 +33,12 @@ interface SendtUliktProps {
 export const SendtUlikt = ({ soknad }: SendtUliktProps) => {
     return (
         <Normaltekst tag='span'>
-            {getLedetekst(tekster['soknad.teaser.status.SENDT.til-arbeidsgiver'], {
+            {getLedetekst(tekst('soknad.teaser.status.SENDT.til-arbeidsgiver'), {
                 '%DATO%': dayjs(soknad.sendtTilArbeidsgiverDato).format('DD.MM.YYYY'),
                 '%ARBEIDSGIVER%': finnArbeidsgivernavn(soknad),
             })}
             <br/>
-            {getLedetekst(tekster['soknad.teaser.status.SENDT.til-nav'], {
+            {getLedetekst(tekst('soknad.teaser.status.SENDT.til-nav'), {
                 '%DATO%': dayjs(soknad.sendtTilNAVDato).format('DD.MM.YYYY'),
             })}
         </Normaltekst>
@@ -57,13 +56,13 @@ const hentIkonHover = (soknadstype: RSSoknadstype) => {
 const beregnUndertekst = (soknad: Soknad) => {
     if (soknad.status === RSSoknadstatus.AVBRUTT) {
         return getLedetekst(
-            tekster['soknad.teaser.status.AVBRUTT'],
+            tekst('soknad.teaser.status.AVBRUTT'),
             { '%DATO%': dayjs(soknad.avbruttDato).format('DD.MM.YYYY') }
         );
     }
 
     if (soknad.status === RSSoknadstatus.FREMTIDIG) {
-        return tekster['soknad.teaser.status.FREMTIDIG'];
+        return tekst('soknad.teaser.status.FREMTIDIG');
     }
 
     const endelse = getSendtTilSuffix(soknad);
@@ -75,7 +74,7 @@ const beregnUndertekst = (soknad: Soknad) => {
         case RSSoknadstype.ANNET_ARBEIDSFORHOLD:
         case RSSoknadstype.SELVSTENDIGE_OG_FRILANSERE: {
             return soknad.status === RSSoknadstatus.SENDT
-                ? getLedetekst(tekster['soknad.teaser.status.SENDT.til-nav'], {
+                ? getLedetekst(tekst('soknad.teaser.status.SENDT.til-nav'), {
                     '%DATO%': dayjs(datoher).format('DD.MM.YYYY'),
                 })
                 : '';
@@ -85,13 +84,13 @@ const beregnUndertekst = (soknad: Soknad) => {
                 case RSSoknadstatus.SENDT:
                     return erSendtTilBeggeMenIkkeSamtidig(soknad)
                         ? <SendtUlikt soknad={soknad}/>
-                        : getLedetekst(tekster[`soknad.teaser.status.${soknad.status}${endelse}`], {
+                        : getLedetekst(tekst(`soknad.teaser.status.${soknad.status}${endelse}`), {
                             '%DATO%': dayjs(datoher).format('DD.MM.YYYY'),
                             '%ARBEIDSGIVER%': finnArbeidsgivernavn(soknad),
                         });
                 case RSSoknadstatus.NY:
                 case RSSoknadstatus.UTKAST_TIL_KORRIGERING: {
-                    return getLedetekst(tekster['soknad.teaser.undertekst'], {
+                    return getLedetekst(tekst('soknad.teaser.undertekst'), {
                         '%ARBEIDSGIVER%': finnArbeidsgivernavn(soknad),
                     });
                 }
@@ -109,7 +108,7 @@ export const hentTeaserStatustekst = (soknad: Soknad) => {
         soknad.status !== RSSoknadstatus.SENDT &&
         soknad.status !== RSSoknadstatus.AVBRUTT
     ) {
-        return getLedetekst(tekster[`soknad.teaser.status.${soknad.status}`], {
+        return getLedetekst(tekst(`soknad.teaser.status.${soknad.status}`), {
             '%DATO%': dayjs(getRiktigDato(soknad)).format('DD.MM.YYYY'),
         })
     }
@@ -137,17 +136,17 @@ const Teaser = ({ soknad }: SykepengesoknadTeaserProps) => {
                 <HoyreChevron />
                 <div className='inngangspanel__innhold'>
                     <InngangsHeader
-                        meta={getLedetekst(tekster['soknad.teaser.dato'], {
+                        meta={getLedetekst(tekst('soknad.teaser.dato'), {
                             '%DATO%': dayjs(soknad.opprettetDato).format('DD.MM.YYYY'),
                         })}
                         tittel={soknad.soknadstype === RSSoknadstype.OPPHOLD_UTLAND
-                            ? tekster['soknad.utland.teaser.tittel']
-                            : tekster['soknad.teaser.tittel']}
+                            ? tekst('soknad.utland.teaser.tittel')
+                            : tekst('soknad.teaser.tittel')}
                         status={hentTeaserStatustekst(soknad)}
                     />
                     <Vis hvis={soknad.soknadstype !== RSSoknadstype.OPPHOLD_UTLAND}>
                         <Normaltekst className='inngangspanel__tekst'>
-                            {getLedetekst(tekster['soknad.teaser.tekst'], {
+                            {getLedetekst(tekst('soknad.teaser.tekst'), {
                                 '%PERIODE%': tilLesbarPeriodeMedArstall(soknad.fom, soknad.tom),
                             })}
                         </Normaltekst>

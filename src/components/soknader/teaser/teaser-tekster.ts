@@ -17,6 +17,4 @@ const TeaserTekster: any = {
     }, 'en': {}
 };
 
-const tekster = TeaserTekster.nb;
-
-export default tekster;
+export default TeaserTekster;

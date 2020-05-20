@@ -5,6 +5,4 @@ const UtbetalingerTekster: any = {
     }, 'en': {}
 };
 
-const tekster = UtbetalingerTekster.nb;
-
-export default tekster;
+export default UtbetalingerTekster;

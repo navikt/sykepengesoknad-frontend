@@ -79,6 +79,4 @@ const SoknadenTekster: any = {
     }, 'en': {}
 };
 
-const tekster = SoknadenTekster.nb;
-
-export default tekster;
+export default SoknadenTekster;

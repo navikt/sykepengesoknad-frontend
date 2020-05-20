@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
-import tekster from './opplysninger-tekster';
 import SykmeldingPerioder from './sykmelding-perioder';
 import ArbeidsgiverInfo from './arbeidsgiver-info';
 import SykmeldingDato from './sykmelding-dato';
@@ -11,6 +10,7 @@ import plaster from './plaster.svg';
 import plasterHover from './plaster-hover.svg';
 import Utvidbar from '../../utvidbar';
 import './opplysninger.less';
+import { tekst } from '../../../utils/tekster';
 
 interface OpplysningerProps {
     ekspandert: boolean;
@@ -30,7 +30,7 @@ const Opplysninger = ({ ekspandert }: OpplysningerProps) => {
     return (
         <Utvidbar className={'ekspander' + (apen ? ' apen' : '')}
             ikon={plaster} ikonHover={plasterHover} erApen={apen}
-            tittel={tekster['sykepengesoknad.sykmelding-utdrag.tittel']}
+            tittel={tekst('sykepengesoknad.sykmelding-utdrag.tittel')}
             ikonAltTekst=''
         >
             <div className='opplysninger'>

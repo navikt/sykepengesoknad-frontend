@@ -8,10 +8,10 @@ import { sorterEtterOpprettetDato, sorterEtterPerioder } from '../../utils/sorte
 import Vis from '../../components/vis';
 import { useAppStore } from '../../data/stores/app-store';
 import { RSSoknadstatus } from '../../types/rs-types/rs-soknadstatus';
-import tekster from './soknader-tekster';
 import Brodsmuler from '../../components/brodsmuler/brodsmuler';
 import { setBodyClass } from '../../utils/utils';
 import './soknader.less';
+import { tekst } from '../../utils/tekster';
 
 export const filtrerOgSorterNyeSoknader = (soknader: Soknad[]) => {
     return soknader.filter(soknad =>
@@ -20,7 +20,7 @@ export const filtrerOgSorterNyeSoknader = (soknader: Soknad[]) => {
 };
 
 const brodsmuler: Brodsmule[] = [ {
-    tittel: tekster['soknader.sidetittel'],
+    tittel: tekst('soknader.sidetittel'),
     sti: '/soknader',
     erKlikkbar: false
 } ];
@@ -47,7 +47,7 @@ const Soknader = () => {
         <div className='limit'>
             <Brodsmuler brodsmuler={brodsmuler} />
             <Sidetittel tag='h1' className='sidetopp__tittel'>
-                {tekster['soknader.sidetittel']}
+                {tekst('soknader.sidetittel')}
             </Sidetittel>
 
             <Vis hvis={soknader === undefined}>
@@ -61,15 +61,15 @@ const Soknader = () => {
 
             <Teasere
                 soknader={nyeSoknader}
-                tittel={tekster['soknader.venter-paa-behandling.tittel']}
-                tomListeTekst={tekster['soknader.venter-paa-behandling.ingen-soknader']}
+                tittel={tekst('soknader.venter-paa-behandling.tittel')}
+                tomListeTekst={tekst('soknader.venter-paa-behandling.ingen-soknader')}
                 id='soknader-list-til-behandling'
             />
 
             <Vis hvis={fremtidigeSoknader.length > 0}>
                 <Teasere
                     soknader={fremtidigeSoknader}
-                    tittel={tekster['soknader.planlagt.tittel']}
+                    tittel={tekst('soknader.planlagt.tittel')}
                     id='soknader-planlagt'
                 />
             </Vis>
@@ -79,7 +79,7 @@ const Soknader = () => {
             <Vis hvis={tidligereSoknader.length > 0}>
                 <Teasere
                     soknader={tidligereSoknader}
-                    tittel={tekster['soknader.sendt.tittel']}
+                    tittel={tekst('soknader.sendt.tittel')}
                     id='soknader-sendt'
                 />
             </Vis>

@@ -2,9 +2,9 @@ import React from 'react';
 import Hjelpetekst from 'nav-frontend-hjelpetekst';
 import { TagTyper } from '../../types/enums';
 import { fjernIndexFraTag } from './sporsmal-utils';
-import tekster from './sporsmal-tekster';
 import { SpmProps } from './sporsmal-form/sporsmal-form';
 import Vis from '../vis';
+import { tekst } from '../../utils/tekster';
 
 const SporsmalHjelpetekst = ({ sporsmal }: SpmProps) => {
 
@@ -17,7 +17,7 @@ const SporsmalHjelpetekst = ({ sporsmal }: SpmProps) => {
     return (
         <Vis hvis={vis}>
             <Hjelpetekst>
-                {tekster[`soknad.hjelpetekst.${nokkel}`]}
+                {tekst(`soknad.hjelpetekst.${nokkel}`)}
             </Hjelpetekst>
         </Vis>
     )

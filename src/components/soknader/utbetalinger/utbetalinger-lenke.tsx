@@ -2,13 +2,13 @@ import React, { useState } from 'react';
 import { Systemtittel } from 'nav-frontend-typografi';
 import utbetalingIkon from './utbetalinger.svg';
 import utbetalingHover from './utbetalinger--hover.svg';
-import tekster from './utbetalinger-tekster';
+import { tekst } from '../../../utils/tekster';
 
 const UtbetalingerLenke = () => {
     const [ ikon, setIkon ] = useState(utbetalingIkon);
 
     return (
-        <a href={tekster['utbetaliner.lenke.url']} target='_blank' rel='noreferrer noopener'
+        <a href={tekst('utbetaliner.lenke.url')} target='_blank' rel='noreferrer noopener'
             onMouseEnter={() => setIkon(utbetalingHover)}
             onMouseLeave={() => setIkon(utbetalingIkon)}
             className='inngangspanel inngangspanel--ekstern'>
@@ -17,7 +17,7 @@ const UtbetalingerLenke = () => {
             </span>
             <div className='inngangspanel__innhold'>
                 <Systemtittel className='inngangspanel__tittel' tag='h2'>
-                    {tekster['soknader.sykepenger.tittel']}
+                    {tekst('soknader.sykepenger.tittel')}
                 </Systemtittel>
             </div>
         </a>
