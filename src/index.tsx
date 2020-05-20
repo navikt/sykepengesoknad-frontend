@@ -19,7 +19,7 @@ ReactDOM.render(
     , document.getElementById('root') as HTMLElement
 );
 
-if (env.isProduction) {
+if (env.isQ1 || env.isProd) {
     ReactDOM.render(
         <script type="application/javascript" src="/frontendlogger/logger.js"></script>
         , document.getElementById('logger') as HTMLElement

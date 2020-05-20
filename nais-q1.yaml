@@ -30,4 +30,6 @@ spec:
       value: "true"
     - name: DECORATOR_URL
       value: "https://www-q1.nav.no/dekoratoren"
+    - name: ENVIRONMENT
+      value: "q1"
 
