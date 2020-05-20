@@ -13,7 +13,7 @@ if (env.mockBackend === 'true') {
 }
 
 ReactDOM.render(
-    <BrowserRouter basename={'/nysykepengesoknad'}>
+    <BrowserRouter basename={env.baseName}>
         <App />
     </BrowserRouter>
     , document.getElementById('root') as HTMLElement

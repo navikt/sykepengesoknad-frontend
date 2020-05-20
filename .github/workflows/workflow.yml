@@ -14,7 +14,8 @@ jobs:
           TIME=$(TZ="Europe/Oslo" date +%Y.%m.%d-%H.%M)
           COMMIT=$(git rev-parse --short=8 HEAD)
           VERSION=$TIME-$COMMIT
-          echo "::set-env name=IMAGE::"docker.pkg.github.com/${GITHUB_REPOSITORY}/$APP:$VERSION""
+          echo "::set-env name=IMAGE_ROOT::"docker.pkg.github.com/${GITHUB_REPOSITORY}/$APP-root:$VERSION""
+          echo "::set-env name=IMAGE_NYSYKEPENGESOKNAD::"docker.pkg.github.com/${GITHUB_REPOSITORY}/$APP-nysykepengesoknad:$VERSION""
           echo "::set-env name=VERSION::"$VERSION""
       - run: echo $VERSION > VERSION.txt
       - name: Last opp VERSION til neste job
@@ -46,8 +47,6 @@ jobs:
         run: npm run lint
       - name: Run tests
         run: CI=true npm run test
-      - name: Build application
-        run: npm run build
       - name: Run cypress
         uses: cypress-io/github-action@v1
         with:
@@ -55,14 +54,20 @@ jobs:
           record: false
           start: npm run start-mock
           wait-on: http://localhost:8080
-      - name: Build and publish Docker image
+      - name: Docker login
         env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_ACCESS_TOKEN }}
+            GITHUB_TOKEN: ${{ secrets.GITHUB_ACCESS_TOKEN }}
+        run: docker login docker.pkg.github.com -u ${GITHUB_REPOSITORY} -p ${GITHUB_TOKEN}
+      - name: Bygg og push Docker image hvor appen serves på /
         run: |
-          docker build -t ${IMAGE} .
-          docker login docker.pkg.github.com -u ${GITHUB_REPOSITORY} -p ${GITHUB_TOKEN}
-          docker push ${IMAGE}
-
+            PUBLIC_URL="" npm run build
+            docker build . -f Dockerfile.root -t ${IMAGE_ROOT}
+            docker push ${IMAGE_ROOT}
+      - name: Bygg og push Docker image hvor appen serves på /nysykepengesoknad
+        run: |
+            REACT_APP_DECORATOR_URL=https://www-q1.nav.no/dekoratoren PUBLIC_URL=/nysykepengesoknad npm run build
+            docker build . -f Dockerfile.nysykepengesoknad -t ${IMAGE_NYSYKEPENGESOKNAD}
+            docker push ${IMAGE_NYSYKEPENGESOKNAD}
 
   deploy-to-dev-sbs:
     name: Deploy to dev-sbs (Q1)
@@ -77,7 +82,7 @@ jobs:
           name: VERSION.txt
           path: .
       - run: echo "::set-env name=VERSION::"`cat VERSION.txt`""
-      - run: echo "::set-env name=IMAGE::"docker.pkg.github.com/${GITHUB_REPOSITORY}/$APP:$VERSION""
+      - run: echo "::set-env name=IMAGE::"docker.pkg.github.com/${GITHUB_REPOSITORY}/$APP-nysykepengesoknad:$VERSION""
       - uses: nais/deploy/actions/deploy@v1
         name: Deploy to dev-sbs
         env:
@@ -97,7 +102,7 @@ jobs:
           name: VERSION.txt
           path: .
       - run: echo "::set-env name=VERSION::"`cat VERSION.txt`""
-      - run: echo "::set-env name=IMAGE::"docker.pkg.github.com/${GITHUB_REPOSITORY}/$APP:$VERSION""
+      - run: echo "::set-env name=IMAGE::"docker.pkg.github.com/${GITHUB_REPOSITORY}/$APP-root:$VERSION""
       - name: Deploy to dev-gcp
         uses: nais/deploy/actions/deploy@v1
         env:
@@ -117,7 +122,7 @@ jobs:
           name: VERSION.txt
           path: .
       - run: echo "::set-env name=VERSION::"`cat VERSION.txt`""
-      - run: echo "::set-env name=IMAGE::"docker.pkg.github.com/${GITHUB_REPOSITORY}/$APP:$VERSION""
+      - run: echo "::set-env name=IMAGE::"docker.pkg.github.com/${GITHUB_REPOSITORY}/$APP-root:$VERSION""
       - run: echo "::set-env name=LATEST::"docker.pkg.github.com/${GITHUB_REPOSITORY}/$APP:latest""
       - name: Tag and push docker image
         env:

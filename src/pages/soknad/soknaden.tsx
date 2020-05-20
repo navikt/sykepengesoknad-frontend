@@ -33,7 +33,7 @@ const brodsmuler: Brodsmule[] = [ {
 
 const Soknaden = () => {
     const { soknader, setValgtSoknad, sykmeldinger, setValgtSykmelding } = useAppStore();
-    const { valgtSykmelding, valgtSoknad } = useAppStore();
+    const { valgtSoknad } = useAppStore();
     const { id } = useParams();
 
     useEffect(() => {
