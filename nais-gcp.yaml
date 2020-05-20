@@ -27,3 +27,5 @@ spec:
       value: "false"
     - name: MOCK_BACKEND
       value: "true"
+    - name: DECORATOR_URL
+      value: "https://www.nav.no/dekoratoren"

@@ -54,18 +54,18 @@ jobs:
           record: false
           start: npm run start-mock
           wait-on: http://localhost:8080
+      - name: Build application
+        run: npm run build
       - name: Docker login
         env:
             GITHUB_TOKEN: ${{ secrets.GITHUB_ACCESS_TOKEN }}
         run: docker login docker.pkg.github.com -u ${GITHUB_REPOSITORY} -p ${GITHUB_TOKEN}
       - name: Bygg og push Docker image hvor appen serves på /
         run: |
-            PUBLIC_URL="" npm run build
             docker build . -f Dockerfile.root -t ${IMAGE_ROOT}
             docker push ${IMAGE_ROOT}
       - name: Bygg og push Docker image hvor appen serves på /nysykepengesoknad
         run: |
-            REACT_APP_DECORATOR_URL=https://www-q1.nav.no/dekoratoren PUBLIC_URL=/nysykepengesoknad npm run build
             docker build . -f Dockerfile.nysykepengesoknad -t ${IMAGE_NYSYKEPENGESOKNAD}
             docker push ${IMAGE_NYSYKEPENGESOKNAD}
 
