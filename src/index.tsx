@@ -19,11 +19,13 @@ ReactDOM.render(
     , document.getElementById('root') as HTMLElement
 );
 
+const logger = fetch('/frontendlogger/logger.js', { method: 'GET', headers: { 'Content-Type': 'text/javascript' } })
+    .then(response => {
+        return response.text();
+    });
+
 if (env.isQ1 || env.isProd) {
-    ReactDOM.render(
-        <script type="application/javascript" src="/frontendlogger/logger.js"></script>
+    ReactDOM.render(<>{logger}</>
         , document.getElementById('logger') as HTMLElement
     );
 }
-
-

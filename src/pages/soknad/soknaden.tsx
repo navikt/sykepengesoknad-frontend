@@ -43,7 +43,12 @@ const Soknaden = () => {
 
         const sykmelding = sykmeldinger.filter(sm => sm.id === filtrertSoknad.sykmeldingId)[0];
         setValgtSykmelding(sykmelding);
-        logger.error('tester logger :D')
+        logger.info('Dette er en test av frontendlogger');
+        logger.error('tester logger :D');
+        const frontlogger = (window as any).frontendlogger;
+        frontlogger.info({
+            message: 'Tester logging'
+        });
         // eslint-disable-next-line
     }, [ id ]);
 

@@ -17,6 +17,12 @@ export const info = (...args: any[]): void => {
     if (env.isDev) {
         console.info(...args); // eslint-disable-line
     }
+    else if (env.isProd || env.isQ1) {
+        const frontlogger = (window as any).frontendlogger;
+        frontlogger.info({
+            message: 'Tester logging'
+        });
+    }
 };
 
 export const error = (...args: any[]): void => {
