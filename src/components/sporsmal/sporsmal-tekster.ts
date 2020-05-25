@@ -33,7 +33,7 @@ const SporsmalTekster: any = {
 
         'soknad.feilmelding.PERMITTERT_NAA': 'Du må svare på om du er permittert nå',
         'soknad.feilmelding.PERMITTERT_NAA.lokal': 'Du må svare på om du er permittert nå',
-        'soknad.feilmelding.PERMITTERT_NAA_NAR': 'Du svare på når du ble permittert',
+        'soknad.feilmelding.PERMITTERT_NAA_NAR': 'Du må svare på når du ble permittert',
         'soknad.feilmelding.PERMITTERT_PERIODE': 'Du må svare på om du har vært permittert',
         'soknad.feilmelding.PERMITTERT_PERIODE.lokal': 'Du må svare på om du har vært permittert',
 
