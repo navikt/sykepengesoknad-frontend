@@ -29,7 +29,7 @@ const tekster = {
 
 export const tekst = (tekst: string): string => {
     const verdi = tekster[tekst];
-    return verdi ? verdi : tekst;
+    return verdi ? verdi : undefined;
 };
 
 export const getLedetekst = (text: string, data: any): string => {
