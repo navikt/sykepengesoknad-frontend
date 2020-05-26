@@ -3,7 +3,7 @@
 import { soknader } from '../../src/data/mock/data/soknader';
 import { Soknad } from '../../src/types/types';
 
-describe('Tester arbeidstakersøknad', () => {
+describe('Tester frilansersøknad', () => {
     //-----
     // Sykmelding: baf4a9ab-cc9b-42af-bba3-67cd6ca06388, frilanser - 100%
     // Søknad: a8e40578-682b-4a04-bfda-b7768af2ae13, fom: 1.4.20, tom: 24.4.20
@@ -73,10 +73,12 @@ describe('Tester arbeidstakersøknad', () => {
         // Svarer JA
         // Underspørsmål nivå 1 - checkbox
         cy.contains('Hvilke inntektskilder har du?');
-        cy.get('.undersporsmal .checkboxgruppe label[for=687440]').should('include.text', 'arbeidsforhold');
-        cy.get('.undersporsmal .checkboxgruppe .checkboks#687440').click();
+        cy.get('.undersporsmal .checkboxgruppe label[for=687440]')
+            .should('include.text', 'arbeidsforhold')
+            .click({ force: true });
         // Underspørsmål nivå 2 - radio
-        cy.get('.undersporsmal .checkboxgruppe .radioContainer .radioknapp#687441_0').click();
+        cy.get('.undersporsmal .checkboxgruppe .radioContainer .radioknapp#687441_0')
+            .click({ force: true });
         cy.contains('Du må sende egen sykepengesøknad for dette. ' +
             'Det betyr også at legen må skrive en sykmelding for hvert arbeidsforhold du er sykmeldt fra.');
 

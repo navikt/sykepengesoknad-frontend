@@ -187,9 +187,9 @@ describe('Tester arbeidstakersøknad - gradert 50%', () => {
         // Underspørsmål nivå 1 - checkbox
         cy.contains('Hvilke andre inntektskilder har du?');
         cy.get('.undersporsmal .checkboxgruppe label[for=687320]').should('include.text', 'andre arbeidsforhold');
-        cy.get('.undersporsmal .checkboxgruppe .checkboks#687320').click();
+        cy.get('.undersporsmal .checkboxgruppe .checkboks#687320').click({ force: true });
         // Underspørsmål nivå 2 - radio
-        cy.get('.undersporsmal .checkboxgruppe .radioContainer .radioknapp#687321_0').click();
+        cy.get('.undersporsmal .checkboxgruppe .radioContainer .radioknapp#687321_0').click({ force: true });
         cy.contains('Du må sende egen sykepengesøknad for dette. ' +
             'Det betyr også at legen må skrive en sykmelding for hvert arbeidsforhold du er sykmeldt fra.');
 
