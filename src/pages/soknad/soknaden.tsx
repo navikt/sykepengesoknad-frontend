@@ -20,7 +20,6 @@ import { SEPARATOR } from '../../utils/constants';
 import AlertStripe from 'nav-frontend-alertstriper';
 import './soknaden.less';
 import { tekst } from '../../utils/tekster';
-import { logger } from '../../utils/logger';
 
 const brodsmuler: Brodsmule[] = [ {
     tittel: tekst('soknader.sidetittel'),
@@ -43,12 +42,6 @@ const Soknaden = () => {
 
         const sykmelding = sykmeldinger.filter(sm => sm.id === filtrertSoknad.sykmeldingId)[0];
         setValgtSykmelding(sykmelding);
-        logger.info('Dette er en test av frontendlogger');
-        logger.error('tester logger :D');
-        const frontlogger = (window as any).frontendlogger;
-        frontlogger.info({
-            message: 'Tester logging'
-        });
         // eslint-disable-next-line
     }, [ id ]);
 

@@ -35,9 +35,6 @@ export const tekst = (tekst: string): string => {
 
 export const getLedetekst = (text: string, data: any): string => {
     if (text === undefined || data === undefined) {
-        logger.info({
-            message: 'Mangler tekst!'
-        });
         return '';
     }
     let newtext = text;

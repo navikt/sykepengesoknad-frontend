@@ -14,18 +14,15 @@ if (env.mockBackend === 'true') {
 
 ReactDOM.render(
     <BrowserRouter basename={env.baseName}>
-        <App />
+        <App/>
     </BrowserRouter>
     , document.getElementById('root') as HTMLElement
 );
 
-const logger = fetch('/frontendlogger/logger.js', { method: 'GET', headers: { 'Content-Type': 'text/javascript' } })
-    .then(response => {
-        return response.text();
-    });
-
 if (env.isQ1 || env.isProd) {
-    ReactDOM.render(<>{logger}</>
-        , document.getElementById('logger') as HTMLElement
-    );
+    const src = '/frontendlogger/logger.js';
+    const script = document.createElement('script');
+    script.src = src;
+    script.async = true;
+    document.body.appendChild(script);
 }

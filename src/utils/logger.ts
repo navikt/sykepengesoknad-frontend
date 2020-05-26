@@ -1,40 +1,27 @@
-import env from './environment';
-import { frontendlogger } from './frontend-logger';
+const frontendlogger = (window as any).frontendlogger;
 
-export const log = (...args: any[]): void => {
-    if (env.isDev) {
-        console.log(...args); // eslint-disable-line
-    }
+// Grafana - Metrikk
+export const event = (...args: any[]): void => {
+    frontendlogger.event(...args);
 };
 
+// Kibana - Warning
 export const warn = (...args: any[]): void => {
-    if (env.isDev) {
-        console.warn(...args); // eslint-disable-line
-    }
+    frontendlogger.warn(...args);
 };
 
+// Kibana - Info
 export const info = (...args: any[]): void => {
-    if (env.isDev) {
-        console.info(...args); // eslint-disable-line
-    }
-    else if (env.isProd || env.isQ1) {
-        const frontlogger = (window as any).frontendlogger;
-        frontlogger.info({
-            message: 'Tester logging'
-        });
-    }
+    frontendlogger.info(...args);
 };
 
+// Kibana - Error
 export const error = (...args: any[]): void => {
-    if (env.isDev) {
-        console.error(...args); // eslint-disable-line
-    } else if (env.isProd || env.isQ1) {
-        frontendlogger.logError({ error: JSON.stringify(args) });
-    }
+    frontendlogger.error(...args);
 };
 
 export const logger = {
-    log,
+    event,
     error,
     warn,
     info,
