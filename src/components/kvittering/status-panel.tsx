@@ -1,21 +1,21 @@
 import React from 'react';
-import Status from './status';
-import Utbetaling from './utbetaling';
-import { Knapp } from 'nav-frontend-knapper';
-import Vis from '../../vis';
-import { useAppStore } from '../../../data/stores/app-store';
-import './status-panel.less';
-import env from '../../../utils/environment';
-import useFetch from '../../../data/rest/use-fetch';
-import { RSSoknad } from '../../../types/rs-types/rs-soknad';
-import { FetchState, hasData } from '../../../data/rest/utils';
-import { Soknad } from '../../../types/types';
 import { useHistory } from 'react-router';
-import Ettersending from './ettersending';
-import { getUrlTilSoknad } from '../../../utils/url-utils';
+import { Knapp } from 'nav-frontend-knapper';
 import Alertstripe from 'nav-frontend-alertstriper';
-import { tekst } from '../../../utils/tekster';
-import { logger } from '../../../utils/logger';
+import Vis from '../vis';
+import env from '../../utils/environment';
+import { Soknad } from '../../types/types';
+import { logger } from '../../utils/logger';
+import { tekst } from '../../utils/tekster';
+import Status from '../soknaden/status/status';
+import useFetch from '../../data/rest/use-fetch';
+import Utbetaling from '../soknaden/status/utbetaling';
+import { getUrlTilSoknad } from '../../utils/url-utils';
+import { useAppStore } from '../../data/stores/app-store';
+import { RSSoknad } from '../../types/rs-types/rs-soknad';
+import Ettersending from '../soknaden/status/ettersending';
+import { FetchState, hasData } from '../../data/rest/utils';
+import './status-panel.less';
 
 const StatusPanel = () => {
     const { valgtSoknad, soknader, setSoknader, feilmeldingTekst, setFeilmeldingTekst } = useAppStore();

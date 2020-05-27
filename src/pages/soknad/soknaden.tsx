@@ -9,8 +9,6 @@ import { useAppStore } from '../../data/stores/app-store';
 import { HotjarTrigger } from '../../components/hotjar-trigger';
 import SoknadIntro from '../../components/soknaden/soknad-intro/soknad-intro';
 import Opplysninger from '../../components/soknaden/opplysninger/opplysninger';
-import StatusPanel from '../../components/soknaden/status/status-panel';
-import Oppsummering from '../../components/soknaden/oppsummering/oppsummering';
 import { setBodyClass } from '../../utils/utils';
 import Vis from '../../components/vis';
 import SporsmalForm from '../../components/sporsmal/sporsmal-form/sporsmal-form';
@@ -18,8 +16,9 @@ import SporsmalSteg from '../../components/sporsmal/sporsmal-steg/sporsmal-steg'
 import { hentNokkel } from '../../components/sporsmal/sporsmal-utils';
 import { SEPARATOR } from '../../utils/constants';
 import AlertStripe from 'nav-frontend-alertstriper';
-import './soknaden.less';
 import { tekst } from '../../utils/tekster';
+import Kvittering from '../../components/kvittering/kvittering';
+import './soknaden.less';
 
 const brodsmuler: Brodsmule[] = [ {
     tittel: tekst('soknader.sidetittel'),
@@ -112,13 +111,7 @@ const Fordeling = () => {
         // Tidligere søknader
         case RSSoknadstatus.SENDT:
         case RSSoknadstatus.AVBRUTT:
-            return (
-                <>
-                    <StatusPanel />
-                    <Opplysninger ekspandert={false} />
-                    <Oppsummering />
-                </>
-            );
+            return <Kvittering />;
 
         // Fremtidige søknader
         case RSSoknadstatus.FREMTIDIG:

@@ -5,14 +5,13 @@ import { Brodsmule } from '../../types/types';
 import { SEPARATOR } from '../../utils/constants';
 import { setBodyClass } from '../../utils/utils';
 import { useAppStore } from '../../data/stores/app-store';
-import PanelBase from 'nav-frontend-paneler';
-import SendtTil from '../soknad/sendt-til';
 import Vis from '../../components/vis';
 import { RSSoknadstatus } from '../../types/rs-types/rs-soknadstatus';
 import { Normaltekst } from 'nav-frontend-typografi';
 import { Link } from 'react-router-dom';
-import './kvittering.less';
 import { tekst } from '../../utils/tekster';
+import Kvittering from '../../components/kvittering/kvittering';
+import './kvittering.less';
 
 const brodsmuler: Brodsmule[] = [ {
     tittel: tekst('soknader.sidetittel'),
@@ -24,7 +23,7 @@ const brodsmuler: Brodsmule[] = [ {
     erKlikkbar: false,
 } ];
 
-const Kvittering = () => {
+const KvitteringSide = () => {
     const { valgtSoknad } = useAppStore();
     const erSiste = valgtSoknad!.status === RSSoknadstatus.SENDT;
 
@@ -33,15 +32,13 @@ const Kvittering = () => {
     }, [ valgtSoknad ]);
 
     return (
-        <div className='limit'>
+        <div className="limit">
             <Banner brodsmuler={brodsmuler} />
-            <PanelBase border={true}>
-                <SendtTil />
-            </PanelBase>
+            <Kvittering />
 
             <Vis hvis={erSiste}>
-                <Link to='/' className='gaa-videre'>
-                    <Normaltekst tag='span'>
+                <Link to="/" className="gaa-videre">
+                    <Normaltekst tag="span">
                         <VenstreChevron />
                         {tekst('sykepengesoknad.navigasjon.gaa-til')}
                     </Normaltekst>
@@ -51,4 +48,4 @@ const Kvittering = () => {
     )
 };
 
-export default Kvittering;
+export default KvitteringSide;
