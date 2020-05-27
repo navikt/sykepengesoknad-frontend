@@ -1,4 +1,4 @@
-name: Bygg, publish og deploy
+name: Push
 on: push
 env:
   APP: sykepengesok
