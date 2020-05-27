@@ -47,13 +47,6 @@ jobs:
         run: npm run lint
       - name: Run tests
         run: CI=true npm run test
-      - name: Run cypress
-        uses: cypress-io/github-action@v1
-        with:
-          install: false
-          record: false
-          start: npm run start-mock
-          wait-on: http://localhost:8080
       - name: Build application
         run: npm run build
       - name: Docker login
