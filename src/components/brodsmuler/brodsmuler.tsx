@@ -5,6 +5,7 @@ import { Brodsmule } from '../../types/types';
 import personIkon from './person.svg';
 import { Normaltekst } from 'nav-frontend-typografi';
 import './brodsmuler.less';
+import env from '../../utils/environment';
 
 const BrodsmuleBit = ({ sti, tittel, sisteSmule, erKlikkbar }: Brodsmule) => {
     const erEkstern = sti && sti.includes(process.env.REACT_APP_SYKEFRAVAER_CONTEXT_ROOT!);
@@ -65,7 +66,7 @@ const Brodsmuler = ({ brodsmuler }: BrodsmulerProps) => {
                         <Lenke href='/dittnav'>Ditt NAV</Lenke>
                     </li>
                     <li className='smule'>
-                        <Lenke href='/sykefravaer'>Ditt Sykefravær</Lenke>
+                        <Lenke href={env.sykefravaerUrl}>Ditt Sykefravær</Lenke>
                     </li>
 
                     {getVisCollapsed() &&
