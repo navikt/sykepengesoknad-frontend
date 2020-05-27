@@ -1,0 +1,32 @@
+name: Integrasjonstest
+on: pull_request
+env:
+  APP: sykepengesok
+jobs:
+  integrasjonstest:
+    name: integrasjonstest
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v1
+      - name: Cache NPM dependencies
+        uses: actions/cache@v1
+        with:
+          path: node_modules
+          key: ${{ runner.OS }}-npm-cache-${{ hashFiles('**/package-lock.json') }}
+          restore-keys: |
+            ${{ runner.OS }}-npm-cache-
+      - name: Cache Cypress binary
+        uses: actions/cache@v1
+        with:
+          path: ~/.cache/Cypress
+          key: cypress-${{ runner.os }}-cypress-${{ hashFiles('**/package.json') }}
+          restore-keys: |
+            cypress-${{ runner.os }}-cypress-
+      - name: Run cypress
+        uses: cypress-io/github-action@v1
+        with:
+          install: false
+          record: false
+          start: npm run start-mock
+          wait-on: http://localhost:8080
