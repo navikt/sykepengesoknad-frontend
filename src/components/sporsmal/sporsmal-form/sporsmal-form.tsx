@@ -26,6 +26,7 @@ import { sporsmalToRS } from '../../../types/rs-types/rs-sporsmal';
 import { RSOppdaterSporsmalResponse } from '../../../types/rs-types/rest-response/rs-oppdatersporsmalresponse';
 import './sporsmal-form.less';
 import { hentSvar } from '../hent-svar';
+import { logger } from '../../../utils/logger';
 
 export interface SpmProps {
     sporsmal: Sporsmal;
@@ -78,9 +79,11 @@ const SporsmalForm = () => {
                 setSoknader(soknader);
                 setValgtSoknad(soknad);
             } else {
+                logger.error('Feil ved kall OPPDATER_SPORSMAL', res);
                 restFeilet = true;
             }
         } catch (e) {
+            logger.error('Feil ved kall OPPDATER_SPORSMAL', e);
             restFeilet = true;
         }
     };
@@ -100,6 +103,9 @@ const SporsmalForm = () => {
                 } else if (m === RSMottaker.ARBEIDSGIVER_OG_NAV) {
                     setSendTil([ SvarTil.NAV, SvarTil.ARBEIDSGIVER ]);
                 }
+            }
+            else {
+                logger.error('Klarte ikke hente MOTTAKER av søknad', fetchState);
             }
         })
     };
@@ -127,9 +133,11 @@ const SporsmalForm = () => {
                 soknader[ soknader.findIndex(sok => sok.id === valgtSoknad.id) ] = valgtSoknad;
                 setSoknader(soknader);
             } else {
+                logger.error('Feil ved sending av søknad', res);
                 restFeilet = true;
             }
         } catch (e) {
+            logger.error('Feil ved sending av søknad', e);
             restFeilet = true;
         }
     };

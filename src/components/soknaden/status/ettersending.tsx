@@ -6,6 +6,7 @@ import { useAppStore } from '../../../data/stores/app-store';
 import env from '../../../utils/environment';
 import './ettersending.less';
 import { tekst } from '../../../utils/tekster';
+import { logger } from '../../../utils/logger';
 
 interface EttersendingProps {
     gjelder: string;
@@ -32,6 +33,7 @@ const Ettersending = ({ gjelder }: EttersendingProps) => {
             if (res.ok) {
                 setFeilmeldingTekst('')
             } else {
+                logger.error('Feil ved ettersending til NAV', res);
                 setFeilmeldingTekst(tekst('statuspanel.ettersending.feilet'))
             }
         });
@@ -46,6 +48,7 @@ const Ettersending = ({ gjelder }: EttersendingProps) => {
             if (res.ok) {
                 setFeilmeldingTekst('')
             } else {
+                logger.error('Feil ved ettersending til ARBEIDSGIVER', res);
                 setFeilmeldingTekst(tekst('statuspanel.ettersending.feilet'))
             }
         });

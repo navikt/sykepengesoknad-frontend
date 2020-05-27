@@ -30,7 +30,13 @@ const tekster = {
 
 export const tekst = (tekst: string): string => {
     const verdi = tekster[tekst];
-    return verdi ? verdi : undefined;
+    // Generiskfeilmelding har ingen tekst
+    if(!verdi && !tekst.includes('soknad.feilmelding')) {
+        console.log(`Mangler teksten [ ${tekst} ]`);
+        logger.error(`Mangler teksten [ ${tekst} ]`);
+        return undefined;
+    }
+    return verdi;
 };
 
 export const getLedetekst = (text: string, data: any): string => {
