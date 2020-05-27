@@ -108,8 +108,8 @@ describe('Tester frilansersøknad', () => {
         cy.url().should('include', `${soknad.id}/6`);
 
         // Test spørsmål
+        cy.get('.inputPanelGruppe__inner label:first-child > input[value=JA]').click({ force: true });
         cy.contains('Har du arbeidet i utlandet i løpet av de siste 12 månedene?');
-        cy.get('.skjemaelement__label[for=687451_0]').click({ force: true });
 
         cy.contains('Gå videre').click();
     });
