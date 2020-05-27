@@ -1,5 +1,5 @@
 import OpplysningerTekster from '../components/soknaden/opplysninger/opplysninger-tekster';
-import StatusPanelTekster from '../components/soknaden/status/status-panel-tekster';
+import StatusPanelTekster from '../components/kvittering/status-panel-tekster';
 import SoknadIntroTekster from '../components/soknaden/soknad-intro/soknad-intro-tekster';
 import SoknaderTekster from '../pages/soknader/soknader-tekster';
 import BannerTekster from '../components/banner/banner-tekster';
