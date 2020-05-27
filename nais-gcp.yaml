@@ -30,5 +30,6 @@ spec:
     - name: DECORATOR_URL
       value: "https://www.nav.no/dekoratoren"
     - name: ENVIRONMENT
-      value: "q1"
-
+      value: "gcp"
+    - name: SYKEFRAVAER_URL
+      value: "https://sykefravaer.labs.nais.io"

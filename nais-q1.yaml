@@ -32,4 +32,5 @@ spec:
       value: "https://www-q1.nav.no/dekoratoren"
     - name: ENVIRONMENT
       value: "q1"
-
+    - name: SYKEFRAVAER_URL
+      value: "https://tjenester-q1.nav.no/sykefravaer"

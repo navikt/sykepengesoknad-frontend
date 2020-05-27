@@ -45,6 +45,10 @@ class Environment {
     get baseName() {
         return this.env.BASE_NAME
     }
+
+    get sykefravaerUrl() {
+        return this.env.SYKEFRAVAER_URL
+    }
 }
 
 const env = new Environment();
