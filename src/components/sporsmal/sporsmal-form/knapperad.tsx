@@ -8,6 +8,7 @@ import env from '../../../utils/environment';
 import { RSSoknadstatus } from '../../../types/rs-types/rs-soknadstatus';
 import Alertstripe from 'nav-frontend-alertstriper';
 import { tekst } from '../../../utils/tekster';
+import { logger } from '../../../utils/logger';
 
 type Event = MouseEvent<HTMLAnchorElement | HTMLButtonElement>;
 
@@ -43,9 +44,8 @@ const Knapperad = ({ onSubmit }: KnapperadProps) => {
         fetch(env.syfoapiRoot + `/syfosoknad/api/soknader/${valgtSoknad.id}/avbryt`, {
             method: 'POST',
             credentials: 'include',
-        }).then((response) => {
-            return response.status
-        }).then(status => {
+        }).then((res) => {
+            const status = res.status;
             if (status === 200) {
                 const nySoknad = { ...valgtSoknad, status: RSSoknadstatus.AVBRUTT, avbruttDato: new Date() };
                 setSoknader(soknader.map(s => s.id === valgtSoknad.id ? nySoknad : s));
@@ -53,6 +53,7 @@ const Knapperad = ({ onSubmit }: KnapperadProps) => {
                 history.push(`/soknader/${valgtSoknad.id}/1`);
                 setFeilmeldingTekst('');
             } else {
+                logger.error('Feil ved AVBYTING av søknad', res);
                 setFeilmeldingTekst(tekst('sykepengesoknad.avbryt.feilet'))
             }
         })

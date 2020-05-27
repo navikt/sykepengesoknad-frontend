@@ -15,6 +15,7 @@ import Ettersending from './ettersending';
 import { getUrlTilSoknad } from '../../../utils/url-utils';
 import Alertstripe from 'nav-frontend-alertstriper';
 import { tekst } from '../../../utils/tekster';
+import { logger } from '../../../utils/logger';
 
 const StatusPanel = () => {
     const { valgtSoknad, soknader, setSoknader, feilmeldingTekst, setFeilmeldingTekst } = useAppStore();
@@ -34,6 +35,7 @@ const StatusPanel = () => {
                 history.push(getUrlTilSoknad(soknad.id, '1'));
                 setFeilmeldingTekst('');
             } else {
+                logger.error('Feil ved opprettelse av UTKAST_TIL_KORRIGERING', fetchState);
                 setFeilmeldingTekst(tekst('statuspanel.korrigering.feilet'));
             }
         });

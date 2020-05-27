@@ -10,6 +10,7 @@ import { unleashKeys } from './mock/data/toggles';
 import IngenData from '../pages/feil/ingen-data';
 import env from '../utils/environment';
 import { UnleashToggles } from '../types/types';
+import { logger } from '../utils/logger';
 
 export function DataFetcher(props: { children: any }) {
     const { setUnleash, setSoknader, setSykmeldinger } = useAppStore();
@@ -61,6 +62,7 @@ export function DataFetcher(props: { children: any }) {
         window.location.href = `${hentLoginUrl()}?redirect=${window.location.href}`;
 
     } else if (hasAnyFailed([ unleash, rssoknader, sykmeldinger ])) {
+        logger.error('Klarer ikke hente en av disse [ unleash, rssoknader, sykmeldinger ]');
         return <IngenData />;
     }
 

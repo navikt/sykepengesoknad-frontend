@@ -10,6 +10,8 @@ interface StartIgjenProps {
     soknad: Soknad;
 }
 
+// TODO: Skal denne brukes, eller kan den fjernes?
+
 const StartIgjen = ({ soknad }: StartIgjenProps) => {
 
     useEffect(() => {

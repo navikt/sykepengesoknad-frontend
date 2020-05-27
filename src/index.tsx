@@ -14,7 +14,15 @@ if (env.mockBackend === 'true') {
 
 ReactDOM.render(
     <BrowserRouter basename={env.baseName}>
-        <App />
+        <App/>
     </BrowserRouter>
     , document.getElementById('root') as HTMLElement
 );
+
+if (env.isQ1 || env.isProd) {
+    const src = '/frontendlogger/logger.js';
+    const script = document.createElement('script');
+    script.src = src;
+    script.async = true;
+    document.body.appendChild(script);
+}

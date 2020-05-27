@@ -13,7 +13,7 @@ const SykSokLokalt = () => {
     }
 
     return (
-        <Vis hvis={env.isDevelopment}>
+        <Vis hvis={env.isDev}>
             <div>
                 <span>sok <strong>{
                     valgtSoknad &&
