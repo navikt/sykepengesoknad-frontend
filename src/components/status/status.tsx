@@ -1,9 +1,9 @@
 import React from 'react';
 import { EtikettLiten, Normaltekst } from 'nav-frontend-typografi';
-import { useAppStore } from '../../../data/stores/app-store';
-import Vis from '../../vis';
-import { tilLesbarDatoMedArstall } from '../../../utils/dato-utils';
-import { getLedetekst, tekst } from '../../../utils/tekster';
+import { useAppStore } from '../../data/stores/app-store';
+import Vis from '../vis';
+import { tilLesbarDatoMedArstall } from '../../utils/dato-utils';
+import { getLedetekst, tekst } from '../../utils/tekster';
 
 const Status = () => {
     const { valgtSoknad } = useAppStore();

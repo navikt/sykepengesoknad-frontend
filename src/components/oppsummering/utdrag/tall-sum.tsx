@@ -1,10 +1,10 @@
 import React from 'react';
 import { Element, Normaltekst } from 'nav-frontend-typografi';
-import { RSSvartype } from '../../../../types/rs-types/rs-svartype';
+import { RSSvartype } from '../../../types/rs-types/rs-svartype';
 import { OppsummeringProps } from '../oppsummering';
-import { empty } from '../../../../utils/constants';
-import Vis from '../../../vis';
-import { tekst } from '../../../../utils/tekster';
+import { empty } from '../../../utils/constants';
+import Vis from '../../vis';
+import { tekst } from '../../../utils/tekster';
 
 const TallSum = ({ sporsmal }: OppsummeringProps) => {
     const labelnokkel = sporsmal.svartype === RSSvartype.TIMER ? 'soknad.timer-totalt' : 'soknad.prosent';

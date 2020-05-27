@@ -1,6 +1,6 @@
-import OpplysningerTekster from '../components/soknaden/opplysninger/opplysninger-tekster';
-import StatusPanelTekster from '../components/kvittering/status-panel-tekster';
-import SoknadIntroTekster from '../components/soknaden/soknad-intro/soknad-intro-tekster';
+import OpplysningerTekster from '../components/opplysninger/opplysninger-tekster';
+import StatusPanelTekster from '../components/status-panel/status-panel-tekster';
+import SoknadIntroTekster from '../components/soknad-intro/soknad-intro-tekster';
 import SoknaderTekster from '../pages/soknader/soknader-tekster';
 import BannerTekster from '../components/banner/banner-tekster';
 import BjornTekster from '../components/sporsmal/bjorn/bjorn-tekster';
@@ -9,7 +9,7 @@ import SoknadenTekster from '../pages/soknad/soknaden-tekster';
 import SporsmalTekster from '../components/sporsmal/sporsmal-tekster';
 import TeaserTekster from '../components/soknader/teaser/teaser-tekster';
 import UtbetalingerTekster from '../components/soknader/utbetalinger/utbetalinger-tekster';
-import OppsummeringTekster from '../components/soknaden/oppsummering/oppsummering-tekster';
+import OppsummeringTekster from '../components/oppsummering/oppsummering-tekster';
 import { logger } from './logger';
 
 const tekster = {

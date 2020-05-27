@@ -1,7 +1,7 @@
 import React from 'react';
-import StatusPanel from './status-panel';
-import Opplysninger from '../../components/soknaden/opplysninger/opplysninger';
-import Oppsummering from '../../components/soknaden/oppsummering/oppsummering';
+import StatusPanel from './status-panel/status-panel';
+import Opplysninger from './opplysninger/opplysninger';
+import Oppsummering from './oppsummering/oppsummering';
 
 const Kvittering = () => {
 

@@ -1,8 +1,8 @@
 import React from 'react';
 import { EtikettLiten, Normaltekst } from 'nav-frontend-typografi';
-import { useAppStore } from '../../../data/stores/app-store';
+import { useAppStore } from '../../data/stores/app-store';
 import dayjs from 'dayjs';
-import { tekst } from '../../../utils/tekster';
+import { tekst } from '../../utils/tekster';
 
 const SykmeldingDato = () => {
     const { valgtSykmelding } = useAppStore();

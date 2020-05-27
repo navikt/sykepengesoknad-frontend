@@ -1,7 +1,7 @@
 import React from 'react';
 import { Element } from 'nav-frontend-typografi';
 import parser from 'html-react-parser';
-import SporsmalSwitch from '../../../sporsmal/sporsmal-switch';
+import SporsmalSwitch from '../../sporsmal/sporsmal-switch';
 import { OppsummeringProps } from '../oppsummering';
 
 const UndertekstSum = ({ sporsmal }: OppsummeringProps) => {

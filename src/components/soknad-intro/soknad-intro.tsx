@@ -3,8 +3,8 @@ import { Normaltekst } from 'nav-frontend-typografi';
 import Veilederpanel from 'nav-frontend-veilederpanel';
 import parser from 'html-react-parser';
 import ForsteSoknadSvg from './soknad-intro-svg';
+import { tekst } from '../../utils/tekster';
 import './soknad-intro.less';
-import { tekst } from '../../../utils/tekster';
 
 const SoknadIntro = () => {
     return (

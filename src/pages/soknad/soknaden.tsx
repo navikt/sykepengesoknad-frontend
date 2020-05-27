@@ -7,8 +7,8 @@ import { RSSoknadstatus } from '../../types/rs-types/rs-soknadstatus';
 import Banner from '../../components/banner/banner';
 import { useAppStore } from '../../data/stores/app-store';
 import { HotjarTrigger } from '../../components/hotjar-trigger';
-import SoknadIntro from '../../components/soknaden/soknad-intro/soknad-intro';
-import Opplysninger from '../../components/soknaden/opplysninger/opplysninger';
+import SoknadIntro from '../../components/soknad-intro/soknad-intro';
+import Opplysninger from '../../components/opplysninger/opplysninger';
 import { setBodyClass } from '../../utils/utils';
 import Vis from '../../components/vis';
 import SporsmalForm from '../../components/sporsmal/sporsmal-form/sporsmal-form';
@@ -17,7 +17,7 @@ import { hentNokkel } from '../../components/sporsmal/sporsmal-utils';
 import { SEPARATOR } from '../../utils/constants';
 import AlertStripe from 'nav-frontend-alertstriper';
 import { tekst } from '../../utils/tekster';
-import Kvittering from '../../components/kvittering/kvittering';
+import Kvittering from '../../components/kvittering';
 import './soknaden.less';
 
 const brodsmuler: Brodsmule[] = [ {

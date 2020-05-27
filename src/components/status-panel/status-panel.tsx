@@ -7,13 +7,13 @@ import env from '../../utils/environment';
 import { Soknad } from '../../types/types';
 import { logger } from '../../utils/logger';
 import { tekst } from '../../utils/tekster';
-import Status from '../soknaden/status/status';
+import Status from '../status/status';
 import useFetch from '../../data/rest/use-fetch';
-import Utbetaling from '../soknaden/status/utbetaling';
+import Utbetaling from '../status/utbetaling';
 import { getUrlTilSoknad } from '../../utils/url-utils';
 import { useAppStore } from '../../data/stores/app-store';
 import { RSSoknad } from '../../types/rs-types/rs-soknad';
-import Ettersending from '../soknaden/status/ettersending';
+import Ettersending from '../status/ettersending';
 import { FetchState, hasData } from '../../data/rest/utils';
 import './status-panel.less';
 

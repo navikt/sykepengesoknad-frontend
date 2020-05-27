@@ -14,7 +14,7 @@ import SendtTil from './sendt-til';
 import { SEPARATOR } from '../../../utils/constants';
 import { RSSoknadstatus } from '../../../types/rs-types/rs-soknadstatus';
 import { SvarTil } from '../../../types/enums';
-import Oppsummering from '../../soknaden/oppsummering/oppsummering';
+import Oppsummering from '../../oppsummering/oppsummering';
 import { settSvar } from '../sett-svar';
 import { useAmplitudeInstance } from '../../amplitude/amplitude';
 import env from '../../../utils/environment';

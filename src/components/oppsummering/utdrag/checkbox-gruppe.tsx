@@ -1,7 +1,7 @@
 import React from 'react';
 import { Element } from 'nav-frontend-typografi';
 import { OppsummeringProps, SporsmalVarianter } from '../oppsummering';
-import { Sporsmal } from '../../../../types/types';
+import { Sporsmal } from '../../../types/types';
 
 const CheckboxGruppe = ({ sporsmal }: OppsummeringProps) => {
     return (

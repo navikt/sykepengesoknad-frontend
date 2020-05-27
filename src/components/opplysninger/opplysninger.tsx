@@ -4,13 +4,13 @@ import SykmeldingPerioder from './sykmelding-perioder';
 import ArbeidsgiverInfo from './arbeidsgiver-info';
 import SykmeldingDato from './sykmelding-dato';
 import SelvstendigInfo from './selvstendig-info';
-import { useAppStore } from '../../../data/stores/app-store';
-import { RSSoknadstatus } from '../../../types/rs-types/rs-soknadstatus';
+import { useAppStore } from '../../data/stores/app-store';
+import { RSSoknadstatus } from '../../types/rs-types/rs-soknadstatus';
 import plaster from './plaster.svg';
 import plasterHover from './plaster-hover.svg';
-import Utvidbar from '../../utvidbar';
+import Utvidbar from '../utvidbar';
+import { tekst } from '../../utils/tekster';
 import './opplysninger.less';
-import { tekst } from '../../../utils/tekster';
 
 interface OpplysningerProps {
     ekspandert: boolean;

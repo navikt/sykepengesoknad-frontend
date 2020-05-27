@@ -1,12 +1,12 @@
-import { Knapp } from 'nav-frontend-knapper';
-import Alertstripe from 'nav-frontend-alertstriper';
 import React, { useState } from 'react';
+import { Knapp } from 'nav-frontend-knapper';
 import ModalWrapper from 'nav-frontend-modal';
-import { useAppStore } from '../../../data/stores/app-store';
-import env from '../../../utils/environment';
+import Alertstripe from 'nav-frontend-alertstriper';
+import { useAppStore } from '../../data/stores/app-store';
+import env from '../../utils/environment';
+import { tekst } from '../../utils/tekster';
+import { logger } from '../../utils/logger';
 import './ettersending.less';
-import { tekst } from '../../../utils/tekster';
-import { logger } from '../../../utils/logger';
 
 interface EttersendingProps {
     gjelder: string;

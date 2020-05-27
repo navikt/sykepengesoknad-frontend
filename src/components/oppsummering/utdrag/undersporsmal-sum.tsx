@@ -1,6 +1,6 @@
 import React from 'react';
-import { Sporsmal } from '../../../../types/types';
-import Vis from '../../../vis';
+import { Sporsmal } from '../../../types/types';
+import Vis from '../../vis';
 import { SporsmalVarianter } from '../oppsummering';
 
 interface UndersporsmalProps {

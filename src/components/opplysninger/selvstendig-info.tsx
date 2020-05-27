@@ -1,8 +1,8 @@
 import React from 'react';
 import { EtikettLiten, Normaltekst } from 'nav-frontend-typografi';
-import { useAppStore } from '../../../data/stores/app-store';
-import { RSSoknadstype } from '../../../types/rs-types/rs-soknadstype';
-import { tekst } from '../../../utils/tekster';
+import { useAppStore } from '../../data/stores/app-store';
+import { RSSoknadstype } from '../../types/rs-types/rs-soknadstype';
+import { tekst } from '../../utils/tekster';
 
 const SelvstendigInfo = () => {
     const { valgtSoknad } = useAppStore();
