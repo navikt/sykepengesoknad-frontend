@@ -31,7 +31,7 @@ const Soknader = () => {
 
     const tidligereSoknader = soknader
         .filter((soknad) =>
-            soknad.status === RSSoknadstatus.SENDT || soknad.status === RSSoknadstatus.AVBRUTT
+            soknad.status === RSSoknadstatus.SENDT || soknad.status === RSSoknadstatus.AVBRUTT || soknad.status === RSSoknadstatus.UTGAATT
         ).sort(sorterEtterPerioder);
 
     const fremtidigeSoknader = soknader
