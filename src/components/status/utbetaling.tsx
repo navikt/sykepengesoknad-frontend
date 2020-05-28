@@ -6,7 +6,7 @@ import { tekst } from '../../utils/tekster';
 const Utbetaling = () => {
     return (
         <div className='avsnitt'>
-            <EtikettLiten tag='h3' className='avsnitt-hode'>{tekst('statuspanel.utbetaling.tittel')}</EtikettLiten>
+            <EtikettLiten tag='h3' className='avsnitt-hode'>{tekst('kvittering.utbetaling.tittel')}</EtikettLiten>
             <Normaltekst>{parser(tekst('sykepengesoknad.sykepengeinfo.til-nav'))}</Normaltekst>
         </div>
     );

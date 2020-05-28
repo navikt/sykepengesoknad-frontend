@@ -10,7 +10,7 @@ const Status = () => {
 
     return (
         <div className='avsnitt'>
-            <EtikettLiten tag='h3' className='avsnitt-hode'>{tekst('statuspanel.status')}</EtikettLiten>
+            <EtikettLiten tag='h3' className='avsnitt-hode'>{tekst('kvittering.status')}</EtikettLiten>
             <Vis hvis={valgtSoknad!.sendtTilNAVDato}>
                 <Normaltekst>
                     {getLedetekst(tekst('soknad.teaser.status.SENDT.til-nav'), {

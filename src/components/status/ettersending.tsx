@@ -34,7 +34,7 @@ const Ettersending = ({ gjelder }: EttersendingProps) => {
                 setFeilmeldingTekst('')
             } else {
                 logger.error('Feil ved ettersending til NAV', res);
-                setFeilmeldingTekst(tekst('statuspanel.ettersending.feilet'))
+                setFeilmeldingTekst(tekst('kvittering.ettersending.feilet'))
             }
         });
     };
@@ -49,7 +49,7 @@ const Ettersending = ({ gjelder }: EttersendingProps) => {
                 setFeilmeldingTekst('')
             } else {
                 logger.error('Feil ved ettersending til ARBEIDSGIVER', res);
-                setFeilmeldingTekst(tekst('statuspanel.ettersending.feilet'))
+                setFeilmeldingTekst(tekst('kvittering.ettersending.feilet'))
             }
         });
     };
@@ -67,7 +67,7 @@ const Ettersending = ({ gjelder }: EttersendingProps) => {
         <Knapp mini type='standard' onClick={() => {
             setVilEttersende(true)
         }}>
-            {tekst(`statuspanel.knapp.send-${gjelder}`)}
+            {tekst(`kvittering.knapp.send-${gjelder}`)}
         </Knapp>
 
         <ModalWrapper onRequestClose={() => setVilEttersende(false)}
@@ -75,15 +75,15 @@ const Ettersending = ({ gjelder }: EttersendingProps) => {
             contentLabel='ettersending'
             isOpen={vilEttersende}
         >
-            <h3 className="modal__tittel">{hentTekst('statuspanel.tittel.send-til')}</h3>
-            <Alertstripe type="info">{hentTekst('statuspanel.info.send-til')}</Alertstripe>
+            <h3 className="modal__tittel">{hentTekst('kvittering.tittel.send-til')}</h3>
+            <Alertstripe type="info">{hentTekst('kvittering.info.send-til')}</Alertstripe>
             <div className="blokk-xs">
                 <button className="knapp knapp--hoved lenke" onClick={() => ettersend()}>
-                    {hentTekst('statuspanel.knapp.bekreft.send-til')}
+                    {hentTekst('kvittering.knapp.bekreft.send-til')}
                 </button>
             </div>
             <button className="lenke" onClick={() => setVilEttersende(false)}>
-                {tekst('statuspanel.knapp.angre')}
+                {tekst('kvittering.knapp.angre')}
             </button>
         </ModalWrapper>
     </>);

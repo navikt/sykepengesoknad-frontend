@@ -1,23 +1,25 @@
 import React from 'react';
-import { useHistory } from 'react-router';
+import Opplysninger from '../opplysninger/opplysninger';
+import Oppsummering from '../oppsummering/oppsummering';
 import { Knapp } from 'nav-frontend-knapper';
-import Alertstripe from 'nav-frontend-alertstriper';
+import { tekst } from '../../utils/tekster';
+import Ettersending from '../status/ettersending';
 import Vis from '../vis';
 import env from '../../utils/environment';
-import { Soknad } from '../../types/types';
-import { logger } from '../../utils/logger';
-import { tekst } from '../../utils/tekster';
-import Status from '../status/status';
-import useFetch from '../../data/rest/use-fetch';
-import Utbetaling from '../status/utbetaling';
-import { getUrlTilSoknad } from '../../utils/url-utils';
-import { useAppStore } from '../../data/stores/app-store';
-import { RSSoknad } from '../../types/rs-types/rs-soknad';
-import Ettersending from '../status/ettersending';
 import { FetchState, hasData } from '../../data/rest/utils';
-import './status-panel.less';
+import { RSSoknad } from '../../types/rs-types/rs-soknad';
+import { Soknad } from '../../types/types';
+import { getUrlTilSoknad } from '../../utils/url-utils';
+import { logger } from '../../utils/logger';
+import { useAppStore } from '../../data/stores/app-store';
+import useFetch from '../../data/rest/use-fetch';
+import { useHistory } from 'react-router';
+import Status from '../status/status';
+import Utbetaling from '../status/utbetaling';
+import Alertstripe from 'nav-frontend-alertstriper';
+import './kvittering.less';
 
-const StatusPanel = () => {
+const Kvittering = () => {
     const { valgtSoknad, soknader, setSoknader, feilmeldingTekst, setFeilmeldingTekst } = useAppStore();
     const korrigerSoknad = useFetch<RSSoknad>();
     const history = useHistory();
@@ -32,29 +34,32 @@ const StatusPanel = () => {
                 const soknad = new Soknad(fetchState.data);
                 soknader.push(soknad);
                 setSoknader(soknader);
-                history.push(getUrlTilSoknad(soknad.id, '1'));
+                history.push(getUrlTilSoknad(soknad.id, undefined));
                 setFeilmeldingTekst('');
             } else {
                 logger.error('Feil ved opprettelse av UTKAST_TIL_KORRIGERING', fetchState);
-                setFeilmeldingTekst(tekst('statuspanel.korrigering.feilet'));
+                setFeilmeldingTekst(tekst('kvittering.korrigering.feilet'));
             }
         });
     };
 
     return (
-        <div className='panel status-panel'>
-            <Vis hvis={valgtSoknad!.sendtTilNAVDato || valgtSoknad!.sendtTilArbeidsgiverDato}>
-                <Status/>
-                <Utbetaling/>
+        <div>
+            <Vis hvis={valgtSoknad.sendtTilNAVDato || valgtSoknad.sendtTilArbeidsgiverDato}>
+                <Status />
+                <Utbetaling />
             </Vis>
 
+            <Opplysninger ekspandert={false} />
+            <Oppsummering />
+
             <div className='knapperad'>
-                <Knapp mini type='standard' onClick={korriger}>{tekst('statuspanel.knapp.endre')}</Knapp>
+                <Knapp mini type='standard' onClick={korriger}>{tekst('kvittering.knapp.endre')}</Knapp>
 
-                <Ettersending gjelder='nav'/>
+                <Ettersending gjelder='nav' />
 
-                <Vis hvis={valgtSoknad!.arbeidsgiver !== undefined}>
-                    <Ettersending gjelder='arbeidsgiver'/>
+                <Vis hvis={valgtSoknad.arbeidsgiver !== undefined}>
+                    <Ettersending gjelder='arbeidsgiver' />
                 </Vis>
             </div>
 
@@ -64,7 +69,7 @@ const StatusPanel = () => {
                 </Vis>
             </div>
         </div>
-    );
+    )
 };
 
-export default StatusPanel;
+export default Kvittering;

@@ -1,5 +1,5 @@
 import OpplysningerTekster from '../components/opplysninger/opplysninger-tekster';
-import StatusPanelTekster from '../components/status-panel/status-panel-tekster';
+import KvitteringTekster from '../components/kvittering/kvittering-tekster';
 import SoknadIntroTekster from '../components/soknad-intro/soknad-intro-tekster';
 import SoknaderTekster from '../pages/soknader/soknader-tekster';
 import BannerTekster from '../components/banner/banner-tekster';
@@ -14,7 +14,7 @@ import { logger } from './logger';
 
 const tekster = {
     ...OpplysningerTekster.nb,
-    ...StatusPanelTekster.nb,
+    ...KvitteringTekster.nb,
     ...SoknadIntroTekster.nb,
     ...SoknaderTekster.nb,
     ...BannerTekster.nb,

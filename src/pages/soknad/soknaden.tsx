@@ -17,7 +17,7 @@ import { hentNokkel } from '../../components/sporsmal/sporsmal-utils';
 import { SEPARATOR } from '../../utils/constants';
 import AlertStripe from 'nav-frontend-alertstriper';
 import { tekst } from '../../utils/tekster';
-import Kvittering from '../../components/kvittering';
+import Kvittering from '../../components/kvittering/kvittering';
 import './soknaden.less';
 
 const brodsmuler: Brodsmule[] = [ {
@@ -31,8 +31,7 @@ const brodsmuler: Brodsmule[] = [ {
 } ];
 
 const Soknaden = () => {
-    const { soknader, setValgtSoknad, sykmeldinger, setValgtSykmelding } = useAppStore();
-    const { valgtSoknad } = useAppStore();
+    const { soknader, valgtSoknad, setValgtSoknad, sykmeldinger, setValgtSykmelding } = useAppStore();
     const { id } = useParams();
 
     useEffect(() => {

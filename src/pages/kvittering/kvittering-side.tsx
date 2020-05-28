@@ -6,11 +6,11 @@ import { SEPARATOR } from '../../utils/constants';
 import { setBodyClass } from '../../utils/utils';
 import { useAppStore } from '../../data/stores/app-store';
 import Vis from '../../components/vis';
-import { RSSoknadstatus } from '../../types/rs-types/rs-soknadstatus';
 import { Normaltekst } from 'nav-frontend-typografi';
 import { Link } from 'react-router-dom';
 import { tekst } from '../../utils/tekster';
-import Kvittering from '../../components/kvittering';
+import Kvittering from '../../components/kvittering/kvittering';
+import { RSSoknadstatus } from '../../types/rs-types/rs-soknadstatus';
 import './kvittering.less';
 
 const brodsmuler: Brodsmule[] = [ {
