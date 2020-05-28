@@ -1,5 +1,4 @@
 import { Soknad, Sporsmal } from '../types/types';
-import { PERIODE_SKILLE } from './constants';
 
 export const getSendtTilSuffix = (soknad: Soknad) => {
     if (soknad.sendtTilArbeidsgiverDato && soknad.sendtTilNAVDato) {
@@ -25,21 +24,6 @@ export const getRiktigDato = (soknad: Soknad) => {
         return soknad.sendtTilNAVDato;
     }
     return '';
-};
-
-export const svarVerdi = (sporsmal: Sporsmal): string => {
-    if (sporsmal.svarliste.svar.length > 0) {
-        return sporsmal.svarliste.svar[0].verdi;
-    }
-    return '';
-};
-
-export const periodeVerdi = (sporsmal: Sporsmal): string[] => {
-    const svar = svarVerdi(sporsmal);
-    if (svar.includes(PERIODE_SKILLE)) {
-        return svar.split(PERIODE_SKILLE);
-    }
-    return [];
 };
 
 export const flattenSporsmal = (sporsmal: Sporsmal[]) => {

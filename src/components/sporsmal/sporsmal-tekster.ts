@@ -116,6 +116,7 @@ const SporsmalTekster: any = {
         'soknad.hjelpetekst.PERMISJON_V2': 'Du må svare på om du tok ut permisjon',
         'soknad.hjelpetekst.PERMISJON_NAR': 'Du må oppgi hvilke dager du hadde permisjon',
         'soknad.hjelpetekst.PERMISJON_NAR_V2': 'Du må oppgi hvilke dager du hadde permisjon',
+        'soknad.hjelpetekst.EGENMELDINGER' : 'Vi spør om dette for å kunne behandle søknaden din riktig. Egenmeldinger blir bare registrert hos arbeidsgiveren din, og eventuelle sykmeldinger på papir kan det ta litt tid for oss å registrere.',
 
         'sykepengesoknad.periodevelger.legg-til-ekstra': '+ Legg til ekstra periode',
         'sykepengesoknad.periodevelger.slett': 'Slett periode',

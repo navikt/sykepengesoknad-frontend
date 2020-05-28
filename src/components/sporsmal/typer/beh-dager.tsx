@@ -17,7 +17,7 @@ const BehDager = ({ sporsmal }: SpmProps) => {
     useEffect(() => {
         const lagret: RSSvarliste[] = hentSvar(sporsmal);
         lagret.forEach((liste, idx) => {
-            if (liste.svar[0] !== undefined) {
+            if (liste.svar[0] !== undefined && liste.svar[0].verdi !== '') {
                 lokal[idx] = liste.svar[0].verdi;
                 const radio = document.querySelector('.radioknapp[value="' + lokal[idx] + '"]');
                 radio.setAttribute('checked', 'checked');
@@ -29,7 +29,7 @@ const BehDager = ({ sporsmal }: SpmProps) => {
     }, [ sporsmal ]);
 
     const dagerSidenMandag = (spm: Sporsmal) => {
-        return (((new Date(spm.min).getDay() - 1) % 7) + 7) % 7;
+        return ((new Date(spm.min).getDay() - 1) % 7);
     };
 
     const dagerTilFredag = (spm: Sporsmal) => {
