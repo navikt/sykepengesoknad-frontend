@@ -33,9 +33,11 @@ export const sorterEtterPerioder = (soknad1: Soknad, soknad2: Soknad) => {
 };
 
 export const sorterEtterOpprettetDato = (soknad1: Soknad, soknad2: Soknad) => {
-    return lagDato(soknad1.opprettetDato).getTime() !== lagDato(soknad2.opprettetDato).getTime()
-        ? lagDato(soknad1.opprettetDato).getTime() - lagDato(soknad2.opprettetDato).getTime()
-        : lagDato(soknad1.fom!).getTime() - lagDato(soknad2.fom!).getTime();
+    if (lagDato(soknad1.opprettetDato).getTime() !== lagDato(soknad2.opprettetDato).getTime()) {
+        return lagDato(soknad1.opprettetDato).getTime() - lagDato(soknad2.opprettetDato).getTime();
+    } else {
+        return lagDato(soknad1.fom || soknad1.opprettetDato).getTime() - lagDato(soknad2.fom || soknad2.opprettetDato).getTime();
+    }
 };
 
 const lagDato = (dato: string | Date): Date => {

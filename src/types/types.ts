@@ -137,8 +137,8 @@ export class Soknad {
     sykmeldingId: string;
     soknadstype: RSSoknadstype;
     status: RSSoknadstatus;
-    fom: Date;
-    tom: Date;
+    fom?: Date;
+    tom?: Date;
     avbruttDato?: Date;
     opprettetDato: Date;
     sendtTilNAVDato?: Date;
