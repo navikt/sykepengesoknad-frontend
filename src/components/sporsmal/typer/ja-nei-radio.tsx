@@ -32,6 +32,17 @@ const JaNeiRadio = ({ sporsmal }: SpmProps) => {
         setLokal(lokal === value ? '' : value);
     };
 
+    const presisering = (valgt: boolean) => {
+        const spm = sporsmal;
+        return (spm.tag && spm.tag.startsWith('INNTEKTSKILDE_') && lokal === 'JA' && valgt)
+            ? <div className='presisering'>
+                <Normaltekst tag='span'>
+                    {tekst('soknad.presisering.' + spm.tag)}
+                </Normaltekst>
+            </div>
+            : <></>
+    };
+
     return (
         <>
             <div className={sporsmal.parentKriterie
@@ -58,13 +69,7 @@ const JaNeiRadio = ({ sporsmal }: SpmProps) => {
                             <label className='skjemaelement__label' htmlFor={sporsmal.id + '_' + idx}>
                                 {valg.label}
                             </label>
-                            <Vis hvis={sporsmal.tag && sporsmal.tag.startsWith('INNTEKTSKILDE_') && lokal === 'JA' && OK}>
-                                <div className='presisering'>
-                                    <Normaltekst tag='span'>
-                                        {tekst('soknad.presisering.' + sporsmal.tag)}
-                                    </Normaltekst>
-                                </div>
-                            </Vis>
+                            {presisering(OK)}
                         </div>
                     )
                 })}

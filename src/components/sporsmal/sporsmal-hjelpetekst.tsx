@@ -3,7 +3,6 @@ import Hjelpetekst from 'nav-frontend-hjelpetekst';
 import { TagTyper } from '../../types/enums';
 import { fjernIndexFraTag } from './sporsmal-utils';
 import { SpmProps } from './sporsmal-form/sporsmal-form';
-import Vis from '../vis';
 import { tekst } from '../../utils/tekster';
 
 const SporsmalHjelpetekst = ({ sporsmal }: SpmProps) => {
@@ -12,15 +11,11 @@ const SporsmalHjelpetekst = ({ sporsmal }: SpmProps) => {
         sporsmal.tag === TagTyper.FERIE_PERMISJON_UTLAND ||
         sporsmal.tag === TagTyper.FERIE_V2;
 
-    const nokkel = fjernIndexFraTag(sporsmal.tag).toLowerCase();
+    const nokkel = fjernIndexFraTag(sporsmal.tag);
 
-    return (
-        <Vis hvis={vis}>
-            <Hjelpetekst>
-                {tekst(`soknad.hjelpetekst.${nokkel}`)}
-            </Hjelpetekst>
-        </Vis>
-    )
+    return vis
+        ? <Hjelpetekst> {tekst(`soknad.hjelpetekst.${nokkel}`)} </Hjelpetekst>
+        : <></>
 };
 
 export default SporsmalHjelpetekst;
