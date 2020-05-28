@@ -3,14 +3,14 @@ import { OppsummeringProps } from '../oppsummering';
 import { Element, Normaltekst } from 'nav-frontend-typografi';
 import Vis from '../../../vis';
 import dayjs from 'dayjs';
-import { empty } from '../../../../utils/constants';
 import { tilLesbarPeriodeUtenArstall } from '../../../../utils/dato-utils';
+import { RSSvar } from '../../../../types/rs-types/rs-svar';
 
-const datoEllerIkkeTilBehandling = (verdi: string) => {
-    if (verdi === '') {
+const datoEllerIkkeTilBehandling = (svar: RSSvar) => {
+    if (svar === undefined || svar.verdi === '') {
         return 'Ikke til behandling';
     }
-    return dayjs(verdi).format('DD.MM.YYYY');
+    return dayjs(svar.verdi).format('DD.MM.YYYY');
 };
 
 const Behandlingsdager = ({ sporsmal }: OppsummeringProps) => {
@@ -26,17 +26,9 @@ const Behandlingsdager = ({ sporsmal }: OppsummeringProps) => {
                                     <div className='oppsummering__sporsmal' key={idx}>
                                         <Element tag='h3'>{tilLesbarPeriodeUtenArstall(uspm.min, uspm.max)}</Element>
                                         <div className='oppsummering__tekstsvar'>
-                                            {uspm.svarliste.svar.map((svarverdi, index) => {
-                                                return (
-                                                    <Vis
-                                                        hvis={svarverdi.verdi !== empty}
-                                                        key={index}>
-                                                        <Normaltekst className='oppsummering__dato'>
-                                                            {datoEllerIkkeTilBehandling(svarverdi.verdi.toString())}
-                                                        </Normaltekst>
-                                                    </Vis>
-                                                );
-                                            })}
+                                            <Normaltekst className='oppsummering__dato'>
+                                                {datoEllerIkkeTilBehandling(uspm.svarliste.svar[ 0 ])}
+                                            </Normaltekst>
                                         </div>
                                     </div>
                                 );
