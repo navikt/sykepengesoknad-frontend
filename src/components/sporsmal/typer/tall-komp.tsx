@@ -36,6 +36,8 @@ const TallInput = ({ sporsmal }: SpmProps) => {
                     className='skjemaelement__input input--xs'
                     name={sporsmal.id}
                     id={sporsmal.id}
+                    min={sporsmal.min}
+                    max={sporsmal.max}
                     ref={register({
                         required: feilmelding.global,
                         min: {
