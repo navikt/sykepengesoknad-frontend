@@ -1,9 +1,35 @@
-@import '../../node_modules/nav-frontend-core/less/_variabler';
-@import '../basic';
+@import '../../../node_modules/nav-frontend-core/less/_variabler';
+@import '../../basic';
 
 .utvidbar {
     border: 1px solid @navGra40;
     border-radius: 2px;
+    margin: 2rem 0;
+
+    &.intern {
+        border: 0;
+        margin: 1rem 0;
+
+        .utvidbar__toggle {
+            width: auto;
+            padding: 0;
+            background-color: @white;
+            color: @navBla;
+
+            &:hover {
+                text-decoration: underline;
+            }
+        }
+
+        .utvidbar__handling {
+            padding-top: 5px;
+
+            em {
+                visibility: hidden;
+                font-size: 0;
+            }
+        }
+    }
 
     .utvidbar__toggle {
         display: flex;
@@ -66,6 +92,11 @@
         .utvidbar__toggle {
             border-bottom: 1px solid @navGra40;
             text-decoration: none;
+        }
+        &.intern {
+            .utvidbar__toggle {
+                border: 0;
+            }
         }
     }
 }

@@ -1,14 +1,15 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { Element, Normaltekst } from 'nav-frontend-typografi';
-import { erSynligIViewport } from '../utils/browser-utils';
+import { erSynligIViewport } from '../../utils/browser-utils';
 import Chevron from 'nav-frontend-chevron';
 import './utvidbar.less';
+import Vis from '../vis';
 
 interface UtvidbarProps {
     erApen: boolean;
     tittel: React.ReactNode | string;
     children: React.ReactNode;
-    ikon: string;
+    ikon?: string;
     ikonHover?: string;
     ikonAltTekst?: string;
     className?: string;
@@ -48,14 +49,18 @@ const Utvidbar = (props: UtvidbarProps) => {
                 ref={jsToggle}
                 onMouseEnter={() => btnImage.current!.src = props.ikonHover!}
                 onMouseLeave={() => btnImage.current!.src = props.ikon!}
+                onMouseEnter={props.ikon !== undefined ? () => btnImage.current.src = props.ikonHover : null}
+                onMouseLeave={props.ikon !== undefined ? () => btnImage.current.src = props.ikon : null}
                 onClick={() => setErApen(!erApen)}
                 className='utvidbar__toggle'
             >
-                <img aria-hidden='true' className='utvidbar__ikon'
-                    ref={btnImage}
-                    alt={props.ikonAltTekst}
-                    src={props.ikon}
-                />
+                <Vis hvis={props.ikon !== undefined}>
+                    <img aria-hidden='true' className='utvidbar__ikon'
+                        ref={btnImage}
+                        alt={props.ikonAltTekst}
+                        src={props.ikon}
+                    />
+                </Vis>
                 <Element tag='h3'>{props.tittel}</Element>
                 <div className='utvidbar__handling'>
                     <Normaltekst tag='em'>
@@ -64,6 +69,7 @@ const Utvidbar = (props: UtvidbarProps) => {
                     <Chevron type={erApen ? 'opp' : 'ned'} />
                 </div>
             </button>
+
             <div ref={container} className={'utvidbar__innholdContainer' + (erApen ? ' apen' : '')}
                 onTransitionEnd={() => onTransitionEnd()} style={{ maxHeight: erApen ? (innholdHeight + 2) + 'px' : '0' }}
             >
