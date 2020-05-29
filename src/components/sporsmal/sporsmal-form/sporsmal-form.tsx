@@ -163,7 +163,7 @@ const SporsmalForm = () => {
         }
 
         if (restFeilet) {
-            methods.setError('syfosoknad', 'rest-feilet', 'Opps');
+            methods.setError('syfosoknad', 'rest-feilet', 'Beklager, det oppstod en feil');
             sporsmal = valgtSoknad!.sporsmal[ spmIndex ];
         } else {
             methods.clearError();
