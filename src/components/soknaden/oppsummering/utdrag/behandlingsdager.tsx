@@ -6,7 +6,7 @@ import { tilLesbarDatoUtenAarstall, tilLesbarPeriodeUtenArstall } from '../../..
 import { RSSvar } from '../../../../types/rs-types/rs-svar';
 
 const datoEllerIkkeTilBehandling = (svar: RSSvar) => {
-    if (svar === undefined || svar.verdi === '') {
+    if (svar === undefined || svar.verdi === '' || svar.verdi === 'Ikke til behandling') {
         return 'Ikke til behandling';
     }
     return tilLesbarDatoUtenAarstall(svar.verdi);

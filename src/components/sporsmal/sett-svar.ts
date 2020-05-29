@@ -30,6 +30,9 @@ export const settSvar = (sporsmal: Sporsmal, verdier: Record<string, any>): void
         case RSSvartype.RADIO_GRUPPE_TIMER_PROSENT:
             radiogruppeSvar(sporsmal, verdi);
             break;
+        case RSSvartype.RADIO_GRUPPE_UKEKALENDER:
+            ukekalenderSvar(sporsmal, verdi);
+            break;
         case RSSvartype.DATO:
             datoSvar(sporsmal, verdi);
             break;
@@ -37,7 +40,7 @@ export const settSvar = (sporsmal: Sporsmal, verdier: Record<string, any>): void
         case RSSvartype.PERIODER:
             periodeSvar(sporsmal, verdi);
             break;
-        case RSSvartype.BEHANDLINGSDAGER:
+        case RSSvartype.BEHANDLINGSDAGER:   // Gammel tag, kan fjernes?
             sporsmal.undersporsmal.forEach(uspm => {
                 settSvar(uspm, verdier);
             });
@@ -62,7 +65,7 @@ export const settSvar = (sporsmal: Sporsmal, verdier: Record<string, any>): void
 const checkboxSvar = (sporsmal: Sporsmal, verdi: any) => {
     sporsmal.svarliste = {
         sporsmalId: sporsmal.id,
-        svar: [ { verdi: (verdi === SvarEnums.CHECKED || verdi === true ? SvarEnums.CHECKED : undefined) as any } ]
+        svar: [ { verdi: (verdi === SvarEnums.CHECKED || verdi === true) ? SvarEnums.CHECKED : '' } ]
     };
 };
 
@@ -75,6 +78,13 @@ const radiogruppeSvar = (sporsmal: Sporsmal, verdi: any) => {
         };
     });
 };
+
+const ukekalenderSvar = (sporsmal: Sporsmal, verdi: any) => {
+    sporsmal.svarliste = {
+        sporsmalId: sporsmal.id,
+        svar: [ { verdi: verdi ? verdi.toString() : 'Ikke til behandling' } ]
+    };
+}
 
 const datoSvar = (sporsmal: Sporsmal, verdi: any) => {
     if (Array.isArray(verdi)) {
