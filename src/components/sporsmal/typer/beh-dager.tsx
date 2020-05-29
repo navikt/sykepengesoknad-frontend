@@ -17,7 +17,7 @@ const BehDager = ({ sporsmal }: SpmProps) => {
     useEffect(() => {
         const lagret: RSSvarliste[] = hentSvar(sporsmal);
         lagret.forEach((liste, idx) => {
-            if (liste.svar[0] !== undefined && liste.svar[0].verdi !== '') {
+            if (liste.svar[0] !== undefined && liste.svar[0].verdi !== 'Ikke til behandling') {
                 lokal[idx] = liste.svar[0].verdi;
                 const radio = document.querySelector('.radioknapp[value="' + lokal[idx] + '"]');
                 radio!.setAttribute('checked', 'checked');
