@@ -8,7 +8,7 @@ import { useAppStore } from '../../data/stores/app-store';
 import { RSSoknadstatus } from '../../types/rs-types/rs-soknadstatus';
 import plaster from './plaster.svg';
 import plasterHover from './plaster-hover.svg';
-import Utvidbar from '../utvidbar';
+import Utvidbar from '../utvidbar/utvidbar';
 import { tekst } from '../../utils/tekster';
 import './opplysninger.less';
 

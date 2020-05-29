@@ -1,4 +1,6 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
+import { Normaltekst, Undertittel } from 'nav-frontend-typografi';
+import Alertstripe, { AlertStripeInfo, AlertStripeSuksess } from 'nav-frontend-alertstriper';
 import Opplysninger from '../opplysninger/opplysninger';
 import Oppsummering from '../oppsummering/oppsummering';
 import { Knapp } from 'nav-frontend-knapper';
@@ -14,15 +16,43 @@ import { logger } from '../../utils/logger';
 import { useAppStore } from '../../data/stores/app-store';
 import useFetch from '../../data/rest/use-fetch';
 import { useHistory } from 'react-router';
-import Status from '../status/status';
-import Utbetaling from '../status/utbetaling';
-import Alertstripe from 'nav-frontend-alertstriper';
+import { SvarTil } from '../../types/enums';
+import dayjs from 'dayjs';
+import Utvidbar from '../utvidbar/utvidbar';
+import plaster from '../opplysninger/plaster.svg';
+import plasterHover from '../opplysninger/plaster-hover.svg';
+import Lenke from 'nav-frontend-lenker';
 import './kvittering.less';
 
 const Kvittering = () => {
     const { valgtSoknad, soknader, setSoknader, feilmeldingTekst, setFeilmeldingTekst } = useAppStore();
     const korrigerSoknad = useFetch<RSSoknad>();
     const history = useHistory();
+    const [ tilNavn, setTilNavn ] = useState<string>();
+    const [ tilOrg, setTilOrg ] = useState<string>();
+    const [ tilDato, setTilDato ] = useState<string>();
+
+    useEffect(() => {
+        let sendtTilNavn = valgtSoknad && valgtSoknad.arbeidsgiver && valgtSoknad.arbeidsgiver.navn
+            ? valgtSoknad.arbeidsgiver.navn
+            : SvarTil.NAV;
+        if (sendtTilNavn === undefined) {
+            sendtTilNavn = '';
+        }
+        setTilNavn(sendtTilNavn);
+
+        const sendtTilOrgnr = valgtSoknad && valgtSoknad.arbeidsgiver && valgtSoknad.arbeidsgiver.orgnummer
+            ? `(Org.nr. ${valgtSoknad.arbeidsgiver.orgnummer})`
+            : ''
+        setTilOrg(sendtTilOrgnr);
+
+        const sendtTilDato = valgtSoknad && valgtSoknad.sendtTilArbeidsgiverDato
+            ? valgtSoknad.sendtTilArbeidsgiverDato
+            : valgtSoknad.sendtTilNAVDato
+        const dato = dayjs(sendtTilDato).format('dddd D. MMM, kl hh:mm');
+        setTilDato(dato.charAt(0).toUpperCase() + dato.slice(1));
+        // eslint-disable-next-line
+    }, [])
 
     const korriger = () => {
         korrigerSoknad.fetch(env.syfoapiRoot + `/syfosoknad/api/soknader/${valgtSoknad!.id}/korriger`, {
@@ -45,10 +75,59 @@ const Kvittering = () => {
 
     return (
         <div>
-            <Vis hvis={valgtSoknad.sendtTilNAVDato || valgtSoknad.sendtTilArbeidsgiverDato}>
-                <Status />
-                <Utbetaling />
-            </Vis>
+            <AlertStripeSuksess>
+                <Undertittel tag="h2">
+                    {tekst('kvittering.soknaden-er-sendt-til')} {tilNavn} {tilOrg}
+                </Undertittel>
+                <Normaltekst>
+                    {tekst('kvittering.mottatt')}: {tilDato}
+                </Normaltekst>
+            </AlertStripeSuksess>
+
+            <Utvidbar className={'ekspander apen'}
+                ikon={plaster} ikonHover={plasterHover} erApen={true}
+                tittel={tekst('kvittering.hva-skjer-videre')}
+                ikonAltTekst=''
+            >
+                <div className='opplysninger'>
+                    <div className="avsnitt">
+                        <Undertittel tag="h3">{tekst('kvittering.nav-behandler-soknaden')}</Undertittel>
+                        <Normaltekst tag="span">{tekst('kvittering.saksbehandling-avhenger-av')}</Normaltekst>
+                        <Lenke href={tekst('kvittering.finn-ut.url')}>
+                            <Normaltekst tag="span">{tekst('kvittering.finn-ut')}</Normaltekst>
+                        </Lenke>
+                    </div>
+                    <div className="avsnitt">
+                        <Undertittel tag="h3">{tekst('kvittering.naar-blir-pengene')}</Undertittel>
+                        <Normaltekst tag="span">{tekst('kvittering.det-er-ulike-regler')}</Normaltekst>
+                        <Lenke href={tekst('kvittering.se-hva.url')}>
+                            <Normaltekst tag="span">{tekst('kvittering.se-hva')}</Normaltekst>
+                        </Lenke>
+                    </div>
+                    <div className="avsnitt">
+                        <Undertittel tag="h3">{tekst('kvittering.viktig-for-arbeidstaker')}</Undertittel>
+                        <Normaltekst tag="span">{tekst('kvittering.soker-du-etter')}</Normaltekst>
+                        <Utvidbar erApen={false} tittel={tekst('kvittering.hva-er-arbeidsgiverperioden')} className="intern">
+                            <AlertStripeInfo>
+                                <Normaltekst>{tekst('kvittering.arbeidsgiveren-skal-betale')}</Normaltekst>
+                            </AlertStripeInfo>
+                        </Utvidbar>
+                        <Utvidbar erApen={false} tittel={tekst('kvittering.hva-er-inntektsmelding')} className="intern">
+                            <AlertStripeInfo>
+                                <Normaltekst>{tekst('kvittering.digital-inntektsmelding')}</Normaltekst>
+                            </AlertStripeInfo>
+                        </Utvidbar>
+                    </div>
+                    <div className="avsnitt">
+                        <Undertittel tag="h3">{tekst('kvittering.viktig-for-selvstendige')}</Undertittel>
+                        <Normaltekst tag="span">{tekst('kvittering.for-at-nav.1')}</Normaltekst>
+                        <Lenke href={tekst('kvittering.for-at-nav.2.url')} className="lenke">
+                            <Normaltekst tag="span">{tekst('kvittering.for-at-nav.2')}</Normaltekst>
+                        </Lenke>
+                        <Normaltekst tag="span">{tekst('kvittering.for-at-nav.3')}</Normaltekst>
+                    </div>
+                </div>
+            </Utvidbar>
 
             <Opplysninger ekspandert={false} />
             <Oppsummering />
