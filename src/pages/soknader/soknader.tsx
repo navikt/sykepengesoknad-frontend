@@ -47,23 +47,15 @@ const Soknader = () => {
     return (
         <>
             <Banner />
-
             <div className='limit'>
                 <Brodsmuler brodsmuler={brodsmuler} />
-
                 <Teasere
+                    className={'mb_nye_soknader'}
                     soknader={nyeSoknader}
                     tittel={tekst('soknader.venter-paa-behandling.tittel')}
                     tomListeTekst={tekst('soknader.venter-paa-behandling.ingen-soknader')}
                     id='soknader-list-til-behandling'
                 />
-            <Teasere
-                className={'mb_nye_soknader'}
-                soknader={nyeSoknader}
-                tittel={tekst('soknader.venter-paa-behandling.tittel')}
-                tomListeTekst={tekst('soknader.venter-paa-behandling.ingen-soknader')}
-                id='soknader-list-til-behandling'
-            />
 
                 <Vis hvis={fremtidigeSoknader.length > 0}>
                     <Teasere
