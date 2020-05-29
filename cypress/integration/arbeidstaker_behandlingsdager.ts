@@ -12,7 +12,7 @@ describe('Tester behandlingsdagersøknad', () => {
 
     it('Laster startside', function() {
         cy.visit('http://localhost:8080');
-        cy.get('.sidetopp__tittel').should('be.visible').and('have.text', 'Søknader om sykepenger');
+        cy.get('.soknadtopp__tittel').should('be.visible').and('have.text', 'Søknad om sykepenger');
         cy.get(`#soknader-list-til-behandling article a[href*=${soknad.id}]`).click();
     });
 

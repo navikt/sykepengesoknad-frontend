@@ -3,9 +3,9 @@ import { Systemtittel } from 'nav-frontend-typografi';
 import { RSSoknadstype } from '../../types/rs-types/rs-soknadstype';
 import { useAppStore } from '../../data/stores/app-store';
 import { useHistory } from 'react-router';
-import './banner.less';
 import SykSokLokalt from '../brodsmuler/syk-sok-lokalt';
 import { tekst } from '../../utils/tekster';
+import './banner.less';
 
 const Banner = () => {
     const { valgtSoknad } = useAppStore();
