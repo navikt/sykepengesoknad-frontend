@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import Banner from '../../components/banner/banner';
 import { VenstreChevron } from 'nav-frontend-chevron';
 import { Brodsmule } from '../../types/types';
@@ -11,6 +11,7 @@ import { Link } from 'react-router-dom';
 import { tekst } from '../../utils/tekster';
 import Kvittering from '../../components/kvittering/kvittering';
 import { RSSoknadstatus } from '../../types/rs-types/rs-soknadstatus';
+import Brodsmuler from '../../components/brodsmuler/brodsmuler';
 import './kvittering.less';
 
 const brodsmuler: Brodsmule[] = [ {
@@ -28,22 +29,32 @@ const KvitteringSide = () => {
     const erSiste = valgtSoknad!.status === RSSoknadstatus.SENDT;
 
     useEffect(() => {
-        setBodyClass('kvittering');
-    }, [ valgtSoknad ]);
+        setErSiste(valgtSoknad.status === RSSoknadstatus.SENDT);
+        // eslint-disable-next-line
+    }, []);
+
+    useEffect(() => {
+        setBodyClass('kvittering')
+    }, []);
+
+    if (!valgtSoknad) return null;
 
     return (
-        <div className="limit">
-            <Banner brodsmuler={brodsmuler} />
-            <Kvittering />
+        <div>
+            <Banner />
+            <div className="limit">
+                <Brodsmuler brodsmuler={brodsmuler} />
+                <Kvittering />
 
-            <Vis hvis={erSiste}>
-                <Link to="/" className="gaa-videre">
-                    <Normaltekst tag="span">
-                        <VenstreChevron />
-                        {tekst('sykepengesoknad.navigasjon.gaa-til')}
-                    </Normaltekst>
-                </Link>
-            </Vis>
+                <Vis hvis={erSiste}>
+                    <Link to="/" className="gaa-videre">
+                        <Normaltekst tag="span">
+                            <VenstreChevron />
+                            {tekst('sykepengesoknad.navigasjon.gaa-til')}
+                        </Normaltekst>
+                    </Link>
+                </Vis>
+            </div>
         </div>
     )
 };

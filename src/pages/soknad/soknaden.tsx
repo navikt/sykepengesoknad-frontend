@@ -19,6 +19,7 @@ import AlertStripe from 'nav-frontend-alertstriper';
 import { tekst } from '../../utils/tekster';
 import Kvittering from '../../components/kvittering/kvittering';
 import './soknaden.less';
+import Brodsmuler from '../../components/brodsmuler/brodsmuler';
 
 const brodsmuler: Brodsmule[] = [ {
     tittel: tekst('soknader.sidetittel'),
@@ -50,12 +51,15 @@ const Soknaden = () => {
     if (!valgtSoknad) return null;
 
     return (
-        <div className='limit'>
-            <Banner brodsmuler={brodsmuler} />
-            <HotjarTrigger trigger={valgtSoknad.soknadstype}>
-                <Fordeling />
-            </HotjarTrigger>
-        </div>
+        <>
+            <Banner />
+            <div className='limit'>
+                <Brodsmuler brodsmuler={brodsmuler} />
+                <HotjarTrigger trigger={valgtSoknad.soknadstype}>
+                    <Fordeling />
+                </HotjarTrigger>
+            </div>
+        </>
     )
 };
 
