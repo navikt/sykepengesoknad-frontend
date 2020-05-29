@@ -26,10 +26,10 @@ const brodsmuler: Brodsmule[] = [ {
 
 const KvitteringSide = () => {
     const { valgtSoknad } = useAppStore();
-    const erSiste = valgtSoknad!.status === RSSoknadstatus.SENDT;
+    const [ erSiste, setErSiste ] = useState<boolean>();
 
     useEffect(() => {
-        setErSiste(valgtSoknad.status === RSSoknadstatus.SENDT);
+        setErSiste(valgtSoknad!.status === RSSoknadstatus.SENDT);
         // eslint-disable-next-line
     }, []);
 

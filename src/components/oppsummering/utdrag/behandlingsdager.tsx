@@ -1,9 +1,9 @@
 import React from 'react';
 import { OppsummeringProps } from '../oppsummering';
 import { Element, Normaltekst } from 'nav-frontend-typografi';
-import Vis from '../../../vis';
-import { tilLesbarDatoUtenAarstall, tilLesbarPeriodeUtenArstall } from '../../../../utils/dato-utils';
-import { RSSvar } from '../../../../types/rs-types/rs-svar';
+import Vis from '../../vis';
+import { tilLesbarDatoUtenAarstall, tilLesbarPeriodeUtenArstall } from '../../../utils/dato-utils';
+import { RSSvar } from '../../../types/rs-types/rs-svar';
 
 const datoEllerIkkeTilBehandling = (svar: RSSvar) => {
     if (svar === undefined || svar.verdi === '' || svar.verdi === 'Ikke til behandling') {

@@ -48,7 +48,7 @@ const Kvittering = () => {
 
         const sendtTilDato = valgtSoknad && valgtSoknad.sendtTilArbeidsgiverDato
             ? valgtSoknad.sendtTilArbeidsgiverDato
-            : valgtSoknad.sendtTilNAVDato
+            : valgtSoknad!.sendtTilNAVDato
         const dato = dayjs(sendtTilDato).format('dddd D. MMM, kl hh:mm');
         setTilDato(dato.charAt(0).toUpperCase() + dato.slice(1));
         // eslint-disable-next-line
@@ -137,7 +137,7 @@ const Kvittering = () => {
 
                 <Ettersending gjelder='nav' />
 
-                <Vis hvis={valgtSoknad.arbeidsgiver !== undefined}>
+                <Vis hvis={valgtSoknad!.arbeidsgiver !== undefined}>
                     <Ettersending gjelder='arbeidsgiver' />
                 </Vis>
             </div>

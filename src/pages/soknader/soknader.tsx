@@ -1,5 +1,4 @@
 import React, { useEffect } from 'react';
-import Alertstripe from 'nav-frontend-alertstriper';
 import { Brodsmule, Soknad } from '../../types/types';
 import Teasere from '../../components/soknader/teaser/teasere';
 import UtbetalingerLenke from '../../components/soknader/utbetalinger/utbetalinger-lenke';
@@ -10,8 +9,8 @@ import { RSSoknadstatus } from '../../types/rs-types/rs-soknadstatus';
 import Brodsmuler from '../../components/brodsmuler/brodsmuler';
 import { setBodyClass } from '../../utils/utils';
 import { tekst } from '../../utils/tekster';
-import './soknader.less';
 import Banner from '../../components/banner/banner';
+import './soknader.less';
 
 export const filtrerOgSorterNyeSoknader = (soknader: Soknad[]) => {
     return soknader.filter(soknad =>
@@ -31,7 +30,9 @@ const Soknader = () => {
 
     const tidligereSoknader = soknader
         .filter((soknad) =>
-            soknad.status === RSSoknadstatus.SENDT || soknad.status === RSSoknadstatus.AVBRUTT || soknad.status === RSSoknadstatus.UTGAATT
+            soknad.status === RSSoknadstatus.SENDT
+            || soknad.status === RSSoknadstatus.AVBRUTT
+            || soknad.status === RSSoknadstatus.UTGAATT
         ).sort(sorterEtterPerioder);
 
     const fremtidigeSoknader = soknader
@@ -49,15 +50,6 @@ const Soknader = () => {
 
             <div className='limit'>
                 <Brodsmuler brodsmuler={brodsmuler} />
-
-                <Vis hvis={soknader === undefined}>
-                    <Alertstripe type='advarsel' className='blokk'>
-                        <p className='sist'>
-                            <strong>Oops!</strong>
-                            Vi kunne ikke hente alle dine sykepengesøknader.
-                        </p>
-                    </Alertstripe>
-                </Vis>
 
                 <Teasere
                     soknader={nyeSoknader}

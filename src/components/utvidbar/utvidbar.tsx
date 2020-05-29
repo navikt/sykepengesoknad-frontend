@@ -47,10 +47,8 @@ const Utvidbar = (props: UtvidbarProps) => {
         >
             <button aria-expanded={erApen}
                 ref={jsToggle}
-                onMouseEnter={() => btnImage.current!.src = props.ikonHover!}
-                onMouseLeave={() => btnImage.current!.src = props.ikon!}
-                onMouseEnter={props.ikon !== undefined ? () => btnImage.current.src = props.ikonHover : null}
-                onMouseLeave={props.ikon !== undefined ? () => btnImage.current.src = props.ikon : null}
+                onMouseEnter={props.ikon !== undefined ? () => btnImage.current!.src = props.ikonHover! : undefined}
+                onMouseLeave={props.ikon !== undefined ? () => btnImage.current!.src = props.ikon! : undefined}
                 onClick={() => setErApen(!erApen)}
                 className='utvidbar__toggle'
             >

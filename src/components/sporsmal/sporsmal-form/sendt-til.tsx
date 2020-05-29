@@ -7,7 +7,6 @@ import './sendt-til.less';
 
 const SendtTil = () => {
     const { valgtSoknad, sendTil } = useAppStore();
-    const erSiste = valgtSoknad!.status === RSSoknadstatus.SENDT;
     const mottaker = sendTil && sendTil.length > 0 ? sendTil.sort().reverse().join('-').toLowerCase() : undefined;
     const nokkel = `sykepengesoknad.kvittering.til-${mottaker}.tekst`;
 
