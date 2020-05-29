@@ -60,6 +60,7 @@ const Soknader = () => {
             </Vis>
 
             <Teasere
+                className={'mb_nye_soknader'}
                 soknader={nyeSoknader}
                 tittel={tekst('soknader.venter-paa-behandling.tittel')}
                 tomListeTekst={tekst('soknader.venter-paa-behandling.ingen-soknader')}
