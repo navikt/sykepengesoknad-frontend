@@ -2,6 +2,7 @@
 
 import { soknader } from '../../src/data/mock/data/soknader';
 import { Soknad } from '../../src/types/types';
+import { lyttTilNettverksKall } from './util/util';
 
 describe('Tester arbeidsledigsøknad', () => {
     //-----
@@ -10,14 +11,30 @@ describe('Tester arbeidsledigsøknad', () => {
     //-----
     const soknad = soknader.find((sok: Soknad) => sok.id === '934f39f4-cb47-459f-8209-0dbef6d36059');
 
-    it('Laster startside', function() {
+    before(() => {
         cy.visit('http://localhost:8080');
+        cy.get('.soknadtopp__tittel').should('be.visible').and('have.text', 'Søknad om sykepenger');
+    });
+
+    beforeEach(() => {
+        cy.window().then((win) => {
+            cy.spy(win, 'fetch').as('winFetch');
+        });
+    });
+
+    afterEach(() => {
+        cy.get('@winFetch').should((a: any) => {
+            lyttTilNettverksKall(a);
+        })
+    });
+
+
+    it('Laster startside', () => {
         cy.get('.soknadtopp__tittel').should('be.visible').and('have.text', 'Søknad om sykepenger');
         cy.get(`#soknader-list-til-behandling article a[href*=${soknad.id}]`).click();
     });
 
-
-    it('Søknad ANSVARSERKLARING - steg 1', function() {
+    it('Søknad ANSVARSERKLARING - steg 1', () => {
         cy.url().should('include', `${soknad.id}/1`);
 
         // Sykmelding
@@ -33,7 +50,7 @@ describe('Tester arbeidsledigsøknad', () => {
     });
 
 
-    it('Søknad PERMITTERT_NAA - steg 2', function() {
+    it('Søknad PERMITTERT_NAA - steg 2', () => {
         cy.url().should('include', `${soknad.id}/2`);
 
         // Sjekk at sykmelding er minimert
@@ -48,7 +65,7 @@ describe('Tester arbeidsledigsøknad', () => {
         cy.contains('Gå videre').click();
     });
 
-    it('Søknad PERMITTERT_PERIODE - steg 3', function() {
+    it('Søknad PERMITTERT_PERIODE - steg 3', () => {
         cy.url().should('include', `${soknad.id}/3`);
 
         // Test spørsmål
@@ -60,7 +77,7 @@ describe('Tester arbeidsledigsøknad', () => {
         cy.contains('Gå videre').click();
     });
 
-    it('Søknad FRISKMELDT - steg 4', function() {
+    it('Søknad FRISKMELDT - steg 4', () => {
         cy.url().should('include', `${soknad.id}/4`);
 
         // Test spørsmål
@@ -72,7 +89,7 @@ describe('Tester arbeidsledigsøknad', () => {
         cy.contains('Gå videre').click();
     });
 
-    it('Søknad ANDRE_INNTEKTSKILDER - steg 5', function() {
+    it('Søknad ANDRE_INNTEKTSKILDER - steg 5', () => {
         cy.url().should('include', `${soknad.id}/5`);
 
         // Test spørsmål
@@ -92,7 +109,7 @@ describe('Tester arbeidsledigsøknad', () => {
         cy.contains('Gå videre').click();
     });
 
-    it('Søknad UTDANNING - steg 6', function() {
+    it('Søknad UTDANNING - steg 6', () => {
         cy.url().should('include', `${soknad.id}/6`);
 
         // Test spørsmål
@@ -111,7 +128,7 @@ describe('Tester arbeidsledigsøknad', () => {
         cy.contains('Gå videre').click();
     });
 
-    it('Søknad ARBEIDSLEDIG_UTLAND - steg 7', function() {
+    it('Søknad ARBEIDSLEDIG_UTLAND - steg 7', () => {
         cy.url().should('include', `${soknad.id}/7`);
 
         // Test spørsmål
@@ -131,7 +148,7 @@ describe('Tester arbeidsledigsøknad', () => {
         cy.contains('Gå videre').click();
     });
 
-    it('Søknad VAER_KLAR_OVER_AT - steg 8', function() {
+    it('Søknad VAER_KLAR_OVER_AT - steg 8', () => {
         cy.url().should('include', `${soknad.id}/8`);
         cy.get('.skjemaelement__label').click({ force: true });
         cy.contains('Jeg har lest all informasjonen jeg har fått i søknaden og bekrefter at opplysningene jeg har gitt er korrekte.');
