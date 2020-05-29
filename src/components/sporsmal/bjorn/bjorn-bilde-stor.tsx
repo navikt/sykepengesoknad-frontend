@@ -28,8 +28,8 @@ const BjornBildeStor = ({ alt }: BjornBildeProps) => {
         setTimeout2(handle2);
 
         return () => {
-            setTimeout1(null);
-            setTimeout2(null);
+            setTimeout1(null as any);
+            setTimeout2(null as any);
             window.clearTimeout(timeout1);
             window.clearTimeout(timeout2);
         }

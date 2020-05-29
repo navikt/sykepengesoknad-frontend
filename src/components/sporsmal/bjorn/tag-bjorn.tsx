@@ -22,7 +22,7 @@ const TagBjorn = ({ sporsmal, className }: TagBjornProps) => {
     const tag = sporsmal.tag;
 
     const harBjorntekst = (tag: TagTyper) => {
-        return tagsMedBjorn.soknadstype === valgtSoknad.soknadstype && tagsMedBjorn.tagtyper.includes(tag);
+        return tagsMedBjorn.soknadstype === valgtSoknad!.soknadstype && tagsMedBjorn.tagtyper.includes(tag);
     };
 
     return (

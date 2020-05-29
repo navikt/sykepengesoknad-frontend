@@ -23,7 +23,7 @@ const StatusPanel = () => {
     const history = useHistory();
 
     const korriger = () => {
-        korrigerSoknad.fetch(env.syfoapiRoot + `/syfosoknad/api/soknader/${valgtSoknad.id}/korriger`, {
+        korrigerSoknad.fetch(env.syfoapiRoot + `/syfosoknad/api/soknader/${valgtSoknad!.id}/korriger`, {
             method: 'POST',
             credentials: 'include',
             headers: { 'Content-Type': 'application/json' }
@@ -43,7 +43,7 @@ const StatusPanel = () => {
 
     return (
         <div className='panel status-panel'>
-            <Vis hvis={valgtSoknad.sendtTilNAVDato || valgtSoknad.sendtTilArbeidsgiverDato}>
+            <Vis hvis={valgtSoknad!.sendtTilNAVDato || valgtSoknad!.sendtTilArbeidsgiverDato}>
                 <Status/>
                 <Utbetaling/>
             </Vis>
@@ -53,7 +53,7 @@ const StatusPanel = () => {
 
                 <Ettersending gjelder='nav'/>
 
-                <Vis hvis={valgtSoknad.arbeidsgiver !== undefined}>
+                <Vis hvis={valgtSoknad!.arbeidsgiver !== undefined}>
                     <Ettersending gjelder='arbeidsgiver'/>
                 </Vis>
             </div>

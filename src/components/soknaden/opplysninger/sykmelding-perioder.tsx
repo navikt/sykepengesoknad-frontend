@@ -13,7 +13,7 @@ import { tekst } from '../../../utils/tekster';
 
 const SykmeldingPerioder = () => {
     const { valgtSoknad, valgtSykmelding } = useAppStore();
-    const visBjorn = valgtSoknad.soknadstype === RSSoknadstype.ARBEIDSLEDIG || valgtSoknad.soknadstype === RSSoknadstype.SELVSTENDIGE_OG_FRILANSERE;
+    const visBjorn = valgtSoknad!.soknadstype === RSSoknadstype.ARBEIDSLEDIG || valgtSoknad!.soknadstype === RSSoknadstype.SELVSTENDIGE_OG_FRILANSERE;
 
     if (!valgtSykmelding) {
         return null;
@@ -33,7 +33,7 @@ const SykmeldingPerioder = () => {
                     </div>
                 );
             })}
-            <Vis hvis={erOppdelt(valgtSoknad, valgtSykmelding) && visBjorn}>
+            <Vis hvis={erOppdelt(valgtSoknad!, valgtSykmelding) && visBjorn}>
                 <Bjorn className='' nokkel='sykepengesoknad.sykmelding-utdrag.oppdelt.bjorn' />
             </Vis>
         </div>

@@ -28,6 +28,6 @@ export const erOppdelt = (soknad: Soknad, sykmelding: Sykmelding) => {
     const tomSykmelding = senesteTom(sykmelding.mulighetForArbeid.perioder);
     const fomSykmelding = tidligsteFom(sykmelding.mulighetForArbeid.perioder);
 
-    return !(soknad.fom.getTime() === fomSykmelding.getTime()
-        && soknad.tom.getTime() === tomSykmelding.getTime());
+    return !(soknad.fom!.getTime() === fomSykmelding.getTime()
+        && soknad.tom!.getTime() === tomSykmelding.getTime());
 };

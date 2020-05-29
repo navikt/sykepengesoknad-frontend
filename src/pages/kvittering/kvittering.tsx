@@ -20,13 +20,13 @@ const brodsmuler: Brodsmule[] = [ {
     erKlikkbar: true
 }, {
     tittel: tekst('kvittering.sidetittel'),
-    sti: null,
+    sti: null as any,
     erKlikkbar: false,
 } ];
 
 const Kvittering = () => {
     const { valgtSoknad } = useAppStore();
-    const erSiste = valgtSoknad.status === RSSoknadstatus.SENDT;
+    const erSiste = valgtSoknad!.status === RSSoknadstatus.SENDT;
 
     useEffect(() => {
         setBodyClass('kvittering');

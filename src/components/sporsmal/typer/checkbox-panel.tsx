@@ -19,7 +19,7 @@ const CheckboxInput = ({ sporsmal }: SpmProps) => {
     }, [ sporsmal ]);
 
     const handleChange = () => {
-        bekreft.current.classList.toggle('bekreftCheckboksPanel--checked');
+        bekreft.current!.classList.toggle('bekreftCheckboksPanel--checked');
         setValue(sporsmal.id, !checkWatch);
     };
 

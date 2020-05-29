@@ -11,7 +11,7 @@ import { RSSvartype } from '../../../../types/rs-types/rs-svartype';
 const RadioGruppe = ({ sporsmal }: OppsummeringProps) => {
     const besvartUndersporsmal: Sporsmal = sporsmal.undersporsmal.find((s) => {
         return s.svarliste.svar.length > 0 && s.svarliste.svar[0].verdi === SvarEnums.CHECKED;
-    });
+    })!;
     return (
         <Vis hvis={besvartUndersporsmal !== undefined}>
             <div className='oppsummering__sporsmal'>

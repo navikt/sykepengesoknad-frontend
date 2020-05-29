@@ -68,10 +68,10 @@ const FeilOppsummering = (props: FeilProps) => {
             elmid = 'input' + idarr[0];
         }
 
-        const element = document.getElementById(elmid);
+        const element = document.getElementById(elmid as any);
         if (element) {
             if (detteSpm.erHovedsporsmal && detteSpm.svartype.includes('JA_NEI')) {
-                element!.parentElement.classList.add('inputPanel--focused');
+                element!.parentElement!.classList.add('inputPanel--focused');
             }
             element.focus();
             element.scrollIntoView({ behavior: 'smooth' });

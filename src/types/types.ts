@@ -151,17 +151,17 @@ export class Soknad {
         soknad: RSSoknad
     ) {
         this.id = soknad.id;
-        this.sykmeldingId = soknad.sykmeldingId;
+        this.sykmeldingId = soknad.sykmeldingId!;
         const type = soknad.soknadstype as keyof typeof RSSoknadstype;
         this.soknadstype = RSSoknadstype[type];
         const stat = soknad.status as keyof typeof RSSoknadstatus;
         this.status = RSSoknadstatus[stat];
-        this.fom = dayjsToDate(soknad.fom);
-        this.tom = dayjsToDate(soknad.tom);
-        this.avbruttDato = dayjsToDate(soknad.avbruttDato);
-        this.opprettetDato = dayjsToDate(soknad.opprettetDato);
-        this.sendtTilNAVDato = dayjsToDate(soknad.sendtTilNAVDato);
-        this.sendtTilArbeidsgiverDato = dayjsToDate(soknad.sendtTilArbeidsgiverDato);
+        this.fom = dayjsToDate(soknad.fom!)!;
+        this.tom = dayjsToDate(soknad.tom!)!;
+        this.avbruttDato = dayjsToDate(soknad.avbruttDato!)!;
+        this.opprettetDato = dayjsToDate(soknad.opprettetDato!)!;
+        this.sendtTilNAVDato = dayjsToDate(soknad.sendtTilNAVDato!)!;
+        this.sendtTilArbeidsgiverDato = dayjsToDate(soknad.sendtTilArbeidsgiverDato!)!;
         if (soknad.arbeidsgiver) {
             this.arbeidsgiver = {
                 naermesteLeder: soknad.arbeidsgiver.naermesteLeder,
@@ -169,7 +169,7 @@ export class Soknad {
                 orgnummer: soknad.arbeidsgiver.orgnummer
             };
         }
-        this.sporsmal = rsToSporsmal(soknad.sporsmal, undefined, true);
+        this.sporsmal = rsToSporsmal(soknad.sporsmal, undefined as any, true);
         this.soknadPerioder = soknad.soknadPerioder;
     }
 }
@@ -193,7 +193,7 @@ export class Sporsmal {
     constructor(spm: RSSporsmal, kriterie: string, erHovedsporsmal: boolean) {
         this.id = spm.id;
         const orgarr: string[] = spm.tag.split('_');
-        const numtag: number = parseInt(orgarr.pop());
+        const numtag: number = parseInt(orgarr.pop() as any);
         let tag = spm.tag;
         if (!isNaN(numtag)) {
             this.tagIndex = numtag;
