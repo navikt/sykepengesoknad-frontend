@@ -1,6 +1,4 @@
 import React, { useEffect } from 'react';
-import Alertstripe from 'nav-frontend-alertstriper';
-import { Sidetittel } from 'nav-frontend-typografi';
 import { Brodsmule, Soknad } from '../../types/types';
 import Teasere from '../../components/soknader/teaser/teasere';
 import UtbetalingerLenke from '../../components/soknader/utbetalinger/utbetalinger-lenke';
@@ -10,8 +8,9 @@ import { useAppStore } from '../../data/stores/app-store';
 import { RSSoknadstatus } from '../../types/rs-types/rs-soknadstatus';
 import Brodsmuler from '../../components/brodsmuler/brodsmuler';
 import { setBodyClass } from '../../utils/utils';
-import './soknader.less';
 import { tekst } from '../../utils/tekster';
+import Banner from '../../components/banner/banner';
+import './soknader.less';
 
 export const filtrerOgSorterNyeSoknader = (soknader: Soknad[]) => {
     return soknader.filter(soknad =>
@@ -31,7 +30,9 @@ const Soknader = () => {
 
     const tidligereSoknader = soknader
         .filter((soknad) =>
-            soknad.status === RSSoknadstatus.SENDT || soknad.status === RSSoknadstatus.AVBRUTT || soknad.status === RSSoknadstatus.UTGAATT
+            soknad.status === RSSoknadstatus.SENDT
+            || soknad.status === RSSoknadstatus.AVBRUTT
+            || soknad.status === RSSoknadstatus.UTGAATT
         ).sort(sorterEtterPerioder);
 
     const fremtidigeSoknader = soknader
@@ -44,47 +45,37 @@ const Soknader = () => {
     }, []);
 
     return (
-        <div className='limit'>
-            <Brodsmuler brodsmuler={brodsmuler} />
-            <Sidetittel tag='h1' className='sidetopp__tittel'>
-                {tekst('soknader.sidetittel')}
-            </Sidetittel>
-
-            <Vis hvis={soknader === undefined}>
-                <Alertstripe type='advarsel' className='blokk'>
-                    <p className='sist'>
-                        <strong>Oops!</strong>
-                        Vi kunne ikke hente alle dine sykepengesøknader.
-                    </p>
-                </Alertstripe>
-            </Vis>
-
-            <Teasere
-                className={'mb_nye_soknader'}
-                soknader={nyeSoknader}
-                tittel={tekst('soknader.venter-paa-behandling.tittel')}
-                tomListeTekst={tekst('soknader.venter-paa-behandling.ingen-soknader')}
-                id='soknader-list-til-behandling'
-            />
-
-            <Vis hvis={fremtidigeSoknader.length > 0}>
+        <>
+            <Banner />
+            <div className='limit'>
+                <Brodsmuler brodsmuler={brodsmuler} />
                 <Teasere
-                    soknader={fremtidigeSoknader}
-                    tittel={tekst('soknader.planlagt.tittel')}
-                    id='soknader-planlagt'
+                    className={'mb_nye_soknader'}
+                    soknader={nyeSoknader}
+                    tittel={tekst('soknader.venter-paa-behandling.tittel')}
+                    tomListeTekst={tekst('soknader.venter-paa-behandling.ingen-soknader')}
+                    id='soknader-list-til-behandling'
                 />
-            </Vis>
 
-            <UtbetalingerLenke />
+                <Vis hvis={fremtidigeSoknader.length > 0}>
+                    <Teasere
+                        soknader={fremtidigeSoknader}
+                        tittel={tekst('soknader.planlagt.tittel')}
+                        id='soknader-planlagt'
+                    />
+                </Vis>
 
-            <Vis hvis={tidligereSoknader.length > 0}>
-                <Teasere
-                    soknader={tidligereSoknader}
-                    tittel={tekst('soknader.sendt.tittel')}
-                    id='soknader-sendt'
-                />
-            </Vis>
-        </div>
+                <UtbetalingerLenke />
+
+                <Vis hvis={tidligereSoknader.length > 0}>
+                    <Teasere
+                        soknader={tidligereSoknader}
+                        tittel={tekst('soknader.sendt.tittel')}
+                        id='soknader-sendt'
+                    />
+                </Vis>
+            </div>
+        </>
     );
 };
 

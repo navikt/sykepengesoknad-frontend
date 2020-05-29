@@ -7,10 +7,8 @@ import { RSSoknadstatus } from '../../types/rs-types/rs-soknadstatus';
 import Banner from '../../components/banner/banner';
 import { useAppStore } from '../../data/stores/app-store';
 import { HotjarTrigger } from '../../components/hotjar-trigger';
-import SoknadIntro from '../../components/soknaden/soknad-intro/soknad-intro';
-import Opplysninger from '../../components/soknaden/opplysninger/opplysninger';
-import StatusPanel from '../../components/soknaden/status/status-panel';
-import Oppsummering from '../../components/soknaden/oppsummering/oppsummering';
+import SoknadIntro from '../../components/soknad-intro/soknad-intro';
+import Opplysninger from '../../components/opplysninger/opplysninger';
 import { setBodyClass } from '../../utils/utils';
 import Vis from '../../components/vis';
 import SporsmalForm from '../../components/sporsmal/sporsmal-form/sporsmal-form';
@@ -18,8 +16,10 @@ import SporsmalSteg from '../../components/sporsmal/sporsmal-steg/sporsmal-steg'
 import { hentNokkel } from '../../components/sporsmal/sporsmal-utils';
 import { SEPARATOR } from '../../utils/constants';
 import AlertStripe from 'nav-frontend-alertstriper';
-import './soknaden.less';
 import { tekst } from '../../utils/tekster';
+import Kvittering from '../../components/kvittering/kvittering';
+import './soknaden.less';
+import Brodsmuler from '../../components/brodsmuler/brodsmuler';
 
 const brodsmuler: Brodsmule[] = [ {
     tittel: tekst('soknader.sidetittel'),
@@ -32,8 +32,7 @@ const brodsmuler: Brodsmule[] = [ {
 } ];
 
 const Soknaden = () => {
-    const { soknader, setValgtSoknad, sykmeldinger, setValgtSykmelding } = useAppStore();
-    const { valgtSoknad } = useAppStore();
+    const { soknader, valgtSoknad, setValgtSoknad, sykmeldinger, setValgtSykmelding } = useAppStore();
     const { id } = useParams();
 
     useEffect(() => {
@@ -52,12 +51,15 @@ const Soknaden = () => {
     if (!valgtSoknad) return null;
 
     return (
-        <div className='limit'>
-            <Banner brodsmuler={brodsmuler} />
-            <HotjarTrigger trigger={valgtSoknad.soknadstype}>
-                <Fordeling />
-            </HotjarTrigger>
-        </div>
+        <>
+            <Banner />
+            <div className='limit'>
+                <Brodsmuler brodsmuler={brodsmuler} />
+                <HotjarTrigger trigger={valgtSoknad.soknadstype}>
+                    <Fordeling />
+                </HotjarTrigger>
+            </div>
+        </>
     )
 };
 
@@ -112,13 +114,7 @@ const Fordeling = () => {
         // Tidligere søknader
         case RSSoknadstatus.SENDT:
         case RSSoknadstatus.AVBRUTT:
-            return (
-                <>
-                    <StatusPanel />
-                    <Opplysninger ekspandert={false} />
-                    <Oppsummering />
-                </>
-            );
+            return <Kvittering />;
 
         // Fremtidige søknader
         case RSSoknadstatus.FREMTIDIG:

@@ -10,11 +10,11 @@ import FeilOppsummering from '../../skjema/feiloppsummering/feil-oppsummering';
 import Vis from '../../vis';
 import { RSSvartype } from '../../../types/rs-types/rs-svartype';
 import CheckboxPanel from '../typer/checkbox-panel';
-import SendtTil from '../../../pages/soknad/sendt-til';
+import SendtTil from './sendt-til';
 import { SEPARATOR } from '../../../utils/constants';
 import { RSSoknadstatus } from '../../../types/rs-types/rs-soknadstatus';
 import { SvarTil } from '../../../types/enums';
-import Oppsummering from '../../soknaden/oppsummering/oppsummering';
+import Oppsummering from '../../oppsummering/oppsummering';
 import { settSvar } from '../sett-svar';
 import { useAmplitudeInstance } from '../../amplitude/amplitude';
 import env from '../../../utils/environment';
@@ -24,9 +24,9 @@ import { RSMottaker } from '../../../types/rs-types/rs-mottaker';
 import useFetch from '../../../data/rest/use-fetch';
 import { sporsmalToRS } from '../../../types/rs-types/rs-sporsmal';
 import { RSOppdaterSporsmalResponse } from '../../../types/rs-types/rest-response/rs-oppdatersporsmalresponse';
-import './sporsmal-form.less';
 import { hentSvar } from '../hent-svar';
 import { logger } from '../../../utils/logger';
+import './sporsmal-form.less';
 
 export interface SpmProps {
     sporsmal: Sporsmal;

@@ -1,19 +1,13 @@
 import React from 'react';
-import { Sidetittel } from 'nav-frontend-typografi';
-import Brodsmuler from '../brodsmuler/brodsmuler';
-import { Brodsmule } from '../../types/types';
+import { Systemtittel } from 'nav-frontend-typografi';
 import { RSSoknadstype } from '../../types/rs-types/rs-soknadstype';
 import { useAppStore } from '../../data/stores/app-store';
 import { useHistory } from 'react-router';
-import './banner.less';
 import SykSokLokalt from '../brodsmuler/syk-sok-lokalt';
 import { tekst } from '../../utils/tekster';
+import './banner.less';
 
-interface BannerProps {
-    brodsmuler: Brodsmule[];
-}
-
-const Banner = ({ brodsmuler }: BannerProps) => {
+const Banner = () => {
     const { valgtSoknad } = useAppStore();
     const history = useHistory();
 
@@ -27,9 +21,8 @@ const Banner = ({ brodsmuler }: BannerProps) => {
 
     return (
         <header className='soknadtopp'>
-            <Brodsmuler brodsmuler={brodsmuler} />
             <SykSokLokalt />
-            <Sidetittel tag='h1' className='soknadtopp__tittel'>{tittel}</Sidetittel>
+            <Systemtittel tag='h1' className='soknadtopp__tittel'>{tittel}</Systemtittel>
         </header>
     );
 };

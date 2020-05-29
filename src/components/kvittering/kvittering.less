@@ -1,0 +1,44 @@
+@import '../../../node_modules/nav-frontend-core/less/_variabler';
+
+.kvittering {
+    /*
+    .alertstripe--suksess {
+        border-bottom-left-radius: 0;
+        border-bottom-right-radius: 0;
+        margin-bottom: -2px;
+    }
+    */
+    .avsnitt {
+        margin: 2rem 0;
+
+        &:first-child {
+            margin-top: 0;
+        }
+    }
+
+    .knapperad {
+        display: flex;
+        justify-content: flex-start;
+        align-items: flex-start;
+        flex-wrap: wrap;
+
+        .knapp {
+            margin-right: 1rem;
+            margin-bottom: 1rem;
+
+            &:last-child {
+                margin-bottom: 0.5rem;
+            }
+        }
+    }
+}
+
+@media (min-width: @screen-sm) {
+    .kvittering {
+        .knapperad {
+            .knapp {
+                margin-bottom: 0;
+            }
+        }
+    }
+}
