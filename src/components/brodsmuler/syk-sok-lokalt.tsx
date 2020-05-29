@@ -14,7 +14,7 @@ const SykSokLokalt = () => {
 
     return (
         <Vis hvis={env.isDev}>
-            <div>
+            <div style={{ position: 'absolute', fontSize: '10px', marginLeft: '1rem', color: 'gray' }}>
                 <span>sok <strong>{
                     valgtSoknad &&
                     valgtSoknad.id.substring(valgtSoknad.id.length - 6, valgtSoknad.id.length)
