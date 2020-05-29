@@ -22,12 +22,21 @@
         }
 
         .utvidbar__handling {
-            padding-top: 5px;
+            display: inline-flex;
+            align-items: center;
 
             em {
                 visibility: hidden;
                 font-size: 0;
             }
+        }
+
+        .utvidbar__innhold {
+            padding: 1rem 0;
+        }
+
+        .lenkerad {
+            display: none;
         }
     }
 
@@ -43,6 +52,7 @@
     }
 
     .utvidbar__toggle:focus {
+        outline: 0;
         box-shadow: 0 0 0 3px @fokusFarge;
         z-index: 1;
         position: relative;
