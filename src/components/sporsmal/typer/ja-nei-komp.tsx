@@ -64,6 +64,14 @@ const JaNeiInput = ({ sporsmal }: SpmProps) => {
                 <Bjorn nokkel='sykepengesoknad.ferie_v2.bjorn' className='blokk-m' />
             </Vis>
 
+            <Vis hvis={sporsmal.tag === TagTyper.ARBEID_UTENFOR_NORGE}>
+                <Bjorn nokkel='sykepengesoknad.arbeid_utenfor_norge.bjorn' className='blokk-m' />
+            </Vis>
+
+            <Vis hvis={sporsmal.tag === TagTyper.FRAVER_FOR_BEHANDLING}>
+                <Bjorn nokkel='sykepengesoknad.fraver_for_behandling.bjorn' className='blokk-m' />
+            </Vis>
+
             <div className='inputPanelGruppe inputPanelGruppe--horisontal'>
                 <fieldset className={'skjema__fieldset' + (errors[sporsmal.id] ? ' skjemagruppe--feil' : '')}>
                     <legend className='skjema__legend'>
