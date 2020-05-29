@@ -29,7 +29,7 @@ const Oppsummering = () => {
         <Ekspanderbartpanel apen={false} border={true}
             tittel={<Element>{tekst('sykepengesoknad.oppsummering.tittel')}</Element>}
         >
-            {valgtSoknad.sporsmal
+            {valgtSoknad!.sporsmal
                 .filter((sporsmal) => {
                     return skalVisesIOppsummering(sporsmal);
                 })

@@ -26,17 +26,17 @@ const Utvidbar = (props: UtvidbarProps) => {
 
     useEffect(() => {
         setErApen(props.erApen);
-        setInnholdHeight(innhold.current.offsetHeight)
+        setInnholdHeight(innhold.current!.offsetHeight)
     }, [ props.erApen ]);
 
     function onTransitionEnd() {
         if (erApen) {
-            window.scrollTo({ top: utvidbar.current.offsetTop, left: 0, behavior: 'smooth' });
+            window.scrollTo({ top: utvidbar.current!.offsetTop, left: 0, behavior: 'smooth' });
         } else {
-            if (!erSynligIViewport(utvidbar.current)) {
-                window.scrollTo({ top: utvidbar.current.offsetTop, left: 0, behavior: 'smooth' });
+            if (!erSynligIViewport(utvidbar.current!)) {
+                window.scrollTo({ top: utvidbar.current!.offsetTop, left: 0, behavior: 'smooth' });
             }
-            jsToggle.current.focus();
+            jsToggle.current!.focus();
         }
     }
 
@@ -46,8 +46,8 @@ const Utvidbar = (props: UtvidbarProps) => {
         >
             <button aria-expanded={erApen}
                 ref={jsToggle}
-                onMouseEnter={() => btnImage.current.src = props.ikonHover}
-                onMouseLeave={() => btnImage.current.src = props.ikon}
+                onMouseEnter={() => btnImage.current!.src = props.ikonHover!}
+                onMouseLeave={() => btnImage.current!.src = props.ikon!}
                 onClick={() => setErApen(!erApen)}
                 className='utvidbar__toggle'
             >
@@ -71,7 +71,7 @@ const Utvidbar = (props: UtvidbarProps) => {
                     {props.children}
                     <div className='lenkerad ikke-print'>
                         <button type='button' className='lenke' aria-pressed={!erApen}
-                            tabIndex={erApen ? null : -1} onClick={() => setErApen(!erApen)}
+                            tabIndex={(erApen ? null : -1) as any} onClick={() => setErApen(!erApen)}
                         >
                             <Normaltekst tag='span'>Lukk</Normaltekst>
                         </button>

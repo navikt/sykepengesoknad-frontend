@@ -22,7 +22,7 @@ const Knapperad = ({ onSubmit }: KnapperadProps) => {
     const { stegId } = useParams();
 
     const spmIndex = parseInt(stegId) - 2;
-    const nokkel = spmIndex === valgtSoknad.sporsmal.length - 3
+    const nokkel = spmIndex === valgtSoknad!.sporsmal.length - 3
         ? 'sykepengesoknad.send'
         : 'sykepengesoknad.ga-videre';
     const avbrytDialog = useRef<HTMLDivElement>(null);
@@ -30,7 +30,7 @@ const Knapperad = ({ onSubmit }: KnapperadProps) => {
 
     useEffect(() => {
         if (vilAvbryte) {
-            window.scrollTo({ top: avbrytDialog.current.offsetTop, left: 0, behavior: 'smooth' });
+            window.scrollTo({ top: avbrytDialog!.current!.offsetTop, left: 0, behavior: 'smooth' });
         }
     }, [ vilAvbryte ]);
 
@@ -41,16 +41,16 @@ const Knapperad = ({ onSubmit }: KnapperadProps) => {
 
     const handleAvbryt = (event: Event) => {
         event.preventDefault();
-        fetch(env.syfoapiRoot + `/syfosoknad/api/soknader/${valgtSoknad.id}/avbryt`, {
+        fetch(env.syfoapiRoot + `/syfosoknad/api/soknader/${valgtSoknad!.id}/avbryt`, {
             method: 'POST',
             credentials: 'include',
         }).then((res) => {
             const status = res.status;
             if (status === 200) {
                 const nySoknad = { ...valgtSoknad, status: RSSoknadstatus.AVBRUTT, avbruttDato: new Date() };
-                setSoknader(soknader.map(s => s.id === valgtSoknad.id ? nySoknad : s));
-                setValgtSoknad(nySoknad);
-                history.push(`/soknader/${valgtSoknad.id}/1`);
+                setSoknader(soknader.map(s => s.id === valgtSoknad!.id ? nySoknad : s) as any);
+                setValgtSoknad(nySoknad as any);
+                history.push(`/soknader/${valgtSoknad!.id}/1`);
                 setFeilmeldingTekst('');
             } else {
                 logger.error('Feil ved AVBYTING av søknad', res);

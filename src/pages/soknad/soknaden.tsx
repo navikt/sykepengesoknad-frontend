@@ -27,7 +27,7 @@ const brodsmuler: Brodsmule[] = [ {
     erKlikkbar: true
 }, {
     tittel: tekst('soknad.sidetittel'),
-    sti: null,
+    sti: null as any,
     erKlikkbar: false,
 } ];
 
@@ -67,15 +67,15 @@ const Fordeling = () => {
     const { valgtSoknad } = useAppStore();
     const { stegId } = useParams();
     const stegNo = parseInt(stegId);
-    const tittel = tekst(hentNokkel(valgtSoknad, stegNo));
+    const tittel = tekst(hentNokkel(valgtSoknad!, stegNo));
 
-    switch (valgtSoknad.status) {
+    switch (valgtSoknad!.status) {
         // Nye søknader
         case RSSoknadstatus.NY:
         case RSSoknadstatus.UTKAST_TIL_KORRIGERING:
             return (
                 <>
-                    <Vis hvis={valgtSoknad.status === RSSoknadstatus.UTKAST_TIL_KORRIGERING}>
+                    <Vis hvis={valgtSoknad!.status === RSSoknadstatus.UTKAST_TIL_KORRIGERING}>
                         <AlertStripe type='info' className='blokk-s'>
                             <span>{tekst('sykepengesoknad.utkast-til-korrigering.info')}</span>
                         </AlertStripe>
@@ -87,7 +87,7 @@ const Fordeling = () => {
 
                     <Vis hvis={stegNo > 1}>
                         <SporsmalSteg />
-                        <Link to={'/soknader/' + valgtSoknad.id + SEPARATOR + (stegNo - 1)} className='lenke tilbakelenke'>
+                        <Link to={'/soknader/' + valgtSoknad!.id + SEPARATOR + (stegNo - 1)} className='lenke tilbakelenke'>
                             <VenstreChevron />
                             <Normaltekst tag='span'>{tekst('soknad.tilbakeknapp')}</Normaltekst>
                         </Link>
@@ -122,11 +122,11 @@ const Fordeling = () => {
 
         // Fremtidige søknader
         case RSSoknadstatus.FREMTIDIG:
-            return null;
+            return null as any;
 
         // Utgåtte søknader
         case RSSoknadstatus.KORRIGERT:
         case RSSoknadstatus.SLETTET:
-            return null;
+            return null as any;
     }
 };

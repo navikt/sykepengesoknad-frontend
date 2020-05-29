@@ -24,14 +24,14 @@ export function sporsmalToRS(sporsmal: Sporsmal): RSSporsmal {
 const rsSporsmalMapping = (sporsmal: Sporsmal): RSSporsmal => {
     const rsSporsmal = {} as RSSporsmal;
     rsSporsmal.id = sporsmal.id;
-    rsSporsmal.tag = sporsmal.tag.toString() + tagIndexEllerBlank(sporsmal.tagIndex);
-    rsSporsmal.sporsmalstekst = sporsmal.sporsmalstekst === '' ? null : sporsmal.sporsmalstekst;
+    rsSporsmal.tag = sporsmal.tag.toString() + tagIndexEllerBlank(sporsmal.tagIndex as any);
+    rsSporsmal.sporsmalstekst = (sporsmal.sporsmalstekst === '' ? null : sporsmal.sporsmalstekst) as any;
     rsSporsmal.undertekst = sporsmal.undertekst;
     rsSporsmal.svartype = sporsmal.svartype;
     rsSporsmal.min = sporsmal.min;
     rsSporsmal.max = sporsmal.max;
     rsSporsmal.pavirkerAndreSporsmal = sporsmal.pavirkerAndreSporsmal;
-    rsSporsmal.kriterieForVisningAvUndersporsmal = rsVisningskriterie(sporsmal.kriterieForVisningAvUndersporsmal);
+    rsSporsmal.kriterieForVisningAvUndersporsmal = rsVisningskriterie(sporsmal.kriterieForVisningAvUndersporsmal) as any;
     rsSporsmal.svar = sporsmal.svarliste.svar;
     if (sporsmal.undersporsmal) {
         rsSporsmal.undersporsmal = sporsmal.undersporsmal.map((uspm: Sporsmal) => { return rsSporsmalMapping(uspm) });

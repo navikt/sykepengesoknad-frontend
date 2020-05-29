@@ -7,7 +7,7 @@ import { tekst } from '../../../utils/tekster';
 const SelvstendigInfo = () => {
     const { valgtSoknad } = useAppStore();
 
-    if (valgtSoknad.soknadstype !== RSSoknadstype.SELVSTENDIGE_OG_FRILANSERE) return null;
+    if (valgtSoknad!.soknadstype !== RSSoknadstype.SELVSTENDIGE_OG_FRILANSERE) return null;
 
     return (
         <div className='avsnitt'>

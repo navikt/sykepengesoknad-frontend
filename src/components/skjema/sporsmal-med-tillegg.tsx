@@ -74,7 +74,7 @@ const SporsmalMedTillegg = (props: SporsmalMedTilleggProps) => {
     }
 
     function scrollToHovedsporsmal() {
-        if (!erSynligIViewport(hovedsporsmal.current)) {
+        if (!erSynligIViewport(hovedsporsmal.current!)) {
             //const end = getTop(hovedsporsmal.current, 600);
             //window.scrollTo(end, 600);
         }
@@ -91,7 +91,7 @@ const SporsmalMedTillegg = (props: SporsmalMedTilleggProps) => {
         setHarAnimasjon(true);
 
         setTimeout(() => {
-            const hoyde: string = tilleggsinnhold ? tilleggsinnhold.current.offsetHeight.toString() : 'auto';
+            const hoyde: string = tilleggsinnhold ? tilleggsinnhold.current!.offsetHeight.toString() : 'auto';
             setErApen(true);
             setHoyde(hoyde);
             setContainerClassName(`${containerClassName} animerer`);
@@ -99,7 +99,7 @@ const SporsmalMedTillegg = (props: SporsmalMedTilleggProps) => {
     }
 
     function lukk() {
-        const hoyde = tilleggsinnhold.current.offsetHeight ? tilleggsinnhold.current.offsetHeight.toString() : gammelHoyde;
+        const hoyde = tilleggsinnhold.current!.offsetHeight ? tilleggsinnhold.current!.offsetHeight.toString() : gammelHoyde;
         setHoyde(hoyde);
         setOpacity(0);
 

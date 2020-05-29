@@ -60,7 +60,7 @@ const JaNeiInput = ({ sporsmal }: SpmProps) => {
 
     return (
         <>
-            <Vis hvis={valgtSoknad.soknadstype === RSSoknadstype.ARBEIDSTAKERE && sporsmal.tag === TagTyper.FERIE_V2}>
+            <Vis hvis={valgtSoknad!.soknadstype === RSSoknadstype.ARBEIDSTAKERE && sporsmal.tag === TagTyper.FERIE_V2}>
                 <Bjorn nokkel='sykepengesoknad.ferie_v2.bjorn' className='blokk-m' />
             </Vis>
 

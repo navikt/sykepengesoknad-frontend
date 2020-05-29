@@ -26,15 +26,15 @@ const DatoInput = ({ sporsmal }: SpmProps) => {
         const cls = errors[sporsmal.id]
             ? [ 'skjemaelement__input', 'skjemaelement__input--harFeil' ]
             : [ 'skjemaelement__input' ];
-        const input = datoRef.current.querySelector('.input--s[type=text]');
-        input.classList.add(...cls);
+        const input = datoRef.current!.querySelector('.input--s[type=text]');
+        input!.classList.add(...cls);
         // eslint-disable-next-line
     }, [ errors[sporsmal.id] ]);
 
     const lagIdForDato = () => {
-        const input = datoRef.current.querySelector('.input--s[type=text]');
-        input.setAttribute('id', 'input' + sporsmal.id);
-        input.setAttribute('autoComplete', 'off');
+        const input = datoRef.current!.querySelector('.input--s[type=text]');
+        input!.setAttribute('id', 'input' + sporsmal.id);
+        input!.setAttribute('autoComplete', 'off');
     };
 
     return (

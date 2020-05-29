@@ -37,7 +37,7 @@ const SporsmalSteg = () => {
     const { valgtSoknad } = useAppStore();
     const { stegId } = useParams();
     const aktivtSteg = parseInt(stegId);
-    const steg = valgtSoknad.sporsmal.filter(s => s.tag !== TagTyper.VAER_KLAR_OVER_AT);
+    const steg = valgtSoknad!.sporsmal.filter(s => s.tag !== TagTyper.VAER_KLAR_OVER_AT);
 
     return (
         <div className='stegindikator-med-fremdriftsbar' role='progressbar'
@@ -46,7 +46,7 @@ const SporsmalSteg = () => {
             <div className={'stegindikator stegindikator--kompakt'}>
                 <ol className='stegindikator__liste'>
                     {steg.map((sporsmal: Sporsmal, idx: number) => {
-                        return <Steg index={idx} key={idx} label={tekst(hentNokkel(valgtSoknad, idx + 1))} />;
+                        return <Steg index={idx} key={idx} label={tekst(hentNokkel(valgtSoknad!, idx + 1))} />;
                     })}
                 </ol>
             </div>

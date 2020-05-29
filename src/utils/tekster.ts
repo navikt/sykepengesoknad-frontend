@@ -34,7 +34,7 @@ export const tekst = (tekst: string): string => {
     if(!verdi && !tekst.includes('soknad.feilmelding')) {
         console.log(`Mangler teksten [ ${tekst} ]`);
         logger.error(`Mangler teksten [ ${tekst} ]`);
-        return undefined;
+        return undefined as any;
     }
     return verdi;
 };

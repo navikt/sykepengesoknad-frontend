@@ -60,7 +60,7 @@ export const hentFeilmelding = (sporsmal: Sporsmal): FeilmeldingProps => {
         lokal: tekst('soknad.feilmelding.' + sporsmal.tag + '.lokal')
     };
     if (feilmelding.lokal === undefined) {
-        feilmelding.lokal = hentGeneriskFeilmelding(sporsmal.svartype);
+        feilmelding.lokal = hentGeneriskFeilmelding(sporsmal.svartype)!;
     }
     return feilmelding;
 };

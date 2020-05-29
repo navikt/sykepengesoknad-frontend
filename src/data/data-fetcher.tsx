@@ -27,7 +27,7 @@ export function DataFetcher(props: { children: any }) {
                 body: JSON.stringify(unleashKeys),
                 headers: { 'Content-Type': 'application/json' }
             }, (fetchState: FetchState<UnleashToggles>) => {
-                setUnleash(fetchState.data);
+                setUnleash(fetchState.data as any);
             })
         }
         if (isNotStarted(rssoknader)) {

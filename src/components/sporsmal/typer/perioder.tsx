@@ -23,11 +23,11 @@ const Perioder = ({ sporsmal }: SpmProps) => {
     }, [ sporsmal ]);
 
     const lagIdForPerioder = () => {
-        const perioder = periodeliste.current.querySelectorAll('.periode');
+        const perioder = periodeliste.current!.querySelectorAll('.periode');
         perioder.forEach((value, key) => {
             const input = value.querySelector('.input--m[type=text]');
-            input.setAttribute('id', sporsmal.id + '_t_' + key);
-            input.setAttribute('autoComplete', 'off');
+            input!.setAttribute('id', sporsmal.id + '_t_' + key);
+            input!.setAttribute('autoComplete', 'off');
         })
 
     };

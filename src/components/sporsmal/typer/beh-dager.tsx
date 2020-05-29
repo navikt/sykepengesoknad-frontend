@@ -20,8 +20,8 @@ const BehDager = ({ sporsmal }: SpmProps) => {
             if (liste.svar[0] !== undefined && liste.svar[0].verdi !== '') {
                 lokal[idx] = liste.svar[0].verdi;
                 const radio = document.querySelector('.radioknapp[value="' + lokal[idx] + '"]');
-                radio.setAttribute('checked', 'checked');
-                radio.parentElement.parentElement.querySelector('.fjern').classList.remove('skjul');
+                radio!.setAttribute('checked', 'checked');
+                radio!.parentElement!.parentElement!.querySelector('.fjern')!.classList.remove('skjul');
             }
         });
         setLokal(lokal);
@@ -44,7 +44,7 @@ const BehDager = ({ sporsmal }: SpmProps) => {
 
     const fjernKlikk = (ukespm: Sporsmal, index: number) => {
         lokal[index] = '';
-        document.getElementById(ukespm.id + '_label').classList.add('skjul');
+        document.getElementById(ukespm.id + '_label')!.classList.add('skjul');
     };
 
     return (
@@ -85,7 +85,7 @@ const BehDager = ({ sporsmal }: SpmProps) => {
                                             />
                                             <label htmlFor={ukespm.id + '_' + idx}
                                                 onClick={() =>
-                                                    document.getElementById(ukespm.id + '_label')
+                                                    document.getElementById(ukespm.id + '_label')!
                                                         .classList.remove('skjul')}
                                             >
                                                 {dagspm.date()}

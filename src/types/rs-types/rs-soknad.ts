@@ -15,7 +15,7 @@ export interface RSSoknad {
     opprettetDato: string;
     sendtTilNAVDato?: string;
     sendtTilArbeidsgiverDato: string;
-    arbeidsgiver: Arbeidsgiver;
+    arbeidsgiver?: Arbeidsgiver;
     sporsmal: RSSporsmal[];
     soknadPerioder: RSSoknadsperiode[];
 }
@@ -29,9 +29,9 @@ export const soknadToRS = (soknad: Soknad): RSSoknad => {
     rsSoknad.fom = localDateEllerNull(soknad.fom);
     rsSoknad.tom = localDateEllerNull(soknad.tom);
     rsSoknad.avbruttDato = localDateEllerNull(soknad.avbruttDato);
-    rsSoknad.opprettetDato = localDateTimeEllerNull(soknad.opprettetDato);
+    rsSoknad.opprettetDato = localDateTimeEllerNull(soknad.opprettetDato)!;
     rsSoknad.sendtTilNAVDato = localDateTimeEllerNull(soknad.sendtTilNAVDato);
-    rsSoknad.sendtTilArbeidsgiverDato = localDateTimeEllerNull(soknad.sendtTilArbeidsgiverDato);
+    rsSoknad.sendtTilArbeidsgiverDato = localDateTimeEllerNull(soknad.sendtTilArbeidsgiverDato)!;
     rsSoknad.arbeidsgiver = soknad.arbeidsgiver;
     rsSoknad.sporsmal = soknad.sporsmal.map(spm => {
         return sporsmalToRS(spm);
@@ -41,10 +41,10 @@ export const soknadToRS = (soknad: Soknad): RSSoknad => {
     return rsSoknad;
 };
 
-const localDateEllerNull = (dato: Date) => {
-    return dato ? dato.toLocaleDateString() : null;
+const localDateEllerNull = (dato?: Date) => {
+    return dato ? dato.toLocaleDateString() : undefined;
 };
 
-const localDateTimeEllerNull = (dato: Date) => {
-    return dato ? dato.toDateString() : null;
+const localDateTimeEllerNull = (dato?: Date) => {
+    return dato ? dato.toDateString() : undefined;
 };
