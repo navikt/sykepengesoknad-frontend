@@ -31,7 +31,7 @@ const tekster = {
 export const tekst = (tekst: string): string => {
     const verdi = tekster[tekst];
     // Generiskfeilmelding har ingen tekst
-    if(!verdi && !tekst.includes('soknad.feilmelding')) {
+    if(!verdi === undefined && !tekst.includes('soknad.feilmelding')) {
         console.log(`Mangler teksten [ ${tekst} ]`);
         logger.error(`Mangler teksten [ ${tekst} ]`);
         return undefined as any;
