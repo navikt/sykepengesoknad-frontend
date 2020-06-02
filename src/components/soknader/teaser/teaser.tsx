@@ -3,7 +3,7 @@ import React from 'react';
 import { Soknad } from '../../../types/types';
 import { RSSoknadstatus } from '../../../types/rs-types/rs-soknadstatus';
 import { RSSoknadstype } from '../../../types/rs-types/rs-soknadstype';
-import { Inngangspanel, InngangsHeader, InngangsIkon } from '../inngang/inngangspanel';
+import { InngangsHeader, InngangsIkon, Inngangspanel } from '../inngang/inngangspanel';
 import { getUrlTilSoknad } from '../../../utils/url-utils';
 import GlobeIkon from './globe.svg';
 import GlobeHoverIkon from './globe-hover.svg';
@@ -106,7 +106,8 @@ export const hentTeaserStatustekst = (soknad: Soknad) => {
     if (
         soknad.status !== RSSoknadstatus.NY &&
         soknad.status !== RSSoknadstatus.SENDT &&
-        soknad.status !== RSSoknadstatus.AVBRUTT
+        soknad.status !== RSSoknadstatus.AVBRUTT &&
+        soknad.status !== RSSoknadstatus.FREMTIDIG
     ) {
         return getLedetekst(tekst(`soknad.teaser.status.${soknad.status}`), {
             '%DATO%': dayjs(getRiktigDato(soknad)).format('DD.MM.YYYY'),
@@ -136,9 +137,12 @@ const Teaser = ({ soknad }: SykepengesoknadTeaserProps) => {
                 <HoyreChevron />
                 <div className='inngangspanel__innhold'>
                     <InngangsHeader
-                        meta={getLedetekst(tekst('soknad.teaser.dato'), {
-                            '%DATO%': dayjs(soknad.opprettetDato).format('DD.MM.YYYY'),
-                        })}
+                        meta={ soknad.status === RSSoknadstatus.FREMTIDIG ?
+                            getLedetekst(tekst('soknad.teaser.dato.fremtidig'), {
+                                '%DATO%': dayjs(soknad.tom).format('DD.MM.YYYY'),
+                            }) : getLedetekst(tekst('soknad.teaser.dato'), {
+                                '%DATO%': dayjs(soknad.opprettetDato).format('DD.MM.YYYY'),
+                            })}
                         tittel={soknad.soknadstype === RSSoknadstype.OPPHOLD_UTLAND
                             ? tekst('soknad.utland.teaser.tittel')
                             : tekst('soknad.teaser.tittel')}
