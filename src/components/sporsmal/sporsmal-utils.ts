@@ -3,6 +3,7 @@ import { Soknad, Sporsmal } from '../../types/types';
 import { SEPARATOR } from '../../utils/constants';
 import { RSSvartype } from '../../types/rs-types/rs-svartype';
 import { tekst } from '../../utils/tekster';
+import { RSSoknadstype } from '../../types/rs-types/rs-soknadstype';
 
 export const erSisteSide = (soknad: Soknad, sidenummer: number) => {
     const sporsmal = soknad.sporsmal[sidenummer - 1];
@@ -16,7 +17,7 @@ export const hentNokkel = (soknad: Soknad, sidenummer: number) => {
         return '';
     }
     const nokkel = fjernIndexFraTag(sporsmal.tag).toLowerCase();
-    return sidenummer === 1
+    return (sidenummer === 1 && soknad.soknadstype !== RSSoknadstype.OPPHOLD_UTLAND)
         ? 'sykepengesoknad.foer-du-begynner.tittel'
         : erSisteSide(soknad, sidenummer)
             ? 'sykepengesoknad.til-slutt.tittel'

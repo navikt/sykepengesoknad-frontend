@@ -32,6 +32,7 @@ export const tekst = (tekst: string): string => {
     const verdi = tekster[tekst];
     // Generiskfeilmelding har ingen tekst
     if(!verdi === undefined && !tekst.includes('soknad.feilmelding')) {
+        // eslint-disable-next-line no-console
         console.log(`Mangler teksten [ ${tekst} ]`);
         logger.error(`Mangler teksten [ ${tekst} ]`);
         return undefined as any;
