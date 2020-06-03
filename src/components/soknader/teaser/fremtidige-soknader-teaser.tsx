@@ -30,10 +30,10 @@ const FremtidigeSoknaderTeaser = ({ soknad }: SykepengesoknadTeaserProps) => {
                     ikonHover={hentIkonHover(soknad.soknadstype)}
                 />
                 <HoyreChevron />
-                <div className='inngangspanel__innhold'>
+                <div className='inngangspanel--inaktivt'>
                     <InngangsHeader
-                        meta={ getLedetekst(tekst('soknad.teaser.dato'), {
-                            '%DATO%': dayjs(soknad.opprettetDato).format('DD.MM.YYYY'),
+                        meta={ getLedetekst(tekst('soknad.teaser.dato.fremtidig'), {
+                            '%DATO%': dayjs(soknad.tom).add(1, 'day').format('DD.MM.YYYY'),
                         })}
                         tittel={soknad.soknadstype === RSSoknadstype.OPPHOLD_UTLAND
                             ? tekst('soknad.utland.teaser.tittel')
