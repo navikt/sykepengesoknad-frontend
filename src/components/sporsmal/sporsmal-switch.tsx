@@ -2,6 +2,7 @@ import React from 'react';
 import TallKomp from './typer/tall-komp';
 import DatoInput from './typer/dato-komp';
 import JaNeiKomp from './typer/ja-nei-komp';
+import Land from './typer/land';
 import { Sporsmal } from '../../types/types';
 import UkjentSporsmal from './typer/ukjent-sporsmal';
 import CheckboxPanel from './typer/checkbox-panel';
@@ -54,6 +55,9 @@ const SporsmalSwitch = ({ sporsmal }: UndersporsmalProps) => {
 
         case RSSvartype.INFO_BEHANDLINGSDAGER:
             return <BehDager sporsmal={sporsmal} />;
+
+        case RSSvartype.LAND:
+            return <Land sporsmal={sporsmal} />;
 
         case RSSvartype.IKKE_RELEVANT:
             return <IkkeRelevant sporsmal={sporsmal} />;

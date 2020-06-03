@@ -5,6 +5,7 @@ import Vis from '../../vis';
 import { hentSvar } from '../hent-svar';
 import { hentFeilmelding } from '../sporsmal-utils';
 import { SpmProps } from '../sporsmal-form/sporsmal-form';
+import { TagTyper } from '../../../types/enums';
 
 const CheckboxInput = ({ sporsmal }: SpmProps) => {
     const { register, setValue, errors, watch } = useFormContext();
@@ -16,7 +17,7 @@ const CheckboxInput = ({ sporsmal }: SpmProps) => {
         const svar = hentSvar(sporsmal);
         setValue(sporsmal.id, svar);
         // eslint-disable-next-line
-    }, [ sporsmal ]);
+    }, [sporsmal]);
 
     const handleChange = () => {
         bekreft.current!.classList.toggle('bekreftCheckboksPanel--checked');
@@ -30,8 +31,14 @@ const CheckboxInput = ({ sporsmal }: SpmProps) => {
         return all + err;
     };
 
+    if (sporsmal.tag === TagTyper.BEKREFT_OPPLYSNINGER_UTLAND_INFO) {
+        return (
+            <CheckboxInput sporsmal={sporsmal.undersporsmal[0]}/>
+        )
+    }
     return (
         <>
+
             <div className={makeClassName()} ref={bekreft}>
                 <div className='skjemaelement skjemaelement--horisontal'>
                     <input type='checkbox'

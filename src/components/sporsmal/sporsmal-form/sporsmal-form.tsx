@@ -13,7 +13,7 @@ import CheckboxPanel from '../typer/checkbox-panel';
 import SendtTil from './sendt-til';
 import { SEPARATOR } from '../../../utils/constants';
 import { RSSoknadstatus } from '../../../types/rs-types/rs-soknadstatus';
-import { SvarTil } from '../../../types/enums';
+import { SvarTil, TagTyper } from '../../../types/enums';
 import Oppsummering from '../../oppsummering/oppsummering';
 import { settSvar } from '../sett-svar';
 import { useAmplitudeInstance } from '../../amplitude/amplitude';
@@ -27,6 +27,7 @@ import { RSOppdaterSporsmalResponse } from '../../../types/rs-types/rest-respons
 import { hentSvar } from '../hent-svar';
 import { logger } from '../../../utils/logger';
 import './sporsmal-form.less';
+import { RSSoknadstype } from '../../../types/rs-types/rs-soknadstype';
 
 export interface SpmProps {
     sporsmal: Sporsmal;
@@ -40,18 +41,27 @@ const SporsmalForm = () => {
     const history = useHistory();
     const spmIndex = parseInt(stegId) - 1;
     const methods = useForm();
+    const erUtlandssoknad = valgtSoknad!.soknadstype === RSSoknadstype.OPPHOLD_UTLAND
     let restFeilet = false;
-    let sporsmal = valgtSoknad!.sporsmal[ spmIndex ];
-    const nesteSporsmal = valgtSoknad!.sporsmal[ spmIndex + 1 ];
+    let sporsmal = valgtSoknad!.sporsmal[spmIndex];
+    const nesteSporsmal = valgtSoknad!.sporsmal[spmIndex + 1];
     const mottaker = useFetch<RSMottakerResponse>();
 
     useEffect(() => {
-        const snartSlutt = sporsmal.svartype === RSSvartype.IKKE_RELEVANT || sporsmal.svartype === RSSvartype.CHECKBOX_PANEL;
-        const sisteSide = snartSlutt && spmIndex === valgtSoknad!.sporsmal.length - 2;
+        function erSiste() {
+            const snartSlutt = sporsmal.svartype === RSSvartype.IKKE_RELEVANT || sporsmal.svartype === RSSvartype.CHECKBOX_PANEL;
+            if (erUtlandssoknad) {
+                return sporsmal.tag === TagTyper.BEKREFT_OPPLYSNINGER_UTLAND_INFO
+            }
+            return snartSlutt && spmIndex === valgtSoknad!.sporsmal.length - 2;
+
+        }
+
+        const sisteSide = erSiste();
         setErSiste(sisteSide);
         if (sisteSide) hentMottaker();
         // eslint-disable-next-line
-    }, [ spmIndex ]);
+    }, [spmIndex]);
 
     const sendOppdaterSporsmal = async() => {
         let soknad = valgtSoknad;
@@ -72,10 +82,10 @@ const SporsmalForm = () => {
                 } else {
                     const spm = data.oppdatertSporsmal;
                     erSiste ?
-                        soknad!.sporsmal[ spmIndex + 1 ] = new Sporsmal(spm, undefined as any, true) :
-                        soknad!.sporsmal[ spmIndex ] = new Sporsmal(spm, undefined as any, true);
+                        soknad!.sporsmal[spmIndex + 1] = new Sporsmal(spm, undefined as any, true) :
+                        soknad!.sporsmal[spmIndex] = new Sporsmal(spm, undefined as any, true);
                 }
-                soknader[ soknader.findIndex(sok => sok.id === soknad!.id) ] = soknad as any;
+                soknader[soknader.findIndex(sok => sok.id === soknad!.id)] = soknad as any;
                 setSoknader(soknader);
                 setValgtSoknad(soknad);
             } else {
@@ -87,6 +97,7 @@ const SporsmalForm = () => {
             restFeilet = true;
         }
     };
+
 
     const hentMottaker = () => {
         mottaker.fetch(env.syfoapiRoot + `/syfosoknad/api/soknader/${valgtSoknad!.id}/finnMottaker`, {
@@ -103,8 +114,7 @@ const SporsmalForm = () => {
                 } else if (m === RSMottaker.ARBEIDSGIVER_OG_NAV) {
                     setSendTil([ SvarTil.NAV, SvarTil.ARBEIDSGIVER ]);
                 }
-            }
-            else {
+            } else {
                 logger.error('Klarte ikke hente MOTTAKER av søknad', fetchState);
             }
         })
@@ -130,7 +140,7 @@ const SporsmalForm = () => {
                 });
                 valgtSoknad!.status = RSSoknadstatus.SENDT;
                 setValgtSoknad(valgtSoknad);
-                soknader[ soknader.findIndex(sok => sok.id === valgtSoknad!.id) ] = valgtSoknad!;
+                soknader[soknader.findIndex(sok => sok.id === valgtSoknad!.id)] = valgtSoknad!;
                 setSoknader(soknader);
             } else {
                 logger.error('Feil ved sending av søknad', res);
@@ -144,10 +154,14 @@ const SporsmalForm = () => {
 
     const onSubmit = async() => {
         settSvar(sporsmal, methods.getValues());
+        console.log(`On submit ${erSiste}`)
         if (erSiste) {
-            settSvar(nesteSporsmal, methods.getValues());
-            sporsmal = nesteSporsmal;
+            if (!erUtlandssoknad) {
+                settSvar(nesteSporsmal, methods.getValues());
+                sporsmal = nesteSporsmal;
+            }
             await sendOppdaterSporsmal();
+
             await sendSoknad();
             logEvent('Søknad sendt', { soknadstype: valgtSoknad!.soknadstype });
         } else {
@@ -164,7 +178,7 @@ const SporsmalForm = () => {
 
         if (restFeilet) {
             methods.setError('syfosoknad', 'rest-feilet', 'Beklager, det oppstod en feil');
-            sporsmal = valgtSoknad!.sporsmal[ spmIndex ];
+            sporsmal = valgtSoknad!.sporsmal[spmIndex];
         } else {
             methods.clearError();
             methods.reset();
@@ -177,13 +191,18 @@ const SporsmalForm = () => {
 
     return (
         <FormContext {...methods}>
-            <form onSubmit={methods.handleSubmit(onSubmit)} className={'sporsmal__form ' + nesteSporsmal.tag.toLowerCase()}>
+            <form onSubmit={methods.handleSubmit(onSubmit)}
+                className={'sporsmal__form ' + nesteSporsmal?.tag?.toLowerCase()}>
                 <SporsmalSwitch sporsmal={sporsmal}/>
 
-                <Vis hvis={erSiste}>
+                <Vis hvis={erSiste && !erUtlandssoknad}>
                     <Oppsummering/>
                     <CheckboxPanel sporsmal={nesteSporsmal}/>
                     <SendtTil/>
+                </Vis>
+
+                <Vis hvis={erSiste && erUtlandssoknad}>
+                    <CheckboxPanel sporsmal={sporsmal}/>
                 </Vis>
 
                 <FeilOppsummering errors={methods.errors} sporsmal={sporsmal}/>

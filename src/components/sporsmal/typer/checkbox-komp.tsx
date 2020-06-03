@@ -17,20 +17,22 @@ const CheckboxKomp = ({ sporsmal }: SpmProps) => {
 
     return (
         <>
-            <Vis hvis={sporsmal.sporsmalstekst !== null}>
-                <Element tag='h3' className='skjema__sporsmal'>{sporsmal.sporsmalstekst}</Element>
-            </Vis>
+            <div style={{ backgroundColor: 'red', padding: '20px' }}>
+                <Vis hvis={sporsmal.sporsmalstekst !== null}>
+                    <Element tag='h3' className='skjema__sporsmal'>{sporsmal.sporsmalstekst}</Element>
+                </Vis>
 
-            <div className={'skjemagruppe checkboxgruppe' + (errors[sporsmal.id] ? ' skjemagruppe--feil' : '')}>
-                {sporsmal.undersporsmal.map((uspm, idx) => {
-                    return <CheckboxSingle parent={sporsmal} sporsmal={uspm} key={idx} />;
-                })}
+                <div className={'skjemagruppe checkboxgruppe' + (errors[sporsmal.id] ? ' skjemagruppe--feil' : '')}>
+                    {sporsmal.undersporsmal.map((uspm, idx) => {
+                        return <CheckboxSingle parent={sporsmal} sporsmal={uspm} key={idx}/>;
+                    })}
 
-                <Normaltekst tag='div' role='alert' aria-live='assertive' className='skjemaelement__feilmelding'>
-                    <Vis hvis={Object.entries(errors).length > 0 && !validCheck}>
-                        <p>{feilmelding['lokal']}</p>
-                    </Vis>
-                </Normaltekst>
+                    <Normaltekst tag='div' role='alert' aria-live='assertive' className='skjemaelement__feilmelding'>
+                        <Vis hvis={Object.entries(errors).length > 0 && !validCheck}>
+                            <p>{feilmelding['lokal']}</p>
+                        </Vis>
+                    </Normaltekst>
+                </div>
             </div>
         </>
     )
@@ -53,7 +55,7 @@ const CheckboxSingle = ({ parent, sporsmal }: AllProps) => {
         const svar = hentSvar(sporsmal);
         setValue(sporsmal.id, svar === 'CHECKED' ? 'true' : '');
         // eslint-disable-next-line
-    }, [ sporsmal ]);
+    }, [sporsmal]);
 
     const valider = () => {
         const valid = harValgtNoe(parent, getValues());
@@ -84,7 +86,7 @@ const CheckboxSingle = ({ parent, sporsmal }: AllProps) => {
                 leave='undersporsmal--skjul'
                 start='undersporsmal'
             >
-                <UndersporsmalListe undersporsmal={sporsmal.undersporsmal} />
+                <UndersporsmalListe undersporsmal={sporsmal.undersporsmal}/>
             </AnimateOnMount>
         </div>
     )

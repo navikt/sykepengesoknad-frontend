@@ -1,7 +1,7 @@
 import React, { MouseEvent, useEffect, useRef, useState } from 'react';
-import { Knapp, Fareknapp } from 'nav-frontend-knapper';
+import { Fareknapp, Knapp } from 'nav-frontend-knapper';
 import { Normaltekst } from 'nav-frontend-typografi';
-import { useParams, useHistory } from 'react-router-dom';
+import { useHistory, useParams } from 'react-router-dom';
 import { useAppStore } from '../../../data/stores/app-store';
 import Vis from '../../vis';
 import env from '../../../utils/environment';
@@ -9,6 +9,7 @@ import { RSSoknadstatus } from '../../../types/rs-types/rs-soknadstatus';
 import Alertstripe from 'nav-frontend-alertstriper';
 import { tekst } from '../../../utils/tekster';
 import { logger } from '../../../utils/logger';
+import { RSSoknadstype } from '../../../types/rs-types/rs-soknadstype';
 
 type Event = MouseEvent<HTMLAnchorElement | HTMLButtonElement>;
 
@@ -22,7 +23,8 @@ const Knapperad = ({ onSubmit }: KnapperadProps) => {
     const { stegId } = useParams();
 
     const spmIndex = parseInt(stegId) - 2;
-    const nokkel = spmIndex === valgtSoknad!.sporsmal.length - 3
+
+    const nokkel = spmIndex === valgtSoknad!.sporsmal.length - (valgtSoknad!.soknadstype === RSSoknadstype.OPPHOLD_UTLAND ? 2 : 3)
         ? 'sykepengesoknad.send'
         : 'sykepengesoknad.ga-videre';
     const avbrytDialog = useRef<HTMLDivElement>(null);

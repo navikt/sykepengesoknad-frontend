@@ -19,6 +19,7 @@ import AlertStripe from 'nav-frontend-alertstriper';
 import { tekst } from '../../utils/tekster';
 import Kvittering from '../../components/kvittering/kvittering';
 import Brodsmuler from '../../components/brodsmuler/brodsmuler';
+import { RSSoknadstype } from '../../types/rs-types/rs-soknadstype';
 import './soknaden.less';
 
 const brodsmuler: Brodsmule[] = [ {
@@ -42,7 +43,7 @@ const Soknaden = () => {
         const sykmelding = sykmeldinger.filter(sm => sm.id === filtrertSoknad.sykmeldingId)[0];
         setValgtSykmelding(sykmelding);
         // eslint-disable-next-line
-    }, [ id ]);
+    }, [id]);
 
     useEffect(() => {
         setBodyClass('soknaden')
@@ -52,11 +53,11 @@ const Soknaden = () => {
 
     return (
         <>
-            <Banner />
+            <Banner/>
             <div className='limit'>
-                <Brodsmuler brodsmuler={brodsmuler} />
+                <Brodsmuler brodsmuler={brodsmuler}/>
                 <HotjarTrigger trigger={valgtSoknad.soknadstype}>
-                    <Fordeling />
+                    <Fordeling/>
                 </HotjarTrigger>
             </div>
         </>
@@ -70,6 +71,7 @@ const Fordeling = () => {
     const { stegId } = useParams();
     const stegNo = parseInt(stegId);
     const tittel = tekst(hentNokkel(valgtSoknad!, stegNo));
+    const erUtlandssoknad = valgtSoknad!.soknadstype === RSSoknadstype.OPPHOLD_UTLAND
 
     switch (valgtSoknad!.status) {
         // Nye søknader
@@ -83,38 +85,45 @@ const Fordeling = () => {
                         </AlertStripe>
                     </Vis>
 
-                    <Vis hvis={stegNo === 1}>
-                        <SoknadIntro />
+                    <Vis hvis={stegNo === 1 && !erUtlandssoknad}>
+                        <SoknadIntro/>
+                    </Vis>
+
+                    <Vis hvis={stegNo > 1 || erUtlandssoknad}>
+                        <SporsmalSteg/>
                     </Vis>
 
                     <Vis hvis={stegNo > 1}>
-                        <SporsmalSteg />
-                        <Link to={'/soknader/' + valgtSoknad!.id + SEPARATOR + (stegNo - 1)} className='lenke tilbakelenke'>
-                            <VenstreChevron />
+                        <Link to={'/soknader/' + valgtSoknad!.id + SEPARATOR + (stegNo - 1)}
+                            className='lenke tilbakelenke'>
+                            <VenstreChevron/>
                             <Normaltekst tag='span'>{tekst('soknad.tilbakeknapp')}</Normaltekst>
                         </Link>
                     </Vis>
 
-                    <Opplysninger ekspandert={true} />
+
+                    <Vis hvis={!erUtlandssoknad}>
+                        <Opplysninger ekspandert={true}/>
+                    </Vis>
 
                     <Vis hvis={tittel !== undefined}>
                         <Systemtittel className='sporsmal__tittel'>{tittel}</Systemtittel>
                     </Vis>
 
-                    <Vis hvis={stegNo === 1}>
+                    <Vis hvis={stegNo === 1 && !erUtlandssoknad}>
                         <Normaltekst tag='p' className='sporsmal__intro'>
                             {tekst('sykepengesoknad.foer-du-begynner.introtekst')}
                         </Normaltekst>
                     </Vis>
 
-                    <SporsmalForm />
+                    <SporsmalForm/>
                 </>
             );
 
         // Tidligere søknader
         case RSSoknadstatus.SENDT:
         case RSSoknadstatus.AVBRUTT:
-            return <Kvittering />;
+            return <Kvittering/>;
 
         // Fremtidige søknader
         case RSSoknadstatus.FREMTIDIG:
