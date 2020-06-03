@@ -2,7 +2,6 @@
 
 import { soknader } from '../../src/data/mock/data/soknader';
 import { Soknad } from '../../src/types/types';
-import { lyttTilNettverksKall } from './util/util';
 
 describe('Tester arbeidsledigsøknad', () => {
     //-----
@@ -15,20 +14,6 @@ describe('Tester arbeidsledigsøknad', () => {
     before(() => {
         cy.visit('http://localhost:8080');
     });
-
-    beforeEach(() => {
-        // TODO: Tror det kan opprettes en context slik at denne kan settes en gang
-        cy.window().then((win) => {
-            cy.spy(win, 'fetch').as('winFetch');
-        });
-    });
-
-    afterEach(() => {
-        cy.get('@winFetch').should((a: any) => {
-            lyttTilNettverksKall(a);
-        })
-    });
-
 
     it('Laster startside', () => {
         cy.get('.soknadtopp__tittel').should('be.visible').and('have.text', 'Søknad om sykepenger');

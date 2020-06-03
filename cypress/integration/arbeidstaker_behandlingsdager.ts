@@ -2,7 +2,6 @@
 
 import { soknader } from '../../src/data/mock/data/soknader';
 import { Soknad } from '../../src/types/types';
-import { lyttTilNettverksKall } from './util/util';
 
 describe('Tester behandlingsdagersøknad', () => {
     //-----
@@ -13,18 +12,6 @@ describe('Tester behandlingsdagersøknad', () => {
 
     before(() => {
         cy.visit('http://localhost:8080');
-    });
-
-    beforeEach(() => {
-        cy.window().then((win) => {
-            cy.spy(win, 'fetch').as('winFetch');
-        });
-    });
-
-    afterEach(() => {
-        cy.get('@winFetch').should((a: any) => {
-            lyttTilNettverksKall(a);
-        })
     });
 
     it('Laster startside', function() {

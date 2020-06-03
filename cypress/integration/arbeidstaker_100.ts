@@ -2,7 +2,6 @@
 
 import { soknader } from '../../src/data/mock/data/soknader';
 import { Soknad } from '../../src/types/types';
-import { lyttTilNettverksKall } from './util/util';
 
 describe('Tester arbeidstakersøknad', () => {
     //-----
@@ -13,18 +12,6 @@ describe('Tester arbeidstakersøknad', () => {
 
     before(() => {
         cy.visit('http://localhost:8080');
-    });
-
-    beforeEach(() => {
-        cy.window().then((win) => {
-            cy.spy(win, 'fetch').as('winFetch');
-        });
-    });
-
-    afterEach(() => {
-        cy.get('@winFetch').should((a: any) => {
-            lyttTilNettverksKall(a);
-        })
     });
 
     it('Laster startside', function() {
@@ -195,9 +182,9 @@ describe('Tester arbeidstakersøknad', () => {
         // Underspørsmål nivå 1 - checkbox
         cy.contains('Hvilke andre inntektskilder har du?');
         cy.get('.undersporsmal .checkboxgruppe label[for=687360]').should('include.text', 'selvstendig næringsdrivende');
-        cy.get('.undersporsmal .checkboxgruppe .checkboks#687360').click();
+        cy.get('.undersporsmal .checkboxgruppe .checkboks#687360').click({ force: true });
         // Underspørsmål nivå 2 - radio
-        cy.get('.undersporsmal .checkboxgruppe .radioContainer .radioknapp#687361_1').click();
+        cy.get('.undersporsmal .checkboxgruppe .radioContainer .radioknapp#687361_1').click({ force: true });
 
         cy.contains('Gå videre').click();
     });

@@ -1,10 +1,36 @@
+// ***********************************************************
+// This example support/index.js is processed and
+// loaded automatically before your test files.
+//
+// This is a great place to put global configuration and
+// behavior that modifies Cypress.
+//
+// You can change the location of this file or turn off
+// automatically serving support files with the
+// 'supportFile' configuration option.
+//
+// You can read more here:
+// https://on.cypress.io/configuration
+// ***********************************************************
 /* eslint-disable no-undef */
+import './commands'
+import { RSSporsmal } from '../../src/types/rs-types/rs-sporsmal';
+import { RSSvartype } from '../../src/types/rs-types/rs-svartype';
+import { SvarEnums } from '../../src/types/enums';
 
-import { RSSporsmal } from '../../../src/types/rs-types/rs-sporsmal';
-import { RSSvartype } from '../../../src/types/rs-types/rs-svartype';
-import { SvarEnums } from '../../../src/types/enums';
+beforeEach(() => {
+    cy.window().then((win) => {
+        cy.spy(win, 'fetch').as('winFetch');
+    });
+});
 
-export const lyttTilNettverksKall = (a: any) => {
+afterEach(() => {
+    cy.get('@winFetch').should((a: any) => {
+        lyttTilNettverksKall(a);
+    })
+});
+
+const lyttTilNettverksKall = (a: any) => {
     const spy = a ? a[ 'getCalls' ]() : [];
     for (const call of spy) {
         const { args } = call;
