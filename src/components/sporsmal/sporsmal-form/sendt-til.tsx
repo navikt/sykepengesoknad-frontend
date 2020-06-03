@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useAppStore } from '../../../data/stores/app-store';
 import { Normaltekst, Systemtittel } from 'nav-frontend-typografi';
 import { getLedetekst, tekst } from '../../../utils/tekster';
@@ -7,12 +7,13 @@ import './sendt-til.less';
 
 const SendtTil = () => {
     const { valgtSoknad, sendTil } = useAppStore();
-    let mottaker;
-    let nokkel = '';
+    const [ mottaker, setMottaker ] = useState<string | undefined>('')
+    const [ nokkel, setNokkel ] = useState<string>('')
 
     useEffect(() => {
-        mottaker = sendTil && sendTil.length > 0 ? sendTil.sort().reverse().join('-').toLowerCase() : undefined;
-        nokkel = `sykepengesoknad.kvittering.til-${mottaker}.tekst`;
+        setMottaker(sendTil && sendTil.length > 0 ? sendTil.sort().reverse().join('-').toLowerCase() : undefined);
+        setNokkel(`sykepengesoknad.kvittering.til-${mottaker}.tekst`);
+        // eslint-disable-next-line
     }, []);
 
     if (mottaker === undefined) {
