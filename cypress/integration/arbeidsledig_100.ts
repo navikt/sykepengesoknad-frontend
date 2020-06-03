@@ -9,14 +9,15 @@ describe('Tester arbeidsledigsøknad', () => {
     // Sykmelding: 470c9e25-e112-4060-be61-7a24af530889, arbeidsledig - 100%
     // Søknad: 934f39f4-cb47-459f-8209-0dbef6d36059, fom: 1.4.20, tom: 24.4.20
     //-----
+
     const soknad = soknader.find((sok: Soknad) => sok.id === '934f39f4-cb47-459f-8209-0dbef6d36059');
 
     before(() => {
         cy.visit('http://localhost:8080');
-        cy.get('.soknadtopp__tittel').should('be.visible').and('have.text', 'Søknad om sykepenger');
     });
 
     beforeEach(() => {
+        // TODO: Tror det kan opprettes en context slik at denne kan settes en gang
         cy.window().then((win) => {
             cy.spy(win, 'fetch').as('winFetch');
         });

@@ -2,6 +2,7 @@
 
 import { soknader } from '../../src/data/mock/data/soknader';
 import { Soknad } from '../../src/types/types';
+import { lyttTilNettverksKall } from './util/util';
 
 describe('Tester arbeidstakersøknad', () => {
     //-----
@@ -10,8 +11,23 @@ describe('Tester arbeidstakersøknad', () => {
     //-----
     const soknad = soknader.find((sok: Soknad) => sok.id === 'faba11f5-c4f2-4647-8c8a-58b28ce2f3ef');
 
-    it('Laster startside', function() {
+    before(() => {
         cy.visit('http://localhost:8080');
+    });
+
+    beforeEach(() => {
+        cy.window().then((win) => {
+            cy.spy(win, 'fetch').as('winFetch');
+        });
+    });
+
+    afterEach(() => {
+        cy.get('@winFetch').should((a: any) => {
+            lyttTilNettverksKall(a);
+        })
+    });
+
+    it('Laster startside', function() {
         cy.get('.soknadtopp__tittel').should('be.visible').and('have.text', 'Søknad om sykepenger');
         cy.get(`#soknader-list-til-behandling article a[href*=${soknad.id}]`).click();
     });
