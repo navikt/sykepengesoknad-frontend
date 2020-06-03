@@ -2,13 +2,29 @@
 
 import { soknader } from '../../src/data/mock/data/soknader';
 import { Soknad } from '../../src/types/types';
+import { lyttTilNettverksKall } from './util/util';
 
 describe('Tester søknad om å beholde sykepenger utenfor EØS', () => {
 
     const soknad = soknader.find((sok: Soknad) => sok.id === 'b9d67b0d-b1f8-44a5-bcbd-6010b60b90ce');
 
-    it('Laster startside', function() {
+    before(() => {
         cy.visit('http://localhost:8080');
+    });
+
+    beforeEach(() => {
+        cy.window().then((win) => {
+            cy.spy(win, 'fetch').as('winFetch');
+        });
+    });
+
+    afterEach(() => {
+        cy.get('@winFetch').should((a: any) => {
+            lyttTilNettverksKall(a);
+        })
+    });
+
+    it('Laster startside', function() {
         cy.get('.soknadtopp__tittel').should('be.visible').and('have.text', 'Søknad om sykepenger');
         cy.get(`#soknader-list-til-behandling article a[href*=${soknad.id}]`).should('include.text', 'Søknad om å beholde sykepenger utenfor EØS');
         cy.get(`#soknader-list-til-behandling article a[href*=${soknad.id}]`).click();

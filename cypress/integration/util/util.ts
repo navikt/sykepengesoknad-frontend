@@ -18,7 +18,12 @@ export const lyttTilNettverksKall = (a: any) => {
                 .to.deep.eq({ 'Content-Type': 'application/json' });
             svarFormat(sporsmal);
         }
-        else if(url.includes('finnMottaker')) {
+        else if(url.includes('/finnMottaker')) {
+            const headers = req[ 'headers' ];
+            expect(headers, '/finnMottaker')
+                .to.deep.eq({ 'Content-Type': 'application/json' });
+        }
+        else if(url.includes('/send')) {
             const headers = req[ 'headers' ];
             expect(headers, '/finnMottaker')
                 .to.deep.eq({ 'Content-Type': 'application/json' });
@@ -70,19 +75,26 @@ const svarFormat = (sporsmal: RSSporsmal) => {
                 expect(sporsmal.svar[ 0 ].verdi).to.match(RegExp(`(${SvarEnums.CHECKED}|)`),
                     `Svar format ${sporsmal.svartype}`)
                 break;
+            case RSSvartype.LAND:
+                expect(sporsmal.svar[ 0 ].verdi).to.match(RegExp('\\S+'),
+                    `Svar format ${sporsmal.svartype}`)
+                break;
             case RSSvartype.FRITEKST:
             case RSSvartype.IKKE_RELEVANT:
-            case RSSvartype.LAND:
             case RSSvartype.PERIODE:
             case RSSvartype.RADIO_GRUPPE:
             case RSSvartype.RADIO_GRUPPE_TIMER_PROSENT:
             case RSSvartype.BEHANDLINGSDAGER:
             case RSSvartype.INFO_BEHANDLINGSDAGER:
-            /* Ubesvart eller tags som ikke skal ha svar er på dette formatet:
-                sporsmal: {
-                    svar: []
-                }
-            */
+                /* Ubesvart eller tags som ikke skal ha svar er på dette formatet:
+                    sporsmal: {
+                        svar: []
+                    }
+                */
+                break;
+            default:
+                expect(true, `Mangler format på sporsmal ${sporsmal.svartype}`)
+                    .to.be.false
         }
     }
 
