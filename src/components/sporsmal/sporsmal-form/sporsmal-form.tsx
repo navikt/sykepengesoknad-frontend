@@ -154,7 +154,6 @@ const SporsmalForm = () => {
 
     const onSubmit = async() => {
         settSvar(sporsmal, methods.getValues());
-        console.log(`On submit ${erSiste}`)
         if (erSiste) {
             if (!erUtlandssoknad) {
                 settSvar(nesteSporsmal, methods.getValues());
