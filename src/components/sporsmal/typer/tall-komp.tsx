@@ -52,6 +52,7 @@ const TallInput = ({ sporsmal }: SpmProps) => {
                             )
                         }
                     })}
+                    step={0.1}
                     onChange={onChange}
                     autoComplete='off'
                 />
