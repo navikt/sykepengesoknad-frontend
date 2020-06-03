@@ -16,7 +16,7 @@ const SendtTil = () => {
         // eslint-disable-next-line
     }, []);
 
-    if (mottaker === undefined) {
+    if (mottaker === undefined || nokkel === '') {
         return null;
     }
 
@@ -25,16 +25,14 @@ const SendtTil = () => {
             <Systemtittel tag='h2'>
                 {tekst('sykepengesoknad.kvittering.tittel')}
             </Systemtittel>
-            {mottaker !== undefined ?
-                <Normaltekst tag='div'>
-                    {valgtSoknad!.arbeidsgiver !== undefined
-                        ? parser(getLedetekst(tekst(nokkel), {
-                            '%ARBEIDSGIVER%': valgtSoknad!.arbeidsgiver.navn,
-                        }))
-                        : parser(tekst(nokkel))
-                    }
-                </Normaltekst> : null
-            }
+            <Normaltekst tag='div'>
+                {valgtSoknad!.arbeidsgiver !== undefined
+                    ? parser(getLedetekst(tekst(nokkel), {
+                        '%ARBEIDSGIVER%': valgtSoknad!.arbeidsgiver.navn,
+                    }))
+                    : parser(tekst(nokkel))
+                }
+            </Normaltekst> : null
         </div>
     )
 };
