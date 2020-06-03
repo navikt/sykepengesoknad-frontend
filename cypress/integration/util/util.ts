@@ -14,9 +14,17 @@ export const lyttTilNettverksKall = (a: any) => {
         if (url.includes('sporsmal')) {
             const headers = req[ 'headers' ];
             const sporsmal = JSON.parse(req[ 'body' ]) as RSSporsmal;
-
-            expect(headers).to.deep.eq({ 'Content-Type': 'application/json' });
+            expect(headers, '/oppdaterSporsmal')
+                .to.deep.eq({ 'Content-Type': 'application/json' });
             svarFormat(sporsmal);
+        }
+        else if(url.includes('finnMottaker')) {
+            const headers = req[ 'headers' ];
+            expect(headers, '/finnMottaker')
+                .to.deep.eq({ 'Content-Type': 'application/json' });
+        }
+        else {
+            cy.log('Sjekker ikke kallet til', url);
         }
     }
 };
@@ -37,8 +45,8 @@ const svarFormat = (sporsmal: RSSporsmal) => {
                     `Svar format ${sporsmal.svartype}`)
                 break;
             case RSSvartype.CHECKBOX_GRUPPE:
-                expect(sporsmal.svar, `Svar format ${sporsmal.svartype}`)
-                    .to.deep.eq([ { verdi: '' } ])
+                expect(sporsmal.svar).to.deep.eq([ { verdi: '' } ],
+                    `Svar format ${sporsmal.svartype}`)
                 break;
             case RSSvartype.CHECKBOX:
                 expect(sporsmal.svar[ 0 ].verdi).to.match(RegExp(`(${SvarEnums.CHECKED}|)`),
