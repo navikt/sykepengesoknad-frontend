@@ -8,7 +8,7 @@
     }
 
     &__innhold {
-        padding: 0 2.5rem 3rem;
+        padding: 0 1.5rem;
     }
 
     .sporsmal {
@@ -97,26 +97,26 @@
         padding-left: 1.5rem;
     }
 
-  .oppsummering__svarliste:last-child .oppsummering__undersporsmalsliste {
-    margin-bottom: 0;
-  }
+    .oppsummering__svarliste:last-child .oppsummering__undersporsmalsliste {
+        margin-bottom: 0;
+    }
 
-  .oppsummering__svarliste + .oppsummering__svarliste {
-    margin-top: 1rem;
-  }
+    .oppsummering__svarliste + .oppsummering__svarliste {
+        margin-top: 1rem;
+    }
 
-  .oppsummering__overskrift + .oppsummering__undersporsmalsliste {
-    margin-top: 0;
-  }
+    .oppsummering__overskrift + .oppsummering__undersporsmalsliste {
+        margin-top: 0;
+    }
 
-  .oppsummering__undersporsmalsliste {
-    margin-top: 2rem;
-  }
+    .oppsummering__undersporsmalsliste {
+        margin-top: 2rem;
+    }
 
-  .oppsummering__sporsmal + .oppsummering__undersporsmalsliste,
-  .oppsummering__avkrysset + .oppsummering__undersporsmalsliste {
-    margin-bottom: 1rem;
-    margin-top: 1rem;
+    .oppsummering__sporsmal + .oppsummering__undersporsmalsliste,
+    .oppsummering__avkrysset + .oppsummering__undersporsmalsliste {
+        margin-bottom: 1rem;
+        margin-top: 1rem;
 
         > .oppsummering__tekstsvar:first-child {
             margin-top: -1rem;
@@ -136,7 +136,7 @@
     }
 
     .oppsummering__dato,
-    .oppsummering__land{
+    .oppsummering__land {
         margin-bottom: 0;
 
         &:before {
@@ -158,3 +158,12 @@
         padding: 0;
     }
 }
+
+@media (min-width: @screen-sm) {
+    .ekspanderbartPanel {
+        &__innhold {
+            padding: 0 2.5rem 3rem;
+        }
+    }
+}
+
