@@ -52,6 +52,12 @@
         }
     }
 
+    .inngangspanel__status {
+        position:absolute;
+        top:1.8rem;
+        right:3rem;
+    }
+
     &.inngangspanel--ekstern {
         border: 5px solid #669db4;
         background-position: 97% center;
@@ -62,5 +68,15 @@
 
     .inngangspanel__undertekst {
         margin-top: 0.7rem;
+    }
+
+}
+
+.inngangspanel--inaktivt {
+    background-image: none;
+    color: @navGra60;
+
+    .inngangspanel__status {
+        color: @navMorkGra;
     }
 }

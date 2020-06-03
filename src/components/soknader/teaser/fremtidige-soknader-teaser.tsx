@@ -1,6 +1,5 @@
 import dayjs from 'dayjs';
 import React from 'react';
-import { RSSoknadstatus } from '../../../types/rs-types/rs-soknadstatus';
 import { RSSoknadstype } from '../../../types/rs-types/rs-soknadstype';
 import { InngangsHeader, InngangsIkon, Inngangspanel } from '../inngang/inngangspanel';
 import { getUrlTilSoknad } from '../../../utils/url-utils';
@@ -11,37 +10,35 @@ import { Normaltekst } from 'nav-frontend-typografi';
 import { HoyreChevron } from 'nav-frontend-chevron';
 import { useAmplitudeInstance } from '../../amplitude/amplitude';
 import {
-    beregnUndertekst,
+    finnArbeidsgivernavn,
     hentIkon,
     hentIkonHover,
     hentTeaserStatustekst,
     SykepengesoknadTeaserProps
 } from './teaser-util';
 
-const Teaser = ({ soknad }: SykepengesoknadTeaserProps) => {
+const FremtidigeSoknaderTeaser = ({ soknad }: SykepengesoknadTeaserProps) => {
     const { logEvent } = useAmplitudeInstance();
-    const stegId = soknad.status === RSSoknadstatus.NY || RSSoknadstatus.UTKAST_TIL_KORRIGERING ? '1' : '';
-    const undertekst = beregnUndertekst(soknad);
 
     return (
         <article aria-labelledby={`soknader-header-${soknad.id}`} onClick={() => {
             logEvent('Velger søknad', { soknadstype: soknad.soknadstype });
         }}>
-            <Inngangspanel to={getUrlTilSoknad(soknad.id, stegId)}>
+            <Inngangspanel to={getUrlTilSoknad(soknad.id, '')}>
                 <InngangsIkon
                     ikon={hentIkon(soknad.soknadstype)}
                     ikonHover={hentIkonHover(soknad.soknadstype)}
                 />
                 <HoyreChevron />
-                <div className='inngangspanel__innhold'>
+                <div className='inngangspanel--inaktivt'>
                     <InngangsHeader
-                        meta={ getLedetekst(tekst('soknad.teaser.dato'), {
-                            '%DATO%': dayjs(soknad.opprettetDato).format('DD.MM.YYYY'),
+                        meta={ getLedetekst(tekst('soknad.teaser.dato.fremtidig'), {
+                            '%DATO%': dayjs(soknad.tom).add(1, 'day').format('DD.MM.YYYY'),
                         })}
                         tittel={soknad.soknadstype === RSSoknadstype.OPPHOLD_UTLAND
                             ? tekst('soknad.utland.teaser.tittel')
                             : tekst('soknad.teaser.tittel')}
-                        status={hentTeaserStatustekst(soknad)}
+                        status={ hentTeaserStatustekst(soknad) }
                     />
                     <Vis hvis={soknad.soknadstype !== RSSoknadstype.OPPHOLD_UTLAND}>
                         <Normaltekst className='inngangspanel__tekst'>
@@ -50,15 +47,13 @@ const Teaser = ({ soknad }: SykepengesoknadTeaserProps) => {
                             })}
                         </Normaltekst>
                     </Vis>
-                    <Vis hvis={undertekst !== undefined}>
-                        <Normaltekst className='inngangspanel__undertekst'>
-                            {undertekst}
-                        </Normaltekst>
-                    </Vis>
+                    <Normaltekst className='inngangspanel__undertekst'>
+                        { finnArbeidsgivernavn(soknad)}
+                    </Normaltekst>
                 </div>
             </Inngangspanel>
         </article>
     );
 };
 
-export default Teaser;
+export default FremtidigeSoknaderTeaser;
