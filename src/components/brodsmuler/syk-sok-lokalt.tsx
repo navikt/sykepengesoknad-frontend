@@ -13,7 +13,7 @@ const SykSokLokalt = () => {
     }
 
     return (
-        <Vis hvis={env.isDev}>
+        <Vis hvis={env.isDev && window.innerWidth > 767}>
             <div style={{ position: 'absolute', fontSize: '10px', marginLeft: '1rem', color: 'gray' }}>
                 <span>type <strong>{valgtSoknad.soknadstype} </strong></span>
                 <span>sok <strong>{

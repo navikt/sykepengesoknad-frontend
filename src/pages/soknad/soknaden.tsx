@@ -18,8 +18,8 @@ import { SEPARATOR } from '../../utils/constants';
 import AlertStripe from 'nav-frontend-alertstriper';
 import { tekst } from '../../utils/tekster';
 import Kvittering from '../../components/kvittering/kvittering';
-import './soknaden.less';
 import Brodsmuler from '../../components/brodsmuler/brodsmuler';
+import './soknaden.less';
 
 const brodsmuler: Brodsmule[] = [ {
     tittel: tekst('soknader.sidetittel'),

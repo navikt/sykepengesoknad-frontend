@@ -25,7 +25,7 @@ const KvitteringTekster: any = {
         'kvittering.knapp.bekreft.send-til-nav-ettersending': 'Send søknaden likevel',
 
         'kvittering.soknaden-er-sendt-til': 'Søknaden er sendt til',
-        'kvittering.mottatt': 'Mottatt:',
+        'kvittering.mottatt': 'Mottatt',
         'kvittering.hva-skjer-videre': 'Hva skjer videre?',
         'kvittering.nav-behandler-soknaden': 'NAV behandler søknaden din',
         'kvittering.saksbehandling-avhenger-av': 'Saksbehandlingstid avhenger av hvilket fylke du bor i og om det er førstegangssøknad eller søknad om forlengelse.',
