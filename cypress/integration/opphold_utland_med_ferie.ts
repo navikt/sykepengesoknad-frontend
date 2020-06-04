@@ -43,34 +43,25 @@ describe('Tester søknad om å beholde sykepenger utenfor EØS', () => {
         cy.contains('Gå videre').click();
     });
 
-    it('ARBEIDSGIVER', function() {
+    it('Vi svarer Ja på arbeidsgiverspørsmålet', function() {
         cy.url().should('include', `${soknad.id}/3`);
-
-
         cy.contains('Har du arbeidsgiver?');
-        cy.contains('Nei').click({ force: true });
-
-        cy.contains('Gå videre').click();
+        cy.get('#3_0').click({ force: true });
+        cy.contains('Er du 100 % sykmeldt?');
     });
 
-    it('BEKRFEFT', function() {
-        cy.url().should('include', `${soknad.id}/4`);
-
-
-        cy.contains('Bekreft opplysninger');
-        cy.contains('Før du reiser ber vi deg bekrefte');
-        cy.contains('Jeg bekrefter de to punktene ovenfor').click({ force: true });
-
-        cy.contains('Send søknaden').click();
+    it('Sykmeldt sporsmalet forsvinner når vi klikker nei', function() {
+        cy.get('#3_1').click({ force: true });
+        cy.contains('Er du 100 % sykmeldt?').should('not.exist');
+        cy.get('#3_0').click({ force: true });
     });
 
-    it('Kvittering', function() {
-        cy.url().should('include', `kvittering/${soknad.id}`);
+    it('Gå videre forsvinner når man har avtalt ferie', function() {
+        cy.contains('Har du avtalt med arbeidsgiveren din at du skal ha ferie i hele perioden?');
+        cy.contains('Gå videre');
 
-
-        cy.contains('Søknaden er sendt til NAV');
-        cy.contains('Endre søknad').should('not.exist');
-        cy.contains('Send til NAV').should('not.exist');
+        cy.get('#5_0').click({ force: true });
+        cy.contains('Gå videre').should('not.exist');
     });
-
 });
+

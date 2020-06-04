@@ -18,6 +18,7 @@ import { useHistory } from 'react-router';
 import KvitteringStatus from './kvittering-status';
 import KvitteringInfo from './kvittering-info';
 import './kvittering.less';
+import { RSSoknadstype } from '../../types/rs-types/rs-soknadstype';
 
 const Kvittering = () => {
     const { valgtSoknad, soknader, setSoknader, feilmeldingTekst, setFeilmeldingTekst } = useAppStore();
@@ -34,7 +35,7 @@ const Kvittering = () => {
                 const soknad = new Soknad(fetchState.data);
                 soknader.push(soknad);
                 setSoknader(soknader);
-                history.push(getUrlTilSoknad(soknad.id, undefined));
+                history.push(getUrlTilSoknad(soknad, undefined));
                 setFeilmeldingTekst('');
             } else {
                 logger.error('Feil ved opprettelse av UTKAST_TIL_KORRIGERING', fetchState);
@@ -43,6 +44,8 @@ const Kvittering = () => {
         });
     };
 
+    const skalViseKnapperad = !(valgtSoknad?.soknadstype === RSSoknadstype.OPPHOLD_UTLAND)
+
     return (
         <div className="kvittering">
             <KvitteringStatus />
@@ -50,15 +53,17 @@ const Kvittering = () => {
             <Opplysninger ekspandert={false} />
             <Oppsummering />
 
-            <div className='knapperad'>
-                <Knapp mini type='standard' onClick={korriger}>{tekst('kvittering.knapp.endre')}</Knapp>
+            <Vis hvis={skalViseKnapperad}>
+                <div className='knapperad'>
+                    <Knapp mini type='standard' onClick={korriger}>{tekst('kvittering.knapp.endre')}</Knapp>
 
-                <Ettersending gjelder='nav' />
+                    <Ettersending gjelder='nav' />
 
-                <Vis hvis={valgtSoknad!.arbeidsgiver !== undefined}>
-                    <Ettersending gjelder='arbeidsgiver' />
-                </Vis>
-            </div>
+                    <Vis hvis={valgtSoknad!.arbeidsgiver !== undefined}>
+                        <Ettersending gjelder='arbeidsgiver' />
+                    </Vis>
+                </div>
+            </Vis>
 
             <div aria-live="polite">
                 <Vis hvis={feilmeldingTekst !== ''}>

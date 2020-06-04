@@ -23,7 +23,7 @@ const JaEllerNei = ({ sporsmal }: OppsummeringProps) => {
     return (
         <div className='oppsummering-sporsmal'>
             <Element tag='h3'>{sporsmal.sporsmalstekst}</Element>
-            <Avkrysset tekst={svartekst}/>
+            <Avkrysset tekst={svartekst} />
             <Vis hvis={erUndersporsmalStilt(sporsmal)}>
                 <UndersporsmalSum sporsmalsliste={sporsmal.undersporsmal} />
             </Vis>

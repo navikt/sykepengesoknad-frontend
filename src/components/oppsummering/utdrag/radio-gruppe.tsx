@@ -17,8 +17,8 @@ const RadioGruppe = ({ sporsmal }: OppsummeringProps) => {
             <div className='oppsummering__sporsmal'>
                 <Element tag='h3' className='oppsummering__overskrift'>{sporsmal.sporsmalstekst}</Element>
                 {sporsmal.svartype === RSSvartype.RADIO_GRUPPE &&
-                <Avkrysset tekst={besvartUndersporsmal.sporsmalstekst}/>}
-                <UndersporsmalSum sporsmalsliste={besvartUndersporsmal.undersporsmal}/>
+                <Avkrysset tekst={besvartUndersporsmal.sporsmalstekst} />}
+                <UndersporsmalSum sporsmalsliste={besvartUndersporsmal.undersporsmal} />
             </div>
         </Vis>
     )

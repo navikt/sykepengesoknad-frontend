@@ -10,7 +10,7 @@ const SoknadIntro = () => {
     return (
         <div className='soknad-intro'>
             <div className='blokk-s'>
-                <Veilederpanel kompakt svg={<ForsteSoknadSvg/>}>
+                <Veilederpanel kompakt svg={<ForsteSoknadSvg />}>
                     <Normaltekst tag='h2' className='panel__tittel sist'>
                         {parser(tekst('sykepengesoknad.soknad-intro.personvern'))}
                     </Normaltekst>

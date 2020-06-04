@@ -26,13 +26,13 @@ const DatoInput = ({ sporsmal }: SpmProps) => {
         const cls = errors[sporsmal.id]
             ? [ 'skjemaelement__input', 'skjemaelement__input--harFeil' ]
             : [ 'skjemaelement__input' ];
-        const input = datoRef.current!.querySelector('.input--s[type=text]');
+        const input = datoRef.current!.querySelector('.input--m[type=text], .input--m[type=date]');
         input!.classList.add(...cls);
         // eslint-disable-next-line
     }, [ errors[sporsmal.id] ]);
 
     const lagIdForDato = () => {
-        const input = datoRef.current!.querySelector('.input--s[type=text]');
+        const input = datoRef.current!.querySelector('.input--m[type=text], .input--m[type=date]');
         input!.setAttribute('id', 'input' + sporsmal.id);
         input!.setAttribute('autoComplete', 'off');
     };
@@ -47,7 +47,7 @@ const DatoInput = ({ sporsmal }: SpmProps) => {
                 rules={{ required:feilmelding.global }}
                 id={sporsmal.id}
                 name={sporsmal.id}
-                className='skjemaelement__input input--s'
+                className='skjemaelement__input input--m'
                 placeholder='dd.mm.yyyy'
                 options={{
                     minDate: sporsmal.min,
