@@ -10,8 +10,11 @@ describe('Tester arbeidstakersøknad', () => {
     //-----
     const soknad = soknader.find((sok: Soknad) => sok.id === 'faba11f5-c4f2-4647-8c8a-58b28ce2f3ef');
 
-    it('Laster startside', function() {
+    before(() => {
         cy.visit('http://localhost:8080');
+    });
+
+    it('Laster startside', function() {
         cy.get('.soknadtopp__tittel').should('be.visible').and('have.text', 'Søknad om sykepenger');
         cy.get(`#soknader-list-til-behandling article a[href*=${soknad.id}]`).click();
     });
@@ -179,9 +182,9 @@ describe('Tester arbeidstakersøknad', () => {
         // Underspørsmål nivå 1 - checkbox
         cy.contains('Hvilke andre inntektskilder har du?');
         cy.get('.undersporsmal .checkboxgruppe label[for=687360]').should('include.text', 'selvstendig næringsdrivende');
-        cy.get('.undersporsmal .checkboxgruppe .checkboks#687360').click();
+        cy.get('.undersporsmal .checkboxgruppe .checkboks#687360').click({ force: true });
         // Underspørsmål nivå 2 - radio
-        cy.get('.undersporsmal .checkboxgruppe .radioContainer .radioknapp#687361_1').click();
+        cy.get('.undersporsmal .checkboxgruppe .radioContainer .radioknapp#687361_1').click({ force: true });
 
         cy.contains('Gå videre').click();
     });
