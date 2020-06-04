@@ -34,7 +34,7 @@ const Kvittering = () => {
                 const soknad = new Soknad(fetchState.data);
                 soknader.push(soknad);
                 setSoknader(soknader);
-                history.push(getUrlTilSoknad(soknad.id, undefined));
+                history.push(getUrlTilSoknad(soknad, undefined));
                 setFeilmeldingTekst('');
             } else {
                 logger.error('Feil ved opprettelse av UTKAST_TIL_KORRIGERING', fetchState);

@@ -9,8 +9,8 @@ const CheckboxSum = ({ sporsmal }: OppsummeringProps) => {
     const uspm = sporsmal.undersporsmal;
     return (
         <Vis hvis={sporsmal.svarliste.svar[0] && sporsmal.svarliste.svar[0].verdi === SvarEnums.CHECKED}>
-            <Avkrysset tekst={sporsmal.sporsmalstekst}/>
-            <UndersporsmalSum sporsmalsliste={uspm}/>
+            <Avkrysset tekst={sporsmal.sporsmalstekst} />
+            <UndersporsmalSum sporsmalsliste={uspm} />
         </Vis>
     );
 };

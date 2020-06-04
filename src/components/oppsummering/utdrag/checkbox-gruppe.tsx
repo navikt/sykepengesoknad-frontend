@@ -8,7 +8,7 @@ const CheckboxGruppe = ({ sporsmal }: OppsummeringProps) => {
         <div className='oppsummering__sporsmal'>
             <Element tag='h3'>{sporsmal.sporsmalstekst}</Element>
             {sporsmal.undersporsmal.map((s: Sporsmal, idx) => {
-                return <SporsmalVarianter sporsmal={s} key={idx}/>;
+                return <SporsmalVarianter sporsmal={s} key={idx} />;
             })}
         </div>
     );

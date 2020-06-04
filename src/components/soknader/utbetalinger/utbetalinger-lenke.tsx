@@ -14,7 +14,7 @@ const UtbetalingerLenke = () => {
             onMouseLeave={() => setIkon(utbetalingIkon)}
             className='inngangspanel inngangspanel--ekstern'>
             <span className='inngangspanel__ikon'>
-                <img alt='' className='js-ikon' src={ikon}/>
+                <img alt='' className='js-ikon' src={ikon} />
             </span>
             <div className='inngangspanel__innhold'>
                 <Systemtittel className='inngangspanel__tittel' tag='h2'>

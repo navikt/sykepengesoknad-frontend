@@ -192,20 +192,20 @@ const SporsmalForm = () => {
         <FormContext {...methods}>
             <form onSubmit={methods.handleSubmit(onSubmit)}
                 className={'sporsmal__form ' + nesteSporsmal?.tag?.toLowerCase()}>
-                <SporsmalSwitch sporsmal={sporsmal}/>
+                <SporsmalSwitch sporsmal={sporsmal} />
 
                 <Vis hvis={erSiste && !erUtlandssoknad}>
-                    <Oppsummering/>
-                    <CheckboxPanel sporsmal={nesteSporsmal}/>
-                    <SendtTil/>
+                    <Oppsummering />
+                    <CheckboxPanel sporsmal={nesteSporsmal} />
+                    <SendtTil />
                 </Vis>
 
                 <Vis hvis={erSiste && erUtlandssoknad}>
-                    <CheckboxPanel sporsmal={sporsmal}/>
+                    <CheckboxPanel sporsmal={sporsmal} />
                 </Vis>
 
-                <FeilOppsummering errors={methods.errors} sporsmal={sporsmal}/>
-                <Knapperad onSubmit={onSubmit}/>
+                <FeilOppsummering errors={methods.errors} sporsmal={sporsmal} />
+                <Knapperad onSubmit={onSubmit} />
             </form>
         </FormContext>
     )

@@ -61,7 +61,7 @@ const Perioder = ({ sporsmal }: SpmProps) => {
 
             <ul className='periodeliste' ref={periodeliste}>
                 {lokal.map((idx) => {
-                    return <PeriodeKomp sporsmal={sporsmal} index={idx} slettPeriode={slettPeriode} key={idx}/>
+                    return <PeriodeKomp sporsmal={sporsmal} index={idx} slettPeriode={slettPeriode} key={idx} />
                 })}
             </ul>
 
@@ -71,7 +71,7 @@ const Perioder = ({ sporsmal }: SpmProps) => {
 
             <div className='undersporsmal'>
                 <Vis hvis={lokal.length > 0 && lokal[0] !== empty}>
-                    <UndersporsmalListe undersporsmal={sporsmal.undersporsmal}/>
+                    <UndersporsmalListe undersporsmal={sporsmal.undersporsmal} />
                 </Vis>
             </div>
         </div>

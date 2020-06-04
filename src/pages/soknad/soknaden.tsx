@@ -53,11 +53,11 @@ const Soknaden = () => {
 
     return (
         <>
-            <Banner/>
+            <Banner />
             <div className='limit'>
-                <Brodsmuler brodsmuler={brodsmuler}/>
+                <Brodsmuler brodsmuler={brodsmuler} />
                 <HotjarTrigger trigger={valgtSoknad.soknadstype}>
-                    <Fordeling/>
+                    <Fordeling />
                 </HotjarTrigger>
             </div>
         </>
@@ -86,24 +86,24 @@ const Fordeling = () => {
                     </Vis>
 
                     <Vis hvis={stegNo === 1 && !erUtlandssoknad}>
-                        <SoknadIntro/>
+                        <SoknadIntro />
                     </Vis>
 
                     <Vis hvis={stegNo > 1 || erUtlandssoknad}>
-                        <SporsmalSteg/>
+                        <SporsmalSteg />
                     </Vis>
 
                     <Vis hvis={stegNo > 1}>
                         <Link to={'/soknader/' + valgtSoknad!.id + SEPARATOR + (stegNo - 1)}
                             className='lenke tilbakelenke'>
-                            <VenstreChevron/>
+                            <VenstreChevron />
                             <Normaltekst tag='span'>{tekst('soknad.tilbakeknapp')}</Normaltekst>
                         </Link>
                     </Vis>
 
 
                     <Vis hvis={!erUtlandssoknad}>
-                        <Opplysninger ekspandert={true}/>
+                        <Opplysninger ekspandert={true} />
                     </Vis>
 
                     <Vis hvis={tittel !== undefined}>
@@ -116,14 +116,14 @@ const Fordeling = () => {
                         </Normaltekst>
                     </Vis>
 
-                    <SporsmalForm/>
+                    <SporsmalForm />
                 </>
             );
 
         // Tidligere søknader
         case RSSoknadstatus.SENDT:
         case RSSoknadstatus.AVBRUTT:
-            return <Kvittering/>;
+            return <Kvittering />;
 
         // Fremtidige søknader
         case RSSoknadstatus.FREMTIDIG:
