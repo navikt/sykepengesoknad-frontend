@@ -8,7 +8,8 @@ import { SpmProps } from '../sporsmal-form/sporsmal-form';
 import { tekst } from '../../../utils/tekster';
 import { useAppStore } from '../../../data/stores/app-store';
 import Bjorn from '../bjorn/bjorn';
-import { TagTyper } from '../../../types/enums';
+import { SvarEnums, TagTyper } from '../../../types/enums';
+import parser from 'html-react-parser';
 
 const jaNeiValg = [ {
     value: 'JA',
@@ -47,7 +48,19 @@ const JaNeiRadio = ({ sporsmal }: SpmProps) => {
                     {tekst('soknad.presisering.' + spm.tag)}
                 </Normaltekst>
             </div>
-            : <></>
+            : (spm.tag && spm.tag === TagTyper.UTLANDSOPPHOLD_SOKT_SYKEPENGER && lokal === SvarEnums.JA && valgt)
+                ? <div className='kriterie--checkedkriterie--checked ekstrasporsmal'>
+                    <Normaltekst tag='span'>
+                        {parser(tekst('soknad.infotekst.utlandsopphold_sokt_sykepenger.ja'))}
+                    </Normaltekst>
+                </div>
+                : (spm.tag && spm.tag === TagTyper.UTLANDSOPPHOLD_SOKT_SYKEPENGER && lokal === SvarEnums.NEI && valgt)
+                    ? <div className='kriterie--checkedkriterie--checked ekstrasporsmal'>
+                        <Normaltekst tag='span'>
+                            {parser(tekst('soknad.infotekst.utlandsopphold_sokt_sykepenger.nei'))}
+                        </Normaltekst>
+                    </div>
+                    : <></>
     };
 
     return (
@@ -83,7 +96,7 @@ const JaNeiRadio = ({ sporsmal }: SpmProps) => {
             </div>
 
             <div role='alert' aria-live='assertive'>
-                <Vis hvis={errors[sporsmal.id]}>
+                <Vis hvis={errors[ sporsmal.id ]}>
                     <Normaltekst tag='span' className='skjemaelement__feilmelding'>
                         <p>{feilmelding.lokal}</p>
                     </Normaltekst>

@@ -10,10 +10,12 @@ import { hentFormState, hentSvar } from '../hent-svar';
 import { SpmProps } from '../sporsmal-form/sporsmal-form';
 import SporsmalHjelpetekst from '../sporsmal-hjelpetekst';
 import { useAppStore } from '../../../data/stores/app-store';
-import { AvgittAvTyper, TagTyper } from '../../../types/enums';
+import { AvgittAvTyper, SvarEnums, TagTyper } from '../../../types/enums';
 import UndersporsmalListe from '../undersporsmal/undersporsmal-liste';
 import { RSSoknadstype } from '../../../types/rs-types/rs-soknadstype';
 import { hentFeilmelding, sporsmalIdListe } from '../sporsmal-utils';
+import { tekst } from '../../../utils/tekster';
+import parser from 'html-react-parser';
 
 const jaNeiValg = [ {
     value: 'JA',
@@ -106,6 +108,14 @@ const JaNeiInput = ({ sporsmal }: SpmProps) => {
                         })}
                     </div>
                 </fieldset>
+                <Vis hvis={sporsmal.tag && sporsmal.tag === TagTyper.UTLANDSOPPHOLD_SOKT_SYKEPENGER && getValues()[sporsmal.id]}>
+                    {(getValues()[sporsmal.id] === SvarEnums.JA)
+                        ? <Normaltekst className={'utland_infotekst'}> {parser(tekst('soknad.infotekst.utlandsopphold_sokt_sykepenger.ja'))} </Normaltekst>
+                        : ((getValues()[sporsmal.id] === SvarEnums.NEI)
+                            ? <Normaltekst tag='div' className={'utland_infotekst'}> {parser(tekst('soknad.infotekst.utlandsopphold_sokt_sykepenger.nei'))} </Normaltekst>
+                            : <></>)}
+
+                </Vis>
             </div>
 
             <Normaltekst tag='div' role='alert' aria-live='assertive' className='skjemaelement__feilmelding'>
