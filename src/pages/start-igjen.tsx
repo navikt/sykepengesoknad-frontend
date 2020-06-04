@@ -21,7 +21,6 @@ const StartIgjen = ({ soknad }: StartIgjenProps) => {
             message: `Ugyldig tilstand i søknad av typen ${type} med ID: ${soknad.id}`,
             sporsmalsliste,
         });
-        // eslint-disable-next-line
     }, []);
 
     return (
@@ -30,7 +29,7 @@ const StartIgjen = ({ soknad }: StartIgjenProps) => {
                 <Sidetittel tag='h2' className='hode__tittel'>Oops, nå har vi mistet dataene dine</Sidetittel>
                 <Normaltekst className='hode__melding'>
                     Derfor må du dessverre
-                    <Link className='lenke' to={getUrlTilSoknad(soknad.id, undefined)}>
+                    <Link className='lenke' to={getUrlTilSoknad(soknad, undefined)}>
                         fylle ut søknaden på nytt
                     </Link>.
                 </Normaltekst>

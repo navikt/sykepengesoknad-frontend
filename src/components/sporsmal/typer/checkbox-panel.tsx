@@ -33,7 +33,7 @@ const CheckboxInput = ({ sporsmal }: SpmProps) => {
 
     if (sporsmal.tag === TagTyper.BEKREFT_OPPLYSNINGER_UTLAND_INFO) {
         return (
-            <CheckboxInput sporsmal={sporsmal.undersporsmal[0]}/>
+            <CheckboxInput sporsmal={sporsmal.undersporsmal[0]} />
         )
     }
     return (

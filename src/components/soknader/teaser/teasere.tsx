@@ -23,8 +23,8 @@ const Teasere = ({ soknader, className, tittel, tomListeTekst, id }: SoknaderTea
             <div id={id} className={className}>
                 {soknader.map((soknad, idx) => {
                     return soknad.status === RSSoknadstatus.FREMTIDIG ?
-                        <FremtidigeSoknaderTeaser key={idx} soknad={soknad}/> :
-                        <Teaser key={idx} soknad={soknad}/>
+                        <FremtidigeSoknaderTeaser key={idx} soknad={soknad} /> :
+                        <Teaser key={idx} soknad={soknad} />
                 })}
                 <Vis hvis={soknader.length === 0}>
                     <Element className='panel'>{tomListeTekst}</Element>

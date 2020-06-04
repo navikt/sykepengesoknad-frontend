@@ -17,14 +17,14 @@ const CheckboxKomp = ({ sporsmal }: SpmProps) => {
 
     return (
         <>
-            <div style={{ backgroundColor: 'red', padding: '20px' }}>
+            <div>
                 <Vis hvis={sporsmal.sporsmalstekst !== null}>
                     <Element tag='h3' className='skjema__sporsmal'>{sporsmal.sporsmalstekst}</Element>
                 </Vis>
 
                 <div className={'skjemagruppe checkboxgruppe' + (errors[sporsmal.id] ? ' skjemagruppe--feil' : '')}>
                     {sporsmal.undersporsmal.map((uspm, idx) => {
-                        return <CheckboxSingle parent={sporsmal} sporsmal={uspm} key={idx}/>;
+                        return <CheckboxSingle parent={sporsmal} sporsmal={uspm} key={idx} />;
                     })}
 
                     <Normaltekst tag='div' role='alert' aria-live='assertive' className='skjemaelement__feilmelding'>
@@ -86,7 +86,7 @@ const CheckboxSingle = ({ parent, sporsmal }: AllProps) => {
                 leave='undersporsmal--skjul'
                 start='undersporsmal'
             >
-                <UndersporsmalListe undersporsmal={sporsmal.undersporsmal}/>
+                <UndersporsmalListe undersporsmal={sporsmal.undersporsmal} />
             </AnimateOnMount>
         </div>
     )

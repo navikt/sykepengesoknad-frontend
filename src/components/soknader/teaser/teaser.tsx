@@ -27,7 +27,7 @@ const Teaser = ({ soknad }: SykepengesoknadTeaserProps) => {
         <article aria-labelledby={`soknader-header-${soknad.id}`} onClick={() => {
             logEvent('Velger søknad', { soknadstype: soknad.soknadstype });
         }}>
-            <Inngangspanel to={getUrlTilSoknad(soknad.id, stegId)}>
+            <Inngangspanel to={getUrlTilSoknad(soknad, stegId)}>
                 <InngangsIkon
                     ikon={hentIkon(soknad.soknadstype)}
                     ikonHover={hentIkonHover(soknad.soknadstype)}

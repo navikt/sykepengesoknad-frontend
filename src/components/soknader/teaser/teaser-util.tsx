@@ -31,7 +31,7 @@ export const SendtUlikt = ({ soknad }: SendtUliktProps) => {
                 '%DATO%': dayjs(soknad.sendtTilArbeidsgiverDato).format('DD.MM.YYYY'),
                 '%ARBEIDSGIVER%': finnArbeidsgivernavn(soknad),
             })}
-            <br/>
+            <br />
             {getLedetekst(tekst('soknad.teaser.status.SENDT.til-nav'), {
                 '%DATO%': dayjs(soknad.sendtTilNAVDato).format('DD.MM.YYYY'),
             })}
@@ -77,7 +77,7 @@ export const beregnUndertekst = (soknad: Soknad) => {
             switch (soknad.status) {
                 case RSSoknadstatus.SENDT:
                     return erSendtTilBeggeMenIkkeSamtidig(soknad)
-                        ? <SendtUlikt soknad={soknad}/>
+                        ? <SendtUlikt soknad={soknad} />
                         : getLedetekst(tekst(`soknad.teaser.status.${soknad.status}${endelse}`), {
                             '%DATO%': dayjs(datoher).format('DD.MM.YYYY'),
                             '%ARBEIDSGIVER%': finnArbeidsgivernavn(soknad),
