@@ -69,6 +69,8 @@ describe('Tester søknad om å beholde sykepenger utenfor EØS', () => {
 
 
         cy.contains('Søknaden er sendt til NAV');
+        cy.contains('Endre søknad').should('not.exist');
+        cy.contains('Send til NAV').should('not.exist');
     });
 
 });
