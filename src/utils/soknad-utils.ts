@@ -34,3 +34,7 @@ export const flattenSporsmal = (sporsmal: Sporsmal[]) => {
     }
     return flatArr;
 };
+
+export const hentSporsmal = (soknad: Soknad, tag: string) => {
+    return flattenSporsmal(soknad.sporsmal).find(spm => spm.tag === tag)
+};
