@@ -6,6 +6,7 @@ import { hentSvar } from '../hent-svar';
 import { hentFeilmelding } from '../sporsmal-utils';
 import { SpmProps } from '../sporsmal-form/sporsmal-form';
 import { tekst } from '../../../utils/tekster';
+import { useAppStore } from '../../../data/stores/app-store';
 
 const jaNeiValg = [ {
     value: 'JA',
@@ -18,6 +19,8 @@ const jaNeiValg = [ {
 const JaNeiRadio = ({ sporsmal }: SpmProps) => {
     const [ lokal, setLokal ] = useState<string>(hentSvar(sporsmal));
     const { register, setValue, errors } = useFormContext();
+    const { setRerenderSporsmalForm } = useAppStore();
+
     const feilmelding = hentFeilmelding(sporsmal);
 
     useEffect(() => {
@@ -25,11 +28,13 @@ const JaNeiRadio = ({ sporsmal }: SpmProps) => {
         setValue(sporsmal.id, lagret);
         setLokal(lagret);
         // eslint-disable-next-line
-    }, [ sporsmal ]);
+    }, [sporsmal]);
 
     const changeValue = (value: string) => {
         setValue(sporsmal.id, value);
         setLokal(lokal === value ? '' : value);
+        // Force rerender siden setValue kun trigger rerender første gangen
+        setRerenderSporsmalForm(new Date().getUTCMilliseconds())
     };
 
     const presisering = (valgt: boolean) => {

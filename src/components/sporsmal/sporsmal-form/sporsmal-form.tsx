@@ -28,13 +28,14 @@ import { hentSvar } from '../hent-svar';
 import { logger } from '../../../utils/logger';
 import './sporsmal-form.less';
 import { RSSoknadstype } from '../../../types/rs-types/rs-soknadstype';
+import skalViseKnapperad from './skal-vise-knapperad';
 
 export interface SpmProps {
     sporsmal: Sporsmal;
 }
 
 const SporsmalForm = () => {
-    const { soknader, setSoknader, setValgtSoknad, valgtSoknad, sendTil, setTop, setSendTil } = useAppStore();
+    const { soknader, setSoknader, setValgtSoknad, valgtSoknad, sendTil, setTop, setSendTil, rerenderSporsmalForm } = useAppStore();
     const { logEvent } = useAmplitudeInstance();
     const [ erSiste, setErSiste ] = useState<boolean>(false);
     const { stegId } = useParams();
@@ -62,6 +63,10 @@ const SporsmalForm = () => {
         if (sisteSide) hentMottaker();
         // eslint-disable-next-line
     }, [spmIndex]);
+
+    // eslint-disable-next-line @typescript-eslint/no-empty-function
+    useEffect(() => {
+    }, [ rerenderSporsmalForm ]);
 
     const sendOppdaterSporsmal = async() => {
         let soknad = valgtSoknad;
@@ -205,7 +210,10 @@ const SporsmalForm = () => {
                 </Vis>
 
                 <FeilOppsummering errors={methods.errors} sporsmal={sporsmal} />
-                <Knapperad onSubmit={onSubmit} />
+
+                <Vis hvis={skalViseKnapperad(valgtSoknad!, methods.getValues())}>
+                    <Knapperad onSubmit={onSubmit} />
+                </Vis>
             </form>
         </FormContext>
     )
