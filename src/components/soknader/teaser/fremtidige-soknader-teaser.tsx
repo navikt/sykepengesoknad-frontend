@@ -1,13 +1,11 @@
 import dayjs from 'dayjs';
-import React from 'react';
+import React, { useState } from 'react';
 import { RSSoknadstype } from '../../../types/rs-types/rs-soknadstype';
-import { InngangsHeader, InngangsIkon, Inngangspanel } from '../inngang/inngangspanel';
-import { getUrlTilSoknad } from '../../../utils/url-utils';
+import { InngangsHeader, InngangsIkon } from '../inngang/inngangspanel';
 import Vis from '../../vis';
 import { getLedetekst, tekst } from '../../../utils/tekster';
-import { tilLesbarPeriodeMedArstall } from '../../../utils/dato-utils';
+import { tilLesbarDatoMedArstall, tilLesbarPeriodeMedArstall } from '../../../utils/dato-utils';
 import { Normaltekst } from 'nav-frontend-typografi';
-import { HoyreChevron } from 'nav-frontend-chevron';
 import { useAmplitudeInstance } from '../../amplitude/amplitude';
 import {
     finnArbeidsgivernavn,
@@ -16,20 +14,28 @@ import {
     hentTeaserStatustekst,
     SykepengesoknadTeaserProps
 } from './teaser-util';
+import ModalWrapper from 'nav-frontend-modal';
+import Alertstripe from 'nav-frontend-alertstriper';
 
 const FremtidigeSoknaderTeaser = ({ soknad }: SykepengesoknadTeaserProps) => {
     const { logEvent } = useAmplitudeInstance();
+    const [ aapen, setAapen ] = useState<boolean>(false);
+
+    ModalWrapper.setAppElement('#root');
 
     return (
         <article aria-labelledby={`soknader-header-${soknad.id}`} onClick={() => {
             logEvent('Velger søknad', { soknadstype: soknad.soknadstype });
         }}>
-            <Inngangspanel to={getUrlTilSoknad(soknad, '')}>
+            <a className="inngangspanel" href={'/'}
+                onClick={(e) => {
+                    e.preventDefault();
+                    setAapen(true)
+                }}>
                 <InngangsIkon
                     ikon={hentIkon(soknad.soknadstype)}
                     ikonHover={hentIkonHover(soknad.soknadstype)}
                 />
-                <HoyreChevron />
                 <div className='inngangspanel--inaktivt'>
                     <InngangsHeader
                         meta={ getLedetekst(tekst('soknad.teaser.dato.fremtidig'), {
@@ -48,10 +54,24 @@ const FremtidigeSoknaderTeaser = ({ soknad }: SykepengesoknadTeaserProps) => {
                         </Normaltekst>
                     </Vis>
                     <Normaltekst className='inngangspanel__undertekst'>
-                        { finnArbeidsgivernavn(soknad)}
+                        { finnArbeidsgivernavn(soknad) }
                     </Normaltekst>
                 </div>
-            </Inngangspanel>
+            </a>
+            <ModalWrapper onRequestClose={() => setAapen(false)}
+                contentLabel={'planlagt'}
+                isOpen={aapen}
+            >
+                <h3 className="modal__tittel">{tekst('soknader.teaser.fremtidig.dato-tittel')}</h3>
+                <Alertstripe type="info">{getLedetekst(tekst('soknader.teaser.fremtidig.dato-info'), {
+                    '%DATO%': tilLesbarDatoMedArstall(dayjs(soknad.tom).add(1, 'day'))
+                })}</Alertstripe>
+                <div className="blokk-xs knappplassering">
+                    <button className="knapp knapp--hoved" onClick={() => setAapen(false)}>
+                        Lukk
+                    </button>
+                </div>
+            </ModalWrapper>
         </article>
     );
 };
