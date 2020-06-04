@@ -105,16 +105,10 @@
         "cy:open": "cypress open",
         "e2e": "MOCK_BACKEND=true start-test 8080 cy:open",
         "lint": "eslint --ext=ts,tsx src",
-        "lint:fix": "eslint --ext=ts,tsx src --fix",
-        "preinstall": "npx npm-force-resolutions"
+        "lint:fix": "eslint --ext=ts,tsx src --fix"
     },
     "eslintConfig": {
         "extends": "react-app"
-    },
-    "resolutions": {
-        "minimist": "^1.2.5",
-        "webpack-dev-server": "3.10.3",
-        "yargs-parser": "18.1.2"
     },
     "browserslist": [
         ">0.2%",
