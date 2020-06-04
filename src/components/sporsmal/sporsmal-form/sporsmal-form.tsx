@@ -211,7 +211,7 @@ const SporsmalForm = () => {
 
                 <FeilOppsummering errors={methods.errors} sporsmal={sporsmal} />
 
-                <Vis hvis={skalViseKnapperad(valgtSoknad!, methods.getValues())}>
+                <Vis hvis={skalViseKnapperad(valgtSoknad!, sporsmal, methods.getValues())}>
                     <Knapperad onSubmit={onSubmit} />
                 </Vis>
             </form>

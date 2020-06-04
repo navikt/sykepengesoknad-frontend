@@ -1,11 +1,11 @@
-import { Soknad } from '../../../types/types';
-import { RSSoknadstype } from '../../../types/rs-types/rs-soknadstype';
-import { hentSporsmal } from '../../../utils/soknad-utils';
-import { TagTyper } from '../../../types/enums';
+import { Soknad, Sporsmal } from '../../../types/types';
 import { FieldValues } from 'react-hook-form';
+import { RSSoknadstype } from '../../../types/rs-types/rs-soknadstype';
+import { TagTyper } from '../../../types/enums';
+import { hentSporsmal } from '../../../utils/soknad-utils';
 
-export default (soknad: Soknad, formValues: FieldValues) => {
-    if (soknad.soknadstype === RSSoknadstype.OPPHOLD_UTLAND) {
+export default (soknad: Soknad, sporsmal: Sporsmal, formValues: FieldValues) => {
+    if (soknad.soknadstype === RSSoknadstype.OPPHOLD_UTLAND && sporsmal.tag === TagTyper.ARBEIDSGIVER) {
 
         const arbiedsgiverId = hentSporsmal(soknad, TagTyper.ARBEIDSGIVER)!.id;
         const ferieId = hentSporsmal(soknad, TagTyper.FERIE)!.id;

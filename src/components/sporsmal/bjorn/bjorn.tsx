@@ -14,13 +14,23 @@ interface BjornProps {
     hvit?: boolean;
     stor?: boolean;
     vertikal?: boolean;
+    ekstraMarginTop?: boolean;
     className?: string;
 }
 
-export const Bjorn = ({ bildeAlt = 'NAV-ansatt', nokkel, children, hvit = false, stor = false, vertikal = false, className = '' }: BjornProps) => {
+export const Bjorn = ({
+    bildeAlt = 'NAV-ansatt',
+    nokkel, children,
+    hvit = false,
+    stor = false,
+    vertikal = false,
+    ekstraMarginTop = false,
+    className = ''
+}: BjornProps) => {
 
     const classNames = cls(`hjelpeboble ${className}`, {
         'hjelpeboble--horisontal': !vertikal,
+        'hjelpeboble--margin--top': ekstraMarginTop,
     });
 
     const bobleClassNames = cls({
