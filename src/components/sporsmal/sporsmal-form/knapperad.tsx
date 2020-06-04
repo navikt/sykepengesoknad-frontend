@@ -66,7 +66,7 @@ const Knapperad = ({ onSubmit }: KnapperadProps) => {
             <Knapp type="hoved" onClick={() => onSubmit}>{tekst(nokkel)}</Knapp>
             <div className="avbrytDialog blokk-l">
                 <button className="lenke avbrytlenke avbrytDialog__trigger" onClick={handleVilAvbryte}>
-                    {tekst('sykepengesoknad.avbryt.trigger')}
+                    <Normaltekst tag="span">{tekst('sykepengesoknad.avbryt.trigger')}</Normaltekst>
                 </button>
                 <Vis hvis={vilAvbryte}>
                     <div ref={avbrytDialog} className="avbrytDialog__dialog pekeboble">
