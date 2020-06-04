@@ -11,6 +11,8 @@ const TeaserTekster: any = {
         'soknad.teaser.status.UTKAST_TIL_KORRIGERING': 'Utkast til endring',
         'soknad.teaser.dato': 'Opprettet %DATO%',
         'soknad.teaser.dato.fremtidig' : 'Kan fylles ut fra %DATO%',
+        'soknader.teaser.fremtidig.dato-info' : 'Du kan fylle ut denne søknaden %DATO%.',
+        'soknader.teaser.fremtidig.dato-tittel' : 'Planlagt søknad',
         'soknad.utland.teaser.tittel': 'Søknad om å beholde sykepenger utenfor EØS',
         'soknad.teaser.tittel': 'Søknad om sykepenger',
         'soknad.teaser.tekst': 'Gjelder perioden %PERIODE%',
