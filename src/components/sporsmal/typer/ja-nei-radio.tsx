@@ -7,6 +7,8 @@ import { hentFeilmelding } from '../sporsmal-utils';
 import { SpmProps } from '../sporsmal-form/sporsmal-form';
 import { tekst } from '../../../utils/tekster';
 import { useAppStore } from '../../../data/stores/app-store';
+import Bjorn from '../bjorn/bjorn';
+import { TagTyper } from '../../../types/enums';
 
 const jaNeiValg = [ {
     value: 'JA',
@@ -87,6 +89,12 @@ const JaNeiRadio = ({ sporsmal }: SpmProps) => {
                     </Normaltekst>
                 </Vis>
             </div>
+            <Vis hvis={sporsmal.tag === TagTyper.SYKMELDINGSGRAD && lokal === 'JA'}>
+                <Bjorn className='press' nokkel='sykepengesoknad-utland.skjema.bjorn' ekstraMarginTop={true} />
+            </Vis>
+            <Vis hvis={sporsmal.tag === TagTyper.FERIE && lokal === 'JA'}>
+                <Bjorn className='press' nokkel='sykepengesoknad-utland.skjema.ferie-sporsmal-bjorn' ekstraMarginTop={true} />
+            </Vis>
         </>
     )
 };
