@@ -52,6 +52,26 @@
             }
         }
     }
+
+    .ekstrasporsmal {
+        position: relative;
+        margin: .7rem -1.2rem;
+        padding: 1rem 1.2rem;
+        background-color: @navLysGra;
+
+        &:after {
+            content: '';
+            width: 1rem;
+            height: 1rem;
+            position: absolute;
+            display: block;
+            left: 1rem;
+            top: 0;
+            transform: translateY(-50%) rotate(45deg) skew(5deg, 5deg);
+            transform-origin: 50% 50%;
+            background-color: @navLysGra;
+        }
+    }
 }
 
 .undersporsmal--vis {

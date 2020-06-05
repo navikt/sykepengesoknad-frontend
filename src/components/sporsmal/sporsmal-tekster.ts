@@ -118,6 +118,9 @@ const SporsmalTekster: any = {
         'soknad.hjelpetekst.PERMISJON_NAR_V2': 'Du må oppgi hvilke dager du hadde permisjon',
         'soknad.hjelpetekst.EGENMELDINGER' : 'Vi spør om dette for å kunne behandle søknaden din riktig. Egenmeldinger blir bare registrert hos arbeidsgiveren din, og eventuelle sykmeldinger på papir kan det ta litt tid for oss å registrere.',
 
+        'soknad.infotekst.utlandsopphold_sokt_sykepenger.ja': 'Du må ha sendt en egen <a target="_blank" href="https://tjenester.nav.no/sykefravaer/sykepengesoknad-utland">utenlandssøknad</a> for å svare ja på dette spørsmålet. Husk at du også må fullføre denne søknaden om sykepenger.',
+        'soknad.infotekst.utlandsopphold_sokt_sykepenger.nei': 'I utgangspunktet kan du bare få sykepenger mens du er i et land innenfor EØS. Du kan likevel <a href="https://tjenester.nav.no/sykefravaer/sykepengesoknad-utland" target="_blank">søke NAV om å få reise ut av EØS</a> og beholde sykepengene i en begrenset periode.',
+
         'sykepengesoknad.periodevelger.legg-til-ekstra': '+ Legg til ekstra periode',
         'sykepengesoknad.periodevelger.slett': 'Slett periode',
         'sykepengesoknad.periodevelger.fom': 'Fra og med',
