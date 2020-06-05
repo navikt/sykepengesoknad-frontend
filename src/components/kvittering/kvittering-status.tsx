@@ -5,44 +5,50 @@ import { useAppStore } from '../../data/stores/app-store';
 import { tekst } from '../../utils/tekster';
 import { SvarTil } from '../../types/enums';
 import dayjs from 'dayjs';
+import Vis from '../vis';
 
 const KvitteringStatus = () => {
     const { valgtSoknad } = useAppStore();
-    const [ tilNavn, setTilNavn ] = useState<string>();
+    const [ tilArbNavn, setTilArbNavn ] = useState<string>();
     const [ tilOrg, setTilOrg ] = useState<string>();
-    const [ tilDato, setTilDato ] = useState<string>();
+    const [ tilNavDato, setTilNavDato ] = useState<string>();
+    const [ tilArbDato, setTilArbDato ] = useState<string>();
 
     useEffect(() => {
-        let sendtTilNavn = valgtSoknad && valgtSoknad.arbeidsgiver && valgtSoknad.arbeidsgiver.navn
-            ? valgtSoknad.arbeidsgiver.navn
-            : SvarTil.NAV;
-        if (sendtTilNavn === undefined) {
-            sendtTilNavn = '';
-        }
-        setTilNavn(sendtTilNavn);
+        const sendtTilNav = valgtSoknad?.sendtTilNAVDato;
+        const datoNav = dayjs(sendtTilNav).format('dddd D. MMM, kl hh:mm');
+        setTilNavDato(datoNav.charAt(0).toUpperCase() + datoNav.slice(1));
 
-        const sendtTilOrgnr = valgtSoknad && valgtSoknad.arbeidsgiver && valgtSoknad.arbeidsgiver.orgnummer
-            ? `(Org.nr. ${valgtSoknad.arbeidsgiver.orgnummer})`
-            : ''
-        setTilOrg(sendtTilOrgnr);
-
-        const sendtTilDato = valgtSoknad && valgtSoknad.sendtTilArbeidsgiverDato
-            ? valgtSoknad.sendtTilArbeidsgiverDato
-            : valgtSoknad!.sendtTilNAVDato
-        const dato = dayjs(sendtTilDato).format('dddd D. MMM, kl hh:mm');
-        setTilDato(dato.charAt(0).toUpperCase() + dato.slice(1));
+        const sendtTilArb = valgtSoknad?.sendtTilArbeidsgiverDato;
+        const datoArb = dayjs(sendtTilArb).format('dddd D. MMM, kl hh:mm');
+        setTilArbDato(datoArb.charAt(0).toUpperCase() + datoArb.slice(1));
+        setTilArbNavn(valgtSoknad?.arbeidsgiver?.navn ? valgtSoknad?.arbeidsgiver?.navn : SvarTil.ARBEIDSGIVER);
+        setTilOrg(valgtSoknad?.arbeidsgiver?.orgnummer ? `(Org.nr. ${valgtSoknad.arbeidsgiver.orgnummer})` : '');
         // eslint-disable-next-line
     }, [])
 
+
     return (
-        <AlertStripeSuksess>
-            <Undertittel tag="h2">
-                {tekst('kvittering.soknaden-er-sendt-til')} {tilNavn} {tilOrg}
-            </Undertittel>
-            <Normaltekst>
-                {tekst('kvittering.mottatt')}: {tilDato}
-            </Normaltekst>
-        </AlertStripeSuksess>
+        <Vis hvis={valgtSoknad!.sendtTilArbeidsgiverDato || valgtSoknad!.sendtTilNAVDato}>
+            <AlertStripeSuksess>
+                <Vis hvis={valgtSoknad!.sendtTilArbeidsgiverDato}>
+                    <Undertittel tag="h2">
+                        {tekst('kvittering.soknaden-er-sendt-til')} {tilArbNavn} {tilOrg}
+                    </Undertittel>
+                    <Normaltekst>
+                        {tekst('kvittering.mottatt')}: {tilArbDato}
+                    </Normaltekst>
+                </Vis>
+                <Vis hvis={valgtSoknad!.sendtTilNAVDato}>
+                    <Undertittel tag="h2">
+                        {tekst('kvittering.soknaden-er-sendt-til')} { SvarTil.NAV }
+                    </Undertittel>
+                    <Normaltekst>
+                        {tekst('kvittering.mottatt')}: {tilNavDato}
+                    </Normaltekst>
+                </Vis>
+            </AlertStripeSuksess>
+        </Vis>
     );
 };
 
