@@ -49,13 +49,13 @@ const JaNeiRadio = ({ sporsmal }: SpmProps) => {
                 </Normaltekst>
             </div>
             : (spm.tag && spm.tag === TagTyper.UTLANDSOPPHOLD_SOKT_SYKEPENGER && lokal === SvarEnums.JA && valgt)
-                ? <div className='kriterie--checkedkriterie--checked ekstrasporsmal'>
+                ? <div className='ekstrasporsmal'>
                     <Normaltekst tag='span'>
                         {parser(tekst('soknad.infotekst.utlandsopphold_sokt_sykepenger.ja'))}
                     </Normaltekst>
                 </div>
                 : (spm.tag && spm.tag === TagTyper.UTLANDSOPPHOLD_SOKT_SYKEPENGER && lokal === SvarEnums.NEI && valgt)
-                    ? <div className='kriterie--checkedkriterie--checked ekstrasporsmal'>
+                    ? <div className='ekstrasporsmal'>
                         <Normaltekst tag='span'>
                             {parser(tekst('soknad.infotekst.utlandsopphold_sokt_sykepenger.nei'))}
                         </Normaltekst>

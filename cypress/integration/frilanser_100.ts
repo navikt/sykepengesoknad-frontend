@@ -100,9 +100,19 @@ describe('Tester frilansersøknad', () => {
         cy.get('.undersporsmal .skjemaelement__input.form-control').focus();
         cy.get('.flatpickr-calendar').contains('17').click({ force: true });
         cy.get('.flatpickr-calendar').contains('24').click({ force: true });
-        // Underspørsmål 2
+
+        // Underspørsmål 2 - Ja
         cy.contains('Har du søkt om å beholde sykepengene for disse dagene?');
         cy.get('.undersporsmal .radioContainer .radioknapp#687449_0').click({ force: true });
+        cy.get('.ekstrasporsmal')
+            .should('have.text', 'Du må ha sendt en egen utenlandssøknad for å svare ja på dette spørsmålet. Husk at du også må fullføre denne søknaden om sykepenger.')
+            .find('a').should('have.attr', 'href', 'https://tjenester.nav.no/sykefravaer/sykepengesoknad-utland');
+
+        // Underspørsmål 2 - Nei
+        cy.get('.undersporsmal .radioContainer .radioknapp#687449_1').click({ force: true });
+        cy.get('.ekstrasporsmal')
+            .should('have.text', 'I utgangspunktet kan du bare få sykepenger mens du er i et land innenfor EØS. Du kan likevel søke NAV om å få reise ut av EØS og beholde sykepengene i en begrenset periode.')
+            .find('a').should('have.attr', 'href', 'https://tjenester.nav.no/sykefravaer/sykepengesoknad-utland');
 
         cy.contains('Gå videre').click();
     });
