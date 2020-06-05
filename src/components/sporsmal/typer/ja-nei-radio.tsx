@@ -10,6 +10,7 @@ import { useAppStore } from '../../../data/stores/app-store';
 import Bjorn from '../bjorn/bjorn';
 import { SvarEnums, TagTyper } from '../../../types/enums';
 import parser from 'html-react-parser';
+import KnapperadAvbryt from '../sporsmal-form/knapperad-avbryt';
 
 const jaNeiValg = [ {
     value: 'JA',
@@ -96,7 +97,7 @@ const JaNeiRadio = ({ sporsmal }: SpmProps) => {
             </div>
 
             <div role='alert' aria-live='assertive'>
-                <Vis hvis={errors[ sporsmal.id ]}>
+                <Vis hvis={errors[sporsmal.id]}>
                     <Normaltekst tag='span' className='skjemaelement__feilmelding'>
                         <p>{feilmelding.lokal}</p>
                     </Normaltekst>
@@ -106,7 +107,9 @@ const JaNeiRadio = ({ sporsmal }: SpmProps) => {
                 <Bjorn className='press' nokkel='sykepengesoknad-utland.skjema.bjorn' ekstraMarginTop={true} />
             </Vis>
             <Vis hvis={sporsmal.tag === TagTyper.FERIE && lokal === 'JA'}>
-                <Bjorn className='press' nokkel='sykepengesoknad-utland.skjema.ferie-sporsmal-bjorn' ekstraMarginTop={true} />
+                <Bjorn className='press' nokkel='sykepengesoknad-utland.skjema.ferie-sporsmal-bjorn'
+                    ekstraMarginTop={true} />
+                <KnapperadAvbryt />
             </Vis>
         </>
     )

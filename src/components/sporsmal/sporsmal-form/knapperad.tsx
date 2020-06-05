@@ -4,12 +4,10 @@ import { Normaltekst } from 'nav-frontend-typografi';
 import { useHistory, useParams } from 'react-router-dom';
 import { useAppStore } from '../../../data/stores/app-store';
 import Vis from '../../vis';
-import env from '../../../utils/environment';
-import { RSSoknadstatus } from '../../../types/rs-types/rs-soknadstatus';
 import Alertstripe from 'nav-frontend-alertstriper';
 import { tekst } from '../../../utils/tekster';
-import { logger } from '../../../utils/logger';
 import { RSSoknadstype } from '../../../types/rs-types/rs-soknadstype';
+import { avbrytSoknad } from './avbryt-soknad';
 
 type Event = MouseEvent<HTMLAnchorElement | HTMLButtonElement>;
 
@@ -43,22 +41,14 @@ const Knapperad = ({ onSubmit }: KnapperadProps) => {
 
     const handleAvbryt = (event: Event) => {
         event.preventDefault();
-        fetch(env.syfoapiRoot + `/syfosoknad/api/soknader/${valgtSoknad!.id}/avbryt`, {
-            method: 'POST',
-            credentials: 'include',
-        }).then((res) => {
-            const status = res.status;
-            if (status === 200) {
-                const nySoknad = { ...valgtSoknad, status: RSSoknadstatus.AVBRUTT, avbruttDato: new Date() };
-                setSoknader(soknader.map(s => s.id === valgtSoknad!.id ? nySoknad : s) as any);
-                setValgtSoknad(nySoknad as any);
-                history.push(`/soknader/${valgtSoknad!.id}/1`);
-                setFeilmeldingTekst('');
-            } else {
-                logger.error('Feil ved AVBYTING av søknad', res);
-                setFeilmeldingTekst(tekst('sykepengesoknad.avbryt.feilet'))
-            }
-        })
+        avbrytSoknad({
+            valgtSoknad: valgtSoknad!,
+            setSoknader: setSoknader,
+            soknader: soknader,
+            setValgtSoknad: setValgtSoknad,
+            history: history,
+            setFeilmeldingTekst: setFeilmeldingTekst
+        });
     };
 
     return (

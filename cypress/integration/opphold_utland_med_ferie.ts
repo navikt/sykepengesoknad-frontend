@@ -64,11 +64,22 @@ describe('Tester søknad om å beholde sykepenger utenfor EØS', () => {
     it('Gå videre forsvinner og bjørn vises når man har avtalt ferie', function() {
         cy.contains('Har du avtalt med arbeidsgiveren din at du skal ha ferie i hele perioden?');
         cy.contains('Gå videre');
+        cy.contains('Avbryt søknad').should('not.exist');
+
 
         cy.get('#5_0').click({ force: true });
         cy.contains('Du får ikke sykepenger mens du har ferie. Det betyr at du ikke trenger å sende denne søknaden. God tur!');
 
         cy.contains('Gå videre').should('not.exist');
+    });
+
+    it('Vi avbryter søknaden og havner på forsiden, søknaden er borte', function() {
+        cy.contains('Avbryt søknad').click();
+
+        cy.url().should('equal', 'http://localhost:8080/');
+
+        cy.get('.soknadtopp__tittel').should('be.visible').and('have.text', 'Søknad om sykepenger');
+        cy.contains('Søknad om å beholde sykepenger utenfor EØS').should('not.exist');
     });
 });
 
