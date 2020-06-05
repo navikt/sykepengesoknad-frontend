@@ -1,4 +1,13 @@
 import dayjs from 'dayjs'
+import React, { useState } from 'react'
+import { RSSoknadstype } from '../../../types/rs-types/rs-soknadstype'
+import { InngangsHeader, InngangsIkon } from '../inngang/inngangspanel'
+import Vis from '../../vis'
+import { getLedetekst, tekst } from '../../../utils/tekster'
+import { tilLesbarDatoMedArstall, tilLesbarPeriodeMedArstall } from '../../../utils/dato-utils'
+import { Normaltekst, Systemtittel } from 'nav-frontend-typografi'
+import { useAmplitudeInstance } from '../../amplitude/amplitude'
+import dayjs from 'dayjs'
 import Alertstripe from 'nav-frontend-alertstriper'
 import ModalWrapper from 'nav-frontend-modal'
 import { Normaltekst } from 'nav-frontend-typografi'
@@ -27,11 +36,8 @@ const FremtidigeSoknaderTeaser = ({ soknad }: SykepengesoknadTeaserProps) => {
         <article aria-labelledby={`soknader-header-${soknad.id}`} onClick={() => {
             logEvent('Velger søknad', { soknadstype: soknad.soknadstype })
         }}>
-            <a className="inngangspanel" href={'/'}
-                onClick={(e) => {
-                    e.preventDefault()
-                    setAapen(true)
-                }}>
+            <button className="inngangspanel inngangspanel__btn"
+                onClick={() => setAapen(true)}>
                 <InngangsIkon
                     ikon={hentIkon(soknad.soknadstype)}
                     ikonHover={hentIkonHover(soknad.soknadstype)}
@@ -57,20 +63,20 @@ const FremtidigeSoknaderTeaser = ({ soknad }: SykepengesoknadTeaserProps) => {
                         { finnArbeidsgivernavn(soknad) }
                     </Normaltekst>
                 </div>
-            </a>
-            <ModalWrapper onRequestClose={() => setAapen(false)}
+            </button>
+            <ModalWrapper className="modal__fremtidig" onRequestClose={() => setAapen(false)}
                 contentLabel={'planlagt'}
                 isOpen={aapen}
             >
-                <h3 className="modal__tittel">{tekst('soknader.teaser.fremtidig.dato-tittel')}</h3>
+                <Systemtittel tag="h3" className="modal__tittel">
+                    {tekst('soknader.teaser.fremtidig.dato-tittel')}
+                </Systemtittel>
                 <Alertstripe type="info">{getLedetekst(tekst('soknader.teaser.fremtidig.dato-info'), {
                     '%DATO%': tilLesbarDatoMedArstall(dayjs(soknad.tom).add(1, 'day'))
                 })}</Alertstripe>
-                <div className="blokk-xs knappplassering">
-                    <button className="knapp knapp--hoved" onClick={() => setAapen(false)}>
+                <button className="knapp knapp--hoved" onClick={() => setAapen(false)}>
                         Lukk
-                    </button>
-                </div>
+                </button>
             </ModalWrapper>
         </article>
     )
