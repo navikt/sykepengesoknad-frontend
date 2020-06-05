@@ -121,9 +121,12 @@ const Fordeling = () => {
             );
 
         // Tidligere søknader
-        case RSSoknadstatus.SENDT:
         case RSSoknadstatus.AVBRUTT:
             return <Kvittering />;
+
+        // Håndteres i /kvittering/:id
+        case RSSoknadstatus.SENDT:
+            return null as any;
 
         // Fremtidige søknader
         case RSSoknadstatus.FREMTIDIG:

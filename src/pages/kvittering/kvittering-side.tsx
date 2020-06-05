@@ -7,7 +7,7 @@ import { setBodyClass } from '../../utils/utils';
 import { useAppStore } from '../../data/stores/app-store';
 import Vis from '../../components/vis';
 import { Normaltekst } from 'nav-frontend-typografi';
-import { Link, useParams } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { tekst } from '../../utils/tekster';
 import Kvittering from '../../components/kvittering/kvittering';
 import { RSSoknadstatus } from '../../types/rs-types/rs-soknadstatus';
@@ -25,22 +25,14 @@ const brodsmuler: Brodsmule[] = [ {
 } ];
 
 const KvitteringSide = () => {
-    const { valgtSoknad, setValgtSoknad, soknader, sykmeldinger, setValgtSykmelding } = useAppStore();
+    const { valgtSoknad } = useAppStore();
     const [ erSiste, setErSiste ] = useState<boolean>();
-    const { id } = useParams();
 
     useEffect(() => {
-        if (!valgtSoknad) {
-            const filtrertSoknad = soknader.filter(soknad => soknad.id === id)[ 0 ];
-            setValgtSoknad(filtrertSoknad);
-            const sykmelding = sykmeldinger.filter(sm => sm.id === filtrertSoknad.sykmeldingId)[ 0 ];
-            setValgtSykmelding(sykmelding);
-        }
-
         setBodyClass('kvittering')
         setErSiste(valgtSoknad?.status === RSSoknadstatus.SENDT);
         // eslint-disable-next-line
-    }, [ id ]);
+    }, []);
 
     if (!valgtSoknad) return null;
 
