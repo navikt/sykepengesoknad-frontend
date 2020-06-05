@@ -5,6 +5,7 @@ import Teaser from './teaser';
 import FremtidigeSoknaderTeaser from './fremtidige-soknader-teaser';
 import Vis from '../../vis';
 import { RSSoknadstatus } from '../../../types/rs-types/rs-soknadstatus';
+import TidligereSoknaderTeaser from './tidligere-soknader-teaser';
 
 interface SoknaderTeasereProps {
     soknader: Soknad[];
@@ -22,9 +23,14 @@ const Teasere = ({ soknader, className, tittel, tomListeTekst, id }: SoknaderTea
             </header>
             <div id={id} className={className}>
                 {soknader.map((soknad, idx) => {
-                    return soknad.status === RSSoknadstatus.FREMTIDIG ?
-                        <FremtidigeSoknaderTeaser key={idx} soknad={soknad} /> :
-                        <Teaser key={idx} soknad={soknad} />
+                    switch (soknad.status) {
+                        case RSSoknadstatus.FREMTIDIG:
+                            return <FremtidigeSoknaderTeaser key={idx} soknad={soknad} />;
+                        case RSSoknadstatus.SENDT:
+                            return <TidligereSoknaderTeaser key={idx} soknad={soknad} />;
+                        default:
+                            return <Teaser key={idx} soknad={soknad} />;
+                    }
                 })}
                 <Vis hvis={soknader.length === 0}>
                     <Element className='panel'>{tomListeTekst}</Element>
