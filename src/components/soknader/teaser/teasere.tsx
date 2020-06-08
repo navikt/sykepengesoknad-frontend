@@ -1,12 +1,12 @@
-import { Element } from 'nav-frontend-typografi';
-import React from 'react';
+import { Element } from 'nav-frontend-typografi'
+import React from 'react'
 
-import { RSSoknadstatus } from '../../../types/rs-types/rs-soknadstatus';
-import { Soknad } from '../../../types/types';
-import Vis from '../../vis';
-import FremtidigeSoknaderTeaser from './fremtidige-soknader-teaser';
-import Teaser from './teaser';
-import TidligereSoknaderTeaser from './tidligere-soknader-teaser';
+import { RSSoknadstatus } from '../../../types/rs-types/rs-soknadstatus'
+import { Soknad } from '../../../types/types'
+import Vis from '../../vis'
+import FremtidigeSoknaderTeaser from './fremtidige-soknader-teaser'
+import Teaser from './teaser'
+import TidligereSoknaderTeaser from './tidligere-soknader-teaser'
 
 interface SoknaderTeasereProps {
     soknader: Soknad[];
@@ -26,11 +26,11 @@ const Teasere = ({ soknader, className, tittel, tomListeTekst, id }: SoknaderTea
                 {soknader.map((soknad, idx) => {
                     switch (soknad.status) {
                         case RSSoknadstatus.FREMTIDIG:
-                            return <FremtidigeSoknaderTeaser key={idx} soknad={soknad} />;
+                            return <FremtidigeSoknaderTeaser key={idx} soknad={soknad} />
                         case RSSoknadstatus.SENDT:
-                            return <TidligereSoknaderTeaser key={idx} soknad={soknad} />;
+                            return <TidligereSoknaderTeaser key={idx} soknad={soknad} />
                         default:
-                            return <Teaser key={idx} soknad={soknad} />;
+                            return <Teaser key={idx} soknad={soknad} />
                     }
                 })}
                 <Vis hvis={soknader.length === 0}>
@@ -38,7 +38,7 @@ const Teasere = ({ soknader, className, tittel, tomListeTekst, id }: SoknaderTea
                 </Vis>
             </div>
         </>
-    );
-};
+    )
+}
 
-export default Teasere;
+export default Teasere

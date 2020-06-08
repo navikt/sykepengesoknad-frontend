@@ -4,7 +4,7 @@ export const unleashToggles: any = {
     'syfo.ag.soknad.ny.platform': true,
     'syfo.syfofront.nytt.sykmeldingsmottak': true,
     'syfo.amplitude': true
-};
+}
 
 export const unleashKeys: any = [
     'syfo.syfofront.angre.bekreft.sykmelding',
@@ -12,4 +12,4 @@ export const unleashKeys: any = [
     'syfo.ag.soknad.ny.platform',
     'syfo.syfofront.nytt.sykmeldingsmottak',
     'syfo.amplitude'
-];
+]

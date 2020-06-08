@@ -1,11 +1,11 @@
-import './utvidbar.less';
+import './utvidbar.less'
 
-import Chevron from 'nav-frontend-chevron';
-import { Element, Normaltekst } from 'nav-frontend-typografi';
-import React, { useEffect, useRef, useState } from 'react';
+import Chevron from 'nav-frontend-chevron'
+import { Element, Normaltekst } from 'nav-frontend-typografi'
+import React, { useEffect, useRef, useState } from 'react'
 
-import { erSynligIViewport } from '../../utils/browser-utils';
-import Vis from '../vis';
+import { erSynligIViewport } from '../../utils/browser-utils'
+import Vis from '../vis'
 
 interface UtvidbarProps {
     erApen: boolean;
@@ -19,27 +19,27 @@ interface UtvidbarProps {
 }
 
 const Utvidbar = (props: UtvidbarProps) => {
-    const [ erApen, setErApen ] = useState<boolean>(props.erApen);
-    const [ innholdHeight, setInnholdHeight ] = useState<number>(0);
-    const utvidbar = useRef<HTMLDivElement>(null);
-    const jsToggle = useRef<HTMLButtonElement>(null);
-    const btnImage = useRef<HTMLImageElement>(null);
-    const container = useRef<HTMLDivElement>(null);
-    const innhold = useRef<HTMLDivElement>(null);
+    const [ erApen, setErApen ] = useState<boolean>(props.erApen)
+    const [ innholdHeight, setInnholdHeight ] = useState<number>(0)
+    const utvidbar = useRef<HTMLDivElement>(null)
+    const jsToggle = useRef<HTMLButtonElement>(null)
+    const btnImage = useRef<HTMLImageElement>(null)
+    const container = useRef<HTMLDivElement>(null)
+    const innhold = useRef<HTMLDivElement>(null)
 
     useEffect(() => {
-        setErApen(props.erApen);
+        setErApen(props.erApen)
         setInnholdHeight(innhold.current!.offsetHeight)
-    }, [ props.erApen ]);
+    }, [ props.erApen ])
 
     function onTransitionEnd() {
         if (erApen) {
-            window.scrollTo({ top: utvidbar.current!.offsetTop, left: 0, behavior: 'smooth' });
+            window.scrollTo({ top: utvidbar.current!.offsetTop, left: 0, behavior: 'smooth' })
         } else {
             if (!erSynligIViewport(utvidbar.current!)) {
-                window.scrollTo({ top: utvidbar.current!.offsetTop, left: 0, behavior: 'smooth' });
+                window.scrollTo({ top: utvidbar.current!.offsetTop, left: 0, behavior: 'smooth' })
             }
-            jsToggle.current!.focus();
+            jsToggle.current!.focus()
         }
     }
 
@@ -85,7 +85,7 @@ const Utvidbar = (props: UtvidbarProps) => {
                 </div>
             </div>
         </div>
-    );
-};
+    )
+}
 
-export default Utvidbar;
+export default Utvidbar

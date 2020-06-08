@@ -7,6 +7,6 @@ const SoknaderTekster: any = {
         'soknader.sendt.tittel': 'Tidligere søknader',
         'landingside.sidetittel': 'Ditt sykefravær'
     }, 'en': {}
-};
+}
 
-export default SoknaderTekster;
+export default SoknaderTekster

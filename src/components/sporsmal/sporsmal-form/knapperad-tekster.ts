@@ -9,6 +9,6 @@ const KnapperadTekster: any = {
         'sykepengesoknad.avbryt.angre': 'Angre',
         'sykepengesoknad.avbryt.feilet': 'Beklager, søknaden kunne ikke avbrytes',
     }, 'en': {}
-};
+}
 
-export default KnapperadTekster;
+export default KnapperadTekster

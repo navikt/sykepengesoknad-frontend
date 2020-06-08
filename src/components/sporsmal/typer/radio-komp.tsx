@@ -1,22 +1,22 @@
-import { Element, Normaltekst } from 'nav-frontend-typografi';
-import React, { useEffect } from 'react';
-import { useFormContext } from 'react-hook-form';
+import { Element, Normaltekst } from 'nav-frontend-typografi'
+import React, { useEffect } from 'react'
+import { useFormContext } from 'react-hook-form'
 
-import { RSSvartype } from '../../../types/rs-types/rs-svartype';
-import AnimateOnMount from '../../animate-on-mount';
-import Vis from '../../vis';
-import { hentSvar } from '../hent-svar';
-import { SpmProps } from '../sporsmal-form/sporsmal-form';
-import { hentFeilmelding } from '../sporsmal-utils';
-import UndersporsmalListe from '../undersporsmal/undersporsmal-liste';
+import { RSSvartype } from '../../../types/rs-types/rs-svartype'
+import AnimateOnMount from '../../animate-on-mount'
+import Vis from '../../vis'
+import { hentSvar } from '../hent-svar'
+import { SpmProps } from '../sporsmal-form/sporsmal-form'
+import { hentFeilmelding } from '../sporsmal-utils'
+import UndersporsmalListe from '../undersporsmal/undersporsmal-liste'
 
 const RadioKomp = ({ sporsmal }: SpmProps) => {
-    const { register, setValue, errors, watch } = useFormContext();
-    const radioWatch = watch(sporsmal.id);
-    const feilmelding = hentFeilmelding(sporsmal);
+    const { register, setValue, errors, watch } = useFormContext()
+    const radioWatch = watch(sporsmal.id)
+    const feilmelding = hentFeilmelding(sporsmal)
 
     useEffect(() => {
-        setValue(sporsmal.id, hentSvar(sporsmal));
+        setValue(sporsmal.id, hentSvar(sporsmal))
         // eslint-disable-next-line
     }, [ sporsmal.id ]);
 
@@ -66,10 +66,10 @@ const RadioKomp = ({ sporsmal }: SpmProps) => {
             </div>
         </>
     )
-};
+}
 
-export default RadioKomp;
+export default RadioKomp
 
 export const erHorisontal = (svartype: RSSvartype) => {
-    return svartype === RSSvartype.RADIO_GRUPPE_TIMER_PROSENT;
-};
+    return svartype === RSSvartype.RADIO_GRUPPE_TIMER_PROSENT
+}

@@ -1,6 +1,6 @@
-import React from 'react';
+import React from 'react'
 
-import { MONTHS } from './daypickerLocale';
+import { MONTHS } from './daypickerLocale'
 
 interface CaptionProps {
     date: Date;
@@ -11,7 +11,7 @@ const DayPickerCaption = ({ date }: CaptionProps) => {
         <div className='DayPicker-Caption' role='heading' aria-live='assertive' aria-atomic='true'>
             {`${MONTHS[date.getMonth()]} ${date.getFullYear()}`}
         </div>
-    );
-};
+    )
+}
 
-export default DayPickerCaption;
+export default DayPickerCaption

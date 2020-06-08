@@ -1,4 +1,4 @@
-import React from 'react';
+import React from 'react'
 
 const SoknadIntroSvg = () => {
     return <svg width='100' height='100' viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg' xmlnsXlink='http://www.w3.org/1999/xlink'>
@@ -26,6 +26,6 @@ const SoknadIntroSvg = () => {
             </g>
         </g>
     </svg>
-};
+}
 
-export default SoknadIntroSvg;
+export default SoknadIntroSvg

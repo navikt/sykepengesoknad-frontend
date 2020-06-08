@@ -13,6 +13,6 @@ const BjornTekster: any = {
         'sykepengesoknad-utland.kvittering.sendt.bjorn': 'Nå har du bare søkt om å dra utenfor EØS, ikke om selve sykepengene. Det gjør du på vanlig måte senere, enten på papir eller digitalt.',
         'sykepengesoknad-utland.skjema.ferie-sporsmal-bjorn': 'Du får ikke sykepenger mens du har ferie. Det betyr at du ikke trenger å sende denne søknaden. God tur!',
     }, 'en': {}
-};
+}
 
-export default BjornTekster;
+export default BjornTekster

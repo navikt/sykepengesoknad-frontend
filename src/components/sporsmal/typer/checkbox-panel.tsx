@@ -1,36 +1,36 @@
-import { Normaltekst } from 'nav-frontend-typografi';
-import React, { useEffect, useRef } from 'react';
-import { useFormContext } from 'react-hook-form';
+import { Normaltekst } from 'nav-frontend-typografi'
+import React, { useEffect, useRef } from 'react'
+import { useFormContext } from 'react-hook-form'
 
-import { TagTyper } from '../../../types/enums';
-import Vis from '../../vis';
-import { hentSvar } from '../hent-svar';
-import { SpmProps } from '../sporsmal-form/sporsmal-form';
-import { hentFeilmelding } from '../sporsmal-utils';
+import { TagTyper } from '../../../types/enums'
+import Vis from '../../vis'
+import { hentSvar } from '../hent-svar'
+import { SpmProps } from '../sporsmal-form/sporsmal-form'
+import { hentFeilmelding } from '../sporsmal-utils'
 
 const CheckboxInput = ({ sporsmal }: SpmProps) => {
-    const { register, setValue, errors, watch } = useFormContext();
-    const bekreft = useRef<HTMLDivElement>(null);
-    const checkWatch = watch(sporsmal.id);
-    const feilmelding = hentFeilmelding(sporsmal);
+    const { register, setValue, errors, watch } = useFormContext()
+    const bekreft = useRef<HTMLDivElement>(null)
+    const checkWatch = watch(sporsmal.id)
+    const feilmelding = hentFeilmelding(sporsmal)
 
     useEffect(() => {
-        const svar = hentSvar(sporsmal);
-        setValue(sporsmal.id, svar);
+        const svar = hentSvar(sporsmal)
+        setValue(sporsmal.id, svar)
         // eslint-disable-next-line
     }, [sporsmal]);
 
     const handleChange = () => {
-        bekreft.current!.classList.toggle('bekreftCheckboksPanel--checked');
-        setValue(sporsmal.id, !checkWatch);
-    };
+        bekreft.current!.classList.toggle('bekreftCheckboksPanel--checked')
+        setValue(sporsmal.id, !checkWatch)
+    }
 
     const makeClassName = () => {
-        const cls = 'bekreftCheckboksPanel';
-        const err = errors[sporsmal.id] ? ' skjemaelement__input--harFeil' : '';
-        const all = watch(sporsmal.id) ? cls + ' ' + cls + '--checked' : cls;
-        return all + err;
-    };
+        const cls = 'bekreftCheckboksPanel'
+        const err = errors[sporsmal.id] ? ' skjemaelement__input--harFeil' : ''
+        const all = watch(sporsmal.id) ? cls + ' ' + cls + '--checked' : cls
+        return all + err
+    }
 
     if (sporsmal.tag === TagTyper.BEKREFT_OPPLYSNINGER_UTLAND_INFO) {
         return (
@@ -62,6 +62,6 @@ const CheckboxInput = ({ sporsmal }: SpmProps) => {
             </Normaltekst>
         </>
     )
-};
+}
 
-export default CheckboxInput;
+export default CheckboxInput

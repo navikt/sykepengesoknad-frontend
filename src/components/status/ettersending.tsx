@@ -1,30 +1,30 @@
-import './ettersending.less';
+import './ettersending.less'
 
-import Alertstripe from 'nav-frontend-alertstriper';
-import { Knapp } from 'nav-frontend-knapper';
-import ModalWrapper from 'nav-frontend-modal';
-import React, { useState } from 'react';
+import Alertstripe from 'nav-frontend-alertstriper'
+import { Knapp } from 'nav-frontend-knapper'
+import ModalWrapper from 'nav-frontend-modal'
+import React, { useState } from 'react'
 
-import { useAppStore } from '../../data/stores/app-store';
-import env from '../../utils/environment';
-import { logger } from '../../utils/logger';
-import { tekst } from '../../utils/tekster';
+import { useAppStore } from '../../data/stores/app-store'
+import env from '../../utils/environment'
+import { logger } from '../../utils/logger'
+import { tekst } from '../../utils/tekster'
 
 interface EttersendingProps {
     gjelder: string;
 }
 
 const Ettersending = ({ gjelder }: EttersendingProps) => {
-    const [ vilEttersende, setVilEttersende ] = useState<boolean>(false);
-    const { valgtSoknad, setFeilmeldingTekst } = useAppStore();
+    const [ vilEttersende, setVilEttersende ] = useState<boolean>(false)
+    const { valgtSoknad, setFeilmeldingTekst } = useAppStore()
 
-    ModalWrapper.setAppElement('#root');
+    ModalWrapper.setAppElement('#root')
 
     const ettersend = () => {
-        if (gjelder === 'nav') ettersendNav();
-        else if (gjelder === 'arbeidsgiver') ettersendArbeidsgiver();
-        setVilEttersende(false);
-    };
+        if (gjelder === 'nav') ettersendNav()
+        else if (gjelder === 'arbeidsgiver') ettersendArbeidsgiver()
+        setVilEttersende(false)
+    }
 
     const ettersendNav = () => {
         fetch(env.syfoapiRoot + `/syfosoknad/api/soknader/${valgtSoknad!.id}/ettersendTilNav`, {
@@ -35,11 +35,11 @@ const Ettersending = ({ gjelder }: EttersendingProps) => {
             if (res.ok) {
                 setFeilmeldingTekst('')
             } else {
-                logger.error('Feil ved ettersending til NAV', res);
+                logger.error('Feil ved ettersending til NAV', res)
                 setFeilmeldingTekst(tekst('kvittering.ettersending.feilet'))
             }
-        });
-    };
+        })
+    }
 
     const ettersendArbeidsgiver = () => {
         fetch(env.syfoapiRoot + `/syfosoknad/api/soknader/${valgtSoknad!.id}/ettersendTilArbeidsgiver`, {
@@ -50,20 +50,20 @@ const Ettersending = ({ gjelder }: EttersendingProps) => {
             if (res.ok) {
                 setFeilmeldingTekst('')
             } else {
-                logger.error('Feil ved ettersending til ARBEIDSGIVER', res);
+                logger.error('Feil ved ettersending til ARBEIDSGIVER', res)
                 setFeilmeldingTekst(tekst('kvittering.ettersending.feilet'))
             }
-        });
-    };
+        })
+    }
 
     const hentTekst = (text: string) => {
-        const tilSuffix = (gjelder === 'nav') ? '-nav' : '-arbeidsgiver';
+        const tilSuffix = (gjelder === 'nav') ? '-nav' : '-arbeidsgiver'
         const ettersendingSuffix = (gjelder === 'nav')
             ? (valgtSoknad!.sendtTilNAVDato !== undefined) ? '-ettersending' : ''
-            : (valgtSoknad!.sendtTilArbeidsgiverDato !== undefined) ? '-ettersending' : '';
+            : (valgtSoknad!.sendtTilArbeidsgiverDato !== undefined) ? '-ettersending' : ''
 
-        return tekst(`${text}${tilSuffix}${ettersendingSuffix}`);
-    };
+        return tekst(`${text}${tilSuffix}${ettersendingSuffix}`)
+    }
 
     return (<>
         <Knapp mini type='standard' onClick={() => {
@@ -88,7 +88,7 @@ const Ettersending = ({ gjelder }: EttersendingProps) => {
                 {tekst('kvittering.knapp.angre')}
             </button>
         </ModalWrapper>
-    </>);
-};
+    </>)
+}
 
-export default Ettersending;
+export default Ettersending

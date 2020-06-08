@@ -1,11 +1,11 @@
-import { Element, Normaltekst } from 'nav-frontend-typografi';
-import React, { useEffect, useState } from 'react';
-import { useFormContext } from 'react-hook-form';
+import { Element, Normaltekst } from 'nav-frontend-typografi'
+import React, { useEffect, useState } from 'react'
+import { useFormContext } from 'react-hook-form'
 
-import Vis from '../../vis';
-import { hentSvar } from '../hent-svar';
-import { SpmProps } from '../sporsmal-form/sporsmal-form';
-import { hentFeilmelding } from '../sporsmal-utils';
+import Vis from '../../vis'
+import { hentSvar } from '../hent-svar'
+import { SpmProps } from '../sporsmal-form/sporsmal-form'
+import { hentFeilmelding } from '../sporsmal-utils'
 
 const landValg = [ {
     value: 'SYDEN',
@@ -16,24 +16,24 @@ const landValg = [ {
 }, {
     value: 'KINA',
     label: 'Kina',
-} ];
+} ]
 
 export default ({ sporsmal }: SpmProps) => {
-    const [ lokal, setLokal ] = useState<string>(hentSvar(sporsmal));
-    const { register, setValue, errors } = useFormContext();
-    const feilmelding = hentFeilmelding(sporsmal);
+    const [ lokal, setLokal ] = useState<string>(hentSvar(sporsmal))
+    const { register, setValue, errors } = useFormContext()
+    const feilmelding = hentFeilmelding(sporsmal)
 
     useEffect(() => {
-        const lagret = hentSvar(sporsmal);
-        setValue(sporsmal.id, lagret);
-        setLokal(lagret);
+        const lagret = hentSvar(sporsmal)
+        setValue(sporsmal.id, lagret)
+        setLokal(lagret)
         // eslint-disable-next-line
     }, [sporsmal]);
 
     const changeValue = (value: string) => {
-        setValue(sporsmal.id, value);
-        setLokal(lokal === value ? '' : value);
-    };
+        setValue(sporsmal.id, value)
+        setLokal(lokal === value ? '' : value)
+    }
 
 
     return (
@@ -46,7 +46,7 @@ export default ({ sporsmal }: SpmProps) => {
                 <Element tag='h3' className='skjema__sporsmal'>{sporsmal.sporsmalstekst}</Element>
 
                 {landValg.map((valg, idx) => {
-                    const OK = lokal === valg.value;
+                    const OK = lokal === valg.value
                     return (
                         <div className="radioContainer" key={idx}>
                             <input type='radio'
@@ -76,5 +76,5 @@ export default ({ sporsmal }: SpmProps) => {
             </div>
         </>
     )
-};
+}
 

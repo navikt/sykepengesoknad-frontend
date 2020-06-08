@@ -1,40 +1,40 @@
-import './kvittering.less';
+import './kvittering.less'
 
-import Alertstripe from 'nav-frontend-alertstriper';
-import { Knapp } from 'nav-frontend-knapper';
-import React, { useEffect } from 'react';
-import { useHistory } from 'react-router';
-import { useParams } from 'react-router-dom';
+import Alertstripe from 'nav-frontend-alertstriper'
+import { Knapp } from 'nav-frontend-knapper'
+import React, { useEffect } from 'react'
+import { useHistory } from 'react-router'
+import { useParams } from 'react-router-dom'
 
-import useFetch from '../../data/rest/use-fetch';
-import { FetchState, hasData } from '../../data/rest/utils';
-import { useAppStore } from '../../data/stores/app-store';
-import { RSSoknad } from '../../types/rs-types/rs-soknad';
-import { RSSoknadstype } from '../../types/rs-types/rs-soknadstype';
-import { Soknad } from '../../types/types';
-import env from '../../utils/environment';
-import { logger } from '../../utils/logger';
-import { tekst } from '../../utils/tekster';
-import { getUrlTilSoknad } from '../../utils/url-utils';
-import Opplysninger from '../opplysninger/opplysninger';
-import Oppsummering from '../oppsummering/oppsummering';
-import Ettersending from '../status/ettersending';
-import Vis from '../vis';
-import KvitteringInfo from './kvittering-info';
-import KvitteringStatus from './kvittering-status';
+import useFetch from '../../data/rest/use-fetch'
+import { FetchState, hasData } from '../../data/rest/utils'
+import { useAppStore } from '../../data/stores/app-store'
+import { RSSoknad } from '../../types/rs-types/rs-soknad'
+import { RSSoknadstype } from '../../types/rs-types/rs-soknadstype'
+import { Soknad } from '../../types/types'
+import env from '../../utils/environment'
+import { logger } from '../../utils/logger'
+import { tekst } from '../../utils/tekster'
+import { getUrlTilSoknad } from '../../utils/url-utils'
+import Opplysninger from '../opplysninger/opplysninger'
+import Oppsummering from '../oppsummering/oppsummering'
+import Ettersending from '../status/ettersending'
+import Vis from '../vis'
+import KvitteringInfo from './kvittering-info'
+import KvitteringStatus from './kvittering-status'
 
 const Kvittering = () => {
-    const { valgtSoknad, setValgtSoknad, soknader, setSoknader, sykmeldinger, setValgtSykmelding, feilmeldingTekst, setFeilmeldingTekst } = useAppStore();
-    const korrigerSoknad = useFetch<RSSoknad>();
-    const history = useHistory();
-    const { id } = useParams();
+    const { valgtSoknad, setValgtSoknad, soknader, setSoknader, sykmeldinger, setValgtSykmelding, feilmeldingTekst, setFeilmeldingTekst } = useAppStore()
+    const korrigerSoknad = useFetch<RSSoknad>()
+    const history = useHistory()
+    const { id } = useParams()
 
     useEffect(() => {
         if (!valgtSoknad) {
-            const filtrertSoknad = soknader.find(soknad => soknad.id === id);
-            setValgtSoknad(filtrertSoknad);
-            const sykmelding = sykmeldinger.find(sm => sm.id === filtrertSoknad?.sykmeldingId);
-            setValgtSykmelding(sykmelding);
+            const filtrertSoknad = soknader.find(soknad => soknad.id === id)
+            setValgtSoknad(filtrertSoknad)
+            const sykmelding = sykmeldinger.find(sm => sm.id === filtrertSoknad?.sykmeldingId)
+            setValgtSykmelding(sykmelding)
         }
         // eslint-disable-next-line
     }, [])
@@ -46,17 +46,17 @@ const Kvittering = () => {
             headers: { 'Content-Type': 'application/json' }
         }, (fetchState: FetchState<RSSoknad>) => {
             if (hasData(fetchState)) {
-                const soknad = new Soknad(fetchState.data);
-                soknader.push(soknad);
-                setSoknader(soknader);
-                history.push(getUrlTilSoknad(soknad, undefined));
-                setFeilmeldingTekst('');
+                const soknad = new Soknad(fetchState.data)
+                soknader.push(soknad)
+                setSoknader(soknader)
+                history.push(getUrlTilSoknad(soknad, undefined))
+                setFeilmeldingTekst('')
             } else {
-                logger.error('Feil ved opprettelse av UTKAST_TIL_KORRIGERING', fetchState);
-                setFeilmeldingTekst(tekst('kvittering.korrigering.feilet'));
+                logger.error('Feil ved opprettelse av UTKAST_TIL_KORRIGERING', fetchState)
+                setFeilmeldingTekst(tekst('kvittering.korrigering.feilet'))
             }
-        });
-    };
+        })
+    }
 
     const skalViseKnapperad = !(valgtSoknad?.soknadstype === RSSoknadstype.OPPHOLD_UTLAND)
 
@@ -86,6 +86,6 @@ const Kvittering = () => {
             </div>
         </div>
     )
-};
+}
 
-export default Kvittering;
+export default Kvittering

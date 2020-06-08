@@ -1,7 +1,7 @@
-import { Normaltekst } from 'nav-frontend-typografi';
-import React from 'react';
+import { Normaltekst } from 'nav-frontend-typografi'
+import React from 'react'
 
-import CheckBoxImg from '../check-box-1.png';
+import CheckBoxImg from '../check-box-1.png'
 
 interface AvkryssetProps {
     tekst: string;
@@ -13,7 +13,7 @@ const Avkrysset = ({ tekst }: AvkryssetProps) => {
             <img src={CheckBoxImg} alt='Avkrysset' />
             <Normaltekst>{tekst}</Normaltekst>
         </div>
-    );
-};
+    )
+}
 
-export default Avkrysset;
+export default Avkrysset

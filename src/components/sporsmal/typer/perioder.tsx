@@ -1,59 +1,59 @@
-import './flatpickr.less';
+import './flatpickr.less'
 
-import { Element } from 'nav-frontend-typografi';
-import React, { useEffect, useRef, useState } from 'react';
-import useForceUpdate from 'use-force-update';
+import { Element } from 'nav-frontend-typografi'
+import React, { useEffect, useRef, useState } from 'react'
+import useForceUpdate from 'use-force-update'
 
-import { empty } from '../../../utils/constants';
-import { tekst } from '../../../utils/tekster';
-import Vis from '../../vis';
-import { hentPerioder } from '../hent-svar';
-import { SpmProps } from '../sporsmal-form/sporsmal-form';
-import UndersporsmalListe from '../undersporsmal/undersporsmal-liste';
-import PeriodeKomp from './periode-komp';
+import { empty } from '../../../utils/constants'
+import { tekst } from '../../../utils/tekster'
+import Vis from '../../vis'
+import { hentPerioder } from '../hent-svar'
+import { SpmProps } from '../sporsmal-form/sporsmal-form'
+import UndersporsmalListe from '../undersporsmal/undersporsmal-liste'
+import PeriodeKomp from './periode-komp'
 
 const Perioder = ({ sporsmal }: SpmProps) => {
-    const [ lokal, setLokal ] = useState<number[]>([ 0 ]);
-    const periodeliste = useRef<HTMLUListElement>(null);
-    const forceUpdate = useForceUpdate();
+    const [ lokal, setLokal ] = useState<number[]>([ 0 ])
+    const periodeliste = useRef<HTMLUListElement>(null)
+    const forceUpdate = useForceUpdate()
 
     useEffect(() => {
-        const svar = hentPerioder(sporsmal);
-        setLokal(svar.length > 0 ? svar : lokal);
-        lagIdForPerioder();
+        const svar = hentPerioder(sporsmal)
+        setLokal(svar.length > 0 ? svar : lokal)
+        lagIdForPerioder()
         // eslint-disable-next-line
     }, [ sporsmal ]);
 
     const lagIdForPerioder = () => {
-        const perioder = periodeliste.current!.querySelectorAll('.periode');
+        const perioder = periodeliste.current!.querySelectorAll('.periode')
         perioder.forEach((value, key) => {
-            const input = value.querySelector('.input--m[type=text]');
-            input!.setAttribute('id', sporsmal.id + '_t_' + key);
-            input!.setAttribute('autoComplete', 'off');
+            const input = value.querySelector('.input--m[type=text]')
+            input!.setAttribute('id', sporsmal.id + '_t_' + key)
+            input!.setAttribute('autoComplete', 'off')
         })
 
-    };
+    }
 
     const oppdaterPerioder = () => {
-        forceUpdate();
+        forceUpdate()
         setTimeout(() => {
-            lagIdForPerioder();
-        }, 10);
-    };
+            lagIdForPerioder()
+        }, 10)
+    }
 
     const slettPeriode = (e: any, idx: number) => {
-        e.preventDefault();
-        lokal.splice(idx, 1);
-        setLokal(lokal);
-        oppdaterPerioder();
-    };
+        e.preventDefault()
+        lokal.splice(idx, 1)
+        setLokal(lokal)
+        oppdaterPerioder()
+    }
 
     const leggTilPeriode = (e: any) => {
-        e.preventDefault();
-        lokal.push(lokal[lokal.length - 1] + 1);
-        setLokal(lokal);
-        oppdaterPerioder();
-    };
+        e.preventDefault()
+        lokal.push(lokal[lokal.length - 1] + 1)
+        setLokal(lokal)
+        oppdaterPerioder()
+    }
 
     return (
         <div className={sporsmal.parentKriterie ? 'kriterie--' + sporsmal.parentKriterie.toLowerCase() : ''}>
@@ -78,6 +78,6 @@ const Perioder = ({ sporsmal }: SpmProps) => {
             </div>
         </div>
     )
-};
+}
 
-export default Perioder;
+export default Perioder

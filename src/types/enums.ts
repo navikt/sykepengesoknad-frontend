@@ -163,11 +163,11 @@ export enum HotjarTriggerType {
     SOKNAD_ARBEIDSLEDIG = 'SOKNAD_ARBEIDSLEDIG',
 }
 
-export const OPPHOLD_UTLAND_SKJEMA = 'OPPHOLD_UTLAND_SKJEMA';
+export const OPPHOLD_UTLAND_SKJEMA = 'OPPHOLD_UTLAND_SKJEMA'
 
 export const getSoknadSkjemanavn = (id: string) => {
-    return `SOKNAD___${id}`;
-};
+    return `SOKNAD___${id}`
+}
 
 export enum SvarEnums {
     JA = 'JA',

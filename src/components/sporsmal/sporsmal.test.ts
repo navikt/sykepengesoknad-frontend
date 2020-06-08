@@ -1,11 +1,11 @@
-import { TagTyper } from '../../types/enums';
-import { RSSvartype } from '../../types/rs-types/rs-svartype';
-import { tekst } from '../../utils/tekster';
-import { hentGeneriskFeilmelding } from './sporsmal-utils';
+import { TagTyper } from '../../types/enums'
+import { RSSvartype } from '../../types/rs-types/rs-svartype'
+import { tekst } from '../../utils/tekster'
+import { hentGeneriskFeilmelding } from './sporsmal-utils'
 
 test('Alle tags har global feilmelding', () => {
-    let tags = Object.values(TagTyper);
-    let manglerFeilmelding = false;
+    let tags = Object.values(TagTyper)
+    let manglerFeilmelding = false
 
     tags = tags.filter(skipTag => {
         return skipTag !== TagTyper.VAER_KLAR_OVER_AT
@@ -21,30 +21,30 @@ test('Alle tags har global feilmelding', () => {
             // TODO: Sjekk om disse faktisk ikke skal ha feilmelding
             && skipTag !== TagTyper.PERMITTERT_PERIODE_NAR
             && skipTag !== TagTyper.ENKELTSTAENDE_BEHANDLINGSDAGER_DAG_NAR
-    });
+    })
 
     tags.forEach(tag => {
         if (tekst(`soknad.feilmelding.${tag}`) === undefined) {
             // eslint-disable-next-line no-console
-            console.log('Mangler feilmelding for tag:', tag);
-            manglerFeilmelding = true;
+            console.log('Mangler feilmelding for tag:', tag)
+            manglerFeilmelding = true
         }
-    });
+    })
 
-    expect(manglerFeilmelding).toBeFalsy();
-});
+    expect(manglerFeilmelding).toBeFalsy()
+})
 
 test('Alle svartyper har generiskfeilmelding', () => {
-    const svartyper = Object.values(RSSvartype);
-    let manglerFeilmelding = false;
+    const svartyper = Object.values(RSSvartype)
+    let manglerFeilmelding = false
 
     svartyper.forEach(svartype => {
         if(hentGeneriskFeilmelding(svartype) === undefined) {
             // eslint-disable-next-line no-console
-            console.log('Mangler generisk feilmelding for svartype:', svartype);
-            manglerFeilmelding = true;
+            console.log('Mangler generisk feilmelding for svartype:', svartype)
+            manglerFeilmelding = true
         }
-    });
+    })
 
-    expect(manglerFeilmelding).toBeFalsy();
-});
+    expect(manglerFeilmelding).toBeFalsy()
+})

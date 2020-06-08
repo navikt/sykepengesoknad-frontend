@@ -1,22 +1,22 @@
-import './brodsmuler.less';
+import './brodsmuler.less'
 
-import Lenke from 'nav-frontend-lenker';
-import { Normaltekst } from 'nav-frontend-typografi';
-import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+import Lenke from 'nav-frontend-lenker'
+import { Normaltekst } from 'nav-frontend-typografi'
+import React, { useState } from 'react'
+import { Link } from 'react-router-dom'
 
-import { Brodsmule } from '../../types/types';
-import env from '../../utils/environment';
-import personIkon from './person.svg';
+import { Brodsmule } from '../../types/types'
+import env from '../../utils/environment'
+import personIkon from './person.svg'
 
 const BrodsmuleBit = ({ sti, tittel, sisteSmule, erKlikkbar }: Brodsmule) => {
-    const erEkstern = sti && sti.includes(process.env.REACT_APP_SYKEFRAVAER_CONTEXT_ROOT!);
+    const erEkstern = sti && sti.includes(process.env.REACT_APP_SYKEFRAVAER_CONTEXT_ROOT!)
 
     const link = erEkstern
         ? <Lenke href={sti}>{tittel}</Lenke>
         : sti
             ? <Link to={sti} className='lenke'>{tittel}</Link>
-            : <span>{tittel}</span>;
+            : <span>{tittel}</span>
 
     if (sisteSmule) {
         return (
@@ -24,41 +24,41 @@ const BrodsmuleBit = ({ sti, tittel, sisteSmule, erKlikkbar }: Brodsmule) => {
                 <span className='vekk'>Du er her:</span>
                 <span>{tittel}</span>
             </li>
-        );
+        )
     } else if (erKlikkbar) {
         return (
             <li className='smule'>{link}</li>
-        );
+        )
     }
     return (
         <li className='smule'>
             <span>{tittel}</span>
         </li>
-    );
-};
+    )
+}
 
 interface BrodsmulerProps {
     brodsmuler: Brodsmule[];
 }
 
 const Brodsmuler = ({ brodsmuler }: BrodsmulerProps) => {
-    const [ visCollapsed, setVisCollapsed ] = useState(true);
+    const [ visCollapsed, setVisCollapsed ] = useState(true)
 
     const getVisCollapsed = () => {
-        return brodsmuler.length > 3 && visCollapsed;
-    };
+        return brodsmuler.length > 3 && visCollapsed
+    }
 
     const getSynligeBrodsmuler = () => {
         if (getVisCollapsed()) {
             return [
                 brodsmuler[brodsmuler.length - 2],
                 brodsmuler[brodsmuler.length - 1],
-            ];
+            ]
         }
-        return brodsmuler;
-    };
+        return brodsmuler
+    }
 
-    const synligeBrodsmuler = getSynligeBrodsmuler();
+    const synligeBrodsmuler = getSynligeBrodsmuler()
 
     return (
         <>
@@ -86,15 +86,15 @@ const Brodsmuler = ({ brodsmuler }: BrodsmulerProps) => {
                             return {
                                 ...smule,
                                 sisteSmule: synligeBrodsmuler.length === index + 1,
-                            };
+                            }
                         })
                         .map((smule, index) => {
-                            return <BrodsmuleBit key={index} {...smule} />;
+                            return <BrodsmuleBit key={index} {...smule} />
                         })}
                 </Normaltekst>
             </nav>
         </>
-    );
-};
+    )
+}
 
-export default Brodsmuler;
+export default Brodsmuler

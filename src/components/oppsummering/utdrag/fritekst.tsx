@@ -1,7 +1,7 @@
-import { Element } from 'nav-frontend-typografi';
-import React from 'react';
+import { Element } from 'nav-frontend-typografi'
+import React from 'react'
 
-import { OppsummeringProps } from '../oppsummering';
+import { OppsummeringProps } from '../oppsummering'
 
 const Fritekst = ({ sporsmal }: OppsummeringProps) => {
 
@@ -10,7 +10,7 @@ const Fritekst = ({ sporsmal }: OppsummeringProps) => {
             <Element tag='h3'>{sporsmal.sporsmalstekst}</Element>
             <p className='sist'>{sporsmal.svarliste.svar[0].verdi}</p>
         </div>
-    );
-};
+    )
+}
 
-export default Fritekst;
+export default Fritekst

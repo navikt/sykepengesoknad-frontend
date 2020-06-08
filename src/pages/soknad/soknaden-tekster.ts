@@ -81,6 +81,6 @@ const SoknadenTekster: any = {
         'sykepengesoknad.navigasjon.gaa-til': 'Gå til dine sykepengesøknader',
 
     }, 'en': {}
-};
+}
 
-export default SoknadenTekster;
+export default SoknadenTekster

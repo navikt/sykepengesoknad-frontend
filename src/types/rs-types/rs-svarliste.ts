@@ -1,4 +1,4 @@
-import { RSSvar } from './rs-svar';
+import { RSSvar } from './rs-svar'
 
 export interface RSSvarliste {
     sporsmalId: string;

@@ -1,28 +1,28 @@
-import { Element, Normaltekst } from 'nav-frontend-typografi';
-import React, { useEffect, useRef, useState } from 'react';
-import { useFormContext } from 'react-hook-form';
+import { Element, Normaltekst } from 'nav-frontend-typografi'
+import React, { useEffect, useRef, useState } from 'react'
+import { useFormContext } from 'react-hook-form'
 
-import { getLedetekst, tekst } from '../../../utils/tekster';
-import Vis from '../../vis';
-import { hentSvar } from '../hent-svar';
-import { SpmProps } from '../sporsmal-form/sporsmal-form';
-import { hentFeilmelding } from '../sporsmal-utils';
-import UndersporsmalListe from '../undersporsmal/undersporsmal-liste';
+import { getLedetekst, tekst } from '../../../utils/tekster'
+import Vis from '../../vis'
+import { hentSvar } from '../hent-svar'
+import { SpmProps } from '../sporsmal-form/sporsmal-form'
+import { hentFeilmelding } from '../sporsmal-utils'
+import UndersporsmalListe from '../undersporsmal/undersporsmal-liste'
 
 const TallInput = ({ sporsmal }: SpmProps) => {
-    const feilmelding = hentFeilmelding(sporsmal);
-    const [ lokal, setLokal ] = useState<string>(hentSvar(sporsmal));
-    const { register, setValue, errors } = useFormContext();
-    const undersporsmal = useRef<HTMLDivElement>(null);
+    const feilmelding = hentFeilmelding(sporsmal)
+    const [ lokal, setLokal ] = useState<string>(hentSvar(sporsmal))
+    const { register, setValue, errors } = useFormContext()
+    const undersporsmal = useRef<HTMLDivElement>(null)
 
     const onChange = (e: any) => {
-        const value = e.target.value;
-        setValue(sporsmal.id, value);
-        setLokal(value);
-    };
+        const value = e.target.value
+        setValue(sporsmal.id, value)
+        setLokal(value)
+    }
 
     useEffect(() => {
-        setValue(sporsmal.id, hentSvar(sporsmal));
+        setValue(sporsmal.id, hentSvar(sporsmal))
         // eslint-disable-next-line
     }, []);
 
@@ -75,6 +75,6 @@ const TallInput = ({ sporsmal }: SpmProps) => {
             </div>
         </>
     )
-};
+}
 
-export default TallInput;
+export default TallInput

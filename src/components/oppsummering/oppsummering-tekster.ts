@@ -4,6 +4,6 @@ const OppsummeringTekster: any = {
         'soknad.ja': 'Ja',
         'soknad.nei': 'Nei'
     }, 'en': {}
-};
+}
 
-export default OppsummeringTekster;
+export default OppsummeringTekster

@@ -1,12 +1,12 @@
-import cls from 'classnames';
-import React from 'react';
-import { useHistory, useParams } from 'react-router';
+import cls from 'classnames'
+import React from 'react'
+import { useHistory, useParams } from 'react-router'
 
-import { useAppStore } from '../../../data/stores/app-store';
-import { SEPARATOR } from '../../../utils/constants';
-import { useAmplitudeInstance } from '../../amplitude/amplitude';
-import Vis from '../../vis';
-import { pathUtenSteg } from '../sporsmal-utils';
+import { useAppStore } from '../../../data/stores/app-store'
+import { SEPARATOR } from '../../../utils/constants'
+import { useAmplitudeInstance } from '../../amplitude/amplitude'
+import Vis from '../../vis'
+import { pathUtenSteg } from '../sporsmal-utils'
 
 const innerCls = (aktiv: boolean, ferdig: boolean, disabled: boolean) =>
     cls('stegindikator__steg-inner', {
@@ -14,7 +14,7 @@ const innerCls = (aktiv: boolean, ferdig: boolean, disabled: boolean) =>
         'stegindikator__steg-inner--ferdig': ferdig,
         'stegindikator__steg-inner--disabled': disabled,
         'stegindikator__steg-inner--interaktiv': !aktiv
-    });
+    })
 
 export interface StegProps {
     label: string;
@@ -22,19 +22,19 @@ export interface StegProps {
 }
 
 const Steg = ({ label, index }: StegProps) => {
-    const { stegId } = useParams();
-    const { valgtSoknad } = useAppStore();
-    const { logEvent } = useAmplitudeInstance();
-    const aktivtSteg = parseInt(stegId);
-    const num = index + 1;
-    const erAktiv = aktivtSteg === num;
-    const erPassert = aktivtSteg > num;
-    const disabled = !erPassert && !erAktiv;
-    const history = useHistory();
+    const { stegId } = useParams()
+    const { valgtSoknad } = useAppStore()
+    const { logEvent } = useAmplitudeInstance()
+    const aktivtSteg = parseInt(stegId)
+    const num = index + 1
+    const erAktiv = aktivtSteg === num
+    const erPassert = aktivtSteg > num
+    const disabled = !erPassert && !erAktiv
+    const history = useHistory()
 
     function goTo(idx: number) {
-        logEvent('Trykt på spørsmålssteg', { fra: valgtSoknad!.sporsmal[aktivtSteg - 1].tag, til: valgtSoknad!.sporsmal[idx - 1].tag });
-        history.push(pathUtenSteg(history.location.pathname) + SEPARATOR + (idx));
+        logEvent('Trykt på spørsmålssteg', { fra: valgtSoknad!.sporsmal[aktivtSteg - 1].tag, til: valgtSoknad!.sporsmal[idx - 1].tag })
+        history.push(pathUtenSteg(history.location.pathname) + SEPARATOR + (idx))
     }
 
     return (
@@ -51,7 +51,7 @@ const Steg = ({ label, index }: StegProps) => {
                 </div>
             </Vis>
         </li>
-    );
-};
+    )
+}
 
-export default Steg;
+export default Steg

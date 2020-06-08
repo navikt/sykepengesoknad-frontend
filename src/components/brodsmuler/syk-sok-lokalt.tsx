@@ -1,23 +1,23 @@
-import React, { useEffect, useState } from 'react';
-import { useParams } from 'react-router';
+import React, { useEffect, useState } from 'react'
+import { useParams } from 'react-router'
 
-import { useAppStore } from '../../data/stores/app-store';
-import env from '../../utils/environment';
-import Vis from '../vis';
+import { useAppStore } from '../../data/stores/app-store'
+import env from '../../utils/environment'
+import Vis from '../vis'
 
 const SykSokLokalt = () => {
-    const { valgtSoknad, valgtSykmelding } = useAppStore();
-    const { stegId } = useParams();
-    const [ width, setWidth ] = useState<number>(window.innerWidth);
+    const { valgtSoknad, valgtSykmelding } = useAppStore()
+    const { stegId } = useParams()
+    const [ width, setWidth ] = useState<number>(window.innerWidth)
 
     // eslint-disable-next-line
     useEffect(() => {
-        window.addEventListener('resize', () => setWidth(window.innerWidth) as any);
-        return () => window.removeEventListener('resize', () => setWidth(window.innerWidth) as any);
-    });
+        window.addEventListener('resize', () => setWidth(window.innerWidth) as any)
+        return () => window.removeEventListener('resize', () => setWidth(window.innerWidth) as any)
+    })
 
     if (!valgtSoknad || !valgtSoknad.sporsmal || !stegId || Number(stegId) >= valgtSoknad.sporsmal.length) {
-        return null;
+        return null
     }
 
     return (
@@ -47,6 +47,6 @@ const SykSokLokalt = () => {
             </div>
         </Vis>
     )
-};
+}
 
-export default SykSokLokalt;
+export default SykSokLokalt

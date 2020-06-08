@@ -49,6 +49,6 @@ const KvitteringTekster: any = {
         'kvittering.digital-inntektsmelding': 'Digital inntektsmelding sendes fra arbeidsgivers eget lønns- og personalsystem eller fra altinn.no. Meldingen inneholder inntektsopplysninger og annen informasjon NAV må ha for å behandle søknaden arbeidstaker har sendt.',
 
     }, 'en': {}
-};
+}
 
-export default KvitteringTekster;
+export default KvitteringTekster

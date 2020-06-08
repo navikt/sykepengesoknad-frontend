@@ -1,11 +1,11 @@
-import Panel from 'nav-frontend-paneler';
-import { Normaltekst, Sidetittel } from 'nav-frontend-typografi';
-import React, { useEffect } from 'react';
-import { Link } from 'react-router-dom';
+import Panel from 'nav-frontend-paneler'
+import { Normaltekst, Sidetittel } from 'nav-frontend-typografi'
+import React, { useEffect } from 'react'
+import { Link } from 'react-router-dom'
 
-import { Soknad } from '../types/types';
-import { logger } from '../utils/logger';
-import { getUrlTilSoknad } from '../utils/url-utils';
+import { Soknad } from '../types/types'
+import { logger } from '../utils/logger'
+import { getUrlTilSoknad } from '../utils/url-utils'
 
 interface StartIgjenProps {
     soknad: Soknad;
@@ -16,13 +16,13 @@ interface StartIgjenProps {
 const StartIgjen = ({ soknad }: StartIgjenProps) => {
 
     useEffect(() => {
-        const type = soknad.soknadstype ? soknad.soknadstype : 'ARBEIDSTAKER_GAMMEL_PLATTFORM';
-        const sporsmalsliste = soknad.soknadstype ? JSON.stringify(soknad.sporsmal) : null;
+        const type = soknad.soknadstype ? soknad.soknadstype : 'ARBEIDSTAKER_GAMMEL_PLATTFORM'
+        const sporsmalsliste = soknad.soknadstype ? JSON.stringify(soknad.sporsmal) : null
         logger.error({
             message: `Ugyldig tilstand i søknad av typen ${type} med ID: ${soknad.id}`,
             sporsmalsliste,
-        });
-    }, []);
+        })
+    }, [])
 
     return (
         <Panel>
@@ -36,7 +36,7 @@ const StartIgjen = ({ soknad }: StartIgjenProps) => {
                 </Normaltekst>
             </div>
         </Panel>
-    );
-};
+    )
+}
 
-export default StartIgjen;
+export default StartIgjen
