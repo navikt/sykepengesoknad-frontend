@@ -1,5 +1,3 @@
-/* eslint-disable no-undef */
-
 import { soknaderOpplaering as soknader } from '../../src/data/mock/data/soknader-opplaering'
 import { Soknad } from '../../src/types/types'
 
