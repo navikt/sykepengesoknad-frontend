@@ -26,8 +26,12 @@ class Environment {
         return this.env.UNLEASH_URL
     }
 
-    get mockBackend() {
-        return this.env.MOCK_BACKEND
+    get isMockBackend() {
+        return this.env.MOCK_BACKEND === 'true'
+    }
+
+    get isOpplaering() {
+        return this.env.OPPLAERING === 'true'
     }
 
     get loginServiceUrl() {

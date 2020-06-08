@@ -33,3 +33,5 @@ spec:
       value: "gcp"
     - name: SYKEFRAVAER_URL
       value: "https://sykefravaer.labs.nais.io"
+    - name: OPPLAERING
+      value: "true"
