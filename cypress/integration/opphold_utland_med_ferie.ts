@@ -1,85 +1,85 @@
 /* eslint-disable no-undef */
 
-import { soknader } from '../../src/data/mock/data/soknader';
-import { Soknad } from '../../src/types/types';
+import { soknaderOpplaering as soknader } from '../../src/data/mock/data/soknader-opplaering'
+import { Soknad } from '../../src/types/types'
 
 describe('Tester søknad om å beholde sykepenger utenfor EØS', () => {
 
-    const soknad = soknader.find((sok: Soknad) => sok.id === 'b9d67b0d-b1f8-44a5-bcbd-6010b60b90ce');
+    const soknad = soknader.find((sok: Soknad) => sok.id === 'b9d67b0d-b1f8-44a5-bcbd-6010b60b90ce')
 
     before(() => {
-        cy.visit('http://localhost:8080');
-    });
+        cy.visit('http://localhost:8080')
+    })
 
     it('Laster startside', function() {
-        cy.get('.soknadtopp__tittel').should('be.visible').and('have.text', 'Søknad om sykepenger');
-        cy.get(`#soknader-list-til-behandling article a[href*=${soknad.id}]`).should('include.text', 'Søknad om å beholde sykepenger utenfor EØS');
-        cy.get(`#soknader-list-til-behandling article a[href*=${soknad.id}]`).click();
-    });
+        cy.get('.soknadtopp__tittel').should('be.visible').and('have.text', 'Søknad om sykepenger')
+        cy.get(`#soknader-list-til-behandling article a[href*=${soknad.id}]`).should('include.text', 'Søknad om å beholde sykepenger utenfor EØS')
+        cy.get(`#soknader-list-til-behandling article a[href*=${soknad.id}]`).click()
+    })
 
 
     it('PERIODEUTLAND - steg 1', function() {
-        cy.url().should('include', `${soknad.id}/1`);
+        cy.url().should('include', `${soknad.id}/1`)
 
 
-        cy.contains('Opplysninger fra sykmeldingen').should('not.exist');
-        cy.contains('Når skal du reise?');
+        cy.contains('Opplysninger fra sykmeldingen').should('not.exist')
+        cy.contains('Når skal du reise?')
 
-        cy.get('.skjemaelement__input.form-control').focus();
-        cy.get('.flatpickr-calendar').contains('17').click({ force: true });
-        cy.get('.flatpickr-calendar').contains('24').click({ force: true });
+        cy.get('.skjemaelement__input.form-control').focus()
+        cy.get('.flatpickr-calendar').contains('17').click({ force: true })
+        cy.get('.flatpickr-calendar').contains('24').click({ force: true })
 
 
-        cy.contains('Gå videre').click();
-    });
+        cy.contains('Gå videre').click()
+    })
 
     it('LAND - steg 2', function() {
-        cy.url().should('include', `${soknad.id}/2`);
+        cy.url().should('include', `${soknad.id}/2`)
 
 
-        cy.contains('Hvilket land skal du reise til?');
-        cy.contains('Syden').click({ force: true });
+        cy.contains('Hvilket land skal du reise til?')
+        cy.contains('Syden').click({ force: true })
 
-        cy.contains('Gå videre').click();
-    });
+        cy.contains('Gå videre').click()
+    })
 
     it('Vi svarer Ja på arbeidsgiverspørsmålet', function() {
-        cy.url().should('include', `${soknad.id}/3`);
-        cy.contains('Har du arbeidsgiver?');
-        cy.get('#3_0').click({ force: true });
-        cy.contains('Er du 100 % sykmeldt?');
-    });
+        cy.url().should('include', `${soknad.id}/3`)
+        cy.contains('Har du arbeidsgiver?')
+        cy.get('#3_0').click({ force: true })
+        cy.contains('Er du 100 % sykmeldt?')
+    })
 
     it('Vi svarer Ja på 100% sykmeldt spørsmålet og får en bjørn', function() {
-        cy.get('#4_0').click({ force: true });
-        cy.contains('Det er ikke mulig å ta ut ferie de dagene eller timene du skulle arbeidet og få utbetalt sykepenger for de andre. Men har du spart opp fleksitid, kan du avspasere dagene eller timene du skulle jobbet og få sykepenger for de andre dagene. Eksempel: Er du 50 prosent sykmeldt og ønsker å reise til utlandet noen dager, kan du avspasere halvparten av dagene. Har du ikke nok fleksitid å avspasere, må du ta ut hele feriedager.');
-    });
+        cy.get('#4_0').click({ force: true })
+        cy.contains('Det er ikke mulig å ta ut ferie de dagene eller timene du skulle arbeidet og få utbetalt sykepenger for de andre. Men har du spart opp fleksitid, kan du avspasere dagene eller timene du skulle jobbet og få sykepenger for de andre dagene. Eksempel: Er du 50 prosent sykmeldt og ønsker å reise til utlandet noen dager, kan du avspasere halvparten av dagene. Har du ikke nok fleksitid å avspasere, må du ta ut hele feriedager.')
+    })
 
     it('Sykmeldt sporsmalet forsvinner når vi klikker nei', function() {
-        cy.get('#3_1').click({ force: true });
-        cy.contains('Er du 100 % sykmeldt?').should('not.exist');
-        cy.get('#3_0').click({ force: true });
-    });
+        cy.get('#3_1').click({ force: true })
+        cy.contains('Er du 100 % sykmeldt?').should('not.exist')
+        cy.get('#3_0').click({ force: true })
+    })
 
     it('Gå videre forsvinner og bjørn vises når man har avtalt ferie', function() {
-        cy.contains('Har du avtalt med arbeidsgiveren din at du skal ha ferie i hele perioden?');
-        cy.contains('Gå videre');
-        cy.contains('Avbryt søknad').should('not.exist');
+        cy.contains('Har du avtalt med arbeidsgiveren din at du skal ha ferie i hele perioden?')
+        cy.contains('Gå videre')
+        cy.contains('Avbryt søknad').should('not.exist')
 
 
-        cy.get('#5_0').click({ force: true });
-        cy.contains('Du får ikke sykepenger mens du har ferie. Det betyr at du ikke trenger å sende denne søknaden. God tur!');
+        cy.get('#5_0').click({ force: true })
+        cy.contains('Du får ikke sykepenger mens du har ferie. Det betyr at du ikke trenger å sende denne søknaden. God tur!')
 
-        cy.contains('Gå videre').should('not.exist');
-    });
+        cy.contains('Gå videre').should('not.exist')
+    })
 
     it('Vi avbryter søknaden og havner på forsiden, søknaden er borte', function() {
-        cy.contains('Avbryt søknad').click();
+        cy.contains('Avbryt søknad').click()
 
-        cy.url().should('equal', 'http://localhost:8080/');
+        cy.url().should('equal', 'http://localhost:8080/')
 
-        cy.get('.soknadtopp__tittel').should('be.visible').and('have.text', 'Søknad om sykepenger');
-        cy.contains('Søknad om å beholde sykepenger utenfor EØS').should('not.exist');
-    });
-});
+        cy.get('.soknadtopp__tittel').should('be.visible').and('have.text', 'Søknad om sykepenger')
+        cy.contains('Søknad om å beholde sykepenger utenfor EØS').should('not.exist')
+    })
+})
 

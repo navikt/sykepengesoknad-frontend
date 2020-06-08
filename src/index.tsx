@@ -10,7 +10,7 @@ import env from './utils/environment'
 
 dayjs.locale('nb')
 
-if (env.mockBackend === 'true') {
+if (env.isMockBackend) {
     require('./data/mock')
 }
 

@@ -1,4 +1,4 @@
-export const soknader: any = [
+export const soknaderOpplaering: any = [
     {
         'id': 'faba11f5-c4f2-4647-8c8a-58b28ce2f3ef',
         'sykmeldingId': '7e90121c-b64b-4a1c-b7a5-93c9d95aba47',

@@ -14,51 +14,52 @@
 // ***********************************************************
 /* eslint-disable no-undef */
 import './commands'
-import { RSSporsmal } from '../../src/types/rs-types/rs-sporsmal';
-import { RSSvartype } from '../../src/types/rs-types/rs-svartype';
-import { SvarEnums } from '../../src/types/enums';
+
+import { SvarEnums } from '../../src/types/enums'
+import { RSSporsmal } from '../../src/types/rs-types/rs-sporsmal'
+import { RSSvartype } from '../../src/types/rs-types/rs-svartype'
 
 beforeEach(() => {
     cy.window().then((win) => {
-        cy.spy(win, 'fetch').as('winFetch');
-    });
-});
+        cy.spy(win, 'fetch').as('winFetch')
+    })
+})
 
 afterEach(() => {
     cy.get('@winFetch').should((a: any) => {
-        lyttTilNettverksKall(a);
+        lyttTilNettverksKall(a)
     })
-});
+})
 
 const lyttTilNettverksKall = (a: any) => {
-    const spy = a ? a[ 'getCalls' ]() : [];
+    const spy = a ? a[ 'getCalls' ]() : []
     for (const call of spy) {
-        const { args } = call;
-        const url = args[ 0 ];
-        const req = args[ 1 ];
+        const { args } = call
+        const url = args[ 0 ]
+        const req = args[ 1 ]
 
         if (url.includes('sporsmal')) {
-            const headers = req[ 'headers' ];
-            const sporsmal = JSON.parse(req[ 'body' ]) as RSSporsmal;
+            const headers = req[ 'headers' ]
+            const sporsmal = JSON.parse(req[ 'body' ]) as RSSporsmal
             expect(headers, '/oppdaterSporsmal')
-                .to.deep.eq({ 'Content-Type': 'application/json' });
-            svarFormat(sporsmal);
+                .to.deep.eq({ 'Content-Type': 'application/json' })
+            svarFormat(sporsmal)
         }
         else if(url.includes('/finnMottaker')) {
-            const headers = req[ 'headers' ];
+            const headers = req[ 'headers' ]
             expect(headers, '/finnMottaker')
-                .to.deep.eq({ 'Content-Type': 'application/json' });
+                .to.deep.eq({ 'Content-Type': 'application/json' })
         }
         else if(url.includes('/send')) {
-            const headers = req[ 'headers' ];
+            const headers = req[ 'headers' ]
             expect(headers, '/finnMottaker')
-                .to.deep.eq({ 'Content-Type': 'application/json' });
+                .to.deep.eq({ 'Content-Type': 'application/json' })
         }
         else {
-            cy.log('Sjekker ikke kallet til', url);
+            cy.log('Sjekker ikke kallet til', url)
         }
     }
-};
+}
 
 const svarFormat = (sporsmal: RSSporsmal) => {
     if(sporsmal.svar[0]) {
@@ -66,45 +67,45 @@ const svarFormat = (sporsmal: RSSporsmal) => {
             case RSSvartype.CHECKBOX_PANEL:
                 expect(sporsmal.svar[ 0 ].verdi).to.match(RegExp(`(${SvarEnums.CHECKED}|${SvarEnums.UNCHECKED})`),
                     `Svar format ${sporsmal.svartype}`)
-                break;
+                break
             case RSSvartype.JA_NEI:
                 expect(sporsmal.svar[ 0 ].verdi).to.match(RegExp(`(${SvarEnums.JA}|${SvarEnums.NEI}|)`),
                     `Svar format ${sporsmal.svartype}`)
-                break;
+                break
             case RSSvartype.RADIO_GRUPPE_UKEKALENDER:
                 expect(sporsmal.svar[ 0 ].verdi).to.match(RegExp('(Ikke til behandling|\\d{4}-\\d{2}-\\d{2})'),
                     `Svar format ${sporsmal.svartype}`)
-                break;
+                break
             case RSSvartype.CHECKBOX_GRUPPE:
                 expect(sporsmal.svar).to.deep.eq([ { verdi: '' } ],
                     `Svar format ${sporsmal.svartype}`)
-                break;
+                break
             case RSSvartype.CHECKBOX:
                 expect(sporsmal.svar[ 0 ].verdi).to.match(RegExp(`(${SvarEnums.CHECKED}|)`),
                     `Svar format ${sporsmal.svartype}`)
-                break;
+                break
             case RSSvartype.DATO:
                 expect(sporsmal.svar[ 0 ].verdi).to.match(RegExp('(\\d{4}-\\d{2}-\\d{2})'),
                     `Svar format ${sporsmal.svartype}`)
-                break;
+                break
             case RSSvartype.PERIODER:
                 expect(sporsmal.svar[ 0 ].verdi).to.match(RegExp('{"fom":"\\d{4}-\\d{2}-\\d{2}","tom":"\\d{4}-\\d{2}-\\d{2}"}'),
                     `Svar format ${sporsmal.svartype}`)
-                break;
+                break
             case RSSvartype.TALL:
             case RSSvartype.PROSENT:
             case RSSvartype.TIMER:
                 expect(sporsmal.svar[ 0 ].verdi).to.match(RegExp('\\d+|'),
                     `Svar format ${sporsmal.svartype}`)
-                break;
+                break
             case RSSvartype.RADIO:
                 expect(sporsmal.svar[ 0 ].verdi).to.match(RegExp(`(${SvarEnums.CHECKED}|)`),
                     `Svar format ${sporsmal.svartype}`)
-                break;
+                break
             case RSSvartype.LAND:
                 expect(sporsmal.svar[ 0 ].verdi).to.match(RegExp('\\S+'),
                     `Svar format ${sporsmal.svartype}`)
-                break;
+                break
             case RSSvartype.FRITEKST:
             case RSSvartype.IKKE_RELEVANT:
             case RSSvartype.PERIODE:
@@ -117,7 +118,7 @@ const svarFormat = (sporsmal: RSSporsmal) => {
                         svar: []
                     }
                 */
-                break;
+                break
             default:
                 expect(true, `Mangler format på sporsmal ${sporsmal.svartype}`)
                     .to.be.false
@@ -125,6 +126,6 @@ const svarFormat = (sporsmal: RSSporsmal) => {
     }
 
     for (const uspm of sporsmal.undersporsmal) {
-        svarFormat(uspm);
+        svarFormat(uspm)
     }
-};
+}

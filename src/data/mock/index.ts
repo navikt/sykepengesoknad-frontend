@@ -3,7 +3,8 @@ import FetchMock, { HandlerArgument, MiddlewareUtils } from 'yet-another-fetch-m
 import { RSSoknad } from '../../types/rs-types/rs-soknad'
 import { RSSoknadstatus } from '../../types/rs-types/rs-soknadstatus'
 import env from '../../utils/environment'
-import { soknader } from './data/soknader'
+import { soknaderIntegration } from './data/soknader-integration'
+import { soknaderOpplaering } from './data/soknader-opplaering'
 import { sykmeldinger } from './data/sykmeldinger'
 import { unleashToggles } from './data/toggles'
 
@@ -14,6 +15,11 @@ const mock = FetchMock.configure({
         MiddlewareUtils.loggingMiddleware()
     )
 })
+
+const soknader = [ ...soknaderOpplaering ]
+if (!env.isOpplaering) {
+    soknader.push(...soknaderIntegration)
+}
 
 mock.put(`${env.syfoapiRoot}/syfosoknad/api/soknader/:soknad/sporsmal/:sporsmal`, (args: HandlerArgument) => {
     return { 'oppdatertSporsmal': args.body }
