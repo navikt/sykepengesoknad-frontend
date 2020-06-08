@@ -1,8 +1,8 @@
-import React from 'react';
+import React from 'react'
 
-import { Sporsmal } from '../../../types/types';
-import Vis from '../../vis';
-import SporsmalSwitch from '../sporsmal-switch';
+import { Sporsmal } from '../../../types/types'
+import Vis from '../../vis'
+import SporsmalSwitch from '../sporsmal-switch'
 
 const UndersporsmalListe = ({ undersporsmal }: any) => {
     return (
@@ -11,9 +11,9 @@ const UndersporsmalListe = ({ undersporsmal }: any) => {
                 <Vis hvis={underspm.kriterieForVisningAvUndersporsmal !== undefined} key={idx}>
                     <SporsmalSwitch sporsmal={underspm} />
                 </Vis>
-            );
+            )
         }).filter((underspm: any) => underspm !== null)
-    );
-};
+    )
+}
 
-export default UndersporsmalListe;
+export default UndersporsmalListe

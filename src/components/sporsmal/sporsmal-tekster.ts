@@ -137,6 +137,6 @@ const SporsmalTekster: any = {
         'soknad.presisering.INNTEKTSKILDE_FOSTERHJEM_ER_DU_SYKMELDT': 'Legen må sende inn én sykmelding for hver arbeidssituasjon du er sykmeldt fra, og du må søke om sykepenger for hver av dem. Foreløpig støtter ikke den digitale løsningen søknad om sykepenger for fosterhjem. Søknaden om sykepenger for dagmamma må du derfor sende på papir.',
 
     }, 'en': {}
-};
+}
 
-export default SporsmalTekster;
+export default SporsmalTekster

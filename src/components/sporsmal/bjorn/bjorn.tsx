@@ -1,13 +1,13 @@
-import './bjorn.less';
+import './bjorn.less'
 
-import cls from 'classnames';
-import parser from 'html-react-parser';
-import { Normaltekst } from 'nav-frontend-typografi';
-import React from 'react';
+import cls from 'classnames'
+import parser from 'html-react-parser'
+import { Normaltekst } from 'nav-frontend-typografi'
+import React from 'react'
 
-import { tekst } from '../../../utils/tekster';
-import BjornBildeLiten from './bjorn-bilde-liten';
-import BjornBildeStor from './bjorn-bilde-stor';
+import { tekst } from '../../../utils/tekster'
+import BjornBildeLiten from './bjorn-bilde-liten'
+import BjornBildeStor from './bjorn-bilde-stor'
 
 interface BjornProps {
     bildeAlt?: string;
@@ -34,23 +34,23 @@ export const Bjorn = ({
     const classNames = cls(`hjelpeboble ${className}`, {
         'hjelpeboble--horisontal': !vertikal,
         'hjelpeboble--margin--top': ekstraMarginTop,
-    });
+    })
 
     const bobleClassNames = cls({
         hjelpeboble__boble: true, // eslint-disable-line
         'hjelpeboble__boble--hvit': hvit,
         'hjelpeboble__boble--stor': stor,
         'hjelpeboble__boble--horisontal': !vertikal,
-    });
+    })
 
     const bildeClassNames = cls({
         hjelpeboble__bilde: true, // eslint-disable-line
         'hjelpeboble__bilde--hvit': hvit,
         'hjelpeboble__bilde--stor': stor,
         'hjelpeboble__bilde--horisontal': !vertikal,
-    });
+    })
 
-    const Bilde = stor ? BjornBildeStor : BjornBildeLiten;
+    const Bilde = stor ? BjornBildeStor : BjornBildeLiten
 
     return (
         <div className={classNames}>
@@ -61,7 +61,7 @@ export const Bjorn = ({
                 <Bilde alt={bildeAlt} />
             </div>
         </div>
-    );
-};
+    )
+}
 
-export default Bjorn;
+export default Bjorn

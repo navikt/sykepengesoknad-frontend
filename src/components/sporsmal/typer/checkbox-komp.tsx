@@ -1,20 +1,20 @@
-import { Element, Normaltekst } from 'nav-frontend-typografi';
-import React, { useEffect } from 'react';
-import { useFormContext } from 'react-hook-form';
+import { Element, Normaltekst } from 'nav-frontend-typografi'
+import React, { useEffect } from 'react'
+import { useFormContext } from 'react-hook-form'
 
-import { useAppStore } from '../../../data/stores/app-store';
-import { Sporsmal } from '../../../types/types';
-import AnimateOnMount from '../../animate-on-mount';
-import Vis from '../../vis';
-import { hentSvar } from '../hent-svar';
-import { SpmProps } from '../sporsmal-form/sporsmal-form';
-import { hentFeilmelding } from '../sporsmal-utils';
-import UndersporsmalListe from '../undersporsmal/undersporsmal-liste';
+import { useAppStore } from '../../../data/stores/app-store'
+import { Sporsmal } from '../../../types/types'
+import AnimateOnMount from '../../animate-on-mount'
+import Vis from '../../vis'
+import { hentSvar } from '../hent-svar'
+import { SpmProps } from '../sporsmal-form/sporsmal-form'
+import { hentFeilmelding } from '../sporsmal-utils'
+import UndersporsmalListe from '../undersporsmal/undersporsmal-liste'
 
 const CheckboxKomp = ({ sporsmal }: SpmProps) => {
-    const { errors } = useFormContext();
-    const feilmelding = hentFeilmelding(sporsmal);
-    const { validCheck } = useAppStore();
+    const { errors } = useFormContext()
+    const feilmelding = hentFeilmelding(sporsmal)
+    const { validCheck } = useAppStore()
 
     return (
         <>
@@ -25,7 +25,7 @@ const CheckboxKomp = ({ sporsmal }: SpmProps) => {
 
                 <div className={'skjemagruppe checkboxgruppe' + (errors[sporsmal.id] ? ' skjemagruppe--feil' : '')}>
                     {sporsmal.undersporsmal.map((uspm, idx) => {
-                        return <CheckboxSingle parent={sporsmal} sporsmal={uspm} key={idx} />;
+                        return <CheckboxSingle parent={sporsmal} sporsmal={uspm} key={idx} />
                     })}
 
                     <Normaltekst tag='div' role='alert' aria-live='assertive' className='skjemaelement__feilmelding'>
@@ -37,9 +37,9 @@ const CheckboxKomp = ({ sporsmal }: SpmProps) => {
             </div>
         </>
     )
-};
+}
 
-export default CheckboxKomp;
+export default CheckboxKomp
 
 interface CheckboxProps {
     parent: Sporsmal;
@@ -48,26 +48,26 @@ interface CheckboxProps {
 type AllProps = SpmProps & CheckboxProps;
 
 const CheckboxSingle = ({ parent, sporsmal }: AllProps) => {
-    const { register, setValue, watch, getValues, clearError } = useFormContext();
-    const feilmelding = hentFeilmelding(parent);
-    const { setValidCheck } = useAppStore();
+    const { register, setValue, watch, getValues, clearError } = useFormContext()
+    const feilmelding = hentFeilmelding(parent)
+    const { setValidCheck } = useAppStore()
 
     useEffect(() => {
-        const svar = hentSvar(sporsmal);
-        setValue(sporsmal.id, svar === 'CHECKED' ? 'true' : '');
+        const svar = hentSvar(sporsmal)
+        setValue(sporsmal.id, svar === 'CHECKED' ? 'true' : '')
         // eslint-disable-next-line
     }, [sporsmal]);
 
     const valider = () => {
-        const valid = harValgtNoe(parent, getValues());
-        const fields: string[] = parent.undersporsmal.map(spm => spm.id);
+        const valid = harValgtNoe(parent, getValues())
+        const fields: string[] = parent.undersporsmal.map(spm => spm.id)
         if (!valid) {
-            fields.shift();
+            fields.shift()
         }
-        clearError(fields);
-        setValidCheck(valid);
-        return valid ? valid : feilmelding.global;
-    };
+        clearError(fields)
+        setValidCheck(valid)
+        return valid ? valid : feilmelding.global
+    }
 
     return (
         <div className='checkboksContainer'>
@@ -91,10 +91,10 @@ const CheckboxSingle = ({ parent, sporsmal }: AllProps) => {
             </AnimateOnMount>
         </div>
     )
-};
+}
 
 const harValgtNoe = (parent: Sporsmal, values: any): boolean => {
     return parent.undersporsmal.filter(uspm => {
         return values[uspm.id]
-    }).length > 0;
-};
+    }).length > 0
+}

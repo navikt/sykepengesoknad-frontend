@@ -1,12 +1,12 @@
-import React from 'react';
+import React from 'react'
 
 const onKeyDown = (e: any) => {
-    const OPP = 40;
-    const NED = 38;
+    const OPP = 40
+    const NED = 38
     if ([ OPP, NED ].indexOf(e.keyCode) > -1) {
-        e.preventDefault();
+        e.preventDefault()
     }
-};
+}
 
 interface NavBarProps {
     onNextClick: Function;
@@ -16,7 +16,7 @@ interface NavBarProps {
 }
 
 const DayPickerNavBar = ({ onNextClick, onPreviousClick, showPreviousButton, showNextButton }: NavBarProps) => {
-    const className = 'DayPicker-NavButton';
+    const className = 'DayPicker-NavButton'
 
     return (
         <div role='toolbar'>
@@ -27,8 +27,8 @@ const DayPickerNavBar = ({ onNextClick, onPreviousClick, showPreviousButton, sho
                 type='button'
                 onKeyDown={onKeyDown}
                 onClick={(e) => {
-                    e.preventDefault();
-                    onPreviousClick();
+                    e.preventDefault()
+                    onPreviousClick()
                 }}
             >
                 Forrige måned
@@ -40,15 +40,15 @@ const DayPickerNavBar = ({ onNextClick, onPreviousClick, showPreviousButton, sho
                 type='button'
                 onKeyDown={onKeyDown}
                 onClick={(e) => {
-                    e.preventDefault();
-                    onNextClick();
+                    e.preventDefault()
+                    onNextClick()
                 }}
             >
                 Neste måned
             </button>
         </div>
-    );
-};
+    )
+}
 
-export default DayPickerNavBar;
+export default DayPickerNavBar
 

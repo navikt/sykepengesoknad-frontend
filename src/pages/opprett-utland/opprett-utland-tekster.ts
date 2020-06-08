@@ -6,6 +6,6 @@ const OpprettUtlandTekster: any = {
         'opprett-utland.fortsett': 'Fortsett til søknaden',
         'opprett-utland.personvern': 'Les om hvordan NAV behandler personopplysninger'
     }, 'en': {}
-};
+}
 
-export default OpprettUtlandTekster;
+export default OpprettUtlandTekster

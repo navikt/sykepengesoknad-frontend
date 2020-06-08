@@ -1,13 +1,13 @@
-import parser from 'html-react-parser';
-import { Element, Normaltekst } from 'nav-frontend-typografi';
-import React from 'react';
-import { useFormContext } from 'react-hook-form';
+import parser from 'html-react-parser'
+import { Element, Normaltekst } from 'nav-frontend-typografi'
+import React from 'react'
+import { useFormContext } from 'react-hook-form'
 
-import Vis from '../../vis';
-import { SpmProps } from '../sporsmal-form/sporsmal-form';
+import Vis from '../../vis'
+import { SpmProps } from '../sporsmal-form/sporsmal-form'
 
 const IkkeRelevant = ({ sporsmal }: SpmProps) => {
-    const { register } = useFormContext();
+    const { register } = useFormContext()
 
     return (
         <Vis hvis={sporsmal.sporsmalstekst !== undefined}>
@@ -19,7 +19,7 @@ const IkkeRelevant = ({ sporsmal }: SpmProps) => {
                 <input name={sporsmal.id} ref={register} type='hidden' value={sporsmal.undertekst} />
             </>
         </Vis>
-    );
-};
+    )
+}
 
-export default IkkeRelevant;
+export default IkkeRelevant

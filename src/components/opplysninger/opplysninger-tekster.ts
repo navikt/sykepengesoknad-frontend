@@ -7,7 +7,7 @@ const OpplysningerTekster: any = {
         'din-sykmelding.arbeidssituasjon.alternativ.frilanser': 'Jeg er frilanser',
         'sykepengesoknad.sykmelding-utdrag.dato-sykmeldingen-ble-skrevet': 'Dato sykmeldingen ble skrevet'
     }, 'en': {}
-};
+}
 
-export default OpplysningerTekster;
+export default OpplysningerTekster
 

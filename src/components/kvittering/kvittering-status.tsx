@@ -1,30 +1,30 @@
-import dayjs from 'dayjs';
-import { AlertStripeSuksess } from 'nav-frontend-alertstriper';
-import { Normaltekst, Undertittel } from 'nav-frontend-typografi';
-import React, { useEffect, useState } from 'react';
+import dayjs from 'dayjs'
+import { AlertStripeSuksess } from 'nav-frontend-alertstriper'
+import { Normaltekst, Undertittel } from 'nav-frontend-typografi'
+import React, { useEffect, useState } from 'react'
 
-import { useAppStore } from '../../data/stores/app-store';
-import { SvarTil } from '../../types/enums';
-import { tekst } from '../../utils/tekster';
-import Vis from '../vis';
+import { useAppStore } from '../../data/stores/app-store'
+import { SvarTil } from '../../types/enums'
+import { tekst } from '../../utils/tekster'
+import Vis from '../vis'
 
 const KvitteringStatus = () => {
-    const { valgtSoknad } = useAppStore();
-    const [ tilArbNavn, setTilArbNavn ] = useState<string>();
-    const [ tilOrg, setTilOrg ] = useState<string>();
-    const [ tilNavDato, setTilNavDato ] = useState<string>();
-    const [ tilArbDato, setTilArbDato ] = useState<string>();
+    const { valgtSoknad } = useAppStore()
+    const [ tilArbNavn, setTilArbNavn ] = useState<string>()
+    const [ tilOrg, setTilOrg ] = useState<string>()
+    const [ tilNavDato, setTilNavDato ] = useState<string>()
+    const [ tilArbDato, setTilArbDato ] = useState<string>()
 
     useEffect(() => {
-        const sendtTilNav = valgtSoknad?.sendtTilNAVDato;
-        const datoNav = dayjs(sendtTilNav).format('dddd D. MMM, kl hh:mm');
-        setTilNavDato(datoNav.charAt(0).toUpperCase() + datoNav.slice(1));
+        const sendtTilNav = valgtSoknad?.sendtTilNAVDato
+        const datoNav = dayjs(sendtTilNav).format('dddd D. MMM, kl hh:mm')
+        setTilNavDato(datoNav.charAt(0).toUpperCase() + datoNav.slice(1))
 
-        const sendtTilArb = valgtSoknad?.sendtTilArbeidsgiverDato;
-        const datoArb = dayjs(sendtTilArb).format('dddd D. MMM, kl hh:mm');
-        setTilArbDato(datoArb.charAt(0).toUpperCase() + datoArb.slice(1));
-        setTilArbNavn(valgtSoknad?.arbeidsgiver?.navn ? valgtSoknad?.arbeidsgiver?.navn : SvarTil.ARBEIDSGIVER);
-        setTilOrg(valgtSoknad?.arbeidsgiver?.orgnummer ? `(Org.nr. ${valgtSoknad.arbeidsgiver.orgnummer})` : '');
+        const sendtTilArb = valgtSoknad?.sendtTilArbeidsgiverDato
+        const datoArb = dayjs(sendtTilArb).format('dddd D. MMM, kl hh:mm')
+        setTilArbDato(datoArb.charAt(0).toUpperCase() + datoArb.slice(1))
+        setTilArbNavn(valgtSoknad?.arbeidsgiver?.navn ? valgtSoknad?.arbeidsgiver?.navn : SvarTil.ARBEIDSGIVER)
+        setTilOrg(valgtSoknad?.arbeidsgiver?.orgnummer ? `(Org.nr. ${valgtSoknad.arbeidsgiver.orgnummer})` : '')
         // eslint-disable-next-line
     }, [])
 
@@ -50,7 +50,7 @@ const KvitteringStatus = () => {
                 </Vis>
             </AlertStripeSuksess>
         </Vis>
-    );
-};
+    )
+}
 
-export default KvitteringStatus;
+export default KvitteringStatus

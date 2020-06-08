@@ -1,31 +1,31 @@
-import dayjs from 'dayjs';
-import { HoyreChevron } from 'nav-frontend-chevron';
-import { Normaltekst } from 'nav-frontend-typografi';
-import React from 'react';
+import dayjs from 'dayjs'
+import { HoyreChevron } from 'nav-frontend-chevron'
+import { Normaltekst } from 'nav-frontend-typografi'
+import React from 'react'
 
-import { RSSoknadstatus } from '../../../types/rs-types/rs-soknadstatus';
-import { RSSoknadstype } from '../../../types/rs-types/rs-soknadstype';
-import { tilLesbarPeriodeMedArstall } from '../../../utils/dato-utils';
-import { getLedetekst, tekst } from '../../../utils/tekster';
-import { getUrlTilSoknad } from '../../../utils/url-utils';
-import { useAmplitudeInstance } from '../../amplitude/amplitude';
-import Vis from '../../vis';
-import { InngangsHeader, InngangsIkon, Inngangspanel } from '../inngang/inngangspanel';
+import { RSSoknadstatus } from '../../../types/rs-types/rs-soknadstatus'
+import { RSSoknadstype } from '../../../types/rs-types/rs-soknadstype'
+import { tilLesbarPeriodeMedArstall } from '../../../utils/dato-utils'
+import { getLedetekst, tekst } from '../../../utils/tekster'
+import { getUrlTilSoknad } from '../../../utils/url-utils'
+import { useAmplitudeInstance } from '../../amplitude/amplitude'
+import Vis from '../../vis'
+import { InngangsHeader, InngangsIkon, Inngangspanel } from '../inngang/inngangspanel'
 import {
     beregnUndertekst,
     hentIkon,
     hentIkonHover,
     hentTeaserStatustekst,
-    SykepengesoknadTeaserProps } from './teaser-util';
+    SykepengesoknadTeaserProps } from './teaser-util'
 
 const Teaser = ({ soknad }: SykepengesoknadTeaserProps) => {
-    const { logEvent } = useAmplitudeInstance();
-    const stegId = soknad.status === RSSoknadstatus.NY || RSSoknadstatus.UTKAST_TIL_KORRIGERING ? '1' : '';
-    const undertekst = beregnUndertekst(soknad);
+    const { logEvent } = useAmplitudeInstance()
+    const stegId = soknad.status === RSSoknadstatus.NY || RSSoknadstatus.UTKAST_TIL_KORRIGERING ? '1' : ''
+    const undertekst = beregnUndertekst(soknad)
 
     return (
         <article aria-labelledby={`soknader-header-${soknad.id}`} onClick={() => {
-            logEvent('Velger søknad', { soknadstype: soknad.soknadstype });
+            logEvent('Velger søknad', { soknadstype: soknad.soknadstype })
         }}>
             <Inngangspanel to={getUrlTilSoknad(soknad, stegId)}>
                 <InngangsIkon
@@ -58,7 +58,7 @@ const Teaser = ({ soknad }: SykepengesoknadTeaserProps) => {
                 </div>
             </Inngangspanel>
         </article>
-    );
-};
+    )
+}
 
-export default Teaser;
+export default Teaser

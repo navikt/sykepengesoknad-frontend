@@ -1,13 +1,13 @@
-import { dayjsToDate } from '../utils/dato-utils';
-import { SykmeldingStatuser, TagTyper } from './enums';
-import { RSArbeidssituasjon } from './rs-types/rs-arbeidssituasjon';
-import { RSSoknad } from './rs-types/rs-soknad';
-import { RSSoknadsperiode } from './rs-types/rs-soknadsperiode';
-import { RSSoknadstatus } from './rs-types/rs-soknadstatus';
-import { RSSoknadstype } from './rs-types/rs-soknadstype';
-import { RSSporsmal } from './rs-types/rs-sporsmal';
-import { RSSvarliste } from './rs-types/rs-svarliste';
-import { RSSvartype } from './rs-types/rs-svartype';
+import { dayjsToDate } from '../utils/dato-utils'
+import { SykmeldingStatuser, TagTyper } from './enums'
+import { RSArbeidssituasjon } from './rs-types/rs-arbeidssituasjon'
+import { RSSoknad } from './rs-types/rs-soknad'
+import { RSSoknadsperiode } from './rs-types/rs-soknadsperiode'
+import { RSSoknadstatus } from './rs-types/rs-soknadstatus'
+import { RSSoknadstype } from './rs-types/rs-soknadstype'
+import { RSSporsmal } from './rs-types/rs-sporsmal'
+import { RSSvarliste } from './rs-types/rs-svarliste'
+import { RSSvartype } from './rs-types/rs-svartype'
 
 export interface TidsPeriode {
     fom: Date;
@@ -150,27 +150,27 @@ export class Soknad {
     constructor(
         soknad: RSSoknad
     ) {
-        this.id = soknad.id;
-        this.sykmeldingId = soknad.sykmeldingId!;
-        const type = soknad.soknadstype as keyof typeof RSSoknadstype;
-        this.soknadstype = RSSoknadstype[type];
-        const stat = soknad.status as keyof typeof RSSoknadstatus;
-        this.status = RSSoknadstatus[stat];
-        this.fom = dayjsToDate(soknad.fom!)!;
-        this.tom = dayjsToDate(soknad.tom!)!;
-        this.avbruttDato = dayjsToDate(soknad.avbruttDato!)!;
-        this.opprettetDato = dayjsToDate(soknad.opprettetDato!)!;
-        this.sendtTilNAVDato = dayjsToDate(soknad.sendtTilNAVDato!)!;
-        this.sendtTilArbeidsgiverDato = dayjsToDate(soknad.sendtTilArbeidsgiverDato!)!;
+        this.id = soknad.id
+        this.sykmeldingId = soknad.sykmeldingId!
+        const type = soknad.soknadstype as keyof typeof RSSoknadstype
+        this.soknadstype = RSSoknadstype[type]
+        const stat = soknad.status as keyof typeof RSSoknadstatus
+        this.status = RSSoknadstatus[stat]
+        this.fom = dayjsToDate(soknad.fom!)!
+        this.tom = dayjsToDate(soknad.tom!)!
+        this.avbruttDato = dayjsToDate(soknad.avbruttDato!)!
+        this.opprettetDato = dayjsToDate(soknad.opprettetDato!)!
+        this.sendtTilNAVDato = dayjsToDate(soknad.sendtTilNAVDato!)!
+        this.sendtTilArbeidsgiverDato = dayjsToDate(soknad.sendtTilArbeidsgiverDato!)!
         if (soknad.arbeidsgiver) {
             this.arbeidsgiver = {
                 naermesteLeder: soknad.arbeidsgiver.naermesteLeder,
                 navn: soknad.arbeidsgiver.navn,
                 orgnummer: soknad.arbeidsgiver.orgnummer
-            };
+            }
         }
-        this.sporsmal = rsToSporsmal(soknad.sporsmal, undefined as any, true);
-        this.soknadPerioder = soknad.soknadPerioder;
+        this.sporsmal = rsToSporsmal(soknad.sporsmal, undefined as any, true)
+        this.soknadPerioder = soknad.soknadPerioder
     }
 }
 
@@ -191,40 +191,40 @@ export class Sporsmal {
     erHovedsporsmal: boolean;
 
     constructor(spm: RSSporsmal, kriterie: string, erHovedsporsmal: boolean) {
-        this.id = spm.id;
-        const orgarr: string[] = spm.tag.split('_');
-        const numtag: number = parseInt(orgarr.pop() as any);
-        let tag = spm.tag;
+        this.id = spm.id
+        const orgarr: string[] = spm.tag.split('_')
+        const numtag: number = parseInt(orgarr.pop() as any)
+        let tag = spm.tag
         if (!isNaN(numtag)) {
-            this.tagIndex = numtag;
-            tag = orgarr.join('_');
+            this.tagIndex = numtag
+            tag = orgarr.join('_')
         }
-        const idtag = tag as keyof typeof TagTyper;
-        this.tag = TagTyper[idtag];
-        this.sporsmalstekst = spm.sporsmalstekst === null ? '' : spm.sporsmalstekst;
-        this.undertekst = spm.undertekst;
-        this.svartype = spm.svartype;
-        this.min = spm.min;
-        this.max = spm.max;
-        this.pavirkerAndreSporsmal = spm.pavirkerAndreSporsmal;
-        this.kriterieForVisningAvUndersporsmal = spm.kriterieForVisningAvUndersporsmal;
-        this.svarliste = { sporsmalId: spm.id, svar: spm.svar };
-        this.undersporsmal = rsToSporsmal(spm.undersporsmal, spm.kriterieForVisningAvUndersporsmal, false);
-        this.parentKriterie = kriterie;
-        this.erHovedsporsmal = erHovedsporsmal;
+        const idtag = tag as keyof typeof TagTyper
+        this.tag = TagTyper[idtag]
+        this.sporsmalstekst = spm.sporsmalstekst === null ? '' : spm.sporsmalstekst
+        this.undertekst = spm.undertekst
+        this.svartype = spm.svartype
+        this.min = spm.min
+        this.max = spm.max
+        this.pavirkerAndreSporsmal = spm.pavirkerAndreSporsmal
+        this.kriterieForVisningAvUndersporsmal = spm.kriterieForVisningAvUndersporsmal
+        this.svarliste = { sporsmalId: spm.id, svar: spm.svar }
+        this.undersporsmal = rsToSporsmal(spm.undersporsmal, spm.kriterieForVisningAvUndersporsmal, false)
+        this.parentKriterie = kriterie
+        this.erHovedsporsmal = erHovedsporsmal
     }
 }
 
 function rsToSporsmal(spms: RSSporsmal[], kriterie: string, erHovedsporsmal: boolean) {
-    const sporsmals: Sporsmal[] = [];
+    const sporsmals: Sporsmal[] = []
     if (spms === undefined) {
-        return sporsmals;
+        return sporsmals
     }
     spms.forEach(rssp => {
-        const spm: Sporsmal = new Sporsmal(rssp, kriterie, erHovedsporsmal);
-        sporsmals.push(spm);
-    });
-    return sporsmals;
+        const spm: Sporsmal = new Sporsmal(rssp, kriterie, erHovedsporsmal)
+        sporsmals.push(spm)
+    })
+    return sporsmals
 }
 
 export interface UnleashToggles {

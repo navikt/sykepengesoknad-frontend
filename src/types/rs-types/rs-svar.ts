@@ -1,4 +1,4 @@
-import { AvgittAvTyper } from '../enums';
+import { AvgittAvTyper } from '../enums'
 
 export interface RSSvar {
     verdi: string;

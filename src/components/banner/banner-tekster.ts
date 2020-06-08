@@ -5,6 +5,6 @@ const BannerTekster: any = {
         'sykepengesoknad.sidetittel.periode-2': 'Gjelder for perioden %PERIODE%',
         'kvittering.sidetittel': 'Kvittering',
     }, 'en': {}
-};
+}
 
-export default BannerTekster;
+export default BannerTekster

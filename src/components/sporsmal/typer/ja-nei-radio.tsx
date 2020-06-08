@@ -1,18 +1,18 @@
-import parser from 'html-react-parser';
-import { Element, Normaltekst } from 'nav-frontend-typografi';
-import React, { useEffect, useState } from 'react';
-import { useFormContext } from 'react-hook-form';
+import parser from 'html-react-parser'
+import { Element, Normaltekst } from 'nav-frontend-typografi'
+import React, { useEffect, useState } from 'react'
+import { useFormContext } from 'react-hook-form'
 
-import { useAppStore } from '../../../data/stores/app-store';
-import { SvarEnums, TagTyper } from '../../../types/enums';
-import { getLedetekst, tekst } from '../../../utils/tekster';
-import { utlandssoknadUrl } from '../../../utils/url-utils';
-import Vis from '../../vis';
-import Bjorn from '../bjorn/bjorn';
-import { hentSvar } from '../hent-svar';
-import KnapperadAvbryt from '../sporsmal-form/knapperad-avbryt';
-import { SpmProps } from '../sporsmal-form/sporsmal-form';
-import { hentFeilmelding } from '../sporsmal-utils';
+import { useAppStore } from '../../../data/stores/app-store'
+import { SvarEnums, TagTyper } from '../../../types/enums'
+import { getLedetekst, tekst } from '../../../utils/tekster'
+import { utlandssoknadUrl } from '../../../utils/url-utils'
+import Vis from '../../vis'
+import Bjorn from '../bjorn/bjorn'
+import { hentSvar } from '../hent-svar'
+import KnapperadAvbryt from '../sporsmal-form/knapperad-avbryt'
+import { SpmProps } from '../sporsmal-form/sporsmal-form'
+import { hentFeilmelding } from '../sporsmal-utils'
 
 const jaNeiValg = [ {
     value: 'JA',
@@ -20,31 +20,31 @@ const jaNeiValg = [ {
 }, {
     value: 'NEI',
     label: 'Nei',
-} ];
+} ]
 
 const JaNeiRadio = ({ sporsmal }: SpmProps) => {
-    const [ lokal, setLokal ] = useState<string>(hentSvar(sporsmal));
-    const { register, setValue, errors } = useFormContext();
-    const { setRerenderSporsmalForm } = useAppStore();
+    const [ lokal, setLokal ] = useState<string>(hentSvar(sporsmal))
+    const { register, setValue, errors } = useFormContext()
+    const { setRerenderSporsmalForm } = useAppStore()
 
-    const feilmelding = hentFeilmelding(sporsmal);
+    const feilmelding = hentFeilmelding(sporsmal)
 
     useEffect(() => {
-        const lagret = hentSvar(sporsmal);
-        setValue(sporsmal.id, lagret);
-        setLokal(lagret);
+        const lagret = hentSvar(sporsmal)
+        setValue(sporsmal.id, lagret)
+        setLokal(lagret)
         // eslint-disable-next-line
     }, [sporsmal]);
 
     const changeValue = (value: string) => {
-        setValue(sporsmal.id, value);
-        setLokal(lokal === value ? '' : value);
+        setValue(sporsmal.id, value)
+        setLokal(lokal === value ? '' : value)
         // Force rerender siden setValue kun trigger rerender første gangen
         setRerenderSporsmalForm(new Date().getUTCMilliseconds())
-    };
+    }
 
     const presisering = (valgt: boolean) => {
-        const spm = sporsmal;
+        const spm = sporsmal
         return (spm.tag && spm.tag.startsWith('INNTEKTSKILDE_') && lokal === 'JA' && valgt)
             ? <div className='presisering'>
                 <Normaltekst tag='span'>
@@ -64,7 +64,7 @@ const JaNeiRadio = ({ sporsmal }: SpmProps) => {
                         </Normaltekst>
                     </div>
                     : <></>
-    };
+    }
 
     return (
         <>
@@ -76,7 +76,7 @@ const JaNeiRadio = ({ sporsmal }: SpmProps) => {
                 <Element tag='h3' className='skjema__sporsmal'>{sporsmal.sporsmalstekst}</Element>
 
                 {jaNeiValg.map((valg, idx) => {
-                    const OK = lokal === valg.value;
+                    const OK = lokal === valg.value
                     return (
                         <div className="radioContainer" key={idx}>
                             <input type='radio'
@@ -115,6 +115,6 @@ const JaNeiRadio = ({ sporsmal }: SpmProps) => {
             </Vis>
         </>
     )
-};
+}
 
-export default JaNeiRadio;
+export default JaNeiRadio

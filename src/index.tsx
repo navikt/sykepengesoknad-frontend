@@ -1,17 +1,17 @@
-import 'dayjs/locale/nb';
+import 'dayjs/locale/nb'
 
-import dayjs from 'dayjs';
-import React from 'react';
-import ReactDOM from 'react-dom';
-import { BrowserRouter } from 'react-router-dom';
+import dayjs from 'dayjs'
+import React from 'react'
+import ReactDOM from 'react-dom'
+import { BrowserRouter } from 'react-router-dom'
 
-import App from './app';
-import env from './utils/environment';
+import App from './app'
+import env from './utils/environment'
 
-dayjs.locale('nb');
+dayjs.locale('nb')
 
 if (env.mockBackend === 'true') {
-    require('./data/mock');
+    require('./data/mock')
 }
 
 ReactDOM.render(
@@ -19,12 +19,12 @@ ReactDOM.render(
         <App />
     </BrowserRouter>
     , document.getElementById('root') as HTMLElement
-);
+)
 
 if (env.isQ1 || env.isProd) {
-    const src = '/frontendlogger/logger.js';
-    const script = document.createElement('script');
-    script.src = src;
-    script.async = true;
-    document.body.appendChild(script);
+    const src = '/frontendlogger/logger.js'
+    const script = document.createElement('script')
+    script.src = src
+    script.async = true
+    document.body.appendChild(script)
 }

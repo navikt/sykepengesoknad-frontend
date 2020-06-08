@@ -1,12 +1,12 @@
-import './soknad-intro.less';
+import './soknad-intro.less'
 
-import parser from 'html-react-parser';
-import { Normaltekst } from 'nav-frontend-typografi';
-import Veilederpanel from 'nav-frontend-veilederpanel';
-import React from 'react';
+import parser from 'html-react-parser'
+import { Normaltekst } from 'nav-frontend-typografi'
+import Veilederpanel from 'nav-frontend-veilederpanel'
+import React from 'react'
 
-import { tekst } from '../../utils/tekster';
-import ForsteSoknadSvg from './soknad-intro-svg';
+import { tekst } from '../../utils/tekster'
+import ForsteSoknadSvg from './soknad-intro-svg'
 
 const SoknadIntro = () => {
     return (
@@ -19,7 +19,7 @@ const SoknadIntro = () => {
                 </Veilederpanel>
             </div>
         </div>
-    );
-};
+    )
+}
 
-export default SoknadIntro;
+export default SoknadIntro

@@ -1,13 +1,13 @@
-import amplitude from 'amplitude-js';
-import constate from 'constate';
-import { useEffect, useRef } from 'react';
+import amplitude from 'amplitude-js'
+import constate from 'constate'
+import { useEffect, useRef } from 'react'
 
-import { useAppStore } from '../../data/stores/app-store';
-import env from '../../utils/environment';
+import { useAppStore } from '../../data/stores/app-store'
+import env from '../../utils/environment'
 
 export const [ AmplitudeProvider, useAmplitudeInstance ] = constate(() => {
-    const { unleash } = useAppStore();
-    const unleashAmplitudeEnabled = unleash === undefined ? false : unleash['syfo.amplitude'];
+    const { unleash } = useAppStore()
+    const unleashAmplitudeEnabled = unleash === undefined ? false : unleash['syfo.amplitude']
 
     const instance: any = useRef({
         _userAgent: '',
@@ -16,12 +16,12 @@ export const [ AmplitudeProvider, useAmplitudeInstance ] = constate(() => {
                 // eslint-disable-next-line
                 console.log(`Logger ${eventName} - Event properties: ${JSON.stringify(data)}!`);
             }
-            return 1;
+            return 1
         },
         init: () => {
             // console.log('Initialiserer mockAmplitude'); // eslint-disable-line
         }
-    });
+    })
 
     useEffect(() => {
         if (unleashAmplitudeEnabled && env.amplitudeEnabled) {
@@ -43,14 +43,14 @@ export const [ AmplitudeProvider, useAmplitudeInstance ] = constate(() => {
                     dma: false,
                 },
             },
-        );
-        instance.current._userAgent = '';
+        )
+        instance.current._userAgent = ''
         // eslint-disable-next-line
     }, []);
 
     function logEvent(eventName: string, eventProperties: any) {
-        instance.current.logEvent(eventName, eventProperties);
+        instance.current.logEvent(eventName, eventProperties)
     }
 
-    return { logEvent };
-});
+    return { logEvent }
+})

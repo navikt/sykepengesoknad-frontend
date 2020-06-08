@@ -1,17 +1,17 @@
-import { Element, Normaltekst } from 'nav-frontend-typografi';
-import React from 'react';
+import { Element, Normaltekst } from 'nav-frontend-typografi'
+import React from 'react'
 
-import { RSSvar } from '../../../types/rs-types/rs-svar';
-import { tilLesbarDatoUtenAarstall, tilLesbarPeriodeUtenArstall } from '../../../utils/dato-utils';
-import Vis from '../../vis';
-import { OppsummeringProps } from '../oppsummering';
+import { RSSvar } from '../../../types/rs-types/rs-svar'
+import { tilLesbarDatoUtenAarstall, tilLesbarPeriodeUtenArstall } from '../../../utils/dato-utils'
+import Vis from '../../vis'
+import { OppsummeringProps } from '../oppsummering'
 
 const datoEllerIkkeTilBehandling = (svar: RSSvar) => {
     if (svar === undefined || svar.verdi === '' || svar.verdi === 'Ikke til behandling') {
-        return 'Ikke til behandling';
+        return 'Ikke til behandling'
     }
-    return tilLesbarDatoUtenAarstall(svar.verdi);
-};
+    return tilLesbarDatoUtenAarstall(svar.verdi)
+}
 
 const Behandlingsdager = ({ sporsmal }: OppsummeringProps) => {
     return (
@@ -31,7 +31,7 @@ const Behandlingsdager = ({ sporsmal }: OppsummeringProps) => {
                                             </Normaltekst>
                                         </div>
                                     </div>
-                                );
+                                )
                             })}
                         </div>
                     </Vis>
@@ -39,6 +39,6 @@ const Behandlingsdager = ({ sporsmal }: OppsummeringProps) => {
             </Vis>
         </>
     )
-};
+}
 
-export default Behandlingsdager;
+export default Behandlingsdager

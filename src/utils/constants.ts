@@ -1,2 +1,2 @@
-export const empty: any = null || undefined;
-export const SEPARATOR = '/';
+export const empty: any = null || undefined
+export const SEPARATOR = '/'

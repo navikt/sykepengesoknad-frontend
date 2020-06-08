@@ -1,6 +1,6 @@
-import React from 'react';
+import React from 'react'
 
-import { BjornBildeProps } from './bjorn-bilde-stor';
+import { BjornBildeProps } from './bjorn-bilde-stor'
 
 const BjornBildeLiten = ({ alt }: BjornBildeProps) => {
     return (
@@ -44,7 +44,7 @@ const BjornBildeLiten = ({ alt }: BjornBildeProps) => {
                 </g>
             </g>
         </svg>
-    );
-};
+    )
+}
 
-export default BjornBildeLiten;
+export default BjornBildeLiten

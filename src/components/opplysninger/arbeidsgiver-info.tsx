@@ -1,15 +1,15 @@
-import { EtikettLiten, Normaltekst } from 'nav-frontend-typografi';
-import React from 'react';
+import { EtikettLiten, Normaltekst } from 'nav-frontend-typografi'
+import React from 'react'
 
-import { useAppStore } from '../../data/stores/app-store';
-import { tekst } from '../../utils/tekster';
-import Vis from '../vis';
+import { useAppStore } from '../../data/stores/app-store'
+import { tekst } from '../../utils/tekster'
+import Vis from '../vis'
 
 const ArbeidsgiverInfo = () => {
-    const { valgtSykmelding } = useAppStore();
+    const { valgtSykmelding } = useAppStore()
 
     if (valgtSykmelding === undefined) {
-        return null;
+        return null
     }
 
     return (
@@ -21,7 +21,7 @@ const ArbeidsgiverInfo = () => {
                 <Normaltekst>{valgtSykmelding.arbeidsgiver}</Normaltekst>
             </Vis>
         </div>
-    );
-};
+    )
+}
 
-export default ArbeidsgiverInfo;
+export default ArbeidsgiverInfo

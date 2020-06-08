@@ -1,4 +1,4 @@
-import { RSMottaker } from '../rs-mottaker';
+import { RSMottaker } from '../rs-mottaker'
 
 export interface RSMottakerResponse {
     mottaker: RSMottaker;

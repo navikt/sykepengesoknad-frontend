@@ -1,14 +1,14 @@
-import { Norwegian } from 'flatpickr/dist/l10n/no.js';
-import { Normaltekst } from 'nav-frontend-typografi';
-import React, { useEffect } from 'react';
-import Flatpickr from 'react-flatpickr';
-import { Controller, useFormContext } from 'react-hook-form';
+import { Norwegian } from 'flatpickr/dist/l10n/no.js'
+import { Normaltekst } from 'nav-frontend-typografi'
+import React, { useEffect } from 'react'
+import Flatpickr from 'react-flatpickr'
+import { Controller, useFormContext } from 'react-hook-form'
 
-import { tekst } from '../../../utils/tekster';
-import Vis from '../../vis';
-import { hentPeriode } from '../hent-svar';
-import { SpmProps } from '../sporsmal-form/sporsmal-form';
-import { hentFeilmelding } from '../sporsmal-utils';
+import { tekst } from '../../../utils/tekster'
+import Vis from '../../vis'
+import { hentPeriode } from '../hent-svar'
+import { SpmProps } from '../sporsmal-form/sporsmal-form'
+import { hentFeilmelding } from '../sporsmal-utils'
 
 interface PeriodeProps {
     index: number;
@@ -18,13 +18,13 @@ interface PeriodeProps {
 type AllProps = SpmProps & PeriodeProps;
 
 const PeriodeKomp = ({ sporsmal, index, slettPeriode }: AllProps) => {
-    const { setValue, errors } = useFormContext();
-    const id = sporsmal.id + '_' + index;
-    const htmlfor = sporsmal.id + '_t_' + index;
-    const feilmelding = hentFeilmelding(sporsmal);
+    const { setValue, errors } = useFormContext()
+    const id = sporsmal.id + '_' + index
+    const htmlfor = sporsmal.id + '_t_' + index
+    const feilmelding = hentFeilmelding(sporsmal)
 
     useEffect(() => {
-        setValue(id, hentPeriode(sporsmal, index));
+        setValue(id, hentPeriode(sporsmal, index))
         // eslint-disable-next-line
     }, [ sporsmal ]);
 
@@ -74,6 +74,6 @@ const PeriodeKomp = ({ sporsmal, index, slettPeriode }: AllProps) => {
             </Normaltekst>
         </li>
     )
-};
+}
 
-export default PeriodeKomp;
+export default PeriodeKomp

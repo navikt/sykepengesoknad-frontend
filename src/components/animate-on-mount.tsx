@@ -1,7 +1,7 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react'
 
-import { useAppStore } from '../data/stores/app-store';
-import Vis from './vis';
+import { useAppStore } from '../data/stores/app-store'
+import Vis from './vis'
 
 interface AnimateOnMountProps {
     mounted: boolean;
@@ -12,31 +12,31 @@ interface AnimateOnMountProps {
 }
 
 const AnimateOnMount = (props: AnimateOnMountProps) => {
-    const { mounted, enter, leave, start, children } = props;
-    const { top, setTop } = useAppStore();
-    const [ styles, setStyles ] = useState<string>(null as any);
-    const [ show, setShow ] = useState<boolean>(mounted);
-    const animRef = useRef<HTMLDivElement>(null);
+    const { mounted, enter, leave, start, children } = props
+    const { top, setTop } = useAppStore()
+    const [ styles, setStyles ] = useState<string>(null as any)
+    const [ show, setShow ] = useState<boolean>(mounted)
+    const animRef = useRef<HTMLDivElement>(null)
 
     useEffect(() => {
         if (animRef!.current!.offsetTop > top) {
-            setTop(animRef!.current!.offsetTop);
+            setTop(animRef!.current!.offsetTop)
         }
         if (mounted) {
-            setShow(true);
-            setStyles(enter);
+            setShow(true)
+            setStyles(enter)
         } else {
-            setStyles(leave);
+            setStyles(leave)
         }
         // eslint-disable-next-line
     }, [ mounted ]);
 
     const onTransitionEnd = () => {
-        window.scrollTo({ top: top, behavior: 'auto' });
+        window.scrollTo({ top: top, behavior: 'auto' })
         if (styles === leave) {
-            setShow(false);
+            setShow(false)
         }
-    };
+    }
 
     return (
         <div ref={animRef} className={`${start} ${styles}`} onTransitionEnd={onTransitionEnd}>
@@ -45,6 +45,6 @@ const AnimateOnMount = (props: AnimateOnMountProps) => {
             </Vis>
         </div>
     )
-};
+}
 
-export default AnimateOnMount;
+export default AnimateOnMount

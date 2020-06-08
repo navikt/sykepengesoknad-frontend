@@ -1,16 +1,16 @@
-import './app.less';
+import './app.less'
 
-import React from 'react';
-import { Route, Switch } from 'react-router-dom';
-import { CSSTransition, TransitionGroup } from 'react-transition-group';
+import React from 'react'
+import { Route, Switch } from 'react-router-dom'
+import { CSSTransition, TransitionGroup } from 'react-transition-group'
 
-import { Amplitude } from './components/amplitude/amplitudeProvider';
-import { DataFetcher } from './data/data-fetcher';
-import StoreProvider from './data/stores/store-provider';
-import KvitteringSide from './pages/kvittering/kvittering-side';
-import OpprettUtland from './pages/opprett-utland/opprett-utland';
-import Soknad from './pages/soknad/soknaden';
-import Soknader from './pages/soknader/soknader';
+import { Amplitude } from './components/amplitude/amplitudeProvider'
+import { DataFetcher } from './data/data-fetcher'
+import StoreProvider from './data/stores/store-provider'
+import KvitteringSide from './pages/kvittering/kvittering-side'
+import OpprettUtland from './pages/opprett-utland/opprett-utland'
+import Soknad from './pages/soknad/soknaden'
+import Soknader from './pages/soknader/soknader'
 
 const App = (): any => {
     return (
@@ -36,7 +36,7 @@ const App = (): any => {
                 </Amplitude>
             </DataFetcher>
         </StoreProvider>
-    );
-};
+    )
+}
 
-export default App;
+export default App

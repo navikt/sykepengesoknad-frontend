@@ -1,5 +1,5 @@
-import { AlertStripeFeil } from 'nav-frontend-alertstriper';
-import React from 'react';
+import { AlertStripeFeil } from 'nav-frontend-alertstriper'
+import React from 'react'
 
 const IngenData = () => {
     return (
@@ -10,6 +10,6 @@ const IngenData = () => {
             </AlertStripeFeil>
         </div>
     )
-};
+}
 
-export default IngenData;
+export default IngenData

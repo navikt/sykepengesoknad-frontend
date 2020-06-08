@@ -1,12 +1,12 @@
-import { Element } from 'nav-frontend-typografi';
-import React from 'react';
+import { Element } from 'nav-frontend-typografi'
+import React from 'react'
 
-import { OppsummeringProps } from '../oppsummering';
+import { OppsummeringProps } from '../oppsummering'
 
 const LandSum = ({ sporsmal }: OppsummeringProps) => {
-    const svar = sporsmal.svarliste.svar;
+    const svar = sporsmal.svarliste.svar
     if (typeof svar[0].verdi !== 'string') {
-        return null;
+        return null
     }
 
     const svarliste = svar.length === 1
@@ -14,16 +14,16 @@ const LandSum = ({ sporsmal }: OppsummeringProps) => {
         : (
             <ul className='oppsummering__landliste'>
                 {sporsmal.svarliste.svar.map((s) => {
-                    return <li className='oppsummering__land' key={s.verdi.toString()}>{s.verdi}</li>;
+                    return <li className='oppsummering__land' key={s.verdi.toString()}>{s.verdi}</li>
                 })}
             </ul>
-        );
+        )
     return (
         <div className='oppsummering__fritekst'>
             <Element tag='h3'>{sporsmal.sporsmalstekst}</Element>
             <div className='oppsummering__tekstsvar'>{svarliste}</div>
         </div>
-    );
-};
+    )
+}
 
-export default LandSum;
+export default LandSum

@@ -1,23 +1,23 @@
-import parser from 'html-react-parser';
-import { Element, Normaltekst } from 'nav-frontend-typografi';
-import React, { useEffect } from 'react';
-import { useFormContext } from 'react-hook-form';
+import parser from 'html-react-parser'
+import { Element, Normaltekst } from 'nav-frontend-typografi'
+import React, { useEffect } from 'react'
+import { useFormContext } from 'react-hook-form'
 
-import { useAppStore } from '../../../data/stores/app-store';
-import { AvgittAvTyper, SvarEnums, TagTyper } from '../../../types/enums';
-import { RSSoknadstype } from '../../../types/rs-types/rs-soknadstype';
-import { getLedetekst, tekst } from '../../../utils/tekster';
-import { utlandssoknadUrl } from '../../../utils/url-utils';
-import AnimateOnMount from '../../animate-on-mount';
-import Vis from '../../vis';
-import Bjorn from '../bjorn/bjorn';
-import SporsmalBjorn from '../bjorn/sporsmal-bjorn';
-import TagBjorn from '../bjorn/tag-bjorn';
-import { hentFormState, hentSvar } from '../hent-svar';
-import { SpmProps } from '../sporsmal-form/sporsmal-form';
-import SporsmalHjelpetekst from '../sporsmal-hjelpetekst';
-import { hentFeilmelding, sporsmalIdListe } from '../sporsmal-utils';
-import UndersporsmalListe from '../undersporsmal/undersporsmal-liste';
+import { useAppStore } from '../../../data/stores/app-store'
+import { AvgittAvTyper, SvarEnums, TagTyper } from '../../../types/enums'
+import { RSSoknadstype } from '../../../types/rs-types/rs-soknadstype'
+import { getLedetekst, tekst } from '../../../utils/tekster'
+import { utlandssoknadUrl } from '../../../utils/url-utils'
+import AnimateOnMount from '../../animate-on-mount'
+import Vis from '../../vis'
+import Bjorn from '../bjorn/bjorn'
+import SporsmalBjorn from '../bjorn/sporsmal-bjorn'
+import TagBjorn from '../bjorn/tag-bjorn'
+import { hentFormState, hentSvar } from '../hent-svar'
+import { SpmProps } from '../sporsmal-form/sporsmal-form'
+import SporsmalHjelpetekst from '../sporsmal-hjelpetekst'
+import { hentFeilmelding, sporsmalIdListe } from '../sporsmal-utils'
+import UndersporsmalListe from '../undersporsmal/undersporsmal-liste'
 
 const jaNeiValg = [ {
     value: 'JA',
@@ -25,42 +25,42 @@ const jaNeiValg = [ {
 }, {
     value: 'NEI',
     label: 'Nei',
-} ];
+} ]
 
 const JaNeiInput = ({ sporsmal }: SpmProps) => {
-    const { valgtSoknad } = useAppStore();
-    const { register, setValue, errors, watch, reset, getValues, clearError } = useFormContext();
-    const feilmelding = hentFeilmelding(sporsmal);
-    const watchVerdi = watch(sporsmal.id);
+    const { valgtSoknad } = useAppStore()
+    const { register, setValue, errors, watch, reset, getValues, clearError } = useFormContext()
+    const feilmelding = hentFeilmelding(sporsmal)
+    const watchVerdi = watch(sporsmal.id)
 
     useEffect(() => {
         if (sporsmal.erHovedsporsmal) {
-            reset(hentFormState(sporsmal));
+            reset(hentFormState(sporsmal))
         } else {
-            setValue(sporsmal.id, hentSvar(sporsmal));
+            setValue(sporsmal.id, hentSvar(sporsmal))
         }
         // eslint-disable-next-line
     }, [sporsmal.id]);
 
     const visAvgittAvBjorn = () => {
-        const undersporsmal = sporsmal.undersporsmal.find(uspm => uspm.tag === TagTyper.EGENMELDINGER_NAR);
+        const undersporsmal = sporsmal.undersporsmal.find(uspm => uspm.tag === TagTyper.EGENMELDINGER_NAR)
         if (undersporsmal) {
-            return undersporsmal.svarliste.svar.some(svaret => svaret.avgittAv === AvgittAvTyper.TIDLIGERE_SOKNAD);
+            return undersporsmal.svarliste.svar.some(svaret => svaret.avgittAv === AvgittAvTyper.TIDLIGERE_SOKNAD)
         }
-        return false;
-    };
+        return false
+    }
 
     const changeValue = (value: string) => {
-        setValue(sporsmal.id, value);
-    };
+        setValue(sporsmal.id, value)
+    }
 
     const valider = (value: any) => {
         if (value === 'JA' || value === 'NEI') {
-            clearError(sporsmalIdListe(sporsmal.undersporsmal));
-            return true;
+            clearError(sporsmalIdListe(sporsmal.undersporsmal))
+            return true
         }
-        return false;
-    };
+        return false
+    }
 
     return (
         <>
@@ -88,7 +88,7 @@ const JaNeiInput = ({ sporsmal }: SpmProps) => {
                     </legend>
                     <div className='inputPanelGruppe__inner'>
                         {jaNeiValg.map((valg, idx) => {
-                            const OK = getValues()[sporsmal.id] === valg.value;
+                            const OK = getValues()[sporsmal.id] === valg.value
                             return (
                                 <label className={'inputPanel radioPanel' + (OK ? ' inputPanel--checked' : '')}
                                     key={idx}>
@@ -149,6 +149,6 @@ const JaNeiInput = ({ sporsmal }: SpmProps) => {
             <SporsmalBjorn sporsmal={sporsmal} />
         </>
     )
-};
+}
 
-export default JaNeiInput;
+export default JaNeiInput

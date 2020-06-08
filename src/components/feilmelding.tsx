@@ -1,5 +1,5 @@
-import { Systemtittel } from 'nav-frontend-typografi';
-import React, { ReactNode } from 'react';
+import { Systemtittel } from 'nav-frontend-typografi'
+import React, { ReactNode } from 'react'
 
 interface FeilmeldingProps {
     tittel?: string;
@@ -20,7 +20,7 @@ const Feilmelding = (
                 <p className='hode__melding'>{children || melding}</p>
             </div>
         </div>
-    );
-};
+    )
+}
 
-export default Feilmelding;
+export default Feilmelding

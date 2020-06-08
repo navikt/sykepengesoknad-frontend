@@ -1,26 +1,26 @@
-import { Element } from 'nav-frontend-typografi';
-import React from 'react';
+import { Element } from 'nav-frontend-typografi'
+import React from 'react'
 
-import { Sporsmal } from '../../../types/types';
-import { tekst } from '../../../utils/tekster';
-import Vis from '../../vis';
-import { OppsummeringProps } from '../oppsummering';
-import Avkrysset from './avkrysset';
-import UndersporsmalSum from './undersporsmal-sum';
+import { Sporsmal } from '../../../types/types'
+import { tekst } from '../../../utils/tekster'
+import Vis from '../../vis'
+import { OppsummeringProps } from '../oppsummering'
+import Avkrysset from './avkrysset'
+import UndersporsmalSum from './undersporsmal-sum'
 
 const erUndersporsmalStilt = (sporsmal: Sporsmal): boolean => {
     return sporsmal.svarliste.svar.map((s) => {
-        return s.verdi;
-    }).indexOf(sporsmal.kriterieForVisningAvUndersporsmal) > -1;
-};
+        return s.verdi
+    }).indexOf(sporsmal.kriterieForVisningAvUndersporsmal) > -1
+}
 
 const JaEllerNei = ({ sporsmal }: OppsummeringProps) => {
-    const svar = sporsmal.svarliste.svar[0];
+    const svar = sporsmal.svarliste.svar[0]
     if (typeof svar.verdi !== 'string') {
-        return null;
+        return null
     }
 
-    const svartekst = tekst(`soknad.${svar.verdi.toLowerCase()}`);
+    const svartekst = tekst(`soknad.${svar.verdi.toLowerCase()}`)
     return (
         <div className='oppsummering-sporsmal'>
             <Element tag='h3'>{sporsmal.sporsmalstekst}</Element>
@@ -29,7 +29,7 @@ const JaEllerNei = ({ sporsmal }: OppsummeringProps) => {
                 <UndersporsmalSum sporsmalsliste={sporsmal.undersporsmal} />
             </Vis>
         </div>
-    );
-};
+    )
+}
 
-export default JaEllerNei;
+export default JaEllerNei

@@ -1,40 +1,40 @@
-import { Soknad, Sporsmal } from '../types/types';
+import { Soknad, Sporsmal } from '../types/types'
 
 export const getSendtTilSuffix = (soknad: Soknad) => {
     if (soknad.sendtTilArbeidsgiverDato && soknad.sendtTilNAVDato) {
-        return '.til-arbeidsgiver-og-nav';
+        return '.til-arbeidsgiver-og-nav'
     }
     if (soknad.sendtTilArbeidsgiverDato) {
-        return '.til-arbeidsgiver';
+        return '.til-arbeidsgiver'
     }
     if (soknad.sendtTilNAVDato) {
-        return '.til-nav';
+        return '.til-nav'
     }
-    return '';
-};
+    return ''
+}
 
 export const getRiktigDato = (soknad: Soknad) => {
     if (soknad.sendtTilArbeidsgiverDato && soknad.sendtTilNAVDato) {
-        return soknad.sendtTilNAVDato;
+        return soknad.sendtTilNAVDato
     }
     if (soknad.sendtTilArbeidsgiverDato) {
-        return soknad.sendtTilArbeidsgiverDato;
+        return soknad.sendtTilArbeidsgiverDato
     }
     if (soknad.sendtTilNAVDato) {
-        return soknad.sendtTilNAVDato;
+        return soknad.sendtTilNAVDato
     }
-    return '';
-};
+    return ''
+}
 
 export const flattenSporsmal = (sporsmal: Sporsmal[]) => {
-    let flatArr: Sporsmal[] = [];
+    let flatArr: Sporsmal[] = []
     for (let i = 0; i < sporsmal.length; i++) {
-        flatArr.push(sporsmal[i]);
-        flatArr = flatArr.concat(flattenSporsmal(sporsmal[i].undersporsmal));
+        flatArr.push(sporsmal[i])
+        flatArr = flatArr.concat(flattenSporsmal(sporsmal[i].undersporsmal))
     }
-    return flatArr;
-};
+    return flatArr
+}
 
 export const hentSporsmal = (soknad: Soknad, tag: string) => {
     return flattenSporsmal(soknad.sporsmal).find(spm => spm.tag === tag)
-};
+}

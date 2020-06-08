@@ -1,53 +1,53 @@
-import './beh.dager.less';
+import './beh.dager.less'
 
-import { Element, Normaltekst } from 'nav-frontend-typografi';
-import React, { useEffect, useState } from 'react';
-import { ErrorMessage, useFormContext } from 'react-hook-form';
+import { Element, Normaltekst } from 'nav-frontend-typografi'
+import React, { useEffect, useState } from 'react'
+import { ErrorMessage, useFormContext } from 'react-hook-form'
 
-import { RSSvarliste } from '../../../types/rs-types/rs-svarliste';
-import { Sporsmal } from '../../../types/types';
-import { ukeDatoListe } from '../../../utils/dato-utils';
-import Vis from '../../vis';
-import { hentSvar } from '../hent-svar';
-import { SpmProps } from '../sporsmal-form/sporsmal-form';
+import { RSSvarliste } from '../../../types/rs-types/rs-svarliste'
+import { Sporsmal } from '../../../types/types'
+import { ukeDatoListe } from '../../../utils/dato-utils'
+import Vis from '../../vis'
+import { hentSvar } from '../hent-svar'
+import { SpmProps } from '../sporsmal-form/sporsmal-form'
 
 const BehDager = ({ sporsmal }: SpmProps) => {
-    const { register, errors, setValue } = useFormContext();
-    const antallUker = sporsmal.undersporsmal.length;
-    const [ lokal, setLokal ] = useState<string[]>(new Array(antallUker).fill(''));
+    const { register, errors, setValue } = useFormContext()
+    const antallUker = sporsmal.undersporsmal.length
+    const [ lokal, setLokal ] = useState<string[]>(new Array(antallUker).fill(''))
 
     useEffect(() => {
-        const lagret: RSSvarliste[] = hentSvar(sporsmal);
+        const lagret: RSSvarliste[] = hentSvar(sporsmal)
         lagret.forEach((liste, idx) => {
             if (liste.svar[0] !== undefined && liste.svar[0].verdi !== 'Ikke til behandling') {
-                lokal[idx] = liste.svar[0].verdi;
-                const radio = document.querySelector('.radioknapp[value="' + lokal[idx] + '"]');
-                radio!.setAttribute('checked', 'checked');
-                radio!.parentElement!.parentElement!.querySelector('.fjern')!.classList.remove('skjul');
+                lokal[idx] = liste.svar[0].verdi
+                const radio = document.querySelector('.radioknapp[value="' + lokal[idx] + '"]')
+                radio!.setAttribute('checked', 'checked')
+                radio!.parentElement!.parentElement!.querySelector('.fjern')!.classList.remove('skjul')
             }
-        });
-        setLokal(lokal);
+        })
+        setLokal(lokal)
         // eslint-disable-next-line
     }, [ sporsmal ]);
 
     const dagerSidenMandag = (spm: Sporsmal) => {
-        return ((new Date(spm.min).getDay() - 1) % 7);
-    };
+        return ((new Date(spm.min).getDay() - 1) % 7)
+    }
 
     const dagerTilFredag = (spm: Sporsmal) => {
         return (5 - new Date(spm.max).getDay())
-    };
+    }
 
     const radioKlikk = (value: string, index: number, name: string) => {
-        setValue(name, value);
-        lokal[index] = value;
-        setLokal(lokal);
-    };
+        setValue(name, value)
+        lokal[index] = value
+        setLokal(lokal)
+    }
 
     const fjernKlikk = (ukespm: Sporsmal, index: number) => {
-        lokal[index] = '';
-        document.getElementById(ukespm.id + '_label')!.classList.add('skjul');
-    };
+        lokal[index] = ''
+        document.getElementById(ukespm.id + '_label')!.classList.add('skjul')
+    }
 
     return (
         <>
@@ -71,7 +71,7 @@ const BehDager = ({ sporsmal }: SpmProps) => {
                             <div className='kalenderuke' key={ukeidx}>
 
                                 {Array(dagerSidenMandag(ukespm)).fill(0).map((i, idx) => {
-                                    return <div className='kalenderdag tomdag' key={idx} />;
+                                    return <div className='kalenderdag tomdag' key={idx} />
                                 })}
 
                                 {ukeDatoListe(ukespm.min, ukespm.max).map((dagspm, idx) => {
@@ -93,11 +93,11 @@ const BehDager = ({ sporsmal }: SpmProps) => {
                                                 {dagspm.date()}
                                             </label>
                                         </div>
-                                    );
+                                    )
                                 })}
 
                                 {Array(dagerTilFredag(ukespm)).fill(0).map((i, idx) => {
-                                    return <div className='kalenderdag tomdag' key={idx} />;
+                                    return <div className='kalenderdag tomdag' key={idx} />
                                 })}
 
                                 <div className='kalenderdag'>
@@ -130,6 +130,6 @@ const BehDager = ({ sporsmal }: SpmProps) => {
             </div>
         </>
     )
-};
+}
 
-export default BehDager;
+export default BehDager

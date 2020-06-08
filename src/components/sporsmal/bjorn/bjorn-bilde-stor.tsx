@@ -1,63 +1,63 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react'
 
-const fargeApen = '#635e59';
-const fargeLukket = '#e7e5e2';
-const smilemunn = 'M15.48571,14.3678 C15.48571,14.3678 13.74911,18.34545 8.91741,18.19725 C4.08571,18.04905 2.27406,14.3678 2.27406,14.3678';
-const alvorligmunn = 'M15.5,16.2c0,0-1.7,2.1-6.6,2c-4.8-0.1-6.6-2-6.6-2';
+const fargeApen = '#635e59'
+const fargeLukket = '#e7e5e2'
+const smilemunn = 'M15.48571,14.3678 C15.48571,14.3678 13.74911,18.34545 8.91741,18.19725 C4.08571,18.04905 2.27406,14.3678 2.27406,14.3678'
+const alvorligmunn = 'M15.5,16.2c0,0-1.7,2.1-6.6,2c-4.8-0.1-6.6-2-6.6-2'
 
 export interface BjornBildeProps {
     alt: string;
 }
 
 const BjornBildeStor = ({ alt }: BjornBildeProps) => {
-    const [ oyefarge, setOyefarge ] = useState<string>(fargeApen);
-    const [ munnform, setMunnform ] = useState<string>(smilemunn);
-    const [ timeout1, setTimeout1 ] = useState<number>();
-    const [ timeout2, setTimeout2 ] = useState<number>();
+    const [ oyefarge, setOyefarge ] = useState<string>(fargeApen)
+    const [ munnform, setMunnform ] = useState<string>(smilemunn)
+    const [ timeout1, setTimeout1 ] = useState<number>()
+    const [ timeout2, setTimeout2 ] = useState<number>()
 
     useEffect(() => {
         const handle1 = window.setTimeout(() => {
-            blink();
-        }, 3000);
+            blink()
+        }, 3000)
 
         const handle2 = window.setTimeout(() => {
-            bevegMunn();
-        }, 5000);
+            bevegMunn()
+        }, 5000)
 
-        setTimeout1(handle1);
-        setTimeout2(handle2);
+        setTimeout1(handle1)
+        setTimeout2(handle2)
 
         return () => {
-            setTimeout1(null as any);
-            setTimeout2(null as any);
-            window.clearTimeout(timeout1);
-            window.clearTimeout(timeout2);
+            setTimeout1(null as any)
+            setTimeout2(null as any)
+            window.clearTimeout(timeout1)
+            window.clearTimeout(timeout2)
         }
         // eslint-disable-next-line
     }, []);
 
     function blink() {
-        setOyefarge(fargeLukket);
+        setOyefarge(fargeLukket)
         const handle1 = window.setTimeout(() => {
-            setOyefarge(fargeApen);
-        }, 125);
+            setOyefarge(fargeApen)
+        }, 125)
         const handle2 = window.setTimeout(() => {
-            blink();
-        }, Math.random() * 10000);
-        setTimeout1(handle1);
-        setTimeout2(handle2);
+            blink()
+        }, Math.random() * 10000)
+        setTimeout1(handle1)
+        setTimeout2(handle2)
     }
 
     function bevegMunn() {
-        setMunnform(alvorligmunn);
+        setMunnform(alvorligmunn)
         const handle1 = window.setTimeout(() => {
-            setMunnform(smilemunn);
-        }, Math.random() * 10000);
+            setMunnform(smilemunn)
+        }, Math.random() * 10000)
         const handle2 = window.setTimeout(() => {
-            bevegMunn();
-        }, Math.random() * 30000);
-        setTimeout1(handle1);
-        setTimeout2(handle2);
+            bevegMunn()
+        }, Math.random() * 30000)
+        setTimeout1(handle1)
+        setTimeout2(handle2)
     }
 
     return (
@@ -140,7 +140,7 @@ const BjornBildeStor = ({ alt }: BjornBildeProps) => {
                 </g>
             </g>
         </svg>
-    );
-};
+    )
+}
 
-export default BjornBildeStor;
+export default BjornBildeStor

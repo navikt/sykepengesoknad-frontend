@@ -1,35 +1,35 @@
-import dayjs from 'dayjs';
-import Alertstripe from 'nav-frontend-alertstriper';
-import ModalWrapper from 'nav-frontend-modal';
-import { Normaltekst } from 'nav-frontend-typografi';
-import React, { useState } from 'react';
+import dayjs from 'dayjs'
+import Alertstripe from 'nav-frontend-alertstriper'
+import ModalWrapper from 'nav-frontend-modal'
+import { Normaltekst } from 'nav-frontend-typografi'
+import React, { useState } from 'react'
 
-import { RSSoknadstype } from '../../../types/rs-types/rs-soknadstype';
-import { tilLesbarDatoMedArstall, tilLesbarPeriodeMedArstall } from '../../../utils/dato-utils';
-import { getLedetekst, tekst } from '../../../utils/tekster';
-import { useAmplitudeInstance } from '../../amplitude/amplitude';
-import Vis from '../../vis';
-import { InngangsHeader, InngangsIkon } from '../inngang/inngangspanel';
+import { RSSoknadstype } from '../../../types/rs-types/rs-soknadstype'
+import { tilLesbarDatoMedArstall, tilLesbarPeriodeMedArstall } from '../../../utils/dato-utils'
+import { getLedetekst, tekst } from '../../../utils/tekster'
+import { useAmplitudeInstance } from '../../amplitude/amplitude'
+import Vis from '../../vis'
+import { InngangsHeader, InngangsIkon } from '../inngang/inngangspanel'
 import {
     finnArbeidsgivernavn,
     hentIkon,
     hentIkonHover,
     hentTeaserStatustekst,
-    SykepengesoknadTeaserProps } from './teaser-util';
+    SykepengesoknadTeaserProps } from './teaser-util'
 
 const FremtidigeSoknaderTeaser = ({ soknad }: SykepengesoknadTeaserProps) => {
-    const { logEvent } = useAmplitudeInstance();
-    const [ aapen, setAapen ] = useState<boolean>(false);
+    const { logEvent } = useAmplitudeInstance()
+    const [ aapen, setAapen ] = useState<boolean>(false)
 
-    ModalWrapper.setAppElement('#root');
+    ModalWrapper.setAppElement('#root')
 
     return (
         <article aria-labelledby={`soknader-header-${soknad.id}`} onClick={() => {
-            logEvent('Velger søknad', { soknadstype: soknad.soknadstype });
+            logEvent('Velger søknad', { soknadstype: soknad.soknadstype })
         }}>
             <a className="inngangspanel" href={'/'}
                 onClick={(e) => {
-                    e.preventDefault();
+                    e.preventDefault()
                     setAapen(true)
                 }}>
                 <InngangsIkon
@@ -73,7 +73,7 @@ const FremtidigeSoknaderTeaser = ({ soknad }: SykepengesoknadTeaserProps) => {
                 </div>
             </ModalWrapper>
         </article>
-    );
-};
+    )
+}
 
-export default FremtidigeSoknaderTeaser;
+export default FremtidigeSoknaderTeaser

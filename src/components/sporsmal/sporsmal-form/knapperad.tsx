@@ -1,14 +1,14 @@
-import Alertstripe from 'nav-frontend-alertstriper';
-import { Fareknapp, Knapp } from 'nav-frontend-knapper';
-import { Normaltekst } from 'nav-frontend-typografi';
-import React, { MouseEvent, useEffect, useRef, useState } from 'react';
-import { useHistory, useParams } from 'react-router-dom';
+import Alertstripe from 'nav-frontend-alertstriper'
+import { Fareknapp, Knapp } from 'nav-frontend-knapper'
+import { Normaltekst } from 'nav-frontend-typografi'
+import React, { MouseEvent, useEffect, useRef, useState } from 'react'
+import { useHistory, useParams } from 'react-router-dom'
 
-import { useAppStore } from '../../../data/stores/app-store';
-import { RSSoknadstype } from '../../../types/rs-types/rs-soknadstype';
-import { tekst } from '../../../utils/tekster';
-import Vis from '../../vis';
-import { avbrytSoknad } from './avbryt-soknad';
+import { useAppStore } from '../../../data/stores/app-store'
+import { RSSoknadstype } from '../../../types/rs-types/rs-soknadstype'
+import { tekst } from '../../../utils/tekster'
+import Vis from '../../vis'
+import { avbrytSoknad } from './avbryt-soknad'
 
 type Event = MouseEvent<HTMLAnchorElement | HTMLButtonElement>;
 
@@ -17,31 +17,31 @@ interface KnapperadProps {
 }
 
 const Knapperad = ({ onSubmit }: KnapperadProps) => {
-    const { valgtSoknad, setValgtSoknad, soknader, setSoknader, feilmeldingTekst, setFeilmeldingTekst } = useAppStore();
-    const history = useHistory();
-    const { stegId } = useParams();
+    const { valgtSoknad, setValgtSoknad, soknader, setSoknader, feilmeldingTekst, setFeilmeldingTekst } = useAppStore()
+    const history = useHistory()
+    const { stegId } = useParams()
 
-    const spmIndex = parseInt(stegId) - 2;
+    const spmIndex = parseInt(stegId) - 2
 
     const nokkel = spmIndex === valgtSoknad!.sporsmal.length - (valgtSoknad!.soknadstype === RSSoknadstype.OPPHOLD_UTLAND ? 2 : 3)
         ? 'sykepengesoknad.send'
-        : 'sykepengesoknad.ga-videre';
-    const avbrytDialog = useRef<HTMLDivElement>(null);
-    const [ vilAvbryte, setVilAvbryte ] = useState<boolean>(false);
+        : 'sykepengesoknad.ga-videre'
+    const avbrytDialog = useRef<HTMLDivElement>(null)
+    const [ vilAvbryte, setVilAvbryte ] = useState<boolean>(false)
 
     useEffect(() => {
         if (vilAvbryte) {
-            window.scrollTo({ top: avbrytDialog!.current!.offsetTop, left: 0, behavior: 'smooth' });
+            window.scrollTo({ top: avbrytDialog!.current!.offsetTop, left: 0, behavior: 'smooth' })
         }
-    }, [ vilAvbryte ]);
+    }, [ vilAvbryte ])
 
     const handleVilAvbryte = (event: Event) => {
-        event.preventDefault();
-        setVilAvbryte(!vilAvbryte);
-    };
+        event.preventDefault()
+        setVilAvbryte(!vilAvbryte)
+    }
 
     const handleAvbryt = (event: Event) => {
-        event.preventDefault();
+        event.preventDefault()
         avbrytSoknad({
             valgtSoknad: valgtSoknad!,
             setSoknader: setSoknader,
@@ -49,8 +49,8 @@ const Knapperad = ({ onSubmit }: KnapperadProps) => {
             setValgtSoknad: setValgtSoknad,
             history: history,
             setFeilmeldingTekst: setFeilmeldingTekst
-        });
-    };
+        })
+    }
 
     return (
         <div className="knapperad">
@@ -78,6 +78,6 @@ const Knapperad = ({ onSubmit }: KnapperadProps) => {
             </div>
         </div>
     )
-};
+}
 
-export default Knapperad;
+export default Knapperad

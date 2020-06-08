@@ -1,7 +1,7 @@
-import cls from 'classnames';
-import React from 'react';
+import cls from 'classnames'
+import React from 'react'
 
-import SkjemaFeilmelding from './skjema-feilmelding';
+import SkjemaFeilmelding from './skjema-feilmelding'
 
 interface TekstfeltMedEnhetProps {
     label: string;
@@ -12,10 +12,10 @@ interface TekstfeltMedEnhetProps {
 }
 
 const TekstfeltMedEnhet = ({ label, id, input, undertekst, kunHeltall }: TekstfeltMedEnhetProps) => {
-    const inputType = undertekst === 'prosent' || kunHeltall ? 'tel' : 'text';
+    const inputType = undertekst === 'prosent' || kunHeltall ? 'tel' : 'text'
     const className = cls('skjemaelement__input input--xs', {
         'skjemaelement__input--harFeil': true,
-    });
+    })
     return (
         <div className='skjemaelement'>
             <div className='medEnhet'>
@@ -24,7 +24,7 @@ const TekstfeltMedEnhet = ({ label, id, input, undertekst, kunHeltall }: Tekstfe
             </div>
             <SkjemaFeilmelding touched={true} error={''} />
         </div>
-    );
-};
+    )
+}
 
-export default TekstfeltMedEnhet;
+export default TekstfeltMedEnhet

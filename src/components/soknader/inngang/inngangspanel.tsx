@@ -1,10 +1,10 @@
-import './inngangspanel.less';
+import './inngangspanel.less'
 
-import { Normaltekst, Systemtittel } from 'nav-frontend-typografi';
-import React from 'react';
-import { Link } from 'react-router-dom';
+import { Normaltekst, Systemtittel } from 'nav-frontend-typografi'
+import React from 'react'
+import { Link } from 'react-router-dom'
 
-import Vis from '../../vis';
+import Vis from '../../vis'
 
 interface InngangsIkonProps {
     ikon: string;
@@ -23,8 +23,8 @@ export const InngangsIkon = ({ ikon, ikonHover }: InngangsIkonProps) => {
                 </span>
             </Vis>
         </>
-    );
-};
+    )
+}
 
 interface InngangsProps {
     to: string;
@@ -36,8 +36,8 @@ export const Inngangspanel = ({ to, children, }: InngangsProps) => {
         <Link to={to} className='inngangspanel'>
             {children}
         </Link>
-    );
-};
+    )
+}
 
 interface InngangsHeaderProps {
     meta: string;
@@ -58,5 +58,5 @@ export const InngangsHeader = ({ meta, tittel, status }: InngangsHeaderProps) =>
                 <Normaltekst className='inngangspanel__status'>{status}</Normaltekst>
             </Vis>
         </header>
-    );
-};
+    )
+}

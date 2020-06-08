@@ -1,18 +1,18 @@
-import './opprett-utland.less';
+import './opprett-utland.less'
 
-import parser from 'html-react-parser';
-import React, { useEffect } from 'react';
+import parser from 'html-react-parser'
+import React, { useEffect } from 'react'
 
-import Bjorn from '../../components/sporsmal/bjorn/bjorn';
-import { tekst } from '../../utils/tekster';
-import { setBodyClass } from '../../utils/utils';
+import Bjorn from '../../components/sporsmal/bjorn/bjorn'
+import { tekst } from '../../utils/tekster'
+import { setBodyClass } from '../../utils/utils'
 
 
 const OpprettUtland = () => {
 
     useEffect(() => {
-        setBodyClass('soknader');
-    }, []);
+        setBodyClass('soknader')
+    }, [])
 
     return (
         <>
@@ -45,7 +45,7 @@ const OpprettUtland = () => {
             </div>
         </>
     )
-};
+}
 
-export default OpprettUtland;
+export default OpprettUtland
 

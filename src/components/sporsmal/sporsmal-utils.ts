@@ -1,54 +1,54 @@
-import { TagTyper } from '../../types/enums';
-import { RSSoknadstype } from '../../types/rs-types/rs-soknadstype';
-import { RSSvartype } from '../../types/rs-types/rs-svartype';
-import { Soknad, Sporsmal } from '../../types/types';
-import { SEPARATOR } from '../../utils/constants';
-import { tekst } from '../../utils/tekster';
+import { TagTyper } from '../../types/enums'
+import { RSSoknadstype } from '../../types/rs-types/rs-soknadstype'
+import { RSSvartype } from '../../types/rs-types/rs-svartype'
+import { Soknad, Sporsmal } from '../../types/types'
+import { SEPARATOR } from '../../utils/constants'
+import { tekst } from '../../utils/tekster'
 
 export const erSisteSide = (soknad: Soknad, sidenummer: number) => {
-    const sporsmal = soknad.sporsmal[sidenummer - 1];
-    const tag = sporsmal.tag;
-    return [ TagTyper.VAER_KLAR_OVER_AT, TagTyper.BEKREFT_OPPLYSNINGER ].indexOf(tag) > -1;
-};
+    const sporsmal = soknad.sporsmal[sidenummer - 1]
+    const tag = sporsmal.tag
+    return [ TagTyper.VAER_KLAR_OVER_AT, TagTyper.BEKREFT_OPPLYSNINGER ].indexOf(tag) > -1
+}
 
 export const hentNokkel = (soknad: Soknad, sidenummer: number) => {
-    const sporsmal = soknad.sporsmal[sidenummer - 1];
+    const sporsmal = soknad.sporsmal[sidenummer - 1]
     if (sporsmal === undefined) {
-        return '';
+        return ''
     }
-    const nokkel = fjernIndexFraTag(sporsmal.tag).toLowerCase();
+    const nokkel = fjernIndexFraTag(sporsmal.tag).toLowerCase()
     return (sidenummer === 1 && soknad.soknadstype !== RSSoknadstype.OPPHOLD_UTLAND)
         ? 'sykepengesoknad.foer-du-begynner.tittel'
         : erSisteSide(soknad, sidenummer)
             ? 'sykepengesoknad.til-slutt.tittel'
-            : `sykepengesoknad.${nokkel}.tittel`;
-};
+            : `sykepengesoknad.${nokkel}.tittel`
+}
 
 export const pathUtenSteg = (pathname: string) => {
-    const arr: string[] = pathname.split(SEPARATOR);
-    arr.pop();
-    return arr.join(SEPARATOR);
-};
+    const arr: string[] = pathname.split(SEPARATOR)
+    arr.pop()
+    return arr.join(SEPARATOR)
+}
 
 export const fjernIndexFraTag = (tag: TagTyper): TagTyper => {
-    let stringtag: string = tag.toString();
-    const separator = '_';
-    const index = stringtag.lastIndexOf(separator);
+    let stringtag: string = tag.toString()
+    const separator = '_'
+    const index = stringtag.lastIndexOf(separator)
     if (index === (stringtag.length - 2) || index === (stringtag.length - 1)) {
-        stringtag = stringtag.slice(0, index);
+        stringtag = stringtag.slice(0, index)
     }
-    return TagTyper[stringtag as keyof typeof TagTyper];
-};
+    return TagTyper[stringtag as keyof typeof TagTyper]
+}
 
 export const sporsmalIdListe = (sporsmal: Sporsmal[]) => {
-    let svar: any = [];
+    let svar: any = []
     sporsmal.forEach(spm => {
-        svar.push(spm.id);
-        const alleUndersporsmalId: any = sporsmalIdListe(spm.undersporsmal);
-        svar = [ ...svar, ...alleUndersporsmalId ];
-    });
-    return svar;
-};
+        svar.push(spm.id)
+        const alleUndersporsmalId: any = sporsmalIdListe(spm.undersporsmal)
+        svar = [ ...svar, ...alleUndersporsmalId ]
+    })
+    return svar
+}
 
 interface FeilmeldingProps {
     global: string;
@@ -59,12 +59,12 @@ export const hentFeilmelding = (sporsmal: Sporsmal): FeilmeldingProps => {
     const feilmelding: FeilmeldingProps = {
         global: tekst('soknad.feilmelding.' + sporsmal.tag),
         lokal: tekst('soknad.feilmelding.' + sporsmal.tag + '.lokal')
-    };
-    if (feilmelding.lokal === undefined) {
-        feilmelding.lokal = hentGeneriskFeilmelding(sporsmal.svartype)!;
     }
-    return feilmelding;
-};
+    if (feilmelding.lokal === undefined) {
+        feilmelding.lokal = hentGeneriskFeilmelding(sporsmal.svartype)!
+    }
+    return feilmelding
+}
 
 export const hentGeneriskFeilmelding = (svartype: RSSvartype) => {
     switch(svartype) {
@@ -75,36 +75,36 @@ export const hentGeneriskFeilmelding = (svartype: RSSvartype) => {
         case RSSvartype.CHECKBOX:
         case RSSvartype.CHECKBOX_GRUPPE:
         case RSSvartype.CHECKBOX_PANEL: {
-            return 'Du må velge et alternativ';
+            return 'Du må velge et alternativ'
         }
         case RSSvartype.PROSENT:
         case RSSvartype.TIMER:
         case RSSvartype.TALL: {
-            return 'Du må oppgi en verdi';
+            return 'Du må oppgi en verdi'
         }
         case RSSvartype.PERIODER:
         case RSSvartype.PERIODE: {
-            return 'Du må oppgi en periode';
+            return 'Du må oppgi en periode'
         }
         case RSSvartype.BEHANDLINGSDAGER:
         case RSSvartype.RADIO_GRUPPE_UKEKALENDER: {
-            return 'Du må oppgi en dag';
+            return 'Du må oppgi en dag'
         }
         case RSSvartype.FRITEKST: {
-            return 'Du må skrive inn en tekst';
+            return 'Du må skrive inn en tekst'
         }
         case RSSvartype.LAND: {
-            return 'Du må velge ett land';
+            return 'Du må velge ett land'
         }
         case RSSvartype.DATO: {
-            return 'Du må oppgi en dato';
+            return 'Du må oppgi en dato'
         }
         case RSSvartype.IKKE_RELEVANT:
         case RSSvartype.INFO_BEHANDLINGSDAGER: {
-            return '';
+            return ''
         }
         default: {
-            return undefined;
+            return undefined
         }
     }
-};
+}

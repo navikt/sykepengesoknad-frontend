@@ -1,29 +1,29 @@
-import dayjs from 'dayjs';
-import { HoyreChevron } from 'nav-frontend-chevron';
-import { Normaltekst } from 'nav-frontend-typografi';
-import React from 'react';
+import dayjs from 'dayjs'
+import { HoyreChevron } from 'nav-frontend-chevron'
+import { Normaltekst } from 'nav-frontend-typografi'
+import React from 'react'
 
-import { RSSoknadstype } from '../../../types/rs-types/rs-soknadstype';
-import { tilLesbarPeriodeMedArstall } from '../../../utils/dato-utils';
-import { getLedetekst, tekst } from '../../../utils/tekster';
-import { useAmplitudeInstance } from '../../amplitude/amplitude';
-import Vis from '../../vis';
-import { InngangsHeader, InngangsIkon, Inngangspanel } from '../inngang/inngangspanel';
+import { RSSoknadstype } from '../../../types/rs-types/rs-soknadstype'
+import { tilLesbarPeriodeMedArstall } from '../../../utils/dato-utils'
+import { getLedetekst, tekst } from '../../../utils/tekster'
+import { useAmplitudeInstance } from '../../amplitude/amplitude'
+import Vis from '../../vis'
+import { InngangsHeader, InngangsIkon, Inngangspanel } from '../inngang/inngangspanel'
 import {
     beregnUndertekst,
     hentIkon,
     hentIkonHover,
     hentTeaserStatustekst,
     SykepengesoknadTeaserProps
-} from './teaser-util';
+} from './teaser-util'
 
 const TidligereSoknaderTeaser = ({ soknad }: SykepengesoknadTeaserProps) => {
-    const { logEvent } = useAmplitudeInstance();
-    const undertekst = beregnUndertekst(soknad);
+    const { logEvent } = useAmplitudeInstance()
+    const undertekst = beregnUndertekst(soknad)
 
     return (
         <article aria-labelledby={`soknader-header-${soknad.id}`} onClick={() => {
-            logEvent('Velger søknad', { soknadstype: soknad.soknadstype });
+            logEvent('Velger søknad', { soknadstype: soknad.soknadstype })
         }}>
             <Inngangspanel to={`/kvittering/${soknad.id}`}>
                 <InngangsIkon
@@ -56,7 +56,7 @@ const TidligereSoknaderTeaser = ({ soknad }: SykepengesoknadTeaserProps) => {
                 </div>
             </Inngangspanel>
         </article>
-    );
-};
+    )
+}
 
-export default TidligereSoknaderTeaser;
+export default TidligereSoknaderTeaser

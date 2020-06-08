@@ -1,22 +1,22 @@
-import Hjelpetekst from 'nav-frontend-hjelpetekst';
-import React from 'react';
+import Hjelpetekst from 'nav-frontend-hjelpetekst'
+import React from 'react'
 
-import { TagTyper } from '../../types/enums';
-import { tekst } from '../../utils/tekster';
-import { SpmProps } from './sporsmal-form/sporsmal-form';
-import { fjernIndexFraTag } from './sporsmal-utils';
+import { TagTyper } from '../../types/enums'
+import { tekst } from '../../utils/tekster'
+import { SpmProps } from './sporsmal-form/sporsmal-form'
+import { fjernIndexFraTag } from './sporsmal-utils'
 
 const SporsmalHjelpetekst = ({ sporsmal }: SpmProps) => {
 
     const vis = sporsmal.tag === TagTyper.EGENMELDINGER ||
         sporsmal.tag === TagTyper.FERIE_PERMISJON_UTLAND ||
-        sporsmal.tag === TagTyper.FERIE_V2;
+        sporsmal.tag === TagTyper.FERIE_V2
 
-    const nokkel = fjernIndexFraTag(sporsmal.tag);
+    const nokkel = fjernIndexFraTag(sporsmal.tag)
 
     return vis
         ? <Hjelpetekst> {tekst(`soknad.hjelpetekst.${nokkel}`)} </Hjelpetekst>
         : <></>
-};
+}
 
-export default SporsmalHjelpetekst;
+export default SporsmalHjelpetekst

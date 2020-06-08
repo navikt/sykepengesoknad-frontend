@@ -18,6 +18,6 @@ const TeaserTekster: any = {
         'soknad.teaser.tekst': 'Gjelder perioden %PERIODE%',
         'soknad.teaser.undertekst': '%ARBEIDSGIVER%'
     }, 'en': {}
-};
+}
 
-export default TeaserTekster;
+export default TeaserTekster

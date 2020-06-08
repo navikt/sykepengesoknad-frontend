@@ -1,10 +1,10 @@
-import dayjs from 'dayjs';
-import { Element, Normaltekst } from 'nav-frontend-typografi';
-import React from 'react';
+import dayjs from 'dayjs'
+import { Element, Normaltekst } from 'nav-frontend-typografi'
+import React from 'react'
 
-import { empty } from '../../../utils/constants';
-import Vis from '../../vis';
-import { OppsummeringProps } from '../oppsummering';
+import { empty } from '../../../utils/constants'
+import Vis from '../../vis'
+import { OppsummeringProps } from '../oppsummering'
 
 const DatoSum = ({ sporsmal }: OppsummeringProps) => {
     return (
@@ -18,11 +18,11 @@ const DatoSum = ({ sporsmal }: OppsummeringProps) => {
                                 {dayjs(svarverdi.verdi.toString()).format('DD.MM.YYYY')}
                             </Normaltekst>
                         </Vis>
-                    );
+                    )
                 })}
             </div>
         </div>
-    );
-};
+    )
+}
 
-export default DatoSum;
+export default DatoSum

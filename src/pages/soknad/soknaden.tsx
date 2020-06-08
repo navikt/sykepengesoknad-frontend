@@ -1,28 +1,28 @@
-import './soknaden.less';
+import './soknaden.less'
 
-import AlertStripe from 'nav-frontend-alertstriper';
-import { VenstreChevron } from 'nav-frontend-chevron';
-import { Normaltekst, Systemtittel } from 'nav-frontend-typografi';
-import React, { useEffect } from 'react';
-import { Link, useParams } from 'react-router-dom';
+import AlertStripe from 'nav-frontend-alertstriper'
+import { VenstreChevron } from 'nav-frontend-chevron'
+import { Normaltekst, Systemtittel } from 'nav-frontend-typografi'
+import React, { useEffect } from 'react'
+import { Link, useParams } from 'react-router-dom'
 
-import Banner from '../../components/banner/banner';
-import Brodsmuler from '../../components/brodsmuler/brodsmuler';
-import { HotjarTrigger } from '../../components/hotjar-trigger';
-import Kvittering from '../../components/kvittering/kvittering';
-import Opplysninger from '../../components/opplysninger/opplysninger';
-import SoknadIntro from '../../components/soknad-intro/soknad-intro';
-import SporsmalForm from '../../components/sporsmal/sporsmal-form/sporsmal-form';
-import SporsmalSteg from '../../components/sporsmal/sporsmal-steg/sporsmal-steg';
-import { hentNokkel } from '../../components/sporsmal/sporsmal-utils';
-import Vis from '../../components/vis';
-import { useAppStore } from '../../data/stores/app-store';
-import { RSSoknadstatus } from '../../types/rs-types/rs-soknadstatus';
-import { RSSoknadstype } from '../../types/rs-types/rs-soknadstype';
-import { Brodsmule } from '../../types/types';
-import { SEPARATOR } from '../../utils/constants';
-import { tekst } from '../../utils/tekster';
-import { setBodyClass } from '../../utils/utils';
+import Banner from '../../components/banner/banner'
+import Brodsmuler from '../../components/brodsmuler/brodsmuler'
+import { HotjarTrigger } from '../../components/hotjar-trigger'
+import Kvittering from '../../components/kvittering/kvittering'
+import Opplysninger from '../../components/opplysninger/opplysninger'
+import SoknadIntro from '../../components/soknad-intro/soknad-intro'
+import SporsmalForm from '../../components/sporsmal/sporsmal-form/sporsmal-form'
+import SporsmalSteg from '../../components/sporsmal/sporsmal-steg/sporsmal-steg'
+import { hentNokkel } from '../../components/sporsmal/sporsmal-utils'
+import Vis from '../../components/vis'
+import { useAppStore } from '../../data/stores/app-store'
+import { RSSoknadstatus } from '../../types/rs-types/rs-soknadstatus'
+import { RSSoknadstype } from '../../types/rs-types/rs-soknadstype'
+import { Brodsmule } from '../../types/types'
+import { SEPARATOR } from '../../utils/constants'
+import { tekst } from '../../utils/tekster'
+import { setBodyClass } from '../../utils/utils'
 
 const brodsmuler: Brodsmule[] = [ {
     tittel: tekst('soknader.sidetittel'),
@@ -32,26 +32,26 @@ const brodsmuler: Brodsmule[] = [ {
     tittel: tekst('soknad.sidetittel'),
     sti: null as any,
     erKlikkbar: false,
-} ];
+} ]
 
 const Soknaden = () => {
-    const { soknader, valgtSoknad, setValgtSoknad, sykmeldinger, setValgtSykmelding } = useAppStore();
-    const { id } = useParams();
+    const { soknader, valgtSoknad, setValgtSoknad, sykmeldinger, setValgtSykmelding } = useAppStore()
+    const { id } = useParams()
 
     useEffect(() => {
-        const filtrertSoknad = soknader.filter(soknad => soknad.id === id)[0];
-        setValgtSoknad(filtrertSoknad);
+        const filtrertSoknad = soknader.filter(soknad => soknad.id === id)[0]
+        setValgtSoknad(filtrertSoknad)
 
-        const sykmelding = sykmeldinger.filter(sm => sm.id === filtrertSoknad.sykmeldingId)[0];
-        setValgtSykmelding(sykmelding);
+        const sykmelding = sykmeldinger.filter(sm => sm.id === filtrertSoknad.sykmeldingId)[0]
+        setValgtSykmelding(sykmelding)
         // eslint-disable-next-line
     }, [id]);
 
     useEffect(() => {
         setBodyClass('soknaden')
-    }, []);
+    }, [])
 
-    if (!valgtSoknad) return null;
+    if (!valgtSoknad) return null
 
     return (
         <>
@@ -64,15 +64,15 @@ const Soknaden = () => {
             </div>
         </>
     )
-};
+}
 
-export default Soknaden;
+export default Soknaden
 
 const Fordeling = () => {
-    const { valgtSoknad } = useAppStore();
-    const { stegId } = useParams();
-    const stegNo = parseInt(stegId);
-    const tittel = tekst(hentNokkel(valgtSoknad!, stegNo));
+    const { valgtSoknad } = useAppStore()
+    const { stegId } = useParams()
+    const stegNo = parseInt(stegId)
+    const tittel = tekst(hentNokkel(valgtSoknad!, stegNo))
     const erUtlandssoknad = valgtSoknad!.soknadstype === RSSoknadstype.OPPHOLD_UTLAND
 
     switch (valgtSoknad!.status) {
@@ -120,23 +120,23 @@ const Fordeling = () => {
 
                     <SporsmalForm />
                 </>
-            );
+            )
 
         // Tidligere søknader
         case RSSoknadstatus.AVBRUTT:
-            return <Kvittering />;
+            return <Kvittering />
 
         // Håndteres i /kvittering/:id
         case RSSoknadstatus.SENDT:
-            return null as any;
+            return null as any
 
         // Fremtidige søknader
         case RSSoknadstatus.FREMTIDIG:
-            return null as any;
+            return null as any
 
         // Utgåtte søknader
         case RSSoknadstatus.KORRIGERT:
         case RSSoknadstatus.SLETTET:
-            return null as any;
+            return null as any
     }
-};
+}

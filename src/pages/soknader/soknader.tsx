@@ -1,50 +1,50 @@
-import './soknader.less';
+import './soknader.less'
 
-import React, { useEffect } from 'react';
+import React, { useEffect } from 'react'
 
-import Banner from '../../components/banner/banner';
-import Brodsmuler from '../../components/brodsmuler/brodsmuler';
-import Teasere from '../../components/soknader/teaser/teasere';
-import UtbetalingerLenke from '../../components/soknader/utbetalinger/utbetalinger-lenke';
-import Vis from '../../components/vis';
-import { useAppStore } from '../../data/stores/app-store';
-import { RSSoknadstatus } from '../../types/rs-types/rs-soknadstatus';
-import { Brodsmule, Soknad } from '../../types/types';
-import { sorterEtterOpprettetDato, sorterEtterPerioder } from '../../utils/sorter-soknader';
-import { tekst } from '../../utils/tekster';
-import { setBodyClass } from '../../utils/utils';
+import Banner from '../../components/banner/banner'
+import Brodsmuler from '../../components/brodsmuler/brodsmuler'
+import Teasere from '../../components/soknader/teaser/teasere'
+import UtbetalingerLenke from '../../components/soknader/utbetalinger/utbetalinger-lenke'
+import Vis from '../../components/vis'
+import { useAppStore } from '../../data/stores/app-store'
+import { RSSoknadstatus } from '../../types/rs-types/rs-soknadstatus'
+import { Brodsmule, Soknad } from '../../types/types'
+import { sorterEtterOpprettetDato, sorterEtterPerioder } from '../../utils/sorter-soknader'
+import { tekst } from '../../utils/tekster'
+import { setBodyClass } from '../../utils/utils'
 
 export const filtrerOgSorterNyeSoknader = (soknader: Soknad[]) => {
     return soknader.filter(soknad =>
         soknad.status === RSSoknadstatus.NY || soknad.status === RSSoknadstatus.UTKAST_TIL_KORRIGERING
-    ).sort(sorterEtterOpprettetDato);
-};
+    ).sort(sorterEtterOpprettetDato)
+}
 
 const brodsmuler: Brodsmule[] = [ {
     tittel: tekst('soknader.sidetittel'),
     sti: '/soknader',
     erKlikkbar: false
-} ];
+} ]
 
 const Soknader = () => {
-    const { soknader } = useAppStore();
-    const nyeSoknader = filtrerOgSorterNyeSoknader(soknader);
+    const { soknader } = useAppStore()
+    const nyeSoknader = filtrerOgSorterNyeSoknader(soknader)
 
     const tidligereSoknader = soknader
         .filter((soknad) =>
             soknad.status === RSSoknadstatus.SENDT
             || soknad.status === RSSoknadstatus.AVBRUTT
             || soknad.status === RSSoknadstatus.UTGAATT
-        ).sort(sorterEtterPerioder);
+        ).sort(sorterEtterPerioder)
 
     const fremtidigeSoknader = soknader
         .filter((soknad) => soknad.status === RSSoknadstatus.FREMTIDIG)
         .sort(sorterEtterPerioder)
-        .reverse();
+        .reverse()
 
     useEffect(() => {
-        setBodyClass('soknader');
-    }, []);
+        setBodyClass('soknader')
+    }, [])
 
     return (
         <>
@@ -78,7 +78,7 @@ const Soknader = () => {
                 </Vis>
             </div>
         </>
-    );
-};
+    )
+}
 
-export default Soknader;
+export default Soknader

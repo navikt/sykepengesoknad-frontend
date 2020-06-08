@@ -1,14 +1,14 @@
-import './feil-oppsummering.less';
+import './feil-oppsummering.less'
 
-import { Undertittel } from 'nav-frontend-typografi';
-import React, { useEffect, useRef } from 'react';
+import { Undertittel } from 'nav-frontend-typografi'
+import React, { useEffect, useRef } from 'react'
 
-import { Sporsmal } from '../../../types/types';
-import { erSynligIViewport } from '../../../utils/browser-utils';
-import { flattenSporsmal } from '../../../utils/soknad-utils';
-import { useAmplitudeInstance } from '../../amplitude/amplitude';
-import { SpmProps } from '../../sporsmal/sporsmal-form/sporsmal-form';
-import Vis from '../../vis';
+import { Sporsmal } from '../../../types/types'
+import { erSynligIViewport } from '../../../utils/browser-utils'
+import { flattenSporsmal } from '../../../utils/soknad-utils'
+import { useAmplitudeInstance } from '../../amplitude/amplitude'
+import { SpmProps } from '../../sporsmal/sporsmal-form/sporsmal-form'
+import Vis from '../../vis'
 
 interface FeiloppsummeringProps {
     settFokus?: boolean;
@@ -18,10 +18,10 @@ interface FeiloppsummeringProps {
 type FeilProps = FeiloppsummeringProps & SpmProps;
 
 const FeilOppsummering = (props: FeilProps) => {
-    const oppsummering = useRef<HTMLDivElement>(null);
-    const { logEvent } = useAmplitudeInstance();
-    const { settFokus, errors, sporsmal } = props;
-    const entries: any[] = Object.entries(errors);
+    const oppsummering = useRef<HTMLDivElement>(null)
+    const { logEvent } = useAmplitudeInstance()
+    const { settFokus, errors, sporsmal } = props
+    const entries: any[] = Object.entries(errors)
 
     useEffect(() => {
         if (Object.entries(errors).length > 0) {
@@ -31,60 +31,60 @@ const FeilOppsummering = (props: FeilProps) => {
     }, [ errors ]);
 
     useEffect(() => {
-        let fokuser = settFokus;
+        let fokuser = settFokus
         if (fokuser === undefined) {
-            fokuser = true;
+            fokuser = true
         }
         if (fokuser && oppsummering.current) {
             if (!erSynligIViewport(oppsummering.current)) {
                 setTimeout(() => {
-                    oppsummering.current?.focus();
-                }, 300);
+                    oppsummering.current?.focus()
+                }, 300)
             } else {
-                oppsummering.current?.focus();
+                oppsummering.current?.focus()
             }
         }
-    });
+    })
 
     const handleClick = (list: any) => {
-        const id = `${list[0]}`;
-        const idarr = id.split('_');
+        const id = `${list[0]}`
+        const idarr = id.split('_')
 
-        let detteSpm = flattenSporsmal(sporsmal.undersporsmal).filter((uspm: Sporsmal) => uspm.id === idarr[0])[0];
+        let detteSpm = flattenSporsmal(sporsmal.undersporsmal).filter((uspm: Sporsmal) => uspm.id === idarr[0])[0]
         if (!detteSpm) {
-            detteSpm = sporsmal;
+            detteSpm = sporsmal
         }
 
-        let elmid;
+        let elmid
         if (id.includes('_')) {
-            elmid = idarr[0] + '_t_' + idarr[1];
+            elmid = idarr[0] + '_t_' + idarr[1]
 
         } else if (detteSpm.svartype.includes('JA_NEI')) {
-            elmid = idarr[0] += '_0';
+            elmid = idarr[0] += '_0'
 
         } else if (detteSpm.svartype.includes('CHECK') || detteSpm.svartype.includes('RADIO') ||
             detteSpm.svartype.includes('TIMER') || detteSpm.svartype.includes('PROSENT')) {
-            elmid = idarr[0];
+            elmid = idarr[0]
 
         } else if (detteSpm.svartype.includes('DATO')) {
-            elmid = 'input' + idarr[0];
+            elmid = 'input' + idarr[0]
         }
 
-        const element = document.getElementById(elmid as any);
+        const element = document.getElementById(elmid as any)
         if (element) {
             if (detteSpm.erHovedsporsmal && detteSpm.svartype.includes('JA_NEI')) {
-                element!.parentElement!.classList.add('inputPanel--focused');
+                element!.parentElement!.classList.add('inputPanel--focused')
             }
-            element.focus();
-            element.scrollIntoView({ behavior: 'smooth' });
+            element.focus()
+            element.scrollIntoView({ behavior: 'smooth' })
         }
-    };
+    }
 
     const handleKeyDown = (e: any, list: any) => {
         if (e.key === 'Enter') {
-            handleClick(list);
+            handleClick(list)
         }
-    };
+    }
 
     return (
         <div aria-live='polite' role='alert'>
@@ -106,7 +106,7 @@ const FeilOppsummering = (props: FeilProps) => {
                 </div>
             </Vis>
         </div>
-    );
-};
+    )
+}
 
-export default FeilOppsummering;
+export default FeilOppsummering
