@@ -34,7 +34,9 @@ const Teasere = ({ soknader, className, tittel, tomListeTekst, id }: SoknaderTea
                     }
                 })}
                 <Vis hvis={soknader.length === 0}>
-                    <Element className='panel'>{tomListeTekst}</Element>
+                    <Element className='inngangspanel inngangspanel--tomListe'>
+                        {tomListeTekst}
+                    </Element>
                 </Vis>
             </div>
         </>
