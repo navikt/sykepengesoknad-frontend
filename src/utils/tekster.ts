@@ -10,6 +10,7 @@ import SporsmalTekster from '../components/sporsmal/sporsmal-tekster';
 import TeaserTekster from '../components/soknader/teaser/teaser-tekster';
 import UtbetalingerTekster from '../components/soknader/utbetalinger/utbetalinger-tekster';
 import OppsummeringTekster from '../components/oppsummering/oppsummering-tekster';
+import OpprettUtlandTekster from '../pages/opprett-utland/opprett-utland-tekster';
 import { logger } from './logger';
 
 const tekster = {
@@ -24,14 +25,15 @@ const tekster = {
     ...SporsmalTekster.nb,
     ...TeaserTekster.nb,
     ...UtbetalingerTekster.nb,
-    ...OppsummeringTekster.nb
+    ...OppsummeringTekster.nb,
+    ...OpprettUtlandTekster.nb,
 };
 
 
 export const tekst = (tekst: string): string => {
     const verdi = tekster[tekst];
     // Generiskfeilmelding har ingen tekst
-    if(!verdi === undefined && !tekst.includes('soknad.feilmelding')) {
+    if (!verdi === undefined && !tekst.includes('soknad.feilmelding')) {
         // eslint-disable-next-line no-console
         console.log(`Mangler teksten [ ${tekst} ]`);
         logger.error(`Mangler teksten [ ${tekst} ]`);

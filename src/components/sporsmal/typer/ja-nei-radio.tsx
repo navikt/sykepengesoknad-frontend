@@ -5,12 +5,13 @@ import Vis from '../../vis';
 import { hentSvar } from '../hent-svar';
 import { hentFeilmelding } from '../sporsmal-utils';
 import { SpmProps } from '../sporsmal-form/sporsmal-form';
-import { tekst } from '../../../utils/tekster';
+import { getLedetekst, tekst } from '../../../utils/tekster';
 import { useAppStore } from '../../../data/stores/app-store';
 import Bjorn from '../bjorn/bjorn';
 import { SvarEnums, TagTyper } from '../../../types/enums';
 import parser from 'html-react-parser';
 import KnapperadAvbryt from '../sporsmal-form/knapperad-avbryt';
+import { utlandssoknadUrl } from '../../../utils/url-utils';
 
 const jaNeiValg = [ {
     value: 'JA',
@@ -52,13 +53,13 @@ const JaNeiRadio = ({ sporsmal }: SpmProps) => {
             : (spm.tag && spm.tag === TagTyper.UTLANDSOPPHOLD_SOKT_SYKEPENGER && lokal === SvarEnums.JA && valgt)
                 ? <div className='ekstrasporsmal'>
                     <Normaltekst tag='span'>
-                        {parser(tekst('soknad.infotekst.utlandsopphold_sokt_sykepenger.ja'))}
+                        {parser(getLedetekst(tekst('soknad.infotekst.utlandsopphold_sokt_sykepenger.ja'), { '%URL%': utlandssoknadUrl }))}
                     </Normaltekst>
                 </div>
                 : (spm.tag && spm.tag === TagTyper.UTLANDSOPPHOLD_SOKT_SYKEPENGER && lokal === SvarEnums.NEI && valgt)
                     ? <div className='ekstrasporsmal'>
                         <Normaltekst tag='span'>
-                            {parser(tekst('soknad.infotekst.utlandsopphold_sokt_sykepenger.nei'))}
+                            {parser(getLedetekst(tekst('soknad.infotekst.utlandsopphold_sokt_sykepenger.nei'), { '%URL%': utlandssoknadUrl }))}
                         </Normaltekst>
                     </div>
                     : <></>

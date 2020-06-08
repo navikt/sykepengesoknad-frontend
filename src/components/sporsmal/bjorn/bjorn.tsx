@@ -20,7 +20,8 @@ interface BjornProps {
 
 export const Bjorn = ({
     bildeAlt = 'NAV-ansatt',
-    nokkel, children,
+    nokkel,
+    children,
     hvit = false,
     stor = false,
     vertikal = false,

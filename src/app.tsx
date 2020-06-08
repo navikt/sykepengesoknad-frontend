@@ -7,6 +7,7 @@ import StoreProvider from './data/stores/store-provider';
 import { DataFetcher } from './data/data-fetcher';
 import { Amplitude } from './components/amplitude/amplitudeProvider';
 import KvitteringSide from './pages/kvittering/kvittering-side';
+import OpprettUtland from './pages/opprett-utland/opprett-utland';
 import './app.less';
 
 const App = (): any => {
@@ -25,6 +26,7 @@ const App = (): any => {
                                     <Route path={'/soknader/:id/:stegId'} component={Soknad} />
                                     <Route path={'/soknader/:id'} component={Soknad} />
                                     <Route path={'/kvittering/:id'} component={KvitteringSide} />
+                                    <Route path={'/sykepengesoknad-utland'} component={OpprettUtland} />
                                 </Switch>
                             </CSSTransition>
                         </TransitionGroup>
