@@ -105,8 +105,8 @@
         "test": "MOCK_BACKEND=true craco test",
         "cy:open": "cypress open",
         "e2e": "MOCK_BACKEND=true start-test 8080 cy:open",
-        "lint": "eslint --ext=ts,tsx src",
-        "lint:fix": "eslint --ext=ts,tsx src --fix"
+        "lint": "eslint --ext=ts,tsx src cypress",
+        "lint:fix": "eslint --ext=ts,tsx src cypress --fix"
     },
     "eslintConfig": {
         "extends": "react-app"
