@@ -1,4 +1,4 @@
-export const soknaderIntegration: any = [ {
+export const arbeidstakersoknadMedUtenlandsoppholdSoktSykepenger = {
     'id': '5b74f271-5b94-455a-b79f-428f593f2b98',
     'sykmeldingId': '7e90121c-b64b-4a1c-b7a5-93c9d95aba47',
     'soknadstype': 'ARBEIDSTAKERE',
@@ -72,4 +72,6 @@ export const soknaderIntegration: any = [ {
         'undersporsmal': []
     } ],
     'egenmeldtSykmelding': false
-} ]
+}
+
+export const soknaderIntegration: any[] = [ arbeidstakersoknadMedUtenlandsoppholdSoktSykepenger ]
