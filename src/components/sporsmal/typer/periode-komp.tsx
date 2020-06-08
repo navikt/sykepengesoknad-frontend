@@ -46,7 +46,7 @@ const PeriodeKomp = ({ sporsmal, index, slettPeriode }: AllProps) => {
                 id={id}
                 name={id}
                 className='skjemaelement__input input--m'
-                placeholder='dd.mm.yyyy til dd.mm.yyyy'
+                placeholder='dd.mm.åååå - dd.mm.åååå'
                 options={{
                     minDate: sporsmal.min,
                     maxDate: sporsmal.max,

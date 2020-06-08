@@ -50,7 +50,7 @@ const DatoInput = ({ sporsmal }: SpmProps) => {
                 id={sporsmal.id}
                 name={sporsmal.id}
                 className='skjemaelement__input input--m'
-                placeholder='dd.mm.yyyy'
+                placeholder='dd.mm.åååå'
                 options={{
                     minDate: sporsmal.min,
                     maxDate: sporsmal.max,
