@@ -29,16 +29,12 @@ const KvitteringSide = () => {
     const [ erSiste, setErSiste ] = useState<boolean>();
 
     useEffect(() => {
+        setBodyClass('kvittering')
         setErSiste(valgtSoknad?.status === RSSoknadstatus.SENDT);
         // eslint-disable-next-line
     }, []);
 
-    useEffect(() => {
-        setBodyClass('kvittering')
-    }, []);
-
     if (!valgtSoknad) return null;
-
 
     return (
         <div>

@@ -10,7 +10,6 @@ import FeilOppsummering from '../../skjema/feiloppsummering/feil-oppsummering';
 import Vis from '../../vis';
 import { RSSvartype } from '../../../types/rs-types/rs-svartype';
 import CheckboxPanel from '../typer/checkbox-panel';
-import SendtTil from './sendt-til';
 import { SEPARATOR } from '../../../utils/constants';
 import { RSSoknadstatus } from '../../../types/rs-types/rs-soknadstatus';
 import { SvarTil, TagTyper } from '../../../types/enums';
@@ -202,7 +201,6 @@ const SporsmalForm = () => {
                 <Vis hvis={erSiste && !erUtlandssoknad}>
                     <Oppsummering />
                     <CheckboxPanel sporsmal={nesteSporsmal} />
-                    <SendtTil />
                 </Vis>
 
                 <Vis hvis={erSiste && erUtlandssoknad}>

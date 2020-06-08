@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import Alertstripe from 'nav-frontend-alertstriper';
 import Opplysninger from '../opplysninger/opplysninger';
 import Oppsummering from '../oppsummering/oppsummering';
@@ -19,11 +19,23 @@ import KvitteringStatus from './kvittering-status';
 import KvitteringInfo from './kvittering-info';
 import './kvittering.less';
 import { RSSoknadstype } from '../../types/rs-types/rs-soknadstype';
+import { useParams } from 'react-router-dom';
 
 const Kvittering = () => {
-    const { valgtSoknad, soknader, setSoknader, feilmeldingTekst, setFeilmeldingTekst } = useAppStore();
+    const { valgtSoknad, setValgtSoknad, soknader, setSoknader, sykmeldinger, setValgtSykmelding, feilmeldingTekst, setFeilmeldingTekst } = useAppStore();
     const korrigerSoknad = useFetch<RSSoknad>();
     const history = useHistory();
+    const { id } = useParams();
+
+    useEffect(() => {
+        if (!valgtSoknad) {
+            const filtrertSoknad = soknader.find(soknad => soknad.id === id);
+            setValgtSoknad(filtrertSoknad);
+            const sykmelding = sykmeldinger.find(sm => sm.id === filtrertSoknad?.sykmeldingId);
+            setValgtSykmelding(sykmelding);
+        }
+        // eslint-disable-next-line
+    }, [])
 
     const korriger = () => {
         korrigerSoknad.fetch(env.syfoapiRoot + `/syfosoknad/api/soknader/${valgtSoknad!.id}/korriger`, {
