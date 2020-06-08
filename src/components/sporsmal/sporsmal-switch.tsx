@@ -1,19 +1,21 @@
-import React from 'react';
-import TallKomp from './typer/tall-komp';
-import DatoInput from './typer/dato-komp';
-import JaNeiKomp from './typer/ja-nei-komp';
-import Land from './typer/land';
-import { Sporsmal } from '../../types/types';
-import UkjentSporsmal from './typer/ukjent-sporsmal';
-import CheckboxPanel from './typer/checkbox-panel';
-import { RSSvartype } from '../../types/rs-types/rs-svartype';
-import IkkeRelevant from './typer/ikke-relevant';
-import CheckboxKomp from './typer/checkbox-komp';
-import RadioKomp from './typer/radio-komp';
-import JaNeiRadio from './typer/ja-nei-radio';
-import BehDager from './typer/beh-dager';
-import Perioder from './typer/perioder';
 import './undersporsmal/undersporsmal.less';
+
+import React from 'react';
+
+import { RSSvartype } from '../../types/rs-types/rs-svartype';
+import { Sporsmal } from '../../types/types';
+import BehDager from './typer/beh-dager';
+import CheckboxKomp from './typer/checkbox-komp';
+import CheckboxPanel from './typer/checkbox-panel';
+import DatoInput from './typer/dato-komp';
+import IkkeRelevant from './typer/ikke-relevant';
+import JaNeiKomp from './typer/ja-nei-komp';
+import JaNeiRadio from './typer/ja-nei-radio';
+import Land from './typer/land';
+import Perioder from './typer/perioder';
+import RadioKomp from './typer/radio-komp';
+import TallKomp from './typer/tall-komp';
+import UkjentSporsmal from './typer/ukjent-sporsmal';
 
 interface UndersporsmalProps {
     sporsmal: Sporsmal;

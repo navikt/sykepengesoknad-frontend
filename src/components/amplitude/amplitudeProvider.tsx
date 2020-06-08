@@ -1,4 +1,5 @@
 import React from 'react';
+
 import { AmplitudeProvider } from './amplitude';
 
 interface AmplitudeProps {

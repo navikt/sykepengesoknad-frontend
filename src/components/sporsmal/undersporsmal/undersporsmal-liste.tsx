@@ -1,7 +1,8 @@
 import React from 'react';
+
+import { Sporsmal } from '../../../types/types';
 import Vis from '../../vis';
 import SporsmalSwitch from '../sporsmal-switch';
-import { Sporsmal } from '../../../types/types';
 
 const UndersporsmalListe = ({ undersporsmal }: any) => {
     return (

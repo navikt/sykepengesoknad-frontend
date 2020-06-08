@@ -1,7 +1,9 @@
-import React, { useEffect } from 'react';
 import './opprett-utland.less';
-import Bjorn from '../../components/sporsmal/bjorn/bjorn';
+
 import parser from 'html-react-parser';
+import React, { useEffect } from 'react';
+
+import Bjorn from '../../components/sporsmal/bjorn/bjorn';
 import { tekst } from '../../utils/tekster';
 import { setBodyClass } from '../../utils/utils';
 

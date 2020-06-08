@@ -1,10 +1,11 @@
-import React, { useEffect, useState } from 'react';
+import dayjs from 'dayjs';
 import { AlertStripeSuksess } from 'nav-frontend-alertstriper';
 import { Normaltekst, Undertittel } from 'nav-frontend-typografi';
+import React, { useEffect, useState } from 'react';
+
 import { useAppStore } from '../../data/stores/app-store';
-import { tekst } from '../../utils/tekster';
 import { SvarTil } from '../../types/enums';
-import dayjs from 'dayjs';
+import { tekst } from '../../utils/tekster';
 import Vis from '../vis';
 
 const KvitteringStatus = () => {

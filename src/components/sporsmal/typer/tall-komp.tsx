@@ -1,11 +1,12 @@
-import { useFormContext } from 'react-hook-form';
-import React, { useEffect, useRef, useState } from 'react';
 import { Element, Normaltekst } from 'nav-frontend-typografi';
+import React, { useEffect, useRef, useState } from 'react';
+import { useFormContext } from 'react-hook-form';
+
+import { getLedetekst, tekst } from '../../../utils/tekster';
 import Vis from '../../vis';
 import { hentSvar } from '../hent-svar';
-import { getLedetekst, tekst } from '../../../utils/tekster';
-import { hentFeilmelding } from '../sporsmal-utils';
 import { SpmProps } from '../sporsmal-form/sporsmal-form';
+import { hentFeilmelding } from '../sporsmal-utils';
 import UndersporsmalListe from '../undersporsmal/undersporsmal-liste';
 
 const TallInput = ({ sporsmal }: SpmProps) => {

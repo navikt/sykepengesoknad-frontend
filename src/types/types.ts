@@ -1,13 +1,13 @@
+import { dayjsToDate } from '../utils/dato-utils';
 import { SykmeldingStatuser, TagTyper } from './enums';
 import { RSArbeidssituasjon } from './rs-types/rs-arbeidssituasjon';
-import { RSSvartype } from './rs-types/rs-svartype';
-import { RSSoknadstype } from './rs-types/rs-soknadstype';
-import { RSSoknadstatus } from './rs-types/rs-soknadstatus';
-import { RSSporsmal } from './rs-types/rs-sporsmal';
 import { RSSoknad } from './rs-types/rs-soknad';
 import { RSSoknadsperiode } from './rs-types/rs-soknadsperiode';
+import { RSSoknadstatus } from './rs-types/rs-soknadstatus';
+import { RSSoknadstype } from './rs-types/rs-soknadstype';
+import { RSSporsmal } from './rs-types/rs-sporsmal';
 import { RSSvarliste } from './rs-types/rs-svarliste';
-import { dayjsToDate } from '../utils/dato-utils';
+import { RSSvartype } from './rs-types/rs-svartype';
 
 export interface TidsPeriode {
     fom: Date;

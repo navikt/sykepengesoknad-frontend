@@ -1,13 +1,14 @@
+import { Element, Normaltekst } from 'nav-frontend-typografi';
 import React, { useEffect } from 'react';
 import { useFormContext } from 'react-hook-form';
-import { Element, Normaltekst } from 'nav-frontend-typografi';
+
+import { useAppStore } from '../../../data/stores/app-store';
+import { Sporsmal } from '../../../types/types';
+import AnimateOnMount from '../../animate-on-mount';
 import Vis from '../../vis';
 import { hentSvar } from '../hent-svar';
-import { Sporsmal } from '../../../types/types';
-import { hentFeilmelding } from '../sporsmal-utils';
-import AnimateOnMount from '../../animate-on-mount';
 import { SpmProps } from '../sporsmal-form/sporsmal-form';
-import { useAppStore } from '../../../data/stores/app-store';
+import { hentFeilmelding } from '../sporsmal-utils';
 import UndersporsmalListe from '../undersporsmal/undersporsmal-liste';
 
 const CheckboxKomp = ({ sporsmal }: SpmProps) => {

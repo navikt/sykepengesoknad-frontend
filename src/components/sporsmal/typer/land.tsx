@@ -1,10 +1,11 @@
-import { useFormContext } from 'react-hook-form';
-import React, { useEffect, useState } from 'react';
 import { Element, Normaltekst } from 'nav-frontend-typografi';
+import React, { useEffect, useState } from 'react';
+import { useFormContext } from 'react-hook-form';
+
 import Vis from '../../vis';
 import { hentSvar } from '../hent-svar';
-import { hentFeilmelding } from '../sporsmal-utils';
 import { SpmProps } from '../sporsmal-form/sporsmal-form';
+import { hentFeilmelding } from '../sporsmal-utils';
 
 const landValg = [ {
     value: 'SYDEN',

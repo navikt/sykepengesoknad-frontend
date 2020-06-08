@@ -1,7 +1,8 @@
 import constate from 'constate';
 import { useState } from 'react';
-import { Soknad, Sykmelding, UnleashToggles } from '../../types/types';
+
 import { SvarTil } from '../../types/enums';
+import { Soknad, Sykmelding, UnleashToggles } from '../../types/types';
 
 export const [ AppStoreProvider, useAppStore ] = constate(() => {
     const [ unleash, setUnleash ] = useState<UnleashToggles>();

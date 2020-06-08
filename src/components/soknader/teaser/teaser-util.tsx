@@ -1,15 +1,16 @@
-import { Soknad } from '../../../types/types';
-import { Normaltekst } from 'nav-frontend-typografi';
-import { getLedetekst, tekst } from '../../../utils/tekster';
 import dayjs from 'dayjs';
+import { Normaltekst } from 'nav-frontend-typografi';
 import React from 'react';
-import { RSSoknadstype } from '../../../types/rs-types/rs-soknadstype';
-import GlobeIkon from './globe.svg';
-import SoknaderIkon from '../../../pages/soknader/soknader.svg';
-import GlobeHoverIkon from './globe-hover.svg';
+
 import SoknaderHoverIkon from '../../../pages/soknader/soknader-hover.svg';
+import SoknaderIkon from '../../../pages/soknader/soknader.svg';
 import { RSSoknadstatus } from '../../../types/rs-types/rs-soknadstatus';
+import { RSSoknadstype } from '../../../types/rs-types/rs-soknadstype';
+import { Soknad } from '../../../types/types';
 import { getRiktigDato, getSendtTilSuffix } from '../../../utils/soknad-utils';
+import { getLedetekst, tekst } from '../../../utils/tekster';
+import GlobeHoverIkon from './globe-hover.svg';
+import GlobeIkon from './globe.svg';
 
 export const erSendtTilBeggeMenIkkeSamtidig = (soknad: Soknad) => {
     return soknad.sendtTilNAVDato && soknad.sendtTilArbeidsgiverDato

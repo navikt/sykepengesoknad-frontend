@@ -1,4 +1,5 @@
 import { useEffect } from 'react';
+
 // import { log } from '../utils/logger';
 import { RSSoknadstype } from '../types/rs-types/rs-soknadstype';
 

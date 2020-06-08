@@ -1,17 +1,18 @@
-import { useFormContext } from 'react-hook-form';
-import React, { useEffect, useState } from 'react';
-import { Element, Normaltekst } from 'nav-frontend-typografi';
-import Vis from '../../vis';
-import { hentSvar } from '../hent-svar';
-import { hentFeilmelding } from '../sporsmal-utils';
-import { SpmProps } from '../sporsmal-form/sporsmal-form';
-import { getLedetekst, tekst } from '../../../utils/tekster';
-import { useAppStore } from '../../../data/stores/app-store';
-import Bjorn from '../bjorn/bjorn';
-import { SvarEnums, TagTyper } from '../../../types/enums';
 import parser from 'html-react-parser';
-import KnapperadAvbryt from '../sporsmal-form/knapperad-avbryt';
+import { Element, Normaltekst } from 'nav-frontend-typografi';
+import React, { useEffect, useState } from 'react';
+import { useFormContext } from 'react-hook-form';
+
+import { useAppStore } from '../../../data/stores/app-store';
+import { SvarEnums, TagTyper } from '../../../types/enums';
+import { getLedetekst, tekst } from '../../../utils/tekster';
 import { utlandssoknadUrl } from '../../../utils/url-utils';
+import Vis from '../../vis';
+import Bjorn from '../bjorn/bjorn';
+import { hentSvar } from '../hent-svar';
+import KnapperadAvbryt from '../sporsmal-form/knapperad-avbryt';
+import { SpmProps } from '../sporsmal-form/sporsmal-form';
+import { hentFeilmelding } from '../sporsmal-utils';
 
 const jaNeiValg = [ {
     value: 'JA',

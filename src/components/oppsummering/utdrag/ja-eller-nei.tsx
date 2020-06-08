@@ -1,11 +1,12 @@
-import React from 'react';
 import { Element } from 'nav-frontend-typografi';
-import Avkrysset from './avkrysset';
-import { OppsummeringProps } from '../oppsummering';
-import UndersporsmalSum from './undersporsmal-sum';
+import React from 'react';
+
 import { Sporsmal } from '../../../types/types';
-import Vis from '../../vis';
 import { tekst } from '../../../utils/tekster';
+import Vis from '../../vis';
+import { OppsummeringProps } from '../oppsummering';
+import Avkrysset from './avkrysset';
+import UndersporsmalSum from './undersporsmal-sum';
 
 const erUndersporsmalStilt = (sporsmal: Sporsmal): boolean => {
     return sporsmal.svarliste.svar.map((s) => {

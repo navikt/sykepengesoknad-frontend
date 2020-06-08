@@ -1,5 +1,6 @@
-import { SykmeldingPeriode } from '../types/types';
 import dayjs from 'dayjs';
+
+import { SykmeldingPeriode } from '../types/types';
 
 // TODO: Det skjer noe rart her. Browser og kompilator sier at tom og fom verken er dato eller string
 export function sorterPerioderEldsteFoerst(perioder: SykmeldingPeriode[]) {

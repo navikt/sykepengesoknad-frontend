@@ -1,8 +1,10 @@
+import './inngangspanel.less';
+
+import { Normaltekst, Systemtittel } from 'nav-frontend-typografi';
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { Normaltekst, Systemtittel } from 'nav-frontend-typografi';
+
 import Vis from '../../vis';
-import './inngangspanel.less';
 
 interface InngangsIkonProps {
     ikon: string;

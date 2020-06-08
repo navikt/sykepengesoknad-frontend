@@ -1,7 +1,8 @@
-import React, { useEffect } from 'react';
-import { Link } from 'react-router-dom';
 import Panel from 'nav-frontend-paneler';
 import { Normaltekst, Sidetittel } from 'nav-frontend-typografi';
+import React, { useEffect } from 'react';
+import { Link } from 'react-router-dom';
+
 import { Soknad } from '../types/types';
 import { logger } from '../utils/logger';
 import { getUrlTilSoknad } from '../utils/url-utils';

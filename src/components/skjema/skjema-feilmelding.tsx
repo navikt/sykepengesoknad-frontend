@@ -1,5 +1,5 @@
-import React from 'react';
 import { Normaltekst } from 'nav-frontend-typografi';
+import React from 'react';
 
 interface FeilmeldingProps {
     touched: boolean;

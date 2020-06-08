@@ -1,4 +1,5 @@
 import { useCallback, useMemo, useState } from 'react';
+
 import { FetchState, FetchStatus } from './utils';
 
 export interface Fetch<D = any, FP = any> extends FetchState<D> {

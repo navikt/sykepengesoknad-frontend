@@ -1,12 +1,13 @@
-import React, { MouseEvent, useEffect, useRef, useState } from 'react';
+import Alertstripe from 'nav-frontend-alertstriper';
 import { Fareknapp, Knapp } from 'nav-frontend-knapper';
 import { Normaltekst } from 'nav-frontend-typografi';
+import React, { MouseEvent, useEffect, useRef, useState } from 'react';
 import { useHistory, useParams } from 'react-router-dom';
+
 import { useAppStore } from '../../../data/stores/app-store';
-import Vis from '../../vis';
-import Alertstripe from 'nav-frontend-alertstriper';
-import { tekst } from '../../../utils/tekster';
 import { RSSoknadstype } from '../../../types/rs-types/rs-soknadstype';
+import { tekst } from '../../../utils/tekster';
+import Vis from '../../vis';
 import { avbrytSoknad } from './avbryt-soknad';
 
 type Event = MouseEvent<HTMLAnchorElement | HTMLButtonElement>;

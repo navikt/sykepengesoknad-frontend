@@ -1,6 +1,7 @@
-import React from 'react';
-import { Element } from 'nav-frontend-typografi';
 import parser from 'html-react-parser';
+import { Element } from 'nav-frontend-typografi';
+import React from 'react';
+
 import { OppsummeringProps } from '../oppsummering';
 
 const UndertekstSum = ({ sporsmal }: OppsummeringProps) => {

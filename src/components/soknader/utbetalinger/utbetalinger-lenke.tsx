@@ -1,8 +1,9 @@
-import React, { useState } from 'react';
 import { Systemtittel } from 'nav-frontend-typografi';
-import utbetalingIkon from './utbetalinger.svg';
-import utbetalingHover from './utbetalinger--hover.svg';
+import React, { useState } from 'react';
+
 import { tekst } from '../../../utils/tekster';
+import utbetalingHover from './utbetalinger--hover.svg';
+import utbetalingIkon from './utbetalinger.svg';
 
 const UtbetalingerLenke = () => {
     const [ ikon, setIkon ] = useState(utbetalingIkon);

@@ -1,7 +1,7 @@
 import { TagTyper } from '../../types/enums';
 import { RSSvartype } from '../../types/rs-types/rs-svartype';
-import { hentGeneriskFeilmelding } from './sporsmal-utils';
 import { tekst } from '../../utils/tekster';
+import { hentGeneriskFeilmelding } from './sporsmal-utils';
 
 test('Alle tags har global feilmelding', () => {
     let tags = Object.values(TagTyper);

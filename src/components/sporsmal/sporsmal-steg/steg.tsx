@@ -1,11 +1,12 @@
-import React from 'react';
 import cls from 'classnames';
-import { useParams, useHistory } from 'react-router';
-import Vis from '../../vis';
-import { pathUtenSteg } from '../sporsmal-utils';
+import React from 'react';
+import { useHistory, useParams } from 'react-router';
+
+import { useAppStore } from '../../../data/stores/app-store';
 import { SEPARATOR } from '../../../utils/constants';
 import { useAmplitudeInstance } from '../../amplitude/amplitude';
-import { useAppStore } from '../../../data/stores/app-store';
+import Vis from '../../vis';
+import { pathUtenSteg } from '../sporsmal-utils';
 
 const innerCls = (aktiv: boolean, ferdig: boolean, disabled: boolean) =>
     cls('stegindikator__steg-inner', {

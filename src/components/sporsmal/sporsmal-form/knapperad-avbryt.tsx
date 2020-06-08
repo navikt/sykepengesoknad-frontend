@@ -1,6 +1,7 @@
-import React, { MouseEvent } from 'react';
 import { Fareknapp } from 'nav-frontend-knapper';
+import React, { MouseEvent } from 'react';
 import { useHistory } from 'react-router-dom';
+
 import { useAppStore } from '../../../data/stores/app-store';
 import { tekst } from '../../../utils/tekster';
 import { avbrytSoknad } from './avbryt-soknad';

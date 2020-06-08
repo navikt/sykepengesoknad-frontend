@@ -1,8 +1,8 @@
-import { RSSoknadstype } from './rs-soknadstype';
-import { RSSoknadstatus } from './rs-soknadstatus';
-import { RSSporsmal, sporsmalToRS } from './rs-sporsmal';
 import { Arbeidsgiver, Soknad } from '../types';
 import { RSSoknadsperiode } from './rs-soknadsperiode';
+import { RSSoknadstatus } from './rs-soknadstatus';
+import { RSSoknadstype } from './rs-soknadstype';
+import { RSSporsmal, sporsmalToRS } from './rs-sporsmal';
 
 export interface RSSoknad {
     id: string;

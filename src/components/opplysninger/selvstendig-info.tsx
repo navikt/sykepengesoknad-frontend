@@ -1,5 +1,6 @@
-import React from 'react';
 import { EtikettLiten, Normaltekst } from 'nav-frontend-typografi';
+import React from 'react';
+
 import { useAppStore } from '../../data/stores/app-store';
 import { RSSoknadstype } from '../../types/rs-types/rs-soknadstype';
 import { tekst } from '../../utils/tekster';

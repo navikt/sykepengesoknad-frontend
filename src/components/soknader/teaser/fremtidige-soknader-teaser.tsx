@@ -1,21 +1,21 @@
 import dayjs from 'dayjs';
-import React, { useState } from 'react';
-import { RSSoknadstype } from '../../../types/rs-types/rs-soknadstype';
-import { InngangsHeader, InngangsIkon } from '../inngang/inngangspanel';
-import Vis from '../../vis';
-import { getLedetekst, tekst } from '../../../utils/tekster';
-import { tilLesbarDatoMedArstall, tilLesbarPeriodeMedArstall } from '../../../utils/dato-utils';
+import Alertstripe from 'nav-frontend-alertstriper';
+import ModalWrapper from 'nav-frontend-modal';
 import { Normaltekst } from 'nav-frontend-typografi';
+import React, { useState } from 'react';
+
+import { RSSoknadstype } from '../../../types/rs-types/rs-soknadstype';
+import { tilLesbarDatoMedArstall, tilLesbarPeriodeMedArstall } from '../../../utils/dato-utils';
+import { getLedetekst, tekst } from '../../../utils/tekster';
 import { useAmplitudeInstance } from '../../amplitude/amplitude';
+import Vis from '../../vis';
+import { InngangsHeader, InngangsIkon } from '../inngang/inngangspanel';
 import {
     finnArbeidsgivernavn,
     hentIkon,
     hentIkonHover,
     hentTeaserStatustekst,
-    SykepengesoknadTeaserProps
-} from './teaser-util';
-import ModalWrapper from 'nav-frontend-modal';
-import Alertstripe from 'nav-frontend-alertstriper';
+    SykepengesoknadTeaserProps } from './teaser-util';
 
 const FremtidigeSoknaderTeaser = ({ soknad }: SykepengesoknadTeaserProps) => {
     const { logEvent } = useAmplitudeInstance();

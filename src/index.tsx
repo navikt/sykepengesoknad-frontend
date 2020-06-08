@@ -1,10 +1,12 @@
+import 'dayjs/locale/nb';
+
+import dayjs from 'dayjs';
 import React from 'react';
 import ReactDOM from 'react-dom';
-import env from './utils/environment';
-import App from './app';
-import dayjs from 'dayjs';
-import 'dayjs/locale/nb';
 import { BrowserRouter } from 'react-router-dom';
+
+import App from './app';
+import env from './utils/environment';
 
 dayjs.locale('nb');
 

@@ -1,16 +1,18 @@
+import './soknader.less';
+
 import React, { useEffect } from 'react';
-import { Brodsmule, Soknad } from '../../types/types';
+
+import Banner from '../../components/banner/banner';
+import Brodsmuler from '../../components/brodsmuler/brodsmuler';
 import Teasere from '../../components/soknader/teaser/teasere';
 import UtbetalingerLenke from '../../components/soknader/utbetalinger/utbetalinger-lenke';
-import { sorterEtterOpprettetDato, sorterEtterPerioder } from '../../utils/sorter-soknader';
 import Vis from '../../components/vis';
 import { useAppStore } from '../../data/stores/app-store';
 import { RSSoknadstatus } from '../../types/rs-types/rs-soknadstatus';
-import Brodsmuler from '../../components/brodsmuler/brodsmuler';
-import { setBodyClass } from '../../utils/utils';
+import { Brodsmule, Soknad } from '../../types/types';
+import { sorterEtterOpprettetDato, sorterEtterPerioder } from '../../utils/sorter-soknader';
 import { tekst } from '../../utils/tekster';
-import Banner from '../../components/banner/banner';
-import './soknader.less';
+import { setBodyClass } from '../../utils/utils';
 
 export const filtrerOgSorterNyeSoknader = (soknader: Soknad[]) => {
     return soknader.filter(soknad =>

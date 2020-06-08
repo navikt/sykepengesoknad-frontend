@@ -1,7 +1,7 @@
-import { Sporsmal } from '../../types/types';
-import { RSSvartype } from '../../types/rs-types/rs-svartype';
-import { RSSvarliste } from '../../types/rs-types/rs-svarliste';
 import { SvarEnums } from '../../types/enums';
+import { RSSvarliste } from '../../types/rs-types/rs-svarliste';
+import { RSSvartype } from '../../types/rs-types/rs-svartype';
+import { Sporsmal } from '../../types/types';
 import { empty } from '../../utils/constants';
 import { fraBackendTilDate } from '../../utils/dato-utils';
 

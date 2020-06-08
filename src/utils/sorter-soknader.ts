@@ -1,8 +1,9 @@
 import dayjs from 'dayjs';
-import { Soknad, Sporsmal } from '../types/types';
+
 import { TagTyper } from '../types/enums';
-import { RSSoknadstype } from '../types/rs-types/rs-soknadstype';
 import { RSSoknadstatus } from '../types/rs-types/rs-soknadstatus';
+import { RSSoknadstype } from '../types/rs-types/rs-soknadstype';
+import { Soknad, Sporsmal } from '../types/types';
 import { senesteTom } from './periode-utils';
 
 const getTomFraSoknad = (soknad: Soknad) => {

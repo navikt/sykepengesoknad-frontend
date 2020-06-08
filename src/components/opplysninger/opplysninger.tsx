@@ -1,16 +1,18 @@
+import './opplysninger.less';
+
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
-import SykmeldingPerioder from './sykmelding-perioder';
-import ArbeidsgiverInfo from './arbeidsgiver-info';
-import SykmeldingDato from './sykmelding-dato';
-import SelvstendigInfo from './selvstendig-info';
+
 import { useAppStore } from '../../data/stores/app-store';
 import { RSSoknadstatus } from '../../types/rs-types/rs-soknadstatus';
-import plaster from './plaster.svg';
-import plasterHover from './plaster-hover.svg';
-import Utvidbar from '../utvidbar/utvidbar';
 import { tekst } from '../../utils/tekster';
-import './opplysninger.less';
+import Utvidbar from '../utvidbar/utvidbar';
+import ArbeidsgiverInfo from './arbeidsgiver-info';
+import plasterHover from './plaster-hover.svg';
+import plaster from './plaster.svg';
+import SelvstendigInfo from './selvstendig-info';
+import SykmeldingDato from './sykmelding-dato';
+import SykmeldingPerioder from './sykmelding-perioder';
 
 interface OpplysningerProps {
     ekspandert: boolean;
