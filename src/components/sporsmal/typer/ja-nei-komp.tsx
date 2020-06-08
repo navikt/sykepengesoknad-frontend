@@ -14,8 +14,9 @@ import { AvgittAvTyper, SvarEnums, TagTyper } from '../../../types/enums';
 import UndersporsmalListe from '../undersporsmal/undersporsmal-liste';
 import { RSSoknadstype } from '../../../types/rs-types/rs-soknadstype';
 import { hentFeilmelding, sporsmalIdListe } from '../sporsmal-utils';
-import { tekst } from '../../../utils/tekster';
+import { getLedetekst, tekst } from '../../../utils/tekster';
 import parser from 'html-react-parser';
+import { utlandssoknadUrl } from '../../../utils/url-utils';
 
 const jaNeiValg = [ {
     value: 'JA',
@@ -38,7 +39,7 @@ const JaNeiInput = ({ sporsmal }: SpmProps) => {
             setValue(sporsmal.id, hentSvar(sporsmal));
         }
         // eslint-disable-next-line
-    }, [ sporsmal.id ]);
+    }, [sporsmal.id]);
 
     const visAvgittAvBjorn = () => {
         const undersporsmal = sporsmal.undersporsmal.find(uspm => uspm.tag === TagTyper.EGENMELDINGER_NAR);
@@ -88,7 +89,8 @@ const JaNeiInput = ({ sporsmal }: SpmProps) => {
                         {jaNeiValg.map((valg, idx) => {
                             const OK = getValues()[sporsmal.id] === valg.value;
                             return (
-                                <label className={'inputPanel radioPanel' + (OK ? ' inputPanel--checked' : '')} key={idx}>
+                                <label className={'inputPanel radioPanel' + (OK ? ' inputPanel--checked' : '')}
+                                    key={idx}>
                                     <input type='radio'
                                         name={sporsmal.id}
                                         id={sporsmal.id + '_' + idx}
@@ -108,11 +110,14 @@ const JaNeiInput = ({ sporsmal }: SpmProps) => {
                         })}
                     </div>
                 </fieldset>
-                <Vis hvis={sporsmal.tag && sporsmal.tag === TagTyper.UTLANDSOPPHOLD_SOKT_SYKEPENGER && getValues()[sporsmal.id]}>
+                <Vis
+                    hvis={sporsmal.tag && sporsmal.tag === TagTyper.UTLANDSOPPHOLD_SOKT_SYKEPENGER && getValues()[sporsmal.id]}>
                     {(getValues()[sporsmal.id] === SvarEnums.JA)
-                        ? <Normaltekst className={'utland_infotekst'}> {parser(tekst('soknad.infotekst.utlandsopphold_sokt_sykepenger.ja'))} </Normaltekst>
+                        ? <Normaltekst
+                            className={'utland_infotekst'}> {parser(getLedetekst(tekst('soknad.infotekst.utlandsopphold_sokt_sykepenger.ja'), { '%URL%': utlandssoknadUrl }))} </Normaltekst>
                         : ((getValues()[sporsmal.id] === SvarEnums.NEI)
-                            ? <Normaltekst tag='div' className={'utland_infotekst'}> {parser(tekst('soknad.infotekst.utlandsopphold_sokt_sykepenger.nei'))} </Normaltekst>
+                            ? <Normaltekst tag='div'
+                                className={'utland_infotekst'}> {parser(getLedetekst(tekst('soknad.infotekst.utlandsopphold_sokt_sykepenger.nei'), { '%URL%': utlandssoknadUrl }))} </Normaltekst>
                             : <></>)}
 
                 </Vis>
