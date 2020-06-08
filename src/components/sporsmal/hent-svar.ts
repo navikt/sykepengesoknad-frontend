@@ -53,6 +53,10 @@ export const hentPeriode = (sporsmal: Sporsmal, index: number) => {
     return [ fraBackendTilDate(datoer.fom), fraBackendTilDate(datoer.tom) ]
 }
 
+export const hentPeriodeListe = ( sporsmal: Sporsmal ) => {
+    return hentPerioder(sporsmal).map(i => hentPeriode(sporsmal, i))
+};
+
 export const hentFormState = (sporsmal: Sporsmal) => {
     return hentSvarliste(sporsmal)
 }

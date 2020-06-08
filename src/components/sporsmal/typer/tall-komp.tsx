@@ -2,6 +2,7 @@ import { Element, Normaltekst } from 'nav-frontend-typografi'
 import React, { useEffect, useRef, useState } from 'react'
 import { useFormContext } from 'react-hook-form'
 
+import validerArbeidsgrad from '../../../utils/sporsmal/valider-arbeidsgrad'
 import { getLedetekst, tekst } from '../../../utils/tekster'
 import Vis from '../../vis'
 import { hentSvar } from '../hent-svar'
@@ -14,17 +15,20 @@ const TallInput = ({ sporsmal }: SpmProps) => {
     const [ lokal, setLokal ] = useState<string>(hentSvar(sporsmal))
     const { register, setValue, errors } = useFormContext()
     const undersporsmal = useRef<HTMLDivElement>(null)
+    const [ kalkulerGrad ] = validerArbeidsgrad(sporsmal)
 
     const onChange = (e: any) => {
         const value = e.target.value
         setValue(sporsmal.id, value)
         setLokal(value)
+        // eslint-disable-next-line
+        console.log(kalkulerGrad(sporsmal))
     }
 
     useEffect(() => {
         setValue(sporsmal.id, hentSvar(sporsmal))
         // eslint-disable-next-line
-    }, []);
+    }, [])
 
     return (
         <>
