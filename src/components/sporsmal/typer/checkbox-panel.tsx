@@ -1,11 +1,12 @@
+import { Normaltekst } from 'nav-frontend-typografi';
 import React, { useEffect, useRef } from 'react';
 import { useFormContext } from 'react-hook-form';
-import { Normaltekst } from 'nav-frontend-typografi';
+
+import { TagTyper } from '../../../types/enums';
 import Vis from '../../vis';
 import { hentSvar } from '../hent-svar';
-import { hentFeilmelding } from '../sporsmal-utils';
 import { SpmProps } from '../sporsmal-form/sporsmal-form';
-import { TagTyper } from '../../../types/enums';
+import { hentFeilmelding } from '../sporsmal-utils';
 
 const CheckboxInput = ({ sporsmal }: SpmProps) => {
     const { register, setValue, errors, watch } = useFormContext();

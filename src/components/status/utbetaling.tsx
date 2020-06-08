@@ -1,6 +1,7 @@
-import React from 'react';
 import parser from 'html-react-parser';
 import { EtikettLiten, Normaltekst } from 'nav-frontend-typografi';
+import React from 'react';
+
 import { tekst } from '../../utils/tekster';
 
 const Utbetaling = () => {

@@ -1,14 +1,16 @@
-import useForceUpdate from 'use-force-update';
+import './flatpickr.less';
+
 import { Element } from 'nav-frontend-typografi';
 import React, { useEffect, useRef, useState } from 'react';
-import Vis from '../../vis';
-import PeriodeKomp from './periode-komp';
-import { hentPerioder } from '../hent-svar';
+import useForceUpdate from 'use-force-update';
+
 import { empty } from '../../../utils/constants';
+import { tekst } from '../../../utils/tekster';
+import Vis from '../../vis';
+import { hentPerioder } from '../hent-svar';
 import { SpmProps } from '../sporsmal-form/sporsmal-form';
 import UndersporsmalListe from '../undersporsmal/undersporsmal-liste';
-import './flatpickr.less';
-import { tekst } from '../../../utils/tekster';
+import PeriodeKomp from './periode-komp';
 
 const Perioder = ({ sporsmal }: SpmProps) => {
     const [ lokal, setLokal ] = useState<number[]>([ 0 ]);

@@ -1,15 +1,16 @@
+import dayjs from 'dayjs';
+import { EtikettLiten, Normaltekst } from 'nav-frontend-typografi';
 import React from 'react';
-import { sorterPerioderEldsteFoerst } from '../../utils/sykmelding-utils';
+
+import { useAppStore } from '../../data/stores/app-store';
+import { RSSoknadstype } from '../../types/rs-types/rs-soknadstype';
 import { SykmeldingPeriode } from '../../types/types';
 import { getDuration } from '../../utils/dato-utils';
-import { EtikettLiten, Normaltekst } from 'nav-frontend-typografi';
-import dayjs from 'dayjs';
-import { useAppStore } from '../../data/stores/app-store';
+import { erOppdelt } from '../../utils/periode-utils';
+import { sorterPerioderEldsteFoerst } from '../../utils/sykmelding-utils';
+import { tekst } from '../../utils/tekster';
 import Bjorn from '../sporsmal/bjorn/bjorn';
 import Vis from '../vis';
-import { erOppdelt } from '../../utils/periode-utils';
-import { RSSoknadstype } from '../../types/rs-types/rs-soknadstype';
-import { tekst } from '../../utils/tekster';
 
 const SykmeldingPerioder = () => {
     const { valgtSoknad, valgtSykmelding } = useAppStore();

@@ -1,7 +1,8 @@
 import React, { useEffect, useRef, useState } from 'react';
-import Vis from '../vis';
-import { erSynligIViewport } from '../../utils/browser-utils';
+
 import { Sporsmal } from '../../types/types';
+import { erSynligIViewport } from '../../utils/browser-utils';
+import Vis from '../vis';
 
 
 interface SporsmalMedTilleggProps {

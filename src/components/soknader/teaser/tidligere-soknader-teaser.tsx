@@ -1,13 +1,14 @@
 import dayjs from 'dayjs';
-import React from 'react';
-import { RSSoknadstype } from '../../../types/rs-types/rs-soknadstype';
-import { InngangsHeader, InngangsIkon, Inngangspanel } from '../inngang/inngangspanel';
-import Vis from '../../vis';
-import { getLedetekst, tekst } from '../../../utils/tekster';
-import { tilLesbarPeriodeMedArstall } from '../../../utils/dato-utils';
-import { Normaltekst } from 'nav-frontend-typografi';
 import { HoyreChevron } from 'nav-frontend-chevron';
+import { Normaltekst } from 'nav-frontend-typografi';
+import React from 'react';
+
+import { RSSoknadstype } from '../../../types/rs-types/rs-soknadstype';
+import { tilLesbarPeriodeMedArstall } from '../../../utils/dato-utils';
+import { getLedetekst, tekst } from '../../../utils/tekster';
 import { useAmplitudeInstance } from '../../amplitude/amplitude';
+import Vis from '../../vis';
+import { InngangsHeader, InngangsIkon, Inngangspanel } from '../inngang/inngangspanel';
 import {
     beregnUndertekst,
     hentIkon,

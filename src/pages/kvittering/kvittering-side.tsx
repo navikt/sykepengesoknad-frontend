@@ -1,18 +1,20 @@
-import React, { useEffect, useState } from 'react';
-import Banner from '../../components/banner/banner';
+import './kvittering.less';
+
 import { VenstreChevron } from 'nav-frontend-chevron';
+import { Normaltekst } from 'nav-frontend-typografi';
+import React, { useEffect, useState } from 'react';
+import { Link } from 'react-router-dom';
+
+import Banner from '../../components/banner/banner';
+import Brodsmuler from '../../components/brodsmuler/brodsmuler';
+import Kvittering from '../../components/kvittering/kvittering';
+import Vis from '../../components/vis';
+import { useAppStore } from '../../data/stores/app-store';
+import { RSSoknadstatus } from '../../types/rs-types/rs-soknadstatus';
 import { Brodsmule } from '../../types/types';
 import { SEPARATOR } from '../../utils/constants';
-import { setBodyClass } from '../../utils/utils';
-import { useAppStore } from '../../data/stores/app-store';
-import Vis from '../../components/vis';
-import { Normaltekst } from 'nav-frontend-typografi';
-import { Link } from 'react-router-dom';
 import { tekst } from '../../utils/tekster';
-import Kvittering from '../../components/kvittering/kvittering';
-import { RSSoknadstatus } from '../../types/rs-types/rs-soknadstatus';
-import Brodsmuler from '../../components/brodsmuler/brodsmuler';
-import './kvittering.less';
+import { setBodyClass } from '../../utils/utils';
 
 const brodsmuler: Brodsmule[] = [ {
     tittel: tekst('soknader.sidetittel'),

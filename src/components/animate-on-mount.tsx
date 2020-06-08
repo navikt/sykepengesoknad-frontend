@@ -1,6 +1,7 @@
 import React, { useEffect, useRef, useState } from 'react';
-import Vis from './vis';
+
 import { useAppStore } from '../data/stores/app-store';
+import Vis from './vis';
 
 interface AnimateOnMountProps {
     mounted: boolean;

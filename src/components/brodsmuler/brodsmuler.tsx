@@ -1,11 +1,13 @@
-import { Link } from 'react-router-dom';
-import React, { useState } from 'react';
-import Lenke from 'nav-frontend-lenker';
-import { Brodsmule } from '../../types/types';
-import personIkon from './person.svg';
-import { Normaltekst } from 'nav-frontend-typografi';
-import env from '../../utils/environment';
 import './brodsmuler.less';
+
+import Lenke from 'nav-frontend-lenker';
+import { Normaltekst } from 'nav-frontend-typografi';
+import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
+
+import { Brodsmule } from '../../types/types';
+import env from '../../utils/environment';
+import personIkon from './person.svg';
 
 const BrodsmuleBit = ({ sti, tittel, sisteSmule, erKlikkbar }: Brodsmule) => {
     const erEkstern = sti && sti.includes(process.env.REACT_APP_SYKEFRAVAER_CONTEXT_ROOT!);

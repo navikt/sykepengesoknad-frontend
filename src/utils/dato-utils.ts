@@ -1,5 +1,6 @@
-import { Sykmelding } from '../types/types';
 import dayjs from 'dayjs';
+
+import { Sykmelding } from '../types/types';
 
 export const fraInputdatoTilJSDato = (inputDato: any) => {
     const datoSplit = inputDato.split('.');

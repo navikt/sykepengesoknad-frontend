@@ -1,15 +1,17 @@
-import React from 'react';
-import parser from 'html-react-parser';
-import { Normaltekst } from 'nav-frontend-typografi';
-import { useParams } from 'react-router-dom';
-import Steg from './steg';
-import { Sporsmal } from '../../../types/types';
-import { TagTyper } from '../../../types/enums';
-import { hentNokkel } from '../sporsmal-utils';
-import { useAppStore } from '../../../data/stores/app-store';
 import 'nav-frontend-stegindikator-style';
 import './sporsmal-steg.less';
+
+import parser from 'html-react-parser';
+import { Normaltekst } from 'nav-frontend-typografi';
+import React from 'react';
+import { useParams } from 'react-router-dom';
+
+import { useAppStore } from '../../../data/stores/app-store';
+import { TagTyper } from '../../../types/enums';
+import { Sporsmal } from '../../../types/types';
 import { tekst } from '../../../utils/tekster';
+import { hentNokkel } from '../sporsmal-utils';
+import Steg from './steg';
 
 interface FremdriftsbarProps {
     antallSteg: number;

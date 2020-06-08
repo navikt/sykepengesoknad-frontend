@@ -1,9 +1,10 @@
-import React from 'react';
 import Hjelpetekst from 'nav-frontend-hjelpetekst';
+import React from 'react';
+
 import { TagTyper } from '../../types/enums';
-import { fjernIndexFraTag } from './sporsmal-utils';
-import { SpmProps } from './sporsmal-form/sporsmal-form';
 import { tekst } from '../../utils/tekster';
+import { SpmProps } from './sporsmal-form/sporsmal-form';
+import { fjernIndexFraTag } from './sporsmal-utils';
 
 const SporsmalHjelpetekst = ({ sporsmal }: SpmProps) => {
 

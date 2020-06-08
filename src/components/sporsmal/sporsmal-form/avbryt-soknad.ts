@@ -1,11 +1,12 @@
-import { Soknad } from '../../../types/types';
-import React from 'react';
 import * as H from 'history';
-import env from '../../../utils/environment';
+import React from 'react';
+
 import { RSSoknadstatus } from '../../../types/rs-types/rs-soknadstatus';
+import { RSSoknadstype } from '../../../types/rs-types/rs-soknadstype';
+import { Soknad } from '../../../types/types';
+import env from '../../../utils/environment';
 import { logger } from '../../../utils/logger';
 import { tekst } from '../../../utils/tekster';
-import { RSSoknadstype } from '../../../types/rs-types/rs-soknadstype';
 
 interface AvbrytSoknadReq {
     valgtSoknad: Soknad;

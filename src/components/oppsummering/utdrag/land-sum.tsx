@@ -1,6 +1,7 @@
-import React from 'react';
-import { OppsummeringProps } from '../oppsummering';
 import { Element } from 'nav-frontend-typografi';
+import React from 'react';
+
+import { OppsummeringProps } from '../oppsummering';
 
 const LandSum = ({ sporsmal }: OppsummeringProps) => {
     const svar = sporsmal.svarliste.svar;

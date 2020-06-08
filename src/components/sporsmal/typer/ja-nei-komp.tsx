@@ -1,22 +1,23 @@
+import parser from 'html-react-parser';
+import { Element, Normaltekst } from 'nav-frontend-typografi';
 import React, { useEffect } from 'react';
 import { useFormContext } from 'react-hook-form';
-import { Element, Normaltekst } from 'nav-frontend-typografi';
+
+import { useAppStore } from '../../../data/stores/app-store';
+import { AvgittAvTyper, SvarEnums, TagTyper } from '../../../types/enums';
+import { RSSoknadstype } from '../../../types/rs-types/rs-soknadstype';
+import { getLedetekst, tekst } from '../../../utils/tekster';
+import { utlandssoknadUrl } from '../../../utils/url-utils';
+import AnimateOnMount from '../../animate-on-mount';
 import Vis from '../../vis';
 import Bjorn from '../bjorn/bjorn';
-import TagBjorn from '../bjorn/tag-bjorn';
 import SporsmalBjorn from '../bjorn/sporsmal-bjorn';
-import AnimateOnMount from '../../animate-on-mount';
+import TagBjorn from '../bjorn/tag-bjorn';
 import { hentFormState, hentSvar } from '../hent-svar';
 import { SpmProps } from '../sporsmal-form/sporsmal-form';
 import SporsmalHjelpetekst from '../sporsmal-hjelpetekst';
-import { useAppStore } from '../../../data/stores/app-store';
-import { AvgittAvTyper, SvarEnums, TagTyper } from '../../../types/enums';
-import UndersporsmalListe from '../undersporsmal/undersporsmal-liste';
-import { RSSoknadstype } from '../../../types/rs-types/rs-soknadstype';
 import { hentFeilmelding, sporsmalIdListe } from '../sporsmal-utils';
-import { getLedetekst, tekst } from '../../../utils/tekster';
-import parser from 'html-react-parser';
-import { utlandssoknadUrl } from '../../../utils/url-utils';
+import UndersporsmalListe from '../undersporsmal/undersporsmal-liste';
 
 const jaNeiValg = [ {
     value: 'JA',

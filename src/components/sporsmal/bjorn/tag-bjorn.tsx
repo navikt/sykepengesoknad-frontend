@@ -1,11 +1,12 @@
 import React from 'react';
-import { RSSoknadstype } from '../../../types/rs-types/rs-soknadstype';
-import { TagTyper } from '../../../types/enums';
-import Bjorn from './bjorn';
-import { fjernIndexFraTag } from '../sporsmal-utils';
+
 import { useAppStore } from '../../../data/stores/app-store';
-import Vis from '../../vis';
+import { TagTyper } from '../../../types/enums';
+import { RSSoknadstype } from '../../../types/rs-types/rs-soknadstype';
 import { Sporsmal } from '../../../types/types';
+import Vis from '../../vis';
+import { fjernIndexFraTag } from '../sporsmal-utils';
+import Bjorn from './bjorn';
 
 const tagsMedBjorn = {
     soknadstype: RSSoknadstype.ARBEIDSTAKERE,

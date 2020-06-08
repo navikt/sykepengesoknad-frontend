@@ -1,11 +1,13 @@
-import React from 'react';
+import './bjorn.less';
+
 import cls from 'classnames';
 import parser from 'html-react-parser';
 import { Normaltekst } from 'nav-frontend-typografi';
-import BjornBildeStor from './bjorn-bilde-stor';
-import BjornBildeLiten from './bjorn-bilde-liten';
-import './bjorn.less';
+import React from 'react';
+
 import { tekst } from '../../../utils/tekster';
+import BjornBildeLiten from './bjorn-bilde-liten';
+import BjornBildeStor from './bjorn-bilde-stor';
 
 interface BjornProps {
     bildeAlt?: string;

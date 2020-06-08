@@ -1,6 +1,8 @@
-import dayjs from 'dayjs';
-import { getLedetekst, tekst } from '../../utils/tekster';
 import 'dayjs/locale/nb';
+
+import dayjs from 'dayjs';
+
+import { getLedetekst, tekst } from '../../utils/tekster';
 
 it('Returns text from bundle', () => {
     const text = tekst('sykepengesoknad.sidetittel.periode-2');

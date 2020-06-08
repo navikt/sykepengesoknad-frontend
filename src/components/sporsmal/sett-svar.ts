@@ -1,7 +1,7 @@
-import { Sporsmal } from '../../types/types';
 import { SvarEnums } from '../../types/enums';
-import { empty } from '../../utils/constants';
 import { RSSvartype } from '../../types/rs-types/rs-svartype';
+import { Sporsmal } from '../../types/types';
+import { empty } from '../../utils/constants';
 import { tilBackendDato } from '../../utils/dato-utils';
 
 const hentVerdier = (sporsmal: Sporsmal, verdier: Record<string, any>) => {

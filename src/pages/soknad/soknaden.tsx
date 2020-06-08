@@ -1,26 +1,28 @@
-import React, { useEffect } from 'react';
+import './soknaden.less';
+
+import AlertStripe from 'nav-frontend-alertstriper';
 import { VenstreChevron } from 'nav-frontend-chevron';
-import { Link, useParams } from 'react-router-dom';
 import { Normaltekst, Systemtittel } from 'nav-frontend-typografi';
-import { Brodsmule } from '../../types/types';
-import { RSSoknadstatus } from '../../types/rs-types/rs-soknadstatus';
+import React, { useEffect } from 'react';
+import { Link, useParams } from 'react-router-dom';
+
 import Banner from '../../components/banner/banner';
-import { useAppStore } from '../../data/stores/app-store';
+import Brodsmuler from '../../components/brodsmuler/brodsmuler';
 import { HotjarTrigger } from '../../components/hotjar-trigger';
-import SoknadIntro from '../../components/soknad-intro/soknad-intro';
+import Kvittering from '../../components/kvittering/kvittering';
 import Opplysninger from '../../components/opplysninger/opplysninger';
-import { setBodyClass } from '../../utils/utils';
-import Vis from '../../components/vis';
+import SoknadIntro from '../../components/soknad-intro/soknad-intro';
 import SporsmalForm from '../../components/sporsmal/sporsmal-form/sporsmal-form';
 import SporsmalSteg from '../../components/sporsmal/sporsmal-steg/sporsmal-steg';
 import { hentNokkel } from '../../components/sporsmal/sporsmal-utils';
-import { SEPARATOR } from '../../utils/constants';
-import AlertStripe from 'nav-frontend-alertstriper';
-import { tekst } from '../../utils/tekster';
-import Kvittering from '../../components/kvittering/kvittering';
-import Brodsmuler from '../../components/brodsmuler/brodsmuler';
+import Vis from '../../components/vis';
+import { useAppStore } from '../../data/stores/app-store';
+import { RSSoknadstatus } from '../../types/rs-types/rs-soknadstatus';
 import { RSSoknadstype } from '../../types/rs-types/rs-soknadstype';
-import './soknaden.less';
+import { Brodsmule } from '../../types/types';
+import { SEPARATOR } from '../../utils/constants';
+import { tekst } from '../../utils/tekster';
+import { setBodyClass } from '../../utils/utils';
 
 const brodsmuler: Brodsmule[] = [ {
     tittel: tekst('soknader.sidetittel'),

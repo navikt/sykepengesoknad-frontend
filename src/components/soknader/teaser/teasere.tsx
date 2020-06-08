@@ -1,10 +1,11 @@
-import React from 'react';
-import { Soknad } from '../../../types/types';
 import { Element } from 'nav-frontend-typografi';
-import Teaser from './teaser';
-import FremtidigeSoknaderTeaser from './fremtidige-soknader-teaser';
-import Vis from '../../vis';
+import React from 'react';
+
 import { RSSoknadstatus } from '../../../types/rs-types/rs-soknadstatus';
+import { Soknad } from '../../../types/types';
+import Vis from '../../vis';
+import FremtidigeSoknaderTeaser from './fremtidige-soknader-teaser';
+import Teaser from './teaser';
 import TidligereSoknaderTeaser from './tidligere-soknader-teaser';
 
 interface SoknaderTeasereProps {

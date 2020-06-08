@@ -1,12 +1,14 @@
-import React, { useEffect, useRef } from 'react';
-import Vis from '../../vis';
-import { erSynligIViewport } from '../../../utils/browser-utils';
-import { Undertittel } from 'nav-frontend-typografi';
-import { SpmProps } from '../../sporsmal/sporsmal-form/sporsmal-form';
-import { flattenSporsmal } from '../../../utils/soknad-utils';
-import { Sporsmal } from '../../../types/types';
 import './feil-oppsummering.less';
+
+import { Undertittel } from 'nav-frontend-typografi';
+import React, { useEffect, useRef } from 'react';
+
+import { Sporsmal } from '../../../types/types';
+import { erSynligIViewport } from '../../../utils/browser-utils';
+import { flattenSporsmal } from '../../../utils/soknad-utils';
 import { useAmplitudeInstance } from '../../amplitude/amplitude';
+import { SpmProps } from '../../sporsmal/sporsmal-form/sporsmal-form';
+import Vis from '../../vis';
 
 interface FeiloppsummeringProps {
     settFokus?: boolean;

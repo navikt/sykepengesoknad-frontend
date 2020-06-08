@@ -1,12 +1,13 @@
-import React from 'react';
-import { OppsummeringProps } from '../oppsummering';
 import { Element } from 'nav-frontend-typografi';
-import Vis from '../../vis';
-import UndersporsmalSum from './undersporsmal-sum';
+import React from 'react';
+
 import { SvarEnums } from '../../../types/enums';
-import Avkrysset from './avkrysset';
-import { Sporsmal } from '../../../types/types';
 import { RSSvartype } from '../../../types/rs-types/rs-svartype';
+import { Sporsmal } from '../../../types/types';
+import Vis from '../../vis';
+import { OppsummeringProps } from '../oppsummering';
+import Avkrysset from './avkrysset';
+import UndersporsmalSum from './undersporsmal-sum';
 
 const RadioGruppe = ({ sporsmal }: OppsummeringProps) => {
     const besvartUndersporsmal: Sporsmal = sporsmal.undersporsmal.find((s) => {

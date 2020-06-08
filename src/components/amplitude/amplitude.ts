@@ -1,8 +1,9 @@
 import amplitude from 'amplitude-js';
-import env from '../../utils/environment';
-import { useEffect, useRef } from 'react';
 import constate from 'constate';
+import { useEffect, useRef } from 'react';
+
 import { useAppStore } from '../../data/stores/app-store';
+import env from '../../utils/environment';
 
 export const [ AmplitudeProvider, useAmplitudeInstance ] = constate(() => {
     const { unleash } = useAppStore();

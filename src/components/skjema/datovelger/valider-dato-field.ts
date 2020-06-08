@@ -1,5 +1,5 @@
-import validerPeriode from './valider-periode';
 import { erGyldigDato, erGyldigDatoformat } from '../../../utils/dato-utils';
+import validerPeriode from './valider-periode';
 
 const validerDatoField = (input: any, alternativer: any) => {
     if (!input) {

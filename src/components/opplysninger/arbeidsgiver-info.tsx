@@ -1,8 +1,9 @@
-import React from 'react';
 import { EtikettLiten, Normaltekst } from 'nav-frontend-typografi';
+import React from 'react';
+
 import { useAppStore } from '../../data/stores/app-store';
-import Vis from '../vis';
 import { tekst } from '../../utils/tekster';
+import Vis from '../vis';
 
 const ArbeidsgiverInfo = () => {
     const { valgtSykmelding } = useAppStore();

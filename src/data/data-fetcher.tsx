@@ -1,16 +1,17 @@
-import React, { useEffect } from 'react';
 import Spinner from 'nav-frontend-spinner';
-import useFetch from './rest/use-fetch';
+import React, { useEffect } from 'react';
+
+import IngenData from '../pages/feil/ingen-data';
+import { RSSoknad } from '../types/rs-types/rs-soknad';
 import { Soknad, Sykmelding } from '../types/types';
+import { UnleashToggles } from '../types/types';
+import { fixSykmeldingDatoer } from '../utils/dato-utils';
+import env from '../utils/environment';
+import { logger } from '../utils/logger';
+import { unleashKeys } from './mock/data/toggles';
+import useFetch from './rest/use-fetch';
 import { FetchState, hasAny401, hasAnyFailed, hasData, isAnyNotStartedOrPending, isNotStarted } from './rest/utils';
 import { useAppStore } from './stores/app-store';
-import { RSSoknad } from '../types/rs-types/rs-soknad';
-import { fixSykmeldingDatoer } from '../utils/dato-utils';
-import { unleashKeys } from './mock/data/toggles';
-import IngenData from '../pages/feil/ingen-data';
-import env from '../utils/environment';
-import { UnleashToggles } from '../types/types';
-import { logger } from '../utils/logger';
 
 export function DataFetcher(props: { children: any }) {
     const { setUnleash, setSoknader, setSykmeldinger } = useAppStore();

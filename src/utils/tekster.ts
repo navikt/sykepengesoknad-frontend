@@ -1,16 +1,16 @@
-import OpplysningerTekster from '../components/opplysninger/opplysninger-tekster';
-import KvitteringTekster from '../components/kvittering/kvittering-tekster';
-import SoknadIntroTekster from '../components/soknad-intro/soknad-intro-tekster';
-import SoknaderTekster from '../pages/soknader/soknader-tekster';
 import BannerTekster from '../components/banner/banner-tekster';
-import BjornTekster from '../components/sporsmal/bjorn/bjorn-tekster';
-import KnapperadTekster from '../components/sporsmal/sporsmal-form/knapperad-tekster';
-import SoknadenTekster from '../pages/soknad/soknaden-tekster';
-import SporsmalTekster from '../components/sporsmal/sporsmal-tekster';
+import KvitteringTekster from '../components/kvittering/kvittering-tekster';
+import OpplysningerTekster from '../components/opplysninger/opplysninger-tekster';
+import OppsummeringTekster from '../components/oppsummering/oppsummering-tekster';
+import SoknadIntroTekster from '../components/soknad-intro/soknad-intro-tekster';
 import TeaserTekster from '../components/soknader/teaser/teaser-tekster';
 import UtbetalingerTekster from '../components/soknader/utbetalinger/utbetalinger-tekster';
-import OppsummeringTekster from '../components/oppsummering/oppsummering-tekster';
+import BjornTekster from '../components/sporsmal/bjorn/bjorn-tekster';
+import KnapperadTekster from '../components/sporsmal/sporsmal-form/knapperad-tekster';
+import SporsmalTekster from '../components/sporsmal/sporsmal-tekster';
 import OpprettUtlandTekster from '../pages/opprett-utland/opprett-utland-tekster';
+import SoknadenTekster from '../pages/soknad/soknaden-tekster';
+import SoknaderTekster from '../pages/soknader/soknader-tekster';
 import { logger } from './logger';
 
 const tekster = {

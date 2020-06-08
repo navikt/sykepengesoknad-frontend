@@ -1,25 +1,27 @@
-import React, { useEffect } from 'react';
+import './kvittering.less';
+
 import Alertstripe from 'nav-frontend-alertstriper';
+import { Knapp } from 'nav-frontend-knapper';
+import React, { useEffect } from 'react';
+import { useHistory } from 'react-router';
+import { useParams } from 'react-router-dom';
+
+import useFetch from '../../data/rest/use-fetch';
+import { FetchState, hasData } from '../../data/rest/utils';
+import { useAppStore } from '../../data/stores/app-store';
+import { RSSoknad } from '../../types/rs-types/rs-soknad';
+import { RSSoknadstype } from '../../types/rs-types/rs-soknadstype';
+import { Soknad } from '../../types/types';
+import env from '../../utils/environment';
+import { logger } from '../../utils/logger';
+import { tekst } from '../../utils/tekster';
+import { getUrlTilSoknad } from '../../utils/url-utils';
 import Opplysninger from '../opplysninger/opplysninger';
 import Oppsummering from '../oppsummering/oppsummering';
-import { Knapp } from 'nav-frontend-knapper';
-import { tekst } from '../../utils/tekster';
 import Ettersending from '../status/ettersending';
 import Vis from '../vis';
-import env from '../../utils/environment';
-import { FetchState, hasData } from '../../data/rest/utils';
-import { RSSoknad } from '../../types/rs-types/rs-soknad';
-import { Soknad } from '../../types/types';
-import { getUrlTilSoknad } from '../../utils/url-utils';
-import { logger } from '../../utils/logger';
-import { useAppStore } from '../../data/stores/app-store';
-import useFetch from '../../data/rest/use-fetch';
-import { useHistory } from 'react-router';
-import KvitteringStatus from './kvittering-status';
 import KvitteringInfo from './kvittering-info';
-import './kvittering.less';
-import { RSSoknadstype } from '../../types/rs-types/rs-soknadstype';
-import { useParams } from 'react-router-dom';
+import KvitteringStatus from './kvittering-status';
 
 const Kvittering = () => {
     const { valgtSoknad, setValgtSoknad, soknader, setSoknader, sykmeldinger, setValgtSykmelding, feilmeldingTekst, setFeilmeldingTekst } = useAppStore();

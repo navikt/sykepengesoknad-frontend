@@ -1,8 +1,9 @@
 import React, { useEffect, useState } from 'react';
+import { useParams } from 'react-router';
+
 import { useAppStore } from '../../data/stores/app-store';
 import env from '../../utils/environment';
 import Vis from '../vis';
-import { useParams } from 'react-router';
 
 const SykSokLokalt = () => {
     const { valgtSoknad, valgtSykmelding } = useAppStore();

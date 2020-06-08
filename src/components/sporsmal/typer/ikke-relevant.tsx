@@ -1,7 +1,8 @@
-import React from 'react';
 import parser from 'html-react-parser';
-import { useFormContext } from 'react-hook-form';
 import { Element, Normaltekst } from 'nav-frontend-typografi';
+import React from 'react';
+import { useFormContext } from 'react-hook-form';
+
 import Vis from '../../vis';
 import { SpmProps } from '../sporsmal-form/sporsmal-form';
 

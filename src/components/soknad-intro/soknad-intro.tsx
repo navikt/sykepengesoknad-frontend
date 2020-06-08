@@ -1,10 +1,12 @@
-import React from 'react';
+import './soknad-intro.less';
+
+import parser from 'html-react-parser';
 import { Normaltekst } from 'nav-frontend-typografi';
 import Veilederpanel from 'nav-frontend-veilederpanel';
-import parser from 'html-react-parser';
-import ForsteSoknadSvg from './soknad-intro-svg';
+import React from 'react';
+
 import { tekst } from '../../utils/tekster';
-import './soknad-intro.less';
+import ForsteSoknadSvg from './soknad-intro-svg';
 
 const SoknadIntro = () => {
     return (

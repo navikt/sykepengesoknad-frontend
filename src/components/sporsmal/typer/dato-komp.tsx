@@ -1,14 +1,16 @@
-import Flatpickr from 'react-flatpickr';
-import React, { useEffect, useRef } from 'react';
+import './flatpickr.less';
+
 import { Norwegian } from 'flatpickr/dist/l10n/no.js'
-import { Controller, useFormContext } from 'react-hook-form';
 import { Element, Normaltekst } from 'nav-frontend-typografi';
+import React, { useEffect, useRef } from 'react';
+import Flatpickr from 'react-flatpickr';
+import { Controller, useFormContext } from 'react-hook-form';
+
 import Vis from '../../vis';
 import { hentSvar } from '../hent-svar';
-import { hentFeilmelding } from '../sporsmal-utils';
 import { SpmProps } from '../sporsmal-form/sporsmal-form';
+import { hentFeilmelding } from '../sporsmal-utils';
 import UndersporsmalListe from '../undersporsmal/undersporsmal-liste';
-import './flatpickr.less';
 
 const DatoInput = ({ sporsmal }: SpmProps) => {
     const { setValue, errors, watch } = useFormContext();

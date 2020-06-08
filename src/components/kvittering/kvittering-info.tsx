@@ -1,11 +1,12 @@
-import React from 'react';
-import Utvidbar from '../utvidbar/utvidbar';
-import plaster from '../opplysninger/plaster.svg';
-import plasterHover from '../opplysninger/plaster-hover.svg';
-import { tekst } from '../../utils/tekster';
-import { Normaltekst, Undertittel } from 'nav-frontend-typografi';
-import Lenke from 'nav-frontend-lenker';
 import { AlertStripeInfo } from 'nav-frontend-alertstriper';
+import Lenke from 'nav-frontend-lenker';
+import { Normaltekst, Undertittel } from 'nav-frontend-typografi';
+import React from 'react';
+
+import { tekst } from '../../utils/tekster';
+import plasterHover from '../opplysninger/plaster-hover.svg';
+import plaster from '../opplysninger/plaster.svg';
+import Utvidbar from '../utvidbar/utvidbar';
 
 const KvitteringInfo = () => {
     return (

@@ -1,13 +1,15 @@
-import React, { useEffect, useState } from 'react';
+import './beh.dager.less';
+
 import { Element, Normaltekst } from 'nav-frontend-typografi';
-import Vis from '../../vis';
-import { hentSvar } from '../hent-svar';
+import React, { useEffect, useState } from 'react';
+import { ErrorMessage, useFormContext } from 'react-hook-form';
+
+import { RSSvarliste } from '../../../types/rs-types/rs-svarliste';
 import { Sporsmal } from '../../../types/types';
 import { ukeDatoListe } from '../../../utils/dato-utils';
+import Vis from '../../vis';
+import { hentSvar } from '../hent-svar';
 import { SpmProps } from '../sporsmal-form/sporsmal-form';
-import { ErrorMessage, useFormContext } from 'react-hook-form';
-import { RSSvarliste } from '../../../types/rs-types/rs-svarliste';
-import './beh.dager.less';
 
 const BehDager = ({ sporsmal }: SpmProps) => {
     const { register, errors, setValue } = useFormContext();

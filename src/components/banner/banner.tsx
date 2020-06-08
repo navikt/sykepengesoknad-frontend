@@ -1,11 +1,13 @@
-import React from 'react';
-import { Systemtittel } from 'nav-frontend-typografi';
-import { RSSoknadstype } from '../../types/rs-types/rs-soknadstype';
-import { useAppStore } from '../../data/stores/app-store';
-import { useHistory } from 'react-router';
-import SykSokLokalt from '../brodsmuler/syk-sok-lokalt';
-import { tekst } from '../../utils/tekster';
 import './banner.less';
+
+import { Systemtittel } from 'nav-frontend-typografi';
+import React from 'react';
+import { useHistory } from 'react-router';
+
+import { useAppStore } from '../../data/stores/app-store';
+import { RSSoknadstype } from '../../types/rs-types/rs-soknadstype';
+import { tekst } from '../../utils/tekster';
+import SykSokLokalt from '../brodsmuler/syk-sok-lokalt';
 
 const Banner = () => {
     const { valgtSoknad } = useAppStore();

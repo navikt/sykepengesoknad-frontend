@@ -1,7 +1,8 @@
-import { Soknad, Sporsmal } from '../../../types/types';
 import { FieldValues } from 'react-hook-form';
-import { RSSoknadstype } from '../../../types/rs-types/rs-soknadstype';
+
 import { TagTyper } from '../../../types/enums';
+import { RSSoknadstype } from '../../../types/rs-types/rs-soknadstype';
+import { Soknad, Sporsmal } from '../../../types/types';
 import { hentSporsmal } from '../../../utils/soknad-utils';
 
 export default (soknad: Soknad, sporsmal: Sporsmal, formValues: FieldValues) => {

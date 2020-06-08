@@ -1,32 +1,34 @@
+import './sporsmal-form.less';
+
 import React, { useEffect, useState } from 'react';
 import { FormContext, useForm } from 'react-hook-form';
 import { useHistory, useParams } from 'react-router-dom';
-import Knapperad from './knapperad';
-import { Soknad, Sporsmal } from '../../../types/types';
-import SporsmalSwitch from '../sporsmal-switch';
-import { pathUtenSteg } from '../sporsmal-utils';
+
+import useFetch from '../../../data/rest/use-fetch';
+import { FetchState, hasData } from '../../../data/rest/utils';
 import { useAppStore } from '../../../data/stores/app-store';
+import { SvarTil, TagTyper } from '../../../types/enums';
+import { RSMottakerResponse } from '../../../types/rs-types/rest-response/rs-mottakerresponse';
+import { RSOppdaterSporsmalResponse } from '../../../types/rs-types/rest-response/rs-oppdatersporsmalresponse';
+import { RSMottaker } from '../../../types/rs-types/rs-mottaker';
+import { RSSoknadstatus } from '../../../types/rs-types/rs-soknadstatus';
+import { RSSoknadstype } from '../../../types/rs-types/rs-soknadstype';
+import { sporsmalToRS } from '../../../types/rs-types/rs-sporsmal';
+import { RSSvartype } from '../../../types/rs-types/rs-svartype';
+import { Soknad, Sporsmal } from '../../../types/types';
+import { SEPARATOR } from '../../../utils/constants';
+import env from '../../../utils/environment';
+import { logger } from '../../../utils/logger';
+import { useAmplitudeInstance } from '../../amplitude/amplitude';
+import Oppsummering from '../../oppsummering/oppsummering';
 import FeilOppsummering from '../../skjema/feiloppsummering/feil-oppsummering';
 import Vis from '../../vis';
-import { RSSvartype } from '../../../types/rs-types/rs-svartype';
-import CheckboxPanel from '../typer/checkbox-panel';
-import { SEPARATOR } from '../../../utils/constants';
-import { RSSoknadstatus } from '../../../types/rs-types/rs-soknadstatus';
-import { SvarTil, TagTyper } from '../../../types/enums';
-import Oppsummering from '../../oppsummering/oppsummering';
-import { settSvar } from '../sett-svar';
-import { useAmplitudeInstance } from '../../amplitude/amplitude';
-import env from '../../../utils/environment';
-import { FetchState, hasData } from '../../../data/rest/utils';
-import { RSMottakerResponse } from '../../../types/rs-types/rest-response/rs-mottakerresponse';
-import { RSMottaker } from '../../../types/rs-types/rs-mottaker';
-import useFetch from '../../../data/rest/use-fetch';
-import { sporsmalToRS } from '../../../types/rs-types/rs-sporsmal';
-import { RSOppdaterSporsmalResponse } from '../../../types/rs-types/rest-response/rs-oppdatersporsmalresponse';
 import { hentSvar } from '../hent-svar';
-import { logger } from '../../../utils/logger';
-import './sporsmal-form.less';
-import { RSSoknadstype } from '../../../types/rs-types/rs-soknadstype';
+import { settSvar } from '../sett-svar';
+import SporsmalSwitch from '../sporsmal-switch';
+import { pathUtenSteg } from '../sporsmal-utils';
+import CheckboxPanel from '../typer/checkbox-panel';
+import Knapperad from './knapperad';
 import skalViseKnapperad from './skal-vise-knapperad';
 
 export interface SpmProps {

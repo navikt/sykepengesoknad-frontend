@@ -1,22 +1,22 @@
 import dayjs from 'dayjs';
+import { HoyreChevron } from 'nav-frontend-chevron';
+import { Normaltekst } from 'nav-frontend-typografi';
 import React from 'react';
+
 import { RSSoknadstatus } from '../../../types/rs-types/rs-soknadstatus';
 import { RSSoknadstype } from '../../../types/rs-types/rs-soknadstype';
-import { InngangsHeader, InngangsIkon, Inngangspanel } from '../inngang/inngangspanel';
-import { getUrlTilSoknad } from '../../../utils/url-utils';
-import Vis from '../../vis';
-import { getLedetekst, tekst } from '../../../utils/tekster';
 import { tilLesbarPeriodeMedArstall } from '../../../utils/dato-utils';
-import { Normaltekst } from 'nav-frontend-typografi';
-import { HoyreChevron } from 'nav-frontend-chevron';
+import { getLedetekst, tekst } from '../../../utils/tekster';
+import { getUrlTilSoknad } from '../../../utils/url-utils';
 import { useAmplitudeInstance } from '../../amplitude/amplitude';
+import Vis from '../../vis';
+import { InngangsHeader, InngangsIkon, Inngangspanel } from '../inngang/inngangspanel';
 import {
     beregnUndertekst,
     hentIkon,
     hentIkonHover,
     hentTeaserStatustekst,
-    SykepengesoknadTeaserProps
-} from './teaser-util';
+    SykepengesoknadTeaserProps } from './teaser-util';
 
 const Teaser = ({ soknad }: SykepengesoknadTeaserProps) => {
     const { logEvent } = useAmplitudeInstance();

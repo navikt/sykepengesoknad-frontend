@@ -1,4 +1,5 @@
 import React from 'react';
+
 import { BjornBildeProps } from './bjorn-bilde-stor';
 
 const BjornBildeLiten = ({ alt }: BjornBildeProps) => {

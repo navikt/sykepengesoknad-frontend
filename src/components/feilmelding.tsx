@@ -1,5 +1,5 @@
-import React, { ReactNode } from 'react';
 import { Systemtittel } from 'nav-frontend-typografi';
+import React, { ReactNode } from 'react';
 
 interface FeilmeldingProps {
     tittel?: string;

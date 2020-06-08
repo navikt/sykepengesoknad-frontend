@@ -1,12 +1,13 @@
+import { Element, Normaltekst } from 'nav-frontend-typografi';
 import React, { useEffect } from 'react';
 import { useFormContext } from 'react-hook-form';
-import { Element, Normaltekst } from 'nav-frontend-typografi';
+
+import { RSSvartype } from '../../../types/rs-types/rs-svartype';
+import AnimateOnMount from '../../animate-on-mount';
 import Vis from '../../vis';
 import { hentSvar } from '../hent-svar';
-import AnimateOnMount from '../../animate-on-mount';
-import { hentFeilmelding } from '../sporsmal-utils';
 import { SpmProps } from '../sporsmal-form/sporsmal-form';
-import { RSSvartype } from '../../../types/rs-types/rs-svartype';
+import { hentFeilmelding } from '../sporsmal-utils';
 import UndersporsmalListe from '../undersporsmal/undersporsmal-liste';
 
 const RadioKomp = ({ sporsmal }: SpmProps) => {

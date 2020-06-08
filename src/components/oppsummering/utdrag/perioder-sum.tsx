@@ -1,10 +1,11 @@
-import React from 'react';
 import { Element, Normaltekst } from 'nav-frontend-typografi';
-import { OppsummeringProps } from '../oppsummering';
-import Vis from '../../vis';
+import React from 'react';
+
 import { empty } from '../../../utils/constants';
 import { tilLesbarPeriodeMedArstall } from '../../../utils/dato-utils';
 import { hentPeriode } from '../../sporsmal/hent-svar';
+import Vis from '../../vis';
+import { OppsummeringProps } from '../oppsummering';
 
 const PerioderSum = ({ sporsmal }: OppsummeringProps) => {
     return (

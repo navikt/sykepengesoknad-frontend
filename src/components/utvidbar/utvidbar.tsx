@@ -1,8 +1,10 @@
-import React, { useEffect, useRef, useState } from 'react';
-import { Element, Normaltekst } from 'nav-frontend-typografi';
-import { erSynligIViewport } from '../../utils/browser-utils';
-import Chevron from 'nav-frontend-chevron';
 import './utvidbar.less';
+
+import Chevron from 'nav-frontend-chevron';
+import { Element, Normaltekst } from 'nav-frontend-typografi';
+import React, { useEffect, useRef, useState } from 'react';
+
+import { erSynligIViewport } from '../../utils/browser-utils';
 import Vis from '../vis';
 
 interface UtvidbarProps {
