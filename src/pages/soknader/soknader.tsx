@@ -1,8 +1,8 @@
 import './soknader.less'
 
+import { Sidetittel } from 'nav-frontend-typografi'
 import React, { useEffect } from 'react'
 
-import Banner from '../../components/banner/banner'
 import Brodsmuler from '../../components/brodsmuler/brodsmuler'
 import Teasere from '../../components/soknader/teaser/teasere'
 import UtbetalingerLenke from '../../components/soknader/utbetalinger/utbetalinger-lenke'
@@ -48,9 +48,11 @@ const Soknader = () => {
 
     return (
         <>
-            <Banner />
             <div className='limit'>
                 <Brodsmuler brodsmuler={brodsmuler} />
+                <Sidetittel tag='h1' className='sidetopp__tittel'>
+                    {tekst('soknader.sidetittel')}
+                </Sidetittel>
                 <Teasere
                     className={'mb_nye_soknader'}
                     soknader={nyeSoknader}

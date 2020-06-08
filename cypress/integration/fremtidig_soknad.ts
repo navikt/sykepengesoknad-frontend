@@ -8,11 +8,10 @@ describe('Tester fremtidig søknad', () => {
     })
 
     it('Laster startside', function() {
-        cy.get('.soknadtopp__tittel').should('be.visible').and('have.text', 'Søknad om sykepenger')
+        cy.get('.typo-sidetittel').should('be.visible').and('have.text', 'Søknader om sykepenger')
     })
 
     it('Fremtidig søknad har forventa tekst', function() {
-        cy.get('.soknadtopp__tittel').should('be.visible').and('have.text', 'Søknad om sykepenger')
         cy.get(`#soknader-planlagt article[aria-labelledby*=${fremtidigSøknad.id}]`)
             .should('include.text', 'Gjelder perioden 23. mai – 7. juni 2020')
             .should('include.text', 'Kan fylles ut fra 08.06.2020')

@@ -9,7 +9,7 @@ describe('Tester opprettelse av søknad om å beholde sykepenger utenfor EØS', 
     })
 
     it('Laster startside', function() {
-        cy.get('.soknadtopp__tittel').should('be.visible').and('have.text', 'Søknad om sykepenger')
+        cy.get('.typo-sidetittel').should('be.visible').and('have.text', 'Søknader om sykepenger')
         cy.get(`#soknader-list-til-behandling article a[href*=${arbeidstakersoknadMedUtenlandsoppholdSoktSykepenger.id}]`).click()
     })
 

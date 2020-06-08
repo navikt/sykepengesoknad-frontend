@@ -14,7 +14,7 @@ describe('Tester arbeidsledigsøknad', () => {
     })
 
     it('Laster startside', () => {
-        cy.get('.soknadtopp__tittel').should('be.visible').and('have.text', 'Søknad om sykepenger')
+        cy.get('.typo-sidetittel').should('be.visible').and('have.text', 'Søknader om sykepenger')
         cy.get(`#soknader-list-til-behandling article a[href*=${soknad.id}]`).click()
     })
 
