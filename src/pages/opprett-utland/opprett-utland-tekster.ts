@@ -4,7 +4,8 @@ const OpprettUtlandTekster: any = {
         'opprett-utland.trenger-ikke-soke': '<p>Du trenger ikke søke hvis du enten</p>\n<ul>\n    <li>har avtalt med arbeidsgiveren din at du tar ut lovbestemt ferie</li>\n    <li>er sykmeldt på grunn av godkjent yrkesskade</li>\n</ul>\n<p><a target="_blank" href="https://www.nav.no/no/Person/Arbeid/Sykmeldt%2C+arbeidsavklaringspenger+og+yrkesskade/Sykepenger/sykepenger-ved-utenlandsopphold">Se regler om sykepenger når du er på reise.</a></p>\n',
         'opprett-utland.tittel': 'Søknad om å beholde sykepenger utenfor EØS',
         'opprett-utland.fortsett': 'Fortsett til søknaden',
-        'opprett-utland.personvern': 'Les om hvordan NAV behandler personopplysninger'
+        'opprett-utland.personvern': 'Les om hvordan NAV behandler personopplysninger',
+        'opprett-utland.feilet': 'Beklager, søknaden kunne ikke opprettes. Vennligst prøv igjen',
     }, 'en': {}
 }
 

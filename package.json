@@ -65,7 +65,8 @@
         "react-router-hash-link": "^1.2.2",
         "react-scripts": "3.4.1",
         "react-transition-group": "^4.4.1",
-        "use-force-update": "^1.0.7"
+        "use-force-update": "^1.0.7",
+        "uuid": "^8.1.0"
     },
     "devDependencies": {
         "@bahmutov/add-typescript-to-cypress": "^2.1.2",
@@ -84,6 +85,7 @@
         "@types/react-router-dom": "^5.1.5",
         "@types/react-router-hash-link": "^1.2.1",
         "@types/testing-library__jest-dom": "^5.9.1",
+        "@types/uuid": "^8.0.0",
         "@typescript-eslint/eslint-plugin": "^2.34.0",
         "@typescript-eslint/parser": "^2.34.0",
         "cypress": "^4.7.0",

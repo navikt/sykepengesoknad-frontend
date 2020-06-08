@@ -1,3 +1,4 @@
+import { RSSoknad } from '../../../types/rs-types/rs-soknad'
 
 export const fremtidigSøknad  = {
     'id': '5b74f271-5b94-455a-b79f-428f593f2b99',
@@ -104,4 +105,4 @@ export const arbeidstakersoknadMedUtenlandsoppholdSoktSykepenger = {
     'egenmeldtSykmelding': false
 }
 
-export const soknaderIntegration: any[] = [ arbeidstakersoknadMedUtenlandsoppholdSoktSykepenger, fremtidigSøknad ]
+export const soknaderIntegration = [ arbeidstakersoknadMedUtenlandsoppholdSoktSykepenger, fremtidigSøknad ] as any as RSSoknad[]
