@@ -1,6 +1,6 @@
 /* eslint-disable no-undef */
 
-import { soknader } from '../../src/data/mock/data/soknader';
+import { soknaderOpplaering as soknader } from '../../src/data/mock/data/soknader-opplaering';
 import { Soknad } from '../../src/types/types';
 
 describe('Tester behandlingsdagersøknad', () => {
