@@ -5,7 +5,7 @@ import { useAppStore } from '../../data/stores/app-store'
 import { TagTyper } from '../../types/enums';
 import { Sporsmal } from '../../types/types';
 import { ukeDatoListe } from '../dato-utils';
-import { finnHovedSporsmal, hentSporsmal } from '../soknad-utils';
+import { finnHovedSporsmal, hentSporsmal, hentUndersporsmal } from '../soknad-utils';
 
 
 const useValiderArbeidsgrad = ( sporsmal: Sporsmal ) => {
@@ -33,13 +33,34 @@ const useValiderArbeidsgrad = ( sporsmal: Sporsmal ) => {
             }
         });
 
-    const validerGrad = ( spm: Sporsmal ) => {
+    const validerGrad = ( values: Record<string, any> ) => {
+        if (![ TagTyper.JOBBET_DU_GRADERT, TagTyper.JOBBET_DU_100_PROSENT ].includes(hovedSporsmal!.tag)) {
+            return true;
+        }
+        if (values[hovedSporsmal!.id] === 'NEI') {
+            return true;
+        }
+
+        const verditype = hentUndersporsmal(hovedSporsmal!, TagTyper.HVOR_MYE_HAR_DU_JOBBET)!.id;
+
+        if (values[verditype] === 'prosent') {
+            return true;
+        }
+
+        const timerTotaltId = hentUndersporsmal(hovedSporsmal!, TagTyper.HVOR_MANGE_TIMER_PER_UKE)!.id;
+        const faktiskTimerId = hentUndersporsmal(hovedSporsmal!, TagTyper.HVOR_MYE_TIMER_VERDI)!.id;
+
         const dagerIPeriode = faktiskeSykedager.length;
         const uker = dagerIPeriode / 7;
+        const sykefravaerGrad = periode.grad / 100;
+        const timerTotalt = parseFloat(values[timerTotaltId]);
+        const faktiskTimer = parseFloat(values[faktiskTimerId]);
 
-        return uker + spm.id;
-        // vet egentlig ikke hvordan vi kan få henta det bruker har skrevet inn for
-        // timer pr. uke og faktisk prosent/timer her :(
+        const maksArbeid = timerTotalt * uker * sykefravaerGrad;
+
+        const faktiskGrad = faktiskTimer / maksArbeid;
+
+        return faktiskGrad < sykefravaerGrad;
     };
 
     return [ validerGrad ];

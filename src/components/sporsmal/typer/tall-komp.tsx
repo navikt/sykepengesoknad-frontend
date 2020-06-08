@@ -13,16 +13,14 @@ import UndersporsmalListe from '../undersporsmal/undersporsmal-liste'
 const TallInput = ({ sporsmal }: SpmProps) => {
     const feilmelding = hentFeilmelding(sporsmal)
     const [ lokal, setLokal ] = useState<string>(hentSvar(sporsmal))
-    const { register, setValue, errors } = useFormContext()
+    const { register, setValue, errors, getValues } = useFormContext()
     const undersporsmal = useRef<HTMLDivElement>(null)
-    const [ kalkulerGrad ] = validerArbeidsgrad(sporsmal)
+    const [ validerGrad ] = validerArbeidsgrad(sporsmal)
 
     const onChange = (e: any) => {
         const value = e.target.value
         setValue(sporsmal.id, value)
         setLokal(value)
-        // eslint-disable-next-line
-        console.log(kalkulerGrad(sporsmal))
     }
 
     useEffect(() => {
@@ -45,6 +43,7 @@ const TallInput = ({ sporsmal }: SpmProps) => {
                     max={sporsmal.max}
                     ref={register({
                         required: feilmelding.global,
+                        validate: () => validerGrad(getValues()),
                         min: {
                             value: sporsmal.min,
                             message: getLedetekst(tekst('soknad.feilmelding.TALL_MIN_MAX'),
