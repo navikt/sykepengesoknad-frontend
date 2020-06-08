@@ -1,22 +1,55 @@
 import './opprett-utland.less'
 
 import parser from 'html-react-parser'
-import React, { useEffect } from 'react'
+import Alertstripe from 'nav-frontend-alertstriper'
+import { Knapp } from 'nav-frontend-knapper'
+import React from 'react'
+import { useHistory } from 'react-router'
 
 import Bjorn from '../../components/sporsmal/bjorn/bjorn'
+import Vis from '../../components/vis'
+import useFetch from '../../data/rest/use-fetch'
+import { FetchState, hasData } from '../../data/rest/utils'
+import { useAppStore } from '../../data/stores/app-store'
+import { RSSoknad } from '../../types/rs-types/rs-soknad'
+import { Soknad } from '../../types/types'
+import env from '../../utils/environment'
+import { logger } from '../../utils/logger'
 import { tekst } from '../../utils/tekster'
-import { setBodyClass } from '../../utils/utils'
+import { getUrlTilSoknad } from '../../utils/url-utils'
 
 
 const OpprettUtland = () => {
+    const { soknader, setSoknader, setFeilmeldingTekst, feilmeldingTekst } = useAppStore()
 
-    useEffect(() => {
-        setBodyClass('soknader')
-    }, [])
+    const opprettUtland = useFetch<RSSoknad>()
+    const history = useHistory()
+
+
+    const opprett = () => {
+        opprettUtland.fetch(`${env.syfoapiRoot}/syfosoknad/api/opprettSoknadUtland`, {
+            method: 'POST',
+            credentials: 'include',
+            headers: { 'Content-Type': 'application/json' }
+        }, (fetchState: FetchState<RSSoknad>) => {
+            if (hasData(fetchState)) {
+                const soknad = new Soknad(fetchState.data)
+                if (!soknader.find(s => s.id === soknad.id)) {
+                    soknader.push(soknad)
+                    setSoknader(soknader)
+                }
+                history.push(getUrlTilSoknad(soknad, '1'))
+                setFeilmeldingTekst('')
+            } else {
+                logger.error('Feil ved opprettelse av utlandssøknad', fetchState)
+                setFeilmeldingTekst(tekst('opprett-utland.feilet'))
+            }
+        })
+    }
 
     return (
         <>
-            <div className={'opprett-utland'}>
+            <div id="opprett_utland_main" className={'opprett-utland'}>
                 <div className="sidebanner sidebanner--utenramme">
                     <div className="sidebanner__innhold blokk--xl">
                         <Bjorn nokkel={'opprett-utland.bjorn'} hvit={true} vertikal={true} stor={true} />
@@ -31,16 +64,23 @@ const OpprettUtland = () => {
 
                     <div className="knapperad">
                         <p>
-                            <button className="knapp js-submit knapp--hoved" type="submit">
-                                {tekst('opprett-utland.fortsett')}
-                            </button>
-                        </p>
-                        <p className="blokk"><a
-                            href="https://www.nav.no/no/NAV+og+samfunn/Om+NAV/personvern-i-arbeids-og-velferdsetaten"
-                            target="_blank" rel="noopener noreferrer">
-                            {tekst('opprett-utland.personvern')}
+                            <Knapp type="hoved" htmlType={'button'}
+                                onClick={opprett}>{tekst('opprett-utland.fortsett')}</Knapp>
 
-                        </a></p></div>
+                        </p>
+                        <div aria-live="polite">
+                            <Vis hvis={feilmeldingTekst !== ''}>
+                                <Alertstripe type="feil">{feilmeldingTekst}</Alertstripe>
+                            </Vis>
+                        </div>
+                        <p className="blokk">
+                            <a href="https://www.nav.no/no/NAV+og+samfunn/Om+NAV/personvern-i-arbeids-og-velferdsetaten"
+                                target="_blank" rel="noopener noreferrer">
+                                {tekst('opprett-utland.personvern')}
+
+                            </a>
+                        </p>
+                    </div>
                 </div>
             </div>
         </>

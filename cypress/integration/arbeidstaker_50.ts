@@ -1,12 +1,12 @@
 import { soknaderOpplaering as soknader } from '../../src/data/mock/data/soknader-opplaering'
-import { Soknad } from '../../src/types/types'
+import { RSSoknad } from '../../src/types/rs-types/rs-soknad'
 
 describe('Tester arbeidstakersøknad - gradert 50%', () => {
     //-----
     // Sykmelding: ee4540e3-eba6-46cb-b90f-05747ddb1537, arbeidstaker - 50%
     // Søknad: 5b769c04-e171-47c9-b79b-23ab8fce331e, fom: 1.4.20, tom: 24.4.20
     //-----
-    const soknad = soknader.find((sok: Soknad) => sok.id === '5b769c04-e171-47c9-b79b-23ab8fce331e')
+    const soknad = soknader.find((sok: RSSoknad) => sok.id === '5b769c04-e171-47c9-b79b-23ab8fce331e')!
 
     before(() => {
         cy.visit('http://localhost:8080')

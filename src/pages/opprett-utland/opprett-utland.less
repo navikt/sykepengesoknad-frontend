@@ -2,7 +2,54 @@
 @import '../../../node_modules/nav-frontend-skjema-style/src/index';
 @import "../../basic.less";
 
+
+#opprett_utland_main {
+  background-color: @navLysGra;
+}
+
 .opprett-utland {
+
+  font-family: @font-family;
+
+  .mixin-panel-padding() {
+    padding-left: 1rem;
+    padding-right: 1rem;
+
+    @media (min-width: @skjermMini) {
+      padding-left: 2rem;
+      padding-right: 2rem;
+    }
+  }
+
+  .sidetopp {
+    .mixin-panel-padding();
+  }
+
+  .sidetopp__intro {
+    margin-bottom: 3rem;
+    .redaksjonelt-innhold();
+
+  }
+
+  .sidetopp__tittel {
+    text-align: center;
+    margin-top: 0;
+    margin-bottom: 2rem;
+    .typo-sidetittel-mixin();
+  }
+
+  .sidetopp__meta {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 2rem;
+  }
+
+  .sidetopp--arbeidsrettetOppfolging {
+    padding-top: 1rem;
+    padding-bottom: 1rem;
+  }
+
+
   .begrensning {
     max-width: 42rem;
     margin-left: auto;
