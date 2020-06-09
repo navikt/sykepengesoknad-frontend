@@ -137,6 +137,7 @@ export class Soknad {
     sykmeldingId: string;
     soknadstype: RSSoknadstype;
     status: RSSoknadstatus;
+    arbeidssituasjon: RSArbeidssituasjon | null;
     fom?: Date;
     tom?: Date;
     avbruttDato?: Date;
@@ -169,6 +170,7 @@ export class Soknad {
                 orgnummer: soknad.arbeidsgiver.orgnummer
             }
         }
+        this.arbeidssituasjon = soknad.arbeidssituasjon
         this.sporsmal = rsToSporsmal(soknad.sporsmal, undefined as any, true)
         this.soknadPerioder = soknad.soknadPerioder
     }

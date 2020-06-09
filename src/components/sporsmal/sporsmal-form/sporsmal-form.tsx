@@ -7,7 +7,7 @@ import { useHistory, useParams } from 'react-router-dom'
 import useFetch from '../../../data/rest/use-fetch'
 import { FetchState, hasData } from '../../../data/rest/utils'
 import { useAppStore } from '../../../data/stores/app-store'
-import { SvarTil, TagTyper } from '../../../types/enums'
+import { TagTyper } from '../../../types/enums'
 import { RSMottakerResponse } from '../../../types/rs-types/rest-response/rs-mottakerresponse'
 import { RSOppdaterSporsmalResponse } from '../../../types/rs-types/rest-response/rs-oppdatersporsmalresponse'
 import { RSMottaker } from '../../../types/rs-types/rs-mottaker'
@@ -29,6 +29,7 @@ import SporsmalSwitch from '../sporsmal-switch'
 import { pathUtenSteg } from '../sporsmal-utils'
 import CheckboxPanel from '../typer/checkbox-panel'
 import Knapperad from './knapperad'
+import SendesTil from './sendes-til'
 import skalViseKnapperad from './skal-vise-knapperad'
 
 export interface SpmProps {
@@ -36,7 +37,7 @@ export interface SpmProps {
 }
 
 const SporsmalForm = () => {
-    const { soknader, setSoknader, setValgtSoknad, valgtSoknad, sendTil, setTop, setSendTil, rerenderSporsmalForm } = useAppStore()
+    const { soknader, setSoknader, setValgtSoknad, valgtSoknad, mottaker, setTop, setMottaker, rerenderSporsmalForm } = useAppStore()
     const { logEvent } = useAmplitudeInstance()
     const [ erSiste, setErSiste ] = useState<boolean>(false)
     const { stegId } = useParams()
@@ -47,7 +48,7 @@ const SporsmalForm = () => {
     let restFeilet = false
     let sporsmal = valgtSoknad!.sporsmal[spmIndex]
     const nesteSporsmal = valgtSoknad!.sporsmal[spmIndex + 1]
-    const mottaker = useFetch<RSMottakerResponse>()
+    const rsMottakerResponseFetch = useFetch<RSMottakerResponse>()
 
     useEffect(() => {
         function erSiste() {
@@ -106,20 +107,13 @@ const SporsmalForm = () => {
 
 
     const hentMottaker = () => {
-        mottaker.fetch(env.syfoapiRoot + `/syfosoknad/api/soknader/${valgtSoknad!.id}/finnMottaker`, {
+        rsMottakerResponseFetch.fetch(env.syfoapiRoot + `/syfosoknad/api/soknader/${valgtSoknad!.id}/finnMottaker`, {
             method: 'POST',
             credentials: 'include',
             headers: { 'Content-Type': 'application/json' }
         }, (fetchState: FetchState<RSMottakerResponse>) => {
             if (hasData(fetchState)) {
-                const m = fetchState.data.mottaker
-                if (m === RSMottaker.NAV) {
-                    setSendTil([ SvarTil.NAV ])
-                } else if (m === RSMottaker.ARBEIDSGIVER) {
-                    setSendTil([ SvarTil.ARBEIDSGIVER ])
-                } else if (m === RSMottaker.ARBEIDSGIVER_OG_NAV) {
-                    setSendTil([ SvarTil.NAV, SvarTil.ARBEIDSGIVER ])
-                }
+                setMottaker(fetchState.data.mottaker)
             } else {
                 logger.error('Klarte ikke hente MOTTAKER av søknad', fetchState)
             }
@@ -136,14 +130,17 @@ const SporsmalForm = () => {
         try {
             const httpCode = res.status
             if ([ 200, 201, 203, 206 ].includes(httpCode)) {
-                sendTil.forEach(mottaker => {
-                    if (mottaker === SvarTil.NAV) {
-                        valgtSoknad!.sendtTilNAVDato = new Date()
-                    }
-                    if (mottaker === SvarTil.ARBEIDSGIVER) {
-                        valgtSoknad!.sendtTilArbeidsgiverDato = new Date()
-                    }
-                })
+                if (mottaker === RSMottaker.ARBEIDSGIVER) {
+                    valgtSoknad!.sendtTilArbeidsgiverDato = new Date()
+                }
+                if (mottaker === RSMottaker.NAV) {
+                    valgtSoknad!.sendtTilNAVDato = new Date()
+                }
+                if (mottaker === RSMottaker.ARBEIDSGIVER_OG_NAV) {
+                    valgtSoknad!.sendtTilArbeidsgiverDato = new Date()
+                    valgtSoknad!.sendtTilNAVDato = new Date()
+                }
+
                 valgtSoknad!.status = RSSoknadstatus.SENDT
                 setValgtSoknad(valgtSoknad)
                 soknader[soknader.findIndex(sok => sok.id === valgtSoknad!.id)] = valgtSoknad!
@@ -203,6 +200,7 @@ const SporsmalForm = () => {
                 <Vis hvis={erSiste && !erUtlandssoknad}>
                     <Oppsummering />
                     <CheckboxPanel sporsmal={nesteSporsmal} />
+                    <SendesTil />
                 </Vis>
 
                 <Vis hvis={erSiste && erUtlandssoknad}>

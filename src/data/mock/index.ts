@@ -1,13 +1,14 @@
 import * as uuid from 'uuid'
 import FetchMock, { HandlerArgument, MiddlewareUtils } from 'yet-another-fetch-mock'
 
+import { RSMottaker } from '../../types/rs-types/rs-mottaker'
 import { RSSoknad } from '../../types/rs-types/rs-soknad'
 import { RSSoknadstatus } from '../../types/rs-types/rs-soknadstatus'
 import { RSSoknadstype } from '../../types/rs-types/rs-soknadstype'
 import env from '../../utils/environment'
 import { jsonDeepCopy } from '../../utils/json-deep-copy'
 import { soknaderIntegration } from './data/soknader-integration'
-import { soknaderOpplaering } from './data/soknader-opplaering'
+import { arbeidstaker, arbeidstakerGradert, soknaderOpplaering } from './data/soknader-opplaering'
 import { sykmeldinger } from './data/sykmeldinger'
 import { unleashToggles } from './data/toggles'
 
@@ -49,11 +50,23 @@ mock.post(`${env.syfoapiRoot}/syfosoknad/api/opprettSoknadUtland`, () => {
     soknadOriginal.status = RSSoknadstatus.NY
     return soknadOriginal as any
 })
-mock.get('/login', '/nysykepengesoknad')
+mock.post(`${env.syfoapiRoot}/syfosoknad/api/soknader/:soknad/finnMottaker`, (args: HandlerArgument) => {
+    const soknadId = args.pathParams.soknad
+
+    if (soknadId === arbeidstaker.id) {
+        return { mottaker: RSMottaker.ARBEIDSGIVER_OG_NAV }
+    }
+    if (soknadId === arbeidstakerGradert.id) {
+        return { mottaker: RSMottaker.ARBEIDSGIVER }
+    }
+
+    return { mottaker: RSMottaker.NAV }
+})
+
+
 mock.post(env.unleashUrl, unleashToggles)
 mock.get(`${env.syfoapiRoot}/syfosoknad/api/soknader`, soknader as any)
 mock.get(`${env.syforestRoot}/sykmeldinger`, sykmeldinger)
-mock.post(`${env.syfoapiRoot}/syfosoknad/api/soknader/:soknad/finnMottaker`, { 'mottaker': 'NAV' })
 mock.post(`${env.syfoapiRoot}/syfosoknad/api/soknader/:soknad/send`, {})
 mock.post(`${env.syfoapiRoot}/syfosoknad/api/soknader/:soknad/ettersendTilNav`, {})
 mock.post(`${env.syfoapiRoot}/syfosoknad/api/soknader/:soknad/ettersendTilArbeidsgiver`, {})

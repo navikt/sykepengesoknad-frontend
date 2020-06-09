@@ -183,7 +183,3 @@ export enum SpmKomp {
     TALL = 'TALL',
 }
 
-export enum SvarTil {
-    NAV = 'NAV',
-    ARBEIDSGIVER = 'ARBEIDSGIVER',
-}

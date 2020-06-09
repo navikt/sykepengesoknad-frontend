@@ -1,12 +1,11 @@
-import { soknaderOpplaering as soknader } from '../../src/data/mock/data/soknader-opplaering'
-import { RSSoknad } from '../../src/types/rs-types/rs-soknad'
+import { arbeidstaker } from '../../src/data/mock/data/soknader-opplaering'
 
 describe('Tester arbeidstakersøknad', () => {
     //-----
     // Sykmelding: 7e90121c-b64b-4a1c-b7a5-93c9d95aba47, arbeidstaker - 100%
     // Søknad: faba11f5-c4f2-4647-8c8a-58b28ce2f3ef, fom: 1.4.20, tom: 24.4.20
     //-----
-    const soknad = soknader.find((sok: RSSoknad) => sok.id === 'faba11f5-c4f2-4647-8c8a-58b28ce2f3ef')!
+    const soknad = arbeidstaker
 
     before(() => {
         cy.visit('http://localhost:8080')
@@ -211,6 +210,7 @@ describe('Tester arbeidstakersøknad', () => {
         cy.url().should('include', `${soknad.id}/11`)
         cy.get('.skjemaelement__label').click({ force: true })
         cy.contains('Jeg har lest all informasjonen jeg har fått i søknaden og bekrefter at opplysningene jeg har gitt er korrekte.')
+        cy.contains('Søknaden sendes til NAV. Kopi av søknaden sendes til POSTEN NORGE AS, BÆRUM.')
 
         cy.contains('Send søknaden').click()
     })
