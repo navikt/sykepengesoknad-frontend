@@ -1,8 +1,8 @@
-import React, { useState } from 'react'
-import { Normaltekst, Systemtittel } from 'nav-frontend-typografi'
 import dayjs from 'dayjs'
 import Alertstripe from 'nav-frontend-alertstriper'
 import ModalWrapper from 'nav-frontend-modal'
+import { Normaltekst, Systemtittel } from 'nav-frontend-typografi'
+import React, { useState } from 'react'
 
 import { RSSoknadstype } from '../../../types/rs-types/rs-soknadstype'
 import { tilLesbarDatoMedArstall, tilLesbarPeriodeMedArstall } from '../../../utils/dato-utils'
