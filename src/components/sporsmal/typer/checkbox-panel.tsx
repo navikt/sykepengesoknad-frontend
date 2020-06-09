@@ -39,7 +39,6 @@ const CheckboxInput = ({ sporsmal }: SpmProps) => {
     }
     return (
         <>
-
             <div className={makeClassName()} ref={bekreft}>
                 <div className='skjemaelement skjemaelement--horisontal'>
                     <input type='checkbox'
