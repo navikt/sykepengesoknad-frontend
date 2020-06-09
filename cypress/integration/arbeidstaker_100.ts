@@ -33,6 +33,7 @@ describe('Tester arbeidstakersøknad', () => {
         // Må godkjenne ANSVARSERKLARING først
         cy.contains('Gå videre').click()
         cy.contains('Det er 1 feil i skjemaet')
+        cy.get('.feiloppsummering').should('have.css', 'background-color', 'rgb(255, 255, 255)')
         cy.contains('Du må bekrefte dette før du går videre')
         cy.get('.skjemaelement__label').click({ force: true })
 
