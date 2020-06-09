@@ -1154,7 +1154,7 @@ export const arbeidstakerGradert = {
         {
             'id': '687310',
             'tag': 'ARBEID_UTENFOR_NORGE',
-            'sporsmalstekst': 'Har du arbeidet i utlandet i løpet av de siste 12 månedene?',
+            'sporsmalstekst': 'Utfører du arbeid andre steder enn i Norge?',
             'undertekst': null,
             'svartype': 'JA_NEI',
             'min': null,
@@ -2329,7 +2329,7 @@ export const frilanser = {
         {
             'id': '687451',
             'tag': 'ARBEID_UTENFOR_NORGE',
-            'sporsmalstekst': 'Har du arbeidet i utlandet i løpet av de siste 12 månedene?',
+            'sporsmalstekst': 'Utfører du arbeid andre steder enn i Norge?',
             'undertekst': null,
             'svartype': 'JA_NEI',
             'min': null,
