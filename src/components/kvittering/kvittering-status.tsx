@@ -4,9 +4,14 @@ import { Normaltekst, Undertittel } from 'nav-frontend-typografi'
 import React, { useEffect, useState } from 'react'
 
 import { useAppStore } from '../../data/stores/app-store'
-import { SvarTil } from '../../types/enums'
 import { tekst } from '../../utils/tekster'
 import Vis from '../vis'
+
+enum Mottaker {
+    NAV = 'NAV',
+    ARBEIDSGIVER = 'ARBEIDSGIVER',
+}
+
 
 const KvitteringStatus = () => {
     const { valgtSoknad } = useAppStore()
@@ -23,7 +28,7 @@ const KvitteringStatus = () => {
         const sendtTilArb = valgtSoknad?.sendtTilArbeidsgiverDato
         const datoArb = dayjs(sendtTilArb).format('dddd D. MMM, kl hh:mm')
         setTilArbDato(datoArb.charAt(0).toUpperCase() + datoArb.slice(1))
-        setTilArbNavn(valgtSoknad?.arbeidsgiver?.navn ? valgtSoknad?.arbeidsgiver?.navn : SvarTil.ARBEIDSGIVER)
+        setTilArbNavn(valgtSoknad?.arbeidsgiver?.navn ? valgtSoknad?.arbeidsgiver?.navn : Mottaker.ARBEIDSGIVER)
         setTilOrg(valgtSoknad?.arbeidsgiver?.orgnummer ? `(Org.nr. ${valgtSoknad.arbeidsgiver.orgnummer})` : '')
         // eslint-disable-next-line
     }, [])
@@ -42,7 +47,7 @@ const KvitteringStatus = () => {
                 </Vis>
                 <Vis hvis={valgtSoknad!.sendtTilNAVDato}>
                     <Undertittel tag="h2">
-                        {tekst('kvittering.soknaden-er-sendt-til')} { SvarTil.NAV }
+                        {tekst('kvittering.soknaden-er-sendt-til')} {Mottaker.NAV}
                     </Undertittel>
                     <Normaltekst>
                         {tekst('kvittering.mottatt')}: {tilNavDato}

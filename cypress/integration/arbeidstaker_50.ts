@@ -1,12 +1,11 @@
-import { soknaderOpplaering as soknader } from '../../src/data/mock/data/soknader-opplaering'
-import { RSSoknad } from '../../src/types/rs-types/rs-soknad'
+import { arbeidstakerGradert } from '../../src/data/mock/data/soknader-opplaering'
 
 describe('Tester arbeidstakersøknad - gradert 50%', () => {
     //-----
     // Sykmelding: ee4540e3-eba6-46cb-b90f-05747ddb1537, arbeidstaker - 50%
     // Søknad: 5b769c04-e171-47c9-b79b-23ab8fce331e, fom: 1.4.20, tom: 24.4.20
     //-----
-    const soknad = soknader.find((sok: RSSoknad) => sok.id === '5b769c04-e171-47c9-b79b-23ab8fce331e')!
+    const soknad = arbeidstakerGradert
 
     before(() => {
         cy.visit('http://localhost:8080')
@@ -229,6 +228,7 @@ describe('Tester arbeidstakersøknad - gradert 50%', () => {
         cy.url().should('include', `${soknad.id}/13`)
         cy.get('.skjemaelement__label').click({ force: true })
         cy.contains('Jeg har lest all informasjonen jeg har fått i søknaden og bekrefter at opplysningene jeg har gitt er korrekte.')
+        cy.contains('Søknaden sendes til POSTEN NORGE AS, BÆRUM.')
 
         cy.contains('Send søknaden').click()
     })

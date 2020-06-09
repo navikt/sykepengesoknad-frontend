@@ -1,7 +1,7 @@
 import constate from 'constate'
 import { useState } from 'react'
 
-import { SvarTil } from '../../types/enums'
+import { RSMottaker } from '../../types/rs-types/rs-mottaker'
 import { Soknad, Sykmelding, UnleashToggles } from '../../types/types'
 
 export const [ AppStoreProvider, useAppStore ] = constate(() => {
@@ -10,7 +10,7 @@ export const [ AppStoreProvider, useAppStore ] = constate(() => {
     const [ sykmeldinger, setSykmeldinger ] = useState<Sykmelding[]>([])
     const [ valgtSoknad, setValgtSoknad ] = useState<Soknad>()
     const [ valgtSykmelding, setValgtSykmelding ] = useState<Sykmelding>()
-    const [ sendTil, setSendTil ] = useState<SvarTil[]>([])
+    const [ mottaker, setMottaker ] = useState<RSMottaker>()
     const [ top, setTop ] = useState<number>(0)
     const [ validCheck, setValidCheck ] = useState<boolean>()
     const [ feilmeldingTekst, setFeilmeldingTekst ] = useState<string>('')
@@ -22,7 +22,7 @@ export const [ AppStoreProvider, useAppStore ] = constate(() => {
         valgtSoknad, setValgtSoknad,
         sykmeldinger, setSykmeldinger,
         valgtSykmelding, setValgtSykmelding,
-        sendTil, setSendTil,
+        mottaker, setMottaker,
         top, setTop,
         validCheck, setValidCheck,
         feilmeldingTekst, setFeilmeldingTekst,

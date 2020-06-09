@@ -136,6 +136,7 @@ describe('Tester arbeidsledigsøknad', () => {
         cy.url().should('include', `${soknad.id}/8`)
         cy.get('.skjemaelement__label').click({ force: true })
         cy.contains('Jeg har lest all informasjonen jeg har fått i søknaden og bekrefter at opplysningene jeg har gitt er korrekte.')
+        cy.contains('Søknaden sendes til').should('not.exist')
 
         cy.contains('Send søknaden').click()
     })
