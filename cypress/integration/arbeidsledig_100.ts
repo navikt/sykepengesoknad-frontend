@@ -143,8 +143,8 @@ describe('Tester arbeidsledigsøknad', () => {
 
     it('Søknad kvittering', () => {
         cy.url().should('include', `/kvittering/${soknad.id}`)
-        // TODO: Fix bug der denne ikke vises
-        // cy.contains('Søknaden er sendt til NAV');
+        // Sendt til
+        cy.contains('Søknaden er sendt til NAV')
 
         // Kvittering
         cy.contains('Hva skjer videre?')

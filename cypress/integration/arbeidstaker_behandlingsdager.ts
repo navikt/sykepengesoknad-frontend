@@ -80,7 +80,7 @@ describe('Tester behandlingsdagersøknad', () => {
     it('Søknad kvittering', () => {
         cy.url().should('include', `/kvittering/${soknad.id}`)
         // Sendt til
-        // cy.contains('Søknaden er sendt til NAV');
+        cy.contains('Søknaden er sendt til NAV')
 
         // Kvittering
         cy.contains('Hva skjer videre?')

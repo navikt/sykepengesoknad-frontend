@@ -22,14 +22,18 @@ const KvitteringStatus = () => {
 
     useEffect(() => {
         const sendtTilNav = valgtSoknad?.sendtTilNAVDato
-        const datoNav = dayjs(sendtTilNav).format('dddd D. MMM, kl hh:mm')
-        setTilNavDato(datoNav.charAt(0).toUpperCase() + datoNav.slice(1))
+        if (sendtTilNav) {
+            const datoNav = dayjs(sendtTilNav).format('dddd D. MMM, kl hh:mm')
+            setTilNavDato(datoNav.charAt(0).toUpperCase() + datoNav.slice(1))
+        }
 
         const sendtTilArb = valgtSoknad?.sendtTilArbeidsgiverDato
-        const datoArb = dayjs(sendtTilArb).format('dddd D. MMM, kl hh:mm')
-        setTilArbDato(datoArb.charAt(0).toUpperCase() + datoArb.slice(1))
-        setTilArbNavn(valgtSoknad?.arbeidsgiver?.navn ? valgtSoknad?.arbeidsgiver?.navn : Mottaker.ARBEIDSGIVER)
-        setTilOrg(valgtSoknad?.arbeidsgiver?.orgnummer ? `(Org.nr. ${valgtSoknad.arbeidsgiver.orgnummer})` : '')
+        if (sendtTilArb) {
+            const datoArb = dayjs(sendtTilArb).format('dddd D. MMM, kl hh:mm')
+            setTilArbDato(datoArb.charAt(0).toUpperCase() + datoArb.slice(1))
+            setTilArbNavn(valgtSoknad?.arbeidsgiver?.navn ? valgtSoknad?.arbeidsgiver?.navn : Mottaker.ARBEIDSGIVER)
+            setTilOrg(valgtSoknad?.arbeidsgiver?.orgnummer ? `(Org.nr. ${valgtSoknad.arbeidsgiver.orgnummer})` : '')
+        }
         // eslint-disable-next-line
     }, [])
 

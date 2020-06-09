@@ -15,7 +15,6 @@ import { unleashToggles } from './data/toggles'
 const mock = FetchMock.configure({
     enableFallback: true,
     middleware: MiddlewareUtils.combine(
-        MiddlewareUtils.delayMiddleware(300),
         MiddlewareUtils.loggingMiddleware()
     )
 })

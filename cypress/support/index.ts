@@ -52,7 +52,7 @@ const lyttTilNettverksKall = (a: any) => {
         }
         else if(url.includes('/send')) {
             const headers = req[ 'headers' ]
-            expect(headers, '/finnMottaker')
+            expect(headers, '/send')
                 .to.deep.eq({ 'Content-Type': 'application/json' })
         }
         else {
