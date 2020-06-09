@@ -28,7 +28,7 @@ const Endreknapp = () => {
                 const soknad = new Soknad(fetchState.data)
                 soknader.push(soknad)
                 setSoknader(soknader)
-                history.push(getUrlTilSoknad(soknad, undefined))
+                history.push(getUrlTilSoknad(soknad, '1'))
                 setFeilmeldingTekst('')
             } else {
                 logger.error('Feil ved opprettelse av UTKAST_TIL_KORRIGERING', fetchState)
