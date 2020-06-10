@@ -56,7 +56,8 @@ const PeriodeKomp = ({ sporsmal, index, slettPeriode }: AllProps) => {
                     altInput: true,
                     altFormat: 'd.m.Y',
                     locale: Norwegian,
-                    allowInput: true
+                    allowInput: true,
+                    disableMobile: true
                 }}
             />
 

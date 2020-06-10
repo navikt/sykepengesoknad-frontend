@@ -60,7 +60,8 @@ const DatoInput = ({ sporsmal }: SpmProps) => {
                     altInput: true,
                     altFormat: 'd.m.Y',
                     locale: Norwegian,
-                    allowInput: true
+                    allowInput: true,
+                    disableMobile: true
                 }}
             />
 
