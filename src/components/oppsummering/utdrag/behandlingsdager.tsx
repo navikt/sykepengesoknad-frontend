@@ -2,11 +2,15 @@ import { Element, Normaltekst } from 'nav-frontend-typografi'
 import React from 'react'
 
 import { RSSvar } from '../../../types/rs-types/rs-svar'
-import { tilLesbarDatoUtenAarstall, tilLesbarPeriodeUtenArstall } from '../../../utils/dato-utils'
+import {
+    tilLesbarDatoUtenAarstall,
+    tilLesbarPeriodeUtenArstall
+} from '../../../utils/dato-utils'
 import Vis from '../../vis'
 import { OppsummeringProps } from '../oppsummering'
+import Avkrysset from './avkrysset'
 
-const datoEllerIkkeTilBehandling = (svar: RSSvar) => {
+const datoEllerIkkeTilBehandling = (svar: RSSvar): string => {
     if (svar === undefined || svar.verdi === '' || svar.verdi === 'Ikke til behandling') {
         return 'Ikke til behandling'
     }
@@ -27,7 +31,7 @@ const Behandlingsdager = ({ sporsmal }: OppsummeringProps) => {
                                         <Element tag='h3'>{tilLesbarPeriodeUtenArstall(uspm.min, uspm.max)}</Element>
                                         <div className='oppsummering__tekstsvar'>
                                             <Normaltekst className='oppsummering__dato'>
-                                                {datoEllerIkkeTilBehandling(uspm.svarliste.svar[ 0 ])}
+                                                <Avkrysset tekst={datoEllerIkkeTilBehandling(uspm.svarliste.svar[ 0 ])} />
                                             </Normaltekst>
                                         </div>
                                     </div>
