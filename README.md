@@ -1,4 +1,4 @@
-# Nytt i denne appen
+# Teknisk nytt i denne appen
 
 * create-react-app
     * bootstrappet med [Create React App](https://github.com/facebook/create-react-app)
@@ -30,3 +30,10 @@
     * IKKE definer egne farger
 * `digisyfo-npm` brukes ikke lenger
 
+# Funksjonelle endringer fra gammel app
+
+* Banner ligger nå over brødsmulene, i gammel app lå den under
+* Kvittering for sendt søknad er helt skrevet om. 
+* Kvitteringen er samme side man kommer til om man går inn på en sendt søknad fra oversikten
+* Utenlandssøknaden har nå et spørsmål per side, ikke en side med alle spørsmål
+* TODO: Kalendere oppfører seg litt annerledes på mobil  
