@@ -148,7 +148,7 @@ describe('Tester arbeidstakersøknad - gradert 50%', () => {
 
         // Test spørsmål
         cy.get('.inputPanelGruppe__inner label:first-child > input[value=JA]').click({ force: true })
-        cy.contains('Har du arbeidet i utlandet i løpet av de siste 12 månedene?')
+        cy.contains('Utfører du arbeid andre steder enn i Norge?')
 
         cy.contains('Gå videre').click()
     })
