@@ -1,40 +1,20 @@
 import { Element, Normaltekst } from 'nav-frontend-typografi'
-import React, { useEffect, useState } from 'react'
-import { useFormContext } from 'react-hook-form'
+import React, { useEffect } from 'react'
+import { Controller, useFormContext } from 'react-hook-form'
 
 import Vis from '../../vis'
-import { hentSvar } from '../hent-svar'
+import { LandvelgerComponent } from '../landvelger/landvelger'
 import { SpmProps } from '../sporsmal-form/sporsmal-form'
 import { hentFeilmelding } from '../sporsmal-utils'
 
-const landValg = [ {
-    value: 'SYDEN',
-    label: 'Syden',
-}, {
-    value: 'USA',
-    label: 'USA',
-}, {
-    value: 'KINA',
-    label: 'Kina',
-} ]
-
 export default ({ sporsmal }: SpmProps) => {
-    const [ lokal, setLokal ] = useState<string>(hentSvar(sporsmal))
-    const { register, setValue, errors } = useFormContext()
+    const { errors, setValue } = useFormContext()
     const feilmelding = hentFeilmelding(sporsmal)
 
     useEffect(() => {
-        const lagret = hentSvar(sporsmal)
-        setValue(sporsmal.id, lagret)
-        setLokal(lagret)
+        setValue(sporsmal.id, sporsmal.svarliste.svar.map((i) => i.verdi))
         // eslint-disable-next-line
     }, [sporsmal]);
-
-    const changeValue = (value: string) => {
-        setValue(sporsmal.id, value)
-        setLokal(lokal === value ? '' : value)
-    }
-
 
     return (
         <>
@@ -45,26 +25,18 @@ export default ({ sporsmal }: SpmProps) => {
 
                 <Element tag='h3' className='skjema__sporsmal'>{sporsmal.sporsmalstekst}</Element>
 
-                {landValg.map((valg, idx) => {
-                    const OK = lokal === valg.value
-                    return (
-                        <div className="radioContainer" key={idx}>
-                            <input type='radio'
-                                id={sporsmal.id + '_' + idx}
-                                name={sporsmal.id}
-                                value={valg.value}
-                                checked={OK}
-                                aria-checked={OK}
-                                onChange={() => changeValue(valg.value)}
-                                ref={register({ required: feilmelding.global })}
-                                className='skjemaelement__input radioknapp'
-                            />
-                            <label className='skjemaelement__label' htmlFor={sporsmal.id + '_' + idx}>
-                                {valg.label}
-                            </label>
-                        </div>
-                    )
-                })}
+
+                <Controller
+                    as={LandvelgerComponent}
+                    rules={{ required: feilmelding.global }}
+                    id={sporsmal.id}
+                    name={sporsmal.id}
+                    onChange={(s: string[]) => {
+                        return s
+                    }}
+                    verdierInn={sporsmal.svarliste.svar.map((i) => i.verdi)}
+                />
+
             </div>
 
             <div role='alert' aria-live='assertive'>
