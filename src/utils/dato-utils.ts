@@ -59,7 +59,7 @@ export const fraBackendTilDate = (datoArg: string) => {
     return new Date(datoer[0], datoer[1] - 1, datoer[2])
 }
 
-export const tilLesbarDatoUtenAarstall = (datoArg: any) => {
+export const tilLesbarDatoUtenAarstall = (datoArg: any): string => {
     if (datoArg) {
         const dato = new Date(datoArg)
         const dag = dato.getDate()
@@ -67,7 +67,7 @@ export const tilLesbarDatoUtenAarstall = (datoArg: any) => {
         const maned = maaneder[manedIndex]
         return `${dag}. ${maned}`
     }
-    return null
+    return ''
 }
 
 export const tilLesbarDatoMedArstall = (datoArg: any) => {
