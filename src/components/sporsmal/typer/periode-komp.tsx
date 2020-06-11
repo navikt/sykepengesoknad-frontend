@@ -4,6 +4,7 @@ import React, { useEffect } from 'react'
 import Flatpickr from 'react-flatpickr'
 import { Controller, useFormContext } from 'react-hook-form'
 
+import validerPeriode from '../../../utils/sporsmal/valider-periode'
 import { tekst } from '../../../utils/tekster'
 import Vis from '../../vis'
 import { hentPeriode } from '../hent-svar'
@@ -18,7 +19,7 @@ interface PeriodeProps {
 type AllProps = SpmProps & PeriodeProps;
 
 const PeriodeKomp = ({ sporsmal, index, slettPeriode }: AllProps) => {
-    const { setValue, errors } = useFormContext()
+    const { setValue, errors, getValues } = useFormContext()
     const id = sporsmal.id + '_' + index
     const htmlfor = sporsmal.id + '_t_' + index
     const feilmelding = hentFeilmelding(sporsmal)
@@ -41,7 +42,8 @@ const PeriodeKomp = ({ sporsmal, index, slettPeriode }: AllProps) => {
             <Controller
                 as={Flatpickr}
                 rules={{
-                    pattern: { value: /\d/, message: feilmelding.global }
+                    pattern: { value: /\d/, message: feilmelding.global },
+                    validate: () => validerPeriode(sporsmal, id, getValues())
                 }}
                 id={id}
                 name={id}
@@ -69,8 +71,11 @@ const PeriodeKomp = ({ sporsmal, index, slettPeriode }: AllProps) => {
             </Vis>
 
             <Normaltekst tag='div' role='alert' aria-live='assertive' className='skjemaelement__feilmelding'>
-                <Vis hvis={errors[id]}>
+                <Vis hvis={errors[id]?.type === 'pattern'}>
                     <p>{feilmelding.lokal}</p>
+                </Vis>
+                <Vis hvis={errors[id]?.type === 'validate'}>
+                    <p>Du må oppi en annen periode</p>
                 </Vis>
             </Normaltekst>
         </li>

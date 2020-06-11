@@ -31,7 +31,6 @@ const Perioder = ({ sporsmal }: SpmProps) => {
             input!.setAttribute('id', sporsmal.id + '_t_' + key)
             input!.setAttribute('autoComplete', 'off')
         })
-
     }
 
     const oppdaterPerioder = () => {
