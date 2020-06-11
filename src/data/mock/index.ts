@@ -35,6 +35,7 @@ mock.post(`${env.syfoapiRoot}/syfosoknad/api/soknader/:soknad/korriger`, (args: 
     soknad.status = RSSoknadstatus.UTKAST_TIL_KORRIGERING
     return soknad as any
 })
+mock.post(`${env.syfoapiRoot}/syfosoknad/api/soknader/:soknad/gjenapne`, {})
 mock.post(`${env.syfoapiRoot}/syfosoknad/api/opprettSoknadUtland`, () => {
     const soknad = soknader.find((sok: RSSoknad) => {
         return sok.soknadstype === RSSoknadstype.OPPHOLD_UTLAND && sok.status === RSSoknadstatus.NY

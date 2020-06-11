@@ -55,6 +55,11 @@ const lyttTilNettverksKall = (a: any) => {
             expect(headers, '/send')
                 .to.deep.eq({ 'Content-Type': 'application/json' })
         }
+        else if(url.includes('/gjenapne')) {
+            const headers = req[ 'headers' ]
+            expect(headers, '/gjenapne')
+                .to.deep.eq({ 'Content-Type': 'application/json' })
+        }
         else {
             cy.log('Sjekker ikke kallet til', url)
         }

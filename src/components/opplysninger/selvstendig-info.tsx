@@ -12,7 +12,7 @@ const SelvstendigInfo = () => {
 
     return (
         <div className='avsnitt'>
-            <EtikettLiten tag='h3' className='avsnitt-hode'>{tekst('din-sykmelding.arbeidssituasjon.tittel.2')}</EtikettLiten>
+            <EtikettLiten tag='h3' className='avsnitt-hode'>{tekst('statuspanel.status')}</EtikettLiten>
             <Normaltekst>{tekst('din-sykmelding.arbeidssituasjon.alternativ.frilanser')}</Normaltekst>
         </div>
     )

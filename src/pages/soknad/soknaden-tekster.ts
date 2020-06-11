@@ -5,6 +5,7 @@ const SoknadenTekster: any = {
         'soknad.sidetittel': 'Søknad',
         'kvittering.sidetittel': 'Kvittering',
         'soknad.tilbakeknapp': 'Tilbake',
+        'statuspanel.status': 'Status',
         'sykepengesoknad.foer-du-begynner.tittel': 'Før du begynner',
         'sykepengesoknad.foer-du-begynner.introtekst': 'Det du fyller ut brukes til å vurdere om du har rett til sykepenger, og eventuelt hvor mye. Derfor ber vi deg bekrefte at opplysningene er riktige:',
         'sykepengesoknad.til-slutt.tittel': 'Til slutt',

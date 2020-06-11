@@ -9,12 +9,12 @@ import { Link, useParams } from 'react-router-dom'
 import Banner from '../../components/banner/banner'
 import Brodsmuler from '../../components/brodsmuler/brodsmuler'
 import { HotjarTrigger } from '../../components/hotjar-trigger'
-import Kvittering from '../../components/kvittering/kvittering'
 import Opplysninger from '../../components/opplysninger/opplysninger'
 import SoknadIntro from '../../components/soknad-intro/soknad-intro'
 import SporsmalForm from '../../components/sporsmal/sporsmal-form/sporsmal-form'
 import SporsmalSteg from '../../components/sporsmal/sporsmal-steg/sporsmal-steg'
 import { hentNokkel } from '../../components/sporsmal/sporsmal-utils'
+import StatusPanel from '../../components/status/statuspanel'
 import Vis from '../../components/vis'
 import { useAppStore } from '../../data/stores/app-store'
 import { RSSoknadstatus } from '../../types/rs-types/rs-soknadstatus'
@@ -124,7 +124,12 @@ const Fordeling = () => {
 
         // Tidligere søknader
         case RSSoknadstatus.AVBRUTT:
-            return <Kvittering />
+            return (
+                <>
+                    <StatusPanel />
+                    <Opplysninger ekspandert={false} />
+                </>
+            )
 
         // Håndteres i /kvittering/:id
         case RSSoknadstatus.SENDT:

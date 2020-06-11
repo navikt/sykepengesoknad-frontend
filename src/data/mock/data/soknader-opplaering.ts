@@ -2514,6 +2514,4 @@ export const oppholdUtland = {
     } ],
     'egenmeldtSykmelding': null
 }
-
-
 export const soknaderOpplaering = [ behandlingsdager, arbeidstaker, arbeidstakerGradert, arbeidsledig, frilanser, oppholdUtland ] as any as RSSoknad[]

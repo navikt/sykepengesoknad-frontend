@@ -5,7 +5,8 @@ const OpplysningerTekster: any = {
         'sykepengesoknad.sykmelding-utdrag.arbeidsgiver': 'Arbeidsgiver',
         'din-sykmelding.arbeidssituasjon.tittel.2': 'Hva passer best for deg?',
         'din-sykmelding.arbeidssituasjon.alternativ.frilanser': 'Jeg er frilanser',
-        'sykepengesoknad.sykmelding-utdrag.dato-sykmeldingen-ble-skrevet': 'Dato sykmeldingen ble skrevet'
+        'sykepengesoknad.sykmelding-utdrag.dato-sykmeldingen-ble-skrevet': 'Dato sykmeldingen ble skrevet',
+        'sykepengesoknad.status.AVBRUTT': 'Avbrutt av deg'
     }, 'en': {}
 }
 

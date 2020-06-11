@@ -24,7 +24,7 @@ const Opplysninger = ({ ekspandert }: OpplysningerProps) => {
     const { stegId } = useParams()
 
     useEffect(() => {
-        const tidligere = valgtSoknad.status === RSSoknadstatus.SENDT || valgtSoknad.status === RSSoknadstatus.AVBRUTT
+        const tidligere = valgtSoknad.status === RSSoknadstatus.SENDT
         const stegNo = parseInt(stegId)
         setApen(!tidligere && stegNo === 1)
     }, [ valgtSoknad.status, stegId ])
