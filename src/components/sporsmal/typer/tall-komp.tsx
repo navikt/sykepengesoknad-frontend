@@ -80,9 +80,16 @@ const TallInput = ({ sporsmal }: SpmProps) => {
 
             <div role='alert' aria-live='assertive' className='skjemaelement__feilmelding'>
                 <Vis hvis={errors[sporsmal.id]}>
-                    <Normaltekst tag='span'>
-                        <p>{feilmelding.lokal}</p>
-                    </Normaltekst>
+                    <Vis hvis={errors[sporsmal.id]?.type !== 'validate'}>
+                        <Normaltekst tag='span'>
+                            <p>{feilmelding.lokal}</p>
+                        </Normaltekst>
+                    </Vis>
+                    <Vis hvis={errors[sporsmal.id]?.type === 'validate'}>
+                        <Normaltekst tag='span'>
+                            <p>{errors[sporsmal.id]?.message}</p>
+                        </Normaltekst>
+                    </Vis>
                 </Vis>
             </div>
 
