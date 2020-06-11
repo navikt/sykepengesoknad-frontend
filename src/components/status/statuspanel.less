@@ -1,28 +1,20 @@
 @import '../../../node_modules/nav-frontend-core/less/_variabler';
 
+
 .statuspanel {
-    display: flex;
-    width: 100%;
-
-    &.statuspanel--ramme {
-        padding: 1.5rem 2.5rem 2.5rem
-    }
-
-    .avsnitt {
-        margin: 0;
-    }
-
-    .venstre-justert {
-        alignment: left;
-        width: 50%;
-    }
-
-    .hoyre-justert {
-        alignment: right;
-        width: 50%;
-    }
-}
-
-.panel--ramme {
+    padding: 1rem 2rem 1.25rem;
     border: 1px solid @navGra40;
+
+    .content {
+        display: flex;
+
+        .avsnitt {
+            margin-bottom: 2rem;
+            margin-right: 2.5rem;
+            width: 50%;
+        }
+        .avsnitt-hode {
+            margin-top: 1rem;
+        }
+    }
 }

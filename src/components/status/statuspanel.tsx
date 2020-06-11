@@ -1,41 +1,21 @@
 import './statuspanel.less'
 
 import { Knapp } from 'nav-frontend-knapper'
-import { EtikettLiten } from 'nav-frontend-typografi'
-import React, { useEffect, useState } from 'react'
+import { EtikettLiten, Normaltekst } from 'nav-frontend-typografi'
+import React, { useEffect } from 'react'
 import { useHistory, useParams } from 'react-router'
 
 import { useAppStore } from '../../data/stores/app-store'
 import { RSSoknadstatus } from '../../types/rs-types/rs-soknadstatus'
 import { RSSoknadstype } from '../../types/rs-types/rs-soknadstype'
-import { Soknad } from '../../types/types'
 import { tilLesbarDatoMedArstall } from '../../utils/dato-utils'
 import env from '../../utils/environment'
 import { logger } from '../../utils/logger'
 import { tekst } from '../../utils/tekster'
+import Vis from '../vis'
 
-interface StatusNokkelopplysningProps {
-    tittel: string;
-    innhold: string | null;
-}
-
-export const StatusNokkelopplysning = ({ tittel, innhold }: StatusNokkelopplysningProps) => {
-    return (
-        <>
-            <EtikettLiten tag='h3'>{tittel}</EtikettLiten>
-            <p className={'avsnitt'}> {innhold} </p>
-        </>
-    )
-}
-
-interface GjenapneSoknadProps {
-    soknad: Soknad;
-
-}
-
-export const StatusPanel = () => {
+const StatusPanel = () => {
     const { valgtSoknad, setValgtSoknad, setValgtSykmelding, sykmeldinger, soknader, setSoknader } = useAppStore()
-    const [ gjenapner ] = useState<boolean>(false)
     const history = useHistory()
     const { id } = useParams()
 
@@ -50,35 +30,14 @@ export const StatusPanel = () => {
     }, [])
 
     const soknadKanGjenapnes = (opprettetDato: Date) => {
-        const oppholdUtland = valgtSoknad?.soknadstype === RSSoknadstype.OPPHOLD_UTLAND
+        const oppholdUtland = valgtSoknad!.soknadstype === RSSoknadstype.OPPHOLD_UTLAND
         const ettAarSiden = new Date()
         ettAarSiden.setFullYear(ettAarSiden.getFullYear() - 1)
         return !oppholdUtland && opprettetDato >= ettAarSiden
     }
 
-    const GjenapneSoknad = ({ soknad }: GjenapneSoknadProps) => {
-        logger.info(`GjenapneSoknad-1 - sykepengesoknad.id: ${soknad.id} - vis: ${soknadKanGjenapnes(soknad.opprettetDato)}`)
-
-        return soknadKanGjenapnes(soknad.opprettetDato)
-            ?
-            <div className="verktoylinje__element">
-                {
-                    logger.info(`GjenapneSoknad-2 - sykepengesoknad.id: ${soknad.id} - vis: ${soknad.opprettetDato}`)
-                }
-                <Knapp
-                    type="standard"
-                    spinner={gjenapner}
-                    disabled={gjenapner}
-                    mini
-                    onClick={Gjenapne}
-                    className="js-gjenapne">
-                    {'Gjenåpne'}
-                </Knapp>
-            </div>
-            : null
-    }
-
     const Gjenapne = () => {
+        logger.info(`GjenapneSoknad-1 - sykepengesoknad.id: ${valgtSoknad!.id} - vis: ${soknadKanGjenapnes(valgtSoknad!.opprettetDato)}`)
         fetch(env.syfoapiRoot + `/syfosoknad/api/soknader/${valgtSoknad!.id}/gjenapne`, {
             method: 'POST',
             credentials: 'include',
@@ -102,22 +61,27 @@ export const StatusPanel = () => {
         })
     }
 
+
     return (
-        <div className={'statuspanel panel--ramme statuspanel--ramme'}>
-            <div className={'venstre-justert'}>
-                <StatusNokkelopplysning
-                    tittel={tekst('statuspanel.status')}
-                    innhold={tekst('sykepengesoknad.status.AVBRUTT')}
-                />
+        <div className={'statuspanel'}>
+            <div className={'content'}>
+                <div className='avsnitt'>
+                    <EtikettLiten tag='h3' className='avsnitt-hode'>{tekst('statuspanel.status')}</EtikettLiten>
+                    <Normaltekst>{tekst('sykepengesoknad.status.AVBRUTT')}</Normaltekst>
+                </div>
+                <div className='avsnitt'>
+                    <EtikettLiten tag='h3' className='avsnitt-hode'>{'Dato avbrutt'}</EtikettLiten>
+                    <Normaltekst>{tilLesbarDatoMedArstall(valgtSoknad!.avbruttDato)}</Normaltekst>
+                </div>
             </div>
-            <div className={'hoyre-justert'}>
-                <StatusNokkelopplysning
-                    tittel={'Dato avbrutt'}
-                    innhold={tilLesbarDatoMedArstall(valgtSoknad?.avbruttDato)}
-                />
-            </div>
-            <GjenapneSoknad soknad={valgtSoknad!} />
+            <Vis hvis={ soknadKanGjenapnes(valgtSoknad!.opprettetDato)} >
+                <Knapp mini type="standard" onClick={Gjenapne}>
+                    {'Gjenåpne søknad'}
+                </Knapp>
+            </Vis>
         </div>
     )
 
 }
+
+export default StatusPanel
