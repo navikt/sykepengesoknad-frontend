@@ -16,7 +16,7 @@ const TallInput = ({ sporsmal }: SpmProps) => {
     const [ lokal, setLokal ] = useState<string>(hentSvar(sporsmal))
     const { register, setValue, errors, getValues } = useFormContext()
     const undersporsmal = useRef<HTMLDivElement>(null)
-    const { validerGrad, hovedSporsmal } = validerArbeidsgrad(sporsmal)
+    const { validerGrad, periode, hovedSporsmal } = validerArbeidsgrad(sporsmal)
 
     const onChange = (e: any) => {
         const value = e.target.value
@@ -35,7 +35,7 @@ const TallInput = ({ sporsmal }: SpmProps) => {
 
         const values = getValues()
 
-        return validerGrad(values)
+        return validerGrad ? validerGrad(values) : true
     }
 
     useEffect(() => {
@@ -85,9 +85,10 @@ const TallInput = ({ sporsmal }: SpmProps) => {
                             <p>{feilmelding.lokal}</p>
                         </Normaltekst>
                     </Vis>
-                    <Vis hvis={errors[sporsmal.id]?.type === 'validate'}>
+                    <Vis hvis={errors[sporsmal.id]?.type === 'validate' && sporsmal.tag === TagTyper.HVOR_MYE_TIMER_VERDI}>
                         <Normaltekst tag='span'>
-                            <p>{errors[sporsmal.id]?.message}</p>
+                            <p>{getLedetekst(tekst('soknad.feilmelding.MINDRE_TIMER_ENN_FORVENTET.lokal'),
+                                { '%GRAD%': periode.grad })}</p>
                         </Normaltekst>
                     </Vis>
                 </Vis>
