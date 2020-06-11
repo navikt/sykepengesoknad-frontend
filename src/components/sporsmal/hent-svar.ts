@@ -55,7 +55,7 @@ export const hentPeriode = (sporsmal: Sporsmal, index: number) => {
 
 export const hentPeriodeListe = ( sporsmal: Sporsmal ) => {
     return hentPerioder(sporsmal).map(i => hentPeriode(sporsmal, i))
-};
+}
 
 export const hentFormState = (sporsmal: Sporsmal) => {
     return hentSvarliste(sporsmal)

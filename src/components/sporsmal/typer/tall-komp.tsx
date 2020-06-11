@@ -3,7 +3,6 @@ import React, { useEffect, useRef, useState } from 'react'
 import { useFormContext } from 'react-hook-form'
 
 import { TagTyper } from '../../../types/enums'
-import { hentUndersporsmal } from '../../../utils/soknad-utils'
 import validerArbeidsgrad from '../../../utils/sporsmal/valider-arbeidsgrad'
 import { getLedetekst, tekst } from '../../../utils/tekster'
 import Vis from '../../vis'
@@ -30,17 +29,11 @@ const TallInput = ({ sporsmal }: SpmProps) => {
             return true // hopp over validering dersom det ikke er spørsmål av denne typen
         }
 
-        const values = getValues()
-
-        if (values[hovedSporsmal!.id] === 'NEI') {
+        if (sporsmal.tag !== TagTyper.HVOR_MYE_TIMER_VERDI) {
             return true
         }
 
-        const verditype = hentUndersporsmal(hovedSporsmal!, TagTyper.HVOR_MYE_HAR_DU_JOBBET)!.id;
-
-        if (values[verditype] === 'prosent') {
-            return true // prosent valideres ved MIN/MAX-verdier i feltet
-        }
+        const values = getValues()
 
         return validerGrad(values)
     }
