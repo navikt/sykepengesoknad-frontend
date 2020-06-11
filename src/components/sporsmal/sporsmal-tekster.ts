@@ -52,6 +52,7 @@ const SporsmalTekster: any = {
         'soknad.feilmelding.HVOR_MYE_TIMER': 'Du må velge et alternativ',
         'soknad.feilmelding.HVOR_MYE_TIMER_VERDI': 'Du må svare på hvor mye du jobbet totalt',
         'soknad.feilmelding.HVOR_MYE_TIMER_VERDI.lokal': 'Du må oppgi antall timer',
+        'soknad.feilmelding.MINDRE_TIMER_ENN_FORVENTET': 'Timene du skrev inn tyder på at du har jobbet mindre enn GRAD %. Du må enten svare nei på spørsmålet over eller endre antall timer her.',
 
         'soknad.feilmelding.TIDLIGERE_SYK': 'Du må svare på om du var syk med egenmelding eller papirsykmelding',
         'soknad.feilmelding.TIDLIGERE_SYK.lokal': 'Du må velge et av alternativene',

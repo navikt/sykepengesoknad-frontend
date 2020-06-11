@@ -6,6 +6,7 @@ import { TagTyper } from '../../types/enums';
 import { Sporsmal } from '../../types/types';
 import { ukeDatoListe } from '../dato-utils';
 import { finnHovedSporsmal, hentSporsmal, hentUndersporsmal } from '../soknad-utils';
+import {getLedetekst, tekst} from "../tekster";
 
 
 const useValiderArbeidsgrad = ( sporsmal: Sporsmal ) => {
@@ -34,36 +35,23 @@ const useValiderArbeidsgrad = ( sporsmal: Sporsmal ) => {
         });
 
     const validerGrad = ( values: Record<string, any> ) => {
-        if (![ TagTyper.JOBBET_DU_GRADERT, TagTyper.JOBBET_DU_100_PROSENT ].includes(hovedSporsmal!.tag)) {
-            return true;
-        }
-        if (values[hovedSporsmal!.id] === 'NEI') {
-            return true;
-        }
-
-        const verditype = hentUndersporsmal(hovedSporsmal!, TagTyper.HVOR_MYE_HAR_DU_JOBBET)!.id;
-
-        if (values[verditype] === 'prosent') {
-            return true;
-        }
-
-        const timerTotaltId = hentUndersporsmal(hovedSporsmal!, TagTyper.HVOR_MANGE_TIMER_PER_UKE)!.id;
+        const timerPerUkeId = hentUndersporsmal(hovedSporsmal!, TagTyper.HVOR_MANGE_TIMER_PER_UKE)!.id;
         const faktiskTimerId = hentUndersporsmal(hovedSporsmal!, TagTyper.HVOR_MYE_TIMER_VERDI)!.id;
 
         const dagerIPeriode = faktiskeSykedager.length;
         const uker = dagerIPeriode / 7;
-        const sykefravaerGrad = periode.grad / 100;
-        const timerTotalt = parseFloat(values[timerTotaltId]);
+        const forventetArbeidsGrad = 1.0 - (periode.grad / 100);
+        const timerPerUke = parseFloat(values[timerPerUkeId]);
         const faktiskTimer = parseFloat(values[faktiskTimerId]);
 
-        const maksArbeid = timerTotalt * uker * sykefravaerGrad;
+        const faktiskArbeidsGrad = faktiskTimer / uker / timerPerUke;
 
-        const faktiskGrad = faktiskTimer / maksArbeid;
-
-        return faktiskGrad < sykefravaerGrad;
+        return faktiskArbeidsGrad < forventetArbeidsGrad
+            ? getLedetekst(tekst('soknad.feilmelding.MINDRE_TIMER_ENN_FORVENTET'), { 'GRAD': Math.round(forventetArbeidsGrad * 100)})
+            : true;
     };
 
-    return [ validerGrad ];
+    return { validerGrad, hovedSporsmal };
 };
 
 export default useValiderArbeidsgrad;
