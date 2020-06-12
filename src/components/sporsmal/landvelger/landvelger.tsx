@@ -23,9 +23,8 @@ const LandvelgerComponent = ({ verdierInn, name, id, onChange }: LandvelgerCompo
     const onAdd = (verdi: Forslag) => {
         const nyeVerdier = [ ...verdier, verdi.text ]
         setVerdier(nyeVerdier)
-        if (onChange) {
-            onChange(nyeVerdier)
-        }
+        onChange(nyeVerdier)
+
     }
 
     const onDelete = (idx: number) => {
@@ -36,10 +35,7 @@ const LandvelgerComponent = ({ verdierInn, name, id, onChange }: LandvelgerCompo
             .forEach((v) => nyeVerdier.push(v))
 
         setVerdier(nyeVerdier)
-        if (onChange) {
-            onChange(verdier)
-        }
-
+        onChange(nyeVerdier)
     }
 
     return (<>
