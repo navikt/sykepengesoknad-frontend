@@ -3,7 +3,7 @@ import React, { useEffect } from 'react'
 import { Controller, useFormContext } from 'react-hook-form'
 
 import Vis from '../../vis'
-import { LandvelgerComponent } from '../landvelger/landvelger'
+import LandvelgerComponent from '../landvelger/landvelger'
 import { SpmProps } from '../sporsmal-form/sporsmal-form'
 import { hentFeilmelding } from '../sporsmal-utils'
 

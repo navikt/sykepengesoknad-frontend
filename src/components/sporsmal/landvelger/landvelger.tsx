@@ -16,7 +16,7 @@ interface LandvelgerComponentProps {
 }
 
 
-export const LandvelgerComponent = ({ verdierInn, name, id, onChange }: LandvelgerComponentProps) => {
+const LandvelgerComponent = ({ verdierInn, name, id, onChange }: LandvelgerComponentProps) => {
 
     const [ verdier, setVerdier ] = useState(verdierInn)
 
@@ -45,7 +45,6 @@ export const LandvelgerComponent = ({ verdierInn, name, id, onChange }: Landvelg
     return (<>
         <NavAutosuggest
             onAdd={onAdd}
-
             forslagsliste={tilForslagsliste(landliste, verdier)}
         />
         <ValgteTags verdier={verdier} handleDelete={onDelete} />
@@ -53,23 +52,5 @@ export const LandvelgerComponent = ({ verdierInn, name, id, onChange }: Landvelg
     </>)
 }
 
-const LandvelgerWrapper = () => {
 
-
-    return (<>
-        <LandvelgerComponent
-            name={'hei'}
-            id={'123'}
-            verdierInn={[ 'Djibouti', 'Falklandsøyene' ]}
-            onChange={() => {
-                // eslint-disable-next-line no-console
-                console.log('change')
-            }
-            }
-
-        />
-    </>)
-}
-
-
-export default LandvelgerWrapper
+export default LandvelgerComponent

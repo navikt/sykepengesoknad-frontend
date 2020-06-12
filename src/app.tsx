@@ -5,7 +5,6 @@ import { Route, Switch } from 'react-router-dom'
 import { CSSTransition, TransitionGroup } from 'react-transition-group'
 
 import { Amplitude } from './components/amplitude/amplitudeProvider'
-import LandvelgerComponent from './components/sporsmal/landvelger/landvelger'
 import { DataFetcher } from './data/data-fetcher'
 import StoreProvider from './data/stores/store-provider'
 import KvitteringSide from './pages/kvittering/kvittering-side'
@@ -30,7 +29,6 @@ const App = (): any => {
                                     <Route path={'/soknader/:id'} component={Soknad} />
                                     <Route path={'/kvittering/:id'} component={KvitteringSide} />
                                     <Route path={'/sykepengesoknad-utland'} component={OpprettUtland} />
-                                    <Route path={'/land'} component={LandvelgerComponent} />
                                 </Switch>
                             </CSSTransition>
                         </TransitionGroup>

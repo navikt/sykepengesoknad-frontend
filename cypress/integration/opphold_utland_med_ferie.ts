@@ -36,7 +36,9 @@ describe('Tester søknad om å beholde sykepenger utenfor EØS', () => {
 
 
         cy.contains('Hvilket land skal du reise til?')
-        cy.contains('Syden').click({ force: true })
+        cy.get('.skjemaelement__input').type('Fransk')
+        cy.contains('Fransk Polynesia')
+        cy.contains('Søre franske territorier').click({ force: true })
 
         cy.contains('Gå videre').click()
     })
