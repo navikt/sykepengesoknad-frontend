@@ -33,8 +33,8 @@ export default ({ sporsmal }: SpmProps) => {
                     as={LandvelgerComponent}
                     id={sporsmal.id}
                     name={sporsmal.id}
-                    onChange={(s: string[]) => {
-                        return s
+                    onChange={(values: string[][]) => {
+                        return values[0]
                     }}
                     rules={{
                         validate: () => validerLand(sporsmal, getValues())
