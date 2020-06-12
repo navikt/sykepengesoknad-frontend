@@ -36,6 +36,9 @@ export const settSvar = (sporsmal: Sporsmal, verdier: Record<string, any>): void
         case RSSvartype.DATO:
             datoSvar(sporsmal, verdi)
             break
+        case RSSvartype.LAND:
+            landSvar(sporsmal, verdi)
+            break
         case RSSvartype.PERIODE:
         case RSSvartype.PERIODER:
             periodeSvar(sporsmal, verdi)
@@ -66,6 +69,22 @@ const checkboxSvar = (sporsmal: Sporsmal, verdi: any) => {
     sporsmal.svarliste = {
         sporsmalId: sporsmal.id,
         svar: [ { verdi: (verdi === SvarEnums.CHECKED || verdi === true) ? SvarEnums.CHECKED : '' } ]
+    }
+}
+
+const landSvar = (sporsmal: Sporsmal, verdi: string[][]) => {
+    if (verdi.length === 0) {
+        sporsmal.svarliste = {
+            sporsmalId: sporsmal.id,
+            svar: [  ]
+        }
+    } else {
+        sporsmal.svarliste = {
+            sporsmalId: sporsmal.id,
+            svar: verdi[0].map((a) => {
+                return { verdi: a }
+            })
+        }
     }
 }
 

@@ -36,7 +36,18 @@ describe('Tester søknad om å beholde sykepenger utenfor EØS', () => {
 
 
         cy.contains('Hvilket land skal du reise til?')
-        cy.contains('Syden').click({ force: true })
+        cy.get('.skjemaelement__input').type('Fransk')
+        cy.contains('Fransk Polynesia')
+        cy.contains('Søre franske territorier').click({ force: true })
+        cy.get('.skjemaelement__input').type('De')
+        cy.contains('De forente arabiske emirater')
+        cy.contains('De okkuperte palestinske områdene').click({ force: true })
+
+        cy.get('.skjemaelement__input').type('R')
+        cy.contains('Amerikansk Samoa').click({ force: true })
+        cy.contains('Amerikansk Samoa')
+        cy.get(':nth-child(3) > .etikett__slett').click()
+        cy.contains('Amerikansk Samoa').should('not.exist')
 
         cy.contains('Gå videre').click()
     })
@@ -68,6 +79,12 @@ describe('Tester søknad om å beholde sykepenger utenfor EØS', () => {
         cy.contains('Søknaden er sendt til NAV')
         cy.contains('Endre søknad').should('not.exist')
         cy.contains('Send til NAV').should('not.exist')
+        cy.get('.ekspanderbartPanel__tittel > .typo-element').click()
+        cy.contains('Hvilket land skal du reise til?')
+        cy.contains('Søre franske territorier')
+        cy.contains('De okkuperte palestinske områdene')
+        cy.contains('Amerikansk Samoa').should('not.exist')
+
     })
 
 })
