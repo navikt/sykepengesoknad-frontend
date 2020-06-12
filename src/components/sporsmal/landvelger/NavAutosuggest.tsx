@@ -1,8 +1,9 @@
 import cn from 'classnames'
-import React, { Component } from 'react'
+import React, { useState } from 'react'
 import Autosuggest, { SuggestionSelectedEventData } from 'react-autosuggest'
 
 import { Forslag } from './Forslag'
+
 
 const getQueryIndex = (query: string, forslag: Forslag) => {
     return forslag.text
@@ -30,48 +31,33 @@ export interface NavAutosuggestProps {
     onAdd: (i: Forslag) => void;
 }
 
-export interface NavAutosuggestState {
-    value: string;
-    suggestions: Forslag[]; //TODO type
-}
+
+const NavAutosuggest = (props: NavAutosuggestProps) => {
+
+    const [ value, setValue ] = useState('')
+    const [ suggestions, setSuggestions ] = useState<Forslag[]>([])
 
 
-class NavAutosuggest extends Component<NavAutosuggestProps, NavAutosuggestState> {
-    constructor(props: NavAutosuggestProps) {
-        super(props)
-        this.state = {
-            value: '',
-            suggestions: [],
-        }
-        this.onChange = this.onChange.bind(this)
-        this.onBlur = this.onBlur.bind(this)
-        this.onSuggestionsFetchRequested = this.onSuggestionsFetchRequested.bind(this)
-        this.onSuggestionsClearRequested = this.onSuggestionsClearRequested.bind(this)
-        this.onSuggestionSelected = this.onSuggestionSelected.bind(this)
+    const onChange = (event: any, { newValue }: any) => {
+        setValue(newValue)
     }
 
-    onChange(event: any, { newValue }: any) {
-        this.setState({
-            value: newValue,
-        })
-    }
-
-    onBlur(event: React.FocusEvent) {
+    const onBlur = (event: React.FocusEvent) => {
         const value = (event.target as any).value as string
         const forslag = new Forslag(value.trim())
-        const forslagFraListe = this.props.forslagsliste.find((_forslag) => {
+        const forslagFraListe = props.forslagsliste.find((_forslag) => {
             return _forslag.text.toUpperCase() === forslag.text.toUpperCase()
         })
         if (forslagFraListe) {
-            this.velgForslag(forslag)
+            velgForslag(forslag)
         }
     }
 
-    onSuggestionsFetchRequested({ value }: any) {
-        const eksakteForslag = this.props.forslagsliste.filter((forslag) => {
+    const onSuggestionsFetchRequested = ({ value }: any) => {
+        const eksakteForslag = props.forslagsliste.filter((forslag) => {
             return getQueryIndex(value, forslag) === 0
         })
-        const delvisMatchForslag = this.props.forslagsliste.filter((forslag) => {
+        const delvisMatchForslag = props.forslagsliste.filter((forslag) => {
             return getQueryIndex(value, forslag) > 0
         })
         const suggestions = [ ...eksakteForslag, ...delvisMatchForslag ]
@@ -79,50 +65,42 @@ class NavAutosuggest extends Component<NavAutosuggestProps, NavAutosuggestState>
                 return forslag.id !== 'NORGE'
             })
             .slice(0, 5)
-        this.setState({
-            suggestions,
-        })
+        setSuggestions(suggestions)
+    }
+    const velgForslag = (suggestion: Forslag) => {
+
+        setValue('')
+        props.onAdd(suggestion)
     }
 
-
-    onSuggestionSelected(event: React.FormEvent, { suggestion, method }: SuggestionSelectedEventData<Forslag>) {
+    const onSuggestionSelected = (event: React.FormEvent, { suggestion, method }: SuggestionSelectedEventData<Forslag>) => {
         if (method === 'enter') {
             event.preventDefault()
         }
-        this.velgForslag(suggestion)
+        velgForslag(suggestion)
     }
 
-    onSuggestionsClearRequested() {
-        this.setState({
-            suggestions: [],
-        })
+    const onSuggestionsClearRequested = () => {
+        setSuggestions([])
     }
 
-    velgForslag(suggestion: Forslag) {
-        this.setState({
-            value: '',
-        })
-        this.props.onAdd(suggestion)
-    }
 
-    render() {
-        return (<Autosuggest
-            onSuggestionsFetchRequested={this.onSuggestionsFetchRequested}
-            onSuggestionsClearRequested={this.onSuggestionsClearRequested}
-            onSuggestionSelected={this.onSuggestionSelected}
-            getSuggestionValue={getSuggestionValue}
-            renderSuggestion={renderSuggestion}
-            suggestions={this.state.suggestions}
-            inputProps={
-                {
-                    value: this.state.value,
-                    onChange: this.onChange,
-                    onBlur: this.onBlur,
-                    className: cn('skjemaelement__input input--l input--autocomplete'),
-                }
+    return (<Autosuggest
+        onSuggestionsFetchRequested={onSuggestionsFetchRequested}
+        onSuggestionsClearRequested={onSuggestionsClearRequested}
+        onSuggestionSelected={onSuggestionSelected}
+        getSuggestionValue={getSuggestionValue}
+        renderSuggestion={renderSuggestion}
+        suggestions={suggestions}
+        inputProps={
+            {
+                value: value,
+                onChange: onChange,
+                onBlur: onBlur,
+                className: cn('skjemaelement__input input--l input--autocomplete'),
             }
-        />)
-    }
+        }
+    />)
 }
 
 
