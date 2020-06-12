@@ -19,7 +19,6 @@ test('Alle tags har global feilmelding', () => {
             && skipTag !== TagTyper.BEKREFT_OPPLYSNINGER_UTLAND_INFO
 
             // TODO: Sjekk om disse faktisk ikke skal ha feilmelding
-            && skipTag !== TagTyper.PERMITTERT_PERIODE_NAR
             && skipTag !== TagTyper.ENKELTSTAENDE_BEHANDLINGSDAGER_DAG_NAR
     })
 

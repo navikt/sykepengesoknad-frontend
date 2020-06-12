@@ -52,11 +52,29 @@ describe('Tester arbeidsledigsøknad', () => {
     it('Søknad PERMITTERT_PERIODE - steg 3', () => {
         cy.url().should('include', `${soknad.id}/3`)
 
-        // Test spørsmål
+        // Hovedspørsmål
         cy.get('.inputPanelGruppe__inner label:first-child > input[value=JA]').click({ force: true })
-        cy.get('.undersporsmal .skjemaelement__input.form-control').focus()
-        cy.get('.flatpickr-calendar').contains('17').click({ force: true })
-        cy.get('.flatpickr-calendar').contains('24').click({ force: true })
+
+        // Periode 1
+        cy.get('.undersporsmal .skjemaelement__input.form-control#687399_t_0').focus()
+        cy.get('.flatpickr-calendar.open').contains('10').click({ force: true })
+        cy.get('.flatpickr-calendar.open').contains('15').click({ force: true })
+
+        // Periode 2 - overlapper
+        cy.contains('+ Legg til ekstra periode').click()
+        cy.get('.undersporsmal .skjemaelement__input.form-control#687399_t_1').focus()
+        cy.get('.flatpickr-calendar.open').contains('12').click({ force: true })
+        cy.get('.flatpickr-calendar.open').contains('20').click({ force: true })
+
+        // Feilmelding
+        cy.contains('Gå videre').click()
+        cy.contains('Det er 1 feil i skjemaet')
+        cy.contains('Du kan ikke legge inn perioder som overlapper med hverandre')
+
+        // Endre periode 2
+        cy.get('.undersporsmal .skjemaelement__input.form-control#687399_t_1').focus()
+        cy.get('.flatpickr-calendar.open').contains('16').click({ force: true })
+        cy.get('.flatpickr-calendar.open').contains('20').click({ force: true })
 
         cy.contains('Gå videre').click()
     })
