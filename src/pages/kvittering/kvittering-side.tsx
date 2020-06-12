@@ -3,7 +3,7 @@ import './kvittering.less'
 import { VenstreChevron } from 'nav-frontend-chevron'
 import { Normaltekst } from 'nav-frontend-typografi'
 import React, { useEffect, useState } from 'react'
-import { Link } from 'react-router-dom'
+import { Link, useParams } from 'react-router-dom'
 
 import Banner from '../../components/banner/banner'
 import Brodsmuler from '../../components/brodsmuler/brodsmuler'
@@ -27,8 +27,19 @@ const brodsmuler: Brodsmule[] = [ {
 } ]
 
 const KvitteringSide = () => {
-    const { valgtSoknad } = useAppStore()
+    const { valgtSoknad, soknader, setValgtSoknad, setValgtSykmelding, sykmeldinger } = useAppStore()
     const [ erSiste, setErSiste ] = useState<boolean>()
+
+    const { id } = useParams()
+
+    useEffect(() => {
+        const filtrertSoknad = soknader.filter(soknad => soknad.id === id)[0]
+        setValgtSoknad(filtrertSoknad)
+
+        const sykmelding = sykmeldinger.filter(sm => sm.id === filtrertSoknad.sykmeldingId)[0]
+        setValgtSykmelding(sykmelding)
+        // eslint-disable-next-line
+    }, [id]);
 
     useEffect(() => {
         setBodyClass('kvittering')
