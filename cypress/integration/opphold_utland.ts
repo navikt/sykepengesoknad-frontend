@@ -68,9 +68,13 @@ describe('Tester søknad om å beholde sykepenger utenfor EØS', () => {
         cy.contains('Gå videre').click()
     })
 
+    it('Gå tilbake og frem', function() {
+        cy.contains('Tilbake').click()
+        cy.contains('Gå videre').click()
+    })
+
     it('ARBEIDSGIVER', function() {
         cy.url().should('include', `${soknad.id}/3`)
-
 
         cy.contains('Har du arbeidsgiver?')
         cy.contains('Nei').click({ force: true })

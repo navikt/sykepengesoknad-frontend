@@ -72,19 +72,12 @@ const checkboxSvar = (sporsmal: Sporsmal, verdi: any) => {
     }
 }
 
-const landSvar = (sporsmal: Sporsmal, verdi: string[][]) => {
-    if (verdi.length === 0) {
-        sporsmal.svarliste = {
-            sporsmalId: sporsmal.id,
-            svar: [  ]
-        }
-    } else {
-        sporsmal.svarliste = {
-            sporsmalId: sporsmal.id,
-            svar: verdi[0].map((a) => {
-                return { verdi: a }
-            })
-        }
+const landSvar = (sporsmal: Sporsmal, verdi: string[]) => {
+    sporsmal.svarliste = {
+        sporsmalId: sporsmal.id,
+        svar: verdi.map((a) => {
+            return { verdi: a }
+        })
     }
 }
 
