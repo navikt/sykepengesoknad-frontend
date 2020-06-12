@@ -1,3 +1,5 @@
+import './landvelger.less'
+
 import React, { useState } from 'react'
 
 import { Forslag } from './Forslag'
@@ -5,7 +7,6 @@ import { tilForslagsliste } from './forslagUtils'
 import landliste from './landliste'
 import NavAutosuggest from './NavAutosuggest'
 import { ValgteTags } from './ValgteTags'
-
 
 interface LandvelgerComponentProps {
     verdierInn: string[];
@@ -38,14 +39,14 @@ const LandvelgerComponent = ({ verdierInn, name, id, onChange }: LandvelgerCompo
         onChange(nyeVerdier)
     }
 
-    return (<>
+    return (<div className={'landvelger'}>
         <NavAutosuggest
             onAdd={onAdd}
             forslagsliste={tilForslagsliste(landliste, verdier)}
         />
         <ValgteTags verdier={verdier} handleDelete={onDelete} />
         <input type={'hidden'} value={verdier} name={name} id={id} />
-    </>)
+    </div>)
 }
 
 
