@@ -29,6 +29,7 @@ const renderSuggestion = (forslag: Forslag, { query }: any) => {
 export interface NavAutosuggestProps {
     forslagsliste: Forslag[];
     onAdd: (i: Forslag) => void;
+    id: string;
 }
 
 
@@ -94,6 +95,8 @@ const NavAutosuggest = (props: NavAutosuggestProps) => {
         suggestions={suggestions}
         inputProps={
             {
+                id: props.id,
+                name: props.id,
                 value: value,
                 onChange: onChange,
                 onBlur: onBlur,

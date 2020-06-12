@@ -17,7 +17,7 @@ interface LandvelgerComponentProps {
 }
 
 
-const LandvelgerComponent = ({ verdierInn, name, id, onChange }: LandvelgerComponentProps) => {
+const LandvelgerComponent = ({ verdierInn, id, onChange }: LandvelgerComponentProps) => {
 
     const [ verdier, setVerdier ] = useState(verdierInn)
 
@@ -42,10 +42,10 @@ const LandvelgerComponent = ({ verdierInn, name, id, onChange }: LandvelgerCompo
     return (<div className={'landvelger'}>
         <NavAutosuggest
             onAdd={onAdd}
+            id={id}
             forslagsliste={tilForslagsliste(landliste, verdier)}
         />
         <ValgteTags verdier={verdier} handleDelete={onDelete} />
-        <input type={'hidden'} value={verdier} name={name} id={id} />
     </div>)
 }
 
