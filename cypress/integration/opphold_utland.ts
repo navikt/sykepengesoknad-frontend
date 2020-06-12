@@ -33,12 +33,21 @@ describe('Tester søknad om å beholde sykepenger utenfor EØS', () => {
 
     it('LAND - steg 2', function() {
         cy.url().should('include', `${soknad.id}/2`)
+        cy.contains('Gå videre').click()
+        cy.contains('Du må velge ett land')
+        cy.contains('Det er 1 feil i skjemaet')
+        cy.contains('Du må oppgi et land utenfor EØS. Innenfor EØS trenger du ikke søke.')
 
 
         cy.contains('Hvilket land skal du reise til?')
         cy.get('.skjemaelement__input').type('Fransk')
         cy.contains('Fransk Polynesia')
         cy.contains('Søre franske territorier').click({ force: true })
+
+        cy.contains('Du må velge ett land').should('not.exist')
+        cy.contains('Det er 1 feil i skjemaet').should('not.exist')
+        cy.contains('Du må oppgi et land utenfor EØS. Innenfor EØS trenger du ikke søke.').should('not.exist')
+
         cy.get('.skjemaelement__input').type('De')
         cy.contains('De forente arabiske emirater')
         cy.contains('De okkuperte palestinske områdene').click({ force: true })

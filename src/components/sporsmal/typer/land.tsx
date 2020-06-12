@@ -2,19 +2,22 @@ import { Element, Normaltekst } from 'nav-frontend-typografi'
 import React, { useEffect } from 'react'
 import { Controller, useFormContext } from 'react-hook-form'
 
+import validerLand from '../../../utils/sporsmal/valider-land'
 import Vis from '../../vis'
 import LandvelgerComponent from '../landvelger/landvelger'
 import { SpmProps } from '../sporsmal-form/sporsmal-form'
 import { hentFeilmelding } from '../sporsmal-utils'
 
 export default ({ sporsmal }: SpmProps) => {
-    const { errors, setValue } = useFormContext()
+    const { errors, setValue, getValues } = useFormContext()
+
     const feilmelding = hentFeilmelding(sporsmal)
 
     useEffect(() => {
         setValue(sporsmal.id, sporsmal.svarliste.svar.map((i) => i.verdi))
         // eslint-disable-next-line
     }, [sporsmal]);
+
 
     return (
         <>
@@ -28,11 +31,13 @@ export default ({ sporsmal }: SpmProps) => {
 
                 <Controller
                     as={LandvelgerComponent}
-                    rules={{ required: feilmelding.global }}
                     id={sporsmal.id}
                     name={sporsmal.id}
                     onChange={(s: string[]) => {
                         return s
+                    }}
+                    rules={{
+                        validate: () => validerLand(sporsmal, getValues())
                     }}
                     verdierInn={sporsmal.svarliste.svar.map((i) => i.verdi)}
                 />
