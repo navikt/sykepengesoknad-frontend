@@ -13,8 +13,8 @@ describe('Tester gjenoppretting av søknad', () => {
 
     it('Avbrutt søknad har forventa tekst', function() {
         cy.get(`#soknader-sendt article[aria-labelledby*=${avbruttSoknad.id}]`)
-            .should('include.text', 'Gjelder perioden 20. mai – 4. juni 2020')
-            .should('include.text', 'Avbrutt av deg 05.06.2020')
+            .should('include.text', 'Gjelder perioden 20. mai – 5. juni 2020')
+            .should('include.text', 'Avbrutt av deg 12.06.2020')
 
     })
 
@@ -25,12 +25,10 @@ describe('Tester gjenoppretting av søknad', () => {
 
     it('Avbrutt tekster stemmer', function() {
         cy.contains('Avbrutt av deg')
-        cy.contains('5. juni 2020')
+        cy.contains('12. juni 2020')
 
         // Sykmelding
-        cy.contains('1. april - 24. april 2020 • 24 dager')
-        cy.contains('LOMMEN BARNEHAVE')
-        cy.contains('1. april 2020')
+        cy.contains('20. mai - 5. juni 2020 • 17 dager')
     })
 
     it('Søknad kan gjenåpnes', function() {

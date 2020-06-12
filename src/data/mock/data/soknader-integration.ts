@@ -29,19 +29,19 @@ export const fremtidigSøknad  = {
 }
 
 export const avbruttSoknad = {
-    'id': '94648c92-d8a5-4811-b6b9-30955ba24de4',
-    'sykmeldingId': '470c9e25-e112-4060-be61-7a24af530889',
+    'id': '811d15b2-2a76-4623-9530-1ba55617e0a5',
+    'sykmeldingId': 'ff5a4a27-2d76-4e12-9786-c7e4f31121e6',
     'soknadstype': 'ARBEIDSTAKERE',
     'status': 'AVBRUTT',
     'fom': '2020-05-20',
-    'tom': '2020-06-04',
-    'opprettetDato': '2020-06-05',
+    'tom': '2020-06-05',
+    'opprettetDato': '2020-06-12',
     'innsendtDato': null,
     'sendtTilNAVDato': null,
     'sendtTilArbeidsgiverDato': null,
-    'avbruttDato': '2020-06-05',
+    'avbruttDato': '2020-06-12',
     'startSykeforlop': '2020-05-20',
-    'sykmeldingUtskrevet': '2020-05-20',
+    'sykmeldingUtskrevet': '2020-05-27',
     'arbeidsgiver': {
         'navn': '995816598 sitt orgnavn :)',
         'orgnummer': '995816598'
@@ -52,14 +52,14 @@ export const avbruttSoknad = {
     'soknadPerioder': [
         {
             'fom': '2020-05-20',
-            'tom': '2020-06-04',
-            'grad': 60,
+            'tom': '2020-06-05',
+            'grad': 80,
             'sykmeldingstype': 'AKTIVITET_IKKE_MULIG'
         }
     ],
     'sporsmal': [
         {
-            'id': '91',
+            'id': '84',
             'tag': 'ANSVARSERKLARING',
             'sporsmalstekst': 'Jeg vet at jeg kan miste retten til sykepenger hvis opplysningene jeg gir ikke er riktige eller fullstendige. Jeg vet også at NAV kan holde igjen eller kreve tilbake penger, og at å gi feil opplysninger kan være straffbart.',
             'undertekst': null,
@@ -72,7 +72,7 @@ export const avbruttSoknad = {
             'undersporsmal': []
         },
         {
-            'id': '92',
+            'id': '85',
             'tag': 'PERMITTERT_NAA',
             'sporsmalstekst': 'Er du permittert nå?',
             'undertekst': null,
@@ -84,13 +84,13 @@ export const avbruttSoknad = {
             'svar': [],
             'undersporsmal': [
                 {
-                    'id': '93',
+                    'id': '86',
                     'tag': 'PERMITTERT_NAA_NAR',
                     'sporsmalstekst': 'Velg første dag i permitteringen',
                     'undertekst': null,
                     'svartype': 'DATO',
                     'min': '2020-01-20',
-                    'max': '2020-06-04',
+                    'max': '2020-06-05',
                     'pavirkerAndreSporsmal': false,
                     'kriterieForVisningAvUndersporsmal': null,
                     'svar': [],
@@ -99,7 +99,7 @@ export const avbruttSoknad = {
             ]
         },
         {
-            'id': '94',
+            'id': '87',
             'tag': 'PERMITTERT_PERIODE',
             'sporsmalstekst': 'Har du vært permittert i noen perioder etter 1. februar 2020?',
             'undertekst': null,
@@ -111,13 +111,13 @@ export const avbruttSoknad = {
             'svar': [],
             'undersporsmal': [
                 {
-                    'id': '95',
+                    'id': '88',
                     'tag': 'PERMITTERT_PERIODE_NAR',
                     'sporsmalstekst': null,
                     'undertekst': null,
                     'svartype': 'PERIODER',
                     'min': '2020-02-01',
-                    'max': '2020-06-04',
+                    'max': '2020-06-05',
                     'pavirkerAndreSporsmal': false,
                     'kriterieForVisningAvUndersporsmal': null,
                     'svar': [],
@@ -126,9 +126,91 @@ export const avbruttSoknad = {
             ]
         },
         {
-            'id': '96',
+            'id': '89',
+            'tag': 'EGENMELDINGER',
+            'sporsmalstekst': 'Vi har registrert at du ble sykmeldt onsdag 20. mai 2020. Var du syk og borte fra jobb i perioden 4. - 19. mai 2020?',
+            'undertekst': null,
+            'svartype': 'JA_NEI',
+            'min': null,
+            'max': null,
+            'pavirkerAndreSporsmal': false,
+            'kriterieForVisningAvUndersporsmal': 'JA',
+            'svar': [],
+            'undersporsmal': [
+                {
+                    'id': '90',
+                    'tag': 'TIDLIGERE_SYK',
+                    'sporsmalstekst': null,
+                    'undertekst': null,
+                    'svartype': 'CHECKBOX_GRUPPE',
+                    'min': null,
+                    'max': null,
+                    'pavirkerAndreSporsmal': false,
+                    'kriterieForVisningAvUndersporsmal': null,
+                    'svar': [],
+                    'undersporsmal': [
+                        {
+                            'id': '91',
+                            'tag': 'TIDLIGERE_EGENMELDING',
+                            'sporsmalstekst': 'Jeg var syk med egenmelding',
+                            'undertekst': null,
+                            'svartype': 'CHECKBOX',
+                            'min': null,
+                            'max': null,
+                            'pavirkerAndreSporsmal': false,
+                            'kriterieForVisningAvUndersporsmal': 'CHECKED',
+                            'svar': [],
+                            'undersporsmal': [
+                                {
+                                    'id': '92',
+                                    'tag': 'EGENMELDINGER_NAR',
+                                    'sporsmalstekst': 'Hvilke dager var du syk med egenmelding? Du trenger bare oppgi dager før 20. mai 2020.',
+                                    'undertekst': null,
+                                    'svartype': 'PERIODER',
+                                    'min': '2019-11-20',
+                                    'max': '2020-05-19',
+                                    'pavirkerAndreSporsmal': false,
+                                    'kriterieForVisningAvUndersporsmal': null,
+                                    'svar': [],
+                                    'undersporsmal': []
+                                }
+                            ]
+                        },
+                        {
+                            'id': '93',
+                            'tag': 'TIDLIGERE_PAPIRSYKMELDING',
+                            'sporsmalstekst': 'Jeg var syk med papirsykmelding',
+                            'undertekst': null,
+                            'svartype': 'CHECKBOX',
+                            'min': null,
+                            'max': null,
+                            'pavirkerAndreSporsmal': false,
+                            'kriterieForVisningAvUndersporsmal': 'CHECKED',
+                            'svar': [],
+                            'undersporsmal': [
+                                {
+                                    'id': '94',
+                                    'tag': 'PAPIRSYKMELDING_NAR',
+                                    'sporsmalstekst': 'Hvilke dager var du syk med papirsykmelding? Du trenger bare oppgi dager før 20. mai 2020.',
+                                    'undertekst': null,
+                                    'svartype': 'PERIODER',
+                                    'min': '2019-11-20',
+                                    'max': '2020-05-19',
+                                    'pavirkerAndreSporsmal': false,
+                                    'kriterieForVisningAvUndersporsmal': null,
+                                    'svar': [],
+                                    'undersporsmal': []
+                                }
+                            ]
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            'id': '95',
             'tag': 'TILBAKE_I_ARBEID',
-            'sporsmalstekst': 'Var du tilbake i fullt arbeid hos 995816598 sitt orgnavn :) i løpet av perioden 20. mai - 4. juni 2020?',
+            'sporsmalstekst': 'Var du tilbake i fullt arbeid hos 995816598 sitt orgnavn :) i løpet av perioden 20. mai - 5. juni 2020?',
             'undertekst': null,
             'svartype': 'JA_NEI',
             'min': null,
@@ -138,13 +220,13 @@ export const avbruttSoknad = {
             'svar': [],
             'undersporsmal': [
                 {
-                    'id': '97',
+                    'id': '96',
                     'tag': 'TILBAKE_NAR',
                     'sporsmalstekst': 'Når begynte du å jobbe igjen?',
                     'undertekst': null,
                     'svartype': 'DATO',
                     'min': '2020-05-20',
-                    'max': '2020-06-04',
+                    'max': '2020-06-05',
                     'pavirkerAndreSporsmal': true,
                     'kriterieForVisningAvUndersporsmal': null,
                     'svar': [],
@@ -153,9 +235,9 @@ export const avbruttSoknad = {
             ]
         },
         {
-            'id': '98',
+            'id': '97',
             'tag': 'FERIE_V2',
-            'sporsmalstekst': 'Tok du ut ferie mens du var sykmeldt 20. mai - 4. juni 2020?',
+            'sporsmalstekst': 'Tok du ut ferie mens du var sykmeldt 20. mai - 5. juni 2020?',
             'undertekst': null,
             'svartype': 'JA_NEI',
             'min': null,
@@ -165,13 +247,13 @@ export const avbruttSoknad = {
             'svar': [],
             'undersporsmal': [
                 {
-                    'id': '99',
+                    'id': '98',
                     'tag': 'FERIE_NAR_V2',
                     'sporsmalstekst': 'Når tok du ut ferie?',
                     'undertekst': null,
                     'svartype': 'PERIODER',
                     'min': '2020-05-20',
-                    'max': '2020-06-04',
+                    'max': '2020-06-05',
                     'pavirkerAndreSporsmal': false,
                     'kriterieForVisningAvUndersporsmal': null,
                     'svar': [],
@@ -180,9 +262,9 @@ export const avbruttSoknad = {
             ]
         },
         {
-            'id': '100',
+            'id': '99',
             'tag': 'PERMISJON_V2',
-            'sporsmalstekst': 'Tok du permisjon mens du var sykmeldt 20. mai - 4. juni 2020?',
+            'sporsmalstekst': 'Tok du permisjon mens du var sykmeldt 20. mai - 5. juni 2020?',
             'undertekst': null,
             'svartype': 'JA_NEI',
             'min': null,
@@ -192,13 +274,13 @@ export const avbruttSoknad = {
             'svar': [],
             'undersporsmal': [
                 {
-                    'id': '101',
+                    'id': '100',
                     'tag': 'PERMISJON_NAR_V2',
                     'sporsmalstekst': 'Når tok du permisjon?',
                     'undertekst': null,
                     'svartype': 'PERIODER',
                     'min': '2020-05-20',
-                    'max': '2020-06-04',
+                    'max': '2020-06-05',
                     'pavirkerAndreSporsmal': false,
                     'kriterieForVisningAvUndersporsmal': null,
                     'svar': [],
@@ -207,9 +289,9 @@ export const avbruttSoknad = {
             ]
         },
         {
-            'id': '102',
+            'id': '101',
             'tag': 'UTLAND_V2',
-            'sporsmalstekst': 'Var du på reise utenfor EØS mens du var sykmeldt 20. mai - 4. juni 2020?',
+            'sporsmalstekst': 'Var du på reise utenfor EØS mens du var sykmeldt 20. mai - 5. juni 2020?',
             'undertekst': null,
             'svartype': 'JA_NEI',
             'min': null,
@@ -219,13 +301,13 @@ export const avbruttSoknad = {
             'svar': [],
             'undersporsmal': [
                 {
-                    'id': '103',
+                    'id': '102',
                     'tag': 'UTLAND_NAR_V2',
                     'sporsmalstekst': 'Når var du utenfor EØS?',
                     'undertekst': null,
                     'svartype': 'PERIODER',
                     'min': '2020-05-20',
-                    'max': '2020-06-04',
+                    'max': '2020-06-05',
                     'pavirkerAndreSporsmal': false,
                     'kriterieForVisningAvUndersporsmal': null,
                     'svar': [],
@@ -234,9 +316,22 @@ export const avbruttSoknad = {
             ]
         },
         {
+            'id': '103',
+            'tag': 'ARBEID_UTENFOR_NORGE',
+            'sporsmalstekst': 'Utfører du arbeid andre steder enn i Norge?',
+            'undertekst': null,
+            'svartype': 'JA_NEI',
+            'min': null,
+            'max': null,
+            'pavirkerAndreSporsmal': false,
+            'kriterieForVisningAvUndersporsmal': null,
+            'svar': [],
+            'undersporsmal': []
+        },
+        {
             'id': '104',
             'tag': 'JOBBET_DU_GRADERT_0',
-            'sporsmalstekst': 'I perioden 20. mai - 4. juni 2020 skulle du jobbe 40 % av ditt normale arbeid hos 995816598 sitt orgnavn :). Jobbet du mer enn dette?',
+            'sporsmalstekst': 'I perioden 20. mai - 5. juni 2020 skulle du jobbe 20 % av ditt normale arbeid hos 995816598 sitt orgnavn :). Jobbet du mer enn dette?',
             'undertekst': null,
             'svartype': 'JA_NEI',
             'min': null,
@@ -261,7 +356,7 @@ export const avbruttSoknad = {
                 {
                     'id': '106',
                     'tag': 'HVOR_MYE_HAR_DU_JOBBET_0',
-                    'sporsmalstekst': 'Hvor mye jobbet du totalt 20. mai - 4. juni 2020 hos 995816598 sitt orgnavn :)?',
+                    'sporsmalstekst': 'Hvor mye jobbet du totalt 20. mai - 5. juni 2020 hos 995816598 sitt orgnavn :)?',
                     'undertekst': null,
                     'svartype': 'RADIO_GRUPPE_TIMER_PROSENT',
                     'min': null,
@@ -288,7 +383,7 @@ export const avbruttSoknad = {
                                     'sporsmalstekst': null,
                                     'undertekst': 'prosent',
                                     'svartype': 'TALL',
-                                    'min': '41',
+                                    'min': '21',
                                     'max': '99',
                                     'pavirkerAndreSporsmal': false,
                                     'kriterieForVisningAvUndersporsmal': null,
@@ -316,7 +411,7 @@ export const avbruttSoknad = {
                                     'undertekst': 'timer totalt',
                                     'svartype': 'TALL',
                                     'min': '1',
-                                    'max': '343',
+                                    'max': '364',
                                     'pavirkerAndreSporsmal': false,
                                     'kriterieForVisningAvUndersporsmal': null,
                                     'svar': [],
@@ -507,7 +602,7 @@ export const avbruttSoknad = {
         {
             'id': '124',
             'tag': 'UTDANNING',
-            'sporsmalstekst': 'Har du vært under utdanning i løpet av perioden 20. mai - 4. juni 2020?',
+            'sporsmalstekst': 'Har du vært under utdanning i løpet av perioden 20. mai - 5. juni 2020?',
             'undertekst': null,
             'svartype': 'JA_NEI',
             'min': null,
@@ -523,7 +618,7 @@ export const avbruttSoknad = {
                     'undertekst': null,
                     'svartype': 'DATO',
                     'min': null,
-                    'max': '2020-06-04',
+                    'max': '2020-06-05',
                     'pavirkerAndreSporsmal': false,
                     'kriterieForVisningAvUndersporsmal': null,
                     'svar': [],
