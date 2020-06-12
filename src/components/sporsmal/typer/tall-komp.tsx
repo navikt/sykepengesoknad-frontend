@@ -2,6 +2,8 @@ import { Element, Normaltekst } from 'nav-frontend-typografi'
 import React, { useEffect, useRef, useState } from 'react'
 import { useFormContext } from 'react-hook-form'
 
+import { TagTyper } from '../../../types/enums'
+import validerArbeidsgrad from '../../../utils/sporsmal/valider-arbeidsgrad'
 import { getLedetekst, tekst } from '../../../utils/tekster'
 import Vis from '../../vis'
 import { hentSvar } from '../hent-svar'
@@ -12,8 +14,9 @@ import UndersporsmalListe from '../undersporsmal/undersporsmal-liste'
 const TallInput = ({ sporsmal }: SpmProps) => {
     const feilmelding = hentFeilmelding(sporsmal)
     const [ lokal, setLokal ] = useState<string>(hentSvar(sporsmal))
-    const { register, setValue, errors } = useFormContext()
+    const { register, setValue, errors, getValues } = useFormContext()
     const undersporsmal = useRef<HTMLDivElement>(null)
+    const { validerGrad, periode, hovedSporsmal } = validerArbeidsgrad(sporsmal)
 
     const onChange = (e: any) => {
         const value = e.target.value
@@ -21,10 +24,24 @@ const TallInput = ({ sporsmal }: SpmProps) => {
         setLokal(value)
     }
 
+    const valider = () => {
+        if (![ TagTyper.JOBBET_DU_GRADERT, TagTyper.JOBBET_DU_100_PROSENT ].includes(hovedSporsmal!.tag)) {
+            return true // hopp over validering dersom det ikke er spørsmål av denne typen
+        }
+
+        if (sporsmal.tag !== TagTyper.HVOR_MYE_TIMER_VERDI) {
+            return true
+        }
+
+        const values = getValues()
+
+        return validerGrad ? validerGrad(values) : true
+    }
+
     useEffect(() => {
         setValue(sporsmal.id, hentSvar(sporsmal))
         // eslint-disable-next-line
-    }, []);
+    }, [])
 
     return (
         <>
@@ -41,6 +58,7 @@ const TallInput = ({ sporsmal }: SpmProps) => {
                     max={sporsmal.max}
                     ref={register({
                         required: feilmelding.global,
+                        validate: () => valider(),
                         min: {
                             value: sporsmal.min,
                             message: getLedetekst(tekst('soknad.feilmelding.TALL_MIN_MAX'),
@@ -62,9 +80,17 @@ const TallInput = ({ sporsmal }: SpmProps) => {
 
             <div role='alert' aria-live='assertive' className='skjemaelement__feilmelding'>
                 <Vis hvis={errors[sporsmal.id]}>
-                    <Normaltekst tag='span'>
-                        <p>{feilmelding.lokal}</p>
-                    </Normaltekst>
+                    <Vis hvis={errors[sporsmal.id]?.type !== 'validate'}>
+                        <Normaltekst tag='span'>
+                            <p>{feilmelding.lokal}</p>
+                        </Normaltekst>
+                    </Vis>
+                    <Vis hvis={errors[sporsmal.id]?.type === 'validate' && sporsmal.tag === TagTyper.HVOR_MYE_TIMER_VERDI}>
+                        <Normaltekst tag='span'>
+                            <p>{getLedetekst(tekst('soknad.feilmelding.MINDRE_TIMER_ENN_FORVENTET.lokal'),
+                                { '%GRAD%': periode.grad })}</p>
+                        </Normaltekst>
+                    </Vis>
                 </Vis>
             </div>
 

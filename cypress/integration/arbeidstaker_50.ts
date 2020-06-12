@@ -171,7 +171,18 @@ describe('Tester arbeidstakersøknad - gradert 50%', () => {
         cy.get('.undersporsmal .skjemaelement__input#687315').focus().type('51')
         // Svarer timer
         cy.get('.undersporsmal .skjemaelement__input.radioknapp[value=timer]').focus().click({ force: true })
-        cy.get('.undersporsmal .skjemaelement__input#687317').focus().type('21')
+        // Ferie/permisjon/tilbake i arbeid dekker alle datoer fra dag 14.
+        // Gradkalkulatoren dermed vil regne ut at man har hatt 13 arbeidsdager i denne perioden
+        // 12 timer * (13 dager/7) * 0.5 (50% sykefraværsgrad) = 11.142 timer, så vi prøver litt lavere enn det
+        cy.get('.undersporsmal .skjemaelement__input#687317').focus().type('11.1')
+
+        cy.contains('Gå videre').click()
+
+        // Feilmelding
+        cy.contains('Timene du skrev inn tyder på at du har jobbet mindre enn 50 %. Du må enten svare nei på spørsmålet over eller endre antall timer her.')
+
+        // Endre timer til 11.2, som er mer enn 11.142
+        cy.get('.undersporsmal .skjemaelement__input#687317').focus().type('{selectall}').type('11.2')
 
         cy.contains('Gå videre').click()
     })
@@ -197,7 +208,7 @@ describe('Tester arbeidstakersøknad - gradert 50%', () => {
         // Underspørsmål nivå 1 - checkbox
         cy.contains('Hvilke andre inntektskilder har du?')
         cy.get('.undersporsmal .checkboxgruppe label[for=687322]').should('include.text', 'selvstendig næringsdrivende')
-        cy.get('.undersporsmal .checkboxgruppe .checkboks#687322').click()
+        cy.get('.undersporsmal .checkboxgruppe .checkboks#687322').click({ force: true })
         // Underspørsmål nivå 2 - radio
         cy.get('.undersporsmal .checkboxgruppe .radioContainer .radioknapp#687323_1').click()
 
