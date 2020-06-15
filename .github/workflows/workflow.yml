@@ -52,7 +52,7 @@ jobs:
           docker push ${IMAGE_SYKEPENGESOKNAD}
 
   deploy-nysykepengesoknad-to-q1-sbs:
-    name: Deploy to q1-sbs (Q1)
+    name: Deploy nysykepengesoknad to q1-sbs (Q1)
     runs-on: ubuntu-latest
     needs: build-and-publish
     steps:
@@ -71,6 +71,28 @@ jobs:
           APIKEY: ${{ secrets.NAIS_DEPLOY_APIKEY }}
           CLUSTER: dev-sbs
           RESOURCE: nais-q1-nysykepengesoknad.yaml
+
+  deploy-to-q1-sbs:
+    if: github.ref == 'refs/heads/fjern-denne-linja'
+    name: Deploy sykepengesoknad to q1-sbs (Q1)
+    runs-on: ubuntu-latest
+    needs: build-and-publish
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v1
+      - name: Last ned versjon
+        uses: actions/download-artifact@v1
+        with:
+          name: VERSION.txt
+          path: .
+      - run: echo "::set-env name=VERSION::"`cat VERSION.txt`""
+      - run: echo "::set-env name=IMAGE::"docker.pkg.github.com/${GITHUB_REPOSITORY}/$APP-sykepengesoknad:$VERSION""
+      - uses: nais/deploy/actions/deploy@v1
+        name: Deploy to q1-sbs
+        env:
+          APIKEY: ${{ secrets.NAIS_DEPLOY_APIKEY }}
+          CLUSTER: dev-sbs
+          RESOURCE: nais-q1.yaml
 
   deploy-to-labs-gcp:
     if: github.ref == 'refs/heads/master'
