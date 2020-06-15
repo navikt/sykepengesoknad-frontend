@@ -8,18 +8,11 @@ test('Alle tags har global feilmelding', () => {
     let manglerFeilmelding = false
 
     tags = tags.filter(skipTag => {
-        return skipTag !== TagTyper.VAER_KLAR_OVER_AT
-            && skipTag !== TagTyper.PERMISJON_NAR
-            && skipTag !== TagTyper.PERMISJON_NAR_V2
-            && skipTag !== TagTyper.IKKE_SOKT_UTENLANDSOPPHOLD_INFORMASJON
-            && skipTag !== TagTyper.FERIE_NAR
-            && skipTag !== TagTyper.FERIE_NAR_V2
-            && skipTag !== TagTyper.ER_DU_SYKMELDT
-            && skipTag !== TagTyper.ENKELTSTAENDE_BEHANDLINGSDAGER
-            && skipTag !== TagTyper.BEKREFT_OPPLYSNINGER_UTLAND_INFO
-
-            // TODO: Sjekk om disse faktisk ikke skal ha feilmelding
-            && skipTag !== TagTyper.ENKELTSTAENDE_BEHANDLINGSDAGER_DAG_NAR
+        return skipTag !== TagTyper.VAER_KLAR_OVER_AT                       // Svartype: IKKE_RELEVANT
+            && skipTag !== TagTyper.IKKE_SOKT_UTENLANDSOPPHOLD_INFORMASJON  // Svartype: IKKE_RELEVANT
+            && skipTag !== TagTyper.BEKREFT_OPPLYSNINGER_UTLAND_INFO        // Svartype: IKKE_RELEVANT
+            && skipTag !== TagTyper.ENKELTSTAENDE_BEHANDLINGSDAGER          // Svartype: INFO_BEHANDLINGSDAGER
+            && skipTag !== TagTyper.ER_DU_SYKMELDT                          // Er ikke en egen tag, men legges til på andre tags
     })
 
     tags.forEach(tag => {
