@@ -204,6 +204,7 @@ const SporsmalForm = () => {
                 </Vis>
 
                 <Vis hvis={erSiste && erUtlandssoknad}>
+                    <Oppsummering />
                     <CheckboxPanel sporsmal={sporsmal} />
                 </Vis>
 

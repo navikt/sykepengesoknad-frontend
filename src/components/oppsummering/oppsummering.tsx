@@ -98,6 +98,7 @@ function skalVisesIOppsummering(sporsmal: Sporsmal) {
     switch (sporsmal.tag) {
         case TagTyper.BEKREFT_OPPLYSNINGER:
         case TagTyper.VAER_KLAR_OVER_AT:
+        case TagTyper.BEKREFT_OPPLYSNINGER_UTLAND_INFO:
         case TagTyper.IKKE_SOKT_UTENLANDSOPPHOLD_INFORMASJON: {
             return false
         }
