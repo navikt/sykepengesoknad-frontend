@@ -1,4 +1,4 @@
-const TeaserTekster: any = {
+const TeaserTekster = {
     'nb': {
         'soknad.teaser.status.AVBRUTT': 'Avbrutt av deg %DATO%',
         'soknad.teaser.status.FREMTIDIG': 'Planlagt',
@@ -16,7 +16,10 @@ const TeaserTekster: any = {
         'soknad.utland.teaser.tittel': 'Søknad om å beholde sykepenger utenfor EØS',
         'soknad.teaser.tittel': 'Søknad om sykepenger',
         'soknad.teaser.tekst': 'Gjelder perioden %PERIODE%',
-        'soknad.teaser.undertekst': '%ARBEIDSGIVER%'
+        'soknad.teaser.undertekst': '%ARBEIDSGIVER%',
+        'soknad.teaser.utgaatt.popup.header': 'Søknaden er utgått',
+        'soknad.teaser.utgaatt.popup.innhold': 'Du får ikke åpnet denne søknaden fordi du ikke har sendt den innen fristen.'
+
     }, 'en': {}
 }
 

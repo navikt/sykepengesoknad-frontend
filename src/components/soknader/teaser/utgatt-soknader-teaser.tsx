@@ -7,7 +7,7 @@ import { Normaltekst, Systemtittel } from 'nav-frontend-typografi'
 import React, { useState } from 'react'
 
 import { RSSoknadstype } from '../../../types/rs-types/rs-soknadstype'
-import { tilLesbarDatoMedArstall, tilLesbarPeriodeMedArstall } from '../../../utils/dato-utils'
+import { tilLesbarPeriodeMedArstall } from '../../../utils/dato-utils'
 import { getLedetekst, tekst } from '../../../utils/tekster'
 import { useAmplitudeInstance } from '../../amplitude/amplitude'
 import Vis from '../../vis'
@@ -20,7 +20,7 @@ import {
     SykepengesoknadTeaserProps
 } from './teaser-util'
 
-const FremtidigeSoknaderTeaser = ({ soknad }: SykepengesoknadTeaserProps) => {
+const UtgaattSoknaderTeaser = ({ soknad }: SykepengesoknadTeaserProps) => {
     const { logEvent } = useAmplitudeInstance()
     const [ aapen, setAapen ] = useState<boolean>(false)
 
@@ -38,7 +38,7 @@ const FremtidigeSoknaderTeaser = ({ soknad }: SykepengesoknadTeaserProps) => {
                 />
                 <div className='inngangspanel--inaktivt'>
                     <InngangsHeader
-                        meta={getLedetekst(tekst('soknad.teaser.dato.fremtidig'), {
+                        meta={getLedetekst(tekst('soknad.teaser.dato'), {
                             '%DATO%': dayjs(soknad.tom).add(1, 'day').format('DD.MM.YYYY'),
                         })}
                         tittel={soknad.soknadstype === RSSoknadstype.OPPHOLD_UTLAND
@@ -63,11 +63,9 @@ const FremtidigeSoknaderTeaser = ({ soknad }: SykepengesoknadTeaserProps) => {
                 isOpen={aapen}
             >
                 <Systemtittel tag="h3" className="modal__tittel">
-                    {tekst('soknader.teaser.fremtidig.dato-tittel')}
+                    {tekst('soknad.teaser.utgaatt.popup.header')}
                 </Systemtittel>
-                <Alertstripe type="info">{getLedetekst(tekst('soknader.teaser.fremtidig.dato-info'), {
-                    '%DATO%': tilLesbarDatoMedArstall(dayjs(soknad.tom).add(1, 'day'))
-                })}</Alertstripe>
+                <Alertstripe type="info">{tekst('soknad.teaser.utgaatt.popup.innhold')}</Alertstripe>
                 <button className="knapp knapp--hoved" onClick={() => setAapen(false)}>
                     Lukk
                 </button>
@@ -76,4 +74,4 @@ const FremtidigeSoknaderTeaser = ({ soknad }: SykepengesoknadTeaserProps) => {
     )
 }
 
-export default FremtidigeSoknaderTeaser
+export default UtgaattSoknaderTeaser

@@ -7,6 +7,7 @@ import Vis from '../../vis'
 import FremtidigeSoknaderTeaser from './fremtidige-soknader-teaser'
 import Teaser from './teaser'
 import TidligereSoknaderTeaser from './tidligere-soknader-teaser'
+import UtgaattSoknaderTeaser from './utgatt-soknader-teaser'
 
 interface SoknaderTeasereProps {
     soknader: Soknad[];
@@ -29,6 +30,8 @@ const Teasere = ({ soknader, className, tittel, tomListeTekst, id }: SoknaderTea
                             return <FremtidigeSoknaderTeaser key={idx} soknad={soknad} />
                         case RSSoknadstatus.SENDT:
                             return <TidligereSoknaderTeaser key={idx} soknad={soknad} />
+                        case RSSoknadstatus.UTGAATT:
+                            return <UtgaattSoknaderTeaser key={idx} soknad={soknad} />
                         default:
                             return <Teaser key={idx} soknad={soknad} />
                     }

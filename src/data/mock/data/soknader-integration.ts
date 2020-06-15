@@ -28,6 +28,34 @@ export const fremtidigSøknad = {
     'egenmeldtSykmelding': false
 }
 
+export const utgåttSøknad = {
+    'id': '5b74f271-5b94-455a-b79f-428f593f2b90',
+    'sykmeldingId': '7e90121c-b64b-4a1c-b7a5-93c9d95aba47',
+    'soknadstype': 'ARBEIDSTAKERE',
+    'status': 'UTGAATT',
+    'fom': '2020-05-23',
+    'tom': '2020-06-07',
+    'opprettetDato': '2020-06-08',
+    'innsendtDato': null,
+    'sendtTilNAVDato': null,
+    'sendtTilArbeidsgiverDato': null,
+    'avbruttDato': null,
+    'startSykeforlop': '2020-05-23',
+    'sykmeldingUtskrevet': '2020-05-23',
+    'arbeidsgiver': { 'navn': '995816598 sitt orgnavn :)', 'orgnummer': '995816598' },
+    'korrigerer': null,
+    'korrigertAv': null,
+    'arbeidssituasjon': 'ARBEIDSTAKER',
+    'soknadPerioder': [ {
+        'fom': '2020-05-23',
+        'tom': '2020-06-07',
+        'grad': 100,
+        'sykmeldingstype': 'AKTIVITET_IKKE_MULIG'
+    } ],
+    'sporsmal': [],
+    'egenmeldtSykmelding': false
+}
+
 export const avbruttSoknad = {
     'id': '811d15b2-2a76-4623-9530-1ba55617e0a5',
     'sykmeldingId': 'ff5a4a27-2d76-4e12-9786-c7e4f31121e6',
@@ -745,7 +773,7 @@ export const arbeidstakersoknadMedUtenlandsoppholdSoktSykepenger = {
     'egenmeldtSykmelding': false
 }
 
-export const sendtArbeidsledig =  {
+export const sendtArbeidsledig = {
     'id': '3848e75e-4069-4076-95c0-3f9f0b63e498',
     'sykmeldingId': '7e90121c-b64b-4a1c-b7a5-93c9d95aba47',
     'soknadstype': 'ARBEIDSLEDIG',
@@ -1181,4 +1209,10 @@ export const sendtArbeidsledig =  {
     'egenmeldtSykmelding': false
 }
 
-export const soknaderIntegration = [ arbeidstakersoknadMedUtenlandsoppholdSoktSykepenger, sendtArbeidsledig, avbruttSoknad, fremtidigSøknad ] as any as RSSoknad[]
+export const soknaderIntegration = [
+    utgåttSøknad,
+    arbeidstakersoknadMedUtenlandsoppholdSoktSykepenger,
+    sendtArbeidsledig,
+    avbruttSoknad,
+    fremtidigSøknad
+] as any as RSSoknad[]

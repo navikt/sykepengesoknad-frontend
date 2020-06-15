@@ -36,4 +36,5 @@
 * Kvittering for sendt søknad er helt skrevet om. 
 * Kvitteringen er samme side man kommer til om man går inn på en sendt søknad fra oversikten
 * Utenlandssøknaden har nå et spørsmål per side, ikke en side med alle spørsmål
+* Ved klikk på utgått søknad får man en popup, ikke en egen side
 * TODO: Kalendere oppfører seg litt annerledes på mobil  
