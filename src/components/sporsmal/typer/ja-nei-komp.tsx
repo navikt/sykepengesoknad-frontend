@@ -16,7 +16,7 @@ import TagBjorn from '../bjorn/tag-bjorn'
 import { hentFormState, hentSvar } from '../hent-svar'
 import { SpmProps } from '../sporsmal-form/sporsmal-form'
 import SporsmalHjelpetekst from '../sporsmal-hjelpetekst'
-import { hentFeilmelding } from '../sporsmal-utils'
+import { hentFeilmelding, sporsmalIdListe } from '../sporsmal-utils'
 import UndersporsmalListe from '../undersporsmal/undersporsmal-liste'
 
 const jaNeiValg = [ {
@@ -56,7 +56,12 @@ const JaNeiInput = ({ sporsmal }: SpmProps) => {
 
     const valider = (value: any) => {
         if (value === 'JA' || value === 'NEI') {
-            clearError()
+            if (sporsmal.erHovedsporsmal) {
+                clearError()
+            }
+            else {
+                clearError(sporsmalIdListe(sporsmal.undersporsmal))
+            }
             return true
         }
         return false
