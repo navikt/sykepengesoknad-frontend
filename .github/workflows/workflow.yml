@@ -16,6 +16,7 @@ jobs:
           VERSION=$TIME-$COMMIT
           echo "::set-env name=IMAGE_ROOT::"docker.pkg.github.com/${GITHUB_REPOSITORY}/$APP-root:$VERSION""
           echo "::set-env name=IMAGE_NYSYKEPENGESOKNAD::"docker.pkg.github.com/${GITHUB_REPOSITORY}/$APP-nysykepengesoknad:$VERSION""
+          echo "::set-env name=IMAGE_SYKEPENGESOKNAD::"docker.pkg.github.com/${GITHUB_REPOSITORY}/$APP-sykepengesoknad:$VERSION""
           echo "::set-env name=VERSION::"$VERSION""
       - run: echo $VERSION > VERSION.txt
       - name: Last opp VERSION til neste job
@@ -45,8 +46,12 @@ jobs:
         run: |
             docker build . -f Dockerfile.nysykepengesoknad -t ${IMAGE_NYSYKEPENGESOKNAD}
             docker push ${IMAGE_NYSYKEPENGESOKNAD}
+      - name: Bygg og push Docker image hvor appen serves på /sykepengesoknad
+        run: |
+          docker build . -f Dockerfile.sykepengesoknad -t ${IMAGE_SYKEPENGESOKNAD}
+          docker push ${IMAGE_SYKEPENGESOKNAD}
 
-  deploy-to-q1-sbs:
+  deploy-nysykepengesoknad-to-q1-sbs:
     name: Deploy to q1-sbs (Q1)
     runs-on: ubuntu-latest
     needs: build-and-publish
@@ -65,7 +70,7 @@ jobs:
         env:
           APIKEY: ${{ secrets.NAIS_DEPLOY_APIKEY }}
           CLUSTER: dev-sbs
-          RESOURCE: nais-q1.yaml
+          RESOURCE: nais-q1-nysykepengesoknad.yaml
 
   deploy-to-labs-gcp:
     if: github.ref == 'refs/heads/master'
