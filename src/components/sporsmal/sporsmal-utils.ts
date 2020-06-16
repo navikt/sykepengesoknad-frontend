@@ -40,6 +40,16 @@ export const fjernIndexFraTag = (tag: TagTyper): TagTyper => {
     return TagTyper[stringtag as keyof typeof TagTyper]
 }
 
+export const sporsmalIdListe = (sporsmal: Sporsmal[]) => {
+    let svar: any = []
+    sporsmal.forEach(spm => {
+        svar.push(spm.id)
+        const alleUndersporsmalId: any = sporsmalIdListe(spm.undersporsmal)
+        svar = [ ...svar, ...alleUndersporsmalId ]
+    })
+    return svar
+}
+
 interface FeilmeldingProps {
     global: string;
     lokal: string;

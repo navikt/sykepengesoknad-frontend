@@ -244,3 +244,8 @@ export interface IdParams {
     id: string;
     stegId: string;
 }
+
+export interface Ettersend {
+    type: string;
+    dato: Date;
+}
