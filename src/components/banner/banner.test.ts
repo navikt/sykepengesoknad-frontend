@@ -6,7 +6,6 @@ import { getLedetekst, tekst } from '../../utils/tekster'
 
 it('Returns text from bundle', () => {
     const text = tekst('sykepengesoknad.sidetittel.periode-2')
-    console.log('text', text); //eslint-disable-line
     expect(text).toEqual('Gjelder for perioden %PERIODE%')
 })
 

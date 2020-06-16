@@ -1,4 +1,4 @@
-import { utgåttSøknad } from '../../src/data/mock/data/soknader-integration'
+import { utgattSoknad } from '../../src/data/mock/data/soknader-integration'
 
 describe('Tester sendt søknad', () => {
 
@@ -12,7 +12,7 @@ describe('Tester sendt søknad', () => {
     })
 
     it('Utgått søknad har forventa tekst', function() {
-        cy.get(`#soknader-sendt article[aria-labelledby*=${utgåttSøknad.id}]`)
+        cy.get(`#soknader-sendt article[aria-labelledby*=${utgattSoknad.id}]`)
             .should('include.text', 'Opprettet 08.06.2020')
             .should('include.text', 'Gjelder perioden 23. mai – 7. juni 2020')
             .should('include.text', 'Ikke brukt på nett')
@@ -21,7 +21,7 @@ describe('Tester sendt søknad', () => {
     })
 
     it('Ved klikk så åpnes popup', function() {
-        cy.get(`#soknader-sendt article[aria-labelledby*=${utgåttSøknad.id}]`).click()
+        cy.get(`#soknader-sendt article[aria-labelledby*=${utgattSoknad.id}]`).click()
         cy.get('.ReactModal__Content')
             .should('include.text', 'Søknaden er utgått')
             .get('.alertstripe > .typo-normal')

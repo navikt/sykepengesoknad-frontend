@@ -65,8 +65,6 @@ const SporsmalTekster: any = {
 
         'soknad.feilmelding.INNTEKTSKILDE_ANDRE_ARBEIDSFORHOLD_ER_DU_SYKMELDT': 'Du må svare på om du er sykmeldt fra andre arbeidsforhold',
         'soknad.feilmelding.INNTEKTSKILDE_ANDRE_ARBEIDSFORHOLD_ER_DU_SYKMELDT.lokal': 'Du må svare på om du er sykmeldt fra dette',
-        'soknad.feilmelding.INNTEKTSKILDE_ANNET_ER_DU_SYKMELDT': 'Du må svare på om du er sykmeldt fra dette',
-        'soknad.feilmelding.INNTEKTSKILDE_ANNET_ER_DU_SYKMELDT.lokal': 'Du må svare på om du er sykmeldt fra dette',
         'soknad.feilmelding.INNTEKTSKILDE_ARBEIDSFORHOLD_ER_DU_SYKMELDT': 'Du må svare på om du er sykmeldt fra arbeidsforhold',
         'soknad.feilmelding.INNTEKTSKILDE_ARBEIDSFORHOLD_ER_DU_SYKMELDT.lokal': 'Du må svare på om du er sykmeldt fra dette',
         'soknad.feilmelding.INNTEKTSKILDE_FRILANSER_ER_DU_SYKMELDT': 'Du må svare på om du er sykmeldt som frilanser',
