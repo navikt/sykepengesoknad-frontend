@@ -79,8 +79,17 @@ describe('Tester behandlingsdagersøknad', () => {
 
     it('Søknad kvittering', () => {
         cy.url().should('include', `/kvittering/${soknad.id}`)
+
         // Sendt til
         cy.contains('Søknaden er sendt til NAV')
+        cy.contains('Søknaden er sendt til POSTEN NORGE AS, BÆRUM').should('not.exist')
+
+        // Ettersend
+        cy.contains('Send til arbeidsgiver').click()
+        cy.contains('Er du sikker på at du vil sende søknaden til arbeidsgiveren din?')
+        cy.contains('Ja, send søknaden').click()
+        cy.contains('Søknaden er sendt til NAV')
+        cy.contains('Søknaden er sendt til POSTEN NORGE AS, BÆRUM')
 
         // Kvittering
         cy.contains('Hva skjer videre?')
