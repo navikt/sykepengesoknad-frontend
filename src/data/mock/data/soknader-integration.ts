@@ -1461,12 +1461,7 @@ export const veldigLangSoknad = {
                             'max': null,
                             'pavirkerAndreSporsmal': false,
                             'kriterieForVisningAvUndersporsmal': 'CHECKED',
-                            'svar': [
-                                {
-                                    'verdi': 'CHECKED',
-                                    'avgittAv': null
-                                }
-                            ],
+                            'svar': [],
                             'undersporsmal': [
                                 {
                                     'id': '687353',
@@ -1988,8 +1983,8 @@ export const veldigLangSoknad = {
             'sporsmalstekst': 'Når skal du reise?',
             'undertekst': null,
             'svartype': 'PERIODER',
-            'min': '2020-03-03',
-            'max': '2020-12-03',
+            'min': '2020-04-01',
+            'max': '2020-04-24',
             'pavirkerAndreSporsmal': false,
             'kriterieForVisningAvUndersporsmal': null,
             'svar': [],
@@ -2399,7 +2394,7 @@ export const veldigLangSoknad = {
         {
             'id': '423',
             'tag': 'UTLAND',
-            'sporsmalstekst': 'Har du vært utenfor EØS mens du var sykmeldt 27. mai - 11. juni 2020?',
+            'sporsmalstekst': 'Har du vært utenfor EØS mens du var sykmeldt 1. - 24. april 2020?',
             'undertekst': null,
             'svartype': 'JA_NEI',
             'min': null,
@@ -2414,8 +2409,8 @@ export const veldigLangSoknad = {
                     'sporsmalstekst': 'Når var du utenfor EØS?',
                     'undertekst': null,
                     'svartype': 'PERIODER',
-                    'min': '2020-05-27',
-                    'max': '2020-06-11',
+                    'min': '2020-04-01',
+                    'max': '2020-04-24',
                     'pavirkerAndreSporsmal': false,
                     'kriterieForVisningAvUndersporsmal': null,
                     'svar': [],
@@ -2639,31 +2634,6 @@ export const veldigLangSoknad = {
                     ]
                 }
             ]
-        },
-        {
-            'id': '6',
-            'tag': 'BEKREFT_OPPLYSNINGER_UTLAND_INFO',
-            'sporsmalstekst': 'Før du reiser ber vi deg bekrefte:',
-            'undertekst': '<ul>\n    <li>Jeg har avklart med legen at reisen ikke vil forlenge sykefraværet</li>\n    <li>Reisen hindrer ikke planlagt behandling eller avtaler med NAV</li>\n</ul>',
-            'svartype': 'IKKE_RELEVANT',
-            'min': null,
-            'max': null,
-            'pavirkerAndreSporsmal': false,
-            'kriterieForVisningAvUndersporsmal': null,
-            'svar': [],
-            'undersporsmal': [ {
-                'id': '7',
-                'tag': 'BEKREFT_OPPLYSNINGER_UTLAND',
-                'sporsmalstekst': 'Jeg bekrefter de to punktene ovenfor',
-                'undertekst': null,
-                'svartype': 'CHECKBOX_PANEL',
-                'min': null,
-                'max': null,
-                'pavirkerAndreSporsmal': false,
-                'kriterieForVisningAvUndersporsmal': null,
-                'svar': [],
-                'undersporsmal': []
-            } ]
         },
         {
             'id': '687372',

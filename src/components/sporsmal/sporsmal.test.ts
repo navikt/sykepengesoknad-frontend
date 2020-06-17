@@ -51,6 +51,8 @@ test('Alle sporsmal tag ligger i veldigLangSoknad', () => {
         return skipTag !== 'BETALER_ARBEIDSGIVER'                   // Kan fjernes?
             && skipTag !== 'ENKELTSTAENDE_BEHANDLINGSDAGER_DAG_NAR' // Ble brukt mens vi satte opp ny søknad, ligger i prod?
             && skipTag !== 'HVOR_MANGE_TIMER'                       // Finnes i syfosoknad, men brukes ikke
+            && skipTag !== 'BEKREFT_OPPLYSNINGER_UTLAND'            // Kan bare inneholde en sisteside, dekkes av andre tester
+            && skipTag !== 'BEKREFT_OPPLYSNINGER_UTLAND_INFO'       // Kan bare inneholde en sisteside
     })
     let manglerTagsISoknad = false
     let manglerTagsIKoden = false
