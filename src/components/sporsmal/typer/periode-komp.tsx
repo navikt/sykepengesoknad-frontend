@@ -1,6 +1,7 @@
+import dayjs from 'dayjs'
 import { Norwegian } from 'flatpickr/dist/l10n/no.js'
 import { Normaltekst } from 'nav-frontend-typografi'
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import Flatpickr from 'react-flatpickr'
 import { Controller, useFormContext } from 'react-hook-form'
 
@@ -20,14 +21,26 @@ type AllProps = SpmProps & PeriodeProps;
 
 const PeriodeKomp = ({ sporsmal, index, slettPeriode }: AllProps) => {
     const { setValue, errors, getValues } = useFormContext()
+    const [ datoer, settDatoer ] = useState<Date[]>([])
     const id = sporsmal.id + '_' + index
     const htmlfor = sporsmal.id + '_t_' + index
     const feilmelding = hentFeilmelding(sporsmal)
+    Norwegian.rangeSeparator = ' - '
 
     useEffect(() => {
         setValue(id, hentPeriode(sporsmal, index))
         // eslint-disable-next-line
     }, [ sporsmal ]);
+
+    const onValueUpdate = (selectedDates: Date[]) => {
+        if (selectedDates.length > 0) {
+            settDatoer(selectedDates)
+        }
+    }
+
+    const formater = () => {
+        return datoer.map(dato => dayjs(dato).format('DD.MM.YYYY')).join('   -    ')
+    }
 
     return (
         <li className='periode'>
@@ -49,6 +62,7 @@ const PeriodeKomp = ({ sporsmal, index, slettPeriode }: AllProps) => {
                 name={id}
                 className='skjemaelement__input input--m'
                 placeholder='dd.mm.åååå - dd.mm.åååå'
+                onValueUpdate={onValueUpdate}
                 options={{
                     minDate: sporsmal.min,
                     maxDate: sporsmal.max,
@@ -57,6 +71,7 @@ const PeriodeKomp = ({ sporsmal, index, slettPeriode }: AllProps) => {
                     dateFormat: 'F j, Y',
                     altInput: true,
                     altFormat: 'd.m.Y',
+                    formatDate: formater,
                     locale: Norwegian,
                     allowInput: true,
                     disableMobile: true
