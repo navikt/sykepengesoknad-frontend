@@ -17,11 +17,13 @@ export const hentNokkel = (soknad: Soknad, sidenummer: number) => {
         return ''
     }
     const nokkel = fjernIndexFraTag(sporsmal.tag).toLowerCase()
-    return (sidenummer === 1 && soknad.soknadstype !== RSSoknadstype.OPPHOLD_UTLAND)
-        ? 'sykepengesoknad.foer-du-begynner.tittel'
-        : erSisteSide(soknad, sidenummer)
-            ? 'sykepengesoknad.til-slutt.tittel'
-            : `sykepengesoknad.${nokkel}.tittel`
+    if (sidenummer === 1 && soknad.soknadstype !== RSSoknadstype.OPPHOLD_UTLAND) {
+        return ''
+    }
+    return erSisteSide(soknad, sidenummer)
+        ? 'sykepengesoknad.til-slutt.tittel'
+        : `sykepengesoknad.${nokkel}.tittel`
+
 }
 
 export const pathUtenSteg = (pathname: string) => {
@@ -67,7 +69,7 @@ export const hentFeilmelding = (sporsmal: Sporsmal): FeilmeldingProps => {
 }
 
 export const hentGeneriskFeilmelding = (svartype: RSSvartype) => {
-    switch(svartype) {
+    switch (svartype) {
         case RSSvartype.JA_NEI:
         case RSSvartype.RADIO:
         case RSSvartype.RADIO_GRUPPE:

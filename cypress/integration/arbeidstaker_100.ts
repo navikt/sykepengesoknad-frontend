@@ -20,6 +20,9 @@ describe('Tester arbeidstakersøknad', () => {
     it('Søknad ANSVARSERKLARING - steg 1', function() {
         cy.url().should('include', `${soknad.id}/1`)
 
+        cy.contains('Før du begynner').should('not.exist')
+        cy.contains('Det du fyller ut brukes til å vurdere om du har rett til sykepenger').should('not.exist')
+
         // Sykmelding
         cy.contains('1. april - 24. april 2020 • 24 dager')
         cy.contains('LOMMEN BARNEHAVE')

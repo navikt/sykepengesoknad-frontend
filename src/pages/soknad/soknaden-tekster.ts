@@ -6,8 +6,6 @@ const SoknadenTekster: any = {
         'kvittering.sidetittel': 'Kvittering',
         'soknad.tilbakeknapp': 'Tilbake',
         'statuspanel.status': 'Status',
-        'sykepengesoknad.foer-du-begynner.tittel': 'Før du begynner',
-        'sykepengesoknad.foer-du-begynner.introtekst': 'Det du fyller ut brukes til å vurdere om du har rett til sykepenger, og eventuelt hvor mye. Derfor ber vi deg bekrefte at opplysningene er riktige:',
         'sykepengesoknad.til-slutt.tittel': 'Til slutt',
         'sykepengesoknad.utkast-til-korrigering.info': 'Rediger det som er feil i søknaden, og send den inn på nytt.',
         'sykepengesoknad.sykepengeinfo.til-nav': 'Sykepenger utbetales etter at NAV har innvilget søknaden. <a class="lenke" href="https://www.nav.no/no/NAV+og+samfunn/Kontakt+NAV/Utbetalinger/Utbetalinger/Utbetalingsdatoer%2C+feriepenger+og+skattetrekk?kap=499628" target="_blank">Les om sykepenger og saksbehandlingstider.</a>',
