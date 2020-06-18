@@ -34,6 +34,7 @@ const SoknadenTekster: any = {
         'sykepengesoknad.tilbake_i_arbeid.tittel': 'Tilbake i arbeid',
         'sykepengesoknad.friskmeldt.tittel': 'Friskmeldt',
         'sykepengesoknad.enkeltstaende_behandlingsdager.tittel': 'Behandlingsdager',
+        'sykepengesoknad.enkeltstaende_behandlingsdager.bjorn': 'Du kan bare få én behandlingsdag i løpet av en uke. Trenger du flere slike dager, ber du legen om en gradert sykmelding i stedet.',
         'sykepengesoknad.jobbet_du_gradert.tittel' : 'Jobb underveis i sykefraværet',
         'sykepengesoknad.fraver_for_behandling.tittel' : 'Fravær før behandlingsdager',
         'sykepengesoknad.fraver_for_behandling.bjorn' : 'Vi trenger å vite om du har brukt egenmeldinger eller en papirsykmelding noen dager før denne sykmeldingen. Det er for å kunne beregne sykepengene dine riktig.',

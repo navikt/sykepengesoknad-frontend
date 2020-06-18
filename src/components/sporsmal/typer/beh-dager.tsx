@@ -8,6 +8,7 @@ import { RSSvarliste } from '../../../types/rs-types/rs-svarliste'
 import { Sporsmal } from '../../../types/types'
 import { ukeDatoListe } from '../../../utils/dato-utils'
 import Vis from '../../vis'
+import Bjorn from '../bjorn/bjorn'
 import { hentSvar } from '../hent-svar'
 import { SpmProps } from '../sporsmal-form/sporsmal-form'
 
@@ -28,7 +29,7 @@ const BehDager = ({ sporsmal }: SpmProps) => {
         })
         setLokal(lokal)
         // eslint-disable-next-line
-    }, [ sporsmal ]);
+    }, [sporsmal]);
 
     const dagerSidenMandag = (spm: Sporsmal) => {
         return ((new Date(spm.min).getDay() - 1) % 7)
@@ -51,6 +52,8 @@ const BehDager = ({ sporsmal }: SpmProps) => {
 
     return (
         <>
+            <Bjorn nokkel='sykepengesoknad.enkeltstaende_behandlingsdager.bjorn' className='blokk-m' />
+
             <Vis hvis={sporsmal.sporsmalstekst !== null}>
                 <Element tag='h3' className='skjema__sporsmal'>{sporsmal.sporsmalstekst}</Element>
             </Vis>
