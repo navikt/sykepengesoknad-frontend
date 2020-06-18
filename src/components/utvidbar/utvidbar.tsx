@@ -1,7 +1,7 @@
 import './utvidbar.less'
 
 import Chevron from 'nav-frontend-chevron'
-import { Element, Normaltekst } from 'nav-frontend-typografi'
+import { Normaltekst, Undertittel } from 'nav-frontend-typografi'
 import React, { useEffect, useRef, useState } from 'react'
 
 import { erSynligIViewport } from '../../utils/browser-utils'
@@ -61,13 +61,13 @@ const Utvidbar = (props: UtvidbarProps) => {
                         src={props.ikon}
                     />
                 </Vis>
-                <Element tag='h3'>{props.tittel}</Element>
-                <div className='utvidbar__handling'>
+                <Undertittel tag='h3' className="utvidbar__tittel">{props.tittel}</Undertittel>
+                <span className='utvidbar__handling'>
                     <Normaltekst tag='em'>
                         {erApen ? 'Lukk' : 'Åpne'}
                     </Normaltekst>
                     <Chevron type={erApen ? 'opp' : 'ned'} />
-                </div>
+                </span>
             </button>
 
             <div ref={container} className={'utvidbar__innholdContainer' + (erApen ? ' apen' : '')}

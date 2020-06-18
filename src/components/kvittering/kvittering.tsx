@@ -5,17 +5,17 @@ import React, { useEffect } from 'react'
 import { useParams } from 'react-router-dom'
 
 import { useAppStore } from '../../data/stores/app-store'
+import { RSArbeidssituasjon } from '../../types/rs-types/rs-arbeidssituasjon'
 import { RSSoknadstype } from '../../types/rs-types/rs-soknadstype'
 import Endreknapp from '../endreknapp/endreknapp'
 import Ettersending from '../ettersending/ettersending'
 import Opplysninger from '../opplysninger/opplysninger'
 import Oppsummering from '../oppsummering/oppsummering'
 import Vis from '../vis'
-import KvitteringInfo from './kvittering-info'
-import KvitteringStatus from './kvittering-status'
+import ArbeidsledigFrilansRokla from './arbeidsledig-frilans-rokla'
 
 const Kvittering = () => {
-    const { valgtSoknad, setValgtSoknad, soknader, sykmeldinger, setValgtSykmelding, feilmeldingTekst } = useAppStore()
+    const { valgtSoknad, setValgtSoknad, soknader, sykmeldinger, valgtSykmelding, setValgtSykmelding, feilmeldingTekst } = useAppStore()
     const { id } = useParams()
 
     useEffect(() => {
@@ -30,21 +30,36 @@ const Kvittering = () => {
 
     const skalViseKnapperad = !(valgtSoknad?.soknadstype === RSSoknadstype.OPPHOLD_UTLAND)
 
+    const KvitteringType = () => {
+        if (valgtSoknad!.soknadstype === RSSoknadstype.OPPHOLD_UTLAND) {
+            return null
+        }
+        switch (valgtSykmelding!.valgtArbeidssituasjon) {
+            case RSArbeidssituasjon.ARBEIDSTAKER:
+                return null
+            case RSArbeidssituasjon.NAERINGSDRIVENDE:
+                return null
+            default:
+                return <ArbeidsledigFrilansRokla />
+        }
+    }
+
+    const soknadErMottatt = false
+
     return (
         <div className="kvittering">
-            <KvitteringStatus />
-            <KvitteringInfo />
+            <KvitteringType />
+            <Oppsummering ekspandert={soknadErMottatt} />
             <Opplysninger ekspandert={false} />
-            <Oppsummering />
 
             <Vis hvis={skalViseKnapperad}>
-                <div className='knapperad'>
+                <div className="knapperad">
                     <Endreknapp />
 
-                    <Ettersending gjelder='nav' />
+                    <Ettersending gjelder="nav" />
 
                     <Vis hvis={valgtSoknad!.arbeidsgiver !== undefined}>
-                        <Ettersending gjelder='arbeidsgiver' />
+                        <Ettersending gjelder="arbeidsgiver" />
                     </Vis>
                 </div>
             </Vis>

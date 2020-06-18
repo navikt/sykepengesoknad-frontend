@@ -45,14 +45,18 @@
     }
 
     .utvidbar__toggle {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
+        text-align: left;
         width: 100%;
         padding: 0.7rem 1rem;
         border: 0;
-        background-color: @navLillaLighten80;
+        background-color: @navDypBlaLighten80;
         color: @navMorkGra;
+    }
+
+    &.lilla {
+        .utvidbar__toggle {
+            background-color: @navLillaLighten80;
+        }
     }
 
     .utvidbar__toggle:focus {
@@ -66,14 +70,19 @@
         color: @navBla;
     }
 
+    .utvidbar__ikon {
+        margin: 0 1.5rem 0 0.75rem;
+    }
+
     .utvidbar__tittel {
-        padding-right: 2rem;
-        background-size: 1rem .5rem;
-        flex: 1;
+        display: inline-block;
+        padding-top: 2px;
     }
 
     .utvidbar__handling {
+        float: right;
         color: @navBla;
+        margin-top: 4px;
 
         em {
             font-style: normal;

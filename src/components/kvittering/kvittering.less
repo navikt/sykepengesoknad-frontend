@@ -1,15 +1,18 @@
 @import '../../../node_modules/nav-frontend-core/less/_variabler';
 
 .kvittering {
-    /*
     .alertstripe--suksess {
         border-bottom-left-radius: 0;
         border-bottom-right-radius: 0;
         margin-bottom: -2px;
     }
-    */
+
+    .alertstripe:not(.alertstripe--inline) .lenke:not(:focus) {
+        color: @navBla;
+    }
+
     .avsnitt {
-        margin: 2rem 0;
+        margin: 1.5rem 0;
 
         &:first-child {
             margin-top: 0;

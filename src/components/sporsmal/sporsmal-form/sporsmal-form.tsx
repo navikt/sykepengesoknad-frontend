@@ -198,13 +198,13 @@ const SporsmalForm = () => {
                 <SporsmalSwitch sporsmal={sporsmal} />
 
                 <Vis hvis={erSiste && !erUtlandssoknad}>
-                    <Oppsummering />
+                    <Oppsummering ekspandert={false} />
                     <CheckboxPanel sporsmal={nesteSporsmal} />
                     <SendesTil />
                 </Vis>
 
                 <Vis hvis={erSiste && erUtlandssoknad}>
-                    <Oppsummering />
+                    <Oppsummering ekspandert={false} />
                     <CheckboxPanel sporsmal={sporsmal} />
                 </Vis>
 

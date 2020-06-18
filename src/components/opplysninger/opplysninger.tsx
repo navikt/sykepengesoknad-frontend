@@ -19,7 +19,7 @@ interface OpplysningerProps {
 }
 
 const Opplysninger = ({ ekspandert }: OpplysningerProps) => {
-    const  valgtSoknad  = useAppStore().valgtSoknad!
+    const valgtSoknad = useAppStore().valgtSoknad!
     const [ apen, setApen ] = useState<boolean>(ekspandert)
     const { stegId } = useParams()
 
