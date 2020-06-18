@@ -40,9 +40,10 @@ const Perioder = ({ sporsmal }: SpmProps) => {
         }, 10)
     }
 
-    const slettPeriode = (e: any, idx: number) => {
+    const slettPeriode = (e: any, id: number) => {
         e.preventDefault()
-        lokal.splice(idx, 1)
+        const index = lokal.findIndex(value => value === id)
+        lokal.splice(index, 1)
         setLokal(lokal)
         oppdaterPerioder()
     }
