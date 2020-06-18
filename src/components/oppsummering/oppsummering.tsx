@@ -1,12 +1,17 @@
 import './oppsummering.less'
 
 import React, { useEffect, useState } from 'react'
+import { useParams } from 'react-router-dom'
 
 import { useAppStore } from '../../data/stores/app-store'
 import { TagTyper } from '../../types/enums'
+import { RSSoknadstatus } from '../../types/rs-types/rs-soknadstatus'
 import { RSSvartype } from '../../types/rs-types/rs-svartype'
 import { Sporsmal } from '../../types/types'
 import { tekst } from '../../utils/tekster'
+import plasterHover from '../opplysninger/plaster-hover.svg'
+import plaster from '../opplysninger/plaster.svg'
+import Utvidbar from '../utvidbar/utvidbar'
 import Behandlingsdager from './utdrag/behandlingsdager'
 import CheckboxGruppe from './utdrag/checkbox-gruppe'
 import CheckboxSum from './utdrag/checkbox-sum'
@@ -18,11 +23,6 @@ import PerioderSum from './utdrag/perioder-sum'
 import RadioGruppe from './utdrag/radio-gruppe'
 import TallSum from './utdrag/tall-sum'
 import UndertekstSum from './utdrag/undertekst-sum'
-import Utvidbar from '../utvidbar/utvidbar'
-import plaster from '../opplysninger/plaster.svg'
-import plasterHover from '../opplysninger/plaster-hover.svg'
-import { RSSoknadstatus } from '../../types/rs-types/rs-soknadstatus'
-import { useParams } from 'react-router-dom'
 
 export interface OppsummeringProps {
     sporsmal: Sporsmal;

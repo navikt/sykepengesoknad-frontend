@@ -1,11 +1,19 @@
+import dayjs from 'dayjs'
+import { AlertStripeInfo } from 'nav-frontend-alertstriper'
 import Lenke from 'nav-frontend-lenker'
-import { Normaltekst, Undertittel, Element } from 'nav-frontend-typografi'
+import { Element,Normaltekst, Undertittel } from 'nav-frontend-typografi'
 import React from 'react'
 
+import { useAppStore } from '../../data/stores/app-store'
 import { tekst } from '../../utils/tekster'
-import { AlertStripeInfo } from 'nav-frontend-alertstriper'
 
 const KvitteringVidere = () => {
+    const { valgtSoknad } = useAppStore()
+
+    if (dayjs(new Date()).diff(dayjs(valgtSoknad!.opprettetDato), 'day') > 30) {
+        return null
+    }
+
     return (
         <AlertStripeInfo className="opplysninger">
             <Undertittel tag="h3">{tekst('kvittering.hva-skjer-videre')}</Undertittel>

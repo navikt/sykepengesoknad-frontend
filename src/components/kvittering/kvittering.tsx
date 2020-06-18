@@ -5,14 +5,14 @@ import React, { useEffect } from 'react'
 import { useParams } from 'react-router-dom'
 
 import { useAppStore } from '../../data/stores/app-store'
+import { RSArbeidssituasjon } from '../../types/rs-types/rs-arbeidssituasjon'
 import { RSSoknadstype } from '../../types/rs-types/rs-soknadstype'
 import Endreknapp from '../endreknapp/endreknapp'
 import Ettersending from '../ettersending/ettersending'
 import Opplysninger from '../opplysninger/opplysninger'
 import Oppsummering from '../oppsummering/oppsummering'
 import Vis from '../vis'
-import { RSArbeidssituasjon } from '../../types/rs-types/rs-arbeidssituasjon';
-import ArbeidsledigFrilansRokla from './arbeidsledig-frilans-rokla';
+import ArbeidsledigFrilansRokla from './arbeidsledig-frilans-rokla'
 
 const Kvittering = () => {
     const { valgtSoknad, setValgtSoknad, soknader, sykmeldinger, valgtSykmelding, setValgtSykmelding, feilmeldingTekst } = useAppStore()
@@ -32,7 +32,7 @@ const Kvittering = () => {
 
     const KvitteringType = () => {
         if (valgtSoknad!.soknadstype === RSSoknadstype.OPPHOLD_UTLAND) {
-            return null;
+            return null
         }
         switch (valgtSykmelding!.valgtArbeidssituasjon) {
             case RSArbeidssituasjon.ARBEIDSTAKER:
@@ -44,10 +44,12 @@ const Kvittering = () => {
         }
     }
 
+    const soknadErMottatt = false
+
     return (
         <div className="kvittering">
             <KvitteringType />
-            <Oppsummering ekspandert={false} />
+            <Oppsummering ekspandert={soknadErMottatt} />
             <Opplysninger ekspandert={false} />
 
             <Vis hvis={skalViseKnapperad}>
