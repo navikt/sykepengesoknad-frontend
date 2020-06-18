@@ -1,8 +1,6 @@
 import './oppsummering.less'
 
-import Ekspanderbartpanel from 'nav-frontend-ekspanderbartpanel'
-import { Element } from 'nav-frontend-typografi'
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 
 import { useAppStore } from '../../data/stores/app-store'
 import { TagTyper } from '../../types/enums'
@@ -20,16 +18,37 @@ import PerioderSum from './utdrag/perioder-sum'
 import RadioGruppe from './utdrag/radio-gruppe'
 import TallSum from './utdrag/tall-sum'
 import UndertekstSum from './utdrag/undertekst-sum'
+import Utvidbar from '../utvidbar/utvidbar'
+import plaster from '../opplysninger/plaster.svg'
+import plasterHover from '../opplysninger/plaster-hover.svg'
+import { RSSoknadstatus } from '../../types/rs-types/rs-soknadstatus'
+import { useParams } from 'react-router-dom'
 
 export interface OppsummeringProps {
     sporsmal: Sporsmal;
 }
 
-const Oppsummering = () => {
+interface EkspanderProps {
+    ekspandert: boolean;
+}
+
+const Oppsummering = ({ ekspandert }: EkspanderProps) => {
     const { valgtSoknad } = useAppStore()
+    const [ apen, setApen ] = useState<boolean>(ekspandert)
+    const { stegId } = useParams()
+
+    useEffect(() => {
+        const tidligere = valgtSoknad!.status === RSSoknadstatus.SENDT
+        const stegNo = parseInt(stegId)
+        setApen(!tidligere && stegNo === 1)
+        // eslint-disable-next-line
+    }, [ valgtSoknad!.status, stegId ])
+
     return (
-        <Ekspanderbartpanel apen={false} border={true}
-            tittel={<Element>{tekst('sykepengesoknad.oppsummering.tittel')}</Element>}
+        <Utvidbar className={'ekspander lilla' + (apen ? ' apen' : '')}
+            ikon={plaster} ikonHover={plasterHover} erApen={apen}
+            tittel={tekst('sykepengesoknad.oppsummering.tittel')}
+            ikonAltTekst=''
         >
             {valgtSoknad!.sporsmal
                 .filter((sporsmal) => {
@@ -43,7 +62,7 @@ const Oppsummering = () => {
                     )
                 })
             }
-        </Ekspanderbartpanel>
+        </Utvidbar>
     )
 }
 
