@@ -12,7 +12,7 @@ import Ettersending from '../ettersending/ettersending'
 import Opplysninger from '../opplysninger/opplysninger'
 import Oppsummering from '../oppsummering/oppsummering'
 import Vis from '../vis'
-import ArbeidsledigFrilansRokla from './arbeidsledig-frilans-rokla'
+import AlleAndre from './alle-andre'
 
 const Kvittering = () => {
     const { valgtSoknad, setValgtSoknad, soknader, sykmeldinger, valgtSykmelding, setValgtSykmelding, feilmeldingTekst } = useAppStore()
@@ -37,10 +37,8 @@ const Kvittering = () => {
         switch (valgtSykmelding!.valgtArbeidssituasjon) {
             case RSArbeidssituasjon.ARBEIDSTAKER:
                 return null
-            case RSArbeidssituasjon.NAERINGSDRIVENDE:
-                return null
             default:
-                return <ArbeidsledigFrilansRokla />
+                return <AlleAndre />
         }
     }
 
