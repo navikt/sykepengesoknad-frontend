@@ -3,7 +3,7 @@ import React from 'react'
 import KvitteringStatus from './kvittering-status'
 import KvitteringVidere from './kvittering-videre'
 
-const ArbeidsledigFrilansRokla = () => {
+const AlleAndre = () => {
     return (
         <>
             <KvitteringStatus />
@@ -12,4 +12,4 @@ const ArbeidsledigFrilansRokla = () => {
     )
 }
 
-export default ArbeidsledigFrilansRokla
+export default AlleAndre

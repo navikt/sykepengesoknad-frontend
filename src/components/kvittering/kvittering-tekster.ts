@@ -48,6 +48,11 @@ const KvitteringTekster: any = {
         'kvittering.arbeidsgiveren-skal-betale': 'Arbeidsgiveren skal betale sykepenger i en periode på opptil 16 kalenderdager, også kalt arbeidsgiverperioden. NAV overtar sykepengeutbetalingen fra og med 17. kalenderdag.',
         'kvittering.digital-inntektsmelding': 'Digital inntektsmelding sendes fra arbeidsgivers eget lønns- og personalsystem eller fra altinn.no. Meldingen inneholder inntektsopplysninger og annen informasjon NAV må ha for å behandle søknaden arbeidstaker har sendt.',
 
+        'kvittering.naeringsdrivende.tittel': 'Før NAV kan behandle søknaden',
+        'kvittering.naeringsdrivende.brodtekst': 'Vi trenger inntektsopplysninger fra deg som du sender inn på eget skjema. Du trenger bare å sende inn skjemaet én gang, selv om sykmeldingen eventuelt blir forlenget.',
+        'kvittering.naeringsdrivende.lenke': 'Gå til skjema for inntekstopplysninger her',
+        'kvittering.naeringsdrivende.lenke.url': 'https://www.nav.no/soknader/nb/bedrift/inntekt-og-trekk/inntektsopplysninger-sykepenger',
+
     }, 'en': {}
 }
 
