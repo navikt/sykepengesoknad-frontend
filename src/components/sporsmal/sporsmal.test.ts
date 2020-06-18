@@ -1,7 +1,10 @@
+import { veldigLangSoknad } from '../../data/mock/data/soknader-integration'
 import { TagTyper } from '../../types/enums'
 import { RSSvartype } from '../../types/rs-types/rs-svartype'
+import { Soknad, Sporsmal } from '../../types/types'
+import { flattenSporsmal } from '../../utils/soknad-utils'
 import { tekst } from '../../utils/tekster'
-import { hentGeneriskFeilmelding } from './sporsmal-utils'
+import { fjernIndexFraTag, hentGeneriskFeilmelding } from './sporsmal-utils'
 
 test('Alle tags har global feilmelding', () => {
     let tags = Object.values(TagTyper)
@@ -12,7 +15,6 @@ test('Alle tags har global feilmelding', () => {
             && skipTag !== TagTyper.IKKE_SOKT_UTENLANDSOPPHOLD_INFORMASJON  // Svartype: IKKE_RELEVANT
             && skipTag !== TagTyper.BEKREFT_OPPLYSNINGER_UTLAND_INFO        // Svartype: IKKE_RELEVANT
             && skipTag !== TagTyper.ENKELTSTAENDE_BEHANDLINGSDAGER          // Svartype: INFO_BEHANDLINGSDAGER
-            && skipTag !== TagTyper.ER_DU_SYKMELDT                          // Er ikke en egen tag, men legges til på andre tags
     })
 
     tags.forEach(tag => {
@@ -40,3 +42,47 @@ test('Alle svartyper har generiskfeilmelding', () => {
 
     expect(manglerFeilmelding).toBeFalsy()
 })
+
+test('Alle sporsmal tag ligger i veldigLangSoknad', () => {
+    const soknad: Soknad = new Soknad(veldigLangSoknad as any)
+    const sporsmalTagsUtenIndex = hentAlleTagsUtenIndex(soknad.sporsmal)
+    const tagsSomSkalStottes = Object.values(TagTyper).filter(skipTag => {
+        // TODO: Sjekk at disse tagene fortsatt er i bruk, legg de inn i søknaden
+        return skipTag !== 'BETALER_ARBEIDSGIVER'                   // Kan fjernes?
+            && skipTag !== 'ENKELTSTAENDE_BEHANDLINGSDAGER_DAG_NAR' // Ble brukt mens vi satte opp ny søknad, ligger i prod?
+            && skipTag !== 'HVOR_MANGE_TIMER'                       // Finnes i syfosoknad, men brukes ikke
+            && skipTag !== 'BEKREFT_OPPLYSNINGER_UTLAND'            // Kan bare inneholde en sisteside, dekkes av andre tester
+            && skipTag !== 'BEKREFT_OPPLYSNINGER_UTLAND_INFO'       // Kan bare inneholde en sisteside
+    })
+    let manglerTagsISoknad = false
+    let manglerTagsIKoden = false
+
+    // Mangler tags i soknaden
+    tagsSomSkalStottes.forEach(tag => {
+        if (!sporsmalTagsUtenIndex.has(tag)) {
+            // eslint-disable-next-line no-console
+            console.log(`Mangler sporsmal tag i veldigLangSoknad [ ${tag} ]`)
+            manglerTagsISoknad = true
+        }
+    })
+    expect(manglerTagsISoknad).toBeFalsy()
+
+    // Mangler tags i koden
+    sporsmalTagsUtenIndex.forEach((tag: any) => {
+        if (!tagsSomSkalStottes.includes(tag)) {
+            // eslint-disable-next-line no-console
+            console.log(`Mangler sporsmal tag i TagTyper [ ${tag} ]`)
+            manglerTagsIKoden = true
+        }
+    })
+    expect(manglerTagsIKoden).toBeFalsy()
+})
+
+const hentAlleTagsUtenIndex = (sporsmal: Sporsmal[]) => {
+    const flatSoknad = flattenSporsmal(sporsmal)
+    const tags = new Set()
+    flatSoknad.forEach(spm => {
+        tags.add(fjernIndexFraTag(spm.tag))
+    })
+    return tags
+}
