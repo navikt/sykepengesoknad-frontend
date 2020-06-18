@@ -5,8 +5,8 @@ import { Element, Normaltekst, Undertittel } from 'nav-frontend-typografi'
 import React from 'react'
 
 import { useAppStore } from '../../data/stores/app-store'
-import { tekst } from '../../utils/tekster'
 import { RSArbeidssituasjon } from '../../types/rs-types/rs-arbeidssituasjon'
+import { tekst } from '../../utils/tekster'
 import Vis from '../vis'
 
 const KvitteringVidere = () => {
