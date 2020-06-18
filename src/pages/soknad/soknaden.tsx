@@ -112,12 +112,6 @@ const Fordeling = () => {
                         <Systemtittel className='sporsmal__tittel'>{tittel}</Systemtittel>
                     </Vis>
 
-                    <Vis hvis={stegNo === 1 && !erUtlandssoknad}>
-                        <Normaltekst tag='p' className='sporsmal__intro'>
-                            {tekst('sykepengesoknad.foer-du-begynner.introtekst')}
-                        </Normaltekst>
-                    </Vis>
-
                     <SporsmalForm />
                 </>
             )

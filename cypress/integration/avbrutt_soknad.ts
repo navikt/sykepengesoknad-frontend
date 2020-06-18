@@ -34,7 +34,7 @@ describe('Tester gjenoppretting av søknad', () => {
     it('Søknad kan gjenåpnes', function() {
         cy.contains('Gjenåpne søknad').click()
         cy.url().should('include', `${avbruttSoknad.id}/1`)
-        cy.contains('Før du begynner')
+        cy.contains('Gå videre')
     })
 
     it('Søknad kan avbrytes ', function() {
