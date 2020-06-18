@@ -1253,263 +1253,6 @@ export const veldigLangSoknad = {
             'undersporsmal': []
         },
         {
-            'id': '687337',
-            'tag': 'PERMITTERT_NAA',
-            'sporsmalstekst': 'Er du permittert nå?',
-            'undertekst': null,
-            'svartype': 'JA_NEI',
-            'min': null,
-            'max': null,
-            'pavirkerAndreSporsmal': false,
-            'kriterieForVisningAvUndersporsmal': 'JA',
-            'svar': [],
-            'undersporsmal': [
-                {
-                    'id': '687338',
-                    'tag': 'PERMITTERT_NAA_NAR',
-                    'sporsmalstekst': 'Velg første dag i permitteringen',
-                    'undertekst': null,
-                    'svartype': 'DATO',
-                    'min': '2019-12-01',
-                    'max': '2020-04-24',
-                    'pavirkerAndreSporsmal': false,
-                    'kriterieForVisningAvUndersporsmal': null,
-                    'svar': [],
-                    'undersporsmal': []
-                }
-            ]
-        },
-        {
-            'id': '687339',
-            'tag': 'PERMITTERT_PERIODE',
-            'sporsmalstekst': 'Har du vært permittert i noen perioder etter 1. februar 2020?',
-            'undertekst': null,
-            'svartype': 'JA_NEI',
-            'min': null,
-            'max': null,
-            'pavirkerAndreSporsmal': false,
-            'kriterieForVisningAvUndersporsmal': 'JA',
-            'svar': [],
-            'undersporsmal': [
-                {
-                    'id': '687340',
-                    'tag': 'PERMITTERT_PERIODE_NAR',
-                    'sporsmalstekst': null,
-                    'undertekst': null,
-                    'svartype': 'PERIODER',
-                    'min': '2020-02-01',
-                    'max': '2020-04-24',
-                    'pavirkerAndreSporsmal': false,
-                    'kriterieForVisningAvUndersporsmal': null,
-                    'svar': [],
-                    'undersporsmal': []
-                }
-            ]
-        },
-        {
-            'id': '687341',
-            'tag': 'TILBAKE_I_ARBEID',
-            'sporsmalstekst': 'Var du tilbake i fullt arbeid hos POSTEN NORGE AS, BÆRUM i løpet av perioden 1. - 24. april 2020?',
-            'undertekst': null,
-            'svartype': 'JA_NEI',
-            'min': null,
-            'max': null,
-            'pavirkerAndreSporsmal': true,
-            'kriterieForVisningAvUndersporsmal': 'JA',
-            'svar': [],
-            'undersporsmal': [
-                {
-                    'id': '687342',
-                    'tag': 'TILBAKE_NAR',
-                    'sporsmalstekst': 'Når begynte du å jobbe igjen?',
-                    'undertekst': null,
-                    'svartype': 'DATO',
-                    'min': '2020-04-01',
-                    'max': '2020-04-24',
-                    'pavirkerAndreSporsmal': true,
-                    'kriterieForVisningAvUndersporsmal': null,
-                    'svar': [],
-                    'undersporsmal': []
-                }
-            ]
-        },
-        {
-            'id': '687343',
-            'tag': 'FERIE_V2',
-            'sporsmalstekst': 'Tok du ut ferie mens du var sykmeldt 1. - 24. april 2020?',
-            'undertekst': null,
-            'svartype': 'JA_NEI',
-            'min': null,
-            'max': null,
-            'pavirkerAndreSporsmal': false,
-            'kriterieForVisningAvUndersporsmal': 'JA',
-            'svar': [],
-            'undersporsmal': [
-                {
-                    'id': '687344',
-                    'tag': 'FERIE_NAR_V2',
-                    'sporsmalstekst': 'Når tok du ut ferie?',
-                    'undertekst': null,
-                    'svartype': 'PERIODER',
-                    'min': '2020-04-01',
-                    'max': '2020-04-24',
-                    'pavirkerAndreSporsmal': false,
-                    'kriterieForVisningAvUndersporsmal': null,
-                    'svar': [],
-                    'undersporsmal': []
-                }
-            ]
-        },
-        {
-            'id': '687345',
-            'tag': 'PERMISJON_V2',
-            'sporsmalstekst': 'Tok du permisjon mens du var sykmeldt 1. - 24. april 2020?',
-            'undertekst': null,
-            'svartype': 'JA_NEI',
-            'min': null,
-            'max': null,
-            'pavirkerAndreSporsmal': false,
-            'kriterieForVisningAvUndersporsmal': 'JA',
-            'svar': [],
-            'undersporsmal': [
-                {
-                    'id': '687346',
-                    'tag': 'PERMISJON_NAR_V2',
-                    'sporsmalstekst': 'Når tok du permisjon?',
-                    'undertekst': null,
-                    'svartype': 'PERIODER',
-                    'min': '2020-04-01',
-                    'max': '2020-04-24',
-                    'pavirkerAndreSporsmal': false,
-                    'kriterieForVisningAvUndersporsmal': null,
-                    'svar': [],
-                    'undersporsmal': []
-                }
-            ]
-        },
-        {
-            'id': '687347',
-            'tag': 'UTLAND_V2',
-            'sporsmalstekst': 'Var du på reise utenfor EØS mens du var sykmeldt 1. - 24. april 2020?',
-            'undertekst': null,
-            'svartype': 'JA_NEI',
-            'min': null,
-            'max': null,
-            'pavirkerAndreSporsmal': false,
-            'kriterieForVisningAvUndersporsmal': 'JA',
-            'svar': [],
-            'undersporsmal': [
-                {
-                    'id': '687348',
-                    'tag': 'UTLAND_NAR_V2',
-                    'sporsmalstekst': 'Når var du utenfor EØS?',
-                    'undertekst': null,
-                    'svartype': 'PERIODER',
-                    'min': '2020-04-01',
-                    'max': '2020-04-24',
-                    'pavirkerAndreSporsmal': false,
-                    'kriterieForVisningAvUndersporsmal': null,
-                    'svar': [],
-                    'undersporsmal': []
-                }
-            ]
-        },
-        {
-            'id': '687349',
-            'tag': 'JOBBET_DU_100_PROSENT_0',
-            'sporsmalstekst': 'I perioden 1. - 24. april 2020 var du 100 % sykmeldt fra POSTEN NORGE AS, BÆRUM. Jobbet du noe i denne perioden?',
-            'undertekst': null,
-            'svartype': 'JA_NEI',
-            'min': null,
-            'max': null,
-            'pavirkerAndreSporsmal': false,
-            'kriterieForVisningAvUndersporsmal': 'JA',
-            'svar': [],
-            'undersporsmal': [
-                {
-                    'id': '687350',
-                    'tag': 'HVOR_MANGE_TIMER_PER_UKE_0',
-                    'sporsmalstekst': 'Hvor mange timer i uken jobber du vanligvis når du er frisk? Varierer det, kan du oppgi gjennomsnittet.',
-                    'undertekst': 'timer per uke',
-                    'svartype': 'TALL',
-                    'min': '1',
-                    'max': '150',
-                    'pavirkerAndreSporsmal': false,
-                    'kriterieForVisningAvUndersporsmal': null,
-                    'svar': [],
-                    'undersporsmal': []
-                },
-                {
-                    'id': '687351',
-                    'tag': 'HVOR_MYE_HAR_DU_JOBBET_0',
-                    'sporsmalstekst': 'Hvor mye jobbet du totalt 1. - 24. april 2020 hos POSTEN NORGE AS, BÆRUM?',
-                    'undertekst': null,
-                    'svartype': 'RADIO_GRUPPE_TIMER_PROSENT',
-                    'min': null,
-                    'max': null,
-                    'pavirkerAndreSporsmal': false,
-                    'kriterieForVisningAvUndersporsmal': null,
-                    'svar': [],
-                    'undersporsmal': [
-                        {
-                            'id': '687352',
-                            'tag': 'HVOR_MYE_PROSENT_0',
-                            'sporsmalstekst': 'prosent',
-                            'undertekst': null,
-                            'svartype': 'RADIO',
-                            'min': null,
-                            'max': null,
-                            'pavirkerAndreSporsmal': false,
-                            'kriterieForVisningAvUndersporsmal': 'CHECKED',
-                            'svar': [],
-                            'undersporsmal': [
-                                {
-                                    'id': '687353',
-                                    'tag': 'HVOR_MYE_PROSENT_VERDI_0',
-                                    'sporsmalstekst': null,
-                                    'undertekst': 'prosent',
-                                    'svartype': 'TALL',
-                                    'min': '1',
-                                    'max': '99',
-                                    'pavirkerAndreSporsmal': false,
-                                    'kriterieForVisningAvUndersporsmal': null,
-                                    'svar': [],
-                                    'undersporsmal': []
-                                }
-                            ]
-                        },
-                        {
-                            'id': '687354',
-                            'tag': 'HVOR_MYE_TIMER_0',
-                            'sporsmalstekst': 'timer',
-                            'undertekst': null,
-                            'svartype': 'RADIO',
-                            'min': null,
-                            'max': null,
-                            'pavirkerAndreSporsmal': false,
-                            'kriterieForVisningAvUndersporsmal': 'CHECKED',
-                            'svar': [],
-                            'undersporsmal': [
-                                {
-                                    'id': '687355',
-                                    'tag': 'HVOR_MYE_TIMER_VERDI_0',
-                                    'sporsmalstekst': null,
-                                    'undertekst': 'timer totalt',
-                                    'svartype': 'TALL',
-                                    'min': '1',
-                                    'max': '514',
-                                    'pavirkerAndreSporsmal': false,
-                                    'kriterieForVisningAvUndersporsmal': null,
-                                    'svar': [],
-                                    'undersporsmal': []
-                                }
-                            ]
-                        }
-                    ]
-                }
-            ]
-        },
-        {
             'id': '687356',
             'tag': 'ANDRE_INNTEKTSKILDER',
             'sporsmalstekst': 'Har du andre inntektskilder enn POSTEN NORGE AS, BÆRUM?',
@@ -1680,419 +1423,6 @@ export const veldigLangSoknad = {
                             'kriterieForVisningAvUndersporsmal': null,
                             'svar': [],
                             'undersporsmal': []
-                        }
-                    ]
-                }
-            ]
-        },
-        {
-            'id': '687369',
-            'tag': 'UTDANNING',
-            'sporsmalstekst': 'Har du vært under utdanning i løpet av perioden 1. - 24. april 2020?',
-            'undertekst': null,
-            'svartype': 'JA_NEI',
-            'min': null,
-            'max': null,
-            'pavirkerAndreSporsmal': false,
-            'kriterieForVisningAvUndersporsmal': 'JA',
-            'svar': [],
-            'undersporsmal': [
-                {
-                    'id': '687370',
-                    'tag': 'UTDANNING_START',
-                    'sporsmalstekst': 'Når startet du på utdanningen?',
-                    'undertekst': null,
-                    'svartype': 'DATO',
-                    'min': null,
-                    'max': '2020-04-24',
-                    'pavirkerAndreSporsmal': false,
-                    'kriterieForVisningAvUndersporsmal': null,
-                    'svar': [],
-                    'undersporsmal': []
-                },
-                {
-                    'id': '687371',
-                    'tag': 'FULLTIDSSTUDIUM',
-                    'sporsmalstekst': 'Er utdanningen et fulltidsstudium?',
-                    'undertekst': null,
-                    'svartype': 'JA_NEI',
-                    'min': null,
-                    'max': null,
-                    'pavirkerAndreSporsmal': false,
-                    'kriterieForVisningAvUndersporsmal': null,
-                    'svar': [],
-                    'undersporsmal': []
-                }
-            ]
-        },
-        {
-            'id': '103',
-            'tag': 'ARBEID_UTENFOR_NORGE',
-            'sporsmalstekst': 'Utfører du arbeid andre steder enn i Norge?',
-            'undertekst': null,
-            'svartype': 'JA_NEI',
-            'min': null,
-            'max': null,
-            'pavirkerAndreSporsmal': false,
-            'kriterieForVisningAvUndersporsmal': null,
-            'svar': [],
-            'undersporsmal': []
-        },
-        {
-            'id': '687422',
-            'tag': 'ARBEIDSLEDIG_UTLAND',
-            'sporsmalstekst': 'Var du på reise utenfor EØS mens du var sykmeldt 1. - 24. april 2020?',
-            'undertekst': null,
-            'svartype': 'JA_NEI',
-            'min': null,
-            'max': null,
-            'pavirkerAndreSporsmal': false,
-            'kriterieForVisningAvUndersporsmal': 'JA',
-            'svar': [],
-            'undersporsmal': [
-                {
-                    'id': '687423',
-                    'tag': 'UTLAND_NAR',
-                    'sporsmalstekst': 'Når var du utenfor EØS?',
-                    'undertekst': null,
-                    'svartype': 'PERIODER',
-                    'min': '2020-04-01',
-                    'max': '2020-04-24',
-                    'pavirkerAndreSporsmal': false,
-                    'kriterieForVisningAvUndersporsmal': null,
-                    'svar': [],
-                    'undersporsmal': []
-                },
-                {
-                    'id': '687424',
-                    'tag': 'UTLANDSOPPHOLD_SOKT_SYKEPENGER',
-                    'sporsmalstekst': 'Har du søkt om å beholde sykepengene for disse dagene?',
-                    'undertekst': null,
-                    'svartype': 'JA_NEI',
-                    'min': null,
-                    'max': null,
-                    'pavirkerAndreSporsmal': false,
-                    'kriterieForVisningAvUndersporsmal': 'NEI',
-                    'svar': [],
-                    'undersporsmal': [
-                        {
-                            'id': '687425',
-                            'tag': 'IKKE_SOKT_UTENLANDSOPPHOLD_INFORMASJON',
-                            'sporsmalstekst': null,
-                            'undertekst': '<p>DENNE SKAL IKKE VISES  I! utgangspunktet kan du bare få sykepenger mens du er i et land innenfor EØS. Du kan likevel <a target=\'_blank\' href=\'https://tjenester.nav.no/sykefravaer/sykepengesoknad-utland\'>søke NAV om å få reise ut av EØS</a> og beholde sykepengene i en begrenset periode.</p>',
-                            'svartype': 'IKKE_RELEVANT',
-                            'min': null,
-                            'max': null,
-                            'pavirkerAndreSporsmal': false,
-                            'kriterieForVisningAvUndersporsmal': null,
-                            'svar': [],
-                            'undersporsmal': []
-                        }
-                    ]
-                }
-            ]
-        },
-        {
-            'id': '89',
-            'tag': 'EGENMELDINGER',
-            'sporsmalstekst': 'Vi har registrert at du ble sykmeldt onsdag 20. mai 2020. Var du syk og borte fra jobb i perioden 4. - 19. mai 2020?',
-            'undertekst': null,
-            'svartype': 'JA_NEI',
-            'min': null,
-            'max': null,
-            'pavirkerAndreSporsmal': false,
-            'kriterieForVisningAvUndersporsmal': 'JA',
-            'svar': [],
-            'undersporsmal': [
-                {
-                    'id': '90',
-                    'tag': 'TIDLIGERE_SYK',
-                    'sporsmalstekst': null,
-                    'undertekst': null,
-                    'svartype': 'CHECKBOX_GRUPPE',
-                    'min': null,
-                    'max': null,
-                    'pavirkerAndreSporsmal': false,
-                    'kriterieForVisningAvUndersporsmal': null,
-                    'svar': [],
-                    'undersporsmal': [
-                        {
-                            'id': '91',
-                            'tag': 'TIDLIGERE_EGENMELDING',
-                            'sporsmalstekst': 'Jeg var syk med egenmelding',
-                            'undertekst': null,
-                            'svartype': 'CHECKBOX',
-                            'min': null,
-                            'max': null,
-                            'pavirkerAndreSporsmal': false,
-                            'kriterieForVisningAvUndersporsmal': 'CHECKED',
-                            'svar': [],
-                            'undersporsmal': [
-                                {
-                                    'id': '92',
-                                    'tag': 'EGENMELDINGER_NAR',
-                                    'sporsmalstekst': 'Hvilke dager var du syk med egenmelding? Du trenger bare oppgi dager før 20. mai 2020.',
-                                    'undertekst': null,
-                                    'svartype': 'PERIODER',
-                                    'min': '2019-11-20',
-                                    'max': '2020-05-19',
-                                    'pavirkerAndreSporsmal': false,
-                                    'kriterieForVisningAvUndersporsmal': null,
-                                    'svar': [],
-                                    'undersporsmal': []
-                                }
-                            ]
-                        },
-                        {
-                            'id': '93',
-                            'tag': 'TIDLIGERE_PAPIRSYKMELDING',
-                            'sporsmalstekst': 'Jeg var syk med papirsykmelding',
-                            'undertekst': null,
-                            'svartype': 'CHECKBOX',
-                            'min': null,
-                            'max': null,
-                            'pavirkerAndreSporsmal': false,
-                            'kriterieForVisningAvUndersporsmal': 'CHECKED',
-                            'svar': [],
-                            'undersporsmal': [
-                                {
-                                    'id': '94',
-                                    'tag': 'PAPIRSYKMELDING_NAR',
-                                    'sporsmalstekst': 'Hvilke dager var du syk med papirsykmelding? Du trenger bare oppgi dager før 20. mai 2020.',
-                                    'undertekst': null,
-                                    'svartype': 'PERIODER',
-                                    'min': '2019-11-20',
-                                    'max': '2020-05-19',
-                                    'pavirkerAndreSporsmal': false,
-                                    'kriterieForVisningAvUndersporsmal': null,
-                                    'svar': [],
-                                    'undersporsmal': []
-                                }
-                            ]
-                        }
-                    ]
-                }
-            ]
-        },
-        {
-            'id': '687375',
-            'tag': 'ENKELTSTAENDE_BEHANDLINGSDAGER_0',
-            'sporsmalstekst': 'Hvilke dager måtte du være helt borte fra jobben på grunn av behandling mellom 1. - 24. april 2020?',
-            'undertekst': null,
-            'svartype': 'INFO_BEHANDLINGSDAGER',
-            'min': null,
-            'max': null,
-            'pavirkerAndreSporsmal': false,
-            'kriterieForVisningAvUndersporsmal': null,
-            'svar': [],
-            'undersporsmal': [
-                {
-                    'id': '687376',
-                    'tag': 'ENKELTSTAENDE_BEHANDLINGSDAGER_UKE_0',
-                    'sporsmalstekst': '2020-04-01 - 2020-04-03',
-                    'undertekst': null,
-                    'svartype': 'RADIO_GRUPPE_UKEKALENDER',
-                    'min': '2020-04-01',
-                    'max': '2020-04-03',
-                    'pavirkerAndreSporsmal': false,
-                    'kriterieForVisningAvUndersporsmal': null,
-                    'svar': [],
-                    'undersporsmal': []
-                },
-                {
-                    'id': '687377',
-                    'tag': 'ENKELTSTAENDE_BEHANDLINGSDAGER_UKE_1',
-                    'sporsmalstekst': '2020-04-06 - 2020-04-10',
-                    'undertekst': null,
-                    'svartype': 'RADIO_GRUPPE_UKEKALENDER',
-                    'min': '2020-04-06',
-                    'max': '2020-04-10',
-                    'pavirkerAndreSporsmal': false,
-                    'kriterieForVisningAvUndersporsmal': null,
-                    'svar': [],
-                    'undersporsmal': []
-                },
-                {
-                    'id': '687378',
-                    'tag': 'ENKELTSTAENDE_BEHANDLINGSDAGER_UKE_2',
-                    'sporsmalstekst': '2020-04-13 - 2020-04-17',
-                    'undertekst': null,
-                    'svartype': 'RADIO_GRUPPE_UKEKALENDER',
-                    'min': '2020-04-13',
-                    'max': '2020-04-17',
-                    'pavirkerAndreSporsmal': false,
-                    'kriterieForVisningAvUndersporsmal': null,
-                    'svar': [],
-                    'undersporsmal': []
-                },
-                {
-                    'id': '687379',
-                    'tag': 'ENKELTSTAENDE_BEHANDLINGSDAGER_UKE_3',
-                    'sporsmalstekst': '2020-04-20 - 2020-04-24',
-                    'undertekst': null,
-                    'svartype': 'RADIO_GRUPPE_UKEKALENDER',
-                    'min': '2020-04-20',
-                    'max': '2020-04-24',
-                    'pavirkerAndreSporsmal': false,
-                    'kriterieForVisningAvUndersporsmal': null,
-                    'svar': [],
-                    'undersporsmal': []
-                }
-            ]
-        },
-        {
-            'id': '3',
-            'tag': 'ARBEIDSGIVER',
-            'sporsmalstekst': 'Har du arbeidsgiver?',
-            'undertekst': null,
-            'svartype': 'JA_NEI',
-            'min': null,
-            'max': null,
-            'pavirkerAndreSporsmal': true,
-            'kriterieForVisningAvUndersporsmal': 'JA',
-            'svar': [],
-            'undersporsmal': [ {
-                'id': '4',
-                'tag': 'SYKMELDINGSGRAD',
-                'sporsmalstekst': 'Er du 100 % sykmeldt?',
-                'undertekst': null,
-                'svartype': 'JA_NEI',
-                'min': null,
-                'max': null,
-                'pavirkerAndreSporsmal': false,
-                'kriterieForVisningAvUndersporsmal': null,
-                'svar': [],
-                'undersporsmal': []
-            }, {
-                'id': '5',
-                'tag': 'FERIE',
-                'sporsmalstekst': 'Har du avtalt med arbeidsgiveren din at du skal ha ferie i hele perioden?',
-                'undertekst': null,
-                'svartype': 'JA_NEI',
-                'min': null,
-                'max': null,
-                'pavirkerAndreSporsmal': false,
-                'kriterieForVisningAvUndersporsmal': null,
-                'svar': [],
-                'undersporsmal': []
-            } ]
-        },
-        {
-            'id': '1',
-            'tag': 'PERIODEUTLAND',
-            'sporsmalstekst': 'Når skal du reise?',
-            'undertekst': null,
-            'svartype': 'PERIODER',
-            'min': '2020-04-01',
-            'max': '2020-04-24',
-            'pavirkerAndreSporsmal': false,
-            'kriterieForVisningAvUndersporsmal': null,
-            'svar': [],
-            'undersporsmal': []
-        },
-        {
-            'id': '2',
-            'tag': 'LAND',
-            'sporsmalstekst': 'Hvilket land skal du reise til?',
-            'undertekst': null,
-            'svartype': 'LAND',
-            'min': null,
-            'max': '50',
-            'pavirkerAndreSporsmal': false,
-            'kriterieForVisningAvUndersporsmal': null,
-            'svar': [],
-            'undersporsmal': []
-        },
-        {
-            'id': '104',
-            'tag': 'JOBBET_DU_GRADERT_0',
-            'sporsmalstekst': 'I perioden 20. mai - 5. juni 2020 skulle du jobbe 20 % av ditt normale arbeid hos 995816598 sitt orgnavn :). Jobbet du mer enn dette?',
-            'undertekst': null,
-            'svartype': 'JA_NEI',
-            'min': null,
-            'max': null,
-            'pavirkerAndreSporsmal': false,
-            'kriterieForVisningAvUndersporsmal': 'JA',
-            'svar': [],
-            'undersporsmal': [
-                {
-                    'id': '105',
-                    'tag': 'HVOR_MANGE_TIMER_PER_UKE_0',
-                    'sporsmalstekst': 'Hvor mange timer i uken jobber du vanligvis når du er frisk? Varierer det, kan du oppgi gjennomsnittet.',
-                    'undertekst': 'timer per uke',
-                    'svartype': 'TALL',
-                    'min': '1',
-                    'max': '150',
-                    'pavirkerAndreSporsmal': false,
-                    'kriterieForVisningAvUndersporsmal': null,
-                    'svar': [],
-                    'undersporsmal': []
-                },
-                {
-                    'id': '106',
-                    'tag': 'HVOR_MYE_HAR_DU_JOBBET_0',
-                    'sporsmalstekst': 'Hvor mye jobbet du totalt 20. mai - 5. juni 2020 hos 995816598 sitt orgnavn :)?',
-                    'undertekst': null,
-                    'svartype': 'RADIO_GRUPPE_TIMER_PROSENT',
-                    'min': null,
-                    'max': null,
-                    'pavirkerAndreSporsmal': false,
-                    'kriterieForVisningAvUndersporsmal': null,
-                    'svar': [],
-                    'undersporsmal': [
-                        {
-                            'id': '107',
-                            'tag': 'HVOR_MYE_PROSENT_0',
-                            'sporsmalstekst': 'prosent',
-                            'undertekst': null,
-                            'svartype': 'RADIO',
-                            'min': null,
-                            'max': null,
-                            'pavirkerAndreSporsmal': false,
-                            'kriterieForVisningAvUndersporsmal': 'CHECKED',
-                            'svar': [],
-                            'undersporsmal': [
-                                {
-                                    'id': '108',
-                                    'tag': 'HVOR_MYE_PROSENT_VERDI_0',
-                                    'sporsmalstekst': null,
-                                    'undertekst': 'prosent',
-                                    'svartype': 'TALL',
-                                    'min': '21',
-                                    'max': '99',
-                                    'pavirkerAndreSporsmal': false,
-                                    'kriterieForVisningAvUndersporsmal': null,
-                                    'svar': [],
-                                    'undersporsmal': []
-                                }
-                            ]
-                        },
-                        {
-                            'id': '109',
-                            'tag': 'HVOR_MYE_TIMER_0',
-                            'sporsmalstekst': 'timer',
-                            'undertekst': null,
-                            'svartype': 'RADIO',
-                            'min': null,
-                            'max': null,
-                            'pavirkerAndreSporsmal': false,
-                            'kriterieForVisningAvUndersporsmal': 'CHECKED',
-                            'svar': [],
-                            'undersporsmal': [
-                                {
-                                    'id': '110',
-                                    'tag': 'HVOR_MYE_TIMER_VERDI_0',
-                                    'sporsmalstekst': null,
-                                    'undertekst': 'timer totalt',
-                                    'svartype': 'TALL',
-                                    'min': '1',
-                                    'max': '364',
-                                    'pavirkerAndreSporsmal': false,
-                                    'kriterieForVisningAvUndersporsmal': null,
-                                    'svar': [],
-                                    'undersporsmal': []
-                                }
-                            ]
                         }
                     ]
                 }
@@ -2367,24 +1697,49 @@ export const veldigLangSoknad = {
             } ]
         },
         {
-            'id': '47',
-            'tag': 'FRISKMELDT',
-            'sporsmalstekst': 'Brukte du hele sykmeldingen fram til 11. juni 2020?',
+            'id': '103',
+            'tag': 'ARBEID_UTENFOR_NORGE',
+            'sporsmalstekst': 'Utfører du arbeid andre steder enn i Norge?',
             'undertekst': null,
             'svartype': 'JA_NEI',
             'min': null,
             'max': null,
             'pavirkerAndreSporsmal': false,
-            'kriterieForVisningAvUndersporsmal': 'NEI',
+            'kriterieForVisningAvUndersporsmal': null,
+            'svar': [],
+            'undersporsmal': []
+        },
+        {
+            'id': '3',
+            'tag': 'ARBEIDSGIVER',
+            'sporsmalstekst': 'Har du arbeidsgiver?',
+            'undertekst': null,
+            'svartype': 'JA_NEI',
+            'min': null,
+            'max': null,
+            'pavirkerAndreSporsmal': true,
+            'kriterieForVisningAvUndersporsmal': 'JA',
             'svar': [],
             'undersporsmal': [ {
-                'id': '48',
-                'tag': 'FRISKMELDT_START',
-                'sporsmalstekst': 'Fra hvilken dato har du ikke lenger behov for sykmelding?',
+                'id': '4',
+                'tag': 'SYKMELDINGSGRAD',
+                'sporsmalstekst': 'Er du 100 % sykmeldt?',
                 'undertekst': null,
-                'svartype': 'DATO',
-                'min': '2020-05-27',
-                'max': '2020-06-11',
+                'svartype': 'JA_NEI',
+                'min': null,
+                'max': null,
+                'pavirkerAndreSporsmal': false,
+                'kriterieForVisningAvUndersporsmal': null,
+                'svar': [],
+                'undersporsmal': []
+            }, {
+                'id': '5',
+                'tag': 'FERIE',
+                'sporsmalstekst': 'Har du avtalt med arbeidsgiveren din at du skal ha ferie i hele perioden?',
+                'undertekst': null,
+                'svartype': 'JA_NEI',
+                'min': null,
+                'max': null,
                 'pavirkerAndreSporsmal': false,
                 'kriterieForVisningAvUndersporsmal': null,
                 'svar': [],
@@ -2392,9 +1747,9 @@ export const veldigLangSoknad = {
             } ]
         },
         {
-            'id': '423',
-            'tag': 'UTLAND',
-            'sporsmalstekst': 'Har du vært utenfor EØS mens du var sykmeldt 1. - 24. april 2020?',
+            'id': '687422',
+            'tag': 'ARBEIDSLEDIG_UTLAND',
+            'sporsmalstekst': 'Var du på reise utenfor EØS mens du var sykmeldt 1. - 24. april 2020?',
             'undertekst': null,
             'svartype': 'JA_NEI',
             'min': null,
@@ -2404,8 +1759,8 @@ export const veldigLangSoknad = {
             'svar': [],
             'undersporsmal': [
                 {
-                    'id': '424',
-                    'tag': 'PERIODER',
+                    'id': '687423',
+                    'tag': 'UTLAND_NAR',
                     'sporsmalstekst': 'Når var du utenfor EØS?',
                     'undertekst': null,
                     'svartype': 'PERIODER',
@@ -2417,7 +1772,7 @@ export const veldigLangSoknad = {
                     'undersporsmal': []
                 },
                 {
-                    'id': '425',
+                    'id': '687424',
                     'tag': 'UTLANDSOPPHOLD_SOKT_SYKEPENGER',
                     'sporsmalstekst': 'Har du søkt om å beholde sykepengene for disse dagene?',
                     'undertekst': null,
@@ -2429,10 +1784,10 @@ export const veldigLangSoknad = {
                     'svar': [],
                     'undersporsmal': [
                         {
-                            'id': '426',
+                            'id': '687425',
                             'tag': 'IKKE_SOKT_UTENLANDSOPPHOLD_INFORMASJON',
-                            'sporsmalstekst': '<p>I utgangspunktet kan du bare få sykepenger mens du er i et land innenfor EØS. Du kan likevel <a target="_blank" href="https://tjenester.nav.no/sykefravaer/sykepengesoknad-utland">søke NAV om å få reise ut av EØS</a> og beholde sykepengene i en begrenset periode.</p>',
-                            'undertekst': null,
+                            'sporsmalstekst': null,
+                            'undertekst': '<p>DENNE SKAL IKKE VISES  I! utgangspunktet kan du bare få sykepenger mens du er i et land innenfor EØS. Du kan likevel <a target=\'_blank\' href=\'https://tjenester.nav.no/sykefravaer/sykepengesoknad-utland\'>søke NAV om å få reise ut av EØS</a> og beholde sykepengene i en begrenset periode.</p>',
                             'svartype': 'IKKE_RELEVANT',
                             'min': null,
                             'max': null,
@@ -2442,12 +1797,13 @@ export const veldigLangSoknad = {
                             'undersporsmal': []
                         }
                     ]
-                } ]
+                }
+            ]
         },
         {
-            'id': '243',
-            'tag': 'FRAVER_FOR_BEHANDLING',
-            'sporsmalstekst': 'Vi ser at sykmeldingen inneholder behandlingsdager mellom 1. - 24. april 2020. Var du syk og borte fra jobb før dette, nærmere bestemt 16. - 31. mars 2020?',
+            'id': '89',
+            'tag': 'EGENMELDINGER',
+            'sporsmalstekst': 'Vi har registrert at du ble sykmeldt onsdag 20. mai 2020. Var du syk og borte fra jobb i perioden 4. - 19. mai 2020?',
             'undertekst': null,
             'svartype': 'JA_NEI',
             'min': null,
@@ -2457,7 +1813,7 @@ export const veldigLangSoknad = {
             'svar': [],
             'undersporsmal': [
                 {
-                    'id': '3214',
+                    'id': '90',
                     'tag': 'TIDLIGERE_SYK',
                     'sporsmalstekst': null,
                     'undertekst': null,
@@ -2469,7 +1825,7 @@ export const veldigLangSoknad = {
                     'svar': [],
                     'undersporsmal': [
                         {
-                            'id': '443',
+                            'id': '91',
                             'tag': 'TIDLIGERE_EGENMELDING',
                             'sporsmalstekst': 'Jeg var syk med egenmelding',
                             'undertekst': null,
@@ -2481,13 +1837,13 @@ export const veldigLangSoknad = {
                             'svar': [],
                             'undersporsmal': [
                                 {
-                                    'id': '546',
+                                    'id': '92',
                                     'tag': 'EGENMELDINGER_NAR',
-                                    'sporsmalstekst': 'Hvilke dager var du syk med egenmelding? Du trenger bare oppgi dager før 1. april 2020.',
+                                    'sporsmalstekst': 'Hvilke dager var du syk med egenmelding? Du trenger bare oppgi dager før 20. mai 2020.',
                                     'undertekst': null,
                                     'svartype': 'PERIODER',
-                                    'min': '2019-10-01',
-                                    'max': '2020-03-31',
+                                    'min': '2019-11-20',
+                                    'max': '2020-05-19',
                                     'pavirkerAndreSporsmal': false,
                                     'kriterieForVisningAvUndersporsmal': null,
                                     'svar': [],
@@ -2496,7 +1852,7 @@ export const veldigLangSoknad = {
                             ]
                         },
                         {
-                            'id': '6234',
+                            'id': '93',
                             'tag': 'TIDLIGERE_PAPIRSYKMELDING',
                             'sporsmalstekst': 'Jeg var syk med papirsykmelding',
                             'undertekst': null,
@@ -2508,13 +1864,13 @@ export const veldigLangSoknad = {
                             'svar': [],
                             'undersporsmal': [
                                 {
-                                    'id': '7645',
+                                    'id': '94',
                                     'tag': 'PAPIRSYKMELDING_NAR',
-                                    'sporsmalstekst': 'Hvilke dager var du syk med papirsykmelding? Du trenger bare oppgi dager før 1. april 2020.',
+                                    'sporsmalstekst': 'Hvilke dager var du syk med papirsykmelding? Du trenger bare oppgi dager før 20. mai 2020.',
                                     'undertekst': null,
                                     'svartype': 'PERIODER',
-                                    'min': '2019-10-01',
-                                    'max': '2020-03-31',
+                                    'min': '2019-11-20',
+                                    'max': '2020-05-19',
                                     'pavirkerAndreSporsmal': false,
                                     'kriterieForVisningAvUndersporsmal': null,
                                     'svar': [],
@@ -2523,6 +1879,99 @@ export const veldigLangSoknad = {
                             ]
                         }
                     ]
+                }
+            ]
+        },
+        {
+            'id': '687375',
+            'tag': 'ENKELTSTAENDE_BEHANDLINGSDAGER_0',
+            'sporsmalstekst': 'Hvilke dager måtte du være helt borte fra jobben på grunn av behandling mellom 1. - 24. april 2020?',
+            'undertekst': null,
+            'svartype': 'INFO_BEHANDLINGSDAGER',
+            'min': null,
+            'max': null,
+            'pavirkerAndreSporsmal': false,
+            'kriterieForVisningAvUndersporsmal': null,
+            'svar': [],
+            'undersporsmal': [
+                {
+                    'id': '687376',
+                    'tag': 'ENKELTSTAENDE_BEHANDLINGSDAGER_UKE_0',
+                    'sporsmalstekst': '2020-04-01 - 2020-04-03',
+                    'undertekst': null,
+                    'svartype': 'RADIO_GRUPPE_UKEKALENDER',
+                    'min': '2020-04-01',
+                    'max': '2020-04-03',
+                    'pavirkerAndreSporsmal': false,
+                    'kriterieForVisningAvUndersporsmal': null,
+                    'svar': [],
+                    'undersporsmal': []
+                },
+                {
+                    'id': '687377',
+                    'tag': 'ENKELTSTAENDE_BEHANDLINGSDAGER_UKE_1',
+                    'sporsmalstekst': '2020-04-06 - 2020-04-10',
+                    'undertekst': null,
+                    'svartype': 'RADIO_GRUPPE_UKEKALENDER',
+                    'min': '2020-04-06',
+                    'max': '2020-04-10',
+                    'pavirkerAndreSporsmal': false,
+                    'kriterieForVisningAvUndersporsmal': null,
+                    'svar': [],
+                    'undersporsmal': []
+                },
+                {
+                    'id': '687378',
+                    'tag': 'ENKELTSTAENDE_BEHANDLINGSDAGER_UKE_2',
+                    'sporsmalstekst': '2020-04-13 - 2020-04-17',
+                    'undertekst': null,
+                    'svartype': 'RADIO_GRUPPE_UKEKALENDER',
+                    'min': '2020-04-13',
+                    'max': '2020-04-17',
+                    'pavirkerAndreSporsmal': false,
+                    'kriterieForVisningAvUndersporsmal': null,
+                    'svar': [],
+                    'undersporsmal': []
+                },
+                {
+                    'id': '687379',
+                    'tag': 'ENKELTSTAENDE_BEHANDLINGSDAGER_UKE_3',
+                    'sporsmalstekst': '2020-04-20 - 2020-04-24',
+                    'undertekst': null,
+                    'svartype': 'RADIO_GRUPPE_UKEKALENDER',
+                    'min': '2020-04-20',
+                    'max': '2020-04-24',
+                    'pavirkerAndreSporsmal': false,
+                    'kriterieForVisningAvUndersporsmal': null,
+                    'svar': [],
+                    'undersporsmal': []
+                }
+            ]
+        },
+        {
+            'id': '687343',
+            'tag': 'FERIE_V2',
+            'sporsmalstekst': 'Tok du ut ferie mens du var sykmeldt 1. - 24. april 2020?',
+            'undertekst': null,
+            'svartype': 'JA_NEI',
+            'min': null,
+            'max': null,
+            'pavirkerAndreSporsmal': false,
+            'kriterieForVisningAvUndersporsmal': 'JA',
+            'svar': [],
+            'undersporsmal': [
+                {
+                    'id': '687344',
+                    'tag': 'FERIE_NAR_V2',
+                    'sporsmalstekst': 'Når tok du ut ferie?',
+                    'undertekst': null,
+                    'svartype': 'PERIODER',
+                    'min': '2020-04-01',
+                    'max': '2020-04-24',
+                    'pavirkerAndreSporsmal': false,
+                    'kriterieForVisningAvUndersporsmal': null,
+                    'svar': [],
+                    'undersporsmal': []
                 }
             ]
         },
@@ -2632,6 +2081,557 @@ export const veldigLangSoknad = {
                             ]
                         }
                     ]
+                }
+            ]
+        },
+        {
+            'id': '243',
+            'tag': 'FRAVER_FOR_BEHANDLING',
+            'sporsmalstekst': 'Vi ser at sykmeldingen inneholder behandlingsdager mellom 1. - 24. april 2020. Var du syk og borte fra jobb før dette, nærmere bestemt 16. - 31. mars 2020?',
+            'undertekst': null,
+            'svartype': 'JA_NEI',
+            'min': null,
+            'max': null,
+            'pavirkerAndreSporsmal': false,
+            'kriterieForVisningAvUndersporsmal': 'JA',
+            'svar': [],
+            'undersporsmal': [
+                {
+                    'id': '3214',
+                    'tag': 'TIDLIGERE_SYK',
+                    'sporsmalstekst': null,
+                    'undertekst': null,
+                    'svartype': 'CHECKBOX_GRUPPE',
+                    'min': null,
+                    'max': null,
+                    'pavirkerAndreSporsmal': false,
+                    'kriterieForVisningAvUndersporsmal': null,
+                    'svar': [],
+                    'undersporsmal': [
+                        {
+                            'id': '443',
+                            'tag': 'TIDLIGERE_EGENMELDING',
+                            'sporsmalstekst': 'Jeg var syk med egenmelding',
+                            'undertekst': null,
+                            'svartype': 'CHECKBOX',
+                            'min': null,
+                            'max': null,
+                            'pavirkerAndreSporsmal': false,
+                            'kriterieForVisningAvUndersporsmal': 'CHECKED',
+                            'svar': [],
+                            'undersporsmal': [
+                                {
+                                    'id': '546',
+                                    'tag': 'EGENMELDINGER_NAR',
+                                    'sporsmalstekst': 'Hvilke dager var du syk med egenmelding? Du trenger bare oppgi dager før 1. april 2020.',
+                                    'undertekst': null,
+                                    'svartype': 'PERIODER',
+                                    'min': '2019-10-01',
+                                    'max': '2020-03-31',
+                                    'pavirkerAndreSporsmal': false,
+                                    'kriterieForVisningAvUndersporsmal': null,
+                                    'svar': [],
+                                    'undersporsmal': []
+                                }
+                            ]
+                        },
+                        {
+                            'id': '6234',
+                            'tag': 'TIDLIGERE_PAPIRSYKMELDING',
+                            'sporsmalstekst': 'Jeg var syk med papirsykmelding',
+                            'undertekst': null,
+                            'svartype': 'CHECKBOX',
+                            'min': null,
+                            'max': null,
+                            'pavirkerAndreSporsmal': false,
+                            'kriterieForVisningAvUndersporsmal': 'CHECKED',
+                            'svar': [],
+                            'undersporsmal': [
+                                {
+                                    'id': '7645',
+                                    'tag': 'PAPIRSYKMELDING_NAR',
+                                    'sporsmalstekst': 'Hvilke dager var du syk med papirsykmelding? Du trenger bare oppgi dager før 1. april 2020.',
+                                    'undertekst': null,
+                                    'svartype': 'PERIODER',
+                                    'min': '2019-10-01',
+                                    'max': '2020-03-31',
+                                    'pavirkerAndreSporsmal': false,
+                                    'kriterieForVisningAvUndersporsmal': null,
+                                    'svar': [],
+                                    'undersporsmal': []
+                                }
+                            ]
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            'id': '47',
+            'tag': 'FRISKMELDT',
+            'sporsmalstekst': 'Brukte du hele sykmeldingen fram til 11. juni 2020?',
+            'undertekst': null,
+            'svartype': 'JA_NEI',
+            'min': null,
+            'max': null,
+            'pavirkerAndreSporsmal': false,
+            'kriterieForVisningAvUndersporsmal': 'NEI',
+            'svar': [],
+            'undersporsmal': [ {
+                'id': '48',
+                'tag': 'FRISKMELDT_START',
+                'sporsmalstekst': 'Fra hvilken dato har du ikke lenger behov for sykmelding?',
+                'undertekst': null,
+                'svartype': 'DATO',
+                'min': '2020-05-27',
+                'max': '2020-06-11',
+                'pavirkerAndreSporsmal': false,
+                'kriterieForVisningAvUndersporsmal': null,
+                'svar': [],
+                'undersporsmal': []
+            } ]
+        },
+        {
+            'id': '687349',
+            'tag': 'JOBBET_DU_100_PROSENT_0',
+            'sporsmalstekst': 'I perioden 1. - 24. april 2020 var du 100 % sykmeldt fra POSTEN NORGE AS, BÆRUM. Jobbet du noe i denne perioden?',
+            'undertekst': null,
+            'svartype': 'JA_NEI',
+            'min': null,
+            'max': null,
+            'pavirkerAndreSporsmal': false,
+            'kriterieForVisningAvUndersporsmal': 'JA',
+            'svar': [],
+            'undersporsmal': [
+                {
+                    'id': '687350',
+                    'tag': 'HVOR_MANGE_TIMER_PER_UKE_0',
+                    'sporsmalstekst': 'Hvor mange timer i uken jobber du vanligvis når du er frisk? Varierer det, kan du oppgi gjennomsnittet.',
+                    'undertekst': 'timer per uke',
+                    'svartype': 'TALL',
+                    'min': '1',
+                    'max': '150',
+                    'pavirkerAndreSporsmal': false,
+                    'kriterieForVisningAvUndersporsmal': null,
+                    'svar': [],
+                    'undersporsmal': []
+                },
+                {
+                    'id': '687351',
+                    'tag': 'HVOR_MYE_HAR_DU_JOBBET_0',
+                    'sporsmalstekst': 'Hvor mye jobbet du totalt 1. - 24. april 2020 hos POSTEN NORGE AS, BÆRUM?',
+                    'undertekst': null,
+                    'svartype': 'RADIO_GRUPPE_TIMER_PROSENT',
+                    'min': null,
+                    'max': null,
+                    'pavirkerAndreSporsmal': false,
+                    'kriterieForVisningAvUndersporsmal': null,
+                    'svar': [],
+                    'undersporsmal': [
+                        {
+                            'id': '687352',
+                            'tag': 'HVOR_MYE_PROSENT_0',
+                            'sporsmalstekst': 'prosent',
+                            'undertekst': null,
+                            'svartype': 'RADIO',
+                            'min': null,
+                            'max': null,
+                            'pavirkerAndreSporsmal': false,
+                            'kriterieForVisningAvUndersporsmal': 'CHECKED',
+                            'svar': [],
+                            'undersporsmal': [
+                                {
+                                    'id': '687353',
+                                    'tag': 'HVOR_MYE_PROSENT_VERDI_0',
+                                    'sporsmalstekst': null,
+                                    'undertekst': 'prosent',
+                                    'svartype': 'TALL',
+                                    'min': '1',
+                                    'max': '99',
+                                    'pavirkerAndreSporsmal': false,
+                                    'kriterieForVisningAvUndersporsmal': null,
+                                    'svar': [],
+                                    'undersporsmal': []
+                                }
+                            ]
+                        },
+                        {
+                            'id': '687354',
+                            'tag': 'HVOR_MYE_TIMER_0',
+                            'sporsmalstekst': 'timer',
+                            'undertekst': null,
+                            'svartype': 'RADIO',
+                            'min': null,
+                            'max': null,
+                            'pavirkerAndreSporsmal': false,
+                            'kriterieForVisningAvUndersporsmal': 'CHECKED',
+                            'svar': [],
+                            'undersporsmal': [
+                                {
+                                    'id': '687355',
+                                    'tag': 'HVOR_MYE_TIMER_VERDI_0',
+                                    'sporsmalstekst': null,
+                                    'undertekst': 'timer totalt',
+                                    'svartype': 'TALL',
+                                    'min': '1',
+                                    'max': '514',
+                                    'pavirkerAndreSporsmal': false,
+                                    'kriterieForVisningAvUndersporsmal': null,
+                                    'svar': [],
+                                    'undersporsmal': []
+                                }
+                            ]
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            'id': '104',
+            'tag': 'JOBBET_DU_GRADERT_0',
+            'sporsmalstekst': 'I perioden 20. mai - 5. juni 2020 skulle du jobbe 20 % av ditt normale arbeid hos 995816598 sitt orgnavn :). Jobbet du mer enn dette?',
+            'undertekst': null,
+            'svartype': 'JA_NEI',
+            'min': null,
+            'max': null,
+            'pavirkerAndreSporsmal': false,
+            'kriterieForVisningAvUndersporsmal': 'JA',
+            'svar': [],
+            'undersporsmal': [
+                {
+                    'id': '105',
+                    'tag': 'HVOR_MANGE_TIMER_PER_UKE_0',
+                    'sporsmalstekst': 'Hvor mange timer i uken jobber du vanligvis når du er frisk? Varierer det, kan du oppgi gjennomsnittet.',
+                    'undertekst': 'timer per uke',
+                    'svartype': 'TALL',
+                    'min': '1',
+                    'max': '150',
+                    'pavirkerAndreSporsmal': false,
+                    'kriterieForVisningAvUndersporsmal': null,
+                    'svar': [],
+                    'undersporsmal': []
+                },
+                {
+                    'id': '106',
+                    'tag': 'HVOR_MYE_HAR_DU_JOBBET_0',
+                    'sporsmalstekst': 'Hvor mye jobbet du totalt 20. mai - 5. juni 2020 hos 995816598 sitt orgnavn :)?',
+                    'undertekst': null,
+                    'svartype': 'RADIO_GRUPPE_TIMER_PROSENT',
+                    'min': null,
+                    'max': null,
+                    'pavirkerAndreSporsmal': false,
+                    'kriterieForVisningAvUndersporsmal': null,
+                    'svar': [],
+                    'undersporsmal': [
+                        {
+                            'id': '107',
+                            'tag': 'HVOR_MYE_PROSENT_0',
+                            'sporsmalstekst': 'prosent',
+                            'undertekst': null,
+                            'svartype': 'RADIO',
+                            'min': null,
+                            'max': null,
+                            'pavirkerAndreSporsmal': false,
+                            'kriterieForVisningAvUndersporsmal': 'CHECKED',
+                            'svar': [],
+                            'undersporsmal': [
+                                {
+                                    'id': '108',
+                                    'tag': 'HVOR_MYE_PROSENT_VERDI_0',
+                                    'sporsmalstekst': null,
+                                    'undertekst': 'prosent',
+                                    'svartype': 'TALL',
+                                    'min': '21',
+                                    'max': '99',
+                                    'pavirkerAndreSporsmal': false,
+                                    'kriterieForVisningAvUndersporsmal': null,
+                                    'svar': [],
+                                    'undersporsmal': []
+                                }
+                            ]
+                        },
+                        {
+                            'id': '109',
+                            'tag': 'HVOR_MYE_TIMER_0',
+                            'sporsmalstekst': 'timer',
+                            'undertekst': null,
+                            'svartype': 'RADIO',
+                            'min': null,
+                            'max': null,
+                            'pavirkerAndreSporsmal': false,
+                            'kriterieForVisningAvUndersporsmal': 'CHECKED',
+                            'svar': [],
+                            'undersporsmal': [
+                                {
+                                    'id': '110',
+                                    'tag': 'HVOR_MYE_TIMER_VERDI_0',
+                                    'sporsmalstekst': null,
+                                    'undertekst': 'timer totalt',
+                                    'svartype': 'TALL',
+                                    'min': '1',
+                                    'max': '364',
+                                    'pavirkerAndreSporsmal': false,
+                                    'kriterieForVisningAvUndersporsmal': null,
+                                    'svar': [],
+                                    'undersporsmal': []
+                                }
+                            ]
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            'id': '2',
+            'tag': 'LAND',
+            'sporsmalstekst': 'Hvilket land skal du reise til?',
+            'undertekst': null,
+            'svartype': 'LAND',
+            'min': null,
+            'max': '50',
+            'pavirkerAndreSporsmal': false,
+            'kriterieForVisningAvUndersporsmal': null,
+            'svar': [],
+            'undersporsmal': []
+        },
+        {
+            'id': '1',
+            'tag': 'PERIODEUTLAND',
+            'sporsmalstekst': 'Når skal du reise?',
+            'undertekst': null,
+            'svartype': 'PERIODER',
+            'min': '2020-04-01',
+            'max': '2020-04-24',
+            'pavirkerAndreSporsmal': false,
+            'kriterieForVisningAvUndersporsmal': null,
+            'svar': [],
+            'undersporsmal': []
+        },
+        {
+            'id': '687345',
+            'tag': 'PERMISJON_V2',
+            'sporsmalstekst': 'Tok du permisjon mens du var sykmeldt 1. - 24. april 2020?',
+            'undertekst': null,
+            'svartype': 'JA_NEI',
+            'min': null,
+            'max': null,
+            'pavirkerAndreSporsmal': false,
+            'kriterieForVisningAvUndersporsmal': 'JA',
+            'svar': [],
+            'undersporsmal': [
+                {
+                    'id': '687346',
+                    'tag': 'PERMISJON_NAR_V2',
+                    'sporsmalstekst': 'Når tok du permisjon?',
+                    'undertekst': null,
+                    'svartype': 'PERIODER',
+                    'min': '2020-04-01',
+                    'max': '2020-04-24',
+                    'pavirkerAndreSporsmal': false,
+                    'kriterieForVisningAvUndersporsmal': null,
+                    'svar': [],
+                    'undersporsmal': []
+                }
+            ]
+        },
+        {
+            'id': '687337',
+            'tag': 'PERMITTERT_NAA',
+            'sporsmalstekst': 'Er du permittert nå?',
+            'undertekst': null,
+            'svartype': 'JA_NEI',
+            'min': null,
+            'max': null,
+            'pavirkerAndreSporsmal': false,
+            'kriterieForVisningAvUndersporsmal': 'JA',
+            'svar': [],
+            'undersporsmal': [
+                {
+                    'id': '687338',
+                    'tag': 'PERMITTERT_NAA_NAR',
+                    'sporsmalstekst': 'Velg første dag i permitteringen',
+                    'undertekst': null,
+                    'svartype': 'DATO',
+                    'min': '2019-12-01',
+                    'max': '2020-04-24',
+                    'pavirkerAndreSporsmal': false,
+                    'kriterieForVisningAvUndersporsmal': null,
+                    'svar': [],
+                    'undersporsmal': []
+                }
+            ]
+        },
+        {
+            'id': '687339',
+            'tag': 'PERMITTERT_PERIODE',
+            'sporsmalstekst': 'Har du vært permittert i noen perioder etter 1. februar 2020?',
+            'undertekst': null,
+            'svartype': 'JA_NEI',
+            'min': null,
+            'max': null,
+            'pavirkerAndreSporsmal': false,
+            'kriterieForVisningAvUndersporsmal': 'JA',
+            'svar': [],
+            'undersporsmal': [
+                {
+                    'id': '687340',
+                    'tag': 'PERMITTERT_PERIODE_NAR',
+                    'sporsmalstekst': null,
+                    'undertekst': null,
+                    'svartype': 'PERIODER',
+                    'min': '2020-02-01',
+                    'max': '2020-04-24',
+                    'pavirkerAndreSporsmal': false,
+                    'kriterieForVisningAvUndersporsmal': null,
+                    'svar': [],
+                    'undersporsmal': []
+                }
+            ]
+        },
+        {
+            'id': '687341',
+            'tag': 'TILBAKE_I_ARBEID',
+            'sporsmalstekst': 'Var du tilbake i fullt arbeid hos POSTEN NORGE AS, BÆRUM i løpet av perioden 1. - 24. april 2020?',
+            'undertekst': null,
+            'svartype': 'JA_NEI',
+            'min': null,
+            'max': null,
+            'pavirkerAndreSporsmal': true,
+            'kriterieForVisningAvUndersporsmal': 'JA',
+            'svar': [],
+            'undersporsmal': [
+                {
+                    'id': '687342',
+                    'tag': 'TILBAKE_NAR',
+                    'sporsmalstekst': 'Når begynte du å jobbe igjen?',
+                    'undertekst': null,
+                    'svartype': 'DATO',
+                    'min': '2020-04-01',
+                    'max': '2020-04-24',
+                    'pavirkerAndreSporsmal': true,
+                    'kriterieForVisningAvUndersporsmal': null,
+                    'svar': [],
+                    'undersporsmal': []
+                }
+            ]
+        },
+        {
+            'id': '687369',
+            'tag': 'UTDANNING',
+            'sporsmalstekst': 'Har du vært under utdanning i løpet av perioden 1. - 24. april 2020?',
+            'undertekst': null,
+            'svartype': 'JA_NEI',
+            'min': null,
+            'max': null,
+            'pavirkerAndreSporsmal': false,
+            'kriterieForVisningAvUndersporsmal': 'JA',
+            'svar': [],
+            'undersporsmal': [
+                {
+                    'id': '687370',
+                    'tag': 'UTDANNING_START',
+                    'sporsmalstekst': 'Når startet du på utdanningen?',
+                    'undertekst': null,
+                    'svartype': 'DATO',
+                    'min': null,
+                    'max': '2020-04-24',
+                    'pavirkerAndreSporsmal': false,
+                    'kriterieForVisningAvUndersporsmal': null,
+                    'svar': [],
+                    'undersporsmal': []
+                },
+                {
+                    'id': '687371',
+                    'tag': 'FULLTIDSSTUDIUM',
+                    'sporsmalstekst': 'Er utdanningen et fulltidsstudium?',
+                    'undertekst': null,
+                    'svartype': 'JA_NEI',
+                    'min': null,
+                    'max': null,
+                    'pavirkerAndreSporsmal': false,
+                    'kriterieForVisningAvUndersporsmal': null,
+                    'svar': [],
+                    'undersporsmal': []
+                }
+            ]
+        },
+        {
+            'id': '423',
+            'tag': 'UTLAND',
+            'sporsmalstekst': 'Har du vært utenfor EØS mens du var sykmeldt 1. - 24. april 2020?',
+            'undertekst': null,
+            'svartype': 'JA_NEI',
+            'min': null,
+            'max': null,
+            'pavirkerAndreSporsmal': false,
+            'kriterieForVisningAvUndersporsmal': 'JA',
+            'svar': [],
+            'undersporsmal': [
+                {
+                    'id': '424',
+                    'tag': 'PERIODER',
+                    'sporsmalstekst': 'Når var du utenfor EØS?',
+                    'undertekst': null,
+                    'svartype': 'PERIODER',
+                    'min': '2020-04-01',
+                    'max': '2020-04-24',
+                    'pavirkerAndreSporsmal': false,
+                    'kriterieForVisningAvUndersporsmal': null,
+                    'svar': [],
+                    'undersporsmal': []
+                },
+                {
+                    'id': '425',
+                    'tag': 'UTLANDSOPPHOLD_SOKT_SYKEPENGER',
+                    'sporsmalstekst': 'Har du søkt om å beholde sykepengene for disse dagene?',
+                    'undertekst': null,
+                    'svartype': 'JA_NEI',
+                    'min': null,
+                    'max': null,
+                    'pavirkerAndreSporsmal': false,
+                    'kriterieForVisningAvUndersporsmal': 'NEI',
+                    'svar': [],
+                    'undersporsmal': [
+                        {
+                            'id': '426',
+                            'tag': 'IKKE_SOKT_UTENLANDSOPPHOLD_INFORMASJON',
+                            'sporsmalstekst': '<p>I utgangspunktet kan du bare få sykepenger mens du er i et land innenfor EØS. Du kan likevel <a target="_blank" href="https://tjenester.nav.no/sykefravaer/sykepengesoknad-utland">søke NAV om å få reise ut av EØS</a> og beholde sykepengene i en begrenset periode.</p>',
+                            'undertekst': null,
+                            'svartype': 'IKKE_RELEVANT',
+                            'min': null,
+                            'max': null,
+                            'pavirkerAndreSporsmal': false,
+                            'kriterieForVisningAvUndersporsmal': null,
+                            'svar': [],
+                            'undersporsmal': []
+                        }
+                    ]
+                } ]
+        },
+        {
+            'id': '687347',
+            'tag': 'UTLAND_V2',
+            'sporsmalstekst': 'Var du på reise utenfor EØS mens du var sykmeldt 1. - 24. april 2020?',
+            'undertekst': null,
+            'svartype': 'JA_NEI',
+            'min': null,
+            'max': null,
+            'pavirkerAndreSporsmal': false,
+            'kriterieForVisningAvUndersporsmal': 'JA',
+            'svar': [],
+            'undersporsmal': [
+                {
+                    'id': '687348',
+                    'tag': 'UTLAND_NAR_V2',
+                    'sporsmalstekst': 'Når var du utenfor EØS?',
+                    'undertekst': null,
+                    'svartype': 'PERIODER',
+                    'min': '2020-04-01',
+                    'max': '2020-04-24',
+                    'pavirkerAndreSporsmal': false,
+                    'kriterieForVisningAvUndersporsmal': null,
+                    'svar': [],
+                    'undersporsmal': []
                 }
             ]
         },

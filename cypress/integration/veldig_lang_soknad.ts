@@ -89,56 +89,27 @@ describe('Tester støtte for gamle spørsmål', () => {
         svarCheckboxPanel()
         gaVidere()
     })
-    it('PERMITTERT_NAA', () => {
-        svarJaHovedsporsmal()
-        velgDato()
-        gaVidere()
-    })
-    it('PERMITTERT_PERIODE', () => {
-        svarJaHovedsporsmal()
-        velgPeriode()
-        gaVidere()
-    })
-    it('TILBAKE_I_ARBEID', () => {
-        svarJaHovedsporsmal()
-        velgDato()
-        gaVidere()
-    })
-    it('FERIE_V2', () => {
-        svarJaHovedsporsmal()
-        velgPeriode()
-        gaVidere()
-    })
-    it('PERMISJON_V2', () => {
-        svarJaHovedsporsmal()
-        velgPeriode()
-        gaVidere()
-    })
-    it('UTLAND_V2', () => {
-        svarJaHovedsporsmal()
-        velgPeriode()
-        gaVidere()
-    })
-    it('JOBBET_DU_100_PROSENT', () => {
-        svarJaHovedsporsmal()
-        velgTimerPerUke()
-        velgTimer()
-        gaVidere()
-    })
+
     it('ANDRE_INNTEKTSKILDER', () => {
         svarJaHovedsporsmal()
         velgCheckbox('dagmamma')
         svarJaRadio('Er du sykmeldt fra dette?')
         gaVidere()
     })
-    it('UTDANNING', () => {
+    it('ANDRE_INNTEKTSKILDER', () => {
         svarJaHovedsporsmal()
-        velgDato()
-        svarJaRadio('Er utdanningen et fulltidsstudium?')
+        velgCheckbox('frilanser')
+        svarJaRadio('Er du sykmeldt fra dette?')
         gaVidere()
     })
     it('ARBEID_UTENFOR_NORGE', () => {
         svarNeiHovedsporsmal()
+        gaVidere()
+    })
+    it('ARBEIDSGIVER', () => {
+        svarJaHovedsporsmal()
+        svarJaRadio('Er du 100 % sykmeldt?')
+        svarJaRadio('Har du avtalt med arbeidsgiveren din at du skal ha ferie i hele perioden?')
         gaVidere()
     })
     it('ARBEIDSLEDIG_UTLAND', () => {
@@ -157,45 +128,8 @@ describe('Tester støtte for gamle spørsmål', () => {
         velgBehandlingsdager()
         gaVidere()
     })
-    it('ARBEIDSGIVER', () => {
+    it('FERIE_V2', () => {
         svarJaHovedsporsmal()
-        svarJaRadio('Er du 100 % sykmeldt?')
-        svarJaRadio('Har du avtalt med arbeidsgiveren din at du skal ha ferie i hele perioden?')
-        gaVidere()
-    })
-    it('PERIODEUTLAND', () => {
-        velgPeriode()
-        gaVidere()
-    })
-    it('LAND', () => {
-        velgLand('franske')
-        gaVidere()
-    })
-    it('JOBBET_DU_GRADERT', () => {
-        svarJaHovedsporsmal()
-        velgTimerPerUke()
-        velgTimer()
-        gaVidere()
-    })
-    it('ANDRE_INNTEKTSKILDER', () => {
-        svarJaHovedsporsmal()
-        velgCheckbox('frilanser')
-        svarJaRadio('Er du sykmeldt fra dette?')
-        gaVidere()
-    })
-    it('FRISKMELDT', () => {
-        svarJaHovedsporsmal()
-        gaVidere()
-    })
-    it('UTLAND', () => {
-        svarJaHovedsporsmal()
-        velgPeriode()
-        svarJaRadio('Har du søkt om å beholde sykepengene for disse dagene?')
-        gaVidere()
-    })
-    it('FRAVER_FOR_BEHANDLING', () => {
-        svarJaHovedsporsmal()
-        svarSykMedEgenmelding()
         velgPeriode()
         gaVidere()
     })
@@ -205,6 +139,74 @@ describe('Tester støtte for gamle spørsmål', () => {
         velgPeriode()
         gaVidere()
     })
+    it('FRAVER_FOR_BEHANDLING', () => {
+        svarJaHovedsporsmal()
+        svarSykMedEgenmelding()
+        velgPeriode()
+        gaVidere()
+    })
+    it('FRISKMELDT', () => {
+        svarJaHovedsporsmal()
+        gaVidere()
+    })
+    it('JOBBET_DU_100_PROSENT', () => {
+        svarJaHovedsporsmal()
+        velgTimerPerUke()
+        velgTimer()
+        gaVidere()
+    })
+    it('JOBBET_DU_GRADERT', () => {
+        svarJaHovedsporsmal()
+        velgTimerPerUke()
+        velgTimer()
+        gaVidere()
+    })
+    it('LAND', () => {
+        velgLand('franske')
+        gaVidere()
+    })
+    it('PERIODEUTLAND', () => {
+        velgPeriode()
+        gaVidere()
+    })
+    it('PERMISJON_V2', () => {
+        svarJaHovedsporsmal()
+        velgPeriode()
+        gaVidere()
+    })
+    it('PERMITTERT_NAA', () => {
+        svarJaHovedsporsmal()
+        velgDato()
+        gaVidere()
+    })
+    it('PERMITTERT_PERIODE', () => {
+        svarJaHovedsporsmal()
+        velgPeriode()
+        gaVidere()
+    })
+    it('TILBAKE_I_ARBEID', () => {
+        svarJaHovedsporsmal()
+        velgDato()
+        gaVidere()
+    })
+    it('UTDANNING', () => {
+        svarJaHovedsporsmal()
+        velgDato()
+        svarJaRadio('Er utdanningen et fulltidsstudium?')
+        gaVidere()
+    })
+    it('UTLAND', () => {
+        svarJaHovedsporsmal()
+        velgPeriode()
+        svarJaRadio('Har du søkt om å beholde sykepengene for disse dagene?')
+        gaVidere()
+    })
+    it('UTLAND_V2', () => {
+        svarJaHovedsporsmal()
+        velgPeriode()
+        gaVidere()
+    })
+
     it('VAER_KLAR_OVER_AT & BEKREFT_OPPLYSNINGER', () => {
         svarCheckboxPanel()
         cy.contains('Send søknaden').click()
