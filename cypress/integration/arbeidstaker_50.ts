@@ -58,15 +58,50 @@ describe('Tester arbeidstakersøknad - gradert 50%', () => {
     it('Søknad PERMITTERT_PERIODE - steg 3', function() {
         cy.url().should('include', `${soknad.id}/3`)
 
-        // Må velge ja/nei
-        cy.contains('Gå videre').click()
-        cy.contains('Du må svare på om du har vært permittert')
-
-        // Test spørsmål
+        // Hovedspørsmål
         cy.get('.inputPanelGruppe__inner label:first-child > input[value=JA]').click({ force: true })
-        cy.get('.undersporsmal .skjemaelement__input.form-control').focus()
-        cy.get('.flatpickr-calendar').contains('17').click({ force: true })
-        cy.get('.flatpickr-calendar').contains('24').click({ force: true })
+
+        // Periode 1
+        cy.get('.skjemaelement__input.form-control#687295_t_0').focus()
+        cy.get('.flatpickr-calendar.open').contains('4').click({ force: true })
+        cy.get('.flatpickr-calendar.open').contains('5').click({ force: true })
+
+        // Periode 2
+        cy.contains('+ Legg til ekstra periode').click()
+        cy.get('.skjemaelement__input.form-control#687295_t_1').focus()
+        cy.get('.flatpickr-calendar.open').contains('11').click({ force: true })
+        cy.get('.flatpickr-calendar.open').contains('12').click({ force: true })
+        cy.get('.skjemaelement__input#687295_1')
+            .should('exist')
+            .and('have.value', '11.04.2020   -    12.04.2020')
+
+        // Periode 3
+        cy.contains('+ Legg til ekstra periode').click()
+        cy.get('.skjemaelement__input.form-control#687295_t_2').focus()
+        cy.get('.flatpickr-calendar.open').contains('18').click({ force: true })
+        cy.get('.flatpickr-calendar.open').contains('19').click({ force: true })
+        cy.get('.skjemaelement__input#687295_2')
+            .should('exist')
+            .and('have.value', '18.04.2020   -    19.04.2020')
+
+        // Fjern periode 2, id oppdateres
+        cy.get('.skjemaelement__input.form-control#687295_t_1')
+            .siblings()
+            .contains('Slett periode')
+            .click({ force: true })
+        cy.get('.skjemaelement__input.form-control#687295_t_1')
+            .should('exist')
+            .and('have.value', '18.04.2020   -    19.04.2020')
+        cy.get('.skjemaelement__input.form-control#687295_t_2')
+            .should('not.exist')
+
+        // Fjern periode 3
+        cy.get('.skjemaelement__input.form-control#687295_t_1')
+            .siblings()
+            .contains('Slett periode')
+            .click({ force: true })
+        cy.get('.skjemaelement__input.form-control#687295_t_1')
+            .should('not.exist')
 
         cy.contains('Gå videre').click()
     })
