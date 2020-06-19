@@ -75,6 +75,34 @@ describe('Tester arbeidsledigsøknad', () => {
         cy.get('.undersporsmal .skjemaelement__input.form-control#687399_t_1').focus()
         cy.get('.flatpickr-calendar.open').contains('16').click({ force: true })
         cy.get('.flatpickr-calendar.open').contains('20').click({ force: true })
+        cy.get('.undersporsmal .skjemaelement__input.form-control#687399_t_1')
+            .should('have.value', '16.04.2020   -    20.04.2020')
+
+        // Gå frem også tilbake
+        cy.contains('Gå videre').click()
+        cy.url().should('include', `${soknad.id}/4`)
+        cy.contains('Tilbake').click()
+        cy.url().should('include', `${soknad.id}/3`)
+
+        // Periode 1 - hentSvar og formater
+        cy.get('.undersporsmal .skjemaelement__input.form-control#687399_t_0')
+            .should('have.value', '10.04.2020   -    15.04.2020')
+
+        // Periode 1 - Må velge 2 datoer
+        cy.get('.undersporsmal .skjemaelement__input.form-control#687399_t_0').focus()
+        cy.get('.flatpickr-calendar.open').contains('10').click({ force: true })
+        cy.contains('Gå videre').click()
+
+        // Feilmelding
+        cy.contains('Det er 1 feil i skjemaet')
+        cy.contains('Du må oppi en gyldig periode')
+
+        // Endre periode 1
+        cy.get('.undersporsmal .skjemaelement__input.form-control#687399_t_0').focus()
+        cy.get('.flatpickr-calendar.open').contains('10').click({ force: true })
+        cy.get('.flatpickr-calendar.open').contains('10').click({ force: true })
+        cy.get('.undersporsmal .skjemaelement__input.form-control#687399_t_0')
+            .should('have.value', '10.04.2020   -    10.04.2020')
 
         cy.contains('Gå videre').click()
     })
