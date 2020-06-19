@@ -28,6 +28,8 @@ const KvitteringUtenlands = () => {
                     <li>{tekst('kvittering.utenlands.liste2')}</li>
                     <li>{tekst('kvittering.utenlands.liste3')}</li>
                 </Normaltekst>
+            </div>
+            <div className="avsnitt">
                 <Lenke href={tekst('kvittering.utenlands.lenke.url')}>
                     <Normaltekst tag="span">{tekst('kvittering.utenlands.lenke')}</Normaltekst>
                 </Lenke>.
@@ -37,7 +39,7 @@ const KvitteringUtenlands = () => {
                 <Normaltekst tag="span">{tekst('kvittering.saksbehandling-avhenger-av')} </Normaltekst>
                 <Lenke href={tekst('kvittering.finn-ut.url')}>
                     <Normaltekst tag="span">{tekst('kvittering.finn-ut')}</Normaltekst>
-                </Lenke>
+                </Lenke>.
             </div>
             <div className="avsnitt">
                 <Element tag="h2">{tekst('kvittering.utenlands.overskrift3')}</Element>

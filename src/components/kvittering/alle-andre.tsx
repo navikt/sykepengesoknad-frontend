@@ -1,11 +1,11 @@
 import React from 'react'
 
-import KvitteringStatus from './innhold/kvittering-status'
-import KvitteringVidere from './innhold/kvittering-videre'
-import Vis from '../vis'
-import KvitteringUtenlands from './innhold/kvittering-utenlands'
 import { useAppStore } from '../../data/stores/app-store'
 import { RSSoknadstype } from '../../types/rs-types/rs-soknadstype'
+import Vis from '../vis'
+import KvitteringStatus from './innhold/kvittering-status'
+import KvitteringUtenlands from './innhold/kvittering-utenlands'
+import KvitteringVidere from './innhold/kvittering-videre'
 
 const AlleAndre = () => {
     const { valgtSoknad } = useAppStore()
