@@ -246,27 +246,6 @@ describe('Tester arbeidstakersøknad - gradert 50%', () => {
 
     it('Søknad kvittering', () => {
         cy.url().should('include', `/kvittering/${soknad.id}`)
-        // Sendt til
-        cy.contains('Søknaden er sendt til POSTEN NORGE AS, BÆRUM (Org.nr. 974654458)')
-
-        // Kvittering
-        cy.contains('Hva skjer videre?')
-        cy.contains('NAV behandler søknaden din').should('be.visible')
-        cy.contains('Når blir pengene utbetalt?').should('be.visible')
-        cy.contains('Viktig for arbeidstaker').should('be.visible')
-        cy.contains('Viktig for selvstendige næringsdrivende og frilansere').should('be.visible')
-
-        // Kvittering minimert
-        cy.contains('Hva skjer videre?').click({ force: true })
-        cy.contains('NAV behandler søknaden din').should('not.be.visible')
-
-        // Sykmelding
-        cy.contains('1. april - 24. april 2020 • 24 dager').should('not.be.visible')
-        cy.contains('Opplysninger fra sykmeldingen').click({ force: true })
-        cy.contains('1. april - 24. april 2020 • 24 dager').should('be.visible')
-
-        // Oppsummering
-        cy.contains('Oppsummering').click({ force: true })
-        cy.contains('Jeg vet at jeg kan miste retten til sykepenger hvis opplysningene jeg gir ikke er riktige eller fullstendige. Jeg vet også at NAV kan holde igjen eller kreve tilbake penger, og at å gi feil opplysninger kan være straffbart.')
+        // TODO: Legg til test når kvittering er ferdig
     })
 })
