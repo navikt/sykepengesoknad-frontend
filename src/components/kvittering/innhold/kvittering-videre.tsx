@@ -4,10 +4,10 @@ import Lenke from 'nav-frontend-lenker'
 import { Element, Normaltekst, Undertittel } from 'nav-frontend-typografi'
 import React from 'react'
 
-import { useAppStore } from '../../data/stores/app-store'
-import { RSArbeidssituasjon } from '../../types/rs-types/rs-arbeidssituasjon'
-import { tekst } from '../../utils/tekster'
-import Vis from '../vis'
+import { useAppStore } from '../../../data/stores/app-store'
+import { RSArbeidssituasjon } from '../../../types/rs-types/rs-arbeidssituasjon'
+import { tekst } from '../../../utils/tekster'
+import Vis from '../../vis'
 
 const KvitteringVidere = () => {
     const { valgtSoknad, valgtSykmelding } = useAppStore()
@@ -19,7 +19,7 @@ const KvitteringVidere = () => {
     return (
         <AlertStripeInfo className="opplysninger">
             <Undertittel tag="h3">{tekst('kvittering.hva-skjer-videre')}</Undertittel>
-            <Vis hvis={valgtSykmelding!.valgtArbeidssituasjon === RSArbeidssituasjon.NAERINGSDRIVENDE}>
+            <Vis hvis={valgtSykmelding && valgtSykmelding!.valgtArbeidssituasjon === RSArbeidssituasjon.NAERINGSDRIVENDE}>
                 <div className="avsnitt">
                     <Element tag="h2">{tekst('kvittering.naeringsdrivende.tittel')}</Element>
                     <Normaltekst tag="span">{tekst('kvittering.naeringsdrivende.brodtekst')} </Normaltekst>

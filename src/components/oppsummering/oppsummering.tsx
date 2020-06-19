@@ -9,8 +9,8 @@ import { RSSoknadstatus } from '../../types/rs-types/rs-soknadstatus'
 import { RSSvartype } from '../../types/rs-types/rs-svartype'
 import { Sporsmal } from '../../types/types'
 import { tekst } from '../../utils/tekster'
-import plasterHover from '../opplysninger/plaster-hover.svg'
-import plaster from '../opplysninger/plaster.svg'
+import sjekkbokser from './sjekkbokser.svg'
+import sjekkbokserHover from './sjekkbokser-hover.svg'
 import Utvidbar from '../utvidbar/utvidbar'
 import Behandlingsdager from './utdrag/behandlingsdager'
 import CheckboxGruppe from './utdrag/checkbox-gruppe'
@@ -46,7 +46,7 @@ const Oppsummering = ({ ekspandert }: EkspanderProps) => {
 
     return (
         <Utvidbar className={'ekspander lilla' + (apen ? ' apen' : '')}
-            ikon={plaster} ikonHover={plasterHover} erApen={apen}
+            ikon={sjekkbokser} ikonHover={sjekkbokserHover} erApen={apen}
             tittel={tekst('sykepengesoknad.oppsummering.tittel')}
             ikonAltTekst=''
         >

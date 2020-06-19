@@ -32,7 +32,7 @@ const Kvittering = () => {
 
     const KvitteringType = () => {
         if (valgtSoknad!.soknadstype === RSSoknadstype.OPPHOLD_UTLAND) {
-            return null
+            return <AlleAndre />
         }
         switch (valgtSykmelding!.valgtArbeidssituasjon) {
             case RSArbeidssituasjon.ARBEIDSTAKER:
@@ -48,7 +48,10 @@ const Kvittering = () => {
         <div className="kvittering">
             <KvitteringType />
             <Oppsummering ekspandert={soknadErMottatt} />
-            <Opplysninger ekspandert={false} />
+
+            <Vis hvis={valgtSoknad!.soknadstype !== RSSoknadstype.OPPHOLD_UTLAND}>
+                <Opplysninger ekspandert={false} />
+            </Vis>
 
             <Vis hvis={skalViseKnapperad}>
                 <div className="knapperad">
