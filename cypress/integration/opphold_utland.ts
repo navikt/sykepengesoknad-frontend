@@ -95,16 +95,7 @@ describe('Tester søknad om å beholde sykepenger utenfor EØS', () => {
 
     it('Kvittering', function() {
         cy.url().should('include', `kvittering/${soknad.id}`)
-
-        cy.contains('Søknaden er sendt til NAV')
-        cy.contains('Endre søknad').should('not.exist')
-        cy.contains('Send til NAV').should('not.exist')
-        cy.get('.ekspanderbartPanel__tittel > .typo-element').click()
-        cy.contains('Hvilket land skal du reise til?')
-        cy.contains('Søre franske territorier')
-        cy.contains('De okkuperte palestinske områdene')
-        cy.contains('Amerikansk Samoa').should('not.exist')
-
+        // TODO: Legg til test når kvittering er ferdig
     })
 
 })
