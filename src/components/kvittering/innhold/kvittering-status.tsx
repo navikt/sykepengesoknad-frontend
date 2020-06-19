@@ -3,11 +3,11 @@ import { AlertStripeSuksess } from 'nav-frontend-alertstriper'
 import { Normaltekst, Undertittel } from 'nav-frontend-typografi'
 import React, { useEffect, useState } from 'react'
 
-import { useAppStore } from '../../data/stores/app-store'
-import env from '../../utils/environment'
-import { logger } from '../../utils/logger'
-import { tekst } from '../../utils/tekster'
-import Vis from '../vis'
+import { useAppStore } from '../../../data/stores/app-store'
+import env from '../../../utils/environment'
+import { logger } from '../../../utils/logger'
+import { tekst } from '../../../utils/tekster'
+import Vis from '../../vis'
 
 enum Mottaker {
     NAV = 'NAV',
