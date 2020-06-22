@@ -31,8 +31,10 @@ const JaNeiRadio = ({ sporsmal }: SpmProps) => {
 
     useEffect(() => {
         const lagret = hentSvar(sporsmal)
-        setValue(sporsmal.id, lagret)
-        setLokal(lagret)
+        if(lagret !== '') {
+            setValue(sporsmal.id, lagret)
+            setLokal(lagret)
+        }
         // eslint-disable-next-line
     }, [sporsmal]);
 

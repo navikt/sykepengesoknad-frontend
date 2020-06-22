@@ -73,7 +73,7 @@ const Perioder = ({ sporsmal }: SpmProps) => {
 
             <div className='undersporsmal'>
                 <Vis hvis={lokal.length > 0 && lokal[0] !== empty}>
-                    <UndersporsmalListe undersporsmal={sporsmal.undersporsmal} />
+                    <UndersporsmalListe oversporsmal={sporsmal} />
                 </Vis>
             </div>
         </div>

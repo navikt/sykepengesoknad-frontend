@@ -1,8 +1,9 @@
 import { Element, Normaltekst } from 'nav-frontend-typografi'
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import { useFormContext } from 'react-hook-form'
 
 import { RSSvartype } from '../../../types/rs-types/rs-svartype'
+import { Sporsmal } from '../../../types/types'
 import AnimateOnMount from '../../animate-on-mount'
 import Vis from '../../vis'
 import { hentSvar } from '../hent-svar'
@@ -10,15 +11,59 @@ import { SpmProps } from '../sporsmal-form/sporsmal-form'
 import { hentFeilmelding } from '../sporsmal-utils'
 import UndersporsmalListe from '../undersporsmal/undersporsmal-liste'
 
-const RadioKomp = ({ sporsmal }: SpmProps) => {
-    const { register, setValue, errors, watch } = useFormContext()
+export interface RadioUnderKompProps {
+    sporsmal: Sporsmal;
+    uspm: Sporsmal;
+    idx: number;
+}
+
+
+export const RadioUnderKomp = ({ idx, uspm, sporsmal }: RadioUnderKompProps) => {
+    const { register, watch } = useFormContext()
+    const hentSvar1 = hentSvar(sporsmal)
+    const [ lokal, setLokal ] = useState<string>((hentSvar1 || 'prosent') === uspm.sporsmalstekst ? 'CHECKED' : '')
+
+    const feilmelding = hentFeilmelding(sporsmal)
+
     const radioWatch = watch(sporsmal.id)
+    return (
+        <div className='radioContainer' key={idx}>
+            <input type='radio'
+                id={uspm.id}
+                name={sporsmal.id}
+                value={uspm.sporsmalstekst}
+                onChange={(e) => {
+                    setLokal(e.currentTarget.id === uspm.id ? 'CHECKED' : '')
+                }}
+
+                ref={register({ required: feilmelding.global })}
+                className='skjemaelement__input radioknapp'
+            />
+            <label className='skjemaelement__label' htmlFor={uspm.id}>
+                {uspm.sporsmalstekst}
+            </label>
+
+            <AnimateOnMount
+                mounted={radioWatch === uspm.sporsmalstekst}
+                enter='undersporsmal--vis'
+                leave='undersporsmal--skjul'
+                start='undersporsmal'
+            >
+                <UndersporsmalListe oversporsmal={uspm} oversporsmalSvar={lokal} />
+            </AnimateOnMount>
+        </div>
+    )
+}
+
+const RadioKomp = ({ sporsmal }: SpmProps) => {
+    const { setValue, errors } = useFormContext()
+
     const feilmelding = hentFeilmelding(sporsmal)
 
     useEffect(() => {
         setValue(sporsmal.id, hentSvar(sporsmal))
         // eslint-disable-next-line
-    }, [ sporsmal.id ]);
+    }, [sporsmal.id]);
 
     return (
         <>
@@ -31,29 +76,7 @@ const RadioKomp = ({ sporsmal }: SpmProps) => {
                 : 'skjemaelement'}
             >
                 {sporsmal.undersporsmal.map((uspm, idx) => {
-                    return (
-                        <div className='radioContainer' key={idx}>
-                            <input type='radio'
-                                id={uspm.id}
-                                name={sporsmal.id}
-                                value={uspm.sporsmalstekst}
-                                ref={register({ required: feilmelding.global })}
-                                className='skjemaelement__input radioknapp'
-                            />
-                            <label className='skjemaelement__label' htmlFor={uspm.id}>
-                                {uspm.sporsmalstekst}
-                            </label>
-
-                            <AnimateOnMount
-                                mounted={radioWatch === uspm.sporsmalstekst}
-                                enter='undersporsmal--vis'
-                                leave='undersporsmal--skjul'
-                                start='undersporsmal'
-                            >
-                                <UndersporsmalListe undersporsmal={uspm.undersporsmal} />
-                            </AnimateOnMount>
-                        </div>
-                    )
+                    return RadioUnderKomp({ idx: idx, uspm: uspm, sporsmal: sporsmal })
                 })}
             </div>
 

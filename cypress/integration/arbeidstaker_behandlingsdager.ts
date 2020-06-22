@@ -69,6 +69,12 @@ describe('Tester behandlingsdagersøknad', () => {
         cy.contains('Gå videre').click()
     })
 
+    it('Tilbake og videre', function() {
+        cy.contains('Tilbake').click()
+
+        cy.contains('Gå videre').click()
+    })
+
     it('Søknad VAER_KLAR_OVER_AT - steg 4', function() {
         cy.url().should('include', `${soknad.id}/4`)
         cy.get('.skjemaelement__label').click({ force: true })

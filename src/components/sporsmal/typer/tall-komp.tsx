@@ -96,7 +96,7 @@ const TallInput = ({ sporsmal }: SpmProps) => {
 
             <div className='undersporsmal' ref={undersporsmal}>
                 <Vis hvis={lokal}>
-                    <UndersporsmalListe undersporsmal={sporsmal.undersporsmal} />
+                    <UndersporsmalListe oversporsmal={sporsmal} />
                 </Vis>
             </div>
         </>
