@@ -43,7 +43,7 @@ const SporsmalForm = () => {
     const { stegId } = useParams()
     const history = useHistory()
     const spmIndex = parseInt(stegId) - 1
-    const methods = useForm()
+    const methods = useForm({ reValidateMode: 'onSubmit' })
     const erUtlandssoknad = valgtSoknad!.soknadstype === RSSoknadstype.OPPHOLD_UTLAND
     let restFeilet = false
     let sporsmal = valgtSoknad!.sporsmal[spmIndex]
