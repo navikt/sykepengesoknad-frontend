@@ -29,3 +29,8 @@ jobs:
           record: false
           start: npm run start-mock
           wait-on: http://localhost:8080
+      - uses: actions/upload-artifact@v1
+        if: ${{ always() }}
+        with:
+          name: cypress-screenshots
+          path: cypress/screenshots

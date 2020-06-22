@@ -1,5 +1,6 @@
 import './app.less'
 
+import ModalWrapper from 'nav-frontend-modal'
 import React from 'react'
 import { Route, Switch } from 'react-router-dom'
 import { CSSTransition, TransitionGroup } from 'react-transition-group'
@@ -13,6 +14,9 @@ import Soknad from './pages/soknad/soknaden'
 import Soknader from './pages/soknader/soknader'
 
 const App = (): any => {
+
+    ModalWrapper.setAppElement('#root')
+
     return (
         <StoreProvider>
             <DataFetcher>
