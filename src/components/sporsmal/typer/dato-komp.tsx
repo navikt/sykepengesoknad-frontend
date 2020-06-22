@@ -22,7 +22,7 @@ const DatoInput = ({ sporsmal }: SpmProps) => {
         setValue(sporsmal.id, verdi)
         lagIdForDato()
         // eslint-disable-next-line
-    }, [ sporsmal ]);
+    }, [sporsmal]);
 
     useEffect(() => {
         const cls = errors[sporsmal.id]
@@ -31,7 +31,7 @@ const DatoInput = ({ sporsmal }: SpmProps) => {
         const input = datoRef.current!.querySelector('.input--m[type=text], .input--m[type=date]')
         input!.classList.add(...cls)
         // eslint-disable-next-line
-    }, [ errors[sporsmal.id] ]);
+    }, [errors[sporsmal.id]]);
 
     const lagIdForDato = () => {
         const input = datoRef.current!.querySelector('.input--m[type=text], .input--m[type=date]')
@@ -46,7 +46,7 @@ const DatoInput = ({ sporsmal }: SpmProps) => {
             </label>
             <Controller
                 as={Flatpickr}
-                rules={{ required:feilmelding.global }}
+                rules={{ required: feilmelding.global }}
                 id={sporsmal.id}
                 name={sporsmal.id}
                 className='skjemaelement__input input--m'
@@ -73,7 +73,7 @@ const DatoInput = ({ sporsmal }: SpmProps) => {
 
             <div className='undersporsmal'>
                 <Vis hvis={watch(sporsmal.id)}>
-                    <UndersporsmalListe undersporsmal={sporsmal.undersporsmal} />
+                    <UndersporsmalListe oversporsmal={sporsmal} />
                 </Vis>
             </div>
         </div>

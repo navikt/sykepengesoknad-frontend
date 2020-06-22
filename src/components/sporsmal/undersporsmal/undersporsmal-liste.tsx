@@ -4,15 +4,24 @@ import { Sporsmal } from '../../../types/types'
 import Vis from '../../vis'
 import SporsmalSwitch from '../sporsmal-switch'
 
-const UndersporsmalListe = ({ undersporsmal }: any) => {
+interface UndersporsmalListeProps {
+    oversporsmal: Sporsmal;
+    oversporsmalSvar?: string;
+}
+
+const UndersporsmalListe = ({ oversporsmal, oversporsmalSvar }: UndersporsmalListeProps) => {
     return (
-        undersporsmal.map((underspm: Sporsmal, idx: number) => {
-            return (
-                <Vis hvis={underspm.kriterieForVisningAvUndersporsmal !== undefined} key={idx}>
-                    <SporsmalSwitch sporsmal={underspm} />
-                </Vis>
-            )
-        }).filter((underspm: any) => underspm !== null)
+        <>{
+            oversporsmal.undersporsmal.map((underspm: Sporsmal, idx: number) => {
+
+                return (
+                    <Vis hvis={!oversporsmal.kriterieForVisningAvUndersporsmal || oversporsmal.kriterieForVisningAvUndersporsmal === oversporsmalSvar} key={idx}>
+                        <SporsmalSwitch sporsmal={underspm} />
+                    </Vis>
+                )
+            }).filter((underspm: any) => underspm !== null)
+        }
+        </>
     )
 }
 

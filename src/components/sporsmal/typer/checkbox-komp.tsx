@@ -1,6 +1,6 @@
 import { Element, Normaltekst } from 'nav-frontend-typografi'
-import React, { useEffect } from 'react'
-import { useFormContext } from 'react-hook-form'
+import React, { useEffect, useState } from 'react'
+import { FieldValues, useFormContext } from 'react-hook-form'
 
 import { useAppStore } from '../../../data/stores/app-store'
 import { Sporsmal } from '../../../types/types'
@@ -51,6 +51,7 @@ const CheckboxSingle = ({ parent, sporsmal }: AllProps) => {
     const { register, setValue, watch, getValues, clearError } = useFormContext()
     const feilmelding = hentFeilmelding(parent)
     const { setValidCheck } = useAppStore()
+    const [ lokal, setLokal ] = useState<string>(hentSvar(sporsmal))
 
     useEffect(() => {
         const svar = hentSvar(sporsmal)
@@ -69,11 +70,16 @@ const CheckboxSingle = ({ parent, sporsmal }: AllProps) => {
         return valid ? valid : feilmelding.global
     }
 
+    const mounted = watch(sporsmal.id)
+
     return (
         <div className='checkboksContainer'>
             <input type='checkbox'
                 id={sporsmal.id}
                 name={sporsmal.id}
+                onChange={(e) => {
+                    setLokal(e.target.checked ? 'CHECKED' : '')
+                }}
                 ref={register({ validate: () => valider() })}
                 className='skjemaelement__input checkboks'
             />
@@ -82,18 +88,18 @@ const CheckboxSingle = ({ parent, sporsmal }: AllProps) => {
             </label>
 
             <AnimateOnMount
-                mounted={watch(sporsmal.id)}
+                mounted={mounted}
                 enter='undersporsmal--vis'
                 leave='undersporsmal--skjul'
                 start='undersporsmal'
             >
-                <UndersporsmalListe undersporsmal={sporsmal.undersporsmal} />
+                <UndersporsmalListe oversporsmal={sporsmal} oversporsmalSvar={lokal} />
             </AnimateOnMount>
         </div>
     )
 }
 
-const harValgtNoe = (parent: Sporsmal, values: any): boolean => {
+const harValgtNoe = (parent: Sporsmal, values: FieldValues): boolean => {
     return parent.undersporsmal.filter(uspm => {
         return values[uspm.id]
     }).length > 0

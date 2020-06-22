@@ -1,6 +1,6 @@
 import parser from 'html-react-parser'
 import { Element, Normaltekst } from 'nav-frontend-typografi'
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import { useFormContext } from 'react-hook-form'
 
 import { useAppStore } from '../../../data/stores/app-store'
@@ -32,6 +32,7 @@ const JaNeiInput = ({ sporsmal }: SpmProps) => {
     const { register, setValue, errors, watch, reset, getValues, clearError } = useFormContext()
     const feilmelding = hentFeilmelding(sporsmal)
     const watchVerdi = watch(sporsmal.id)
+    const [ lokal, setLokal ] = useState<string>(hentSvar(sporsmal))
 
     useEffect(() => {
         if (sporsmal.erHovedsporsmal) {
@@ -52,14 +53,14 @@ const JaNeiInput = ({ sporsmal }: SpmProps) => {
 
     const changeValue = (value: string) => {
         setValue(sporsmal.id, value)
+        setLokal(value)
     }
 
     const valider = (value: any) => {
         if (value === 'JA' || value === 'NEI') {
             if (sporsmal.erHovedsporsmal) {
                 clearError()
-            }
-            else {
+            } else {
                 clearError(sporsmalIdListe(sporsmal.undersporsmal))
             }
             return true
@@ -142,7 +143,7 @@ const JaNeiInput = ({ sporsmal }: SpmProps) => {
                 start='undersporsmal'
             >
                 <>
-                    <UndersporsmalListe undersporsmal={sporsmal.undersporsmal} />
+                    <UndersporsmalListe oversporsmal={sporsmal} oversporsmalSvar={lokal} />
                     <TagBjorn sporsmal={sporsmal} className='press' />
                 </>
             </AnimateOnMount>
