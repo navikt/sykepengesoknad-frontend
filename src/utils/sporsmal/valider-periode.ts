@@ -5,8 +5,8 @@ interface Periode {
     tom: Date;
 }
 
-const validerPeriode = ( sporsmal: Sporsmal, id: string, values: Record<string, any>, ferdigValgt: boolean ) => {
-    if (ferdigValgt && values[id].length !== 2) return 'Du må oppi en gyldig periode'
+const validerPeriode = ( sporsmal: Sporsmal, id: string, values: Record<string, any>) => {
+    if (values[id].length !== 2) return 'Du må oppi en gyldig periode'
 
     const valgtPeriode = { fom: values[id][0], tom: values[id][1] } as Periode
     const perioder = Object.entries(values)

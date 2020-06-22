@@ -25,7 +25,6 @@ const PeriodeKomp = ({ sporsmal, index, slettPeriode }: AllProps) => {
     const id = sporsmal.id + '_' + index
     const htmlfor = sporsmal.id + '_t_' + index
     const feilmelding = hentFeilmelding(sporsmal)
-    let ferdigValgt = false
     Norwegian.rangeSeparator = ' - '
 
     useEffect(() => {
@@ -39,7 +38,6 @@ const PeriodeKomp = ({ sporsmal, index, slettPeriode }: AllProps) => {
         if (selectedDates.length > 0) {
             settDatoer(selectedDates)
         }
-        ferdigValgt = selectedDates.length === 2
     }
 
     const formater = () => {
@@ -60,7 +58,7 @@ const PeriodeKomp = ({ sporsmal, index, slettPeriode }: AllProps) => {
                 as={Flatpickr}
                 rules={{
                     pattern: { value: /\d/, message: feilmelding.global },
-                    validate: () => validerPeriode(sporsmal, id, getValues(), ferdigValgt)
+                    validate: () => validerPeriode(sporsmal, id, getValues())
                 }}
                 id={id}
                 name={id}
