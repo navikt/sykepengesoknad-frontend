@@ -9,7 +9,7 @@ import { logger } from '../../../utils/logger'
 import { tekst } from '../../../utils/tekster'
 import Vis from '../../vis'
 
-enum Mottaker {
+export enum Mottaker {
     NAV = 'NAV',
     ARBEIDSGIVER = 'ARBEIDSGIVER',
 }

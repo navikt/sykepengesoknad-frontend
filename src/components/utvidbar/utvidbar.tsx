@@ -16,6 +16,7 @@ interface UtvidbarProps {
     ikonAltTekst?: string;
     className?: string;
     visLukk?: boolean;
+    type?: 'intern' | undefined;
 }
 
 const Utvidbar = (props: UtvidbarProps) => {
@@ -45,7 +46,7 @@ const Utvidbar = (props: UtvidbarProps) => {
 
     return (
         <div ref={utvidbar}
-            className={`utvidbar ${props.className ? props.className : ''}`}
+            className={`utvidbar ${props.className ? props.className : ''} ${props.type ? props.type : ''}`}
         >
             <button aria-expanded={erApen}
                 ref={jsToggle}
@@ -62,7 +63,12 @@ const Utvidbar = (props: UtvidbarProps) => {
                         src={props.ikon}
                     />
                 </Vis>
-                <Undertittel tag='h3' className="utvidbar__tittel">{props.tittel}</Undertittel>
+                <Vis hvis={props.type === undefined}>
+                    <Undertittel tag='h3' className="utvidbar__tittel">{props.tittel}</Undertittel>
+                </Vis>
+                <Vis hvis={props.type === 'intern'}>
+                    <Normaltekst tag='h3' className="utvidbar__tittel">{props.tittel}</Normaltekst>
+                </Vis>
                 <span className='utvidbar__handling'>
                     <Normaltekst tag='em'>
                         {erApen ? 'Lukk' : 'Åpne'}
