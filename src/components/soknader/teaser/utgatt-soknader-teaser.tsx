@@ -24,8 +24,6 @@ const UtgaattSoknaderTeaser = ({ soknad }: SykepengesoknadTeaserProps) => {
     const { logEvent } = useAmplitudeInstance()
     const [ aapen, setAapen ] = useState<boolean>(false)
 
-    ModalWrapper.setAppElement('#root')
-
     return (
         <article aria-labelledby={`soknader-header-${soknad.id}`} onClick={() => {
             logEvent('Velger søknad', { soknadstype: soknad.soknadstype })

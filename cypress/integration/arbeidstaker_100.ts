@@ -23,6 +23,13 @@ describe('Tester arbeidstakersøknad', () => {
         cy.contains('Før du begynner').should('not.exist')
         cy.contains('Det du fyller ut brukes til å vurdere om du har rett til sykepenger').should('not.exist')
 
+        // Personvern erklæring
+        cy.contains('Les mer om hvordan NAV behandler personopplysninger').click()
+        cy.contains('Slik behandler NAV personopplysningene dine')
+        cy.contains('Søknaden din vil bli behandlet automatisk hvis NAV har tilstrekkelige opplysninger')
+        cy.get('.no-border > .typo-normal').contains('Lukk').click()
+
+
         // Sykmelding
         cy.contains('1. april - 24. april 2020 • 24 dager')
         cy.contains('LOMMEN BARNEHAVE')

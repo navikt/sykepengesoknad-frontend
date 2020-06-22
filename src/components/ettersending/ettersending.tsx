@@ -16,8 +16,6 @@ const Ettersending = ({ gjelder }: EttersendingProps) => {
     const { valgtSoknad, setEttersend } = useAppStore()
     const [ vilEttersende, setVilEttersende ] = useState<boolean>(false)
 
-    ModalWrapper.setAppElement('#root')
-
     const hentTekst = (text: string) => {
         const tilSuffix = (gjelder === 'nav') ? '-nav' : '-arbeidsgiver'
         const ettersendingSuffix = (gjelder === 'nav')
