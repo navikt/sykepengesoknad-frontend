@@ -32,11 +32,11 @@ const BehDager = ({ sporsmal }: SpmProps) => {
     }, [sporsmal]);
 
     const dagerSidenMandag = (spm: Sporsmal) => {
-        return ((new Date(spm.min).getDay() - 1) % 7)
+        return ((new Date(spm.min!).getDay() - 1) % 7)
     }
 
     const dagerTilFredag = (spm: Sporsmal) => {
-        return (5 - new Date(spm.max).getDay())
+        return (5 - new Date(spm.max!).getDay())
     }
 
     const radioKlikk = (value: string, index: number, name: string) => {
@@ -77,7 +77,7 @@ const BehDager = ({ sporsmal }: SpmProps) => {
                                     return <div className='kalenderdag tomdag' key={idx} />
                                 })}
 
-                                {ukeDatoListe(ukespm.min, ukespm.max).map((dagspm, idx) => {
+                                {ukeDatoListe(ukespm.min!, ukespm.max!).map((dagspm, idx) => {
                                     return (
                                         <div className='kalenderdag' key={idx}>
                                             <input type='radio'

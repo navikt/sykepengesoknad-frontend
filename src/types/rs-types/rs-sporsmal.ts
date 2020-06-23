@@ -1,18 +1,18 @@
 import { Sporsmal } from '../types'
 import { RSSvar } from './rs-svar'
-import { RSSvartype } from './rs-svartype'
-import { RSVisningskriterie } from './rs-visningskriterie'
+import { RSSvartypeType } from './rs-svartype'
+import { RSVisningskriterie, RSVisningskriterieType } from './rs-visningskriterie'
 
 export interface RSSporsmal {
     id: string;
     tag: string;
-    sporsmalstekst: string;
-    undertekst: string;
-    svartype: RSSvartype;
-    min: string;
-    max: string;
+    sporsmalstekst: string | null;
+    undertekst: string | null;
+    svartype: RSSvartypeType;
+    min: string | null;
+    max: string | null;
     pavirkerAndreSporsmal: boolean;
-    kriterieForVisningAvUndersporsmal: RSVisningskriterie;
+    kriterieForVisningAvUndersporsmal: RSVisningskriterieType | null;
     svar: RSSvar[];
     undersporsmal: RSSporsmal[];
 }
@@ -34,9 +34,10 @@ const rsSporsmalMapping = (sporsmal: Sporsmal): RSSporsmal => {
     rsSporsmal.kriterieForVisningAvUndersporsmal = rsVisningskriterie(sporsmal.kriterieForVisningAvUndersporsmal) as any
     rsSporsmal.svar = sporsmal.svarliste.svar
     if (sporsmal.undersporsmal) {
-        rsSporsmal.undersporsmal = sporsmal.undersporsmal.map((uspm: Sporsmal) => { return rsSporsmalMapping(uspm) })
-    }
-    else {
+        rsSporsmal.undersporsmal = sporsmal.undersporsmal.map((uspm: Sporsmal) => {
+            return rsSporsmalMapping(uspm)
+        })
+    } else {
         rsSporsmal.undersporsmal = []
     }
     return rsSporsmal
@@ -48,7 +49,7 @@ const tagIndexEllerBlank = (tagIndex: number) => {
 }
 
 const rsVisningskriterie = (kriterieForVisningAvUndersporsmal: string) => {
-    if(kriterieForVisningAvUndersporsmal as keyof typeof RSVisningskriterie) {
+    if (kriterieForVisningAvUndersporsmal as keyof typeof RSVisningskriterie) {
         return RSVisningskriterie[kriterieForVisningAvUndersporsmal as keyof typeof RSVisningskriterie]
     }
     return null

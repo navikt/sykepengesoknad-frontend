@@ -8,6 +8,7 @@ import { RSSoknadstype } from './rs-types/rs-soknadstype'
 import { RSSporsmal } from './rs-types/rs-sporsmal'
 import { RSSvarliste } from './rs-types/rs-svarliste'
 import { RSSvartype } from './rs-types/rs-svartype'
+import { RSVisningskriterieType } from './rs-types/rs-visningskriterie'
 
 export interface TidsPeriode {
     fom: Date;
@@ -106,7 +107,7 @@ export interface Sykmelding {
         utenArbeidsgiverTilbakemelding: string | null;
     };
     utdypendeOpplysninger: {
-        sykehistorie?: string| null;
+        sykehistorie?: string | null;
         paavirkningArbeidsevne?: string | null;
         resultatAvBehandling?: string | null;
         henvisningUtredningBehandling?: string | null;
@@ -177,7 +178,7 @@ export class Soknad {
                 orgnummer: soknad.arbeidsgiver.orgnummer
             }
         }
-        this.arbeidssituasjon = soknad.arbeidssituasjon
+        this.arbeidssituasjon = soknad.arbeidssituasjon as any
         this.sporsmal = rsToSporsmal(soknad.sporsmal, undefined as any, true)
         this.soknadPerioder = soknad.soknadPerioder
     }
@@ -188,18 +189,18 @@ export class Sporsmal {
     tag: TagTyper;
     tagIndex?: number;
     sporsmalstekst: string;
-    undertekst: string;
+    undertekst: string | null;
     svartype: RSSvartype;
-    min: string;
-    max: string;
+    min: string | null;
+    max: string | null;
     pavirkerAndreSporsmal: boolean;
     kriterieForVisningAvUndersporsmal: string;
     svarliste: RSSvarliste;
     undersporsmal: Sporsmal[];
-    parentKriterie?: string;
+    parentKriterie: RSVisningskriterieType | null;
     erHovedsporsmal: boolean;
 
-    constructor(spm: RSSporsmal, kriterie: string, erHovedsporsmal: boolean) {
+    constructor(spm: RSSporsmal, kriterie: RSVisningskriterieType | null, erHovedsporsmal: boolean) {
         this.id = spm.id
         const orgarr: string[] = spm.tag.split('_')
         const numtag: number = parseInt(orgarr.pop() as any)
@@ -212,11 +213,11 @@ export class Sporsmal {
         this.tag = TagTyper[idtag]
         this.sporsmalstekst = spm.sporsmalstekst === null ? '' : spm.sporsmalstekst
         this.undertekst = spm.undertekst
-        this.svartype = spm.svartype
+        this.svartype = spm.svartype as any as RSSvartype
         this.min = spm.min
         this.max = spm.max
         this.pavirkerAndreSporsmal = spm.pavirkerAndreSporsmal
-        this.kriterieForVisningAvUndersporsmal = spm.kriterieForVisningAvUndersporsmal
+        this.kriterieForVisningAvUndersporsmal = spm.kriterieForVisningAvUndersporsmal as any
         this.svarliste = { sporsmalId: spm.id, svar: spm.svar }
         this.undersporsmal = rsToSporsmal(spm.undersporsmal, spm.kriterieForVisningAvUndersporsmal, false)
         this.parentKriterie = kriterie
@@ -224,7 +225,7 @@ export class Sporsmal {
     }
 }
 
-function rsToSporsmal(spms: RSSporsmal[], kriterie: string, erHovedsporsmal: boolean) {
+function rsToSporsmal(spms: RSSporsmal[], kriterie: RSVisningskriterieType | null, erHovedsporsmal: boolean) {
     const sporsmals: Sporsmal[] = []
     if (spms === undefined) {
         return sporsmals

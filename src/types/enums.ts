@@ -51,9 +51,8 @@ export enum SykepengesoknadSvartyper {
 export type SykmeldingStatuser = 'NY' | 'SENDT' | 'UTGAATT' | 'AVBRUTT' | 'BEKREFTET' | 'TIL_SENDING'
 
 
-export enum AvgittAvTyper {
-    TIDLIGERE_SOKNAD = 'TIDLIGERE_SOKNAD'
-}
+export type AvgittAvTyper = 'TIDLIGERE_SOKNAD'
+
 
 export enum TagTyper {
     ANDRE_INNTEKTSKILDER = 'ANDRE_INNTEKTSKILDER',
