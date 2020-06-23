@@ -4,7 +4,13 @@ import Lenke from 'nav-frontend-lenker'
 import { Element, Normaltekst, Undertekst, Undertittel } from 'nav-frontend-typografi'
 import React, { useEffect, useState } from 'react'
 
+import useFetch from '../../data/rest/use-fetch'
+import { FetchState, hasData } from '../../data/rest/utils'
 import { useAppStore } from '../../data/stores/app-store'
+import { RSMottakerResponse } from '../../types/rs-types/rest-response/rs-mottakerresponse'
+import { RSMottaker } from '../../types/rs-types/rs-mottaker'
+import env from '../../utils/environment'
+import { logger } from '../../utils/logger'
 import { tekst } from '../../utils/tekster'
 import Avkrysset from '../oppsummering/utdrag/avkrysset'
 import Utvidbar from '../utvidbar/utvidbar'
@@ -12,14 +18,16 @@ import Vis from '../vis'
 import { Mottaker } from './innhold/kvittering-status'
 
 const Arbeidstaker = () => {
-    const { valgtSoknad } = useAppStore()
+    const { valgtSoknad, setMottaker, mottaker } = useAppStore()
     const [ tilArbNavn, setTilArbNavn ] = useState<string>()
     const [ tilOrg, setTilOrg ] = useState<string>()
     const [ tilNavDato, setTilNavDato ] = useState<string>()
     const [ tilArbDato, setTilArbDato ] = useState<string>()
+    const rsMottakerResponseFetch = useFetch<RSMottakerResponse>()
 
     useEffect(() => {
         opprettDatoer()
+        hentMottaker()
         // eslint-disable-next-line
     }, [])
 
@@ -39,10 +47,24 @@ const Arbeidstaker = () => {
         }
     }
     //TODO: legge til vedtaksløsningen
-    const over16dager = dayjs(valgtSoknad!.tom).diff(dayjs(valgtSoknad!.fom), 'day') > 16
+    const over16dager = mottaker === RSMottaker.NAV || mottaker === RSMottaker.ARBEIDSGIVER_OG_NAV
     // const perioderUtenOpphold = true
     // const perioderMedOpphold = true
     // const over30dagerEllerMotatt = dayjs(new Date()).diff(dayjs(valgtSoknad!.opprettetDato), 'day') > 30
+
+    const hentMottaker = () => {
+        rsMottakerResponseFetch.fetch(env.syfoapiRoot + `/syfosoknad/api/soknader/${valgtSoknad!.id}/finnMottaker`, {
+            method: 'POST',
+            credentials: 'include',
+            headers: { 'Content-Type': 'application/json' }
+        }, (fetchState: FetchState<RSMottakerResponse>) => {
+            if (hasData(fetchState)) {
+                setMottaker(fetchState.data.mottaker)
+            } else {
+                logger.error('Klarte ikke hente MOTTAKER av søknad', fetchState)
+            }
+        })
+    }
 
     let fellesTittelForBehandling = 'kvittering.arbeidstaker.tittel'
     let fellesTekstForBehandling = 'kvittering.arbeidstaker.brodtekst'
