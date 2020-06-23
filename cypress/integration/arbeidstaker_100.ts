@@ -220,6 +220,11 @@ describe('Tester arbeidstakersøknad', () => {
 
     it('Søknad ANSVARSERKLARING - steg 11', function() {
         cy.url().should('include', `${soknad.id}/11`)
+
+        cy.contains('Oppsummering fra søknaden').click({ force: true })
+        cy.contains('Jeg vet at jeg kan miste retten til sykepenger hvis opplysningene jeg gir ikke er riktige eller fullstendige')
+        cy.contains('Det er 1 feil i skjemaet').should('not.exist')
+
         cy.get('.skjemaelement__label').click({ force: true })
         cy.contains('Jeg har lest all informasjonen jeg har fått i søknaden og bekrefter at opplysningene jeg har gitt er korrekte.')
         cy.contains('Søknaden sendes til NAV. Kopi av søknaden sendes til POSTEN NORGE AS, BÆRUM.')
