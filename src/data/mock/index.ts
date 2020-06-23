@@ -7,7 +7,11 @@ import { RSSoknadstatus } from '../../types/rs-types/rs-soknadstatus'
 import { RSSoknadstype } from '../../types/rs-types/rs-soknadstype'
 import env from '../../utils/environment'
 import { jsonDeepCopy } from '../../utils/json-deep-copy'
-import { arbeidsgiverInnenforArbeidsgiverperiodeKvitteringMock, soknaderIntegration } from './data/soknader-integration'
+import {
+    arbeidsgiverInnenforArbeidsgiverperiodeKvitteringMock,
+    arbeidstakerUtenforArbeidsgiverperiodeKvitteringMock,
+    soknaderIntegration
+} from './data/soknader-integration'
 import { arbeidstaker, arbeidstakerGradert, soknaderOpplaering } from './data/soknader-opplaering'
 import { sykmeldinger } from './data/sykmeldinger'
 import { unleashToggles } from './data/toggles'
@@ -53,7 +57,8 @@ mock.post(`${env.syfoapiRoot}/syfosoknad/api/opprettSoknadUtland`, () => {
 mock.post(`${env.syfoapiRoot}/syfosoknad/api/soknader/:soknad/finnMottaker`, (args: HandlerArgument) => {
     const soknadId = args.pathParams.soknad
 
-    if (soknadId === arbeidstaker.id) {
+    if (soknadId === arbeidstaker.id ||
+        soknadId === arbeidstakerUtenforArbeidsgiverperiodeKvitteringMock.id) {
         return { mottaker: RSMottaker.ARBEIDSGIVER_OG_NAV }
     }
     if (soknadId === arbeidstakerGradert.id ||

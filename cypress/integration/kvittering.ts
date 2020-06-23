@@ -1,6 +1,6 @@
 import {
     arbeidsgiverInnenforArbeidsgiverperiodeKvitteringMock,
-    arbeidsledigKvitteringMock,
+    arbeidsledigKvitteringMock, arbeidstakerUtenforArbeidsgiverperiodeKvitteringMock,
     oppholdUtlandKvitteringMock, selvstendigKvitteringMock,
     sendtArbeidsledigKvitteringMock
 } from '../../src/data/mock/data/soknader-integration'
@@ -18,7 +18,7 @@ describe('Tester kvittering', () => {
     const utlandSoknad = oppholdUtlandKvitteringMock
     const selvstendig = selvstendigKvitteringMock
     const arbeidstakerInnenforArbeidsgiverperiode = arbeidsgiverInnenforArbeidsgiverperiodeKvitteringMock
-    // TODO: const arbeidstakerUtenforArbeidsgiverperiode = arbeidstakerUtenforArbeidsgiverperiodeKvitteringMock
+    const arbeidstakerUtenforArbeidsgiverperiode = arbeidstakerUtenforArbeidsgiverperiodeKvitteringMock
     // TODO: const arbeidstakerOppfolgendeUtenOpphold = arbeidstakerOppfolgendeUtenOppholdKvitteringMock
     // TODO: const arbeidstakerOppfolgendeMedOpphold = arbeidstakerOppfolgendeMedOppholdKvitteringMock
 
@@ -260,8 +260,53 @@ describe('Tester kvittering', () => {
         })
 
         it('Utenfor arbeidsgiverperiode', () => {
-            // Samme som arbeidsledig (annen tekst Hva skjer)
-            // Inntektsmelding
+            // Velg søknad
+            cy.get(`#soknader-list-til-behandling article a[href*=${arbeidstakerUtenforArbeidsgiverperiode.id}]`).click()
+
+            // Svar og send
+            cy.contains('Jeg vet at jeg kan miste retten til sykepenger hvis opplysningene jeg gir ikke er riktige eller fullstendige.')
+                .click({ force: true })
+            cy.contains('Gå videre').click()
+            cy.get('.inputPanelGruppe__inner label:nth-child(2) > input[value=NEI]').click({ force: true })
+            cy.contains('Gå videre').click()
+            cy.get('.skjemaelement__label').click({ force: true })
+            cy.contains('Send søknaden').click()
+            cy.url().should('include', `/kvittering/${arbeidstakerUtenforArbeidsgiverperiode.id}`)
+
+            // Sendt datoer
+            cy.get('.kvittering .alertstripe--suksess')
+                .should('contain', 'Søknaden er sendt')
+
+            // TODO: Avkrysset med sendt til arbeidsgiver og NAV
+
+            // Hva skjer videre
+            cy.get('.alertstripe.opplysninger.alertstripe--info')
+                .should('contain', 'Hva skjer videre?')
+                .and('contain', 'Før NAV behandler søknaden')
+                .and('contain', 'Sykefraværet ditt er lengre enn 16 kalenderdager. Det betyr at du får sykepenger utbetalt av NAV. Noen arbeidsgplasser fortsetter å utbetale sykepenger fra dag 17, men da får de penger tilbake fra NAV senere. Arbeidsgiveren din må derfor sende oss inntektsmelding så fort som mulig.')
+                .and('contain', 'Hvorfor går det et skille ved 16 dager?')
+                .and('contain', 'Hva er en inntektsmelding')
+                .and('contain', 'NAV behandler søknaden')
+                .and('contain', 'Saksbehandlingstidene kan variere noe. Sjekk saksbehandlingstidene i ditt fylke')
+                .and('contain', 'Når blir pengene utbetalt')
+                .and('contain', 'Blir søknaden din innvilget før den 15. i denne måneden, blir pengene utbetalt innen den 25. samme måned. Blir det innvilget etter den 15. i måneden, utbetales pengene innen 5 dager.')
+                .and('not.contain', 'Du får sykepengene fra arbeidsgiveren din')
+
+            // TODO: Skal ligge under Hva skjer
+            // Knapperad ( Endre, Ettersend)
+            cy.contains('Endre søknad').should('exist')
+            cy.contains('Send til NAV').should('exist')
+            cy.contains('Send til Arbeidsgiver').should('exist')
+
+            // Oppsummering minimert
+            cy.get('.utvidbar.oppsummering.ekspander.lilla .utvidbar__toggle')
+                .should('contain', 'Oppsummering fra søknaden')
+                .and('have.attr', 'aria-expanded', 'false')
+
+            // Opplysninger minimert
+            cy.get('.utvidbar.ekspander .utvidbar__toggle')
+                .should('contain', 'Opplysninger fra sykmeldingen')
+                .and('have.attr', 'aria-expanded', 'false')
         })
 
         it('Oppfølgende periode uten opphold', () => {
