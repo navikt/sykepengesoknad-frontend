@@ -5,7 +5,6 @@ import IngenData from '../pages/feil/ingen-data'
 import { RSSoknad } from '../types/rs-types/rs-soknad'
 import { Soknad, Sykmelding } from '../types/types'
 import { UnleashToggles } from '../types/types'
-import { fixSykmeldingDatoer } from '../utils/dato-utils'
 import env from '../utils/environment'
 import { logger } from '../utils/logger'
 import { unleashKeys } from './mock/data/toggles'
@@ -47,14 +46,12 @@ export function DataFetcher(props: { children: any }) {
                 credentials: 'include',
             }, (fetchState: FetchState<Sykmelding[]>) => {
                 if (hasData(fetchState)) {
-                    setSykmeldinger(fetchState.data!.map(sykmelding => {
-                        return fixSykmeldingDatoer(sykmelding)
-                    }))
+                    setSykmeldinger(fetchState.data)
                 }
             })
         }
         // eslint-disable-next-line
-    }, [ rssoknader ]);
+    }, [rssoknader]);
 
     if (isAnyNotStartedOrPending([ unleash, rssoknader, sykmeldinger ])) {
         return <Spinner type={'XXL'} />

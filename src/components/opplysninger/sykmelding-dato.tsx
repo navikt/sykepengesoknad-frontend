@@ -8,7 +8,7 @@ import { tekst } from '../../utils/tekster'
 const SykmeldingDato = () => {
     const { valgtSykmelding } = useAppStore()
 
-    if (valgtSykmelding === undefined) {
+    if (valgtSykmelding === undefined || !valgtSykmelding.startLegemeldtFravaer) {
         return null
     }
 

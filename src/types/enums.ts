@@ -48,14 +48,8 @@ export enum SykepengesoknadSvartyper {
     HTML = 'HTML'
 }
 
-export enum SykmeldingStatuser {
-    NY = 'NY',
-    SENDT = 'SENDT',
-    UTGAATT = 'UTGAATT',
-    AVBRUTT = 'AVBRUTT',
-    BEKREFTET = 'BEKREFTET',
-    TIL_SENDING = 'TIL_SENDING'
-}
+export type SykmeldingStatuser = 'NY' | 'SENDT' | 'UTGAATT' | 'AVBRUTT' | 'BEKREFTET' | 'TIL_SENDING'
+
 
 export enum AvgittAvTyper {
     TIDLIGERE_SOKNAD = 'TIDLIGERE_SOKNAD'
