@@ -52,6 +52,7 @@ const Utvidbar = (props: UtvidbarProps) => {
                 onMouseEnter={props.ikon !== undefined ? () => btnImage.current!.src = props.ikonHover! : undefined}
                 onMouseLeave={props.ikon !== undefined ? () => btnImage.current!.src = props.ikon! : undefined}
                 onClick={() => setErApen(!erApen)}
+                type={'button'}
                 className='utvidbar__toggle'
             >
                 <Vis hvis={props.ikon !== undefined}>
@@ -71,7 +72,8 @@ const Utvidbar = (props: UtvidbarProps) => {
             </button>
 
             <div ref={container} className={'utvidbar__innholdContainer' + (erApen ? ' apen' : '')}
-                onTransitionEnd={() => onTransitionEnd()} style={{ maxHeight: erApen ? (innholdHeight * 2) + 'px' : '0' }}
+                onTransitionEnd={() => onTransitionEnd()}
+                style={{ maxHeight: erApen ? (innholdHeight * 2) + 'px' : '0' }}
             >
                 <div ref={innhold} className='utvidbar__innhold'>
                     {props.children}
