@@ -45,7 +45,7 @@ const Oppsummering = ({ ekspandert }: EkspanderProps) => {
     }, [ valgtSoknad!.status, stegId ])
 
     return (
-        <Utvidbar className={'ekspander lilla' + (apen ? ' apen' : '')}
+        <Utvidbar className={'oppsummering ekspander lilla' + (apen ? ' apen' : '')}
             ikon={sjekkbokser} ikonHover={sjekkbokserHover} erApen={apen}
             tittel={tekst('sykepengesoknad.oppsummering.tittel')}
             ikonAltTekst=''
