@@ -31,13 +31,10 @@ describe('Tester arbeidstakersøknad', () => {
 
 
         // Sykmelding
-        cy.scrollTo('top')
-
         cy.contains('1. april - 24. april 2020 • 24 dager')
         cy.contains('LOMMEN BARNEHAVE')
 
-        cy.scrollTo('top')
-        cy.contains('Opplysninger fra sykmeldingen').click()
+        cy.contains('Opplysninger fra sykmeldingen').scrollIntoView().click()
 
         // Avbryt dialog vises
         cy.contains('Jeg ønsker ikke å bruke denne søknaden').click()
