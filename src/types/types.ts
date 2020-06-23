@@ -1,6 +1,6 @@
 import { dayjsToDate } from '../utils/dato-utils'
 import { SykmeldingStatuser, TagTyper } from './enums'
-import { RSArbeidssituasjon } from './rs-types/rs-arbeidssituasjon'
+import { RSArbeidssituasjon, RSArbeidssituasjonType } from './rs-types/rs-arbeidssituasjon'
 import { RSSoknad } from './rs-types/rs-soknad'
 import { RSSoknadsperiode } from './rs-types/rs-soknadsperiode'
 import { RSSoknadstatus } from './rs-types/rs-soknadstatus'
@@ -30,79 +30,86 @@ export interface Arbeidsgiver {
 }
 
 export interface SykmeldingDiagnose {
-    diagnose: string;
+    diagnose?: string;
     diagnosekode: string;
     diagnosesystem: string;
+    diagnosetekst?: string | null;
 }
 
 export interface SykmeldingPeriode {
-    fom: Date;
-    tom: Date;
-    grad: number;
-    behandlingsdager: number;
-    reisetilskudd: boolean;
-    avventende: string;
+    fom: string;
+    tom: string;
+    grad: number | null;
+    behandlingsdager: number | null;
+    reisetilskudd: boolean | null;
+    avventende?: string | null;
+    redusertVenteperiode?: boolean | null;
 }
 
 export interface Sykmelding {
     id: string;
-    startLegemeldtFravaer: Date;
+    startLegemeldtFravaer: string | null;
     skalViseSkravertFelt: boolean;
-    identdato: Date;
+    identdato: string;
     status: SykmeldingStatuser;
-    naermesteLederStatus: string;
-    innsendtArbeidsgivernavn: string;
-    valgtArbeidssituasjon: RSArbeidssituasjon;
+    naermesteLederStatus: string | null;
+    erEgenmeldt?: boolean | null;
+    erPapirsykmelding?: boolean | null;
+    innsendtArbeidsgivernavn: string | null;
+    valgtArbeidssituasjon: RSArbeidssituasjonType | null;
     mottakendeArbeidsgiver: {
         navn: string;
         virksomhetsnummer: string;
         juridiskOrgnummer: string;
-    };
-    orgnummer: string;
-    sendtDato: Date;
+    } | null;
+    orgnummer: string | null;
+    sendtdato: string;
     sporsmal: {
-        harForsikring: boolean;
+        harForsikring: boolean | null;
+        'arbeidssituasjon': RSArbeidssituasjonType | null;
+        'fravaersperioder': any;
+        'harAnnetFravaer': boolean | null;
     };
     pasient: {
-        fnr: string;
-        fornavn: string;
-        mellomnavn: string;
-        etternavn: string;
+        fnr: string | null;
+        fornavn: string | null;
+        mellomnavn: string | null;
+        etternavn: string | null;
     };
-    arbeidsgiver: string;
-    stillingsprosent: number;
+    arbeidsgiver: string | null;
+    stillingsprosent: number | null;
     diagnose: {
         hoveddiagnose: SykmeldingDiagnose;
-        bidiagnoser: SykmeldingDiagnose[];
-        fravaersgrunnLovfestet: string;
-        fravaerBeskrivelse: string;
-        svangerskap: boolean;
-        yrkesskade: boolean;
-        yrkesskadeDato: Date;
+        bidiagnoser: SykmeldingDiagnose[] | null;
+        fravaersgrunnLovfestet: string | null;
+        fravaerBeskrivelse: string | null;
+        svangerskap: boolean | null;
+        yrkesskade: boolean | null;
+        yrkesskadeDato: string | null;
     };
     mulighetForArbeid: {
         perioder: SykmeldingPeriode[];
-        aktivitetIkkeMulig433: string[];
-        aktivitetIkkeMulig434: string[];
-        aarsakAktivitetIkkeMulig433: string;
-        aarsakAktivitetIkkeMulig434: string;
+        aktivitetIkkeMulig433: string[] | null;
+        aktivitetIkkeMulig434: string[] | null;
+        aarsakAktivitetIkkeMulig433: string | null;
+        aarsakAktivitetIkkeMulig434: string | null;
     };
     friskmelding: {
-        arbeidsfoerEtterPerioden: boolean;
-        hensynPaaArbeidsplassen: string;
+        arbeidsfoerEtterPerioden: boolean | null;
+        hensynPaaArbeidsplassen: string | null;
         antarReturSammeArbeidsgiver: boolean;
-        antattDatoReturSammeArbeidsgiver: Date;
+        antattDatoReturSammeArbeidsgiver: string | null;
         antarReturAnnenArbeidsgiver: boolean;
-        tilbakemeldingReturArbeid: Date;
+        tilbakemeldingReturArbeid: string | null;
         utenArbeidsgiverAntarTilbakeIArbeid: boolean;
-        utenArbeidsgiverAntarTilbakeIArbeidDato: Date;
-        utenArbeidsgiverTilbakemelding: Date;
+        utenArbeidsgiverAntarTilbakeIArbeidDato: string | null;
+        utenArbeidsgiverTilbakemelding: string | null;
     };
     utdypendeOpplysninger: {
-        sykehistorie: string;
-        paavirkningArbeidsevne: string;
-        resultatAvBehandling: string;
-        henvisningUtredningBehandling: string;
+        sykehistorie?: string| null;
+        paavirkningArbeidsevne?: string | null;
+        resultatAvBehandling?: string | null;
+        henvisningUtredningBehandling?: string | null;
         grupper: {
             id: string;
             sporsmal: {
@@ -112,23 +119,23 @@ export interface Sykmelding {
         }[];
     };
     arbeidsevne: {
-        tilretteleggingArbeidsplass: string;
-        tiltakNAV: string;
-        tiltakAndre: string;
+        tilretteleggingArbeidsplass: string | null;
+        tiltakNAV: string | null;
+        tiltakAndre: string | null;
     };
     meldingTilNav: {
         navBoerTaTakISaken: boolean;
-        navBoerTaTakISakenBegrunnelse: string;
+        navBoerTaTakISakenBegrunnelse: string | null;
     };
-    innspillTilArbeidsgiver: string;
+    innspillTilArbeidsgiver: string | null;
     tilbakedatering: {
-        dokumenterbarPasientkontakt: Date;
-        tilbakedatertBegrunnelse: string;
+        dokumenterbarPasientkontakt: string | null;
+        tilbakedatertBegrunnelse: string | null;
     };
     bekreftelse: {
-        utstedelsesdato: Date;
-        sykmelder: string;
-        sykmelderTlf: string;
+        utstedelsesdato: string | null;
+        sykmelder: string | null;
+        sykmelderTlf: string | null;
     };
 }
 

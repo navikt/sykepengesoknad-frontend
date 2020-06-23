@@ -1,4 +1,6 @@
-export const sykmeldinger: any = [
+import { Sykmelding } from '../../../types/types'
+
+export const sykmeldinger: Sykmelding[] = [
     {
         'id': '7e90121c-b64b-4a1c-b7a5-93c9d95aba47',
         'startLegemeldtFravaer': '2020-04-01',

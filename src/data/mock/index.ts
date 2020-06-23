@@ -66,7 +66,7 @@ mock.post(`${env.syfoapiRoot}/syfosoknad/api/soknader/:soknad/finnMottaker`, (ar
 
 mock.post(env.unleashUrl, unleashToggles)
 mock.get(`${env.syfoapiRoot}/syfosoknad/api/soknader`, soknader as any)
-mock.get(`${env.syforestRoot}/sykmeldinger`, sykmeldinger)
+mock.get(`${env.syforestRoot}/sykmeldinger`, sykmeldinger as any)
 mock.post(`${env.syfoapiRoot}/syfosoknad/api/soknader/:soknad/send`, {})
 mock.post(`${env.syfoapiRoot}/syfosoknad/api/soknader/:soknad/ettersendTilNav`, {})
 mock.post(`${env.syfoapiRoot}/syfosoknad/api/soknader/:soknad/ettersendTilArbeidsgiver`, {})

@@ -5,3 +5,6 @@ export enum RSArbeidssituasjon {
     ARBEISLEDIG = 'ARBEIDSLEDIG',
     ANNET = 'ANNET',
 }
+
+export type RSArbeidssituasjonType = 'NAERINGSDRIVENDE' | 'FRILANSER' | 'ARBEIDSTAKER' | 'ARBEIDSLEDIG' | 'ANNET'
+

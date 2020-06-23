@@ -25,7 +25,7 @@ const SykmeldingPerioder = () => {
             {sorterPerioderEldsteFoerst(valgtSykmelding.mulighetForArbeid.perioder).map((periode: SykmeldingPeriode, index: number) => {
                 const fom = dayjs(periode.fom).format('D. MMM')
                 const tom = dayjs(periode.tom).format('D. MMM YYYY')
-                const dager = getDuration(periode.fom, periode.tom) + ' dager'
+                const dager = getDuration(new Date(periode.fom), new Date(periode.tom)) + ' dager'
 
                 return (
                     <div className='avsnitt' key={index}>
