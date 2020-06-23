@@ -3,3 +3,10 @@ export enum RSVisningskriterie {
     JA = 'JA',
     CHECKED = 'CHECKED'
 }
+
+
+export type RSVisningskriterieType =
+    'NEI' |
+    'JA' |
+    'CHECKED'
+

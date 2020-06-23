@@ -66,8 +66,8 @@ const PeriodeKomp = ({ sporsmal, index, slettPeriode }: AllProps) => {
                 placeholder='dd.mm.åååå - dd.mm.åååå'
                 onValueUpdate={onValueUpdate}
                 options={{
-                    minDate: sporsmal.min,
-                    maxDate: sporsmal.max,
+                    minDate: sporsmal.min!,
+                    maxDate: sporsmal.max!,
                     mode: 'range',
                     enableTime: false,
                     dateFormat: 'F j, Y',

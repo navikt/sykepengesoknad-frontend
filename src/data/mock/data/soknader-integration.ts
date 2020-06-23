@@ -1,6 +1,6 @@
 import { RSSoknad } from '../../../types/rs-types/rs-soknad'
 
-export const fremtidigSoknad = {
+export const fremtidigSoknad: RSSoknad = {
     'id': '5b74f271-5b94-455a-b79f-428f593f2b99',
     'sykmeldingId': '7e90121c-b64b-4a1c-b7a5-93c9d95aba47',
     'soknadstype': 'ARBEIDSTAKERE',
@@ -8,7 +8,6 @@ export const fremtidigSoknad = {
     'fom': '2020-05-23',
     'tom': '2020-06-07',
     'opprettetDato': '2020-06-08',
-    'innsendtDato': null,
     'sendtTilNAVDato': null,
     'sendtTilArbeidsgiverDato': null,
     'avbruttDato': null,
@@ -28,7 +27,7 @@ export const fremtidigSoknad = {
     'egenmeldtSykmelding': false
 }
 
-export const utgattSoknad = {
+export const utgattSoknad: RSSoknad = {
     'id': '5b74f271-5b94-455a-b79f-428f593f2b90',
     'sykmeldingId': '7e90121c-b64b-4a1c-b7a5-93c9d95aba47',
     'soknadstype': 'ARBEIDSTAKERE',
@@ -36,7 +35,6 @@ export const utgattSoknad = {
     'fom': '2020-05-23',
     'tom': '2020-06-07',
     'opprettetDato': '2020-06-08',
-    'innsendtDato': null,
     'sendtTilNAVDato': null,
     'sendtTilArbeidsgiverDato': null,
     'avbruttDato': null,
@@ -56,7 +54,7 @@ export const utgattSoknad = {
     'egenmeldtSykmelding': false
 }
 
-export const avbruttSoknad = {
+export const avbruttSoknad: RSSoknad = {
     'id': '811d15b2-2a76-4623-9530-1ba55617e0a5',
     'sykmeldingId': 'ff5a4a27-2d76-4e12-9786-c7e4f31121e6',
     'soknadstype': 'ARBEIDSTAKERE',
@@ -64,7 +62,6 @@ export const avbruttSoknad = {
     'fom': '2020-05-20',
     'tom': '2020-06-05',
     'opprettetDato': '2020-06-12',
-    'innsendtDato': null,
     'sendtTilNAVDato': null,
     'sendtTilArbeidsgiverDato': null,
     'avbruttDato': '2020-06-12',
@@ -697,7 +694,7 @@ export const avbruttSoknad = {
     'egenmeldtSykmelding': false
 }
 
-export const arbeidstakersoknadMedUtenlandsoppholdSoktSykepenger = {
+export const arbeidstakersoknadMedUtenlandsoppholdSoktSykepenger: RSSoknad = {
     'id': '5b74f271-5b94-455a-b79f-428f593f2b98',
     'sykmeldingId': '7e90121c-b64b-4a1c-b7a5-93c9d95aba47',
     'soknadstype': 'ARBEIDSTAKERE',
@@ -705,7 +702,6 @@ export const arbeidstakersoknadMedUtenlandsoppholdSoktSykepenger = {
     'fom': '2020-05-23',
     'tom': '2020-06-07',
     'opprettetDato': '2020-06-08',
-    'innsendtDato': null,
     'sendtTilNAVDato': null,
     'sendtTilArbeidsgiverDato': null,
     'avbruttDato': null,
@@ -773,7 +769,7 @@ export const arbeidstakersoknadMedUtenlandsoppholdSoktSykepenger = {
     'egenmeldtSykmelding': false
 }
 
-export const sendtArbeidsledig = {
+export const sendtArbeidsledig: RSSoknad = {
     'id': '3848e75e-4069-4076-95c0-3f9f0b63e498',
     'sykmeldingId': '7e90121c-b64b-4a1c-b7a5-93c9d95aba47',
     'soknadstype': 'ARBEIDSLEDIG',
@@ -781,7 +777,6 @@ export const sendtArbeidsledig = {
     'fom': '2020-05-27',
     'tom': '2020-06-11',
     'opprettetDato': '2020-06-12',
-    'innsendtDato': '2020-06-12',
     'sendtTilNAVDato': '2020-06-12T14:15:39.267',
     'sendtTilArbeidsgiverDato': null,
     'avbruttDato': null,
@@ -1209,7 +1204,7 @@ export const sendtArbeidsledig = {
     'egenmeldtSykmelding': false
 }
 
-export const veldigLangSoknad = {
+export const veldigLangSoknad: RSSoknad = {
     'id': 'faba11f5-123-abc-8c8a-58b28ce2f3ef',
     'sykmeldingId': '7e90121c-b64b-4a1c-b7a5-93c9d95aba47',
     'soknadstype': 'ARBEIDSTAKERE',
@@ -1217,7 +1212,6 @@ export const veldigLangSoknad = {
     'fom': '2020-04-01',
     'tom': '2020-04-24',
     'opprettetDato': '2020-05-13',
-    'innsendtDato': null,
     'sendtTilNAVDato': null,
     'sendtTilArbeidsgiverDato': null,
     'avbruttDato': null,
@@ -2672,4 +2666,4 @@ export const soknaderIntegration = [
     avbruttSoknad,
     fremtidigSoknad,
     veldigLangSoknad
-] as any as RSSoknad[]
+] as RSSoknad[]

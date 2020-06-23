@@ -4,7 +4,7 @@ import React, { useEffect, useState } from 'react'
 import { useFormContext } from 'react-hook-form'
 
 import { useAppStore } from '../../../data/stores/app-store'
-import { AvgittAvTyper, SvarEnums, TagTyper } from '../../../types/enums'
+import { SvarEnums, TagTyper } from '../../../types/enums'
 import { RSSoknadstype } from '../../../types/rs-types/rs-soknadstype'
 import { getLedetekst, tekst } from '../../../utils/tekster'
 import { utlandssoknadUrl } from '../../../utils/url-utils'
@@ -46,7 +46,7 @@ const JaNeiInput = ({ sporsmal }: SpmProps) => {
     const visAvgittAvBjorn = () => {
         const undersporsmal = sporsmal.undersporsmal.find(uspm => uspm.tag === TagTyper.EGENMELDINGER_NAR)
         if (undersporsmal) {
-            return undersporsmal.svarliste.svar.some(svaret => svaret.avgittAv === AvgittAvTyper.TIDLIGERE_SOKNAD)
+            return undersporsmal.svarliste.svar.some(svaret => svaret.avgittAv ===  'TIDLIGERE_SOKNAD')
         }
         return false
     }

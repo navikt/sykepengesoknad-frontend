@@ -54,18 +54,18 @@ const TallInput = ({ sporsmal }: SpmProps) => {
                     className='skjemaelement__input input--xs'
                     name={sporsmal.id}
                     id={sporsmal.id}
-                    min={sporsmal.min}
-                    max={sporsmal.max}
+                    min={sporsmal.min!}
+                    max={sporsmal.max!}
                     ref={register({
                         required: feilmelding.global,
                         validate: () => valider(),
                         min: {
-                            value: sporsmal.min,
+                            value: sporsmal.min!,
                             message: getLedetekst(tekst('soknad.feilmelding.TALL_MIN_MAX'),
                                 { '%MIN%': sporsmal.min, '%MAX%': sporsmal.max })
                         },
                         max: {
-                            value: sporsmal.max,
+                            value: sporsmal.max!,
                             message: getLedetekst(tekst('soknad.feilmelding.TALL_MIN_MAX'),
                                 { '%MIN%': sporsmal.min, '%MAX%': sporsmal.max }
                             )

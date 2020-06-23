@@ -16,7 +16,7 @@ const IkkeRelevant = ({ sporsmal }: SpmProps) => {
                 <div className='redaksjonelt-innhold'>
                     <Normaltekst tag='div'>{parser(sporsmal.undertekst)}</Normaltekst>
                 </div>
-                <input name={sporsmal.id} ref={register} type='hidden' value={sporsmal.undertekst} />
+                <input name={sporsmal.id} ref={register} type='hidden' value={sporsmal.undertekst!} />
             </>
         </Vis>
     )

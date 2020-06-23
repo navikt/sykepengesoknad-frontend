@@ -19,3 +19,25 @@ export enum RSSvartype {
     TALL = 'TALL',
     TIMER = 'TIMER'
 }
+
+export type RSSvartypeType =
+    'RADIO_GRUPPE_UKEKALENDER' |
+    'BEHANDLINGSDAGER' |
+    'INFO_BEHANDLINGSDAGER' |
+    'CHECKBOX' |
+    'CHECKBOX_GRUPPE' |
+    'CHECKBOX_PANEL' |
+    'DATO' |
+    'FRITEKST' |
+    'IKKE_RELEVANT' |
+    'JA_NEI' |
+    'LAND' |
+    'PERIODE' |
+    'PERIODER' |
+    'PROSENT' |
+    'RADIO' |
+    'RADIO_GRUPPE' |
+    'RADIO_GRUPPE_TIMER_PROSENT' |
+    'TALL' |
+    'TIMER'
+
