@@ -3646,6 +3646,91 @@ export const arbeidstakerUtenforArbeidsgiverperiodeKvitteringMock: RSSoknad = {
     'egenmeldtSykmelding': false
 }
 
+export const arbeidstakerOppfolgendeUtenOppholdKvitteringMock: RSSoknad = {
+    'id': '253eb3d6-89b8-457b-8865-cfa2a927da39',
+    'sykmeldingId': 'bdf810a8-6d92-4bd5-b4be-47714f8ae44e',
+    'soknadstype': 'ARBEIDSTAKERE',
+    'status': 'NY',
+    'fom': '2020-01-21',
+    'tom': '2020-02-09',
+    'opprettetDato': '2020-06-23',
+    'sendtTilNAVDato': null,
+    'sendtTilArbeidsgiverDato': null,
+    'avbruttDato': null,
+    'startSykeforlop': '2020-01-01',
+    'sykmeldingUtskrevet': '2020-01-01',
+    'arbeidsgiver': {
+        'navn': '995816598 sitt orgnavn :)',
+        'orgnummer': '995816598'
+    },
+    'korrigerer': null,
+    'korrigertAv': null,
+    'arbeidssituasjon': 'ARBEIDSTAKER',
+    'soknadPerioder': [
+        {
+            'fom': '2020-01-21',
+            'tom': '2020-02-09',
+            'grad': 100,
+            'sykmeldingstype': 'AKTIVITET_IKKE_MULIG'
+        }
+    ],
+    'sporsmal': [
+        {
+            'id': '280',
+            'tag': 'ANSVARSERKLARING',
+            'sporsmalstekst': 'Jeg vet at jeg kan miste retten til sykepenger hvis opplysningene jeg gir ikke er riktige eller fullstendige. Jeg vet også at NAV kan holde igjen eller kreve tilbake penger, og at å gi feil opplysninger kan være straffbart.',
+            'undertekst': null,
+            'svartype': 'CHECKBOX_PANEL',
+            'min': null,
+            'max': null,
+            'pavirkerAndreSporsmal': false,
+            'kriterieForVisningAvUndersporsmal': null,
+            'svar': [],
+            'undersporsmal': []
+        },
+        {
+            'id': '281',
+            'tag': 'PERMITTERT_NAA',
+            'sporsmalstekst': 'Er du permittert nå?',
+            'undertekst': null,
+            'svartype': 'JA_NEI',
+            'min': null,
+            'max': null,
+            'pavirkerAndreSporsmal': false,
+            'kriterieForVisningAvUndersporsmal': null,
+            'svar': [],
+            'undersporsmal': []
+        },
+        {
+            'id': '316',
+            'tag': 'VAER_KLAR_OVER_AT',
+            'sporsmalstekst': 'Viktig å være klar over:',
+            'undertekst': '<ul><li>Du kan bare få sykepenger hvis det er din egen sykdom eller skade som hindrer deg i å jobbe. Sosiale eller økonomiske problemer gir ikke rett til sykepenger.</li><li>Du kan miste retten til sykepenger hvis du nekter å opplyse om din egen arbeidsevne, eller hvis du ikke tar imot behandling eller tilrettelegging.</li><li>Retten til sykepenger gjelder bare inntekt du har mottatt som lønn og betalt skatt av på sykmeldingstidspunktet.</li><li>NAV kan innhente opplysninger som er nødvendige for å behandle søknaden.</li><li>Du må melde fra til NAV hvis du satt i varetekt, sonet straff eller var under forvaring i sykmeldingsperioden.</li><li>Fristen for å søke sykepenger er som hovedregel 3 måneder</li></ul><p>Du kan lese mer om rettigheter og plikter på <a href="https://www.nav.no/sykepenger" target="_blank">nav.no/sykepenger</a>.</p>',
+            'svartype': 'IKKE_RELEVANT',
+            'min': null,
+            'max': null,
+            'pavirkerAndreSporsmal': false,
+            'kriterieForVisningAvUndersporsmal': null,
+            'svar': [],
+            'undersporsmal': []
+        },
+        {
+            'id': '317',
+            'tag': 'BEKREFT_OPPLYSNINGER',
+            'sporsmalstekst': 'Jeg har lest all informasjonen jeg har fått i søknaden og bekrefter at opplysningene jeg har gitt er korrekte.',
+            'undertekst': null,
+            'svartype': 'CHECKBOX_PANEL',
+            'min': null,
+            'max': null,
+            'pavirkerAndreSporsmal': false,
+            'kriterieForVisningAvUndersporsmal': null,
+            'svar': [],
+            'undersporsmal': []
+        }
+    ],
+    'egenmeldtSykmelding': false
+}
+
 export const soknaderIntegration = [
     utgattSoknad,
     arbeidstakersoknadMedUtenlandsoppholdSoktSykepenger,
@@ -3659,4 +3744,5 @@ export const soknaderIntegration = [
     selvstendigKvitteringMock,
     arbeidsgiverInnenforArbeidsgiverperiodeKvitteringMock,
     arbeidstakerUtenforArbeidsgiverperiodeKvitteringMock,
+    arbeidstakerOppfolgendeUtenOppholdKvitteringMock,
 ] as RSSoknad[]
