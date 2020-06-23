@@ -1,7 +1,6 @@
 import dayjs from 'dayjs'
-import AlertStripe, { AlertStripeInfo, AlertStripeSuksess } from 'nav-frontend-alertstriper'
-import Lenke from 'nav-frontend-lenker'
-import { Element, Normaltekst, Undertekst, Undertittel } from 'nav-frontend-typografi'
+import AlertStripe, { AlertStripeSuksess } from 'nav-frontend-alertstriper'
+import { Element, Undertekst, Undertittel } from 'nav-frontend-typografi'
 import React, { useEffect, useState } from 'react'
 
 import useFetch from '../../data/rest/use-fetch'
@@ -13,8 +12,11 @@ import env from '../../utils/environment'
 import { logger } from '../../utils/logger'
 import { tekst } from '../../utils/tekster'
 import Avkrysset from '../oppsummering/utdrag/avkrysset'
-import Utvidbar from '../utvidbar/utvidbar'
 import Vis from '../vis'
+import Inntil16dager from './innhold/arbeidstaker/inntil16dager'
+import Over16dager from './innhold/arbeidstaker/over16dager'
+import PerioderMedOpphold from './innhold/arbeidstaker/perioder-med-opphold'
+import PerioderUtenOpphold from './innhold/arbeidstaker/perioder-uten-opphold'
 import { Mottaker } from './innhold/kvittering-status'
 
 const Arbeidstaker = () => {
@@ -96,60 +98,16 @@ const Arbeidstaker = () => {
                     <div className="avsnitt">
                         <div className="sendt-inner">
                             <Vis hvis={inntil16dager}>
-                                <Element tag="h2" className="arbeidstaker-tittel">{tekst('kvittering.arbeidstaker.tittel')}</Element>
-                                <Normaltekst tag="span">{tekst('kvittering.arbeidstaker.brodtekst')} </Normaltekst>
+                                <Inntil16dager />
                             </Vis>
                             <Vis hvis={over16dager}>
-                                <Element tag="h2" className="arbeidstaker-tittel">{tekst('kvittering.naeringsdrivende.tittel')}</Element>
-                                <Normaltekst tag="span">{tekst('kvittering.arbeidstaker.over16.brodtekst')} </Normaltekst>
-                                <Utvidbar erApen={false} type="intern" tittel={tekst('kvittering.arbeidstaker.hvorfor-skille-ved-16-dager')}>
-                                    <AlertStripeInfo>{tekst('kvittering.arbeidsgiveren-skal-betale')}</AlertStripeInfo>
-                                </Utvidbar>
-                                <Utvidbar erApen={false} type="intern" tittel={tekst('kvittering.hva-er-inntektsmelding')}>
-                                    <AlertStripeInfo>{tekst('kvittering.arbeidstaker.over16.inntektsmelding.brodtekst')}</AlertStripeInfo>
-                                </Utvidbar>
-                                <div className="avsnitt hva-skjer">
-                                    <Element tag="h2" className="arbeidstaker-tittel">{tekst('kvittering.nav-behandler-soknaden')}</Element>
-                                    <Normaltekst tag="span">{tekst('kvittering.arbeidstaker.saksbehandlingstid')} </Normaltekst>
-                                    <Lenke href={tekst('kvittering.arbeidstaker.saksbehandlingstid.lenke.url')}>
-                                        <Normaltekst tag="span">{tekst('kvittering.arbeidstaker.saksbehandlingstid.lenke')}</Normaltekst>
-                                    </Lenke>.
-                                </div>
-                                <div className="avsnitt">
-                                    <Element tag="h2" className="arbeidstaker-tittel">{tekst('kvittering.naar-blir-pengene')}</Element>
-                                    <Normaltekst tag="span">{tekst('kvittering.arbeidstaker.over16.utbetaling')} </Normaltekst>
-                                </div>
+                                <Over16dager />
                             </Vis>
                             <Vis hvis={perioderUtenOpphold}>
-                                <div className="avsnitt hva-skjer">
-                                    <Element tag="h2" className="arbeidstaker-tittel">{tekst('kvittering.nav-behandler-soknaden')}</Element>
-                                    <Normaltekst tag="span">{tekst('kvittering.arbeidstaker.saksbehandlingstid')} </Normaltekst>
-                                    <Lenke href={tekst('kvittering.arbeidstaker.saksbehandlingstid.lenke.url')}>
-                                        <Normaltekst tag="span">{tekst('kvittering.arbeidstaker.saksbehandlingstid.lenke')}</Normaltekst>
-                                    </Lenke>.
-                                </div>
-                                <div className="avsnitt">
-                                    <Element tag="h2" className="arbeidstaker-tittel">{tekst('kvittering.naar-blir-pengene')}</Element>
-                                    <Normaltekst tag="span">{tekst('kvittering.arbeidstaker.over16.utbetaling')} </Normaltekst>
-                                </div>
+                                <PerioderUtenOpphold />
                             </Vis>
                             <Vis hvis={perioderMedOpphold}>
-                                <Element tag="h2" className="arbeidstaker-tittel">{tekst('kvittering.naeringsdrivende.tittel')}</Element>
-                                <Normaltekst tag="span">{tekst('kvittering.arbeidstaker.med-opphold')} </Normaltekst>
-                                <Utvidbar erApen={false} type="intern" tittel={tekst('kvittering.arbeidstaker.hvorfor-skille-ved-16-dager')}>
-                                    <AlertStripeInfo>{tekst('kvittering.arbeidstaker.hvorfor-inntektsmelding-pa-nytt')}</AlertStripeInfo>
-                                </Utvidbar>
-                                <div className="avsnitt hva-skjer">
-                                    <Element tag="h2" className="arbeidstaker-tittel">{tekst('kvittering.nav-behandler-soknaden')}</Element>
-                                    <Normaltekst tag="span">{tekst('kvittering.arbeidstaker.saksbehandlingstid')} </Normaltekst>
-                                    <Lenke href={tekst('kvittering.arbeidstaker.saksbehandlingstid.lenke.url')}>
-                                        <Normaltekst tag="span">{tekst('kvittering.arbeidstaker.saksbehandlingstid.lenke')}</Normaltekst>
-                                    </Lenke>.
-                                </div>
-                                <div className="avsnitt">
-                                    <Element tag="h2" className="arbeidstaker-tittel">{tekst('kvittering.naar-blir-pengene')}</Element>
-                                    <Normaltekst tag="span">{tekst('kvittering.arbeidstaker.over16.utbetaling')} </Normaltekst>
-                                </div>
+                                <PerioderMedOpphold />
                             </Vis>
                         </div>
                     </div>
