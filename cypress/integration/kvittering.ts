@@ -1,4 +1,5 @@
 import {
+    arbeidsgiverInnenforArbeidsgiverperiodeKvitteringMock,
     arbeidsledigKvitteringMock,
     oppholdUtlandKvitteringMock, selvstendigKvitteringMock,
     sendtArbeidsledigKvitteringMock
@@ -16,7 +17,7 @@ describe('Tester kvittering', () => {
     const arbeidsledigEtter30Dager = sendtArbeidsledigKvitteringMock
     const utlandSoknad = oppholdUtlandKvitteringMock
     const selvstendig = selvstendigKvitteringMock
-    // TODO: const arbeidstakerInnenforArbeidsgiverperiode = arbeidsgiverInnenforArbeidsgiverperiodeKvitteringMock
+    const arbeidstakerInnenforArbeidsgiverperiode = arbeidsgiverInnenforArbeidsgiverperiodeKvitteringMock
     // TODO: const arbeidstakerUtenforArbeidsgiverperiode = arbeidstakerUtenforArbeidsgiverperiodeKvitteringMock
     // TODO: const arbeidstakerOppfolgendeUtenOpphold = arbeidstakerOppfolgendeUtenOppholdKvitteringMock
     // TODO: const arbeidstakerOppfolgendeMedOpphold = arbeidstakerOppfolgendeMedOppholdKvitteringMock
@@ -212,8 +213,50 @@ describe('Tester kvittering', () => {
 
     context.skip('Arbeidstaker', () => {
         it('Innenfor arbeidsgiverperiode', () => {
-            // Samme som arbeidsledig (annen tekst Hva skjer)
-            // Trenger ikke inntektsmelding
+            // Velg søknad
+            cy.get(`#soknader-list-til-behandling article a[href*=${arbeidstakerInnenforArbeidsgiverperiode.id}]`).click()
+
+            // Svar og send
+            cy.contains('Jeg vet at jeg kan miste retten til sykepenger hvis opplysningene jeg gir ikke er riktige eller fullstendige.')
+                .click({ force: true })
+            cy.contains('Gå videre').click()
+            cy.get('.inputPanelGruppe__inner label:nth-child(2) > input[value=NEI]').click({ force: true })
+            cy.contains('Gå videre').click()
+            cy.get('.skjemaelement__label').click({ force: true })
+            cy.contains('Send søknaden').click()
+            cy.url().should('include', `/kvittering/${arbeidstakerInnenforArbeidsgiverperiode.id}`)
+
+            // Sendt datoer
+            cy.get('.kvittering .alertstripe--suksess')
+                .should('contain', 'Søknaden er sendt')
+                .and('not.contain', 'Søknaden er sendt til NAV')
+
+            // TODO: Avkrysset med sendt til arbeidsgiver
+
+            // Hva skjer videre
+            cy.get('.alertstripe.opplysninger.alertstripe--info')
+                .should('contain', 'Hva skjer videre?')
+                .and('contain', 'Du får sykepengene fra arbeidsgiveren din')
+                .and('contain', 'Arbeidsgiveren din betaler de første 16 kalenderdagene av sykefraværet. Hvis du mener sykefraværet har vart lenger enn det, kan du sende søknaden til NAV. Noen arbeidsplasser fortsetter å utbetale sykepenger fra dag 17, men da får de penger tilbake fra NAV.')
+                .and('not.contain', 'Før NAV behandler søknaden')
+                .and('not.contain', 'NAV behandler søknaden')
+                .and('not.contain', 'Når blir pengene utbetalt')
+
+            // TODO: Skal ligge under Hva skjer
+            // Knapperad ( Endre, Ettersend)
+            cy.contains('Endre søknad').should('exist')
+            cy.contains('Send til NAV').should('exist')
+            cy.contains('Send til Arbeidsgiver').should('exist')
+
+            // Oppsummering minimert
+            cy.get('.utvidbar.oppsummering.ekspander.lilla .utvidbar__toggle')
+                .should('contain', 'Oppsummering fra søknaden')
+                .and('have.attr', 'aria-expanded', 'false')
+
+            // Opplysninger minimert
+            cy.get('.utvidbar.ekspander .utvidbar__toggle')
+                .should('contain', 'Opplysninger fra sykmeldingen')
+                .and('have.attr', 'aria-expanded', 'false')
         })
 
         it('Utenfor arbeidsgiverperiode', () => {
@@ -229,12 +272,6 @@ describe('Tester kvittering', () => {
         it('Oppfølgende periode 16 eller mindre dager', () => {
             // Samme som arbeidsledig (annen tekst Hva skjer)
             // Inntektsmelding
-        })
-
-        it('Etter 30 dager', () => {
-            // Samme som arbeidsledig (annen tekst Hva skjer)
-
-            // TODO: Denne dekkes av Arbeidsledig og Arbeidstaker
         })
     })
 })

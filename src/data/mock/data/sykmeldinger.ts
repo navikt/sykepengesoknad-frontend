@@ -995,4 +995,96 @@ export const sykmeldinger: Sykmelding[] = [
         },
         'sendtdato': '2020-06-23T16:07:06.427'
     },
+    {
+        'id': '846bc8ce-4d70-4fdd-b3d1-cc3aee508e90',
+        'startLegemeldtFravaer': null,
+        'skalViseSkravertFelt': false,
+        'identdato': '2020-02-28',
+        'status': 'SENDT',
+        'naermesteLederStatus': 'NEI',
+        'innsendtArbeidsgivernavn': null,
+        'valgtArbeidssituasjon': 'ARBEIDSTAKER',
+        'sporsmal': {
+            'arbeidssituasjon': null,
+            'harForsikring': null,
+            'fravaersperioder': [],
+            'harAnnetFravaer': null
+        },
+        'pasient': {
+            'fnr': null,
+            'fornavn': null,
+            'mellomnavn': null,
+            'etternavn': null
+        },
+        'arbeidsgiver': null,
+        'stillingsprosent': null,
+        'diagnose': {
+            'hoveddiagnose': {
+                'diagnosekode': 'L87',
+                'diagnosesystem': 'Ukjent',
+                'diagnosetekst': 'Ukjent'
+            },
+            'bidiagnoser': null,
+            'fravaersgrunnLovfestet': null,
+            'fravaerBeskrivelse': null,
+            'svangerskap': null,
+            'yrkesskade': null,
+            'yrkesskadeDato': null
+        },
+        'mulighetForArbeid': {
+            'perioder': [
+                {
+                    'grad': 100,
+                    'reisetilskudd': false,
+                    'fom': '2020-01-01',
+                    'tom': '2020-01-10',
+                    'behandlingsdager': null
+                }
+            ],
+            'aktivitetIkkeMulig433': null,
+            'aktivitetIkkeMulig434': null,
+            'aarsakAktivitetIkkeMulig433': null,
+            'aarsakAktivitetIkkeMulig434': null
+        },
+        'friskmelding': {
+            'arbeidsfoerEtterPerioden': null,
+            'hensynPaaArbeidsplassen': null,
+            'antarReturSammeArbeidsgiver': false,
+            'antattDatoReturSammeArbeidsgiver': null,
+            'antarReturAnnenArbeidsgiver': false,
+            'tilbakemeldingReturArbeid': null,
+            'utenArbeidsgiverAntarTilbakeIArbeid': false,
+            'utenArbeidsgiverAntarTilbakeIArbeidDato': null,
+            'utenArbeidsgiverTilbakemelding': null
+        },
+        'utdypendeOpplysninger': {
+            'grupper': []
+        },
+        'arbeidsevne': {
+            'tilretteleggingArbeidsplass': null,
+            'tiltakNAV': null,
+            'tiltakAndre': null
+        },
+        'meldingTilNav': {
+            'navBoerTaTakISaken': false,
+            'navBoerTaTakISakenBegrunnelse': null
+        },
+        'innspillTilArbeidsgiver': 'kjør på',
+        'tilbakedatering': {
+            'dokumenterbarPasientkontakt': null,
+            'tilbakedatertBegrunnelse': null
+        },
+        'bekreftelse': {
+            'utstedelsesdato': null,
+            'sykmelder': null,
+            'sykmelderTlf': null
+        },
+        'mottakendeArbeidsgiver': {
+            'navn': 'Arbeidsgivernavn',
+            'virksomhetsnummer': '123456789',
+            'juridiskOrgnummer': '123123123'
+        },
+        'orgnummer': '2134324',
+        'sendtdato': '2020-06-23T16:29:01.277'
+    },
 ]
