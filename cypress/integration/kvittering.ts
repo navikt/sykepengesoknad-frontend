@@ -1,5 +1,6 @@
 import {
     arbeidsledigKvitteringMock,
+    oppholdUtlandKvitteringMock,
     sendtArbeidsledigKvitteringMock
 } from '../../src/data/mock/data/soknader-integration'
 
@@ -13,7 +14,7 @@ describe('Tester kvittering', () => {
 
     const arbeidsledigSoknad = arbeidsledigKvitteringMock
     const arbeidsledigEtter30Dager = sendtArbeidsledigKvitteringMock
-    // TODO: const utlandSoknad = oppholdUtlandKvitteringMock
+    const utlandSoknad = oppholdUtlandKvitteringMock
     // TODO: const selvstendig = selvstendigKvitteringMock
     // TODO: const arbeidstakerInnenforArbeidsgiverperiode = arbeidsgiverInnenforArbeidsgiverperiodeKvitteringMock
     // TODO: const arbeidstakerUtenforArbeidsgiverperiode = arbeidstakerUtenforArbeidsgiverperiodeKvitteringMock
@@ -106,19 +107,58 @@ describe('Tester kvittering', () => {
         })
     })
 
-    context.skip('Utland', () => {
+    context('Utland', () => {
         it('Nylig sendt', () => {
-            // Samme som arbeidsledig (annen tekst Hva skjer)
-            // Ingen knapperad
-            // Ingen sykmelding
-        })
+            // Velg søknad
+            cy.get(`#soknader-list-til-behandling article a[href*=${utlandSoknad.id}]`).click({ force: true })
 
-        it('Etter 30 dager', () => {
-            // Samme som arbeidsledig (annen tekst Hva skjer)
-            // Ingen knapperad
-            // Ingen sykmelding
+            // Svar og send
+            cy.get('.skjemaelement__input.form-control').focus()
+            cy.get('.flatpickr-calendar').contains('17').click({ force: true })
+            cy.get('.flatpickr-calendar').contains('24').click({ force: true })
+            cy.contains('Gå videre').click()
+            cy.get('.skjemaelement__input').type('Fransk')
+            cy.contains('Søre franske territorier').click({ force: true })
+            cy.contains('Gå videre').click({ force: true })
+            cy.contains('Nei').click({ force: true })
+            cy.contains('Gå videre').click({ force: true })
+            cy.contains('Jeg bekrefter de to punktene ovenfor').click({ force: true })
+            cy.contains('Send søknaden').click({ force: true })
+            cy.url().should('include', `/kvittering/${utlandSoknad.id}`)
 
-            // TODO: Denne dekkes av Arbeidsledig og Utland
+            // Sendt datoer
+            cy.get('.kvittering .alertstripe--suksess')
+                .should('contain', 'Søknaden er sendt til NAV')
+                .and('not.contain', 'Org.nr')
+
+            // Hva skjer videre
+            cy.get('.alertstripe.opplysninger.alertstripe--info')
+                .should('contain', 'Hva skjer videre?')
+                .and('contain', 'Du får svar på om du kan reise')
+                .and('contain', 'NAV vurderer om reisen vil forlenge sykefraværet ditt eller hindre planlagte aktiviteter.')
+                .and('contain', 'Risiko ved reise før du har mottatt svar')
+                .and('contain', 'Du kan risikere at sykepengene stanses i perioden du er på Reise.')
+                .and('contain', 'Sykepengene kan beregnes etter et lavere grunnlag når du er tilbake.')
+                .and('contain', 'Du kan få avslag på videre sykepenger hvis reisen varer fire uker eller mer.')
+                .and('contain', 'Les mer om sykepenger nå du er på reise.')
+                .and('contain', 'Les mer om sykepenger nå du er på reise.')
+                .and('contain', 'NAV behandler søknaden din')   // TODO: Skal ikke være en del av denne kvitteringen
+                .and('contain', 'Saksbehandlingstid avhenger av hvilket fylke du bor i og om det er førstegangs-søknad eller søknad om forlengelse. Finn ut hva som gjelder for ditt fylke her.') // TODO: Skal ikke være en del av denne kvitteringen
+                .and('contain', 'Du søker om sykepenger')
+                .and('contain', 'Etter at sykefraværsperioden er over, søker du om sykepenger på vanlig måte. Du får en melding fra NAV når søknaden er klar til å fylles ut.')
+
+            // Knapperad finnes ikke
+            cy.contains('Endre søknad').should('not.exist')
+            cy.contains('Send til NAV').should('not.exist')
+            cy.contains('Send til Arbeidsgiver').should('not.exist')
+
+            // Oppsummering minimert
+            cy.get('.utvidbar.oppsummering.ekspander.lilla .utvidbar__toggle')
+                .should('contain', 'Oppsummering fra søknaden')
+                .and('have.attr', 'aria-expanded', 'false')
+
+            // Opplysninger finnes ikke
+            cy.contains('Opplysninger fra sykmeldingen').should('not.exist')
         })
     })
 
