@@ -49,8 +49,8 @@ const Arbeidstaker = () => {
     //TODO: legge til vedtaksløsningen
     const inntil16dager = mottaker === RSMottaker.ARBEIDSGIVER
     const over16dager = mottaker === RSMottaker.NAV || mottaker === RSMottaker.ARBEIDSGIVER_OG_NAV
-    const perioderUtenOpphold = true
-    const perioderMedOpphold = true
+    const perioderUtenOpphold = false
+    const perioderMedOpphold = false
     // const over30dagerEllerMotatt = dayjs(new Date()).diff(dayjs(valgtSoknad!.opprettetDato), 'day') > 30
 
     const hentMottaker = () => {

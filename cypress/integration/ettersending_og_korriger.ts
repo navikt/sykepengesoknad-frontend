@@ -70,9 +70,9 @@ describe('Tester ettersending og korrigering', () => {
         cy.url().should('include', `/kvittering/${soknad.id}`)
 
         // Sendt til
-        cy.get('.kvittering .alertstripe--suksess')
-            .should('contain', 'Søknaden er sendt til POSTEN NORGE AS, BÆRUM (Org.nr. 974654458)')
-            .and('contain', 'Søknaden er sendt til NAV')
+        cy.get('.sendt-info')
+            .should('contain', 'POSTEN NORGE AS, BÆRUM (Org.nr. 974654458)')
+            .and('contain', 'NAV')
 
         // Ettersend
         cy.contains('Send til NAV').click()
@@ -109,8 +109,7 @@ describe('Tester ettersending og korrigering', () => {
         cy.get(`#soknader-list-til-behandling article a[href*=${soknad.id}]`).should('not.exist')
         cy.get(`#soknader-sendt article a[href*=${soknad.id}]`)
             .should('contain', 'Gjelder perioden 1. – 24. april 2020')
-            .and('contain', 'Sendt til POSTEN NORGE AS, BÆRUM')
-            .and('contain', 'Sendt til NAV')
+            .and('contain', 'Sendt til POSTEN NORGE AS, BÆRUM og NAV')
 
         cy.get('#soknader-list-til-behandling article .inngangspanel__status')
             .should('contain', 'Utkast til endring')
