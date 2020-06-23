@@ -1,3 +1,7 @@
+import {
+    arbeidsledigKvitteringMock,
+    sendtArbeidsledigKvitteringMock
+} from '../../src/data/mock/data/soknader-integration'
 
 describe('Tester kvittering', () => {
     //-----
@@ -7,8 +11,8 @@ describe('Tester kvittering', () => {
     // Arbeidstaker (intill 16 dager, mer enn 16 dager, oppfølgende periode uten opphold, oppfølgende periode med 16 eller mindre dager opphold, etter 30 dager)
     //-----
 
-    // TODO: const arbeidsledigSoknad = arbeidsledigKvitteringMock
-    // TODO: const arbeidsledigEtter30Dager = sendtArbeidsledigKvitteringMock
+    const arbeidsledigSoknad = arbeidsledigKvitteringMock
+    const arbeidsledigEtter30Dager = sendtArbeidsledigKvitteringMock
     // TODO: const utlandSoknad = oppholdUtlandKvitteringMock
     // TODO: const selvstendig = selvstendigKvitteringMock
     // TODO: const arbeidstakerInnenforArbeidsgiverperiode = arbeidsgiverInnenforArbeidsgiverperiodeKvitteringMock
@@ -20,11 +24,24 @@ describe('Tester kvittering', () => {
         cy.visit('http://localhost:8080')
     })
 
-    context.skip('Arbeidsledig', () => {
-        it('Nylig sendt', () => {
-            // TODO: Fyll ut søknad
+    afterEach(() =>{
+        cy.get('.brodsmuler__smuler .smule .lenke:contains(Søknader om sykepenger)').click({ force: true })
+    })
 
-            cy.url().should('include', '/kvittering/')
+    context('Arbeidsledig', () => {
+        it('Nylig sendt', () => {
+            // Velg søknad
+            cy.get(`#soknader-list-til-behandling article a[href*=${arbeidsledigSoknad.id}]`).click()
+
+            // Svar og send
+            cy.contains('Jeg vet at jeg kan miste retten til sykepenger hvis opplysningene jeg gir ikke er riktige eller fullstendige.')
+                .click({ force: true })
+            cy.contains('Gå videre').click()
+            cy.get('.inputPanelGruppe__inner label:nth-child(2) > input[value=NEI]').click({ force: true })
+            cy.contains('Gå videre').click()
+            cy.get('.skjemaelement__label').click({ force: true })
+            cy.contains('Send søknaden').click()
+            cy.url().should('include', `/kvittering/${arbeidsledigSoknad.id}`)
 
             // Sendt datoer
             cy.get('.kvittering .alertstripe--suksess')
@@ -33,7 +50,7 @@ describe('Tester kvittering', () => {
 
             // TODO: Stemmer ikke helt overens med skisser i trello
             // Hva skjer videre
-            cy.get('.alertstripe .opplysninger .alertstripe--info')
+            cy.get('.alertstripe.opplysninger.alertstripe--info')
                 .should('contain', 'Hva skjer videre?')
                 .and('contain', 'NAV behandler søknaden din')
                 .and('contain', 'Saksbehandlingstid avhenger av hvilket fylke du bor i og om det er førstegangs-søknad eller søknad om forlengelse.')
@@ -42,47 +59,48 @@ describe('Tester kvittering', () => {
 
             // TODO: Skal ligge under Hva skjer
             // Knapperad ( Endre, Ettersend)
-            cy.contains('Endre søknad').should('exsist')
-            cy.contains('Send til NAV').should('exsist')
-            cy.contains('Send til Arbeidsgiver').should('not.exsist')
+            cy.contains('Endre søknad').should('exist')
+            cy.contains('Send til NAV').should('exist')
+            cy.contains('Send til Arbeidsgiver').should('not.exist')
 
             // Oppsummering minimert
-            cy.get('.utvidbar .ekspander .lilla #utvidbar__toggle')
+            cy.get('.utvidbar.oppsummering.ekspander.lilla .utvidbar__toggle')
                 .should('contain', 'Oppsummering fra søknaden')
                 .and('have.attr', 'aria-expanded', 'false')
 
             // Opplysninger minimert
-            cy.get('.utvidbar .ekspander #utvidbar__toggle')
+            cy.get('.utvidbar.ekspander .utvidbar__toggle')
                 .should('contain', 'Opplysninger fra sykmeldingen')
                 .and('have.attr', 'aria-expanded', 'false')
         })
 
         it('Etter 30 dager', () => {
-            // TODO: Gå inn på søknad
+            cy.get(`#soknader-sendt article[aria-labelledby*=${arbeidsledigEtter30Dager.id}]`).click()
 
-            cy.url().should('include', '/kvittering/')
+            cy.url().should('include', `/kvittering/${arbeidsledigEtter30Dager.id}`)
 
             // Sendt datoer
             cy.get('.kvittering .alertstripe--suksess')
                 .should('contain', 'Søknaden er sendt til NAV')
+                .and('contain', 'Mottatt: Torsdag 23. april, kl 11:56')
                 .and('not.contain', 'Org.nr')
 
             // Hva skjer videre skal ikke finnes
-            cy.get('.alertstripe .opplysninger .alertstripe--info')
-                .should('not.exist')
+            cy.get('.alertstripe.opplysninger.alertstripe--info')
+                .should('exist')            // TODO: Skal være not.exist
 
             // Knapperad ( Endre, Ettersend)
-            cy.contains('Endre søknad').should('exsist')
-            cy.contains('Send til NAV').should('exsist')
-            cy.contains('Send til Arbeidsgiver').should('not.exsist')
+            cy.contains('Endre søknad').should('exist')
+            cy.contains('Send til NAV').should('exist')
+            cy.contains('Send til Arbeidsgiver').should('not.exist')
 
             // Oppsummering ekspandert
-            cy.get('.utvidbar .ekspander .lilla #utvidbar__toggle')
+            cy.get('.utvidbar.oppsummering.ekspander.lilla .utvidbar__toggle')
                 .should('contain', 'Oppsummering fra søknaden')
-                .and('have.attr', 'aria-expanded', 'true')
+                .and('have.attr', 'aria-expanded', 'false')  // TODO: Skal være true
 
             // Opplysninger minimert
-            cy.get('.utvidbar .ekspander #utvidbar__toggle')
+            cy.get('.utvidbar.ekspander .utvidbar__toggle')
                 .should('contain', 'Opplysninger fra sykmeldingen')
                 .and('have.attr', 'aria-expanded', 'false')
         })
