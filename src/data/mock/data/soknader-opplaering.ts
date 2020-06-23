@@ -2508,4 +2508,11 @@ export const oppholdUtland: RSSoknad = {
     } ],
     'egenmeldtSykmelding': null
 }
-export const soknaderOpplaering = [ behandlingsdager, arbeidstaker, arbeidstakerGradert, arbeidsledig, frilanser, oppholdUtland ] as RSSoknad[]
+export const soknaderOpplaering = [
+    behandlingsdager,
+    arbeidstaker,
+    arbeidstakerGradert,
+    arbeidsledig,
+    frilanser,
+    oppholdUtland
+] as RSSoknad[]
