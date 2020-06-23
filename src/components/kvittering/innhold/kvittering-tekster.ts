@@ -74,8 +74,10 @@ const KvitteringTekster: any = {
         'kvittering.arbeidstaker.brodtekst': 'Arbeidsgiveren din betaler de første 16 kalenderdagene av sykefraværet. Hvis du mener sykefraværet har vart lenger enn det, kan du sende søknaden til NAV. Noen arbeidsplasser fortsetter å utbetale sykepenger fra dag 17, men da får de penger tilbake fra NAV.',
         'kvittering.arbeidstaker.over16.brodtekst': 'Sykefraværet ditt er lengre enn 16 kalenderdager. Det betyr at du får sykepenger utbetalt av NAV. Noen arbeidsgplasser fortsetter å utbetale sykepenger fra dag 17, men da får de penger tilbake fra NAV senere. Arbeidsgiveren din må derfor sende oss inntektsmelding så fort som mulig.',
         'kvittering.arbeidstaker.over16.inntektsmelding.brodtekst': 'Arbeidsplassen din sender inntektsopplysninger og annen informasjon som NAV trenger for å behandle søkaden din. Inntektsmeldingen senden digitalt fra arbeidsplssens lønns og personalsystemet eller fra Altinn.no.',
-        'kvittering.arbeidstaker.over16.utbetaling': 'Blir søknaden din innvilget før den 15. i denne måneden, blir pengene utbetalt innen den 25. samme måned. Blir det innvilget etter den 15. i måneden, utbetales pengene innen 5 dager.'
+        'kvittering.arbeidstaker.over16.utbetaling': 'Blir søknaden din innvilget før den 15. i denne måneden, blir pengene utbetalt innen den 25. samme måned. Blir det innvilget etter den 15. i måneden, utbetales pengene innen 5 dager.',
 
+        'kvittering.arbeidstaker.med-opphold': 'Du har vært friskmeldt inelled 16 dager siden sist du søkte om sykepenger. Da må arbeidsgiver sende oss inntektsmelding på nytt. Hør gjerne med arbeidsgiveren din hvis du er usikker på om den er sendt.',
+        'kvittering.arbeidstaker.hvorfor-inntektsmelding-pa-nytt': 'Hvorfor inntektsmeldingen må sendes på nytt?'
     }, 'en': {}
 }
 
