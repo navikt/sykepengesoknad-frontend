@@ -1,6 +1,6 @@
 import {
     arbeidsledigKvitteringMock,
-    oppholdUtlandKvitteringMock,
+    oppholdUtlandKvitteringMock, selvstendigKvitteringMock,
     sendtArbeidsledigKvitteringMock
 } from '../../src/data/mock/data/soknader-integration'
 
@@ -15,7 +15,7 @@ describe('Tester kvittering', () => {
     const arbeidsledigSoknad = arbeidsledigKvitteringMock
     const arbeidsledigEtter30Dager = sendtArbeidsledigKvitteringMock
     const utlandSoknad = oppholdUtlandKvitteringMock
-    // TODO: const selvstendig = selvstendigKvitteringMock
+    const selvstendig = selvstendigKvitteringMock
     // TODO: const arbeidstakerInnenforArbeidsgiverperiode = arbeidsgiverInnenforArbeidsgiverperiodeKvitteringMock
     // TODO: const arbeidstakerUtenforArbeidsgiverperiode = arbeidstakerUtenforArbeidsgiverperiodeKvitteringMock
     // TODO: const arbeidstakerOppfolgendeUtenOpphold = arbeidstakerOppfolgendeUtenOppholdKvitteringMock
@@ -162,15 +162,51 @@ describe('Tester kvittering', () => {
         })
     })
 
-    context.skip('Selvstendig', () => {
+    context('Selvstendig', () => {
         it('Nylig sendt', () => {
-            // Samme som arbeidsledig (annen tekst Hva skjer)
-        })
+            // Velg søknad
+            cy.get(`#soknader-list-til-behandling article a[href*=${selvstendig.id}]`).click()
 
-        it('Etter 30 dager', () => {
-            // Samme som arbeidsledig (annen tekst Hva skjer)
+            // Svar og send
+            cy.contains('Jeg vet at jeg kan miste retten til sykepenger hvis opplysningene jeg gir ikke er riktige eller fullstendige.')
+                .click({ force: true })
+            cy.contains('Gå videre').click()
+            cy.get('.inputPanelGruppe__inner label:nth-child(2) > input[value=NEI]').click({ force: true })
+            cy.contains('Gå videre').click()
+            cy.get('.skjemaelement__label').click({ force: true })
+            cy.contains('Send søknaden').click()
+            cy.url().should('include', `/kvittering/${selvstendig.id}`)
 
-            // TODO: Denne dekkes av Arbeidsledig og Selvstendig
+            // Sendt datoer
+            cy.get('.kvittering .alertstripe--suksess')
+                .should('contain', 'Søknaden er sendt til NAV')
+                .and('not.contain', 'Dato sendt:')          // TODO: Skal være contain, står nå Mottatt:
+                .and('not.contain', 'Org.nr')
+
+            // TODO: Stemmer ikke helt overens med skisser i trello
+            // Hva skjer videre
+            cy.get('.alertstripe.opplysninger.alertstripe--info')
+                .should('contain', 'Hva skjer videre?')
+                .and('contain', 'NAV behandler søknaden din')
+                .and('contain', 'Saksbehandlingstid avhenger av hvilket fylke du bor i og om det er førstegangs-søknad eller søknad om forlengelse.')
+                .and('contain', 'Når blir pengene utbetalt?')
+                .and('contain', 'Det er ulike regler for sykepenger avhengig av hva slags arbeid du har eller hvilken situasjon du er i.')
+
+            // TODO: Skal ligge under Hva skjer
+            // Knapperad ( Endre, Ettersend)
+            cy.contains('Endre søknad').should('exist')
+            cy.contains('Send til NAV').should('exist')
+            cy.contains('Send til Arbeidsgiver').should('not.exist')
+
+            // Oppsummering minimert
+            cy.get('.utvidbar.oppsummering.ekspander.lilla .utvidbar__toggle')
+                .should('contain', 'Oppsummering fra søknaden')
+                .and('have.attr', 'aria-expanded', 'false')
+
+            // Opplysninger minimert
+            cy.get('.utvidbar.ekspander .utvidbar__toggle')
+                .should('contain', 'Opplysninger fra sykmeldingen')
+                .and('have.attr', 'aria-expanded', 'false')
         })
     })
 

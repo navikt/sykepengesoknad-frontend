@@ -3394,6 +3394,88 @@ export const oppholdUtlandKvitteringMock: RSSoknad = {
     'egenmeldtSykmelding': null
 }
 
+export const selvstendigKvitteringMock: RSSoknad = {
+    'id': '8e267bc7-b213-4f19-a423-1543e09e0dc1',
+    'sykmeldingId': 'f2e93cca-eea8-464b-b942-ee1821169885',
+    'soknadstype': 'SELVSTENDIGE_OG_FRILANSERE',
+    'status': 'NY',
+    'fom': '2020-06-01',
+    'tom': '2020-06-22',
+    'opprettetDato': '2020-06-23',
+    'sendtTilNAVDato': null,
+    'sendtTilArbeidsgiverDato': null,
+    'avbruttDato': null,
+    'startSykeforlop': '2020-06-01',
+    'sykmeldingUtskrevet': '2020-06-01',
+    'arbeidsgiver': null,
+    'korrigerer': null,
+    'korrigertAv': null,
+    'arbeidssituasjon': 'NAERINGSDRIVENDE',
+    'soknadPerioder': [
+        {
+            'fom': '2020-06-01',
+            'tom': '2020-06-22',
+            'grad': 100,
+            'sykmeldingstype': 'AKTIVITET_IKKE_MULIG'
+        }
+    ],
+    'sporsmal': [
+        {
+            'id': '161',
+            'tag': 'ANSVARSERKLARING',
+            'sporsmalstekst': 'Jeg vet at jeg kan miste retten til sykepenger hvis opplysningene jeg gir ikke er riktige eller fullstendige. Jeg vet også at NAV kan holde igjen eller kreve tilbake penger, og at å gi feil opplysninger kan være straffbart.',
+            'undertekst': null,
+            'svartype': 'CHECKBOX_PANEL',
+            'min': null,
+            'max': null,
+            'pavirkerAndreSporsmal': false,
+            'kriterieForVisningAvUndersporsmal': null,
+            'svar': [],
+            'undersporsmal': []
+        },
+        {
+            'id': '185',
+            'tag': 'UTDANNING',
+            'sporsmalstekst': 'Har du vært under utdanning i løpet av perioden 1. - 22. juni 2020?',
+            'undertekst': null,
+            'svartype': 'JA_NEI',
+            'min': null,
+            'max': null,
+            'pavirkerAndreSporsmal': false,
+            'kriterieForVisningAvUndersporsmal': null,
+            'svar': [],
+            'undersporsmal': []
+        },
+        {
+            'id': '188',
+            'tag': 'VAER_KLAR_OVER_AT',
+            'sporsmalstekst': 'Viktig å være klar over:',
+            'undertekst': '<ul><li>Du kan bare få sykepenger hvis det er din egen sykdom eller skade som hindrer deg i å jobbe. Sosiale eller økonomiske problemer gir ikke rett til sykepenger.</li><li>Du kan miste retten til sykepenger hvis du nekter å opplyse om din egen arbeidsevne, eller hvis du ikke tar imot behandling eller tilrettelegging.</li><li>Retten til sykepenger gjelder bare inntekt du har mottatt som lønn og betalt skatt av på sykmeldingstidspunktet.</li><li>NAV kan innhente opplysninger som er nødvendige for å behandle søknaden.</li><li>Du må melde fra til NAV hvis du satt i varetekt, sonet straff eller var under forvaring i sykmeldingsperioden.</li><li>Fristen for å søke sykepenger er som hovedregel 3 måneder</li></ul><p>Du kan lese mer om rettigheter og plikter på <a href="https://www.nav.no/sykepenger" target="_blank">nav.no/sykepenger</a>.</p>',
+            'svartype': 'IKKE_RELEVANT',
+            'min': null,
+            'max': null,
+            'pavirkerAndreSporsmal': false,
+            'kriterieForVisningAvUndersporsmal': null,
+            'svar': [],
+            'undersporsmal': []
+        },
+        {
+            'id': '189',
+            'tag': 'BEKREFT_OPPLYSNINGER',
+            'sporsmalstekst': 'Jeg har lest all informasjonen jeg har fått i søknaden og bekrefter at opplysningene jeg har gitt er korrekte.',
+            'undertekst': null,
+            'svartype': 'CHECKBOX_PANEL',
+            'min': null,
+            'max': null,
+            'pavirkerAndreSporsmal': false,
+            'kriterieForVisningAvUndersporsmal': null,
+            'svar': [],
+            'undersporsmal': []
+        }
+    ],
+    'egenmeldtSykmelding': false
+}
+
 export const soknaderIntegration = [
     utgattSoknad,
     arbeidstakersoknadMedUtenlandsoppholdSoktSykepenger,
@@ -3404,4 +3486,5 @@ export const soknaderIntegration = [
     arbeidsledigKvitteringMock,
     sendtArbeidsledigKvitteringMock,
     oppholdUtlandKvitteringMock,
+    selvstendigKvitteringMock,
 ] as RSSoknad[]
