@@ -1,6 +1,7 @@
 import {
     arbeidsgiverInnenforArbeidsgiverperiodeKvitteringMock,
     arbeidsledigKvitteringMock,
+    arbeidstakerOppfolgendeMedOppholdKvitteringMock,
     arbeidstakerOppfolgendeUtenOppholdKvitteringMock,
     arbeidstakerUtenforArbeidsgiverperiodeKvitteringMock,
     oppholdUtlandKvitteringMock,
@@ -23,7 +24,7 @@ describe('Tester kvittering', () => {
     const arbeidstakerInnenforArbeidsgiverperiode = arbeidsgiverInnenforArbeidsgiverperiodeKvitteringMock
     const arbeidstakerUtenforArbeidsgiverperiode = arbeidstakerUtenforArbeidsgiverperiodeKvitteringMock
     const arbeidstakerOppfolgendeUtenOpphold = arbeidstakerOppfolgendeUtenOppholdKvitteringMock
-    // TODO: const arbeidstakerOppfolgendeMedOpphold = arbeidstakerOppfolgendeMedOppholdKvitteringMock
+    const arbeidstakerOppfolgendeMedOpphold = arbeidstakerOppfolgendeMedOppholdKvitteringMock
 
     before(() => {
         cy.visit('http://localhost:8080')
@@ -360,8 +361,52 @@ describe('Tester kvittering', () => {
         })
 
         it('Oppfølgende periode 16 eller mindre dager', () => {
-            // Samme som arbeidsledig (annen tekst Hva skjer)
-            // Inntektsmelding
+            // Velg søknad
+            cy.get(`#soknader-list-til-behandling article a[href*=${arbeidstakerOppfolgendeMedOpphold.id}]`).click()
+
+            // Svar og send
+            cy.contains('Jeg vet at jeg kan miste retten til sykepenger hvis opplysningene jeg gir ikke er riktige eller fullstendige.')
+                .click({ force: true })
+            cy.contains('Gå videre').click()
+            cy.get('.inputPanelGruppe__inner label:nth-child(2) > input[value=NEI]').click({ force: true })
+            cy.contains('Gå videre').click()
+            cy.get('.skjemaelement__label').click({ force: true })
+            cy.contains('Send søknaden').click()
+            cy.url().should('include', `/kvittering/${arbeidstakerOppfolgendeMedOpphold.id}`)
+
+            // Sendt datoer
+            cy.get('.kvittering .alertstripe--suksess')
+                .should('contain', 'Søknaden er sendt')
+
+            // TODO: Avkrysset med sendt til NAV
+
+            // Hva skjer videre
+            cy.get('.alertstripe.opplysninger.alertstripe--info')
+                .should('contain', 'Hva skjer videre?')
+                .and('contain', 'Før NAV behandler søknaden')
+                .and('contain', 'Du har vært friskmeldt inntil 16 dager siden sist du søkte om sykepenger. Da må arbeidsgiver sende oss inntektsmelding på nytt. Hør gjerne med arbeidsgiveren din hvis du er usikker på om den er sendt.')
+                .and('contain', 'Hvorfor inntektsmeldingen må sendes på nytt?')
+                .and('contain', 'NAV behandler søknaden')
+                .and('contain', 'Saksbehandlingstidene kan variere noe. Sjekk saksbehandlingstidene i ditt fylke')
+                .and('contain', 'Når blir pengene utbetalt')
+                .and('contain', 'Blir søknaden din innvilget før den 15. i denne måneden, blir pengene utbetalt innen den 25. samme måned. Blir det innvilget etter den 15. i måneden, utbetales pengene innen 5 dager.')
+                .and('not.contain', 'Du får sykepengene fra arbeidsgiveren din')
+
+            // TODO: Skal ligge under Hva skjer
+            // Knapperad ( Endre, Ettersend)
+            cy.contains('Endre søknad').should('exist')
+            cy.contains('Send til NAV').should('exist')
+            cy.contains('Send til Arbeidsgiver').should('exist')
+
+            // Oppsummering minimert
+            cy.get('.utvidbar.oppsummering.ekspander.lilla .utvidbar__toggle')
+                .should('contain', 'Oppsummering fra søknaden')
+                .and('have.attr', 'aria-expanded', 'false')
+
+            // Opplysninger minimert
+            cy.get('.utvidbar.ekspander .utvidbar__toggle')
+                .should('contain', 'Opplysninger fra sykmeldingen')
+                .and('have.attr', 'aria-expanded', 'false')
         })
     })
 })
