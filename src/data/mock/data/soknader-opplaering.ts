@@ -1,4 +1,5 @@
 import { RSSoknad } from '../../../types/rs-types/rs-soknad'
+import { arbeidstaker50, arbeidstaker100, frilanserSykmelding } from './sykmeldinger'
 
 export const behandlingsdager: RSSoknad = {
     'id': 'bcb032ac-b6dd-4ae7-8e73-9e64f1b35182',
@@ -315,7 +316,7 @@ export const behandlingsdager: RSSoknad = {
 }
 export const arbeidstaker: RSSoknad = {
     'id': 'faba11f5-c4f2-4647-8c8a-58b28ce2f3ef',
-    'sykmeldingId': '7e90121c-b64b-4a1c-b7a5-93c9d95aba47',
+    'sykmeldingId': arbeidstaker100.id,
     'soknadstype': 'ARBEIDSTAKERE',
     'status': 'NY',
     'fom': '2020-04-01',
@@ -864,7 +865,7 @@ export const arbeidstaker: RSSoknad = {
 }
 export const arbeidstakerGradert: RSSoknad = {
     'id': '5b769c04-e171-47c9-b79b-23ab8fce331e',
-    'sykmeldingId': 'ee4540e3-eba6-46cb-b90f-05747ddb1537',
+    'sykmeldingId': arbeidstaker50.id,
     'soknadstype': 'ARBEIDSTAKERE',
     'status': 'NY',
     'fom': '2020-04-01',
@@ -1981,7 +1982,7 @@ export const arbeidsledig: RSSoknad = {
 }
 export const frilanser: RSSoknad = {
     'id': 'a8e40578-682b-4a04-bfda-b7768af2ae13',
-    'sykmeldingId': 'baf4a9ab-cc9b-42af-bba3-67cd6ca06388',
+    'sykmeldingId': frilanserSykmelding.id,
     'soknadstype': 'SELVSTENDIGE_OG_FRILANSERE',
     'status': 'NY',
     'fom': '2020-04-01',
