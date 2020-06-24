@@ -47,6 +47,11 @@ export interface SykmeldingPeriode {
     redusertVenteperiode?: boolean | null;
 }
 
+export interface Datospenn {
+    fom: string | null;
+    tom: string | null;
+}
+
 export interface Sykmelding {
     id: string;
     startLegemeldtFravaer: string | null;
@@ -68,7 +73,7 @@ export interface Sykmelding {
     sporsmal: {
         harForsikring: boolean | null;
         'arbeidssituasjon': RSArbeidssituasjonType | null;
-        'fravaersperioder': any;
+        'fravaersperioder': Datospenn[] | null;
         'harAnnetFravaer': boolean | null;
     };
     pasient: {

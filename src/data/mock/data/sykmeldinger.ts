@@ -17,8 +17,11 @@ export const frilanserSykmelding: Sykmelding = {
     'sporsmal': {
         'arbeidssituasjon': 'FRILANSER',
         'harForsikring': false,
-        'fravaersperioder': [],
-        'harAnnetFravaer': null
+        'fravaersperioder': [ {
+            fom: '2020-01-01',
+            tom: '2020-06-01'
+        } ],
+        'harAnnetFravaer': false
     },
     'pasient': {
         'fnr': '31057023263',

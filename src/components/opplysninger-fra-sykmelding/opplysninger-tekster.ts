@@ -13,8 +13,9 @@ const OpplysningerTekster: any = {
         'sykepengesoknad.status.AVBRUTT': 'Avbrutt av deg',
         'sykepengesoknad.sykmelding-utdrag.forsikring-ja': 'Ja',
         'sykepengesoknad.sykmelding-utdrag.forsikring-nei': 'Har ikke forsikring som gjelder de første 16 dagene av sykefraværet',
-        'sykepengesoknad.sykmelding-utdrag.forsikring': 'Forsikring'
-
+        'sykepengesoknad.sykmelding-utdrag.forsikring': 'Forsikring',
+        'sykepengesoknad.sykmelding-utdrag.egenmelding-papir': 'Egenmelding og/eller sykmelding på papir',
+        'sykepengesoknad.sykmelding-utdrag.egenmelding-papir-nei': 'Har ikke hatt egenmelding og/eller sykmelding på papir',
     }, 'en': {}
 }
 
