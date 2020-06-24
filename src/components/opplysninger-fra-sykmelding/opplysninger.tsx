@@ -12,6 +12,8 @@ import ArbeidssituasjonInfo from './arbeidssituasjon-info'
 import plasterHover from './plaster-hover.svg'
 import plaster from './plaster.svg'
 import SykmeldingDato from './sykmelding-dato'
+import ForsikringInfo from './sykmelding-forsikring'
+import FravaersperioderInfo from './sykmelding-fravaersperioder'
 import SykmeldingPerioder from './sykmelding-perioder'
 
 interface OpplysningerProps {
@@ -41,6 +43,8 @@ const Opplysninger = ({ ekspandert }: OpplysningerProps) => {
                 <ArbeidsgiverInfo />
                 <SykmeldingDato />
                 <ArbeidssituasjonInfo />
+                <FravaersperioderInfo />
+                <ForsikringInfo />
             </div>
         </Utvidbar>
     )

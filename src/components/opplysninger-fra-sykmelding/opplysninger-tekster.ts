@@ -10,7 +10,11 @@ const OpplysningerTekster: any = {
         'din-sykmelding.arbeidssituasjon.alternativ.arbeidsledig': 'Jeg er arbeidsledig',
         'din-sykmelding.arbeidssituasjon.alternativ.arbeidstaker': 'Jeg er ansatt',
         'sykepengesoknad.sykmelding-utdrag.dato-sykmeldingen-ble-skrevet': 'Dato sykmeldingen ble skrevet',
-        'sykepengesoknad.status.AVBRUTT': 'Avbrutt av deg'
+        'sykepengesoknad.status.AVBRUTT': 'Avbrutt av deg',
+        'sykepengesoknad.sykmelding-utdrag.forsikring-ja': 'Ja',
+        'sykepengesoknad.sykmelding-utdrag.forsikring-nei': 'Har ikke forsikring som gjelder de første 16 dagene av sykefraværet',
+        'sykepengesoknad.sykmelding-utdrag.forsikring': 'Forsikring'
+
     }, 'en': {}
 }
 
