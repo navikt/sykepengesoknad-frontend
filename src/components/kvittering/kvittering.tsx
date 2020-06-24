@@ -13,17 +13,16 @@ import Opplysninger from '../opplysninger/opplysninger'
 import Oppsummering from '../oppsummering/oppsummering'
 import Vis from '../vis'
 import AlleAndre from './alle-andre'
+import Arbeidstaker from './arbeidstaker'
 
 const Kvittering = () => {
-    const { valgtSoknad, setValgtSoknad, soknader, sykmeldinger, valgtSykmelding, setValgtSykmelding, feilmeldingTekst } = useAppStore()
+    const { valgtSoknad, setValgtSoknad, soknader, feilmeldingTekst } = useAppStore()
     const { id } = useParams()
 
     useEffect(() => {
         if (!valgtSoknad) {
             const filtrertSoknad = soknader.find(soknad => soknad.id === id)
             setValgtSoknad(filtrertSoknad)
-            const sykmelding = sykmeldinger.find(sm => sm.id === filtrertSoknad?.sykmeldingId)
-            setValgtSykmelding(sykmelding)
         }
         // eslint-disable-next-line
     }, [])
@@ -34,9 +33,9 @@ const Kvittering = () => {
         if (valgtSoknad!.soknadstype === RSSoknadstype.OPPHOLD_UTLAND) {
             return <AlleAndre />
         }
-        switch (valgtSykmelding!.valgtArbeidssituasjon) {
+        switch (valgtSoknad!.arbeidssituasjon) {
             case RSArbeidssituasjon.ARBEIDSTAKER:
-                return null
+                return <Arbeidstaker />
             default:
                 return <AlleAndre />
         }
