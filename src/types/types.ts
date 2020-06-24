@@ -58,12 +58,12 @@ export interface Sykmelding {
     erPapirsykmelding?: boolean | null;
     innsendtArbeidsgivernavn: string | null;
     valgtArbeidssituasjon: RSArbeidssituasjonType | null;
-    mottakendeArbeidsgiver: {
+    mottakendeArbeidsgiver?: {
         navn: string;
         virksomhetsnummer: string;
         juridiskOrgnummer: string;
     } | null;
-    orgnummer: string | null;
+    orgnummer?: string | null;
     sendtdato: string;
     sporsmal: {
         harForsikring: boolean | null;

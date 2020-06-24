@@ -79,7 +79,6 @@ describe('Tester søknad om å beholde sykepenger utenfor EØS', () => {
         cy.url().should('equal', 'http://localhost:8080/')
 
         cy.get('.typo-sidetittel').should('be.visible').and('have.text', 'Søknader om sykepenger')
-        cy.contains('Søknad om å beholde sykepenger utenfor EØS').should('not.exist')
+        cy.get(`#soknader-list-til-behandling article a[href*=${soknad.id}]`).should('not.exist')
     })
 })
-
