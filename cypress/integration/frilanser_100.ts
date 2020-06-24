@@ -1,12 +1,11 @@
-import { soknaderOpplaering as soknader } from '../../src/data/mock/data/soknader-opplaering'
-import { RSSoknad } from '../../src/types/rs-types/rs-soknad'
+import { frilanser } from '../../src/data/mock/data/soknader-opplaering'
 
 describe('Tester frilansersøknad', () => {
     //-----
     // Sykmelding: baf4a9ab-cc9b-42af-bba3-67cd6ca06388, frilanser - 100%
     // Søknad: a8e40578-682b-4a04-bfda-b7768af2ae13, fom: 1.4.20, tom: 24.4.20
     //-----
-    const soknad = soknader.find((sok: RSSoknad) => sok.id === 'a8e40578-682b-4a04-bfda-b7768af2ae13')!
+    const soknad = frilanser
 
     before(() => {
         cy.visit('http://localhost:8080')
@@ -23,7 +22,6 @@ describe('Tester frilansersøknad', () => {
 
         // Sykmelding
         cy.contains('1. april - 24. april 2020 • 24 dager')
-        cy.contains('LOMMEN BARNEHAVE')
         cy.contains('Opplysninger fra sykmeldingen').click()
 
         // Godkjenne ANSVARSERKLARING

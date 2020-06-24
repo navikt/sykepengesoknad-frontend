@@ -1,10 +1,7 @@
 import { arbeidstakerGradert } from '../../src/data/mock/data/soknader-opplaering'
 
 describe('Tester arbeidstakersøknad - gradert 50%', () => {
-    //-----
-    // Sykmelding: ee4540e3-eba6-46cb-b90f-05747ddb1537, arbeidstaker - 50%
-    // Søknad: 5b769c04-e171-47c9-b79b-23ab8fce331e, fom: 1.4.20, tom: 24.4.20
-    //-----
+
     const soknad = arbeidstakerGradert
 
     before(() => {
@@ -22,7 +19,7 @@ describe('Tester arbeidstakersøknad - gradert 50%', () => {
 
         // Sykmelding
         cy.contains('1. april - 24. april 2020 • 24 dager')
-        cy.contains('LOMMEN BARNEHAVE')
+        cy.contains('POSTEN NORGE AS, BÆRUM')
         cy.contains('Opplysninger fra sykmeldingen').click()
 
         // Godkjenne ANSVARSERKLARING

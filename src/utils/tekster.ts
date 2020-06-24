@@ -1,6 +1,6 @@
 import BannerTekster from '../components/banner/banner-tekster'
 import KvitteringTekster from '../components/kvittering/innhold/kvittering-tekster'
-import OpplysningerTekster from '../components/opplysninger/opplysninger-tekster'
+import OpplysningerTekster from '../components/opplysninger-fra-sykmelding/opplysninger-tekster'
 import OppsummeringTekster from '../components/oppsummering/oppsummering-tekster'
 import SoknadIntroTekster from '../components/soknad-intro/soknad-intro-tekster'
 import TeaserTekster from '../components/soknader/teaser/teaser-tekster'

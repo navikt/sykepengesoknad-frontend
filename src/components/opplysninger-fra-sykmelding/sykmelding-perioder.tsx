@@ -3,7 +3,6 @@ import { EtikettLiten, Normaltekst } from 'nav-frontend-typografi'
 import React from 'react'
 
 import { useAppStore } from '../../data/stores/app-store'
-import { RSSoknadstype } from '../../types/rs-types/rs-soknadstype'
 import { SykmeldingPeriode } from '../../types/types'
 import { getDuration } from '../../utils/dato-utils'
 import { erOppdelt } from '../../utils/periode-utils'
@@ -14,7 +13,6 @@ import Vis from '../vis'
 
 const SykmeldingPerioder = () => {
     const { valgtSoknad, valgtSykmelding } = useAppStore()
-    const visBjorn = valgtSoknad!.soknadstype === RSSoknadstype.ARBEIDSLEDIG || valgtSoknad!.soknadstype === RSSoknadstype.SELVSTENDIGE_OG_FRILANSERE
 
     if (!valgtSykmelding) {
         return null
@@ -34,7 +32,7 @@ const SykmeldingPerioder = () => {
                     </div>
                 )
             })}
-            <Vis hvis={erOppdelt(valgtSoknad!, valgtSykmelding) && visBjorn}>
+            <Vis hvis={erOppdelt(valgtSoknad!, valgtSykmelding)}>
                 <Bjorn className='' nokkel='sykepengesoknad.sykmelding-utdrag.oppdelt.bjorn' />
             </Vis>
         </div>

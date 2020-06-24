@@ -8,14 +8,14 @@ import { tekst } from '../../utils/tekster'
 const SykmeldingDato = () => {
     const { valgtSykmelding } = useAppStore()
 
-    if (valgtSykmelding === undefined || !valgtSykmelding.startLegemeldtFravaer) {
+    if (!valgtSykmelding?.bekreftelse.utstedelsesdato) {
         return null
     }
 
     return (
         <div className='avsnitt'>
             <EtikettLiten tag='h3' className='avsnitt-hode'>{tekst('sykepengesoknad.sykmelding-utdrag.dato-sykmeldingen-ble-skrevet')}</EtikettLiten>
-            <Normaltekst>{dayjs(valgtSykmelding.startLegemeldtFravaer).format('D. MMM YYYY')}</Normaltekst>
+            <Normaltekst>{dayjs(valgtSykmelding.bekreftelse.utstedelsesdato).format('D. MMM YYYY')}</Normaltekst>
         </div>
     )
 }
