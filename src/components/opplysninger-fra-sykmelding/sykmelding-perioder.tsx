@@ -27,8 +27,24 @@ const SykmeldingPerioder = () => {
 
                 return (
                     <div className='avsnitt' key={index}>
-                        <EtikettLiten tag='h3' className='avsnitt-hode'>{tekst('din-sykmelding.periode.tittel')}</EtikettLiten>
+                        <EtikettLiten tag='h3'
+                            className='avsnitt-hode'>{tekst('din-sykmelding.periode.tittel')}</EtikettLiten>
                         <Normaltekst><strong>{fom} - {tom}</strong> &bull; {dager}</Normaltekst>
+                        <Vis hvis={periode.grad}>
+                            <Normaltekst>
+                                {periode.grad} {tekst('din-sykmelding.periode.prosent-sykmeldt')}
+                            </Normaltekst>
+                        </Vis>
+                        <Vis hvis={periode.behandlingsdager}>
+                            <Normaltekst>
+                                <Vis hvis={periode.behandlingsdager! > 1}>
+                                    {periode.behandlingsdager} {tekst('din-sykmelding.periode.behandlingsdager')}
+                                </Vis>
+                                <Vis hvis={periode.behandlingsdager! === 1}>
+                                    {tekst('din-sykmelding.periode.behandlingsdag')}
+                                </Vis>
+                            </Normaltekst>
+                        </Vis>
                     </div>
                 )
             })}

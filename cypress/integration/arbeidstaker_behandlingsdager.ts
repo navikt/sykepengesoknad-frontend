@@ -23,6 +23,7 @@ describe('Tester behandlingsdagersøknad', () => {
         // Sykmelding
         cy.contains('1. april - 24. april 2020 • 24 dager')
         cy.contains('POSTEN NORGE AS, BÆRUM')
+        cy.contains('1 behandlingsdag')
         cy.contains('Opplysninger fra sykmeldingen').click()
 
         // Godkjenne ANSVARSERKLARING

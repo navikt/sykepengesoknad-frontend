@@ -16,6 +16,9 @@ const OpplysningerTekster: any = {
         'sykepengesoknad.sykmelding-utdrag.forsikring': 'Forsikring',
         'sykepengesoknad.sykmelding-utdrag.egenmelding-papir': 'Egenmelding og/eller sykmelding på papir',
         'sykepengesoknad.sykmelding-utdrag.egenmelding-papir-nei': 'Har ikke hatt egenmelding og/eller sykmelding på papir',
+        'din-sykmelding.periode.behandlingsdager': 'behandlingsdager',
+        'din-sykmelding.periode.behandlingsdag': '1 behandlingsdag',
+        'din-sykmelding.periode.prosent-sykmeldt': '% sykmeldt'
     }, 'en': {}
 }
 
