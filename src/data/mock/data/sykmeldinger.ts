@@ -16,7 +16,7 @@ export const frilanserSykmelding: Sykmelding = {
     'sendtdato': '2020-05-13T13:24:17',
     'sporsmal': {
         'arbeidssituasjon': 'FRILANSER',
-        'harForsikring': true,
+        'harForsikring': false,
         'fravaersperioder': [],
         'harAnnetFravaer': null
     },

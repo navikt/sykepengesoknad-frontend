@@ -22,7 +22,10 @@ describe('Tester frilansersøknad', () => {
 
         // Sykmelding
         cy.contains('1. april - 24. april 2020 • 24 dager')
+        cy.contains('Har ikke forsikring som gjelder de første 16 dagene av sykefraværet')
         cy.contains('Opplysninger fra sykmeldingen').click()
+        cy.contains('Har ikke forsikring som gjelder de første 16 dagene av sykefraværet').should('not.be.visible')
+
 
         // Godkjenne ANSVARSERKLARING
         cy.contains('Jeg vet at jeg kan miste retten til sykepenger hvis opplysningene jeg gir ikke er riktige eller fullstendige.')
