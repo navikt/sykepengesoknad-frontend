@@ -7,10 +7,8 @@ const Inntil16dager = () => {
 
     return (
         <div className="avsnitt">
-            <div className="sendt-inner">
-                <Element tag="h2" className="arbeidstaker-tittel">{tekst('kvittering.arbeidstaker.tittel')}</Element>
-                <Normaltekst tag="span">{tekst('kvittering.arbeidstaker.brodtekst')} </Normaltekst>
-            </div>
+            <Element tag="h2" className="arbeidstaker-tittel">{tekst('kvittering.arbeidstaker.tittel')}</Element>
+            <Normaltekst tag="span">{tekst('kvittering.arbeidstaker.brodtekst')} </Normaltekst>
         </div>
     )
 }
