@@ -1,4 +1,5 @@
 import { Soknad, Sykmelding, SykmeldingPeriode, TidsPeriode } from '../types/types'
+import { dayjsToDate } from './dato-utils'
 
 export const tidligsteFom = (perioder: TidsPeriode[]) => {
     return perioder.map((p) => {
@@ -33,8 +34,8 @@ export const erOppdelt = (soknad: Soknad, sykmelding: Sykmelding) => {
 
     const tilTidsperiode = (p: SykmeldingPeriode) => {
         return {
-            fom: new Date(p.fom),
-            tom: new Date(p.tom)
+            fom: dayjsToDate(p.fom)!,
+            tom: dayjsToDate(p.tom)!
         }
     }
     const tomSykmelding = senesteTom(sykmelding.mulighetForArbeid.perioder.map(tilTidsperiode))

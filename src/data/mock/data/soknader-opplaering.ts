@@ -1,5 +1,5 @@
 import { RSSoknad } from '../../../types/rs-types/rs-soknad'
-import { arbeidstaker50, arbeidstaker100, frilanserSykmelding } from './sykmeldinger'
+import { arbeidsledigSm,arbeidstaker50, arbeidstaker100, frilanserSykmelding } from './sykmeldinger'
 
 export const behandlingsdager: RSSoknad = {
     'id': 'bcb032ac-b6dd-4ae7-8e73-9e64f1b35182',
@@ -1509,7 +1509,7 @@ export const arbeidstakerGradert: RSSoknad = {
 }
 export const arbeidsledig: RSSoknad = {
     'id': '934f39f4-cb47-459f-8209-0dbef6d36059',
-    'sykmeldingId': '470c9e25-e112-4060-be61-7a24af530889',
+    'sykmeldingId': arbeidsledigSm.id,
     'soknadstype': 'ARBEIDSLEDIG',
     'status': 'NY',
     'fom': '2020-04-01',

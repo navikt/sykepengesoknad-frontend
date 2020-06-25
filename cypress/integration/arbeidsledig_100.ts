@@ -1,13 +1,8 @@
-import { soknaderOpplaering as soknader } from '../../src/data/mock/data/soknader-opplaering'
-import { RSSoknad } from '../../src/types/rs-types/rs-soknad'
+import { arbeidsledig } from '../../src/data/mock/data/soknader-opplaering'
 
 describe('Tester arbeidsledigsøknad', () => {
-    //-----
-    // Sykmelding: 470c9e25-e112-4060-be61-7a24af530889, arbeidsledig - 100%
-    // Søknad: 934f39f4-cb47-459f-8209-0dbef6d36059, fom: 1.4.20, tom: 24.4.20
-    //-----
 
-    const soknad = soknader.find((sok: RSSoknad) => sok.id === '934f39f4-cb47-459f-8209-0dbef6d36059')!
+    const soknad = arbeidsledig
 
     before(() => {
         cy.visit('http://localhost:8080')
@@ -22,8 +17,9 @@ describe('Tester arbeidsledigsøknad', () => {
         cy.url().should('include', `${soknad.id}/1`)
 
         // Sykmelding
-        cy.contains('1. april - 24. april 2020 • 24 dager')
+        cy.contains('1. mars - 24. april 2020 • 55 dager')
         cy.contains('100 % sykmeldt')
+        cy.contains('Sykmeldingen din er lang, derfor er den delt opp i flere søknader om sykepenger')
         cy.contains('Opplysninger fra sykmeldingen').click()
 
         // Godkjenne ANSVARSERKLARING
