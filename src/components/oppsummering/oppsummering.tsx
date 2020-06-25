@@ -1,11 +1,9 @@
 import './oppsummering.less'
 
-import React, { useEffect, useState } from 'react'
-import { useParams } from 'react-router-dom'
+import React from 'react'
 
 import { useAppStore } from '../../data/stores/app-store'
 import { TagTyper } from '../../types/enums'
-import { RSSoknadstatus } from '../../types/rs-types/rs-soknadstatus'
 import { RSSvartype } from '../../types/rs-types/rs-svartype'
 import { Sporsmal } from '../../types/types'
 import { tekst } from '../../utils/tekster'
@@ -34,19 +32,10 @@ interface EkspanderProps {
 
 const Oppsummering = ({ ekspandert }: EkspanderProps) => {
     const { valgtSoknad } = useAppStore()
-    const [ apen, setApen ] = useState<boolean>(ekspandert)
-    const { stegId } = useParams()
-
-    useEffect(() => {
-        const tidligere = valgtSoknad!.status === RSSoknadstatus.SENDT
-        const stegNo = parseInt(stegId)
-        setApen(!tidligere && stegNo === 1)
-        // eslint-disable-next-line
-    }, [ valgtSoknad!.status, stegId ])
 
     return (
-        <Utvidbar className={'oppsummering ekspander lilla' + (apen ? ' apen' : '')}
-            ikon={sjekkbokser} ikonHover={sjekkbokserHover} erApen={apen}
+        <Utvidbar className={'oppsummering ekspander lilla' + (ekspandert ? ' apen' : '')}
+            ikon={sjekkbokser} ikonHover={sjekkbokserHover} erApen={ekspandert}
             tittel={tekst('sykepengesoknad.oppsummering.tittel')}
             ikonAltTekst=''
         >

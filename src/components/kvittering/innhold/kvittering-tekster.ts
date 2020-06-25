@@ -29,6 +29,7 @@ const KvitteringTekster: any = {
         'kvittering.sendt-til': 'Sendt til:',
         'kvittering.mottatt': 'Mottatt',
         'kvittering.hva-skjer-videre': 'Hva skjer videre?',
+        'kvittering.viktig-informasjon': 'Viktig informasjon',
         'kvittering.nav-behandler-soknaden': 'NAV behandler søknaden din',
         'kvittering.saksbehandling-avhenger-av': 'Saksbehandlingstid avhenger av hvilket fylke du bor i og om det er førstegangs-søknad eller søknad om forlengelse.',
         'kvittering.finn-ut': 'Finn ut hva som gjelder for ditt fylke her',
@@ -76,7 +77,7 @@ const KvitteringTekster: any = {
         'kvittering.arbeidstaker.over16.inntektsmelding.brodtekst': 'Arbeidsplassen din sender inntektsopplysninger og annen informasjon som NAV trenger for å behandle søkaden din. Inntektsmeldingen senden digitalt fra arbeidsplssens lønns og personalsystemet eller fra Altinn.no.',
         'kvittering.arbeidstaker.over16.utbetaling': 'Blir søknaden din innvilget før den 15. i denne måneden, blir pengene utbetalt innen den 25. samme måned. Blir det innvilget etter den 15. i måneden, utbetales pengene innen 5 dager.',
 
-        'kvittering.arbeidstaker.med-opphold': 'Du har vært friskmeldt inelled 16 dager siden sist du søkte om sykepenger. Da må arbeidsgiver sende oss inntektsmelding på nytt. Hør gjerne med arbeidsgiveren din hvis du er usikker på om den er sendt.',
+        'kvittering.arbeidstaker.med-opphold': 'Du har vært friskmeldt inntil 16 dager siden sist du søkte om sykepenger. Da må arbeidsgiver sende oss inntektsmelding på nytt. Hør gjerne med arbeidsgiveren din hvis du er usikker på om den er sendt.',
         'kvittering.arbeidstaker.hvorfor-inntektsmelding-pa-nytt': 'Hvorfor inntektsmeldingen må sendes på nytt?'
     }, 'en': {}
 }

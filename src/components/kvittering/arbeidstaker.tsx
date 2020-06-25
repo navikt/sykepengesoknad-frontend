@@ -8,6 +8,8 @@ import { FetchState, hasData } from '../../data/rest/utils'
 import { useAppStore } from '../../data/stores/app-store'
 import { RSMottakerResponse } from '../../types/rs-types/rest-response/rs-mottakerresponse'
 import { RSMottaker } from '../../types/rs-types/rs-mottaker'
+import { RSSoknadstype } from '../../types/rs-types/rs-soknadstype'
+import { dayjsToDate, getDuration, sendtForMerEnn30DagerSiden } from '../../utils/dato-utils'
 import env from '../../utils/environment'
 import { logger } from '../../utils/logger'
 import { tekst } from '../../utils/tekster'
@@ -19,17 +21,21 @@ import PerioderMedOpphold from './innhold/arbeidstaker/perioder-med-opphold'
 import PerioderUtenOpphold from './innhold/arbeidstaker/perioder-uten-opphold'
 import { Mottaker } from './innhold/kvittering-status'
 
+type ArbeidstakerKvitteringTekst = 'intil16dager' | 'over16dager' | 'utenOpphold' | 'medOpphold' | undefined
+
 const Arbeidstaker = () => {
-    const { valgtSoknad, setMottaker, mottaker } = useAppStore()
+    const { valgtSoknad, valgtSykmelding, setMottaker, mottaker, soknader } = useAppStore()
     const [ tilArbNavn, setTilArbNavn ] = useState<string>()
     const [ tilOrg, setTilOrg ] = useState<string>()
     const [ tilNavDato, setTilNavDato ] = useState<string>()
     const [ tilArbDato, setTilArbDato ] = useState<string>()
+    const [ kvitteringTekst, setKvitteringTekst ] = useState<ArbeidstakerKvitteringTekst>()
     const rsMottakerResponseFetch = useFetch<RSMottakerResponse>()
 
     useEffect(() => {
         opprettDatoer()
         hentMottaker()
+        settRiktigKvitteringTekst()
         // eslint-disable-next-line
     }, [])
 
@@ -48,12 +54,6 @@ const Arbeidstaker = () => {
             setTilOrg(valgtSoknad?.arbeidsgiver?.orgnummer ? `(Org.nr. ${valgtSoknad.arbeidsgiver.orgnummer})` : '')
         }
     }
-    //TODO: legge til vedtaksløsningen
-    const inntil16dager = mottaker === RSMottaker.ARBEIDSGIVER
-    const over16dager = mottaker === RSMottaker.NAV || mottaker === RSMottaker.ARBEIDSGIVER_OG_NAV
-    const perioderUtenOpphold = false
-    const perioderMedOpphold = false
-    // const over30dagerEllerMotatt = dayjs(new Date()).diff(dayjs(valgtSoknad!.opprettetDato), 'day') > 30
 
     const hentMottaker = () => {
         rsMottakerResponseFetch.fetch(env.syfoapiRoot + `/syfosoknad/api/soknader/${valgtSoknad!.id}/finnMottaker`, {
@@ -67,6 +67,50 @@ const Arbeidstaker = () => {
                 logger.error('Klarte ikke hente MOTTAKER av søknad', fetchState)
             }
         })
+    }
+
+    const settRiktigKvitteringTekst = () => {
+        if (mottaker === RSMottaker.ARBEIDSGIVER) {
+            setKvitteringTekst('intil16dager')
+        }
+        else if (mottaker === RSMottaker.NAV || mottaker === RSMottaker.ARBEIDSGIVER_OG_NAV) {
+            const fom = valgtSoknad!.fom!.getDate()
+            const sykFom = dayjsToDate(valgtSykmelding!.mulighetForArbeid.perioder[0].fom)?.getDate()
+            const forsteSoknad = fom === sykFom
+
+            if (forsteSoknad) {
+                // TODO: Sjekk også at dette gjelder for samme arbeidsgiver
+                const harTidligereSoknad = soknader
+                    .filter((sok) => sok.soknadstype === RSSoknadstype.ARBEIDSTAKERE)
+                    .filter((senereSok) => senereSok.tom! < valgtSoknad!.fom!)
+                    .filter((tidligereSok) => getDuration(tidligereSok.tom!, valgtSoknad!.fom!) > 16)
+                    .length > 0
+                if (harTidligereSoknad) {
+                    setKvitteringTekst('medOpphold')
+                }
+                else {
+                    setKvitteringTekst('over16dager')
+                }
+            }
+            else {
+                setKvitteringTekst('utenOpphold')
+            }
+        }
+    }
+
+    const kvitteringInnhold = () => {
+        switch (kvitteringTekst) {
+            case 'intil16dager':
+                return <Inntil16dager />
+            case 'over16dager':
+                return <Over16dager />
+            case 'utenOpphold':
+                return <PerioderUtenOpphold />
+            case 'medOpphold':
+                return <PerioderMedOpphold />
+            default:
+                return null
+        }
     }
 
     return (
@@ -91,32 +135,28 @@ const Arbeidstaker = () => {
                     </Vis>
                 </div>
 
-                <div className="hva-skjer">
-                    <AlertStripe type="info" form="inline">
-                        <Undertittel tag="h3">{tekst('kvittering.hva-skjer-videre')}</Undertittel>
-                    </AlertStripe>
-                    <div className="avsnitt">
-                        <div className="sendt-inner">
-                            <Vis hvis={inntil16dager}>
-                                <Inntil16dager />
+                <Vis hvis={!sendtForMerEnn30DagerSiden(valgtSoknad?.sendtTilArbeidsgiverDato, valgtSoknad?.sendtTilNAVDato)} >
+                    <div className="hva-skjer">
+                        <AlertStripe type="info" form="inline">
+                            <Vis hvis={kvitteringTekst === 'medOpphold'} >
+                                <Undertittel tag="h3">{tekst('kvittering.viktig-informasjon')}</Undertittel>
                             </Vis>
-                            <Vis hvis={over16dager}>
-                                <Over16dager />
+                            <Vis hvis={kvitteringTekst !== 'medOpphold'} >
+                                <Undertittel tag="h3">{tekst('kvittering.hva-skjer-videre')}</Undertittel>
                             </Vis>
-                            <Vis hvis={perioderUtenOpphold}>
-                                <PerioderUtenOpphold />
-                            </Vis>
-                            <Vis hvis={perioderMedOpphold}>
-                                <PerioderMedOpphold />
-                            </Vis>
+                        </AlertStripe>
+                        <div className="avsnitt">
+                            <div className="sendt-inner">
+                                { kvitteringInnhold() }
+                            </div>
+                        </div>
+                        <div className="avsnitt">
+                            <div className="sendt-inner">
+                                <Element tag="h2" className="arbeidstaker-tittel">{}</Element>
+                            </div>
                         </div>
                     </div>
-                    <div className="avsnitt">
-                        <div className="sendt-inner">
-                            <Element tag="h2" className="arbeidstaker-tittel">{}</Element>
-                        </div>
-                    </div>
-                </div>
+                </Vis>
             </div>
 
         </>
