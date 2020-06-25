@@ -12,8 +12,8 @@ const PerioderMedOpphold = () => {
         <div className="avsnitt">
             <Element tag="h2" className="arbeidstaker-tittel">{tekst('kvittering.naeringsdrivende.tittel')}</Element>
             <Normaltekst tag="span">{tekst('kvittering.arbeidstaker.med-opphold')} </Normaltekst>
-            <Utvidbar erApen={false} type="intern" tittel={tekst('kvittering.arbeidstaker.hvorfor-skille-ved-16-dager')}>
-                <AlertStripeInfo>{tekst('kvittering.arbeidstaker.hvorfor-inntektsmelding-pa-nytt')}</AlertStripeInfo>
+            <Utvidbar erApen={false} type="intern" tittel={tekst('kvittering.arbeidstaker.hvorfor-inntektsmelding-pa-nytt')}>
+                <AlertStripeInfo>{tekst('kvittering.arbeidstaker.hvorfor-inntektsmelding-pa-nytt.tekst')}</AlertStripeInfo>
             </Utvidbar>
             <div className="avsnitt hva-skjer">
                 <Element tag="h2" className="arbeidstaker-tittel">{tekst('kvittering.nav-behandler-soknaden')}</Element>

@@ -403,6 +403,11 @@ describe('Tester kvittering', () => {
                 .and('contain', 'Blir søknaden din innvilget før den 15. i denne måneden, blir pengene utbetalt innen den 25. samme måned. Blir det innvilget etter den 15. i måneden, utbetales pengene innen 5 dager.')
                 .and('not.contain', 'Du får sykepengene fra arbeidsgiveren din')
 
+            // Inntekstmelding
+            cy.contains('Hvorfor inntektsmeldingen må sendes på nytt?').click()
+            cy.get('.alertstripe--info')
+                .should('contain', 'Lønn eller arbeidstid kan ha endret seg siden du var syk forrige gang. Dette får vi bare informasjon om gjennom inntektsmeldingen.')
+
             // Behandlingstider lenke
             cy.contains('Sjekk saksbehandlingstidene i ditt fylke')
                 .should('have.attr', 'href', 'https://www.nav.no/no/nav-og-samfunn/om-nav/saksbehandlingstider-i-nav')

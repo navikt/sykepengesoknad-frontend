@@ -78,7 +78,8 @@ const KvitteringTekster: any = {
         'kvittering.arbeidstaker.over16.utbetaling': 'Blir søknaden din innvilget før den 15. i denne måneden, blir pengene utbetalt innen den 25. samme måned. Blir det innvilget etter den 15. i måneden, utbetales pengene innen 5 dager.',
 
         'kvittering.arbeidstaker.med-opphold': 'Du har vært friskmeldt inntil 16 dager siden sist du søkte om sykepenger. Da må arbeidsgiver sende oss inntektsmelding på nytt. Hør gjerne med arbeidsgiveren din hvis du er usikker på om den er sendt.',
-        'kvittering.arbeidstaker.hvorfor-inntektsmelding-pa-nytt': 'Hvorfor inntektsmeldingen må sendes på nytt?'
+        'kvittering.arbeidstaker.hvorfor-inntektsmelding-pa-nytt': 'Hvorfor inntektsmeldingen må sendes på nytt?',
+        'kvittering.arbeidstaker.hvorfor-inntektsmelding-pa-nytt.tekst': 'Lønn eller arbeidstid kan ha endret seg siden du var syk forrige gang. Dette får vi bare informasjon om gjennom inntektsmeldingen.'
     }, 'en': {}
 }
 
