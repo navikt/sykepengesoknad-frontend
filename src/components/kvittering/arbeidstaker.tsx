@@ -56,9 +56,9 @@ const Arbeidstaker = () => {
             const forsteSoknad = fom === sykFom
 
             if (forsteSoknad) {
-                // TODO: Sjekk også at dette gjelder for samme arbeidsgiver
                 const harTidligereSoknad = soknader
                     .filter((sok) => sok.soknadstype === RSSoknadstype.ARBEIDSTAKERE)
+                    .filter((sok) => sok.arbeidsgiver?.orgnummer === valgtSoknad?.arbeidsgiver?.orgnummer)
                     .filter((senereSok) => senereSok.tom! < valgtSoknad!.fom!)
                     .filter((tidligereSok) => getDuration(tidligereSok.tom!, valgtSoknad!.fom!) > 16)
                     .length > 0
