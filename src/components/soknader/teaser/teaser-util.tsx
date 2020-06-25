@@ -14,7 +14,7 @@ import GlobeIkon from './globe.svg'
 
 export const erSendtTilBeggeMenIkkeSamtidig = (soknad: Soknad) => {
     return soknad.sendtTilNAVDato && soknad.sendtTilArbeidsgiverDato
-        && soknad.sendtTilNAVDato.getTime() !== soknad.sendtTilArbeidsgiverDato.getTime()
+        && soknad.sendtTilNAVDato.toDateString() !== soknad.sendtTilArbeidsgiverDato.toDateString()
 }
 
 export const finnArbeidsgivernavn = (soknad: Soknad) => {
