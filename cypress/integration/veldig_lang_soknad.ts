@@ -213,6 +213,12 @@ describe('Tester støtte for gamle spørsmål', () => {
     })
     it('Søknad kvittering', () => {
         cy.url().should('include', `/kvittering/${soknad.id}`)
-        // TODO: Legg til test når kvittering er ferdig
+        cy.get('.hva-skjer')
+            .should('contain', 'Hva skjer videre?')
+            .and('contain', 'Før NAV kan behandle søknaden')
+            .and('contain', 'Hvorfor går det et skille ved 16 dager?')
+            .and('contain', 'Hva er en inntektsmelding')
+            .and('contain', 'NAV behandler søknaden')
+            .and('contain', 'Når blir pengene utbetalt')
     })
 })

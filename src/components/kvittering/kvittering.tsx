@@ -7,6 +7,7 @@ import { useParams } from 'react-router-dom'
 import { useAppStore } from '../../data/stores/app-store'
 import { RSArbeidssituasjon } from '../../types/rs-types/rs-arbeidssituasjon'
 import { RSSoknadstype } from '../../types/rs-types/rs-soknadstype'
+import { sendtForMerEnn30DagerSiden } from '../../utils/dato-utils'
 import Endreknapp from '../endreknapp/endreknapp'
 import Ettersending from '../ettersending/ettersending'
 import Opplysninger from '../opplysninger-fra-sykmelding/opplysninger'
@@ -16,13 +17,15 @@ import AlleAndre from './alle-andre'
 import Arbeidstaker from './arbeidstaker'
 
 const Kvittering = () => {
-    const { valgtSoknad, setValgtSoknad, soknader, feilmeldingTekst } = useAppStore()
+    const { valgtSoknad, setValgtSoknad, setValgtSykmelding, soknader, sykmeldinger, feilmeldingTekst } = useAppStore()
     const { id } = useParams()
 
     useEffect(() => {
         if (!valgtSoknad) {
             const filtrertSoknad = soknader.find(soknad => soknad.id === id)
             setValgtSoknad(filtrertSoknad)
+            const sykmelding = sykmeldinger.find(sm => sm.id === filtrertSoknad?.sykmeldingId)
+            setValgtSykmelding(sykmelding)
         }
         // eslint-disable-next-line
     }, [])
@@ -41,12 +44,10 @@ const Kvittering = () => {
         }
     }
 
-    const soknadErMottatt = false
-
     return (
         <div className="kvittering">
             <KvitteringType />
-            <Oppsummering ekspandert={soknadErMottatt} />
+            <Oppsummering ekspandert={sendtForMerEnn30DagerSiden(valgtSoknad?.sendtTilArbeidsgiverDato, valgtSoknad?.sendtTilNAVDato)} />
 
             <Vis hvis={valgtSoknad!.soknadstype !== RSSoknadstype.OPPHOLD_UTLAND}>
                 <Opplysninger ekspandert={false} />

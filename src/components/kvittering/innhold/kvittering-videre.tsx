@@ -1,4 +1,3 @@
-import dayjs from 'dayjs'
 import { AlertStripeInfo } from 'nav-frontend-alertstriper'
 import Lenke from 'nav-frontend-lenker'
 import { Element, Normaltekst, Undertittel } from 'nav-frontend-typografi'
@@ -6,13 +5,14 @@ import React from 'react'
 
 import { useAppStore } from '../../../data/stores/app-store'
 import { RSArbeidssituasjon } from '../../../types/rs-types/rs-arbeidssituasjon'
+import { sendtForMerEnn30DagerSiden } from '../../../utils/dato-utils'
 import { tekst } from '../../../utils/tekster'
 import Vis from '../../vis'
 
 const KvitteringVidere = () => {
     const { valgtSoknad, valgtSykmelding } = useAppStore()
 
-    if (dayjs(new Date()).diff(dayjs(valgtSoknad!.opprettetDato), 'day') > 30) {
+    if (sendtForMerEnn30DagerSiden(valgtSoknad?.sendtTilArbeidsgiverDato, valgtSoknad?.sendtTilNAVDato)) {
         return null
     }
 
@@ -28,19 +28,16 @@ const KvitteringVidere = () => {
                     </Lenke>.
                 </div>
             </Vis>
-            <div className="avsnitt">
+            <div className="avsnitt hva-skjer">
                 <Element tag="h2">{tekst('kvittering.nav-behandler-soknaden')}</Element>
-                <Normaltekst tag="span">{tekst('kvittering.saksbehandling-avhenger-av')} </Normaltekst>
-                <Lenke href={tekst('kvittering.finn-ut.url')}>
-                    <Normaltekst tag="span">{tekst('kvittering.finn-ut')}</Normaltekst>
+                <Normaltekst tag="span">{tekst('kvittering.arbeidstaker.saksbehandlingstid')} </Normaltekst>
+                <Lenke href={tekst('kvittering.arbeidstaker.saksbehandlingstid.lenke.url')}>
+                    <Normaltekst tag="span">{tekst('kvittering.arbeidstaker.saksbehandlingstid.lenke')}</Normaltekst>
                 </Lenke>
             </div>
             <div className="avsnitt">
                 <Element tag="h2">{tekst('kvittering.naar-blir-pengene')}</Element>
-                <Normaltekst tag="span">{tekst('kvittering.det-er-ulike-regler')} </Normaltekst>
-                <Lenke href={tekst('kvittering.se-hva.url')}>
-                    <Normaltekst tag="span">{tekst('kvittering.se-hva')}</Normaltekst>
-                </Lenke>
+                <Normaltekst tag="span">{tekst('kvittering.arbeidstaker.over16.utbetaling')} </Normaltekst>
             </div>
         </AlertStripeInfo>
     )

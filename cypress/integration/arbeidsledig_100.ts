@@ -189,6 +189,10 @@ describe('Tester arbeidsledigsøknad', () => {
 
     it('Søknad kvittering', () => {
         cy.url().should('include', `/kvittering/${soknad.id}`)
-        // TODO: Legg til test når kvittering er ferdig
+        // Hva skjer videre
+        cy.get('.alertstripe.opplysninger.alertstripe--info')
+            .should('contain', 'Hva skjer videre?')
+            .and('contain', 'NAV behandler søknaden din')
+            .and('contain', 'Når blir pengene utbetalt?')
     })
 })

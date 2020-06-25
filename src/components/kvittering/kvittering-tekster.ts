@@ -29,6 +29,7 @@ const KvitteringTekster: any = {
         'kvittering.sendt-til': 'Sendt til:',
         'kvittering.mottatt': 'Mottatt',
         'kvittering.hva-skjer-videre': 'Hva skjer videre?',
+        'kvittering.viktig-informasjon': 'Viktig informasjon',
         'kvittering.nav-behandler-soknaden': 'NAV behandler søknaden din',
         'kvittering.saksbehandling-avhenger-av': 'Saksbehandlingstid avhenger av hvilket fylke du bor i og om det er førstegangs-søknad eller søknad om forlengelse.',
         'kvittering.finn-ut': 'Finn ut hva som gjelder for ditt fylke her',
@@ -61,7 +62,7 @@ const KvitteringTekster: any = {
         'kvittering.utenlands.liste1': 'Du kan risikere at sykepengene stanses i perioden du er på Reise.',
         'kvittering.utenlands.liste2': 'Sykepengene kan beregnes etter et lavere grunnlag når du er tilbake.',
         'kvittering.utenlands.liste3': 'Du kan få avslag på videre sykepenger hvis reisen varer fire uker eller mer.',
-        'kvittering.utenlands.lenke': 'Les mer om sykepenger nå du er på reise',
+        'kvittering.utenlands.lenke': 'Les mer om sykepenger når du er på reise',
         'kvittering.utenlands.lenke.url': 'https://www.nav.no/no/person/arbeid/sykmeldt-arbeidsavklaringspenger-og-yrkesskade/sykepenger/sykepenger-ved-utenlandsopphold',
         'kvittering.utenlands.overskrift3': 'Du søker om sykepenger',
         'kvittering.utenlands.brodtekst3': 'Etter at sykefraværsperioden er over, søker du om sykepenger på vanlig måte. Du får en melding fra NAV når søknaden er klar til å fylles ut.',
@@ -76,8 +77,9 @@ const KvitteringTekster: any = {
         'kvittering.arbeidstaker.over16.inntektsmelding.brodtekst': 'Arbeidsplassen din sender inntektsopplysninger og annen informasjon som NAV trenger for å behandle søkaden din. Inntektsmeldingen senden digitalt fra arbeidsplssens lønns og personalsystemet eller fra Altinn.no.',
         'kvittering.arbeidstaker.over16.utbetaling': 'Blir søknaden din innvilget før den 15. i denne måneden, blir pengene utbetalt innen den 25. samme måned. Blir det innvilget etter den 15. i måneden, utbetales pengene innen 5 dager.',
 
-        'kvittering.arbeidstaker.med-opphold': 'Du har vært friskmeldt inelled 16 dager siden sist du søkte om sykepenger. Da må arbeidsgiver sende oss inntektsmelding på nytt. Hør gjerne med arbeidsgiveren din hvis du er usikker på om den er sendt.',
-        'kvittering.arbeidstaker.hvorfor-inntektsmelding-pa-nytt': 'Hvorfor inntektsmeldingen må sendes på nytt?'
+        'kvittering.arbeidstaker.med-opphold': 'Du har vært friskmeldt inntil 16 dager siden sist du søkte om sykepenger. Da må arbeidsgiver sende oss inntektsmelding på nytt. Hør gjerne med arbeidsgiveren din hvis du er usikker på om den er sendt.',
+        'kvittering.arbeidstaker.hvorfor-inntektsmelding-pa-nytt': 'Hvorfor inntektsmeldingen må sendes på nytt?',
+        'kvittering.arbeidstaker.hvorfor-inntektsmelding-pa-nytt.tekst': 'Lønn eller arbeidstid kan ha endret seg siden du var syk forrige gang. Dette får vi bare informasjon om gjennom inntektsmeldingen.'
     }, 'en': {}
 }
 

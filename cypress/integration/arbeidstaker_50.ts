@@ -279,6 +279,8 @@ describe('Tester arbeidstakersøknad - gradert 50%', () => {
 
     it('Søknad kvittering', () => {
         cy.url().should('include', `/kvittering/${soknad.id}`)
-        // TODO: Legg til test når kvittering er ferdig
+        cy.get('.hva-skjer')
+            .should('contain', 'Hva skjer videre?')
+            .and('contain', 'Du får sykepengene fra arbeidsgiveren din')
     })
 })
