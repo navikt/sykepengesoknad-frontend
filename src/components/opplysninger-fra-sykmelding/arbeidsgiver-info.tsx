@@ -7,7 +7,7 @@ import { tekst } from '../../utils/tekster'
 const ArbeidsgiverInfo = () => {
     const { valgtSykmelding } = useAppStore()
 
-    if (valgtSykmelding?.valgtArbeidssituasjon === 'ARBEIDSTAKER' && valgtSykmelding?.mottakendeArbeidsgiver?.navn) {
+    if (valgtSykmelding?.mottakendeArbeidsgiver?.navn) {
         return (
             <div className='avsnitt'>
                 <EtikettLiten tag='h3' className='avsnitt-hode'>
