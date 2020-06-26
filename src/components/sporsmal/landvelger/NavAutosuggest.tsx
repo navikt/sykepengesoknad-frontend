@@ -85,6 +85,9 @@ const NavAutosuggest = (props: NavAutosuggestProps) => {
         setSuggestions([])
     }
 
+    const onKeypress = (e: any) => {
+        e.key === 'Enter' && e.preventDefault()
+    }
 
     return (<Autosuggest
         onSuggestionsFetchRequested={onSuggestionsFetchRequested}
@@ -99,6 +102,7 @@ const NavAutosuggest = (props: NavAutosuggestProps) => {
                 name: props.id,
                 value: value,
                 onChange: onChange,
+                onKeyPress: onKeypress,
                 onBlur: onBlur,
                 className: cn('skjemaelement__input input--l input--autocomplete'),
             }
