@@ -23,6 +23,7 @@ import { useAmplitudeInstance } from '../../amplitude/amplitude'
 import FeilOppsummering from '../../feiloppsummering/feil-oppsummering'
 import Oppsummering from '../../oppsummering/oppsummering'
 import Vis from '../../vis'
+import BjornUnderTittel from '../bjorn/bjorn-under-tittel'
 import { hentSvar } from '../hent-svar'
 import { settSvar } from '../sett-svar'
 import SporsmalSwitch from '../sporsmal-switch'
@@ -195,6 +196,9 @@ const SporsmalForm = () => {
         <FormContext {...methods}>
             <form onSubmit={methods.handleSubmit(onSubmit)}
                 className={'sporsmal__form ' + nesteSporsmal?.tag?.toLowerCase()}>
+
+                <BjornUnderTittel sporsmal={sporsmal} />
+
                 <SporsmalSwitch sporsmal={sporsmal} />
 
                 <Vis hvis={erSiste && !erUtlandssoknad}>

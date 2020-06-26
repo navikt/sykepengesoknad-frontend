@@ -3,9 +3,7 @@ import { Element, Normaltekst } from 'nav-frontend-typografi'
 import React, { useEffect, useState } from 'react'
 import { useFormContext } from 'react-hook-form'
 
-import { useAppStore } from '../../../data/stores/app-store'
 import { SvarEnums, TagTyper } from '../../../types/enums'
-import { RSSoknadstype } from '../../../types/rs-types/rs-soknadstype'
 import { getLedetekst, tekst } from '../../../utils/tekster'
 import { utlandssoknadUrl } from '../../../utils/url-utils'
 import AnimateOnMount from '../../animate-on-mount'
@@ -28,7 +26,6 @@ const jaNeiValg = [ {
 } ]
 
 const JaNeiInput = ({ sporsmal }: SpmProps) => {
-    const { valgtSoknad } = useAppStore()
     const { register, setValue, errors, watch, reset, getValues, clearError } = useFormContext()
     const feilmelding = hentFeilmelding(sporsmal)
     const watchVerdi = watch(sporsmal.id)
@@ -70,18 +67,6 @@ const JaNeiInput = ({ sporsmal }: SpmProps) => {
 
     return (
         <>
-            <Vis hvis={valgtSoknad!.soknadstype === RSSoknadstype.ARBEIDSTAKERE && sporsmal.tag === TagTyper.FERIE_V2}>
-                <Bjorn nokkel='sykepengesoknad.ferie_v2.bjorn' className='blokk-m' />
-            </Vis>
-
-            <Vis hvis={sporsmal.tag === TagTyper.ARBEID_UTENFOR_NORGE}>
-                <Bjorn nokkel='sykepengesoknad.arbeid_utenfor_norge.bjorn' className='blokk-m' />
-            </Vis>
-
-            <Vis hvis={sporsmal.tag === TagTyper.FRAVER_FOR_BEHANDLING}>
-                <Bjorn nokkel='sykepengesoknad.fraver_for_behandling.bjorn' className='blokk-m' />
-            </Vis>
-
             <div className='inputPanelGruppe inputPanelGruppe--horisontal'>
                 <fieldset className={'skjema__fieldset' + (errors[sporsmal.id] ? ' skjemagruppe--feil' : '')}>
                     <legend className='skjema__legend'>
