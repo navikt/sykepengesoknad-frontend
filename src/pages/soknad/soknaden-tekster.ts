@@ -15,14 +15,12 @@ const SoknadenTekster: any = {
         'sykepengesoknad.bekreft_opplysninger_utland.tittel': 'Bekreft opplysninger',
         'sykepengesoknad.bekreft_opplysninger_utland_info.tittel': 'Bekreft opplysninger',
         'sykepengesoknad.arbeid_utenfor_norge.tittel': 'Arbeid utenfor Norge',
-        'sykepengesoknad.arbeid_utenfor_norge.bjorn': 'Vi spør om dette for å undersøke om du har rettigheter i flere land enn Norge. Har du vært på en kort tjenestereise eller konferanse i utlandet, krysser du nei.',
 
         'sykepengesoknad.ferie.tittel': 'Ferie',
         'sykepengesoknad.ferie.bjorn': 'Du lurer kanskje på hvorfor vi spør om ferie før du ble sykmeldt? Det er fordi vi må se om dette sykefraværet henger sammen med forrige periode du var syk.',
         'sykepengesoknad.ferie.hjelpetekst.tekst': 'Du skal bare oppgi feriedager som du har brukt. Hvis du har avtalt å utsette ferien, skriver du ikke noe her.\n\nJobber du vanligvis bare noen dager i uken? Da gjelder ferien likevel hele uker, ikke bare de enkeltdagene du skulle vært på jobb.',
         'sykepengesoknad.ferie.hjelpetekst.tittel': 'Ferie',
         'sykepengesoknad.ferie_v2.tittel': 'Ferie',
-        'sykepengesoknad.ferie_v2.bjorn': 'Måtte du avbryte ferien fordi du ble syk? Du kan avtale med arbeidsgiveren at du utsetter ferien. Fikk du tatt noen feriedager, svarer du ja nedenfor, og så spør vi deg hvilke dager. Ble hele ferien ødelagt fordi du ble syk, svarer du nei.',
 
         'sykepengesoknad.permisjon.tittel': 'Permisjon',
         'sykepengesoknad.permisjon_v2.tittel': 'Permisjon',
@@ -32,10 +30,8 @@ const SoknadenTekster: any = {
         'sykepengesoknad.tilbake_i_arbeid.tittel': 'Tilbake i arbeid',
         'sykepengesoknad.friskmeldt.tittel': 'Friskmeldt',
         'sykepengesoknad.enkeltstaende_behandlingsdager.tittel': 'Behandlingsdager',
-        'sykepengesoknad.enkeltstaende_behandlingsdager.bjorn': 'Du kan bare få én behandlingsdag i løpet av en uke. Trenger du flere slike dager, ber du legen om en gradert sykmelding i stedet.',
         'sykepengesoknad.jobbet_du_gradert.tittel' : 'Jobb underveis i sykefraværet',
         'sykepengesoknad.fraver_for_behandling.tittel' : 'Fravær før behandlingsdager',
-        'sykepengesoknad.fraver_for_behandling.bjorn' : 'Vi trenger å vite om du har brukt egenmeldinger eller en papirsykmelding noen dager før denne sykmeldingen. Det er for å kunne beregne sykepengene dine riktig.',
 
         'sykepengesoknad.jobbet_du_100_prosent.tittel': 'Jobb underveis i sykefraværet',
         'sykepengesoknad.aktiviteter.gradert.hjelpetekst.tittel': 'Gradert sykmelding',
