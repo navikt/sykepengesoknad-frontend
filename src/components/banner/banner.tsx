@@ -1,30 +1,31 @@
 import './banner.less'
 
-import { Systemtittel } from 'nav-frontend-typografi'
+import { Ingress, Systemtittel } from 'nav-frontend-typografi'
 import React from 'react'
-import { useHistory } from 'react-router'
 
 import { useAppStore } from '../../data/stores/app-store'
 import { RSSoknadstype } from '../../types/rs-types/rs-soknadstype'
+import { tilLesbarPeriodeMedArstall } from '../../utils/dato-utils'
 import { tekst } from '../../utils/tekster'
 import SykSokLokalt from '../brodsmuler/syk-sok-lokalt'
+import Vis from '../vis'
 
 const Banner = () => {
     const { valgtSoknad } = useAppStore()
-    const history = useHistory()
 
-    let tittel = valgtSoknad && valgtSoknad.soknadstype === RSSoknadstype.OPPHOLD_UTLAND
+    const erUtlandssoknad = valgtSoknad && valgtSoknad.soknadstype === RSSoknadstype.OPPHOLD_UTLAND
+    const tittel = erUtlandssoknad
         ? tekst('sykepengesoknad-utland.tittel')
         : tekst('sykepengesoknad.sidetittel')
-
-    if (history.location.pathname.includes('kvittering')) {
-        tittel = tekst('kvittering.sidetittel')
-    }
 
     return (
         <header className='soknadtopp'>
             <SykSokLokalt />
             <Systemtittel tag='h1' className='soknadtopp__tittel'>{tittel}</Systemtittel>
+            <Vis hvis={!erUtlandssoknad}>
+                <Ingress tag='h2'
+                    className='soknadtopp__tittel'>{tekst('sykepengesoknad.banner.for')} {tilLesbarPeriodeMedArstall(valgtSoknad?.fom, valgtSoknad?.tom)}</Ingress>
+            </Vis>
         </header>
     )
 }
