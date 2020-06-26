@@ -116,7 +116,7 @@ const SporsmalTekster: any = {
         'soknad.feilmelding.ENKELTSTAENDE_BEHANDLINGSDAGER_UKE': 'Du må oppgi hvilke dager du var til behandling',
         'soknad.feilmelding.ENKELTSTAENDE_BEHANDLINGSDAGER_DAG_NAR': 'Du må oppgi hvilke dager du var til behandling',
 
-        'soknad.hjelpetekst.FERIE_V2': 'Vi spør om ferie fordi du ikke kan få sykepenger og feriepenger samtidig. Tar du ferie, får du i stedet feriepenger.',
+        'soknad.hjelpetekst.FERIE_V2': 'Blir du trukket i antall feriedager, er det ferie. Du får ikke sykepenger for disse dagene.',
         'soknad.hjelpetekst.FERIE_NAR': 'Du må oppgi hvilke dager du hadde ferie',
         'soknad.hjelpetekst.FERIE_NAR_V2': 'Du må oppgi hvilke dager du hadde ferie',
         'soknad.hjelpetekst.PERMISJON_V2': 'Du må svare på om du tok ut permisjon',
