@@ -293,12 +293,12 @@ describe('Tester kvittering', () => {
                 .should('have.attr', 'href', 'https://www.nav.no/no/nav-og-samfunn/om-nav/saksbehandlingstider-i-nav')
 
             // Arbeidsgiverperiode tekst
-            cy.contains('Hvorfor går det et skille ved 16 dager?').click()
+            cy.contains('Hvorfor går det et skille ved 16 dager?').click({ force: true })
             cy.get('.alertstripe--info')
                 .should('contain', 'Arbeidsgiveren skal betale sykepenger i en periode på opptil 16 kalenderdager, også kalt arbeidsgiverperioden. NAV overtar sykepengeutbetalingen fra og med 17. kalenderdag.')
 
             // Inntektsmelding
-            cy.contains('Hva er en inntektsmelding').click()
+            cy.contains('Hva er en inntektsmelding').click({ force: true })
             cy.get('.alertstripe--info')
                 .should('contain', 'Arbeidsplassen din sender inntektsopplysninger og annen informasjon som NAV trenger for å behandle søkaden din. Inntektsmeldingen senden digitalt fra arbeidsplssens lønns og personalsystemet eller fra Altinn.no.')
 

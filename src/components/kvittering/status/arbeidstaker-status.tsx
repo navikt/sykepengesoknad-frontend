@@ -76,13 +76,13 @@ const ArbeidstakerStatus = () => {
     const opprettDatoer = () => {
         const sendtTilNav = valgtSoknad?.sendtTilNAVDato
         if (sendtTilNav) {
-            const datoNav = dayjs(sendtTilNav).format('dddd D. MMM, kl hh:mm')
+            const datoNav = dayjs(sendtTilNav).format('dddd D. MMM, kl HH:mm')
             setTilNavDato(datoNav.charAt(0).toUpperCase() + datoNav.slice(1))
         }
 
         const sendtTilArb = valgtSoknad?.sendtTilArbeidsgiverDato
         if (sendtTilArb) {
-            const datoArb = dayjs(sendtTilArb).format('dddd D. MMM, kl hh:mm')
+            const datoArb = dayjs(sendtTilArb).format('dddd D. MMM, kl HH:mm')
             setTilArbDato(datoArb.charAt(0).toUpperCase() + datoArb.slice(1))
             setTilArbNavn(valgtSoknad?.arbeidsgiver?.navn ? valgtSoknad?.arbeidsgiver?.navn : Mottaker.ARBEIDSGIVER)
             setTilOrg(valgtSoknad?.arbeidsgiver?.orgnummer ? `(Org.nr. ${valgtSoknad.arbeidsgiver.orgnummer})` : '')
