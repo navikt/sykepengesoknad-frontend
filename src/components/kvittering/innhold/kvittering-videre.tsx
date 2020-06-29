@@ -23,7 +23,7 @@ const KvitteringVidere = () => {
                 <div className="avsnitt">
                     <Element tag="h2">{tekst('kvittering.naeringsdrivende.tittel')}</Element>
                     <Normaltekst tag="span">{tekst('kvittering.naeringsdrivende.brodtekst')} </Normaltekst>
-                    <Lenke href={tekst('kvittering.naeringsdrivende.lenke')}>
+                    <Lenke href={tekst('kvittering.naeringsdrivende.lenke.url')}>
                         <Normaltekst tag="span">{tekst('kvittering.naeringsdrivende.lenke')}</Normaltekst>
                     </Lenke>.
                 </div>
