@@ -53,19 +53,25 @@ const JaNeiRadio = ({ sporsmal }: SpmProps) => {
                     {tekst('soknad.presisering.' + spm.tag)}
                 </Normaltekst>
             </div>
-            : (spm.tag && spm.tag === TagTyper.UTLANDSOPPHOLD_SOKT_SYKEPENGER && lokal === SvarEnums.JA && valgt)
-                ? <div className='ekstrasporsmal'>
+            : (spm.tag && spm.tag.startsWith('INNTEKTSKILDE_SELVSTENDIG') && lokal === 'NEI' && valgt)
+                ? <div className='presisering'>
                     <Normaltekst tag='span'>
-                        {parser(getLedetekst(tekst('soknad.infotekst.utlandsopphold_sokt_sykepenger.ja'), { '%URL%': utlandssoknadUrl }))}
+                        {parser(getLedetekst(tekst('soknad.presisering.' + spm.tag + '_NEI'), { '%URL%': tekst('soknad.presisering.INNTEKTSKILDE_SELVSTENDIG_ER_DU_SYKMELDT_NEI.url') }))}
                     </Normaltekst>
                 </div>
-                : (spm.tag && spm.tag === TagTyper.UTLANDSOPPHOLD_SOKT_SYKEPENGER && lokal === SvarEnums.NEI && valgt)
+                : (spm.tag && spm.tag === TagTyper.UTLANDSOPPHOLD_SOKT_SYKEPENGER && lokal === SvarEnums.JA && valgt)
                     ? <div className='ekstrasporsmal'>
                         <Normaltekst tag='span'>
-                            {parser(getLedetekst(tekst('soknad.infotekst.utlandsopphold_sokt_sykepenger.nei'), { '%URL%': utlandssoknadUrl }))}
+                            {parser(getLedetekst(tekst('soknad.infotekst.utlandsopphold_sokt_sykepenger.ja'), { '%URL%': utlandssoknadUrl }))}
                         </Normaltekst>
                     </div>
-                    : <></>
+                    : (spm.tag && spm.tag === TagTyper.UTLANDSOPPHOLD_SOKT_SYKEPENGER && lokal === SvarEnums.NEI && valgt)
+                        ? <div className='ekstrasporsmal'>
+                            <Normaltekst tag='span'>
+                                {parser(getLedetekst(tekst('soknad.infotekst.utlandsopphold_sokt_sykepenger.nei'), { '%URL%': utlandssoknadUrl }))}
+                            </Normaltekst>
+                        </div>
+                        : <></>
     }
 
     return (
