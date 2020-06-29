@@ -122,6 +122,11 @@ describe('Tester arbeidsledigsøknad', () => {
         cy.contains('Har du hatt inntekt mens du har vært sykmeldt i perioden 1. - 24. april 2020? Du trenger ikke oppgi penger fra NAV.')
         cy.get('.inputPanelGruppe__inner label:first-child > input[value=JA]').click({ force: true })
 
+        // Når ingen velges så dukker bare 1 feilmelding opp
+        cy.contains('Gå videre').click()
+        cy.contains('Det er 1 feil i skjemaet')
+        cy.contains('Du må oppgi hvilke inntektskilder du har')
+
         // Svarer JA
         // Underspørsmål nivå 1 - checkbox
         cy.contains('Hvilke inntektskilder har du hatt?')

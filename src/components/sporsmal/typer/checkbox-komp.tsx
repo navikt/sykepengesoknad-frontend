@@ -48,7 +48,7 @@ interface CheckboxProps {
 type AllProps = SpmProps & CheckboxProps;
 
 const CheckboxSingle = ({ parent, sporsmal }: AllProps) => {
-    const { register, setValue, watch, getValues, clearError } = useFormContext()
+    const { register, setValue, watch, getValues } = useFormContext()
     const feilmelding = hentFeilmelding(parent)
     const { setValidCheck } = useAppStore()
     const [ lokal, setLokal ] = useState<string>(hentSvar(sporsmal))
@@ -61,13 +61,18 @@ const CheckboxSingle = ({ parent, sporsmal }: AllProps) => {
 
     const valider = () => {
         const valid = harValgtNoe(parent, getValues())
-        const fields: string[] = parent.undersporsmal.map(spm => spm.id)
-        if (!valid) {
-            fields.shift()
-        }
-        clearError(fields)
+        const forsteCheckbox = parent.undersporsmal[0].id
         setValidCheck(valid)
-        return valid ? valid : feilmelding.global
+        if (valid) {
+            return true
+        }
+        // For å bare vise feilmeldingen en gang
+        if (forsteCheckbox === sporsmal.id) {
+            return feilmelding.global
+        }
+        else {
+            return true
+        }
     }
 
     const mounted = watch(sporsmal.id)
