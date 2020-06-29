@@ -28,6 +28,10 @@ const CheckboxKomp = ({ sporsmal }: SpmProps) => {
                         return <CheckboxSingle parent={sporsmal} sporsmal={uspm} key={idx} />
                     })}
 
+                    <Vis hvis={sporsmal.undertekst}>
+                        <Normaltekst tag='div'> {sporsmal.undertekst} </Normaltekst>
+                    </Vis>
+
                     <Normaltekst tag='div' role='alert' aria-live='assertive' className='skjemaelement__feilmelding'>
                         <Vis hvis={Object.entries(errors).length > 0 && !validCheck}>
                             <p>{feilmelding['lokal']}</p>
