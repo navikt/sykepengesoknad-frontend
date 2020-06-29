@@ -134,6 +134,8 @@ const SporsmalTekster: any = {
 
         'soknad.presisering.INNTEKTSKILDE_ARBEIDSFORHOLD_ER_DU_SYKMELDT': 'Du må sende egen sykepengesøknad for dette. Det betyr også at legen må skrive en sykmelding for hvert arbeidsforhold du er sykmeldt fra.',
         'soknad.presisering.INNTEKTSKILDE_ANDRE_ARBEIDSFORHOLD_ER_DU_SYKMELDT': 'Du må sende egen sykepengesøknad for dette. Det betyr også at legen må skrive en sykmelding for hvert arbeidsforhold du er sykmeldt fra.',
+        'soknad.presisering.INNTEKTSKILDE_SELVSTENDIG_ER_DU_SYKMELDT_NEI.url': 'https://www.nav.no/soknader/nb/person/helse/sykepenger#NAV083501',
+        'soknad.presisering.INNTEKTSKILDE_SELVSTENDIG_ER_DU_SYKMELDT_NEI': 'For å kunne behandle søknaden trenger vi også <a target="_blank" href="%URL%">inntektsopplysninger</a> fra deg som næringsdrivende. Vi trenger dette selv om du ikke er sykmeldt som næringsdrivende så vi kan beregne riktig beløp. Du trenger bare å sende inntektsopplysninger én gang per sammenhengende sykefravær. Det gjelder altså selv om du får en ny søknad til utfylling etter hver sykmelding',
         'soknad.presisering.INNTEKTSKILDE_SELVSTENDIG_ER_DU_SYKMELDT': 'Legen må sende inn én sykmelding for hver arbeidssituasjon du er sykmeldt fra, og du må søke om sykepenger for hver av dem.',
         'soknad.presisering.INNTEKTSKILDE_FRILANSER_ER_DU_SYKMELDT': 'Legen må sende inn én sykmelding for hver arbeidssituasjon du er sykmeldt fra, og du må søke om sykepenger for hver av dem.',
         'soknad.presisering.INNTEKTSKILDE_FRILANSER_SELVSTENDIG_ER_DU_SYKMELDT': 'Legen må sende inn én sykmelding for hver arbeidssituasjon du er sykmeldt fra, og du må søke om sykepenger for hver av dem.',
