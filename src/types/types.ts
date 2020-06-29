@@ -259,6 +259,6 @@ export interface IdParams {
 }
 
 export interface Ettersend {
-    type: string;
+    type: 'nav' | 'arbeidsgiver';
     dato: Date;
 }

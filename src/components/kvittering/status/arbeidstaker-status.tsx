@@ -12,7 +12,7 @@ import { Mottaker } from './kvittering-status'
 
 
 const ArbeidstakerStatus = () => {
-    const { valgtSoknad, setValgtSoknad, soknader, setSoknader, ettersend, setFeilmeldingTekst } = useAppStore()
+    const { valgtSoknad, setValgtSoknad, soknader, setSoknader, setEttersend, ettersend, setFeilmeldingTekst } = useAppStore()
     const [ tilArbNavn, setTilArbNavn ] = useState<string>()
     const [ tilOrg, setTilOrg ] = useState<string>()
     const [ tilNavDato, setTilNavDato ] = useState<string>()
@@ -26,12 +26,11 @@ const ArbeidstakerStatus = () => {
     useEffect(() => {
         if (ettersend?.type === 'nav') {
             ettersendNav()
-        }
-        else if(ettersend?.type === 'arbeidsgiver'){
+        } else if (ettersend?.type === 'arbeidsgiver') {
             ettersendArbeidsgiver()
         }
         // eslint-disable-next-line
-    }, [ ettersend ])
+    }, [ettersend])
 
     const ettersendNav = () => {
         fetch(env.syfoapiRoot + `/syfosoknad/api/soknader/${valgtSoknad!.id}/ettersendTilNav`, {
@@ -41,6 +40,7 @@ const ArbeidstakerStatus = () => {
         }).then((res: Response) => {
             if (res.ok) {
                 valgtSoknad!.sendtTilNAVDato = ettersend?.dato
+                setEttersend(null)
                 oppdaterSoknad()
             } else {
                 logger.error('Feil ved ettersending til NAV', res)
@@ -57,6 +57,7 @@ const ArbeidstakerStatus = () => {
         }).then((res: Response) => {
             if (res.ok) {
                 valgtSoknad!.sendtTilArbeidsgiverDato = ettersend?.dato
+                setEttersend(null)
                 oppdaterSoknad()
             } else {
                 logger.error('Feil ved ettersending til ARBEIDSGIVER', res)

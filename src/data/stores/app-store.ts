@@ -15,7 +15,7 @@ export const [ AppStoreProvider, useAppStore ] = constate(() => {
     const [ validCheck, setValidCheck ] = useState<boolean>()
     const [ feilmeldingTekst, setFeilmeldingTekst ] = useState<string>('')
     const [ rerenderSporsmalForm, setRerenderSporsmalForm ] = useState<number>(new Date().getUTCMilliseconds())
-    const [ ettersend, setEttersend ] = useState<Ettersend>()
+    const [ ettersend, setEttersend ] = useState<Ettersend | null>(null)
 
     return {
         unleash, setUnleash,

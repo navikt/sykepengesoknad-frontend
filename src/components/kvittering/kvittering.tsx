@@ -30,6 +30,9 @@ const Kvittering = () => {
         // eslint-disable-next-line
     }, [])
 
+    const erSendtTilNav = valgtSoknad?.sendtTilNAVDato !== null
+    const erSendtTilArbeidsgiver = valgtSoknad?.sendtTilArbeidsgiverDato !== null
+
     const skalViseKnapperad = !(valgtSoknad?.soknadstype === RSSoknadstype.OPPHOLD_UTLAND)
 
     const KvitteringType = () => {
@@ -45,9 +48,11 @@ const Kvittering = () => {
     }
 
     return (
-        <div className="kvittering">
+        <div
+            className="kvittering">
             <KvitteringType />
-            <Oppsummering ekspandert={sendtForMerEnn30DagerSiden(valgtSoknad?.sendtTilArbeidsgiverDato, valgtSoknad?.sendtTilNAVDato)} />
+            <Oppsummering
+                ekspandert={sendtForMerEnn30DagerSiden(valgtSoknad?.sendtTilArbeidsgiverDato, valgtSoknad?.sendtTilNAVDato)} />
 
             <Vis hvis={valgtSoknad!.soknadstype !== RSSoknadstype.OPPHOLD_UTLAND}>
                 <Opplysninger ekspandert={false} />
@@ -57,9 +62,12 @@ const Kvittering = () => {
                 <div className="knapperad">
                     <Endreknapp />
 
-                    <Ettersending gjelder="nav" />
+                    <Vis hvis={!erSendtTilNav}>
 
-                    <Vis hvis={valgtSoknad!.arbeidsgiver !== undefined}>
+                        <Ettersending gjelder="nav" />
+                    </Vis>
+
+                    <Vis hvis={valgtSoknad!.arbeidsgiver !== undefined && !erSendtTilArbeidsgiver}>
                         <Ettersending gjelder="arbeidsgiver" />
                     </Vis>
                 </div>
