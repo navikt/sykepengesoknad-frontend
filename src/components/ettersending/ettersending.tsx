@@ -9,20 +9,17 @@ import { useAppStore } from '../../data/stores/app-store'
 import { tekst } from '../../utils/tekster'
 
 interface EttersendingProps {
-    gjelder: string;
+    gjelder: 'nav' | 'arbeidsgiver';
 }
 
 const Ettersending = ({ gjelder }: EttersendingProps) => {
-    const { valgtSoknad, setEttersend } = useAppStore()
+    const { setEttersend } = useAppStore()
     const [ vilEttersende, setVilEttersende ] = useState<boolean>(false)
 
     const hentTekst = (text: string) => {
         const tilSuffix = (gjelder === 'nav') ? '-nav' : '-arbeidsgiver'
-        const ettersendingSuffix = (gjelder === 'nav')
-            ? (valgtSoknad?.sendtTilNAVDato ? '-ettersending' : '')
-            : (valgtSoknad?.sendtTilArbeidsgiverDato ? '-ettersending' : '')
 
-        return tekst(`${text}${tilSuffix}${ettersendingSuffix}`)
+        return tekst(`${text}${tilSuffix}`)
     }
 
     return (<>

@@ -49,8 +49,7 @@ const Arbeidstaker = () => {
     const settRiktigKvitteringTekst = () => {
         if (mottaker === RSMottaker.ARBEIDSGIVER) {
             setKvitteringTekst('intil16dager')
-        }
-        else if (mottaker === RSMottaker.NAV || mottaker === RSMottaker.ARBEIDSGIVER_OG_NAV) {
+        } else if (mottaker === RSMottaker.NAV || mottaker === RSMottaker.ARBEIDSGIVER_OG_NAV) {
             const fom = valgtSoknad!.fom!.getDate()
             const sykFom = dayjsToDate(valgtSykmelding!.mulighetForArbeid.perioder[0].fom)?.getDate()
             const forsteSoknad = fom === sykFom
@@ -64,12 +63,10 @@ const Arbeidstaker = () => {
                     .length > 0
                 if (harTidligereSoknad) {
                     setKvitteringTekst('medOpphold')
-                }
-                else {
+                } else {
                     setKvitteringTekst('over16dager')
                 }
-            }
-            else {
+            } else {
                 setKvitteringTekst('utenOpphold')
             }
         }
@@ -100,19 +97,20 @@ const Arbeidstaker = () => {
             <div className="sendt-info">
                 <ArbeidstakerStatus />
 
-                <Vis hvis={!sendtForMerEnn30DagerSiden(valgtSoknad?.sendtTilArbeidsgiverDato, valgtSoknad?.sendtTilNAVDato)} >
+                <Vis
+                    hvis={!sendtForMerEnn30DagerSiden(valgtSoknad?.sendtTilArbeidsgiverDato, valgtSoknad?.sendtTilNAVDato)}>
                     <div className="hva-skjer">
                         <AlertStripe type="info" form="inline">
-                            <Vis hvis={kvitteringTekst === 'medOpphold'} >
+                            <Vis hvis={kvitteringTekst === 'medOpphold'}>
                                 <Undertittel tag="h3">{tekst('kvittering.viktig-informasjon')}</Undertittel>
                             </Vis>
-                            <Vis hvis={kvitteringTekst !== 'medOpphold'} >
+                            <Vis hvis={kvitteringTekst !== 'medOpphold'}>
                                 <Undertittel tag="h3">{tekst('kvittering.hva-skjer-videre')}</Undertittel>
                             </Vis>
                         </AlertStripe>
                         <div className="avsnitt">
                             <div className="sendt-inner">
-                                { kvitteringInnhold() }
+                                {kvitteringInnhold()}
                             </div>
                         </div>
                     </div>

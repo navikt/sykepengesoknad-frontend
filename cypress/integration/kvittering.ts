@@ -74,8 +74,6 @@ describe('Tester kvittering', () => {
 
             // Knapperad ( Endre, Ettersend)
             cy.contains('Endre søknad').should('exist')
-            cy.contains('Send til NAV').should('exist')
-            cy.contains('Send til arbeidsgiver').should('not.exist')
         })
 
         it('Etter 30 dager', () => {
@@ -103,8 +101,6 @@ describe('Tester kvittering', () => {
 
             // Knapperad ( Endre, Ettersend)
             cy.contains('Endre søknad').should('exist')
-            cy.contains('Send til NAV').should('exist')
-            cy.contains('Send til arbeidsgiver').should('not.exist')
         })
     })
 
@@ -202,7 +198,7 @@ describe('Tester kvittering', () => {
 
             // Knapperad ( Endre, Ettersend)
             cy.contains('Endre søknad').should('exist')
-            cy.contains('Send til NAV').should('exist')
+            cy.contains('Send til NAV').should('not.exist')
             cy.contains('Send til arbeidsgiver').should('not.exist')
         })
     })
@@ -251,7 +247,7 @@ describe('Tester kvittering', () => {
             // Knapperad ( Endre, Ettersend)
             cy.contains('Endre søknad').should('exist')
             cy.contains('Send til NAV').should('exist')
-            cy.contains('Send til arbeidsgiver').should('exist')
+            cy.contains('Send til arbeidsgiver').should('not.exist')
         })
 
         it('Utenfor arbeidsgiverperiode', () => {
@@ -314,8 +310,8 @@ describe('Tester kvittering', () => {
 
             // Knapperad ( Endre, Ettersend)
             cy.contains('Endre søknad').should('exist')
-            cy.contains('Send til NAV').should('exist')
-            cy.contains('Send til arbeidsgiver').should('exist')
+            cy.contains('Send til NAV').should('not.exist')
+            cy.contains('Send til arbeidsgiver').should('not.exist')
         })
 
         it('Oppfølgende periode uten opphold', () => {
@@ -365,7 +361,7 @@ describe('Tester kvittering', () => {
 
             // Knapperad ( Endre, Ettersend)
             cy.contains('Endre søknad').should('exist')
-            cy.contains('Send til NAV').should('exist')
+            cy.contains('Send til NAV').should('not.exist')
             cy.contains('Send til arbeidsgiver').should('exist')
         })
 
@@ -423,7 +419,7 @@ describe('Tester kvittering', () => {
 
             // Knapperad ( Endre, Ettersend)
             cy.contains('Endre søknad').should('exist')
-            cy.contains('Send til NAV').should('exist')
+            cy.contains('Send til NAV').should('not.exist')
             cy.contains('Send til arbeidsgiver').should('exist')
         })
     })

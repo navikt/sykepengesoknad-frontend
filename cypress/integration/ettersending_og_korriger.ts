@@ -1,11 +1,8 @@
-import { arbeidstaker } from '../../src/data/mock/data/soknader-opplaering'
+import { arbeidstakerGradert } from '../../src/data/mock/data/soknader-opplaering'
 
 describe('Tester ettersending og korrigering', () => {
-    //-----
-    // Sykmelding: 7e90121c-b64b-4a1c-b7a5-93c9d95aba47, arbeidstaker - 100%
-    // Søknad: faba11f5-c4f2-4647-8c8a-58b28ce2f3ef, fom: 1.4.20, tom: 24.4.20
-    //-----
-    const soknad = arbeidstaker
+
+    const soknad = arbeidstakerGradert
 
     before(() => {
         cy.visit('http://localhost:8080')
@@ -62,6 +59,15 @@ describe('Tester ettersending og korrigering', () => {
         cy.contains('Gå videre').click()
 
         cy.url().should('include', `${soknad.id}/11`)
+        cy.get('.inputPanelGruppe__inner label:nth-child(2) > input[value=NEI]').click({ force: true })
+        cy.contains('Gå videre').click()
+
+        cy.url().should('include', `${soknad.id}/12`)
+        cy.get('.inputPanelGruppe__inner label:nth-child(2) > input[value=NEI]').click({ force: true })
+        cy.contains('Gå videre').click()
+
+
+        cy.url().should('include', `${soknad.id}/13`)
         cy.get('.skjemaelement__label').click({ force: true })
         cy.contains('Send søknaden').click()
     })
@@ -76,8 +82,10 @@ describe('Tester ettersending og korrigering', () => {
 
         // Ettersend
         cy.contains('Send til NAV').click()
-        cy.contains('Hei! Du har allerede sendt denne søknaden og trenger ikke gjøre det på nytt.')
-        cy.contains('Send søknaden likevel').click()
+        cy.contains('Vanligvis sendes søknaden bare til NAV hvis det samlede sykefraværet er 16 dager eller mer. Denne søknaden er beregnet til å være kortere. Hvis arbeidsgiveren din eller NAV har bedt deg sende den likevel, gjør du det her')
+        cy.contains('Ja, send søknaden').click()
+        cy.contains('Send til NAV').should('not.exist')
+
     })
 
     it('Korriger', () => {
