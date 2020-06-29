@@ -19,7 +19,7 @@ import PerioderMedOpphold from './innhold/arbeidstaker/perioder-med-opphold'
 import PerioderUtenOpphold from './innhold/arbeidstaker/perioder-uten-opphold'
 import ArbeidstakerStatus from './status/arbeidstaker-status'
 
-type ArbeidstakerKvitteringTekst = 'intil16dager' | 'over16dager' | 'utenOpphold' | 'medOpphold' | undefined
+type ArbeidstakerKvitteringTekst = 'inntil16dager' | 'over16dager' | 'utenOpphold' | 'medOpphold' | undefined
 
 const Arbeidstaker = () => {
     const { valgtSoknad, valgtSykmelding, setMottaker, mottaker, soknader } = useAppStore()
@@ -30,7 +30,7 @@ const Arbeidstaker = () => {
         hentMottaker()
         settRiktigKvitteringTekst()
         // eslint-disable-next-line
-    }, [])
+    }, [valgtSoknad?.sendtTilNAVDato])
 
     const hentMottaker = () => {
         rsMottakerResponseFetch.fetch(env.syfoapiRoot + `/syfosoknad/api/soknader/${valgtSoknad!.id}/finnMottaker`, {
@@ -48,7 +48,12 @@ const Arbeidstaker = () => {
 
     const settRiktigKvitteringTekst = () => {
         if (mottaker === RSMottaker.ARBEIDSGIVER) {
-            setKvitteringTekst('intil16dager')
+            if (valgtSoknad?.sendtTilNAVDato !== null) {
+                // Brukeren har ettersendt til NAV
+                setKvitteringTekst('over16dager')
+            } else {
+                setKvitteringTekst('inntil16dager')
+            }
         } else if (mottaker === RSMottaker.NAV || mottaker === RSMottaker.ARBEIDSGIVER_OG_NAV) {
             const fom = valgtSoknad!.fom!.getDate()
             const sykFom = dayjsToDate(valgtSykmelding!.mulighetForArbeid.perioder[0].fom)?.getDate()
@@ -74,7 +79,7 @@ const Arbeidstaker = () => {
 
     const kvitteringInnhold = () => {
         switch (kvitteringTekst) {
-            case 'intil16dager':
+            case 'inntil16dager':
                 return <Inntil16dager />
             case 'over16dager':
                 return <Over16dager />

@@ -248,6 +248,48 @@ describe('Tester kvittering', () => {
             cy.contains('Endre søknad').should('exist')
             cy.contains('Send til NAV').should('exist')
             cy.contains('Send til arbeidsgiver').should('not.exist')
+
+            // Ettersend
+            cy.contains('Send til NAV').click()
+            cy.contains('Vanligvis sendes søknaden bare til NAV hvis det samlede sykefraværet er 16 dager eller mer. Denne søknaden er beregnet til å være kortere. Hvis arbeidsgiveren din eller NAV har bedt deg sende den likevel, gjør du det her')
+            cy.contains('Ja, send søknaden').click()
+            cy.contains('Send til NAV').should('not.exist')
+
+            // Sendt datoer
+            cy.get('.kvittering .alertstripe--suksess')
+                .should('contain', 'Søknaden er sendt')
+            cy.get('.sendt-info .oppsummering__avkrysset')
+                .should('contain', '995816598 sitt orgnavn :) (Org.nr. 995816598)')
+                .and('contain', 'NAV')
+
+
+            // Hva skjer videre
+            cy.get('.hva-skjer')
+                .should('contain', 'Hva skjer videre?')
+                .and('contain', 'Før NAV kan behandle søknaden')
+                .and('contain', 'Når sykefraværet ditt er lengre enn 16 kalenderdager, betyr det at du får sykepenger utbetalt av NAV. Noen arbeidsplasser fortsetter å utbetale sykepenger fra dag 17, men da får de penger tilbake fra NAV senere.  Arbeidsgiveren din må derfor sende oss inntektsmelding så fort som mulig.')
+                .and('contain', 'Hvorfor går det et skille ved 16 dager?')
+                .and('contain', 'Hva er en inntektsmelding')
+                .and('contain', 'NAV behandler søknaden')
+                .and('contain', 'Saksbehandlingstidene kan variere noe. Sjekk saksbehandlingstidene i ditt fylke')
+                .and('contain', 'Når blir pengene utbetalt')
+                .and('contain', 'Blir søknaden din innvilget før den 15. i denne måneden, blir pengene utbetalt innen den 25. samme måned. Blir det innvilget etter den 15. i måneden, utbetales pengene innen 5 dager.')
+                .and('not.contain', 'Du får sykepengene fra arbeidsgiveren din')
+
+            // Behandlingstider lenke
+            cy.contains('Sjekk saksbehandlingstidene i ditt fylke')
+                .should('have.attr', 'href', 'https://www.nav.no/no/nav-og-samfunn/om-nav/saksbehandlingstider-i-nav')
+
+            // Arbeidsgiverperiode tekst
+            cy.contains('Hvorfor går det et skille ved 16 dager?').click({ force: true })
+            cy.get('.alertstripe--info')
+                .should('contain', 'Arbeidsgiveren skal betale sykepenger i en periode på opptil 16 kalenderdager, også kalt arbeidsgiverperioden. NAV overtar sykepengeutbetalingen fra og med 17. kalenderdag.')
+
+            // Inntektsmelding
+            cy.contains('Hva er en inntektsmelding').click({ force: true })
+            cy.get('.alertstripe--info')
+                .should('contain', 'Arbeidsplassen din sender inntektsopplysninger og annen informasjon som NAV trenger for å behandle søkaden din. Inntektsmeldingen senden digitalt fra arbeidsplssens lønns og personalsystemet eller fra Altinn.no.')
+
         })
 
         it('Utenfor arbeidsgiverperiode', () => {
@@ -275,7 +317,7 @@ describe('Tester kvittering', () => {
             cy.get('.hva-skjer')
                 .should('contain', 'Hva skjer videre?')
                 .and('contain', 'Før NAV kan behandle søknaden')
-                .and('contain', 'Sykefraværet ditt er lengre enn 16 kalenderdager. Det betyr at du får sykepenger utbetalt av NAV. Noen arbeidsplasser fortsetter å utbetale sykepenger fra dag 17, men da får de penger tilbake fra NAV senere. Arbeidsgiveren din må derfor sende oss inntektsmelding så fort som mulig.')
+                .and('contain', 'Når sykefraværet ditt er lengre enn 16 kalenderdager, betyr det at du får sykepenger utbetalt av NAV. Noen arbeidsplasser fortsetter å utbetale sykepenger fra dag 17, men da får de penger tilbake fra NAV senere.  Arbeidsgiveren din må derfor sende oss inntektsmelding så fort som mulig.')
                 .and('contain', 'Hvorfor går det et skille ved 16 dager?')
                 .and('contain', 'Hva er en inntektsmelding')
                 .and('contain', 'NAV behandler søknaden')
