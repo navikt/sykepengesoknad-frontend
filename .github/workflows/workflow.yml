@@ -42,35 +42,10 @@ jobs:
         run: |
             docker build . -f Dockerfile.root -t ${IMAGE_ROOT}
             docker push ${IMAGE_ROOT}
-      - name: Bygg og push Docker image hvor appen serves på /nysykepengesoknad
-        run: |
-            docker build . -f Dockerfile.nysykepengesoknad -t ${IMAGE_NYSYKEPENGESOKNAD}
-            docker push ${IMAGE_NYSYKEPENGESOKNAD}
       - name: Bygg og push Docker image hvor appen serves på /sykepengesoknad
         run: |
           docker build . -f Dockerfile.sykepengesoknad -t ${IMAGE_SYKEPENGESOKNAD}
           docker push ${IMAGE_SYKEPENGESOKNAD}
-
-  deploy-nysykepengesoknad-to-q1-sbs:
-    name: Deploy nysykepengesoknad to q1-sbs (Q1)
-    runs-on: ubuntu-latest
-    needs: build-and-publish
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v1
-      - name: Last ned versjon
-        uses: actions/download-artifact@v1
-        with:
-          name: VERSION.txt
-          path: .
-      - run: echo "::set-env name=VERSION::"`cat VERSION.txt`""
-      - run: echo "::set-env name=IMAGE::"docker.pkg.github.com/${GITHUB_REPOSITORY}/$APP-nysykepengesoknad:$VERSION""
-      - uses: nais/deploy/actions/deploy@v1
-        name: Deploy to q1-sbs
-        env:
-          APIKEY: ${{ secrets.NAIS_DEPLOY_APIKEY }}
-          CLUSTER: dev-sbs
-          RESOURCE: nais-q1-nysykepengesoknad.yaml
 
   deploy-to-q1-sbs:
     name: Deploy sykepengesoknad to q1-sbs (Q1)
