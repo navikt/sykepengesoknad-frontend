@@ -28,6 +28,10 @@ const CheckboxKomp = ({ sporsmal }: SpmProps) => {
                         return <CheckboxSingle parent={sporsmal} sporsmal={uspm} key={idx} />
                     })}
 
+                    <Vis hvis={sporsmal.undertekst}>
+                        <Normaltekst tag='div'> {sporsmal.undertekst} </Normaltekst>
+                    </Vis>
+
                     <Normaltekst tag='div' role='alert' aria-live='assertive' className='skjemaelement__feilmelding'>
                         <Vis hvis={Object.entries(errors).length > 0 && !validCheck}>
                             <p>{feilmelding['lokal']}</p>
@@ -48,7 +52,7 @@ interface CheckboxProps {
 type AllProps = SpmProps & CheckboxProps;
 
 const CheckboxSingle = ({ parent, sporsmal }: AllProps) => {
-    const { register, setValue, watch, getValues, clearError } = useFormContext()
+    const { register, setValue, watch, getValues } = useFormContext()
     const feilmelding = hentFeilmelding(parent)
     const { setValidCheck } = useAppStore()
     const [ lokal, setLokal ] = useState<string>(hentSvar(sporsmal))
@@ -61,13 +65,18 @@ const CheckboxSingle = ({ parent, sporsmal }: AllProps) => {
 
     const valider = () => {
         const valid = harValgtNoe(parent, getValues())
-        const fields: string[] = parent.undersporsmal.map(spm => spm.id)
-        if (!valid) {
-            fields.shift()
-        }
-        clearError(fields)
+        const forsteCheckbox = parent.undersporsmal[0].id
         setValidCheck(valid)
-        return valid ? valid : feilmelding.global
+        if (valid) {
+            return true
+        }
+        // For å bare vise feilmeldingen en gang
+        if (forsteCheckbox === sporsmal.id) {
+            return feilmelding.global
+        }
+        else {
+            return true
+        }
     }
 
     const mounted = watch(sporsmal.id)

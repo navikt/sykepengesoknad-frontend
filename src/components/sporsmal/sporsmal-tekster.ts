@@ -139,10 +139,10 @@ const SporsmalTekster: any = {
         'soknad.presisering.INNTEKTSKILDE_SELVSTENDIG_ER_DU_SYKMELDT': 'Legen må sende inn én sykmelding for hver arbeidssituasjon du er sykmeldt fra, og du må søke om sykepenger for hver av dem.',
         'soknad.presisering.INNTEKTSKILDE_FRILANSER_ER_DU_SYKMELDT': 'Legen må sende inn én sykmelding for hver arbeidssituasjon du er sykmeldt fra, og du må søke om sykepenger for hver av dem.',
         'soknad.presisering.INNTEKTSKILDE_FRILANSER_SELVSTENDIG_ER_DU_SYKMELDT': 'Legen må sende inn én sykmelding for hver arbeidssituasjon du er sykmeldt fra, og du må søke om sykepenger for hver av dem.',
-        'soknad.presisering.INNTEKTSKILDE_JORDBRUKER_ER_DU_SYKMELDT': 'Legen må sende inn én sykmelding for hver arbeidssituasjon du er sykmeldt fra, og du må søke om sykepenger for hver av dem . Foreløpig støtter ikke den digitale løsningen søknad om sykepenger for disse gruppene. Søknaden om sykepenger for dette må du derfor sende på papir.',
+        'soknad.presisering.INNTEKTSKILDE_JORDBRUKER_ER_DU_SYKMELDT': 'Legen må sende inn én sykmelding for hver arbeidssituasjon du er sykmeldt fra, og du må søke om sykepenger for hver av dem.',
         'soknad.presisering.INNTEKTSKILDE_SELVSTENDIG_DAGMAMMA_ER_DU_SYKMELDT': 'Legen må sende inn én sykmelding for hver arbeidssituasjon du er sykmeldt fra, og du må søke om sykepenger for hver av dem.',
-        'soknad.presisering.INNTEKTSKILDE_OMSORGSLONN_ER_DU_SYKMELDT': 'Legen må sende inn én sykmelding for hver arbeidssituasjon du er sykmeldt fra, og du må søke om sykepenger for hver av dem. Foreløpig støtter ikke den digitale løsningen søknad om sykepenger for omsorgslønn. Søknaden om sykepenger for dagmamma må du derfor sende på papir.',
-        'soknad.presisering.INNTEKTSKILDE_FOSTERHJEM_ER_DU_SYKMELDT': 'Legen må sende inn én sykmelding for hver arbeidssituasjon du er sykmeldt fra, og du må søke om sykepenger for hver av dem. Foreløpig støtter ikke den digitale løsningen søknad om sykepenger for fosterhjem. Søknaden om sykepenger for dagmamma må du derfor sende på papir.',
+        'soknad.presisering.INNTEKTSKILDE_OMSORGSLONN_ER_DU_SYKMELDT': 'Legen må sende inn én sykmelding for hver arbeidssituasjon du er sykmeldt fra, og du må søke om sykepenger for hver av dem.',
+        'soknad.presisering.INNTEKTSKILDE_FOSTERHJEM_ER_DU_SYKMELDT': 'Legen må sende inn én sykmelding for hver arbeidssituasjon du er sykmeldt fra, og du må søke om sykepenger for hver av dem.',
 
     }, 'en': {}
 }
