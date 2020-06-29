@@ -47,31 +47,33 @@ const JaNeiRadio = ({ sporsmal }: SpmProps) => {
 
     const presisering = (valgt: boolean) => {
         const spm = sporsmal
-        return (spm.tag && spm.tag.startsWith('INNTEKTSKILDE_') && lokal === 'JA' && valgt)
-            ? <div className='presisering'>
-                <Normaltekst tag='span'>
-                    {tekst('soknad.presisering.' + spm.tag)}
-                </Normaltekst>
-            </div>
-            : (spm.tag && spm.tag.startsWith('INNTEKTSKILDE_SELVSTENDIG') && lokal === 'NEI' && valgt)
-                ? <div className='presisering'>
+        if (spm.tag && valgt) {
+            if (spm.tag === TagTyper.UTLANDSOPPHOLD_SOKT_SYKEPENGER) {
+                const utenlandsopphold = lokal === SvarEnums.JA
+                    ? 'soknad.infotekst.utlandsopphold_sokt_sykepenger.ja'
+                    : 'soknad.infotekst.utlandsopphold_sokt_sykepenger.nei'
+                return <div className='ekstrasporsmal'>
+                    <Normaltekst tag='span'>
+                        {parser(getLedetekst(tekst(utenlandsopphold), { '%URL%': utlandssoknadUrl }))}
+                    </Normaltekst>
+                </div>
+            }
+            if (spm.tag.startsWith('INNTEKTSKILDE_') && lokal === 'JA') {
+                return <div className='presisering'>
+                    <Normaltekst tag='span'>
+                        {tekst('soknad.presisering.' + spm.tag)}
+                    </Normaltekst>
+                </div>
+            }
+            if (spm.tag === 'INNTEKTSKILDE_SELVSTENDIG_ER_DU_SYKMELDT' && lokal === 'NEI') {
+                return <div className='presisering'>
                     <Normaltekst tag='span'>
                         {parser(getLedetekst(tekst('soknad.presisering.' + spm.tag + '_NEI'), { '%URL%': tekst('soknad.presisering.INNTEKTSKILDE_SELVSTENDIG_ER_DU_SYKMELDT_NEI.url') }))}
                     </Normaltekst>
                 </div>
-                : (spm.tag && spm.tag === TagTyper.UTLANDSOPPHOLD_SOKT_SYKEPENGER && lokal === SvarEnums.JA && valgt)
-                    ? <div className='ekstrasporsmal'>
-                        <Normaltekst tag='span'>
-                            {parser(getLedetekst(tekst('soknad.infotekst.utlandsopphold_sokt_sykepenger.ja'), { '%URL%': utlandssoknadUrl }))}
-                        </Normaltekst>
-                    </div>
-                    : (spm.tag && spm.tag === TagTyper.UTLANDSOPPHOLD_SOKT_SYKEPENGER && lokal === SvarEnums.NEI && valgt)
-                        ? <div className='ekstrasporsmal'>
-                            <Normaltekst tag='span'>
-                                {parser(getLedetekst(tekst('soknad.infotekst.utlandsopphold_sokt_sykepenger.nei'), { '%URL%': utlandssoknadUrl }))}
-                            </Normaltekst>
-                        </div>
-                        : <></>
+            }
+        }
+        else return <></>
     }
 
     return (
