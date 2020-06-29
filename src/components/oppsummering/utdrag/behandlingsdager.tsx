@@ -1,4 +1,4 @@
-import { Element, Normaltekst } from 'nav-frontend-typografi'
+import { Element } from 'nav-frontend-typografi'
 import React from 'react'
 
 import { RSSvar } from '../../../types/rs-types/rs-svar'
@@ -29,10 +29,8 @@ const Behandlingsdager = ({ sporsmal }: OppsummeringProps) => {
                                 return (
                                     <div className='oppsummering__sporsmal' key={idx}>
                                         <Element tag='h3'>{tilLesbarPeriodeUtenArstall(uspm.min, uspm.max)}</Element>
-                                        <div className='oppsummering__tekstsvar'>
-                                            <Normaltekst className='oppsummering__dato'>
-                                                <Avkrysset tekst={datoEllerIkkeTilBehandling(uspm.svarliste.svar[ 0 ])} />
-                                            </Normaltekst>
+                                        <div className='oppsummering__tekstsvar oppsummering__dato'>
+                                            <Avkrysset tekst={datoEllerIkkeTilBehandling(uspm.svarliste.svar[0])} />
                                         </div>
                                     </div>
                                 )
