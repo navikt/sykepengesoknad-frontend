@@ -9,19 +9,13 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v1
-      - name: Cache Cypress binary
-        uses: actions/cache@v1
-        with:
-          path: ~/.cache/Cypress
-          key: cypress-${{ runner.os }}-cypress-${{ hashFiles('**/package.json') }}
-          restore-keys: |
-            cypress-${{ runner.os }}-cypress-
       - name: Generer versjon og image navn
         run: |
           TIME=$(TZ="Europe/Oslo" date +%Y.%m.%d-%H.%M)
           COMMIT=$(git rev-parse --short=8 HEAD)
           VERSION=$TIME-$COMMIT
           echo "::set-env name=IMAGE_ROOT::"docker.pkg.github.com/${GITHUB_REPOSITORY}/$APP-root:$VERSION""
+          echo "::set-env name=IMAGE_NYSYKEPENGESOKNAD::"docker.pkg.github.com/${GITHUB_REPOSITORY}/$APP-nysykepengesoknad:$VERSION""
           echo "::set-env name=IMAGE_SYKEPENGESOKNAD::"docker.pkg.github.com/${GITHUB_REPOSITORY}/$APP-sykepengesoknad:$VERSION""
           echo "::set-env name=VERSION::"$VERSION""
       - run: echo $VERSION > VERSION.txt
@@ -40,18 +34,6 @@ jobs:
         run: CI=true npm run test
       - name: Build application
         run: npm run build
-      - name: Run cypress
-        uses: cypress-io/github-action@v1
-        with:
-          install: false
-          record: false
-          start: npm run start-mock
-          wait-on: http://localhost:8080
-      - uses: actions/upload-artifact@v1
-        if: ${{ always() }}
-        with:
-          name: cypress-screenshots
-          path: cypress/screenshots
       - name: Docker login
         env:
             GITHUB_TOKEN: ${{ secrets.GITHUB_ACCESS_TOKEN }}
@@ -105,26 +87,6 @@ jobs:
           APIKEY: ${{ secrets.NAIS_DEPLOY_APIKEY }}
           CLUSTER: labs-gcp
           RESOURCE: nais-gcp.yaml
-
-  deploy-to-prod-sbs:
-    if: github.ref == 'refs/heads/master'
-    name: Deploy to production
-    needs: build-and-publish
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v1
-      - uses: actions/download-artifact@v1
-        with:
-          name: VERSION.txt
-          path: .
-      - run: echo "::set-env name=VERSION::"`cat VERSION.txt`""
-      - run: echo "::set-env name=IMAGE::"docker.pkg.github.com/${GITHUB_REPOSITORY}/$APP-sykepengesoknad:$VERSION""
-      - name: Deploy to prod-sbs
-        uses: nais/deploy/actions/deploy@v1
-        env:
-          APIKEY: ${{ secrets.NAIS_DEPLOY_APIKEY }}
-          CLUSTER: prod-sbs
-          RESOURCE: nais-prod.yaml
 
   tag-image-as-latest:
     if: github.ref == 'refs/heads/master'

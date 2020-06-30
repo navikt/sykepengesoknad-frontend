@@ -1,0 +1,36 @@
+name: PR
+on:
+  pull_request:
+  push:
+    branches:
+      - 'master'
+env:
+  APP: sykepengesok
+jobs:
+  integrasjonstest:
+    name: Integrasjonstest
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v1
+      - name: Cache Cypress binary
+        uses: actions/cache@v1
+        with:
+          path: ~/.cache/Cypress
+          key: cypress-${{ runner.os }}-cypress-pr-${{ hashFiles('**/package.json') }}
+          restore-keys: |
+            cypress-${{ runner.os }}-cypress-
+      - name: Install npm dependencies
+        run: npm ci
+      - name: Run cypress
+        uses: cypress-io/github-action@v1
+        with:
+          install: false
+          record: false
+          start: npm run start-mock
+          wait-on: http://localhost:8080
+      - uses: actions/upload-artifact@v1
+        if: ${{ always() }}
+        with:
+          name: cypress-screenshots
+          path: cypress/screenshots
