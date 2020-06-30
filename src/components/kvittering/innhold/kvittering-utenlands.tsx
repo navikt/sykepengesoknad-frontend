@@ -30,7 +30,7 @@ const KvitteringUtenlands = () => {
                 </Normaltekst>
             </div>
             <div className="avsnitt">
-                <Lenke href={tekst('kvittering.utenlands.lenke.url')}>
+                <Lenke target="blank" href={tekst('kvittering.utenlands.lenke.url')}>
                     <Normaltekst tag="span">{tekst('kvittering.utenlands.lenke')}</Normaltekst>
                 </Lenke>.
             </div>
