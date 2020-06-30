@@ -2376,6 +2376,19 @@ export const frilanser: RSSoknad = {
             ]
         },
         {
+            'id': '687456',
+            'tag': 'BEKREFT_OPPLYSNINGER',
+            'sporsmalstekst': 'Jeg har lest all informasjonen jeg har fått i søknaden og bekrefter at opplysningene jeg har gitt er korrekte.',
+            'undertekst': null,
+            'svartype': 'CHECKBOX_PANEL',
+            'min': null,
+            'max': null,
+            'pavirkerAndreSporsmal': false,
+            'kriterieForVisningAvUndersporsmal': null,
+            'svar': [],
+            'undersporsmal': []
+        },
+        {
             'id': '687455',
             'tag': 'VAER_KLAR_OVER_AT',
             'sporsmalstekst': 'Viktig å være klar over:',
@@ -2388,19 +2401,6 @@ export const frilanser: RSSoknad = {
             'svar': [],
             'undersporsmal': []
         },
-        {
-            'id': '687456',
-            'tag': 'BEKREFT_OPPLYSNINGER',
-            'sporsmalstekst': 'Jeg har lest all informasjonen jeg har fått i søknaden og bekrefter at opplysningene jeg har gitt er korrekte.',
-            'undertekst': null,
-            'svartype': 'CHECKBOX_PANEL',
-            'min': null,
-            'max': null,
-            'pavirkerAndreSporsmal': false,
-            'kriterieForVisningAvUndersporsmal': null,
-            'svar': [],
-            'undersporsmal': []
-        }
     ],
     'egenmeldtSykmelding': false
 }
