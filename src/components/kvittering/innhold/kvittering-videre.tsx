@@ -23,7 +23,7 @@ const KvitteringVidere = () => {
                 <div className="avsnitt">
                     <Element tag="h2">{tekst('kvittering.naeringsdrivende.tittel')}</Element>
                     <Normaltekst tag="span">{tekst('kvittering.naeringsdrivende.brodtekst')} </Normaltekst>
-                    <Lenke href={tekst('kvittering.naeringsdrivende.lenke.url')}>
+                    <Lenke target="blank" href={tekst('kvittering.naeringsdrivende.lenke.url')}>
                         <Normaltekst tag="span">{tekst('kvittering.naeringsdrivende.lenke')}</Normaltekst>
                     </Lenke>.
                 </div>
@@ -31,7 +31,7 @@ const KvitteringVidere = () => {
             <div className="avsnitt hva-skjer">
                 <Element tag="h2">{tekst('kvittering.nav-behandler-soknaden')}</Element>
                 <Normaltekst tag="span">{tekst('kvittering.arbeidstaker.saksbehandlingstid')} </Normaltekst>
-                <Lenke href={tekst('kvittering.arbeidstaker.saksbehandlingstid.lenke.url')}>
+                <Lenke target="blank" href={tekst('kvittering.arbeidstaker.saksbehandlingstid.lenke.url')}>
                     <Normaltekst tag="span">{tekst('kvittering.arbeidstaker.saksbehandlingstid.lenke')}</Normaltekst>
                 </Lenke>
             </div>

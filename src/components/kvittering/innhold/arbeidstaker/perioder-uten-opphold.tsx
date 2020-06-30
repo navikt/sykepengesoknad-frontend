@@ -11,7 +11,7 @@ const PerioderUtenOpphold = () => {
             <div className="avsnitt">
                 <Element tag="h2" className="arbeidstaker-tittel">{tekst('kvittering.nav-behandler-soknaden')}</Element>
                 <Normaltekst tag="span">{tekst('kvittering.arbeidstaker.saksbehandlingstid')} </Normaltekst>
-                <Lenke href={tekst('kvittering.arbeidstaker.saksbehandlingstid.lenke.url')}>
+                <Lenke target="blank" href={tekst('kvittering.arbeidstaker.saksbehandlingstid.lenke.url')}>
                     <Normaltekst tag="span">{tekst('kvittering.arbeidstaker.saksbehandlingstid.lenke')}</Normaltekst>
                 </Lenke>.
             </div>
