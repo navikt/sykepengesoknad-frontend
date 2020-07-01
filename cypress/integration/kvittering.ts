@@ -288,7 +288,7 @@ describe('Tester kvittering', () => {
             // Inntektsmelding
             cy.contains('Hva er en inntektsmelding').click({ force: true })
             cy.get('.alertstripe--info')
-                .should('contain', 'Arbeidsplassen din sender inntektsopplysninger og annen informasjon som NAV trenger for å behandle søkaden din. Inntektsmeldingen senden digitalt fra arbeidsplssens lønns og personalsystemet eller fra Altinn.no.')
+                .should('contain', 'Arbeidsplassen din sender inntektsopplysninger og annen informasjon som NAV trenger for å behandle søkaden din. Inntektsmeldingen senden digitalt fra arbeidsplassens lønns og personalsystemet eller fra Altinn.no.')
 
         })
 
@@ -338,7 +338,7 @@ describe('Tester kvittering', () => {
             // Inntektsmelding
             cy.contains('Hva er en inntektsmelding').click({ force: true })
             cy.get('.alertstripe--info')
-                .should('contain', 'Arbeidsplassen din sender inntektsopplysninger og annen informasjon som NAV trenger for å behandle søkaden din. Inntektsmeldingen senden digitalt fra arbeidsplssens lønns og personalsystemet eller fra Altinn.no.')
+                .should('contain', 'Arbeidsplassen din sender inntektsopplysninger og annen informasjon som NAV trenger for å behandle søkaden din. Inntektsmeldingen senden digitalt fra arbeidsplassens lønns og personalsystemet eller fra Altinn.no.')
 
             // Oppsummering minimert
             cy.get('.utvidbar.oppsummering.ekspander.lilla .utvidbar__toggle')
