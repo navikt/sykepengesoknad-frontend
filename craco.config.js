@@ -1,8 +1,15 @@
-const CracoLessPlugin = require('craco-less');
+// eslint-disable-next-line @typescript-eslint/no-var-requires
+const CracoLessPlugin = require('craco-less')
 
 module.exports = {
+    webpack: {
+        configure: {
+            devtool: 'hidden-source-map'
+        },
+    },
     plugins: [
-        { plugin: CracoLessPlugin,
+        {
+            plugin: CracoLessPlugin,
             options: {
                 lessLoaderOptions: {
                     sourceMap: true
@@ -10,4 +17,4 @@ module.exports = {
             }
         },
     ],
-};
+}

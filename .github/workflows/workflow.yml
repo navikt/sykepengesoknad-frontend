@@ -34,6 +34,16 @@ jobs:
         run: CI=true npm run test
       - name: Build application
         run: npm run build
+      - name: Upload sources with sourcemaps
+        if: github.ref == 'refs/heads/master'
+        uses: actions/upload-artifact@v1
+        with:
+          name: sources-with-sourcemaps
+          path: build/static
+      - name: Slett sourcemaps
+        run: |
+          rm ./build/static/js/*.map
+          rm ./build/static/css/*.map
       - name: Docker login
         env:
             GITHUB_TOKEN: ${{ secrets.GITHUB_ACCESS_TOKEN }}
