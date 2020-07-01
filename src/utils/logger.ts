@@ -1,23 +1,32 @@
+import safeStringify from 'fast-safe-stringify'
+
 const frontendlogger = (window as any).frontendlogger
 
 // Grafana - Metrikk
-export const event = (...args: any[]): void => {
-    frontendlogger.event(...args)
+export const event = (arg: object): void => {
+    frontendlogger.event(arg)
+}
+
+const msgToString = (msg: string, arg?: any): string => {
+    if (arg) {
+        return `${msg} - ${safeStringify(arg)}`
+    }
+    return msg
 }
 
 // Kibana - Warning
-export const warn = (...args: any[]): void => {
-    frontendlogger.warn(...args)
+export const warn = (msg: string, arg?: any): void => {
+    frontendlogger.warn(msgToString(msg, arg))
 }
 
 // Kibana - Info
-export const info = (...args: any[]): void => {
-    frontendlogger.info(...args)
+export const info = (msg: string, arg?: any): void => {
+    frontendlogger.info(msgToString(msg, arg))
 }
 
 // Kibana - Error
-export const error = (...args: any[]): void => {
-    frontendlogger.error(...args)
+export const error = (msg: string, arg?: any): void => {
+    frontendlogger.error(msgToString(msg, arg))
 }
 
 export const logger = {
