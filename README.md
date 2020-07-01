@@ -37,4 +37,10 @@
 * Kvitteringen er samme side man kommer til om man går inn på en sendt søknad fra oversikten
 * Utenlandssøknaden har nå et spørsmål per side, ikke en side med alle spørsmål
 * Ved klikk på utgått søknad får man en popup, ikke en egen side
-* TODO: Kalendere oppfører seg litt annerledes på mobil  
+* Kalendere oppfører seg litt annerledes på mobil  
+
+
+# Debugging med sourcemaps
+Ved feil i produksjon vil en minimert stacktrace logges til frontendlogger. 
+Ved å laste ned artifikaten sources-with-sourcemaps fra GHA for bygget hvor feilen oppstod kan man sammen med skriptet sourcemap-debug.js finne ut av hvor i originalkoden feilen oppstod. 
+Se også https://stackoverflow.com/questions/33128859/how-can-i-take-a-minified-javascript-stack-trace-and-run-it-against-a-source-map
