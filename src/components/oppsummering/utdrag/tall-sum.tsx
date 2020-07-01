@@ -16,7 +16,7 @@ const TallSum = ({ sporsmal }: OppsummeringProps) => {
             <div className='oppsummering__svar'>
                 {sporsmal.svarliste.svar.map((svarverdi, index) => {
                     return (
-                        <Vis hvis={svarverdi.verdi !== empty && typeof svarverdi.verdi === 'string'} key={index}>
+                        <Vis hvis={svarverdi.verdi !== empty} key={index}>
                             <Normaltekst className='oppsummering__tekst'>
                                 {svarverdi.verdi} {label}
                             </Normaltekst>

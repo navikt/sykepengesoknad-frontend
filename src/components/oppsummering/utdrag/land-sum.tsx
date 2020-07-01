@@ -5,7 +5,7 @@ import { OppsummeringProps } from '../oppsummering'
 
 const LandSum = ({ sporsmal }: OppsummeringProps) => {
     const svar = sporsmal.svarliste.svar
-    if (typeof svar[0].verdi !== 'string') {
+    if (!svar || sporsmal.svarliste.svar.length === 0) {
         return null
     }
 
