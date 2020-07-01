@@ -6,7 +6,7 @@ import { RSSoknadstype } from '../types/rs-types/rs-soknadstype'
 import { Soknad, Sporsmal } from '../types/types'
 import { senesteTom } from './periode-utils'
 
-const getTomFraSoknad = (soknad: Soknad) => {
+const getTomFraSoknad = (soknad: Soknad): Date => {
     const getTomForUtland = (_soknad: Soknad) => {
         const perioder = _soknad.sporsmal.find((spm: Sporsmal) => spm.tag === TagTyper.PERIODEUTLAND)!
             .svarliste.svar
@@ -20,16 +20,19 @@ const getTomFraSoknad = (soknad: Soknad) => {
         return senesteTom(perioder)
     }
 
-    return soknad.soknadstype === RSSoknadstype.OPPHOLD_UTLAND && soknad.status === RSSoknadstatus.SENDT
-        ? getTomForUtland(soknad)
-        : soknad.soknadstype === RSSoknadstype.OPPHOLD_UTLAND && soknad.status === RSSoknadstatus.NY
-            ? soknad.opprettetDato
-            : soknad.tom
+    if (soknad.soknadstype === RSSoknadstype.OPPHOLD_UTLAND && soknad.status === RSSoknadstatus.SENDT) {
+        return getTomForUtland(soknad) || soknad.opprettetDato
+    }
+
+    if (soknad.soknadstype === RSSoknadstype.OPPHOLD_UTLAND && soknad.status === RSSoknadstatus.NY) {
+        return soknad.opprettetDato
+    }
+    return soknad.tom || soknad.opprettetDato
 }
 
 export const sorterEtterPerioder = (soknad1: Soknad, soknad2: Soknad) => {
-    const tom1 = getTomFraSoknad(soknad1)!
-    const tom2 = getTomFraSoknad(soknad2)!
+    const tom1 = getTomFraSoknad(soknad1)
+    const tom2 = getTomFraSoknad(soknad2)
     return tom2.getTime() - tom1.getTime()
 }
 
