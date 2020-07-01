@@ -16,7 +16,7 @@ const erUndersporsmalStilt = (sporsmal: Sporsmal): boolean => {
 
 const JaEllerNei = ({ sporsmal }: OppsummeringProps) => {
     const svar = sporsmal.svarliste.svar[0]
-    if (typeof svar.verdi !== 'string') {
+    if (!svar || !svar.verdi || sporsmal.svarliste.svar.length === 0) {
         return null
     }
 
