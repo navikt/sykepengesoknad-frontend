@@ -16,12 +16,16 @@ const SykSokLokalt = () => {
         return () => window.removeEventListener('resize', () => setWidth(window.innerWidth) as any)
     })
 
+    if (!env.isDev) {
+        return null
+    }
+
     if (!valgtSoknad || !valgtSoknad.sporsmal || !stegId || Number(stegId) >= valgtSoknad.sporsmal.length) {
         return null
     }
 
     return (
-        <Vis hvis={env.isDev && width > 767}>
+        <Vis hvis={width > 767}>
             <div style={{ position: 'absolute', left: 0, fontSize: '10px', marginLeft: '1rem', color: 'gray' }}>
                 <span>type <strong>{valgtSoknad.soknadstype} </strong></span>
                 <span>sok <strong>{
