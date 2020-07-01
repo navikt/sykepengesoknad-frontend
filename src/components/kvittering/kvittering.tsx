@@ -15,6 +15,7 @@ import Oppsummering from '../oppsummering/oppsummering'
 import Vis from '../vis'
 import AlleAndre from './alle-andre'
 import Arbeidstaker from './arbeidstaker'
+import { RSSoknadstatus } from '../../types/rs-types/rs-soknadstatus'
 
 const Kvittering = () => {
     const { valgtSoknad, setValgtSoknad, setValgtSykmelding, soknader, sykmeldinger, feilmeldingTekst } = useAppStore()
@@ -60,10 +61,11 @@ const Kvittering = () => {
 
             <Vis hvis={skalViseKnapperad}>
                 <div className="knapperad">
-                    <Endreknapp />
+                    <Vis hvis={valgtSoknad!.status !== RSSoknadstatus.KORRIGERT}>
+                        <Endreknapp />
+                    </Vis>
 
                     <Vis hvis={!erSendtTilNav}>
-
                         <Ettersending gjelder="nav" />
                     </Vis>
 
