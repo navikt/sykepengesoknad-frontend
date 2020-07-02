@@ -82,13 +82,17 @@ const SporsmalForm = () => {
         })
 
         try {
-            const data: RSOppdaterSporsmalResponse = await res.json()
+            const data = await res.json()
+
             const httpCode = res.status
             if ([ 200, 201, 203, 206 ].includes(httpCode)) {
-                if (data.mutertSoknad) {
-                    soknad = new Soknad(data.mutertSoknad)
+
+                const rsOppdaterSporsmalResponse: RSOppdaterSporsmalResponse = data
+
+                if (rsOppdaterSporsmalResponse.mutertSoknad) {
+                    soknad = new Soknad(rsOppdaterSporsmalResponse.mutertSoknad)
                 } else {
-                    const spm = data.oppdatertSporsmal
+                    const spm = rsOppdaterSporsmalResponse.oppdatertSporsmal
                     erSiste ?
                         soknad!.sporsmal[spmIndex + 1] = new Sporsmal(spm, undefined as any, true) :
                         soknad!.sporsmal[spmIndex] = new Sporsmal(spm, undefined as any, true)
@@ -96,6 +100,10 @@ const SporsmalForm = () => {
                 soknader[soknader.findIndex(sok => sok.id === soknad!.id)] = soknad as any
                 setSoknader(soknader)
                 setValgtSoknad(soknad)
+            } else if (httpCode === 400 && data !== null && typeof data === 'object' && data.reason === 'FEIL_STATUS_FOR_OPPDATER_SPORSMAL') {
+                logger.error('Feil STATUS FOR OPPDATER_SPORSMAL, refresher siden for å resette state')
+                window.location.reload()
+
             } else {
                 logger.error('Feil ved kall OPPDATER_SPORSMAL', res)
                 restFeilet = true
@@ -142,6 +150,7 @@ const SporsmalForm = () => {
                     valgtSoknad!.sendtTilNAVDato = new Date()
                 }
 
+                history.push(pathUtenSteg(history.location.pathname).replace('soknader', 'kvittering'))
                 valgtSoknad!.status = RSSoknadstatus.SENDT
                 setValgtSoknad(valgtSoknad)
                 soknader[soknader.findIndex(sok => sok.id === valgtSoknad!.id)] = valgtSoknad!
@@ -186,9 +195,9 @@ const SporsmalForm = () => {
             methods.clearError()
             methods.reset()
             setTop(0)
-            erSiste
-                ? history.push(pathUtenSteg(history.location.pathname).replace('soknader', 'kvittering'))
-                : history.push(pathUtenSteg(history.location.pathname) + SEPARATOR + (spmIndex + 2))
+            if (!erSiste) {
+                history.push(pathUtenSteg(history.location.pathname) + SEPARATOR + (spmIndex + 2))
+            }
         }
     }
 

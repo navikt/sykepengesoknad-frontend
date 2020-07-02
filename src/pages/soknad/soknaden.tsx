@@ -25,6 +25,7 @@ import { SEPARATOR } from '../../utils/constants'
 import { tekst } from '../../utils/tekster'
 import { getUrlTilSoknad } from '../../utils/url-utils'
 import { setBodyClass } from '../../utils/utils'
+import RedirectTilOversikt from '../feil/redirect-til-oversikt'
 
 const brodsmuler: Brodsmule[] = [ {
     tittel: tekst('soknader.sidetittel'),
@@ -54,6 +55,8 @@ const Soknaden = () => {
     }, [])
 
     if (!valgtSoknad) return null
+
+    if (valgtSoknad.id !== id) return null
 
     return (
         <>
@@ -135,18 +138,9 @@ const Fordeling = () => {
                     <Opplysninger ekspandert={false} />
                 </>
             )
-
-        // Håndteres i /kvittering/:id
-        case RSSoknadstatus.SENDT:
-            return null as any
-
-        // Fremtidige søknader
-        case RSSoknadstatus.FREMTIDIG:
-            return null as any
-
-        // Utgåtte søknader
-        case RSSoknadstatus.KORRIGERT:
-        case RSSoknadstatus.SLETTET:
-            return null as any
     }
+
+    // Brukeren skal ikke komme hit ved andre statuser. Sender tilbake til forsiden
+    return (<RedirectTilOversikt />)
+
 }
