@@ -23,7 +23,6 @@ export const settSvar = (sporsmal: Sporsmal, verdier: Record<string, any>): void
     switch (sporsmal.svartype) {
         case RSSvartype.CHECKBOX_PANEL:
         case RSSvartype.CHECKBOX:
-        case RSSvartype.CHECKBOX_GRUPPE:
             checkboxSvar(sporsmal, verdi)
             break
         case RSSvartype.RADIO_GRUPPE:
@@ -51,6 +50,7 @@ export const settSvar = (sporsmal: Sporsmal, verdier: Record<string, any>): void
         case RSSvartype.RADIO:
         case RSSvartype.IKKE_RELEVANT:
         case RSSvartype.INFO_BEHANDLINGSDAGER:
+        case RSSvartype.CHECKBOX_GRUPPE:
             // Skal ikke ha svarverdi
             break
         default:
