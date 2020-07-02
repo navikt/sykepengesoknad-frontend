@@ -8,6 +8,7 @@ import { CSSTransition, TransitionGroup } from 'react-transition-group'
 import { Amplitude } from './components/amplitude/amplitudeProvider'
 import { DataFetcher } from './data/data-fetcher'
 import StoreProvider from './data/stores/store-provider'
+import RedirectTilOversikt from './pages/feil/redirect-til-oversikt'
 import KvitteringSide from './pages/kvittering/kvittering-side'
 import OpprettUtland from './pages/opprett-utland/opprett-utland'
 import Soknad from './pages/soknad/soknaden'
@@ -31,6 +32,7 @@ const App = (): any => {
                                     <Route exact={true} path="/" component={Soknader} />
                                     <Route path={'/soknader/:id/:stegId'} component={Soknad} />
                                     <Route path={'/soknader/:id'} component={Soknad} />
+                                    <Route path={'/soknader/'} component={RedirectTilOversikt} />
                                     <Route path={'/kvittering/:id'} component={KvitteringSide} />
                                     <Route path={'/sykepengesoknad-utland'} component={OpprettUtland} />
                                 </Switch>
@@ -42,5 +44,6 @@ const App = (): any => {
         </StoreProvider>
     )
 }
+
 
 export default App
