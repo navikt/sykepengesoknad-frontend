@@ -3287,6 +3287,157 @@ export const sendtArbeidsledigKvitteringMock: RSSoknad = {
     'egenmeldtSykmelding': false
 }
 
+
+export const delvisUtfylltArbeidsledig: RSSoknad = {
+    'id': '162b42d7-2600-44ea-905e-d3bae7f234047',
+    'sykmeldingId': 'b4d3dc32-49ba-4448-9fd1-e03d3b98fbc4',
+    'soknadstype': 'ARBEIDSLEDIG',
+    'status': 'NY',
+    'fom': '2020-02-01',
+    'tom': '2020-02-10',
+    'opprettetDato': '2019-07-23',
+    'sendtTilNAVDato': null,
+    'sendtTilArbeidsgiverDato': null,
+    'avbruttDato': null,
+    'startSykeforlop': '2020-01-01',
+    'sykmeldingUtskrevet': '2020-06-07',
+    'arbeidsgiver': null,
+    'korrigerer': null,
+    'korrigertAv': null,
+    'arbeidssituasjon': 'ARBEIDSLEDIG',
+    'soknadPerioder': [
+        {
+            'fom': '2020-01-01',
+            'tom': '2020-01-10',
+            'grad': 100,
+            'sykmeldingstype': 'AKTIVITET_IKKE_MULIG'
+        }
+    ],
+    'sporsmal': [
+        {
+            'id': '93',
+            'tag': 'ANSVARSERKLARING',
+            'sporsmalstekst': 'Jeg vet at jeg kan miste retten til sykepenger hvis opplysningene jeg gir ikke er riktige eller fullstendige. Jeg vet også at NAV kan holde igjen eller kreve tilbake penger, og at å gi feil opplysninger kan være straffbart.',
+            'undertekst': null,
+            'svartype': 'CHECKBOX_PANEL',
+            'min': null,
+            'max': null,
+            'pavirkerAndreSporsmal': false,
+            'kriterieForVisningAvUndersporsmal': null,
+            'svar': [
+                {
+                    'verdi': 'CHECKED',
+                    'avgittAv': null
+                }
+            ],
+            'undersporsmal': []
+        },
+        {
+            'id': '1243',
+            'tag': 'ARBEID_UTENFOR_NORGE',
+            'sporsmalstekst': 'Utfører du arbeid andre steder enn i Norge?',
+            'undertekst': null,
+            'svartype': 'JA_NEI',
+            'min': null,
+            'max': null,
+            'pavirkerAndreSporsmal': false,
+            'kriterieForVisningAvUndersporsmal': null,
+            'svar': [
+                {
+                    'verdi': 'NEI',
+                    'avgittAv': null
+                }
+            ],
+            'undersporsmal': []
+        },
+        {
+            'id': '96',
+            'tag': 'PERMITTERT_PERIODE',
+            'sporsmalstekst': 'Har du vært permittert i noen perioder etter 1. februar 2020?',
+            'undertekst': null,
+            'svartype': 'JA_NEI',
+            'min': null,
+            'max': null,
+            'pavirkerAndreSporsmal': false,
+            'kriterieForVisningAvUndersporsmal': 'JA',
+            'svar': [
+                {
+                    'verdi': 'JA',
+                    'avgittAv': null
+                }
+            ],
+            'undersporsmal': [
+                {
+                    'id': '97',
+                    'tag': 'PERMITTERT_PERIODE_NAR',
+                    'sporsmalstekst': null,
+                    'undertekst': null,
+                    'svartype': 'PERIODER',
+                    'min': '2020-02-01',
+                    'max': '2020-07-01',
+                    'pavirkerAndreSporsmal': false,
+                    'kriterieForVisningAvUndersporsmal': null,
+                    'svar': [ {
+                        'verdi': '{"fom":"2020-07-01","tom":"2020-07-01"}',
+                        'avgittAv': null
+                    } ],
+                    'undersporsmal': []
+                }
+            ]
+        },
+        {
+            'id': '1334',
+            'tag': 'ARBEID_UTENFOR_NORGE',
+            'sporsmalstekst': 'Utfører du arbeid andre steder enn i Norge?',
+            'undertekst': null,
+            'svartype': 'JA_NEI',
+            'min': null,
+            'max': null,
+            'pavirkerAndreSporsmal': false,
+            'kriterieForVisningAvUndersporsmal': null,
+            'svar': [
+                {
+                    'verdi': 'NEI',
+                    'avgittAv': null
+                }
+            ],
+            'undersporsmal': []
+        },
+        {
+            'id': '125',
+            'tag': 'VAER_KLAR_OVER_AT',
+            'sporsmalstekst': 'Viktig å være klar over:',
+            'undertekst': '<ul><li>Du kan bare få sykepenger hvis det er din egen sykdom eller skade som hindrer deg i å jobbe. Sosiale eller økonomiske problemer gir ikke rett til sykepenger.</li><li>Du kan miste retten til sykepenger hvis du nekter å opplyse om din egen arbeidsevne, eller hvis du ikke tar imot behandling eller tilrettelegging.</li><li>Retten til sykepenger gjelder bare inntekt du har mottatt som lønn og betalt skatt av på sykmeldingstidspunktet.</li><li>NAV kan innhente opplysninger som er nødvendige for å behandle søknaden.</li><li>Du må melde fra til NAV hvis du satt i varetekt, sonet straff eller var under forvaring i sykmeldingsperioden.</li><li>Fristen for å søke sykepenger er som hovedregel 3 måneder</li></ul><p>Du kan lese mer om rettigheter og plikter på <a href="https://www.nav.no/sykepenger" target="_blank">nav.no/sykepenger</a>.</p>',
+            'svartype': 'IKKE_RELEVANT',
+            'min': null,
+            'max': null,
+            'pavirkerAndreSporsmal': false,
+            'kriterieForVisningAvUndersporsmal': null,
+            'svar': [],
+            'undersporsmal': []
+        },
+        {
+            'id': '126',
+            'tag': 'BEKREFT_OPPLYSNINGER',
+            'sporsmalstekst': 'Jeg har lest all informasjonen jeg har fått i søknaden og bekrefter at opplysningene jeg har gitt er korrekte.',
+            'undertekst': null,
+            'svartype': 'CHECKBOX_PANEL',
+            'min': null,
+            'max': null,
+            'pavirkerAndreSporsmal': false,
+            'kriterieForVisningAvUndersporsmal': null,
+            'svar': [
+                {
+                    'verdi': 'CHECKED',
+                    'avgittAv': null
+                }
+            ],
+            'undersporsmal': []
+        }
+    ],
+    'egenmeldtSykmelding': false
+}
+
 export const oppholdUtlandKvitteringMock: RSSoknad = {
     'id': 'b9d67b0d-b1f8-44a5-bcbd-6010111122',
     'sykmeldingId': null,
@@ -3831,4 +3982,5 @@ export const soknaderIntegration = [
     arbeidstakerUtenforArbeidsgiverperiodeKvitteringMock,
     arbeidstakerOppfolgendeUtenOppholdKvitteringMock,
     arbeidstakerOppfolgendeMedOppholdKvitteringMock,
+    delvisUtfylltArbeidsledig,
 ] as RSSoknad[]

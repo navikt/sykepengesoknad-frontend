@@ -40,10 +40,14 @@ const JaNeiInput = ({ sporsmal }: SpmProps) => {
         // eslint-disable-next-line
     }, [sporsmal.id]);
 
+    useEffect(() => {
+        setLokal(hentSvar(sporsmal))
+    }, [ sporsmal ])
+
     const visAvgittAvBjorn = () => {
         const undersporsmal = sporsmal.undersporsmal.find(uspm => uspm.tag === TagTyper.EGENMELDINGER_NAR)
         if (undersporsmal) {
-            return undersporsmal.svarliste.svar.some(svaret => svaret.avgittAv ===  'TIDLIGERE_SOKNAD')
+            return undersporsmal.svarliste.svar.some(svaret => svaret.avgittAv === 'TIDLIGERE_SOKNAD')
         }
         return false
     }

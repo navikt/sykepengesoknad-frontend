@@ -9,7 +9,7 @@ import CheckboxKomp from './typer/checkbox-komp'
 import CheckboxPanel from './typer/checkbox-panel'
 import DatoInput from './typer/dato-komp'
 import IkkeRelevant from './typer/ikke-relevant'
-import JaNeiKomp from './typer/ja-nei-komp'
+import JaNeiInput from './typer/ja-nei-input'
 import JaNeiRadio from './typer/ja-nei-radio'
 import Land from './typer/land'
 import Perioder from './typer/perioder'
@@ -44,7 +44,7 @@ const SporsmalSwitch = ({ sporsmal }: UndersporsmalProps) => {
             ) {
                 return <JaNeiRadio sporsmal={sporsmal} />
             }
-            return <JaNeiKomp sporsmal={sporsmal} />
+            return <JaNeiInput sporsmal={sporsmal} />
 
         case RSSvartype.TIMER:
         case RSSvartype.PROSENT:
