@@ -81,10 +81,6 @@ const svarFormat = (sporsmal: RSSporsmal) => {
                 expect(sporsmal.svar[ 0 ].verdi).to.match(RegExp('(Ikke til behandling|\\d{4}-\\d{2}-\\d{2})'),
                     `Svar format ${sporsmal.svartype}`)
                 break
-            case RSSvartype.CHECKBOX_GRUPPE:
-                expect(sporsmal.svar).to.deep.eq([ { verdi: '' } ],
-                    `Svar format ${sporsmal.svartype}`)
-                break
             case RSSvartype.CHECKBOX:
                 expect(sporsmal.svar[ 0 ].verdi).to.match(RegExp(`(${SvarEnums.CHECKED}|)`),
                     `Svar format ${sporsmal.svartype}`)
@@ -118,6 +114,7 @@ const svarFormat = (sporsmal: RSSporsmal) => {
             case RSSvartype.RADIO_GRUPPE_TIMER_PROSENT:
             case RSSvartype.BEHANDLINGSDAGER:
             case RSSvartype.INFO_BEHANDLINGSDAGER:
+            case RSSvartype.CHECKBOX_GRUPPE:
                 /* Ubesvart eller tags som ikke skal ha svar er på dette formatet:
                     sporsmal: {
                         svar: []
