@@ -6,6 +6,7 @@ import { useParams } from 'react-router-dom'
 
 import { useAppStore } from '../../data/stores/app-store'
 import { RSArbeidssituasjon } from '../../types/rs-types/rs-arbeidssituasjon'
+import { RSSoknadstatus } from '../../types/rs-types/rs-soknadstatus'
 import { RSSoknadstype } from '../../types/rs-types/rs-soknadstype'
 import { sendtForMerEnn30DagerSiden } from '../../utils/dato-utils'
 import Endreknapp from '../endreknapp/endreknapp'
@@ -60,10 +61,11 @@ const Kvittering = () => {
 
             <Vis hvis={skalViseKnapperad}>
                 <div className="knapperad">
-                    <Endreknapp />
+                    <Vis hvis={valgtSoknad!.status !== RSSoknadstatus.KORRIGERT}>
+                        <Endreknapp />
+                    </Vis>
 
                     <Vis hvis={!erSendtTilNav}>
-
                         <Ettersending gjelder="nav" />
                     </Vis>
 
