@@ -51,12 +51,12 @@ export const InngangsHeader = ({ meta, tittel, status }: InngangsHeaderProps) =>
             <Normaltekst className='inngangspanel__meta'>
                 {meta}
             </Normaltekst>
-            <Systemtittel tag='h3' className='inngangspanel__tittel'>
-                {tittel}
-            </Systemtittel>
             <Vis hvis={status !== null}>
                 <Normaltekst className='inngangspanel__status'>{status}</Normaltekst>
             </Vis>
+            <Systemtittel tag='h3' className='inngangspanel__tittel'>
+                {tittel}
+            </Systemtittel>
         </header>
     )
 }
