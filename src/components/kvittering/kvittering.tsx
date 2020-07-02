@@ -6,6 +6,7 @@ import { useParams } from 'react-router-dom'
 
 import { useAppStore } from '../../data/stores/app-store'
 import { RSArbeidssituasjon } from '../../types/rs-types/rs-arbeidssituasjon'
+import { RSSoknadstatus } from '../../types/rs-types/rs-soknadstatus'
 import { RSSoknadstype } from '../../types/rs-types/rs-soknadstype'
 import { sendtForMerEnn30DagerSiden } from '../../utils/dato-utils'
 import Endreknapp from '../endreknapp/endreknapp'
@@ -15,7 +16,6 @@ import Oppsummering from '../oppsummering/oppsummering'
 import Vis from '../vis'
 import AlleAndre from './alle-andre'
 import Arbeidstaker from './arbeidstaker'
-import { RSSoknadstatus } from '../../types/rs-types/rs-soknadstatus'
 
 const Kvittering = () => {
     const { valgtSoknad, setValgtSoknad, setValgtSykmelding, soknader, sykmeldinger, feilmeldingTekst } = useAppStore()
