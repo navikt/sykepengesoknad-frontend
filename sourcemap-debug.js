@@ -4,14 +4,14 @@ const fs = require('fs')
 const sourceMap = require('source-map')
 
 
-const biblioteker = './build/static/js/2.63f0e1bf.chunk.js.map'
-const main = './build/static/js/main.bf7fab64.chunk.js.map'
+// Last ned sources with sourcemaps fra GHA
+const sourcemap = './sources-with-sourcemaps/js/2.65948334.chunk.js.map' // Bytt ut her
 
-new sourceMap.SourceMapConsumer(fs.readFileSync(biblioteker, 'utf8'))
+new sourceMap.SourceMapConsumer(fs.readFileSync(sourcemap, 'utf8'))
     .then(c => {
             console.log(c.originalPositionFor({
-                line: 2,
-                column: 853309
+                line: 2, // Bytt ut her
+                column: 853309 // Bytt ut her
             }))
         }
     )

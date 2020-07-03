@@ -21,10 +21,18 @@ ReactDOM.render(
     , document.getElementById('root') as HTMLElement
 )
 
-if (env.isQ1 || env.isProd) {
-    const src = '/frontendlogger/logger.js'
-    const script = document.createElement('script')
-    script.src = src
-    script.async = true
-    document.body.appendChild(script)
+const frontendloggerSrc = () => {
+    if (env.isQ1 || env.isProd) {
+        return '/frontendlogger/logger.js'
+    }
+    return '/dev-frontendlogger.js'
 }
+
+
+const src = frontendloggerSrc()
+const script = document.createElement('script')
+script.src = src
+script.async = true
+document.body.appendChild(script)
+
+
