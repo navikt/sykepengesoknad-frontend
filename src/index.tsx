@@ -8,6 +8,10 @@ import { BrowserRouter } from 'react-router-dom'
 import App from './app'
 import env from './utils/environment'
 
+import smoothscroll from 'smoothscroll-polyfill'
+
+smoothscroll.polyfill()
+
 dayjs.locale('nb')
 
 if (env.isMockBackend) {
