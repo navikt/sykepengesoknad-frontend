@@ -24,8 +24,8 @@ export const RadioUnderKomp = ({ idx, uspm, sporsmal }: RadioUnderKompProps) => 
     const [ lokal, setLokal ] = useState<string>((hentSvar1 || 'prosent') === uspm.sporsmalstekst ? 'CHECKED' : '')
 
     const feilmelding = hentFeilmelding(sporsmal)
-
     const radioWatch = watch(sporsmal.id)
+
     return (
         <div className='radioContainer' key={idx}>
             <input type='radio'
@@ -35,7 +35,8 @@ export const RadioUnderKomp = ({ idx, uspm, sporsmal }: RadioUnderKompProps) => 
                 onChange={(e) => {
                     setLokal(e.currentTarget.id === uspm.id ? 'CHECKED' : '')
                 }}
-
+                checked={lokal === 'CHECKED'}
+                aria-checked={lokal === 'CHECKED'}
                 ref={register({ required: feilmelding.global })}
                 className='skjemaelement__input radioknapp'
             />
@@ -44,7 +45,7 @@ export const RadioUnderKomp = ({ idx, uspm, sporsmal }: RadioUnderKompProps) => 
             </label>
 
             <AnimateOnMount
-                mounted={radioWatch === uspm.sporsmalstekst}
+                mounted={radioWatch === uspm.sporsmalstekst || lokal === 'CHECKED'}
                 enter='undersporsmal--vis'
                 leave='undersporsmal--skjul'
                 start='undersporsmal'

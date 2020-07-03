@@ -58,7 +58,6 @@ const SporsmalForm = () => {
                 return sporsmal.tag === TagTyper.BEKREFT_OPPLYSNINGER_UTLAND_INFO
             }
             return snartSlutt && spmIndex === valgtSoknad!.sporsmal.length - 2
-
         }
 
         const sisteSide = erSiste()
@@ -86,7 +85,6 @@ const SporsmalForm = () => {
 
             const httpCode = res.status
             if ([ 200, 201, 203, 206 ].includes(httpCode)) {
-
                 const rsOppdaterSporsmalResponse: RSOppdaterSporsmalResponse = data
 
                 if (rsOppdaterSporsmalResponse.mutertSoknad) {

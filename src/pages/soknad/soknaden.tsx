@@ -117,7 +117,6 @@ const Fordeling = () => {
                         </Link>
                     </Vis>
 
-
                     <Vis hvis={!erUtlandssoknad}>
                         <Opplysninger ekspandert={true} />
                     </Vis>
@@ -142,5 +141,4 @@ const Fordeling = () => {
 
     // Brukeren skal ikke komme hit ved andre statuser. Sender tilbake til forsiden
     return (<RedirectTilOversikt />)
-
 }
