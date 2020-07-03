@@ -2,15 +2,9 @@ import AlertStripe, { AlertStripeSuksess } from 'nav-frontend-alertstriper'
 import { Undertittel } from 'nav-frontend-typografi'
 import React, { useEffect, useState } from 'react'
 
-import useFetch from '../../data/rest/use-fetch'
-import { FetchState, hasData } from '../../data/rest/utils'
 import { useAppStore } from '../../data/stores/app-store'
-import { RSMottakerResponse } from '../../types/rs-types/rest-response/rs-mottakerresponse'
-import { RSMottaker } from '../../types/rs-types/rs-mottaker'
 import { RSSoknadstype } from '../../types/rs-types/rs-soknadstype'
 import { dayjsToDate, getDuration, sendtForMerEnn30DagerSiden } from '../../utils/dato-utils'
-import env from '../../utils/environment'
-import { logger } from '../../utils/logger'
 import { tekst } from '../../utils/tekster'
 import Vis from '../vis'
 import Inntil16dager from './innhold/arbeidstaker/inntil16dager'
@@ -22,39 +16,22 @@ import ArbeidstakerStatus from './status/arbeidstaker-status'
 type ArbeidstakerKvitteringTekst = 'inntil16dager' | 'over16dager' | 'utenOpphold' | 'medOpphold' | undefined
 
 const Arbeidstaker = () => {
-    const { valgtSoknad, valgtSykmelding, setMottaker, mottaker, soknader } = useAppStore()
+    const { valgtSoknad, valgtSykmelding, soknader } = useAppStore()
     const [ kvitteringTekst, setKvitteringTekst ] = useState<ArbeidstakerKvitteringTekst>()
-    const rsMottakerResponseFetch = useFetch<RSMottakerResponse>()
+
 
     useEffect(() => {
-        hentMottaker()
         settRiktigKvitteringTekst()
         // eslint-disable-next-line
     }, [valgtSoknad?.sendtTilNAVDato])
 
-    const hentMottaker = () => {
-        rsMottakerResponseFetch.fetch(env.syfoapiRoot + `/syfosoknad/api/soknader/${valgtSoknad!.id}/finnMottaker`, {
-            method: 'POST',
-            credentials: 'include',
-            headers: { 'Content-Type': 'application/json' }
-        }, (fetchState: FetchState<RSMottakerResponse>) => {
-            if (hasData(fetchState)) {
-                setMottaker(fetchState.data.mottaker)
-            } else {
-                logger.error('Klarte ikke hente MOTTAKER av søknad', fetchState)
-            }
-        })
-    }
+    if (!valgtSoknad) return null
+
 
     const settRiktigKvitteringTekst = () => {
-        if (mottaker === RSMottaker.ARBEIDSGIVER) {
-            if (valgtSoknad?.sendtTilNAVDato !== null) {
-                // Brukeren har ettersendt til NAV
-                setKvitteringTekst('over16dager')
-            } else {
-                setKvitteringTekst('inntil16dager')
-            }
-        } else if (mottaker === RSMottaker.NAV || mottaker === RSMottaker.ARBEIDSGIVER_OG_NAV) {
+        if (valgtSoknad.sendtTilArbeidsgiverDato !== null && valgtSoknad.sendtTilNAVDato === null) {
+            setKvitteringTekst('inntil16dager')
+        } else {
             const fom = valgtSoknad!.fom!.getDate()
             const sykFom = dayjsToDate(valgtSykmelding!.mulighetForArbeid.perioder[0].fom)?.getDate()
             const forsteSoknad = fom === sykFom
