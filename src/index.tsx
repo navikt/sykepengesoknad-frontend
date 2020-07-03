@@ -4,9 +4,12 @@ import dayjs from 'dayjs'
 import React from 'react'
 import ReactDOM from 'react-dom'
 import { BrowserRouter } from 'react-router-dom'
+import smoothscroll from 'smoothscroll-polyfill'
 
 import App from './app'
 import env from './utils/environment'
+
+smoothscroll.polyfill()
 
 dayjs.locale('nb')
 
