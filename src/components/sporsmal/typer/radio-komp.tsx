@@ -19,12 +19,10 @@ export interface RadioUnderKompProps {
 
 
 export const RadioUnderKomp = ({ idx, uspm, sporsmal }: RadioUnderKompProps) => {
-    const { register, watch } = useFormContext()
+    const { register } = useFormContext()
     const hentSvar1 = hentSvar(sporsmal)
     const [ lokal, setLokal ] = useState<string>((hentSvar1 || 'prosent') === uspm.sporsmalstekst ? 'CHECKED' : '')
-
     const feilmelding = hentFeilmelding(sporsmal)
-    const radioWatch = watch(sporsmal.id)
 
     return (
         <div className='radioContainer' key={idx}>
@@ -45,7 +43,7 @@ export const RadioUnderKomp = ({ idx, uspm, sporsmal }: RadioUnderKompProps) => 
             </label>
 
             <AnimateOnMount
-                mounted={radioWatch === uspm.sporsmalstekst || lokal === 'CHECKED'}
+                mounted={lokal === 'CHECKED'}
                 enter='undersporsmal--vis'
                 leave='undersporsmal--skjul'
                 start='undersporsmal'
