@@ -1,3 +1,6 @@
+import { logger } from '../../utils/logger'
+import { hentLoginUrl } from '../data-fetcher'
+
 export enum FetchStatus {
     NOT_STARTED = 'NOT_STARTED',
     PENDING = 'PENDING',
@@ -58,4 +61,11 @@ export const has401 = (fetch: FetchState): boolean => {
 
 export const hasData = <D = {}>(fetch: FetchState<D>): fetch is FetchStateWithData<D> => {
     return fetch.data != null
+}
+
+export const redirectTilLoginHvis401 = (res: Response) => {
+    if (res.status === 401) {
+        logger.warn('Redirecter til login grunnet 401')
+        window.location.href = `${hentLoginUrl()}?redirect=${window.location.href}`
+    }
 }

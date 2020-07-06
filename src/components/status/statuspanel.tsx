@@ -5,6 +5,7 @@ import { EtikettLiten, Normaltekst } from 'nav-frontend-typografi'
 import React, { useEffect } from 'react'
 import { useHistory, useParams } from 'react-router'
 
+import { redirectTilLoginHvis401 } from '../../data/rest/utils'
 import { useAppStore } from '../../data/stores/app-store'
 import { RSSoknadstatus } from '../../types/rs-types/rs-soknadstatus'
 import { RSSoknadstype } from '../../types/rs-types/rs-soknadstype'
@@ -37,12 +38,12 @@ const StatusPanel = () => {
     }
 
     const Gjenapne = () => {
-        logger.info(`GjenapneSoknad-1 - sykepengesoknad.id: ${valgtSoknad!.id} - vis: ${soknadKanGjenapnes(valgtSoknad!.opprettetDato)}`)
         fetch(env.syfoapiRoot + `/syfosoknad/api/soknader/${valgtSoknad!.id}/gjenapne`, {
             method: 'POST',
             credentials: 'include',
             headers: { 'Content-Type': 'application/json' }
         }).then((res: Response) => {
+            redirectTilLoginHvis401(res)
             try {
                 const httpCode = res.status
                 if ([ 200, 201, 203, 206 ].includes(httpCode)) {

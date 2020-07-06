@@ -2,6 +2,7 @@ import dayjs from 'dayjs'
 import { Element, Undertekst } from 'nav-frontend-typografi'
 import React, { useEffect, useState } from 'react'
 
+import { redirectTilLoginHvis401 } from '../../../data/rest/utils'
 import { useAppStore } from '../../../data/stores/app-store'
 import env from '../../../utils/environment'
 import { logger } from '../../../utils/logger'
@@ -38,6 +39,7 @@ const ArbeidstakerStatus = () => {
             credentials: 'include',
             headers: { 'Content-Type': 'application/json' }
         }).then((res: Response) => {
+            redirectTilLoginHvis401(res)
             if (res.ok) {
                 valgtSoknad!.sendtTilNAVDato = ettersend?.dato
                 setEttersend(null)
@@ -55,6 +57,7 @@ const ArbeidstakerStatus = () => {
             credentials: 'include',
             headers: { 'Content-Type': 'application/json' }
         }).then((res: Response) => {
+            redirectTilLoginHvis401(res)
             if (res.ok) {
                 valgtSoknad!.sendtTilArbeidsgiverDato = ettersend?.dato
                 setEttersend(null)

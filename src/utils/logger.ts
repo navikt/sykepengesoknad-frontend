@@ -9,6 +9,9 @@ export const event = (arg: object): void => {
 
 const msgToString = (msg: string, arg?: any): string => {
     if (arg) {
+        if(arg.stack){
+            return `${msg} - ${safeStringify(arg.stack)}`
+        }
         return `${msg} - ${safeStringify(arg)}`
     }
     return msg
