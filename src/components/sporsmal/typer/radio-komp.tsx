@@ -25,8 +25,8 @@ export const RadioUnderKomp = ({ idx, uspm, sporsmal }: RadioUnderKompProps) => 
     const feilmelding = hentFeilmelding(sporsmal)
 
     return (
-        <div className='radioContainer' key={idx}>
-            <input type='radio'
+        <div className="radioContainer" key={idx}>
+            <input type="radio"
                 id={uspm.id}
                 name={sporsmal.id}
                 value={uspm.sporsmalstekst}
@@ -36,17 +36,17 @@ export const RadioUnderKomp = ({ idx, uspm, sporsmal }: RadioUnderKompProps) => 
                 checked={lokal === 'CHECKED'}
                 aria-checked={lokal === 'CHECKED'}
                 ref={register({ required: feilmelding.global })}
-                className='skjemaelement__input radioknapp'
+                className="skjemaelement__input radioknapp"
             />
-            <label className='skjemaelement__label' htmlFor={uspm.id}>
+            <label className="skjemaelement__label" htmlFor={uspm.id}>
                 {uspm.sporsmalstekst}
             </label>
 
             <AnimateOnMount
                 mounted={lokal === 'CHECKED'}
-                enter='undersporsmal--vis'
-                leave='undersporsmal--skjul'
-                start='undersporsmal'
+                enter="undersporsmal--vis"
+                leave="undersporsmal--skjul"
+                start="undersporsmal"
             >
                 <UndersporsmalListe oversporsmal={uspm} oversporsmalSvar={lokal} />
             </AnimateOnMount>
@@ -67,7 +67,7 @@ const RadioKomp = ({ sporsmal }: SpmProps) => {
     return (
         <>
             <Vis hvis={sporsmal.sporsmalstekst !== null}>
-                <Element tag='h3' className='skjema__sporsmal'>{sporsmal.sporsmalstekst}</Element>
+                <Element tag="h3" className="skjema__sporsmal">{sporsmal.sporsmalstekst}</Element>
             </Vis>
 
             <div className={erHorisontal(sporsmal.svartype)
@@ -79,9 +79,9 @@ const RadioKomp = ({ sporsmal }: SpmProps) => {
                 })}
             </div>
 
-            <div role='alert' aria-live='assertive'>
+            <div role="alert" aria-live="assertive">
                 <Vis hvis={errors[sporsmal.id] !== undefined}>
-                    <Normaltekst tag='span' className='skjemaelement__feilmelding'>
+                    <Normaltekst tag="span" className="skjemaelement__feilmelding">
                         <p>{feilmelding.lokal}</p>
                     </Normaltekst>
                 </Vis>

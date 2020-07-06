@@ -34,7 +34,7 @@ const UtgaattSoknaderTeaser = ({ soknad }: SykepengesoknadTeaserProps) => {
                     ikon={hentIkon(soknad.soknadstype)}
                     ikonHover={hentIkonHover(soknad.soknadstype)}
                 />
-                <div className='inngangspanel--inaktivt'>
+                <div className="inngangspanel--inaktivt">
                     <InngangsHeader
                         meta={getLedetekst(tekst('soknad.teaser.dato'), {
                             '%DATO%': dayjs(soknad.tom).add(1, 'day').format('DD.MM.YYYY'),
@@ -45,13 +45,13 @@ const UtgaattSoknaderTeaser = ({ soknad }: SykepengesoknadTeaserProps) => {
                         status={hentTeaserStatustekst(soknad)}
                     />
                     <Vis hvis={soknad.soknadstype !== RSSoknadstype.OPPHOLD_UTLAND}>
-                        <Normaltekst className='inngangspanel__tekst'>
+                        <Normaltekst className="inngangspanel__tekst">
                             {getLedetekst(tekst('soknad.teaser.tekst'), {
                                 '%PERIODE%': tilLesbarPeriodeMedArstall(soknad.fom, soknad.tom),
                             })}
                         </Normaltekst>
                     </Vis>
-                    <Normaltekst className='inngangspanel__undertekst'>
+                    <Normaltekst className="inngangspanel__undertekst">
                         {finnArbeidsgivernavn(soknad)}
                     </Normaltekst>
                 </div>

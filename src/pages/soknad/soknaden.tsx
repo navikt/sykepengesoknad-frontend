@@ -61,7 +61,7 @@ const Soknaden = () => {
     return (
         <>
             <Banner />
-            <div className='limit'>
+            <div className="limit">
                 <Brodsmuler brodsmuler={brodsmuler} />
                 <HotjarTrigger trigger={valgtSoknad.soknadstype}>
                     <Fordeling />
@@ -96,7 +96,7 @@ const Fordeling = () => {
             return (
                 <>
                     <Vis hvis={valgtSoknad.status === RSSoknadstatus.UTKAST_TIL_KORRIGERING}>
-                        <AlertStripe type='info' className='blokk-s'>
+                        <AlertStripe type="info" className="blokk-s">
                             <span>{tekst('sykepengesoknad.utkast-til-korrigering.info')}</span>
                         </AlertStripe>
                     </Vis>
@@ -111,9 +111,9 @@ const Fordeling = () => {
 
                     <Vis hvis={stegNo > 1}>
                         <Link to={'/soknader/' + valgtSoknad.id + SEPARATOR + (stegNo - 1)}
-                            className='lenke tilbakelenke'>
+                            className="lenke tilbakelenke">
                             <VenstreChevron />
-                            <Normaltekst tag='span'>{tekst('soknad.tilbakeknapp')}</Normaltekst>
+                            <Normaltekst tag="span">{tekst('soknad.tilbakeknapp')}</Normaltekst>
                         </Link>
                     </Vis>
 
@@ -122,7 +122,7 @@ const Fordeling = () => {
                     </Vis>
 
                     <Vis hvis={tittel !== undefined}>
-                        <Systemtittel className='sporsmal__tittel'>{tittel}</Systemtittel>
+                        <Systemtittel className="sporsmal__tittel">{tittel}</Systemtittel>
                     </Vis>
 
                     <SporsmalForm />

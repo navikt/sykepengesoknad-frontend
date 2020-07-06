@@ -9,14 +9,14 @@ import { OppsummeringProps } from '../oppsummering'
 
 const PerioderSum = ({ sporsmal }: OppsummeringProps) => {
     return (
-        <div className='oppsummering__sporsmal'>
-            <Element tag='h3'>{sporsmal.sporsmalstekst}</Element>
-            <div className='oppsummering__tekstsvar'>
+        <div className="oppsummering__sporsmal">
+            <Element tag="h3">{sporsmal.sporsmalstekst}</Element>
+            <div className="oppsummering__tekstsvar">
                 {sporsmal.svarliste.svar.map((p, i) => {
                     const periode = hentPeriode(sporsmal, i)
                     return (
                         <Vis hvis={p.verdi !== empty} key={i}>
-                            <Normaltekst className='oppsummering__dato'>
+                            <Normaltekst className="oppsummering__dato">
                                 { tilLesbarPeriodeMedArstall(periode[0], periode[1]) }
                             </Normaltekst>
                         </Vis>

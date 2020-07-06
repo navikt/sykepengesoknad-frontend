@@ -20,7 +20,7 @@ const CheckboxKomp = ({ sporsmal }: SpmProps) => {
         <>
             <div>
                 <Vis hvis={sporsmal.sporsmalstekst !== null}>
-                    <Element tag='h3' className='skjema__sporsmal'>{sporsmal.sporsmalstekst}</Element>
+                    <Element tag="h3" className="skjema__sporsmal">{sporsmal.sporsmalstekst}</Element>
                 </Vis>
 
                 <div className={'skjemagruppe checkboxgruppe' + (errors[sporsmal.id] ? ' skjemagruppe--feil' : '')}>
@@ -29,10 +29,10 @@ const CheckboxKomp = ({ sporsmal }: SpmProps) => {
                     })}
 
                     <Vis hvis={sporsmal.undertekst}>
-                        <Normaltekst tag='div'> {sporsmal.undertekst} </Normaltekst>
+                        <Normaltekst tag="div"> {sporsmal.undertekst} </Normaltekst>
                     </Vis>
 
-                    <Normaltekst tag='div' role='alert' aria-live='assertive' className='skjemaelement__feilmelding'>
+                    <Normaltekst tag="div" role="alert" aria-live="assertive" className="skjemaelement__feilmelding">
                         <Vis hvis={Object.entries(errors).length > 0 && !validCheck}>
                             <p>{feilmelding['lokal']}</p>
                         </Vis>
@@ -82,25 +82,25 @@ const CheckboxSingle = ({ parent, sporsmal }: AllProps) => {
     const mounted = watch(sporsmal.id)
 
     return (
-        <div className='checkboksContainer'>
-            <input type='checkbox'
+        <div className="checkboksContainer">
+            <input type="checkbox"
                 id={sporsmal.id}
                 name={sporsmal.id}
                 onChange={(e) => {
                     setLokal(e.target.checked ? 'CHECKED' : '')
                 }}
                 ref={register({ validate: () => valider() })}
-                className='skjemaelement__input checkboks'
+                className="skjemaelement__input checkboks"
             />
-            <label className='skjemaelement__label' htmlFor={sporsmal.id}>
+            <label className="skjemaelement__label" htmlFor={sporsmal.id}>
                 {sporsmal.sporsmalstekst}
             </label>
 
             <AnimateOnMount
                 mounted={mounted}
-                enter='undersporsmal--vis'
-                leave='undersporsmal--skjul'
-                start='undersporsmal'
+                enter="undersporsmal--vis"
+                leave="undersporsmal--skjul"
+                start="undersporsmal"
             >
                 <UndersporsmalListe oversporsmal={sporsmal} oversporsmalSvar={lokal} />
             </AnimateOnMount>

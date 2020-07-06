@@ -10,18 +10,18 @@ const LandSum = ({ sporsmal }: OppsummeringProps) => {
     }
 
     const svarliste = svar.length === 1
-        ? <p className='sist'>{svar[0].verdi}</p>
+        ? <p className="sist">{svar[0].verdi}</p>
         : (
-            <ul className='oppsummering__landliste'>
+            <ul className="oppsummering__landliste">
                 {sporsmal.svarliste.svar.map((s) => {
-                    return <li className='oppsummering__land' key={s.verdi.toString()}>{s.verdi}</li>
+                    return <li className="oppsummering__land" key={s.verdi.toString()}>{s.verdi}</li>
                 })}
             </ul>
         )
     return (
-        <div className='oppsummering__fritekst'>
-            <Element tag='h3'>{sporsmal.sporsmalstekst}</Element>
-            <div className='oppsummering__tekstsvar'>{svarliste}</div>
+        <div className="oppsummering__fritekst">
+            <Element tag="h3">{sporsmal.sporsmalstekst}</Element>
+            <div className="oppsummering__tekstsvar">{svarliste}</div>
         </div>
     )
 }

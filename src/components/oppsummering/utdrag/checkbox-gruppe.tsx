@@ -6,8 +6,8 @@ import { OppsummeringProps, SporsmalVarianter } from '../oppsummering'
 
 const CheckboxGruppe = ({ sporsmal }: OppsummeringProps) => {
     return (
-        <div className='oppsummering__sporsmal'>
-            <Element tag='h3'>{sporsmal.sporsmalstekst}</Element>
+        <div className="oppsummering__sporsmal">
+            <Element tag="h3">{sporsmal.sporsmalstekst}</Element>
             {sporsmal.undersporsmal.map((s: Sporsmal, idx) => {
                 return <SporsmalVarianter sporsmal={s} key={idx} />
             })}

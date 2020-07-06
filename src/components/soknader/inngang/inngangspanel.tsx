@@ -14,12 +14,12 @@ interface InngangsIkonProps {
 export const InngangsIkon = ({ ikon, ikonHover }: InngangsIkonProps) => {
     return (
         <>
-            <span className='inngangspanel__ikon inngangspanel__ikon--normal'>
-                <img alt='' src={ikon} />
+            <span className="inngangspanel__ikon inngangspanel__ikon--normal">
+                <img alt="" src={ikon} />
             </span>
             <Vis hvis={ikonHover !== undefined}>
-                <span className='inngangspanel__ikon inngangspanel__ikon--hover'>
-                    <img alt='' src={ikonHover || ikon} />
+                <span className="inngangspanel__ikon inngangspanel__ikon--hover">
+                    <img alt="" src={ikonHover || ikon} />
                 </span>
             </Vis>
         </>
@@ -33,7 +33,7 @@ interface InngangsProps {
 
 export const Inngangspanel = ({ to, children, }: InngangsProps) => {
     return (
-        <Link to={to} className='inngangspanel'>
+        <Link to={to} className="inngangspanel">
             {children}
         </Link>
     )
@@ -47,14 +47,14 @@ interface InngangsHeaderProps {
 
 export const InngangsHeader = ({ meta, tittel, status }: InngangsHeaderProps) => {
     return (
-        <header className='inngangspanel__header'>
-            <Normaltekst className='inngangspanel__meta'>
+        <header className="inngangspanel__header">
+            <Normaltekst className="inngangspanel__meta">
                 {meta}
             </Normaltekst>
             <Vis hvis={status !== null}>
-                <Normaltekst className='inngangspanel__status'>{status}</Normaltekst>
+                <Normaltekst className="inngangspanel__status">{status}</Normaltekst>
             </Vis>
-            <Systemtittel tag='h3' className='inngangspanel__tittel'>
+            <Systemtittel tag="h3" className="inngangspanel__tittel">
                 {tittel}
             </Systemtittel>
         </header>

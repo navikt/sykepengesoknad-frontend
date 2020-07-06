@@ -54,23 +54,23 @@ const Utvidbar = (props: UtvidbarProps) => {
                 onMouseLeave={props.ikon !== undefined ? () => btnImage.current!.src = props.ikon! : undefined}
                 onClick={() => setErApen(!erApen)}
                 type={'button'}
-                className='utvidbar__toggle'
+                className="utvidbar__toggle"
             >
                 <Vis hvis={props.ikon !== undefined}>
-                    <img aria-hidden='true' className='utvidbar__ikon'
+                    <img aria-hidden="true" className="utvidbar__ikon"
                         ref={btnImage}
                         alt={props.ikonAltTekst}
                         src={props.ikon}
                     />
                 </Vis>
                 <Vis hvis={props.type === undefined}>
-                    <Undertittel tag='h3' className="utvidbar__tittel">{props.tittel}</Undertittel>
+                    <Undertittel tag="h3" className="utvidbar__tittel">{props.tittel}</Undertittel>
                 </Vis>
                 <Vis hvis={props.type === 'intern'}>
-                    <Normaltekst tag='h3' className="utvidbar__tittel">{props.tittel}</Normaltekst>
+                    <Normaltekst tag="h3" className="utvidbar__tittel">{props.tittel}</Normaltekst>
                 </Vis>
-                <span className='utvidbar__handling'>
-                    <Normaltekst tag='em'>
+                <span className="utvidbar__handling">
+                    <Normaltekst tag="em">
                         {erApen ? 'Lukk' : 'Åpne'}
                     </Normaltekst>
                     <Chevron type={erApen ? 'opp' : 'ned'} />
@@ -81,13 +81,13 @@ const Utvidbar = (props: UtvidbarProps) => {
                 onTransitionEnd={() => onTransitionEnd()}
                 style={{ maxHeight: erApen ? (innholdHeight * 2) + 'px' : '0' }}
             >
-                <div ref={innhold} className='utvidbar__innhold'>
+                <div ref={innhold} className="utvidbar__innhold">
                     {props.children}
-                    <div className='lenkerad ikke-print'>
-                        <button type='button' className='lenke' aria-pressed={!erApen}
+                    <div className="lenkerad ikke-print">
+                        <button type="button" className="lenke" aria-pressed={!erApen}
                             tabIndex={(erApen ? null : -1) as any} onClick={() => setErApen(!erApen)}
                         >
-                            <Normaltekst tag='span'>Lukk</Normaltekst>
+                            <Normaltekst tag="span">Lukk</Normaltekst>
                         </button>
                     </div>
                 </div>

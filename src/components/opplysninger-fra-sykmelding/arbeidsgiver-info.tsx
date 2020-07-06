@@ -9,8 +9,8 @@ const ArbeidsgiverInfo = () => {
 
     if (valgtSykmelding?.mottakendeArbeidsgiver?.navn) {
         return (
-            <div className='avsnitt'>
-                <EtikettLiten tag='h3' className='avsnitt-hode'>
+            <div className="avsnitt">
+                <EtikettLiten tag="h3" className="avsnitt-hode">
                     {tekst('sykepengesoknad.sykmelding-utdrag.arbeidsgiver')}
                 </EtikettLiten>
                 <Normaltekst>{valgtSykmelding.mottakendeArbeidsgiver.navn}</Normaltekst>

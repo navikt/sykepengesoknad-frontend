@@ -71,26 +71,26 @@ const JaNeiInput = ({ sporsmal }: SpmProps) => {
 
     return (
         <>
-            <div className='inputPanelGruppe inputPanelGruppe--horisontal'>
+            <div className="inputPanelGruppe inputPanelGruppe--horisontal">
                 <fieldset className={'skjema__fieldset' + (errors[sporsmal.id] ? ' skjemagruppe--feil' : '')}>
-                    <legend className='skjema__legend'>
-                        <div className='medHjelpetekst'>
-                            <Element tag='h3' className='skjema__sporsmal'>
+                    <legend className="skjema__legend">
+                        <div className="medHjelpetekst">
+                            <Element tag="h3" className="skjema__sporsmal">
                                 {sporsmal.sporsmalstekst}
                             </Element>
                             <SporsmalHjelpetekst sporsmal={sporsmal} />
                         </div>
                     </legend>
-                    <div className='inputPanelGruppe__inner'>
+                    <div className="inputPanelGruppe__inner">
                         {jaNeiValg.map((valg, idx) => {
                             const OK = getValues()[sporsmal.id] === valg.value
                             return (
                                 <label className={'inputPanel radioPanel' + (OK ? ' inputPanel--checked' : '')}
                                     key={idx}>
-                                    <input type='radio'
+                                    <input type="radio"
                                         name={sporsmal.id}
                                         id={sporsmal.id + '_' + idx}
-                                        className='inputPanel__field'
+                                        className="inputPanel__field"
                                         aria-checked={OK}
                                         checked={OK}
                                         value={valg.value}
@@ -100,7 +100,7 @@ const JaNeiInput = ({ sporsmal }: SpmProps) => {
                                             required: feilmelding.global
                                         })}
                                     />
-                                    <span className='inputPanel__label'>{valg.label}</span>
+                                    <span className="inputPanel__label">{valg.label}</span>
                                 </label>
                             )
                         })}
@@ -112,14 +112,14 @@ const JaNeiInput = ({ sporsmal }: SpmProps) => {
                         ? <Normaltekst
                             className={'utland_infotekst'}> {parser(getLedetekst(tekst('soknad.infotekst.utlandsopphold_sokt_sykepenger.ja'), { '%URL%': utlandssoknadUrl }))} </Normaltekst>
                         : ((getValues()[sporsmal.id] === SvarEnums.NEI)
-                            ? <Normaltekst tag='div'
+                            ? <Normaltekst tag="div"
                                 className={'utland_infotekst'}> {parser(getLedetekst(tekst('soknad.infotekst.utlandsopphold_sokt_sykepenger.nei'), { '%URL%': utlandssoknadUrl }))} </Normaltekst>
                             : <></>)}
 
                 </Vis>
             </div>
 
-            <Normaltekst tag='div' role='alert' aria-live='assertive' className='skjemaelement__feilmelding'>
+            <Normaltekst tag="div" role="alert" aria-live="assertive" className="skjemaelement__feilmelding">
                 <Vis hvis={errors[sporsmal.id] !== undefined}>
                     <p>{feilmelding.lokal}</p>
                 </Vis>
@@ -127,18 +127,18 @@ const JaNeiInput = ({ sporsmal }: SpmProps) => {
 
             <AnimateOnMount
                 mounted={watchVerdi === sporsmal.kriterieForVisningAvUndersporsmal}
-                enter='undersporsmal--vis'
-                leave='undersporsmal--skjul'
-                start='undersporsmal'
+                enter="undersporsmal--vis"
+                leave="undersporsmal--skjul"
+                start="undersporsmal"
             >
                 <>
                     <UndersporsmalListe oversporsmal={sporsmal} oversporsmalSvar={lokal} />
-                    <TagBjorn sporsmal={sporsmal} className='press' />
+                    <TagBjorn sporsmal={sporsmal} className="press" />
                 </>
             </AnimateOnMount>
 
             <Vis hvis={visAvgittAvBjorn()}>
-                <Bjorn className='press' nokkel='sykepengesoknad.egenmeldingsdager.preutfylt-melding' />
+                <Bjorn className="press" nokkel="sykepengesoknad.egenmeldingsdager.preutfylt-melding" />
             </Vis>
 
             <SporsmalBjorn sporsmal={sporsmal} />

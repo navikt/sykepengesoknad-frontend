@@ -20,8 +20,8 @@ interface SoknaderTeasereProps {
 const Teasere = ({ soknader, className, tittel, tomListeTekst, id }: SoknaderTeasereProps) => {
     return (
         <>
-            <header className='inngangspanelerHeader'>
-                <Element className='inngangspanelerHeader__tittel' tag='h2'>{tittel}</Element>
+            <header className="inngangspanelerHeader">
+                <Element className="inngangspanelerHeader__tittel" tag="h2">{tittel}</Element>
             </header>
             <div id={id} className={className}>
                 {soknader.map((soknad, idx) => {
@@ -37,7 +37,7 @@ const Teasere = ({ soknader, className, tittel, tomListeTekst, id }: SoknaderTea
                     }
                 })}
                 <Vis hvis={soknader.length === 0}>
-                    <Element className='inngangspanel inngangspanel--tomListe'>
+                    <Element className="inngangspanel inngangspanel--tomListe">
                         {tomListeTekst}
                     </Element>
                 </Vis>

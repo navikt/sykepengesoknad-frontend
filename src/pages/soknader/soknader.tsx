@@ -48,9 +48,9 @@ const Soknader = () => {
 
     return (
         <>
-            <div className='limit'>
+            <div className="limit">
                 <Brodsmuler brodsmuler={brodsmuler} />
-                <Sidetittel tag='h1' className='sidetopp__tittel'>
+                <Sidetittel tag="h1" className="sidetopp__tittel">
                     {tekst('soknader.sidetittel')}
                 </Sidetittel>
                 <Teasere
@@ -58,14 +58,14 @@ const Soknader = () => {
                     soknader={nyeSoknader}
                     tittel={tekst('soknader.venter-paa-behandling.tittel')}
                     tomListeTekst={tekst('soknader.venter-paa-behandling.ingen-soknader')}
-                    id='soknader-list-til-behandling'
+                    id="soknader-list-til-behandling"
                 />
 
                 <Vis hvis={fremtidigeSoknader.length > 0}>
                     <Teasere
                         soknader={fremtidigeSoknader}
                         tittel={tekst('soknader.planlagt.tittel')}
-                        id='soknader-planlagt'
+                        id="soknader-planlagt"
                     />
                 </Vis>
 
@@ -75,7 +75,7 @@ const Soknader = () => {
                     <Teasere
                         soknader={tidligereSoknader}
                         tittel={tekst('soknader.sendt.tittel')}
-                        id='soknader-sendt'
+                        id="soknader-sendt"
                     />
                 </Vis>
             </div>

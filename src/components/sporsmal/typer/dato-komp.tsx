@@ -41,7 +41,7 @@ const DatoInput = ({ sporsmal }: SpmProps) => {
 
     return (
         <div ref={datoRef}>
-            <label className='skjema__sporsmal' htmlFor={'input' + sporsmal.id}>
+            <label className="skjema__sporsmal" htmlFor={'input' + sporsmal.id}>
                 <Element>{sporsmal.sporsmalstekst}</Element>
             </label>
             <Controller
@@ -49,8 +49,8 @@ const DatoInput = ({ sporsmal }: SpmProps) => {
                 rules={{ required: feilmelding.global }}
                 id={sporsmal.id}
                 name={sporsmal.id}
-                className='skjemaelement__input input--m'
-                placeholder='dd.mm.åååå'
+                className="skjemaelement__input input--m"
+                placeholder="dd.mm.åååå"
                 options={{
                     minDate: sporsmal.min!,
                     maxDate: sporsmal.max!,
@@ -65,13 +65,13 @@ const DatoInput = ({ sporsmal }: SpmProps) => {
                 }}
             />
 
-            <Normaltekst tag='div' role='alert' aria-live='assertive' className='skjemaelement__feilmelding'>
+            <Normaltekst tag="div" role="alert" aria-live="assertive" className="skjemaelement__feilmelding">
                 <Vis hvis={errors[sporsmal.id]}>
                     <p>{feilmelding.lokal}</p>
                 </Vis>
             </Normaltekst>
 
-            <div className='undersporsmal'>
+            <div className="undersporsmal">
                 <Vis hvis={watch(sporsmal.id)}>
                     <UndersporsmalListe oversporsmal={sporsmal} />
                 </Vis>

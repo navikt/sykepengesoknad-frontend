@@ -18,10 +18,10 @@ const SoknadIntro = () => {
     const automatiseringPersonvernErklaering = !env.isProd
 
     return (<>
-        <div className='soknad-intro'>
-            <div className='blokk-s'>
+        <div className="soknad-intro">
+            <div className="blokk-s">
                 <Veilederpanel kompakt svg={<ForsteSoknadSvg />}>
-                    <Normaltekst tag='h2' className='panel__tittel sist'>
+                    <Normaltekst tag="h2" className="panel__tittel sist">
                         {parser(tekst('sykepengesoknad.soknad-intro.personvern'))}
                         <p className="sist">
                             <Vis hvis={automatiseringPersonvernErklaering}>
@@ -54,9 +54,9 @@ const SoknadIntro = () => {
 
 
             <div className={'lukk-wrapper'}>
-                <button type='button' className='no-border lenke' onClick={() => setAapen(false)}
+                <button type="button" className="no-border lenke" onClick={() => setAapen(false)}
                 >
-                    <Normaltekst tag='span'>Lukk</Normaltekst>
+                    <Normaltekst tag="span">Lukk</Normaltekst>
                 </button>
             </div>
 

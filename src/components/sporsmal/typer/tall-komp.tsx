@@ -46,12 +46,12 @@ const TallInput = ({ sporsmal }: SpmProps) => {
     return (
         <>
             <Vis hvis={sporsmal.sporsmalstekst !== null}>
-                <Element tag='h3' className='skjema__sporsmal'>{sporsmal.sporsmalstekst}</Element>
+                <Element tag="h3" className="skjema__sporsmal">{sporsmal.sporsmalstekst}</Element>
             </Vis>
 
-            <div className='medEnhet'>
-                <input type='number'
-                    className='skjemaelement__input input--xs'
+            <div className="medEnhet">
+                <input type="number"
+                    className="skjemaelement__input input--xs"
                     name={sporsmal.id}
                     id={sporsmal.id}
                     min={sporsmal.min!}
@@ -73,20 +73,20 @@ const TallInput = ({ sporsmal }: SpmProps) => {
                     })}
                     step={0.1}
                     onChange={onChange}
-                    autoComplete='off'
+                    autoComplete="off"
                 />
-                <label className='medEnhet__enhet' htmlFor={sporsmal.id}>{sporsmal.undertekst}</label>
+                <label className="medEnhet__enhet" htmlFor={sporsmal.id}>{sporsmal.undertekst}</label>
             </div>
 
-            <div role='alert' aria-live='assertive' className='skjemaelement__feilmelding'>
+            <div role="alert" aria-live="assertive" className="skjemaelement__feilmelding">
                 <Vis hvis={errors[sporsmal.id]}>
                     <Vis hvis={errors[sporsmal.id]?.type !== 'validate'}>
-                        <Normaltekst tag='span'>
+                        <Normaltekst tag="span">
                             <p>{feilmelding.lokal}</p>
                         </Normaltekst>
                     </Vis>
                     <Vis hvis={errors[sporsmal.id]?.type === 'validate' && sporsmal.tag === TagTyper.HVOR_MYE_TIMER_VERDI}>
-                        <Normaltekst tag='span'>
+                        <Normaltekst tag="span">
                             <p>{getLedetekst(tekst('soknad.feilmelding.MINDRE_TIMER_ENN_FORVENTET.lokal'),
                                 { '%GRAD%': periode.grad })}</p>
                         </Normaltekst>
@@ -94,7 +94,7 @@ const TallInput = ({ sporsmal }: SpmProps) => {
                 </Vis>
             </div>
 
-            <div className='undersporsmal' ref={undersporsmal}>
+            <div className="undersporsmal" ref={undersporsmal}>
                 <Vis hvis={lokal}>
                     <UndersporsmalListe oversporsmal={sporsmal} />
                 </Vis>

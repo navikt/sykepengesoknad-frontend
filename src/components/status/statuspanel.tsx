@@ -65,12 +65,12 @@ const StatusPanel = () => {
     return (
         <div className={'statuspanel'}>
             <div className={'content'}>
-                <div className='avsnitt'>
-                    <EtikettLiten tag='h3' className='avsnitt-hode'>{tekst('statuspanel.status')}</EtikettLiten>
+                <div className="avsnitt">
+                    <EtikettLiten tag="h3" className="avsnitt-hode">{tekst('statuspanel.status')}</EtikettLiten>
                     <Normaltekst>{tekst('sykepengesoknad.status.AVBRUTT')}</Normaltekst>
                 </div>
-                <div className='avsnitt'>
-                    <EtikettLiten tag='h3' className='avsnitt-hode'>{'Dato avbrutt'}</EtikettLiten>
+                <div className="avsnitt">
+                    <EtikettLiten tag="h3" className="avsnitt-hode">{'Dato avbrutt'}</EtikettLiten>
                     <Normaltekst>{tilLesbarDatoMedArstall(valgtSoknad!.avbruttDato)}</Normaltekst>
                 </div>
             </div>

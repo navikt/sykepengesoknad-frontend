@@ -16,9 +16,9 @@ const ForsikringInfo = () => {
             : 'sykepengesoknad.sykmelding-utdrag.forsikring-nei'
 
         return (
-            <div className='avsnitt'>
-                <EtikettLiten tag='h3'
-                    className='avsnitt-hode'>{tekst('sykepengesoknad.sykmelding-utdrag.forsikring')}</EtikettLiten>
+            <div className="avsnitt">
+                <EtikettLiten tag="h3"
+                    className="avsnitt-hode">{tekst('sykepengesoknad.sykmelding-utdrag.forsikring')}</EtikettLiten>
                 <Normaltekst>{tekst(nokkel)}</Normaltekst>
             </div>
         )

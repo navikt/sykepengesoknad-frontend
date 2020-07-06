@@ -11,9 +11,9 @@ const ArbeidssituasjonInfo = () => {
     if (valgtSykmelding?.valgtArbeidssituasjon) {
 
         return (
-            <div className='avsnitt'>
-                <EtikettLiten tag='h3'
-                    className='avsnitt-hode'>{tekst('din-sykmelding.arbeidssituasjon.tittel.2')}</EtikettLiten>
+            <div className="avsnitt">
+                <EtikettLiten tag="h3"
+                    className="avsnitt-hode">{tekst('din-sykmelding.arbeidssituasjon.tittel.2')}</EtikettLiten>
                 <Normaltekst>{tekst(`din-sykmelding.arbeidssituasjon.alternativ.${valgtSykmelding.valgtArbeidssituasjon.toLowerCase()}`)}</Normaltekst>
             </div>
         )
