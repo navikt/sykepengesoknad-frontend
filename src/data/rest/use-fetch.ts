@@ -1,6 +1,6 @@
 import { useCallback, useMemo, useState } from 'react'
 
-import { FetchState, FetchStatus } from './utils'
+import { FetchState, FetchStatus, redirectTilLoginHvis401 } from './utils'
 
 export interface Fetch<D = any, FP = any> extends FetchState<D> {
     fetch: (url: string, request?: RequestInit, onFinished?: (fetchState: FetchState<D>) => void) => void;
@@ -36,6 +36,7 @@ const useFetch = <D = {}>(): Fetch<D> => {
 
         fetch(url, request)
             .then(async(res) => {
+                redirectTilLoginHvis401(res)
                 const httpCode = res.status
                 let state: FetchState<D>
 
@@ -47,6 +48,7 @@ const useFetch = <D = {}>(): Fetch<D> => {
                         state = createFinishedFetchState(null, error, httpCode)
                     }
                 } else {
+
                     state = createFinishedFetchState(null, null, httpCode)
                 }
 

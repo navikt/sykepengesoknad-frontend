@@ -1,6 +1,7 @@
 import * as H from 'history'
 import React from 'react'
 
+import { redirectTilLoginHvis401 } from '../../../data/rest/utils'
 import { RSSoknadstatus } from '../../../types/rs-types/rs-soknadstatus'
 import { RSSoknadstype } from '../../../types/rs-types/rs-soknadstype'
 import { Soknad } from '../../../types/types'
@@ -22,6 +23,7 @@ export function avbrytSoknad({ valgtSoknad, setSoknader, soknader, setValgtSokna
         method: 'POST',
         credentials: 'include',
     }).then((res) => {
+        redirectTilLoginHvis401(res)
         const status = res.status
         if (status === 200) {
             if (valgtSoknad.soknadstype === RSSoknadstype.OPPHOLD_UTLAND) {

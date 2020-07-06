@@ -10,7 +10,7 @@ import { jsonDeepCopy } from '../../utils/json-deep-copy'
 import {
     arbeidsgiverInnenforArbeidsgiverperiodeKvitteringMock,
     arbeidstakerUtenforArbeidsgiverperiodeKvitteringMock,
-    soknaderIntegration
+    soknaderIntegration,
 } from './data/soknader-integration'
 import { arbeidstaker, arbeidstakerGradert, soknaderOpplaering } from './data/soknader-opplaering'
 import { sykmeldinger } from './data/sykmeldinger'
@@ -29,7 +29,10 @@ if (!env.isOpplaering) {
 }
 
 mock.put(`${env.syfoapiRoot}/syfosoknad/api/soknader/:soknad/sporsmal/:sporsmal`, (args: HandlerArgument) => {
-    return { 'oppdatertSporsmal': args.body }
+    return Promise.resolve({
+        status: 200,
+        body: JSON.stringify({ oppdatertSporsmal: args.body })
+    })
 })
 mock.post(`${env.syfoapiRoot}/syfosoknad/api/soknader/:soknad/korriger`, (args: HandlerArgument) => {
     const soknad = jsonDeepCopy(soknader.find((sok: RSSoknad) => {

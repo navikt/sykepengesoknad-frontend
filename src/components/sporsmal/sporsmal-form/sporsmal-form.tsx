@@ -5,7 +5,7 @@ import { FormContext, useForm } from 'react-hook-form'
 import { useHistory, useParams } from 'react-router-dom'
 
 import useFetch from '../../../data/rest/use-fetch'
-import { FetchState, hasData } from '../../../data/rest/utils'
+import { FetchState, hasData, redirectTilLoginHvis401 } from '../../../data/rest/utils'
 import { useAppStore } from '../../../data/stores/app-store'
 import { TagTyper } from '../../../types/enums'
 import { RSMottakerResponse } from '../../../types/rs-types/rest-response/rs-mottakerresponse'
@@ -82,6 +82,7 @@ const SporsmalForm = () => {
         })
 
         try {
+            redirectTilLoginHvis401(res)
             const data = await res.json()
 
             const httpCode = res.status
@@ -105,11 +106,11 @@ const SporsmalForm = () => {
                 window.location.reload()
 
             } else {
-                logger.error('Feil ved kall OPPDATER_SPORSMAL', res)
+                logger.error('Feil ved kall OPPDATER_SPORSMAL, uhåndtert http kode', res)
                 restFeilet = true
             }
         } catch (e) {
-            logger.error('Feil ved kall OPPDATER_SPORSMAL', e)
+            logger.error('Feil ved kall OPPDATER_SPORSMAL med exception', e)
             restFeilet = true
         }
     }
@@ -137,6 +138,7 @@ const SporsmalForm = () => {
         })
 
         try {
+            redirectTilLoginHvis401(res)
             const httpCode = res.status
             if ([ 200, 201, 203, 206 ].includes(httpCode)) {
                 if (mottaker === RSMottaker.ARBEIDSGIVER) {
