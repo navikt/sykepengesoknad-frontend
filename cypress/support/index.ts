@@ -32,79 +32,75 @@ afterEach(() => {
 })
 
 const lyttTilNettverksKall = (a: any) => {
-    const spy = a ? a[ 'getCalls' ]() : []
+    const spy = a ? a['getCalls']() : []
     for (const call of spy) {
         const { args } = call
-        const url = args[ 0 ]
-        const req = args[ 1 ]
+        const url = args[0]
+        const req = args[1]
 
         if (url.includes('sporsmal')) {
-            const headers = req[ 'headers' ]
-            const sporsmal = JSON.parse(req[ 'body' ]) as RSSporsmal
-            expect(headers, '/oppdaterSporsmal')
-                .to.deep.eq({ 'Content-Type': 'application/json' })
+            const headers = req['headers']
+            const sporsmal = JSON.parse(req['body']) as RSSporsmal
+            expect(headers['Content-Type'], '/oppdaterSporsmal').to.eql('application/json')
+            expect(headers['X-App-Started-Timestamp'], '/oppdaterSporsmal').not.to.be.undefined
             svarFormat(sporsmal)
-        }
-        else if(url.includes('/finnMottaker')) {
-            const headers = req[ 'headers' ]
-            expect(headers, '/finnMottaker')
-                .to.deep.eq({ 'Content-Type': 'application/json' })
-        }
-        else if(url.includes('/send')) {
-            const headers = req[ 'headers' ]
-            expect(headers, '/send')
-                .to.deep.eq({ 'Content-Type': 'application/json' })
-        }
-        else if(url.includes('/gjenapne')) {
-            const headers = req[ 'headers' ]
-            expect(headers, '/gjenapne')
-                .to.deep.eq({ 'Content-Type': 'application/json' })
-        }
-        else {
+        } else if (url.includes('/finnMottaker')) {
+            const headers = req['headers']
+            expect(headers['Content-Type'], '/finnMottaker').to.eql('application/json')
+            expect(headers['X-App-Started-Timestamp'], '/finnMottaker').not.to.be.undefined
+        } else if (url.includes('/send')) {
+            const headers = req['headers']
+            expect(headers['Content-Type'], '/send').to.eql('application/json')
+            expect(headers['X-App-Started-Timestamp'], '/send').not.to.be.undefined
+        } else if (url.includes('/gjenapne')) {
+            const headers = req['headers']
+            expect(headers['Content-Type'], '/gjenapne').to.eql('application/json')
+            expect(headers['X-App-Started-Timestamp'], '/gjenapne').not.to.be.undefined
+        } else {
             cy.log('Sjekker ikke kallet til', url)
         }
     }
 }
 
 const svarFormat = (sporsmal: RSSporsmal) => {
-    if(sporsmal.svar[0]) {
+    if (sporsmal.svar[0]) {
         switch (sporsmal.svartype) {
             case RSSvartype.CHECKBOX_PANEL:
-                expect(sporsmal.svar[ 0 ].verdi).to.match(RegExp(`(${SvarEnums.CHECKED}|${SvarEnums.UNCHECKED})`),
+                expect(sporsmal.svar[0].verdi).to.match(RegExp(`(${SvarEnums.CHECKED}|${SvarEnums.UNCHECKED})`),
                     `Svar format ${sporsmal.svartype}`)
                 break
             case RSSvartype.JA_NEI:
-                expect(sporsmal.svar[ 0 ].verdi).to.match(RegExp(`(${SvarEnums.JA}|${SvarEnums.NEI}|)`),
+                expect(sporsmal.svar[0].verdi).to.match(RegExp(`(${SvarEnums.JA}|${SvarEnums.NEI}|)`),
                     `Svar format ${sporsmal.svartype}`)
                 break
             case RSSvartype.RADIO_GRUPPE_UKEKALENDER:
-                expect(sporsmal.svar[ 0 ].verdi).to.match(RegExp('(Ikke til behandling|\\d{4}-\\d{2}-\\d{2})'),
+                expect(sporsmal.svar[0].verdi).to.match(RegExp('(Ikke til behandling|\\d{4}-\\d{2}-\\d{2})'),
                     `Svar format ${sporsmal.svartype}`)
                 break
             case RSSvartype.CHECKBOX:
-                expect(sporsmal.svar[ 0 ].verdi).to.match(RegExp(`(${SvarEnums.CHECKED}|)`),
+                expect(sporsmal.svar[0].verdi).to.match(RegExp(`(${SvarEnums.CHECKED}|)`),
                     `Svar format ${sporsmal.svartype}`)
                 break
             case RSSvartype.DATO:
-                expect(sporsmal.svar[ 0 ].verdi).to.match(RegExp('(\\d{4}-\\d{2}-\\d{2})'),
+                expect(sporsmal.svar[0].verdi).to.match(RegExp('(\\d{4}-\\d{2}-\\d{2})'),
                     `Svar format ${sporsmal.svartype}`)
                 break
             case RSSvartype.PERIODER:
-                expect(sporsmal.svar[ 0 ].verdi).to.match(RegExp('{"fom":"\\d{4}-\\d{2}-\\d{2}","tom":"\\d{4}-\\d{2}-\\d{2}"}'),
+                expect(sporsmal.svar[0].verdi).to.match(RegExp('{"fom":"\\d{4}-\\d{2}-\\d{2}","tom":"\\d{4}-\\d{2}-\\d{2}"}'),
                     `Svar format ${sporsmal.svartype}`)
                 break
             case RSSvartype.TALL:
             case RSSvartype.PROSENT:
             case RSSvartype.TIMER:
-                expect(sporsmal.svar[ 0 ].verdi).to.match(RegExp('\\d+|'),
+                expect(sporsmal.svar[0].verdi).to.match(RegExp('\\d+|'),
                     `Svar format ${sporsmal.svartype}`)
                 break
             case RSSvartype.RADIO:
-                expect(sporsmal.svar[ 0 ].verdi).to.match(RegExp(`(${SvarEnums.CHECKED}|)`),
+                expect(sporsmal.svar[0].verdi).to.match(RegExp(`(${SvarEnums.CHECKED}|)`),
                     `Svar format ${sporsmal.svartype}`)
                 break
             case RSSvartype.LAND:
-                expect(sporsmal.svar[ 0 ].verdi).to.match(RegExp('\\S+'),
+                expect(sporsmal.svar[0].verdi).to.match(RegExp('\\S+'),
                     `Svar format ${sporsmal.svartype}`)
                 break
             case RSSvartype.FRITEKST:

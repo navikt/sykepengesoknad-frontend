@@ -18,6 +18,7 @@ import { RSSvartype } from '../../../types/rs-types/rs-svartype'
 import { Soknad, Sporsmal } from '../../../types/types'
 import { SEPARATOR } from '../../../utils/constants'
 import env from '../../../utils/environment'
+import fetcher from '../../../utils/fetcher'
 import { logger } from '../../../utils/logger'
 import { useAmplitudeInstance } from '../../amplitude/amplitude'
 import FeilOppsummering from '../../feiloppsummering/feil-oppsummering'
@@ -74,7 +75,7 @@ const SporsmalForm = () => {
     const sendOppdaterSporsmal = async() => {
         let soknad = valgtSoknad
 
-        const res = await fetch(env.syfoapiRoot + `/syfosoknad/api/soknader/${soknad!.id}/sporsmal/${sporsmal.id}`, {
+        const res = await fetcher(env.syfoapiRoot + `/syfosoknad/api/soknader/${soknad!.id}/sporsmal/${sporsmal.id}`, {
             method: 'PUT',
             credentials: 'include',
             body: JSON.stringify(sporsmalToRS(sporsmal)),
@@ -130,7 +131,7 @@ const SporsmalForm = () => {
     }
 
     const sendSoknad = async() => {
-        const res = await fetch(env.syfoapiRoot + `/syfosoknad/api/soknader/${valgtSoknad!.id}/send`, {
+        const res = await fetcher(env.syfoapiRoot + `/syfosoknad/api/soknader/${valgtSoknad!.id}/send`, {
             method: 'POST',
             credentials: 'include',
             headers: { 'Content-Type': 'application/json' }
