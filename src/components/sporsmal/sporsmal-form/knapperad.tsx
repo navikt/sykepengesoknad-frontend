@@ -14,12 +14,14 @@ type Event = MouseEvent<HTMLAnchorElement | HTMLButtonElement>;
 
 interface KnapperadProps {
     onSubmit: Function;
+    poster: boolean;
 }
 
-const Knapperad = ({ onSubmit }: KnapperadProps) => {
+const Knapperad = ({ onSubmit, poster }: KnapperadProps) => {
     const { valgtSoknad, setValgtSoknad, soknader, setSoknader, feilmeldingTekst, setFeilmeldingTekst } = useAppStore()
     const history = useHistory()
     const { stegId } = useParams()
+    const [ avbryter, setAvbryter ] = useState<boolean>(false)
 
     const spmIndex = parseInt(stegId) - 2
 
@@ -40,21 +42,26 @@ const Knapperad = ({ onSubmit }: KnapperadProps) => {
         setVilAvbryte(!vilAvbryte)
     }
 
-    const handleAvbryt = (event: Event) => {
+    const handleAvbryt = async(event: Event) => {
         event.preventDefault()
-        avbrytSoknad({
-            valgtSoknad: valgtSoknad!,
-            setSoknader: setSoknader,
-            soknader: soknader,
-            setValgtSoknad: setValgtSoknad,
-            history: history,
-            setFeilmeldingTekst: setFeilmeldingTekst
-        })
+        setAvbryter(true)
+        try {
+            await avbrytSoknad({
+                valgtSoknad: valgtSoknad!,
+                setSoknader: setSoknader,
+                soknader: soknader,
+                setValgtSoknad: setValgtSoknad,
+                history: history,
+                setFeilmeldingTekst: setFeilmeldingTekst
+            })
+        } finally {
+            setAvbryter(false)
+        }
     }
 
     return (
         <div className="knapperad">
-            <Knapp type="hoved" onClick={() => onSubmit}>{tekst(nokkel)}</Knapp>
+            <Knapp type="hoved" disabled={poster} spinner={poster} onClick={() => onSubmit}>{tekst(nokkel)}</Knapp>
             <div className="avbrytDialog blokk-l">
                 <button className="lenke avbrytlenke avbrytDialog__trigger" onClick={handleVilAvbryte}>
                     <Normaltekst tag="span">{tekst('sykepengesoknad.avbryt.trigger')}</Normaltekst>
@@ -63,7 +70,8 @@ const Knapperad = ({ onSubmit }: KnapperadProps) => {
                     <div ref={avbrytDialog} className="avbrytDialog__dialog pekeboble">
                         <Normaltekst className="blokk-s">{tekst('sykepengesoknad.avbryt.sporsmal')}</Normaltekst>
                         <div className="blokk-xs">
-                            <Fareknapp onClick={handleAvbryt}>{tekst('sykepengesoknad.avbryt.ja')}</Fareknapp>
+                            <Fareknapp disabled={avbryter} spinner={avbryter}
+                                onClick={handleAvbryt}>{tekst('sykepengesoknad.avbryt.ja')}</Fareknapp>
                         </div>
                         <div aria-live="polite">
                             <Vis hvis={feilmeldingTekst !== ''}>

@@ -41,6 +41,7 @@ const SporsmalForm = () => {
     const { soknader, setSoknader, setValgtSoknad, valgtSoknad, mottaker, setTop, setMottaker, rerenderSporsmalForm } = useAppStore()
     const { logEvent } = useAmplitudeInstance()
     const [ erSiste, setErSiste ] = useState<boolean>(false)
+    const [ poster, setPoster ] = useState<boolean>(false)
     const { stegId } = useParams()
     const history = useHistory()
     const spmIndex = parseInt(stegId) - 1
@@ -166,38 +167,43 @@ const SporsmalForm = () => {
     }
 
     const onSubmit = async() => {
-        settSvar(sporsmal, methods.getValues())
-        if (erSiste) {
-            if (!erUtlandssoknad) {
-                settSvar(nesteSporsmal, methods.getValues())
-                sporsmal = nesteSporsmal
-            }
-            await sendOppdaterSporsmal()
-
-            await sendSoknad()
-            logEvent('Søknad sendt', { soknadstype: valgtSoknad!.soknadstype })
-        } else {
-            await sendOppdaterSporsmal()
-            logEvent(
-                'Spørsmål svart',
-                {
-                    soknadstype: valgtSoknad!.soknadstype,
-                    sporsmalstag: sporsmal.tag,
-                    svar: hentSvar(sporsmal)
+        setPoster(true)
+        try {
+            settSvar(sporsmal, methods.getValues())
+            if (erSiste) {
+                if (!erUtlandssoknad) {
+                    settSvar(nesteSporsmal, methods.getValues())
+                    sporsmal = nesteSporsmal
                 }
-            )
-        }
+                await sendOppdaterSporsmal()
 
-        if (restFeilet) {
-            methods.setError('syfosoknad', 'rest-feilet', 'Beklager, det oppstod en feil')
-            sporsmal = valgtSoknad!.sporsmal[spmIndex]
-        } else {
-            methods.clearError()
-            methods.reset()
-            setTop(0)
-            if (!erSiste) {
-                history.push(pathUtenSteg(history.location.pathname) + SEPARATOR + (spmIndex + 2))
+                await sendSoknad()
+                logEvent('Søknad sendt', { soknadstype: valgtSoknad!.soknadstype })
+            } else {
+                await sendOppdaterSporsmal()
+                logEvent(
+                    'Spørsmål svart',
+                    {
+                        soknadstype: valgtSoknad!.soknadstype,
+                        sporsmalstag: sporsmal.tag,
+                        svar: hentSvar(sporsmal)
+                    }
+                )
             }
+
+            if (restFeilet) {
+                methods.setError('syfosoknad', 'rest-feilet', 'Beklager, det oppstod en feil')
+                sporsmal = valgtSoknad!.sporsmal[spmIndex]
+            } else {
+                methods.clearError()
+                methods.reset()
+                setTop(0)
+                if (!erSiste) {
+                    history.push(pathUtenSteg(history.location.pathname) + SEPARATOR + (spmIndex + 2))
+                }
+            }
+        } finally {
+            setPoster(false)
         }
     }
 
@@ -224,7 +230,7 @@ const SporsmalForm = () => {
                 <FeilOppsummering errors={methods.errors} sporsmal={sporsmal} />
 
                 <Vis hvis={skalViseKnapperad(valgtSoknad!, sporsmal, methods.getValues())}>
-                    <Knapperad onSubmit={onSubmit} />
+                    <Knapperad onSubmit={onSubmit} poster={poster} />
                 </Vis>
             </form>
         </FormContext>
