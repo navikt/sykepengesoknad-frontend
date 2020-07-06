@@ -19,16 +19,16 @@ const SykmeldingPerioder = () => {
     }
 
     return (
-        <div className='sykmelding-perioder'>
+        <div className="sykmelding-perioder">
             {sorterPerioderEldsteFoerst(valgtSykmelding.mulighetForArbeid.perioder).map((periode: SykmeldingPeriode, index: number) => {
                 const fom = dayjs(periode.fom).format('D. MMM')
                 const tom = dayjs(periode.tom).format('D. MMM YYYY')
                 const dager = getDuration(new Date(periode.fom), new Date(periode.tom)) + ' dager'
 
                 return (
-                    <div className='avsnitt' key={index}>
-                        <EtikettLiten tag='h3'
-                            className='avsnitt-hode'>{tekst('din-sykmelding.periode.tittel')}</EtikettLiten>
+                    <div className="avsnitt" key={index}>
+                        <EtikettLiten tag="h3"
+                            className="avsnitt-hode">{tekst('din-sykmelding.periode.tittel')}</EtikettLiten>
                         <Normaltekst><strong>{fom} - {tom}</strong> &bull; {dager}</Normaltekst>
                         <Vis hvis={periode.grad}>
                             <Normaltekst>
@@ -49,7 +49,7 @@ const SykmeldingPerioder = () => {
                 )
             })}
             <Vis hvis={erOppdelt(valgtSoknad!, valgtSykmelding)}>
-                <Bjorn className='' nokkel='sykepengesoknad.sykmelding-utdrag.oppdelt.bjorn' />
+                <Bjorn className="" nokkel="sykepengesoknad.sykmelding-utdrag.oppdelt.bjorn" />
             </Vis>
         </div>
     )

@@ -18,9 +18,9 @@ const FravaersperioderInfo = () => {
 
 
         return (
-            <div className='avsnitt'>
-                <EtikettLiten tag='h3'
-                    className='avsnitt-hode'>{tekst('sykepengesoknad.sykmelding-utdrag.egenmelding-papir')}</EtikettLiten>
+            <div className="avsnitt">
+                <EtikettLiten tag="h3"
+                    className="avsnitt-hode">{tekst('sykepengesoknad.sykmelding-utdrag.egenmelding-papir')}</EtikettLiten>
 
                 <Vis hvis={harPerioder}>
                     <ul className="nokkelopplysning__liste">

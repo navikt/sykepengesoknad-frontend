@@ -14,10 +14,10 @@ const Feilmelding = (
         children
     }: FeilmeldingProps) => {
     return (
-        <div className='panel'>
-            <div className='hode hode--feil'>
-                <Systemtittel tag='h1' className='hode__tittel'>{tittel}</Systemtittel>
-                <p className='hode__melding'>{children || melding}</p>
+        <div className="panel">
+            <div className="hode hode--feil">
+                <Systemtittel tag="h1" className="hode__tittel">{tittel}</Systemtittel>
+                <p className="hode__melding">{children || melding}</p>
             </div>
         </div>
     )

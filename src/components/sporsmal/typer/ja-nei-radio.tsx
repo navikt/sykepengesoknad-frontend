@@ -52,22 +52,22 @@ const JaNeiRadio = ({ sporsmal }: SpmProps) => {
                 const utenlandsopphold = lokal === SvarEnums.JA
                     ? 'soknad.infotekst.utlandsopphold_sokt_sykepenger.ja'
                     : 'soknad.infotekst.utlandsopphold_sokt_sykepenger.nei'
-                return <div className='ekstrasporsmal'>
-                    <Normaltekst tag='span'>
+                return <div className="ekstrasporsmal">
+                    <Normaltekst tag="span">
                         {parser(getLedetekst(tekst(utenlandsopphold), { '%URL%': utlandssoknadUrl }))}
                     </Normaltekst>
                 </div>
             }
             if (spm.tag.startsWith('INNTEKTSKILDE_') && lokal === 'JA') {
-                return <div className='presisering'>
-                    <Normaltekst tag='span'>
+                return <div className="presisering">
+                    <Normaltekst tag="span">
                         {tekst('soknad.presisering.' + spm.tag)}
                     </Normaltekst>
                 </div>
             }
             if (spm.tag === 'INNTEKTSKILDE_SELVSTENDIG_ER_DU_SYKMELDT' && lokal === 'NEI') {
-                return <div className='presisering'>
-                    <Normaltekst tag='span'>
+                return <div className="presisering">
+                    <Normaltekst tag="span">
                         {parser(getLedetekst(tekst('soknad.presisering.' + spm.tag + '_NEI'), { '%URL%': tekst('soknad.presisering.INNTEKTSKILDE_SELVSTENDIG_ER_DU_SYKMELDT_NEI.url') }))}
                     </Normaltekst>
                 </div>
@@ -83,13 +83,13 @@ const JaNeiRadio = ({ sporsmal }: SpmProps) => {
                 : 'skjemaelement'
             }>
 
-                <Element tag='h3' className='skjema__sporsmal'>{sporsmal.sporsmalstekst}</Element>
+                <Element tag="h3" className="skjema__sporsmal">{sporsmal.sporsmalstekst}</Element>
 
                 {jaNeiValg.map((valg, idx) => {
                     const OK = lokal === valg.value
                     return (
                         <div className="radioContainer" key={idx}>
-                            <input type='radio'
+                            <input type="radio"
                                 id={sporsmal.id + '_' + idx}
                                 name={sporsmal.id}
                                 value={valg.value}
@@ -97,9 +97,9 @@ const JaNeiRadio = ({ sporsmal }: SpmProps) => {
                                 aria-checked={OK}
                                 onChange={() => changeValue(valg.value)}
                                 ref={register({ required: feilmelding.global })}
-                                className='skjemaelement__input radioknapp'
+                                className="skjemaelement__input radioknapp"
                             />
-                            <label className='skjemaelement__label' htmlFor={sporsmal.id + '_' + idx}>
+                            <label className="skjemaelement__label" htmlFor={sporsmal.id + '_' + idx}>
                                 {valg.label}
                             </label>
                             {presisering(OK)}
@@ -108,18 +108,18 @@ const JaNeiRadio = ({ sporsmal }: SpmProps) => {
                 })}
             </div>
 
-            <div role='alert' aria-live='assertive'>
+            <div role="alert" aria-live="assertive">
                 <Vis hvis={errors[sporsmal.id]}>
-                    <Normaltekst tag='span' className='skjemaelement__feilmelding'>
+                    <Normaltekst tag="span" className="skjemaelement__feilmelding">
                         <p>{feilmelding.lokal}</p>
                     </Normaltekst>
                 </Vis>
             </div>
             <Vis hvis={sporsmal.tag === TagTyper.SYKMELDINGSGRAD && lokal === 'JA'}>
-                <Bjorn className='press' nokkel='sykepengesoknad-utland.skjema.bjorn' ekstraMarginTop={true} />
+                <Bjorn className="press" nokkel="sykepengesoknad-utland.skjema.bjorn" ekstraMarginTop={true} />
             </Vis>
             <Vis hvis={sporsmal.tag === TagTyper.FERIE && lokal === 'JA'}>
-                <Bjorn className='press' nokkel='sykepengesoknad-utland.skjema.ferie-sporsmal-bjorn'
+                <Bjorn className="press" nokkel="sykepengesoknad-utland.skjema.ferie-sporsmal-bjorn"
                     ekstraMarginTop={true} />
                 <KnapperadAvbryt />
             </Vis>

@@ -27,7 +27,7 @@ interface SendtUliktProps {
 
 export const SendtUlikt = ({ soknad }: SendtUliktProps) => {
     return (
-        <Normaltekst tag='span'>
+        <Normaltekst tag="span">
             {getLedetekst(tekst('soknad.teaser.status.SENDT.til-arbeidsgiver'), {
                 '%DATO%': dayjs(soknad.sendtTilArbeidsgiverDato).format('DD.MM.YYYY'),
                 '%ARBEIDSGIVER%': finnArbeidsgivernavn(soknad),

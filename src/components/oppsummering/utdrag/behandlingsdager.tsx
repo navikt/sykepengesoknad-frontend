@@ -21,15 +21,15 @@ const Behandlingsdager = ({ sporsmal }: OppsummeringProps) => {
     return (
         <>
             <Vis hvis={sporsmal.undersporsmal !== undefined}>
-                <div className='oppsummering__sporsmal'>
-                    <Element tag='h3'>{sporsmal.sporsmalstekst}</Element>
+                <div className="oppsummering__sporsmal">
+                    <Element tag="h3">{sporsmal.sporsmalstekst}</Element>
                     <Vis hvis={sporsmal.undersporsmal.length > 0}>
-                        <div className='oppsummering__undersporsmalsliste'>
+                        <div className="oppsummering__undersporsmalsliste">
                             {sporsmal.undersporsmal.map((uspm, idx) => {
                                 return (
-                                    <div className='oppsummering__sporsmal' key={idx}>
-                                        <Element tag='h3'>{tilLesbarPeriodeUtenArstall(uspm.min, uspm.max)}</Element>
-                                        <div className='oppsummering__tekstsvar oppsummering__dato'>
+                                    <div className="oppsummering__sporsmal" key={idx}>
+                                        <Element tag="h3">{tilLesbarPeriodeUtenArstall(uspm.min, uspm.max)}</Element>
+                                        <div className="oppsummering__tekstsvar oppsummering__dato">
                                             <Avkrysset tekst={datoEllerIkkeTilBehandling(uspm.svarliste.svar[0])} />
                                         </div>
                                     </div>

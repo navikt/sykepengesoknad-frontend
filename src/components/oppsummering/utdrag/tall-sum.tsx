@@ -11,13 +11,13 @@ const TallSum = ({ sporsmal }: OppsummeringProps) => {
     const labelnokkel = sporsmal.svartype === RSSvartype.TIMER ? 'soknad.timer-totalt' : 'soknad.prosent'
     const label = sporsmal.undertekst || tekst(labelnokkel)
     return (
-        <div className='oppsummering__sporsmal'>
-            <Element tag='h3'>{sporsmal.sporsmalstekst}</Element>
-            <div className='oppsummering__svar'>
+        <div className="oppsummering__sporsmal">
+            <Element tag="h3">{sporsmal.sporsmalstekst}</Element>
+            <div className="oppsummering__svar">
                 {sporsmal.svarliste.svar.map((svarverdi, index) => {
                     return (
                         <Vis hvis={svarverdi.verdi !== empty} key={index}>
-                            <Normaltekst className='oppsummering__tekst'>
+                            <Normaltekst className="oppsummering__tekst">
                                 {svarverdi.verdi} {label}
                             </Normaltekst>
                         </Vis>

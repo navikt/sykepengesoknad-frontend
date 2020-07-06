@@ -19,12 +19,12 @@ const Banner = () => {
         : tekst('sykepengesoknad.sidetittel')
 
     return (
-        <header className='soknadtopp'>
+        <header className="soknadtopp">
             <SykSokLokalt />
-            <Systemtittel tag='h1' className='soknadtopp__tittel'>{tittel}</Systemtittel>
+            <Systemtittel tag="h1" className="soknadtopp__tittel">{tittel}</Systemtittel>
             <Vis hvis={!erUtlandssoknad}>
-                <Ingress tag='h2'
-                    className='soknadtopp__tittel'>{tekst('sykepengesoknad.banner.for')} {tilLesbarPeriodeMedArstall(valgtSoknad?.fom, valgtSoknad?.tom)}</Ingress>
+                <Ingress tag="h2"
+                    className="soknadtopp__tittel">{tekst('sykepengesoknad.banner.for')} {tilLesbarPeriodeMedArstall(valgtSoknad?.fom, valgtSoknad?.tom)}</Ingress>
             </Vis>
         </header>
     )

@@ -37,7 +37,7 @@ const Oppsummering = ({ ekspandert }: EkspanderProps) => {
         <Utvidbar className={'oppsummering ekspander lilla' + (ekspandert ? ' apen' : '')}
             ikon={sjekkbokser} ikonHover={sjekkbokserHover} erApen={ekspandert}
             tittel={tekst('sykepengesoknad.oppsummering.tittel')}
-            ikonAltTekst=''
+            ikonAltTekst=""
         >
             {valgtSoknad!.sporsmal
                 .filter((sporsmal) => {
@@ -45,7 +45,7 @@ const Oppsummering = ({ ekspandert }: EkspanderProps) => {
                 })
                 .map((sporsmal, index) => {
                     return (
-                        <div className='oppsummering__seksjon' key={index}>
+                        <div className="oppsummering__seksjon" key={index}>
                             <SporsmalVarianter sporsmal={sporsmal} />
                         </div>
                     )

@@ -34,7 +34,7 @@ const SendesTil = () => {
 
     return (
         <div className="bottom_line">
-            <Normaltekst tag='div'>
+            <Normaltekst tag="div">
                 {valgtSoknad!.arbeidsgiver !== undefined
                     ? parser(getLedetekst(tekst(nokkel), {
                         '%ARBEIDSGIVER%': valgtSoknad?.arbeidsgiver.navn,

@@ -37,7 +37,7 @@ const Endreknapp = () => {
         })
     }
 
-    return <Knapp mini type='standard' onClick={korriger}>{tekst('kvittering.knapp.endre')}</Knapp>
+    return <Knapp mini type="standard" onClick={korriger}>{tekst('kvittering.knapp.endre')}</Knapp>
 }
 
 export default Endreknapp

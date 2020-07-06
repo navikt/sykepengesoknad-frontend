@@ -26,7 +26,7 @@ export default ({ sporsmal }: SpmProps) => {
                 : 'skjemaelement'
             }>
 
-                <Element tag='h3' className='skjema__sporsmal'>{sporsmal.sporsmalstekst}</Element>
+                <Element tag="h3" className="skjema__sporsmal">{sporsmal.sporsmalstekst}</Element>
 
 
                 <Controller
@@ -44,9 +44,9 @@ export default ({ sporsmal }: SpmProps) => {
 
             </div>
 
-            <div role='alert' aria-live='assertive'>
+            <div role="alert" aria-live="assertive">
                 <Vis hvis={errors[sporsmal.id]}>
-                    <Normaltekst tag='span' className='skjemaelement__feilmelding'>
+                    <Normaltekst tag="span" className="skjemaelement__feilmelding">
                         <p>{feilmelding.lokal}</p>
                     </Normaltekst>
                 </Vis>

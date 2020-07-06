@@ -45,12 +45,12 @@ const PeriodeKomp = ({ sporsmal, index, slettPeriode }: AllProps) => {
     }
 
     return (
-        <li className='periode'>
-            <div className='periodelabel'>
-                <label htmlFor={htmlfor} className='fom'>
+        <li className="periode">
+            <div className="periodelabel">
+                <label htmlFor={htmlfor} className="fom">
                     {tekst('sykepengesoknad.periodevelger.fom')}
                 </label>
-                <label htmlFor={htmlfor} className='tom'>
+                <label htmlFor={htmlfor} className="tom">
                     {tekst('sykepengesoknad.periodevelger.tom')}
                 </label>
             </div>
@@ -62,8 +62,8 @@ const PeriodeKomp = ({ sporsmal, index, slettPeriode }: AllProps) => {
                 }}
                 id={id}
                 name={id}
-                className='skjemaelement__input input--m'
-                placeholder='dd.mm.åååå - dd.mm.åååå'
+                className="skjemaelement__input input--m"
+                placeholder="dd.mm.åååå - dd.mm.åååå"
                 onValueUpdate={onValueUpdate}
                 options={{
                     minDate: sporsmal.min!,
@@ -81,13 +81,13 @@ const PeriodeKomp = ({ sporsmal, index, slettPeriode }: AllProps) => {
             />
 
             <Vis hvis={index > 0}>
-                <button role='link' id={'btn_' + id} className='periodeknapp lenke slett'
+                <button role="link" id={'btn_' + id} className="periodeknapp lenke slett"
                     onClick={(e) => slettPeriode(e, index)}>
                     {tekst('sykepengesoknad.periodevelger.slett')}
                 </button>
             </Vis>
 
-            <Normaltekst tag='div' role='alert' aria-live='assertive' className='skjemaelement__feilmelding'>
+            <Normaltekst tag="div" role="alert" aria-live="assertive" className="skjemaelement__feilmelding">
                 <Vis hvis={errors[id]?.type === 'pattern'}>
                     <p>{feilmelding.lokal}</p>
                 </Vis>

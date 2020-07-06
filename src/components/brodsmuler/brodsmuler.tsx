@@ -15,23 +15,23 @@ const BrodsmuleBit = ({ sti, tittel, sisteSmule, erKlikkbar }: Brodsmule) => {
     const link = erEkstern
         ? <Lenke href={sti}>{tittel}</Lenke>
         : sti
-            ? <Link to={sti} className='lenke'>{tittel}</Link>
+            ? <Link to={sti} className="lenke">{tittel}</Link>
             : <span>{tittel}</span>
 
     if (sisteSmule) {
         return (
-            <li className='smule'>
-                <span className='vekk'>Du er her:</span>
+            <li className="smule">
+                <span className="vekk">Du er her:</span>
                 <span>{tittel}</span>
             </li>
         )
     } else if (erKlikkbar) {
         return (
-            <li className='smule'>{link}</li>
+            <li className="smule">{link}</li>
         )
     }
     return (
-        <li className='smule'>
+        <li className="smule">
             <span>{tittel}</span>
         </li>
     )
@@ -62,20 +62,20 @@ const Brodsmuler = ({ brodsmuler }: BrodsmulerProps) => {
 
     return (
         <>
-            <nav className='brodsmuler' aria-label='Du er her: '>
-                <img src={personIkon} alt='Du' className='brodsmuler__ikon' />
-                <Normaltekst tag='ul' className='brodsmuler__smuler'>
-                    <li className='smule'>
-                        <Lenke href='/dittnav'>Ditt NAV</Lenke>
+            <nav className="brodsmuler" aria-label="Du er her: ">
+                <img src={personIkon} alt="Du" className="brodsmuler__ikon" />
+                <Normaltekst tag="ul" className="brodsmuler__smuler">
+                    <li className="smule">
+                        <Lenke href="/dittnav">Ditt NAV</Lenke>
                     </li>
-                    <li className='smule'>
+                    <li className="smule">
                         <Lenke href={env.sykefravaerUrl}>Ditt Sykefravær</Lenke>
                     </li>
 
                     {getVisCollapsed() &&
-                    <li className='smule'>
-                        <button aria-label='Vis hele brødsmulestien'
-                            className='js-toggle'
+                    <li className="smule">
+                        <button aria-label="Vis hele brødsmulestien"
+                            className="js-toggle"
                             onClick={() => setVisCollapsed(false)}>
                             ...
                         </button>

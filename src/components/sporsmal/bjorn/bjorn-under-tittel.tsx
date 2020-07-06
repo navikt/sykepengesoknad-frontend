@@ -20,7 +20,7 @@ const BjornUnderTittel = ({ sporsmal }: SpmProps) => {
 
     return (
         <Vis hvis={harBjorntekst(sporsmal.tag)}>
-            <Bjorn className='blokk-m' nokkel={`soknad.bjorn.${fjernIndexFraTag(sporsmal.tag).toLowerCase()}`} />
+            <Bjorn className="blokk-m" nokkel={`soknad.bjorn.${fjernIndexFraTag(sporsmal.tag).toLowerCase()}`} />
         </Vis>
     )
 }

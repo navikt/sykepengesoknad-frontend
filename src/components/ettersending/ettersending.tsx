@@ -23,15 +23,15 @@ const Ettersending = ({ gjelder }: EttersendingProps) => {
     }
 
     return (<>
-        <Knapp mini type='standard' onClick={() => {
+        <Knapp mini type="standard" onClick={() => {
             setVilEttersende(true)
         }}>
             {tekst(`kvittering.knapp.send-${gjelder}`)}
         </Knapp>
 
         <ModalWrapper onRequestClose={() => setVilEttersende(false)}
-            className='ettersending'
-            contentLabel='ettersending'
+            className="ettersending"
+            contentLabel="ettersending"
             isOpen={vilEttersende}
         >
             <h3 className="modal__tittel">{hentTekst('kvittering.tittel.send-til')}</h3>
