@@ -5,6 +5,7 @@ import React, { useEffect, useState } from 'react'
 import { redirectTilLoginHvis401 } from '../../../data/rest/utils'
 import { useAppStore } from '../../../data/stores/app-store'
 import env from '../../../utils/environment'
+import fetcher from '../../../utils/fetcher'
 import { logger } from '../../../utils/logger'
 import { tekst } from '../../../utils/tekster'
 import Avkrysset from '../../oppsummering/utdrag/avkrysset'
@@ -34,7 +35,7 @@ const ArbeidstakerStatus = () => {
     }, [ettersend])
 
     const ettersendNav = () => {
-        fetch(env.syfoapiRoot + `/syfosoknad/api/soknader/${valgtSoknad!.id}/ettersendTilNav`, {
+        fetcher(env.syfoapiRoot + `/syfosoknad/api/soknader/${valgtSoknad!.id}/ettersendTilNav`, {
             method: 'POST',
             credentials: 'include',
             headers: { 'Content-Type': 'application/json' }
@@ -52,7 +53,7 @@ const ArbeidstakerStatus = () => {
     }
 
     const ettersendArbeidsgiver = () => {
-        fetch(env.syfoapiRoot + `/syfosoknad/api/soknader/${valgtSoknad!.id}/ettersendTilArbeidsgiver`, {
+        fetcher(env.syfoapiRoot + `/syfosoknad/api/soknader/${valgtSoknad!.id}/ettersendTilArbeidsgiver`, {
             method: 'POST',
             credentials: 'include',
             headers: { 'Content-Type': 'application/json' }

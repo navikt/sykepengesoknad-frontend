@@ -11,6 +11,7 @@ import { RSSoknadstatus } from '../../types/rs-types/rs-soknadstatus'
 import { RSSoknadstype } from '../../types/rs-types/rs-soknadstype'
 import { tilLesbarDatoMedArstall } from '../../utils/dato-utils'
 import env from '../../utils/environment'
+import fetcher from '../../utils/fetcher'
 import { logger } from '../../utils/logger'
 import { tekst } from '../../utils/tekster'
 import Vis from '../vis'
@@ -38,7 +39,7 @@ const StatusPanel = () => {
     }
 
     const Gjenapne = () => {
-        fetch(env.syfoapiRoot + `/syfosoknad/api/soknader/${valgtSoknad!.id}/gjenapne`, {
+        fetcher(env.syfoapiRoot + `/syfosoknad/api/soknader/${valgtSoknad!.id}/gjenapne`, {
             method: 'POST',
             credentials: 'include',
             headers: { 'Content-Type': 'application/json' }
