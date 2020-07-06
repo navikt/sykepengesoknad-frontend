@@ -21,7 +21,7 @@ export interface RadioUnderKompProps {
 export const RadioUnderKomp = ({ idx, uspm, sporsmal }: RadioUnderKompProps) => {
     const { register } = useFormContext()
     const hentSvar1 = hentSvar(sporsmal)
-    const [ lokal, setLokal ] = useState<string>((hentSvar1 || 'prosent') === uspm.sporsmalstekst ? 'CHECKED' : '')
+    const [ lokal, setLokal ] = useState<string>(hentSvar1 === uspm.sporsmalstekst ? 'CHECKED' : '')
     const feilmelding = hentFeilmelding(sporsmal)
 
     return (
