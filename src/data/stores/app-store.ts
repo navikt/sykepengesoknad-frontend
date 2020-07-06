@@ -2,7 +2,7 @@ import constate from 'constate'
 import { useState } from 'react'
 
 import { RSMottaker } from '../../types/rs-types/rs-mottaker'
-import { Ettersend, Soknad, Sykmelding, UnleashToggles } from '../../types/types'
+import {  Soknad, Sykmelding, UnleashToggles } from '../../types/types'
 
 export const [ AppStoreProvider, useAppStore ] = constate(() => {
     const [ unleash, setUnleash ] = useState<UnleashToggles>()
@@ -15,7 +15,6 @@ export const [ AppStoreProvider, useAppStore ] = constate(() => {
     const [ validCheck, setValidCheck ] = useState<boolean>()
     const [ feilmeldingTekst, setFeilmeldingTekst ] = useState<string>('')
     const [ rerenderSporsmalForm, setRerenderSporsmalForm ] = useState<number>(new Date().getUTCMilliseconds())
-    const [ ettersend, setEttersend ] = useState<Ettersend | null>(null)
     const [ sisteSteg, setSisteSteg ] = useState<number>()
 
     return {
@@ -29,7 +28,6 @@ export const [ AppStoreProvider, useAppStore ] = constate(() => {
         validCheck, setValidCheck,
         feilmeldingTekst, setFeilmeldingTekst,
         rerenderSporsmalForm, setRerenderSporsmalForm,
-        ettersend, setEttersend,
         sisteSteg, setSisteSteg
     }
 })

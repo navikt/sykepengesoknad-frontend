@@ -2,11 +2,7 @@ import dayjs from 'dayjs'
 import { Element, Undertekst } from 'nav-frontend-typografi'
 import React, { useEffect, useState } from 'react'
 
-import { redirectTilLoginHvis401 } from '../../../data/rest/utils'
 import { useAppStore } from '../../../data/stores/app-store'
-import env from '../../../utils/environment'
-import fetcher from '../../../utils/fetcher'
-import { logger } from '../../../utils/logger'
 import { tekst } from '../../../utils/tekster'
 import Avkrysset from '../../oppsummering/utdrag/avkrysset'
 import Vis from '../../vis'
@@ -14,7 +10,7 @@ import { Mottaker } from './kvittering-status'
 
 
 const ArbeidstakerStatus = () => {
-    const { valgtSoknad, setValgtSoknad, soknader, setSoknader, setEttersend, ettersend, setFeilmeldingTekst } = useAppStore()
+    const { valgtSoknad } = useAppStore()
     const [ tilArbNavn, setTilArbNavn ] = useState<string>()
     const [ tilOrg, setTilOrg ] = useState<string>()
     const [ tilNavDato, setTilNavDato ] = useState<string>()
@@ -25,58 +21,6 @@ const ArbeidstakerStatus = () => {
         // eslint-disable-next-line
     }, [])
 
-    useEffect(() => {
-        if (ettersend?.type === 'nav') {
-            ettersendNav()
-        } else if (ettersend?.type === 'arbeidsgiver') {
-            ettersendArbeidsgiver()
-        }
-        // eslint-disable-next-line
-    }, [ettersend])
-
-    const ettersendNav = () => {
-        fetcher(env.syfoapiRoot + `/syfosoknad/api/soknader/${valgtSoknad!.id}/ettersendTilNav`, {
-            method: 'POST',
-            credentials: 'include',
-            headers: { 'Content-Type': 'application/json' }
-        }).then((res: Response) => {
-            redirectTilLoginHvis401(res)
-            if (res.ok) {
-                valgtSoknad!.sendtTilNAVDato = ettersend?.dato
-                setEttersend(null)
-                oppdaterSoknad()
-            } else {
-                logger.error('Feil ved ettersending til NAV', res)
-                setFeilmeldingTekst(tekst('kvittering.ettersending.feilet'))
-            }
-        })
-    }
-
-    const ettersendArbeidsgiver = () => {
-        fetcher(env.syfoapiRoot + `/syfosoknad/api/soknader/${valgtSoknad!.id}/ettersendTilArbeidsgiver`, {
-            method: 'POST',
-            credentials: 'include',
-            headers: { 'Content-Type': 'application/json' }
-        }).then((res: Response) => {
-            redirectTilLoginHvis401(res)
-            if (res.ok) {
-                valgtSoknad!.sendtTilArbeidsgiverDato = ettersend?.dato
-                setEttersend(null)
-                oppdaterSoknad()
-            } else {
-                logger.error('Feil ved ettersending til ARBEIDSGIVER', res)
-                setFeilmeldingTekst(tekst('kvittering.ettersending.feilet'))
-            }
-        })
-    }
-
-    const oppdaterSoknad = () => {
-        setValgtSoknad(valgtSoknad)
-        soknader[soknader.findIndex(sok => sok.id === valgtSoknad!.id)] = valgtSoknad as any
-        setSoknader(soknader)
-        setFeilmeldingTekst('')
-        opprettDatoer()
-    }
 
     const opprettDatoer = () => {
         const sendtTilNav = valgtSoknad?.sendtTilNAVDato

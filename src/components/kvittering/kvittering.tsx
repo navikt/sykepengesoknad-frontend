@@ -1,7 +1,7 @@
 import './kvittering.less'
 
 import Alertstripe from 'nav-frontend-alertstriper'
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom'
 
 import { useAppStore } from '../../data/stores/app-store'
@@ -20,6 +20,8 @@ import Arbeidstaker from './arbeidstaker'
 const Kvittering = () => {
     const { valgtSoknad, setValgtSoknad, setValgtSykmelding, soknader, sykmeldinger, feilmeldingTekst } = useAppStore()
     const { id } = useParams()
+    const [ rerendreKvittering, setRerendrekvittering ] = useState<Date>(new Date())
+
 
     useEffect(() => {
         if (!valgtSoknad) {
@@ -30,6 +32,12 @@ const Kvittering = () => {
         }
         // eslint-disable-next-line
     }, [])
+
+    // eslint-disable-next-line @typescript-eslint/no-empty-function
+    useEffect(() => {
+
+    }, [ rerendreKvittering ])
+
 
     const erSendtTilNav = valgtSoknad?.sendtTilNAVDato !== null
     const erSendtTilArbeidsgiver = valgtSoknad?.sendtTilArbeidsgiverDato !== null
@@ -66,11 +74,11 @@ const Kvittering = () => {
                     </Vis>
 
                     <Vis hvis={!erSendtTilNav}>
-                        <Ettersending gjelder="nav" />
+                        <Ettersending gjelder="nav" setRerendrekvittering={setRerendrekvittering} />
                     </Vis>
 
                     <Vis hvis={valgtSoknad!.arbeidsgiver !== undefined && !erSendtTilArbeidsgiver}>
-                        <Ettersending gjelder="arbeidsgiver" />
+                        <Ettersending gjelder="arbeidsgiver" setRerendrekvittering={setRerendrekvittering} />
                     </Vis>
                 </div>
             </Vis>

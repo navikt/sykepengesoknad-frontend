@@ -44,6 +44,7 @@ const Knapperad = ({ onSubmit, poster }: KnapperadProps) => {
 
     const handleAvbryt = async(event: Event) => {
         event.preventDefault()
+        if(avbryter) return
         setAvbryter(true)
         try {
             await avbrytSoknad({
@@ -61,7 +62,7 @@ const Knapperad = ({ onSubmit, poster }: KnapperadProps) => {
 
     return (
         <div className="knapperad">
-            <Knapp type="hoved" disabled={poster} spinner={poster} onClick={() => onSubmit}>{tekst(nokkel)}</Knapp>
+            <Knapp type="hoved" spinner={poster} onClick={() => onSubmit}>{tekst(nokkel)}</Knapp>
             <div className="avbrytDialog blokk-l">
                 <button className="lenke avbrytlenke avbrytDialog__trigger" onClick={handleVilAvbryte}>
                     <Normaltekst tag="span">{tekst('sykepengesoknad.avbryt.trigger')}</Normaltekst>
@@ -70,7 +71,7 @@ const Knapperad = ({ onSubmit, poster }: KnapperadProps) => {
                     <div ref={avbrytDialog} className="avbrytDialog__dialog pekeboble">
                         <Normaltekst className="blokk-s">{tekst('sykepengesoknad.avbryt.sporsmal')}</Normaltekst>
                         <div className="blokk-xs">
-                            <Fareknapp disabled={avbryter} spinner={avbryter}
+                            <Fareknapp spinner={avbryter}
                                 onClick={handleAvbryt}>{tekst('sykepengesoknad.avbryt.ja')}</Fareknapp>
                         </div>
                         <div aria-live="polite">
