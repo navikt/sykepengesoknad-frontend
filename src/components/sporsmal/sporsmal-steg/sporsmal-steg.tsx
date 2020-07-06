@@ -36,9 +36,10 @@ const Fremdriftsbar = ({ antallSteg }: FremdriftsbarProps) => {
 }
 
 const SporsmalSteg = () => {
-    const { valgtSoknad } = useAppStore()
+    const { valgtSoknad, setSisteSteg } = useAppStore()
     const { stegId } = useParams()
     const aktivtSteg = parseInt(stegId)
+    setSisteSteg(aktivtSteg)
     const steg = valgtSoknad!.sporsmal.filter(s => s.tag !== TagTyper.VAER_KLAR_OVER_AT)
 
     return (
