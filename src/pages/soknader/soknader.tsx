@@ -54,7 +54,7 @@ const Soknader = () => {
                     {tekst('soknader.sidetittel')}
                 </Sidetittel>
                 <Teasere
-                    className={'mb_nye_soknader'}
+                    className={'soknader_teasere'}
                     soknader={nyeSoknader}
                     tittel={tekst('soknader.venter-paa-behandling.tittel')}
                     tomListeTekst={tekst('soknader.venter-paa-behandling.ingen-soknader')}
@@ -63,6 +63,7 @@ const Soknader = () => {
 
                 <Vis hvis={fremtidigeSoknader.length > 0}>
                     <Teasere
+                        className={'soknader_teasere'}
                         soknader={fremtidigeSoknader}
                         tittel={tekst('soknader.planlagt.tittel')}
                         id='soknader-planlagt'
@@ -73,6 +74,7 @@ const Soknader = () => {
 
                 <Vis hvis={tidligereSoknader.length > 0}>
                     <Teasere
+                        className={'soknader_teasere'}
                         soknader={tidligereSoknader}
                         tittel={tekst('soknader.sendt.tittel')}
                         id='soknader-sendt'
