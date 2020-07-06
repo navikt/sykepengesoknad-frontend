@@ -2,7 +2,7 @@ import './statuspanel.less'
 
 import { Knapp } from 'nav-frontend-knapper'
 import { EtikettLiten, Normaltekst } from 'nav-frontend-typografi'
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import { useHistory, useParams } from 'react-router'
 
 import { redirectTilLoginHvis401 } from '../../data/rest/utils'
@@ -20,6 +20,8 @@ const StatusPanel = () => {
     const { valgtSoknad, setValgtSoknad, setValgtSykmelding, sykmeldinger, soknader, setSoknader } = useAppStore()
     const history = useHistory()
     const { id } = useParams()
+    const [ gjenapner, setGjenapner ] = useState<boolean>(false)
+
 
     useEffect(() => {
         if (!valgtSoknad) {
@@ -38,12 +40,17 @@ const StatusPanel = () => {
         return !oppholdUtland && opprettetDato >= ettAarSiden
     }
 
-    const Gjenapne = () => {
-        fetcher(env.syfoapiRoot + `/syfosoknad/api/soknader/${valgtSoknad!.id}/gjenapne`, {
-            method: 'POST',
-            credentials: 'include',
-            headers: { 'Content-Type': 'application/json' }
-        }).then((res: Response) => {
+    const Gjenapne = async() => {
+        if (gjenapner) return
+        setGjenapner(true)
+        try {
+            const res = await fetcher(env.syfoapiRoot + `/syfosoknad/api/soknader/${valgtSoknad!.id}/gjenapne`, {
+                method: 'POST',
+                credentials: 'include',
+                headers: { 'Content-Type': 'application/json' }
+            })
+
+
             redirectTilLoginHvis401(res)
             try {
                 const httpCode = res.status
@@ -60,7 +67,9 @@ const StatusPanel = () => {
             } catch (e) {
                 logger.error('Feil ved gjenåpning av søknad', e)
             }
-        })
+        } finally {
+            setGjenapner(false)
+        }
     }
 
 
@@ -76,8 +85,8 @@ const StatusPanel = () => {
                     <Normaltekst>{tilLesbarDatoMedArstall(valgtSoknad!.avbruttDato)}</Normaltekst>
                 </div>
             </div>
-            <Vis hvis={ soknadKanGjenapnes(valgtSoknad!.opprettetDato)} >
-                <Knapp mini type="standard" onClick={Gjenapne}>
+            <Vis hvis={soknadKanGjenapnes(valgtSoknad!.opprettetDato)}>
+                <Knapp spinner={gjenapner} mini type="standard" onClick={Gjenapne}>
                     {'Gjenåpne søknad'}
                 </Knapp>
             </Vis>

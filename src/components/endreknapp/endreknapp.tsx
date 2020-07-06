@@ -1,5 +1,5 @@
 import { Knapp } from 'nav-frontend-knapper'
-import React from 'react'
+import React, { useState } from 'react'
 import { useHistory } from 'react-router'
 
 import useFetch from '../../data/rest/use-fetch'
@@ -17,8 +17,11 @@ const Endreknapp = () => {
     const { valgtSoknad, soknader, setSoknader, setFeilmeldingTekst } = useAppStore()
     const korrigerSoknad = useFetch<RSSoknad>()
     const history = useHistory()
+    const [ korrigerer, setKorrigerer ] = useState<boolean>(false)
 
     const korriger = () => {
+        if (korrigerer) return
+        setKorrigerer(true)
         korrigerSoknad.fetch(env.syfoapiRoot + `/syfosoknad/api/soknader/${valgtSoknad!.id}/korriger`, {
             method: 'POST',
             credentials: 'include',
@@ -34,10 +37,11 @@ const Endreknapp = () => {
                 logger.error('Feil ved opprettelse av UTKAST_TIL_KORRIGERING', fetchState)
                 setFeilmeldingTekst(tekst('kvittering.korrigering.feilet'))
             }
+            setKorrigerer(false)
         })
     }
 
-    return <Knapp mini type="standard" onClick={korriger}>{tekst('kvittering.knapp.endre')}</Knapp>
+    return <Knapp mini type="standard" spinner={korrigerer} onClick={korriger}>{tekst('kvittering.knapp.endre')}</Knapp>
 }
 
 export default Endreknapp
