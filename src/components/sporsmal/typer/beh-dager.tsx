@@ -1,5 +1,6 @@
 import './beh.dager.less'
 
+import dayjs from 'dayjs'
 import { Element, Normaltekst } from 'nav-frontend-typografi'
 import React, { useEffect, useState } from 'react'
 import { ErrorMessage, useFormContext } from 'react-hook-form'
@@ -31,11 +32,11 @@ const BehDager = ({ sporsmal }: SpmProps) => {
     }, [sporsmal]);
 
     const dagerSidenMandag = (spm: Sporsmal) => {
-        return ((new Date(spm.min!).getDay() - 1) % 7)
+        return (( dayjs(spm.min!).day() - 1)) % 7
     }
 
     const dagerTilFredag = (spm: Sporsmal) => {
-        return (5 - new Date(spm.max!).getDay())
+        return (5 - dayjs(spm.max!).day())
     }
 
     const radioKlikk = (value: string, index: number, name: string) => {
