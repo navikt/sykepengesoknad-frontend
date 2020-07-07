@@ -1,5 +1,5 @@
 import { Normaltekst } from 'nav-frontend-typografi'
-import React, { useEffect, useRef } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import { useFormContext } from 'react-hook-form'
 
 import { TagTyper } from '../../../types/enums'
@@ -9,26 +9,29 @@ import { SpmProps } from '../sporsmal-form/sporsmal-form'
 import { hentFeilmelding } from '../sporsmal-utils'
 
 const CheckboxInput = ({ sporsmal }: SpmProps) => {
-    const { register, setValue, errors, watch } = useFormContext()
+    const { register, setValue, errors } = useFormContext()
     const bekreft = useRef<HTMLDivElement>(null)
-    const checkWatch = watch(sporsmal.id)
+    const [ classname, setClassname ] = useState<string>('bekreftCheckboksPanel')
     const feilmelding = hentFeilmelding(sporsmal)
 
     useEffect(() => {
         const svar = hentSvar(sporsmal)
         setValue(sporsmal.id, svar)
+        setClassname(getClassName(svar === 'CHECKED'))
         // eslint-disable-next-line
     }, [sporsmal]);
 
-    const handleChange = () => {
+    const handleChange = (evt: any) => {
         bekreft.current!.classList.toggle('bekreftCheckboksPanel--checked')
-        setValue(sporsmal.id, !checkWatch)
+        setValue(sporsmal.id, evt.target.checked)
+        setClassname(getClassName(evt.target.checked))
+
     }
 
-    const makeClassName = () => {
+    const getClassName = (checked: boolean) => {
         const cls = 'bekreftCheckboksPanel'
         const err = errors[sporsmal.id] ? ' skjemaelement__input--harFeil' : ''
-        const all = watch(sporsmal.id) ? cls + ' ' + cls + '--checked' : cls
+        const all = checked ? cls + ' ' + cls + '--checked' : cls
         return all + err
     }
 
@@ -39,7 +42,7 @@ const CheckboxInput = ({ sporsmal }: SpmProps) => {
     }
     return (
         <>
-            <div className={makeClassName()} ref={bekreft}>
+            <div className={classname} ref={bekreft}>
                 <div className="skjemaelement skjemaelement--horisontal">
                     <input type="checkbox"
                         className="skjemaelement__input checkboks"
