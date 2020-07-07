@@ -26,9 +26,8 @@ const jaNeiValg = [ {
 } ]
 
 const JaNeiInput = ({ sporsmal }: SpmProps) => {
-    const { register, setValue, errors, watch, reset, getValues, clearError } = useFormContext()
+    const { register, setValue, errors, reset, getValues, clearError } = useFormContext()
     const feilmelding = hentFeilmelding(sporsmal)
-    const watchVerdi = watch(sporsmal.id)
     const [ lokal, setLokal ] = useState<string>(hentSvar(sporsmal))
 
     useEffect(() => {
@@ -126,7 +125,7 @@ const JaNeiInput = ({ sporsmal }: SpmProps) => {
             </Normaltekst>
 
             <AnimateOnMount
-                mounted={watchVerdi === sporsmal.kriterieForVisningAvUndersporsmal}
+                mounted={lokal === sporsmal.kriterieForVisningAvUndersporsmal}
                 enter="undersporsmal--vis"
                 leave="undersporsmal--skjul"
                 start="undersporsmal"
