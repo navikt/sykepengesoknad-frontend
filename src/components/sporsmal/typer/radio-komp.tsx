@@ -1,5 +1,5 @@
 import { Element, Normaltekst } from 'nav-frontend-typografi'
-import React, { ChangeEvent, useEffect, useState } from 'react'
+import React, { MouseEvent, useEffect, useState } from 'react'
 import { useFormContext } from 'react-hook-form'
 
 import { RSSvartype } from '../../../types/rs-types/rs-svartype'
@@ -16,7 +16,7 @@ export interface RadioUnderKompProps {
     uspm: Sporsmal;
     idx: number;
     sporsmal: Sporsmal;
-    handleOptionChange: (e: ChangeEvent<HTMLInputElement>) => void;
+    handleOptionChange: (e: MouseEvent) => void;
 }
 
 
@@ -32,7 +32,7 @@ export const RadioUnderKomp = ({ idx, uspm, selectedOption, sporsmal, handleOpti
                 id={uspm.id}
                 name={sporsmal.id}
                 value={uspm.sporsmalstekst}
-                onChange={handleOptionChange}
+                onClick={handleOptionChange}
                 checked={checked}
                 aria-checked={checked}
                 ref={register({ required: feilmelding.global })}
@@ -57,8 +57,9 @@ export const RadioUnderKomp = ({ idx, uspm, selectedOption, sporsmal, handleOpti
 const RadioKomp = ({ sporsmal }: SpmProps) => {
     const { setValue, errors } = useFormContext()
     const [ selectedOption, setSelectedOption ] = useState<string>(hentSvar(sporsmal))
-    const handleOptionChange = (e: ChangeEvent<HTMLInputElement>) => {
-        setSelectedOption(e.target.value)
+    const handleOptionChange = (e: MouseEvent) => {
+        const target = e.target as HTMLInputElement
+        setSelectedOption(target.value)
     }
 
     const feilmelding = hentFeilmelding(sporsmal)
