@@ -45,7 +45,7 @@ const TallInput = ({ sporsmal }: SpmProps) => {
 
     return (
         <>
-            <Vis hvis={sporsmal.sporsmalstekst !== null}>
+            <Vis hvis={sporsmal.sporsmalstekst}>
                 <Element tag="h3" className="skjema__sporsmal">{sporsmal.sporsmalstekst}</Element>
             </Vis>
 
