@@ -1,5 +1,5 @@
 import { Element, Normaltekst } from 'nav-frontend-typografi'
-import React, { useEffect, useState } from 'react'
+import React, { ChangeEvent, useEffect, useState } from 'react'
 import { useFormContext } from 'react-hook-form'
 
 import { RSSvartype } from '../../../types/rs-types/rs-svartype'
@@ -12,17 +12,19 @@ import { hentFeilmelding } from '../sporsmal-utils'
 import UndersporsmalListe from '../undersporsmal/undersporsmal-liste'
 
 export interface RadioUnderKompProps {
-    sporsmal: Sporsmal;
+    selectedOption: string;
     uspm: Sporsmal;
     idx: number;
+    sporsmal: Sporsmal;
+    handleOptionChange: (e: ChangeEvent<HTMLInputElement>) => void;
 }
 
 
-export const RadioUnderKomp = ({ idx, uspm, sporsmal }: RadioUnderKompProps) => {
+export const RadioUnderKomp = ({ idx, uspm, selectedOption, sporsmal, handleOptionChange }: RadioUnderKompProps) => {
     const { register } = useFormContext()
-    const hentSvar1 = hentSvar(sporsmal)
-    const [ lokal, setLokal ] = useState<string>(hentSvar1 === uspm.sporsmalstekst ? 'CHECKED' : '')
     const feilmelding = hentFeilmelding(sporsmal)
+
+    const checked = selectedOption === uspm.sporsmalstekst
 
     return (
         <div className="radioContainer" key={idx}>
@@ -30,11 +32,9 @@ export const RadioUnderKomp = ({ idx, uspm, sporsmal }: RadioUnderKompProps) => 
                 id={uspm.id}
                 name={sporsmal.id}
                 value={uspm.sporsmalstekst}
-                onChange={(e) => {
-                    setLokal(e.currentTarget.id === uspm.id ? 'CHECKED' : '')
-                }}
-                checked={lokal === 'CHECKED'}
-                aria-checked={lokal === 'CHECKED'}
+                onChange={handleOptionChange}
+                checked={checked}
+                aria-checked={checked}
                 ref={register({ required: feilmelding.global })}
                 className="skjemaelement__input radioknapp"
             />
@@ -43,12 +43,12 @@ export const RadioUnderKomp = ({ idx, uspm, sporsmal }: RadioUnderKompProps) => 
             </label>
 
             <AnimateOnMount
-                mounted={lokal === 'CHECKED'}
+                mounted={checked}
                 enter="undersporsmal--vis"
                 leave="undersporsmal--skjul"
                 start="undersporsmal"
             >
-                <UndersporsmalListe oversporsmal={uspm} oversporsmalSvar={lokal} />
+                <UndersporsmalListe oversporsmal={uspm} oversporsmalSvar={checked ? 'CHECKED' : ''} />
             </AnimateOnMount>
         </div>
     )
@@ -56,6 +56,10 @@ export const RadioUnderKomp = ({ idx, uspm, sporsmal }: RadioUnderKompProps) => 
 
 const RadioKomp = ({ sporsmal }: SpmProps) => {
     const { setValue, errors } = useFormContext()
+    const [ selectedOption, setSelectedOption ] = useState<string>(hentSvar(sporsmal))
+    const handleOptionChange = (e: ChangeEvent<HTMLInputElement>) => {
+        setSelectedOption(e.target.value)
+    }
 
     const feilmelding = hentFeilmelding(sporsmal)
 
@@ -75,7 +79,7 @@ const RadioKomp = ({ sporsmal }: SpmProps) => {
                 : 'skjemaelement'}
             >
                 {sporsmal.undersporsmal.map((uspm, idx) => {
-                    return RadioUnderKomp({ idx: idx, uspm: uspm, sporsmal: sporsmal })
+                    return RadioUnderKomp({ idx, uspm, sporsmal, selectedOption, handleOptionChange })
                 })}
             </div>
 
