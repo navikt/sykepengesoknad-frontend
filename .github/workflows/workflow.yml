@@ -117,7 +117,7 @@ jobs:
           RESOURCE: nais-gcp.yaml
 
   deploy-to-prod-sbs:
-    if: github.ref == 'refs/heads/denne-endres-til-master-ved-neste-forsok-pa-prod'
+    if: github.ref == 'refs/heads/master'
     name: Deploy to production
     needs: build-and-publish
     runs-on: ubuntu-latest
