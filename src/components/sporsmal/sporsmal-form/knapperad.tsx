@@ -79,7 +79,7 @@ const Knapperad = ({ onSubmit, poster }: KnapperadProps) => {
                                 <Alertstripe type="feil">{feilmeldingTekst}</Alertstripe>
                             </Vis>
                         </div>
-                        <button className="lenke" onClick={handleVilAvbryte}>
+                        <button className="avbrytlenke lenke" onClick={handleVilAvbryte}>
                             {tekst('sykepengesoknad.avbryt.angre')}
                         </button>
                     </div>
