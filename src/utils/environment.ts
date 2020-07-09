@@ -38,6 +38,10 @@ class Environment {
         return this.env.LOGINSERVICE_URL
     }
 
+    get loginServiceRedirectUrl() {
+        return this.env.LOGINSERVICE_REDIRECT_URL
+    }
+
     get amplitudeKey() {
         return this.env.AMPLITUDE_KEY
     }
