@@ -57,7 +57,7 @@ export function DataFetcher(props: { children: any }) {
         return <Spinner type={'XXL'} />
 
     } else if (hasAny401([ unleash, rssoknader, sykmeldinger ])) {
-        window.location.href = `${hentLoginUrl()}?redirect=${window.location.href}`
+        window.location.href = hentLoginUrl()
 
     } else if (hasAnyFailed([ unleash, rssoknader, sykmeldinger ])) {
         logger.error('Klarer ikke hente en av disse [ unleash, rssoknader, sykmeldinger ]')
@@ -68,6 +68,5 @@ export function DataFetcher(props: { children: any }) {
 }
 
 export const hentLoginUrl = () => {
-    window.localStorage.setItem('REDIRECT_ETTER_LOGIN', window.location.href)
-    return env.loginServiceUrl
+    return `${env.loginServiceUrl}?redirect=${env.loginServiceRedirectUrl}`
 }
