@@ -39,7 +39,7 @@ export interface SpmProps {
 }
 
 const SporsmalForm = () => {
-    const { soknader, setSoknader, setValgtSoknad, valgtSoknad, mottaker, setTop, setMottaker, rerenderSporsmalForm } = useAppStore()
+    const { soknader, setSoknader, setValgtSoknad, valgtSoknad, mottaker, setTop, setMottaker, rerenderSporsmalForm, setFeilState } = useAppStore()
     const { logEvent } = useAmplitudeInstance()
     const [ erSiste, setErSiste ] = useState<boolean>(false)
     const [ poster, setPoster ] = useState<boolean>(false)
@@ -102,9 +102,14 @@ const SporsmalForm = () => {
                 setSoknader(soknader)
                 setValgtSoknad(soknad)
             } else if (httpCode === 400 && data !== null && typeof data === 'object' && data.reason === 'FEIL_STATUS_FOR_OPPDATER_SPORSMAL') {
-                logger.error('Feil STATUS FOR OPPDATER_SPORSMAL, refresher siden for å resette state')
-                window.location.reload()
+                logger.warn('FEIL_STATUS_FOR_OPPDATER_SPORSMAL, gir bruker mulighet for å refreshe siden for å resette state')
+                restFeilet = true
+                setFeilState(true)
 
+            } else if (httpCode === 400 && data !== null && typeof data === 'object' && data.reason === 'SPORSMAL_FINNES_IKKE_I_SOKNAD') {
+                logger.warn('SPORSMAL_FINNES_IKKE_I_SOKNAD, gir bruker mulighet for å refreshe siden for å resette state')
+                restFeilet = true
+                setFeilState(true)
             } else {
                 logger.error('Feil ved kall OPPDATER_SPORSMAL, uhåndtert http kode', res)
                 restFeilet = true
