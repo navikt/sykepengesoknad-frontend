@@ -111,7 +111,7 @@ const SporsmalForm = () => {
                 restFeilet = true
                 setFeilState(true)
             } else {
-                logger.error('Feil ved kall OPPDATER_SPORSMAL, uhåndtert http kode', res)
+                logger.error(`Feil ved kall OPPDATER_SPORSMAL, uhåndtert http kode ${httpCode}`, res)
                 restFeilet = true
             }
         } catch (e) {
