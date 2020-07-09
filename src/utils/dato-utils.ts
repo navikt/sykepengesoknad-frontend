@@ -14,12 +14,12 @@ const maaneder = [ 'januar', 'februar', 'mars', 'april', 'mai', 'juni', 'juli', 
 const SKILLETEGN_PERIODE = '–'
 
 export const langtDatoFormat = (_dato: any) => {
-    const dato = new Date(_dato)
+    const dato = dayjsToDate(_dato)!
     return `${dato.getDate()}. ${maaneder[dato.getMonth()]} ${dato.getFullYear()}`
 }
 
 export const tilBackendDato = (datoArg: string) => {
-    const dato = new Date(datoArg)
+    const dato = dayjsToDate(datoArg)!
     let dag: any = dato.getDate()
     let maned: any = dato.getMonth() + 1
     const ar = dato.getFullYear()
@@ -39,7 +39,7 @@ export const fraBackendTilDate = (datoArg: string) => {
 
 export const tilLesbarDatoUtenAarstall = (datoArg: any): string => {
     if (datoArg) {
-        const dato = new Date(datoArg)
+        const dato =  dayjsToDate(datoArg)!
         const dag = dato.getDate()
         const manedIndex = dato.getMonth()
         const maned = maaneder[manedIndex]
@@ -50,25 +50,25 @@ export const tilLesbarDatoUtenAarstall = (datoArg: any): string => {
 
 export const tilLesbarDatoMedArstall = (datoArg: any) => {
     return datoArg
-        ? `${tilLesbarDatoUtenAarstall(new Date(datoArg))} ${new Date(datoArg).getFullYear()}`
+        ? `${tilLesbarDatoUtenAarstall(dayjsToDate(datoArg))} ${dayjsToDate(datoArg)!.getFullYear()}`
         : null
 }
 
 export const tilLesbarPeriodeMedArstall = (fomArg: any, tomArg: any) => {
-    const fom = new Date(fomArg)
-    const tom = new Date(tomArg)
-    const erSammeAar = fom.getFullYear() === tom.getFullYear()
-    const erSammeMaaned = fom.getMonth() === tom.getMonth()
+    const fom = dayjsToDate(fomArg)
+    const tom = dayjsToDate(tomArg)
+    const erSammeAar = fom?.getFullYear() === tom?.getFullYear()
+    const erSammeMaaned = fom?.getMonth() === tom?.getMonth()
     return erSammeAar && erSammeMaaned
-        ? `${fom.getDate()}. ${SKILLETEGN_PERIODE} ${tilLesbarDatoMedArstall(tom)}`
+        ? `${fom?.getDate()}. ${SKILLETEGN_PERIODE} ${tilLesbarDatoMedArstall(tom)}`
         : erSammeAar
             ? `${tilLesbarDatoUtenAarstall(fom)} ${SKILLETEGN_PERIODE} ${tilLesbarDatoMedArstall(tom)}`
             : `${tilLesbarDatoMedArstall(fom)} ${SKILLETEGN_PERIODE} ${tilLesbarDatoMedArstall(tom)}`
 }
 
 export const tilLesbarPeriodeUtenArstall = (fomArg: any, tomArg: any) => {
-    const fom = new Date(fomArg)
-    const tom = new Date(tomArg)
+    const fom = dayjsToDate(fomArg)!
+    const tom = dayjsToDate(tomArg)!
     const erSammeMaaned = fom.getMonth() === tom.getMonth()
     return erSammeMaaned
         ? `${fom.getDate()}. ${SKILLETEGN_PERIODE} ${tilLesbarDatoUtenAarstall(tom)}`
