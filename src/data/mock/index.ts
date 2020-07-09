@@ -8,9 +8,11 @@ import { RSSoknadstype } from '../../types/rs-types/rs-soknadstype'
 import env from '../../utils/environment'
 import { jsonDeepCopy } from '../../utils/json-deep-copy'
 import {
-    arbeidsgiverInnenforArbeidsgiverperiodeKvitteringMock,
-    arbeidstakerUtenforArbeidsgiverperiodeKvitteringMock,
+    arbeidsgiverInnenforArbeidsgiverperiodeKvittering,
+    arbeidstakerUtenforArbeidsgiverperiodeKvittering,
     soknaderIntegration,
+    soknadSomTriggerFeilStatusForOppdaterSporsmal,
+    soknadSomTriggerSporsmalFinnesIkkeISoknad,
 } from './data/soknader-integration'
 import { arbeidstaker, arbeidstakerGradert, soknaderOpplaering } from './data/soknader-opplaering'
 import { sykmeldinger } from './data/sykmeldinger'
@@ -29,6 +31,20 @@ if (!env.isOpplaering) {
 }
 
 mock.put(`${env.syfoapiRoot}/syfosoknad/api/soknader/:soknad/sporsmal/:sporsmal`, (args: HandlerArgument) => {
+
+
+    if (args.pathParams.soknad === soknadSomTriggerSporsmalFinnesIkkeISoknad.id) {
+        return Promise.resolve({
+            status: 400,
+            body: JSON.stringify({ reason: 'SPORSMAL_FINNES_IKKE_I_SOKNAD' })
+        })
+    }
+    if (args.pathParams.soknad === soknadSomTriggerFeilStatusForOppdaterSporsmal.id) {
+        return Promise.resolve({
+            status: 400,
+            body: JSON.stringify({ reason: 'FEIL_STATUS_FOR_OPPDATER_SPORSMAL' })
+        })
+    }
     return Promise.resolve({
         status: 200,
         body: JSON.stringify({ oppdatertSporsmal: args.body })
@@ -61,11 +77,11 @@ mock.post(`${env.syfoapiRoot}/syfosoknad/api/soknader/:soknad/finnMottaker`, (ar
     const soknadId = args.pathParams.soknad
 
     if (soknadId === arbeidstaker.id ||
-        soknadId === arbeidstakerUtenforArbeidsgiverperiodeKvitteringMock.id) {
+        soknadId === arbeidstakerUtenforArbeidsgiverperiodeKvittering.id) {
         return { mottaker: RSMottaker.ARBEIDSGIVER_OG_NAV }
     }
     if (soknadId === arbeidstakerGradert.id ||
-        soknadId === arbeidsgiverInnenforArbeidsgiverperiodeKvitteringMock.id) {
+        soknadId === arbeidsgiverInnenforArbeidsgiverperiodeKvittering.id) {
         return { mottaker: RSMottaker.ARBEIDSGIVER }
     }
 

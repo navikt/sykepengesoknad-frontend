@@ -8,6 +8,7 @@ import UtbetalingerTekster from '../components/soknader/utbetalinger/utbetalinge
 import BjornTekster from '../components/sporsmal/bjorn/bjorn-tekster'
 import KnapperadTekster from '../components/sporsmal/sporsmal-form/knapperad-tekster'
 import SporsmalTekster from '../components/sporsmal/sporsmal-tekster'
+import RefreshHvisFeilStateTekster from '../pages/feil/refresh-hvis-feil-state-tekster'
 import OpprettUtlandTekster from '../pages/opprett-utland/opprett-utland-tekster'
 import SoknadenTekster from '../pages/soknad/soknaden-tekster'
 import SoknaderTekster from '../pages/soknader/soknader-tekster'
@@ -27,6 +28,7 @@ const tekster = {
     ...UtbetalingerTekster.nb,
     ...OppsummeringTekster.nb,
     ...OpprettUtlandTekster.nb,
+    ...RefreshHvisFeilStateTekster.nb,
 }
 
 

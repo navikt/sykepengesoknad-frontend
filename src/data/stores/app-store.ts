@@ -13,6 +13,7 @@ export const [ AppStoreProvider, useAppStore ] = constate(() => {
     const [ mottaker, setMottaker ] = useState<RSMottaker>()
     const [ top, setTop ] = useState<number>(0)
     const [ validCheck, setValidCheck ] = useState<boolean>()
+    const [ feilState, setFeilState ] = useState<boolean>(false)
     const [ feilmeldingTekst, setFeilmeldingTekst ] = useState<string>('')
     const [ rerenderSporsmalForm, setRerenderSporsmalForm ] = useState<number>(new Date().getUTCMilliseconds())
     const [ sisteSteg, setSisteSteg ] = useState<number>()
@@ -26,6 +27,7 @@ export const [ AppStoreProvider, useAppStore ] = constate(() => {
         mottaker, setMottaker,
         top, setTop,
         validCheck, setValidCheck,
+        feilState, setFeilState,
         feilmeldingTekst, setFeilmeldingTekst,
         rerenderSporsmalForm, setRerenderSporsmalForm,
         sisteSteg, setSisteSteg

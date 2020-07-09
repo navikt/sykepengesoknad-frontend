@@ -1,4 +1,6 @@
 import { RSSoknad } from '../../../types/rs-types/rs-soknad'
+import { jsonDeepCopy } from '../../../utils/json-deep-copy'
+import { arbeidstaker } from './soknader-opplaering'
 
 export const fremtidigSoknad: RSSoknad = {
     'id': '5b74f271-5b94-455a-b79f-428f593f2b99',
@@ -2659,7 +2661,7 @@ export const veldigLangSoknad: RSSoknad = {
     'egenmeldtSykmelding': false
 }
 
-export const arbeidsledigKvitteringMock: RSSoknad = {
+export const arbeidsledigKvittering: RSSoknad = {
     'id': 'd3756302-4488-4f15-837b-38d51bc9b773',
     'sykmeldingId': '54d684f4-1e36-4ad9-bfbd-30365284234b',
     'soknadstype': 'ARBEIDSLEDIG',
@@ -2755,7 +2757,7 @@ export const arbeidsledigKvitteringMock: RSSoknad = {
     'egenmeldtSykmelding': false
 }
 
-export const sendtArbeidsledigKvitteringMock: RSSoknad = {
+export const sendtArbeidsledigKvittering: RSSoknad = {
     'id': '162b42d7-2600-44ea-905e-d3bae7f23404',
     'sykmeldingId': 'b4d3dc32-49ba-4448-9fd1-e03d3b98fbc4',
     'soknadstype': 'ARBEIDSLEDIG',
@@ -3438,7 +3440,7 @@ export const delvisUtfylltArbeidsledig: RSSoknad = {
     'egenmeldtSykmelding': false
 }
 
-export const oppholdUtlandKvitteringMock: RSSoknad = {
+export const oppholdUtlandKvittering: RSSoknad = {
     'id': 'b9d67b0d-b1f8-44a5-bcbd-6010111122',
     'sykmeldingId': null,
     'soknadstype': 'OPPHOLD_UTLAND',
@@ -3544,7 +3546,7 @@ export const oppholdUtlandKvitteringMock: RSSoknad = {
     'egenmeldtSykmelding': null
 }
 
-export const selvstendigKvitteringMock: RSSoknad = {
+export const selvstendigKvittering: RSSoknad = {
     'id': '8e267bc7-b213-4f19-a423-1543e09e0dc1',
     'sykmeldingId': 'f2e93cca-eea8-464b-b942-ee1821169885',
     'soknadstype': 'SELVSTENDIGE_OG_FRILANSERE',
@@ -3626,7 +3628,7 @@ export const selvstendigKvitteringMock: RSSoknad = {
     'egenmeldtSykmelding': false
 }
 
-export const arbeidsgiverInnenforArbeidsgiverperiodeKvitteringMock: RSSoknad = {
+export const arbeidsgiverInnenforArbeidsgiverperiodeKvittering: RSSoknad = {
     'id': 'd82a94f6-eefa-40f0-af32-cd6325044345',
     'sykmeldingId': '846bc8ce-4d70-4fdd-b3d1-cc3aee508e90',
     'soknadstype': 'ARBEIDSTAKERE',
@@ -3711,7 +3713,7 @@ export const arbeidsgiverInnenforArbeidsgiverperiodeKvitteringMock: RSSoknad = {
     'egenmeldtSykmelding': false
 }
 
-export const arbeidstakerUtenforArbeidsgiverperiodeKvitteringMock: RSSoknad = {
+export const arbeidstakerUtenforArbeidsgiverperiodeKvittering: RSSoknad = {
     'id': 'd27a0609-7be1-49bc-b00c-5a26370be786',
     'sykmeldingId': 'bdf810a8-6d92-4bd5-b4be-47714f8ae44e',
     'soknadstype': 'ARBEIDSTAKERE',
@@ -3796,7 +3798,7 @@ export const arbeidstakerUtenforArbeidsgiverperiodeKvitteringMock: RSSoknad = {
     'egenmeldtSykmelding': false
 }
 
-export const arbeidstakerOppfolgendeUtenOppholdKvitteringMock: RSSoknad = {
+export const arbeidstakerOppfolgendeUtenOppholdKvittering: RSSoknad = {
     'id': '253eb3d6-89b8-457b-8865-cfa2a927da39',
     'sykmeldingId': 'bdf810a8-6d92-4bd5-b4be-47714f8ae44e',
     'soknadstype': 'ARBEIDSTAKERE',
@@ -3881,7 +3883,7 @@ export const arbeidstakerOppfolgendeUtenOppholdKvitteringMock: RSSoknad = {
     'egenmeldtSykmelding': false
 }
 
-export const arbeidstakerOppfolgendeMedOppholdKvitteringMock: RSSoknad = {
+export const arbeidstakerOppfolgendeMedOppholdKvittering: RSSoknad = {
     'id': '6c45e5b3-1e0b-486a-ab6c-555b1ea02ed1',
     'sykmeldingId': '6d6250d5-edf0-4da8-8ea3-c2b46924999d',
     'soknadstype': 'ARBEIDSTAKERE',
@@ -3966,6 +3968,12 @@ export const arbeidstakerOppfolgendeMedOppholdKvitteringMock: RSSoknad = {
     'egenmeldtSykmelding': false
 }
 
+export const soknadSomTriggerSporsmalFinnesIkkeISoknad: RSSoknad = jsonDeepCopy(arbeidstaker)
+soknadSomTriggerSporsmalFinnesIkkeISoknad.id = '2c45e5b3-1e0b-486a-ab6c-555b1ea02ed1'
+
+
+export const soknadSomTriggerFeilStatusForOppdaterSporsmal: RSSoknad = jsonDeepCopy(arbeidstaker)
+soknadSomTriggerFeilStatusForOppdaterSporsmal.id = '3335e5b3-1e0b-486a-ab6c-555b1ea02ed1'
 
 export const soknaderIntegration = [
     utgattSoknad,
@@ -3974,13 +3982,15 @@ export const soknaderIntegration = [
     avbruttSoknad,
     fremtidigSoknad,
     veldigLangSoknad,
-    arbeidsledigKvitteringMock,
-    sendtArbeidsledigKvitteringMock,
-    oppholdUtlandKvitteringMock,
-    selvstendigKvitteringMock,
-    arbeidsgiverInnenforArbeidsgiverperiodeKvitteringMock,
-    arbeidstakerUtenforArbeidsgiverperiodeKvitteringMock,
-    arbeidstakerOppfolgendeUtenOppholdKvitteringMock,
-    arbeidstakerOppfolgendeMedOppholdKvitteringMock,
+    arbeidsledigKvittering,
+    sendtArbeidsledigKvittering,
+    oppholdUtlandKvittering,
+    selvstendigKvittering,
+    arbeidsgiverInnenforArbeidsgiverperiodeKvittering,
+    arbeidstakerUtenforArbeidsgiverperiodeKvittering,
+    arbeidstakerOppfolgendeUtenOppholdKvittering,
+    arbeidstakerOppfolgendeMedOppholdKvittering,
     delvisUtfylltArbeidsledig,
+    soknadSomTriggerSporsmalFinnesIkkeISoknad,
+    soknadSomTriggerFeilStatusForOppdaterSporsmal,
 ] as RSSoknad[]

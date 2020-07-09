@@ -1,12 +1,12 @@
 import {
-    arbeidsgiverInnenforArbeidsgiverperiodeKvitteringMock,
-    arbeidsledigKvitteringMock,
-    arbeidstakerOppfolgendeMedOppholdKvitteringMock,
-    arbeidstakerOppfolgendeUtenOppholdKvitteringMock,
-    arbeidstakerUtenforArbeidsgiverperiodeKvitteringMock,
-    oppholdUtlandKvitteringMock,
-    selvstendigKvitteringMock,
-    sendtArbeidsledigKvitteringMock
+    arbeidsgiverInnenforArbeidsgiverperiodeKvittering,
+    arbeidsledigKvittering,
+    arbeidstakerOppfolgendeMedOppholdKvittering,
+    arbeidstakerOppfolgendeUtenOppholdKvittering,
+    arbeidstakerUtenforArbeidsgiverperiodeKvittering,
+    oppholdUtlandKvittering,
+    selvstendigKvittering,
+    sendtArbeidsledigKvittering
 } from '../../src/data/mock/data/soknader-integration'
 
 describe('Tester kvittering', () => {
@@ -17,14 +17,14 @@ describe('Tester kvittering', () => {
     // Arbeidstaker (intill 16 dager, mer enn 16 dager, oppfølgende periode uten opphold, oppfølgende periode med 16 eller mindre dager opphold, etter 30 dager)
     //-----
 
-    const arbeidsledigSoknad = arbeidsledigKvitteringMock
-    const arbeidsledigEtter30Dager = sendtArbeidsledigKvitteringMock
-    const utlandSoknad = oppholdUtlandKvitteringMock
-    const selvstendig = selvstendigKvitteringMock
-    const arbeidstakerInnenforArbeidsgiverperiode = arbeidsgiverInnenforArbeidsgiverperiodeKvitteringMock
-    const arbeidstakerUtenforArbeidsgiverperiode = arbeidstakerUtenforArbeidsgiverperiodeKvitteringMock
-    const arbeidstakerOppfolgendeUtenOpphold = arbeidstakerOppfolgendeUtenOppholdKvitteringMock
-    const arbeidstakerOppfolgendeMedOpphold = arbeidstakerOppfolgendeMedOppholdKvitteringMock
+    const arbeidsledigSoknad = arbeidsledigKvittering
+    const arbeidsledigEtter30Dager = sendtArbeidsledigKvittering
+    const utlandSoknad = oppholdUtlandKvittering
+    const selvstendig = selvstendigKvittering
+    const arbeidstakerInnenforArbeidsgiverperiode = arbeidsgiverInnenforArbeidsgiverperiodeKvittering
+    const arbeidstakerUtenforArbeidsgiverperiode = arbeidstakerUtenforArbeidsgiverperiodeKvittering
+    const arbeidstakerOppfolgendeUtenOpphold = arbeidstakerOppfolgendeUtenOppholdKvittering
+    const arbeidstakerOppfolgendeMedOpphold = arbeidstakerOppfolgendeMedOppholdKvittering
 
     before(() => {
         cy.visit('http://localhost:8080')

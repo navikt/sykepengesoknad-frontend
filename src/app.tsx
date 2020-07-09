@@ -9,6 +9,7 @@ import { Amplitude } from './components/amplitude/amplitudeProvider'
 import { DataFetcher } from './data/data-fetcher'
 import StoreProvider from './data/stores/store-provider'
 import RedirectTilOversikt from './pages/feil/redirect-til-oversikt'
+import { RefreshHvisFeilState } from './pages/feil/refresh-hvis-feil-state'
 import KvitteringSide from './pages/kvittering/kvittering-side'
 import OpprettUtland from './pages/opprett-utland/opprett-utland'
 import Soknad from './pages/soknad/soknaden'
@@ -23,21 +24,23 @@ const App = (): any => {
             <DataFetcher>
                 <Amplitude>
                     <main id="maincontent" role="main" tabIndex={-1}>
-                        <TransitionGroup>
-                            <CSSTransition
-                                timeout={{ enter: 300, exit: 300 }}
-                                classNames={'fade'}
-                            >
-                                <Switch>
-                                    <Route exact={true} path="/" component={Soknader} />
-                                    <Route path={'/soknader/:id/:stegId'} component={Soknad} />
-                                    <Route path={'/soknader/:id'} component={Soknad} />
-                                    <Route path={'/soknader/'} component={RedirectTilOversikt} />
-                                    <Route path={'/kvittering/:id'} component={KvitteringSide} />
-                                    <Route path={'/sykepengesoknad-utland'} component={OpprettUtland} />
-                                </Switch>
-                            </CSSTransition>
-                        </TransitionGroup>
+                        <RefreshHvisFeilState>
+                            <TransitionGroup>
+                                <CSSTransition
+                                    timeout={{ enter: 300, exit: 300 }}
+                                    classNames={'fade'}
+                                >
+                                    <Switch>
+                                        <Route exact={true} path="/" component={Soknader} />
+                                        <Route path={'/soknader/:id/:stegId'} component={Soknad} />
+                                        <Route path={'/soknader/:id'} component={Soknad} />
+                                        <Route path={'/soknader/'} component={RedirectTilOversikt} />
+                                        <Route path={'/kvittering/:id'} component={KvitteringSide} />
+                                        <Route path={'/sykepengesoknad-utland'} component={OpprettUtland} />
+                                    </Switch>
+                                </CSSTransition>
+                            </TransitionGroup>
+                        </RefreshHvisFeilState>
                     </main>
                 </Amplitude>
             </DataFetcher>
