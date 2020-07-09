@@ -20,4 +20,4 @@ const basenameUtenTrailingSlash = () => {
 
 export const utlandssoknadUrl = basenameUtenTrailingSlash() + '/sykepengesoknad-utland'
 
-export const oversiktside = basenameUtenTrailingSlash()
+export const oversiktside = '/'
