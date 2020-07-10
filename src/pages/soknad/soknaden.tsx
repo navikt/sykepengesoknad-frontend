@@ -42,11 +42,12 @@ const Soknaden = () => {
     const { id } = useParams()
 
     useEffect(() => {
-        const filtrertSoknad = soknader.filter(soknad => soknad.id === id)[0]
+        const filtrertSoknad = soknader.find(soknad => soknad.id === id)
         setValgtSoknad(filtrertSoknad)
 
-        const sykmelding = sykmeldinger.filter(sm => sm.id === filtrertSoknad.sykmeldingId)[0]
+        const sykmelding = sykmeldinger.find(sm => sm.id === filtrertSoknad?.sykmeldingId)
         setValgtSykmelding(sykmelding)
+
         // eslint-disable-next-line
     }, [id]);
 
