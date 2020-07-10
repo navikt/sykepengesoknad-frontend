@@ -136,7 +136,10 @@ const SporsmalForm = () => {
     }
 
     const sendSoknad = async() => {
-        const res = await fetcher(env.syfoapiRoot + `/syfosoknad/api/soknader/${valgtSoknad!.id}/send`, {
+        if (!valgtSoknad) {
+            return
+        }
+        const res = await fetcher(env.syfoapiRoot + `/syfosoknad/api/soknader/${valgtSoknad.id}/send`, {
             method: 'POST',
             credentials: 'include',
             headers: { 'Content-Type': 'application/json' }
@@ -147,20 +150,23 @@ const SporsmalForm = () => {
             const httpCode = res.status
             if ([ 200, 201, 203, 206 ].includes(httpCode)) {
                 if (mottaker === RSMottaker.ARBEIDSGIVER) {
-                    valgtSoknad!.sendtTilArbeidsgiverDato = new Date()
+                    valgtSoknad.sendtTilArbeidsgiverDato = new Date()
                 }
                 if (mottaker === RSMottaker.NAV) {
-                    valgtSoknad!.sendtTilNAVDato = new Date()
+                    valgtSoknad.sendtTilNAVDato = new Date()
                 }
                 if (mottaker === RSMottaker.ARBEIDSGIVER_OG_NAV) {
-                    valgtSoknad!.sendtTilArbeidsgiverDato = new Date()
-                    valgtSoknad!.sendtTilNAVDato = new Date()
+                    valgtSoknad.sendtTilArbeidsgiverDato = new Date()
+                    valgtSoknad.sendtTilNAVDato = new Date()
                 }
 
                 history.push(pathUtenSteg(history.location.pathname).replace('soknader', 'kvittering'))
-                valgtSoknad!.status = RSSoknadstatus.SENDT
+                valgtSoknad.status = RSSoknadstatus.SENDT
                 setValgtSoknad(valgtSoknad)
-                soknader[soknader.findIndex(sok => sok.id === valgtSoknad!.id)] = valgtSoknad!
+                soknader[soknader.findIndex(sok => sok.id === valgtSoknad.id)] = valgtSoknad
+                if (valgtSoknad.korrigerer !== null) {
+                    soknader.find(sok => sok.id === valgtSoknad.korrigerer)!.status = RSSoknadstatus.KORRIGERT
+                }
                 setSoknader(soknader)
             } else {
                 logger.error('Feil ved sending av søknad', res)

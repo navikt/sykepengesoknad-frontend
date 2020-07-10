@@ -160,6 +160,7 @@ export class Soknad {
     arbeidsgiver?: Arbeidsgiver;
     sporsmal: Sporsmal[];
     soknadPerioder: RSSoknadsperiode[];
+    korrigerer: string | null;
 
     constructor(
         soknad: RSSoknad
@@ -172,6 +173,7 @@ export class Soknad {
         this.status = RSSoknadstatus[stat]
         this.fom = dayjsToDate(soknad.fom!)!
         this.tom = dayjsToDate(soknad.tom!)!
+        this.korrigerer = soknad.korrigerer
         this.avbruttDato = dayjsToDate(soknad.avbruttDato!)!
         this.opprettetDato = dayjsToDate(soknad.opprettetDato!)!
         this.sendtTilNAVDato = dayjsToDate(soknad.sendtTilNAVDato!)!
