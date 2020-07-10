@@ -67,5 +67,7 @@ export const redirectTilLoginHvis401 = (res: Response) => {
     if (res.status === 401) {
         logger.warn('Redirecter til login grunnet 401')
         window.location.href = hentLoginUrl()
+        return true
     }
+    return false
 }

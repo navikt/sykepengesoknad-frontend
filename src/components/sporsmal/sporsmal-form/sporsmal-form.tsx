@@ -83,7 +83,6 @@ const SporsmalForm = () => {
         })
 
         try {
-            redirectTilLoginHvis401(res)
             const data = await res.json()
 
             const httpCode = res.status
@@ -111,6 +110,9 @@ const SporsmalForm = () => {
                 restFeilet = true
                 setFeilState(true)
             } else {
+                if (redirectTilLoginHvis401(res)) {
+                    return
+                }
                 logger.error(`Feil ved kall OPPDATER_SPORSMAL, uhåndtert http kode ${httpCode}`, res)
                 restFeilet = true
             }
@@ -143,9 +145,11 @@ const SporsmalForm = () => {
         })
 
         try {
-            redirectTilLoginHvis401(res)
             const httpCode = res.status
-            if ([ 200, 201, 203, 206 ].includes(httpCode)) {
+            if (redirectTilLoginHvis401(res)) {
+                return
+            }
+            else if ([ 200, 201, 203, 206 ].includes(httpCode)) {
                 if (mottaker === RSMottaker.ARBEIDSGIVER) {
                     valgtSoknad!.sendtTilArbeidsgiverDato = new Date()
                 }

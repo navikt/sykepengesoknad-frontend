@@ -37,9 +37,12 @@ const useFetch = <D = {}>(): Fetch<D> => {
 
         fetcher(url, request)
             .then(async(res) => {
-                redirectTilLoginHvis401(res)
                 const httpCode = res.status
                 let state: FetchState<D>
+                if (redirectTilLoginHvis401(res)) {
+                    state = createFinishedFetchState(null, null, httpCode)
+                    return state
+                }
 
                 if ([ 200, 201, 203, 206 ].includes(httpCode)) {
                     try {
