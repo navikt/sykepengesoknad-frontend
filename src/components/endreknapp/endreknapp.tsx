@@ -29,8 +29,11 @@ const Endreknapp = () => {
         }, (fetchState: FetchState<RSSoknad>) => {
             if (hasData(fetchState)) {
                 const soknad = new Soknad(fetchState.data)
-                soknader.push(soknad)
-                setSoknader(soknader)
+                if (!soknader.find(sok => sok.id === soknad.id)) {
+                    soknader.push(soknad)
+                    setSoknader(soknader)
+                }
+
                 history.push(getUrlTilSoknad(soknad, '1'))
                 setFeilmeldingTekst('')
             } else {
