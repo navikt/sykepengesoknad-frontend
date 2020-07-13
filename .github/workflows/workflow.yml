@@ -117,7 +117,7 @@ jobs:
           RESOURCE: nais-gcp.yaml
 
   deploy-to-prod-sbs:
-    if: github.ref == 'refs/heads/master'
+    if: github.ref == 'refs/heads/bytt-til-master-ved-neste-deploy'
     name: Deploy to production
     needs: build-and-publish
     runs-on: ubuntu-latest
