@@ -61,8 +61,9 @@ const Ettersending = ({ gjelder, setRerendrekvittering }: EttersendingProps) => 
             credentials: 'include',
             headers: { 'Content-Type': 'application/json' }
         })
-        redirectTilLoginHvis401(res)
-        if (res.ok) {
+        if (redirectTilLoginHvis401(res)) {
+            return
+        } else if (res.ok) {
             valgtSoknad!.sendtTilNAVDato = new Date()
             oppdaterSoknad()
         } else {
@@ -79,8 +80,9 @@ const Ettersending = ({ gjelder, setRerendrekvittering }: EttersendingProps) => 
             credentials: 'include',
             headers: { 'Content-Type': 'application/json' }
         })
-        redirectTilLoginHvis401(res)
-        if (res.ok) {
+        if (redirectTilLoginHvis401(res)) {
+            return
+        } else if (res.ok) {
             valgtSoknad!.sendtTilArbeidsgiverDato = new Date()
             oppdaterSoknad()
         } else {

@@ -51,10 +51,12 @@ const StatusPanel = () => {
             })
 
 
-            redirectTilLoginHvis401(res)
             try {
                 const httpCode = res.status
-                if ([ 200, 201, 203, 206 ].includes(httpCode)) {
+                if (redirectTilLoginHvis401(res)) {
+                    return
+                }
+                else if ([ 200, 201, 203, 206 ].includes(httpCode)) {
                     valgtSoknad!.status = RSSoknadstatus.NY
                     valgtSoknad!.avbruttDato = undefined
                     setValgtSoknad(valgtSoknad)
