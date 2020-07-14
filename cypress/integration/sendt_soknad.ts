@@ -24,13 +24,13 @@ describe('Tester sendt søknad', () => {
     })
 
     it('Tekster stemmer', function() {
-        cy.contains('NAV behandler søknaden din')
+        cy.contains('Søknaden er sendt til NAV')
 
     })
 
     it('Siden kan refreshes', function() {
         cy.reload()
-        cy.contains('NAV behandler søknaden din')
+        cy.contains('Søknaden er sendt til NAV')
         cy.url().should('equal', `http://localhost:8080/kvittering/${sendtArbeidsledig.id}`)
 
     })
