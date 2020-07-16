@@ -71,7 +71,7 @@ const TallInput = ({ sporsmal }: SpmProps) => {
                             )
                         }
                     })}
-                    step={0.1}
+                    step={sporsmal.tag === TagTyper.HVOR_MYE_PROSENT_VERDI ? 1 : 0.1}
                     onChange={onChange}
                     autoComplete="off"
                 />
