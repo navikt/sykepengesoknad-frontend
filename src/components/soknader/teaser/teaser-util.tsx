@@ -7,6 +7,7 @@ import SoknaderIkon from '../../../pages/soknader/soknader.svg'
 import { RSSoknadstatus } from '../../../types/rs-types/rs-soknadstatus'
 import { RSSoknadstype } from '../../../types/rs-types/rs-soknadstype'
 import { Soknad } from '../../../types/types'
+import env from '../../../utils/environment'
 import { getRiktigDato, getSendtTilSuffix } from '../../../utils/soknad-utils'
 import { getLedetekst, tekst } from '../../../utils/tekster'
 import GlobeHoverIkon from './globe-hover.svg'
@@ -95,6 +96,20 @@ export const beregnUndertekst = (soknad: Soknad) => {
             }
         }
     }
+}
+
+export const leggTilSoknadstypeForDemoside = (soknad: Soknad) => {
+    if (env.isOpplaering && soknad.soknadstype !== RSSoknadstype.OPPHOLD_UTLAND) {
+        const arbeidssituasjon = soknad.arbeidssituasjon?.toLowerCase()
+        const soknadstype = soknad.soknadstype === RSSoknadstype.BEHANDLINGSDAGER
+            ? soknad.soknadstype.toLowerCase()
+            : ''
+        const grad = soknad.soknadPerioder.map(periode => periode.grad + '%')
+        return <Normaltekst className="inngangspanel__undertekst__demo">
+            {`${arbeidssituasjon} ${soknadstype}, ${grad} sykmeldt`}
+        </Normaltekst>
+    }
+    return ''
 }
 
 export const hentTeaserStatustekst = (soknad: Soknad) => {

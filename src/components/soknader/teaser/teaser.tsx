@@ -6,6 +6,7 @@ import React from 'react'
 import { RSSoknadstatus } from '../../../types/rs-types/rs-soknadstatus'
 import { RSSoknadstype } from '../../../types/rs-types/rs-soknadstype'
 import { tilLesbarPeriodeMedArstall } from '../../../utils/dato-utils'
+import env from '../../../utils/environment'
 import { getLedetekst, tekst } from '../../../utils/tekster'
 import { getUrlTilSoknad } from '../../../utils/url-utils'
 import { useAmplitudeInstance } from '../../amplitude/amplitude'
@@ -15,8 +16,9 @@ import {
     beregnUndertekst,
     hentIkon,
     hentIkonHover,
-    hentTeaserStatustekst,
-    SykepengesoknadTeaserProps } from './teaser-util'
+    hentTeaserStatustekst, leggTilSoknadstypeForDemoside,
+    SykepengesoknadTeaserProps
+} from './teaser-util'
 
 const Teaser = ({ soknad }: SykepengesoknadTeaserProps) => {
     const { logEvent } = useAmplitudeInstance()
@@ -54,6 +56,9 @@ const Teaser = ({ soknad }: SykepengesoknadTeaserProps) => {
                         <Normaltekst className="inngangspanel__undertekst">
                             {undertekst}
                         </Normaltekst>
+                    </Vis>
+                    <Vis hvis={env.isOpplaering}>
+                        {leggTilSoknadstypeForDemoside(soknad)}
                     </Vis>
                 </div>
             </Inngangspanel>
