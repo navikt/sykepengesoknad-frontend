@@ -4,6 +4,7 @@ import React, { useEffect, useState } from 'react'
 
 import { useAppStore } from '../../data/stores/app-store'
 import { RSSoknadstype } from '../../types/rs-types/rs-soknadstype'
+import { Soknad } from '../../types/types'
 import { dayjsToDate, getDuration, sendtForMerEnn30DagerSiden } from '../../utils/dato-utils'
 import { tekst } from '../../utils/tekster'
 import Vis from '../vis'
@@ -27,6 +28,13 @@ const Arbeidstaker = () => {
 
     if (!valgtSoknad) return null
 
+    // 1. Søknaden er innenfor arbeidsgiverperiode
+    // 2. Søknaden er utenfor arbeidsgiverperiode og det er mer enn 16 dager siden sist søknad
+    // 3. -||- og det er ikke opphold til tidligere søknad og forrige søknad var også utenfor arbeidsgiverperiode
+    // 4. -||- og det er ikke opphold til tidligere søknad men forrige søknad var innenfor arbeidsgiverperiode, gir samme resultat som 2.
+    // 5. -||- og det er 16 eller mindre, men ikke 0 dager opphold
+
+    // Obs: denne dekker ikke tilfelle der det er 1 søknad uten opphold, men den søknaden er utenfor arbeidsgiverperioden, men ikke 16 dager lang.
 
     const settRiktigKvitteringTekst = () => {
         if (valgtSoknad.sendtTilArbeidsgiverDato !== null && valgtSoknad.sendtTilNAVDato === null) {
@@ -43,8 +51,13 @@ const Arbeidstaker = () => {
                     .filter((senereSok) => senereSok.tom! < valgtSoknad!.fom!)                              // Gjelder søknader før valgt
                     .filter((tidligereSok) => tidligereSoknaderInnenfor16Dager(tidligereSok.tom!, valgtSoknad.fom!))
                 if (tidligereSoknader.length > 0) {
-                    if (tidligereSoknader.filter((sok) => tidligereUtenOpphold(sok.tom!, valgtSoknad.fom!)).length > 0) {
-                        setKvitteringTekst('utenOpphold')
+                    if (tidligereSoknader.filter(sok => tidligereUtenOpphold(sok.tom!, valgtSoknad.fom!)).length > 0) {
+                        if (tidligereUtenOppholdMenFørsteUtenforArbeidsgiverperiode(tidligereSoknader)) {
+                            setKvitteringTekst('over16dager')
+                        }
+                        else {
+                            setKvitteringTekst('utenOpphold')
+                        }
                     }
                     else {
                         setKvitteringTekst('medOpphold')
@@ -64,6 +77,12 @@ const Arbeidstaker = () => {
 
     const tidligereUtenOpphold = (d1: Date, d2: Date): boolean => {
         return getDuration(d1, d2) <= 2
+    }
+
+    const tidligereUtenOppholdMenFørsteUtenforArbeidsgiverperiode = (tidligereSoknader: Soknad[]) => {
+        const tidligstFom = tidligereSoknader.sort((a, b) => a.fom!.getTime() - b.fom!.getTime()).reverse()[0].fom!
+        const senesteTom = tidligereSoknader.sort((a, b) => a.fom!.getTime() - b.fom!.getTime())[0].tom!
+        return getDuration(tidligstFom, senesteTom) <= 16        // (fom = 1) + 14 + (tom = 1)
     }
 
     const kvitteringInnhold = () => {
