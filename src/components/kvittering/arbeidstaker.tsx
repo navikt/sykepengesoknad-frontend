@@ -37,14 +37,18 @@ const Arbeidstaker = () => {
             const forsteSoknad = fom === sykFom
 
             if (forsteSoknad) {
-                const harTidligereSoknad = soknader
-                    .filter((sok) => sok.soknadstype === RSSoknadstype.ARBEIDSTAKERE)
-                    .filter((sok) => sok.arbeidsgiver?.orgnummer === valgtSoknad?.arbeidsgiver?.orgnummer)
-                    .filter((senereSok) => senereSok.tom! < valgtSoknad!.fom!)
-                    .filter((tidligereSok) => getDuration(tidligereSok.tom!, valgtSoknad!.fom!) > 16)
-                    .length > 0
-                if (harTidligereSoknad) {
-                    setKvitteringTekst('medOpphold')
+                const tidligereSoknader = soknader
+                    .filter((sok) => sok.soknadstype === RSSoknadstype.ARBEIDSTAKERE)                       // Gjelder arbeidstakersøknad
+                    .filter((sok) => sok.arbeidsgiver?.orgnummer === valgtSoknad?.arbeidsgiver?.orgnummer)  // Samme arbeidstaker
+                    .filter((senereSok) => senereSok.tom! < valgtSoknad!.fom!)                              // Gjelder søknader før valgt
+                    .filter((tidligereSok) => tidligereSoknaderInnenfor16Dager(tidligereSok.tom!, valgtSoknad.fom!))
+                if (tidligereSoknader.length > 0) {
+                    if (tidligereSoknader.filter((sok) => tidligereUtenOpphold(sok.tom!, valgtSoknad.fom!)).length > 0) {
+                        setKvitteringTekst('utenOpphold')
+                    }
+                    else {
+                        setKvitteringTekst('medOpphold')
+                    }
                 } else {
                     setKvitteringTekst('over16dager')
                 }
@@ -52,6 +56,14 @@ const Arbeidstaker = () => {
                 setKvitteringTekst('utenOpphold')
             }
         }
+    }
+
+    const tidligereSoknaderInnenfor16Dager = (d1: Date, d2: Date): boolean => {
+        return getDuration(d1, d2) <= 17    // (fom = 1) + 15 + (tom = 1)
+    }
+
+    const tidligereUtenOpphold = (d1: Date, d2: Date): boolean => {
+        return getDuration(d1, d2) <= 2
     }
 
     const kvitteringInnhold = () => {
