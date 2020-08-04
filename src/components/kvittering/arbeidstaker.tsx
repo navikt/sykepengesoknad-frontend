@@ -1,3 +1,4 @@
+import dayjs from 'dayjs'
 import AlertStripe, { AlertStripeSuksess } from 'nav-frontend-alertstriper'
 import { Undertittel } from 'nav-frontend-typografi'
 import React, { useEffect, useState } from 'react'
@@ -34,25 +35,21 @@ const Arbeidstaker = () => {
     // 4. -||- og det er ikke opphold til tidligere søknad men forrige søknad var innenfor arbeidsgiverperiode, gir samme resultat som 2.
     // 5. -||- og det er 16 eller mindre, men ikke 0 dager opphold
 
-    // Obs: denne dekker ikke tilfelle der det er 1 søknad uten opphold, men den søknaden er utenfor arbeidsgiverperioden, men ikke 16 dager lang.
-
     const settRiktigKvitteringTekst = () => {
-        if (valgtSoknad.sendtTilArbeidsgiverDato !== null && valgtSoknad.sendtTilNAVDato === null) {
+        if (erInnenforArbeidsgiverperiode()) {
             setKvitteringTekst('inntil16dager')
         } else {
-            const fom = valgtSoknad!.fom!.getDate()
-            const sykFom = dayjsToDate(valgtSykmelding!.mulighetForArbeid.perioder[0].fom)?.getDate()
-            const forsteSoknad = fom === sykFom
-
-            if (forsteSoknad) {
+            if (erSykmeldingperiodeDeltOverFlereSoknader()) {
+                setKvitteringTekst('utenOpphold')
+            } else {
                 const tidligereSoknader = soknader
-                    .filter((sok) => sok.soknadstype === RSSoknadstype.ARBEIDSTAKERE)                       // Gjelder arbeidstakersøknad
-                    .filter((sok) => sok.arbeidsgiver?.orgnummer === valgtSoknad?.arbeidsgiver?.orgnummer)  // Samme arbeidstaker
-                    .filter((senereSok) => senereSok.tom! < valgtSoknad!.fom!)                              // Gjelder søknader før valgt
-                    .filter((tidligereSok) => tidligereSoknaderInnenfor16Dager(tidligereSok.tom!, valgtSoknad.fom!))
+                    .filter(sok => sok.soknadstype === RSSoknadstype.ARBEIDSTAKERE)                       // Gjelder arbeidstakersøknad
+                    .filter(sok => sok.arbeidsgiver?.orgnummer === valgtSoknad?.arbeidsgiver?.orgnummer)  // Samme arbeidstaker
+                    .filter(senereSok => senereSok.tom! < valgtSoknad!.fom!)                              // Gjelder søknader før valgt
+                    .filter(tidligereSok => tidligereSoknaderInnenfor16Dager(tidligereSok.tom!, valgtSoknad.fom!))
                 if (tidligereSoknader.length > 0) {
-                    if (tidligereSoknader.filter(sok => tidligereUtenOpphold(sok.tom!, valgtSoknad.fom!)).length > 0) {
-                        if (tidligereUtenOppholdMenFørsteUtenforArbeidsgiverperiode(tidligereSoknader)) {
+                    if (harTidligereUtenOpphold(tidligereSoknader)) {
+                        if (forsteUtenforArbeidsgiverperiode(tidligereSoknader)) {
                             setKvitteringTekst('over16dager')
                         }
                         else {
@@ -60,26 +57,42 @@ const Arbeidstaker = () => {
                         }
                     }
                     else {
+                        if (forsteUtenforArbeidsgiverperiode(tidligereSoknader)) {
+                            setKvitteringTekst('over16dager')
+                        }
                         setKvitteringTekst('medOpphold')
                     }
                 } else {
                     setKvitteringTekst('over16dager')
                 }
-            } else {
-                setKvitteringTekst('utenOpphold')
             }
         }
     }
 
+    const erInnenforArbeidsgiverperiode = () => {
+        return valgtSoknad.sendtTilArbeidsgiverDato !== null && valgtSoknad.sendtTilNAVDato === null
+    }
+
+    const erSykmeldingperiodeDeltOverFlereSoknader = () => {
+        const fom = valgtSoknad!.fom!.getDate()
+        const sykFom = dayjsToDate(valgtSykmelding!.mulighetForArbeid.perioder[0].fom)?.getDate()
+        return fom !== sykFom
+    }
+
     const tidligereSoknaderInnenfor16Dager = (d1: Date, d2: Date): boolean => {
-        return getDuration(d1, d2) <= 17    // (fom = 1) + 15 + (tom = 1)
+        return dayjs(d2).diff(d1, 'day') <= 16
+    }
+
+    const harTidligereUtenOpphold = (tidligereSoknader: Soknad[]) => {
+        return tidligereSoknader.filter(sok => tidligereUtenOpphold(sok.tom!, valgtSoknad.fom!)).length > 0
     }
 
     const tidligereUtenOpphold = (d1: Date, d2: Date): boolean => {
-        return getDuration(d1, d2) <= 2
+        return dayjs(d2).diff(d1, 'day') <= 1
     }
 
-    const tidligereUtenOppholdMenFørsteUtenforArbeidsgiverperiode = (tidligereSoknader: Soknad[]) => {
+    // TODO: Sett opp denne med /finnMottaker da denne ikke er helt riktig
+    const forsteUtenforArbeidsgiverperiode = (tidligereSoknader: Soknad[]) => {
         const tidligstFom = tidligereSoknader.sort((a, b) => a.fom!.getTime() - b.fom!.getTime()).reverse()[0].fom!
         const senesteTom = tidligereSoknader.sort((a, b) => a.fom!.getTime() - b.fom!.getTime())[0].tom!
         return getDuration(tidligstFom, senesteTom) <= 16        // (fom = 1) + 14 + (tom = 1)
