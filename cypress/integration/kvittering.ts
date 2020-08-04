@@ -2,7 +2,7 @@ import {
     arbeidsgiverInnenforArbeidsgiverperiodeKvittering,
     arbeidsledigKvittering,
     arbeidstakerOppfolgendeMedOppholdKvittering,
-    arbeidstakerOppfolgendeUtenOppholdKvittering,
+    arbeidstakerOppfolgendeUtenOppholdKvittering, arbeidstakerOppfolgendeUtenOppholdMenErFørsteForSykmeldingKvittering,
     arbeidstakerUtenforArbeidsgiverperiodeKvittering,
     oppholdUtlandKvittering,
     selvstendigKvittering,
@@ -369,6 +369,57 @@ describe('Tester kvittering', () => {
             cy.get('.skjemaelement__label').click({ force: true })
             cy.contains('Send søknaden').click()
             cy.url().should('include', `/kvittering/${arbeidstakerOppfolgendeUtenOpphold.id}`)
+
+            // Sendt datoer
+            cy.get('.kvittering .alertstripe--suksess')
+                .should('contain', 'Søknaden er sendt')
+            cy.get('.sendt-info .oppsummering__avkrysset')
+                .should('not.contain', '995816598 sitt orgnavn :) (Org.nr. 995816598)')
+                .and('contain', 'NAV')
+
+            // Hva skjer videre
+            cy.get('.hva-skjer')
+                .should('contain', 'Hva skjer videre?')
+                .and('contain', 'NAV behandler søknaden')
+                .and('contain', 'Saksbehandlingstidene kan variere noe. Sjekk saksbehandlingstidene i ditt fylke')
+                .and('contain', 'Når blir pengene utbetalt')
+                .and('contain', 'Blir søknaden din innvilget før den 15. i denne måneden, blir pengene utbetalt innen den 25. samme måned. Blir det innvilget etter den 15. i måneden, utbetales pengene innen 5 dager.')
+                .and('not.contain', 'Før NAV kan behandle søknaden')
+                .and('not.contain', 'Du får sykepengene fra arbeidsgiveren din')
+
+            // Behandlingstider lenke
+            cy.contains('Sjekk saksbehandlingstidene i ditt fylke')
+                .should('have.attr', 'href', 'https://www.nav.no/no/nav-og-samfunn/om-nav/saksbehandlingstider-i-nav')
+
+            // Oppsummering minimert
+            cy.get('.utvidbar.oppsummering.ekspander.lilla .utvidbar__toggle')
+                .should('contain', 'Oppsummering fra søknaden')
+                .and('have.attr', 'aria-expanded', 'false')
+
+            // Opplysninger minimert
+            cy.get('.utvidbar.ekspander .utvidbar__toggle')
+                .should('contain', 'Opplysninger fra sykmeldingen')
+                .and('have.attr', 'aria-expanded', 'false')
+
+            // Knapperad ( Endre, Ettersend)
+            cy.contains('Endre søknad').should('exist')
+            cy.contains('Send til NAV').should('not.exist')
+            cy.contains('Send til arbeidsgiver').should('exist')
+        })
+
+        it('Oppfølgende periode uten opphold, men ny sykmelding', () => {
+            // Velg søknad
+            cy.get(`#soknader-list-til-behandling article a[href*=${arbeidstakerOppfolgendeUtenOppholdMenErFørsteForSykmeldingKvittering.id}]`).click()
+
+            // Svar og send
+            cy.contains('Jeg vet at jeg kan miste retten til sykepenger hvis opplysningene jeg gir ikke er riktige eller fullstendige.')
+                .click({ force: true })
+            cy.contains('Gå videre').click()
+            cy.get('.inputPanelGruppe__inner label:nth-child(2) > input[value=NEI]').click({ force: true })
+            cy.contains('Gå videre').click()
+            cy.get('.skjemaelement__label').click({ force: true })
+            cy.contains('Send søknaden').click()
+            cy.url().should('include', `/kvittering/${arbeidstakerOppfolgendeUtenOppholdMenErFørsteForSykmeldingKvittering.id}`)
 
             // Sendt datoer
             cy.get('.kvittering .alertstripe--suksess')

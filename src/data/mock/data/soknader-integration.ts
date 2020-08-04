@@ -3889,7 +3889,7 @@ export const arbeidstakerOppfolgendeMedOppholdKvittering: RSSoknad = {
     'soknadstype': 'ARBEIDSTAKERE',
     'status': 'NY',
     'fom': '2020-02-17',
-    'tom': '2020-02-29',
+    'tom': '2020-03-05',
     'opprettetDato': '2020-06-23',
     'sendtTilNAVDato': null,
     'sendtTilArbeidsgiverDato': null,
@@ -3907,6 +3907,91 @@ export const arbeidstakerOppfolgendeMedOppholdKvittering: RSSoknad = {
         {
             'fom': '2020-02-17',
             'tom': '2020-02-29',
+            'grad': 100,
+            'sykmeldingstype': 'AKTIVITET_IKKE_MULIG'
+        }
+    ],
+    'sporsmal': [
+        {
+            'id': '318',
+            'tag': 'ANSVARSERKLARING',
+            'sporsmalstekst': 'Jeg vet at jeg kan miste retten til sykepenger hvis opplysningene jeg gir ikke er riktige eller fullstendige. Jeg vet også at NAV kan holde igjen eller kreve tilbake penger, og at å gi feil opplysninger kan være straffbart.',
+            'undertekst': null,
+            'svartype': 'CHECKBOX_PANEL',
+            'min': null,
+            'max': null,
+            'pavirkerAndreSporsmal': false,
+            'kriterieForVisningAvUndersporsmal': null,
+            'svar': [],
+            'undersporsmal': []
+        },
+        {
+            'id': '319',
+            'tag': 'PERMITTERT_NAA',
+            'sporsmalstekst': 'Er du permittert nå?',
+            'undertekst': null,
+            'svartype': 'JA_NEI',
+            'min': null,
+            'max': null,
+            'pavirkerAndreSporsmal': false,
+            'kriterieForVisningAvUndersporsmal': null,
+            'svar': [],
+            'undersporsmal': []
+        },
+        {
+            'id': '361',
+            'tag': 'VAER_KLAR_OVER_AT',
+            'sporsmalstekst': 'Viktig å være klar over:',
+            'undertekst': '<ul><li>Du kan bare få sykepenger hvis det er din egen sykdom eller skade som hindrer deg i å jobbe. Sosiale eller økonomiske problemer gir ikke rett til sykepenger.</li><li>Du kan miste retten til sykepenger hvis du nekter å opplyse om din egen arbeidsevne, eller hvis du ikke tar imot behandling eller tilrettelegging.</li><li>Retten til sykepenger gjelder bare inntekt du har mottatt som lønn og betalt skatt av på sykmeldingstidspunktet.</li><li>NAV kan innhente opplysninger som er nødvendige for å behandle søknaden.</li><li>Du må melde fra til NAV hvis du satt i varetekt, sonet straff eller var under forvaring i sykmeldingsperioden.</li><li>Fristen for å søke sykepenger er som hovedregel 3 måneder</li></ul><p>Du kan lese mer om rettigheter og plikter på <a href="https://www.nav.no/sykepenger" target="_blank">nav.no/sykepenger</a>.</p>',
+            'svartype': 'IKKE_RELEVANT',
+            'min': null,
+            'max': null,
+            'pavirkerAndreSporsmal': false,
+            'kriterieForVisningAvUndersporsmal': null,
+            'svar': [],
+            'undersporsmal': []
+        },
+        {
+            'id': '362',
+            'tag': 'BEKREFT_OPPLYSNINGER',
+            'sporsmalstekst': 'Jeg har lest all informasjonen jeg har fått i søknaden og bekrefter at opplysningene jeg har gitt er korrekte.',
+            'undertekst': null,
+            'svartype': 'CHECKBOX_PANEL',
+            'min': null,
+            'max': null,
+            'pavirkerAndreSporsmal': false,
+            'kriterieForVisningAvUndersporsmal': null,
+            'svar': [],
+            'undersporsmal': []
+        }
+    ],
+    'egenmeldtSykmelding': false
+}
+
+export const arbeidstakerOppfolgendeUtenOppholdMenErFørsteForSykmeldingKvittering: RSSoknad = {
+    'id': 'dsdwed2-1e0b-486a-ab6c-555b1ea02ed1',
+    'sykmeldingId': '111111-edf0-4da8-8ea3-222222',
+    'soknadstype': 'ARBEIDSTAKERE',
+    'status': 'NY',
+    'fom': '2020-03-05',
+    'tom': '2020-03-10',
+    'opprettetDato': '2020-06-23',
+    'sendtTilNAVDato': null,
+    'sendtTilArbeidsgiverDato': null,
+    'avbruttDato': null,
+    'startSykeforlop': '2020-02-17',
+    'sykmeldingUtskrevet': '2020-02-17',
+    'arbeidsgiver': {
+        'navn': '995816598 sitt orgnavn :)',
+        'orgnummer': '995816598'
+    },
+    'korrigerer': null,
+    'korrigertAv': null,
+    'arbeidssituasjon': 'ARBEIDSTAKER',
+    'soknadPerioder': [
+        {
+            'fom': '2020-02-30',
+            'tom': '2020-03-05',
             'grad': 100,
             'sykmeldingstype': 'AKTIVITET_IKKE_MULIG'
         }
@@ -3989,6 +4074,7 @@ export const soknaderIntegration = [
     arbeidsgiverInnenforArbeidsgiverperiodeKvittering,
     arbeidstakerUtenforArbeidsgiverperiodeKvittering,
     arbeidstakerOppfolgendeUtenOppholdKvittering,
+    arbeidstakerOppfolgendeUtenOppholdMenErFørsteForSykmeldingKvittering,
     arbeidstakerOppfolgendeMedOppholdKvittering,
     delvisUtfylltArbeidsledig,
     soknadSomTriggerSporsmalFinnesIkkeISoknad,
