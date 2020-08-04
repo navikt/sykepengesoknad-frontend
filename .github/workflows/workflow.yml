@@ -57,7 +57,7 @@ jobs:
           docker push ${IMAGE_SYKEPENGESOKNAD}
 
   integrasjonstest:
-    name: integrasjonstest
+    name: Integrasjonstest
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
