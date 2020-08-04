@@ -33,12 +33,6 @@ const Arbeidstaker = () => {
 
     if (!valgtSoknad) return null
 
-    // 1. Søknaden er innenfor arbeidsgiverperiode
-    // 2. Søknaden er utenfor arbeidsgiverperiode og det er mer enn 16 dager siden sist søknad
-    // 3. -||- og det er ikke opphold til tidligere søknad og forrige søknad var også utenfor arbeidsgiverperiode
-    // 4. -||- og det er ikke opphold til tidligere søknad men forrige søknad var innenfor arbeidsgiverperiode, gir samme resultat som 2.
-    // 5. -||- og det er 16 eller mindre, men ikke 0 dager opphold
-
     const settRiktigKvitteringTekst = () => {
         if (erInnenforArbeidsgiverperiode()) {
             setKvitteringTekst('inntil16dager')
@@ -80,11 +74,11 @@ const Arbeidstaker = () => {
     }
 
     const harTidligereUtenOpphold = (tidligereSoknader: Soknad[]) => {
-        return tidligereSoknader.filter(sok => dayjs(valgtSoknad.fom!).diff(sok.tom!) <= 1).length > 0
+        return tidligereSoknader.filter(sok => dayjs(valgtSoknad.fom!).diff(sok.tom!, 'day') <= 1).length > 0
     }
 
     const utenOppholdSjekkArbeidsgiverperiode = async(tidligereSoknader: Soknad[]) => {
-        const forrigeSoknad = tidligereSoknader.find(sok => dayjs(valgtSoknad.fom).diff(sok.tom!) <= 1)
+        const forrigeSoknad = tidligereSoknader.find(sok => dayjs(valgtSoknad.fom).diff(sok.tom!, 'day') <= 1)
         const forste = await erForsteSoknadUtenforArbeidsgiverperiode(forrigeSoknad?.id)
         if (forste) {
             setKvitteringTekst('over16dager')
