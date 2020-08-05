@@ -4,9 +4,13 @@ import { Undertittel } from 'nav-frontend-typografi'
 import React, { useEffect, useState } from 'react'
 
 import { useAppStore } from '../../data/stores/app-store'
+import { RSMottakerResponse } from '../../types/rs-types/rest-response/rs-mottakerresponse'
+import { RSMottaker } from '../../types/rs-types/rs-mottaker'
 import { RSSoknadstype } from '../../types/rs-types/rs-soknadstype'
 import { Soknad } from '../../types/types'
-import { dayjsToDate, getDuration, sendtForMerEnn30DagerSiden } from '../../utils/dato-utils'
+import { dayjsToDate, sendtForMerEnn30DagerSiden } from '../../utils/dato-utils'
+import env from '../../utils/environment'
+import fetcher from '../../utils/fetcher'
 import { tekst } from '../../utils/tekster'
 import Vis from '../vis'
 import Inntil16dager from './innhold/arbeidstaker/inntil16dager'
@@ -29,12 +33,6 @@ const Arbeidstaker = () => {
 
     if (!valgtSoknad) return null
 
-    // 1. Søknaden er innenfor arbeidsgiverperiode
-    // 2. Søknaden er utenfor arbeidsgiverperiode og det er mer enn 16 dager siden sist søknad
-    // 3. -||- og det er ikke opphold til tidligere søknad og forrige søknad var også utenfor arbeidsgiverperiode
-    // 4. -||- og det er ikke opphold til tidligere søknad men forrige søknad var innenfor arbeidsgiverperiode, gir samme resultat som 2.
-    // 5. -||- og det er 16 eller mindre, men ikke 0 dager opphold
-
     const settRiktigKvitteringTekst = () => {
         if (erInnenforArbeidsgiverperiode()) {
             setKvitteringTekst('inntil16dager')
@@ -49,18 +47,10 @@ const Arbeidstaker = () => {
                     .filter(tidligereSok => tidligereSoknaderInnenfor16Dager(tidligereSok.tom!, valgtSoknad.fom!))
                 if (tidligereSoknader.length > 0) {
                     if (harTidligereUtenOpphold(tidligereSoknader)) {
-                        if (forsteUtenforArbeidsgiverperiode(tidligereSoknader)) {
-                            setKvitteringTekst('over16dager')
-                        }
-                        else {
-                            setKvitteringTekst('utenOpphold')
-                        }
+                        utenOppholdSjekkArbeidsgiverperiode(tidligereSoknader)
                     }
                     else {
-                        if (forsteUtenforArbeidsgiverperiode(tidligereSoknader)) {
-                            setKvitteringTekst('over16dager')
-                        }
-                        setKvitteringTekst('medOpphold')
+                        medOppholdSjekkArbeidsgiverperiode(tidligereSoknader)
                     }
                 } else {
                     setKvitteringTekst('over16dager')
@@ -84,18 +74,38 @@ const Arbeidstaker = () => {
     }
 
     const harTidligereUtenOpphold = (tidligereSoknader: Soknad[]) => {
-        return tidligereSoknader.filter(sok => tidligereUtenOpphold(sok.tom!, valgtSoknad.fom!)).length > 0
+        return tidligereSoknader.filter(sok => dayjs(valgtSoknad.fom!).diff(sok.tom!, 'day') <= 1).length > 0
     }
 
-    const tidligereUtenOpphold = (d1: Date, d2: Date): boolean => {
-        return dayjs(d2).diff(d1, 'day') <= 1
+    const utenOppholdSjekkArbeidsgiverperiode = async(tidligereSoknader: Soknad[]) => {
+        const forrigeSoknad = tidligereSoknader.find(sok => dayjs(valgtSoknad.fom).diff(sok.tom!, 'day') <= 1)
+        const forste = await erForsteSoknadUtenforArbeidsgiverperiode(forrigeSoknad?.id)
+        if (forste) {
+            setKvitteringTekst('over16dager')
+        } else {
+            setKvitteringTekst('utenOpphold')
+        }
     }
 
-    // TODO: Sett opp denne med /finnMottaker da denne ikke er helt riktig
-    const forsteUtenforArbeidsgiverperiode = (tidligereSoknader: Soknad[]) => {
-        const tidligstFom = tidligereSoknader.sort((a, b) => a.fom!.getTime() - b.fom!.getTime()).reverse()[0].fom!
-        const senesteTom = tidligereSoknader.sort((a, b) => a.fom!.getTime() - b.fom!.getTime())[0].tom!
-        return getDuration(tidligstFom, senesteTom) <= 16        // (fom = 1) + 14 + (tom = 1)
+    const medOppholdSjekkArbeidsgiverperiode = async(tidligereSoknader: Soknad[]) => {
+        const forrigeSoknad = tidligereSoknader.sort((a, b) => a.tom!.getTime() - b.tom!.getTime())[0]
+        const forste = await erForsteSoknadUtenforArbeidsgiverperiode(forrigeSoknad?.id)
+        if (forste) {
+            setKvitteringTekst('over16dager')
+        } else {
+            setKvitteringTekst('medOpphold')
+        }
+    }
+
+    async function erForsteSoknadUtenforArbeidsgiverperiode(id?: string) {
+        if (id === undefined) return true
+        const res = await fetcher(env.syfoapiRoot + `/syfosoknad/api/soknader/${id}/finnMottaker`, {
+            method: 'POST',
+            credentials: 'include',
+            headers: { 'Content-Type': 'application/json' }
+        })
+        const data: RSMottakerResponse = await res.json()
+        return data.mottaker === RSMottaker.ARBEIDSGIVER
     }
 
     const kvitteringInnhold = () => {

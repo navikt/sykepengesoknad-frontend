@@ -8,8 +8,12 @@ import { RSSoknadstype } from '../../types/rs-types/rs-soknadstype'
 import env from '../../utils/environment'
 import { jsonDeepCopy } from '../../utils/json-deep-copy'
 import {
-    arbeidsgiverInnenforArbeidsgiverperiodeKvittering,
+    arbeidstakerDeltPeriodeForsteUtenforArbeidsgiverperiodeKvittering,
+    arbeidstakerInnenforArbeidsgiverperiodeKvittering,
+    arbeidstakerMedOppholdForsteUtenforArbeidsgiverperiodeKvittering,
     arbeidstakerUtenforArbeidsgiverperiodeKvittering,
+    arbeidstakerUtenOppholdForsteUtenforArbeidsgiverperiodeKvittering,
+    sok6,
     soknaderIntegration,
     soknadSomTriggerFeilStatusForOppdaterSporsmal,
     soknadSomTriggerSporsmalFinnesIkkeISoknad,
@@ -77,11 +81,15 @@ mock.post(`${env.syfoapiRoot}/syfosoknad/api/soknader/:soknad/finnMottaker`, (ar
     const soknadId = args.pathParams.soknad
 
     if (soknadId === arbeidstaker.id ||
-        soknadId === arbeidstakerUtenforArbeidsgiverperiodeKvittering.id) {
+        soknadId === arbeidstakerUtenforArbeidsgiverperiodeKvittering.id ||
+        soknadId === arbeidstakerDeltPeriodeForsteUtenforArbeidsgiverperiodeKvittering.id ||
+        soknadId === arbeidstakerUtenOppholdForsteUtenforArbeidsgiverperiodeKvittering.id ||
+        soknadId === arbeidstakerMedOppholdForsteUtenforArbeidsgiverperiodeKvittering.id) {
         return { mottaker: RSMottaker.ARBEIDSGIVER_OG_NAV }
     }
     if (soknadId === arbeidstakerGradert.id ||
-        soknadId === arbeidsgiverInnenforArbeidsgiverperiodeKvittering.id) {
+        soknadId === arbeidstakerInnenforArbeidsgiverperiodeKvittering.id ||
+        soknadId === sok6.id) {
         return { mottaker: RSMottaker.ARBEIDSGIVER }
     }
 

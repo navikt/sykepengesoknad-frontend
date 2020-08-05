@@ -1,6 +1,6 @@
 import { Sykmelding } from '../../../types/types'
 
-export const frilanserSykmelding: Sykmelding = {
+export const frilanserSm: Sykmelding = {
     'id': 'baf4a9ab-cc9b-42af-bba3-67cd6ca06388',
     'startLegemeldtFravaer': '2020-04-01',
     'skalViseSkravertFelt': true,
@@ -131,7 +131,7 @@ export const frilanserSykmelding: Sykmelding = {
         'sykmelderTlf': '94431152'
     }
 }
-export const arbeidstaker100: Sykmelding = {
+export const arbeidstaker100Sm: Sykmelding = {
     'id': '7e90121c-b64b-4a1c-b7a5-93c9d95aba47',
     'startLegemeldtFravaer': '2020-04-01',
     'skalViseSkravertFelt': true,
@@ -263,7 +263,7 @@ export const arbeidstaker100: Sykmelding = {
         'sykmelderTlf': '94431152'
     }
 }
-export const arbeidstaker50: Sykmelding = {
+export const arbeidstaker50Sm: Sykmelding = {
     'id': 'ee4540e3-eba6-46cb-b90f-05747ddb1537',
     'startLegemeldtFravaer': '2020-04-01',
     'skalViseSkravertFelt': true,
@@ -390,6 +390,226 @@ export const arbeidstaker50: Sykmelding = {
         'sykmelder': 'Frida Perma Frost',
         'sykmelderTlf': '94431152'
     }
+}
+export const arbeidstakerBehandlingsdagerSm: Sykmelding = {
+    'id': 'e876fe08-2765-4bd6-966c-922eefe99382',
+    'startLegemeldtFravaer': '2020-04-01',
+    'skalViseSkravertFelt': true,
+    'identdato': '2020-04-01',
+    'status': 'SENDT',
+    'naermesteLederStatus': null,
+    'erEgenmeldt': false,
+    'erPapirsykmelding': false,
+    'innsendtArbeidsgivernavn': 'POSTEN NORGE AS, BÆRUM',
+    'valgtArbeidssituasjon': 'ARBEIDSTAKER',
+    'mottakendeArbeidsgiver': {
+        'navn': 'POSTEN NORGE AS, BÆRUM',
+        'virksomhetsnummer': '974654458',
+        'juridiskOrgnummer': '984661185'
+    },
+    'orgnummer': '974654458',
+    'sendtdato': '2020-05-13T13:22:38',
+    'sporsmal': {
+        'arbeidssituasjon': 'ARBEIDSTAKER',
+        'harForsikring': null,
+        'fravaersperioder': [],
+        'harAnnetFravaer': null
+    },
+    'pasient': {
+        'fnr': '31057023263',
+        'fornavn': 'Frida',
+        'mellomnavn': 'Perma',
+        'etternavn': 'Frost'
+    },
+    'arbeidsgiver': 'LOMMEN BARNEHAVE',
+    'stillingsprosent': 100,
+    'diagnose': {
+        'hoveddiagnose': {
+            'diagnose': 'TENDINITT INA',
+            'diagnosekode': 'L87',
+            'diagnosesystem': 'ICPC-2'
+        },
+        'bidiagnoser': [
+            {
+                'diagnose': 'GANGLION SENE',
+                'diagnosekode': 'L87',
+                'diagnosesystem': 'ICPC-2'
+            }
+        ],
+        'fravaersgrunnLovfestet': null,
+        'fravaerBeskrivelse': null,
+        'svangerskap': false,
+        'yrkesskade': false,
+        'yrkesskadeDato': '2020-04-01'
+    },
+    'mulighetForArbeid': {
+        'perioder': [
+            {
+                'fom': '2020-04-01',
+                'tom': '2020-04-24',
+                'grad': null,
+                'behandlingsdager': 1,
+                'reisetilskudd': null,
+                'avventende': null,
+                'redusertVenteperiode': null
+            }
+        ],
+        'aktivitetIkkeMulig433': null,
+        'aktivitetIkkeMulig434': null,
+        'aarsakAktivitetIkkeMulig433': null,
+        'aarsakAktivitetIkkeMulig434': null
+    },
+    'friskmelding': {
+        'arbeidsfoerEtterPerioden': true,
+        'hensynPaaArbeidsplassen': 'Må ta det pent',
+        'antarReturSammeArbeidsgiver': true,
+        'antattDatoReturSammeArbeidsgiver': '2020-04-01',
+        'antarReturAnnenArbeidsgiver': true,
+        'tilbakemeldingReturArbeid': '2020-04-01',
+        'utenArbeidsgiverAntarTilbakeIArbeid': false,
+        'utenArbeidsgiverAntarTilbakeIArbeidDato': null,
+        'utenArbeidsgiverTilbakemelding': null
+    },
+    'utdypendeOpplysninger': {
+        'sykehistorie': 'Langvarig korsryggsmerter. Ømhet og smerte',
+        'paavirkningArbeidsevne': 'Kan ikke utføre arbeidsoppgaver 100% som kreves fra yrket. Duplikatbuster: 2256fba0-3f0b-47d9-8f89-256c511f160d',
+        'resultatAvBehandling': 'Nei',
+        'henvisningUtredningBehandling': 'Henvist til fysio',
+        'grupper': [
+            {
+                'id': '6.2',
+                'sporsmal': [
+                    {
+                        'id': '6.2.1',
+                        'svar': 'Langvarig korsryggsmerter. Ømhet og smerte'
+                    },
+                    {
+                        'id': '6.2.2',
+                        'svar': 'Kan ikke utføre arbeidsoppgaver 100% som kreves fra yrket. Duplikatbuster: 2256fba0-3f0b-47d9-8f89-256c511f160d'
+                    },
+                    {
+                        'id': '6.2.3',
+                        'svar': 'Nei'
+                    },
+                    {
+                        'id': '6.2.4',
+                        'svar': 'Henvist til fysio'
+                    }
+                ]
+            }
+        ]
+    },
+    'arbeidsevne': {
+        'tilretteleggingArbeidsplass': 'Fortsett som sist.',
+        'tiltakNAV': 'Pasienten har plager som er kommet tilbake etter operasjon. Det er nylig tatt MR bildet som viser forandringer i hånd som mulig må opereres. Venter på time. Det er mulig sykemledingen vil vare utover aktuell sm periode. ',
+        'tiltakAndre': null
+    },
+    'meldingTilNav': {
+        'navBoerTaTakISaken': false,
+        'navBoerTaTakISakenBegrunnelse': null
+    },
+    'innspillTilArbeidsgiver': null,
+    'tilbakedatering': {
+        'dokumenterbarPasientkontakt': null,
+        'tilbakedatertBegrunnelse': null
+    },
+    'bekreftelse': {
+        'utstedelsesdato': '2020-03-31',
+        'sykmelder': 'Frida Perma Frost',
+        'sykmelderTlf': '94431152'
+    }
+}
+export const arbeidstakerAvbruttSm: Sykmelding = {
+    'id': 'ff5a4a27-2d76-4e12-9786-c7e4f31121e6',
+    'startLegemeldtFravaer': null,
+    'skalViseSkravertFelt': false,
+    'identdato': '2020-02-28',
+    'status': 'SENDT',
+    'naermesteLederStatus': 'NEI',
+    'innsendtArbeidsgivernavn': null,
+    'valgtArbeidssituasjon': 'ARBEIDSTAKER',
+    'sporsmal': {
+        'arbeidssituasjon': null,
+        'harForsikring': null,
+        'fravaersperioder': [],
+        'harAnnetFravaer': null
+    },
+    'pasient': {
+        'fnr': null,
+        'fornavn': null,
+        'mellomnavn': null,
+        'etternavn': null
+    },
+    'arbeidsgiver': null,
+    'stillingsprosent': null,
+    'diagnose': {
+        'hoveddiagnose': {
+            'diagnosekode': 'L87',
+            'diagnosesystem': 'Ukjent',
+            'diagnosetekst': 'Ukjent'
+        },
+        'bidiagnoser': null,
+        'fravaersgrunnLovfestet': null,
+        'fravaerBeskrivelse': null,
+        'svangerskap': null,
+        'yrkesskade': null,
+        'yrkesskadeDato': null
+    },
+    'mulighetForArbeid': {
+        'perioder': [
+            {
+                'grad': 80,
+                'reisetilskudd': false,
+                'fom': '2020-05-20',
+                'tom': '2020-06-05',
+                'behandlingsdager': null
+            }
+        ],
+        'aktivitetIkkeMulig433': null,
+        'aktivitetIkkeMulig434': null,
+        'aarsakAktivitetIkkeMulig433': null,
+        'aarsakAktivitetIkkeMulig434': null
+    },
+    'friskmelding': {
+        'arbeidsfoerEtterPerioden': null,
+        'hensynPaaArbeidsplassen': null,
+        'antarReturSammeArbeidsgiver': false,
+        'antattDatoReturSammeArbeidsgiver': null,
+        'antarReturAnnenArbeidsgiver': false,
+        'tilbakemeldingReturArbeid': null,
+        'utenArbeidsgiverAntarTilbakeIArbeid': false,
+        'utenArbeidsgiverAntarTilbakeIArbeidDato': null,
+        'utenArbeidsgiverTilbakemelding': null
+    },
+    'utdypendeOpplysninger': {
+        'grupper': []
+    },
+    'arbeidsevne': {
+        'tilretteleggingArbeidsplass': null,
+        'tiltakNAV': null,
+        'tiltakAndre': null
+    },
+    'meldingTilNav': {
+        'navBoerTaTakISaken': false,
+        'navBoerTaTakISakenBegrunnelse': null
+    },
+    'innspillTilArbeidsgiver': 'kjør på',
+    'tilbakedatering': {
+        'dokumenterbarPasientkontakt': null,
+        'tilbakedatertBegrunnelse': null
+    },
+    'bekreftelse': {
+        'utstedelsesdato': null,
+        'sykmelder': null,
+        'sykmelderTlf': null
+    },
+    'mottakendeArbeidsgiver': {
+        'navn': 'Arbeidsgivernavn',
+        'virksomhetsnummer': '123456789',
+        'juridiskOrgnummer': '123123123'
+    },
+    'orgnummer': '2134324',
+    'sendtdato': '2020-06-12T10:42:18.763'
 }
 export const arbeidsledigSm: Sykmelding = {
     'id': '470c9e25-e112-4060-be61-7a24af530889',
@@ -519,855 +739,1117 @@ export const arbeidsledigSm: Sykmelding = {
         'sykmelderTlf': '94431152'
     }
 }
-export const sykmeldinger: Sykmelding[] = [
-    arbeidstaker100,
-    arbeidstaker50,
-    {
-        'id': 'e876fe08-2765-4bd6-966c-922eefe99382',
-        'startLegemeldtFravaer': '2020-04-01',
-        'skalViseSkravertFelt': true,
-        'identdato': '2020-04-01',
-        'status': 'SENDT',
-        'naermesteLederStatus': null,
-        'erEgenmeldt': false,
-        'erPapirsykmelding': false,
-        'innsendtArbeidsgivernavn': 'POSTEN NORGE AS, BÆRUM',
-        'valgtArbeidssituasjon': 'ARBEIDSTAKER',
-        'mottakendeArbeidsgiver': {
-            'navn': 'POSTEN NORGE AS, BÆRUM',
-            'virksomhetsnummer': '974654458',
-            'juridiskOrgnummer': '984661185'
+export const arbeidsledigKvitteringSm: Sykmelding = {
+    'id': '54d684f4-1e36-4ad9-bfbd-30365284234b',
+    'startLegemeldtFravaer': null,
+    'skalViseSkravertFelt': false,
+    'identdato': '2020-02-28',
+    'status': 'BEKREFTET',
+    'naermesteLederStatus': 'NEI',
+    'innsendtArbeidsgivernavn': null,
+    'valgtArbeidssituasjon': 'ARBEIDSLEDIG',
+    'sporsmal': {
+        'arbeidssituasjon': null,
+        'harForsikring': null,
+        'fravaersperioder': [],
+        'harAnnetFravaer': null
+    },
+    'pasient': {
+        'fnr': null,
+        'fornavn': null,
+        'mellomnavn': null,
+        'etternavn': null
+    },
+    'arbeidsgiver': null,
+    'stillingsprosent': null,
+    'diagnose': {
+        'hoveddiagnose': {
+            'diagnosekode': 'L87',
+            'diagnosesystem': 'Ukjent',
+            'diagnosetekst': 'Ukjent'
         },
-        'orgnummer': '974654458',
-        'sendtdato': '2020-05-13T13:22:38',
-        'sporsmal': {
-            'arbeidssituasjon': 'ARBEIDSTAKER',
-            'harForsikring': null,
-            'fravaersperioder': [],
-            'harAnnetFravaer': null
+        'bidiagnoser': null,
+        'fravaersgrunnLovfestet': null,
+        'fravaerBeskrivelse': null,
+        'svangerskap': null,
+        'yrkesskade': null,
+        'yrkesskadeDato': null
+    },
+    'mulighetForArbeid': {
+        'perioder': [
+            {
+                'grad': 100,
+                'reisetilskudd': false,
+                'fom': '2020-06-07',
+                'tom': '2020-06-22',
+                'behandlingsdager': null
+            }
+        ],
+        'aktivitetIkkeMulig433': null,
+        'aktivitetIkkeMulig434': null,
+        'aarsakAktivitetIkkeMulig433': null,
+        'aarsakAktivitetIkkeMulig434': null
+    },
+    'friskmelding': {
+        'arbeidsfoerEtterPerioden': null,
+        'hensynPaaArbeidsplassen': null,
+        'antarReturSammeArbeidsgiver': false,
+        'antattDatoReturSammeArbeidsgiver': null,
+        'antarReturAnnenArbeidsgiver': false,
+        'tilbakemeldingReturArbeid': null,
+        'utenArbeidsgiverAntarTilbakeIArbeid': false,
+        'utenArbeidsgiverAntarTilbakeIArbeidDato': null,
+        'utenArbeidsgiverTilbakemelding': null
+    },
+    'utdypendeOpplysninger': {
+        'grupper': []
+    },
+    'arbeidsevne': {
+        'tilretteleggingArbeidsplass': null,
+        'tiltakNAV': null,
+        'tiltakAndre': null
+    },
+    'meldingTilNav': {
+        'navBoerTaTakISaken': false,
+        'navBoerTaTakISakenBegrunnelse': null
+    },
+    'innspillTilArbeidsgiver': 'kjør på',
+    'tilbakedatering': {
+        'dokumenterbarPasientkontakt': null,
+        'tilbakedatertBegrunnelse': null
+    },
+    'bekreftelse': {
+        'utstedelsesdato': null,
+        'sykmelder': null,
+        'sykmelderTlf': null
+    },
+    'sendtdato': '2020-06-23T11:55:24.319'
+}
+export const selvstendingSm: Sykmelding = {
+    'id': 'f2e93cca-eea8-464b-b942-ee1821169885',
+    'startLegemeldtFravaer': null,
+    'skalViseSkravertFelt': false,
+    'identdato': '2020-02-28',
+    'status': 'BEKREFTET',
+    'naermesteLederStatus': 'NEI',
+    'innsendtArbeidsgivernavn': null,
+    'valgtArbeidssituasjon': 'NAERINGSDRIVENDE',
+    'sporsmal': {
+        'arbeidssituasjon': null,
+        'harForsikring': null,
+        'fravaersperioder': [],
+        'harAnnetFravaer': null
+    },
+    'pasient': {
+        'fnr': null,
+        'fornavn': null,
+        'mellomnavn': null,
+        'etternavn': null
+    },
+    'arbeidsgiver': null,
+    'stillingsprosent': null,
+    'diagnose': {
+        'hoveddiagnose': {
+            'diagnosekode': 'L87',
+            'diagnosesystem': 'Ukjent',
+            'diagnosetekst': 'Ukjent'
         },
-        'pasient': {
-            'fnr': '31057023263',
-            'fornavn': 'Frida',
-            'mellomnavn': 'Perma',
-            'etternavn': 'Frost'
+        'bidiagnoser': null,
+        'fravaersgrunnLovfestet': null,
+        'fravaerBeskrivelse': null,
+        'svangerskap': null,
+        'yrkesskade': null,
+        'yrkesskadeDato': null
+    },
+    'mulighetForArbeid': {
+        'perioder': [
+            {
+                'grad': 100,
+                'reisetilskudd': false,
+                'fom': '2020-06-01',
+                'tom': '2020-06-22',
+                'behandlingsdager': null
+            }
+        ],
+        'aktivitetIkkeMulig433': null,
+        'aktivitetIkkeMulig434': null,
+        'aarsakAktivitetIkkeMulig433': null,
+        'aarsakAktivitetIkkeMulig434': null
+    },
+    'friskmelding': {
+        'arbeidsfoerEtterPerioden': null,
+        'hensynPaaArbeidsplassen': null,
+        'antarReturSammeArbeidsgiver': false,
+        'antattDatoReturSammeArbeidsgiver': null,
+        'antarReturAnnenArbeidsgiver': false,
+        'tilbakemeldingReturArbeid': null,
+        'utenArbeidsgiverAntarTilbakeIArbeid': false,
+        'utenArbeidsgiverAntarTilbakeIArbeidDato': null,
+        'utenArbeidsgiverTilbakemelding': null
+    },
+    'utdypendeOpplysninger': {
+        'grupper': []
+    },
+    'arbeidsevne': {
+        'tilretteleggingArbeidsplass': null,
+        'tiltakNAV': null,
+        'tiltakAndre': null
+    },
+    'meldingTilNav': {
+        'navBoerTaTakISaken': false,
+        'navBoerTaTakISakenBegrunnelse': null
+    },
+    'innspillTilArbeidsgiver': 'kjør på',
+    'tilbakedatering': {
+        'dokumenterbarPasientkontakt': null,
+        'tilbakedatertBegrunnelse': null
+    },
+    'bekreftelse': {
+        'utstedelsesdato': null,
+        'sykmelder': null,
+        'sykmelderTlf': null
+    },
+    'sendtdato': '2020-06-23T16:07:06.427'
+}
+export const syk1: Sykmelding = {
+    'id': 'syk1',
+    'startLegemeldtFravaer': '2020-01-01',
+    'skalViseSkravertFelt': true,
+    'identdato': '2020-01-01',
+    'status': 'SENDT',
+    'naermesteLederStatus': null,
+    'erEgenmeldt': false,
+    'erPapirsykmelding': false,
+    'innsendtArbeidsgivernavn': 'arb1',
+    'valgtArbeidssituasjon': 'ARBEIDSTAKER',
+    'mottakendeArbeidsgiver': {
+        'navn': 'arb1',
+        'virksomhetsnummer': '1',
+        'juridiskOrgnummer': '1'
+    },
+    'orgnummer': '1',
+    'sendtdato': '2020-01-01T00:00:01',
+    'sporsmal': {
+        'arbeidssituasjon': 'ARBEIDSTAKER',
+        'harForsikring': null,
+        'fravaersperioder': [],
+        'harAnnetFravaer': null
+    },
+    'pasient': {
+        'fnr': '31057023263',
+        'fornavn': 'Frida',
+        'mellomnavn': 'Perma',
+        'etternavn': 'Frost'
+    },
+    'arbeidsgiver': 'arb1',
+    'stillingsprosent': 100,
+    'diagnose': {
+        'hoveddiagnose': {
+            'diagnose': 'TENDINITT INA',
+            'diagnosekode': 'L87',
+            'diagnosesystem': 'ICPC-2'
         },
-        'arbeidsgiver': 'LOMMEN BARNEHAVE',
-        'stillingsprosent': 100,
-        'diagnose': {
-            'hoveddiagnose': {
-                'diagnose': 'TENDINITT INA',
+        'bidiagnoser': [
+            {
+                'diagnose': 'GANGLION SENE',
                 'diagnosekode': 'L87',
                 'diagnosesystem': 'ICPC-2'
-            },
-            'bidiagnoser': [
-                {
-                    'diagnose': 'GANGLION SENE',
-                    'diagnosekode': 'L87',
-                    'diagnosesystem': 'ICPC-2'
-                }
-            ],
-            'fravaersgrunnLovfestet': null,
-            'fravaerBeskrivelse': null,
-            'svangerskap': false,
-            'yrkesskade': false,
-            'yrkesskadeDato': '2020-04-01'
-        },
-        'mulighetForArbeid': {
-            'perioder': [
-                {
-                    'fom': '2020-04-01',
-                    'tom': '2020-04-24',
-                    'grad': null,
-                    'behandlingsdager': 1,
-                    'reisetilskudd': null,
-                    'avventende': null,
-                    'redusertVenteperiode': null
-                }
-            ],
-            'aktivitetIkkeMulig433': null,
-            'aktivitetIkkeMulig434': null,
-            'aarsakAktivitetIkkeMulig433': null,
-            'aarsakAktivitetIkkeMulig434': null
-        },
-        'friskmelding': {
-            'arbeidsfoerEtterPerioden': true,
-            'hensynPaaArbeidsplassen': 'Må ta det pent',
-            'antarReturSammeArbeidsgiver': true,
-            'antattDatoReturSammeArbeidsgiver': '2020-04-01',
-            'antarReturAnnenArbeidsgiver': true,
-            'tilbakemeldingReturArbeid': '2020-04-01',
-            'utenArbeidsgiverAntarTilbakeIArbeid': false,
-            'utenArbeidsgiverAntarTilbakeIArbeidDato': null,
-            'utenArbeidsgiverTilbakemelding': null
-        },
-        'utdypendeOpplysninger': {
-            'sykehistorie': 'Langvarig korsryggsmerter. Ømhet og smerte',
-            'paavirkningArbeidsevne': 'Kan ikke utføre arbeidsoppgaver 100% som kreves fra yrket. Duplikatbuster: 2256fba0-3f0b-47d9-8f89-256c511f160d',
-            'resultatAvBehandling': 'Nei',
-            'henvisningUtredningBehandling': 'Henvist til fysio',
-            'grupper': [
-                {
-                    'id': '6.2',
-                    'sporsmal': [
-                        {
-                            'id': '6.2.1',
-                            'svar': 'Langvarig korsryggsmerter. Ømhet og smerte'
-                        },
-                        {
-                            'id': '6.2.2',
-                            'svar': 'Kan ikke utføre arbeidsoppgaver 100% som kreves fra yrket. Duplikatbuster: 2256fba0-3f0b-47d9-8f89-256c511f160d'
-                        },
-                        {
-                            'id': '6.2.3',
-                            'svar': 'Nei'
-                        },
-                        {
-                            'id': '6.2.4',
-                            'svar': 'Henvist til fysio'
-                        }
-                    ]
-                }
-            ]
-        },
-        'arbeidsevne': {
-            'tilretteleggingArbeidsplass': 'Fortsett som sist.',
-            'tiltakNAV': 'Pasienten har plager som er kommet tilbake etter operasjon. Det er nylig tatt MR bildet som viser forandringer i hånd som mulig må opereres. Venter på time. Det er mulig sykemledingen vil vare utover aktuell sm periode. ',
-            'tiltakAndre': null
-        },
-        'meldingTilNav': {
-            'navBoerTaTakISaken': false,
-            'navBoerTaTakISakenBegrunnelse': null
-        },
-        'innspillTilArbeidsgiver': null,
-        'tilbakedatering': {
-            'dokumenterbarPasientkontakt': null,
-            'tilbakedatertBegrunnelse': null
-        },
-        'bekreftelse': {
-            'utstedelsesdato': '2020-03-31',
-            'sykmelder': 'Frida Perma Frost',
-            'sykmelderTlf': '94431152'
-        }
+            }
+        ],
+        'fravaersgrunnLovfestet': null,
+        'fravaerBeskrivelse': null,
+        'svangerskap': false,
+        'yrkesskade': false,
+        'yrkesskadeDato': '2020-01-01'
     },
+    'mulighetForArbeid': {
+        'perioder': [
+            {
+                'fom': '2020-01-01',
+                'tom': '2020-01-05',
+                'grad': 100,
+                'behandlingsdager': null,
+                'reisetilskudd': null,
+                'avventende': null,
+                'redusertVenteperiode': null
+            }
+        ],
+        'aktivitetIkkeMulig433': [
+            'Annet'
+        ],
+        'aktivitetIkkeMulig434': [
+            'Annet'
+        ],
+        'aarsakAktivitetIkkeMulig433': 'andre årsaker til sykefravær',
+        'aarsakAktivitetIkkeMulig434': 'andre årsaker til sykefravær'
+    },
+    'friskmelding': {
+        'arbeidsfoerEtterPerioden': true,
+        'hensynPaaArbeidsplassen': 'Må ta det pent',
+        'antarReturSammeArbeidsgiver': true,
+        'antattDatoReturSammeArbeidsgiver': '2020-01-01',
+        'antarReturAnnenArbeidsgiver': true,
+        'tilbakemeldingReturArbeid': '2020-01-01',
+        'utenArbeidsgiverAntarTilbakeIArbeid': false,
+        'utenArbeidsgiverAntarTilbakeIArbeidDato': null,
+        'utenArbeidsgiverTilbakemelding': null
+    },
+    'utdypendeOpplysninger': {
+        'sykehistorie': 'Langvarig korsryggsmerter. Ømhet og smerte',
+        'paavirkningArbeidsevne': 'Kan ikke utføre arbeidsoppgaver 100% som kreves fra yrket. Duplikatbuster: d6eca6d8-1a57-46b9-bb96-10d8ff96c419',
+        'resultatAvBehandling': 'Nei',
+        'henvisningUtredningBehandling': 'Henvist til fysio',
+        'grupper': [
+            {
+                'id': '6.2',
+                'sporsmal': [
+                    {
+                        'id': '6.2.1',
+                        'svar': 'Langvarig korsryggsmerter. Ømhet og smerte'
+                    },
+                    {
+                        'id': '6.2.2',
+                        'svar': 'Kan ikke utføre arbeidsoppgaver 100% som kreves fra yrket. Duplikatbuster: d6eca6d8-1a57-46b9-bb96-10d8ff96c419'
+                    },
+                    {
+                        'id': '6.2.3',
+                        'svar': 'Nei'
+                    },
+                    {
+                        'id': '6.2.4',
+                        'svar': 'Henvist til fysio'
+                    }
+                ]
+            }
+        ]
+    },
+    'arbeidsevne': {
+        'tilretteleggingArbeidsplass': 'Fortsett som sist.',
+        'tiltakNAV': 'Pasienten har plager som er kommet tilbake etter operasjon. Det er nylig tatt MR bildet som viser forandringer i hånd som mulig må opereres. Venter på time. Det er mulig sykemledingen vil vare utover aktuell sm periode. ',
+        'tiltakAndre': null
+    },
+    'meldingTilNav': {
+        'navBoerTaTakISaken': false,
+        'navBoerTaTakISakenBegrunnelse': null
+    },
+    'innspillTilArbeidsgiver': null,
+    'tilbakedatering': {
+        'dokumenterbarPasientkontakt': null,
+        'tilbakedatertBegrunnelse': null
+    },
+    'bekreftelse': {
+        'utstedelsesdato': '2020-01-01',
+        'sykmelder': 'Frida Perma Frost',
+        'sykmelderTlf': '94431152'
+    }
+}
+export const syk2: Sykmelding = {
+    'id': 'syk2',
+    'startLegemeldtFravaer': '2020-01-01',
+    'skalViseSkravertFelt': true,
+    'identdato': '2020-01-01',
+    'status': 'SENDT',
+    'naermesteLederStatus': null,
+    'erEgenmeldt': false,
+    'erPapirsykmelding': false,
+    'innsendtArbeidsgivernavn': 'arb2',
+    'valgtArbeidssituasjon': 'ARBEIDSTAKER',
+    'mottakendeArbeidsgiver': {
+        'navn': 'arb2',
+        'virksomhetsnummer': '2',
+        'juridiskOrgnummer': '2'
+    },
+    'orgnummer': '2',
+    'sendtdato': '2020-01-01T00:00:01',
+    'sporsmal': {
+        'arbeidssituasjon': 'ARBEIDSTAKER',
+        'harForsikring': null,
+        'fravaersperioder': [],
+        'harAnnetFravaer': null
+    },
+    'pasient': {
+        'fnr': '31057023263',
+        'fornavn': 'Frida',
+        'mellomnavn': 'Perma',
+        'etternavn': 'Frost'
+    },
+    'arbeidsgiver': 'arb2',
+    'stillingsprosent': 100,
+    'diagnose': {
+        'hoveddiagnose': {
+            'diagnose': 'TENDINITT INA',
+            'diagnosekode': 'L87',
+            'diagnosesystem': 'ICPC-2'
+        },
+        'bidiagnoser': [
+            {
+                'diagnose': 'GANGLION SENE',
+                'diagnosekode': 'L87',
+                'diagnosesystem': 'ICPC-2'
+            }
+        ],
+        'fravaersgrunnLovfestet': null,
+        'fravaerBeskrivelse': null,
+        'svangerskap': false,
+        'yrkesskade': false,
+        'yrkesskadeDato': '2020-01-01'
+    },
+    'mulighetForArbeid': {
+        'perioder': [
+            {
+                'fom': '2020-01-01',
+                'tom': '2020-01-20',
+                'grad': 100,
+                'behandlingsdager': null,
+                'reisetilskudd': null,
+                'avventende': null,
+                'redusertVenteperiode': null
+            }
+        ],
+        'aktivitetIkkeMulig433': [
+            'Annet'
+        ],
+        'aktivitetIkkeMulig434': [
+            'Annet'
+        ],
+        'aarsakAktivitetIkkeMulig433': 'andre årsaker til sykefravær',
+        'aarsakAktivitetIkkeMulig434': 'andre årsaker til sykefravær'
+    },
+    'friskmelding': {
+        'arbeidsfoerEtterPerioden': true,
+        'hensynPaaArbeidsplassen': 'Må ta det pent',
+        'antarReturSammeArbeidsgiver': true,
+        'antattDatoReturSammeArbeidsgiver': '2020-01-01',
+        'antarReturAnnenArbeidsgiver': true,
+        'tilbakemeldingReturArbeid': '2020-01-01',
+        'utenArbeidsgiverAntarTilbakeIArbeid': false,
+        'utenArbeidsgiverAntarTilbakeIArbeidDato': null,
+        'utenArbeidsgiverTilbakemelding': null
+    },
+    'utdypendeOpplysninger': {
+        'sykehistorie': 'Langvarig korsryggsmerter. Ømhet og smerte',
+        'paavirkningArbeidsevne': 'Kan ikke utføre arbeidsoppgaver 100% som kreves fra yrket. Duplikatbuster: d6eca6d8-1a57-46b9-bb96-10d8ff96c419',
+        'resultatAvBehandling': 'Nei',
+        'henvisningUtredningBehandling': 'Henvist til fysio',
+        'grupper': [
+            {
+                'id': '6.2',
+                'sporsmal': [
+                    {
+                        'id': '6.2.1',
+                        'svar': 'Langvarig korsryggsmerter. Ømhet og smerte'
+                    },
+                    {
+                        'id': '6.2.2',
+                        'svar': 'Kan ikke utføre arbeidsoppgaver 100% som kreves fra yrket. Duplikatbuster: d6eca6d8-1a57-46b9-bb96-10d8ff96c419'
+                    },
+                    {
+                        'id': '6.2.3',
+                        'svar': 'Nei'
+                    },
+                    {
+                        'id': '6.2.4',
+                        'svar': 'Henvist til fysio'
+                    }
+                ]
+            }
+        ]
+    },
+    'arbeidsevne': {
+        'tilretteleggingArbeidsplass': 'Fortsett som sist.',
+        'tiltakNAV': 'Pasienten har plager som er kommet tilbake etter operasjon. Det er nylig tatt MR bildet som viser forandringer i hånd som mulig må opereres. Venter på time. Det er mulig sykemledingen vil vare utover aktuell sm periode. ',
+        'tiltakAndre': null
+    },
+    'meldingTilNav': {
+        'navBoerTaTakISaken': false,
+        'navBoerTaTakISakenBegrunnelse': null
+    },
+    'innspillTilArbeidsgiver': null,
+    'tilbakedatering': {
+        'dokumenterbarPasientkontakt': null,
+        'tilbakedatertBegrunnelse': null
+    },
+    'bekreftelse': {
+        'utstedelsesdato': '2020-01-01',
+        'sykmelder': 'Frida Perma Frost',
+        'sykmelderTlf': '94431152'
+    }
+}
+export const syk3: Sykmelding = {
+    'id': 'syk3',
+    'startLegemeldtFravaer': '2020-01-10',
+    'skalViseSkravertFelt': true,
+    'identdato': '2020-01-10',
+    'status': 'SENDT',
+    'naermesteLederStatus': null,
+    'erEgenmeldt': false,
+    'erPapirsykmelding': false,
+    'innsendtArbeidsgivernavn': 'arb3',
+    'valgtArbeidssituasjon': 'ARBEIDSTAKER',
+    'mottakendeArbeidsgiver': {
+        'navn': 'arb3',
+        'virksomhetsnummer': '3',
+        'juridiskOrgnummer': '3'
+    },
+    'orgnummer': '3',
+    'sendtdato': '2020-01-10T00:00:01',
+    'sporsmal': {
+        'arbeidssituasjon': 'ARBEIDSTAKER',
+        'harForsikring': null,
+        'fravaersperioder': [],
+        'harAnnetFravaer': null
+    },
+    'pasient': {
+        'fnr': '31057023263',
+        'fornavn': 'Frida',
+        'mellomnavn': 'Perma',
+        'etternavn': 'Frost'
+    },
+    'arbeidsgiver': 'arb3',
+    'stillingsprosent': 100,
+    'diagnose': {
+        'hoveddiagnose': {
+            'diagnose': 'TENDINITT INA',
+            'diagnosekode': 'L87',
+            'diagnosesystem': 'ICPC-2'
+        },
+        'bidiagnoser': [
+            {
+                'diagnose': 'GANGLION SENE',
+                'diagnosekode': 'L87',
+                'diagnosesystem': 'ICPC-2'
+            }
+        ],
+        'fravaersgrunnLovfestet': null,
+        'fravaerBeskrivelse': null,
+        'svangerskap': false,
+        'yrkesskade': false,
+        'yrkesskadeDato': '2020-01-10'
+    },
+    'mulighetForArbeid': {
+        'perioder': [
+            {
+                'fom': '2020-01-10',
+                'tom': '2020-01-20',
+                'grad': 100,
+                'behandlingsdager': null,
+                'reisetilskudd': null,
+                'avventende': null,
+                'redusertVenteperiode': null
+            }
+        ],
+        'aktivitetIkkeMulig433': [
+            'Annet'
+        ],
+        'aktivitetIkkeMulig434': [
+            'Annet'
+        ],
+        'aarsakAktivitetIkkeMulig433': 'andre årsaker til sykefravær',
+        'aarsakAktivitetIkkeMulig434': 'andre årsaker til sykefravær'
+    },
+    'friskmelding': {
+        'arbeidsfoerEtterPerioden': true,
+        'hensynPaaArbeidsplassen': 'Må ta det pent',
+        'antarReturSammeArbeidsgiver': true,
+        'antattDatoReturSammeArbeidsgiver': '2020-01-10',
+        'antarReturAnnenArbeidsgiver': true,
+        'tilbakemeldingReturArbeid': '2020-01-10',
+        'utenArbeidsgiverAntarTilbakeIArbeid': false,
+        'utenArbeidsgiverAntarTilbakeIArbeidDato': null,
+        'utenArbeidsgiverTilbakemelding': null
+    },
+    'utdypendeOpplysninger': {
+        'sykehistorie': 'Langvarig korsryggsmerter. Ømhet og smerte',
+        'paavirkningArbeidsevne': 'Kan ikke utføre arbeidsoppgaver 100% som kreves fra yrket. Duplikatbuster: d6eca6d8-1a57-46b9-bb96-10d8ff96c419',
+        'resultatAvBehandling': 'Nei',
+        'henvisningUtredningBehandling': 'Henvist til fysio',
+        'grupper': [
+            {
+                'id': '6.2',
+                'sporsmal': [
+                    {
+                        'id': '6.2.1',
+                        'svar': 'Langvarig korsryggsmerter. Ømhet og smerte'
+                    },
+                    {
+                        'id': '6.2.2',
+                        'svar': 'Kan ikke utføre arbeidsoppgaver 100% som kreves fra yrket. Duplikatbuster: d6eca6d8-1a57-46b9-bb96-10d8ff96c419'
+                    },
+                    {
+                        'id': '6.2.3',
+                        'svar': 'Nei'
+                    },
+                    {
+                        'id': '6.2.4',
+                        'svar': 'Henvist til fysio'
+                    }
+                ]
+            }
+        ]
+    },
+    'arbeidsevne': {
+        'tilretteleggingArbeidsplass': 'Fortsett som sist.',
+        'tiltakNAV': 'Pasienten har plager som er kommet tilbake etter operasjon. Det er nylig tatt MR bildet som viser forandringer i hånd som mulig må opereres. Venter på time. Det er mulig sykemledingen vil vare utover aktuell sm periode. ',
+        'tiltakAndre': null
+    },
+    'meldingTilNav': {
+        'navBoerTaTakISaken': false,
+        'navBoerTaTakISakenBegrunnelse': null
+    },
+    'innspillTilArbeidsgiver': null,
+    'tilbakedatering': {
+        'dokumenterbarPasientkontakt': null,
+        'tilbakedatertBegrunnelse': null
+    },
+    'bekreftelse': {
+        'utstedelsesdato': '2020-01-10',
+        'sykmelder': 'Frida Perma Frost',
+        'sykmelderTlf': '94431152'
+    }
+}
+export const syk4: Sykmelding = {
+    'id': 'syk4',
+    'startLegemeldtFravaer': '2020-01-06',
+    'skalViseSkravertFelt': true,
+    'identdato': '2020-01-06',
+    'status': 'SENDT',
+    'naermesteLederStatus': null,
+    'erEgenmeldt': false,
+    'erPapirsykmelding': false,
+    'innsendtArbeidsgivernavn': 'arb1',
+    'valgtArbeidssituasjon': 'ARBEIDSTAKER',
+    'mottakendeArbeidsgiver': {
+        'navn': 'arb1',
+        'virksomhetsnummer': '1',
+        'juridiskOrgnummer': '1'
+    },
+    'orgnummer': '1',
+    'sendtdato': '2020-01-06T00:00:01',
+    'sporsmal': {
+        'arbeidssituasjon': 'ARBEIDSTAKER',
+        'harForsikring': null,
+        'fravaersperioder': [],
+        'harAnnetFravaer': null
+    },
+    'pasient': {
+        'fnr': '31057023263',
+        'fornavn': 'Frida',
+        'mellomnavn': 'Perma',
+        'etternavn': 'Frost'
+    },
+    'arbeidsgiver': 'arb1',
+    'stillingsprosent': 100,
+    'diagnose': {
+        'hoveddiagnose': {
+            'diagnose': 'TENDINITT INA',
+            'diagnosekode': 'L87',
+            'diagnosesystem': 'ICPC-2'
+        },
+        'bidiagnoser': [
+            {
+                'diagnose': 'GANGLION SENE',
+                'diagnosekode': 'L87',
+                'diagnosesystem': 'ICPC-2'
+            }
+        ],
+        'fravaersgrunnLovfestet': null,
+        'fravaerBeskrivelse': null,
+        'svangerskap': false,
+        'yrkesskade': false,
+        'yrkesskadeDato': '2020-01-06'
+    },
+    'mulighetForArbeid': {
+        'perioder': [
+            {
+                'fom': '2020-01-06',
+                'tom': '2020-01-20',
+                'grad': 100,
+                'behandlingsdager': null,
+                'reisetilskudd': null,
+                'avventende': null,
+                'redusertVenteperiode': null
+            }
+        ],
+        'aktivitetIkkeMulig433': [
+            'Annet'
+        ],
+        'aktivitetIkkeMulig434': [
+            'Annet'
+        ],
+        'aarsakAktivitetIkkeMulig433': 'andre årsaker til sykefravær',
+        'aarsakAktivitetIkkeMulig434': 'andre årsaker til sykefravær'
+    },
+    'friskmelding': {
+        'arbeidsfoerEtterPerioden': true,
+        'hensynPaaArbeidsplassen': 'Må ta det pent',
+        'antarReturSammeArbeidsgiver': true,
+        'antattDatoReturSammeArbeidsgiver': '2020-01-06',
+        'antarReturAnnenArbeidsgiver': true,
+        'tilbakemeldingReturArbeid': '2020-01-06',
+        'utenArbeidsgiverAntarTilbakeIArbeid': false,
+        'utenArbeidsgiverAntarTilbakeIArbeidDato': null,
+        'utenArbeidsgiverTilbakemelding': null
+    },
+    'utdypendeOpplysninger': {
+        'sykehistorie': 'Langvarig korsryggsmerter. Ømhet og smerte',
+        'paavirkningArbeidsevne': 'Kan ikke utføre arbeidsoppgaver 100% som kreves fra yrket. Duplikatbuster: d6eca6d8-1a57-46b9-bb96-10d8ff96c419',
+        'resultatAvBehandling': 'Nei',
+        'henvisningUtredningBehandling': 'Henvist til fysio',
+        'grupper': [
+            {
+                'id': '6.2',
+                'sporsmal': [
+                    {
+                        'id': '6.2.1',
+                        'svar': 'Langvarig korsryggsmerter. Ømhet og smerte'
+                    },
+                    {
+                        'id': '6.2.2',
+                        'svar': 'Kan ikke utføre arbeidsoppgaver 100% som kreves fra yrket. Duplikatbuster: d6eca6d8-1a57-46b9-bb96-10d8ff96c419'
+                    },
+                    {
+                        'id': '6.2.3',
+                        'svar': 'Nei'
+                    },
+                    {
+                        'id': '6.2.4',
+                        'svar': 'Henvist til fysio'
+                    }
+                ]
+            }
+        ]
+    },
+    'arbeidsevne': {
+        'tilretteleggingArbeidsplass': 'Fortsett som sist.',
+        'tiltakNAV': 'Pasienten har plager som er kommet tilbake etter operasjon. Det er nylig tatt MR bildet som viser forandringer i hånd som mulig må opereres. Venter på time. Det er mulig sykemledingen vil vare utover aktuell sm periode. ',
+        'tiltakAndre': null
+    },
+    'meldingTilNav': {
+        'navBoerTaTakISaken': false,
+        'navBoerTaTakISakenBegrunnelse': null
+    },
+    'innspillTilArbeidsgiver': null,
+    'tilbakedatering': {
+        'dokumenterbarPasientkontakt': null,
+        'tilbakedatertBegrunnelse': null
+    },
+    'bekreftelse': {
+        'utstedelsesdato': '2020-01-06',
+        'sykmelder': 'Frida Perma Frost',
+        'sykmelderTlf': '94431152'
+    }
+}
+export const syk5: Sykmelding = {
+    'id': 'syk5',
+    'startLegemeldtFravaer': '2020-01-21',
+    'skalViseSkravertFelt': true,
+    'identdato': '2020-01-21',
+    'status': 'SENDT',
+    'naermesteLederStatus': null,
+    'erEgenmeldt': false,
+    'erPapirsykmelding': false,
+    'innsendtArbeidsgivernavn': 'arb1',
+    'valgtArbeidssituasjon': 'ARBEIDSTAKER',
+    'mottakendeArbeidsgiver': {
+        'navn': 'arb1',
+        'virksomhetsnummer': '1',
+        'juridiskOrgnummer': '1'
+    },
+    'orgnummer': '1',
+    'sendtdato': '2020-01-21T00:00:01',
+    'sporsmal': {
+        'arbeidssituasjon': 'ARBEIDSTAKER',
+        'harForsikring': null,
+        'fravaersperioder': [],
+        'harAnnetFravaer': null
+    },
+    'pasient': {
+        'fnr': '31057023263',
+        'fornavn': 'Frida',
+        'mellomnavn': 'Perma',
+        'etternavn': 'Frost'
+    },
+    'arbeidsgiver': 'arb1',
+    'stillingsprosent': 100,
+    'diagnose': {
+        'hoveddiagnose': {
+            'diagnose': 'TENDINITT INA',
+            'diagnosekode': 'L87',
+            'diagnosesystem': 'ICPC-2'
+        },
+        'bidiagnoser': [
+            {
+                'diagnose': 'GANGLION SENE',
+                'diagnosekode': 'L87',
+                'diagnosesystem': 'ICPC-2'
+            }
+        ],
+        'fravaersgrunnLovfestet': null,
+        'fravaerBeskrivelse': null,
+        'svangerskap': false,
+        'yrkesskade': false,
+        'yrkesskadeDato': '2020-01-21'
+    },
+    'mulighetForArbeid': {
+        'perioder': [
+            {
+                'fom': '2020-01-21',
+                'tom': '2020-01-25',
+                'grad': 100,
+                'behandlingsdager': null,
+                'reisetilskudd': null,
+                'avventende': null,
+                'redusertVenteperiode': null
+            }
+        ],
+        'aktivitetIkkeMulig433': [
+            'Annet'
+        ],
+        'aktivitetIkkeMulig434': [
+            'Annet'
+        ],
+        'aarsakAktivitetIkkeMulig433': 'andre årsaker til sykefravær',
+        'aarsakAktivitetIkkeMulig434': 'andre årsaker til sykefravær'
+    },
+    'friskmelding': {
+        'arbeidsfoerEtterPerioden': true,
+        'hensynPaaArbeidsplassen': 'Må ta det pent',
+        'antarReturSammeArbeidsgiver': true,
+        'antattDatoReturSammeArbeidsgiver': '2020-01-21',
+        'antarReturAnnenArbeidsgiver': true,
+        'tilbakemeldingReturArbeid': '2020-01-21',
+        'utenArbeidsgiverAntarTilbakeIArbeid': false,
+        'utenArbeidsgiverAntarTilbakeIArbeidDato': null,
+        'utenArbeidsgiverTilbakemelding': null
+    },
+    'utdypendeOpplysninger': {
+        'sykehistorie': 'Langvarig korsryggsmerter. Ømhet og smerte',
+        'paavirkningArbeidsevne': 'Kan ikke utføre arbeidsoppgaver 100% som kreves fra yrket. Duplikatbuster: d6eca6d8-1a57-46b9-bb96-10d8ff96c419',
+        'resultatAvBehandling': 'Nei',
+        'henvisningUtredningBehandling': 'Henvist til fysio',
+        'grupper': [
+            {
+                'id': '6.2',
+                'sporsmal': [
+                    {
+                        'id': '6.2.1',
+                        'svar': 'Langvarig korsryggsmerter. Ømhet og smerte'
+                    },
+                    {
+                        'id': '6.2.2',
+                        'svar': 'Kan ikke utføre arbeidsoppgaver 100% som kreves fra yrket. Duplikatbuster: d6eca6d8-1a57-46b9-bb96-10d8ff96c419'
+                    },
+                    {
+                        'id': '6.2.3',
+                        'svar': 'Nei'
+                    },
+                    {
+                        'id': '6.2.4',
+                        'svar': 'Henvist til fysio'
+                    }
+                ]
+            }
+        ]
+    },
+    'arbeidsevne': {
+        'tilretteleggingArbeidsplass': 'Fortsett som sist.',
+        'tiltakNAV': 'Pasienten har plager som er kommet tilbake etter operasjon. Det er nylig tatt MR bildet som viser forandringer i hånd som mulig må opereres. Venter på time. Det er mulig sykemledingen vil vare utover aktuell sm periode. ',
+        'tiltakAndre': null
+    },
+    'meldingTilNav': {
+        'navBoerTaTakISaken': false,
+        'navBoerTaTakISakenBegrunnelse': null
+    },
+    'innspillTilArbeidsgiver': null,
+    'tilbakedatering': {
+        'dokumenterbarPasientkontakt': null,
+        'tilbakedatertBegrunnelse': null
+    },
+    'bekreftelse': {
+        'utstedelsesdato': '2020-01-21',
+        'sykmelder': 'Frida Perma Frost',
+        'sykmelderTlf': '94431152'
+    }
+}
+export const syk7: Sykmelding = {
+    'id': 'syk7',
+    'startLegemeldtFravaer': '2020-01-01',
+    'skalViseSkravertFelt': true,
+    'identdato': '2020-01-10',
+    'status': 'SENDT',
+    'naermesteLederStatus': null,
+    'erEgenmeldt': false,
+    'erPapirsykmelding': false,
+    'innsendtArbeidsgivernavn': 'arb4',
+    'valgtArbeidssituasjon': 'ARBEIDSTAKER',
+    'mottakendeArbeidsgiver': {
+        'navn': 'arb4',
+        'virksomhetsnummer': '4',
+        'juridiskOrgnummer': '4'
+    },
+    'orgnummer': '4',
+    'sendtdato': '2020-01-10T00:00:01',
+    'sporsmal': {
+        'arbeidssituasjon': 'ARBEIDSTAKER',
+        'harForsikring': null,
+        'fravaersperioder': [],
+        'harAnnetFravaer': null
+    },
+    'pasient': {
+        'fnr': '31057023263',
+        'fornavn': 'Frida',
+        'mellomnavn': 'Perma',
+        'etternavn': 'Frost'
+    },
+    'arbeidsgiver': 'arb4',
+    'stillingsprosent': 100,
+    'diagnose': {
+        'hoveddiagnose': {
+            'diagnose': 'TENDINITT INA',
+            'diagnosekode': 'L87',
+            'diagnosesystem': 'ICPC-2'
+        },
+        'bidiagnoser': [
+            {
+                'diagnose': 'GANGLION SENE',
+                'diagnosekode': 'L87',
+                'diagnosesystem': 'ICPC-2'
+            }
+        ],
+        'fravaersgrunnLovfestet': null,
+        'fravaerBeskrivelse': null,
+        'svangerskap': false,
+        'yrkesskade': false,
+        'yrkesskadeDato': '2020-01-10'
+    },
+    'mulighetForArbeid': {
+        'perioder': [
+            {
+                'fom': '2020-01-10',
+                'tom': '2020-01-25',
+                'grad': 100,
+                'behandlingsdager': null,
+                'reisetilskudd': null,
+                'avventende': null,
+                'redusertVenteperiode': null
+            }
+        ],
+        'aktivitetIkkeMulig433': [
+            'Annet'
+        ],
+        'aktivitetIkkeMulig434': [
+            'Annet'
+        ],
+        'aarsakAktivitetIkkeMulig433': 'andre årsaker til sykefravær',
+        'aarsakAktivitetIkkeMulig434': 'andre årsaker til sykefravær'
+    },
+    'friskmelding': {
+        'arbeidsfoerEtterPerioden': true,
+        'hensynPaaArbeidsplassen': 'Må ta det pent',
+        'antarReturSammeArbeidsgiver': true,
+        'antattDatoReturSammeArbeidsgiver': '2020-01-10',
+        'antarReturAnnenArbeidsgiver': true,
+        'tilbakemeldingReturArbeid': '2020-01-10',
+        'utenArbeidsgiverAntarTilbakeIArbeid': false,
+        'utenArbeidsgiverAntarTilbakeIArbeidDato': null,
+        'utenArbeidsgiverTilbakemelding': null
+    },
+    'utdypendeOpplysninger': {
+        'sykehistorie': 'Langvarig korsryggsmerter. Ømhet og smerte',
+        'paavirkningArbeidsevne': 'Kan ikke utføre arbeidsoppgaver 100% som kreves fra yrket. Duplikatbuster: d6eca6d8-1a57-46b9-bb96-10d8ff96c419',
+        'resultatAvBehandling': 'Nei',
+        'henvisningUtredningBehandling': 'Henvist til fysio',
+        'grupper': [
+            {
+                'id': '6.2',
+                'sporsmal': [
+                    {
+                        'id': '6.2.1',
+                        'svar': 'Langvarig korsryggsmerter. Ømhet og smerte'
+                    },
+                    {
+                        'id': '6.2.2',
+                        'svar': 'Kan ikke utføre arbeidsoppgaver 100% som kreves fra yrket. Duplikatbuster: d6eca6d8-1a57-46b9-bb96-10d8ff96c419'
+                    },
+                    {
+                        'id': '6.2.3',
+                        'svar': 'Nei'
+                    },
+                    {
+                        'id': '6.2.4',
+                        'svar': 'Henvist til fysio'
+                    }
+                ]
+            }
+        ]
+    },
+    'arbeidsevne': {
+        'tilretteleggingArbeidsplass': 'Fortsett som sist.',
+        'tiltakNAV': 'Pasienten har plager som er kommet tilbake etter operasjon. Det er nylig tatt MR bildet som viser forandringer i hånd som mulig må opereres. Venter på time. Det er mulig sykemledingen vil vare utover aktuell sm periode. ',
+        'tiltakAndre': null
+    },
+    'meldingTilNav': {
+        'navBoerTaTakISaken': false,
+        'navBoerTaTakISakenBegrunnelse': null
+    },
+    'innspillTilArbeidsgiver': null,
+    'tilbakedatering': {
+        'dokumenterbarPasientkontakt': null,
+        'tilbakedatertBegrunnelse': null
+    },
+    'bekreftelse': {
+        'utstedelsesdato': '2020-01-10',
+        'sykmelder': 'Frida Perma Frost',
+        'sykmelderTlf': '94431152'
+    }
+}
+export const syk8: Sykmelding = {
+    'id': 'syk8',
+    'startLegemeldtFravaer': '2020-01-01',
+    'skalViseSkravertFelt': true,
+    'identdato': '2020-02-01',
+    'status': 'SENDT',
+    'naermesteLederStatus': null,
+    'erEgenmeldt': false,
+    'erPapirsykmelding': false,
+    'innsendtArbeidsgivernavn': 'arb4',
+    'valgtArbeidssituasjon': 'ARBEIDSTAKER',
+    'mottakendeArbeidsgiver': {
+        'navn': 'arb4',
+        'virksomhetsnummer': '4',
+        'juridiskOrgnummer': '4'
+    },
+    'orgnummer': '4',
+    'sendtdato': '2020-02-01T00:00:01',
+    'sporsmal': {
+        'arbeidssituasjon': 'ARBEIDSTAKER',
+        'harForsikring': null,
+        'fravaersperioder': [],
+        'harAnnetFravaer': null
+    },
+    'pasient': {
+        'fnr': '31057023263',
+        'fornavn': 'Frida',
+        'mellomnavn': 'Perma',
+        'etternavn': 'Frost'
+    },
+    'arbeidsgiver': 'arb4',
+    'stillingsprosent': 100,
+    'diagnose': {
+        'hoveddiagnose': {
+            'diagnose': 'TENDINITT INA',
+            'diagnosekode': 'L87',
+            'diagnosesystem': 'ICPC-2'
+        },
+        'bidiagnoser': [
+            {
+                'diagnose': 'GANGLION SENE',
+                'diagnosekode': 'L87',
+                'diagnosesystem': 'ICPC-2'
+            }
+        ],
+        'fravaersgrunnLovfestet': null,
+        'fravaerBeskrivelse': null,
+        'svangerskap': false,
+        'yrkesskade': false,
+        'yrkesskadeDato': '2020-02-01'
+    },
+    'mulighetForArbeid': {
+        'perioder': [
+            {
+                'fom': '2020-02-01',
+                'tom': '2020-02-05',
+                'grad': 100,
+                'behandlingsdager': null,
+                'reisetilskudd': null,
+                'avventende': null,
+                'redusertVenteperiode': null
+            }
+        ],
+        'aktivitetIkkeMulig433': [
+            'Annet'
+        ],
+        'aktivitetIkkeMulig434': [
+            'Annet'
+        ],
+        'aarsakAktivitetIkkeMulig433': 'andre årsaker til sykefravær',
+        'aarsakAktivitetIkkeMulig434': 'andre årsaker til sykefravær'
+    },
+    'friskmelding': {
+        'arbeidsfoerEtterPerioden': true,
+        'hensynPaaArbeidsplassen': 'Må ta det pent',
+        'antarReturSammeArbeidsgiver': true,
+        'antattDatoReturSammeArbeidsgiver': '2020-02-01',
+        'antarReturAnnenArbeidsgiver': true,
+        'tilbakemeldingReturArbeid': '2020-02-01',
+        'utenArbeidsgiverAntarTilbakeIArbeid': false,
+        'utenArbeidsgiverAntarTilbakeIArbeidDato': null,
+        'utenArbeidsgiverTilbakemelding': null
+    },
+    'utdypendeOpplysninger': {
+        'sykehistorie': 'Langvarig korsryggsmerter. Ømhet og smerte',
+        'paavirkningArbeidsevne': 'Kan ikke utføre arbeidsoppgaver 100% som kreves fra yrket. Duplikatbuster: d6eca6d8-1a57-46b9-bb96-10d8ff96c419',
+        'resultatAvBehandling': 'Nei',
+        'henvisningUtredningBehandling': 'Henvist til fysio',
+        'grupper': [
+            {
+                'id': '6.2',
+                'sporsmal': [
+                    {
+                        'id': '6.2.1',
+                        'svar': 'Langvarig korsryggsmerter. Ømhet og smerte'
+                    },
+                    {
+                        'id': '6.2.2',
+                        'svar': 'Kan ikke utføre arbeidsoppgaver 100% som kreves fra yrket. Duplikatbuster: d6eca6d8-1a57-46b9-bb96-10d8ff96c419'
+                    },
+                    {
+                        'id': '6.2.3',
+                        'svar': 'Nei'
+                    },
+                    {
+                        'id': '6.2.4',
+                        'svar': 'Henvist til fysio'
+                    }
+                ]
+            }
+        ]
+    },
+    'arbeidsevne': {
+        'tilretteleggingArbeidsplass': 'Fortsett som sist.',
+        'tiltakNAV': 'Pasienten har plager som er kommet tilbake etter operasjon. Det er nylig tatt MR bildet som viser forandringer i hånd som mulig må opereres. Venter på time. Det er mulig sykemledingen vil vare utover aktuell sm periode. ',
+        'tiltakAndre': null
+    },
+    'meldingTilNav': {
+        'navBoerTaTakISaken': false,
+        'navBoerTaTakISakenBegrunnelse': null
+    },
+    'innspillTilArbeidsgiver': null,
+    'tilbakedatering': {
+        'dokumenterbarPasientkontakt': null,
+        'tilbakedatertBegrunnelse': null
+    },
+    'bekreftelse': {
+        'utstedelsesdato': '2020-02-01',
+        'sykmelder': 'Frida Perma Frost',
+        'sykmelderTlf': '94431152'
+    }
+}
+
+export const sykmeldinger: Sykmelding[] = [
+    frilanserSm,
+    arbeidstaker100Sm,
+    arbeidstaker50Sm,
+    arbeidstakerBehandlingsdagerSm,
+    arbeidstakerAvbruttSm,
     arbeidsledigSm,
-    frilanserSykmelding,
-    {
-        'id': 'ff5a4a27-2d76-4e12-9786-c7e4f31121e6',
-        'startLegemeldtFravaer': null,
-        'skalViseSkravertFelt': false,
-        'identdato': '2020-02-28',
-        'status': 'SENDT',
-        'naermesteLederStatus': 'NEI',
-        'innsendtArbeidsgivernavn': null,
-        'valgtArbeidssituasjon': 'ARBEIDSTAKER',
-        'sporsmal': {
-            'arbeidssituasjon': null,
-            'harForsikring': null,
-            'fravaersperioder': [],
-            'harAnnetFravaer': null
-        },
-        'pasient': {
-            'fnr': null,
-            'fornavn': null,
-            'mellomnavn': null,
-            'etternavn': null
-        },
-        'arbeidsgiver': null,
-        'stillingsprosent': null,
-        'diagnose': {
-            'hoveddiagnose': {
-                'diagnosekode': 'L87',
-                'diagnosesystem': 'Ukjent',
-                'diagnosetekst': 'Ukjent'
-            },
-            'bidiagnoser': null,
-            'fravaersgrunnLovfestet': null,
-            'fravaerBeskrivelse': null,
-            'svangerskap': null,
-            'yrkesskade': null,
-            'yrkesskadeDato': null
-        },
-        'mulighetForArbeid': {
-            'perioder': [
-                {
-                    'grad': 80,
-                    'reisetilskudd': false,
-                    'fom': '2020-05-20',
-                    'tom': '2020-06-05',
-                    'behandlingsdager': null
-                }
-            ],
-            'aktivitetIkkeMulig433': null,
-            'aktivitetIkkeMulig434': null,
-            'aarsakAktivitetIkkeMulig433': null,
-            'aarsakAktivitetIkkeMulig434': null
-        },
-        'friskmelding': {
-            'arbeidsfoerEtterPerioden': null,
-            'hensynPaaArbeidsplassen': null,
-            'antarReturSammeArbeidsgiver': false,
-            'antattDatoReturSammeArbeidsgiver': null,
-            'antarReturAnnenArbeidsgiver': false,
-            'tilbakemeldingReturArbeid': null,
-            'utenArbeidsgiverAntarTilbakeIArbeid': false,
-            'utenArbeidsgiverAntarTilbakeIArbeidDato': null,
-            'utenArbeidsgiverTilbakemelding': null
-        },
-        'utdypendeOpplysninger': {
-            'grupper': []
-        },
-        'arbeidsevne': {
-            'tilretteleggingArbeidsplass': null,
-            'tiltakNAV': null,
-            'tiltakAndre': null
-        },
-        'meldingTilNav': {
-            'navBoerTaTakISaken': false,
-            'navBoerTaTakISakenBegrunnelse': null
-        },
-        'innspillTilArbeidsgiver': 'kjør på',
-        'tilbakedatering': {
-            'dokumenterbarPasientkontakt': null,
-            'tilbakedatertBegrunnelse': null
-        },
-        'bekreftelse': {
-            'utstedelsesdato': null,
-            'sykmelder': null,
-            'sykmelderTlf': null
-        },
-        'mottakendeArbeidsgiver': {
-            'navn': 'Arbeidsgivernavn',
-            'virksomhetsnummer': '123456789',
-            'juridiskOrgnummer': '123123123'
-        },
-        'orgnummer': '2134324',
-        'sendtdato': '2020-06-12T10:42:18.763'
-    },
-    {
-        'id': 'b4d3dc32-49ba-4448-9fd1-e03d3b98fbc4',
-        'startLegemeldtFravaer': null,
-        'skalViseSkravertFelt': false,
-        'identdato': '2020-02-28',
-        'status': 'BEKREFTET',
-        'naermesteLederStatus': 'NEI',
-        'innsendtArbeidsgivernavn': null,
-        'valgtArbeidssituasjon': 'ARBEIDSLEDIG',
-        'sporsmal': {
-            'arbeidssituasjon': null,
-            'harForsikring': null,
-            'fravaersperioder': [],
-            'harAnnetFravaer': null
-        },
-        'pasient': {
-            'fnr': null,
-            'fornavn': null,
-            'mellomnavn': null,
-            'etternavn': null
-        },
-        'arbeidsgiver': null,
-        'stillingsprosent': null,
-        'diagnose': {
-            'hoveddiagnose': {
-                'diagnosekode': 'L87',
-                'diagnosesystem': 'Ukjent',
-                'diagnosetekst': 'Ukjent'
-            },
-            'bidiagnoser': null,
-            'fravaersgrunnLovfestet': null,
-            'fravaerBeskrivelse': null,
-            'svangerskap': null,
-            'yrkesskade': null,
-            'yrkesskadeDato': null
-        },
-        'mulighetForArbeid': {
-            'perioder': [
-                {
-                    'grad': 100,
-                    'reisetilskudd': false,
-                    'fom': '2020-01-01',
-                    'tom': '2020-01-10',
-                    'behandlingsdager': null
-                }
-            ],
-            'aktivitetIkkeMulig433': null,
-            'aktivitetIkkeMulig434': null,
-            'aarsakAktivitetIkkeMulig433': null,
-            'aarsakAktivitetIkkeMulig434': null
-        },
-        'friskmelding': {
-            'arbeidsfoerEtterPerioden': null,
-            'hensynPaaArbeidsplassen': null,
-            'antarReturSammeArbeidsgiver': false,
-            'antattDatoReturSammeArbeidsgiver': null,
-            'antarReturAnnenArbeidsgiver': false,
-            'tilbakemeldingReturArbeid': null,
-            'utenArbeidsgiverAntarTilbakeIArbeid': false,
-            'utenArbeidsgiverAntarTilbakeIArbeidDato': null,
-            'utenArbeidsgiverTilbakemelding': null
-        },
-        'utdypendeOpplysninger': {
-            'grupper': []
-        },
-        'arbeidsevne': {
-            'tilretteleggingArbeidsplass': null,
-            'tiltakNAV': null,
-            'tiltakAndre': null
-        },
-        'meldingTilNav': {
-            'navBoerTaTakISaken': false,
-            'navBoerTaTakISakenBegrunnelse': null
-        },
-        'innspillTilArbeidsgiver': 'kjør på',
-        'tilbakedatering': {
-            'dokumenterbarPasientkontakt': null,
-            'tilbakedatertBegrunnelse': null
-        },
-        'bekreftelse': {
-            'utstedelsesdato': null,
-            'sykmelder': null,
-            'sykmelderTlf': null
-        },
-        'sendtdato': '2020-06-23T11:55:04.243'
-    },
-    {
-        'id': '54d684f4-1e36-4ad9-bfbd-30365284234b',
-        'startLegemeldtFravaer': null,
-        'skalViseSkravertFelt': false,
-        'identdato': '2020-02-28',
-        'status': 'BEKREFTET',
-        'naermesteLederStatus': 'NEI',
-        'innsendtArbeidsgivernavn': null,
-        'valgtArbeidssituasjon': 'ARBEIDSLEDIG',
-        'sporsmal': {
-            'arbeidssituasjon': null,
-            'harForsikring': null,
-            'fravaersperioder': [],
-            'harAnnetFravaer': null
-        },
-        'pasient': {
-            'fnr': null,
-            'fornavn': null,
-            'mellomnavn': null,
-            'etternavn': null
-        },
-        'arbeidsgiver': null,
-        'stillingsprosent': null,
-        'diagnose': {
-            'hoveddiagnose': {
-                'diagnosekode': 'L87',
-                'diagnosesystem': 'Ukjent',
-                'diagnosetekst': 'Ukjent'
-            },
-            'bidiagnoser': null,
-            'fravaersgrunnLovfestet': null,
-            'fravaerBeskrivelse': null,
-            'svangerskap': null,
-            'yrkesskade': null,
-            'yrkesskadeDato': null
-        },
-        'mulighetForArbeid': {
-            'perioder': [
-                {
-                    'grad': 100,
-                    'reisetilskudd': false,
-                    'fom': '2020-06-07',
-                    'tom': '2020-06-22',
-                    'behandlingsdager': null
-                }
-            ],
-            'aktivitetIkkeMulig433': null,
-            'aktivitetIkkeMulig434': null,
-            'aarsakAktivitetIkkeMulig433': null,
-            'aarsakAktivitetIkkeMulig434': null
-        },
-        'friskmelding': {
-            'arbeidsfoerEtterPerioden': null,
-            'hensynPaaArbeidsplassen': null,
-            'antarReturSammeArbeidsgiver': false,
-            'antattDatoReturSammeArbeidsgiver': null,
-            'antarReturAnnenArbeidsgiver': false,
-            'tilbakemeldingReturArbeid': null,
-            'utenArbeidsgiverAntarTilbakeIArbeid': false,
-            'utenArbeidsgiverAntarTilbakeIArbeidDato': null,
-            'utenArbeidsgiverTilbakemelding': null
-        },
-        'utdypendeOpplysninger': {
-            'grupper': []
-        },
-        'arbeidsevne': {
-            'tilretteleggingArbeidsplass': null,
-            'tiltakNAV': null,
-            'tiltakAndre': null
-        },
-        'meldingTilNav': {
-            'navBoerTaTakISaken': false,
-            'navBoerTaTakISakenBegrunnelse': null
-        },
-        'innspillTilArbeidsgiver': 'kjør på',
-        'tilbakedatering': {
-            'dokumenterbarPasientkontakt': null,
-            'tilbakedatertBegrunnelse': null
-        },
-        'bekreftelse': {
-            'utstedelsesdato': null,
-            'sykmelder': null,
-            'sykmelderTlf': null
-        },
-        'sendtdato': '2020-06-23T11:55:24.319'
-    },
-    {
-        'id': 'f2e93cca-eea8-464b-b942-ee1821169885',
-        'startLegemeldtFravaer': null,
-        'skalViseSkravertFelt': false,
-        'identdato': '2020-02-28',
-        'status': 'BEKREFTET',
-        'naermesteLederStatus': 'NEI',
-        'innsendtArbeidsgivernavn': null,
-        'valgtArbeidssituasjon': 'NAERINGSDRIVENDE',
-        'sporsmal': {
-            'arbeidssituasjon': null,
-            'harForsikring': null,
-            'fravaersperioder': [],
-            'harAnnetFravaer': null
-        },
-        'pasient': {
-            'fnr': null,
-            'fornavn': null,
-            'mellomnavn': null,
-            'etternavn': null
-        },
-        'arbeidsgiver': null,
-        'stillingsprosent': null,
-        'diagnose': {
-            'hoveddiagnose': {
-                'diagnosekode': 'L87',
-                'diagnosesystem': 'Ukjent',
-                'diagnosetekst': 'Ukjent'
-            },
-            'bidiagnoser': null,
-            'fravaersgrunnLovfestet': null,
-            'fravaerBeskrivelse': null,
-            'svangerskap': null,
-            'yrkesskade': null,
-            'yrkesskadeDato': null
-        },
-        'mulighetForArbeid': {
-            'perioder': [
-                {
-                    'grad': 100,
-                    'reisetilskudd': false,
-                    'fom': '2020-06-01',
-                    'tom': '2020-06-22',
-                    'behandlingsdager': null
-                }
-            ],
-            'aktivitetIkkeMulig433': null,
-            'aktivitetIkkeMulig434': null,
-            'aarsakAktivitetIkkeMulig433': null,
-            'aarsakAktivitetIkkeMulig434': null
-        },
-        'friskmelding': {
-            'arbeidsfoerEtterPerioden': null,
-            'hensynPaaArbeidsplassen': null,
-            'antarReturSammeArbeidsgiver': false,
-            'antattDatoReturSammeArbeidsgiver': null,
-            'antarReturAnnenArbeidsgiver': false,
-            'tilbakemeldingReturArbeid': null,
-            'utenArbeidsgiverAntarTilbakeIArbeid': false,
-            'utenArbeidsgiverAntarTilbakeIArbeidDato': null,
-            'utenArbeidsgiverTilbakemelding': null
-        },
-        'utdypendeOpplysninger': {
-            'grupper': []
-        },
-        'arbeidsevne': {
-            'tilretteleggingArbeidsplass': null,
-            'tiltakNAV': null,
-            'tiltakAndre': null
-        },
-        'meldingTilNav': {
-            'navBoerTaTakISaken': false,
-            'navBoerTaTakISakenBegrunnelse': null
-        },
-        'innspillTilArbeidsgiver': 'kjør på',
-        'tilbakedatering': {
-            'dokumenterbarPasientkontakt': null,
-            'tilbakedatertBegrunnelse': null
-        },
-        'bekreftelse': {
-            'utstedelsesdato': null,
-            'sykmelder': null,
-            'sykmelderTlf': null
-        },
-        'sendtdato': '2020-06-23T16:07:06.427'
-    },
-    {
-        'id': '846bc8ce-4d70-4fdd-b3d1-cc3aee508e90',
-        'startLegemeldtFravaer': null,
-        'skalViseSkravertFelt': false,
-        'identdato': '2020-02-28',
-        'status': 'SENDT',
-        'naermesteLederStatus': 'NEI',
-        'innsendtArbeidsgivernavn': null,
-        'valgtArbeidssituasjon': 'ARBEIDSTAKER',
-        'sporsmal': {
-            'arbeidssituasjon': null,
-            'harForsikring': null,
-            'fravaersperioder': [],
-            'harAnnetFravaer': null
-        },
-        'pasient': {
-            'fnr': null,
-            'fornavn': null,
-            'mellomnavn': null,
-            'etternavn': null
-        },
-        'arbeidsgiver': null,
-        'stillingsprosent': null,
-        'diagnose': {
-            'hoveddiagnose': {
-                'diagnosekode': 'L87',
-                'diagnosesystem': 'Ukjent',
-                'diagnosetekst': 'Ukjent'
-            },
-            'bidiagnoser': null,
-            'fravaersgrunnLovfestet': null,
-            'fravaerBeskrivelse': null,
-            'svangerskap': null,
-            'yrkesskade': null,
-            'yrkesskadeDato': null
-        },
-        'mulighetForArbeid': {
-            'perioder': [
-                {
-                    'grad': 100,
-                    'reisetilskudd': false,
-                    'fom': '2020-01-01',
-                    'tom': '2020-01-10',
-                    'behandlingsdager': null
-                }
-            ],
-            'aktivitetIkkeMulig433': null,
-            'aktivitetIkkeMulig434': null,
-            'aarsakAktivitetIkkeMulig433': null,
-            'aarsakAktivitetIkkeMulig434': null
-        },
-        'friskmelding': {
-            'arbeidsfoerEtterPerioden': null,
-            'hensynPaaArbeidsplassen': null,
-            'antarReturSammeArbeidsgiver': false,
-            'antattDatoReturSammeArbeidsgiver': null,
-            'antarReturAnnenArbeidsgiver': false,
-            'tilbakemeldingReturArbeid': null,
-            'utenArbeidsgiverAntarTilbakeIArbeid': false,
-            'utenArbeidsgiverAntarTilbakeIArbeidDato': null,
-            'utenArbeidsgiverTilbakemelding': null
-        },
-        'utdypendeOpplysninger': {
-            'grupper': []
-        },
-        'arbeidsevne': {
-            'tilretteleggingArbeidsplass': null,
-            'tiltakNAV': null,
-            'tiltakAndre': null
-        },
-        'meldingTilNav': {
-            'navBoerTaTakISaken': false,
-            'navBoerTaTakISakenBegrunnelse': null
-        },
-        'innspillTilArbeidsgiver': 'kjør på',
-        'tilbakedatering': {
-            'dokumenterbarPasientkontakt': null,
-            'tilbakedatertBegrunnelse': null
-        },
-        'bekreftelse': {
-            'utstedelsesdato': null,
-            'sykmelder': null,
-            'sykmelderTlf': null
-        },
-        'mottakendeArbeidsgiver': {
-            'navn': 'Arbeidsgivernavn',
-            'virksomhetsnummer': '123456789',
-            'juridiskOrgnummer': '123123123'
-        },
-        'orgnummer': '2134324',
-        'sendtdato': '2020-06-23T16:29:01.277'
-    },
-    {
-        'id': 'bdf810a8-6d92-4bd5-b4be-47714f8ae44e',
-        'startLegemeldtFravaer': null,
-        'skalViseSkravertFelt': false,
-        'identdato': '2020-02-28',
-        'status': 'SENDT',
-        'naermesteLederStatus': 'NEI',
-        'innsendtArbeidsgivernavn': null,
-        'valgtArbeidssituasjon': 'ARBEIDSTAKER',
-        'sporsmal': {
-            'arbeidssituasjon': null,
-            'harForsikring': null,
-            'fravaersperioder': [],
-            'harAnnetFravaer': null
-        },
-        'pasient': {
-            'fnr': null,
-            'fornavn': null,
-            'mellomnavn': null,
-            'etternavn': null
-        },
-        'arbeidsgiver': null,
-        'stillingsprosent': null,
-        'diagnose': {
-            'hoveddiagnose': {
-                'diagnosekode': 'L87',
-                'diagnosesystem': 'Ukjent',
-                'diagnosetekst': 'Ukjent'
-            },
-            'bidiagnoser': null,
-            'fravaersgrunnLovfestet': null,
-            'fravaerBeskrivelse': null,
-            'svangerskap': null,
-            'yrkesskade': null,
-            'yrkesskadeDato': null
-        },
-        'mulighetForArbeid': {
-            'perioder': [
-                {
-                    'grad': 100,
-                    'reisetilskudd': false,
-                    'fom': '2020-01-01',
-                    'tom': '2020-02-09',
-                    'behandlingsdager': null
-                }
-            ],
-            'aktivitetIkkeMulig433': null,
-            'aktivitetIkkeMulig434': null,
-            'aarsakAktivitetIkkeMulig433': null,
-            'aarsakAktivitetIkkeMulig434': null
-        },
-        'friskmelding': {
-            'arbeidsfoerEtterPerioden': null,
-            'hensynPaaArbeidsplassen': null,
-            'antarReturSammeArbeidsgiver': false,
-            'antattDatoReturSammeArbeidsgiver': null,
-            'antarReturAnnenArbeidsgiver': false,
-            'tilbakemeldingReturArbeid': null,
-            'utenArbeidsgiverAntarTilbakeIArbeid': false,
-            'utenArbeidsgiverAntarTilbakeIArbeidDato': null,
-            'utenArbeidsgiverTilbakemelding': null
-        },
-        'utdypendeOpplysninger': {
-            'grupper': []
-        },
-        'arbeidsevne': {
-            'tilretteleggingArbeidsplass': null,
-            'tiltakNAV': null,
-            'tiltakAndre': null
-        },
-        'meldingTilNav': {
-            'navBoerTaTakISaken': false,
-            'navBoerTaTakISakenBegrunnelse': null
-        },
-        'innspillTilArbeidsgiver': 'kjør på',
-        'tilbakedatering': {
-            'dokumenterbarPasientkontakt': null,
-            'tilbakedatertBegrunnelse': null
-        },
-        'bekreftelse': {
-            'utstedelsesdato': null,
-            'sykmelder': null,
-            'sykmelderTlf': null
-        },
-        'mottakendeArbeidsgiver': {
-            'navn': 'Arbeidsgivernavn',
-            'virksomhetsnummer': '123456789',
-            'juridiskOrgnummer': '123123123'
-        },
-        'orgnummer': '2134324',
-        'sendtdato': '2020-06-23T17:09:05.586'
-    },
-    {
-        'id': '6d6250d5-edf0-4da8-8ea3-c2b46924999d',
-        'startLegemeldtFravaer': null,
-        'skalViseSkravertFelt': false,
-        'identdato': '2020-02-28',
-        'status': 'SENDT',
-        'naermesteLederStatus': 'NEI',
-        'innsendtArbeidsgivernavn': null,
-        'valgtArbeidssituasjon': 'ARBEIDSTAKER',
-        'sporsmal': {
-            'arbeidssituasjon': null,
-            'harForsikring': null,
-            'fravaersperioder': [],
-            'harAnnetFravaer': null
-        },
-        'pasient': {
-            'fnr': null,
-            'fornavn': null,
-            'mellomnavn': null,
-            'etternavn': null
-        },
-        'arbeidsgiver': null,
-        'stillingsprosent': null,
-        'diagnose': {
-            'hoveddiagnose': {
-                'diagnosekode': 'L87',
-                'diagnosesystem': 'Ukjent',
-                'diagnosetekst': 'Ukjent'
-            },
-            'bidiagnoser': null,
-            'fravaersgrunnLovfestet': null,
-            'fravaerBeskrivelse': null,
-            'svangerskap': null,
-            'yrkesskade': null,
-            'yrkesskadeDato': null
-        },
-        'mulighetForArbeid': {
-            'perioder': [
-                {
-                    'grad': 100,
-                    'reisetilskudd': false,
-                    'fom': '2020-02-17',
-                    'tom': '2020-02-29',
-                    'behandlingsdager': null
-                }
-            ],
-            'aktivitetIkkeMulig433': null,
-            'aktivitetIkkeMulig434': null,
-            'aarsakAktivitetIkkeMulig433': null,
-            'aarsakAktivitetIkkeMulig434': null
-        },
-        'friskmelding': {
-            'arbeidsfoerEtterPerioden': null,
-            'hensynPaaArbeidsplassen': null,
-            'antarReturSammeArbeidsgiver': false,
-            'antattDatoReturSammeArbeidsgiver': null,
-            'antarReturAnnenArbeidsgiver': false,
-            'tilbakemeldingReturArbeid': null,
-            'utenArbeidsgiverAntarTilbakeIArbeid': false,
-            'utenArbeidsgiverAntarTilbakeIArbeidDato': null,
-            'utenArbeidsgiverTilbakemelding': null
-        },
-        'utdypendeOpplysninger': {
-            'grupper': []
-        },
-        'arbeidsevne': {
-            'tilretteleggingArbeidsplass': null,
-            'tiltakNAV': null,
-            'tiltakAndre': null
-        },
-        'meldingTilNav': {
-            'navBoerTaTakISaken': false,
-            'navBoerTaTakISakenBegrunnelse': null
-        },
-        'innspillTilArbeidsgiver': 'kjør på',
-        'tilbakedatering': {
-            'dokumenterbarPasientkontakt': null,
-            'tilbakedatertBegrunnelse': null
-        },
-        'bekreftelse': {
-            'utstedelsesdato': null,
-            'sykmelder': null,
-            'sykmelderTlf': null
-        },
-        'mottakendeArbeidsgiver': {
-            'navn': 'Arbeidsgivernavn',
-            'virksomhetsnummer': '123456789',
-            'juridiskOrgnummer': '123123123'
-        },
-        'orgnummer': '2134324',
-        'sendtdato': '2020-06-23T17:44:52.855'
-    },
-    {
-        'id': '111111-edf0-4da8-8ea3-222222',
-        'startLegemeldtFravaer': null,
-        'skalViseSkravertFelt': false,
-        'identdato': '2020-02-30',
-        'status': 'SENDT',
-        'naermesteLederStatus': 'NEI',
-        'innsendtArbeidsgivernavn': null,
-        'valgtArbeidssituasjon': 'ARBEIDSTAKER',
-        'sporsmal': {
-            'arbeidssituasjon': null,
-            'harForsikring': null,
-            'fravaersperioder': [],
-            'harAnnetFravaer': null
-        },
-        'pasient': {
-            'fnr': null,
-            'fornavn': null,
-            'mellomnavn': null,
-            'etternavn': null
-        },
-        'arbeidsgiver': null,
-        'stillingsprosent': null,
-        'diagnose': {
-            'hoveddiagnose': {
-                'diagnosekode': 'L87',
-                'diagnosesystem': 'Ukjent',
-                'diagnosetekst': 'Ukjent'
-            },
-            'bidiagnoser': null,
-            'fravaersgrunnLovfestet': null,
-            'fravaerBeskrivelse': null,
-            'svangerskap': null,
-            'yrkesskade': null,
-            'yrkesskadeDato': null
-        },
-        'mulighetForArbeid': {
-            'perioder': [
-                {
-                    'grad': 100,
-                    'reisetilskudd': false,
-                    'fom': '2020-02-30',
-                    'tom': '2020-03-05',
-                    'behandlingsdager': null
-                }
-            ],
-            'aktivitetIkkeMulig433': null,
-            'aktivitetIkkeMulig434': null,
-            'aarsakAktivitetIkkeMulig433': null,
-            'aarsakAktivitetIkkeMulig434': null
-        },
-        'friskmelding': {
-            'arbeidsfoerEtterPerioden': null,
-            'hensynPaaArbeidsplassen': null,
-            'antarReturSammeArbeidsgiver': false,
-            'antattDatoReturSammeArbeidsgiver': null,
-            'antarReturAnnenArbeidsgiver': false,
-            'tilbakemeldingReturArbeid': null,
-            'utenArbeidsgiverAntarTilbakeIArbeid': false,
-            'utenArbeidsgiverAntarTilbakeIArbeidDato': null,
-            'utenArbeidsgiverTilbakemelding': null
-        },
-        'utdypendeOpplysninger': {
-            'grupper': []
-        },
-        'arbeidsevne': {
-            'tilretteleggingArbeidsplass': null,
-            'tiltakNAV': null,
-            'tiltakAndre': null
-        },
-        'meldingTilNav': {
-            'navBoerTaTakISaken': false,
-            'navBoerTaTakISakenBegrunnelse': null
-        },
-        'innspillTilArbeidsgiver': 'kjør på',
-        'tilbakedatering': {
-            'dokumenterbarPasientkontakt': null,
-            'tilbakedatertBegrunnelse': null
-        },
-        'bekreftelse': {
-            'utstedelsesdato': null,
-            'sykmelder': null,
-            'sykmelderTlf': null
-        },
-        'mottakendeArbeidsgiver': {
-            'navn': 'Arbeidsgivernavn',
-            'virksomhetsnummer': '123456789',
-            'juridiskOrgnummer': '123123123'
-        },
-        'orgnummer': '2134324',
-        'sendtdato': '2020-06-23T17:44:52.855'
-    },
+    arbeidsledigKvitteringSm,
+    selvstendingSm,
+    syk1,
+    syk2,
+    syk3,
+    syk4,
+    syk5,
+    syk7,
+    syk8,
 ]
