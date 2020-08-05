@@ -88,7 +88,7 @@ const Arbeidstaker = () => {
     }
 
     const medOppholdSjekkArbeidsgiverperiode = async(tidligereSoknader: Soknad[]) => {
-        const forrigeSoknad = tidligereSoknader.sort((a, b) => a.tom!.getTime() - b.tom!.getTime())[0]
+        const forrigeSoknad = tidligereSoknader.sort((a, b) => a.tom!.getTime() - b.tom!.getTime()).reverse()[0]
         const forste = await erForsteSoknadUtenforArbeidsgiverperiode(forrigeSoknad?.id)
         if (forste) {
             setKvitteringTekst('over16dager')
