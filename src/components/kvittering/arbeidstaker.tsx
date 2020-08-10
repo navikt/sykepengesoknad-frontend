@@ -6,6 +6,7 @@ import React, { useEffect, useState } from 'react'
 import { useAppStore } from '../../data/stores/app-store'
 import { RSMottakerResponse } from '../../types/rs-types/rest-response/rs-mottakerresponse'
 import { RSMottaker } from '../../types/rs-types/rs-mottaker'
+import { RSSoknadstatus } from '../../types/rs-types/rs-soknadstatus'
 import { RSSoknadstype } from '../../types/rs-types/rs-soknadstype'
 import { Soknad } from '../../types/types'
 import { dayjsToDate, sendtForMerEnn30DagerSiden } from '../../utils/dato-utils'
@@ -41,6 +42,7 @@ const Arbeidstaker = () => {
                 setKvitteringTekst('utenOpphold')
             } else {
                 const tidligereSoknader = soknader
+                    .filter(sok => sok.status !== RSSoknadstatus.UTGAATT)                                 // Vi sjekker ikke utgåtte søknader
                     .filter(sok => sok.soknadstype === RSSoknadstype.ARBEIDSTAKERE)                       // Gjelder arbeidstakersøknad
                     .filter(sok => sok.arbeidsgiver?.orgnummer === valgtSoknad?.arbeidsgiver?.orgnummer)  // Samme arbeidstaker
                     .filter(senereSok => senereSok.tom! < valgtSoknad!.fom!)                              // Gjelder søknader før valgt
@@ -48,8 +50,7 @@ const Arbeidstaker = () => {
                 if (tidligereSoknader.length > 0) {
                     if (harTidligereUtenOpphold(tidligereSoknader)) {
                         utenOppholdSjekkArbeidsgiverperiode(tidligereSoknader)
-                    }
-                    else {
+                    } else {
                         medOppholdSjekkArbeidsgiverperiode(tidligereSoknader)
                     }
                 } else {
