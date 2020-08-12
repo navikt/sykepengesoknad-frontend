@@ -7,6 +7,7 @@ import { Link, useParams } from 'react-router-dom'
 
 import Banner from '../../components/banner/banner'
 import Brodsmuler from '../../components/brodsmuler/brodsmuler'
+import { HotjarTrigger } from '../../components/hotjar-trigger'
 import Kvittering from '../../components/kvittering/kvittering'
 import Vis from '../../components/vis'
 import { useAppStore } from '../../data/stores/app-store'
@@ -54,7 +55,9 @@ const KvitteringSide = () => {
             <Banner />
             <div className="limit">
                 <Brodsmuler brodsmuler={brodsmuler} />
-                <Kvittering />
+                <HotjarTrigger soknadstype={valgtSoknad.soknadstype}>
+                    <Kvittering />
+                </HotjarTrigger>
 
                 <Vis hvis={erSiste}>
                     <Link to="/" className="gaa-videre">

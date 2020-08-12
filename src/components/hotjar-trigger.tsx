@@ -20,7 +20,7 @@ export const typeTilTriggerMapping = (soknadstype: RSSoknadstype) => {
         case RSSoknadstype.OPPHOLD_UTLAND:
             return 'SOKNAD_OPPHOLD_UTENFOR_NORGE'
         case RSSoknadstype.ARBEIDSTAKERE:
-            return 'SOKNAD_ARBEIDSTAKER_NY' || 'SOKNAD_ARBEIDSTAKER'            // TODO: Hvem brukes
+            return 'SOKNAD_ARBEIDSTAKER_NY'
         case RSSoknadstype.ARBEIDSLEDIG:
             return 'SOKNAD_ARBEIDSLEDIG'
         case RSSoknadstype.BEHANDLINGSDAGER:
@@ -34,7 +34,7 @@ export const HotjarTrigger = ({ soknadstype, children }: HotjarTriggerProps) => 
     useEffect(() => {
         const hotJarWindow = (window as unknown as HotjarWindow)
 
-        if (env.isProd || env.isDev || env.isMockBackend) {     // TODO: Kun prod
+        if (env.isProd || env.isDev || env.isMockBackend || env.isOpplaering) {     // TODO: Kun prod
             setTimeout(() => {
                 if (typeof hotJarWindow.hj !== 'function') {
                     warn('Hotjar ble ikke lastet inn...')
