@@ -1,10 +1,11 @@
 import { useEffect } from 'react'
 
-// import { log } from '../utils/logger';
 import { RSSoknadstype } from '../types/rs-types/rs-soknadstype'
+import env from '../utils/environment'
+import { warn } from '../utils/logger'
 
 interface HotjarTriggerProps {
-    trigger: RSSoknadstype;
+    soknadstype: RSSoknadstype;
     children: any;
 }
 
@@ -12,15 +13,37 @@ interface HotjarWindow extends Window {
     hj: (name: string, value: string) => void;
 }
 
-export const HotjarTrigger = ({ trigger, children }: HotjarTriggerProps) => {
+export const typeTilTriggerMapping = (soknadstype: RSSoknadstype) => {
+    switch (soknadstype) {
+        case RSSoknadstype.SELVSTENDIGE_OG_FRILANSERE:
+            return 'SOKNAD_FRILANSER_NAERINGSDRIVENDE'
+        case RSSoknadstype.OPPHOLD_UTLAND:
+            return 'SOKNAD_OPPHOLD_UTENFOR_NORGE'
+        case RSSoknadstype.ARBEIDSTAKERE:
+            return 'SOKNAD_ARBEIDSTAKER_NY' || 'SOKNAD_ARBEIDSTAKER'            // TODO: Hvem brukes
+        case RSSoknadstype.ARBEIDSLEDIG:
+            return 'SOKNAD_ARBEIDSLEDIG'
+        case RSSoknadstype.BEHANDLINGSDAGER:
+            return 'SOKNAD_BEHANDLINGSDAGER'
+        case RSSoknadstype.ANNET_ARBEIDSFORHOLD:
+            return 'SOKNAD_ANNET_ARBEIDSFORHOLD'
+    }
+}
+
+export const HotjarTrigger = ({ soknadstype, children }: HotjarTriggerProps) => {
     useEffect(() => {
         const hotJarWindow = (window as unknown as HotjarWindow)
-        if (typeof hotJarWindow.hj === 'function'
-            && window.location.href.indexOf('herokuapp') === -1) {
-            hotJarWindow.hj('trigger', trigger)
+
+        if (env.isProd || env.isDev || env.isMockBackend) {     // TODO: Kun prod
+            setTimeout(() => {
+                if (typeof hotJarWindow.hj !== 'function') {
+                    warn('Hotjar ble ikke lastet inn...')
+                } else {
+                    hotJarWindow.hj('trigger', typeTilTriggerMapping(soknadstype))
+                }
+            }, 200)
         }
-        // log(`Trigger hotjar: ${trigger}`); TODO: Må denne logges?
-    }, [ trigger, children ])
+    })
 
     return children
 }

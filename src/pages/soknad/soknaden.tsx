@@ -64,7 +64,7 @@ const Soknaden = () => {
             <Banner />
             <div className="limit">
                 <Brodsmuler brodsmuler={brodsmuler} />
-                <HotjarTrigger trigger={valgtSoknad.soknadstype}>
+                <HotjarTrigger soknadstype={valgtSoknad.soknadstype}>
                     <Fordeling />
                 </HotjarTrigger>
             </div>
