@@ -34,7 +34,7 @@ export const HotjarTrigger = ({ soknadstype, children }: HotjarTriggerProps) => 
     useEffect(() => {
         const hotJarWindow = (window as unknown as HotjarWindow)
 
-        if (env.isProd || env.isDev || env.isMockBackend || env.isOpplaering) {     // TODO: Kun prod
+        if (env.isProd) {
             setTimeout(() => {
                 if (typeof hotJarWindow.hj !== 'function') {
                     warn('Hotjar ble ikke lastet inn...')

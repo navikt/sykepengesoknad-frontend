@@ -107,7 +107,7 @@ jobs:
           RESOURCE: nais-q1.yaml
 
   deploy-to-labs-gcp:
-#    if: github.ref == 'refs/heads/master'      // TODO: Legg tilbake før merge
+    if: github.ref == 'refs/heads/master'
     name: Deploy to labs-gcp (Demo)
     needs: [build-and-publish, integrasjonstest]
     runs-on: ubuntu-latest
