@@ -65,7 +65,7 @@
         "react-modal": "^3.11.2",
         "react-router-dom": "^5.2.0",
         "react-router-hash-link": "^1.2.2",
-        "react-scripts": "3.4.1",
+        "react-scripts": "^3.4.2",
         "react-transition-group": "^4.4.1",
         "smoothscroll-polyfill": "^0.4.4",
         "use-force-update": "^1.0.7",
@@ -73,7 +73,7 @@
     },
     "devDependencies": {
         "@bahmutov/add-typescript-to-cypress": "^2.1.2",
-        "@testing-library/jest-dom": "^5.11.2",
+        "@testing-library/jest-dom": "^5.11.3",
         "@testing-library/react": "^10.4.8",
         "@testing-library/react-hooks": "^3.4.1",
         "@testing-library/user-event": "^11.4.2",
@@ -90,10 +90,10 @@
         "@types/react-router-hash-link": "^1.2.1",
         "@types/react-transition-group": "^4.4.0",
         "@types/testing-library__jest-dom": "^5.9.2",
-        "@types/uuid": "^8.0.1",
+        "@types/uuid": "^8.3.0",
         "@typescript-eslint/eslint-plugin": "^2.34.0",
         "@typescript-eslint/parser": "^2.34.0",
-        "cypress": "^4.11.0",
+        "cypress": "^4.12.1",
         "eslint": "^6.6.0",
         "eslint-config-react": "^1.1.7",
         "eslint-plugin-cypress": "^2.11.1",
@@ -116,7 +116,8 @@
         "cy:open": "cypress open",
         "e2e": "MOCK_BACKEND=true start-test 8080 cy:open",
         "lint": "eslint --ext=ts,tsx src cypress",
-        "lint:fix": "eslint --ext=ts,tsx src cypress --fix"
+        "lint:fix": "eslint --ext=ts,tsx src cypress --fix",
+        "pre-install": "npx npm-force-resolutions"
     },
     "eslintConfig": {
         "extends": "react-app"
@@ -126,5 +127,8 @@
         "not dead",
         "not ie < 11",
         "not op_mini all"
-    ]
+    ],
+    "resolutions": {
+        "serialize-javascript": "3.1.0"
+    }
 }
