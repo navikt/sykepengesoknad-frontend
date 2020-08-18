@@ -16,7 +16,8 @@ import {
     beregnUndertekst,
     hentIkon,
     hentIkonHover,
-    hentTeaserStatustekst, leggTilSoknadstypeForDemoside,
+    hentTeaserStatustekst,
+    leggTilSoknadstypeForDemoside,
     SykepengesoknadTeaserProps
 } from './teaser-util'
 
