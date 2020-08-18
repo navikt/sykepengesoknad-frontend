@@ -2,6 +2,7 @@ import dayjs from 'dayjs'
 import { Normaltekst } from 'nav-frontend-typografi'
 import React from 'react'
 
+import { arbeidstakerGradert } from '../../../data/mock/data/soknader-opplaering'
 import SoknaderHoverIkon from '../../../pages/soknader/soknader-hover.svg'
 import SoknaderIkon from '../../../pages/soknader/soknader.svg'
 import { RSSoknadstatus } from '../../../types/rs-types/rs-soknadstatus'
@@ -100,13 +101,14 @@ export const beregnUndertekst = (soknad: Soknad) => {
 
 export const leggTilSoknadstypeForDemoside = (soknad: Soknad) => {
     if (env.isOpplaering && soknad.soknadstype !== RSSoknadstype.OPPHOLD_UTLAND) {
+        const forste = soknad.id === arbeidstakerGradert.id ? 'førstegangssøknad' : ''
         const arbeidssituasjon = soknad.arbeidssituasjon?.toLowerCase()
         const soknadstype = soknad.soknadstype === RSSoknadstype.BEHANDLINGSDAGER
             ? soknad.soknadstype.toLowerCase()
             : ''
         const grad = soknad.soknadPerioder.map(periode => periode.grad + '%')
         return <Normaltekst className="inngangspanel__undertekst__demo">
-            {`${arbeidssituasjon} ${soknadstype}, ${grad} sykmeldt`}
+            {`${arbeidssituasjon} ${forste} ${soknadstype}, ${grad} sykmeldt`}
         </Normaltekst>
     }
     return ''
