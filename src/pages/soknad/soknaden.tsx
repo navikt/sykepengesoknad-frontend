@@ -83,7 +83,7 @@ const Fordeling = () => {
         return null
     }
     if (isNaN(stegNo)) {
-        history.replace(getUrlTilSoknad(valgtSoknad, '1'))
+        history.replace(getUrlTilSoknad(valgtSoknad))
         return null
     }
 

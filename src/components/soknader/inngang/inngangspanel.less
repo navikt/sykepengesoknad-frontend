@@ -1,21 +1,34 @@
 @import '../../../../node_modules/nav-frontend-core/less/_variabler';
+@import '../../../../src/basic';
 
 .inngangspanelerHeader {
-    padding: 1rem 2rem;
-    background-color: @white;
+    padding: 1rem;
+    display: flex;
+
+    .inngangspanel__sortering {
+        display: inline-block;
+        position: absolute;
+        right: 1rem;
+
+        ~ .typo-undertittel {
+            padding-top: 3rem;
+        }
+    }
 }
 
 .inngangspanel {
     display: flex;
+    align-items: center;
     position: relative;
+    border: 1px solid @navMorkGra;
+    border-radius: 4px;
     background-color: @white;
-    margin-top: 1px;
-    padding: 2rem 3rem 2rem 0;
+    margin-bottom: 1rem;
+    padding: 2rem 2rem 2rem 1rem;
     color: @navMorkGra;
     text-decoration: none;
 
     &.inngangspanel__btn {
-        border: 0;
         width: 100%;
         text-align: left;
     }
@@ -23,7 +36,7 @@
     .chevronboks {
         position: absolute;
         right: 1rem;
-        top: 2.4rem;
+        top: 50%;
         color: @grayIcon;
     }
 
@@ -33,7 +46,6 @@
         justify-content: flex-start;
         align-items: center;
         flex-direction: column;
-        margin-left: 18px;
     }
 
     .inngangspanel__ikon--hover {
@@ -59,15 +71,22 @@
     }
 
     .inngangspanel__status {
-        position: relative;
-    }
+        display: inline-block;
+        border: 1px solid;
+        border-radius: 4px;
+        padding: .2rem 1rem;
 
-    &.inngangspanel--ekstern {
-        border: 5px solid @navDypBlaLighten40;
-        background-position: 97% center;
-        padding-top: 1.5rem;
-        padding-bottom: 1.5rem;
-        margin-bottom: 2.5rem;
+        &.sendt {
+            background-color: @navGronnLighten80
+        }
+
+        &.utgaatt {
+            background-color: @navBlaLighten80
+        }
+
+        &.avbrutt {
+            background-color: @navRodLighten80
+        }
     }
 
     &.inngangspanel--tomListe {
@@ -76,9 +95,16 @@
     }
 
     .inngangspanel__undertekst {
-        margin-top: 0.7rem;
+        margin-top: 0.5rem;
     }
 
+}
+
+.inngangspanel--ny {
+    .inngangspanel {
+        border-color: @navOransje;
+        background-color: mix(@navOransje, @white, 5%);
+    }
 }
 
 .inngangspanel--inaktivt {
@@ -101,12 +127,9 @@
     }
 }
 
-@media (min-width: @screen-sm) {
-    .inngangspanel {
-        .inngangspanel__status {
-            position: absolute;
-            top: 1.8rem;
-            right: 3rem;
-        }
+@media (min-width: @skjermMedium) {
+    .inngangspanel__status {
+        position: absolute;
+        right: 3rem;
     }
 }

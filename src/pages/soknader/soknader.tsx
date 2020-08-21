@@ -56,8 +56,8 @@ const Soknader = () => {
                 <Teasere
                     className={'soknader_teasere'}
                     soknader={nyeSoknader}
-                    tittel={tekst('soknader.venter-paa-behandling.tittel')}
-                    tomListeTekst={tekst('soknader.venter-paa-behandling.ingen-soknader')}
+                    tittel={tekst('soknader.nye.tittel')}
+                    tomListeTekst={tekst('soknader.nye.ingen-soknader')}
                     id="soknader-list-til-behandling"
                 />
 
@@ -78,6 +78,7 @@ const Soknader = () => {
                         soknader={tidligereSoknader}
                         tittel={tekst('soknader.sendt.tittel')}
                         id="soknader-sendt"
+                        kanSorteres={true}
                     />
                 </Vis>
             </div>

@@ -3,12 +3,11 @@
     "version": "1.0.0",
     "description": "Digitalisering av sykepengesoknad",
     "private": true,
-    "peerDependencies": {
-        "@navikt/fnrvalidator": "^1.1.2"
-    },
+    "peerDependencies": {},
     "dependencies": {
         "@craco/craco": "^5.6.4",
         "@types/smoothscroll-polyfill": "^0.3.1",
+        "@navikt/fnrvalidator": "^1.1.2",
         "amplitude-js": "^6.2.0",
         "classnames": "^2.2.6",
         "constate": "^2.0.0",

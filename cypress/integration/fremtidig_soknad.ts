@@ -14,9 +14,6 @@ describe('Tester fremtidig søknad', () => {
     it('Fremtidig søknad har forventa tekst', function() {
         cy.get(`#soknader-planlagt article[aria-labelledby*=${fremtidigSoknad.id}]`)
             .should('include.text', 'Gjelder perioden 23. mai – 7. juni 2020')
-            .should('include.text', 'Kan fylles ut fra 08.06.2020')
-            .should('include.text', 'Planlagt')
-
     })
 
     it('Ved klikk så åpnes popup', function() {

@@ -1,4 +1,3 @@
-import dayjs from 'dayjs'
 import { HoyreChevron } from 'nav-frontend-chevron'
 import { Normaltekst } from 'nav-frontend-typografi'
 import React from 'react'
@@ -6,11 +5,12 @@ import React from 'react'
 import { RSSoknadstype } from '../../../types/rs-types/rs-soknadstype'
 import { tilLesbarPeriodeMedArstall } from '../../../utils/dato-utils'
 import { getLedetekst, tekst } from '../../../utils/tekster'
+import { getUrlTilSoknad } from '../../../utils/url-utils'
 import { useAmplitudeInstance } from '../../amplitude/amplitude'
 import Vis from '../../vis'
-import { InngangsHeader, InngangsIkon, Inngangspanel } from '../inngang/inngangspanel'
+import { InngangsHeader, InngangsIkon, Inngangspanel, InngangsStatus } from '../inngang/inngangspanel'
 import {
-    beregnUndertekst,
+    finnArbeidsgivernavn,
     hentIkon,
     hentIkonHover,
     hentTeaserStatustekst,
@@ -19,40 +19,47 @@ import {
 
 const TidligereSoknaderTeaser = ({ soknad }: SykepengesoknadTeaserProps) => {
     const { logEvent } = useAmplitudeInstance()
-    const undertekst = beregnUndertekst(soknad)
 
     return (
         <article aria-labelledby={`soknader-header-${soknad.id}`} onClick={() => {
             logEvent('Velger søknad', { soknadstype: soknad.soknadstype })
         }}>
-            <Inngangspanel to={`/kvittering/${soknad.id}`}>
+            <Inngangspanel to={getUrlTilSoknad(soknad)}>
                 <InngangsIkon
-                    ikon={hentIkon(soknad.soknadstype)}
+                    ikon={hentIkon(soknad)}
                     ikonHover={hentIkonHover(soknad.soknadstype)}
                 />
                 <HoyreChevron />
                 <div className="inngangspanel__innhold">
                     <InngangsHeader
-                        meta={ getLedetekst(tekst('soknad.teaser.dato'), {
-                            '%DATO%': dayjs(soknad.opprettetDato).format('DD.MM.YYYY'),
-                        })}
                         tittel={soknad.soknadstype === RSSoknadstype.OPPHOLD_UTLAND
                             ? tekst('soknad.utland.teaser.tittel')
                             : tekst('soknad.teaser.tittel')}
-                        status={hentTeaserStatustekst(soknad)}
                     />
+                    <InngangsStatus status={soknad.status} tekst={hentTeaserStatustekst(soknad)} />
                     <Vis hvis={soknad.soknadstype !== RSSoknadstype.OPPHOLD_UTLAND}>
-                        <Normaltekst className="inngangspanel__tekst">
-                            {getLedetekst(tekst('soknad.teaser.tekst'), {
+                        <Normaltekst className="inngangspanel__periode">
+                            {getLedetekst(tekst('soknad.teaser.periode'), {
                                 '%PERIODE%': tilLesbarPeriodeMedArstall(soknad.fom, soknad.tom),
                             })}
                         </Normaltekst>
                     </Vis>
-                    <Vis hvis={undertekst !== undefined}>
-                        <Normaltekst className="inngangspanel__undertekst">
-                            {undertekst}
-                        </Normaltekst>
-                    </Vis>
+                    <Normaltekst className="inngangspanel__undertekst">
+                        {soknad.soknadPerioder.map(p => {
+                            if (soknad.soknadstype === RSSoknadstype.BEHANDLINGSDAGER) {
+                                return ''
+                            }
+                            if (soknad.soknadstype === RSSoknadstype.ARBEIDSTAKERE) {
+                                return getLedetekst(tekst('soknad.teaser.sykmeldt-fra'), {
+                                    '%GRAD%': p.grad,
+                                    '%ARBEIDSGIVER%': finnArbeidsgivernavn(soknad),
+                                })
+                            }
+                            return getLedetekst(tekst('soknad.teaser.sykmeldt'), {
+                                '%GRAD%': p.grad,
+                            })
+                        })}
+                    </Normaltekst>
                 </div>
             </Inngangspanel>
         </article>

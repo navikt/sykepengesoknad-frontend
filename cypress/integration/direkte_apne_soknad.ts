@@ -17,7 +17,7 @@ describe('Tester å åpne søknaden direkte fra sykefravaer', () => {
 
     it('Hvis vi åpner en sendt søknad utafor kvittering så sendes vi til oversikten', function() {
         cy.visit(`http://localhost:8080/soknader/${sendtArbeidsledig.id}`)
-        cy.url().should('equal', 'http://localhost:8080/')
+        cy.url().should('equal', `http://localhost:8080/kvittering/${sendtArbeidsledig.id}`)
         cy.visit(`http://localhost:8080/soknader/${sendtArbeidsledig.id}/3`)
         cy.url().should('equal', 'http://localhost:8080/')
     })

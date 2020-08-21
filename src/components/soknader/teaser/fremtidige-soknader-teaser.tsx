@@ -16,7 +16,6 @@ import {
     finnArbeidsgivernavn,
     hentIkon,
     hentIkonHover,
-    hentTeaserStatustekst,
     SykepengesoknadTeaserProps
 } from './teaser-util'
 
@@ -32,28 +31,37 @@ const FremtidigeSoknaderTeaser = ({ soknad }: SykepengesoknadTeaserProps) => {
             <button className="inngangspanel inngangspanel__btn pointer"
                 onClick={() => setAapen(true)}>
                 <InngangsIkon
-                    ikon={hentIkon(soknad.soknadstype)}
+                    ikon={hentIkon(soknad)}
                     ikonHover={hentIkonHover(soknad.soknadstype)}
                 />
                 <div className="inngangspanel--inaktivt">
                     <InngangsHeader
-                        meta={getLedetekst(tekst('soknad.teaser.dato.fremtidig'), {
-                            '%DATO%': dayjs(soknad.tom).add(1, 'day').format('DD.MM.YYYY'),
-                        })}
                         tittel={soknad.soknadstype === RSSoknadstype.OPPHOLD_UTLAND
                             ? tekst('soknad.utland.teaser.tittel')
                             : tekst('soknad.teaser.tittel')}
-                        status={hentTeaserStatustekst(soknad)}
                     />
                     <Vis hvis={soknad.soknadstype !== RSSoknadstype.OPPHOLD_UTLAND}>
-                        <Normaltekst className="inngangspanel__tekst">
-                            {getLedetekst(tekst('soknad.teaser.tekst'), {
+                        <Normaltekst className="inngangspanel__periode">
+                            {getLedetekst(tekst('soknad.teaser.periode'), {
                                 '%PERIODE%': tilLesbarPeriodeMedArstall(soknad.fom, soknad.tom),
                             })}
                         </Normaltekst>
                     </Vis>
                     <Normaltekst className="inngangspanel__undertekst">
-                        {finnArbeidsgivernavn(soknad)}
+                        {soknad.soknadPerioder.map(p => {
+                            if (soknad.soknadstype === RSSoknadstype.BEHANDLINGSDAGER) {
+                                return ''
+                            }
+                            if (soknad.soknadstype === RSSoknadstype.ARBEIDSTAKERE) {
+                                return getLedetekst(tekst('soknad.teaser.sykmeldt-fra'), {
+                                    '%GRAD%': p.grad,
+                                    '%ARBEIDSGIVER%': finnArbeidsgivernavn(soknad),
+                                })
+                            }
+                            return getLedetekst(tekst('soknad.teaser.sykmeldt'), {
+                                '%GRAD%': p.grad,
+                            })
+                        })}
                     </Normaltekst>
                 </div>
             </button>

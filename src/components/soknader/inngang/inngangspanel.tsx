@@ -4,6 +4,7 @@ import { Normaltekst, Systemtittel } from 'nav-frontend-typografi'
 import React from 'react'
 import { Link } from 'react-router-dom'
 
+import { RSSoknadstatus } from '../../../types/rs-types/rs-soknadstatus'
 import Vis from '../../vis'
 
 interface InngangsIkonProps {
@@ -26,12 +27,12 @@ export const InngangsIkon = ({ ikon, ikonHover }: InngangsIkonProps) => {
     )
 }
 
-interface InngangsProps {
+interface InngangspanelProps {
     to: string;
     children: React.ReactNode;
 }
 
-export const Inngangspanel = ({ to, children, }: InngangsProps) => {
+export const Inngangspanel = ({ to, children, }: InngangspanelProps) => {
     return (
         <Link to={to} className="inngangspanel">
             {children}
@@ -39,21 +40,27 @@ export const Inngangspanel = ({ to, children, }: InngangsProps) => {
     )
 }
 
-interface InngangsHeaderProps {
-    meta: string;
-    tittel: string;
-    status: string;
+interface InngangsStatusProps {
+    status: RSSoknadstatus;
+    tekst: string;
 }
 
-export const InngangsHeader = ({ meta, tittel, status }: InngangsHeaderProps) => {
+export const InngangsStatus = ({ status, tekst }: InngangsStatusProps) => {
+    const type = status.toLowerCase()
+    return (
+        <Normaltekst className={`inngangspanel__status ${type}`}>
+            {tekst}
+        </Normaltekst>
+    )
+}
+
+interface InngangsHeaderProps {
+    tittel: string;
+}
+
+export const InngangsHeader = ({ tittel }: InngangsHeaderProps) => {
     return (
         <header className="inngangspanel__header">
-            <Normaltekst className="inngangspanel__meta">
-                {meta}
-            </Normaltekst>
-            <Vis hvis={status !== null}>
-                <Normaltekst className="inngangspanel__status">{status}</Normaltekst>
-            </Vis>
             <Systemtittel tag="h3" className="inngangspanel__tittel">
                 {tittel}
             </Systemtittel>
