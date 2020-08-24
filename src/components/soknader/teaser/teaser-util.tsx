@@ -6,6 +6,7 @@ import { arbeidstakerGradert } from '../../../data/mock/data/soknader-opplaering
 import { RSSoknadstatus } from '../../../types/rs-types/rs-soknadstatus'
 import { RSSoknadstype } from '../../../types/rs-types/rs-soknadstype'
 import { Soknad } from '../../../types/types'
+import { tilLesbarDatoMedArstall } from '../../../utils/dato-utils'
 import env from '../../../utils/environment'
 import { getRiktigDato, getSendtTilSuffix } from '../../../utils/soknad-utils'
 import { getLedetekst, tekst } from '../../../utils/tekster'
@@ -159,10 +160,14 @@ export const leggTilSoknadstypeForDemoside = (soknad: Soknad) => {
 }
 
 export const hentTeaserStatustekst = (soknad: Soknad) => {
-    if ( soknad.status === RSSoknadstatus.FREMTIDIG ||
-        soknad.status === RSSoknadstatus.AVBRUTT ||
+    if (soknad.status === RSSoknadstatus.AVBRUTT ||
         soknad.status === RSSoknadstatus.UTGAATT) {
         return tekst(`soknad.teaser.status.${soknad.status}`)
+    }
+    if (soknad.status === RSSoknadstatus.FREMTIDIG) {
+        return getLedetekst(tekst(`soknad.teaser.status.${soknad.status}`), {
+            '%DATO%': tilLesbarDatoMedArstall(dayjs(soknad.tom).add(1, 'day'))
+        })
     }
     if (soknad.status === RSSoknadstatus.SENDT) {
         if (soknad.sendtTilArbeidsgiverDato) {

@@ -11,10 +11,10 @@ import { tilLesbarDatoMedArstall, tilLesbarPeriodeMedArstall } from '../../../ut
 import { getLedetekst, tekst } from '../../../utils/tekster'
 import { useAmplitudeInstance } from '../../amplitude/amplitude'
 import Vis from '../../vis'
-import { InngangsHeader, InngangsIkon } from '../inngang/inngangspanel'
+import { InngangsHeader, InngangsIkon, InngangsStatus } from '../inngang/inngangspanel'
 import {
     hentIkon,
-    hentIkonHover,
+    hentIkonHover, hentTeaserStatustekst,
     periodeListevisning,
     SykepengesoknadTeaserProps
 } from './teaser-util'
@@ -40,6 +40,7 @@ const FremtidigeSoknaderTeaser = ({ soknad }: SykepengesoknadTeaserProps) => {
                             ? tekst('soknad.utland.teaser.tittel')
                             : tekst('soknad.teaser.tittel')}
                     />
+                    <InngangsStatus status={soknad.status} tekst={hentTeaserStatustekst(soknad)} />
                     <Vis hvis={soknad.soknadstype !== RSSoknadstype.OPPHOLD_UTLAND}>
                         <Normaltekst className="inngangspanel__periode">
                             {getLedetekst(tekst('soknad.teaser.periode'), {

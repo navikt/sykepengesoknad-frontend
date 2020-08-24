@@ -1,7 +1,7 @@
 const TeaserTekster = {
     'nb': {
         'soknad.teaser.status.AVBRUTT': 'Avbrutt av deg',
-        'soknad.teaser.status.FREMTIDIG': 'Planlagt',
+        'soknad.teaser.status.FREMTIDIG': 'Aktiveres %DATO%',
         'soknad.teaser.status.SENDT.til-arbeidsgiver-og-nav': 'Sendt til arbeidsgiver og NAV',
         'soknad.teaser.status.SENDT.til-arbeidsgiver': 'Sendt til arbeidsgiver',
         'soknad.teaser.status.SENDT.til-nav': 'Sendt til NAV',
