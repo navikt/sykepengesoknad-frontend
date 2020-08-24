@@ -4,7 +4,8 @@ import {
     arbeidstaker50Sm,
     arbeidstaker100Sm,
     arbeidstakerBehandlingsdagerSm,
-    frilanserSm } from './sykmeldinger'
+    frilanserSm
+} from './sykmeldinger'
 
 export const behandlingsdager: RSSoknad = {
     'id': 'bcb032ac-b6dd-4ae7-8e73-9e64f1b35182',
@@ -2514,11 +2515,41 @@ export const oppholdUtland: RSSoknad = {
     } ],
     'egenmeldtSykmelding': null
 }
+export const fremtidigSoknad: RSSoknad = {
+    'id': '5b74f271-5b94-455a-b79f-428f593f2b99',
+    'sykmeldingId': arbeidstaker100Sm.id,
+    'soknadstype': 'ARBEIDSTAKERE',
+    'status': 'FREMTIDIG',
+    'fom': '3020-05-23',
+    'tom': '3020-06-07',
+    'opprettetDato': '2020-06-08',
+    'sendtTilNAVDato': null,
+    'sendtTilArbeidsgiverDato': null,
+    'avbruttDato': null,
+    'startSykeforlop': '3020-05-23',
+    'sykmeldingUtskrevet': '2020-05-23',
+    'arbeidsgiver': {
+        'navn': 'POSTEN NORGE AS, BÆRUM',
+        'orgnummer': '974654458'
+    },
+    'korrigerer': null,
+    'korrigertAv': null,
+    'arbeidssituasjon': 'ARBEIDSTAKER',
+    'soknadPerioder': [ {
+        'fom': '3020-05-23',
+        'tom': '3020-06-07',
+        'grad': 100,
+        'sykmeldingstype': 'AKTIVITET_IKKE_MULIG'
+    } ],
+    'sporsmal': [],
+    'egenmeldtSykmelding': false
+}
 export const soknaderOpplaering = [
     behandlingsdager,
     arbeidstaker,
     arbeidstakerGradert,
     arbeidsledig,
     frilanser,
-    oppholdUtland
+    oppholdUtland,
+    fremtidigSoknad,
 ] as RSSoknad[]

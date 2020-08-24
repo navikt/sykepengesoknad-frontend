@@ -16,32 +16,6 @@ import {
     syk8
 } from './sykmeldinger'
 
-export const fremtidigSoknad: RSSoknad = {
-    'id': '5b74f271-5b94-455a-b79f-428f593f2b99',
-    'sykmeldingId': arbeidstaker100Sm.id,
-    'soknadstype': 'ARBEIDSTAKERE',
-    'status': 'FREMTIDIG',
-    'fom': '2020-05-23',
-    'tom': '2020-06-07',
-    'opprettetDato': '2020-06-08',
-    'sendtTilNAVDato': null,
-    'sendtTilArbeidsgiverDato': null,
-    'avbruttDato': null,
-    'startSykeforlop': '2020-05-23',
-    'sykmeldingUtskrevet': '2020-05-23',
-    'arbeidsgiver': { 'navn': '995816598 sitt orgnavn :)', 'orgnummer': '995816598' },
-    'korrigerer': null,
-    'korrigertAv': null,
-    'arbeidssituasjon': 'ARBEIDSTAKER',
-    'soknadPerioder': [ {
-        'fom': '2020-05-23',
-        'tom': '2020-06-07',
-        'grad': 100,
-        'sykmeldingstype': 'AKTIVITET_IKKE_MULIG'
-    } ],
-    'sporsmal': [],
-    'egenmeldtSykmelding': false
-}
 export const utgattSoknad: RSSoknad = {
     'id': '5b74f271-5b94-455a-b79f-428f593f2b90',
     'sykmeldingId': arbeidstaker100Sm.id,
@@ -4314,7 +4288,6 @@ export const soknaderIntegration = [
     arbeidstakersoknadMedUtenlandsoppholdSoktSykepenger,
     sendtArbeidsledig,
     avbruttSoknad,
-    fremtidigSoknad,
     veldigLangSoknad,
     arbeidsledigKvittering,
     sendtArbeidsledigKvittering,

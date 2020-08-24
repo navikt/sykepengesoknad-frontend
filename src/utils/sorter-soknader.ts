@@ -36,9 +36,8 @@ const senesteSendtDato = (soknad: Soknad) => {
     return (arb > nav) ? arb : nav
 }
 
-// TODO: Sjekk om denne faktisk fungerer
 export const sorterEtterSendt = (soknad1: Soknad, soknad2: Soknad) => {
-    if (soknad1.status === RSSoknadstatus.SENDT) {
+    if (soknad1.status === RSSoknadstatus.SENDT || soknad2.status === RSSoknadstatus.SENDT) {
         return senesteSendtDato(soknad2) - senesteSendtDato(soknad1)
     }
     return sorterEtterPerioder(soknad1, soknad2)
