@@ -13,9 +13,9 @@ import { useAmplitudeInstance } from '../../amplitude/amplitude'
 import Vis from '../../vis'
 import { InngangsHeader, InngangsIkon } from '../inngang/inngangspanel'
 import {
-    finnArbeidsgivernavn,
     hentIkon,
     hentIkonHover,
+    periodeListevisning,
     SykepengesoknadTeaserProps
 } from './teaser-util'
 
@@ -47,22 +47,7 @@ const FremtidigeSoknaderTeaser = ({ soknad }: SykepengesoknadTeaserProps) => {
                             })}
                         </Normaltekst>
                     </Vis>
-                    <Normaltekst className="inngangspanel__undertekst">
-                        {soknad.soknadPerioder.map(p => {
-                            if (soknad.soknadstype === RSSoknadstype.BEHANDLINGSDAGER) {
-                                return ''
-                            }
-                            if (soknad.soknadstype === RSSoknadstype.ARBEIDSTAKERE) {
-                                return getLedetekst(tekst('soknad.teaser.sykmeldt-fra'), {
-                                    '%GRAD%': p.grad,
-                                    '%ARBEIDSGIVER%': finnArbeidsgivernavn(soknad),
-                                })
-                            }
-                            return getLedetekst(tekst('soknad.teaser.sykmeldt'), {
-                                '%GRAD%': p.grad,
-                            })
-                        })}
-                    </Normaltekst>
+                    {periodeListevisning(soknad)}
                 </div>
             </button>
             <ModalWrapper className="modal__teaser_popup" onRequestClose={() => setAapen(false)}

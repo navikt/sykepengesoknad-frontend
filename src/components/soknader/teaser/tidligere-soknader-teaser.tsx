@@ -10,10 +10,10 @@ import { useAmplitudeInstance } from '../../amplitude/amplitude'
 import Vis from '../../vis'
 import { InngangsHeader, InngangsIkon, Inngangspanel, InngangsStatus } from '../inngang/inngangspanel'
 import {
-    finnArbeidsgivernavn,
     hentIkon,
     hentIkonHover,
     hentTeaserStatustekst,
+    periodeListevisning,
     SykepengesoknadTeaserProps
 } from './teaser-util'
 
@@ -44,22 +44,7 @@ const TidligereSoknaderTeaser = ({ soknad }: SykepengesoknadTeaserProps) => {
                             })}
                         </Normaltekst>
                     </Vis>
-                    <Normaltekst className="inngangspanel__undertekst">
-                        {soknad.soknadPerioder.map(p => {
-                            if (soknad.soknadstype === RSSoknadstype.BEHANDLINGSDAGER) {
-                                return ''
-                            }
-                            if (soknad.soknadstype === RSSoknadstype.ARBEIDSTAKERE) {
-                                return getLedetekst(tekst('soknad.teaser.sykmeldt-fra'), {
-                                    '%GRAD%': p.grad,
-                                    '%ARBEIDSGIVER%': finnArbeidsgivernavn(soknad),
-                                })
-                            }
-                            return getLedetekst(tekst('soknad.teaser.sykmeldt'), {
-                                '%GRAD%': p.grad,
-                            })
-                        })}
-                    </Normaltekst>
+                    {periodeListevisning(soknad)}
                 </div>
             </Inngangspanel>
         </article>

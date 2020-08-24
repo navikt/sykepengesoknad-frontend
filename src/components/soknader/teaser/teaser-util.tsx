@@ -171,9 +171,8 @@ export const periodeListevisning = (soknad: Soknad) => {
         })
     })
 
-    // TODO: Perioder har for mye margin
     return (perioder.length === 0) ? '' :
-        <ul className={'inngangspanel__undertekst'}>
+        <ul className={'inngangspanel__periode__undertekst'}>
             {perioder.map((p, i) => <li key={i}> {p} </li>)}
         </ul>
 }
