@@ -32,7 +32,7 @@ const FremtidigeSoknaderTeaser = ({ soknad }: SykepengesoknadTeaserProps) => {
                 onClick={() => setAapen(true)}>
                 <InngangsIkon
                     ikon={hentIkon(soknad)}
-                    ikonHover={hentIkonHover(soknad.soknadstype)}
+                    ikonHover={hentIkonHover(soknad)}
                 />
                 <div className="inngangspanel--inaktivt">
                     <InngangsHeader

@@ -33,7 +33,7 @@ const Teaser = ({ soknad }: SykepengesoknadTeaserProps) => {
             <Inngangspanel to={getUrlTilSoknad(soknad)}>
                 <InngangsIkon
                     ikon={hentIkon(soknad)}
-                    ikonHover={hentIkonHover(soknad.soknadstype)}
+                    ikonHover={hentIkonHover(soknad)}
                 />
                 <HoyreChevron />
                 <div className="inngangspanel__innhold">

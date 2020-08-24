@@ -9,13 +9,16 @@ import { Soknad } from '../../../types/types'
 import env from '../../../utils/environment'
 import { getRiktigDato, getSendtTilSuffix } from '../../../utils/soknad-utils'
 import { getLedetekst, tekst } from '../../../utils/tekster'
-import SoknaderTimeIkon from './img/file-time.svg'
-import GlobeHoverIkon from './img/globe-hover.svg'
+import SoknadAvbruttHoverIkon from './img/hover/soknad-avbrutt.svg'
+import SoknadFremtidigHoverIkon from './img/hover/soknad-fremtidig.svg'
+import SoknadNyUtlandHoverIkon from './img/hover/soknad-ny-utland.svg'
+import SoknadNyHoverIkon from './img/hover/soknad-ny.svg'
+import SoknadSendtHoverIkon from './img/hover/soknad-sendt.svg'
 import SoknadAvbruttIkon from './img/soknad-avbrutt.svg'
+import SoknadFremtidigIkon from './img/soknad-fremtidig.svg'
 import SoknadNyUtlandIkon from './img/soknad-ny-utland.svg'
 import SoknadNyIkon from './img/soknad-ny.svg'
 import SoknadSendtIkon from './img/soknad-sendt.svg'
-import SoknaderHoverIkon from './img/soknader-hover.svg'
 
 export const erSendtTilBeggeMenIkkeSamtidig = (soknad: Soknad) => {
     return soknad.sendtTilNAVDato && soknad.sendtTilArbeidsgiverDato
@@ -55,7 +58,7 @@ export const hentIkon = (soknad: Soknad) => {
             return SoknadNyIkon
         }
         case RSSoknadstatus.FREMTIDIG: {
-            return SoknaderTimeIkon             // TODO: Skal det være en egen på fremtidig?
+            return SoknadFremtidigIkon
         }
         case RSSoknadstatus.SENDT: {
             return SoknadSendtIkon
@@ -68,9 +71,27 @@ export const hentIkon = (soknad: Soknad) => {
     return SoknadNyIkon
 }
 
-export const hentIkonHover = (soknadstype: RSSoknadstype) => {
-    //TODO: Oppdater disse
-    return soknadstype === RSSoknadstype.OPPHOLD_UTLAND ? GlobeHoverIkon : SoknaderHoverIkon
+export const hentIkonHover = (soknad: Soknad) => {
+    switch (soknad.status) {
+        case RSSoknadstatus.NY:
+        case RSSoknadstatus.UTKAST_TIL_KORRIGERING: {
+            if (soknad.soknadstype === RSSoknadstype.OPPHOLD_UTLAND) {
+                return SoknadNyUtlandHoverIkon
+            }
+            return SoknadNyHoverIkon
+        }
+        case RSSoknadstatus.FREMTIDIG: {
+            return SoknadFremtidigHoverIkon
+        }
+        case RSSoknadstatus.SENDT: {
+            return SoknadSendtHoverIkon
+        }
+        case RSSoknadstatus.AVBRUTT:
+        case RSSoknadstatus.UTGAATT: {
+            return SoknadAvbruttHoverIkon
+        }
+    }
+    return SoknadNyHoverIkon
 }
 
 export const beregnUndertekst = (soknad: Soknad) => {
