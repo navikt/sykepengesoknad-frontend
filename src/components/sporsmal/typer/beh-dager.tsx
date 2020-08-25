@@ -1,9 +1,10 @@
 import './beh.dager.less'
 
+import { ErrorMessage } from '@hookform/error-message'
 import dayjs from 'dayjs'
 import { Element, Normaltekst } from 'nav-frontend-typografi'
 import React, { useEffect, useState } from 'react'
-import { ErrorMessage, useFormContext } from 'react-hook-form'
+import { useFormContext } from 'react-hook-form'
 
 import { RSSvarliste } from '../../../types/rs-types/rs-svarliste'
 import { Sporsmal } from '../../../types/types'

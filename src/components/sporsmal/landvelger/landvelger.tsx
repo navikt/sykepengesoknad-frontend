@@ -13,23 +13,18 @@ interface LandvelgerComponentProps {
     name: string;
     id: string;
     onChange: (verdier: string[]) => void;
-
 }
 
-
 const LandvelgerComponent = ({ verdierInn, id, onChange }: LandvelgerComponentProps) => {
-
     const [ verdier, setVerdier ] = useState(verdierInn)
 
     const onAdd = (verdi: Forslag) => {
         const nyeVerdier = [ ...verdier, verdi.text ]
         setVerdier(nyeVerdier)
         onChange(nyeVerdier)
-
     }
 
     const onDelete = (idx: number) => {
-
         const nyeVerdier: string[] = []
         verdier
             .filter((v, i) => i !== idx)
@@ -48,6 +43,5 @@ const LandvelgerComponent = ({ verdierInn, id, onChange }: LandvelgerComponentPr
         <ValgteTags verdier={verdier} handleDelete={onDelete} />
     </div>)
 }
-
 
 export default LandvelgerComponent

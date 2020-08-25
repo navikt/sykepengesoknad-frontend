@@ -2,6 +2,7 @@ import cls from 'classnames'
 import React from 'react'
 import { useHistory, useParams } from 'react-router'
 
+import { RouteParams } from '../../../app'
 import { useAppStore } from '../../../data/stores/app-store'
 import { SEPARATOR } from '../../../utils/constants'
 import { useAmplitudeInstance } from '../../amplitude/amplitude'
@@ -22,7 +23,7 @@ export interface StegProps {
 }
 
 const Steg = ({ label, index }: StegProps) => {
-    const { stegId } = useParams()
+    const { stegId } = useParams<RouteParams>()
     const { valgtSoknad } = useAppStore()
     const { logEvent } = useAmplitudeInstance()
     const aktivtSteg = parseInt(stegId)

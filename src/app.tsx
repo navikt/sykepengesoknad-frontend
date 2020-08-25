@@ -15,6 +15,11 @@ import OpprettUtland from './pages/opprett-utland/opprett-utland'
 import Soknad from './pages/soknad/soknaden'
 import Soknader from './pages/soknader/soknader'
 
+export interface RouteParams {
+    stegId: string;
+    id: string;
+}
+
 const App = (): any => {
 
     ModalWrapper.setAppElement('#root')

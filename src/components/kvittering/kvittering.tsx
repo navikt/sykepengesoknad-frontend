@@ -4,6 +4,7 @@ import Alertstripe from 'nav-frontend-alertstriper'
 import React, { useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom'
 
+import { RouteParams } from '../../app'
 import { useAppStore } from '../../data/stores/app-store'
 import { RSArbeidssituasjon } from '../../types/rs-types/rs-arbeidssituasjon'
 import { RSSoknadstatus } from '../../types/rs-types/rs-soknadstatus'
@@ -19,7 +20,7 @@ import Arbeidstaker from './arbeidstaker'
 
 const Kvittering = () => {
     const { valgtSoknad, setValgtSoknad, setValgtSykmelding, soknader, sykmeldinger, feilmeldingTekst } = useAppStore()
-    const { id } = useParams()
+    const { id } = useParams<RouteParams>()
     const [ rerendreKvittering, setRerendrekvittering ] = useState<Date>(new Date())
 
 

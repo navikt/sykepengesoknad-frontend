@@ -10,14 +10,12 @@ import { hentFeilmelding } from '../sporsmal-utils'
 
 export default ({ sporsmal }: SpmProps) => {
     const { errors, setValue, getValues } = useFormContext()
-
     const feilmelding = hentFeilmelding(sporsmal)
 
     useEffect(() => {
         setValue(sporsmal.id, sporsmal.svarliste.svar.map((i) => i.verdi))
         // eslint-disable-next-line
     }, [sporsmal]);
-
 
     return (
         <>
@@ -28,12 +26,11 @@ export default ({ sporsmal }: SpmProps) => {
 
                 <Element tag="h3" className="skjema__sporsmal">{sporsmal.sporsmalstekst}</Element>
 
-
                 <Controller
                     as={LandvelgerComponent}
                     id={sporsmal.id}
                     name={sporsmal.id}
-                    onChange={(values: string[][]) => {
+                    onChange={(values: string[]) => {
                         return values[0]
                     }}
                     rules={{

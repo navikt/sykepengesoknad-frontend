@@ -4,6 +4,7 @@ import { Normaltekst } from 'nav-frontend-typografi'
 import React, { MouseEvent, useEffect, useRef, useState } from 'react'
 import { useHistory, useParams } from 'react-router-dom'
 
+import { RouteParams } from '../../../app'
 import { useAppStore } from '../../../data/stores/app-store'
 import { RSSoknadstype } from '../../../types/rs-types/rs-soknadstype'
 import { tekst } from '../../../utils/tekster'
@@ -13,14 +14,14 @@ import { avbrytSoknad } from './avbryt-soknad'
 type Event = MouseEvent<HTMLAnchorElement | HTMLButtonElement>;
 
 interface KnapperadProps {
-    onSubmit: Function;
+    onSubmit: () => void;
     poster: boolean;
 }
 
 const Knapperad = ({ onSubmit, poster }: KnapperadProps) => {
     const { valgtSoknad, setValgtSoknad, soknader, setSoknader, feilmeldingTekst, setFeilmeldingTekst } = useAppStore()
     const history = useHistory()
-    const { stegId } = useParams()
+    const { stegId } = useParams<RouteParams>()
     const [ avbryter, setAvbryter ] = useState<boolean>(false)
 
     const spmIndex = parseInt(stegId) - 2

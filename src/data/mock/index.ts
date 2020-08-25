@@ -1,5 +1,5 @@
 import * as uuid from 'uuid'
-import FetchMock, { HandlerArgument, MiddlewareUtils } from 'yet-another-fetch-mock'
+import FetchMock, { MiddlewareUtils } from 'yet-another-fetch-mock'
 
 import { RSMottaker } from '../../types/rs-types/rs-mottaker'
 import { RSSoknad } from '../../types/rs-types/rs-soknad'
@@ -34,73 +34,94 @@ if (!env.isOpplaering) {
     soknader.push(...jsonDeepCopy(soknaderIntegration))
 }
 
-mock.put(`${env.syfoapiRoot}/syfosoknad/api/soknader/:soknad/sporsmal/:sporsmal`, (args: HandlerArgument) => {
+mock.put(`${env.syfoapiRoot}/syfosoknad/api/soknader/:soknad/sporsmal/:sporsmal`,
+    (req) => {
 
-
-    if (args.pathParams.soknad === soknadSomTriggerSporsmalFinnesIkkeISoknad.id) {
+        if (req.pathParams.soknad === soknadSomTriggerSporsmalFinnesIkkeISoknad.id) {
+            return Promise.resolve({
+                status: 400,
+                body: JSON.stringify({ reason: 'SPORSMAL_FINNES_IKKE_I_SOKNAD' })
+            })
+        }
+        if (req.pathParams.soknad === soknadSomTriggerFeilStatusForOppdaterSporsmal.id) {
+            return Promise.resolve({
+                status: 400,
+                body: JSON.stringify({ reason: 'FEIL_STATUS_FOR_OPPDATER_SPORSMAL' })
+            })
+        }
         return Promise.resolve({
-            status: 400,
-            body: JSON.stringify({ reason: 'SPORSMAL_FINNES_IKKE_I_SOKNAD' })
+            status: 200,
+            body: JSON.stringify({ oppdatertSporsmal: req.body })
         })
-    }
-    if (args.pathParams.soknad === soknadSomTriggerFeilStatusForOppdaterSporsmal.id) {
-        return Promise.resolve({
-            status: 400,
-            body: JSON.stringify({ reason: 'FEIL_STATUS_FOR_OPPDATER_SPORSMAL' })
+    })
+
+mock.post(`${env.syfoapiRoot}/syfosoknad/api/soknader/:soknad/korriger`,
+    (req, res, ctx) => {
+        const soknad = jsonDeepCopy(soknader.find((sok: RSSoknad) => {
+            return res(ctx.json(sok.id === req.pathParams.soknad))
+        }))!
+        soknad.id = uuid.v4()
+        soknad.status = RSSoknadstatus.UTKAST_TIL_KORRIGERING
+        return res(ctx.json(soknad))
+    })
+
+mock.post(`${env.syfoapiRoot}/syfosoknad/api/opprettSoknadUtland`,
+    (req, res, ctx) => {
+        const soknad = soknader.find((sok: RSSoknad) => {
+            return res(ctx.json(sok.soknadstype === RSSoknadstype.OPPHOLD_UTLAND && sok.status === RSSoknadstatus.NY))
         })
-    }
-    return Promise.resolve({
-        status: 200,
-        body: JSON.stringify({ oppdatertSporsmal: args.body })
+        if (soknad) {
+            return res(ctx.json(soknad))
+        }
+        const soknadOriginal = jsonDeepCopy(soknaderOpplaering.find((sok: RSSoknad) => {
+            return res(ctx.json(sok.soknadstype === RSSoknadstype.OPPHOLD_UTLAND && sok.status === RSSoknadstatus.NY))
+        })!)
+        soknadOriginal.id = uuid.v4()
+        soknadOriginal.status = RSSoknadstatus.NY
+        return res(ctx.json(soknadOriginal))
     })
-})
-mock.post(`${env.syfoapiRoot}/syfosoknad/api/soknader/:soknad/korriger`, (args: HandlerArgument) => {
-    const soknad = jsonDeepCopy(soknader.find((sok: RSSoknad) => {
-        return sok.id === args.pathParams.soknad
-    }))!
-    soknad.id = uuid.v4()
-    soknad.status = RSSoknadstatus.UTKAST_TIL_KORRIGERING
-    return soknad as any
-})
-mock.post(`${env.syfoapiRoot}/syfosoknad/api/soknader/:soknad/gjenapne`, {})
-mock.post(`${env.syfoapiRoot}/syfosoknad/api/opprettSoknadUtland`, () => {
-    const soknad = soknader.find((sok: RSSoknad) => {
-        return sok.soknadstype === RSSoknadstype.OPPHOLD_UTLAND && sok.status === RSSoknadstatus.NY
+
+mock.post(`${env.syfoapiRoot}/syfosoknad/api/soknader/:soknad/finnMottaker`,
+    (req, res, ctx) => {
+        const soknadId = req.pathParams.soknad
+
+        if (soknadId === arbeidstaker.id ||
+            soknadId === arbeidstakerUtenforArbeidsgiverperiodeKvittering.id ||
+            soknadId === arbeidstakerDeltPeriodeForsteUtenforArbeidsgiverperiodeKvittering.id ||
+            soknadId === arbeidstakerUtenOppholdForsteUtenforArbeidsgiverperiodeKvittering.id ||
+            soknadId === arbeidstakerMedOppholdForsteUtenforArbeidsgiverperiodeKvittering.id) {
+            return res(ctx.json({ mottaker: RSMottaker.ARBEIDSGIVER_OG_NAV }))
+        }
+        if (soknadId === arbeidstakerGradert.id ||
+            soknadId === arbeidstakerInnenforArbeidsgiverperiodeKvittering.id ||
+            soknadId === sok6.id) {
+            return res(ctx.json({ mottaker: RSMottaker.ARBEIDSGIVER }))
+        }
+
+        return res(ctx.json({ mottaker: RSMottaker.NAV }))
     })
-    if (soknad) {
-        return soknad
-    }
-    const soknadOriginal = jsonDeepCopy(soknaderOpplaering.find((sok: RSSoknad) => {
-        return sok.soknadstype === RSSoknadstype.OPPHOLD_UTLAND && sok.status === RSSoknadstatus.NY
-    })!)
-    soknadOriginal.id = uuid.v4()
-    soknadOriginal.status = RSSoknadstatus.NY
-    return soknadOriginal as any
-})
-mock.post(`${env.syfoapiRoot}/syfosoknad/api/soknader/:soknad/finnMottaker`, (args: HandlerArgument) => {
-    const soknadId = args.pathParams.soknad
-
-    if (soknadId === arbeidstaker.id ||
-        soknadId === arbeidstakerUtenforArbeidsgiverperiodeKvittering.id ||
-        soknadId === arbeidstakerDeltPeriodeForsteUtenforArbeidsgiverperiodeKvittering.id ||
-        soknadId === arbeidstakerUtenOppholdForsteUtenforArbeidsgiverperiodeKvittering.id ||
-        soknadId === arbeidstakerMedOppholdForsteUtenforArbeidsgiverperiodeKvittering.id) {
-        return { mottaker: RSMottaker.ARBEIDSGIVER_OG_NAV }
-    }
-    if (soknadId === arbeidstakerGradert.id ||
-        soknadId === arbeidstakerInnenforArbeidsgiverperiodeKvittering.id ||
-        soknadId === sok6.id) {
-        return { mottaker: RSMottaker.ARBEIDSGIVER }
-    }
-
-    return { mottaker: RSMottaker.NAV }
-})
 
 
-mock.post(env.unleashUrl, unleashToggles)
-mock.get(`${env.syfoapiRoot}/syfosoknad/api/soknader`, soknader as any)
-mock.get(`${env.syforestRoot}/sykmeldinger`, sykmeldinger as any)
-mock.post(`${env.syfoapiRoot}/syfosoknad/api/soknader/:soknad/send`, {})
-mock.post(`${env.syfoapiRoot}/syfosoknad/api/soknader/:soknad/ettersendTilNav`, {})
-mock.post(`${env.syfoapiRoot}/syfosoknad/api/soknader/:soknad/ettersendTilArbeidsgiver`, {})
-mock.post(`${env.syfoapiRoot}/syfosoknad/api/soknader/:soknad/avbryt`, {})
+mock.post(env.unleashUrl, (req, res, ctx) => res(ctx.json(unleashToggles)))
+
+mock.get(`${env.syfoapiRoot}/syfosoknad/api/soknader`,
+    (req, res, ctx) => res(ctx.json(soknader)))
+
+mock.get(`${env.syforestRoot}/sykmeldinger`,
+    (req, res, ctx) => res(ctx.json(sykmeldinger)))
+
+mock.post(`${env.syfoapiRoot}/syfosoknad/api/soknader/:soknad/send`,
+    () => Promise.resolve({ status: 200 }))
+
+mock.post(`${env.syfoapiRoot}/syfosoknad/api/soknader/:soknad/ettersendTilNav`,
+    () => Promise.resolve({ status: 200 }))
+
+mock.post(`${env.syfoapiRoot}/syfosoknad/api/soknader/:soknad/ettersendTilArbeidsgiver`,
+    () => Promise.resolve({ status: 200 }))
+
+mock.post(`${env.syfoapiRoot}/syfosoknad/api/soknader/:soknad/avbryt`,
+    () => Promise.resolve({ status: 200 }))
+
+mock.post(`${env.syfoapiRoot}/syfosoknad/api/soknader/:soknad/gjenapne`,
+    () => Promise.resolve({ status: 200 }))
+

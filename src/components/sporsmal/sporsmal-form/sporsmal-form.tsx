@@ -1,9 +1,10 @@
 import './sporsmal-form.less'
 
 import React, { useEffect, useState } from 'react'
-import { FormContext, useForm } from 'react-hook-form'
+import { FormProvider,useForm } from 'react-hook-form'
 import { useHistory, useParams } from 'react-router-dom'
 
+import { RouteParams } from '../../../app'
 import useFetch from '../../../data/rest/use-fetch'
 import { FetchState, hasData, redirectTilLoginHvis401 } from '../../../data/rest/utils'
 import { useAppStore } from '../../../data/stores/app-store'
@@ -43,7 +44,7 @@ const SporsmalForm = () => {
     const { logEvent } = useAmplitudeInstance()
     const [ erSiste, setErSiste ] = useState<boolean>(false)
     const [ poster, setPoster ] = useState<boolean>(false)
-    const { stegId } = useParams()
+    const { stegId } = useParams<RouteParams>()
     const history = useHistory()
     const spmIndex = parseInt(stegId) - 1
     const methods = useForm({ reValidateMode: 'onSubmit' })
@@ -66,7 +67,7 @@ const SporsmalForm = () => {
         setErSiste(sisteSide)
         if (sisteSide) hentMottaker()
         // eslint-disable-next-line
-    }, [spmIndex]);
+    }, [ spmIndex ]);
 
     // eslint-disable-next-line @typescript-eslint/no-empty-function
     useEffect(() => {
@@ -214,10 +215,13 @@ const SporsmalForm = () => {
             }
 
             if (restFeilet) {
-                methods.setError('syfosoknad', 'rest-feilet', 'Beklager, det oppstod en feil')
+                methods.setError(
+                    'syfosoknad',
+                    { type: 'rest-feilet', message: 'Beklager, det oppstod en feil' }
+                )
                 sporsmal = valgtSoknad!.sporsmal[spmIndex]
             } else {
-                methods.clearError()
+                methods.clearErrors()
                 methods.reset()
                 setTop(0)
                 if (!erSiste) {
@@ -230,7 +234,7 @@ const SporsmalForm = () => {
     }
 
     return (
-        <FormContext {...methods}>
+        <FormProvider {...methods}>
             <form onSubmit={methods.handleSubmit(onSubmit)}
                 className={'sporsmal__form ' + nesteSporsmal?.tag?.toLowerCase()}>
 
@@ -255,7 +259,7 @@ const SporsmalForm = () => {
                     <Knapperad onSubmit={onSubmit} poster={poster} />
                 </Vis>
             </form>
-        </FormContext>
+        </FormProvider>
     )
 }
 

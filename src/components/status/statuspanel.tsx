@@ -5,6 +5,7 @@ import { EtikettLiten, Normaltekst } from 'nav-frontend-typografi'
 import React, { useEffect, useState } from 'react'
 import { useHistory, useParams } from 'react-router'
 
+import { RouteParams } from '../../app'
 import { redirectTilLoginHvis401 } from '../../data/rest/utils'
 import { useAppStore } from '../../data/stores/app-store'
 import { RSSoknadstatus } from '../../types/rs-types/rs-soknadstatus'
@@ -19,7 +20,7 @@ import Vis from '../vis'
 const StatusPanel = () => {
     const { valgtSoknad, setValgtSoknad, setValgtSykmelding, sykmeldinger, soknader, setSoknader } = useAppStore()
     const history = useHistory()
-    const { id } = useParams()
+    const { id } = useParams<RouteParams>()
     const [ gjenapner, setGjenapner ] = useState<boolean>(false)
 
 
