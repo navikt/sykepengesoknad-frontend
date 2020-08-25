@@ -1,6 +1,5 @@
-import './teaser.less'
-
 import Alertstripe from 'nav-frontend-alertstriper'
+import { HoyreChevron } from 'nav-frontend-chevron'
 import ModalWrapper from 'nav-frontend-modal'
 import { Normaltekst, Systemtittel } from 'nav-frontend-typografi'
 import React, { useState } from 'react'
@@ -27,12 +26,13 @@ const UtgaattSoknaderTeaser = ({ soknad }: SykepengesoknadTeaserProps) => {
         <article aria-labelledby={`soknader-header-${soknad.id}`} onClick={() => {
             logEvent('Velger søknad', { soknadstype: soknad.soknadstype })
         }}>
-            <button className="inngangspanel inngangspanel__btn pointer"
+            <button className="inngangspanel inngangspanel__btn"
                 onClick={() => setAapen(true)}>
                 <InngangsIkon
                     ikon={hentIkon(soknad)}
                     ikonHover={hentIkonHover(soknad)}
                 />
+                <HoyreChevron />
                 <div className="inngangspanel--inaktivt">
                     <InngangsHeader
                         tittel={soknad.soknadstype === RSSoknadstype.OPPHOLD_UTLAND

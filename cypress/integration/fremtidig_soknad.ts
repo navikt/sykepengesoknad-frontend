@@ -12,12 +12,12 @@ describe('Tester fremtidig søknad', () => {
     })
 
     it('Fremtidig søknad har forventa tekst', function() {
-        cy.get(`#soknader-planlagt article[aria-labelledby*=${fremtidigSoknad.id}]`)
+        cy.get(`#soknader-list-til-behandling article[aria-labelledby*=${fremtidigSoknad.id}]`)
             .should('include.text', 'Gjelder perioden 23. mai – 7. juni 3020')
     })
 
     it('Ved klikk så åpnes popup', function() {
-        cy.get(`#soknader-planlagt article[aria-labelledby*=${fremtidigSoknad.id}]`).click()
+        cy.get(`#soknader-list-til-behandling article[aria-labelledby*=${fremtidigSoknad.id}]`).click()
         cy.get('.ReactModal__Content')
             .should('include.text', 'Planlagt søknad')
             .get('.alertstripe > .typo-normal')

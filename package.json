@@ -6,8 +6,8 @@
     "peerDependencies": {},
     "dependencies": {
         "@craco/craco": "^5.6.4",
-        "@types/smoothscroll-polyfill": "^0.3.1",
         "@navikt/fnrvalidator": "^1.1.2",
+        "@types/smoothscroll-polyfill": "^0.3.1",
         "amplitude-js": "^6.2.0",
         "classnames": "^2.2.6",
         "constate": "^2.0.0",
@@ -26,6 +26,8 @@
         "nav-frontend-core": "^5.0.1",
         "nav-frontend-ekspanderbartpanel": "^3.0.23",
         "nav-frontend-ekspanderbartpanel-style": "^1.0.19",
+        "nav-frontend-etiketter": "^2.0.8",
+        "nav-frontend-etiketter-style": "^1.0.3",
         "nav-frontend-hjelpetekst": "^2.0.32",
         "nav-frontend-hjelpetekst-style": "^2.0.25",
         "nav-frontend-ikoner-assets": "^2.0.3",

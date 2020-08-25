@@ -16,7 +16,9 @@ import { setBodyClass } from '../../utils/utils'
 
 export const filtrerOgSorterNyeSoknader = (soknader: Soknad[]) => {
     return soknader.filter(soknad =>
-        soknad.status === RSSoknadstatus.NY || soknad.status === RSSoknadstatus.UTKAST_TIL_KORRIGERING
+        soknad.status === RSSoknadstatus.NY ||
+        soknad.status === RSSoknadstatus.UTKAST_TIL_KORRIGERING ||
+        soknad.status === RSSoknadstatus.FREMTIDIG
     ).sort(sorterEtterOpprettetDato)
 }
 
@@ -37,11 +39,6 @@ const Soknader = () => {
             || soknad.status === RSSoknadstatus.UTGAATT
         ).sort(sorterEtterPerioder)
 
-    const fremtidigeSoknader = soknader
-        .filter((soknad) => soknad.status === RSSoknadstatus.FREMTIDIG)
-        .sort(sorterEtterPerioder)
-        .reverse()
-
     useEffect(() => {
         setBodyClass('soknader')
     }, [])
@@ -60,15 +57,6 @@ const Soknader = () => {
                     tomListeTekst={tekst('soknader.nye.ingen-soknader')}
                     id="soknader-list-til-behandling"
                 />
-
-                <Vis hvis={fremtidigeSoknader.length > 0}>
-                    <Teasere
-                        className={'soknader_teasere'}
-                        soknader={fremtidigeSoknader}
-                        tittel={tekst('soknader.planlagt.tittel')}
-                        id="soknader-planlagt"
-                    />
-                </Vis>
 
                 <UtbetalingerLenke />
 

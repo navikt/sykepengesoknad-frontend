@@ -1,7 +1,6 @@
-import './teaser.less'
-
 import dayjs from 'dayjs'
 import Alertstripe from 'nav-frontend-alertstriper'
+import { HoyreChevron } from 'nav-frontend-chevron'
 import ModalWrapper from 'nav-frontend-modal'
 import { Normaltekst, Systemtittel } from 'nav-frontend-typografi'
 import React, { useState } from 'react'
@@ -28,13 +27,14 @@ const FremtidigeSoknaderTeaser = ({ soknad }: SykepengesoknadTeaserProps) => {
         <article aria-labelledby={`soknader-header-${soknad.id}`} onClick={() => {
             logEvent('Velger søknad', { soknadstype: soknad.soknadstype })
         }}>
-            <button className="inngangspanel inngangspanel__btn pointer"
+            <button className="inngangspanel inngangspanel__btn inngangspanel--ny"
                 onClick={() => setAapen(true)}>
                 <InngangsIkon
                     ikon={hentIkon(soknad)}
                     ikonHover={hentIkonHover(soknad)}
                 />
-                <div className="inngangspanel--inaktivt">
+                <HoyreChevron />
+                <div className="inngangspanel__innhold">
                     <InngangsHeader
                         tittel={soknad.soknadstype === RSSoknadstype.OPPHOLD_UTLAND
                             ? tekst('soknad.utland.teaser.tittel')

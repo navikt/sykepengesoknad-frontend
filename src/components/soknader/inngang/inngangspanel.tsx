@@ -1,6 +1,7 @@
 import './inngangspanel.less'
 
-import { Normaltekst, Systemtittel } from 'nav-frontend-typografi'
+import Etikett from 'nav-frontend-etiketter'
+import { Systemtittel } from 'nav-frontend-typografi'
 import React from 'react'
 import { Link } from 'react-router-dom'
 
@@ -30,11 +31,12 @@ export const InngangsIkon = ({ ikon, ikonHover }: InngangsIkonProps) => {
 interface InngangspanelProps {
     to: string;
     children: React.ReactNode;
+    className?: string;
 }
 
-export const Inngangspanel = ({ to, children, }: InngangspanelProps) => {
+export const Inngangspanel = ({ to, children, className }: InngangspanelProps) => {
     return (
-        <Link to={to} className="inngangspanel">
+        <Link to={to} className={`inngangspanel ${className || ''}`}>
             {children}
         </Link>
     )
@@ -46,12 +48,22 @@ interface InngangsStatusProps {
 }
 
 export const InngangsStatus = ({ status, tekst }: InngangsStatusProps) => {
-    const type = status.toLowerCase()
-    return (
-        <Normaltekst className={`inngangspanel__status ${type}`}>
-            {tekst}
-        </Normaltekst>
-    )
+    const type = statusTilType(status)
+    return <Etikett className="inngangspanel__status" type={type}>{tekst}</Etikett>
+}
+
+const statusTilType = (status: RSSoknadstatus) => {
+    switch (status) {
+        case RSSoknadstatus.SENDT:
+            return 'suksess'
+        case RSSoknadstatus.UTGAATT:
+        case RSSoknadstatus.FREMTIDIG:
+            return 'info'
+        case RSSoknadstatus.AVBRUTT:
+            return 'advarsel'
+        default:
+            return 'info'
+    }
 }
 
 interface InngangsHeaderProps {

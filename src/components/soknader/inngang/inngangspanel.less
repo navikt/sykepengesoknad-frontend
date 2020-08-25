@@ -24,9 +24,18 @@
     border-radius: 4px;
     background-color: @white;
     margin-bottom: 1rem;
-    padding: 2rem 2rem 2rem 1rem;
+    padding: 1.3rem 2rem 1.5rem 1rem;
     color: @navMorkGra;
     text-decoration: none;
+    cursor: pointer;
+
+    .inngangspanel__status {
+        margin: 4px 0;
+    }
+
+    .inngangspanel__innhold {
+        padding: 0 0.5rem;
+    }
 
     &.inngangspanel__btn {
         width: 100%;
@@ -41,11 +50,8 @@
     }
 
     .inngangspanel__ikon {
-        display: flex;
-        width: 60px;
-        justify-content: flex-start;
-        align-items: center;
-        flex-direction: column;
+        display: block;
+        width: 44px;
     }
 
     .inngangspanel__ikon--hover {
@@ -62,34 +68,11 @@
         }
 
         .inngangspanel__ikon--hover {
-            display: flex;
+            display: block;
         }
 
         .inngangspanel__ikon--normal {
             display: none;
-        }
-    }
-
-    .inngangspanel__status {
-        display: inline-block;
-        border: 1px solid;
-        border-radius: 4px;
-        padding: .2rem 1rem;
-
-        &.sendt {
-            background-color: @navGronnLighten80
-        }
-
-        &.utgaatt {
-            background-color: @navBlaLighten80
-        }
-
-        &.avbrutt {
-            background-color: @navRodLighten80
-        }
-
-        &.fremtidig {
-            background-color: @navBlaLighten80
         }
     }
 
@@ -102,24 +85,20 @@
         margin: 0;
         padding-top: 1rem;
         padding-left: 1rem;
+        max-width: 20rem;
     }
 
 }
 
 .inngangspanel--ny {
-    .inngangspanel {
-        border-color: @navOransje;
-        background-color: mix(@navOransje, @white, 5%);
-    }
+    border-color: @navOransje;
+    background-color: mix(@navOransje, @white, 5%);
 }
 
 .inngangspanel--inaktivt {
+    padding: 0 0.5rem;
     background-image: none;
     color: @navGra60;
-
-    .inngangspanel__status {
-        color: @navMorkGra;
-    }
 }
 
 .modal.modal__teaser_popup {
@@ -137,9 +116,6 @@
     .inngangspanel__status {
         position: absolute;
         right: 3rem;
-
-        &.fremtidig {
-            right: 1rem;
-        }
+        top: calc(50% - 15px);
     }
 }
