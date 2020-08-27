@@ -6,7 +6,7 @@ import { RSSoknadstype } from '../types/rs-types/rs-soknadstype'
 import { Soknad, Sporsmal } from '../types/types'
 import { senesteTom } from './periode-utils'
 
-const getTomFraSoknad = (soknad: Soknad): Date => {
+export const getTomFraSoknad = (soknad: Soknad): Date => {
     const getTomForUtland = (_soknad: Soknad) => {
         const perioder = _soknad.sporsmal.find((spm: Sporsmal) => spm.tag === TagTyper.PERIODEUTLAND)!
             .svarliste.svar
@@ -30,7 +30,7 @@ const getTomFraSoknad = (soknad: Soknad): Date => {
     return soknad.tom || soknad.opprettetDato
 }
 
-const senesteSendtDato = (soknad: Soknad) => {
+export const senesteSendtDato = (soknad: Soknad) => {
     const arb = soknad.sendtTilArbeidsgiverDato?.getTime() || 0
     const nav = soknad.sendtTilNAVDato?.getTime() || 0
     return (arb > nav) ? arb : nav
