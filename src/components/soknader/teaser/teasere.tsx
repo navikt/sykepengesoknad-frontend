@@ -20,12 +20,15 @@ interface SoknaderTeasereProps {
     kanSorteres?: boolean;
 }
 
-type Sortering = 'Dato' | 'Status' | 'Sendt'
+enum Sortering {
+    Dato = 'Dato',
+    Status = 'Status',
+    Sendt = 'Sendt',
+}
 
 const Teasere = ({ soknader, className, tittel, tomListeTekst, id, kanSorteres = false }: SoknaderTeasereProps) => {
-    const [ sortering, setSortering ] = useState<Sortering>('Dato')
+    const [ sortering, setSortering ] = useState<Sortering>(Sortering.Dato)
 
-    // TODO: Blir rendret flere ganger, hvis man bruker useEffect så oppdateres ikke liste før neste render
     const sorterteSoknader = () => {
         if (sortering === 'Dato') {
             return soknader.sort(sorterEtterPerioder)
@@ -41,14 +44,13 @@ const Teasere = ({ soknader, className, tittel, tomListeTekst, id, kanSorteres =
         <>
             <header className="inngangspanelerHeader">
                 <Vis hvis={kanSorteres}>
-                    <Select
-                        label="Sorter etter"
+                    <Select label="Sorter etter"
                         className="inngangspanel__sortering"
                         onChange={(event) => setSortering(event.target.value as Sortering)}
                     >
-                        <option value="Dato">Dato</option>
-                        <option value="Status">Status</option>
-                        <option value="Sendt">Sendt</option>
+                        {Object.values(Sortering).map((sort, idx) => {
+                            return <option value={sort} key={idx}>{sort}</option>
+                        })}
                     </Select>
                 </Vis>
                 <Undertittel tag="h2">{tittel}</Undertittel>
