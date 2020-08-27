@@ -3,6 +3,7 @@ import { Normaltekst } from 'nav-frontend-typografi'
 import React from 'react'
 
 import { arbeidstakerGradert } from '../../../data/mock/data/soknader-opplaering'
+import { RSArbeidssituasjon } from '../../../types/rs-types/rs-arbeidssituasjon'
 import { RSSoknadstatus } from '../../../types/rs-types/rs-soknadstatus'
 import { RSSoknadstype } from '../../../types/rs-types/rs-soknadstype'
 import { Soknad } from '../../../types/types'
@@ -182,10 +183,17 @@ export const hentTeaserStatustekst = (soknad: Soknad) => {
 }
 
 export const periodeListevisning = (soknad: Soknad) => {
-    if (soknad.soknadstype === RSSoknadstype.BEHANDLINGSDAGER) {
+    if (soknad.soknadstype === RSSoknadstype.BEHANDLINGSDAGER &&
+        soknad.arbeidssituasjon !== RSArbeidssituasjon.ARBEIDSTAKER) {
         return ''
     }
+
     const perioder = soknad.soknadPerioder.map(p => {
+        if (soknad.soknadstype === RSSoknadstype.BEHANDLINGSDAGER) {
+            return getLedetekst(tekst('soknad.teaser.sykmeldt-behandlingsdager-fra'), {
+                '%ARBEIDSGIVER%': finnArbeidsgivernavn(soknad)
+            })
+        }
         if (soknad.soknadstype === RSSoknadstype.ARBEIDSTAKERE) {
             return getLedetekst(tekst('soknad.teaser.sykmeldt-fra'), {
                 '%GRAD%': p.grad,
