@@ -41,7 +41,7 @@ export const HotjarTrigger = ({ soknadstype, children }: HotjarTriggerProps) => 
                 } else {
                     hotJarWindow.hj('trigger', typeTilTriggerMapping(soknadstype))
                 }
-            }, 200)
+            }, 500)
         }
     })
 

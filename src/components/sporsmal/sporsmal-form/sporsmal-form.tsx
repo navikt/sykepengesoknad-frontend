@@ -83,7 +83,13 @@ const SporsmalForm = () => {
         })
 
         try {
-            const data = await res.json()
+            let data: any = {}
+            try {
+                data = await res.json()
+                // eslint-disable-next-line no-empty
+            } finally {
+
+            }
 
             const httpCode = res.status
             if ([ 200, 201, 203, 206 ].includes(httpCode)) {
@@ -151,8 +157,7 @@ const SporsmalForm = () => {
             const httpCode = res.status
             if (redirectTilLoginHvis401(res)) {
                 return
-            }
-            else if ([ 200, 201, 203, 206 ].includes(httpCode)) {
+            } else if ([ 200, 201, 203, 206 ].includes(httpCode)) {
                 if (mottaker === RSMottaker.ARBEIDSGIVER) {
                     valgtSoknad.sendtTilArbeidsgiverDato = new Date()
                 }

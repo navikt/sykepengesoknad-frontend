@@ -65,7 +65,7 @@ export const hasData = <D = {}>(fetch: FetchState<D>): fetch is FetchStateWithDa
 
 export const redirectTilLoginHvis401 = (res: Response) => {
     if (res.status === 401) {
-        logger.warn('Redirecter til login grunnet 401')
+        logger.info('Redirecter til login grunnet 401')
         window.location.href = hentLoginUrl()
         return true
     }
