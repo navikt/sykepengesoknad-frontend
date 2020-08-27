@@ -48,7 +48,6 @@ const Soknaden = () => {
 
         const sykmelding = sykmeldinger.find(sm => sm.id === filtrertSoknad?.sykmeldingId)
         setValgtSykmelding(sykmelding)
-
         // eslint-disable-next-line
     }, [id]);
 

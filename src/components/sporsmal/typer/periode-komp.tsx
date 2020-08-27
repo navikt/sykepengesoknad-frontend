@@ -65,6 +65,7 @@ const PeriodeKomp = ({ sporsmal, index, slettPeriode }: AllProps) => {
                 className="skjemaelement__input input--m"
                 placeholder="dd.mm.åååå - dd.mm.åååå"
                 onValueUpdate={onValueUpdate}
+                defaultValue={hentPeriode(sporsmal, index)}
                 options={{
                     minDate: sporsmal.min!,
                     maxDate: sporsmal.max!,

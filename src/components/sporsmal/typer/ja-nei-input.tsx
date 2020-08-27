@@ -93,7 +93,7 @@ const JaNeiInput = ({ sporsmal }: SpmProps) => {
                                         aria-checked={OK}
                                         checked={OK}
                                         value={valg.value}
-                                        onClick={() => changeValue(valg.value)}
+                                        onChange={() => changeValue(valg.value)}
                                         ref={register({
                                             validate: (value) => valider(value),
                                             required: feilmelding.global

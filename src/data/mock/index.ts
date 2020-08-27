@@ -68,13 +68,13 @@ mock.post(`${env.syfoapiRoot}/syfosoknad/api/soknader/:soknad/korriger`,
 mock.post(`${env.syfoapiRoot}/syfosoknad/api/opprettSoknadUtland`,
     (req, res, ctx) => {
         const soknad = soknader.find((sok: RSSoknad) => {
-            return res(ctx.json(sok.soknadstype === RSSoknadstype.OPPHOLD_UTLAND && sok.status === RSSoknadstatus.NY))
+            return sok.soknadstype === RSSoknadstype.OPPHOLD_UTLAND && sok.status === RSSoknadstatus.NY
         })
         if (soknad) {
             return res(ctx.json(soknad))
         }
         const soknadOriginal = jsonDeepCopy(soknaderOpplaering.find((sok: RSSoknad) => {
-            return res(ctx.json(sok.soknadstype === RSSoknadstype.OPPHOLD_UTLAND && sok.status === RSSoknadstatus.NY))
+            return sok.soknadstype === RSSoknadstype.OPPHOLD_UTLAND && sok.status === RSSoknadstatus.NY
         })!)
         soknadOriginal.id = uuid.v4()
         soknadOriginal.status = RSSoknadstatus.NY

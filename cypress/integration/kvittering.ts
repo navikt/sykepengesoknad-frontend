@@ -262,7 +262,7 @@ describe('Tester kvittering', () => {
         })
 
         it('Oppfølgende periode uten opphold', () => {
-            cy.get(`#soknader-list-til-behandling article a[href*=${arbeidstakerUtenOppholdKvittering.id}]`).click()
+            cy.get(`#soknader-list-til-behandling article a[href*=${arbeidstakerUtenOppholdKvittering.id}]`).click({ force: true })
             besvarSoknad()
             cy.url().should('include', `/kvittering/${arbeidstakerUtenOppholdKvittering.id}`)
             utenOppholdKvittering()
