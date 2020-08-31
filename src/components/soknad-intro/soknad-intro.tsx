@@ -6,16 +6,12 @@ import { Normaltekst, Systemtittel } from 'nav-frontend-typografi'
 import Veilederpanel from 'nav-frontend-veilederpanel'
 import React, { useState } from 'react'
 
-import env from '../../utils/environment'
 import { tekst } from '../../utils/tekster'
-import Vis from '../vis'
 import ForsteSoknadSvg from './soknad-intro-svg'
 
 const SoknadIntro = () => {
 
     const [ aapen, setAapen ] = useState<boolean>(false)
-
-    const automatiseringPersonvernErklaering = !env.isProd
 
     return (<>
         <div className="soknad-intro">
@@ -24,20 +20,10 @@ const SoknadIntro = () => {
                     <Normaltekst tag="h2" className="panel__tittel sist">
                         {parser(tekst('sykepengesoknad.soknad-intro.personvern'))}
                         <p className="sist">
-                            <Vis hvis={automatiseringPersonvernErklaering}>
-                                <button className="lenke no-border"
-                                    onClick={() => setAapen(true)}>
-                                    {tekst('sykepengesoknad.soknad-intro.personvern-les-mer')}
-
-                                </button>
-                            </Vis>
-                            <Vis hvis={!automatiseringPersonvernErklaering}>
-                                <a target="_blank" href="https://www.nav.no/personvern"
-                                    rel="noopener noreferrer">{
-                                        tekst('sykepengesoknad.soknad-intro.personvern-les-mer')
-                                    }</a>
-
-                            </Vis>
+                            <button className="lenke no-border"
+                                onClick={() => setAapen(true)}>
+                                {tekst('sykepengesoknad.soknad-intro.personvern-les-mer')}
+                            </button>
                         </p>
                     </Normaltekst>
                 </Veilederpanel>
