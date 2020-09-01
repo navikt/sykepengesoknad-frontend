@@ -51,6 +51,7 @@ const DatoInput = ({ sporsmal }: SpmProps) => {
                 name={sporsmal.id}
                 className="skjemaelement__input input--m"
                 placeholder="dd.mm.åååå"
+                defaultValue={hentSvar(sporsmal)}
                 options={{
                     minDate: sporsmal.min!,
                     maxDate: sporsmal.max!,

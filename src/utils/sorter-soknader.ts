@@ -6,7 +6,7 @@ import { RSSoknadstype } from '../types/rs-types/rs-soknadstype'
 import { Soknad, Sporsmal } from '../types/types'
 import { senesteTom } from './periode-utils'
 
-const getTomFraSoknad = (soknad: Soknad): Date => {
+export const getTomFraSoknad = (soknad: Soknad): Date => {
     const getTomForUtland = (_soknad: Soknad) => {
         const perioder = _soknad.sporsmal.find((spm: Sporsmal) => spm.tag === TagTyper.PERIODEUTLAND)!
             .svarliste.svar
@@ -28,6 +28,38 @@ const getTomFraSoknad = (soknad: Soknad): Date => {
         return soknad.opprettetDato
     }
     return soknad.tom || soknad.opprettetDato
+}
+
+export const senesteSendtDato = (soknad: Soknad) => {
+    const arb = soknad.sendtTilArbeidsgiverDato?.getTime() || 0
+    const nav = soknad.sendtTilNAVDato?.getTime() || 0
+    return (arb > nav) ? arb : nav
+}
+
+export const sorterEtterSendt = (soknad1: Soknad, soknad2: Soknad) => {
+    if (soknad1.status === RSSoknadstatus.SENDT || soknad2.status === RSSoknadstatus.SENDT) {
+        return senesteSendtDato(soknad2) - senesteSendtDato(soknad1)
+    }
+    return sorterEtterPerioder(soknad1, soknad2)
+}
+
+export const sorterEtterStatus = (soknad1: Soknad, soknad2: Soknad) => {
+    if (soknad1.status === soknad2.status) {
+        return sorterEtterPerioder(soknad1, soknad2)
+    }
+    if (soknad1.status === RSSoknadstatus.AVBRUTT) {
+        return -1
+    }
+    if (soknad1.status === RSSoknadstatus.SENDT) {
+        if (soknad2.status === RSSoknadstatus.UTGAATT) {
+            return -1
+        }
+        return 1
+    }
+    if (soknad1.status === RSSoknadstatus.UTGAATT) {
+        return 1
+    }
+    return sorterEtterPerioder(soknad1, soknad2)
 }
 
 export const sorterEtterPerioder = (soknad1: Soknad, soknad2: Soknad) => {

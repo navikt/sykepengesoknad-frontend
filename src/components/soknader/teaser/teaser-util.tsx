@@ -3,16 +3,24 @@ import { Normaltekst } from 'nav-frontend-typografi'
 import React from 'react'
 
 import { arbeidstakerGradert } from '../../../data/mock/data/soknader-opplaering'
-import SoknaderHoverIkon from '../../../pages/soknader/soknader-hover.svg'
-import SoknaderIkon from '../../../pages/soknader/soknader.svg'
+import { RSArbeidssituasjon } from '../../../types/rs-types/rs-arbeidssituasjon'
 import { RSSoknadstatus } from '../../../types/rs-types/rs-soknadstatus'
 import { RSSoknadstype } from '../../../types/rs-types/rs-soknadstype'
 import { Soknad } from '../../../types/types'
+import { tilLesbarDatoMedArstall } from '../../../utils/dato-utils'
 import env from '../../../utils/environment'
 import { getRiktigDato, getSendtTilSuffix } from '../../../utils/soknad-utils'
 import { getLedetekst, tekst } from '../../../utils/tekster'
-import GlobeHoverIkon from './globe-hover.svg'
-import GlobeIkon from './globe.svg'
+import SoknadAvbruttHoverIkon from './img/hover/soknad-avbrutt.svg'
+import SoknadFremtidigHoverIkon from './img/hover/soknad-fremtidig.svg'
+import SoknadNyUtlandHoverIkon from './img/hover/soknad-ny-utland.svg'
+import SoknadNyHoverIkon from './img/hover/soknad-ny.svg'
+import SoknadSendtHoverIkon from './img/hover/soknad-sendt.svg'
+import SoknadAvbruttIkon from './img/soknad-avbrutt.svg'
+import SoknadFremtidigIkon from './img/soknad-fremtidig.svg'
+import SoknadNyUtlandIkon from './img/soknad-ny-utland.svg'
+import SoknadNyIkon from './img/soknad-ny.svg'
+import SoknadSendtIkon from './img/soknad-sendt.svg'
 
 export const erSendtTilBeggeMenIkkeSamtidig = (soknad: Soknad) => {
     return soknad.sendtTilNAVDato && soknad.sendtTilArbeidsgiverDato
@@ -42,12 +50,50 @@ export const SendtUlikt = ({ soknad }: SendtUliktProps) => {
     )
 }
 
-export const hentIkon = (soknadstype: RSSoknadstype) => {
-    return soknadstype === RSSoknadstype.OPPHOLD_UTLAND ? GlobeIkon : SoknaderIkon
+export const hentIkon = (soknad: Soknad) => {
+    switch (soknad.status) {
+        case RSSoknadstatus.NY:
+        case RSSoknadstatus.UTKAST_TIL_KORRIGERING: {
+            if (soknad.soknadstype === RSSoknadstype.OPPHOLD_UTLAND) {
+                return SoknadNyUtlandIkon
+            }
+            return SoknadNyIkon
+        }
+        case RSSoknadstatus.FREMTIDIG: {
+            return SoknadFremtidigIkon
+        }
+        case RSSoknadstatus.SENDT: {
+            return SoknadSendtIkon
+        }
+        case RSSoknadstatus.AVBRUTT:
+        case RSSoknadstatus.UTGAATT: {
+            return SoknadAvbruttIkon
+        }
+    }
+    return SoknadNyIkon
 }
 
-export const hentIkonHover = (soknadstype: RSSoknadstype) => {
-    return soknadstype === RSSoknadstype.OPPHOLD_UTLAND ? GlobeHoverIkon : SoknaderHoverIkon
+export const hentIkonHover = (soknad: Soknad) => {
+    switch (soknad.status) {
+        case RSSoknadstatus.NY:
+        case RSSoknadstatus.UTKAST_TIL_KORRIGERING: {
+            if (soknad.soknadstype === RSSoknadstype.OPPHOLD_UTLAND) {
+                return SoknadNyUtlandHoverIkon
+            }
+            return SoknadNyHoverIkon
+        }
+        case RSSoknadstatus.FREMTIDIG: {
+            return SoknadFremtidigHoverIkon
+        }
+        case RSSoknadstatus.SENDT: {
+            return SoknadSendtHoverIkon
+        }
+        case RSSoknadstatus.AVBRUTT:
+        case RSSoknadstatus.UTGAATT: {
+            return SoknadAvbruttHoverIkon
+        }
+    }
+    return SoknadNyHoverIkon
 }
 
 export const beregnUndertekst = (soknad: Soknad) => {
@@ -115,16 +161,54 @@ export const leggTilSoknadstypeForDemoside = (soknad: Soknad) => {
 }
 
 export const hentTeaserStatustekst = (soknad: Soknad) => {
-    if (
-        soknad.status !== RSSoknadstatus.NY &&
-        soknad.status !== RSSoknadstatus.SENDT &&
-        soknad.status !== RSSoknadstatus.AVBRUTT
-    ) {
+    if (soknad.status === RSSoknadstatus.AVBRUTT ||
+        soknad.status === RSSoknadstatus.UTGAATT) {
+        return tekst(`soknad.teaser.status.${soknad.status}`)
+    }
+    if (soknad.status === RSSoknadstatus.FREMTIDIG) {
         return getLedetekst(tekst(`soknad.teaser.status.${soknad.status}`), {
-            '%DATO%': dayjs(getRiktigDato(soknad)).format('DD.MM.YYYY'),
+            '%DATO%': tilLesbarDatoMedArstall(dayjs(soknad.tom).add(1, 'day'))
         })
     }
+    if (soknad.status === RSSoknadstatus.SENDT) {
+        if (soknad.sendtTilArbeidsgiverDato) {
+            if (soknad.sendtTilNAVDato) {
+                return tekst(`soknad.teaser.status.${soknad.status}.til-arbeidsgiver-og-nav`)
+            }
+            return tekst(`soknad.teaser.status.${soknad.status}.til-arbeidsgiver`)
+        }
+        return tekst(`soknad.teaser.status.${soknad.status}.til-nav`)
+    }
     return ''
+}
+
+export const periodeListevisning = (soknad: Soknad) => {
+    if (soknad.soknadstype === RSSoknadstype.BEHANDLINGSDAGER &&
+        soknad.arbeidssituasjon !== RSArbeidssituasjon.ARBEIDSTAKER) {
+        return ''
+    }
+
+    const perioder = soknad.soknadPerioder.map(p => {
+        if (soknad.soknadstype === RSSoknadstype.BEHANDLINGSDAGER) {
+            return getLedetekst(tekst('soknad.teaser.sykmeldt-behandlingsdager-fra'), {
+                '%ARBEIDSGIVER%': finnArbeidsgivernavn(soknad)
+            })
+        }
+        if (soknad.soknadstype === RSSoknadstype.ARBEIDSTAKERE) {
+            return getLedetekst(tekst('soknad.teaser.sykmeldt-fra'), {
+                '%GRAD%': p.grad,
+                '%ARBEIDSGIVER%': finnArbeidsgivernavn(soknad),
+            })
+        }
+        return getLedetekst(tekst('soknad.teaser.sykmeldt'), {
+            '%GRAD%': p.grad,
+        })
+    })
+
+    return (perioder.length === 0) ? '' :
+        <ul className={'inngangspanel__periode__undertekst'}>
+            {perioder.map((p, i) => <li key={i}> {p} </li>)}
+        </ul>
 }
 
 export interface SykepengesoknadTeaserProps {

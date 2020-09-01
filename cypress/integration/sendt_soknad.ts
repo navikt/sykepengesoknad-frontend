@@ -14,7 +14,7 @@ describe('Tester sendt søknad', () => {
     it('Sendt søknad har forventa tekst', function() {
         cy.get(`#soknader-sendt article[aria-labelledby*=${sendtArbeidsledig.id}]`)
             .should('include.text', 'Gjelder perioden 27. mai – 11. juni 2020')
-            .should('include.text', 'Sendt til NAV 12.06.2020')
+            .should('include.text', 'Sendt til NAV')
 
     })
 

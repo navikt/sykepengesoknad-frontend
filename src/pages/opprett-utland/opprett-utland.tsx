@@ -38,7 +38,7 @@ const OpprettUtland = () => {
                     soknader.push(soknad)
                     setSoknader(soknader)
                 }
-                history.push(getUrlTilSoknad(soknad, '1'))
+                history.push(getUrlTilSoknad(soknad))
                 setFeilmeldingTekst('')
             } else {
                 logger.error('Feil ved opprettelse av utlandssøknad', fetchState)

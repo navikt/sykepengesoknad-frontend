@@ -1,13 +1,14 @@
 import React, { useEffect, useState } from 'react'
 import { useParams } from 'react-router'
 
+import { RouteParams } from '../../app'
 import { useAppStore } from '../../data/stores/app-store'
 import env from '../../utils/environment'
 import Vis from '../vis'
 
 const SykSokLokalt = () => {
     const { valgtSoknad, valgtSykmelding } = useAppStore()
-    const { stegId } = useParams()
+    const { stegId } = useParams<RouteParams>()
     const [ width, setWidth ] = useState<number>(window.innerWidth)
 
     // eslint-disable-next-line

@@ -26,7 +26,7 @@ const jaNeiValg = [ {
 } ]
 
 const JaNeiInput = ({ sporsmal }: SpmProps) => {
-    const { register, setValue, errors, reset, getValues, clearError } = useFormContext()
+    const { register, setValue, errors, reset, getValues, clearErrors } = useFormContext()
     const feilmelding = hentFeilmelding(sporsmal)
     const [ lokal, setLokal ] = useState<string>(hentSvar(sporsmal))
 
@@ -59,9 +59,9 @@ const JaNeiInput = ({ sporsmal }: SpmProps) => {
     const valider = (value: any) => {
         if (value === 'JA' || value === 'NEI') {
             if (sporsmal.erHovedsporsmal) {
-                clearError()
+                clearErrors()
             } else {
-                clearError(sporsmalIdListe(sporsmal.undersporsmal))
+                clearErrors(sporsmalIdListe(sporsmal.undersporsmal))
             }
             return true
         }
@@ -93,7 +93,7 @@ const JaNeiInput = ({ sporsmal }: SpmProps) => {
                                         aria-checked={OK}
                                         checked={OK}
                                         value={valg.value}
-                                        onClick={() => changeValue(valg.value)}
+                                        onChange={() => changeValue(valg.value)}
                                         ref={register({
                                             validate: (value) => valider(value),
                                             required: feilmelding.global

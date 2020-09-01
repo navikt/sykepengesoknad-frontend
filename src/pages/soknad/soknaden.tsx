@@ -7,6 +7,7 @@ import React, { useEffect } from 'react'
 import { Link, useParams } from 'react-router-dom'
 import { useHistory } from 'react-router-dom'
 
+import { RouteParams } from '../../app'
 import Banner from '../../components/banner/banner'
 import Brodsmuler from '../../components/brodsmuler/brodsmuler'
 import { HotjarTrigger } from '../../components/hotjar-trigger'
@@ -39,7 +40,7 @@ const brodsmuler: Brodsmule[] = [ {
 
 const Soknaden = () => {
     const { soknader, valgtSoknad, setValgtSoknad, sykmeldinger, setValgtSykmelding } = useAppStore()
-    const { id } = useParams()
+    const { id } = useParams<RouteParams>()
 
     useEffect(() => {
         const filtrertSoknad = soknader.find(soknad => soknad.id === id)
@@ -47,7 +48,6 @@ const Soknaden = () => {
 
         const sykmelding = sykmeldinger.find(sm => sm.id === filtrertSoknad?.sykmeldingId)
         setValgtSykmelding(sykmelding)
-
         // eslint-disable-next-line
     }, [id]);
 
@@ -76,14 +76,14 @@ export default Soknaden
 
 const Fordeling = () => {
     const { valgtSoknad } = useAppStore()
-    const { stegId } = useParams()
+    const { stegId } = useParams<RouteParams>()
     const stegNo = parseInt(stegId)
     const history = useHistory()
     if (!valgtSoknad) {
         return null
     }
     if (isNaN(stegNo)) {
-        history.replace(getUrlTilSoknad(valgtSoknad, '1'))
+        history.replace(getUrlTilSoknad(valgtSoknad))
         return null
     }
 

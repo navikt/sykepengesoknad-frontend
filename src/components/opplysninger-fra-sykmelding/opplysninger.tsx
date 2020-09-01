@@ -3,6 +3,7 @@ import './opplysninger.less'
 import React, { useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom'
 
+import { RouteParams } from '../../app'
 import { useAppStore } from '../../data/stores/app-store'
 import { RSSoknadstatus } from '../../types/rs-types/rs-soknadstatus'
 import { tekst } from '../../utils/tekster'
@@ -23,7 +24,7 @@ interface OpplysningerProps {
 const Opplysninger = ({ ekspandert }: OpplysningerProps) => {
     const valgtSoknad = useAppStore().valgtSoknad!
     const [ apen, setApen ] = useState<boolean>(ekspandert)
-    const { stegId } = useParams()
+    const { stegId } = useParams<RouteParams>()
 
     useEffect(() => {
         const tidligere = valgtSoknad.status === RSSoknadstatus.SENDT

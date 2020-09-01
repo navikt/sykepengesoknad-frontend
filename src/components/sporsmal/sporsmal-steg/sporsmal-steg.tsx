@@ -6,6 +6,7 @@ import { Normaltekst } from 'nav-frontend-typografi'
 import React from 'react'
 import { useParams } from 'react-router-dom'
 
+import { RouteParams } from '../../../app'
 import { useAppStore } from '../../../data/stores/app-store'
 import { TagTyper } from '../../../types/enums'
 import { Sporsmal } from '../../../types/types'
@@ -18,7 +19,7 @@ interface FremdriftsbarProps {
 }
 
 const Fremdriftsbar = ({ antallSteg }: FremdriftsbarProps) => {
-    const { stegId } = useParams()
+    const { stegId } = useParams<RouteParams>()
     const stegNo = parseInt(stegId)
     const style = {
         width: `${((100 / antallSteg) * stegNo)}%`,
@@ -36,10 +37,9 @@ const Fremdriftsbar = ({ antallSteg }: FremdriftsbarProps) => {
 }
 
 const SporsmalSteg = () => {
-    const { valgtSoknad, setSisteSteg } = useAppStore()
-    const { stegId } = useParams()
+    const { valgtSoknad } = useAppStore()
+    const { stegId } = useParams<RouteParams>()
     const aktivtSteg = parseInt(stegId)
-    setSisteSteg(aktivtSteg)
     const steg = valgtSoknad!.sporsmal.filter(s => s.tag !== TagTyper.VAER_KLAR_OVER_AT)
 
     return (

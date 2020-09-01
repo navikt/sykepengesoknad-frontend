@@ -16,7 +16,6 @@ export const [ AppStoreProvider, useAppStore ] = constate(() => {
     const [ feilState, setFeilState ] = useState<boolean>(false)
     const [ feilmeldingTekst, setFeilmeldingTekst ] = useState<string>('')
     const [ rerenderSporsmalForm, setRerenderSporsmalForm ] = useState<number>(new Date().getUTCMilliseconds())
-    const [ sisteSteg, setSisteSteg ] = useState<number>()
 
     return {
         unleash, setUnleash,
@@ -30,6 +29,5 @@ export const [ AppStoreProvider, useAppStore ] = constate(() => {
         feilState, setFeilState,
         feilmeldingTekst, setFeilmeldingTekst,
         rerenderSporsmalForm, setRerenderSporsmalForm,
-        sisteSteg, setSisteSteg
     }
 })

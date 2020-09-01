@@ -1,21 +1,43 @@
 @import '../../../../node_modules/nav-frontend-core/less/_variabler';
+@import '../../../../src/basic';
 
 .inngangspanelerHeader {
-    padding: 1rem 2rem;
-    background-color: @white;
+    padding: 1rem;
+    display: flex;
+
+    .inngangspanel__sortering {
+        display: inline-block;
+        position: absolute;
+        right: 1rem;
+
+        ~ .typo-undertittel {
+            padding-top: 3rem;
+        }
+    }
 }
 
 .inngangspanel {
     display: flex;
+    align-items: center;
     position: relative;
+    border: 1px solid @navMorkGra;
+    border-radius: 4px;
     background-color: @white;
-    margin-top: 1px;
-    padding: 2rem 3rem 2rem 0;
+    margin-bottom: 1rem;
+    padding: 1.3rem 2rem 1.5rem 1rem;
     color: @navMorkGra;
     text-decoration: none;
+    cursor: pointer;
+
+    .inngangspanel__status {
+        margin: 4px 0;
+    }
+
+    .inngangspanel__innhold {
+        padding: 0 0.5rem;
+    }
 
     &.inngangspanel__btn {
-        border: 0;
         width: 100%;
         text-align: left;
     }
@@ -23,17 +45,13 @@
     .chevronboks {
         position: absolute;
         right: 1rem;
-        top: 2.4rem;
+        top: 50%;
         color: @grayIcon;
     }
 
     .inngangspanel__ikon {
-        display: flex;
-        width: 60px;
-        justify-content: flex-start;
-        align-items: center;
-        flex-direction: column;
-        margin-left: 18px;
+        display: block;
+        width: 44px;
     }
 
     .inngangspanel__ikon--hover {
@@ -50,7 +68,7 @@
         }
 
         .inngangspanel__ikon--hover {
-            display: flex;
+            display: block;
         }
 
         .inngangspanel__ikon--normal {
@@ -58,36 +76,29 @@
         }
     }
 
-    .inngangspanel__status {
-        position: relative;
-    }
-
-    &.inngangspanel--ekstern {
-        border: 5px solid @navDypBlaLighten40;
-        background-position: 97% center;
-        padding-top: 1.5rem;
-        padding-bottom: 1.5rem;
-        margin-bottom: 2.5rem;
-    }
-
     &.inngangspanel--tomListe {
         padding: 1rem 2rem 1rem;
         font-weight: 400;
     }
 
-    .inngangspanel__undertekst {
-        margin-top: 0.7rem;
+    .inngangspanel__periode__undertekst {
+        margin: 0;
+        padding-top: 1rem;
+        padding-left: 1rem;
+        max-width: 20rem;
     }
 
 }
 
+.inngangspanel--ny {
+    border-color: @navOransje;
+    background-color: mix(@navOransje, @white, 5%);
+}
+
 .inngangspanel--inaktivt {
+    padding: 0 0.5rem;
     background-image: none;
     color: @navGra60;
-
-    .inngangspanel__status {
-        color: @navMorkGra;
-    }
 }
 
 .modal.modal__teaser_popup {
@@ -101,12 +112,10 @@
     }
 }
 
-@media (min-width: @screen-sm) {
-    .inngangspanel {
-        .inngangspanel__status {
-            position: absolute;
-            top: 1.8rem;
-            right: 3rem;
-        }
+@media (min-width: @skjermMedium) {
+    .inngangspanel__status {
+        position: absolute;
+        right: 3rem;
+        top: calc(50% - 15px);
     }
 }

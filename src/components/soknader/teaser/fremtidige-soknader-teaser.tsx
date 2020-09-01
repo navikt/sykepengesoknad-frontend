@@ -1,7 +1,6 @@
-import './teaser.less'
-
 import dayjs from 'dayjs'
 import Alertstripe from 'nav-frontend-alertstriper'
+import { HoyreChevron } from 'nav-frontend-chevron'
 import ModalWrapper from 'nav-frontend-modal'
 import { Normaltekst, Systemtittel } from 'nav-frontend-typografi'
 import React, { useState } from 'react'
@@ -11,12 +10,11 @@ import { tilLesbarDatoMedArstall, tilLesbarPeriodeMedArstall } from '../../../ut
 import { getLedetekst, tekst } from '../../../utils/tekster'
 import { useAmplitudeInstance } from '../../amplitude/amplitude'
 import Vis from '../../vis'
-import { InngangsHeader, InngangsIkon } from '../inngang/inngangspanel'
+import { InngangsHeader, InngangsIkon, InngangsStatus } from '../inngang/inngangspanel'
 import {
-    finnArbeidsgivernavn,
     hentIkon,
-    hentIkonHover,
-    hentTeaserStatustekst,
+    hentIkonHover, hentTeaserStatustekst,
+    periodeListevisning,
     SykepengesoknadTeaserProps
 } from './teaser-util'
 
@@ -29,32 +27,28 @@ const FremtidigeSoknaderTeaser = ({ soknad }: SykepengesoknadTeaserProps) => {
         <article aria-labelledby={`soknader-header-${soknad.id}`} onClick={() => {
             logEvent('Velger søknad', { soknadstype: soknad.soknadstype })
         }}>
-            <button className="inngangspanel inngangspanel__btn pointer"
+            <button className="inngangspanel inngangspanel__btn inngangspanel--ny"
                 onClick={() => setAapen(true)}>
                 <InngangsIkon
-                    ikon={hentIkon(soknad.soknadstype)}
-                    ikonHover={hentIkonHover(soknad.soknadstype)}
+                    ikon={hentIkon(soknad)}
+                    ikonHover={hentIkonHover(soknad)}
                 />
-                <div className="inngangspanel--inaktivt">
+                <HoyreChevron />
+                <div className="inngangspanel__innhold">
                     <InngangsHeader
-                        meta={getLedetekst(tekst('soknad.teaser.dato.fremtidig'), {
-                            '%DATO%': dayjs(soknad.tom).add(1, 'day').format('DD.MM.YYYY'),
-                        })}
                         tittel={soknad.soknadstype === RSSoknadstype.OPPHOLD_UTLAND
                             ? tekst('soknad.utland.teaser.tittel')
                             : tekst('soknad.teaser.tittel')}
-                        status={hentTeaserStatustekst(soknad)}
                     />
+                    <InngangsStatus status={soknad.status} tekst={hentTeaserStatustekst(soknad)} />
                     <Vis hvis={soknad.soknadstype !== RSSoknadstype.OPPHOLD_UTLAND}>
-                        <Normaltekst className="inngangspanel__tekst">
-                            {getLedetekst(tekst('soknad.teaser.tekst'), {
+                        <Normaltekst className="inngangspanel__periode">
+                            {getLedetekst(tekst('soknad.teaser.periode'), {
                                 '%PERIODE%': tilLesbarPeriodeMedArstall(soknad.fom, soknad.tom),
                             })}
                         </Normaltekst>
                     </Vis>
-                    <Normaltekst className="inngangspanel__undertekst">
-                        {finnArbeidsgivernavn(soknad)}
-                    </Normaltekst>
+                    {periodeListevisning(soknad)}
                 </div>
             </button>
             <ModalWrapper className="modal__teaser_popup" onRequestClose={() => setAapen(false)}

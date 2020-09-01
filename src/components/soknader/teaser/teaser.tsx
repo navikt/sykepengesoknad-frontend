@@ -1,9 +1,7 @@
-import dayjs from 'dayjs'
 import { HoyreChevron } from 'nav-frontend-chevron'
 import { Normaltekst } from 'nav-frontend-typografi'
 import React from 'react'
 
-import { RSSoknadstatus } from '../../../types/rs-types/rs-soknadstatus'
 import { RSSoknadstype } from '../../../types/rs-types/rs-soknadstype'
 import { tilLesbarPeriodeMedArstall } from '../../../utils/dato-utils'
 import env from '../../../utils/environment'
@@ -13,51 +11,44 @@ import { useAmplitudeInstance } from '../../amplitude/amplitude'
 import Vis from '../../vis'
 import { InngangsHeader, InngangsIkon, Inngangspanel } from '../inngang/inngangspanel'
 import {
-    beregnUndertekst,
     hentIkon,
     hentIkonHover,
-    hentTeaserStatustekst,
     leggTilSoknadstypeForDemoside,
+    periodeListevisning,
     SykepengesoknadTeaserProps
 } from './teaser-util'
 
+// TODO: Skal det også legges til undertekst på "utkast til korrigering", "Sendt dato", "Opprettet", "Avbrutt dato"
 const Teaser = ({ soknad }: SykepengesoknadTeaserProps) => {
     const { logEvent } = useAmplitudeInstance()
-    const stegId = soknad.status === RSSoknadstatus.NY || RSSoknadstatus.UTKAST_TIL_KORRIGERING ? '1' : ''
-    const undertekst = beregnUndertekst(soknad)
 
     return (
-        <article aria-labelledby={`soknader-header-${soknad.id}`} onClick={() => {
-            logEvent('Velger søknad', { soknadstype: soknad.soknadstype })
-        }}>
-            <Inngangspanel to={getUrlTilSoknad(soknad, stegId)}>
+        <article
+            aria-labelledby={`soknader-header-${soknad.id}`}
+            onClick={() => {
+                logEvent('Velger søknad', { soknadstype: soknad.soknadstype })
+            }}
+        >
+            <Inngangspanel to={getUrlTilSoknad(soknad)} className="inngangspanel--ny">
                 <InngangsIkon
-                    ikon={hentIkon(soknad.soknadstype)}
-                    ikonHover={hentIkonHover(soknad.soknadstype)}
+                    ikon={hentIkon(soknad)}
+                    ikonHover={hentIkonHover(soknad)}
                 />
                 <HoyreChevron />
                 <div className="inngangspanel__innhold">
                     <InngangsHeader
-                        meta={ getLedetekst(tekst('soknad.teaser.dato'), {
-                            '%DATO%': dayjs(soknad.opprettetDato).format('DD.MM.YYYY'),
-                        })}
                         tittel={soknad.soknadstype === RSSoknadstype.OPPHOLD_UTLAND
                             ? tekst('soknad.utland.teaser.tittel')
                             : tekst('soknad.teaser.tittel')}
-                        status={hentTeaserStatustekst(soknad)}
                     />
                     <Vis hvis={soknad.soknadstype !== RSSoknadstype.OPPHOLD_UTLAND}>
-                        <Normaltekst className="inngangspanel__tekst">
-                            {getLedetekst(tekst('soknad.teaser.tekst'), {
+                        <Normaltekst className="inngangspanel__periode">
+                            {getLedetekst(tekst('soknad.teaser.periode'), {
                                 '%PERIODE%': tilLesbarPeriodeMedArstall(soknad.fom, soknad.tom),
                             })}
                         </Normaltekst>
                     </Vis>
-                    <Vis hvis={undertekst !== undefined}>
-                        <Normaltekst className="inngangspanel__undertekst">
-                            {undertekst}
-                        </Normaltekst>
-                    </Vis>
+                    {periodeListevisning(soknad)}
                     <Vis hvis={env.isOpplaering}>
                         {leggTilSoknadstypeForDemoside(soknad)}
                     </Vis>

@@ -5,6 +5,7 @@ import { Normaltekst } from 'nav-frontend-typografi'
 import React, { useEffect, useState } from 'react'
 import { Link, useParams } from 'react-router-dom'
 
+import { RouteParams } from '../../app'
 import Banner from '../../components/banner/banner'
 import Brodsmuler from '../../components/brodsmuler/brodsmuler'
 import { HotjarTrigger } from '../../components/hotjar-trigger'
@@ -31,7 +32,7 @@ const KvitteringSide = () => {
     const { valgtSoknad, soknader, setValgtSoknad, setValgtSykmelding, sykmeldinger } = useAppStore()
     const [ erSiste, setErSiste ] = useState<boolean>()
 
-    const { id } = useParams()
+    const { id } = useParams<RouteParams>()
 
     useEffect(() => {
         const filtrertSoknad = soknader.find(soknad => soknad.id === id)

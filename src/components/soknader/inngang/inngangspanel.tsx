@@ -1,9 +1,11 @@
 import './inngangspanel.less'
 
-import { Normaltekst, Systemtittel } from 'nav-frontend-typografi'
+import Etikett from 'nav-frontend-etiketter'
+import { Systemtittel } from 'nav-frontend-typografi'
 import React from 'react'
 import { Link } from 'react-router-dom'
 
+import { RSSoknadstatus } from '../../../types/rs-types/rs-soknadstatus'
 import Vis from '../../vis'
 
 interface InngangsIkonProps {
@@ -26,34 +28,51 @@ export const InngangsIkon = ({ ikon, ikonHover }: InngangsIkonProps) => {
     )
 }
 
-interface InngangsProps {
+interface InngangspanelProps {
     to: string;
     children: React.ReactNode;
+    className?: string;
 }
 
-export const Inngangspanel = ({ to, children, }: InngangsProps) => {
+export const Inngangspanel = ({ to, children, className }: InngangspanelProps) => {
     return (
-        <Link to={to} className="inngangspanel">
+        <Link to={to} className={`inngangspanel ${className || ''}`}>
             {children}
         </Link>
     )
 }
 
-interface InngangsHeaderProps {
-    meta: string;
-    tittel: string;
-    status: string;
+interface InngangsStatusProps {
+    status: RSSoknadstatus;
+    tekst: string;
 }
 
-export const InngangsHeader = ({ meta, tittel, status }: InngangsHeaderProps) => {
+export const InngangsStatus = ({ status, tekst }: InngangsStatusProps) => {
+    const type = statusTilType(status)
+    return <Etikett className="inngangspanel__status" type={type}>{tekst}</Etikett>
+}
+
+const statusTilType = (status: RSSoknadstatus) => {
+    switch (status) {
+        case RSSoknadstatus.SENDT:
+            return 'suksess'
+        case RSSoknadstatus.UTGAATT:
+        case RSSoknadstatus.FREMTIDIG:
+            return 'info'
+        case RSSoknadstatus.AVBRUTT:
+            return 'advarsel'
+        default:
+            return 'info'
+    }
+}
+
+interface InngangsHeaderProps {
+    tittel: string;
+}
+
+export const InngangsHeader = ({ tittel }: InngangsHeaderProps) => {
     return (
         <header className="inngangspanel__header">
-            <Normaltekst className="inngangspanel__meta">
-                {meta}
-            </Normaltekst>
-            <Vis hvis={status !== null}>
-                <Normaltekst className="inngangspanel__status">{status}</Normaltekst>
-            </Vis>
             <Systemtittel tag="h3" className="inngangspanel__tittel">
                 {tittel}
             </Systemtittel>
