@@ -2,10 +2,9 @@ import constate from 'constate'
 import { useState } from 'react'
 
 import { RSMottaker } from '../../types/rs-types/rs-mottaker'
-import {  Soknad, Sykmelding, UnleashToggles } from '../../types/types'
+import {  Soknad, Sykmelding } from '../../types/types'
 
 export const [ AppStoreProvider, useAppStore ] = constate(() => {
-    const [ unleash, setUnleash ] = useState<UnleashToggles>()
     const [ soknader, setSoknader ] = useState<Soknad[]>([])
     const [ sykmeldinger, setSykmeldinger ] = useState<Sykmelding[]>([])
     const [ valgtSoknad, setValgtSoknad ] = useState<Soknad>()
@@ -18,7 +17,6 @@ export const [ AppStoreProvider, useAppStore ] = constate(() => {
     const [ rerenderSporsmalForm, setRerenderSporsmalForm ] = useState<number>(new Date().getUTCMilliseconds())
 
     return {
-        unleash, setUnleash,
         soknader, setSoknader,
         valgtSoknad, setValgtSoknad,
         sykmeldinger, setSykmeldinger,

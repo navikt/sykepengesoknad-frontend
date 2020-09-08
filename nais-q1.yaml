@@ -34,8 +34,6 @@ spec:
       value: "https://loginservice-q.nav.no/login"
     - name: LOGINSERVICE_REDIRECT_URL
       value: "https://tjenester-q1.nav.no/sykepengesoknad"
-    - name: UNLEASH_URL
-      value: "https://tjenester-q1.nav.no/syfounleash"
     - name: AMPLITUDE_KEY
       value: "7a887ba3e5a07c755526c6591810101a"
     - name: AMPLITUDE_ENABLED

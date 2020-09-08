@@ -22,10 +22,6 @@ class Environment {
         return this.env.SYFOREST_ROOT
     }
 
-    get unleashUrl() {
-        return this.env.UNLEASH_URL
-    }
-
     get isMockBackend() {
         return this.env.MOCK_BACKEND === 'true'
     }

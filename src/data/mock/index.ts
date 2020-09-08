@@ -20,7 +20,6 @@ import {
 } from './data/soknader-integration'
 import { arbeidstaker, arbeidstakerGradert, soknaderOpplaering } from './data/soknader-opplaering'
 import { sykmeldinger } from './data/sykmeldinger'
-import { unleashToggles } from './data/toggles'
 
 const mock = FetchMock.configure({
     enableFallback: true,
@@ -101,8 +100,6 @@ mock.post(`${env.syfoapiRoot}/syfosoknad/api/soknader/:soknad/finnMottaker`,
         return res(ctx.json({ mottaker: RSMottaker.NAV }))
     })
 
-
-mock.post(env.unleashUrl, (req, res, ctx) => res(ctx.json(unleashToggles)))
 
 mock.get(`${env.syfoapiRoot}/syfosoknad/api/soknader`,
     (req, res, ctx) => res(ctx.json(soknader)))
