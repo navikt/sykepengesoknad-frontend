@@ -124,7 +124,7 @@ jobs:
         env:
           APIKEY: ${{ secrets.NAIS_DEPLOY_APIKEY }}
           CLUSTER: labs-gcp
-          RESOURCE: nais-gcp.yaml
+          RESOURCE: nais-labs.yaml
 
   deploy-to-prod-sbs:
     if: github.ref == 'refs/heads/master'
