@@ -11,28 +11,24 @@ import { oversiktside } from '../../utils/url-utils'
 import { setBodyClass } from '../../utils/utils'
 
 export function FeilView() {
-
     const history = useHistory()
     history.replace(oversiktside)
-
 
     useEffect(() => {
         setBodyClass('feil-state')
     }, [])
 
-
     return (
-        <>
-            <div className="limit">
+        <div className="limit">
 
-                <div aria-live="polite">
-                    <Alertstripe type="feil">{tekst('feilstate.alert')}</Alertstripe>
-                </div>
-                <div className="knappewrapper">
-                    <Knapp onClick={() => window.location.reload()}>{tekst('feilstate.refresh')}</Knapp>
-                </div>
+            <div aria-live="polite">
+                <Alertstripe type="feil">{tekst('feilstate.alert')}</Alertstripe>
             </div>
-        </>)
+            <div className="knappewrapper">
+                <Knapp onClick={() => window.location.reload()}>{tekst('feilstate.refresh')}</Knapp>
+            </div>
+        </div>
+    )
 }
 
 
