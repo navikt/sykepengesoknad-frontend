@@ -10,9 +10,7 @@ const IkkeRelevant = ({ sporsmal }: SpmProps) => {
         <Vis hvis={sporsmal.sporsmalstekst !== undefined}>
             <>
                 <Element tag="h3" className="skjema__sporsmal">{sporsmal.sporsmalstekst}</Element>
-                <div className="redaksjonelt-innhold">
-                    <Normaltekst tag="div">{parser(sporsmal.undertekst)}</Normaltekst>
-                </div>
+                <Normaltekst tag="div" className="redaksjonelt-innhold">{parser(sporsmal.undertekst)}</Normaltekst>
             </>
         </Vis>
     )
