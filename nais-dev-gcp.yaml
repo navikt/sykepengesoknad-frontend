@@ -1,0 +1,39 @@
+apiVersion: "nais.io/v1alpha1"
+kind: "Application"
+metadata:
+  name: sykepengesoknad
+  namespace: flex
+  labels:
+    team: flex
+spec:
+  image: {{ image }}
+  port: 8080
+  ingresses:
+    - "https://sykepengesoknad.dev.nav.no/"
+  liveness:
+    path: internal/isAlive
+  readiness:
+    path: internal/isReady
+  env:
+    - name: SYFOAPI_ROOT
+      value: "https://syfoapi.dev.nav.no"
+    - name: SYKMELDINGER_BACKEND_PROXY_ROOT
+      value: "https://sykmeldinger-backend-proxy.dev.nav.no"
+    - name: BRUK_SYKMELDINGER_BACKEND_PROXY
+      value: "true"
+    - name: SYFOREST_ROOT
+      value: "brukes-ikke"
+    - name: LOGINSERVICE_URL
+      value: "https://loginservice.dev.nav.no/login"
+    - name: LOGINSERVICE_REDIRECT_URL
+      value: "https://sykepengesoknad.dev.nav.no"
+    - name: AMPLITUDE_KEY
+      value: "7a887ba3e5a07c755526c6591810101a"
+    - name: AMPLITUDE_ENABLED
+      value: "true"
+    - name: DECORATOR_URL
+      value: "https://dekoratoren.dev.nav.no"
+    - name: ENVIRONMENT
+      value: "q1"
+    - name: SYKEFRAVAER_URL
+      value: "https://sykefravaer.er.ikke.tilgjengelig.fra.naisdevice.ennå.dev.nav.no"

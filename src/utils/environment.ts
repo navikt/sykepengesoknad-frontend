@@ -30,6 +30,14 @@ class Environment {
         return this.env.OPPLAERING === 'true'
     }
 
+    get isBrukSykmeldingerBackendProxy() {
+        return this.env.BRUK_SYKMELDINGER_BACKEND_PROXY === 'true'
+    }
+
+    get sykmeldingerBackendProxyRoot() {
+        return this.env.SYKMELDINGER_BACKEND_PROXY_ROOT
+    }
+
     get loginServiceUrl() {
         return this.env.LOGINSERVICE_URL
     }

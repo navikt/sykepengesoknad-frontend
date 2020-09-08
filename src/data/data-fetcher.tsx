@@ -29,7 +29,11 @@ export function DataFetcher(props: { children: any }) {
             })
         }
         if (isNotStarted(sykmeldinger)) {
-            sykmeldinger.fetch(env.syforestRoot + '/sykmeldinger', {
+            let url = env.syforestRoot + '/sykmeldinger'
+            if(env.isBrukSykmeldingerBackendProxy){
+                url = `${env.sykmeldingerBackendProxyRoot}/api/v1/syforest/sykmeldinger`
+            }
+            sykmeldinger.fetch(url, {
                 credentials: 'include',
             }, (fetchState: FetchState<Sykmelding[]>) => {
                 if (hasData(fetchState)) {
