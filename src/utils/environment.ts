@@ -22,16 +22,20 @@ class Environment {
         return this.env.SYFOREST_ROOT
     }
 
-    get unleashUrl() {
-        return this.env.UNLEASH_URL
-    }
-
     get isMockBackend() {
         return this.env.MOCK_BACKEND === 'true'
     }
 
     get isOpplaering() {
         return this.env.OPPLAERING === 'true'
+    }
+
+    get isBrukSykmeldingerBackendProxy() {
+        return this.env.BRUK_SYKMELDINGER_BACKEND_PROXY === 'true'
+    }
+
+    get sykmeldingerBackendProxyRoot() {
+        return this.env.SYKMELDINGER_BACKEND_PROXY_ROOT
     }
 
     get loginServiceUrl() {
