@@ -18,35 +18,66 @@
 
 .inngangspanel {
     display: flex;
-    align-items: center;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: flex-start;
     position: relative;
     border: 1px solid @navMorkGra;
     border-radius: 4px;
     background-color: @white;
     margin-bottom: 1rem;
-    padding: 1.3rem 2rem 1.5rem 1rem;
+    padding: 1.3rem 1rem 1.5rem 1rem;
     color: @navMorkGra;
     text-decoration: none;
     cursor: pointer;
-
-    .inngangspanel__status {
-        margin: 4px 0;
-    }
-
-    .inngangspanel__innhold {
-        padding: 0 0.5rem;
-    }
 
     &.inngangspanel__btn {
         width: 100%;
         text-align: left;
     }
 
-    .chevronboks {
-        position: absolute;
-        right: 1rem;
-        top: 50%;
-        color: @grayIcon;
+    &.inngangspanel--tomListe {
+        padding: 1rem 2rem 1rem;
+        font-weight: 400;
+
+        &:hover {
+            box-shadow: none;
+            cursor: default;
+        }
+    }
+
+    &:hover {
+        position: relative;
+        z-index: 100;
+        box-shadow: #ccc 0 0 4px 2px;
+
+        .inngangspanel__ikon--hover {
+            display: block;
+
+            img {
+                margin-right: 4px;
+            }
+        }
+
+        .inngangspanel__ikon--normal {
+            display: none;
+        }
+    }
+
+    .inngangspanel__del1, .inngangspanel__del2 {
+        display: flex;
+        justify-content: flex-start;
+        align-items: center;
+    }
+
+    .inngangspanel__del2 {
+        .inngangspanel__status {
+            margin: 1rem 0 0 44px;
+        }
+
+        .chevronboks {
+            display: none;
+        }
     }
 
     .inngangspanel__ikon {
@@ -58,27 +89,17 @@
         display: none;
     }
 
-    &:hover {
-        position: relative;
-        z-index: 100;
-        box-shadow: #ccc 0 0 4px 2px;
-
-        .chevronboks {
-            color: @navBla;
-        }
-
-        .inngangspanel__ikon--hover {
-            display: block;
-        }
-
-        .inngangspanel__ikon--normal {
-            display: none;
-        }
+    .inngangspanel__innhold {
+        padding-left: 0.5rem;
     }
 
-    &.inngangspanel--tomListe {
-        padding: 1rem 2rem 1rem;
-        font-weight: 400;
+    .inngangspanel__tittel {
+        margin-bottom: 0.5rem;
+    }
+
+    .inngangspanel__status {
+        white-space: nowrap;
+        margin: 4px 0;
     }
 
     .inngangspanel__periode__undertekst {
@@ -87,7 +108,6 @@
         padding-left: 1rem;
         max-width: 20rem;
     }
-
 }
 
 .inngangspanel--ny {
@@ -113,9 +133,40 @@
 }
 
 @media (min-width: @skjermMedium) {
-    .inngangspanel__status {
-        position: absolute;
-        right: 3rem;
-        top: calc(50% - 15px);
+    .inngangspanel {
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+        padding-right: 2rem;
+
+        &:hover {
+            .inngangspanel__del2 {
+                .chevronboks {
+                    color: @navBla;
+                }
+            }
+        }
+
+        .inngangspanel__tittel {
+            margin-bottom: 0;
+        }
+
+        .inngangspanel__del2 {
+            margin: 0;
+
+            .inngangspanel__status {
+                margin: 0;
+            }
+
+            .chevronboks {
+                display: inline-block;
+                margin: 0 -1rem 0 1rem;
+                color: @grayIcon;
+            }
+        }
+
+        .inngangspanel__innhold {
+            padding-right: 0.5rem;
+        }
     }
 }
