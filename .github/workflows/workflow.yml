@@ -16,6 +16,7 @@ jobs:
           VERSION=$TIME-$COMMIT
           echo "::set-env name=IMAGE_ROOT::"docker.pkg.github.com/${GITHUB_REPOSITORY}/$APP-root:$VERSION""
           echo "::set-env name=IMAGE_SYKEPENGESOKNAD::"docker.pkg.github.com/${GITHUB_REPOSITORY}/$APP-sykepengesoknad:$VERSION""
+          echo "::set-env name=IMAGE_SYK_SYKEPENGESOKNAD::"docker.pkg.github.com/${GITHUB_REPOSITORY}/$APP-syk-sykepengesoknad:$VERSION""
           echo "::set-env name=VERSION::"$VERSION""
       - run: echo $VERSION > VERSION.txt
       - name: Last opp VERSION til neste job
@@ -55,6 +56,10 @@ jobs:
         run: |
           docker build . -f Dockerfile.sykepengesoknad -t ${IMAGE_SYKEPENGESOKNAD}
           docker push ${IMAGE_SYKEPENGESOKNAD}
+      - name: Bygg og push Docker image hvor appen serves på /syk/sykepengesoknad
+        run: |
+          docker build . -f Dockerfile.syksykepengesoknad -t ${IMAGE_SYK_SYKEPENGESOKNAD}
+          docker push ${IMAGE_SYK_SYKEPENGESOKNAD}
 
   integrasjonstest:
     name: Integrasjonstest
@@ -117,7 +122,7 @@ jobs:
           name: VERSION.txt
           path: .
       - run: echo "::set-env name=VERSION::"`cat VERSION.txt`""
-      - run: echo "::set-env name=IMAGE::"docker.pkg.github.com/${GITHUB_REPOSITORY}/$APP-root:$VERSION""
+      - run: echo "::set-env name=IMAGE::"docker.pkg.github.com/${GITHUB_REPOSITORY}/$APP-syk-sykepengesoknad:$VERSION""
       - name: Deploy to dev-gcp
         uses: nais/deploy/actions/deploy@v1
         env:
