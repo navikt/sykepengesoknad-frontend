@@ -4,32 +4,19 @@ import React, { useEffect } from 'react'
 import IngenData from '../pages/feil/ingen-data'
 import { RSSoknad } from '../types/rs-types/rs-soknad'
 import { Soknad, Sykmelding } from '../types/types'
-import { UnleashToggles } from '../types/types'
 import env from '../utils/environment'
 import { logger } from '../utils/logger'
-import { unleashKeys } from './mock/data/toggles'
 import useFetch from './rest/use-fetch'
 import { FetchState, hasAny401, hasAnyFailed, hasData, isAnyNotStartedOrPending, isNotStarted } from './rest/utils'
 import { useAppStore } from './stores/app-store'
 
 export function DataFetcher(props: { children: any }) {
-    const { setUnleash, setSoknader, setSykmeldinger } = useAppStore()
+    const { setSoknader, setSykmeldinger } = useAppStore()
 
-    const unleash = useFetch<{}>()
     const rssoknader = useFetch<RSSoknad[]>()
     const sykmeldinger = useFetch<Sykmelding[]>()
 
     useEffect(() => {
-        if (isNotStarted(unleash)) {
-            unleash.fetch(env.unleashUrl, {
-                method: 'POST',
-                credentials: 'include',
-                body: JSON.stringify(unleashKeys),
-                headers: { 'Content-Type': 'application/json' }
-            }, (fetchState: FetchState<UnleashToggles>) => {
-                setUnleash(fetchState.data as any)
-            })
-        }
         if (isNotStarted(rssoknader)) {
             rssoknader.fetch(env.syfoapiRoot + '/syfosoknad/api/soknader', {
                 credentials: 'include',
@@ -42,7 +29,11 @@ export function DataFetcher(props: { children: any }) {
             })
         }
         if (isNotStarted(sykmeldinger)) {
-            sykmeldinger.fetch(env.syforestRoot + '/sykmeldinger', {
+            let url = env.syforestRoot + '/sykmeldinger'
+            if(env.isBrukSykmeldingerBackendProxy){
+                url = `${env.sykmeldingerBackendProxyRoot}/api/v1/syforest/sykmeldinger`
+            }
+            sykmeldinger.fetch(url, {
                 credentials: 'include',
             }, (fetchState: FetchState<Sykmelding[]>) => {
                 if (hasData(fetchState)) {
@@ -53,14 +44,14 @@ export function DataFetcher(props: { children: any }) {
         // eslint-disable-next-line
     }, [rssoknader]);
 
-    if (isAnyNotStartedOrPending([ unleash, rssoknader, sykmeldinger ])) {
+    if (isAnyNotStartedOrPending([ rssoknader, sykmeldinger ])) {
         return <Spinner type={'XXL'} />
 
-    } else if (hasAny401([ unleash, rssoknader, sykmeldinger ])) {
+    } else if (hasAny401([ rssoknader, sykmeldinger ])) {
         window.location.href = hentLoginUrl()
 
-    } else if (hasAnyFailed([ unleash, rssoknader, sykmeldinger ])) {
-        logger.error('Klarer ikke hente en av disse [ unleash, rssoknader, sykmeldinger ]')
+    } else if (hasAnyFailed([ rssoknader, sykmeldinger ])) {
+        logger.error('Klarer ikke hente en av disse [ rssoknader, sykmeldinger ]')
         return <IngenData />
     }
 

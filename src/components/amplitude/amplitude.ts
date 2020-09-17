@@ -2,20 +2,15 @@ import amplitude from 'amplitude-js'
 import constate from 'constate'
 import { useEffect, useRef } from 'react'
 
-import { useAppStore } from '../../data/stores/app-store'
 import env from '../../utils/environment'
 
 export const [ AmplitudeProvider, useAmplitudeInstance ] = constate(() => {
-    const { unleash } = useAppStore()
-    const unleashAmplitudeEnabled = unleash === undefined ? false : unleash['syfo.amplitude']
 
     const instance: any = useRef({
         _userAgent: '',
         logEvent: (eventName: string, data?: any) => {
-            if (unleashAmplitudeEnabled) {
-                // eslint-disable-next-line
-                console.log(`Logger ${eventName} - Event properties: ${JSON.stringify(data)}!`);
-            }
+            // eslint-disable-next-line
+            console.log(`Logger ${eventName} - Event properties: ${JSON.stringify(data)}!`);
             return 1
         },
         init: () => {
@@ -24,7 +19,7 @@ export const [ AmplitudeProvider, useAmplitudeInstance ] = constate(() => {
     })
 
     useEffect(() => {
-        if (unleashAmplitudeEnabled && env.amplitudeEnabled) {
+        if (env.amplitudeEnabled) {
             instance.current = amplitude.getInstance()
         }
         instance.current.init(

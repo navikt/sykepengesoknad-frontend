@@ -1,7 +1,6 @@
 import './inngangspanel.less'
 
 import Etikett from 'nav-frontend-etiketter'
-import { Systemtittel } from 'nav-frontend-typografi'
 import React from 'react'
 import { Link } from 'react-router-dom'
 
@@ -64,18 +63,4 @@ const statusTilType = (status: RSSoknadstatus) => {
         default:
             return 'info'
     }
-}
-
-interface InngangsHeaderProps {
-    tittel: string;
-}
-
-export const InngangsHeader = ({ tittel }: InngangsHeaderProps) => {
-    return (
-        <header className="inngangspanel__header">
-            <Systemtittel tag="h3" className="inngangspanel__tittel">
-                {tittel}
-            </Systemtittel>
-        </header>
-    )
 }

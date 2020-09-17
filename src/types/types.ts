@@ -252,10 +252,6 @@ function rsToSporsmal(spms: RSSporsmal[], kriterie: RSVisningskriterieType | nul
     return sporsmals
 }
 
-export interface UnleashToggles {
-    [index: string]: boolean;
-}
-
 export interface Brodsmule {
     sti: string;
     tittel: string;

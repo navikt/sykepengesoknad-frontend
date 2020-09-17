@@ -2,44 +2,37 @@ apiVersion: "nais.io/v1alpha1"
 kind: "Application"
 metadata:
   name: sykepengesoknad
-  namespace: default
+  namespace: flex
   labels:
     team: flex
 spec:
   image: {{ image }}
   port: 8080
   ingresses:
-    - "https://tjenester-q1.nav.no/sykepengesoknad"
-  replicas:
-    min: 2
-    max: 2
-    cpuThresholdPercentage: 50
-  resources:
-    limits:
-      cpu: 500m
-      memory: 256Mi
-    requests:
-      cpu: 200m
-      memory: 256Mi
+    - "https://www-q1.dev.nav.no/syk/sykepengesoknad"
   liveness:
     path: internal/isAlive
   readiness:
     path: internal/isReady
   env:
     - name: SYFOAPI_ROOT
-      value: "https://syfoapi-q.nav.no"
+      value: "https://syfoapi.dev.nav.no"
+    - name: SYKMELDINGER_BACKEND_PROXY_ROOT
+      value: "https://sykmeldinger-backend-proxy.dev.nav.no"
+    - name: BRUK_SYKMELDINGER_BACKEND_PROXY
+      value: "true"
     - name: SYFOREST_ROOT
-      value: "https://tjenester-q1.nav.no/syforest"
+      value: "brukes-ikke"
     - name: LOGINSERVICE_URL
-      value: "https://loginservice-q.nav.no/login"
+      value: "https://loginservice.dev.nav.no/login"
     - name: LOGINSERVICE_REDIRECT_URL
-      value: "https://tjenester-q1.nav.no/sykepengesoknad"
+      value: "https://www-q1.dev.nav.no/syk/sykepengesoknad"
     - name: AMPLITUDE_KEY
       value: "7a887ba3e5a07c755526c6591810101a"
     - name: AMPLITUDE_ENABLED
       value: "true"
     - name: DECORATOR_URL
-      value: "https://www-q1.nav.no/dekoratoren"
+      value: "https://dekoratoren.dev.nav.no"
     - name: ENVIRONMENT
       value: "q1"
     - name: SYKEFRAVAER_URL
