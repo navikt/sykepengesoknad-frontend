@@ -57,7 +57,6 @@
         "nav-frontend-veileder-style": "^2.0.15",
         "nav-frontend-veilederpanel": "^0.1.29",
         "nav-frontend-veilederpanel-style": "0.0.29",
-        "node-forge": ">=0.10.0",
         "prop-types": "^15.7.2",
         "react": "^16.13.1",
         "react-autosuggest": "^10.0.2",
@@ -132,6 +131,7 @@
         "not op_mini all"
     ],
     "resolutions": {
-        "serialize-javascript": "3.1.0"
+        "serialize-javascript": "3.1.0",
+        "node-forge": ">=0.10.0"
     }
 }
