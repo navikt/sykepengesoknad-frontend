@@ -191,6 +191,7 @@ const SporsmalForm = () => {
     const onSubmit = async() => {
         if (poster) return
         setPoster(true)
+        restFeilet = false
         try {
             settSvar(sporsmal, methods.getValues())
             if (erSiste) {
