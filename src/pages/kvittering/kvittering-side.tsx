@@ -1,7 +1,7 @@
 import './kvittering.less'
 
 import { VenstreChevron } from 'nav-frontend-chevron'
-import { Normaltekst, Sidetittel } from 'nav-frontend-typografi'
+import { Normaltekst } from 'nav-frontend-typografi'
 import React, { useEffect, useState } from 'react'
 import { Link, useParams } from 'react-router-dom'
 
@@ -53,9 +53,7 @@ const KvitteringSide = () => {
 
     return (
         <>
-            <Banner>
-                <Sidetittel className="sidebanner__tittel">{tekst('kvittering.sidetittel')}</Sidetittel>
-            </Banner>
+            <Banner />
             <Brodsmuler brodsmuler={brodsmuler} />
 
             <div className="limit">

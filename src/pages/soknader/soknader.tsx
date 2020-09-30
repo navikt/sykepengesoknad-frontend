@@ -1,6 +1,5 @@
 import './soknader.less'
 
-import { Sidetittel } from 'nav-frontend-typografi'
 import React, { useEffect } from 'react'
 
 import Banner from '../../components/banner/banner'
@@ -46,9 +45,7 @@ const Soknader = () => {
 
     return (
         <>
-            <Banner>
-                <Sidetittel className="sidebanner__tittel">{tekst('soknader.sidetittel')}</Sidetittel>
-            </Banner>
+            <Banner overskrift={tekst('soknader.sidetittel')} />
             <Brodsmuler brodsmuler={brodsmuler} />
 
             <div className="limit">
