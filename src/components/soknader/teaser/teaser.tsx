@@ -18,7 +18,6 @@ import {
     SykepengesoknadTeaserProps
 } from './teaser-util'
 
-// TODO: Skal det også legges til undertekst på "utkast til korrigering", "Sendt dato", "Opprettet", "Avbrutt dato"
 const Teaser = ({ soknad }: SykepengesoknadTeaserProps) => {
     const { logEvent } = useAmplitudeInstance()
 
