@@ -13,6 +13,7 @@ import { Brodsmule, Soknad } from '../../types/types'
 import { sorterEtterOpprettetDato, sorterEtterPerioder } from '../../utils/sorter-soknader'
 import { tekst } from '../../utils/tekster'
 import { setBodyClass } from '../../utils/utils'
+import Banner from '../../components/banner/banner';
 
 export const filtrerOgSorterNyeSoknader = (soknader: Soknad[]) => {
     return soknader.filter(soknad =>
@@ -45,11 +46,12 @@ const Soknader = () => {
 
     return (
         <>
+            <Banner>
+                <Sidetittel className="sidebanner__tittel">{tekst('soknader.sidetittel')}</Sidetittel>
+            </Banner>
+            <Brodsmuler brodsmuler={brodsmuler} />
+
             <div className="limit">
-                <Brodsmuler brodsmuler={brodsmuler} />
-                <Sidetittel tag="h1" className="sidetopp__tittel">
-                    {tekst('soknader.sidetittel')}
-                </Sidetittel>
                 <Teasere
                     className={'soknader_teasere'}
                     soknader={nyeSoknader}

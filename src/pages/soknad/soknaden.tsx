@@ -2,7 +2,7 @@ import './soknaden.less'
 
 import AlertStripe from 'nav-frontend-alertstriper'
 import { VenstreChevron } from 'nav-frontend-chevron'
-import { Normaltekst, Systemtittel } from 'nav-frontend-typografi'
+import { Normaltekst, Sidetittel, Systemtittel } from 'nav-frontend-typografi'
 import React, { useEffect } from 'react'
 import { Link, useParams } from 'react-router-dom'
 import { useHistory } from 'react-router-dom'
@@ -61,9 +61,12 @@ const Soknaden = () => {
 
     return (
         <>
-            <Banner />
+            <Banner>
+                <Sidetittel className="sidebanner__tittel">{tekst('soknad.sidetittel')}</Sidetittel>
+            </Banner>
+            <Brodsmuler brodsmuler={brodsmuler} />
+
             <div className="limit">
-                <Brodsmuler brodsmuler={brodsmuler} />
                 <HotjarTrigger soknadstype={valgtSoknad.soknadstype}>
                     <Fordeling />
                 </HotjarTrigger>

@@ -1,4 +1,3 @@
-import BannerTekster from '../components/banner/banner-tekster'
 import KvitteringTekster from '../components/kvittering/kvittering-tekster'
 import OpplysningerTekster from '../components/opplysninger-fra-sykmelding/opplysninger-tekster'
 import OppsummeringTekster from '../components/oppsummering/oppsummering-tekster'
@@ -19,7 +18,6 @@ const tekster = {
     ...KvitteringTekster.nb,
     ...SoknadIntroTekster.nb,
     ...SoknaderTekster.nb,
-    ...BannerTekster.nb,
     ...BjornTekster.nb,
     ...KnapperadTekster.nb,
     ...SoknadenTekster.nb,

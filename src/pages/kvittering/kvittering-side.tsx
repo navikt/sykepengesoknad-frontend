@@ -1,7 +1,7 @@
 import './kvittering.less'
 
 import { VenstreChevron } from 'nav-frontend-chevron'
-import { Normaltekst } from 'nav-frontend-typografi'
+import { Normaltekst, Sidetittel } from 'nav-frontend-typografi'
 import React, { useEffect, useState } from 'react'
 import { Link, useParams } from 'react-router-dom'
 
@@ -52,10 +52,13 @@ const KvitteringSide = () => {
     if (!valgtSoknad) return null
 
     return (
-        <div>
-            <Banner />
+        <>
+            <Banner>
+                <Sidetittel className="sidebanner__tittel">{tekst('kvittering.sidetittel')}</Sidetittel>
+            </Banner>
+            <Brodsmuler brodsmuler={brodsmuler} />
+
             <div className="limit">
-                <Brodsmuler brodsmuler={brodsmuler} />
                 <HotjarTrigger soknadstype={valgtSoknad.soknadstype}>
                     <Kvittering />
                 </HotjarTrigger>
@@ -69,7 +72,7 @@ const KvitteringSide = () => {
                     </Link>
                 </Vis>
             </div>
-        </div>
+        </>
     )
 }
 
