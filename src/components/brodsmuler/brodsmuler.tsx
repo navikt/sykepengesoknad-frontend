@@ -61,8 +61,8 @@ const Brodsmuler = ({ brodsmuler }: BrodsmulerProps) => {
     const synligeBrodsmuler = getSynligeBrodsmuler()
 
     return (
-        <>
-            <nav className="brodsmuler" aria-label="Du er her: ">
+        <nav className="brodsmuler" aria-label="Du er her: ">
+            <div className="limit">
                 <img src={personIkon} alt="Du" className="brodsmuler__ikon" />
                 <Normaltekst tag="ul" className="brodsmuler__smuler">
                     <li className="smule">
@@ -92,8 +92,8 @@ const Brodsmuler = ({ brodsmuler }: BrodsmulerProps) => {
                             return <BrodsmuleBit key={index} {...smule} />
                         })}
                 </Normaltekst>
-            </nav>
-        </>
+            </div>
+        </nav>
     )
 }
 

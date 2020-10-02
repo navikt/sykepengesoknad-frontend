@@ -17,7 +17,7 @@ describe('Tester kvittering', () => {
         cy.visit('http://localhost:8080')
     })
 
-    afterEach(() =>{
+    afterEach(() => {
         cy.get('.brodsmuler__smuler .smule .lenke:contains(Søknader om sykepenger)').click({ force: true })
     })
 
@@ -241,7 +241,7 @@ describe('Tester kvittering', () => {
         })
 
         it('Utenfor arbeidsgiverperiode', () => {
-            cy.get(`#soknader-list-til-behandling article a[href*=${arbeidstakerUtenforArbeidsgiverperiodeKvittering.id}]`).click()
+            cy.get(`#soknader-list-til-behandling article a[href*=${arbeidstakerUtenforArbeidsgiverperiodeKvittering.id}]`).click({ force: true })
             besvarSoknad()
             cy.url().should('include', `/kvittering/${arbeidstakerUtenforArbeidsgiverperiodeKvittering.id}`)
             over16dagerKvittering()

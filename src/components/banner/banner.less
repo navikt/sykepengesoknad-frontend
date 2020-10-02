@@ -1,21 +1,22 @@
 @import '../../../node_modules/nav-frontend-core/less/core';
 @import '../../../src/basic';
 
-.soknadtopp {
-    height: 5em;
-    padding: 0.6em 0 0;
+.sidebanner {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
     background-color: @navLysBlaLighten60;
+    padding: 1.4rem 0;
 
-    .soknadtopp__tittel {
+    .sidebanner__tittel {
         text-align: center;
-        padding-bottom: 0.2em;
     }
 }
 
 @media (min-width: @skjermMedium) {
-    .soknadtopp {
+    .sidebanner {
         .sidebanner__tittel {
-            padding-bottom: 1rem;
             text-align: left;
         }
     }

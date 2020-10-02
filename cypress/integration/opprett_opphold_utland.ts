@@ -3,7 +3,6 @@ import { oppholdUtland } from '../../src/data/mock/data/soknader-opplaering'
 
 describe('Tester opprettelse av søknad om å beholde sykepenger utenfor EØS', () => {
 
-
     before(() => {
         cy.visit('http://localhost:8080')
     })

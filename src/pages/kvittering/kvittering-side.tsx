@@ -52,10 +52,11 @@ const KvitteringSide = () => {
     if (!valgtSoknad) return null
 
     return (
-        <div>
+        <>
             <Banner />
+            <Brodsmuler brodsmuler={brodsmuler} />
+
             <div className="limit">
-                <Brodsmuler brodsmuler={brodsmuler} />
                 <HotjarTrigger soknadstype={valgtSoknad.soknadstype}>
                     <Kvittering />
                 </HotjarTrigger>
@@ -69,7 +70,7 @@ const KvitteringSide = () => {
                     </Link>
                 </Vis>
             </div>
-        </div>
+        </>
     )
 }
 

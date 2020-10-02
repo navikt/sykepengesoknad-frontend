@@ -19,14 +19,12 @@ describe('Tester søknad om å beholde sykepenger utenfor EØS', () => {
     it('PERIODEUTLAND - steg 1', function() {
         cy.url().should('include', `${soknad.id}/1`)
 
-
         cy.contains('Opplysninger fra sykmeldingen').should('not.exist')
         cy.contains('Når skal du reise?')
 
         cy.get('.skjemaelement__input.form-control').focus()
         cy.get('.flatpickr-calendar').contains('17').click({ force: true })
         cy.get('.flatpickr-calendar').contains('24').click({ force: true })
-
 
         cy.contains('Gå videre').click()
     })
@@ -38,16 +36,15 @@ describe('Tester søknad om å beholde sykepenger utenfor EØS', () => {
         cy.contains('Det er 1 feil i skjemaet')
         cy.contains('Du må oppgi et land utenfor EØS. Innenfor EØS trenger du ikke søke.')
 
-
         cy.contains('Hvilket land skal du reise til?')
-        cy.get('.skjemaelement__input').type('Fransk')
+        cy.get('.skjemaelement__input').type('Fransk', { force: true })
         cy.contains('Fransk Polynesia')
         cy.contains('Søre franske territorier').click({ force: true })
         cy.get('.etikett__slett').click({ force: true })
         cy.contains('Du må velge ett land')
         cy.contains('Det er 1 feil i skjemaet')
 
-        cy.get('.skjemaelement__input').type('Fransk')
+        cy.get('.skjemaelement__input').type('Fransk', { force: true })
         cy.contains('Fransk Polynesia')
         cy.contains('Søre franske territorier').click({ force: true })
 
@@ -65,8 +62,8 @@ describe('Tester søknad om å beholde sykepenger utenfor EØS', () => {
     })
 
     it('Gå tilbake og frem', function() {
-        cy.contains('Tilbake').click()
-        cy.contains('Gå videre').click()
+        cy.contains('Tilbake').click({ force: true })
+        cy.contains('Gå videre').click({ force: true })
     })
 
     it('ARBEIDSGIVER', function() {

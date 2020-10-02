@@ -1,5 +1,6 @@
 const KvitteringTekster: any = {
     'nb': {
+        'kvittering.sidetittel': 'Kvittering',
         'kvittering.status': 'Status',
         'kvittering.utbetaling.tittel': 'Utbetaling av sykepenger',
         'kvittering.knapp.endre': 'Endre søknad',
