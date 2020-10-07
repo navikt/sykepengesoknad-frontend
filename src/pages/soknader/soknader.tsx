@@ -13,6 +13,9 @@ import { Brodsmule, Soknad } from '../../types/types'
 import { sorterEtterOpprettetDato, sorterEtterPerioder } from '../../utils/sorter-soknader'
 import { tekst } from '../../utils/tekster'
 import { setBodyClass } from '../../utils/utils'
+import Lenke from 'nav-frontend-lenker';
+import { Normaltekst } from 'nav-frontend-typografi';
+import { VenstreChevron } from 'nav-frontend-chevron';
 
 export const filtrerOgSorterNyeSoknader = (soknader: Soknad[]) => {
     return soknader.filter(soknad =>
@@ -23,7 +26,7 @@ export const filtrerOgSorterNyeSoknader = (soknader: Soknad[]) => {
 }
 
 const brodsmuler: Brodsmule[] = [ {
-    tittel: tekst('soknader.sidetittel'),
+    tittel: tekst('soknader.brodsmuler.sidetittel'),
     sti: '/soknader',
     erKlikkbar: false
 } ]
@@ -68,6 +71,11 @@ const Soknader = () => {
                         kanSorteres={true}
                     />
                 </Vis>
+
+                <Lenke className="hovedside-lenke" href="/sykefravaer">
+                    <VenstreChevron />
+                    <Normaltekst tag="span">{tekst('hovedside.lenke')}</Normaltekst>
+                </Lenke>
             </div>
         </>
     )

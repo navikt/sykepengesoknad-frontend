@@ -207,7 +207,7 @@ export const periodeListevisning = (soknad: Soknad) => {
 
     return (perioder.length === 0) ? '' :
         <ul className={'inngangspanel__periode__undertekst'}>
-            {perioder.map((p, i) => <li key={i}> {p} </li>)}
+            {perioder.map((p, i) => <Normaltekst tag="li" key={i}> {p} </Normaltekst>)}
         </ul>
 }
 

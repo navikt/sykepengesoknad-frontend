@@ -42,8 +42,8 @@ const Teasere = ({ soknader, className, tittel, tomListeTekst, id, kanSorteres =
 
     return (
         <>
-            <header className="inngangspanelerHeader">
-                <Vis hvis={kanSorteres}>
+            <header className="teasere__header">
+                <Vis hvis={kanSorteres && sorterteSoknader().length > 0}>
                     <Select label="Sorter etter"
                         className="inngangspanel__sortering"
                         onChange={(event) => setSortering(event.target.value as Sortering)}
@@ -53,8 +53,13 @@ const Teasere = ({ soknader, className, tittel, tomListeTekst, id, kanSorteres =
                         })}
                     </Select>
                 </Vis>
-                <Undertittel tag="h2">{tittel}</Undertittel>
+                <Vis hvis={sorterteSoknader().length > 0 || tomListeTekst !== undefined}>
+                    <Undertittel tag="h2" className="teasere__header__tittel">
+                        {tittel}
+                    </Undertittel>
+                </Vis>
             </header>
+
             <div id={id} className={className}>
                 {sorterteSoknader().map((soknad, idx) => {
                     switch (soknad.status) {

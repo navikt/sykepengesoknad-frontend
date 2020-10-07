@@ -1,7 +1,7 @@
 @import '../../../../node_modules/nav-frontend-core/less/_variabler';
 @import '../../../../src/basic';
 
-.inngangspanelerHeader {
+.teasere__header {
     padding: 1rem 0;
     display: flex;
 
@@ -9,118 +9,81 @@
         display: inline-block;
         position: absolute;
         right: 1rem;
+    }
 
-        ~ .typo-undertittel {
-            padding-top: 3rem;
+    .teasere__header__tittel {
+        margin-top: 3rem;
+
+        &:first-child {
+            margin-top: 0;
         }
     }
 }
 
 .inngangspanel {
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
     justify-content: space-between;
-    align-items: flex-start;
-    position: relative;
+    align-items: center;
+    padding: 28px 16px 30px 20px;
     border: 1px solid @navMorkGra;
     border-radius: 4px;
-    background-color: @white;
     margin-bottom: 1rem;
-    padding: 1.3rem 1rem 1.5rem 1rem;
+    text-align: left;
+    background-color: @white;
+    width: 100%;
+    cursor: pointer;
     color: @navMorkGra;
     text-decoration: none;
-    cursor: pointer;
-
-    &.inngangspanel__btn {
-        width: 100%;
-        text-align: left;
-    }
 
     &.inngangspanel--tomListe {
-        padding: 1rem 2rem 1rem;
+        display: inline;
+        padding: 0;
+        border: 0;
+        border-radius: 0;
+        margin-bottom: 0;
+        width: auto;
         font-weight: 400;
-
-        &:hover {
-            box-shadow: none;
-            cursor: default;
-        }
     }
 
-    &:hover {
-        position: relative;
-        z-index: 100;
-        box-shadow: #ccc 0 0 4px 2px;
-
-        .inngangspanel__ikon--hover {
-            display: block;
-
-            img {
-                margin-right: 4px;
-            }
-        }
-
-        .inngangspanel__ikon--normal {
-            display: none;
-        }
+    &.inngangspanel--ny {
+        border-color: @navOransje;
+        background-color: mix(@navOransje, @white, 5%);
     }
 
-    .inngangspanel__del1, .inngangspanel__del2 {
+    &.inngangspanel--inaktivt {
+        padding: 0 0.5rem;
+        background-image: none;
+        color: @navGra60;
+    }
+
+    .inngangspanel__ytre {
         display: flex;
-        justify-content: flex-start;
-        align-items: center;
-    }
-
-    .inngangspanel__del2 {
-        .inngangspanel__status {
-            margin: 1rem 0 0 44px;
-        }
-
-        .chevronboks {
-            display: none;
-        }
+        flex-direction: column;
+        justify-content: center;
+        width: 100%;
     }
 
     .inngangspanel__ikon {
-        display: block;
-        width: 48px;
-        margin: 6px 0 0 12px;
-        align-self: flex-start;
-    }
-
-    .inngangspanel__ikon--hover {
         display: none;
     }
 
-    .inngangspanel__innhold {
-        padding-left: 0.5rem;
-    }
-
-    .inngangspanel__tittel {
-        margin-bottom: 0.5rem;
+    .inngangspanel__periode__undertekst {
+        list-style: none;
+        margin: 0;
+        padding-top: 6px;
+        padding-left: 0;
+        max-width: 20rem;
     }
 
     .inngangspanel__status {
         white-space: nowrap;
-        margin: 4px 0;
+        margin-top: 12px;
     }
 
-    .inngangspanel__periode__undertekst {
-        margin: 0;
-        padding-top: 1rem;
-        padding-left: 1rem;
-        max-width: 20rem;
+    .inngangspanel__periode {
+        margin-bottom: 2px;
     }
-}
-
-.inngangspanel--ny {
-    border-color: @navOransje;
-    background-color: mix(@navOransje, @white, 5%);
-}
-
-.inngangspanel--inaktivt {
-    padding: 0 0.5rem;
-    background-image: none;
-    color: @navGra60;
 }
 
 .modal.modal__teaser_popup {
@@ -136,38 +99,68 @@
 
 @media (min-width: @skjermMedium) {
     .inngangspanel {
-        flex-direction: row;
-        justify-content: space-between;
-        align-items: center;
-        padding-right: 2rem;
-
         &:hover {
-            .inngangspanel__del2 {
-                .chevronboks {
-                    color: @navBla;
+            box-shadow: #ccc 0 0 4px 2px;
+
+            .inngangspanel__ikon--hover {
+                display: block;
+
+                img {
+                    margin-right: 4px;
                 }
+            }
+
+            .inngangspanel__ikon--normal {
+                display: none;
             }
         }
 
-        .inngangspanel__tittel {
-            margin-bottom: 0;
+        &.inngangspanel--tomListe {
+            &:hover {
+                box-shadow: none;
+                cursor: default;
+            }
         }
 
-        .inngangspanel__del2 {
-            margin: 0;
+        .inngangspanel__ytre {
+            flex-direction: row;
+            justify-content: space-between;
+            align-items: center;
+            width: calc(100% - 2rem);
+        }
 
-            .inngangspanel__status {
-                margin: 0;
+        .inngangspanel__del1 {
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+        }
+
+        .inngangspanel__ikon {
+            display: block;
+            width: 56px;
+            margin: 6px 0 0 12px;
+            align-self: flex-start;
+
+            &--hover {
+                display: none;
+            }
+        }
+
+        &:hover {
+            .inngangspanel__del1 {
+                .inngangspanel__tittel {
+                    color: @navBla;
+                    text-decoration: underline;
+                }
             }
 
             .chevronboks {
-                display: inline-block;
-                margin: 0 -1rem 0 1rem;
+                color: @navBla;
             }
         }
 
-        .inngangspanel__innhold {
-            padding-right: 0.5rem;
+        .inngangspanel__status {
+            margin: 0;
         }
     }
 }
