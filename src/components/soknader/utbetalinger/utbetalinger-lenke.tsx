@@ -2,7 +2,7 @@ import './utbetalinger-lenke.less'
 
 import { HoyreChevron } from 'nav-frontend-chevron'
 import Lenke from 'nav-frontend-lenker'
-import { Systemtittel } from 'nav-frontend-typografi'
+import { Undertittel } from 'nav-frontend-typografi'
 import React from 'react'
 
 import { tekst } from '../../../utils/tekster'
@@ -12,9 +12,9 @@ const UtbetalingerLenke = () => {
 
     return (
         <Lenke href={url} target="_blank" rel="noreferrer noopener" className="utbetalinger-lenke">
-            <Systemtittel tag="h3">
+            <Undertittel tag="h3">
                 {tekst('utbetalinger.sykepenger.tittel')}
-            </Systemtittel>
+            </Undertittel>
             <HoyreChevron />
         </Lenke>
     )

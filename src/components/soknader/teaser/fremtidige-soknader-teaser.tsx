@@ -2,7 +2,7 @@ import dayjs from 'dayjs'
 import Alertstripe from 'nav-frontend-alertstriper'
 import { HoyreChevron } from 'nav-frontend-chevron'
 import ModalWrapper from 'nav-frontend-modal'
-import { Systemtittel, Undertekst } from 'nav-frontend-typografi'
+import { Systemtittel, Undertekst, Undertittel } from 'nav-frontend-typografi'
 import React, { useState } from 'react'
 
 import { RSSoknadstype } from '../../../types/rs-types/rs-soknadstype'
@@ -22,7 +22,6 @@ const FremtidigeSoknaderTeaser = ({ soknad }: SykepengesoknadTeaserProps) => {
     const { logEvent } = useAmplitudeInstance()
     const [ aapen, setAapen ] = useState<boolean>(false)
 
-
     return (
         <article aria-labelledby={`soknader-header-${soknad.id}`} onClick={() => {
             logEvent('Velger søknad', { soknadstype: soknad.soknadstype })
@@ -38,11 +37,11 @@ const FremtidigeSoknaderTeaser = ({ soknad }: SykepengesoknadTeaserProps) => {
                                     {tilLesbarPeriodeMedArstall(soknad.fom, soknad.tom)}
                                 </Undertekst>
                             </Vis>
-                            <Systemtittel tag="h3" className="inngangspanel__tittel">
+                            <Undertittel tag="h3" className="inngangspanel__tittel">
                                 {soknad.soknadstype === RSSoknadstype.OPPHOLD_UTLAND
                                     ? tekst('soknad.utland.teaser.tittel')
                                     : tekst('soknad.teaser.tittel')}
-                            </Systemtittel>
+                            </Undertittel>
                             {periodeListevisning(soknad)}
                         </div>
                     </div>

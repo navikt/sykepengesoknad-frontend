@@ -1,5 +1,5 @@
 import { HoyreChevron } from 'nav-frontend-chevron'
-import { Systemtittel, Undertekst } from 'nav-frontend-typografi'
+import { Undertekst, Undertittel } from 'nav-frontend-typografi'
 import React from 'react'
 
 import { RSSoknadstype } from '../../../types/rs-types/rs-soknadstype'
@@ -38,11 +38,11 @@ const Teaser = ({ soknad }: SykepengesoknadTeaserProps) => {
                                 {tilLesbarPeriodeMedArstall(soknad.fom, soknad.tom)}
                             </Undertekst>
                         </Vis>
-                        <Systemtittel tag="h3" className="inngangspanel__tittel">
+                        <Undertittel tag="h3" className="inngangspanel__tittel">
                             {soknad.soknadstype === RSSoknadstype.OPPHOLD_UTLAND
                                 ? tekst('soknad.utland.teaser.tittel')
                                 : tekst('soknad.teaser.tittel')}
-                        </Systemtittel>
+                        </Undertittel>
                         {periodeListevisning(soknad)}
                         <Vis hvis={env.isOpplaering}>
                             {leggTilSoknadstypeForDemoside(soknad)}
