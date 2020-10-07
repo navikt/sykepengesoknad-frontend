@@ -1,5 +1,8 @@
 import './soknader.less'
 
+import { VenstreChevron } from 'nav-frontend-chevron'
+import Lenke from 'nav-frontend-lenker'
+import { Normaltekst } from 'nav-frontend-typografi'
 import React, { useEffect } from 'react'
 
 import Banner from '../../components/banner/banner'
@@ -13,9 +16,6 @@ import { Brodsmule, Soknad } from '../../types/types'
 import { sorterEtterOpprettetDato, sorterEtterPerioder } from '../../utils/sorter-soknader'
 import { tekst } from '../../utils/tekster'
 import { setBodyClass } from '../../utils/utils'
-import Lenke from 'nav-frontend-lenker';
-import { Normaltekst } from 'nav-frontend-typografi';
-import { VenstreChevron } from 'nav-frontend-chevron';
 
 export const filtrerOgSorterNyeSoknader = (soknader: Soknad[]) => {
     return soknader.filter(soknad =>
