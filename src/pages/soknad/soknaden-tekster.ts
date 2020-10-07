@@ -38,7 +38,7 @@ const SoknadenTekster: any = {
         'sykepengesoknad.egenmeldingsdager.hjelpetekst.tittel': 'Egenmelding',
         'sykepengesoknad.oppsummering.tittel': 'Oppsummering',
         'sykepengesoknad.oppsummering.undertittel': 'Oppsummering av søknaden',
-        'sykepengesoknad.sykepengeinfo.tittel': 'Utbetaling av sykepenger',
+        'sykepengesoknad.sykepengeinfo.tittel': 'Søknader om sykepenger',
 
         'sykepengesoknad.utdanning.fulltidsstudium.sporsmal': 'Er utdanningen et fulltidsstudium?',
         'sykepengesoknad.utdanning.ja-nei.sporsmal': 'Har du vært under utdanning i løpet av perioden %STARTDATO% – %SLUTTDATO%?',
