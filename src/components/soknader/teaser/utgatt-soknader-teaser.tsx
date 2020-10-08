@@ -1,12 +1,12 @@
 import Alertstripe from 'nav-frontend-alertstriper'
 import { HoyreChevron } from 'nav-frontend-chevron'
 import ModalWrapper from 'nav-frontend-modal'
-import { Normaltekst, Systemtittel } from 'nav-frontend-typografi'
+import { Systemtittel, Undertekst, Undertittel } from 'nav-frontend-typografi'
 import React, { useState } from 'react'
 
 import { RSSoknadstype } from '../../../types/rs-types/rs-soknadstype'
 import { tilLesbarPeriodeMedArstall } from '../../../utils/dato-utils'
-import { getLedetekst, tekst } from '../../../utils/tekster'
+import { tekst } from '../../../utils/tekster'
 import { useAmplitudeInstance } from '../../amplitude/amplitude'
 import Vis from '../../vis'
 import { InngangsIkon, InngangsStatus } from '../inngang/inngangspanel'
@@ -28,31 +28,29 @@ const UtgaattSoknaderTeaser = ({ soknad }: SykepengesoknadTeaserProps) => {
         }}>
             <button className="inngangspanel inngangspanel__btn"
                 onClick={() => setAapen(true)}>
-                <div className="inngangspanel__del1">
-                    <InngangsIkon
-                        ikon={hentIkon(soknad)}
-                        ikonHover={hentIkonHover(soknad)}
-                    />
-                    <div className="inngangspanel--inaktivt">
-                        <Systemtittel tag="h3" className="inngangspanel__tittel">
-                            {soknad.soknadstype === RSSoknadstype.OPPHOLD_UTLAND
-                                ? tekst('soknad.utland.teaser.tittel')
-                                : tekst('soknad.teaser.tittel')}
-                        </Systemtittel>
-                        <Vis hvis={soknad.soknadstype !== RSSoknadstype.OPPHOLD_UTLAND}>
-                            <Normaltekst className="inngangspanel__periode">
-                                {getLedetekst(tekst('soknad.teaser.periode'), {
-                                    '%PERIODE%': tilLesbarPeriodeMedArstall(soknad.fom, soknad.tom),
-                                })}
-                            </Normaltekst>
-                        </Vis>
-                        {periodeListevisning(soknad)}
+                <div className="inngangspanel__ytre">
+                    <div className="inngangspanel__del1">
+                        <InngangsIkon
+                            ikon={hentIkon(soknad)}
+                            ikonHover={hentIkonHover(soknad)}
+                        />
+                        <div className="inngangspanel--inaktivt">
+                            <Vis hvis={soknad.soknadstype !== RSSoknadstype.OPPHOLD_UTLAND}>
+                                <Undertekst className="inngangspanel__periode">
+                                    {tilLesbarPeriodeMedArstall(soknad.fom, soknad.tom)}
+                                </Undertekst>
+                            </Vis>
+                            <Undertittel tag="h3" className="inngangspanel__tittel">
+                                {soknad.soknadstype === RSSoknadstype.OPPHOLD_UTLAND
+                                    ? tekst('soknad.utland.teaser.tittel')
+                                    : tekst('soknad.teaser.tittel')}
+                            </Undertittel>
+                            {periodeListevisning(soknad)}
+                        </div>
                     </div>
-                </div>
-                <div className="inngangspanel__del2">
                     <InngangsStatus status={soknad.status} tekst={hentTeaserStatustekst(soknad)} />
-                    <HoyreChevron />
                 </div>
+                <HoyreChevron />
             </button>
             <ModalWrapper className="modal__teaser_popup" onRequestClose={() => setAapen(false)}
                 contentLabel={'planlagt'}

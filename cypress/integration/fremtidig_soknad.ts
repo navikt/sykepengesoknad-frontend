@@ -13,7 +13,7 @@ describe('Tester fremtidig søknad', () => {
 
     it('Fremtidig søknad har forventa tekst', function() {
         cy.get(`#soknader-list-til-behandling article[aria-labelledby*=${fremtidigSoknad.id}]`)
-            .should('include.text', 'Gjelder perioden 23. mai – 7. juni 3020')
+            .should('include.text', '23. mai – 7. juni 3020')
             .and('include.text', 'Aktiveres 8. juni 3020')
     })
 

@@ -1,5 +1,8 @@
 import './soknader.less'
 
+import { VenstreChevron } from 'nav-frontend-chevron'
+import Lenke from 'nav-frontend-lenker'
+import { Normaltekst } from 'nav-frontend-typografi'
 import React, { useEffect } from 'react'
 
 import Banner from '../../components/banner/banner'
@@ -23,7 +26,7 @@ export const filtrerOgSorterNyeSoknader = (soknader: Soknad[]) => {
 }
 
 const brodsmuler: Brodsmule[] = [ {
-    tittel: tekst('soknader.sidetittel'),
+    tittel: tekst('soknader.brodsmuler.sidetittel'),
     sti: '/soknader',
     erKlikkbar: false
 } ]
@@ -68,6 +71,11 @@ const Soknader = () => {
                         kanSorteres={true}
                     />
                 </Vis>
+
+                <Lenke className="hovedside-lenke" href="/sykefravaer">
+                    <VenstreChevron />
+                    <Normaltekst tag="span">{tekst('hovedside.lenke')}</Normaltekst>
+                </Lenke>
             </div>
         </>
     )

@@ -48,7 +48,11 @@ interface InngangsStatusProps {
 
 export const InngangsStatus = ({ status, tekst }: InngangsStatusProps) => {
     const type = statusTilType(status)
-    return <Etikett className="inngangspanel__status" type={type}>{tekst}</Etikett>
+    return (
+        <div className="inngangspanel__status">
+            <Etikett type={type}>{tekst}</Etikett>
+        </div>
+    )
 }
 
 const statusTilType = (status: RSSoknadstatus) => {

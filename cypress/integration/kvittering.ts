@@ -248,7 +248,7 @@ describe('Tester kvittering', () => {
         })
 
         it('Delt periode og første utenfor arbeidsgiverperiode', () => {
-            cy.get(`#soknader-list-til-behandling article a[href*=${arbeidstakerDeltPeriodeForsteUtenforArbeidsgiverperiodeKvittering.id}]`).click()
+            cy.get(`#soknader-list-til-behandling article a[href*=${arbeidstakerDeltPeriodeForsteUtenforArbeidsgiverperiodeKvittering.id}]`).click({ force: true })
             besvarSoknad()
             cy.url().should('include', `/kvittering/${arbeidstakerDeltPeriodeForsteUtenforArbeidsgiverperiodeKvittering.id}`)
             over16dagerKvittering()

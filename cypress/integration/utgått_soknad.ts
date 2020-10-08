@@ -13,7 +13,7 @@ describe('Tester sendt søknad', () => {
 
     it('Utgått søknad har forventa tekst', function() {
         cy.get(`#soknader-sendt article[aria-labelledby*=${utgattSoknad.id}]`)
-            .should('include.text', 'Gjelder perioden 23. mai – 7. juni 2020')
+            .should('include.text', '23. mai – 7. juni 2020')
             .should('include.text', 'Utgått')
 
     })

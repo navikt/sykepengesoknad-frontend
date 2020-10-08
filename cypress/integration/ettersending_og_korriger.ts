@@ -116,7 +116,7 @@ describe('Tester ettersending og korrigering', () => {
 
         cy.get(`#soknader-list-til-behandling article a[href*=${soknad.id}]`).should('not.exist')
         cy.get(`#soknader-sendt article a[href*=${soknad.id}]`)
-            .should('contain', 'Gjelder perioden 1. – 24. april 2020')
+            .should('contain', '1. – 24. april 2020')
             .and('contain', 'Sendt til arbeidsgiver og NAV')
     })
 })
