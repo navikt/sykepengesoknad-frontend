@@ -1,15 +1,24 @@
 import './brodsmuler.less'
 
+import { OppChevron } from 'nav-frontend-chevron'
 import Lenke from 'nav-frontend-lenker'
 import { Normaltekst } from 'nav-frontend-typografi'
-import React, { useState } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import { Link } from 'react-router-dom'
 
 import { Brodsmule } from '../../types/types'
 import env from '../../utils/environment'
+import Vis from '../vis'
 import personIkon from './person.svg'
 
-const BrodsmuleBit = ({ sti, tittel, sisteSmule, erKlikkbar }: Brodsmule) => {
+const LITEN = 768
+
+const faste: Brodsmule[] = [
+    { tittel: 'Ditt NAV', sti: '/dittnav', erKlikkbar: true },
+    { tittel: 'Ditt sykefravær', sti: env.sykefravaerUrl, erKlikkbar: true }
+]
+
+const BrodsmuleBit = ({ sti, tittel, erKlikkbar }: Brodsmule) => {
     const erEkstern = sti && sti.includes(process.env.REACT_APP_SYKEFRAVAER_CONTEXT_ROOT!)
 
     const link = erEkstern
@@ -18,7 +27,7 @@ const BrodsmuleBit = ({ sti, tittel, sisteSmule, erKlikkbar }: Brodsmule) => {
             ? <Link to={sti} className="lenke">{tittel}</Link>
             : <span>{tittel}</span>
 
-    if (sisteSmule) {
+    if (!erKlikkbar) {
         return (
             <li className="smule">
                 <span className="vekk">Du er her:</span>
@@ -42,56 +51,70 @@ interface BrodsmulerProps {
 }
 
 const Brodsmuler = ({ brodsmuler }: BrodsmulerProps) => {
-    const [ visCollapsed, setVisCollapsed ] = useState(true)
+    const [ synlige, setSynlige ] = useState<Brodsmule[]>([])
+    const [ skjerm, setSkjerm ] = useState<number>(window.innerWidth)
+    const smulesti = useRef<HTMLElement>(null)
 
-    const getVisCollapsed = () => {
-        return brodsmuler.length > 3 && visCollapsed
-    }
+    brodsmuler = faste.concat(brodsmuler)
 
-    const getSynligeBrodsmuler = () => {
-        if (getVisCollapsed()) {
-            return [
-                brodsmuler[brodsmuler.length - 2],
-                brodsmuler[brodsmuler.length - 1],
-            ]
+    useEffect(() => {
+        window.addEventListener('resize', () => {
+            setSkjerm(window.innerWidth)
+        })
+        setSynlige(skjerm <= LITEN ? [ brodsmuler[brodsmuler.length - 1] ] : brodsmuler)
+        // eslint-disable-next-line
+    }, [ skjerm ])
+
+    const toggleSynlige = () => {
+        if (synlige.length === brodsmuler.length) {
+            setSynlige([ brodsmuler[brodsmuler.length - 1] ])
+            smulesti.current!.classList.remove('apen')
+        } else {
+            setSynlige(brodsmuler)
+            smulesti.current!.classList.add('apen')
         }
-        return brodsmuler
     }
-
-    const synligeBrodsmuler = getSynligeBrodsmuler()
 
     return (
-        <nav className="brodsmuler" aria-label="Du er her: ">
+        <nav className="brodsmuler" ref={smulesti} aria-label="Du er her: ">
             <div className="limit">
                 <img src={personIkon} alt="Du" className="brodsmuler__ikon" />
                 <Normaltekst tag="ul" className="brodsmuler__smuler">
-                    <li className="smule">
-                        <Lenke href="/dittnav">Ditt NAV</Lenke>
-                    </li>
-                    <li className="smule">
-                        <Lenke href={env.sykefravaerUrl}>Ditt Sykefravær</Lenke>
-                    </li>
+                    <Vis hvis={skjerm <= LITEN}>
+                        <li className="smule">
+                            <button
+                                aria-label={
+                                    synlige.length === brodsmuler.length
+                                        ? 'Vis redusert brødsmulesti'
+                                        : 'Vis hele brødsmulestien'}
+                                className="js-toggle"
+                                onClick={toggleSynlige}
+                            >
+                                ...
+                            </button>
+                        </li>
+                    </Vis>
 
-                    {getVisCollapsed() &&
-                    <li className="smule">
-                        <button aria-label="Vis hele brødsmulestien"
-                            className="js-toggle"
-                            onClick={() => setVisCollapsed(false)}>
-                            ...
-                        </button>
-                    </li>}
-
-                    {synligeBrodsmuler
-                        .map((smule, index) => {
-                            return {
-                                ...smule,
-                                sisteSmule: synligeBrodsmuler.length === index + 1,
-                            }
-                        })
-                        .map((smule, index) => {
-                            return <BrodsmuleBit key={index} {...smule} />
-                        })}
+                    {synlige.map((smule, index) => {
+                        return (
+                            <BrodsmuleBit key={index}
+                                sti={smule.sti}
+                                tittel={smule.tittel}
+                                erKlikkbar={smule.erKlikkbar}
+                            />
+                        )
+                    })}
                 </Normaltekst>
+                <button
+                    aria-label={
+                        synlige.length === brodsmuler.length
+                            ? 'Vis redusert brødsmulesti'
+                            : 'Vis hele brødsmulestien'}
+                    className="js-toggle"
+                    onClick={toggleSynlige}
+                >
+                    <OppChevron />
+                </button>
             </div>
         </nav>
     )

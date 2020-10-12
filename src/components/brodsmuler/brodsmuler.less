@@ -1,14 +1,33 @@
 @import '../../../node_modules/nav-frontend-core/less/_variabler';
+@import '../../../src/basic';
 
 .brodsmuler {
-    display: flex;
-    background-color: @navLysGra;
+    max-height: 40px;
+    background-color: @alternativBakgrunn;
     padding: 8px 0 8px 1rem;
     margin-bottom: 1em;
 
     .limit {
+        display: flex;
+        align-items: center;
         background-color: transparent;
         padding: 0;
+    }
+
+    .chevron--opp {
+        display: none;
+    }
+
+    &.apen {
+        max-height: 100px;
+        overflow: hidden;
+        transition: max-height 500ms ease;
+
+        .chevron--opp {
+            display: block;
+            margin-right: 0.5rem;
+            color: @navBla;
+        }
     }
 
     .brodsmuler__smuler {
@@ -26,12 +45,27 @@
             margin-left: 0.5rem;
         }
 
+        &:first-child:after {
+            margin-left: 0;
+        }
+
         &:last-child:after {
             content: '';
         }
 
         .lenke {
             white-space: nowrap;
+        }
+    }
+
+    .js-toggle {
+        border: 0;
+        padding: 0 0.5rem;
+        color: @navBla;
+        cursor: pointer;
+
+        &:focus {
+            outline: none;
         }
     }
 
@@ -55,13 +89,20 @@
     .brodsmuler {
         display: flex;
         position: relative;
-        padding-left: 2rem;
 
         .brodsmuler__ikon {
             width: 2em;
             height: 2em;
             display: inline-block;
             margin-right: 1em;
+        }
+    }
+}
+
+@media (min-width: @skjermMedium) {
+    .brodsmuler {
+        .limit {
+            padding: 0 5rem;
         }
     }
 }
