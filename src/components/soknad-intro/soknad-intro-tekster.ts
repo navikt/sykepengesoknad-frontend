@@ -6,7 +6,7 @@ const SoknadIntroTekster: any = {
         'sykepengesoknad.soknad-intro.personvern-modal-innhold':
             `<p>Du har valgt å søke om sykepenger fra NAV. Det er penger du kan få hvis du fyller kravene. Du kan lese om kravene på <a target="_blank" rel="noopener noreferrer" href="https://nav.no/sykepenger">nav.no/sykepenger</a>.</p>
             <p>NAV innhenter opplysninger om deg når du sender inn en søknad. Det er nødvendig for at du skal kunne få det du har krav på. For å behandle søknaden din henter vi inn opplysninger både fra deg og fra offentlige registre.</p>
-            <p>Søknaden din vil bli behandlet automatisk hvis NAV har tilstrekkelige opplysninger. Den automatiske behandlingen baserer seg på følgende opplysninger:</p>
+            <p>Søknaden din vil bli behandlet automatisk hvis NAV har tilstrekkelige opplysninger. Da vil du se beslutningen på <a target="_blank" rel="noopener noreferrer" href="https://nav.no/syk/sykepenger">nav.no/syk/sykepenger</a>. Den automatiske behandlingen baserer seg på følgende opplysninger:</p>
             <ul>
             <li>
                 Folkeregisteret: <b>navn, fødselsnummer, adresse, familie o.l.</b>
