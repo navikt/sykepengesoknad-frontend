@@ -19,7 +19,7 @@ const faste: Brodsmule[] = [
 ]
 
 const BrodsmuleBit = ({ sti, tittel, erKlikkbar }: Brodsmule) => {
-    const erEkstern = sti && sti.includes(process.env.REACT_APP_SYKEFRAVAER_CONTEXT_ROOT!)
+    const erEkstern = sti && sti.startsWith('http')
 
     const link = erEkstern
         ? <Lenke href={sti}>{tittel}</Lenke>
