@@ -255,6 +255,7 @@ function rsToSporsmal(spms: RSSporsmal[], kriterie: RSVisningskriterieType | nul
 export interface Brodsmule {
     sti: string;
     tittel: string;
+    mobilTittel?: string;
     sisteSmule?: boolean;
     erKlikkbar?: boolean;
 }

@@ -18,7 +18,11 @@ describe('Tester kvittering', () => {
     })
 
     afterEach(() => {
-        cy.get('.brodsmuler__smuler .smule .lenke:contains(Søknader om sykepenger)').click({ force: true })
+        cy.get('.brodsmuler__smuler').then(smuler => {
+            if (smuler.find('.smule .lenke').length > 0) {
+                cy.contains('Søknader om sykepenger').click({ force: true })
+            }
+        })
     })
 
     context('Arbeidsledig', () => {
@@ -255,7 +259,7 @@ describe('Tester kvittering', () => {
         })
 
         it('Oppfølgende periode uten opphold og første utenfor arbeidsgiverperiode', () => {
-            cy.get(`#soknader-list-til-behandling article a[href*=${arbeidstakerUtenOppholdForsteUtenforArbeidsgiverperiodeKvittering.id}]`).click()
+            cy.get(`#soknader-list-til-behandling article a[href*=${arbeidstakerUtenOppholdForsteUtenforArbeidsgiverperiodeKvittering.id}]`).click({ force: true })
             besvarSoknad()
             cy.url().should('include', `/kvittering/${arbeidstakerUtenOppholdForsteUtenforArbeidsgiverperiodeKvittering.id}`)
             over16dagerKvittering()

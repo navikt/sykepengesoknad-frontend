@@ -26,7 +26,8 @@ export const filtrerOgSorterNyeSoknader = (soknader: Soknad[]) => {
 }
 
 const brodsmuler: Brodsmule[] = [ {
-    tittel: tekst('soknader.brodsmuler.sidetittel'),
+    tittel: tekst('soknader.sidetittel'),
+    mobilTittel: tekst('soknader.brodsmuler.sidetittel'),
     sti: '/soknader',
     erKlikkbar: false
 } ]

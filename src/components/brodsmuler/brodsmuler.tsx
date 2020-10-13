@@ -99,7 +99,11 @@ const Brodsmuler = ({ brodsmuler }: BrodsmulerProps) => {
                         return (
                             <BrodsmuleBit key={index}
                                 sti={smule.sti}
-                                tittel={smule.tittel}
+                                tittel={
+                                    skjerm <= LITEN && smule.mobilTittel && !smulesti.current!.classList.contains('apen')
+                                        ? smule.mobilTittel
+                                        : smule.tittel
+                                }
                                 erKlikkbar={smule.erKlikkbar}
                             />
                         )
