@@ -14,10 +14,10 @@ jobs:
           TIME=$(TZ="Europe/Oslo" date +%Y.%m.%d-%H.%M)
           COMMIT=$(git rev-parse --short=8 HEAD)
           VERSION=$TIME-$COMMIT
-          echo "::set-env name=IMAGE_ROOT::"docker.pkg.github.com/${GITHUB_REPOSITORY}/$APP-root:$VERSION""
-          echo "::set-env name=IMAGE_SYKEPENGESOKNAD::"docker.pkg.github.com/${GITHUB_REPOSITORY}/$APP-sykepengesoknad:$VERSION""
-          echo "::set-env name=IMAGE_SYK_SYKEPENGESOKNAD::"docker.pkg.github.com/${GITHUB_REPOSITORY}/$APP-syk-sykepengesoknad:$VERSION""
-          echo "::set-env name=VERSION::"$VERSION""
+          echo "IMAGE_ROOT=docker.pkg.github.com/${GITHUB_REPOSITORY}/$APP-root:$VERSION" >> $GITHUB_ENV
+          echo "IMAGE_SYKEPENGESOKNAD=docker.pkg.github.com/${GITHUB_REPOSITORY}/$APP-sykepengesoknad:$VERSION" >> $GITHUB_ENV
+          echo "IMAGE_SYK_SYKEPENGESOKNAD=docker.pkg.github.com/${GITHUB_REPOSITORY}/$APP-syk-sykepengesoknad:$VERSION" >> $GITHUB_ENV
+          echo "VERSION=$VERSION" >> $GITHUB_ENV
       - run: echo $VERSION > VERSION.txt
       - name: Last opp VERSION til neste job
         uses: actions/upload-artifact@v1
@@ -102,8 +102,8 @@ jobs:
         with:
           name: VERSION.txt
           path: .
-      - run: echo "::set-env name=VERSION::"`cat VERSION.txt`""
-      - run: echo "::set-env name=IMAGE::"docker.pkg.github.com/${GITHUB_REPOSITORY}/$APP-sykepengesoknad:$VERSION""
+      - run: echo "VERSION=`cat VERSION.txt`" >> $GITHUB_ENV
+      - run: echo "IMAGE=docker.pkg.github.com/${GITHUB_REPOSITORY}/$APP-sykepengesoknad:$VERSION" >> $GITHUB_ENV
       - uses: nais/deploy/actions/deploy@v1
         name: Deploy to q1-sbs
         env:
@@ -121,8 +121,8 @@ jobs:
         with:
           name: VERSION.txt
           path: .
-      - run: echo "::set-env name=VERSION::"`cat VERSION.txt`""
-      - run: echo "::set-env name=IMAGE::"docker.pkg.github.com/${GITHUB_REPOSITORY}/$APP-syk-sykepengesoknad:$VERSION""
+      - run: echo "VERSION=`cat VERSION.txt`" >> $GITHUB_ENV
+      - run: echo "IMAGE=docker.pkg.github.com/${GITHUB_REPOSITORY}/$APP-syk-sykepengesoknad:$VERSION" >> $GITHUB_ENV
       - name: Deploy to dev-gcp
         uses: nais/deploy/actions/deploy@v1
         env:
@@ -141,8 +141,8 @@ jobs:
         with:
           name: VERSION.txt
           path: .
-      - run: echo "::set-env name=VERSION::"`cat VERSION.txt`""
-      - run: echo "::set-env name=IMAGE::"docker.pkg.github.com/${GITHUB_REPOSITORY}/$APP-root:$VERSION""
+      - run: echo "VERSION=`cat VERSION.txt`" >> $GITHUB_ENV
+      - run: echo "IMAGE=docker.pkg.github.com/${GITHUB_REPOSITORY}/$APP-root:$VERSION" >> $GITHUB_ENV
       - name: Deploy to labs-gcp
         uses: nais/deploy/actions/deploy@v1
         env:
@@ -161,8 +161,8 @@ jobs:
         with:
           name: VERSION.txt
           path: .
-      - run: echo "::set-env name=VERSION::"`cat VERSION.txt`""
-      - run: echo "::set-env name=IMAGE::"docker.pkg.github.com/${GITHUB_REPOSITORY}/$APP-sykepengesoknad:$VERSION""
+      - run: echo "VERSION=`cat VERSION.txt`" >> $GITHUB_ENV
+      - run: echo "IMAGE=docker.pkg.github.com/${GITHUB_REPOSITORY}/$APP-sykepengesoknad:$VERSION" >> $GITHUB_ENV
       - name: Deploy to prod-sbs
         uses: nais/deploy/actions/deploy@v1
         env:
@@ -181,9 +181,9 @@ jobs:
         with:
           name: VERSION.txt
           path: .
-      - run: echo "::set-env name=VERSION::"`cat VERSION.txt`""
-      - run: echo "::set-env name=IMAGE::"docker.pkg.github.com/${GITHUB_REPOSITORY}/$APP-root:$VERSION""
-      - run: echo "::set-env name=LATEST::"docker.pkg.github.com/${GITHUB_REPOSITORY}/$APP:latest""
+      - run: echo "VERSION=`cat VERSION.txt`" >> $GITHUB_ENV
+      - run: echo "IMAGE=docker.pkg.github.com/${GITHUB_REPOSITORY}/$APP-root:$VERSION" >> $GITHUB_ENV
+      - run: echo "LATEST=docker.pkg.github.com/${GITHUB_REPOSITORY}/$APP:latest" >> $GITHUB_ENV
       - name: Tag and push docker image
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_ACCESS_TOKEN }}
