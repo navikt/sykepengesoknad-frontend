@@ -280,7 +280,7 @@ describe('Tester kvittering', () => {
         })
 
         it('Oppfølgende periode 16 eller mindre dager', () => {
-            cy.get(`#soknader-list-til-behandling article a[href*=${arbeidstakerMedOppholdKvittering.id}]`).click()
+            cy.get(`#soknader-list-til-behandling article a[href*=${arbeidstakerMedOppholdKvittering.id}]`).click({ force: true })
             besvarSoknad()
             cy.url().should('include', `/kvittering/${arbeidstakerMedOppholdKvittering.id}`)
             medOppholdKvittering()

@@ -14,12 +14,12 @@ import personIkon from './person.svg'
 const LITEN = 768
 
 const faste: Brodsmule[] = [
-    { tittel: 'Ditt NAV', sti: '/dittnav', erKlikkbar: true },
+    { tittel: 'Ditt NAV', sti: env.dittNavUrl, erKlikkbar: true },
     { tittel: 'Ditt sykefravær', sti: env.sykefravaerUrl, erKlikkbar: true }
 ]
 
 const BrodsmuleBit = ({ sti, tittel, erKlikkbar }: Brodsmule) => {
-    const erEkstern = sti && sti.startsWith('http')
+    const erEkstern = sti && (sti.startsWith('https://') || sti.startsWith('http://'))
 
     const link = erEkstern
         ? <Lenke href={sti}>{tittel}</Lenke>

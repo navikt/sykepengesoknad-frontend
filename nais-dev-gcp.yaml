@@ -37,3 +37,5 @@ spec:
       value: "q1"
     - name: SYKEFRAVAER_URL
       value: "https://tjenester-q1.nav.no/sykefravaer"
+    - name: DITTNAV_URL
+      value: "https://www-q1.nav.no/person/dittnav/"

@@ -256,7 +256,6 @@ export interface Brodsmule {
     sti: string;
     tittel: string;
     mobilTittel?: string;
-    sisteSmule?: boolean;
     erKlikkbar?: boolean;
 }
 
