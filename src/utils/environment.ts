@@ -61,6 +61,10 @@ class Environment {
     get sykefravaerUrl() {
         return this.env.SYKEFRAVAER_URL
     }
+
+    get dittNavUrl() {
+        return this.env.DITTNAV_URL
+    }
 }
 
 const env = new Environment()

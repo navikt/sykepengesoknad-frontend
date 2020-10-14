@@ -30,6 +30,7 @@ import RedirectTilOversikt from '../feil/redirect-til-oversikt'
 
 const brodsmuler: Brodsmule[] = [ {
     tittel: tekst('soknader.sidetittel'),
+    mobilTittel: tekst('soknader.brodsmuler.sidetittel'),
     sti: SEPARATOR,
     erKlikkbar: true
 }, {
