@@ -58,6 +58,7 @@
         "nav-frontend-veilederpanel": "^0.1.29",
         "nav-frontend-veilederpanel-style": "0.0.29",
         "node-forge": ">=0.10.0",
+        "object-path": "^0.11.5",
         "prop-types": "^15.7.2",
         "react": "^16.13.1",
         "react-autosuggest": "^10.0.2",
