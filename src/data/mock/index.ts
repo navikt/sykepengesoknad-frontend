@@ -33,7 +33,7 @@ if (!env.isOpplaering) {
     soknader.push(...jsonDeepCopy(soknaderIntegration))
 }
 
-mock.put(`${env.syfosoknadProxyRoot}/api/soknader/:soknad/sporsmal/:sporsmal`,
+mock.put(`${env.syfoapiRoot}/syfosoknad/api/soknader/:soknad/sporsmal/:sporsmal`,
     (req) => {
 
         if (req.pathParams.soknad === soknadSomTriggerSporsmalFinnesIkkeISoknad.id) {
@@ -54,7 +54,7 @@ mock.put(`${env.syfosoknadProxyRoot}/api/soknader/:soknad/sporsmal/:sporsmal`,
         })
     })
 
-mock.post(`${env.syfosoknadProxyRoot}/api/soknader/:soknad/korriger`,
+mock.post(`${env.syfoapiRoot}/syfosoknad/api/soknader/:soknad/korriger`,
     (req, res, ctx) => {
         const soknad = jsonDeepCopy(soknader.find((sok: RSSoknad) => {
             return res(ctx.json(sok.id === req.pathParams.soknad))
@@ -64,7 +64,7 @@ mock.post(`${env.syfosoknadProxyRoot}/api/soknader/:soknad/korriger`,
         return res(ctx.json(soknad))
     })
 
-mock.post(`${env.syfosoknadProxyRoot}/api/opprettSoknadUtland`,
+mock.post(`${env.syfoapiRoot}/syfosoknad/api/opprettSoknadUtland`,
     (req, res, ctx) => {
         const soknad = soknader.find((sok: RSSoknad) => {
             return sok.soknadstype === RSSoknadstype.OPPHOLD_UTLAND && sok.status === RSSoknadstatus.NY
@@ -80,7 +80,7 @@ mock.post(`${env.syfosoknadProxyRoot}/api/opprettSoknadUtland`,
         return res(ctx.json(soknadOriginal))
     })
 
-mock.post(`${env.syfosoknadProxyRoot}/api/soknader/:soknad/finnMottaker`,
+mock.post(`${env.syfoapiRoot}/syfosoknad/api/soknader/:soknad/finnMottaker`,
     (req, res, ctx) => {
         const soknadId = req.pathParams.soknad
 
@@ -101,24 +101,24 @@ mock.post(`${env.syfosoknadProxyRoot}/api/soknader/:soknad/finnMottaker`,
     })
 
 
-mock.get(`${env.syfosoknadProxyRoot}/api/soknader`,
+mock.get(`${env.syfoapiRoot}/syfosoknad/api/soknader`,
     (req, res, ctx) => res(ctx.json(soknader)))
 
 mock.get(`${env.syforestRoot}/sykmeldinger`,
     (req, res, ctx) => res(ctx.json(sykmeldinger)))
 
-mock.post(`${env.syfosoknadProxyRoot}/api/soknader/:soknad/send`,
+mock.post(`${env.syfoapiRoot}/syfosoknad/api/soknader/:soknad/send`,
     () => Promise.resolve({ status: 200 }))
 
-mock.post(`${env.syfosoknadProxyRoot}/api/soknader/:soknad/ettersendTilNav`,
+mock.post(`${env.syfoapiRoot}/syfosoknad/api/soknader/:soknad/ettersendTilNav`,
     () => Promise.resolve({ status: 200 }))
 
-mock.post(`${env.syfosoknadProxyRoot}/api/soknader/:soknad/ettersendTilArbeidsgiver`,
+mock.post(`${env.syfoapiRoot}/syfosoknad/api/soknader/:soknad/ettersendTilArbeidsgiver`,
     () => Promise.resolve({ status: 200 }))
 
-mock.post(`${env.syfosoknadProxyRoot}/api/soknader/:soknad/avbryt`,
+mock.post(`${env.syfoapiRoot}/syfosoknad/api/soknader/:soknad/avbryt`,
     () => Promise.resolve({ status: 200 }))
 
-mock.post(`${env.syfosoknadProxyRoot}/api/soknader/:soknad/gjenapne`,
+mock.post(`${env.syfoapiRoot}/syfosoknad/api/soknader/:soknad/gjenapne`,
     () => Promise.resolve({ status: 200 }))
 
