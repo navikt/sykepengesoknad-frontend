@@ -41,8 +41,8 @@ const lyttTilNettverksKall = (a: any) => {
         if (url.includes('sporsmal')) {
             const headers = req['headers']
             const sporsmal = JSON.parse(req['body']) as RSSporsmal
-            expect(headers['Content-Type'], '/oppdaterSporsmal').to.eql('application/json')
-            expect(headers['X-App-Started-Timestamp'], '/oppdaterSporsmal').not.to.be.undefined
+            expect(headers['Content-Type'], '/sporsmal').to.eql('application/json')
+            expect(headers['X-App-Started-Timestamp'], '/sporsmal').not.to.be.undefined
             svarFormat(sporsmal)
         } else if (url.includes('/finnMottaker')) {
             const headers = req['headers']
