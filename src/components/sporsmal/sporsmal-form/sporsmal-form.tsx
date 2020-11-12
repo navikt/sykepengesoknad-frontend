@@ -76,7 +76,7 @@ const SporsmalForm = () => {
     const sendOppdaterSporsmal = async() => {
         let soknad = valgtSoknad
 
-        const res = await fetcher(env.syfosoknadProxyRoot + `/api/soknader/${soknad!.id}/sporsmal/${sporsmal.id}`, {
+        const res = await fetcher(env.syfoapiRoot + `/syfosoknad/api/soknader/${soknad!.id}/sporsmal/${sporsmal.id}`, {
             method: 'PUT',
             credentials: 'include',
             body: JSON.stringify(sporsmalToRS(sporsmal)),
@@ -131,7 +131,7 @@ const SporsmalForm = () => {
 
 
     const hentMottaker = () => {
-        rsMottakerResponseFetch.fetch(env.syfosoknadProxyRoot + `/api/soknader/${valgtSoknad!.id}/finnMottaker`, {
+        rsMottakerResponseFetch.fetch(env.syfoapiRoot + `/syfosoknad/api/soknader/${valgtSoknad!.id}/finnMottaker`, {
             method: 'POST',
             credentials: 'include',
             headers: { 'Content-Type': 'application/json' }
@@ -148,7 +148,7 @@ const SporsmalForm = () => {
         if (!valgtSoknad) {
             return
         }
-        const res = await fetcher(env.syfosoknadProxyRoot + `/api/soknader/${valgtSoknad.id}/send`, {
+        const res = await fetcher(env.syfoapiRoot + `/syfosoknad/api/soknader/${valgtSoknad.id}/send`, {
             method: 'POST',
             credentials: 'include',
             headers: { 'Content-Type': 'application/json' }
