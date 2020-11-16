@@ -23,6 +23,7 @@ const useValiderArbeidsgrad = ( sporsmal: Sporsmal ) => {
 
     const sykedagerForFrilansere = () => {
         return periodeDager
+            .filter(dag => dag.day() !== 0 && dag.day() !== 6)
             .filter(dag => {
                 if (tilbake !== '') {
                     return dag < dayjs(tilbake)
@@ -41,6 +42,7 @@ const useValiderArbeidsgrad = ( sporsmal: Sporsmal ) => {
 
         return periodeDager
             .filter(dag => !ekskluderteDager.find(ekskludertDag => ekskludertDag.toString() === dag.toString()))
+            .filter(dag => dag.day() !== 0 && dag.day() !== 6)
             .filter(dag => {
                 if (tilbake !== '') {
                     return dag < dayjs(tilbake)
