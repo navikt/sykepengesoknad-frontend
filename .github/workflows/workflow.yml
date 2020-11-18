@@ -77,7 +77,7 @@ jobs:
       - name: Install npm dependencies
         run: npm ci
       - name: Run cypress
-        uses: cypress-io/github-action@v1
+        uses: cypress-io/github-action@v2
         with:
           install: false
           record: false
