@@ -27,7 +27,7 @@ const OpprettUtland = () => {
 
 
     const opprett = () => {
-        opprettUtland.fetch(`${env.syfoapiRoot}/syfosoknad/api/opprettSoknadUtland`, {
+        opprettUtland.fetch(`${env.syfosoknadProxyRoot}/api/opprettSoknadUtland`, {
             method: 'POST',
             credentials: 'include',
             headers: { 'Content-Type': 'application/json' }
