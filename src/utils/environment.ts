@@ -14,8 +14,8 @@ class Environment {
         return this.env.ENVIRONMENT === 'prod'
     }
 
-    get syfosoknadProxyRoot() {
-        return this.env.SYFOSOKNAD_PROXY_ROOT
+    get syfoapiRoot() {
+        return this.env.SYFOAPI_ROOT
     }
 
     get syforestRoot() {

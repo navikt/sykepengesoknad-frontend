@@ -20,7 +20,7 @@ interface AvbrytSoknadReq {
 }
 
 export async function avbrytSoknad({ valgtSoknad, setSoknader, soknader, setValgtSoknad, history, setFeilmeldingTekst }: AvbrytSoknadReq) {
-    const res = await fetcher(env.syfosoknadProxyRoot + `/api/soknader/${valgtSoknad!.id}/avbryt`, {
+    const res = await fetcher(env.syfoapiRoot + `/syfosoknad/api/soknader/${valgtSoknad!.id}/avbryt`, {
         method: 'POST',
         credentials: 'include',
     })
