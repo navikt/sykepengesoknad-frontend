@@ -18,7 +18,7 @@ export function DataFetcher(props: { children: any }) {
 
     useEffect(() => {
         if (isNotStarted(rssoknader)) {
-            rssoknader.fetch(env.syfoapiRoot + '/syfosoknad/api/soknader', {
+            rssoknader.fetch(env.syfosoknadProxyRoot + '/api/soknader', {
                 credentials: 'include',
             }, (fetchState: FetchState<RSSoknad[]>) => {
                 if (hasData(fetchState)) {
