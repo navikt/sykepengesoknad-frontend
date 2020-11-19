@@ -205,17 +205,17 @@ describe('Tester arbeidstakersøknad - gradert 50%', () => {
         // Svarer timer
         cy.get('.undersporsmal .skjemaelement__input.radioknapp[value=timer]').focus().click({ force: true })
         // Ferie/permisjon/tilbake i arbeid dekker alle datoer fra dag 14.
-        // Gradkalkulatoren dermed vil regne ut at man har hatt 13 arbeidsdager i denne perioden
-        // 12 timer * (13 dager/7) * 0.5 (50% sykefraværsgrad) = 11.142 timer, så vi prøver litt lavere enn det
-        cy.get('.undersporsmal .skjemaelement__input#687317').focus().type('11.1')
+        // Gradkalkulatoren dermed vil regne ut at man har hatt 9 arbeidsdager i denne perioden
+        // 12 timer * (9 dager/7) * 0.5 (50% sykefraværsgrad) = 7,71 timer, så vi prøver litt lavere enn det
+        cy.get('.undersporsmal .skjemaelement__input#687317').focus().type('7.7')
 
         cy.contains('Gå videre').click()
 
         // Feilmelding
         cy.contains('Timene du skrev inn tyder på at du har jobbet mindre enn 50 %. Du må enten svare nei på spørsmålet over eller endre antall timer her.')
 
-        // Endre timer til 11.2, som er mer enn 11.142
-        cy.get('.undersporsmal .skjemaelement__input#687317').focus().type('{selectall}').type('11.2')
+        // Endre timer til 7.8, som er mer enn 7.71
+        cy.get('.undersporsmal .skjemaelement__input#687317').focus().type('{selectall}').type('7.8')
 
         cy.contains('Gå videre').click()
     })
