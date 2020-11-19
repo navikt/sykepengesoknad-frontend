@@ -27,7 +27,7 @@ spec:
     path: internal/isReady
   env:
     - name: SYFOSOKNAD_PROXY_ROOT
-      value: "https://syfosoknad-proxy-sbs.nav.no"
+      value: "https://syfosoknad-proxy.nav.no"
     - name: SYFOREST_ROOT
       value: "https://tjenester.nav.no/syforest"
     - name: LOGINSERVICE_URL
