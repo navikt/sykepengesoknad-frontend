@@ -24,7 +24,7 @@ const Teaser = ({ soknad }: SykepengesoknadTeaserProps) => {
     return (
         <article
             aria-labelledby={`soknader-header-${soknad.id}`}
-            onClick={() => logEvent('Velger søknad', { soknadstype: soknad.soknadstype })}
+            onClick={() => logEvent('skjema åpnet', { soknadstype: soknad.soknadstype })}
         >
             <Inngangspanel to={getUrlTilSoknad(soknad)} className="inngangspanel--ny">
                 <div className="inngangspanel__del1">
