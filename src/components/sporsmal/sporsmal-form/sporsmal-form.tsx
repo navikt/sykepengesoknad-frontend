@@ -202,7 +202,7 @@ const SporsmalForm = () => {
                 await sendOppdaterSporsmal()
 
                 await sendSoknad()
-                logEvent('Søknad sendt', { soknadstype: valgtSoknad!.soknadstype })
+                logEvent('skjema fullført', { soknadstype: valgtSoknad!.soknadstype })
             } else {
                 await sendOppdaterSporsmal()
                 logEvent(

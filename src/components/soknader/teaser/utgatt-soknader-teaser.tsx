@@ -24,7 +24,7 @@ const UtgaattSoknaderTeaser = ({ soknad }: SykepengesoknadTeaserProps) => {
 
     return (
         <article aria-labelledby={`soknader-header-${soknad.id}`} onClick={() => {
-            logEvent('Velger søknad', { soknadstype: soknad.soknadstype })
+            logEvent('skjema åpnet', { soknadstype: soknad.soknadstype })
         }}>
             <button className="inngangspanel inngangspanel__btn"
                 onClick={() => setAapen(true)}>
