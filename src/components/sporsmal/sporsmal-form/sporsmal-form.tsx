@@ -66,6 +66,9 @@ const SporsmalForm = () => {
         const sisteSide = erSiste()
         setErSiste(sisteSide)
         if (sisteSide) hentMottaker()
+        return () => {
+            methods.reset()
+        }
         // eslint-disable-next-line
     }, [ spmIndex ]);
 
