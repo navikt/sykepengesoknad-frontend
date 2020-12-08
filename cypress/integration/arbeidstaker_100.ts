@@ -86,8 +86,8 @@ describe('Tester arbeidstakersøknad', () => {
         // Test spørsmål
         cy.get('.inputPanelGruppe__inner label:first-child > input[value=JA]').click({ force: true })
         cy.get('.undersporsmal .skjemaelement__input.form-control').focus()
-        cy.get('.flatpickr-calendar').contains('17').click({ force: true })
-        cy.get('.flatpickr-calendar').contains('24').click({ force: true })
+        cy.get('.flatpickr-calendar').contains('10').click({ force: true })
+        cy.get('.flatpickr-calendar').contains('13').click({ force: true })
 
         cy.contains('Gå videre').click()
     })
