@@ -13,9 +13,11 @@ const CheckboxInput = ({ sporsmal }: SpmProps) => {
     const bekreft = useRef<HTMLDivElement>(null)
     const [ classname, setClassname ] = useState<string>('bekreftCheckboksPanel')
     const feilmelding = hentFeilmelding(sporsmal)
+    const [ lokal, setLokal ] = useState<boolean>(hentSvar(sporsmal))
 
     useEffect(() => {
         const svar = hentSvar(sporsmal)
+        setLokal(svar)
         setValue(sporsmal.id, svar)
         setClassname(getClassName(svar === 'CHECKED'))
         // eslint-disable-next-line
@@ -24,6 +26,7 @@ const CheckboxInput = ({ sporsmal }: SpmProps) => {
     const handleChange = (evt: any) => {
         bekreft.current!.classList.toggle('bekreftCheckboksPanel--checked')
         setValue(sporsmal.id, evt.target.checked)
+        setLokal(evt.target.checked)
         setClassname(getClassName(evt.target.checked))
 
     }
@@ -48,6 +51,7 @@ const CheckboxInput = ({ sporsmal }: SpmProps) => {
                         className="skjemaelement__input checkboks"
                         name={sporsmal.id}
                         id={sporsmal.id}
+                        checked={lokal}
                         onChange={handleChange}
                         ref={register({ required: feilmelding.global })}
                     />
