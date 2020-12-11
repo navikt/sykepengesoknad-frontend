@@ -191,6 +191,10 @@ const SporsmalForm = () => {
         }
     }
 
+    const preSubmit = () => {
+        methods.clearErrors('syfosoknad')
+    }
+
     const onSubmit = async() => {
         if (poster) return
         setPoster(true)
@@ -240,6 +244,7 @@ const SporsmalForm = () => {
     return (
         <FormProvider {...methods}>
             <form onSubmit={methods.handleSubmit(onSubmit)}
+                onSubmitCapture={preSubmit}
                 className={'sporsmal__form ' + nesteSporsmal?.tag?.toLowerCase()}>
 
                 <BjornUnderTittel sporsmal={sporsmal} />
