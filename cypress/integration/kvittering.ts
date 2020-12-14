@@ -102,7 +102,6 @@ describe('Tester kvittering', () => {
 
             // Svar og send
             cy.get('.skjemaelement__input.form-control').focus()
-            cy.get('.flatpickr-prev-month').click({ force: true })
             cy.get('.flatpickr-calendar').contains('17').click({ force: true })
             cy.get('.flatpickr-calendar').contains('24').click({ force: true })
             cy.contains('Gå videre').click()

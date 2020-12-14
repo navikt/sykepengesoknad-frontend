@@ -20,7 +20,7 @@ interface PeriodeProps {
 type AllProps = SpmProps & PeriodeProps;
 
 const PeriodeKomp = ({ sporsmal, index, slettPeriode }: AllProps) => {
-    const { setValue, errors, getValues, reset } = useFormContext()
+    const { setValue, errors, getValues } = useFormContext()
     const [ datoer, settDatoer ] = useState<Date[]>([])
     const id = sporsmal.id + '_' + index
     const htmlfor = sporsmal.id + '_t_' + index
@@ -31,11 +31,6 @@ const PeriodeKomp = ({ sporsmal, index, slettPeriode }: AllProps) => {
         const periode = hentPeriode(sporsmal, index)
         onValueUpdate(periode)
         setValue(id, periode)
-
-        const cleanUp = () => {
-            reset({ ...getValues(), id })
-        }
-        return cleanUp
         // eslint-disable-next-line
     }, [ sporsmal ]);
 
