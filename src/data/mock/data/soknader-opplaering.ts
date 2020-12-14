@@ -2435,7 +2435,7 @@ export const oppholdUtland: RSSoknad = {
         'undertekst': null,
         'svartype': 'PERIODER',
         'min': '2020-03-03',
-        'max': '2020-12-03',
+        'max': '2020-12-31',
         'pavirkerAndreSporsmal': false,
         'kriterieForVisningAvUndersporsmal': null,
         'svar': [],
