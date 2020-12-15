@@ -1,9 +1,6 @@
-import './flatpickr.less'
-
-import { Norwegian } from 'flatpickr/dist/l10n/no.js'
+import { Datepicker } from 'nav-datovelger'
 import { Element, Normaltekst } from 'nav-frontend-typografi'
-import React, { useEffect, useRef } from 'react'
-import Flatpickr from 'react-flatpickr'
+import React, { useEffect, useState } from 'react'
 import { Controller, useFormContext } from 'react-hook-form'
 
 import Vis from '../../vis'
@@ -14,56 +11,63 @@ import UndersporsmalListe from '../undersporsmal/undersporsmal-liste'
 
 const DatoInput = ({ sporsmal }: SpmProps) => {
     const { setValue, errors, watch } = useFormContext()
-    const datoRef = useRef<HTMLDivElement>(null)
     const feilmelding = hentFeilmelding(sporsmal)
+    const [ dato, setDato ] = useState<string>('')
 
     useEffect(() => {
-        const verdi = hentSvar(sporsmal)
-        setValue(sporsmal.id, verdi)
-        lagIdForDato()
+        const svar = hentSvar(sporsmal)
+        setValue(sporsmal.id, svar)
+        setDato(svar)
         // eslint-disable-next-line
     }, [sporsmal]);
 
     useEffect(() => {
-        const cls = errors[sporsmal.id]
-            ? [ 'skjemaelement__input', 'skjemaelement__input--harFeil' ]
-            : [ 'skjemaelement__input' ]
-        const input = datoRef.current!.querySelector('.input--m[type=text], .input--m[type=date]')
-        input!.classList.add(...cls)
         // eslint-disable-next-line
     }, [errors[sporsmal.id]]);
 
-    const lagIdForDato = () => {
-        const input = datoRef.current!.querySelector('.input--m[type=text], .input--m[type=date]')
-        input!.setAttribute('id', 'input' + sporsmal.id)
-        input!.setAttribute('autoComplete', 'off')
-    }
-
     return (
-        <div ref={datoRef}>
+        <div>
             <label className="skjema__sporsmal" htmlFor={'input' + sporsmal.id}>
                 <Element>{sporsmal.sporsmalstekst}</Element>
             </label>
             <Controller
-                as={Flatpickr}
-                rules={{ required: feilmelding.global }}
-                id={sporsmal.id}
+                //TODO: legge til "as" fordi det er required
                 name={sporsmal.id}
-                className="skjemaelement__input input--m"
-                placeholder="dd.mm.åååå"
                 defaultValue={hentSvar(sporsmal)}
-                options={{
-                    minDate: sporsmal.min!,
-                    maxDate: sporsmal.max!,
-                    mode: 'single',
-                    enableTime: false,
-                    dateFormat: 'Y-m-d',
-                    altInput: true,
-                    altFormat: 'd.m.Y',
-                    locale: Norwegian,
-                    allowInput: true,
-                    disableMobile: true
+                rules={{
+                    validate: () => {
+                        const div: HTMLDivElement | null = document.querySelector('.nav-datovelger__input')
+                        // 2020-01-20 //
+                        if (dato === '' || !dato.match(RegExp('\\d{4}-\\d{2}-\\d{2}'))) {
+                            div?.classList.add('skjemaelement__input--harFeil')
+                            return feilmelding.global
+                        }
+
+                        div?.classList.remove('skjemaelement__input--harFeil')
+                        return true
+                    }
                 }}
+                render={({ name }) => (
+                    <Datepicker
+                        locale={'nb'}
+                        inputId={ name }
+                        onChange={(value) => {
+                            setValue(sporsmal.id ,value)
+                            setDato(value)
+                        }}
+                        value={dato}
+                        inputProps={{
+                            name: name
+                        }}
+                        calendarSettings={{ showWeekNumbers: true }}
+                        showYearSelector={false}
+                        limitations={{
+                            weekendsNotSelectable: false,
+                            minDate: sporsmal.min!,
+                            maxDate: sporsmal.max!
+                        }}
+                    />
+                )}
             />
 
             <Normaltekst tag="div" role="alert" aria-live="assertive" className="skjemaelement__feilmelding">

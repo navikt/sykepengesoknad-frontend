@@ -28,10 +28,6 @@ export const hentSvar = (sporsmal: Sporsmal): any => {
         return sporsmal.svartype.toString().startsWith('PERIODE') ? [] : ''
     }
 
-    if (sporsmal.svartype === RSSvartype.DATO) {
-        return fraBackendTilDate(svar.verdi)
-    }
-
     return svar.verdi
 }
 

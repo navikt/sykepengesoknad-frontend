@@ -1,5 +1,3 @@
-import './flatpickr.less'
-
 import { Element } from 'nav-frontend-typografi'
 import React, { useEffect, useRef, useState } from 'react'
 import useForceUpdate from 'use-force-update'

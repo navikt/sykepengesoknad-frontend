@@ -32,9 +32,6 @@ export const settSvar = (sporsmal: Sporsmal, verdier: Record<string, any>): void
         case RSSvartype.RADIO_GRUPPE_UKEKALENDER:
             ukekalenderSvar(sporsmal, verdi)
             break
-        case RSSvartype.DATO:
-            datoSvar(sporsmal, verdi)
-            break
         case RSSvartype.LAND:
             landSvar(sporsmal, verdi)
             break
@@ -95,17 +92,6 @@ const ukekalenderSvar = (sporsmal: Sporsmal, verdi: any) => {
     sporsmal.svarliste = {
         sporsmalId: sporsmal.id,
         svar: [ { verdi: verdi ? verdi.toString() : 'Ikke til behandling' } ]
-    }
-}
-
-const datoSvar = (sporsmal: Sporsmal, verdi: any) => {
-    if (Array.isArray(verdi)) {
-        sporsmal.svarliste = {
-            sporsmalId: sporsmal.id,
-            svar: verdi.map(element => {
-                return { verdi: tilBackendDato(element) }
-            }),
-        }
     }
 }
 
