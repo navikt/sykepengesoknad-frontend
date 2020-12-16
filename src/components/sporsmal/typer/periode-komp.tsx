@@ -1,8 +1,10 @@
 import { Norwegian } from 'flatpickr/dist/l10n/no.js'
+import { Datepicker } from 'nav-datovelger'
 import { Normaltekst } from 'nav-frontend-typografi'
-import React, { useEffect } from 'react'
-import { useFormContext } from 'react-hook-form'
+import React, { useEffect, useState } from 'react'
+import { Controller,useFormContext } from 'react-hook-form'
 
+import validerPeriode from '../../../utils/sporsmal/valider-periode'
 import { tekst } from '../../../utils/tekster'
 import Vis from '../../vis'
 import { hentPeriode } from '../hent-svar'
@@ -14,12 +16,17 @@ interface PeriodeProps {
     slettPeriode: (e: any, idx: number) => void;
 }
 
+interface Periode {
+    fom: string;
+    tom: string;
+}
+
 type AllProps = SpmProps & PeriodeProps;
 
 const PeriodeKomp = ({ sporsmal, index, slettPeriode }: AllProps) => {
-    const { setValue, errors } = useFormContext()
+    const { setValue, getValues, errors } = useFormContext()
+    const [ periode, setPeriode ] = useState<Periode>({ fom: '', tom: '' })
     const id = sporsmal.id + '_' + index
-    const htmlfor = sporsmal.id + '_t_' + index
     const feilmelding = hentFeilmelding(sporsmal)
     Norwegian.rangeSeparator = ' - '
 
@@ -29,18 +36,68 @@ const PeriodeKomp = ({ sporsmal, index, slettPeriode }: AllProps) => {
         // eslint-disable-next-line
     }, [ sporsmal ]);
 
+    const onChange = (fom?: string, tom?: string) => {
+        const nyFom = fom ? fom : periode.fom
+        const nyTom = tom ? tom : periode.tom
+        const nyPeriode = { fom: nyFom, tom: nyTom }
+
+        setPeriode(nyPeriode)
+        setValue(id, nyPeriode)
+    }
+
 
     return (
         <li className="periode">
-            <div className="periodelabel">
-                <label htmlFor={htmlfor} className="fom">
-                    {tekst('sykepengesoknad.periodevelger.fom')}
-                </label>
-                <label htmlFor={htmlfor} className="tom">
-                    {tekst('sykepengesoknad.periodevelger.tom')}
-                </label>
-            </div>
-
+            <Controller
+                rules={{
+                    pattern: { value: /\d/, message: feilmelding.global },
+                    validate: () => validerPeriode(sporsmal, id, getValues())
+                }}
+                name={id}
+                defaultValue={hentPeriode(sporsmal, index)}
+                render={({ name }) => (
+                    <>
+                        <label htmlFor={ name + '_fom' } className="fom">
+                            {tekst('sykepengesoknad.periodevelger.fom')}
+                        </label>
+                        <Datepicker
+                            locale={'nb'}
+                            inputId={ name + '_fom' }
+                            onChange={(value) => onChange(value, undefined)}
+                            value={periode.fom}
+                            inputProps={{
+                                name: name
+                            }}
+                            calendarSettings={{ showWeekNumbers: true }}
+                            showYearSelector={false}
+                            limitations={{
+                                weekendsNotSelectable: false,
+                                minDate: sporsmal.min!,
+                                maxDate: sporsmal.max!
+                            }}
+                        />
+                        <label htmlFor={ name + '_tom' } className="tom">
+                            {tekst('sykepengesoknad.periodevelger.tom')}
+                        </label>
+                        <Datepicker
+                            locale={'nb'}
+                            inputId={ name + '_tom' }
+                            onChange={(value) => onChange(undefined, value)}
+                            value={periode.tom}
+                            inputProps={{
+                                name: name
+                            }}
+                            calendarSettings={{ showWeekNumbers: true }}
+                            showYearSelector={false}
+                            limitations={{
+                                weekendsNotSelectable: false,
+                                minDate: sporsmal.min!,
+                                maxDate: sporsmal.max!
+                            }}
+                        />
+                    </>
+                )}
+            />
             <Vis hvis={index > 0}>
                 <button role="link" id={'btn_' + id} className="periodeknapp lenke slett"
                     onClick={(e) => slettPeriode(e, index)}>

@@ -31,7 +31,6 @@ const DatoInput = ({ sporsmal }: SpmProps) => {
                 <Element>{sporsmal.sporsmalstekst}</Element>
             </label>
             <Controller
-                //TODO: legge til "as" fordi det er required
                 name={sporsmal.id}
                 defaultValue={hentSvar(sporsmal)}
                 rules={{

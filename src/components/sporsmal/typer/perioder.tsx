@@ -18,24 +18,11 @@ const Perioder = ({ sporsmal }: SpmProps) => {
     useEffect(() => {
         const svar = hentPerioder(sporsmal)
         setLokal(svar.length > 0 ? svar : lokal)
-        lagIdForPerioder()
         // eslint-disable-next-line
     }, [ sporsmal ]);
 
-    const lagIdForPerioder = () => {
-        const perioder = periodeliste.current!.querySelectorAll('.periode')
-        perioder.forEach((value, key) => {
-            const input = value.querySelector('.input--m[type=text]')
-            input!.setAttribute('id', sporsmal.id + '_t_' + key)
-            input!.setAttribute('autoComplete', 'off')
-        })
-    }
-
     const oppdaterPerioder = () => {
         forceUpdate()
-        setTimeout(() => {
-            lagIdForPerioder()
-        }, 10)
     }
 
     const slettPeriode = (e: any, id: number) => {
