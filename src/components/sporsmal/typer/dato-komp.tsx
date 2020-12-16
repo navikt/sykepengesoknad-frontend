@@ -8,9 +8,10 @@ import { hentSvar } from '../hent-svar'
 import { SpmProps } from '../sporsmal-form/sporsmal-form'
 import { hentFeilmelding } from '../sporsmal-utils'
 import UndersporsmalListe from '../undersporsmal/undersporsmal-liste'
+import validerDato from '../../../utils/sporsmal/valider-dato';
 
 const DatoInput = ({ sporsmal }: SpmProps) => {
-    const { setValue, errors, watch } = useFormContext()
+    const { setValue, errors, watch, getValues } = useFormContext()
     const feilmelding = hentFeilmelding(sporsmal)
     const [ dato, setDato ] = useState<string>('')
 
@@ -21,10 +22,6 @@ const DatoInput = ({ sporsmal }: SpmProps) => {
         // eslint-disable-next-line
     }, [sporsmal]);
 
-    useEffect(() => {
-        // eslint-disable-next-line
-    }, [errors[sporsmal.id]]);
-
     return (
         <div>
             <label className="skjema__sporsmal" htmlFor={'input' + sporsmal.id}>
@@ -34,12 +31,13 @@ const DatoInput = ({ sporsmal }: SpmProps) => {
                 name={sporsmal.id}
                 defaultValue={hentSvar(sporsmal)}
                 rules={{
+                    required: feilmelding.global,
                     validate: () => {
                         const div: HTMLDivElement | null = document.querySelector('.nav-datovelger__input')
-                        // 2020-01-20 //
-                        if (dato === '' || !dato.match(RegExp('\\d{4}-\\d{2}-\\d{2}'))) {
+                        const detteFeilet = validerDato(sporsmal, getValues())
+                        if (detteFeilet !== true) {
                             div?.classList.add('skjemaelement__input--harFeil')
-                            return feilmelding.global
+                            return detteFeilet
                         }
 
                         div?.classList.remove('skjemaelement__input--harFeil')

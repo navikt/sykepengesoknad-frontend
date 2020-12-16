@@ -2,7 +2,6 @@ import { SvarEnums } from '../../types/enums'
 import { RSSvartype } from '../../types/rs-types/rs-svartype'
 import { Sporsmal } from '../../types/types'
 import { empty } from '../../utils/constants'
-import { tilBackendDato } from '../../utils/dato-utils'
 
 const hentVerdier = (sporsmal: Sporsmal, verdier: Record<string, any>) => {
     let verdi = verdier[sporsmal.id]
@@ -100,9 +99,8 @@ const periodeSvar = (sporsmal: Sporsmal, verdi: any) => {
         sporsmal.svarliste = {
             sporsmalId: sporsmal.id,
             svar: verdi
-                .filter((periode) => periode[0] !== undefined && periode[1] !== undefined)
                 .map((periode) => {
-                    return { verdi: JSON.stringify({ fom: tilBackendDato(periode[0]), tom: tilBackendDato(periode[1]) }) }
+                    return { verdi: JSON.stringify(periode) }
                 }),
         }
     }

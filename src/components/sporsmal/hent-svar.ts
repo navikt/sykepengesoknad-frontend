@@ -3,7 +3,7 @@ import { RSSvarliste } from '../../types/rs-types/rs-svarliste'
 import { RSSvartype } from '../../types/rs-types/rs-svartype'
 import { Sporsmal } from '../../types/types'
 import { empty } from '../../utils/constants'
-import { fraBackendTilDate } from '../../utils/dato-utils'
+import { FormPeriode } from './typer/periode-komp'
 
 export const hentSvar = (sporsmal: Sporsmal): any => {
     const svarliste = sporsmal.svarliste
@@ -41,12 +41,11 @@ export const hentPerioder = (sporsmal: Sporsmal) => {
 
 export const hentPeriode = (sporsmal: Sporsmal, index: number) => {
     const svar = sporsmal.svarliste.svar[index]
-    const periode: Date[] = []
+    const periode: FormPeriode = { fom: '', tom: '' }
     if (svar === empty) {
         return periode
     }
-    const datoer = JSON.parse(svar.verdi)
-    return [ fraBackendTilDate(datoer.fom), fraBackendTilDate(datoer.tom) ]
+    return JSON.parse(svar.verdi) as FormPeriode
 }
 
 export const hentPeriodeListe = ( sporsmal: Sporsmal ) => {

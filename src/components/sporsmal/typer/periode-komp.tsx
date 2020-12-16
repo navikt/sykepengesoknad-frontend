@@ -16,7 +16,7 @@ interface PeriodeProps {
     slettPeriode: (e: any, idx: number) => void;
 }
 
-interface Periode {
+export interface FormPeriode {
     fom: string;
     tom: string;
 }
@@ -25,7 +25,7 @@ type AllProps = SpmProps & PeriodeProps;
 
 const PeriodeKomp = ({ sporsmal, index, slettPeriode }: AllProps) => {
     const { setValue, getValues, errors } = useFormContext()
-    const [ periode, setPeriode ] = useState<Periode>({ fom: '', tom: '' })
+    const [ periode, setPeriode ] = useState<FormPeriode>({ fom: '', tom: '' })
     const id = sporsmal.id + '_' + index
     const feilmelding = hentFeilmelding(sporsmal)
     Norwegian.rangeSeparator = ' - '
@@ -33,6 +33,7 @@ const PeriodeKomp = ({ sporsmal, index, slettPeriode }: AllProps) => {
     useEffect(() => {
         const periode = hentPeriode(sporsmal, index)
         setValue(id, periode)
+        setPeriode(periode)
         // eslint-disable-next-line
     }, [ sporsmal ]);
 
@@ -50,11 +51,12 @@ const PeriodeKomp = ({ sporsmal, index, slettPeriode }: AllProps) => {
         <li className="periode">
             <Controller
                 rules={{
-                    pattern: { value: /\d/, message: feilmelding.global },
+                    required: feilmelding.global,
                     validate: () => validerPeriode(sporsmal, id, getValues())
+                    // TODO: Legg til styling for feilmelding, sånn som dato-komp
                 }}
                 name={id}
-                defaultValue={hentPeriode(sporsmal, index)}
+                defaultValue={hentPeriode(sporsmal, index)} // Denne overlapper med useEffect, men må være med for å ikke få warning
                 render={({ name }) => (
                     <>
                         <label htmlFor={ name + '_fom' } className="fom">
@@ -66,7 +68,7 @@ const PeriodeKomp = ({ sporsmal, index, slettPeriode }: AllProps) => {
                             onChange={(value) => onChange(value, undefined)}
                             value={periode.fom}
                             inputProps={{
-                                name: name
+                                name: name + '_fom'
                             }}
                             calendarSettings={{ showWeekNumbers: true }}
                             showYearSelector={false}
@@ -85,7 +87,7 @@ const PeriodeKomp = ({ sporsmal, index, slettPeriode }: AllProps) => {
                             onChange={(value) => onChange(undefined, value)}
                             value={periode.tom}
                             inputProps={{
-                                name: name
+                                name: name + '_tom'
                             }}
                             calendarSettings={{ showWeekNumbers: true }}
                             showYearSelector={false}
@@ -106,11 +108,8 @@ const PeriodeKomp = ({ sporsmal, index, slettPeriode }: AllProps) => {
             </Vis>
 
             <Normaltekst tag="div" role="alert" aria-live="assertive" className="skjemaelement__feilmelding">
-                <Vis hvis={errors[id]?.type === 'pattern'}>
+                <Vis hvis={errors[id]}>
                     <p>{feilmelding.lokal}</p>
-                </Vis>
-                <Vis hvis={errors[id]?.type === 'validate'}>
-                    <p>Du må oppi en annen periode</p>
                 </Vis>
             </Normaltekst>
         </li>

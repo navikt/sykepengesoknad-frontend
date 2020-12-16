@@ -35,9 +35,9 @@ const useValiderArbeidsgrad = ( sporsmal: Sporsmal ) => {
 
     const sykedagerForArbeidstakere = () => {
         const feriedager = hentPeriodeListe(hentSporsmal(valgtSoknad!, TagTyper.FERIE_NAR_V2)!)
-            .flatMap(periode => ukeDatoListe(periode[0].toDateString(), periode[1].toDateString()))
+            .flatMap(periode => ukeDatoListe(periode.fom, periode.tom))
         const permisjonsdager = hentPeriodeListe(hentSporsmal(valgtSoknad!, TagTyper.PERMISJON_NAR_V2)!)
-            .flatMap(periode => ukeDatoListe(periode[0].toDateString(), periode[1].toDateString()))
+            .flatMap(periode => ukeDatoListe(periode.fom, periode.tom))
         const ekskluderteDager = [ feriedager, permisjonsdager ].flat()
 
         return periodeDager

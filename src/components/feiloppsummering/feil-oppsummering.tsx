@@ -57,7 +57,7 @@ const FeilOppsummering = (props: FeilProps) => {
 
         let elmid
         if (id.includes('_')) {
-            elmid = idarr[0] + '_t_' + idarr[1]
+            elmid = id + '_fom'     // TODO: Siden fom og tom er i samme Controller så kan ikke valideringen sende med ref til den riktige
 
         } else if (detteSpm.svartype.includes('JA_NEI')) {
             elmid = idarr[0] += '_0'
@@ -67,7 +67,7 @@ const FeilOppsummering = (props: FeilProps) => {
             elmid = idarr[0]
 
         } else if (detteSpm.svartype.includes('DATO')) {
-            elmid = 'input' + idarr[0]
+            elmid = id
         }
 
         const element = document.getElementById(elmid as any)
