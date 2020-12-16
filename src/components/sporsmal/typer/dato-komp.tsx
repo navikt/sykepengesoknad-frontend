@@ -9,6 +9,7 @@ import { SpmProps } from '../sporsmal-form/sporsmal-form'
 import { hentFeilmelding } from '../sporsmal-utils'
 import UndersporsmalListe from '../undersporsmal/undersporsmal-liste'
 import validerDato from '../../../utils/sporsmal/valider-dato';
+import { fraBackendTilDate } from '../../../utils/dato-utils';
 
 const DatoInput = ({ sporsmal }: SpmProps) => {
     const { setValue, errors, watch, getValues } = useFormContext()
@@ -24,7 +25,7 @@ const DatoInput = ({ sporsmal }: SpmProps) => {
 
     return (
         <div>
-            <label className="skjema__sporsmal" htmlFor={'input' + sporsmal.id}>
+            <label className="skjema__sporsmal" htmlFor={sporsmal.id}>
                 <Element>{sporsmal.sporsmalstekst}</Element>
             </label>
             <Controller
@@ -62,6 +63,9 @@ const DatoInput = ({ sporsmal }: SpmProps) => {
                             weekendsNotSelectable: false,
                             minDate: sporsmal.min!,
                             maxDate: sporsmal.max!
+                        }}
+                        dayPickerProps={{
+                            initialMonth: fraBackendTilDate(sporsmal.min!)
                         }}
                     />
                 )}

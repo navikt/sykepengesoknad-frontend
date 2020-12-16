@@ -10,6 +10,7 @@ import Vis from '../../vis'
 import { hentPeriode } from '../hent-svar'
 import { SpmProps } from '../sporsmal-form/sporsmal-form'
 import { hentFeilmelding } from '../sporsmal-utils'
+import { fraBackendTilDate } from '../../../utils/dato-utils';
 
 interface PeriodeProps {
     index: number;
@@ -76,6 +77,9 @@ const PeriodeKomp = ({ sporsmal, index, slettPeriode }: AllProps) => {
                                 weekendsNotSelectable: false,
                                 minDate: sporsmal.min!,
                                 maxDate: sporsmal.max!
+                            }}
+                            dayPickerProps={{
+                                initialMonth: fraBackendTilDate(sporsmal.min!)
                             }}
                         />
                         <label htmlFor={ name + '_tom' } className="tom">
