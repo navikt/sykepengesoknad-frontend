@@ -43,8 +43,8 @@ describe('Tester frilansersøknad', () => {
         // Test spørsmål
         cy.get('.inputPanelGruppe__inner label:first-child > input[value=JA]').click({ force: true })
         cy.contains('Når begynte du å jobbe igjen?')
-        cy.get('.undersporsmal .skjemaelement__input.form-control').focus()
-        cy.get('.flatpickr-calendar').contains('20').click({ force: true })
+        cy.get('.nav-datovelger__kalenderknapp').click()
+        cy.get('.DayPicker-Day').contains('20').click()
 
         cy.contains('Gå videre').click()
     })
@@ -98,9 +98,10 @@ describe('Tester frilansersøknad', () => {
 
         // Underspørsmål 1
         cy.contains('Når var du utenfor EØS?')
-        cy.get('.undersporsmal .skjemaelement__input.form-control').focus()
-        cy.get('.flatpickr-calendar').contains('17').click({ force: true })
-        cy.get('.flatpickr-calendar').contains('24').click({ force: true })
+        cy.get('#687448_0 .fom .nav-datovelger__kalenderknapp').click()
+        cy.get('.DayPicker-Day').contains('17').click()
+        cy.get('#687448_0 .tom .nav-datovelger__kalenderknapp').click()
+        cy.get('.DayPicker-Day').contains('24').click()
 
         // Underspørsmål 2 - Ja
         cy.contains('Har du søkt om å beholde sykepengene for disse dagene?')
@@ -137,8 +138,8 @@ describe('Tester frilansersøknad', () => {
 
         // Underspørsmål 1
         cy.contains('Når startet du på utdanningen?')
-        cy.get('.undersporsmal .skjemaelement__input.form-control').focus()
-        cy.get('.flatpickr-calendar').contains('10').click({ force: true })
+        cy.get('.nav-datovelger__kalenderknapp').click()
+        cy.get('.DayPicker-Day').contains('10').click()
 
         // Underspørsmål 2 - radio
         cy.contains('Er utdanningen et fulltidsstudium?')

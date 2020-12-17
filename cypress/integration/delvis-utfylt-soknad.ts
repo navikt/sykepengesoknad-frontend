@@ -29,7 +29,7 @@ describe('Tester delvis utfylt søknad', () => {
     it('Søknad PERMITTERT_PERIODE er utfylt med ja og periode - steg 2', () => {
         cy.url().should('include', `${soknad.id}/3`)
         cy.get('.inputPanel--checked').contains('Ja')
-        cy.get('.periodelabel').contains('Fra og med')
-        cy.get('.periodelabel').contains('Til og med')
+        cy.get('.skjemaelement__label').contains('Fra og med')
+        cy.get('.skjemaelement__label').contains('Til og med')
     })
 })

@@ -57,7 +57,11 @@ const FeilOppsummering = (props: FeilProps) => {
 
         let elmid
         if (id.includes('_')) {
-            elmid = id + '_fom'     // TODO: Siden fom og tom er i samme Controller så kan ikke valideringen sende med ref til den riktige
+            if(list[1].type === 'periode') {
+                elmid = id + '_fom'
+            } else {
+                elmid = id + '_' + list[1].type
+            }
 
         } else if (detteSpm.svartype.includes('JA_NEI')) {
             elmid = idarr[0] += '_0'

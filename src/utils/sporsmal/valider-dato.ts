@@ -1,5 +1,5 @@
 import { Sporsmal } from '../../types/types'
-import { fraBackendTilDate } from '../dato-utils';
+import { fraBackendTilDate } from '../dato-utils'
 
 const validerDato = (sporsmal: Sporsmal, values: Record<string, any>) => {
 
@@ -11,8 +11,8 @@ const validerDato = (sporsmal: Sporsmal, values: Record<string, any>) => {
     // Formattering er riktig når dato er skrevet inn manuelt
     if (isNaN(valgtDato.getTime())) return 'Datoen følger ikke formatet dd.mm.åååå'
     // Grenseverdier
-    if (valgtDato < fraBackendTilDate(sporsmal.min!)) return 'Datoen kan ikke være før ' + sporsmal.min
-    if (valgtDato > fraBackendTilDate(sporsmal.max!)) return 'Datoen kan ikke være etter ' + sporsmal.max
+    if (sporsmal.min && valgtDato < fraBackendTilDate(sporsmal.min)) return 'Datoen kan ikke være før ' + sporsmal.min
+    if (sporsmal.max && valgtDato > fraBackendTilDate(sporsmal.max)) return 'Datoen kan ikke være etter ' + sporsmal.max
 
     return true
 }

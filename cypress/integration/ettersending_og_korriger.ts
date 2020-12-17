@@ -22,8 +22,8 @@ describe('Tester ettersending og korrigering', () => {
         cy.url().should('include', `${soknad.id}/2`)
         cy.get('.inputPanelGruppe__inner label:first-child > input[value=JA]').click({ force: true })
         cy.contains('Velg første dag i permitteringen')
-        cy.get('.undersporsmal .skjemaelement__input.form-control').focus()
-        cy.get('.flatpickr-calendar').contains('20').click({ force: true })
+        cy.get('.nav-datovelger__kalenderknapp').click()
+        cy.get('.DayPicker-Day').contains('20').click()
         cy.contains('Gå videre').click()
 
         cy.url().should('include', `${soknad.id}/3`)

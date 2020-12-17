@@ -3,13 +3,13 @@ import { Element, Normaltekst } from 'nav-frontend-typografi'
 import React, { useEffect, useState } from 'react'
 import { Controller, useFormContext } from 'react-hook-form'
 
+import { fraBackendTilDate } from '../../../utils/dato-utils'
+import validerDato from '../../../utils/sporsmal/valider-dato'
 import Vis from '../../vis'
 import { hentSvar } from '../hent-svar'
 import { SpmProps } from '../sporsmal-form/sporsmal-form'
 import { hentFeilmelding } from '../sporsmal-utils'
 import UndersporsmalListe from '../undersporsmal/undersporsmal-liste'
-import validerDato from '../../../utils/sporsmal/valider-dato';
-import { fraBackendTilDate } from '../../../utils/dato-utils';
 
 const DatoInput = ({ sporsmal }: SpmProps) => {
     const { setValue, errors, watch, getValues } = useFormContext()
@@ -32,7 +32,6 @@ const DatoInput = ({ sporsmal }: SpmProps) => {
                 name={sporsmal.id}
                 defaultValue={hentSvar(sporsmal)}
                 rules={{
-                    required: feilmelding.global,
                     validate: () => {
                         const div: HTMLDivElement | null = document.querySelector('.nav-datovelger__input')
                         const detteFeilet = validerDato(sporsmal, getValues())
@@ -61,11 +60,11 @@ const DatoInput = ({ sporsmal }: SpmProps) => {
                         showYearSelector={false}
                         limitations={{
                             weekendsNotSelectable: false,
-                            minDate: sporsmal.min!,
-                            maxDate: sporsmal.max!
+                            minDate: sporsmal.min || undefined,
+                            maxDate: sporsmal.max || undefined
                         }}
                         dayPickerProps={{
-                            initialMonth: fraBackendTilDate(sporsmal.min!)
+                            initialMonth: fraBackendTilDate(sporsmal.max!)
                         }}
                     />
                 )}
