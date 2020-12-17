@@ -4,40 +4,40 @@
 .periode {
 
     .skjemagruppe {
-        display: flex;
-
-        &:last-child {
-            display: block;
-        }
+        display: inline-flex;
 
         .skjemaelement {
             padding-right: 0.5rem;
-            margin-bottom: 0;
-        }
-        .periodeknapp.slett {
-            padding-top: 2rem;
-            margin-left: 0.2rem;
+            margin-bottom: 0.2rem;
         }
 
         .nav-datovelger__inputContainer {
             width: 8.5rem;
         }
     }
+
+    button {
+        &.slett.lenke {
+            margin-left: 0;
+        }
+    }
 }
 
 @media (min-width: @screen-sm) {
     .periode {
+        display: flex;
+        flex-direction: row;
 
         .skjemagruppe {
-            display: flex;
-
-            .skjemaelement {
-                padding-right: 0.5rem;
-                margin-bottom: 0;
+            .nav-datovelger__inputContainer {
+                width: 11rem;
             }
-            .periodeknapp.slett {
-                padding-top: 2rem;
-                margin-left: 0.2rem;
+        }
+
+        button {
+            &.slett.lenke {
+                display: inline-flex;
+                padding-top: 2.5rem;
             }
         }
     }

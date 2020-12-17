@@ -101,7 +101,7 @@ const PeriodeKomp = ({ sporsmal, index, slettPeriode }: AllProps) => {
                                 inputProps={{
                                     name: name + '_fom'
                                 }}
-                                calendarSettings={{ showWeekNumbers: true }}
+                                calendarSettings={{ showWeekNumbers: true }}    // TODO: Se på position: 'fullscreen' når skjermen er liten
                                 showYearSelector={false}
                                 limitations={{
                                     weekendsNotSelectable: false,
@@ -137,16 +137,15 @@ const PeriodeKomp = ({ sporsmal, index, slettPeriode }: AllProps) => {
                                 }}
                             />
                         </div>
-                        <Vis hvis={index > 0}>
-                            <button role="link" id={'btn_' + id} className="periodeknapp lenke slett" onClick={(e) =>
-                                slettPeriode(e, index)}>
-                                {tekst('sykepengesoknad.periodevelger.slett')}
-                            </button>
-                        </Vis>
                     </fieldset>
                 )}
             />
-
+            <Vis hvis={index > 0}>
+                <button role="link" id={'btn_' + id} className="periodeknapp lenke slett" onClick={(e) =>
+                    slettPeriode(e, index)}>
+                    {tekst('sykepengesoknad.periodevelger.slett')}
+                </button>
+            </Vis>
             <Normaltekst tag="div" role="alert" aria-live="assertive" className="skjemaelement__feilmelding">
                 <Vis hvis={errors[id]}>
                     <p>{feilmelding.lokal}</p>
