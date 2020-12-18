@@ -5,7 +5,7 @@ const validerDato = (sporsmal: Sporsmal, values: Record<string, any>) => {
 
     const formDato = values[sporsmal.id]
     // Enkel null sjekk
-    if (formDato === undefined || formDato === '') return 'Du må oppi en gyldig dato'
+    if (formDato === undefined || formDato === '') return 'Du må oppgi en gyldig dato'
 
     const valgtDato = fraBackendTilDate(formDato)
     // Formattering er riktig når dato er skrevet inn manuelt

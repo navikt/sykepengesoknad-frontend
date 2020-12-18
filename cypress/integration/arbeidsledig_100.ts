@@ -98,7 +98,7 @@ describe('Tester arbeidsledigsøknad', () => {
 
         // Feilmelding
         cy.contains('Det er 1 feil i skjemaet')
-        cy.contains('Du må oppi en til og med dato')
+        cy.contains('Du må oppgi en til og med dato')
 
         // Endre periode 3
         cy.get('#687399_2 .fom .nav-datovelger__kalenderknapp').click()

@@ -5,7 +5,7 @@
     padding-top: 1rem;
 
     .skjemagruppe {
-        display: inline-flex;
+        display: flex;
 
         .skjemaelement {
             padding-right: 0.5rem;
@@ -20,6 +20,7 @@
     button {
         &.slett.lenke {
             margin-left: 0;
+            padding-top: 0.5rem;
         }
     }
 }
@@ -32,7 +33,7 @@
 
 @media (min-width: @screen-sm) {
     .periode {
-        display: inline-flex;
+        display: flex;
 
         .skjemagruppe {
             .nav-datovelger__inputContainer {
@@ -42,7 +43,7 @@
 
         button {
             &.slett.lenke {
-                display: inline-flex;
+                display: flex;
                 padding-top: 2.5rem;
             }
         }
