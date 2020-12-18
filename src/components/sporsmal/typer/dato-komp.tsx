@@ -3,6 +3,7 @@ import { Element, Normaltekst } from 'nav-frontend-typografi'
 import React, { useEffect, useState } from 'react'
 import { Controller, useFormContext } from 'react-hook-form'
 
+import { skalBrukeFullskjermKalender } from '../../../utils/browser-utils'
 import { fraBackendTilDate } from '../../../utils/dato-utils'
 import validerDato from '../../../utils/sporsmal/valider-dato'
 import Vis from '../../vis'
@@ -56,7 +57,10 @@ const DatoInput = ({ sporsmal }: SpmProps) => {
                         inputProps={{
                             name: name
                         }}
-                        calendarSettings={{ showWeekNumbers: true }}
+                        calendarSettings={{
+                            showWeekNumbers: true,
+                            position: skalBrukeFullskjermKalender()
+                        }}
                         showYearSelector={false}
                         limitations={{
                             weekendsNotSelectable: false,

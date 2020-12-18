@@ -5,6 +5,7 @@ import { Normaltekst } from 'nav-frontend-typografi'
 import React, { useEffect, useState } from 'react'
 import { Controller,useFormContext } from 'react-hook-form'
 
+import { skalBrukeFullskjermKalender } from '../../../utils/browser-utils'
 import { fraBackendTilDate } from '../../../utils/dato-utils'
 import { validerFom, validerPeriode,validerTom } from '../../../utils/sporsmal/valider-periode'
 import { tekst } from '../../../utils/tekster'
@@ -46,7 +47,6 @@ const PeriodeKomp = ({ sporsmal, index, slettPeriode }: AllProps) => {
         setPeriode(nyPeriode)
         setValue(id, nyPeriode)
     }
-
 
     return (
         <li className="periode" id={id}>
@@ -101,7 +101,10 @@ const PeriodeKomp = ({ sporsmal, index, slettPeriode }: AllProps) => {
                                 inputProps={{
                                     name: name + '_fom'
                                 }}
-                                calendarSettings={{ showWeekNumbers: true }}    // TODO: Se på position: 'fullscreen' når skjermen er liten
+                                calendarSettings={{
+                                    showWeekNumbers: true,
+                                    position: skalBrukeFullskjermKalender()
+                                }}
                                 showYearSelector={false}
                                 limitations={{
                                     weekendsNotSelectable: false,
@@ -125,7 +128,10 @@ const PeriodeKomp = ({ sporsmal, index, slettPeriode }: AllProps) => {
                                 inputProps={{
                                     name: name + '_tom'
                                 }}
-                                calendarSettings={{ showWeekNumbers: true }}
+                                calendarSettings={{
+                                    showWeekNumbers: true,
+                                    position: skalBrukeFullskjermKalender()
+                                }}
                                 showYearSelector={false}
                                 limitations={{
                                     weekendsNotSelectable: false,
