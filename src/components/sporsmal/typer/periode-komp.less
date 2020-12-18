@@ -2,13 +2,14 @@
 @import '../../../../src/basic';
 
 .periode {
+    padding-top: 1rem;
 
     .skjemagruppe {
         display: inline-flex;
 
         .skjemaelement {
             padding-right: 0.5rem;
-            margin-bottom: 0.2rem;
+            margin-bottom: 0;
         }
 
         .nav-datovelger__inputContainer {
@@ -23,10 +24,15 @@
     }
 }
 
+.skjemaelement__feilmelding {
+    p {
+        margin: 0;
+    }
+}
+
 @media (min-width: @screen-sm) {
     .periode {
-        display: flex;
-        flex-direction: row;
+        display: inline-flex;
 
         .skjemagruppe {
             .nav-datovelger__inputContainer {
