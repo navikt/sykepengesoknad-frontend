@@ -1,6 +1,6 @@
 import { Datepicker } from 'nav-datovelger'
 import { Element, Normaltekst } from 'nav-frontend-typografi'
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import { Controller, useFormContext } from 'react-hook-form'
 
 import { skalBrukeFullskjermKalender } from '../../../utils/browser-utils'
@@ -11,21 +11,34 @@ import { hentSvar } from '../hent-svar'
 import { SpmProps } from '../sporsmal-form/sporsmal-form'
 import { hentFeilmelding } from '../sporsmal-utils'
 import UndersporsmalListe from '../undersporsmal/undersporsmal-liste'
+import useMutationObserver from '@rooks/use-mutation-observer'
 
 const DatoInput = ({ sporsmal }: SpmProps) => {
     const { setValue, errors, watch, getValues } = useFormContext()
     const feilmelding = hentFeilmelding(sporsmal)
     const [ dato, setDato ] = useState<string>('')
+    const mutationRef = useRef<HTMLDivElement>(null)
+
+    useMutationObserver(mutationRef, (e) => {
+        const node: Node = e[1].addedNodes[0]
+        const knapperad: any = document.querySelectorAll('.knapperad')[0]
+        if (node !== undefined) {
+            knapperad.style.zIndex = '-1'
+            knapperad.style.position = 'relative'
+        } else {
+            knapperad.removeAttribute('style')
+        }
+    })
 
     useEffect(() => {
         const svar = hentSvar(sporsmal)
         setValue(sporsmal.id, svar)
         setDato(svar)
         // eslint-disable-next-line
-    }, [sporsmal]);
+    }, [ sporsmal ])
 
     return (
-        <div>
+        <div ref={mutationRef} className="dato-komp">
             <label className="skjema__sporsmal" htmlFor={sporsmal.id}>
                 <Element>{sporsmal.sporsmalstekst}</Element>
             </label>
@@ -48,9 +61,9 @@ const DatoInput = ({ sporsmal }: SpmProps) => {
                 render={({ name }) => (
                     <Datepicker
                         locale={'nb'}
-                        inputId={ name }
+                        inputId={name}
                         onChange={(value) => {
-                            setValue(sporsmal.id ,value)
+                            setValue(sporsmal.id, value)
                             setDato(value)
                         }}
                         value={dato}
