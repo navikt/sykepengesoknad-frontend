@@ -123,7 +123,9 @@ const svarFormat = (sporsmal: RSSporsmal) => {
         }
     }
 
-    for (const uspm of sporsmal.undersporsmal) {
-        svarFormat(uspm)
+    if (!sporsmal.kriterieForVisningAvUndersporsmal || sporsmal.kriterieForVisningAvUndersporsmal === sporsmal.svar[0].verdi) {
+        for (const uspm of sporsmal.undersporsmal) {
+            svarFormat(uspm)
+        }
     }
 }

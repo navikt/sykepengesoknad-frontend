@@ -57,7 +57,11 @@ const FeilOppsummering = (props: FeilProps) => {
 
         let elmid
         if (id.includes('_')) {
-            elmid = idarr[0] + '_t_' + idarr[1]
+            if(list[1].type === 'periode') {
+                elmid = id + '_fom'
+            } else {
+                elmid = id + '_' + list[1].type
+            }
 
         } else if (detteSpm.svartype.includes('JA_NEI')) {
             elmid = idarr[0] += '_0'
@@ -67,7 +71,7 @@ const FeilOppsummering = (props: FeilProps) => {
             elmid = idarr[0]
 
         } else if (detteSpm.svartype.includes('DATO')) {
-            elmid = 'input' + idarr[0]
+            elmid = id
         }
 
         const element = document.getElementById(elmid as any)

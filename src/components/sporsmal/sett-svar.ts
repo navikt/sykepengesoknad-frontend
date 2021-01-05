@@ -2,7 +2,6 @@ import { SvarEnums } from '../../types/enums'
 import { RSSvartype } from '../../types/rs-types/rs-svartype'
 import { Sporsmal } from '../../types/types'
 import { empty } from '../../utils/constants'
-import { tilBackendDato } from '../../utils/dato-utils'
 
 const hentVerdier = (sporsmal: Sporsmal, verdier: Record<string, any>) => {
     let verdi = verdier[sporsmal.id]
@@ -31,9 +30,6 @@ export const settSvar = (sporsmal: Sporsmal, verdier: Record<string, any>): void
             break
         case RSSvartype.RADIO_GRUPPE_UKEKALENDER:
             ukekalenderSvar(sporsmal, verdi)
-            break
-        case RSSvartype.DATO:
-            datoSvar(sporsmal, verdi)
             break
         case RSSvartype.LAND:
             landSvar(sporsmal, verdi)
@@ -98,25 +94,13 @@ const ukekalenderSvar = (sporsmal: Sporsmal, verdi: any) => {
     }
 }
 
-const datoSvar = (sporsmal: Sporsmal, verdi: any) => {
-    if (Array.isArray(verdi)) {
-        sporsmal.svarliste = {
-            sporsmalId: sporsmal.id,
-            svar: verdi.map(element => {
-                return { verdi: tilBackendDato(element) }
-            }),
-        }
-    }
-}
-
 const periodeSvar = (sporsmal: Sporsmal, verdi: any) => {
     if (Array.isArray(verdi)) {
         sporsmal.svarliste = {
             sporsmalId: sporsmal.id,
             svar: verdi
-                .filter((periode) => periode[0] !== undefined && periode[1] !== undefined)
                 .map((periode) => {
-                    return { verdi: JSON.stringify({ fom: tilBackendDato(periode[0]), tom: tilBackendDato(periode[1]) }) }
+                    return { verdi: JSON.stringify(periode) }
                 }),
         }
     }

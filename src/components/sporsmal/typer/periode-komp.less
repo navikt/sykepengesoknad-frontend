@@ -1,0 +1,51 @@
+@import '../../../../node_modules/nav-frontend-core/less/_variabler';
+@import '../../../../src/basic';
+
+.periode {
+    padding-top: 1rem;
+
+    .skjemagruppe {
+        display: flex;
+
+        .skjemaelement {
+            padding-right: 0.5rem;
+            margin-bottom: 0;
+        }
+
+        .nav-datovelger__inputContainer {
+            width: 8.5rem;
+        }
+    }
+
+    button {
+        &.slett.lenke {
+            margin-left: 0;
+            padding-top: 0.5rem;
+        }
+    }
+}
+
+.skjemaelement__feilmelding {
+    p {
+        margin: 0;
+    }
+}
+
+@media (min-width: @screen-sm) {
+    .periode {
+        display: flex;
+
+        .skjemagruppe {
+            .nav-datovelger__inputContainer {
+                width: 11rem;
+            }
+        }
+
+        button {
+            &.slett.lenke {
+                display: flex;
+                padding-top: 2.5rem;
+            }
+        }
+    }
+}

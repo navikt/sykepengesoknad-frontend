@@ -22,9 +22,10 @@ describe('Tester søknad om å beholde sykepenger utenfor EØS', () => {
         cy.contains('Opplysninger fra sykmeldingen').should('not.exist')
         cy.contains('Når skal du reise?')
 
-        cy.get('.skjemaelement__input.form-control').focus()
-        cy.get('.flatpickr-calendar').contains('17').click({ force: true })
-        cy.get('.flatpickr-calendar').contains('24').click({ force: true })
+        cy.get('#1_0 .fom .nav-datovelger__kalenderknapp').click()
+        cy.get('.DayPicker-Day').contains('17').click()
+        cy.get('#1_0 .tom .nav-datovelger__kalenderknapp').click()
+        cy.get('.DayPicker-Day').contains('24').click()
 
         cy.contains('Gå videre').click()
     })

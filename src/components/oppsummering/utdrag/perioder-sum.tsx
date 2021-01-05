@@ -17,7 +17,7 @@ const PerioderSum = ({ sporsmal }: OppsummeringProps) => {
                     return (
                         <Vis hvis={p.verdi !== empty} key={i}>
                             <Normaltekst className="oppsummering__dato">
-                                { tilLesbarPeriodeMedArstall(periode[0], periode[1]) }
+                                { tilLesbarPeriodeMedArstall(periode.fom, periode.tom) }
                             </Normaltekst>
                         </Vis>
                     )

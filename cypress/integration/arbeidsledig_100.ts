@@ -29,7 +29,6 @@ describe('Tester arbeidsledigsøknad', () => {
         cy.contains('Gå videre').click()
     })
 
-
     it('Søknad PERMITTERT_NAA - steg 2', () => {
         cy.url().should('include', `${soknad.id}/2`)
 
@@ -39,8 +38,8 @@ describe('Tester arbeidsledigsøknad', () => {
         // Test spørsmål
         cy.get('.inputPanelGruppe__inner label:first-child > input[value=JA]').click({ force: true })
         cy.contains('Velg første dag i permitteringen')
-        cy.get('.undersporsmal .skjemaelement__input.form-control').focus()
-        cy.get('.flatpickr-calendar').contains('20').click({ force: true })
+        cy.get('.nav-datovelger__kalenderknapp').click()
+        cy.get('.DayPicker-Day').contains('20').click()
 
         cy.contains('Gå videre').click()
     })
@@ -52,15 +51,17 @@ describe('Tester arbeidsledigsøknad', () => {
         cy.get('.inputPanelGruppe__inner label:first-child > input[value=JA]').click({ force: true })
 
         // Periode 1
-        cy.get('.undersporsmal .skjemaelement__input.form-control#687399_t_0').focus()
-        cy.get('.flatpickr-calendar.open').contains('10').click({ force: true })
-        cy.get('.flatpickr-calendar.open').contains('13').click({ force: true })
+        cy.get('#687399_0 .fom .nav-datovelger__kalenderknapp').click()
+        cy.get('.DayPicker-Day').contains('10').click()
+        cy.get('#687399_0 .tom .nav-datovelger__kalenderknapp').click()
+        cy.get('.DayPicker-Day').contains('13').click()
 
         // Periode 2 - overlapper
         cy.contains('+ Legg til ekstra periode').click()
-        cy.get('.undersporsmal .skjemaelement__input.form-control#687399_t_1').focus()
-        cy.get('.flatpickr-calendar.open').contains('12').click({ force: true })
-        cy.get('.flatpickr-calendar.open').contains('14').click({ force: true })
+        cy.get('#687399_1 .fom .nav-datovelger__kalenderknapp').click()
+        cy.get('.DayPicker-Day').contains('12').click()
+        cy.get('#687399_1 .tom .nav-datovelger__kalenderknapp').click()
+        cy.get('.DayPicker-Day').contains('14').click()
 
         // Feilmelding
         cy.contains('Gå videre').click()
@@ -68,11 +69,14 @@ describe('Tester arbeidsledigsøknad', () => {
         cy.contains('Du kan ikke legge inn perioder som overlapper med hverandre')
 
         // Endre periode 2
-        cy.get('.undersporsmal .skjemaelement__input.form-control#687399_t_1').focus()
-        cy.get('.flatpickr-calendar.open').contains('14').click({ force: true })
-        cy.get('.flatpickr-calendar.open').contains('16').click({ force: true })
-        cy.get('.undersporsmal .skjemaelement__input.form-control#687399_t_1')
-            .should('have.value', '14.11.2020   -    16.11.2020')
+        cy.get('#687399_1 .fom .nav-datovelger__kalenderknapp').click()
+        cy.get('.DayPicker-Day').contains('14').click()
+        cy.get('#687399_1 .tom .nav-datovelger__kalenderknapp').click({ force: true })
+        cy.get('.DayPicker-Day').contains('16').click()
+        cy.get('#687399_1_fom')
+            .should('have.value', '14.11.2020')
+        cy.get('#687399_1_tom')
+            .should('have.value', '16.11.2020')
 
         // Gå frem også tilbake
         cy.contains('Gå videre').click()
@@ -81,24 +85,30 @@ describe('Tester arbeidsledigsøknad', () => {
         cy.url().should('include', `${soknad.id}/3`)
 
         // Periode 1 - hentSvar og formater
-        cy.get('.undersporsmal .skjemaelement__input.form-control#687399_t_0')
-            .should('have.value', '10.11.2020   -    13.11.2020')
+        cy.get('#687399_0_fom')
+            .should('have.value', '10.11.2020')
+        cy.get('#687399_0_tom')
+            .should('have.value', '13.11.2020')
 
-        // Periode 1 - Må velge 2 datoer
-        cy.get('.undersporsmal .skjemaelement__input.form-control#687399_t_0').focus()
-        cy.get('.flatpickr-calendar.open').contains('10').click({ force: true })
+        // Periode 3 - Må velge 2 datoer
+        cy.contains('+ Legg til ekstra periode').click()
+        cy.get('#687399_2 .fom .nav-datovelger__kalenderknapp').click()
+        cy.get('.DayPicker-Day').contains('10').click()
         cy.contains('Gå videre').click()
 
         // Feilmelding
         cy.contains('Det er 1 feil i skjemaet')
-        cy.contains('Du må oppi en gyldig periode')
+        cy.contains('Du må oppgi en til og med dato')
 
-        // Endre periode 1
-        cy.get('.undersporsmal .skjemaelement__input.form-control#687399_t_0').focus()
-        cy.get('.flatpickr-calendar.open').contains('10').click({ force: true })
-        cy.get('.flatpickr-calendar.open').contains('10').click({ force: true })
-        cy.get('.undersporsmal .skjemaelement__input.form-control#687399_t_0')
-            .should('have.value', '10.11.2020   -    10.11.2020')
+        // Endre periode 3
+        cy.get('#687399_2 .fom .nav-datovelger__kalenderknapp').click()
+        cy.get('.DayPicker-Day').contains('20').click()
+        cy.get('#687399_2 .tom .nav-datovelger__kalenderknapp').click({ force: true })
+        cy.get('.DayPicker-Day').contains('22').click()
+        cy.get('#687399_2_fom')
+            .should('have.value', '20.11.2020')
+        cy.get('#687399_2_tom')
+            .should('have.value', '22.11.2020')
 
         cy.contains('Gå videre').click()
     })
@@ -109,8 +119,8 @@ describe('Tester arbeidsledigsøknad', () => {
         // Test spørsmål
         cy.get('.inputPanelGruppe__inner label:nth-child(2) > input[value=NEI]').click({ force: true })
         cy.contains('Fra hvilken dato har du ikke lenger behov for sykmelding?')
-        cy.get('.undersporsmal .skjemaelement__input.form-control').focus()
-        cy.get('.flatpickr-calendar').contains('20').click({ force: true })
+        cy.get('.nav-datovelger__kalenderknapp').click()
+        cy.get('.DayPicker-Day').contains('20').click()
 
         cy.contains('Gå videre').click()
     })
@@ -148,15 +158,15 @@ describe('Tester arbeidsledigsøknad', () => {
 
         // Underspørsmål 1
         cy.contains('Når startet du på utdanningen?')
-        cy.get('.undersporsmal .skjemaelement__input.form-control').focus()
-        cy.get('.flatpickr-calendar').contains('10').click({ force: true })
+        cy.get('.nav-datovelger__kalenderknapp').click()
+        cy.get('.DayPicker-Day').contains('10').click()
 
         // Underspørsmål 2 - dato
         cy.contains('Er utdanningen et fulltidsstudium?')
         // Underspørsmål 2 - radio
         cy.get('.undersporsmal .skjemaelement .radioContainer .radioknapp#687421_0').click({ force: true })
 
-        cy.contains('Gå videre').click()
+        cy.contains('Gå videre').click({ force: true })
     })
 
     it('Søknad ARBEIDSLEDIG_UTLAND - steg 7', () => {
@@ -168,9 +178,10 @@ describe('Tester arbeidsledigsøknad', () => {
 
         // Underspørsmål 1
         cy.contains('Når var du utenfor EØS?')
-        cy.get('.undersporsmal .skjemaelement__input.form-control').focus()
-        cy.get('.flatpickr-calendar').contains('17').click({ force: true })
-        cy.get('.flatpickr-calendar').contains('24').click({ force: true })
+        cy.get('#687423_0 .fom .nav-datovelger__kalenderknapp').click()
+        cy.get('.DayPicker-Day').contains('17').click()
+        cy.get('#687423_0 .tom .nav-datovelger__kalenderknapp').click({ force: true })
+        cy.get('.DayPicker-Day').contains('24').click()
 
         // Underspørsmål 2
         cy.contains('Har du søkt om å beholde sykepengene for disse dagene?')

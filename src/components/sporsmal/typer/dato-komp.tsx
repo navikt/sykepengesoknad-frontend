@@ -1,11 +1,12 @@
-import './flatpickr.less'
-
-import { Norwegian } from 'flatpickr/dist/l10n/no.js'
+import useMutationObserver from '@rooks/use-mutation-observer'
+import { Datepicker } from 'nav-datovelger'
 import { Element, Normaltekst } from 'nav-frontend-typografi'
-import React, { useEffect, useRef } from 'react'
-import Flatpickr from 'react-flatpickr'
+import React, { useEffect, useRef, useState } from 'react'
 import { Controller, useFormContext } from 'react-hook-form'
 
+import { skalBrukeFullskjermKalender } from '../../../utils/browser-utils'
+import { fraBackendTilDate } from '../../../utils/dato-utils'
+import validerDato from '../../../utils/sporsmal/valider-dato'
 import Vis from '../../vis'
 import { hentSvar } from '../hent-svar'
 import { SpmProps } from '../sporsmal-form/sporsmal-form'
@@ -13,57 +14,77 @@ import { hentFeilmelding } from '../sporsmal-utils'
 import UndersporsmalListe from '../undersporsmal/undersporsmal-liste'
 
 const DatoInput = ({ sporsmal }: SpmProps) => {
-    const { setValue, errors, watch } = useFormContext()
-    const datoRef = useRef<HTMLDivElement>(null)
+    const { setValue, errors, watch, getValues } = useFormContext()
     const feilmelding = hentFeilmelding(sporsmal)
+    const [ dato, setDato ] = useState<string>('')
+    const mutationRef = useRef<HTMLDivElement>(null)
+
+    useMutationObserver(mutationRef, (e) => {
+        const node: Node = e[1]?.addedNodes[0]
+        const knapperad: any = document.querySelectorAll('.knapperad')[0]
+        if (node !== undefined) {
+            knapperad.style.zIndex = '-1'
+            knapperad.style.position = 'relative'
+        } else {
+            knapperad.removeAttribute('style')
+        }
+    })
 
     useEffect(() => {
-        const verdi = hentSvar(sporsmal)
-        setValue(sporsmal.id, verdi)
-        lagIdForDato()
+        const svar = hentSvar(sporsmal)
+        setValue(sporsmal.id, svar)
+        setDato(svar)
         // eslint-disable-next-line
-    }, [sporsmal]);
-
-    useEffect(() => {
-        const cls = errors[sporsmal.id]
-            ? [ 'skjemaelement__input', 'skjemaelement__input--harFeil' ]
-            : [ 'skjemaelement__input' ]
-        const input = datoRef.current!.querySelector('.input--m[type=text], .input--m[type=date]')
-        input!.classList.add(...cls)
-        // eslint-disable-next-line
-    }, [errors[sporsmal.id]]);
-
-    const lagIdForDato = () => {
-        const input = datoRef.current!.querySelector('.input--m[type=text], .input--m[type=date]')
-        input!.setAttribute('id', 'input' + sporsmal.id)
-        input!.setAttribute('autoComplete', 'off')
-    }
+    }, [ sporsmal ])
 
     return (
-        <div ref={datoRef}>
-            <label className="skjema__sporsmal" htmlFor={'input' + sporsmal.id}>
+        <div ref={mutationRef} className="dato-komp">
+            <label className="skjema__sporsmal" htmlFor={sporsmal.id}>
                 <Element>{sporsmal.sporsmalstekst}</Element>
             </label>
             <Controller
-                as={Flatpickr}
-                rules={{ required: feilmelding.global }}
-                id={sporsmal.id}
                 name={sporsmal.id}
-                className="skjemaelement__input input--m"
-                placeholder="dd.mm.åååå"
                 defaultValue={hentSvar(sporsmal)}
-                options={{
-                    minDate: sporsmal.min!,
-                    maxDate: sporsmal.max!,
-                    mode: 'single',
-                    enableTime: false,
-                    dateFormat: 'Y-m-d',
-                    altInput: true,
-                    altFormat: 'd.m.Y',
-                    locale: Norwegian,
-                    allowInput: true,
-                    disableMobile: true
+                rules={{
+                    validate: () => {
+                        const div: HTMLDivElement | null = document.querySelector('.nav-datovelger__input')
+                        const detteFeilet = validerDato(sporsmal, getValues())
+                        if (detteFeilet !== true) {
+                            div?.classList.add('skjemaelement__input--harFeil')
+                            return detteFeilet
+                        }
+
+                        div?.classList.remove('skjemaelement__input--harFeil')
+                        return true
+                    }
                 }}
+                render={({ name }) => (
+                    <Datepicker
+                        locale={'nb'}
+                        inputId={name}
+                        onChange={(value) => {
+                            setValue(sporsmal.id, value)
+                            setDato(value)
+                        }}
+                        value={dato}
+                        inputProps={{
+                            name: name
+                        }}
+                        calendarSettings={{
+                            showWeekNumbers: true,
+                            position: skalBrukeFullskjermKalender()
+                        }}
+                        showYearSelector={false}
+                        limitations={{
+                            weekendsNotSelectable: false,
+                            minDate: sporsmal.min || undefined,
+                            maxDate: sporsmal.max || undefined
+                        }}
+                        dayPickerProps={{
+                            initialMonth: fraBackendTilDate(sporsmal.max!)
+                        }}
+                    />
+                )}
             />
 
             <Normaltekst tag="div" role="alert" aria-live="assertive" className="skjemaelement__feilmelding">

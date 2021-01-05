@@ -12,3 +12,11 @@ export function erSynligIViewport(element: HTMLElement) {
         rect.right <= (window.innerWidth || document.documentElement.clientWidth)
     )
 }
+
+export function skalBrukeFullskjermKalender() {
+    if (window.innerWidth < 768) {
+        return 'fullscreen'
+    } else {
+        return 'responsive'
+    }
+}

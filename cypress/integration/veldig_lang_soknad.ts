@@ -23,20 +23,21 @@ describe('Tester støtte for gamle spørsmål', () => {
 
     function velgDato() {
         const velgDato = 10
-        const className = '.skjemaelement__input.form-control'
+        const className = '.nav-datovelger__kalenderknapp'
 
-        cy.get(className).focus()
-        cy.get('.flatpickr-calendar').contains(velgDato).first().click({ force: true })
+        cy.get(className).click()
+        cy.get('.DayPicker-Day').contains(velgDato).first().click()
     }
 
     function velgPeriode() {
-        const fom = 12
-        const tom = 15
-        const className = '.skjemaelement__input.form-control'
+        const fom = '12'
+        const tom = '15'
+        const className = '.nav-datovelger__kalenderknapp'
 
-        cy.get(className).focus()
-        cy.get('.flatpickr-calendar').contains(fom).click({ force: true })
-        cy.get('.flatpickr-calendar').contains(tom).click({ force: true })
+        cy.get('.fom ' + className).click()
+        cy.get('.DayPicker-Day').contains(fom).click()
+        cy.get('.tom ' + className).click()
+        cy.get('.DayPicker-Day').contains(tom).click()
     }
 
     function velgTimerPerUke() {

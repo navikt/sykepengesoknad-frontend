@@ -48,8 +48,8 @@ describe('Tester arbeidstakersøknad - gradert 50%', () => {
         // Test spørsmål
         cy.get('.inputPanelGruppe__inner label:first-child > input[value=JA]').click({ force: true })
         cy.contains('Velg første dag i permitteringen')
-        cy.get('.undersporsmal .skjemaelement__input.form-control').focus()
-        cy.get('.flatpickr-calendar').contains('20').click({ force: true })
+        cy.get('.nav-datovelger__kalenderknapp').click()
+        cy.get('.DayPicker-Day').contains('20').click()
 
         // Gå til neste, så tilbake å svar nei
         cy.contains('Gå videre').click()
@@ -68,45 +68,45 @@ describe('Tester arbeidstakersøknad - gradert 50%', () => {
         cy.get('.inputPanelGruppe__inner label:first-child > input[value=JA]').click({ force: true })
 
         // Periode 1
-        cy.get('.skjemaelement__input.form-control#687295_t_0').focus()
-        cy.get('.flatpickr-calendar.open').contains('4').click({ force: true })
-        cy.get('.flatpickr-calendar.open').contains('5').click({ force: true })
+        cy.get('#687295_0 .fom .nav-datovelger__kalenderknapp').click()
+        cy.get('.DayPicker-Day').contains('4').click()
+        cy.get('#687295_0 .tom .nav-datovelger__kalenderknapp').click()
+        cy.get('.DayPicker-Day').contains('5').click()
 
         // Periode 2
         cy.contains('+ Legg til ekstra periode').click()
-        cy.get('.skjemaelement__input.form-control#687295_t_1').focus()
-        cy.get('.flatpickr-calendar.open').contains('11').click({ force: true })
-        cy.get('.flatpickr-calendar.open').contains('12').click({ force: true })
-        cy.get('.skjemaelement__input#687295_1')
-            .should('exist')
-            .and('have.value', '11.04.2020   -    12.04.2020')
+        cy.get('#687295_1 .fom .nav-datovelger__kalenderknapp').click()
+        cy.get('.DayPicker-Day').contains('11').click()
+        cy.get('#687295_1 .tom .nav-datovelger__kalenderknapp').click()
+        cy.get('.DayPicker-Day').contains('12').click()
+        cy.get('#687295_1_fom')
+            .should('have.value', '11.04.2020')
+        cy.get('#687295_1_tom')
+            .should('have.value', '12.04.2020')
 
         // Periode 3
         cy.contains('+ Legg til ekstra periode').click()
-        cy.get('.skjemaelement__input.form-control#687295_t_2').focus()
-        cy.get('.flatpickr-calendar.open').contains('18').click({ force: true })
-        cy.get('.flatpickr-calendar.open').contains('19').click({ force: true })
-        cy.get('.skjemaelement__input#687295_2')
-            .should('exist')
-            .and('have.value', '18.04.2020   -    19.04.2020')
+        cy.get('#687295_2 .fom .nav-datovelger__kalenderknapp').click()
+        cy.get('.DayPicker-Day').contains('18').click()
+        cy.get('#687295_2 .tom .nav-datovelger__kalenderknapp').click()
+        cy.get('.DayPicker-Day').contains('19').click()
+        cy.get('#687295_2_fom')
+            .should('have.value', '18.04.2020')
+        cy.get('#687295_2_tom')
+            .should('have.value', '19.04.2020')
 
-        // Fjern periode 2, id oppdateres
-        cy.get('.skjemaelement__input.form-control#687295_t_1')
-            .siblings()
-            .contains('Slett periode')
-            .click({ force: true })
-        cy.get('.skjemaelement__input.form-control#687295_t_1')
-            .should('exist')
-            .and('have.value', '18.04.2020   -    19.04.2020')
-        cy.get('.skjemaelement__input.form-control#687295_t_2')
+        // Fjern periode 2
+        cy.get('#btn_687295_1').contains('Slett periode').click({ force: true })
+        cy.get('#687295_2_fom').should('exist')
+            .should('have.value', '18.04.2020')
+        cy.get('#687295_2_tom').should('exist')
+            .should('have.value', '19.04.2020')
+        cy.get('#687295_1_tom')
             .should('not.exist')
 
         // Fjern periode 3
-        cy.get('.skjemaelement__input.form-control#687295_t_1')
-            .siblings()
-            .contains('Slett periode')
-            .click({ force: true })
-        cy.get('.skjemaelement__input.form-control#687295_t_1')
+        cy.get('#btn_687295_2').contains('Slett periode').click({ force: true })
+        cy.get('#687295_2_tom')
             .should('not.exist')
 
         cy.contains('Gå videre').click()
@@ -121,9 +121,10 @@ describe('Tester arbeidstakersøknad - gradert 50%', () => {
         cy.get('.undersporsmal .skjemaelement__input#687298').click()
 
         cy.contains('Hvilke dager var du syk med egenmelding? Du trenger bare oppgi dager før 1. april 2020.')
-        cy.get('.undersporsmal .skjemaelement__input.form-control').focus()
-        cy.get('.flatpickr-calendar').contains('11').click({ force: true })
-        cy.get('.flatpickr-calendar').contains('22').click({ force: true })
+        cy.get('#687299_0 .fom .nav-datovelger__kalenderknapp').click()
+        cy.get('.DayPicker-Day').contains('11').click()
+        cy.get('#687299_0 .tom .nav-datovelger__kalenderknapp').click()
+        cy.get('.DayPicker-Day').contains('12').click()
 
         cy.contains('Gå videre').click()
     })
@@ -135,8 +136,8 @@ describe('Tester arbeidstakersøknad - gradert 50%', () => {
         // Test spørsmål
         cy.get('.inputPanelGruppe__inner label:first-child > input[value=JA]').click({ force: true })
         cy.contains('Når begynte du å jobbe igjen?')
-        cy.get('.undersporsmal .skjemaelement__input.form-control').focus()
-        cy.get('.flatpickr-calendar').contains('20').click({ force: true })
+        cy.get('.nav-datovelger__kalenderknapp').click()
+        cy.get('.DayPicker-Day').contains('20').click()
 
         cy.contains('Gå videre').click()
     })
@@ -148,9 +149,10 @@ describe('Tester arbeidstakersøknad - gradert 50%', () => {
         // Test spørsmål
         cy.get('.inputPanelGruppe__inner label:first-child > input[value=JA]').click({ force: true })
         cy.contains('Når tok du ut ferie?')
-        cy.get('.undersporsmal .skjemaelement__input.form-control').focus()
-        cy.get('.flatpickr-calendar').contains('16').click({ force: true })
-        cy.get('.flatpickr-calendar').contains('23').click({ force: true })
+        cy.get('#687305_0 .fom .nav-datovelger__kalenderknapp').click()
+        cy.get('.DayPicker-Day').contains('16').click()
+        cy.get('#687305_0 .tom .nav-datovelger__kalenderknapp').click()
+        cy.get('.DayPicker-Day').contains('23').click()
 
         cy.contains('Gå videre').click()
     })
@@ -162,9 +164,10 @@ describe('Tester arbeidstakersøknad - gradert 50%', () => {
         // Test spørsmål
         cy.get('.inputPanelGruppe__inner label:first-child > input[value=JA]').click({ force: true })
         cy.contains('Når tok du permisjon?')
-        cy.get('.undersporsmal .skjemaelement__input.form-control').focus()
-        cy.get('.flatpickr-calendar').contains('14').click({ force: true })
-        cy.get('.flatpickr-calendar').contains('22').click({ force: true })
+        cy.get('#687307_0 .fom .nav-datovelger__kalenderknapp').click()
+        cy.get('.DayPicker-Day').contains('14').click()
+        cy.get('#687307_0 .tom .nav-datovelger__kalenderknapp').click()
+        cy.get('.DayPicker-Day').contains('22').click()
 
         cy.contains('Gå videre').click()
     })
@@ -176,9 +179,10 @@ describe('Tester arbeidstakersøknad - gradert 50%', () => {
         // Test spørsmål
         cy.get('.inputPanelGruppe__inner label:first-child > input[value=JA]').click({ force: true })
         cy.contains('Når var du utenfor EØS?')
-        cy.get('.undersporsmal .skjemaelement__input.form-control').focus()
-        cy.get('.flatpickr-calendar').contains('14').click({ force: true })
-        cy.get('.flatpickr-calendar').contains('22').click({ force: true })
+        cy.get('#687309_0 .fom .nav-datovelger__kalenderknapp').click()
+        cy.get('.DayPicker-Day').contains('14').click()
+        cy.get('#687309_0 .tom .nav-datovelger__kalenderknapp').click()
+        cy.get('.DayPicker-Day').contains('22').click()
 
         cy.contains('Gå videre').click()
     })
@@ -264,8 +268,8 @@ describe('Tester arbeidstakersøknad - gradert 50%', () => {
 
         // Underspørsmål 1
         cy.contains('Når startet du på utdanningen?')
-        cy.get('.undersporsmal .skjemaelement__input.form-control').focus()
-        cy.get('.flatpickr-calendar').contains('10').click({ force: true })
+        cy.get('.nav-datovelger__kalenderknapp').click()
+        cy.get('.DayPicker-Day').contains('10').click()
 
         // Underspørsmål 2 - dato
         cy.contains('Er utdanningen et fulltidsstudium?')
