@@ -1,3 +1,4 @@
+import useMutationObserver from '@rooks/use-mutation-observer'
 import { Datepicker } from 'nav-datovelger'
 import { Element, Normaltekst } from 'nav-frontend-typografi'
 import React, { useEffect, useRef, useState } from 'react'
@@ -11,7 +12,6 @@ import { hentSvar } from '../hent-svar'
 import { SpmProps } from '../sporsmal-form/sporsmal-form'
 import { hentFeilmelding } from '../sporsmal-utils'
 import UndersporsmalListe from '../undersporsmal/undersporsmal-liste'
-import useMutationObserver from '@rooks/use-mutation-observer'
 
 const DatoInput = ({ sporsmal }: SpmProps) => {
     const { setValue, errors, watch, getValues } = useFormContext()
