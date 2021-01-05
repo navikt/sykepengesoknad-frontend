@@ -1,8 +1,9 @@
 import './periode-komp.less'
 
+import useMutationObserver from '@rooks/use-mutation-observer'
 import { Datepicker } from 'nav-datovelger'
 import { Normaltekst } from 'nav-frontend-typografi'
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import { Controller,useFormContext } from 'react-hook-form'
 
 import { skalBrukeFullskjermKalender } from '../../../utils/browser-utils'
@@ -31,6 +32,7 @@ const PeriodeKomp = ({ sporsmal, index, slettPeriode }: AllProps) => {
     const [ periode, setPeriode ] = useState<FormPeriode>({ fom: '', tom: '' })
     const id = sporsmal.id + '_' + index
     const feilmelding = hentFeilmelding(sporsmal)
+    const mutationRef = useRef<HTMLDivElement>(null)
 
     useEffect(() => {
         const periode = hentPeriode(sporsmal, index)
@@ -38,6 +40,17 @@ const PeriodeKomp = ({ sporsmal, index, slettPeriode }: AllProps) => {
         setPeriode(periode)
         // eslint-disable-next-line
     }, [ sporsmal ]);
+
+    useMutationObserver(mutationRef, (e) => {
+        const node: Node = e[1]?.addedNodes[0]
+        const knapperad: any = document.querySelectorAll('.knapperad')[0]
+        if (node !== undefined) {
+            knapperad.style.zIndex = '-1'
+            knapperad.style.position = 'relative'
+        } else {
+            knapperad.removeAttribute('style')
+        }
+    })
 
     const onChange = (fom?: string, tom?: string) => {
         const nyFom = fom ? fom : periode.fom
@@ -50,7 +63,7 @@ const PeriodeKomp = ({ sporsmal, index, slettPeriode }: AllProps) => {
 
     return (
         <li id={id}>
-            <div className="periode">
+            <div ref={mutationRef} className="periode">
                 <Controller
                     rules={{
                         validate: {

@@ -20,7 +20,7 @@ const DatoInput = ({ sporsmal }: SpmProps) => {
     const mutationRef = useRef<HTMLDivElement>(null)
 
     useMutationObserver(mutationRef, (e) => {
-        const node: Node = e[1].addedNodes[0]
+        const node: Node = e[1]?.addedNodes[0]
         const knapperad: any = document.querySelectorAll('.knapperad')[0]
         if (node !== undefined) {
             knapperad.style.zIndex = '-1'
