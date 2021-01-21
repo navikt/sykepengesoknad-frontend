@@ -45,7 +45,7 @@ const StatusPanel = () => {
         if (gjenapner) return
         setGjenapner(true)
         try {
-            const res = await fetcher(env.syfosoknadProxyRoot + `/api/soknader/${valgtSoknad!.id}/gjenapne`, {
+            const res = await fetcher(env.flexGatewayRoot + `/syfosoknad/api/soknader/${valgtSoknad!.id}/gjenapne`, {
                 method: 'POST',
                 credentials: 'include',
                 headers: { 'Content-Type': 'application/json' }

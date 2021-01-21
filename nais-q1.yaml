@@ -26,8 +26,8 @@ spec:
   readiness:
     path: internal/isReady
   env:
-    - name: SYFOSOKNAD_PROXY_ROOT
-      value: "https://syfosoknad-proxy.dev.nav.no"
+    - name: FLEX_GATEWAY_ROOT
+      value: "https://flex-gateway.dev.nav.no"
     - name: SYFOREST_ROOT
       value: "https://tjenester-q1.nav.no/syforest"
     - name: LOGINSERVICE_URL

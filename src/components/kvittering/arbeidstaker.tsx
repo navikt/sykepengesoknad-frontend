@@ -100,7 +100,7 @@ const Arbeidstaker = () => {
 
     async function erForsteSoknadUtenforArbeidsgiverperiode(id?: string) {
         if (id === undefined) return true
-        const res = await fetcher(env.syfosoknadProxyRoot + `/api/soknader/${id}/finnMottaker`, {
+        const res = await fetcher(env.flexGatewayRoot + `/syfosoknad/api/soknader/${id}/finnMottaker`, {
             method: 'POST',
             credentials: 'include',
             headers: { 'Content-Type': 'application/json' }
