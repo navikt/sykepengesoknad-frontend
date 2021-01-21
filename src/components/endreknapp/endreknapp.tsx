@@ -22,7 +22,7 @@ const Endreknapp = () => {
     const korriger = () => {
         if (korrigerer) return
         setKorrigerer(true)
-        korrigerSoknad.fetch(env.syfosoknadProxyRoot + `/api/soknader/${valgtSoknad!.id}/korriger`, {
+        korrigerSoknad.fetch(env.flexGatewayRoot + `/syfosoknad/api/soknader/${valgtSoknad!.id}/korriger`, {
             method: 'POST',
             credentials: 'include',
             headers: { 'Content-Type': 'application/json' }
