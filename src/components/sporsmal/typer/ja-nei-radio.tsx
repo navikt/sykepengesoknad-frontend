@@ -31,7 +31,7 @@ const JaNeiRadio = ({ sporsmal }: SpmProps) => {
 
     useEffect(() => {
         const lagret = hentSvar(sporsmal)
-        if(lagret !== '') {
+        if (lagret !== '') {
             setValue(sporsmal.id, lagret)
             setLokal(lagret)
         }
@@ -115,7 +115,7 @@ const JaNeiRadio = ({ sporsmal }: SpmProps) => {
                     </Normaltekst>
                 </Vis>
             </div>
-            <Vis hvis={sporsmal.tag === TagTyper.SYKMELDINGSGRAD && lokal === 'JA'}>
+            <Vis hvis={sporsmal.tag === TagTyper.SYKMELDINGSGRAD && lokal === 'NEI'}>
                 <Bjorn className="press" nokkel="sykepengesoknad-utland.skjema.bjorn" ekstraMarginTop={true} />
             </Vis>
             <Vis hvis={sporsmal.tag === TagTyper.FERIE && lokal === 'JA'}>
