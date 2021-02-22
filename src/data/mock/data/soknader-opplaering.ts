@@ -363,60 +363,6 @@ export const arbeidstaker: RSSoknad = {
             'undersporsmal': []
         },
         {
-            'id': '687337',
-            'tag': 'PERMITTERT_NAA',
-            'sporsmalstekst': 'Er du permittert nå?',
-            'undertekst': null,
-            'svartype': 'JA_NEI',
-            'min': null,
-            'max': null,
-            'pavirkerAndreSporsmal': false,
-            'kriterieForVisningAvUndersporsmal': 'JA',
-            'svar': [],
-            'undersporsmal': [
-                {
-                    'id': '687338',
-                    'tag': 'PERMITTERT_NAA_NAR',
-                    'sporsmalstekst': 'Velg første dag i permitteringen',
-                    'undertekst': null,
-                    'svartype': 'DATO',
-                    'min': '2019-12-01',
-                    'max': '2020-04-24',
-                    'pavirkerAndreSporsmal': false,
-                    'kriterieForVisningAvUndersporsmal': null,
-                    'svar': [],
-                    'undersporsmal': []
-                }
-            ]
-        },
-        {
-            'id': '687339',
-            'tag': 'PERMITTERT_PERIODE',
-            'sporsmalstekst': 'Har du vært permittert i mer enn 14 sammenhengende dager i perioden 22. oktober - 22. november 2020?',
-            'undertekst': null,
-            'svartype': 'JA_NEI',
-            'min': null,
-            'max': null,
-            'pavirkerAndreSporsmal': false,
-            'kriterieForVisningAvUndersporsmal': 'JA',
-            'svar': [],
-            'undersporsmal': [
-                {
-                    'id': '687340',
-                    'tag': 'PERMITTERT_PERIODE_NAR',
-                    'sporsmalstekst': null,
-                    'undertekst': null,
-                    'svartype': 'PERIODER',
-                    'min': '2020-10-22',
-                    'max': '2020-11-22',
-                    'pavirkerAndreSporsmal': false,
-                    'kriterieForVisningAvUndersporsmal': null,
-                    'svar': [],
-                    'undersporsmal': []
-                }
-            ]
-        },
-        {
             'id': '687341',
             'tag': 'TILBAKE_I_ARBEID',
             'sporsmalstekst': 'Var du tilbake i fullt arbeid hos POSTEN NORGE AS, BÆRUM i løpet av perioden 1. - 24. april 2020?',
@@ -841,6 +787,60 @@ export const arbeidstaker: RSSoknad = {
             ]
         },
         {
+            'id': '687337',
+            'tag': 'PERMITTERT_NAA',
+            'sporsmalstekst': 'Er du permittert nå?',
+            'undertekst': null,
+            'svartype': 'JA_NEI',
+            'min': null,
+            'max': null,
+            'pavirkerAndreSporsmal': false,
+            'kriterieForVisningAvUndersporsmal': 'JA',
+            'svar': [],
+            'undersporsmal': [
+                {
+                    'id': '687338',
+                    'tag': 'PERMITTERT_NAA_NAR',
+                    'sporsmalstekst': 'Velg første dag i permitteringen',
+                    'undertekst': null,
+                    'svartype': 'DATO',
+                    'min': '2019-12-01',
+                    'max': '2020-04-24',
+                    'pavirkerAndreSporsmal': false,
+                    'kriterieForVisningAvUndersporsmal': null,
+                    'svar': [],
+                    'undersporsmal': []
+                }
+            ]
+        },
+        {
+            'id': '687339',
+            'tag': 'PERMITTERT_PERIODE',
+            'sporsmalstekst': 'Har du vært permittert i mer enn 14 sammenhengende dager i perioden 22. oktober - 22. november 2020?',
+            'undertekst': null,
+            'svartype': 'JA_NEI',
+            'min': null,
+            'max': null,
+            'pavirkerAndreSporsmal': false,
+            'kriterieForVisningAvUndersporsmal': 'JA',
+            'svar': [],
+            'undersporsmal': [
+                {
+                    'id': '687340',
+                    'tag': 'PERMITTERT_PERIODE_NAR',
+                    'sporsmalstekst': null,
+                    'undertekst': null,
+                    'svartype': 'PERIODER',
+                    'min': '2020-10-22',
+                    'max': '2020-11-22',
+                    'pavirkerAndreSporsmal': false,
+                    'kriterieForVisningAvUndersporsmal': null,
+                    'svar': [],
+                    'undersporsmal': []
+                }
+            ]
+        },
+        {
             'id': '687372',
             'tag': 'VAER_KLAR_OVER_AT',
             'sporsmalstekst': 'Viktig å være klar over:',
@@ -910,60 +910,6 @@ export const arbeidstakerGradert: RSSoknad = {
             'kriterieForVisningAvUndersporsmal': null,
             'svar': [],
             'undersporsmal': []
-        },
-        {
-            'id': '687292',
-            'tag': 'PERMITTERT_NAA',
-            'sporsmalstekst': 'Er du permittert nå?',
-            'undertekst': null,
-            'svartype': 'JA_NEI',
-            'min': null,
-            'max': null,
-            'pavirkerAndreSporsmal': false,
-            'kriterieForVisningAvUndersporsmal': 'JA',
-            'svar': [],
-            'undersporsmal': [
-                {
-                    'id': '687293',
-                    'tag': 'PERMITTERT_NAA_NAR',
-                    'sporsmalstekst': 'Velg første dag i permitteringen',
-                    'undertekst': null,
-                    'svartype': 'DATO',
-                    'min': '2019-12-01',
-                    'max': '2020-04-24',
-                    'pavirkerAndreSporsmal': false,
-                    'kriterieForVisningAvUndersporsmal': null,
-                    'svar': [],
-                    'undersporsmal': []
-                }
-            ]
-        },
-        {
-            'id': '687294',
-            'tag': 'PERMITTERT_PERIODE',
-            'sporsmalstekst': 'Har du vært permittert i mer enn 14 sammenhengende dager i perioden 22. mars - 22. april 2020?',
-            'undertekst': null,
-            'svartype': 'JA_NEI',
-            'min': null,
-            'max': null,
-            'pavirkerAndreSporsmal': false,
-            'kriterieForVisningAvUndersporsmal': 'JA',
-            'svar': [],
-            'undersporsmal': [
-                {
-                    'id': '687295',
-                    'tag': 'PERMITTERT_PERIODE_NAR',
-                    'sporsmalstekst': null,
-                    'undertekst': null,
-                    'svartype': 'PERIODER',
-                    'min': '2020-03-22',
-                    'max': '2020-04-22',
-                    'pavirkerAndreSporsmal': false,
-                    'kriterieForVisningAvUndersporsmal': null,
-                    'svar': [],
-                    'undersporsmal': []
-                }
-            ]
         },
         {
             'id': '687296',
@@ -1485,6 +1431,60 @@ export const arbeidstakerGradert: RSSoknad = {
             ]
         },
         {
+            'id': '687292',
+            'tag': 'PERMITTERT_NAA',
+            'sporsmalstekst': 'Er du permittert nå?',
+            'undertekst': null,
+            'svartype': 'JA_NEI',
+            'min': null,
+            'max': null,
+            'pavirkerAndreSporsmal': false,
+            'kriterieForVisningAvUndersporsmal': 'JA',
+            'svar': [],
+            'undersporsmal': [
+                {
+                    'id': '687293',
+                    'tag': 'PERMITTERT_NAA_NAR',
+                    'sporsmalstekst': 'Velg første dag i permitteringen',
+                    'undertekst': null,
+                    'svartype': 'DATO',
+                    'min': '2019-12-01',
+                    'max': '2020-04-24',
+                    'pavirkerAndreSporsmal': false,
+                    'kriterieForVisningAvUndersporsmal': null,
+                    'svar': [],
+                    'undersporsmal': []
+                }
+            ]
+        },
+        {
+            'id': '687294',
+            'tag': 'PERMITTERT_PERIODE',
+            'sporsmalstekst': 'Har du vært permittert i mer enn 14 sammenhengende dager i perioden 22. mars - 22. april 2020?',
+            'undertekst': null,
+            'svartype': 'JA_NEI',
+            'min': null,
+            'max': null,
+            'pavirkerAndreSporsmal': false,
+            'kriterieForVisningAvUndersporsmal': 'JA',
+            'svar': [],
+            'undersporsmal': [
+                {
+                    'id': '687295',
+                    'tag': 'PERMITTERT_PERIODE_NAR',
+                    'sporsmalstekst': null,
+                    'undertekst': null,
+                    'svartype': 'PERIODER',
+                    'min': '2020-03-22',
+                    'max': '2020-04-22',
+                    'pavirkerAndreSporsmal': false,
+                    'kriterieForVisningAvUndersporsmal': null,
+                    'svar': [],
+                    'undersporsmal': []
+                }
+            ]
+        },
+        {
             'id': '687334',
             'tag': 'VAER_KLAR_OVER_AT',
             'sporsmalstekst': 'Viktig å være klar over:',
@@ -1551,60 +1551,6 @@ export const arbeidsledig: RSSoknad = {
             'kriterieForVisningAvUndersporsmal': null,
             'svar': [],
             'undersporsmal': []
-        },
-        {
-            'id': '687396',
-            'tag': 'PERMITTERT_NAA',
-            'sporsmalstekst': 'Er du permittert nå?',
-            'undertekst': null,
-            'svartype': 'JA_NEI',
-            'min': null,
-            'max': null,
-            'pavirkerAndreSporsmal': false,
-            'kriterieForVisningAvUndersporsmal': 'JA',
-            'svar': [],
-            'undersporsmal': [
-                {
-                    'id': '687397',
-                    'tag': 'PERMITTERT_NAA_NAR',
-                    'sporsmalstekst': 'Velg første dag i permitteringen',
-                    'undertekst': null,
-                    'svartype': 'DATO',
-                    'min': '2019-12-01',
-                    'max': '2020-04-24',
-                    'pavirkerAndreSporsmal': false,
-                    'kriterieForVisningAvUndersporsmal': null,
-                    'svar': [],
-                    'undersporsmal': []
-                }
-            ]
-        },
-        {
-            'id': '687398',
-            'tag': 'PERMITTERT_PERIODE',
-            'sporsmalstekst': 'Har du vært permittert i mer enn 14 sammenhengende dager i perioden 22. oktober - 22. november 2020?',
-            'undertekst': null,
-            'svartype': 'JA_NEI',
-            'min': null,
-            'max': null,
-            'pavirkerAndreSporsmal': false,
-            'kriterieForVisningAvUndersporsmal': 'JA',
-            'svar': [],
-            'undersporsmal': [
-                {
-                    'id': '687399',
-                    'tag': 'PERMITTERT_PERIODE_NAR',
-                    'sporsmalstekst': null,
-                    'undertekst': null,
-                    'svartype': 'PERIODER',
-                    'min': '2020-10-22',
-                    'max': '2020-11-22',
-                    'pavirkerAndreSporsmal': false,
-                    'kriterieForVisningAvUndersporsmal': null,
-                    'svar': [],
-                    'undersporsmal': []
-                }
-            ]
         },
         {
             'id': '687400',
@@ -1954,6 +1900,60 @@ export const arbeidsledig: RSSoknad = {
                             'undersporsmal': []
                         }
                     ]
+                }
+            ]
+        },
+        {
+            'id': '687396',
+            'tag': 'PERMITTERT_NAA',
+            'sporsmalstekst': 'Er du permittert nå?',
+            'undertekst': null,
+            'svartype': 'JA_NEI',
+            'min': null,
+            'max': null,
+            'pavirkerAndreSporsmal': false,
+            'kriterieForVisningAvUndersporsmal': 'JA',
+            'svar': [],
+            'undersporsmal': [
+                {
+                    'id': '687397',
+                    'tag': 'PERMITTERT_NAA_NAR',
+                    'sporsmalstekst': 'Velg første dag i permitteringen',
+                    'undertekst': null,
+                    'svartype': 'DATO',
+                    'min': '2019-12-01',
+                    'max': '2020-04-24',
+                    'pavirkerAndreSporsmal': false,
+                    'kriterieForVisningAvUndersporsmal': null,
+                    'svar': [],
+                    'undersporsmal': []
+                }
+            ]
+        },
+        {
+            'id': '687398',
+            'tag': 'PERMITTERT_PERIODE',
+            'sporsmalstekst': 'Har du vært permittert i mer enn 14 sammenhengende dager i perioden 22. oktober - 22. november 2020?',
+            'undertekst': null,
+            'svartype': 'JA_NEI',
+            'min': null,
+            'max': null,
+            'pavirkerAndreSporsmal': false,
+            'kriterieForVisningAvUndersporsmal': 'JA',
+            'svar': [],
+            'undersporsmal': [
+                {
+                    'id': '687399',
+                    'tag': 'PERMITTERT_PERIODE_NAR',
+                    'sporsmalstekst': null,
+                    'undertekst': null,
+                    'svartype': 'PERIODER',
+                    'min': '2020-10-22',
+                    'max': '2020-11-22',
+                    'pavirkerAndreSporsmal': false,
+                    'kriterieForVisningAvUndersporsmal': null,
+                    'svar': [],
+                    'undersporsmal': []
                 }
             ]
         },
