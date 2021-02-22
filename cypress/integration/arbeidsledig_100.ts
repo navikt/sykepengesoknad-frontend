@@ -29,8 +29,86 @@ describe('Tester arbeidsledigsøknad', () => {
         cy.contains('Gå videre').click()
     })
 
-    it('Søknad PERMITTERT_NAA - steg 2', () => {
+    it('Søknad FRISKMELDT - steg 2', () => {
         cy.url().should('include', `${soknad.id}/2`)
+
+        // Test spørsmål
+        cy.get('.inputPanelGruppe__inner label:nth-child(2) > input[value=NEI]').click({ force: true })
+        cy.contains('Fra hvilken dato har du ikke lenger behov for sykmelding?')
+        cy.get('.nav-datovelger__kalenderknapp').click()
+        cy.get('.DayPicker-Day').contains('20').click()
+
+        cy.contains('Gå videre').click()
+    })
+
+    it('Søknad ANDRE_INNTEKTSKILDER - steg 3', () => {
+        cy.url().should('include', `${soknad.id}/3`)
+
+        // Test spørsmål
+        cy.contains('Har du hatt inntekt mens du har vært sykmeldt i perioden 1. - 24. april 2020? Du trenger ikke oppgi penger fra NAV.')
+        cy.get('.inputPanelGruppe__inner label:first-child > input[value=JA]').click({ force: true })
+
+        // Når ingen velges så dukker bare 1 feilmelding opp
+        cy.contains('Gå videre').click()
+        cy.contains('Det er 1 feil i skjemaet')
+        cy.contains('Du må oppgi hvilke inntektskilder du har')
+
+        // Svarer JA
+        // Underspørsmål nivå 1 - checkbox
+        cy.contains('Hvilke inntektskilder har du hatt?')
+        cy.get('.undersporsmal .checkboxgruppe label[for=687404]').should('include.text', 'andre arbeidsforhold')
+        cy.get('.undersporsmal .checkboxgruppe .checkboks#687404').click({ force: true })
+        // Underspørsmål nivå 2 - radio
+        cy.get('.undersporsmal .checkboxgruppe .radioContainer .radioknapp#687405_0').click({ force: true })
+        cy.contains('Du må sende egen sykepengesøknad for dette. ' +
+            'Det betyr også at legen må skrive en sykmelding for hvert arbeidsforhold du er sykmeldt fra.')
+
+        cy.contains('Gå videre').click()
+    })
+
+    it('Søknad UTDANNING - steg 4', () => {
+        cy.url().should('include', `${soknad.id}/4`)
+
+        // Test spørsmål
+        cy.get('.inputPanelGruppe__inner label:first-child > input[value=JA]').click({ force: true })
+
+        // Underspørsmål 1
+        cy.contains('Når startet du på utdanningen?')
+        cy.get('.nav-datovelger__kalenderknapp').click()
+        cy.get('.DayPicker-Day').contains('10').click()
+
+        // Underspørsmål 2 - dato
+        cy.contains('Er utdanningen et fulltidsstudium?')
+        // Underspørsmål 2 - radio
+        cy.get('.undersporsmal .skjemaelement .radioContainer .radioknapp#687421_0').click({ force: true })
+
+        cy.contains('Gå videre').click({ force: true })
+    })
+
+    it('Søknad ARBEIDSLEDIG_UTLAND - steg 5', () => {
+        cy.url().should('include', `${soknad.id}/5`)
+
+        // Test spørsmål
+        cy.contains('Var du på reise utenfor EØS mens du var sykmeldt 1. - 24. april 2020?')
+        cy.get('.inputPanelGruppe__inner label:first-child > input[value=JA]').click({ force: true })
+
+        // Underspørsmål 1
+        cy.contains('Når var du utenfor EØS?')
+        cy.get('#687423_0 .fom .nav-datovelger__kalenderknapp').click()
+        cy.get('.DayPicker-Day').contains('17').click()
+        cy.get('#687423_0 .tom .nav-datovelger__kalenderknapp').click({ force: true })
+        cy.get('.DayPicker-Day').contains('24').click()
+
+        // Underspørsmål 2
+        cy.contains('Har du søkt om å beholde sykepengene for disse dagene?')
+        cy.get('.skjemaelement__label[for=687424_0]').click({ force: true })
+
+        cy.contains('Gå videre').click()
+    })
+
+
+    it('Søknad PERMITTERT_NAA - steg 6', () => {
+        cy.url().should('include', `${soknad.id}/6`)
 
         // Sjekk at sykmelding er minimert
         cy.get('.sykmelding-perioder').should('not.be.visible')
@@ -44,8 +122,8 @@ describe('Tester arbeidsledigsøknad', () => {
         cy.contains('Gå videre').click()
     })
 
-    it('Søknad PERMITTERT_PERIODE - steg 3', () => {
-        cy.url().should('include', `${soknad.id}/3`)
+    it('Søknad PERMITTERT_PERIODE - steg 7', () => {
+        cy.url().should('include', `${soknad.id}/7`)
 
         // Hovedspørsmål
         cy.get('.inputPanelGruppe__inner label:first-child > input[value=JA]').click({ force: true })
@@ -80,9 +158,9 @@ describe('Tester arbeidsledigsøknad', () => {
 
         // Gå frem også tilbake
         cy.contains('Gå videre').click()
-        cy.url().should('include', `${soknad.id}/4`)
+        cy.url().should('include', `${soknad.id}/8`)
         cy.contains('Tilbake').click()
-        cy.url().should('include', `${soknad.id}/3`)
+        cy.url().should('include', `${soknad.id}/7`)
 
         // Periode 1 - hentSvar og formater
         cy.get('#687399_0_fom')
@@ -113,82 +191,6 @@ describe('Tester arbeidsledigsøknad', () => {
         cy.contains('Gå videre').click()
     })
 
-    it('Søknad FRISKMELDT - steg 4', () => {
-        cy.url().should('include', `${soknad.id}/4`)
-
-        // Test spørsmål
-        cy.get('.inputPanelGruppe__inner label:nth-child(2) > input[value=NEI]').click({ force: true })
-        cy.contains('Fra hvilken dato har du ikke lenger behov for sykmelding?')
-        cy.get('.nav-datovelger__kalenderknapp').click()
-        cy.get('.DayPicker-Day').contains('20').click()
-
-        cy.contains('Gå videre').click()
-    })
-
-    it('Søknad ANDRE_INNTEKTSKILDER - steg 5', () => {
-        cy.url().should('include', `${soknad.id}/5`)
-
-        // Test spørsmål
-        cy.contains('Har du hatt inntekt mens du har vært sykmeldt i perioden 1. - 24. april 2020? Du trenger ikke oppgi penger fra NAV.')
-        cy.get('.inputPanelGruppe__inner label:first-child > input[value=JA]').click({ force: true })
-
-        // Når ingen velges så dukker bare 1 feilmelding opp
-        cy.contains('Gå videre').click()
-        cy.contains('Det er 1 feil i skjemaet')
-        cy.contains('Du må oppgi hvilke inntektskilder du har')
-
-        // Svarer JA
-        // Underspørsmål nivå 1 - checkbox
-        cy.contains('Hvilke inntektskilder har du hatt?')
-        cy.get('.undersporsmal .checkboxgruppe label[for=687404]').should('include.text', 'andre arbeidsforhold')
-        cy.get('.undersporsmal .checkboxgruppe .checkboks#687404').click({ force: true })
-        // Underspørsmål nivå 2 - radio
-        cy.get('.undersporsmal .checkboxgruppe .radioContainer .radioknapp#687405_0').click({ force: true })
-        cy.contains('Du må sende egen sykepengesøknad for dette. ' +
-            'Det betyr også at legen må skrive en sykmelding for hvert arbeidsforhold du er sykmeldt fra.')
-
-        cy.contains('Gå videre').click()
-    })
-
-    it('Søknad UTDANNING - steg 6', () => {
-        cy.url().should('include', `${soknad.id}/6`)
-
-        // Test spørsmål
-        cy.get('.inputPanelGruppe__inner label:first-child > input[value=JA]').click({ force: true })
-
-        // Underspørsmål 1
-        cy.contains('Når startet du på utdanningen?')
-        cy.get('.nav-datovelger__kalenderknapp').click()
-        cy.get('.DayPicker-Day').contains('10').click()
-
-        // Underspørsmål 2 - dato
-        cy.contains('Er utdanningen et fulltidsstudium?')
-        // Underspørsmål 2 - radio
-        cy.get('.undersporsmal .skjemaelement .radioContainer .radioknapp#687421_0').click({ force: true })
-
-        cy.contains('Gå videre').click({ force: true })
-    })
-
-    it('Søknad ARBEIDSLEDIG_UTLAND - steg 7', () => {
-        cy.url().should('include', `${soknad.id}/7`)
-
-        // Test spørsmål
-        cy.contains('Var du på reise utenfor EØS mens du var sykmeldt 1. - 24. april 2020?')
-        cy.get('.inputPanelGruppe__inner label:first-child > input[value=JA]').click({ force: true })
-
-        // Underspørsmål 1
-        cy.contains('Når var du utenfor EØS?')
-        cy.get('#687423_0 .fom .nav-datovelger__kalenderknapp').click()
-        cy.get('.DayPicker-Day').contains('17').click()
-        cy.get('#687423_0 .tom .nav-datovelger__kalenderknapp').click({ force: true })
-        cy.get('.DayPicker-Day').contains('24').click()
-
-        // Underspørsmål 2
-        cy.contains('Har du søkt om å beholde sykepengene for disse dagene?')
-        cy.get('.skjemaelement__label[for=687424_0]').click({ force: true })
-
-        cy.contains('Gå videre').click()
-    })
 
     it('Søknad VAER_KLAR_OVER_AT - steg 8', () => {
         cy.url().should('include', `${soknad.id}/8`)

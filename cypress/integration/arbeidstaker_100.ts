@@ -17,7 +17,7 @@ describe('Tester arbeidstakersøknad', () => {
     })
 
 
-    it('Søknad ANSVARSERKLARING - steg 1', function() {
+    it('Søknad ANSVARSERKLARING', function() {
         cy.url().should('include', `${soknad.id}/1`)
 
         cy.contains('Før du begynner').should('not.exist')
@@ -54,48 +54,8 @@ describe('Tester arbeidstakersøknad', () => {
     })
 
 
-    it('Søknad PERMITTERT_NAA - steg 2', function() {
+    it('Søknad TILBAKE_I_ARBEID ', function() {
         cy.url().should('include', `${soknad.id}/2`)
-
-        // Sjekk at sykmelding er minimert
-        cy.get('.sykmelding-perioder').should('not.be.visible')
-
-        // Test spørsmål
-        cy.get('.inputPanelGruppe__inner label:first-child > input[value=JA]').click({ force: true })
-        cy.contains('Velg første dag i permitteringen')
-        cy.get('.nav-datovelger__kalenderknapp').click()
-        cy.get('.DayPicker-Day').contains('20').click()
-
-        // Gå til neste, så tilbake å svar nei
-        cy.contains('Gå videre').click()
-        cy.url().should('include', `${soknad.id}/3`)
-        cy.contains('Tilbake').click()
-        cy.get('.inputPanelGruppe__inner label:nth-child(2) > input[value=NEI]').click({ force: true })
-
-        cy.contains('Gå videre').click()
-    })
-
-
-    it('Søknad PERMITTERT_PERIODE - steg 3', function() {
-        cy.url().should('include', `${soknad.id}/3`)
-
-        // Må velge ja/nei
-        cy.contains('Gå videre').click()
-        cy.contains('Du må svare på om du har vært permittert')
-
-        // Test spørsmål
-        cy.get('.inputPanelGruppe__inner label:first-child > input[value=JA]').click({ force: true })
-        cy.get('#687340_0 .fom .nav-datovelger__kalenderknapp').click()
-        cy.get('.DayPicker-Day').contains('10').click()
-        cy.get('#687340_0 .tom .nav-datovelger__kalenderknapp').click()
-        cy.get('.DayPicker-Day').contains('13').click()
-
-        cy.contains('Gå videre').click()
-    })
-
-
-    it('Søknad TILBAKE_I_ARBEID - steg 4', function() {
-        cy.url().should('include', `${soknad.id}/4`)
 
         // Test spørsmål
         cy.get('.inputPanelGruppe__inner label:first-child > input[value=JA]').click({ force: true })
@@ -107,8 +67,8 @@ describe('Tester arbeidstakersøknad', () => {
     })
 
 
-    it('Søknad FERIE_V2 - steg 5', function() {
-        cy.url().should('include', `${soknad.id}/5`)
+    it('Søknad FERIE_V2', function() {
+        cy.url().should('include', `${soknad.id}/3`)
 
         // Test spørsmål
         cy.get('.inputPanelGruppe__inner label:first-child > input[value=JA]').click({ force: true })
@@ -122,8 +82,8 @@ describe('Tester arbeidstakersøknad', () => {
     })
 
 
-    it('Søknad PERMISJON_V2 - steg 6', function() {
-        cy.url().should('include', `${soknad.id}/6`)
+    it('Søknad PERMISJON_V2', function() {
+        cy.url().should('include', `${soknad.id}/4`)
 
         // Test spørsmål
         cy.get('.inputPanelGruppe__inner label:first-child > input[value=JA]').click({ force: true })
@@ -137,8 +97,8 @@ describe('Tester arbeidstakersøknad', () => {
     })
 
 
-    it('Søknad UTLAND_V2 - steg 7', function() {
-        cy.url().should('include', `${soknad.id}/7`)
+    it('Søknad UTLAND_V2 ', function() {
+        cy.url().should('include', `${soknad.id}/5`)
 
         // Test spørsmål
         cy.get('.inputPanelGruppe__inner label:first-child > input[value=JA]').click({ force: true })
@@ -152,8 +112,8 @@ describe('Tester arbeidstakersøknad', () => {
     })
 
 
-    it('Søknad JOBBET_DU_100_PROSENT - steg 8', function() {
-        cy.url().should('include', `${soknad.id}/8`)
+    it('Søknad JOBBET_DU_100_PROSENT', function() {
+        cy.url().should('include', `${soknad.id}/6`)
 
         // Test spørsmål
         cy.get('.inputPanelGruppe__inner label:first-child > input[value=JA]').click({ force: true })
@@ -175,8 +135,8 @@ describe('Tester arbeidstakersøknad', () => {
     })
 
 
-    it('Søknad ANDRE_INNTEKTSKILDER - steg 9', function() {
-        cy.url().should('include', `${soknad.id}/9`)
+    it('Søknad ANDRE_INNTEKTSKILDER', function() {
+        cy.url().should('include', `${soknad.id}/7`)
 
         // Test spørsmål
         cy.get('.inputPanelGruppe__inner label:first-child > input[value=JA]').click({ force: true })
@@ -204,8 +164,8 @@ describe('Tester arbeidstakersøknad', () => {
         cy.contains('Gå videre').click()
     })
 
-    it('Søknad UTDANNING - steg 10', function() {
-        cy.url().should('include', `${soknad.id}/10`)
+    it('Søknad UTDANNING', function() {
+        cy.url().should('include', `${soknad.id}/8`)
 
         // Test spørsmål
         cy.get('.inputPanelGruppe__inner label:first-child > input[value=JA]').click({ force: true })
@@ -219,6 +179,46 @@ describe('Tester arbeidstakersøknad', () => {
         cy.contains('Er utdanningen et fulltidsstudium?')
         // Underspørsmål 2 - radio
         cy.get('.undersporsmal .skjemaelement .radioContainer .radioknapp#687371_0').click({ force: true })
+
+        cy.contains('Gå videre').click()
+    })
+
+
+    it('Søknad PERMITTERT_NAA', function() {
+        cy.url().should('include', `${soknad.id}/9`)
+
+        // Sjekk at sykmelding er minimert
+        cy.get('.sykmelding-perioder').should('not.be.visible')
+
+        // Test spørsmål
+        cy.get('.inputPanelGruppe__inner label:first-child > input[value=JA]').click({ force: true })
+        cy.contains('Velg første dag i permitteringen')
+        cy.get('.nav-datovelger__kalenderknapp').click()
+        cy.get('.DayPicker-Day').contains('20').click()
+
+        // Gå til neste, så tilbake å svar nei
+        cy.contains('Gå videre').click()
+        cy.url().should('include', `${soknad.id}/10`)
+        cy.contains('Tilbake').click()
+        cy.get('.inputPanelGruppe__inner label:nth-child(2) > input[value=NEI]').click({ force: true })
+
+        cy.contains('Gå videre').click()
+    })
+
+
+    it('Søknad PERMITTERT_PERIODE', function() {
+        cy.url().should('include', `${soknad.id}/10`)
+
+        // Må velge ja/nei
+        cy.contains('Gå videre').click()
+        cy.contains('Du må svare på om du har vært permittert')
+
+        // Test spørsmål
+        cy.get('.inputPanelGruppe__inner label:first-child > input[value=JA]').click({ force: true })
+        cy.get('#687340_0 .fom .nav-datovelger__kalenderknapp').click()
+        cy.get('.DayPicker-Day').contains('10').click()
+        cy.get('#687340_0 .tom .nav-datovelger__kalenderknapp').click()
+        cy.get('.DayPicker-Day').contains('13').click()
 
         cy.contains('Gå videre').click()
     })

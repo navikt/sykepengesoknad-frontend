@@ -19,11 +19,9 @@ describe('Tester ettersending og korrigering', () => {
         cy.get('.skjemaelement__label').click({ force: true })
         cy.contains('Gå videre').click()
 
+
         cy.url().should('include', `${soknad.id}/2`)
-        cy.get('.inputPanelGruppe__inner label:first-child > input[value=JA]').click({ force: true })
-        cy.contains('Velg første dag i permitteringen')
-        cy.get('.nav-datovelger__kalenderknapp').click()
-        cy.get('.DayPicker-Day').contains('20').click()
+        cy.get('.inputPanelGruppe__inner label:nth-child(2) > input[value=NEI]').click({ force: true })
         cy.contains('Gå videre').click()
 
         cy.url().should('include', `${soknad.id}/3`)
@@ -59,13 +57,15 @@ describe('Tester ettersending og korrigering', () => {
         cy.contains('Gå videre').click()
 
         cy.url().should('include', `${soknad.id}/11`)
-        cy.get('.inputPanelGruppe__inner label:nth-child(2) > input[value=NEI]').click({ force: true })
+        cy.get('.inputPanelGruppe__inner label:first-child > input[value=JA]').click({ force: true })
+        cy.contains('Velg første dag i permitteringen')
+        cy.get('.nav-datovelger__kalenderknapp').click()
+        cy.get('.DayPicker-Day').contains('20').click()
         cy.contains('Gå videre').click()
 
         cy.url().should('include', `${soknad.id}/12`)
         cy.get('.inputPanelGruppe__inner label:nth-child(2) > input[value=NEI]').click({ force: true })
         cy.contains('Gå videre').click()
-
 
         cy.url().should('include', `${soknad.id}/13`)
         cy.get('.skjemaelement__label').click({ force: true })
