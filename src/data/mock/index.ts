@@ -104,7 +104,7 @@ mock.post(`${env.flexGatewayRoot}/syfosoknad/api/soknader/:soknad/finnMottaker`,
 mock.get(`${env.flexGatewayRoot}/syfosoknad/api/soknader`,
     (req, res, ctx) => res(ctx.json(soknader)))
 
-mock.get(`${env.syforestRoot}/sykmeldinger`,
+mock.get(`${env.sykmeldingerBackendProxyRoot}/api/v1/syforest/sykmeldinger`,
     (req, res, ctx) => res(ctx.json(sykmeldinger)))
 
 mock.post(`${env.flexGatewayRoot}/syfosoknad/api/soknader/:soknad/send`,

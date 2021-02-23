@@ -18,20 +18,12 @@ class Environment {
         return this.env.FLEX_GATEWAY_ROOT
     }
 
-    get syforestRoot() {
-        return this.env.SYFOREST_ROOT
-    }
-
     get isMockBackend() {
         return this.env.MOCK_BACKEND === 'true'
     }
 
     get isOpplaering() {
         return this.env.OPPLAERING === 'true'
-    }
-
-    get isBrukSykmeldingerBackendProxy() {
-        return this.env.BRUK_SYKMELDINGER_BACKEND_PROXY === 'true'
     }
 
     get sykmeldingerBackendProxyRoot() {

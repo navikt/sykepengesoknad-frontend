@@ -19,10 +19,6 @@ spec:
       value: "https://flex-gateway.dev.nav.no"
     - name: SYKMELDINGER_BACKEND_PROXY_ROOT
       value: "https://sykmeldinger-backend-proxy.dev.nav.no"
-    - name: BRUK_SYKMELDINGER_BACKEND_PROXY
-      value: "true"
-    - name: SYFOREST_ROOT
-      value: "brukes-ikke"
     - name: LOGINSERVICE_URL
       value: "https://loginservice.dev.nav.no/login"
     - name: LOGINSERVICE_REDIRECT_URL
