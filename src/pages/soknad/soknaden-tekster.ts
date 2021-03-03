@@ -9,8 +9,8 @@ const SoknadenTekster: any = {
         'sykepengesoknad.utkast-til-korrigering.info': 'Rediger det som er feil i søknaden, og send den inn på nytt.',
         'sykepengesoknad.sykepengeinfo.til-nav': 'Sykepenger utbetales etter at NAV har innvilget søknaden. <a class="lenke" href="https://www.nav.no/no/NAV+og+samfunn/Kontakt+NAV/Utbetalinger/Utbetalinger/Utbetalingsdatoer%2C+feriepenger+og+skattetrekk?kap=499628" target="_blank">Les om sykepenger og saksbehandlingstider.</a>',
 
-        'sykepengesoknad.permittert_naa.tittel': 'Permittert',
-        'sykepengesoknad.permittert_periode.tittel': 'Permittert',
+        'sykepengesoknad.permittert_naa.tittel': 'Permittert av arbeidsgiveren',
+        'sykepengesoknad.permittert_periode.tittel': 'Permittert av arbeidsgiveren',
         'sykepengesoknad.bekreft_opplysninger_utland.tittel': 'Bekreft opplysninger',
         'sykepengesoknad.bekreft_opplysninger_utland_info.tittel': 'Bekreft opplysninger',
         'sykepengesoknad.arbeid_utenfor_norge.tittel': 'Arbeid utenfor Norge',
