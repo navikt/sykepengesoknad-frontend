@@ -35,8 +35,8 @@ const SporsmalTekster: any = {
         'soknad.feilmelding.HVILKE_ANDRE_INNTEKTSKILDER': 'Du må oppgi hvilke inntektskilder du har',
         'soknad.feilmelding.HVILKE_ANDRE_INNTEKTSKILDER.lokal': 'Du må velge minst et alternativ',
 
-        'soknad.feilmelding.PERMITTERT_NAA': 'Du må svare på om du er permittert nå',
-        'soknad.feilmelding.PERMITTERT_NAA.lokal': 'Du må svare på om du er permittert nå',
+        'soknad.feilmelding.PERMITTERT_NAA': 'Du må svare på om du var permittert',
+        'soknad.feilmelding.PERMITTERT_NAA.lokal': 'Du må svare på om du var permittert',
         'soknad.feilmelding.PERMITTERT_NAA_NAR': 'Du må svare på når du ble permittert',
         'soknad.feilmelding.PERMITTERT_PERIODE': 'Du må svare på om du har vært permittert',
         'soknad.feilmelding.PERMITTERT_PERIODE.lokal': 'Du må svare på om du har vært permittert',

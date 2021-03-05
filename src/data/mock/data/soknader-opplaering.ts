@@ -789,7 +789,7 @@ export const arbeidstaker: RSSoknad = {
         {
             'id': '687337',
             'tag': 'PERMITTERT_NAA',
-            'sporsmalstekst': 'Er du permittert nå?',
+            'sporsmalstekst': 'Var du permittert av arbeidsgiveren din da du ble sykmeldt 4. januar 2021?',
             'undertekst': null,
             'svartype': 'JA_NEI',
             'min': null,
@@ -816,7 +816,7 @@ export const arbeidstaker: RSSoknad = {
         {
             'id': '687339',
             'tag': 'PERMITTERT_PERIODE',
-            'sporsmalstekst': 'Har du vært permittert i mer enn 14 sammenhengende dager i perioden 22. oktober - 22. november 2020?',
+            'sporsmalstekst': 'Har du vært permittert av arbeidsgiveren din i mer enn 14 sammenhengende dager mellom 22. oktober - 22. november 2020?',
             'undertekst': null,
             'svartype': 'JA_NEI',
             'min': null,
@@ -1433,7 +1433,7 @@ export const arbeidstakerGradert: RSSoknad = {
         {
             'id': '687292',
             'tag': 'PERMITTERT_NAA',
-            'sporsmalstekst': 'Er du permittert nå?',
+            'sporsmalstekst': 'Var du permittert av arbeidsgiveren din da du ble sykmeldt 4. januar 2021?',
             'undertekst': null,
             'svartype': 'JA_NEI',
             'min': null,
@@ -1460,7 +1460,7 @@ export const arbeidstakerGradert: RSSoknad = {
         {
             'id': '687294',
             'tag': 'PERMITTERT_PERIODE',
-            'sporsmalstekst': 'Har du vært permittert i mer enn 14 sammenhengende dager i perioden 22. mars - 22. april 2020?',
+            'sporsmalstekst': 'Har du vært permittert av arbeidsgiveren din i mer enn 14 sammenhengende dager mellom 22. mars - 22. april 2020?',
             'undertekst': null,
             'svartype': 'JA_NEI',
             'min': null,
@@ -1906,7 +1906,7 @@ export const arbeidsledig: RSSoknad = {
         {
             'id': '687396',
             'tag': 'PERMITTERT_NAA',
-            'sporsmalstekst': 'Er du permittert nå?',
+            'sporsmalstekst': 'Var du permittert av arbeidsgiveren din da du ble sykmeldt 4. januar 2021?',
             'undertekst': null,
             'svartype': 'JA_NEI',
             'min': null,
@@ -1933,7 +1933,7 @@ export const arbeidsledig: RSSoknad = {
         {
             'id': '687398',
             'tag': 'PERMITTERT_PERIODE',
-            'sporsmalstekst': 'Har du vært permittert i mer enn 14 sammenhengende dager i perioden 22. oktober - 22. november 2020?',
+            'sporsmalstekst': 'Har du vært permittert av arbeidsgiveren din i mer enn 14 sammenhengende dager mellom 22. oktober - 22. november 2020?',
             'undertekst': null,
             'svartype': 'JA_NEI',
             'min': null,
