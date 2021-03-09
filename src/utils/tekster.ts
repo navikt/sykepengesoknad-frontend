@@ -15,24 +15,23 @@ import SoknaderTekster from '../pages/soknader/soknader-tekster'
 import { logger } from './logger'
 
 const tekster = {
-    ...OpplysningerTekster.nb,
-    ...KvitteringTekster.nb,
-    ...SoknadIntroTekster.nb,
-    ...SoknaderTekster.nb,
-    ...BannerTekster.nb,
-    ...BjornTekster.nb,
-    ...KnapperadTekster.nb,
-    ...SoknadenTekster.nb,
-    ...SporsmalTekster.nb,
-    ...TeaserTekster.nb,
-    ...UtbetalingerTekster.nb,
-    ...OppsummeringTekster.nb,
-    ...OpprettUtlandTekster.nb,
-    ...RefreshHvisFeilStateTekster.nb,
+    ...OpplysningerTekster,
+    ...KvitteringTekster,
+    ...SoknadIntroTekster,
+    ...SoknaderTekster,
+    ...BannerTekster,
+    ...BjornTekster,
+    ...KnapperadTekster,
+    ...SoknadenTekster,
+    ...SporsmalTekster,
+    ...TeaserTekster,
+    ...UtbetalingerTekster,
+    ...OppsummeringTekster,
+    ...OpprettUtlandTekster,
+    ...RefreshHvisFeilStateTekster,
 }
 
-
-export const tekst = (tekst: string): string => {
+export const tekst = (tekst: keyof typeof tekster): string => {
     const verdi = tekster[tekst]
     // Generiskfeilmelding har ingen tekst
     if (!verdi === undefined && !tekst.includes('soknad.feilmelding')) {

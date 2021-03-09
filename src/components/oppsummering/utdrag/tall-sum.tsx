@@ -9,7 +9,7 @@ import { OppsummeringProps } from '../oppsummering'
 
 const TallSum = ({ sporsmal }: OppsummeringProps) => {
     const labelnokkel = sporsmal.svartype === RSSvartype.TIMER ? 'soknad.timer-totalt' : 'soknad.prosent'
-    const label = sporsmal.undertekst || tekst(labelnokkel)
+    const label = sporsmal.undertekst || tekst(labelnokkel as any)
     return (
         <div className="oppsummering__sporsmal">
             <Element tag="h3">{sporsmal.sporsmalstekst}</Element>

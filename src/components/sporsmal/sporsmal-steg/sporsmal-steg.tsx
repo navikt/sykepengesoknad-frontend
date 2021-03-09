@@ -49,7 +49,7 @@ const SporsmalSteg = () => {
             <div className={'stegindikator stegindikator--kompakt'}>
                 <ol className="stegindikator__liste">
                     {steg.map((sporsmal: Sporsmal, idx: number) => {
-                        return <Steg index={idx} key={idx} label={tekst(hentNokkel(valgtSoknad!, idx + 1))} />
+                        return <Steg index={idx} key={idx} label={tekst(hentNokkel(valgtSoknad!, idx + 1) as any)} />
                     })}
                 </ol>
             </div>

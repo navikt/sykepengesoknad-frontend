@@ -55,7 +55,7 @@ export const Bjorn = ({
     return (
         <div className={classNames}>
             <div className={bobleClassNames}>
-                {nokkel !== undefined ? <Normaltekst>{parser(tekst(nokkel))}</Normaltekst> : children}
+                {nokkel !== undefined ? <Normaltekst>{parser(tekst(nokkel as any))}</Normaltekst> : children}
             </div>
             <div className={bildeClassNames}>
                 <Bilde alt={bildeAlt} />

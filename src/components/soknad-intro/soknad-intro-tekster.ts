@@ -1,9 +1,9 @@
-const SoknadIntroTekster: any = {
-    'nb': {
-        'sykepengesoknad.soknad-intro.personvern': '<p>Ifølge folketrygdloven kan du få sykepenger hvis du oppfyller kravene. For å utbetale riktig trenger vi å vite hva som skjedde i perioden du var sykmeldt. Derfor må du søke hver gang vi ber deg om det.</p>',
-        'sykepengesoknad.soknad-intro.personvern-les-mer': 'Les mer om hvordan NAV behandler personopplysninger',
-        'sykepengesoknad.soknad-intro.personvern-modal-header': 'Slik behandler NAV personopplysningene dine',
-        'sykepengesoknad.soknad-intro.personvern-modal-innhold':
+const SoknadIntroTekster = {
+
+    'sykepengesoknad.soknad-intro.personvern': '<p>Ifølge folketrygdloven kan du få sykepenger hvis du oppfyller kravene. For å utbetale riktig trenger vi å vite hva som skjedde i perioden du var sykmeldt. Derfor må du søke hver gang vi ber deg om det.</p>',
+    'sykepengesoknad.soknad-intro.personvern-les-mer': 'Les mer om hvordan NAV behandler personopplysninger',
+    'sykepengesoknad.soknad-intro.personvern-modal-header': 'Slik behandler NAV personopplysningene dine',
+    'sykepengesoknad.soknad-intro.personvern-modal-innhold':
             `<p>Du har valgt å søke om sykepenger fra NAV. Det er penger du kan få hvis du fyller kravene. Du kan lese om kravene på <a target="_blank" rel="noopener noreferrer" href="https://nav.no/sykepenger">nav.no/sykepenger</a>.</p>
             <p>NAV innhenter opplysninger om deg når du sender inn en søknad. Det er nødvendig for at du skal kunne få det du har krav på. For å behandle søknaden din henter vi inn opplysninger både fra deg og fra offentlige registre.</p>
             <p>Ved korte sykefravær går søknaden bare til arbeidsgiveren din. Søknaden vil likevel kunne leses av en saksbehandler i NAV og benyttes i fremtidig saksbehandling.</p>
@@ -34,7 +34,7 @@ const SoknadIntroTekster: any = {
             <p>Vi kan også sende opplysninger om deg til trygdeordninger i andre land.</p>
             <p>Du kan lese mer om hvordan NAV behandler personopplysninger i Arbeids- og velferdsetatens personvernerklæring på <a target="_blank" rel="noopener noreferrer" href="https://nav.no/personvern">nav.no/personvern</a>.</p>
             `,
-    }, 'en': {}
+
 }
 
 export default SoknadIntroTekster

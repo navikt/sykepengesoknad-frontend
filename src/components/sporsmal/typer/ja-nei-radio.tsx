@@ -61,14 +61,14 @@ const JaNeiRadio = ({ sporsmal }: SpmProps) => {
             if (spm.tag.startsWith('INNTEKTSKILDE_') && lokal === 'JA') {
                 return <div className="presisering">
                     <Normaltekst tag="span">
-                        {tekst('soknad.presisering.' + spm.tag)}
+                        {tekst('soknad.presisering.' + spm.tag as any)}
                     </Normaltekst>
                 </div>
             }
             if (spm.tag === 'INNTEKTSKILDE_SELVSTENDIG_ER_DU_SYKMELDT' && lokal === 'NEI') {
                 return <div className="presisering">
                     <Normaltekst tag="span">
-                        {parser(getLedetekst(tekst('soknad.presisering.' + spm.tag + '_NEI'), { '%URL%': tekst('soknad.presisering.INNTEKTSKILDE_SELVSTENDIG_ER_DU_SYKMELDT_NEI.url') }))}
+                        {parser(getLedetekst(tekst('soknad.presisering.' + spm.tag + '_NEI' as any), { '%URL%': tekst('soknad.presisering.INNTEKTSKILDE_SELVSTENDIG_ER_DU_SYKMELDT_NEI.url') }))}
                     </Normaltekst>
                 </div>
             }

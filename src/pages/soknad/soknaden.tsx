@@ -89,7 +89,7 @@ const Fordeling = () => {
         return null
     }
 
-    const tittel = tekst(hentNokkel(valgtSoknad!, stegNo))
+    const tittel = tekst(hentNokkel(valgtSoknad!, stegNo) as any)
     const erUtlandssoknad = valgtSoknad.soknadstype === RSSoknadstype.OPPHOLD_UTLAND
 
     switch (valgtSoknad.status) {
