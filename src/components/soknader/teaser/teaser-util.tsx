@@ -127,13 +127,13 @@ export const beregnUndertekst = (soknad: Soknad) => {
                 case RSSoknadstatus.SENDT:
                     return erSendtTilBeggeMenIkkeSamtidig(soknad)
                         ? <SendtUlikt soknad={soknad} />
-                        : getLedetekst(tekst(`soknad.teaser.status.${soknad.status}${endelse}`), {
+                        : getLedetekst(tekst(`soknad.teaser.status.${soknad.status}${endelse}` as any), {
                             '%DATO%': dayjs(datoher).format('DD.MM.YYYY'),
                             '%ARBEIDSGIVER%': finnArbeidsgivernavn(soknad),
                         })
                 case RSSoknadstatus.NY:
                 case RSSoknadstatus.UTKAST_TIL_KORRIGERING: {
-                    return getLedetekst(tekst('soknad.teaser.undertekst'), {
+                    return getLedetekst(tekst('soknad.teaser.undertekst' as any), {
                         '%ARBEIDSGIVER%': finnArbeidsgivernavn(soknad),
                     })
                 }
@@ -163,21 +163,21 @@ export const leggTilSoknadstypeForDemoside = (soknad: Soknad) => {
 export const hentTeaserStatustekst = (soknad: Soknad) => {
     if (soknad.status === RSSoknadstatus.AVBRUTT ||
         soknad.status === RSSoknadstatus.UTGAATT) {
-        return tekst(`soknad.teaser.status.${soknad.status}`)
+        return tekst(`soknad.teaser.status.${soknad.status}` as any)
     }
     if (soknad.status === RSSoknadstatus.FREMTIDIG) {
-        return getLedetekst(tekst(`soknad.teaser.status.${soknad.status}`), {
+        return getLedetekst(tekst(`soknad.teaser.status.${soknad.status}` as any), {
             '%DATO%': tilLesbarDatoMedArstall(dayjs(soknad.tom).add(1, 'day'))
         })
     }
     if (soknad.status === RSSoknadstatus.SENDT) {
         if (soknad.sendtTilArbeidsgiverDato) {
             if (soknad.sendtTilNAVDato) {
-                return tekst(`soknad.teaser.status.${soknad.status}.til-arbeidsgiver-og-nav`)
+                return tekst(`soknad.teaser.status.${soknad.status}.til-arbeidsgiver-og-nav` as any)
             }
-            return tekst(`soknad.teaser.status.${soknad.status}.til-arbeidsgiver`)
+            return tekst(`soknad.teaser.status.${soknad.status}.til-arbeidsgiver` as any)
         }
-        return tekst(`soknad.teaser.status.${soknad.status}.til-nav`)
+        return tekst(`soknad.teaser.status.${soknad.status}.til-nav` as any)
     }
     return ''
 }

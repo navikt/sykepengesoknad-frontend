@@ -15,7 +15,7 @@ const SporsmalHjelpetekst = ({ sporsmal }: SpmProps) => {
     const nokkel = fjernIndexFraTag(sporsmal.tag)
 
     return vis
-        ? <Hjelpetekst> {tekst(`soknad.hjelpetekst.${nokkel}`)} </Hjelpetekst>
+        ? <Hjelpetekst> {tekst(`soknad.hjelpetekst.${nokkel}` as any)} </Hjelpetekst>
         : <></>
 }
 

@@ -27,7 +27,7 @@ const Ettersending = ({ gjelder, setRerendrekvittering }: EttersendingProps) => 
     const hentTekst = (text: string) => {
         const tilSuffix = (gjelder === 'nav') ? '-nav' : '-arbeidsgiver'
 
-        return tekst(`${text}${tilSuffix}`)
+        return tekst(`${text}${tilSuffix}` as any)
     }
 
     const oppdaterSoknad = () => {
@@ -96,7 +96,7 @@ const Ettersending = ({ gjelder, setRerendrekvittering }: EttersendingProps) => 
         <Knapp mini type="standard" onClick={() => {
             setVilEttersende(true)
         }}>
-            {tekst(`kvittering.knapp.send-${gjelder}`)}
+            {tekst(`kvittering.knapp.send-${gjelder}` as any)}
         </Knapp>
 
         <ModalWrapper onRequestClose={() => setVilEttersende(false)}

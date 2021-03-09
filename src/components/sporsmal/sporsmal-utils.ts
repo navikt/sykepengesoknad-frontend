@@ -59,8 +59,8 @@ interface FeilmeldingProps {
 
 export const hentFeilmelding = (sporsmal: Sporsmal): FeilmeldingProps => {
     const feilmelding: FeilmeldingProps = {
-        global: tekst('soknad.feilmelding.' + sporsmal.tag),
-        lokal: tekst('soknad.feilmelding.' + sporsmal.tag + '.lokal')
+        global: tekst('soknad.feilmelding.' + sporsmal.tag as any),
+        lokal: tekst('soknad.feilmelding.' + sporsmal.tag + '.lokal' as any)
     }
     if (feilmelding.lokal === undefined) {
         feilmelding.lokal = hentGeneriskFeilmelding(sporsmal.svartype)!

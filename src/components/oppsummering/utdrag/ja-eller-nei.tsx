@@ -20,7 +20,7 @@ const JaEllerNei = ({ sporsmal }: OppsummeringProps) => {
         return null
     }
 
-    const svartekst = tekst(`soknad.${svar.verdi.toLowerCase()}`)
+    const svartekst = tekst(`soknad.${svar.verdi.toLowerCase()}` as any)
     return (
         <div className="oppsummering-sporsmal">
             <Element tag="h3">{sporsmal.sporsmalstekst}</Element>
