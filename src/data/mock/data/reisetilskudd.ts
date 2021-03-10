@@ -29,11 +29,10 @@ export const nyttReisetilskudd: RSSoknad = {
     'arbeidsgiver': { 'navn': 'BYGDA SFO', 'orgnummer': '995816598' },  // TODO: Slått sammen til ett arbeidsgiverobjekt
     'sporsmal': [
         {
-            'id': '7d293cf9-6274-4d05-80f3-f7a6be337506',
-            'tag': 'ANSVARSERKLARING',              // TODO: Skal denne være lik som sykepengesoknad sin førsteside?
-            // 'overskrift': 'Vi stoler på deg',    TODO: Legg inn i koden
-            'sporsmalstekst': 'Jeg vet at jeg kan miste retten til sykepenger hvis jeg ikke har gitt riktige opplysninger. Jeg vet også at jeg må betale tilbake hvis jeg har gitt feil opplysninger eller latt være å informere.',
-            'undertekst': 'Jeg, <strong>Ola Nordmann</strong>, bekrefter at jeg vil gi riktige og fullstendige opplysninger.',
+            'id': '318',
+            'tag': 'ANSVARSERKLARING',
+            'sporsmalstekst': 'Jeg vet at jeg kan miste retten til sykepenger hvis opplysningene jeg gir ikke er riktige eller fullstendige. Jeg vet også at NAV kan holde igjen eller kreve tilbake penger, og at å gi feil opplysninger kan være straffbart.',
+            'undertekst': null,
             'svartype': 'CHECKBOX_PANEL',
             'min': null,
             'max': null,
