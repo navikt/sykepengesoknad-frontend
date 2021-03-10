@@ -31,11 +31,13 @@ const SykmeldingPerioder = () => {
                             {tekst('din-sykmelding.periode.tittel')}
                         </UndertekstBold>
                         <Normaltekst><strong>{fom} - {tom}</strong> &bull; {dager}</Normaltekst>
+
                         <Vis hvis={periode.grad}>
                             <Normaltekst>
                                 {periode.grad} {tekst('din-sykmelding.periode.prosent-sykmeldt')}
                             </Normaltekst>
                         </Vis>
+
                         <Vis hvis={periode.behandlingsdager}>
                             <Normaltekst>
                                 <Vis hvis={periode.behandlingsdager! > 1}>
