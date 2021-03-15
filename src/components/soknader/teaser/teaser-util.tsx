@@ -27,6 +27,17 @@ export const erSendtTilBeggeMenIkkeSamtidig = (soknad: Soknad) => {
         && soknad.sendtTilNAVDato.toDateString() !== soknad.sendtTilArbeidsgiverDato.toDateString()
 }
 
+export const teaserTittel = (soknad: Soknad) => {
+    if (soknad.soknadstype === RSSoknadstype.OPPHOLD_UTLAND) {
+        return tekst('soknad.utland.teaser.tittel')
+    }
+    if (soknad.soknadstype === RSSoknadstype.REISETILSKUDD) {
+        return tekst('soknad.reisetilskudd.teaser.tittel')
+    }
+
+    return tekst('soknad.teaser.tittel')
+}
+
 export const finnArbeidsgivernavn = (soknad: Soknad) => {
     return soknad.arbeidsgiver && soknad.arbeidsgiver.navn ? soknad.arbeidsgiver.navn : ''
 }
