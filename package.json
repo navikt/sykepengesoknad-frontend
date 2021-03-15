@@ -75,6 +75,7 @@
         "react-transition-group": "^4.4.1",
         "restore-cursor": "^3.1.0",
         "smoothscroll-polyfill": "^0.4.4",
+        "string.prototype.trimend": "^1.0.4",
         "use-force-update": "^1.0.7",
         "uuid": "^8.3.2"
     },
