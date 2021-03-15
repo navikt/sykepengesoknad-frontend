@@ -240,6 +240,3 @@ export const nyttReisetilskudd: RSSoknad = {
     ]
 }
 
-export const reisetilskuddene: RSSoknad[] = [
-    nyttReisetilskudd,
-]
