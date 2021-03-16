@@ -9,7 +9,7 @@ describe('Teste førsteside i reisetilskuddsøknaden', () => {
 
     describe('Landingside og listevisning', () => {
         it('Laster startside', () => {
-            cy.get('.typo-sidetittel').should('be.visible').and('have.text', 'Søknader om sykepenger')
+            cy.get('.typo-sidetittel').should('be.visible').and('have.text', 'Søknader')
         })
 
         it('Søknad har forventa tekst', () => {
