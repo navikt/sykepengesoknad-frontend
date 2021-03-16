@@ -15,16 +15,23 @@ interface BannerProps {
 const Banner = ({ overskrift }: BannerProps) => {
     const { valgtSoknad } = useAppStore()
 
-    const erUtlandssoknad = valgtSoknad && valgtSoknad.soknadstype === RSSoknadstype.OPPHOLD_UTLAND
-    const tittel = erUtlandssoknad
-        ? tekst('sykepengesoknad-utland.tittel')
-        : tekst('sykepengesoknad.sidetittel')
+    const tittel = () => {
+        if (valgtSoknad) {
+            if (valgtSoknad.soknadstype === RSSoknadstype.OPPHOLD_UTLAND) {
+                return tekst('sykepengesoknad-utland.tittel')
+            }
+            if (valgtSoknad.soknadstype === RSSoknadstype.REISETILSKUDD) {
+                return tekst('reisetilskuddsoknad.tittel')
+            }
+        }
+        return tekst('sykepengesoknad.sidetittel')
+    }
 
     return (
         <header className="sidebanner">
             <SykSokLokalt />
             <Sidetittel tag="h1" className="sidebanner__tittel">
-                {overskrift === undefined ? tittel : overskrift}
+                {overskrift === undefined ? tittel() : overskrift}
             </Sidetittel>
         </header>
     )
