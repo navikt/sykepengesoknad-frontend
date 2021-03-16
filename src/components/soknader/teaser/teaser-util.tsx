@@ -157,7 +157,7 @@ export const beregnUndertekst = (soknad: Soknad) => {
 }
 
 export const leggTilSoknadstypeForDemoside = (soknad: Soknad) => {
-    if (env.isOpplaering && soknad.soknadstype !== RSSoknadstype.OPPHOLD_UTLAND) {
+    if (env.isOpplaering && soknad.soknadstype !== RSSoknadstype.OPPHOLD_UTLAND && soknad.soknadstype !== RSSoknadstype.REISETILSKUDD) {
         const forste = soknad.id === arbeidstakerGradert.id ? 'førstegangssøknad' : ''
         const arbeidssituasjon = soknad.arbeidssituasjon?.toLowerCase()
         const soknadstype = soknad.soknadstype === RSSoknadstype.BEHANDLINGSDAGER
@@ -211,10 +211,13 @@ export const periodeListevisning = (soknad: Soknad) => {
                 '%ARBEIDSGIVER%': finnArbeidsgivernavn(soknad),
             })
         }
+        if (soknad.soknadstype === RSSoknadstype.REISETILSKUDD) {
+            return null
+        }
         return getLedetekst(tekst('soknad.teaser.sykmeldt'), {
             '%GRAD%': p.grad,
         })
-    })
+    }).filter(p => p != null)
 
     return (perioder.length === 0) ? '' :
         <ul className={'inngangspanel__periode__undertekst'}>
