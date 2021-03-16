@@ -1,7 +1,7 @@
 import { SvarEnums } from '../../types/enums'
 import { RSSvarliste } from '../../types/rs-types/rs-svarliste'
 import { RSSvartype } from '../../types/rs-types/rs-svartype'
-import { Sporsmal } from '../../types/types'
+import { Sporsmal, svarverdiToKvittering } from '../../types/types'
 import { empty } from '../../utils/constants'
 import { FormPeriode } from './typer/periode-komp'
 
@@ -22,6 +22,10 @@ export const hentSvar = (sporsmal: Sporsmal): any => {
             return spm.svarliste.svar[0] && spm.svarliste.svar[0].verdi === SvarEnums.CHECKED
         })
         return besvartSporsmal ? besvartSporsmal.sporsmalstekst : undefined
+    }
+
+    if (sporsmal.svartype === RSSvartype.KVITTERING) {
+        return svarliste.svar.map(s => svarverdiToKvittering(s.verdi))     // svar.verdi = "kvittering"
     }
 
     if (svar === undefined) {

@@ -1,0 +1,151 @@
+@import 'node_modules/nav-frontend-core/less/_variabler';
+
+.opplasting {
+    margin-top: 2rem;
+
+    .opplasting__tekst {
+        display: flex;
+        align-items: center;
+        margin-top: 0.5rem;
+
+        .opplasting__hjelpetekst {
+            align-self: flex-start;
+            margin-left: 0.35rem;
+        }
+    }
+
+    .fler-vedlegg {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        padding: 2rem;
+        margin: 2rem 0 0;
+        width: 100%;
+        border-radius: 4px;
+        border: 1px solid @navBla;
+        background-color: @navLysBlaLighten80;
+        color: @navBla;
+        cursor: pointer;
+
+        .pluss-ikon {
+            margin-right: 0.3rem;
+        }
+
+        &:hover {
+            text-decoration: underline;
+        }
+
+        &:focus {
+            outline: 0;
+            box-shadow: 0 0 0 3px @fokusFarge;
+        }
+    }
+
+    ul.opplasting-liste {
+        padding-inline-start: 1.3em;
+        line-height: 40px;
+    }
+
+    li {
+        font-size: 25px;
+    }
+
+    .tekst {
+        margin-left: 10px;
+    }
+
+    .feilmeldinger {
+        margin: 1rem 0 0 0;
+        text-align: left;
+    }
+}
+
+.opplasting_modal {
+    width: 400px;
+
+    .modal-content {
+        padding: 0 0.4rem;
+
+        .nav-datovelger {
+            display: block;
+        }
+
+        .skjemaelement, .nav-datovelger__inputContainer {
+            width: 100%;
+        }
+
+        .enhet {
+            margin-left: 0.5rem;
+        }
+
+        .filstr {
+            margin-top: 0.5rem;
+        }
+
+        .ddfil__wrap {
+            margin-top: 0.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .knapperad {
+            flex-direction: column;
+            padding: 0 0 0.5rem;
+
+            .lagre-kvittering {
+                display: block;
+                width: 100%;
+                margin: 0 0.5rem 1rem;
+            }
+        }
+    }
+
+    .opplasting-header {
+        margin-bottom: 1.5rem;
+    }
+
+    .skjemaelement {
+        margin: 1rem 0;
+    }
+
+    .skjemaelement__feilmelding {
+        font-weight: 600;
+        color: @redError;
+
+        p {
+            margin: 0;
+        }
+    }
+
+    .nav-datovelger__inputContainer {
+        width: auto;
+    }
+
+    .feilmelding-alert {
+        margin-top: 1rem;
+    }
+
+    .restriksjoner {
+        display: flex;
+        flex-direction: column;
+        margin-top: 2rem;
+    }
+}
+
+@media (min-width: @screen-sm) {
+    .kvitteringer-total {
+        margin: 1rem 0;
+    }
+
+    .opplasting_modal {
+        .modal-content {
+            .knapperad {
+                flex-direction: row;
+
+                .lagre-kvittering {
+                    display: inline-block;
+                    width: auto;
+                }
+            }
+        }
+    }
+}
