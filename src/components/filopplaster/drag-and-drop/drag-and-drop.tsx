@@ -8,6 +8,7 @@ import { useFormContext } from 'react-hook-form'
 import { useAppStore } from '../../../data/stores/app-store'
 import env from '../../../utils/environment'
 import { customTruncet, formaterFilstørrelse } from '../../../utils/fil-utils'
+import { logger } from '../../../utils/logger'
 import { getLedetekst, tekst } from '../../../utils/tekster'
 import Utvidbar from '../../utvidbar/utvidbar'
 import Vis from '../../vis'
@@ -32,9 +33,14 @@ const DragAndDrop = () => {
                 credentials: 'include',
                 headers: { 'Content-Type': 'application/json' }
             }).then((res) => {
-                res.blob().then((blob) => {
-                    setValgtFil(blob as any)
-                })
+                if (res.ok) {
+                    res.blob().then((blob) => {
+                        setValgtFil(blob as any)
+                    })
+                }
+                else {
+                    logger.warn(`Klarte ikke hente bilde fra flex-bucket-uploader, status: ${res.status}`)
+                }
             })
         } else {
             setValgtFil(undefined)
