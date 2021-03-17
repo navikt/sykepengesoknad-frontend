@@ -1,4 +1,7 @@
 import BannerTekster from '../components/banner/banner-tekster'
+import DragAndDropTekster from '../components/filopplaster/drag-and-drop/drag-and-drop-tekster'
+import FilListeTekster from '../components/filopplaster/fil-liste/fil-liste-tekster'
+import OpplastingTekster from '../components/filopplaster/kvittering-modal/opplasting-tekster'
 import KvitteringTekster from '../components/kvittering/kvittering-tekster'
 import OpplysningerTekster from '../components/opplysninger-fra-sykmelding/opplysninger-tekster'
 import OppsummeringTekster from '../components/oppsummering/oppsummering-tekster'
@@ -31,6 +34,9 @@ const tekster = {
     ...OpprettUtlandTekster,
     ...RefreshHvisFeilStateTekster,
     ...ReisetilskuddstartTekster,
+    ...FilListeTekster,
+    ...DragAndDropTekster,
+    ...OpplastingTekster,
 }
 
 export const tekst = (tekst: keyof typeof tekster): string => {

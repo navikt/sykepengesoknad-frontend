@@ -1,3 +1,5 @@
+import { filstørrelseTilBytes } from './fil-utils'
+
 class Environment {
 
     private env = (window as any)._env_;
@@ -56,6 +58,18 @@ class Environment {
 
     get dittNavUrl() {
         return this.env.DITTNAV_URL
+    }
+
+    get maksFilstørrelse() {
+        return filstørrelseTilBytes(this.env.MAKS_FILSTORRELSE)
+    }
+
+    get tillatteFiltyper() {
+        return this.env.TILLATTE_FILTYPER.split(',')
+    }
+
+    get formaterteFiltyper() {
+        return this.env.FORMATERTE_FILTYPER
     }
 }
 

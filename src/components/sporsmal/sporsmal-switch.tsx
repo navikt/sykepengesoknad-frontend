@@ -12,6 +12,7 @@ import IkkeRelevant from './typer/ikke-relevant'
 import JaNeiInput from './typer/ja-nei-input'
 import JaNeiRadio from './typer/ja-nei-radio'
 import Land from './typer/land'
+import Opplasting from './typer/opplasting/opplasting'
 import Perioder from './typer/perioder'
 import RadioKomp from './typer/radio-komp'
 import TallKomp from './typer/tall-komp'
@@ -60,6 +61,9 @@ const SporsmalSwitch = ({ sporsmal }: UndersporsmalProps) => {
 
         case RSSvartype.LAND:
             return <Land sporsmal={sporsmal} />
+
+        case RSSvartype.KVITTERING:
+            return <Opplasting sporsmal={sporsmal} />
 
         case RSSvartype.IKKE_RELEVANT:
             return <IkkeRelevant sporsmal={sporsmal} />

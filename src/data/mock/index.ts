@@ -7,6 +7,7 @@ import { RSSoknadstatus } from '../../types/rs-types/rs-soknadstatus'
 import { RSSoknadstype } from '../../types/rs-types/rs-soknadstype'
 import env from '../../utils/environment'
 import { jsonDeepCopy } from '../../utils/json-deep-copy'
+import KvitteringJPG from './data/kvittering.jpg'
 import { nyttReisetilskudd } from './data/reisetilskudd'
 import {
     arbeidstakerDeltPeriodeForsteUtenforArbeidsgiverperiodeKvittering,
@@ -122,4 +123,30 @@ mock.post(`${env.flexGatewayRoot}/syfosoknad/api/soknader/:soknad/avbryt`,
 
 mock.post(`${env.flexGatewayRoot}/syfosoknad/api/soknader/:soknad/gjenapne`,
     () => Promise.resolve({ status: 200 }))
+
+mock.delete(`${env.flexGatewayRoot}/syfosoknad/api/soknader/:soknad/sporsmal/:spmid/svar/:svarid`,
+    () => Promise.resolve({ status: 204 }))
+
+mock.post(`${env.flexGatewayRoot}/flex-bucket-uploader/opplasting`,
+    (req, res, ctx) =>
+        res(ctx.json({
+            id: uuid.v4(),
+            melding: 'opprettet'
+        })))
+
+mock.post(`${env.flexGatewayRoot}/syfosoknad/api/soknader/:soknad/sporsmal/:spmid/svar`,
+    (req) => {
+        const r = soknader.find((r) => r.id === req.pathParams.soknad)
+        const spm = r!.sporsmal.find((spm) => spm.id === req.pathParams.spmid)
+        spm!.svar.push(req.body)
+        return Promise.resolve({
+            status: 200,
+            body: JSON.stringify({ oppdatertSporsmal: spm })
+        })
+    }
+)
+
+mock.get(`${env.flexGatewayRoot}/flex-bucket-uploader/kvittering/:blob`,
+    () => fetch(KvitteringJPG)
+)
 

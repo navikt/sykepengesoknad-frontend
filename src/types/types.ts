@@ -268,3 +268,31 @@ export interface Ettersend {
     type: 'nav' | 'arbeidsgiver';
     dato: Date;
 }
+
+export class Kvittering {
+    blobId: string;
+    datoForUtgift: string;
+    belop: number; // Beløp i heltall øre
+    typeUtgift: keyof typeof UtgiftTyper;
+    opprettet?: string;
+
+    constructor(verdi: string) {
+        const kvitt = JSON.parse(verdi)
+        this.blobId = kvitt.blobId
+        this.datoForUtgift = kvitt.datoForUtgift
+        this.belop = kvitt.belop
+        this.typeUtgift = kvitt.typeUtgift
+        this.opprettet = kvitt.opprettet
+    }
+}
+
+export enum UtgiftTyper {
+    OFFENTLIG_TRANSPORT = 'Offentlig transport',
+    TAXI = 'Taxi',
+    PARKERING = 'Parkering',
+    ANNET = 'Annet'
+}
+
+export function svarverdiToKvittering(kvittering: string): Kvittering {
+    return new Kvittering(kvittering)
+}

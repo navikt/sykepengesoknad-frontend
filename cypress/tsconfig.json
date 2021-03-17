@@ -7,7 +7,7 @@
     "noEmit": false,
     "isolatedModules": false,
     "types": [
-      "cypress"
+      "cypress", "cypress-file-upload"
     ]
   }
 }

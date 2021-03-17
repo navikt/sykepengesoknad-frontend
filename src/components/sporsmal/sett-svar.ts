@@ -43,6 +43,9 @@ export const settSvar = (sporsmal: Sporsmal, verdier: Record<string, any>): void
                 settSvar(uspm, verdier)
             })
             break
+        case RSSvartype.KVITTERING:
+            // Denne settes i opplasting-form
+            return
         case RSSvartype.RADIO:
         case RSSvartype.IKKE_RELEVANT:
         case RSSvartype.INFO_BEHANDLINGSDAGER:
