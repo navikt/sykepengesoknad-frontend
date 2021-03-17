@@ -17,6 +17,7 @@ interface UtvidbarProps {
     className?: string;
     visLukk?: boolean;
     type?: 'intern' | undefined;
+    fixedHeight?: boolean;
 }
 
 const Utvidbar = (props: UtvidbarProps) => {
@@ -30,8 +31,12 @@ const Utvidbar = (props: UtvidbarProps) => {
 
     useEffect(() => {
         setErApen(props.erApen)
-        setInnholdHeight(innhold.current!.offsetHeight)
-    }, [ props.erApen ])
+        setInnholdHeight(
+            props.fixedHeight
+                ? 3000
+                : innhold.current!.offsetHeight
+        )
+    }, [ props.erApen, props.fixedHeight ])
 
     function onTransitionEnd() {
         if (erApen) {
