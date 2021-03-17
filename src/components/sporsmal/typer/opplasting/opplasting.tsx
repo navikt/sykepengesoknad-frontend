@@ -1,7 +1,7 @@
 import './opplasting.less'
 
 import Modal from 'nav-frontend-modal'
-import { Normaltekst, Systemtittel, } from 'nav-frontend-typografi'
+import { Normaltekst } from 'nav-frontend-typografi'
 import React  from 'react'
 
 import { useAppStore } from '../../../../data/stores/app-store'
@@ -27,10 +27,6 @@ const Opplasting = ({ sporsmal }: SpmProps) => {
 
     return (
         <div className="opplasting">
-            <Systemtittel>
-                {tekst('opplasting.tittel')}
-            </Systemtittel>
-
             <div className="opplasting__tekst">
                 <Normaltekst id="opplasting-overskrift" aria-describedby="opplasting-hjelpetekst">
                     {sporsmal.sporsmalstekst}

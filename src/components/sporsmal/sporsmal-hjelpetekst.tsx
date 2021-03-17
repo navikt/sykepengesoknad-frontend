@@ -10,7 +10,8 @@ const SporsmalHjelpetekst = ({ sporsmal }: SpmProps) => {
 
     const vis = sporsmal.tag === TagTyper.EGENMELDINGER ||
         sporsmal.tag === TagTyper.FERIE_PERMISJON_UTLAND ||
-        sporsmal.tag === TagTyper.FERIE_V2
+        sporsmal.tag === TagTyper.FERIE_V2 ||
+        sporsmal.tag === TagTyper.TRANSPORT_TIL_DAGLIG
 
     const nokkel = fjernIndexFraTag(sporsmal.tag)
 

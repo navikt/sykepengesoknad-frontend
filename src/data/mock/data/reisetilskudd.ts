@@ -19,14 +19,15 @@ export const nyttReisetilskudd: RSSoknad = {
     'id': '3b6d3764-bc4d-4fe2-902d-5097b9e0ce93',
     'status': 'NY',
     'sykmeldingId': arbeidstakerReisetilskudd.id,
-    // 'fnr': '01010112345',    TODO: Trenger vi dette?
     'fom': '2021-02-01',
     'tom': '2021-02-18',
     'opprettetDato': '2021-02-19',
-    // 'endret': '2021-02-19T10:25:59.232720Z', TODO: Trenger vi dette?
     'sendtTilNAVDato': null,
     'avbruttDato': null,
-    'arbeidsgiver': { 'navn': 'BYGDA SFO', 'orgnummer': '995816598' },  // TODO: Slått sammen til ett arbeidsgiverobjekt
+    'arbeidsgiver': {
+        'navn': 'BYGDA SFO',
+        'orgnummer': '995816598'
+    },
     'sporsmal': [
         {
             'id': '318',
@@ -36,7 +37,7 @@ export const nyttReisetilskudd: RSSoknad = {
             'svartype': 'CHECKBOX_PANEL',
             'min': null,
             'max': null,
-            'pavirkerAndreSporsmal': false,         // TODO: Nytt felt, sjekk at dette blir riktig (alle er satt til false)
+            'pavirkerAndreSporsmal': false,
             'kriterieForVisningAvUndersporsmal': null,
             'svar': [],
             'undersporsmal': []
@@ -44,15 +45,8 @@ export const nyttReisetilskudd: RSSoknad = {
         {
             'id': 'b59b2bea-1d4c-49e7-9e05-351aaf083232',
             'tag': 'TRANSPORT_TIL_DAGLIG',
-            // 'overskrift': 'Før du fikk sykmelding',  TODO: Legg inn i koden
             'sporsmalstekst': 'Brukte du bil eller offentlig transport til og fra jobben?',
             'undertekst': null,
-            /*  TODO: Legg til i koden
-            'hjelpetekst': {
-                'tittel': 'Hva regnes som offentlig transport?',
-                'brodtekst': 'Eksempler på offentlig transport: Buss, tog, t-bane, bysykkel, el-sparkesykkel.',
-            },
-            */
             'svartype': 'JA_NEI',
             'min': null,
             'max': null,
@@ -133,7 +127,6 @@ export const nyttReisetilskudd: RSSoknad = {
         {
             'id': '7f8e5fd4-325b-4614-9eb3-39faa2bb511f',
             'tag': 'REISE_MED_BIL',
-            // 'overskrift': 'Reise med bil',   TODO: Legg til i koden
             'sporsmalstekst': 'Reiste du med egen bil, leiebil eller en kollega til jobben fra 1. februar - 18. mars 2021?',
             'undertekst': null,
             'svartype': 'JA_NEI',
@@ -185,7 +178,6 @@ export const nyttReisetilskudd: RSSoknad = {
         {
             'id': 'c5e8e211-d8d1-404d-85a7-d6e073f1fd4b',
             'tag': 'KVITTERINGER',
-            /// 'overskrift': 'Kvitteringer',   TODO: Legg til i koden
             'sporsmalstekst': 'Last opp kvitteringer for reiseutgifter til jobben fra 1. februar til 18. mars 2021.',
             'undertekst': null,
             'svartype': 'KVITTERING',
@@ -199,7 +191,6 @@ export const nyttReisetilskudd: RSSoknad = {
         {
             'id': '2723f1dc-a45e-44b1-bb0c-a7caa34a43f2',
             'tag': 'UTBETALING',
-            // 'overskrift': 'Utbetaling',  TODO: Legg til i koden
             'sporsmalstekst': 'Legger arbeidsgiveren din ut for reisene?',
             'undertekst': null,
             'svartype': 'JA_NEI',
