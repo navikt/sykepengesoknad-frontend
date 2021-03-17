@@ -47,12 +47,6 @@ export const nyttReisetilskudd: RSSoknad = {
             'tag': 'TRANSPORT_TIL_DAGLIG',
             'sporsmalstekst': 'Brukte du bil eller offentlig transport til og fra jobben?',
             'undertekst': null,
-            /*  TODO: Legg til i koden
-            'hjelpetekst': {
-                'tittel': 'Hva regnes som offentlig transport?',
-                'brodtekst': 'Eksempler på offentlig transport: Buss, tog, t-bane, bysykkel, el-sparkesykkel.',
-            },
-            */
             'svartype': 'JA_NEI',
             'min': null,
             'max': null,
