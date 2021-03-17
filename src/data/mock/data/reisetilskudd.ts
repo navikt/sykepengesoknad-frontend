@@ -19,14 +19,15 @@ export const nyttReisetilskudd: RSSoknad = {
     'id': '3b6d3764-bc4d-4fe2-902d-5097b9e0ce93',
     'status': 'NY',
     'sykmeldingId': arbeidstakerReisetilskudd.id,
-    // 'fnr': '01010112345',    TODO: Trenger vi dette?
     'fom': '2021-02-01',
     'tom': '2021-02-18',
     'opprettetDato': '2021-02-19',
-    // 'endret': '2021-02-19T10:25:59.232720Z', TODO: Trenger vi dette?
     'sendtTilNAVDato': null,
     'avbruttDato': null,
-    'arbeidsgiver': { 'navn': 'BYGDA SFO', 'orgnummer': '995816598' },  // TODO: Slått sammen til ett arbeidsgiverobjekt
+    'arbeidsgiver': {
+        'navn': 'BYGDA SFO',
+        'orgnummer': '995816598'
+    },
     'sporsmal': [
         {
             'id': '318',
