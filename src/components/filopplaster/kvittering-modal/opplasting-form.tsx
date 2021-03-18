@@ -1,6 +1,6 @@
 import dayjs from 'dayjs'
 import { Datepicker } from 'nav-datovelger'
-import Alertstripe  from 'nav-frontend-alertstriper'
+import Alertstripe from 'nav-frontend-alertstriper'
 import AlertStripe from 'nav-frontend-alertstriper'
 import { Knapp } from 'nav-frontend-knapper'
 import NavFrontendSpinner from 'nav-frontend-spinner'
@@ -10,6 +10,7 @@ import { Controller, FormProvider, useForm } from 'react-hook-form'
 import { useParams } from 'react-router-dom'
 
 import { RouteParams } from '../../../app'
+import { redirectTilLoginHvis401 } from '../../../data/rest/utils'
 import { useAppStore } from '../../../data/stores/app-store'
 import { RSOppdaterSporsmalResponse } from '../../../types/rs-types/rest-response/rs-oppdatersporsmalresponse'
 import { RSSvar } from '../../../types/rs-types/rs-svar'
@@ -64,60 +65,89 @@ const OpplastingForm = ({ sporsmal }: SpmProps) => {
     }, [ valgtSoknad, valgtKvittering ])
 
     const onSubmit = async() => {
-        setLaster(true)
-
-        const valid = await methods.trigger()
-
-        if (!valid) {
-            setLaster(false)
-            return
-        }
-
         try {
-            const requestData = new FormData()
-            const blob = valgtFil as Blob
-            requestData.append('file', blob)
+            setLaster(true)
+            setFetchFeilmelding(null)
 
-            const bucketRes = await fetcher(`${env.flexGatewayRoot}/flex-bucket-uploader/opplasting`, {
-                method: 'POST',
-                body: requestData,
-                credentials: 'include'
-            })
-            const opplastingResponse: OpplastetKvittering = await bucketRes.json()
+            const valid = await methods.trigger()
+            if (!valid) return
 
-            const kvittering: Kvittering = {
-                blobId: opplastingResponse.id,
-                datoForUtgift: dato,
-                belop: methods.getValues('belop_input') * 100,
-                typeUtgift: methods.getValues('transportmiddel'),
-                opprettet: dayjs().toISOString()
-            }
-            const svar: RSSvar = { verdi: JSON.stringify(kvittering) }
+            const opplastingResponse: OpplastetKvittering = await opplastingTilBucket()
+            if (!opplastingResponse) return
 
-            const syfosoknadRes = await fetcher(`${env.flexGatewayRoot}/syfosoknad/api/soknader/${valgtSoknad!.id}/sporsmal/${sporsmal!.id}/svar`, {
-                method: 'POST',
-                body: JSON.stringify(svar),
-                credentials: 'include',
-                headers: { 'Content-Type': 'application/json' }
-            })
-            const rsOppdaterSporsmalResponse: RSOppdaterSporsmalResponse = await syfosoknadRes.json()
+            const rsOppdaterSporsmalResponse: RSOppdaterSporsmalResponse = await lagreSvarISyfosoknad(opplastingResponse)
+            if (!rsOppdaterSporsmalResponse) return
 
             valgtSoknad!.sporsmal[spmIndex] = new Sporsmal(rsOppdaterSporsmalResponse.oppdatertSporsmal, null, true)
             setValgtSoknad(valgtSoknad)
             setOpenModal(false)
-
         } catch(ex) {
-            // TODO: Legg inn flere feilmeldinger og sjekk status før den går videre
             setFetchFeilmelding('Det skjedde en feil i baksystemene, prøv igjen senere')
         } finally {
             setLaster(false)
         }
     }
 
-    const slettKvittering = async() => {
-        setLaster(true)
+    const opplastingTilBucket = async() => {
+        const requestData = new FormData()
+        requestData.append('file', valgtFil as Blob)
+        const bucketRes = await fetcher(`${env.flexGatewayRoot}/flex-bucket-uploader/opplasting`, {
+            method: 'POST',
+            body: requestData,
+            credentials: 'include'
+        })
 
+        if (bucketRes.ok) {
+            return bucketRes.json()
+        }
+        else if (redirectTilLoginHvis401(bucketRes)) {
+            return null
+        }
+        else if (bucketRes.status === 413) {
+            logger.warn('Feil under opplasting fordi filen du prøvde å laste opp er for stor')
+            setFetchFeilmelding('Filen du prøvde å laste opp er for stor')
+            return null
+        }
+        else {
+            logger.warn('Feil under opplasting av kvittering')
+            setFetchFeilmelding('Det skjedde en feil i baksystemene, prøv igjen senere')
+            return null
+        }
+    }
+
+    const lagreSvarISyfosoknad = async(opplastingResponse: OpplastetKvittering) => {
+        const kvittering: Kvittering = {
+            blobId: opplastingResponse.id,
+            datoForUtgift: dato,
+            belop: methods.getValues('belop_input') * 100,
+            typeUtgift: methods.getValues('transportmiddel'),
+            opprettet: dayjs().toISOString()
+        }
+        const svar: RSSvar = { verdi: JSON.stringify(kvittering) }
+
+        const syfosoknadRes = await fetcher(`${env.flexGatewayRoot}/syfosoknad/api/soknader/${valgtSoknad!.id}/sporsmal/${sporsmal!.id}/svar`, {
+            method: 'POST',
+            body: JSON.stringify(svar),
+            credentials: 'include',
+            headers: { 'Content-Type': 'application/json' }
+        })
+
+        if (syfosoknadRes.ok) {
+            return syfosoknadRes.json()
+        }
+        else if (redirectTilLoginHvis401(syfosoknadRes)) {
+            return null
+        }
+        else {
+            logger.warn('Feil under lagring av kvittering svar i syfosoknad')
+            setFetchFeilmelding('Det skjedde en feil i baksystemene, prøv igjen senere')
+            return null
+        }
+    }
+
+    const slettKvittering = async() => {
         try {
+            setLaster(true)
             const idx = sporsmal!.svarliste.svar.findIndex(svar => svarverdiToKvittering(svar?.verdi).blobId === valgtKvittering?.blobId)
             const svar = sporsmal?.svarliste.svar.find(svar => svarverdiToKvittering(svar?.verdi).blobId === valgtKvittering?.blobId)
 
