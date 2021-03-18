@@ -140,7 +140,7 @@ mock.post(`${env.flexGatewayRoot}/syfosoknad/api/soknader/:soknad/sporsmal/:spmi
         const spm = r!.sporsmal.find((spm) => spm.id === req.pathParams.spmid)
         spm!.svar.push(req.body)
         return Promise.resolve({
-            status: 200,
+            status: 201,
             body: JSON.stringify({ oppdatertSporsmal: spm })
         })
     }
