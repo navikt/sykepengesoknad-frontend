@@ -163,7 +163,7 @@ export const nyttReisetilskudd: RSSoknad = {
                         'id': '616cc0cb-434e-4114-a68b-b5708e033e9e',
                         'tag': 'BIL_BOMPENGER_BELOP',
                         'sporsmalstekst': 'Hvor mye betalte du i bompenger mellom hjemmet ditt og jobben i perioden?',
-                        'undertekst': null,
+                        'undertekst': 'kr',
                         'svartype': 'BELOP',
                         'min': '0',
                         'max': null,

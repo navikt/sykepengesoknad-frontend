@@ -12,12 +12,15 @@ import { getLedetekst, tekst } from '../tekster'
 
 const useValiderArbeidsgrad = ( sporsmal: Sporsmal ) => {
     const { valgtSoknad } = useAppStore()
+    if (!valgtSoknad || valgtSoknad.soknadstype === RSSoknadstype.REISETILSKUDD) {
+        return { undefined }
+    }
 
-    const hovedSporsmal = finnHovedSporsmal(valgtSoknad!, sporsmal)
+    const hovedSporsmal = finnHovedSporsmal(valgtSoknad, sporsmal)
 
-    const tilbake = hentSvar(hentSporsmal(valgtSoknad!, TagTyper.TILBAKE_NAR)!)
+    const tilbake = hentSvar(hentSporsmal(valgtSoknad, TagTyper.TILBAKE_NAR)!)
 
-    const periode = valgtSoknad!.soknadPerioder[hovedSporsmal!.tagIndex!]
+    const periode = valgtSoknad.soknadPerioder[hovedSporsmal!.tagIndex!]
     const periodeDager = ukeDatoListe(periode.fom.toString(), periode.tom.toString())
 
 
@@ -34,9 +37,9 @@ const useValiderArbeidsgrad = ( sporsmal: Sporsmal ) => {
     }
 
     const sykedagerForArbeidstakere = () => {
-        const feriedager = hentPeriodeListe(hentSporsmal(valgtSoknad!, TagTyper.FERIE_NAR_V2)!)
+        const feriedager = hentPeriodeListe(hentSporsmal(valgtSoknad, TagTyper.FERIE_NAR_V2)!)
             .flatMap(periode => ukeDatoListe(periode.fom, periode.tom))
-        const permisjonsdager = hentPeriodeListe(hentSporsmal(valgtSoknad!, TagTyper.PERMISJON_NAR_V2)!)
+        const permisjonsdager = hentPeriodeListe(hentSporsmal(valgtSoknad, TagTyper.PERMISJON_NAR_V2)!)
             .flatMap(periode => ukeDatoListe(periode.fom, periode.tom))
         const ekskluderteDager = [ feriedager, permisjonsdager ].flat()
 
@@ -54,7 +57,7 @@ const useValiderArbeidsgrad = ( sporsmal: Sporsmal ) => {
 
 
     const validerGrad = ( values: Record<string, any> ) => {
-        const faktiskeSykedager = valgtSoknad!.soknadstype === RSSoknadstype.ARBEIDSTAKERE
+        const faktiskeSykedager = valgtSoknad.soknadstype === RSSoknadstype.ARBEIDSTAKERE
             ? sykedagerForArbeidstakere()
             : sykedagerForFrilansere()
 

@@ -7,12 +7,14 @@ import { useAppStore } from '../../../data/stores/app-store'
 import { SvarEnums, TagTyper } from '../../../types/enums'
 import { getLedetekst, tekst } from '../../../utils/tekster'
 import { utlandssoknadUrl } from '../../../utils/url-utils'
+import AnimateOnMount from '../../animate-on-mount'
 import Vis from '../../vis'
 import Bjorn from '../bjorn/bjorn'
 import { hentSvar } from '../hent-svar'
 import KnapperadAvbryt from '../sporsmal-form/knapperad-avbryt'
 import { SpmProps } from '../sporsmal-form/sporsmal-form'
 import { hentFeilmelding } from '../sporsmal-utils'
+import UndersporsmalListe from '../undersporsmal/undersporsmal-liste'
 
 const jaNeiValg = [ {
     value: 'JA',
@@ -123,6 +125,15 @@ const JaNeiRadio = ({ sporsmal }: SpmProps) => {
                     ekstraMarginTop={true} />
                 <KnapperadAvbryt />
             </Vis>
+
+            <AnimateOnMount
+                mounted={lokal === sporsmal.kriterieForVisningAvUndersporsmal}
+                enter="undersporsmal--vis"
+                leave="undersporsmal--skjul"
+                start="undersporsmal"
+            >
+                <UndersporsmalListe oversporsmal={sporsmal} oversporsmalSvar={lokal} />
+            </AnimateOnMount>
         </>
     )
 }

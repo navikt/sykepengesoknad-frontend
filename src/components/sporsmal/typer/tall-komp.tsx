@@ -3,6 +3,7 @@ import React, { useEffect, useRef, useState } from 'react'
 import { useFormContext } from 'react-hook-form'
 
 import { TagTyper } from '../../../types/enums'
+import { RSSvartype } from '../../../types/rs-types/rs-svartype'
 import validerArbeidsgrad from '../../../utils/sporsmal/valider-arbeidsgrad'
 import { getLedetekst, tekst } from '../../../utils/tekster'
 import Vis from '../../vis'
@@ -16,6 +17,7 @@ const TallKomp = ({ sporsmal }: SpmProps) => {
     const [ lokal, setLokal ] = useState<string>(hentSvar(sporsmal))
     const { register, setValue, errors, getValues } = useFormContext()
     const undersporsmal = useRef<HTMLDivElement>(null)
+    const { validerGrad, periode, hovedSporsmal } = validerArbeidsgrad(sporsmal)
 
     const onChange = (e: any) => {
         const value = e.target.value
@@ -24,31 +26,34 @@ const TallKomp = ({ sporsmal }: SpmProps) => {
     }
 
     const valider = () => {
-        const { validerGrad, hovedSporsmal } = validerArbeidsgrad(sporsmal)
-        if (![ TagTyper.JOBBET_DU_GRADERT, TagTyper.JOBBET_DU_100_PROSENT ].includes(hovedSporsmal!.tag)) {
-            return true // hopp over validering dersom det ikke er spørsmål av denne typen
-        }
+        if (validerGrad) {
+            if (![ TagTyper.JOBBET_DU_GRADERT, TagTyper.JOBBET_DU_100_PROSENT ].includes(hovedSporsmal!.tag)) {
+                return true // hopp over validering dersom det ikke er spørsmål av denne typen
+            }
 
-        if (sporsmal.tag !== TagTyper.HVOR_MYE_TIMER_VERDI) {
+            if (sporsmal.tag !== TagTyper.HVOR_MYE_TIMER_VERDI) {
+                return true
+            }
+
+            const values = getValues()
+
+            return validerGrad(values)
+        }
+        else {
             return true
         }
-
-        const values = getValues()
-
-        return validerGrad ? validerGrad(values) : true
     }
 
-    const periodeGrad = () => {
-        if (sporsmal.tag === TagTyper.HVOR_MYE_TIMER_VERDI) {
-            const { periode } = validerArbeidsgrad(sporsmal)
-            return (
-                <Normaltekst tag="span">
-                    <p>{getLedetekst(tekst('soknad.feilmelding.MINDRE_TIMER_ENN_FORVENTET.lokal'),
-                        { '%GRAD%': periode.grad })}</p>
-                </Normaltekst>
-            )
+    const step = () => {
+        switch (sporsmal.svartype) {
+            case RSSvartype.PROSENT:
+            case RSSvartype.BELOP:
+                return 1
+            case RSSvartype.KILOMETER:
+                return 0.1
+            default:
+                return 0.05
         }
-        return null
     }
 
     useEffect(() => {
@@ -85,7 +90,7 @@ const TallKomp = ({ sporsmal }: SpmProps) => {
                             )
                         }
                     })}
-                    step={sporsmal.tag === TagTyper.HVOR_MYE_PROSENT_VERDI ? 1 : 0.05}
+                    step={step()}
                     onChange={onChange}
                     autoComplete="off"
                 />
@@ -100,7 +105,10 @@ const TallKomp = ({ sporsmal }: SpmProps) => {
                         </Normaltekst>
                     </Vis>
                     <Vis hvis={errors[sporsmal.id]?.type === 'validate' && sporsmal.tag === TagTyper.HVOR_MYE_TIMER_VERDI}>
-                        {periodeGrad()}
+                        <Normaltekst tag="span">
+                            <p>{getLedetekst(tekst('soknad.feilmelding.MINDRE_TIMER_ENN_FORVENTET.lokal'),
+                                { '%GRAD%': periode?.grad })}</p>
+                        </Normaltekst>
                     </Vis>
                 </Vis>
             </div>
