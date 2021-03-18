@@ -3,15 +3,16 @@ import DragAndDropTekster from '../components/filopplaster/drag-and-drop/drag-an
 import FilListeTekster from '../components/filopplaster/fil-liste/fil-liste-tekster'
 import OpplastingTekster from '../components/filopplaster/kvittering-modal/opplasting-tekster'
 import KvitteringTekster from '../components/kvittering/kvittering-tekster'
+import OmReisetilskuddTekster from '../components/om-reisetilskudd/om-reisetilskudd-tekster'
 import OpplysningerTekster from '../components/opplysninger-fra-sykmelding/opplysninger-tekster'
 import OppsummeringTekster from '../components/oppsummering/oppsummering-tekster'
-import ReisetilskuddstartTekster from '../components/reisetilskuddstart/reisetilskuddstart-tekster'
 import SoknadIntroTekster from '../components/soknad-intro/soknad-intro-tekster'
 import TeaserTekster from '../components/soknader/teaser/teaser-tekster'
 import UtbetalingerTekster from '../components/soknader/utbetalinger/utbetalinger-tekster'
 import BjornTekster from '../components/sporsmal/bjorn/bjorn-tekster'
 import KnapperadTekster from '../components/sporsmal/sporsmal-form/knapperad-tekster'
 import SporsmalTekster from '../components/sporsmal/sporsmal-tekster'
+import SparTidTekster from '../components/sporsmal/typer/opplasting/spar-tid-mobil-tekster'
 import RefreshHvisFeilStateTekster from '../pages/feil/refresh-hvis-feil-state-tekster'
 import OpprettUtlandTekster from '../pages/opprett-utland/opprett-utland-tekster'
 import SoknadenTekster from '../pages/soknad/soknaden-tekster'
@@ -33,10 +34,11 @@ const tekster = {
     ...OppsummeringTekster,
     ...OpprettUtlandTekster,
     ...RefreshHvisFeilStateTekster,
-    ...ReisetilskuddstartTekster,
+    ...OmReisetilskuddTekster,
     ...FilListeTekster,
     ...DragAndDropTekster,
     ...OpplastingTekster,
+    ...SparTidTekster,
 }
 
 export const tekst = (tekst: keyof typeof tekster): string => {

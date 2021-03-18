@@ -2,7 +2,7 @@ import './opplasting.less'
 
 import Modal from 'nav-frontend-modal'
 import { Normaltekst } from 'nav-frontend-typografi'
-import React  from 'react'
+import React from 'react'
 
 import { useAppStore } from '../../../../data/stores/app-store'
 import { tekst } from '../../../../utils/tekster'
@@ -10,6 +10,7 @@ import FilListe from '../../../filopplaster/fil-liste/fil-liste'
 import OpplastingForm from '../../../filopplaster/kvittering-modal/opplasting-form'
 import { SpmProps } from '../../sporsmal-form/sporsmal-form'
 import PlussIkon from './pluss-ikon.svg'
+import SparTidMobil from './spar-tid-mobil'
 
 const Opplasting = ({ sporsmal }: SpmProps) => {
     const { setValgtKvittering, openModal, setOpenModal } = useAppStore()
@@ -32,6 +33,8 @@ const Opplasting = ({ sporsmal }: SpmProps) => {
                     {sporsmal.sporsmalstekst}
                 </Normaltekst>
             </div>
+
+            <SparTidMobil />
 
             <button className="fler-vedlegg" onClick={aktiverModal} type="button">
                 <img className="pluss-ikon" src={PlussIkon} alt="" />

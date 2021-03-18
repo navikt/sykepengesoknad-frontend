@@ -12,6 +12,12 @@ describe('Tester utfylling av kvittering', () => {
             cy.url().should('include', `/soknader/${reisetilskudd.id}/4`)
         })
 
+        it('Laster inn veilederpanel spar-tid', () => {
+            cy.get('.spar-tid').should('be.visible')
+            cy.get('.spar-tid .nav-veilederpanel__content h2').should('be.visible').and('have.text', 'Spar tid med mobilen')
+            cy.get('.spar-tid .nav-veilederpanel__content').contains('Fyller du ut fra telefonen, kan du ta bilde av kvitteringene og bruke dem direkte i søknaden.')
+        })
+
         it('Legger inn taxi kvittering', () => {
             cy.get('.fler-vedlegg').click()
 
