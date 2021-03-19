@@ -70,7 +70,7 @@ const FeilOppsummering = (props: FeilProps) => {
             detteSpm.svartype.includes('TIMER') || detteSpm.svartype.includes('PROSENT')) {
             elmid = idarr[0]
 
-        } else if (detteSpm.svartype.includes('DATO')) {
+        } else {
             elmid = id
         }
 

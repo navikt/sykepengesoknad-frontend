@@ -50,6 +50,8 @@ const SporsmalSwitch = ({ sporsmal }: UndersporsmalProps) => {
         case RSSvartype.TIMER:
         case RSSvartype.PROSENT:
         case RSSvartype.TALL:
+        case RSSvartype.BELOP:
+        case RSSvartype.KILOMETER:
             return <TallKomp sporsmal={sporsmal} />
 
         case RSSvartype.RADIO_GRUPPE:

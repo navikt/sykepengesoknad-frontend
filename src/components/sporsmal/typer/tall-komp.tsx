@@ -3,6 +3,7 @@ import React, { useEffect, useRef, useState } from 'react'
 import { useFormContext } from 'react-hook-form'
 
 import { TagTyper } from '../../../types/enums'
+import { RSSvartype } from '../../../types/rs-types/rs-svartype'
 import validerArbeidsgrad from '../../../utils/sporsmal/valider-arbeidsgrad'
 import { getLedetekst, tekst } from '../../../utils/tekster'
 import Vis from '../../vis'
@@ -11,7 +12,7 @@ import { SpmProps } from '../sporsmal-form/sporsmal-form'
 import { hentFeilmelding } from '../sporsmal-utils'
 import UndersporsmalListe from '../undersporsmal/undersporsmal-liste'
 
-const TallInput = ({ sporsmal }: SpmProps) => {
+const TallKomp = ({ sporsmal }: SpmProps) => {
     const feilmelding = hentFeilmelding(sporsmal)
     const [ lokal, setLokal ] = useState<string>(hentSvar(sporsmal))
     const { register, setValue, errors, getValues } = useFormContext()
@@ -25,17 +26,54 @@ const TallInput = ({ sporsmal }: SpmProps) => {
     }
 
     const valider = () => {
-        if (![ TagTyper.JOBBET_DU_GRADERT, TagTyper.JOBBET_DU_100_PROSENT ].includes(hovedSporsmal!.tag)) {
-            return true // hopp over validering dersom det ikke er spørsmål av denne typen
-        }
+        if (validerGrad) {
+            if (![ TagTyper.JOBBET_DU_GRADERT, TagTyper.JOBBET_DU_100_PROSENT ].includes(hovedSporsmal!.tag)) {
+                return true // hopp over validering dersom det ikke er spørsmål av denne typen
+            }
 
-        if (sporsmal.tag !== TagTyper.HVOR_MYE_TIMER_VERDI) {
+            if (sporsmal.tag !== TagTyper.HVOR_MYE_TIMER_VERDI) {
+                return true
+            }
+
+            const values = getValues()
+
+            return validerGrad(values)
+        }
+        else {
             return true
         }
+    }
 
-        const values = getValues()
+    const className = () => {
+        if (!sporsmal.parentKriterie) return ''
+        if (sporsmal.tag === TagTyper.KM_HJEM_JOBB ||
+            sporsmal.tag === TagTyper.OFFENTLIG_TRANSPORT_BELOP
+        ) {
+            return `kriterie--${sporsmal.parentKriterie.toLowerCase()} skjemaelement`
+        }
+        return 'skjemaelement'
+    }
 
-        return validerGrad ? validerGrad(values) : true
+    const inputSize = () => {
+        switch (sporsmal.svartype) {
+            case RSSvartype.PROSENT:
+            case RSSvartype.TALL:
+                return ' input--xs'
+            default:
+                return ' input--s'
+        }
+    }
+
+    const step = () => {
+        switch (sporsmal.svartype) {
+            case RSSvartype.PROSENT:
+            case RSSvartype.BELOP:
+                return 1
+            case RSSvartype.KILOMETER:
+                return 0.1
+            default:
+                return 0.05
+        }
     }
 
     useEffect(() => {
@@ -43,15 +81,16 @@ const TallInput = ({ sporsmal }: SpmProps) => {
         // eslint-disable-next-line
     }, [])
 
+
     return (
-        <>
+        <div className={className()}>
             <Vis hvis={sporsmal.sporsmalstekst}>
                 <Element tag="h3" className="skjema__sporsmal">{sporsmal.sporsmalstekst}</Element>
             </Vis>
 
             <div className="medEnhet">
                 <input type="number"
-                    className="skjemaelement__input input--xs"
+                    className={'skjemaelement__input' + inputSize()}
                     name={sporsmal.id}
                     id={sporsmal.id}
                     min={sporsmal.min!}
@@ -71,7 +110,7 @@ const TallInput = ({ sporsmal }: SpmProps) => {
                             )
                         }
                     })}
-                    step={sporsmal.tag === TagTyper.HVOR_MYE_PROSENT_VERDI ? 1 : 0.05}
+                    step={step()}
                     onChange={onChange}
                     autoComplete="off"
                 />
@@ -88,7 +127,7 @@ const TallInput = ({ sporsmal }: SpmProps) => {
                     <Vis hvis={errors[sporsmal.id]?.type === 'validate' && sporsmal.tag === TagTyper.HVOR_MYE_TIMER_VERDI}>
                         <Normaltekst tag="span">
                             <p>{getLedetekst(tekst('soknad.feilmelding.MINDRE_TIMER_ENN_FORVENTET.lokal'),
-                                { '%GRAD%': periode.grad })}</p>
+                                { '%GRAD%': periode?.grad })}</p>
                         </Normaltekst>
                     </Vis>
                 </Vis>
@@ -99,8 +138,8 @@ const TallInput = ({ sporsmal }: SpmProps) => {
                     <UndersporsmalListe oversporsmal={sporsmal} />
                 </Vis>
             </div>
-        </>
+        </div>
     )
 }
 
-export default TallInput
+export default TallKomp
