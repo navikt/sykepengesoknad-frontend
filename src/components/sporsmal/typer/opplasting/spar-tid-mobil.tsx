@@ -4,7 +4,7 @@ import { Normaltekst, Undertittel } from 'nav-frontend-typografi'
 import Veilederpanel from 'nav-frontend-veilederpanel'
 import React from 'react'
 
-import { tekst } from '../../utils/tekster'
+import { tekst } from '../../../../utils/tekster'
 
 const SparTidMobil = () => {
     return (

@@ -1,5 +1,6 @@
 const SoknadIntroTekster = {
 
+    'reisetilskudd.soknad-intro.personvern': '<p>Ifølge folketrygdloven kan du få reisetilskudd hvis du har rett til sykepenger. Reisetilskuddet kommer da i stedet for sykepengene.</p>',
     'sykepengesoknad.soknad-intro.personvern': '<p>Ifølge folketrygdloven kan du få sykepenger hvis du oppfyller kravene. For å utbetale riktig trenger vi å vite hva som skjedde i perioden du var sykmeldt. Derfor må du søke hver gang vi ber deg om det.</p>',
     'sykepengesoknad.soknad-intro.personvern-les-mer': 'Les mer om hvordan NAV behandler personopplysninger',
     'sykepengesoknad.soknad-intro.personvern-modal-header': 'Slik behandler NAV personopplysningene dine',

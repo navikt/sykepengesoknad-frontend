@@ -11,6 +11,7 @@ import { RouteParams } from '../../app'
 import Banner from '../../components/banner/banner'
 import Brodsmuler from '../../components/brodsmuler/brodsmuler'
 import { HotjarTrigger } from '../../components/hotjar-trigger'
+import OmReisetilskudd from '../../components/om-reisetilskudd/om-reisetilskudd'
 import Opplysninger from '../../components/opplysninger-fra-sykmelding/opplysninger'
 import SoknadIntro from '../../components/soknad-intro/soknad-intro'
 import SporsmalForm from '../../components/sporsmal/sporsmal-form/sporsmal-form'
@@ -91,6 +92,7 @@ const Fordeling = () => {
 
     const tittel = tekst(hentNokkel(valgtSoknad!, stegNo) as any)
     const erUtlandssoknad = valgtSoknad.soknadstype === RSSoknadstype.OPPHOLD_UTLAND
+    const erReisetilskuddsoknad = valgtSoknad.soknadstype === RSSoknadstype.REISETILSKUDD
 
     switch (valgtSoknad.status) {
         // Nye søknader
@@ -122,6 +124,10 @@ const Fordeling = () => {
 
                     <Vis hvis={!erUtlandssoknad}>
                         <Opplysninger ekspandert={true} />
+                    </Vis>
+
+                    <Vis hvis={stegNo === 1 && erReisetilskuddsoknad}>
+                        <OmReisetilskudd />
                     </Vis>
 
                     <Vis hvis={tittel !== undefined}>

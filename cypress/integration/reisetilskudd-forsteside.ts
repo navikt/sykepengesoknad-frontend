@@ -25,33 +25,31 @@ describe('Teste førsteside i reisetilskuddsøknaden', () => {
 
     })
 
-    describe('Vi stoler på deg', () => {
+    describe('Reisetilskudd førsteside', () => {
         it('URL er riktig', () => {
             cy.url().should('include', `/soknader/${nyttReisetilskudd.id}/1`)
         })
 
+        it('Skal ha egen folketrygloven tekst', () => {
+            cy.get('.nav-veilederpanel').contains('Ifølge folketrygdloven kan du få reisetilskudd hvis du har rett til sykepenger. Reisetilskuddet kommer da i stedet for sykepengene.')
+        })
+
         it('Laster inn hvem kan få reisetilskudd', () => {
-            cy.get('.hvem-kan-faa').should('be.visible')
-            cy.get('.hvem-kan-faa .ekspanderbartPanel__tittel')
+            cy.get('.om-reisetilskudd').should('be.visible')
+            cy.get('.om-reisetilskudd .ekspanderbartPanel__tittel')
                 .should('be.visible')
-                .and('have.text', 'Hvem kan få reisetilskudd?')
+                .and('have.text', 'Om reisetilskudd')
+                .click()
                 .click()
 
-            cy.get('li').contains('Du er yrkesaktiv.')
-            cy.get('li').contains('Du trenger midlertidig transport til og fra arbeidsstedet på grunn av helseplager.')
-            cy.get('li').contains('Du har i utgangspunktet rett til sykepenger. Reisetilskuddet kommer da i stedet for sykepengene.')
+            cy.get('.typo-element').contains('Hva dekker reisetilskuddet')
+            cy.get('.typo-normal').contains('Reisetilskuddet dekker nødvendige ekstra reiseutgifter til og fra jobben mens du er syk, altså reiseutgifter utover det du har til vanlig.')
 
-            cy.get('.typo-element').contains('Hvor mye kan du få?')
-            cy.get('.typo-normal').contains('Du kan maksimalt få det samme som du ville fått i sykepenger. Det vil si at det daglige reisetilskuddet ikke kan være høyere enn det du ellers ville fått i sykepenger den dagen. Dagsatsen er årslønnen din delt på 260. Årslønnen blir redusert til 6G (grunnbeløpet i folketrygden) hvis du tjener mer enn det.')
-
-            cy.get('.typo-element').contains('Husk å søke før fristen')
-            cy.get('.typo-normal').contains('Fristen for å søke om refusjon er 3 måneder etter at sykmeldingsperioden er over.')
+            cy.get('.typo-element').contains('De første 16 dagene')
+            cy.get('.typo-element').contains('Legg ved kvitteringer')
+            cy.get('.typo-normal').contains('Du må legge ved bilde av kvitteringene dine når du søker NAV om å dekke utgiftene. Fyller du ut fra telefonen, kan du ta bilde av kvitteringene og bruke dem direkte i søknaden.')
         })
 
-        it('Laster inn veilederpanel spar-tid', () => {
-            cy.get('.spar-tid').should('be.visible')
-            cy.get('.spar-tid .nav-veilederpanel__content h2').should('be.visible').and('have.text', 'Spar tid med mobilen')
-            cy.get('.spar-tid .nav-veilederpanel__content').contains('Fyller du ut fra telefonen, kan du ta bilde av kvitteringene og bruke dem direkte i søknaden.')
-        })
+
     })
 })
