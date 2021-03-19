@@ -44,6 +44,26 @@ const TallKomp = ({ sporsmal }: SpmProps) => {
         }
     }
 
+    const className = () => {
+        if (!sporsmal.parentKriterie) return ''
+        if (sporsmal.tag === TagTyper.KM_HJEM_JOBB ||
+            sporsmal.tag === TagTyper.OFFENTLIG_TRANSPORT_BELOP
+        ) {
+            return `kriterie--${sporsmal.parentKriterie.toLowerCase()} skjemaelement`
+        }
+        return 'skjemaelement'
+    }
+
+    const inputSize = () => {
+        switch (sporsmal.svartype) {
+            case RSSvartype.PROSENT:
+            case RSSvartype.TALL:
+                return ' input--xs'
+            default:
+                return ' input--s'
+        }
+    }
+
     const step = () => {
         switch (sporsmal.svartype) {
             case RSSvartype.PROSENT:
@@ -63,14 +83,14 @@ const TallKomp = ({ sporsmal }: SpmProps) => {
 
 
     return (
-        <>
+        <div className={className()}>
             <Vis hvis={sporsmal.sporsmalstekst}>
                 <Element tag="h3" className="skjema__sporsmal">{sporsmal.sporsmalstekst}</Element>
             </Vis>
 
             <div className="medEnhet">
                 <input type="number"
-                    className="skjemaelement__input input--xs"
+                    className={'skjemaelement__input' + inputSize()}
                     name={sporsmal.id}
                     id={sporsmal.id}
                     min={sporsmal.min!}
@@ -118,7 +138,7 @@ const TallKomp = ({ sporsmal }: SpmProps) => {
                     <UndersporsmalListe oversporsmal={sporsmal} />
                 </Vis>
             </div>
-        </>
+        </div>
     )
 }
 
