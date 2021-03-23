@@ -25,9 +25,6 @@ describe('Tester utfylling av kvittering', () => {
 
             cy.get('select[name=transportmiddel]').select('TAXI')
 
-            cy.get('.nav-datovelger__kalenderknapp').click()
-            cy.get('.DayPicker-Body').contains('13').click()
-
             cy.get('input[name=belop_input]').type('1234')
 
             cy.get('.filopplasteren input[type=file]').attachFile('kvittering.jpg')
@@ -52,9 +49,6 @@ describe('Tester utfylling av kvittering', () => {
         it('Fil list oppdateres med kvittering', () => {
             cy.get('.fil_liste')
 
-            cy.get('#dato_sortering').contains('Dato')
-            cy.get('#utgift_sortering').contains('Utgift')
-
             cy.get('.transport').contains('Taxi')
             cy.get('.belop').contains('1 234 kr')
 
@@ -63,11 +57,10 @@ describe('Tester utfylling av kvittering', () => {
         })
 
         it('Endring av kvittering',  () => {
-            cy.contains('lørdag 13.02.2021').click()
+            cy.contains('Taxi').click()
             cy.contains('Endre reiseutgift')
             cy.get('.alertstripe--info').contains('Du kan foreløpig ikke redigere utgifter som du har lagt til. Men du kan slette den som er feil, og legge inn på nytt.')
             cy.get('select[name=transportmiddel]').should('have.attr', 'disabled')
-            cy.get('.nav-datovelger__kalenderknapp').should('have.attr', 'disabled')
             cy.get('input[name=belop_input]').should('have.attr', 'disabled')
             cy.get('.filopplasteren input[type=file]').should('not.exist')
             cy.get('.knapperad').within(() => {
@@ -87,39 +80,9 @@ describe('Tester utfylling av kvittering', () => {
             cy.get('.fler-vedlegg').click()
             cy.get('.lagre-kvittering').contains('Bekreft').click()
 
-            cy.get('.skjemaelement__feilmelding').contains('Du må oppgi en gyldig dato')
             cy.get('.skjemaelement__feilmelding').contains('Du må velge transportmiddel')
             cy.get('.skjemaelement__feilmelding').contains('Du må skrive inn beløp')
             cy.get('.skjemaelement__feilmelding').contains('Du må laste opp kvittering')
-        })
-
-        describe('Dato feilmeldinger', () => {
-            it('Feil format', () => {
-                cy.get('input[name=dato_input]').type('40.01.1700')
-                cy.get('.lagre-kvittering').contains('Bekreft').click()
-                cy.get('.skjemaelement__feilmelding').contains('Datoen følger ikke formatet dd.mm.åååå')
-            })
-
-            // TODO: Skal dette begrenses
-            xit('Dato før fom', () => {
-                cy.get('input[name=dato_input]').clear().type('10.01.2021')
-                cy.get('.lagre-kvittering').contains('Bekreft').click()
-                cy.get('.skjemaelement__feilmelding').contains('Datoen kan ikke være før 31. januar 2021')
-            })
-
-            // TODO: Skal dette begrenses
-            xit('Dato etter tom', () => {
-                cy.get('input[name=dato_input]').clear().type('10.08.2022')
-                cy.get('.lagre-kvittering').contains('Bekreft').click()
-                cy.get('.skjemaelement__feilmelding').contains('Datoen kan ikke være etter 18. februar 2021')
-            })
-
-            it('Gyldig dato', () => {
-                cy.get('input[name=dato_input]').should('have.class', 'skjemaelement__input--harFeil')
-                cy.get('input[name=dato_input]').clear().type('13.02.2021')
-                cy.get('.lagre-kvittering').contains('Bekreft').click()
-                cy.get('input[name=dato_input]').should('not.have.class', 'skjemaelement__input--harFeil')
-            })
         })
 
         describe('Transportmiddel feilmeldinger', () => {
