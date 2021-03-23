@@ -7,6 +7,7 @@ import { Sporsmal } from '../../types/types'
 import BehDager from './typer/beh-dager'
 import CheckboxKomp from './typer/checkbox-komp'
 import CheckboxPanel from './typer/checkbox-panel'
+import DagerKomp from './typer/dager-komp'
 import DatoInput from './typer/dato-komp'
 import IkkeRelevant from './typer/ikke-relevant'
 import JaNeiInput from './typer/ja-nei-input'
@@ -36,6 +37,9 @@ const SporsmalSwitch = ({ sporsmal }: UndersporsmalProps) => {
 
         case RSSvartype.PERIODER:
             return <Perioder sporsmal={sporsmal} />
+
+        case RSSvartype.DATOER:
+            return <DagerKomp sporsmal={sporsmal} />
 
         case RSSvartype.JA_NEI:
             if (!sporsmal.erHovedsporsmal &&

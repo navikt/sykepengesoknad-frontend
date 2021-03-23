@@ -1,4 +1,5 @@
 import { SvarEnums } from '../../types/enums'
+import { RSSvar } from '../../types/rs-types/rs-svar'
 import { RSSvartype } from '../../types/rs-types/rs-svartype'
 import { Sporsmal } from '../../types/types'
 import { empty } from '../../utils/constants'
@@ -9,7 +10,7 @@ const hentVerdier = (sporsmal: Sporsmal, verdier: Record<string, any>) => {
         verdi = Object.entries(verdier)
             .filter(([ key ]) => key.startsWith(sporsmal.id))
             .map(([ key ]) => verdier[key])
-            .filter((verdi) => verdi !== empty)
+            .filter((verdi) => verdi !== empty && verdi !== false)
     }
     return verdi
 }
@@ -34,10 +35,14 @@ export const settSvar = (sporsmal: Sporsmal, verdier: Record<string, any>): void
         case RSSvartype.LAND:
             landSvar(sporsmal, verdi)
             break
+        case RSSvartype.DATOER:
+            datoerSvar(sporsmal, verdi)
+            break
         case RSSvartype.PERIODE:
         case RSSvartype.PERIODER:
             periodeSvar(sporsmal, verdi)
             break
+        //TODO: Kan fjernes siden koden kjøres lenger ned?
         case RSSvartype.BEHANDLINGSDAGER:   // Gammel tag, kan fjernes?
             sporsmal.undersporsmal.forEach(uspm => {
                 settSvar(uspm, verdier)
@@ -106,5 +111,20 @@ const periodeSvar = (sporsmal: Sporsmal, verdi: any) => {
                     return { verdi: JSON.stringify(periode) }
                 }),
         }
+    }
+}
+
+const datoerSvar = (sporsmal: Sporsmal, verdi: any) => {
+    const svar: RSSvar[] = []
+    if (verdi !== undefined) {
+        verdi.toString().split(',').map( (dag: string) =>
+            svar.push({
+                verdi: dag
+            })
+        )
+    }
+    sporsmal.svarliste = {
+        sporsmalId: sporsmal.id,
+        svar: svar
     }
 }
