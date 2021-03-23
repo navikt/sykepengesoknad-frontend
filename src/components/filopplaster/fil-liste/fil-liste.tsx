@@ -1,6 +1,7 @@
 import 'nav-frontend-tabell-style'
 import './fil-liste.less'
 
+import { Knapp } from 'nav-frontend-knapper'
 import { Normaltekst, Undertittel } from 'nav-frontend-typografi'
 import React from 'react'
 import useForceUpdate from 'use-force-update'
@@ -15,7 +16,6 @@ import { getLedetekst, tekst } from '../../../utils/tekster'
 import { formatterTall } from '../../../utils/utils'
 import { hentSvar } from '../../sporsmal/hent-svar'
 import Vis from '../../vis'
-import SlettFilIkon from './slettfil-ikon.svg'
 
 interface Props {
     sporsmal: Sporsmal,
@@ -96,11 +96,9 @@ const FilListe = ({ sporsmal, fjernKnapp }: Props) => {
                                 {formatterTall(kvittering.belop! / 100)} kr
                             </td>
                             <td>
-                                <button className="lenkeknapp" type="button"
-                                    onClick={() => slettKvittering(kvittering)} tabIndex={0}
-                                >
-                                    <img src={SlettFilIkon} alt="Slett" />
-                                </button>
+                                <Knapp mini type="fare" htmlType="button" className="lagre-kvittering" onClick={() => slettKvittering(kvittering)}>
+                                    {tekst('opplasting_modal.slett')}
+                                </Knapp>
                             </td>
                         </tr>
                     ))}
