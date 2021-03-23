@@ -96,7 +96,7 @@ const FilListe = ({ sporsmal, fjernKnapp }: Props) => {
                                 {formatterTall(kvittering.belop! / 100)} kr
                             </td>
                             <td>
-                                <Knapp mini type="fare" htmlType="button" className="lagre-kvittering" onClick={() => slettKvittering(kvittering)}>
+                                <Knapp mini type="fare" htmlType="button" onClick={() => slettKvittering(kvittering)}>
                                     {tekst('opplasting_modal.slett')}
                                 </Knapp>
                             </td>
