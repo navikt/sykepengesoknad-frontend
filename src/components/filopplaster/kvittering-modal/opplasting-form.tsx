@@ -31,7 +31,6 @@ const OpplastingForm = ({ sporsmal }: SpmProps) => {
         valgtSoknad, setValgtSoknad, valgtKvittering, setOpenModal, valgtFil
     } = useAppStore()
     const [ laster, setLaster ] = useState<boolean>(false)
-    const [ typeUtgift, setTypeUtgift ] = useState<string>('')
     const [ kvitteringHeader, setKvitteringHeader ] = useState<string>('')
     const [ formErDisabled, setFormErDisabled ] = useState<boolean>(false)
     const [ fetchFeilmelding, setFetchFeilmelding ] = useState<string | null>(null)
@@ -45,12 +44,10 @@ const OpplastingForm = ({ sporsmal }: SpmProps) => {
 
     useEffect(() => {
         if (valgtKvittering) {
-            setTypeUtgift(valgtKvittering?.typeUtgift)
             setKvitteringHeader(tekst('opplasting_modal.endre-utlegg.tittel'))
             setFormErDisabled(true)
         }
         else {
-            setTypeUtgift('')
             setKvitteringHeader(tekst('opplasting_modal.nytt-utlegg.tittel'))
             setFormErDisabled(false)
         }
@@ -169,11 +166,6 @@ const OpplastingForm = ({ sporsmal }: SpmProps) => {
         }
     }
 
-    const typeUtgiftOnChange = (e: any) => {
-        setTypeUtgift(e.target.value)
-        methods.trigger('transportmiddel')
-    }
-
     if (!valgtSoknad) return null
 
     return (
@@ -203,7 +195,6 @@ const OpplastingForm = ({ sporsmal }: SpmProps) => {
                             }
                             id="transportmiddel"
                             name="transportmiddel"
-                            onChange={typeUtgiftOnChange}
                             defaultValue={valgtKvittering?.typeUtgift}
                         >
                             <option value="">Velg</option>
@@ -263,12 +254,6 @@ const OpplastingForm = ({ sporsmal }: SpmProps) => {
                         </Normaltekst>
                     </div>
                 </div>
-
-                <Vis hvis={typeUtgift === 'OFFENTLIG_TRANSPORT' && !formErDisabled}>
-                    <Alertstripe type="info" form="inline">
-                        <Normaltekst>{tekst('opplasting_modal.type-utgift.hjelpetekst')}</Normaltekst>
-                    </Alertstripe>
-                </Vis>
 
                 <DragAndDrop />
 
