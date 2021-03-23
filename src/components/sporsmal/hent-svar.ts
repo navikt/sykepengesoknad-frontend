@@ -9,6 +9,7 @@ export const hentSvar = (sporsmal: Sporsmal): any => {
     const svarliste = sporsmal.svarliste
     const svar = svarliste.svar[0]
 
+    //TODO: Skrive om til switch case?
     if (sporsmal.svartype === RSSvartype.INFO_BEHANDLINGSDAGER) {
         const ukeliste: RSSvarliste[] = []
         sporsmal.undersporsmal.forEach(uspm => {
@@ -28,8 +29,13 @@ export const hentSvar = (sporsmal: Sporsmal): any => {
         return svarliste.svar.map(s => svarverdiToKvittering(s.verdi))     // svar.verdi = "kvittering"
     }
 
+    if (sporsmal.svartype === RSSvartype.DATOER) {
+        return svarliste.svar
+    }
+
     if (svar === undefined) {
-        return sporsmal.svartype.toString().startsWith('PERIODE') ? [] : ''
+        return sporsmal.svartype.toString().startsWith('PERIODE') ||
+        sporsmal.svartype.toString().startsWith('DATOER') ? [] : ''
     }
 
     return svar.verdi

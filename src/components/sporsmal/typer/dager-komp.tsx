@@ -26,7 +26,7 @@ interface KalenderDag {
 
 const DagerKomp = ({ sporsmal }: SpmProps) => {
     const [ lokal, setLokal ] = useState<string[]>([])
-    const { register, errors } = useFormContext()
+    const { register, errors, setValue } = useFormContext()
 
     const dagerSidenMandag = (spm: Sporsmal) => {
         return ((dayjs(spm.min!).day() - 1)) % 7
@@ -96,8 +96,8 @@ const DagerKomp = ({ sporsmal }: SpmProps) => {
     })
 
     useEffect(() => {
-        const lagret: RSSvar[] = hentSvar(sporsmal)
-        lagret.forEach((svar, idx) => {
+        const dager: RSSvar[] = hentSvar(sporsmal)
+        dager.forEach((svar, idx) => {
             if (svar?.verdi !== undefined && svar?.verdi !== '') {
                 lokal[idx] = svar.verdi
                 const radio = document.querySelector('.checkboks[value="' + lokal[idx] + '"]')
@@ -108,7 +108,7 @@ const DagerKomp = ({ sporsmal }: SpmProps) => {
         // eslint-disable-next-line
     }, [ sporsmal ])
 
-    const radioKlikk = (value: string) => {
+    const checkClick = (value: string) => {
         const index = lokal.indexOf(value)
         if (index > -1) {
             lokal.splice(index, 1)
@@ -116,6 +116,7 @@ const DagerKomp = ({ sporsmal }: SpmProps) => {
             lokal.push(value)
         }
         setLokal(Array.from(new Set(lokal)))
+        setValue(sporsmal.id, lokal)
     }
 
     return (
@@ -156,7 +157,7 @@ const DagerKomp = ({ sporsmal }: SpmProps) => {
                                                         name={`${sporsmal.id}_${ukeidx}_${idx}`}
                                                         value={dag.dayjs.format('YYYY-MM-DD')}
                                                         ref={register}
-                                                        onChange={() => radioKlikk(dag.dayjs.format(('YYYY-MM-DD')))}
+                                                        onChange={() => checkClick(dag.dayjs.format(('YYYY-MM-DD')))}
                                                         className="checkboks"
                                                     />
                                                     <label htmlFor={`${sporsmal.id}_${ukeidx}_${idx}`}>
