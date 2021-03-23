@@ -34,18 +34,6 @@ describe('Tester utfylling av kvittering', () => {
                 .click()
         })
 
-        it('Ekstra informasjon for offentlig transport utgift', () => {
-            cy.get('.fler-vedlegg').click()
-
-            cy.get('select[name=transportmiddel]').select('OFFENTLIG_TRANSPORT')
-            cy.get('.alertstripe--inline').contains('Ukes- eller månedskort legger du inn som utgift med datoen du betalte.')
-
-            cy.get('select[name=transportmiddel]').select('TAXI')
-            cy.get('.alertstripe--inline').should('not.exist')
-
-            cy.get('.lukknapp').click()
-        })
-
         it('Fil list oppdateres med kvittering', () => {
             cy.get('.fil_liste')
 
@@ -88,12 +76,14 @@ describe('Tester utfylling av kvittering', () => {
         describe('Transportmiddel feilmeldinger', () => {
             it('Ugyldig valg', () => {
                 cy.get('select[name=transportmiddel]').select('')
+                cy.get('.lagre-kvittering').contains('Bekreft').click()
                 cy.get('.skjemaelement__feilmelding').contains('Du må velge transportmiddel')
             })
 
             it('Velger egen bil', () => {
                 cy.get('select[name=transportmiddel]').should('have.class', 'skjemaelement__input--harFeil')
                 cy.get('select[name=transportmiddel]').select('TAXI')
+                cy.get('.lagre-kvittering').contains('Bekreft').click()
                 cy.get('select[name=transportmiddel]').should('not.have.class', 'skjemaelement__input--harFeil')
             })
         })
