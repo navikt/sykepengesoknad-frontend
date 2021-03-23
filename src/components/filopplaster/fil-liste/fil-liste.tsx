@@ -24,26 +24,8 @@ interface Props {
 
 const FilListe = ({ sporsmal, fjernKnapp }: Props) => {
     const { valgtSoknad, setValgtSoknad, setValgtKvittering, setOpenModal } = useAppStore()
-    const [ sortering, setSortering ] = useState<string>('descending_dato_sortering')
-    const [ tabellDato, setTabellDato ] = useState<string>()
     const forceUpdate = useForceUpdate()
     const kvitteringer: Kvittering[] = hentSvar(sporsmal)
-
-    useEffect(() => {
-        resizeListener()
-        window.addEventListener('resize', resizeListener)
-        return () => {
-            window.removeEventListener('resize', resizeListener)
-        }
-    }, [ setTabellDato ])
-
-    const resizeListener = () => {
-        if (window.innerWidth > 768) {
-            setTabellDato('dddd DD.MM.YYYY')
-        } else {
-            setTabellDato('DD.MM.YYYY')
-        }
-    }
 
     const slettKvittering = async(kvitto: Kvittering) => {
         try {
@@ -69,44 +51,6 @@ const FilListe = ({ sporsmal, fjernKnapp }: Props) => {
         setValgtKvittering(kvittering)
     }
 
-    const sorteringOnClick = (e: any) => {
-        const parent = e.target.parentElement
-        const id = parent.id
-        const sort = parent.getAttribute('aria-sort')
-
-        let nySort: string
-
-        if (sort === 'none' || sort === 'ascending') {
-            nySort = 'descending'
-        } else {
-            nySort = 'ascending'
-        }
-
-        parent.setAttribute('aria-sort', nySort)
-        parent.setAttribute('class', (nySort === 'ascending')
-            ? 'tabell__th--sortert-asc'
-            : 'tabell__th--sortert-desc'
-        )
-
-        setSortering(`${nySort}_${id}`)
-    }
-
-    const sorterteKvitteringer = () => {
-        if (sortering.includes('dato_sortering')) {
-            if (sortering.includes('descending')) {
-                kvitteringer.sort((a, b) => (a.datoForUtgift! > b.datoForUtgift!) ? -1 : 1)
-            } else {
-                kvitteringer.sort((a, b) => (a.datoForUtgift! > b.datoForUtgift!) ? 1 : -1)
-            }
-        } else if (sortering.includes('utgift_sortering')) {
-            if (sortering.includes('descending')) {
-                kvitteringer.sort((a, b) => (a.typeUtgift! > b.typeUtgift!) ? -1 : 1)
-            } else {
-                kvitteringer.sort((a, b) => (a.typeUtgift! > b.typeUtgift!) ? 1 : -1)
-            }
-        }
-        return kvitteringer
-    }
 
     const totaltBeløp = (): number => (kvitteringer
         ? kvitteringer
@@ -121,17 +65,10 @@ const FilListe = ({ sporsmal, fjernKnapp }: Props) => {
                 <Vis hvis={fjernKnapp}>
                     <thead>
                         <tr>
-                            <th role="columnheader" aria-sort="none" id="dato_sortering">
-                                <button onClick={sorteringOnClick} type="button">
-                                    Dato
-                                </button>
+                            <th role="columnheader" aria-sort="none">
+                                Utgift
                             </th>
-                            <th role="columnheader" aria-sort="none" id="utgift_sortering">
-                                <button onClick={sorteringOnClick} type="button">
-                                    Utgift
-                                </button>
-                            </th>
-                            <th role="columnheader">
+                            <th role="columnheader" className="belop">
                                 Beløp
                             </th>
                             <th />
@@ -139,18 +76,12 @@ const FilListe = ({ sporsmal, fjernKnapp }: Props) => {
                     </thead>
                 </Vis>
                 <tbody>
-                    {sorterteKvitteringer().map((kvittering: Kvittering, idx) => (
+                    {kvitteringer.reverse().map((kvittering: Kvittering, idx) => (
                         <tr key={idx}>
-                            <td className="dato">
-                                <button type="button" tabIndex={0} className="lenkeknapp" onClick={() => visKvittering(kvittering)}>
-                                    {kvittering.datoForUtgift
-                                        ? dayjs(kvittering.datoForUtgift).format(tabellDato)
-                                        : ''
-                                    }
-                                </button>
-                            </td>
                             <td className="transport">
-                                {UtgiftTyper[kvittering.typeUtgift]}
+                                <button type="button" tabIndex={0} className="lenkeknapp" onClick={() => visKvittering(kvittering)}>
+                                    {UtgiftTyper[kvittering.typeUtgift]}
+                                </button>
                             </td>
                             <td className="belop">
                                 {formatterTall(kvittering.belop! / 100)} kr
@@ -167,7 +98,7 @@ const FilListe = ({ sporsmal, fjernKnapp }: Props) => {
                 </tbody>
                 <tbody className="sumlinje">
                     <tr>
-                        <td colSpan={2}>
+                        <td>
                             <Undertittel tag="span">
                                 {getLedetekst(tekst('fil_liste.utlegg.sum'), {
                                     '%ANTALL_BILAG%': kvitteringer.length

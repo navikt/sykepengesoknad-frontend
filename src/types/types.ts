@@ -271,7 +271,6 @@ export interface Ettersend {
 
 export class Kvittering {
     blobId: string;
-    datoForUtgift: string;
     belop: number; // Beløp i heltall øre
     typeUtgift: keyof typeof UtgiftTyper;
     opprettet?: string;
@@ -279,7 +278,6 @@ export class Kvittering {
     constructor(verdi: string) {
         const kvitt = JSON.parse(verdi)
         this.blobId = kvitt.blobId
-        this.datoForUtgift = kvitt.datoForUtgift
         this.belop = kvitt.belop
         this.typeUtgift = kvitt.typeUtgift
         this.opprettet = kvitt.opprettet

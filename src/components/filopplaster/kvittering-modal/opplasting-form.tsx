@@ -35,7 +35,6 @@ const OpplastingForm = ({ sporsmal }: SpmProps) => {
         valgtSoknad, setValgtSoknad, valgtKvittering, setOpenModal, valgtFil
     } = useAppStore()
     const [ laster, setLaster ] = useState<boolean>(false)
-    const [ dato, setDato ] = useState<string>('')
     const [ typeUtgift, setTypeUtgift ] = useState<string>('')
     const [ kvitteringHeader, setKvitteringHeader ] = useState<string>('')
     const [ formErDisabled, setFormErDisabled ] = useState<boolean>(false)
@@ -50,13 +49,11 @@ const OpplastingForm = ({ sporsmal }: SpmProps) => {
 
     useEffect(() => {
         if (valgtKvittering) {
-            setDato(dayjs(valgtKvittering?.datoForUtgift).format('YYYY-MM-DD'))
             setTypeUtgift(valgtKvittering?.typeUtgift)
             setKvitteringHeader(tekst('opplasting_modal.endre-utlegg.tittel'))
             setFormErDisabled(true)
         }
         else {
-            setDato('')
             setTypeUtgift('')
             setKvitteringHeader(tekst('opplasting_modal.nytt-utlegg.tittel'))
             setFormErDisabled(false)
@@ -118,7 +115,6 @@ const OpplastingForm = ({ sporsmal }: SpmProps) => {
     const lagreSvarISyfosoknad = async(opplastingResponse: OpplastetKvittering) => {
         const kvittering: Kvittering = {
             blobId: opplastingResponse.id,
-            datoForUtgift: dato,
             belop: methods.getValues('belop_input') * 100,
             typeUtgift: methods.getValues('transportmiddel'),
             opprettet: dayjs().toISOString()
@@ -218,70 +214,6 @@ const OpplastingForm = ({ sporsmal }: SpmProps) => {
                             className="skjemaelement__feilmelding">
                             <Vis hvis={methods.errors['transportmiddel']}>
                                 <p>{tekst('opplasting_modal.transportmiddel.feilmelding')}</p>
-                            </Vis>
-                        </Normaltekst>
-                    </div>
-
-                    <div className="skjemaelement">
-                        <label htmlFor="dato_input" className="skjemaelement__label">
-                            <Element tag="strong">{tekst('opplasting_modal.dato')}</Element>
-                        </label>
-                        <Controller
-                            control={methods.control}
-                            name="dato_input"
-                            defaultValue={valgtKvittering?.datoForUtgift || ''}
-                            rules={{
-                                validate: () => {
-                                    const div: HTMLDivElement | null = document.querySelector('.nav-datovelger__input')
-                                    const rec: Record<string, string> = {}
-                                    rec[sporsmal.id] = dato
-                                    const validert = validerDato(
-                                        sporsmal,
-                                        rec
-                                    )
-                                    if (validert !== true) {
-                                        div?.classList.add('skjemaelement__input--harFeil')
-                                        return validert
-                                    }
-
-                                    div?.classList.remove('skjemaelement__input--harFeil')
-                                    return validert
-                                }
-                            }}
-                            render={({ name }) => (
-                                <Datepicker
-                                    disabled={formErDisabled}
-                                    locale={'nb'}
-                                    inputId="dato_input"
-                                    onChange={(value) => {
-                                        methods.setValue(name, value)
-                                        setDato(value)
-                                    }}
-                                    value={dato}
-                                    inputProps={{
-                                        name: name,
-                                    }}
-                                    calendarSettings={{
-                                        showWeekNumbers: true,
-                                        position: skalBrukeFullskjermKalender()
-                                    }}
-                                    showYearSelector={false}
-                                    limitations={{
-                                        weekendsNotSelectable: false,
-                                        minDate: sporsmal.min ? fraBackendTilDate(sporsmal.min).toISOString() : undefined,
-                                        maxDate: sporsmal.max ? fraBackendTilDate(sporsmal.max).toISOString() : undefined
-                                    }}
-                                    dayPickerProps={{
-                                        initialMonth: valgtSoknad?.fom
-                                    }}
-                                />
-                            )}
-                        />
-
-                        <Normaltekst tag="div" role="alert" aria-live="assertive"
-                            className="skjemaelement__feilmelding">
-                            <Vis hvis={methods.errors['dato_input']}>
-                                <p>{methods.errors['dato_input']?.message}</p>
                             </Vis>
                         </Normaltekst>
                     </div>
