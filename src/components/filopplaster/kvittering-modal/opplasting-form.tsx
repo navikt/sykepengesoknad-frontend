@@ -1,12 +1,11 @@
 import dayjs from 'dayjs'
-import { Datepicker } from 'nav-datovelger'
 import Alertstripe from 'nav-frontend-alertstriper'
 import AlertStripe from 'nav-frontend-alertstriper'
 import { Knapp } from 'nav-frontend-knapper'
 import NavFrontendSpinner from 'nav-frontend-spinner'
 import { Element, Normaltekst, Systemtittel } from 'nav-frontend-typografi'
 import React, { useEffect, useState } from 'react'
-import { Controller, FormProvider, useForm } from 'react-hook-form'
+import { FormProvider, useForm } from 'react-hook-form'
 import { useParams } from 'react-router-dom'
 
 import { RouteParams } from '../../../app'
@@ -15,12 +14,9 @@ import { useAppStore } from '../../../data/stores/app-store'
 import { RSOppdaterSporsmalResponse } from '../../../types/rs-types/rest-response/rs-oppdatersporsmalresponse'
 import { RSSvar } from '../../../types/rs-types/rs-svar'
 import { Kvittering, Sporsmal, svarverdiToKvittering, UtgiftTyper } from '../../../types/types'
-import { skalBrukeFullskjermKalender } from '../../../utils/browser-utils'
-import { fraBackendTilDate } from '../../../utils/dato-utils'
 import env from '../../../utils/environment'
 import fetcher from '../../../utils/fetcher'
 import { logger } from '../../../utils/logger'
-import validerDato from '../../../utils/sporsmal/valider-dato'
 import { tekst } from '../../../utils/tekster'
 import { SpmProps } from '../../sporsmal/sporsmal-form/sporsmal-form'
 import Vis from '../../vis'
@@ -147,15 +143,25 @@ const OpplastingForm = ({ sporsmal }: SpmProps) => {
             const idx = sporsmal!.svarliste.svar.findIndex(svar => svarverdiToKvittering(svar?.verdi).blobId === valgtKvittering?.blobId)
             const svar = sporsmal?.svarliste.svar.find(svar => svarverdiToKvittering(svar?.verdi).blobId === valgtKvittering?.blobId)
 
-            await fetcher(`${env.flexGatewayRoot}/syfosoknad/api/soknader/${valgtSoknad?.id}/sporsmal/${sporsmal?.id}/svar/${svar?.id}`, {
+            const res = await fetcher(`${env.flexGatewayRoot}/syfosoknad/api/soknader/${valgtSoknad?.id}/sporsmal/${sporsmal?.id}/svar/${svar?.id}`, {
                 method: 'DELETE',
                 credentials: 'include'
             })
 
-            sporsmal.svarliste.svar.splice(idx, 1)
-            valgtSoknad!.sporsmal[valgtSoknad!.sporsmal.findIndex(spm => spm.id === sporsmal.id)] = sporsmal
-            setValgtSoknad(valgtSoknad)
-            setOpenModal(false)
+            if (res.ok) {
+                sporsmal.svarliste.svar.splice(idx, 1)
+                valgtSoknad!.sporsmal[valgtSoknad!.sporsmal.findIndex(spm => spm.id === sporsmal.id)] = sporsmal
+                setValgtSoknad(valgtSoknad)
+                setOpenModal(false)
+            }
+            else if (redirectTilLoginHvis401(res)) {
+                return null
+            }
+            else {
+                logger.warn('Feil under sletting av kvittering i syfosoknad')
+                setFetchFeilmelding('Det skjedde en feil i baksystemene, prøv igjen senere')
+                return null
+            }
         } catch (error) {
             logger.error('Feil under sletting av kvittering', error)
         } finally {

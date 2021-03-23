@@ -1,11 +1,11 @@
 import 'nav-frontend-tabell-style'
 import './fil-liste.less'
 
-import dayjs from 'dayjs'
 import { Normaltekst, Undertittel } from 'nav-frontend-typografi'
-import React, { useEffect, useState } from 'react'
+import React from 'react'
 import useForceUpdate from 'use-force-update'
 
+import { redirectTilLoginHvis401 } from '../../../data/rest/utils'
 import { useAppStore } from '../../../data/stores/app-store'
 import { Kvittering, Sporsmal, svarverdiToKvittering, UtgiftTyper } from '../../../types/types'
 import env from '../../../utils/environment'
@@ -32,15 +32,24 @@ const FilListe = ({ sporsmal, fjernKnapp }: Props) => {
             const idx = sporsmal!.svarliste.svar.findIndex(svar => svarverdiToKvittering(svar?.verdi).blobId === kvitto.blobId)
             const svar = sporsmal?.svarliste.svar.find(svar => svarverdiToKvittering(svar?.verdi).blobId === kvitto.blobId)
 
-            await fetcher(`${env.flexGatewayRoot}/syfosoknad/api/soknader/${valgtSoknad?.id}/sporsmal/${sporsmal?.id}/svar/${svar?.id}`, {
+            const res = await fetcher(`${env.flexGatewayRoot}/syfosoknad/api/soknader/${valgtSoknad?.id}/sporsmal/${sporsmal?.id}/svar/${svar?.id}`, {
                 method: 'DELETE',
                 credentials: 'include'
             })
 
-            sporsmal.svarliste.svar.splice(idx, 1)
-            valgtSoknad!.sporsmal[valgtSoknad!.sporsmal.findIndex(spm => spm.id === sporsmal.id)] = sporsmal
-            setValgtSoknad(valgtSoknad)
-            forceUpdate()
+            if (res.ok) {
+                sporsmal.svarliste.svar.splice(idx, 1)
+                valgtSoknad!.sporsmal[valgtSoknad!.sporsmal.findIndex(spm => spm.id === sporsmal.id)] = sporsmal
+                setValgtSoknad(valgtSoknad)
+                forceUpdate()
+            }
+            else if (redirectTilLoginHvis401(res)) {
+                return null
+            }
+            else {
+                logger.warn('Feil under sletting av kvittering i syfosoknad')
+                return null
+            }
         } catch (error) {
             logger.error('Feil under sletting av kvittering', error)
         }
