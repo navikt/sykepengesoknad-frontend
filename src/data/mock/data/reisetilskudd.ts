@@ -205,7 +205,7 @@ export const nyttReisetilskudd: RSSoknad = {
             'id': '361',
             'tag': 'VAER_KLAR_OVER_AT',
             'sporsmalstekst': 'Viktig å være klar over:',
-            'undertekst': '<ul><li>Retten til reisetilskudd gjelder bare hvis du trenger midlertidig transport til og fra arbeidsstedet på grunn av helseplager.</li><li>Du kan få reisetilskudd hvis du i utgangspunktet har rett til sykepenger.</li><li>NAV kan innhente flere opplysninger som er nødvendige for å behandle søknaden.</li><li>NAV kan holde igjen eller kreve tilbake penger hvis du gir uriktige eller ufullstendige opplysninger.</li><li>Det å gi feil opplysninger kan være straffbart.</li><li>Fristen for å søke sykepenger er som hovedregel 3 måneder.</li></ul><p>Du kan lese mer om rettigheter og plikter på <a href="https://www.nav.no/sykepenger" target="_blank">nav.no/sykepenger</a>.</p>',
+            'undertekst': '<ul><li>Retten til reisetilskudd gjelder bare hvis du trenger midlertidig transport til og fra arbeidsstedet på grunn av helseplager.</li><li>Du kan få reisetilskudd hvis du i utgangspunktet har rett til sykepenger.</li><li>NAV kan innhente flere opplysninger som er nødvendige for å behandle søknaden.</li><li>NAV kan holde igjen eller kreve tilbake penger hvis du gir uriktige eller ufullstendige opplysninger.</li><li>Det å gi feil opplysninger kan være straffbart.</li><li>Fristen for å søke reisetilskudd er som hovedregel 3 måneder.</li></ul><p>Du kan lese mer om rettigheter og plikter på <a href="https://www.nav.no/sykepenger" target="_blank">nav.no/sykepenger</a>.</p>',
             'svartype': 'IKKE_RELEVANT',
             'min': null,
             'max': null,
