@@ -66,7 +66,7 @@ describe('Teste førsteside i reisetilskuddsøknaden', () => {
             cy.url().should('include', `${nyttReisetilskudd.id}/3`)
             cy.contains('Tilbake').click()
             cy.url().should('include', `${nyttReisetilskudd.id}/2`)
-            cy.get('#5fb4961f-90d5-4893-9821-24b3a68cf3e1').should('have.value', '1000')
+            cy.get('#5fb4961f-90d5-4893-9821-24b3a68cf3e1').should('have.value', '100000')
 
             cy.contains('Gå videre').click()
         })
