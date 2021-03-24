@@ -14,7 +14,7 @@ const OpplastingSum = ({ sporsmal }: OppsummeringProps) => {
     useEffect(() => {
         setAntall(sporsmal.svarliste.svar.length)
         const kr = sporsmal.svarliste.svar.reduce((a, b) => a + Number(b.verdi), 0)
-        setSum(kr)
+        setSum(kr / 100)
 
         // eslint-disable-next-line
     }, [])
