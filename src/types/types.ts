@@ -225,7 +225,21 @@ export class Sporsmal {
         this.max = spm.max
         this.pavirkerAndreSporsmal = spm.pavirkerAndreSporsmal
         this.kriterieForVisningAvUndersporsmal = spm.kriterieForVisningAvUndersporsmal as any
-        this.svarliste = { sporsmalId: spm.id, svar: spm.svar }
+        this.svarliste = {
+            sporsmalId: spm.id, svar: spm.svar.map((svar) => {
+                const hentVerdi = () => {
+                    if (spm.svartype == RSSvartype.BELOP) {
+                        return (Number(svar.verdi) / 100).toString()
+                    }
+                    return svar.verdi
+                }
+                return {
+                    id: svar.id,
+                    verdi: hentVerdi(),
+                    avgittAv: svar.avgittAv,
+                }
+            })
+        }
         this.undersporsmal = rsToSporsmal(spm.undersporsmal, spm.kriterieForVisningAvUndersporsmal, false)
         this.parentKriterie = kriterie
         this.erHovedsporsmal = erHovedsporsmal

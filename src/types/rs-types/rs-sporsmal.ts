@@ -1,6 +1,6 @@
 import { Sporsmal } from '../types'
 import { RSSvar } from './rs-svar'
-import { RSSvartypeType } from './rs-svartype'
+import { RSSvartype, RSSvartypeType } from './rs-svartype'
 import { RSVisningskriterie, RSVisningskriterieType } from './rs-visningskriterie'
 
 export interface RSSporsmal {
@@ -32,7 +32,19 @@ const rsSporsmalMapping = (sporsmal: Sporsmal): RSSporsmal => {
     rsSporsmal.max = sporsmal.max
     rsSporsmal.pavirkerAndreSporsmal = sporsmal.pavirkerAndreSporsmal
     rsSporsmal.kriterieForVisningAvUndersporsmal = rsVisningskriterie(sporsmal.kriterieForVisningAvUndersporsmal) as any
-    rsSporsmal.svar = sporsmal.svarliste.svar
+    rsSporsmal.svar = sporsmal.svarliste.svar.map((svar: RSSvar) => {
+        const hentVerdi = () => {
+            if (sporsmal.svartype == RSSvartype.BELOP) {
+                return (Number(svar.verdi) * 100).toString()
+            }
+            return svar.verdi
+        }
+        return {
+            id: svar.id,
+            verdi: hentVerdi(),
+            avgittAv: svar.avgittAv,
+        }
+    })
     if (sporsmal.undersporsmal) {
         rsSporsmal.undersporsmal = sporsmal.undersporsmal.map((uspm: Sporsmal) => {
             return rsSporsmalMapping(uspm)

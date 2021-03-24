@@ -38,13 +38,6 @@ export const hentSvar = (sporsmal: Sporsmal): any => {
         sporsmal.svartype.toString().startsWith('DATOER') ? [] : ''
     }
 
-    if (sporsmal.svartype === RSSvartype.BELOP) {
-        if (svar.verdi == '') {
-            return svar.verdi
-        }
-        return (parseInt(svar.verdi) / 100).toString()
-    }
-
     return svar.verdi
 }
 
