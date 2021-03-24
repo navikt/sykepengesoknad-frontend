@@ -21,7 +21,11 @@ const TallKomp = ({ sporsmal }: SpmProps) => {
 
     const onChange = (e: any) => {
         const value = e.target.value
-        setValue(sporsmal.id, value)
+        if (sporsmal.svartype == RSSvartype.BELOP) {
+            setValue(sporsmal.id, value / 100)
+        } else {
+            setValue(sporsmal.id, value)
+        }
         setLokal(value)
     }
 
@@ -38,8 +42,7 @@ const TallKomp = ({ sporsmal }: SpmProps) => {
             const values = getValues()
 
             return validerGrad(values)
-        }
-        else {
+        } else {
             return true
         }
     }
@@ -93,6 +96,7 @@ const TallKomp = ({ sporsmal }: SpmProps) => {
                     className={'skjemaelement__input' + inputSize()}
                     name={sporsmal.id}
                     id={sporsmal.id}
+                    value={lokal}
                     min={sporsmal.min!}
                     max={sporsmal.max!}
                     ref={register({
@@ -124,7 +128,8 @@ const TallKomp = ({ sporsmal }: SpmProps) => {
                             <p>{feilmelding.lokal}</p>
                         </Normaltekst>
                     </Vis>
-                    <Vis hvis={errors[sporsmal.id]?.type === 'validate' && sporsmal.tag === TagTyper.HVOR_MYE_TIMER_VERDI}>
+                    <Vis
+                        hvis={errors[sporsmal.id]?.type === 'validate' && sporsmal.tag === TagTyper.HVOR_MYE_TIMER_VERDI}>
                         <Normaltekst tag="span">
                             <p>{getLedetekst(tekst('soknad.feilmelding.MINDRE_TIMER_ENN_FORVENTET.lokal'),
                                 { '%GRAD%': periode?.grad })}</p>
