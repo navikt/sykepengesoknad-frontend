@@ -85,6 +85,10 @@ const svarFormat = (sporsmal: RSSporsmal) => {
                 expect(sporsmal.svar[0].verdi).to.match(RegExp('(\\d{4}-\\d{2}-\\d{2})'),
                     `Svar format ${sporsmal.svartype}`)
                 break
+            case RSSvartype.DATOER:
+                expect(sporsmal.svar[0].verdi).to.match(RegExp('(\\d{4}-\\d{2}-\\d{2})'),
+                    `Svar format ${sporsmal.svartype}`)
+                break
             case RSSvartype.PERIODER:
                 expect(sporsmal.svar[0].verdi).to.match(RegExp('{"fom":"\\d{4}-\\d{2}-\\d{2}","tom":"\\d{4}-\\d{2}-\\d{2}"}'),
                     `Svar format ${sporsmal.svartype}`)

@@ -54,6 +54,13 @@ describe('Teste førsteside i reisetilskuddsøknaden', () => {
             cy.get('.skjemaelement__label').click({ force: true })
             cy.contains('Gå videre').click()
         })
+    })
+    
+    describe('Reisetilskudd andreside', () => {
+        it('URL er riktig', () => {
+            cy.url().should('include', `/soknader/${nyttReisetilskudd.id}/2`)
+            cy.get('.sporsmal__tittel').should('have.text', 'Før du fikk sykmelding')
+        })
 
         it('Tester beløp valget', () => {
             cy.get('.inputPanelGruppe__inner label:first-child > input[value=JA]').click({ force: true })
@@ -71,5 +78,165 @@ describe('Teste førsteside i reisetilskuddsøknaden', () => {
             cy.contains('Gå videre').click()
         })
 
+    })
+
+    describe('Reisetilskudd tredjeside', () => {
+        it('URL er riktig', () => {
+            cy.url().should('include', `/soknader/${nyttReisetilskudd.id}/3`)
+            cy.get('.sporsmal__tittel').should('have.text', 'Reise med bil')
+        })
+
+        it('Fyller ut', () => {
+            cy.get('.inputPanelGruppe__inner label:first-child > input[value=JA]').click({ force: true })
+            cy.get('.undersporsmal > :nth-child(1)').should('have.text', 'Hvilke dager reiste du med bil?')
+            cy.get('.undersporsmal > .kriterie--ja > h3').should('have.text', 'Hadde du utgifter til bompenger?')
+
+            let skjema = cy.get('.skjema__dager')
+            cy.get('.skjema__dager').contains('01').click({ force: true })
+            // cy.get('.skjema__dager').contains('04').click({ force: true })
+            // cy.get('.skjema__dager').contains('05').click({ force: true })
+            // cy.get('.skjema__dager').contains('06').click({ force: true })
+            // cy.get('.skjema__dager').contains('07').click({ force: true })
+            // cy.get('.skjema__dager').contains('10').click({ force: true }) // alt dette er flaky >:(
+
+            cy.get('.undersporsmal > .kriterie--ja > .radioContainer > input[value=JA]').click({ force: true })
+
+            cy.get('#616cc0cb-434e-4114-a68b-b5708e033e9e').focus().type('1000')
+
+            cy.contains('Gå videre').click()
+        })
+
+        // it('Beløpet er riktig når vi går frem og tilbake', () => {
+        //     cy.url().should('include', `${nyttReisetilskudd.id}/4`)
+        //     cy.contains('Tilbake').click()
+        //     cy.url().should('include', `${nyttReisetilskudd.id}/3`)
+        //     cy.get('#616cc0cb-434e-4114-a68b-b5708e033e9e').should('have.value', '1000') // :shrug:
+
+        //     cy.contains('Gå videre').click()
+        // })
+
+    })
+
+    describe('Opplasting reisetilskudd', () => {
+        it('URL er riktig', () => {
+            cy.url().should('include', `/soknader/${nyttReisetilskudd.id}/4`)
+        })
+
+        it('Laster inn veilederpanel spar-tid', () => {
+            cy.get('.spar-tid').should('be.visible')
+            cy.get('.spar-tid .nav-veilederpanel__content h2').should('be.visible').and('have.text', 'Spar tid med mobilen')
+            cy.get('.spar-tid .nav-veilederpanel__content').contains('Fyller du ut fra telefonen, kan du ta bilde av kvitteringene og bruke dem direkte i søknaden.')
+        })
+
+        it('Legger inn taxi kvittering', () => {
+            cy.get('.fler-vedlegg').click()
+
+            cy.contains('Legg til reiseutgift')
+
+            cy.get('select[name=transportmiddel]').select('TAXI')
+
+            cy.get('input[name=belop_input]').type('1234')
+
+            cy.get('.filopplasteren input[type=file]').attachFile('kvittering.jpg')
+
+            cy.get('.lagre-kvittering')
+                .contains('Bekreft')
+                .click()
+        })
+
+        it('Fil list oppdateres med kvittering', () => {
+            cy.get('.fil_liste')
+
+            cy.get('.transport').contains('Taxi')
+            cy.get('.belop').contains('1 234 kr')
+
+            cy.get('.sumlinje').contains('1 utgifter på til sammen')
+            cy.get('.sumlinje .belop').contains('1 234 kr')
+        })
+
+        it('Endring av kvittering',  () => {
+            cy.contains('Taxi').click()
+            cy.contains('Endre reiseutgift')
+            cy.get('.alertstripe--info').contains('Du kan foreløpig ikke redigere utgifter som du har lagt til. Men du kan slette den som er feil, og legge inn på nytt.')
+            cy.get('select[name=transportmiddel]').should('have.attr', 'disabled')
+            cy.get('input[name=belop_input]').should('have.attr', 'disabled')
+            cy.get('.filopplasteren input[type=file]').should('not.exist')
+            cy.get('.knapperad').within(() => {
+                cy.contains('Tilbake')
+                cy.contains('Slett')
+                cy.contains('Bekreft').should('not.exist')
+            })
+            cy.get('.lukknapp').click()
+        })
+
+        it('Åpner og lukker modal', () => {
+            cy.get('.fler-vedlegg').click()
+            cy.get('.lagre-kvittering').contains('Tilbake').click()
+        })
+
+        it('Feilmeldinger når ingenting er valgt', () => {
+            cy.get('.fler-vedlegg').click()
+            cy.get('.lagre-kvittering').contains('Bekreft').click()
+
+            cy.get('.skjemaelement__feilmelding').contains('Du må velge transportmiddel')
+            cy.get('.skjemaelement__feilmelding').contains('Du må skrive inn beløp')
+            cy.get('.skjemaelement__feilmelding').contains('Du må laste opp kvittering')
+        })
+
+        describe('Transportmiddel feilmeldinger', () => {
+            it('Ugyldig valg', () => {
+                cy.get('select[name=transportmiddel]').select('')
+                cy.get('.lagre-kvittering').contains('Bekreft').click()
+                cy.get('.skjemaelement__feilmelding').contains('Du må velge transportmiddel')
+            })
+
+            it('Velger egen bil', () => {
+                cy.get('select[name=transportmiddel]').should('have.class', 'skjemaelement__input--harFeil')
+                cy.get('select[name=transportmiddel]').select('TAXI')
+                cy.get('.lagre-kvittering').contains('Bekreft').click()
+                cy.get('select[name=transportmiddel]').should('not.have.class', 'skjemaelement__input--harFeil')
+            })
+        })
+
+        describe('Beløp feilmeldinger', () => {
+            it('Negative beløp', () => {
+                cy.get('input[name=belop_input]').type('-100')
+                cy.get('.lagre-kvittering').contains('Bekreft').click()
+                cy.get('.skjemaelement__feilmelding').contains('Beløp kan ikke være negativt')
+            })
+
+            it('Høyere beløp enn maks', () => {
+                cy.get('input[name=belop_input]').clear().type('1000000000')
+                cy.get('.lagre-kvittering').contains('Bekreft').click()
+                cy.get('.skjemaelement__feilmelding').contains('Beløp kan ikke være større enn 10 000')
+            })
+
+            it('Kan ikke skrive inn med 3 desimaler', () => {
+                cy.get('input[name=belop_input]').clear().type('100.253')
+                cy.get('.lagre-kvittering').contains('Bekreft').click()
+                cy.get('input[name=belop_input]').invoke('val').should((val) => {
+                    expect(val).to.be.eq('100.25')
+                })
+            })
+
+            it('Gyldig beløp med 2 desimaler', () => {
+                cy.get('input[name=belop_input]').clear().type('100.30')
+                cy.get('.lagre-kvittering').contains('Bekreft').click()
+                cy.get('input[name=belop_input]').should('not.have.class', 'skjemaelement__input--harFeil')
+            })
+
+            it('Gyldig beløp uten desimaler', () => {
+                cy.get('input[name=belop_input]').clear().type('99')
+                cy.get('.lagre-kvittering').contains('Bekreft').click()
+                cy.get('input[name=belop_input]').should('not.have.class', 'skjemaelement__input--harFeil')
+            })
+        })
+
+        describe('Kvittering feilmeldinger', () => {
+            it('Legger inn gyldig kvittering', () => {
+                cy.get('.filopplasteren input[type=file]').attachFile('kvittering.jpg')
+                cy.get('.lagre-kvittering').contains('Bekreft').click()
+            })
+        })
     })
 })
