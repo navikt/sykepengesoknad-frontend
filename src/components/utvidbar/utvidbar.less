@@ -46,6 +46,7 @@
 
     .utvidbar__toggle {
         display: flex;
+        align-items: center;
         text-align: left;
         width: 100%;
         padding: 0.7rem 1rem;
@@ -88,6 +89,9 @@
         margin-left: auto;
 
         em {
+            position: absolute;
+            font-size: 0;
+            color: transparent;
             font-style: normal;
             margin-right: 0.5rem;
         }
@@ -117,6 +121,14 @@
     .utvidbar {
         .utvidbar__innhold {
             padding: 1.5rem 2.5rem 2.5rem;
+        }
+
+        .utvidbar__handling {
+            em {
+                position: static;
+                font-size: medium;
+                color: @navBla;
+            }
         }
     }
 }
