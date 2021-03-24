@@ -14,7 +14,6 @@ import Behandlingsdager from './utdrag/behandlingsdager'
 import CheckboxGruppe from './utdrag/checkbox-gruppe'
 import CheckboxSum from './utdrag/checkbox-sum'
 import DatoSum from './utdrag/dato-sum'
-import DatoerSum from './utdrag/datoer-sum'
 import Fritekst from './utdrag/fritekst'
 import JaEllerNei from './utdrag/ja-eller-nei'
 import LandSum from './utdrag/land-sum'
@@ -72,6 +71,7 @@ export const SporsmalVarianter = ({ sporsmal }: OppsummeringProps) => {
             return <JaEllerNei sporsmal={sporsmal} />
         }
 
+        case RSSvartype.DATOER:
         case RSSvartype.DATO: {
             return <DatoSum sporsmal={sporsmal} />
         }
@@ -112,11 +112,7 @@ export const SporsmalVarianter = ({ sporsmal }: OppsummeringProps) => {
         case RSSvartype.INFO_BEHANDLINGSDAGER: {
             return <Behandlingsdager sporsmal={sporsmal} />
         }
-
-        case RSSvartype.DATOER: {
-            return <DatoerSum sporsmal={sporsmal} />
-        }
-
+        
         case RSSvartype.KVITTERING: {
             return <OpplastingSum sporsmal={sporsmal} />
         }
