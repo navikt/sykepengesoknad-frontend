@@ -15,10 +15,14 @@ const TallSum = ({ sporsmal }: OppsummeringProps) => {
             <Element tag="h3">{sporsmal.sporsmalstekst}</Element>
             <div className="oppsummering__svar">
                 {sporsmal.svarliste.svar.map((svarverdi, index) => {
+                    let verdi = svarverdi.verdi
+                    if (sporsmal.svartype == RSSvartype.BELOP) {
+                        verdi = (parseInt(verdi) / 100).toString()
+                    }
                     return (
                         <Vis hvis={svarverdi.verdi !== empty} key={index}>
                             <Normaltekst className="oppsummering__tekst">
-                                {svarverdi.verdi} {label}
+                                {verdi} {label}
                             </Normaltekst>
                         </Vis>
                     )
