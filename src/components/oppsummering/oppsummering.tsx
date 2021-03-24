@@ -46,7 +46,6 @@ const Oppsummering = ({ ekspandert }: EkspanderProps) => {
                     return skalVisesIOppsummering(sporsmal)
                 })
                 .map((sporsmal, index) => {
-                    console.log('sporsmal', sporsmal) // eslint-disable-line
                     return (
                         <div className="oppsummering__seksjon" key={index}>
                             <SporsmalVarianter sporsmal={sporsmal} />
