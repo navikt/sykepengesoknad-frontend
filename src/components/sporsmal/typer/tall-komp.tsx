@@ -21,11 +21,7 @@ const TallKomp = ({ sporsmal }: SpmProps) => {
 
     const onChange = (e: any) => {
         const value = e.target.value
-        if (sporsmal.svartype == RSSvartype.BELOP) {
-            setValue(sporsmal.id, value / 100)
-        } else {
-            setValue(sporsmal.id, value)
-        }
+        setValue(sporsmal.id, value)
         setLokal(value)
     }
 
