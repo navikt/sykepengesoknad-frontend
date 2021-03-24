@@ -50,6 +50,26 @@ describe('Teste førsteside i reisetilskuddsøknaden', () => {
             cy.get('.typo-normal').contains('Du må legge ved bilde av kvitteringene dine når du søker NAV om å dekke utgiftene. Fyller du ut fra telefonen, kan du ta bilde av kvitteringene og bruke dem direkte i søknaden.')
         })
 
+        it('Bekrefter ansvarserklæring', () => {
+            cy.get('.skjemaelement__label').click({ force: true })
+            cy.contains('Gå videre').click()
+        })
+
+        it('Tester beløp valget', () => {
+            cy.get('.inputPanelGruppe__inner label:first-child > input[value=JA]').click({ force: true })
+            cy.get(':nth-child(2) > .skjemaelement__label').click({ force: true })
+            cy.get('#5fb4961f-90d5-4893-9821-24b3a68cf3e1').focus().type('1000')
+            cy.contains('Gå videre').click()
+        })
+
+        it('Beløpet er riktig når vi går frem og tilbake', () => {
+            cy.url().should('include', `${nyttReisetilskudd.id}/3`)
+            cy.contains('Tilbake').click()
+            cy.url().should('include', `${nyttReisetilskudd.id}/2`)
+            cy.get('#5fb4961f-90d5-4893-9821-24b3a68cf3e1').should('have.value', '1000')
+
+            cy.contains('Gå videre').click()
+        })
 
     })
 })

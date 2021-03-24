@@ -95,6 +95,14 @@ const svarFormat = (sporsmal: RSSporsmal) => {
                 expect(sporsmal.svar[0].verdi).to.match(RegExp('\\d+|'),
                     `Svar format ${sporsmal.svartype}`)
                 break
+            case RSSvartype.BELOP:
+                expect(sporsmal.svar[0].verdi).to.match(RegExp('\\d+|'),
+                    `Svar format ${sporsmal.svartype}`)
+                if (sporsmal.id == '5fb4961f-90d5-4893-9821-24b3a68cf3e1') {
+                    // Tester at frontend poster med øre
+                    expect(sporsmal.svar[0].verdi).to.eq('100000')
+                }
+                break
             case RSSvartype.RADIO:
                 expect(sporsmal.svar[0].verdi).to.match(RegExp(`(${SvarEnums.CHECKED}|)`),
                     `Svar format ${sporsmal.svartype}`)

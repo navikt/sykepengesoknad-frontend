@@ -38,6 +38,13 @@ export const hentSvar = (sporsmal: Sporsmal): any => {
         sporsmal.svartype.toString().startsWith('DATOER') ? [] : ''
     }
 
+    if (sporsmal.svartype === RSSvartype.BELOP) {
+        if (svar.verdi == '') {
+            return svar.verdi
+        }
+        return (parseInt(svar.verdi) / 100).toString()
+    }
+
     return svar.verdi
 }
 
@@ -58,7 +65,7 @@ export const hentPeriode = (sporsmal: Sporsmal, index: number) => {
     return JSON.parse(svar.verdi) as FormPeriode
 }
 
-export const hentPeriodeListe = ( sporsmal: Sporsmal ) => {
+export const hentPeriodeListe = (sporsmal: Sporsmal) => {
     return hentPerioder(sporsmal).map(i => hentPeriode(sporsmal, i))
 }
 

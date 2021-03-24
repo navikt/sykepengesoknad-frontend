@@ -38,8 +38,7 @@ const TallKomp = ({ sporsmal }: SpmProps) => {
             const values = getValues()
 
             return validerGrad(values)
-        }
-        else {
+        } else {
             return true
         }
     }
@@ -124,7 +123,8 @@ const TallKomp = ({ sporsmal }: SpmProps) => {
                             <p>{feilmelding.lokal}</p>
                         </Normaltekst>
                     </Vis>
-                    <Vis hvis={errors[sporsmal.id]?.type === 'validate' && sporsmal.tag === TagTyper.HVOR_MYE_TIMER_VERDI}>
+                    <Vis
+                        hvis={errors[sporsmal.id]?.type === 'validate' && sporsmal.tag === TagTyper.HVOR_MYE_TIMER_VERDI}>
                         <Normaltekst tag="span">
                             <p>{getLedetekst(tekst('soknad.feilmelding.MINDRE_TIMER_ENN_FORVENTET.lokal'),
                                 { '%GRAD%': periode?.grad })}</p>

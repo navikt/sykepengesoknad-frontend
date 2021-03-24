@@ -57,6 +57,9 @@ export const settSvar = (sporsmal: Sporsmal, verdier: Record<string, any>): void
         case RSSvartype.CHECKBOX_GRUPPE:
             // Skal ikke ha svarverdi
             break
+        case RSSvartype.BELOP:
+            belopSvar(sporsmal, verdi)
+            break
         default:
             sporsmal.svarliste = {
                 sporsmalId: sporsmal.id,
@@ -67,6 +70,13 @@ export const settSvar = (sporsmal: Sporsmal, verdier: Record<string, any>): void
     sporsmal.undersporsmal.forEach((spm) => {
         settSvar(spm, verdier)
     })
+}
+
+const belopSvar = (sporsmal: Sporsmal, verdi: any) => {
+    sporsmal.svarliste = {
+        sporsmalId: sporsmal.id,
+        svar: [ { verdi: verdi ? (verdi * 100).toString() : '' } ]
+    }
 }
 
 const checkboxSvar = (sporsmal: Sporsmal, verdi: any) => {
@@ -117,7 +127,7 @@ const periodeSvar = (sporsmal: Sporsmal, verdi: any) => {
 const datoerSvar = (sporsmal: Sporsmal, verdi: any) => {
     const svar: RSSvar[] = []
     if (verdi !== undefined) {
-        verdi.toString().split(',').map( (dag: string) =>
+        verdi.toString().split(',').map((dag: string) =>
             svar.push({
                 verdi: dag
             })
