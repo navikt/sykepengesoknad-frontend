@@ -58,7 +58,7 @@ describe('Teste førsteside i reisetilskuddsøknaden', () => {
         it('Tester beløp valget', () => {
             cy.get('.inputPanelGruppe__inner label:first-child > input[value=JA]').click({ force: true })
             cy.get(':nth-child(2) > .skjemaelement__label').click({ force: true })
-            cy.get('#5fb4961f-90d5-4893-9821-24b3a68cf3e1').focus().type('1000')
+            cy.get('#5fb4961f-90d5-4893-9821-24b3a68cf3e1').focus().type('1000', { delay: 500 })
             cy.get('#5fb4961f-90d5-4893-9821-24b3a68cf3e1').should('have.value', '1000')
             cy.contains('Gå videre').click()
         })
