@@ -104,8 +104,7 @@ const svarFormat = (sporsmal: RSSporsmal) => {
                     `Svar format ${sporsmal.svartype}`)
                 if (sporsmal.id == '5fb4961f-90d5-4893-9821-24b3a68cf3e1') {
                     // Tester at frontend poster med øre
-                    // TODO flaky for øyeblikket, må fikse koden, disabler for å få stabil GHA
-                    // expect(sporsmal.svar[0].verdi).to.eq('100000')
+                    expect(sporsmal.svar[0].verdi).to.eq('100000')
                 }
                 break
             case RSSvartype.RADIO:
