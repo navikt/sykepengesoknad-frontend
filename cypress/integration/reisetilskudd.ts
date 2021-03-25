@@ -25,7 +25,7 @@ describe('Teste førsteside i reisetilskuddsøknaden', () => {
 
     })
 
-    describe('Reisetilskudd førsteside', () => {
+    describe('Ansvarserklæring - Reisetilskudd', () => {
         it('URL er riktig', () => {
             cy.url().should('include', `/soknader/${nyttReisetilskudd.id}/1`)
         })
@@ -56,7 +56,7 @@ describe('Teste førsteside i reisetilskuddsøknaden', () => {
         })
     })
     
-    describe('Reisetilskudd andreside', () => {
+    describe('Før du fikk sykmelding - Reisetilskudd', () => {
         it('URL er riktig', () => {
             cy.url().should('include', `/soknader/${nyttReisetilskudd.id}/2`)
             cy.get('.sporsmal__tittel').should('have.text', 'Før du fikk sykmelding')
@@ -81,7 +81,7 @@ describe('Teste førsteside i reisetilskuddsøknaden', () => {
 
     })
 
-    describe('Reisetilskudd tredjeside', () => {
+    describe('Reise med bil - Reisetilskudd', () => {
         it('URL er riktig', () => {
             cy.url().should('include', `/soknader/${nyttReisetilskudd.id}/3`)
             cy.get('.sporsmal__tittel').should('have.text', 'Reise med bil')
@@ -92,13 +92,12 @@ describe('Teste førsteside i reisetilskuddsøknaden', () => {
             cy.get('.undersporsmal > :nth-child(1)').should('have.text', 'Hvilke dager reiste du med bil?')
             cy.get('.undersporsmal > .kriterie--ja > h3').should('have.text', 'Hadde du utgifter til bompenger?')
 
-            let skjema = cy.get('.skjema__dager')
-            cy.get('.skjema__dager').contains('01').click({ force: true })
+            cy.get('.skjema__dager').contains('01').click({ force: true }) // alt dette er flaky >:(
             // cy.get('.skjema__dager').contains('04').click({ force: true })
             // cy.get('.skjema__dager').contains('05').click({ force: true })
             // cy.get('.skjema__dager').contains('06').click({ force: true })
             // cy.get('.skjema__dager').contains('07').click({ force: true })
-            // cy.get('.skjema__dager').contains('10').click({ force: true }) // alt dette er flaky >:(
+            // cy.get('.skjema__dager').contains('10').click({ force: true }) 
 
             cy.get('.undersporsmal > .kriterie--ja > .radioContainer > input[value=JA]').click({ force: true })
 
@@ -107,18 +106,18 @@ describe('Teste førsteside i reisetilskuddsøknaden', () => {
             cy.contains('Gå videre').click()
         })
 
-        // it('Beløpet er riktig når vi går frem og tilbake', () => {
-        //     cy.url().should('include', `${nyttReisetilskudd.id}/4`)
-        //     cy.contains('Tilbake').click()
-        //     cy.url().should('include', `${nyttReisetilskudd.id}/3`)
-        //     cy.get('#616cc0cb-434e-4114-a68b-b5708e033e9e').should('have.value', '1000') // :shrug:
+        it('Beløpet er riktig når vi går frem og tilbake', () => {
+            cy.url().should('include', `${nyttReisetilskudd.id}/4`)
+            cy.contains('Tilbake').click()
+            cy.url().should('include', `${nyttReisetilskudd.id}/3`)
+            cy.get('#616cc0cb-434e-4114-a68b-b5708e033e9e').should('have.value', '1000')
 
-        //     cy.contains('Gå videre').click()
-        // })
+            cy.contains('Gå videre').click()
+        })
 
     })
 
-    describe('Opplasting reisetilskudd', () => {
+    describe('Opplasting - Reisetilskudd', () => {
         it('URL er riktig', () => {
             cy.url().should('include', `/soknader/${nyttReisetilskudd.id}/4`)
         })
@@ -238,6 +237,51 @@ describe('Teste førsteside i reisetilskuddsøknaden', () => {
                 cy.get('.filopplasteren input[type=file]').attachFile('kvittering.jpg')
                 cy.get('.lagre-kvittering').contains('Bekreft').click()
             })
+
+            it('Går videre', () => {
+                cy.contains('Gå videre').click()
+            })
         })
+    })
+
+    describe('Utbetaling - Reisetilskudd', () => {
+        it('URL er riktig', () => {
+            cy.url().should('include', `/soknader/${nyttReisetilskudd.id}/5`)
+            cy.get('.sporsmal__tittel').should('have.text', 'Utbetaling')
+        })
+
+        it('Arbeidsgiveren legger ut for reisene', () => {
+            cy.get('.inputPanelGruppe__inner label:first-child > input[value=JA]').click({ force: true })
+            cy.contains('Gå videre').click()
+        })
+    })
+
+    describe('Til slutt - Reisetilskudd', () => {
+        it('URL er riktig', () => {
+            cy.url().should('include', `/soknader/${nyttReisetilskudd.id}/6`)
+            cy.get('.sporsmal__tittel').should('have.text', 'Til slutt')
+        })
+
+        it('Oppsummering inneholder riktig informasjon', () => {
+            cy.get('.oppsummering').click()
+
+            cy.get('.skjemaelement__label').should('contain', 'Jeg har lest all informasjonen jeg har fått i søknaden og bekrefter at opplysningene jeg har gitt er korrekte.')
+            cy.get('.skjemaelement__label').click({ force: true })
+
+            cy.contains('Send søknaden').click()
+        })
+    })
+
+    describe('Kvittering - Reisetilskudd', () => {
+        it('URL er riktig', () => {
+            cy.url().should('include', `/kvittering/${nyttReisetilskudd.id}`)
+        })
+        
+        it('Hva skjer videre', () => {
+            cy.get('.hva-skjer')
+                .should('contain', 'Hva skjer videre?')
+                .and('contain', 'NAV behandler søknaden din')
+                .and('contain', 'Når blir pengene utbetalt?')
+        }) 
     })
 })
