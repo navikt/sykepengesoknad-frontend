@@ -264,7 +264,8 @@ describe('Teste førsteside i reisetilskuddsøknaden', () => {
 
         it('Oppsummering inneholder riktig informasjon', () => {
             cy.get('.oppsummering').click()
-
+            cy.get('.utvidbar__innhold > :nth-child(4)').should('include.text', 'Last opp kvitteringer for reiseutgifter til jobben fra 1. februar til 18. mars 2021')
+            cy.get('.utvidbar__innhold > :nth-child(4)').should('include.text', 'Du lastet opp 2 utgifter på til sammen')
             cy.get('.skjemaelement__label').should('contain', 'Jeg har lest all informasjonen jeg har fått i søknaden og bekrefter at opplysningene jeg har gitt er korrekte.')
             cy.get('.skjemaelement__label').click({ force: true })
 
