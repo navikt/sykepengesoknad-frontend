@@ -55,7 +55,7 @@ describe('Teste førsteside i reisetilskuddsøknaden', () => {
             cy.contains('Gå videre').click()
         })
     })
-    
+
     describe('Før du fikk sykmelding - Reisetilskudd', () => {
         it('URL er riktig', () => {
             cy.url().should('include', `/soknader/${nyttReisetilskudd.id}/2`)
@@ -65,7 +65,7 @@ describe('Teste førsteside i reisetilskuddsøknaden', () => {
         it('Tester beløp valget', () => {
             cy.get('.inputPanelGruppe__inner label:first-child > input[value=JA]').click({ force: true })
             cy.get(':nth-child(2) > .skjemaelement__label').click({ force: true })
-            cy.get('#5fb4961f-90d5-4893-9821-24b3a68cf3e1').focus().type('1000', { delay: 500 })
+            cy.get('#5fb4961f-90d5-4893-9821-24b3a68cf3e1').focus().type('1000', { delay: 500, force: true })
             cy.get('#5fb4961f-90d5-4893-9821-24b3a68cf3e1').should('have.value', '1000')
             cy.contains('Gå videre').click()
         })
@@ -97,7 +97,7 @@ describe('Teste førsteside i reisetilskuddsøknaden', () => {
             // cy.get('.skjema__dager').contains('05').click({ force: true })
             // cy.get('.skjema__dager').contains('06').click({ force: true })
             // cy.get('.skjema__dager').contains('07').click({ force: true })
-            // cy.get('.skjema__dager').contains('10').click({ force: true }) 
+            // cy.get('.skjema__dager').contains('10').click({ force: true })
 
             cy.get('.undersporsmal > .kriterie--ja > .radioContainer > input[value=JA]').click({ force: true })
 
@@ -154,7 +154,7 @@ describe('Teste førsteside i reisetilskuddsøknaden', () => {
             cy.get('.sumlinje .belop').contains('1 234 kr')
         })
 
-        it('Endring av kvittering',  () => {
+        it('Endring av kvittering', () => {
             cy.contains('Taxi').click()
             cy.contains('Endre reiseutgift')
             cy.get('.alertstripe--info').contains('Du kan foreløpig ikke redigere utgifter som du har lagt til. Men du kan slette den som er feil, og legge inn på nytt.')
@@ -276,12 +276,12 @@ describe('Teste førsteside i reisetilskuddsøknaden', () => {
         it('URL er riktig', () => {
             cy.url().should('include', `/kvittering/${nyttReisetilskudd.id}`)
         })
-        
+
         it('Hva skjer videre', () => {
             cy.get('.hva-skjer')
                 .should('contain', 'Hva skjer videre?')
                 .and('contain', 'NAV behandler søknaden din')
                 .and('contain', 'Når blir pengene utbetalt?')
-        }) 
+        })
     })
 })
