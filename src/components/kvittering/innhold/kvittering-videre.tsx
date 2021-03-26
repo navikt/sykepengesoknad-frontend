@@ -5,6 +5,7 @@ import React from 'react'
 
 import { useAppStore } from '../../../data/stores/app-store'
 import { RSArbeidssituasjon } from '../../../types/rs-types/rs-arbeidssituasjon'
+import { RSSoknadstype } from '../../../types/rs-types/rs-soknadstype'
 import { sendtForMerEnn30DagerSiden } from '../../../utils/dato-utils'
 import { tekst } from '../../../utils/tekster'
 import Vis from '../../vis'
@@ -35,10 +36,13 @@ const KvitteringVidere = () => {
                     <Normaltekst tag="span">{tekst('kvittering.arbeidstaker.saksbehandlingstid.lenke')}</Normaltekst>
                 </Lenke>
             </div>
-            <div className="avsnitt">
-                <Element tag="h2">{tekst('kvittering.naar-blir-pengene')}</Element>
-                <Normaltekst tag="span">{tekst('kvittering.arbeidstaker.over16.utbetaling')} </Normaltekst>
-            </div>
+            <Vis hvis={valgtSoknad && valgtSoknad.soknadstype !== RSSoknadstype.REISETILSKUDD}>
+                <div className="avsnitt">
+                    <Element tag="h2">{tekst('kvittering.naar-blir-pengene')}</Element>
+                    <Normaltekst tag="span">{tekst('kvittering.arbeidstaker.over16.utbetaling')} </Normaltekst>
+                </div>
+            </Vis>
+
         </AlertStripeInfo>
     )
 }

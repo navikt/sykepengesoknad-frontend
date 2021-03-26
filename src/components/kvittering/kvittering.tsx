@@ -46,7 +46,7 @@ const Kvittering = () => {
     const skalViseKnapperad = !(valgtSoknad?.soknadstype === RSSoknadstype.OPPHOLD_UTLAND)
 
     const KvitteringType = () => {
-        if (valgtSoknad!.soknadstype === RSSoknadstype.OPPHOLD_UTLAND) {
+        if (valgtSoknad!.soknadstype === RSSoknadstype.OPPHOLD_UTLAND || valgtSoknad!.soknadstype === RSSoknadstype.REISETILSKUDD) {
             return <AlleAndre />
         }
         switch (valgtSoknad!.arbeidssituasjon) {
@@ -57,6 +57,7 @@ const Kvittering = () => {
         }
     }
 
+    const skalViseSendTilArbeidsgiver = valgtSoknad!.arbeidsgiver !== undefined && !erSendtTilArbeidsgiver && valgtSoknad?.soknadstype !== RSSoknadstype.REISETILSKUDD
     return (
         <div
             className="kvittering">
@@ -78,7 +79,8 @@ const Kvittering = () => {
                         <Ettersending gjelder="nav" setRerendrekvittering={setRerendrekvittering} />
                     </Vis>
 
-                    <Vis hvis={valgtSoknad!.arbeidsgiver !== undefined && !erSendtTilArbeidsgiver}>
+                    <Vis
+                        hvis={skalViseSendTilArbeidsgiver}>
                         <Ettersending gjelder="arbeidsgiver" setRerendrekvittering={setRerendrekvittering} />
                     </Vis>
                 </div>
