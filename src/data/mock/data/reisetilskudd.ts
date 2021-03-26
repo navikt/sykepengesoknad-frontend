@@ -139,7 +139,7 @@ export const nyttReisetilskudd: RSSoknad = {
                 {
                     'id': 'deaac8aa-11b9-4e60-86e2-b90af5cf8b04',
                     'tag': 'BIL_DATOER',
-                    'sporsmalstekst': 'Hvilke dager reiste du med bil?',
+                    'sporsmalstekst': 'Hvilke dager reiste du med bil i perioden 1. februar - 18. mars 2021?',
                     'undertekst': null,
                     'svartype': 'DATOER',
                     'min': '2020-02-01',

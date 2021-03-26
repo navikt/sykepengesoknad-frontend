@@ -11,7 +11,6 @@ import { useFormContext } from 'react-hook-form'
 import { RSSvar } from '../../../types/rs-types/rs-svar'
 import { Sporsmal } from '../../../types/types'
 import { maaneder,sammeAar, sammeMnd } from '../../../utils/dato-utils'
-import { getLedetekst, tekst } from '../../../utils/tekster'
 import Vis from '../../vis'
 import { hentSvar } from '../hent-svar'
 import { SpmProps } from '../sporsmal-form/sporsmal-form'
@@ -173,14 +172,6 @@ const DagerKomp = ({ sporsmal }: SpmProps) => {
                             </div>
                         )
                     })}
-                    <Normaltekst className="kalender__hjelp">
-                        {getLedetekst(tekst('reisetilskudd.datoer.egen-bil.kalender.hjelp'), {
-                            '%FRA%': sammeAar(sporsmal)
-                                ? dayjs(sporsmal.min!).format('DD. MMMM')
-                                : dayjs(sporsmal.min!).format('DD. MMMM YYYY'),
-                            '%TIL%': dayjs(sporsmal.max!).format('DD. MMMM YYYY')
-                        })}
-                    </Normaltekst>
                 </div>
             </div>
 
