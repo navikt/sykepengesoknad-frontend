@@ -89,7 +89,7 @@ describe('Teste førsteside i reisetilskuddsøknaden', () => {
 
         it('Fyller ut', () => {
             cy.get('.inputPanelGruppe__inner label:first-child > input[value=JA]').click({ force: true })
-            cy.get('.undersporsmal > :nth-child(1)').should('have.text', 'Hvilke dager reiste du med bil?')
+            cy.get('.undersporsmal > :nth-child(1)').should('have.text', 'Hvilke dager reiste du med bil i perioden 1. februar - 18. mars 2021?')
             cy.get('.undersporsmal > .kriterie--ja > h3').should('have.text', 'Hadde du utgifter til bompenger?')
 
             cy.get('.skjema__dager').contains('01').click({ force: true }) // alt dette er flaky >:(
