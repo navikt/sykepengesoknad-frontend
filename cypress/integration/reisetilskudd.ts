@@ -279,10 +279,10 @@ describe('Teste førsteside i reisetilskuddsøknaden', () => {
         })
 
         it('Hva skjer videre', () => {
-            cy.get('.hva-skjer')
+            cy.get('.alertstripe--info')
                 .should('contain', 'Hva skjer videre?')
                 .and('contain', 'NAV behandler søknaden din')
-                .and('contain', 'Når blir pengene utbetalt?')
+                .and('contain', 'Saksbehandlingstidene kan variere noe')
         })
     })
 })
