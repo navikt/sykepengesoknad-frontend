@@ -1,7 +1,7 @@
 import './opplasting.less'
 
 import Modal from 'nav-frontend-modal'
-import { Normaltekst } from 'nav-frontend-typografi'
+import { Element, Normaltekst } from 'nav-frontend-typografi'
 import React from 'react'
 
 import { useAppStore } from '../../../../data/stores/app-store'
@@ -29,9 +29,9 @@ const Opplasting = ({ sporsmal }: SpmProps) => {
     return (
         <div className="opplasting">
             <div className="opplasting__tekst">
-                <Normaltekst id="opplasting-overskrift" aria-describedby="opplasting-hjelpetekst">
+                <Element tag="h3" className="skjema__sporsmal">
                     {sporsmal.sporsmalstekst}
-                </Normaltekst>
+                </Element>
             </div>
 
             <SparTidMobil />
