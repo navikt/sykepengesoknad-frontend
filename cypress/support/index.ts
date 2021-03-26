@@ -124,7 +124,6 @@ const svarFormat = (sporsmal: RSSporsmal) => {
             case RSSvartype.PERIODE:
             case RSSvartype.RADIO_GRUPPE:
             case RSSvartype.RADIO_GRUPPE_TIMER_PROSENT:
-            case RSSvartype.BEHANDLINGSDAGER:
             case RSSvartype.INFO_BEHANDLINGSDAGER:
             case RSSvartype.CHECKBOX_GRUPPE:
                 /* Ubesvart eller tags som ikke skal ha svar er på dette formatet:

@@ -90,7 +90,6 @@ export const hentGeneriskFeilmelding = (svartype: RSSvartype) => {
         case RSSvartype.PERIODE: {
             return 'Du må oppgi en periode'
         }
-        case RSSvartype.BEHANDLINGSDAGER:
         case RSSvartype.DATOER:
         case RSSvartype.RADIO_GRUPPE_UKEKALENDER: {
             return 'Du må oppgi en dag'
