@@ -1,7 +1,7 @@
 import './drag-and-drop.less'
 
 import { Element, Normaltekst } from 'nav-frontend-typografi'
-import React, { useCallback, useEffect, useRef, useState } from 'react'
+import React, { useCallback, useEffect, useState } from 'react'
 import { useDropzone } from 'react-dropzone'
 import { useFormContext } from 'react-hook-form'
 
@@ -21,8 +21,7 @@ const maks = formaterFilstørrelse(maxFilstørrelse)
 
 const DragAndDrop = () => {
     const { valgtFil, setValgtFil, valgtKvittering } = useAppStore()
-    const { setError, errors, register } = useFormContext()
-    const filRef = useRef<HTMLInputElement>(null)
+    const { errors, register, trigger } = useFormContext()
     const [ formErDisabled, setFormErDisabled ] = useState<boolean>(false)
 
     useEffect(() => {
@@ -46,43 +45,31 @@ const DragAndDrop = () => {
             setValgtFil(undefined)
             setFormErDisabled(false)
         }
-        // eslint-disable-next-line
-    }, [ valgtKvittering ])
+    }, [ setValgtFil, valgtKvittering ])
 
     const onDropCallback = useCallback(
         (filer) => {
             filer.forEach((fil: File) => {
-                if (maxFilstørrelse && fil.size > maxFilstørrelse) {
-                    setError('fil_input', {
-                        type: 'skjema-feil',
-                        message: getLedetekst(tekst('drag_and_drop.maks'),
-                            { '%FILNAVN%': fil.name, '%MAKSSTOR%': maks }
-                        )
-                    })
-                }
-
-                if (tillatteFiltyper && !tillatteFiltyper.includes(fil.type)) {
-                    setError('fil_input', {
-                        type: 'skjema-feil',
-                        message: getLedetekst(tekst('drag_and_drop.filtype'),
-                            { '%FILNAVN%': fil.name, '%TILLATTEFILTYPER%': formattertFiltyper }
-                        )
-                    })
-                }
-
-                if (!errors.fil_input) {
-                    setValgtFil(fil)
-                }
+                setValgtFil(fil)
             })
+            trigger('fil_input')
         },
         // eslint-disable-next-line
         []
     )
 
-    const { getRootProps, getInputProps, isDragActive } = useDropzone({
+    const { getRootProps, getInputProps, isDragActive, rootRef } = useDropzone({
         onDrop: onDropCallback,
         multiple: false,
     })
+
+    const settInputHarFeil = () => {
+        rootRef.current?.classList.add('skjemaelement__input--harFeil')
+    }
+
+    const fjernInputHarFeil = () => {
+        rootRef.current?.classList.remove('skjemaelement__input--harFeil')
+    }
 
     return (
         <div className="ddfil__wrap">
@@ -103,34 +90,38 @@ const DragAndDrop = () => {
                             : null
                     }</div>
                 </Utvidbar>
-
-                <Normaltekst tag="div" role="alert" aria-live="assertive" className="skjemaelement__feilmelding">
-                    <Vis hvis={errors['maks_fil']}>
-                        <p>{getLedetekst(tekst('drag_and_drop.maks'),
-                            { '%FILNAVN%': 'valgtFil!.name', '%MAKSSTOR%': maks }
-                        )}</p>
-                    </Vis>
-                    <Vis hvis={errors['tillatt_fil']}>
-                        <p>{getLedetekst(tekst('drag_and_drop.filtype'),
-                            { '%FILNAVN%': 'valgtFil!.name', '%TILLATTEFILTYPER%': tillatteFiltyper }
-                        )}</p>
-                    </Vis>
-                </Normaltekst>
             </Vis>
 
             <Vis hvis={!formErDisabled}>
                 <div className="filopplasteren" {...getRootProps()}>
-                    <input ref={filRef} {...getInputProps()} id="ddfil" />
-                    <input type="hidden" name="fil_input" id="fil_input"
+                    <input {...getInputProps()} id="ddfil" />
+                    <input type="hidden"
+                        id="fil_input"
+                        name="fil_input"
                         ref={register({
-                            validate: () => {
-                                const div: HTMLDivElement | null = document.querySelector('.filopplasteren')
-                                if (valgtFil === undefined || valgtFil === null) {
-                                    div?.classList.add('skjemaelement__input--harFeil')
-                                    return tekst('opplasting_modal.filopplasting.feilmelding')
+                            validate: {
+                                fil_valgt: () => {
+                                    if (!valgtFil) {
+                                        settInputHarFeil()
+                                        return tekst('opplasting_modal.filopplasting.feilmelding')
+                                    }
+                                },
+                                fil_type: () => {
+                                    if (valgtFil && !tillatteFiltyper.includes(valgtFil.type)) {
+                                        settInputHarFeil()
+                                        return getLedetekst(tekst('drag_and_drop.filtype'), { '%FILNAVN%': valgtFil.name, '%TILLATTEFILTYPER%': formattertFiltyper })
+                                    }
+                                },
+                                fil_storrelse: () => {
+                                    if (valgtFil && valgtFil.size > maxFilstørrelse) {
+                                        settInputHarFeil()
+                                        return getLedetekst(tekst('drag_and_drop.maks'), { '%FILNAVN%': valgtFil.name, '%MAKSSTOR%': maks })
+                                    }
+                                },
+                                fjern_styling_hvis_ok: () => {
+                                    fjernInputHarFeil()
+                                    return true
                                 }
-                                div?.classList.remove('skjemaelement__input--harFeil')
-                                return true
                             }
                         })}
                     />
