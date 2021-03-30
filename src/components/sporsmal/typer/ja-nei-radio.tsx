@@ -97,7 +97,7 @@ const JaNeiRadio = ({ sporsmal }: SpmProps) => {
                                 value={valg.value}
                                 checked={OK}
                                 aria-checked={OK}
-                                onClick={() => changeValue(valg.value)}
+                                onChange={() => changeValue(valg.value)}
                                 ref={register({ required: feilmelding.global })}
                                 className="skjemaelement__input radioknapp"
                             />

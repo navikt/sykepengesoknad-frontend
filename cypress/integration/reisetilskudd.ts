@@ -78,7 +78,6 @@ describe('Teste førsteside i reisetilskuddsøknaden', () => {
 
             cy.contains('Gå videre').click()
         })
-
     })
 
     describe('Reise med bil - Reisetilskudd', () => {
@@ -87,20 +86,23 @@ describe('Teste førsteside i reisetilskuddsøknaden', () => {
             cy.get('.sporsmal__tittel').should('have.text', 'Reise med bil')
         })
 
-        it('Fyller ut', () => {
+        it('Svar ja på hovedspørsmålet', () => {
             cy.get('.inputPanelGruppe__inner label:first-child > input[value=JA]').click({ force: true })
             cy.get('.undersporsmal > :nth-child(1)').should('have.text', 'Hvilke dager reiste du med bil i perioden 1. februar - 18. mars 2021?')
             cy.get('.undersporsmal > .kriterie--ja > h3').should('have.text', 'Hadde du utgifter til bompenger?')
+        })
 
-            cy.get('.skjema__dager').contains('01').click({ force: true }) // alt dette er flaky >:(
-            // cy.get('.skjema__dager').contains('04').click({ force: true })
-            // cy.get('.skjema__dager').contains('05').click({ force: true })
-            // cy.get('.skjema__dager').contains('06').click({ force: true })
-            // cy.get('.skjema__dager').contains('07').click({ force: true })
-            // cy.get('.skjema__dager').contains('10').click({ force: true })
+        it('Minst en dag må velges', () => {
+            cy.contains('Gå videre').click()
+            cy.get('.skjemaelement__feilmelding').contains('Du må oppgi en dag')
+        })
+
+        it('Fyller ut', () => {
+            cy.get('.skjema__dager').contains('25').click({ force: true })
+            cy.get('.skjema__dager').contains('26').click({ force: true })
+            cy.get('.skjema__dager').contains('26').click({ force: true })
 
             cy.get('.undersporsmal > .kriterie--ja > .radioContainer > input[value=JA]').click({ force: true })
-
             cy.get('#616cc0cb-434e-4114-a68b-b5708e033e9e').focus().type('1000')
 
             cy.contains('Gå videre').click()
@@ -114,7 +116,6 @@ describe('Teste førsteside i reisetilskuddsøknaden', () => {
 
             cy.contains('Gå videre').click()
         })
-
     })
 
     describe('Opplasting - Reisetilskudd', () => {
@@ -130,15 +131,10 @@ describe('Teste førsteside i reisetilskuddsøknaden', () => {
 
         it('Legger inn taxi kvittering', () => {
             cy.get('.fler-vedlegg').click()
-
             cy.contains('Legg til reiseutgift')
-
             cy.get('select[name=transportmiddel]').select('TAXI')
-
             cy.get('input[name=belop_input]').type('1234')
-
             cy.get('.filopplasteren input[type=file]').attachFile('kvittering.jpg')
-
             cy.get('.lagre-kvittering')
                 .contains('Bekreft')
                 .click()

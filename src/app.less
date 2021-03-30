@@ -40,6 +40,27 @@ a {
     color: @navBla;
 }
 
+.lenkeknapp {
+    border: 0;
+    background: none;
+    padding: 0;
+    cursor: pointer;
+    outline: 0;
+    color: @navBla;
+    text-decoration: underline;
+
+    &:hover {
+        text-decoration: none;
+    }
+
+    &:focus {
+        background-color: @navDypBla;
+        color: @white;
+        text-decoration: none;
+        box-shadow: 0 0 0 2px @navDypBla;
+    }
+}
+
 .tving-ny-css-hash {
     color: @navBla;
 }
