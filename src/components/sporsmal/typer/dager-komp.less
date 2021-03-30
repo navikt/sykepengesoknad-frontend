@@ -4,6 +4,7 @@
 @dagbredde: 40px;
 
 .skjema__dager {
+    width: 330px;
     margin-top: 1.5rem;
 
     .kalender__tittel {
@@ -66,6 +67,13 @@
             border-bottom: 1px solid @white;
         }
 
+        &.helg {
+            label:hover {
+                cursor: default;
+                background-color: transparent;
+            }
+        }
+
         &.sun {
             label, span.label {
                 color: @redError;
@@ -82,10 +90,37 @@
         }
 
         input {
-            &:checked + label {
+            &.checked + label {
                 background-color: @navBla;
                 color: @white;
             }
+        }
+    }
+
+    .kalendervalg {
+        display: flex;
+        justify-content: space-around;
+        margin: 2rem 0 3rem;
+
+        .velgalle, .fjernalle {
+            &:focus {
+                box-shadow: none;
+                background-color: transparent;
+                color: @navBla;
+                text-decoration: underline;
+
+                &:hover {
+                    text-decoration: none;
+                }
+            }
+        }
+
+        .velgalle img {
+            margin-right: 0.5rem;
+        }
+
+        .fjernalle img {
+            margin-right: 0.35rem;
         }
     }
 }

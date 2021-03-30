@@ -157,6 +157,11 @@ const SporsmalTekster = {
     'soknad.presisering.INNTEKTSKILDE_SELVSTENDIG_DAGMAMMA_ER_DU_SYKMELDT': 'Legen må sende inn én sykmelding for hver arbeidssituasjon du er sykmeldt fra, og du må søke om sykepenger for hver av dem.',
     'soknad.presisering.INNTEKTSKILDE_OMSORGSLONN_ER_DU_SYKMELDT': 'Legen må sende inn én sykmelding for hver arbeidssituasjon du er sykmeldt fra, og du må søke om sykepenger for hver av dem.',
     'soknad.presisering.INNTEKTSKILDE_FOSTERHJEM_ER_DU_SYKMELDT': 'Legen må sende inn én sykmelding for hver arbeidssituasjon du er sykmeldt fra, og du må søke om sykepenger for hver av dem.',
+
+    'reisetilskudd.datoer.egen-bil.kalender.hjelp': ' Velg dager fra %FRA% - %TIL%',
+    'sporsmal.egen-bil.kalender.ukedager': 'Velg alle ukedager',
+    'sporsmal.egen-bil.kalender.fjern': 'Fjern valgte',
+
 }
 
 export default SporsmalTekster

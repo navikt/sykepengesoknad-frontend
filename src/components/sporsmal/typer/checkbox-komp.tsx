@@ -18,26 +18,24 @@ const CheckboxKomp = ({ sporsmal }: SpmProps) => {
 
     return (
         <>
-            <div>
-                <Vis hvis={sporsmal.sporsmalstekst !== null}>
-                    <Element tag="h3" className="skjema__sporsmal">{sporsmal.sporsmalstekst}</Element>
+            <Vis hvis={sporsmal.sporsmalstekst !== null}>
+                <Element tag="h3" className="skjema__sporsmal">{sporsmal.sporsmalstekst}</Element>
+            </Vis>
+
+            <div className={'skjemagruppe checkboxgruppe' + (errors[sporsmal.id] ? ' skjemagruppe--feil' : '')}>
+                {sporsmal.undersporsmal.map((uspm, idx) => {
+                    return <CheckboxSingle parent={sporsmal} sporsmal={uspm} key={idx} />
+                })}
+
+                <Vis hvis={sporsmal.undertekst}>
+                    <Normaltekst tag="div"> {sporsmal.undertekst} </Normaltekst>
                 </Vis>
 
-                <div className={'skjemagruppe checkboxgruppe' + (errors[sporsmal.id] ? ' skjemagruppe--feil' : '')}>
-                    {sporsmal.undersporsmal.map((uspm, idx) => {
-                        return <CheckboxSingle parent={sporsmal} sporsmal={uspm} key={idx} />
-                    })}
-
-                    <Vis hvis={sporsmal.undertekst}>
-                        <Normaltekst tag="div"> {sporsmal.undertekst} </Normaltekst>
+                <Normaltekst tag="div" role="alert" aria-live="assertive" className="skjemaelement__feilmelding">
+                    <Vis hvis={Object.entries(errors).length > 0 && !validCheck}>
+                        <p>{feilmelding['lokal']}</p>
                     </Vis>
-
-                    <Normaltekst tag="div" role="alert" aria-live="assertive" className="skjemaelement__feilmelding">
-                        <Vis hvis={Object.entries(errors).length > 0 && !validCheck}>
-                            <p>{feilmelding['lokal']}</p>
-                        </Vis>
-                    </Normaltekst>
-                </div>
+                </Normaltekst>
             </div>
         </>
     )
@@ -61,7 +59,7 @@ const CheckboxSingle = ({ parent, sporsmal }: AllProps) => {
         const svar = hentSvar(sporsmal)
         setValue(sporsmal.id, svar === 'CHECKED' ? 'true' : '')
         // eslint-disable-next-line
-    }, [sporsmal]);
+    }, [ sporsmal ]);
 
     const valider = () => {
         const valid = harValgtNoe(parent, getValues())
@@ -73,8 +71,7 @@ const CheckboxSingle = ({ parent, sporsmal }: AllProps) => {
         // For å bare vise feilmeldingen en gang
         if (forsteCheckbox === sporsmal.id) {
             return feilmelding.global
-        }
-        else {
+        } else {
             return true
         }
     }

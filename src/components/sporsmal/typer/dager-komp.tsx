@@ -1,6 +1,5 @@
 import './dager-komp.less'
 
-import { ErrorMessage } from '@hookform/error-message'
 import dayjs, { Dayjs } from 'dayjs'
 import isoWeek from 'dayjs/plugin/isoWeek'
 import weekOfYear from 'dayjs/plugin/weekOfYear'
@@ -10,10 +9,13 @@ import { useFormContext } from 'react-hook-form'
 
 import { RSSvar } from '../../../types/rs-types/rs-svar'
 import { Sporsmal } from '../../../types/types'
-import { maaneder,sammeAar, sammeMnd } from '../../../utils/dato-utils'
+import { maaneder, sammeAar, sammeMnd } from '../../../utils/dato-utils'
+import { tekst } from '../../../utils/tekster'
 import Vis from '../../vis'
 import { hentSvar } from '../hent-svar'
 import { SpmProps } from '../sporsmal-form/sporsmal-form'
+import { hentFeilmelding } from '../sporsmal-utils'
+import SlettIkon from './slett-ikon.svg'
 
 dayjs.extend(weekOfYear)
 dayjs.extend(isoWeek)
@@ -26,6 +28,7 @@ interface KalenderDag {
 const DagerKomp = ({ sporsmal }: SpmProps) => {
     const [ lokal, setLokal ] = useState<string[]>([])
     const { register, errors, setValue } = useFormContext()
+    const feilmelding = hentFeilmelding(sporsmal)
 
     const dagerSidenMandag = (spm: Sporsmal) => {
         return ((dayjs(spm.min!).day() - 1)) % 7
@@ -118,69 +121,103 @@ const DagerKomp = ({ sporsmal }: SpmProps) => {
         setValue(sporsmal.id, lokal)
     }
 
+    const velgAlle = () => {
+        const dager: string[] = []
+        alledager.forEach((uke: any) => {
+            for (let i = 0; i < uke.length; i++) {
+                const dag = uke[i]
+                if (dag.tid === 'inni' && dag.dayjs.isoWeekday() < 6) {
+                    dager.push(dag.dayjs.format('YYYY-MM-DD'))
+                }
+            }
+        })
+        setLokal(Array.from(new Set(dager)))
+    }
+
+    const fjernAlle = () => {
+        setLokal([])
+    }
+
+    const kalenderdag = (dag: KalenderDag, ukeidx: number, idx: number) => {
+        const helg = dag.dayjs.isoWeekday() > 5
+        if (helg) {
+            return <span className="label">{dag.dayjs.format('DD')}</span>
+        } else if (dag.tid !== 'foran' && dag.tid !== 'etter') {
+            return (
+                <>
+                    <input type="checkbox"
+                        id={`${sporsmal.id}_${ukeidx}_${idx}`}
+                        name={sporsmal.id}
+                        value={dag.dayjs.format('YYYY-MM-DD')}
+                        ref={register({ required: feilmelding.global })}
+                        checked={lokal.includes(dag.dayjs.format('YYYY-MM-DD'))}
+                        onChange={() => checkClick(dag.dayjs.format(('YYYY-MM-DD')))}
+                        className={'checkboks' + (lokal.includes(dag.dayjs.format('YYYY-MM-DD')) ? ' checked' : '')}
+                    />
+                    <label htmlFor={`${sporsmal.id}_${ukeidx}_${idx}`}>
+                        {dag.dayjs.format('DD')}
+                    </label>
+                </>
+            )
+        } else {
+            return <span className="label">{dag.dayjs.format('DD')}</span>
+        }
+    }
+
     return (
         <>
             <Vis hvis={sporsmal.sporsmalstekst !== null}>
-                <Element tag="h3" className="skjema__sporsmal">{sporsmal.sporsmalstekst}</Element>
+                <Element tag="h3" className="skjema__sporsmal">
+                    {sporsmal.sporsmalstekst}
+                </Element>
             </Vis>
 
-            <div className="skjemaelement">
-                <div className="skjema__dager">
-                    <Normaltekst tag="h4" className="kalender__tittel">{kalTittel()}</Normaltekst>
-                    <div className="ukedager">
-                        <span>uke</span>
-                        <span>Man</span>
-                        <span>Tir</span>
-                        <span>Ons</span>
-                        <span>Tor</span>
-                        <span>Fre</span>
-                        <span>Lør</span>
-                        <span>Søn</span>
-                    </div>
-
-                    {alledager.map((ukedager: KalenderDag[], ukeidx: number) => {
-                        return (
-                            <div className="kalenderuke" key={ukeidx}>
-                                <div className="ukenr">{uker[ukeidx]}</div>
-
-                                {ukedager.map((dag, idx) => {
-                                    const sunday = dag.dayjs.isoWeekday() === 7 ? 'sun' : ''
-                                    const helg = dag.dayjs.isoWeekday() > 5 ? 'helg' : ''
-                                    return (
-                                        <div className={`kalenderdag ${dag.tid} ${sunday} ${helg}`} key={idx}>
-                                            {dag.tid !== 'foran' && dag.tid !== 'etter'
-                                                ?
-                                                <>
-                                                    <input type="checkbox"
-                                                        id={`${sporsmal.id}_${ukeidx}_${idx}`}
-                                                        name={`${sporsmal.id}_${ukeidx}_${idx}`}
-                                                        value={dag.dayjs.format('YYYY-MM-DD')}
-                                                        ref={register}
-                                                        onChange={() => checkClick(dag.dayjs.format(('YYYY-MM-DD')))}
-                                                        className="checkboks"
-                                                    />
-                                                    <label htmlFor={`${sporsmal.id}_${ukeidx}_${idx}`}>
-                                                        {dag.dayjs.format('DD')}
-                                                    </label>
-                                                </>
-                                                :
-                                                <span className="label">{dag.dayjs.format('DD')}</span>
-                                            }
-                                        </div>
-                                    )
-                                })}
-                            </div>
-                        )
-                    })}
+            <div className="skjemaelement skjema__dager">
+                <Normaltekst tag="h4" className="kalender__tittel">{kalTittel()}</Normaltekst>
+                <div className="ukedager">
+                    <span>uke</span>
+                    <span>Man</span>
+                    <span>Tir</span>
+                    <span>Ons</span>
+                    <span>Tor</span>
+                    <span>Fre</span>
+                    <span>Lør</span>
+                    <span>Søn</span>
                 </div>
-            </div>
 
-            <div role="alert" aria-live="assertive">
-                <Vis hvis={errors[sporsmal.id] !== undefined}>
-                    <Normaltekst tag="span" className="skjemaelement__feilmelding">
-                        <ErrorMessage as="p" errors={errors} name={sporsmal.id} />
-                    </Normaltekst>
-                </Vis>
+                {alledager.map((ukedager: KalenderDag[], ukeidx: number) => {
+                    return (
+                        <div className="kalenderuke" key={ukeidx}>
+                            <div className="ukenr">{uker[ukeidx]}</div>
+
+                            {ukedager.map((dag, idx) => {
+                                const sunday = dag.dayjs.isoWeekday() === 7 ? 'sun' : ''
+                                const helg = dag.dayjs.isoWeekday() > 5 ? 'helg' : ''
+                                return (
+                                    <div className={`kalenderdag ${dag.tid} ${sunday} ${helg}`} key={idx}>
+                                        {kalenderdag(dag, ukeidx, idx)}
+                                    </div>
+                                )
+                            })}
+                        </div>
+                    )
+                })}
+
+                <Normaltekst className="kalendervalg">
+                    <button type="button" className="lenkeknapp velgalle" onClick={velgAlle}>
+                        {tekst('sporsmal.egen-bil.kalender.ukedager')}
+                    </button>
+                    <button type="button" className="lenkeknapp fjernalle" onClick={fjernAlle}>
+                        <img src={SlettIkon} alt="" />
+                        {tekst('sporsmal.egen-bil.kalender.fjern')}
+                    </button>
+                </Normaltekst>
+
+                <Normaltekst tag="div" role="alert" aria-live="assertive" className="skjemaelement__feilmelding">
+                    <Vis hvis={errors[sporsmal.id] !== undefined}>
+                        <p>{feilmelding['lokal']}</p>
+                    </Vis>
+                </Normaltekst>
             </div>
         </>
     )
