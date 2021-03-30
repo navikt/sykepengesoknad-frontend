@@ -98,7 +98,7 @@ describe('Teste førsteside i reisetilskuddsøknaden', () => {
         })
 
         it('Fyller ut', () => {
-            cy.get('.skjema__dager').contains('25').click({ force: true }) // alt dette er flaky >:(
+            cy.get('.skjema__dager').contains('25').click({ force: true })
             cy.get('.skjema__dager').contains('26').click({ force: true })
             cy.get('.skjema__dager').contains('26').click({ force: true })
 
