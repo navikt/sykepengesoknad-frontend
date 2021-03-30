@@ -82,7 +82,7 @@ const JaNeiInput = ({ sporsmal }: SpmProps) => {
                     </legend>
                     <div className="inputPanelGruppe__inner">
                         {jaNeiValg.map((valg, idx) => {
-                            const OK = getValues()[sporsmal.id] === valg.value
+                            const OK = getValues()[sporsmal.id] === valg.value || lokal === valg.value
                             return (
                                 <label className={'inputPanel radioPanel' + (OK ? ' inputPanel--checked' : '')}
                                     key={idx}>
