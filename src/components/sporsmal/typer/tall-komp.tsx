@@ -1,5 +1,5 @@
 import { Element, Normaltekst } from 'nav-frontend-typografi'
-import React, { useEffect, useRef, useState } from 'react'
+import React, { useEffect, useRef } from 'react'
 import { useFormContext } from 'react-hook-form'
 
 import { TagTyper } from '../../../types/enums'
@@ -13,17 +13,18 @@ import { hentFeilmelding } from '../sporsmal-utils'
 import UndersporsmalListe from '../undersporsmal/undersporsmal-liste'
 
 const TallKomp = ({ sporsmal }: SpmProps) => {
+    const { register, setValue, errors, getValues, watch } = useFormContext()
+    const watchTall = watch(sporsmal.id)
+
     const feilmelding = hentFeilmelding(sporsmal)
-    const [ lokal, setLokal ] = useState<string>(hentSvar(sporsmal))
-    const { register, setValue, errors, getValues } = useFormContext()
     const undersporsmal = useRef<HTMLDivElement>(null)
     const { validerGrad, periode, hovedSporsmal } = validerArbeidsgrad(sporsmal)
 
-    const onChange = (e: any) => {
-        const value = e.target.value
-        setValue(sporsmal.id, value)
-        setLokal(value)
-    }
+    // TODO: Feilmeldinger for andre valideringer enn required
+
+    useEffect(() => {
+        setValue(sporsmal.id, hentSvar(sporsmal))
+    }, [ sporsmal, setValue ])
 
     const valider = () => {
         if (validerGrad) {
@@ -34,10 +35,7 @@ const TallKomp = ({ sporsmal }: SpmProps) => {
             if (sporsmal.tag !== TagTyper.HVOR_MYE_TIMER_VERDI) {
                 return true
             }
-
-            const values = getValues()
-
-            return validerGrad(values)
+            return validerGrad(getValues())
         } else {
             return true
         }
@@ -75,12 +73,6 @@ const TallKomp = ({ sporsmal }: SpmProps) => {
         }
     }
 
-    useEffect(() => {
-        setValue(sporsmal.id, hentSvar(sporsmal))
-        // eslint-disable-next-line
-    }, [])
-
-
     return (
         <div className={className()}>
             <Vis hvis={sporsmal.sporsmalstekst}>
@@ -110,31 +102,31 @@ const TallKomp = ({ sporsmal }: SpmProps) => {
                         }
                     })}
                     step={step()}
-                    onChange={onChange}
                     autoComplete="off"
                 />
                 <label className="medEnhet__enhet" htmlFor={sporsmal.id}>{sporsmal.undertekst}</label>
             </div>
 
-            <div role="alert" aria-live="assertive" className="skjemaelement__feilmelding">
+            <div role="alert" aria-live="assertive">
                 <Vis hvis={errors[sporsmal.id]}>
                     <Vis hvis={errors[sporsmal.id]?.type !== 'validate'}>
-                        <Normaltekst tag="span">
+                        <Normaltekst tag="span" className="skjemaelement__feilmelding">
                             <p>{feilmelding.lokal}</p>
                         </Normaltekst>
                     </Vis>
-                    <Vis
-                        hvis={errors[sporsmal.id]?.type === 'validate' && sporsmal.tag === TagTyper.HVOR_MYE_TIMER_VERDI}>
-                        <Normaltekst tag="span">
-                            <p>{getLedetekst(tekst('soknad.feilmelding.MINDRE_TIMER_ENN_FORVENTET.lokal'),
-                                { '%GRAD%': periode?.grad })}</p>
+                    <Vis hvis={errors[sporsmal.id]?.type === 'validate' && sporsmal.tag === TagTyper.HVOR_MYE_TIMER_VERDI}>
+                        <Normaltekst tag="span" className="skjemaelement__feilmelding">
+                            <p>{getLedetekst(
+                                tekst('soknad.feilmelding.MINDRE_TIMER_ENN_FORVENTET.lokal'),
+                                { '%GRAD%': periode?.grad }
+                            )}</p>
                         </Normaltekst>
                     </Vis>
                 </Vis>
             </div>
 
             <div className="undersporsmal" ref={undersporsmal}>
-                <Vis hvis={lokal}>
+                <Vis hvis={watchTall}>
                     <UndersporsmalListe oversporsmal={sporsmal} />
                 </Vis>
             </div>

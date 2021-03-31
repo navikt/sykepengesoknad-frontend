@@ -1,22 +1,21 @@
 import useMutationObserver from '@rooks/use-mutation-observer'
 import { Datepicker } from 'nav-datovelger'
-import { Element, Normaltekst } from 'nav-frontend-typografi'
-import React, { useEffect, useRef, useState } from 'react'
+import { Element } from 'nav-frontend-typografi'
+import React, { useEffect, useRef } from 'react'
 import { Controller, useFormContext } from 'react-hook-form'
 
 import { skalBrukeFullskjermKalender } from '../../../utils/browser-utils'
 import { fraBackendTilDate } from '../../../utils/dato-utils'
 import validerDato from '../../../utils/sporsmal/valider-dato'
+import FeilLokal from '../../feil/feil-lokal'
 import Vis from '../../vis'
 import { hentSvar } from '../hent-svar'
 import { SpmProps } from '../sporsmal-form/sporsmal-form'
-import { hentFeilmelding } from '../sporsmal-utils'
 import UndersporsmalListe from '../undersporsmal/undersporsmal-liste'
 
 const DatoInput = ({ sporsmal }: SpmProps) => {
-    const { setValue, errors, watch, getValues } = useFormContext()
-    const feilmelding = hentFeilmelding(sporsmal)
-    const [ dato, setDato ] = useState<string>('')
+    const { setValue, getValues, watch } = useFormContext()
+    const watchDato = watch(sporsmal.id)
     const mutationRef = useRef<HTMLDivElement>(null)
 
     useMutationObserver(mutationRef, (e) => {
@@ -33,9 +32,7 @@ const DatoInput = ({ sporsmal }: SpmProps) => {
     useEffect(() => {
         const svar = hentSvar(sporsmal)
         setValue(sporsmal.id, svar)
-        setDato(svar)
-        // eslint-disable-next-line
-    }, [ sporsmal ])
+    }, [ sporsmal, setValue ])
 
     return (
         <div ref={mutationRef} className="dato-komp">
@@ -53,7 +50,6 @@ const DatoInput = ({ sporsmal }: SpmProps) => {
                             div?.classList.add('skjemaelement__input--harFeil')
                             return detteFeilet
                         }
-
                         div?.classList.remove('skjemaelement__input--harFeil')
                         return true
                     }
@@ -64,9 +60,8 @@ const DatoInput = ({ sporsmal }: SpmProps) => {
                         inputId={name}
                         onChange={(value) => {
                             setValue(sporsmal.id, value)
-                            setDato(value)
                         }}
-                        value={dato}
+                        value={watchDato}
                         inputProps={{
                             name: name
                         }}
@@ -87,11 +82,7 @@ const DatoInput = ({ sporsmal }: SpmProps) => {
                 )}
             />
 
-            <Normaltekst tag="div" role="alert" aria-live="assertive" className="skjemaelement__feilmelding">
-                <Vis hvis={errors[sporsmal.id]}>
-                    <p>{feilmelding.lokal}</p>
-                </Vis>
-            </Normaltekst>
+            <FeilLokal sporsmal={sporsmal} />
 
             <div className="undersporsmal">
                 <Vis hvis={watch(sporsmal.id)}>

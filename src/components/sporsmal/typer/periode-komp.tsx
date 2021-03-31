@@ -30,16 +30,18 @@ type AllProps = SpmProps & PeriodeProps;
 const PeriodeKomp = ({ sporsmal, index, slettPeriode }: AllProps) => {
     const { setValue, getValues, errors } = useFormContext()
     const [ periode, setPeriode ] = useState<FormPeriode>({ fom: '', tom: '' })
-    const id = sporsmal.id + '_' + index
     const feilmelding = hentFeilmelding(sporsmal)
+    const id = sporsmal.id + '_' + index
     const mutationRef = useRef<HTMLDivElement>(null)
+
+    // TODO: Feilmeldinger for andre valideringer enn required
 
     useEffect(() => {
         const periode = hentPeriode(sporsmal, index)
         setValue(id, periode)
         setPeriode(periode)
         // eslint-disable-next-line
-    }, [ sporsmal ]);
+    }, [ sporsmal, setValue ])
 
     useMutationObserver(mutationRef, (e) => {
         const node: Node = e[1]?.addedNodes[0]
@@ -167,6 +169,7 @@ const PeriodeKomp = ({ sporsmal, index, slettPeriode }: AllProps) => {
                     </button>
                 </Vis>
             </div>
+
             <Normaltekst tag="div" role="alert" aria-live="assertive" className="skjemaelement__feilmelding">
                 <Vis hvis={errors[id]}>
                     <p>{feilmelding.lokal}</p>

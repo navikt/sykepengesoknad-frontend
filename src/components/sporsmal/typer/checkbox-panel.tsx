@@ -1,34 +1,29 @@
-import { Normaltekst } from 'nav-frontend-typografi'
 import React, { useEffect, useRef, useState } from 'react'
 import { useFormContext } from 'react-hook-form'
 
 import { TagTyper } from '../../../types/enums'
-import Vis from '../../vis'
+import FeilLokal from '../../feil/feil-lokal'
 import { hentSvar } from '../hent-svar'
 import { SpmProps } from '../sporsmal-form/sporsmal-form'
 import { hentFeilmelding } from '../sporsmal-utils'
 
 const CheckboxInput = ({ sporsmal }: SpmProps) => {
     const { register, setValue, errors } = useFormContext()
+
     const bekreft = useRef<HTMLDivElement>(null)
     const [ classname, setClassname ] = useState<string>('bekreftCheckboksPanel')
     const feilmelding = hentFeilmelding(sporsmal)
-    const [ lokal, setLokal ] = useState<boolean>(hentSvar(sporsmal))
 
     useEffect(() => {
         const svar = hentSvar(sporsmal)
-        setLokal(svar)
         setValue(sporsmal.id, svar)
         setClassname(getClassName(svar === 'CHECKED'))
         // eslint-disable-next-line
-    }, [sporsmal]);
+    }, [ sporsmal, setValue, setClassname ])
 
     const handleChange = (evt: any) => {
         bekreft.current!.classList.toggle('bekreftCheckboksPanel--checked')
-        setValue(sporsmal.id, evt.target.checked)
-        setLokal(evt.target.checked)
         setClassname(getClassName(evt.target.checked))
-
     }
 
     const getClassName = (checked: boolean) => {
@@ -51,7 +46,6 @@ const CheckboxInput = ({ sporsmal }: SpmProps) => {
                         className="skjemaelement__input checkboks"
                         name={sporsmal.id}
                         id={sporsmal.id}
-                        checked={lokal}
                         onChange={handleChange}
                         ref={register({ required: feilmelding.global })}
                     />
@@ -61,11 +55,7 @@ const CheckboxInput = ({ sporsmal }: SpmProps) => {
                 </div>
             </div>
 
-            <Normaltekst tag="div" role="alert" aria-live="assertive" className="skjemaelement__feilmelding">
-                <Vis hvis={errors[sporsmal.id] !== undefined}>
-                    <p>{feilmelding.lokal}</p>
-                </Vis>
-            </Normaltekst>
+            <FeilLokal sporsmal={sporsmal} />
         </>
     )
 }

@@ -1,17 +1,18 @@
 import parser from 'html-react-parser'
 import { Element, Normaltekst } from 'nav-frontend-typografi'
-import React, { useEffect, useState } from 'react'
+import React, { useEffect } from 'react'
 import { useFormContext } from 'react-hook-form'
 
 import { SvarEnums, TagTyper } from '../../../types/enums'
 import { getLedetekst, tekst } from '../../../utils/tekster'
 import { utlandssoknadUrl } from '../../../utils/url-utils'
 import AnimateOnMount from '../../animate-on-mount'
+import FeilLokal from '../../feil/feil-lokal'
 import Vis from '../../vis'
 import Bjorn from '../bjorn/bjorn'
 import SporsmalBjorn from '../bjorn/sporsmal-bjorn'
 import TagBjorn from '../bjorn/tag-bjorn'
-import { hentFormState, hentSvar } from '../hent-svar'
+import { hentSvar } from '../hent-svar'
 import { SpmProps } from '../sporsmal-form/sporsmal-form'
 import SporsmalHjelpetekst from '../sporsmal-hjelpetekst'
 import { hentFeilmelding, sporsmalIdListe } from '../sporsmal-utils'
@@ -26,22 +27,13 @@ const jaNeiValg = [ {
 } ]
 
 const JaNeiInput = ({ sporsmal }: SpmProps) => {
-    const { register, setValue, errors, reset, getValues, clearErrors } = useFormContext()
+    const { register, setValue, errors, getValues, clearErrors, watch } = useFormContext()
     const feilmelding = hentFeilmelding(sporsmal)
-    const [ lokal, setLokal ] = useState<string>(hentSvar(sporsmal))
+    const watchJaNei = watch(sporsmal.id)
 
     useEffect(() => {
-        if (sporsmal.erHovedsporsmal) {
-            reset(hentFormState(sporsmal))
-        } else {
-            setValue(sporsmal.id, hentSvar(sporsmal))
-        }
-        // eslint-disable-next-line
-    }, [sporsmal.id]);
-
-    useEffect(() => {
-        setLokal(hentSvar(sporsmal))
-    }, [ sporsmal ])
+        setValue(sporsmal.id, hentSvar(sporsmal))
+    }, [ sporsmal, setValue ])
 
     const visAvgittAvBjorn = () => {
         const undersporsmal = sporsmal.undersporsmal.find(uspm => uspm.tag === TagTyper.EGENMELDINGER_NAR)
@@ -49,11 +41,6 @@ const JaNeiInput = ({ sporsmal }: SpmProps) => {
             return undersporsmal.svarliste.svar.some(svaret => svaret.avgittAv === 'TIDLIGERE_SOKNAD')
         }
         return false
-    }
-
-    const changeValue = (value: string) => {
-        setValue(sporsmal.id, value)
-        setLokal(value)
     }
 
     const valider = (value: any) => {
@@ -82,7 +69,7 @@ const JaNeiInput = ({ sporsmal }: SpmProps) => {
                     </legend>
                     <div className="inputPanelGruppe__inner">
                         {jaNeiValg.map((valg, idx) => {
-                            const OK = getValues()[sporsmal.id] === valg.value || lokal === valg.value
+                            const OK = watchJaNei === valg.value
                             return (
                                 <label className={'inputPanel radioPanel' + (OK ? ' inputPanel--checked' : '')}
                                     key={idx}>
@@ -90,10 +77,7 @@ const JaNeiInput = ({ sporsmal }: SpmProps) => {
                                         name={sporsmal.id}
                                         id={sporsmal.id + '_' + idx}
                                         className="inputPanel__field"
-                                        aria-checked={OK}
-                                        checked={OK}
                                         value={valg.value}
-                                        onClick={() => changeValue(valg.value)}
                                         ref={register({
                                             validate: (value) => valider(value),
                                             required: feilmelding.global
@@ -118,20 +102,16 @@ const JaNeiInput = ({ sporsmal }: SpmProps) => {
                 </Vis>
             </div>
 
-            <Normaltekst tag="div" role="alert" aria-live="assertive" className="skjemaelement__feilmelding">
-                <Vis hvis={errors[sporsmal.id] !== undefined}>
-                    <p>{feilmelding.lokal}</p>
-                </Vis>
-            </Normaltekst>
+            <FeilLokal sporsmal={sporsmal} />
 
             <AnimateOnMount
-                mounted={lokal === sporsmal.kriterieForVisningAvUndersporsmal}
+                mounted={watchJaNei === sporsmal.kriterieForVisningAvUndersporsmal}
                 enter="undersporsmal--vis"
                 leave="undersporsmal--skjul"
                 start="undersporsmal"
             >
                 <>
-                    <UndersporsmalListe oversporsmal={sporsmal} oversporsmalSvar={lokal} />
+                    <UndersporsmalListe oversporsmal={sporsmal} oversporsmalSvar={watchJaNei} />
                     <TagBjorn sporsmal={sporsmal} className="press" />
                 </>
             </AnimateOnMount>
