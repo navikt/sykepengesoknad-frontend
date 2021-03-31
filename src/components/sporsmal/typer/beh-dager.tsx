@@ -1,20 +1,20 @@
 import './beh.dager.less'
 
-import { ErrorMessage } from '@hookform/error-message'
 import dayjs from 'dayjs'
-import { Element, Normaltekst } from 'nav-frontend-typografi'
+import { Element } from 'nav-frontend-typografi'
 import React, { useEffect, useState } from 'react'
 import { useFormContext } from 'react-hook-form'
 
 import { RSSvarliste } from '../../../types/rs-types/rs-svarliste'
 import { Sporsmal } from '../../../types/types'
 import { ukeDatoListe } from '../../../utils/dato-utils'
+import FeilLokal from '../../feil/feil-lokal'
 import Vis from '../../vis'
 import { hentSvar } from '../hent-svar'
 import { SpmProps } from '../sporsmal-form/sporsmal-form'
 
 const BehDager = ({ sporsmal }: SpmProps) => {
-    const { register, errors, setValue } = useFormContext()
+    const { register, setValue } = useFormContext()
     const antallUker = sporsmal.undersporsmal.length
     const [ lokal, setLokal ] = useState<string[]>(new Array(antallUker).fill(''))
 
@@ -123,13 +123,7 @@ const BehDager = ({ sporsmal }: SpmProps) => {
                 </div>
             </div>
 
-            <div role="alert" aria-live="assertive">
-                <Vis hvis={errors[sporsmal.id] !== undefined}>
-                    <Normaltekst tag="span" className="skjemaelement__feilmelding">
-                        <ErrorMessage as="p" errors={errors} name={sporsmal.id} />
-                    </Normaltekst>
-                </Vis>
-            </div>
+            <FeilLokal sporsmal={sporsmal} />
         </>
     )
 }

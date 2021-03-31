@@ -11,16 +11,16 @@ interface UndersporsmalListeProps {
 
 const UndersporsmalListe = ({ oversporsmal, oversporsmalSvar }: UndersporsmalListeProps) => {
     return (
-        <>{
-            oversporsmal.undersporsmal.map((underspm: Sporsmal, idx: number) => {
-
-                return (
-                    <Vis hvis={!oversporsmal.kriterieForVisningAvUndersporsmal || oversporsmal.kriterieForVisningAvUndersporsmal === oversporsmalSvar} key={idx}>
-                        <SporsmalSwitch sporsmal={underspm} />
-                    </Vis>
-                )
-            }).filter((underspm: any) => underspm !== null)
-        }
+        <>{oversporsmal.undersporsmal.map((underspm: Sporsmal, idx: number) => {
+            return (
+                <Vis hvis={
+                    !oversporsmal.kriterieForVisningAvUndersporsmal ||
+                    oversporsmal.kriterieForVisningAvUndersporsmal === oversporsmalSvar
+                } key={idx}>
+                    <SporsmalSwitch sporsmal={underspm} />
+                </Vis>
+            )
+        }).filter((underspm: any) => underspm !== null)}
         </>
     )
 }

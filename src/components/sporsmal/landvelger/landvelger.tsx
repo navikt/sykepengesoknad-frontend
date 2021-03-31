@@ -34,14 +34,16 @@ const LandvelgerComponent = ({ verdierInn, id, onChange }: LandvelgerComponentPr
         onChange(nyeVerdier)
     }
 
-    return (<div className={'landvelger'}>
-        <NavAutosuggest
-            onAdd={onAdd}
-            id={id}
-            forslagsliste={tilForslagsliste(landliste, verdier)}
-        />
-        <ValgteTags verdier={verdier} handleDelete={onDelete} />
-    </div>)
+    return (
+        <div className="landvelger">
+            <NavAutosuggest
+                onAdd={onAdd}
+                id={id}
+                forslagsliste={tilForslagsliste(landliste, verdier)}
+            />
+            <ValgteTags verdier={verdier} handleDelete={onDelete} />
+        </div>
+    )
 }
 
 export default LandvelgerComponent

@@ -1,10 +1,10 @@
 import { Element, Normaltekst } from 'nav-frontend-typografi'
-import React, { useEffect, useState } from 'react'
+import React, { useEffect } from 'react'
 import { FieldValues, useFormContext } from 'react-hook-form'
 
-import { useAppStore } from '../../../data/stores/app-store'
 import { Sporsmal } from '../../../types/types'
 import AnimateOnMount from '../../animate-on-mount'
+import FeilLokal from '../../feil/feil-lokal'
 import Vis from '../../vis'
 import { hentSvar } from '../hent-svar'
 import { SpmProps } from '../sporsmal-form/sporsmal-form'
@@ -13,8 +13,6 @@ import UndersporsmalListe from '../undersporsmal/undersporsmal-liste'
 
 const CheckboxKomp = ({ sporsmal }: SpmProps) => {
     const { errors } = useFormContext()
-    const feilmelding = hentFeilmelding(sporsmal)
-    const { validCheck } = useAppStore()
 
     return (
         <>
@@ -31,11 +29,7 @@ const CheckboxKomp = ({ sporsmal }: SpmProps) => {
                     <Normaltekst tag="div"> {sporsmal.undertekst} </Normaltekst>
                 </Vis>
 
-                <Normaltekst tag="div" role="alert" aria-live="assertive" className="skjemaelement__feilmelding">
-                    <Vis hvis={Object.entries(errors).length > 0 && !validCheck}>
-                        <p>{feilmelding['lokal']}</p>
-                    </Vis>
-                </Normaltekst>
+                <FeilLokal sporsmal={sporsmal} />
             </div>
         </>
     )
@@ -47,24 +41,21 @@ interface CheckboxProps {
     parent: Sporsmal;
 }
 
-type AllProps = SpmProps & CheckboxProps;
+type AllProps = SpmProps & CheckboxProps
 
 const CheckboxSingle = ({ parent, sporsmal }: AllProps) => {
     const { register, setValue, watch, getValues } = useFormContext()
+    const watchCheck = watch(sporsmal.id)
     const feilmelding = hentFeilmelding(parent)
-    const { setValidCheck } = useAppStore()
-    const [ lokal, setLokal ] = useState<string>(hentSvar(sporsmal))
 
     useEffect(() => {
         const svar = hentSvar(sporsmal)
         setValue(sporsmal.id, svar === 'CHECKED' ? 'true' : '')
-        // eslint-disable-next-line
-    }, [ sporsmal ]);
+    }, [ sporsmal, setValue ])
 
     const valider = () => {
         const valid = harValgtNoe(parent, getValues())
         const forsteCheckbox = parent.undersporsmal[0].id
-        setValidCheck(valid)
         if (valid) {
             return true
         }
@@ -76,16 +67,11 @@ const CheckboxSingle = ({ parent, sporsmal }: AllProps) => {
         }
     }
 
-    const mounted = watch(sporsmal.id)
-
     return (
         <div className="checkboksContainer">
             <input type="checkbox"
                 id={sporsmal.id}
                 name={sporsmal.id}
-                onChange={(e) => {
-                    setLokal(e.target.checked ? 'CHECKED' : '')
-                }}
                 ref={register({ validate: () => valider() })}
                 className="skjemaelement__input checkboks"
             />
@@ -94,12 +80,12 @@ const CheckboxSingle = ({ parent, sporsmal }: AllProps) => {
             </label>
 
             <AnimateOnMount
-                mounted={mounted}
+                mounted={watchCheck}
                 enter="undersporsmal--vis"
                 leave="undersporsmal--skjul"
                 start="undersporsmal"
             >
-                <UndersporsmalListe oversporsmal={sporsmal} oversporsmalSvar={lokal} />
+                <UndersporsmalListe oversporsmal={sporsmal} oversporsmalSvar={watchCheck ? 'CHECKED' : ''} />
             </AnimateOnMount>
         </div>
     )

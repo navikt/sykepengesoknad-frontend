@@ -19,7 +19,7 @@ const Perioder = ({ sporsmal }: SpmProps) => {
         const svar = hentPerioder(sporsmal)
         setLokal(svar.length > 0 ? svar : lokal)
         // eslint-disable-next-line
-    }, [ sporsmal ]);
+    }, [ sporsmal ])
 
     const oppdaterPerioder = () => {
         forceUpdate()

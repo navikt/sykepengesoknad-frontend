@@ -4,13 +4,14 @@ import dayjs, { Dayjs } from 'dayjs'
 import isoWeek from 'dayjs/plugin/isoWeek'
 import weekOfYear from 'dayjs/plugin/weekOfYear'
 import { Element, Normaltekst } from 'nav-frontend-typografi'
-import React, { useEffect, useState } from 'react'
+import React, { useEffect } from 'react'
 import { useFormContext } from 'react-hook-form'
 
 import { RSSvar } from '../../../types/rs-types/rs-svar'
 import { Sporsmal } from '../../../types/types'
 import { maaneder, sammeAar, sammeMnd } from '../../../utils/dato-utils'
 import { tekst } from '../../../utils/tekster'
+import FeilLokal from '../../feil/feil-lokal'
 import Vis from '../../vis'
 import { hentSvar } from '../hent-svar'
 import { SpmProps } from '../sporsmal-form/sporsmal-form'
@@ -26,9 +27,15 @@ interface KalenderDag {
 }
 
 const DagerKomp = ({ sporsmal }: SpmProps) => {
-    const [ lokal, setLokal ] = useState<string[]>([])
-    const { register, errors, setValue } = useFormContext()
+    const { register, setValue, watch } = useFormContext()
     const feilmelding = hentFeilmelding(sporsmal)
+    const watchDager = watch(sporsmal.id)
+
+    useEffect(() => {
+        const svar = hentSvar(sporsmal).map((svar: RSSvar) => svar.verdi)
+        console.log('svar', svar) // eslint-disable-line
+        setValue(sporsmal.id, svar)
+    }, [ sporsmal, setValue ])
 
     const dagerSidenMandag = (spm: Sporsmal) => {
         return ((dayjs(spm.min!).day() - 1)) % 7
@@ -97,30 +104,6 @@ const DagerKomp = ({ sporsmal }: SpmProps) => {
         }
     })
 
-    useEffect(() => {
-        const dager: RSSvar[] = hentSvar(sporsmal)
-        dager.forEach((svar, idx) => {
-            if (svar?.verdi !== undefined && svar?.verdi !== '') {
-                lokal[idx] = svar.verdi
-                const radio = document.querySelector('.checkboks[value="' + lokal[idx] + '"]')
-                radio!.setAttribute('checked', 'checked')
-            }
-        })
-        setLokal(lokal)
-        // eslint-disable-next-line
-    }, [ sporsmal ])
-
-    const checkClick = (value: string) => {
-        const index = lokal.indexOf(value)
-        if (index > -1) {
-            lokal.splice(index, 1)
-        } else {
-            lokal.push(value)
-        }
-        setLokal(Array.from(new Set(lokal)))
-        setValue(sporsmal.id, lokal)
-    }
-
     const velgAlle = () => {
         const dager: string[] = []
         alledager.forEach((uke: any) => {
@@ -131,11 +114,11 @@ const DagerKomp = ({ sporsmal }: SpmProps) => {
                 }
             }
         })
-        setLokal(Array.from(new Set(dager)))
+        setValue(sporsmal.id, Array.from(new Set(dager)))
     }
 
     const fjernAlle = () => {
-        setLokal([])
+        setValue(sporsmal.id, [])
     }
 
     const kalenderdag = (dag: KalenderDag, ukeidx: number, idx: number) => {
@@ -150,9 +133,7 @@ const DagerKomp = ({ sporsmal }: SpmProps) => {
                         name={sporsmal.id}
                         value={dag.dayjs.format('YYYY-MM-DD')}
                         ref={register({ required: feilmelding.global })}
-                        checked={lokal.includes(dag.dayjs.format('YYYY-MM-DD'))}
-                        onChange={() => checkClick(dag.dayjs.format(('YYYY-MM-DD')))}
-                        className={'checkboks' + (lokal.includes(dag.dayjs.format('YYYY-MM-DD')) ? ' checked' : '')}
+                        className={'checkboks' + (watchDager?.includes(dag.dayjs.format('YYYY-MM-DD')) ? ' checked' : '')}
                     />
                     <label htmlFor={`${sporsmal.id}_${ukeidx}_${idx}`}>
                         {dag.dayjs.format('DD')}
@@ -213,11 +194,7 @@ const DagerKomp = ({ sporsmal }: SpmProps) => {
                     </button>
                 </Normaltekst>
 
-                <Normaltekst tag="div" role="alert" aria-live="assertive" className="skjemaelement__feilmelding">
-                    <Vis hvis={errors[sporsmal.id] !== undefined}>
-                        <p>{feilmelding['lokal']}</p>
-                    </Vis>
-                </Normaltekst>
+                <FeilLokal sporsmal={sporsmal} />
             </div>
         </>
     )

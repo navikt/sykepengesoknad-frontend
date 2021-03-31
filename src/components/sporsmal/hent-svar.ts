@@ -33,6 +33,10 @@ export const hentSvar = (sporsmal: Sporsmal): any => {
         return svarliste.svar
     }
 
+    if (sporsmal.svartype === RSSvartype.LAND) {
+        return svarliste.svar.map((i) => i.verdi)
+    }
+
     if (svar === undefined) {
         return sporsmal.svartype.toString().startsWith('PERIODE') ||
         sporsmal.svartype.toString().startsWith('DATOER') ? [] : ''
