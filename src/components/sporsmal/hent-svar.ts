@@ -27,8 +27,6 @@ export const hentSvar = (sporsmal: Sporsmal): any => {
 
         case RSSvartype.DATOER:
         case RSSvartype.LAND:
-            // eslint-disable-next-line no-console
-            console.log('svar', svarliste.svar)
             return svarliste.svar.map((svar: RSSvar) => svar.verdi)
 
         case RSSvartype.KVITTERING:
