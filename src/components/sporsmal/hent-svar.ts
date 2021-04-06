@@ -22,11 +22,13 @@ export const hentSvar = (sporsmal: Sporsmal): any => {
         case RSSvartype.RADIO_GRUPPE_TIMER_PROSENT:
         case RSSvartype.RADIO_GRUPPE_UKEKALENDER:
             return sporsmal.undersporsmal.find((spm: Sporsmal) => {
-                return spm.svarliste.svar[0] && spm.svarliste.svar[0].verdi === SvarEnums.CHECKED
+                return spm.svarliste.svar[0]?.verdi === SvarEnums.CHECKED
             })?.sporsmalstekst || undefined
 
         case RSSvartype.DATOER:
         case RSSvartype.LAND:
+            // eslint-disable-next-line no-console
+            console.log('svar', svarliste.svar)
             return svarliste.svar.map((svar: RSSvar) => svar.verdi)
 
         case RSSvartype.KVITTERING:
