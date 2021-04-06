@@ -14,7 +14,6 @@ export const [ AppStoreProvider, useAppStore ] = constate(() => {
     const [ top, setTop ] = useState<number>(0)
     const [ feilState, setFeilState ] = useState<boolean>(false)
     const [ feilmeldingTekst, setFeilmeldingTekst ] = useState<string>('')
-    const [ rerenderSporsmalForm, setRerenderSporsmalForm ] = useState<number>(new Date().getUTCMilliseconds())
     const [ openModal, setOpenModal ] = useState<boolean>(false)
     const [ valgtFil, setValgtFil ] = useState<File>()
 
@@ -28,7 +27,6 @@ export const [ AppStoreProvider, useAppStore ] = constate(() => {
         top, setTop,
         feilState, setFeilState,
         feilmeldingTekst, setFeilmeldingTekst,
-        rerenderSporsmalForm, setRerenderSporsmalForm,
         openModal, setOpenModal,
         valgtFil, setValgtFil,
     }
