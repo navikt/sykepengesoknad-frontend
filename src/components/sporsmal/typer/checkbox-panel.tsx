@@ -1,35 +1,16 @@
-import React, { useEffect, useRef, useState } from 'react'
+import React from 'react'
 import { useFormContext } from 'react-hook-form'
 
 import { TagTyper } from '../../../types/enums'
 import FeilLokal from '../../feil/feil-lokal'
-import { hentSvar } from '../hent-svar'
 import { SpmProps } from '../sporsmal-form/sporsmal-form'
 import { hentFeilmelding } from '../sporsmal-utils'
 
 const CheckboxInput = ({ sporsmal }: SpmProps) => {
-    const { register, errors } = useFormContext()
-    const bekreft = useRef<HTMLDivElement>(null)
-    const [ classname, setClassname ] = useState<string>('bekreftCheckboksPanel')
+    const { register, errors, watch } = useFormContext()
     const feilmelding = hentFeilmelding(sporsmal)
+    const watchCheckbox = watch(sporsmal.id)
 
-    useEffect(() => {
-        const svar = hentSvar(sporsmal)
-        setClassname(getClassName(svar))
-        // eslint-disable-next-line
-    }, [ sporsmal, setClassname ])
-
-    const handleChange = (evt: any) => {
-        bekreft.current!.classList.toggle('bekreftCheckboksPanel--checked')
-        setClassname(getClassName(evt.target.checked))
-    }
-
-    const getClassName = (checked: boolean) => {
-        const cls = 'bekreftCheckboksPanel'
-        const err = errors[sporsmal.id] ? ' skjemaelement__input--harFeil' : ''
-        const all = checked ? cls + ' ' + cls + '--checked' : cls
-        return all + err
-    }
 
     if (sporsmal.tag === TagTyper.BEKREFT_OPPLYSNINGER_UTLAND_INFO) {
         return <CheckboxInput sporsmal={sporsmal.undersporsmal[0]} />
@@ -37,13 +18,16 @@ const CheckboxInput = ({ sporsmal }: SpmProps) => {
 
     return (
         <>
-            <div className={classname} ref={bekreft}>
+            <div className={
+                'bekreftCheckboksPanel' +
+                (watchCheckbox ? ' bekreftCheckboksPanel--checked' : '') +
+                (errors[sporsmal.id] ? ' skjemaelement__input--harFeil' : '')
+            }>
                 <div className="skjemaelement skjemaelement--horisontal">
                     <input type="checkbox"
                         className="skjemaelement__input checkboks"
                         name={sporsmal.id}
                         id={sporsmal.id}
-                        onChange={handleChange}
                         ref={register({ required: feilmelding.global })}
                     />
                     <label className="skjemaelement__label" htmlFor={sporsmal.id}>
