@@ -16,7 +16,7 @@ export const hentSvar = (sporsmal: Sporsmal): any => {
 
         case RSSvartype.CHECKBOX:
         case RSSvartype.CHECKBOX_PANEL:
-            return svar.verdi === 'CHECKED'
+            return svar?.verdi === 'CHECKED'
 
         case RSSvartype.RADIO_GRUPPE:
         case RSSvartype.RADIO_GRUPPE_TIMER_PROSENT:
