@@ -8,18 +8,16 @@ import { SpmProps } from '../sporsmal-form/sporsmal-form'
 import { hentFeilmelding } from '../sporsmal-utils'
 
 const CheckboxInput = ({ sporsmal }: SpmProps) => {
-    const { register, setValue, errors } = useFormContext()
-
+    const { register, errors } = useFormContext()
     const bekreft = useRef<HTMLDivElement>(null)
     const [ classname, setClassname ] = useState<string>('bekreftCheckboksPanel')
     const feilmelding = hentFeilmelding(sporsmal)
 
     useEffect(() => {
         const svar = hentSvar(sporsmal)
-        setValue(sporsmal.id, svar)
-        setClassname(getClassName(svar === 'CHECKED'))
+        setClassname(getClassName(svar))
         // eslint-disable-next-line
-    }, [ sporsmal, setValue, setClassname ])
+    }, [ sporsmal, setClassname ])
 
     const handleChange = (evt: any) => {
         bekreft.current!.classList.toggle('bekreftCheckboksPanel--checked')
@@ -34,10 +32,9 @@ const CheckboxInput = ({ sporsmal }: SpmProps) => {
     }
 
     if (sporsmal.tag === TagTyper.BEKREFT_OPPLYSNINGER_UTLAND_INFO) {
-        return (
-            <CheckboxInput sporsmal={sporsmal.undersporsmal[0]} />
-        )
+        return <CheckboxInput sporsmal={sporsmal.undersporsmal[0]} />
     }
+
     return (
         <>
             <div className={classname} ref={bekreft}>

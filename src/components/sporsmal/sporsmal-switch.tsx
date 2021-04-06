@@ -28,7 +28,6 @@ const SporsmalSwitch = ({ sporsmal }: UndersporsmalProps) => {
         case RSSvartype.CHECKBOX_PANEL:
             return <CheckboxPanel sporsmal={sporsmal} />
 
-        case RSSvartype.CHECKBOX:
         case RSSvartype.CHECKBOX_GRUPPE:
             return <CheckboxKomp sporsmal={sporsmal} />
 

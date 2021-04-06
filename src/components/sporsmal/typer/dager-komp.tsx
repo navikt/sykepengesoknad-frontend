@@ -4,16 +4,14 @@ import dayjs, { Dayjs } from 'dayjs'
 import isoWeek from 'dayjs/plugin/isoWeek'
 import weekOfYear from 'dayjs/plugin/weekOfYear'
 import { Element, Normaltekst } from 'nav-frontend-typografi'
-import React, { useEffect } from 'react'
+import React from 'react'
 import { useFormContext } from 'react-hook-form'
 
-import { RSSvar } from '../../../types/rs-types/rs-svar'
 import { Sporsmal } from '../../../types/types'
 import { maaneder, sammeAar, sammeMnd } from '../../../utils/dato-utils'
 import { tekst } from '../../../utils/tekster'
 import FeilLokal from '../../feil/feil-lokal'
 import Vis from '../../vis'
-import { hentSvar } from '../hent-svar'
 import { SpmProps } from '../sporsmal-form/sporsmal-form'
 import { hentFeilmelding } from '../sporsmal-utils'
 import SlettIkon from './slett-ikon.svg'
@@ -30,12 +28,6 @@ const DagerKomp = ({ sporsmal }: SpmProps) => {
     const { register, setValue, watch } = useFormContext()
     const feilmelding = hentFeilmelding(sporsmal)
     const watchDager = watch(sporsmal.id)
-
-    useEffect(() => {
-        const svar = hentSvar(sporsmal).map((svar: RSSvar) => svar.verdi)
-        console.log('svar', svar) // eslint-disable-line
-        setValue(sporsmal.id, svar)
-    }, [ sporsmal, setValue ])
 
     const dagerSidenMandag = (spm: Sporsmal) => {
         return ((dayjs(spm.min!).day() - 1)) % 7

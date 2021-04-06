@@ -28,7 +28,7 @@ const FeilOppsummering = (props: FeilProps) => {
             logEvent('skjemavalidering feilet', { sporsmalstag: sporsmal.tag })
         }
         // eslint-disable-next-line
-    }, [ errors ]);
+    }, [ errors ])
 
     useEffect(() => {
         let fokuser = settFokus
@@ -44,7 +44,8 @@ const FeilOppsummering = (props: FeilProps) => {
                 oppsummering.current?.focus()
             }
         }
-    })
+        // eslint-disable-next-line
+    }, [ errors ])
 
     const handleClick = (list: any) => {
         const id = `${list[0]}`
