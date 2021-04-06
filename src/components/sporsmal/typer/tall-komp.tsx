@@ -1,5 +1,5 @@
 import { Element, Normaltekst } from 'nav-frontend-typografi'
-import React, { useEffect, useRef } from 'react'
+import React, { useRef } from 'react'
 import { useFormContext } from 'react-hook-form'
 
 import { TagTyper } from '../../../types/enums'
@@ -7,13 +7,12 @@ import { RSSvartype } from '../../../types/rs-types/rs-svartype'
 import validerArbeidsgrad from '../../../utils/sporsmal/valider-arbeidsgrad'
 import { getLedetekst, tekst } from '../../../utils/tekster'
 import Vis from '../../vis'
-import { hentSvar } from '../hent-svar'
 import { SpmProps } from '../sporsmal-form/sporsmal-form'
 import { hentFeilmelding } from '../sporsmal-utils'
 import UndersporsmalListe from '../undersporsmal/undersporsmal-liste'
 
 const TallKomp = ({ sporsmal }: SpmProps) => {
-    const { register, setValue, errors, getValues, watch } = useFormContext()
+    const { register, errors, getValues, watch } = useFormContext()
     const watchTall = watch(sporsmal.id)
 
     const feilmelding = hentFeilmelding(sporsmal)
@@ -21,10 +20,6 @@ const TallKomp = ({ sporsmal }: SpmProps) => {
     const { validerGrad, periode, hovedSporsmal } = validerArbeidsgrad(sporsmal)
 
     // TODO: Feilmeldinger for andre valideringer enn required
-
-    useEffect(() => {
-        setValue(sporsmal.id, hentSvar(sporsmal))
-    }, [ sporsmal, setValue ])
 
     const valider = () => {
         if (validerGrad) {

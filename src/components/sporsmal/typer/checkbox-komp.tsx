@@ -1,12 +1,11 @@
 import { Element, Normaltekst } from 'nav-frontend-typografi'
-import React, { useEffect } from 'react'
+import React from 'react'
 import { FieldValues, useFormContext } from 'react-hook-form'
 
 import { Sporsmal } from '../../../types/types'
 import AnimateOnMount from '../../animate-on-mount'
 import FeilLokal from '../../feil/feil-lokal'
 import Vis from '../../vis'
-import { hentSvar } from '../hent-svar'
 import { SpmProps } from '../sporsmal-form/sporsmal-form'
 import { hentFeilmelding } from '../sporsmal-utils'
 import UndersporsmalListe from '../undersporsmal/undersporsmal-liste'
@@ -44,14 +43,9 @@ interface CheckboxProps {
 type AllProps = SpmProps & CheckboxProps
 
 const CheckboxSingle = ({ parent, sporsmal }: AllProps) => {
-    const { register, setValue, watch, getValues } = useFormContext()
+    const { register, watch, getValues } = useFormContext()
     const watchCheck = watch(sporsmal.id)
     const feilmelding = hentFeilmelding(parent)
-
-    useEffect(() => {
-        const svar = hentSvar(sporsmal)
-        setValue(sporsmal.id, svar === 'CHECKED' ? 'true' : '')
-    }, [ sporsmal, setValue ])
 
     const valider = () => {
         const valid = harValgtNoe(parent, getValues())

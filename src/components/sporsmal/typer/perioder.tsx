@@ -21,23 +21,19 @@ const Perioder = ({ sporsmal }: SpmProps) => {
         // eslint-disable-next-line
     }, [ sporsmal ])
 
-    const oppdaterPerioder = () => {
-        forceUpdate()
-    }
-
     const slettPeriode = (e: any, id: number) => {
         e.preventDefault()
         const index = lokal.findIndex(value => value === id)
         lokal.splice(index, 1)
         setLokal(lokal)
-        oppdaterPerioder()
+        forceUpdate()
     }
 
     const leggTilPeriode = (e: any) => {
         e.preventDefault()
         lokal.push(lokal[lokal.length - 1] + 1)
         setLokal(lokal)
-        oppdaterPerioder()
+        forceUpdate()
     }
 
     return (

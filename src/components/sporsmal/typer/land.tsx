@@ -1,19 +1,14 @@
 import { Element } from 'nav-frontend-typografi'
-import React, { useEffect } from 'react'
+import React from 'react'
 import { Controller, useFormContext } from 'react-hook-form'
 
 import validerLand from '../../../utils/sporsmal/valider-land'
 import FeilLokal from '../../feil/feil-lokal'
-import { hentSvar } from '../hent-svar'
 import LandvelgerComponent from '../landvelger/landvelger'
 import { SpmProps } from '../sporsmal-form/sporsmal-form'
 
 export default ({ sporsmal }: SpmProps) => {
-    const { setValue, getValues } = useFormContext()
-
-    useEffect(() => {
-        setValue(sporsmal.id, hentSvar(sporsmal))
-    }, [ sporsmal, setValue ])
+    const { getValues } = useFormContext()
 
     return (
         <>

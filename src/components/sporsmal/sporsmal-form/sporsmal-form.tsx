@@ -1,7 +1,7 @@
 import './sporsmal-form.less'
 
 import React, { useEffect, useState } from 'react'
-import { FormProvider,useForm } from 'react-hook-form'
+import { FormProvider, useForm } from 'react-hook-form'
 import { useHistory, useParams } from 'react-router-dom'
 
 import { RouteParams } from '../../../app'
@@ -26,7 +26,7 @@ import FeilOppsummering from '../../feil/feil-oppsummering'
 import Oppsummering from '../../oppsummering/oppsummering'
 import Vis from '../../vis'
 import BjornUnderTittel from '../bjorn/bjorn-under-tittel'
-import { hentSvar } from '../hent-svar'
+import { hentFormState, hentSvar } from '../hent-svar'
 import { settSvar } from '../sett-svar'
 import SporsmalSwitch from '../sporsmal-switch'
 import { pathUtenSteg } from '../sporsmal-utils'
@@ -55,6 +55,11 @@ const SporsmalForm = () => {
     const rsMottakerResponseFetch = useFetch<RSMottakerResponse>()
 
     useEffect(() => {
+        methods.reset(hentFormState(sporsmal))
+        // eslint-disable-next-line
+    }, [ sporsmal ])
+
+    useEffect(() => {
         function erSiste() {
             const snartSlutt = sporsmal.svartype === RSSvartype.IKKE_RELEVANT || sporsmal.svartype === RSSvartype.CHECKBOX_PANEL
             if (erUtlandssoknad) {
@@ -67,7 +72,7 @@ const SporsmalForm = () => {
         setErSiste(sisteSide)
         if (sisteSide) hentMottaker()
         // eslint-disable-next-line
-    }, [ spmIndex ]);
+    }, [ spmIndex ])
 
     const sendOppdaterSporsmal = async() => {
         let soknad = valgtSoknad

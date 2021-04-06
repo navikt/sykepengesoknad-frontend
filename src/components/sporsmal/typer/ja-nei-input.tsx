@@ -1,9 +1,9 @@
 import parser from 'html-react-parser'
 import { Element, Normaltekst } from 'nav-frontend-typografi'
-import React, { useEffect } from 'react'
+import React from 'react'
 import { useFormContext } from 'react-hook-form'
 
-import { SvarEnums, TagTyper } from '../../../types/enums'
+import { TagTyper } from '../../../types/enums'
 import { getLedetekst, tekst } from '../../../utils/tekster'
 import { utlandssoknadUrl } from '../../../utils/url-utils'
 import AnimateOnMount from '../../animate-on-mount'
@@ -12,7 +12,6 @@ import Vis from '../../vis'
 import Bjorn from '../bjorn/bjorn'
 import SporsmalBjorn from '../bjorn/sporsmal-bjorn'
 import TagBjorn from '../bjorn/tag-bjorn'
-import { hentSvar } from '../hent-svar'
 import { SpmProps } from '../sporsmal-form/sporsmal-form'
 import SporsmalHjelpetekst from '../sporsmal-hjelpetekst'
 import { hentFeilmelding, sporsmalIdListe } from '../sporsmal-utils'
@@ -27,13 +26,9 @@ const jaNeiValg = [ {
 } ]
 
 const JaNeiInput = ({ sporsmal }: SpmProps) => {
-    const { register, setValue, errors, getValues, clearErrors, watch } = useFormContext()
+    const { register, errors, clearErrors, watch } = useFormContext()
     const feilmelding = hentFeilmelding(sporsmal)
     const watchJaNei = watch(sporsmal.id)
-
-    useEffect(() => {
-        setValue(sporsmal.id, hentSvar(sporsmal))
-    }, [ sporsmal, setValue ])
 
     const visAvgittAvBjorn = () => {
         const undersporsmal = sporsmal.undersporsmal.find(uspm => uspm.tag === TagTyper.EGENMELDINGER_NAR)
@@ -89,16 +84,18 @@ const JaNeiInput = ({ sporsmal }: SpmProps) => {
                         })}
                     </div>
                 </fieldset>
-                <Vis
-                    hvis={sporsmal.tag && sporsmal.tag === TagTyper.UTLANDSOPPHOLD_SOKT_SYKEPENGER && getValues()[sporsmal.id]}>
-                    {(getValues()[sporsmal.id] === SvarEnums.JA)
-                        ? <Normaltekst
-                            className={'utland_infotekst'}> {parser(getLedetekst(tekst('soknad.infotekst.utlandsopphold_sokt_sykepenger.ja'), { '%URL%': utlandssoknadUrl }))} </Normaltekst>
-                        : ((getValues()[sporsmal.id] === SvarEnums.NEI)
-                            ? <Normaltekst tag="div"
-                                className={'utland_infotekst'}> {parser(getLedetekst(tekst('soknad.infotekst.utlandsopphold_sokt_sykepenger.nei'), { '%URL%': utlandssoknadUrl }))} </Normaltekst>
-                            : <></>)}
 
+                <Vis hvis={
+                    sporsmal.tag
+                    && sporsmal.tag === TagTyper.UTLANDSOPPHOLD_SOKT_SYKEPENGER
+                    && watchJaNei
+                }>
+                    <Normaltekst className={'utland_infotekst'}>{
+                        parser(getLedetekst(
+                            tekst('soknad.infotekst.utlandsopphold_sokt_sykepenger.' + watchJaNei?.toLowerCase() as any),
+                            { '%URL%': utlandssoknadUrl })
+                        )}
+                    </Normaltekst>
                 </Vis>
             </div>
 

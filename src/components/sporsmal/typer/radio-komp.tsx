@@ -1,5 +1,5 @@
 import { Element } from 'nav-frontend-typografi'
-import React, { MouseEvent, useEffect } from 'react'
+import React, { MouseEvent } from 'react'
 import { useFormContext } from 'react-hook-form'
 
 import { RSSvartype } from '../../../types/rs-types/rs-svartype'
@@ -7,7 +7,6 @@ import { Sporsmal } from '../../../types/types'
 import AnimateOnMount from '../../animate-on-mount'
 import FeilLokal from '../../feil/feil-lokal'
 import Vis from '../../vis'
-import { hentSvar } from '../hent-svar'
 import { SpmProps } from '../sporsmal-form/sporsmal-form'
 import { hentFeilmelding } from '../sporsmal-utils'
 import UndersporsmalListe from '../undersporsmal/undersporsmal-liste'
@@ -21,13 +20,9 @@ export interface RadioUnderKompProps {
 }
 
 const RadioKomp = ({ sporsmal }: SpmProps) => {
-    const { register, setValue, watch } = useFormContext()
+    const { register, watch } = useFormContext()
     const watchRadio = watch(sporsmal.id)
     const feilmelding = hentFeilmelding(sporsmal)
-
-    useEffect(() => {
-        setValue(sporsmal.id, hentSvar(sporsmal))
-    }, [ sporsmal, setValue ])
 
     return (
         <>

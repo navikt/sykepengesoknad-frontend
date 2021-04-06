@@ -1,5 +1,5 @@
 import { SvarEnums } from '../../types/enums'
-import { RSSvarliste } from '../../types/rs-types/rs-svarliste'
+import { RSSvar } from '../../types/rs-types/rs-svar'
 import { RSSvartype } from '../../types/rs-types/rs-svartype'
 import { Sporsmal, svarverdiToKvittering } from '../../types/types'
 import { empty } from '../../utils/constants'
@@ -9,32 +9,29 @@ export const hentSvar = (sporsmal: Sporsmal): any => {
     const svarliste = sporsmal.svarliste
     const svar = svarliste.svar[0]
 
-    //TODO: Skrive om til switch case?
-    if (sporsmal.svartype === RSSvartype.INFO_BEHANDLINGSDAGER) {
-        const ukeliste: RSSvarliste[] = []
-        sporsmal.undersporsmal.forEach(uspm => {
-            ukeliste.push(uspm.svarliste)
-        })
-        return ukeliste
-    }
+    const svartype = sporsmal.svartype
+    switch(svartype) {
+        case RSSvartype.INFO_BEHANDLINGSDAGER:
+            return sporsmal.undersporsmal.map(uspm => uspm.svarliste)
 
-    if (sporsmal.svartype.toString().startsWith('RADIO_GRUPPE')) {
-        const besvartSporsmal = sporsmal.undersporsmal.find((spm: Sporsmal) => {
-            return spm.svarliste.svar[0] && spm.svarliste.svar[0].verdi === SvarEnums.CHECKED
-        })
-        return besvartSporsmal ? besvartSporsmal.sporsmalstekst : undefined
-    }
+        case RSSvartype.CHECKBOX:
+        case RSSvartype.CHECKBOX_PANEL:
+            return svar.verdi === 'CHECKED'
 
-    if (sporsmal.svartype === RSSvartype.KVITTERING) {
-        return svarliste.svar.map(s => svarverdiToKvittering(s.verdi))     // svar.verdi = "kvittering"
-    }
+        case RSSvartype.RADIO_GRUPPE:
+        case RSSvartype.RADIO_GRUPPE_TIMER_PROSENT:
+        case RSSvartype.RADIO_GRUPPE_UKEKALENDER:
+            return sporsmal.undersporsmal.find((spm: Sporsmal) => {
+                return spm.svarliste.svar[0] && spm.svarliste.svar[0].verdi === SvarEnums.CHECKED
+            })?.sporsmalstekst || undefined
 
-    if (sporsmal.svartype === RSSvartype.DATOER) {
-        return svarliste.svar
-    }
+        case RSSvartype.DATOER:
+        case RSSvartype.LAND:
+            return svarliste.svar.map((svar: RSSvar) => svar.verdi)
 
-    if (sporsmal.svartype === RSSvartype.LAND) {
-        return svarliste.svar.map((i) => i.verdi)
+        case RSSvartype.KVITTERING:
+            return svarliste.svar.map(s => svarverdiToKvittering(s.verdi))
+
     }
 
     if (svar === undefined) {
@@ -74,7 +71,7 @@ const hentSvarliste = (sporsmal: Sporsmal) => {
     let svar: any = {}
 
     if (sporsmal.svarliste.svar[0] !== undefined) {
-        svar[sporsmal.id] = sporsmal.svarliste.svar[0].verdi
+        svar[sporsmal.id] = hentSvar(sporsmal)
     }
     sporsmal.undersporsmal.forEach((spm) => {
         const alleUndersporsmalSvar: any = hentSvarliste(spm)

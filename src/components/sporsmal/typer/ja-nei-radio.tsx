@@ -1,6 +1,6 @@
 import parser from 'html-react-parser'
 import { Element, Normaltekst } from 'nav-frontend-typografi'
-import React, { useEffect } from 'react'
+import React from 'react'
 import { useFormContext } from 'react-hook-form'
 
 import { SvarEnums, TagTyper } from '../../../types/enums'
@@ -10,7 +10,6 @@ import AnimateOnMount from '../../animate-on-mount'
 import FeilLokal from '../../feil/feil-lokal'
 import Vis from '../../vis'
 import Bjorn from '../bjorn/bjorn'
-import { hentSvar } from '../hent-svar'
 import KnapperadAvbryt from '../sporsmal-form/knapperad-avbryt'
 import { SpmProps } from '../sporsmal-form/sporsmal-form'
 import { hentFeilmelding } from '../sporsmal-utils'
@@ -25,16 +24,9 @@ const jaNeiValg = [ {
 } ]
 
 const JaNeiRadio = ({ sporsmal }: SpmProps) => {
-    const { register, setValue, watch } = useFormContext()
+    const { register, watch } = useFormContext()
     const watchJaNei = watch(sporsmal.id)
     const feilmelding = hentFeilmelding(sporsmal)
-
-    useEffect(() => {
-        const lagret = hentSvar(sporsmal)
-        if (lagret !== '') {
-            setValue(sporsmal.id, lagret)
-        }
-    }, [ sporsmal, setValue ])
 
     const presisering = (valgt: boolean) => {
         const spm = sporsmal

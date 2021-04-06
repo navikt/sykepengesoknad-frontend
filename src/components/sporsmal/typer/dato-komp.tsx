@@ -29,11 +29,6 @@ const DatoInput = ({ sporsmal }: SpmProps) => {
         }
     })
 
-    useEffect(() => {
-        const svar = hentSvar(sporsmal)
-        setValue(sporsmal.id, svar)
-    }, [ sporsmal, setValue ])
-
     return (
         <div ref={mutationRef} className="dato-komp">
             <label className="skjema__sporsmal" htmlFor={sporsmal.id}>
