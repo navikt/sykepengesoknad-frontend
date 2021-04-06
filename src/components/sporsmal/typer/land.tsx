@@ -4,10 +4,11 @@ import { Controller, useFormContext } from 'react-hook-form'
 
 import validerLand from '../../../utils/sporsmal/valider-land'
 import FeilLokal from '../../feil/feil-lokal'
+import { hentSvar } from '../hent-svar'
 import LandvelgerComponent from '../landvelger/landvelger'
 import { SpmProps } from '../sporsmal-form/sporsmal-form'
 
-export default ({ sporsmal }: SpmProps) => {
+const Land = ({ sporsmal }: SpmProps) => {
     const { getValues } = useFormContext()
 
     return (
@@ -23,6 +24,7 @@ export default ({ sporsmal }: SpmProps) => {
                     as={LandvelgerComponent}
                     id={sporsmal.id}
                     name={sporsmal.id}
+                    defaultValue={hentSvar(sporsmal)}
                     onChange={(values: string[]) => {
                         return values[0]
                     }}
@@ -39,3 +41,4 @@ export default ({ sporsmal }: SpmProps) => {
     )
 }
 
+export default Land
