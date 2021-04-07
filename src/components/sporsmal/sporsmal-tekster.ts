@@ -117,7 +117,7 @@ const SporsmalTekster = {
     'soknad.feilmelding.ENKELTSTAENDE_BEHANDLINGSDAGER_DAG_NAR': 'Du må oppgi hvilke dager du var til behandling',
 
     'soknad.feilmelding.TRANSPORT_TIL_DAGLIG': 'Du må svare på hvordan du kommer deg til jobb',
-    'soknad.feilmelding.TYPE_TRANSPORT': 'Du må oppgi hvilke type transport du bruker',
+    'soknad.feilmelding.TYPE_TRANSPORT': 'Du må oppgi hvilken type transport du brukte',
     'soknad.feilmelding.BIL_TIL_DAGLIG': 'Du må oppgi kilometer mellom hjemmet ditt og jobben',
     'soknad.feilmelding.KM_HJEM_JOBB': 'Du må oppgi kilometer mellom hjemmet ditt og jobben',
     'soknad.feilmelding.OFFENTLIG_TRANSPORT_TIL_DAGLIG': 'Du må oppgi hvor mye du vanligvis betaler i måneden for offentlig transport',

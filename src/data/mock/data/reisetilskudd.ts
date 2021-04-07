@@ -57,7 +57,7 @@ export const nyttReisetilskudd: RSSoknad = {
                 {
                     'id': 'e9d8255d-4277-41c2-bc63-904029c71623',
                     'tag': 'TYPE_TRANSPORT',
-                    'sporsmalstekst': 'Hva slags type transport bruker du?',
+                    'sporsmalstekst': 'Hva slags type transport brukte du?',
                     'undertekst': null,
                     'svartype': 'CHECKBOX_GRUPPE',
                     'min': null,
