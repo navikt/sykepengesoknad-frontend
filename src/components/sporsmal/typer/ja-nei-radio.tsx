@@ -98,14 +98,18 @@ const JaNeiRadio = ({ sporsmal }: SpmProps) => {
                 <KnapperadAvbryt />
             </Vis>
 
-            <AnimateOnMount
-                mounted={watchJaNei === sporsmal.kriterieForVisningAvUndersporsmal}
-                enter="undersporsmal--vis"
-                leave="undersporsmal--skjul"
-                start="undersporsmal"
-            >
-                <UndersporsmalListe oversporsmal={sporsmal} oversporsmalSvar={watchJaNei} />
-            </AnimateOnMount>
+            <Vis hvis={ // TODO: Dette er en fix for å ikke vise underspørsmål, fjern denne etter hvert
+                sporsmal.tag !== TagTyper.UTLANDSOPPHOLD_SOKT_SYKEPENGER
+            }>
+                <AnimateOnMount
+                    mounted={watchJaNei === sporsmal.kriterieForVisningAvUndersporsmal}
+                    enter="undersporsmal--vis"
+                    leave="undersporsmal--skjul"
+                    start="undersporsmal"
+                >
+                    <UndersporsmalListe oversporsmal={sporsmal} oversporsmalSvar={watchJaNei} />
+                </AnimateOnMount>
+            </Vis>
         </>
     )
 }
