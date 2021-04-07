@@ -1883,23 +1883,9 @@ export const arbeidsledig: RSSoknad = {
                     'min': null,
                     'max': null,
                     'pavirkerAndreSporsmal': false,
-                    'kriterieForVisningAvUndersporsmal': 'NEI',
+                    'kriterieForVisningAvUndersporsmal': null,
                     'svar': [],
-                    'undersporsmal': [
-                        {
-                            'id': '687425',
-                            'tag': 'IKKE_SOKT_UTENLANDSOPPHOLD_INFORMASJON',
-                            'sporsmalstekst': null,
-                            'undertekst': '<p>DENNE SKAL IKKE VISES  I! utgangspunktet kan du bare få sykepenger mens du er i et land innenfor EØS. Du kan likevel <a target=\'_blank\' href=\'https://tjenester.nav.no/sykefravaer/sykepengesoknad-utland\'>søke NAV om å få reise ut av EØS</a> og beholde sykepengene i en begrenset periode.</p>',
-                            'svartype': 'IKKE_RELEVANT',
-                            'min': null,
-                            'max': null,
-                            'pavirkerAndreSporsmal': false,
-                            'kriterieForVisningAvUndersporsmal': null,
-                            'svar': [],
-                            'undersporsmal': []
-                        }
-                    ]
+                    'undersporsmal': []
                 }
             ]
         },
@@ -2308,23 +2294,9 @@ export const frilanser: RSSoknad = {
                     'min': null,
                     'max': null,
                     'pavirkerAndreSporsmal': false,
-                    'kriterieForVisningAvUndersporsmal': 'NEI',
+                    'kriterieForVisningAvUndersporsmal': null,
                     'svar': [],
-                    'undersporsmal': [
-                        {
-                            'id': '687450',
-                            'tag': 'IKKE_SOKT_UTENLANDSOPPHOLD_INFORMASJON',
-                            'sporsmalstekst': null,
-                            'undertekst': '<p>DENNE SKAL IKKE VISES! I utgangspunktet kan du bare få sykepenger mens du er i et land innenfor EØS. Du kan likevel <a target=\'_blank\' href=\'https://tjenester.nav.no/sykefravaer/sykepengesoknad-utland\'>søke NAV om å få reise ut av EØS</a> og beholde sykepengene i en begrenset periode.</p>',
-                            'svartype': 'IKKE_RELEVANT',
-                            'min': null,
-                            'max': null,
-                            'pavirkerAndreSporsmal': false,
-                            'kriterieForVisningAvUndersporsmal': null,
-                            'svar': [],
-                            'undersporsmal': []
-                        }
-                    ]
+                    'undersporsmal': []
                 }
             ]
         },
