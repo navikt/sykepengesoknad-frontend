@@ -129,7 +129,6 @@ const SporsmalTekster = {
     'soknad.feilmelding.KVITTERINGER': 'Du må oppgi utgift for reisen',
     'soknad.feilmelding.UTBETALING': 'Du må svare på om arbeidsgiveren din legger ut for reisene',
 
-    'soknad.hjelpetekst.FERIE_V2': 'Blir du trukket i antall feriedager, er det ferie. Du får ikke sykepenger for disse dagene.',
     'soknad.hjelpetekst.FERIE_NAR': 'Du må oppgi hvilke dager du hadde ferie',
     'soknad.hjelpetekst.FERIE_NAR_V2': 'Du må oppgi hvilke dager du hadde ferie',
     'soknad.hjelpetekst.PERMISJON_V2': 'Du må svare på om du tok ut permisjon',
