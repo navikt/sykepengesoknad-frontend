@@ -392,7 +392,7 @@ export const arbeidstaker: RSSoknad = {
         {
             'id': '687343',
             'tag': 'FERIE_V2',
-            'sporsmalstekst': 'Tok du ut ferie mens du var sykmeldt 1. - 24. april 2020?',
+            'sporsmalstekst': 'Hadde du ferie i tidsrommet 1. - 24. april 2020?',
             'undertekst': null,
             'svartype': 'JA_NEI',
             'min': null,
@@ -1023,7 +1023,7 @@ export const arbeidstakerGradert: RSSoknad = {
         {
             'id': '687304',
             'tag': 'FERIE_V2',
-            'sporsmalstekst': 'Tok du ut ferie mens du var sykmeldt 1. - 24. april 2020?',
+            'sporsmalstekst': 'Hadde du ferie i tidsrommet 1. - 24. april 2020?',
             'undertekst': null,
             'svartype': 'JA_NEI',
             'min': null,
