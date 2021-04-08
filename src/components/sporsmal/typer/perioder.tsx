@@ -2,9 +2,7 @@ import { Element } from 'nav-frontend-typografi'
 import React, { useEffect, useRef, useState } from 'react'
 import useForceUpdate from 'use-force-update'
 
-import { empty } from '../../../utils/constants'
 import { tekst } from '../../../utils/tekster'
-import Vis from '../../vis'
 import { hentPerioder } from '../hent-svar'
 import { SpmProps } from '../sporsmal-form/sporsmal-form'
 import UndersporsmalListe from '../undersporsmal/undersporsmal-liste'
@@ -53,9 +51,7 @@ const Perioder = ({ sporsmal }: SpmProps) => {
             </button>
 
             <div className="undersporsmal">
-                <Vis hvis={lokal.length > 0 && lokal[0] !== empty}>
-                    <UndersporsmalListe oversporsmal={sporsmal} />
-                </Vis>
+                <UndersporsmalListe oversporsmal={sporsmal} />
             </div>
         </div>
     )

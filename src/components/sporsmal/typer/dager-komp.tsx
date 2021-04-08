@@ -3,7 +3,7 @@ import './dager-komp.less'
 import dayjs, { Dayjs } from 'dayjs'
 import isoWeek from 'dayjs/plugin/isoWeek'
 import weekOfYear from 'dayjs/plugin/weekOfYear'
-import { Element, Normaltekst } from 'nav-frontend-typografi'
+import { Normaltekst } from 'nav-frontend-typografi'
 import React from 'react'
 import { useFormContext } from 'react-hook-form'
 
@@ -11,9 +11,9 @@ import { Sporsmal } from '../../../types/types'
 import { maaneder, sammeAar, sammeMnd } from '../../../utils/dato-utils'
 import { tekst } from '../../../utils/tekster'
 import FeilLokal from '../../feil/feil-lokal'
-import Vis from '../../vis'
 import { SpmProps } from '../sporsmal-form/sporsmal-form'
 import { hentFeilmelding } from '../sporsmal-utils'
+import SporsmalstekstH3 from '../sporsmalstekst/sporsmalstekstH3'
 import SlettIkon from './slett-ikon.svg'
 
 dayjs.extend(weekOfYear)
@@ -139,11 +139,7 @@ const DagerKomp = ({ sporsmal }: SpmProps) => {
 
     return (
         <>
-            <Vis hvis={sporsmal.sporsmalstekst !== null}>
-                <Element tag="h3" className="skjema__sporsmal">
-                    {sporsmal.sporsmalstekst}
-                </Element>
-            </Vis>
+            <SporsmalstekstH3 sporsmal={sporsmal} />
 
             <div className="skjemaelement skjema__dager">
                 <Normaltekst tag="h4" className="kalender__tittel">{kalTittel()}</Normaltekst>

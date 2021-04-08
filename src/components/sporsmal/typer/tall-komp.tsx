@@ -1,4 +1,4 @@
-import { Element, Normaltekst } from 'nav-frontend-typografi'
+import { Normaltekst } from 'nav-frontend-typografi'
 import React, { useRef } from 'react'
 import { useFormContext } from 'react-hook-form'
 
@@ -9,6 +9,7 @@ import { getLedetekst, tekst } from '../../../utils/tekster'
 import Vis from '../../vis'
 import { SpmProps } from '../sporsmal-form/sporsmal-form'
 import { hentFeilmelding } from '../sporsmal-utils'
+import SporsmalstekstH3 from '../sporsmalstekst/sporsmalstekstH3'
 import UndersporsmalListe from '../undersporsmal/undersporsmal-liste'
 
 const TallKomp = ({ sporsmal }: SpmProps) => {
@@ -70,9 +71,7 @@ const TallKomp = ({ sporsmal }: SpmProps) => {
 
     return (
         <div className={className()}>
-            <Vis hvis={sporsmal.sporsmalstekst}>
-                <Element tag="h3" className="skjema__sporsmal">{sporsmal.sporsmalstekst}</Element>
-            </Vis>
+            <SporsmalstekstH3 sporsmal={sporsmal} />
 
             <div className="medEnhet">
                 <input type="number"

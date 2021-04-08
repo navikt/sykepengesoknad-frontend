@@ -8,7 +8,7 @@ import { getLedetekst, tekst } from '../../../utils/tekster'
 import { utlandssoknadUrl } from '../../../utils/url-utils'
 import AnimateOnMount from '../../animate-on-mount'
 import FeilLokal from '../../feil/feil-lokal'
-import Vis from '../../vis'
+import VisBlock from '../../vis-block'
 import Bjorn from '../bjorn/bjorn'
 import KnapperadAvbryt from '../sporsmal-form/knapperad-avbryt'
 import { SpmProps } from '../sporsmal-form/sporsmal-form'
@@ -89,27 +89,34 @@ const JaNeiRadio = ({ sporsmal }: SpmProps) => {
 
             <FeilLokal sporsmal={sporsmal} />
 
-            <Vis hvis={sporsmal.tag === TagTyper.SYKMELDINGSGRAD && watchJaNei === 'NEI'}>
-                <Bjorn className="press" nokkel="sykepengesoknad-utland.skjema.bjorn" ekstraMarginTop={true} />
-            </Vis>
-            <Vis hvis={sporsmal.tag === TagTyper.FERIE && watchJaNei === 'JA'}>
-                <Bjorn className="press" nokkel="sykepengesoknad-utland.skjema.ferie-sporsmal-bjorn"
-                    ekstraMarginTop={true} />
-                <KnapperadAvbryt />
-            </Vis>
+            <VisBlock hvis={sporsmal.tag === TagTyper.SYKMELDINGSGRAD && watchJaNei === 'NEI'}
+                render={() =>
+                    <Bjorn className="press" nokkel="sykepengesoknad-utland.skjema.bjorn" ekstraMarginTop={true} />
+                }
+            />
 
-            <Vis hvis={ // TODO: Dette er en fix for å ikke vise underspørsmål, fjern denne etter hvert
-                sporsmal.tag !== TagTyper.UTLANDSOPPHOLD_SOKT_SYKEPENGER
-            }>
-                <AnimateOnMount
-                    mounted={watchJaNei === sporsmal.kriterieForVisningAvUndersporsmal}
-                    enter="undersporsmal--vis"
-                    leave="undersporsmal--skjul"
-                    start="undersporsmal"
-                >
-                    <UndersporsmalListe oversporsmal={sporsmal} oversporsmalSvar={watchJaNei} />
-                </AnimateOnMount>
-            </Vis>
+            <VisBlock hvis={sporsmal.tag === TagTyper.FERIE && watchJaNei === 'JA'}
+                render={() =>
+                    <>
+                        <Bjorn className="press" nokkel="sykepengesoknad-utland.skjema.ferie-sporsmal-bjorn"
+                            ekstraMarginTop={true} />
+                        <KnapperadAvbryt />
+                    </>
+                }
+            />
+
+            <AnimateOnMount
+                mounted={
+                    watchJaNei === sporsmal.kriterieForVisningAvUndersporsmal &&
+                    sporsmal.tag !== TagTyper.UTLANDSOPPHOLD_SOKT_SYKEPENGER
+                    // TODO: Dette er en fix for å ikke vise underspørsmål, fjern denne etter hvert
+                }
+                enter="undersporsmal--vis"
+                leave="undersporsmal--skjul"
+                start="undersporsmal"
+            >
+                <UndersporsmalListe oversporsmal={sporsmal} oversporsmalSvar={watchJaNei} />
+            </AnimateOnMount>
         </>
     )
 }

@@ -10,7 +10,7 @@ import { skalBrukeFullskjermKalender } from '../../../utils/browser-utils'
 import { fraBackendTilDate } from '../../../utils/dato-utils'
 import { validerFom, validerPeriode, validerTom } from '../../../utils/sporsmal/valider-periode'
 import { tekst } from '../../../utils/tekster'
-import Vis from '../../vis'
+import VisBlock from '../../vis-block'
 import { hentPeriode } from '../hent-svar'
 import { SpmProps } from '../sporsmal-form/sporsmal-form'
 import { hentFeilmelding } from '../sporsmal-utils'
@@ -162,20 +162,24 @@ const PeriodeKomp = ({ sporsmal, index, slettPeriode }: AllProps) => {
                         </fieldset>
                     )}
                 />
-                <Vis hvis={index > 0}>
-                    <button role="link" id={'btn_' + id} className="periodeknapp lenke slett" onClick={(e) =>
-                        slettPeriode(e, index)}>
-                        {tekst('sykepengesoknad.periodevelger.slett')}
-                    </button>
-                </Vis>
+                <VisBlock hvis={index > 0}
+                    render={() =>
+                        <button role="link" id={'btn_' + id} className="periodeknapp lenke slett" onClick={(e) =>
+                            slettPeriode(e, index)}>
+                            {tekst('sykepengesoknad.periodevelger.slett')}
+                        </button>
+                    }
+                />
             </div>
 
             <div role="alert" aria-live="assertive">
-                <Normaltekst tag="span" className="skjemaelement__feilmelding">
-                    <Vis hvis={errors[id]}>
-                        {feilmelding.lokal}
-                    </Vis>
-                </Normaltekst>
+                <VisBlock hvis={errors[id]}
+                    render={() =>
+                        <Normaltekst tag="span" className="skjemaelement__feilmelding">
+                            {feilmelding.lokal}
+                        </Normaltekst>
+                    }
+                />
             </div>
         </li>
     )
