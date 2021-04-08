@@ -2,7 +2,6 @@ import dayjs from 'dayjs'
 import Alertstripe from 'nav-frontend-alertstriper'
 import AlertStripe from 'nav-frontend-alertstriper'
 import { Knapp } from 'nav-frontend-knapper'
-import NavFrontendSpinner from 'nav-frontend-spinner'
 import { Element, Normaltekst, Systemtittel } from 'nav-frontend-typografi'
 import React, { useEffect, useState } from 'react'
 import { FormProvider, useForm } from 'react-hook-form'
@@ -13,11 +12,12 @@ import { redirectTilLoginHvis401 } from '../../../data/rest/utils'
 import { useAppStore } from '../../../data/stores/app-store'
 import { RSOppdaterSporsmalResponse } from '../../../types/rs-types/rest-response/rs-oppdatersporsmalresponse'
 import { RSSvar } from '../../../types/rs-types/rs-svar'
-import { Kvittering, Sporsmal, svarverdiToKvittering, UtgiftTyper } from '../../../types/types'
+import { Kvittering, Sporsmal, UtgiftTyper } from '../../../types/types'
 import env from '../../../utils/environment'
 import fetcher from '../../../utils/fetcher'
 import { logger } from '../../../utils/logger'
 import { tekst } from '../../../utils/tekster'
+import Slettknapp from '../../slettknapp/slettknapp'
 import { SpmProps } from '../../sporsmal/sporsmal-form/sporsmal-form'
 import Vis from '../../vis'
 import DragAndDrop from '../drag-and-drop/drag-and-drop'
@@ -28,18 +28,17 @@ interface OpplastetKvittering {
 
 const OpplastingForm = ({ sporsmal }: SpmProps) => {
     const {
-        valgtSoknad, setValgtSoknad, valgtKvittering, setOpenModal, valgtFil
+        valgtSoknad, setValgtSoknad, valgtKvittering, setOpenModal, valgtFil, feilmeldingTekst, setFeilmeldingTekst
     } = useAppStore()
     const [ laster, setLaster ] = useState<boolean>(false)
     const [ kvitteringHeader, setKvitteringHeader ] = useState<string>('')
     const [ formErDisabled, setFormErDisabled ] = useState<boolean>(false)
-    const [ fetchFeilmelding, setFetchFeilmelding ] = useState<string | null>(null)
     const { stegId } = useParams<RouteParams>()
     const stegNum = Number(stegId)
     const spmIndex = stegNum - 1
 
     const methods = useForm({
-        reValidateMode: 'onSubmit'
+        reValidateMode: 'onChange'
     })
 
     useEffect(() => {
@@ -57,7 +56,7 @@ const OpplastingForm = ({ sporsmal }: SpmProps) => {
     const onSubmit = async() => {
         try {
             setLaster(true)
-            setFetchFeilmelding(null)
+            setFeilmeldingTekst('')
 
             const valid = await methods.trigger()
             if (!valid) return
@@ -72,7 +71,7 @@ const OpplastingForm = ({ sporsmal }: SpmProps) => {
             setValgtSoknad(valgtSoknad)
             setOpenModal(false)
         } catch(ex) {
-            setFetchFeilmelding('Det skjedde en feil i baksystemene, prøv igjen senere')
+            setFeilmeldingTekst('Det skjedde en feil i baksystemene, prøv igjen senere')
         } finally {
             setLaster(false)
         }
@@ -95,12 +94,12 @@ const OpplastingForm = ({ sporsmal }: SpmProps) => {
         }
         else if (bucketRes.status === 413) {
             logger.warn('Feil under opplasting fordi filen du prøvde å laste opp er for stor')
-            setFetchFeilmelding('Filen du prøvde å laste opp er for stor')
+            setFeilmeldingTekst('Filen du prøvde å laste opp er for stor')
             return null
         }
         else {
             logger.warn('Feil under opplasting av kvittering')
-            setFetchFeilmelding('Det skjedde en feil i baksystemene, prøv igjen senere')
+            setFeilmeldingTekst('Det skjedde en feil i baksystemene, prøv igjen senere')
             return null
         }
     }
@@ -129,40 +128,8 @@ const OpplastingForm = ({ sporsmal }: SpmProps) => {
         }
         else {
             logger.warn('Feil under lagring av kvittering svar i syfosoknad')
-            setFetchFeilmelding('Det skjedde en feil i baksystemene, prøv igjen senere')
+            setFeilmeldingTekst('Det skjedde en feil i baksystemene, prøv igjen senere')
             return null
-        }
-    }
-
-    const slettKvittering = async() => {
-        try {
-            setLaster(true)
-            const idx = sporsmal!.svarliste.svar.findIndex(svar => svarverdiToKvittering(svar?.verdi).blobId === valgtKvittering?.blobId)
-            const svar = sporsmal?.svarliste.svar.find(svar => svarverdiToKvittering(svar?.verdi).blobId === valgtKvittering?.blobId)
-
-            const res = await fetcher(`${env.flexGatewayRoot}/syfosoknad/api/soknader/${valgtSoknad?.id}/sporsmal/${sporsmal?.id}/svar/${svar?.id}`, {
-                method: 'DELETE',
-                credentials: 'include'
-            })
-
-            if (res.ok) {
-                sporsmal.svarliste.svar.splice(idx, 1)
-                valgtSoknad!.sporsmal[valgtSoknad!.sporsmal.findIndex(spm => spm.id === sporsmal.id)] = sporsmal
-                setValgtSoknad(valgtSoknad)
-                setOpenModal(false)
-            }
-            else if (redirectTilLoginHvis401(res)) {
-                return null
-            }
-            else {
-                logger.warn('Feil under sletting av kvittering i syfosoknad')
-                setFetchFeilmelding('Det skjedde en feil i baksystemene, prøv igjen senere')
-                return null
-            }
-        } catch (error) {
-            logger.error('Feil under sletting av kvittering', error)
-        } finally {
-            setLaster(false)
         }
     }
 
@@ -180,7 +147,6 @@ const OpplastingForm = ({ sporsmal }: SpmProps) => {
                         <Normaltekst>{tekst('opplasting_modal.endre-utlegg.hjelpetekst')}</Normaltekst>
                     </AlertStripe>
                 </Vis>
-
                 <div className="skjemakolonner">
                     <div className="skjemaelement">
                         <label htmlFor="transportmiddel" className="skjemaelement__label">
@@ -188,7 +154,9 @@ const OpplastingForm = ({ sporsmal }: SpmProps) => {
                         </label>
                         <select
                             disabled={formErDisabled}
-                            ref={methods.register({ required: tekst('opplasting_modal.transportmiddel.feilmelding') })}
+                            ref={methods.register({
+                                required: tekst('opplasting_modal.transportmiddel.feilmelding')
+                            })}
                             className={
                                 'skjemaelement__input input--fullbredde kvittering-element' +
                                 (methods.errors['transportmiddel'] ? ' skjemaelement__input--harFeil' : '')
@@ -257,32 +225,25 @@ const OpplastingForm = ({ sporsmal }: SpmProps) => {
 
                 <DragAndDrop />
 
-                <Vis hvis={fetchFeilmelding}>
+                <Vis hvis={feilmeldingTekst}>
                     <Alertstripe type="advarsel">
-                        <Normaltekst>{fetchFeilmelding}</Normaltekst>
+                        <Normaltekst>{feilmeldingTekst}</Normaltekst>
                     </Alertstripe>
                 </Vis>
 
-                {laster
-                    ?
-                    <NavFrontendSpinner className="lagre-kvittering" />
-                    :
-                    <div className="knapperad">
-                        <Knapp htmlType="button" className="lagre-kvittering" onClick={() => setOpenModal(false)}>
-                            {tekst('opplasting_modal.tilbake')}
+                <div className="knapperad">
+                    <Knapp htmlType="button" className="lagre-kvittering" onClick={() => setOpenModal(false)}>
+                        {tekst('opplasting_modal.tilbake')}
+                    </Knapp>
+                    <Vis hvis={!formErDisabled}>
+                        <Knapp type="hoved" htmlType="button" className="lagre-kvittering" onClick={onSubmit} spinner={laster}>
+                            {tekst('opplasting_modal.bekreft')}
                         </Knapp>
-                        <Vis hvis={!formErDisabled}>
-                            <Knapp type="hoved" htmlType="button" className="lagre-kvittering" onClick={onSubmit}>
-                                {tekst('opplasting_modal.bekreft')}
-                            </Knapp>
-                        </Vis>
-                        <Vis hvis={formErDisabled}>
-                            <Knapp type="fare" htmlType="button" className="lagre-kvittering" onClick={slettKvittering}>
-                                {tekst('opplasting_modal.slett')}
-                            </Knapp>
-                        </Vis>
-                    </div>
-                }
+                    </Vis>
+                    <Vis hvis={formErDisabled}>
+                        <Slettknapp sporsmal={sporsmal} kvittering={valgtKvittering!} />
+                    </Vis>
+                </div>
             </form>
         </FormProvider>
     )
