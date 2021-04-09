@@ -175,12 +175,13 @@ const OpplastingForm = ({ sporsmal }: SpmProps) => {
                             })}
                         </select>
 
-                        <Normaltekst tag="div" role="alert" aria-live="assertive"
-                            className="skjemaelement__feilmelding">
-                            <Vis hvis={methods.errors['transportmiddel']}>
-                                <p>{tekst('opplasting_modal.transportmiddel.feilmelding')}</p>
-                            </Vis>
-                        </Normaltekst>
+                        <div role="alert" aria-live="assertive">
+                            <Normaltekst tag="span" className="skjemaelement__feilmelding">
+                                <Vis hvis={methods.errors['transportmiddel']}>
+                                    {tekst('opplasting_modal.transportmiddel.feilmelding')}
+                                </Vis>
+                            </Normaltekst>
+                        </div>
                     </div>
 
                     <div className="skjemaelement">
@@ -214,12 +215,14 @@ const OpplastingForm = ({ sporsmal }: SpmProps) => {
                             autoComplete="off"
                         />
                         <span className="enhet">kr</span>
-                        <Normaltekst tag="div" role="alert" aria-live="assertive"
-                            className="skjemaelement__feilmelding">
-                            <Vis hvis={methods.errors['belop_input']}>
-                                <p>{methods.errors['belop_input']?.message}</p>
-                            </Vis>
-                        </Normaltekst>
+
+                        <div role="alert" aria-live="assertive">
+                            <Normaltekst tag="span" className="skjemaelement__feilmelding">
+                                <Vis hvis={methods.errors['belop_input']}>
+                                    {methods.errors['belop_input']?.message}
+                                </Vis>
+                            </Normaltekst>
+                        </div>
                     </div>
                 </div>
 

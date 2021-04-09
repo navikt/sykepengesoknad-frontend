@@ -135,11 +135,13 @@ const DragAndDrop = () => {
                     </Normaltekst>
                 </div>
 
-                <Normaltekst tag="div" role="alert" aria-live="assertive" className="skjemaelement__feilmelding">
-                    <Vis hvis={errors.fil_input}>
-                        <p>{errors.fil_input?.message}</p>
-                    </Vis>
-                </Normaltekst>
+                <div role="alert" aria-live="assertive">
+                    <Normaltekst tag="span" className="skjemaelement__feilmelding">
+                        <Vis hvis={errors.fil_input}>
+                            {errors.fil_input?.message}
+                        </Vis>
+                    </Normaltekst>
+                </div>
 
                 <Normaltekst className="restriksjoner">
                     <span className="filtype">{
