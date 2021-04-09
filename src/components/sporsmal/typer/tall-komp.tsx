@@ -106,15 +106,15 @@ const TallKomp = ({ sporsmal }: SpmProps) => {
                 <Vis hvis={errors[sporsmal.id]}>
                     <Vis hvis={errors[sporsmal.id]?.type !== 'validate'}>
                         <Normaltekst tag="span" className="skjemaelement__feilmelding">
-                            <p>{feilmelding.lokal}</p>
+                            {feilmelding.lokal}
                         </Normaltekst>
                     </Vis>
                     <Vis hvis={errors[sporsmal.id]?.type === 'validate' && sporsmal.tag === TagTyper.HVOR_MYE_TIMER_VERDI}>
                         <Normaltekst tag="span" className="skjemaelement__feilmelding">
-                            <p>{getLedetekst(
+                            {getLedetekst(
                                 tekst('soknad.feilmelding.MINDRE_TIMER_ENN_FORVENTET.lokal'),
                                 { '%GRAD%': periode?.grad }
-                            )}</p>
+                            )}
                         </Normaltekst>
                     </Vis>
                 </Vis>

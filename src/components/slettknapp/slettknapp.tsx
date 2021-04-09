@@ -14,6 +14,7 @@ import fetcher from '../../utils/fetcher'
 import { logger } from '../../utils/logger'
 import { tekst } from '../../utils/tekster'
 import Vis from '../vis'
+import SlettIkon from './slettknapp.svg'
 
 interface SlettknappProps {
     sporsmal: Sporsmal;
@@ -44,11 +45,9 @@ const Slettknapp = ({ sporsmal, kvittering, update }: SlettknappProps) => {
                 valgtSoknad!.sporsmal[valgtSoknad!.sporsmal.findIndex(spm => spm.id === sporsmal.id)] = sporsmal
                 setValgtSoknad(valgtSoknad)
                 setOpenModal(false)
-            }
-            else if (redirectTilLoginHvis401(res)) {
+            } else if (redirectTilLoginHvis401(res)) {
                 return null
-            }
-            else {
+            } else {
                 logger.warn('Feil under sletting av kvittering i syfosoknad')
                 setFeilmeldingTekst('Det skjedde en feil i baksystemene, prøv igjen senere')
                 return null
@@ -58,15 +57,26 @@ const Slettknapp = ({ sporsmal, kvittering, update }: SlettknappProps) => {
         } finally {
             setSletter(false)
             setVilSlette(false)
-            if(update) update()
+            if (update) update()
         }
     }
 
     return (
         <>
-            <Knapp type="fare" htmlType="button" className="lagre-kvittering" onClick={() => setVilSlette(true)}>
-                {tekst('opplasting_modal.slett')}
-            </Knapp>
+            <Vis hvis={update}>
+                <button type="button" className="slette-kvittering" aria-label={tekst('opplasting_modal.slett')}
+                    onClick={() => setVilSlette(true)} title={tekst('opplasting_modal.slett')}
+                >
+                    <img src={SlettIkon} alt="" />
+                </button>
+            </Vis>
+
+            <Vis hvis={!update}>
+                <Knapp type="fare" htmlType="button" className="lagre-kvittering" onClick={() => setVilSlette(true)}>
+                    {tekst('opplasting_modal.slett')}
+                </Knapp>
+            </Vis>
+
             <ModalWrapper className="modal__teaser_popup" onRequestClose={() => setVilSlette(false)}
                 contentLabel={'slett'}
                 isOpen={vilSlette}

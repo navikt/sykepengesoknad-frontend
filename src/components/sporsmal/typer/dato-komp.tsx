@@ -1,7 +1,7 @@
 import useMutationObserver from '@rooks/use-mutation-observer'
 import { Datepicker } from 'nav-datovelger'
 import { Element } from 'nav-frontend-typografi'
-import React, { useEffect, useRef } from 'react'
+import React, { useRef } from 'react'
 import { Controller, useFormContext } from 'react-hook-form'
 
 import { skalBrukeFullskjermKalender } from '../../../utils/browser-utils'

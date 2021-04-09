@@ -18,7 +18,7 @@ const FeilLokal = ({ sporsmal }: FeilProps) => {
         <div role="alert" aria-live="assertive">
             <Vis hvis={errors[sporsmal.id]}>
                 <Normaltekst tag="span" className="skjemaelement__feilmelding">
-                    <p>{feilmelding.lokal}</p>
+                    {feilmelding.lokal}
                 </Normaltekst>
             </Vis>
         </div>

@@ -1,20 +1,20 @@
 @import '../../../../node_modules/nav-frontend-core/less/_variabler';
 @import '../../../basic';
 
-@dagbredde: 40px;
+@padding: 2rem;
+@ukebredde: calc(100vw - @padding);
+@dagbredde: calc((100vw - @padding) / 8);
 
 .skjema__dager {
-    width: 330px;
+    width: @ukebredde;
     margin-top: 1.5rem;
 
     .kalender__tittel {
         text-align: center;
-        width: 320px;
         margin: 2rem 0 1rem;
     }
 
     .ukedager {
-        width: 320px;
         font-size: 0.9rem;
         font-style: italic;
 
@@ -22,12 +22,12 @@
             display: inline-block;
             text-align: center;
             padding: 0.9rem 0 1rem;
-            min-width: @dagbredde;
+            width: @dagbredde;
         }
     }
 
     .tomdag {
-        min-width: @dagbredde;
+        width: @dagbredde;
     }
 
     .kalenderuke {
@@ -59,7 +59,7 @@
 
         label, span.label {
             display: inline-block;
-            min-width: @dagbredde;
+            min-width: 100%;
             padding: 0.9rem 0;
             text-align: center;
             color: @navMorkGra;
@@ -121,6 +121,20 @@
 
         .fjernalle img {
             margin-right: 0.35rem;
+        }
+    }
+}
+
+@media (min-width: 768px) {
+    @paddingDesktop: calc(100vw - (@desktopLimitWidth - 2rem));
+    @ukebreddeDesktop: calc(100vw - @paddingDesktop);
+    @dagbreddeDesktop: calc(@ukebreddeDesktop / 8);
+
+    .skjema__dager {
+        width: @ukebreddeDesktop;
+
+        .tomdag, .ukenr, .kalenderdag, .ukedager span {
+            width: @dagbreddeDesktop;
         }
     }
 }

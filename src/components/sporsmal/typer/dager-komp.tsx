@@ -176,6 +176,8 @@ const DagerKomp = ({ sporsmal }: SpmProps) => {
                     )
                 })}
 
+                <FeilLokal sporsmal={sporsmal} />
+
                 <Normaltekst className="kalendervalg">
                     <button type="button" className="lenkeknapp velgalle" onClick={velgAlle}>
                         {tekst('sporsmal.egen-bil.kalender.ukedager')}
@@ -185,8 +187,6 @@ const DagerKomp = ({ sporsmal }: SpmProps) => {
                         {tekst('sporsmal.egen-bil.kalender.fjern')}
                     </button>
                 </Normaltekst>
-
-                <FeilLokal sporsmal={sporsmal} />
             </div>
         </>
     )
