@@ -21,7 +21,7 @@ const maks = formaterFilstørrelse(maxFilstørrelse)
 
 const DragAndDrop = () => {
     const { valgtFil, setValgtFil, valgtKvittering } = useAppStore()
-    const { errors, register, trigger } = useFormContext()
+    const { errors, register } = useFormContext()
     const [ formErDisabled, setFormErDisabled ] = useState<boolean>(false)
 
     useEffect(() => {
@@ -52,7 +52,6 @@ const DragAndDrop = () => {
             filer.forEach((fil: File) => {
                 setValgtFil(fil)
             })
-            trigger('fil_input')
         },
         // eslint-disable-next-line
         []

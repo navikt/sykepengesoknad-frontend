@@ -165,6 +165,38 @@ describe('Teste førsteside i reisetilskuddsøknaden', () => {
             cy.get('.lukknapp').click()
         })
 
+        it('Sletting av kvittering som er valgt', () => {
+            cy.contains('Taxi').click()
+
+            cy.get('.knapperad').contains('Slett').click()
+            cy.get('.bekreft-dialog').within(() => {
+                cy.contains('Vil du slette kvitteringen?')
+                cy.contains('Ja, jeg er sikker')
+                cy.contains('Angre')
+                    .click()
+            })
+            cy.contains('Vil du slette kvitteringen?').should('not.exist')
+
+            cy.get('.knapperad').contains('Slett').click()
+
+            cy.contains('Ja, jeg er sikker').click()
+            cy.get('.sumlinje').should('not.exist')
+        })
+
+        it('Sletting av kvittering i liste', () => {
+            cy.get('.fler-vedlegg').click()
+            cy.contains('Legg til reiseutgift')
+            cy.get('select[name=transportmiddel]').select('TAXI')
+            cy.get('input[name=belop_input]').type('1234')
+            cy.get('.filopplasteren input[type=file]').attachFile('kvittering.jpg')
+            cy.get('.lagre-kvittering').contains('Bekreft').click()
+
+            cy.get('.sumlinje').should('exist')
+            cy.get('.knapp--fare').contains('Slett').click()
+            cy.contains('Ja, jeg er sikker').click()
+            cy.get('.sumlinje').should('not.exist')
+        })
+
         it('Åpner og lukker modal', () => {
             cy.get('.fler-vedlegg').click()
             cy.get('.lagre-kvittering').contains('Tilbake').click()
@@ -261,7 +293,7 @@ describe('Teste førsteside i reisetilskuddsøknaden', () => {
         it('Oppsummering inneholder riktig informasjon', () => {
             cy.get('.oppsummering').click()
             cy.get('.utvidbar__innhold > :nth-child(4)').should('include.text', 'Last opp kvitteringer for reiseutgifter til jobben fra 1. februar til 18. mars 2021')
-            cy.get('.utvidbar__innhold > :nth-child(4)').should('include.text', 'Du lastet opp 2 utgifter på til sammen')
+            cy.get('.utvidbar__innhold > :nth-child(4)').should('include.text', 'Du lastet opp 1 utgift på 99 kr')
             cy.get('.skjemaelement__label').should('contain', 'Jeg har lest all informasjonen jeg har fått i søknaden og bekrefter at opplysningene jeg har gitt er korrekte.')
             cy.get('.skjemaelement__label').click({ force: true })
 

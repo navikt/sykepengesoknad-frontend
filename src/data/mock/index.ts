@@ -137,7 +137,9 @@ mock.post(`${env.flexGatewayRoot}/flex-bucket-uploader/opplasting`,
 mock.post(`${env.flexGatewayRoot}/syfosoknad/api/soknader/:soknad/sporsmal/:spmid/svar`,
     (req) => {
         const r = soknader.find((r) => r.id === req.pathParams.soknad)
-        const spm = r!.sporsmal.find((spm) => spm.id === req.pathParams.spmid)
+        const spm = jsonDeepCopy(
+            r!.sporsmal.find((spm) => spm.id === req.pathParams.spmid)
+        )
         spm!.svar.push(req.body)
         return Promise.resolve({
             status: 201,
