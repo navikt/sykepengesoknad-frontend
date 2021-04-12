@@ -27,7 +27,7 @@ const jaNeiValg = [ {
 
 const JaNeiInput = ({ sporsmal }: SpmProps) => {
     const { register, errors, clearErrors, watch } = useFormContext()
-    const feilmelding = hentFeilmelding(sporsmal)
+    const feilmelding = hentFeilmelding(sporsmal, errors[sporsmal.id])
     const watchJaNei = watch(sporsmal.id)
 
     const visAvgittAvBjorn = () => {

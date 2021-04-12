@@ -42,23 +42,18 @@ const SporsmalTekster = {
     'soknad.feilmelding.PERMITTERT_PERIODE.lokal': 'Du må svare på om du har vært permittert',
     'soknad.feilmelding.PERMITTERT_PERIODE_NAR': 'Du må svare på når du ble permittert',
 
-    'soknad.feilmelding.HVOR_MANGE_TIMER': 'Du må svare på hvor mange timer du jobber normalt per uke',
-    'soknad.feilmelding.HVOR_MANGE_TIMER.lokal': 'Du må oppgi antall timer',
-
     'soknad.feilmelding.HVOR_MANGE_TIMER_PER_UKE': 'Du må svare på hvor mange timer du jobbet per uke før du ble sykmeldt',
 
-    'soknad.feilmelding.HVOR_MYE_HAR_DU_JOBBET': 'Du må svare på hvor mye du jobbet totalt',
-    'soknad.feilmelding.HVOR_MYE_HAR_DU_JOBBET.lokal': 'Du må oppgi antall timer',
+    'soknad.feilmelding.HVOR_MYE_HAR_DU_JOBBET': 'Du må velge prosent eller timer',
+    'soknad.feilmelding.HVOR_MYE_HAR_DU_JOBBET.lokal': 'Du må velge prosent eller timer',
 
     'soknad.feilmelding.HVOR_MYE_PROSENT': 'Du må velge et alternativ',
     'soknad.feilmelding.HVOR_MYE_PROSENT_VERDI': 'Du må svare på hvor mye du jobbet totalt',
-    'soknad.feilmelding.HVOR_MYE_PROSENT_VERDI.lokal': 'Du må oppgi prosent',
 
     'soknad.feilmelding.HVOR_MYE_TIMER': 'Du må velge et alternativ',
     'soknad.feilmelding.HVOR_MYE_TIMER_VERDI': 'Du må svare på hvor mye du jobbet totalt',
-    'soknad.feilmelding.HVOR_MYE_TIMER_VERDI.lokal': 'Du må oppgi antall timer',
-    'soknad.feilmelding.MINDRE_TIMER_ENN_FORVENTET.lokal': 'Timene du skrev inn tyder på at du har jobbet mindre enn %GRAD% %. Du må enten svare nei på spørsmålet over eller endre antall timer her.',
-    'soknad.feilmelding.MINDRE_TIMER_ENN_FORVENTET': 'Timene du skrev inn tyder på at du har jobbet mindre enn %GRAD% %.',
+    'soknad.feilmelding.MINDRE_TIMER_ENN_FORVENTET': 'Timene du skrev inn tyder på at du har jobbet mindre enn %GRAD% %. Du må enten svare nei på øverste spørsmålet eller endre antall timer totalt.',
+    'soknad.feilmelding.MINDRE_TIMER_ENN_FORVENTET.lokal': 'Timene utgjør mindre enn %GRAD% %.',
 
     'soknad.feilmelding.TIDLIGERE_SYK': 'Du må svare på om du var syk med egenmelding eller papirsykmelding',
     'soknad.feilmelding.TIDLIGERE_SYK.lokal': 'Du må velge et av alternativene',
@@ -99,6 +94,7 @@ const SporsmalTekster = {
     'soknad.feilmelding.LAND.max': 'Du kan maksimalt skrive inn %MAX% tegn her',
     'soknad.feilmelding.SYKMELDINGSGRAD': 'Du må oppgi om du er 100% sykmeldt',
     'soknad.feilmelding.TALL_MIN_MAX': 'Vennligst fyll ut et tall mellom %MIN% og %MAX%',
+    'soknad.feilmelding.TALL_MIN': 'Vennligst fyll ut et tall på minimum %MIN%',
     'soknad.feilmelding.FRISKMELDT': 'Du må oppgi om du ble frisk iløpet av sykmeldingsperioden',
     'soknad.feilmelding.FRISKMELDT_START': 'Du må svare på når du ble frisk',
     'soknad.feilmelding.TILBAKE_I_ARBEID': 'Du må oppgi om du var tilbake i arbeid før friskmeldingsperioden utløp',

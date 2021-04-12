@@ -1,3 +1,5 @@
+import { FieldError } from 'react-hook-form'
+
 import { TagTyper } from '../../types/enums'
 import { RSSoknadstype } from '../../types/rs-types/rs-soknadstype'
 import { RSSvartype } from '../../types/rs-types/rs-svartype'
@@ -57,18 +59,26 @@ interface FeilmeldingProps {
     lokal: string;
 }
 
-export const hentFeilmelding = (sporsmal: Sporsmal): FeilmeldingProps => {
+export const hentFeilmelding = (
+    sporsmal: Sporsmal,
+    error?: FieldError
+): FeilmeldingProps => {
     const feilmelding: FeilmeldingProps = {
         global: tekst('soknad.feilmelding.' + sporsmal.tag as any),
         lokal: tekst('soknad.feilmelding.' + sporsmal.tag + '.lokal' as any)
     }
     if (feilmelding.lokal === undefined) {
-        feilmelding.lokal = hentGeneriskFeilmelding(sporsmal.svartype)!
+        feilmelding.lokal = hentGeneriskFeilmelding(sporsmal.svartype, error)!
     }
     return feilmelding
 }
 
-export const hentGeneriskFeilmelding = (svartype: RSSvartype) => {
+export const hentGeneriskFeilmelding = (
+    svartype: RSSvartype,
+    error?: FieldError
+) => {
+    const type = error?.type
+
     switch (svartype) {
         case RSSvartype.JA_NEI:
         case RSSvartype.RADIO:
@@ -84,7 +94,14 @@ export const hentGeneriskFeilmelding = (svartype: RSSvartype) => {
         case RSSvartype.BELOP:
         case RSSvartype.KILOMETER:
         case RSSvartype.TALL: {
-            return 'Du må oppgi en verdi'
+            if (type === 'required') {
+                return 'Du må oppgi en verdi'
+            } else if (type === 'min') {
+                return `Må være minimum ${(error?.ref as HTMLInputElement).min}`
+            } else if (type === 'max') {
+                return `Må være maksimum ${(error?.ref as HTMLInputElement).max}`
+            }
+            return
         }
         case RSSvartype.PERIODER:
         case RSSvartype.PERIODE: {
