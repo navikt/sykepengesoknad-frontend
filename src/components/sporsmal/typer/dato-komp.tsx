@@ -8,7 +8,6 @@ import { skalBrukeFullskjermKalender } from '../../../utils/browser-utils'
 import { fraBackendTilDate } from '../../../utils/dato-utils'
 import validerDato from '../../../utils/sporsmal/valider-dato'
 import FeilLokal from '../../feil/feil-lokal'
-import Vis from '../../vis'
 import { hentSvar } from '../hent-svar'
 import { SpmProps } from '../sporsmal-form/sporsmal-form'
 import UndersporsmalListe from '../undersporsmal/undersporsmal-liste'
@@ -79,11 +78,7 @@ const DatoInput = ({ sporsmal }: SpmProps) => {
 
             <FeilLokal sporsmal={sporsmal} />
 
-            <div className="undersporsmal">
-                <Vis hvis={watch(sporsmal.id)}>
-                    <UndersporsmalListe oversporsmal={sporsmal} />
-                </Vis>
-            </div>
+            <UndersporsmalListe oversporsmal={sporsmal} />
         </div>
     )
 }

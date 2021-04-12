@@ -8,7 +8,7 @@ import { getLedetekst, tekst } from '../../../utils/tekster'
 import { utlandssoknadUrl } from '../../../utils/url-utils'
 import AnimateOnMount from '../../animate-on-mount'
 import FeilLokal from '../../feil/feil-lokal'
-import Vis from '../../vis'
+import VisBlock from '../../vis-block'
 import Bjorn from '../bjorn/bjorn'
 import SporsmalBjorn from '../bjorn/sporsmal-bjorn'
 import TagBjorn from '../bjorn/tag-bjorn'
@@ -85,18 +85,17 @@ const JaNeiInput = ({ sporsmal }: SpmProps) => {
                     </div>
                 </fieldset>
 
-                <Vis hvis={
-                    sporsmal.tag
-                    && sporsmal.tag === TagTyper.UTLANDSOPPHOLD_SOKT_SYKEPENGER
-                    && watchJaNei
-                }>
-                    <Normaltekst className={'utland_infotekst'}>{
-                        parser(getLedetekst(
-                            tekst('soknad.infotekst.utlandsopphold_sokt_sykepenger.' + watchJaNei?.toLowerCase() as any),
-                            { '%URL%': utlandssoknadUrl })
-                        )}
-                    </Normaltekst>
-                </Vis>
+                <VisBlock hvis={sporsmal?.tag === TagTyper.UTLANDSOPPHOLD_SOKT_SYKEPENGER && watchJaNei}
+                    render={() =>
+                        <Normaltekst className={'utland_infotekst'}>{
+                            parser(getLedetekst(
+                                tekst('soknad.infotekst.utlandsopphold_sokt_sykepenger.' + watchJaNei?.toLowerCase() as any),
+                                { '%URL%': utlandssoknadUrl })
+                            )}
+                        </Normaltekst>
+                    }
+                />
+
             </div>
 
             <FeilLokal sporsmal={sporsmal} />
@@ -113,9 +112,11 @@ const JaNeiInput = ({ sporsmal }: SpmProps) => {
                 </>
             </AnimateOnMount>
 
-            <Vis hvis={visAvgittAvBjorn()}>
-                <Bjorn className="press" nokkel="sykepengesoknad.egenmeldingsdager.preutfylt-melding" />
-            </Vis>
+            <VisBlock hvis={visAvgittAvBjorn()}
+                render={() =>
+                    <Bjorn className="press" nokkel="sykepengesoknad.egenmeldingsdager.preutfylt-melding" />
+                }
+            />
 
             <SporsmalBjorn sporsmal={sporsmal} />
         </>

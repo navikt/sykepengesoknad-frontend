@@ -1,7 +1,6 @@
 import './beh.dager.less'
 
 import dayjs from 'dayjs'
-import { Element } from 'nav-frontend-typografi'
 import React, { useEffect, useState } from 'react'
 import { useFormContext } from 'react-hook-form'
 
@@ -9,9 +8,9 @@ import { RSSvarliste } from '../../../types/rs-types/rs-svarliste'
 import { Sporsmal } from '../../../types/types'
 import { ukeDatoListe } from '../../../utils/dato-utils'
 import FeilLokal from '../../feil/feil-lokal'
-import Vis from '../../vis'
 import { hentSvar } from '../hent-svar'
 import { SpmProps } from '../sporsmal-form/sporsmal-form'
+import SporsmalstekstH3 from '../sporsmalstekst/sporsmalstekstH3'
 
 const BehDager = ({ sporsmal }: SpmProps) => {
     const { register, setValue } = useFormContext()
@@ -30,7 +29,7 @@ const BehDager = ({ sporsmal }: SpmProps) => {
         })
         setLokal(lokal)
         // eslint-disable-next-line
-    }, [ sporsmal ]);
+    }, [ sporsmal ])
 
     const dagerSidenMandag = (spm: Sporsmal) => {
         return ((dayjs(spm.min!).day() - 1)) % 7
@@ -53,9 +52,7 @@ const BehDager = ({ sporsmal }: SpmProps) => {
 
     return (
         <>
-            <Vis hvis={sporsmal.sporsmalstekst !== null}>
-                <Element tag="h3" className="skjema__sporsmal">{sporsmal.sporsmalstekst}</Element>
-            </Vis>
+            <SporsmalstekstH3 sporsmal={sporsmal} />
 
             <div className="skjemaelement">
                 <div className="skjema__beh-dager">
