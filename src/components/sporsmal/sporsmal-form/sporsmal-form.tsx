@@ -243,6 +243,7 @@ const SporsmalForm = () => {
         <FormProvider {...methods}>
             <form onSubmit={methods.handleSubmit(onSubmit)}
                 onSubmitCapture={preSubmit}
+                noValidate={true}
                 className={'sporsmal__form ' + nesteSporsmal?.tag?.toLowerCase()}>
 
                 <BjornUnderTittel sporsmal={sporsmal} />
