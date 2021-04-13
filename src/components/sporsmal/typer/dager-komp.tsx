@@ -33,8 +33,8 @@ const DagerKomp = ({ sporsmal }: SpmProps) => {
         return ((dayjs(spm.min!).day() - 1)) % 7
     }
 
-    const dagerTilFredag = (spm: Sporsmal) => {
-        return (5 - dayjs(spm.max!).day())
+    const dagerTilSøndag = (spm: Sporsmal) => {
+        return (7 - dayjs(spm.max!).day())
     }
 
     const kalTittel = () => {
@@ -63,7 +63,7 @@ const DagerKomp = ({ sporsmal }: SpmProps) => {
 
     uker.forEach(uke => {
         const pre = dagerSidenMandag(sporsmal)
-        const post = dagerTilFredag(sporsmal)
+        const post = dagerTilSøndag(sporsmal)
 
         if (uke === minWeek) {
             const ukedager: KalenderDag[] = []
@@ -101,7 +101,7 @@ const DagerKomp = ({ sporsmal }: SpmProps) => {
         alledager.forEach((uke: any) => {
             for (let i = 0; i < uke.length; i++) {
                 const dag = uke[i]
-                if (dag.tid === 'inni' && dag.dayjs.isoWeekday() < 6) {
+                if (dag.tid === 'inni') {
                     dager.push(dag.dayjs.format('YYYY-MM-DD'))
                 }
             }
@@ -114,10 +114,7 @@ const DagerKomp = ({ sporsmal }: SpmProps) => {
     }
 
     const kalenderdag = (dag: KalenderDag, ukeidx: number, idx: number) => {
-        const helg = dag.dayjs.isoWeekday() > 5
-        if (helg) {
-            return <span className="label">{dag.dayjs.format('DD')}</span>
-        } else if (dag.tid !== 'foran' && dag.tid !== 'etter') {
+        if (dag.tid !== 'foran' && dag.tid !== 'etter') {
             return (
                 <>
                     <input type="checkbox"
@@ -161,9 +158,8 @@ const DagerKomp = ({ sporsmal }: SpmProps) => {
 
                             {ukedager.map((dag, idx) => {
                                 const sunday = dag.dayjs.isoWeekday() === 7 ? 'sun' : ''
-                                const helg = dag.dayjs.isoWeekday() > 5 ? 'helg' : ''
                                 return (
-                                    <div className={`kalenderdag ${dag.tid} ${sunday} ${helg}`} key={idx}>
+                                    <div className={`kalenderdag ${dag.tid} ${sunday}`} key={idx}>
                                         {kalenderdag(dag, ukeidx, idx)}
                                     </div>
                                 )
