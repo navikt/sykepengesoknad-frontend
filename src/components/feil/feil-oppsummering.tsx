@@ -58,7 +58,7 @@ const FeilOppsummering = (props: FeilProps) => {
 
         let elmid
         if (id.includes('_')) {
-            if(list[1].type === 'periode') {
+            if (list[1].type === 'periode') {
                 elmid = id + '_fom'
             } else {
                 elmid = id + '_' + list[1].type
@@ -71,6 +71,9 @@ const FeilOppsummering = (props: FeilProps) => {
             detteSpm.svartype.includes('TIMER') || detteSpm.svartype.includes('PROSENT')) {
             elmid = idarr[0]
 
+        } else if (detteSpm.svartype === 'DATOER') {
+            const kalender: any = document.querySelector('.skjema__dager')
+            kalender.focus()
         } else {
             elmid = id
         }

@@ -105,7 +105,12 @@ export const hentGeneriskFeilmelding = (
         }
         case RSSvartype.PERIODER:
         case RSSvartype.PERIODE: {
-            return 'Du må oppgi en periode'
+            if (type === 'fom' || type === 'tom') {
+                return error?.message
+            } else if (type === 'periode') {
+                return 'Perioder kan ikke overlappe'
+            }
+            return
         }
         case RSSvartype.DATOER:
         case RSSvartype.RADIO_GRUPPE_UKEKALENDER: {
@@ -118,7 +123,7 @@ export const hentGeneriskFeilmelding = (
             return 'Du må velge ett land'
         }
         case RSSvartype.DATO: {
-            return 'Du må oppgi en dato'
+            return error?.message
         }
         case RSSvartype.KVITTERING:
         case RSSvartype.IKKE_RELEVANT:
