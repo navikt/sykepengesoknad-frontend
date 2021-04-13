@@ -49,22 +49,9 @@ test('Alle sporsmal tag ligger i veldigLangSoknad', () => {
     const tagsSomSkalStottes = Object.values(TagTyper).filter(skipTag => {
         // TODO: Sjekk at disse tagene fortsatt er i bruk, legg de inn i søknaden
         return skipTag !== 'BETALER_ARBEIDSGIVER'                   // Kan fjernes?
-            && skipTag !== 'ENKELTSTAENDE_BEHANDLINGSDAGER_DAG_NAR' // Ble brukt mens vi satte opp ny søknad, ligger i prod?
             && skipTag !== 'HVOR_MANGE_TIMER'                       // Finnes i syfosoknad, men brukes ikke
             && skipTag !== 'BEKREFT_OPPLYSNINGER_UTLAND'            // Kan bare inneholde en sisteside, dekkes av andre tester
             && skipTag !== 'BEKREFT_OPPLYSNINGER_UTLAND_INFO'       // Kan bare inneholde en sisteside
-            && skipTag !== 'TRANSPORT_TIL_DAGLIG'                   // TODO: Fix denne testen
-            && skipTag !== 'TYPE_TRANSPORT'
-            && skipTag !== 'BIL_TIL_DAGLIG'
-            && skipTag !== 'KM_HJEM_JOBB'
-            && skipTag !== 'OFFENTLIG_TRANSPORT_TIL_DAGLIG'
-            && skipTag !== 'OFFENTLIG_TRANSPORT_BELOP'
-            && skipTag !== 'REISE_MED_BIL'
-            && skipTag !== 'BIL_DATOER'
-            && skipTag !== 'BIL_BOMPENGER'
-            && skipTag !== 'BIL_BOMPENGER_BELOP'
-            && skipTag !== 'KVITTERINGER'
-            && skipTag !== 'UTBETALING'
     })
     let manglerTagsISoknad = false
     let manglerTagsIKoden = false

@@ -40,9 +40,9 @@ describe('Tester støtte for gamle spørsmål', () => {
         cy.get('.DayPicker-Day').contains(tom).click()
     }
 
-    function velgTimerPerUke() {
-        const id = soknad.sporsmal[steg - 1].undersporsmal[0].id
-        cy.get(`.undersporsmal .skjemaelement__input#${id}`).focus().type('12')
+    function velgKalenderdag() {
+        const dag = '13'
+        cy.get('.kalenderdag.inni').contains(dag).click()
     }
 
     function velgTimer() {
@@ -51,12 +51,18 @@ describe('Tester støtte for gamle spørsmål', () => {
         cy.get(`.undersporsmal .skjemaelement__input#${id}`).focus().type('21')
     }
 
+    function velgTall(sporsmalstekst: string, verdi: string) {
+        cy.contains(sporsmalstekst).siblings().within(() => {
+            cy.get('.skjemaelement__input').type(verdi)
+        })
+    }
+
     function velgCheckbox(gjelder: string) {
         cy.get('.undersporsmal .checkboxgruppe').contains(gjelder).click({ force: true })
     }
 
-    function svarJaRadio(gjelder: string) {
-        cy.contains(gjelder).siblings().contains('Ja').click({ force: true })
+    function svarRadioJaEllerNei(gjelder: string, svar: 'Ja' | 'Nei') {
+        cy.contains(gjelder).siblings().contains(svar).click({ force: true })
     }
 
     function svarSykMedEgenmelding() {
@@ -71,6 +77,15 @@ describe('Tester støtte for gamle spørsmål', () => {
     function velgLand(land: string) {
         cy.get('.skjemaelement__input').type(land)
         cy.contains(land).click({ force: true })
+    }
+
+    function lastOppKvittering() {
+        cy.get('.fler-vedlegg').click()
+        cy.contains('Legg til reiseutgift')
+        cy.get('select[name=transportmiddel]').select('TAXI')
+        cy.get('input[name=belop_input]').type('1234')
+        cy.get('.filopplasteren input[type=file]').attachFile('kvittering.jpg')
+        cy.get('.lagre-kvittering').contains('Bekreft').click()
     }
 
     function gaVidere() {
@@ -94,13 +109,13 @@ describe('Tester støtte for gamle spørsmål', () => {
     it('ANDRE_INNTEKTSKILDER', () => {
         svarJaHovedsporsmal()
         velgCheckbox('dagmamma')
-        svarJaRadio('Er du sykmeldt fra dette?')
+        svarRadioJaEllerNei('Er du sykmeldt fra dette?', 'Ja')
         gaVidere()
     })
     it('ANDRE_INNTEKTSKILDER', () => {
         svarJaHovedsporsmal()
         velgCheckbox('frilanser')
-        svarJaRadio('Er du sykmeldt fra dette?')
+        svarRadioJaEllerNei('Er du sykmeldt fra dette?', 'Ja')
         gaVidere()
     })
     it('ARBEID_UTENFOR_NORGE', () => {
@@ -109,14 +124,14 @@ describe('Tester støtte for gamle spørsmål', () => {
     })
     it('ARBEIDSGIVER', () => {
         svarJaHovedsporsmal()
-        svarJaRadio('Er du 100 % sykmeldt?')
-        svarJaRadio('Har du avtalt med arbeidsgiveren din at du skal ha ferie i hele perioden?')
+        svarRadioJaEllerNei('Er du 100 % sykmeldt?', 'Ja')
+        svarRadioJaEllerNei('Har du avtalt med arbeidsgiveren din at du skal ha ferie i hele perioden?', 'Ja')
         gaVidere()
     })
     it('ARBEIDSLEDIG_UTLAND', () => {
         svarJaHovedsporsmal()
         velgPeriode()
-        svarJaRadio('Har du søkt om å beholde sykepengene for disse dagene?')
+        svarRadioJaEllerNei('Har du søkt om å beholde sykepengene for disse dagene?', 'Ja')
         gaVidere()
     })
     it('EGENMELDINGER', () => {
@@ -152,13 +167,13 @@ describe('Tester støtte for gamle spørsmål', () => {
     })
     it('JOBBET_DU_100_PROSENT', () => {
         svarJaHovedsporsmal()
-        velgTimerPerUke()
+        velgTall('Hvor mange timer i uken jobber du vanligvis når du er frisk? Varierer det, kan du oppgi gjennomsnittet.', '12')
         velgTimer()
         gaVidere()
     })
     it('JOBBET_DU_GRADERT', () => {
         svarJaHovedsporsmal()
-        velgTimerPerUke()
+        velgTall('Hvor mange timer i uken jobber du vanligvis når du er frisk? Varierer det, kan du oppgi gjennomsnittet.', '12')
         velgTimer()
         gaVidere()
     })
@@ -193,18 +208,38 @@ describe('Tester støtte for gamle spørsmål', () => {
     it('UTDANNING', () => {
         svarJaHovedsporsmal()
         velgDato()
-        svarJaRadio('Er utdanningen et fulltidsstudium?')
+        svarRadioJaEllerNei('Er utdanningen et fulltidsstudium?', 'Ja')
         gaVidere()
     })
     it('UTLAND', () => {
         svarJaHovedsporsmal()
         velgPeriode()
-        svarJaRadio('Har du søkt om å beholde sykepengene for disse dagene?')
+        svarRadioJaEllerNei('Har du søkt om å beholde sykepengene for disse dagene?', 'Ja')
         gaVidere()
     })
     it('UTLAND_V2', () => {
         svarJaHovedsporsmal()
         velgPeriode()
+        gaVidere()
+    })
+    it('TRANSPORT_TIL_DAGLIG', () => {
+        svarJaHovedsporsmal()
+        velgCheckbox('Offentlig transport')
+        velgTall('Hvor mye betaler du vanligvis i måneden for offentlig transport?', '21')
+        gaVidere()
+    })
+    it('REISE_MED_BIL', () => {
+        svarJaHovedsporsmal()
+        velgKalenderdag()
+        svarRadioJaEllerNei('Hadde du utgifter til bompenger?', 'Nei')
+        gaVidere()
+    })
+    it('KVITTERINGER', () => {
+        lastOppKvittering()
+        gaVidere()
+    })
+    it('UTBETALING', () => {
+        svarJaHovedsporsmal()
         gaVidere()
     })
 

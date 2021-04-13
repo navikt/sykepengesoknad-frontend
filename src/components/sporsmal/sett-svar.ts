@@ -42,12 +42,6 @@ export const settSvar = (sporsmal: Sporsmal, verdier: Record<string, any>): void
         case RSSvartype.PERIODER:
             periodeSvar(sporsmal, verdi)
             break
-        //TODO: Kan fjernes siden koden kjøres lenger ned?
-        case RSSvartype.BEHANDLINGSDAGER:   // Gammel tag, kan fjernes?
-            sporsmal.undersporsmal.forEach(uspm => {
-                settSvar(uspm, verdier)
-            })
-            break
         case RSSvartype.KVITTERING:
             // Denne settes i opplasting-form
             return

@@ -6,13 +6,18 @@ import { TagTyper } from '../../types/enums'
 import { RSSoknadstype } from '../../types/rs-types/rs-soknadstype'
 import { Sporsmal } from '../../types/types'
 import { ukeDatoListe } from '../dato-utils'
+import env from '../environment'
 import { finnHovedSporsmal, hentSporsmal, hentUndersporsmal } from '../soknad-utils'
 import { getLedetekst, tekst } from '../tekster'
 
 
-const useValiderArbeidsgrad = ( sporsmal: Sporsmal ) => {
+const useValiderArbeidsgrad = (sporsmal: Sporsmal) => {
     const { valgtSoknad } = useAppStore()
-    if (!valgtSoknad || valgtSoknad.soknadstype === RSSoknadstype.REISETILSKUDD) {
+    if (
+        !valgtSoknad ||
+        valgtSoknad.soknadstype === RSSoknadstype.REISETILSKUDD ||
+        (env.isDev && sporsmal.id === 'veldigLangSoknadTestReisetilskudd')
+    ) {
         return { undefined }
     }
 
@@ -56,7 +61,7 @@ const useValiderArbeidsgrad = ( sporsmal: Sporsmal ) => {
     }
 
 
-    const validerGrad = ( values: Record<string, any> ) => {
+    const validerGrad = (values: Record<string, any>) => {
         const faktiskeSykedager = valgtSoknad.soknadstype === RSSoknadstype.ARBEIDSTAKERE
             ? sykedagerForArbeidstakere()
             : sykedagerForFrilansere()
