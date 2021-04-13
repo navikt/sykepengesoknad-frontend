@@ -158,9 +158,8 @@ const DagerKomp = ({ sporsmal }: SpmProps) => {
 
                             {ukedager.map((dag, idx) => {
                                 const sunday = dag.dayjs.isoWeekday() === 7 ? 'sun' : ''
-                                const helg = dag.dayjs.isoWeekday() > 5 ? 'helg' : ''
                                 return (
-                                    <div className={`kalenderdag ${dag.tid} ${sunday} ${helg}`} key={idx}>
+                                    <div className={`kalenderdag ${dag.tid} ${sunday}`} key={idx}>
                                         {kalenderdag(dag, ukeidx, idx)}
                                     </div>
                                 )
