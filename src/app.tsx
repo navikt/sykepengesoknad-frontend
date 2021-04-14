@@ -42,7 +42,7 @@ const App = (): any => {
                 <Amplitude>
                     <TransitionGroup component={null}>
                         <CSSTransition
-                            timeout={{ enter: 500, exit: 500 }}
+                            timeout={{ enter: 500, exit: 0 }}
                             classNames="fade"
                             key={location.key}
                         >
