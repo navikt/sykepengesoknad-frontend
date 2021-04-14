@@ -1,8 +1,8 @@
 import './app.less'
 
 import ModalWrapper from 'nav-frontend-modal'
-import React from 'react'
-import { Route, Switch } from 'react-router-dom'
+import React, { useEffect } from 'react'
+import { Route, Switch, useLocation } from 'react-router-dom'
 import { CSSTransition, TransitionGroup } from 'react-transition-group'
 
 import { Amplitude } from './components/amplitude/amplitudeProvider'
@@ -21,32 +21,45 @@ export interface RouteParams {
 }
 
 const App = (): any => {
-
+    const location = useLocation()
     ModalWrapper.setAppElement('#root')
+
+    useEffect(() => {
+        const desktop = window.matchMedia('(min-width: 768px)')
+        let offset = document.getElementById('decorator-header')?.clientHeight || 0
+        if (!desktop.matches) {
+            offset += document.querySelector('.sidebanner')?.clientHeight || 0
+        }
+        setTimeout(() => {
+            window.scrollTo(0, offset)
+        }, 1)
+
+    }, [ location ])
 
     return (
         <StoreProvider>
             <DataFetcher>
                 <Amplitude>
-                    <main id="maincontent" role="main" tabIndex={-1}>
-                        <RefreshHvisFeilState>
-                            <TransitionGroup>
-                                <CSSTransition
-                                    timeout={{ enter: 300, exit: 300 }}
-                                    classNames={'fade'}
-                                >
-                                    <Switch>
-                                        <Route exact={true} path="/" component={Soknader} />
+                    <TransitionGroup component={null}>
+                        <CSSTransition
+                            timeout={{ enter: 500, exit: 500 }}
+                            classNames="fade"
+                            key={location.key}
+                        >
+                            <main id="maincontent" role="main" tabIndex={-1}>
+                                <RefreshHvisFeilState>
+                                    <Switch location={location}>
+                                        <Route exact={true} path={'/'} component={Soknader} />
                                         <Route path={'/soknader/:id/:stegId'} component={Soknad} />
                                         <Route path={'/soknader/:id'} component={Soknad} />
                                         <Route path={'/soknader/'} component={RedirectTilOversikt} />
                                         <Route path={'/kvittering/:id'} component={KvitteringSide} />
                                         <Route path={'/sykepengesoknad-utland'} component={OpprettUtland} />
                                     </Switch>
-                                </CSSTransition>
-                            </TransitionGroup>
-                        </RefreshHvisFeilState>
-                    </main>
+                                </RefreshHvisFeilState>
+                            </main>
+                        </CSSTransition>
+                    </TransitionGroup>
                 </Amplitude>
             </DataFetcher>
         </StoreProvider>

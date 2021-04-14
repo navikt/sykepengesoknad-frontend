@@ -67,10 +67,11 @@ a {
 
 .fade-enter {
     opacity: 0.01;
+    z-index: 1;
 
     &.fade-enter-active {
         opacity: 1;
-        transition: opacity 300ms ease-in;
+        transition: opacity 500ms ease-in;
     }
 }
 
@@ -79,7 +80,7 @@ a {
 
     &.fade-exit-active {
         opacity: 0.01;
-        transition: opacity 300ms ease-in;
+        transition: opacity 500ms ease-in;
     }
 }
 

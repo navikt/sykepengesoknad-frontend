@@ -20,7 +20,6 @@ export function FeilView() {
 
     return (
         <div className="limit">
-
             <div aria-live="polite">
                 <Alertstripe type="feil">{tekst('feilstate.alert')}</Alertstripe>
             </div>
