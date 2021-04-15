@@ -58,9 +58,9 @@ mock.put(`${env.flexGatewayRoot}/syfosoknad/api/soknader/:soknad/sporsmal/:spors
 
 mock.post(`${env.flexGatewayRoot}/syfosoknad/api/soknader/:soknad/korriger`,
     (req, res, ctx) => {
-        const soknad = jsonDeepCopy(soknader.find((sok: RSSoknad) => {
-            return res(ctx.json(sok.id === req.pathParams.soknad))
-        }))!
+        const soknad = jsonDeepCopy(soknader.find((sok: RSSoknad) =>
+            sok.id === req.pathParams.soknad
+        ))!
         soknad.id = uuid.v4()
         soknad.status = RSSoknadstatus.UTKAST_TIL_KORRIGERING
         return res(ctx.json(soknad))
@@ -68,15 +68,15 @@ mock.post(`${env.flexGatewayRoot}/syfosoknad/api/soknader/:soknad/korriger`,
 
 mock.post(`${env.flexGatewayRoot}/syfosoknad/api/opprettSoknadUtland`,
     (req, res, ctx) => {
-        const soknad = soknader.find((sok: RSSoknad) => {
-            return sok.soknadstype === RSSoknadstype.OPPHOLD_UTLAND && sok.status === RSSoknadstatus.NY
-        })
+        const soknad = soknader.find((sok: RSSoknad) =>
+            sok.soknadstype === RSSoknadstype.OPPHOLD_UTLAND && sok.status === RSSoknadstatus.NY
+        )
         if (soknad) {
             return res(ctx.json(soknad))
         }
-        const soknadOriginal = jsonDeepCopy(soknaderOpplaering.find((sok: RSSoknad) => {
-            return sok.soknadstype === RSSoknadstype.OPPHOLD_UTLAND && sok.status === RSSoknadstatus.NY
-        })!)
+        const soknadOriginal = jsonDeepCopy(soknaderOpplaering.find((sok: RSSoknad) =>
+            sok.soknadstype === RSSoknadstype.OPPHOLD_UTLAND && sok.status === RSSoknadstatus.NY
+        )!)
         soknadOriginal.id = uuid.v4()
         soknadOriginal.status = RSSoknadstatus.NY
         return res(ctx.json(soknadOriginal))
