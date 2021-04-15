@@ -44,7 +44,6 @@ const App = (): any => {
                         <CSSTransition
                             timeout={{ enter: 500, exit: 0 }}
                             classNames="fade"
-                            key={location.key}
                         >
                             <main id="maincontent" role="main" tabIndex={-1}>
                                 <RefreshHvisFeilState>

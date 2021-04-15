@@ -12,10 +12,11 @@ import { setBodyClass } from '../../utils/utils'
 
 export function FeilView() {
     const history = useHistory()
-    history.replace(oversiktside)
 
     useEffect(() => {
+        history.replace(oversiktside)
         setBodyClass('feil-state')
+        // eslint-disable-next-line
     }, [])
 
     return (

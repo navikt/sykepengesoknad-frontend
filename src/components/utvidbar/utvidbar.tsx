@@ -39,15 +39,9 @@ const Utvidbar = (props: UtvidbarProps) => {
     }, [ props.erApen, props.fixedHeight ])
 
     const onKlikk = () => {
-        const open = !erApen
-        setErApen(open)
-
-        if (open) {
-            window.scrollTo({ top: utvidbar.current!.offsetTop, left: 0, behavior: 'smooth' })
-        } else {
-            if (!erSynligIViewport(utvidbar.current!)) {
-                window.scrollTo({ top: utvidbar.current!.offsetTop, left: 0, behavior: 'smooth' })
-            }
+        setErApen(!erApen)
+        if (!erSynligIViewport(utvidbar.current)) {
+            window.scrollTo({ top: utvidbar.current?.offsetTop, left: 0, behavior: 'smooth' })
         }
     }
 
@@ -59,7 +53,7 @@ const Utvidbar = (props: UtvidbarProps) => {
                 ref={jsToggle}
                 onMouseEnter={props.ikon !== undefined ? () => btnImage.current!.src = props.ikonHover! : undefined}
                 onMouseLeave={props.ikon !== undefined ? () => btnImage.current!.src = props.ikon! : undefined}
-                onClick={() => onKlikk}
+                onClick={onKlikk}
                 type={'button'}
                 className="utvidbar__toggle"
             >
