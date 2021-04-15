@@ -73,7 +73,11 @@ const TallKomp = ({ sporsmal }: SpmProps) => {
 
             <div className="medEnhet">
                 <input type="number"
-                    className={'skjemaelement__input' + inputSize()}
+                    className={
+                        'skjemaelement__input' +
+                        inputSize() +
+                        (errors[sporsmal.id] ? ' skjemaelement__input--harFeil' : '')
+                    }
                     name={sporsmal.id}
                     id={sporsmal.id}
                     min={sporsmal.min!}
