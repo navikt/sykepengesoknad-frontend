@@ -101,7 +101,7 @@ export const hentGeneriskFeilmelding = (
             } else if (type === 'max') {
                 return `Må være maksimum ${(error?.ref as HTMLInputElement).max}`
             }
-            return
+            return error?.message
         }
         case RSSvartype.PERIODER:
         case RSSvartype.PERIODE: {
@@ -110,7 +110,7 @@ export const hentGeneriskFeilmelding = (
             } else if (type === 'periode') {
                 return 'Perioder kan ikke overlappe'
             }
-            return
+            return error?.message
         }
         case RSSvartype.DATOER:
         case RSSvartype.RADIO_GRUPPE_UKEKALENDER: {

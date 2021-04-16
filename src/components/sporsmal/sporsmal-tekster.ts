@@ -42,6 +42,9 @@ const SporsmalTekster = {
     'soknad.feilmelding.PERMITTERT_PERIODE.lokal': 'Du må svare på om du har vært permittert',
     'soknad.feilmelding.PERMITTERT_PERIODE_NAR': 'Du må svare på når du ble permittert',
 
+    'soknad.feilmelding.HVOR_MANGE_TIMER': 'Du må svare på hvor mange timer du jobber normalt per uke',
+    'soknad.feilmelding.HVOR_MANGE_TIMER.lokal': 'Du må oppgi antall timer',
+
     'soknad.feilmelding.HVOR_MANGE_TIMER_PER_UKE': 'Du må svare på hvor mange timer du jobbet per uke før du ble sykmeldt',
 
     'soknad.feilmelding.HVOR_MYE_HAR_DU_JOBBET': 'Du må velge prosent eller timer',
