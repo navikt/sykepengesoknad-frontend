@@ -11,7 +11,7 @@ import { customTruncet, formaterFilstørrelse } from '../../../utils/fil-utils'
 import { logger } from '../../../utils/logger'
 import { getLedetekst, tekst } from '../../../utils/tekster'
 import Utvidbar from '../../utvidbar/utvidbar'
-import Vis from '../../vis'
+import VisBlock from '../../vis-block'
 import binders from './binders.svg'
 
 const formattertFiltyper = env.formaterteFiltyper
@@ -36,8 +36,7 @@ const DragAndDrop = () => {
                     res.blob().then((blob) => {
                         setValgtFil(blob as any)
                     })
-                }
-                else {
+                } else {
                     logger.warn(`Klarte ikke hente bilde fra flex-bucket-uploader, status: ${res.status}`)
                 }
             })
@@ -76,86 +75,94 @@ const DragAndDrop = () => {
                 <Element tag="strong">{tekst('drag_and_drop.label')}</Element>
             </label>
 
-            <Vis hvis={valgtFil}>
-                <Utvidbar
-                    erApen={formErDisabled}
-                    tittel={customTruncet(valgtFil?.name || 'Kvittering.png', 20)}
-                    type="intern"
-                    fixedHeight={true}
-                >
-                    <div className="preview">{
-                        valgtFil
-                            ? <img alt="" src={URL.createObjectURL(valgtFil)} />
-                            : null
-                    }</div>
-                </Utvidbar>
-            </Vis>
+            <VisBlock hvis={valgtFil}
+                render={() => {
+                    return (
+                        <Utvidbar
+                            erApen={formErDisabled}
+                            tittel={customTruncet(valgtFil?.name || 'Kvittering.png', 20)}
+                            type="intern"
+                            fixedHeight={true}
+                        >
+                            <div className="preview">{
+                                valgtFil
+                                    ? <img alt="" src={URL.createObjectURL(valgtFil)} />
+                                    : null
+                            }</div>
+                        </Utvidbar>
+                    )
+                }}
+            />
 
-            <Vis hvis={!formErDisabled}>
-                <div className="filopplasteren" {...getRootProps()}>
-                    <input {...getInputProps()} id="ddfil" />
-                    <input type="hidden"
-                        id="fil_input"
-                        name="fil_input"
-                        ref={register({
-                            validate: {
-                                fil_valgt: () => {
-                                    if (!valgtFil) {
-                                        settInputHarFeil()
-                                        return tekst('opplasting_modal.filopplasting.feilmelding')
+            <VisBlock hvis={!formErDisabled}
+                render={() => {
+                    return <>
+                        <div className="filopplasteren" {...getRootProps()}>
+                            <input {...getInputProps()} id="ddfil" />
+                            <input type="hidden"
+                                id="fil_input"
+                                name="fil_input"
+                                ref={register({
+                                    validate: {
+                                        fil_valgt: () => {
+                                            if (!valgtFil) {
+                                                settInputHarFeil()
+                                                return tekst('opplasting_modal.filopplasting.feilmelding')
+                                            }
+                                        },
+                                        fil_type: () => {
+                                            if (valgtFil && !tillatteFiltyper.includes(valgtFil.type)) {
+                                                settInputHarFeil()
+                                                return getLedetekst(tekst('drag_and_drop.filtype'), { '%FILNAVN%': valgtFil.name, '%TILLATTEFILTYPER%': formattertFiltyper })
+                                            }
+                                        },
+                                        fil_storrelse: () => {
+                                            if (valgtFil && valgtFil.size > maxFilstørrelse) {
+                                                settInputHarFeil()
+                                                return getLedetekst(tekst('drag_and_drop.maks'), { '%FILNAVN%': valgtFil.name, '%MAKSSTOR%': maks })
+                                            }
+                                        },
+                                        fjern_styling_hvis_ok: () => {
+                                            fjernInputHarFeil()
+                                            return true
+                                        }
                                     }
-                                },
-                                fil_type: () => {
-                                    if (valgtFil && !tillatteFiltyper.includes(valgtFil.type)) {
-                                        settInputHarFeil()
-                                        return getLedetekst(tekst('drag_and_drop.filtype'), { '%FILNAVN%': valgtFil.name, '%TILLATTEFILTYPER%': formattertFiltyper })
-                                    }
-                                },
-                                fil_storrelse: () => {
-                                    if (valgtFil && valgtFil.size > maxFilstørrelse) {
-                                        settInputHarFeil()
-                                        return getLedetekst(tekst('drag_and_drop.maks'), { '%FILNAVN%': valgtFil.name, '%MAKSSTOR%': maks })
-                                    }
-                                },
-                                fjern_styling_hvis_ok: () => {
-                                    fjernInputHarFeil()
-                                    return true
+                                })}
+                            />
+                            <img src={binders} className="opplastingsikon" alt="Opplastingsikon" />
+                            <Normaltekst tag="span" className="tekst">
+                                {isDragActive
+                                    ? tekst('drag_and_drop.dragtekst.aktiv')
+                                    : valgtFil
+                                        ? tekst('drag_and_drop.dragtekst.endre')
+                                        : tekst('drag_and_drop.dragtekst')
                                 }
-                            }
-                        })}
-                    />
-                    <img src={binders} className="opplastingsikon" alt="Opplastingsikon" />
-                    <Normaltekst tag="span" className="tekst">
-                        {isDragActive
-                            ? tekst('drag_and_drop.dragtekst.aktiv')
-                            : valgtFil
-                                ? tekst('drag_and_drop.dragtekst.endre')
-                                : tekst('drag_and_drop.dragtekst')
-                        }
-                    </Normaltekst>
-                </div>
+                            </Normaltekst>
+                        </div>
 
-                <div role="alert" aria-live="assertive">
-                    <Normaltekst tag="span" className="skjemaelement__feilmelding">
-                        <Vis hvis={errors.fil_input}>
-                            {errors.fil_input?.message}
-                        </Vis>
-                    </Normaltekst>
-                </div>
+                        <div role="alert" aria-live="assertive">
+                            <Normaltekst tag="span" className="skjemaelement__feilmelding">
+                                <VisBlock hvis={errors.fil_input}
+                                    render={() => <>{errors.fil_input?.message}</>}
+                                />
+                            </Normaltekst>
+                        </div>
 
-                <Normaltekst className="restriksjoner">
-                    <span className="filtype">{
-                        getLedetekst(tekst('opplasting_modal.filtyper'), {
-                            '%FILTYPER%': formattertFiltyper
-                        })
-                    }</span>
-                    <span className="filstr">{
-                        getLedetekst(tekst('opplasting_modal.maksfilstr'), {
-                            '%MAKSFILSTR%': maks
-                        })
-                    }</span>
-                </Normaltekst>
-            </Vis>
+                        <Normaltekst className="restriksjoner">
+                            <span className="filtype">{
+                                getLedetekst(tekst('opplasting_modal.filtyper'), {
+                                    '%FILTYPER%': formattertFiltyper
+                                })
+                            }</span>
+                            <span className="filstr">{
+                                getLedetekst(tekst('opplasting_modal.maksfilstr'), {
+                                    '%MAKSFILSTR%': maks
+                                })
+                            }</span>
+                        </Normaltekst>
+                    </>
+                }}
+            />
         </div>
     )
 }

@@ -19,7 +19,7 @@ import { logger } from '../../../utils/logger'
 import { tekst } from '../../../utils/tekster'
 import Slettknapp from '../../slettknapp/slettknapp'
 import { SpmProps } from '../../sporsmal/sporsmal-form/sporsmal-form'
-import Vis from '../../vis'
+import VisBlock from '../../vis-block'
 import DragAndDrop from '../drag-and-drop/drag-and-drop'
 
 interface OpplastetKvittering {
@@ -45,8 +45,7 @@ const OpplastingForm = ({ sporsmal }: SpmProps) => {
         if (valgtKvittering) {
             setKvitteringHeader(tekst('opplasting_modal.endre-utlegg.tittel'))
             setFormErDisabled(true)
-        }
-        else {
+        } else {
             setKvitteringHeader(tekst('opplasting_modal.nytt-utlegg.tittel'))
             setFormErDisabled(false)
         }
@@ -70,7 +69,7 @@ const OpplastingForm = ({ sporsmal }: SpmProps) => {
             valgtSoknad!.sporsmal[spmIndex] = new Sporsmal(rsOppdaterSporsmalResponse.oppdatertSporsmal, null, true)
             setValgtSoknad(valgtSoknad)
             setOpenModal(false)
-        } catch(ex) {
+        } catch (ex) {
             setFeilmeldingTekst('Det skjedde en feil i baksystemene, prøv igjen senere')
         } finally {
             setLaster(false)
@@ -88,16 +87,13 @@ const OpplastingForm = ({ sporsmal }: SpmProps) => {
 
         if (bucketRes.ok) {
             return bucketRes.json()
-        }
-        else if (redirectTilLoginHvis401(bucketRes)) {
+        } else if (redirectTilLoginHvis401(bucketRes)) {
             return null
-        }
-        else if (bucketRes.status === 413) {
+        } else if (bucketRes.status === 413) {
             logger.warn('Feil under opplasting fordi filen du prøvde å laste opp er for stor')
             setFeilmeldingTekst('Filen du prøvde å laste opp er for stor')
             return null
-        }
-        else {
+        } else {
             logger.warn('Feil under opplasting av kvittering')
             setFeilmeldingTekst('Det skjedde en feil i baksystemene, prøv igjen senere')
             return null
@@ -122,11 +118,9 @@ const OpplastingForm = ({ sporsmal }: SpmProps) => {
 
         if (syfosoknadRes.ok) {
             return syfosoknadRes.json()
-        }
-        else if (redirectTilLoginHvis401(syfosoknadRes)) {
+        } else if (redirectTilLoginHvis401(syfosoknadRes)) {
             return null
-        }
-        else {
+        } else {
             logger.warn('Feil under lagring av kvittering svar i syfosoknad')
             setFeilmeldingTekst('Det skjedde en feil i baksystemene, prøv igjen senere')
             return null
@@ -142,11 +136,15 @@ const OpplastingForm = ({ sporsmal }: SpmProps) => {
                     {kvitteringHeader}
                 </Systemtittel>
 
-                <Vis hvis={formErDisabled}>
-                    <AlertStripe type="info">
-                        <Normaltekst>{tekst('opplasting_modal.endre-utlegg.hjelpetekst')}</Normaltekst>
-                    </AlertStripe>
-                </Vis>
+                <VisBlock hvis={formErDisabled}
+                    render={() => {
+                        return (
+                            <AlertStripe type="info">
+                                <Normaltekst>{tekst('opplasting_modal.endre-utlegg.hjelpetekst')}</Normaltekst>
+                            </AlertStripe>
+                        )
+                    }}
+                />
                 <div className="skjemakolonner">
                     <div className="skjemaelement">
                         <label htmlFor="transportmiddel" className="skjemaelement__label">
@@ -177,9 +175,9 @@ const OpplastingForm = ({ sporsmal }: SpmProps) => {
 
                         <div role="alert" aria-live="assertive">
                             <Normaltekst tag="span" className="skjemaelement__feilmelding">
-                                <Vis hvis={methods.errors['transportmiddel']}>
-                                    {tekst('opplasting_modal.transportmiddel.feilmelding')}
-                                </Vis>
+                                <VisBlock hvis={methods.errors['transportmiddel']}
+                                    render={() => <>{tekst('opplasting_modal.transportmiddel.feilmelding')}</>}
+                                />
                             </Normaltekst>
                         </div>
                     </div>
@@ -218,9 +216,9 @@ const OpplastingForm = ({ sporsmal }: SpmProps) => {
 
                         <div role="alert" aria-live="assertive">
                             <Normaltekst tag="span" className="skjemaelement__feilmelding">
-                                <Vis hvis={methods.errors['belop_input']}>
-                                    {methods.errors['belop_input']?.message}
-                                </Vis>
+                                <VisBlock hvis={methods.errors['belop_input']}
+                                    render={() => <>{methods.errors['belop_input']?.message}</>}
+                                />
                             </Normaltekst>
                         </div>
                     </div>
@@ -228,24 +226,34 @@ const OpplastingForm = ({ sporsmal }: SpmProps) => {
 
                 <DragAndDrop />
 
-                <Vis hvis={feilmeldingTekst}>
-                    <Alertstripe type="advarsel">
-                        <Normaltekst>{feilmeldingTekst}</Normaltekst>
-                    </Alertstripe>
-                </Vis>
+                <VisBlock hvis={feilmeldingTekst}
+                    render={() => {
+                        return (
+                            <Alertstripe type="advarsel">
+                                <Normaltekst>{feilmeldingTekst}</Normaltekst>
+                            </Alertstripe>
+                        )
+                    }}
+                />
 
                 <div className="knapperad">
                     <Knapp htmlType="button" className="lagre-kvittering" onClick={() => setOpenModal(false)}>
                         {tekst('opplasting_modal.tilbake')}
                     </Knapp>
-                    <Vis hvis={!formErDisabled}>
-                        <Knapp type="hoved" htmlType="button" className="lagre-kvittering" onClick={onSubmit} spinner={laster}>
-                            {tekst('opplasting_modal.bekreft')}
-                        </Knapp>
-                    </Vis>
-                    <Vis hvis={formErDisabled}>
-                        <Slettknapp sporsmal={sporsmal} kvittering={valgtKvittering!} />
-                    </Vis>
+
+                    <VisBlock hvis={!formErDisabled}
+                        render={() => {
+                            return (
+                                <Knapp type="hoved" htmlType="button" className="lagre-kvittering" onClick={onSubmit} spinner={laster}>
+                                    {tekst('opplasting_modal.bekreft')}
+                                </Knapp>
+                            )
+                        }}
+                    />
+
+                    <VisBlock hvis={formErDisabled}
+                        render={() => <Slettknapp sporsmal={sporsmal} kvittering={valgtKvittering!} />}
+                    />
                 </div>
             </form>
         </FormProvider>

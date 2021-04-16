@@ -4,7 +4,7 @@ import React from 'react'
 import { empty } from '../../../utils/constants'
 import { tilLesbarPeriodeMedArstall } from '../../../utils/dato-utils'
 import { hentPeriode } from '../../sporsmal/hent-svar'
-import Vis from '../../vis'
+import VisBlock from '../../vis-block'
 import { OppsummeringProps } from '../oppsummering'
 
 const PerioderSum = ({ sporsmal }: OppsummeringProps) => {
@@ -15,11 +15,15 @@ const PerioderSum = ({ sporsmal }: OppsummeringProps) => {
                 {sporsmal.svarliste.svar.map((p, i) => {
                     const periode = hentPeriode(sporsmal, i)
                     return (
-                        <Vis hvis={p.verdi !== empty} key={i}>
-                            <Normaltekst className="oppsummering__dato">
-                                { tilLesbarPeriodeMedArstall(periode.fom, periode.tom) }
-                            </Normaltekst>
-                        </Vis>
+                        <VisBlock hvis={p.verdi !== empty} key={i}
+                            render={() => {
+                                return (
+                                    <Normaltekst className="oppsummering__dato">
+                                        {tilLesbarPeriodeMedArstall(periode.fom, periode.tom)}
+                                    </Normaltekst>
+                                )
+                            }}
+                        />
                     )
                 })}
             </div>

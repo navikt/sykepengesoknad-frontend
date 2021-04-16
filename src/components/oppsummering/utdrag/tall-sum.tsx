@@ -4,7 +4,7 @@ import React from 'react'
 import { RSSvartype } from '../../../types/rs-types/rs-svartype'
 import { empty } from '../../../utils/constants'
 import { tekst } from '../../../utils/tekster'
-import Vis from '../../vis'
+import VisBlock from '../../vis-block'
 import { OppsummeringProps } from '../oppsummering'
 
 const TallSum = ({ sporsmal }: OppsummeringProps) => {
@@ -16,11 +16,15 @@ const TallSum = ({ sporsmal }: OppsummeringProps) => {
             <div className="oppsummering__svar">
                 {sporsmal.svarliste.svar.map((svarverdi, index) => {
                     return (
-                        <Vis hvis={svarverdi.verdi !== empty} key={index}>
-                            <Normaltekst className="oppsummering__tekst">
-                                {svarverdi.verdi} {label}
-                            </Normaltekst>
-                        </Vis>
+                        <VisBlock hvis={svarverdi.verdi !== empty} key={index}
+                            render={() => {
+                                return (
+                                    <Normaltekst className="oppsummering__tekst">
+                                        {svarverdi.verdi} {label}
+                                    </Normaltekst>
+                                )
+                            }}
+                        />
                     )
                 })}
             </div>

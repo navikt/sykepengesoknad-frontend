@@ -9,7 +9,7 @@ import { erOppdelt } from '../../utils/periode-utils'
 import { sorterPerioderEldsteFoerst } from '../../utils/sykmelding-utils'
 import { tekst } from '../../utils/tekster'
 import Bjorn from '../sporsmal/bjorn/bjorn'
-import Vis from '../vis'
+import VisBlock from '../vis-block'
 
 const SykmeldingPerioder = () => {
     const { valgtSoknad, valgtSykmelding } = useAppStore()
@@ -32,28 +32,42 @@ const SykmeldingPerioder = () => {
                         </UndertekstBold>
                         <Normaltekst><strong>{fom} - {tom}</strong> &bull; {dager}</Normaltekst>
 
-                        <Vis hvis={periode.grad}>
-                            <Normaltekst>
-                                {periode.grad} {tekst('din-sykmelding.periode.prosent-sykmeldt')}
-                            </Normaltekst>
-                        </Vis>
+                        <VisBlock hvis={periode.grad}
+                            render={() => {
+                                return (
+                                    <Normaltekst>
+                                        {periode.grad} {tekst('din-sykmelding.periode.prosent-sykmeldt')}
+                                    </Normaltekst>
+                                )
+                            }}
+                        />
 
-                        <Vis hvis={periode.behandlingsdager}>
-                            <Normaltekst>
-                                <Vis hvis={periode.behandlingsdager! > 1}>
-                                    {periode.behandlingsdager} {tekst('din-sykmelding.periode.behandlingsdager')}
-                                </Vis>
-                                <Vis hvis={periode.behandlingsdager! === 1}>
-                                    {tekst('din-sykmelding.periode.behandlingsdag')}
-                                </Vis>
-                            </Normaltekst>
-                        </Vis>
+                        <VisBlock hvis={periode.behandlingsdager}
+                            render={() => {
+                                return (
+                                    <Normaltekst>
+                                        <VisBlock hvis={periode.behandlingsdager! > 1}
+                                            render={() => {
+                                                return <>
+                                                    {periode.behandlingsdager}
+                                                    {' '}
+                                                    {tekst('din-sykmelding.periode.behandlingsdager')}
+                                                </>
+                                            }}
+                                        />
+                                        <VisBlock hvis={periode.behandlingsdager! === 1}
+                                            render={() => <>{tekst('din-sykmelding.periode.behandlingsdag')}</>}
+                                        />
+                                    </Normaltekst>
+                                )
+                            }}
+                        />
                     </div>
                 )
             })}
-            <Vis hvis={erOppdelt(valgtSoknad!, valgtSykmelding)}>
-                <Bjorn className="" nokkel="sykepengesoknad.sykmelding-utdrag.oppdelt.bjorn" />
-            </Vis>
+            <VisBlock hvis={erOppdelt(valgtSoknad!, valgtSykmelding)}
+                render={() => <Bjorn nokkel="sykepengesoknad.sykmelding-utdrag.oppdelt.bjorn" />}
+            />
         </div>
     )
 }

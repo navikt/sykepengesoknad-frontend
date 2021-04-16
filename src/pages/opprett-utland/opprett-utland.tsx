@@ -7,7 +7,7 @@ import React from 'react'
 import { useHistory } from 'react-router'
 
 import Bjorn from '../../components/sporsmal/bjorn/bjorn'
-import Vis from '../../components/vis'
+import VisBlock from '../../components/vis-block'
 import useFetch from '../../data/rest/use-fetch'
 import { FetchState, hasData } from '../../data/rest/utils'
 import { useAppStore } from '../../data/stores/app-store'
@@ -24,7 +24,6 @@ const OpprettUtland = () => {
 
     const opprettUtland = useFetch<RSSoknad>()
     const history = useHistory()
-
 
     const opprett = () => {
         opprettUtland.fetch(`${env.flexGatewayRoot}/syfosoknad/api/opprettSoknadUtland`, {
@@ -48,42 +47,39 @@ const OpprettUtland = () => {
     }
 
     return (
-        <>
-            <div id="opprett_utland_main" className={'opprett-utland'}>
-                <div className="sidebanner sidebanner--utenramme">
-                    <div className="sidebanner__innhold blokk--xl">
-                        <Bjorn nokkel={'opprett-utland.bjorn'} hvit={true} vertikal={true} stor={true} />
-                    </div>
-                </div>
-                <div className="begrensning">
-                    <header className="sidetopp"><h1
-                        className="opprett-utland__tittel">{tekst('opprett-utland.tittel')}</h1></header>
-                    <div className="panel blokk redaksjonelt-innhold">
-                        {parser(tekst('opprett-utland.trenger-ikke-soke'))}
-                    </div>
-
-                    <div className="knapperad">
-                        <p>
-                            <Knapp type="hoved" htmlType={'button'}
-                                onClick={opprett}>{tekst('opprett-utland.fortsett')}</Knapp>
-
-                        </p>
-                        <div aria-live="polite">
-                            <Vis hvis={feilmeldingTekst !== ''}>
-                                <Alertstripe type="feil">{feilmeldingTekst}</Alertstripe>
-                            </Vis>
-                        </div>
-                        <p className="blokk">
-                            <a href="https://www.nav.no/no/NAV+og+samfunn/Om+NAV/personvern-i-arbeids-og-velferdsetaten"
-                                target="_blank" rel="noopener noreferrer">
-                                {tekst('opprett-utland.personvern')}
-
-                            </a>
-                        </p>
-                    </div>
+        <div id="opprett_utland_main" className={'opprett-utland'}>
+            <div className="sidebanner sidebanner--utenramme">
+                <div className="sidebanner__innhold blokk--xl">
+                    <Bjorn nokkel={'opprett-utland.bjorn'} hvit={true} vertikal={true} stor={true} />
                 </div>
             </div>
-        </>
+            <div className="begrensning">
+                <header className="sidetopp">
+                    <h1 className="opprett-utland__tittel">{tekst('opprett-utland.tittel')}</h1>
+                </header>
+
+                <div className="panel blokk redaksjonelt-innhold">
+                    {parser(tekst('opprett-utland.trenger-ikke-soke'))}
+                </div>
+
+                <div className="knapperad">
+                    <Knapp type="hoved" htmlType={'button'}
+                        onClick={opprett}>{tekst('opprett-utland.fortsett')}
+                    </Knapp>
+
+                    <div aria-live="polite">
+                        <VisBlock hvis={feilmeldingTekst !== ''}
+                            render={() => <Alertstripe type="feil">{feilmeldingTekst}</Alertstripe>}
+                        />
+                    </div>
+
+                    <a className="blokk" href="https://www.nav.no/no/NAV+og+samfunn/Om+NAV/personvern-i-arbeids-og-velferdsetaten"
+                        target="_blank" rel="noopener noreferrer">
+                        {tekst('opprett-utland.personvern')}
+                    </a>
+                </div>
+            </div>
+        </div>
     )
 }
 

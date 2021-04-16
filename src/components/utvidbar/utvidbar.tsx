@@ -5,7 +5,7 @@ import { Normaltekst, Undertittel } from 'nav-frontend-typografi'
 import React, { useEffect, useRef, useState } from 'react'
 
 import { erSynligIViewport } from '../../utils/browser-utils'
-import Vis from '../vis'
+import VisBlock from '../vis-block'
 
 interface UtvidbarProps {
     erApen: boolean;
@@ -61,19 +61,26 @@ const Utvidbar = (props: UtvidbarProps) => {
                 type={'button'}
                 className="utvidbar__toggle"
             >
-                <Vis hvis={props.ikon !== undefined}>
-                    <img aria-hidden="true" className="utvidbar__ikon"
-                        ref={btnImage}
-                        alt={props.ikonAltTekst}
-                        src={props.ikon}
-                    />
-                </Vis>
-                <Vis hvis={props.type === undefined}>
-                    <Undertittel tag="h3" className="utvidbar__tittel">{props.tittel}</Undertittel>
-                </Vis>
-                <Vis hvis={props.type === 'intern'}>
-                    <Normaltekst tag="h3" className="utvidbar__tittel">{props.tittel}</Normaltekst>
-                </Vis>
+                <VisBlock hvis={props.ikon !== undefined}
+                    render={() => {
+                        return (
+                            <img aria-hidden="true" className="utvidbar__ikon"
+                                ref={btnImage}
+                                alt={props.ikonAltTekst}
+                                src={props.ikon}
+                            />
+                        )
+                    }}
+                />
+
+                <VisBlock hvis={props.type === undefined}
+                    render={() => <Undertittel tag="h3" className="utvidbar__tittel">{props.tittel}</Undertittel>}
+                />
+
+                <VisBlock hvis={props.type === 'intern'}
+                    render={() => <Normaltekst tag="h3" className="utvidbar__tittel">{props.tittel}</Normaltekst>}
+                />
+
                 <span className="utvidbar__handling">
                     <Normaltekst tag="em">
                         {erApen ? 'Lukk' : 'Åpne'}

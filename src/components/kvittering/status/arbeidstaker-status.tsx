@@ -5,7 +5,7 @@ import React, { useEffect, useState } from 'react'
 import { useAppStore } from '../../../data/stores/app-store'
 import { tekst } from '../../../utils/tekster'
 import Avkrysset from '../../oppsummering/utdrag/avkrysset'
-import Vis from '../../vis'
+import VisBlock from '../../vis-block'
 import { Mottaker } from './kvittering-status'
 
 
@@ -39,17 +39,25 @@ const ArbeidstakerStatus = () => {
     }
 
     return <div className="sendt-inner">
-        <Vis hvis={valgtSoknad!.sendtTilArbeidsgiverDato}>
-            <Element tag="h2" className="sendt-tittel">
-                {tekst('kvittering.sendt-til')}
-            </Element>
-            <Avkrysset tekst={tilArbNavn + ' ' + tilOrg} />
-            <Undertekst>{tilArbDato}</Undertekst>
-        </Vis>
-        <Vis hvis={valgtSoknad!.sendtTilNAVDato}>
-            <Avkrysset tekst={Mottaker.NAV} />
-            <Undertekst>{tilNavDato}</Undertekst>
-        </Vis>
+        <VisBlock hvis={valgtSoknad!.sendtTilArbeidsgiverDato}
+            render={() => {
+                return <>
+                    <Element tag="h2" className="sendt-tittel">
+                        {tekst('kvittering.sendt-til')}
+                    </Element>
+                    <Avkrysset tekst={tilArbNavn + ' ' + tilOrg} />
+                    <Undertekst>{tilArbDato}</Undertekst>
+                </>
+            }}
+        />
+        <VisBlock hvis={valgtSoknad!.sendtTilNAVDato}
+            render={() => {
+                return <>
+                    <Avkrysset tekst={Mottaker.NAV} />
+                    <Undertekst>{tilNavDato}</Undertekst>
+                </>
+            }}
+        />
     </div>
 }
 

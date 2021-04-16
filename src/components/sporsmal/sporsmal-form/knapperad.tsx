@@ -8,7 +8,7 @@ import { RouteParams } from '../../../app'
 import { useAppStore } from '../../../data/stores/app-store'
 import { RSSoknadstype } from '../../../types/rs-types/rs-soknadstype'
 import { tekst } from '../../../utils/tekster'
-import Vis from '../../vis'
+import VisBlock from '../../vis-block'
 import { avbrytSoknad } from './avbryt-soknad'
 
 type Event = MouseEvent<HTMLAnchorElement | HTMLButtonElement>;
@@ -45,7 +45,7 @@ const Knapperad = ({ onSubmit, poster }: KnapperadProps) => {
 
     const handleAvbryt = async(event: Event) => {
         event.preventDefault()
-        if(avbryter) return
+        if (avbryter) return
         setAvbryter(true)
         try {
             await avbrytSoknad({
@@ -68,23 +68,27 @@ const Knapperad = ({ onSubmit, poster }: KnapperadProps) => {
                 <button className="lenke avbrytlenke avbrytDialog__trigger" onClick={handleVilAvbryte}>
                     <Normaltekst tag="span">{tekst('sykepengesoknad.avbryt.trigger')}</Normaltekst>
                 </button>
-                <Vis hvis={vilAvbryte}>
-                    <div ref={avbrytDialog} className="avbrytDialog__dialog pekeboble">
-                        <Normaltekst className="blokk-s">{tekst('sykepengesoknad.avbryt.sporsmal')}</Normaltekst>
-                        <div className="blokk-xs">
-                            <Fareknapp spinner={avbryter}
-                                onClick={handleAvbryt}>{tekst('sykepengesoknad.avbryt.ja')}</Fareknapp>
-                        </div>
-                        <div aria-live="polite">
-                            <Vis hvis={feilmeldingTekst !== ''}>
-                                <Alertstripe type="feil">{feilmeldingTekst}</Alertstripe>
-                            </Vis>
-                        </div>
-                        <button className="avbrytlenke lenke" onClick={handleVilAvbryte}>
-                            {tekst('sykepengesoknad.avbryt.angre')}
-                        </button>
-                    </div>
-                </Vis>
+                <VisBlock hvis={vilAvbryte}
+                    render={() => {
+                        return (
+                            <div ref={avbrytDialog} className="avbrytDialog__dialog pekeboble">
+                                <Normaltekst className="blokk-s">{tekst('sykepengesoknad.avbryt.sporsmal')}</Normaltekst>
+                                <div className="blokk-xs">
+                                    <Fareknapp spinner={avbryter}
+                                        onClick={handleAvbryt}>{tekst('sykepengesoknad.avbryt.ja')}</Fareknapp>
+                                </div>
+                                <div aria-live="polite">
+                                    <VisBlock hvis={feilmeldingTekst !== ''}
+                                        render={() => <Alertstripe type="feil">{feilmeldingTekst}</Alertstripe>}
+                                    />
+                                </div>
+                                <button className="avbrytlenke lenke" onClick={handleVilAvbryte}>
+                                    {tekst('sykepengesoknad.avbryt.angre')}
+                                </button>
+                            </div>
+                        )
+                    }}
+                />
             </div>
         </div>
     )

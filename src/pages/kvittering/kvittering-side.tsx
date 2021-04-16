@@ -10,7 +10,7 @@ import Banner from '../../components/banner/banner'
 import Brodsmuler from '../../components/brodsmuler/brodsmuler'
 import { HotjarTrigger } from '../../components/hotjar-trigger'
 import Kvittering from '../../components/kvittering/kvittering'
-import Vis from '../../components/vis'
+import VisBlock from '../../components/vis-block'
 import { useAppStore } from '../../data/stores/app-store'
 import { RSSoknadstatus } from '../../types/rs-types/rs-soknadstatus'
 import { Brodsmule } from '../../types/types'
@@ -41,7 +41,7 @@ const KvitteringSide = () => {
         const sykmelding = sykmeldinger.find(sm => sm.id === filtrertSoknad?.sykmeldingId)
         setValgtSykmelding(sykmelding)
         // eslint-disable-next-line
-    }, [id]);
+    }, [ id ]);
 
     useEffect(() => {
         setBodyClass('kvittering')
@@ -61,14 +61,18 @@ const KvitteringSide = () => {
                     <Kvittering />
                 </HotjarTrigger>
 
-                <Vis hvis={erSiste}>
-                    <Link to="/" className="gaa-videre">
-                        <Normaltekst tag="span">
-                            <VenstreChevron />
-                            {tekst('sykepengesoknad.navigasjon.gaa-til')}
-                        </Normaltekst>
-                    </Link>
-                </Vis>
+                <VisBlock hvis={erSiste}
+                    render={() => {
+                        return (
+                            <Link to="/" className="gaa-videre">
+                                <Normaltekst tag="span">
+                                    <VenstreChevron />
+                                    {tekst('sykepengesoknad.navigasjon.gaa-til')}
+                                </Normaltekst>
+                            </Link>
+                        )
+                    }}
+                />
             </div>
         </>
     )

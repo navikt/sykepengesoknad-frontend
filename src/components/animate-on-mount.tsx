@@ -1,7 +1,7 @@
 import React, { useEffect, useRef, useState } from 'react'
 
 import { useAppStore } from '../data/stores/app-store'
-import Vis from './vis'
+import VisBlock from './vis-block'
 
 interface AnimateOnMountProps {
     mounted: boolean;
@@ -40,9 +40,7 @@ const AnimateOnMount = (props: AnimateOnMountProps) => {
 
     return (
         <div ref={animRef} className={`${start} ${styles}`} onTransitionEnd={onTransitionEnd}>
-            <Vis hvis={show}>
-                {children}
-            </Vis>
+            <VisBlock hvis={show} render={() => children} />
         </div>
     )
 }

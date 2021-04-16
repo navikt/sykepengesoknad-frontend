@@ -15,7 +15,7 @@ import env from '../../utils/environment'
 import fetcher from '../../utils/fetcher'
 import { logger } from '../../utils/logger'
 import { tekst } from '../../utils/tekster'
-import Vis from '../vis'
+import VisBlock from '../vis-block'
 
 const StatusPanel = () => {
     const { valgtSoknad, setValgtSoknad, setValgtSykmelding, sykmeldinger, soknader, setSoknader } = useAppStore()
@@ -54,8 +54,7 @@ const StatusPanel = () => {
                 const httpCode = res.status
                 if (redirectTilLoginHvis401(res)) {
                     return
-                }
-                else if ([ 200, 201, 203, 206 ].includes(httpCode)) {
+                } else if ([ 200, 201, 203, 206 ].includes(httpCode)) {
                     valgtSoknad!.status = RSSoknadstatus.NY
                     valgtSoknad!.avbruttDato = undefined
                     setValgtSoknad(valgtSoknad)
@@ -85,11 +84,16 @@ const StatusPanel = () => {
                     <Normaltekst>{tilLesbarDatoMedArstall(valgtSoknad!.avbruttDato)}</Normaltekst>
                 </div>
             </div>
-            <Vis hvis={soknadKanGjenapnes(valgtSoknad!.opprettetDato)}>
-                <Knapp spinner={gjenapner} mini type="standard" onClick={Gjenapne}>
-                    {'Gjenåpne søknad'}
-                </Knapp>
-            </Vis>
+
+            <VisBlock hvis={soknadKanGjenapnes(valgtSoknad!.opprettetDato)}
+                render={() => {
+                    return (
+                        <Knapp spinner={gjenapner} mini type="standard" onClick={Gjenapne}>
+                            {'Gjenåpne søknad'}
+                        </Knapp>
+                    )
+                }}
+            />
         </div>
     )
 }

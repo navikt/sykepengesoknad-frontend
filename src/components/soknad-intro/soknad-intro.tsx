@@ -9,27 +9,28 @@ import React, { useState } from 'react'
 import { useAppStore } from '../../data/stores/app-store'
 import { RSSoknadstype } from '../../types/rs-types/rs-soknadstype'
 import { tekst } from '../../utils/tekster'
-import Vis from '../vis'
+import VisBlock from '../vis-block'
 import ForsteSoknadSvg from './soknad-intro-svg'
 
 const SoknadIntro = () => {
-
     const [ aapen, setAapen ] = useState<boolean>(false)
     const { valgtSoknad } = useAppStore()
+
     if (!valgtSoknad) {
         return null
     }
+
     return (<>
         <div className="soknad-intro">
             <div className="blokk-s">
                 <Veilederpanel kompakt svg={<ForsteSoknadSvg />}>
                     <Normaltekst tag="h2" className="panel__tittel sist">
-                        <Vis hvis={valgtSoknad.soknadstype !== RSSoknadstype.REISETILSKUDD}>
-                            {parser(tekst('sykepengesoknad.soknad-intro.personvern'))}
-                        </Vis>
-                        <Vis hvis={valgtSoknad.soknadstype === RSSoknadstype.REISETILSKUDD}>
-                            {parser(tekst('reisetilskudd.soknad-intro.personvern'))}
-                        </Vis>
+                        <VisBlock hvis={valgtSoknad.soknadstype !== RSSoknadstype.REISETILSKUDD}
+                            render={() => parser(tekst('sykepengesoknad.soknad-intro.personvern'))}
+                        />
+                        <VisBlock hvis={valgtSoknad.soknadstype === RSSoknadstype.REISETILSKUDD}
+                            render={() => parser(tekst('reisetilskudd.soknad-intro.personvern'))}
+                        />
                         <p className="sist">
                             <button className="lenke no-border"
                                 onClick={() => setAapen(true)}>
@@ -50,15 +51,11 @@ const SoknadIntro = () => {
             </Systemtittel>
             {parser(tekst('sykepengesoknad.soknad-intro.personvern-modal-innhold'))}
 
-
             <div className={'lukk-wrapper'}>
-                <button type="button" className="no-border lenke" onClick={() => setAapen(false)}
-                >
+                <button type="button" className="no-border lenke" onClick={() => setAapen(false)}>
                     <Normaltekst tag="span">Lukk</Normaltekst>
                 </button>
             </div>
-
-
         </ModalWrapper>
     </>
     )

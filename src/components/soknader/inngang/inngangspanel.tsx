@@ -5,7 +5,7 @@ import React from 'react'
 import { Link } from 'react-router-dom'
 
 import { RSSoknadstatus } from '../../../types/rs-types/rs-soknadstatus'
-import Vis from '../../vis'
+import VisBlock from '../../vis-block'
 
 interface InngangsIkonProps {
     ikon: string;
@@ -18,11 +18,15 @@ export const InngangsIkon = ({ ikon, ikonHover }: InngangsIkonProps) => {
             <span className="inngangspanel__ikon inngangspanel__ikon--normal">
                 <img alt="" src={ikon} />
             </span>
-            <Vis hvis={ikonHover !== undefined}>
-                <span className="inngangspanel__ikon inngangspanel__ikon--hover">
-                    <img alt="" src={ikonHover || ikon} />
-                </span>
-            </Vis>
+            <VisBlock hvis={ikonHover !== undefined}
+                render={() => {
+                    return (
+                        <span className="inngangspanel__ikon inngangspanel__ikon--hover">
+                            <img alt="" src={ikonHover || ikon} />
+                        </span>
+                    )
+                }}
+            />
         </>
     )
 }

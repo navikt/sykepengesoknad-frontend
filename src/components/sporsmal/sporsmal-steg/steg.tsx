@@ -6,7 +6,7 @@ import { RouteParams } from '../../../app'
 import { useAppStore } from '../../../data/stores/app-store'
 import { SEPARATOR } from '../../../utils/constants'
 import { useAmplitudeInstance } from '../../amplitude/amplitude'
-import Vis from '../../vis'
+import VisBlock from '../../vis-block'
 import { pathUtenSteg } from '../sporsmal-utils'
 
 const innerCls = (aktiv: boolean, ferdig: boolean, disabled: boolean) =>
@@ -40,17 +40,28 @@ const Steg = ({ label, index }: StegProps) => {
 
     return (
         <li className="stegindikator__steg" aria-current={(erAktiv) ? 'step' : undefined}>
-            <Vis hvis={aktivtSteg >= index + 2}>
-                <button className={innerCls(erAktiv, erPassert, disabled)} title={label} disabled={disabled} onClick={() => goTo(num)}>
-                    <div className="stegindikator__steg-num">{num}</div>
-                </button>
-            </Vis>
+            <VisBlock hvis={aktivtSteg >= index + 2}
+                render={() => {
+                    return (
+                        <button className={innerCls(erAktiv, erPassert, disabled)}
+                            title={label} disabled={disabled}
+                            onClick={() => goTo(num)}
+                        >
+                            <div className="stegindikator__steg-num">{num}</div>
+                        </button>
+                    )
+                }}
+            />
 
-            <Vis hvis={aktivtSteg < index + 2}>
-                <div className={innerCls(erAktiv, erPassert, disabled)} title={label} >
-                    <div className="stegindikator__steg-num">{num}</div>
-                </div>
-            </Vis>
+            <VisBlock hvis={aktivtSteg < index + 2}
+                render={() => {
+                    return (
+                        <div className={innerCls(erAktiv, erPassert, disabled)} title={label}>
+                            <div className="stegindikator__steg-num">{num}</div>
+                        </div>
+                    )
+                }}
+            />
         </li>
     )
 }

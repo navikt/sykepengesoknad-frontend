@@ -8,15 +8,9 @@ import { RSSoknadstype } from '../../../types/rs-types/rs-soknadstype'
 import { tilLesbarPeriodeMedArstall } from '../../../utils/dato-utils'
 import { tekst } from '../../../utils/tekster'
 import { useAmplitudeInstance } from '../../amplitude/amplitude'
-import Vis from '../../vis'
+import VisBlock from '../../vis-block'
 import { InngangsIkon, InngangsStatus } from '../inngang/inngangspanel'
-import {
-    hentIkon,
-    hentIkonHover,
-    hentTeaserStatustekst,
-    periodeListevisning,
-    SykepengesoknadTeaserProps, teaserTittel
-} from './teaser-util'
+import { hentIkon, hentIkonHover, hentTeaserStatustekst, periodeListevisning, SykepengesoknadTeaserProps, teaserTittel } from './teaser-util'
 
 const UtgaattSoknaderTeaser = ({ soknad }: SykepengesoknadTeaserProps) => {
     const { logEvent } = useAmplitudeInstance()
@@ -35,11 +29,15 @@ const UtgaattSoknaderTeaser = ({ soknad }: SykepengesoknadTeaserProps) => {
                             ikonHover={hentIkonHover(soknad)}
                         />
                         <div className="inngangspanel--inaktivt">
-                            <Vis hvis={soknad.soknadstype !== RSSoknadstype.OPPHOLD_UTLAND}>
-                                <Undertekst className="inngangspanel__periode">
-                                    {tilLesbarPeriodeMedArstall(soknad.fom, soknad.tom)}
-                                </Undertekst>
-                            </Vis>
+                            <VisBlock hvis={soknad.soknadstype !== RSSoknadstype.OPPHOLD_UTLAND}
+                                render={() => {
+                                    return (
+                                        <Undertekst className="inngangspanel__periode">
+                                            {tilLesbarPeriodeMedArstall(soknad.fom, soknad.tom)}
+                                        </Undertekst>
+                                    )
+                                }}
+                            />
                             <Undertittel tag="h3" className="inngangspanel__tittel">
                                 {teaserTittel(soknad)}
                             </Undertittel>
