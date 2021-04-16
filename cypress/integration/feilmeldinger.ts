@@ -37,7 +37,7 @@ describe('Tester feilmeldinger', () => {
         gaVidere()
 
         feilmeldingHandtering(
-            'Du må velge et alternativ',
+            'Du må bekrefte dette',
             'Du må bekrefte dette før du går videre',
             arbeidstakerGradert.sporsmal[0].id
         )

@@ -85,9 +85,11 @@ export const hentGeneriskFeilmelding = (
         case RSSvartype.RADIO_GRUPPE:
         case RSSvartype.RADIO_GRUPPE_TIMER_PROSENT:
         case RSSvartype.CHECKBOX:
-        case RSSvartype.CHECKBOX_GRUPPE:
-        case RSSvartype.CHECKBOX_PANEL: {
+        case RSSvartype.CHECKBOX_GRUPPE: {
             return 'Du må velge et alternativ'
+        }
+        case RSSvartype.CHECKBOX_PANEL: {
+            return 'Du må bekrefte dette'
         }
         case RSSvartype.PROSENT:
         case RSSvartype.TIMER:
