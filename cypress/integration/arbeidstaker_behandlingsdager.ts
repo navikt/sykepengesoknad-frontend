@@ -71,7 +71,7 @@ describe('Tester behandlingsdagersøknad', () => {
     })
 
     it('Tilbake og videre', function() {
-        cy.contains('Tilbake').click()
+        cy.contains('Tilbake').click({ force: true })
 
         cy.contains('Gå videre').click()
     })
