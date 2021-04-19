@@ -43,21 +43,26 @@ const Teasere = ({ soknader, className, tittel, tomListeTekst, id, kanSorteres =
     return (
         <>
             <header className="teasere__header">
-                <Vis hvis={kanSorteres && sorterteSoknader().length > 0}>
-                    <Select label="Sorter etter"
-                        className="inngangspanel__sortering"
-                        onChange={(event) => setSortering(event.target.value as Sortering)}
-                    >
-                        {Object.values(Sortering).map((sort, idx) => {
-                            return <option value={sort} key={idx}>{sort}</option>
-                        })}
-                    </Select>
-                </Vis>
-                <Vis hvis={sorterteSoknader().length > 0 || tomListeTekst !== undefined}>
-                    <Undertittel tag="h2" className="teasere__header__tittel">
-                        {tittel}
-                    </Undertittel>
-                </Vis>
+                <Vis hvis={kanSorteres && sorterteSoknader().length > 0}
+                    render={() =>
+                        <Select label="Sorter etter"
+                            className="inngangspanel__sortering"
+                            onChange={(event) => setSortering(event.target.value as Sortering)}
+                        >
+                            {Object.values(Sortering).map((sort, idx) => {
+                                return <option value={sort} key={idx}>{sort}</option>
+                            })}
+                        </Select>
+                    }
+                />
+
+                <Vis hvis={sorterteSoknader().length > 0 || tomListeTekst}
+                    render={() =>
+                        <Undertittel tag="h2" className="teasere__header__tittel">
+                            {tittel}
+                        </Undertittel>
+                    }
+                />
             </header>
 
             <div id={id} className={className}>
@@ -74,11 +79,13 @@ const Teasere = ({ soknader, className, tittel, tomListeTekst, id, kanSorteres =
                             return <Teaser key={idx} soknad={soknad} />
                     }
                 })}
-                <Vis hvis={soknader.length === 0}>
-                    <Element className="inngangspanel inngangspanel--tomListe">
-                        {tomListeTekst}
-                    </Element>
-                </Vis>
+                <Vis hvis={soknader.length === 0}
+                    render={() =>
+                        <Element className="inngangspanel inngangspanel--tomListe">
+                            {tomListeTekst}
+                        </Element>
+                    }
+                />
             </div>
         </>
     )

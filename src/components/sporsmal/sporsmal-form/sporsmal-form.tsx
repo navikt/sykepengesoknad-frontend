@@ -250,22 +250,30 @@ const SporsmalForm = () => {
 
                 <SporsmalSwitch sporsmal={sporsmal} />
 
-                <Vis hvis={erSiste && !erUtlandssoknad}>
-                    <Oppsummering ekspandert={false} />
-                    <CheckboxPanel sporsmal={nesteSporsmal} />
-                    <SendesTil />
-                </Vis>
+                <Vis hvis={erSiste && !erUtlandssoknad}
+                    render={() =>
+                        <>
+                            <Oppsummering ekspandert={false} />
+                            <CheckboxPanel sporsmal={nesteSporsmal} />
+                            <SendesTil />
+                        </>
+                    }
+                />
 
-                <Vis hvis={erSiste && erUtlandssoknad}>
-                    <Oppsummering ekspandert={false} />
-                    <CheckboxPanel sporsmal={sporsmal} />
-                </Vis>
+                <Vis hvis={erSiste && erUtlandssoknad}
+                    render={() =>
+                        <>
+                            <Oppsummering ekspandert={false} />
+                            <CheckboxPanel sporsmal={sporsmal} />
+                        </>
+                    }
+                />
 
                 <FeilOppsummering errors={methods.errors} sporsmal={sporsmal} />
 
-                <Vis hvis={skalViseKnapperad(valgtSoknad!, sporsmal, methods.getValues())}>
-                    <Knapperad onSubmit={onSubmit} poster={poster} />
-                </Vis>
+                <Vis hvis={skalViseKnapperad(valgtSoknad!, sporsmal, methods.getValues())}
+                    render={() => <Knapperad onSubmit={onSubmit} poster={poster} />}
+                />
             </form>
         </FormProvider>
     )

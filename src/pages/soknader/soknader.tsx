@@ -63,15 +63,17 @@ const Soknader = () => {
 
                 <UtbetalingerLenke />
 
-                <Vis hvis={tidligereSoknader.length > 0}>
-                    <Teasere
-                        className={'soknader_teasere'}
-                        soknader={tidligereSoknader}
-                        tittel={tekst('soknader.sendt.tittel')}
-                        id="soknader-sendt"
-                        kanSorteres={true}
-                    />
-                </Vis>
+                <Vis hvis={tidligereSoknader.length > 0}
+                    render={() =>
+                        <Teasere
+                            className={'soknader_teasere'}
+                            soknader={tidligereSoknader}
+                            tittel={tekst('soknader.sendt.tittel')}
+                            id="soknader-sendt"
+                            kanSorteres={true}
+                        />
+                    }
+                />
 
                 <Lenke className="hovedside-lenke" href="/sykefravaer">
                     <VenstreChevron />

@@ -61,19 +61,24 @@ const Utvidbar = (props: UtvidbarProps) => {
                 type={'button'}
                 className="utvidbar__toggle"
             >
-                <Vis hvis={props.ikon !== undefined}>
-                    <img aria-hidden="true" className="utvidbar__ikon"
-                        ref={btnImage}
-                        alt={props.ikonAltTekst}
-                        src={props.ikon}
-                    />
-                </Vis>
-                <Vis hvis={props.type === undefined}>
-                    <Undertittel tag="h3" className="utvidbar__tittel">{props.tittel}</Undertittel>
-                </Vis>
-                <Vis hvis={props.type === 'intern'}>
-                    <Normaltekst tag="h3" className="utvidbar__tittel">{props.tittel}</Normaltekst>
-                </Vis>
+                <Vis hvis={props.ikon}
+                    render={() =>
+                        <img aria-hidden="true" className="utvidbar__ikon"
+                            ref={btnImage}
+                            alt={props.ikonAltTekst}
+                            src={props.ikon}
+                        />
+                    }
+                />
+
+                <Vis hvis={props.type === undefined}
+                    render={() => <Undertittel tag="h3" className="utvidbar__tittel">{props.tittel}</Undertittel>}
+                />
+
+                <Vis hvis={props.type === 'intern'}
+                    render={() => <Normaltekst tag="h3" className="utvidbar__tittel">{props.tittel}</Normaltekst>}
+                />
+
                 <span className="utvidbar__handling">
                     <Normaltekst tag="em">
                         {erApen ? 'Lukk' : 'Åpne'}

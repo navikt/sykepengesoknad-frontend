@@ -10,7 +10,7 @@ import { skalBrukeFullskjermKalender } from '../../../utils/browser-utils'
 import { fraBackendTilDate } from '../../../utils/dato-utils'
 import { validerFom, validerPeriode, validerTom } from '../../../utils/sporsmal/valider-periode'
 import { tekst } from '../../../utils/tekster'
-import VisBlock from '../../vis-block'
+import Vis from '../../vis'
 import { hentPeriode } from '../hent-svar'
 import { SpmProps } from '../sporsmal-form/sporsmal-form'
 import { hentFeilmelding } from '../sporsmal-utils'
@@ -160,7 +160,7 @@ const PeriodeKomp = ({ sporsmal, index, slettPeriode }: AllProps) => {
                         </fieldset>
                     )}
                 />
-                <VisBlock hvis={index > 0}
+                <Vis hvis={index > 0}
                     render={() =>
                         <button role="link" id={'btn_' + id} className="periodeknapp lenke slett" onClick={(e) =>
                             slettPeriode(e, index)}>
@@ -171,7 +171,7 @@ const PeriodeKomp = ({ sporsmal, index, slettPeriode }: AllProps) => {
             </div>
 
             <div role="alert" aria-live="assertive">
-                <VisBlock hvis={errors[id]}
+                <Vis hvis={errors[id]}
                     render={() =>
                         <Normaltekst tag="span" className="skjemaelement__feilmelding">
                             {feilmelding.lokal}

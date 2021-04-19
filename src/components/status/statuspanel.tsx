@@ -54,8 +54,7 @@ const StatusPanel = () => {
                 const httpCode = res.status
                 if (redirectTilLoginHvis401(res)) {
                     return
-                }
-                else if ([ 200, 201, 203, 206 ].includes(httpCode)) {
+                } else if ([ 200, 201, 203, 206 ].includes(httpCode)) {
                     valgtSoknad!.status = RSSoknadstatus.NY
                     valgtSoknad!.avbruttDato = undefined
                     setValgtSoknad(valgtSoknad)
@@ -85,11 +84,14 @@ const StatusPanel = () => {
                     <Normaltekst>{tilLesbarDatoMedArstall(valgtSoknad!.avbruttDato)}</Normaltekst>
                 </div>
             </div>
-            <Vis hvis={soknadKanGjenapnes(valgtSoknad!.opprettetDato)}>
-                <Knapp spinner={gjenapner} mini type="standard" onClick={Gjenapne}>
-                    {'Gjenåpne søknad'}
-                </Knapp>
-            </Vis>
+
+            <Vis hvis={soknadKanGjenapnes(valgtSoknad!.opprettetDato)}
+                render={() =>
+                    <Knapp spinner={gjenapner} mini type="standard" onClick={Gjenapne}>
+                        {'Gjenåpne søknad'}
+                    </Knapp>
+                }
+            />
         </div>
     )
 }

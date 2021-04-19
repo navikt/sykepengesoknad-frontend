@@ -8,13 +8,7 @@ import { getUrlTilSoknad } from '../../../utils/url-utils'
 import { useAmplitudeInstance } from '../../amplitude/amplitude'
 import Vis from '../../vis'
 import { InngangsIkon, Inngangspanel, InngangsStatus } from '../inngang/inngangspanel'
-import {
-    hentIkon,
-    hentIkonHover,
-    hentTeaserStatustekst,
-    periodeListevisning,
-    SykepengesoknadTeaserProps, teaserTittel
-} from './teaser-util'
+import { hentIkon, hentIkonHover, hentTeaserStatustekst, periodeListevisning, SykepengesoknadTeaserProps, teaserTittel } from './teaser-util'
 
 const TidligereSoknaderTeaser = ({ soknad }: SykepengesoknadTeaserProps) => {
     const { logEvent } = useAmplitudeInstance()
@@ -31,11 +25,13 @@ const TidligereSoknaderTeaser = ({ soknad }: SykepengesoknadTeaserProps) => {
                             ikonHover={hentIkonHover(soknad)}
                         />
                         <div className="inngangspanel__innhold">
-                            <Vis hvis={soknad.soknadstype !== RSSoknadstype.OPPHOLD_UTLAND}>
-                                <Undertekst className="inngangspanel__periode">
-                                    {tilLesbarPeriodeMedArstall(soknad.fom, soknad.tom)}
-                                </Undertekst>
-                            </Vis>
+                            <Vis hvis={soknad.soknadstype !== RSSoknadstype.OPPHOLD_UTLAND}
+                                render={() =>
+                                    <Undertekst className="inngangspanel__periode">
+                                        {tilLesbarPeriodeMedArstall(soknad.fom, soknad.tom)}
+                                    </Undertekst>
+                                }
+                            />
                             <Undertittel tag="h3" className="inngangspanel__tittel">
                                 {teaserTittel(soknad)}
                             </Undertittel>

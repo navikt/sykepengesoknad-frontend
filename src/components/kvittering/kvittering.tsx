@@ -65,31 +65,34 @@ const Kvittering = () => {
             <Oppsummering
                 ekspandert={sendtForMerEnn30DagerSiden(valgtSoknad?.sendtTilArbeidsgiverDato, valgtSoknad?.sendtTilNAVDato)} />
 
-            <Vis hvis={valgtSoknad!.soknadstype !== RSSoknadstype.OPPHOLD_UTLAND}>
-                <Opplysninger ekspandert={false} />
-            </Vis>
+            <Vis hvis={valgtSoknad!.soknadstype !== RSSoknadstype.OPPHOLD_UTLAND}
+                render={() => <Opplysninger ekspandert={false} />}
+            />
 
-            <Vis hvis={skalViseKnapperad}>
-                <div className="knapperad">
-                    <Vis hvis={valgtSoknad!.status !== RSSoknadstatus.KORRIGERT}>
-                        <Endreknapp />
-                    </Vis>
+            <Vis hvis={skalViseKnapperad}
+                render={() =>
+                    <div className="knapperad">
+                        <Vis hvis={valgtSoknad!.status !== RSSoknadstatus.KORRIGERT}
+                            render={() => <Endreknapp />}
+                        />
 
-                    <Vis hvis={!erSendtTilNav}>
-                        <Ettersending gjelder="nav" setRerendrekvittering={setRerendrekvittering} />
-                    </Vis>
+                        <Vis hvis={!erSendtTilNav}
+                            render={() => <Ettersending gjelder="nav" setRerendrekvittering={setRerendrekvittering} />}
+                        />
 
-                    <Vis
-                        hvis={skalViseSendTilArbeidsgiver}>
-                        <Ettersending gjelder="arbeidsgiver" setRerendrekvittering={setRerendrekvittering} />
-                    </Vis>
-                </div>
-            </Vis>
+                        <Vis hvis={skalViseSendTilArbeidsgiver}
+                            render={() =>
+                                <Ettersending gjelder="arbeidsgiver" setRerendrekvittering={setRerendrekvittering} />
+                            }
+                        />
+                    </div>
+                }
+            />
 
             <div aria-live="polite">
-                <Vis hvis={feilmeldingTekst !== ''}>
-                    <Alertstripe type="feil">{feilmeldingTekst}</Alertstripe>
-                </Vis>
+                <Vis hvis={feilmeldingTekst}
+                    render={() => <Alertstripe type="feil">{feilmeldingTekst}</Alertstripe>}
+                />
             </div>
         </div>
     )

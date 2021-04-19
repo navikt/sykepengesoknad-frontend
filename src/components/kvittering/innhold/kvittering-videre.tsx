@@ -20,15 +20,18 @@ const KvitteringVidere = () => {
     return (
         <AlertStripeInfo className="opplysninger">
             <Undertittel tag="h3">{tekst('kvittering.hva-skjer-videre')}</Undertittel>
-            <Vis hvis={valgtSykmelding && valgtSykmelding!.valgtArbeidssituasjon === RSArbeidssituasjon.NAERINGSDRIVENDE}>
-                <div className="avsnitt">
-                    <Element tag="h2">{tekst('kvittering.naeringsdrivende.tittel')}</Element>
-                    <Normaltekst tag="span">{tekst('kvittering.naeringsdrivende.brodtekst')} </Normaltekst>
-                    <Lenke target="blank" href={tekst('kvittering.naeringsdrivende.lenke.url')}>
-                        <Normaltekst tag="span">{tekst('kvittering.naeringsdrivende.lenke')}</Normaltekst>
-                    </Lenke>.
-                </div>
-            </Vis>
+
+            <Vis hvis={valgtSykmelding?.valgtArbeidssituasjon === RSArbeidssituasjon.NAERINGSDRIVENDE}
+                render={() =>
+                    <div className="avsnitt">
+                        <Element tag="h2">{tekst('kvittering.naeringsdrivende.tittel')}</Element>
+                        <Normaltekst tag="span">{tekst('kvittering.naeringsdrivende.brodtekst')} </Normaltekst>
+                        <Lenke target="blank" href={tekst('kvittering.naeringsdrivende.lenke.url')}>
+                            <Normaltekst tag="span">{tekst('kvittering.naeringsdrivende.lenke')}</Normaltekst>
+                        </Lenke>.
+                    </div>
+                }
+            />
             <div className="avsnitt hva-skjer">
                 <Element tag="h2">{tekst('kvittering.nav-behandler-soknaden')}</Element>
                 <Normaltekst tag="span">{tekst('kvittering.arbeidstaker.saksbehandlingstid')} </Normaltekst>
@@ -36,12 +39,15 @@ const KvitteringVidere = () => {
                     <Normaltekst tag="span">{tekst('kvittering.arbeidstaker.saksbehandlingstid.lenke')}</Normaltekst>
                 </Lenke>
             </div>
-            <Vis hvis={valgtSoknad && valgtSoknad.soknadstype !== RSSoknadstype.REISETILSKUDD}>
-                <div className="avsnitt">
-                    <Element tag="h2">{tekst('kvittering.naar-blir-pengene')}</Element>
-                    <Normaltekst tag="span">{tekst('kvittering.arbeidstaker.over16.utbetaling')} </Normaltekst>
-                </div>
-            </Vis>
+
+            <Vis hvis={valgtSoknad && valgtSoknad.soknadstype !== RSSoknadstype.REISETILSKUDD}
+                render={() =>
+                    <div className="avsnitt">
+                        <Element tag="h2">{tekst('kvittering.naar-blir-pengene')}</Element>
+                        <Normaltekst tag="span">{tekst('kvittering.arbeidstaker.over16.utbetaling')} </Normaltekst>
+                    </div>
+                }
+            />
 
         </AlertStripeInfo>
     )

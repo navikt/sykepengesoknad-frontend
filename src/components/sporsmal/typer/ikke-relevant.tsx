@@ -2,12 +2,12 @@ import parser from 'html-react-parser'
 import { Element, Normaltekst } from 'nav-frontend-typografi'
 import React from 'react'
 
-import VisBlock from '../../vis-block'
+import Vis from '../../vis'
 import { SpmProps } from '../sporsmal-form/sporsmal-form'
 
 const IkkeRelevant = ({ sporsmal }: SpmProps) => {
     return (
-        <VisBlock hvis={sporsmal.sporsmalstekst !== undefined}
+        <Vis hvis={sporsmal.sporsmalstekst}
             render={() =>
                 <>
                     <Element tag="h3" className="skjema__sporsmal">{sporsmal.sporsmalstekst}</Element>

@@ -32,28 +32,38 @@ const SykmeldingPerioder = () => {
                         </UndertekstBold>
                         <Normaltekst><strong>{fom} - {tom}</strong> &bull; {dager}</Normaltekst>
 
-                        <Vis hvis={periode.grad}>
-                            <Normaltekst>
-                                {periode.grad} {tekst('din-sykmelding.periode.prosent-sykmeldt')}
-                            </Normaltekst>
-                        </Vis>
+                        <Vis hvis={periode.grad}
+                            render={() =>
+                                <Normaltekst>
+                                    {periode.grad} {tekst('din-sykmelding.periode.prosent-sykmeldt')}
+                                </Normaltekst>
+                            }
+                        />
 
-                        <Vis hvis={periode.behandlingsdager}>
-                            <Normaltekst>
-                                <Vis hvis={periode.behandlingsdager! > 1}>
-                                    {periode.behandlingsdager} {tekst('din-sykmelding.periode.behandlingsdager')}
-                                </Vis>
-                                <Vis hvis={periode.behandlingsdager! === 1}>
-                                    {tekst('din-sykmelding.periode.behandlingsdag')}
-                                </Vis>
-                            </Normaltekst>
-                        </Vis>
+                        <Vis hvis={periode.behandlingsdager}
+                            render={() =>
+                                <Normaltekst>
+                                    <Vis hvis={periode.behandlingsdager! > 1}
+                                        render={() =>
+                                            <>
+                                                {periode.behandlingsdager}
+                                                {' '}
+                                                {tekst('din-sykmelding.periode.behandlingsdager')}
+                                            </>
+                                        }
+                                    />
+                                    <Vis hvis={periode.behandlingsdager === 1}
+                                        render={() => <>{tekst('din-sykmelding.periode.behandlingsdag')}</>}
+                                    />
+                                </Normaltekst>
+                            }
+                        />
                     </div>
                 )
             })}
-            <Vis hvis={erOppdelt(valgtSoknad!, valgtSykmelding)}>
-                <Bjorn className="" nokkel="sykepengesoknad.sykmelding-utdrag.oppdelt.bjorn" />
-            </Vis>
+            <Vis hvis={erOppdelt(valgtSoknad!, valgtSykmelding)}
+                render={() => <Bjorn nokkel="sykepengesoknad.sykmelding-utdrag.oppdelt.bjorn" />}
+            />
         </div>
     )
 }

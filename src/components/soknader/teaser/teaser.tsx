@@ -9,13 +9,7 @@ import { getUrlTilSoknad } from '../../../utils/url-utils'
 import { useAmplitudeInstance } from '../../amplitude/amplitude'
 import Vis from '../../vis'
 import { InngangsIkon, Inngangspanel } from '../inngang/inngangspanel'
-import {
-    hentIkon,
-    hentIkonHover,
-    leggTilSoknadstypeForDemoside,
-    periodeListevisning,
-    SykepengesoknadTeaserProps, teaserTittel
-} from './teaser-util'
+import { hentIkon, hentIkonHover, leggTilSoknadstypeForDemoside, periodeListevisning, SykepengesoknadTeaserProps, teaserTittel } from './teaser-util'
 
 const Teaser = ({ soknad }: SykepengesoknadTeaserProps) => {
     const { logEvent } = useAmplitudeInstance()
@@ -32,18 +26,22 @@ const Teaser = ({ soknad }: SykepengesoknadTeaserProps) => {
                         ikonHover={hentIkonHover(soknad)}
                     />
                     <div className="inngangspanel__innhold">
-                        <Vis hvis={soknad.soknadstype !== RSSoknadstype.OPPHOLD_UTLAND}>
-                            <Undertekst className="inngangspanel__periode">
-                                {tilLesbarPeriodeMedArstall(soknad.fom, soknad.tom)}
-                            </Undertekst>
-                        </Vis>
+                        <Vis hvis={soknad.soknadstype !== RSSoknadstype.OPPHOLD_UTLAND}
+                            render={() =>
+                                <Undertekst className="inngangspanel__periode">
+                                    {tilLesbarPeriodeMedArstall(soknad.fom, soknad.tom)}
+                                </Undertekst>
+                            }
+                        />
                         <Undertittel tag="h3" className="inngangspanel__tittel">
                             {teaserTittel(soknad)}
                         </Undertittel>
+
                         {periodeListevisning(soknad)}
-                        <Vis hvis={env.isOpplaering}>
-                            {leggTilSoknadstypeForDemoside(soknad)}
-                        </Vis>
+
+                        <Vis hvis={env.isOpplaering}
+                            render={() => leggTilSoknadstypeForDemoside(soknad)}
+                        />
                     </div>
                 </div>
                 <HoyreChevron />

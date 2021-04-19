@@ -41,7 +41,7 @@ const KvitteringSide = () => {
         const sykmelding = sykmeldinger.find(sm => sm.id === filtrertSoknad?.sykmeldingId)
         setValgtSykmelding(sykmelding)
         // eslint-disable-next-line
-    }, [id]);
+    }, [ id ]);
 
     useEffect(() => {
         setBodyClass('kvittering')
@@ -61,14 +61,16 @@ const KvitteringSide = () => {
                     <Kvittering />
                 </HotjarTrigger>
 
-                <Vis hvis={erSiste}>
-                    <Link to="/" className="gaa-videre">
-                        <Normaltekst tag="span">
-                            <VenstreChevron />
-                            {tekst('sykepengesoknad.navigasjon.gaa-til')}
-                        </Normaltekst>
-                    </Link>
-                </Vis>
+                <Vis hvis={erSiste}
+                    render={() =>
+                        <Link to="/" className="gaa-videre">
+                            <Normaltekst tag="span">
+                                <VenstreChevron />
+                                {tekst('sykepengesoknad.navigasjon.gaa-til')}
+                            </Normaltekst>
+                        </Link>
+                    }
+                />
             </div>
         </>
     )

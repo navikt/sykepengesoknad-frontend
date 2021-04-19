@@ -4,8 +4,7 @@ import AlertStripe from 'nav-frontend-alertstriper'
 import { VenstreChevron } from 'nav-frontend-chevron'
 import { Normaltekst, Systemtittel } from 'nav-frontend-typografi'
 import React, { useEffect } from 'react'
-import { Link, useParams } from 'react-router-dom'
-import { useHistory } from 'react-router-dom'
+import { Link, useHistory, useParams } from 'react-router-dom'
 
 import { RouteParams } from '../../app'
 import Banner from '../../components/banner/banner'
@@ -51,7 +50,7 @@ const Soknaden = () => {
         const sykmelding = sykmeldinger.find(sm => sm.id === filtrertSoknad?.sykmeldingId)
         setValgtSykmelding(sykmelding)
         // eslint-disable-next-line
-    }, [id]);
+    }, [ id ]);
 
     useEffect(() => {
         setBodyClass('soknaden')
@@ -100,39 +99,43 @@ const Fordeling = () => {
         case RSSoknadstatus.UTKAST_TIL_KORRIGERING:
             return (
                 <>
-                    <Vis hvis={valgtSoknad.status === RSSoknadstatus.UTKAST_TIL_KORRIGERING}>
-                        <AlertStripe type="info" className="blokk-s">
-                            <span>{tekst('sykepengesoknad.utkast-til-korrigering.info')}</span>
-                        </AlertStripe>
-                    </Vis>
+                    <Vis hvis={valgtSoknad.status === RSSoknadstatus.UTKAST_TIL_KORRIGERING}
+                        render={() =>
+                            <AlertStripe type="info" className="blokk-s">
+                                <span>{tekst('sykepengesoknad.utkast-til-korrigering.info')}</span>
+                            </AlertStripe>
+                        }
+                    />
 
-                    <Vis hvis={stegNo === 1 && !erUtlandssoknad}>
-                        <SoknadIntro />
-                    </Vis>
+                    <Vis hvis={stegNo === 1 && !erUtlandssoknad}
+                        render={() => <SoknadIntro />}
+                    />
 
-                    <Vis hvis={stegNo > 1 || erUtlandssoknad}>
-                        <SporsmalSteg />
-                    </Vis>
+                    <Vis hvis={stegNo > 1 || erUtlandssoknad}
+                        render={() => <SporsmalSteg />}
+                    />
 
-                    <Vis hvis={stegNo > 1}>
-                        <Link to={'/soknader/' + valgtSoknad.id + SEPARATOR + (stegNo - 1)}
-                            className="lenke tilbakelenke">
-                            <VenstreChevron />
-                            <Normaltekst tag="span">{tekst('soknad.tilbakeknapp')}</Normaltekst>
-                        </Link>
-                    </Vis>
+                    <Vis hvis={stegNo > 1}
+                        render={() =>
+                            <Link to={'/soknader/' + valgtSoknad.id + SEPARATOR + (stegNo - 1)}
+                                className="lenke tilbakelenke">
+                                <VenstreChevron />
+                                <Normaltekst tag="span">{tekst('soknad.tilbakeknapp')}</Normaltekst>
+                            </Link>
+                        }
+                    />
 
-                    <Vis hvis={!erUtlandssoknad}>
-                        <Opplysninger ekspandert={true} />
-                    </Vis>
+                    <Vis hvis={!erUtlandssoknad}
+                        render={() => <Opplysninger ekspandert={true} />}
+                    />
 
-                    <Vis hvis={stegNo === 1 && erReisetilskuddsoknad}>
-                        <OmReisetilskudd />
-                    </Vis>
+                    <Vis hvis={stegNo === 1 && erReisetilskuddsoknad}
+                        render={() => <OmReisetilskudd />}
+                    />
 
-                    <Vis hvis={tittel !== undefined}>
-                        <Systemtittel className="sporsmal__tittel">{tittel}</Systemtittel>
-                    </Vis>
+                    <Vis hvis={tittel}
+                        render={() => <Systemtittel className="sporsmal__tittel">{tittel}</Systemtittel>}
+                    />
 
                     <SporsmalForm />
                 </>

@@ -40,9 +40,7 @@ const AnimateOnMount = (props: AnimateOnMountProps) => {
 
     return (
         <div ref={animRef} className={`${start} ${styles}`} onTransitionEnd={onTransitionEnd}>
-            <Vis hvis={show}>
-                {children}
-            </Vis>
+            <Vis hvis={show} render={() => children} />
         </div>
     )
 }

@@ -40,17 +40,24 @@ const Steg = ({ label, index }: StegProps) => {
 
     return (
         <li className="stegindikator__steg" aria-current={(erAktiv) ? 'step' : undefined}>
-            <Vis hvis={aktivtSteg >= index + 2}>
-                <button className={innerCls(erAktiv, erPassert, disabled)} title={label} disabled={disabled} onClick={() => goTo(num)}>
-                    <div className="stegindikator__steg-num">{num}</div>
-                </button>
-            </Vis>
+            <Vis hvis={aktivtSteg >= index + 2}
+                render={() =>
+                    <button className={innerCls(erAktiv, erPassert, disabled)}
+                        title={label} disabled={disabled}
+                        onClick={() => goTo(num)}
+                    >
+                        <div className="stegindikator__steg-num">{num}</div>
+                    </button>
+                }
+            />
 
-            <Vis hvis={aktivtSteg < index + 2}>
-                <div className={innerCls(erAktiv, erPassert, disabled)} title={label} >
-                    <div className="stegindikator__steg-num">{num}</div>
-                </div>
-            </Vis>
+            <Vis hvis={aktivtSteg < index + 2}
+                render={() =>
+                    <div className={innerCls(erAktiv, erPassert, disabled)} title={label}>
+                        <div className="stegindikator__steg-num">{num}</div>
+                    </div>
+                }
+            />
         </li>
     )
 }

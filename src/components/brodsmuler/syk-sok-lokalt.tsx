@@ -26,31 +26,26 @@ const SykSokLokalt = () => {
     }
 
     return (
-        <Vis hvis={width > 767}>
-            <div style={{ position: 'absolute', left: 0, fontSize: '10px', marginLeft: '1rem', color: 'gray' }}>
-                <span>type <strong>{valgtSoknad.soknadstype} </strong></span>
-                <span>sok <strong>{
-                    valgtSoknad &&
-                    valgtSoknad.id.substring(valgtSoknad.id.length - 6, valgtSoknad.id.length)
-                }</strong></span>
-                &nbsp;&nbsp;
-                <span>syk <strong>{
-                    valgtSykmelding &&
-                    valgtSykmelding.id.substring(valgtSykmelding.id.length - 6, valgtSykmelding.id.length)
-                }</strong></span>
-                &nbsp;&nbsp;
-                <span>spm
-                    <strong> {
-                        valgtSoknad && valgtSoknad.sporsmal[Number(stegId) - 1].id
-                    } </strong>
-                    <strong> {
-                        valgtSoknad && valgtSoknad.sporsmal[Number(stegId) - 1].tag
-                    } </strong>
-                </span>
-                <br />
-                <br />
-            </div>
-        </Vis>
+        <Vis hvis={width > 767}
+            render={() =>
+                <div style={{ position: 'absolute', left: 0, fontSize: '10px', marginLeft: '1rem', color: 'gray' }}>
+                    <span>type <strong>{valgtSoknad.soknadstype} </strong></span>
+                    <span>sok <strong>{
+                        valgtSoknad &&
+                        valgtSoknad.id.substring(valgtSoknad.id.length - 6, valgtSoknad.id.length)
+                    }</strong></span>
+                    &nbsp;&nbsp;
+                    <span>syk <strong>{
+                        valgtSykmelding &&
+                        valgtSykmelding.id.substring(valgtSykmelding.id.length - 6, valgtSykmelding.id.length)
+                    }</strong></span>
+                    &nbsp;&nbsp;
+                    <span>spm <strong>{valgtSoknad && valgtSoknad.sporsmal[Number(stegId) - 1].id}</strong>
+                        <strong>{valgtSoknad && valgtSoknad.sporsmal[Number(stegId) - 1].tag}</strong>
+                    </span>
+                </div>
+            }
+        />
     )
 }
 

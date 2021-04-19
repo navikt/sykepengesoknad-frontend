@@ -39,17 +39,25 @@ const ArbeidstakerStatus = () => {
     }
 
     return <div className="sendt-inner">
-        <Vis hvis={valgtSoknad!.sendtTilArbeidsgiverDato}>
-            <Element tag="h2" className="sendt-tittel">
-                {tekst('kvittering.sendt-til')}
-            </Element>
-            <Avkrysset tekst={tilArbNavn + ' ' + tilOrg} />
-            <Undertekst>{tilArbDato}</Undertekst>
-        </Vis>
-        <Vis hvis={valgtSoknad!.sendtTilNAVDato}>
-            <Avkrysset tekst={Mottaker.NAV} />
-            <Undertekst>{tilNavDato}</Undertekst>
-        </Vis>
+        <Vis hvis={valgtSoknad!.sendtTilArbeidsgiverDato}
+            render={() =>
+                <>
+                    <Element tag="h2" className="sendt-tittel">
+                        {tekst('kvittering.sendt-til')}
+                    </Element>
+                    <Avkrysset tekst={tilArbNavn + ' ' + tilOrg} />
+                    <Undertekst>{tilArbDato}</Undertekst>
+                </>
+            }
+        />
+        <Vis hvis={valgtSoknad!.sendtTilNAVDato}
+            render={() =>
+                <>
+                    <Avkrysset tekst={Mottaker.NAV} />
+                    <Undertekst>{tilNavDato}</Undertekst>
+                </>
+            }
+        />
     </div>
 }
 

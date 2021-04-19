@@ -1,7 +1,7 @@
 import React from 'react'
 
 import { Sporsmal } from '../../../types/types'
-import VisBlock from '../../vis-block'
+import Vis from '../../vis'
 import SporsmalSwitch from '../sporsmal-switch'
 
 interface UndersporsmalListeProps {
@@ -13,7 +13,7 @@ const UndersporsmalListe = ({ oversporsmal, oversporsmalSvar }: UndersporsmalLis
     return (
         <>{oversporsmal.undersporsmal.map((underspm: Sporsmal, idx: number) => {
             return (
-                <VisBlock
+                <Vis
                     hvis={
                         !oversporsmal.kriterieForVisningAvUndersporsmal ||
                         oversporsmal.kriterieForVisningAvUndersporsmal === oversporsmalSvar

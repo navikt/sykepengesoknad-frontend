@@ -21,9 +21,13 @@ const BjornUnderTittel = ({ sporsmal }: SpmProps) => {
         (tag === TagTyper.FERIE_V2 && valgtSoknad?.soknadstype === RSSoknadstype.ARBEIDSTAKERE)
 
     return (
-        <Vis hvis={harBjorntekst(sporsmal.tag)}>
-            <Bjorn className="blokk-m" nokkel={`soknad.bjorn.${fjernIndexFraTag(sporsmal.tag).toLowerCase()}`} />
-        </Vis>
+        <Vis hvis={harBjorntekst(sporsmal.tag)}
+            render={() =>
+                <Bjorn className="blokk-m"
+                    nokkel={`soknad.bjorn.${fjernIndexFraTag(sporsmal.tag).toLowerCase()}`}
+                />
+            }
+        />
     )
 }
 

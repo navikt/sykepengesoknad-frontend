@@ -164,11 +164,13 @@ export const leggTilSoknadstypeForDemoside = (soknad: Soknad) => {
             ? soknad.soknadstype.toLowerCase()
             : ''
         const grad = soknad.soknadPerioder.map(periode => periode.grad + '%')
-        return <Normaltekst className="inngangspanel__undertekst__demo">
-            {`${arbeidssituasjon} ${forste} ${soknadstype}, ${grad} sykmeldt`}
-        </Normaltekst>
+        return (
+            <Normaltekst className="inngangspanel__undertekst__demo">
+                {`${arbeidssituasjon} ${forste} ${soknadstype}, ${grad} sykmeldt`}
+            </Normaltekst>
+        )
     }
-    return ''
+    return <></>
 }
 
 export const hentTeaserStatustekst = (soknad: Soknad) => {

@@ -27,9 +27,9 @@ const TagBjorn = ({ sporsmal, className }: TagBjornProps) => {
     }
 
     return (
-        <Vis hvis={harBjorntekst(tag)}>
-            <Bjorn className={className} nokkel={`soknad.bjorn.${fjernIndexFraTag(tag).toLowerCase()}`} />
-        </Vis>
+        <Vis hvis={harBjorntekst(tag)}
+            render={() => <Bjorn className={className} nokkel={`soknad.bjorn.${fjernIndexFraTag(tag).toLowerCase()}`} />}
+        />
     )
 }
 

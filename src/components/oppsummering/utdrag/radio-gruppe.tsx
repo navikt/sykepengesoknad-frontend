@@ -14,14 +14,16 @@ const RadioGruppe = ({ sporsmal }: OppsummeringProps) => {
         return s.svarliste.svar.length > 0 && s.svarliste.svar[0].verdi === SvarEnums.CHECKED
     })!
     return (
-        <Vis hvis={besvartUndersporsmal !== undefined}>
-            <div className="oppsummering__sporsmal">
-                <Element tag="h3" className="oppsummering__overskrift">{sporsmal.sporsmalstekst}</Element>
-                {sporsmal.svartype === RSSvartype.RADIO_GRUPPE &&
-                <Avkrysset tekst={besvartUndersporsmal.sporsmalstekst} />}
-                <UndersporsmalSum sporsmalsliste={besvartUndersporsmal.undersporsmal} />
-            </div>
-        </Vis>
+        <Vis hvis={besvartUndersporsmal}
+            render={() =>
+                <div className="oppsummering__sporsmal">
+                    <Element tag="h3" className="oppsummering__overskrift">{sporsmal.sporsmalstekst}</Element>
+                    {sporsmal.svartype === RSSvartype.RADIO_GRUPPE &&
+                    <Avkrysset tekst={besvartUndersporsmal.sporsmalstekst} />}
+                    <UndersporsmalSum sporsmalsliste={besvartUndersporsmal.undersporsmal} />
+                </div>
+            }
+        />
     )
 }
 

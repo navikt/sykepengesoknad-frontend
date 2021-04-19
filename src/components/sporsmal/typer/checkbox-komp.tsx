@@ -5,7 +5,7 @@ import { FieldValues, useFormContext } from 'react-hook-form'
 import { Sporsmal } from '../../../types/types'
 import AnimateOnMount from '../../animate-on-mount'
 import FeilLokal from '../../feil/feil-lokal'
-import VisBlock from '../../vis-block'
+import Vis from '../../vis'
 import { SpmProps } from '../sporsmal-form/sporsmal-form'
 import { hentFeilmelding } from '../sporsmal-utils'
 import SporsmalstekstH3 from '../sporsmalstekst/sporsmalstekstH3'
@@ -23,7 +23,7 @@ const CheckboxKomp = ({ sporsmal }: SpmProps) => {
                     return <CheckboxSingle parent={sporsmal} sporsmal={uspm} key={idx} />
                 })}
 
-                <VisBlock hvis={sporsmal.undertekst}
+                <Vis hvis={sporsmal.undertekst}
                     render={() =>
                         <Normaltekst tag="div"> {sporsmal.undertekst} </Normaltekst>
                     }

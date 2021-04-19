@@ -22,23 +22,30 @@ const FravaersperioderInfo = () => {
                     {tekst('sykepengesoknad.sykmelding-utdrag.egenmelding-papir')}
                 </UndertekstBold>
 
-                <Vis hvis={harPerioder}>
-                    <ul className="nokkelopplysning__liste">
-                        {valgtSykmelding.sporsmal.fravaersperioder
-                            ?.filter((p) => {
-                                return p.fom !== null && p.tom !== null
-                            })
-                            .map((p) => {
-                                return <li
-                                    key={tilLesbarDatoMedArstall(p.fom)!}><Normaltekst>{tilLesbarPeriodeMedArstall(p.fom, p.tom)}</Normaltekst></li>
-                            })
-                        }
-                    </ul>
-                </Vis>
+                <Vis hvis={harPerioder}
+                    render={() =>
+                        <ul className="nokkelopplysning__liste">
+                            {valgtSykmelding.sporsmal.fravaersperioder
+                                ?.filter((p) => {
+                                    return p.fom !== null && p.tom !== null
+                                })
+                                .map((p) => {
+                                    return (
+                                        <li key={tilLesbarDatoMedArstall(p.fom)!}>
+                                            <Normaltekst>{tilLesbarPeriodeMedArstall(p.fom, p.tom)}</Normaltekst>
+                                        </li>
+                                    )
+                                })
+                            }
+                        </ul>
+                    }
+                />
 
-                <Vis hvis={!harPerioder}>
-                    <Normaltekst>{tekst('sykepengesoknad.sykmelding-utdrag.egenmelding-papir-nei')}</Normaltekst>
-                </Vis>
+                <Vis hvis={!harPerioder}
+                    render={() =>
+                        <Normaltekst>{tekst('sykepengesoknad.sykmelding-utdrag.egenmelding-papir-nei')}</Normaltekst>
+                    }
+                />
             </div>
         )
     }

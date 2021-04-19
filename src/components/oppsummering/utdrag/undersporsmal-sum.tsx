@@ -10,13 +10,15 @@ interface UndersporsmalProps {
 
 const UndersporsmalSum = ({ sporsmalsliste = [] }: UndersporsmalProps) => {
     return (
-        <Vis hvis={sporsmalsliste.length > 0}>
-            <div className="oppsummering__undersporsmalsliste">
-                {sporsmalsliste.map((sporsmal, idx) => {
-                    return <SporsmalVarianter sporsmal={sporsmal} key={idx} />
-                })}
-            </div>
-        </Vis>
+        <Vis hvis={sporsmalsliste.length > 0}
+            render={() =>
+                <div className="oppsummering__undersporsmalsliste">
+                    {sporsmalsliste.map((sporsmal, idx) => {
+                        return <SporsmalVarianter sporsmal={sporsmal} key={idx} />
+                    })}
+                </div>
+            }
+        />
     )
 }
 

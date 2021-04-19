@@ -8,7 +8,7 @@ import { getLedetekst, tekst } from '../../../utils/tekster'
 import { utlandssoknadUrl } from '../../../utils/url-utils'
 import AnimateOnMount from '../../animate-on-mount'
 import FeilLokal from '../../feil/feil-lokal'
-import VisBlock from '../../vis-block'
+import Vis from '../../vis'
 import Bjorn from '../bjorn/bjorn'
 import KnapperadAvbryt from '../sporsmal-form/knapperad-avbryt'
 import { SpmProps } from '../sporsmal-form/sporsmal-form'
@@ -89,13 +89,13 @@ const JaNeiRadio = ({ sporsmal }: SpmProps) => {
                 <FeilLokal sporsmal={sporsmal} />
             </div>
 
-            <VisBlock hvis={sporsmal.tag === TagTyper.SYKMELDINGSGRAD && watchJaNei === 'NEI'}
+            <Vis hvis={sporsmal.tag === TagTyper.SYKMELDINGSGRAD && watchJaNei === 'NEI'}
                 render={() =>
                     <Bjorn className="press" nokkel="sykepengesoknad-utland.skjema.bjorn" ekstraMarginTop={true} />
                 }
             />
 
-            <VisBlock hvis={sporsmal.tag === TagTyper.FERIE && watchJaNei === 'JA'}
+            <Vis hvis={sporsmal.tag === TagTyper.FERIE && watchJaNei === 'JA'}
                 render={() =>
                     <>
                         <Bjorn className="press" nokkel="sykepengesoknad-utland.skjema.ferie-sporsmal-bjorn"

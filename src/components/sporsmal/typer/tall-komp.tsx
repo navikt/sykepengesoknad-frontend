@@ -105,27 +105,35 @@ const TallKomp = ({ sporsmal }: SpmProps) => {
             </div>
 
             <div role="alert" aria-live="assertive">
-                <Vis hvis={errors[sporsmal.id]}>
-                    <Vis hvis={errors[sporsmal.id]?.type !== 'validate'}>
-                        <Normaltekst tag="span" className="skjemaelement__feilmelding">
-                            {feilmelding.lokal}
-                        </Normaltekst>
-                    </Vis>
-                    <Vis hvis={errors[sporsmal.id]?.type === 'validate' && sporsmal.tag === TagTyper.HVOR_MYE_TIMER_VERDI}>
-                        <Normaltekst tag="span" className="skjemaelement__feilmelding">
-                            {getLedetekst(
-                                tekst('soknad.feilmelding.MINDRE_TIMER_ENN_FORVENTET.lokal'),
-                                { '%GRAD%': periode?.grad }
-                            )}
-                        </Normaltekst>
-                    </Vis>
-                </Vis>
+                <Vis hvis={errors[sporsmal.id]}
+                    render={() =>
+                        <>
+                            <Vis hvis={errors[sporsmal.id]?.type !== 'validate'}
+                                render={() =>
+                                    <Normaltekst tag="span" className="skjemaelement__feilmelding">
+                                        {feilmelding.lokal}
+                                    </Normaltekst>
+                                }
+                            />
+                            <Vis hvis={errors[sporsmal.id]?.type === 'validate' && sporsmal.tag === TagTyper.HVOR_MYE_TIMER_VERDI}
+                                render={() =>
+                                    <Normaltekst tag="span" className="skjemaelement__feilmelding">
+                                        {getLedetekst(
+                                            tekst('soknad.feilmelding.MINDRE_TIMER_ENN_FORVENTET.lokal'),
+                                            { '%GRAD%': periode?.grad }
+                                        )}
+                                    </Normaltekst>
+                                }
+                            />
+                        </>
+                    }
+                />
             </div>
 
             <div className="undersporsmal" ref={undersporsmal}>
-                <Vis hvis={watchTall}>
-                    <UndersporsmalListe oversporsmal={sporsmal} />
-                </Vis>
+                <Vis hvis={watchTall}
+                    render={() => <UndersporsmalListe oversporsmal={sporsmal} />}
+                />
             </div>
         </div>
     )

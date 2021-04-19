@@ -30,7 +30,7 @@ const Arbeidstaker = () => {
     useEffect(() => {
         settRiktigKvitteringTekst()
         // eslint-disable-next-line
-    }, [valgtSoknad?.sendtTilNAVDato])
+    }, [ valgtSoknad?.sendtTilNAVDato ])
 
     if (!valgtSoknad) return null
 
@@ -135,25 +135,36 @@ const Arbeidstaker = () => {
                 <ArbeidstakerStatus />
 
                 <Vis
-                    hvis={!sendtForMerEnn30DagerSiden(valgtSoknad?.sendtTilArbeidsgiverDato, valgtSoknad?.sendtTilNAVDato)}>
-                    <div className="hva-skjer">
-                        <AlertStripe type="info" form="inline">
-                            <Vis hvis={kvitteringTekst === 'medOpphold'}>
-                                <Undertittel tag="h3">{tekst('kvittering.viktig-informasjon')}</Undertittel>
-                            </Vis>
-                            <Vis hvis={kvitteringTekst !== 'medOpphold'}>
-                                <Undertittel tag="h3">{tekst('kvittering.hva-skjer-videre')}</Undertittel>
-                            </Vis>
-                        </AlertStripe>
-                        <div className="avsnitt">
-                            <div className="sendt-inner">
-                                {kvitteringInnhold()}
+                    hvis={!sendtForMerEnn30DagerSiden(valgtSoknad?.sendtTilArbeidsgiverDato, valgtSoknad?.sendtTilNAVDato)}
+                    render={() => {
+                        return (
+                            <div className="hva-skjer">
+                                <AlertStripe type="info" form="inline">
+                                    <Vis hvis={kvitteringTekst === 'medOpphold'}
+                                        render={() =>
+                                            <Undertittel tag="h3">
+                                                {tekst('kvittering.viktig-informasjon')}
+                                            </Undertittel>
+                                        }
+                                    />
+                                    <Vis hvis={kvitteringTekst !== 'medOpphold'}
+                                        render={() =>
+                                            <Undertittel tag="h3">
+                                                {tekst('kvittering.hva-skjer-videre')}
+                                            </Undertittel>
+                                        }
+                                    />
+                                </AlertStripe>
+                                <div className="avsnitt">
+                                    <div className="sendt-inner">
+                                        {kvitteringInnhold()}
+                                    </div>
+                                </div>
                             </div>
-                        </div>
-                    </div>
-                </Vis>
+                        )
+                    }}
+                />
             </div>
-
         </>
     )
 }

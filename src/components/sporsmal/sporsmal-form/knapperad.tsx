@@ -45,7 +45,7 @@ const Knapperad = ({ onSubmit, poster }: KnapperadProps) => {
 
     const handleAvbryt = async(event: Event) => {
         event.preventDefault()
-        if(avbryter) return
+        if (avbryter) return
         setAvbryter(true)
         try {
             await avbrytSoknad({
@@ -68,23 +68,25 @@ const Knapperad = ({ onSubmit, poster }: KnapperadProps) => {
                 <button className="lenke avbrytlenke avbrytDialog__trigger" onClick={handleVilAvbryte}>
                     <Normaltekst tag="span">{tekst('sykepengesoknad.avbryt.trigger')}</Normaltekst>
                 </button>
-                <Vis hvis={vilAvbryte}>
-                    <div ref={avbrytDialog} className="avbrytDialog__dialog pekeboble">
-                        <Normaltekst className="blokk-s">{tekst('sykepengesoknad.avbryt.sporsmal')}</Normaltekst>
-                        <div className="blokk-xs">
-                            <Fareknapp spinner={avbryter}
-                                onClick={handleAvbryt}>{tekst('sykepengesoknad.avbryt.ja')}</Fareknapp>
+                <Vis hvis={vilAvbryte}
+                    render={() =>
+                        <div ref={avbrytDialog} className="avbrytDialog__dialog pekeboble">
+                            <Normaltekst className="blokk-s">{tekst('sykepengesoknad.avbryt.sporsmal')}</Normaltekst>
+                            <div className="blokk-xs">
+                                <Fareknapp spinner={avbryter}
+                                    onClick={handleAvbryt}>{tekst('sykepengesoknad.avbryt.ja')}</Fareknapp>
+                            </div>
+                            <div aria-live="polite">
+                                <Vis hvis={feilmeldingTekst}
+                                    render={() => <Alertstripe type="feil">{feilmeldingTekst}</Alertstripe>}
+                                />
+                            </div>
+                            <button className="avbrytlenke lenke" onClick={handleVilAvbryte}>
+                                {tekst('sykepengesoknad.avbryt.angre')}
+                            </button>
                         </div>
-                        <div aria-live="polite">
-                            <Vis hvis={feilmeldingTekst !== ''}>
-                                <Alertstripe type="feil">{feilmeldingTekst}</Alertstripe>
-                            </Vis>
-                        </div>
-                        <button className="avbrytlenke lenke" onClick={handleVilAvbryte}>
-                            {tekst('sykepengesoknad.avbryt.angre')}
-                        </button>
-                    </div>
-                </Vis>
+                    }
+                />
             </div>
         </div>
     )

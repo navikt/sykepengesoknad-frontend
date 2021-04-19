@@ -32,18 +32,18 @@ const KvitteringStatus = () => {
 
 
     return (
-        <Vis hvis={valgtSoknad!.sendtTilNAVDato}>
-            <AlertStripeSuksess>
-                <Vis hvis={valgtSoknad!.sendtTilNAVDato}>
+        <Vis hvis={valgtSoknad?.sendtTilNAVDato}
+            render={() =>
+                <AlertStripeSuksess>
                     <Undertittel tag="h2">
                         {tekst('kvittering.soknaden-er-sendt-til')} {Mottaker.NAV}
                     </Undertittel>
                     <Normaltekst>
                         {tekst('kvittering.mottatt')}: {tilNavDato}
                     </Normaltekst>
-                </Vis>
-            </AlertStripeSuksess>
-        </Vis>
+                </AlertStripeSuksess>
+            }
+        />
     )
 }
 

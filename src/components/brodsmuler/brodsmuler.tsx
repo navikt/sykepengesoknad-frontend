@@ -80,20 +80,22 @@ const Brodsmuler = ({ brodsmuler }: BrodsmulerProps) => {
             <div className="limit">
                 <img src={personIkon} alt="Du" className="brodsmuler__ikon" />
                 <Normaltekst tag="ul" className="brodsmuler__smuler">
-                    <Vis hvis={skjerm <= LITEN}>
-                        <li className="smule">
-                            <button
-                                aria-label={
-                                    synlige.length === brodsmuler.length
-                                        ? 'Vis redusert brødsmulesti'
-                                        : 'Vis hele brødsmulestien'}
-                                className="js-toggle"
-                                onClick={toggleSynlige}
-                            >
-                                ...
-                            </button>
-                        </li>
-                    </Vis>
+                    <Vis hvis={skjerm <= LITEN}
+                        render={() =>
+                            <li className="smule">
+                                <button
+                                    aria-label={
+                                        synlige.length === brodsmuler.length
+                                            ? 'Vis redusert brødsmulesti'
+                                            : 'Vis hele brødsmulestien'}
+                                    className="js-toggle"
+                                    onClick={toggleSynlige}
+                                >
+                                    ...
+                                </button>
+                            </li>
+                        }
+                    />
 
                     {synlige.map((smule, index) => {
                         return (

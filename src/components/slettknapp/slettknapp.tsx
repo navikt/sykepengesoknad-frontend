@@ -63,19 +63,23 @@ const Slettknapp = ({ sporsmal, kvittering, update }: SlettknappProps) => {
 
     return (
         <>
-            <Vis hvis={update}>
-                <button type="button" className="slette-kvittering" aria-label={tekst('opplasting_modal.slett')}
-                    onClick={() => setVilSlette(true)} title={tekst('opplasting_modal.slett')}
-                >
-                    <img src={SlettIkon} alt="" />
-                </button>
-            </Vis>
+            <Vis hvis={update}
+                render={() =>
+                    <button type="button" className="slette-kvittering" aria-label={tekst('opplasting_modal.slett')}
+                        onClick={() => setVilSlette(true)} title={tekst('opplasting_modal.slett')}
+                    >
+                        <img src={SlettIkon} alt="" />
+                    </button>
+                }
+            />
 
-            <Vis hvis={!update}>
-                <Knapp type="fare" htmlType="button" className="lagre-kvittering" onClick={() => setVilSlette(true)}>
-                    {tekst('opplasting_modal.slett')}
-                </Knapp>
-            </Vis>
+            <Vis hvis={!update}
+                render={() =>
+                    <Knapp type="fare" htmlType="button" className="lagre-kvittering" onClick={() => setVilSlette(true)}>
+                        {tekst('opplasting_modal.slett')}
+                    </Knapp>
+                }
+            />
 
             <ModalWrapper className="modal__teaser_popup" onRequestClose={() => setVilSlette(false)}
                 contentLabel={'slett'}
@@ -92,11 +96,9 @@ const Slettknapp = ({ sporsmal, kvittering, update }: SlettknappProps) => {
                         </Fareknapp>
                     </div>
                     <div aria-live="polite" className="blokk-xs">
-                        <Vis hvis={feilmeldingTekst}>
-                            <Alertstripe type="feil">
-                                {feilmeldingTekst}
-                            </Alertstripe>
-                        </Vis>
+                        <Vis hvis={feilmeldingTekst}
+                            render={() => <Alertstripe type="feil">{feilmeldingTekst}</Alertstripe>}
+                        />
                     </div>
                     <button className="avbrytlenke lenkeknapp" type={'button'} onClick={() => setVilSlette(false)}>
                         {tekst('sykepengesoknad.avbryt.angre')}
