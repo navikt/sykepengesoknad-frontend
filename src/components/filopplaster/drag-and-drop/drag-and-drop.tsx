@@ -25,6 +25,8 @@ const DragAndDrop = () => {
     const [ formErDisabled, setFormErDisabled ] = useState<boolean>(false)
 
     useEffect(() => {
+        setValgtFil(undefined)
+
         if (valgtKvittering?.blobId) {
             setFormErDisabled(true)
             fetch(`${env.flexGatewayRoot}/flex-bucket-uploader/kvittering/${valgtKvittering.blobId}`, {
@@ -41,7 +43,6 @@ const DragAndDrop = () => {
                 }
             })
         } else {
-            setValgtFil(undefined)
             setFormErDisabled(false)
         }
     }, [ setValgtFil, valgtKvittering ])
