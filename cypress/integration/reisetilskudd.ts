@@ -72,7 +72,7 @@ describe('Teste førsteside i reisetilskuddsøknaden', () => {
 
         it('Beløpet er riktig når vi går frem og tilbake', () => {
             cy.url().should('include', `${nyttReisetilskudd.id}/3`)
-            cy.contains('Tilbake').click()
+            cy.contains('Tilbake').click({ force: true })
             cy.url().should('include', `${nyttReisetilskudd.id}/2`)
             cy.get('#5fb4961f-90d5-4893-9821-24b3a68cf3e1').should('have.value', '1000')
 
@@ -110,7 +110,7 @@ describe('Teste førsteside i reisetilskuddsøknaden', () => {
 
         it('Beløpet er riktig når vi går frem og tilbake', () => {
             cy.url().should('include', `${nyttReisetilskudd.id}/4`)
-            cy.contains('Tilbake').click()
+            cy.contains('Tilbake').click({ force: true })
             cy.url().should('include', `${nyttReisetilskudd.id}/3`)
             cy.get('#616cc0cb-434e-4114-a68b-b5708e033e9e').should('have.value', '1000')
 
