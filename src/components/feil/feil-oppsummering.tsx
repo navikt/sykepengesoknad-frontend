@@ -3,46 +3,28 @@ import './feil-oppsummering.less'
 import { Undertittel } from 'nav-frontend-typografi'
 import React, { useEffect, useRef } from 'react'
 
+import { RSSvartype } from '../../types/rs-types/rs-svartype'
 import { Sporsmal } from '../../types/types'
-import { erSynligIViewport } from '../../utils/browser-utils'
 import { flattenSporsmal } from '../../utils/soknad-utils'
 import { useAmplitudeInstance } from '../amplitude/amplitude'
 import { SpmProps } from '../sporsmal/sporsmal-form/sporsmal-form'
-import Vis from '../vis'
+import VisBlock from '../vis-block'
 
 interface FeiloppsummeringProps {
-    settFokus?: boolean;
     errors: any;
 }
 
 type FeilProps = FeiloppsummeringProps & SpmProps;
 
-const FeilOppsummering = (props: FeilProps) => {
+const FeilOppsummering = ({ errors, sporsmal }: FeilProps) => {
     const oppsummering = useRef<HTMLDivElement>(null)
     const { logEvent } = useAmplitudeInstance()
-    const { settFokus, errors, sporsmal } = props
     const entries: any[] = Object.entries(errors)
 
     useEffect(() => {
-        if (Object.entries(errors).length > 0) {
+        if (entries.length > 0) {
+            oppsummering.current?.focus()
             logEvent('skjemavalidering feilet', { sporsmalstag: sporsmal.tag })
-        }
-        // eslint-disable-next-line
-    }, [ errors ])
-
-    useEffect(() => {
-        let fokuser = settFokus
-        if (fokuser === undefined) {
-            fokuser = true
-        }
-        if (fokuser && oppsummering.current) {
-            if (!erSynligIViewport(oppsummering.current)) {
-                setTimeout(() => {
-                    oppsummering.current?.focus()
-                }, 300)
-            } else {
-                oppsummering.current?.focus()
-            }
         }
         // eslint-disable-next-line
     }, [ errors ])
@@ -51,26 +33,31 @@ const FeilOppsummering = (props: FeilProps) => {
         const id = `${list[0]}`
         const idarr = id.split('_')
 
-        let detteSpm = flattenSporsmal(sporsmal.undersporsmal).filter((uspm: Sporsmal) => uspm.id === idarr[0])[0]
+        let detteSpm = flattenSporsmal(sporsmal.undersporsmal).find((uspm: Sporsmal) => uspm.id === idarr[0])
         if (!detteSpm) {
             detteSpm = sporsmal
         }
 
         let elmid
         if (id.includes('_')) {
-            if(list[1].type === 'periode') {
+            if (list[1].type === 'periode') {
                 elmid = id + '_fom'
             } else {
                 elmid = id + '_' + list[1].type
             }
 
-        } else if (detteSpm.svartype.includes('JA_NEI')) {
+        } else if (detteSpm.svartype === RSSvartype.JA_NEI) {
             elmid = idarr[0] += '_0'
 
-        } else if (detteSpm.svartype.includes('CHECK') || detteSpm.svartype.includes('RADIO') ||
-            detteSpm.svartype.includes('TIMER') || detteSpm.svartype.includes('PROSENT')) {
+        } else if (detteSpm.svartype === RSSvartype.RADIO_GRUPPE_TIMER_PROSENT) {
+            elmid = detteSpm.undersporsmal[0].id
+
+        } else if (detteSpm.svartype.includes('CHECK') || detteSpm.svartype.includes('RADIO')) {
             elmid = idarr[0]
 
+        } else if (detteSpm.svartype === RSSvartype.DATOER) {
+            const kalender: any = document.querySelector('.skjema__dager')
+            kalender.focus()
         } else {
             elmid = id
         }
@@ -93,23 +80,25 @@ const FeilOppsummering = (props: FeilProps) => {
 
     return (
         <div aria-live="polite" role="alert">
-            <Vis hvis={entries.length > 0}>
-                <div ref={oppsummering} tabIndex={0} role="region" className="feiloppsummering">
-                    <Undertittel>{'Det er ' + entries.length + ' feil i skjemaet'}</Undertittel>
-                    <ul className="feiloppsummering__liste">
-                        {entries.sort(list => list[0][0]).map((list, index) => (
-                            <li key={index}>
-                                <div role="link" className="lenke" tabIndex={0}
-                                    onKeyDown={(e) => handleKeyDown(e, list)}
-                                    onClick={() => handleClick(list)}
-                                >
-                                    {list[1].message}
-                                </div>
-                            </li>
-                        ))}
-                    </ul>
-                </div>
-            </Vis>
+            <VisBlock hvis={entries.length > 0}
+                render={() =>
+                    <div ref={oppsummering} tabIndex={0} role="region" className="feiloppsummering">
+                        <Undertittel>{'Det er ' + entries.length + ' feil i skjemaet'}</Undertittel>
+                        <ul className="feiloppsummering__liste">
+                            {entries.sort(list => list[0][0]).map((list, index) => (
+                                <li key={index}>
+                                    <div role="link" className="lenke" tabIndex={0}
+                                        onKeyDown={(e) => handleKeyDown(e, list)}
+                                        onClick={() => handleClick(list)}
+                                    >
+                                        {list[1].message}
+                                    </div>
+                                </li>
+                            ))}
+                        </ul>
+                    </div>
+                }
+            />
         </div>
     )
 }

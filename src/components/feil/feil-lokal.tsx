@@ -12,7 +12,7 @@ interface FeilProps {
 
 const FeilLokal = ({ sporsmal }: FeilProps) => {
     const { errors } = useFormContext()
-    const feilmelding = hentFeilmelding(sporsmal)
+    const feilmelding = hentFeilmelding(sporsmal, errors[sporsmal.id])
 
     return (
         <div role="alert" aria-live="assertive">

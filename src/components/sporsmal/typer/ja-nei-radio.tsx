@@ -24,7 +24,7 @@ const jaNeiValg = [ {
 } ]
 
 const JaNeiRadio = ({ sporsmal }: SpmProps) => {
-    const { register, watch } = useFormContext()
+    const { register, watch, errors } = useFormContext()
     const watchJaNei = watch(sporsmal.id)
     const feilmelding = hentFeilmelding(sporsmal)
 
@@ -60,9 +60,10 @@ const JaNeiRadio = ({ sporsmal }: SpmProps) => {
 
     return (
         <>
-            <div className={sporsmal.parentKriterie
-                ? 'kriterie--' + sporsmal.parentKriterie.toLowerCase() + ' skjemaelement'
-                : 'skjemaelement'
+            <div className={
+                'skjemaelement' +
+                (sporsmal.parentKriterie ? ' kriterie--' + sporsmal.parentKriterie.toLowerCase() : '') +
+                (errors[sporsmal.id] ? ' skjemagruppe--feil' : '')
             }>
 
                 <Element tag="h3" className="skjema__sporsmal">{sporsmal.sporsmalstekst}</Element>
@@ -85,9 +86,8 @@ const JaNeiRadio = ({ sporsmal }: SpmProps) => {
                         </div>
                     )
                 })}
+                <FeilLokal sporsmal={sporsmal} />
             </div>
-
-            <FeilLokal sporsmal={sporsmal} />
 
             <VisBlock hvis={sporsmal.tag === TagTyper.SYKMELDINGSGRAD && watchJaNei === 'NEI'}
                 render={() =>

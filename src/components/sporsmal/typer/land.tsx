@@ -21,8 +21,6 @@ const Land = ({ sporsmal }: SpmProps) => {
                 <Element tag="h3" className="skjema__sporsmal">{sporsmal.sporsmalstekst}</Element>
 
                 <Controller
-                    as={LandvelgerComponent}
-                    id={sporsmal.id}
                     name={sporsmal.id}
                     defaultValue={hentSvar(sporsmal)}
                     onChange={(values: string[]) => {
@@ -31,7 +29,14 @@ const Land = ({ sporsmal }: SpmProps) => {
                     rules={{
                         validate: () => validerLand(sporsmal, getValues())
                     }}
-                    verdierInn={sporsmal.svarliste.svar.map((i) => i.verdi)}
+                    render={({ name, onChange,  }) => (
+                        <LandvelgerComponent
+                            verdierInn={sporsmal.svarliste.svar.map((i) => i.verdi)}
+                            id={sporsmal.id}
+                            name={name}
+                            onChange={onChange}
+                        />
+                    )}
                 />
 
             </div>

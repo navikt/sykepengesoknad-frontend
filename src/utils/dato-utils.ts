@@ -15,28 +15,12 @@ export const fraInputdatoTilJSDato = (inputDato: any) => {
 export const maaneder = [ 'januar', 'februar', 'mars', 'april', 'mai', 'juni', 'juli', 'august', 'september', 'oktober', 'november', 'desember' ]
 const SKILLETEGN_PERIODE = '–'
 
-export const langtDatoFormat = (_dato: any) => {
-    const dato = dayjsToDate(_dato)!
-    return `${dato.getDate()}. ${maaneder[dato.getMonth()]} ${dato.getFullYear()}`
-}
-
 export const tilBackendDato = (datoArg: string) => {
-    const dato = dayjsToDate(datoArg)!
-    let dag: any = dato.getDate()
-    let maned: any = dato.getMonth() + 1
-    const ar = dato.getFullYear()
-    if (dag < 10) dag = '0' + dag
-    if (maned < 10) maned = '0' + maned
-
-    return `${ar}-${maned}-${dag}`
+    return dayjs(datoArg).format('YYYY-MM-DD')
 }
 
 export const fraBackendTilDate = (datoArg: string) => {
-    const datoer = datoArg.split('-').map((verdi => {
-        if (verdi[0] === '0') return parseInt(verdi[1])
-        return parseInt(verdi)
-    }))
-    return new Date(datoer[0], datoer[1] - 1, datoer[2])
+    return dayjs(datoArg).toDate()
 }
 
 export const tilLesbarDatoUtenAarstall = (datoArg: any): string => {

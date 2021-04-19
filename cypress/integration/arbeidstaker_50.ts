@@ -149,7 +149,8 @@ describe('Tester arbeidstakersøknad - gradert 50%', () => {
         cy.contains('Gå videre').click()
 
         // Feilmelding
-        cy.contains('Timene du skrev inn tyder på at du har jobbet mindre enn 50 %. Du må enten svare nei på spørsmålet over eller endre antall timer her.')
+        cy.get('.skjemaelement__feilmelding').contains('Timene utgjør mindre enn 50 %.')
+        cy.contains('Timene du skrev inn tyder på at du har jobbet mindre enn 50 %. Du må enten svare nei på øverste spørsmålet eller endre antall timer totalt.')
 
         // Endre timer til 7.8, som er mer enn 7.71
         cy.get('.undersporsmal .skjemaelement__input#687317').focus().type('{selectall}').type('7.8')

@@ -18,7 +18,7 @@ const CheckboxKomp = ({ sporsmal }: SpmProps) => {
         <>
             <SporsmalstekstH3 sporsmal={sporsmal} />
 
-            <div className={'skjemagruppe checkboxgruppe' + (errors[sporsmal.id] ? ' skjemagruppe--feil' : '')}>
+            <div className={'skjemagruppe checkboxgruppe' + (errors[sporsmal.undersporsmal[0].id] ? ' skjemagruppe--feil' : '')}>
                 {sporsmal.undersporsmal.map((uspm, idx) => {
                     return <CheckboxSingle parent={sporsmal} sporsmal={uspm} key={idx} />
                 })}
@@ -29,7 +29,7 @@ const CheckboxKomp = ({ sporsmal }: SpmProps) => {
                     }
                 />
 
-                <FeilLokal sporsmal={sporsmal} />
+                <FeilLokal sporsmal={sporsmal.undersporsmal[0]} />
             </div>
         </>
     )
@@ -44,7 +44,7 @@ interface CheckboxProps {
 type AllProps = SpmProps & CheckboxProps
 
 const CheckboxSingle = ({ parent, sporsmal }: AllProps) => {
-    const { register, watch, getValues } = useFormContext()
+    const { register, watch, getValues, clearErrors } = useFormContext()
     const watchCheck = watch(sporsmal.id)
     const feilmelding = hentFeilmelding(parent)
 
@@ -52,6 +52,7 @@ const CheckboxSingle = ({ parent, sporsmal }: AllProps) => {
         const valid = harValgtNoe(parent, getValues())
         const forsteCheckbox = parent.undersporsmal[0].id
         if (valid) {
+            clearErrors(forsteCheckbox)
             return true
         }
         // For å bare vise feilmeldingen en gang

@@ -1,3 +1,5 @@
+import { FieldError } from 'react-hook-form'
+
 import { TagTyper } from '../../types/enums'
 import { RSSoknadstype } from '../../types/rs-types/rs-soknadstype'
 import { RSSvartype } from '../../types/rs-types/rs-svartype'
@@ -57,38 +59,60 @@ interface FeilmeldingProps {
     lokal: string;
 }
 
-export const hentFeilmelding = (sporsmal: Sporsmal): FeilmeldingProps => {
+export const hentFeilmelding = (
+    sporsmal: Sporsmal,
+    error?: FieldError
+): FeilmeldingProps => {
     const feilmelding: FeilmeldingProps = {
         global: tekst('soknad.feilmelding.' + sporsmal.tag as any),
         lokal: tekst('soknad.feilmelding.' + sporsmal.tag + '.lokal' as any)
     }
     if (feilmelding.lokal === undefined) {
-        feilmelding.lokal = hentGeneriskFeilmelding(sporsmal.svartype)!
+        feilmelding.lokal = hentGeneriskFeilmelding(sporsmal.svartype, error)!
     }
     return feilmelding
 }
 
-export const hentGeneriskFeilmelding = (svartype: RSSvartype) => {
+export const hentGeneriskFeilmelding = (
+    svartype: RSSvartype,
+    error?: FieldError
+) => {
+    const type = error?.type
+
     switch (svartype) {
         case RSSvartype.JA_NEI:
         case RSSvartype.RADIO:
         case RSSvartype.RADIO_GRUPPE:
         case RSSvartype.RADIO_GRUPPE_TIMER_PROSENT:
         case RSSvartype.CHECKBOX:
-        case RSSvartype.CHECKBOX_GRUPPE:
-        case RSSvartype.CHECKBOX_PANEL: {
+        case RSSvartype.CHECKBOX_GRUPPE: {
             return 'Du må velge et alternativ'
+        }
+        case RSSvartype.CHECKBOX_PANEL: {
+            return 'Du må bekrefte dette'
         }
         case RSSvartype.PROSENT:
         case RSSvartype.TIMER:
         case RSSvartype.BELOP:
         case RSSvartype.KILOMETER:
         case RSSvartype.TALL: {
-            return 'Du må oppgi en verdi'
+            if (type === 'required') {
+                return 'Du må oppgi en verdi'
+            } else if (type === 'min') {
+                return `Må være minimum ${(error?.ref as HTMLInputElement).min}`
+            } else if (type === 'max') {
+                return `Må være maksimum ${(error?.ref as HTMLInputElement).max}`
+            }
+            return error?.message
         }
         case RSSvartype.PERIODER:
         case RSSvartype.PERIODE: {
-            return 'Du må oppgi en periode'
+            if (type === 'fom' || type === 'tom') {
+                return error?.message
+            } else if (type === 'periode') {
+                return 'Perioder kan ikke overlappe'
+            }
+            return error?.message
         }
         case RSSvartype.DATOER:
         case RSSvartype.RADIO_GRUPPE_UKEKALENDER: {
@@ -101,7 +125,7 @@ export const hentGeneriskFeilmelding = (svartype: RSSvartype) => {
             return 'Du må velge ett land'
         }
         case RSSvartype.DATO: {
-            return 'Du må oppgi en dato'
+            return error?.message
         }
         case RSSvartype.KVITTERING:
         case RSSvartype.IKKE_RELEVANT:

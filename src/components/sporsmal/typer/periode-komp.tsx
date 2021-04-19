@@ -30,11 +30,9 @@ type AllProps = SpmProps & PeriodeProps;
 const PeriodeKomp = ({ sporsmal, index, slettPeriode }: AllProps) => {
     const { setValue, getValues, errors } = useFormContext()
     const [ periode, setPeriode ] = useState<FormPeriode>({ fom: '', tom: '' })
-    const feilmelding = hentFeilmelding(sporsmal)
     const id = sporsmal.id + '_' + index
+    const feilmelding = hentFeilmelding(sporsmal, errors[id])
     const mutationRef = useRef<HTMLDivElement>(null)
-
-    // TODO: Feilmeldinger for andre valideringer enn required
 
     useEffect(() => {
         const periode = hentPeriode(sporsmal, index)

@@ -33,7 +33,7 @@ test('Alle svartyper har generiskfeilmelding', () => {
     let manglerFeilmelding = false
 
     svartyper.forEach(svartype => {
-        if(hentGeneriskFeilmelding(svartype) === undefined) {
+        if(hentGeneriskFeilmelding(svartype, { message: 'test' } as any) === undefined) {
             // eslint-disable-next-line no-console
             console.log('Mangler generisk feilmelding for svartype:', svartype)
             manglerFeilmelding = true

@@ -2,7 +2,7 @@ import './soknad-intro.less'
 
 import parser from 'html-react-parser'
 import ModalWrapper from 'nav-frontend-modal'
-import { Normaltekst, Systemtittel, Undertittel } from 'nav-frontend-typografi'
+import { Normaltekst, Systemtittel } from 'nav-frontend-typografi'
 import Veilederpanel from 'nav-frontend-veilederpanel'
 import React, { useState } from 'react'
 

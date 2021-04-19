@@ -19,7 +19,7 @@ export interface RadioUnderKompProps {
 }
 
 const RadioKomp = ({ sporsmal }: SpmProps) => {
-    const { register, watch } = useFormContext()
+    const { register, watch, errors } = useFormContext()
     const watchRadio = watch(sporsmal.id)
     const feilmelding = hentFeilmelding(sporsmal)
 
@@ -27,10 +27,11 @@ const RadioKomp = ({ sporsmal }: SpmProps) => {
         <>
             <SporsmalstekstH3 sporsmal={sporsmal} />
 
-            <div className={erHorisontal(sporsmal.svartype)
-                ? 'skjemaelement skjemaelement--horisontal'
-                : 'skjemaelement'}
-            >
+            <div className={
+                'skjemaelement' +
+                (erHorisontal(sporsmal.svartype) ? ' skjemaelement--horisontal' : '') +
+                (errors[sporsmal.id] ? ' skjemagruppe--feil' : '')
+            }>
                 {sporsmal.undersporsmal.map((uspm, idx) => {
                     const checked = watchRadio === uspm.sporsmalstekst
 
@@ -40,7 +41,9 @@ const RadioKomp = ({ sporsmal }: SpmProps) => {
                                 id={uspm.id}
                                 name={sporsmal.id}
                                 value={uspm.sporsmalstekst}
-                                ref={register({ required: feilmelding.global })}
+                                ref={register({
+                                    required: feilmelding.global
+                                })}
                                 className="skjemaelement__input radioknapp"
                             />
                             <label className="skjemaelement__label" htmlFor={uspm.id}>

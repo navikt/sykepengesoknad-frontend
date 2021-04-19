@@ -16,11 +16,9 @@ const TallKomp = ({ sporsmal }: SpmProps) => {
     const { register, errors, getValues, watch } = useFormContext()
     const watchTall = watch(sporsmal.id)
 
-    const feilmelding = hentFeilmelding(sporsmal)
+    const feilmelding = hentFeilmelding(sporsmal, errors[sporsmal.id])
     const undersporsmal = useRef<HTMLDivElement>(null)
     const { validerGrad, periode, hovedSporsmal } = validerArbeidsgrad(sporsmal)
-
-    // TODO: Feilmeldinger for andre valideringer enn required
 
     const valider = () => {
         if (validerGrad) {
@@ -75,7 +73,11 @@ const TallKomp = ({ sporsmal }: SpmProps) => {
 
             <div className="medEnhet">
                 <input type="number"
-                    className={'skjemaelement__input' + inputSize()}
+                    className={
+                        'skjemaelement__input' +
+                        inputSize() +
+                        (errors[sporsmal.id] ? ' skjemaelement__input--harFeil' : '')
+                    }
                     name={sporsmal.id}
                     id={sporsmal.id}
                     min={sporsmal.min!}
@@ -85,8 +87,9 @@ const TallKomp = ({ sporsmal }: SpmProps) => {
                         validate: () => valider(),
                         min: {
                             value: sporsmal.min!,
-                            message: getLedetekst(tekst('soknad.feilmelding.TALL_MIN_MAX'),
-                                { '%MIN%': sporsmal.min, '%MAX%': sporsmal.max })
+                            message: (sporsmal.max)
+                                ? getLedetekst(tekst('soknad.feilmelding.TALL_MIN_MAX'), { '%MIN%': sporsmal.min, '%MAX%': sporsmal.max })
+                                : getLedetekst(tekst('soknad.feilmelding.TALL_MIN'), { '%MIN%': sporsmal.min })
                         },
                         max: {
                             value: sporsmal.max!,

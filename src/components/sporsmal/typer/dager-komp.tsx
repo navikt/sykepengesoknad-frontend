@@ -138,7 +138,7 @@ const DagerKomp = ({ sporsmal }: SpmProps) => {
         <>
             <SporsmalstekstH3 sporsmal={sporsmal} />
 
-            <div className="skjemaelement skjema__dager">
+            <div className="skjemaelement skjema__dager" tabIndex={-1} >
                 <Normaltekst tag="h4" className="kalender__tittel">{kalTittel()}</Normaltekst>
                 <div className="ukedager">
                     <span>uke</span>
