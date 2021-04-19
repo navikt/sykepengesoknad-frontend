@@ -7,10 +7,18 @@
     .tilbakelenke {
         display: inline-flex;
         align-items: center;
-        margin: 1rem 0;
+        margin: 1rem 0 0.25rem;
     }
 
     .sporsmal__tittel {
         margin: 2rem 0 0.5rem;
+    }
+}
+
+@media (min-width: @screen-sm) {
+    .soknaden {
+        .tilbakelenke {
+            margin: 1rem 0;
+        }
     }
 }

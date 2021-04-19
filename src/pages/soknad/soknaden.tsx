@@ -81,9 +81,11 @@ const Fordeling = () => {
     const { stegId } = useParams<RouteParams>()
     const stegNo = parseInt(stegId)
     const history = useHistory()
+
     if (!valgtSoknad) {
         return null
     }
+
     if (isNaN(stegNo)) {
         history.replace(getUrlTilSoknad(valgtSoknad))
         return null

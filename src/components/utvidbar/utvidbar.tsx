@@ -38,14 +38,10 @@ const Utvidbar = (props: UtvidbarProps) => {
         )
     }, [ props.erApen, props.fixedHeight ])
 
-    function onTransitionEnd() {
-        if (erApen) {
-            window.scrollTo({ top: utvidbar.current!.offsetTop, left: 0, behavior: 'smooth' })
-        } else {
-            if (!erSynligIViewport(utvidbar.current!)) {
-                window.scrollTo({ top: utvidbar.current!.offsetTop, left: 0, behavior: 'smooth' })
-            }
-            jsToggle.current!.focus()
+    const onKlikk = () => {
+        setErApen(!erApen)
+        if (!erSynligIViewport(utvidbar.current)) {
+            window.scrollTo({ top: utvidbar.current?.offsetTop, left: 0, behavior: 'smooth' })
         }
     }
 
@@ -57,7 +53,7 @@ const Utvidbar = (props: UtvidbarProps) => {
                 ref={jsToggle}
                 onMouseEnter={props.ikon !== undefined ? () => btnImage.current!.src = props.ikonHover! : undefined}
                 onMouseLeave={props.ikon !== undefined ? () => btnImage.current!.src = props.ikon! : undefined}
-                onClick={() => setErApen(!erApen)}
+                onClick={onKlikk}
                 type={'button'}
                 className="utvidbar__toggle"
             >
@@ -88,7 +84,6 @@ const Utvidbar = (props: UtvidbarProps) => {
             </button>
 
             <div ref={container} className={'utvidbar__innholdContainer' + (erApen ? ' apen' : '')}
-                onTransitionEnd={() => onTransitionEnd()}
                 style={{ maxHeight: erApen ? (innholdHeight * 2) + 'px' : '0' }}
             >
                 <div ref={innhold} className="utvidbar__innhold">

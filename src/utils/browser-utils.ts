@@ -1,6 +1,6 @@
 // Get the top position of an element in the document
 
-export function erSynligIViewport(element: HTMLElement) {
+export function erSynligIViewport(element?: HTMLElement | null) {
     if (!element) {
         return false
     }

@@ -31,7 +31,6 @@ const frontendloggerSrc = () => {
     return '/dev-frontendlogger.js'
 }
 
-
 const src = frontendloggerSrc()
 const script = document.createElement('script')
 script.src = src
