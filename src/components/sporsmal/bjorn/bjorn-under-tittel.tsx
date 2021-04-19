@@ -3,7 +3,7 @@ import React from 'react'
 import { useAppStore } from '../../../data/stores/app-store'
 import { TagTyper } from '../../../types/enums'
 import { RSSoknadstype } from '../../../types/rs-types/rs-soknadstype'
-import VisBlock from '../../vis-block'
+import Vis from '../../vis'
 import { SpmProps } from '../sporsmal-form/sporsmal-form'
 import { fjernIndexFraTag } from '../sporsmal-utils'
 import Bjorn from './bjorn'
@@ -21,14 +21,12 @@ const BjornUnderTittel = ({ sporsmal }: SpmProps) => {
         (tag === TagTyper.FERIE_V2 && valgtSoknad?.soknadstype === RSSoknadstype.ARBEIDSTAKERE)
 
     return (
-        <VisBlock hvis={harBjorntekst(sporsmal.tag)}
-            render={() => {
-                return (
-                    <Bjorn className="blokk-m"
-                        nokkel={`soknad.bjorn.${fjernIndexFraTag(sporsmal.tag).toLowerCase()}`}
-                    />
-                )
-            }}
+        <Vis hvis={harBjorntekst(sporsmal.tag)}
+            render={() =>
+                <Bjorn className="blokk-m"
+                    nokkel={`soknad.bjorn.${fjernIndexFraTag(sporsmal.tag).toLowerCase()}`}
+                />
+            }
         />
     )
 }

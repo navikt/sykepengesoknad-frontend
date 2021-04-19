@@ -4,7 +4,7 @@ import { useFormContext } from 'react-hook-form'
 
 import { Sporsmal } from '../../types/types'
 import { hentFeilmelding } from '../sporsmal/sporsmal-utils'
-import VisBlock from '../vis-block'
+import Vis from '../vis'
 
 interface FeilProps {
     sporsmal: Sporsmal;
@@ -16,14 +16,12 @@ const FeilLokal = ({ sporsmal }: FeilProps) => {
 
     return (
         <div role="alert" aria-live="assertive">
-            <VisBlock hvis={errors[sporsmal.id]}
-                render={() => {
-                    return (
-                        <Normaltekst tag="span" className="skjemaelement__feilmelding">
-                            {feilmelding.lokal}
-                        </Normaltekst>
-                    )
-                }}
+            <Vis hvis={errors[sporsmal.id]}
+                render={() =>
+                    <Normaltekst tag="span" className="skjemaelement__feilmelding">
+                        {feilmelding.lokal}
+                    </Normaltekst>
+                }
             />
         </div>
     )

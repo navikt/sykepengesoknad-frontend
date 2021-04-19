@@ -17,7 +17,7 @@ import SporsmalForm from '../../components/sporsmal/sporsmal-form/sporsmal-form'
 import SporsmalSteg from '../../components/sporsmal/sporsmal-steg/sporsmal-steg'
 import { hentNokkel } from '../../components/sporsmal/sporsmal-utils'
 import StatusPanel from '../../components/status/statuspanel'
-import VisBlock from '../../components/vis-block'
+import Vis from '../../components/vis'
 import { useAppStore } from '../../data/stores/app-store'
 import { RSSoknadstatus } from '../../types/rs-types/rs-soknadstatus'
 import { RSSoknadstype } from '../../types/rs-types/rs-soknadstype'
@@ -99,45 +99,41 @@ const Fordeling = () => {
         case RSSoknadstatus.UTKAST_TIL_KORRIGERING:
             return (
                 <>
-                    <VisBlock hvis={valgtSoknad.status === RSSoknadstatus.UTKAST_TIL_KORRIGERING}
-                        render={() => {
-                            return (
-                                <AlertStripe type="info" className="blokk-s">
-                                    <span>{tekst('sykepengesoknad.utkast-til-korrigering.info')}</span>
-                                </AlertStripe>
-                            )
-                        }}
+                    <Vis hvis={valgtSoknad.status === RSSoknadstatus.UTKAST_TIL_KORRIGERING}
+                        render={() =>
+                            <AlertStripe type="info" className="blokk-s">
+                                <span>{tekst('sykepengesoknad.utkast-til-korrigering.info')}</span>
+                            </AlertStripe>
+                        }
                     />
 
-                    <VisBlock hvis={stegNo === 1 && !erUtlandssoknad}
+                    <Vis hvis={stegNo === 1 && !erUtlandssoknad}
                         render={() => <SoknadIntro />}
                     />
 
-                    <VisBlock hvis={stegNo > 1 || erUtlandssoknad}
+                    <Vis hvis={stegNo > 1 || erUtlandssoknad}
                         render={() => <SporsmalSteg />}
                     />
 
-                    <VisBlock hvis={stegNo > 1}
-                        render={() => {
-                            return (
-                                <Link to={'/soknader/' + valgtSoknad.id + SEPARATOR + (stegNo - 1)}
-                                    className="lenke tilbakelenke">
-                                    <VenstreChevron />
-                                    <Normaltekst tag="span">{tekst('soknad.tilbakeknapp')}</Normaltekst>
-                                </Link>
-                            )
-                        }}
+                    <Vis hvis={stegNo > 1}
+                        render={() =>
+                            <Link to={'/soknader/' + valgtSoknad.id + SEPARATOR + (stegNo - 1)}
+                                className="lenke tilbakelenke">
+                                <VenstreChevron />
+                                <Normaltekst tag="span">{tekst('soknad.tilbakeknapp')}</Normaltekst>
+                            </Link>
+                        }
                     />
 
-                    <VisBlock hvis={!erUtlandssoknad}
+                    <Vis hvis={!erUtlandssoknad}
                         render={() => <Opplysninger ekspandert={true} />}
                     />
 
-                    <VisBlock hvis={stegNo === 1 && erReisetilskuddsoknad}
+                    <Vis hvis={stegNo === 1 && erReisetilskuddsoknad}
                         render={() => <OmReisetilskudd />}
                     />
 
-                    <VisBlock hvis={tittel !== undefined}
+                    <Vis hvis={tittel}
                         render={() => <Systemtittel className="sporsmal__tittel">{tittel}</Systemtittel>}
                     />
 

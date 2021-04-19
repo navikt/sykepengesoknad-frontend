@@ -9,7 +9,7 @@ import Banner from '../../components/banner/banner'
 import Brodsmuler from '../../components/brodsmuler/brodsmuler'
 import Teasere from '../../components/soknader/teaser/teasere'
 import UtbetalingerLenke from '../../components/soknader/utbetalinger/utbetalinger-lenke'
-import VisBlock from '../../components/vis-block'
+import Vis from '../../components/vis'
 import { useAppStore } from '../../data/stores/app-store'
 import { RSSoknadstatus } from '../../types/rs-types/rs-soknadstatus'
 import { Brodsmule, Soknad } from '../../types/types'
@@ -63,18 +63,16 @@ const Soknader = () => {
 
                 <UtbetalingerLenke />
 
-                <VisBlock hvis={tidligereSoknader.length > 0}
-                    render={() => {
-                        return (
-                            <Teasere
-                                className={'soknader_teasere'}
-                                soknader={tidligereSoknader}
-                                tittel={tekst('soknader.sendt.tittel')}
-                                id="soknader-sendt"
-                                kanSorteres={true}
-                            />
-                        )
-                    }}
+                <Vis hvis={tidligereSoknader.length > 0}
+                    render={() =>
+                        <Teasere
+                            className={'soknader_teasere'}
+                            soknader={tidligereSoknader}
+                            tittel={tekst('soknader.sendt.tittel')}
+                            id="soknader-sendt"
+                            kanSorteres={true}
+                        />
+                    }
                 />
 
                 <Lenke className="hovedside-lenke" href="/sykefravaer">

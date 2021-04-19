@@ -5,7 +5,7 @@ import React, { useEffect, useState } from 'react'
 import { useAppStore } from '../../../data/stores/app-store'
 import { tekst } from '../../../utils/tekster'
 import Avkrysset from '../../oppsummering/utdrag/avkrysset'
-import VisBlock from '../../vis-block'
+import Vis from '../../vis'
 import { Mottaker } from './kvittering-status'
 
 
@@ -39,24 +39,24 @@ const ArbeidstakerStatus = () => {
     }
 
     return <div className="sendt-inner">
-        <VisBlock hvis={valgtSoknad!.sendtTilArbeidsgiverDato}
-            render={() => {
-                return <>
+        <Vis hvis={valgtSoknad!.sendtTilArbeidsgiverDato}
+            render={() =>
+                <>
                     <Element tag="h2" className="sendt-tittel">
                         {tekst('kvittering.sendt-til')}
                     </Element>
                     <Avkrysset tekst={tilArbNavn + ' ' + tilOrg} />
                     <Undertekst>{tilArbDato}</Undertekst>
                 </>
-            }}
+            }
         />
-        <VisBlock hvis={valgtSoknad!.sendtTilNAVDato}
-            render={() => {
-                return <>
+        <Vis hvis={valgtSoknad!.sendtTilNAVDato}
+            render={() =>
+                <>
                     <Avkrysset tekst={Mottaker.NAV} />
                     <Undertekst>{tilNavDato}</Undertekst>
                 </>
-            }}
+            }
         />
     </div>
 }

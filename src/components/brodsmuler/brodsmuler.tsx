@@ -8,7 +8,7 @@ import { Link } from 'react-router-dom'
 
 import { Brodsmule } from '../../types/types'
 import env from '../../utils/environment'
-import VisBlock from '../vis-block'
+import Vis from '../vis'
 import personIkon from './person.svg'
 
 const LITEN = 768
@@ -80,23 +80,21 @@ const Brodsmuler = ({ brodsmuler }: BrodsmulerProps) => {
             <div className="limit">
                 <img src={personIkon} alt="Du" className="brodsmuler__ikon" />
                 <Normaltekst tag="ul" className="brodsmuler__smuler">
-                    <VisBlock hvis={skjerm <= LITEN}
-                        render={() => {
-                            return (
-                                <li className="smule">
-                                    <button
-                                        aria-label={
-                                            synlige.length === brodsmuler.length
-                                                ? 'Vis redusert brødsmulesti'
-                                                : 'Vis hele brødsmulestien'}
-                                        className="js-toggle"
-                                        onClick={toggleSynlige}
-                                    >
-                                        ...
-                                    </button>
-                                </li>
-                            )
-                        }}
+                    <Vis hvis={skjerm <= LITEN}
+                        render={() =>
+                            <li className="smule">
+                                <button
+                                    aria-label={
+                                        synlige.length === brodsmuler.length
+                                            ? 'Vis redusert brødsmulesti'
+                                            : 'Vis hele brødsmulestien'}
+                                    className="js-toggle"
+                                    onClick={toggleSynlige}
+                                >
+                                    ...
+                                </button>
+                            </li>
+                        }
                     />
 
                     {synlige.map((smule, index) => {

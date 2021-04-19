@@ -19,7 +19,7 @@ import { logger } from '../../../utils/logger'
 import { tekst } from '../../../utils/tekster'
 import Slettknapp from '../../slettknapp/slettknapp'
 import { SpmProps } from '../../sporsmal/sporsmal-form/sporsmal-form'
-import VisBlock from '../../vis-block'
+import Vis from '../../vis'
 import DragAndDrop from '../drag-and-drop/drag-and-drop'
 
 interface OpplastetKvittering {
@@ -136,14 +136,12 @@ const OpplastingForm = ({ sporsmal }: SpmProps) => {
                     {kvitteringHeader}
                 </Systemtittel>
 
-                <VisBlock hvis={formErDisabled}
-                    render={() => {
-                        return (
-                            <AlertStripe type="info">
-                                <Normaltekst>{tekst('opplasting_modal.endre-utlegg.hjelpetekst')}</Normaltekst>
-                            </AlertStripe>
-                        )
-                    }}
+                <Vis hvis={formErDisabled}
+                    render={() =>
+                        <AlertStripe type="info">
+                            <Normaltekst>{tekst('opplasting_modal.endre-utlegg.hjelpetekst')}</Normaltekst>
+                        </AlertStripe>
+                    }
                 />
                 <div className="skjemakolonner">
                     <div className="skjemaelement">
@@ -175,7 +173,7 @@ const OpplastingForm = ({ sporsmal }: SpmProps) => {
 
                         <div role="alert" aria-live="assertive">
                             <Normaltekst tag="span" className="skjemaelement__feilmelding">
-                                <VisBlock hvis={methods.errors['transportmiddel']}
+                                <Vis hvis={methods.errors['transportmiddel']}
                                     render={() => <>{tekst('opplasting_modal.transportmiddel.feilmelding')}</>}
                                 />
                             </Normaltekst>
@@ -216,7 +214,7 @@ const OpplastingForm = ({ sporsmal }: SpmProps) => {
 
                         <div role="alert" aria-live="assertive">
                             <Normaltekst tag="span" className="skjemaelement__feilmelding">
-                                <VisBlock hvis={methods.errors['belop_input']}
+                                <Vis hvis={methods.errors['belop_input']}
                                     render={() => <>{methods.errors['belop_input']?.message}</>}
                                 />
                             </Normaltekst>
@@ -226,14 +224,12 @@ const OpplastingForm = ({ sporsmal }: SpmProps) => {
 
                 <DragAndDrop />
 
-                <VisBlock hvis={feilmeldingTekst}
-                    render={() => {
-                        return (
-                            <Alertstripe type="advarsel">
-                                <Normaltekst>{feilmeldingTekst}</Normaltekst>
-                            </Alertstripe>
-                        )
-                    }}
+                <Vis hvis={feilmeldingTekst}
+                    render={() =>
+                        <Alertstripe type="advarsel">
+                            <Normaltekst>{feilmeldingTekst}</Normaltekst>
+                        </Alertstripe>
+                    }
                 />
 
                 <div className="knapperad">
@@ -241,17 +237,15 @@ const OpplastingForm = ({ sporsmal }: SpmProps) => {
                         {tekst('opplasting_modal.tilbake')}
                     </Knapp>
 
-                    <VisBlock hvis={!formErDisabled}
-                        render={() => {
-                            return (
-                                <Knapp type="hoved" htmlType="button" className="lagre-kvittering" onClick={onSubmit} spinner={laster}>
-                                    {tekst('opplasting_modal.bekreft')}
-                                </Knapp>
-                            )
-                        }}
+                    <Vis hvis={!formErDisabled}
+                        render={() =>
+                            <Knapp type="hoved" htmlType="button" className="lagre-kvittering" onClick={onSubmit} spinner={laster}>
+                                {tekst('opplasting_modal.bekreft')}
+                            </Knapp>
+                        }
                     />
 
-                    <VisBlock hvis={formErDisabled}
+                    <Vis hvis={formErDisabled}
                         render={() => <Slettknapp sporsmal={sporsmal} kvittering={valgtKvittering!} />}
                     />
                 </div>

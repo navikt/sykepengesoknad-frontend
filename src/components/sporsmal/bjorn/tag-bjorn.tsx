@@ -4,7 +4,7 @@ import { useAppStore } from '../../../data/stores/app-store'
 import { TagTyper } from '../../../types/enums'
 import { RSSoknadstype } from '../../../types/rs-types/rs-soknadstype'
 import { Sporsmal } from '../../../types/types'
-import VisBlock from '../../vis-block'
+import Vis from '../../vis'
 import { fjernIndexFraTag } from '../sporsmal-utils'
 import Bjorn from './bjorn'
 
@@ -27,7 +27,7 @@ const TagBjorn = ({ sporsmal, className }: TagBjornProps) => {
     }
 
     return (
-        <VisBlock hvis={harBjorntekst(tag)}
+        <Vis hvis={harBjorntekst(tag)}
             render={() => <Bjorn className={className} nokkel={`soknad.bjorn.${fjernIndexFraTag(tag).toLowerCase()}`} />}
         />
     )

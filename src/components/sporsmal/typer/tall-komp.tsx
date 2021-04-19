@@ -6,7 +6,7 @@ import { TagTyper } from '../../../types/enums'
 import { RSSvartype } from '../../../types/rs-types/rs-svartype'
 import validerArbeidsgrad from '../../../utils/sporsmal/valider-arbeidsgrad'
 import { getLedetekst, tekst } from '../../../utils/tekster'
-import VisBlock from '../../vis-block'
+import Vis from '../../vis'
 import { SpmProps } from '../sporsmal-form/sporsmal-form'
 import { hentFeilmelding } from '../sporsmal-utils'
 import SporsmalstekstH3 from '../sporsmalstekst/sporsmalstekstH3'
@@ -105,37 +105,33 @@ const TallKomp = ({ sporsmal }: SpmProps) => {
             </div>
 
             <div role="alert" aria-live="assertive">
-                <VisBlock hvis={errors[sporsmal.id]}
-                    render={() => {
-                        return <>
-                            <VisBlock hvis={errors[sporsmal.id]?.type !== 'validate'}
-                                render={() => {
-                                    return (
-                                        <Normaltekst tag="span" className="skjemaelement__feilmelding">
-                                            {feilmelding.lokal}
-                                        </Normaltekst>
-                                    )
-                                }}
+                <Vis hvis={errors[sporsmal.id]}
+                    render={() =>
+                        <>
+                            <Vis hvis={errors[sporsmal.id]?.type !== 'validate'}
+                                render={() =>
+                                    <Normaltekst tag="span" className="skjemaelement__feilmelding">
+                                        {feilmelding.lokal}
+                                    </Normaltekst>
+                                }
                             />
-                            <VisBlock hvis={errors[sporsmal.id]?.type === 'validate' && sporsmal.tag === TagTyper.HVOR_MYE_TIMER_VERDI}
-                                render={() => {
-                                    return (
-                                        <Normaltekst tag="span" className="skjemaelement__feilmelding">
-                                            {getLedetekst(
-                                                tekst('soknad.feilmelding.MINDRE_TIMER_ENN_FORVENTET.lokal'),
-                                                { '%GRAD%': periode?.grad }
-                                            )}
-                                        </Normaltekst>
-                                    )
-                                }}
+                            <Vis hvis={errors[sporsmal.id]?.type === 'validate' && sporsmal.tag === TagTyper.HVOR_MYE_TIMER_VERDI}
+                                render={() =>
+                                    <Normaltekst tag="span" className="skjemaelement__feilmelding">
+                                        {getLedetekst(
+                                            tekst('soknad.feilmelding.MINDRE_TIMER_ENN_FORVENTET.lokal'),
+                                            { '%GRAD%': periode?.grad }
+                                        )}
+                                    </Normaltekst>
+                                }
                             />
                         </>
-                    }}
+                    }
                 />
             </div>
 
             <div className="undersporsmal" ref={undersporsmal}>
-                <VisBlock hvis={watchTall}
+                <Vis hvis={watchTall}
                     render={() => <UndersporsmalListe oversporsmal={sporsmal} />}
                 />
             </div>

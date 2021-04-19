@@ -5,7 +5,7 @@ import { Normaltekst, Undertittel } from 'nav-frontend-typografi'
 import React, { useEffect, useRef, useState } from 'react'
 
 import { erSynligIViewport } from '../../utils/browser-utils'
-import VisBlock from '../vis-block'
+import Vis from '../vis'
 
 interface UtvidbarProps {
     erApen: boolean;
@@ -61,23 +61,21 @@ const Utvidbar = (props: UtvidbarProps) => {
                 type={'button'}
                 className="utvidbar__toggle"
             >
-                <VisBlock hvis={props.ikon !== undefined}
-                    render={() => {
-                        return (
-                            <img aria-hidden="true" className="utvidbar__ikon"
-                                ref={btnImage}
-                                alt={props.ikonAltTekst}
-                                src={props.ikon}
-                            />
-                        )
-                    }}
+                <Vis hvis={props.ikon}
+                    render={() =>
+                        <img aria-hidden="true" className="utvidbar__ikon"
+                            ref={btnImage}
+                            alt={props.ikonAltTekst}
+                            src={props.ikon}
+                        />
+                    }
                 />
 
-                <VisBlock hvis={props.type === undefined}
+                <Vis hvis={props.type === undefined}
                     render={() => <Undertittel tag="h3" className="utvidbar__tittel">{props.tittel}</Undertittel>}
                 />
 
-                <VisBlock hvis={props.type === 'intern'}
+                <Vis hvis={props.type === 'intern'}
                     render={() => <Normaltekst tag="h3" className="utvidbar__tittel">{props.tittel}</Normaltekst>}
                 />
 

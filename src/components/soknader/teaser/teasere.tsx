@@ -5,7 +5,7 @@ import React, { useState } from 'react'
 import { RSSoknadstatus } from '../../../types/rs-types/rs-soknadstatus'
 import { Soknad } from '../../../types/types'
 import { sorterEtterPerioder, sorterEtterSendt, sorterEtterStatus } from '../../../utils/sorter-soknader'
-import VisBlock from '../../vis-block'
+import Vis from '../../vis'
 import FremtidigeSoknaderTeaser from './fremtidige-soknader-teaser'
 import Teaser from './teaser'
 import TidligereSoknaderTeaser from './tidligere-soknader-teaser'
@@ -43,29 +43,25 @@ const Teasere = ({ soknader, className, tittel, tomListeTekst, id, kanSorteres =
     return (
         <>
             <header className="teasere__header">
-                <VisBlock hvis={kanSorteres && sorterteSoknader().length > 0}
-                    render={() => {
-                        return (
-                            <Select label="Sorter etter"
-                                className="inngangspanel__sortering"
-                                onChange={(event) => setSortering(event.target.value as Sortering)}
-                            >
-                                {Object.values(Sortering).map((sort, idx) => {
-                                    return <option value={sort} key={idx}>{sort}</option>
-                                })}
-                            </Select>
-                        )
-                    }}
+                <Vis hvis={kanSorteres && sorterteSoknader().length > 0}
+                    render={() =>
+                        <Select label="Sorter etter"
+                            className="inngangspanel__sortering"
+                            onChange={(event) => setSortering(event.target.value as Sortering)}
+                        >
+                            {Object.values(Sortering).map((sort, idx) => {
+                                return <option value={sort} key={idx}>{sort}</option>
+                            })}
+                        </Select>
+                    }
                 />
 
-                <VisBlock hvis={sorterteSoknader().length > 0 || tomListeTekst !== undefined}
-                    render={() => {
-                        return (
-                            <Undertittel tag="h2" className="teasere__header__tittel">
-                                {tittel}
-                            </Undertittel>
-                        )
-                    }}
+                <Vis hvis={sorterteSoknader().length > 0 || tomListeTekst}
+                    render={() =>
+                        <Undertittel tag="h2" className="teasere__header__tittel">
+                            {tittel}
+                        </Undertittel>
+                    }
                 />
             </header>
 
@@ -83,14 +79,12 @@ const Teasere = ({ soknader, className, tittel, tomListeTekst, id, kanSorteres =
                             return <Teaser key={idx} soknad={soknad} />
                     }
                 })}
-                <VisBlock hvis={soknader.length === 0}
-                    render={() => {
-                        return (
-                            <Element className="inngangspanel inngangspanel--tomListe">
-                                {tomListeTekst}
-                            </Element>
-                        )
-                    }}
+                <Vis hvis={soknader.length === 0}
+                    render={() =>
+                        <Element className="inngangspanel inngangspanel--tomListe">
+                            {tomListeTekst}
+                        </Element>
+                    }
                 />
             </div>
         </>

@@ -11,7 +11,7 @@ import { customTruncet, formaterFilstørrelse } from '../../../utils/fil-utils'
 import { logger } from '../../../utils/logger'
 import { getLedetekst, tekst } from '../../../utils/tekster'
 import Utvidbar from '../../utvidbar/utvidbar'
-import VisBlock from '../../vis-block'
+import Vis from '../../vis'
 import binders from './binders.svg'
 
 const formattertFiltyper = env.formaterteFiltyper
@@ -75,28 +75,26 @@ const DragAndDrop = () => {
                 <Element tag="strong">{tekst('drag_and_drop.label')}</Element>
             </label>
 
-            <VisBlock hvis={valgtFil}
-                render={() => {
-                    return (
-                        <Utvidbar
-                            erApen={formErDisabled}
-                            tittel={customTruncet(valgtFil?.name || 'Kvittering.png', 20)}
-                            type="intern"
-                            fixedHeight={true}
-                        >
-                            <div className="preview">{
-                                valgtFil
-                                    ? <img alt="" src={URL.createObjectURL(valgtFil)} />
-                                    : null
-                            }</div>
-                        </Utvidbar>
-                    )
-                }}
+            <Vis hvis={valgtFil}
+                render={() =>
+                    <Utvidbar
+                        erApen={formErDisabled}
+                        tittel={customTruncet(valgtFil?.name || 'Kvittering.png', 20)}
+                        type="intern"
+                        fixedHeight={true}
+                    >
+                        <div className="preview">{
+                            valgtFil
+                                ? <img alt="" src={URL.createObjectURL(valgtFil)} />
+                                : null
+                        }</div>
+                    </Utvidbar>
+                }
             />
 
-            <VisBlock hvis={!formErDisabled}
-                render={() => {
-                    return <>
+            <Vis hvis={!formErDisabled}
+                render={() =>
+                    <>
                         <div className="filopplasteren" {...getRootProps()}>
                             <input {...getInputProps()} id="ddfil" />
                             <input type="hidden"
@@ -142,7 +140,7 @@ const DragAndDrop = () => {
 
                         <div role="alert" aria-live="assertive">
                             <Normaltekst tag="span" className="skjemaelement__feilmelding">
-                                <VisBlock hvis={errors.fil_input}
+                                <Vis hvis={errors.fil_input}
                                     render={() => <>{errors.fil_input?.message}</>}
                                 />
                             </Normaltekst>
@@ -161,7 +159,7 @@ const DragAndDrop = () => {
                             }</span>
                         </Normaltekst>
                     </>
-                }}
+                }
             />
         </div>
     )

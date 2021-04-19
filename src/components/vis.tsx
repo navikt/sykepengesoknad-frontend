@@ -1,9 +1,14 @@
 import React from 'react'
 
-const Vis = (props: { hvis: any; children: React.ReactNode }) => {
-    return props.hvis === undefined || props.hvis === null || props.hvis === false || props.hvis === ''
-        ? (null as any)
-        : props.children
+interface VisProps {
+    hvis: any;
+    render: () => React.ReactElement;
+}
+
+const Vis = ({ hvis, render }: VisProps) => {
+    return hvis
+        ? render()
+        : null
 }
 
 export default Vis

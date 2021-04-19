@@ -7,7 +7,7 @@ import { tilLesbarPeriodeMedArstall } from '../../../utils/dato-utils'
 import env from '../../../utils/environment'
 import { getUrlTilSoknad } from '../../../utils/url-utils'
 import { useAmplitudeInstance } from '../../amplitude/amplitude'
-import VisBlock from '../../vis-block'
+import Vis from '../../vis'
 import { InngangsIkon, Inngangspanel } from '../inngang/inngangspanel'
 import { hentIkon, hentIkonHover, leggTilSoknadstypeForDemoside, periodeListevisning, SykepengesoknadTeaserProps, teaserTittel } from './teaser-util'
 
@@ -26,14 +26,12 @@ const Teaser = ({ soknad }: SykepengesoknadTeaserProps) => {
                         ikonHover={hentIkonHover(soknad)}
                     />
                     <div className="inngangspanel__innhold">
-                        <VisBlock hvis={soknad.soknadstype !== RSSoknadstype.OPPHOLD_UTLAND}
-                            render={() => {
-                                return (
-                                    <Undertekst className="inngangspanel__periode">
-                                        {tilLesbarPeriodeMedArstall(soknad.fom, soknad.tom)}
-                                    </Undertekst>
-                                )
-                            }}
+                        <Vis hvis={soknad.soknadstype !== RSSoknadstype.OPPHOLD_UTLAND}
+                            render={() =>
+                                <Undertekst className="inngangspanel__periode">
+                                    {tilLesbarPeriodeMedArstall(soknad.fom, soknad.tom)}
+                                </Undertekst>
+                            }
                         />
                         <Undertittel tag="h3" className="inngangspanel__tittel">
                             {teaserTittel(soknad)}
@@ -41,7 +39,7 @@ const Teaser = ({ soknad }: SykepengesoknadTeaserProps) => {
 
                         {periodeListevisning(soknad)}
 
-                        <VisBlock hvis={env.isOpplaering}
+                        <Vis hvis={env.isOpplaering}
                             render={() => leggTilSoknadstypeForDemoside(soknad)}
                         />
                     </div>

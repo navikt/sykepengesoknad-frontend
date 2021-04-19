@@ -5,7 +5,7 @@ import React, { useEffect, useState } from 'react'
 
 import { useAppStore } from '../../../data/stores/app-store'
 import { tekst } from '../../../utils/tekster'
-import VisBlock from '../../vis-block'
+import Vis from '../../vis'
 
 export enum Mottaker {
     NAV = 'NAV',
@@ -32,25 +32,17 @@ const KvitteringStatus = () => {
 
 
     return (
-        <VisBlock hvis={valgtSoknad!.sendtTilNAVDato}
-            render={() => {
-                return (
-                    <AlertStripeSuksess>
-                        <VisBlock hvis={valgtSoknad!.sendtTilNAVDato}
-                            render={() => {
-                                return <>
-                                    <Undertittel tag="h2">
-                                        {tekst('kvittering.soknaden-er-sendt-til')} {Mottaker.NAV}
-                                    </Undertittel>
-                                    <Normaltekst>
-                                        {tekst('kvittering.mottatt')}: {tilNavDato}
-                                    </Normaltekst>
-                                </>
-                            }}
-                        />
-                    </AlertStripeSuksess>
-                )
-            }}
+        <Vis hvis={valgtSoknad?.sendtTilNAVDato}
+            render={() =>
+                <AlertStripeSuksess>
+                    <Undertittel tag="h2">
+                        {tekst('kvittering.soknaden-er-sendt-til')} {Mottaker.NAV}
+                    </Undertittel>
+                    <Normaltekst>
+                        {tekst('kvittering.mottatt')}: {tilNavDato}
+                    </Normaltekst>
+                </AlertStripeSuksess>
+            }
         />
     )
 }

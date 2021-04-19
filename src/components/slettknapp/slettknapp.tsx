@@ -13,7 +13,7 @@ import env from '../../utils/environment'
 import fetcher from '../../utils/fetcher'
 import { logger } from '../../utils/logger'
 import { tekst } from '../../utils/tekster'
-import VisBlock from '../vis-block'
+import Vis from '../vis'
 import SlettIkon from './slettknapp.svg'
 
 interface SlettknappProps {
@@ -63,26 +63,22 @@ const Slettknapp = ({ sporsmal, kvittering, update }: SlettknappProps) => {
 
     return (
         <>
-            <VisBlock hvis={update}
-                render={() => {
-                    return (
-                        <button type="button" className="slette-kvittering" aria-label={tekst('opplasting_modal.slett')}
-                            onClick={() => setVilSlette(true)} title={tekst('opplasting_modal.slett')}
-                        >
-                            <img src={SlettIkon} alt="" />
-                        </button>
-                    )
-                }}
+            <Vis hvis={update}
+                render={() =>
+                    <button type="button" className="slette-kvittering" aria-label={tekst('opplasting_modal.slett')}
+                        onClick={() => setVilSlette(true)} title={tekst('opplasting_modal.slett')}
+                    >
+                        <img src={SlettIkon} alt="" />
+                    </button>
+                }
             />
 
-            <VisBlock hvis={!update}
-                render={() => {
-                    return (
-                        <Knapp type="fare" htmlType="button" className="lagre-kvittering" onClick={() => setVilSlette(true)}>
-                            {tekst('opplasting_modal.slett')}
-                        </Knapp>
-                    )
-                }}
+            <Vis hvis={!update}
+                render={() =>
+                    <Knapp type="fare" htmlType="button" className="lagre-kvittering" onClick={() => setVilSlette(true)}>
+                        {tekst('opplasting_modal.slett')}
+                    </Knapp>
+                }
             />
 
             <ModalWrapper className="modal__teaser_popup" onRequestClose={() => setVilSlette(false)}
@@ -100,7 +96,7 @@ const Slettknapp = ({ sporsmal, kvittering, update }: SlettknappProps) => {
                         </Fareknapp>
                     </div>
                     <div aria-live="polite" className="blokk-xs">
-                        <VisBlock hvis={feilmeldingTekst}
+                        <Vis hvis={feilmeldingTekst}
                             render={() => <Alertstripe type="feil">{feilmeldingTekst}</Alertstripe>}
                         />
                     </div>

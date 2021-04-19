@@ -11,7 +11,7 @@ import { getLedetekst, tekst } from '../../../utils/tekster'
 import { formatterTall } from '../../../utils/utils'
 import Slettknapp from '../../slettknapp/slettknapp'
 import { hentSvar } from '../../sporsmal/hent-svar'
-import VisBlock from '../../vis-block'
+import Vis from '../../vis'
 
 interface Props {
     sporsmal: Sporsmal,
@@ -40,64 +40,60 @@ const FilListe = ({ sporsmal, fjernKnapp }: Props) => {
         : (0.0)) / 100
 
     return (
-        <VisBlock hvis={kvitteringer.length > 0}
-            render={() => {
-                return (
-                    <Normaltekst tag="table" className="tabell tabell--stripet fil_liste">
-                        <VisBlock hvis={fjernKnapp}
-                            render={() => {
-                                return (
-                                    <thead>
-                                        <tr>
-                                            <th role="columnheader" aria-sort="none">
-                                                Utgift
-                                            </th>
-                                            <th role="columnheader" className="belop">
-                                                Beløp
-                                            </th>
-                                            <th />
-                                        </tr>
-                                    </thead>
-                                )
-                            }}
-                        />
-                        <tbody>
-                            {kvitteringer.reverse().map((kvittering: Kvittering, idx: number) => (
-                                <tr key={idx}>
-                                    <td className="transport">
-                                        <button type="button" tabIndex={0} className="lenkeknapp" onClick={() => visKvittering(kvittering)}>
-                                            {UtgiftTyper[kvittering.typeUtgift]}
-                                        </button>
-                                    </td>
-                                    <td className="belop">
-                                        {formatterTall(kvittering.belop! / 100)} kr
-                                    </td>
-                                    <td>
-                                        <Slettknapp sporsmal={sporsmal} kvittering={kvittering} update={update} />
-                                    </td>
+        <Vis hvis={kvitteringer.length > 0}
+            render={() =>
+                <Normaltekst tag="table" className="tabell tabell--stripet fil_liste">
+                    <Vis hvis={fjernKnapp}
+                        render={() =>
+                            <thead>
+                                <tr>
+                                    <th role="columnheader" aria-sort="none">
+                                        Utgift
+                                    </th>
+                                    <th role="columnheader" className="belop">
+                                        Beløp
+                                    </th>
+                                    <th />
                                 </tr>
-                            ))}
-                        </tbody>
-                        <tbody className="sumlinje">
-                            <tr>
-                                <td>
-                                    <Undertittel tag="span">
-                                        {getLedetekst(tekst('fil_liste.utlegg.sum'), {
-                                            '%ANTALL_BILAG%': kvitteringer.length
-                                        })}
-                                    </Undertittel>
+                            </thead>
+                        }
+                    />
+                    <tbody>
+                        {kvitteringer.reverse().map((kvittering: Kvittering, idx: number) => (
+                            <tr key={idx}>
+                                <td className="transport">
+                                    <button type="button" tabIndex={0} className="lenkeknapp" onClick={() => visKvittering(kvittering)}>
+                                        {UtgiftTyper[kvittering.typeUtgift]}
+                                    </button>
                                 </td>
                                 <td className="belop">
-                                    <Undertittel tag="span">
-                                        {formatterTall(totaltBeløp())} kr
-                                    </Undertittel>
+                                    {formatterTall(kvittering.belop! / 100)} kr
                                 </td>
-                                <td />
+                                <td>
+                                    <Slettknapp sporsmal={sporsmal} kvittering={kvittering} update={update} />
+                                </td>
                             </tr>
-                        </tbody>
-                    </Normaltekst>
-                )
-            }}
+                        ))}
+                    </tbody>
+                    <tbody className="sumlinje">
+                        <tr>
+                            <td>
+                                <Undertittel tag="span">
+                                    {getLedetekst(tekst('fil_liste.utlegg.sum'), {
+                                        '%ANTALL_BILAG%': kvitteringer.length
+                                    })}
+                                </Undertittel>
+                            </td>
+                            <td className="belop">
+                                <Undertittel tag="span">
+                                    {formatterTall(totaltBeløp())} kr
+                                </Undertittel>
+                            </td>
+                            <td />
+                        </tr>
+                    </tbody>
+                </Normaltekst>
+            }
         />
     )
 }

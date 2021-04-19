@@ -6,7 +6,7 @@ import { RouteParams } from '../../../app'
 import { useAppStore } from '../../../data/stores/app-store'
 import { SEPARATOR } from '../../../utils/constants'
 import { useAmplitudeInstance } from '../../amplitude/amplitude'
-import VisBlock from '../../vis-block'
+import Vis from '../../vis'
 import { pathUtenSteg } from '../sporsmal-utils'
 
 const innerCls = (aktiv: boolean, ferdig: boolean, disabled: boolean) =>
@@ -40,27 +40,23 @@ const Steg = ({ label, index }: StegProps) => {
 
     return (
         <li className="stegindikator__steg" aria-current={(erAktiv) ? 'step' : undefined}>
-            <VisBlock hvis={aktivtSteg >= index + 2}
-                render={() => {
-                    return (
-                        <button className={innerCls(erAktiv, erPassert, disabled)}
-                            title={label} disabled={disabled}
-                            onClick={() => goTo(num)}
-                        >
-                            <div className="stegindikator__steg-num">{num}</div>
-                        </button>
-                    )
-                }}
+            <Vis hvis={aktivtSteg >= index + 2}
+                render={() =>
+                    <button className={innerCls(erAktiv, erPassert, disabled)}
+                        title={label} disabled={disabled}
+                        onClick={() => goTo(num)}
+                    >
+                        <div className="stegindikator__steg-num">{num}</div>
+                    </button>
+                }
             />
 
-            <VisBlock hvis={aktivtSteg < index + 2}
-                render={() => {
-                    return (
-                        <div className={innerCls(erAktiv, erPassert, disabled)} title={label}>
-                            <div className="stegindikator__steg-num">{num}</div>
-                        </div>
-                    )
-                }}
+            <Vis hvis={aktivtSteg < index + 2}
+                render={() =>
+                    <div className={innerCls(erAktiv, erPassert, disabled)} title={label}>
+                        <div className="stegindikator__steg-num">{num}</div>
+                    </div>
+                }
             />
         </li>
     )

@@ -8,7 +8,7 @@ import { Sporsmal } from '../../types/types'
 import { flattenSporsmal } from '../../utils/soknad-utils'
 import { useAmplitudeInstance } from '../amplitude/amplitude'
 import { SpmProps } from '../sporsmal/sporsmal-form/sporsmal-form'
-import VisBlock from '../vis-block'
+import Vis from '../vis'
 
 interface FeiloppsummeringProps {
     errors: any;
@@ -80,7 +80,7 @@ const FeilOppsummering = ({ errors, sporsmal }: FeilProps) => {
 
     return (
         <div aria-live="polite" role="alert">
-            <VisBlock hvis={entries.length > 0}
+            <Vis hvis={entries.length > 0}
                 render={() =>
                     <div ref={oppsummering} tabIndex={0} role="region" className="feiloppsummering">
                         <Undertittel>{'Det er ' + entries.length + ' feil i skjemaet'}</Undertittel>

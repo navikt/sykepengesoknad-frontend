@@ -3,7 +3,7 @@ import React from 'react'
 
 import { Sporsmal } from '../../../types/types'
 import { tekst } from '../../../utils/tekster'
-import VisBlock from '../../vis-block'
+import Vis from '../../vis'
 import { OppsummeringProps } from '../oppsummering'
 import Avkrysset from './avkrysset'
 import UndersporsmalSum from './undersporsmal-sum'
@@ -25,7 +25,7 @@ const JaEllerNei = ({ sporsmal }: OppsummeringProps) => {
         <div className="oppsummering-sporsmal">
             <Element tag="h3">{sporsmal.sporsmalstekst}</Element>
             <Avkrysset tekst={svartekst} />
-            <VisBlock hvis={erUndersporsmalStilt(sporsmal)}
+            <Vis hvis={erUndersporsmalStilt(sporsmal)}
                 render={() => <UndersporsmalSum sporsmalsliste={sporsmal.undersporsmal} />}
             />
         </div>

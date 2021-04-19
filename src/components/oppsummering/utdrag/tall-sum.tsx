@@ -2,9 +2,8 @@ import { Element, Normaltekst } from 'nav-frontend-typografi'
 import React from 'react'
 
 import { RSSvartype } from '../../../types/rs-types/rs-svartype'
-import { empty } from '../../../utils/constants'
 import { tekst } from '../../../utils/tekster'
-import VisBlock from '../../vis-block'
+import Vis from '../../vis'
 import { OppsummeringProps } from '../oppsummering'
 
 const TallSum = ({ sporsmal }: OppsummeringProps) => {
@@ -16,14 +15,12 @@ const TallSum = ({ sporsmal }: OppsummeringProps) => {
             <div className="oppsummering__svar">
                 {sporsmal.svarliste.svar.map((svarverdi, index) => {
                     return (
-                        <VisBlock hvis={svarverdi.verdi !== empty} key={index}
-                            render={() => {
-                                return (
-                                    <Normaltekst className="oppsummering__tekst">
-                                        {svarverdi.verdi} {label}
-                                    </Normaltekst>
-                                )
-                            }}
+                        <Vis hvis={svarverdi.verdi} key={index}
+                            render={() =>
+                                <Normaltekst className="oppsummering__tekst">
+                                    {svarverdi.verdi} {label}
+                                </Normaltekst>
+                            }
                         />
                     )
                 })}

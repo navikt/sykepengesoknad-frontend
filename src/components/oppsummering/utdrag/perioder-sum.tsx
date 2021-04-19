@@ -1,10 +1,9 @@
 import { Element, Normaltekst } from 'nav-frontend-typografi'
 import React from 'react'
 
-import { empty } from '../../../utils/constants'
 import { tilLesbarPeriodeMedArstall } from '../../../utils/dato-utils'
 import { hentPeriode } from '../../sporsmal/hent-svar'
-import VisBlock from '../../vis-block'
+import Vis from '../../vis'
 import { OppsummeringProps } from '../oppsummering'
 
 const PerioderSum = ({ sporsmal }: OppsummeringProps) => {
@@ -15,14 +14,12 @@ const PerioderSum = ({ sporsmal }: OppsummeringProps) => {
                 {sporsmal.svarliste.svar.map((p, i) => {
                     const periode = hentPeriode(sporsmal, i)
                     return (
-                        <VisBlock hvis={p.verdi !== empty} key={i}
-                            render={() => {
-                                return (
-                                    <Normaltekst className="oppsummering__dato">
-                                        {tilLesbarPeriodeMedArstall(periode.fom, periode.tom)}
-                                    </Normaltekst>
-                                )
-                            }}
+                        <Vis hvis={p.verdi} key={i}
+                            render={() =>
+                                <Normaltekst className="oppsummering__dato">
+                                    {tilLesbarPeriodeMedArstall(periode.fom, periode.tom)}
+                                </Normaltekst>
+                            }
                         />
                     )
                 })}

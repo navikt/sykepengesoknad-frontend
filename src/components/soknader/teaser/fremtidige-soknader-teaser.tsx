@@ -9,7 +9,7 @@ import { RSSoknadstype } from '../../../types/rs-types/rs-soknadstype'
 import { tilLesbarDatoMedArstall, tilLesbarPeriodeMedArstall } from '../../../utils/dato-utils'
 import { getLedetekst, tekst } from '../../../utils/tekster'
 import { useAmplitudeInstance } from '../../amplitude/amplitude'
-import VisBlock from '../../vis-block'
+import Vis from '../../vis'
 import { InngangsIkon, InngangsStatus } from '../inngang/inngangspanel'
 import { hentIkon, hentIkonHover, hentTeaserStatustekst, periodeListevisning, SykepengesoknadTeaserProps, teaserTittel } from './teaser-util'
 
@@ -27,14 +27,12 @@ const FremtidigeSoknaderTeaser = ({ soknad }: SykepengesoknadTeaserProps) => {
                     <div className="inngangspanel__del1">
                         <InngangsIkon ikon={hentIkon(soknad)} ikonHover={hentIkonHover(soknad)} />
                         <div className="inngangspanel__innhold">
-                            <VisBlock hvis={soknad.soknadstype !== RSSoknadstype.OPPHOLD_UTLAND}
-                                render={() => {
-                                    return (
-                                        <Undertekst className="inngangspanel__periode">
-                                            {tilLesbarPeriodeMedArstall(soknad.fom, soknad.tom)}
-                                        </Undertekst>
-                                    )
-                                }}
+                            <Vis hvis={soknad.soknadstype !== RSSoknadstype.OPPHOLD_UTLAND}
+                                render={() =>
+                                    <Undertekst className="inngangspanel__periode">
+                                        {tilLesbarPeriodeMedArstall(soknad.fom, soknad.tom)}
+                                    </Undertekst>
+                                }
                             />
                             <Undertittel tag="h3" className="inngangspanel__tittel">
                                 {teaserTittel(soknad)}

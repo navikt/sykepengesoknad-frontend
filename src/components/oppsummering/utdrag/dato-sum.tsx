@@ -3,7 +3,7 @@ import { Element, Normaltekst } from 'nav-frontend-typografi'
 import React from 'react'
 
 import { empty } from '../../../utils/constants'
-import VisBlock from '../../vis-block'
+import Vis from '../../vis'
 import { OppsummeringProps } from '../oppsummering'
 
 const DatoSum = ({ sporsmal }: OppsummeringProps) => {
@@ -13,14 +13,12 @@ const DatoSum = ({ sporsmal }: OppsummeringProps) => {
             <div className="oppsummering__tekstsvar">
                 {sporsmal.svarliste.svar.map((svarverdi, index) => {
                     return (
-                        <VisBlock hvis={svarverdi.verdi !== empty} key={index}
-                            render={() => {
-                                return (
-                                    <Normaltekst className="oppsummering__dato">
-                                        {dayjs(svarverdi.verdi.toString()).format('DD.MM.YYYY')}
-                                    </Normaltekst>
-                                )
-                            }}
+                        <Vis hvis={svarverdi.verdi} key={index}
+                            render={() =>
+                                <Normaltekst className="oppsummering__dato">
+                                    {dayjs(svarverdi.verdi.toString()).format('DD.MM.YYYY')}
+                                </Normaltekst>
+                            }
                         />
                     )
                 })}

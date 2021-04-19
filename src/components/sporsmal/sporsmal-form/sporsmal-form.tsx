@@ -24,7 +24,7 @@ import { logger } from '../../../utils/logger'
 import { useAmplitudeInstance } from '../../amplitude/amplitude'
 import FeilOppsummering from '../../feil/feil-oppsummering'
 import Oppsummering from '../../oppsummering/oppsummering'
-import VisBlock from '../../vis-block'
+import Vis from '../../vis'
 import BjornUnderTittel from '../bjorn/bjorn-under-tittel'
 import { hentFormState, hentSvar } from '../hent-svar'
 import { settSvar } from '../sett-svar'
@@ -250,28 +250,28 @@ const SporsmalForm = () => {
 
                 <SporsmalSwitch sporsmal={sporsmal} />
 
-                <VisBlock hvis={erSiste && !erUtlandssoknad}
-                    render={()=>{
-                        return <>
+                <Vis hvis={erSiste && !erUtlandssoknad}
+                    render={() =>
+                        <>
                             <Oppsummering ekspandert={false} />
                             <CheckboxPanel sporsmal={nesteSporsmal} />
                             <SendesTil />
                         </>
-                    }}
+                    }
                 />
 
-                <VisBlock hvis={erSiste && erUtlandssoknad}
-                    render={() => {
-                        return <>
+                <Vis hvis={erSiste && erUtlandssoknad}
+                    render={() =>
+                        <>
                             <Oppsummering ekspandert={false} />
                             <CheckboxPanel sporsmal={sporsmal} />
                         </>
-                    }}
+                    }
                 />
 
                 <FeilOppsummering errors={methods.errors} sporsmal={sporsmal} />
 
-                <VisBlock hvis={skalViseKnapperad(valgtSoknad!, sporsmal, methods.getValues())}
+                <Vis hvis={skalViseKnapperad(valgtSoknad!, sporsmal, methods.getValues())}
                     render={() => <Knapperad onSubmit={onSubmit} poster={poster} />}
                 />
             </form>

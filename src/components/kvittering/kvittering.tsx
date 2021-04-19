@@ -14,7 +14,7 @@ import Endreknapp from '../endreknapp/endreknapp'
 import Ettersending from '../ettersending/ettersending'
 import Opplysninger from '../opplysninger-fra-sykmelding/opplysninger'
 import Oppsummering from '../oppsummering/oppsummering'
-import VisBlock from '../vis-block'
+import Vis from '../vis'
 import AlleAndre from './alle-andre'
 import Arbeidstaker from './arbeidstaker'
 
@@ -65,35 +65,32 @@ const Kvittering = () => {
             <Oppsummering
                 ekspandert={sendtForMerEnn30DagerSiden(valgtSoknad?.sendtTilArbeidsgiverDato, valgtSoknad?.sendtTilNAVDato)} />
 
-            <VisBlock hvis={valgtSoknad!.soknadstype !== RSSoknadstype.OPPHOLD_UTLAND}
+            <Vis hvis={valgtSoknad!.soknadstype !== RSSoknadstype.OPPHOLD_UTLAND}
                 render={() => <Opplysninger ekspandert={false} />}
             />
 
-            <VisBlock hvis={skalViseKnapperad}
-                render={() => {
-                    return (
-                        <div className="knapperad">
-                            <VisBlock hvis={valgtSoknad!.status !== RSSoknadstatus.KORRIGERT}
-                                render={() => <Endreknapp />}
-                            />
+            <Vis hvis={skalViseKnapperad}
+                render={() =>
+                    <div className="knapperad">
+                        <Vis hvis={valgtSoknad!.status !== RSSoknadstatus.KORRIGERT}
+                            render={() => <Endreknapp />}
+                        />
 
-                            <VisBlock hvis={!erSendtTilNav}
-                                render={() => <Ettersending gjelder="nav" setRerendrekvittering={setRerendrekvittering} />}
-                            />
+                        <Vis hvis={!erSendtTilNav}
+                            render={() => <Ettersending gjelder="nav" setRerendrekvittering={setRerendrekvittering} />}
+                        />
 
-                            <VisBlock hvis={skalViseSendTilArbeidsgiver}
-                                render={() => {
-                                    return <Ettersending gjelder="arbeidsgiver" setRerendrekvittering={setRerendrekvittering} />
-                                }}
-                            />
-                        </div>
-                    )
-                }
+                        <Vis hvis={skalViseSendTilArbeidsgiver}
+                            render={() =>
+                                <Ettersending gjelder="arbeidsgiver" setRerendrekvittering={setRerendrekvittering} />
+                            }
+                        />
+                    </div>
                 }
             />
 
             <div aria-live="polite">
-                <VisBlock hvis={feilmeldingTekst !== ''}
+                <Vis hvis={feilmeldingTekst}
                     render={() => <Alertstripe type="feil">{feilmeldingTekst}</Alertstripe>}
                 />
             </div>

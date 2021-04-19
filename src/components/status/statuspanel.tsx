@@ -15,7 +15,7 @@ import env from '../../utils/environment'
 import fetcher from '../../utils/fetcher'
 import { logger } from '../../utils/logger'
 import { tekst } from '../../utils/tekster'
-import VisBlock from '../vis-block'
+import Vis from '../vis'
 
 const StatusPanel = () => {
     const { valgtSoknad, setValgtSoknad, setValgtSykmelding, sykmeldinger, soknader, setSoknader } = useAppStore()
@@ -85,14 +85,12 @@ const StatusPanel = () => {
                 </div>
             </div>
 
-            <VisBlock hvis={soknadKanGjenapnes(valgtSoknad!.opprettetDato)}
-                render={() => {
-                    return (
-                        <Knapp spinner={gjenapner} mini type="standard" onClick={Gjenapne}>
-                            {'Gjenåpne søknad'}
-                        </Knapp>
-                    )
-                }}
+            <Vis hvis={soknadKanGjenapnes(valgtSoknad!.opprettetDato)}
+                render={() =>
+                    <Knapp spinner={gjenapner} mini type="standard" onClick={Gjenapne}>
+                        {'Gjenåpne søknad'}
+                    </Knapp>
+                }
             />
         </div>
     )

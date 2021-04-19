@@ -8,7 +8,7 @@ import { getLedetekst, tekst } from '../../../utils/tekster'
 import { utlandssoknadUrl } from '../../../utils/url-utils'
 import AnimateOnMount from '../../animate-on-mount'
 import FeilLokal from '../../feil/feil-lokal'
-import VisBlock from '../../vis-block'
+import Vis from '../../vis'
 import Bjorn from '../bjorn/bjorn'
 import SporsmalBjorn from '../bjorn/sporsmal-bjorn'
 import TagBjorn from '../bjorn/tag-bjorn'
@@ -85,7 +85,7 @@ const JaNeiInput = ({ sporsmal }: SpmProps) => {
                     </div>
                 </fieldset>
 
-                <VisBlock hvis={sporsmal?.tag === TagTyper.UTLANDSOPPHOLD_SOKT_SYKEPENGER && watchJaNei}
+                <Vis hvis={sporsmal?.tag === TagTyper.UTLANDSOPPHOLD_SOKT_SYKEPENGER && watchJaNei}
                     render={() =>
                         <Normaltekst className={'utland_infotekst'}>{
                             parser(getLedetekst(
@@ -112,7 +112,7 @@ const JaNeiInput = ({ sporsmal }: SpmProps) => {
                 </>
             </AnimateOnMount>
 
-            <VisBlock hvis={visAvgittAvBjorn()}
+            <Vis hvis={visAvgittAvBjorn()}
                 render={() =>
                     <Bjorn className="press" nokkel="sykepengesoknad.egenmeldingsdager.preutfylt-melding" />
                 }

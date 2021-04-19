@@ -10,7 +10,7 @@ import Banner from '../../components/banner/banner'
 import Brodsmuler from '../../components/brodsmuler/brodsmuler'
 import { HotjarTrigger } from '../../components/hotjar-trigger'
 import Kvittering from '../../components/kvittering/kvittering'
-import VisBlock from '../../components/vis-block'
+import Vis from '../../components/vis'
 import { useAppStore } from '../../data/stores/app-store'
 import { RSSoknadstatus } from '../../types/rs-types/rs-soknadstatus'
 import { Brodsmule } from '../../types/types'
@@ -61,17 +61,15 @@ const KvitteringSide = () => {
                     <Kvittering />
                 </HotjarTrigger>
 
-                <VisBlock hvis={erSiste}
-                    render={() => {
-                        return (
-                            <Link to="/" className="gaa-videre">
-                                <Normaltekst tag="span">
-                                    <VenstreChevron />
-                                    {tekst('sykepengesoknad.navigasjon.gaa-til')}
-                                </Normaltekst>
-                            </Link>
-                        )
-                    }}
+                <Vis hvis={erSiste}
+                    render={() =>
+                        <Link to="/" className="gaa-videre">
+                            <Normaltekst tag="span">
+                                <VenstreChevron />
+                                {tekst('sykepengesoknad.navigasjon.gaa-til')}
+                            </Normaltekst>
+                        </Link>
+                    }
                 />
             </div>
         </>

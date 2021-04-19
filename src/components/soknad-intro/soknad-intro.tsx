@@ -9,7 +9,7 @@ import React, { useState } from 'react'
 import { useAppStore } from '../../data/stores/app-store'
 import { RSSoknadstype } from '../../types/rs-types/rs-soknadstype'
 import { tekst } from '../../utils/tekster'
-import VisBlock from '../vis-block'
+import Vis from '../vis'
 import ForsteSoknadSvg from './soknad-intro-svg'
 
 const SoknadIntro = () => {
@@ -25,10 +25,10 @@ const SoknadIntro = () => {
             <div className="blokk-s">
                 <Veilederpanel kompakt svg={<ForsteSoknadSvg />}>
                     <Normaltekst tag="h2" className="panel__tittel sist">
-                        <VisBlock hvis={valgtSoknad.soknadstype !== RSSoknadstype.REISETILSKUDD}
+                        <Vis hvis={valgtSoknad.soknadstype !== RSSoknadstype.REISETILSKUDD}
                             render={() => parser(tekst('sykepengesoknad.soknad-intro.personvern'))}
                         />
-                        <VisBlock hvis={valgtSoknad.soknadstype === RSSoknadstype.REISETILSKUDD}
+                        <Vis hvis={valgtSoknad.soknadstype === RSSoknadstype.REISETILSKUDD}
                             render={() => parser(tekst('reisetilskudd.soknad-intro.personvern'))}
                         />
                         <p className="sist">

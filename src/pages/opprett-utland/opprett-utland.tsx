@@ -7,7 +7,7 @@ import React from 'react'
 import { useHistory } from 'react-router'
 
 import Bjorn from '../../components/sporsmal/bjorn/bjorn'
-import VisBlock from '../../components/vis-block'
+import Vis from '../../components/vis'
 import useFetch from '../../data/rest/use-fetch'
 import { FetchState, hasData } from '../../data/rest/utils'
 import { useAppStore } from '../../data/stores/app-store'
@@ -68,7 +68,7 @@ const OpprettUtland = () => {
                     </Knapp>
 
                     <div aria-live="polite">
-                        <VisBlock hvis={feilmeldingTekst !== ''}
+                        <Vis hvis={feilmeldingTekst}
                             render={() => <Alertstripe type="feil">{feilmeldingTekst}</Alertstripe>}
                         />
                     </div>

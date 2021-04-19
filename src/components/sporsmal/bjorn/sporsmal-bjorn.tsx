@@ -1,7 +1,7 @@
 import React from 'react'
 
 import { SvarEnums, TagTyper } from '../../../types/enums'
-import VisBlock from '../../vis-block'
+import Vis from '../../vis'
 import { SpmProps } from '../sporsmal-form/sporsmal-form'
 import Bjorn from './bjorn'
 
@@ -14,7 +14,7 @@ export const SporsmalBjorn = ({ sporsmal }: SpmProps) => {
     const nokkel = vis ? 'sykepengesoknad-utland.skjema.bjorn' : 'sykepengesoknad-utland.skjema.ferie-sporsmal-bjorn'
 
     return (
-        <VisBlock hvis={vis}
+        <Vis hvis={vis}
             render={() => <Bjorn className="press" nokkel={nokkel} />}
         />
     )
