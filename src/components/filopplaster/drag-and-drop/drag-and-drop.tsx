@@ -41,8 +41,11 @@ const DragAndDrop = () => {
                 }
             })
         } else {
-            setValgtFil(undefined)
             setFormErDisabled(false)
+        }
+
+        return () => {
+            setValgtFil(undefined)
         }
     }, [ setValgtFil, valgtKvittering ])
 
