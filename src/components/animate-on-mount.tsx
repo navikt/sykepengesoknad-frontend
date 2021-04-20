@@ -13,17 +13,11 @@ interface AnimateOnMountProps {
 
 const AnimateOnMount = (props: AnimateOnMountProps) => {
     const { mounted, enter, leave, start, children } = props
-    const { top, setTop } = useAppStore()
     const [ styles, setStyles ] = useState<string>(null as any)
-    const [ show, setShow ] = useState<boolean>(mounted)
     const animRef = useRef<HTMLDivElement>(null)
 
     useEffect(() => {
-        if (animRef!.current!.offsetTop > top) {
-            setTop(animRef!.current!.offsetTop)
-        }
         if (mounted) {
-            setShow(true)
             setStyles(enter)
         } else {
             setStyles(leave)
@@ -31,16 +25,10 @@ const AnimateOnMount = (props: AnimateOnMountProps) => {
         // eslint-disable-next-line
     }, [ mounted ]);
 
-    const onTransitionEnd = () => {
-        window.scrollTo({ top: top, behavior: 'auto' })
-        if (styles === leave) {
-            setShow(false)
-        }
-    }
 
     return (
-        <div ref={animRef} className={`${start} ${styles}`} onTransitionEnd={onTransitionEnd}>
-            <Vis hvis={show} render={() => children} />
+        <div ref={animRef} className={`${start} ${styles}`}>
+            <Vis hvis={ mounted } render={() => children} />
         </div>
     )
 }
