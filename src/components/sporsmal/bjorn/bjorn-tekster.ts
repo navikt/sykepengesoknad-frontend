@@ -1,6 +1,4 @@
 const BjornTekster = {
-    'soknad.bjorn.jobbet_du_100_prosent': 'Du har kanskje avtalt med arbeidsgiveren din at du skal ha færre arbeidsoppgaver, men bruke lenger tid på dem enn vanlig? Da svarer du i prosent hvor stor mengde av arbeidsoppgavene dine du har utført.',
-    'soknad.bjorn.jobbet_du_gradert': 'Du har kanskje avtalt med arbeidsgiveren din at du skal ha færre arbeidsoppgaver, men bruke lenger tid på dem enn vanlig? Da svarer du i prosent hvor stor mengde av arbeidsoppgavene dine du har utført.',
     'soknad.bjorn.enkeltstaende_behandlingsdager': 'Du kan bare få én behandlingsdag i løpet av en uke. Trenger du flere slike dager, ber du legen om en gradert sykmelding i stedet.',
     'soknad.bjorn.ferie_v2': 'Måtte du avbryte ferien fordi du ble syk? Du kan avtale med arbeidsgiveren at du utsetter ferien. Fikk du tatt noen feriedager, svarer du ja nedenfor, og så spør vi deg hvilke dager. Ble hele ferien ødelagt fordi du ble syk, svarer du nei.',
     'soknad.bjorn.arbeid_utenfor_norge': 'Vi spør om dette for å undersøke om du har rettigheter i flere land enn Norge. Har du vært på en kort tjenestereise eller konferanse i utlandet, krysser du nei.',
