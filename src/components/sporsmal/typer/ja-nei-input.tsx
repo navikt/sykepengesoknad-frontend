@@ -108,7 +108,12 @@ const JaNeiInput = ({ sporsmal }: SpmProps) => {
             >
                 <>
                     <UndersporsmalListe oversporsmal={sporsmal} oversporsmalSvar={watchJaNei} />
-                    <TagBjorn sporsmal={sporsmal} className="press" />
+                    <Vis hvis={sporsmal.tag !== TagTyper.JOBBET_DU_100_PROSENT
+                    && sporsmal.tag !== TagTyper.JOBBET_DU_GRADERT}
+                    render={() =>
+                        <TagBjorn sporsmal={sporsmal} className="press" />
+                    }
+                    />
                 </>
             </AnimateOnMount>
 
