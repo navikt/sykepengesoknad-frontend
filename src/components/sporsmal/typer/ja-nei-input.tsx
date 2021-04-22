@@ -11,7 +11,6 @@ import FeilLokal from '../../feil/feil-lokal'
 import Vis from '../../vis'
 import Bjorn from '../bjorn/bjorn'
 import SporsmalBjorn from '../bjorn/sporsmal-bjorn'
-import TagBjorn from '../bjorn/tag-bjorn'
 import { SpmProps } from '../sporsmal-form/sporsmal-form'
 import SporsmalHjelpetekst from '../sporsmal-hjelpetekst'
 import { hentFeilmelding, sporsmalIdListe } from '../sporsmal-utils'
@@ -106,15 +105,7 @@ const JaNeiInput = ({ sporsmal }: SpmProps) => {
                 leave="undersporsmal--skjul"
                 start="undersporsmal"
             >
-                <>
-                    <UndersporsmalListe oversporsmal={sporsmal} oversporsmalSvar={watchJaNei} />
-                    <Vis hvis={sporsmal.tag !== TagTyper.JOBBET_DU_100_PROSENT
-                    && sporsmal.tag !== TagTyper.JOBBET_DU_GRADERT}
-                    render={() =>
-                        <TagBjorn sporsmal={sporsmal} className="press" />
-                    }
-                    />
-                </>
+                <UndersporsmalListe oversporsmal={sporsmal} oversporsmalSvar={watchJaNei} />
             </AnimateOnMount>
 
             <Vis hvis={visAvgittAvBjorn()}
