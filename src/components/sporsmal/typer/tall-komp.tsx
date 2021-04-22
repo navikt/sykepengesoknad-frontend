@@ -1,6 +1,6 @@
 import AlertStripe from 'nav-frontend-alertstriper'
 import { Normaltekst } from 'nav-frontend-typografi'
-import React, { useRef, useState } from 'react'
+import React, { useRef } from 'react'
 import { useFormContext } from 'react-hook-form'
 
 import { TagTyper } from '../../../types/enums'
@@ -14,12 +14,11 @@ import SporsmalstekstH3 from '../sporsmalstekst/sporsmalstekstH3'
 import UndersporsmalListe from '../undersporsmal/undersporsmal-liste'
 
 const TallKomp = ({ sporsmal }: SpmProps) => {
-    const { register, errors, getValues, watch } = useFormContext()
+    const { register, errors, watch } = useFormContext()
     const watchTall = watch(sporsmal.id)
 
     const feilmelding = hentFeilmelding(sporsmal, errors[sporsmal.id])
     const undersporsmal = useRef<HTMLDivElement>(null)
-    const [ timerPerUke, setTimerPerUke ] = useState<number>(0)
     const { validerGrad, periode, hovedSporsmal } = validerArbeidsgrad(sporsmal)
 
     const valider = () => {
@@ -31,7 +30,7 @@ const TallKomp = ({ sporsmal }: SpmProps) => {
             if (sporsmal.tag !== TagTyper.HVOR_MYE_TIMER_VERDI) {
                 return true
             }
-            return validerGrad(getValues())
+            return validerGrad()
         } else {
             return true
         }
@@ -102,9 +101,6 @@ const TallKomp = ({ sporsmal }: SpmProps) => {
                     })}
                     step={step()}
                     autoComplete="off"
-                    onChange={event =>
-                        setTimerPerUke(event.target.valueAsNumber)
-                    }
                 />
                 <label className="medEnhet__enhet" htmlFor={sporsmal.id}>{sporsmal.undertekst}</label>
             </div>
@@ -135,7 +131,7 @@ const TallKomp = ({ sporsmal }: SpmProps) => {
                 />
             </div>
 
-            <Vis hvis={sporsmal.tag === TagTyper.HVOR_MANGE_TIMER_PER_UKE && timerPerUke < 10}
+            <Vis hvis={sporsmal.tag === TagTyper.HVOR_MANGE_TIMER_PER_UKE && watchTall && watchTall < 10}
                 render={() =>
                     <AlertStripe type="advarsel" style={{ marginTop: '1rem' }}>
                         <Normaltekst>{tekst('sykepengesoknad.jobb-underveis-under-10-timer-uke')}</Normaltekst>

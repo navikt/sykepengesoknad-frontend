@@ -120,7 +120,8 @@ describe('Tester arbeidstakersøknad', () => {
 
         // Underspørsmål 1
         cy.contains('Hvor mange timer i uken jobber du vanligvis når du er frisk? Varierer det, kan du oppgi gjennomsnittet.')
-        cy.get('.undersporsmal .skjemaelement__input#687350').focus().type('12')
+        cy.get('.undersporsmal .skjemaelement__input#687350').focus().type('9')
+        cy.get('.undersporsmal .alertstripe--advarsel').should('contain', 'Du skriver at du jobber mindre enn 10 timer per uke')
 
         // Underspørsmål 2
         cy.contains('Hvor mye jobbet du totalt 1. - 24. april 2020 hos POSTEN NORGE AS, BÆRUM?')
@@ -130,6 +131,7 @@ describe('Tester arbeidstakersøknad', () => {
         // Svarer timer
         cy.get('.undersporsmal .skjemaelement__input.radioknapp[value=timer]').focus().click({ force: true })
         cy.get('.undersporsmal .skjemaelement__input#687355').focus().type('21')
+        cy.get('.undersporsmal .alertstripe--info').should('contain', 'Antall timer du skrev inn, betyr at du har jobbet 181% av det du gjør når du er frisk.')
 
         cy.contains('Gå videre').click()
     })
