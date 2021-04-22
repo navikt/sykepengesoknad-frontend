@@ -165,31 +165,12 @@ describe('Tester feilmeldinger', () => {
         ingenFeilmeldinger()
     })
 
-    it('RADIO prosent eller timer ikke valgt', () => {
+    it('TALL ingen valg', () => {
         gaTilSoknad(arbeidstakerGradert, '8')
         cy.get('input[value=JA]').click({ force: true })
         cy.get(`input[name=${arbeidstakerGradert.sporsmal[7].undersporsmal[0].id}]`).type('37.5')
         gaVidere()
 
-        cy.get('.radioknapp').should('have.css', 'border-color', 'rgb(186, 58, 38)')
-        cy.get('.skjemaelement__feilmelding').contains('Du må velge prosent eller timer')
-        cy.get('.feiloppsummering')
-            .should('have.css', 'background-color', 'rgb(255, 255, 255)')
-            .should('have.css', 'border-color', 'rgb(186, 58, 38)')
-            .within(() => {
-                cy.contains('Det er 1 feil i skjemaet')
-                cy.contains('Du må velge prosent eller timer')
-                    .click()
-            })
-        cy.focused()
-            .should('have.attr', 'name', arbeidstakerGradert.sporsmal[7].undersporsmal[1].id)
-            .click({ force: true })
-
-        ingenFeilmeldinger()
-    })
-
-    it('TALL ingen valg', () => {
-        gaVidere()
         feilmeldingHandtering(
             'Du må oppgi en verdi',
             'Du må svare på hvor mye du jobbet totalt',
