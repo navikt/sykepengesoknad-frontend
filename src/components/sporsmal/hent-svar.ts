@@ -70,9 +70,8 @@ export const hentFormState = (sporsmal: Sporsmal) => {
 const hentSvarliste = (sporsmal: Sporsmal) => {
     let svar: any = {}
 
-    if (sporsmal.svarliste.svar[0] !== undefined) {
-        svar[sporsmal.id] = hentSvar(sporsmal)
-    }
+    svar[sporsmal.id] = hentSvar(sporsmal)
+
     sporsmal.undersporsmal.forEach((spm) => {
         const alleUndersporsmalSvar: any = hentSvarliste(spm)
         svar = { ...svar, ...alleUndersporsmalSvar }
