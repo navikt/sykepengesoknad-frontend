@@ -16,6 +16,10 @@ class Environment {
         return this.env.ENVIRONMENT === 'prod'
     }
 
+    get isIntegrationtest() {
+        return this.isMockBackend && !this.isOpplaering
+    }
+
     get flexGatewayRoot() {
         return this.env.FLEX_GATEWAY_ROOT
     }
