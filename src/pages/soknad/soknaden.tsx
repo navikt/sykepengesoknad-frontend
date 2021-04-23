@@ -9,7 +9,7 @@ import { Link, useHistory, useParams } from 'react-router-dom'
 import { RouteParams } from '../../app'
 import Banner from '../../components/banner/banner'
 import Brodsmuler from '../../components/brodsmuler/brodsmuler'
-import { HotjarTrigger } from '../../components/hotjar-trigger'
+import { hentHotjarJsTrigger, HotjarTrigger } from '../../components/hotjar-trigger'
 import OmReisetilskudd from '../../components/om-reisetilskudd/om-reisetilskudd'
 import Opplysninger from '../../components/opplysninger-fra-sykmelding/opplysninger'
 import SoknadIntro from '../../components/soknad-intro/soknad-intro'
@@ -50,7 +50,7 @@ const Soknaden = () => {
         const sykmelding = sykmeldinger.find(sm => sm.id === filtrertSoknad?.sykmeldingId)
         setValgtSykmelding(sykmelding)
         // eslint-disable-next-line
-    }, [ id ]);
+    }, [id]);
 
     useEffect(() => {
         setBodyClass('soknaden')
@@ -66,7 +66,7 @@ const Soknaden = () => {
             <Brodsmuler brodsmuler={brodsmuler} />
 
             <div className="limit">
-                <HotjarTrigger soknadstype={valgtSoknad.soknadstype}>
+                <HotjarTrigger jsTrigger={hentHotjarJsTrigger(valgtSoknad.soknadstype, 'soknad')}>
                     <Fordeling />
                 </HotjarTrigger>
             </div>
