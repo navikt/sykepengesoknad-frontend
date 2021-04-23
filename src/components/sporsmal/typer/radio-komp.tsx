@@ -79,13 +79,13 @@ const RadioKomp = ({ sporsmal }: SpmProps) => {
 
             <FeilLokal sporsmal={sporsmal} />
 
-            <Vis hvis={watchRadio === 'timer'}
+            <Vis hvis={watchRadio === 'timer' && beregnGrad!()}
                 render={() =>
                     <AlertStripe type="info" style={{ marginTop: '1rem' }}>
                         <Normaltekst>
                             {getLedetekst(
                                 tekst('sykepengesoknad.jobb-underveis-timer-i-prosent'),
-                                { '%PROSENT%': beregnGrad!() ? Math.floor(beregnGrad!() * 100): 0 }
+                                { '%PROSENT%': Math.floor(beregnGrad!() * 100) }
                             )}
                         </Normaltekst>
                     </AlertStripe>
