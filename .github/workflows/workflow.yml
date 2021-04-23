@@ -137,7 +137,7 @@ jobs:
   deploy-to-labs-gcp:
     if: github.ref == 'refs/heads/master' || startsWith(github.ref, 'refs/heads/dev-')
     name: Deploy to labs-gcp (Demo)
-    needs: [build-and-publish, integrasjonstest]
+    needs: [build-and-publish]
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v1

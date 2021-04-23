@@ -1,7 +1,6 @@
 import { useEffect } from 'react'
 
 import { RSSoknadstype } from '../types/rs-types/rs-soknadstype'
-import env from '../utils/environment'
 import { info } from '../utils/logger'
 
 interface HotjarTriggerProps {
@@ -36,15 +35,15 @@ export const HotjarTrigger = ({ soknadstype, children }: HotjarTriggerProps) => 
     useEffect(() => {
         const hotJarWindow = (window as unknown as HotjarWindow)
 
-        if (env.isProd) {
-            setTimeout(() => {
-                if (typeof hotJarWindow.hj !== 'function') {
-                    info('Hotjar ble ikke lastet inn...')
-                } else {
-                    hotJarWindow.hj('trigger', typeTilTriggerMapping(soknadstype))
-                }
-            }, 500)
-        }
+
+        setTimeout(() => {
+            if (typeof hotJarWindow.hj !== 'function') {
+                info('Hotjar ble ikke lastet inn...')
+            } else {
+                hotJarWindow.hj('trigger', typeTilTriggerMapping(soknadstype))
+            }
+        }, 500)
+
     })
 
     return children
