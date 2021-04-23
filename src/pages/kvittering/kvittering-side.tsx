@@ -8,7 +8,7 @@ import { Link, useParams } from 'react-router-dom'
 import { RouteParams } from '../../app'
 import Banner from '../../components/banner/banner'
 import Brodsmuler from '../../components/brodsmuler/brodsmuler'
-import { HotjarTrigger } from '../../components/hotjar-trigger'
+import { hentHotjarJsTrigger, HotjarTrigger } from '../../components/hotjar-trigger'
 import Kvittering from '../../components/kvittering/kvittering'
 import Vis from '../../components/vis'
 import { useAppStore } from '../../data/stores/app-store'
@@ -41,7 +41,7 @@ const KvitteringSide = () => {
         const sykmelding = sykmeldinger.find(sm => sm.id === filtrertSoknad?.sykmeldingId)
         setValgtSykmelding(sykmelding)
         // eslint-disable-next-line
-    }, [ id ]);
+    }, [id]);
 
     useEffect(() => {
         setBodyClass('kvittering')
@@ -57,7 +57,7 @@ const KvitteringSide = () => {
             <Brodsmuler brodsmuler={brodsmuler} />
 
             <div className="limit">
-                <HotjarTrigger soknadstype={valgtSoknad.soknadstype}>
+                <HotjarTrigger jsTrigger={hentHotjarJsTrigger(valgtSoknad.soknadstype, 'kvittering')}>
                     <Kvittering />
                 </HotjarTrigger>
 
