@@ -1,4 +1,5 @@
 import dayjs from 'dayjs'
+import { useFormContext } from 'react-hook-form'
 
 import { hentPeriodeListe, hentSvar } from '../../components/sporsmal/hent-svar'
 import { useAppStore } from '../../data/stores/app-store'
@@ -13,6 +14,7 @@ import { getLedetekst, tekst } from '../tekster'
 
 const useValiderArbeidsgrad = (sporsmal: Sporsmal) => {
     const { valgtSoknad } = useAppStore()
+    const { getValues } = useFormContext()
     if (
         !valgtSoknad ||
         valgtSoknad.soknadstype === RSSoknadstype.REISETILSKUDD ||
@@ -61,21 +63,10 @@ const useValiderArbeidsgrad = (sporsmal: Sporsmal) => {
     }
 
 
-    const validerGrad = (values: Record<string, any>) => {
-        const faktiskeSykedager = valgtSoknad.soknadstype === RSSoknadstype.ARBEIDSTAKERE
-            ? sykedagerForArbeidstakere()
-            : sykedagerForFrilansere()
+    const validerGrad = () => {
 
-        const timerPerUkeId = hentUndersporsmal(hovedSporsmal!, TagTyper.HVOR_MANGE_TIMER_PER_UKE)!.id
-        const faktiskTimerId = hentUndersporsmal(hovedSporsmal!, TagTyper.HVOR_MYE_TIMER_VERDI)!.id
-
-        const dagerIPeriode = faktiskeSykedager.length
-        const uker = dagerIPeriode / 7
+        const faktiskArbeidsGrad = beregnGrad()
         const forventetArbeidsGrad = 1.0 - (periode.grad / 100)
-        const timerPerUke = parseFloat(values[timerPerUkeId])
-        const faktiskTimer = parseFloat(values[faktiskTimerId])
-
-        const faktiskArbeidsGrad = faktiskTimer / uker / timerPerUke
 
         return faktiskArbeidsGrad < forventetArbeidsGrad
             ? getLedetekst(tekst('soknad.feilmelding.MINDRE_TIMER_ENN_FORVENTET'),
@@ -83,7 +74,27 @@ const useValiderArbeidsgrad = (sporsmal: Sporsmal) => {
             : true
     }
 
-    return { validerGrad, periode, hovedSporsmal }
+    const beregnGrad = () => {
+
+        const values = getValues()
+        const timerPerUkeId = hentUndersporsmal(hovedSporsmal!, TagTyper.HVOR_MANGE_TIMER_PER_UKE)!.id
+        const faktiskTimerId = hentUndersporsmal(hovedSporsmal!, TagTyper.HVOR_MYE_TIMER_VERDI)!.id
+
+        const timerPerUke = parseFloat(values[timerPerUkeId])
+        const faktiskTimer = parseFloat(values[faktiskTimerId])
+
+        const faktiskeSykedager = valgtSoknad.soknadstype === RSSoknadstype.ARBEIDSTAKERE
+            ? sykedagerForArbeidstakere()
+            : sykedagerForFrilansere()
+
+
+        const dagerIPeriode = faktiskeSykedager.length
+        const uker = dagerIPeriode / 7
+
+        return faktiskTimer / uker / timerPerUke
+    }
+
+    return { beregnGrad, validerGrad, periode, hovedSporsmal }
 }
 
 export default useValiderArbeidsgrad

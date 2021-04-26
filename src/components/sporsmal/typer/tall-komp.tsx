@@ -1,3 +1,4 @@
+import AlertStripe from 'nav-frontend-alertstriper'
 import { Normaltekst } from 'nav-frontend-typografi'
 import React, { useRef } from 'react'
 import { useFormContext } from 'react-hook-form'
@@ -13,7 +14,7 @@ import SporsmalstekstH3 from '../sporsmalstekst/sporsmalstekstH3'
 import UndersporsmalListe from '../undersporsmal/undersporsmal-liste'
 
 const TallKomp = ({ sporsmal }: SpmProps) => {
-    const { register, errors, getValues, watch } = useFormContext()
+    const { register, errors, watch } = useFormContext()
     const watchTall = watch(sporsmal.id)
 
     const feilmelding = hentFeilmelding(sporsmal, errors[sporsmal.id])
@@ -29,7 +30,7 @@ const TallKomp = ({ sporsmal }: SpmProps) => {
             if (sporsmal.tag !== TagTyper.HVOR_MYE_TIMER_VERDI) {
                 return true
             }
-            return validerGrad(getValues())
+            return validerGrad()
         } else {
             return true
         }
@@ -129,6 +130,14 @@ const TallKomp = ({ sporsmal }: SpmProps) => {
                     }
                 />
             </div>
+
+            <Vis hvis={sporsmal.tag === TagTyper.HVOR_MANGE_TIMER_PER_UKE && watchTall && watchTall < 10}
+                render={() =>
+                    <AlertStripe type="advarsel" style={{ marginTop: '1rem' }}>
+                        <Normaltekst>{tekst('sykepengesoknad.jobb-underveis-under-10-timer-uke')}</Normaltekst>
+                    </AlertStripe>
+                }
+            />
 
             <div className="undersporsmal" ref={undersporsmal}>
                 <Vis hvis={watchTall}

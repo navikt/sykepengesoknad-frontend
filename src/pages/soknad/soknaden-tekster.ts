@@ -65,6 +65,10 @@ const SoknadenTekster = {
     'sykepengesoknad.andre-inntektskilder.hvilke-inntektskilder.sporsmal': 'Hvilke andre inntektskilder har du?',
     'sykepengesoknad.andre-inntektskilder.janei.sporsmal': 'Har du andre inntektskilder, eller jobber du for andre enn %ARBEIDSGIVER%?',
 
+    'sykepengesoknad.jobb-underveis-under-10-timer-uke': 'Du skriver at du jobber mindre enn 10 timer per uke når du er frisk. Stemmer det?',
+    'sykepengesoknad.jobb-underveis-timer-i-prosent': 'Antall timer du skrev inn, betyr at du har jobbet %PROSENT%% av det du gjør når du er frisk.',
+
+
     'sykepengesoknad.oppsummering.nav-som-mottaker': 'Søknaden sendes til NAV.',
     'sykepengesoknad.oppsummering.arbeidsgiver-som-mottaker': 'Søknaden sendes til %ARBEIDSGIVER%.',
     'sykepengesoknad.oppsummering.nav-arbeidsgiver-som-mottaker': 'Søknaden sendes til NAV. Kopi av søknaden sendes til %ARBEIDSGIVER%.',
