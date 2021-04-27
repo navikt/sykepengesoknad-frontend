@@ -31,6 +31,7 @@ import { settSvar } from '../sett-svar'
 import SporsmalSwitch from '../sporsmal-switch'
 import { pathUtenSteg } from '../sporsmal-utils'
 import CheckboxPanel from '../typer/checkbox-panel'
+import { EldreUsendtSoknad, harEldreUsendtSoknad } from './eldre-usendt-soknad'
 import Knapperad from './knapperad'
 import SendesTil from './sendes-til'
 import skalViseKnapperad from './skal-vise-knapperad'
@@ -40,7 +41,16 @@ export interface SpmProps {
 }
 
 const SporsmalForm = () => {
-    const { soknader, setSoknader, setValgtSoknad, valgtSoknad, mottaker, setTop, setMottaker, setFeilState } = useAppStore()
+    const {
+        soknader,
+        setSoknader,
+        setValgtSoknad,
+        valgtSoknad,
+        mottaker,
+        setTop,
+        setMottaker,
+        setFeilState
+    } = useAppStore()
     const { logEvent } = useAmplitudeInstance()
     const [ erSiste, setErSiste ] = useState<boolean>(false)
     const [ poster, setPoster ] = useState<boolean>(false)
@@ -57,7 +67,7 @@ const SporsmalForm = () => {
     useEffect(() => {
         methods.reset(hentFormState(sporsmal))
         // eslint-disable-next-line
-    }, [ sporsmal ])
+    }, [sporsmal])
 
     useEffect(() => {
         function erSiste() {
@@ -72,7 +82,7 @@ const SporsmalForm = () => {
         setErSiste(sisteSide)
         if (sisteSide) hentMottaker()
         // eslint-disable-next-line
-    }, [ spmIndex ])
+    }, [spmIndex])
 
     const sendOppdaterSporsmal = async() => {
         let soknad = valgtSoknad
@@ -237,6 +247,11 @@ const SporsmalForm = () => {
         } finally {
             setPoster(false)
         }
+    }
+
+    const eldreUsendtSoknad = harEldreUsendtSoknad(valgtSoknad!, soknader)
+    if (eldreUsendtSoknad != null) {
+        return (<EldreUsendtSoknad eldreSoknad={eldreUsendtSoknad} />)
     }
 
     return (
