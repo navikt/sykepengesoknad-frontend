@@ -131,7 +131,8 @@ describe('Tester arbeidstakersøknad', () => {
         // Svarer timer
         cy.get('.undersporsmal .skjemaelement__input.radioknapp[value=timer]').focus().click({ force: true })
         cy.get('.undersporsmal .skjemaelement__input#687355').focus().type('21')
-        cy.get('.undersporsmal .alertstripe--info').should('contain', 'Antall timer du skrev inn, betyr at du har jobbet 181% av det du gjør når du er frisk.')
+        // Denne personen har vært tilbake i arbeid 20 april, har hatt ferie 16-23 april, og hatt permisjon 14-22 april
+        cy.get('.undersporsmal .alertstripe--info').should('contain', 'Antall timer du skrev inn, betyr at du har jobbet 129% av det du gjør når du er frisk.')
 
         cy.contains('Gå videre').click()
     })
