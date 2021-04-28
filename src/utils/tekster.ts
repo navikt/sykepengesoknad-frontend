@@ -10,6 +10,7 @@ import SoknadIntroTekster from '../components/soknad-intro/soknad-intro-tekster'
 import TeaserTekster from '../components/soknader/teaser/teaser-tekster'
 import UtbetalingerTekster from '../components/soknader/utbetalinger/utbetalinger-tekster'
 import BjornTekster from '../components/sporsmal/bjorn/bjorn-tekster'
+import EldreUsendtTekster from '../components/sporsmal/sporsmal-form/eldre-usendt-soknad-tekster'
 import KnapperadTekster from '../components/sporsmal/sporsmal-form/knapperad-tekster'
 import SporsmalTekster from '../components/sporsmal/sporsmal-tekster'
 import SparTidTekster from '../components/sporsmal/typer/opplasting/spar-tid-mobil-tekster'
@@ -39,6 +40,7 @@ const tekster = {
     ...DragAndDropTekster,
     ...OpplastingTekster,
     ...SparTidTekster,
+    ...EldreUsendtTekster,
 }
 
 export const tekst = (tekst: keyof typeof tekster): string => {

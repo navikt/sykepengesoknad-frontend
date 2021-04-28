@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom'
 
 import { RSSoknadstatus } from '../../../types/rs-types/rs-soknadstatus'
 import { Soknad } from '../../../types/types'
+import { tekst } from '../../../utils/tekster'
 import { getUrlTilSoknad } from '../../../utils/url-utils'
 
 interface EldreUsendtSoknadProps {
@@ -14,8 +15,7 @@ export const EldreUsendtSoknad = ({ eldreSoknad }: EldreUsendtSoknadProps) => {
 
     return (
         <AlertStripe type={'info'}>
-            OBS: Du har en eldre søknad som du må fylle ut først. <Link to={getUrlTilSoknad(eldreSoknad)}>
-            Gå til den eldste søknaden
+            {tekst('eldre.usendt.alert')} <Link to={getUrlTilSoknad(eldreSoknad)}> {tekst('eldre.usendt.gaa-til')}
             </Link>
         </AlertStripe>
     )
@@ -31,8 +31,6 @@ export function harEldreUsendtSoknad(valgtSoknad: Soknad, soknader: Soknad[]): S
         .filter((s => s.fom! < valgtSoknad.fom!))
         .sort((a, b) => a.fom!.getMilliseconds() - b.fom!.getMilliseconds())
         .find((s) => s.id != valgtSoknad.id)
-
-
 }
 
 
