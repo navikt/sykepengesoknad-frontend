@@ -1,7 +1,4 @@
-import './eldre-usendt-soknad.less'
-
-import { AlertStripeAdvarsel } from 'nav-frontend-alertstriper'
-import { Knapp } from 'nav-frontend-knapper'
+import AlertStripe from 'nav-frontend-alertstriper'
 import React from 'react'
 import { Link } from 'react-router-dom'
 
@@ -16,19 +13,11 @@ interface EldreUsendtSoknadProps {
 export const EldreUsendtSoknad = ({ eldreSoknad }: EldreUsendtSoknadProps) => {
 
     return (
-        <div className="eldre_usendt">
-            <AlertStripeAdvarsel>
-                Du har en eldre usendt søknad som må fylles ut før du fyller ut denne
-            </AlertStripeAdvarsel>
-
-            <div className="knapperad">
-                <Link to={getUrlTilSoknad(eldreSoknad)}>
-
-                    <Knapp type="hoved">Gå til eldre søknad</Knapp>
-                </Link>
-
-            </div>
-        </div>
+        <AlertStripe type={'info'}>
+            OBS: Du har en eldre søknad som du må fylle ut først. <Link to={getUrlTilSoknad(eldreSoknad)}>
+            Gå til den eldste søknaden
+            </Link>
+        </AlertStripe>
     )
 }
 
