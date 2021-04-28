@@ -13,7 +13,7 @@ describe('Tester gjenoppretting av søknad', () => {
 
     it('Avbrutt søknad har forventa tekst', function() {
         cy.get(`#soknader-sendt article[aria-labelledby*=${avbruttSoknad.id}]`)
-            .should('include.text', '20. mai – 5. juni 2020')
+            .should('include.text', '1. – 24. april')
             .should('include.text', 'Avbrutt av deg')
 
     })

@@ -1358,8 +1358,8 @@ export const syk3: Sykmelding = {
     'mulighetForArbeid': {
         'perioder': [
             {
-                'fom': '2020-01-10',
-                'tom': '2020-01-20',
+                'fom': '2020-04-01',
+                'tom': '2020-04-10',
                 'grad': 100,
                 'behandlingsdager': null,
                 'reisetilskudd': null,
@@ -1490,8 +1490,8 @@ export const syk4: Sykmelding = {
     'mulighetForArbeid': {
         'perioder': [
             {
-                'fom': '2020-01-06',
-                'tom': '2020-01-20',
+                'fom': '2020-04-01',
+                'tom': '2020-04-16',
                 'grad': 100,
                 'behandlingsdager': null,
                 'reisetilskudd': null,
@@ -1754,8 +1754,8 @@ export const syk7: Sykmelding = {
     'mulighetForArbeid': {
         'perioder': [
             {
-                'fom': '2020-01-10',
-                'tom': '2020-01-25',
+                'fom': '2020-04-01',
+                'tom': '2020-04-16',
                 'grad': 100,
                 'behandlingsdager': null,
                 'reisetilskudd': null,
@@ -1886,8 +1886,8 @@ export const syk8: Sykmelding = {
     'mulighetForArbeid': {
         'perioder': [
             {
-                'fom': '2020-02-01',
-                'tom': '2020-02-05',
+                'fom': '2020-04-01',
+                'tom': '2020-04-05',
                 'grad': 100,
                 'behandlingsdager': null,
                 'reisetilskudd': null,

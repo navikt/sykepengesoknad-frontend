@@ -30,7 +30,7 @@ const Arbeidstaker = () => {
     useEffect(() => {
         settRiktigKvitteringTekst()
         // eslint-disable-next-line
-    }, [ valgtSoknad?.sendtTilNAVDato ])
+    }, [valgtSoknad?.sendtTilNAVDato])
 
     if (!valgtSoknad) return null
 
