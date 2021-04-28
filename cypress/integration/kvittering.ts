@@ -68,7 +68,7 @@ describe('Tester kvittering', () => {
         })
 
         it('Etter 30 dager', () => {
-            cy.get(`#soknader-sendt article[aria-labelledby*=${sendtArbeidsledigKvittering.id}]`).click()
+            cy.get(`#soknader-sendt article[aria-labelledby*=${sendtArbeidsledigKvittering.id}]`).click({ force: true })
 
             cy.url().should('include', `/kvittering/${sendtArbeidsledigKvittering.id}`)
 

@@ -39,7 +39,7 @@ describe('Tester sortering av søknader', () => {
             const soknader = articleTilSoknad(articles)
             let forrigeSoknad = soknader[0]
             soknader.forEach((sok: Soknad) => {
-                assert.isTrue(getTomFraSoknad(sok).getTime() <= getTomFraSoknad(forrigeSoknad).getTime())
+                assert.isTrue(getTomFraSoknad(forrigeSoknad).getTime() <= getTomFraSoknad(sok).getTime())
                 forrigeSoknad = sok
             })
         })
