@@ -216,7 +216,7 @@ describe('Tester feilmeldinger', () => {
     })
 
     it('TALL grad feilmelding går bort', () => {
-        cy.focused().clear().type('50')
+        cy.focused().clear().type('67.5')
         ingenFeilmeldinger()
     })
 

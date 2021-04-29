@@ -87,9 +87,9 @@ const useValiderArbeidsgrad = (sporsmal: Sporsmal) => {
             ? sykedagerForArbeidstakere()
             : sykedagerForFrilansere()
 
-
         const dagerIPeriode = faktiskeSykedager.length
-        const uker = dagerIPeriode / 7
+
+        const uker = dagerIPeriode / 5
 
         return faktiskTimer / uker / timerPerUke
     }
