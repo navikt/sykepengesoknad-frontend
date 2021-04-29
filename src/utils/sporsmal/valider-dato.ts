@@ -12,7 +12,6 @@ const validerDato = (sporsmal: Sporsmal, values: Record<string, any>) => {
     const valgtDato = fraBackendTilDate(formDato)
     // Formattering er riktig når dato er skrevet inn manuelt
 
-    console.log('formDato', formDato) // eslint-disable-line
     if (!valgtDato) return 'Datoen følger ikke formatet dd.mm.åååå'
     // Grenseverdier
     if (sporsmal.min && valgtDato < fraBackendTilDate(sporsmal.min)!) {

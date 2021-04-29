@@ -27,7 +27,6 @@ const DatoInput = ({ sporsmal }: SpmProps) => {
             knapperad.removeAttribute('style')
         }
     })
-    console.log('fraBackendTilDato()', fraBackendTilDate('2020-04-21')) // eslint-disable-line
 
     return (
         <div ref={mutationRef} className="dato-komp">
