@@ -65,7 +65,7 @@ export const sorterEtterStatus = (soknad1: Soknad, soknad2: Soknad) => {
 export const sorterEtterPerioder = (soknad1: Soknad, soknad2: Soknad) => {
     const tom1 = getTomFraSoknad(soknad1)
     const tom2 = getTomFraSoknad(soknad2)
-    return tom2.getTime() - tom1.getTime()
+    return tom1.getTime() - tom2.getTime()
 }
 
 export const sorterEtterOpprettetDato = (soknad1: Soknad, soknad2: Soknad) => {

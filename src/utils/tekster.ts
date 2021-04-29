@@ -1,4 +1,5 @@
 import BannerTekster from '../components/banner/banner-tekster'
+import EldreUsendtTekster from '../components/eldre-usendt-soknad/eldre-usendt-soknad-tekster'
 import DragAndDropTekster from '../components/filopplaster/drag-and-drop/drag-and-drop-tekster'
 import FilListeTekster from '../components/filopplaster/fil-liste/fil-liste-tekster'
 import OpplastingTekster from '../components/filopplaster/kvittering-modal/opplasting-tekster'
@@ -39,6 +40,7 @@ const tekster = {
     ...DragAndDropTekster,
     ...OpplastingTekster,
     ...SparTidTekster,
+    ...EldreUsendtTekster,
 }
 
 export const tekst = (tekst: keyof typeof tekster): string => {

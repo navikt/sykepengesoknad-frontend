@@ -9,6 +9,7 @@ import { Link, useHistory, useParams } from 'react-router-dom'
 import { RouteParams } from '../../app'
 import Banner from '../../components/banner/banner'
 import Brodsmuler from '../../components/brodsmuler/brodsmuler'
+import { EldreUsendtSoknad, harEldreUsendtSoknad } from '../../components/eldre-usendt-soknad/eldre-usendt-soknad'
 import { hentHotjarJsTrigger, HotjarTrigger } from '../../components/hotjar-trigger'
 import OmReisetilskudd from '../../components/om-reisetilskudd/om-reisetilskudd'
 import Opplysninger from '../../components/opplysninger-fra-sykmelding/opplysninger'
@@ -77,7 +78,7 @@ const Soknaden = () => {
 export default Soknaden
 
 const Fordeling = () => {
-    const { valgtSoknad } = useAppStore()
+    const { valgtSoknad, soknader } = useAppStore()
     const { stegId } = useParams<RouteParams>()
     const stegNo = parseInt(stegId)
     const history = useHistory()
@@ -98,7 +99,11 @@ const Fordeling = () => {
     switch (valgtSoknad.status) {
         // Nye søknader
         case RSSoknadstatus.NY:
-        case RSSoknadstatus.UTKAST_TIL_KORRIGERING:
+        case RSSoknadstatus.UTKAST_TIL_KORRIGERING: {
+            const eldreUsendtSoknad = harEldreUsendtSoknad(valgtSoknad, soknader)
+            if (eldreUsendtSoknad != null) {
+                return (<EldreUsendtSoknad eldreSoknad={eldreUsendtSoknad} />)
+            }
             return (
                 <>
                     <Vis hvis={valgtSoknad.status === RSSoknadstatus.UTKAST_TIL_KORRIGERING}
@@ -142,7 +147,7 @@ const Fordeling = () => {
                     <SporsmalForm />
                 </>
             )
-
+        }
         // Tidligere søknader
         case RSSoknadstatus.AVBRUTT:
             return (

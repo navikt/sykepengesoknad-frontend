@@ -14,7 +14,7 @@ import {
     arbeidstakerInnenforArbeidsgiverperiodeKvittering,
     arbeidstakerMedOppholdForsteUtenforArbeidsgiverperiodeKvittering,
     arbeidstakerUtenforArbeidsgiverperiodeKvittering,
-    arbeidstakerUtenOppholdForsteUtenforArbeidsgiverperiodeKvittering,
+    arbeidstakerUtenOppholdForsteUtenforArbeidsgiverperiodeKvittering, foranArbeidstakerMedOppholdKvittering,
     sok6,
     soknaderIntegration,
     soknadSomTriggerFeilStatusForOppdaterSporsmal,
@@ -90,6 +90,7 @@ mock.post(`${env.flexGatewayRoot}/syfosoknad/api/soknader/:soknad/finnMottaker`,
             soknadId === arbeidstakerUtenforArbeidsgiverperiodeKvittering.id ||
             soknadId === arbeidstakerDeltPeriodeForsteUtenforArbeidsgiverperiodeKvittering.id ||
             soknadId === arbeidstakerUtenOppholdForsteUtenforArbeidsgiverperiodeKvittering.id ||
+            soknadId === foranArbeidstakerMedOppholdKvittering.id ||
             soknadId === arbeidstakerMedOppholdForsteUtenforArbeidsgiverperiodeKvittering.id) {
             return res(ctx.json({ mottaker: RSMottaker.ARBEIDSGIVER_OG_NAV }))
         }

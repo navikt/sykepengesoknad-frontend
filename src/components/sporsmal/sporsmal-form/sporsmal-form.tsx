@@ -40,7 +40,16 @@ export interface SpmProps {
 }
 
 const SporsmalForm = () => {
-    const { soknader, setSoknader, setValgtSoknad, valgtSoknad, mottaker, setTop, setMottaker, setFeilState } = useAppStore()
+    const {
+        soknader,
+        setSoknader,
+        setValgtSoknad,
+        valgtSoknad,
+        mottaker,
+        setTop,
+        setMottaker,
+        setFeilState
+    } = useAppStore()
     const { logEvent } = useAmplitudeInstance()
     const [ erSiste, setErSiste ] = useState<boolean>(false)
     const [ poster, setPoster ] = useState<boolean>(false)
@@ -57,7 +66,7 @@ const SporsmalForm = () => {
     useEffect(() => {
         methods.reset(hentFormState(sporsmal))
         // eslint-disable-next-line
-    }, [ sporsmal ])
+    }, [sporsmal])
 
     useEffect(() => {
         function erSiste() {
@@ -72,7 +81,7 @@ const SporsmalForm = () => {
         setErSiste(sisteSide)
         if (sisteSide) hentMottaker()
         // eslint-disable-next-line
-    }, [ spmIndex ])
+    }, [spmIndex])
 
     const sendOppdaterSporsmal = async() => {
         let soknad = valgtSoknad
@@ -238,6 +247,7 @@ const SporsmalForm = () => {
             setPoster(false)
         }
     }
+
 
     return (
         <FormProvider {...methods}>
