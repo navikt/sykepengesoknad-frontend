@@ -106,6 +106,17 @@ describe('Tester feilmeldinger', () => {
         )
     })
 
+    it('DATO ugyldig format', () => {
+        cy.get('.nav-datovelger__input').clear().type('2020')
+        gaVidere()
+        feilmeldingHandtering(
+            'Datoen følger ikke formatet dd.mm.åååå',
+            'Datoen følger ikke formatet dd.mm.åååå',
+            arbeidstakerGradert.sporsmal[2].undersporsmal[0].id
+        )
+    })
+
+
     it('PERIODER ingen fom', () => {
         gaTilSoknad(arbeidstakerGradert, '4')
         cy.get('input[value=JA]').click({ force: true })
