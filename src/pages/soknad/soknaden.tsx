@@ -92,11 +92,6 @@ const Fordeling = () => {
         return null
     }
 
-    const eldreUsendtSoknad = harEldreUsendtSoknad(valgtSoknad, soknader)
-    if (eldreUsendtSoknad != null) {
-        return (<EldreUsendtSoknad eldreSoknad={eldreUsendtSoknad} />)
-    }
-
     const tittel = tekst(hentNokkel(valgtSoknad!, stegNo) as any)
     const erUtlandssoknad = valgtSoknad.soknadstype === RSSoknadstype.OPPHOLD_UTLAND
     const erReisetilskuddsoknad = valgtSoknad.soknadstype === RSSoknadstype.REISETILSKUDD
@@ -104,7 +99,11 @@ const Fordeling = () => {
     switch (valgtSoknad.status) {
         // Nye søknader
         case RSSoknadstatus.NY:
-        case RSSoknadstatus.UTKAST_TIL_KORRIGERING:
+        case RSSoknadstatus.UTKAST_TIL_KORRIGERING: {
+            const eldreUsendtSoknad = harEldreUsendtSoknad(valgtSoknad, soknader)
+            if (eldreUsendtSoknad != null) {
+                return (<EldreUsendtSoknad eldreSoknad={eldreUsendtSoknad} />)
+            }
             return (
                 <>
                     <Vis hvis={valgtSoknad.status === RSSoknadstatus.UTKAST_TIL_KORRIGERING}
@@ -148,7 +147,7 @@ const Fordeling = () => {
                     <SporsmalForm />
                 </>
             )
-
+        }
         // Tidligere søknader
         case RSSoknadstatus.AVBRUTT:
             return (
