@@ -31,7 +31,6 @@ import { settSvar } from '../sett-svar'
 import SporsmalSwitch from '../sporsmal-switch'
 import { pathUtenSteg } from '../sporsmal-utils'
 import CheckboxPanel from '../typer/checkbox-panel'
-import { EldreUsendtSoknad, harEldreUsendtSoknad } from './eldre-usendt-soknad'
 import Knapperad from './knapperad'
 import SendesTil from './sendes-til'
 import skalViseKnapperad from './skal-vise-knapperad'
@@ -249,10 +248,6 @@ const SporsmalForm = () => {
         }
     }
 
-    const eldreUsendtSoknad = harEldreUsendtSoknad(valgtSoknad!, soknader)
-    if (eldreUsendtSoknad != null) {
-        return (<EldreUsendtSoknad eldreSoknad={eldreUsendtSoknad} />)
-    }
 
     return (
         <FormProvider {...methods}>

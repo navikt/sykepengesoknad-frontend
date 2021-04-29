@@ -2,10 +2,10 @@ import AlertStripe from 'nav-frontend-alertstriper'
 import React from 'react'
 import { Link } from 'react-router-dom'
 
-import { RSSoknadstatus } from '../../../types/rs-types/rs-soknadstatus'
-import { Soknad } from '../../../types/types'
-import { tekst } from '../../../utils/tekster'
-import { getUrlTilSoknad } from '../../../utils/url-utils'
+import { RSSoknadstatus } from '../../types/rs-types/rs-soknadstatus'
+import { Soknad } from '../../types/types'
+import { tekst } from '../../utils/tekster'
+import { getUrlTilSoknad } from '../../utils/url-utils'
 
 interface EldreUsendtSoknadProps {
     eldreSoknad: Soknad;
@@ -14,7 +14,7 @@ interface EldreUsendtSoknadProps {
 export const EldreUsendtSoknad = ({ eldreSoknad }: EldreUsendtSoknadProps) => {
 
     return (
-        <AlertStripe type={'info'}>
+        <AlertStripe type={'advarsel'}>
             {tekst('eldre.usendt.alert')} <Link to={getUrlTilSoknad(eldreSoknad)}> {tekst('eldre.usendt.gaa-til')}
             </Link>
         </AlertStripe>
