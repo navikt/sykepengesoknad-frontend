@@ -40,9 +40,9 @@ export const validerFom = ( sporsmal: Sporsmal, id: string, values: Record<strin
 
     const valgtPeriode = { fom: fraBackendTilDate(formPeriode.fom), tom: fraBackendTilDate(formPeriode.tom) } as Periode
     // Formattering er riktig når dato er skrevet inn manuelt
-    if (isNaN(valgtPeriode.fom.getTime())) return 'Fra og med følger ikke formatet dd.mm.åååå'
+    if (!valgtPeriode.fom) return 'Fra og med følger ikke formatet dd.mm.åååå'
     // Grenseverdier
-    if (sporsmal.min && valgtPeriode.fom < fraBackendTilDate(sporsmal.min)) {
+    if (sporsmal.min && valgtPeriode.fom < fraBackendTilDate(sporsmal.min)!) {
         return 'Fra og med kan ikke være før ' + dayjs(sporsmal.min).format('DD.MM.YYYY')
     }
     if (valgtPeriode.fom > valgtPeriode.tom) return 'Fra og med må være før til og med'
@@ -57,9 +57,9 @@ export const validerTom = ( sporsmal: Sporsmal, id: string, values: Record<strin
 
     const valgtPeriode = { fom: fraBackendTilDate(formPeriode.fom), tom: fraBackendTilDate(formPeriode.tom) } as Periode
     // Formattering er riktig når dato er skrevet inn manuelt
-    if (isNaN(valgtPeriode.tom.getTime())) return 'Til og med følger ikke formatet dd.mm.åååå'
+    if (!valgtPeriode.tom) return 'Til og med følger ikke formatet dd.mm.åååå'
     // Grenseverdier
-    if (sporsmal.max && valgtPeriode.tom > fraBackendTilDate(sporsmal.max)) {
+    if (sporsmal.max && valgtPeriode.tom > fraBackendTilDate(sporsmal.max)!) {
         return 'Til og med kan ikke være etter ' + dayjs(sporsmal.max).format('DD.MM.YYYY')
     }
     if (valgtPeriode.fom > valgtPeriode.tom) return 'Til og med må være etter fra og med'

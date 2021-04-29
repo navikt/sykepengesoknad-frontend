@@ -27,6 +27,7 @@ const DatoInput = ({ sporsmal }: SpmProps) => {
             knapperad.removeAttribute('style')
         }
     })
+    console.log('fraBackendTilDato()', fraBackendTilDate('2020-04-21')) // eslint-disable-line
 
     return (
         <div ref={mutationRef} className="dato-komp">
@@ -70,7 +71,7 @@ const DatoInput = ({ sporsmal }: SpmProps) => {
                             maxDate: sporsmal.max || undefined
                         }}
                         dayPickerProps={{
-                            initialMonth: fraBackendTilDate(sporsmal.max!)
+                            initialMonth: fraBackendTilDate('2020-04-01')
                         }}
                     />
                 )}
