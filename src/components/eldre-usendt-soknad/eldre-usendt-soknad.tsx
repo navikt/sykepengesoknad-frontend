@@ -6,16 +6,20 @@ import { RSSoknadstatus } from '../../types/rs-types/rs-soknadstatus'
 import { Soknad } from '../../types/types'
 import { tekst } from '../../utils/tekster'
 import { getUrlTilSoknad } from '../../utils/url-utils'
+import { useAmplitudeInstance } from '../amplitude/amplitude'
 
 interface EldreUsendtSoknadProps {
     eldreSoknad: Soknad;
 }
 
 export const EldreUsendtSoknad = ({ eldreSoknad }: EldreUsendtSoknadProps) => {
+    const { logEvent } = useAmplitudeInstance()
 
     return (
         <AlertStripe type={'advarsel'}>
-            {tekst('eldre.usendt.alert')} <Link to={getUrlTilSoknad(eldreSoknad)}> {tekst('eldre.usendt.gaa-til')}
+            {tekst('eldre.usendt.alert')} <Link onClick={() => {
+                logEvent('navigere', { lenketekst: tekst('eldre.usendt.gaa-til') })
+            }} to={getUrlTilSoknad(eldreSoknad)}> {tekst('eldre.usendt.gaa-til')}
             </Link>
         </AlertStripe>
     )
