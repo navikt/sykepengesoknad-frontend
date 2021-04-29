@@ -90,7 +90,6 @@ const useValiderArbeidsgrad = (sporsmal: Sporsmal) => {
         const dagerIPeriode = faktiskeSykedager.length
 
         const uker = dagerIPeriode / 5
-        console.log('dagerIPeriode', dagerIPeriode) // eslint-disable-line
 
         return faktiskTimer / uker / timerPerUke
     }
