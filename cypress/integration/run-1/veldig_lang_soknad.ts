@@ -1,5 +1,5 @@
-import { veldigLangSoknad } from '../../src/data/mock/data/soknader-integration'
-import { Soknad } from '../../src/types/types'
+import { veldigLangSoknad } from '../../../src/data/mock/data/soknader-integration'
+import { Soknad } from '../../../src/types/types'
 
 describe('Tester støtte for gamle spørsmål', () => {
     //-----

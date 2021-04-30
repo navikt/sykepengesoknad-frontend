@@ -1,4 +1,4 @@
-import { fremtidigSoknad } from '../../src/data/mock/data/soknader-opplaering'
+import { fremtidigSoknad } from '../../../src/data/mock/data/soknader-opplaering'
 
 describe('Tester fremtidig søknad', () => {
 

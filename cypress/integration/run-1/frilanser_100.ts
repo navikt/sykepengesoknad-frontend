@@ -1,4 +1,4 @@
-import { frilanser } from '../../src/data/mock/data/soknader-opplaering'
+import { frilanser } from '../../../src/data/mock/data/soknader-opplaering'
 
 describe('Tester frilansersøknad', () => {
     //-----
