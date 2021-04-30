@@ -70,7 +70,7 @@ const DatoInput = ({ sporsmal }: SpmProps) => {
                             maxDate: sporsmal.max || undefined
                         }}
                         dayPickerProps={{
-                            initialMonth: fraBackendTilDate('2020-04-01')
+                            initialMonth: fraBackendTilDate(sporsmal.max!)
                         }}
                     />
                 )}
