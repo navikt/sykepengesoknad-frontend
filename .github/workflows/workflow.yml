@@ -80,7 +80,7 @@ jobs:
       fail-fast: false
       matrix:
         # run copies of the current job in parallel
-        containers: [ 0, 1 ]
+        containers: [ 0, 1, 2, 3 ]
     steps:
       - name: Checkout code
         uses: actions/checkout@v2
