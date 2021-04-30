@@ -8,6 +8,7 @@ import { Link } from 'react-router-dom'
 
 import { Brodsmule } from '../../types/types'
 import env from '../../utils/environment'
+import { useAmplitudeInstance } from '../amplitude/amplitude'
 import Vis from '../vis'
 import personIkon from './person.svg'
 
@@ -19,12 +20,16 @@ const faste: Brodsmule[] = [
 ]
 
 const BrodsmuleBit = ({ sti, tittel, erKlikkbar }: Brodsmule) => {
+    const { logEvent } = useAmplitudeInstance()
+
     const erEkstern = sti && (sti.startsWith('https://') || sti.startsWith('http://'))
 
     const link = erEkstern
         ? <Lenke href={sti}>{tittel}</Lenke>
         : sti
-            ? <Link to={sti} className="lenke">{tittel}</Link>
+            ? <Link to={sti} className="lenke" onClick={() => {
+                logEvent('navigere', { lenketekst: tittel })
+            }}>{tittel}</Link>
             : <span>{tittel}</span>
 
     if (!erKlikkbar) {
@@ -63,7 +68,7 @@ const Brodsmuler = ({ brodsmuler }: BrodsmulerProps) => {
         })
         setSynlige(skjerm <= LITEN ? [ brodsmuler[brodsmuler.length - 1] ] : brodsmuler)
         // eslint-disable-next-line
-    }, [ skjerm ])
+    }, [skjerm])
 
     const toggleSynlige = () => {
         if (synlige.length === brodsmuler.length) {
@@ -91,7 +96,7 @@ const Brodsmuler = ({ brodsmuler }: BrodsmulerProps) => {
                                     className="js-toggle"
                                     onClick={toggleSynlige}
                                 >
-                                    ...
+                                     ...
                                 </button>
                             </li>
                         }
