@@ -67,20 +67,25 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v2
-      #- name: Setup kernel for react native, increase watchers
-      #  run: echo fs.inotify.max_user_watches=524288 | sudo tee -a /etc/sysctl.conf && sudo sysctl -p
       - name: Install cypress & npm
         uses: cypress-io/github-action@v2
         with:
           runTests: false
 
-  integrasjonstest-run-0:
-    name: Integrasjonstest run 0
+  integrasjonstest-run:
+    name: Integrasjonstest run
     needs: integrasjonstest-install
     runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        # run copies of the current job in parallel
+        containers: [ 0, 1 ]
     steps:
       - name: Checkout code
         uses: actions/checkout@v2
+      - name: Setup kernel for react native, increase watchers
+        run: echo fs.inotify.max_user_watches=524288 | sudo tee -a /etc/sysctl.conf && sudo sysctl -p
       # download cached ~/.npm and ~/.cache/Cypress
       # and install node_modules and run tests
       - name: Run cypress
@@ -88,6 +93,7 @@ jobs:
         with:
           start: npm run start-mock
           wait-on: http://localhost:8080
+          spec: cypress/integration/run-${{ matrix.containers }}/**
       - uses: actions/upload-artifact@v2
         if: ${{ always() }}
         with:
