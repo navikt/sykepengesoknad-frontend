@@ -1,5 +1,5 @@
-import { soknaderOpplaering as soknader } from '../../src/data/mock/data/soknader-opplaering'
-import { RSSoknad } from '../../src/types/rs-types/rs-soknad'
+import { soknaderOpplaering as soknader } from '../../../src/data/mock/data/soknader-opplaering'
+import { RSSoknad } from '../../../src/types/rs-types/rs-soknad'
 
 describe('Tester søknad om å beholde sykepenger utenfor EØS', () => {
 

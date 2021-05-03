@@ -1,4 +1,4 @@
-import { avbruttSoknad } from '../../src/data/mock/data/soknader-integration'
+import { avbruttSoknad } from '../../../src/data/mock/data/soknader-integration'
 
 describe('Tester gjenoppretting av søknad', () => {
 

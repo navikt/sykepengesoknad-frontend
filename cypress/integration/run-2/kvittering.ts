@@ -10,7 +10,7 @@ import {
     oppholdUtlandKvittering,
     selvstendigKvittering,
     sendtArbeidsledigKvittering,
-} from '../../src/data/mock/data/soknader-integration'
+} from '../../../src/data/mock/data/soknader-integration'
 
 describe('Tester kvittering', () => {
 

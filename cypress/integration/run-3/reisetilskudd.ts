@@ -1,4 +1,4 @@
-import { nyttReisetilskudd } from '../../src/data/mock/data/reisetilskudd'
+import { nyttReisetilskudd } from '../../../src/data/mock/data/reisetilskudd'
 
 describe('Teste førsteside i reisetilskuddsøknaden', () => {
 

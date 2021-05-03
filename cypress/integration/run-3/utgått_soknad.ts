@@ -1,4 +1,4 @@
-import { utgattSoknad } from '../../src/data/mock/data/soknader-integration'
+import { utgattSoknad } from '../../../src/data/mock/data/soknader-integration'
 
 describe('Tester sendt søknad', () => {
 

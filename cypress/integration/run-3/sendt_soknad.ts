@@ -1,4 +1,4 @@
-import { sendtArbeidsledig } from '../../src/data/mock/data/soknader-integration'
+import { sendtArbeidsledig } from '../../../src/data/mock/data/soknader-integration'
 
 describe('Tester sendt søknad', () => {
 

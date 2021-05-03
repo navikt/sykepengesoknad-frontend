@@ -1,7 +1,7 @@
 import {
     soknadSomTriggerFeilStatusForOppdaterSporsmal,
     soknadSomTriggerSporsmalFinnesIkkeISoknad
-} from '../../src/data/mock/data/soknader-integration'
+} from '../../../src/data/mock/data/soknader-integration'
 
 describe('Tester feilsituasjoner ', () => {
 

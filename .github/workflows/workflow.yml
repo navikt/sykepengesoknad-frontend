@@ -61,31 +61,40 @@ jobs:
           docker build . -f Dockerfile.syksykepengesoknad -t ${IMAGE_SYK_SYKEPENGESOKNAD}
           docker push ${IMAGE_SYK_SYKEPENGESOKNAD}
 
-  integrasjonstest:
-    name: Integrasjonstest
+  integrasjonstest-install:
+    name: Integrasjonstest install
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
-        uses: actions/checkout@v1
+        uses: actions/checkout@v2
+      - name: Install cypress & npm
+        uses: cypress-io/github-action@v2
+        with:
+          runTests: false
+
+  integrasjonstest-run:
+    name: Integrasjonstest run
+    needs: integrasjonstest-install
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        # run copies of the current job in parallel
+        containers: [ 0, 1, 2, 3 ]
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
       - name: Setup kernel for react native, increase watchers
         run: echo fs.inotify.max_user_watches=524288 | sudo tee -a /etc/sysctl.conf && sudo sysctl -p
-      - name: Cache Cypress binary
-        uses: actions/cache@v1
-        with:
-          path: ~/.cache/Cypress
-          key: cypress-${{ runner.os }}-cypress-${{ hashFiles('**/package.json') }}
-          restore-keys: |
-            cypress-${{ runner.os }}-cypress-
-      - name: Install npm dependencies
-        run: npm ci
+      # download cached ~/.npm and ~/.cache/Cypress
+      # and install node_modules and run tests
       - name: Run cypress
         uses: cypress-io/github-action@v2
         with:
-          install: false
-          record: false
           start: npm run start-mock
           wait-on: http://localhost:8080
-      - uses: actions/upload-artifact@v1
+          spec: cypress/integration/run-${{ matrix.containers }}/**
+      - uses: actions/upload-artifact@v2
         if: ${{ always() }}
         with:
           name: cypress-screenshots
@@ -96,7 +105,7 @@ jobs:
     if: github.ref == 'refs/heads/master' || startsWith(github.ref, 'refs/heads/dev-')
     name: Deploy sykepengesoknad to q1-sbs (Q1)
     runs-on: ubuntu-latest
-    needs: [build-and-publish, integrasjonstest]
+    needs: [build-and-publish, integrasjonstest-run]
     steps:
       - name: Checkout code
         uses: actions/checkout@v1
@@ -114,10 +123,11 @@ jobs:
           CLUSTER: dev-sbs
           RESOURCE: nais-q1.yaml
 
+
   deploy-to-q1-dev-gcp:
     if: github.ref == 'refs/heads/master' || startsWith(github.ref, 'refs/heads/dev-')
     name: Deploy to q1 dev-gcp
-    needs: [build-and-publish, integrasjonstest]
+    needs: [build-and-publish, integrasjonstest-run]
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v1
@@ -133,6 +143,7 @@ jobs:
           APIKEY: ${{ secrets.NAIS_DEPLOY_APIKEY }}
           CLUSTER: dev-gcp
           RESOURCE: nais-dev-gcp.yaml
+
 
   deploy-to-labs-gcp:
     if: github.ref == 'refs/heads/master' || startsWith(github.ref, 'refs/heads/dev-')
@@ -154,10 +165,11 @@ jobs:
           CLUSTER: labs-gcp
           RESOURCE: nais-labs.yaml
 
+
   deploy-to-prod-sbs:
     if: github.ref == 'refs/heads/master'
     name: Deploy to production
-    needs: [build-and-publish, integrasjonstest]
+    needs: [build-and-publish, integrasjonstest-run]
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v1
@@ -174,11 +186,12 @@ jobs:
           CLUSTER: prod-sbs
           RESOURCE: nais-prod.yaml
 
+
   tag-image-as-latest:
     if: github.ref == 'refs/heads/master'
     name: Tag dockerimage as latest
     runs-on: ubuntu-latest
-    needs: [build-and-publish, integrasjonstest]
+    needs: [build-and-publish, integrasjonstest-run]
     steps:
       - name: Last ned versjon
         uses: actions/download-artifact@v1

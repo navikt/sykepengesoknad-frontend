@@ -1,4 +1,4 @@
-import { delvisUtfylltArbeidsledig } from '../../src/data/mock/data/soknader-integration'
+import { delvisUtfylltArbeidsledig } from '../../../src/data/mock/data/soknader-integration'
 
 describe('Tester delvis utfylt søknad', () => {
 

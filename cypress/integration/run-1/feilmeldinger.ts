@@ -1,5 +1,5 @@
-import { arbeidstakerGradert } from '../../src/data/mock/data/soknader-opplaering'
-import { RSSoknad } from '../../src/types/rs-types/rs-soknad'
+import { arbeidstakerGradert } from '../../../src/data/mock/data/soknader-opplaering'
+import { RSSoknad } from '../../../src/types/rs-types/rs-soknad'
 
 describe('Tester feilmeldinger', () => {
     function gaTilSoknad(soknad: RSSoknad, steg: string) {

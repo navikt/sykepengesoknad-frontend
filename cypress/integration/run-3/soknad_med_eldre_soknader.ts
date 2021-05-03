@@ -1,4 +1,4 @@
-import { behandlingsdager, nySoknadSomIkkeKanFyllesUt } from '../../src/data/mock/data/soknader-opplaering'
+import { behandlingsdager, nySoknadSomIkkeKanFyllesUt } from '../../../src/data/mock/data/soknader-opplaering'
 
 describe('Tester soknad med eldre søknader', () => {
 

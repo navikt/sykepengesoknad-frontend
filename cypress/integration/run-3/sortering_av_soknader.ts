@@ -1,7 +1,7 @@
-import { soknaderIntegration } from '../../src/data/mock/data/soknader-integration'
-import { soknaderOpplaering } from '../../src/data/mock/data/soknader-opplaering'
-import { Soknad } from '../../src/types/types'
-import { getTomFraSoknad, senesteSendtDato } from '../../src/utils/sorter-soknader'
+import { soknaderIntegration } from '../../../src/data/mock/data/soknader-integration'
+import { soknaderOpplaering } from '../../../src/data/mock/data/soknader-opplaering'
+import { Soknad } from '../../../src/types/types'
+import { getTomFraSoknad, senesteSendtDato } from '../../../src/utils/sorter-soknader'
 
 const articleTilSoknad = (articles: any) => {
     const soknader: Soknad[] = []
