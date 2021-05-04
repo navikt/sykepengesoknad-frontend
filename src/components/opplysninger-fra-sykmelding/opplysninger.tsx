@@ -1,11 +1,7 @@
 import './opplysninger.less'
 
-import React, { useEffect, useState } from 'react'
-import { useParams } from 'react-router-dom'
+import React from 'react'
 
-import { RouteParams } from '../../app'
-import { useAppStore } from '../../data/stores/app-store'
-import { RSSoknadstatus } from '../../types/rs-types/rs-soknadstatus'
 import { tekst } from '../../utils/tekster'
 import Utvidbar from '../utvidbar/utvidbar'
 import ArbeidsgiverInfo from './arbeidsgiver-info'
@@ -22,24 +18,14 @@ interface OpplysningerProps {
 }
 
 const Opplysninger = ({ ekspandert }: OpplysningerProps) => {
-    const valgtSoknad = useAppStore().valgtSoknad!
-    const [ apen, setApen ] = useState<boolean>(ekspandert)
-    const { stegId } = useParams<RouteParams>()
-
-    useEffect(() => {
-        const tidligere = valgtSoknad.status === RSSoknadstatus.SENDT
-        const stegNo = parseInt(stegId)
-        setApen(!tidligere && stegNo === 1)
-    }, [ valgtSoknad.status, stegId ])
 
     return (
-        <Utvidbar className={'ekspander' + (apen ? ' apen' : '')}
-            ikon={plaster} ikonHover={plasterHover} erApen={apen}
+        <Utvidbar className={'ekspander'}
+            ikon={plaster} ikonHover={plasterHover} erApen={ekspandert}
             tittel={tekst('sykepengesoknad.sykmelding-utdrag.tittel')}
             ikonAltTekst=""
         >
             <div className="opplysninger">
-                {apen}
                 <SykmeldingPerioder />
                 <ArbeidsgiverInfo />
                 <SykmeldingDato />

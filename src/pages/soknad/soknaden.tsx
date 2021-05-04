@@ -133,7 +133,7 @@ const Fordeling = () => {
                     />
 
                     <Vis hvis={!erUtlandssoknad}
-                        render={() => <Opplysninger ekspandert={true} />}
+                        render={() => <Opplysninger ekspandert={stegNo == 1} />}
                     />
 
                     <Vis hvis={stegNo === 1 && erReisetilskuddsoknad}
