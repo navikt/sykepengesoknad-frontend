@@ -38,6 +38,10 @@ const Knapperad = ({ onSubmit, poster }: KnapperadProps) => {
         }
     }, [ vilAvbryte ])
 
+    useEffect(() => {
+        setVilAvbryte(false)
+    },[ stegId ])
+
     const handleVilAvbryte = (event: Event) => {
         event.preventDefault()
         setVilAvbryte(!vilAvbryte)

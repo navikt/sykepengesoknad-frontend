@@ -36,7 +36,7 @@ const Utvidbar = (props: UtvidbarProps) => {
                 ? 3000
                 : innhold.current!.offsetHeight
         )
-    }, [ props.erApen, props.fixedHeight ])
+    }, [ props ])
 
     const onKlikk = () => {
         setErApen(!erApen)
