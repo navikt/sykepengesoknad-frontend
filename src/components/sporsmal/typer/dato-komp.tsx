@@ -17,15 +17,9 @@ const DatoInput = ({ sporsmal }: SpmProps) => {
     const watchDato = watch(sporsmal.id)
     const mutationRef = useRef<HTMLDivElement>(null)
 
-    useMutationObserver(mutationRef, (e) => {
-        const node: Node = e[1]?.addedNodes[0]
+    useMutationObserver(mutationRef, () => {
         const knapperad: any = document.querySelectorAll('.knapperad')[0]
-        if (node !== undefined) {
-            knapperad.style.zIndex = '-1'
-            knapperad.style.position = 'relative'
-        } else {
-            knapperad.removeAttribute('style')
-        }
+        knapperad.removeAttribute('style')
     })
 
     return (
