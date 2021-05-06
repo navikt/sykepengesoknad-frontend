@@ -41,15 +41,9 @@ const PeriodeKomp = ({ sporsmal, index, slettPeriode }: AllProps) => {
         // eslint-disable-next-line
     }, [ sporsmal, setValue ])
 
-    useMutationObserver(mutationRef, (e) => {
-        const node: Node = e[1]?.addedNodes[0]
+    useMutationObserver(mutationRef, () => {
         const knapperad: any = document.querySelectorAll('.knapperad')[0]
-        if (node !== undefined) {
-            knapperad.style.zIndex = '-1'
-            knapperad.style.position = 'relative'
-        } else {
-            knapperad.removeAttribute('style')
-        }
+        knapperad.removeAttribute('style')
     })
 
     const onChange = (fom?: string, tom?: string) => {
