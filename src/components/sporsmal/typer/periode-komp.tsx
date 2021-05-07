@@ -1,9 +1,8 @@
 import './periode-komp.less'
 
-import useMutationObserver from '@rooks/use-mutation-observer'
 import { Datepicker } from 'nav-datovelger'
 import { Normaltekst } from 'nav-frontend-typografi'
-import React, { useEffect, useRef, useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { Controller, useFormContext } from 'react-hook-form'
 
 import { skalBrukeFullskjermKalender } from '../../../utils/browser-utils'
@@ -32,7 +31,6 @@ const PeriodeKomp = ({ sporsmal, index, slettPeriode }: AllProps) => {
     const [ periode, setPeriode ] = useState<FormPeriode>({ fom: '', tom: '' })
     const id = sporsmal.id + '_' + index
     const feilmelding = hentFeilmelding(sporsmal, errors[id])
-    const mutationRef = useRef<HTMLDivElement>(null)
 
     useEffect(() => {
         const periode = hentPeriode(sporsmal, index)
@@ -40,11 +38,6 @@ const PeriodeKomp = ({ sporsmal, index, slettPeriode }: AllProps) => {
         setPeriode(periode)
         // eslint-disable-next-line
     }, [ sporsmal, setValue ])
-
-    useMutationObserver(mutationRef, () => {
-        const knapperad: any = document.querySelectorAll('.knapperad')[0]
-        knapperad.removeAttribute('style')
-    })
 
     const onChange = (fom?: string, tom?: string) => {
         const nyFom = fom ? fom : periode.fom
@@ -57,7 +50,7 @@ const PeriodeKomp = ({ sporsmal, index, slettPeriode }: AllProps) => {
 
     return (
         <li id={id}>
-            <div ref={mutationRef} className="periode">
+            <div className="periode">
                 <Controller
                     rules={{
                         validate: {
@@ -101,55 +94,59 @@ const PeriodeKomp = ({ sporsmal, index, slettPeriode }: AllProps) => {
                                 <label className="skjemaelement__label" htmlFor={name + '_fom'}>
                                     <Normaltekst tag="span">{tekst('sykepengesoknad.periodevelger.fom')}</Normaltekst>
                                 </label>
-                                <Datepicker
-                                    locale={'nb'}
-                                    inputId={name + '_fom'}
-                                    onChange={(value) => onChange(value, undefined)}
-                                    value={periode.fom}
-                                    inputProps={{
-                                        name: name + '_fom'
-                                    }}
-                                    calendarSettings={{
-                                        showWeekNumbers: true,
-                                        position: skalBrukeFullskjermKalender()
-                                    }}
-                                    showYearSelector={false}
-                                    limitations={{
-                                        weekendsNotSelectable: false,
-                                        minDate: sporsmal.min || undefined,
-                                        maxDate: sporsmal.max || undefined
-                                    }}
-                                    dayPickerProps={{
-                                        initialMonth: fraBackendTilDate(sporsmal.max!)
-                                    }}
-                                />
+                                <div className="on-top">
+                                    <Datepicker
+                                        locale={'nb'}
+                                        inputId={name + '_fom'}
+                                        onChange={(value) => onChange(value, undefined)}
+                                        value={periode.fom}
+                                        inputProps={{
+                                            name: name + '_fom'
+                                        }}
+                                        calendarSettings={{
+                                            showWeekNumbers: true,
+                                            position: skalBrukeFullskjermKalender()
+                                        }}
+                                        showYearSelector={false}
+                                        limitations={{
+                                            weekendsNotSelectable: false,
+                                            minDate: sporsmal.min || undefined,
+                                            maxDate: sporsmal.max || undefined
+                                        }}
+                                        dayPickerProps={{
+                                            initialMonth: fraBackendTilDate(sporsmal.max!)
+                                        }}
+                                    />
+                                </div>
                             </div>
                             <div className="tom skjemaelement">
                                 <label className="skjemaelement__label" htmlFor={name + '_tom'}>
                                     <Normaltekst tag="span">{tekst('sykepengesoknad.periodevelger.tom')}</Normaltekst>
                                 </label>
-                                <Datepicker
-                                    locale={'nb'}
-                                    inputId={name + '_tom'}
-                                    onChange={(value) => onChange(undefined, value)}
-                                    value={periode.tom}
-                                    inputProps={{
-                                        name: name + '_tom'
-                                    }}
-                                    calendarSettings={{
-                                        showWeekNumbers: true,
-                                        position: skalBrukeFullskjermKalender()
-                                    }}
-                                    showYearSelector={false}
-                                    limitations={{
-                                        weekendsNotSelectable: false,
-                                        minDate: sporsmal.min || undefined,
-                                        maxDate: sporsmal.max || undefined
-                                    }}
-                                    dayPickerProps={{
-                                        initialMonth: fraBackendTilDate(sporsmal.max!)
-                                    }}
-                                />
+                                <div className="on-top">
+                                    <Datepicker
+                                        locale={'nb'}
+                                        inputId={name + '_tom'}
+                                        onChange={(value) => onChange(undefined, value)}
+                                        value={periode.tom}
+                                        inputProps={{
+                                            name: name + '_tom'
+                                        }}
+                                        calendarSettings={{
+                                            showWeekNumbers: true,
+                                            position: skalBrukeFullskjermKalender()
+                                        }}
+                                        showYearSelector={false}
+                                        limitations={{
+                                            weekendsNotSelectable: false,
+                                            minDate: sporsmal.min || undefined,
+                                            maxDate: sporsmal.max || undefined
+                                        }}
+                                        dayPickerProps={{
+                                            initialMonth: fraBackendTilDate(sporsmal.max!)
+                                        }}
+                                    />
+                                </div>
                             </div>
                         </fieldset>
                     )}
