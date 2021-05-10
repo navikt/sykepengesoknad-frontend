@@ -203,7 +203,7 @@ jobs:
       - run: echo "LATEST=docker.pkg.github.com/${GITHUB_REPOSITORY}/$APP:latest" >> $GITHUB_ENV
       - name: Tag and push docker image
         env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_ACCESS_TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
           docker login docker.pkg.github.com -u ${GITHUB_REPOSITORY} -p ${GITHUB_TOKEN}
           docker pull ${IMAGE}
