@@ -45,7 +45,7 @@ export const nyttReisetilskudd: RSSoknad = {
         {
             'id': 'b59b2bea-1d4c-49e7-9e05-351aaf083232',
             'tag': 'TRANSPORT_TIL_DAGLIG',
-            'sporsmalstekst': 'Brukte du bil eller offentlig transport til og fra jobben?',
+            'sporsmalstekst': 'Brukte du bil eller offentlig transport til og fra jobben før du ble sykmeldt?',
             'undertekst': null,
             'svartype': 'JA_NEI',
             'min': null,
