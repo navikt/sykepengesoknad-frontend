@@ -94,59 +94,55 @@ const PeriodeKomp = ({ sporsmal, index, slettPeriode }: AllProps) => {
                                 <label className="skjemaelement__label" htmlFor={name + '_fom'}>
                                     <Normaltekst tag="span">{tekst('sykepengesoknad.periodevelger.fom')}</Normaltekst>
                                 </label>
-                                <div className="on-top">
-                                    <Datepicker
-                                        locale={'nb'}
-                                        inputId={name + '_fom'}
-                                        onChange={(value) => onChange(value, undefined)}
-                                        value={periode.fom}
-                                        inputProps={{
-                                            name: name + '_fom'
-                                        }}
-                                        calendarSettings={{
-                                            showWeekNumbers: true,
-                                            position: skalBrukeFullskjermKalender()
-                                        }}
-                                        showYearSelector={false}
-                                        limitations={{
-                                            weekendsNotSelectable: false,
-                                            minDate: sporsmal.min || undefined,
-                                            maxDate: sporsmal.max || undefined
-                                        }}
-                                        dayPickerProps={{
-                                            initialMonth: fraBackendTilDate(sporsmal.max!)
-                                        }}
-                                    />
-                                </div>
+                                <Datepicker
+                                    locale={'nb'}
+                                    inputId={name + '_fom'}
+                                    onChange={(value) => onChange(value, undefined)}
+                                    value={periode.fom}
+                                    inputProps={{
+                                        name: name + '_fom'
+                                    }}
+                                    calendarSettings={{
+                                        showWeekNumbers: true,
+                                        position: skalBrukeFullskjermKalender()
+                                    }}
+                                    showYearSelector={false}
+                                    limitations={{
+                                        weekendsNotSelectable: false,
+                                        minDate: sporsmal.min || undefined,
+                                        maxDate: sporsmal.max || undefined
+                                    }}
+                                    dayPickerProps={{
+                                        initialMonth: fraBackendTilDate(sporsmal.max!)
+                                    }}
+                                />
                             </div>
                             <div className="tom skjemaelement">
                                 <label className="skjemaelement__label" htmlFor={name + '_tom'}>
                                     <Normaltekst tag="span">{tekst('sykepengesoknad.periodevelger.tom')}</Normaltekst>
                                 </label>
-                                <div className="on-top">
-                                    <Datepicker
-                                        locale={'nb'}
-                                        inputId={name + '_tom'}
-                                        onChange={(value) => onChange(undefined, value)}
-                                        value={periode.tom}
-                                        inputProps={{
-                                            name: name + '_tom'
-                                        }}
-                                        calendarSettings={{
-                                            showWeekNumbers: true,
-                                            position: skalBrukeFullskjermKalender()
-                                        }}
-                                        showYearSelector={false}
-                                        limitations={{
-                                            weekendsNotSelectable: false,
-                                            minDate: sporsmal.min || undefined,
-                                            maxDate: sporsmal.max || undefined
-                                        }}
-                                        dayPickerProps={{
-                                            initialMonth: fraBackendTilDate(sporsmal.max!)
-                                        }}
-                                    />
-                                </div>
+                                <Datepicker
+                                    locale={'nb'}
+                                    inputId={name + '_tom'}
+                                    onChange={(value) => onChange(undefined, value)}
+                                    value={periode.tom}
+                                    inputProps={{
+                                        name: name + '_tom'
+                                    }}
+                                    calendarSettings={{
+                                        showWeekNumbers: true,
+                                        position: skalBrukeFullskjermKalender()
+                                    }}
+                                    showYearSelector={false}
+                                    limitations={{
+                                        weekendsNotSelectable: false,
+                                        minDate: sporsmal.min || undefined,
+                                        maxDate: sporsmal.max || undefined
+                                    }}
+                                    dayPickerProps={{
+                                        initialMonth: fraBackendTilDate(sporsmal.max!)
+                                    }}
+                                />
                             </div>
                         </fieldset>
                     )}
