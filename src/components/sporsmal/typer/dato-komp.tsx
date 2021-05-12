@@ -1,7 +1,6 @@
-import useMutationObserver from '@rooks/use-mutation-observer'
 import { Datepicker } from 'nav-datovelger'
 import { Element } from 'nav-frontend-typografi'
-import React, { useRef } from 'react'
+import React from 'react'
 import { Controller, useFormContext } from 'react-hook-form'
 
 import { skalBrukeFullskjermKalender } from '../../../utils/browser-utils'
@@ -15,21 +14,9 @@ import UndersporsmalListe from '../undersporsmal/undersporsmal-liste'
 const DatoInput = ({ sporsmal }: SpmProps) => {
     const { setValue, getValues, watch } = useFormContext()
     const watchDato = watch(sporsmal.id)
-    const mutationRef = useRef<HTMLDivElement>(null)
-
-    useMutationObserver(mutationRef, (e) => {
-        const node: Node = e[1]?.addedNodes[0]
-        const knapperad: any = document.querySelectorAll('.knapperad')[0]
-        if (node !== undefined) {
-            knapperad.style.zIndex = '-1'
-            knapperad.style.position = 'relative'
-        } else {
-            knapperad.removeAttribute('style')
-        }
-    })
 
     return (
-        <div ref={mutationRef} className="dato-komp">
+        <div className="dato-komp">
             <label className="skjema__sporsmal" htmlFor={sporsmal.id}>
                 <Element>{sporsmal.sporsmalstekst}</Element>
             </label>
