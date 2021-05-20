@@ -75,23 +75,9 @@ export const nyttReisetilskudd: RSSoknad = {
                             'min': null,
                             'max': null,
                             'pavirkerAndreSporsmal': false,
-                            'kriterieForVisningAvUndersporsmal': 'CHECKED',
+                            'kriterieForVisningAvUndersporsmal': null,
                             'svar': [],
-                            'undersporsmal': [
-                                {
-                                    'id': 'c56ca825-5993-4a13-bba7-29d592944b20',
-                                    'tag': 'KM_HJEM_JOBB',
-                                    'sporsmalstekst': 'Hvor mange km er kjøreturen mellom hjemmet ditt og jobben?',
-                                    'undertekst': 'km',
-                                    'svartype': 'KILOMETER',
-                                    'min': '0',
-                                    'max': null,
-                                    'pavirkerAndreSporsmal': false,
-                                    'kriterieForVisningAvUndersporsmal': null,
-                                    'svar': [],
-                                    'undersporsmal': []
-                                }
-                            ]
+                            'undersporsmal': []
                         },
                         {
                             'id': '96e7c69e-8af5-4b4d-ae10-1d3c19cc29e2',
@@ -172,6 +158,19 @@ export const nyttReisetilskudd: RSSoknad = {
                         'svar': [],
                         'undersporsmal': []
                     } ]
+                },
+                {
+                    'id': 'c56ca825-5993-4a13-bba7-29d592944b20',
+                    'tag': 'KM_HJEM_JOBB',
+                    'sporsmalstekst': 'Hvor mange km er kjøreturen mellom hjemmet ditt og jobben?',
+                    'undertekst': 'km',
+                    'svartype': 'KILOMETER',
+                    'min': '0',
+                    'max': null,
+                    'pavirkerAndreSporsmal': false,
+                    'kriterieForVisningAvUndersporsmal': null,
+                    'svar': [],
+                    'undersporsmal': []
                 }
             ]
         },
