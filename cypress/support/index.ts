@@ -98,6 +98,7 @@ const svarFormat = (sporsmal: RSSporsmal) => {
                     `Svar format ${sporsmal.svartype}`)
                 break
             case RSSvartype.TALL:
+            case RSSvartype.KILOMETER:
             case RSSvartype.PROSENT:
             case RSSvartype.TIMER:
                 expect(sporsmal.svar[0].verdi).to.match(RegExp('\\d+|'),

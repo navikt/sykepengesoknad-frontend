@@ -89,7 +89,7 @@ describe('Teste førsteside i reisetilskuddsøknaden', () => {
         it('Svar ja på hovedspørsmålet', () => {
             cy.get('.inputPanelGruppe__inner label:first-child > input[value=JA]').click({ force: true })
             cy.get('.undersporsmal > :nth-child(1)').should('have.text', 'Hvilke dager reiste du med bil i perioden 1. februar - 18. mars 2021?')
-            cy.get('.undersporsmal > .kriterie--ja > h3').should('have.text', 'Hadde du utgifter til bompenger?')
+            cy.get('.undersporsmal > .kriterie--ja > h3').should('have.text', 'Hadde du utgifter til bompenger?Hvor mange km er kjøreturen mellom hjemmet ditt og jobben?')
         })
 
         it('Minst en dag må velges', () => {
@@ -104,6 +104,7 @@ describe('Teste førsteside i reisetilskuddsøknaden', () => {
 
             cy.get('.undersporsmal > .kriterie--ja > .radioContainer > input[value=JA]').click({ force: true })
             cy.get('#616cc0cb-434e-4114-a68b-b5708e033e9e').focus().type('1000')
+            cy.get('#c56ca825-5993-4a13-bba7-29d592944b20').focus().type('42')
 
             cy.contains('Gå videre').click()
         })
