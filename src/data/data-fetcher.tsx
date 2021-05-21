@@ -48,7 +48,7 @@ export function DataFetcher(props: { children: any }) {
         window.location.href = hentLoginUrl()
 
     } else if (hasAnyFailed([ rssoknader, sykmeldinger ])) {
-        logger.error('Klarer ikke hente en av disse [ rssoknader, sykmeldinger ]')
+        logger.error(`Klarer ikke hente en av disse [ rssoknader = ${rssoknader.httpCode}, sykmeldinger = ${sykmeldinger.httpCode} ]`)
         return <IngenData />
     }
 
