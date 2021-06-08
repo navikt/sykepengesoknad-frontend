@@ -19,6 +19,17 @@ describe('Tester sortering av søknader', () => {
         cy.get('.typo-sidetittel').should('be.visible').and('have.text', 'Søknader')
     })
 
+    it('Nye søknader sorteres etter tidligste tom dato', function() {
+        cy.get('#soknader-list-til-behandling article').then((articles: any) => {
+            const soknader = articleTilSoknad(articles)
+            let forrigeSoknad = soknader[0]
+            soknader.forEach((sok: Soknad) => {
+                assert.isTrue(getTomFraSoknad(forrigeSoknad).getTime() <= getTomFraSoknad(sok).getTime())
+                forrigeSoknad = sok
+            })
+        })
+    })
+
     it('Sorter etter Status', function() {
         cy.get('.inngangspanel__sortering select')
             .select('Status')
@@ -39,7 +50,7 @@ describe('Tester sortering av søknader', () => {
             const soknader = articleTilSoknad(articles)
             let forrigeSoknad = soknader[0]
             soknader.forEach((sok: Soknad) => {
-                assert.isTrue(getTomFraSoknad(forrigeSoknad).getTime() <= getTomFraSoknad(sok).getTime())
+                assert.isTrue(getTomFraSoknad(forrigeSoknad).getTime() >= getTomFraSoknad(sok).getTime())
                 forrigeSoknad = sok
             })
         })

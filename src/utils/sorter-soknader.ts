@@ -1,5 +1,3 @@
-import dayjs from 'dayjs'
-
 import { TagTyper } from '../types/enums'
 import { RSSoknadstatus } from '../types/rs-types/rs-soknadstatus'
 import { RSSoknadstype } from '../types/rs-types/rs-soknadstype'
@@ -40,12 +38,12 @@ export const sorterEtterSendt = (soknad1: Soknad, soknad2: Soknad) => {
     if (soknad1.status === RSSoknadstatus.SENDT || soknad2.status === RSSoknadstatus.SENDT) {
         return senesteSendtDato(soknad2) - senesteSendtDato(soknad1)
     }
-    return sorterEtterPerioder(soknad1, soknad2)
+    return sorterEtterNyesteTom(soknad1, soknad2)
 }
 
 export const sorterEtterStatus = (soknad1: Soknad, soknad2: Soknad) => {
     if (soknad1.status === soknad2.status) {
-        return sorterEtterPerioder(soknad1, soknad2)
+        return sorterEtterNyesteTom(soknad1, soknad2)
     }
     if (soknad1.status === RSSoknadstatus.AVBRUTT) {
         return -1
@@ -59,27 +57,11 @@ export const sorterEtterStatus = (soknad1: Soknad, soknad2: Soknad) => {
     if (soknad1.status === RSSoknadstatus.UTGAATT) {
         return 1
     }
-    return sorterEtterPerioder(soknad1, soknad2)
+    return sorterEtterNyesteTom(soknad1, soknad2)
 }
 
-export const sorterEtterPerioder = (soknad1: Soknad, soknad2: Soknad) => {
+export const sorterEtterNyesteTom = (soknad1: Soknad, soknad2: Soknad) => {
     const tom1 = getTomFraSoknad(soknad1)
     const tom2 = getTomFraSoknad(soknad2)
-    return tom1.getTime() - tom2.getTime()
-}
-
-export const sorterEtterOpprettetDato = (soknad1: Soknad, soknad2: Soknad) => {
-    if (lagDato(soknad1.opprettetDato).getTime() !== lagDato(soknad2.opprettetDato).getTime()) {
-        return lagDato(soknad1.opprettetDato).getTime() - lagDato(soknad2.opprettetDato).getTime()
-    } else {
-        return lagDato(soknad1.fom || soknad1.opprettetDato).getTime() - lagDato(soknad2.fom || soknad2.opprettetDato).getTime()
-    }
-}
-
-const lagDato = (dato: string | Date): Date => {
-    if (typeof dato === 'string') {
-        return dayjs(dato).toDate()
-    } else {
-        return dato
-    }
+    return tom2.getTime() - tom1.getTime()
 }

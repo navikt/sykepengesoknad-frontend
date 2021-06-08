@@ -4,7 +4,7 @@ import React, { useState } from 'react'
 
 import { RSSoknadstatus } from '../../../types/rs-types/rs-soknadstatus'
 import { Soknad } from '../../../types/types'
-import { sorterEtterPerioder, sorterEtterSendt, sorterEtterStatus } from '../../../utils/sorter-soknader'
+import { sorterEtterNyesteTom, sorterEtterSendt, sorterEtterStatus } from '../../../utils/sorter-soknader'
 import Vis from '../../vis'
 import FremtidigeSoknaderTeaser from './fremtidige-soknader-teaser'
 import Teaser from './teaser'
@@ -30,12 +30,14 @@ const Teasere = ({ soknader, className, tittel, tomListeTekst, id, kanSorteres =
     const [ sortering, setSortering ] = useState<Sortering>(Sortering.Dato)
 
     const sorterteSoknader = () => {
-        if (sortering === 'Dato') {
-            return soknader.sort(sorterEtterPerioder)
-        } else if (sortering === 'Status') {
-            return soknader.sort(sorterEtterStatus)
-        } else if (sortering === 'Sendt') {
-            return soknader.sort(sorterEtterSendt)
+        if (kanSorteres) {
+            if (sortering === 'Dato') {
+                return soknader.sort(sorterEtterNyesteTom)
+            } else if (sortering === 'Status') {
+                return soknader.sort(sorterEtterStatus)
+            } else if (sortering === 'Sendt') {
+                return soknader.sort(sorterEtterSendt)
+            }
         }
         return soknader
     }
