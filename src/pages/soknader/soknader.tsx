@@ -12,18 +12,10 @@ import UtbetalingerLenke from '../../components/soknader/utbetalinger/utbetaling
 import Vis from '../../components/vis'
 import { useAppStore } from '../../data/stores/app-store'
 import { RSSoknadstatus } from '../../types/rs-types/rs-soknadstatus'
-import { Brodsmule, Soknad } from '../../types/types'
-import { sorterEtterOpprettetDato, sorterEtterPerioder } from '../../utils/sorter-soknader'
+import { Brodsmule } from '../../types/types'
+import { sorterEtterNyesteTom } from '../../utils/sorter-soknader'
 import { tekst } from '../../utils/tekster'
 import { setBodyClass } from '../../utils/utils'
-
-export const filtrerOgSorterNyeSoknader = (soknader: Soknad[]) => {
-    return soknader.filter(soknad =>
-        soknad.status === RSSoknadstatus.NY ||
-        soknad.status === RSSoknadstatus.UTKAST_TIL_KORRIGERING ||
-        soknad.status === RSSoknadstatus.FREMTIDIG
-    ).sort(sorterEtterOpprettetDato)
-}
 
 const brodsmuler: Brodsmule[] = [ {
     tittel: tekst('soknader.sidetittel'),
@@ -34,14 +26,17 @@ const brodsmuler: Brodsmule[] = [ {
 
 const Soknader = () => {
     const { soknader } = useAppStore()
-    const nyeSoknader = filtrerOgSorterNyeSoknader(soknader)
+    const nyeSoknader = soknader.filter((soknad) =>
+        soknad.status === RSSoknadstatus.NY
+            || soknad.status === RSSoknadstatus.UTKAST_TIL_KORRIGERING
+            || soknad.status === RSSoknadstatus.FREMTIDIG
+    ).sort(sorterEtterNyesteTom).reverse()
 
-    const tidligereSoknader = soknader
-        .filter((soknad) =>
-            soknad.status === RSSoknadstatus.SENDT
+    const tidligereSoknader = soknader.filter((soknad) =>
+        soknad.status === RSSoknadstatus.SENDT
             || soknad.status === RSSoknadstatus.AVBRUTT
             || soknad.status === RSSoknadstatus.UTGAATT
-        ).sort(sorterEtterPerioder)
+    ).sort(sorterEtterNyesteTom)
 
     useEffect(() => {
         setBodyClass('soknader')
