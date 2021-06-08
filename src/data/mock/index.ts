@@ -31,7 +31,7 @@ const mock = FetchMock.configure({
 })
 
 const soknader = [ ...jsonDeepCopy(soknaderOpplaering), nyttReisetilskudd ]
-if (!env.isOpplaering) {
+if (!env.isOpplaering || window.location.href.includes('alle-mock-data')) {
     soknader.push(...jsonDeepCopy(soknaderIntegration))
 }
 

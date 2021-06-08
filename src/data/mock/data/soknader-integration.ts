@@ -4421,6 +4421,10 @@ soknadSomTriggerSporsmalFinnesIkkeISoknad.id = '2c45e5b3-1e0b-486a-ab6c-555b1ea0
 export const soknadSomTriggerFeilStatusForOppdaterSporsmal: RSSoknad = jsonDeepCopy(arbeidstaker)
 soknadSomTriggerFeilStatusForOppdaterSporsmal.id = '3335e5b3-1e0b-486a-ab6c-555b1ea02ed1'
 
+export const arbeidstakerTilKorrigering: RSSoknad = jsonDeepCopy(arbeidstaker)
+arbeidstakerTilKorrigering.id = '3335e5b3-1e0b-486a-ab6c-555b1ea02e99'
+arbeidstakerTilKorrigering.status = 'UTKAST_TIL_KORRIGERING'
+
 export const soknaderIntegration = [
     utgattSoknad,
     arbeidstakersoknadMedUtenlandsoppholdSoktSykepenger,
@@ -4428,6 +4432,7 @@ export const soknaderIntegration = [
     avbruttSoknad,
     veldigLangSoknad,
     arbeidsledigKvittering,
+    arbeidstakerTilKorrigering,
     sendtArbeidsledigKvittering,
     oppholdUtlandKvittering,
     selvstendigKvittering,
