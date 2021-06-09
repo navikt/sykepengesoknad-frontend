@@ -2,11 +2,13 @@ import React from 'react'
 
 import { useAppStore } from '../../../data/stores/app-store'
 import { TagTyper } from '../../../types/enums'
+import { RSSoknadstatus } from '../../../types/rs-types/rs-soknadstatus'
 import { RSSoknadstype } from '../../../types/rs-types/rs-soknadstype'
 import Vis from '../../vis'
 import { SpmProps } from '../sporsmal-form/sporsmal-form'
 import { fjernIndexFraTag } from '../sporsmal-utils'
 import Bjorn from './bjorn'
+
 
 const BjornUnderTittel = ({ sporsmal }: SpmProps) => {
     const { valgtSoknad } = useAppStore()
@@ -19,7 +21,7 @@ const BjornUnderTittel = ({ sporsmal }: SpmProps) => {
         tag === TagTyper.PERMITTERT_NAA ||
         tag === TagTyper.PERIODEUTLAND ||
         tag === TagTyper.PERMITTERT_PERIODE ||
-        (tag === TagTyper.FERIE_V2 && valgtSoknad?.soknadstype === RSSoknadstype.ARBEIDSTAKERE)
+        (tag === TagTyper.FERIE_V2 && valgtSoknad?.soknadstype === RSSoknadstype.ARBEIDSTAKERE && valgtSoknad?.status === RSSoknadstatus.NY)
 
     return (
         <Vis hvis={harBjorntekst(sporsmal.tag)}

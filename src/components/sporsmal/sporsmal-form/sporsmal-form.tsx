@@ -27,6 +27,7 @@ import Oppsummering from '../../oppsummering/oppsummering'
 import Vis from '../../vis'
 import BjornUnderTittel from '../bjorn/bjorn-under-tittel'
 import { hentFormState, hentSvar } from '../hent-svar'
+import InfotekstOverSubmit from '../infotekst-over-submit'
 import { settSvar } from '../sett-svar'
 import SporsmalSwitch from '../sporsmal-switch'
 import { pathUtenSteg } from '../sporsmal-utils'
@@ -280,6 +281,7 @@ const SporsmalForm = () => {
                 />
 
                 <FeilOppsummering errors={methods.errors} sporsmal={sporsmal} />
+                <InfotekstOverSubmit sporsmal={sporsmal} />
 
                 <Vis hvis={skalViseKnapperad(valgtSoknad!, sporsmal, methods.getValues())}
                     render={() => <Knapperad onSubmit={onSubmit} poster={poster} />}
