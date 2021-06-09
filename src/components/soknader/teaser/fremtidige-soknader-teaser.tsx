@@ -1,14 +1,15 @@
 import dayjs from 'dayjs'
-import Alertstripe from 'nav-frontend-alertstriper'
+import Alertstripe, { AlertStripeInfo } from 'nav-frontend-alertstriper'
 import { HoyreChevron } from 'nav-frontend-chevron'
 import ModalWrapper from 'nav-frontend-modal'
-import { Systemtittel, Undertekst, Undertittel } from 'nav-frontend-typografi'
+import { Element, Normaltekst, Undertekst, Undertittel } from 'nav-frontend-typografi'
 import React, { useState } from 'react'
 
 import { RSSoknadstype } from '../../../types/rs-types/rs-soknadstype'
 import { tilLesbarDatoMedArstall, tilLesbarPeriodeMedArstall } from '../../../utils/dato-utils'
 import { getLedetekst, tekst } from '../../../utils/tekster'
 import { useAmplitudeInstance } from '../../amplitude/amplitude'
+import Utvidbar from '../../utvidbar/utvidbar'
 import Vis from '../../vis'
 import { InngangsIkon, InngangsStatus } from '../inngang/inngangspanel'
 import { hentIkon, hentIkonHover, hentTeaserStatustekst, periodeListevisning, SykepengesoknadTeaserProps, teaserTittel } from './teaser-util'
@@ -21,7 +22,7 @@ const FremtidigeSoknaderTeaser = ({ soknad }: SykepengesoknadTeaserProps) => {
         <article aria-labelledby={`soknader-header-${soknad.id}`} onClick={() => {
             logEvent('skjema åpnet', { soknadstype: soknad.soknadstype })
         }}>
-            <button className="inngangspanel inngangspanel__btn inngangspanel--ny"
+            <button className="inngangspanel inngangspanel__btn inngangspanel--fremtidig"
                 onClick={() => setAapen(true)}>
                 <div className="inngangspanel__ytre">
                     <div className="inngangspanel__del1">
@@ -44,20 +45,32 @@ const FremtidigeSoknaderTeaser = ({ soknad }: SykepengesoknadTeaserProps) => {
                 </div>
                 <HoyreChevron />
             </button>
+
             <ModalWrapper className="modal__teaser_popup" onRequestClose={() => setAapen(false)}
                 contentLabel={'planlagt'}
                 isOpen={aapen}
             >
-                <Systemtittel tag="h3" className="modal__tittel">
-                    {tekst('soknader.teaser.fremtidig.dato-tittel')}
-                </Systemtittel>
-                <Alertstripe type="info">{getLedetekst(tekst('soknader.teaser.fremtidig.dato-info'), {
-                    '%DATO%': tilLesbarDatoMedArstall(dayjs(soknad.tom).add(1, 'day'))
-                })}</Alertstripe>
+                <Element tag="h3" className="modal__tittel">
+                    {tekst('soknader.teaser.fremtidig.modal.tittel')}
+                </Element>
+                <Normaltekst>
+                    {getLedetekst(tekst('soknader.teaser.fremtidig.modal.tekst'), {
+                        '%DATO%': tilLesbarDatoMedArstall(dayjs(soknad.tom).add(1, 'day'))
+                    })}
+                </Normaltekst>
+                <Normaltekst>{tekst('soknader.teaser.fremtidig.modal.tekst2')}</Normaltekst>
+                <Utvidbar erApen={false} type="intern" tittel={
+                    <Element>{tekst('soknader.teaser.fremtidig.modal.utvidbar.tittel')}</Element>
+                }>
+                    <AlertStripeInfo>
+                        {tekst('soknader.teaser.fremtidig.modal.utvidbar.tekst')}
+                    </AlertStripeInfo>
+                </Utvidbar>
                 <button className="knapp knapp--hoved" onClick={() => setAapen(false)}>
                     Lukk
                 </button>
             </ModalWrapper>
+
         </article>
     )
 }

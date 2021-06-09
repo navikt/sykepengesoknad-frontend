@@ -13,13 +13,13 @@ export const behandlingsdager: RSSoknad = {
     'sykmeldingId': arbeidstakerBehandlingsdagerSm.id,
     'soknadstype': 'BEHANDLINGSDAGER',
     'status': 'NY',
-    'fom': '2020-04-01',
+    'fom': '2020-03-31',
     'tom': '2020-04-24',
     'opprettetDato': '2020-05-13',
     'sendtTilNAVDato': null,
     'sendtTilArbeidsgiverDato': null,
     'avbruttDato': null,
-    'startSykeforlop': '2020-04-01',
+    'startSykeforlop': '2020-03-31',
     'sykmeldingUtskrevet': '2020-03-31',
     'arbeidsgiver': {
         'navn': 'POSTEN NORGE AS, BÆRUM',
@@ -30,7 +30,7 @@ export const behandlingsdager: RSSoknad = {
     'arbeidssituasjon': 'ARBEIDSTAKER',
     'soknadPerioder': [
         {
-            'fom': '2020-04-01',
+            'fom': '2020-03-31',
             'tom': '2020-04-24',
             'grad': 0,
             'sykmeldingstype': 'BEHANDLINGSDAGER'
@@ -65,10 +65,10 @@ export const behandlingsdager: RSSoknad = {
                 {
                     'id': '687376',
                     'tag': 'ENKELTSTAENDE_BEHANDLINGSDAGER_UKE_0',
-                    'sporsmalstekst': '2020-04-01 - 2020-04-03',
+                    'sporsmalstekst': '2020-03-31 - 2020-04-03',
                     'undertekst': null,
                     'svartype': 'RADIO_GRUPPE_UKEKALENDER',
-                    'min': '2020-04-01',
+                    'min': '2020-03-31',
                     'max': '2020-04-03',
                     'pavirkerAndreSporsmal': false,
                     'kriterieForVisningAvUndersporsmal': null,
