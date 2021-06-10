@@ -7,6 +7,7 @@ import React, { useEffect } from 'react'
 
 import Banner from '../../components/banner/banner'
 import Brodsmuler from '../../components/brodsmuler/brodsmuler'
+import OmSykepenger from '../../components/om-sykepenger/om-sykepenger'
 import Teasere from '../../components/soknader/teaser/teasere'
 import UtbetalingerLenke from '../../components/soknader/utbetalinger/utbetalinger-lenke'
 import Vis from '../../components/vis'
@@ -28,14 +29,14 @@ const Soknader = () => {
     const { soknader } = useAppStore()
     const nyeSoknader = soknader.filter((soknad) =>
         soknad.status === RSSoknadstatus.NY
-            || soknad.status === RSSoknadstatus.UTKAST_TIL_KORRIGERING
-            || soknad.status === RSSoknadstatus.FREMTIDIG
+        || soknad.status === RSSoknadstatus.UTKAST_TIL_KORRIGERING
+        || soknad.status === RSSoknadstatus.FREMTIDIG
     ).sort(sorterEtterNyesteTom).reverse()
 
     const tidligereSoknader = soknader.filter((soknad) =>
         soknad.status === RSSoknadstatus.SENDT
-            || soknad.status === RSSoknadstatus.AVBRUTT
-            || soknad.status === RSSoknadstatus.UTGAATT
+        || soknad.status === RSSoknadstatus.AVBRUTT
+        || soknad.status === RSSoknadstatus.UTGAATT
     ).sort(sorterEtterNyesteTom)
 
     useEffect(() => {
@@ -48,6 +49,9 @@ const Soknader = () => {
             <Brodsmuler brodsmuler={brodsmuler} />
 
             <div className="limit">
+
+                <OmSykepenger />
+
                 <Teasere
                     className={'soknader_teasere'}
                     soknader={nyeSoknader}
