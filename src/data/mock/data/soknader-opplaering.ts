@@ -13,7 +13,7 @@ export const behandlingsdager: RSSoknad = {
     'sykmeldingId': arbeidstakerBehandlingsdagerSm.id,
     'soknadstype': 'BEHANDLINGSDAGER',
     'status': 'NY',
-    'fom': '2020-03-31',
+    'fom': '2020-04-01',
     'tom': '2020-04-24',
     'opprettetDato': '2020-05-13',
     'sendtTilNAVDato': null,
@@ -30,7 +30,7 @@ export const behandlingsdager: RSSoknad = {
     'arbeidssituasjon': 'ARBEIDSTAKER',
     'soknadPerioder': [
         {
-            'fom': '2020-03-31',
+            'fom': '2020-04-01',
             'tom': '2020-04-24',
             'grad': 0,
             'sykmeldingstype': 'BEHANDLINGSDAGER'
