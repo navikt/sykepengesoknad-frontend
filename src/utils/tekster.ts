@@ -10,7 +10,6 @@ import OpplysningerTekster from '../components/opplysninger-fra-sykmelding/opply
 import OppsummeringTekster from '../components/oppsummering/oppsummering-tekster'
 import SoknadIntroTekster from '../components/soknad-intro/soknad-intro-tekster'
 import TeaserTekster from '../components/soknader/teaser/teaser-tekster'
-import UtbetalingerTekster from '../components/soknader/utbetalinger/utbetalinger-tekster'
 import BjornTekster from '../components/sporsmal/bjorn/bjorn-tekster'
 import KnapperadTekster from '../components/sporsmal/sporsmal-form/knapperad-tekster'
 import SporsmalTekster from '../components/sporsmal/sporsmal-tekster'
@@ -33,7 +32,6 @@ const tekster = {
     ...SporsmalTekster,
     ...TeaserTekster,
     ...OmSykepengerTekster,
-    ...UtbetalingerTekster,
     ...OppsummeringTekster,
     ...OpprettUtlandTekster,
     ...RefreshHvisFeilStateTekster,

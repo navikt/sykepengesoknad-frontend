@@ -9,7 +9,6 @@ import Banner from '../../components/banner/banner'
 import Brodsmuler from '../../components/brodsmuler/brodsmuler'
 import OmSykepenger from '../../components/om-sykepenger/om-sykepenger'
 import Teasere from '../../components/soknader/teaser/teasere'
-import UtbetalingerLenke from '../../components/soknader/utbetalinger/utbetalinger-lenke'
 import Vis from '../../components/vis'
 import { useAppStore } from '../../data/stores/app-store'
 import { RSSoknadstatus } from '../../types/rs-types/rs-soknadstatus'
@@ -59,8 +58,6 @@ const Soknader = () => {
                     tomListeTekst={tekst('soknader.nye.ingen-soknader')}
                     id="soknader-list-til-behandling"
                 />
-
-                <UtbetalingerLenke />
 
                 <Vis hvis={tidligereSoknader.length > 0}
                     render={() =>
