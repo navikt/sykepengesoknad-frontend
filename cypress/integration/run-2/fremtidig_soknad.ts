@@ -19,10 +19,10 @@ describe('Tester fremtidig søknad', () => {
 
     it('Ved klikk så åpnes popup', function() {
         cy.get(`#soknader-list-til-behandling article[aria-labelledby*=${fremtidigSoknad.id}]`).click()
-        cy.get('.ReactModal__Content')
-            .should('include.text', 'Planlagt søknad')
-            .get('.alertstripe > .typo-normal')
-            .should('include.text', 'Du kan fylle ut denne søknaden 8. juni 3020.')
+        cy.get('.ReactModal__Content .modal__tittel')
+            .should('include.text', 'Søknaden er ikke klar')
+            .get('.utvidbar .typo-element')
+            .should('include.text', 'Hvorfor kan jeg ikke søke nå?')
     })
 })
 

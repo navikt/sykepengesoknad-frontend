@@ -15,11 +15,10 @@ describe('Tester feilmeldinger', () => {
         globalFeilmelding: string,
         focusTarget: string
     ) {
-        cy.get('.skjemaelement__input--harFeil').should('have.css', 'border-color', 'rgb(186, 58, 38)')
+        cy.get('.skjemaelement__input--harFeil').should('exist')
         cy.get('.skjemaelement__feilmelding').contains(lokalFeilmelding)
         cy.get('.feiloppsummering')
-            .should('have.css', 'background-color', 'rgb(255, 255, 255)')
-            .should('have.css', 'border-color', 'rgb(186, 58, 38)')
+            .should('exist')
             .within(() => {
                 cy.contains('Det er 1 feil i skjemaet')
                 cy.contains(globalFeilmelding).click()
@@ -50,11 +49,10 @@ describe('Tester feilmeldinger', () => {
         gaTilSoknad(arbeidstakerGradert, '3')
         gaVidere()
 
-        cy.get('.radioPanel').should('have.css', 'border-color', 'rgb(186, 58, 38)')
+        cy.get('.skjemagruppe--feil').should('exist')
         cy.get('.skjemaelement__feilmelding').contains('Du må velge et alternativ')
         cy.get('.feiloppsummering')
-            .should('have.css', 'background-color', 'rgb(255, 255, 255)')
-            .should('have.css', 'border-color', 'rgb(186, 58, 38)')
+            .should('exist')
             .within(() => {
                 cy.contains('Det er 1 feil i skjemaet')
                 cy.contains('Du må oppgi om du var tilbake i arbeid før friskmeldingsperioden utløp')
@@ -236,21 +234,10 @@ describe('Tester feilmeldinger', () => {
         cy.get('input[value=JA]').click({ force: true })
         gaVidere()
 
-        cy.get('.checkboksContainer label')
-            .first()
-            .then(els => {
-                // get Window reference from element
-                const win = els[0].ownerDocument.defaultView
-                // use getComputedStyle to read the pseudo selector
-                const before = win!.getComputedStyle(els[0], 'before')
-                const contentValue = before.borderColor
-
-                expect(contentValue).to.eq('rgb(186, 58, 38)')
-            })
+        cy.get('.checkboxgruppe.skjemagruppe--feil').should('exist')
         cy.get('.skjemaelement__feilmelding').contains('Du må velge et alternativ')
         cy.get('.feiloppsummering')
-            .should('have.css', 'background-color', 'rgb(255, 255, 255)')
-            .should('have.css', 'border-color', 'rgb(186, 58, 38)')
+            .should('exist')
             .within(() => {
                 cy.contains('Det er 1 feil i skjemaet')
                 cy.contains('Du må oppgi hvilke inntektskilder du har')

@@ -5,11 +5,11 @@ import FilListeTekster from '../components/filopplaster/fil-liste/fil-liste-teks
 import OpplastingTekster from '../components/filopplaster/kvittering-modal/opplasting-tekster'
 import KvitteringTekster from '../components/kvittering/kvittering-tekster'
 import OmReisetilskuddTekster from '../components/om-reisetilskudd/om-reisetilskudd-tekster'
+import OmSykepengerTekster from '../components/om-sykepenger/om-sykepenger-tekster'
 import OpplysningerTekster from '../components/opplysninger-fra-sykmelding/opplysninger-tekster'
 import OppsummeringTekster from '../components/oppsummering/oppsummering-tekster'
 import SoknadIntroTekster from '../components/soknad-intro/soknad-intro-tekster'
 import TeaserTekster from '../components/soknader/teaser/teaser-tekster'
-import UtbetalingerTekster from '../components/soknader/utbetalinger/utbetalinger-tekster'
 import BjornTekster from '../components/sporsmal/bjorn/bjorn-tekster'
 import KnapperadTekster from '../components/sporsmal/sporsmal-form/knapperad-tekster'
 import SporsmalTekster from '../components/sporsmal/sporsmal-tekster'
@@ -31,7 +31,7 @@ const tekster = {
     ...SoknadenTekster,
     ...SporsmalTekster,
     ...TeaserTekster,
-    ...UtbetalingerTekster,
+    ...OmSykepengerTekster,
     ...OppsummeringTekster,
     ...OpprettUtlandTekster,
     ...RefreshHvisFeilStateTekster,
