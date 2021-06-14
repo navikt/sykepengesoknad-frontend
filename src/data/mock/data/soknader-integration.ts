@@ -1,3 +1,5 @@
+import dayjs from 'dayjs'
+
 import { RSSoknad } from '../../../types/rs-types/rs-soknad'
 import { jsonDeepCopy } from '../../../utils/json-deep-copy'
 import { arbeidstaker } from './soknader-opplaering'
@@ -49,7 +51,7 @@ export const avbruttSoknad: RSSoknad = {
     'status': 'AVBRUTT',
     'fom': '2020-04-01',
     'tom': '2020-04-24',
-    'opprettetDato': '2020-06-12',
+    'opprettetDato': dayjs().add(-1, 'days').format('YYYY-MM-DD'),
     'sendtTilNAVDato': null,
     'sendtTilArbeidsgiverDato': null,
     'avbruttDato': '2020-06-12',
@@ -681,6 +683,7 @@ export const avbruttSoknad: RSSoknad = {
     ],
     'egenmeldtSykmelding': false
 }
+
 export const arbeidstakersoknadMedUtenlandsoppholdSoktSykepenger: RSSoknad = {
     'id': '5b74f271-5b94-455a-b79f-428f593f2b98',
     'sykmeldingId': arbeidstaker100Sm.id,
@@ -4413,8 +4416,8 @@ export const arbeidstakerMedOppholdKvittering: RSSoknad = {
 export const foranArbeidstakerMedOppholdKvittering: RSSoknad = jsonDeepCopy(arbeidstakerMedOppholdKvittering)
 foranArbeidstakerMedOppholdKvittering.id = 'foran-sok-8'
 foranArbeidstakerMedOppholdKvittering.status = 'SENDT'
-foranArbeidstakerMedOppholdKvittering.fom= '2020-03-25'
-foranArbeidstakerMedOppholdKvittering.tom= '2020-03-27'
+foranArbeidstakerMedOppholdKvittering.fom = '2020-03-25'
+foranArbeidstakerMedOppholdKvittering.tom = '2020-03-27'
 
 export const soknadSomTriggerSporsmalFinnesIkkeISoknad: RSSoknad = jsonDeepCopy(arbeidstaker)
 soknadSomTriggerSporsmalFinnesIkkeISoknad.id = '2c45e5b3-1e0b-486a-ab6c-555b1ea02ed1'
