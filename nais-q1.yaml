@@ -29,7 +29,7 @@ spec:
     - name: FLEX_GATEWAY_ROOT
       value: "https://flex-gateway.dev.nav.no"
     - name: SYKMELDINGER_BACKEND_PROXY_ROOT
-      value: "https://sykmeldinger-backend-proxy.dev.nav.no"
+      value: "https://sykmelding-gateway.dev.nav.no/sykmeldinger-backend"
     - name: LOGINSERVICE_URL
       value: "https://loginservice-q.nav.no/login"
     - name: LOGINSERVICE_REDIRECT_URL
