@@ -2,54 +2,47 @@ import { Normaltekst, UndertekstBold } from 'nav-frontend-typografi'
 import React from 'react'
 
 import { useAppStore } from '../../data/stores/app-store'
-import { tilLesbarDatoMedArstall, tilLesbarPeriodeMedArstall } from '../../utils/dato-utils'
+import { RSArbeidssituasjon } from '../../types/rs-types/rs-arbeidssituasjon'
+import { tilLesbarPeriodeMedArstall } from '../../utils/dato-utils'
+import { hentArbeidssituasjon, hentPerioderFørSykmelding } from '../../utils/sykmelding-utils'
 import { tekst } from '../../utils/tekster'
 import Vis from '../vis'
 
 const FravaersperioderInfo = () => {
     const { valgtSykmelding } = useAppStore()
 
-    if ((valgtSykmelding?.valgtArbeidssituasjon === 'FRILANSER'
-        || valgtSykmelding?.valgtArbeidssituasjon === 'NAERINGSDRIVENDE')
-        && valgtSykmelding.sporsmal.harAnnetFravaer !== null) {
+    const arbeidssituasjon = hentArbeidssituasjon(valgtSykmelding)
+    const perioder = hentPerioderFørSykmelding(valgtSykmelding)
 
-        const harPerioder = valgtSykmelding.sporsmal.fravaersperioder
-            && valgtSykmelding.sporsmal.fravaersperioder.length > 0
+    return (
+        <Vis hvis={arbeidssituasjon === RSArbeidssituasjon.FRILANSER || arbeidssituasjon === RSArbeidssituasjon.NAERINGSDRIVENDE}
+            render={() =>
+                <div className="avsnitt">
+                    <UndertekstBold tag="h3" className="avsnitt-hode">
+                        {tekst('sykepengesoknad.sykmelding-utdrag.egenmelding-papir')}
+                    </UndertekstBold>
 
-        return (
-            <div className="avsnitt">
-                <UndertekstBold tag="h3" className="avsnitt-hode">
-                    {tekst('sykepengesoknad.sykmelding-utdrag.egenmelding-papir')}
-                </UndertekstBold>
+                    <Vis hvis={perioder.length > 0}
+                        render={() =>
+                            <ul className="nokkelopplysning__liste">
+                                {perioder.map((p, idx) =>
+                                    <li key={idx}>
+                                        <Normaltekst>{tilLesbarPeriodeMedArstall(p.fom, p.tom)}</Normaltekst>
+                                    </li>
+                                )}
+                            </ul>
+                        }
+                    />
 
-                <Vis hvis={harPerioder}
-                    render={() =>
-                        <ul className="nokkelopplysning__liste">
-                            {valgtSykmelding.sporsmal.fravaersperioder
-                                ?.filter((p) => {
-                                    return p.fom !== null && p.tom !== null
-                                })
-                                .map((p) => {
-                                    return (
-                                        <li key={tilLesbarDatoMedArstall(p.fom)!}>
-                                            <Normaltekst>{tilLesbarPeriodeMedArstall(p.fom, p.tom)}</Normaltekst>
-                                        </li>
-                                    )
-                                })
-                            }
-                        </ul>
-                    }
-                />
-
-                <Vis hvis={!harPerioder}
-                    render={() =>
-                        <Normaltekst>{tekst('sykepengesoknad.sykmelding-utdrag.egenmelding-papir-nei')}</Normaltekst>
-                    }
-                />
-            </div>
-        )
-    }
-    return null
+                    <Vis hvis={perioder.length === 0}
+                        render={() =>
+                            <Normaltekst>{tekst('sykepengesoknad.sykmelding-utdrag.egenmelding-papir-nei')}</Normaltekst>
+                        }
+                    />
+                </div>
+            }
+        />
+    )
 }
 
 export default FravaersperioderInfo

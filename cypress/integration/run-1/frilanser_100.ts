@@ -24,7 +24,7 @@ describe('Tester frilansersøknad', () => {
         cy.contains('1. april - 24. april 2020 • 24 dager')
         cy.contains('Har ikke forsikring som gjelder de første 16 dagene av sykefraværet')
         cy.contains('Egenmelding og/eller sykmelding på papir')
-        cy.contains('1. januar – 1. juni 2020')
+        cy.contains('1. januar – 13. mars 2020')
         cy.contains('Opplysninger fra sykmeldingen').click()
         cy.contains('Har ikke forsikring som gjelder de første 16 dagene av sykefraværet').should('not.be.visible')
 

@@ -8,9 +8,7 @@ import { tekst } from '../../utils/tekster'
 const SykmeldingDato = () => {
     const { valgtSykmelding } = useAppStore()
 
-    if (!valgtSykmelding?.bekreftelse.utstedelsesdato) {
-        return null
-    }
+    if (!valgtSykmelding) return null
 
     return (
         <div className="avsnitt">
@@ -18,7 +16,7 @@ const SykmeldingDato = () => {
                 {tekst('sykepengesoknad.sykmelding-utdrag.dato-sykmeldingen-ble-skrevet')}
             </UndertekstBold>
             <Normaltekst>
-                {dayjs(valgtSykmelding.bekreftelse.utstedelsesdato).format('D. MMM YYYY')}
+                {dayjs(valgtSykmelding!.behandletTidspunkt).format('D. MMM YYYY')}
             </Normaltekst>
         </div>
     )

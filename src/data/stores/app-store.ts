@@ -2,7 +2,8 @@ import constate from 'constate'
 import { useState } from 'react'
 
 import { RSMottaker } from '../../types/rs-types/rs-mottaker'
-import { Kvittering, Soknad, Sykmelding } from '../../types/types'
+import { Sykmelding } from '../../types/sykmelding'
+import { Kvittering, Soknad } from '../../types/types'
 
 export const [ AppStoreProvider, useAppStore ] = constate(() => {
     const [ soknader, setSoknader ] = useState<Soknad[]>([])

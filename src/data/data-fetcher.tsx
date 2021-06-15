@@ -3,7 +3,8 @@ import React, { useEffect } from 'react'
 
 import IngenData from '../pages/feil/ingen-data'
 import { RSSoknad } from '../types/rs-types/rs-soknad'
-import { Soknad, Sykmelding } from '../types/types'
+import { Sykmelding } from '../types/sykmelding'
+import { Soknad } from '../types/types'
 import env from '../utils/environment'
 import { logger } from '../utils/logger'
 import useFetch from './rest/use-fetch'
@@ -29,7 +30,7 @@ export function DataFetcher(props: { children: any }) {
             })
         }
         if (isNotStarted(sykmeldinger)) {
-            const url = `${env.sykmeldingerBackendProxyRoot}/api/v1/syforest/sykmeldinger`
+            const url = `${env.sykmeldingerBackendProxyRoot}/api/v1/sykmeldinger`
             sykmeldinger.fetch(url, {
                 credentials: 'include',
             }, (fetchState: FetchState<Sykmelding[]>) => {
@@ -48,7 +49,7 @@ export function DataFetcher(props: { children: any }) {
         window.location.href = hentLoginUrl()
 
     } else if (hasAnyFailed([ rssoknader, sykmeldinger ])) {
-        logger.error(`Klarer ikke hente en av disse [ rssoknader = ${rssoknader.httpCode}, sykmeldinger = ${sykmeldinger.httpCode} ]`)
+        logger.error(`Klarer ikke hente en av disse [ soknader = ${rssoknader.httpCode}, sykmeldinger = ${sykmeldinger.httpCode} ]`)
         return <IngenData />
     }
 

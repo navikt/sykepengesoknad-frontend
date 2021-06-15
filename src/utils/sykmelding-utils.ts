@@ -1,18 +1,25 @@
 import dayjs from 'dayjs'
 
-import { SykmeldingPeriode } from '../types/types'
+import { Periode,Sykmelding } from '../types/sykmelding'
+import { TidsPeriode } from '../types/types'
 
-// TODO: Det skjer noe rart her. Browser og kompilator sier at tom og fom verken er dato eller string
-export function sorterPerioderEldsteFoerst(perioder: SykmeldingPeriode[]) {
-    return perioder.sort((a: SykmeldingPeriode, b: SykmeldingPeriode) => {
-        if (s2d(a.fom).getTime() !== s2d(b.fom).getTime()) {
-            return s2d(a.fom).getTime() - s2d(b.fom).getTime()
-        }
-        return s2d(a.tom).getTime() - s2d(b.tom).getTime()
-    })
+export const sorterEtterEldsteTom = (p1: Periode, p2: Periode) => {
+    return dayjs(p1.tom).unix() - dayjs(p2.tom).unix()
 }
 
-const s2d = (datostreng: any) => {
-    const dato: Date = dayjs(datostreng).toDate()
-    return dato
+export const hentArbeidssituasjon = (valgtSykmelding?: Sykmelding) => {
+    return valgtSykmelding?.sykmeldingStatus.sporsmalOgSvarListe?.find(s => s.shortName === 'ARBEIDSSITUASJON')?.svar?.svar
+}
+
+export const harForsikring = (valgtSykmelding?: Sykmelding) => {
+    return valgtSykmelding?.sykmeldingStatus.sporsmalOgSvarListe?.find(s => s.shortName === 'FORSIKRING')?.svar?.svar === 'JA'
+}
+
+export const hentPerioderFørSykmelding = (valgtSykmelding?: Sykmelding) => {
+    const perioder = valgtSykmelding?.sykmeldingStatus.sporsmalOgSvarListe?.find(s => s.shortName === 'PERIODE')?.svar?.svar
+    if (perioder) {
+        const p: TidsPeriode[] = JSON.parse(perioder)
+        return p
+    }
+    return []
 }

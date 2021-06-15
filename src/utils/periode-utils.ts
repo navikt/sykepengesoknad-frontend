@@ -1,5 +1,7 @@
-import { Soknad, Sykmelding, SykmeldingPeriode, TidsPeriode } from '../types/types'
-import { dayjsToDate } from './dato-utils'
+import dayjs from 'dayjs'
+
+import { Periode,Sykmelding } from '../types/sykmelding'
+import { Soknad, TidsPeriode } from '../types/types'
 
 export const tidligsteFom = (perioder: TidsPeriode[]) => {
     if (perioder.length === 0) {
@@ -34,19 +36,20 @@ export const senesteTom = (perioder: TidsPeriode[]) => {
     })[0]
 }
 
-export const erOppdelt = (soknad: Soknad, sykmelding: Sykmelding) => {
-    if (!sykmelding) {
+const tilTidsperiode = (p: Periode) => {
+    return {
+        fom: p.fom,
+        tom: p.tom
+    }
+}
+
+export const erOppdelt = (soknad?: Soknad, sykmelding?: Sykmelding) => {
+    if (!sykmelding || !soknad) {
         return false
     }
 
-    const tilTidsperiode = (p: SykmeldingPeriode) => {
-        return {
-            fom: dayjsToDate(p.fom)!,
-            tom: dayjsToDate(p.tom)!
-        }
-    }
-    const tomSykmelding = senesteTom(sykmelding.mulighetForArbeid.perioder.map(tilTidsperiode))!
-    const fomSykmelding = tidligsteFom(sykmelding.mulighetForArbeid.perioder.map(tilTidsperiode))!
+    const fomSykmelding = dayjs(tidligsteFom(sykmelding.sykmeldingsperioder.map(tilTidsperiode))!).toDate()
+    const tomSykmelding = dayjs(senesteTom(sykmelding.sykmeldingsperioder.map(tilTidsperiode))!).toDate()
 
     return !(soknad.fom!.getTime() === fomSykmelding.getTime()
         && soknad.tom!.getTime() === tomSykmelding.getTime())

@@ -33,7 +33,7 @@ describe('Tester arbeidstakersøknad', () => {
         // Sykmelding
         cy.contains('1. april - 24. april 2020 • 24 dager')
         cy.contains('POSTEN NORGE AS, BÆRUM')
-        cy.contains('100 % sykmeldt')
+        cy.contains('100% sykmeldt')
         cy.contains('Sykmeldingen din er lang, derfor er den delt opp i flere søknader om sykepenger').should('not.exist')
 
         cy.contains('Opplysninger fra sykmeldingen').click({ force: true })

@@ -1,5 +1,5 @@
 import { RSSoknad } from '../../../types/rs-types/rs-soknad'
-import { arbeidstakerReisetilskudd } from './sykmeldinger'
+import { arbeidstakerReisetilskuddSyk } from './sykmeldinger'
 
 export const nyttReisetilskudd: RSSoknad = {
     'arbeidssituasjon': 'ARBEIDSTAKER',
@@ -18,7 +18,7 @@ export const nyttReisetilskudd: RSSoknad = {
     'sykmeldingUtskrevet': '2021-02-01',
     'id': '3b6d3764-bc4d-4fe2-902d-5097b9e0ce93',
     'status': 'NY',
-    'sykmeldingId': arbeidstakerReisetilskudd.id,
+    'sykmeldingId': arbeidstakerReisetilskuddSyk.id,
     'fom': '2020-04-01',
     'tom': '2020-04-24',
     'opprettetDato': '2021-02-19',

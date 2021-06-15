@@ -2,29 +2,34 @@ import { Normaltekst, UndertekstBold } from 'nav-frontend-typografi'
 import React from 'react'
 
 import { useAppStore } from '../../data/stores/app-store'
+import { RSArbeidssituasjon } from '../../types/rs-types/rs-arbeidssituasjon'
+import { harForsikring,hentArbeidssituasjon } from '../../utils/sykmelding-utils'
 import { tekst } from '../../utils/tekster'
+import Vis from '../vis'
 
 const ForsikringInfo = () => {
     const { valgtSykmelding } = useAppStore()
 
-    if ((valgtSykmelding?.valgtArbeidssituasjon === 'FRILANSER'
-        || valgtSykmelding?.valgtArbeidssituasjon === 'NAERINGSDRIVENDE')
-        && valgtSykmelding.sporsmal.harForsikring !== null) {
+    const arbeidssituasjon = hentArbeidssituasjon(valgtSykmelding)
+    const forsikring = harForsikring(valgtSykmelding)
 
-        const nokkel = valgtSykmelding.sporsmal.harForsikring
-            ? 'sykepengesoknad.sykmelding-utdrag.forsikring-ja'
-            : 'sykepengesoknad.sykmelding-utdrag.forsikring-nei'
-
-        return (
-            <div className="avsnitt">
-                <UndertekstBold tag="h3" className="avsnitt-hode">
-                    {tekst('sykepengesoknad.sykmelding-utdrag.forsikring')}
-                </UndertekstBold>
-                <Normaltekst>{tekst(nokkel)}</Normaltekst>
-            </div>
-        )
-    }
-    return null
+    return (
+        <Vis hvis={arbeidssituasjon === RSArbeidssituasjon.FRILANSER || arbeidssituasjon === RSArbeidssituasjon.NAERINGSDRIVENDE}
+            render={() =>
+                <div className="avsnitt">
+                    <UndertekstBold tag="h3" className="avsnitt-hode">
+                        {tekst('sykepengesoknad.sykmelding-utdrag.forsikring')}
+                    </UndertekstBold>
+                    <Normaltekst>
+                        {tekst(forsikring
+                            ? 'sykepengesoknad.sykmelding-utdrag.forsikring-ja'
+                            : 'sykepengesoknad.sykmelding-utdrag.forsikring-nei'
+                        )}
+                    </Normaltekst>
+                </div>
+            }
+        />
+    )
 }
 
 export default ForsikringInfo
