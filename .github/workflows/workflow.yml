@@ -50,10 +50,6 @@ jobs:
         run: |
             docker build . -f Dockerfile.root -t ${IMAGE_ROOT}
             docker push ${IMAGE_ROOT}
-      - name: Bygg og push Docker image hvor appen serves på /sykepengesoknad
-        run: |
-          docker build . -f Dockerfile.sykepengesoknad -t ${IMAGE_SYKEPENGESOKNAD}
-          docker push ${IMAGE_SYKEPENGESOKNAD}
       - name: Bygg og push Docker image hvor appen serves på /syk/sykepengesoknad
         run: |
           docker build . -f Dockerfile.syksykepengesoknad -t ${IMAGE_SYK_SYKEPENGESOKNAD}
@@ -98,28 +94,6 @@ jobs:
           name: cypress-screenshots
           path: cypress/screenshots
 
-
-  deploy-to-q1-sbs:
-    if: github.ref == 'refs/heads/master' || startsWith(github.ref, 'refs/heads/dev-')
-    name: Deploy sykepengesoknad to q1-sbs (Q1)
-    runs-on: ubuntu-latest
-    needs: [build-and-publish, integrasjonstest-run]
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v1
-      - name: Last ned versjon
-        uses: actions/download-artifact@v1
-        with:
-          name: VERSION.txt
-          path: .
-      - run: echo "VERSION=`cat VERSION.txt`" >> $GITHUB_ENV
-      - run: echo "IMAGE=docker.pkg.github.com/${GITHUB_REPOSITORY}/$APP-sykepengesoknad:$VERSION" >> $GITHUB_ENV
-      - uses: nais/deploy/actions/deploy@v1
-        name: Deploy to q1-sbs
-        env:
-          APIKEY: ${{ secrets.NAIS_DEPLOY_APIKEY }}
-          CLUSTER: dev-sbs
-          RESOURCE: nais-q1.yaml
 
 
   deploy-to-q1-dev-gcp:
@@ -183,26 +157,6 @@ jobs:
           CLUSTER: labs-gcp
           RESOURCE: nais-labs.yaml
 
-
-  deploy-to-prod-sbs:
-    if: github.ref == 'refs/heads/master'
-    name: Deploy to production
-    needs: [build-and-publish, integrasjonstest-run]
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v1
-      - uses: actions/download-artifact@v1
-        with:
-          name: VERSION.txt
-          path: .
-      - run: echo "VERSION=`cat VERSION.txt`" >> $GITHUB_ENV
-      - run: echo "IMAGE=docker.pkg.github.com/${GITHUB_REPOSITORY}/$APP-sykepengesoknad:$VERSION" >> $GITHUB_ENV
-      - name: Deploy to prod-sbs
-        uses: nais/deploy/actions/deploy@v1
-        env:
-          APIKEY: ${{ secrets.NAIS_DEPLOY_APIKEY }}
-          CLUSTER: prod-sbs
-          RESOURCE: nais-prod.yaml
 
 
   tag-image-as-latest:
