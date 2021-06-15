@@ -9,7 +9,7 @@ import { RSMottaker } from '../../types/rs-types/rs-mottaker'
 import { RSSoknadstatus } from '../../types/rs-types/rs-soknadstatus'
 import { RSSoknadstype } from '../../types/rs-types/rs-soknadstype'
 import { Soknad } from '../../types/types'
-import { dayjsToDate, sendtForMerEnn30DagerSiden } from '../../utils/dato-utils'
+import { sendtForMerEnn30DagerSiden } from '../../utils/dato-utils'
 import env from '../../utils/environment'
 import fetcher from '../../utils/fetcher'
 import { tekst } from '../../utils/tekster'
@@ -65,8 +65,8 @@ const Arbeidstaker = () => {
     }
 
     const erSykmeldingperiodeDeltOverFlereSoknader = () => {
-        const fom = valgtSoknad!.fom!.getDate()
-        const sykFom = dayjsToDate(valgtSykmelding!.mulighetForArbeid.perioder[0].fom)?.getDate()
+        const fom = dayjs(valgtSoknad!.fom).date()
+        const sykFom = dayjs(valgtSykmelding!.sykmeldingsperioder[0].fom).date()
         return fom !== sykFom
     }
 

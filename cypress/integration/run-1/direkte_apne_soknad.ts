@@ -12,7 +12,7 @@ describe('Tester å åpne søknaden direkte fra sykefravaer', () => {
 
         cy.contains('1. april - 24. april 2020 • 24 dager')
         cy.contains('POSTEN NORGE AS, BÆRUM')
-        cy.contains('100 % sykmeldt')
+        cy.contains('100% sykmeldt')
     })
 
     it('Hvis vi åpner en sendt søknad utafor kvittering så sendes vi til oversikten', function() {

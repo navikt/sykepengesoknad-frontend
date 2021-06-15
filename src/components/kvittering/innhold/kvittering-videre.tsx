@@ -11,7 +11,7 @@ import { tekst } from '../../../utils/tekster'
 import Vis from '../../vis'
 
 const KvitteringVidere = () => {
-    const { valgtSoknad, valgtSykmelding } = useAppStore()
+    const { valgtSoknad } = useAppStore()
 
     if (sendtForMerEnn30DagerSiden(valgtSoknad?.sendtTilArbeidsgiverDato, valgtSoknad?.sendtTilNAVDato)) {
         return null
@@ -21,7 +21,7 @@ const KvitteringVidere = () => {
         <AlertStripeInfo className="opplysninger">
             <Undertittel tag="h3">{tekst('kvittering.hva-skjer-videre')}</Undertittel>
 
-            <Vis hvis={valgtSykmelding?.valgtArbeidssituasjon === RSArbeidssituasjon.NAERINGSDRIVENDE}
+            <Vis hvis={valgtSoknad?.arbeidssituasjon === RSArbeidssituasjon.NAERINGSDRIVENDE}
                 render={() =>
                     <div className="avsnitt">
                         <Element tag="h2">{tekst('kvittering.naeringsdrivende.tittel')}</Element>

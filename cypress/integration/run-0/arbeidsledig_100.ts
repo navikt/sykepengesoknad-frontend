@@ -17,9 +17,8 @@ describe('Tester arbeidsledigsøknad', () => {
         cy.url().should('include', `${soknad.id}/1`)
 
         // Sykmelding
-        cy.contains('1. mars - 24. april 2020 • 55 dager')
-        cy.contains('100 % sykmeldt')
-        cy.contains('Sykmeldingen din er lang, derfor er den delt opp i flere søknader om sykepenger')
+        cy.contains('1. april - 24. april 2020 • 24 dager')
+        cy.contains('100% sykmeldt')
         cy.contains('Opplysninger fra sykmeldingen').click()
 
         // Godkjenne ANSVARSERKLARING

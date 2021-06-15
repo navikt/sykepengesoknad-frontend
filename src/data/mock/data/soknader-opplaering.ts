@@ -1,16 +1,16 @@
 import { RSSoknad } from '../../../types/rs-types/rs-soknad'
 import { jsonDeepCopy } from '../../../utils/json-deep-copy'
 import {
-    arbeidsledigSm,
-    arbeidstaker50Sm,
-    arbeidstaker100Sm,
-    arbeidstakerBehandlingsdagerSm,
-    frilanserSm
+    arbeidsledig100Syk,
+    arbeidstaker50Syk,
+    arbeidstaker100Syk,
+    arbeidstakerBehandlingsdagSyk,
+    frilanser100Syk,
 } from './sykmeldinger'
 
 export const behandlingsdager: RSSoknad = {
     'id': 'bcb032ac-b6dd-4ae7-8e73-9e64f1b35182',
-    'sykmeldingId': arbeidstakerBehandlingsdagerSm.id,
+    'sykmeldingId': arbeidstakerBehandlingsdagSyk.id,
     'soknadstype': 'BEHANDLINGSDAGER',
     'status': 'NY',
     'fom': '2020-04-01',
@@ -323,7 +323,7 @@ export const behandlingsdager: RSSoknad = {
 }
 export const arbeidstaker: RSSoknad = {
     'id': 'faba11f5-c4f2-4647-8c8a-58b28ce2f3ef',
-    'sykmeldingId': arbeidstaker100Sm.id,
+    'sykmeldingId': arbeidstaker100Syk.id,
     'soknadstype': 'ARBEIDSTAKERE',
     'status': 'NY',
     'fom': '2020-04-01',
@@ -872,7 +872,7 @@ export const arbeidstaker: RSSoknad = {
 }
 export const arbeidstakerGradert: RSSoknad = {
     'id': '5b769c04-e171-47c9-b79b-23ab8fce331e',
-    'sykmeldingId': arbeidstaker50Sm.id,
+    'sykmeldingId': arbeidstaker50Syk.id,
     'soknadstype': 'ARBEIDSTAKERE',
     'status': 'NY',
     'fom': '2020-04-01',
@@ -1516,7 +1516,7 @@ export const arbeidstakerGradert: RSSoknad = {
 }
 export const arbeidsledig: RSSoknad = {
     'id': '934f39f4-cb47-459f-8209-0dbef6d36059',
-    'sykmeldingId': arbeidsledigSm.id,
+    'sykmeldingId': arbeidsledig100Syk.id,
     'soknadstype': 'ARBEIDSLEDIG',
     'status': 'NY',
     'fom': '2020-04-01',
@@ -1975,7 +1975,7 @@ export const arbeidsledig: RSSoknad = {
 }
 export const frilanser: RSSoknad = {
     'id': 'a8e40578-682b-4a04-bfda-b7768af2ae13',
-    'sykmeldingId': frilanserSm.id,
+    'sykmeldingId': frilanser100Syk.id,
     'soknadstype': 'SELVSTENDIGE_OG_FRILANSERE',
     'status': 'NY',
     'fom': '2020-04-01',
@@ -2490,7 +2490,7 @@ export const oppholdUtland: RSSoknad = {
 }
 export const fremtidigSoknad: RSSoknad = {
     'id': '5b74f271-5b94-455a-b79f-428f593f2b99',
-    'sykmeldingId': arbeidstaker100Sm.id,
+    'sykmeldingId': arbeidstaker100Syk.id,
     'soknadstype': 'ARBEIDSTAKERE',
     'status': 'FREMTIDIG',
     'fom': '3020-05-23',

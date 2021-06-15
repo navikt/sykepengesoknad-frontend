@@ -4,23 +4,15 @@ import { RSSoknad } from '../../../types/rs-types/rs-soknad'
 import { jsonDeepCopy } from '../../../utils/json-deep-copy'
 import { arbeidstaker } from './soknader-opplaering'
 import {
-    arbeidsledigKvitteringSm,
-    arbeidsledigSm,
-    arbeidstaker100Sm,
-    arbeidstakerAvbruttSm,
-    selvstendingSm,
-    syk1,
-    syk2,
-    syk3,
-    syk4,
-    syk5,
-    syk7,
-    syk8
+    arbeidsledig100Syk,
+    arbeidstaker100Syk,
+    frilanser100Syk,
+    syk1, syk2, syk3, syk4, syk5, syk7, syk8,
 } from './sykmeldinger'
 
 export const utgattSoknad: RSSoknad = {
     'id': '5b74f271-5b94-455a-b79f-428f593f2b90',
-    'sykmeldingId': arbeidstaker100Sm.id,
+    'sykmeldingId': arbeidstaker100Syk.id,
     'soknadstype': 'ARBEIDSTAKERE',
     'status': 'UTGAATT',
     'fom': '2020-05-23',
@@ -46,7 +38,7 @@ export const utgattSoknad: RSSoknad = {
 }
 export const avbruttSoknad: RSSoknad = {
     'id': '811d15b2-2a76-4623-9530-1ba55617e0a5',
-    'sykmeldingId': arbeidstakerAvbruttSm.id,
+    'sykmeldingId': arbeidstaker100Syk.id,
     'soknadstype': 'ARBEIDSTAKERE',
     'status': 'AVBRUTT',
     'fom': '2020-04-01',
@@ -686,7 +678,7 @@ export const avbruttSoknad: RSSoknad = {
 
 export const arbeidstakersoknadMedUtenlandsoppholdSoktSykepenger: RSSoknad = {
     'id': '5b74f271-5b94-455a-b79f-428f593f2b98',
-    'sykmeldingId': arbeidstaker100Sm.id,
+    'sykmeldingId': arbeidstaker100Syk.id,
     'soknadstype': 'ARBEIDSTAKERE',
     'status': 'NY',
     'fom': '2020-04-01',
@@ -760,7 +752,7 @@ export const arbeidstakersoknadMedUtenlandsoppholdSoktSykepenger: RSSoknad = {
 }
 export const sendtArbeidsledig: RSSoknad = {
     'id': '3848e75e-4069-4076-95c0-3f9f0b63e498',
-    'sykmeldingId': arbeidstaker100Sm.id,
+    'sykmeldingId': arbeidstaker100Syk.id,
     'soknadstype': 'ARBEIDSLEDIG',
     'status': 'SENDT',
     'fom': '2020-05-27',
@@ -1182,7 +1174,7 @@ export const sendtArbeidsledig: RSSoknad = {
 }
 export const veldigLangSoknad: RSSoknad = {
     'id': 'faba11f5-123-abc-8c8a-58b28ce2f3ef',
-    'sykmeldingId': arbeidstaker100Sm.id,
+    'sykmeldingId': arbeidstaker100Syk.id,
     'soknadstype': 'ARBEIDSTAKERE',
     'status': 'NY',
     'fom': '2020-04-01',
@@ -2795,7 +2787,7 @@ export const veldigLangSoknad: RSSoknad = {
 }
 export const arbeidsledigKvittering: RSSoknad = {
     'id': 'd3756302-4488-4f15-837b-38d51bc9b773',
-    'sykmeldingId': arbeidsledigKvitteringSm.id,
+    'sykmeldingId': arbeidsledig100Syk.id,
     'soknadstype': 'ARBEIDSLEDIG',
     'status': 'NY',
     'fom': '2020-04-01',
@@ -2890,7 +2882,7 @@ export const arbeidsledigKvittering: RSSoknad = {
 }
 export const sendtArbeidsledigKvittering: RSSoknad = {
     'id': '162b42d7-2600-44ea-905e-d3bae7f23404',
-    'sykmeldingId': arbeidsledigSm.id,
+    'sykmeldingId': arbeidsledig100Syk.id,
     'soknadstype': 'ARBEIDSLEDIG',
     'status': 'SENDT',
     'fom': '2020-01-01',
@@ -3407,7 +3399,7 @@ export const sendtArbeidsledigKvittering: RSSoknad = {
 }
 export const delvisUtfylltArbeidsledig: RSSoknad = {
     'id': '162b42d7-2600-44ea-905e-d3bae7f234047',
-    'sykmeldingId': arbeidsledigSm.id,
+    'sykmeldingId': arbeidsledig100Syk.id,
     'soknadstype': 'ARBEIDSLEDIG',
     'status': 'NY',
     'fom': '2020-04-01',
@@ -3661,7 +3653,7 @@ export const oppholdUtlandKvittering: RSSoknad = {
 }
 export const selvstendigKvittering: RSSoknad = {
     'id': '8e267bc7-b213-4f19-a423-1543e09e0dc1',
-    'sykmeldingId': selvstendingSm.id,
+    'sykmeldingId': frilanser100Syk.id,
     'soknadstype': 'SELVSTENDIGE_OG_FRILANSERE',
     'status': 'NY',
     'fom': '2020-04-01',

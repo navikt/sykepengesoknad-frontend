@@ -28,7 +28,7 @@ describe('Tester gjenoppretting av søknad', () => {
         cy.contains('12. juni 2020')
 
         // Sykmelding
-        cy.contains('20. mai - 5. juni 2020 • 17 dager')
+        cy.contains('1. april - 24. april 2020 • 24 dager')
     })
 
     it('Søknad kan gjenåpnes', function() {
