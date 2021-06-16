@@ -32,7 +32,7 @@ const Arbeidstaker = () => {
         // eslint-disable-next-line
     }, [valgtSoknad?.sendtTilNAVDato])
 
-    if (!valgtSoknad) return null
+    if (!valgtSoknad || !valgtSykmelding) return null
 
     const settRiktigKvitteringTekst = () => {
         if (erInnenforArbeidsgiverperiode()) {
