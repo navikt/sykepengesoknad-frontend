@@ -109,7 +109,7 @@ interface ArbeidsgiverStatus {
     orgNavn: string;
 }
 
-type SvarType = 'ARBEIDSSITUASJON' | 'PERIODER' | 'JA_NEI ';
+type SvarType = 'ARBEIDSSITUASJON' | 'PERIODER' | 'JA_NEI';
 
 interface Svar {
     svar: string;
