@@ -325,7 +325,7 @@ export const avbruttSoknad: RSSoknad = {
         {
             'id': '103',
             'tag': 'ARBEID_UTENFOR_NORGE',
-            'sporsmalstekst': 'Utfører du arbeid andre steder enn i Norge?',
+            'sporsmalstekst': 'Har du arbeidet i utlandet i løpet av de siste 12 månedene?',
             'undertekst': null,
             'svartype': 'JA_NEI',
             'min': null,
@@ -1136,7 +1136,7 @@ export const sendtArbeidsledig: RSSoknad = {
     }, {
         'id': '73',
         'tag': 'ARBEID_UTENFOR_NORGE',
-        'sporsmalstekst': 'Utfører du arbeid andre steder enn i Norge?',
+        'sporsmalstekst': 'Har du arbeidet i utlandet i løpet av de siste 12 månedene?',
         'undertekst': null,
         'svartype': 'JA_NEI',
         'min': null,
@@ -1661,7 +1661,7 @@ export const veldigLangSoknad: RSSoknad = {
         {
             'id': '103',
             'tag': 'ARBEID_UTENFOR_NORGE',
-            'sporsmalstekst': 'Utfører du arbeid andre steder enn i Norge?',
+            'sporsmalstekst': 'Har du arbeidet i utlandet i løpet av de siste 12 månedene?',
             'undertekst': null,
             'svartype': 'JA_NEI',
             'min': null,
@@ -3348,7 +3348,7 @@ export const sendtArbeidsledigKvittering: RSSoknad = {
         {
             'id': '124',
             'tag': 'ARBEID_UTENFOR_NORGE',
-            'sporsmalstekst': 'Utfører du arbeid andre steder enn i Norge?',
+            'sporsmalstekst': 'Har du arbeidet i utlandet i løpet av de siste 12 månedene?',
             'undertekst': null,
             'svartype': 'JA_NEI',
             'min': null,
@@ -3444,7 +3444,7 @@ export const delvisUtfylltArbeidsledig: RSSoknad = {
         {
             'id': '1243',
             'tag': 'ARBEID_UTENFOR_NORGE',
-            'sporsmalstekst': 'Utfører du arbeid andre steder enn i Norge?',
+            'sporsmalstekst': 'Har du arbeidet i utlandet i løpet av de siste 12 månedene?',
             'undertekst': null,
             'svartype': 'JA_NEI',
             'min': null,
@@ -3497,7 +3497,7 @@ export const delvisUtfylltArbeidsledig: RSSoknad = {
         {
             'id': '1334',
             'tag': 'ARBEID_UTENFOR_NORGE',
-            'sporsmalstekst': 'Utfører du arbeid andre steder enn i Norge?',
+            'sporsmalstekst': 'Har du arbeidet i utlandet i løpet av de siste 12 månedene?',
             'undertekst': null,
             'svartype': 'JA_NEI',
             'min': null,
