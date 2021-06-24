@@ -914,8 +914,8 @@ export const arbeidstakerGradert: RSSoknad = {
         },
         {
             'id': '687296',
-            'tag': 'EGENMELDINGER',
-            'sporsmalstekst': 'Vi har registrert at du ble sykmeldt onsdag 1. april 2020. Var du syk og borte fra jobb i perioden 16. - 31. mars 2020?',
+            'tag': 'FRAVAR_FOR_SYKMELDINGEN',
+            'sporsmalstekst': 'Var du syk og borte fra jobb mellom 16. - 31. mars 2020?',
             'undertekst': null,
             'svartype': 'JA_NEI',
             'min': null,
@@ -925,72 +925,17 @@ export const arbeidstakerGradert: RSSoknad = {
             'svar': [],
             'undersporsmal': [
                 {
-                    'id': '687297',
-                    'tag': 'TIDLIGERE_SYK',
-                    'sporsmalstekst': null,
+                    'id': '687299',
+                    'tag': 'FRAVAR_FOR_SYKMELDINGEN_NAR',
+                    'sporsmalstekst': 'Hvilke dager var du syk og borte fra jobb? Du trenger bare oppgi dager før 1. april 2020.',
                     'undertekst': null,
-                    'svartype': 'CHECKBOX_GRUPPE',
-                    'min': null,
-                    'max': null,
+                    'svartype': 'PERIODER',
+                    'min': '2019-10-01',
+                    'max': '2020-03-31',
                     'pavirkerAndreSporsmal': false,
                     'kriterieForVisningAvUndersporsmal': null,
                     'svar': [],
-                    'undersporsmal': [
-                        {
-                            'id': '687298',
-                            'tag': 'TIDLIGERE_EGENMELDING',
-                            'sporsmalstekst': 'Jeg var syk med egenmelding',
-                            'undertekst': null,
-                            'svartype': 'CHECKBOX',
-                            'min': null,
-                            'max': null,
-                            'pavirkerAndreSporsmal': false,
-                            'kriterieForVisningAvUndersporsmal': 'CHECKED',
-                            'svar': [],
-                            'undersporsmal': [
-                                {
-                                    'id': '687299',
-                                    'tag': 'EGENMELDINGER_NAR',
-                                    'sporsmalstekst': 'Hvilke dager var du syk med egenmelding? Du trenger bare oppgi dager før 1. april 2020.',
-                                    'undertekst': null,
-                                    'svartype': 'PERIODER',
-                                    'min': '2019-10-01',
-                                    'max': '2020-03-31',
-                                    'pavirkerAndreSporsmal': false,
-                                    'kriterieForVisningAvUndersporsmal': null,
-                                    'svar': [],
-                                    'undersporsmal': []
-                                }
-                            ]
-                        },
-                        {
-                            'id': '687300',
-                            'tag': 'TIDLIGERE_PAPIRSYKMELDING',
-                            'sporsmalstekst': 'Jeg var syk med papirsykmelding',
-                            'undertekst': null,
-                            'svartype': 'CHECKBOX',
-                            'min': null,
-                            'max': null,
-                            'pavirkerAndreSporsmal': false,
-                            'kriterieForVisningAvUndersporsmal': 'CHECKED',
-                            'svar': [],
-                            'undersporsmal': [
-                                {
-                                    'id': '687301',
-                                    'tag': 'PAPIRSYKMELDING_NAR',
-                                    'sporsmalstekst': 'Hvilke dager var du syk med papirsykmelding? Du trenger bare oppgi dager før 1. april 2020.',
-                                    'undertekst': null,
-                                    'svartype': 'PERIODER',
-                                    'min': '2019-10-01',
-                                    'max': '2020-03-31',
-                                    'pavirkerAndreSporsmal': false,
-                                    'kriterieForVisningAvUndersporsmal': null,
-                                    'svar': [],
-                                    'undersporsmal': []
-                                }
-                            ]
-                        }
-                    ]
+                    'undersporsmal': []
                 }
             ]
         },
@@ -2520,8 +2465,8 @@ export const fremtidigSoknad: RSSoknad = {
 
 export const nySoknadSomIkkeKanFyllesUt: RSSoknad = jsonDeepCopy(arbeidstaker)
 nySoknadSomIkkeKanFyllesUt.id = 'ny-som-ikke-kan-fylles-ut'
-nySoknadSomIkkeKanFyllesUt.fom= '2020-04-25'
-nySoknadSomIkkeKanFyllesUt.tom= '2020-04-30'
+nySoknadSomIkkeKanFyllesUt.fom = '2020-04-25'
+nySoknadSomIkkeKanFyllesUt.tom = '2020-04-30'
 
 export const soknaderOpplaering = [
     behandlingsdager,
