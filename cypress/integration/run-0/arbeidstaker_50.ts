@@ -38,15 +38,15 @@ describe('Tester arbeidstakersøknad - gradert 50%', () => {
         cy.contains('Gå videre').click()
     })
 
-    it('Søknad EGENMELDINGER', function() {
+    it('Søknad FRAVAR FOR SYKMELDINGEN', function() {
         cy.url().should('include', `${soknad.id}/2`)
 
         // Test spørsmål
         cy.get('.inputPanelGruppe__inner label:first-child > input[value=JA]').click({ force: true })
-        cy.get('.undersporsmal .skjemaelement__input#687298').click()
 
-        cy.contains('Hvilke dager var du syk med egenmelding? Du trenger bare oppgi dager før 1. april 2020.')
+        cy.contains('Hvilke dager var du syk og borte fra jobb? Du trenger bare oppgi dager før 1. april 2020.')
         cy.get('#687299_0 .fom .nav-datovelger__kalenderknapp').click()
+
         cy.get('.DayPicker-Day').contains('11').click()
         cy.get('#687299_0 .tom .nav-datovelger__kalenderknapp').click()
         cy.get('.DayPicker-Day').contains('12').click()

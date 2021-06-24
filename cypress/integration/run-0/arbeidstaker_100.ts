@@ -202,7 +202,7 @@ describe('Tester arbeidstakersøknad', () => {
         // Gå til neste, så tilbake å svar nei
         cy.contains('Gå videre').click()
         cy.url().should('include', `${soknad.id}/10`)
-        cy.contains('Tilbake').click()
+        cy.contains('Tilbake').click({ force: true })
         cy.get('.inputPanelGruppe__inner label:nth-child(2) > input[value=NEI]').click({ force: true })
 
         cy.contains('Gå videre').click()

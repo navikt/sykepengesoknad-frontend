@@ -140,6 +140,11 @@ describe('Tester støtte for gamle spørsmål', () => {
         velgPeriode()
         gaVidere()
     })
+    it('FRAVAR_FOR_SYKMELDINGEN', () => {
+        svarJaHovedsporsmal()
+        velgPeriode()
+        gaVidere()
+    })
     it('ENKELTSTAENDE_BEHANDLINGSDAGER', () => {
         velgBehandlingsdager()
         gaVidere()
