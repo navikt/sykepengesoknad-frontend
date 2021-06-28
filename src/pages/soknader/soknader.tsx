@@ -13,6 +13,7 @@ import Vis from '../../components/vis'
 import { useAppStore } from '../../data/stores/app-store'
 import { RSSoknadstatus } from '../../types/rs-types/rs-soknadstatus'
 import { Brodsmule } from '../../types/types'
+import env from '../../utils/environment'
 import { sorterEtterNyesteTom } from '../../utils/sorter-soknader'
 import { tekst } from '../../utils/tekster'
 import { setBodyClass } from '../../utils/utils'
@@ -71,7 +72,7 @@ const Soknader = () => {
                     }
                 />
 
-                <Lenke className="hovedside-lenke" href="/sykefravaer">
+                <Lenke className="hovedside-lenke" href={env.sykefravaerUrl}>
                     <VenstreChevron />
                     <Normaltekst tag="span">{tekst('hovedside.lenke')}</Normaltekst>
                 </Lenke>
