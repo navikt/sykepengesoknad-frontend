@@ -68,11 +68,11 @@ const Utvidbar = (props: UtvidbarProps) => {
                 />
 
                 <Vis hvis={props.type === undefined}
-                    render={() => <Undertittel tag="h3" className="utvidbar__tittel">{props.tittel}</Undertittel>}
+                    render={() => <Undertittel tag="h2" className="utvidbar__tittel">{props.tittel}</Undertittel>}
                 />
 
                 <Vis hvis={props.type === 'intern'}
-                    render={() => <Normaltekst tag="h3" className="utvidbar__tittel">{props.tittel}</Normaltekst>}
+                    render={() => <Normaltekst tag="h2" className="utvidbar__tittel">{props.tittel}</Normaltekst>}
                 />
 
                 <span className="utvidbar__handling">

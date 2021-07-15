@@ -20,11 +20,8 @@ const TidligereSoknaderTeaser = ({ soknad }: SykepengesoknadTeaserProps) => {
             <Inngangspanel to={getUrlTilSoknad(soknad)}>
                 <div className="inngangspanel__ytre">
                     <div className="inngangspanel__del1">
-                        <InngangsIkon
-                            ikon={hentIkon(soknad)}
-                            ikonHover={hentIkonHover(soknad)}
-                        />
-                        <div className="inngangspanel__innhold">
+                        <InngangsIkon ikon={hentIkon(soknad)} ikonHover={hentIkonHover(soknad)} />
+                        <div id={`soknader-header-${soknad.id}`} className="inngangspanel__innhold">
                             <Vis hvis={soknad.soknadstype !== RSSoknadstype.OPPHOLD_UTLAND}
                                 render={() =>
                                     <Undertekst className="inngangspanel__periode">

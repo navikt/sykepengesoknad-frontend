@@ -24,11 +24,8 @@ const UtgaattSoknaderTeaser = ({ soknad }: SykepengesoknadTeaserProps) => {
                 onClick={() => setAapen(true)}>
                 <div className="inngangspanel__ytre">
                     <div className="inngangspanel__del1">
-                        <InngangsIkon
-                            ikon={hentIkon(soknad)}
-                            ikonHover={hentIkonHover(soknad)}
-                        />
-                        <div className="inngangspanel--inaktivt">
+                        <InngangsIkon ikon={hentIkon(soknad)} ikonHover={hentIkonHover(soknad)} />
+                        <div id={`soknader-header-${soknad.id}`} className="inngangspanel--inaktivt">
                             <Vis hvis={soknad.soknadstype !== RSSoknadstype.OPPHOLD_UTLAND}
                                 render={() =>
                                     <Undertekst className="inngangspanel__periode">
