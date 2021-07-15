@@ -42,7 +42,7 @@ const ArbeidstakerStatus = () => {
         <Vis hvis={valgtSoknad!.sendtTilArbeidsgiverDato}
             render={() =>
                 <>
-                    <Element tag="h2" className="sendt-tittel">
+                    <Element tag="h3" className="sendt-tittel">
                         {tekst('kvittering.sendt-til')}
                     </Element>
                     <Avkrysset tekst={tilArbNavn + ' ' + tilOrg} />
