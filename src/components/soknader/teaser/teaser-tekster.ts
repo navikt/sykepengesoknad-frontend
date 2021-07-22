@@ -21,6 +21,7 @@ const TeaserTekster = {
     'soknad.teaser.utgaatt.popup.header': 'Søknaden er utgått',
     'soknad.teaser.utgaatt.popup.innhold': 'Du får ikke åpnet denne søknaden fordi du ikke har sendt den innen fristen.',
     'soknad.reisetilskudd.teaser.tittel': 'Søknad om reisetilskudd',
+    'soknad.gradert-reisetilskudd.teaser.tittel': 'Søknad om sykepenger med reisetilskudd',
 }
 
 export default TeaserTekster

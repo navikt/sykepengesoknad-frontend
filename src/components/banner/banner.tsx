@@ -23,6 +23,9 @@ const Banner = ({ overskrift }: BannerProps) => {
             if (valgtSoknad.soknadstype === RSSoknadstype.REISETILSKUDD) {
                 return tekst('reisetilskuddsoknad.tittel')
             }
+            if (valgtSoknad.soknadstype === RSSoknadstype.GRADERT_REISETILSKUDD) {
+                return tekst('gradert-reisetilskuddsoknad.tittel')
+            }
         }
         return tekst('sykepengesoknad.sidetittel')
     }
