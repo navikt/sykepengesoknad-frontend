@@ -34,6 +34,9 @@ export const teaserTittel = (soknad: Soknad) => {
     if (soknad.soknadstype === RSSoknadstype.REISETILSKUDD) {
         return tekst('soknad.reisetilskudd.teaser.tittel')
     }
+    if (soknad.soknadstype === RSSoknadstype.GRADERT_REISETILSKUDD) {
+        return tekst('soknad.gradert-reisetilskudd.teaser.tittel')
+    }
 
     return tekst('soknad.teaser.tittel')
 }
