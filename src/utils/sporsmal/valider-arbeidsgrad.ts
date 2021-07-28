@@ -18,6 +18,7 @@ const useValiderArbeidsgrad = (sporsmal: Sporsmal) => {
     if (
         !valgtSoknad ||
         valgtSoknad.soknadstype === RSSoknadstype.REISETILSKUDD ||
+        valgtSoknad.soknadstype === RSSoknadstype.GRADERT_REISETILSKUDD ||
         (env.isDev && sporsmal.id === 'veldigLangSoknadTestReisetilskudd')
     ) {
         return { undefined }
