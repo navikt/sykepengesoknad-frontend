@@ -1,7 +1,7 @@
 import parser from 'html-react-parser'
 import { Element, Normaltekst } from 'nav-frontend-typografi'
 import React from 'react'
-import { useFormContext } from 'react-hook-form'
+import { useForm } from 'react-hook-form'
 
 import { SvarEnums, TagTyper } from '../../../types/enums'
 import { getLedetekst, tekst } from '../../../utils/tekster'
@@ -24,7 +24,7 @@ const jaNeiValg = [ {
 } ]
 
 const JaNeiRadio = ({ sporsmal }: SpmProps) => {
-    const { register, watch, errors } = useFormContext()
+    const { register, watch, formState: { errors } } = useForm()
     const watchJaNei = watch(sporsmal.id)
     const feilmelding = hentFeilmelding(sporsmal)
 
@@ -74,9 +74,8 @@ const JaNeiRadio = ({ sporsmal }: SpmProps) => {
                         <div className="radioContainer" key={idx}>
                             <input type="radio"
                                 id={sporsmal.id + '_' + idx}
-                                name={sporsmal.id}
                                 value={valg.value}
-                                ref={register({ required: feilmelding.global })}
+                                {...register(sporsmal.id, { required: feilmelding.global })}
                                 className="skjemaelement__input radioknapp"
                             />
                             <label className="skjemaelement__label" htmlFor={sporsmal.id + '_' + idx}>

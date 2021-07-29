@@ -41,6 +41,8 @@ const OpplastingForm = ({ sporsmal }: SpmProps) => {
         reValidateMode: 'onChange'
     })
 
+    const { formState: { errors }, register } = useForm()
+
     useEffect(() => {
         if (valgtKvittering) {
             setKvitteringHeader(tekst('opplasting_modal.endre-utlegg.tittel'))
@@ -50,7 +52,7 @@ const OpplastingForm = ({ sporsmal }: SpmProps) => {
             setFormErDisabled(false)
         }
         // eslint-disable-next-line
-    }, [valgtSoknad, valgtKvittering])
+    }, [ valgtSoknad, valgtKvittering ])
 
     const onSubmit = async() => {
         try {
@@ -66,7 +68,7 @@ const OpplastingForm = ({ sporsmal }: SpmProps) => {
             const rsOppdaterSporsmalResponse: RSOppdaterSporsmalResponse = await lagreSvarISyfosoknad(opplastingResponse)
             if (!rsOppdaterSporsmalResponse) return
 
-            valgtSoknad!.sporsmal[ spmIndex ] = new Sporsmal(rsOppdaterSporsmalResponse.oppdatertSporsmal, null, true)
+            valgtSoknad!.sporsmal[spmIndex] = new Sporsmal(rsOppdaterSporsmalResponse.oppdatertSporsmal, null, true)
             setValgtSoknad(valgtSoknad)
             setOpenModal(false)
         } catch (ex) {
@@ -150,12 +152,12 @@ const OpplastingForm = ({ sporsmal }: SpmProps) => {
                         </label>
                         <select
                             disabled={formErDisabled}
-                            ref={methods.register({
+                            {...methods.register('transportmiddel', {
                                 required: tekst('opplasting_modal.transportmiddel.feilmelding')
                             })}
                             className={
                                 'skjemaelement__input input--fullbredde kvittering-element' +
-                                (methods.errors[ 'transportmiddel' ] ? ' skjemaelement__input--harFeil' : '')
+                                (errors['transportmiddel'] ? ' skjemaelement__input--harFeil' : '')
                             }
                             id="transportmiddel"
                             name="transportmiddel"
@@ -164,8 +166,8 @@ const OpplastingForm = ({ sporsmal }: SpmProps) => {
                             <option value="">Velg</option>
                             {Object.entries(UtgiftTyper).map((keyval, idx) => {
                                 return (
-                                    <option value={keyval[ 0 ]} id={keyval[ 0 ]} key={idx}>
-                                        {keyval[ 1 ]}
+                                    <option value={keyval[0]} id={keyval[0]} key={idx}>
+                                        {keyval[1]}
                                     </option>
                                 )
                             })}
@@ -173,7 +175,7 @@ const OpplastingForm = ({ sporsmal }: SpmProps) => {
 
                         <div role="alert" aria-live="assertive">
                             <Normaltekst tag="span" className="skjemaelement__feilmelding">
-                                <Vis hvis={methods.errors[ 'transportmiddel' ]}
+                                <Vis hvis={errors['transportmiddel']}
                                     render={() => <>{tekst('opplasting_modal.transportmiddel.feilmelding')}</>}
                                 />
                             </Normaltekst>
@@ -186,26 +188,25 @@ const OpplastingForm = ({ sporsmal }: SpmProps) => {
                         </label>
                         <input
                             disabled={formErDisabled}
-                            ref={methods.register({
+                            {...register('belop_input',{
                                 required: tekst('opplasting_modal.belop.feilmelding'),
                                 min: { value: 0, message: 'Beløp kan ikke være negativt' },
                                 max: { value: 10000, message: 'Beløp kan ikke være større enn 10 000' },
                                 validate: (val) => {
                                     const belop = val.split('.')
-                                    if (belop[ 1 ]?.length > 2) {
-                                        methods.setValue('belop_input', belop[ 0 ] + '.' + belop[ 1 ].substring(0, 2))
+                                    if (belop[1]?.length > 2) {
+                                        methods.setValue('belop_input', belop[0] + '.' + belop[1].substring(0, 2))
                                     }
                                     return true
                                 }
                             })}
                             type="number"
                             id="belop_input"
-                            name="belop_input"
                             inputMode={'decimal'}
                             defaultValue={valgtKvittering?.belop ? (valgtKvittering.belop / 100) : ''}
                             className={
                                 'skjemaelement__input input--s periode-element' +
-                                (methods.errors[ 'belop_input' ] ? ' skjemaelement__input--harFeil' : '')
+                                (errors['belop_input'] ? ' skjemaelement__input--harFeil' : '')
                             }
                             step={0.01}
                             autoComplete="off"
@@ -214,8 +215,8 @@ const OpplastingForm = ({ sporsmal }: SpmProps) => {
 
                         <div role="alert" aria-live="assertive">
                             <Normaltekst tag="span" className="skjemaelement__feilmelding">
-                                <Vis hvis={methods.errors[ 'belop_input' ]}
-                                    render={() => <>{methods.errors[ 'belop_input' ]?.message}</>}
+                                <Vis hvis={errors['belop_input']}
+                                    render={() => <>{errors['belop_input']?.message}</>}
                                 />
                             </Normaltekst>
                         </div>

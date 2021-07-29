@@ -3,7 +3,7 @@ import './periode-komp.less'
 import { Datepicker } from 'nav-datovelger'
 import { Normaltekst } from 'nav-frontend-typografi'
 import React, { useEffect, useState } from 'react'
-import { Controller, useFormContext } from 'react-hook-form'
+import { Controller, useForm } from 'react-hook-form'
 
 import { skalBrukeFullskjermKalender } from '../../../utils/browser-utils'
 import { fraBackendTilDate } from '../../../utils/dato-utils'
@@ -27,7 +27,7 @@ export interface FormPeriode {
 type AllProps = SpmProps & PeriodeProps;
 
 const PeriodeKomp = ({ sporsmal, index, slettPeriode }: AllProps) => {
-    const { setValue, getValues, errors } = useFormContext()
+    const { setValue, getValues, formState: { errors } } = useForm()
     const [ periode, setPeriode ] = useState<FormPeriode>({ fom: '', tom: '' })
     const id = sporsmal.id + '_' + index
     const feilmelding = hentFeilmelding(sporsmal, errors[id])
@@ -88,19 +88,19 @@ const PeriodeKomp = ({ sporsmal, index, slettPeriode }: AllProps) => {
                     }}
                     name={id}
                     defaultValue={hentPeriode(sporsmal, index)} // Denne overlapper med useEffect, men må være med for å ikke få warning
-                    render={({ name }) => (
+                    render={() => (
                         <fieldset className="skjemagruppe">
                             <div className="fom skjemaelement">
-                                <label className="skjemaelement__label" htmlFor={name + '_fom'}>
+                                <label className="skjemaelement__label" htmlFor={sporsmal.id + '_fom'}>
                                     <Normaltekst tag="span">{tekst('sykepengesoknad.periodevelger.fom')}</Normaltekst>
                                 </label>
                                 <Datepicker
                                     locale={'nb'}
-                                    inputId={name + '_fom'}
+                                    inputId={sporsmal.id + '_fom'}
                                     onChange={(value) => onChange(value, undefined)}
                                     value={periode.fom}
                                     inputProps={{
-                                        name: name + '_fom'
+                                        name: sporsmal.id + '_fom'
                                     }}
                                     calendarSettings={{
                                         showWeekNumbers: true,
@@ -123,11 +123,11 @@ const PeriodeKomp = ({ sporsmal, index, slettPeriode }: AllProps) => {
                                 </label>
                                 <Datepicker
                                     locale={'nb'}
-                                    inputId={name + '_tom'}
+                                    inputId={sporsmal.id + '_tom'}
                                     onChange={(value) => onChange(undefined, value)}
                                     value={periode.tom}
                                     inputProps={{
-                                        name: name + '_tom'
+                                        name: sporsmal.id + '_tom'
                                     }}
                                     calendarSettings={{
                                         showWeekNumbers: true,

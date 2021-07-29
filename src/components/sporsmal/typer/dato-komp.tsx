@@ -1,7 +1,7 @@
 import { Datepicker } from 'nav-datovelger'
 import { Element } from 'nav-frontend-typografi'
 import React from 'react'
-import { Controller, useFormContext } from 'react-hook-form'
+import { Controller, useForm } from 'react-hook-form'
 
 import { skalBrukeFullskjermKalender } from '../../../utils/browser-utils'
 import { fraBackendTilDate } from '../../../utils/dato-utils'
@@ -12,7 +12,7 @@ import { SpmProps } from '../sporsmal-form/sporsmal-form'
 import UndersporsmalListe from '../undersporsmal/undersporsmal-liste'
 
 const DatoInput = ({ sporsmal }: SpmProps) => {
-    const { setValue, getValues, watch } = useFormContext()
+    const { setValue, getValues, watch } = useForm()
     const watchDato = watch(sporsmal.id)
 
     return (
@@ -35,16 +35,16 @@ const DatoInput = ({ sporsmal }: SpmProps) => {
                         return true
                     }
                 }}
-                render={({ name }) => (
+                render={() => (
                     <Datepicker
                         locale={'nb'}
-                        inputId={name}
+                        inputId={sporsmal.id}
                         onChange={(value) => {
                             setValue(sporsmal.id, value)
                         }}
                         value={watchDato}
                         inputProps={{
-                            name: name
+                            name: sporsmal.id
                         }}
                         calendarSettings={{
                             showWeekNumbers: true,

@@ -80,7 +80,7 @@ const BehDager = ({ sporsmal }: SpmProps) => {
                                                 id={ukespm.id + '_' + idx}
                                                 name={ukespm.id}
                                                 value={dagspm.format('YYYY-MM-DD')}
-                                                ref={register}
+                                                {...register}
                                                 onChange={() => radioKlikk(dagspm.format(('YYYY-MM-DD')), ukeidx, ukespm.id)}
                                                 className="radioknapp"
                                             />

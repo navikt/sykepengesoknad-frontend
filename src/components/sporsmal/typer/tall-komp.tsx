@@ -1,7 +1,7 @@
 import AlertStripe from 'nav-frontend-alertstriper'
 import { Normaltekst } from 'nav-frontend-typografi'
 import React, { useRef } from 'react'
-import { useFormContext } from 'react-hook-form'
+import { useForm } from 'react-hook-form'
 
 import { TagTyper } from '../../../types/enums'
 import { RSSvartype } from '../../../types/rs-types/rs-svartype'
@@ -14,7 +14,7 @@ import SporsmalstekstH3 from '../sporsmalstekst/sporsmalstekstH3'
 import UndersporsmalListe from '../undersporsmal/undersporsmal-liste'
 
 const TallKomp = ({ sporsmal }: SpmProps) => {
-    const { register, errors, watch } = useFormContext()
+    const { register, formState: { errors }, watch } = useForm()
     const watchTall = watch(sporsmal.id)
 
     const feilmelding = hentFeilmelding(sporsmal, errors[sporsmal.id])
@@ -79,11 +79,10 @@ const TallKomp = ({ sporsmal }: SpmProps) => {
                         inputSize() +
                         (errors[sporsmal.id] ? ' skjemaelement__input--harFeil' : '')
                     }
-                    name={sporsmal.id}
                     id={sporsmal.id}
                     min={sporsmal.min!}
                     max={sporsmal.max!}
-                    ref={register({
+                    {...register(sporsmal.id,{
                         required: feilmelding.global,
                         validate: () => valider(),
                         min: {
