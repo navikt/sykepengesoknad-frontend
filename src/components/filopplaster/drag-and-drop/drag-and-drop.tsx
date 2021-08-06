@@ -3,7 +3,7 @@ import './drag-and-drop.less'
 import { Element, Normaltekst } from 'nav-frontend-typografi'
 import React, { useCallback, useEffect, useState } from 'react'
 import { useDropzone } from 'react-dropzone'
-import { useForm } from 'react-hook-form'
+import { useFormContext } from 'react-hook-form'
 
 import { useAppStore } from '../../../data/stores/app-store'
 import env from '../../../utils/environment'
@@ -21,7 +21,7 @@ const maks = formaterFilstørrelse(maxFilstørrelse)
 
 const DragAndDrop = () => {
     const { valgtFil, setValgtFil, valgtKvittering } = useAppStore()
-    const { formState: { errors }, register } = useForm()
+    const { formState: { errors }, register } = useFormContext()
     const [ formErDisabled, setFormErDisabled ] = useState<boolean>(false)
 
     useEffect(() => {

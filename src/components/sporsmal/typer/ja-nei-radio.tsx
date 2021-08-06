@@ -1,7 +1,7 @@
 import parser from 'html-react-parser'
 import { Element, Normaltekst } from 'nav-frontend-typografi'
 import React from 'react'
-import { useForm } from 'react-hook-form'
+import { useFormContext } from 'react-hook-form'
 
 import { SvarEnums, TagTyper } from '../../../types/enums'
 import { getLedetekst, tekst } from '../../../utils/tekster'
@@ -24,7 +24,7 @@ const jaNeiValg = [ {
 } ]
 
 const JaNeiRadio = ({ sporsmal }: SpmProps) => {
-    const { register, watch, formState: { errors } } = useForm()
+    const { register, formState: { errors }, watch } = useFormContext()
     const watchJaNei = watch(sporsmal.id)
     const feilmelding = hentFeilmelding(sporsmal)
 

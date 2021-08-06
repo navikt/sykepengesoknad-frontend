@@ -1,5 +1,5 @@
 import React from 'react'
-import { useForm } from 'react-hook-form'
+import { useFormContext, useWatch } from 'react-hook-form'
 
 import { TagTyper } from '../../../types/enums'
 import FeilLokal from '../../feil/feil-lokal'
@@ -7,9 +7,9 @@ import { SpmProps } from '../sporsmal-form/sporsmal-form'
 import { hentFeilmelding } from '../sporsmal-utils'
 
 const CheckboxInput = ({ sporsmal }: SpmProps) => {
-    const { formState: { errors }, register, watch } = useForm()
+    const { register, formState: { errors } } = useFormContext()
     const feilmelding = hentFeilmelding(sporsmal)
-    const watchCheckbox = watch(sporsmal.id)
+    const watchCheckbox = useWatch({ name: sporsmal.id })
 
     if (sporsmal.tag === TagTyper.BEKREFT_OPPLYSNINGER_UTLAND_INFO) {
         return <CheckboxInput sporsmal={sporsmal.undersporsmal[0]} />

@@ -51,7 +51,7 @@ const SporsmalForm = () => {
     const history = useHistory()
     const spmIndex = parseInt(stegId) - 1
     const methods = useForm({ reValidateMode: 'onChange' })
-    const { formState: { errors }, register } = useForm()
+    const { formState: { errors } } = useForm()
     const erUtlandssoknad = valgtSoknad!.soknadstype === RSSoknadstype.OPPHOLD_UTLAND
     let restFeilet = false
     let sporsmal = valgtSoknad!.sporsmal[spmIndex]
@@ -243,7 +243,6 @@ const SporsmalForm = () => {
         }
     }
 
-
     return (
         <FormProvider {...methods}>
             <form onSubmit={methods.handleSubmit(onSubmit)}
@@ -274,7 +273,7 @@ const SporsmalForm = () => {
                     }
                 />
 
-                <FeilOppsummering errors={errors} sporsmal={sporsmal} />
+                <FeilOppsummering sporsmal={sporsmal} />
                 <InfotekstOverSubmit sporsmal={sporsmal} />
 
                 <Vis hvis={skalViseKnapperad(valgtSoknad!, sporsmal, methods.getValues())}

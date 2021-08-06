@@ -1,7 +1,7 @@
 import { Datepicker } from 'nav-datovelger'
 import { Element } from 'nav-frontend-typografi'
 import React from 'react'
-import { Controller, useForm } from 'react-hook-form'
+import { Controller, useFormContext } from 'react-hook-form'
 
 import { skalBrukeFullskjermKalender } from '../../../utils/browser-utils'
 import { fraBackendTilDate } from '../../../utils/dato-utils'
@@ -12,7 +12,7 @@ import { SpmProps } from '../sporsmal-form/sporsmal-form'
 import UndersporsmalListe from '../undersporsmal/undersporsmal-liste'
 
 const DatoInput = ({ sporsmal }: SpmProps) => {
-    const { setValue, getValues, watch } = useForm()
+    const { setValue, getValues, watch } = useFormContext()
     const watchDato = watch(sporsmal.id)
 
     return (

@@ -1,7 +1,7 @@
 import AlertStripe from 'nav-frontend-alertstriper'
 import { Normaltekst } from 'nav-frontend-typografi'
 import React, { useEffect } from 'react'
-import { useForm } from 'react-hook-form'
+import { useFormContext } from 'react-hook-form'
 import useForceUpdate from 'use-force-update'
 
 import { RSSvartype } from '../../../types/rs-types/rs-svartype'
@@ -16,7 +16,7 @@ import SporsmalstekstH3 from '../sporsmalstekst/sporsmalstekstH3'
 import UndersporsmalListe from '../undersporsmal/undersporsmal-liste'
 
 const RadioKomp = ({ sporsmal }: SpmProps) => {
-    const { register, watch, formState: { errors } } = useForm()
+    const { register, formState: { errors }, watch } = useFormContext()
     const watchRadio = watch(sporsmal.id)
     const feilmelding = hentFeilmelding(sporsmal)
     const forceUpdate = useForceUpdate()

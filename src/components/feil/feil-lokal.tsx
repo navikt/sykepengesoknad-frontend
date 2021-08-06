@@ -1,6 +1,6 @@
 import { Normaltekst } from 'nav-frontend-typografi'
 import React from 'react'
-import { useForm } from 'react-hook-form'
+import { useFormContext } from 'react-hook-form'
 
 import { Sporsmal } from '../../types/types'
 import { hentFeilmelding } from '../sporsmal/sporsmal-utils'
@@ -11,7 +11,7 @@ interface FeilProps {
 }
 
 const FeilLokal = ({ sporsmal }: FeilProps) => {
-    const { formState: { errors } } = useForm()
+    const { formState: { errors } } = useFormContext()
     const feilmelding = hentFeilmelding(sporsmal, errors[sporsmal.id])
 
     return (

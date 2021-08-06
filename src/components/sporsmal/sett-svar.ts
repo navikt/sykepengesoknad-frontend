@@ -10,7 +10,7 @@ const hentVerdier = (sporsmal: Sporsmal, verdier: Record<string, any>) => {
         verdi = Object.entries(verdier)
             .filter(([ key ]) => key.startsWith(sporsmal.id))
             .map(([ key ]) => verdier[key])
-            .filter((verdi) => verdi !== empty && verdi !== false)
+            .filter(verdi => verdi !== empty && verdi !== false)
     }
     return verdi
 }

@@ -2,6 +2,7 @@ import './feil-oppsummering.less'
 
 import { Undertittel } from 'nav-frontend-typografi'
 import React, { useEffect, useRef } from 'react'
+import { useFormContext } from 'react-hook-form'
 
 import { RSSvartype } from '../../types/rs-types/rs-svartype'
 import { Sporsmal } from '../../types/types'
@@ -10,13 +11,8 @@ import { useAmplitudeInstance } from '../amplitude/amplitude'
 import { SpmProps } from '../sporsmal/sporsmal-form/sporsmal-form'
 import Vis from '../vis'
 
-interface FeiloppsummeringProps {
-    errors: any;
-}
-
-type FeilProps = FeiloppsummeringProps & SpmProps;
-
-const FeilOppsummering = ({ errors, sporsmal }: FeilProps) => {
+const FeilOppsummering = ({ sporsmal }: SpmProps) => {
+    const { formState: { errors } } = useFormContext()
     const oppsummering = useRef<HTMLDivElement>(null)
     const { logEvent } = useAmplitudeInstance()
     const entries: any[] = Object.entries(errors)

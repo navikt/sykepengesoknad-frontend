@@ -4,7 +4,7 @@ import AlertStripe from 'nav-frontend-alertstriper'
 import { Knapp } from 'nav-frontend-knapper'
 import { Element, Normaltekst, Systemtittel } from 'nav-frontend-typografi'
 import React, { useEffect, useState } from 'react'
-import { FormProvider, useForm } from 'react-hook-form'
+import { FormProvider, useForm, useFormContext } from 'react-hook-form'
 import { useParams } from 'react-router-dom'
 
 import { RouteParams } from '../../../app'
@@ -41,7 +41,8 @@ const OpplastingForm = ({ sporsmal }: SpmProps) => {
         reValidateMode: 'onChange'
     })
 
-    const { formState: { errors }, register } = useForm()
+    const { formState: { errors } } = useForm()
+    const { register } = useFormContext()
 
     useEffect(() => {
         if (valgtKvittering) {
