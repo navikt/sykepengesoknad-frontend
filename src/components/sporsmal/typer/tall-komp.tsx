@@ -82,7 +82,7 @@ const TallKomp = ({ sporsmal }: SpmProps) => {
                     id={sporsmal.id}
                     min={sporsmal.min!}
                     max={sporsmal.max!}
-                    {...register(sporsmal.id,{
+                    {...register(sporsmal.id, {
                         required: feilmelding.global,
                         validate: () => valider(),
                         min: {

@@ -37,11 +37,12 @@ import SendesTil from './sendes-til'
 import skalViseKnapperad from './skal-vise-knapperad'
 
 export interface SpmProps {
-    sporsmal: Sporsmal;
+    sporsmal: Sporsmal
 }
 
 const SporsmalForm = () => {
-    const { soknader, setSoknader, setValgtSoknad, valgtSoknad,
+    const {
+        soknader, setSoknader, setValgtSoknad, valgtSoknad,
         mottaker, setTop, setMottaker, setFeilState
     } = useAppStore()
     const { logEvent } = useAmplitudeInstance()
@@ -50,8 +51,9 @@ const SporsmalForm = () => {
     const { stegId } = useParams<RouteParams>()
     const history = useHistory()
     const spmIndex = parseInt(stegId) - 1
-    const methods = useForm({ reValidateMode: 'onChange' })
-    const { formState: { errors } } = useForm()
+    const methods = useForm({
+        reValidateMode: 'onChange', mode: 'onBlur'
+    })
     const erUtlandssoknad = valgtSoknad!.soknadstype === RSSoknadstype.OPPHOLD_UTLAND
     let restFeilet = false
     let sporsmal = valgtSoknad!.sporsmal[spmIndex]

@@ -9,16 +9,18 @@ export interface TagProps {
 }
 
 const Tag = ({ onDelete, verdi }: TagProps) => {
-    return (<span className="etikett etikett--info etikett--tag">
-        <span className="etikett--tag__verdi">{verdi}</span>
-        <button
-            type="button"
-            className="etikett__slett"
-            onClick={onDelete}>
-            <span className="etikett__slett-label etikett__slett-label--skjermleser">Slett</span>
-            <span aria-hidden="true" className="etikett__slett-label">{kryss}</span>
-        </button>
-    </span>)
+    return (
+        <span className="etikett etikett--info etikett--tag">
+            <span className="etikett--tag__verdi">{verdi}</span>
+            <button
+                type="button"
+                className="etikett__slett"
+                onClick={onDelete}>
+                <span className="etikett__slett-label etikett__slett-label--skjermleser">Slett</span>
+                <span aria-hidden="true" className="etikett__slett-label">{kryss}</span>
+            </button>
+        </span>
+    )
 }
 
 export interface ValgteTagsProps {
@@ -27,18 +29,21 @@ export interface ValgteTagsProps {
 }
 
 export const ValgteTags = ({ handleDelete, verdier }: ValgteTagsProps) => {
-    return (<div aria-live="polite">
-        {
-            verdier && verdier.length > 0
+    return (
+        <div aria-live="polite">
+            {verdier && verdier.length > 0
                 ? verdier.map((verdi, index) => {
-                    return (<Tag
-                        key={verdi}
-                        onDelete={() => {
-                            handleDelete(index)
-                        }}
-                        verdi={verdi} />)
+                    return (
+                        <Tag key={verdi}
+                            onDelete={() => {
+                                handleDelete(index)
+                            }}
+                            verdi={verdi}
+                        />
+                    )
                 })
                 : null
-        }
-    </div>)
+            }
+        </div>
+    )
 }

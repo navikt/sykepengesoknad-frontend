@@ -1,5 +1,6 @@
 import { Element } from 'nav-frontend-typografi'
 import React, { useEffect, useRef, useState } from 'react'
+import { useFormContext } from 'react-hook-form'
 import useForceUpdate from 'use-force-update'
 
 import { tekst } from '../../../utils/tekster'
@@ -9,6 +10,7 @@ import UndersporsmalListe from '../undersporsmal/undersporsmal-liste'
 import PeriodeKomp from './periode-komp'
 
 const Perioder = ({ sporsmal }: SpmProps) => {
+    const { clearErrors } = useFormContext()
     const [ lokal, setLokal ] = useState<number[]>([ 0 ])
     const periodeliste = useRef<HTMLUListElement>(null)
     const forceUpdate = useForceUpdate()
@@ -19,11 +21,12 @@ const Perioder = ({ sporsmal }: SpmProps) => {
         // eslint-disable-next-line
     }, [ sporsmal ])
 
-    const slettPeriode = (e: any, id: number) => {
+    const slettPeriode = (e: any, idx: number) => {
         e.preventDefault()
-        const index = lokal.findIndex(value => value === id)
+        const index = lokal.findIndex(value => value === idx)
         lokal.splice(index, 1)
         setLokal(lokal)
+        clearErrors(sporsmal.id + '_' + idx)
         forceUpdate()
     }
 

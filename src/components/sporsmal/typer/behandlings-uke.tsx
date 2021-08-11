@@ -2,7 +2,6 @@ import dayjs from 'dayjs'
 import React, { useEffect, useRef, useState } from 'react'
 import { useFormContext } from 'react-hook-form'
 
-import { RSSvarliste } from '../../../types/rs-types/rs-svarliste'
 import { Sporsmal } from '../../../types/types'
 import { ukeDatoListe } from '../../../utils/dato-utils'
 import { hentSvar } from '../hent-svar'
@@ -16,22 +15,17 @@ interface UkeProps {
 const BehandlingsUke = ({ sporsmal, ukeidx, ukespm }: UkeProps) => {
     const { register, setValue, watch } = useFormContext()
     const fjernRef = useRef<HTMLLabelElement>(null)
-    const ukeWatch = watch(ukespm.id)
-    const [ lagret, setLagret ] = useState<RSSvarliste[]>([])
-
-    const hentLagret = () => {
-        setLagret(hentSvar(sporsmal))
-    }
+    const [ lokal, setLokal ] = useState<string>('')
 
     useEffect(() => {
-        hentLagret()
-        const liste = lagret[ukeidx]
-        if (liste.svar[0] && liste.svar[0].verdi && liste.svar[0].verdi !== 'Ikke til behandling') {
-            fjernRef.current!.classList.remove('skjul')
-            setValue(ukespm.id, liste.svar[0].verdi)
+        const svar = hentSvar(sporsmal)
+        const liste = svar[ukeidx].svar
+        if (liste && liste[0] && liste[0].verdi !== 'Ikke til behandling') {
+            setLokal(liste[0].verdi)
+            setValue(ukespm.id, liste[0].verdi)
         }
         // eslint-disable-next-line
-    }, [ lagret ])
+    }, [])
 
     const dagerSidenMandag = (spm: Sporsmal) => {
         return ((dayjs(spm.min!).day() - 1)) % 7
@@ -42,12 +36,13 @@ const BehandlingsUke = ({ sporsmal, ukeidx, ukespm }: UkeProps) => {
     }
 
     const radioKlikk = (value: string, index: number, name: string) => {
-        setValue(name, value)
+        setLokal(value)
+        setValue(ukespm.id, value)
     }
 
     const fjernKlikk = (ukespm: Sporsmal, index: number) => {
+        setLokal('')
         setValue(ukespm.id, '')
-        fjernRef.current!.classList.add('skjul')
     }
 
     return (
@@ -58,20 +53,18 @@ const BehandlingsUke = ({ sporsmal, ukeidx, ukespm }: UkeProps) => {
             })}
 
             {ukeDatoListe(ukespm.min!, ukespm.max!).map((dag, idx) => {
+                const checked = lokal === dag.format('YYYY-MM-DD')
                 return (
                     <div className="kalenderdag" key={idx}>
                         <input type="radio"
                             id={ukespm.id + '_' + idx}
-                            value={dag.format('YYYY-MM-DD')}
+                            defaultValue={dag.format('YYYY-MM-DD')}
                             {...register(ukespm.id)}
                             onChange={() => radioKlikk(dag.format(('YYYY-MM-DD')), ukeidx, ukespm.id)}
-                            checked={ukeWatch === dag.format('YYYY-MM-DD')}
+                            defaultChecked={checked}
                             className="radioknapp"
                         />
-                        <label htmlFor={ukespm.id + '_' + idx}
-                            onClick={() =>
-                                fjernRef.current!.classList.remove('skjul')}
-                        >
+                        <label htmlFor={ukespm.id + '_' + idx}>
                             {dag.date()}
                         </label>
                     </div>
@@ -91,7 +84,7 @@ const BehandlingsUke = ({ sporsmal, ukeidx, ukespm }: UkeProps) => {
                 />
                 <label htmlFor={ukespm.id + '_fjern'}
                     id={ukespm.id + '_label'}
-                    className="fjern skjul"
+                    className={lokal ? 'fjern' : 'fjern skjul'}
                     onClick={() => fjernKlikk(ukespm, ukeidx)}
                     ref={fjernRef}
                 >
