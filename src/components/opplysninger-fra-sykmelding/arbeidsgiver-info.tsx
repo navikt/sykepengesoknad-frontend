@@ -6,16 +6,16 @@ import { tekst } from '../../utils/tekster'
 import Vis from '../vis'
 
 const ArbeidsgiverInfo = () => {
-    const { valgtSykmelding } = useAppStore()
+    const { valgtSoknad } = useAppStore()
 
     return (
-        <Vis hvis={valgtSykmelding?.arbeidsgiver}
+        <Vis hvis={valgtSoknad?.arbeidsgiver}
             render={() =>
                 <div className="avsnitt">
                     <UndertekstBold tag="h3" className="avsnitt-hode">
                         {tekst('sykepengesoknad.sykmelding-utdrag.arbeidsgiver')}
                     </UndertekstBold>
-                    <Normaltekst>{valgtSykmelding!.arbeidsgiver!.navn}</Normaltekst>
+                    <Normaltekst>{valgtSoknad!.arbeidsgiver!.navn}</Normaltekst>
                 </div>
             }
         />
