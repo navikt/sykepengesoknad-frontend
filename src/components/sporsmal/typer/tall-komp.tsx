@@ -73,15 +73,9 @@ const TallKomp = ({ sporsmal }: SpmProps) => {
             <SporsmalstekstH3 sporsmal={sporsmal} />
 
             <div className="medEnhet">
-                <input type="number"
-                    className={
-                        'skjemaelement__input' +
-                        inputSize() +
-                        (errors[sporsmal.id] ? ' skjemaelement__input--harFeil' : '')
-                    }
+                <input
+                    type="number"
                     id={sporsmal.id}
-                    min={sporsmal.min!}
-                    max={sporsmal.max!}
                     {...register(sporsmal.id, {
                         required: feilmelding.global,
                         validate: () => valider(),
@@ -98,6 +92,13 @@ const TallKomp = ({ sporsmal }: SpmProps) => {
                             )
                         }
                     })}
+                    min={sporsmal.min!}
+                    max={sporsmal.max!}
+                    className={
+                        'skjemaelement__input' +
+                        inputSize() +
+                        (errors[sporsmal.id] ? ' skjemaelement__input--harFeil' : '')
+                    }
                     step={step()}
                     autoComplete="off"
                 />
