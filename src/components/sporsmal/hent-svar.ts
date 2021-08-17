@@ -12,9 +12,7 @@ export const hentSvar = (sporsmal: Sporsmal): any => {
     const svartype = sporsmal.svartype
     switch(svartype) {
         case RSSvartype.INFO_BEHANDLINGSDAGER:
-            // eslint-disable-next-line no-case-declarations
-            const s = sporsmal.undersporsmal.map(uspm => uspm.svarliste)
-            return s
+            return sporsmal.undersporsmal.map(uspm => uspm.svarliste)
 
         case RSSvartype.CHECKBOX:
         case RSSvartype.CHECKBOX_PANEL:
