@@ -275,7 +275,14 @@ const SporsmalForm = () => {
                     }
                 />
 
-                <FeilOppsummering sporsmal={sporsmal} />
+                <Vis hvis={
+                    (valgtSoknad!.soknadstype === RSSoknadstype.REISETILSKUDD
+                        && sporsmal.svartype !== RSSvartype.KVITTERING)
+                    || valgtSoknad!.soknadstype !== RSSoknadstype.REISETILSKUDD
+                } render={() =>
+                    <FeilOppsummering sporsmal={sporsmal} />
+                } />
+
                 <InfotekstOverSubmit sporsmal={sporsmal} />
 
                 <Vis hvis={skalViseKnapperad(valgtSoknad!, sporsmal, methods.getValues())}

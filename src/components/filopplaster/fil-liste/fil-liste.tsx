@@ -20,7 +20,6 @@ interface Props {
 
 const FilListe = ({ sporsmal, fjernKnapp }: Props) => {
     const { setValgtKvittering, setOpenModal } = useAppStore()
-    console.log('sporsmal', sporsmal) // eslint-disable-line
     const kvitteringer = hentSvar(sporsmal)
     const forceUpdate = useForceUpdate()
 
