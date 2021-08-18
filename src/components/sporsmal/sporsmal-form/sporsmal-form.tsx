@@ -52,7 +52,9 @@ const SporsmalForm = () => {
     const history = useHistory()
     const spmIndex = parseInt(stegId) - 1
     const methods = useForm({
-        reValidateMode: 'onChange', mode: 'onBlur'
+        mode: 'onBlur',
+        reValidateMode: 'onChange',
+        shouldUnregister: true,
     })
     const erUtlandssoknad = valgtSoknad!.soknadstype === RSSoknadstype.OPPHOLD_UTLAND
     let restFeilet = false

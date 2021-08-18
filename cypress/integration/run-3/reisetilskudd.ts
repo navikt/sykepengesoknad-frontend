@@ -240,6 +240,14 @@ describe('Teste førsteside i reisetilskuddsøknaden', () => {
                 cy.get('.skjemaelement__feilmelding').contains('Beløp kan ikke være større enn 10 000')
             })
 
+            it('Kan ikke skrive inn med 3 desimaler', () => {
+                cy.get('input[name=belop_input]').clear().type('100.253')
+                cy.get('.lagre-kvittering').contains('Bekreft').click()
+                cy.get('input[name=belop_input]').invoke('val').should((val) => {
+                    expect(val).to.be.eq('100.25')
+                })
+            })
+
             it('Gyldig beløp med 2 desimaler', () => {
                 cy.get('input[name=belop_input]').clear().type('100.30')
                 cy.get('.lagre-kvittering').contains('Bekreft').click()

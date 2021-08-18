@@ -20,7 +20,6 @@ const FeilOppsummering = ({ sporsmal }: SpmProps) => {
     useEffect(() => {
         setEntries(Object.entries(formState.errors))
         if (Object.entries(formState.errors).length > 0) {
-            //oppsummering.current?.focus()
             logEvent('skjemavalidering feilet', { sporsmalstag: sporsmal.tag })
         }
         // eslint-disable-next-line

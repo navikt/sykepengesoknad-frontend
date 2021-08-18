@@ -3,7 +3,6 @@ import './opplasting.less'
 import Modal from 'nav-frontend-modal'
 import { Element, Normaltekst } from 'nav-frontend-typografi'
 import React from 'react'
-import { useFormContext } from 'react-hook-form'
 
 import { useAppStore } from '../../../../data/stores/app-store'
 import { tekst } from '../../../../utils/tekster'
@@ -15,7 +14,6 @@ import SparTidMobil from './spar-tid-mobil'
 
 const Opplasting = ({ sporsmal }: SpmProps) => {
     const { setValgtKvittering, openModal, setOpenModal } = useAppStore()
-    const { clearErrors, setValue } = useFormContext()
 
     Modal.setAppElement('#maincontent')
 
@@ -25,7 +23,6 @@ const Opplasting = ({ sporsmal }: SpmProps) => {
     }
 
     const lukkModal = () => {
-        clearErrors()
         setOpenModal(false)
     }
 

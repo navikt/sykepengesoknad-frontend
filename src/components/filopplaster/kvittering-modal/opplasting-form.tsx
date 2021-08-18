@@ -6,7 +6,7 @@ import AlertStripe from 'nav-frontend-alertstriper'
 import { Knapp } from 'nav-frontend-knapper'
 import { Element, Normaltekst, Systemtittel } from 'nav-frontend-typografi'
 import React, { useEffect, useState } from 'react'
-import { FormProvider, useForm, useFormContext } from 'react-hook-form'
+import { FormProvider, useForm } from 'react-hook-form'
 import { useParams } from 'react-router-dom'
 
 import { RouteParams } from '../../../app'
@@ -40,10 +40,10 @@ const OpplastingForm = ({ sporsmal }: SpmProps) => {
     const spmIndex = stegNum - 1
 
     const methods = useForm({
-        mode: 'all', reValidateMode: 'onChange'
+        mode: 'onBlur',
+        reValidateMode: 'onChange',
+        shouldUnregister: true,
     })
-
-    const { formState: { errors }, register, getValues, setError, clearErrors, setValue } = useFormContext()
 
     useEffect(() => {
         if (valgtKvittering) {
@@ -57,16 +57,6 @@ const OpplastingForm = ({ sporsmal }: SpmProps) => {
     }, [ valgtSoknad, valgtKvittering ])
 
     const onSubmit = async() => {
-        if (getValues('transportmiddel') === undefined) {
-            setError('transportmiddel', { message: tekst('opplasting_modal.transportmiddel.feilmelding') })
-        } else {
-            clearErrors('transportmiddel')
-        }
-
-        if (!getValues('belop_input')) {
-            setError('belop_input', { message: tekst('opplasting_modal.belop.feilmelding') })
-        }
-
         try {
             setLaster(true)
             setFeilmeldingTekst('')
@@ -166,18 +156,10 @@ const OpplastingForm = ({ sporsmal }: SpmProps) => {
                             disabled={formErDisabled}
                             {...methods.register('transportmiddel', {
                                 required: tekst('opplasting_modal.transportmiddel.feilmelding'),
-                                validate: (val) => {
-                                    if (val) {
-                                        methods.setValue('transportmiddel', val)
-                                        clearErrors('transportmiddel')
-                                        return true
-                                    }
-                                    return false
-                                }
                             })}
                             className={
                                 'skjemaelement__input input--fullbredde kvittering-element' +
-                                (errors['transportmiddel'] ? ' skjemaelement__input--harFeil' : '')
+                                (methods.formState.errors['transportmiddel'] ? ' skjemaelement__input--harFeil' : '')
                             }
                             id="transportmiddel"
                             name="transportmiddel"
@@ -195,8 +177,8 @@ const OpplastingForm = ({ sporsmal }: SpmProps) => {
 
                         <div role="alert" aria-live="assertive">
                             <Normaltekst tag="span" className="skjemaelement__feilmelding">
-                                <Vis hvis={errors['transportmiddel']}
-                                    render={() => <>{errors['transportmiddel']?.message}</>}
+                                <Vis hvis={methods.formState.errors['transportmiddel']}
+                                    render={() => <>{methods.formState.errors['transportmiddel']?.message}</>}
                                 />
                             </Normaltekst>
                         </div>
@@ -209,12 +191,13 @@ const OpplastingForm = ({ sporsmal }: SpmProps) => {
                         <input
                             type="number"
                             id="belop_input"
-                            {...register('belop_input', {
+                            {...methods.register('belop_input', {
                                 required: tekst('opplasting_modal.belop.feilmelding'),
                                 min: { value: 0, message: 'Beløp kan ikke være negativt' },
                                 max: { value: 10000, message: 'Beløp kan ikke være større enn 10 000' },
                                 validate: (val) => {
-                                    let belop = Number(val.replace(',', '.').replace(/ /g, ''))
+                                    let belop = val.toString()
+                                    belop = Number(belop.replace(',', '.').replace(/ /g, ''))
                                     belop = Math.round(belop * 100) / 100
                                     methods.setValue('belop_input', belop)
                                     return true
@@ -223,7 +206,7 @@ const OpplastingForm = ({ sporsmal }: SpmProps) => {
                             defaultValue={valgtKvittering?.belop ? (valgtKvittering.belop / 100) : ''}
                             className={
                                 'skjemaelement__input input--s periode-element' +
-                                (errors['belop_input'] ? ' skjemaelement__input--harFeil' : '')
+                                (methods.formState.errors['belop_input'] ? ' skjemaelement__input--harFeil' : '')
                             }
                             inputMode="decimal"
                             step={0.01}
@@ -233,10 +216,10 @@ const OpplastingForm = ({ sporsmal }: SpmProps) => {
                         <span className="enhet">kr</span>
 
                         <div role="alert" aria-live="assertive">
-                            <Vis hvis={errors['belop_input']?.message}
+                            <Vis hvis={methods.formState.errors['belop_input']?.message}
                                 render={() =>
                                     <Normaltekst tag="span" className="skjemaelement__feilmelding">
-                                        {errors['belop_input']?.message}
+                                        {methods.formState.errors['belop_input']?.message}
                                     </Normaltekst>
                                 } />
                         </div>
@@ -265,7 +248,6 @@ const OpplastingForm = ({ sporsmal }: SpmProps) => {
 
                     <Knapp htmlType="button" className="lagre-kvittering" onClick={() => {
                         setOpenModal(false)
-                        clearErrors()
                     }}>
                         {tekst('opplasting_modal.tilbake')}
                     </Knapp>
