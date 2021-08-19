@@ -1,11 +1,10 @@
 import AlertStripe from 'nav-frontend-alertstriper'
 import { Normaltekst } from 'nav-frontend-typografi'
-import React, { MouseEvent, useEffect } from 'react'
+import React, { useEffect } from 'react'
 import { useFormContext } from 'react-hook-form'
 import useForceUpdate from 'use-force-update'
 
 import { RSSvartype } from '../../../types/rs-types/rs-svartype'
-import { Sporsmal } from '../../../types/types'
 import validerArbeidsgrad from '../../../utils/sporsmal/valider-arbeidsgrad'
 import { getLedetekst, tekst } from '../../../utils/tekster'
 import AnimateOnMount from '../../animate-on-mount'
@@ -16,16 +15,8 @@ import { hentFeilmelding } from '../sporsmal-utils'
 import SporsmalstekstH3 from '../sporsmalstekst/sporsmalstekstH3'
 import UndersporsmalListe from '../undersporsmal/undersporsmal-liste'
 
-export interface RadioUnderKompProps {
-    selectedOption: string;
-    uspm: Sporsmal;
-    idx: number;
-    sporsmal: Sporsmal;
-    handleOptionChange: (e: MouseEvent) => void;
-}
-
 const RadioKomp = ({ sporsmal }: SpmProps) => {
-    const { register, watch, errors } = useFormContext()
+    const { register, formState: { errors }, watch } = useFormContext()
     const watchRadio = watch(sporsmal.id)
     const feilmelding = hentFeilmelding(sporsmal)
     const forceUpdate = useForceUpdate()
@@ -53,9 +44,8 @@ const RadioKomp = ({ sporsmal }: SpmProps) => {
                         <div className="radioContainer" key={idx}>
                             <input type="radio"
                                 id={uspm.id}
-                                name={sporsmal.id}
                                 value={uspm.sporsmalstekst}
-                                ref={register({
+                                {...register(sporsmal.id,{
                                     required: feilmelding.global
                                 })}
                                 className="skjemaelement__input radioknapp"

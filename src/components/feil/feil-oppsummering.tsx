@@ -1,7 +1,8 @@
 import './feil-oppsummering.less'
 
 import { Undertittel } from 'nav-frontend-typografi'
-import React, { useEffect, useRef } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
+import { useFormContext } from 'react-hook-form'
 
 import { RSSvartype } from '../../types/rs-types/rs-svartype'
 import { Sporsmal } from '../../types/types'
@@ -10,24 +11,19 @@ import { useAmplitudeInstance } from '../amplitude/amplitude'
 import { SpmProps } from '../sporsmal/sporsmal-form/sporsmal-form'
 import Vis from '../vis'
 
-interface FeiloppsummeringProps {
-    errors: any;
-}
-
-type FeilProps = FeiloppsummeringProps & SpmProps;
-
-const FeilOppsummering = ({ errors, sporsmal }: FeilProps) => {
+const FeilOppsummering = ({ sporsmal }: SpmProps) => {
+    const { formState } = useFormContext()
+    const [ entries, setEntries ] = useState<any[]>([])
     const oppsummering = useRef<HTMLDivElement>(null)
     const { logEvent } = useAmplitudeInstance()
-    const entries: any[] = Object.entries(errors)
 
     useEffect(() => {
-        if (entries.length > 0) {
-            oppsummering.current?.focus()
+        setEntries(Object.entries(formState.errors))
+        if (Object.entries(formState.errors).length > 0) {
             logEvent('skjemavalidering feilet', { sporsmalstag: sporsmal.tag })
         }
         // eslint-disable-next-line
-    }, [ errors ])
+    }, [ formState ])
 
     const handleClick = (list: any) => {
         const id = `${list[0]}`
