@@ -14,7 +14,7 @@ import SporsmalstekstH3 from '../sporsmalstekst/sporsmalstekstH3'
 import UndersporsmalListe from '../undersporsmal/undersporsmal-liste'
 
 const TallKomp = ({ sporsmal }: SpmProps) => {
-    const { register, errors, watch } = useFormContext()
+    const { register, formState: { errors }, watch } = useFormContext()
     const watchTall = watch(sporsmal.id)
 
     const feilmelding = hentFeilmelding(sporsmal, errors[sporsmal.id])
@@ -73,17 +73,10 @@ const TallKomp = ({ sporsmal }: SpmProps) => {
             <SporsmalstekstH3 sporsmal={sporsmal} />
 
             <div className="medEnhet">
-                <input type="number"
-                    className={
-                        'skjemaelement__input' +
-                        inputSize() +
-                        (errors[sporsmal.id] ? ' skjemaelement__input--harFeil' : '')
-                    }
-                    name={sporsmal.id}
+                <input
+                    type="number"
                     id={sporsmal.id}
-                    min={sporsmal.min!}
-                    max={sporsmal.max!}
-                    ref={register({
+                    {...register(sporsmal.id, {
                         required: feilmelding.global,
                         validate: () => valider(),
                         min: {
@@ -99,6 +92,13 @@ const TallKomp = ({ sporsmal }: SpmProps) => {
                             )
                         }
                     })}
+                    min={sporsmal.min!}
+                    max={sporsmal.max!}
+                    className={
+                        'skjemaelement__input' +
+                        inputSize() +
+                        (errors[sporsmal.id] ? ' skjemaelement__input--harFeil' : '')
+                    }
                     step={step()}
                     autoComplete="off"
                 />

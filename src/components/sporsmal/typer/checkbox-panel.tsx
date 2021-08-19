@@ -1,5 +1,5 @@
 import React from 'react'
-import { useFormContext } from 'react-hook-form'
+import { useFormContext, useWatch } from 'react-hook-form'
 
 import { TagTyper } from '../../../types/enums'
 import FeilLokal from '../../feil/feil-lokal'
@@ -7,10 +7,9 @@ import { SpmProps } from '../sporsmal-form/sporsmal-form'
 import { hentFeilmelding } from '../sporsmal-utils'
 
 const CheckboxInput = ({ sporsmal }: SpmProps) => {
-    const { register, errors, watch } = useFormContext()
+    const { register, formState: { errors } } = useFormContext()
     const feilmelding = hentFeilmelding(sporsmal)
-    const watchCheckbox = watch(sporsmal.id)
-
+    const watchCheckbox = useWatch({ name: sporsmal.id })
 
     if (sporsmal.tag === TagTyper.BEKREFT_OPPLYSNINGER_UTLAND_INFO) {
         return <CheckboxInput sporsmal={sporsmal.undersporsmal[0]} />
@@ -26,9 +25,8 @@ const CheckboxInput = ({ sporsmal }: SpmProps) => {
                 <div className="skjemaelement skjemaelement--horisontal">
                     <input type="checkbox"
                         className="skjemaelement__input checkboks"
-                        name={sporsmal.id}
                         id={sporsmal.id}
-                        ref={register({ required: feilmelding.global })}
+                        {...register(sporsmal.id, { required: feilmelding.global })}
                     />
                     <label className="skjemaelement__label" htmlFor={sporsmal.id}>
                         {sporsmal.sporsmalstekst}

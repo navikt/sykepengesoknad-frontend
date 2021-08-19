@@ -145,10 +145,10 @@ describe('Teste førsteside i reisetilskuddsøknaden', () => {
             cy.get('.fil_liste')
 
             cy.get('.transport').contains('Taxi')
-            cy.get('.belop').contains('1 234 kr')
+            cy.get('.belop').contains('1.234 kr')
 
-            cy.get('.sumlinje').contains('1 utgifter på til sammen')
-            cy.get('.sumlinje .belop').contains('1 234 kr')
+            cy.get('.sumlinje').contains('1 utgift på til sammen')
+            cy.get('.sumlinje .belop').contains('1.234 kr')
         })
 
         it('Endring av kvittering', () => {

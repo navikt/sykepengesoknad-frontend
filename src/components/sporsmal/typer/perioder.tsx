@@ -19,9 +19,9 @@ const Perioder = ({ sporsmal }: SpmProps) => {
         // eslint-disable-next-line
     }, [ sporsmal ])
 
-    const slettPeriode = (e: any, id: number) => {
+    const slettPeriode = (e: any, idx: number) => {
         e.preventDefault()
-        const index = lokal.findIndex(value => value === id)
+        const index = lokal.findIndex(value => value === idx)
         lokal.splice(index, 1)
         setLokal(lokal)
         forceUpdate()

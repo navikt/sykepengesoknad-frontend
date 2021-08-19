@@ -37,19 +37,13 @@ import SendesTil from './sendes-til'
 import skalViseKnapperad from './skal-vise-knapperad'
 
 export interface SpmProps {
-    sporsmal: Sporsmal;
+    sporsmal: Sporsmal
 }
 
 const SporsmalForm = () => {
     const {
-        soknader,
-        setSoknader,
-        setValgtSoknad,
-        valgtSoknad,
-        mottaker,
-        setTop,
-        setMottaker,
-        setFeilState
+        soknader, setSoknader, setValgtSoknad, valgtSoknad,
+        mottaker, setTop, setMottaker, setFeilState
     } = useAppStore()
     const { logEvent } = useAmplitudeInstance()
     const [ erSiste, setErSiste ] = useState<boolean>(false)
@@ -57,7 +51,11 @@ const SporsmalForm = () => {
     const { stegId } = useParams<RouteParams>()
     const history = useHistory()
     const spmIndex = parseInt(stegId) - 1
-    const methods = useForm({ reValidateMode: 'onChange' })
+    const methods = useForm({
+        mode: 'onBlur',
+        reValidateMode: 'onChange',
+        shouldUnregister: true,
+    })
     const erUtlandssoknad = valgtSoknad!.soknadstype === RSSoknadstype.OPPHOLD_UTLAND
     let restFeilet = false
     let sporsmal = valgtSoknad!.sporsmal[spmIndex]
@@ -67,7 +65,7 @@ const SporsmalForm = () => {
     useEffect(() => {
         methods.reset(hentFormState(sporsmal))
         // eslint-disable-next-line
-    }, [sporsmal])
+    }, [ sporsmal ])
 
     useEffect(() => {
         function erSiste() {
@@ -82,7 +80,7 @@ const SporsmalForm = () => {
         setErSiste(sisteSide)
         if (sisteSide) hentMottaker()
         // eslint-disable-next-line
-    }, [spmIndex])
+    }, [ spmIndex ])
 
     const sendOppdaterSporsmal = async() => {
         let soknad = valgtSoknad
@@ -249,7 +247,6 @@ const SporsmalForm = () => {
         }
     }
 
-
     return (
         <FormProvider {...methods}>
             <form onSubmit={methods.handleSubmit(onSubmit)}
@@ -280,7 +277,14 @@ const SporsmalForm = () => {
                     }
                 />
 
-                <FeilOppsummering errors={methods.errors} sporsmal={sporsmal} />
+                <Vis hvis={
+                    (valgtSoknad!.soknadstype === RSSoknadstype.REISETILSKUDD
+                        && sporsmal.svartype !== RSSvartype.KVITTERING)
+                    || valgtSoknad!.soknadstype !== RSSoknadstype.REISETILSKUDD
+                } render={() =>
+                    <FeilOppsummering sporsmal={sporsmal} />
+                } />
+
                 <InfotekstOverSubmit sporsmal={sporsmal} />
 
                 <Vis hvis={skalViseKnapperad(valgtSoknad!, sporsmal, methods.getValues())}
