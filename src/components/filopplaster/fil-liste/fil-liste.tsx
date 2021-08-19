@@ -80,8 +80,7 @@ const FilListe = ({ sporsmal, fjernKnapp }: Props) => {
                             <td>
                                 <Undertittel tag="span">
                                     {getLedetekst(tekst('fil_liste.utlegg.sum'), {
-                                        '%ANTALL_BILAG%': kvitteringer.length,
-                                        '%FLERTALL%': kvitteringer.length > 1 ? 'er' : ''
+                                        '%ANTALL_BILAG%': kvitteringer.length
                                     })}
                                 </Undertittel>
                             </td>

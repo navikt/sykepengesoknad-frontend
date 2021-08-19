@@ -23,20 +23,22 @@ const Land = ({ sporsmal }: SpmProps) => {
                 <Controller
                     name={sporsmal.id}
                     defaultValue={hentSvar(sporsmal)}
-                    rules={{
-                        validate: () => validerLand(sporsmal, getValues(sporsmal.id))
+                    onChange={(values: string[]) => {
+                        return values[0]
                     }}
-                    render={() => (
+                    rules={{
+                        validate: () => validerLand(sporsmal, getValues())
+                    }}
+                    render={({ name, onChange,  }) => (
                         <LandvelgerComponent
                             verdierInn={sporsmal.svarliste.svar.map((i) => i.verdi)}
-                            sporsmalId={sporsmal.id}
-                            name={sporsmal.id}
-                            onChange={(values: string[]) => {
-                                return values[0]
-                            }}
+                            id={sporsmal.id}
+                            name={name}
+                            onChange={onChange}
                         />
                     )}
                 />
+
             </div>
 
             <FeilLokal sporsmal={sporsmal} />

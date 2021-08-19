@@ -20,7 +20,7 @@ export const tilBackendDato = (datoArg: string) => {
 }
 
 export const fraBackendTilDate = (datoArg: string) => {
-    if (datoArg && datoArg.match(RegExp('\\d{4}-\\d{2}-\\d{2}')))
+    if (datoArg.match(RegExp('\\d{4}-\\d{2}-\\d{2}')))
         return dayjs(datoArg).toDate()
 }
 

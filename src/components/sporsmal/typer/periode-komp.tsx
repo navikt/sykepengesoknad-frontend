@@ -27,7 +27,7 @@ export interface FormPeriode {
 type AllProps = SpmProps & PeriodeProps;
 
 const PeriodeKomp = ({ sporsmal, index, slettPeriode }: AllProps) => {
-    const { setValue, getValues, formState: { errors } } = useFormContext()
+    const { setValue, getValues, errors } = useFormContext()
     const [ periode, setPeriode ] = useState<FormPeriode>({ fom: '', tom: '' })
     const id = sporsmal.id + '_' + index
     const feilmelding = hentFeilmelding(sporsmal, errors[id])
@@ -88,19 +88,19 @@ const PeriodeKomp = ({ sporsmal, index, slettPeriode }: AllProps) => {
                     }}
                     name={id}
                     defaultValue={hentPeriode(sporsmal, index)} // Denne overlapper med useEffect, men må være med for å ikke få warning
-                    render={() => (
+                    render={({ name }) => (
                         <fieldset className="skjemagruppe">
                             <div className="fom skjemaelement">
-                                <label className="skjemaelement__label" htmlFor={sporsmal.id + '_' + index + '_fom'}>
+                                <label className="skjemaelement__label" htmlFor={name + '_fom'}>
                                     <Normaltekst tag="span">{tekst('sykepengesoknad.periodevelger.fom')}</Normaltekst>
                                 </label>
                                 <Datepicker
                                     locale={'nb'}
-                                    inputId={sporsmal.id + '_' + index + '_fom'}
+                                    inputId={name + '_fom'}
                                     onChange={(value) => onChange(value, undefined)}
                                     value={periode.fom}
                                     inputProps={{
-                                        name: sporsmal.id + '_' + index + '_fom'
+                                        name: name + '_fom'
                                     }}
                                     calendarSettings={{
                                         showWeekNumbers: true,
@@ -118,16 +118,16 @@ const PeriodeKomp = ({ sporsmal, index, slettPeriode }: AllProps) => {
                                 />
                             </div>
                             <div className="tom skjemaelement">
-                                <label className="skjemaelement__label" htmlFor={sporsmal.id + '_' + index + '_tom'}>
+                                <label className="skjemaelement__label" htmlFor={name + '_tom'}>
                                     <Normaltekst tag="span">{tekst('sykepengesoknad.periodevelger.tom')}</Normaltekst>
                                 </label>
                                 <Datepicker
                                     locale={'nb'}
-                                    inputId={sporsmal.id + '_' + index + '_tom'}
+                                    inputId={name + '_tom'}
                                     onChange={(value) => onChange(undefined, value)}
                                     value={periode.tom}
                                     inputProps={{
-                                        name: sporsmal.id + '_' + index + '_tom'
+                                        name: name + '_tom'
                                     }}
                                     calendarSettings={{
                                         showWeekNumbers: true,
@@ -149,9 +149,8 @@ const PeriodeKomp = ({ sporsmal, index, slettPeriode }: AllProps) => {
                 />
                 <Vis hvis={index > 0}
                     render={() =>
-                        <button role="link" id={'btn_' + id} className="periodeknapp lenke slett"
-                            onClick={(e) => slettPeriode(e, index)}
-                        >
+                        <button role="link" id={'btn_' + id} className="periodeknapp lenke slett" onClick={(e) =>
+                            slettPeriode(e, index)}>
                             {tekst('sykepengesoknad.periodevelger.slett')}
                         </button>
                     }

@@ -35,16 +35,16 @@ const DatoInput = ({ sporsmal }: SpmProps) => {
                         return true
                     }
                 }}
-                render={() => (
+                render={({ name }) => (
                     <Datepicker
                         locale={'nb'}
-                        inputId={sporsmal.id}
+                        inputId={name}
                         onChange={(value) => {
                             setValue(sporsmal.id, value)
                         }}
                         value={watchDato}
                         inputProps={{
-                            name: sporsmal.id
+                            name: name
                         }}
                         calendarSettings={{
                             showWeekNumbers: true,

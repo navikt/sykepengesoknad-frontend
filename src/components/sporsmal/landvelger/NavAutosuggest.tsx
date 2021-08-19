@@ -4,6 +4,7 @@ import Autosuggest, { SuggestionSelectedEventData } from 'react-autosuggest'
 
 import { Forslag } from './Forslag'
 
+
 const getQueryIndex = (query: string, forslag: Forslag) => {
     return forslag.text
         .toLowerCase()
@@ -21,18 +22,22 @@ const renderSuggestion = (forslag: Forslag, { query }: any) => {
             return `<mark>${unescape(x)}</mark>`
         }),
     }
-    return <div dangerouslySetInnerHTML={html} />
+    return (<div dangerouslySetInnerHTML={html}
+    />)
 }
 
 export interface NavAutosuggestProps {
     forslagsliste: Forslag[];
     onAdd: (i: Forslag) => void;
-    sporsmalId: string;
+    id: string;
 }
 
+
 const NavAutosuggest = (props: NavAutosuggestProps) => {
+
     const [ value, setValue ] = useState('')
     const [ suggestions, setSuggestions ] = useState<Forslag[]>([])
+
 
     const onChange = (event: any, { newValue }: any) => {
         setValue(newValue)
@@ -53,11 +58,9 @@ const NavAutosuggest = (props: NavAutosuggestProps) => {
         const eksakteForslag = props.forslagsliste.filter((forslag) => {
             return getQueryIndex(value, forslag) === 0
         })
-
         const delvisMatchForslag = props.forslagsliste.filter((forslag) => {
             return getQueryIndex(value, forslag) > 0
         })
-
         const suggestions = [ ...eksakteForslag, ...delvisMatchForslag ]
             .filter((forslag) => {
                 return forslag.id !== 'NORGE'
@@ -65,8 +68,8 @@ const NavAutosuggest = (props: NavAutosuggestProps) => {
             .slice(0, 5)
         setSuggestions(suggestions)
     }
-
     const velgForslag = (suggestion: Forslag) => {
+
         setValue('')
         props.onAdd(suggestion)
     }
@@ -86,27 +89,25 @@ const NavAutosuggest = (props: NavAutosuggestProps) => {
         e.key === 'Enter' && e.preventDefault()
     }
 
-    return (
-        <Autosuggest
-            onSuggestionsFetchRequested={onSuggestionsFetchRequested}
-            onSuggestionsClearRequested={onSuggestionsClearRequested}
-            onSuggestionSelected={onSuggestionSelected}
-            getSuggestionValue={getSuggestionValue}
-            renderSuggestion={renderSuggestion}
-            suggestions={suggestions}
-            inputProps={
-                {
-                    id: props.sporsmalId,
-                    name: props.sporsmalId,
-                    value: value,
-                    onChange: onChange,
-                    onKeyPress: onKeypress,
-                    onBlur: onBlur,
-                    className: cn('skjemaelement__input input--l input--autocomplete'),
-                }
+    return (<Autosuggest
+        onSuggestionsFetchRequested={onSuggestionsFetchRequested}
+        onSuggestionsClearRequested={onSuggestionsClearRequested}
+        onSuggestionSelected={onSuggestionSelected}
+        getSuggestionValue={getSuggestionValue}
+        renderSuggestion={renderSuggestion}
+        suggestions={suggestions}
+        inputProps={
+            {
+                id: props.id,
+                name: props.id,
+                value: value,
+                onChange: onChange,
+                onKeyPress: onKeypress,
+                onBlur: onBlur,
+                className: cn('skjemaelement__input input--l input--autocomplete'),
             }
-        />
-    )
+        }
+    />)
 }
 
 

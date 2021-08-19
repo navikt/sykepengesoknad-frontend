@@ -12,7 +12,7 @@ import SporsmalstekstH3 from '../sporsmalstekst/sporsmalstekstH3'
 import UndersporsmalListe from '../undersporsmal/undersporsmal-liste'
 
 const CheckboxKomp = ({ sporsmal }: SpmProps) => {
-    const { formState: { errors } } = useFormContext()
+    const { errors } = useFormContext()
 
     return (
         <>
@@ -44,7 +44,7 @@ interface CheckboxProps {
 type AllProps = SpmProps & CheckboxProps
 
 const CheckboxSingle = ({ parent, sporsmal }: AllProps) => {
-    const { getValues, register, watch, clearErrors } = useFormContext()
+    const { register, watch, getValues, clearErrors } = useFormContext()
     const watchCheck = watch(sporsmal.id)
     const feilmelding = hentFeilmelding(parent)
 
@@ -67,7 +67,8 @@ const CheckboxSingle = ({ parent, sporsmal }: AllProps) => {
         <div className="checkboksContainer">
             <input type="checkbox"
                 id={sporsmal.id}
-                {...register(sporsmal.id,{ validate: () => valider() })}
+                name={sporsmal.id}
+                ref={register({ validate: () => valider() })}
                 className="skjemaelement__input checkboks"
             />
             <label className="skjemaelement__label" htmlFor={sporsmal.id}>

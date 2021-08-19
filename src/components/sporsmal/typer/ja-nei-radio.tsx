@@ -24,7 +24,7 @@ const jaNeiValg = [ {
 } ]
 
 const JaNeiRadio = ({ sporsmal }: SpmProps) => {
-    const { register, formState: { errors }, watch } = useFormContext()
+    const { register, watch, errors } = useFormContext()
     const watchJaNei = watch(sporsmal.id)
     const feilmelding = hentFeilmelding(sporsmal)
 
@@ -74,8 +74,9 @@ const JaNeiRadio = ({ sporsmal }: SpmProps) => {
                         <div className="radioContainer" key={idx}>
                             <input type="radio"
                                 id={sporsmal.id + '_' + idx}
+                                name={sporsmal.id}
                                 value={valg.value}
-                                {...register(sporsmal.id, { required: feilmelding.global })}
+                                ref={register({ required: feilmelding.global })}
                                 className="skjemaelement__input radioknapp"
                             />
                             <label className="skjemaelement__label" htmlFor={sporsmal.id + '_' + idx}>

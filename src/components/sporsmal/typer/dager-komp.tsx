@@ -5,7 +5,7 @@ import isoWeek from 'dayjs/plugin/isoWeek'
 import weekOfYear from 'dayjs/plugin/weekOfYear'
 import { Normaltekst } from 'nav-frontend-typografi'
 import React from 'react'
-import { useFormContext, useWatch } from 'react-hook-form'
+import { useFormContext } from 'react-hook-form'
 
 import { Sporsmal } from '../../../types/types'
 import { maaneder, sammeAar, sammeMnd } from '../../../utils/dato-utils'
@@ -25,9 +25,9 @@ interface KalenderDag {
 }
 
 const DagerKomp = ({ sporsmal }: SpmProps) => {
-    const { register, setValue } = useFormContext()
+    const { register, setValue, watch } = useFormContext()
     const feilmelding = hentFeilmelding(sporsmal)
-    const watchDager = useWatch({ name: sporsmal.id })
+    const watchDager = watch(sporsmal.id)
 
     const dagerSidenMandag = (spm: Sporsmal) => {
         return ((dayjs(spm.min!).day() - 1)) % 7
@@ -119,8 +119,9 @@ const DagerKomp = ({ sporsmal }: SpmProps) => {
                 <>
                     <input type="checkbox"
                         id={`${sporsmal.id}_${ukeidx}_${idx}`}
+                        name={sporsmal.id}
                         value={dag.dayjs.format('YYYY-MM-DD')}
-                        {...register(sporsmal.id, { required: feilmelding.global })}
+                        ref={register({ required: feilmelding.global })}
                         className={'checkboks' + (watchDager?.includes(dag.dayjs.format('YYYY-MM-DD')) ? ' checked' : '')}
                     />
                     <label htmlFor={`${sporsmal.id}_${ukeidx}_${idx}`}>

@@ -25,7 +25,7 @@ const jaNeiValg = [ {
 } ]
 
 const JaNeiInput = ({ sporsmal }: SpmProps) => {
-    const { register, formState: { errors }, clearErrors, watch } = useFormContext()
+    const { register, errors, clearErrors, watch } = useFormContext()
     const feilmelding = hentFeilmelding(sporsmal, errors[sporsmal.id])
     const watchJaNei = watch(sporsmal.id)
 
@@ -68,10 +68,11 @@ const JaNeiInput = ({ sporsmal }: SpmProps) => {
                                 <label className={'inputPanel radioPanel' + (OK ? ' inputPanel--checked' : '')}
                                     key={idx}>
                                     <input type="radio"
+                                        name={sporsmal.id}
                                         id={sporsmal.id + '_' + idx}
                                         className="inputPanel__field"
                                         value={valg.value}
-                                        {...register(sporsmal.id, {
+                                        ref={register({
                                             validate: (value) => valider(value),
                                             required: feilmelding.global
                                         })}
