@@ -23,7 +23,12 @@ const Over16dager = ({ erGradert }: gradertReisetilskuddProps) => {
                 }
             </Normaltekst>
             <Utvidbar erApen={false} type="intern" tittel={tekst('kvittering.arbeidstaker.hvorfor-skille-ved-16-dager')}>
-                <AlertStripeInfo>{tekst('kvittering.arbeidsgiveren-skal-betale')}</AlertStripeInfo>
+                <AlertStripeInfo>
+                    {erGradert ?
+                        tekst('kvittering.arbeidsgiveren-skal-betale-gradertreisetilskudd') :
+                        tekst('kvittering.arbeidsgiveren-skal-betale')
+                    }
+                </AlertStripeInfo>
             </Utvidbar>
             <Utvidbar erApen={false} type="intern" tittel={tekst('kvittering.hva-er-inntektsmelding')}>
                 <AlertStripeInfo>{tekst('kvittering.arbeidstaker.over16.inntektsmelding.brodtekst')}</AlertStripeInfo>

@@ -43,7 +43,8 @@ const KvitteringTekster = {
     'kvittering.for-at-nav.2.url': 'https://www.nav.no/no/bedrift/tjenester-og-skjemaer/nav-og-altinn-tjenester/inntektsmelding',
     'kvittering.for-at-nav.3': '. Du skal kunne fylle ut og sende inn dette skjemaet én gang. Hvis du sender inn nye sykepengekrav (forlengelser), skal du ikke fylle ut skjemaet.',
 
-    'kvittering.arbeidsgiveren-skal-betale': 'Arbeidsgiveren skal betale sykepenger og reisetilskudd i en periode på opptil 16 kalenderdager, også kalt arbeidsgiverperioden. NAV overtar sykepengeutbetalingen fra og med 17. kalenderdag.',
+    'kvittering.arbeidsgiveren-skal-betale': 'Arbeidsgiveren skal betale sykepenger i en periode på opptil 16 kalenderdager, også kalt arbeidsgiverperioden. NAV overtar sykepengeutbetalingen fra og med 17. kalenderdag.',
+    'kvittering.arbeidsgiveren-skal-betale-gradertreisetilskudd': 'Arbeidsgiveren skal betale sykepenger og reisetilskudd i en periode på opptil 16 kalenderdager, også kalt arbeidsgiverperioden. NAV overtar sykepengeutbetalingen fra og med 17. kalenderdag.',
     'kvittering.digital-inntektsmelding': 'Digital inntektsmelding sendes fra arbeidsgivers eget lønns- og personalsystem eller fra altinn.no. Meldingen inneholder inntektsopplysninger og annen informasjon NAV må ha for å behandle søknaden arbeidstaker har sendt.',
 
     'kvittering.naeringsdrivende.tittel': 'Før NAV kan behandle søknaden',
