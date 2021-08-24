@@ -17,7 +17,7 @@ const Over16dager = ({ erGradert }: gradertReisetilskuddProps) => {
             <Element tag="h2" className="arbeidstaker-tittel">{tekst('kvittering.naeringsdrivende.tittel')}</Element>
             <Normaltekst tag="span">
                 {erGradert ?
-                    tekst('kvittering.arbeidstaker.over16.gradertreiserilskudd.brodtekst') :
+                    tekst('kvittering.arbeidstaker.over16.gradertreisetilskudd.brodtekst') :
                     tekst('kvittering.arbeidstaker.over16.brodtekst')
 
                 }
