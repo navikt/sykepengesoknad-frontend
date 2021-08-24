@@ -44,6 +44,7 @@ const KvitteringTekster = {
     'kvittering.for-at-nav.3': '. Du skal kunne fylle ut og sende inn dette skjemaet én gang. Hvis du sender inn nye sykepengekrav (forlengelser), skal du ikke fylle ut skjemaet.',
 
     'kvittering.arbeidsgiveren-skal-betale': 'Arbeidsgiveren skal betale sykepenger i en periode på opptil 16 kalenderdager, også kalt arbeidsgiverperioden. NAV overtar sykepengeutbetalingen fra og med 17. kalenderdag.',
+    'kvittering.arbeidsgiveren-skal-betale-gradertreisetilskudd': 'Arbeidsgiveren skal betale sykepenger og reisetilskudd i en periode på opptil 16 kalenderdager, også kalt arbeidsgiverperioden. NAV overtar sykepengeutbetalingen fra og med 17. kalenderdag.',
     'kvittering.digital-inntektsmelding': 'Digital inntektsmelding sendes fra arbeidsgivers eget lønns- og personalsystem eller fra altinn.no. Meldingen inneholder inntektsopplysninger og annen informasjon NAV må ha for å behandle søknaden arbeidstaker har sendt.',
 
     'kvittering.naeringsdrivende.tittel': 'Før NAV kan behandle søknaden',
@@ -69,6 +70,7 @@ const KvitteringTekster = {
     'kvittering.arbeidstaker.saksbehandlingstid.lenke.url': 'https://www.nav.no/no/nav-og-samfunn/om-nav/saksbehandlingstider-i-nav',
     'kvittering.arbeidstaker.brodtekst': 'Arbeidsgiveren din betaler de første 16 kalenderdagene av sykefraværet. Hvis du mener sykefraværet har vart lenger enn det, kan du sende søknaden til NAV. Noen arbeidsplasser fortsetter å utbetale sykepenger fra dag 17, men da får de penger tilbake fra NAV.',
     'kvittering.arbeidstaker.over16.brodtekst': 'Når sykefraværet ditt er lengre enn 16 kalenderdager, betyr det at du får sykepenger utbetalt av NAV. Noen arbeidsplasser fortsetter å utbetale sykepenger fra dag 17, men da får de penger tilbake fra NAV senere.  Arbeidsgiveren din må derfor sende oss inntektsmelding så fort som mulig.',
+    'kvittering.arbeidstaker.over16.gradertreisetilskudd.brodtekst': 'Når sykefraværet ditt er lengre enn 16 kalenderdager, betyr det at du får sykepenger og reisetilskudd utbetalt av NAV. Noen arbeidsplasser fortsetter å utbetale sykepenger og reisetilskudd fra dag 17, men da får de penger tilbake fra NAV senere.  Arbeidsgiveren din må derfor sende oss inntektsmelding så fort som mulig.',
     'kvittering.arbeidstaker.over16.inntektsmelding.brodtekst': 'Arbeidsplassen din sender inntektsopplysninger og annen informasjon som NAV trenger for å behandle søkaden din. Inntektsmeldingen sendes digitalt fra arbeidsplassens lønns og personalsystemet eller fra Altinn.no.',
     'kvittering.arbeidstaker.over16.utbetaling': 'Blir søknaden din innvilget før den 15. i denne måneden, blir pengene utbetalt innen den 25. samme måned. Blir det innvilget etter den 15. i måneden, utbetales pengene innen 5 dager.',
 
