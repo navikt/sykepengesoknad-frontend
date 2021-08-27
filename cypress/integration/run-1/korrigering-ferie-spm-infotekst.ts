@@ -11,6 +11,6 @@ describe('Ved korrigering av ferie forsvinner bjørn og det er en infotekst om i
 
         cy.contains('Hadde du ferie i tidsrommet 1. - 24. april 2020?')
         cy.contains('Du får ikke sykepenger de dagene du tar ut ferie.')
-        cy.contains('Måtte du avbryte ferien fordi du ble syk').should('not.exist')
+        cy.contains('Syns du det er vanskelig å svare på om du har tatt ut ferie eller ikke').should('not.exist')
     })
 })

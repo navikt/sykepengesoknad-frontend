@@ -1,6 +1,6 @@
 const BjornTekster = {
     'soknad.bjorn.enkeltstaende_behandlingsdager': 'Du kan bare få én behandlingsdag i løpet av en uke. Trenger du flere slike dager, ber du legen om en gradert sykmelding i stedet.',
-    'soknad.bjorn.ferie_v2': 'Måtte du avbryte ferien fordi du ble syk? Du kan avtale med arbeidsgiveren at du utsetter ferien. Fikk du tatt noen feriedager, svarer du ja nedenfor, og så spør vi deg hvilke dager. Ble hele ferien ødelagt fordi du ble syk, svarer du nei.',
+    'soknad.bjorn.ferie_v2': 'Et lite tips! Syns du det er vanskelig å svare på om du har tatt ut ferie eller ikke, finnes det en <a target="_blank" href="https://www.nav.no/no/person/arbeid/sykmeldt-arbeidsavklaringspenger-og-yrkesskade/papirsykmelding/hvorfor-spor-vi-om-ferie-i-soknaden-om-sykepenger">veiledning på nav.no</a>',
     'soknad.bjorn.arbeid_utenfor_norge': 'Vi spør om dette for å undersøke om du har rettigheter i flere land enn Norge. Har du vært på en kort tjenestereise eller konferanse i utlandet, krysser du nei.',
     'soknad.bjorn.fraver_for_behandling' : 'Vi trenger å vite om du har brukt egenmeldinger eller en papirsykmelding noen dager før denne sykmeldingen. Det er for å kunne beregne sykepengene dine riktig.',
     'soknad.bjorn.fravar_for_sykmeldingen' : 'Hvorfor spør vi om disse datoene? Arbeidsgiveren din dekker de første 16 dagene av sykefraværet, også dagene før selve sykmeldingen. Derfor trenger vi å vite om du var syk og borte fra jobb noen av disse dagene.',
