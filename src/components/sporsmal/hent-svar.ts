@@ -70,7 +70,10 @@ export const hentFormState = (sporsmal: Sporsmal) => {
 const hentSvarliste = (sporsmal: Sporsmal) => {
     let svar: any = {}
 
-    svar[sporsmal.id] = hentSvar(sporsmal)
+    // PERIODER har ingen input på spm.id, de ligger i spm.id_idx
+    if (sporsmal.svartype !== RSSvartype.PERIODER) {
+        svar[sporsmal.id] = hentSvar(sporsmal)
+    }
 
     sporsmal.undersporsmal.forEach((spm) => {
         const alleUndersporsmalSvar: any = hentSvarliste(spm)

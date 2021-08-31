@@ -1,7 +1,6 @@
 import './landvelger.less'
 
 import React, { useState } from 'react'
-import { useFormContext } from 'react-hook-form'
 
 import { Forslag } from './Forslag'
 import { tilForslagsliste } from './forslagUtils'
@@ -18,12 +17,10 @@ interface LandvelgerComponentProps {
 
 const LandvelgerComponent = ({ verdierInn, sporsmalId, onChange }: LandvelgerComponentProps) => {
     const [ verdier, setVerdier ] = useState(verdierInn)
-    const { setValue } = useFormContext()
 
     const onAdd = (verdi: Forslag) => {
         const nyeVerdier = [ ...verdier, verdi.text ]
         setVerdier(nyeVerdier)
-        setValue(sporsmalId, nyeVerdier)
         onChange(nyeVerdier)
     }
 
@@ -34,7 +31,6 @@ const LandvelgerComponent = ({ verdierInn, sporsmalId, onChange }: LandvelgerCom
             .forEach((v) => nyeVerdier.push(v))
 
         setVerdier(nyeVerdier)
-        setValue(sporsmalId, nyeVerdier)
         onChange(nyeVerdier)
     }
 

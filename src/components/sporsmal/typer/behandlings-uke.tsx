@@ -13,7 +13,7 @@ interface UkeProps {
 }
 
 const BehandlingsUke = ({ sporsmal, ukeidx, ukespm }: UkeProps) => {
-    const { register, setValue, watch } = useFormContext()
+    const { register, setValue } = useFormContext()
     const fjernRef = useRef<HTMLLabelElement>(null)
     const [ lokal, setLokal ] = useState<string>('')
 
@@ -58,7 +58,6 @@ const BehandlingsUke = ({ sporsmal, ukeidx, ukespm }: UkeProps) => {
                     <div className="kalenderdag" key={idx}>
                         <input type="radio"
                             id={ukespm.id + '_' + idx}
-                            defaultValue={dag.format('YYYY-MM-DD')}
                             {...register(ukespm.id)}
                             onChange={() => radioKlikk(dag.format(('YYYY-MM-DD')), ukeidx, ukespm.id)}
                             defaultChecked={checked}

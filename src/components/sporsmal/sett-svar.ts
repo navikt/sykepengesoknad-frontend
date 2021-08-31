@@ -6,10 +6,8 @@ import { empty } from '../../utils/constants'
 
 const hentVerdier = (sporsmal: Sporsmal, verdier: Record<string, any>) => {
     let verdi = verdier[sporsmal.id]
-    if (verdi === undefined || Array.isArray(verdi)) {
-        const startMed = sporsmal.svartype === RSSvartype.PERIODE || sporsmal.svartype === RSSvartype.PERIODER
-            ? sporsmal.id + '_'
-            : sporsmal.id
+    if (sporsmal.svartype === RSSvartype.PERIODE || sporsmal.svartype === RSSvartype.PERIODER) {
+        const startMed = sporsmal.id + '_'
         verdi = Object.entries(verdier)
             .filter(([ key ]) => key.startsWith(startMed))
             .map(([ key ]) => verdier[key])

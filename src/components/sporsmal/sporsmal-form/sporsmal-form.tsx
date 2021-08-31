@@ -251,7 +251,7 @@ const SporsmalForm = () => {
         <FormProvider {...methods}>
             <form onSubmit={methods.handleSubmit(onSubmit)}
                 onSubmitCapture={preSubmit}
-                noValidate={true}
+                noValidate={true}   // Ikke native validation
                 className={'sporsmal__form ' + nesteSporsmal?.tag?.toLowerCase()}>
 
                 <BjornUnderTittel sporsmal={sporsmal} />

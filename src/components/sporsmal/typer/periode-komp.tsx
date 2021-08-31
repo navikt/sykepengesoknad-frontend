@@ -34,7 +34,7 @@ const PeriodeKomp = ({ sporsmal, index, slettPeriode }: AllProps) => {
 
     useEffect(() => {
         const periode = hentPeriode(sporsmal, index)
-        setValue(id, periode)
+        setValue(id, periode, { shouldValidate: false })
         setPeriode(periode)
         // eslint-disable-next-line
     }, [ sporsmal, setValue ])
@@ -87,7 +87,6 @@ const PeriodeKomp = ({ sporsmal, index, slettPeriode }: AllProps) => {
                         }
                     }}
                     name={id}
-                    defaultValue={hentPeriode(sporsmal, index)} // Denne overlapper med useEffect, men må være med for å ikke få warning
                     render={() => (
                         <fieldset className="skjemagruppe">
                             <div className="fom skjemaelement">

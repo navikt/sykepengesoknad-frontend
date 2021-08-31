@@ -4,7 +4,6 @@ import { Controller, useFormContext } from 'react-hook-form'
 
 import validerLand from '../../../utils/sporsmal/valider-land'
 import FeilLokal from '../../feil/feil-lokal'
-import { hentSvar } from '../hent-svar'
 import LandvelgerComponent from '../landvelger/landvelger'
 import { SpmProps } from '../sporsmal-form/sporsmal-form'
 
@@ -22,18 +21,15 @@ const Land = ({ sporsmal }: SpmProps) => {
 
                 <Controller
                     name={sporsmal.id}
-                    defaultValue={hentSvar(sporsmal)}
                     rules={{
                         validate: () => validerLand(sporsmal, getValues(sporsmal.id))
                     }}
-                    render={() => (
+                    render={({ field }) => (
                         <LandvelgerComponent
                             verdierInn={sporsmal.svarliste.svar.map((i) => i.verdi)}
-                            sporsmalId={sporsmal.id}
-                            name={sporsmal.id}
-                            onChange={(values: string[]) => {
-                                return values[0]
-                            }}
+                            sporsmalId={ field.name }
+                            name={ field.name }
+                            onChange={ field.onChange }
                         />
                     )}
                 />
