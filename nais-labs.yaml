@@ -30,7 +30,7 @@ spec:
     - name: ENVIRONMENT
       value: "gcp"
     - name: SYKEFRAVAER_URL
-      value: "https://sykefravaer.labs.nais.io"
+      value: "https://ditt-sykefravaer.labs.nais.io/syk/sykefravaer"
     - name: DITTNAV_URL
       value: "https://www.nav.no/person/dittnav"
     - name: OPPLAERING
