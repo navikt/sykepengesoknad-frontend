@@ -34,10 +34,9 @@ const PeriodeKomp = ({ sporsmal, index, slettPeriode }: AllProps) => {
 
     useEffect(() => {
         const periode = hentPeriode(sporsmal, index)
-        setValue(id, periode, { shouldValidate: false })
         setPeriode(periode)
         // eslint-disable-next-line
-    }, [ sporsmal, setValue ])
+    }, [ sporsmal ])
 
     const onChange = (fom?: string, tom?: string) => {
         const nyFom = fom ? fom : periode.fom

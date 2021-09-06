@@ -27,6 +27,7 @@ export const hentSvar = (sporsmal: Sporsmal): any => {
 
         case RSSvartype.DATOER:
         case RSSvartype.LAND:
+        case RSSvartype.PERIODER:
             return svarliste.svar.map((svar: RSSvar) => svar.verdi)
 
         case RSSvartype.KVITTERING:
@@ -71,7 +72,12 @@ const hentSvarliste = (sporsmal: Sporsmal) => {
     let svar: any = {}
 
     // PERIODER har ingen input på spm.id, de ligger i spm.id_idx
-    if (sporsmal.svartype !== RSSvartype.PERIODER) {
+    if (sporsmal.svartype === RSSvartype.PERIODER) {
+        hentSvar(sporsmal).forEach((periode: string, idx: number) => {
+            svar[sporsmal.id + '_' + idx] = JSON.parse(periode)
+        })
+    }
+    else {
         svar[sporsmal.id] = hentSvar(sporsmal)
     }
 

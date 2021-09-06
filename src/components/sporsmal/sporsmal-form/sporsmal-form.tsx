@@ -63,7 +63,7 @@ const SporsmalForm = () => {
     const rsMottakerResponseFetch = useFetch<RSMottakerResponse>()
 
     useEffect(() => {
-        methods.reset(hentFormState(sporsmal))
+        methods.reset(hentFormState(sporsmal), { keepValues: false })
         // eslint-disable-next-line
     }, [ sporsmal ])
 
@@ -201,15 +201,15 @@ const SporsmalForm = () => {
         methods.clearErrors('syfosoknad')
     }
 
-    const onSubmit = async() => {
+    const onSubmit = async(data: any) => {
         if (poster) return
         setPoster(true)
         restFeilet = false
         try {
-            settSvar(sporsmal, methods.getValues())
+            settSvar(sporsmal, data)
             if (erSiste) {
                 if (!erUtlandssoknad) {
-                    settSvar(nesteSporsmal, methods.getValues())
+                    settSvar(nesteSporsmal, data)
                     sporsmal = nesteSporsmal
                 }
                 await sendOppdaterSporsmal()
@@ -236,7 +236,6 @@ const SporsmalForm = () => {
                 sporsmal = valgtSoknad!.sporsmal[spmIndex]
             } else {
                 methods.clearErrors()
-                methods.reset()
                 setTop(0)
                 if (!erSiste) {
                     history.push(pathUtenSteg(history.location.pathname) + SEPARATOR + (spmIndex + 2))
@@ -288,7 +287,7 @@ const SporsmalForm = () => {
                 <InfotekstOverSubmit sporsmal={sporsmal} />
 
                 <Vis hvis={skalViseKnapperad(valgtSoknad!, sporsmal, methods.getValues())}
-                    render={() => <Knapperad onSubmit={onSubmit} poster={poster} />}
+                    render={() => <Knapperad poster={poster} />}
                 />
             </form>
         </FormProvider>
