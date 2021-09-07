@@ -7,13 +7,11 @@ import { skalBrukeFullskjermKalender } from '../../../utils/browser-utils'
 import { fraBackendTilDate } from '../../../utils/dato-utils'
 import validerDato from '../../../utils/sporsmal/valider-dato'
 import FeilLokal from '../../feil/feil-lokal'
-import { hentSvar } from '../hent-svar'
 import { SpmProps } from '../sporsmal-form/sporsmal-form'
 import UndersporsmalListe from '../undersporsmal/undersporsmal-liste'
 
 const DatoInput = ({ sporsmal }: SpmProps) => {
-    const { setValue, getValues, watch } = useFormContext()
-    const watchDato = watch(sporsmal.id)
+    const { getValues } = useFormContext()
 
     return (
         <div className="dato-komp">
@@ -22,7 +20,6 @@ const DatoInput = ({ sporsmal }: SpmProps) => {
             </label>
             <Controller
                 name={sporsmal.id}
-                defaultValue={hentSvar(sporsmal)}
                 rules={{
                     validate: () => {
                         const div: HTMLDivElement | null = document.querySelector('.nav-datovelger__input')
@@ -35,16 +32,14 @@ const DatoInput = ({ sporsmal }: SpmProps) => {
                         return true
                     }
                 }}
-                render={({ name }) => (
+                render={({ field }) => (
                     <Datepicker
                         locale={'nb'}
-                        inputId={name}
-                        onChange={(value) => {
-                            setValue(sporsmal.id, value)
-                        }}
-                        value={watchDato}
+                        inputId={field.name}
+                        onChange={field.onChange}
+                        value={field.value}
                         inputProps={{
-                            name: name
+                            name: field.name
                         }}
                         calendarSettings={{
                             showWeekNumbers: true,

@@ -21,7 +21,7 @@ const maks = formaterFilstørrelse(maxFilstørrelse)
 
 const DragAndDrop = () => {
     const { valgtFil, setValgtFil, valgtKvittering } = useAppStore()
-    const { errors, register } = useFormContext()
+    const { formState: { errors }, register } = useFormContext()
     const [ formErDisabled, setFormErDisabled ] = useState<boolean>(false)
 
     useEffect(() => {
@@ -102,8 +102,7 @@ const DragAndDrop = () => {
                             <input {...getInputProps()} id="ddfil" />
                             <input type="hidden"
                                 id="fil_input"
-                                name="fil_input"
-                                ref={register({
+                                {...register('fil_input', {
                                     validate: {
                                         fil_valgt: () => {
                                             if (!valgtFil) {

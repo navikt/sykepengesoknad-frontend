@@ -11,7 +11,7 @@ interface FeilProps {
 }
 
 const FeilLokal = ({ sporsmal }: FeilProps) => {
-    const { errors } = useFormContext()
+    const { formState: { errors } } = useFormContext()
     const feilmelding = hentFeilmelding(sporsmal, errors[sporsmal.id])
 
     return (

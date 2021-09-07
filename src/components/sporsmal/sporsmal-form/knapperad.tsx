@@ -14,11 +14,10 @@ import { avbrytSoknad } from './avbryt-soknad'
 type Event = MouseEvent<HTMLAnchorElement | HTMLButtonElement>;
 
 interface KnapperadProps {
-    onSubmit: () => void;
     poster: boolean;
 }
 
-const Knapperad = ({ onSubmit, poster }: KnapperadProps) => {
+const Knapperad = ({ poster }: KnapperadProps) => {
     const { valgtSoknad, setValgtSoknad, soknader, setSoknader, feilmeldingTekst, setFeilmeldingTekst } = useAppStore()
     const history = useHistory()
     const { stegId } = useParams<RouteParams>()
@@ -67,7 +66,7 @@ const Knapperad = ({ onSubmit, poster }: KnapperadProps) => {
 
     return (
         <div className="knapperad">
-            <Knapp type="hoved" spinner={poster} onClick={() => onSubmit}>{tekst(nokkel)}</Knapp>
+            <Knapp type="hoved" htmlType="submit" spinner={poster}>{tekst(nokkel)}</Knapp>
             <div className="avbrytDialog blokk-l">
                 <button className="lenke avbrytlenke avbrytDialog__trigger" onClick={handleVilAvbryte}>
                     <Normaltekst tag="span">{tekst('sykepengesoknad.avbryt.trigger')}</Normaltekst>

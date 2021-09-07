@@ -36,7 +36,7 @@ export const validerPeriode = ( sporsmal: Sporsmal, id: string, values: Record<s
 export const validerFom = ( sporsmal: Sporsmal, id: string, values: Record<string, any>) => {
     const formPeriode = values[id] as FormPeriode
     // Enkel null sjekk
-    if (formPeriode.fom === undefined || formPeriode.fom === '') return 'Du må oppgi en fra og med dato'
+    if (formPeriode?.fom === undefined || formPeriode?.fom === '') return 'Du må oppgi en fra og med dato'
 
     const valgtPeriode = { fom: fraBackendTilDate(formPeriode.fom), tom: fraBackendTilDate(formPeriode.tom) } as Periode
     // Formattering er riktig når dato er skrevet inn manuelt
@@ -53,7 +53,7 @@ export const validerFom = ( sporsmal: Sporsmal, id: string, values: Record<strin
 export const validerTom = ( sporsmal: Sporsmal, id: string, values: Record<string, any>) => {
     const formPeriode = values[id] as FormPeriode
     // Enkel null sjekk
-    if (formPeriode.tom === undefined || formPeriode.tom === '') return 'Du må oppgi en til og med dato'
+    if (formPeriode?.tom === undefined || formPeriode?.tom === '') return 'Du må oppgi en til og med dato'
 
     const valgtPeriode = { fom: fraBackendTilDate(formPeriode.fom), tom: fraBackendTilDate(formPeriode.tom) } as Periode
     // Formattering er riktig når dato er skrevet inn manuelt

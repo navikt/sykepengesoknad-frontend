@@ -11,11 +11,11 @@ import { ValgteTags } from './ValgteTags'
 interface LandvelgerComponentProps {
     verdierInn: string[];
     name: string;
-    id: string;
+    sporsmalId: string;
     onChange: (verdier: string[]) => void;
 }
 
-const LandvelgerComponent = ({ verdierInn, id, onChange }: LandvelgerComponentProps) => {
+const LandvelgerComponent = ({ verdierInn, sporsmalId, onChange }: LandvelgerComponentProps) => {
     const [ verdier, setVerdier ] = useState(verdierInn)
 
     const onAdd = (verdi: Forslag) => {
@@ -38,7 +38,7 @@ const LandvelgerComponent = ({ verdierInn, id, onChange }: LandvelgerComponentPr
         <div className="landvelger">
             <NavAutosuggest
                 onAdd={onAdd}
-                id={id}
+                sporsmalId={sporsmalId}
                 forslagsliste={tilForslagsliste(landliste, verdier)}
             />
             <ValgteTags verdier={verdier} handleDelete={onDelete} />
