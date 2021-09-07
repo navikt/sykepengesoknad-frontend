@@ -394,7 +394,7 @@ export const gradertReisetilskudd: RSSoknad = {
     }, {
         'id': '1547249',
         'tag': 'JOBBET_DU_GRADERT_0',
-        'sporsmalstekst': 'I perioden 1. - 24. april 2020 skulle du jobbe 40 % av ditt normale arbeid hos SNILL TORPEDO. Jobbet du mer enn dette?',
+        'sporsmalstekst': 'I perioden 1. - 24. april 2020 skulle du jobbe 40 % med reisetilskudd hos SNILL TORPEDO. Jobbet du mer enn dette?',
         'undertekst': null,
         'svartype': 'JA_NEI',
         'min': null,
