@@ -88,7 +88,7 @@ describe('Teste førsteside i reisetilskuddsøknaden', () => {
 
         it('Svar ja på hovedspørsmålet', () => {
             cy.get('.inputPanelGruppe__inner label:first-child > input[value=JA]').click({ force: true })
-            cy.get('.undersporsmal > :nth-child(1)').should('have.text', 'Hvilke dager reiste du med bil i perioden 1. februar - 18. mars 2021?')
+            cy.get('.undersporsmal > :nth-child(1)').should('have.text', 'Hvilke dager reiste du med bil i perioden 20. desember 2020 - 18. januar 2021?')
             cy.get('.undersporsmal > .kriterie--ja > h3').should('have.text', 'Hadde du utgifter til bompenger?Hvor mange km er kjøreturen mellom hjemmet ditt og jobben?')
         })
 
@@ -98,9 +98,24 @@ describe('Teste førsteside i reisetilskuddsøknaden', () => {
         })
 
         it('Fyller ut', () => {
+            // Grense før
+            cy.get('.kalenderuke').first().within(() => {
+                cy.get('.ukenr').contains('51')
+                cy.get('.kalenderdag.foran').contains('19')
+                cy.get('.kalenderdag.inni').contains('20')
+            })
+
+            // Valg av dager
             cy.get('.skjema__dager').contains('25').click({ force: true })
             cy.get('.skjema__dager').contains('26').click({ force: true })
             cy.get('.skjema__dager').contains('26').click({ force: true })
+
+            // Grense etter
+            cy.get('.kalenderuke').last().within(() => {
+                cy.get('.ukenr').contains('3')
+                cy.get('.kalenderdag.inni').contains('18')
+                cy.get('.kalenderdag.etter').contains('19')
+            })
 
             cy.get('.undersporsmal > .kriterie--ja > .radioContainer > input[value=JA]').click({ force: true })
             cy.get('#616cc0cb-434e-4114-a68b-b5708e033e9e').focus().type('1000')

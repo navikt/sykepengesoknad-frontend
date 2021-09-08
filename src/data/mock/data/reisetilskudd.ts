@@ -125,11 +125,12 @@ export const nyttReisetilskudd: RSSoknad = {
                 {
                     'id': 'deaac8aa-11b9-4e60-86e2-b90af5cf8b04',
                     'tag': 'BIL_DATOER',
-                    'sporsmalstekst': 'Hvilke dager reiste du med bil i perioden 1. februar - 18. mars 2021?',
+                    'sporsmalstekst': 'Hvilke dager reiste du med bil i perioden 20. desember 2020 - 18. januar 2021?',
                     'undertekst': null,
                     'svartype': 'DATOER',
-                    'min': '2020-02-01',
-                    'max': '2021-03-18',
+                    // TODO: Finn en måte å teste dette på uten å endre spørsmålet
+                    'min': '2020-12-20',
+                    'max': '2021-01-18',
                     'pavirkerAndreSporsmal': false,
                     'kriterieForVisningAvUndersporsmal': null,
                     'svar': [],
