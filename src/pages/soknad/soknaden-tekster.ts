@@ -49,6 +49,7 @@ const SoknadenTekster = {
     'sykepengesoknad.utdanning.tittel': 'Utdanning',
     'sykepengesoknad.arbeidsledig_utland.tittel': 'Reise',
 
+    'sykepengesoknad.brukte_reisetilskuddet.tittel': 'Reisetilskudd',
     'sykepengesoknad.transport_til_daglig.tittel': 'Før du fikk sykmelding',
     'sykepengesoknad.reise_med_bil.tittel': 'Reise med bil',
     'sykepengesoknad.kvitteringer.tittel': 'Kvitteringer',

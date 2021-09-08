@@ -721,6 +721,18 @@ export const gradertReisetilskudd: RSSoknad = {
             'undersporsmal': []
         } ]
     }, {
+        'id': '1563341',
+        'tag': 'BRUKTE_REISETILSKUDDET',
+        'sporsmalstekst': 'Har du brukt reisetilskuddet mens du var sykmeldt?',
+        'undertekst': null,
+        'svartype': 'JA_NEI',
+        'min': null,
+        'max': null,
+        'pavirkerAndreSporsmal': true,
+        'kriterieForVisningAvUndersporsmal': null,
+        'svar': [ { 'verdi': 'JA' } ],
+        'undersporsmal': []
+    }, {
         'id': '1547256',
         'tag': 'TRANSPORT_TIL_DAGLIG',
         'sporsmalstekst': 'Brukte du bil eller offentlig transport til og fra jobben før du ble sykmeldt?',

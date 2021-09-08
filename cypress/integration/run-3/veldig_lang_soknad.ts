@@ -227,6 +227,10 @@ describe('Tester støtte for gamle spørsmål', () => {
         velgPeriode()
         gaVidere()
     })
+    it('BRUKTE_REISETILSKUDDET', () => {
+        svarJaHovedsporsmal()
+        gaVidere()
+    })
     it('TRANSPORT_TIL_DAGLIG', () => {
         svarJaHovedsporsmal()
         velgCheckbox('Offentlig transport')
