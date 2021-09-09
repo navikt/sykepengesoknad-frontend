@@ -7,7 +7,6 @@ import { Normaltekst } from 'nav-frontend-typografi'
 import React from 'react'
 import { useFormContext, useWatch } from 'react-hook-form'
 
-import { Sporsmal } from '../../../types/types'
 import { maaneder, sammeAar, sammeMnd } from '../../../utils/dato-utils'
 import { tekst } from '../../../utils/tekster'
 import FeilLokal from '../../feil/feil-lokal'
@@ -19,6 +18,11 @@ import SlettIkon from './slett-ikon.svg'
 dayjs.extend(weekOfYear)
 dayjs.extend(isoWeek)
 
+interface KalenderUke {
+    ukenr: number;
+    dager: KalenderDag[];
+}
+
 interface KalenderDag {
     dayjs: Dayjs;
     tid: 'foran' | 'etter' | 'inni';
@@ -28,14 +32,6 @@ const DagerKomp = ({ sporsmal }: SpmProps) => {
     const { register, setValue } = useFormContext()
     const feilmelding = hentFeilmelding(sporsmal)
     const watchDager = useWatch({ name: sporsmal.id })
-
-    const dagerSidenMandag = (spm: Sporsmal) => {
-        return ((dayjs(spm.min!).day() - 1)) % 7
-    }
-
-    const dagerTilSøndag = (spm: Sporsmal) => {
-        return (7 - dayjs(spm.max!).day())
-    }
 
     const kalTittel = () => {
         const etaar = sammeAar(sporsmal)
@@ -51,60 +47,37 @@ const DagerKomp = ({ sporsmal }: SpmProps) => {
         }
     }
 
-    const minWeek = dayjs(sporsmal.min!).isoWeek()
-    const maxWeek = dayjs(sporsmal.max!).isoWeek()
-    const uker: number[] = []
-    for (let i = 0; i <= (maxWeek - minWeek); i++) {
-        uker.push(minWeek + i)
+    const min = dayjs(sporsmal.min!)
+    const max = dayjs(sporsmal.max!)
+    const forsteDagIKalender = min.startOf('isoWeek')
+    const sisteDagIKalender = max.endOf('isoWeek')
+
+    const alleUker: KalenderUke[] = []
+    for (let uke = forsteDagIKalender; uke.endOf('isoWeek') <= sisteDagIKalender; uke = uke.add(1, 'week')) {
+        const dager: KalenderDag[] = []
+        for(let dag = uke.startOf('isoWeek'); dag <= uke.endOf('isoWeek'); dag = dag.add(1, 'day')) {
+            if (dag < min) {
+                dager.push({ dayjs: dag, tid: 'foran' })
+            } else if (dag > max) {
+                dager.push({ dayjs: dag, tid: 'etter' })
+            } else {
+                dager.push({ dayjs: dag, tid: 'inni' })
+            }
+        }
+        alleUker.push({
+            ukenr: uke.isoWeek(),
+            dager: dager
+        })
     }
 
-    let tell = 1
-    const alledager: any = []
-
-    uker.forEach(uke => {
-        const pre = dagerSidenMandag(sporsmal)
-        const post = dagerTilSøndag(sporsmal)
-
-        if (uke === minWeek) {
-            const ukedager: KalenderDag[] = []
-            for (let i = 0; i < pre; i++) {
-                ukedager.push({ dayjs: dayjs(sporsmal.min!).isoWeekday(i + 1), tid: 'foran' })
-            }
-            for (let i = ukedager.length; i < 7; i++) {
-                ukedager.push({ dayjs: dayjs(sporsmal.min!).isoWeekday(i + 1), tid: 'inni' })
-            }
-            alledager.push(ukedager)
-
-        } else if (uke === maxWeek) {
-            const ukedager: KalenderDag[] = []
-            for (let i = 0; i < (5 - post); i++) {
-                ukedager.push({ dayjs: dayjs(sporsmal.max!).isoWeekday(i + 1), tid: 'inni' })
-            }
-            for (let i = ukedager.length; i < 7; i++) {
-                ukedager.push({ dayjs: dayjs(sporsmal.max!).isoWeekday(i + 1), tid: 'etter' })
-            }
-            alledager.push(ukedager)
-
-        } else {
-            const start = dayjs(sporsmal.min!)
-            const ukedager: KalenderDag[] = []
-            for (let i = 1; i <= 7; i++) {
-                ukedager.push({ dayjs: start.add((tell * 7) + 1, 'days').isoWeekday(i), tid: 'inni' })
-            }
-            alledager.push(ukedager)
-            tell++
-        }
-    })
-
-    const velgAlle = () => {
+    const velgAlleUkedager = () => {
         const dager: string[] = []
-        alledager.forEach((uke: any) => {
-            for (let i = 0; i < uke.length; i++) {
-                const dag = uke[i]
-                if (dag.tid === 'inni') {
+        alleUker.forEach((uke: KalenderUke) => {
+            uke.dager.forEach((dag) => {
+                if (dag.tid === 'inni' && dag.dayjs.isoWeekday() <= 5) {
                     dager.push(dag.dayjs.format('YYYY-MM-DD'))
                 }
-            }
+            })
         })
         setValue(sporsmal.id, Array.from(new Set(dager)))
     }
@@ -150,16 +123,16 @@ const DagerKomp = ({ sporsmal }: SpmProps) => {
                     <span>Søn</span>
                 </div>
 
-                {alledager.map((ukedager: KalenderDag[], ukeidx: number) => {
+                {alleUker.map((uke: KalenderUke) => {
                     return (
-                        <div className="kalenderuke" key={ukeidx}>
-                            <div className="ukenr">{uker[ukeidx]}</div>
+                        <div className="kalenderuke" key={uke.ukenr}>
+                            <div className="ukenr">{uke.ukenr}</div>
 
-                            {ukedager.map((dag, idx) => {
+                            {uke.dager.map((dag, idx) => {
                                 const sunday = dag.dayjs.isoWeekday() === 7 ? 'sun' : ''
                                 return (
                                     <div className={`kalenderdag ${dag.tid} ${sunday}`} key={idx}>
-                                        {kalenderdag(dag, ukeidx, idx)}
+                                        {kalenderdag(dag, uke.ukenr, idx)}
                                     </div>
                                 )
                             })}
@@ -170,7 +143,7 @@ const DagerKomp = ({ sporsmal }: SpmProps) => {
                 <FeilLokal sporsmal={sporsmal} />
 
                 <Normaltekst className="kalendervalg">
-                    <button type="button" className="lenkeknapp velgalle" onClick={velgAlle}>
+                    <button type="button" className="lenkeknapp velgalle" onClick={velgAlleUkedager}>
                         {tekst('sporsmal.egen-bil.kalender.ukedager')}
                     </button>
                     <button type="button" className="lenkeknapp fjernalle" onClick={fjernAlle}>

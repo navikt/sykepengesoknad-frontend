@@ -64,9 +64,9 @@ describe('Teste førsteside i reisetilskuddsøknaden', () => {
 
         it('Tester beløp valget', () => {
             cy.get('.inputPanelGruppe__inner label:first-child > input[value=JA]').click({ force: true })
-            cy.get(':nth-child(2) > .skjemaelement__label').click({ force: true })
-            cy.get('#5fb4961f-90d5-4893-9821-24b3a68cf3e1').focus().type('1000', { delay: 500, force: true })
-            cy.get('#5fb4961f-90d5-4893-9821-24b3a68cf3e1').should('have.value', '1000')
+            cy.get(':nth-child(1) > .skjemaelement__label').click({ force: true })
+            cy.get('#1566427').focus().type('1000', { delay: 500, force: true })
+            cy.get('#1566427').should('have.value', '1000')
             cy.contains('Gå videre').click()
         })
 
@@ -74,7 +74,7 @@ describe('Teste førsteside i reisetilskuddsøknaden', () => {
             cy.url().should('include', `${nyttReisetilskudd.id}/3`)
             cy.contains('Tilbake').click({ force: true })
             cy.url().should('include', `${nyttReisetilskudd.id}/2`)
-            cy.get('#5fb4961f-90d5-4893-9821-24b3a68cf3e1').should('have.value', '1000')
+            cy.get('#1566427').should('have.value', '1000')
 
             cy.contains('Gå videre').click()
         })
@@ -88,8 +88,7 @@ describe('Teste førsteside i reisetilskuddsøknaden', () => {
 
         it('Svar ja på hovedspørsmålet', () => {
             cy.get('.inputPanelGruppe__inner label:first-child > input[value=JA]').click({ force: true })
-            cy.get('.undersporsmal > :nth-child(1)').should('have.text', 'Hvilke dager reiste du med bil i perioden 1. februar - 18. mars 2021?')
-            cy.get('.undersporsmal > .kriterie--ja > h3').should('have.text', 'Hadde du utgifter til bompenger?Hvor mange km er kjøreturen mellom hjemmet ditt og jobben?')
+            cy.get('.undersporsmal > :nth-child(1)').should('have.text', 'Hvilke dager reiste du med bil i perioden 23. desember 2020 - 7. januar 2021?')
         })
 
         it('Minst en dag må velges', () => {
@@ -98,13 +97,28 @@ describe('Teste førsteside i reisetilskuddsøknaden', () => {
         })
 
         it('Fyller ut', () => {
+            // Grense før
+            cy.get('.kalenderuke').first().within(() => {
+                cy.get('.ukenr').contains('52')
+                cy.get('.kalenderdag.foran').contains('22')
+                cy.get('.kalenderdag.inni').contains('23')
+            })
+
+            // Valg av dager
+            cy.get('.skjema__dager').contains('24').click({ force: true })
             cy.get('.skjema__dager').contains('25').click({ force: true })
-            cy.get('.skjema__dager').contains('26').click({ force: true })
-            cy.get('.skjema__dager').contains('26').click({ force: true })
+            cy.get('.skjema__dager').contains('25').click({ force: true })
+
+            // Grense etter
+            cy.get('.kalenderuke').last().within(() => {
+                cy.get('.ukenr').contains('1')
+                cy.get('.kalenderdag.inni').contains('07')
+                cy.get('.kalenderdag.etter').contains('08')
+            })
 
             cy.get('.undersporsmal > .kriterie--ja > .radioContainer > input[value=JA]').click({ force: true })
-            cy.get('#616cc0cb-434e-4114-a68b-b5708e033e9e').focus().type('1000')
-            cy.get('#c56ca825-5993-4a13-bba7-29d592944b20').focus().type('42')
+            cy.get('#1566447').focus().type('1000')
+            cy.get('#1566448').focus().type('42')
 
             cy.contains('Gå videre').click()
         })
@@ -113,7 +127,7 @@ describe('Teste førsteside i reisetilskuddsøknaden', () => {
             cy.url().should('include', `${nyttReisetilskudd.id}/4`)
             cy.contains('Tilbake').click({ force: true })
             cy.url().should('include', `${nyttReisetilskudd.id}/3`)
-            cy.get('#616cc0cb-434e-4114-a68b-b5708e033e9e').should('have.value', '1000')
+            cy.get('#1566447').should('have.value', '1000')
 
             cy.contains('Gå videre').click()
         })
@@ -293,7 +307,7 @@ describe('Teste førsteside i reisetilskuddsøknaden', () => {
 
         it('Oppsummering inneholder riktig informasjon', () => {
             cy.get('.oppsummering').click()
-            cy.get('.utvidbar__innhold > :nth-child(4)').should('include.text', 'Last opp kvitteringer for reiseutgifter til jobben fra 1. februar til 18. mars 2021')
+            cy.get('.utvidbar__innhold > :nth-child(4)').should('include.text', 'Last opp kvitteringer for reiser til og fra jobben mellom 1. - 24. april 2020.')
             cy.get('.utvidbar__innhold > :nth-child(4)').should('include.text', 'Du lastet opp 1 utgift på 99 kr')
             cy.get('.skjemaelement__label').should('contain', 'Jeg har lest all informasjonen jeg har fått i søknaden og bekrefter at opplysningene jeg har gitt er korrekte.')
             cy.get('.skjemaelement__label').click({ force: true })
