@@ -14,6 +14,7 @@ const BjornUnderTittel = ({ sporsmal }: SpmProps) => {
     const { valgtSoknad } = useAppStore()
 
     const harBjorntekst = (tag: TagTyper) =>
+        tag === TagTyper.BRUKTE_REISETILSKUDDET ||
         tag === TagTyper.ENKELTSTAENDE_BEHANDLINGSDAGER ||
         tag === TagTyper.ARBEID_UTENFOR_NORGE ||
         tag === TagTyper.FRAVER_FOR_BEHANDLING ||

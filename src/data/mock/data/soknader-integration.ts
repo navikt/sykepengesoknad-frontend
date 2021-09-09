@@ -2625,6 +2625,19 @@ export const veldigLangSoknad: RSSoknad = {
             ]
         },
         {
+            'id': '1563341',
+            'tag': 'BRUKTE_REISETILSKUDDET',
+            'sporsmalstekst': 'Har du brukt reisetilskuddet mens du var sykmeldt?',
+            'undertekst': null,
+            'svartype': 'JA_NEI',
+            'min': null,
+            'max': null,
+            'pavirkerAndreSporsmal': true,
+            'kriterieForVisningAvUndersporsmal': null,
+            'svar': [],
+            'undersporsmal': []
+        },
+        {
             'id': 'b59b2bea-1d4c-49e7-9e05-351aaf083232',
             'tag': 'TRANSPORT_TIL_DAGLIG',
             'sporsmalstekst': 'Brukte du bil eller offentlig transport til og fra jobben før du ble sykmeldt?',
