@@ -34,7 +34,6 @@ const RadioKomp = ({ sporsmal }: SpmProps) => {
 
             <div className={
                 'skjemaelement' +
-                (erHorisontal(sporsmal.svartype) ? ' skjemaelement--horisontal' : '') +
                 (errors[sporsmal.id] ? ' skjemagruppe--feil' : '')
             }>
                 {sporsmal.undersporsmal.map((uspm, idx) => {
@@ -86,7 +85,3 @@ const RadioKomp = ({ sporsmal }: SpmProps) => {
 }
 
 export default RadioKomp
-
-export const erHorisontal = (svartype: RSSvartype) => {
-    return svartype === RSSvartype.RADIO_GRUPPE_TIMER_PROSENT
-}
