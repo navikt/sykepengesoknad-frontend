@@ -59,7 +59,8 @@ const BehandlingsUke = ({ sporsmal, ukeidx, ukespm }: UkeProps) => {
                         <input type="radio"
                             id={ukespm.id + '_' + idx}
                             {...register(ukespm.id)}
-                            onChange={() => radioKlikk(dag.format(('YYYY-MM-DD')), ukeidx, ukespm.id)}
+                            onChange={() => radioKlikk(dag.format('YYYY-MM-DD'), ukeidx, ukespm.id)}
+                            value={dag.format('YYYY-MM-DD')}
                             defaultChecked={checked}
                             className="radioknapp"
                         />
