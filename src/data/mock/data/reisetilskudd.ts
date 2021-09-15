@@ -730,7 +730,7 @@ export const gradertReisetilskudd: RSSoknad = {
         'max': null,
         'pavirkerAndreSporsmal': true,
         'kriterieForVisningAvUndersporsmal': null,
-        'svar': [ { 'verdi': 'JA' } ],
+        'svar': [ ],
         'undersporsmal': []
     }, {
         'id': '1547256',
