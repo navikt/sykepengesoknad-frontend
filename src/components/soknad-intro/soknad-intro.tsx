@@ -11,6 +11,7 @@ import { RSSoknadstype } from '../../types/rs-types/rs-soknadstype'
 import { tekst } from '../../utils/tekster'
 import Vis from '../vis'
 import ForsteSoknadSvg from './soknad-intro-svg'
+import { ViktigInformasjon } from './viktig-informasjon'
 
 const SoknadIntro = () => {
     const [ aapen, setAapen ] = useState<boolean>(false)
@@ -40,6 +41,8 @@ const SoknadIntro = () => {
                     </Normaltekst>
                 </Veilederpanel>
             </div>
+
+            <ViktigInformasjon />
 
         </div>
         <ModalWrapper className={'personvern-modal'} onRequestClose={() => setAapen(false)}

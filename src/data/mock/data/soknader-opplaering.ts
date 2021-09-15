@@ -1935,6 +1935,7 @@ export const frilanser: RSSoknad = {
     'korrigerer': null,
     'korrigertAv': null,
     'arbeidssituasjon': 'FRILANSER',
+    'merknaderFraSykmelding': [ { 'type': 'UGYLDIG_TILBAKEDATERING' } ],
     'soknadPerioder': [
         {
             'fom': '2020-04-01',

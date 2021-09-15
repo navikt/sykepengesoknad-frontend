@@ -1,6 +1,7 @@
 import { dayjsToDate } from '../utils/dato-utils'
 import { TagTyper } from './enums'
 import { RSArbeidssituasjon } from './rs-types/rs-arbeidssituasjon'
+import { RSMerknad } from './rs-types/rs-merknad'
 import { RSSoknad } from './rs-types/rs-soknad'
 import { RSSoknadsperiode } from './rs-types/rs-soknadsperiode'
 import { RSSoknadstatus } from './rs-types/rs-soknadstatus'
@@ -46,6 +47,7 @@ export class Soknad {
     sporsmal: Sporsmal[];
     soknadPerioder: RSSoknadsperiode[];
     korrigerer: string | null;
+    merknaderFraSykmelding?: RSMerknad[];
 
     constructor(
         soknad: RSSoknad
@@ -73,6 +75,7 @@ export class Soknad {
         this.arbeidssituasjon = soknad.arbeidssituasjon as any
         this.sporsmal = rsToSporsmal(soknad.sporsmal, undefined as any, true)
         this.soknadPerioder = soknad.soknadPerioder
+        this.merknaderFraSykmelding = soknad.merknaderFraSykmelding
     }
 }
 

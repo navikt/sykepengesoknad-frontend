@@ -9,6 +9,7 @@ import OmSykepengerTekster from '../components/om-sykepenger/om-sykepenger-tekst
 import OpplysningerTekster from '../components/opplysninger-fra-sykmelding/opplysninger-tekster'
 import OppsummeringTekster from '../components/oppsummering/oppsummering-tekster'
 import SoknadIntroTekster from '../components/soknad-intro/soknad-intro-tekster'
+import { ViktigInformasjonTekster } from '../components/soknad-intro/viktig-informasjon-tekster'
 import TeaserTekster from '../components/soknader/teaser/teaser-tekster'
 import BjornTekster from '../components/sporsmal/bjorn/bjorn-tekster'
 import KnapperadTekster from '../components/sporsmal/sporsmal-form/knapperad-tekster'
@@ -41,6 +42,7 @@ const tekster = {
     ...OpplastingTekster,
     ...SparTidTekster,
     ...EldreUsendtTekster,
+    ...ViktigInformasjonTekster,
 }
 
 export const tekst = (tekst: keyof typeof tekster): string => {
