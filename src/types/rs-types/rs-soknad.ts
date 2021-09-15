@@ -1,5 +1,6 @@
 import { Arbeidsgiver } from '../types'
 import { RSArbeidssituasjonType } from './rs-arbeidssituasjon'
+import { RSMerknad } from './rs-merknad'
 import { RSSoknadsperiode } from './rs-soknadsperiode'
 import { RSSoknadstatusType } from './rs-soknadstatus'
 import { RSSoknadstypeType } from './rs-soknadstype'
@@ -25,6 +26,7 @@ export interface RSSoknad {
     arbeidsgiver: Arbeidsgiver | null;
     sporsmal: RSSporsmal[];
     soknadPerioder: RSSoknadsperiode[];
+    merknaderFraSykmelding?: RSMerknad[];
 }
 
 
