@@ -291,7 +291,7 @@ export const gradertReisetilskudd: RSSoknad = {
     }, {
         'id': '1547216',
         'tag': 'TILBAKE_I_ARBEID',
-        'sporsmalstekst': 'Var du tilbake i fullt arbeid hos SNILL TORPEDO i løpet av perioden 1. - 24. april 2020?',
+        'sporsmalstekst': 'Var du tilbake i ditt vanlige arbeid uten ekstra reiseutgifter før 25. april?',
         'undertekst': null,
         'svartype': 'JA_NEI',
         'min': null,
@@ -302,7 +302,7 @@ export const gradertReisetilskudd: RSSoknad = {
         'undersporsmal': [ {
             'id': '1547217',
             'tag': 'TILBAKE_NAR',
-            'sporsmalstekst': 'Når begynte du å jobbe igjen?',
+            'sporsmalstekst': 'Når var du tilbake?',
             'undertekst': null,
             'svartype': 'DATO',
             'min': '2020-04-01',
@@ -723,7 +723,7 @@ export const gradertReisetilskudd: RSSoknad = {
     }, {
         'id': '1563341',
         'tag': 'BRUKTE_REISETILSKUDDET',
-        'sporsmalstekst': 'Har du brukt reisetilskuddet mens du var sykmeldt?',
+        'sporsmalstekst': 'Hadde du ekstra reiseutgifter mens du var sykmeldt?',
         'undertekst': null,
         'svartype': 'JA_NEI',
         'min': null,
