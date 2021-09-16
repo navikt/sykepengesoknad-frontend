@@ -112,7 +112,7 @@ function hentEnvironment(): EnvironmentInterface {
             }, isMockBackend(): boolean {
                 return true
             }, isOpplaering(): boolean {
-                return true
+                return process.env.REACT_APP_OPPLAERING === 'true'
             }, isProd(): boolean {
                 return false
             }, isQ1(): boolean {

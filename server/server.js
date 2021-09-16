@@ -14,25 +14,21 @@ server.get('/', (req, res) => {
 })
 
 server.get(`${basePath}/env-config-server.js`, (req, res) => {
-
-        res.contentType('application/javascript; charset=UTF-8')
-        res.send(`
-window._env_ = {
-    MOCK_BACKEND: 'true',
-    FLEX_GATEWAY_ROOT: 'http://localhost:33333',
-    LOGINSERVICE_URL: 'http://localhost:5000',
-    LOGINSERVICE_REDIRECT_URL: 'http://localhost:8080',
-    AMPLITUDE_KEY: '7a887ba3e5a07c755526c6591810101a',
-    AMPLITUDE_ENABLED: 'true',
-    REACT_APP_DECORATOR_URL: 'http://localhost:8100/dekoratoren',
-    ENVIRONMENT: 'dev',
-    SYKEFRAVAER_URL: 'http://localhost:2027',
-    DITTNAV_URL: 'https://www.nav.no/person/dittnav',
-    OPPLAERING: 'true',
-    SYKMELDINGER_BACKEND_PROXY_ROOT: 'http://localhost:6998'
+    res.contentType('application/javascript; charset=UTF-8')
+    res.send(`window._env_ = {
+    MOCK_BACKEND: '${process.env.MOCK_BACKEND}',
+    FLEX_GATEWAY_ROOT: '${process.env.FLEX_GATEWAY_ROOT}',
+    LOGINSERVICE_URL: '${process.env.LOGINSERVICE_URL}',
+    LOGINSERVICE_REDIRECT_URL: '${process.env.LOGINSERVICE_REDIRECT_URL}',
+    AMPLITUDE_KEY: '${process.env.AMPLITUDE_KEY}',
+    AMPLITUDE_ENABLED: '${process.env.AMPLITUDE_ENABLED}',
+    ENVIRONMENT: '${process.env.ENVIRONMENT}',
+    SYKEFRAVAER_URL: '${process.env.SYKEFRAVAER_URL}',
+    DITTNAV_URL: '${process.env.DITTNAV_URL}',
+    OPPLAERING: '${process.env.OPPLAERING}',
+    SYKMELDINGER_BACKEND_PROXY_ROOT: '${process.env.SYKMELDINGER_BACKEND_PROXY_ROOT}'
 }`)
-    }
-)
+})
 
 
 server.use(`${basePath}`, express.static(buildPath, { index: false }))

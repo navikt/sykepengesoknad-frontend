@@ -104,8 +104,8 @@
         "yet-another-fetch-mock": "^4.1.0"
     },
     "scripts": {
-        "start-mock": "craco start",
-        "start-opp": "REACT_APP_OPPLAERING=true craco start",
+        "start-opp": "NODE_ENV=development REACT_APP_OPPLAERING=true craco start",
+        "start-mock": "NODE_ENV=development craco start",
         "start": "craco start",
         "build": "CI=true craco build",
         "test": "MOCK_BACKEND=true craco test",

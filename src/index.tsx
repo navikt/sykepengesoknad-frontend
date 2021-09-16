@@ -28,7 +28,7 @@ const frontendloggerSrc = () => {
     if (env.isQ1() || env.isProd()) {
         return '/frontendlogger/logger.js'
     }
-    return '/dev-frontendlogger.js'
+    return '/syk/sykepengesoknad/dev-frontendlogger.js'
 }
 
 const src = frontendloggerSrc()
