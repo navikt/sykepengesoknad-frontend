@@ -38,11 +38,11 @@ spec:
       value: "d5b43a81941b61a3b06059197807a25a"
     - name: AMPLITUDE_ENABLED
       value: "true"
-    - name: DECORATOR_URL
-      value: "https://www.nav.no/dekoratoren"
     - name: ENVIRONMENT
       value: "prod"
     - name: SYKEFRAVAER_URL
       value: "https://www.nav.no/syk/sykefravaer"
     - name: DITTNAV_URL
       value: "https://www.nav.no/person/dittnav"
+    - name: DECORATOR_ENV
+      value: "prod"

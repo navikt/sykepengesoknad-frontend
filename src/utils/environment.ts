@@ -1,4 +1,4 @@
-class Environment implements EnvironmentInterface{
+class Environment implements EnvironmentInterface {
 
     private env = (window as any)._env_;
 
@@ -62,21 +62,76 @@ class Environment implements EnvironmentInterface{
 
 interface EnvironmentInterface {
     dittNavUrl(): string
+
     sykefravaerUrl(): string
+
     amplitudeEnabled(): boolean
+
     amplitudeKey(): string
+
     loginServiceRedirectUrl(): string
+
     loginServiceUrl(): string
+
     sykmeldingerBackendProxyRoot(): string
+
     isOpplaering(): boolean
+
     isMockBackend(): boolean
+
     flexGatewayRoot(): string
+
     isIntegrationtest(): boolean
+
     isDev(): boolean
+
     isQ1(): boolean
+
     isProd(): boolean
 }
 
-const env: EnvironmentInterface = new Environment()
+function hentEnvironment(): EnvironmentInterface {
+    if (process.env.NODE_ENV === 'development') {
+        // eslint-disable-next-line no-console
+        console.log('process.env')
+        // eslint-disable-next-line no-console
+        console.log(process.env)
+        return {
+            amplitudeEnabled(): boolean {
+                return false
+            }, amplitudeKey(): string {
+                return ''
+            }, dittNavUrl(): string {
+                return ''
+            }, flexGatewayRoot(): string {
+                return ''
+            }, isDev(): boolean {
+                return true
+            }, isIntegrationtest(): boolean {
+                return true
+            }, isMockBackend(): boolean {
+                return true
+            }, isOpplaering(): boolean {
+                return true
+            }, isProd(): boolean {
+                return false
+            }, isQ1(): boolean {
+                return false
+            }, loginServiceRedirectUrl(): string {
+                return ''
+            }, loginServiceUrl(): string {
+                return ''
+            }, sykefravaerUrl(): string {
+                return ''
+            }, sykmeldingerBackendProxyRoot(): string {
+                return ''
+            }
+
+        }
+    }
+    return new Environment()
+}
+
+const env = hentEnvironment()
 
 export default env

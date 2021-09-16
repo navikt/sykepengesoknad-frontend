@@ -25,8 +25,6 @@ spec:
       value: "false"
     - name: MOCK_BACKEND
       value: "true"
-    - name: DECORATOR_URL
-      value: "https://www.nav.no/dekoratoren"
     - name: ENVIRONMENT
       value: "gcp"
     - name: SYKEFRAVAER_URL
@@ -35,3 +33,5 @@ spec:
       value: "https://www.nav.no/person/dittnav"
     - name: OPPLAERING
       value: "true"
+    - name: DECORATOR_ENV
+      value: "prod"
