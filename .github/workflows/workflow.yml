@@ -14,9 +14,7 @@ jobs:
           TIME=$(TZ="Europe/Oslo" date +%Y.%m.%d-%H.%M)
           COMMIT=$(git rev-parse --short=8 HEAD)
           VERSION=$TIME-$COMMIT
-          echo "IMAGE_ROOT=docker.pkg.github.com/${GITHUB_REPOSITORY}/$APP-root:$VERSION" >> $GITHUB_ENV
-          echo "IMAGE_SYKEPENGESOKNAD=docker.pkg.github.com/${GITHUB_REPOSITORY}/$APP-sykepengesoknad:$VERSION" >> $GITHUB_ENV
-          echo "IMAGE_SYK_SYKEPENGESOKNAD=docker.pkg.github.com/${GITHUB_REPOSITORY}/$APP-syk-sykepengesoknad:$VERSION" >> $GITHUB_ENV
+          echo "IMAGE=docker.pkg.github.com/${GITHUB_REPOSITORY}/$APP:$VERSION" >> $GITHUB_ENV
           echo "VERSION=$VERSION" >> $GITHUB_ENV
       - run: echo $VERSION > VERSION.txt
       - name: Last opp VERSION til neste job
@@ -46,14 +44,10 @@ jobs:
         env:
             GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: docker login docker.pkg.github.com -u ${GITHUB_REPOSITORY} -p ${GITHUB_TOKEN}
-      - name: Bygg og push Docker image hvor appen serves på /
+      - name: Bygg og push Docker image
         run: |
-            docker build . -f Dockerfile.root -t ${IMAGE_ROOT}
-            docker push ${IMAGE_ROOT}
-      - name: Bygg og push Docker image hvor appen serves på /syk/sykepengesoknad
-        run: |
-          docker build . -f Dockerfile.syksykepengesoknad -t ${IMAGE_SYK_SYKEPENGESOKNAD}
-          docker push ${IMAGE_SYK_SYKEPENGESOKNAD}
+          docker build . -t ${IMAGE}
+          docker push ${IMAGE}
 
   integrasjonstest-install:
     name: Integrasjonstest install
@@ -108,7 +102,7 @@ jobs:
           name: VERSION.txt
           path: .
       - run: echo "VERSION=`cat VERSION.txt`" >> $GITHUB_ENV
-      - run: echo "IMAGE=docker.pkg.github.com/${GITHUB_REPOSITORY}/$APP-syk-sykepengesoknad:$VERSION" >> $GITHUB_ENV
+      - run: echo "IMAGE=docker.pkg.github.com/${GITHUB_REPOSITORY}/$APP:$VERSION" >> $GITHUB_ENV
       - name: Deploy to dev-gcp
         uses: nais/deploy/actions/deploy@v1
         env:
@@ -128,7 +122,7 @@ jobs:
           name: VERSION.txt
           path: .
       - run: echo "VERSION=`cat VERSION.txt`" >> $GITHUB_ENV
-      - run: echo "IMAGE=docker.pkg.github.com/${GITHUB_REPOSITORY}/$APP-syk-sykepengesoknad:$VERSION" >> $GITHUB_ENV
+      - run: echo "IMAGE=docker.pkg.github.com/${GITHUB_REPOSITORY}/$APP:$VERSION" >> $GITHUB_ENV
       - name: Deploy to prod-gcp
         uses: nais/deploy/actions/deploy@v1
         env:
@@ -149,7 +143,7 @@ jobs:
           name: VERSION.txt
           path: .
       - run: echo "VERSION=`cat VERSION.txt`" >> $GITHUB_ENV
-      - run: echo "IMAGE=docker.pkg.github.com/${GITHUB_REPOSITORY}/$APP-root:$VERSION" >> $GITHUB_ENV
+      - run: echo "IMAGE=docker.pkg.github.com/${GITHUB_REPOSITORY}/$APP:$VERSION" >> $GITHUB_ENV
       - name: Deploy to labs-gcp
         uses: nais/deploy/actions/deploy@v1
         env:
