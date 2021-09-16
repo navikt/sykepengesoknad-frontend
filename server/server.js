@@ -9,7 +9,7 @@ const server = express()
 
 server.use(express.json())
 server.use(`${basePath}`, express.static(buildPath, { index: false }))
-server.get(`${basePath}/internal/isAlive|isReady`, (req, res) =>
+server.get(`/internal/isAlive|isReady`, (req, res) =>
     res.sendStatus(200)
 )
 
