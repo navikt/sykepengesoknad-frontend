@@ -15,6 +15,7 @@ server.get('/', (req, res) => {
 
 server.get(`${basePath}/env-config-server.js`, (req, res) => {
     res.contentType('application/javascript; charset=UTF-8')
+    disableCache(res)
     res.send(`window._env_ = {
     MOCK_BACKEND: '${process.env.MOCK_BACKEND}',
     FLEX_GATEWAY_ROOT: '${process.env.FLEX_GATEWAY_ROOT}',
@@ -39,13 +40,21 @@ server.get(`/internal/isAlive|isReady`, (req, res) =>
 server.use('*', (req, res) =>
     getHtmlWithDecorator(`${buildPath}/index.html`)
         .then((html) => {
+            disableCache(res)
             res.send(html)
         })
         .catch((e) => {
             logger.error(e)
+            disableCache(res)
             res.status(500).send(e)
         })
 )
+
+function disableCache(res){
+    res.setHeader('Pragma', 'no-cache');
+    res.setHeader('Cache-Control', 'private, no-cache, no-store, must-revalidate');
+    res.setHeader('Expires', '-1');
+}
 
 
 const port = process.env.PORT || 8080
