@@ -31,11 +31,11 @@ const mock = FetchMock.configure({
 })
 
 const soknader = [ ...jsonDeepCopy(soknaderOpplaering), nyttReisetilskudd, gradertReisetilskudd ]
-if (!env.isOpplaering || window.location.href.includes('alle-mock-data')) {
+if (!env.isOpplaering() || window.location.href.includes('alle-mock-data')) {
     soknader.push(...jsonDeepCopy(soknaderIntegration))
 }
 
-mock.put(`${env.flexGatewayRoot}/syfosoknad/api/soknader/:soknad/sporsmal/:sporsmal`,
+mock.put(`${env.flexGatewayRoot()}/syfosoknad/api/soknader/:soknad/sporsmal/:sporsmal`,
     (req) => {
 
         if (req.pathParams.soknad === soknadSomTriggerSporsmalFinnesIkkeISoknad.id) {
@@ -56,7 +56,7 @@ mock.put(`${env.flexGatewayRoot}/syfosoknad/api/soknader/:soknad/sporsmal/:spors
         })
     })
 
-mock.post(`${env.flexGatewayRoot}/syfosoknad/api/soknader/:soknad/korriger`,
+mock.post(`${env.flexGatewayRoot()}/syfosoknad/api/soknader/:soknad/korriger`,
     (req, res, ctx) => {
         const soknad = jsonDeepCopy(soknader.find((sok: RSSoknad) =>
             sok.id === req.pathParams.soknad
@@ -66,7 +66,7 @@ mock.post(`${env.flexGatewayRoot}/syfosoknad/api/soknader/:soknad/korriger`,
         return res(ctx.json(soknad))
     })
 
-mock.post(`${env.flexGatewayRoot}/syfosoknad/api/opprettSoknadUtland`,
+mock.post(`${env.flexGatewayRoot()}/syfosoknad/api/opprettSoknadUtland`,
     (req, res, ctx) => {
         const soknad = soknader.find((sok: RSSoknad) =>
             sok.soknadstype === RSSoknadstype.OPPHOLD_UTLAND && sok.status === RSSoknadstatus.NY
@@ -82,7 +82,7 @@ mock.post(`${env.flexGatewayRoot}/syfosoknad/api/opprettSoknadUtland`,
         return res(ctx.json(soknadOriginal))
     })
 
-mock.post(`${env.flexGatewayRoot}/syfosoknad/api/soknader/:soknad/finnMottaker`,
+mock.post(`${env.flexGatewayRoot()}/syfosoknad/api/soknader/:soknad/finnMottaker`,
     (req, res, ctx) => {
         const soknadId = req.pathParams.soknad
 
@@ -104,38 +104,38 @@ mock.post(`${env.flexGatewayRoot}/syfosoknad/api/soknader/:soknad/finnMottaker`,
     })
 
 
-mock.get(`${env.flexGatewayRoot}/syfosoknad/api/soknader`,
+mock.get(`${env.flexGatewayRoot()}/syfosoknad/api/soknader`,
     (req, res, ctx) => res(ctx.json(soknader)))
 
-mock.get(`${env.sykmeldingerBackendProxyRoot}/api/v1/sykmeldinger`,
+mock.get(`${env.sykmeldingerBackendProxyRoot()}/api/v1/sykmeldinger`,
     (req, res, ctx) => res(ctx.json(sykmeldinger)))
 
-mock.post(`${env.flexGatewayRoot}/syfosoknad/api/soknader/:soknad/send`,
+mock.post(`${env.flexGatewayRoot()}/syfosoknad/api/soknader/:soknad/send`,
     () => Promise.resolve({ status: 200 }))
 
-mock.post(`${env.flexGatewayRoot}/syfosoknad/api/soknader/:soknad/ettersendTilNav`,
+mock.post(`${env.flexGatewayRoot()}/syfosoknad/api/soknader/:soknad/ettersendTilNav`,
     () => Promise.resolve({ status: 200 }))
 
-mock.post(`${env.flexGatewayRoot}/syfosoknad/api/soknader/:soknad/ettersendTilArbeidsgiver`,
+mock.post(`${env.flexGatewayRoot()}/syfosoknad/api/soknader/:soknad/ettersendTilArbeidsgiver`,
     () => Promise.resolve({ status: 200 }))
 
-mock.post(`${env.flexGatewayRoot}/syfosoknad/api/soknader/:soknad/avbryt`,
+mock.post(`${env.flexGatewayRoot()}/syfosoknad/api/soknader/:soknad/avbryt`,
     () => Promise.resolve({ status: 200 }))
 
-mock.post(`${env.flexGatewayRoot}/syfosoknad/api/soknader/:soknad/gjenapne`,
+mock.post(`${env.flexGatewayRoot()}/syfosoknad/api/soknader/:soknad/gjenapne`,
     () => Promise.resolve({ status: 200 }))
 
-mock.delete(`${env.flexGatewayRoot}/syfosoknad/api/soknader/:soknad/sporsmal/:spmid/svar/:svarid`,
+mock.delete(`${env.flexGatewayRoot()}/syfosoknad/api/soknader/:soknad/sporsmal/:spmid/svar/:svarid`,
     () => Promise.resolve({ status: 204 }))
 
-mock.post(`${env.flexGatewayRoot}/flex-bucket-uploader/opplasting`,
+mock.post(`${env.flexGatewayRoot()}/flex-bucket-uploader/opplasting`,
     (req, res, ctx) =>
         res(ctx.json({
             id: uuid.v4(),
             melding: 'opprettet'
         })))
 
-mock.post(`${env.flexGatewayRoot}/syfosoknad/api/soknader/:soknad/sporsmal/:spmid/svar`,
+mock.post(`${env.flexGatewayRoot()}/syfosoknad/api/soknader/:soknad/sporsmal/:spmid/svar`,
     (req) => {
         const r = soknader.find((r) => r.id === req.pathParams.soknad)
         const spm = jsonDeepCopy(
@@ -149,7 +149,7 @@ mock.post(`${env.flexGatewayRoot}/syfosoknad/api/soknader/:soknad/sporsmal/:spmi
     }
 )
 
-mock.get(`${env.flexGatewayRoot}/flex-bucket-uploader/kvittering/:blob`,
+mock.get(`${env.flexGatewayRoot()}/flex-bucket-uploader/kvittering/:blob`,
     () => fetch(KvitteringJPG)
 )
 

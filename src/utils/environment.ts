@@ -1,82 +1,82 @@
-import { filstørrelseTilBytes } from './fil-utils'
-
-class Environment {
+class Environment implements EnvironmentInterface{
 
     private env = (window as any)._env_;
 
-    get isDev() {
+    isDev() {
         return this.env.ENVIRONMENT === 'dev'
     }
 
-    get isQ1() {
+    isQ1() {
         return this.env.ENVIRONMENT === 'q1'
     }
 
-    get isProd() {
+    isProd() {
         return this.env.ENVIRONMENT === 'prod'
     }
 
-    get isIntegrationtest() {
-        return this.isMockBackend && !this.isOpplaering
+    isIntegrationtest() {
+        return this.isMockBackend() && !this.isOpplaering()
     }
 
-    get flexGatewayRoot() {
+    flexGatewayRoot() {
         return this.env.FLEX_GATEWAY_ROOT
     }
 
-    get isMockBackend() {
+    isMockBackend() {
         return this.env.MOCK_BACKEND === 'true'
     }
 
-    get isOpplaering() {
+    isOpplaering() {
         return this.env.OPPLAERING === 'true'
     }
 
-    get sykmeldingerBackendProxyRoot() {
+    sykmeldingerBackendProxyRoot() {
         return this.env.SYKMELDINGER_BACKEND_PROXY_ROOT
     }
 
-    get loginServiceUrl() {
+    loginServiceUrl() {
         return this.env.LOGINSERVICE_URL
     }
 
-    get loginServiceRedirectUrl() {
+    loginServiceRedirectUrl() {
         return this.env.LOGINSERVICE_REDIRECT_URL
     }
 
-    get amplitudeKey() {
+    amplitudeKey() {
         return this.env.AMPLITUDE_KEY
     }
 
-    get amplitudeEnabled() {
+    amplitudeEnabled() {
         return this.env.AMPLITUDE_ENABLED === 'true'
     }
 
-    get baseName() {
-        return this.env.BASE_NAME
-    }
-
-    get sykefravaerUrl() {
+    sykefravaerUrl() {
         return this.env.SYKEFRAVAER_URL
     }
 
-    get dittNavUrl() {
+    dittNavUrl() {
         return this.env.DITTNAV_URL
     }
 
-    get maksFilstørrelse() {
-        return filstørrelseTilBytes(this.env.MAKS_FILSTORRELSE)
-    }
-
-    get tillatteFiltyper() {
-        return this.env.TILLATTE_FILTYPER.split(',')
-    }
-
-    get formaterteFiltyper() {
-        return this.env.FORMATERTE_FILTYPER
-    }
 }
 
-const env = new Environment()
+interface EnvironmentInterface {
+    dittNavUrl(): string
+    sykefravaerUrl(): string
+    amplitudeEnabled(): boolean
+    amplitudeKey(): string
+    loginServiceRedirectUrl(): string
+    loginServiceUrl(): string
+    sykmeldingerBackendProxyRoot(): string
+    isOpplaering(): boolean
+    isMockBackend(): boolean
+    flexGatewayRoot(): string
+    isIntegrationtest(): boolean
+    isDev(): boolean
+    isQ1(): boolean
+    isProd(): boolean
+}
+
+const env: EnvironmentInterface = new Environment()
 
 export default env

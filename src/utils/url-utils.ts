@@ -12,16 +12,6 @@ export const getUrlTilSoknad = (soknad: Soknad) => {
     return `/soknader/${soknad.id}/1`
 }
 
-
-const basenameUtenTrailingSlash = () => {
-    const baseName = env.baseName
-    if (baseName.endsWith('/')) {
-        return baseName.substring(0, baseName.length - 1)
-    }
-    return baseName
-}
-
-
-export const utlandssoknadUrl = basenameUtenTrailingSlash() + '/sykepengesoknad-utland'
+export const utlandssoknadUrl =  '/syk/sykepengesoknad/sykepengesoknad-utland'
 
 export const oversiktside = '/'

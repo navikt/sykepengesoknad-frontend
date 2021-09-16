@@ -83,7 +83,7 @@ const OpplastingForm = ({ sporsmal }: SpmProps) => {
     const opplastingTilBucket = async() => {
         const requestData = new FormData()
         requestData.append('file', valgtFil as Blob)
-        const bucketRes = await fetcher(`${env.flexGatewayRoot}/flex-bucket-uploader/opplasting`, {
+        const bucketRes = await fetcher(`${env.flexGatewayRoot()}/flex-bucket-uploader/opplasting`, {
             method: 'POST',
             body: requestData,
             credentials: 'include'
@@ -113,7 +113,7 @@ const OpplastingForm = ({ sporsmal }: SpmProps) => {
         }
         const svar: RSSvar = { verdi: JSON.stringify(kvittering) }
 
-        const syfosoknadRes = await fetcher(`${env.flexGatewayRoot}/syfosoknad/api/soknader/${valgtSoknad!.id}/sporsmal/${sporsmal!.id}/svar`, {
+        const syfosoknadRes = await fetcher(`${env.flexGatewayRoot()}/syfosoknad/api/soknader/${valgtSoknad!.id}/sporsmal/${sporsmal!.id}/svar`, {
             method: 'POST',
             body: JSON.stringify(svar),
             credentials: 'include',

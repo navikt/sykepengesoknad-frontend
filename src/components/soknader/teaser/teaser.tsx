@@ -39,7 +39,7 @@ const Teaser = ({ soknad }: SykepengesoknadTeaserProps) => {
 
                         {periodeListevisning(soknad)}
 
-                        <Vis hvis={env.isOpplaering}
+                        <Vis hvis={env.isOpplaering()}
                             render={() => leggTilSoknadstypeForDemoside(soknad)}
                         />
                     </div>

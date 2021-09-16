@@ -35,7 +35,7 @@ const Slettknapp = ({ sporsmal, kvittering, update }: SlettknappProps) => {
             const idx = sporsmal!.svarliste.svar.findIndex(svar => svarverdiToKvittering(svar?.verdi).blobId === kvittering?.blobId)
             const svar = sporsmal?.svarliste.svar.find(svar => svarverdiToKvittering(svar?.verdi).blobId === kvittering?.blobId)
 
-            const res = await fetcher(`${env.flexGatewayRoot}/syfosoknad/api/soknader/${valgtSoknad?.id}/sporsmal/${sporsmal?.id}/svar/${svar?.id}`, {
+            const res = await fetcher(`${env.flexGatewayRoot()}/syfosoknad/api/soknader/${valgtSoknad?.id}/sporsmal/${sporsmal?.id}/svar/${svar?.id}`, {
                 method: 'DELETE',
                 credentials: 'include'
             })

@@ -7,16 +7,16 @@ import { useFormContext } from 'react-hook-form'
 
 import { useAppStore } from '../../../data/stores/app-store'
 import env from '../../../utils/environment'
-import { customTruncet, formaterFilstørrelse } from '../../../utils/fil-utils'
+import { customTruncet, filstørrelseTilBytes, formaterFilstørrelse } from '../../../utils/fil-utils'
 import { logger } from '../../../utils/logger'
 import { getLedetekst, tekst } from '../../../utils/tekster'
 import Utvidbar from '../../utvidbar/utvidbar'
 import Vis from '../../vis'
 import binders from './binders.svg'
 
-const formattertFiltyper = env.formaterteFiltyper
-const tillatteFiltyper = env.tillatteFiltyper
-const maxFilstørrelse = env.maksFilstørrelse
+const formattertFiltyper = 'png, jpg og mobile bildeformater'
+const tillatteFiltyper = 'image/png,image/jpeg,image/heic'.split(',')
+const maxFilstørrelse = filstørrelseTilBytes('5MB')
 const maks = formaterFilstørrelse(maxFilstørrelse)
 
 const DragAndDrop = () => {
@@ -27,7 +27,7 @@ const DragAndDrop = () => {
     useEffect(() => {
         if (valgtKvittering?.blobId) {
             setFormErDisabled(true)
-            fetch(`${env.flexGatewayRoot}/flex-bucket-uploader/kvittering/${valgtKvittering.blobId}`, {
+            fetch(`${env.flexGatewayRoot()}/flex-bucket-uploader/kvittering/${valgtKvittering.blobId}`, {
                 method: 'GET',
                 credentials: 'include',
                 headers: { 'Content-Type': 'application/json' }
@@ -113,13 +113,19 @@ const DragAndDrop = () => {
                                         fil_type: () => {
                                             if (valgtFil && !tillatteFiltyper.includes(valgtFil.type)) {
                                                 settInputHarFeil()
-                                                return getLedetekst(tekst('drag_and_drop.filtype'), { '%FILNAVN%': valgtFil.name, '%TILLATTEFILTYPER%': formattertFiltyper })
+                                                return getLedetekst(tekst('drag_and_drop.filtype'), {
+                                                    '%FILNAVN%': valgtFil.name,
+                                                    '%TILLATTEFILTYPER%': formattertFiltyper
+                                                })
                                             }
                                         },
                                         fil_storrelse: () => {
                                             if (valgtFil && valgtFil.size > maxFilstørrelse) {
                                                 settInputHarFeil()
-                                                return getLedetekst(tekst('drag_and_drop.maks'), { '%FILNAVN%': valgtFil.name, '%MAKSSTOR%': maks })
+                                                return getLedetekst(tekst('drag_and_drop.maks'), {
+                                                    '%FILNAVN%': valgtFil.name,
+                                                    '%MAKSSTOR%': maks
+                                                })
                                             }
                                         },
                                         fjern_styling_hvis_ok: () => {

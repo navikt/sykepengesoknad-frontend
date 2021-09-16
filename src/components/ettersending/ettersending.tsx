@@ -51,7 +51,7 @@ const Ettersending = ({ gjelder, setRerendrekvittering }: EttersendingProps) => 
     }
 
     const ettersendNav = async() => {
-        const res = await fetcher(env.flexGatewayRoot + `/syfosoknad/api/soknader/${valgtSoknad!.id}/ettersendTilNav`, {
+        const res = await fetcher(env.flexGatewayRoot() + `/syfosoknad/api/soknader/${valgtSoknad!.id}/ettersendTilNav`, {
             method: 'POST',
             credentials: 'include',
             headers: { 'Content-Type': 'application/json' }
@@ -69,7 +69,7 @@ const Ettersending = ({ gjelder, setRerendrekvittering }: EttersendingProps) => 
     }
 
     const ettersendArbeidsgiver = async() => {
-        const res = await fetcher(env.flexGatewayRoot + `/syfosoknad/api/soknader/${valgtSoknad!.id}/ettersendTilArbeidsgiver`, {
+        const res = await fetcher(env.flexGatewayRoot() + `/syfosoknad/api/soknader/${valgtSoknad!.id}/ettersendTilArbeidsgiver`, {
             method: 'POST',
             credentials: 'include',
             headers: { 'Content-Type': 'application/json' }
