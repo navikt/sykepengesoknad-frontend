@@ -9,6 +9,9 @@ const server = express()
 
 server.use(express.json())
 
+server.get('/', (req, res) => {
+    res.redirect(basePath)
+})
 
 server.get(`${basePath}/env-config-server.js`, (req, res) => {
 
@@ -25,7 +28,7 @@ window._env_ = {
     ENVIRONMENT: 'dev',
     SYKEFRAVAER_URL: 'http://localhost:2027',
     DITTNAV_URL: 'https://www.nav.no/person/dittnav',
-    OPPLAERING: 'false',
+    OPPLAERING: 'true',
     SYKMELDINGER_BACKEND_PROXY_ROOT: 'http://localhost:6998'
 }`)
     }
