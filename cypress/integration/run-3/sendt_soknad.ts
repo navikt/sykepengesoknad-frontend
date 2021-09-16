@@ -4,7 +4,7 @@ describe('Tester sendt søknad', () => {
 
 
     before(() => {
-        cy.visit('http://localhost:8080')
+        cy.visit('http://localhost:8080/syk/sykepengesoknad')
     })
 
     it('Laster startside', function() {
@@ -20,7 +20,7 @@ describe('Tester sendt søknad', () => {
 
     it('Ved klikk så åpnes kvittering søknad visning', function() {
         cy.get(`#soknader-sendt article[aria-labelledby*=${sendtArbeidsledig.id}]`).click()
-        cy.url().should('equal', `http://localhost:8080/kvittering/${sendtArbeidsledig.id}`)
+        cy.url().should('equal', `http://localhost:8080/syk/sykepengesoknad/kvittering/${sendtArbeidsledig.id}`)
     })
 
     it('Tekster stemmer', function() {
@@ -31,7 +31,7 @@ describe('Tester sendt søknad', () => {
     it('Siden kan refreshes', function() {
         cy.reload()
         cy.contains('Søknaden er sendt til NAV')
-        cy.url().should('equal', `http://localhost:8080/kvittering/${sendtArbeidsledig.id}`)
+        cy.url().should('equal', `http://localhost:8080/syk/sykepengesoknad/kvittering/${sendtArbeidsledig.id}`)
 
     })
 

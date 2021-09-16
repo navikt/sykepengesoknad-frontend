@@ -5,7 +5,7 @@ describe('Tester delvis utfylt søknad', () => {
     const soknad = delvisUtfylltArbeidsledig
 
     before(() => {
-        cy.visit('http://localhost:8080')
+        cy.visit('http://localhost:8080/syk/sykepengesoknad')
     })
 
     it('Laster startside', () => {

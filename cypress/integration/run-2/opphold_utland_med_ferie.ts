@@ -6,7 +6,7 @@ describe('Tester søknad om å beholde sykepenger utenfor EØS', () => {
     const soknad = soknader.find((sok: RSSoknad) => sok.id === 'b9d67b0d-b1f8-44a5-bcbd-6010b60b90ce')!
 
     before(() => {
-        cy.visit('http://localhost:8080')
+        cy.visit('http://localhost:8080/syk/sykepengesoknad')
     })
 
     it('Laster startside', function() {
@@ -77,7 +77,7 @@ describe('Tester søknad om å beholde sykepenger utenfor EØS', () => {
     it('Vi avbryter søknaden og havner på forsiden, søknaden er borte', function() {
         cy.contains('Avbryt søknad').click()
 
-        cy.url().should('equal', 'http://localhost:8080/')
+        cy.url().should('equal', 'http://localhost:8080/syk/sykepengesoknad/')
 
         cy.get('.typo-sidetittel').should('be.visible').and('have.text', 'Søknader')
         cy.get(`#soknader-list-til-behandling article a[href*=${soknad.id}]`).should('not.exist')
