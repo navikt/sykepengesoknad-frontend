@@ -385,18 +385,6 @@ export const gradertReisetilskudd: RSSoknad = {
             'undersporsmal': []
         } ]
     }, {
-        'id': '1547244',
-        'tag': 'ARBEID_UTENFOR_NORGE',
-        'sporsmalstekst': 'Har du arbeidet i utlandet i løpet av de siste 12 månedene?',
-        'undertekst': null,
-        'svartype': 'JA_NEI',
-        'min': null,
-        'max': null,
-        'pavirkerAndreSporsmal': false,
-        'kriterieForVisningAvUndersporsmal': null,
-        'svar': [],
-        'undersporsmal': []
-    }, {
         'id': '1547249',
         'tag': 'JOBBET_DU_GRADERT_0',
         'sporsmalstekst': 'I perioden 1. - 24. april 2020 skulle du jobbe 40 % med reisetilskudd hos SNILL TORPEDO. Jobbet du mer enn dette?',
@@ -480,7 +468,21 @@ export const gradertReisetilskudd: RSSoknad = {
                 } ]
             } ]
         } ]
-    }, {
+    },
+    {
+        'id': '1547244',
+        'tag': 'ARBEID_UTENFOR_NORGE',
+        'sporsmalstekst': 'Har du arbeidet i utlandet i løpet av de siste 12 månedene?',
+        'undertekst': null,
+        'svartype': 'JA_NEI',
+        'min': null,
+        'max': null,
+        'pavirkerAndreSporsmal': false,
+        'kriterieForVisningAvUndersporsmal': null,
+        'svar': [],
+        'undersporsmal': []
+    },
+    {
         'id': '1547224',
         'tag': 'ANDRE_INNTEKTSKILDER',
         'sporsmalstekst': 'Har du andre inntektskilder enn SNILL TORPEDO? Du trenger ikke oppgi penger fra NAV.',

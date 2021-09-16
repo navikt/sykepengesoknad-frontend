@@ -112,20 +112,8 @@ describe('Tester arbeidstakersøknad - gradert 50%', () => {
         cy.contains('Gå videre').click()
     })
 
-
-    it('Søknad ARBEID_UTENFOR_NORGE', function() {
-        cy.url().should('include', `${soknad.id}/7`)
-
-        // Test spørsmål
-        cy.get('.inputPanelGruppe__inner label:first-child > input[value=JA]').click({ force: true })
-        cy.contains('Har du arbeidet i utlandet i løpet av de siste 12 månedene?')
-
-        cy.contains('Gå videre').click()
-    })
-
-
     it('Søknad JOBBET_DU_GRADERT', function() {
-        cy.url().should('include', `${soknad.id}/8`)
+        cy.url().should('include', `${soknad.id}/7`)
 
         // Test spørsmål
         cy.get('.inputPanelGruppe__inner label:first-child > input[value=JA]').click({ force: true })
@@ -158,6 +146,16 @@ describe('Tester arbeidstakersøknad - gradert 50%', () => {
         cy.contains('Gå videre').click()
     })
 
+
+    it('Søknad ARBEID_UTENFOR_NORGE', function() {
+        cy.url().should('include', `${soknad.id}/8`)
+
+        // Test spørsmål
+        cy.get('.inputPanelGruppe__inner label:first-child > input[value=JA]').click({ force: true })
+        cy.contains('Har du arbeidet i utlandet i løpet av de siste 12 månedene?')
+
+        cy.contains('Gå videre').click()
+    })
 
     it('Søknad ANDRE_INNTEKTSKILDER', function() {
         cy.url().should('include', `${soknad.id}/9`)

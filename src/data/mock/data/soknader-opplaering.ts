@@ -1048,19 +1048,6 @@ export const arbeidstakerGradert: RSSoknad = {
             ]
         },
         {
-            'id': '687310',
-            'tag': 'ARBEID_UTENFOR_NORGE',
-            'sporsmalstekst': 'Har du arbeidet i utlandet i løpet av de siste 12 månedene?',
-            'undertekst': null,
-            'svartype': 'JA_NEI',
-            'min': null,
-            'max': null,
-            'pavirkerAndreSporsmal': false,
-            'kriterieForVisningAvUndersporsmal': null,
-            'svar': [],
-            'undersporsmal': []
-        },
-        {
             'id': '687311',
             'tag': 'JOBBET_DU_GRADERT_0',
             'sporsmalstekst': 'I perioden 1. - 24. april 2020 skulle du jobbe 50 % av ditt normale arbeid hos POSTEN NORGE AS, BÆRUM. Jobbet du mer enn dette?',
@@ -1159,6 +1146,19 @@ export const arbeidstakerGradert: RSSoknad = {
                     ]
                 }
             ]
+        },
+        {
+            'id': '687310',
+            'tag': 'ARBEID_UTENFOR_NORGE',
+            'sporsmalstekst': 'Har du arbeidet i utlandet i løpet av de siste 12 månedene?',
+            'undertekst': null,
+            'svartype': 'JA_NEI',
+            'min': null,
+            'max': null,
+            'pavirkerAndreSporsmal': false,
+            'kriterieForVisningAvUndersporsmal': null,
+            'svar': [],
+            'undersporsmal': []
         },
         {
             'id': '687318',
