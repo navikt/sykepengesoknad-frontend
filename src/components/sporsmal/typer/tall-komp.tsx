@@ -121,7 +121,7 @@ const TallKomp = ({ sporsmal }: SpmProps) => {
                                     <Normaltekst tag="span" className="skjemaelement__feilmelding">
                                         {getLedetekst(
                                             tekst('soknad.feilmelding.MINDRE_TIMER_ENN_FORVENTET.lokal'),
-                                            { '%GRAD%': periode?.grad }
+                                            { '%GRAD%':  100 - periode!.grad }
                                         )}
                                     </Normaltekst>
                                 }
