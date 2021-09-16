@@ -75,6 +75,10 @@ class Environment {
     get formaterteFiltyper() {
         return this.env.FORMATERTE_FILTYPER
     }
+
+    get dekoratorenRoot() {
+        return this.env.REACT_APP_DECORATOR_URL
+    }
 }
 
 const env = new Environment()

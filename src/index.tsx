@@ -37,4 +37,27 @@ script.src = src
 script.async = true
 document.body.appendChild(script)
 
+const dekoratoren = () => {
+    const dekoratorStyles = document.createElement('link')
+    const dekoratorStylesHref = env.dekoratorenRoot + '/css/client.css'
+    dekoratorStyles.setAttribute('href' , dekoratorStylesHref)
+    dekoratorStyles.setAttribute('rel', 'stylesheet')
+    document.head.appendChild(dekoratorStyles)
 
+    const dekoratorEnv = document.createElement('div')
+    const dekoratorEnvDataSrc = env.dekoratorenRoot + '/env?simple=true&chatbot=false&urlLookupTable=false'
+    dekoratorEnv.setAttribute('id' , 'decorator-env')
+    dekoratorEnv.setAttribute('data-src', dekoratorEnvDataSrc)
+
+    const dekoratorScript = document.createElement('script')
+    const dekoratorScriptSrc = env.dekoratorenRoot + '/client.js'
+    dekoratorScript.setAttribute('src' , dekoratorScriptSrc)
+    dekoratorScript.setAttribute('async' , 'true')
+
+    const pagewrapper = document.getElementById('pagewrapper')!
+    pagewrapper.appendChild(dekoratorEnv)
+    pagewrapper.appendChild(dekoratorScript)
+}
+if (!env.isIntegrationtest) {
+    dekoratoren()
+}
