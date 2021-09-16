@@ -36,8 +36,7 @@ server.get(`/internal/isAlive|isReady`, (req, res) =>
     res.sendStatus(200)
 )
 
-// Match everything except internal og static
-server.use(/^(?!.*\/(internal|static)\/).*$/, (req, res) =>
+server.use('*', (req, res) =>
     getHtmlWithDecorator(`${buildPath}/index.html`)
         .then((html) => {
             res.send(html)
