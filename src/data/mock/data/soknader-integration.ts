@@ -323,19 +323,6 @@ export const avbruttSoknad: RSSoknad = {
             ]
         },
         {
-            'id': '103',
-            'tag': 'ARBEID_UTENFOR_NORGE',
-            'sporsmalstekst': 'Har du arbeidet i utlandet i løpet av de siste 12 månedene?',
-            'undertekst': null,
-            'svartype': 'JA_NEI',
-            'min': null,
-            'max': null,
-            'pavirkerAndreSporsmal': false,
-            'kriterieForVisningAvUndersporsmal': null,
-            'svar': [],
-            'undersporsmal': []
-        },
-        {
             'id': '104',
             'tag': 'JOBBET_DU_GRADERT_0',
             'sporsmalstekst': 'I perioden 20. mai - 5. juni 2020 skulle du jobbe 20 % av ditt normale arbeid hos 995816598 sitt orgnavn :). Jobbet du mer enn dette?',
@@ -429,6 +416,19 @@ export const avbruttSoknad: RSSoknad = {
                     ]
                 }
             ]
+        },
+        {
+            'id': '103',
+            'tag': 'ARBEID_UTENFOR_NORGE',
+            'sporsmalstekst': 'Har du arbeidet i utlandet i løpet av de siste 12 månedene?',
+            'undertekst': null,
+            'svartype': 'JA_NEI',
+            'min': null,
+            'max': null,
+            'pavirkerAndreSporsmal': false,
+            'kriterieForVisningAvUndersporsmal': null,
+            'svar': [],
+            'undersporsmal': []
         },
         {
             'id': '111',
