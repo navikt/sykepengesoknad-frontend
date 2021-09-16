@@ -7,7 +7,6 @@ import { TagTyper } from '../../types/enums'
 import { RSSoknadstype } from '../../types/rs-types/rs-soknadstype'
 import { Sporsmal } from '../../types/types'
 import { ukeDatoListe } from '../dato-utils'
-import env from '../environment'
 import { finnHovedSporsmal, hentSporsmal, hentUndersporsmal } from '../soknad-utils'
 import { getLedetekst, tekst } from '../tekster'
 
@@ -17,9 +16,7 @@ const useValiderArbeidsgrad = (sporsmal: Sporsmal) => {
     const { getValues } = useFormContext()
     if (
         !valgtSoknad ||
-        valgtSoknad.soknadstype === RSSoknadstype.REISETILSKUDD ||
-        valgtSoknad.soknadstype === RSSoknadstype.GRADERT_REISETILSKUDD ||
-        (env.isDev && sporsmal.id === 'veldigLangSoknadTestReisetilskudd')
+        (sporsmal.tag !== TagTyper.HVOR_MYE_TIMER_VERDI && sporsmal.tag !== TagTyper.HVOR_MYE_HAR_DU_JOBBET)
     ) {
         return { undefined }
     }
