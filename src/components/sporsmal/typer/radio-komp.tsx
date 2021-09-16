@@ -4,7 +4,6 @@ import React, { useEffect } from 'react'
 import { useFormContext } from 'react-hook-form'
 import useForceUpdate from 'use-force-update'
 
-import { RSSvartype } from '../../../types/rs-types/rs-svartype'
 import validerArbeidsgrad from '../../../utils/sporsmal/valider-arbeidsgrad'
 import { getLedetekst, tekst } from '../../../utils/tekster'
 import AnimateOnMount from '../../animate-on-mount'
@@ -68,7 +67,7 @@ const RadioKomp = ({ sporsmal }: SpmProps) => {
 
             <FeilLokal sporsmal={sporsmal} />
 
-            <Vis hvis={watchRadio === 'timer' && beregnGrad!()}
+            <Vis hvis={watchRadio === 'timer' && beregnGrad}
                 render={() =>
                     <AlertStripe type="info" style={{ marginTop: '1rem' }}>
                         <Normaltekst>
