@@ -8,22 +8,6 @@ const basePath = '/syk/sykepengesoknad'
 const server = express()
 
 server.use(express.json())
-server.use(`${basePath}`, express.static(buildPath, { index: false }))
-server.get(`/internal/isAlive|isReady`, (req, res) =>
-    res.sendStatus(200)
-)
-
-// Match everything except internal og static
-server.use(/^(?!.*\/(internal|static)\/).*$/, (req, res) =>
-    getHtmlWithDecorator(`${buildPath}/index.html`)
-        .then((html) => {
-            res.send(html)
-        })
-        .catch((e) => {
-            logger.error(e)
-            res.status(500).send(e)
-        })
-)
 
 
 server.get(`${basePath}/env-config-server.js`, (req, res) => {
@@ -46,6 +30,25 @@ window._env_ = {
 }`)
     }
 )
+
+
+server.use(`${basePath}`, express.static(buildPath, { index: false }))
+server.get(`/internal/isAlive|isReady`, (req, res) =>
+    res.sendStatus(200)
+)
+
+// Match everything except internal og static
+server.use(/^(?!.*\/(internal|static)\/).*$/, (req, res) =>
+    getHtmlWithDecorator(`${buildPath}/index.html`)
+        .then((html) => {
+            res.send(html)
+        })
+        .catch((e) => {
+            logger.error(e)
+            res.status(500).send(e)
+        })
+)
+
 
 const port = process.env.PORT || 8080
 server.listen(port, () => logger.info(`App listening on port: ${port}`))
