@@ -1,13 +1,15 @@
-const express = require('express')
-const logger = require('./logger')
-const path = require('path')
+import express from 'express'
+import path from 'path'
 
-const getHtmlWithDecorator = require('./dekorator')
+import { getHtmlWithDecorator } from './dekorator'
+import { logger } from './logger'
+
 const buildPath = path.resolve(__dirname, '../build')
 const basePath = '/syk/sykepengesoknad'
 const server = express()
 
 server.use(express.json())
+server.disable('x-powered-by')
 
 server.get('/', (req, res) => {
     res.redirect(basePath)
@@ -33,7 +35,7 @@ server.get(`${basePath}/env-config-server.js`, (req, res) => {
 
 
 server.use(`${basePath}`, express.static(buildPath, { index: false }))
-server.get(`/internal/isAlive|isReady`, (req, res) =>
+server.get('/internal/isAlive|isReady', (req, res) =>
     res.sendStatus(200)
 )
 
@@ -50,10 +52,10 @@ server.use('*', (req, res) =>
         })
 )
 
-function disableCache(res){
-    res.setHeader('Pragma', 'no-cache');
-    res.setHeader('Cache-Control', 'private, no-cache, no-store, must-revalidate');
-    res.setHeader('Expires', '-1');
+function disableCache(res) {
+    res.setHeader('Pragma', 'no-cache')
+    res.setHeader('Cache-Control', 'private, no-cache, no-store, must-revalidate')
+    res.setHeader('Expires', '-1')
 }
 
 
