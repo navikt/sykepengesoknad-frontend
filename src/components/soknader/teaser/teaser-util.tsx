@@ -160,7 +160,7 @@ export const beregnUndertekst = (soknad: Soknad) => {
 }
 
 export const leggTilSoknadstypeForDemoside = (soknad: Soknad) => {
-    if (env.isOpplaering && soknad.soknadstype !== RSSoknadstype.OPPHOLD_UTLAND && soknad.soknadstype !== RSSoknadstype.REISETILSKUDD) {
+    if (env.isOpplaering() && soknad.soknadstype !== RSSoknadstype.OPPHOLD_UTLAND && soknad.soknadstype !== RSSoknadstype.REISETILSKUDD) {
         const forste = soknad.id === arbeidstakerGradert.id ? 'førstegangssøknad' : ''
         const arbeidssituasjon = soknad.arbeidssituasjon?.toLowerCase()
         const soknadstype = soknad.soknadstype === RSSoknadstype.BEHANDLINGSDAGER

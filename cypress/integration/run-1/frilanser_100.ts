@@ -8,7 +8,7 @@ describe('Tester frilansersøknad', () => {
     const soknad = frilanser
 
     before(() => {
-        cy.visit('http://localhost:8080')
+        cy.visit('http://localhost:8080/syk/sykepengesoknad')
     })
 
     it('Laster startside', function() {
@@ -112,13 +112,13 @@ describe('Tester frilansersøknad', () => {
         cy.get('.undersporsmal .radioContainer .radioknapp#687449_0').click({ force: true })
         cy.get('.ekstrasporsmal')
             .should('have.text', 'Du må ha sendt en egen utenlandssøknad for å svare ja på dette spørsmålet. Husk at du også må fullføre denne søknaden om sykepenger.')
-            .find('a').should('have.attr', 'href', '/sykepengesoknad-utland')
+            .find('a').should('have.attr', 'href', '/syk/sykepengesoknad/sykepengesoknad-utland')
 
         // Underspørsmål 2 - Nei
         cy.get('.undersporsmal .radioContainer .radioknapp#687449_1').click({ force: true })
         cy.get('.ekstrasporsmal')
             .should('have.text', 'I utgangspunktet kan du bare få sykepenger mens du er i et land innenfor EØS. Du kan likevel søke NAV om å få reise ut av EØS og beholde sykepengene i en begrenset periode.')
-            .find('a').should('have.attr', 'href', '/sykepengesoknad-utland')
+            .find('a').should('have.attr', 'href', '/syk/sykepengesoknad/sykepengesoknad-utland')
 
         cy.contains('Gå videre').click()
     })

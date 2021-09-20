@@ -1,0 +1,15 @@
+{
+  "name": "sykepengesoknad-frontend-server",
+  "version": "1.0.0",
+  "private": true,
+  "author": "NAV",
+  "license": "MIT",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "dependencies": {
+    "@navikt/nav-dekoratoren-moduler": "^1.5.0",
+    "express": "^4.17.1",
+    "winston": "^3.3.3"
+  }
+}

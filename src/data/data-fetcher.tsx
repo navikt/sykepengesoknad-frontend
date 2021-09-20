@@ -19,7 +19,7 @@ export function DataFetcher(props: { children: any }) {
 
     useEffect(() => {
         if (isNotStarted(rssoknader)) {
-            rssoknader.fetch(env.flexGatewayRoot + '/syfosoknad/api/soknader', {
+            rssoknader.fetch(env.flexGatewayRoot() + '/syfosoknad/api/soknader', {
                 credentials: 'include',
             }, (fetchState: FetchState<RSSoknad[]>) => {
                 if (hasData(fetchState)) {
@@ -30,7 +30,7 @@ export function DataFetcher(props: { children: any }) {
             })
         }
         if (isNotStarted(sykmeldinger)) {
-            const url = `${env.sykmeldingerBackendProxyRoot}/api/v1/sykmeldinger`
+            const url = `${env.sykmeldingerBackendProxyRoot()}/api/v1/sykmeldinger`
             sykmeldinger.fetch(url, {
                 credentials: 'include',
             }, (fetchState: FetchState<Sykmelding[]>) => {
@@ -57,5 +57,5 @@ export function DataFetcher(props: { children: any }) {
 }
 
 export const hentLoginUrl = () => {
-    return `${env.loginServiceUrl}?redirect=${env.loginServiceRedirectUrl}`
+    return `${env.loginServiceUrl()}?redirect=${env.loginServiceRedirectUrl()}`
 }

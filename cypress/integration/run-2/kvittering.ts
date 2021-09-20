@@ -17,7 +17,7 @@ describe('Tester kvittering', () => {
     context('Arbeidsledig', () => {
         it('Nylig sendt', () => {
             // Velg søknad
-            cy.visit('http://localhost:8080')
+            cy.visit('http://localhost:8080/syk/sykepengesoknad')
 
             cy.get(`#soknader-list-til-behandling article a[href*=${arbeidsledigKvittering.id}]`).click()
 
@@ -59,7 +59,7 @@ describe('Tester kvittering', () => {
         })
 
         it('Etter 30 dager', () => {
-            cy.visit('http://localhost:8080')
+            cy.visit('http://localhost:8080/syk/sykepengesoknad')
 
             cy.get(`#soknader-sendt article[aria-labelledby*=${sendtArbeidsledigKvittering.id}]`).scrollIntoView({ duration: 400 })
             cy.get(`[aria-labelledby="soknader-header-${sendtArbeidsledigKvittering.id}"] > .inngangspanel > .inngangspanel__ytre > .inngangspanel__del1 > .inngangspanel__ikon--normal > img`).click()
@@ -90,7 +90,7 @@ describe('Tester kvittering', () => {
 
     context('Utland', () => {
         it('Nylig sendt', () => {
-            cy.visit('http://localhost:8080')
+            cy.visit('http://localhost:8080/syk/sykepengesoknad')
 
             // Velg søknad
             cy.get(`#soknader-list-til-behandling article a[href*=${oppholdUtlandKvittering.id}]`).click({ force: true })
@@ -147,7 +147,7 @@ describe('Tester kvittering', () => {
 
     context('Selvstendig', () => {
         it('Nylig sendt', () => {
-            cy.visit('http://localhost:8080')
+            cy.visit('http://localhost:8080/syk/sykepengesoknad')
 
             // Velg søknad
             cy.get(`#soknader-list-til-behandling article a[href*=${selvstendigKvittering.id}]`).click()
@@ -194,7 +194,7 @@ describe('Tester kvittering', () => {
 
     context('Arbeidstaker', () => {
         it('Innenfor arbeidsgiverperiode', () => {
-            cy.visit('http://localhost:8080')
+            cy.visit('http://localhost:8080/syk/sykepengesoknad')
 
             cy.get(`#soknader-list-til-behandling article a[href*=${arbeidstakerInnenforArbeidsgiverperiodeKvittering.id}]`).click({ force: true })
             besvarSoknad()
@@ -245,7 +245,7 @@ describe('Tester kvittering', () => {
         })
 
         it('Utenfor arbeidsgiverperiode', () => {
-            cy.visit('http://localhost:8080')
+            cy.visit('http://localhost:8080/syk/sykepengesoknad')
 
             cy.get(`#soknader-list-til-behandling article a[href*=${arbeidstakerUtenforArbeidsgiverperiodeKvittering.id}]`).click({ force: true })
             besvarSoknad()
@@ -254,7 +254,7 @@ describe('Tester kvittering', () => {
         })
 
         it('Delt periode og første utenfor arbeidsgiverperiode', () => {
-            cy.visit('http://localhost:8080')
+            cy.visit('http://localhost:8080/syk/sykepengesoknad')
 
             cy.get(`#soknader-list-til-behandling article a[href*=${arbeidstakerDeltPeriodeForsteUtenforArbeidsgiverperiodeKvittering.id}]`).click({ force: true })
             besvarSoknad()
@@ -263,7 +263,7 @@ describe('Tester kvittering', () => {
         })
 
         it('Oppfølgende periode uten opphold og første utenfor arbeidsgiverperiode', () => {
-            cy.visit('http://localhost:8080')
+            cy.visit('http://localhost:8080/syk/sykepengesoknad')
             cy.get(`#soknader-list-til-behandling article a[href*=${arbeidstakerUtenOppholdForsteUtenforArbeidsgiverperiodeKvittering.id}]`).click({ force: true })
             besvarSoknad()
             cy.url().should('include', `/kvittering/${arbeidstakerUtenOppholdForsteUtenforArbeidsgiverperiodeKvittering.id}`)
@@ -271,7 +271,7 @@ describe('Tester kvittering', () => {
         })
 
         it('Oppfølgende periode uten opphold', () => {
-            cy.visit('http://localhost:8080')
+            cy.visit('http://localhost:8080/syk/sykepengesoknad')
             cy.get(`#soknader-list-til-behandling article a[href*=${arbeidstakerUtenOppholdKvittering.id}]`).click({ force: true })
             besvarSoknad()
             cy.url().should('include', `/kvittering/${arbeidstakerUtenOppholdKvittering.id}`)
@@ -279,7 +279,7 @@ describe('Tester kvittering', () => {
         })
 
         it('Oppfølgende periode 16 eller mindre dager og første utenfor arbeidsgiverperiode', () => {
-            cy.visit('http://localhost:8080')
+            cy.visit('http://localhost:8080/syk/sykepengesoknad')
 
             cy.get(`#soknader-list-til-behandling article a[href*=${arbeidstakerMedOppholdForsteUtenforArbeidsgiverperiodeKvittering.id}]`).click()
             besvarSoknad()
@@ -288,7 +288,7 @@ describe('Tester kvittering', () => {
         })
 
         it('Oppfølgende periode 16 eller mindre dager', () => {
-            cy.visit('http://localhost:8080')
+            cy.visit('http://localhost:8080/syk/sykepengesoknad')
 
             cy.get(`#soknader-list-til-behandling article a[href*=${arbeidstakerMedOppholdKvittering.id}]`).click({ force: true })
             besvarSoknad()

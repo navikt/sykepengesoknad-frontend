@@ -1,3 +1,0 @@
-https://${DomainName}/nysykepengesoknad/img/*
-https://${DomainName}/nysykepengesoknad/resources/*
-

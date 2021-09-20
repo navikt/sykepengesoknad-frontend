@@ -19,11 +19,11 @@ export const [ AmplitudeProvider, useAmplitudeInstance ] = constate(() => {
     })
 
     useEffect(() => {
-        if (env.amplitudeEnabled) {
+        if (env.amplitudeEnabled()) {
             instance.current = amplitude.getInstance()
         }
         instance.current.init(
-            env.amplitudeKey, null, {
+            env.amplitudeKey(), null, {
                 apiEndpoint: 'amplitude.nav.no/collect',
                 saveEvents: false,
                 includeUtm: true,

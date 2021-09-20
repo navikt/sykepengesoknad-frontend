@@ -5,6 +5,7 @@
 *.iml
 
 # dependencies
+/server/node_modules
 /node_modules
 /.pnp
 .pnp.js
@@ -25,6 +26,3 @@ npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
 
-# Temporary env files
-/public/env-config.js
-env-config.js

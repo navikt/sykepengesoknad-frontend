@@ -26,7 +26,7 @@ const OpprettUtland = () => {
     const history = useHistory()
 
     const opprett = () => {
-        opprettUtland.fetch(`${env.flexGatewayRoot}/syfosoknad/api/opprettSoknadUtland`, {
+        opprettUtland.fetch(`${env.flexGatewayRoot()}/syfosoknad/api/opprettSoknadUtland`, {
             method: 'POST',
             credentials: 'include',
             headers: { 'Content-Type': 'application/json' }

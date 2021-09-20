@@ -13,26 +13,26 @@ smoothscroll.polyfill()
 
 dayjs.locale('nb')
 
-if (env.isMockBackend) {
+if (env.isMockBackend()) {
     require('./data/mock')
 }
 
 ReactDOM.render(
-    <BrowserRouter basename={env.baseName}>
+    <BrowserRouter basename={'/syk/sykepengesoknad'}>
         <App />
     </BrowserRouter>
     , document.getElementById('root') as HTMLElement
 )
 
 const frontendloggerSrc = () => {
-    if (env.isQ1 || env.isProd) {
+    if (env.isQ1() || env.isProd()) {
         return '/frontendlogger/logger.js'
     }
-    return '/dev-frontendlogger.js'
+    return '/syk/sykepengesoknad/dev-frontendlogger.js'
 }
 
 const src = frontendloggerSrc()
-const script = document.createElement('script')
+const script = (document as any).createElement('script')
 script.src = src
 script.async = true
 document.body.appendChild(script)

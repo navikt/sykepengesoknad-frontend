@@ -4,7 +4,7 @@ import { oppholdUtland } from '../../../src/data/mock/data/soknader-opplaering'
 describe('Tester opprettelse av søknad om å beholde sykepenger utenfor EØS', () => {
 
     before(() => {
-        cy.visit('http://localhost:8080')
+        cy.visit('http://localhost:8080/syk/sykepengesoknad')
     })
 
     it('Laster startside', function() {
@@ -34,13 +34,13 @@ describe('Tester opprettelse av søknad om å beholde sykepenger utenfor EØS', 
 
         cy.get('.utland_infotekst')
             .should('include.text', 'Du må ha sendt en egen utenlandssøknad for å svare ja på dette spørsmålet. Husk at du også må fullføre denne søknaden om sykepenger.')
-            .find('a').should('have.attr', 'href', '/sykepengesoknad-utland')
+            .find('a').should('have.attr', 'href', '/syk/sykepengesoknad/sykepengesoknad-utland')
 
         cy.get('.inputPanelGruppe__inner input[value=NEI]').click({ force: true })
 
         cy.get('.utland_infotekst')
             .should('include.text', 'I utgangspunktet kan du bare få sykepenger mens du er i et land innenfor EØS. Du kan likevel søke NAV om å få reise ut av EØS og beholde sykepengene i en begrenset periode.')
-            .find('a').should('have.attr', 'href', '/sykepengesoknad-utland')
+            .find('a').should('have.attr', 'href', '/syk/sykepengesoknad/sykepengesoknad-utland')
     })
 
     it('Vi åpner opprettelse av søknad siden', function() {

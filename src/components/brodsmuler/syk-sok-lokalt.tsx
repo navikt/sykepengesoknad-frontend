@@ -17,7 +17,7 @@ const SykSokLokalt = () => {
         return () => window.removeEventListener('resize', () => setWidth(window.innerWidth) as any)
     })
 
-    if (!env.isDev) {
+    if (!env.isDev()) {
         return null
     }
 
