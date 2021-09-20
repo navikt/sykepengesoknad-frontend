@@ -2,13 +2,10 @@ FROM node:16-alpine
 
 ENV NODE_ENV production
 
-WORKDIR usr/src/app
-COPY server server/
-COPY build build/
+COPY server/dist/index.js .
 
-WORKDIR server
-RUN npm install
+COPY /build ./build
 
-CMD ["node", "./server.js"]
+CMD ["node", "index.js"]
 
 EXPOSE 8080
