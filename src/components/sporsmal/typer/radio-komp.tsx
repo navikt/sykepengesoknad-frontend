@@ -67,7 +67,7 @@ const RadioKomp = ({ sporsmal }: SpmProps) => {
 
             <FeilLokal sporsmal={sporsmal} />
 
-            <Vis hvis={watchRadio === 'timer' && beregnGrad}
+            <Vis hvis={watchRadio === 'timer' && beregnGrad && beregnGrad()}
                 render={() =>
                     <AlertStripe type="info" style={{ marginTop: '1rem' }}>
                         <Normaltekst>
