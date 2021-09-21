@@ -1,7 +1,6 @@
 const OmSykepengerTekster = {
 
     'om.sykepenger.tittel': 'Om sykepenger',
-    'om.sykepenger.tekst1': 'Etter du har sendt sykmeldingen må du fylle ut og  sende søknaden om sykepenger før du kan få utbetalt sykepengene.',
     'om.sykepenger.tekst2': 'Den siste dagen i sykmeldingsperioden får du en melding. Da er søknaden om sykepenger klar, og du kan fylle den ut.',
     'om.sykepenger.hvorfor': 'Hvorfor må jeg søke om sykepenger?',
     'om.sykepenger.tekst3': 'I søknaden svarer du på noen spørsmål om hva som skjedde de dagene du var sykmeldt. Vi bruker svarene til å avgjøre hva du har krav på, og om det er NAV eller arbeidsgiveren din som skal betale. Disse opplysningene får vi foreløpig ikke innhentet automatisk.',
