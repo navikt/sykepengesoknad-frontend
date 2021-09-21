@@ -33,6 +33,11 @@ export const hentHotjarJsTrigger = (soknadstype: RSSoknadstype, sted: 'kvitterin
                 return 'SOKNAD_ANNET_ARBEIDSFORHOLD'
             case RSSoknadstype.REISETILSKUDD:
                 return 'SOKNAD_REISETILSKUDD'
+            case RSSoknadstype.GRADERT_REISETILSKUDD:
+                if (sted == 'kvittering') {
+                    return 'SOKNAD_GRADERT_REISETILSKUDD_KVITTERING'
+                }
+                return null
         }
     }
     return null
