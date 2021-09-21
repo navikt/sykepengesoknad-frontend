@@ -15,7 +15,6 @@ const OmSykepenger = () => {
         <Ekspanderbartpanel apen={false} className="om_sykepenger"
             tittel={<Undertittel tag="h2">{tekst('om.sykepenger.tittel')}</Undertittel>}
         >
-            <Normaltekst>{tekst('om.sykepenger.tekst1')}</Normaltekst>
             <Normaltekst>{tekst('om.sykepenger.tekst2')}</Normaltekst>
             <Element tag="h3">{tekst('om.sykepenger.hvorfor')}</Element>
             <Normaltekst>{tekst('om.sykepenger.tekst3')}</Normaltekst>
