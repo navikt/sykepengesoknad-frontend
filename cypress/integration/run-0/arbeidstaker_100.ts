@@ -124,12 +124,12 @@ describe('Tester arbeidstakersøknad', () => {
         cy.get('.undersporsmal .alertstripe--advarsel').should('contain', 'Du skriver at du jobber mindre enn 10 timer per uke')
 
         // Underspørsmål 2
-        cy.contains('Hvor mye jobbet du totalt 1. - 24. april 2020 hos POSTEN NORGE AS, BÆRUM?')
+        cy.contains('Hvor mye jobbet du tilsammen 1. - 24. april 2020?')
         // Svarer prosent
-        cy.get('.undersporsmal .skjemaelement__input.radioknapp[value=prosent]').focus().click({ force: true })
+        cy.get('.undersporsmal .skjemaelement__input.radioknapp[value=Prosent]').focus().click({ force: true })
         cy.get('.undersporsmal .skjemaelement__input#687353').focus().type('21')
         // Velger timer
-        cy.get('.undersporsmal .skjemaelement__input.radioknapp[value=timer]').focus().click({ force: true })
+        cy.get('.undersporsmal .skjemaelement__input.radioknapp[value=Timer]').focus().click({ force: true })
         cy.contains('Antall timer du skrev inn, betyr at du har jobbet')
             .should('not.exist')
         // Svarer timer

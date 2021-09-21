@@ -24,7 +24,7 @@ const RadioKomp = ({ sporsmal }: SpmProps) => {
 
     useEffect(() => {
         // Tvangsoppdatering for å få riktig grad i advarselboksen (NB! vi vet det er stygt)
-        if (watchRadio === 'timer') forceUpdate()
+        if (watchRadio && watchRadio.toLowerCase() === 'timer') forceUpdate()
         // eslint-disable-next-line
     }, [sporsmal])
 
@@ -71,7 +71,7 @@ const RadioKomp = ({ sporsmal }: SpmProps) => {
 
             <FeilLokal sporsmal={sporsmal} />
 
-            <Vis hvis={watchRadio === 'timer' && beregnGrad && beregnGrad()}
+            <Vis hvis={watchRadio && watchRadio.toLowerCase() === 'timer' && beregnGrad && beregnGrad()}
                 render={() =>
                     <AlertStripe type="info" style={{ marginTop: '1rem' }}>
                         <Normaltekst>
