@@ -499,8 +499,8 @@ export const arbeidstaker: RSSoknad = {
                 {
                     'id': '687351',
                     'tag': 'HVOR_MYE_HAR_DU_JOBBET_0',
-                    'sporsmalstekst': 'Hvor mye jobbet du totalt 1. - 24. april 2020 hos POSTEN NORGE AS, BÆRUM?',
-                    'undertekst': null,
+                    'sporsmalstekst': 'Hvor mye jobbet du tilsammen 1. - 24. april 2020?',
+                    'undertekst': 'Velg timer eller prosent',
                     'svartype': 'RADIO_GRUPPE_TIMER_PROSENT',
                     'min': null,
                     'max': null,
@@ -509,41 +509,9 @@ export const arbeidstaker: RSSoknad = {
                     'svar': [],
                     'undersporsmal': [
                         {
-                            'id': '687352',
-                            'tag': 'HVOR_MYE_PROSENT_0',
-                            'sporsmalstekst': 'prosent',
-                            'undertekst': null,
-                            'svartype': 'RADIO',
-                            'min': null,
-                            'max': null,
-                            'pavirkerAndreSporsmal': false,
-                            'kriterieForVisningAvUndersporsmal': 'CHECKED',
-                            'svar': [
-                                {
-                                    'verdi': 'CHECKED',
-                                    'avgittAv': null
-                                }
-                            ],
-                            'undersporsmal': [
-                                {
-                                    'id': '687353',
-                                    'tag': 'HVOR_MYE_PROSENT_VERDI_0',
-                                    'sporsmalstekst': null,
-                                    'undertekst': 'prosent',
-                                    'svartype': 'TALL',
-                                    'min': '1',
-                                    'max': '99',
-                                    'pavirkerAndreSporsmal': false,
-                                    'kriterieForVisningAvUndersporsmal': null,
-                                    'svar': [],
-                                    'undersporsmal': []
-                                }
-                            ]
-                        },
-                        {
                             'id': '687354',
                             'tag': 'HVOR_MYE_TIMER_0',
-                            'sporsmalstekst': 'timer',
+                            'sporsmalstekst': 'Timer',
                             'undertekst': null,
                             'svartype': 'RADIO',
                             'min': null,
@@ -560,6 +528,33 @@ export const arbeidstaker: RSSoknad = {
                                     'svartype': 'TALL',
                                     'min': '1',
                                     'max': '514',
+                                    'pavirkerAndreSporsmal': false,
+                                    'kriterieForVisningAvUndersporsmal': null,
+                                    'svar': [],
+                                    'undersporsmal': []
+                                }
+                            ]
+                        },
+                        {
+                            'id': '687352',
+                            'tag': 'HVOR_MYE_PROSENT_0',
+                            'sporsmalstekst': 'Prosent',
+                            'undertekst': null,
+                            'svartype': 'RADIO',
+                            'min': null,
+                            'max': null,
+                            'pavirkerAndreSporsmal': false,
+                            'kriterieForVisningAvUndersporsmal': 'CHECKED',
+                            'svar': [],
+                            'undersporsmal': [
+                                {
+                                    'id': '687353',
+                                    'tag': 'HVOR_MYE_PROSENT_VERDI_0',
+                                    'sporsmalstekst': null,
+                                    'undertekst': 'prosent',
+                                    'svartype': 'TALL',
+                                    'min': '1',
+                                    'max': '99',
                                     'pavirkerAndreSporsmal': false,
                                     'kriterieForVisningAvUndersporsmal': null,
                                     'svar': [],
@@ -1050,7 +1045,7 @@ export const arbeidstakerGradert: RSSoknad = {
         {
             'id': '687311',
             'tag': 'JOBBET_DU_GRADERT_0',
-            'sporsmalstekst': 'I perioden 1. - 24. april 2020 skulle du jobbe 50 % av ditt normale arbeid hos POSTEN NORGE AS, BÆRUM. Jobbet du mer enn dette?',
+            'sporsmalstekst': 'Sykmelding sier du kunne jobbe 50 %. Jobbet du mer enn det?',
             'undertekst': null,
             'svartype': 'JA_NEI',
             'min': null,
@@ -1075,8 +1070,8 @@ export const arbeidstakerGradert: RSSoknad = {
                 {
                     'id': '687313',
                     'tag': 'HVOR_MYE_HAR_DU_JOBBET_0',
-                    'sporsmalstekst': 'Hvor mye jobbet du totalt 1. - 24. april 2020 hos POSTEN NORGE AS, BÆRUM?',
-                    'undertekst': null,
+                    'sporsmalstekst': 'Hvor mye jobbet du tilsammen 1. - 24. april 2020?',
+                    'undertekst': 'Velg timer eller prosent',
                     'svartype': 'RADIO_GRUPPE_TIMER_PROSENT',
                     'min': null,
                     'max': null,
@@ -1085,41 +1080,9 @@ export const arbeidstakerGradert: RSSoknad = {
                     'svar': [],
                     'undersporsmal': [
                         {
-                            'id': '687314',
-                            'tag': 'HVOR_MYE_PROSENT_0',
-                            'sporsmalstekst': 'prosent',
-                            'undertekst': null,
-                            'svartype': 'RADIO',
-                            'min': null,
-                            'max': null,
-                            'pavirkerAndreSporsmal': false,
-                            'kriterieForVisningAvUndersporsmal': 'CHECKED',
-                            'svar': [
-                                {
-                                    'verdi': 'CHECKED',
-                                    'avgittAv': null
-                                }
-                            ],
-                            'undersporsmal': [
-                                {
-                                    'id': '687315',
-                                    'tag': 'HVOR_MYE_PROSENT_VERDI_0',
-                                    'sporsmalstekst': null,
-                                    'undertekst': 'prosent',
-                                    'svartype': 'TALL',
-                                    'min': '51',
-                                    'max': '99',
-                                    'pavirkerAndreSporsmal': false,
-                                    'kriterieForVisningAvUndersporsmal': null,
-                                    'svar': [],
-                                    'undersporsmal': []
-                                }
-                            ]
-                        },
-                        {
                             'id': '687316',
                             'tag': 'HVOR_MYE_TIMER_0',
-                            'sporsmalstekst': 'timer',
+                            'sporsmalstekst': 'Timer',
                             'undertekst': null,
                             'svartype': 'RADIO',
                             'min': null,
@@ -1136,6 +1099,33 @@ export const arbeidstakerGradert: RSSoknad = {
                                     'svartype': 'TALL',
                                     'min': '1',
                                     'max': '514',
+                                    'pavirkerAndreSporsmal': false,
+                                    'kriterieForVisningAvUndersporsmal': null,
+                                    'svar': [],
+                                    'undersporsmal': []
+                                }
+                            ]
+                        },
+                        {
+                            'id': '687314',
+                            'tag': 'HVOR_MYE_PROSENT_0',
+                            'sporsmalstekst': 'Prosent',
+                            'undertekst': null,
+                            'svartype': 'RADIO',
+                            'min': null,
+                            'max': null,
+                            'pavirkerAndreSporsmal': false,
+                            'kriterieForVisningAvUndersporsmal': 'CHECKED',
+                            'svar': [],
+                            'undersporsmal': [
+                                {
+                                    'id': '687315',
+                                    'tag': 'HVOR_MYE_PROSENT_VERDI_0',
+                                    'sporsmalstekst': null,
+                                    'undertekst': 'prosent',
+                                    'svartype': 'TALL',
+                                    'min': '51',
+                                    'max': '99',
                                     'pavirkerAndreSporsmal': false,
                                     'kriterieForVisningAvUndersporsmal': null,
                                     'svar': [],
@@ -2013,8 +2003,8 @@ export const frilanser: RSSoknad = {
                 {
                     'id': '687433',
                     'tag': 'HVOR_MYE_HAR_DU_JOBBET_0',
-                    'sporsmalstekst': 'Hvor mye jobbet du totalt i 1. - 24. april 2020 som frilanser?',
-                    'undertekst': null,
+                    'sporsmalstekst': 'Hvor mye jobbet du tilsammen 1. - 24. april 2020?',
+                    'undertekst': 'Velg timer eller prosent',
                     'svartype': 'RADIO_GRUPPE_TIMER_PROSENT',
                     'min': null,
                     'max': null,
@@ -2023,41 +2013,9 @@ export const frilanser: RSSoknad = {
                     'svar': [],
                     'undersporsmal': [
                         {
-                            'id': '687434',
-                            'tag': 'HVOR_MYE_PROSENT_0',
-                            'sporsmalstekst': 'prosent',
-                            'undertekst': null,
-                            'svartype': 'RADIO',
-                            'min': null,
-                            'max': null,
-                            'pavirkerAndreSporsmal': false,
-                            'kriterieForVisningAvUndersporsmal': 'CHECKED',
-                            'svar': [
-                                {
-                                    'verdi': 'CHECKED',
-                                    'avgittAv': null
-                                }
-                            ],
-                            'undersporsmal': [
-                                {
-                                    'id': '687435',
-                                    'tag': 'HVOR_MYE_PROSENT_VERDI_0',
-                                    'sporsmalstekst': null,
-                                    'undertekst': 'prosent',
-                                    'svartype': 'TALL',
-                                    'min': '1',
-                                    'max': '99',
-                                    'pavirkerAndreSporsmal': false,
-                                    'kriterieForVisningAvUndersporsmal': null,
-                                    'svar': [],
-                                    'undersporsmal': []
-                                }
-                            ]
-                        },
-                        {
                             'id': '687436',
                             'tag': 'HVOR_MYE_TIMER_0',
-                            'sporsmalstekst': 'timer',
+                            'sporsmalstekst': 'Timer',
                             'undertekst': null,
                             'svartype': 'RADIO',
                             'min': null,
@@ -2074,6 +2032,33 @@ export const frilanser: RSSoknad = {
                                     'svartype': 'TALL',
                                     'min': '1',
                                     'max': '514',
+                                    'pavirkerAndreSporsmal': false,
+                                    'kriterieForVisningAvUndersporsmal': null,
+                                    'svar': [],
+                                    'undersporsmal': []
+                                }
+                            ]
+                        },
+                        {
+                            'id': '687434',
+                            'tag': 'HVOR_MYE_PROSENT_0',
+                            'sporsmalstekst': 'Prosent',
+                            'undertekst': null,
+                            'svartype': 'RADIO',
+                            'min': null,
+                            'max': null,
+                            'pavirkerAndreSporsmal': false,
+                            'kriterieForVisningAvUndersporsmal': 'CHECKED',
+                            'svar': [],
+                            'undersporsmal': [
+                                {
+                                    'id': '687435',
+                                    'tag': 'HVOR_MYE_PROSENT_VERDI_0',
+                                    'sporsmalstekst': null,
+                                    'undertekst': 'prosent',
+                                    'svartype': 'TALL',
+                                    'min': '1',
+                                    'max': '99',
                                     'pavirkerAndreSporsmal': false,
                                     'kriterieForVisningAvUndersporsmal': null,
                                     'svar': [],

@@ -4,6 +4,7 @@ import React, { useEffect } from 'react'
 import { useFormContext } from 'react-hook-form'
 import useForceUpdate from 'use-force-update'
 
+import { RSSvartype } from '../../../types/rs-types/rs-svartype'
 import validerArbeidsgrad from '../../../utils/sporsmal/valider-arbeidsgrad'
 import { getLedetekst, tekst } from '../../../utils/tekster'
 import AnimateOnMount from '../../animate-on-mount'
@@ -23,13 +24,16 @@ const RadioKomp = ({ sporsmal }: SpmProps) => {
 
     useEffect(() => {
         // Tvangsoppdatering for å få riktig grad i advarselboksen (NB! vi vet det er stygt)
-        if (watchRadio === 'timer') forceUpdate()
+        if (watchRadio && watchRadio.toLowerCase() === 'timer') forceUpdate()
         // eslint-disable-next-line
-    }, [ sporsmal ])
+    }, [sporsmal])
 
     return (
         <>
             <SporsmalstekstH3 sporsmal={sporsmal} />
+            <Vis hvis={sporsmal.undertekst && sporsmal.svartype == RSSvartype.RADIO_GRUPPE_TIMER_PROSENT}
+                render={() => <Normaltekst style={{ marginBottom: '1em' }}> {sporsmal.undertekst}</Normaltekst>} />
+
 
             <div className={
                 'skjemaelement' +
@@ -43,7 +47,7 @@ const RadioKomp = ({ sporsmal }: SpmProps) => {
                             <input type="radio"
                                 id={uspm.id}
                                 value={uspm.sporsmalstekst}
-                                {...register(sporsmal.id,{
+                                {...register(sporsmal.id, {
                                     required: feilmelding.global
                                 })}
                                 className="skjemaelement__input radioknapp"
@@ -67,7 +71,7 @@ const RadioKomp = ({ sporsmal }: SpmProps) => {
 
             <FeilLokal sporsmal={sporsmal} />
 
-            <Vis hvis={watchRadio === 'timer' && beregnGrad && beregnGrad()}
+            <Vis hvis={watchRadio && watchRadio.toLowerCase() === 'timer' && beregnGrad && beregnGrad()}
                 render={() =>
                     <AlertStripe type="info" style={{ marginTop: '1rem' }}>
                         <Normaltekst>

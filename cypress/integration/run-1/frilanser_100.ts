@@ -64,9 +64,9 @@ describe('Tester frilansersøknad', () => {
         cy.get('.undersporsmal .skjemaelement__input#687432').focus().type('12')
 
         // Underspørsmål 2
-        cy.contains('Hvor mye jobbet du totalt i 1. - 24. april 2020 som frilanser?')
+        cy.contains('Hvor mye jobbet du tilsammen 1. - 24. april 2020?')
         // Svarer prosent
-        cy.get('.undersporsmal .skjemaelement__input.radioknapp[value=prosent]').focus().click({ force: true })
+        cy.get('.undersporsmal .skjemaelement__input.radioknapp[value=Prosent]').focus().click({ force: true })
         cy.get('.undersporsmal .skjemaelement__input#687435').focus().type('21')
 
         cy.contains('Gå videre').click()
