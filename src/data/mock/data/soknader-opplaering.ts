@@ -545,12 +545,7 @@ export const arbeidstaker: RSSoknad = {
                             'max': null,
                             'pavirkerAndreSporsmal': false,
                             'kriterieForVisningAvUndersporsmal': 'CHECKED',
-                            'svar': [
-                                {
-                                    'verdi': 'CHECKED',
-                                    'avgittAv': null
-                                }
-                            ],
+                            'svar': [],
                             'undersporsmal': [
                                 {
                                     'id': '687353',
