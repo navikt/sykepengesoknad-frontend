@@ -27,14 +27,9 @@ const Arbeidstaker = () => {
     const [ kvitteringTekst, setKvitteringTekst ] = useState<ArbeidstakerKvitteringTekst>()
 
 
-    useEffect(() => {
-        settRiktigKvitteringTekst()
-        // eslint-disable-next-line
-    }, [valgtSoknad?.sendtTilNAVDato])
-
-    if (!valgtSoknad || !valgtSykmelding) return null
-
     const settRiktigKvitteringTekst = () => {
+        if (!valgtSoknad) return
+
         if (erInnenforArbeidsgiverperiode()) {
             setKvitteringTekst('inntil16dager')
         } else {
@@ -61,6 +56,8 @@ const Arbeidstaker = () => {
     }
 
     const erInnenforArbeidsgiverperiode = () => {
+        if (!valgtSoknad) return
+
         return valgtSoknad.sendtTilArbeidsgiverDato !== null && valgtSoknad.sendtTilNAVDato === null
     }
 
@@ -75,10 +72,14 @@ const Arbeidstaker = () => {
     }
 
     const harTidligereUtenOpphold = (tidligereSoknader: Soknad[]) => {
+        if (!valgtSoknad) return
+
         return tidligereSoknader.filter(sok => dayjs(valgtSoknad.fom!).diff(sok.tom!, 'day') <= 1).length > 0
     }
 
     const utenOppholdSjekkArbeidsgiverperiode = async(tidligereSoknader: Soknad[]) => {
+        if (!valgtSoknad) return
+
         const forrigeSoknad = tidligereSoknader.find(sok => dayjs(valgtSoknad.fom).diff(sok.tom!, 'day') <= 1)
         const forste = await erForsteSoknadUtenforArbeidsgiverperiode(forrigeSoknad?.id)
         if (forste) {
@@ -123,6 +124,13 @@ const Arbeidstaker = () => {
                 return null
         }
     }
+
+    useEffect(() => {
+        settRiktigKvitteringTekst()
+        // eslint-disable-next-line
+    }, [valgtSoknad?.sendtTilNAVDato])
+
+    if (!valgtSoknad || !valgtSykmelding) return null
 
     return (
         <>
