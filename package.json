@@ -16,7 +16,7 @@
         "html-react-parser": "^1.2.7",
         "jsdom": "^16.7.0",
         "lodash.throttle": "^4.1.1",
-        "nav-datovelger": "^12.0.0",
+        "nav-datovelger": "^12.1.2",
         "nav-frontend-alertstriper": "^4.0.1",
         "nav-frontend-alertstriper-style": "^3.0.1",
         "nav-frontend-chevron": "^1.0.30",
