@@ -15,6 +15,10 @@ export const harForsikring = (valgtSykmelding?: Sykmelding) => {
     return valgtSykmelding?.sykmeldingStatus.sporsmalOgSvarListe?.find(s => s.shortName === 'FORSIKRING')?.svar?.svar === 'JA'
 }
 
+export const harSpmOmForsikring = (valgtSykmelding?: Sykmelding) => {
+    return valgtSykmelding?.sykmeldingStatus.sporsmalOgSvarListe?.find(s => s.shortName === 'FORSIKRING') !== undefined
+}
+
 export const hentPerioderFørSykmelding = (valgtSykmelding?: Sykmelding) => {
     const perioder = valgtSykmelding?.sykmeldingStatus.sporsmalOgSvarListe?.find(s => s.shortName === 'PERIODE')?.svar?.svar
     if (perioder) {
