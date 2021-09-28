@@ -4,7 +4,10 @@ import React from 'react'
 import { useAppStore } from '../../data/stores/app-store'
 import { RSArbeidssituasjon } from '../../types/rs-types/rs-arbeidssituasjon'
 import { tilLesbarPeriodeMedArstall } from '../../utils/dato-utils'
-import { hentArbeidssituasjon, hentPerioderFørSykmelding } from '../../utils/sykmelding-utils'
+import {
+    harSpmOmPerioderFørSykmelding,
+    hentArbeidssituasjon,
+    hentPerioderFørSykmelding } from '../../utils/sykmelding-utils'
 import { tekst } from '../../utils/tekster'
 import Vis from '../vis'
 
@@ -15,7 +18,7 @@ const FravaersperioderInfo = () => {
     const perioder = hentPerioderFørSykmelding(valgtSykmelding)
 
     return (
-        <Vis hvis={arbeidssituasjon === RSArbeidssituasjon.FRILANSER || arbeidssituasjon === RSArbeidssituasjon.NAERINGSDRIVENDE}
+        <Vis hvis={(arbeidssituasjon === RSArbeidssituasjon.FRILANSER || arbeidssituasjon === RSArbeidssituasjon.NAERINGSDRIVENDE) && harSpmOmPerioderFørSykmelding(valgtSykmelding)}
             render={() =>
                 <div className="avsnitt">
                     <UndertekstBold tag="h3" className="avsnitt-hode">
