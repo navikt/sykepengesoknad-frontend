@@ -7,7 +7,7 @@ import { tilLesbarPeriodeMedArstall } from '../../utils/dato-utils'
 import {
     harSpmOmPerioderFørSykmelding,
     hentArbeidssituasjon,
-    hentPerioderFørSykmelding} from '../../utils/sykmelding-utils'
+    hentPerioderFørSykmelding } from '../../utils/sykmelding-utils'
 import { tekst } from '../../utils/tekster'
 import Vis from '../vis'
 
