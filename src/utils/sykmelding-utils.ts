@@ -27,3 +27,7 @@ export const hentPerioderFørSykmelding = (valgtSykmelding?: Sykmelding) => {
     }
     return []
 }
+
+export const harSpmOmPerioderFørSykmelding = (valgtSykmelding?: Sykmelding) => {
+    return valgtSykmelding?.sykmeldingStatus.sporsmalOgSvarListe?.find(s => s.shortName === 'PERIODE') !== undefined
+}
