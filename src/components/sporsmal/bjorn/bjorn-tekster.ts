@@ -1,5 +1,5 @@
 const BjornTekster = {
-    'soknad.bjorn.brukte_reisetilskuddet': 'Takk for svarene du har gitt om selve sykefraværet. Her spør vi deg om reisene til jobben',
+    'soknad.bjorn.brukte_reisetilskuddet': 'Takk for svarene du har gitt om selve sykefraværet. <br /><br />Nå skal vi spørre deg om utgifter du har hatt til reiser til og fra jobben. Har du ikke hatt noen ekstrautgifter, svarer du bare nei og sender søknaden.',
     'soknad.bjorn.enkeltstaende_behandlingsdager': 'Du kan bare få én behandlingsdag i løpet av en uke. Trenger du flere slike dager, ber du legen om en gradert sykmelding i stedet.',
     'soknad.bjorn.ferie_v2': 'Et lite tips! Syns du det er vanskelig å svare på om du har tatt ut ferie eller ikke, finnes det en <a target="_blank" href="https://www.nav.no/no/person/arbeid/sykmeldt-arbeidsavklaringspenger-og-yrkesskade/papirsykmelding/hvorfor-spor-vi-om-ferie-i-soknaden-om-sykepenger">veiledning på nav.no</a>',
     'soknad.bjorn.arbeid_utenfor_norge': 'Vi spør om dette for å undersøke om du har rettigheter i flere land enn Norge. Har du vært på en kort tjenestereise eller konferanse i utlandet, krysser du nei.',
