@@ -166,7 +166,7 @@ export const nyttReisetilskudd: RSSoknad = {
                 {
                     'id': '1566448',
                     'tag': 'KM_HJEM_JOBB',
-                    'sporsmalstekst': 'Hvor mange kilometer er kjøreturen mellom hjemmet ditt og jobben?',
+                    'sporsmalstekst': 'Hvor mange kilometer er kjøreturen mellom hjemmet ditt og jobben én vei?',
                     'undertekst': 'km',
                     'svartype': 'KILOMETER',
                     'min': '0',
@@ -844,7 +844,7 @@ export const gradertReisetilskudd: RSSoknad = {
         }, {
             'id': '1547265',
             'tag': 'KM_HJEM_JOBB',
-            'sporsmalstekst': 'Hvor mange kilometer er kjøreturen mellom hjemmet ditt og jobben?',
+            'sporsmalstekst': 'Hvor mange kilometer er kjøreturen mellom hjemmet ditt og jobben én vei?',
             'undertekst': 'km',
             'svartype': 'KILOMETER',
             'min': '0',
