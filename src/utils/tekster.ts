@@ -24,7 +24,7 @@ import { logger } from './logger'
 const tekster = {
     ...OpplysningerTekster,
     ...KvitteringTekster,
-    ...SoknadIntroTekster,
+    ...PersonvernLesMerTekster,
     ...SoknaderTekster,
     ...BannerTekster,
     ...BjornTekster,
