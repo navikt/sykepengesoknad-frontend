@@ -14,6 +14,7 @@ import { hentHotjarJsTrigger, HotjarTrigger } from '../../components/hotjar-trig
 import HvorforSoknadSykepenger from '../../components/hvorfor-soknad-sykepenger/hvorfor-soknad-sykepenger'
 import OmReisetilskudd from '../../components/om-reisetilskudd/om-reisetilskudd'
 import Opplysninger from '../../components/opplysninger-fra-sykmelding/opplysninger'
+import { ViktigInformasjon } from '../../components/soknad-intro/viktig-informasjon'
 import SoknadMedToDeler from '../../components/soknad-med-to-deler/soknad-med-to-deler'
 import SporsmalForm from '../../components/sporsmal/sporsmal-form/sporsmal-form'
 import SporsmalSteg from '../../components/sporsmal/sporsmal-steg/sporsmal-steg'
@@ -116,12 +117,6 @@ const Fordeling = () => {
                         }
                     />
 
-                    <Vis hvis={stegNo === 1 && erGradertReisetilskuddsoknad}
-                        render={() =>
-                            <SoknadMedToDeler />
-                        }
-                    />
-
                     <Vis hvis={stegNo > 1 || erUtlandssoknad}
                         render={() => <SporsmalSteg />}
                     />
@@ -136,12 +131,26 @@ const Fordeling = () => {
                         }
                     />
 
+                    <Vis hvis={stegNo === 1 && !erUtlandssoknad}
+                        render={() =>
+                            <ViktigInformasjon />
+                        }
+                    />
+
+                    <Vis hvis={stegNo === 1 && erGradertReisetilskuddsoknad}
+                        render={() =>
+                            <SoknadMedToDeler />
+                        }
+                    />
+
                     <Vis hvis={!erUtlandssoknad}
                         render={() => <Opplysninger ekspandert={stegNo == 1} />}
                     />
 
                     <Vis hvis={stegNo === 1 && !erUtlandssoknad}
-                        render={() => <HvorforSoknadSykepenger soknadstype={valgtSoknad.soknadstype} />}
+                        render={() =>
+                            <HvorforSoknadSykepenger soknadstype={valgtSoknad.soknadstype} />
+                        }
                     />
 
                     <Vis hvis={stegNo === 1 && (erReisetilskuddsoknad || erGradertReisetilskuddsoknad)}
