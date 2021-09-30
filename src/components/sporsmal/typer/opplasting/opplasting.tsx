@@ -8,9 +8,9 @@ import { useAppStore } from '../../../../data/stores/app-store'
 import { tekst } from '../../../../utils/tekster'
 import FilListe from '../../../filopplaster/fil-liste/fil-liste'
 import OpplastingForm from '../../../filopplaster/kvittering-modal/opplasting-form'
+import Bjorn from '../../bjorn/bjorn'
 import { SpmProps } from '../../sporsmal-form/sporsmal-form'
 import PlussIkon from './pluss-ikon.svg'
-import SparTidMobil from './spar-tid-mobil'
 
 const Opplasting = ({ sporsmal }: SpmProps) => {
     const { setValgtKvittering, openModal, setOpenModal } = useAppStore()
@@ -34,7 +34,8 @@ const Opplasting = ({ sporsmal }: SpmProps) => {
                 </Element>
             </div>
 
-            <SparTidMobil />
+            {/* Ligger her for å komme under spørsmålsteksten */}
+            <Bjorn className="blokk-m" nokkel={'soknad.bjorn.kvitteringer'} ekstraMarginTop={true} />
 
             <button className="fler-vedlegg" onClick={aktiverModal} type="button">
                 <img className="pluss-ikon" src={PlussIkon} alt="" />

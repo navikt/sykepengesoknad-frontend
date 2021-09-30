@@ -138,10 +138,8 @@ describe('Teste førsteside i reisetilskuddsøknaden', () => {
             cy.url().should('include', `/syk/sykepengesoknad/soknader/${nyttReisetilskudd.id}/4`)
         })
 
-        it('Laster inn veilederpanel spar-tid', () => {
-            cy.get('.spar-tid').should('be.visible')
-            cy.get('.spar-tid .nav-veilederpanel__content h2').should('be.visible').and('have.text', 'Spar tid med mobilen')
-            cy.get('.spar-tid .nav-veilederpanel__content').contains('Fyller du ut fra telefonen, kan du ta bilde av kvitteringene og bruke dem direkte i søknaden.')
+        it('Laster bjørn med info', () => {
+            cy.contains('Du må laste opp kvitteringer hvis du har hatt ekstra utgifter til')
         })
 
         it('Legger inn taxi kvittering', () => {
@@ -166,7 +164,7 @@ describe('Teste førsteside i reisetilskuddsøknaden', () => {
         })
 
         it('Endring av kvittering', () => {
-            cy.contains('Taxi').click()
+            cy.get('.fil_liste').contains('Taxi').click()
             cy.contains('Endre reiseutgift')
             cy.get('.alertstripe--info').contains('Du kan foreløpig ikke redigere utgifter som du har lagt til. Men du kan slette den som er feil, og legge inn på nytt.')
             cy.get('select[name=transportmiddel]').should('have.attr', 'disabled')
@@ -181,7 +179,7 @@ describe('Teste førsteside i reisetilskuddsøknaden', () => {
         })
 
         it('Sletting av kvittering som er valgt', () => {
-            cy.contains('Taxi').click()
+            cy.get('.fil_liste').contains('Taxi').click()
 
             cy.get('.knapperad').contains('Slett').click()
             cy.get('.bekreft-dialog').within(() => {
