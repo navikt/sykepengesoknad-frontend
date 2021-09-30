@@ -11,6 +11,7 @@ import Banner from '../../components/banner/banner'
 import Brodsmuler from '../../components/brodsmuler/brodsmuler'
 import { EldreUsendtSoknad, harEldreUsendtSoknad } from '../../components/eldre-usendt-soknad/eldre-usendt-soknad'
 import { hentHotjarJsTrigger, HotjarTrigger } from '../../components/hotjar-trigger'
+import HvorforSoknadSykepenger from '../../components/hvorfor-soknad-sykepenger/hvorfor-soknad-sykepenger'
 import OmReisetilskudd from '../../components/om-reisetilskudd/om-reisetilskudd'
 import Opplysninger from '../../components/opplysninger-fra-sykmelding/opplysninger'
 import SoknadMedToDeler from '../../components/soknad-med-to-deler/soknad-med-to-deler'
@@ -139,7 +140,11 @@ const Fordeling = () => {
                         render={() => <Opplysninger ekspandert={stegNo == 1} />}
                     />
 
-                    <Vis hvis={stegNo === 1 && erReisetilskuddsoknad}
+                    <Vis hvis={stegNo === 1 && !erUtlandssoknad}
+                        render={() => <HvorforSoknadSykepenger soknadstype={valgtSoknad.soknadstype} />}
+                    />
+
+                    <Vis hvis={stegNo === 1 && (erReisetilskuddsoknad || erGradertReisetilskuddsoknad)}
                         render={() => <OmReisetilskudd />}
                     />
 
