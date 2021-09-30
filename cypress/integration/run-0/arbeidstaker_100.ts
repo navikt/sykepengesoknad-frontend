@@ -24,6 +24,7 @@ describe('Tester arbeidstakersøknad', () => {
         cy.contains('Det du fyller ut brukes til å vurdere om du har rett til sykepenger').should('not.exist')
 
         // Personvern erklæring
+        cy.get('.hvorfor-soknad-sykepenger').click()
         cy.contains('Les mer om hvordan NAV behandler personopplysninger').click()
         cy.contains('Slik behandler NAV personopplysningene dine')
         cy.contains('Søknaden din vil bli behandlet automatisk hvis NAV har tilstrekkelige opplysninger')

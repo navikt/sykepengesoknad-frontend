@@ -11,7 +11,7 @@ import { tekst } from '../../utils/tekster'
 const OmReisetilskudd = () => {
 
     return (
-        <Ekspanderbartpanel apen={true} className="om-reisetilskudd" tittel={
+        <Ekspanderbartpanel apen={false} className="om-reisetilskudd" tittel={
             <Undertittel>{tekst('tilskudd.start.om-reisetilskudd')}</Undertittel>
         }>
 

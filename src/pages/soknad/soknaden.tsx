@@ -11,9 +11,11 @@ import Banner from '../../components/banner/banner'
 import Brodsmuler from '../../components/brodsmuler/brodsmuler'
 import { EldreUsendtSoknad, harEldreUsendtSoknad } from '../../components/eldre-usendt-soknad/eldre-usendt-soknad'
 import { hentHotjarJsTrigger, HotjarTrigger } from '../../components/hotjar-trigger'
+import HvorforSoknadSykepenger from '../../components/hvorfor-soknad-sykepenger/hvorfor-soknad-sykepenger'
 import OmReisetilskudd from '../../components/om-reisetilskudd/om-reisetilskudd'
 import Opplysninger from '../../components/opplysninger-fra-sykmelding/opplysninger'
-import SoknadIntro from '../../components/soknad-intro/soknad-intro'
+import { ViktigInformasjon } from '../../components/soknad-intro/viktig-informasjon'
+import SoknadMedToDeler from '../../components/soknad-med-to-deler/soknad-med-to-deler'
 import SporsmalForm from '../../components/sporsmal/sporsmal-form/sporsmal-form'
 import SporsmalSteg from '../../components/sporsmal/sporsmal-steg/sporsmal-steg'
 import { hentNokkel } from '../../components/sporsmal/sporsmal-utils'
@@ -95,6 +97,7 @@ const Fordeling = () => {
     const tittel = tekst(hentNokkel(valgtSoknad!, stegNo) as any)
     const erUtlandssoknad = valgtSoknad.soknadstype === RSSoknadstype.OPPHOLD_UTLAND
     const erReisetilskuddsoknad = valgtSoknad.soknadstype === RSSoknadstype.REISETILSKUDD
+    const erGradertReisetilskuddsoknad = valgtSoknad.soknadstype === RSSoknadstype.GRADERT_REISETILSKUDD
 
     switch (valgtSoknad.status) {
         // Nye søknader
@@ -114,10 +117,6 @@ const Fordeling = () => {
                         }
                     />
 
-                    <Vis hvis={stegNo === 1 && !erUtlandssoknad}
-                        render={() => <SoknadIntro />}
-                    />
-
                     <Vis hvis={stegNo > 1 || erUtlandssoknad}
                         render={() => <SporsmalSteg />}
                     />
@@ -132,11 +131,29 @@ const Fordeling = () => {
                         }
                     />
 
+                    <Vis hvis={stegNo === 1 && !erUtlandssoknad}
+                        render={() =>
+                            <ViktigInformasjon />
+                        }
+                    />
+
+                    <Vis hvis={stegNo === 1 && erGradertReisetilskuddsoknad}
+                        render={() =>
+                            <SoknadMedToDeler />
+                        }
+                    />
+
                     <Vis hvis={!erUtlandssoknad}
                         render={() => <Opplysninger ekspandert={stegNo == 1} />}
                     />
 
-                    <Vis hvis={stegNo === 1 && erReisetilskuddsoknad}
+                    <Vis hvis={stegNo === 1 && !erUtlandssoknad}
+                        render={() =>
+                            <HvorforSoknadSykepenger soknadstype={valgtSoknad.soknadstype} />
+                        }
+                    />
+
+                    <Vis hvis={stegNo === 1 && (erReisetilskuddsoknad || erGradertReisetilskuddsoknad)}
                         render={() => <OmReisetilskudd />}
                     />
 

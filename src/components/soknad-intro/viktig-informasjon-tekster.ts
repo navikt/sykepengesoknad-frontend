@@ -1,4 +1,4 @@
-export const ViktigInformasjonTekster = {
+const ViktigInformasjonTekster = {
     'viktig-informasjon.overskrift': 'Viktig informasjon',
     'viktig-informasjon.avsnitt.1': 'Vanligvis starter sykmeldingen den dagen du er hos legen. I ditt tilfelle har legen skrevet at den startet tidligere.',
     'viktig-informasjon.avsnitt.2': 'NAV har kommet til at det ikke er noen gyldig grunn til at sykmeldingen startet før dere hadde kontakt.',
@@ -6,3 +6,4 @@ export const ViktigInformasjonTekster = {
     'viktig-informasjon.under-overskrift': 'Hva nå?',
 }
 
+export default ViktigInformasjonTekster
