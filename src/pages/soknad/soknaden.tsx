@@ -13,7 +13,7 @@ import { EldreUsendtSoknad, harEldreUsendtSoknad } from '../../components/eldre-
 import { hentHotjarJsTrigger, HotjarTrigger } from '../../components/hotjar-trigger'
 import OmReisetilskudd from '../../components/om-reisetilskudd/om-reisetilskudd'
 import Opplysninger from '../../components/opplysninger-fra-sykmelding/opplysninger'
-import SoknadIntro from '../../components/soknad-intro/soknad-intro'
+import SoknadMedToDeler from '../../components/soknad-med-to-deler/soknad-med-to-deler'
 import SporsmalForm from '../../components/sporsmal/sporsmal-form/sporsmal-form'
 import SporsmalSteg from '../../components/sporsmal/sporsmal-steg/sporsmal-steg'
 import { hentNokkel } from '../../components/sporsmal/sporsmal-utils'
@@ -95,6 +95,7 @@ const Fordeling = () => {
     const tittel = tekst(hentNokkel(valgtSoknad!, stegNo) as any)
     const erUtlandssoknad = valgtSoknad.soknadstype === RSSoknadstype.OPPHOLD_UTLAND
     const erReisetilskuddsoknad = valgtSoknad.soknadstype === RSSoknadstype.REISETILSKUDD
+    const erGradertReisetilskuddsoknad = valgtSoknad.soknadstype === RSSoknadstype.GRADERT_REISETILSKUDD
 
     switch (valgtSoknad.status) {
         // Nye søknader
@@ -114,8 +115,10 @@ const Fordeling = () => {
                         }
                     />
 
-                    <Vis hvis={stegNo === 1 && !erUtlandssoknad}
-                        render={() => <SoknadIntro />}
+                    <Vis hvis={stegNo === 1 && erGradertReisetilskuddsoknad}
+                        render={() =>
+                            <SoknadMedToDeler />
+                        }
                     />
 
                     <Vis hvis={stegNo > 1 || erUtlandssoknad}

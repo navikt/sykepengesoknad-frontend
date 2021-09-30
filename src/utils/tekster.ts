@@ -8,8 +8,9 @@ import OmReisetilskuddTekster from '../components/om-reisetilskudd/om-reisetilsk
 import OmSykepengerTekster from '../components/om-sykepenger/om-sykepenger-tekster'
 import OpplysningerTekster from '../components/opplysninger-fra-sykmelding/opplysninger-tekster'
 import OppsummeringTekster from '../components/oppsummering/oppsummering-tekster'
-import SoknadIntroTekster from '../components/soknad-intro/soknad-intro-tekster'
-import { ViktigInformasjonTekster } from '../components/soknad-intro/viktig-informasjon-tekster'
+import PersonvernLesMerTekster from '../components/soknad-intro/personvern-les-mer-tekster'
+import ViktigInformasjonTekster from '../components/soknad-intro/viktig-informasjon-tekster'
+import SoknadMedToDelerTekster from '../components/soknad-med-to-deler/soknad-med-to-deler-tekster'
 import TeaserTekster from '../components/soknader/teaser/teaser-tekster'
 import BjornTekster from '../components/sporsmal/bjorn/bjorn-tekster'
 import KnapperadTekster from '../components/sporsmal/sporsmal-form/knapperad-tekster'
@@ -40,6 +41,7 @@ const tekster = {
     ...DragAndDropTekster,
     ...OpplastingTekster,
     ...EldreUsendtTekster,
+    ...SoknadMedToDelerTekster,
     ...ViktigInformasjonTekster,
 }
 
