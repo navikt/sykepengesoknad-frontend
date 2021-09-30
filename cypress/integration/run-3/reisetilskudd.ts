@@ -31,7 +31,8 @@ describe('Teste førsteside i reisetilskuddsøknaden', () => {
         })
 
         it('Skal ha egen folketrygloven tekst', () => {
-            cy.get('.nav-veilederpanel').contains('Ifølge folketrygdloven kan du få reisetilskudd hvis du har rett til sykepenger. Reisetilskuddet kommer da i stedet for sykepengene.')
+            cy.get('.hvorfor-soknad-sykepenger').click()
+            cy.contains('Ifølge folketrygdloven kan du få reisetilskudd hvis du har rett til sykepenger. Reisetilskuddet kommer da i stedet for sykepengene.')
         })
 
         it('Laster inn hvem kan få reisetilskudd', () => {
