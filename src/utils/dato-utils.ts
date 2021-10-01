@@ -1,7 +1,6 @@
 import dayjs from 'dayjs'
 
 import { Sporsmal } from '../types/types'
-
 export const fraInputdatoTilJSDato = (inputDato: any) => {
     const datoSplit = inputDato.split('.')
     let ar = datoSplit[2]
@@ -91,6 +90,13 @@ export const sendtForMerEnn30DagerSiden = (sendtTilArbeidsgiverDato?: Date, send
         dagerSidenNav = dayjs(new Date()).diff(dayjs(sendtTilNAVDato), 'day') > 30
     }
     return dagerSidenArb && dagerSidenNav
+}
+
+export const sendtArbeidsgiverForMerEnnAntallSekunderSiden = (sekunder: number, sendtTilArbeidsgiverDato?: Date) => {
+    if (sendtTilArbeidsgiverDato) {
+        return dayjs(new Date()).diff(dayjs(sendtTilArbeidsgiverDato), 'seconds') > sekunder
+    }
+    return true
 }
 
 export const sammeMnd = (sporsmal: Sporsmal): boolean => {

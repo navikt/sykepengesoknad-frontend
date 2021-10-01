@@ -9,7 +9,11 @@ import { useAppStore } from '../../data/stores/app-store'
 import { RSArbeidssituasjon } from '../../types/rs-types/rs-arbeidssituasjon'
 import { RSSoknadstatus } from '../../types/rs-types/rs-soknadstatus'
 import { RSSoknadstype } from '../../types/rs-types/rs-soknadstype'
-import { sendtForMerEnn30DagerSiden } from '../../utils/dato-utils'
+import {
+    sendtArbeidsgiverForMerEnnAntallSekunderSiden,
+    sendtForMerEnn30DagerSiden
+} from '../../utils/dato-utils'
+import env from '../../utils/environment'
 import Endreknapp from '../endreknapp/endreknapp'
 import Ettersending from '../ettersending/ettersending'
 import Opplysninger from '../opplysninger-fra-sykmelding/opplysninger'
@@ -76,7 +80,8 @@ const Kvittering = () => {
                             render={() => <Endreknapp />}
                         />
 
-                        <Vis hvis={!erSendtTilNav}
+                        <Vis
+                            hvis={!erSendtTilNav && sendtArbeidsgiverForMerEnnAntallSekunderSiden(env.sendTilNavKnappDelaySeconds(), valgtSoknad?.sendtTilArbeidsgiverDato)}
                             render={() => <Ettersending gjelder="nav" setRerendrekvittering={setRerendrekvittering} />}
                         />
 
