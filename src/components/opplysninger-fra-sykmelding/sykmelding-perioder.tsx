@@ -8,6 +8,7 @@ import { getDuration } from '../../utils/dato-utils'
 import { erOppdelt } from '../../utils/periode-utils'
 import { sorterEtterEldsteTom } from '../../utils/sykmelding-utils'
 import { tekst } from '../../utils/tekster'
+import CheckBoxImg from '../oppsummering/check-box-1.png'
 import Bjorn from '../sporsmal/bjorn/bjorn'
 import Vis from '../vis'
 
@@ -54,6 +55,17 @@ const SykmeldingPerioder = () => {
                         <Normaltekst>
                             {hentPeriodeTekst(periode)}
                         </Normaltekst>
+
+                        <Vis hvis={periode.gradert?.reisetilskudd}
+                            render={() =>
+                                <>
+                                    <img style={{ width: 16, height: 16 }} src={CheckBoxImg} alt="Avkrysset" />
+                                    <Normaltekst tag={'span'}>
+                                        {' Kan være i delvis arbeid ved bruk av reisetilskudd'}
+                                    </Normaltekst>
+                                </>
+                            }
+                        />
                     </div>
                 )
             })}
