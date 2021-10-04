@@ -58,6 +58,10 @@ class Environment implements EnvironmentInterface {
         return this.env.DITTNAV_URL
     }
 
+    sendTilNavKnappDelaySeconds(): number {
+        return 10
+    }
+
 }
 
 interface EnvironmentInterface {
@@ -88,14 +92,12 @@ interface EnvironmentInterface {
     isQ1(): boolean
 
     isProd(): boolean
+
+    sendTilNavKnappDelaySeconds(): number
 }
 
 function hentEnvironment(): EnvironmentInterface {
     if (process.env.NODE_ENV === 'development') {
-        // eslint-disable-next-line no-console
-        console.log('process.env')
-        // eslint-disable-next-line no-console
-        console.log(process.env)
         return {
             amplitudeEnabled(): boolean {
                 return false
@@ -125,6 +127,9 @@ function hentEnvironment(): EnvironmentInterface {
                 return ''
             }, sykmeldingerBackendProxyRoot(): string {
                 return ''
+            },
+            sendTilNavKnappDelaySeconds(): number {
+                return -1
             }
 
         }
