@@ -14,6 +14,7 @@ import ViktigInformasjonTekster from '../components/soknad-intro/viktig-informas
 import SoknadMedToDelerTekster from '../components/soknad-med-to-deler/soknad-med-to-deler-tekster'
 import TeaserTekster from '../components/soknader/teaser/teaser-tekster'
 import BjornTekster from '../components/sporsmal/bjorn/bjorn-tekster'
+import { EkspanderbarHjelpTekster } from '../components/sporsmal/ekspanderbar-hjelp/ekspanderbar-hjelp-tekst'
 import KnapperadTekster from '../components/sporsmal/sporsmal-form/knapperad-tekster'
 import SporsmalTekster from '../components/sporsmal/sporsmal-tekster'
 import RefreshHvisFeilStateTekster from '../pages/feil/refresh-hvis-feil-state-tekster'
@@ -33,6 +34,7 @@ const tekster = {
     ...SoknadenTekster,
     ...SporsmalTekster,
     ...TeaserTekster,
+    ...EkspanderbarHjelpTekster,
     ...OmSykepengerTekster,
     ...OppsummeringTekster,
     ...OpprettUtlandTekster,
