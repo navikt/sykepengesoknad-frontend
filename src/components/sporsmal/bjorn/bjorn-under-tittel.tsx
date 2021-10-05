@@ -18,7 +18,6 @@ const BjornUnderTittel = ({ sporsmal }: SpmProps) => {
         tag === TagTyper.ENKELTSTAENDE_BEHANDLINGSDAGER ||
         tag === TagTyper.ARBEID_UTENFOR_NORGE ||
         tag === TagTyper.FRAVER_FOR_BEHANDLING ||
-        tag === TagTyper.PERMISJON_V2 ||
         tag === TagTyper.PERMITTERT_NAA ||
         tag === TagTyper.FRAVAR_FOR_SYKMELDINGEN ||
         tag === TagTyper.PERIODEUTLAND ||

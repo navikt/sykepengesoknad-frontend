@@ -41,8 +41,9 @@ const SykSokLokalt = () => {
                     }</strong></span>
                     &nbsp;&nbsp;
                     <span>spm <strong>{valgtSoknad && valgtSoknad.sporsmal[Number(stegId) - 1].id}</strong>
-                        <strong>{valgtSoknad && valgtSoknad.sporsmal[Number(stegId) - 1].tag}</strong>
                     </span>
+                    &nbsp;&nbsp;
+                    <strong>{valgtSoknad && valgtSoknad.sporsmal[Number(stegId) - 1].tag}</strong>
                 </div>
             }
         />

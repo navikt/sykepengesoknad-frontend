@@ -7,10 +7,12 @@ import { TagTyper } from '../../../types/enums'
 import { getLedetekst, tekst } from '../../../utils/tekster'
 import { utlandssoknadUrl } from '../../../utils/url-utils'
 import AnimateOnMount from '../../animate-on-mount'
+import { Ekspanderbar } from '../../ekspanderbar/ekspanderbar'
 import FeilLokal from '../../feil/feil-lokal'
 import Vis from '../../vis'
 import Bjorn from '../bjorn/bjorn'
 import SporsmalBjorn from '../bjorn/sporsmal-bjorn'
+import { EkspanderbarHjelp } from '../ekspanderbar-hjelp/ekspanderbar-hjelp'
 import { SpmProps } from '../sporsmal-form/sporsmal-form'
 import SporsmalHjelpetekst from '../sporsmal-hjelpetekst'
 import { hentFeilmelding, sporsmalIdListe } from '../sporsmal-utils'
@@ -61,6 +63,7 @@ const JaNeiInput = ({ sporsmal }: SpmProps) => {
                             <SporsmalHjelpetekst sporsmal={sporsmal} />
                         </div>
                     </legend>
+                    <EkspanderbarHjelp sporsmal={sporsmal} />
                     <div className="inputPanelGruppe__inner">
                         {jaNeiValg.map((valg, idx) => {
                             const OK = watchJaNei === valg.value
