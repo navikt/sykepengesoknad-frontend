@@ -144,7 +144,11 @@ const Fordeling = () => {
                     />
 
                     <Vis hvis={!erUtlandssoknad}
-                        render={() => <Opplysninger ekspandert={stegNo == 1} steg={`steg-${stegNo}`} />}
+                        render={
+                            () => {
+                                const sporsmal = valgtSoknad!.sporsmal[stegNo - 1]
+                                return <Opplysninger ekspandert={stegNo == 1} steg={sporsmal.tag} />
+                            }}
                     />
 
                     <Vis hvis={stegNo === 1 && !erUtlandssoknad}
