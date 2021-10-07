@@ -3,6 +3,7 @@ import './opplysninger.less'
 import React from 'react'
 
 import { tekst } from '../../utils/tekster'
+import { Ekspanderbar } from '../ekspanderbar/ekspanderbar'
 import Utvidbar from '../utvidbar/utvidbar'
 import ArbeidsgiverInfo from './arbeidsgiver-info'
 import ArbeidssituasjonInfo from './arbeidssituasjon-info'
@@ -15,14 +16,17 @@ import SykmeldingPerioder from './sykmelding-perioder'
 
 interface OpplysningerProps {
     ekspandert: boolean;
+    steg: string;
 }
 
-const Opplysninger = ({ ekspandert }: OpplysningerProps) => {
+const Opplysninger = ({ ekspandert, steg }: OpplysningerProps) => {
 
+    const tittel = tekst('sykepengesoknad.sykmelding-utdrag.tittel')
     return (
         <Utvidbar className={'ekspander'}
             ikon={plaster} ikonHover={plasterHover} erApen={ekspandert}
-            tittel={tekst('sykepengesoknad.sykmelding-utdrag.tittel')}
+            amplitudeProps={{ 'component': tittel, steg: steg }}
+            tittel={tittel}
             ikonAltTekst=""
         >
             <div className="opplysninger">

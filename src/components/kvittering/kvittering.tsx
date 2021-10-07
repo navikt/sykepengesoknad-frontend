@@ -70,7 +70,7 @@ const Kvittering = () => {
                 ekspandert={sendtForMerEnn30DagerSiden(valgtSoknad?.sendtTilArbeidsgiverDato, valgtSoknad?.sendtTilNAVDato)} />
 
             <Vis hvis={valgtSoknad!.soknadstype !== RSSoknadstype.OPPHOLD_UTLAND}
-                render={() => <Opplysninger ekspandert={false} />}
+                render={() => <Opplysninger ekspandert={false} steg={'kvittering'} />}
             />
 
             <Vis hvis={skalViseKnapperad}
