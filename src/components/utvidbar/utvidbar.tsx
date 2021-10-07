@@ -5,6 +5,7 @@ import { Normaltekst, Undertittel } from 'nav-frontend-typografi'
 import React, { useEffect, useRef, useState } from 'react'
 
 import { erSynligIViewport } from '../../utils/browser-utils'
+import { useAmplitudeInstance } from '../amplitude/amplitude'
 import Vis from '../vis'
 
 interface UtvidbarProps {
@@ -13,6 +14,7 @@ interface UtvidbarProps {
     children: React.ReactNode;
     ikon?: string;
     ikonHover?: string;
+    amplitudeProps?: object,
     ikonAltTekst?: string;
     className?: string;
     visLukk?: boolean;
@@ -28,6 +30,7 @@ const Utvidbar = (props: UtvidbarProps) => {
     const btnImage = useRef<HTMLImageElement>(null)
     const container = useRef<HTMLDivElement>(null)
     const innhold = useRef<HTMLDivElement>(null)
+    const { logEvent } = useAmplitudeInstance()
 
     useEffect(() => {
         setErApen(props.erApen)
@@ -39,6 +42,9 @@ const Utvidbar = (props: UtvidbarProps) => {
     }, [ props ])
 
     const onKlikk = () => {
+        if (props.amplitudeProps) {
+            logEvent(erApen ? 'panel lukket' : 'panel åpnet', props.amplitudeProps)
+        }
         setErApen(!erApen)
         if (!erSynligIViewport(utvidbar.current)) {
             window.scrollTo({ top: utvidbar.current?.offsetTop, left: 0, behavior: 'smooth' })

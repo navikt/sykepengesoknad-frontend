@@ -144,7 +144,7 @@ const Fordeling = () => {
                     />
 
                     <Vis hvis={!erUtlandssoknad}
-                        render={() => <Opplysninger ekspandert={stegNo == 1} />}
+                        render={() => <Opplysninger ekspandert={stegNo == 1} steg={`steg-${stegNo}`} />}
                     />
 
                     <Vis hvis={stegNo === 1 && !erUtlandssoknad}
@@ -170,7 +170,7 @@ const Fordeling = () => {
             return (
                 <>
                     <StatusPanel />
-                    <Opplysninger ekspandert={false} />
+                    <Opplysninger ekspandert={false} steg={'avbrutt-søknad'} />
                 </>
             )
     }
