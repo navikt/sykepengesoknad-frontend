@@ -19,8 +19,7 @@ const BjornUnderTittel = ({ sporsmal }: SpmProps) => {
         tag === TagTyper.ARBEID_UTENFOR_NORGE ||
         tag === TagTyper.FRAVER_FOR_BEHANDLING ||
         tag === TagTyper.PERMITTERT_NAA ||
-        tag === TagTyper.FRAVAR_FOR_SYKMELDINGEN ||
-        tag === TagTyper.PERIODEUTLAND ||
+         tag === TagTyper.PERIODEUTLAND ||
         tag === TagTyper.PERMITTERT_PERIODE ||
         (tag === TagTyper.FERIE_V2 && valgtSoknad?.status === RSSoknadstatus.NY) ||
         (tag === TagTyper.TILBAKE_I_ARBEID && valgtSoknad?.soknadstype === RSSoknadstype.GRADERT_REISETILSKUDD)
