@@ -2,7 +2,7 @@ import './ekspanderbar.less'
 
 import NavFrontendChevron from 'nav-frontend-chevron'
 import { Element, Normaltekst } from 'nav-frontend-typografi'
-import React from 'react'
+import React, { useEffect } from 'react'
 import { useState } from 'react'
 
 import { useAmplitudeInstance } from '../amplitude/amplitude'
@@ -11,11 +11,16 @@ interface EkspanderbarProps {
     title: string;
     amplitudeProps?: object,
     children: any,
+    sporsmalId: string,
 }
 
-export const Ekspanderbar = ({ title, children, amplitudeProps }: EkspanderbarProps) => {
+export const Ekspanderbar = ({ title, children, amplitudeProps, sporsmalId }: EkspanderbarProps) => {
     const [ expanded, setExpanded ] = useState<boolean>(false)
     const { logEvent } = useAmplitudeInstance()
+
+    // Lukker mellom hvert spørsmål
+    useEffect(() => setExpanded(false), [ sporsmalId ])
+
 
     return (
         <div className="ekspanderbar">

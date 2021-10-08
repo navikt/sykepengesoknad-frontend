@@ -39,6 +39,7 @@ export const EkspanderbarHjelp = ({ sporsmal }: SpmProps) => {
                 return <>
                     <Ekspanderbar
                         title={tittel}
+                        sporsmalId={sporsmal.id}
                         amplitudeProps={{ 'component': tittel, sporsmaltag: nokkel }}>
                         <Normaltekst>{parser(tekst(`ekspanderbarhjelp.${nokkel}.innhold` as any))}</Normaltekst>
                     </Ekspanderbar>
