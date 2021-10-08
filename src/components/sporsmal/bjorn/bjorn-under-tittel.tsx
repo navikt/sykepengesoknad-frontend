@@ -16,13 +16,9 @@ const BjornUnderTittel = ({ sporsmal }: SpmProps) => {
     const harBjorntekst = (tag: TagTyper) =>
         tag === TagTyper.BRUKTE_REISETILSKUDDET ||
         tag === TagTyper.ENKELTSTAENDE_BEHANDLINGSDAGER ||
-        tag === TagTyper.ARBEID_UTENFOR_NORGE ||
         tag === TagTyper.FRAVER_FOR_BEHANDLING ||
-        tag === TagTyper.PERMITTERT_NAA ||
          tag === TagTyper.PERIODEUTLAND ||
-        tag === TagTyper.PERMITTERT_PERIODE ||
-        (tag === TagTyper.FERIE_V2 && valgtSoknad?.status === RSSoknadstatus.NY) ||
-        (tag === TagTyper.TILBAKE_I_ARBEID && valgtSoknad?.soknadstype === RSSoknadstype.GRADERT_REISETILSKUDD)
+        (tag === TagTyper.FERIE_V2 && valgtSoknad?.status === RSSoknadstatus.NY)
 
     return (
         <Vis hvis={harBjorntekst(sporsmal.tag)}
