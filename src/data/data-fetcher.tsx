@@ -57,5 +57,8 @@ export function DataFetcher(props: { children: any }) {
 }
 
 export const hentLoginUrl = () => {
+    if (window.location.href.includes('sykepengesoknad-utland')){
+        return `${env.loginServiceUrl()}?redirect=${env.loginServiceRedirectUrl()}/sykepengesoknad-utland`
+    }
     return `${env.loginServiceUrl()}?redirect=${env.loginServiceRedirectUrl()}`
 }
