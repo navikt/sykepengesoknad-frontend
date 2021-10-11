@@ -1,5 +1,18 @@
 export const EkspanderbarHjelpTekster = {
-    'ekspanderbarhjelp.permisjon_v2.tittel': 'Hva mener vi med permisjon?',
+    'ekspanderbarhjelp.permisjon_v2.tittel': 'Hva mener vi med permisjon',
     'ekspanderbarhjelp.permisjon_v2.innhold': 'Med permisjon mener vi dager du var borte fra jobben av andre grunner enn sykdom, ferie eller avspasering. Det finnes to unntak: foreldrepermisjon og seniordager. Da svarer du nei på spørsmålet om du har tatt ut permisjon.',
+    'ekspanderbarhjelp.fravar_for_sykmeldingen.tittel': 'Hvorfor spør vi om disse datoene',
+    'ekspanderbarhjelp.fravar_for_sykmeldingen.innhold': 'Arbeidsgiveren din dekker de første 16 dagene av sykefraværet, også dagene før selve sykmeldingen. Derfor trenger vi å vite om du var syk og borte fra jobb noen av disse dagene.',
+    'ekspanderbarhjelp.transport_til_daglig.tittel': 'Hva mener vi med offentlig transport',
+    'ekspanderbarhjelp.transport_til_daglig.innhold': 'Offentlig transport er blant annet buss, tog og båt som går i fast rute. Det kan også være bysykkel og el- sparkesykkel.',
+    'ekspanderbarhjelp.permittert_naa.tittel': 'Hvorfor spør vi om dette',
+    'ekspanderbarhjelp.permittert_naa.innhold': 'Vi spør om permittering for å kunne beregne sykepengene dine riktig.  Les mer om <a target="_blank" href="https://www.nav.no/kombinasjoner">å være både sykmeldt og permittert.</a>',
+    'ekspanderbarhjelp.permittert_periode.tittel': 'Hvorfor spør vi om dette',
+    'ekspanderbarhjelp.permittert_periode.innhold': 'Tidspunkt og varighet avgjør om sykepengene skal beregnes likt som dagpenger. Derfor spør vi om de fire ukene før du ble sykmeldt. Les mer om <a target="_blank" href="https://www.nav.no/kombinasjoner">å være både sykmeldt og permittert.</a>',
+    'ekspanderbarhjelp.arbeid_utenfor_norge.tittel': 'Hvorfor spør vi om dette',
+    'ekspanderbarhjelp.arbeid_utenfor_norge.innhold': 'Vi spør om dette for å undersøke om du har rettigheter i flere land enn Norge. Har du vært på en kort tjenestereise eller konferanse i utlandet, krysser du nei.',
+    'ekspanderbarhjelp.tilbake_i_arbeid_gradert_reisetilskudd.tittel': 'Hvorfor spør vi om dette',
+    'ekspanderbarhjelp.tilbake_i_arbeid_gradert_reisetilskudd.innhold': 'Det er helt greit å gå tilbake til vanlig jobb før sykmeldingen er slutt - hvis du er klar for det. Da svarer du ja og skriver inn den dagen du ikke lenger trengte sykmelding og  reisetilskudd.',
+    'ekspanderbarhjelp.tilbake_i_arbeid.tittel': 'Hvorfor spør vi om dette',
+    'ekspanderbarhjelp.tilbake_i_arbeid.innhold': 'Det er helt greit å gå tilbake til vanlig jobb før sykmeldingen er slutt - hvis du er klar for det. Da svarer du ja og skriver inn den dagen du ikke lenger trengte sykmelding.',
 }
-

@@ -86,9 +86,9 @@ describe('Tester arbeidstakersøknad', () => {
     it('Søknad PERMISJON_V2', function() {
         cy.url().should('include', `${soknad.id}/4`)
 
-        cy.contains('Hva mener vi med permisjon?')
+        cy.contains('Hva mener vi med permisjon')
         cy.contains('Med permisjon mener vi dager du var borte fra jobben av andre grunner enn sykdom').should('not.be.visible')
-        cy.contains('Hva mener vi med permisjon?').click()
+        cy.contains('Hva mener vi med permisjon').click()
         cy.contains('Med permisjon mener vi dager du var borte fra jobben av andre grunner enn sykdom').should('be.visible')
 
 
