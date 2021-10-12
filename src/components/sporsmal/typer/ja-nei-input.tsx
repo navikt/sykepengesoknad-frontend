@@ -51,37 +51,36 @@ const JaNeiInput = ({ sporsmal }: SpmProps) => {
 
     return (
         <>
-            <div className="inputPanelGruppe inputPanelGruppe--horisontal">
-                <fieldset className={'skjema__fieldset' + (errors[sporsmal.id] ? ' skjemagruppe--feil' : '')}>
-                    <legend className="skjema__legend">
-                        <div className="medHjelpetekst">
-                            <Element tag="h3" className="skjema__sporsmal">
-                                {sporsmal.sporsmalstekst}
-                            </Element>
-                        </div>
-                    </legend>
-                    <EkspanderbarHjelp sporsmal={sporsmal} />
-                    <div className="inputPanelGruppe__inner">
-                        {jaNeiValg.map((valg, idx) => {
-                            const OK = watchJaNei === valg.value
-                            return (
-                                <label className={'inputPanel radioPanel' + (OK ? ' inputPanel--checked' : '')}
-                                    key={idx}>
-                                    <input type="radio"
-                                        id={sporsmal.id + '_' + idx}
-                                        className="inputPanel__field"
-                                        value={valg.value}
-                                        {...register(sporsmal.id, {
-                                            validate: (value) => valider(value),
-                                            required: feilmelding.global
-                                        })}
-                                    />
-                                    <span className="inputPanel__label">{valg.label}</span>
-                                </label>
-                            )
-                        })}
-                    </div>
-                </fieldset>
+            <div className={
+                'inputPanelGruppe inputPanelGruppe--horisontal' +
+                (errors[sporsmal.id] ? ' skjemagruppe--feil' : '')
+            }>
+                <Element tag="h3" className="skjema__sporsmal">
+                    {sporsmal.sporsmalstekst}
+                </Element>
+
+                <EkspanderbarHjelp sporsmal={sporsmal} />
+                
+                <div className="inputPanelGruppe__inner">
+                    {jaNeiValg.map((valg, idx) => {
+                        const OK = watchJaNei === valg.value
+                        return (
+                            <label className={'inputPanel radioPanel' + (OK ? ' inputPanel--checked' : '')}
+                                key={idx}>
+                                <input type="radio"
+                                    id={sporsmal.id + '_' + idx}
+                                    className="inputPanel__field"
+                                    value={valg.value}
+                                    {...register(sporsmal.id, {
+                                        validate: (value) => valider(value),
+                                        required: feilmelding.global
+                                    })}
+                                />
+                                <span className="inputPanel__label">{valg.label}</span>
+                            </label>
+                        )
+                    })}
+                </div>
 
                 <Vis hvis={sporsmal?.tag === TagTyper.UTLANDSOPPHOLD_SOKT_SYKEPENGER && watchJaNei}
                     render={() =>
@@ -98,14 +97,16 @@ const JaNeiInput = ({ sporsmal }: SpmProps) => {
 
             <FeilLokal sporsmal={sporsmal} />
 
-            <AnimateOnMount
-                mounted={watchJaNei === sporsmal.kriterieForVisningAvUndersporsmal}
-                enter="undersporsmal--vis"
-                leave="undersporsmal--skjul"
-                start="undersporsmal"
-            >
-                <UndersporsmalListe oversporsmal={sporsmal} oversporsmalSvar={watchJaNei} />
-            </AnimateOnMount>
+            <div aria-live="assertive">
+                <AnimateOnMount
+                    mounted={watchJaNei === sporsmal.kriterieForVisningAvUndersporsmal}
+                    enter="undersporsmal--vis"
+                    leave="undersporsmal--skjul"
+                    start="undersporsmal"
+                >
+                    <UndersporsmalListe oversporsmal={sporsmal} oversporsmalSvar={watchJaNei} />
+                </AnimateOnMount>
+            </div>
 
             <Vis hvis={visAvgittAvBjorn()}
                 render={() =>

@@ -74,14 +74,16 @@ const CheckboxSingle = ({ parent, sporsmal }: AllProps) => {
                 {sporsmal.sporsmalstekst}
             </label>
 
-            <AnimateOnMount
-                mounted={watchCheck}
-                enter="undersporsmal--vis"
-                leave="undersporsmal--skjul"
-                start="undersporsmal"
-            >
-                <UndersporsmalListe oversporsmal={sporsmal} oversporsmalSvar={watchCheck ? 'CHECKED' : ''} />
-            </AnimateOnMount>
+            <div aria-live="assertive" className="undersporsmal">
+                <AnimateOnMount
+                    mounted={watchCheck}
+                    enter="undersporsmal--vis"
+                    leave="undersporsmal--skjul"
+                    start="undersporsmal"
+                >
+                    <UndersporsmalListe oversporsmal={sporsmal} oversporsmalSvar={watchCheck ? 'CHECKED' : ''} />
+                </AnimateOnMount>
+            </div>
         </div>
     )
 }

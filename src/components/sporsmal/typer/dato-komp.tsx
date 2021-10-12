@@ -60,7 +60,9 @@ const DatoInput = ({ sporsmal }: SpmProps) => {
 
             <FeilLokal sporsmal={sporsmal} />
 
-            <UndersporsmalListe oversporsmal={sporsmal} />
+            <div aria-live="assertive" className="undersporsmal">
+                <UndersporsmalListe oversporsmal={sporsmal} />
+            </div>
         </div>
     )
 }

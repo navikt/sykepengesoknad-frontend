@@ -52,7 +52,7 @@ const Perioder = ({ sporsmal }: SpmProps) => {
                 {tekst('sykepengesoknad.periodevelger.legg-til-ekstra')}
             </button>
 
-            <div className="undersporsmal">
+            <div aria-live="assertive" className="undersporsmal">
                 <UndersporsmalListe oversporsmal={sporsmal} />
             </div>
         </div>
