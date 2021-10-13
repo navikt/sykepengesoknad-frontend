@@ -109,9 +109,6 @@ describe('Tester arbeidsledigsøknad', () => {
     it('Søknad PERMITTERT_NAA - steg 6', () => {
         cy.url().should('include', `${soknad.id}/6`)
 
-        // Sjekk at sykmelding er minimert
-        cy.get('.sykmelding-perioder').should('not.be.visible')
-
         // Test spørsmål
         cy.get('.inputPanelGruppe__inner label:first-child > input[value=JA]').click({ force: true })
         cy.contains('Velg første dag i permitteringen')

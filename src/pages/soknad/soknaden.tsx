@@ -143,7 +143,7 @@ const Fordeling = () => {
                         }
                     />
 
-                    <Vis hvis={!erUtlandssoknad}
+                    <Vis hvis={!erUtlandssoknad && (stegNo == 1 || stegNo == valgtSoknad!.sporsmal.length-1)}
                         render={
                             () => {
                                 const sporsmal = valgtSoknad!.sporsmal[stegNo - 1]

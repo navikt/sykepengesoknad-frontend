@@ -207,8 +207,6 @@ describe('Tester arbeidstakersøknad - gradert 50%', () => {
     it('Søknad PERMITTERT_NAA', function() {
         cy.url().should('include', `${soknad.id}/11`)
 
-        // Sjekk at sykmelding er minimert
-        cy.get('.sykmelding-perioder').should('not.be.visible')
 
         // Test spørsmål
         cy.get('.inputPanelGruppe__inner label:first-child > input[value=JA]').click({ force: true })

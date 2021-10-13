@@ -37,8 +37,6 @@ describe('Tester behandlingsdagersøknad', () => {
     it('Søknad ENKELTSTAENDE_BEHANDLINGSDAGER - steg 2', function() {
         cy.url().should('include', `${soknad.id}/2`)
 
-        // Sjekk at sykmelding er minimert
-        cy.get('.sykmelding-perioder').should('not.be.visible')
 
         cy.contains('Du kan bare få én behandlingsdag i løpet av en uke. Trenger du flere slike dager, ber du legen om en gradert sykmelding i stedet.')
         cy.contains('Hvilke dager måtte du være helt borte fra jobben på grunn av behandling mellom 1. - 24. april 2020?')
