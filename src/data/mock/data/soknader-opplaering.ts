@@ -1045,7 +1045,7 @@ export const arbeidstakerGradert: RSSoknad = {
         {
             'id': '687311',
             'tag': 'JOBBET_DU_GRADERT_0',
-            'sporsmalstekst': 'Sykmelding sier du kunne jobbe 50 %. Jobbet du mer enn det?',
+            'sporsmalstekst': 'Sykmeldingen sier du kunne jobbe 50 %. Jobbet du mer enn det?',
             'undertekst': null,
             'svartype': 'JA_NEI',
             'min': null,
