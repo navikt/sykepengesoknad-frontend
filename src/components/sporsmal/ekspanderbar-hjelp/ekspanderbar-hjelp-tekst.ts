@@ -15,4 +15,6 @@ export const EkspanderbarHjelpTekster = {
     'ekspanderbarhjelp.tilbake_i_arbeid_gradert_reisetilskudd.innhold': 'Det er helt greit å gå tilbake til vanlig jobb før sykmeldingen er slutt - hvis du er klar for det. Da svarer du ja og skriver inn den dagen du ikke lenger trengte sykmelding og  reisetilskudd.',
     'ekspanderbarhjelp.tilbake_i_arbeid.tittel': 'Hvorfor spør vi om dette',
     'ekspanderbarhjelp.tilbake_i_arbeid.innhold': 'Det er helt greit å gå tilbake til vanlig jobb før sykmeldingen er slutt - hvis du er klar for det. Da svarer du ja og skriver inn den dagen du ikke lenger trengte sykmelding.',
+    'ekspanderbarhjelp.jobbet_du_gradert_arbeidstaker.tittel': 'Hvis du hadde færre arbeidsoppgaver',
+    'ekspanderbarhjelp.jobbet_du_gradert_arbeidstaker.innhold': 'Du har kanskje avtalt med arbeidsgiveren din at du skal ha færre arbeidsoppgaver, men bruke lengre tid på dem? Da svarer du i prosent hvor stor mengde av arbeidsoppgavene dine du har utført.',
 }

@@ -4,6 +4,7 @@ import React from 'react'
 
 import { useAppStore } from '../../../data/stores/app-store'
 import { TagTyper } from '../../../types/enums'
+import { RSArbeidssituasjon } from '../../../types/rs-types/rs-arbeidssituasjon'
 import { RSSoknadstype } from '../../../types/rs-types/rs-soknadstype'
 import { tekst } from '../../../utils/tekster'
 import { Ekspanderbar } from '../../ekspanderbar/ekspanderbar'
@@ -20,6 +21,9 @@ export const EkspanderbarHjelp = ({ sporsmal }: SpmProps) => {
     const skapNokkel = () => {
         if (sporsmal.tag == TagTyper.TILBAKE_I_ARBEID && valgtSoknad!.soknadstype == RSSoknadstype.GRADERT_REISETILSKUDD) {
             return 'tilbake_i_arbeid_gradert_reisetilskudd'
+        }
+        if (fjernIndexFraTag(sporsmal.tag) == TagTyper.JOBBET_DU_GRADERT && valgtSoknad!.arbeidssituasjon == RSArbeidssituasjon.ARBEIDSTAKER) {
+            return 'jobbet_du_gradert_arbeidstaker'
         }
         return fjernIndexFraTag(sporsmal.tag).toLowerCase()
     }
