@@ -104,7 +104,7 @@ const JaNeiRadio = ({ sporsmal }: SpmProps) => {
                 }
             />
 
-            <div aria-live="assertive" className="undersporsmal">
+            <div aria-live="assertive">
                 <AnimateOnMount
                     mounted={
                         watchJaNei === sporsmal.kriterieForVisningAvUndersporsmal &&

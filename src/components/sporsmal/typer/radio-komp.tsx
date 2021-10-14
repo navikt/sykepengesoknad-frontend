@@ -56,7 +56,7 @@ const RadioKomp = ({ sporsmal }: SpmProps) => {
                                 {uspm.sporsmalstekst}
                             </label>
 
-                            <div aria-live="assertive" className="undersporsmal">
+                            <div aria-live="assertive">
                                 <AnimateOnMount
                                     mounted={checked}
                                     enter="undersporsmal--vis"
