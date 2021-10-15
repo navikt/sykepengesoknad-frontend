@@ -179,6 +179,7 @@ describe('Tester arbeidstakersøknad - gradert 50%', () => {
         cy.contains('Hvilke andre inntektskilder har du?')
         cy.get('.undersporsmal .checkboxgruppe label[for=687322]').should('include.text', 'selvstendig næringsdrivende')
         cy.get('.undersporsmal .checkboxgruppe .checkboks#687322').click({ force: true })
+
         // Underspørsmål nivå 2 - radio
         cy.get('.undersporsmal .checkboxgruppe .radioContainer .radioknapp#687323_1').click()
 

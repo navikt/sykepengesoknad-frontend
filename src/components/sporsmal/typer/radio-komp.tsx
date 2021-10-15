@@ -26,7 +26,7 @@ const RadioKomp = ({ sporsmal }: SpmProps) => {
         // Tvangsoppdatering for å få riktig grad i advarselboksen (NB! vi vet det er stygt)
         if (watchRadio && watchRadio.toLowerCase() === 'timer') forceUpdate()
         // eslint-disable-next-line
-    }, [sporsmal])
+    }, [ sporsmal ])
 
     return (
         <>
@@ -56,14 +56,16 @@ const RadioKomp = ({ sporsmal }: SpmProps) => {
                                 {uspm.sporsmalstekst}
                             </label>
 
-                            <AnimateOnMount
-                                mounted={checked}
-                                enter="undersporsmal--vis"
-                                leave="undersporsmal--skjul"
-                                start="undersporsmal"
-                            >
-                                <UndersporsmalListe oversporsmal={uspm} oversporsmalSvar={checked ? 'CHECKED' : ''} />
-                            </AnimateOnMount>
+                            <div aria-live="assertive">
+                                <AnimateOnMount
+                                    mounted={checked}
+                                    enter="undersporsmal--vis"
+                                    leave="undersporsmal--skjul"
+                                    start="undersporsmal"
+                                >
+                                    <UndersporsmalListe oversporsmal={uspm} oversporsmalSvar={checked ? 'CHECKED' : ''} />
+                                </AnimateOnMount>
+                            </div>
                         </div>
                     )
                 })}

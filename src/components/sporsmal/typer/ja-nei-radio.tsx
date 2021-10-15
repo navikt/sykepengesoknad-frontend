@@ -104,18 +104,20 @@ const JaNeiRadio = ({ sporsmal }: SpmProps) => {
                 }
             />
 
-            <AnimateOnMount
-                mounted={
-                    watchJaNei === sporsmal.kriterieForVisningAvUndersporsmal &&
-                    sporsmal.tag !== TagTyper.UTLANDSOPPHOLD_SOKT_SYKEPENGER
-                    // TODO: Dette er en fix for å ikke vise underspørsmål, fjern denne etter hvert
-                }
-                enter="undersporsmal--vis"
-                leave="undersporsmal--skjul"
-                start="undersporsmal"
-            >
-                <UndersporsmalListe oversporsmal={sporsmal} oversporsmalSvar={watchJaNei} />
-            </AnimateOnMount>
+            <div aria-live="assertive">
+                <AnimateOnMount
+                    mounted={
+                        watchJaNei === sporsmal.kriterieForVisningAvUndersporsmal &&
+                        sporsmal.tag !== TagTyper.UTLANDSOPPHOLD_SOKT_SYKEPENGER
+                        // TODO: Dette er en fix for å ikke vise underspørsmål, fjern denne etter hvert
+                    }
+                    enter="undersporsmal--vis"
+                    leave="undersporsmal--skjul"
+                    start="undersporsmal"
+                >
+                    <UndersporsmalListe oversporsmal={sporsmal} oversporsmalSvar={watchJaNei} />
+                </AnimateOnMount>
+            </div>
         </>
     )
 }

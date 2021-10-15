@@ -139,7 +139,7 @@ const TallKomp = ({ sporsmal }: SpmProps) => {
                 }
             />
 
-            <div className="undersporsmal" ref={undersporsmal}>
+            <div aria-live="assertive" className="undersporsmal" ref={undersporsmal}>
                 <Vis hvis={watchTall}
                     render={() => <UndersporsmalListe oversporsmal={sporsmal} />}
                 />
