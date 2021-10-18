@@ -5,6 +5,7 @@ import React from 'react'
 
 import { tekst } from '../../../../utils/tekster'
 import Utvidbar from '../../../utvidbar/utvidbar'
+import Kontonummer from '../../kontonummer/kontonummer'
 
 const PerioderMedOpphold = () => {
 
@@ -25,6 +26,9 @@ const PerioderMedOpphold = () => {
             <div className="avsnitt">
                 <Element tag="h2" className="arbeidstaker-tittel">{tekst('kvittering.naar-blir-pengene')}</Element>
                 <Normaltekst tag="span">{tekst('kvittering.arbeidstaker.over16.utbetaling')} </Normaltekst>
+            </div>
+            <div className="avsnitt">
+                <Kontonummer />
             </div>
         </div>
     )

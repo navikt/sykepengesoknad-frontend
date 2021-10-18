@@ -76,8 +76,11 @@ const KvitteringTekster = {
 
     'kvittering.arbeidstaker.med-opphold': 'Du har vært friskmeldt inntil 16 dager siden sist du søkte om sykepenger. Da må arbeidsgiver sende oss inntektsmelding på nytt. Hør gjerne med arbeidsgiveren din hvis du er usikker på om den er sendt.',
     'kvittering.arbeidstaker.hvorfor-inntektsmelding-pa-nytt': 'Hvorfor inntektsmeldingen må sendes på nytt?',
-    'kvittering.arbeidstaker.hvorfor-inntektsmelding-pa-nytt.tekst': 'Lønn eller arbeidstid kan ha endret seg siden du var syk forrige gang. Dette får vi bare informasjon om gjennom inntektsmeldingen.'
+    'kvittering.arbeidstaker.hvorfor-inntektsmelding-pa-nytt.tekst': 'Lønn eller arbeidstid kan ha endret seg siden du var syk forrige gang. Dette får vi bare informasjon om gjennom inntektsmeldingen.',
 
+    'kvittering.kontonummer.tittel': 'Kontonummer for utbetaling',
+    'kvittering.kontonummer.mangler': 'Vi har ikke registrert noe kontonummer på deg, og anbefaler at du legger det inn på <a target="_blank" href="https://www.nav.no/person/personopplysninger/#utbetaling">Din profil</a>',
+    'kvittering.kontonummer.endre': 'Dersom du vil benytte et annet kontonummer for utbetaling fra NAV, kan du endre det på <a target="_blank" href="https://www.nav.no/person/personopplysninger/#utbetaling">Din profil</a>',
 }
 
 export default KvitteringTekster
