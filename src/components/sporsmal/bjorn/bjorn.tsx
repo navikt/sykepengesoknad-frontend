@@ -11,7 +11,7 @@ import BjornBildeStor from './bjorn-bilde-stor'
 
 interface BjornProps {
     bildeAlt?: string;
-    nokkel: string;
+    nokkel?: string;
     children?: React.ReactElement;
     hvit?: boolean;
     stor?: boolean;
