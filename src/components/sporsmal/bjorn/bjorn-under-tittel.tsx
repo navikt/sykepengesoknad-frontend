@@ -39,7 +39,7 @@ const BjornUnderTittel = ({ sporsmal }: SpmProps) => {
                     <Normaltekst>
                         {tekst(bjornTekst as any)}
                         <Lenke
-                            onClick={() => { logEvent('navigere', { lenketekst: bjornTekst + '_lenketekst' })}}
+                            onClick={() => { logEvent('navigere', { lenketekst: tekst((bjornTekst + '_lenketekst') as any) })}}
                             href={tekst((bjornTekst + '_lenke') as any) }
                             target={'_blank'}
                         >
