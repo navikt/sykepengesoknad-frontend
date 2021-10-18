@@ -33,7 +33,6 @@ export const ViktigInformasjon = () => {
                     <Element tag="h3">{tekst('viktig-informasjon.under-overskrift')}</Element>
                     <Normaltekst>{tekst('viktig-informasjon.avsnitt.3')}</Normaltekst>
                 </Veilederpanel>
-
             </div>
 
         )
