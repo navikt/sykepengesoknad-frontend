@@ -1,12 +1,14 @@
 import './banner.less'
 
-import { Sidetittel } from 'nav-frontend-typografi'
+import { Sidetittel, Systemtittel } from 'nav-frontend-typografi'
 import React from 'react'
 
 import { useAppStore } from '../../data/stores/app-store'
 import { RSSoknadstype } from '../../types/rs-types/rs-soknadstype'
+import { tilLesbarPeriodeMedArstall } from '../../utils/dato-utils'
 import { tekst } from '../../utils/tekster'
 import SykSokLokalt from '../brodsmuler/syk-sok-lokalt'
+import Vis from '../vis'
 
 interface BannerProps {
     overskrift?: string;
@@ -36,6 +38,13 @@ const Banner = ({ overskrift }: BannerProps) => {
             <Sidetittel tag="h1" className="sidebanner__tittel">
                 {overskrift === undefined ? tittel() : overskrift}
             </Sidetittel>
+            <Vis hvis={valgtSoknad && valgtSoknad.fom && valgtSoknad.tom}
+                render={() =>
+                    <Systemtittel>
+                        {tilLesbarPeriodeMedArstall(valgtSoknad!.fom, valgtSoknad!.tom)}
+                    </Systemtittel>
+                }
+            />
         </header>
     )
 }
