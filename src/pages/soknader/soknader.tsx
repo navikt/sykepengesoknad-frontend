@@ -26,7 +26,7 @@ const brodsmuler: Brodsmule[] = [ {
 } ]
 
 const Soknader = () => {
-    const { soknader } = useAppStore()
+    const { soknader, setValgtSoknad } = useAppStore()
     const nyeSoknader = soknader.filter((soknad) =>
         soknad.status === RSSoknadstatus.NY
         || soknad.status === RSSoknadstatus.UTKAST_TIL_KORRIGERING
@@ -41,6 +41,8 @@ const Soknader = () => {
 
     useEffect(() => {
         setBodyClass('soknader')
+        setValgtSoknad(undefined)
+        // eslint-disable-next-line
     }, [])
 
     return (
