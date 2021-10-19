@@ -1,11 +1,11 @@
 import './banner.less'
 
-import dayjs from 'dayjs'
 import { Sidetittel, Systemtittel } from 'nav-frontend-typografi'
 import React from 'react'
 
 import { useAppStore } from '../../data/stores/app-store'
 import { RSSoknadstype } from '../../types/rs-types/rs-soknadstype'
+import { tilLesbarPeriodeMedArstall } from '../../utils/dato-utils'
 import { tekst } from '../../utils/tekster'
 import SykSokLokalt from '../brodsmuler/syk-sok-lokalt'
 import Vis from '../vis'
@@ -41,9 +41,7 @@ const Banner = ({ overskrift }: BannerProps) => {
             <Vis hvis={valgtSoknad && valgtSoknad.fom && valgtSoknad.tom}
                 render={() =>
                     <Systemtittel>
-                        {dayjs(valgtSoknad!.fom).format('DD.MM.YYYY')}
-                        {' - '}
-                        {dayjs(valgtSoknad!.tom).format('DD.MM.YYYY')}
+                        {tilLesbarPeriodeMedArstall(valgtSoknad!.fom, valgtSoknad!.tom)}
                     </Systemtittel>
                 }
             />
