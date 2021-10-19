@@ -196,3 +196,9 @@ export enum UtgiftTyper {
 export function svarverdiToKvittering(kvittering: string): Kvittering {
     return new Kvittering(kvittering)
 }
+
+export interface Personalia {
+    personalia: {
+        kontonr: string
+    }
+}
