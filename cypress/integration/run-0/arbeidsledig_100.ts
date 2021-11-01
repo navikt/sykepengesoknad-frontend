@@ -33,7 +33,7 @@ describe('Tester arbeidsledigsøknad', () => {
 
         // Test spørsmål
         cy.get('.inputPanelGruppe__inner label:nth-child(2) > input[value=NEI]').click({ force: true })
-        cy.contains('Fra hvilken dato har du ikke lenger behov for sykmelding?')
+        cy.contains('Fra hvilken dato trengte du ikke lenger sykmeldingen?')
         cy.get('.nav-datovelger__kalenderknapp').click()
         cy.get('.DayPicker-Day').contains('20').click()
 

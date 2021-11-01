@@ -1503,7 +1503,7 @@ export const arbeidsledig: RSSoknad = {
                 {
                     'id': '687401',
                     'tag': 'FRISKMELDT_START',
-                    'sporsmalstekst': 'Fra hvilken dato har du ikke lenger behov for sykmelding?',
+                    'sporsmalstekst': 'Fra hvilken dato trengte du ikke lenger sykmeldingen?',
                     'undertekst': null,
                     'svartype': 'DATO',
                     'min': '2020-04-01',

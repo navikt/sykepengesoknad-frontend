@@ -847,7 +847,7 @@ export const sendtArbeidsledig: RSSoknad = {
         'undersporsmal': [ {
             'id': '48',
             'tag': 'FRISKMELDT_START',
-            'sporsmalstekst': 'Fra hvilken dato har du ikke lenger behov for sykmelding?',
+            'sporsmalstekst': 'Fra hvilken dato trengte du ikke lenger sykmeldingen?',
             'undertekst': null,
             'svartype': 'DATO',
             'min': '2020-05-27',
@@ -2169,7 +2169,7 @@ export const veldigLangSoknad: RSSoknad = {
             'undersporsmal': [ {
                 'id': '48',
                 'tag': 'FRISKMELDT_START',
-                'sporsmalstekst': 'Fra hvilken dato har du ikke lenger behov for sykmelding?',
+                'sporsmalstekst': 'Fra hvilken dato trengte du ikke lenger sykmeldingen?',
                 'undertekst': null,
                 'svartype': 'DATO',
                 'min': '2020-05-27',
@@ -3048,7 +3048,7 @@ export const sendtArbeidsledigKvittering: RSSoknad = {
                 {
                     'id': '99',
                     'tag': 'FRISKMELDT_START',
-                    'sporsmalstekst': 'Fra hvilken dato har du ikke lenger behov for sykmelding?',
+                    'sporsmalstekst': 'Fra hvilken dato trengte du ikke lenger sykmeldingen?',
                     'undertekst': null,
                     'svartype': 'DATO',
                     'min': '2020-01-01',
