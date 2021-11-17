@@ -4522,7 +4522,7 @@ export const brukertestSoknad: RSSoknad = {
     }, {
         'id': '1623808',
         'tag': 'TILBAKE_I_ARBEID',
-        'sporsmalstekst': 'Var du tilbake i fullt arbeid hos SNILL TORPEDO i løpet av perioden 8. - 21. februar 2021?',
+        'sporsmalstekst': 'Var du tilbake i fullt arbeid hos MATBUTIKKEN AS i løpet av perioden 8. - 21. februar 2021?',
         'undertekst': null,
         'svartype': 'JA_NEI',
         'min': null,
@@ -4618,7 +4618,7 @@ export const brukertestSoknad: RSSoknad = {
     }, {
         'id': '1623841',
         'tag': 'JOBBET_DU_100_PROSENT_0',
-        'sporsmalstekst': 'I perioden 8. - 21. februar 2021 var du 100 % sykmeldt fra SNILL TORPEDO. Jobbet du noe i denne perioden?',
+        'sporsmalstekst': 'I perioden 8. - 21. februar 2021 var du 100 % sykmeldt fra MATBUTIKKEN AS. Jobbet du noe i denne perioden?',
         'undertekst': null,
         'svartype': 'JA_NEI',
         'min': null,
@@ -4714,7 +4714,7 @@ export const brukertestSoknad: RSSoknad = {
     }, {
         'id': '1623816',
         'tag': 'ANDRE_INNTEKTSKILDER',
-        'sporsmalstekst': 'Har du andre inntektskilder enn SNILL TORPEDO? Du trenger ikke oppgi penger fra NAV.',
+        'sporsmalstekst': 'Har du andre inntektskilder enn MATBUTIKKEN AS? Du trenger ikke oppgi penger fra NAV.',
         'undertekst': null,
         'svartype': 'JA_NEI',
         'min': null,
