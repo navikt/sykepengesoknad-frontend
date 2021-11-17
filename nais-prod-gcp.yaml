@@ -46,3 +46,5 @@ spec:
       value: "https://www.nav.no/person/dittnav"
     - name: DECORATOR_ENV
       value: "prod"
+    - name: NARMESTELEDER_ROOT
+      value: "https://narmesteleder.nav.no"
