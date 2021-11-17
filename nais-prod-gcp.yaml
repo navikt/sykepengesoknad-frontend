@@ -12,7 +12,7 @@ spec:
     - "https://www.nav.no/syk/sykepengesoknad"
   replicas:
     min: 2
-    max: 2
+    max: 3
     cpuThresholdPercentage: 50
   resources:
     limits:

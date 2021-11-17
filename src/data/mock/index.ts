@@ -14,7 +14,9 @@ import {
     arbeidstakerInnenforArbeidsgiverperiodeKvittering,
     arbeidstakerMedOppholdForsteUtenforArbeidsgiverperiodeKvittering,
     arbeidstakerUtenforArbeidsgiverperiodeKvittering,
-    arbeidstakerUtenOppholdForsteUtenforArbeidsgiverperiodeKvittering, foranArbeidstakerMedOppholdKvittering,
+    arbeidstakerUtenOppholdForsteUtenforArbeidsgiverperiodeKvittering,
+    brukertestSoknad,
+    foranArbeidstakerMedOppholdKvittering,
     sok6,
     soknaderIntegration,
     soknadSomTriggerFeilStatusForOppdaterSporsmal,
@@ -30,10 +32,18 @@ const mock = FetchMock.configure({
     )
 })
 
-const soknader = [ ...jsonDeepCopy(soknaderOpplaering), nyttReisetilskudd, gradertReisetilskudd ]
-if (!env.isOpplaering() || window.location.href.includes('alle-mock-data')) {
-    soknader.push(...jsonDeepCopy(soknaderIntegration))
+const finnSoknader = (): RSSoknad[] => {
+    if (window.location.search.includes('brukertest')) {
+        return [ jsonDeepCopy(brukertestSoknad) ]
+    }
+    const soknader = [ ...jsonDeepCopy(soknaderOpplaering), nyttReisetilskudd, gradertReisetilskudd ]
+    if (!env.isOpplaering() || window.location.href.includes('alle-mock-data')) {
+        soknader.push(...jsonDeepCopy(soknaderIntegration))
+    }
+    return soknader
 }
+
+const soknader = finnSoknader()
 
 mock.put(`${env.flexGatewayRoot()}/syfosoknad/api/soknader/:soknad/sporsmal/:sporsmal`,
     (req) => {
