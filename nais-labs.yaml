@@ -10,6 +10,17 @@ spec:
   port: 8080
   ingresses:
     - "https://sykepengesoknad.labs.nais.io/"
+  replicas:
+    min: 2
+    max: 3
+    cpuThresholdPercentage: 50
+  resources:
+    limits:
+      cpu: 500m
+      memory: 256Mi
+    requests:
+      cpu: 200m
+      memory: 256Mi
   liveness:
     path: internal/isAlive
   readiness:
