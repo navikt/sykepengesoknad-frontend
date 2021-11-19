@@ -25,6 +25,10 @@ export const EkspanderbarHjelp = ({ sporsmal }: SpmProps) => {
         if (fjernIndexFraTag(sporsmal.tag) == TagTyper.JOBBET_DU_GRADERT && valgtSoknad!.arbeidssituasjon == RSArbeidssituasjon.ARBEIDSTAKER) {
             return 'jobbet_du_gradert_arbeidstaker'
         }
+        if (sporsmal.tag == TagTyper.ANDRE_INNTEKTSKILDER && valgtSoknad!.arbeidssituasjon == RSArbeidssituasjon.FRILANSER) {
+            // Hjelpeteksten er ikke kompatibel med svaralternativene for frilanser
+            return null
+        }
         return fjernIndexFraTag(sporsmal.tag).toLowerCase()
     }
 
@@ -36,7 +40,7 @@ export const EkspanderbarHjelp = ({ sporsmal }: SpmProps) => {
 
 
     return (
-        <Vis hvis={harTekst()}
+        <Vis hvis={nokkel && harTekst()}
             render={() => {
 
                 const tittel = tekst(`ekspanderbarhjelp.${nokkel}.tittel` as any)
