@@ -17,4 +17,9 @@ export const EkspanderbarHjelpTekster = {
     'ekspanderbarhjelp.tilbake_i_arbeid.innhold': 'Det er helt greit å gå tilbake til vanlig jobb før sykmeldingen er slutt - hvis du er klar for det. Da svarer du ja og skriver inn den dagen du ikke lenger trengte sykmelding.',
     'ekspanderbarhjelp.jobbet_du_gradert_arbeidstaker.tittel': 'Hvis du hadde færre arbeidsoppgaver',
     'ekspanderbarhjelp.jobbet_du_gradert_arbeidstaker.innhold': 'Du har kanskje avtalt med arbeidsgiveren din at du skal ha færre arbeidsoppgaver, men bruke lengre tid på dem? Da svarer du i prosent hvor stor mengde av arbeidsoppgavene dine du har utført.',
+    'ekspanderbarhjelp.andre_inntektskilder.tittel': 'Hva mener vi med andre inntektskilder?',
+    'ekspanderbarhjelp.andre_inntektskilder.innhold': 'Vi mener bare inntekter som er pensjonsgivende. Som oftest vil det si inntekt fra arbeid du har utført. Penger du får fra NAV, trenger du ikke oppgi selv om de er pensjonsgivende.<br/><br/>Svarer du ja på spørsmålet, får du en liste å krysse av på. Velg frilanser hvis du får fosterhjemsgodtgjørelse eller honorar fra verv, for eksempel styreverv i bedrifter eller borettslag.',
+    'ekspanderbarhjelp.utdanning.tittel': 'Hvorfor spør vi om dette',
+    'ekspanderbarhjelp.utdanning.innhold': 'I utgangspunktet får du ikke sykepenger mens du er under utdanning. Det er likevel noen tilfeller der du kan ha rett til penger fra NAV mens du studerer. <a target="_blank" href="https://www.nav.no/no/person/arbeid/sykmeldt-arbeidsavklaringspenger-og-yrkesskade/sykepenger/sykepenger-under-utdanning">Les mer om sykepenger under utdanning.</a>',
+
 }
