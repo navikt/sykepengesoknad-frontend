@@ -42,10 +42,6 @@ class Environment implements EnvironmentInterface {
         return this.env.LOGINSERVICE_REDIRECT_URL
     }
 
-    narmestelederRoot() {
-        return this.env.NARMESTELEDER_ROOT
-    }
-
     amplitudeKey() {
         return this.env.AMPLITUDE_KEY
     }
@@ -82,8 +78,6 @@ interface EnvironmentInterface {
     loginServiceUrl(): string
 
     sykmeldingerBackendProxyRoot(): string
-
-    narmestelederRoot(): string
 
     isOpplaering(): boolean
 
@@ -130,8 +124,6 @@ function hentEnvironment(): EnvironmentInterface {
             }, loginServiceUrl(): string {
                 return ''
             }, sykefravaerUrl(): string {
-                return ''
-            }, narmestelederRoot(): string {
                 return ''
             }, sykmeldingerBackendProxyRoot(): string {
                 return ''
