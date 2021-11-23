@@ -163,8 +163,3 @@ mock.get(`${env.flexGatewayRoot()}/flex-bucket-uploader/kvittering/:blob`,
     () => fetch(KvitteringJPG)
 )
 
-mock.get(`${env.narmestelederRoot()}/user/sykmeldt/narmesteledere`,
-    (req, res, ctx) => res(ctx.json([ {
-        orgnummer: '974654458',
-        arbeidsgiverForskutterer: false,
-    } ])))
