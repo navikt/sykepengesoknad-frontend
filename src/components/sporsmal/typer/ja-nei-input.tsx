@@ -10,6 +10,7 @@ import AnimateOnMount from '../../animate-on-mount'
 import FeilLokal from '../../feil/feil-lokal'
 import Vis from '../../vis'
 import Bjorn from '../bjorn/bjorn'
+import BjornUnderTittel from '../bjorn/bjorn-under-tittel'
 import SporsmalBjorn from '../bjorn/sporsmal-bjorn'
 import { EkspanderbarHjelp } from '../ekspanderbar-hjelp/ekspanderbar-hjelp'
 import { SpmProps } from '../sporsmal-form/sporsmal-form'
@@ -59,8 +60,14 @@ const JaNeiInput = ({ sporsmal }: SpmProps) => {
                     {sporsmal.sporsmalstekst}
                 </Element>
 
+                <Vis hvis={sporsmal?.tag === TagTyper.FERIE_V2}
+                    render={() =>
+                        <BjornUnderTittel sporsmal={sporsmal} />
+                    }
+                />
+
                 <EkspanderbarHjelp sporsmal={sporsmal} />
-                
+
                 <div className="inputPanelGruppe__inner">
                     {jaNeiValg.map((valg, idx) => {
                         const OK = watchJaNei === valg.value

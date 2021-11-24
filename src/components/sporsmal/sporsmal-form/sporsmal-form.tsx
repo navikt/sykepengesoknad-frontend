@@ -253,7 +253,11 @@ const SporsmalForm = () => {
                 noValidate={true}   // Ikke native validation
                 className={'sporsmal__form ' + nesteSporsmal?.tag?.toLowerCase()}>
 
-                <BjornUnderTittel sporsmal={sporsmal} />
+                <Vis hvis={sporsmal.tag !== TagTyper.FERIE_V2 && sporsmal.tag !== TagTyper.ENKELTSTAENDE_BEHANDLINGSDAGER}
+                    render={() =>
+                        <BjornUnderTittel sporsmal={sporsmal} />
+                    }
+                />
 
                 <SporsmalSwitch sporsmal={sporsmal} />
 

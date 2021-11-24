@@ -2,7 +2,10 @@ import './beh.dager.less'
 
 import React, { useEffect } from 'react'
 
+import { TagTyper } from '../../../types/enums'
 import FeilLokal from '../../feil/feil-lokal'
+import Vis from '../../vis'
+import BjornUnderTittel from '../bjorn/bjorn-under-tittel'
 import { SpmProps } from '../sporsmal-form/sporsmal-form'
 import SporsmalstekstH3 from '../sporsmalstekst/sporsmalstekstH3'
 import BehandlingsUke from './behandlings-uke'
@@ -11,6 +14,12 @@ const BehDager = ({ sporsmal }: SpmProps) => {
     return (
         <>
             <SporsmalstekstH3 sporsmal={sporsmal} />
+
+            <Vis hvis={sporsmal?.tag === TagTyper.ENKELTSTAENDE_BEHANDLINGSDAGER}
+                render={() =>
+                    <BjornUnderTittel sporsmal={sporsmal} />
+                }
+            />
 
             <div className="skjemaelement">
                 <div className="skjema__beh-dager">
