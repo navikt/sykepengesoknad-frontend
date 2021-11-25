@@ -12,29 +12,26 @@ import { SpmProps } from '../sporsmal-form/sporsmal-form'
 import { fjernIndexFraTag } from '../sporsmal-utils'
 import Bjorn from './bjorn'
 
-
-const BjornUnderTittel = ({ sporsmal }: SpmProps) => {
+const BjornUnderSporsmalstekst = ({ sporsmal }: SpmProps) => {
     const { valgtSoknad } = useAppStore()
     const { logEvent } = useAmplitudeInstance()
 
-    const harBjorntekst = (tag: TagTyper) =>
-        tag === TagTyper.BRUKTE_REISETILSKUDDET ||
-        tag === TagTyper.ENKELTSTAENDE_BEHANDLINGSDAGER ||
-        tag === TagTyper.FRAVER_FOR_BEHANDLING ||
-        tag === TagTyper.PERIODEUTLAND
-
     const bjornTekst= `soknad.bjorn.${fjernIndexFraTag(sporsmal.tag).toLowerCase()}`
 
-    const harBjornMedAmplitude = (tag: TagTyper) => (tag === TagTyper.FERIE_V2 && valgtSoknad?.status === RSSoknadstatus.NY)
+    const bjornVeileder = (tag: TagTyper) =>
+        tag === TagTyper.ENKELTSTAENDE_BEHANDLINGSDAGER
+
+    const bjornVeilederOgMaaler = (tag: TagTyper) =>
+        tag === TagTyper.FERIE_V2 && valgtSoknad?.status === RSSoknadstatus.NY
 
     return (
         <>
-            <Vis hvis={harBjorntekst(sporsmal.tag)}
+            <Vis hvis={bjornVeileder(sporsmal.tag)}
                 render={() =>
                     <Bjorn className="blokk-m" nokkel={ bjornTekst } />
                 }
             />
-            <Vis hvis={harBjornMedAmplitude(sporsmal.tag)} render={() =>
+            <Vis hvis={bjornVeilederOgMaaler(sporsmal.tag)} render={() =>
                 <Bjorn className="blokk-m" >
                     <Normaltekst>
                         {tekst(bjornTekst as any)}
@@ -51,4 +48,4 @@ const BjornUnderTittel = ({ sporsmal }: SpmProps) => {
     )
 }
 
-export default BjornUnderTittel
+export default BjornUnderSporsmalstekst

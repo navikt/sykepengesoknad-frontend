@@ -10,6 +10,7 @@ import AnimateOnMount from '../../animate-on-mount'
 import FeilLokal from '../../feil/feil-lokal'
 import Vis from '../../vis'
 import Bjorn from '../bjorn/bjorn'
+import BjornUnderSporsmalstekst from '../bjorn/bjorn-under-sporsmalstekst'
 import SporsmalBjorn from '../bjorn/sporsmal-bjorn'
 import { EkspanderbarHjelp } from '../ekspanderbar-hjelp/ekspanderbar-hjelp'
 import { SpmProps } from '../sporsmal-form/sporsmal-form'
@@ -59,8 +60,10 @@ const JaNeiInput = ({ sporsmal }: SpmProps) => {
                     {sporsmal.sporsmalstekst}
                 </Element>
 
+                <BjornUnderSporsmalstekst sporsmal={sporsmal} />
+
                 <EkspanderbarHjelp sporsmal={sporsmal} />
-                
+
                 <div className="inputPanelGruppe__inner">
                     {jaNeiValg.map((valg, idx) => {
                         const OK = watchJaNei === valg.value
