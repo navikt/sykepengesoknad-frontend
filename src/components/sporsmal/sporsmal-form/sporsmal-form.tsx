@@ -25,7 +25,7 @@ import { useAmplitudeInstance } from '../../amplitude/amplitude'
 import FeilOppsummering from '../../feil/feil-oppsummering'
 import Oppsummering from '../../oppsummering/oppsummering'
 import Vis from '../../vis'
-import BjornUnderTittel from '../bjorn/bjorn-under-tittel'
+import BjornOverSporsmalstekst from '../bjorn/bjorn-over-sporsmalstekst'
 import { hentFormState, hentSvar } from '../hent-svar'
 import InfotekstOverSubmit from '../infotekst-over-submit'
 import { settSvar } from '../sett-svar'
@@ -253,11 +253,7 @@ const SporsmalForm = () => {
                 noValidate={true}   // Ikke native validation
                 className={'sporsmal__form ' + nesteSporsmal?.tag?.toLowerCase()}>
 
-                <Vis hvis={sporsmal.tag !== TagTyper.FERIE_V2 && sporsmal.tag !== TagTyper.ENKELTSTAENDE_BEHANDLINGSDAGER}
-                    render={() =>
-                        <BjornUnderTittel sporsmal={sporsmal} />
-                    }
-                />
+                <BjornOverSporsmalstekst sporsmal={sporsmal} />
 
                 <SporsmalSwitch sporsmal={sporsmal} />
 
