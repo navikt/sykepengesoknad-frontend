@@ -6,7 +6,6 @@ const BjornTekster = {
     'soknad.bjorn.ferie_v2_lenke': 'https://www.nav.no/no/person/arbeid/sykmeldt-arbeidsavklaringspenger-og-yrkesskade/papirsykmelding/hvorfor-spor-vi-om-ferie-i-soknaden-om-sykepenger',
     'soknad.bjorn.fraver_for_behandling' : 'Vi trenger å vite om du har brukt egenmeldinger eller en papirsykmelding noen dager før denne sykmeldingen. Det er for å kunne beregne sykepengene dine riktig.',
     'soknad.bjorn.periodeutland' : 'Vil du beholde sykepengene mens du er på reise, kan du ikke være borte i mer enn 4 uker i løpet av en 12 måneders periode.',
-    'soknad.bjorn.kvitteringer' : 'Du må laste opp kvitteringer hvis du har hatt ekstra utgifter til<br/> <ul> <li>taxi</li><li>offentlig transport</li><li>parkering</li></ul>Kvitteringene må kunne leses av en saksbehandler. Det tryggeste er å laste opp én kvittering om gangen.',
     'bekreft-sykmelding.skal-opprettes-soknad.bjorn': '<p>Du lurer kanskje på hvorfor du må søke som sykepenger på papir?</p>\n<p>Vi jobber med å digitalisere søknaden om sykepenger for selvstendig næringsdrivende og frilansere, men vi er dessverre ikke helt ferdige ennå.</p>',
     'sykepengesoknad.angi-tid.bjorn': 'Du har kanskje avtalt med arbeidsgiveren din at du skal ha færre arbeidsoppgaver, men bruke lenger tid på dem enn vanlig? Da svarer du i prosent hvor stor mengde av arbeidsoppgavene dine du har utført.',
     'sykepengesoknad.ferie.bjorn': 'Du lurer kanskje på hvorfor vi spør om ferie før du ble sykmeldt? Det er fordi vi må se om dette sykefraværet henger sammen med forrige periode du var syk.',

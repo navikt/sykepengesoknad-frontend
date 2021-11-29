@@ -19,6 +19,11 @@ const OpplastingTekster = {
     'opplasting_modal.tilbake': 'Tilbake',
     'opplasting_modal.type-utgift.label': 'Type utgift',
     'opplasting_modal.endre-utlegg.hjelpetekst': 'Du kan foreløpig ikke redigere utgifter som du har lagt til. Men du kan slette den som er feil, og legge inn på nytt.',
+    'soknad.bjorn.kvitteringer-del1' : 'Du må laste opp kvitteringer hvis du har hatt ekstra utgifter til:',
+    'soknad.bjorn.kvitteringer-del2-kulepunkt1' : 'taxi',
+    'soknad.bjorn.kvitteringer-del2-kulepunkt2' : 'offentlig transport',
+    'soknad.bjorn.kvitteringer-del2-kulepunkt3' : 'parkering',
+    'soknad.bjorn.kvitteringer-del3' : 'Kvitteringene må kunne leses av en saksbehandler. Det tryggeste er å laste opp én kvittering om gangen.',
 }
 
 export default OpplastingTekster
