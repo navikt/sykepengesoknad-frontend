@@ -21,9 +21,6 @@ export const hentHotjarJsTrigger = (soknadstype: RSSoknadstype, sted: 'kvitterin
             case RSSoknadstype.OPPHOLD_UTLAND:
                 return 'SOKNAD_OPPHOLD_UTENFOR_NORGE'
             case RSSoknadstype.ARBEIDSTAKERE:
-                if (sted == 'kvittering') {
-                    return 'SOKNAD_ARBEIDSTAKER_KVITTERING'
-                }
                 return null
             case RSSoknadstype.ARBEIDSLEDIG:
                 return 'SOKNAD_ARBEIDSLEDIG'
