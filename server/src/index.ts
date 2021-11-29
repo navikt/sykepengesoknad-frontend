@@ -29,7 +29,8 @@ server.get(`${basePath}/env-config-server.js`, (req, res) => {
     SYKEFRAVAER_URL: '${process.env.SYKEFRAVAER_URL}',
     DITTNAV_URL: '${process.env.DITTNAV_URL}',
     OPPLAERING: '${process.env.OPPLAERING}',
-    SYKMELDINGER_BACKEND_PROXY_ROOT: '${process.env.SYKMELDINGER_BACKEND_PROXY_ROOT}'
+    SYKMELDINGER_BACKEND_PROXY_ROOT: '${process.env.SYKMELDINGER_BACKEND_PROXY_ROOT}',
+    NARMESTELEDER_ROOT: '${process.env.NARMESTELEDER_ROOT}'
 }`)
 })
 
