@@ -49,7 +49,6 @@ const Opplasting = ({ sporsmal }: SpmProps) => {
                 <Normaltekst>{tekst('soknad.bjorn.kvitteringer-del3')}</Normaltekst>
             </AlertStripe>
 
-            {/*TODO: Fikse ikonen sånn at den endrer fill ved hover. Teksten skal ikke være i caps*/}
             <Knapp
                 className="fler-vedlegg"
                 onClick={aktiverModal}
