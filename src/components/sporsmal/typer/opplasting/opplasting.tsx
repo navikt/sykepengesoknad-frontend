@@ -1,6 +1,7 @@
 import './opplasting.less'
 
 import AlertStripe from 'nav-frontend-alertstriper'
+import { Knapp } from 'nav-frontend-knapper'
 import Modal from 'nav-frontend-modal'
 import { Element, Normaltekst } from 'nav-frontend-typografi'
 import React from 'react'
@@ -46,10 +47,11 @@ const Opplasting = ({ sporsmal }: SpmProps) => {
                 <Normaltekst>{tekst('soknad.bjorn.kvitteringer-del3')}</Normaltekst>
             </AlertStripe>
 
-            <button className="fler-vedlegg" onClick={aktiverModal} type="button">
+            {/*TODO: Fikse ikonen sånn at den endrer fill ved hover. Teksten skal ikke være i caps*/}
+            <Knapp className="fler-vedlegg" onClick={aktiverModal}>
                 <img className="pluss-ikon" src={PlussIkon} alt="" />
                 <Normaltekst tag="span">{tekst('opplasting.legg-til')}</Normaltekst>
-            </button>
+            </Knapp>
 
             <Modal
                 isOpen={openModal}
