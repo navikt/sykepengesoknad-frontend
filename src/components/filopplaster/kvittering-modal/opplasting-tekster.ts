@@ -12,7 +12,7 @@ const OpplastingTekster = {
     'opplasting_modal.transportmiddel.feilmelding': 'Du må velge transportmiddel',
     'opplasting_modal.feiloppsummering': 'For å gå videre må du rette opp følgende:',
     'opplasting_modal.filtyper': 'Tillatte filtyper er %FILTYPER%.',
-    'opplasting_modal.maksfilstr': 'Maks bildestørrelse er %MAKSFILSTR%.',
+    'opplasting_modal.maksfilstr': ' Maks bildestørrelse er %MAKSFILSTR%.',
     'opplasting_modal.bekreft': 'Bekreft',
     'opplasting_modal.slett': 'Slett',
     'opplasting_modal.vil-slette': 'Vil du slette kvitteringen?',
@@ -25,7 +25,7 @@ const OpplastingTekster = {
     'soknad.info.kvitteringer-del2-kulepunkt3' : 'parkering',
     'soknad.info.kvitteringer-del3' : 'Kvitteringene må kunne leses av en saksbehandler. Det tryggeste er å laste opp én kvittering om gangen.',
     'soknad.info.kvitteringer-PDF-tittel' : 'Fikk du kvitteringen som PDF?',
-    'soknad.info.kvitteringer-PDF-tekst' : 'Vi klarer dessverre ikke å ta imot PDF, men du kan gjøre den om til et bilde. Du kan enten ta en skjermdump, eller du kan ta bilde av kvitteringen med telefonen.',
+    'soknad.info.kvitteringer-PDF-tekst' : 'Vi klarer dessverre ikke å ta imot PDF, men du kan gjøre den om til et bilde. Du kan enten ta en skjermdump, eller du kan ta bilde av kvitteringen med telefonen. ',
 }
 
 export default OpplastingTekster
