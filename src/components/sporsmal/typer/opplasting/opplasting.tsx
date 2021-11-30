@@ -50,6 +50,7 @@ const Opplasting = ({ sporsmal }: SpmProps) => {
             </AlertStripe>
 
             <Knapp
+                htmlType="button"
                 className="fler-vedlegg"
                 onClick={aktiverModal}
                 onMouseEnter={() => ikonRef.current!.src = PlussIkonHover}
