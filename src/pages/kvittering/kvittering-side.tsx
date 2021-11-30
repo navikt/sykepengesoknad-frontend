@@ -13,12 +13,8 @@ import Kvittering from '../../components/kvittering/kvittering'
 import Vis from '../../components/vis'
 import { useAppStore } from '../../data/stores/app-store'
 import { RSSoknadstatus } from '../../types/rs-types/rs-soknadstatus'
-import { RSSoknadstype } from '../../types/rs-types/rs-soknadstype'
 import { Brodsmule } from '../../types/types'
 import { SEPARATOR } from '../../utils/constants'
-import env from '../../utils/environment'
-import fetcher from '../../utils/fetcher'
-import { logger } from '../../utils/logger'
 import { tekst } from '../../utils/tekster'
 import { setBodyClass } from '../../utils/utils'
 
@@ -35,7 +31,6 @@ const brodsmuler: Brodsmule[] = [ {
 const KvitteringSide = () => {
     const { valgtSoknad, soknader, setValgtSoknad, setValgtSykmelding, sykmeldinger } = useAppStore()
     const [ erSiste, setErSiste ] = useState<boolean>()
-    const [ hotjarTrigger, setHotjarTrigger ] = useState<string | null>(null)
 
     const { id } = useParams<RouteParams>()
 
@@ -54,44 +49,7 @@ const KvitteringSide = () => {
         // eslint-disable-next-line
     }, []);
 
-    useEffect(() => {
-        if (valgtSoknad) {
-            if (valgtSoknad.soknadstype == RSSoknadstype.ARBEIDSTAKERE) {
-                fetch(`${env.narmestelederRoot()}/user/sykmeldt/narmesteledere`, {
-                    method: 'GET',
-                    credentials: 'include',
-                    headers: { 'Content-Type': 'application/json' }
-                }).then(async(r) => {
-                    interface NarmesteLeder {
-                        navn?: string;
-                        orgnummer: string;
-                        aktivFom: string;
-                        aktivTom?: string;  // Er null hvis fortsatt aktiv leder
-                        arbeidsgiverForskutterer?: boolean;
-                    }
-
-                    if (r.status == 200) {
-                        const ledere = await r.json() as NarmesteLeder[]
-                        const utenForskuttering = ledere
-                            .filter((a) => !a.aktivTom)
-                            .filter((a) => a.orgnummer == valgtSoknad.arbeidsgiver?.orgnummer)
-                            .find((a) => a.arbeidsgiverForskutterer == false)
-                        if (utenForskuttering) {
-                            setHotjarTrigger('FLEX_REKRUTTERING_REFUSJON')
-                        }
-                    }
-                }).catch((e) => {
-                    // eslint-disable-next-line no-console
-                    logger.error('feil ved sjekk av narmesteleder refusjon', e)
-                })
-            } else {
-                setHotjarTrigger(hentHotjarJsTrigger(valgtSoknad.soknadstype, 'kvittering'))
-            }
-        }
-    }, [ valgtSoknad ])
-
     if (!valgtSoknad) return null
-
 
     return (
         <>
@@ -99,7 +57,7 @@ const KvitteringSide = () => {
             <Brodsmuler brodsmuler={brodsmuler} />
 
             <div className="limit">
-                <HotjarTrigger jsTrigger={hotjarTrigger}>
+                <HotjarTrigger jsTrigger={hentHotjarJsTrigger(valgtSoknad.soknadstype, 'kvittering')}>
                     <Kvittering />
                 </HotjarTrigger>
 
