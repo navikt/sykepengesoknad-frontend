@@ -8,10 +8,6 @@ import { Element, Normaltekst } from 'nav-frontend-typografi'
 import React, { useRef } from 'react'
 
 import { useAppStore } from '../../../../data/stores/app-store'
-import {
-    formaterFilstørrelse,
-    maxFilstørrelse
-} from '../../../../utils/fil-utils'
 import { tekst } from '../../../../utils/tekster'
 import { Ekspanderbar } from '../../../ekspanderbar/ekspanderbar'
 import FilListe from '../../../filopplaster/fil-liste/fil-liste'
