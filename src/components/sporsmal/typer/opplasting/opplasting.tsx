@@ -10,10 +10,9 @@ import React, { useRef } from 'react'
 import { useAppStore } from '../../../../data/stores/app-store'
 import {
     formaterFilstørrelse,
-    formattertFiltyper,
     maxFilstørrelse
 } from '../../../../utils/fil-utils'
-import { getLedetekst,tekst } from '../../../../utils/tekster'
+import { tekst } from '../../../../utils/tekster'
 import { Ekspanderbar } from '../../../ekspanderbar/ekspanderbar'
 import FilListe from '../../../filopplaster/fil-liste/fil-liste'
 import OpplastingForm from '../../../filopplaster/kvittering-modal/opplasting-form'
@@ -24,7 +23,6 @@ import PlussIkonHover from './pluss-ikon-hover.svg'
 const Opplasting = ({ sporsmal }: SpmProps) => {
     const { setValgtKvittering, openModal, setOpenModal } = useAppStore()
     const ikonRef = useRef<HTMLImageElement>(null)
-    const maks = formaterFilstørrelse(maxFilstørrelse)
 
     Modal.setAppElement('#maincontent')
 
@@ -59,18 +57,8 @@ const Opplasting = ({ sporsmal }: SpmProps) => {
 
             <div className="pdf-hjelp">
                 <Ekspanderbar title={tekst('soknad.info.kvitteringer-PDF-tittel')} sporsmalId={sporsmal.id}>
-                    <Normaltekst className="restriksjoner">
+                    <Normaltekst>
                         {parser(tekst('soknad.info.kvitteringer-PDF-tekst'))}
-                        <span className="filtype">{
-                            getLedetekst(tekst('opplasting_modal.filtyper'), {
-                                '%FILTYPER%': formattertFiltyper
-                            })
-                        }</span>
-                        <span className="filstr">{
-                            getLedetekst(tekst('opplasting_modal.maksfilstr'), {
-                                '%MAKSFILSTR%': maks
-                            })
-                        }</span>
                     </Normaltekst>
                 </Ekspanderbar>
             </div>
