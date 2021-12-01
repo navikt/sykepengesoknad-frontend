@@ -16,6 +16,12 @@ export const filstørrelseTilBytes = (filstørrelse: string): number => {
     return verdi * (k ** i)
 }
 
+export const formattertFiltyper = 'png, jpg og mobile bildeformater'
+
+export const tillatteFiltyper = 'image/png,image/jpeg,image/heic'.split(',')
+
+export const maxFilstørrelse = filstørrelseTilBytes('5MB')
+
 export const customTruncet = (text: string, size: number) => {
     return text.length <= size
         ? text

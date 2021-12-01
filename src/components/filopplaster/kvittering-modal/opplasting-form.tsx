@@ -1,6 +1,7 @@
 import './opplasting-form.less'
 
 import dayjs from 'dayjs'
+import parser from 'html-react-parser'
 import Alertstripe from 'nav-frontend-alertstriper'
 import AlertStripe from 'nav-frontend-alertstriper'
 import { Knapp } from 'nav-frontend-knapper'
@@ -17,8 +18,10 @@ import { RSSvar } from '../../../types/rs-types/rs-svar'
 import { Kvittering, Sporsmal, UtgiftTyper } from '../../../types/types'
 import env from '../../../utils/environment'
 import fetcher from '../../../utils/fetcher'
+import { formaterFilstørrelse, formattertFiltyper, maxFilstørrelse } from '../../../utils/fil-utils'
 import { logger } from '../../../utils/logger'
-import { tekst } from '../../../utils/tekster'
+import { getLedetekst,tekst } from '../../../utils/tekster'
+import { Ekspanderbar } from '../../ekspanderbar/ekspanderbar'
 import Slettknapp from '../../slettknapp/slettknapp'
 import { SpmProps } from '../../sporsmal/sporsmal-form/sporsmal-form'
 import Vis from '../../vis'
@@ -38,6 +41,7 @@ const OpplastingForm = ({ sporsmal }: SpmProps) => {
     const { stegId } = useParams<RouteParams>()
     const stegNum = Number(stegId)
     const spmIndex = stegNum - 1
+    const maks = formaterFilstørrelse(maxFilstørrelse)
 
     const methods = useForm({
         mode: 'onBlur',
@@ -147,6 +151,23 @@ const OpplastingForm = ({ sporsmal }: SpmProps) => {
                         </AlertStripe>
                     }
                 />
+                <Normaltekst className="restriksjoner">
+                    <span className="filtype">{
+                        getLedetekst(tekst('opplasting_modal.filtyper'), {
+                            '%FILTYPER%': formattertFiltyper
+                        })
+                    }</span>
+                    <span className="filstr">{
+                        getLedetekst(tekst('opplasting_modal.maksfilstr'), {
+                            '%MAKSFILSTR%': maks
+                        })
+                    }</span>
+                </Normaltekst>
+                <div className="pdf-hjelp">
+                    <Ekspanderbar title={tekst('soknad.info.kvitteringer-PDF-tittel')} sporsmalId={sporsmal.id}>
+                        <Normaltekst> {parser(tekst('soknad.info.kvitteringer-PDF-tekst'))} </Normaltekst>
+                    </Ekspanderbar>
+                </div>
                 <div className="skjemakolonner">
                     <div className="skjemaelement">
                         <label htmlFor="transportmiddel" className="skjemaelement__label">

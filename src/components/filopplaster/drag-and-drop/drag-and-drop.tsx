@@ -7,16 +7,18 @@ import { useFormContext } from 'react-hook-form'
 
 import { useAppStore } from '../../../data/stores/app-store'
 import env from '../../../utils/environment'
-import { customTruncet, filstørrelseTilBytes, formaterFilstørrelse } from '../../../utils/fil-utils'
+import {
+    customTruncet,
+    formaterFilstørrelse,
+    formattertFiltyper,
+    maxFilstørrelse,
+    tillatteFiltyper } from '../../../utils/fil-utils'
 import { logger } from '../../../utils/logger'
 import { getLedetekst, tekst } from '../../../utils/tekster'
 import Utvidbar from '../../utvidbar/utvidbar'
 import Vis from '../../vis'
 import binders from './binders.svg'
 
-const formattertFiltyper = 'png, jpg og mobile bildeformater'
-const tillatteFiltyper = 'image/png,image/jpeg,image/heic'.split(',')
-const maxFilstørrelse = filstørrelseTilBytes('5MB')
 const maks = formaterFilstørrelse(maxFilstørrelse)
 
 const DragAndDrop = () => {
@@ -154,18 +156,6 @@ const DragAndDrop = () => {
                             </Normaltekst>
                         </div>
 
-                        <Normaltekst className="restriksjoner">
-                            <span className="filtype">{
-                                getLedetekst(tekst('opplasting_modal.filtyper'), {
-                                    '%FILTYPER%': formattertFiltyper
-                                })
-                            }</span>
-                            <span className="filstr">{
-                                getLedetekst(tekst('opplasting_modal.maksfilstr'), {
-                                    '%MAKSFILSTR%': maks
-                                })
-                            }</span>
-                        </Normaltekst>
                     </>
                 }
             />
