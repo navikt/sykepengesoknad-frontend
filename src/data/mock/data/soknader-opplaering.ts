@@ -119,7 +119,7 @@ export const behandlingsdager: RSSoknad = {
         {
             'id': '687380',
             'tag': 'ANDRE_INNTEKTSKILDER',
-            'sporsmalstekst': 'Har du andre inntektskilder enn POSTEN NORGE AS, BÆRUM? Du trenger ikke oppgi penger fra NAV.',
+            'sporsmalstekst': 'Har du andre inntektskilder enn POSTEN NORGE AS, BÆRUM?',
             'undertekst': null,
             'svartype': 'JA_NEI',
             'min': null,
@@ -569,7 +569,7 @@ export const arbeidstaker: RSSoknad = {
         {
             'id': '687356',
             'tag': 'ANDRE_INNTEKTSKILDER',
-            'sporsmalstekst': 'Har du andre inntektskilder enn POSTEN NORGE AS, BÆRUM? Du trenger ikke oppgi penger fra NAV.',
+            'sporsmalstekst': 'Har du andre inntektskilder enn POSTEN NORGE AS, BÆRUM?',
             'undertekst': null,
             'svartype': 'JA_NEI',
             'min': null,
@@ -1153,7 +1153,7 @@ export const arbeidstakerGradert: RSSoknad = {
         {
             'id': '687318',
             'tag': 'ANDRE_INNTEKTSKILDER',
-            'sporsmalstekst': 'Har du andre inntektskilder enn POSTEN NORGE AS, BÆRUM? Du trenger ikke oppgi penger fra NAV.',
+            'sporsmalstekst': 'Har du andre inntektskilder enn POSTEN NORGE AS, BÆRUM?',
             'undertekst': null,
             'svartype': 'JA_NEI',
             'min': null,
@@ -1518,7 +1518,7 @@ export const arbeidsledig: RSSoknad = {
         {
             'id': '687402',
             'tag': 'ANDRE_INNTEKTSKILDER',
-            'sporsmalstekst': 'Har du hatt inntekt mens du har vært sykmeldt i perioden 1. - 24. april 2020? Du trenger ikke oppgi penger fra NAV.',
+            'sporsmalstekst': 'Har du hatt inntekt mens du har vært sykmeldt i perioden 1. - 24. april 2020?',
             'undertekst': null,
             'svartype': 'JA_NEI',
             'min': null,
@@ -2073,7 +2073,7 @@ export const frilanser: RSSoknad = {
         {
             'id': '687438',
             'tag': 'ANDRE_INNTEKTSKILDER',
-            'sporsmalstekst': 'Har du annen inntekt? Du trenger ikke oppgi penger fra NAV.',
+            'sporsmalstekst': 'Har du annen inntekt?',
             'undertekst': null,
             'svartype': 'JA_NEI',
             'min': null,
