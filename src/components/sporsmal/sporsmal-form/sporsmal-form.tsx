@@ -138,7 +138,6 @@ const SporsmalForm = () => {
         }
     }
 
-
     const hentMottaker = () => {
         rsMottakerResponseFetch.fetch(env.flexGatewayRoot() + `/syfosoknad/api/soknader/${valgtSoknad!.id}/finnMottaker`, {
             method: 'POST',
@@ -260,7 +259,6 @@ const SporsmalForm = () => {
                 <Vis hvis={erSiste && !erUtlandssoknad}
                     render={() =>
                         <>
-                            <Oppsummering ekspandert={false} />
                             <CheckboxPanel sporsmal={nesteSporsmal} />
                             <SendesTil />
                         </>
