@@ -485,7 +485,7 @@ export const gradertReisetilskudd: RSSoknad = {
     {
         'id': '1547224',
         'tag': 'ANDRE_INNTEKTSKILDER',
-        'sporsmalstekst': 'Har du andre inntektskilder enn SNILL TORPEDO? Du trenger ikke oppgi penger fra NAV.',
+        'sporsmalstekst': 'Har du andre inntektskilder enn SNILL TORPEDO?',
         'undertekst': null,
         'svartype': 'JA_NEI',
         'min': null,

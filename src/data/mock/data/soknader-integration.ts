@@ -433,7 +433,7 @@ export const avbruttSoknad: RSSoknad = {
         {
             'id': '111',
             'tag': 'ANDRE_INNTEKTSKILDER',
-            'sporsmalstekst': 'Har du andre inntektskilder enn 995816598 sitt orgnavn :)? Du trenger ikke oppgi penger fra NAV.',
+            'sporsmalstekst': 'Har du andre inntektskilder enn 995816598 sitt orgnavn :)?',
             'undertekst': null,
             'svartype': 'JA_NEI',
             'min': null,
@@ -860,7 +860,7 @@ export const sendtArbeidsledig: RSSoknad = {
     }, {
         'id': '49',
         'tag': 'ANDRE_INNTEKTSKILDER',
-        'sporsmalstekst': 'Har du hatt inntekt mens du har vært sykmeldt i perioden 27. mai - 11. juni 2020? Du trenger ikke oppgi penger fra NAV.',
+        'sporsmalstekst': 'Har du hatt inntekt mens du har vært sykmeldt i perioden 27. mai - 11. juni 2020?',
         'undertekst': null,
         'svartype': 'JA_NEI',
         'min': null,
@@ -1217,7 +1217,7 @@ export const veldigLangSoknad: RSSoknad = {
         {
             'id': '687356',
             'tag': 'ANDRE_INNTEKTSKILDER',
-            'sporsmalstekst': 'Har du andre inntektskilder enn POSTEN NORGE AS, BÆRUM? Du trenger ikke oppgi penger fra NAV.',
+            'sporsmalstekst': 'Har du andre inntektskilder enn POSTEN NORGE AS, BÆRUM?',
             'undertekst': null,
             'svartype': 'JA_NEI',
             'min': null,
@@ -1393,7 +1393,7 @@ export const veldigLangSoknad: RSSoknad = {
         {
             'id': '49',
             'tag': 'ANDRE_INNTEKTSKILDER',
-            'sporsmalstekst': 'Har du hatt inntekt mens du har vært sykmeldt i perioden 27. mai - 11. juni 2020? Du trenger ikke oppgi penger fra NAV.',
+            'sporsmalstekst': 'Har du hatt inntekt mens du har vært sykmeldt i perioden 27. mai - 11. juni 2020?',
             'undertekst': null,
             'svartype': 'JA_NEI',
             'min': null,
@@ -3063,7 +3063,7 @@ export const sendtArbeidsledigKvittering: RSSoknad = {
         {
             'id': '100',
             'tag': 'ANDRE_INNTEKTSKILDER',
-            'sporsmalstekst': 'Har du hatt inntekt mens du har vært sykmeldt i perioden 1. - 10. januar 2020? Du trenger ikke oppgi penger fra NAV.',
+            'sporsmalstekst': 'Har du hatt inntekt mens du har vært sykmeldt i perioden 1. - 10. januar 2020?',
             'undertekst': null,
             'svartype': 'JA_NEI',
             'min': null,
@@ -4714,7 +4714,7 @@ export const brukertestSoknad: RSSoknad = {
     }, {
         'id': '1623816',
         'tag': 'ANDRE_INNTEKTSKILDER',
-        'sporsmalstekst': 'Har du andre inntektskilder enn MATBUTIKKEN AS? Du trenger ikke oppgi penger fra NAV.',
+        'sporsmalstekst': 'Har du andre inntektskilder enn MATBUTIKKEN AS?',
         'undertekst': null,
         'svartype': 'JA_NEI',
         'min': null,
