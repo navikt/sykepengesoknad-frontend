@@ -36,8 +36,8 @@ describe('Tester feilmeldinger', () => {
         gaVidere()
 
         feilmeldingHandtering(
-            'Du må bekrefte dette',
-            'Du må bekrefte dette før du går videre',
+            'Du må bekrefte at du har lest og forstått informasjonen før du kan gå videre',
+            'Du må bekrefte at du har lest og forstått informasjonen før du kan gå videre',
             arbeidstakerGradert.sporsmal[0].id
         )
         cy.focused().click({ force: true })
