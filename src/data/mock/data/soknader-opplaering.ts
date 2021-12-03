@@ -2073,7 +2073,7 @@ export const frilanser: RSSoknad = {
         {
             'id': '687438',
             'tag': 'ANDRE_INNTEKTSKILDER',
-            'sporsmalstekst': 'Har du annen inntekt?',
+            'sporsmalstekst': 'Har du annen inntekt? Du trenger ikke oppgi penger fra NAV.',
             'undertekst': null,
             'svartype': 'JA_NEI',
             'min': null,
