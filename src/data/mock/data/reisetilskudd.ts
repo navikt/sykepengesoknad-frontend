@@ -603,7 +603,7 @@ export const gradertReisetilskudd: RSSoknad = {
             }, {
                 'id': '1547234',
                 'tag': 'INNTEKTSKILDE_FRILANSER',
-                'sporsmalstekst': 'frilanser',
+                'sporsmalstekst': 'frilanser / styreverv',
                 'undertekst': null,
                 'svartype': 'CHECKBOX',
                 'min': null,

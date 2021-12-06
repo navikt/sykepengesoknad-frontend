@@ -251,7 +251,7 @@ export const behandlingsdager: RSSoknad = {
                         {
                             'id': '687390',
                             'tag': 'INNTEKTSKILDE_FRILANSER',
-                            'sporsmalstekst': 'frilanser',
+                            'sporsmalstekst': 'frilanser / styreverv',
                             'undertekst': null,
                             'svartype': 'CHECKBOX',
                             'min': null,
@@ -701,7 +701,7 @@ export const arbeidstaker: RSSoknad = {
                         {
                             'id': '687366',
                             'tag': 'INNTEKTSKILDE_FRILANSER',
-                            'sporsmalstekst': 'frilanser',
+                            'sporsmalstekst': 'frilanser / styreverv',
                             'undertekst': null,
                             'svartype': 'CHECKBOX',
                             'min': null,
@@ -1285,7 +1285,7 @@ export const arbeidstakerGradert: RSSoknad = {
                         {
                             'id': '687328',
                             'tag': 'INNTEKTSKILDE_FRILANSER',
-                            'sporsmalstekst': 'frilanser',
+                            'sporsmalstekst': 'frilanser / styreverv',
                             'undertekst': null,
                             'svartype': 'CHECKBOX',
                             'min': null,
@@ -1650,7 +1650,7 @@ export const arbeidsledig: RSSoknad = {
                         {
                             'id': '687412',
                             'tag': 'INNTEKTSKILDE_FRILANSER',
-                            'sporsmalstekst': 'frilanser',
+                            'sporsmalstekst': 'frilanser / styreverv',
                             'undertekst': null,
                             'svartype': 'CHECKBOX',
                             'min': null,
