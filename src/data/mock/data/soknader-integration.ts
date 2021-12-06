@@ -565,7 +565,7 @@ export const avbruttSoknad: RSSoknad = {
                         {
                             'id': '121',
                             'tag': 'INNTEKTSKILDE_FRILANSER',
-                            'sporsmalstekst': 'frilanser / styreverv',
+                            'sporsmalstekst': 'frilanser',
                             'undertekst': null,
                             'svartype': 'CHECKBOX',
                             'min': null,
@@ -978,7 +978,7 @@ export const sendtArbeidsledig: RSSoknad = {
             }, {
                 'id': '59',
                 'tag': 'INNTEKTSKILDE_FRILANSER',
-                'sporsmalstekst': 'frilanser / styreverv',
+                'sporsmalstekst': 'frilanser',
                 'undertekst': null,
                 'svartype': 'CHECKBOX',
                 'min': null,
@@ -1349,7 +1349,7 @@ export const veldigLangSoknad: RSSoknad = {
                         {
                             'id': '687366',
                             'tag': 'INNTEKTSKILDE_FRILANSER',
-                            'sporsmalstekst': 'frilanser / styreverv',
+                            'sporsmalstekst': 'frilanser',
                             'undertekst': null,
                             'svartype': 'CHECKBOX',
                             'min': null,
@@ -1516,7 +1516,7 @@ export const veldigLangSoknad: RSSoknad = {
                     {
                         'id': '59',
                         'tag': 'INNTEKTSKILDE_FRILANSER',
-                        'sporsmalstekst': 'frilanser / styreverv',
+                        'sporsmalstekst': 'frilanser',
                         'undertekst': null,
                         'svartype': 'CHECKBOX',
                         'min': null,
@@ -3200,7 +3200,7 @@ export const sendtArbeidsledigKvittering: RSSoknad = {
                         {
                             'id': '110',
                             'tag': 'INNTEKTSKILDE_FRILANSER',
-                            'sporsmalstekst': 'frilanser / styreverv',
+                            'sporsmalstekst': 'frilanser',
                             'undertekst': null,
                             'svartype': 'CHECKBOX',
                             'min': null,
