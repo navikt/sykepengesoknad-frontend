@@ -14,7 +14,6 @@ import { hentHotjarJsTrigger, HotjarTrigger } from '../../components/hotjar-trig
 import HvorforSoknadSykepenger from '../../components/hvorfor-soknad-sykepenger/hvorfor-soknad-sykepenger'
 import OmReisetilskudd from '../../components/om-reisetilskudd/om-reisetilskudd'
 import Opplysninger from '../../components/opplysninger-fra-sykmelding/opplysninger'
-import Oppsummering from '../../components/oppsummering/oppsummering'
 import { ViktigInformasjon } from '../../components/soknad-intro/viktig-informasjon'
 import SoknadMedToDeler from '../../components/soknad-med-to-deler/soknad-med-to-deler'
 import SporsmalForm from '../../components/sporsmal/sporsmal-form/sporsmal-form'
@@ -144,18 +143,12 @@ const Fordeling = () => {
                         }
                     />
 
-                    <Vis hvis={!erUtlandssoknad && (stegNo == 1 || stegNo == valgtSoknad!.sporsmal.length-1)}
+                    <Vis hvis={!erUtlandssoknad && (stegNo === 1)}
                         render={
                             () => {
-                                const sporsmal = valgtSoknad!.sporsmal[stegNo - 1]
-                                return <Opplysninger ekspandert={stegNo == 1} steg={sporsmal.tag} />
+                                const sporsmal = valgtSoknad!.sporsmal[ stegNo - 1 ]
+                                return <Opplysninger ekspandert={true} steg={sporsmal.tag} />
                             }}
-                    />
-
-                    <Vis hvis={!erUtlandssoknad && stegNo == valgtSoknad!.sporsmal.length-1}
-                        render={() =>
-                            <Oppsummering ekspandert={false} />
-                        }
                     />
 
                     <Vis hvis={stegNo === 1 && !erUtlandssoknad}
