@@ -4832,7 +4832,7 @@ export const brukertestSoknad: RSSoknad = {
             }, {
                 'id': '1623826',
                 'tag': 'INNTEKTSKILDE_FRILANSER',
-                'sporsmalstekst': 'frilanser',
+                'sporsmalstekst': 'frilanser / styreverv',
                 'undertekst': null,
                 'svartype': 'CHECKBOX',
                 'min': null,
