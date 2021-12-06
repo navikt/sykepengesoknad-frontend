@@ -4627,18 +4627,6 @@ export const brukertestSoknad: RSSoknad = {
         'kriterieForVisningAvUndersporsmal': 'JA',
         'svar': [],
         'undersporsmal': [ {
-            'id': '1623842',
-            'tag': 'HVOR_MANGE_TIMER_PER_UKE_0',
-            'sporsmalstekst': 'Hvor mange timer i uken jobber du vanligvis når du er frisk? Varierer det, kan du oppgi gjennomsnittet.',
-            'undertekst': 'timer per uke',
-            'svartype': 'TALL',
-            'min': '1',
-            'max': '150',
-            'pavirkerAndreSporsmal': false,
-            'kriterieForVisningAvUndersporsmal': null,
-            'svar': [],
-            'undersporsmal': []
-        }, {
             'id': '1623843',
             'tag': 'HVOR_MYE_HAR_DU_JOBBET_0',
             'sporsmalstekst': 'Hvor mye jobbet du tilsammen 8. - 21. februar 2021?',
@@ -4698,6 +4686,18 @@ export const brukertestSoknad: RSSoknad = {
                     'undersporsmal': []
                 } ]
             } ]
+        } ,  {
+            'id': '1623842',
+            'tag': 'HVOR_MANGE_TIMER_PER_UKE_0',
+            'sporsmalstekst': 'Hvor mange timer i uken jobber du vanligvis når du er frisk? Varierer det, kan du oppgi gjennomsnittet.',
+            'undertekst': 'timer per uke',
+            'svartype': 'TALL',
+            'min': '1',
+            'max': '150',
+            'pavirkerAndreSporsmal': false,
+            'kriterieForVisningAvUndersporsmal': null,
+            'svar': [],
+            'undersporsmal': []
         } ]
     }, {
         'id': '1623836',
