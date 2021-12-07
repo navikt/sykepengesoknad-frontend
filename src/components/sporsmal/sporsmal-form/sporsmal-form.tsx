@@ -23,6 +23,7 @@ import fetcher from '../../../utils/fetcher'
 import { logger } from '../../../utils/logger'
 import { useAmplitudeInstance } from '../../amplitude/amplitude'
 import FeilOppsummering from '../../feil/feil-oppsummering'
+import Opplysninger from '../../opplysninger-fra-sykmelding/opplysninger'
 import Oppsummering from '../../oppsummering/oppsummering'
 import Vis from '../../vis'
 import BjornOverSporsmalstekst from '../bjorn/bjorn-over-sporsmalstekst'
@@ -259,6 +260,8 @@ const SporsmalForm = () => {
                 <Vis hvis={erSiste && !erUtlandssoknad}
                     render={() =>
                         <>
+                            <Oppsummering ekspandert={false} />
+                            <Opplysninger ekspandert={false} steg={sporsmal.tag} />
                             <CheckboxPanel sporsmal={nesteSporsmal} />
                             <SendesTil />
                         </>
