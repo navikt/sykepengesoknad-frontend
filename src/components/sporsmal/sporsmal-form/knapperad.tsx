@@ -8,6 +8,7 @@ import { RouteParams } from '../../../app'
 import { useAppStore } from '../../../data/stores/app-store'
 import { RSSoknadstype } from '../../../types/rs-types/rs-soknadstype'
 import { tekst } from '../../../utils/tekster'
+import PersonvernLesMer from '../../soknad-intro/personvern-les-mer'
 import Vis from '../../vis'
 import { avbrytSoknad } from './avbryt-soknad'
 
@@ -23,7 +24,9 @@ const Knapperad = ({ poster }: KnapperadProps) => {
     const { stegId } = useParams<RouteParams>()
     const [ avbryter, setAvbryter ] = useState<boolean>(false)
 
-    const spmIndex = parseInt(stegId) - 2
+    const stegNo = parseInt(stegId)
+    const spmIndex = stegNo - 2
+    const erUtlandssoknad = valgtSoknad!.soknadstype === RSSoknadstype.OPPHOLD_UTLAND
 
     const nokkel = spmIndex === valgtSoknad!.sporsmal.length - (valgtSoknad!.soknadstype === RSSoknadstype.OPPHOLD_UTLAND ? 2 : 3)
         ? 'sykepengesoknad.send'
@@ -91,6 +94,11 @@ const Knapperad = ({ poster }: KnapperadProps) => {
                     }
                 />
             </div>
+            <Vis hvis={stegNo === 1 && !erUtlandssoknad}
+                render={() =>
+                    <PersonvernLesMer />
+                }
+            />
         </div>
     )
 }
