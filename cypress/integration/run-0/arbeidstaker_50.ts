@@ -44,7 +44,7 @@ describe('Tester arbeidstakersøknad - gradert 50%', () => {
         // Test spørsmål
         cy.get('.inputPanelGruppe__inner label:first-child > input[value=JA]').click({ force: true })
 
-        cy.contains('Hvilke dager var du syk og borte fra jobb? Du trenger bare oppgi dager før 1. april 2020.')
+        cy.contains('Hvilke dager var du syk og borte fra jobb, før du ble sykmeldt? Du trenger bare oppgi dager før 1. april 2020.')
         cy.get('#687299_0 .fom .nav-datovelger__kalenderknapp').click()
 
         cy.get('.DayPicker-Day').contains('11').click()

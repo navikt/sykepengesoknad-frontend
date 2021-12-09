@@ -1847,7 +1847,7 @@ export const veldigLangSoknad: RSSoknad = {
         {
             'id': '12345678',
             'tag': 'FRAVAR_FOR_SYKMELDINGEN',
-            'sporsmalstekst': 'Var du syk og borte fra jobb mellom 16. - 31. mars 2020?',
+            'sporsmalstekst': 'Var du syk og borte fra jobb før du ble sykmeldt, i perioden 16. - 31. mars 2020?',
             'undertekst': null,
             'svartype': 'JA_NEI',
             'min': null,
@@ -1859,7 +1859,7 @@ export const veldigLangSoknad: RSSoknad = {
                 {
                     'id': '1234567899',
                     'tag': 'FRAVAR_FOR_SYKMELDINGEN_NAR',
-                    'sporsmalstekst': 'Hvilke dager var du syk og borte fra jobb? Du trenger bare oppgi dager før 1. april 2020.',
+                    'sporsmalstekst': 'Hvilke dager var du syk og borte fra jobb, før du ble sykmeldt? Du trenger bare oppgi dager før 1. april 2020.',
                     'undertekst': null,
                     'svartype': 'PERIODER',
                     'min': '2019-10-01',
@@ -4498,7 +4498,7 @@ export const brukertestSoknad: RSSoknad = {
     }, {
         'id': '1623834',
         'tag': 'FRAVAR_FOR_SYKMELDINGEN',
-        'sporsmalstekst': 'Var du syk og borte fra jobb mellom 23. januar - 7. februar 2021?',
+        'sporsmalstekst': 'Var du syk og borte fra jobb før du ble sykmeldt, i perioden 23. januar - 7. februar 2021?',
         'undertekst': null,
         'svartype': 'JA_NEI',
         'min': null,
@@ -4509,7 +4509,7 @@ export const brukertestSoknad: RSSoknad = {
         'undersporsmal': [ {
             'id': '1623835',
             'tag': 'FRAVAR_FOR_SYKMELDINGEN_NAR',
-            'sporsmalstekst': 'Hvilke dager var du syk og borte fra jobb? Du trenger bare oppgi dager før 8. februar 2021.',
+            'sporsmalstekst': 'Hvilke dager var du syk og borte fra jobb, før du ble sykmeldt? Du trenger bare oppgi dager før 8. februar 2021.',
             'undertekst': null,
             'svartype': 'PERIODER',
             'min': '2020-08-08',
