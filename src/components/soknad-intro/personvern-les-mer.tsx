@@ -3,10 +3,12 @@ import './personvern-les-mer.less'
 import parser from 'html-react-parser'
 import ModalWrapper from 'nav-frontend-modal'
 import { Normaltekst, Systemtittel } from 'nav-frontend-typografi'
-import React, { useState } from 'react'
+import React, { MouseEvent,useState } from 'react'
 
 import { useAppStore } from '../../data/stores/app-store'
 import { tekst } from '../../utils/tekster'
+
+type Event = MouseEvent<HTMLAnchorElement | HTMLButtonElement>;
 
 const PersonvernLesMer = () => {
     const [ aapen, setAapen ] = useState<boolean>(false)
@@ -16,10 +18,15 @@ const PersonvernLesMer = () => {
         return null
     }
 
+    const handleAapen = (event: Event) => {
+        event.preventDefault()
+        setAapen(true)
+    }
+
+
     return (
         <>
-            <button className="lenke no-border"
-                onClick={() => setAapen(true)}>
+            <button className="lenke no-border" onClick={handleAapen}>
                 {tekst('sykepengesoknad.soknad-intro.personvern-les-mer')}
             </button>
             <ModalWrapper className={'personvern-modal'} onRequestClose={() => setAapen(false)}

@@ -6,7 +6,6 @@ import React from 'react'
 
 import { RSSoknadstype } from '../../types/rs-types/rs-soknadstype'
 import { tekst } from '../../utils/tekster'
-import PersonvernLesMer from '../soknad-intro/personvern-les-mer'
 import Vis from '../vis'
 
 interface HvorforSoknadSykepengerProps {
@@ -42,7 +41,6 @@ const HvorforSoknadSykepenger = ({ soknadstype }:HvorforSoknadSykepengerProps) =
                 }
             />
 
-            <PersonvernLesMer />
         </Ekspanderbartpanel>
     )
 }
