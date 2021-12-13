@@ -84,7 +84,6 @@ const TallKomp = ({ sporsmal }: SpmProps) => {
                     })}
                     min={sporsmal.min!}
                     max={sporsmal.max!}
-                    step="undefined"
                     className={
                         'skjemaelement__input' +
                         inputSize() +
