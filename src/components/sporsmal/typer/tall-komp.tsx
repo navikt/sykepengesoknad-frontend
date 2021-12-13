@@ -1,3 +1,5 @@
+import './tall-komp.less'
+
 import AlertStripe from 'nav-frontend-alertstriper'
 import { Normaltekst } from 'nav-frontend-typografi'
 import React, { useRef } from 'react'
