@@ -1,5 +1,5 @@
 const HvorforSoknadSykepengerTekster = {
-    'hvorfor-soknad-sykepenger.overskrift': 'Hvorfor må jeg søke',
+    'hvorfor-soknad-sykepenger.overskrift': 'Hvorfor må jeg søke om sykepenger?',
     'hvorfor-soknad-sykepenger': 'Ifølge folketrygdloven kan du få sykepenger hvis du oppfyller kravene.',
     'hvorfor-soknad-reisetilskudd': 'Ifølge folketrygdloven kan du få reisetilskudd hvis du har rett til sykepenger. Reisetilskuddet kommer da i stedet for sykepengene.',
     'hvorfor-soknad-gradertreisetilskudd': 'Ifølge folketrygdloven kan du få sykepenger og reisetilskudd hvis du oppfyller kravene.',
