@@ -1,3 +1,5 @@
+import './tall-komp.less'
+
 import AlertStripe from 'nav-frontend-alertstriper'
 import { Normaltekst } from 'nav-frontend-typografi'
 import React, { useRef } from 'react'
@@ -56,18 +58,6 @@ const TallKomp = ({ sporsmal }: SpmProps) => {
         }
     }
 
-    const step = () => {
-        switch (sporsmal.svartype) {
-            case RSSvartype.PROSENT:
-            case RSSvartype.BELOP:
-                return 1
-            case RSSvartype.KILOMETER:
-                return 0.1
-            default:
-                return 0.05
-        }
-    }
-
     return (
         <div className={className()}>
             <SporsmalstekstH3 sporsmal={sporsmal} />
@@ -99,7 +89,6 @@ const TallKomp = ({ sporsmal }: SpmProps) => {
                         inputSize() +
                         (errors[sporsmal.id] ? ' skjemaelement__input--harFeil' : '')
                     }
-                    step={step()}
                     autoComplete="off"
                 />
                 <label className="medEnhet__enhet" htmlFor={sporsmal.id}>{sporsmal.undertekst}</label>
