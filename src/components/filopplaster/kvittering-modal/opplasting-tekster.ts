@@ -16,6 +16,8 @@ const OpplastingTekster = {
     'opplasting_modal.bekreft': 'Bekreft',
     'opplasting_modal.slett': 'Slett',
     'opplasting_modal.vil-slette': 'Vil du slette kvitteringen?',
+    'opplasting_modal.vil-slette.ja': 'Ja, jeg er sikker',
+    'opplasting_modal.vil-slette.angre': 'Angre',
     'opplasting_modal.tilbake': 'Tilbake',
     'opplasting_modal.type-utgift.label': 'Type utgift',
     'opplasting_modal.endre-utlegg.hjelpetekst': 'Du kan foreløpig ikke redigere utgifter som du har lagt til. Men du kan slette den som er feil, og legge inn på nytt.',

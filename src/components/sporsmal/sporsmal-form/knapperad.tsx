@@ -72,7 +72,7 @@ const Knapperad = ({ poster }: KnapperadProps) => {
             <Knapp type="hoved" htmlType="submit" spinner={poster}>{tekst(nokkel)}</Knapp>
             <div className="avbrytDialog blokk-l">
                 <button className="lenke avbrytlenke avbrytDialog__trigger" onClick={handleVilAvbryte}>
-                    <Normaltekst tag="span">{tekst('sykepengesoknad.avbryt.trigger')}</Normaltekst>
+                    <Normaltekst tag="span">{tekst('sykepengesoknad.avbryt.simpel')}</Normaltekst>
                 </button>
                 <Vis hvis={vilAvbryte}
                     render={() =>
