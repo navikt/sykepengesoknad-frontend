@@ -77,12 +77,10 @@ const Knapperad = ({ poster }: KnapperadProps) => {
                 <Vis hvis={vilAvbryte}
                     render={() =>
                         <div ref={avbrytDialog} className="avbrytDialog__dialog pekeboble">
-                            <div style={{ textAlign: 'left' }}>
-                                <Normaltekst>{tekst('sykepengesoknad.avbryt.sporsmal.forklaring')}</Normaltekst>
-                                <Normaltekst style={{ marginTop: '1rem', marginBottom: '1rem' }}>
-                                    <strong>{tekst('sykepengesoknad.avbryt.sporsmal')}</strong>
-                                </Normaltekst>
-                            </div>
+                            <Normaltekst>{tekst('sykepengesoknad.avbryt.sporsmal.forklaring')}</Normaltekst>
+                            <Normaltekst style={{ marginTop: '1rem', marginBottom: '1rem' }}>
+                                <strong>{tekst('sykepengesoknad.avbryt.sporsmal')}</strong>
+                            </Normaltekst>
                             <div className="blokk-xs">
                                 <Fareknapp spinner={avbryter}
                                     onClick={handleAvbryt}>{tekst('sykepengesoknad.avbryt.ja')}</Fareknapp>
