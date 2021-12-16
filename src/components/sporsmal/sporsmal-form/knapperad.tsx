@@ -1,3 +1,4 @@
+import dayjs from 'dayjs'
 import Alertstripe from 'nav-frontend-alertstriper'
 import { Fareknapp, Knapp } from 'nav-frontend-knapper'
 import { Normaltekst } from 'nav-frontend-typografi'
@@ -7,7 +8,8 @@ import { useHistory, useParams } from 'react-router-dom'
 import { RouteParams } from '../../../app'
 import { useAppStore } from '../../../data/stores/app-store'
 import { RSSoknadstype } from '../../../types/rs-types/rs-soknadstype'
-import { tekst } from '../../../utils/tekster'
+import { tilLesbarDatoMedArstall } from '../../../utils/dato-utils'
+import { getLedetekst,tekst } from '../../../utils/tekster'
 import PersonvernLesMer from '../../soknad-intro/personvern-les-mer'
 import Vis from '../../vis'
 import { avbrytSoknad } from './avbryt-soknad'
@@ -27,6 +29,7 @@ const Knapperad = ({ poster }: KnapperadProps) => {
     const stegNo = parseInt(stegId)
     const spmIndex = stegNo - 2
     const erUtlandssoknad = valgtSoknad!.soknadstype === RSSoknadstype.OPPHOLD_UTLAND
+    const gjenaningsFrist = dayjs(valgtSoknad!.opprettetDato).add(1, 'year')
 
     const nokkel = spmIndex === valgtSoknad!.sporsmal.length - (valgtSoknad!.soknadstype === RSSoknadstype.OPPHOLD_UTLAND ? 2 : 3)
         ? 'sykepengesoknad.send'
@@ -67,23 +70,36 @@ const Knapperad = ({ poster }: KnapperadProps) => {
         }
     }
 
+    const text = (txt: string) => {
+        if (erUtlandssoknad) return tekst(txt +'_utenlands' as any)
+        else return tekst(txt as any)
+    }
+
     return (
         <div className="knapperad">
             <Knapp type="hoved" htmlType="submit" spinner={poster}>{tekst(nokkel)}</Knapp>
             <div className="avbrytDialog blokk-l">
                 <button className="lenke avbrytlenke avbrytDialog__trigger" onClick={handleVilAvbryte}>
-                    <Normaltekst tag="span">{tekst('sykepengesoknad.avbryt.simpel')}</Normaltekst>
+                    <Normaltekst tag="span">{text('sykepengesoknad.avbryt.simpel')}</Normaltekst>
                 </button>
                 <Vis hvis={vilAvbryte}
                     render={() =>
                         <div ref={avbrytDialog} className="avbrytDialog__dialog pekeboble">
-                            <Normaltekst>{tekst('sykepengesoknad.avbryt.sporsmal.forklaring')}</Normaltekst>
+                            <Vis hvis={!erUtlandssoknad}
+                                render={ () =>
+                                    <Normaltekst>
+                                        {getLedetekst(text('sykepengesoknad.avbryt.sporsmal.forklaring'), {
+                                            '%DATO%': tilLesbarDatoMedArstall(gjenaningsFrist)
+                                        })}
+                                    </Normaltekst>
+                                }
+                            />
                             <Normaltekst style={{ marginTop: '1rem', marginBottom: '1rem' }}>
-                                <strong>{tekst('sykepengesoknad.avbryt.sporsmal')}</strong>
+                                <strong>{text('sykepengesoknad.avbryt.sporsmal')}</strong>
                             </Normaltekst>
                             <div className="blokk-xs">
                                 <Fareknapp spinner={avbryter}
-                                    onClick={handleAvbryt}>{tekst('sykepengesoknad.avbryt.ja')}</Fareknapp>
+                                    onClick={handleAvbryt}>{text('sykepengesoknad.avbryt.ja')}</Fareknapp>
                             </div>
                             <div aria-live="polite">
                                 <Vis hvis={feilmeldingTekst}
@@ -91,7 +107,7 @@ const Knapperad = ({ poster }: KnapperadProps) => {
                                 />
                             </div>
                             <button className="avbrytlenke lenke" onClick={handleVilAvbryte}>
-                                {tekst('sykepengesoknad.avbryt.angre')}
+                                {text('sykepengesoknad.avbryt.angre')}
                             </button>
                         </div>
                     }
