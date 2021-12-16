@@ -1,3 +1,4 @@
+import parser from 'html-react-parser'
 import { AlertStripeInfo } from 'nav-frontend-alertstriper'
 import Lenke from 'nav-frontend-lenker'
 import { Element, Normaltekst } from 'nav-frontend-typografi'
@@ -43,7 +44,7 @@ const Over16dager = ({ erGradert }: gradertReisetilskuddProps) => {
             </div>
             <div className="avsnitt">
                 <Element tag="h2" className="arbeidstaker-tittel">{tekst('kvittering.naar-blir-pengene')}</Element>
-                <Normaltekst tag="span">{tekst('kvittering.arbeidstaker.over16.utbetaling')} </Normaltekst>
+                <Normaltekst tag="span">{parser(tekst('kvittering.arbeidstaker.over16.utbetaling'))} </Normaltekst>
             </div>
             <div className="avsnitt">
                 <Kontonummer />
