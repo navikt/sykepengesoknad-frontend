@@ -42,7 +42,7 @@ describe('Tester kvittering', () => {
                 .and('contain', 'NAV behandler søknaden din')
                 .and('contain', 'Saksbehandlingstidene kan variere noe. Sjekk saksbehandlingstidene i ditt fylke')
                 .and('contain', 'Når blir pengene utbetalt?')
-                .and('contain', 'Blir søknaden din innvilget før den 15. i denne måneden, blir pengene utbetalt innen den 25. samme måned. Blir det innvilget etter den 15. i måneden, utbetales pengene innen 5 dager.')
+                .and('contain', 'Du får vanligvis utbetalt sykepengene enten innen den 25. i måneden, eller innen fem dager etter at vi har sendt deg svar på søknaden din. Hvis søknaden din gjelder dager i to ulike kalendermåneder, kan utbetalingen bli delt i to. Les mer om når du kan forvente å få pengene.')
 
             // Oppsummering minimert
             cy.get('.utvidbar.oppsummering.ekspander.lilla .utvidbar__toggle')
@@ -173,7 +173,7 @@ describe('Tester kvittering', () => {
                 .and('contain', 'NAV behandler søknaden din')
                 .and('contain', 'Saksbehandlingstidene kan variere noe. Sjekk saksbehandlingstidene i ditt fylke')
                 .and('contain', 'Når blir pengene utbetalt?')
-                .and('contain', 'Blir søknaden din innvilget før den 15. i denne måneden, blir pengene utbetalt innen den 25. samme måned. Blir det innvilget etter den 15. i måneden, utbetales pengene innen 5 dager.')
+                .and('contain', 'Du får vanligvis utbetalt sykepengene enten innen den 25. i måneden, eller innen fem dager etter at vi har sendt deg svar på søknaden din. Hvis søknaden din gjelder dager i to ulike kalendermåneder, kan utbetalingen bli delt i to. Les mer om når du kan forvente å få pengene.')
 
             // Oppsummering minimert
             cy.get('.utvidbar.oppsummering.ekspander.lilla .utvidbar__toggle')
@@ -225,7 +225,7 @@ describe('Tester kvittering', () => {
                 .and('contain', 'NAV behandler søknaden')
                 .and('contain', 'Saksbehandlingstidene kan variere noe. Sjekk saksbehandlingstidene i ditt fylke')
                 .and('contain', 'Når blir pengene utbetalt')
-                .and('contain', 'Blir søknaden din innvilget før den 15. i denne måneden, blir pengene utbetalt innen den 25. samme måned. Blir det innvilget etter den 15. i måneden, utbetales pengene innen 5 dager.')
+                .and('contain', 'Du får vanligvis utbetalt sykepengene enten innen den 25. i måneden, eller innen fem dager etter at vi har sendt deg svar på søknaden din. Hvis søknaden din gjelder dager i to ulike kalendermåneder, kan utbetalingen bli delt i to. Les mer om når du kan forvente å få pengene.')
                 .and('not.contain', 'Du får sykepengene fra arbeidsgiveren din')
 
             // Behandlingstider lenke
@@ -359,7 +359,7 @@ const over16dagerKvittering = () => {
         .and('contain', 'NAV behandler søknaden')
         .and('contain', 'Saksbehandlingstidene kan variere noe. Sjekk saksbehandlingstidene i ditt fylke')
         .and('contain', 'Når blir pengene utbetalt')
-        .and('contain', 'Blir søknaden din innvilget før den 15. i denne måneden, blir pengene utbetalt innen den 25. samme måned. Blir det innvilget etter den 15. i måneden, utbetales pengene innen 5 dager.')
+        .and('contain', 'Du får vanligvis utbetalt sykepengene enten innen den 25. i måneden, eller innen fem dager etter at vi har sendt deg svar på søknaden din. Hvis søknaden din gjelder dager i to ulike kalendermåneder, kan utbetalingen bli delt i to. Les mer om når du kan forvente å få pengene.')
         .and('not.contain', 'Du får sykepengene fra arbeidsgiveren din')
 
     // Behandlingstider lenke
@@ -406,7 +406,7 @@ const utenOppholdKvittering = () => {
         .and('contain', 'NAV behandler søknaden')
         .and('contain', 'Saksbehandlingstidene kan variere noe. Sjekk saksbehandlingstidene i ditt fylke')
         .and('contain', 'Når blir pengene utbetalt')
-        .and('contain', 'Blir søknaden din innvilget før den 15. i denne måneden, blir pengene utbetalt innen den 25. samme måned. Blir det innvilget etter den 15. i måneden, utbetales pengene innen 5 dager.')
+        .and('contain', 'Du får vanligvis utbetalt sykepengene enten innen den 25. i måneden, eller innen fem dager etter at vi har sendt deg svar på søknaden din. Hvis søknaden din gjelder dager i to ulike kalendermåneder, kan utbetalingen bli delt i to. Les mer om når du kan forvente å få pengene.')
         .and('not.contain', 'Før NAV kan behandle søknaden')
         .and('not.contain', 'Du får sykepengene fra arbeidsgiveren din')
 
@@ -447,7 +447,7 @@ const medOppholdKvittering = () => {
         .and('contain', 'NAV behandler søknaden')
         .and('contain', 'Saksbehandlingstidene kan variere noe. Sjekk saksbehandlingstidene i ditt fylke')
         .and('contain', 'Når blir pengene utbetalt')
-        .and('contain', 'Blir søknaden din innvilget før den 15. i denne måneden, blir pengene utbetalt innen den 25. samme måned. Blir det innvilget etter den 15. i måneden, utbetales pengene innen 5 dager.')
+        .and('contain', 'Du får vanligvis utbetalt sykepengene enten innen den 25. i måneden, eller innen fem dager etter at vi har sendt deg svar på søknaden din. Hvis søknaden din gjelder dager i to ulike kalendermåneder, kan utbetalingen bli delt i to. Les mer om når du kan forvente å få pengene.')
         .and('not.contain', 'Du får sykepengene fra arbeidsgiveren din')
 
     // Inntekstmelding
