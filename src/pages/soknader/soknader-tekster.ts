@@ -7,7 +7,7 @@ const SoknaderTekster = {
     'soknader.planlagt.tittel': 'Planlagte søknader',
     'soknader.sendt.tittel': 'Tidligere søknader',
     'landingside.sidetittel': 'Ditt sykefravær',
-    'hovedside.lenke': 'Til hovedsiden Ditt Sykefravær',
+    'dinesaker.lenke': 'Se alle sykepengedokumentene på Ditt NAV',
 
 }
 
