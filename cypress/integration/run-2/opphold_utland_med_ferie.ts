@@ -65,7 +65,6 @@ describe('Tester søknad om å beholde sykepenger utenfor EØS', () => {
     it('Gå videre forsvinner og bjørn vises når man har avtalt ferie', function() {
         cy.contains('Har du avtalt med arbeidsgiveren din at du skal ha ferie i hele perioden?')
         cy.contains('Gå videre')
-        cy.contains('Avbryt søknad').should('not.exist')
 
 
         cy.get('#5_0').click({ force: true })

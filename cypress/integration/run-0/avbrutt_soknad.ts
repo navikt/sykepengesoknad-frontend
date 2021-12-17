@@ -40,12 +40,12 @@ describe('Tester gjenoppretting av søknad', () => {
     it('Søknad kan avbrytes ', function() {
 
         // Avbryt dialog vises
-        cy.contains('Jeg ønsker ikke å bruke denne søknaden').click()
-        cy.get('.avbrytDialog__dialog button.lenke:contains(Angre)').click()
-        cy.get('.avbrytDialog__dialog button.lenke:contains(Angre)').should('not.exist')
+        cy.contains('Avbryt søknad').click()
+        cy.get('.avbrytDialog__dialog button.lenke:contains(Nei, jeg vil ikke avbryte søknaden likevel)').click()
+        cy.get('.avbrytDialog__dialog button.lenke:contains(Nei, jeg vil ikke avbryte søknaden likevel)').should('not.exist')
 
-        cy.contains('Jeg ønsker ikke å bruke denne søknaden').click()
-        cy.get('button.knapp.knapp--fare:contains(Ja, jeg er sikker)').click()
+        cy.contains('Avbryt søknad').click()
+        cy.get('button.knapp.knapp--fare:contains(Ja, avbryt søknaden)').click()
         cy.url().should('include', `${avbruttSoknad.id}/1`)
         cy.contains('Gjenåpne søknad')
     })

@@ -92,7 +92,7 @@ const Slettknapp = ({ sporsmal, kvittering, update }: SlettknappProps) => {
                     </Normaltekst>
                     <div className="blokk-xs">
                         <Fareknapp spinner={sletter} htmlType="button" onClick={slettKvittering}>
-                            {tekst('sykepengesoknad.avbryt.ja')}
+                            {tekst('opplasting_modal.vil-slette.ja')}
                         </Fareknapp>
                     </div>
                     <div aria-live="polite" className="blokk-xs">
@@ -101,7 +101,7 @@ const Slettknapp = ({ sporsmal, kvittering, update }: SlettknappProps) => {
                         />
                     </div>
                     <button className="avbrytlenke lenkeknapp" type={'button'} onClick={() => setVilSlette(false)}>
-                        {tekst('sykepengesoknad.avbryt.angre')}
+                        {tekst('opplasting_modal.vil-slette.angre')}
                     </button>
                 </div>
             </ModalWrapper>
