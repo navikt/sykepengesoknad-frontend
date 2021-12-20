@@ -48,3 +48,5 @@ spec:
       value: "https://www.dev.nav.no/person/dittnav/"
     - name: DECORATOR_ENV
       value: "dev"
+    - name: DINESAKER_URL
+      value: "https://person.dev.nav.no/mine-saker/tema/SYK"

@@ -74,9 +74,8 @@ const Soknader = () => {
                     }
                 />
 
-                <Lenke className="hovedside-lenke" href={env.sykefravaerUrl()}>
-                    <VenstreChevron />
-                    <Normaltekst tag="span">{tekst('hovedside.lenke')}</Normaltekst>
+                <Lenke className="dinesaker-lenke" href={env.dinesakerUrl()}>
+                    <Normaltekst tag="span">{tekst('dinesaker.lenke')}</Normaltekst>
                 </Lenke>
             </div>
         </>

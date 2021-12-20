@@ -62,12 +62,18 @@ class Environment implements EnvironmentInterface {
         return 10
     }
 
+    dinesakerUrl(): string {
+        return this.env.DINESAKER_URL
+    }
+
 }
 
 interface EnvironmentInterface {
     dittNavUrl(): string
 
     sykefravaerUrl(): string
+
+    dinesakerUrl(): string
 
     amplitudeEnabled(): boolean
 
@@ -99,7 +105,9 @@ interface EnvironmentInterface {
 function hentEnvironment(): EnvironmentInterface {
     if (process.env.NODE_ENV === 'development') {
         return {
-            amplitudeEnabled(): boolean {
+            dinesakerUrl(): string {
+                return ''
+            }, amplitudeEnabled(): boolean {
                 return false
             }, amplitudeKey(): string {
                 return ''
