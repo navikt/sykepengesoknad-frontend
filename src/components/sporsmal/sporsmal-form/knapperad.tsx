@@ -1,4 +1,3 @@
-import dayjs from 'dayjs'
 import Alertstripe from 'nav-frontend-alertstriper'
 import { Fareknapp, Knapp } from 'nav-frontend-knapper'
 import { Normaltekst } from 'nav-frontend-typografi'
@@ -8,7 +7,7 @@ import { useHistory, useParams } from 'react-router-dom'
 import { RouteParams } from '../../../app'
 import { useAppStore } from '../../../data/stores/app-store'
 import { RSSoknadstype } from '../../../types/rs-types/rs-soknadstype'
-import { tilLesbarDatoMedArstall } from '../../../utils/dato-utils'
+import { gjenapningsfristForSoknaden } from '../../../utils/dato-utils'
 import { getLedetekst,tekst } from '../../../utils/tekster'
 import PersonvernLesMer from '../../soknad-intro/personvern-les-mer'
 import Vis from '../../vis'
@@ -29,7 +28,6 @@ const Knapperad = ({ poster }: KnapperadProps) => {
     const stegNo = parseInt(stegId)
     const spmIndex = stegNo - 2
     const erUtlandssoknad = valgtSoknad!.soknadstype === RSSoknadstype.OPPHOLD_UTLAND
-    const gjenaningsFrist = dayjs(valgtSoknad!.opprettetDato).add(1, 'year')
 
     const nokkel = spmIndex === valgtSoknad!.sporsmal.length - (valgtSoknad!.soknadstype === RSSoknadstype.OPPHOLD_UTLAND ? 2 : 3)
         ? 'sykepengesoknad.send'
@@ -89,7 +87,7 @@ const Knapperad = ({ poster }: KnapperadProps) => {
                                 render={ () =>
                                     <Normaltekst>
                                         {getLedetekst(text('sykepengesoknad.avbryt.sporsmal.forklaring'), {
-                                            '%DATO%': tilLesbarDatoMedArstall(gjenaningsFrist)
+                                            '%DATO%': gjenapningsfristForSoknaden(valgtSoknad!.opprettetDato)
                                         })}
                                     </Normaltekst>
                                 }
