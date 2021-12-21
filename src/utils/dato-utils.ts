@@ -92,6 +92,10 @@ export const sendtForMerEnn30DagerSiden = (sendtTilArbeidsgiverDato?: Date, send
     return dagerSidenArb && dagerSidenNav
 }
 
+export const gjenapningsfristForSoknaden = (opprettetDato?: Date) => {
+    return tilLesbarDatoMedArstall(dayjs(opprettetDato).add(1, 'year'))
+}
+
 export const sendtArbeidsgiverForMerEnnAntallSekunderSiden = (sekunder: number, sendtTilArbeidsgiverDato?: Date) => {
     if (sendtTilArbeidsgiverDato) {
         return dayjs(new Date()).diff(dayjs(sendtTilArbeidsgiverDato), 'seconds') > sekunder

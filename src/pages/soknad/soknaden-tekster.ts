@@ -5,6 +5,7 @@ const SoknadenTekster = {
     'kvittering.sidetittel': 'Kvittering',
     'soknad.tilbakeknapp': 'Tilbake',
     'statuspanel.status': 'Status',
+    'statuspanel.frist': 'Frist for å fylle ut og sende inn søknaden',
     'sykepengesoknad.til-slutt.tittel': 'Til slutt',
     'sykepengesoknad.utkast-til-korrigering.info': 'Rett opp det som er feil i søknaden, og send den inn på nytt.',
     'sykepengesoknad.sykepengeinfo.til-nav': 'Sykepenger utbetales etter at NAV har innvilget søknaden. <a class="lenke" href="https://www.nav.no/no/NAV+og+samfunn/Kontakt+NAV/Utbetalinger/Utbetalinger/Utbetalingsdatoer%2C+feriepenger+og+skattetrekk?kap=499628" target="_blank">Les om sykepenger og saksbehandlingstider.</a>',
