@@ -1,3 +1,4 @@
+import dayjs from 'dayjs'
 import Alertstripe from 'nav-frontend-alertstriper'
 import { Fareknapp, Knapp } from 'nav-frontend-knapper'
 import { Normaltekst } from 'nav-frontend-typografi'
@@ -7,7 +8,7 @@ import { useHistory, useParams } from 'react-router-dom'
 import { RouteParams } from '../../../app'
 import { useAppStore } from '../../../data/stores/app-store'
 import { RSSoknadstype } from '../../../types/rs-types/rs-soknadstype'
-import { gjenapningsfristForSoknaden } from '../../../utils/dato-utils'
+import { tilLesbarDatoMedArstall } from '../../../utils/dato-utils'
 import { getLedetekst,tekst } from '../../../utils/tekster'
 import PersonvernLesMer from '../../soknad-intro/personvern-les-mer'
 import Vis from '../../vis'
@@ -86,9 +87,7 @@ const Knapperad = ({ poster }: KnapperadProps) => {
                             <Vis hvis={!erUtlandssoknad}
                                 render={ () =>
                                     <Normaltekst>
-                                        {getLedetekst(text('sykepengesoknad.avbryt.sporsmal.forklaring'), {
-                                            '%DATO%': gjenapningsfristForSoknaden(valgtSoknad!.opprettetDato)
-                                        })}
+                                        {text('sykepengesoknad.avbryt.sporsmal.forklaring')}
                                     </Normaltekst>
                                 }
                             />
