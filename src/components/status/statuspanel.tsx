@@ -10,7 +10,7 @@ import { redirectTilLoginHvis401 } from '../../data/rest/utils'
 import { useAppStore } from '../../data/stores/app-store'
 import { RSSoknadstatus } from '../../types/rs-types/rs-soknadstatus'
 import { RSSoknadstype } from '../../types/rs-types/rs-soknadstype'
-import { gjenapningsfristForSoknaden,tilLesbarDatoMedArstall } from '../../utils/dato-utils'
+import { tilLesbarDatoMedArstall } from '../../utils/dato-utils'
 import env from '../../utils/environment'
 import fetcher from '../../utils/fetcher'
 import { logger } from '../../utils/logger'
@@ -84,12 +84,7 @@ const StatusPanel = () => {
                     <Normaltekst>{tilLesbarDatoMedArstall(valgtSoknad!.avbruttDato)}</Normaltekst>
                 </div>
             </div>
-            <div className={'content'}>
-                <div className="avsnitt">
-                    <UndertekstBold tag="h3" className="avsnitt-hode">{tekst('statuspanel.frist')}</UndertekstBold>
-                    <Normaltekst>{gjenapningsfristForSoknaden(valgtSoknad!.opprettetDato)}</Normaltekst>
-                </div>
-            </div>
+
             <Vis hvis={soknadKanGjenapnes(valgtSoknad!.opprettetDato)}
                 render={() =>
                     <Knapp spinner={gjenapner} mini type="standard" onClick={Gjenapne}>
