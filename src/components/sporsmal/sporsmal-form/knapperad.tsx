@@ -29,7 +29,6 @@ const Knapperad = ({ poster }: KnapperadProps) => {
     const stegNo = parseInt(stegId)
     const spmIndex = stegNo - 2
     const erUtlandssoknad = valgtSoknad!.soknadstype === RSSoknadstype.OPPHOLD_UTLAND
-    const gjenaningsFrist = dayjs(valgtSoknad!.opprettetDato).add(1, 'year')
 
     const nokkel = spmIndex === valgtSoknad!.sporsmal.length - (valgtSoknad!.soknadstype === RSSoknadstype.OPPHOLD_UTLAND ? 2 : 3)
         ? 'sykepengesoknad.send'
@@ -88,9 +87,7 @@ const Knapperad = ({ poster }: KnapperadProps) => {
                             <Vis hvis={!erUtlandssoknad}
                                 render={ () =>
                                     <Normaltekst>
-                                        {getLedetekst(text('sykepengesoknad.avbryt.sporsmal.forklaring'), {
-                                            '%DATO%': tilLesbarDatoMedArstall(gjenaningsFrist)
-                                        })}
+                                        {text('sykepengesoknad.avbryt.sporsmal.forklaring')}
                                     </Normaltekst>
                                 }
                             />
