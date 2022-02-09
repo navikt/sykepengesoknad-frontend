@@ -9,7 +9,8 @@ import { RouteParams } from '../../../app'
 import { useAppStore } from '../../../data/stores/app-store'
 import { RSSoknadstype } from '../../../types/rs-types/rs-soknadstype'
 import { tilLesbarDatoMedArstall } from '../../../utils/dato-utils'
-import { getLedetekst,tekst } from '../../../utils/tekster'
+import { getLedetekst, tekst } from '../../../utils/tekster'
+import { useAmplitudeInstance } from '../../amplitude/amplitude'
 import PersonvernLesMer from '../../soknad-intro/personvern-les-mer'
 import Vis from '../../vis'
 import { avbrytSoknad } from './avbryt-soknad'
@@ -21,6 +22,8 @@ interface KnapperadProps {
 }
 
 const Knapperad = ({ poster }: KnapperadProps) => {
+    const { logEvent } = useAmplitudeInstance()
+
     const { valgtSoknad, setValgtSoknad, soknader, setSoknader, feilmeldingTekst, setFeilmeldingTekst } = useAppStore()
     const history = useHistory()
     const { stegId } = useParams<RouteParams>()
@@ -44,10 +47,11 @@ const Knapperad = ({ poster }: KnapperadProps) => {
 
     useEffect(() => {
         setVilAvbryte(false)
-    },[ stegId ])
+    }, [ stegId ])
 
     const handleVilAvbryte = (event: Event) => {
         event.preventDefault()
+
         setVilAvbryte(!vilAvbryte)
     }
 
@@ -56,6 +60,13 @@ const Knapperad = ({ poster }: KnapperadProps) => {
         if (avbryter) return
         setAvbryter(true)
         try {
+            logEvent('knapp klikket', {
+                'tekst': text('sykepengesoknad.avbryt.ja'),
+                'soknadstype': valgtSoknad?.soknadstype,
+                'component': 'Avbryt søknad',
+                'steg': stegId
+            })
+
             await avbrytSoknad({
                 valgtSoknad: valgtSoknad!,
                 setSoknader: setSoknader,
@@ -70,7 +81,7 @@ const Knapperad = ({ poster }: KnapperadProps) => {
     }
 
     const text = (txt: string) => {
-        if (erUtlandssoknad) return tekst(txt +'_utenlands' as any)
+        if (erUtlandssoknad) return tekst(txt + '_utenlands' as any)
         else return tekst(txt as any)
     }
 
@@ -78,14 +89,21 @@ const Knapperad = ({ poster }: KnapperadProps) => {
         <div className="knapperad">
             <Knapp type="hoved" htmlType="submit" spinner={poster}>{tekst(nokkel)}</Knapp>
             <div className="avbrytDialog blokk-l">
-                <button className="lenke avbrytlenke avbrytDialog__trigger" onClick={handleVilAvbryte}>
+                <button className="lenke avbrytlenke avbrytDialog__trigger" onClick={(e) => {
+                    logEvent(vilAvbryte ? 'panel lukket' : 'panel åpnet', {
+                        'component': 'Avbryt søknad',
+                        'soknadstype': valgtSoknad?.soknadstype,
+                        'steg': stegId
+                    })
+                    handleVilAvbryte(e)
+                }}>
                     <Normaltekst tag="span">{text('sykepengesoknad.avbryt.simpel')}</Normaltekst>
                 </button>
                 <Vis hvis={vilAvbryte}
                     render={() =>
                         <div ref={avbrytDialog} className="avbrytDialog__dialog pekeboble">
                             <Vis hvis={!erUtlandssoknad}
-                                render={ () =>
+                                render={() =>
                                     <Normaltekst>
                                         {text('sykepengesoknad.avbryt.sporsmal.forklaring')}
                                     </Normaltekst>
@@ -103,7 +121,16 @@ const Knapperad = ({ poster }: KnapperadProps) => {
                                     render={() => <Alertstripe type="feil">{feilmeldingTekst}</Alertstripe>}
                                 />
                             </div>
-                            <button className="avbrytlenke lenke" onClick={handleVilAvbryte}>
+                            <button className="avbrytlenke lenke" onClick={(evt) => {
+                                logEvent('knapp klikket', {
+                                    'tekst': text('sykepengesoknad.avbryt.angre'),
+                                    'soknadstype': valgtSoknad?.soknadstype,
+                                    'component': 'Avbryt søknad',
+                                    'steg': stegId
+                                })
+                                handleVilAvbryte(evt)
+                            }
+                            }>
                                 {text('sykepengesoknad.avbryt.angre')}
                             </button>
                         </div>
