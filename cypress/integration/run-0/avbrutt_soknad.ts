@@ -37,6 +37,13 @@ describe('Tester gjenoppretting av søknad', () => {
         cy.contains('Gå videre')
     })
 
+    it('Søknad kan avsluttes og fortsette senere ', function() {
+        cy.contains('Avslutt og fortsett senere').click()
+        cy.contains('Vi lagrer søknaden din på Ditt sykefravær i listen med søknader om sykepenger.')
+        cy.contains('Ja, fortsett senere')
+        cy.contains('Nei').click()
+    })
+
     it('Søknad kan avbrytes ', function() {
 
         // Avbryt dialog vises
