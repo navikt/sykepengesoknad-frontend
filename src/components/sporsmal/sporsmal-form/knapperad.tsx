@@ -1,20 +1,17 @@
-import dayjs from 'dayjs'
-import Alertstripe, { AlertStripeInfo } from 'nav-frontend-alertstriper'
+import { Button } from '@navikt/ds-react'
+import Alertstripe from 'nav-frontend-alertstriper'
 import { Fareknapp, Knapp } from 'nav-frontend-knapper'
-import ModalWrapper from 'nav-frontend-modal'
-import { Element, Normaltekst } from 'nav-frontend-typografi'
+import { Normaltekst } from 'nav-frontend-typografi'
 import React, { MouseEvent, useEffect, useRef, useState } from 'react'
 import { useHistory, useParams } from 'react-router-dom'
 
 import { RouteParams } from '../../../app'
 import { useAppStore } from '../../../data/stores/app-store'
 import { RSSoknadstype } from '../../../types/rs-types/rs-soknadstype'
-import { tilLesbarDatoMedArstall } from '../../../utils/dato-utils'
-import { getLedetekst, tekst } from '../../../utils/tekster'
+import { tekst } from '../../../utils/tekster'
 import { useAmplitudeInstance } from '../../amplitude/amplitude'
 import AvsluttOgFortsettSenere from '../../avslutt-og-fortsett-senere/avslutt-og-fortsett-senere'
 import PersonvernLesMer from '../../soknad-intro/personvern-les-mer'
-import Utvidbar from '../../utvidbar/utvidbar'
 import Vis from '../../vis'
 import { avbrytSoknad } from './avbryt-soknad'
 
@@ -26,7 +23,6 @@ interface KnapperadProps {
 
 const Knapperad = ({ poster }: KnapperadProps) => {
     const { logEvent } = useAmplitudeInstance()
-    const [ aapen, setAapen ] = useState<boolean>(false)
 
     const { valgtSoknad, setValgtSoknad, soknader, setSoknader, feilmeldingTekst, setFeilmeldingTekst } = useAppStore()
     const history = useHistory()
@@ -94,16 +90,18 @@ const Knapperad = ({ poster }: KnapperadProps) => {
             <Knapp type="hoved" htmlType="submit" spinner={poster}>{tekst(nokkel)}</Knapp>
             <div className="avbrytDialog blokk-l">
                 <AvsluttOgFortsettSenere />
-                <button className="lenke avbrytlenke avbrytDialog__trigger" onClick={(e) => {
-                    logEvent(vilAvbryte ? 'panel lukket' : 'panel åpnet', {
-                        'component': 'Avbryt søknad',
-                        'soknadstype': valgtSoknad?.soknadstype,
-                        'steg': stegId
-                    })
-                    handleVilAvbryte(e)
-                }}>
-                    <Normaltekst tag="span">{text('sykepengesoknad.avbryt.simpel')}</Normaltekst>
-                </button>
+                <Button size="small" variant="tertiary" className="avbrytlenke"
+                    onClick={
+                        (e) => {
+                            logEvent(vilAvbryte ? 'panel lukket' : 'panel åpnet', {
+                                'component': 'Avbryt søknad',
+                                'soknadstype': valgtSoknad?.soknadstype,
+                                'steg': stegId
+                            })
+                            handleVilAvbryte(e)
+                        }}>
+                    {tekst('sykepengesoknad.avbryt.simpel')}
+                </Button>
                 <Vis hvis={vilAvbryte}
                     render={() =>
                         <div ref={avbrytDialog} className="avbrytDialog__dialog pekeboble">

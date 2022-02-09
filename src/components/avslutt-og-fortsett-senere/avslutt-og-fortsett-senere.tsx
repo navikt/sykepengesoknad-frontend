@@ -1,6 +1,6 @@
 import './avslutt-og-fortsett-senere.less'
 
-import { Knapp } from 'nav-frontend-knapper'
+import { Button } from '@navikt/ds-react'
 import ModalWrapper from 'nav-frontend-modal'
 import { Element, Normaltekst } from 'nav-frontend-typografi'
 import React, { useState } from 'react'
@@ -20,17 +20,19 @@ const AvsluttOgFortsettSenere = () => {
     return (
 
         <div>
-            <button className="lenke" onClick={(e) => {
-                logEvent('panel åpnet', {
-                    'component': 'Avbryt søknad',
-                    'soknadstype': valgtSoknad?.soknadstype,
-                    'steg': stegId
-                })
-                setAapen(true)
-                e.preventDefault()
-            }}>
-                <Normaltekst tag="span">{tekst('avslutt.popup.tittel')}</Normaltekst>
-            </button>
+            <Button size="small" variant="tertiary"
+                onClick={
+                    (e) => {
+                        logEvent('panel åpnet', {
+                            'component': 'Avbryt søknad',
+                            'soknadstype': valgtSoknad?.soknadstype,
+                            'steg': stegId
+                        })
+                        setAapen(true)
+                        e.preventDefault()
+                    }}>
+                {tekst('avslutt.popup.tittel')}
+            </Button>
             <ModalWrapper className="modal__avslutt_fortsett_popup" onRequestClose={() => setAapen(false)}
                 contentLabel={'avslutt og fortsett senere'}
                 isOpen={aapen}
@@ -40,13 +42,14 @@ const AvsluttOgFortsettSenere = () => {
                 </Element>
                 <Normaltekst>{tekst('avslutt.popup.innhold')}</Normaltekst>
                 <Normaltekst>{tekst('avslutt.popup.sporsmal')}</Normaltekst>
-                <Knapp mini type="hoved" className="knapp" onClick={
+                <Button size="small" variant="primary" className="midtstilt-knapp" onClick={
                     () => window.location.href = 'https://flex-dittnav-brukertest.labs.nais.io/person/dittnav/?testperson=soknad'}>
                     {tekst('avslutt.popup.ja')}
-                </Knapp>
-                <Knapp mini type="standard" className="knapp" onClick={() => setAapen(false)}>
+                </Button>
+                <Button size="small" variant="secondary" className="midtstilt-knapp"
+                    onClick={() => setAapen(false)}>
                     {tekst('avslutt.popup.nei')}
-                </Knapp>
+                </Button>
 
             </ModalWrapper>
         </div>
