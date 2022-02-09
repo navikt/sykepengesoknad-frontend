@@ -39,7 +39,7 @@ spec:
     - name: SYKEFRAVAER_URL
       value: "https://ditt-sykefravaer.labs.nais.io/syk/sykefravaer"
     - name: DITTNAV_URL
-      value: "https://www.nav.no/person/dittnav"
+      value: "https://flex-dittnav-brukertest.labs.nais.io/person/dittnav/?testperson=soknad"
     - name: OPPLAERING
       value: "true"
     - name: DECORATOR_ENV
