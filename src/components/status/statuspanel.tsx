@@ -15,6 +15,7 @@ import env from '../../utils/environment'
 import fetcher from '../../utils/fetcher'
 import { logger } from '../../utils/logger'
 import { tekst } from '../../utils/tekster'
+import { useAmplitudeInstance } from '../amplitude/amplitude'
 import Vis from '../vis'
 
 const StatusPanel = () => {
@@ -22,6 +23,7 @@ const StatusPanel = () => {
     const history = useHistory()
     const { id } = useParams<RouteParams>()
     const [ gjenapner, setGjenapner ] = useState<boolean>(false)
+    const { logEvent } = useAmplitudeInstance()
 
     useEffect(() => {
         if (!valgtSoknad) {
@@ -48,6 +50,12 @@ const StatusPanel = () => {
                 method: 'POST',
                 credentials: 'include',
                 headers: { 'Content-Type': 'application/json' }
+            })
+
+            logEvent('knapp klikket', {
+                'tekst': 'Gjenåpne søknad',
+                'soknadstype': valgtSoknad?.soknadstype,
+                'component': 'Avbrutt søknad visning'
             })
 
             try {
