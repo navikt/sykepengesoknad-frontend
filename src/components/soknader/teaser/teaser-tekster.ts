@@ -7,6 +7,7 @@ const TeaserTekster = {
     'soknad.teaser.status.SENDT.til-nav': 'Sendt til NAV',
     'soknad.teaser.status.UTGAATT': 'Utgått',
     'soknad.teaser.status.UTKAST_TIL_KORRIGERING': 'Utkast til endring',
+    'soknad.teaser.delvis-utfylt.tekst': 'Påbegynt av deg',
     'soknader.teaser.fremtidig.modal.tittel' : 'Søknaden er ikke klar',
     'soknader.teaser.fremtidig.modal.tekst' : 'Du kan ikke fylle ut søknaden før denne sykmeldingsperioden er over %DATO%.',
     'soknader.teaser.fremtidig.modal.tekst2' : 'Du får en melding når søknaden er klar til å fylles ut.',
@@ -25,3 +26,5 @@ const TeaserTekster = {
 }
 
 export default TeaserTekster
+
+
