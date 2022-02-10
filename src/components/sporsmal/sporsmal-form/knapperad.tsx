@@ -90,6 +90,7 @@ const Knapperad = ({ poster }: KnapperadProps) => {
             <Knapp type="hoved" htmlType="submit" spinner={poster}>{tekst(nokkel)}</Knapp>
             <div className="avbrytDialog blokk-l">
                 <AvsluttOgFortsettSenere />
+                <hr />
                 <Button size="small" variant="tertiary" className="avbrytlenke"
                     onClick={
                         (e) => {
@@ -124,7 +125,7 @@ const Knapperad = ({ poster }: KnapperadProps) => {
                                     render={() => <Alertstripe type="feil">{feilmeldingTekst}</Alertstripe>}
                                 />
                             </div>
-                            <button className="avbrytlenke lenke" onClick={(evt) => {
+                            <button className="lenke" onClick={(evt) => {
                                 logEvent('knapp klikket', {
                                     'tekst': text('sykepengesoknad.avbryt.angre'),
                                     'soknadstype': valgtSoknad?.soknadstype,
