@@ -6,6 +6,7 @@ import React, { useEffect, useState } from 'react'
 import { Link, useParams } from 'react-router-dom'
 
 import { RouteParams } from '../../app'
+import { useAmplitudeInstance } from '../../components/amplitude/amplitude'
 import Banner from '../../components/banner/banner'
 import Brodsmuler from '../../components/brodsmuler/brodsmuler'
 import { hentHotjarJsTrigger, HotjarTrigger } from '../../components/hotjar-trigger'
@@ -31,7 +32,7 @@ const brodsmuler: Brodsmule[] = [ {
 const KvitteringSide = () => {
     const { valgtSoknad, soknader, setValgtSoknad, setValgtSykmelding, sykmeldinger } = useAppStore()
     const [ erSiste, setErSiste ] = useState<boolean>()
-
+    const { logEvent } = useAmplitudeInstance()
     const { id } = useParams<RouteParams>()
 
     useEffect(() => {
@@ -40,6 +41,8 @@ const KvitteringSide = () => {
 
         const sykmelding = sykmeldinger.find(sm => sm.id === filtrertSoknad?.sykmeldingId)
         setValgtSykmelding(sykmelding)
+
+        logEvent('skjema åpnet', { soknadstype: filtrertSoknad?.soknadstype })
         // eslint-disable-next-line
     }, [id]);
 
