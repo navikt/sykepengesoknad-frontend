@@ -1,4 +1,5 @@
 import './app.less'
+import '@navikt/ds-css'
 
 import ModalWrapper from 'nav-frontend-modal'
 import React, { useEffect } from 'react'

@@ -1,3 +1,4 @@
+import AvsluttOgFortsettSenereTekster from '../components/avslutt-og-fortsett-senere/avslutt-og-fortsett-senere-tekster'
 import BannerTekster from '../components/banner/banner-tekster'
 import EldreUsendtTekster from '../components/eldre-usendt-soknad/eldre-usendt-soknad-tekster'
 import DragAndDropTekster from '../components/filopplaster/drag-and-drop/drag-and-drop-tekster'
@@ -44,6 +45,7 @@ const tekster = {
     ...DragAndDropTekster,
     ...OpplastingTekster,
     ...EldreUsendtTekster,
+    ...AvsluttOgFortsettSenereTekster,
     ...SoknadMedToDelerTekster,
     ...ViktigInformasjonTekster,
     ...HvorforSoknadSykepengerTekster,

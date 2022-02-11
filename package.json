@@ -5,6 +5,8 @@
     "private": true,
     "dependencies": {
         "@craco/craco": "^6.2.0",
+        "@navikt/ds-css": "^0.15.2",
+        "@navikt/ds-react": "^0.16.4",
         "@navikt/fnrvalidator": "^1.1.4",
         "@types/smoothscroll-polyfill": "^0.3.1",
         "amplitude-js": "^8.4.0",
