@@ -3,7 +3,6 @@ import './opplysninger.less'
 import React from 'react'
 
 import { tekst } from '../../utils/tekster'
-import { Ekspanderbar } from '../ekspanderbar/ekspanderbar'
 import Utvidbar from '../utvidbar/utvidbar'
 import ArbeidsgiverInfo from './arbeidsgiver-info'
 import ArbeidssituasjonInfo from './arbeidssituasjon-info'

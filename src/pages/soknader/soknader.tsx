@@ -1,6 +1,5 @@
 import './soknader.less'
 
-import { VenstreChevron } from 'nav-frontend-chevron'
 import Lenke from 'nav-frontend-lenker'
 import { Normaltekst } from 'nav-frontend-typografi'
 import React, { useEffect } from 'react'

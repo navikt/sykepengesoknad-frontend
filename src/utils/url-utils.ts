@@ -1,6 +1,5 @@
 import { RSSoknadstatus } from '../types/rs-types/rs-soknadstatus'
 import { Soknad } from '../types/types'
-import env from './environment'
 
 export const getUrlTilSoknad = (soknad: Soknad) => {
     if (soknad.status === RSSoknadstatus.SENDT) {
