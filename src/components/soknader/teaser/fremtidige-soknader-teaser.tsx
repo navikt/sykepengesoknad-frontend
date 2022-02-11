@@ -1,5 +1,5 @@
 import dayjs from 'dayjs'
-import Alertstripe, { AlertStripeInfo } from 'nav-frontend-alertstriper'
+import { AlertStripeInfo } from 'nav-frontend-alertstriper'
 import { HoyreChevron } from 'nav-frontend-chevron'
 import ModalWrapper from 'nav-frontend-modal'
 import { Element, Normaltekst, Undertekst, Undertittel } from 'nav-frontend-typografi'
@@ -20,7 +20,11 @@ const FremtidigeSoknaderTeaser = ({ soknad }: SykepengesoknadTeaserProps) => {
 
     return (
         <article aria-labelledby={`soknader-header-${soknad.id}`} onClick={() => {
-            logEvent('skjema åpnet', { soknadstype: soknad.soknadstype })
+            logEvent('skjema åpnet', {
+                skjemanavn: 'sykepengesoknad',
+                soknadstype: soknad.soknadstype,
+                soknadstatus: soknad.status,
+            })
         }}>
             <button className="inngangspanel inngangspanel__btn inngangspanel--fremtidig"
                 onClick={() => setAapen(true)}>

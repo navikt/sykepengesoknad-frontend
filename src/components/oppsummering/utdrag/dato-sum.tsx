@@ -2,7 +2,6 @@ import dayjs from 'dayjs'
 import { Element, Normaltekst } from 'nav-frontend-typografi'
 import React from 'react'
 
-import { empty } from '../../../utils/constants'
 import Vis from '../../vis'
 import { OppsummeringProps } from '../oppsummering'
 

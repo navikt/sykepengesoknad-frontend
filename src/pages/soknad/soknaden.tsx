@@ -7,6 +7,7 @@ import React, { useEffect } from 'react'
 import { Link, useHistory, useParams } from 'react-router-dom'
 
 import { RouteParams } from '../../app'
+import { useAmplitudeInstance } from '../../components/amplitude/amplitude'
 import Banner from '../../components/banner/banner'
 import Brodsmuler from '../../components/brodsmuler/brodsmuler'
 import { EldreUsendtSoknad, harEldreUsendtSoknad } from '../../components/eldre-usendt-soknad/eldre-usendt-soknad'
@@ -44,6 +45,7 @@ const brodsmuler: Brodsmule[] = [ {
 
 const Soknaden = () => {
     const { soknader, valgtSoknad, setValgtSoknad, sykmeldinger, setValgtSykmelding } = useAppStore()
+    const { logEvent } = useAmplitudeInstance()
     const { id } = useParams<RouteParams>()
 
     useEffect(() => {
@@ -52,6 +54,12 @@ const Soknaden = () => {
 
         const sykmelding = sykmeldinger.find(sm => sm.id === filtrertSoknad?.sykmeldingId)
         setValgtSykmelding(sykmelding)
+
+        logEvent('skjema åpnet', {
+            skjemanavn: 'sykepengesoknad',
+            soknadstype: filtrertSoknad?.soknadstype,
+            soknadstatus: filtrertSoknad?.status,
+        })
         // eslint-disable-next-line
     }, [id]);
 

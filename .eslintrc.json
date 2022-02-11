@@ -8,7 +8,8 @@
     "react",
     "@typescript-eslint",
     "simple-import-sort",
-    "react-hooks"
+    "react-hooks",
+    "unused-imports"
   ],
   "env": {
     "browser": true,
@@ -39,6 +40,7 @@
     "semi": ["error", "never"],
     "simple-import-sort/imports": "error",
     "simple-import-sort/exports": "error",
+    "unused-imports/no-unused-imports": "error",
     "sort-imports": "off",
     "import/order": "off",
     "react-hooks/rules-of-hooks": "error",
