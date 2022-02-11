@@ -10,7 +10,7 @@ export const [ AmplitudeProvider, useAmplitudeInstance ] = constate(() => {
         _userAgent: '',
         logEvent: (eventName: string, data?: any) => {
             // eslint-disable-next-line
-            console.log(`Logger ${eventName} - Event properties: ${JSON.stringify(data)}!`);
+            console.log(`Logger ${eventName} - Event properties: ${JSON.stringify(data)}`);
             return 1
         },
         init: () => {
