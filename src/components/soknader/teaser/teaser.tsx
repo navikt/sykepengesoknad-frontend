@@ -3,11 +3,10 @@ import { Undertekst, Undertittel } from 'nav-frontend-typografi'
 import React from 'react'
 
 import { RSSoknadstype } from '../../../types/rs-types/rs-soknadstype'
-import { Soknad } from '../../../types/types'
 import { tilLesbarPeriodeMedArstall } from '../../../utils/dato-utils'
 import env from '../../../utils/environment'
 import { tekst } from '../../../utils/tekster'
-import { getUrlTilSoknad } from '../../../utils/url-utils'
+import { erDelvisUtfylt, getUrlTilSoknad } from '../../../utils/url-utils'
 import Vis from '../../vis'
 import { InngangsIkon, Inngangspanel, InngangsStatus } from '../inngang/inngangspanel'
 import {
@@ -20,14 +19,6 @@ import {
 } from './teaser-util'
 
 const Teaser = ({ soknad }: SykepengesoknadTeaserProps) => {
-
-    const erDelvisUtfylt = function(soknad: Soknad): boolean {
-        const soknaderMedSvar = soknad.sporsmal.filter((sporsmal) => {
-            return sporsmal.svarliste.svar.length !== 0
-        })
-
-        return soknaderMedSvar.length > 0 && (soknaderMedSvar.length !== soknad.sporsmal.length)
-    }
 
     return (
         <article

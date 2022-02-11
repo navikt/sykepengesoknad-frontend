@@ -25,19 +25,13 @@ describe('Tester delvis utfylt søknad', () => {
         cy.get(`#soknader-list-til-behandling article a[href*=${delvisUtfyltSoknad.id}]`).click()
     })
 
-    it('Søknad ANSVARSERKLARING - steg 1', () => {
-        cy.url().should('include', `${delvisUtfyltSoknad.id}/1`)
-        cy.contains('Gå videre').click()
+    it('Første ubesvarte spørsmål er ikke besvart', () => {
+        cy.url().should('include', `${delvisUtfyltSoknad.id}/4`)
+        cy.get('.inputPanel').should('not.be.checked')
     })
 
-    it('Søknad ARBEID_UTENFOR_NORGE - Gå videre direkte - steg 2', () => {
-        cy.url().should('include', `${delvisUtfyltSoknad.id}/2`)
-        cy.get('.inputPanel--checked').contains('Nei')
-
-        cy.contains('Gå videre').click()
-    })
-
-    it('Søknad PERMITTERT_PERIODE er utfylt med ja og periode - steg 2', () => {
+    it('gå tilbake til siste besvarte spørsmål', () => {
+        cy.contains('Tilbake').click()
         cy.url().should('include', `${delvisUtfyltSoknad.id}/3`)
         cy.get('.inputPanel--checked').contains('Ja')
         cy.get('.skjemaelement__label').contains('Fra og med')
