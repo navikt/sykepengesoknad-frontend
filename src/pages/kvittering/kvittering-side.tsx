@@ -42,7 +42,11 @@ const KvitteringSide = () => {
         const sykmelding = sykmeldinger.find(sm => sm.id === filtrertSoknad?.sykmeldingId)
         setValgtSykmelding(sykmelding)
 
-        logEvent('skjema åpnet', { soknadstype: filtrertSoknad?.soknadstype })
+        logEvent('skjema åpnet', {
+            skjemanavn: 'sykepengesoknad',
+            soknadstype: filtrertSoknad?.soknadstype,
+            soknadstatus: filtrertSoknad?.status,
+        })
         // eslint-disable-next-line
     }, [id]);
 
