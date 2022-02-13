@@ -10,27 +10,27 @@ describe('Tester delvis utfylt søknad', () => {
         cy.visit('http://localhost:8080/syk/sykepengesoknad')
     })
 
-    it('Laster startside', () => {
+    it('Henter liste med søknader', () => {
         cy.get('.typo-sidetittel').should('be.visible').and('have.text', 'Søknader')
     })
 
-    it('Delvis utfylt søknad markert som delvis utfylt', () => {
+    it('En ikke påbegynt søknad ikke markert som delvis utfylt', () => {
+        cy.get(`#soknader-list-til-behandling article a[href*=${ikkeUtfyltSoknad.id}] .inngangspanel__status`)
+            .should('not.exist')
+    })
+
+    it('En påbegynt søknad er markert med delvis utfylt label', () => {
         cy.get(`#soknader-list-til-behandling article a[href*=${delvisUtfyltSoknad.id}] .inngangspanel__status`)
             .contains(tekst('soknad.teaser.delvis-utfylt.tekst'))
     })
 
-    it('Ny søknad er ikke markert som delvis utfylt', () => {
-        cy.get(`#soknader-list-til-behandling article a[href*=${ikkeUtfyltSoknad.id}] .inngangspanel__status`)
-            .should('not.exist')
+    it('Går til første ubesvarte spørsmål', () => {
         cy.get(`#soknader-list-til-behandling article a[href*=${delvisUtfyltSoknad.id}]`).click()
-    })
-
-    it('Første ubesvarte spørsmål er ikke besvart', () => {
         cy.url().should('include', `${delvisUtfyltSoknad.id}/4`)
         cy.get('.inputPanel').should('not.be.checked')
     })
 
-    it('gå tilbake til siste besvarte spørsmål', () => {
+    it('Forrige spørsmål er besvart', () => {
         cy.contains('Tilbake').click()
         cy.url().should('include', `${delvisUtfyltSoknad.id}/3`)
         cy.get('.inputPanel--checked').contains('Ja')
