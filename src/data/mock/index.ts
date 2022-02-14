@@ -8,7 +8,7 @@ import { RSSoknadstype } from '../../types/rs-types/rs-soknadstype'
 import env from '../../utils/environment'
 import { jsonDeepCopy } from '../../utils/json-deep-copy'
 import KvitteringJPG from './data/kvittering.jpg'
-import { gradertReisetilskudd, nyttReisetilskudd } from './data/reisetilskudd'
+import { delvisUtfyltReisetilskudd,gradertReisetilskudd, nyttReisetilskudd } from './data/reisetilskudd'
 import {
     arbeidstakerDeltPeriodeForsteUtenforArbeidsgiverperiodeKvittering,
     arbeidstakerInnenforArbeidsgiverperiodeKvittering,
@@ -36,7 +36,7 @@ const finnSoknader = (): RSSoknad[] => {
     if (window.location.search.includes('brukertest')) {
         return [ jsonDeepCopy(brukertestSoknad) ]
     }
-    const soknader = [ ...jsonDeepCopy(soknaderOpplaering), nyttReisetilskudd, gradertReisetilskudd ]
+    const soknader = [ ...jsonDeepCopy(soknaderOpplaering), nyttReisetilskudd, gradertReisetilskudd, delvisUtfyltReisetilskudd ]
     if (!env.isOpplaering() || window.location.href.includes('alle-mock-data')) {
         soknader.push(...jsonDeepCopy(soknaderIntegration))
     }
