@@ -6,12 +6,17 @@ export const getUrlTilSoknad = (soknad: Soknad) => {
     if (soknad.status === RSSoknadstatus.SENDT) {
         return `/kvittering/${soknad.id}`
     }
-    if (soknad.status === RSSoknadstatus.AVBRUTT) {
-        return `/soknader/${soknad.id}/1` // TODO: Denne burde ligge under /avbrutt/${soknad.id}/
+
+    // Skal alltid starte på første spørsmål.
+    const tilForsteSporsmal = [
+        RSSoknadstatus.AVBRUTT,
+        RSSoknadstatus.UTKAST_TIL_KORRIGERING
+    ]
+    if (tilForsteSporsmal.includes(soknad.status)) {
+        return `/soknader/${soknad.id}/1`
     }
 
     const soknaderUrl = `/soknader/${soknad.id}`
-
     return erDelvisUtfylt(soknad)
         ? `${soknaderUrl}/${finnPosisjonPaSisteBesvarteSporsmal(soknad) + 1}`
         : `${soknaderUrl}/1`
