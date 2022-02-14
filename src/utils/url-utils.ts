@@ -7,7 +7,7 @@ export const getUrlTilSoknad = (soknad: Soknad) => {
         return `/kvittering/${soknad.id}`
     }
     if (soknad.status === RSSoknadstatus.AVBRUTT) {
-        return `/soknader/${soknad.id}/1`   // TODO: Denne burde ligge under kvittering
+        return `/soknader/${soknad.id}/1` // TODO: Denne burde ligge under /avbrutt/${soknad.id}/
     }
 
     const soknaderUrl = `/soknader/${soknad.id}`
