@@ -1,10 +1,15 @@
-import { delvisUtfylltArbeidsledig, selvstendigKvittering } from '../../../src/data/mock/data/soknader-integration'
+import {
+    arbeidstakerTilKorrigering,
+    delvisUtfylltArbeidsledig,
+    selvstendigKvittering
+} from '../../../src/data/mock/data/soknader-integration'
 import { tekst } from '../../../src/utils/tekster'
 
 describe('Tester delvis utfylt søknad', () => {
 
     const delvisUtfyltSoknad = delvisUtfylltArbeidsledig
     const ikkeUtfyltSoknad = selvstendigKvittering
+    const tilKorrigering = arbeidstakerTilKorrigering
 
     before(() => {
         cy.visit('http://localhost:8080/syk/sykepengesoknad')
@@ -14,8 +19,13 @@ describe('Tester delvis utfylt søknad', () => {
         cy.get('.typo-sidetittel').should('be.visible').and('have.text', 'Søknader')
     })
 
-    it('En ikke påbegynt søknad ikke markert som delvis utfylt', () => {
+    it('En ikke påbegynt søknad er ikke markert som delvis utfylt', () => {
         cy.get(`#soknader-list-til-behandling article a[href*=${ikkeUtfyltSoknad.id}] .inngangspanel__status`)
+            .should('not.exist')
+    })
+
+    it('En søknad til korringeringer ikke markert som delvis utfylt', () => {
+        cy.get(`#soknader-list-til-behandling article a[href*=${tilKorrigering.id}] .inngangspanel__status`)
             .should('not.exist')
     })
 

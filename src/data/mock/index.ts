@@ -12,7 +12,7 @@ import { delvisUtfyltReisetilskudd,gradertReisetilskudd, nyttReisetilskudd } fro
 import {
     arbeidstakerDeltPeriodeForsteUtenforArbeidsgiverperiodeKvittering,
     arbeidstakerInnenforArbeidsgiverperiodeKvittering,
-    arbeidstakerMedOppholdForsteUtenforArbeidsgiverperiodeKvittering,
+    arbeidstakerMedOppholdForsteUtenforArbeidsgiverperiodeKvittering, arbeidstakerTilKorrigering,
     arbeidstakerUtenforArbeidsgiverperiodeKvittering,
     arbeidstakerUtenOppholdForsteUtenforArbeidsgiverperiodeKvittering,
     brukertestSoknad,
@@ -20,7 +20,7 @@ import {
     sok6,
     soknaderIntegration,
     soknadSomTriggerFeilStatusForOppdaterSporsmal,
-    soknadSomTriggerSporsmalFinnesIkkeISoknad,
+    soknadSomTriggerSporsmalFinnesIkkeISoknad
 } from './data/soknader-integration'
 import { arbeidstaker, arbeidstakerGradert, soknaderOpplaering } from './data/soknader-opplaering'
 import { sykmeldinger } from './data/sykmeldinger'
@@ -35,6 +35,9 @@ const mock = FetchMock.configure({
 const finnSoknader = (): RSSoknad[] => {
     if (window.location.search.includes('brukertest')) {
         return [ jsonDeepCopy(brukertestSoknad) ]
+    }
+    if (window.location.search.includes('korrigering')) {
+        return [ jsonDeepCopy(arbeidstakerTilKorrigering) ]
     }
     const soknader = [ ...jsonDeepCopy(soknaderOpplaering), nyttReisetilskudd, gradertReisetilskudd, delvisUtfyltReisetilskudd ]
     if (!env.isOpplaering() || window.location.href.includes('alle-mock-data')) {

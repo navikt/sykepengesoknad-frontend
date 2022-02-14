@@ -2,6 +2,7 @@ import { HoyreChevron } from 'nav-frontend-chevron'
 import { Undertekst, Undertittel } from 'nav-frontend-typografi'
 import React from 'react'
 
+import { RSSoknadstatus } from '../../../types/rs-types/rs-soknadstatus'
 import { RSSoknadstype } from '../../../types/rs-types/rs-soknadstype'
 import { tilLesbarPeriodeMedArstall } from '../../../utils/dato-utils'
 import env from '../../../utils/environment'
@@ -51,7 +52,7 @@ const Teaser = ({ soknad }: SykepengesoknadTeaserProps) => {
                         </div>
                     </div>
 
-                    <Vis hvis={erDelvisUtfylt(soknad)}
+                    <Vis hvis={erDelvisUtfylt(soknad) && (soknad.status !== RSSoknadstatus.UTKAST_TIL_KORRIGERING)}
                         render={() =>
                             <InngangsStatus status={soknad.status} tekst={tekst('soknad.teaser.delvis-utfylt.tekst')} />
                         }
