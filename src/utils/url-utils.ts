@@ -7,12 +7,11 @@ export const getUrlTilSoknad = (soknad: Soknad) => {
         return `/kvittering/${soknad.id}`
     }
 
-    // Skal alltid starte på første spørsmål.
-    const tilForsteSporsmal = [
+    const alltidTilForsteSporsmal = [
         RSSoknadstatus.AVBRUTT,
         RSSoknadstatus.UTKAST_TIL_KORRIGERING
     ]
-    if (tilForsteSporsmal.includes(soknad.status)) {
+    if (alltidTilForsteSporsmal.includes(soknad.status)) {
         return `/soknader/${soknad.id}/1`
     }
 
@@ -22,7 +21,11 @@ export const getUrlTilSoknad = (soknad: Soknad) => {
         : `${soknaderUrl}/1`
 }
 
-export const erDelvisUtfylt = function(soknad: Soknad): boolean {
+export const visSomDelvisUtfylt = function(soknad: Soknad): boolean {
+    return erDelvisUtfylt(soknad) && soknad.status !== RSSoknadstatus.UTKAST_TIL_KORRIGERING
+}
+
+const erDelvisUtfylt = function(soknad: Soknad): boolean {
     const antallRelevanteSporsmal = hentRelevanteSporsmal(soknad).length
     const posisjonPaSisteBesvarteSporsmal = finnPosisjonPaSisteBesvarteSporsmal(soknad)
     return posisjonPaSisteBesvarteSporsmal > 0 && (posisjonPaSisteBesvarteSporsmal !== antallRelevanteSporsmal)
