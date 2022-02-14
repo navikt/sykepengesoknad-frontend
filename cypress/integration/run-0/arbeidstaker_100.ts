@@ -40,9 +40,9 @@ describe('Tester arbeidstakersøknad', () => {
         cy.contains('Opplysninger fra sykmeldingen').click({ force: true })
 
         // Avbryt dialog vises
-        cy.contains('Avbryt søknad').click()
-        cy.get('.modal__avbryt_popup button:contains(Nei)').click()
-        cy.get('.modal__avbryt_popup button:contains(Nei)').should('not.exist')
+        cy.contains('Jeg vil ikke søke om sykepenger').click()
+        cy.get('.modal__avbryt_popup button:contains(Nei, jeg vil bruke søknaden)').click()
+        cy.get('.modal__avbryt_popup button:contains(Nei, jeg vil bruke søknaden)').should('not.exist')
 
         // Må godkjenne ANSVARSERKLARING først
         cy.contains('Gå videre').click()

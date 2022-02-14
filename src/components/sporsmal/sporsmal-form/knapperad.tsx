@@ -36,13 +36,14 @@ const Knapperad = ({ poster }: KnapperadProps) => {
             <div className="avbrytDialog blokk-l">
                 <AvsluttOgFortsettSenere />
                 <hr />
+                <Vis hvis={stegNo === 1 && !erUtlandssoknad}
+                    render={() =>
+                        <PersonvernLesMer />
+                    }
+                />
                 <AvbrytSoknadModal />
             </div>
-            <Vis hvis={stegNo === 1 && !erUtlandssoknad}
-                render={() =>
-                    <PersonvernLesMer />
-                }
-            />
+
         </div>
     )
 }

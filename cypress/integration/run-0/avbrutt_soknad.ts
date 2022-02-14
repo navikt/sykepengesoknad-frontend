@@ -47,12 +47,12 @@ describe('Tester avryting av søknad', () => {
     it('Søknad kan avbrytes ', function() {
 
         // Avbryt dialog vises
-        cy.contains('Avbryt søknad').click()
-        cy.get('.modal__avbryt_popup button:contains(Nei)').click()
-        cy.get('.modal__avbryt_popup button:contains(Nei)').should('not.exist')
+        cy.contains('Jeg vil ikke søke om sykepenger').click()
+        cy.get('.modal__avbryt_popup button:contains(Nei, jeg vil bruke søknaden)').click()
+        cy.get('.modal__avbryt_popup button:contains(Nei, jeg vil bruke søknaden)').should('not.exist')
 
-        cy.contains('Avbryt søknad').click()
-        cy.get('.modal__avbryt_popup button:contains(Ja, avbryt søknaden)').click()
+        cy.contains('Jeg vil ikke søke om sykepenger').click()
+        cy.get('.modal__avbryt_popup button:contains(Ja, jeg er sikker)').click()
         cy.url().should('include', `${avbruttSoknad.id}/1`)
         cy.contains('Gjenåpne søknad')
     })

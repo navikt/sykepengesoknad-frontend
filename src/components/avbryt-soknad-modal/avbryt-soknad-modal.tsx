@@ -1,6 +1,6 @@
 import './avbryt-soknad-modal.less'
 
-import { Alert, BodyLong, Button, Heading, Modal } from '@navikt/ds-react'
+import { BodyLong, Button, Modal } from '@navikt/ds-react'
 import React, { useState } from 'react'
 import { useHistory, useParams } from 'react-router-dom'
 
@@ -46,11 +46,6 @@ const AvbrytSoknadModal = () => {
             open={aapen}
             >
                 <Modal.Content>
-                    <Heading spacing level="1" size="medium">
-                        {tekst('avbryt.popup.tittel')}
-                    </Heading>
-                    <Alert variant="warning" size="medium">{tekst('avbryt.popup.innhold')}</Alert>
-
                     <BodyLong spacing size={'medium'} className={'sporsmal'}>
                         {tekst('avbryt.popup.sporsmal')}
                     </BodyLong>

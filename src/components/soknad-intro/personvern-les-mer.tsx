@@ -1,9 +1,10 @@
 import './personvern-les-mer.less'
 
+import { Button } from '@navikt/ds-react'
 import parser from 'html-react-parser'
 import ModalWrapper from 'nav-frontend-modal'
 import { Normaltekst, Systemtittel } from 'nav-frontend-typografi'
-import React, { MouseEvent,useState } from 'react'
+import React, { MouseEvent, useState } from 'react'
 
 import { useAppStore } from '../../data/stores/app-store'
 import { tekst } from '../../utils/tekster'
@@ -25,10 +26,11 @@ const PersonvernLesMer = () => {
 
 
     return (
-        <>
-            <button className="lenke no-border" onClick={handleAapen}>
+        <div className="personvern-les-mer">
+            <Button size="small" variant="tertiary"
+                onClick={handleAapen} style={{ paddingBottom: '2rem' }}>
                 {tekst('sykepengesoknad.soknad-intro.personvern-les-mer')}
-            </button>
+            </Button>
             <ModalWrapper className={'personvern-modal'} onRequestClose={() => setAapen(false)}
                 contentLabel={'Personvern'}
                 isOpen={aapen}
@@ -44,7 +46,7 @@ const PersonvernLesMer = () => {
                     </button>
                 </div>
             </ModalWrapper>
-        </>
+        </div>
     )
 }
 
