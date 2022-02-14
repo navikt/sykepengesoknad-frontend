@@ -1,38 +1,33 @@
-import { delvisUtfylltArbeidsledig, selvstendigKvittering } from '../../../src/data/mock/data/soknader-integration'
-import { tekst } from '../../../src/utils/tekster'
+import { delvisUtfylltArbeidsledig } from '../../../src/data/mock/data/soknader-integration'
 
 describe('Tester delvis utfylt søknad', () => {
 
-    const delvisUtfyltSoknad = delvisUtfylltArbeidsledig
-    const ikkeUtfyltSoknad = selvstendigKvittering
+    const soknad = delvisUtfylltArbeidsledig
 
     before(() => {
         cy.visit('http://localhost:8080/syk/sykepengesoknad')
     })
 
-    it('Henter liste med søknader', () => {
+    it('Laster startside', () => {
         cy.get('.typo-sidetittel').should('be.visible').and('have.text', 'Søknader')
+        cy.get(`#soknader-list-til-behandling article a[href*=${soknad.id}]`).click()
     })
 
-    it('En ikke påbegynt søknad ikke markert som delvis utfylt', () => {
-        cy.get(`#soknader-list-til-behandling article a[href*=${ikkeUtfyltSoknad.id}] .inngangspanel__status`)
-            .should('not.exist')
+    it('Søknad ANSVARSERKLARING - steg 1', () => {
+        cy.url().should('include', `${soknad.id}/1`)
+        cy.contains('Gå videre').click()
     })
 
-    it('En påbegynt søknad er markert med delvis utfylt label', () => {
-        cy.get(`#soknader-list-til-behandling article a[href*=${delvisUtfyltSoknad.id}] .inngangspanel__status`)
-            .contains(tekst('soknad.teaser.delvis-utfylt.tekst'))
+
+    it('Søknad ARBEID_UTENFOR_NORGE - Gå videre direkte - steg 2', () => {
+        cy.url().should('include', `${soknad.id}/2`)
+        cy.get('.inputPanel--checked').contains('Nei')
+
+        cy.contains('Gå videre').click()
     })
 
-    it('Går til første ubesvarte spørsmål', () => {
-        cy.get(`#soknader-list-til-behandling article a[href*=${delvisUtfyltSoknad.id}]`).click()
-        cy.url().should('include', `${delvisUtfyltSoknad.id}/4`)
-        cy.get('.inputPanel').should('not.be.checked')
-    })
-
-    it('Forrige spørsmål er besvart', () => {
-        cy.contains('Tilbake').click()
-        cy.url().should('include', `${delvisUtfyltSoknad.id}/3`)
+    it('Søknad PERMITTERT_PERIODE er utfylt med ja og periode - steg 2', () => {
+        cy.url().should('include', `${soknad.id}/3`)
         cy.get('.inputPanel--checked').contains('Ja')
         cy.get('.skjemaelement__label').contains('Fra og med')
         cy.get('.skjemaelement__label').contains('Til og med')
