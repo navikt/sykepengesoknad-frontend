@@ -41,8 +41,8 @@ describe('Tester arbeidstakersøknad', () => {
 
         // Avbryt dialog vises
         cy.contains('Avbryt søknad').click()
-        cy.get('.avbrytDialog__dialog button.lenke:contains(Nei, jeg vil ikke avbryte søknaden likevel)').click()
-        cy.get('.avbrytDialog__dialog button.lenke:contains(Nei, jeg vil ikke avbryte søknaden likevel)').should('not.exist')
+        cy.get('.modal__avbryt_popup button:contains(Nei)').click()
+        cy.get('.modal__avbryt_popup button:contains(Nei)').should('not.exist')
 
         // Må godkjenne ANSVARSERKLARING først
         cy.contains('Gå videre').click()
