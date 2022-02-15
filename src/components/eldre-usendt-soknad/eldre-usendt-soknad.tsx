@@ -2,10 +2,10 @@ import AlertStripe from 'nav-frontend-alertstriper'
 import React from 'react'
 import { Link } from 'react-router-dom'
 
+import { urlTilSoknad } from '../../pages/soknad/soknad-link'
 import { RSSoknadstatus } from '../../types/rs-types/rs-soknadstatus'
 import { Soknad } from '../../types/types'
 import { tekst } from '../../utils/tekster'
-import { getUrlTilSoknad } from '../../utils/url-utils'
 import { useAmplitudeInstance } from '../amplitude/amplitude'
 
 interface EldreUsendtSoknadProps {
@@ -19,11 +19,10 @@ export const EldreUsendtSoknad = ({ eldreSoknad }: EldreUsendtSoknadProps) => {
     logEvent('komponent vist', { 'komponent': 'eldre usendt søknad' })
 
     return (
-        <AlertStripe type={'advarsel'}>
-            {tekst('eldre.usendt.alert')} <Link onClick={() => {
-                logEvent('navigere', { lenketekst: tekst('eldre.usendt.gaa-til') })
-            }} to={getUrlTilSoknad(eldreSoknad)}> {tekst('eldre.usendt.gaa-til')}
-            </Link>
+        <AlertStripe type={'advarsel'}>{tekst('eldre.usendt.alert')} <Link onClick={() => {
+            logEvent('navigere', { lenketekst: tekst('eldre.usendt.gaa-til') })
+        }} to={urlTilSoknad(eldreSoknad)}> {tekst('eldre.usendt.gaa-til')}
+        </Link>
         </AlertStripe>
     )
 }

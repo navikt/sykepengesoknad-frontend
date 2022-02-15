@@ -5,13 +5,12 @@ import { useHistory } from 'react-router'
 import useFetch from '../../data/rest/use-fetch'
 import { FetchState, hasData } from '../../data/rest/utils'
 import { useAppStore } from '../../data/stores/app-store'
+import { urlTilSoknad } from '../../pages/soknad/soknad-link'
 import { RSSoknad } from '../../types/rs-types/rs-soknad'
 import { Soknad } from '../../types/types'
 import env from '../../utils/environment'
 import { logger } from '../../utils/logger'
 import { tekst } from '../../utils/tekster'
-import { getUrlTilSoknad } from '../../utils/url-utils'
-
 
 const Endreknapp = () => {
     const { valgtSoknad, soknader, setSoknader, setFeilmeldingTekst } = useAppStore()
@@ -34,7 +33,7 @@ const Endreknapp = () => {
                     setSoknader(soknader)
                 }
 
-                history.push(getUrlTilSoknad(soknad))
+                history.push(urlTilSoknad(soknad))
                 setFeilmeldingTekst('')
             } else {
                 logger.error('Feil ved opprettelse av UTKAST_TIL_KORRIGERING', fetchState)

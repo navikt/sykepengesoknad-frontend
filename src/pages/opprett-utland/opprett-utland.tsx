@@ -16,8 +16,7 @@ import { Soknad } from '../../types/types'
 import env from '../../utils/environment'
 import { logger } from '../../utils/logger'
 import { tekst } from '../../utils/tekster'
-import { getUrlTilSoknad } from '../../utils/url-utils'
-
+import { urlTilSoknad } from '../soknad/soknad-link'
 
 const OpprettUtland = () => {
     const { soknader, setSoknader, setFeilmeldingTekst, feilmeldingTekst } = useAppStore()
@@ -37,7 +36,7 @@ const OpprettUtland = () => {
                     soknader.push(soknad)
                     setSoknader(soknader)
                 }
-                history.push(getUrlTilSoknad(soknad))
+                history.push(urlTilSoknad(soknad))
                 setFeilmeldingTekst('')
             } else {
                 logger.error('Feil ved opprettelse av utlandssøknad', fetchState)
@@ -73,7 +72,8 @@ const OpprettUtland = () => {
                         />
                     </div>
 
-                    <a className="blokk" href="https://www.nav.no/no/NAV+og+samfunn/Om+NAV/personvern-i-arbeids-og-velferdsetaten"
+                    <a className="blokk"
+                        href="https://www.nav.no/no/NAV+og+samfunn/Om+NAV/personvern-i-arbeids-og-velferdsetaten"
                         target="_blank" rel="noopener noreferrer">
                         {tekst('opprett-utland.personvern')}
                     </a>

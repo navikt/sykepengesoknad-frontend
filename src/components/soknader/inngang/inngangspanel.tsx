@@ -2,9 +2,10 @@ import './inngangspanel.less'
 
 import Etikett from 'nav-frontend-etiketter'
 import React from 'react'
-import { Link } from 'react-router-dom'
 
+import SoknadLink from '../../../pages/soknad/soknad-link'
 import { RSSoknadstatus } from '../../../types/rs-types/rs-soknadstatus'
+import { Soknad } from '../../../types/types'
 import Vis from '../../vis'
 
 interface InngangsIkonProps {
@@ -30,16 +31,16 @@ export const InngangsIkon = ({ ikon, ikonHover }: InngangsIkonProps) => {
 }
 
 interface InngangspanelProps {
-    to: string;
+    soknad: Soknad;
     children: React.ReactNode;
     className?: string;
 }
 
-export const Inngangspanel = ({ to, children, className }: InngangspanelProps) => {
+export const Inngangspanel = ({ soknad, children, className }: InngangspanelProps) => {
     return (
-        <Link to={to} className={`inngangspanel ${className || ''}`}>
+        <SoknadLink soknad={soknad} className={'inngangspanel'} classNameType={className}>
             {children}
-        </Link>
+        </SoknadLink>
     )
 }
 
