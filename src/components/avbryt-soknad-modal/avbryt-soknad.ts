@@ -1,14 +1,14 @@
 import * as H from 'history'
 import React from 'react'
 
-import { redirectTilLoginHvis401 } from '../../../data/rest/utils'
-import { RSSoknadstatus } from '../../../types/rs-types/rs-soknadstatus'
-import { RSSoknadstype } from '../../../types/rs-types/rs-soknadstype'
-import { Soknad } from '../../../types/types'
-import env from '../../../utils/environment'
-import fetcher from '../../../utils/fetcher'
-import { logger } from '../../../utils/logger'
-import { tekst } from '../../../utils/tekster'
+import { redirectTilLoginHvis401 } from '../../data/rest/utils'
+import { RSSoknadstatus } from '../../types/rs-types/rs-soknadstatus'
+import { RSSoknadstype } from '../../types/rs-types/rs-soknadstype'
+import { Soknad } from '../../types/types'
+import env from '../../utils/environment'
+import fetcher from '../../utils/fetcher'
+import { logger } from '../../utils/logger'
+import { tekst } from '../../utils/tekster'
 
 interface AvbrytSoknadReq {
     valgtSoknad: Soknad;
@@ -44,7 +44,7 @@ export async function avbrytSoknad({ valgtSoknad, setSoknader, soknader, setValg
         setFeilmeldingTekst('')
     } else {
         logger.error('Feil ved AVBYTING av søknad', res)
-        setFeilmeldingTekst(tekst('sykepengesoknad.avbryt.feilet'))
+        setFeilmeldingTekst(tekst('avbryt.feilet'))
     }
 
 }

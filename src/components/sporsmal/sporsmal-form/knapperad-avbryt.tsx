@@ -4,7 +4,7 @@ import { useHistory } from 'react-router-dom'
 
 import { useAppStore } from '../../../data/stores/app-store'
 import { tekst } from '../../../utils/tekster'
-import { avbrytSoknad } from './avbryt-soknad'
+import { avbrytSoknad } from '../../avbryt-soknad-modal/avbryt-soknad'
 
 type Event = MouseEvent<HTMLAnchorElement | HTMLButtonElement>;
 

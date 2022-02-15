@@ -1,6 +1,6 @@
 import { avbruttSoknad } from '../../../src/data/mock/data/soknader-integration'
 
-describe('Tester gjenoppretting av søknad', () => {
+describe('Tester avryting av søknad', () => {
 
 
     before(() => {
@@ -47,12 +47,12 @@ describe('Tester gjenoppretting av søknad', () => {
     it('Søknad kan avbrytes ', function() {
 
         // Avbryt dialog vises
-        cy.contains('Avbryt søknad').click()
-        cy.get('.avbrytDialog__dialog button.lenke:contains(Nei, jeg vil ikke avbryte søknaden likevel)').click()
-        cy.get('.avbrytDialog__dialog button.lenke:contains(Nei, jeg vil ikke avbryte søknaden likevel)').should('not.exist')
+        cy.contains('Jeg vil ikke søke om sykepenger').click()
+        cy.get('.modal__avbryt_popup button:contains(Nei, jeg vil bruke søknaden)').click()
+        cy.get('.modal__avbryt_popup button:contains(Nei, jeg vil bruke søknaden)').should('not.exist')
 
-        cy.contains('Avbryt søknad').click()
-        cy.get('button.knapp.knapp--fare:contains(Ja, avbryt søknaden)').click()
+        cy.contains('Jeg vil ikke søke om sykepenger').click()
+        cy.get('.modal__avbryt_popup button:contains(Ja, jeg er sikker)').click()
         cy.url().should('include', `${avbruttSoknad.id}/1`)
         cy.contains('Gjenåpne søknad')
     })
