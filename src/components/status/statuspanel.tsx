@@ -9,14 +9,12 @@ import { RouteParams } from '../../app'
 import { redirectTilLoginHvis401 } from '../../data/rest/utils'
 import { useAppStore } from '../../data/stores/app-store'
 import { RSSoknadstatus } from '../../types/rs-types/rs-soknadstatus'
-import { RSSoknadstype } from '../../types/rs-types/rs-soknadstype'
 import { tilLesbarDatoMedArstall } from '../../utils/dato-utils'
 import env from '../../utils/environment'
 import fetcher from '../../utils/fetcher'
 import { logger } from '../../utils/logger'
 import { tekst } from '../../utils/tekster'
 import { useAmplitudeInstance } from '../amplitude/amplitude'
-import Vis from '../vis'
 
 const StatusPanel = () => {
     const { valgtSoknad, setValgtSoknad, setValgtSykmelding, sykmeldinger, soknader, setSoknader } = useAppStore()
@@ -34,13 +32,6 @@ const StatusPanel = () => {
         }
         // eslint-disable-next-line
     }, [])
-
-    const soknadKanGjenapnes = (opprettetDato: Date) => {
-        const oppholdUtland = valgtSoknad!.soknadstype === RSSoknadstype.OPPHOLD_UTLAND
-        const ettAarSiden = new Date()
-        ettAarSiden.setFullYear(ettAarSiden.getFullYear() - 1)
-        return !oppholdUtland && opprettetDato >= ettAarSiden
-    }
 
     const Gjenapne = async() => {
         if (gjenapner) return
@@ -66,7 +57,7 @@ const StatusPanel = () => {
                     valgtSoknad!.status = RSSoknadstatus.NY
                     valgtSoknad!.avbruttDato = undefined
                     setValgtSoknad(valgtSoknad)
-                    soknader[soknader.findIndex(sok => sok.id === valgtSoknad!.id)] = valgtSoknad!
+                    soknader[ soknader.findIndex(sok => sok.id === valgtSoknad!.id) ] = valgtSoknad!
                     setSoknader(soknader)
                     history.push(`/soknader/${valgtSoknad!.id}/1`)
                 } else {
@@ -93,13 +84,9 @@ const StatusPanel = () => {
                 </div>
             </div>
 
-            <Vis hvis={soknadKanGjenapnes(valgtSoknad!.opprettetDato)}
-                render={() =>
-                    <Knapp spinner={gjenapner} mini type="standard" onClick={Gjenapne}>
-                        {'Gjenåpne søknad'}
-                    </Knapp>
-                }
-            />
+            <Knapp spinner={gjenapner} mini type="standard" onClick={Gjenapne}>
+                {'Gjenåpne søknad'}
+            </Knapp>
         </div>
     )
 }
