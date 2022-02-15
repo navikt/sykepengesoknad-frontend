@@ -3544,12 +3544,7 @@ export const delvisUtfylltArbeidsledig: RSSoknad = {
             'max': null,
             'pavirkerAndreSporsmal': false,
             'kriterieForVisningAvUndersporsmal': null,
-            'svar': [
-                {
-                    'verdi': 'NEI',
-                    'avgittAv': null
-                }
-            ],
+            'svar': [],
             'undersporsmal': []
         },
         {
@@ -3575,12 +3570,7 @@ export const delvisUtfylltArbeidsledig: RSSoknad = {
             'max': null,
             'pavirkerAndreSporsmal': false,
             'kriterieForVisningAvUndersporsmal': null,
-            'svar': [
-                {
-                    'verdi': 'CHECKED',
-                    'avgittAv': null
-                }
-            ],
+            'svar': [],
             'undersporsmal': []
         }
     ],

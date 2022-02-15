@@ -8,11 +8,11 @@ import { RSSoknadstype } from '../../types/rs-types/rs-soknadstype'
 import env from '../../utils/environment'
 import { jsonDeepCopy } from '../../utils/json-deep-copy'
 import KvitteringJPG from './data/kvittering.jpg'
-import { gradertReisetilskudd, nyttReisetilskudd } from './data/reisetilskudd'
+import { delvisUtfyltReisetilskudd,gradertReisetilskudd, nyttReisetilskudd } from './data/reisetilskudd'
 import {
     arbeidstakerDeltPeriodeForsteUtenforArbeidsgiverperiodeKvittering,
     arbeidstakerInnenforArbeidsgiverperiodeKvittering,
-    arbeidstakerMedOppholdForsteUtenforArbeidsgiverperiodeKvittering,
+    arbeidstakerMedOppholdForsteUtenforArbeidsgiverperiodeKvittering, arbeidstakerTilKorrigering,
     arbeidstakerUtenforArbeidsgiverperiodeKvittering,
     arbeidstakerUtenOppholdForsteUtenforArbeidsgiverperiodeKvittering,
     brukertestSoknad,
@@ -20,7 +20,7 @@ import {
     sok6,
     soknaderIntegration,
     soknadSomTriggerFeilStatusForOppdaterSporsmal,
-    soknadSomTriggerSporsmalFinnesIkkeISoknad,
+    soknadSomTriggerSporsmalFinnesIkkeISoknad
 } from './data/soknader-integration'
 import { arbeidstaker, arbeidstakerGradert, soknaderOpplaering } from './data/soknader-opplaering'
 import { sykmeldinger } from './data/sykmeldinger'
@@ -36,7 +36,10 @@ const finnSoknader = (): RSSoknad[] => {
     if (window.location.search.includes('brukertest')) {
         return [ jsonDeepCopy(brukertestSoknad) ]
     }
-    const soknader = [ ...jsonDeepCopy(soknaderOpplaering), nyttReisetilskudd, gradertReisetilskudd ]
+    if (window.location.search.includes('korrigering')) {
+        return [ jsonDeepCopy(arbeidstakerTilKorrigering) ]
+    }
+    const soknader = [ ...jsonDeepCopy(soknaderOpplaering), nyttReisetilskudd, gradertReisetilskudd, delvisUtfyltReisetilskudd ]
     if (!env.isOpplaering() || window.location.href.includes('alle-mock-data')) {
         soknader.push(...jsonDeepCopy(soknaderIntegration))
     }
