@@ -14,7 +14,7 @@ describe('Tester å åpne søknaden direkte fra sykefravaer', () => {
         cy.contains('100% sykmeldt')
     })
 
-    it('Åpner en sendt søknad på en annen siden enn kvitteringssiden og sendes vi til oversikten', function() {
+    it('Åpner en sendt søknad på en annen siden enn kvitteringssiden og sendes til oversikten', function() {
         cy.visit(`http://localhost:8080/syk/sykepengesoknad/soknader/${sendtArbeidsledig.id}`)
         cy.url().should('equal', `http://localhost:8080/syk/sykepengesoknad/kvittering/${sendtArbeidsledig.id}`)
         cy.visit(`http://localhost:8080/syk/sykepengesoknad/soknader/${sendtArbeidsledig.id}/3`)
