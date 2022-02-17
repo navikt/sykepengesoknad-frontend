@@ -1,19 +1,19 @@
-import './statuspanel.less'
+import './gjenapneknapp.less'
 
 import { Knapp } from 'nav-frontend-knapper'
 import React, { useEffect, useState } from 'react'
 import { useHistory, useParams } from 'react-router'
 
-import { RouteParams } from '../../app'
-import { redirectTilLoginHvis401 } from '../../data/rest/utils'
-import { useAppStore } from '../../data/stores/app-store'
-import { RSSoknadstatus } from '../../types/rs-types/rs-soknadstatus'
-import env from '../../utils/environment'
-import fetcher from '../../utils/fetcher'
-import { logger } from '../../utils/logger'
-import { useAmplitudeInstance } from '../amplitude/amplitude'
+import { RouteParams } from '../../../app'
+import { redirectTilLoginHvis401 } from '../../../data/rest/utils'
+import { useAppStore } from '../../../data/stores/app-store'
+import { RSSoknadstatus } from '../../../types/rs-types/rs-soknadstatus'
+import env from '../../../utils/environment'
+import fetcher from '../../../utils/fetcher'
+import { logger } from '../../../utils/logger'
+import { useAmplitudeInstance } from '../../amplitude/amplitude'
 
-const StatusPanel = () => {
+const GjenapneSoknad = () => {
     const { valgtSoknad, setValgtSoknad, setValgtSykmelding, sykmeldinger, soknader, setSoknader } = useAppStore()
     const history = useHistory()
     const { id } = useParams<RouteParams>()
@@ -30,7 +30,7 @@ const StatusPanel = () => {
         // eslint-disable-next-line
     }, [])
 
-    const Gjenapne = async() => {
+    const gjenapneSoknad = async() => {
         if (gjenapner) return
         setGjenapner(true)
         try {
@@ -69,10 +69,10 @@ const StatusPanel = () => {
     }
 
     return (
-        <Knapp className={'gjenapne-knapp'} spinner={gjenapner} mini type="standard" onClick={Gjenapne}>
+        <Knapp className={'gjenapne-knapp'} spinner={gjenapner} mini type="standard" onClick={gjenapneSoknad}>
             {'Gjenåpne søknad'}
         </Knapp>
     )
 }
 
-export default StatusPanel
+export default GjenapneSoknad

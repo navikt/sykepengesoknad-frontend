@@ -18,10 +18,10 @@ import OmReisetilskudd from '../../components/om-reisetilskudd/om-reisetilskudd'
 import Opplysninger from '../../components/opplysninger-fra-sykmelding/opplysninger'
 import { ViktigInformasjon } from '../../components/soknad-intro/viktig-informasjon'
 import SoknadMedToDeler from '../../components/soknad-med-to-deler/soknad-med-to-deler'
+import GjenapneSoknad from '../../components/soknader/gjenapne/gjenapneknapp'
 import SporsmalForm from '../../components/sporsmal/sporsmal-form/sporsmal-form'
 import SporsmalSteg from '../../components/sporsmal/sporsmal-steg/sporsmal-steg'
 import { hentNokkel } from '../../components/sporsmal/sporsmal-utils'
-import StatusPanel from '../../components/status/statuspanel'
 import Vis from '../../components/vis'
 import { useAppStore } from '../../data/stores/app-store'
 import { RSSoknadstatus } from '../../types/rs-types/rs-soknadstatus'
@@ -199,7 +199,7 @@ const Fordeling = () => {
 
                     <Opplysninger ekspandert={true} steg={'avbrutt-søknad'} />
                     <HvorforSoknadSykepenger soknadstype={valgtSoknad.soknadstype} />
-                    <StatusPanel />
+                    <GjenapneSoknad />
                 </>
             )
     }
