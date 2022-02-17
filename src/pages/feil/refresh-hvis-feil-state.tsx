@@ -7,8 +7,8 @@ import { useHistory } from 'react-router-dom'
 
 import { useAppStore } from '../../data/stores/app-store'
 import { tekst } from '../../utils/tekster'
-import { oversiktside } from '../../utils/url-utils'
 import { setBodyClass } from '../../utils/utils'
+import { oversiktside } from '../soknad/soknad-link'
 
 export function FeilView() {
     const history = useHistory()

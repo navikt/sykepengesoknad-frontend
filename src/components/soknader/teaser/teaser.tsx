@@ -2,12 +2,12 @@ import { HoyreChevron } from 'nav-frontend-chevron'
 import { Undertekst, Undertittel } from 'nav-frontend-typografi'
 import React from 'react'
 
+import { erDelvisUtfyltNySoknad } from '../../../pages/soknad/soknad-link'
 import { RSSoknadstatus } from '../../../types/rs-types/rs-soknadstatus'
 import { RSSoknadstype } from '../../../types/rs-types/rs-soknadstype'
 import { tilLesbarPeriodeMedArstall } from '../../../utils/dato-utils'
 import env from '../../../utils/environment'
 import { tekst } from '../../../utils/tekster'
-import { getUrlTilSoknad, visSomDelvisUtfylt } from '../../../utils/url-utils'
 import Vis from '../../vis'
 import { InngangsIkon, Inngangspanel, InngangsStatus } from '../inngang/inngangspanel'
 import {
@@ -25,7 +25,7 @@ const Teaser = ({ soknad }: SykepengesoknadTeaserProps) => {
         <article
             aria-labelledby={`soknader-header-${soknad.id}`}
         >
-            <Inngangspanel to={getUrlTilSoknad(soknad)} className="inngangspanel--ny">
+            <Inngangspanel soknad={soknad} className="inngangspanel--ny">
                 <div className="inngangspanel__ytre">
                     <div className="inngangspanel__del1">
                         <InngangsIkon
@@ -52,7 +52,7 @@ const Teaser = ({ soknad }: SykepengesoknadTeaserProps) => {
                         </div>
                     </div>
 
-                    <Vis hvis={visSomDelvisUtfylt(soknad)}
+                    <Vis hvis={erDelvisUtfyltNySoknad(soknad)}
                         render={() =>
                             <InngangsStatus status={soknad.status} tekst={tekst('soknad.teaser.delvis-utfylt.tekst')} />
                         }

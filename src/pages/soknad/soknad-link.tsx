@@ -1,8 +1,17 @@
-import { RSSoknadstatus } from '../types/rs-types/rs-soknadstatus'
-import { RSSvartype } from '../types/rs-types/rs-svartype'
-import { Soknad } from '../types/types'
+import React from 'react'
+import { Link } from 'react-router-dom'
 
-export const getUrlTilSoknad = (soknad: Soknad) => {
+import { RSSoknadstatus } from '../../types/rs-types/rs-soknadstatus'
+import { RSSvartype } from '../../types/rs-types/rs-svartype'
+import { Soknad } from '../../types/types'
+
+interface SoknadLinkProps {
+    soknad: Soknad;
+    children: React.ReactNode;
+    className: string;
+}
+
+export const urlTilSoknad = (soknad: Soknad) => {
     if (soknad.status === RSSoknadstatus.SENDT) {
         return `/kvittering/${soknad.id}`
     }
@@ -21,21 +30,21 @@ export const getUrlTilSoknad = (soknad: Soknad) => {
         : `${soknaderUrl}/1`
 }
 
-export const visSomDelvisUtfylt = function(soknad: Soknad): boolean {
+export const erDelvisUtfyltNySoknad = (soknad: Soknad): boolean => {
     return erDelvisUtfylt(soknad) && soknad.status !== RSSoknadstatus.UTKAST_TIL_KORRIGERING
 }
 
-const erDelvisUtfylt = function(soknad: Soknad): boolean {
+const erDelvisUtfylt = (soknad: Soknad): boolean => {
     const antallRelevanteSporsmal = hentRelevanteSporsmal(soknad).length
     const posisjonPaSisteBesvarteSporsmal = finnPosisjonPaSisteBesvarteSporsmal(soknad)
     return posisjonPaSisteBesvarteSporsmal > 0 && (posisjonPaSisteBesvarteSporsmal !== antallRelevanteSporsmal)
 }
 
-const hentRelevanteSporsmal = function(soknad: Soknad) {
+const hentRelevanteSporsmal = (soknad: Soknad) => {
     return soknad.sporsmal.filter((sporsmal) => sporsmal.svartype !== RSSvartype.IKKE_RELEVANT)
 }
 
-const finnPosisjonPaSisteBesvarteSporsmal = function(soknad: Soknad) {
+const finnPosisjonPaSisteBesvarteSporsmal = (soknad: Soknad) => {
     const reversertSporsmalsListe = hentRelevanteSporsmal(soknad).slice().reverse()
     let ubesvarteSporsmal = 0
 
@@ -48,6 +57,19 @@ const finnPosisjonPaSisteBesvarteSporsmal = function(soknad: Soknad) {
     return reversertSporsmalsListe.length - ubesvarteSporsmal
 }
 
+const SoknadLink = ({ soknad, children, className }: SoknadLinkProps) => {
+
+    const url = urlTilSoknad(soknad)
+
+    return (
+        <Link to={url} className={`${className}`}>
+            {children}
+        </Link>
+    )
+}
+
 export const utlandssoknadUrl = '/syk/sykepengesoknad/sykepengesoknad-utland'
 
 export const oversiktside = '/'
+
+export default SoknadLink

@@ -1,6 +1,6 @@
 import { useHistory } from 'react-router-dom'
 
-import { oversiktside } from '../../utils/url-utils'
+import { oversiktside } from '../soknad/soknad-link'
 
 const RedirectTilOversikt = () => {
     const history = useHistory()

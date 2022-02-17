@@ -28,9 +28,9 @@ import { RSSoknadstype } from '../../types/rs-types/rs-soknadstype'
 import { Brodsmule } from '../../types/types'
 import { SEPARATOR } from '../../utils/constants'
 import { tekst } from '../../utils/tekster'
-import { getUrlTilSoknad } from '../../utils/url-utils'
 import { setBodyClass } from '../../utils/utils'
 import RedirectTilOversikt from '../feil/redirect-til-oversikt'
+import { urlTilSoknad } from './soknad-link'
 
 const brodsmuler: Brodsmule[] = [ {
     tittel: tekst('soknader.sidetittel'),
@@ -61,7 +61,7 @@ const Soknaden = () => {
             soknadstatus: filtrertSoknad?.status,
         })
         // eslint-disable-next-line
-    }, [id]);
+    }, [ id ]);
 
     useEffect(() => {
         setBodyClass('soknaden')
@@ -98,9 +98,10 @@ const Fordeling = () => {
     }
 
     if (isNaN(stegNo)) {
-        history.replace(getUrlTilSoknad(valgtSoknad))
+        history.replace(urlTilSoknad(valgtSoknad))
         return null
     }
+
 
     const tittel = tekst(hentNokkel(valgtSoknad!, stegNo) as any)
     const erUtlandssoknad = valgtSoknad.soknadstype === RSSoknadstype.OPPHOLD_UTLAND
