@@ -9,7 +9,6 @@ interface SoknadLinkProps {
     soknad: Soknad;
     children: React.ReactNode;
     className: string;
-    classNameType?: string;
 }
 
 export const urlTilSoknad = (soknad: Soknad) => {
@@ -58,12 +57,12 @@ const finnPosisjonPaSisteBesvarteSporsmal = (soknad: Soknad) => {
     return reversertSporsmalsListe.length - ubesvarteSporsmal
 }
 
-const SoknadLink = ({ soknad, children, className, classNameType }: SoknadLinkProps) => {
+const SoknadLink = ({ soknad, children, className }: SoknadLinkProps) => {
 
     const url = urlTilSoknad(soknad)
 
     return (
-        <Link to={url} className={`${className} ${classNameType || ''}`}>
+        <Link to={url} className={`${className}`}>
             {children}
         </Link>
     )
