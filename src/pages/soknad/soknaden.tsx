@@ -1,5 +1,6 @@
 import './soknaden.less'
 
+import { Alert } from '@navikt/ds-react'
 import AlertStripe from 'nav-frontend-alertstriper'
 import { VenstreChevron } from 'nav-frontend-chevron'
 import { Normaltekst, Systemtittel } from 'nav-frontend-typografi'
@@ -27,6 +28,7 @@ import { RSSoknadstatus } from '../../types/rs-types/rs-soknadstatus'
 import { RSSoknadstype } from '../../types/rs-types/rs-soknadstype'
 import { Brodsmule } from '../../types/types'
 import { SEPARATOR } from '../../utils/constants'
+import { tilLesbarDatoMedArstall } from '../../utils/dato-utils'
 import { tekst } from '../../utils/tekster'
 import { setBodyClass } from '../../utils/utils'
 import RedirectTilOversikt from '../feil/redirect-til-oversikt'
@@ -182,8 +184,22 @@ const Fordeling = () => {
         case RSSoknadstatus.AVBRUTT:
             return (
                 <>
+                    <Alert variant="warning">
+                        <Normaltekst>{tekst('sykepengesoknad.avbrutt.tidspunkt')} {tilLesbarDatoMedArstall(valgtSoknad!.avbruttDato)}.</Normaltekst>
+                    </Alert>
+
+                    <div className={'avbrutt-info'}>
+                        <p className={'ingress'}>
+                            {tekst('sykepengesoknad.avbrutt.informasjon-tittel')}
+                        </p>
+                        <p>
+                            {tekst('sykepengesoknad.avbrutt.informasjon-innhold')}
+                        </p>
+                    </div>
+
+                    <Opplysninger ekspandert={true} steg={'avbrutt-søknad'} />
+                    <HvorforSoknadSykepenger soknadstype={valgtSoknad.soknadstype} />
                     <StatusPanel />
-                    <Opplysninger ekspandert={false} steg={'avbrutt-søknad'} />
                 </>
             )
     }

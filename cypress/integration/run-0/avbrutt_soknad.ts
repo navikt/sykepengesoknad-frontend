@@ -24,11 +24,15 @@ describe('Tester avryting av søknad', () => {
     })
 
     it('Avbrutt tekster stemmer', function() {
-        cy.contains('Avbrutt av deg')
+        cy.contains('Søknaden ble avbrutt av deg')
         cy.contains('12. juni 2020')
+        cy.contains('Det betyr at du ikke vil få sykepenger for perioden denne søknaden gjelder for.')
+        cy.contains('Hvis du vil ha sykepenger likevel, må du gjenåpne søknaden, fylle den ut og sende den inn. ' +
+            'Vi minner om at søknaden må sendes seneste tre måneder etter den måneden hver enkelt sykemelding startet.')
 
         // Sykmelding
         cy.contains('1. april - 24. april 2020 • 24 dager')
+        cy.contains('Hvorfor må jeg søke om sykepenger?')
     })
 
     it('Søknad kan gjenåpnes', function() {
