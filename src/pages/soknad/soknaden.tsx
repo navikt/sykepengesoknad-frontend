@@ -1,5 +1,6 @@
 import './soknaden.less'
 
+import { Alert } from '@navikt/ds-react'
 import AlertStripe from 'nav-frontend-alertstriper'
 import { VenstreChevron } from 'nav-frontend-chevron'
 import { Normaltekst, Systemtittel } from 'nav-frontend-typografi'
@@ -17,16 +18,17 @@ import OmReisetilskudd from '../../components/om-reisetilskudd/om-reisetilskudd'
 import Opplysninger from '../../components/opplysninger-fra-sykmelding/opplysninger'
 import { ViktigInformasjon } from '../../components/soknad-intro/viktig-informasjon'
 import SoknadMedToDeler from '../../components/soknad-med-to-deler/soknad-med-to-deler'
+import GjenapneSoknad from '../../components/soknader/avbryt/gjenapneknapp'
 import SporsmalForm from '../../components/sporsmal/sporsmal-form/sporsmal-form'
 import SporsmalSteg from '../../components/sporsmal/sporsmal-steg/sporsmal-steg'
 import { hentNokkel } from '../../components/sporsmal/sporsmal-utils'
-import StatusPanel from '../../components/status/statuspanel'
 import Vis from '../../components/vis'
 import { useAppStore } from '../../data/stores/app-store'
 import { RSSoknadstatus } from '../../types/rs-types/rs-soknadstatus'
 import { RSSoknadstype } from '../../types/rs-types/rs-soknadstype'
 import { Brodsmule } from '../../types/types'
 import { SEPARATOR } from '../../utils/constants'
+import { tilLesbarDatoMedArstall } from '../../utils/dato-utils'
 import { tekst } from '../../utils/tekster'
 import { setBodyClass } from '../../utils/utils'
 import RedirectTilOversikt from '../feil/redirect-til-oversikt'
@@ -182,8 +184,22 @@ const Fordeling = () => {
         case RSSoknadstatus.AVBRUTT:
             return (
                 <>
-                    <StatusPanel />
-                    <Opplysninger ekspandert={false} steg={'avbrutt-søknad'} />
+                    <Alert variant="warning">
+                        <Normaltekst>{tekst('sykepengesoknad.avbrutt.tidspunkt')} {tilLesbarDatoMedArstall(valgtSoknad!.avbruttDato)}.</Normaltekst>
+                    </Alert>
+
+                    <div className={'avbrutt-info'}>
+                        <p className={'ingress'}>
+                            {tekst('sykepengesoknad.avbrutt.informasjon-tittel')}
+                        </p>
+                        <p>
+                            {tekst('sykepengesoknad.avbrutt.informasjon-innhold')}
+                        </p>
+                    </div>
+
+                    <Opplysninger ekspandert={true} steg={'avbrutt-søknad'} />
+                    <HvorforSoknadSykepenger soknadstype={valgtSoknad.soknadstype} />
+                    <GjenapneSoknad />
                 </>
             )
     }

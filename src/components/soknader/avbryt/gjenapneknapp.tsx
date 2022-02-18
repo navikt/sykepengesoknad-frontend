@@ -1,22 +1,19 @@
-import './statuspanel.less'
+import './gjenapneknapp.less'
 
 import { Knapp } from 'nav-frontend-knapper'
-import { Normaltekst, UndertekstBold } from 'nav-frontend-typografi'
 import React, { useEffect, useState } from 'react'
 import { useHistory, useParams } from 'react-router'
 
-import { RouteParams } from '../../app'
-import { redirectTilLoginHvis401 } from '../../data/rest/utils'
-import { useAppStore } from '../../data/stores/app-store'
-import { RSSoknadstatus } from '../../types/rs-types/rs-soknadstatus'
-import { tilLesbarDatoMedArstall } from '../../utils/dato-utils'
-import env from '../../utils/environment'
-import fetcher from '../../utils/fetcher'
-import { logger } from '../../utils/logger'
-import { tekst } from '../../utils/tekster'
-import { useAmplitudeInstance } from '../amplitude/amplitude'
+import { RouteParams } from '../../../app'
+import { redirectTilLoginHvis401 } from '../../../data/rest/utils'
+import { useAppStore } from '../../../data/stores/app-store'
+import { RSSoknadstatus } from '../../../types/rs-types/rs-soknadstatus'
+import env from '../../../utils/environment'
+import fetcher from '../../../utils/fetcher'
+import { logger } from '../../../utils/logger'
+import { useAmplitudeInstance } from '../../amplitude/amplitude'
 
-const StatusPanel = () => {
+const GjenapneSoknad = () => {
     const { valgtSoknad, setValgtSoknad, setValgtSykmelding, sykmeldinger, soknader, setSoknader } = useAppStore()
     const history = useHistory()
     const { id } = useParams<RouteParams>()
@@ -33,7 +30,7 @@ const StatusPanel = () => {
         // eslint-disable-next-line
     }, [])
 
-    const Gjenapne = async() => {
+    const gjenapneSoknad = async() => {
         if (gjenapner) return
         setGjenapner(true)
         try {
@@ -72,23 +69,10 @@ const StatusPanel = () => {
     }
 
     return (
-        <div className={'statuspanel'}>
-            <div className={'content'}>
-                <div className="avsnitt">
-                    <UndertekstBold tag="h3" className="avsnitt-hode">{tekst('statuspanel.status')}</UndertekstBold>
-                    <Normaltekst>{tekst('sykepengesoknad.status.AVBRUTT')}</Normaltekst>
-                </div>
-                <div className="avsnitt">
-                    <UndertekstBold tag="h3" className="avsnitt-hode">{'Dato avbrutt'}</UndertekstBold>
-                    <Normaltekst>{tilLesbarDatoMedArstall(valgtSoknad!.avbruttDato)}</Normaltekst>
-                </div>
-            </div>
-
-            <Knapp spinner={gjenapner} mini type="standard" onClick={Gjenapne}>
-                {'Gjenåpne søknad'}
-            </Knapp>
-        </div>
+        <Knapp className={'gjenapne-knapp'} spinner={gjenapner} mini type="standard" onClick={gjenapneSoknad}>
+            {'Gjenåpne søknad'}
+        </Knapp>
     )
 }
 
-export default StatusPanel
+export default GjenapneSoknad
