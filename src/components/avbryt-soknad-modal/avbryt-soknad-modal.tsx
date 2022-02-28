@@ -1,6 +1,6 @@
 import './avbryt-soknad-modal.less'
 
-import { BodyLong, Button, Modal } from '@navikt/ds-react'
+import { BodyLong, Button, Checkbox, CheckboxGroup, Label,Modal } from '@navikt/ds-react'
 import React, { useState } from 'react'
 import { useHistory, useParams } from 'react-router-dom'
 
@@ -46,15 +46,27 @@ const AvbrytSoknadModal = () => {
             open={aapen}
             >
                 <Modal.Content>
-                    <BodyLong spacing size={'medium'} className={'sporsmal'}>
-                        {tekst('avbryt.popup.sporsmal')}
+                    <BodyLong spacing size={'medium'} className={'tiitel'}>
+                        <Label>{tekst('avbryt.popup.survey')}</Label>
                     </BodyLong>
 
+                    <CheckboxGroup
+                        size="medium"
+                        legend={tekst('avbryt.popup.sporsmal')}
+                        description={tekst('avbryt.popup.survey.anonymt')}
+                        className={'popup-survey'}>
+                        <Checkbox value="alt1">{tekst('avbryt.popup.survey.alternativ1')}</Checkbox>
+                        <Checkbox value="alt2">{tekst('avbryt.popup.survey.alternativ2')}</Checkbox>
+                        <Checkbox value="alt3">{tekst('avbryt.popup.survey.alternativ3')}</Checkbox>
+                        <Checkbox value="alt4">{tekst('avbryt.popup.survey.alternativ4')}</Checkbox>
+                        <Checkbox value="alt5">{tekst('avbryt.popup.survey.alternativ5')}</Checkbox>
+                        <Checkbox value="alt6">{tekst('avbryt.popup.survey.alternativ6')}</Checkbox>
+                    </CheckboxGroup>
 
-                    <Button size="small" variant="danger" className="midtstilt-knapp" onClick={
+                    <Button size="small" variant="primary" className="midtstilt-knapp" onClick={
                         () => {
                             logEvent('knapp klikket', {
-                                'tekst': tekst('avbryt.popup.ja'),
+                                'tekst': tekst('avbryt.popup.bekreft'),
                                 'soknadstype': valgtSoknad?.soknadstype,
                                 'component': tekst('avbryt.popup.tittel'),
                                 'steg': stegId
@@ -70,19 +82,19 @@ const AvbrytSoknadModal = () => {
 
                         }
                     }>
-                        {tekst('avbryt.popup.ja')}
+                        {tekst('avbryt.popup.bekreft')}
                     </Button>
-                    <Button size="small" variant="secondary" className="midtstilt-knapp"
+                    <Button size="small" variant="tertiary" className="midtstilt-knapp"
                         onClick={() => {
                             setAapen(false)
                             logEvent('knapp klikket', {
-                                'tekst': tekst('avbryt.popup.nei'),
+                                'tekst': tekst('avbryt.popup.angre'),
                                 'soknadstype': valgtSoknad?.soknadstype,
                                 'component': tekst('avbryt.popup.tittel'),
                                 'steg': stegId
                             })
                         }}>
-                        {tekst('avbryt.popup.nei')}
+                        {tekst('avbryt.popup.angre')}
                     </Button>
                 </Modal.Content>
             </Modal>
