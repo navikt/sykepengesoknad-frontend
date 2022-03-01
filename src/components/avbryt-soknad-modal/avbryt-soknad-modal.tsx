@@ -63,32 +63,32 @@ const AvbrytSoknadModal = () => {
                         description={tekst('avbryt.popup.survey.anonymt')}
                         className={'popup-survey'}>
                         <Checkbox {...register('survey')}
-                            onChange={ boxClicked }
+                            onClick={ boxClicked }
                             value={tekst('avbryt.popup.survey.alternativ1')}>
                             {tekst('avbryt.popup.survey.alternativ1')}
                         </Checkbox>
                         <Checkbox {...register('survey')}
-                            onChange={boxClicked}
+                            onClick={boxClicked}
                             value={tekst('avbryt.popup.survey.alternativ2')}>
                             {tekst('avbryt.popup.survey.alternativ2')}
                         </Checkbox>
                         <Checkbox {...register('survey')}
-                            onChange={boxClicked}
+                            onClick={boxClicked}
                             value={tekst('avbryt.popup.survey.alternativ3')}>
                             {tekst('avbryt.popup.survey.alternativ3')}
                         </Checkbox>
                         <Checkbox {...register('survey')}
-                            onChange={boxClicked}
+                            onClick={boxClicked}
                             value={tekst('avbryt.popup.survey.alternativ4')}>
                             {tekst('avbryt.popup.survey.alternativ4')}
                         </Checkbox>
                         <Checkbox {...register('survey')}
-                            onChange={boxClicked}
+                            onClick={boxClicked}
                             value={tekst('avbryt.popup.survey.alternativ5')}>
                             {tekst('avbryt.popup.survey.alternativ5')}
                         </Checkbox>
                         <Checkbox {...register('survey')}
-                            onChange={boxClicked}
+                            onClick={boxClicked}
                             value={tekst('avbryt.popup.survey.alternativ6')}>
                             {tekst('avbryt.popup.survey.alternativ6')}
                         </Checkbox>
