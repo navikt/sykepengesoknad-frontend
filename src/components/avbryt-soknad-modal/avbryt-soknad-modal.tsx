@@ -1,6 +1,6 @@
 import './avbryt-soknad-modal.less'
 
-import { BodyLong, Button, Checkbox, CheckboxGroup, Label,Modal } from '@navikt/ds-react'
+import { Button, Checkbox, CheckboxGroup, Label,Modal } from '@navikt/ds-react'
 import React, { useState } from 'react'
 import { useFormContext } from 'react-hook-form'
 import { useHistory, useParams } from 'react-router-dom'
@@ -52,10 +52,9 @@ const AvbrytSoknadModal = () => {
             open={aapen}
             >
                 <Modal.Content>
-                    <BodyLong spacing size={'medium'} className={'tiitel'}>
-                        <Label>{tekst('avbryt.popup.survey')}</Label>
-                    </BodyLong>
-
+                    <Label size="medium" className="tittel" spacing>
+                        {tekst('avbryt.popup.survey')}
+                    </Label>
                     <CheckboxGroup
                         size="medium"
                         error={error}
