@@ -20,9 +20,9 @@ const AvbrytSoknadModal = () => {
     const { register, getValues } = useFormContext()
     const history = useHistory()
 
-
     const boxClicked = () => {
-        if (!getValues('survey')) setError('')
+        const surveyValues = getValues('survey')
+        if (!surveyValues || surveyValues.length === 0 ) setError('')
     }
     return (
 
@@ -97,7 +97,7 @@ const AvbrytSoknadModal = () => {
                     <Button size="small" variant="primary" className="midtstilt-knapp" onClick={
                         (e) => {
                             const surveyValues = getValues('survey')
-                            if( !surveyValues ) {
+                            if( !surveyValues || surveyValues.length === 0 ) {
                                 setError(tekst('soknad.feilmelding.checkbox.lokal'))
                                 return
                             }
@@ -122,6 +122,7 @@ const AvbrytSoknadModal = () => {
                     }>
                         {tekst('avbryt.popup.bekreft')}
                     </Button>
+
                     <Button size="small" variant="tertiary" className="midtstilt-knapp"
                         onClick={() => {
                             setAapen(false)
