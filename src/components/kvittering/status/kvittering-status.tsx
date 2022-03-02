@@ -24,7 +24,7 @@ const KvitteringStatus = () => {
     const opprettDatoer = () => {
         const sendtTilNav = valgtSoknad?.sendtTilNAVDato
         if (sendtTilNav) {
-            const datoNav = dayjs(sendtTilNav).format('dddd D. MMM, kl HH:mm')
+            const datoNav = dayjs(sendtTilNav).format('dddd D. MMM kl HH:mm')
             setTilNavDato(datoNav.charAt(0).toUpperCase() + datoNav.slice(1))
         }
 
