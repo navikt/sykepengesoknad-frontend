@@ -1,6 +1,6 @@
 import './refresh-hvis-feil-state.less'
 
-import Alertstripe from 'nav-frontend-alertstriper'
+import { Alert } from '@navikt/ds-react'
 import { Knapp } from 'nav-frontend-knapper'
 import React, { useEffect } from 'react'
 import { useHistory } from 'react-router-dom'
@@ -22,7 +22,7 @@ export function FeilView() {
     return (
         <div className="limit">
             <div aria-live="polite">
-                <Alertstripe type="feil">{tekst('feilstate.alert')}</Alertstripe>
+                <Alert variant="error">{tekst('feilstate.alert')}</Alert>
             </div>
             <div className="knappewrapper">
                 <Knapp onClick={() => window.location.reload()}>{tekst('feilstate.refresh')}</Knapp>

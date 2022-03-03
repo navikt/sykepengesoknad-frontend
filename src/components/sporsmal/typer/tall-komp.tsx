@@ -1,6 +1,6 @@
 import './tall-komp.less'
 
-import AlertStripe from 'nav-frontend-alertstriper'
+import { Alert } from '@navikt/ds-react'
 import { Normaltekst } from 'nav-frontend-typografi'
 import React, { useRef } from 'react'
 import { useFormContext } from 'react-hook-form'
@@ -122,9 +122,9 @@ const TallKomp = ({ sporsmal }: SpmProps) => {
 
             <Vis hvis={sporsmal.tag === TagTyper.HVOR_MANGE_TIMER_PER_UKE && watchTall && watchTall < 10}
                 render={() =>
-                    <AlertStripe type="advarsel" style={{ marginTop: '1rem' }}>
+                    <Alert variant="advarsel" style={{ marginTop: '1rem' }}>
                         <Normaltekst>{tekst('sykepengesoknad.jobb-underveis-under-10-timer-uke')}</Normaltekst>
-                    </AlertStripe>
+                    </Alert>
                 }
             />
 

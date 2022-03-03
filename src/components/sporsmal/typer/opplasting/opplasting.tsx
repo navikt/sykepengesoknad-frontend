@@ -1,7 +1,7 @@
 import './opplasting.less'
 
+import { Alert } from '@navikt/ds-react'
 import parser from 'html-react-parser'
-import AlertStripe from 'nav-frontend-alertstriper'
 import { Knapp } from 'nav-frontend-knapper'
 import Modal from 'nav-frontend-modal'
 import { Element, Normaltekst } from 'nav-frontend-typografi'
@@ -39,7 +39,7 @@ const Opplasting = ({ sporsmal }: SpmProps) => {
                 </Element>
             </div>
 
-            <AlertStripe type="advarsel" className="reisetilskudd">
+            <Alert variant="warning" className="reisetilskudd">
                 <Normaltekst className="bold">{tekst('soknad.info.kvitteringer-del1')}</Normaltekst>
                 <ul style={{ minWidth: 190 }}>
                     <Normaltekst>
@@ -49,7 +49,7 @@ const Opplasting = ({ sporsmal }: SpmProps) => {
                     </Normaltekst>
                 </ul>
                 <Normaltekst>{tekst('soknad.info.kvitteringer-del3')}</Normaltekst>
-            </AlertStripe>
+            </Alert>
 
             <div className="pdf-hjelp">
                 <Ekspanderbar title={tekst('soknad.info.kvitteringer-PDF-tittel')} sporsmalId={sporsmal.id}>

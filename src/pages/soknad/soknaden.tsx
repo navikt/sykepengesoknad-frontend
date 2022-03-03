@@ -1,7 +1,6 @@
 import './soknaden.less'
 
 import { Alert } from '@navikt/ds-react'
-import AlertStripe from 'nav-frontend-alertstriper'
 import { VenstreChevron } from 'nav-frontend-chevron'
 import { Normaltekst, Systemtittel } from 'nav-frontend-typografi'
 import React, { useEffect } from 'react'
@@ -122,9 +121,9 @@ const Fordeling = () => {
                 <>
                     <Vis hvis={valgtSoknad.status === RSSoknadstatus.UTKAST_TIL_KORRIGERING}
                         render={() =>
-                            <AlertStripe type="info" className="blokk-s">
+                            <Alert variant="info" className="blokk-s">
                                 <span>{tekst('sykepengesoknad.utkast-til-korrigering.info')}</span>
-                            </AlertStripe>
+                            </Alert>
                         }
                     />
 

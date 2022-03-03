@@ -1,5 +1,5 @@
+import { Alert } from '@navikt/ds-react'
 import dayjs from 'dayjs'
-import AlertStripe, { AlertStripeSuksess } from 'nav-frontend-alertstriper'
 import { Undertittel } from 'nav-frontend-typografi'
 import React, { useEffect, useState } from 'react'
 
@@ -134,11 +134,11 @@ const Arbeidstaker = () => {
 
     return (
         <>
-            <AlertStripeSuksess>
-                <Undertittel tag={'h2'}>
+            <Alert variant="success">
+                <Undertittel tag="h2">
                     {tekst('kvittering.soknaden-er-sendt')}
                 </Undertittel>
-            </AlertStripeSuksess>
+            </Alert>
             <div className="sendt-info">
                 <ArbeidstakerStatus />
 
@@ -147,7 +147,7 @@ const Arbeidstaker = () => {
                     render={() => {
                         return (
                             <div className="hva-skjer">
-                                <AlertStripe type="info" form="inline">
+                                <Alert variant="info" size="small">
                                     <Vis hvis={kvitteringTekst === 'medOpphold'}
                                         render={() =>
                                             <Undertittel tag="h3">
@@ -162,7 +162,7 @@ const Arbeidstaker = () => {
                                             </Undertittel>
                                         }
                                     />
-                                </AlertStripe>
+                                </Alert>
                                 <div className="avsnitt">
                                     <div className="sendt-inner">
                                         {kvitteringInnhold()}

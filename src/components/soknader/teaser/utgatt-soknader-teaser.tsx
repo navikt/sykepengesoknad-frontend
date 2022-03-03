@@ -1,4 +1,4 @@
-import Alertstripe from 'nav-frontend-alertstriper'
+import { Alert } from '@navikt/ds-react'
 import { HoyreChevron } from 'nav-frontend-chevron'
 import ModalWrapper from 'nav-frontend-modal'
 import { Systemtittel, Undertekst, Undertittel } from 'nav-frontend-typografi'
@@ -54,7 +54,7 @@ const UtgaattSoknaderTeaser = ({ soknad }: SykepengesoknadTeaserProps) => {
                 <Systemtittel tag="h3" className="modal__tittel">
                     {tekst('soknad.teaser.utgaatt.popup.header')}
                 </Systemtittel>
-                <Alertstripe type="info">{tekst('soknad.teaser.utgaatt.popup.innhold')}</Alertstripe>
+                <Alert variant="info">{tekst('soknad.teaser.utgaatt.popup.innhold')}</Alert>
                 <button className="knapp knapp--hoved" onClick={() => setAapen(false)}>
                     Lukk
                 </button>

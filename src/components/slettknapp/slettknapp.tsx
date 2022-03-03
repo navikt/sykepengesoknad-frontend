@@ -1,6 +1,6 @@
 import './slettknapp.less'
 
-import Alertstripe from 'nav-frontend-alertstriper'
+import { Alert } from '@navikt/ds-react'
 import { Fareknapp, Knapp } from 'nav-frontend-knapper'
 import ModalWrapper from 'nav-frontend-modal'
 import { Normaltekst } from 'nav-frontend-typografi'
@@ -97,7 +97,7 @@ const Slettknapp = ({ sporsmal, kvittering, update }: SlettknappProps) => {
                     </div>
                     <div aria-live="polite" className="blokk-xs">
                         <Vis hvis={feilmeldingTekst}
-                            render={() => <Alertstripe type="feil">{feilmeldingTekst}</Alertstripe>}
+                            render={() => <Alert variant="error">{feilmeldingTekst}</Alert>}
                         />
                     </div>
                     <button className="avbrytlenke lenkeknapp" type={'button'} onClick={() => setVilSlette(false)}>

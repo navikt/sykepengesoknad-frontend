@@ -1,6 +1,6 @@
 import './kvittering.less'
 
-import Alertstripe from 'nav-frontend-alertstriper'
+import { Alert } from '@navikt/ds-react'
 import React, { useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom'
 
@@ -96,7 +96,7 @@ const Kvittering = () => {
 
             <div aria-live="polite">
                 <Vis hvis={feilmeldingTekst}
-                    render={() => <Alertstripe type="feil">{feilmeldingTekst}</Alertstripe>}
+                    render={() => <Alert variant="error">{feilmeldingTekst}</Alert>}
                 />
             </div>
         </div>

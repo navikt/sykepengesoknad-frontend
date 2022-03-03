@@ -1,5 +1,5 @@
+import { Alert } from '@navikt/ds-react'
 import parser from 'html-react-parser'
-import { AlertStripeInfo } from 'nav-frontend-alertstriper'
 import Lenke from 'nav-frontend-lenker'
 import { Element, Normaltekst, Undertittel } from 'nav-frontend-typografi'
 import React from 'react'
@@ -20,7 +20,7 @@ const KvitteringVidere = () => {
     }
 
     return (
-        <AlertStripeInfo className="opplysninger">
+        <Alert variant="info" className="opplysninger">
             <Undertittel tag="h3">{tekst('kvittering.hva-skjer-videre')}</Undertittel>
 
             <Vis hvis={valgtSoknad?.arbeidssituasjon === RSArbeidssituasjon.NAERINGSDRIVENDE}
@@ -54,7 +54,7 @@ const KvitteringVidere = () => {
             <div className="avsnitt">
                 <Kontonummer />
             </div>
-        </AlertStripeInfo>
+        </Alert>
     )
 }
 

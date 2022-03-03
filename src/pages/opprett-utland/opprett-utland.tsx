@@ -1,7 +1,7 @@
 import './opprett-utland.less'
 
+import { Alert } from '@navikt/ds-react'
 import parser from 'html-react-parser'
-import Alertstripe from 'nav-frontend-alertstriper'
 import { Knapp } from 'nav-frontend-knapper'
 import React from 'react'
 import { useHistory } from 'react-router'
@@ -68,7 +68,7 @@ const OpprettUtland = () => {
 
                     <div aria-live="polite">
                         <Vis hvis={feilmeldingTekst}
-                            render={() => <Alertstripe type="feil">{feilmeldingTekst}</Alertstripe>}
+                            render={() => <Alert variant="error">{feilmeldingTekst}</Alert>}
                         />
                     </div>
 

@@ -1,9 +1,8 @@
 import './opplasting-form.less'
 
+import { Alert } from '@navikt/ds-react'
 import dayjs from 'dayjs'
 import parser from 'html-react-parser'
-import Alertstripe from 'nav-frontend-alertstriper'
-import AlertStripe from 'nav-frontend-alertstriper'
 import { Knapp } from 'nav-frontend-knapper'
 import { Element, Normaltekst, Systemtittel } from 'nav-frontend-typografi'
 import React, { useEffect, useState } from 'react'
@@ -28,7 +27,7 @@ import Vis from '../../vis'
 import DragAndDrop from '../drag-and-drop/drag-and-drop'
 
 interface OpplastetKvittering {
-    id: string;
+    id: string
 }
 
 const OpplastingForm = ({ sporsmal }: SpmProps) => {
@@ -146,9 +145,9 @@ const OpplastingForm = ({ sporsmal }: SpmProps) => {
 
                 <Vis hvis={formErDisabled}
                     render={() =>
-                        <AlertStripe type="info">
+                        <Alert variant="info">
                             <Normaltekst>{tekst('opplasting_modal.endre-utlegg.hjelpetekst')}</Normaltekst>
-                        </AlertStripe>
+                        </Alert>
                     }
                 />
                 <Normaltekst className="restriksjoner">
@@ -251,9 +250,9 @@ const OpplastingForm = ({ sporsmal }: SpmProps) => {
 
                 <Vis hvis={feilmeldingTekst}
                     render={() =>
-                        <Alertstripe type="advarsel">
+                        <Alert variant="warning">
                             <Normaltekst>{feilmeldingTekst}</Normaltekst>
-                        </Alertstripe>
+                        </Alert>
                     }
                 />
 
