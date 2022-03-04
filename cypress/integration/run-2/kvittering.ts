@@ -234,7 +234,7 @@ describe('Tester kvittering', () => {
 
             // Arbeidsgiverperiode tekst
             cy.contains('Hvorfor går det et skille ved 16 dager?').click({ force: true })
-            cy.get('navds-alert--info')
+            cy.get('.navds-alert--info')
                 .should('contain', 'Arbeidsgiveren skal betale sykepenger i en periode på opptil 16 kalenderdager, også kalt arbeidsgiverperioden. NAV overtar sykepengeutbetalingen fra og med 17. kalenderdag.')
 
             // Inntektsmelding
