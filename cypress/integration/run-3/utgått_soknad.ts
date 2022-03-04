@@ -21,7 +21,7 @@ describe('Tester sendt søknad', () => {
         cy.get(`#soknader-sendt article[aria-labelledby*=${utgattSoknad.id}]`).click()
         cy.get('.ReactModal__Content')
             .should('include.text', 'Søknaden er utgått')
-            .get('.navds-alert > .typo-normal')
+            .get('.navds-alert .navds-body-long')
             .should('include.text', 'Du får ikke åpnet denne søknaden fordi du ikke har sendt den innen fristen.')
     })
 
