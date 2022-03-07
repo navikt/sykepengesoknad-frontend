@@ -96,7 +96,7 @@ describe('Tester ettersending og korrigering', () => {
         // Ny søknad
         cy.url().should('not.include', `/kvittering/${soknad.id}`)
         cy.url().should('include', '/1')
-        cy.get('.alertstripe--info')
+        cy.get('.navds-alert--info')
             .should('contain', 'Rett opp det som er feil i søknaden, og send den inn på nytt.')
 
         // ANSVARSERKLARING er resatt

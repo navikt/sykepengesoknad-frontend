@@ -122,7 +122,7 @@ const TallKomp = ({ sporsmal }: SpmProps) => {
 
             <Vis hvis={sporsmal.tag === TagTyper.HVOR_MANGE_TIMER_PER_UKE && watchTall && watchTall < 10}
                 render={() =>
-                    <Alert variant="advarsel" style={{ marginTop: '1rem' }}>
+                    <Alert variant="warning" style={{ marginTop: '1rem' }}>
                         <Normaltekst>{tekst('sykepengesoknad.jobb-underveis-under-10-timer-uke')}</Normaltekst>
                     </Alert>
                 }

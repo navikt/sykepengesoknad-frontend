@@ -167,7 +167,7 @@ describe('Teste førsteside i reisetilskuddsøknaden', () => {
         it('Endring av kvittering', () => {
             cy.get('.fil_liste').contains('Taxi').click()
             cy.contains('Endre reiseutgift')
-            cy.get('.alertstripe--info').contains('Du kan foreløpig ikke redigere utgifter som du har lagt til. Men du kan slette den som er feil, og legge inn på nytt.')
+            cy.get('.navds-alert--info').contains('Du kan foreløpig ikke redigere utgifter som du har lagt til. Men du kan slette den som er feil, og legge inn på nytt.')
             cy.get('select[name=transportmiddel]').should('have.attr', 'disabled')
             cy.get('input[name=belop_input]').should('have.attr', 'disabled')
             cy.get('.filopplasteren input[type=file]').should('not.exist')
@@ -321,7 +321,7 @@ describe('Teste førsteside i reisetilskuddsøknaden', () => {
         })
 
         it('Hva skjer videre', () => {
-            cy.get('.alertstripe--info')
+            cy.get('.navds-alert--info')
                 .should('contain', 'Hva skjer videre?')
                 .and('contain', 'NAV behandler søknaden din')
                 .and('contain', 'Saksbehandlingstidene kan variere noe')

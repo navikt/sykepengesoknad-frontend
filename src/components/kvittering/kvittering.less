@@ -1,13 +1,13 @@
 @import '../../../node_modules/nav-frontend-core/less/_variabler';
 
 .kvittering {
-    .alertstripe--suksess {
+    .navds-alert--success {
         border-bottom-left-radius: 0;
         border-bottom-right-radius: 0;
         margin-bottom: -2px;
     }
 
-    .alertstripe:not(.alertstripe--inline) .lenke:not(:focus) {
+    .navds-alert:not(.navds-alert--inline) .lenke:not(:focus) {
         color: @navBla;
     }
 
@@ -47,6 +47,21 @@
             margin-top: 2rem;
             padding-top: 1.4rem;
             border-top: 1px solid @navGra20;
+
+            .navds-alert {
+                background-color: transparent;
+                border: 0;
+                padding-left: 0;
+
+                svg {
+                    width: 28px;
+                    height: 28px;
+                }
+
+                .navds-alert__wrapper {
+                    margin-left: -3px;
+                }
+            }
         }
 
         .sendt-inner {

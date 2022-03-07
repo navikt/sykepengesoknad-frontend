@@ -32,12 +32,12 @@ describe('Tester kvittering', () => {
             cy.url().should('include', `/kvittering/${arbeidsledigKvittering.id}`)
 
             // Sendt datoer
-            cy.get('.kvittering .alertstripe--suksess')
+            cy.get('.kvittering .navds-alert--success')
                 .should('contain', 'Søknaden er sendt til NAV')
                 .and('not.contain', 'Org.nr')
 
             // Hva skjer videre
-            cy.get('.alertstripe.opplysninger.alertstripe--info')
+            cy.get('.opplysninger.navds-alert--info')
                 .should('contain', 'Hva skjer videre?')
                 .and('contain', 'NAV behandler søknaden din')
                 .and('contain', 'Saksbehandlingstidene kan variere noe. Sjekk saksbehandlingstidene i ditt fylke')
@@ -66,13 +66,13 @@ describe('Tester kvittering', () => {
             cy.url().should('include', `/kvittering/${sendtArbeidsledigKvittering.id}`)
 
             // Sendt datoer
-            cy.get('.kvittering .alertstripe--suksess')
+            cy.get('.kvittering .navds-alert--success')
                 .should('contain', 'Søknaden er sendt til NAV')
                 .and('contain', 'Mottatt: Torsdag 23. april, kl 11:56')
                 .and('not.contain', 'Org.nr')
 
             // Hva skjer videre skal ikke finnes
-            cy.get('.alertstripe.opplysninger.alertstripe--info')
+            cy.get('.opplysninger.navds-alert--info')
                 .should('not.exist')
 
             // Oppsummering ekspandert
@@ -111,12 +111,12 @@ describe('Tester kvittering', () => {
             cy.url().should('include', `/kvittering/${oppholdUtlandKvittering.id}`)
 
             // Sendt datoer
-            cy.get('.kvittering .alertstripe--suksess')
+            cy.get('.kvittering .navds-alert--success')
                 .should('contain', 'Søknaden er sendt til NAV')
                 .and('not.contain', 'Org.nr')
 
             // Hva skjer videre
-            cy.get('.alertstripe.opplysninger.alertstripe--info')
+            cy.get('.opplysninger.navds-alert--info')
                 .should('contain', 'Hva skjer videre?')
                 .and('contain', 'Du får svar på om du kan reise')
                 .and('contain', 'NAV vurderer om reisen vil forlenge sykefraværet ditt eller hindre planlagte aktiviteter.')
@@ -163,12 +163,12 @@ describe('Tester kvittering', () => {
             cy.url().should('include', `/kvittering/${selvstendigKvittering.id}`)
 
             // Sendt datoer
-            cy.get('.kvittering .alertstripe--suksess')
+            cy.get('.kvittering .navds-alert--success')
                 .should('contain', 'Søknaden er sendt til NAV')
                 .and('not.contain', 'Org.nr')
 
             // Hva skjer videre
-            cy.get('.alertstripe.opplysninger.alertstripe--info')
+            cy.get('.opplysninger.navds-alert--info')
                 .should('contain', 'Hva skjer videre?')
                 .and('contain', 'NAV behandler søknaden din')
                 .and('contain', 'Saksbehandlingstidene kan variere noe. Sjekk saksbehandlingstidene i ditt fylke')
@@ -208,7 +208,7 @@ describe('Tester kvittering', () => {
             cy.contains('Send til NAV').should('not.exist')
 
             // Sendt datoer
-            cy.get('.kvittering .alertstripe--suksess')
+            cy.get('.kvittering .navds-alert--success')
                 .should('contain', 'Søknaden er sendt')
             cy.get('.sendt-info .oppsummering__avkrysset')
                 .should('contain', 'arb')
@@ -234,12 +234,12 @@ describe('Tester kvittering', () => {
 
             // Arbeidsgiverperiode tekst
             cy.contains('Hvorfor går det et skille ved 16 dager?').click({ force: true })
-            cy.get('.alertstripe--info')
+            cy.get('.navds-alert--info')
                 .should('contain', 'Arbeidsgiveren skal betale sykepenger i en periode på opptil 16 kalenderdager, også kalt arbeidsgiverperioden. NAV overtar sykepengeutbetalingen fra og med 17. kalenderdag.')
 
             // Inntektsmelding
             cy.contains('Hva er en inntektsmelding').click({ force: true })
-            cy.get('.alertstripe--info')
+            cy.get('.navds-alert--info')
                 .should('contain', 'Arbeidsplassen din sender inntektsopplysninger og annen informasjon som NAV trenger for å behandle søkaden din. Inntektsmeldingen sendes digitalt fra arbeidsplassens lønns- og personalsystem eller fra Altinn.no.')
 
         })
@@ -310,7 +310,7 @@ const besvarSoknad = () => {
 
 const inntil16dagerKvittering = () => {
     // Sendt datoer
-    cy.get('.kvittering .alertstripe--suksess')
+    cy.get('.kvittering .navds-alert--success')
         .should('contain', 'Søknaden er sendt')
     cy.get('.sendt-info .oppsummering__avkrysset')
         .should('contain', 'arb')
@@ -343,7 +343,7 @@ const inntil16dagerKvittering = () => {
 
 const over16dagerKvittering = () => {
     // Sendt datoer
-    cy.get('.kvittering .alertstripe--suksess')
+    cy.get('.kvittering .navds-alert--success')
         .should('contain', 'Søknaden er sendt')
     cy.get('.sendt-info .oppsummering__avkrysset')
         .should('contain', 'arb')
@@ -368,12 +368,12 @@ const over16dagerKvittering = () => {
 
     // Arbeidsgiverperiode tekst
     cy.contains('Hvorfor går det et skille ved 16 dager?').click({ force: true })
-    cy.get('.alertstripe--info')
+    cy.get('.navds-alert--info')
         .should('contain', 'Arbeidsgiveren skal betale sykepenger i en periode på opptil 16 kalenderdager, også kalt arbeidsgiverperioden. NAV overtar sykepengeutbetalingen fra og med 17. kalenderdag.')
 
     // Inntektsmelding
     cy.contains('Hva er en inntektsmelding').click({ force: true })
-    cy.get('.alertstripe--info')
+    cy.get('.navds-alert--info')
         .should('contain', 'Arbeidsplassen din sender inntektsopplysninger og annen informasjon som NAV trenger for å behandle søkaden din. Inntektsmeldingen sendes digitalt fra arbeidsplassens lønns- og personalsystem eller fra Altinn.no.')
 
     // Oppsummering minimert
@@ -394,7 +394,7 @@ const over16dagerKvittering = () => {
 
 const utenOppholdKvittering = () => {
     // Sendt datoer
-    cy.get('.kvittering .alertstripe--suksess')
+    cy.get('.kvittering .navds-alert--success')
         .should('contain', 'Søknaden er sendt')
     cy.get('.sendt-info .oppsummering__avkrysset')
         .should('not.contain', 'arb')
@@ -432,7 +432,7 @@ const utenOppholdKvittering = () => {
 
 const medOppholdKvittering = () => {
     // Sendt datoer
-    cy.get('.kvittering .alertstripe--suksess')
+    cy.get('.kvittering .navds-alert--success')
         .should('contain', 'Søknaden er sendt')
     cy.get('.sendt-info .oppsummering__avkrysset')
         .should('not.contain', 'arb')
@@ -452,7 +452,7 @@ const medOppholdKvittering = () => {
 
     // Inntekstmelding
     cy.contains('Hvorfor inntektsmeldingen må sendes på nytt?').click({ force: true })
-    cy.get('.alertstripe--info')
+    cy.get('.navds-alert--info')
         .should('contain', 'Lønn eller arbeidstid kan ha endret seg siden du var syk forrige gang. Dette får vi bare informasjon om gjennom inntektsmeldingen.')
 
     // Behandlingstider lenke
