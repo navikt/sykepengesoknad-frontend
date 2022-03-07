@@ -1,6 +1,6 @@
+import { Next } from '@navikt/ds-icons'
 import { Alert } from '@navikt/ds-react'
 import dayjs from 'dayjs'
-import { HoyreChevron } from 'nav-frontend-chevron'
 import ModalWrapper from 'nav-frontend-modal'
 import { Element, Normaltekst, Undertekst, Undertittel } from 'nav-frontend-typografi'
 import React, { useState } from 'react'
@@ -54,11 +54,11 @@ const FremtidigeSoknaderTeaser = ({ soknad }: SykepengesoknadTeaserProps) => {
                     </div>
                     <InngangsStatus status={soknad.status} tekst={hentTeaserStatustekst(soknad)} />
                 </div>
-                <HoyreChevron />
+                <Next className="chevron--hoyre" />
             </button>
 
             <ModalWrapper className="modal__teaser_popup" onRequestClose={() => setAapen(false)}
-                contentLabel={'planlagt'}
+                contentLabel="planlagt"
                 isOpen={aapen}
             >
                 <Element tag="h3" className="modal__tittel">

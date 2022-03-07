@@ -1,6 +1,6 @@
 import './utvidbar.less'
 
-import Chevron from 'nav-frontend-chevron'
+import { Collapse,Expand } from '@navikt/ds-icons'
 import { Normaltekst, Undertittel } from 'nav-frontend-typografi'
 import React, { useEffect, useRef, useState } from 'react'
 
@@ -9,17 +9,17 @@ import { useAmplitudeInstance } from '../amplitude/amplitude'
 import Vis from '../vis'
 
 interface UtvidbarProps {
-    erApen: boolean;
-    tittel: React.ReactNode | string;
-    children: React.ReactNode;
-    ikon?: string;
-    ikonHover?: string;
-    amplitudeProps?: object,
-    ikonAltTekst?: string;
-    className?: string;
-    visLukk?: boolean;
-    type?: 'intern' | undefined;
-    fixedHeight?: boolean;
+    erApen: boolean
+    tittel: React.ReactNode | string
+    children: React.ReactNode
+    ikon?: string
+    ikonHover?: string
+    amplitudeProps?: object
+    ikonAltTekst?: string
+    className?: string
+    visLukk?: boolean
+    type?: 'intern' | undefined
+    fixedHeight?: boolean
 }
 
 const Utvidbar = (props: UtvidbarProps) => {
@@ -60,7 +60,7 @@ const Utvidbar = (props: UtvidbarProps) => {
                 onMouseEnter={props.ikon !== undefined ? () => btnImage.current!.src = props.ikonHover! : undefined}
                 onMouseLeave={props.ikon !== undefined ? () => btnImage.current!.src = props.ikon! : undefined}
                 onClick={onKlikk}
-                type={'button'}
+                type="button"
                 className="utvidbar__toggle"
             >
                 <Vis hvis={props.ikon}
@@ -85,7 +85,12 @@ const Utvidbar = (props: UtvidbarProps) => {
                     <Normaltekst tag="em">
                         {erApen ? 'Lukk' : 'Åpne'}
                     </Normaltekst>
-                    <Chevron type={erApen ? 'opp' : 'ned'} />
+                    <Vis hvis={erApen} render={() =>
+                        <Collapse className="chevron--opp" />
+                    } />
+                    <Vis hvis={!erApen} render={() =>
+                        <Expand className="chevron--ned" />
+                    } />
                 </span>
             </button>
 

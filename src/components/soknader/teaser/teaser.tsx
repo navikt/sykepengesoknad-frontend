@@ -1,4 +1,4 @@
-import { HoyreChevron } from 'nav-frontend-chevron'
+import { Next } from '@navikt/ds-icons'
 import { Undertekst, Undertittel } from 'nav-frontend-typografi'
 import React from 'react'
 
@@ -65,7 +65,7 @@ const Teaser = ({ soknad }: SykepengesoknadTeaserProps) => {
                         }
                     />
                 </div>
-                <HoyreChevron />
+                <Next className="chevron--hoyre" />
             </Inngangspanel>
         </article>
     )

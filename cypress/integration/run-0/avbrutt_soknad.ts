@@ -2,7 +2,6 @@ import { avbruttSoknad } from '../../../src/data/mock/data/soknader-integration'
 
 describe('Tester avryting av søknad', () => {
 
-
     before(() => {
         cy.visit('http://localhost:8080/syk/sykepengesoknad')
     })
