@@ -1,4 +1,4 @@
-import AlertStripe from 'nav-frontend-alertstriper'
+import { Alert } from '@navikt/ds-react'
 import { Normaltekst } from 'nav-frontend-typografi'
 import React, { useEffect } from 'react'
 import { useFormContext } from 'react-hook-form'
@@ -75,14 +75,14 @@ const RadioKomp = ({ sporsmal }: SpmProps) => {
 
             <Vis hvis={watchRadio && watchRadio.toLowerCase() === 'timer' && beregnGrad && beregnGrad()}
                 render={() =>
-                    <AlertStripe type="info" style={{ marginTop: '1rem' }}>
+                    <Alert variant="info" style={{ marginTop: '1rem' }}>
                         <Normaltekst>
                             {getLedetekst(
                                 tekst('sykepengesoknad.jobb-underveis-timer-i-prosent'),
                                 { '%PROSENT%': Math.floor(beregnGrad!() * 100) }
                             )}
                         </Normaltekst>
-                    </AlertStripe>
+                    </Alert>
                 }
             />
         </>

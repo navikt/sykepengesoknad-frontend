@@ -1,4 +1,4 @@
-import AlertStripe from 'nav-frontend-alertstriper'
+import { Alert } from '@navikt/ds-react'
 import React from 'react'
 import { Link } from 'react-router-dom'
 
@@ -9,21 +9,22 @@ import { tekst } from '../../utils/tekster'
 import { useAmplitudeInstance } from '../amplitude/amplitude'
 
 interface EldreUsendtSoknadProps {
-    eldreSoknad: Soknad;
+    eldreSoknad: Soknad
 }
 
 export const EldreUsendtSoknad = ({ eldreSoknad }: EldreUsendtSoknadProps) => {
     const { logEvent } = useAmplitudeInstance()
 
-
     logEvent('komponent vist', { 'komponent': 'eldre usendt søknad' })
 
     return (
-        <AlertStripe type={'advarsel'}>{tekst('eldre.usendt.alert')} <Link onClick={() => {
-            logEvent('navigere', { lenketekst: tekst('eldre.usendt.gaa-til') })
-        }} to={urlTilSoknad(eldreSoknad)}> {tekst('eldre.usendt.gaa-til')}
-        </Link>
-        </AlertStripe>
+        <Alert variant="warning">
+            {tekst('eldre.usendt.alert')}
+            <Link onClick={() => logEvent('navigere', { lenketekst: tekst('eldre.usendt.gaa-til') })}
+                to={urlTilSoknad(eldreSoknad)}>
+                {tekst('eldre.usendt.gaa-til')}
+            </Link>
+        </Alert>
     )
 }
 

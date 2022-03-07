@@ -1,5 +1,5 @@
+import { Alert } from '@navikt/ds-react'
 import parser from 'html-react-parser'
-import { AlertStripeInfo } from 'nav-frontend-alertstriper'
 import Lenke from 'nav-frontend-lenker'
 import { Element, Normaltekst } from 'nav-frontend-typografi'
 import React from 'react'
@@ -25,15 +25,15 @@ const Over16dager = ({ erGradert }: gradertReisetilskuddProps) => {
                 }
             </Normaltekst>
             <Utvidbar erApen={false} type="intern" tittel={tekst('kvittering.arbeidstaker.hvorfor-skille-ved-16-dager')}>
-                <AlertStripeInfo>
+                <Alert variant="info">
                     {erGradert ?
                         tekst('kvittering.arbeidsgiveren-skal-betale-gradertreisetilskudd') :
                         tekst('kvittering.arbeidsgiveren-skal-betale')
                     }
-                </AlertStripeInfo>
+                </Alert>
             </Utvidbar>
             <Utvidbar erApen={false} type="intern" tittel={tekst('kvittering.hva-er-inntektsmelding')}>
-                <AlertStripeInfo>{tekst('kvittering.arbeidstaker.over16.inntektsmelding.brodtekst')}</AlertStripeInfo>
+                <Alert variant="info">{tekst('kvittering.arbeidstaker.over16.inntektsmelding.brodtekst')}</Alert>
             </Utvidbar>
             <div className="avsnitt hva-skjer">
                 <Element tag="h2" className="arbeidstaker-tittel">{tekst('kvittering.nav-behandler-soknaden')}</Element>

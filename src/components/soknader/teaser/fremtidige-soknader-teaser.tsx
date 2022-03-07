@@ -1,5 +1,5 @@
+import { Alert } from '@navikt/ds-react'
 import dayjs from 'dayjs'
-import { AlertStripeInfo } from 'nav-frontend-alertstriper'
 import { HoyreChevron } from 'nav-frontend-chevron'
 import ModalWrapper from 'nav-frontend-modal'
 import { Element, Normaltekst, Undertekst, Undertittel } from 'nav-frontend-typografi'
@@ -73,9 +73,9 @@ const FremtidigeSoknaderTeaser = ({ soknad }: SykepengesoknadTeaserProps) => {
                 <Utvidbar erApen={false} type="intern" tittel={
                     <Element>{tekst('soknader.teaser.fremtidig.modal.utvidbar.tittel')}</Element>
                 }>
-                    <AlertStripeInfo>
+                    <Alert variant="info">
                         {tekst('soknader.teaser.fremtidig.modal.utvidbar.tekst')}
-                    </AlertStripeInfo>
+                    </Alert>
                 </Utvidbar>
                 <button className="knapp knapp--hoved" onClick={() => setAapen(false)}>
                     Lukk

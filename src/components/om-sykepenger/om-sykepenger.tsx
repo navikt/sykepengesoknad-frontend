@@ -1,7 +1,7 @@
 import './om-sykepenger.less'
 
+import { Alert } from '@navikt/ds-react'
 import parser from 'html-react-parser'
-import { AlertStripeInfo } from 'nav-frontend-alertstriper'
 import Ekspanderbartpanel from 'nav-frontend-ekspanderbartpanel'
 import Lenke from 'nav-frontend-lenker'
 import { Element, Normaltekst, Undertittel } from 'nav-frontend-typografi'
@@ -22,7 +22,7 @@ const OmSykepenger = () => {
             <Ekspanderbartpanel tittel={tekst('om.sykepenger.arbeidstakere.tittel')} apen={false}>
                 <Normaltekst>{tekst('om.sykepenger.arbeidstakere.tekst1')}</Normaltekst>
                 <Normaltekst>{tekst('om.sykepenger.arbeidstakere.tekst2')}</Normaltekst>
-                <AlertStripeInfo>{tekst('om.sykepenger.arbeidstakere.alertstripe')}</AlertStripeInfo>
+                <Alert variant="info">{tekst('om.sykepenger.arbeidstakere.alertstripe')}</Alert>
             </Ekspanderbartpanel>
 
             <Ekspanderbartpanel tittel={tekst('om.sykepenger.selvstendige.tittel')} apen={false}>
@@ -31,7 +31,7 @@ const OmSykepenger = () => {
                 <Normaltekst>{tekst('om.sykepenger.selvstendige.tekst3')}</Normaltekst>
                 <Element tag="h3">{tekst('om.sykepenger.selvstendige.husk')}</Element>
                 <Normaltekst>{parser(tekst('om.sykepenger.selvstendige.tekst4'))}</Normaltekst>
-                <AlertStripeInfo>{parser(tekst('om.sykepenger.selvstendige.alertstripe'))}</AlertStripeInfo>
+                <Alert variant="info">{parser(tekst('om.sykepenger.selvstendige.alertstripe'))}</Alert>
             </Ekspanderbartpanel>
 
             <Element tag="h3">{tekst('om.sykepenger.tittel2')}</Element>

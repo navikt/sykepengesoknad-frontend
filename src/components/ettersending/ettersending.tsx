@@ -1,6 +1,6 @@
 import './ettersending.less'
 
-import Alertstripe from 'nav-frontend-alertstriper'
+import { Alert } from '@navikt/ds-react'
 import { Hovedknapp, Knapp } from 'nav-frontend-knapper'
 import ModalWrapper from 'nav-frontend-modal'
 import React, { useState } from 'react'
@@ -13,8 +13,8 @@ import { logger } from '../../utils/logger'
 import { tekst } from '../../utils/tekster'
 
 interface EttersendingProps {
-    gjelder: 'nav' | 'arbeidsgiver';
-    setRerendrekvittering: (d: Date) => void;
+    gjelder: 'nav' | 'arbeidsgiver'
+    setRerendrekvittering: (d: Date) => void
 }
 
 const Ettersending = ({ gjelder, setRerendrekvittering }: EttersendingProps) => {
@@ -85,7 +85,6 @@ const Ettersending = ({ gjelder, setRerendrekvittering }: EttersendingProps) => 
         }
     }
 
-
     return (<>
         <Knapp mini type="standard" onClick={() => {
             setVilEttersende(true)
@@ -99,7 +98,7 @@ const Ettersending = ({ gjelder, setRerendrekvittering }: EttersendingProps) => 
             isOpen={vilEttersende}
         >
             <h3 className="modal__tittel">{hentTekst('kvittering.tittel.send-til')}</h3>
-            <Alertstripe type="info">{hentTekst('kvittering.info.send-til')}</Alertstripe>
+            <Alert variant="info">{hentTekst('kvittering.info.send-til')}</Alert>
             <div className="blokk-xs">
                 <Hovedknapp spinner={ettersender} onClick={ettersend}>
                     {hentTekst('kvittering.knapp.bekreft.send-til')}

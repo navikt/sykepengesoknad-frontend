@@ -1,5 +1,5 @@
+import { Alert } from '@navikt/ds-react'
 import dayjs from 'dayjs'
-import { AlertStripeSuksess } from 'nav-frontend-alertstriper'
 import { Normaltekst, Undertittel } from 'nav-frontend-typografi'
 import React, { useEffect, useState } from 'react'
 
@@ -27,21 +27,19 @@ const KvitteringStatus = () => {
             const datoNav = dayjs(sendtTilNav).format('dddd D. MMM, kl HH:mm')
             setTilNavDato(datoNav.charAt(0).toUpperCase() + datoNav.slice(1))
         }
-
     }
-
 
     return (
         <Vis hvis={valgtSoknad?.sendtTilNAVDato}
             render={() =>
-                <AlertStripeSuksess>
+                <Alert variant="success">
                     <Undertittel tag="h2">
                         {tekst('kvittering.soknaden-er-sendt-til')} {Mottaker.NAV}
                     </Undertittel>
                     <Normaltekst>
                         {tekst('kvittering.mottatt')}: {tilNavDato}
                     </Normaltekst>
-                </AlertStripeSuksess>
+                </Alert>
             }
         />
     )

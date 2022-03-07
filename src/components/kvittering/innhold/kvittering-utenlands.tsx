@@ -1,4 +1,4 @@
-import { AlertStripeInfo } from 'nav-frontend-alertstriper'
+import { Alert } from '@navikt/ds-react'
 import Lenke from 'nav-frontend-lenker'
 import { Element, Normaltekst, Undertittel } from 'nav-frontend-typografi'
 import React from 'react'
@@ -15,7 +15,7 @@ const KvitteringUtenlands = () => {
     }
 
     return (
-        <AlertStripeInfo className="opplysninger">
+        <Alert variant="info" className="opplysninger">
             <Undertittel tag="h3">{tekst('kvittering.hva-skjer-videre')}</Undertittel>
             <div className="avsnitt">
                 <Element tag="h2">{tekst('kvittering.utenlands.overskrift1')}</Element>
@@ -38,7 +38,7 @@ const KvitteringUtenlands = () => {
                 <Element tag="h2">{tekst('kvittering.utenlands.overskrift3')}</Element>
                 <Normaltekst tag="span">{tekst('kvittering.utenlands.brodtekst3')} </Normaltekst>
             </div>
-        </AlertStripeInfo>
+        </Alert>
     )
 }
 

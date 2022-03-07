@@ -1,4 +1,4 @@
-import AlertStripe from 'nav-frontend-alertstriper'
+import { Alert } from '@navikt/ds-react'
 import { Normaltekst } from 'nav-frontend-typografi'
 import React from 'react'
 
@@ -10,10 +10,8 @@ import { tekst } from '../../utils/tekster'
 import Vis from '../vis'
 import { SpmProps } from './sporsmal-form/sporsmal-form'
 
-
 const InfotekstOverSubmit = ({ sporsmal }: SpmProps) => {
     const { valgtSoknad } = useAppStore()
-
 
     const tekstNokkel = (tag: TagTyper) => {
         if (tag === TagTyper.FERIE_V2 && valgtSoknad?.soknadstype === RSSoknadstype.ARBEIDSTAKERE && valgtSoknad?.status === RSSoknadstatus.UTKAST_TIL_KORRIGERING) {
@@ -30,9 +28,9 @@ const InfotekstOverSubmit = ({ sporsmal }: SpmProps) => {
     return (
         <Vis hvis={tekstNokkel(sporsmal.tag)}
             render={() =>
-                <AlertStripe type="info" style={{ marginTop: '1rem' }}>
+                <Alert variant="info" style={{ marginTop: '1rem' }}>
                     <Normaltekst>{tekst(nokkel)}</Normaltekst>
-                </AlertStripe>
+                </Alert>
             }
         />
     )

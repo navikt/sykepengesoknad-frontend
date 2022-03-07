@@ -1,13 +1,13 @@
-import { AlertStripeFeil } from 'nav-frontend-alertstriper'
+import { Alert } from '@navikt/ds-react'
 import React from 'react'
 
 const IngenData = () => {
     return (
         <div className="limit">
-            <AlertStripeFeil>
+            <Alert variant="error">
                 Vi får akkurat nå ikke hentet alle data.
                 Vi jobber med å løse saken. Vennligst prøv igjen senere.
-            </AlertStripeFeil>
+            </Alert>
         </div>
     )
 }
