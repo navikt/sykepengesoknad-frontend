@@ -1,5 +1,5 @@
+import { Next } from '@navikt/ds-icons'
 import { Alert } from '@navikt/ds-react'
-import { HoyreChevron } from 'nav-frontend-chevron'
 import ModalWrapper from 'nav-frontend-modal'
 import { Systemtittel, Undertekst, Undertittel } from 'nav-frontend-typografi'
 import React, { useState } from 'react'
@@ -45,10 +45,10 @@ const UtgaattSoknaderTeaser = ({ soknad }: SykepengesoknadTeaserProps) => {
                     </div>
                     <InngangsStatus status={soknad.status} tekst={hentTeaserStatustekst(soknad)} />
                 </div>
-                <HoyreChevron />
+                <Next className="chevron--hoyre" />
             </button>
             <ModalWrapper className="modal__teaser_popup" onRequestClose={() => setAapen(false)}
-                contentLabel={'planlagt'}
+                contentLabel="planlagt"
                 isOpen={aapen}
             >
                 <Systemtittel tag="h3" className="modal__tittel">

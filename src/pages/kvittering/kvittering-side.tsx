@@ -1,6 +1,6 @@
 import './kvittering.less'
 
-import { VenstreChevron } from 'nav-frontend-chevron'
+import { Back } from '@navikt/ds-icons'
 import { Normaltekst } from 'nav-frontend-typografi'
 import React, { useEffect, useState } from 'react'
 import { Link, useParams } from 'react-router-dom'
@@ -72,7 +72,7 @@ const KvitteringSide = () => {
                     render={() =>
                         <Link to="/" className="gaa-videre">
                             <Normaltekst tag="span">
-                                <VenstreChevron />
+                                <Back className="chevron--venstre" />
                                 {tekst('sykepengesoknad.navigasjon.gaa-til')}
                             </Normaltekst>
                         </Link>

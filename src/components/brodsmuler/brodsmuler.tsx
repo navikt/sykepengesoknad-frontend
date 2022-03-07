@@ -1,6 +1,6 @@
 import './brodsmuler.less'
 
-import { OppChevron } from 'nav-frontend-chevron'
+import { Collapse } from '@navikt/ds-icons'
 import Lenke from 'nav-frontend-lenker'
 import { Normaltekst } from 'nav-frontend-typografi'
 import React, { useEffect, useRef, useState } from 'react'
@@ -124,7 +124,7 @@ const Brodsmuler = ({ brodsmuler }: BrodsmulerProps) => {
                     className="js-toggle"
                     onClick={toggleSynlige}
                 >
-                    <OppChevron />
+                    <Collapse className="chevron--opp" />
                 </button>
             </div>
         </nav>

@@ -1,7 +1,7 @@
 import './soknaden.less'
 
+import { Back } from '@navikt/ds-icons'
 import { Alert } from '@navikt/ds-react'
-import { VenstreChevron } from 'nav-frontend-chevron'
 import { Normaltekst, Systemtittel } from 'nav-frontend-typografi'
 import React, { useEffect } from 'react'
 import { Link, useHistory, useParams } from 'react-router-dom'
@@ -135,7 +135,7 @@ const Fordeling = () => {
                         render={() =>
                             <Link to={'/soknader/' + valgtSoknad.id + SEPARATOR + (stegNo - 1)}
                                 className="lenke tilbakelenke">
-                                <VenstreChevron />
+                                <Back className="chevron--venstre" />
                                 <Normaltekst tag="span">{tekst('soknad.tilbakeknapp')}</Normaltekst>
                             </Link>
                         }
@@ -187,8 +187,8 @@ const Fordeling = () => {
                         <Normaltekst>{tekst('sykepengesoknad.avbrutt.tidspunkt')} {tilLesbarDatoMedArstall(valgtSoknad!.avbruttDato)}.</Normaltekst>
                     </Alert>
 
-                    <div className={'avbrutt-info'}>
-                        <p className={'ingress'}>
+                    <div className="avbrutt-info">
+                        <p className="ingress">
                             {tekst('sykepengesoknad.avbrutt.informasjon-tittel')}
                         </p>
                         <p>
@@ -196,7 +196,7 @@ const Fordeling = () => {
                         </p>
                     </div>
 
-                    <Opplysninger ekspandert={true} steg={'avbrutt-søknad'} />
+                    <Opplysninger ekspandert={true} steg="avbrutt-søknad" />
                     <HvorforSoknadSykepenger soknadstype={valgtSoknad.soknadstype} />
                     <GjenapneSoknad />
                 </>

@@ -1,4 +1,4 @@
-import { HoyreChevron } from 'nav-frontend-chevron'
+import { Next } from '@navikt/ds-icons'
 import { Undertekst, Undertittel } from 'nav-frontend-typografi'
 import React from 'react'
 
@@ -14,7 +14,6 @@ import {
     SykepengesoknadTeaserProps,
     teaserTittel
 } from './teaser-util'
-
 
 const TidligereSoknaderTeaser = ({ soknad }: SykepengesoknadTeaserProps) => {
     return (
@@ -39,7 +38,7 @@ const TidligereSoknaderTeaser = ({ soknad }: SykepengesoknadTeaserProps) => {
                     </div>
                     <InngangsStatus status={soknad.status} tekst={hentTeaserStatustekst(soknad)} />
                 </div>
-                <HoyreChevron />
+                <Next className="chevron--hoyre" />
             </Inngangspanel>
         </article>
     )

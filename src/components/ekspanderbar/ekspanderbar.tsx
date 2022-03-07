@@ -1,17 +1,18 @@
 import './ekspanderbar.less'
 
-import NavFrontendChevron from 'nav-frontend-chevron'
+import { Collapse,Expand } from '@navikt/ds-icons'
 import { Element, Normaltekst } from 'nav-frontend-typografi'
 import React, { useEffect } from 'react'
 import { useState } from 'react'
 
 import { useAmplitudeInstance } from '../amplitude/amplitude'
+import Vis from '../vis'
 
 interface EkspanderbarProps {
-    title: string;
-    amplitudeProps?: object,
-    children: any,
-    sporsmalId: string,
+    title: string
+    amplitudeProps?: object
+    children: any
+    sporsmalId: string
 }
 
 export const Ekspanderbar = ({ title, children, amplitudeProps, sporsmalId }: EkspanderbarProps) => {
@@ -36,7 +37,12 @@ export const Ekspanderbar = ({ title, children, amplitudeProps, sporsmalId }: Ek
                 className="ekspanderbar__toggle"
             >
                 <Element className="toggle-text">{title}</Element>
-                <NavFrontendChevron type={expanded ? 'opp' : 'ned'} />
+                <Vis hvis={expanded} render={()=>
+                    <Collapse />
+                } />
+                <Vis hvis={!expanded} render={()=>
+                    <Expand />
+                } />
             </button>
             <div style={{ display: expanded ? '' : 'none' }} aria-hidden={!expanded} className="ekspanderbar__content">
                 {typeof children === 'string' ? <Normaltekst>{children}</Normaltekst> : children}
