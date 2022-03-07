@@ -1,8 +1,7 @@
 import './avbryt-soknad-modal.less'
 
-import { Button, Checkbox, CheckboxGroup, Label,Modal } from '@navikt/ds-react'
+import { BodyLong, Button, Modal } from '@navikt/ds-react'
 import React, { useState } from 'react'
-import { useFormContext } from 'react-hook-form'
 import { useHistory, useParams } from 'react-router-dom'
 
 import { RouteParams } from '../../app'
@@ -14,16 +13,11 @@ import { avbrytSoknad } from './avbryt-soknad'
 const AvbrytSoknadModal = () => {
     const { logEvent } = useAmplitudeInstance()
     const [ aapen, setAapen ] = useState<boolean>(false)
-    const [ error, setError ] = useState<string>('')
     const { stegId } = useParams<RouteParams>()
     const { valgtSoknad, soknader, setSoknader, setValgtSoknad, setFeilmeldingTekst } = useAppStore()
-    const { register, getValues } = useFormContext()
     const history = useHistory()
 
-    const boxClicked = () => {
-        const surveyValues = getValues('survey')
-        if (!surveyValues || surveyValues.length === 0 ) setError('')
-    }
+
     return (
 
         <div>
@@ -52,61 +46,18 @@ const AvbrytSoknadModal = () => {
             open={aapen}
             >
                 <Modal.Content>
-                    <Label size="medium" className="tittel" spacing>
-                        {tekst('avbryt.popup.survey')}
-                    </Label>
-                    <CheckboxGroup
-                        size="medium"
-                        error={error}
-                        legend={tekst('avbryt.popup.sporsmal')}
-                        description={tekst('avbryt.popup.survey.anonymt')}
-                        className={'popup-survey'}>
-                        <Checkbox {...register('survey')}
-                            onClick={ boxClicked }
-                            value={tekst('avbryt.popup.survey.alternativ1')}>
-                            {tekst('avbryt.popup.survey.alternativ1')}
-                        </Checkbox>
-                        <Checkbox {...register('survey')}
-                            onClick={boxClicked}
-                            value={tekst('avbryt.popup.survey.alternativ2')}>
-                            {tekst('avbryt.popup.survey.alternativ2')}
-                        </Checkbox>
-                        <Checkbox {...register('survey')}
-                            onClick={boxClicked}
-                            value={tekst('avbryt.popup.survey.alternativ3')}>
-                            {tekst('avbryt.popup.survey.alternativ3')}
-                        </Checkbox>
-                        <Checkbox {...register('survey')}
-                            onClick={boxClicked}
-                            value={tekst('avbryt.popup.survey.alternativ4')}>
-                            {tekst('avbryt.popup.survey.alternativ4')}
-                        </Checkbox>
-                        <Checkbox {...register('survey')}
-                            onClick={boxClicked}
-                            value={tekst('avbryt.popup.survey.alternativ5')}>
-                            {tekst('avbryt.popup.survey.alternativ5')}
-                        </Checkbox>
-                        <Checkbox {...register('survey')}
-                            onClick={boxClicked}
-                            value={tekst('avbryt.popup.survey.alternativ6')}>
-                            {tekst('avbryt.popup.survey.alternativ6')}
-                        </Checkbox>
-                    </CheckboxGroup>
+                    <BodyLong spacing size={'medium'} className={'sporsmal'}>
+                        {tekst('avbryt.popup.sporsmal')}
+                    </BodyLong>
 
-                    <Button size="small" variant="primary" className="midtstilt-knapp" onClick={
-                        (e) => {
-                            const surveyValues = getValues('survey')
-                            if( !surveyValues || surveyValues.length === 0 ) {
-                                setError(tekst('soknad.feilmelding.checkbox.lokal'))
-                                return
-                            }
-                            e.preventDefault()
+
+                    <Button size="small" variant="danger" className="midtstilt-knapp" onClick={
+                        () => {
                             logEvent('knapp klikket', {
-                                'tekst': tekst('avbryt.popup.bekreft'),
+                                'tekst': tekst('avbryt.popup.ja'),
                                 'soknadstype': valgtSoknad?.soknadstype,
                                 'component': tekst('avbryt.popup.tittel'),
-                                'steg': stegId,
-                                'avbrutt survey': surveyValues
+                                'steg': stegId
                             })
                             avbrytSoknad({
                                 valgtSoknad: valgtSoknad!,
@@ -119,20 +70,19 @@ const AvbrytSoknadModal = () => {
 
                         }
                     }>
-                        {tekst('avbryt.popup.bekreft')}
+                        {tekst('avbryt.popup.ja')}
                     </Button>
-
-                    <Button size="small" variant="tertiary" className="midtstilt-knapp"
+                    <Button size="small" variant="secondary" className="midtstilt-knapp"
                         onClick={() => {
                             setAapen(false)
                             logEvent('knapp klikket', {
-                                'tekst': tekst('avbryt.popup.angre'),
+                                'tekst': tekst('avbryt.popup.nei'),
                                 'soknadstype': valgtSoknad?.soknadstype,
                                 'component': tekst('avbryt.popup.tittel'),
                                 'steg': stegId
                             })
                         }}>
-                        {tekst('avbryt.popup.angre')}
+                        {tekst('avbryt.popup.nei')}
                     </Button>
                 </Modal.Content>
             </Modal>
