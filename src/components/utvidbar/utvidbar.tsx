@@ -24,26 +24,20 @@ interface UtvidbarProps {
 
 const Utvidbar = (props: UtvidbarProps) => {
     const [ erApen, setErApen ] = useState<boolean>(props.erApen)
-    const [ innholdHeight, setInnholdHeight ] = useState<number>(0)
 
     const utvidbar = useRef<HTMLDivElement>(null)
     const jsToggle = useRef<HTMLButtonElement>(null)
     const btnImage = useRef<HTMLImageElement>(null)
-    const container = useRef<HTMLDivElement>(null)
     const innhold = useRef<HTMLDivElement>(null)
     const { logEvent } = useAmplitudeInstance()
 
     useEffect(() => {
         setErApen(props.erApen)
         console.log('innhold.current', innhold.current) // eslint-disable-line
-        setInnholdHeight(
-            props.fixedHeight
-                ? 3000
-                : innhold.current!.offsetHeight
-        )
     }, [ props ])
 
-    const onKlikk = () => {
+    const onKlikk = (e: any) => {
+        e.preventDefault()
         if (props.amplitudeProps) {
             logEvent(erApen ? 'panel lukket' : 'panel åpnet', props.amplitudeProps)
         }
@@ -55,11 +49,10 @@ const Utvidbar = (props: UtvidbarProps) => {
 
     return (
         <Accordion>
-            <Accordion.Item ref={utvidbar} renderContentWhenClosed={true}
+            <Accordion.Item ref={utvidbar} renderContentWhenClosed={true} open={erApen}
                 className={`utvidbar ${props.className ? props.className : ''} ${props.type ? props.type : ''}`}
             >
                 <Accordion.Header
-                    className="utvidbar__toggle"
                     ref={jsToggle}
                     onMouseEnter={props.ikon !== undefined ? () => btnImage.current!.src = props.ikonHover! : undefined}
                     onMouseLeave={props.ikon !== undefined ? () => btnImage.current!.src = props.ikon! : undefined}
@@ -88,14 +81,15 @@ const Utvidbar = (props: UtvidbarProps) => {
                     </Normaltekst>
                 </Accordion.Header>
 
-                <Accordion.Content ref={container} className={'utvidbar__innholdContainer' + (erApen ? ' apen' : '')}
-                    style={{ maxHeight: erApen ? (innholdHeight * 2) + 'px' : '0' }}
-                >
-                    <div ref={innhold} className="utvidbar__innhold">
+                <Accordion.Content>
+                    <div ref={innhold}>
                         {props.children}
                         <div className="lenkerad ikke-print">
                             <button type="button" className="lenke" aria-pressed={!erApen}
-                                tabIndex={(erApen ? null : -1) as any} onClick={() => setErApen(!erApen)}
+                                tabIndex={(erApen ? null : -1) as any} onClick={(e: any) => {
+                                    e.preventDefault()
+                                    setErApen(!erApen)
+                                }}
                             >
                                 <Normaltekst tag="span">Lukk</Normaltekst>
                             </button>

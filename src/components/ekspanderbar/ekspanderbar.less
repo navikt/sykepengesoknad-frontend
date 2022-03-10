@@ -1,35 +1,26 @@
 @import '../../../node_modules/nav-frontend-core/less/_variabler';
 
 .ekspanderbar {
-    margin-bottom: 1rem;
-
-    .ekspanderbar__toggle {
-        cursor: pointer;
-        outline-offset: 0.2rem;
-        outline-color: #0067c5;
-        display: flex;
-        align-items: center;
-        margin: 0;
+    .navds-accordion__header {
+        justify-content: flex-start;
+        color: #005b82;
+        background-color: @white;
+        border-bottom: 0;
         padding: 0;
-        background: none;
-        color: @navDypBla;
-        border: none;
+        margin-bottom: 2rem;
 
-        .toggle-text {
-            margin-right: 0.5rem;
+        &:focus {
+            outline: none;
+            box-shadow: none;
         }
     }
 
-    .ekspanderbar__toggle--center {
-        .ekspanderbar__toggle();
-        margin: auto;
-    }
-
-    .ekspanderbar__content {
-        background-color: @grayBackground;
+    .navds-accordion__content {
+        background-color: #f1f1f1;
         padding: 1.5rem;
+        border-bottom: 0;
         border-radius: 5px;
-        margin-top: 0.5rem;
+        margin: -1.5rem 0 2rem;
     }
 }
 

@@ -61,7 +61,7 @@ describe('Tester behandlingsdagersøknad', () => {
         cy.get('.undersporsmal .checkboxgruppe label[for=687382]').should('include.text', 'andre arbeidsforhold')
         cy.get('.undersporsmal .checkboxgruppe .checkboks#687382').click()
         // Underspørsmål nivå 2 - radio
-        cy.get('.undersporsmal .checkboxgruppe .radioContainer .radioknapp#687383_0').click()
+        cy.get('.undersporsmal .checkboxgruppe .radioContainer .radioknapp#687383_0').click({ force: true })
         cy.contains('Du må sende egen sykepengesøknad for dette. ' +
             'Det betyr også at legen må skrive en sykmelding for hvert arbeidsforhold du er sykmeldt fra.')
 

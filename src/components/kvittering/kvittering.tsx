@@ -63,8 +63,7 @@ const Kvittering = () => {
 
     const skalViseSendTilArbeidsgiver = valgtSoknad!.arbeidsgiver !== undefined && !erSendtTilArbeidsgiver && valgtSoknad?.soknadstype !== RSSoknadstype.REISETILSKUDD
     return (
-        <div
-            className="kvittering">
+        <div className="kvittering">
             <KvitteringType />
             <Oppsummering
                 ekspandert={sendtForMerEnn30DagerSiden(valgtSoknad?.sendtTilArbeidsgiverDato, valgtSoknad?.sendtTilNAVDato)} />
