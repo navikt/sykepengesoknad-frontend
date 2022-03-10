@@ -26,14 +26,12 @@ const Utvidbar = (props: UtvidbarProps) => {
     const [ erApen, setErApen ] = useState<boolean>(props.erApen)
 
     const utvidbar = useRef<HTMLDivElement>(null)
-    const jsToggle = useRef<HTMLButtonElement>(null)
     const btnImage = useRef<HTMLImageElement>(null)
     const innhold = useRef<HTMLDivElement>(null)
     const { logEvent } = useAmplitudeInstance()
 
     useEffect(() => {
         setErApen(props.erApen)
-        console.log('innhold.current', innhold.current) // eslint-disable-line
     }, [ props ])
 
     const onKlikk = (e: any) => {
@@ -53,7 +51,6 @@ const Utvidbar = (props: UtvidbarProps) => {
                 className={`utvidbar ${props.className ? props.className : ''} ${props.type ? props.type : ''}`}
             >
                 <Accordion.Header
-                    ref={jsToggle}
                     onMouseEnter={props.ikon !== undefined ? () => btnImage.current!.src = props.ikonHover! : undefined}
                     onMouseLeave={props.ikon !== undefined ? () => btnImage.current!.src = props.ikon! : undefined}
                     onClick={onKlikk}
@@ -69,11 +66,11 @@ const Utvidbar = (props: UtvidbarProps) => {
                     />
 
                     <Vis hvis={props.type === undefined}
-                        render={() => <Undertittel tag="h2" className="utvidbar__tittel">{props.tittel}</Undertittel>}
+                        render={() => <Undertittel tag="h2">{props.tittel}</Undertittel>}
                     />
 
                     <Vis hvis={props.type === 'intern'}
-                        render={() => <Normaltekst tag="h2" className="utvidbar__tittel">{props.tittel}</Normaltekst>}
+                        render={() => <Normaltekst tag="h2">{props.tittel}</Normaltekst>}
                     />
 
                     <Normaltekst tag="em" className="utvidbar__handling">
