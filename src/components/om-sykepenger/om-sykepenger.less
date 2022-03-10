@@ -1,7 +1,28 @@
+@import 'node_modules/nav-frontend-core/less/_variabler';
+
 .om_sykepenger {
+    border: 1px solid @navGra40;
+    border-radius: 4px;
     margin-bottom: 2rem;
 
-    p + p, h3, .ekspanderbartPanel, .navds-alert {
+    .navds-accordion__item {
+        border: 1px solid @navGra40;
+        border-radius: 4px;
+
+        &+ .navds-accordion__item {
+            margin-top: 0.7rem;
+        }
+    }
+
+    .navds-accordion__header {
+        background-color: @white;
+    }
+
+    .navds-accordion__content {
+        padding: 1rem 2rem 2rem;
+    }
+
+    p + p, h3, .navds-accordion, .navds-alert {
         margin-top: 1.2rem;
     }
 
@@ -9,7 +30,7 @@
         margin-bottom: 0.5rem;
     }
 
-    .ekspanderbartPanel + .ekspanderbartPanel {
+    .navds-accordion + .navds-accordion {
         margin-top: 0.6rem;
     }
 }

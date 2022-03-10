@@ -22,8 +22,6 @@
         "lodash.throttle": "^4.1.1",
         "nav-datovelger": "^12.1.2",
         "nav-frontend-core": "^6.0.1",
-        "nav-frontend-ekspanderbartpanel": "^4.0.1",
-        "nav-frontend-ekspanderbartpanel-style": "^2.0.1",
         "nav-frontend-etiketter": "^3.0.1",
         "nav-frontend-etiketter-style": "^2.0.1",
         "nav-frontend-hjelpetekst": "^3.1.1",
