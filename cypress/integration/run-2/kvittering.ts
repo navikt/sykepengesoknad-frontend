@@ -452,7 +452,7 @@ const medOppholdKvittering = () => {
 
     // Inntekstmelding
     cy.contains('Hvorfor inntektsmeldingen må sendes på nytt?').click({ force: true })
-    cy.get('.navds-alert--info')
+    cy.get('.typo-normal')
         .should('contain', 'Lønn eller arbeidstid kan ha endret seg siden du var syk forrige gang. Dette får vi bare informasjon om gjennom inntektsmeldingen.')
 
     // Behandlingstider lenke
