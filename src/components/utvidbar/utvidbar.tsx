@@ -39,7 +39,7 @@ const Utvidbar = (props: UtvidbarProps) => {
 
     return (
         <Accordion>
-            <Accordion.Item renderContentWhenClosed={false} open={erApen}
+            <Accordion.Item renderContentWhenClosed={true} open={erApen}
                 className={`utvidbar ${props.className ? props.className : ''} ${props.type ? props.type : ''}`}
             >
                 <Accordion.Header
