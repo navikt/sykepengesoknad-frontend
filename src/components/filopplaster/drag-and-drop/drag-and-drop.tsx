@@ -86,7 +86,6 @@ const DragAndDrop = () => {
                         erApen={formErDisabled}
                         tittel={customTruncet(valgtFil?.name || 'Kvittering.png', 20)}
                         type="intern"
-                        fixedHeight={true}
                     >
                         <div className="preview">{
                             valgtFil

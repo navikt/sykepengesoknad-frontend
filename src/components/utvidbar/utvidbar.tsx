@@ -4,7 +4,6 @@ import { Accordion } from '@navikt/ds-react'
 import { Normaltekst, Undertittel } from 'nav-frontend-typografi'
 import React, { useEffect, useRef, useState } from 'react'
 
-import { erSynligIViewport } from '../../utils/browser-utils'
 import { useAmplitudeInstance } from '../amplitude/amplitude'
 import Vis from '../vis'
 
@@ -17,17 +16,13 @@ interface UtvidbarProps {
     amplitudeProps?: object
     ikonAltTekst?: string
     className?: string
-    visLukk?: boolean
     type?: 'intern' | undefined
-    fixedHeight?: boolean
 }
 
 const Utvidbar = (props: UtvidbarProps) => {
     const [ erApen, setErApen ] = useState<boolean>(props.erApen)
 
-    const utvidbar = useRef<HTMLDivElement>(null)
     const btnImage = useRef<HTMLImageElement>(null)
-    const innhold = useRef<HTMLDivElement>(null)
     const { logEvent } = useAmplitudeInstance()
 
     useEffect(() => {
@@ -40,14 +35,11 @@ const Utvidbar = (props: UtvidbarProps) => {
             logEvent(erApen ? 'panel lukket' : 'panel åpnet', props.amplitudeProps)
         }
         setErApen(!erApen)
-        if (!erSynligIViewport(utvidbar.current)) {
-            window.scrollTo({ top: utvidbar.current?.offsetTop, left: 0, behavior: 'smooth' })
-        }
     }
 
     return (
         <Accordion>
-            <Accordion.Item ref={utvidbar} renderContentWhenClosed={true} open={erApen}
+            <Accordion.Item renderContentWhenClosed={false} open={erApen}
                 className={`utvidbar ${props.className ? props.className : ''} ${props.type ? props.type : ''}`}
             >
                 <Accordion.Header
@@ -79,18 +71,16 @@ const Utvidbar = (props: UtvidbarProps) => {
                 </Accordion.Header>
 
                 <Accordion.Content>
-                    <div ref={innhold}>
-                        {props.children}
-                        <div className="lenkerad ikke-print">
-                            <button type="button" className="lenke" aria-pressed={!erApen}
-                                tabIndex={(erApen ? null : -1) as any} onClick={(e: any) => {
-                                    e.preventDefault()
-                                    setErApen(!erApen)
-                                }}
-                            >
-                                <Normaltekst tag="span">Lukk</Normaltekst>
-                            </button>
-                        </div>
+                    {props.children}
+                    <div className="lenkerad ikke-print">
+                        <button type="button" className="lenke" aria-pressed={!erApen}
+                            tabIndex={(erApen ? null : -1) as any} onClick={(e: any) => {
+                                e.preventDefault()
+                                setErApen(!erApen)
+                            }}
+                        >
+                            <Normaltekst tag="span">Lukk</Normaltekst>
+                        </button>
                     </div>
                 </Accordion.Content>
             </Accordion.Item>
