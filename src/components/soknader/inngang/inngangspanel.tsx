@@ -1,6 +1,6 @@
 import './inngangspanel.less'
 
-import Etikett from 'nav-frontend-etiketter'
+import { Tag } from '@navikt/ds-react'
 import React from 'react'
 
 import SoknadLink from '../../../pages/soknad/soknad-link'
@@ -53,7 +53,7 @@ export const InngangsStatus = ({ status, tekst }: InngangsStatusProps) => {
     const type = statusTilType(status)
     return (
         <div className="inngangspanel__status">
-            <Etikett type={type}>{tekst}</Etikett>
+            <Tag variant={type}>{tekst}</Tag>
         </div>
     )
 }
@@ -61,12 +61,12 @@ export const InngangsStatus = ({ status, tekst }: InngangsStatusProps) => {
 const statusTilType = (status: RSSoknadstatus) => {
     switch (status) {
         case RSSoknadstatus.SENDT:
-            return 'suksess'
+            return 'success'
         case RSSoknadstatus.UTGAATT:
         case RSSoknadstatus.FREMTIDIG:
             return 'info'
         case RSSoknadstatus.AVBRUTT:
-            return 'advarsel'
+            return 'warning'
         default:
             return 'info'
     }
