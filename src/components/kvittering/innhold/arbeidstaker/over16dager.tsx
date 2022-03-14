@@ -20,7 +20,6 @@ const Over16dager = ({ erGradert }: gradertReisetilskuddProps) => {
                 {erGradert ?
                     tekst('kvittering.arbeidstaker.over16.gradertreisetilskudd.brodtekst') :
                     tekst('kvittering.arbeidstaker.over16.brodtekst')
-
                 }
             </Normaltekst>
             <Utvidbar erApen={false} type="intern" tittel={tekst('kvittering.arbeidstaker.hvorfor-skille-ved-16-dager')}>
