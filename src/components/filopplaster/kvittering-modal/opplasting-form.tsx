@@ -1,9 +1,8 @@
 import './opplasting-form.less'
 
-import { Alert } from '@navikt/ds-react'
+import { Alert, Button } from '@navikt/ds-react'
 import dayjs from 'dayjs'
 import parser from 'html-react-parser'
-import { Knapp } from 'nav-frontend-knapper'
 import { Element, Normaltekst, Systemtittel } from 'nav-frontend-typografi'
 import React, { useEffect, useState } from 'react'
 import { FormProvider, useForm } from 'react-hook-form'
@@ -259,18 +258,18 @@ const OpplastingForm = ({ sporsmal }: SpmProps) => {
                 <div className="knapperad">
                     <Vis hvis={!formErDisabled}
                         render={() =>
-                            <Knapp type="hoved" htmlType="button" className="lagre-kvittering" onClick={onSubmit}
-                                spinner={laster}>
+                            <Button variant="primary" type="button" className="lagre-kvittering" onClick={onSubmit}
+                                loading={laster}>
                                 {tekst('opplasting_modal.bekreft')}
-                            </Knapp>
+                            </Button>
                         }
                     />
 
-                    <Knapp htmlType="button" className="lagre-kvittering" onClick={() => {
+                    <Button variant="secondary" type="button" className="lagre-kvittering" onClick={() => {
                         setOpenModal(false)
                     }}>
                         {tekst('opplasting_modal.tilbake')}
-                    </Knapp>
+                    </Button>
 
                     <Vis hvis={formErDisabled}
                         render={() => <Slettknapp sporsmal={sporsmal} kvittering={valgtKvittering!} />}

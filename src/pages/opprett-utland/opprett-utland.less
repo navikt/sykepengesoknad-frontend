@@ -2,7 +2,6 @@
 @import '../../../node_modules/nav-frontend-skjema-style/src/index';
 @import '../../basic.less';
 
-
 #opprett_utland_main {
     background-color: @navLysGra;
 }
@@ -107,7 +106,6 @@
     }
 
     @media (min-width: @skjermMedium) {
-
         .sidebanner__innhold .brodsmuler {
             margin-bottom: 2rem; // default
         }
@@ -139,27 +137,18 @@
     }
 
     .redaksjonelt-innhold {
-
-        // Brukes på redaktørstyrt HTML.
-
         h2, h3, h4 {
             .typo-element-mixin();
             margin-top: 20px;
             margin-bottom: 0;
         }
 
-
         p:last-child {
             margin-bottom: 0;
         }
-
     }
 
     .panel {
-
-        // Standard-panel
-        // <div class="panel"></div>
-
         background: @white;
         padding: 1rem;
         margin-bottom: 1rem;
@@ -168,7 +157,6 @@
         &:focus {
             outline: 3px @navOransje solid;
         }
-
     }
 
     .panel--ramme {

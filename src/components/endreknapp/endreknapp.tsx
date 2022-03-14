@@ -1,4 +1,4 @@
-import { Knapp } from 'nav-frontend-knapper'
+import { Button } from '@navikt/ds-react'
 import React, { useState } from 'react'
 import { useHistory } from 'react-router'
 
@@ -50,7 +50,11 @@ const Endreknapp = () => {
         })
     }
 
-    return <Knapp mini type="standard" spinner={korrigerer} onClick={korriger}>{endreKnappTekst}</Knapp>
+    return (
+        <Button size="small" variant="secondary" loading={korrigerer} onClick={korriger}>
+            {tekst('kvittering.knapp.endre')}
+        </Button>
+    )
 }
 
 export default Endreknapp

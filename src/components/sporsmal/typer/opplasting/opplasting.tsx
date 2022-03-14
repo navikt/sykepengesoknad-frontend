@@ -1,8 +1,7 @@
 import './opplasting.less'
 
-import { Alert } from '@navikt/ds-react'
+import { Alert, Button } from '@navikt/ds-react'
 import parser from 'html-react-parser'
-import { Knapp } from 'nav-frontend-knapper'
 import Modal from 'nav-frontend-modal'
 import { Element, Normaltekst } from 'nav-frontend-typografi'
 import React, { useRef } from 'react'
@@ -59,8 +58,8 @@ const Opplasting = ({ sporsmal }: SpmProps) => {
                 </Ekspanderbar>
             </div>
 
-            <Knapp
-                htmlType="button"
+            <Button type="button"
+                variant="secondary"
                 className="fler-vedlegg"
                 onClick={aktiverModal}
                 onMouseEnter={() => ikonRef.current!.src = PlussIkonHover}
@@ -68,7 +67,7 @@ const Opplasting = ({ sporsmal }: SpmProps) => {
             >
                 <img ref={ikonRef} className="pluss-ikon" src={PlussIkon} alt="" />
                 <Normaltekst tag="span">{tekst('opplasting.legg-til')}</Normaltekst>
-            </Knapp>
+            </Button>
 
             <Modal
                 isOpen={openModal}

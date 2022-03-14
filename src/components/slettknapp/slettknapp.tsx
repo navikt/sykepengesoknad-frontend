@@ -1,7 +1,6 @@
 import './slettknapp.less'
 
-import { Alert } from '@navikt/ds-react'
-import { Fareknapp, Knapp } from 'nav-frontend-knapper'
+import { Alert, Button } from '@navikt/ds-react'
 import ModalWrapper from 'nav-frontend-modal'
 import { Normaltekst } from 'nav-frontend-typografi'
 import React, { useState } from 'react'
@@ -75,14 +74,14 @@ const Slettknapp = ({ sporsmal, kvittering, update }: SlettknappProps) => {
 
             <Vis hvis={!update}
                 render={() =>
-                    <Knapp type="fare" htmlType="button" className="lagre-kvittering" onClick={() => setVilSlette(true)}>
+                    <Button variant="danger" type="button" className="lagre-kvittering" onClick={() => setVilSlette(true)}>
                         {tekst('opplasting_modal.slett')}
-                    </Knapp>
+                    </Button>
                 }
             />
 
             <ModalWrapper className="modal__teaser_popup" onRequestClose={() => setVilSlette(false)}
-                contentLabel={'slett'}
+                contentLabel="slett"
                 isOpen={vilSlette}
                 closeButton={false}
             >
@@ -91,16 +90,16 @@ const Slettknapp = ({ sporsmal, kvittering, update }: SlettknappProps) => {
                         {tekst('opplasting_modal.vil-slette')}
                     </Normaltekst>
                     <div className="blokk-xs">
-                        <Fareknapp spinner={sletter} htmlType="button" onClick={slettKvittering}>
+                        <Button variant="danger" loading={sletter} type="button" onClick={slettKvittering}>
                             {tekst('opplasting_modal.vil-slette.ja')}
-                        </Fareknapp>
+                        </Button>
                     </div>
                     <div aria-live="polite" className="blokk-xs">
                         <Vis hvis={feilmeldingTekst}
                             render={() => <Alert variant="error">{feilmeldingTekst}</Alert>}
                         />
                     </div>
-                    <button className="avbrytlenke lenkeknapp" type={'button'} onClick={() => setVilSlette(false)}>
+                    <button className="avbrytlenke lenkeknapp" type="button" onClick={() => setVilSlette(false)}>
                         {tekst('opplasting_modal.vil-slette.angre')}
                     </button>
                 </div>
