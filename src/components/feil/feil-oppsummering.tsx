@@ -83,7 +83,7 @@ const FeilOppsummering = ({ sporsmal }: SpmProps) => {
                         <ul className="feiloppsummering__liste">
                             {entries.sort(list => list[0][0]).map((list, index) => (
                                 <li key={index}>
-                                    <div role="link" className="lenke" tabIndex={0}
+                                    <div role="link" className="navds-link" tabIndex={0}
                                         onKeyDown={(e) => handleKeyDown(e, list)}
                                         onClick={() => handleClick(list)}
                                     >

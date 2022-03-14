@@ -73,7 +73,7 @@ const Utvidbar = (props: UtvidbarProps) => {
                 <Accordion.Content>
                     {props.children}
                     <div className="lenkerad ikke-print">
-                        <button type="button" className="lenke" aria-pressed={!erApen}
+                        <button type="button" className="navds-link" aria-pressed={!erApen}
                             tabIndex={(erApen ? null : -1) as any} onClick={(e: any) => {
                                 e.preventDefault()
                                 setErApen(!erApen)

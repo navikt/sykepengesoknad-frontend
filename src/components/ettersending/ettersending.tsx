@@ -103,7 +103,7 @@ const Ettersending = ({ gjelder, setRerendrekvittering }: EttersendingProps) => 
                     {hentTekst('kvittering.knapp.bekreft.send-til')}
                 </Button>
             </div>
-            <button className="lenke" onClick={() => setVilEttersende(false)}>
+            <button className="navds-link" onClick={() => setVilEttersende(false)}>
                 {tekst('kvittering.knapp.angre')}
             </button>
         </ModalWrapper>
