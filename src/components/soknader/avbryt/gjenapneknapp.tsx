@@ -1,6 +1,6 @@
 import './gjenapneknapp.less'
 
-import { Knapp } from 'nav-frontend-knapper'
+import { Button } from '@navikt/ds-react'
 import React, { useEffect, useState } from 'react'
 import { useHistory, useParams } from 'react-router'
 
@@ -69,9 +69,9 @@ const GjenapneSoknad = () => {
     }
 
     return (
-        <Knapp className={'gjenapne-knapp'} spinner={gjenapner} mini type="standard" onClick={gjenapneSoknad}>
-            {'Gjenåpne søknad'}
-        </Knapp>
+        <Button variant="secondary" className="gjenapne-knapp" loading={gjenapner} size="small" onClick={gjenapneSoknad}>
+            Gjenåpne søknad
+        </Button>
     )
 }
 

@@ -1,4 +1,4 @@
-import { Knapp } from 'nav-frontend-knapper'
+import { Button } from '@navikt/ds-react'
 import React from 'react'
 import { useParams } from 'react-router-dom'
 
@@ -10,7 +10,6 @@ import AvbrytSoknadModal from '../../avbryt-soknad-modal/avbryt-soknad-modal'
 import AvsluttOgFortsettSenere from '../../avslutt-og-fortsett-senere/avslutt-og-fortsett-senere'
 import PersonvernLesMer from '../../soknad-intro/personvern-les-mer'
 import Vis from '../../vis'
-
 
 interface KnapperadProps {
     poster: boolean;
@@ -32,7 +31,7 @@ const Knapperad = ({ poster }: KnapperadProps) => {
 
     return (
         <div className="knapperad">
-            <Knapp type="hoved" htmlType="submit" spinner={poster}>{tekst(nokkel)}</Knapp>
+            <Button variant="primary" type="submit" loading={poster}>{tekst(nokkel)}</Button>
             <div className="avbrytDialog blokk-l">
                 <AvsluttOgFortsettSenere />
                 <hr />

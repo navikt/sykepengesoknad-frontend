@@ -1,8 +1,7 @@
 import './opprett-utland.less'
 
-import { Alert } from '@navikt/ds-react'
+import { Alert, Button } from '@navikt/ds-react'
 import parser from 'html-react-parser'
-import { Knapp } from 'nav-frontend-knapper'
 import React from 'react'
 import { useHistory } from 'react-router'
 
@@ -46,10 +45,10 @@ const OpprettUtland = () => {
     }
 
     return (
-        <div id="opprett_utland_main" className={'opprett-utland'}>
+        <div id="opprett_utland_main" className="opprett-utland">
             <div className="sidebanner sidebanner--utenramme">
                 <div className="sidebanner__innhold blokk--xl">
-                    <Bjorn nokkel={'opprett-utland.bjorn'} hvit={true} vertikal={true} stor={true} />
+                    <Bjorn nokkel="opprett-utland.bjorn" hvit={true} vertikal={true} stor={true} />
                 </div>
             </div>
             <div className="begrensning">
@@ -62,9 +61,9 @@ const OpprettUtland = () => {
                 </div>
 
                 <div className="knapperad">
-                    <Knapp type="hoved" htmlType={'button'}
+                    <Button variant="primary" type="button"
                         onClick={opprett}>{tekst('opprett-utland.fortsett')}
-                    </Knapp>
+                    </Button>
 
                     <div aria-live="polite">
                         <Vis hvis={feilmeldingTekst}
