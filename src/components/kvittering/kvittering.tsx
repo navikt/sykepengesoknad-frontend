@@ -27,7 +27,6 @@ const Kvittering = () => {
     const { id } = useParams<RouteParams>()
     const [ rerendreKvittering, setRerendrekvittering ] = useState<Date>(new Date())
 
-
     useEffect(() => {
         if (!valgtSoknad) {
             const filtrertSoknad = soknader.find(soknad => soknad.id === id)
@@ -43,10 +42,8 @@ const Kvittering = () => {
 
     }, [ rerendreKvittering ])
 
-
     const erSendtTilNav = valgtSoknad?.sendtTilNAVDato !== null
     const erSendtTilArbeidsgiver = valgtSoknad?.sendtTilArbeidsgiverDato !== null
-
     const skalViseKnapperad = !(valgtSoknad?.soknadstype === RSSoknadstype.OPPHOLD_UTLAND)
 
     const KvitteringType = () => {
@@ -66,7 +63,8 @@ const Kvittering = () => {
         <div className="kvittering">
             <KvitteringType />
             <Oppsummering
-                ekspandert={sendtForMerEnn30DagerSiden(valgtSoknad?.sendtTilArbeidsgiverDato, valgtSoknad?.sendtTilNAVDato)} />
+                ekspandert={sendtForMerEnn30DagerSiden(valgtSoknad?.sendtTilArbeidsgiverDato, valgtSoknad?.sendtTilNAVDato)}
+            />
 
             <Vis hvis={valgtSoknad!.soknadstype !== RSSoknadstype.OPPHOLD_UTLAND}
                 render={() => <Opplysninger ekspandert={false} steg={'kvittering'} />}

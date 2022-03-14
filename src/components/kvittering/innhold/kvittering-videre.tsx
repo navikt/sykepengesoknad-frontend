@@ -1,6 +1,5 @@
-import { Alert } from '@navikt/ds-react'
+import { Alert, Link } from '@navikt/ds-react'
 import parser from 'html-react-parser'
-import Lenke from 'nav-frontend-lenker'
 import { Element, Normaltekst, Undertittel } from 'nav-frontend-typografi'
 import React from 'react'
 
@@ -28,18 +27,18 @@ const KvitteringVidere = () => {
                     <div className="avsnitt">
                         <Element tag="h2">{tekst('kvittering.naeringsdrivende.tittel')}</Element>
                         <Normaltekst tag="span">{tekst('kvittering.naeringsdrivende.brodtekst')} </Normaltekst>
-                        <Lenke target="blank" href={tekst('kvittering.naeringsdrivende.lenke.url')}>
+                        <Link target="_blank" href={tekst('kvittering.naeringsdrivende.lenke.url')}>
                             <Normaltekst tag="span">{tekst('kvittering.naeringsdrivende.lenke')}</Normaltekst>
-                        </Lenke>.
+                        </Link>.
                     </div>
                 }
             />
             <div className="avsnitt hva-skjer">
                 <Element tag="h2">{tekst('kvittering.nav-behandler-soknaden')}</Element>
                 <Normaltekst tag="span">{tekst('kvittering.arbeidstaker.saksbehandlingstid')} </Normaltekst>
-                <Lenke target="blank" href={tekst('kvittering.arbeidstaker.saksbehandlingstid.lenke.url')}>
+                <Link target="_blank" href={tekst('kvittering.arbeidstaker.saksbehandlingstid.lenke.url')}>
                     <Normaltekst tag="span">{tekst('kvittering.arbeidstaker.saksbehandlingstid.lenke')}</Normaltekst>
-                </Lenke>
+                </Link>
             </div>
 
             <Vis hvis={valgtSoknad && valgtSoknad.soknadstype !== RSSoknadstype.REISETILSKUDD}

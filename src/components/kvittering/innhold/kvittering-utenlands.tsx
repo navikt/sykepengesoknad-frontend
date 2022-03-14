@@ -1,5 +1,4 @@
-import { Alert } from '@navikt/ds-react'
-import Lenke from 'nav-frontend-lenker'
+import { Alert, Link } from '@navikt/ds-react'
 import { Element, Normaltekst, Undertittel } from 'nav-frontend-typografi'
 import React from 'react'
 
@@ -30,9 +29,9 @@ const KvitteringUtenlands = () => {
                 </Normaltekst>
             </div>
             <div className="avsnitt">
-                <Lenke target="blank" href={tekst('kvittering.utenlands.lenke.url')}>
+                <Link target="_blank" href={tekst('kvittering.utenlands.lenke.url')}>
                     <Normaltekst tag="span">{tekst('kvittering.utenlands.lenke')}</Normaltekst>
-                </Lenke>.
+                </Link>.
             </div>
             <div className="avsnitt">
                 <Element tag="h2">{tekst('kvittering.utenlands.overskrift3')}</Element>
