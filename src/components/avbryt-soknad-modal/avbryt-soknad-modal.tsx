@@ -17,10 +17,8 @@ const AvbrytSoknadModal = () => {
     const { valgtSoknad, soknader, setSoknader, setValgtSoknad, setFeilmeldingTekst } = useAppStore()
     const history = useHistory()
 
-
     return (
-
-        <div>
+        <>
             <Button size="small" variant="tertiary" className="avbryt_rødknapp"
                 onClick={
                     (e) => {
@@ -34,22 +32,21 @@ const AvbrytSoknadModal = () => {
                     }}>
                 {tekst('avbryt.popup.tittel')}
             </Button>
-            <Modal className="modal__avbryt_popup" onClose={() => {
-
-                setAapen(false)
-                logEvent('popup lukket', {
-                    'component': tekst('avbryt.popup.tittel'),
-                    'soknadstype': valgtSoknad?.soknadstype,
-                    'steg': stegId
-                })
-            }}
-            open={aapen}
+            <Modal className="modal__avbryt_popup"
+                onClose={() => {
+                    setAapen(false)
+                    logEvent('popup lukket', {
+                        'component': tekst('avbryt.popup.tittel'),
+                        'soknadstype': valgtSoknad?.soknadstype,
+                        'steg': stegId
+                    })
+                }}
+                open={aapen}
             >
                 <Modal.Content>
-                    <BodyLong spacing size={'medium'} className={'sporsmal'}>
+                    <BodyLong spacing size="medium" className="sporsmal">
                         {tekst('avbryt.popup.sporsmal')}
                     </BodyLong>
-
 
                     <Button size="small" variant="danger" className="midtstilt-knapp" onClick={
                         () => {
@@ -86,7 +83,7 @@ const AvbrytSoknadModal = () => {
                     </Button>
                 </Modal.Content>
             </Modal>
-        </div>
+        </>
     )
 }
 

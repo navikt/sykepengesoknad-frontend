@@ -1,8 +1,7 @@
 import './om-sykepenger.less'
 
-import { Accordion, Alert } from '@navikt/ds-react'
+import { Accordion, Alert, Link } from '@navikt/ds-react'
 import parser from 'html-react-parser'
-import Lenke from 'nav-frontend-lenker'
 import { Element, Normaltekst, Undertittel } from 'nav-frontend-typografi'
 import React, { useState } from 'react'
 
@@ -53,14 +52,14 @@ const OmSykepenger = () => {
 
                     <Element tag="h3">{tekst('om.sykepenger.tittel2')}</Element>
                     <Normaltekst>
-                        <Lenke href={tekst('om.sykepenger.lenke1.url')} target="_blank" rel="noopener">
+                        <Link href={tekst('om.sykepenger.lenke1.url')} target="_blank" rel="noopener">
                             {tekst('om.sykepenger.lenke1')}
-                        </Lenke>
+                        </Link>
                     </Normaltekst>
                     <Normaltekst>
-                        <Lenke href={tekst('om.sykepenger.lenke2.url')} target="_blank" rel="noopener">
+                        <Link href={tekst('om.sykepenger.lenke2.url')} target="_blank" rel="noopener">
                             {tekst('om.sykepenger.lenke2')}
-                        </Lenke>
+                        </Link>
                     </Normaltekst>
 
                 </Accordion.Content>

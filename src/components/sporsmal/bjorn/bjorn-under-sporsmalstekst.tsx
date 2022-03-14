@@ -1,4 +1,4 @@
-import Lenke from 'nav-frontend-lenker'
+import { Link } from '@navikt/ds-react'
 import { Normaltekst } from 'nav-frontend-typografi'
 import React from 'react'
 
@@ -35,13 +35,12 @@ const BjornUnderSporsmalstekst = ({ sporsmal }: SpmProps) => {
                 <Bjorn className="blokk-m" >
                     <Normaltekst>
                         {tekst(bjornTekst as any)}
-                        <Lenke
+                        <Link href={tekst((bjornTekst + '_lenke') as any) }
                             onClick={() => { logEvent('navigere', { lenketekst: tekst((bjornTekst + '_lenketekst') as any) })}}
-                            href={tekst((bjornTekst + '_lenke') as any) }
-                            target={'_blank'}
+                            target="_blank"
                         >
                             {tekst((bjornTekst + '_lenketekst') as any )}
-                        </Lenke>
+                        </Link>
                     </Normaltekst>
                 </Bjorn>} />
         </>
