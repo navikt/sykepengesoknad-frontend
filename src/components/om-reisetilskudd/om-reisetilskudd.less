@@ -1,20 +1,23 @@
+@import 'node_modules/nav-frontend-core/less/_variabler';
 
 .om-reisetilskudd {
-  margin: 1rem 0;
+    border: 1px solid @navGra40;
+    border-radius: 4px;
+    margin: 1rem 0;
 
-  p {
-    margin: 0.5rem 0 1rem;
-  }
-
-  .ekspanderbartPanel__innhold {
-    padding-left: 2rem;
-
-    :first-child {
-      margin-top: 0.5rem;
+    p {
+        margin: 0.5rem 0 1rem;
     }
-  }
 
-  .ekspanderbartPanel__hode {
-    padding-left: 2rem;
-  }
+    .navds-accordion__content {
+        padding-left: 2rem;
+
+        :first-child {
+            margin-top: 0.5rem;
+        }
+    }
+
+    .navds-accordion__header {
+        padding-left: 2rem;
+    }
 }

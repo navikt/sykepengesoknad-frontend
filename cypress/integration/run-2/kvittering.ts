@@ -45,12 +45,12 @@ describe('Tester kvittering', () => {
                 .and('contain', 'Du får vanligvis utbetalt sykepengene enten innen den 25. i måneden, eller innen fem dager etter at vi har sendt deg svar på søknaden din. Hvis søknaden din gjelder dager i to ulike kalendermåneder, kan utbetalingen bli delt i to. Les mer om når du kan forvente å få pengene.')
 
             // Oppsummering minimert
-            cy.get('.utvidbar.oppsummering.ekspander.lilla .utvidbar__toggle')
+            cy.get('.utvidbar.oppsummering.lilla .navds-accordion__header')
                 .should('contain', 'Oppsummering fra søknaden')
                 .and('have.attr', 'aria-expanded', 'false')
 
             // Opplysninger minimert
-            cy.get('.utvidbar.ekspander .utvidbar__toggle')
+            cy.get('.utvidbar.ekspander .navds-accordion__header')
                 .should('contain', 'Opplysninger fra sykmeldingen')
                 .and('have.attr', 'aria-expanded', 'false')
 
@@ -76,11 +76,11 @@ describe('Tester kvittering', () => {
                 .should('not.exist')
 
             // Oppsummering ekspandert
-            cy.get('.utvidbar.oppsummering.ekspander.lilla.apen .utvidbar__toggle')
+            cy.get('.utvidbar.oppsummering.lilla.apen .navds-accordion__header')
                 .should('contain', 'Oppsummering fra søknaden')
 
             // Opplysninger minimert
-            cy.get('.utvidbar.ekspander .utvidbar__toggle')
+            cy.get('.utvidbar.ekspander .navds-accordion__header')
                 .should('contain', 'Opplysninger fra sykmeldingen')
 
             // Knapperad ( Endre, Ettersend)
@@ -131,7 +131,7 @@ describe('Tester kvittering', () => {
                 .and('not.contain', 'Saksbehandlingstidene kan variere noe. Sjekk saksbehandlingstidene i ditt fylke')
 
             // Oppsummering minimert
-            cy.get('.utvidbar.oppsummering.ekspander.lilla .utvidbar__toggle')
+            cy.get('.utvidbar.oppsummering.lilla .navds-accordion__header')
                 .should('contain', 'Oppsummering fra søknaden')
                 .and('have.attr', 'aria-expanded', 'false')
 
@@ -176,12 +176,12 @@ describe('Tester kvittering', () => {
                 .and('contain', 'Du får vanligvis utbetalt sykepengene enten innen den 25. i måneden, eller innen fem dager etter at vi har sendt deg svar på søknaden din. Hvis søknaden din gjelder dager i to ulike kalendermåneder, kan utbetalingen bli delt i to. Les mer om når du kan forvente å få pengene.')
 
             // Oppsummering minimert
-            cy.get('.utvidbar.oppsummering.ekspander.lilla .utvidbar__toggle')
+            cy.get('.utvidbar.oppsummering.lilla .navds-accordion__header')
                 .should('contain', 'Oppsummering fra søknaden')
                 .and('have.attr', 'aria-expanded', 'false')
 
             // Opplysninger minimert
-            cy.get('.utvidbar.ekspander .utvidbar__toggle')
+            cy.get('.utvidbar.ekspander .navds-accordion__header')
                 .should('contain', 'Opplysninger fra sykmeldingen')
                 .and('have.attr', 'aria-expanded', 'false')
 
@@ -234,12 +234,12 @@ describe('Tester kvittering', () => {
 
             // Arbeidsgiverperiode tekst
             cy.contains('Hvorfor går det et skille ved 16 dager?').click({ force: true })
-            cy.get('.navds-alert--info')
+            cy.get('.typo-normal')
                 .should('contain', 'Arbeidsgiveren skal betale sykepenger i en periode på opptil 16 kalenderdager, også kalt arbeidsgiverperioden. NAV overtar sykepengeutbetalingen fra og med 17. kalenderdag.')
 
             // Inntektsmelding
             cy.contains('Hva er en inntektsmelding').click({ force: true })
-            cy.get('.navds-alert--info')
+            cy.get('.typo-normal')
                 .should('contain', 'Arbeidsplassen din sender inntektsopplysninger og annen informasjon som NAV trenger for å behandle søkaden din. Inntektsmeldingen sendes digitalt fra arbeidsplassens lønns- og personalsystem eller fra Altinn.no.')
 
         })
@@ -326,12 +326,12 @@ const inntil16dagerKvittering = () => {
         .and('not.contain', 'Når blir pengene utbetalt')
 
     // Oppsummering minimert
-    cy.get('.utvidbar.oppsummering.ekspander.lilla .utvidbar__toggle')
+    cy.get('.utvidbar.oppsummering.lilla .navds-accordion__header')
         .should('contain', 'Oppsummering fra søknaden')
         .and('have.attr', 'aria-expanded', 'false')
 
     // Opplysninger minimert
-    cy.get('.utvidbar.ekspander .utvidbar__toggle')
+    cy.get('.utvidbar.ekspander .navds-accordion__header')
         .should('contain', 'Opplysninger fra sykmeldingen')
         .and('have.attr', 'aria-expanded', 'false')
 
@@ -368,21 +368,21 @@ const over16dagerKvittering = () => {
 
     // Arbeidsgiverperiode tekst
     cy.contains('Hvorfor går det et skille ved 16 dager?').click({ force: true })
-    cy.get('.navds-alert--info')
+    cy.get('.typo-normal')
         .should('contain', 'Arbeidsgiveren skal betale sykepenger i en periode på opptil 16 kalenderdager, også kalt arbeidsgiverperioden. NAV overtar sykepengeutbetalingen fra og med 17. kalenderdag.')
 
     // Inntektsmelding
     cy.contains('Hva er en inntektsmelding').click({ force: true })
-    cy.get('.navds-alert--info')
+    cy.get('.typo-normal')
         .should('contain', 'Arbeidsplassen din sender inntektsopplysninger og annen informasjon som NAV trenger for å behandle søkaden din. Inntektsmeldingen sendes digitalt fra arbeidsplassens lønns- og personalsystem eller fra Altinn.no.')
 
     // Oppsummering minimert
-    cy.get('.utvidbar.oppsummering.ekspander.lilla .utvidbar__toggle')
+    cy.get('.utvidbar.oppsummering.lilla .navds-accordion__header')
         .should('contain', 'Oppsummering fra søknaden')
         .and('have.attr', 'aria-expanded', 'false')
 
     // Opplysninger minimert
-    cy.get('.utvidbar.ekspander .utvidbar__toggle')
+    cy.get('.utvidbar.ekspander .navds-accordion__header')
         .should('contain', 'Opplysninger fra sykmeldingen')
         .and('have.attr', 'aria-expanded', 'false')
 
@@ -415,12 +415,12 @@ const utenOppholdKvittering = () => {
         .should('have.attr', 'href', 'https://www.nav.no/no/nav-og-samfunn/om-nav/saksbehandlingstider-i-nav')
 
     // Oppsummering minimert
-    cy.get('.utvidbar.oppsummering.ekspander.lilla .utvidbar__toggle')
+    cy.get('.utvidbar.oppsummering.lilla .navds-accordion__header')
         .should('contain', 'Oppsummering fra søknaden')
         .and('have.attr', 'aria-expanded', 'false')
 
     // Opplysninger minimert
-    cy.get('.utvidbar.ekspander .utvidbar__toggle')
+    cy.get('.utvidbar.ekspander .navds-accordion__header')
         .should('contain', 'Opplysninger fra sykmeldingen')
         .and('have.attr', 'aria-expanded', 'false')
 
@@ -452,7 +452,7 @@ const medOppholdKvittering = () => {
 
     // Inntekstmelding
     cy.contains('Hvorfor inntektsmeldingen må sendes på nytt?').click({ force: true })
-    cy.get('.navds-alert--info')
+    cy.get('.typo-normal')
         .should('contain', 'Lønn eller arbeidstid kan ha endret seg siden du var syk forrige gang. Dette får vi bare informasjon om gjennom inntektsmeldingen.')
 
     // Behandlingstider lenke
@@ -460,12 +460,12 @@ const medOppholdKvittering = () => {
         .should('have.attr', 'href', 'https://www.nav.no/no/nav-og-samfunn/om-nav/saksbehandlingstider-i-nav')
 
     // Oppsummering minimert
-    cy.get('.utvidbar.oppsummering.ekspander.lilla .utvidbar__toggle')
+    cy.get('.utvidbar.oppsummering.lilla .navds-accordion__header')
         .should('contain', 'Oppsummering fra søknaden')
         .and('have.attr', 'aria-expanded', 'false')
 
     // Opplysninger minimert
-    cy.get('.utvidbar.ekspander .utvidbar__toggle')
+    cy.get('.utvidbar.ekspander .navds-accordion__header')
         .should('contain', 'Opplysninger fra sykmeldingen')
         .and('have.attr', 'aria-expanded', 'false')
 

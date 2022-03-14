@@ -35,7 +35,7 @@ const Oppsummering = ({ ekspandert }: EkspanderProps) => {
     const { valgtSoknad } = useAppStore()
 
     return (
-        <Utvidbar className={'oppsummering ekspander lilla' + (ekspandert ? ' apen' : '')}
+        <Utvidbar className={'oppsummering lilla' + (ekspandert ? ' apen' : '')}
             ikon={sjekkbokser} ikonHover={sjekkbokserHover} erApen={ekspandert}
             tittel={tekst('sykepengesoknad.oppsummering.tittel')}
             ikonAltTekst=""
@@ -112,7 +112,7 @@ export const SporsmalVarianter = ({ sporsmal }: OppsummeringProps) => {
         case RSSvartype.INFO_BEHANDLINGSDAGER: {
             return <Behandlingsdager sporsmal={sporsmal} />
         }
-        
+
         case RSSvartype.KVITTERING: {
             return <OpplastingSum sporsmal={sporsmal} />
         }

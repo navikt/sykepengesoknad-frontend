@@ -1,10 +1,9 @@
 import './utvidbar.less'
 
-import { Collapse,Expand } from '@navikt/ds-icons'
+import { Accordion } from '@navikt/ds-react'
 import { Normaltekst, Undertittel } from 'nav-frontend-typografi'
 import React, { useEffect, useRef, useState } from 'react'
 
-import { erSynligIViewport } from '../../utils/browser-utils'
 import { useAmplitudeInstance } from '../amplitude/amplitude'
 import Vis from '../vis'
 
@@ -17,98 +16,75 @@ interface UtvidbarProps {
     amplitudeProps?: object
     ikonAltTekst?: string
     className?: string
-    visLukk?: boolean
     type?: 'intern' | undefined
-    fixedHeight?: boolean
 }
 
 const Utvidbar = (props: UtvidbarProps) => {
     const [ erApen, setErApen ] = useState<boolean>(props.erApen)
-    const [ innholdHeight, setInnholdHeight ] = useState<number>(0)
-    const utvidbar = useRef<HTMLDivElement>(null)
-    const jsToggle = useRef<HTMLButtonElement>(null)
+
     const btnImage = useRef<HTMLImageElement>(null)
-    const container = useRef<HTMLDivElement>(null)
-    const innhold = useRef<HTMLDivElement>(null)
     const { logEvent } = useAmplitudeInstance()
 
     useEffect(() => {
         setErApen(props.erApen)
-        setInnholdHeight(
-            props.fixedHeight
-                ? 3000
-                : innhold.current!.offsetHeight
-        )
     }, [ props ])
 
-    const onKlikk = () => {
+    const onKlikk = (e: any) => {
+        e.preventDefault()
         if (props.amplitudeProps) {
             logEvent(erApen ? 'panel lukket' : 'panel åpnet', props.amplitudeProps)
         }
         setErApen(!erApen)
-        if (!erSynligIViewport(utvidbar.current)) {
-            window.scrollTo({ top: utvidbar.current?.offsetTop, left: 0, behavior: 'smooth' })
-        }
     }
 
     return (
-        <div ref={utvidbar}
-            className={`utvidbar ${props.className ? props.className : ''} ${props.type ? props.type : ''}`}
-        >
-            <button aria-expanded={erApen}
-                ref={jsToggle}
-                onMouseEnter={props.ikon !== undefined ? () => btnImage.current!.src = props.ikonHover! : undefined}
-                onMouseLeave={props.ikon !== undefined ? () => btnImage.current!.src = props.ikon! : undefined}
-                onClick={onKlikk}
-                type="button"
-                className="utvidbar__toggle"
+        <Accordion>
+            <Accordion.Item renderContentWhenClosed={true} open={erApen}
+                className={`utvidbar ${props.className ? props.className : ''} ${props.type ? props.type : ''}`}
             >
-                <Vis hvis={props.ikon}
-                    render={() =>
-                        <img aria-hidden="true" className="utvidbar__ikon"
-                            ref={btnImage}
-                            alt={props.ikonAltTekst}
-                            src={props.ikon}
-                        />
-                    }
-                />
+                <Accordion.Header
+                    onMouseEnter={props.ikon !== undefined ? () => btnImage.current!.src = props.ikonHover! : undefined}
+                    onMouseLeave={props.ikon !== undefined ? () => btnImage.current!.src = props.ikon! : undefined}
+                    onClick={onKlikk}
+                >
+                    <Vis hvis={props.ikon}
+                        render={() =>
+                            <img aria-hidden="true" className="utvidbar__ikon"
+                                ref={btnImage}
+                                alt={props.ikonAltTekst}
+                                src={props.ikon}
+                            />
+                        }
+                    />
 
-                <Vis hvis={props.type === undefined}
-                    render={() => <Undertittel tag="h2" className="utvidbar__tittel">{props.tittel}</Undertittel>}
-                />
+                    <Vis hvis={props.type === undefined}
+                        render={() => <Undertittel tag="h2">{props.tittel}</Undertittel>}
+                    />
 
-                <Vis hvis={props.type === 'intern'}
-                    render={() => <Normaltekst tag="h2" className="utvidbar__tittel">{props.tittel}</Normaltekst>}
-                />
+                    <Vis hvis={props.type === 'intern'}
+                        render={() => <Normaltekst tag="h2">{props.tittel}</Normaltekst>}
+                    />
 
-                <span className="utvidbar__handling">
-                    <Normaltekst tag="em">
+                    <Normaltekst tag="em" className="utvidbar__handling">
                         {erApen ? 'Lukk' : 'Åpne'}
                     </Normaltekst>
-                    <Vis hvis={erApen} render={() =>
-                        <Collapse className="chevron--opp" />
-                    } />
-                    <Vis hvis={!erApen} render={() =>
-                        <Expand className="chevron--ned" />
-                    } />
-                </span>
-            </button>
+                </Accordion.Header>
 
-            <div ref={container} className={'utvidbar__innholdContainer' + (erApen ? ' apen' : '')}
-                style={{ maxHeight: erApen ? (innholdHeight * 2) + 'px' : '0' }}
-            >
-                <div ref={innhold} className="utvidbar__innhold">
+                <Accordion.Content>
                     {props.children}
                     <div className="lenkerad ikke-print">
                         <button type="button" className="lenke" aria-pressed={!erApen}
-                            tabIndex={(erApen ? null : -1) as any} onClick={() => setErApen(!erApen)}
+                            tabIndex={(erApen ? null : -1) as any} onClick={(e: any) => {
+                                e.preventDefault()
+                                setErApen(!erApen)
+                            }}
                         >
                             <Normaltekst tag="span">Lukk</Normaltekst>
                         </button>
                     </div>
-                </div>
-            </div>
-        </div>
+                </Accordion.Content>
+            </Accordion.Item>
+        </Accordion>
     )
 }
 

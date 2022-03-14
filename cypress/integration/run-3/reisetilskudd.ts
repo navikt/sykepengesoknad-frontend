@@ -37,7 +37,7 @@ describe('Teste førsteside i reisetilskuddsøknaden', () => {
 
         it('Laster inn hvem kan få reisetilskudd', () => {
             cy.get('.om-reisetilskudd').should('be.visible')
-            cy.get('.om-reisetilskudd .ekspanderbartPanel__tittel')
+            cy.get('.om-reisetilskudd .navds-accordion__header')
                 .should('be.visible')
                 .and('have.text', 'Om reisetilskudd')
                 .click()
@@ -306,8 +306,8 @@ describe('Teste førsteside i reisetilskuddsøknaden', () => {
 
         it('Oppsummering inneholder riktig informasjon', () => {
             cy.get('.oppsummering').click()
-            cy.get('.utvidbar__innhold > :nth-child(4)').should('include.text', 'Last opp kvitteringer for reiser til og fra jobben mellom 1. - 24. april 2020.')
-            cy.get('.utvidbar__innhold > :nth-child(4)').should('include.text', 'Du lastet opp 1 utgift på 99 kr')
+            cy.get('.navds-accordion__content > :nth-child(4)').should('include.text', 'Last opp kvitteringer for reiser til og fra jobben mellom 1. - 24. april 2020.')
+            cy.get('.navds-accordion__content > :nth-child(4)').should('include.text', 'Du lastet opp 1 utgift på 99 kr')
             cy.get('.skjemaelement__label').should('contain', 'Jeg har lest all informasjonen jeg har fått i søknaden og bekrefter at opplysningene jeg har gitt er korrekte.')
             cy.get('.skjemaelement__label').click({ force: true })
 

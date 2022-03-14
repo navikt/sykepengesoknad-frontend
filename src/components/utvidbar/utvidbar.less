@@ -3,116 +3,27 @@
 
 .utvidbar {
     border: 1px solid @navGra40;
-    border-radius: 2px;
+    border-radius: 4px;
     margin: 2rem 0;
 
-    &.intern {
-        border: 0;
-        margin: 1rem 0;
-
-        .utvidbar__toggle {
-            width: auto;
-            padding: 0;
-            background-color: @white;
-            color: @navBla;
-
-            &:hover {
-                text-decoration: underline;
-            }
-        }
-
-        .utvidbar__handling {
-            display: inline-flex;
-            align-items: center;
-
-            em {
-                visibility: hidden;
-                font-size: 0;
-            }
-
-            .chevron--opp, .chevron--ned {
-                margin-bottom: -4px;
-            }
-        }
-
-        .utvidbar__innhold {
-            padding: 1rem 0;
-
-            .navds-alert__icon {
-                display: none;
-            }
-        }
-
-        .lenkerad {
-            display: none;
-        }
-    }
-
-    .utvidbar__toggle {
-        display: flex;
-        align-items: center;
-        text-align: left;
-        width: 100%;
-        padding: 0.7rem 1rem;
-        border: 0;
-        cursor: pointer;
+    .navds-accordion__header {
         background-color: @navDypBlaLighten80;
-        color: @navMorkGra;
     }
 
-    &.lilla {
-        .utvidbar__toggle {
-            background-color: @navLillaLighten80;
-        }
-    }
-
-    .utvidbar__toggle:focus {
-        outline: 0;
-        box-shadow: 0 0 0 3px @fokusFarge;
-        z-index: 1;
-        position: relative;
-    }
-
-    .utvidbar__toggle:hover {
-        color: @navBla;
-    }
-
-    .utvidbar__ikon {
-        margin: 0 1.5rem 0 0.75rem;
-        min-width: 30px;
-    }
-
-    .utvidbar__tittel {
-        display: inline-block;
-        padding-top: 2px;
+    .utvidbar__handling {
+        display: inline-flex;
+        align-items: center;
     }
 
     .utvidbar__handling {
         color: @navBla;
-        margin-top: 4px;
         margin-left: auto;
-
-        em {
-            position: absolute;
-            font-size: 0;
-            color: transparent;
-            font-style: normal;
-            margin-right: 0.5rem;
-        }
-
-        .chevron--ned, .chevron--opp {
-            margin-bottom: -4px;
-        }
+        font-style: normal;
+        margin-right: 0.5rem;
     }
 
-    .utvidbar__innholdContainer {
-        overflow: hidden;
-        transition: max-height 0.3s ease-in-out;
-    }
-
-    .utvidbar__innhold {
-        padding: 1.5rem;
-        background-color: @white;
+    .navds-accordion__content {
+        padding: 1.5rem 2.5rem 2.5rem;
     }
 
     .lenkerad {
@@ -123,44 +34,52 @@
             border: 0;
         }
     }
+
+    &.lilla {
+        .navds-accordion__header {
+            background-color: @navLillaLighten80;
+        }
+    }
+
+    &.intern {
+        border: 0;
+        margin: 1rem 0;
+
+        .navds-accordion__header {
+            display: inline-flex;
+            padding: 0;
+            width: auto;
+            color: @navBla;
+            background-color: @white;
+            border-bottom: 0;
+
+            &:hover {
+                text-decoration: underline;
+            }
+
+            .utvidbar__handling {
+                display: none;
+            }
+        }
+
+        .navds-accordion__content {
+            padding: 1rem;
+            border-bottom: 0;
+        }
+
+        .lenkerad {
+            display: none;
+        }
+    }
 }
 
 @media (min-width: @screen-sm) {
     .utvidbar {
-        .utvidbar__innhold {
-            padding: 1.5rem 2.5rem 2.5rem;
-        }
-
         .utvidbar__handling {
             em {
                 position: static;
                 font-size: medium;
                 color: @navBla;
-            }
-
-            .chevron--opp, .chevron--ned {
-                margin-bottom: -4px;
-            }
-        }
-    }
-}
-
-@media print {
-    .utvidbar {
-        .utvidbar__toggle {
-            border-bottom: 1px solid @navGra40;
-            text-decoration: none;
-        }
-
-        &.intern {
-            .utvidbar__toggle {
-                border: 0;
-            }
-
-            .utvidbar__innhold {
-                .navds-alert__icon {
-                    display: inline;
-                }
             }
         }
     }
