@@ -306,8 +306,8 @@ describe('Teste førsteside i reisetilskuddsøknaden', () => {
 
         it('Oppsummering inneholder riktig informasjon', () => {
             cy.get('.oppsummering').click()
-            cy.get('.navds-accordion__content > div > :nth-child(4)').should('include.text', 'Last opp kvitteringer for reiser til og fra jobben mellom 1. - 24. april 2020.')
-            cy.get('.navds-accordion__content > div > :nth-child(4)').should('include.text', 'Du lastet opp 1 utgift på 99 kr')
+            cy.get('.navds-accordion__content > :nth-child(4)').should('include.text', 'Last opp kvitteringer for reiser til og fra jobben mellom 1. - 24. april 2020.')
+            cy.get('.navds-accordion__content > :nth-child(4)').should('include.text', 'Du lastet opp 1 utgift på 99 kr')
             cy.get('.skjemaelement__label').should('contain', 'Jeg har lest all informasjonen jeg har fått i søknaden og bekrefter at opplysningene jeg har gitt er korrekte.')
             cy.get('.skjemaelement__label').click({ force: true })
 

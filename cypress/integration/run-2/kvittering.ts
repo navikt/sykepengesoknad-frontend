@@ -234,12 +234,12 @@ describe('Tester kvittering', () => {
 
             // Arbeidsgiverperiode tekst
             cy.contains('Hvorfor går det et skille ved 16 dager?').click({ force: true })
-            cy.get('.navds-alert--info')
+            cy.get('.typo-normal')
                 .should('contain', 'Arbeidsgiveren skal betale sykepenger i en periode på opptil 16 kalenderdager, også kalt arbeidsgiverperioden. NAV overtar sykepengeutbetalingen fra og med 17. kalenderdag.')
 
             // Inntektsmelding
             cy.contains('Hva er en inntektsmelding').click({ force: true })
-            cy.get('.navds-alert--info')
+            cy.get('.typo-normal')
                 .should('contain', 'Arbeidsplassen din sender inntektsopplysninger og annen informasjon som NAV trenger for å behandle søkaden din. Inntektsmeldingen sendes digitalt fra arbeidsplassens lønns- og personalsystem eller fra Altinn.no.')
 
         })
@@ -368,12 +368,12 @@ const over16dagerKvittering = () => {
 
     // Arbeidsgiverperiode tekst
     cy.contains('Hvorfor går det et skille ved 16 dager?').click({ force: true })
-    cy.get('.navds-alert--info')
+    cy.get('.typo-normal')
         .should('contain', 'Arbeidsgiveren skal betale sykepenger i en periode på opptil 16 kalenderdager, også kalt arbeidsgiverperioden. NAV overtar sykepengeutbetalingen fra og med 17. kalenderdag.')
 
     // Inntektsmelding
     cy.contains('Hva er en inntektsmelding').click({ force: true })
-    cy.get('.navds-alert--info')
+    cy.get('.typo-normal')
         .should('contain', 'Arbeidsplassen din sender inntektsopplysninger og annen informasjon som NAV trenger for å behandle søkaden din. Inntektsmeldingen sendes digitalt fra arbeidsplassens lønns- og personalsystem eller fra Altinn.no.')
 
     // Oppsummering minimert
@@ -452,7 +452,7 @@ const medOppholdKvittering = () => {
 
     // Inntekstmelding
     cy.contains('Hvorfor inntektsmeldingen må sendes på nytt?').click({ force: true })
-    cy.get('.navds-alert--info')
+    cy.get('.typo-normal')
         .should('contain', 'Lønn eller arbeidstid kan ha endret seg siden du var syk forrige gang. Dette får vi bare informasjon om gjennom inntektsmeldingen.')
 
     // Behandlingstider lenke

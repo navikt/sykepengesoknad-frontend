@@ -1,4 +1,3 @@
-import { Alert } from '@navikt/ds-react'
 import parser from 'html-react-parser'
 import Lenke from 'nav-frontend-lenker'
 import { Element, Normaltekst } from 'nav-frontend-typografi'
@@ -15,8 +14,9 @@ const PerioderMedOpphold = () => {
             <Element tag="h2" className="arbeidstaker-tittel">{tekst('kvittering.naeringsdrivende.tittel')}</Element>
             <Normaltekst tag="span">{tekst('kvittering.arbeidstaker.med-opphold')} </Normaltekst>
             <Utvidbar erApen={false} type="intern"
-                tittel={tekst('kvittering.arbeidstaker.hvorfor-inntektsmelding-pa-nytt')}>
-                <Alert variant="info">{tekst('kvittering.arbeidstaker.hvorfor-inntektsmelding-pa-nytt.tekst')}</Alert>
+                tittel={tekst('kvittering.arbeidstaker.hvorfor-inntektsmelding-pa-nytt')}
+            >
+                <Normaltekst>{tekst('kvittering.arbeidstaker.hvorfor-inntektsmelding-pa-nytt.tekst')}</Normaltekst>
             </Utvidbar>
             <div className="avsnitt hva-skjer">
                 <Element tag="h2" className="arbeidstaker-tittel">{tekst('kvittering.nav-behandler-soknaden')}</Element>
