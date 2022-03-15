@@ -1,7 +1,7 @@
 import './app.less'
 import '@navikt/ds-css'
 
-import ModalWrapper from 'nav-frontend-modal'
+import { Modal } from '@navikt/ds-react'
 import React, { useEffect } from 'react'
 import { Route, Switch, useLocation } from 'react-router-dom'
 import { CSSTransition, TransitionGroup } from 'react-transition-group'
@@ -23,7 +23,8 @@ export interface RouteParams {
 
 const App = (): any => {
     const location = useLocation()
-    ModalWrapper.setAppElement('#root')
+    //eslint-disable-next-line
+    Modal.setAppElement('#root')
 
     useEffect(() => {
         const desktop = window.matchMedia('(min-width: 768px)')

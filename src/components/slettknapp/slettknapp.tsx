@@ -1,7 +1,6 @@
 import './slettknapp.less'
 
-import { Alert, Button } from '@navikt/ds-react'
-import ModalWrapper from 'nav-frontend-modal'
+import { Alert, Button, Modal } from '@navikt/ds-react'
 import { Normaltekst } from 'nav-frontend-typografi'
 import React, { useState } from 'react'
 
@@ -80,12 +79,12 @@ const Slettknapp = ({ sporsmal, kvittering, update }: SlettknappProps) => {
                 }
             />
 
-            <ModalWrapper className="modal__teaser_popup" onRequestClose={() => setVilSlette(false)}
-                contentLabel="slett"
-                isOpen={vilSlette}
+            <Modal className="modal__teaser_popup"
+                onClose={() => setVilSlette(false)}
+                open={vilSlette}
                 closeButton={false}
             >
-                <div className="bekreft-dialog">
+                <Modal.Content className="bekreft-dialog">
                     <Normaltekst className="blokk-s">
                         {tekst('opplasting_modal.vil-slette')}
                     </Normaltekst>
@@ -102,8 +101,8 @@ const Slettknapp = ({ sporsmal, kvittering, update }: SlettknappProps) => {
                     <button className="avbrytlenke lenkeknapp" type="button" onClick={() => setVilSlette(false)}>
                         {tekst('opplasting_modal.vil-slette.angre')}
                     </button>
-                </div>
-            </ModalWrapper>
+                </Modal.Content>
+            </Modal>
         </>
     )
 }

@@ -1,8 +1,7 @@
 import './opplasting.less'
 
-import { Alert, Button } from '@navikt/ds-react'
+import { Alert, Button, Modal } from '@navikt/ds-react'
 import parser from 'html-react-parser'
-import Modal from 'nav-frontend-modal'
 import { Element, Normaltekst } from 'nav-frontend-typografi'
 import React, { useRef } from 'react'
 

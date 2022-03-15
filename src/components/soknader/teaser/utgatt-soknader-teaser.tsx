@@ -1,6 +1,5 @@
 import { Next } from '@navikt/ds-icons'
-import { Alert } from '@navikt/ds-react'
-import ModalWrapper from 'nav-frontend-modal'
+import { Alert, Modal } from '@navikt/ds-react'
 import { Systemtittel, Undertekst, Undertittel } from 'nav-frontend-typografi'
 import React, { useState } from 'react'
 
@@ -47,18 +46,20 @@ const UtgaattSoknaderTeaser = ({ soknad }: SykepengesoknadTeaserProps) => {
                 </div>
                 <Next className="chevron--hoyre" />
             </button>
-            <ModalWrapper className="modal__teaser_popup" onRequestClose={() => setAapen(false)}
-                contentLabel="planlagt"
-                isOpen={aapen}
+            <Modal className="modal__teaser_popup"
+                onClose={() => setAapen(false)}
+                open={aapen}
             >
-                <Systemtittel tag="h3" className="modal__tittel">
-                    {tekst('soknad.teaser.utgaatt.popup.header')}
-                </Systemtittel>
-                <Alert variant="info">{tekst('soknad.teaser.utgaatt.popup.innhold')}</Alert>
-                <button className="knapp knapp--hoved" onClick={() => setAapen(false)}>
-                    Lukk
-                </button>
-            </ModalWrapper>
+                <Modal.Content>
+                    <Systemtittel tag="h3" className="modal__tittel">
+                        {tekst('soknad.teaser.utgaatt.popup.header')}
+                    </Systemtittel>
+                    <Alert variant="info">{tekst('soknad.teaser.utgaatt.popup.innhold')}</Alert>
+                    <button className="knapp knapp--hoved" onClick={() => setAapen(false)}>
+                        Lukk
+                    </button>
+                </Modal.Content>
+            </Modal>
         </article>
     )
 }

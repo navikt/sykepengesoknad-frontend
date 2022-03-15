@@ -1,7 +1,6 @@
 import './personvern-les-mer.less'
 
 import { Button, Modal } from '@navikt/ds-react'
-import ModalContent from '@navikt/ds-react/esm/modal/ModalContent'
 import parser from 'html-react-parser'
 import { Normaltekst, Systemtittel } from 'nav-frontend-typografi'
 import React, { MouseEvent, useState } from 'react'
@@ -33,7 +32,7 @@ const PersonvernLesMer = () => {
             <Modal className="personvern-modal" onClose={() => setAapen(false)}
                 open={aapen}
             >
-                <ModalContent>
+                <Modal.Content>
                     <Systemtittel tag="h3" className="modal__tittel">
                         {tekst('sykepengesoknad.soknad-intro.personvern-modal-header')}
                     </Systemtittel>
@@ -44,7 +43,7 @@ const PersonvernLesMer = () => {
                             <Normaltekst tag="span">Lukk</Normaltekst>
                         </button>
                     </div>
-                </ModalContent>
+                </Modal.Content>
             </Modal>
         </div>
     )
