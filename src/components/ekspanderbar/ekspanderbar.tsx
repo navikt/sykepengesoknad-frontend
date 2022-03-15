@@ -24,8 +24,8 @@ export const Ekspanderbar = ({ title, children, amplitudeProps, sporsmalId }: Ek
         <Accordion>
             <Accordion.Item className="ekspanderbar" renderContentWhenClosed={true}>
                 <Accordion.Header
+                    type="button"
                     onClick={(e) => {
-                        e.preventDefault()
                         if (!expanded && amplitudeProps) {
                             logEvent('panel åpnet', amplitudeProps)
                         }
