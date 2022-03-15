@@ -27,7 +27,7 @@ const KnapperadAvbryt = () => {
 
     return (
         <div className="knapperad">
-            <Button variant="secondary" type="button" onClick={handleAvbryt}>
+            <Button variant="danger" type="button" onClick={handleAvbryt}>
                 {tekst('sykepengesoknad.avbryt.simpel')}
             </Button>
         </div>
