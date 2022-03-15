@@ -52,7 +52,7 @@ const Endreknapp = () => {
 
     return (
         <Button size="small" variant="secondary" loading={korrigerer} onClick={korriger}>
-            {tekst('kvittering.knapp.endre')}
+            {endreKnappTekst}
         </Button>
     )
 }
