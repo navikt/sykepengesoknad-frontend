@@ -53,7 +53,7 @@ export const InngangsStatus = ({ status, tekst }: InngangsStatusProps) => {
     const type = statusTilType(status)
     return (
         <div className="inngangspanel__status">
-            <Tag variant={type}>{tekst}</Tag>
+            <Tag variant={type} size="small">{tekst}</Tag>
         </div>
     )
 }
