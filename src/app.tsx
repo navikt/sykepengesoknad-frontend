@@ -23,7 +23,8 @@ export interface RouteParams {
 
 const App = (): any => {
     const location = useLocation()
-    //eslint-disable-next-line
+    // eslint-disable-next-line
+    // @ts-ignore
     Modal.setAppElement('#root')
 
     useEffect(() => {

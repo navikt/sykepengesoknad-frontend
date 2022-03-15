@@ -18,6 +18,8 @@ const Opplasting = ({ sporsmal }: SpmProps) => {
     const { setValgtKvittering, openModal, setOpenModal } = useAppStore()
     const ikonRef = useRef<HTMLImageElement>(null)
 
+    // eslint-disable-next-line
+    // @ts-ignore
     Modal.setAppElement('#maincontent')
 
     const aktiverModal = () => {
@@ -69,15 +71,14 @@ const Opplasting = ({ sporsmal }: SpmProps) => {
             </Button>
 
             <Modal
-                isOpen={openModal}
-                onRequestClose={lukkModal}
+                open={openModal}
+                onClose={lukkModal}
                 closeButton
-                contentLabel="Modal"
                 className="opplasting_modal"
             >
-                <div className="modal-content">
+                <Modal.Content className="modal-content">
                     <OpplastingForm sporsmal={sporsmal} />
-                </div>
+                </Modal.Content>
             </Modal>
 
             <FilListe sporsmal={sporsmal} fjernKnapp />
