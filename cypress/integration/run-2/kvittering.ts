@@ -212,7 +212,6 @@ describe('Tester kvittering', () => {
                 .should('contain', 'Søknaden er sendt')
             cy.get('.sendt-info .oppsummering__avkrysset')
                 .should('contain', 'arb')
-                .and('contain', 'NAV')
 
 
             // Hva skjer videre
@@ -314,7 +313,6 @@ const inntil16dagerKvittering = () => {
         .should('contain', 'Søknaden er sendt')
     cy.get('.sendt-info .oppsummering__avkrysset')
         .should('contain', 'arb')
-        .and('not.contain', 'NAV')
 
     // Hva skjer videre
     cy.get('.hva-skjer')
@@ -347,7 +345,6 @@ const over16dagerKvittering = () => {
         .should('contain', 'Søknaden er sendt')
     cy.get('.sendt-info .oppsummering__avkrysset')
         .should('contain', 'arb')
-        .and('contain', 'NAV')
 
     // Hva skjer videre
     cy.get('.hva-skjer')
@@ -398,7 +395,6 @@ const utenOppholdKvittering = () => {
         .should('contain', 'Søknaden er sendt')
     cy.get('.sendt-info .oppsummering__avkrysset')
         .should('not.contain', 'arb')
-        .and('contain', 'NAV')
 
     // Hva skjer videre
     cy.get('.hva-skjer')
@@ -436,7 +432,6 @@ const medOppholdKvittering = () => {
         .should('contain', 'Søknaden er sendt')
     cy.get('.sendt-info .oppsummering__avkrysset')
         .should('not.contain', 'arb')
-        .and('contain', 'NAV')
 
     // Hva skjer videre
     cy.get('.hva-skjer')
