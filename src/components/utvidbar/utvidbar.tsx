@@ -30,7 +30,6 @@ const Utvidbar = (props: UtvidbarProps) => {
     }, [ props ])
 
     const onKlikk = (e: any) => {
-        e.preventDefault()
         if (props.amplitudeProps) {
             logEvent(erApen ? 'panel lukket' : 'panel åpnet', props.amplitudeProps)
         }
@@ -43,6 +42,7 @@ const Utvidbar = (props: UtvidbarProps) => {
                 className={`utvidbar ${props.className ? props.className : ''} ${props.type ? props.type : ''}`}
             >
                 <Accordion.Header
+                    type="button"
                     onMouseEnter={props.ikon !== undefined ? () => btnImage.current!.src = props.ikonHover! : undefined}
                     onMouseLeave={props.ikon !== undefined ? () => btnImage.current!.src = props.ikon! : undefined}
                     onClick={onKlikk}

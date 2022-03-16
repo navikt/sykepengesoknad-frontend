@@ -1,7 +1,6 @@
 import './refresh-hvis-feil-state.less'
 
-import { Alert } from '@navikt/ds-react'
-import { Knapp } from 'nav-frontend-knapper'
+import { Alert, Button } from '@navikt/ds-react'
 import React, { useEffect } from 'react'
 import { useHistory } from 'react-router-dom'
 
@@ -25,7 +24,9 @@ export function FeilView() {
                 <Alert variant="error">{tekst('feilstate.alert')}</Alert>
             </div>
             <div className="knappewrapper">
-                <Knapp onClick={() => window.location.reload()}>{tekst('feilstate.refresh')}</Knapp>
+                <Button variant="secondary" onClick={() => window.location.reload()}>
+                    {tekst('feilstate.refresh')}
+                </Button>
             </div>
         </div>
     )

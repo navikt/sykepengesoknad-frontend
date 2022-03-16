@@ -1,4 +1,4 @@
-import { Fareknapp } from 'nav-frontend-knapper'
+import { Button } from '@navikt/ds-react'
 import React, { MouseEvent } from 'react'
 import { useHistory } from 'react-router-dom'
 
@@ -7,7 +7,6 @@ import { tekst } from '../../../utils/tekster'
 import { avbrytSoknad } from '../../avbryt-soknad-modal/avbryt-soknad'
 
 type Event = MouseEvent<HTMLAnchorElement | HTMLButtonElement>;
-
 
 const KnapperadAvbryt = () => {
     const { valgtSoknad, soknader, setSoknader, setValgtSoknad, setFeilmeldingTekst } = useAppStore()
@@ -28,7 +27,9 @@ const KnapperadAvbryt = () => {
 
     return (
         <div className="knapperad">
-            <Fareknapp htmlType={'button'} onClick={handleAvbryt}>{tekst('sykepengesoknad.avbryt.simpel')}</Fareknapp>
+            <Button variant="danger" type="button" onClick={handleAvbryt}>
+                {tekst('sykepengesoknad.avbryt.simpel')}
+            </Button>
         </div>
     )
 }

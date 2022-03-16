@@ -1,7 +1,6 @@
 import './ettersending.less'
 
-import { Alert } from '@navikt/ds-react'
-import { Hovedknapp, Knapp } from 'nav-frontend-knapper'
+import { Alert, Button } from '@navikt/ds-react'
 import ModalWrapper from 'nav-frontend-modal'
 import React, { useState } from 'react'
 
@@ -86,11 +85,11 @@ const Ettersending = ({ gjelder, setRerendrekvittering }: EttersendingProps) => 
     }
 
     return (<>
-        <Knapp mini type="standard" onClick={() => {
+        <Button size="small" variant="secondary" onClick={() => {
             setVilEttersende(true)
         }}>
             {tekst(`kvittering.knapp.send-${gjelder}` as any)}
-        </Knapp>
+        </Button>
 
         <ModalWrapper onRequestClose={() => setVilEttersende(false)}
             className="ettersending"
@@ -100,9 +99,9 @@ const Ettersending = ({ gjelder, setRerendrekvittering }: EttersendingProps) => 
             <h3 className="modal__tittel">{hentTekst('kvittering.tittel.send-til')}</h3>
             <Alert variant="info">{hentTekst('kvittering.info.send-til')}</Alert>
             <div className="blokk-xs">
-                <Hovedknapp spinner={ettersender} onClick={ettersend}>
+                <Button variant="primary" loading={ettersender} onClick={ettersend}>
                     {hentTekst('kvittering.knapp.bekreft.send-til')}
-                </Hovedknapp>
+                </Button>
             </div>
             <button className="lenke" onClick={() => setVilEttersende(false)}>
                 {tekst('kvittering.knapp.angre')}
