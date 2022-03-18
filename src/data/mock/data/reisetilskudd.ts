@@ -315,7 +315,7 @@ export const gradertReisetilskudd: RSSoknad = {
     }, {
         'id': '1547218',
         'tag': 'FERIE_V2',
-        'sporsmalstekst': 'Hadde du ferie i tidsrommet 1. - 24. april 2020?',
+        'sporsmalstekst': 'Tok du ut feriedager i tidsrommet 1. - 24. april 2020?',
         'undertekst': null,
         'svartype': 'JA_NEI',
         'min': null,
@@ -326,7 +326,7 @@ export const gradertReisetilskudd: RSSoknad = {
         'undersporsmal': [ {
             'id': '1547219',
             'tag': 'FERIE_NAR_V2',
-            'sporsmalstekst': 'Når tok du ut ferie?',
+            'sporsmalstekst': 'Når tok du ut feriedager?',
             'undertekst': null,
             'svartype': 'PERIODER',
             'min': '2020-04-01',
