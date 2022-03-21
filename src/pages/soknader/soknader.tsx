@@ -1,6 +1,6 @@
 import './soknader.less'
 
-import Lenke from 'nav-frontend-lenker'
+import { Link } from '@navikt/ds-react'
 import { Normaltekst } from 'nav-frontend-typografi'
 import React, { useEffect } from 'react'
 
@@ -54,7 +54,7 @@ const Soknader = () => {
                 <OmSykepenger />
 
                 <Teasere
-                    className={'soknader_teasere'}
+                    className="soknader_teasere"
                     soknader={nyeSoknader}
                     tittel={tekst('soknader.nye.tittel')}
                     tomListeTekst={tekst('soknader.nye.ingen-soknader')}
@@ -64,7 +64,7 @@ const Soknader = () => {
                 <Vis hvis={tidligereSoknader.length > 0}
                     render={() =>
                         <Teasere
-                            className={'soknader_teasere'}
+                            className="soknader_teasere"
                             soknader={tidligereSoknader}
                             tittel={tekst('soknader.sendt.tittel')}
                             id="soknader-sendt"
@@ -73,9 +73,9 @@ const Soknader = () => {
                     }
                 />
 
-                <Lenke className="dinesaker-lenke" href={env.dinesakerUrl()}>
+                <Link className="dinesaker-lenke" href={env.dinesakerUrl()}>
                     <Normaltekst tag="span">{tekst('dinesaker.lenke')}</Normaltekst>
-                </Lenke>
+                </Link>
             </div>
         </>
     )

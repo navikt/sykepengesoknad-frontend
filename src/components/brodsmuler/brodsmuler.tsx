@@ -1,7 +1,6 @@
 import './brodsmuler.less'
 
 import { Collapse } from '@navikt/ds-icons'
-import Lenke from 'nav-frontend-lenker'
 import { Normaltekst } from 'nav-frontend-typografi'
 import React, { useEffect, useRef, useState } from 'react'
 import { Link } from 'react-router-dom'
@@ -25,9 +24,9 @@ const BrodsmuleBit = ({ sti, tittel, erKlikkbar }: Brodsmule) => {
     const erEkstern = sti && (sti.startsWith('https://') || sti.startsWith('http://'))
 
     const link = erEkstern
-        ? <Lenke href={sti}>{tittel}</Lenke>
+        ? <a href={sti} className="navds-link">{tittel}</a>
         : sti
-            ? <Link to={sti} className="lenke" onClick={() => {
+            ? <Link to={sti} className="navds-link" onClick={() => {
                 logEvent('navigere', { lenketekst: tittel })
             }}>{tittel}</Link>
             : <span>{tittel}</span>
@@ -40,10 +39,9 @@ const BrodsmuleBit = ({ sti, tittel, erKlikkbar }: Brodsmule) => {
             </li>
         )
     } else if (erKlikkbar) {
-        return (
-            <li className="smule">{link}</li>
-        )
+        return <li className="smule">{link}</li>
     }
+
     return (
         <li className="smule">
             <span>{tittel}</span>

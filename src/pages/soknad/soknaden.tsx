@@ -134,7 +134,7 @@ const Fordeling = () => {
                     <Vis hvis={stegNo > 1}
                         render={() =>
                             <Link to={'/soknader/' + valgtSoknad.id + SEPARATOR + (stegNo - 1)}
-                                className="lenke tilbakelenke">
+                                className="navds-link tilbakelenke">
                                 <Back className="chevron--venstre" />
                                 <Normaltekst tag="span">{tekst('soknad.tilbakeknapp')}</Normaltekst>
                             </Link>

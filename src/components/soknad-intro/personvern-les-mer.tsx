@@ -41,7 +41,7 @@ const PersonvernLesMer = () => {
                 {parser(tekst('sykepengesoknad.soknad-intro.personvern-modal-innhold'))}
 
                 <div className={'lukk-wrapper'}>
-                    <button type="button" className="no-border lenke" onClick={() => setAapen(false)}>
+                    <button type="button" className="no-border navds-link" onClick={() => setAapen(false)}>
                         <Normaltekst tag="span">Lukk</Normaltekst>
                     </button>
                 </div>

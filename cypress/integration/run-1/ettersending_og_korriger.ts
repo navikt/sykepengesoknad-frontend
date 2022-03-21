@@ -111,7 +111,7 @@ describe('Tester ettersending og korrigering', () => {
     })
 
     it('Søknad har teaser', () => {
-        cy.get('.brodsmuler__smuler .smule .lenke:contains(Søknader)').click({ force: true })
+        cy.get('.brodsmuler__smuler .smule .navds-link:contains(Søknader)').click({ force: true })
         cy.get('.typo-sidetittel').should('be.visible').and('have.text', 'Søknader')
 
         cy.get(`#soknader-list-til-behandling article a[href*=${soknad.id}]`).should('not.exist')

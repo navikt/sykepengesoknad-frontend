@@ -1,8 +1,7 @@
 import './om-reisetilskudd.less'
 
-import { Accordion } from '@navikt/ds-react'
+import { Accordion, Link } from '@navikt/ds-react'
 import parser from 'html-react-parser'
-import Lenke from 'nav-frontend-lenker'
 import { Element, Normaltekst, Undertittel } from 'nav-frontend-typografi'
 import React, { useState } from 'react'
 
@@ -34,9 +33,9 @@ const OmReisetilskudd = () => {
                     </Normaltekst>
 
                     <Normaltekst>
-                        <Lenke href="https://nav.no/reisetilskudd" target="blank" rel="noopener">
+                        <Link href="https://nav.no/reisetilskudd" target="_blank" rel="noopener">
                             {tekst('tilskudd.start.les-mer-reisetilskudd')}
-                        </Lenke>.
+                        </Link>.
                     </Normaltekst>
                 </Accordion.Content>
             </Accordion.Item>

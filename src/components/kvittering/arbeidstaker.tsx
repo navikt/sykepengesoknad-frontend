@@ -26,7 +26,6 @@ const Arbeidstaker = () => {
     const { valgtSoknad, valgtSykmelding, soknader } = useAppStore()
     const [ kvitteringTekst, setKvitteringTekst ] = useState<ArbeidstakerKvitteringTekst>()
 
-
     const settRiktigKvitteringTekst = () => {
         if (!valgtSoknad) return
 
