@@ -19,34 +19,6 @@
         }
     }
 
-    .sidetopp {
-        .mixin-panel-padding();
-    }
-
-    .sidetopp__intro {
-        margin-bottom: 3rem;
-        .redaksjonelt-innhold();
-
-    }
-
-    .sidetopp__tittel {
-        text-align: center;
-        margin-top: 0;
-        margin-bottom: 2rem;
-        .typo-sidetittel-mixin();
-    }
-
-    .sidetopp__meta {
-        display: flex;
-        justify-content: center;
-        margin-bottom: 2rem;
-    }
-
-    .sidetopp--arbeidsrettetOppfolging {
-        padding-top: 1rem;
-        padding-bottom: 1rem;
-    }
-
     .begrensning {
         max-width: 42rem;
         margin-left: auto;
@@ -60,19 +32,6 @@
         }
     }
 
-    .begrensning--bred {
-        max-width: 820px;
-    }
-
-    .begrensning--soknad {
-        padding-left: 1rem;
-        padding-right: 1rem;
-    }
-
-    .begrensning--hvit {
-        background-color: #fff;
-    }
-
     .sidebanner {
         border-bottom: 5px solid #87D5EE;
         background-color: #C2EAF7;
@@ -82,10 +41,6 @@
 
     .sidebanner--utenramme {
         border-bottom: 0;
-    }
-
-    .sidebanner__illustrasjon {
-        display: none;
     }
 
     .sidebanner__innhold {
@@ -114,15 +69,6 @@
             padding-bottom: 1rem;
             text-align: left;
         }
-
-        .sidebanner__illustrasjon {
-            position: absolute;
-            right: .5rem;
-            left: auto;
-            bottom: -5px;
-            display: block;
-        }
-
     }
 
     .blokk--xl {
@@ -172,63 +118,16 @@
         .panel {
             padding: 2rem;
         }
-
-        .panel--komprimert {
-            padding-top: 1rem;
-            padding-bottom: 1.25rem;
-        }
-
-        .panel-ekstra, .panel-relatert {
-            border-left-width: 1px;
-            border-right-width: 1px;
-            margin-left: 0;
-            margin-right: 0;
-            padding-top: 20px;
-
-            &:before {
-                left: 2rem;
-            }
-        }
     }
 
     .knapperad {
         padding-top: 2rem;
         padding-bottom: 1rem;
         text-align: center;
-    }
 
-    @media (max-width: 30rem) {
-        .knapperad__element:not(:last-child) {
-            margin-bottom: 2rem;
+        .blokk {
+            display: block;
+            margin: 1rem 0 2rem;
         }
-    }
-
-    @media (min-width: 30em) {
-        .knapperad__element {
-            display: inline-block;
-        }
-
-        .knapperad__element:not(:last-child) {
-            margin-right: 2rem;
-        }
-    }
-
-    .knapperad--forrigeNeste {
-        @media (max-width: @skjermMini) {
-            display: flex;
-            flex-direction: column-reverse;
-
-            .knapperad__element:not(:first-child) {
-                margin-bottom: 2rem;
-            }
-        }
-    }
-
-    .knapperad--medAvbryt {
-        margin-bottom: 2rem;
-    }
-
-    .knapperad--justervenstre {
-        text-align: left;
     }
 }

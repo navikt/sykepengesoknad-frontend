@@ -1,5 +1,7 @@
 import './ettersending.less'
 
+import { Alert, Button } from '@navikt/ds-react'
+import ModalWrapper from 'nav-frontend-modal'
 import { Alert, Button, Modal } from '@navikt/ds-react'
 import React, { useState } from 'react'
 

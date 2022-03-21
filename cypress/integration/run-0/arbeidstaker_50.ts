@@ -73,7 +73,7 @@ describe('Tester arbeidstakersøknad - gradert 50%', () => {
 
         // Test spørsmål
         cy.get('.inputPanelGruppe__inner label:first-child > input[value=JA]').click({ force: true })
-        cy.contains('Når tok du ut ferie?')
+        cy.contains('Når tok du ut feriedager?')
         cy.get('#687305_0 .fom .nav-datovelger__kalenderknapp').click()
         cy.get('.DayPicker-Day').contains('16').click()
         cy.get('#687305_0 .tom .nav-datovelger__kalenderknapp').click()
@@ -281,7 +281,7 @@ describe('Tester arbeidstakersøknad - gradert 50%', () => {
         cy.url().should('include', `${soknad.id}/13`)
         cy.get('.skjemaelement__label').click({ force: true })
         cy.contains('Jeg har lest all informasjonen jeg har fått i søknaden og bekrefter at opplysningene jeg har gitt er korrekte.')
-        cy.contains('Søknaden sendes til POSTEN NORGE AS, BÆRUM.')
+        cy.contains('Søknaden sendes til POSTEN NORGE AS, BÆRUM med kopi til NAV.')
 
         cy.contains('Send søknaden').click()
     })

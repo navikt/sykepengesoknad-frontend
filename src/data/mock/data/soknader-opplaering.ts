@@ -393,7 +393,7 @@ export const arbeidstaker: RSSoknad = {
         {
             'id': '687343',
             'tag': 'FERIE_V2',
-            'sporsmalstekst': 'Hadde du ferie i tidsrommet 1. - 24. april 2020?',
+            'sporsmalstekst': 'Tok du ut feriedager i tidsrommet 1. - 24. april 2020?',
             'undertekst': null,
             'svartype': 'JA_NEI',
             'min': null,
@@ -405,7 +405,7 @@ export const arbeidstaker: RSSoknad = {
                 {
                     'id': '687344',
                     'tag': 'FERIE_NAR_V2',
-                    'sporsmalstekst': 'Når tok du ut ferie?',
+                    'sporsmalstekst': 'Når tok du ut feriedager?',
                     'undertekst': null,
                     'svartype': 'PERIODER',
                     'min': '2020-04-01',
@@ -964,7 +964,7 @@ export const arbeidstakerGradert: RSSoknad = {
         {
             'id': '687304',
             'tag': 'FERIE_V2',
-            'sporsmalstekst': 'Hadde du ferie i tidsrommet 1. - 24. april 2020?',
+            'sporsmalstekst': 'Tok du ut feriedager i tidsrommet 1. - 24. april 2020?',
             'undertekst': null,
             'svartype': 'JA_NEI',
             'min': null,
@@ -976,7 +976,7 @@ export const arbeidstakerGradert: RSSoknad = {
                 {
                     'id': '687305',
                     'tag': 'FERIE_NAR_V2',
-                    'sporsmalstekst': 'Når tok du ut ferie?',
+                    'sporsmalstekst': 'Når tok du ut feriedager?',
                     'undertekst': null,
                     'svartype': 'PERIODER',
                     'min': '2020-04-01',
@@ -2382,7 +2382,7 @@ export const oppholdUtland: RSSoknad = {
         }, {
             'id': '5',
             'tag': 'FERIE',
-            'sporsmalstekst': 'Har du avtalt med arbeidsgiveren din at du skal ha ferie i hele perioden?',
+            'sporsmalstekst': 'Har du avtalt med arbeidsgiveren din at du skal ta ut feriedager i hele perioden?',
             'undertekst': null,
             'svartype': 'JA_NEI',
             'min': null,

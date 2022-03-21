@@ -35,7 +35,8 @@ export const EkspanderbarHjelp = ({ sporsmal }: SpmProps) => {
     const nokkel = skapNokkel()
 
     const harTekst = () => {
-        return `ekspanderbarhjelp.${nokkel}.tittel` in EkspanderbarHjelpTekster && `ekspanderbarhjelp.${nokkel}.innhold` in EkspanderbarHjelpTekster
+        return `ekspanderbarhjelp.${nokkel}.tittel` in EkspanderbarHjelpTekster
+            && `ekspanderbarhjelp.${nokkel}.innhold` in EkspanderbarHjelpTekster
     }
 
 
