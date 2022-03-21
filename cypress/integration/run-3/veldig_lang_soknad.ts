@@ -125,7 +125,7 @@ describe('Tester støtte for gamle spørsmål', () => {
     it('ARBEIDSGIVER', () => {
         svarJaHovedsporsmal()
         svarRadioJaEllerNei('Er du 100 % sykmeldt?', 'Ja')
-        svarRadioJaEllerNei('Har du avtalt med arbeidsgiveren din at du skal ha ferie i hele perioden?', 'Ja')
+        svarRadioJaEllerNei('Har du avtalt med arbeidsgiveren din at du skal ta ut feriedager i hele perioden?', 'Ja')
         gaVidere()
     })
     it('ARBEIDSLEDIG_UTLAND', () => {

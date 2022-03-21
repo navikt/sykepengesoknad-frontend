@@ -73,7 +73,7 @@ describe('Tester arbeidstakersøknad', () => {
 
         // Test spørsmål
         cy.get('.inputPanelGruppe__inner label:first-child > input[value=JA]').click({ force: true })
-        cy.contains('Når tok du ut ferie?')
+        cy.contains('Når tok du ut feriedager?')
         cy.get('#687344_0 .fom .nav-datovelger__kalenderknapp').click()
         cy.get('.DayPicker-Day').contains('16').click()
         cy.get('#687344_0 .tom .nav-datovelger__kalenderknapp').click()
