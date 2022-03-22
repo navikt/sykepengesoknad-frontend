@@ -49,7 +49,7 @@ const AvsluttOgFortsettSenere = () => {
                     </Heading>
                     <Normaltekst>{tekst('avslutt.popup.innhold')}</Normaltekst>
                     <Normaltekst>{tekst('avslutt.popup.sporsmal')}</Normaltekst>
-                    <Button size="small" variant="primary" className="midtstilt-knapp" onClick={
+                    <Button variant="primary" className="midtstilt-knapp" onClick={
                         () => {
                             logEvent('knapp klikket', {
                                 'tekst': tekst('avslutt.popup.ja'),
@@ -66,7 +66,7 @@ const AvsluttOgFortsettSenere = () => {
                     }>
                         {tekst('avslutt.popup.ja')}
                     </Button>
-                    <Button size="small" variant="secondary" className="midtstilt-knapp"
+                    <Button variant="secondary" className="midtstilt-knapp"
                         onClick={() => {
                             setAapen(false)
                             logEvent('knapp klikket', {
