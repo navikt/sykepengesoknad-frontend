@@ -138,6 +138,8 @@ const Fordeling = () => {
                                 className="navds-link tilbakelenke"
                                 onClick={() => { logEvent('navigere', {
                                     lenketekst: tekst('soknad.tilbakeknapp'),
+                                    fra: valgtSoknad!.sporsmal[stegNo].tag,
+                                    til: valgtSoknad!.sporsmal[stegNo - 1].tag,
                                     'soknadstype': valgtSoknad?.soknadstype,
                                     'stegId': stegId
                                 })}}
