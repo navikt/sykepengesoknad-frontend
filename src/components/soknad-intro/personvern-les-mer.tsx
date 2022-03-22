@@ -1,8 +1,7 @@
 import './personvern-les-mer.less'
 
-import { Button } from '@navikt/ds-react'
+import { Button, Modal } from '@navikt/ds-react'
 import parser from 'html-react-parser'
-import ModalWrapper from 'nav-frontend-modal'
 import { Normaltekst, Systemtittel } from 'nav-frontend-typografi'
 import React, { MouseEvent, useState } from 'react'
 
@@ -24,28 +23,28 @@ const PersonvernLesMer = () => {
         setAapen(true)
     }
 
-
     return (
         <div className="personvern-les-mer">
             <Button size="small" variant="tertiary"
                 onClick={handleAapen} style={{ paddingBottom: '2rem' }}>
                 {tekst('sykepengesoknad.soknad-intro.personvern-les-mer')}
             </Button>
-            <ModalWrapper className={'personvern-modal'} onRequestClose={() => setAapen(false)}
-                contentLabel={'Personvern'}
-                isOpen={aapen}
+            <Modal className="personvern-modal" onClose={() => setAapen(false)}
+                open={aapen}
             >
-                <Systemtittel tag="h3" className="modal__tittel">
-                    {tekst('sykepengesoknad.soknad-intro.personvern-modal-header')}
-                </Systemtittel>
-                {parser(tekst('sykepengesoknad.soknad-intro.personvern-modal-innhold'))}
+                <Modal.Content>
+                    <Systemtittel tag="h3" className="modal__tittel">
+                        {tekst('sykepengesoknad.soknad-intro.personvern-modal-header')}
+                    </Systemtittel>
+                    {parser(tekst('sykepengesoknad.soknad-intro.personvern-modal-innhold'))}
 
-                <div className={'lukk-wrapper'}>
-                    <button type="button" className="no-border navds-link" onClick={() => setAapen(false)}>
-                        <Normaltekst tag="span">Lukk</Normaltekst>
-                    </button>
-                </div>
-            </ModalWrapper>
+                    <div className={'lukk-wrapper'}>
+                        <button type="button" className="no-border navds-link" onClick={() => setAapen(false)}>
+                            <Normaltekst tag="span">Lukk</Normaltekst>
+                        </button>
+                    </div>
+                </Modal.Content>
+            </Modal>
         </div>
     )
 }

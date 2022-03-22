@@ -1,7 +1,6 @@
 import { Next } from '@navikt/ds-icons'
-import { Alert } from '@navikt/ds-react'
+import { Button, Heading, Modal } from '@navikt/ds-react'
 import dayjs from 'dayjs'
-import ModalWrapper from 'nav-frontend-modal'
 import { Element, Normaltekst, Undertekst, Undertittel } from 'nav-frontend-typografi'
 import React, { useState } from 'react'
 
@@ -12,14 +11,7 @@ import { useAmplitudeInstance } from '../../amplitude/amplitude'
 import Utvidbar from '../../utvidbar/utvidbar'
 import Vis from '../../vis'
 import { InngangsIkon, InngangsStatus } from '../inngang/inngangspanel'
-import {
-    hentIkon,
-    hentIkonHover,
-    hentTeaserStatustekst,
-    periodeListevisning,
-    SykepengesoknadTeaserProps,
-    teaserTittel
-} from './teaser-util'
+import { hentIkon, hentIkonHover, hentTeaserStatustekst, periodeListevisning, SykepengesoknadTeaserProps, teaserTittel } from './teaser-util'
 
 const FremtidigeSoknaderTeaser = ({ soknad }: SykepengesoknadTeaserProps) => {
     const { logEvent } = useAmplitudeInstance()
@@ -57,30 +49,30 @@ const FremtidigeSoknaderTeaser = ({ soknad }: SykepengesoknadTeaserProps) => {
                 <Next className="chevron--hoyre" />
             </button>
 
-            <ModalWrapper className="modal__teaser_popup" onRequestClose={() => setAapen(false)}
-                contentLabel="planlagt"
-                isOpen={aapen}
+            <Modal className="modal__teaser_popup"
+                onClose={() => setAapen(false)}
+                open={aapen}
             >
-                <Element tag="h3" className="modal__tittel">
-                    {tekst('soknader.teaser.fremtidig.modal.tittel')}
-                </Element>
-                <Normaltekst>
-                    {getLedetekst(tekst('soknader.teaser.fremtidig.modal.tekst'), {
-                        '%DATO%': tilLesbarDatoMedArstall(dayjs(soknad.tom).add(1, 'day'))
-                    })}
-                </Normaltekst>
-                <Normaltekst>{tekst('soknader.teaser.fremtidig.modal.tekst2')}</Normaltekst>
-                <Utvidbar erApen={false} type="intern" tittel={
-                    <Element>{tekst('soknader.teaser.fremtidig.modal.utvidbar.tittel')}</Element>
-                }>
-                    <Alert variant="info">
-                        {tekst('soknader.teaser.fremtidig.modal.utvidbar.tekst')}
-                    </Alert>
-                </Utvidbar>
-                <button className="knapp knapp--hoved" onClick={() => setAapen(false)}>
-                    Lukk
-                </button>
-            </ModalWrapper>
+                <Modal.Content>
+                    <Heading size="small" level="3" className="modal__tittel">
+                        {tekst('soknader.teaser.fremtidig.modal.tittel')}
+                    </Heading>
+                    <Normaltekst>
+                        {getLedetekst(tekst('soknader.teaser.fremtidig.modal.tekst'), {
+                            '%DATO%': tilLesbarDatoMedArstall(dayjs(soknad.tom).add(1, 'day'))
+                        })}
+                    </Normaltekst>
+                    <Normaltekst>{tekst('soknader.teaser.fremtidig.modal.tekst2')}</Normaltekst>
+                    <Utvidbar erApen={false} type="intern" tittel={
+                        <Element>{tekst('soknader.teaser.fremtidig.modal.utvidbar.tittel')}</Element>
+                    }>
+                        <Normaltekst>{tekst('soknader.teaser.fremtidig.modal.utvidbar.tekst')}</Normaltekst>
+                    </Utvidbar>
+                    <Button variant="primary" onClick={() => setAapen(false)}>
+                        Lukk
+                    </Button>
+                </Modal.Content>
+            </Modal>
 
         </article>
     )

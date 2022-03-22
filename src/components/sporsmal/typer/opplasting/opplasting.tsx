@@ -1,8 +1,7 @@
 import './opplasting.less'
 
-import { Alert, Button } from '@navikt/ds-react'
+import { Alert, Button, Modal } from '@navikt/ds-react'
 import parser from 'html-react-parser'
-import Modal from 'nav-frontend-modal'
 import { Element, Normaltekst } from 'nav-frontend-typografi'
 import React, { useRef } from 'react'
 
@@ -19,6 +18,8 @@ const Opplasting = ({ sporsmal }: SpmProps) => {
     const { setValgtKvittering, openModal, setOpenModal } = useAppStore()
     const ikonRef = useRef<HTMLImageElement>(null)
 
+    // eslint-disable-next-line
+    // @ts-ignore
     Modal.setAppElement('#maincontent')
 
     const aktiverModal = () => {
@@ -70,15 +71,14 @@ const Opplasting = ({ sporsmal }: SpmProps) => {
             </Button>
 
             <Modal
-                isOpen={openModal}
-                onRequestClose={lukkModal}
+                open={openModal}
+                onClose={lukkModal}
                 closeButton
-                contentLabel="Modal"
                 className="opplasting_modal"
             >
-                <div className="modal-content">
+                <Modal.Content>
                     <OpplastingForm sporsmal={sporsmal} />
-                </div>
+                </Modal.Content>
             </Modal>
 
             <FilListe sporsmal={sporsmal} fjernKnapp />

@@ -1,6 +1,6 @@
 import './opprett-utland.less'
 
-import { Alert, Button } from '@navikt/ds-react'
+import { Alert, Button, Heading } from '@navikt/ds-react'
 import parser from 'html-react-parser'
 import React from 'react'
 import { useHistory } from 'react-router'
@@ -53,7 +53,9 @@ const OpprettUtland = () => {
             </div>
             <div className="begrensning">
                 <header className="sidetopp">
-                    <h1 className="opprett-utland__tittel">{tekst('opprett-utland.tittel')}</h1>
+                    <Heading spacing size="xlarge" level="1" className="opprett-utland__tittel">
+                        {tekst('opprett-utland.tittel')}
+                    </Heading>
                 </header>
 
                 <div className="panel blokk redaksjonelt-innhold">
