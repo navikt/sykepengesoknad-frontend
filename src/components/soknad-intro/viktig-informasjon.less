@@ -1,12 +1,18 @@
+@import '../../../node_modules/@navikt/ds-tokens/dist/tokens';
 
 .viktig-informasjon {
-  h2, h3 {
-    padding-bottom: 0.5em;
-  }
-  h2 {
-    font-size: 18px;
-  }
-  p {
-    padding-bottom: 1em;
-  }
+    --navds-guide-panel-color-border: @navds-global-color-orange-400;
+    --navds-guide-panel-color-illustration-background: @navds-global-color-orange-200;
+
+    h2, h3 {
+        padding-bottom: 0.5em;
+    }
+
+    h2 {
+        font-size: 18px;
+    }
+
+    p {
+        padding-bottom: 1em;
+    }
 }

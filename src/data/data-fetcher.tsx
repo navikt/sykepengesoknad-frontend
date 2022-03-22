@@ -1,4 +1,4 @@
-import Spinner from 'nav-frontend-spinner'
+import { Loader } from '@navikt/ds-react'
 import React, { useEffect } from 'react'
 
 import IngenData from '../pages/feil/ingen-data'
@@ -40,10 +40,14 @@ export function DataFetcher(props: { children: any }) {
             })
         }
         // eslint-disable-next-line
-    }, [rssoknader]);
+    }, [ rssoknader ])
 
     if (isAnyNotStartedOrPending([ rssoknader, sykmeldinger ])) {
-        return <Spinner type={'XXL'} />
+        return (
+            <div className="data-loader">
+                <Loader variant="neutral" size="2xlarge" />
+            </div>
+        )
 
     } else if (hasAny401([ rssoknader, sykmeldinger ])) {
         window.location.href = hentLoginUrl()
@@ -57,7 +61,7 @@ export function DataFetcher(props: { children: any }) {
 }
 
 export const hentLoginUrl = () => {
-    if (window.location.href.includes('sykepengesoknad-utland')){
+    if (window.location.href.includes('sykepengesoknad-utland')) {
         return `${env.loginServiceUrl()}?redirect=${env.loginServiceRedirectUrl()}/sykepengesoknad-utland`
     }
     return `${env.loginServiceUrl()}?redirect=${env.loginServiceRedirectUrl()}`
