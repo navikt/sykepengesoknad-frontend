@@ -44,7 +44,7 @@ const AvbrytSoknadModal = () => {
                 open={aapen}
             >
                 <Modal.Content>
-                    <BodyLong spacing size="medium" className="sporsmal">
+                    <BodyLong spacing size="medium">
                         {tekst('avbryt.popup.sporsmal')}
                     </BodyLong>
 
