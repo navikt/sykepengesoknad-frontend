@@ -95,16 +95,14 @@ const Ettersending = ({ gjelder, setRerendrekvittering }: EttersendingProps) => 
             open={vilEttersende}
         >
             <Modal.Content>
-                <Heading size="small" level="3" className="modal__tittel">
+                <Heading spacing size="small" level="3" className="modal__tittel">
                     {hentTekst('kvittering.tittel.send-til')}
                 </Heading>
                 <Alert variant="info">{hentTekst('kvittering.info.send-til')}</Alert>
-                <div className="blokk-xs">
-                    <Button variant="primary" loading={ettersender} onClick={ettersend}>
-                        {hentTekst('kvittering.knapp.bekreft.send-til')}
-                    </Button>
-                </div>
-                <Button variant="tertiary" className="navds-link" onClick={() => setVilEttersende(false)}>
+                <Button variant="primary" loading={ettersender} onClick={ettersend}>
+                    {hentTekst('kvittering.knapp.bekreft.send-til')}
+                </Button>
+                <Button variant="tertiary" className="lenkeknapp" onClick={() => setVilEttersende(false)}>
                     {tekst('kvittering.knapp.angre')}
                 </Button>
             </Modal.Content>
