@@ -1,5 +1,5 @@
 import { Next } from '@navikt/ds-icons'
-import { Alert, Modal } from '@navikt/ds-react'
+import { Button, Heading, Modal } from '@navikt/ds-react'
 import dayjs from 'dayjs'
 import { Element, Normaltekst, Undertekst, Undertittel } from 'nav-frontend-typografi'
 import React, { useState } from 'react'
@@ -54,9 +54,9 @@ const FremtidigeSoknaderTeaser = ({ soknad }: SykepengesoknadTeaserProps) => {
                 open={aapen}
             >
                 <Modal.Content>
-                    <Element tag="h3" className="modal__tittel">
+                    <Heading size="small" level="3" className="modal__tittel">
                         {tekst('soknader.teaser.fremtidig.modal.tittel')}
-                    </Element>
+                    </Heading>
                     <Normaltekst>
                         {getLedetekst(tekst('soknader.teaser.fremtidig.modal.tekst'), {
                             '%DATO%': tilLesbarDatoMedArstall(dayjs(soknad.tom).add(1, 'day'))
@@ -66,13 +66,11 @@ const FremtidigeSoknaderTeaser = ({ soknad }: SykepengesoknadTeaserProps) => {
                     <Utvidbar erApen={false} type="intern" tittel={
                         <Element>{tekst('soknader.teaser.fremtidig.modal.utvidbar.tittel')}</Element>
                     }>
-                        <Alert variant="info">
-                            {tekst('soknader.teaser.fremtidig.modal.utvidbar.tekst')}
-                        </Alert>
+                        <Normaltekst>{tekst('soknader.teaser.fremtidig.modal.utvidbar.tekst')}</Normaltekst>
                     </Utvidbar>
-                    <button className="knapp knapp--hoved" onClick={() => setAapen(false)}>
+                    <Button variant="primary" onClick={() => setAapen(false)}>
                         Lukk
-                    </button>
+                    </Button>
                 </Modal.Content>
             </Modal>
 
