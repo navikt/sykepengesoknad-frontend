@@ -2,7 +2,6 @@ import { nyttReisetilskudd } from '../../../src/data/mock/data/reisetilskudd'
 
 describe('Teste førsteside i reisetilskuddsøknaden', () => {
 
-
     before(() => {
         cy.visit('http://localhost:8080/syk/sykepengesoknad')
     })
@@ -176,7 +175,7 @@ describe('Teste førsteside i reisetilskuddsøknaden', () => {
                 cy.contains('Slett')
                 cy.contains('Bekreft').should('not.exist')
             })
-            cy.get('.lukknapp').click()
+            cy.get('.opplasting_modal > .navds-modal__button').click()
         })
 
         it('Sletting av kvittering som er valgt', () => {
