@@ -1,7 +1,6 @@
 import './slettknapp.less'
 
-import { Alert, Button, Modal } from '@navikt/ds-react'
-import { Normaltekst } from 'nav-frontend-typografi'
+import { Alert, Button, Heading, Modal } from '@navikt/ds-react'
 import React, { useState } from 'react'
 
 import { redirectTilLoginHvis401 } from '../../data/rest/utils'
@@ -85,15 +84,13 @@ const Slettknapp = ({ sporsmal, kvittering, update }: SlettknappProps) => {
                 closeButton={false}
             >
                 <Modal.Content className="bekreft-dialog">
-                    <Normaltekst className="blokk-s">
+                    <Heading spacing size="small" level="3">
                         {tekst('opplasting_modal.vil-slette')}
-                    </Normaltekst>
-                    <div className="blokk-xs">
-                        <Button variant="danger" loading={sletter} type="button" onClick={slettKvittering}>
-                            {tekst('opplasting_modal.vil-slette.ja')}
-                        </Button>
-                    </div>
-                    <div aria-live="polite" className="blokk-xs">
+                    </Heading>
+                    <Button variant="danger" loading={sletter} type="button" onClick={slettKvittering}>
+                        {tekst('opplasting_modal.vil-slette.ja')}
+                    </Button>
+                    <div aria-live="polite">
                         <Vis hvis={feilmeldingTekst}
                             render={() => <Alert variant="error">{feilmeldingTekst}</Alert>}
                         />
