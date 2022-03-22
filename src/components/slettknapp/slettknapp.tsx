@@ -98,9 +98,11 @@ const Slettknapp = ({ sporsmal, kvittering, update }: SlettknappProps) => {
                             render={() => <Alert variant="error">{feilmeldingTekst}</Alert>}
                         />
                     </div>
-                    <button className="avbrytlenke lenkeknapp" type="button" onClick={() => setVilSlette(false)}>
+                    <Button variant="secondary" className="avbrytlenke lenkeknapp" type="button"
+                        onClick={() => setVilSlette(false)}
+                    >
                         {tekst('opplasting_modal.vil-slette.angre')}
-                    </button>
+                    </Button>
                 </Modal.Content>
             </Modal>
         </>

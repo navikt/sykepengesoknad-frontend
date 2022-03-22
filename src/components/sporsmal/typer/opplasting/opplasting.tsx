@@ -76,7 +76,7 @@ const Opplasting = ({ sporsmal }: SpmProps) => {
                 closeButton
                 className="opplasting_modal"
             >
-                <Modal.Content className="modal-content">
+                <Modal.Content>
                     <OpplastingForm sporsmal={sporsmal} />
                 </Modal.Content>
             </Modal>

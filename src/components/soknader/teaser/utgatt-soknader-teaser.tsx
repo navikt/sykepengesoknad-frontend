@@ -1,5 +1,5 @@
 import { Next } from '@navikt/ds-icons'
-import { Alert, Modal } from '@navikt/ds-react'
+import { Alert, Button, Modal } from '@navikt/ds-react'
 import { Systemtittel, Undertekst, Undertittel } from 'nav-frontend-typografi'
 import React, { useState } from 'react'
 
@@ -55,9 +55,9 @@ const UtgaattSoknaderTeaser = ({ soknad }: SykepengesoknadTeaserProps) => {
                         {tekst('soknad.teaser.utgaatt.popup.header')}
                     </Systemtittel>
                     <Alert variant="info">{tekst('soknad.teaser.utgaatt.popup.innhold')}</Alert>
-                    <button className="knapp knapp--hoved" onClick={() => setAapen(false)}>
+                    <Button variant="primary" onClick={() => setAapen(false)}>
                         Lukk
-                    </button>
+                    </Button>
                 </Modal.Content>
             </Modal>
         </article>

@@ -1,8 +1,6 @@
 import './ettersending.less'
 
-import { Alert, Button } from '@navikt/ds-react'
-import ModalWrapper from 'nav-frontend-modal'
-import { Alert, Button, Modal } from '@navikt/ds-react'
+import { Alert, Button, Heading, Modal } from '@navikt/ds-react'
 import React, { useState } from 'react'
 
 import { redirectTilLoginHvis401 } from '../../data/rest/utils'
@@ -97,16 +95,18 @@ const Ettersending = ({ gjelder, setRerendrekvittering }: EttersendingProps) => 
             open={vilEttersende}
         >
             <Modal.Content>
-                <h3 className="modal__tittel">{hentTekst('kvittering.tittel.send-til')}</h3>
+                <Heading size="small" level="3" className="modal__tittel">
+                    {hentTekst('kvittering.tittel.send-til')}
+                </Heading>
                 <Alert variant="info">{hentTekst('kvittering.info.send-til')}</Alert>
                 <div className="blokk-xs">
                     <Button variant="primary" loading={ettersender} onClick={ettersend}>
                         {hentTekst('kvittering.knapp.bekreft.send-til')}
                     </Button>
                 </div>
-                <button className="navds-link" onClick={() => setVilEttersende(false)}>
+                <Button variant="tertiary" className="navds-link" onClick={() => setVilEttersende(false)}>
                     {tekst('kvittering.knapp.angre')}
-                </button>
+                </Button>
             </Modal.Content>
         </Modal>
     </>)
