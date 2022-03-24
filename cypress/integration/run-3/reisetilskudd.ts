@@ -8,7 +8,7 @@ describe('Teste førsteside i reisetilskuddsøknaden', () => {
 
     describe('Landingside og listevisning', () => {
         it('Laster startside', () => {
-            cy.get('.typo-sidetittel').should('be.visible').and('have.text', 'Søknader')
+            cy.get('.navds-heading--xlarge').should('be.visible').and('have.text', 'Søknader')
         })
 
         it('Søknad har forventa tekst', () => {
@@ -42,12 +42,12 @@ describe('Teste førsteside i reisetilskuddsøknaden', () => {
                 .click()
                 .click()
 
-            cy.get('.typo-element').contains('Hva dekker reisetilskuddet')
-            cy.get('.typo-normal').contains('Reisetilskuddet dekker nødvendige ekstra reiseutgifter til og fra jobben mens du er syk, altså reiseutgifter utover det du har til vanlig.')
+            cy.get('.navds-label').contains('Hva dekker reisetilskuddet')
+            cy.get('.navds-body-long').contains('Reisetilskuddet dekker nødvendige ekstra reiseutgifter til og fra jobben mens du er syk, altså reiseutgifter utover det du har til vanlig.')
 
-            cy.get('.typo-element').contains('De første 16 dagene')
-            cy.get('.typo-element').contains('Legg ved kvitteringer')
-            cy.get('.typo-normal').contains('Du må legge ved bilde av kvitteringene dine når du søker NAV om å dekke utgiftene. Fyller du ut fra telefonen, kan du ta bilde av kvitteringene og bruke dem direkte i søknaden.')
+            cy.get('.navds-label').contains('De første 16 dagene')
+            cy.get('.navds-label').contains('Legg ved kvitteringer')
+            cy.get('.navds-body-long').contains('Du må legge ved bilde av kvitteringene dine når du søker NAV om å dekke utgiftene. Fyller du ut fra telefonen, kan du ta bilde av kvitteringene og bruke dem direkte i søknaden.')
         })
 
         it('Bekrefter ansvarserklæring', () => {

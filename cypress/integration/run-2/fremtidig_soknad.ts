@@ -8,7 +8,7 @@ describe('Tester fremtidig søknad', () => {
     })
 
     it('Laster startside', function() {
-        cy.get('.typo-sidetittel').should('be.visible').and('have.text', 'Søknader')
+        cy.get('.navds-heading--xlarge').should('be.visible').and('have.text', 'Søknader')
     })
 
     it('Fremtidig søknad har forventa tekst', function() {
@@ -21,7 +21,7 @@ describe('Tester fremtidig søknad', () => {
         cy.get(`#soknader-list-til-behandling article[aria-labelledby*=${fremtidigSoknad.id}]`).click()
         cy.get('.ReactModal__Content .modal__tittel')
             .should('include.text', 'Søknaden er ikke klar')
-            .get('.utvidbar .typo-element')
+            .get('.utvidbar .navds-label')
             .should('include.text', 'Hvorfor kan jeg ikke søke nå?')
     })
 })

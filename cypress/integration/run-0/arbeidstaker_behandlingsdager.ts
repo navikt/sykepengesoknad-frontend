@@ -12,7 +12,7 @@ describe('Tester behandlingsdagersøknad', () => {
     })
 
     it('Laster startside', function() {
-        cy.get('.typo-sidetittel').should('be.visible').and('have.text', 'Søknader')
+        cy.get('.navds-heading--xlarge').should('be.visible').and('have.text', 'Søknader')
         cy.get(`#soknader-list-til-behandling article a[href*=${soknad.id}]`).click()
     })
 
