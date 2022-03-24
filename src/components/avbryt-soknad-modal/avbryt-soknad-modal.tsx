@@ -19,7 +19,7 @@ const AvbrytSoknadModal = () => {
 
     return (
         <>
-            <Button size="small" variant="tertiary" className="avbryt_rødknapp"
+            <Button variant="tertiary" className="avbryt_rødknapp"
                 onClick={
                     (e) => {
                         logEvent('popup åpnet', {
@@ -48,7 +48,7 @@ const AvbrytSoknadModal = () => {
                         {tekst('avbryt.popup.sporsmal')}
                     </BodyLong>
 
-                    <Button size="small" variant="danger" className="midtstilt-knapp" onClick={
+                    <Button variant="danger" className="midtstilt-knapp" onClick={
                         () => {
                             logEvent('knapp klikket', {
                                 'tekst': tekst('avbryt.popup.ja'),
@@ -69,7 +69,7 @@ const AvbrytSoknadModal = () => {
                     }>
                         {tekst('avbryt.popup.ja')}
                     </Button>
-                    <Button size="small" variant="secondary" className="midtstilt-knapp"
+                    <Button variant="secondary" className="midtstilt-knapp"
                         onClick={() => {
                             setAapen(false)
                             logEvent('knapp klikket', {

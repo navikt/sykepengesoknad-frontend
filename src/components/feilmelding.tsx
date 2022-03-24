@@ -1,10 +1,10 @@
-import { Systemtittel } from 'nav-frontend-typografi'
+import { Heading } from '@navikt/ds-react'
 import React, { ReactNode } from 'react'
 
 interface FeilmeldingProps {
-    tittel?: string;
-    melding?: string;
-    children?: ReactNode;
+    tittel?: string
+    melding?: string
+    children?: ReactNode
 }
 
 const Feilmelding = (
@@ -16,7 +16,7 @@ const Feilmelding = (
     return (
         <div className="panel">
             <div className="hode hode--feil">
-                <Systemtittel tag="h1" className="hode__tittel">{tittel}</Systemtittel>
+                <Heading size="medium" level="1" className="hode__tittel">{tittel}</Heading>
                 <p className="hode__melding">{children || melding}</p>
             </div>
         </div>

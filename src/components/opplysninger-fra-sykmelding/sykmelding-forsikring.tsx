@@ -1,4 +1,4 @@
-import { Normaltekst, UndertekstBold } from 'nav-frontend-typografi'
+import { BodyShort, Detail } from '@navikt/ds-react'
 import React from 'react'
 
 import { useAppStore } from '../../data/stores/app-store'
@@ -17,15 +17,15 @@ const ForsikringInfo = () => {
         <Vis hvis={(arbeidssituasjon === RSArbeidssituasjon.FRILANSER || arbeidssituasjon === RSArbeidssituasjon.NAERINGSDRIVENDE) && harSpmOmForsikring(valgtSykmelding)}
             render={() =>
                 <div className="avsnitt">
-                    <UndertekstBold tag="h3" className="avsnitt-hode">
+                    <Detail as="h3" className="avsnitt-hode">
                         {tekst('sykepengesoknad.sykmelding-utdrag.forsikring')}
-                    </UndertekstBold>
-                    <Normaltekst>
+                    </Detail>
+                    <BodyShort>
                         {tekst(forsikring
                             ? 'sykepengesoknad.sykmelding-utdrag.forsikring-ja'
                             : 'sykepengesoknad.sykmelding-utdrag.forsikring-nei'
                         )}
-                    </Normaltekst>
+                    </BodyShort>
                 </div>
             }
         />

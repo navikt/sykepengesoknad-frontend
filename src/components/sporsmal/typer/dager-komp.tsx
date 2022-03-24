@@ -1,9 +1,9 @@
 import './dager-komp.less'
 
+import { BodyShort } from '@navikt/ds-react'
 import dayjs, { Dayjs } from 'dayjs'
 import isoWeek from 'dayjs/plugin/isoWeek'
 import weekOfYear from 'dayjs/plugin/weekOfYear'
-import { Normaltekst } from 'nav-frontend-typografi'
 import React from 'react'
 import { useFormContext, useWatch } from 'react-hook-form'
 
@@ -19,13 +19,13 @@ dayjs.extend(weekOfYear)
 dayjs.extend(isoWeek)
 
 interface KalenderUke {
-    ukenr: number;
-    dager: KalenderDag[];
+    ukenr: number
+    dager: KalenderDag[]
 }
 
 interface KalenderDag {
-    dayjs: Dayjs;
-    tid: 'foran' | 'etter' | 'inni';
+    dayjs: Dayjs
+    tid: 'foran' | 'etter' | 'inni'
 }
 
 const DagerKomp = ({ sporsmal }: SpmProps) => {
@@ -111,8 +111,8 @@ const DagerKomp = ({ sporsmal }: SpmProps) => {
             <SporsmalstekstH3 sporsmal={sporsmal} />
 
             <div className="skjemaelement skjema__dager" tabIndex={-1} >
-                <Normaltekst tag="h4" className="kalender__tittel">{kalTittel()}</Normaltekst>
-                <div className="ukedager">
+                <BodyShort as="h4" className="kalender__tittel">{kalTittel()}</BodyShort>
+                <BodyShort as="div" className="ukedager">
                     <span>uke</span>
                     <span>Man</span>
                     <span>Tir</span>
@@ -121,7 +121,7 @@ const DagerKomp = ({ sporsmal }: SpmProps) => {
                     <span>Fre</span>
                     <span>Lør</span>
                     <span>Søn</span>
-                </div>
+                </BodyShort>
 
                 {alleUker.map((uke: KalenderUke) => {
                     return (
@@ -142,7 +142,7 @@ const DagerKomp = ({ sporsmal }: SpmProps) => {
 
                 <FeilLokal sporsmal={sporsmal} />
 
-                <Normaltekst className="kalendervalg">
+                <BodyShort className="kalendervalg">
                     <button type="button" className="lenkeknapp velgalle" onClick={velgAlleUkedager}>
                         {tekst('sporsmal.egen-bil.kalender.ukedager')}
                     </button>
@@ -150,7 +150,7 @@ const DagerKomp = ({ sporsmal }: SpmProps) => {
                         <img src={SlettIkon} alt="" />
                         {tekst('sporsmal.egen-bil.kalender.fjern')}
                     </button>
-                </Normaltekst>
+                </BodyShort>
             </div>
         </>
     )

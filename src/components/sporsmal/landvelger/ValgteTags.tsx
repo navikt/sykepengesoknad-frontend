@@ -4,8 +4,8 @@ import React from 'react'
 const kryss = String.fromCharCode(215)
 
 export interface TagProps {
-    onDelete: () => void;
-    verdi: string;
+    onDelete: () => void
+    verdi: string
 }
 
 const Tag = ({ onDelete, verdi }: TagProps) => {
@@ -24,8 +24,8 @@ const Tag = ({ onDelete, verdi }: TagProps) => {
 }
 
 export interface ValgteTagsProps {
-    handleDelete: (i: number) => void;
-    verdier: string[];
+    handleDelete: (i: number) => void
+    verdier: string[]
 }
 
 export const ValgteTags = ({ handleDelete, verdier }: ValgteTagsProps) => {

@@ -1,4 +1,4 @@
-import { Element } from 'nav-frontend-typografi'
+import { Label } from '@navikt/ds-react'
 import React from 'react'
 
 import Vis from '../../vis'
@@ -8,7 +8,7 @@ const SporsmalstekstH3 = ({ sporsmal }: SpmProps) => {
     return (
         <Vis hvis={sporsmal.sporsmalstekst}
             render={() =>
-                <Element tag="h3" className="skjema__sporsmal">{sporsmal.sporsmalstekst}</Element>
+                <Label as="h3" className="skjema__sporsmal">{sporsmal.sporsmalstekst}</Label>
             }
         />
     )

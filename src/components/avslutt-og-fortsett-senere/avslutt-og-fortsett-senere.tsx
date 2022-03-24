@@ -1,7 +1,6 @@
 import './avslutt-og-fortsett-senere.less'
 
-import { Button, Heading, Modal } from '@navikt/ds-react'
-import { Normaltekst } from 'nav-frontend-typografi'
+import { BodyShort, Button, Heading, Modal } from '@navikt/ds-react'
 import React, { useState } from 'react'
 import { useParams } from 'react-router-dom'
 
@@ -19,7 +18,7 @@ const AvsluttOgFortsettSenere = () => {
 
     return (
         <>
-            <Button size="small" variant="tertiary"
+            <Button variant="tertiary"
                 onClick={
                     (e) => {
                         logEvent('popup åpnet', {
@@ -47,8 +46,8 @@ const AvsluttOgFortsettSenere = () => {
                     <Heading size="small" level="3" className="modal__tittel">
                         {tekst('avslutt.popup.tittel')}
                     </Heading>
-                    <Normaltekst>{tekst('avslutt.popup.innhold')}</Normaltekst>
-                    <Normaltekst>{tekst('avslutt.popup.sporsmal')}</Normaltekst>
+                    <BodyShort>{tekst('avslutt.popup.innhold')}</BodyShort>
+                    <BodyShort>{tekst('avslutt.popup.sporsmal')}</BodyShort>
                     <Button variant="primary" className="midtstilt-knapp" onClick={
                         () => {
                             logEvent('knapp klikket', {

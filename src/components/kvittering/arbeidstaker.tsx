@@ -1,6 +1,5 @@
-import { Alert } from '@navikt/ds-react'
+import { Alert, Heading } from '@navikt/ds-react'
 import dayjs from 'dayjs'
-import { Undertittel } from 'nav-frontend-typografi'
 import React, { useEffect, useState } from 'react'
 
 import { useAppStore } from '../../data/stores/app-store'
@@ -134,9 +133,9 @@ const Arbeidstaker = () => {
     return (
         <>
             <Alert variant="success">
-                <Undertittel tag="h2">
+                <Heading size="small" level="2">
                     {tekst('kvittering.soknaden-er-sendt')}
-                </Undertittel>
+                </Heading>
             </Alert>
             <div className="sendt-info">
                 <ArbeidstakerStatus />
@@ -149,16 +148,16 @@ const Arbeidstaker = () => {
                                 <Alert variant="info" size="small">
                                     <Vis hvis={kvitteringTekst === 'medOpphold'}
                                         render={() =>
-                                            <Undertittel tag="h3">
+                                            <Heading size="small" level="3">
                                                 {tekst('kvittering.viktig-informasjon')}
-                                            </Undertittel>
+                                            </Heading>
                                         }
                                     />
                                     <Vis hvis={kvitteringTekst !== 'medOpphold'}
                                         render={() =>
-                                            <Undertittel tag="h3">
+                                            <Heading size="small" level="3">
                                                 {tekst('kvittering.hva-skjer-videre')}
-                                            </Undertittel>
+                                            </Heading>
                                         }
                                     />
                                 </Alert>

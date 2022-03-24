@@ -1,6 +1,5 @@
-import { Alert, Link } from '@navikt/ds-react'
+import { Alert, BodyLong, Heading, Label, Link } from '@navikt/ds-react'
 import parser from 'html-react-parser'
-import { Element, Normaltekst, Undertittel } from 'nav-frontend-typografi'
 import React from 'react'
 
 import { useAppStore } from '../../../data/stores/app-store'
@@ -20,32 +19,32 @@ const KvitteringVidere = () => {
 
     return (
         <Alert variant="info" className="opplysninger">
-            <Undertittel tag="h3">{tekst('kvittering.hva-skjer-videre')}</Undertittel>
+            <Heading size="small" level="3">{tekst('kvittering.hva-skjer-videre')}</Heading>
 
             <Vis hvis={valgtSoknad?.arbeidssituasjon === RSArbeidssituasjon.NAERINGSDRIVENDE}
                 render={() =>
                     <div className="avsnitt">
-                        <Element tag="h2">{tekst('kvittering.naeringsdrivende.tittel')}</Element>
-                        <Normaltekst tag="span">{tekst('kvittering.naeringsdrivende.brodtekst')} </Normaltekst>
+                        <Label as="h2">{tekst('kvittering.naeringsdrivende.tittel')}</Label>
+                        <BodyLong spacing as="span">{tekst('kvittering.naeringsdrivende.brodtekst')} </BodyLong>
                         <Link target="_blank" href={tekst('kvittering.naeringsdrivende.lenke.url')}>
-                            <Normaltekst tag="span">{tekst('kvittering.naeringsdrivende.lenke')}</Normaltekst>
+                            <BodyLong spacing as="span">{tekst('kvittering.naeringsdrivende.lenke')}</BodyLong>
                         </Link>.
                     </div>
                 }
             />
             <div className="avsnitt hva-skjer">
-                <Element tag="h2">{tekst('kvittering.nav-behandler-soknaden')}</Element>
-                <Normaltekst tag="span">{tekst('kvittering.arbeidstaker.saksbehandlingstid')} </Normaltekst>
+                <Label as="h2">{tekst('kvittering.nav-behandler-soknaden')}</Label>
+                <BodyLong spacing as="span">{tekst('kvittering.arbeidstaker.saksbehandlingstid')} </BodyLong>
                 <Link target="_blank" href={tekst('kvittering.arbeidstaker.saksbehandlingstid.lenke.url')}>
-                    <Normaltekst tag="span">{tekst('kvittering.arbeidstaker.saksbehandlingstid.lenke')}</Normaltekst>
+                    <BodyLong spacing as="span">{tekst('kvittering.arbeidstaker.saksbehandlingstid.lenke')}</BodyLong>
                 </Link>
             </div>
 
             <Vis hvis={valgtSoknad && valgtSoknad.soknadstype !== RSSoknadstype.REISETILSKUDD}
                 render={() =>
                     <div className="avsnitt">
-                        <Element tag="h2">{tekst('kvittering.naar-blir-pengene')}</Element>
-                        <Normaltekst tag="span">{parser(tekst('kvittering.arbeidstaker.over16.utbetaling'))}</Normaltekst>
+                        <Label as="h2">{tekst('kvittering.naar-blir-pengene')}</Label>
+                        <BodyLong spacing as="span">{parser(tekst('kvittering.arbeidstaker.over16.utbetaling'))}</BodyLong>
                     </div>
                 }
             />

@@ -1,7 +1,7 @@
 import './sendes-til.less'
 
+import { BodyShort } from '@navikt/ds-react'
 import parser from 'html-react-parser'
-import { Normaltekst } from 'nav-frontend-typografi'
 import React, { useEffect, useState } from 'react'
 
 import { useAppStore } from '../../../data/stores/app-store'
@@ -25,23 +25,22 @@ const SendesTil = () => {
         }
 
         // eslint-disable-next-line
-    }, [mottaker]);
+    }, [mottaker])
 
     if (!mottaker || !nokkel || valgtSoknad?.arbeidssituasjon !== 'ARBEIDSTAKER') {
         return null
     }
 
-
     return (
         <div className="bottom_line">
-            <Normaltekst tag="div">
+            <BodyShort as="div">
                 {valgtSoknad!.arbeidsgiver !== undefined
                     ? parser(getLedetekst(tekst(nokkel as any), {
                         '%ARBEIDSGIVER%': valgtSoknad?.arbeidsgiver.navn,
                     }))
                     : parser(tekst(nokkel as any))
                 }
-            </Normaltekst>
+            </BodyShort>
         </div>
     )
 }

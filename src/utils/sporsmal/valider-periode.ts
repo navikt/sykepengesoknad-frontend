@@ -5,8 +5,8 @@ import { Sporsmal } from '../../types/types'
 import { fraBackendTilDate } from '../dato-utils'
 
 interface Periode {
-    fom: Date;
-    tom: Date;
+    fom: Date
+    tom: Date
 }
 
 export const validerPeriode = ( sporsmal: Sporsmal, id: string, values: Record<string, any>) => {

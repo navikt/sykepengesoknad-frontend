@@ -1,4 +1,4 @@
-import { Element } from 'nav-frontend-typografi'
+import { BodyShort, Label } from '@navikt/ds-react'
 import React from 'react'
 
 import { OppsummeringProps } from '../oppsummering'
@@ -7,8 +7,8 @@ const Fritekst = ({ sporsmal }: OppsummeringProps) => {
 
     return (
         <div className="oppsummering__fritekst">
-            <Element tag="h3">{sporsmal.sporsmalstekst}</Element>
-            <p className="sist">{sporsmal.svarliste.svar[0].verdi}</p>
+            <Label as="h3">{sporsmal.sporsmalstekst}</Label>
+            <BodyShort className="sist">{sporsmal.svarliste.svar[0].verdi}</BodyShort>
         </div>
     )
 }

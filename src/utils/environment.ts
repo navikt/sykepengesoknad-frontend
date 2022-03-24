@@ -1,6 +1,5 @@
 class Environment implements EnvironmentInterface {
-
-    private env = (window as any)._env_;
+    private env = (window as any)._env_
 
     isDev() {
         return this.env.ENVIRONMENT === 'dev'

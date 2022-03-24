@@ -1,4 +1,4 @@
-import { Element } from 'nav-frontend-typografi'
+import { BodyLong, BodyShort, Label } from '@navikt/ds-react'
 import React from 'react'
 
 import { OppsummeringProps } from '../oppsummering'
@@ -10,18 +10,18 @@ const LandSum = ({ sporsmal }: OppsummeringProps) => {
     }
 
     const svarliste = svar.length === 1
-        ? <p className="sist">{svar[0].verdi}</p>
+        ? <BodyShort className="sist">{svar[0].verdi}</BodyShort>
         : (
             <ul className="oppsummering__landliste">
                 {sporsmal.svarliste.svar.map((s) => {
-                    return <li className="oppsummering__land" key={s.verdi.toString()}>{s.verdi}</li>
+                    return <BodyShort className="oppsummering__land" key={s.verdi.toString()}>{s.verdi}</BodyShort>
                 })}
             </ul>
         )
     return (
         <div className="oppsummering__fritekst">
-            <Element tag="h3">{sporsmal.sporsmalstekst}</Element>
-            <div className="oppsummering__tekstsvar">{svarliste}</div>
+            <Label as="h3">{sporsmal.sporsmalstekst}</Label>
+            <BodyLong className="oppsummering__tekstsvar">{svarliste}</BodyLong>
         </div>
     )
 }

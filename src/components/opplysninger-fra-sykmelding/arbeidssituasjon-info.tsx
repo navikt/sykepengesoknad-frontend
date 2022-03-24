@@ -1,4 +1,4 @@
-import { Normaltekst, UndertekstBold } from 'nav-frontend-typografi'
+import { BodyShort, Label } from '@navikt/ds-react'
 import React from 'react'
 
 import { useAppStore } from '../../data/stores/app-store'
@@ -15,12 +15,12 @@ const ArbeidssituasjonInfo = () => {
         <Vis hvis={arbeidssituasjon}
             render={() =>
                 <div className="avsnitt">
-                    <UndertekstBold tag="h3" className="avsnitt-hode">
+                    <Label size="small" as="h3" className="avsnitt-hode">
                         {tekst('din-sykmelding.arbeidssituasjon.tittel.2')}
-                    </UndertekstBold>
-                    <Normaltekst>
+                    </Label>
+                    <BodyShort>
                         {tekst(`din-sykmelding.arbeidssituasjon.alternativ.${arbeidssituasjon!.toLowerCase()}` as any)}
-                    </Normaltekst>
+                    </BodyShort>
                 </div>
             }
         />

@@ -84,7 +84,7 @@ const Ettersending = ({ gjelder, setRerendrekvittering }: EttersendingProps) => 
     }
 
     return (<>
-        <Button size="small" variant="secondary" onClick={() => {
+        <Button variant="secondary" onClick={() => {
             setVilEttersende(true)
         }}>
             {tekst(`kvittering.knapp.send-${gjelder}` as any)}

@@ -1,5 +1,5 @@
+import { BodyShort, Label } from '@navikt/ds-react'
 import dayjs from 'dayjs'
-import { Normaltekst, UndertekstBold } from 'nav-frontend-typografi'
 import React from 'react'
 
 import { useAppStore } from '../../data/stores/app-store'
@@ -12,12 +12,12 @@ const SykmeldingDato = () => {
 
     return (
         <div className="avsnitt">
-            <UndertekstBold tag="h3" className="avsnitt-hode">
+            <Label size="small" as="h3" className="avsnitt-hode">
                 {tekst('sykepengesoknad.sykmelding-utdrag.dato-sykmeldingen-ble-skrevet')}
-            </UndertekstBold>
-            <Normaltekst>
+            </Label>
+            <BodyShort>
                 {dayjs(valgtSykmelding!.behandletTidspunkt).format('D. MMM YYYY')}
-            </Normaltekst>
+            </BodyShort>
         </div>
     )
 }

@@ -1,5 +1,5 @@
+import { BodyLong, BodyShort } from '@navikt/ds-react'
 import dayjs from 'dayjs'
-import { Normaltekst } from 'nav-frontend-typografi'
 import React from 'react'
 
 import { arbeidstakerGradert } from '../../../data/mock/data/soknader-opplaering'
@@ -46,12 +46,12 @@ export const finnArbeidsgivernavn = (soknad: Soknad) => {
 }
 
 interface SendtUliktProps {
-    soknad: Soknad;
+    soknad: Soknad
 }
 
 export const SendtUlikt = ({ soknad }: SendtUliktProps) => {
     return (
-        <Normaltekst tag="span">
+        <BodyLong spacing as="span">
             {getLedetekst(tekst('soknad.teaser.status.SENDT.til-arbeidsgiver'), {
                 '%DATO%': dayjs(soknad.sendtTilArbeidsgiverDato).format('DD.MM.YYYY'),
                 '%ARBEIDSGIVER%': finnArbeidsgivernavn(soknad),
@@ -60,7 +60,7 @@ export const SendtUlikt = ({ soknad }: SendtUliktProps) => {
             {getLedetekst(tekst('soknad.teaser.status.SENDT.til-nav'), {
                 '%DATO%': dayjs(soknad.sendtTilNAVDato).format('DD.MM.YYYY'),
             })}
-        </Normaltekst>
+        </BodyLong>
     )
 }
 
@@ -168,9 +168,9 @@ export const leggTilSoknadstypeForDemoside = (soknad: Soknad) => {
             : ''
         const grad = soknad.soknadPerioder.map(periode => periode.grad + '%')
         return (
-            <Normaltekst className="inngangspanel__undertekst__demo">
+            <BodyShort className="inngangspanel__undertekst__demo">
                 {`${arbeidssituasjon} ${forste} ${soknadstype}, ${grad} sykmeldt`}
-            </Normaltekst>
+            </BodyShort>
         )
     }
     return <></>
@@ -225,11 +225,11 @@ export const periodeListevisning = (soknad: Soknad) => {
     }).filter(p => p != null)
 
     return (perioder.length === 0) ? '' :
-        <ul className={'inngangspanel__periode__undertekst'}>
-            {perioder.map((p, i) => <Normaltekst tag="li" key={i}> {p} </Normaltekst>)}
+        <ul className="inngangspanel__periode__undertekst">
+            {perioder.map((p, i) => <BodyShort as="li" key={i}> {p} </BodyShort>)}
         </ul>
 }
 
 export interface SykepengesoknadTeaserProps {
-    soknad: Soknad;
+    soknad: Soknad
 }

@@ -1,6 +1,6 @@
 export class Forslag {
-    id: string;
-    text: string;
+    id: string
+    text: string
 
     constructor(
         text: string

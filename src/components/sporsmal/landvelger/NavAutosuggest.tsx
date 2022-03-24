@@ -25,9 +25,9 @@ const renderSuggestion = (forslag: Forslag, { query }: any) => {
 }
 
 export interface NavAutosuggestProps {
-    forslagsliste: Forslag[];
-    onAdd: (i: Forslag) => void;
-    sporsmalId: string;
+    forslagsliste: Forslag[]
+    onAdd: (i: Forslag) => void
+    sporsmalId: string
 }
 
 const NavAutosuggest = (props: NavAutosuggestProps) => {

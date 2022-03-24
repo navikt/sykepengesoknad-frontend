@@ -12,7 +12,7 @@ import PersonvernLesMer from '../../soknad-intro/personvern-les-mer'
 import Vis from '../../vis'
 
 interface KnapperadProps {
-    poster: boolean;
+    poster: boolean
 }
 
 const Knapperad = ({ poster }: KnapperadProps) => {

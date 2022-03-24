@@ -1,5 +1,5 @@
+import { BodyLong, Label } from '@navikt/ds-react'
 import parser from 'html-react-parser'
-import { Element, Normaltekst } from 'nav-frontend-typografi'
 import React from 'react'
 import { useFormContext } from 'react-hook-form'
 
@@ -56,9 +56,9 @@ const JaNeiInput = ({ sporsmal }: SpmProps) => {
                 'inputPanelGruppe inputPanelGruppe--horisontal' +
                 (errors[sporsmal.id] ? ' skjemagruppe--feil' : '')
             }>
-                <Element tag="h3" className="skjema__sporsmal">
+                <Label as="h3" className="skjema__sporsmal">
                     {sporsmal.sporsmalstekst}
-                </Element>
+                </Label>
 
                 <BjornUnderSporsmalstekst sporsmal={sporsmal} />
 
@@ -87,12 +87,12 @@ const JaNeiInput = ({ sporsmal }: SpmProps) => {
 
                 <Vis hvis={sporsmal?.tag === TagTyper.UTLANDSOPPHOLD_SOKT_SYKEPENGER && watchJaNei}
                     render={() =>
-                        <Normaltekst className={'utland_infotekst'}>{
+                        <BodyLong spacing className="utland_infotekst">{
                             parser(getLedetekst(
                                 tekst('soknad.infotekst.utlandsopphold_sokt_sykepenger.' + watchJaNei?.toLowerCase() as any),
                                 { '%URL%': utlandssoknadUrl })
                             )}
-                        </Normaltekst>
+                        </BodyLong>
                     }
                 />
 

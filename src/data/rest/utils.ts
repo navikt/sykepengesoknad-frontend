@@ -8,14 +8,14 @@ export enum FetchStatus {
 }
 
 export interface FetchState<D = {}> {
-    status: FetchStatus;
-    error: any;
-    data: D | null;
-    httpCode: number;
+    status: FetchStatus
+    error: any
+    data: D | null
+    httpCode: number
 }
 
 export interface FetchStateWithData<D = {}> extends FetchState<D> {
-    data: D;
+    data: D
 }
 
 export const isAnyNotStartedOrPending = (fetch: FetchState | FetchState[]): boolean => {

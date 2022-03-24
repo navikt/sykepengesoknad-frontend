@@ -1,8 +1,7 @@
 import './soknaden.less'
 
 import { Back } from '@navikt/ds-icons'
-import { Alert } from '@navikt/ds-react'
-import { Normaltekst, Systemtittel } from 'nav-frontend-typografi'
+import { Alert, BodyLong, BodyShort, Heading, Ingress } from '@navikt/ds-react'
 import React, { useEffect } from 'react'
 import { Link, useHistory, useParams } from 'react-router-dom'
 
@@ -62,7 +61,7 @@ const Soknaden = () => {
             soknadstatus: filtrertSoknad?.status,
         })
         // eslint-disable-next-line
-    }, [ id ]);
+    }, [ id ])
 
     useEffect(() => {
         setBodyClass('soknaden')
@@ -136,7 +135,7 @@ const Fordeling = () => {
                             <Link to={'/soknader/' + valgtSoknad.id + SEPARATOR + (stegNo - 1)}
                                 className="navds-link tilbakelenke">
                                 <Back className="chevron--venstre" />
-                                <Normaltekst tag="span">{tekst('soknad.tilbakeknapp')}</Normaltekst>
+                                <BodyShort as="span">{tekst('soknad.tilbakeknapp')}</BodyShort>
                             </Link>
                         }
                     />
@@ -172,7 +171,7 @@ const Fordeling = () => {
                     />
 
                     <Vis hvis={tittel}
-                        render={() => <Systemtittel className="sporsmal__tittel">{tittel}</Systemtittel>}
+                        render={() => <Heading size="medium" className="sporsmal__tittel">{tittel}</Heading>}
                     />
 
                     <SporsmalForm />
@@ -184,16 +183,18 @@ const Fordeling = () => {
             return (
                 <>
                     <Alert variant="warning">
-                        <Normaltekst>{tekst('sykepengesoknad.avbrutt.tidspunkt')} {tilLesbarDatoMedArstall(valgtSoknad!.avbruttDato)}.</Normaltekst>
+                        <BodyShort>
+                            {tekst('sykepengesoknad.avbrutt.tidspunkt')} {tilLesbarDatoMedArstall(valgtSoknad!.avbruttDato)}.
+                        </BodyShort>
                     </Alert>
 
                     <div className="avbrutt-info">
-                        <p className="ingress">
+                        <Ingress>
                             {tekst('sykepengesoknad.avbrutt.informasjon-tittel')}
-                        </p>
-                        <p>
+                        </Ingress>
+                        <BodyLong spacing>
                             {tekst('sykepengesoknad.avbrutt.informasjon-innhold')}
-                        </p>
+                        </BodyLong>
                     </div>
 
                     <Opplysninger ekspandert={true} steg="avbrutt-søknad" />

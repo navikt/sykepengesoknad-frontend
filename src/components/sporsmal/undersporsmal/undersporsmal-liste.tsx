@@ -5,8 +5,8 @@ import Vis from '../../vis'
 import SporsmalSwitch from '../sporsmal-switch'
 
 interface UndersporsmalListeProps {
-    oversporsmal: Sporsmal;
-    oversporsmalSvar?: string;
+    oversporsmal: Sporsmal
+    oversporsmalSvar?: string
 }
 
 const UndersporsmalListe = ({ oversporsmal, oversporsmalSvar }: UndersporsmalListeProps) => {

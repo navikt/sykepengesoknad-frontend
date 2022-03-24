@@ -1,5 +1,4 @@
-import { Alert } from '@navikt/ds-react'
-import { Normaltekst } from 'nav-frontend-typografi'
+import { Alert, BodyShort } from '@navikt/ds-react'
 import React from 'react'
 
 import { useAppStore } from '../../data/stores/app-store'
@@ -29,7 +28,7 @@ const InfotekstOverSubmit = ({ sporsmal }: SpmProps) => {
         <Vis hvis={tekstNokkel(sporsmal.tag)}
             render={() =>
                 <Alert variant="info" style={{ marginTop: '1rem' }}>
-                    <Normaltekst>{tekst(nokkel)}</Normaltekst>
+                    <BodyShort>{tekst(nokkel)}</BodyShort>
                 </Alert>
             }
         />

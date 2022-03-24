@@ -1,7 +1,6 @@
 import './soknad-med-to-deler.less'
 
-import { GuidePanel } from '@navikt/ds-react'
-import { Normaltekst, Undertittel } from 'nav-frontend-typografi'
+import { BodyLong, GuidePanel, Heading } from '@navikt/ds-react'
 import React from 'react'
 
 import { tekst } from '../../utils/tekster'
@@ -11,9 +10,9 @@ const SoknadMedToDeler = () => {
     return (
         <div className="to-deler">
             <GuidePanel poster illustration={VeilederSVG}>
-                <Undertittel tag="h2">{tekst('to-deler.overskrift')}</Undertittel>
-                <Normaltekst>{tekst('to-deler.avsnitt.1')}</Normaltekst>
-                <Normaltekst>{tekst('to-deler.avsnitt.2')}</Normaltekst>
+                <Heading size="small" level="2">{tekst('to-deler.overskrift')}</Heading>
+                <BodyLong>{tekst('to-deler.avsnitt.1')}</BodyLong>
+                <BodyLong>{tekst('to-deler.avsnitt.2')}</BodyLong>
             </GuidePanel>
         </div>
     )

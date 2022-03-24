@@ -1,5 +1,5 @@
+import { BodyShort, Label } from '@navikt/ds-react'
 import parser from 'html-react-parser'
-import { Element, Normaltekst } from 'nav-frontend-typografi'
 import React, { useEffect, useState } from 'react'
 
 import { Personalia } from '../../../types/types'
@@ -37,27 +37,27 @@ const Kontonummer = () => {
 
     return (
         <>
-            <Element tag="h2">
+            <Label as="h2">
                 {tekst('kvittering.kontonummer.tittel')}
-            </Element>
+            </Label>
 
             <Vis hvis={!kontonummer}
                 render={() =>
-                    <Normaltekst>
+                    <BodyShort>
                         {parser(tekst('kvittering.kontonummer.mangler'))}
-                    </Normaltekst>
+                    </BodyShort>
                 }
             />
 
             <Vis hvis={kontonummer}
                 render={() =>
                     <>
-                        <Normaltekst>
+                        <BodyShort>
                             <strong>{formatterKontonr(kontonummer!)}</strong>
-                        </Normaltekst>
-                        <Normaltekst>
+                        </BodyShort>
+                        <BodyShort>
                             {parser(tekst('kvittering.kontonummer.endre'))}
-                        </Normaltekst>
+                        </BodyShort>
                     </>
                 }
             />

@@ -1,9 +1,8 @@
 import './opplasting-form.less'
 
-import { Alert, Button } from '@navikt/ds-react'
+import { Alert, BodyLong, BodyShort, Button, Heading, Label } from '@navikt/ds-react'
 import dayjs from 'dayjs'
 import parser from 'html-react-parser'
-import { Element, Normaltekst, Systemtittel } from 'nav-frontend-typografi'
 import React, { useEffect, useState } from 'react'
 import { FormProvider, useForm } from 'react-hook-form'
 import { useParams } from 'react-router-dom'
@@ -138,18 +137,18 @@ const OpplastingForm = ({ sporsmal }: SpmProps) => {
     return (
         <FormProvider {...methods}>
             <form className="opplasting-form" key="opplasting_form">
-                <Systemtittel className="opplasting-header">
+                <Heading size="medium" className="opplasting-header">
                     {kvitteringHeader}
-                </Systemtittel>
+                </Heading>
 
                 <Vis hvis={formErDisabled}
                     render={() =>
                         <Alert variant="info">
-                            <Normaltekst>{tekst('opplasting_modal.endre-utlegg.hjelpetekst')}</Normaltekst>
+                            <BodyShort>{tekst('opplasting_modal.endre-utlegg.hjelpetekst')}</BodyShort>
                         </Alert>
                     }
                 />
-                <Normaltekst className="restriksjoner">
+                <BodyShort className="restriksjoner">
                     <span className="filtype">{
                         getLedetekst(tekst('opplasting_modal.filtyper'), {
                             '%FILTYPER%': formattertFiltyper
@@ -160,10 +159,10 @@ const OpplastingForm = ({ sporsmal }: SpmProps) => {
                             '%MAKSFILSTR%': maks
                         })
                     }</span>
-                </Normaltekst>
+                </BodyShort>
                 <div className="pdf-hjelp">
                     <Ekspanderbar title={tekst('soknad.info.kvitteringer-PDF-tittel')} sporsmalId={sporsmal.id}>
-                        <Normaltekst> {parser(tekst('soknad.info.kvitteringer-PDF-tekst'))} </Normaltekst>
+                        <BodyLong> {parser(tekst('soknad.info.kvitteringer-PDF-tekst'))} </BodyLong>
                     </Ekspanderbar>
                 </div>
                 <div className="skjemakolonner">
@@ -195,17 +194,17 @@ const OpplastingForm = ({ sporsmal }: SpmProps) => {
                         </select>
 
                         <div role="alert" aria-live="assertive">
-                            <Normaltekst tag="span" className="skjemaelement__feilmelding">
+                            <BodyLong as="span" className="skjemaelement__feilmelding">
                                 <Vis hvis={methods.formState.errors['transportmiddel']}
                                     render={() => <>{methods.formState.errors['transportmiddel']?.message}</>}
                                 />
-                            </Normaltekst>
+                            </BodyLong>
                         </div>
                     </div>
 
                     <div className="skjemaelement">
                         <label htmlFor="belop_input" className="skjemaelement__label">
-                            <Element tag="strong">{tekst('opplasting_modal.tittel')}</Element>
+                            <Label as="strong">{tekst('opplasting_modal.tittel')}</Label>
                         </label>
                         <input
                             type="number"
@@ -237,9 +236,9 @@ const OpplastingForm = ({ sporsmal }: SpmProps) => {
                         <div role="alert" aria-live="assertive">
                             <Vis hvis={methods.formState.errors['belop_input']?.message}
                                 render={() =>
-                                    <Normaltekst tag="span" className="skjemaelement__feilmelding">
+                                    <BodyShort as="span" className="skjemaelement__feilmelding">
                                         {methods.formState.errors['belop_input']?.message}
-                                    </Normaltekst>
+                                    </BodyShort>
                                 } />
                         </div>
                     </div>
@@ -250,7 +249,7 @@ const OpplastingForm = ({ sporsmal }: SpmProps) => {
                 <Vis hvis={feilmeldingTekst}
                     render={() =>
                         <Alert variant="warning">
-                            <Normaltekst>{feilmeldingTekst}</Normaltekst>
+                            <BodyShort>{feilmeldingTekst}</BodyShort>
                         </Alert>
                     }
                 />

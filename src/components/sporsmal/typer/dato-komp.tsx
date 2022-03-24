@@ -1,5 +1,5 @@
+import { Label } from '@navikt/ds-react'
 import { Datepicker } from 'nav-datovelger'
-import { Element } from 'nav-frontend-typografi'
 import React from 'react'
 import { Controller, useFormContext } from 'react-hook-form'
 
@@ -16,7 +16,7 @@ const DatoInput = ({ sporsmal }: SpmProps) => {
     return (
         <div className="dato-komp">
             <label className="skjema__sporsmal" htmlFor={sporsmal.id}>
-                <Element>{sporsmal.sporsmalstekst}</Element>
+                <Label>{sporsmal.sporsmalstekst}</Label>
             </label>
             <Controller
                 name={sporsmal.id}
@@ -34,7 +34,7 @@ const DatoInput = ({ sporsmal }: SpmProps) => {
                 }}
                 render={({ field }) => (
                     <Datepicker
-                        locale={'nb'}
+                        locale="nb"
                         inputId={field.name}
                         onChange={field.onChange}
                         value={field.value}

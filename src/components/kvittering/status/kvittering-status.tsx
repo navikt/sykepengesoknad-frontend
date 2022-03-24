@@ -1,6 +1,5 @@
-import { Alert } from '@navikt/ds-react'
+import { Alert, BodyShort, Heading } from '@navikt/ds-react'
 import dayjs from 'dayjs'
-import { Normaltekst, Undertittel } from 'nav-frontend-typografi'
 import React, { useEffect, useState } from 'react'
 
 import { useAppStore } from '../../../data/stores/app-store'
@@ -33,12 +32,12 @@ const KvitteringStatus = () => {
         <Vis hvis={valgtSoknad?.sendtTilNAVDato}
             render={() =>
                 <Alert variant="success">
-                    <Undertittel tag="h2">
+                    <Heading size="small" level="2">
                         {tekst('kvittering.soknaden-er-sendt-til')} {Mottaker.NAV}
-                    </Undertittel>
-                    <Normaltekst>
+                    </Heading>
+                    <BodyShort>
                         {tekst('kvittering.mottatt')}: {tilNavDato}
-                    </Normaltekst>
+                    </BodyShort>
                 </Alert>
             }
         />

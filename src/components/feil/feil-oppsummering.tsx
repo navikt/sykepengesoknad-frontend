@@ -1,6 +1,6 @@
 import './feil-oppsummering.less'
 
-import { Undertittel } from 'nav-frontend-typografi'
+import { Heading } from '@navikt/ds-react'
 import React, { useEffect, useRef, useState } from 'react'
 import { useFormContext } from 'react-hook-form'
 
@@ -79,7 +79,7 @@ const FeilOppsummering = ({ sporsmal }: SpmProps) => {
             <Vis hvis={entries.length > 0}
                 render={() =>
                     <div ref={oppsummering} tabIndex={0} role="region" className="feiloppsummering">
-                        <Undertittel>{'Det er ' + entries.length + ' feil i skjemaet'}</Undertittel>
+                        <Heading size="small">{'Det er ' + entries.length + ' feil i skjemaet'}</Heading>
                         <ul className="feiloppsummering__liste">
                             {entries.sort(list => list[0][0]).map((list, index) => (
                                 <li key={index}>

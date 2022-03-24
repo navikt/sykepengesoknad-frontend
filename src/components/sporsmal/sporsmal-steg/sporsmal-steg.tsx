@@ -1,8 +1,8 @@
 import 'nav-frontend-stegindikator-style'
 import './sporsmal-steg.less'
 
+import { BodyShort } from '@navikt/ds-react'
 import parser from 'html-react-parser'
-import { Normaltekst } from 'nav-frontend-typografi'
 import React from 'react'
 import { useParams } from 'react-router-dom'
 
@@ -15,7 +15,7 @@ import { hentNokkel } from '../sporsmal-utils'
 import Steg from './steg'
 
 interface FremdriftsbarProps {
-    antallSteg: number;
+    antallSteg: number
 }
 
 const Fremdriftsbar = ({ antallSteg }: FremdriftsbarProps) => {
@@ -27,9 +27,9 @@ const Fremdriftsbar = ({ antallSteg }: FremdriftsbarProps) => {
 
     return (
         <div className="fremdriftsbar">
-            <Normaltekst tag="span" className="fremdriftsbar__tekst" style={style}>
+            <BodyShort as="span" className="fremdriftsbar__tekst" style={style}>
                 {parser(`${stegId}&nbsp;av&nbsp;${antallSteg}`)}
-            </Normaltekst>
+            </BodyShort>
             <div className="fremdriftsbar__fullbredde" />
             <div className="fremdriftsbar__fremdrift" style={style} />
         </div>
@@ -46,7 +46,7 @@ const SporsmalSteg = () => {
         <div className="stegindikator-med-fremdriftsbar" role="progressbar"
             aria-valuenow={aktivtSteg} aria-valuemin={1} aria-valuemax={steg.length}
         >
-            <div className={'stegindikator stegindikator--kompakt'}>
+            <div className="stegindikator stegindikator--kompakt">
                 <ol className="stegindikator__liste">
                     {steg.map((sporsmal: Sporsmal, idx: number) => {
                         return <Steg index={idx} key={idx} label={tekst(hentNokkel(valgtSoknad!, idx + 1) as any)} />

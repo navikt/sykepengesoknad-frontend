@@ -1,8 +1,8 @@
 import React from 'react'
 
 interface VisProps {
-    hvis: any;
-    render: () => React.ReactElement;
+    hvis: any
+    render: () => React.ReactElement
 }
 
 const Vis = ({ hvis, render }: VisProps) => {

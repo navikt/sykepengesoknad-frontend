@@ -1,5 +1,5 @@
+import { BodyLong } from '@navikt/ds-react'
 import parser from 'html-react-parser'
-import { Normaltekst } from 'nav-frontend-typografi'
 import React from 'react'
 
 import { useAppStore } from '../../../data/stores/app-store'
@@ -13,9 +13,7 @@ import { SpmProps } from '../sporsmal-form/sporsmal-form'
 import { fjernIndexFraTag } from '../sporsmal-utils'
 import { EkspanderbarHjelpTekster } from './ekspanderbar-hjelp-tekst'
 
-
 export const EkspanderbarHjelp = ({ sporsmal }: SpmProps) => {
-
     const { valgtSoknad } = useAppStore()
 
     const skapNokkel = () => {
@@ -39,7 +37,6 @@ export const EkspanderbarHjelp = ({ sporsmal }: SpmProps) => {
             && `ekspanderbarhjelp.${nokkel}.innhold` in EkspanderbarHjelpTekster
     }
 
-
     return (
         <Vis hvis={nokkel && harTekst()}
             render={() => {
@@ -50,7 +47,7 @@ export const EkspanderbarHjelp = ({ sporsmal }: SpmProps) => {
                         title={tittel}
                         sporsmalId={sporsmal.id}
                         amplitudeProps={{ 'component': tittel, sporsmaltag: nokkel }}>
-                        <Normaltekst>{parser(tekst(`ekspanderbarhjelp.${nokkel}.innhold` as any))}</Normaltekst>
+                        <BodyLong>{parser(tekst(`ekspanderbarhjelp.${nokkel}.innhold` as any))}</BodyLong>
                     </Ekspanderbar>
                 </>
             }}

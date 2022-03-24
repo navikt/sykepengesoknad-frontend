@@ -1,7 +1,7 @@
 import './brodsmuler.less'
 
 import { Collapse } from '@navikt/ds-icons'
-import { Normaltekst } from 'nav-frontend-typografi'
+import { BodyShort } from '@navikt/ds-react'
 import React, { useEffect, useRef, useState } from 'react'
 import { Link } from 'react-router-dom'
 
@@ -26,31 +26,34 @@ const BrodsmuleBit = ({ sti, tittel, erKlikkbar }: Brodsmule) => {
     const link = erEkstern
         ? <a href={sti} className="navds-link">{tittel}</a>
         : sti
-            ? <Link to={sti} className="navds-link" onClick={() => {
-                logEvent('navigere', { lenketekst: tittel })
-            }}>{tittel}</Link>
-            : <span>{tittel}</span>
+            ? <Link to={sti} className="navds-link"
+                onClick={() => {
+                    logEvent('navigere', { lenketekst: tittel })
+                }}>
+                <BodyShort as="span" size="small">{tittel}</BodyShort>
+            </Link>
+            : <BodyShort as="span" size="small">{tittel}</BodyShort>
 
     if (!erKlikkbar) {
         return (
-            <li className="smule">
+            <BodyShort as="li" size="small" className="smule">
                 <span className="vekk">Du er her:</span>
                 <span>{tittel}</span>
-            </li>
+            </BodyShort>
         )
     } else if (erKlikkbar) {
-        return <li className="smule">{link}</li>
+        return <BodyShort as="li" size="small" className="smule">{link}</BodyShort>
     }
 
     return (
-        <li className="smule">
+        <BodyShort as="li" size="small" className="smule">
             <span>{tittel}</span>
-        </li>
+        </BodyShort>
     )
 }
 
 interface BrodsmulerProps {
-    brodsmuler: Brodsmule[];
+    brodsmuler: Brodsmule[]
 }
 
 const Brodsmuler = ({ brodsmuler }: BrodsmulerProps) => {
@@ -66,7 +69,7 @@ const Brodsmuler = ({ brodsmuler }: BrodsmulerProps) => {
         })
         setSynlige(skjerm <= LITEN ? [ brodsmuler[brodsmuler.length - 1] ] : brodsmuler)
         // eslint-disable-next-line
-    }, [skjerm])
+    }, [ skjerm ])
 
     const toggleSynlige = () => {
         if (synlige.length === brodsmuler.length) {
@@ -82,7 +85,7 @@ const Brodsmuler = ({ brodsmuler }: BrodsmulerProps) => {
         <nav className="brodsmuler" ref={smulesti} aria-label="Du er her: ">
             <div className="limit">
                 <img src={personIkon} alt="Du" className="brodsmuler__ikon" />
-                <Normaltekst tag="ul" className="brodsmuler__smuler">
+                <ul className="brodsmuler__smuler">
                     <Vis hvis={skjerm <= LITEN}
                         render={() =>
                             <li className="smule">
@@ -94,7 +97,7 @@ const Brodsmuler = ({ brodsmuler }: BrodsmulerProps) => {
                                     className="js-toggle"
                                     onClick={toggleSynlige}
                                 >
-                                     ...
+                                    ...
                                 </button>
                             </li>
                         }
@@ -113,7 +116,7 @@ const Brodsmuler = ({ brodsmuler }: BrodsmulerProps) => {
                             />
                         )
                     })}
-                </Normaltekst>
+                </ul>
                 <button
                     aria-label={
                         synlige.length === brodsmuler.length

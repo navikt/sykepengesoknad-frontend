@@ -1,8 +1,7 @@
 import './om-reisetilskudd.less'
 
-import { Accordion, Link } from '@navikt/ds-react'
+import { Accordion, BodyLong, Heading, Label, Link } from '@navikt/ds-react'
 import parser from 'html-react-parser'
-import { Element, Normaltekst, Undertittel } from 'nav-frontend-typografi'
 import React, { useState } from 'react'
 
 import { tekst } from '../../utils/tekster'
@@ -14,29 +13,29 @@ const OmReisetilskudd = () => {
         <Accordion>
             <Accordion.Item open={open} className="om-reisetilskudd">
                 <Accordion.Header onClick={() => setOpen(!open)}>
-                    <Undertittel>{tekst('tilskudd.start.om-reisetilskudd')}</Undertittel>
+                    <Heading size="small">{tekst('tilskudd.start.om-reisetilskudd')}</Heading>
                 </Accordion.Header>
                 <Accordion.Content>
-                    <Element tag="h3">{tekst('tilskudd.start.hva-dekker')}</Element>
-                    <Normaltekst>
+                    <Label as="h3">{tekst('tilskudd.start.hva-dekker')}</Label>
+                    <BodyLong spacing>
                         {parser(tekst('tilskudd.start.hva-dekker-tekst'))}
-                    </Normaltekst>
+                    </BodyLong>
 
-                    <Element tag="h3">{tekst('tilskudd.start.forste-16')}</Element>
-                    <Normaltekst>
+                    <Label as="h3">{tekst('tilskudd.start.forste-16')}</Label>
+                    <BodyLong spacing>
                         {tekst('tilskudd.start.forste-16-tekst')}
-                    </Normaltekst>
+                    </BodyLong>
 
-                    <Element tag="h3">{tekst('tilskudd.start.legg-ved')}</Element>
-                    <Normaltekst>
+                    <Label as="h3">{tekst('tilskudd.start.legg-ved')}</Label>
+                    <BodyLong spacing>
                         {tekst('tilskudd.start.legg-ved-tekst')}
-                    </Normaltekst>
+                    </BodyLong>
 
-                    <Normaltekst>
+                    <BodyLong spacing>
                         <Link href="https://nav.no/reisetilskudd" target="_blank" rel="noopener">
                             {tekst('tilskudd.start.les-mer-reisetilskudd')}
                         </Link>.
-                    </Normaltekst>
+                    </BodyLong>
                 </Accordion.Content>
             </Accordion.Item>
         </Accordion>

@@ -14,15 +14,15 @@ import FravaersperioderInfo from './sykmelding-fravaersperioder'
 import SykmeldingPerioder from './sykmelding-perioder'
 
 interface OpplysningerProps {
-    ekspandert: boolean;
-    steg: string;
+    ekspandert: boolean
+    steg: string
 }
 
 const Opplysninger = ({ ekspandert, steg }: OpplysningerProps) => {
 
     const tittel = tekst('sykepengesoknad.sykmelding-utdrag.tittel')
     return (
-        <Utvidbar className={'ekspander'}
+        <Utvidbar className="ekspander"
             ikon={plaster} ikonHover={plasterHover} erApen={ekspandert}
             amplitudeProps={{ 'component': tittel, steg: steg }}
             tittel={tittel}

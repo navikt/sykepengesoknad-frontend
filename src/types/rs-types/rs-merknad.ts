@@ -1,4 +1,4 @@
 export interface RSMerknad {
-    type: string;
-    beskrivelse?: string;
+    type: string
+    beskrivelse?: string
 }

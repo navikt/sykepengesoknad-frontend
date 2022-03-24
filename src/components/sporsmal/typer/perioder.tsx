@@ -1,4 +1,4 @@
-import { Element } from 'nav-frontend-typografi'
+import { Label } from '@navikt/ds-react'
 import React, { useEffect, useRef, useState } from 'react'
 import { useFormContext } from 'react-hook-form'
 import useForceUpdate from 'use-force-update'
@@ -38,9 +38,9 @@ const Perioder = ({ sporsmal }: SpmProps) => {
 
     return (
         <div className={sporsmal.parentKriterie ? 'kriterie--' + sporsmal.parentKriterie.toLowerCase() : ''}>
-            <Element tag="h3" className="skjema__sporsmal">
+            <Label as="h3" className="skjema__sporsmal">
                 {sporsmal.sporsmalstekst}
-            </Element>
+            </Label>
 
             <ul className="periodeliste" ref={periodeliste}>
                 {lokal.map((idx) => {

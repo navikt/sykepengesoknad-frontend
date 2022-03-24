@@ -1,4 +1,4 @@
 export interface RSArbeidsgiver {
-    navn: string;
-    orgnummer: string;
+    navn: string
+    orgnummer: string
 }

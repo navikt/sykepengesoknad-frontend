@@ -55,8 +55,8 @@ export const sporsmalIdListe = (sporsmal: Sporsmal[]) => {
 }
 
 interface FeilmeldingProps {
-    global: string;
-    lokal: string;
+    global: string
+    lokal: string
 }
 
 export const hentFeilmelding = (

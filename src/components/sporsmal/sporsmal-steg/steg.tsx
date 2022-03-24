@@ -18,8 +18,8 @@ const innerCls = (aktiv: boolean, ferdig: boolean, disabled: boolean) =>
     })
 
 export interface StegProps {
-    label: string;
-    index: number;
+    label: string
+    index: number
 }
 
 const Steg = ({ label, index }: StegProps) => {

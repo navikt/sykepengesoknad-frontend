@@ -6,9 +6,9 @@ import { RSSvartype } from '../../types/rs-types/rs-svartype'
 import { Soknad } from '../../types/types'
 
 interface SoknadLinkProps {
-    soknad: Soknad;
-    children: React.ReactNode;
-    className: string;
+    soknad: Soknad
+    children: React.ReactNode
+    className: string
 }
 
 export const urlTilSoknad = (soknad: Soknad) => {

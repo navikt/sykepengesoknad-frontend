@@ -1,5 +1,5 @@
+import { BodyShort, Label } from '@navikt/ds-react'
 import parser from 'html-react-parser'
-import { Element, Normaltekst } from 'nav-frontend-typografi'
 import React from 'react'
 import { useFormContext } from 'react-hook-form'
 
@@ -36,23 +36,26 @@ const JaNeiRadio = ({ sporsmal }: SpmProps) => {
                     ? 'soknad.infotekst.utlandsopphold_sokt_sykepenger.ja'
                     : 'soknad.infotekst.utlandsopphold_sokt_sykepenger.nei'
                 return <div className="ekstrasporsmal">
-                    <Normaltekst tag="span">
+                    <BodyShort as="span">
                         {parser(getLedetekst(tekst(utenlandsopphold), { '%URL%': utlandssoknadUrl }))}
-                    </Normaltekst>
+                    </BodyShort>
                 </div>
             }
             if (spm.tag.startsWith('INNTEKTSKILDE_') && watchJaNei === 'JA') {
                 return <div className="presisering">
-                    <Normaltekst tag="span">
+                    <BodyShort as="span">
                         {tekst('soknad.presisering.' + spm.tag as any)}
-                    </Normaltekst>
+                    </BodyShort>
                 </div>
             }
             if (spm.tag === 'INNTEKTSKILDE_SELVSTENDIG_ER_DU_SYKMELDT' && watchJaNei === 'NEI') {
                 return <div className="presisering">
-                    <Normaltekst tag="span">
-                        {parser(getLedetekst(tekst('soknad.presisering.' + spm.tag + '_NEI' as any), { '%URL%': tekst('soknad.presisering.INNTEKTSKILDE_SELVSTENDIG_ER_DU_SYKMELDT_NEI.url') }))}
-                    </Normaltekst>
+                    <BodyShort as="span">
+                        {parser(getLedetekst(
+                            tekst('soknad.presisering.' + spm.tag + '_NEI' as any),
+                            { '%URL%': tekst('soknad.presisering.INNTEKTSKILDE_SELVSTENDIG_ER_DU_SYKMELDT_NEI.url') }
+                        ))}
+                    </BodyShort>
                 </div>
             }
         } else return <></>
@@ -66,7 +69,7 @@ const JaNeiRadio = ({ sporsmal }: SpmProps) => {
                 (errors[sporsmal.id] ? ' skjemagruppe--feil' : '')
             }>
 
-                <Element tag="h3" className="skjema__sporsmal">{sporsmal.sporsmalstekst}</Element>
+                <Label as="h3" className="skjema__sporsmal">{sporsmal.sporsmalstekst}</Label>
 
                 {jaNeiValg.map((valg, idx) => {
                     const OK = watchJaNei === valg.value

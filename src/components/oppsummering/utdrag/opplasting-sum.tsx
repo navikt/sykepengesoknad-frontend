@@ -1,4 +1,4 @@
-import { Element } from 'nav-frontend-typografi'
+import { Label } from '@navikt/ds-react'
 import React from 'react'
 
 import { Kvittering } from '../../../types/types'
@@ -9,10 +9,8 @@ import { OppsummeringProps } from '../oppsummering'
 import Avkrysset from './avkrysset'
 
 const OpplastingSum = ({ sporsmal }: OppsummeringProps) => {
-
     const svar: Kvittering[] = hentSvar(sporsmal)
     const antall = svar.length
-
     const kr = svar.reduce((prev, cur) => prev + cur.belop, 0)
     const sum = kr / 100
 
@@ -34,7 +32,7 @@ const OpplastingSum = ({ sporsmal }: OppsummeringProps) => {
 
     return (
         <div className="oppsummering__sporsmal">
-            <Element tag="h3">{sporsmal.sporsmalstekst}</Element>
+            <Label as="h3">{sporsmal.sporsmalstekst}</Label>
             <div className="oppsummering__svar">
                 <Avkrysset tekst={svartekst} />
             </div>

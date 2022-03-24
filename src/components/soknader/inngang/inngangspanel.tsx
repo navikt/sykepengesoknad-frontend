@@ -9,8 +9,8 @@ import { Soknad } from '../../../types/types'
 import Vis from '../../vis'
 
 interface InngangsIkonProps {
-    ikon: string;
-    ikonHover?: string;
+    ikon: string
+    ikonHover?: string
 }
 
 export const InngangsIkon = ({ ikon, ikonHover }: InngangsIkonProps) => {
@@ -31,9 +31,9 @@ export const InngangsIkon = ({ ikon, ikonHover }: InngangsIkonProps) => {
 }
 
 interface InngangspanelProps {
-    soknad: Soknad;
-    children: React.ReactNode;
-    className?: string;
+    soknad: Soknad
+    children: React.ReactNode
+    className?: string
 }
 
 export const Inngangspanel = ({ soknad, children, className }: InngangspanelProps) => {
@@ -45,8 +45,8 @@ export const Inngangspanel = ({ soknad, children, className }: InngangspanelProp
 }
 
 interface InngangsStatusProps {
-    status: RSSoknadstatus;
-    tekst: string;
+    status: RSSoknadstatus
+    tekst: string
 }
 
 export const InngangsStatus = ({ status, tekst }: InngangsStatusProps) => {

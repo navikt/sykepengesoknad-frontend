@@ -14,9 +14,9 @@ import Vis from '../vis'
 import SlettIkon from './slettknapp.svg'
 
 interface SlettknappProps {
-    sporsmal: Sporsmal;
-    kvittering: Kvittering;
-    update?: () => void;
+    sporsmal: Sporsmal
+    kvittering: Kvittering
+    update?: () => void
 }
 
 const Slettknapp = ({ sporsmal, kvittering, update }: SlettknappProps) => {
