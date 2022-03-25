@@ -1,4 +1,3 @@
-import 'nav-frontend-tabell-style'
 import './fil-liste.less'
 
 import { BodyShort, Heading } from '@navikt/ds-react'
