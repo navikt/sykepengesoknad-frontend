@@ -22,7 +22,7 @@ describe('Tester sendt søknad', () => {
         cy.get('.ReactModal__Content')
             .should('include.text', 'Søknaden er utgått')
             .get('.navds-alert .navds-body-long')
-            .should('include.text', 'Du får ikke åpnet denne søknaden fordi du ikke har sendt den innen fristen.')
+            .should('include.text', 'Du får ikke åpnet denne søknaden fordi den ikke ble sendt innen fristen.')
     })
 
 })
