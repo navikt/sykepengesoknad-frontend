@@ -29,9 +29,9 @@ describe('Tester frilansersøknad', () => {
         cy.contains('Har ikke forsikring som gjelder de første 16 dagene av sykefraværet').should('not.be.visible')
 
         // Viktig informasjon grunnet tilbakedatering
-        cy.get('.viktig-informasjon > .nav-veilederpanel').should('be.visible')
-        cy.get('.viktig-informasjon > .nav-veilederpanel').contains('Viktig informasjon')
-        cy.get('.viktig-informasjon > .nav-veilederpanel').contains('Vanligvis starter sykmeldingen den dagen du er hos legen. I ditt tilfelle har legen skrevet at den startet tidligere.')
+        cy.get('.viktig-informasjon > .navds-guide-panel').should('be.visible')
+        cy.get('.viktig-informasjon > .navds-guide-panel').contains('Viktig informasjon')
+        cy.get('.viktig-informasjon > .navds-guide-panel').contains('Vanligvis starter sykmeldingen den dagen du er hos legen. I ditt tilfelle har legen skrevet at den startet tidligere.')
 
         // Godkjenne ANSVARSERKLARING
         cy.contains('Jeg vet at jeg kan miste retten til sykepenger hvis opplysningene jeg gir ikke er riktige eller fullstendige.')
