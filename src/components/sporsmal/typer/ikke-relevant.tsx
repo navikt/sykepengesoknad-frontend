@@ -1,7 +1,7 @@
 import './ikke-relevant.less'
 
+import { BodyLong, Label } from '@navikt/ds-react'
 import parser from 'html-react-parser'
-import { Element, Normaltekst } from 'nav-frontend-typografi'
 import React from 'react'
 
 import Vis from '../../vis'
@@ -12,8 +12,8 @@ const IkkeRelevant = ({ sporsmal }: SpmProps) => {
         <Vis hvis={sporsmal.sporsmalstekst}
             render={() =>
                 <div className="til_slutt_seksjon">
-                    <Element tag="h3" className="skjema__sporsmal">{sporsmal.sporsmalstekst}</Element>
-                    <Normaltekst tag="div" className="redaksjonelt-innhold">{parser(sporsmal.undertekst)}</Normaltekst>
+                    <Label as="h3" className="skjema__sporsmal">{sporsmal.sporsmalstekst}</Label>
+                    <BodyLong as="div" className="redaksjonelt-innhold">{parser(sporsmal.undertekst)}</BodyLong>
                 </div>
             }
         />

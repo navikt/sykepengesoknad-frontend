@@ -9,10 +9,10 @@ import NavAutosuggest from './NavAutosuggest'
 import { ValgteTags } from './ValgteTags'
 
 interface LandvelgerComponentProps {
-    verdierInn: string[];
-    name: string;
-    sporsmalId: string;
-    onChange: (verdier: string[]) => void;
+    verdierInn: string[]
+    name: string
+    sporsmalId: string
+    onChange: (verdier: string[]) => void
 }
 
 const LandvelgerComponent = ({ verdierInn, sporsmalId, onChange }: LandvelgerComponentProps) => {

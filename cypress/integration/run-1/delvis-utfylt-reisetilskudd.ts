@@ -10,7 +10,7 @@ describe('Tester delvis utfylt søknad med reisetilskudd', () => {
     })
 
     it('Henter liste med søknader', () => {
-        cy.get('.typo-sidetittel').should('be.visible').and('have.text', 'Søknader')
+        cy.get('.navds-heading--xlarge').should('be.visible').and('have.text', 'Søknader')
     })
 
     it('Delvis utfylt søknad med reisetilskudd er markert med delvis utfylt label', () => {

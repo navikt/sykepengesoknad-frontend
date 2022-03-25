@@ -1,8 +1,8 @@
 import './bjorn.less'
 
+import { BodyShort } from '@navikt/ds-react'
 import cls from 'classnames'
 import parser from 'html-react-parser'
-import { Normaltekst } from 'nav-frontend-typografi'
 import React from 'react'
 
 import { tekst } from '../../../utils/tekster'
@@ -10,14 +10,14 @@ import BjornBildeLiten from './bjorn-bilde-liten'
 import BjornBildeStor from './bjorn-bilde-stor'
 
 interface BjornProps {
-    bildeAlt?: string;
-    nokkel?: string;
-    children?: React.ReactElement;
-    hvit?: boolean;
-    stor?: boolean;
-    vertikal?: boolean;
-    ekstraMarginTop?: boolean;
-    className?: string;
+    bildeAlt?: string
+    nokkel?: string
+    children?: React.ReactElement
+    hvit?: boolean
+    stor?: boolean
+    vertikal?: boolean
+    ekstraMarginTop?: boolean
+    className?: string
 }
 
 export const Bjorn = ({
@@ -55,7 +55,7 @@ export const Bjorn = ({
     return (
         <div className={classNames}>
             <div className={bobleClassNames}>
-                {nokkel !== undefined ? <Normaltekst>{parser(tekst(nokkel as any))}</Normaltekst> : children}
+                {nokkel !== undefined ? <BodyShort>{parser(tekst(nokkel as any))}</BodyShort> : children}
             </div>
             <div className={bildeClassNames}>
                 <Bilde alt={bildeAlt} />

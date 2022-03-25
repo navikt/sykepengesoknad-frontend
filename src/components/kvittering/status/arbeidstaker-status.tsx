@@ -1,5 +1,5 @@
+import { Detail, Label } from '@navikt/ds-react'
 import dayjs from 'dayjs'
-import { Element, Undertekst } from 'nav-frontend-typografi'
 import React, { useEffect, useState } from 'react'
 
 import { useAppStore } from '../../../data/stores/app-store'
@@ -43,11 +43,11 @@ const ArbeidstakerStatus = () => {
             <Vis hvis={valgtSoknad!.sendtTilArbeidsgiverDato}
                 render={() =>
                     <>
-                        <Element tag="h3" className="sendt-tittel">
+                        <Label as="h3" className="sendt-tittel">
                             {tekst('kvittering.sendt-til')}
-                        </Element>
+                        </Label>
                         <Avkrysset tekst={`${tilArbNavn} ${tilOrg}, ${medKopi}`} />
-                        <Undertekst>{tilArbDato}</Undertekst>
+                        <Detail size="small">{tilArbDato}</Detail>
                     </>
                 }
             />
@@ -55,7 +55,7 @@ const ArbeidstakerStatus = () => {
                 render={() =>
                     <>
                         <Avkrysset tekst={Mottaker.NAV} />
-                        <Undertekst>{tilNavDato}</Undertekst>
+                        <Detail size="small">{tilNavDato}</Detail>
                     </>
                 }
             />

@@ -17,8 +17,8 @@ import Soknad from './pages/soknad/soknaden'
 import Soknader from './pages/soknader/soknader'
 
 export interface RouteParams {
-    stegId: string;
-    id: string;
+    stegId: string
+    id: string
 }
 
 const App = (): any => {
@@ -51,12 +51,12 @@ const App = (): any => {
                             <main id="maincontent" role="main" tabIndex={-1}>
                                 <RefreshHvisFeilState>
                                     <Switch location={location}>
-                                        <Route exact={true} path={'/'} component={Soknader} />
-                                        <Route path={'/soknader/:id/:stegId'} component={Soknad} />
-                                        <Route path={'/soknader/:id'} component={Soknad} />
-                                        <Route path={'/soknader/'} component={RedirectTilOversikt} />
-                                        <Route path={'/kvittering/:id'} component={KvitteringSide} />
-                                        <Route path={'/sykepengesoknad-utland'} component={OpprettUtland} />
+                                        <Route exact={true} path="/" component={Soknader} />
+                                        <Route path="/soknader/:id/:stegId" component={Soknad} />
+                                        <Route path="/soknader/:id" component={Soknad} />
+                                        <Route path="/soknader/" component={RedirectTilOversikt} />
+                                        <Route path="/kvittering/:id" component={KvitteringSide} />
+                                        <Route path="/sykepengesoknad-utland" component={OpprettUtland} />
                                     </Switch>
                                 </RefreshHvisFeilState>
                             </main>

@@ -1,4 +1,4 @@
-import { Normaltekst } from 'nav-frontend-typografi'
+import { BodyShort } from '@navikt/ds-react'
 import React from 'react'
 import { FieldValues, useFormContext } from 'react-hook-form'
 
@@ -25,7 +25,7 @@ const CheckboxKomp = ({ sporsmal }: SpmProps) => {
 
                 <Vis hvis={sporsmal.undertekst}
                     render={() =>
-                        <Normaltekst tag="div"> {sporsmal.undertekst} </Normaltekst>
+                        <BodyShort as="div"> {sporsmal.undertekst} </BodyShort>
                     }
                 />
 
@@ -38,7 +38,7 @@ const CheckboxKomp = ({ sporsmal }: SpmProps) => {
 export default CheckboxKomp
 
 interface CheckboxProps {
-    parent: Sporsmal;
+    parent: Sporsmal
 }
 
 type AllProps = SpmProps & CheckboxProps

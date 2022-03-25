@@ -11,7 +11,7 @@ describe('Tester delvis utfylt søknad', () => {
     })
 
     it('Henter liste med søknader', () => {
-        cy.get('.typo-sidetittel').should('be.visible').and('have.text', 'Søknader')
+        cy.get('.navds-heading--xlarge').should('be.visible').and('have.text', 'Søknader')
     })
 
     it('En ikke påbegynt søknad er ikke markert som delvis utfylt', () => {

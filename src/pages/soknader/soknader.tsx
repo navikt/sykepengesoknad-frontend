@@ -1,7 +1,6 @@
 import './soknader.less'
 
-import { Link } from '@navikt/ds-react'
-import { Normaltekst } from 'nav-frontend-typografi'
+import { BodyShort, Link } from '@navikt/ds-react'
 import React, { useEffect } from 'react'
 
 import Banner from '../../components/banner/banner'
@@ -74,7 +73,7 @@ const Soknader = () => {
                 />
 
                 <Link className="dinesaker-lenke" href={env.dinesakerUrl()}>
-                    <Normaltekst tag="span">{tekst('dinesaker.lenke')}</Normaltekst>
+                    <BodyShort as="span">{tekst('dinesaker.lenke')}</BodyShort>
                 </Link>
             </div>
         </>

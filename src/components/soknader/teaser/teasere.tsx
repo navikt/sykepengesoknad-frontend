@@ -1,5 +1,5 @@
+import { Heading, Label } from '@navikt/ds-react'
 import { Select } from 'nav-frontend-skjema'
-import { Element, Undertittel } from 'nav-frontend-typografi'
 import React, { useState } from 'react'
 
 import { RSSoknadstatus } from '../../../types/rs-types/rs-soknadstatus'
@@ -12,12 +12,12 @@ import TidligereSoknaderTeaser from './tidligere-soknader-teaser'
 import UtgaattSoknaderTeaser from './utgatt-soknader-teaser'
 
 interface SoknaderTeasereProps {
-    soknader: Soknad[];
-    className?: string;
-    tittel: string;
-    tomListeTekst?: string;
-    id: string;
-    kanSorteres?: boolean;
+    soknader: Soknad[]
+    className?: string
+    tittel: string
+    tomListeTekst?: string
+    id: string
+    kanSorteres?: boolean
 }
 
 enum Sortering {
@@ -60,9 +60,9 @@ const Teasere = ({ soknader, className, tittel, tomListeTekst, id, kanSorteres =
 
                 <Vis hvis={sorterteSoknader().length > 0 || tomListeTekst}
                     render={() =>
-                        <Undertittel tag="h2" className="teasere__header__tittel">
+                        <Heading size="small" level="2" className="teasere__header__tittel">
                             {tittel}
-                        </Undertittel>
+                        </Heading>
                     }
                 />
             </header>
@@ -83,9 +83,9 @@ const Teasere = ({ soknader, className, tittel, tomListeTekst, id, kanSorteres =
                 })}
                 <Vis hvis={soknader.length === 0}
                     render={() =>
-                        <Element className="inngangspanel inngangspanel--tomListe">
+                        <Label className="inngangspanel inngangspanel--tomListe">
                             {tomListeTekst}
-                        </Element>
+                        </Label>
                     }
                 />
             </div>

@@ -11,12 +11,12 @@ import { logger } from '../../utils/logger'
 import { tekst } from '../../utils/tekster'
 
 interface AvbrytSoknadReq {
-    valgtSoknad: Soknad;
-    setSoknader: React.Dispatch<React.SetStateAction<Soknad[]>>;
-    soknader: Soknad[];
-    setValgtSoknad: React.Dispatch<React.SetStateAction<Soknad | undefined>>;
-    history: H.History;
-    setFeilmeldingTekst: React.Dispatch<React.SetStateAction<string>>;
+    valgtSoknad: Soknad
+    setSoknader: React.Dispatch<React.SetStateAction<Soknad[]>>
+    soknader: Soknad[]
+    setValgtSoknad: React.Dispatch<React.SetStateAction<Soknad | undefined>>
+    history: H.History
+    setFeilmeldingTekst: React.Dispatch<React.SetStateAction<string>>
 }
 
 export async function avbrytSoknad({ valgtSoknad, setSoknader, soknader, setValgtSoknad, history, setFeilmeldingTekst }: AvbrytSoknadReq) {

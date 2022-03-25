@@ -1,5 +1,5 @@
 import { Next } from '@navikt/ds-icons'
-import { Undertekst, Undertittel } from 'nav-frontend-typografi'
+import { Detail, Heading } from '@navikt/ds-react'
 import React from 'react'
 
 import { erDelvisUtfyltNySoknad } from '../../../pages/soknad/soknad-link'
@@ -35,14 +35,14 @@ const Teaser = ({ soknad }: SykepengesoknadTeaserProps) => {
                         <div id={`soknader-header-${soknad.id}`} className="inngangspanel__innhold">
                             <Vis hvis={soknad.soknadstype !== RSSoknadstype.OPPHOLD_UTLAND}
                                 render={() =>
-                                    <Undertekst className="inngangspanel__periode">
+                                    <Detail className="inngangspanel__periode">
                                         {tilLesbarPeriodeMedArstall(soknad.fom, soknad.tom)}
-                                    </Undertekst>
+                                    </Detail>
                                 }
                             />
-                            <Undertittel tag="h3" className="inngangspanel__tittel">
+                            <Heading size="small" as="h3" className="inngangspanel__tittel">
                                 {teaserTittel(soknad)}
-                            </Undertittel>
+                            </Heading>
 
                             {periodeListevisning(soknad)}
 

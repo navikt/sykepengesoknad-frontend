@@ -1,8 +1,7 @@
 import './opplasting.less'
 
-import { Alert, Button, Modal } from '@navikt/ds-react'
+import { Alert, BodyLong, BodyShort, Button, Label, Modal } from '@navikt/ds-react'
 import parser from 'html-react-parser'
-import { Element, Normaltekst } from 'nav-frontend-typografi'
 import React, { useRef } from 'react'
 
 import { useAppStore } from '../../../../data/stores/app-store'
@@ -34,28 +33,28 @@ const Opplasting = ({ sporsmal }: SpmProps) => {
     return (
         <div className="opplasting">
             <div className="opplasting__tekst">
-                <Element tag="h3" className="skjema__sporsmal">
+                <Label as="h3" className="skjema__sporsmal">
                     {sporsmal.sporsmalstekst}
-                </Element>
+                </Label>
             </div>
 
             <Alert variant="warning" className="reisetilskudd">
-                <Normaltekst className="bold">{tekst('soknad.info.kvitteringer-del1')}</Normaltekst>
+                <BodyShort as="strong">{tekst('soknad.info.kvitteringer-del1')}</BodyShort>
                 <ul style={{ minWidth: 190 }}>
-                    <Normaltekst>
+                    <BodyShort>
                         <li>{tekst('soknad.info.kvitteringer-del2-kulepunkt1')}</li>
                         <li>{tekst('soknad.info.kvitteringer-del2-kulepunkt2')}</li>
                         <li>{tekst('soknad.info.kvitteringer-del2-kulepunkt3')}</li>
-                    </Normaltekst>
+                    </BodyShort>
                 </ul>
-                <Normaltekst>{tekst('soknad.info.kvitteringer-del3')}</Normaltekst>
+                <BodyShort>{tekst('soknad.info.kvitteringer-del3')}</BodyShort>
             </Alert>
 
             <div className="pdf-hjelp">
                 <Ekspanderbar title={tekst('soknad.info.kvitteringer-PDF-tittel')} sporsmalId={sporsmal.id}>
-                    <Normaltekst>
+                    <BodyLong>
                         {parser(tekst('soknad.info.kvitteringer-PDF-tekst'))}
-                    </Normaltekst>
+                    </BodyLong>
                 </Ekspanderbar>
             </div>
 
@@ -67,7 +66,7 @@ const Opplasting = ({ sporsmal }: SpmProps) => {
                 onMouseLeave={() => ikonRef.current!.src = PlussIkon}
             >
                 <img ref={ikonRef} className="pluss-ikon" src={PlussIkon} alt="" />
-                <Normaltekst tag="span">{tekst('opplasting.legg-til')}</Normaltekst>
+                <BodyShort as="span">{tekst('opplasting.legg-til')}</BodyShort>
             </Button>
 
             <Modal

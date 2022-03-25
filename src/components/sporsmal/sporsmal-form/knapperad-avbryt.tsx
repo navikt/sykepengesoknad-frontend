@@ -6,7 +6,7 @@ import { useAppStore } from '../../../data/stores/app-store'
 import { tekst } from '../../../utils/tekster'
 import { avbrytSoknad } from '../../avbryt-soknad-modal/avbryt-soknad'
 
-type Event = MouseEvent<HTMLAnchorElement | HTMLButtonElement>;
+type Event = MouseEvent<HTMLAnchorElement | HTMLButtonElement>
 
 const KnapperadAvbryt = () => {
     const { valgtSoknad, soknader, setSoknader, setValgtSoknad, setFeilmeldingTekst } = useAppStore()

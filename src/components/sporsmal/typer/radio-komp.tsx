@@ -1,5 +1,4 @@
-import { Alert } from '@navikt/ds-react'
-import { Normaltekst } from 'nav-frontend-typografi'
+import { Alert, BodyLong, BodyShort } from '@navikt/ds-react'
 import React, { useEffect } from 'react'
 import { useFormContext } from 'react-hook-form'
 import useForceUpdate from 'use-force-update'
@@ -32,8 +31,8 @@ const RadioKomp = ({ sporsmal }: SpmProps) => {
         <>
             <SporsmalstekstH3 sporsmal={sporsmal} />
             <Vis hvis={sporsmal.undertekst && sporsmal.svartype == RSSvartype.RADIO_GRUPPE_TIMER_PROSENT}
-                render={() => <Normaltekst style={{ marginBottom: '1em' }}> {sporsmal.undertekst}</Normaltekst>} />
-
+                render={() => <BodyLong spacing> {sporsmal.undertekst}</BodyLong>}
+            />
 
             <div className={
                 'skjemaelement' +
@@ -76,12 +75,12 @@ const RadioKomp = ({ sporsmal }: SpmProps) => {
             <Vis hvis={watchRadio && watchRadio.toLowerCase() === 'timer' && beregnGrad && beregnGrad()}
                 render={() =>
                     <Alert variant="info" style={{ marginTop: '1rem' }}>
-                        <Normaltekst>
+                        <BodyShort>
                             {getLedetekst(
                                 tekst('sykepengesoknad.jobb-underveis-timer-i-prosent'),
                                 { '%PROSENT%': Math.floor(beregnGrad!() * 100) }
                             )}
-                        </Normaltekst>
+                        </BodyShort>
                     </Alert>
                 }
             />

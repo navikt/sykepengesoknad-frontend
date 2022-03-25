@@ -12,42 +12,42 @@ import { RSSvartype } from './rs-types/rs-svartype'
 import { RSVisningskriterieType } from './rs-types/rs-visningskriterie'
 
 export interface TidsPeriode {
-    fom: Date;
-    tom: Date;
+    fom: Date
+    tom: Date
 }
 
 export interface NaermesteLeder {
-    navn: string;
-    epost: string;
-    mobil: string;
-    orgnummer: string;
-    organisasjonsnavn: string;
-    aktivTom: string;
+    navn: string
+    epost: string
+    mobil: string
+    orgnummer: string
+    organisasjonsnavn: string
+    aktivTom: string
 }
 
 export interface Arbeidsgiver {
-    navn: string;
-    orgnummer: string;
-    naermesteLeder?: NaermesteLeder;
+    navn: string
+    orgnummer: string
+    naermesteLeder?: NaermesteLeder
 }
 
 export class Soknad {
-    id: string;
-    sykmeldingId: string;
-    soknadstype: RSSoknadstype;
-    status: RSSoknadstatus;
-    arbeidssituasjon: RSArbeidssituasjon | null;
-    fom?: Date;
-    tom?: Date;
-    avbruttDato?: Date;
-    opprettetDato: Date;
-    sendtTilNAVDato?: Date;
-    sendtTilArbeidsgiverDato?: Date;
-    arbeidsgiver?: Arbeidsgiver;
-    sporsmal: Sporsmal[];
-    soknadPerioder: RSSoknadsperiode[];
-    korrigerer: string | null;
-    merknaderFraSykmelding?: RSMerknad[];
+    id: string
+    sykmeldingId: string
+    soknadstype: RSSoknadstype
+    status: RSSoknadstatus
+    arbeidssituasjon: RSArbeidssituasjon | null
+    fom?: Date
+    tom?: Date
+    avbruttDato?: Date
+    opprettetDato: Date
+    sendtTilNAVDato?: Date
+    sendtTilArbeidsgiverDato?: Date
+    arbeidsgiver?: Arbeidsgiver
+    sporsmal: Sporsmal[]
+    soknadPerioder: RSSoknadsperiode[]
+    korrigerer: string | null
+    merknaderFraSykmelding?: RSMerknad[]
 
     constructor(
         soknad: RSSoknad
@@ -80,20 +80,20 @@ export class Soknad {
 }
 
 export class Sporsmal {
-    id: string;
-    tag: TagTyper;
-    tagIndex?: number;
-    sporsmalstekst: string;
-    undertekst: string | null;
-    svartype: RSSvartype;
-    min: string | null;
-    max: string | null;
-    pavirkerAndreSporsmal: boolean;
-    kriterieForVisningAvUndersporsmal: string;
-    svarliste: RSSvarliste;
-    undersporsmal: Sporsmal[];
-    parentKriterie: RSVisningskriterieType | null;
-    erHovedsporsmal: boolean;
+    id: string
+    tag: TagTyper
+    tagIndex?: number
+    sporsmalstekst: string
+    undertekst: string | null
+    svartype: RSSvartype
+    min: string | null
+    max: string | null
+    pavirkerAndreSporsmal: boolean
+    kriterieForVisningAvUndersporsmal: string
+    svarliste: RSSvarliste
+    undersporsmal: Sporsmal[]
+    parentKriterie: RSVisningskriterieType | null
+    erHovedsporsmal: boolean
 
     constructor(spm: RSSporsmal, kriterie: RSVisningskriterieType | null, erHovedsporsmal: boolean) {
         this.id = spm.id
@@ -155,27 +155,27 @@ function rsToSporsmal(spms: RSSporsmal[], kriterie: RSVisningskriterieType | nul
 }
 
 export interface Brodsmule {
-    sti: string;
-    tittel: string;
-    mobilTittel?: string;
-    erKlikkbar?: boolean;
+    sti: string
+    tittel: string
+    mobilTittel?: string
+    erKlikkbar?: boolean
 }
 
 export interface IdParams {
-    id: string;
-    stegId: string;
+    id: string
+    stegId: string
 }
 
 export interface Ettersend {
-    type: 'nav' | 'arbeidsgiver';
-    dato: Date;
+    type: 'nav' | 'arbeidsgiver'
+    dato: Date
 }
 
 export class Kvittering {
-    blobId: string;
-    belop: number; // Beløp i heltall øre
-    typeUtgift: keyof typeof UtgiftTyper;
-    opprettet?: string;
+    blobId: string
+    belop: number // Beløp i heltall øre
+    typeUtgift: keyof typeof UtgiftTyper
+    opprettet?: string
 
     constructor(verdi: string) {
         const kvitt = JSON.parse(verdi)

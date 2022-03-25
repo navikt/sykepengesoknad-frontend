@@ -4,8 +4,8 @@ import fetcher from '../../utils/fetcher'
 import { FetchState, FetchStatus, redirectTilLoginHvis401 } from './utils'
 
 export interface Fetch<D = any, FP = any> extends FetchState<D> {
-    fetch: (url: string, request?: RequestInit, onFinished?: (fetchState: FetchState<D>) => void) => void;
-    reset: () => void;
+    fetch: (url: string, request?: RequestInit, onFinished?: (fetchState: FetchState<D>) => void) => void
+    reset: () => void
 }
 
 const createInitialFetchState = (): FetchState<any> => ({

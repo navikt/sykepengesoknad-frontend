@@ -4,17 +4,17 @@ import { RSSvartype, RSSvartypeType } from './rs-svartype'
 import { RSVisningskriterie, RSVisningskriterieType } from './rs-visningskriterie'
 
 export interface RSSporsmal {
-    id: string;
-    tag: string;
-    sporsmalstekst: string | null;
-    undertekst: string | null;
-    svartype: RSSvartypeType;
-    min: string | null;
-    max: string | null;
-    pavirkerAndreSporsmal: boolean;
-    kriterieForVisningAvUndersporsmal: RSVisningskriterieType | null;
-    svar: RSSvar[];
-    undersporsmal: RSSporsmal[];
+    id: string
+    tag: string
+    sporsmalstekst: string | null
+    undertekst: string | null
+    svartype: RSSvartypeType
+    min: string | null
+    max: string | null
+    pavirkerAndreSporsmal: boolean
+    kriterieForVisningAvUndersporsmal: RSVisningskriterieType | null
+    svar: RSSvar[]
+    undersporsmal: RSSporsmal[]
 }
 
 export function sporsmalToRS(sporsmal: Sporsmal): RSSporsmal {

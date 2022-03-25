@@ -1,5 +1,4 @@
-import { Link } from '@navikt/ds-react'
-import { Normaltekst } from 'nav-frontend-typografi'
+import { BodyShort, Link } from '@navikt/ds-react'
 import React from 'react'
 
 import { useAppStore } from '../../../data/stores/app-store'
@@ -33,7 +32,7 @@ const BjornUnderSporsmalstekst = ({ sporsmal }: SpmProps) => {
             />
             <Vis hvis={bjornVeilederOgMaaler(sporsmal.tag)} render={() =>
                 <Bjorn className="blokk-m" >
-                    <Normaltekst>
+                    <BodyShort>
                         {tekst(bjornTekst as any)}
                         <Link href={tekst((bjornTekst + '_lenke') as any) }
                             onClick={() => { logEvent('navigere', { lenketekst: tekst((bjornTekst + '_lenketekst') as any) })}}
@@ -41,7 +40,7 @@ const BjornUnderSporsmalstekst = ({ sporsmal }: SpmProps) => {
                         >
                             {tekst((bjornTekst + '_lenketekst') as any )}
                         </Link>
-                    </Normaltekst>
+                    </BodyShort>
                 </Bjorn>} />
         </>
     )

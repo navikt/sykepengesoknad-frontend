@@ -3,7 +3,7 @@ import React from 'react'
 import { AmplitudeProvider } from './amplitude'
 
 interface AmplitudeProps {
-    children: React.ReactNode;
+    children: React.ReactNode
 }
 
 export const Amplitude = (props: AmplitudeProps) => {

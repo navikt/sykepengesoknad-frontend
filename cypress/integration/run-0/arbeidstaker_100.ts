@@ -12,7 +12,7 @@ describe('Tester arbeidstakersøknad', () => {
     })
 
     it('Laster startside', function() {
-        cy.get('.typo-sidetittel').should('be.visible').and('have.text', 'Søknader')
+        cy.get('.navds-heading--xlarge').should('be.visible').and('have.text', 'Søknader')
         cy.get(`#soknader-list-til-behandling article a[href*=${soknad.id}]`).click()
     })
 
@@ -28,7 +28,7 @@ describe('Tester arbeidstakersøknad', () => {
         cy.contains('Les mer om hvordan NAV behandler personopplysninger').click()
         cy.contains('Slik behandler NAV personopplysningene dine')
         cy.contains('Søknaden din vil bli behandlet automatisk hvis NAV har tilstrekkelige opplysninger')
-        cy.get('.no-border > .typo-normal').contains('Lukk').click()
+        cy.get('.no-border > .navds-body-short').contains('Lukk').click()
 
 
         // Sykmelding

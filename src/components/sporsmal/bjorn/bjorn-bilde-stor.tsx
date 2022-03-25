@@ -6,7 +6,7 @@ const smilemunn = 'M15.48571,14.3678 C15.48571,14.3678 13.74911,18.34545 8.91741
 const alvorligmunn = 'M15.5,16.2c0,0-1.7,2.1-6.6,2c-4.8-0.1-6.6-2-6.6-2'
 
 export interface BjornBildeProps {
-    alt: string;
+    alt: string
 }
 
 const BjornBildeStor = ({ alt }: BjornBildeProps) => {
@@ -34,7 +34,7 @@ const BjornBildeStor = ({ alt }: BjornBildeProps) => {
             window.clearTimeout(timeout2)
         }
         // eslint-disable-next-line
-    }, []);
+    }, [])
 
     function blink() {
         setOyefarge(fargeLukket)

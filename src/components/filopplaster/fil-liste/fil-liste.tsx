@@ -1,7 +1,7 @@
 import 'nav-frontend-tabell-style'
 import './fil-liste.less'
 
-import { Normaltekst, Undertittel } from 'nav-frontend-typografi'
+import { BodyShort, Heading } from '@navikt/ds-react'
 import React from 'react'
 import useForceUpdate from 'use-force-update'
 
@@ -14,8 +14,8 @@ import { hentSvar } from '../../sporsmal/hent-svar'
 import Vis from '../../vis'
 
 interface Props {
-    sporsmal: Sporsmal,
-    fjernKnapp?: boolean,
+    sporsmal: Sporsmal
+    fjernKnapp?: boolean
 }
 
 const FilListe = ({ sporsmal, fjernKnapp }: Props) => {
@@ -42,7 +42,7 @@ const FilListe = ({ sporsmal, fjernKnapp }: Props) => {
     return (
         <Vis hvis={kvitteringer.length > 0}
             render={() =>
-                <Normaltekst tag="table" className="tabell tabell--stripet fil_liste">
+                <BodyShort as="table" className="tabell tabell--stripet fil_liste">
                     <Vis hvis={fjernKnapp}
                         render={() =>
                             <thead>
@@ -78,22 +78,22 @@ const FilListe = ({ sporsmal, fjernKnapp }: Props) => {
                     <tbody className="sumlinje">
                         <tr>
                             <td>
-                                <Undertittel tag="span">
+                                <Heading size="small" as="span">
                                     {getLedetekst(tekst('fil_liste.utlegg.sum'), {
                                         '%ANTALL_BILAG%': kvitteringer.length,
                                         '%FLERTALL%': kvitteringer.length > 1 ? 'er' : ''
                                     })}
-                                </Undertittel>
+                                </Heading>
                             </td>
                             <td className="belop">
-                                <Undertittel tag="span">
+                                <Heading size="small" as="span">
                                     {formatterTall(totaltBeløp())} kr
-                                </Undertittel>
+                                </Heading>
                             </td>
                             <td />
                         </tr>
                     </tbody>
-                </Normaltekst>
+                </BodyShort>
             }
         />
     )

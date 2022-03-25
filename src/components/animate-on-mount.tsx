@@ -3,11 +3,11 @@ import React, { useEffect, useRef, useState } from 'react'
 import Vis from './vis'
 
 interface AnimateOnMountProps {
-    mounted: boolean;
-    enter: string;
-    leave: string;
-    start: string;
-    children: React.ReactElement;
+    mounted: boolean
+    enter: string
+    leave: string
+    start: string
+    children: React.ReactElement
 }
 
 const AnimateOnMount = (props: AnimateOnMountProps) => {
@@ -22,7 +22,7 @@ const AnimateOnMount = (props: AnimateOnMountProps) => {
             setStyles(leave)
         }
         // eslint-disable-next-line
-    }, [ mounted ]);
+    }, [ mounted ])
 
 
     return (

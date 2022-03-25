@@ -1,6 +1,6 @@
 import './banner.less'
 
-import { Sidetittel, Systemtittel } from 'nav-frontend-typografi'
+import { Heading } from '@navikt/ds-react'
 import React from 'react'
 
 import { useAppStore } from '../../data/stores/app-store'
@@ -11,7 +11,7 @@ import SykSokLokalt from '../brodsmuler/syk-sok-lokalt'
 import Vis from '../vis'
 
 interface BannerProps {
-    overskrift?: string;
+    overskrift?: string
 }
 
 const Banner = ({ overskrift }: BannerProps) => {
@@ -35,14 +35,14 @@ const Banner = ({ overskrift }: BannerProps) => {
     return (
         <header className="sidebanner">
             <SykSokLokalt />
-            <Sidetittel tag="h1" className="sidebanner__tittel">
+            <Heading size="xlarge" level="1" className="sidebanner__tittel">
                 {overskrift === undefined ? tittel() : overskrift}
-            </Sidetittel>
+            </Heading>
             <Vis hvis={valgtSoknad && valgtSoknad.fom && valgtSoknad.tom}
                 render={() =>
-                    <Systemtittel>
+                    <Heading size="medium">
                         {tilLesbarPeriodeMedArstall(valgtSoknad!.fom, valgtSoknad!.tom)}
-                    </Systemtittel>
+                    </Heading>
                 }
             />
         </header>

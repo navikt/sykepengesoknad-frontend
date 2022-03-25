@@ -51,7 +51,7 @@ const Endreknapp = () => {
     }
 
     return (
-        <Button size="small" variant="secondary" loading={korrigerer} onClick={korriger}>
+        <Button variant="secondary" loading={korrigerer} onClick={korriger}>
             {endreKnappTekst}
         </Button>
     )

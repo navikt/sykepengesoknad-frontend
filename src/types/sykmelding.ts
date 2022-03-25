@@ -11,15 +11,15 @@ import { Arbeidsgiver } from './types'
 export type RegelStatus = 'OK' | 'MANUAL_PROCESSING' | 'INVALID'
 
 interface RegelInfo {
-    messageForSender: string;
-    messageForUser: string;
-    ruleName: string;
-    ruleStatus?: RegelStatus;
+    messageForSender: string
+    messageForUser: string
+    ruleName: string
+    ruleStatus?: RegelStatus
 }
 
 interface Behandlingsutfall {
-    status: RegelStatus;
-    ruleHits: RegelInfo[];
+    status: RegelStatus
+    ruleHits: RegelInfo[]
 }
 
 // ------ PERIODER
@@ -32,8 +32,8 @@ export enum MedisinskArsakType {
 }
 
 class MedisinskArsak {
-    beskrivelse: string;
-    arsak: MedisinskArsakType[];
+    beskrivelse: string
+    arsak: MedisinskArsakType[]
 
     constructor(medisinskArsak: any) {
         this.beskrivelse = medisinskArsak.beskrivelse
@@ -49,8 +49,8 @@ export enum ArbeidsrelatertArsakType {
 }
 
 class ArbeidsrelatertArsak {
-    beskrivelse: string;
-    arsak: ArbeidsrelatertArsakType[];
+    beskrivelse: string
+    arsak: ArbeidsrelatertArsakType[]
 
     constructor(arbeidsrelatertArsak: any) {
         this.beskrivelse = arbeidsrelatertArsak.beskrivelse
@@ -61,8 +61,8 @@ class ArbeidsrelatertArsak {
 }
 
 class AktivitetIkkeMulig {
-    medisinskArsak: MedisinskArsak;
-    arbeidsrelatertArsak: ArbeidsrelatertArsak;
+    medisinskArsak: MedisinskArsak
+    arbeidsrelatertArsak: ArbeidsrelatertArsak
 
     constructor(aktivitetIkkeMulig: any) {
         this.medisinskArsak = new MedisinskArsak(aktivitetIkkeMulig.medisinskArsak)
@@ -71,20 +71,20 @@ class AktivitetIkkeMulig {
 }
 
 interface Gradert {
-    grad: number;
-    reisetilskudd: boolean;
+    grad: number
+    reisetilskudd: boolean
 }
 
 type Periodetype = 'AKTIVITET_IKKE_MULIG' | 'AVVENTENDE' | 'BEHANDLINGSDAGER' | 'GRADERT' | 'REISETILSKUDD';
 
 export class Periode {
-    fom: Date;
-    tom: Date;
-    aktivitetIkkeMulig?: AktivitetIkkeMulig;
-    gradert?: Gradert;
-    behandlingsdager?: number;
-    innspillTilArbeidsgiver?: string;
-    type: Periodetype;
+    fom: Date
+    tom: Date
+    aktivitetIkkeMulig?: AktivitetIkkeMulig
+    gradert?: Gradert
+    behandlingsdager?: number
+    innspillTilArbeidsgiver?: string
+    type: Periodetype
 
     constructor(periode: any) {
         this.fom = dayjsToDate(periode.fom)!
@@ -104,31 +104,31 @@ export class Periode {
 export type StatusEvent = 'SENDT' | 'APEN' | 'AVBRUTT' | 'UTGATT' | 'BEKREFTET';
 
 interface ArbeidsgiverStatus {
-    orgnummer: string;
-    juridiskOrgnummer?: string;
-    orgNavn: string;
+    orgnummer: string
+    juridiskOrgnummer?: string
+    orgNavn: string
 }
 
 type SvarType = 'ARBEIDSSITUASJON' | 'PERIODER' | 'JA_NEI';
 
 interface Svar {
-    svar: string;
-    svarType: SvarType;
+    svar: string
+    svarType: SvarType
 }
 
 type SporsmalShortName = 'ARBEIDSSITUASJON' | 'NY_NARMESTE_LEDER' | 'FRAVAER' | 'PERIODE' | 'FORSIKRING';
 
 interface SporsmalOgSvar {
-    tekst?: string;
-    svar?: Svar;
-    shortName?: SporsmalShortName;
+    tekst?: string
+    svar?: Svar
+    shortName?: SporsmalShortName
 }
 
 class SykmeldingStatus {
-    timestamp: Date;
-    statusEvent: StatusEvent;
-    arbeidsgiver?: ArbeidsgiverStatus;
-    sporsmalOgSvarListe?: SporsmalOgSvar[];
+    timestamp: Date
+    statusEvent: StatusEvent
+    arbeidsgiver?: ArbeidsgiverStatus
+    sporsmalOgSvarListe?: SporsmalOgSvar[]
 
     constructor(sykmeldingStatus: any) {
         this.timestamp = new Date(sykmeldingStatus.timestamp)
@@ -145,9 +145,9 @@ export enum DiagnosekodeSystem {
     '2.16.578.1.12.4.1.1.7170' = 'ICPC-2',
 }
 export class Diagnose {
-    kode: string;
-    system: DiagnosekodeSystem;
-    tekst: string;
+    kode: string
+    system: DiagnosekodeSystem
+    tekst: string
 
     constructor(diagnose: any) {
         this.kode = diagnose.kode
@@ -170,8 +170,8 @@ export enum AnnenFraverGrunn {
 }
 
 export class AnnenFraversArsak {
-    beskrivelse?: string;
-    grunn?: AnnenFraverGrunn[];
+    beskrivelse?: string
+    grunn?: AnnenFraverGrunn[]
 
     constructor(annenFraversArsak: any) {
         this.beskrivelse = annenFraversArsak.beskrivelse
@@ -182,12 +182,12 @@ export class AnnenFraversArsak {
 }
 
 export class MedisinskVurdering {
-    hovedDiagnose?: Diagnose;
-    biDiagnoser: Diagnose[];
-    svangerskap?: boolean;
-    yrkesskade?: boolean;
-    yrkesskadeDato?: Date;
-    annenFraversArsak?: AnnenFraversArsak;
+    hovedDiagnose?: Diagnose
+    biDiagnoser: Diagnose[]
+    svangerskap?: boolean
+    yrkesskade?: boolean
+    yrkesskadeDato?: Date
+    annenFraversArsak?: AnnenFraversArsak
 
     constructor(medisinskVurdering: any) {
         this.hovedDiagnose = new Diagnose(medisinskVurdering.hovedDiagnose)
@@ -202,10 +202,10 @@ export class MedisinskVurdering {
 // ------ PROGNOSE
 
 class ErIArbeid {
-    egetArbeidPaSikt: boolean;
-    annetArbeidPaSikt: boolean;
-    arbeidFOM?: Date;
-    vurderingsdato?: Date;
+    egetArbeidPaSikt: boolean
+    annetArbeidPaSikt: boolean
+    arbeidFOM?: Date
+    vurderingsdato?: Date
 
     constructor(erIArbeid: any) {
         this.egetArbeidPaSikt = erIArbeid.egetArbeidPaSikt
@@ -216,9 +216,9 @@ class ErIArbeid {
 }
 
 class ErIkkeIArbeid {
-    arbeidsforPaSikt: boolean;
-    arbeidsforFOM?: Date;
-    vurderingsdato?: Date;
+    arbeidsforPaSikt: boolean
+    arbeidsforFOM?: Date
+    vurderingsdato?: Date
 
     constructor(erIkkeIArbeid: any) {
         this.arbeidsforPaSikt = erIkkeIArbeid.arbeidsforPaSikt
@@ -228,10 +228,10 @@ class ErIkkeIArbeid {
 }
 
 export class Prognose {
-    arbeidsforEtterPeriode: boolean;
-    hensynArbeidsplassen?: string;
-    erIArbeid?: ErIArbeid;
-    erIkkeIArbeid?: ErIkkeIArbeid;
+    arbeidsforEtterPeriode: boolean
+    hensynArbeidsplassen?: string
+    erIArbeid?: ErIArbeid
+    erIkkeIArbeid?: ErIkkeIArbeid
 
     constructor(prognose: any) {
         this.arbeidsforEtterPeriode = prognose.arbeidsforEtterPeriode
@@ -246,23 +246,23 @@ export class Prognose {
 type Restriksjoner = 'SKJERMET_FOR_ARBEIDSGIVER' | 'SKJERMET_FOR_NAV';
 
 export interface UtdypendeOpplysning {
-    sporsmal: string;
-    svar: string;
-    restriksjoner: Restriksjoner[];
+    sporsmal: string
+    svar: string
+    restriksjoner: Restriksjoner[]
 }
 
 // ------ MELDING_TIL_NAV
 
 interface MeldingTilNAV {
-    bistandUmiddelbart: boolean;
-    beskrivBistand?: string;
+    bistandUmiddelbart: boolean
+    beskrivBistand?: string
 }
 
 // ------ KONTAKT_MED_PASIENT
 
 export class KontaktMedPasient {
-    kontaktDato?: Date;
-    begrunnelseIkkeKontakt?: string;
+    kontaktDato?: Date
+    begrunnelseIkkeKontakt?: string
 
     constructor(kontaktMedPasient: any) {
         this.kontaktDato = kontaktMedPasient.kontaktDato ? new Date(kontaktMedPasient.kontaktDato) : undefined
@@ -273,50 +273,50 @@ export class KontaktMedPasient {
 // ------- BEHANDLER
 
 interface Adresse {
-    gate?: string;
-    postnummer?: number;
-    kommune?: string;
-    postboks?: string;
-    land?: string;
+    gate?: string
+    postnummer?: number
+    kommune?: string
+    postboks?: string
+    land?: string
 }
 
 export interface Behandler {
-    fornavn: string;
-    mellomnavn: string;
-    etternavn: string;
-    aktoerId: string;
-    fnr: string;
-    hpr?: string;
-    her?: string;
-    adresse: Adresse;
-    tlf?: string;
+    fornavn: string
+    mellomnavn: string
+    etternavn: string
+    aktoerId: string
+    fnr: string
+    hpr?: string
+    her?: string
+    adresse: Adresse
+    tlf?: string
 }
 
 export class Sykmelding {
-    id: string;
-    mottattTidspunkt: Date;
-    behandlingsutfall: Behandlingsutfall;
-    legekontorOrgnummer?: string;
-    arbeidsgiver?: Arbeidsgiver;
-    sykmeldingsperioder: Periode[];
-    sykmeldingStatus: SykmeldingStatus;
-    medisinskVurdering?: MedisinskVurdering;
-    skjermesForPasient: boolean;
-    prognose?: Prognose;
-    utdypendeOpplysninger: Map<string, Map<string, UtdypendeOpplysning>>;
-    tiltakArbeidsplassen?: string;
-    tiltakNAV?: string;
-    andreTiltak?: string;
-    meldingTilNAV?: MeldingTilNAV;
-    meldingTilArbeidsgiver?: string;
-    kontaktMedPasient: KontaktMedPasient;
-    behandletTidspunkt: Date;
-    behandler: Behandler;
-    syketilfelleStartDato: Date;
-    navnFastlege: string;
-    egenmeldt: boolean;
-    papirsykmelding: boolean;
-    harRedusertArbeidsgiverperiode: boolean;
+    id: string
+    mottattTidspunkt: Date
+    behandlingsutfall: Behandlingsutfall
+    legekontorOrgnummer?: string
+    arbeidsgiver?: Arbeidsgiver
+    sykmeldingsperioder: Periode[]
+    sykmeldingStatus: SykmeldingStatus
+    medisinskVurdering?: MedisinskVurdering
+    skjermesForPasient: boolean
+    prognose?: Prognose
+    utdypendeOpplysninger: Map<string, Map<string, UtdypendeOpplysning>>
+    tiltakArbeidsplassen?: string
+    tiltakNAV?: string
+    andreTiltak?: string
+    meldingTilNAV?: MeldingTilNAV
+    meldingTilArbeidsgiver?: string
+    kontaktMedPasient: KontaktMedPasient
+    behandletTidspunkt: Date
+    behandler: Behandler
+    syketilfelleStartDato: Date
+    navnFastlege: string
+    egenmeldt: boolean
+    papirsykmelding: boolean
+    harRedusertArbeidsgiverperiode: boolean
 
     private setUtdypendeOpplysninger(utdypendeOpplysninger: any) {
         Object.keys(utdypendeOpplysninger).forEach((outerKey) => {

@@ -1,7 +1,6 @@
 import './utvidbar.less'
 
-import { Accordion } from '@navikt/ds-react'
-import { Normaltekst, Undertittel } from 'nav-frontend-typografi'
+import { Accordion, BodyShort, Heading } from '@navikt/ds-react'
 import React, { useEffect, useRef, useState } from 'react'
 
 import { useAmplitudeInstance } from '../amplitude/amplitude'
@@ -29,7 +28,7 @@ const Utvidbar = (props: UtvidbarProps) => {
         setErApen(props.erApen)
     }, [ props ])
 
-    const onKlikk = (e: any) => {
+    const onKlikk = () => {
         if (props.amplitudeProps) {
             logEvent(erApen ? 'panel lukket' : 'panel åpnet', props.amplitudeProps)
         }
@@ -58,16 +57,16 @@ const Utvidbar = (props: UtvidbarProps) => {
                     />
 
                     <Vis hvis={props.type === undefined}
-                        render={() => <Undertittel tag="h2">{props.tittel}</Undertittel>}
+                        render={() => <Heading size="small" level="2">{props.tittel}</Heading>}
                     />
 
                     <Vis hvis={props.type === 'intern'}
-                        render={() => <Normaltekst tag="h2">{props.tittel}</Normaltekst>}
+                        render={() => <BodyShort as="h2">{props.tittel}</BodyShort>}
                     />
 
-                    <Normaltekst tag="em" className="utvidbar__handling">
+                    <BodyShort as="em" className="utvidbar__handling">
                         {erApen ? 'Lukk' : 'Åpne'}
-                    </Normaltekst>
+                    </BodyShort>
                 </Accordion.Header>
 
                 <Accordion.Content>
@@ -79,7 +78,7 @@ const Utvidbar = (props: UtvidbarProps) => {
                                 setErApen(!erApen)
                             }}
                         >
-                            <Normaltekst tag="span">Lukk</Normaltekst>
+                            <BodyShort as="span">Lukk</BodyShort>
                         </button>
                     </div>
                 </Accordion.Content>

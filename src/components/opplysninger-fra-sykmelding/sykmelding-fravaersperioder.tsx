@@ -1,4 +1,4 @@
-import { Normaltekst, UndertekstBold } from 'nav-frontend-typografi'
+import { BodyShort, Detail } from '@navikt/ds-react'
 import React from 'react'
 
 import { useAppStore } from '../../data/stores/app-store'
@@ -21,17 +21,15 @@ const FravaersperioderInfo = () => {
         <Vis hvis={(arbeidssituasjon === RSArbeidssituasjon.FRILANSER || arbeidssituasjon === RSArbeidssituasjon.NAERINGSDRIVENDE) && harSpmOmPerioderFørSykmelding(valgtSykmelding)}
             render={() =>
                 <div className="avsnitt">
-                    <UndertekstBold tag="h3" className="avsnitt-hode">
+                    <Detail as="h3" className="avsnitt-hode">
                         {tekst('sykepengesoknad.sykmelding-utdrag.egenmelding-papir')}
-                    </UndertekstBold>
+                    </Detail>
 
                     <Vis hvis={perioder.length > 0}
                         render={() =>
                             <ul className="nokkelopplysning__liste">
                                 {perioder.map((p, idx) =>
-                                    <li key={idx}>
-                                        <Normaltekst>{tilLesbarPeriodeMedArstall(p.fom, p.tom)}</Normaltekst>
-                                    </li>
+                                    <BodyShort as="li" key={idx}>{tilLesbarPeriodeMedArstall(p.fom, p.tom)}</BodyShort>
                                 )}
                             </ul>
                         }
@@ -39,7 +37,7 @@ const FravaersperioderInfo = () => {
 
                     <Vis hvis={perioder.length === 0}
                         render={() =>
-                            <Normaltekst>{tekst('sykepengesoknad.sykmelding-utdrag.egenmelding-papir-nei')}</Normaltekst>
+                            <BodyShort>{tekst('sykepengesoknad.sykmelding-utdrag.egenmelding-papir-nei')}</BodyShort>
                         }
                     />
                 </div>

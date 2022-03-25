@@ -1,5 +1,5 @@
+import { BodyShort, Label } from '@navikt/ds-react'
 import dayjs from 'dayjs'
-import { Normaltekst, UndertekstBold } from 'nav-frontend-typografi'
 import React from 'react'
 
 import { useAppStore } from '../../data/stores/app-store'
@@ -14,7 +14,6 @@ import Vis from '../vis'
 
 const SykmeldingPerioder = () => {
     const { valgtSoknad, valgtSykmelding } = useAppStore()
-
     const sortertePerioder = valgtSykmelding?.sykmeldingsperioder.sort(sorterEtterEldsteTom) || []
 
     const hentPeriodeTekst = (periode: Periode) => {
@@ -44,25 +43,25 @@ const SykmeldingPerioder = () => {
 
                 return (
                     <div className="avsnitt" key={index}>
-                        <UndertekstBold tag="h3" className="avsnitt-hode">
+                        <Label size="small" as="h3" className="avsnitt-hode">
                             {tekst('din-sykmelding.periode.tittel')}
-                        </UndertekstBold>
+                        </Label>
 
-                        <Normaltekst>
+                        <BodyShort>
                             <strong>{fom} - {tom}</strong> &bull; {dager} dager
-                        </Normaltekst>
+                        </BodyShort>
 
-                        <Normaltekst>
+                        <BodyShort>
                             {hentPeriodeTekst(periode)}
-                        </Normaltekst>
+                        </BodyShort>
 
                         <Vis hvis={periode.gradert?.reisetilskudd}
                             render={() =>
                                 <>
                                     <img style={{ width: 16, height: 16 }} src={CheckBoxImg} alt="Avkrysset" />
-                                    <Normaltekst tag={'span'}>
+                                    <BodyShort as="span">
                                         {' Kan være i delvis arbeid ved bruk av reisetilskudd'}
-                                    </Normaltekst>
+                                    </BodyShort>
                                 </>
                             }
                         />

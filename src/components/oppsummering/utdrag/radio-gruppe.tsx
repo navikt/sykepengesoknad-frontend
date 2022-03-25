@@ -1,4 +1,4 @@
-import { Element } from 'nav-frontend-typografi'
+import { Label } from '@navikt/ds-react'
 import React from 'react'
 
 import { SvarEnums } from '../../../types/enums'
@@ -17,7 +17,7 @@ const RadioGruppe = ({ sporsmal }: OppsummeringProps) => {
         <Vis hvis={besvartUndersporsmal}
             render={() =>
                 <div className="oppsummering__sporsmal">
-                    <Element tag="h3" className="oppsummering__overskrift">{sporsmal.sporsmalstekst}</Element>
+                    <Label as="h3" className="oppsummering__overskrift">{sporsmal.sporsmalstekst}</Label>
                     {sporsmal.svartype === RSSvartype.RADIO_GRUPPE &&
                     <Avkrysset tekst={besvartUndersporsmal.sporsmalstekst} />}
                     <UndersporsmalSum sporsmalsliste={besvartUndersporsmal.undersporsmal} />

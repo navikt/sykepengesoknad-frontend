@@ -1,7 +1,6 @@
 import { Next } from '@navikt/ds-icons'
-import { Button, Heading, Modal } from '@navikt/ds-react'
+import { BodyLong, Button, Detail, Heading, Label, Modal } from '@navikt/ds-react'
 import dayjs from 'dayjs'
-import { Element, Normaltekst, Undertekst, Undertittel } from 'nav-frontend-typografi'
 import React, { useState } from 'react'
 
 import { RSSoknadstype } from '../../../types/rs-types/rs-soknadstype'
@@ -33,14 +32,14 @@ const FremtidigeSoknaderTeaser = ({ soknad }: SykepengesoknadTeaserProps) => {
                         <div id={`soknader-header-${soknad.id}`} className="inngangspanel__innhold">
                             <Vis hvis={soknad.soknadstype !== RSSoknadstype.OPPHOLD_UTLAND}
                                 render={() =>
-                                    <Undertekst className="inngangspanel__periode">
+                                    <Detail className="inngangspanel__periode">
                                         {tilLesbarPeriodeMedArstall(soknad.fom, soknad.tom)}
-                                    </Undertekst>
+                                    </Detail>
                                 }
                             />
-                            <Undertittel tag="h3" className="inngangspanel__tittel">
+                            <Heading size="small" level="3" className="inngangspanel__tittel">
                                 {teaserTittel(soknad)}
-                            </Undertittel>
+                            </Heading>
                             {periodeListevisning(soknad)}
                         </div>
                     </div>
@@ -57,23 +56,23 @@ const FremtidigeSoknaderTeaser = ({ soknad }: SykepengesoknadTeaserProps) => {
                     <Heading size="small" level="3" className="modal__tittel">
                         {tekst('soknader.teaser.fremtidig.modal.tittel')}
                     </Heading>
-                    <Normaltekst>
+                    <BodyLong spacing>
                         {getLedetekst(tekst('soknader.teaser.fremtidig.modal.tekst'), {
                             '%DATO%': tilLesbarDatoMedArstall(dayjs(soknad.tom).add(1, 'day'))
                         })}
-                    </Normaltekst>
-                    <Normaltekst>{tekst('soknader.teaser.fremtidig.modal.tekst2')}</Normaltekst>
+                    </BodyLong>
+                    <BodyLong spacing>{tekst('soknader.teaser.fremtidig.modal.tekst2')}</BodyLong>
+
                     <Utvidbar erApen={false} type="intern" tittel={
-                        <Element>{tekst('soknader.teaser.fremtidig.modal.utvidbar.tittel')}</Element>
+                        <Label>{tekst('soknader.teaser.fremtidig.modal.utvidbar.tittel')}</Label>
                     }>
-                        <Normaltekst>{tekst('soknader.teaser.fremtidig.modal.utvidbar.tekst')}</Normaltekst>
+                        <BodyLong spacing>{tekst('soknader.teaser.fremtidig.modal.utvidbar.tekst')}</BodyLong>
                     </Utvidbar>
                     <Button variant="primary" onClick={() => setAapen(false)}>
                         Lukk
                     </Button>
                 </Modal.Content>
             </Modal>
-
         </article>
     )
 }

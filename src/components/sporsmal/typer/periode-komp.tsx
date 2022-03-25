@@ -1,7 +1,7 @@
 import './periode-komp.less'
 
+import { BodyShort } from '@navikt/ds-react'
 import { Datepicker } from 'nav-datovelger'
-import { Normaltekst } from 'nav-frontend-typografi'
 import React, { useEffect, useState } from 'react'
 import { Controller, useFormContext } from 'react-hook-form'
 
@@ -15,16 +15,16 @@ import { SpmProps } from '../sporsmal-form/sporsmal-form'
 import { hentFeilmelding } from '../sporsmal-utils'
 
 interface PeriodeProps {
-    index: number;
-    slettPeriode: (e: any, idx: number) => void;
+    index: number
+    slettPeriode: (e: any, idx: number) => void
 }
 
 export interface FormPeriode {
-    fom: string;
-    tom: string;
+    fom: string
+    tom: string
 }
 
-type AllProps = SpmProps & PeriodeProps;
+type AllProps = SpmProps & PeriodeProps
 
 const PeriodeKomp = ({ sporsmal, index, slettPeriode }: AllProps) => {
     const { setValue, getValues, formState: { errors } } = useFormContext()
@@ -90,10 +90,10 @@ const PeriodeKomp = ({ sporsmal, index, slettPeriode }: AllProps) => {
                         <fieldset className="skjemagruppe">
                             <div className="fom skjemaelement">
                                 <label className="skjemaelement__label" htmlFor={sporsmal.id + '_' + index + '_fom'}>
-                                    <Normaltekst tag="span">{tekst('sykepengesoknad.periodevelger.fom')}</Normaltekst>
+                                    <BodyShort as="span">{tekst('sykepengesoknad.periodevelger.fom')}</BodyShort>
                                 </label>
                                 <Datepicker
-                                    locale={'nb'}
+                                    locale="nb"
                                     inputId={sporsmal.id + '_' + index + '_fom'}
                                     onChange={(value) => onChange(value, undefined)}
                                     value={periode.fom}
@@ -117,10 +117,10 @@ const PeriodeKomp = ({ sporsmal, index, slettPeriode }: AllProps) => {
                             </div>
                             <div className="tom skjemaelement">
                                 <label className="skjemaelement__label" htmlFor={sporsmal.id + '_' + index + '_tom'}>
-                                    <Normaltekst tag="span">{tekst('sykepengesoknad.periodevelger.tom')}</Normaltekst>
+                                    <BodyShort as="span">{tekst('sykepengesoknad.periodevelger.tom')}</BodyShort>
                                 </label>
                                 <Datepicker
-                                    locale={'nb'}
+                                    locale="nb"
                                     inputId={sporsmal.id + '_' + index + '_tom'}
                                     onChange={(value) => onChange(undefined, value)}
                                     value={periode.tom}
@@ -159,9 +159,9 @@ const PeriodeKomp = ({ sporsmal, index, slettPeriode }: AllProps) => {
             <div role="alert" aria-live="assertive">
                 <Vis hvis={errors[id]}
                     render={() =>
-                        <Normaltekst tag="span" className="skjemaelement__feilmelding">
+                        <BodyShort as="span" className="skjemaelement__feilmelding">
                             {feilmelding.lokal}
-                        </Normaltekst>
+                        </BodyShort>
                     }
                 />
             </div>

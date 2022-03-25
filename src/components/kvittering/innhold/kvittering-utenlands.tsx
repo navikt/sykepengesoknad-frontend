@@ -1,5 +1,4 @@
-import { Alert, Link } from '@navikt/ds-react'
-import { Element, Normaltekst, Undertittel } from 'nav-frontend-typografi'
+import { Alert, BodyLong, BodyShort, Heading, Label, Link } from '@navikt/ds-react'
 import React from 'react'
 
 import { useAppStore } from '../../../data/stores/app-store'
@@ -15,27 +14,27 @@ const KvitteringUtenlands = () => {
 
     return (
         <Alert variant="info" className="opplysninger">
-            <Undertittel tag="h3">{tekst('kvittering.hva-skjer-videre')}</Undertittel>
+            <Heading size="small" level="3">{tekst('kvittering.hva-skjer-videre')}</Heading>
             <div className="avsnitt">
-                <Element tag="h2">{tekst('kvittering.utenlands.overskrift1')}</Element>
-                <Normaltekst tag="span">{tekst('kvittering.utenlands.brodtekst1')} </Normaltekst>
+                <Label as="h2">{tekst('kvittering.utenlands.overskrift1')}</Label>
+                <BodyLong spacing as="span">{tekst('kvittering.utenlands.brodtekst1')} </BodyLong>
             </div>
             <div className="avsnitt">
-                <Element tag="h2">{tekst('kvittering.utenlands.overskrift2')}</Element>
-                <Normaltekst tag="ul">
+                <Label as="h2">{tekst('kvittering.utenlands.overskrift2')}</Label>
+                <BodyLong spacing as="ul">
                     <li>{tekst('kvittering.utenlands.liste1')}</li>
                     <li>{tekst('kvittering.utenlands.liste2')}</li>
                     <li>{tekst('kvittering.utenlands.liste3')}</li>
-                </Normaltekst>
+                </BodyLong>
             </div>
             <div className="avsnitt">
                 <Link target="_blank" href={tekst('kvittering.utenlands.lenke.url')}>
-                    <Normaltekst tag="span">{tekst('kvittering.utenlands.lenke')}</Normaltekst>
+                    <BodyShort as="span">{tekst('kvittering.utenlands.lenke')}</BodyShort>
                 </Link>.
             </div>
             <div className="avsnitt">
-                <Element tag="h2">{tekst('kvittering.utenlands.overskrift3')}</Element>
-                <Normaltekst tag="span">{tekst('kvittering.utenlands.brodtekst3')} </Normaltekst>
+                <Label as="h2">{tekst('kvittering.utenlands.overskrift3')}</Label>
+                <BodyLong spacing as="span">{tekst('kvittering.utenlands.brodtekst3')} </BodyLong>
             </div>
         </Alert>
     )

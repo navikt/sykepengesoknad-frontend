@@ -2,7 +2,7 @@ import cls from 'classnames'
 import React from 'react'
 
 interface AppSpinnerProps {
-    className?: string;
+    className?: string
 }
 
 const AppSpinner = ({ className = 'app-spinner--side blokk--xl' }: AppSpinnerProps) => {

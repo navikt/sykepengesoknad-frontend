@@ -20,7 +20,7 @@ import TallKomp from './typer/tall-komp'
 import UkjentSporsmal from './typer/ukjent-sporsmal'
 
 interface UndersporsmalProps {
-    sporsmal: Sporsmal;
+    sporsmal: Sporsmal
 }
 
 const SporsmalSwitch = ({ sporsmal }: UndersporsmalProps) => {

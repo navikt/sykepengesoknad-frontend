@@ -1,6 +1,6 @@
 import './drag-and-drop.less'
 
-import { Element, Normaltekst } from 'nav-frontend-typografi'
+import { BodyShort, Label } from '@navikt/ds-react'
 import React, { useCallback, useEffect, useState } from 'react'
 import { useDropzone } from 'react-dropzone'
 import { useFormContext } from 'react-hook-form'
@@ -77,7 +77,7 @@ const DragAndDrop = () => {
     return (
         <div className="ddfil__wrap">
             <label htmlFor="ddfil" className="skjemaelement__label">
-                <Element tag="strong">{tekst('drag_and_drop.label')}</Element>
+                <Label as="strong">{tekst('drag_and_drop.label')}</Label>
             </label>
 
             <Vis hvis={valgtFil}
@@ -137,24 +137,23 @@ const DragAndDrop = () => {
                                 })}
                             />
                             <img src={binders} className="opplastingsikon" alt="Opplastingsikon" />
-                            <Normaltekst tag="span" className="tekst">
+                            <BodyShort as="span" className="tekst">
                                 {isDragActive
                                     ? tekst('drag_and_drop.dragtekst.aktiv')
                                     : valgtFil
                                         ? tekst('drag_and_drop.dragtekst.endre')
                                         : tekst('drag_and_drop.dragtekst')
                                 }
-                            </Normaltekst>
+                            </BodyShort>
                         </div>
 
                         <div role="alert" aria-live="assertive">
-                            <Normaltekst tag="span" className="skjemaelement__feilmelding">
+                            <BodyShort as="span" className="skjemaelement__feilmelding">
                                 <Vis hvis={errors.fil_input}
                                     render={() => <>{errors.fil_input?.message}</>}
                                 />
-                            </Normaltekst>
+                            </BodyShort>
                         </div>
-
                     </>
                 }
             />

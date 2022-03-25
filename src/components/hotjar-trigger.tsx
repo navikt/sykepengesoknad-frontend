@@ -5,12 +5,12 @@ import { info } from '../utils/logger'
 import env from './../utils/environment'
 
 interface HotjarTriggerProps {
-    jsTrigger: string | null;
-    children: any;
+    jsTrigger: string | null
+    children: any
 }
 
 interface HotjarWindow extends Window {
-    hj: (name: string, value: string) => void;
+    hj: (name: string, value: string) => void
 }
 
 export const hentHotjarJsTrigger = (soknadstype: RSSoknadstype, sted: 'kvittering' | 'soknad'): string | null => {

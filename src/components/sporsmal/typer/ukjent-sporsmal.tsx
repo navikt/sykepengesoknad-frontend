@@ -1,16 +1,16 @@
-import { Element } from 'nav-frontend-typografi'
+import { Label } from '@navikt/ds-react'
 import React from 'react'
 
 import { Sporsmal } from '../../../types/types'
 
 interface UkjentSporsmalProps {
-    sporsmal: Sporsmal;
+    sporsmal: Sporsmal
 }
 
 const UkjentSporsmal = ({ sporsmal }: UkjentSporsmalProps) => {
     return (
         <>
-            <Element tag="h3" className="skjema__sporsmal">Ukjent svartype: <code>{sporsmal.svartype}</code></Element>
+            <Label as="h3" className="skjema__sporsmal">Ukjent svartype: <code>{sporsmal.svartype}</code></Label>
             <pre>{JSON.stringify(sporsmal, null, 2)}</pre>
         </>
     )

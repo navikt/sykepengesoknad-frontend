@@ -1,4 +1,4 @@
-import { Element, Normaltekst } from 'nav-frontend-typografi'
+import { BodyShort, Label } from '@navikt/ds-react'
 import React from 'react'
 
 import { RSSvartype } from '../../../types/rs-types/rs-svartype'
@@ -11,15 +11,15 @@ const TallSum = ({ sporsmal }: OppsummeringProps) => {
     const label = sporsmal.undertekst || tekst(labelnokkel as any)
     return (
         <div className="oppsummering__sporsmal">
-            <Element tag="h3">{sporsmal.sporsmalstekst}</Element>
+            <Label as="h3">{sporsmal.sporsmalstekst}</Label>
             <div className="oppsummering__svar">
                 {sporsmal.svarliste.svar.map((svarverdi, index) => {
                     return (
                         <Vis hvis={svarverdi.verdi} key={index}
                             render={() =>
-                                <Normaltekst className="oppsummering__tekst">
+                                <BodyShort className="oppsummering__tekst">
                                     {svarverdi.verdi} {label}
-                                </Normaltekst>
+                                </BodyShort>
                             }
                         />
                     )

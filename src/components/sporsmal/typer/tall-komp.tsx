@@ -1,7 +1,6 @@
 import './tall-komp.less'
 
-import { Alert } from '@navikt/ds-react'
-import { Normaltekst } from 'nav-frontend-typografi'
+import { Alert, BodyShort } from '@navikt/ds-react'
 import React, { useRef } from 'react'
 import { useFormContext } from 'react-hook-form'
 
@@ -100,19 +99,19 @@ const TallKomp = ({ sporsmal }: SpmProps) => {
                         <>
                             <Vis hvis={errors[sporsmal.id]?.type !== 'validate'}
                                 render={() =>
-                                    <Normaltekst tag="span" className="skjemaelement__feilmelding">
+                                    <BodyShort as="span" className="skjemaelement__feilmelding">
                                         {feilmelding.lokal}
-                                    </Normaltekst>
+                                    </BodyShort>
                                 }
                             />
                             <Vis hvis={errors[sporsmal.id]?.type === 'validate' && sporsmal.tag === TagTyper.HVOR_MYE_TIMER_VERDI}
                                 render={() =>
-                                    <Normaltekst tag="span" className="skjemaelement__feilmelding">
+                                    <BodyShort as="span" className="skjemaelement__feilmelding">
                                         {getLedetekst(
                                             tekst('soknad.feilmelding.MINDRE_TIMER_ENN_FORVENTET.lokal'),
                                             { '%GRAD%':  100 - periode!.grad }
                                         )}
-                                    </Normaltekst>
+                                    </BodyShort>
                                 }
                             />
                         </>
@@ -122,8 +121,8 @@ const TallKomp = ({ sporsmal }: SpmProps) => {
 
             <Vis hvis={sporsmal.tag === TagTyper.HVOR_MANGE_TIMER_PER_UKE && watchTall && watchTall < 10}
                 render={() =>
-                    <Alert variant="warning" style={{ marginTop: '1rem' }}>
-                        <Normaltekst>{tekst('sykepengesoknad.jobb-underveis-under-10-timer-uke')}</Normaltekst>
+                    <Alert variant="warning">
+                        <BodyShort spacing>{tekst('sykepengesoknad.jobb-underveis-under-10-timer-uke')}</BodyShort>
                     </Alert>
                 }
             />

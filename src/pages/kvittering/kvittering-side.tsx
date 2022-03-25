@@ -1,7 +1,7 @@
 import './kvittering.less'
 
 import { Back } from '@navikt/ds-icons'
-import { Normaltekst } from 'nav-frontend-typografi'
+import { BodyShort } from '@navikt/ds-react'
 import React, { useEffect, useState } from 'react'
 import { Link, useParams } from 'react-router-dom'
 
@@ -48,13 +48,13 @@ const KvitteringSide = () => {
             soknadstatus: filtrertSoknad?.status,
         })
         // eslint-disable-next-line
-    }, [id]);
+    }, [id])
 
     useEffect(() => {
         setBodyClass('kvittering')
         setErSiste(valgtSoknad?.status === RSSoknadstatus.SENDT)
         // eslint-disable-next-line
-    }, []);
+    }, [])
 
     if (!valgtSoknad) return null
 
@@ -71,10 +71,10 @@ const KvitteringSide = () => {
                 <Vis hvis={erSiste}
                     render={() =>
                         <Link to="/" className="gaa-videre">
-                            <Normaltekst tag="span">
+                            <BodyShort as="span">
                                 <Back className="chevron--venstre" />
                                 {tekst('sykepengesoknad.navigasjon.gaa-til')}
-                            </Normaltekst>
+                            </BodyShort>
                         </Link>
                     }
                 />

@@ -1,6 +1,5 @@
-import { Link } from '@navikt/ds-react'
+import { BodyLong, Label, Link } from '@navikt/ds-react'
 import parser from 'html-react-parser'
-import { Element, Normaltekst } from 'nav-frontend-typografi'
 import React from 'react'
 
 import { tekst } from '../../../../utils/tekster'
@@ -11,23 +10,23 @@ const PerioderMedOpphold = () => {
 
     return (
         <div className="avsnitt">
-            <Element tag="h2" className="arbeidstaker-tittel">{tekst('kvittering.naeringsdrivende.tittel')}</Element>
-            <Normaltekst tag="span">{tekst('kvittering.arbeidstaker.med-opphold')} </Normaltekst>
+            <Label as="h2" className="arbeidstaker-tittel">{tekst('kvittering.naeringsdrivende.tittel')}</Label>
+            <BodyLong spacing as="span">{tekst('kvittering.arbeidstaker.med-opphold')} </BodyLong>
             <Utvidbar erApen={false} type="intern"
                 tittel={tekst('kvittering.arbeidstaker.hvorfor-inntektsmelding-pa-nytt')}
             >
-                <Normaltekst>{tekst('kvittering.arbeidstaker.hvorfor-inntektsmelding-pa-nytt.tekst')}</Normaltekst>
+                <BodyLong spacing>{tekst('kvittering.arbeidstaker.hvorfor-inntektsmelding-pa-nytt.tekst')}</BodyLong>
             </Utvidbar>
             <div className="avsnitt hva-skjer">
-                <Element tag="h2" className="arbeidstaker-tittel">{tekst('kvittering.nav-behandler-soknaden')}</Element>
-                <Normaltekst tag="span">{tekst('kvittering.arbeidstaker.saksbehandlingstid')} </Normaltekst>
+                <Label as="h2" className="arbeidstaker-tittel">{tekst('kvittering.nav-behandler-soknaden')}</Label>
+                <BodyLong spacing as="span">{tekst('kvittering.arbeidstaker.saksbehandlingstid')} </BodyLong>
                 <Link target="_blank" href={tekst('kvittering.arbeidstaker.saksbehandlingstid.lenke.url')}>
-                    <Normaltekst tag="span">{tekst('kvittering.arbeidstaker.saksbehandlingstid.lenke')}</Normaltekst>
+                    <BodyLong spacing as="span">{tekst('kvittering.arbeidstaker.saksbehandlingstid.lenke')}</BodyLong>
                 </Link>.
             </div>
             <div className="avsnitt">
-                <Element tag="h2" className="arbeidstaker-tittel">{tekst('kvittering.naar-blir-pengene')}</Element>
-                <Normaltekst tag="span">{parser(tekst('kvittering.arbeidstaker.over16.utbetaling'))} </Normaltekst>
+                <Label as="h2" className="arbeidstaker-tittel">{tekst('kvittering.naar-blir-pengene')}</Label>
+                <BodyLong spacing as="span">{parser(tekst('kvittering.arbeidstaker.over16.utbetaling'))} </BodyLong>
             </div>
             <div className="avsnitt">
                 <Kontonummer />

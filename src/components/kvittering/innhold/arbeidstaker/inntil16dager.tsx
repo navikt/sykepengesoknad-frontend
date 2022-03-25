@@ -1,4 +1,4 @@
-import { Element, Normaltekst } from 'nav-frontend-typografi'
+import { BodyLong, Label } from '@navikt/ds-react'
 import React from 'react'
 
 import { tekst } from '../../../../utils/tekster'
@@ -7,8 +7,8 @@ const Inntil16dager = () => {
 
     return (
         <div className="avsnitt">
-            <Element tag="h4" className="arbeidstaker-tittel">{tekst('kvittering.arbeidstaker.tittel')}</Element>
-            <Normaltekst tag="span">{tekst('kvittering.arbeidstaker.brodtekst')} </Normaltekst>
+            <Label as="h4" className="arbeidstaker-tittel">{tekst('kvittering.arbeidstaker.tittel')}</Label>
+            <BodyLong spacing as="span">{tekst('kvittering.arbeidstaker.brodtekst')} </BodyLong>
         </div>
     )
 }

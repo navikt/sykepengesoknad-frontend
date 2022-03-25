@@ -24,11 +24,11 @@ import TallSum from './utdrag/tall-sum'
 import UndertekstSum from './utdrag/undertekst-sum'
 
 export interface OppsummeringProps {
-    sporsmal: Sporsmal;
+    sporsmal: Sporsmal
 }
 
 interface EkspanderProps {
-    ekspandert: boolean;
+    ekspandert: boolean
 }
 
 const Oppsummering = ({ ekspandert }: EkspanderProps) => {

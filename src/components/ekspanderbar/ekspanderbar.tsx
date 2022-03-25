@@ -1,7 +1,6 @@
 import './ekspanderbar.less'
 
-import { Accordion } from '@navikt/ds-react'
-import { Element, Normaltekst } from 'nav-frontend-typografi'
+import { Accordion, BodyShort, Label } from '@navikt/ds-react'
 import React, { useEffect, useState } from 'react'
 
 import { useAmplitudeInstance } from '../amplitude/amplitude'
@@ -25,17 +24,17 @@ export const Ekspanderbar = ({ title, children, amplitudeProps, sporsmalId }: Ek
             <Accordion.Item className="ekspanderbar" renderContentWhenClosed={true}>
                 <Accordion.Header
                     type="button"
-                    onClick={(e) => {
+                    onClick={() => {
                         if (!expanded && amplitudeProps) {
                             logEvent('panel åpnet', amplitudeProps)
                         }
                         setExpanded((prev) => !prev)
                     }}
                 >
-                    <Element>{title}</Element>
+                    <Label>{title}</Label>
                 </Accordion.Header>
                 <Accordion.Content>
-                    {typeof children === 'string' ? <Normaltekst>{children}</Normaltekst> : children}
+                    {typeof children === 'string' ? <BodyShort>{children}</BodyShort> : children}
                 </Accordion.Content>
             </Accordion.Item>
         </Accordion>

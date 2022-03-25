@@ -1,4 +1,4 @@
-import { Element } from 'nav-frontend-typografi'
+import { Label } from '@navikt/ds-react'
 import React from 'react'
 import { Controller, useFormContext } from 'react-hook-form'
 
@@ -17,7 +17,7 @@ const Land = ({ sporsmal }: SpmProps) => {
                 : 'skjemaelement'
             }>
 
-                <Element tag="h3" className="skjema__sporsmal">{sporsmal.sporsmalstekst}</Element>
+                <Label as="h3" className="skjema__sporsmal">{sporsmal.sporsmalstekst}</Label>
 
                 <Controller
                     name={sporsmal.id}
