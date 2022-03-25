@@ -92,6 +92,7 @@ const Fordeling = () => {
     const { stegId } = useParams<RouteParams>()
     const stegNo = parseInt(stegId)
     const history = useHistory()
+    const { logEvent } = useAmplitudeInstance()
 
     if (!valgtSoknad) {
         return null
@@ -133,7 +134,15 @@ const Fordeling = () => {
                     <Vis hvis={stegNo > 1}
                         render={() =>
                             <Link to={'/soknader/' + valgtSoknad.id + SEPARATOR + (stegNo - 1)}
-                                className="navds-link tilbakelenke">
+                                className="navds-link tilbakelenke"
+                                onClick={() => { logEvent('navigere', {
+                                    lenketekst: tekst('soknad.tilbakeknapp'),
+                                    fra: valgtSoknad!.sporsmal[stegNo].tag,
+                                    til: valgtSoknad!.sporsmal[stegNo - 1].tag,
+                                    'soknadstype': valgtSoknad?.soknadstype,
+                                    'stegId': stegId
+                                })}}
+                            >
                                 <Back className="chevron--venstre" />
                                 <BodyShort as="span">{tekst('soknad.tilbakeknapp')}</BodyShort>
                             </Link>
