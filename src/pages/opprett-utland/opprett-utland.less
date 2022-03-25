@@ -1,19 +1,17 @@
 @import '../../../node_modules/nav-frontend-core/less/_variabler';
-@import '../../../node_modules/nav-frontend-skjema-style/src/index';
-@import '../../basic.less';
 
 #opprett_utland_main {
     background-color: @navLysGra;
 }
 
 .opprett-utland {
-    font-family: @font-family;
+    font-family: 'Source Sans Pro', Arial, sans-serif;
 
     .mixin-panel-padding() {
         padding-left: 1rem;
         padding-right: 1rem;
 
-        @media (min-width: @skjermMini) {
+        @media (min-width: @screen-sm) {
             padding-left: 2rem;
             padding-right: 2rem;
         }
@@ -57,10 +55,9 @@
     .sidebanner__tittel {
         margin: 0;
         text-align: center;
-        .typo-sidetittel-mixin();
     }
 
-    @media (min-width: @skjermMedium) {
+    @media (min-width: @screen-sm) {
         .sidebanner__innhold .brodsmuler {
             margin-bottom: 2rem; // default
         }
@@ -79,12 +76,10 @@
         text-align: center;
         margin-top: 0;
         margin-bottom: 2rem;
-        .typo-sidetittel-mixin();
     }
 
     .redaksjonelt-innhold {
         h2, h3, h4 {
-            .typo-element-mixin();
             margin-top: 20px;
             margin-bottom: 0;
         }
@@ -110,11 +105,10 @@
     }
 
     .panel__tittel {
-        .typo-undertittel-mixin();
         margin-top: 0;
     }
 
-    @media (min-width: @skjermMini) {
+    @media (min-width: @screen-sm) {
         .panel {
             padding: 2rem;
         }
