@@ -1,4 +1,3 @@
-import 'nav-frontend-stegindikator-style'
 import './sporsmal-steg.less'
 
 import { BodyShort } from '@navikt/ds-react'
