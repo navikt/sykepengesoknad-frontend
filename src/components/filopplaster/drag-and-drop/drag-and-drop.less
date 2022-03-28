@@ -1,6 +1,6 @@
-@import 'node_modules/nav-frontend-core/less/_variabler';
+@import '../../../../node_modules/@navikt/ds-tokens/dist/tokens';
 
-@navDypBlaLighten90: mix(@navDypBla, #fff, 10%);
+@navDypBlaLighten90: mix(@navds-global-color-deepblue-500, #fff, 10%);
 
 label[for=ddfil] {
     display: inline-block;
@@ -12,20 +12,20 @@ label[for=ddfil] {
     align-items: center;
     padding: 1.5rem 0;
     font-weight: bold;
-    border: 2px dashed @navBla;
+    border: 2px dashed @navds-semantic-color-interaction-primary;
     border-radius: 4px;
     background-color: #f1f6f8;
-    color: @navBla;
+    color: @navds-semantic-color-interaction-primary;
     margin: 0 auto;
     cursor: pointer;
 
     &.skjemaelement__input--harFeil {
-        border: 1px solid @redError;
+        border: 1px solid @navds-global-color-red-500;
     }
 
     &:focus {
         outline: 0;
-        box-shadow: 0 0 0 3px @fokusFarge;
+        box-shadow: 0 0 0 3px @navds-global-color-blue-800;
     }
 
     & + .skjemaelement__feilmelding {

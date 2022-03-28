@@ -1,4 +1,4 @@
-@import '../../../../node_modules/nav-frontend-core/less/_variabler';
+@import '../../../../node_modules/@navikt/ds-tokens/dist/tokens';
 
 .hjelpeboble {
     position: relative;
@@ -11,7 +11,7 @@
 .hjelpeboble__boble {
     position: relative;
     border-radius: .5rem;
-    background-color: @grayBackground;
+    background-color: @navds-semantic-color-canvas-background;
     padding: 1rem 2rem;
     margin-bottom: 1.5rem;
 
@@ -27,7 +27,7 @@
 }
 
 .hjelpeboble__boble--hvit {
-    background-color: @white;
+    background-color: @navds-global-color-white;
 }
 
 .hjelpeboble__bilde {
@@ -55,7 +55,7 @@
 .hjelpeboble__bilde:after {
     content: "";
     border: 1em solid transparent;
-    border-top-color: @grayBackground;
+    border-top-color: @navds-semantic-color-canvas-background;
     width: 0;
     height: 0;
     display: block;
@@ -66,7 +66,7 @@
 }
 
 .hjelpeboble__bilde--hvit:after {
-    border-top-color: @white;
+    border-top-color: @navds-global-color-white;
 }
 
 @media (min-width: 30em) {
@@ -94,11 +94,11 @@
         top: 25%;
         right: 1rem;
         border-top-color: transparent;
-        border-right-color: @grayBackground;
+        border-right-color: @navds-semantic-color-canvas-background;
         transform: translateX(50%);
     }
 
     .hjelpeboble__bilde--horisontal.hjelpeboble__bilde--hvit:after {
-        border-right-color: @white;
+        border-right-color: @navds-global-color-white;
     }
 }

@@ -1,4 +1,4 @@
-@import '../../../../node_modules/nav-frontend-core/less/_variabler';
+@import '../../../../node_modules/@navikt/ds-tokens/dist/tokens';
 
 .stegindikator {
     &__liste {
@@ -18,7 +18,7 @@
             height: 1px;
             content: "";
             display: block;
-            background-color: @navGra60;
+            background-color: @navds-global-color-gray-600;
             position: absolute;
             top: 1rem;
             left: 2rem;
@@ -48,20 +48,20 @@
         display: flex;
         align-items: center;
         flex-direction: column;
-        color: @navMorkGra;
+        color: @navds-global-color-gray-900;
         position: relative;
         z-index: 1;
 
         &--ferdig {
             .stegindikator__steg-num {
-                background: @navLysGra;
+                background: @navds-global-color-gray-100;
             }
         }
 
         &--aktiv {
             .stegindikator__steg-num {
-                background: @navDypBla;
-                color: @white;
+                background: @navds-global-color-deepblue-500;
+                color: @navds-global-color-white;
                 box-shadow: none;
                 transform: scale(1.2);
             }
@@ -75,12 +75,12 @@
             cursor: not-allowed;
 
             .stegindikator__steg-num {
-                color: @navGra60;
+                color: @navds-global-color-gray-600;
                 background: transparent;
             }
 
             .stegindikator__steg-label {
-                color: @navGra60;
+                color: @navds-global-color-gray-600;
             }
         }
 
@@ -95,7 +95,7 @@
 
             &:not(.stegindikator__steg-inner--disabled) {
                 .stegindikator__steg-label {
-                    color: @navBla;
+                    color: @navds-semantic-color-interaction-primary;
                     text-decoration: underline;
                 }
 
@@ -103,13 +103,13 @@
                     cursor: pointer;
 
                     .stegindikator__steg-num {
-                        background: @white;
-                        box-shadow: 0 0 0 2px @navDypBla;
-                        color: @navDypBla;
+                        background: @navds-global-color-white;
+                        box-shadow: 0 0 0 2px @navds-global-color-deepblue-500;
+                        color: @navds-global-color-deepblue-500;
                     }
 
                     .stegindikator__steg-label {
-                        color: @navBla;
+                        color: @navds-semantic-color-interaction-primary;
                         padding-bottom: 0.3rem;
                         text-decoration: none;
                     }
@@ -120,12 +120,12 @@
                 outline: none;
 
                 .stegindikator__steg-num {
-                    box-shadow: 0 0 0 3px @fokusFarge;
+                    box-shadow: 0 0 0 3px @navds-global-color-blue-800;
                 }
 
                 .stegindikator__steg-label {
                     color: white;
-                    background: @fokusFarge;
+                    background: @navds-global-color-blue-800;
                     text-decoration: none;
                 }
             }
@@ -143,7 +143,7 @@
 
                 &:hover {
                     .stegindikator__steg-label {
-                        border-bottom: 1px solid @navGra80;
+                        border-bottom: 1px solid @navds-global-color-gray-600;
                     }
                 }
             }
@@ -157,7 +157,7 @@
         justify-content: center;
         align-items: center;
         border-radius: 1rem;
-        box-shadow: 0 0 0 1px @navGra60 inset;
+        box-shadow: 0 0 0 1px @navds-global-color-gray-600 inset;
         background: white;
     }
 
@@ -205,13 +205,13 @@
         position: relative;
 
         .fremdriftsbar__fullbredde {
-            background-color: @navGra20;
+            background-color: @navds-global-color-gray-200;
             border-radius: 10px;
             height: 6px;
         }
 
         .fremdriftsbar__fremdrift {
-            background-color: @navDypBla;
+            background-color: @navds-global-color-deepblue-500;
             border-radius: 10px;
             height: 6px;
             margin-top: -6px;

@@ -1,4 +1,5 @@
-@import 'node_modules/nav-frontend-core/less/_variabler';
+@import '../../../../node_modules/@navikt/ds-tokens/dist/tokens';
+@import '../../../basic';
 
 .tabell {
     border-collapse: collapse;
@@ -9,7 +10,7 @@
     .tabell__caption {
         display: table-caption;
         caption-side: bottom;
-        color: @navGra60;
+        color: @navds-global-color-gray-600;
         font-style: italic;
         line-height: 1.25rem;
         margin-top: 0.5rem;
@@ -102,7 +103,7 @@
         &.tabell__tr--valgt {
             td,
             .tabell__td {
-                background: @navBlaLighten80;
+                background: @navds-global-color-blue-100;
             }
         }
     }
@@ -161,15 +162,15 @@
     margin-bottom: 1rem;
 
     tr {
-        border-top: 1px solid @navGra40;
+        border-top: 1px solid @navds-global-color-gray-400;
 
         &:last-child {
-            border-bottom: 1px solid @navGra40;
+            border-bottom: 1px solid @navds-global-color-gray-400;
         }
     }
 
     thead tr:last-child {
-        border-bottom: 2px solid @navGra40;
+        border-bottom: 2px solid @navds-global-color-gray-400;
     }
 
     td:not(:first-child) {
@@ -178,7 +179,7 @@
             width: 0;
             height: 30%;
             position: relative;
-            border: 1px solid @navGra40;
+            border: 1px solid @navds-global-color-gray-400;
             left: -50%;
         }
     }
