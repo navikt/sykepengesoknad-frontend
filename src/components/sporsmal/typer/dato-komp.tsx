@@ -1,5 +1,7 @@
+import '@navikt/ds-datepicker/lib/index.css'
+
+import { Datepicker } from '@navikt/ds-datepicker'
 import { Label } from '@navikt/ds-react'
-import { Datepicker } from 'nav-datovelger'
 import React from 'react'
 import { Controller, useFormContext } from 'react-hook-form'
 
@@ -22,7 +24,7 @@ const DatoInput = ({ sporsmal }: SpmProps) => {
                 name={sporsmal.id}
                 rules={{
                     validate: () => {
-                        const div: HTMLDivElement | null = document.querySelector('.nav-datovelger__input')
+                        const div: HTMLDivElement | null = document.querySelector('.ds-datepicker__input')
                         const detteFeilet = validerDato(sporsmal, getValues())
                         if (detteFeilet !== true) {
                             div?.classList.add('skjemaelement__input--harFeil')

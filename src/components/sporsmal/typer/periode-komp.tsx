@@ -1,7 +1,8 @@
+import '@navikt/ds-datepicker/lib/index.css'
 import './periode-komp.less'
 
+import { Datepicker } from '@navikt/ds-datepicker'
 import { BodyShort } from '@navikt/ds-react'
-import { Datepicker } from 'nav-datovelger'
 import React, { useEffect, useState } from 'react'
 import { Controller, useFormContext } from 'react-hook-form'
 
@@ -95,7 +96,7 @@ const PeriodeKomp = ({ sporsmal, index, slettPeriode }: AllProps) => {
                                 <Datepicker
                                     locale="nb"
                                     inputId={sporsmal.id + '_' + index + '_fom'}
-                                    onChange={(value) => onChange(value, undefined)}
+                                    onChange={(value: any) => onChange(value, undefined)}
                                     value={periode.fom}
                                     inputProps={{
                                         name: sporsmal.id + '_' + index + '_fom'
@@ -122,7 +123,7 @@ const PeriodeKomp = ({ sporsmal, index, slettPeriode }: AllProps) => {
                                 <Datepicker
                                     locale="nb"
                                     inputId={sporsmal.id + '_' + index + '_tom'}
-                                    onChange={(value) => onChange(undefined, value)}
+                                    onChange={(value: any) => onChange(undefined, value)}
                                     value={periode.tom}
                                     inputProps={{
                                         name: sporsmal.id + '_' + index + '_tom'

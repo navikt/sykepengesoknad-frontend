@@ -1,4 +1,6 @@
-@import '../../../../node_modules/nav-frontend-core/less/_variabler';
+@import '../../../../node_modules/@navikt/ds-tokens/dist/tokens';
+@import '../../../basic';
+@import './skjema/index';
 
 .skjemaelement__label {
     font-size: 1.125rem !important;
@@ -20,7 +22,7 @@
     }
 
     .skjema-feilmelding {
-        color: @redError;
+        color: @navds-global-color-red-500;
         font-style: italic;
         margin-top: 0.65rem;
     }
@@ -28,7 +30,7 @@
     .skjemaelement__feilmelding {
         display: inline-block;
         margin-top: 0.5rem;
-        color: @redError;
+        color: @navds-global-color-red-500;
         font-weight: bold;
     }
 
@@ -117,6 +119,11 @@
         }
     }
 
+    .ds-datepicker__kalenderknapp {
+        top: 8px;
+        height: calc(100% - 8px);
+    }
+
     .inputPanel__label, .checkboks + .skjemaelement__label, .radioknapp + .skjemaelement__label {
         font-size: 1.125rem;
     }
@@ -143,7 +150,7 @@
 
     .presisering, .pekeboble {
         padding: 1rem;
-        background-color: @white;
+        background-color: @navds-global-color-white;
         position: relative;
 
         @media (min-width: 30rem) {
@@ -177,7 +184,7 @@
     }
 
     .pekeboble, .pekeboble:after {
-        background-color: @grayBackground;
+        background-color: @navds-global-color-gray-50;
     }
 
     .pekeboble {
@@ -217,7 +224,7 @@
         position: relative;
         margin: 1.5rem 0;
         padding: 1rem 1rem;
-        background-color: @navLysGra;
+        background-color: @navds-global-color-gray-100;
 
         &:after {
             content: '';
@@ -229,7 +236,7 @@
             top: 0;
             transform: translateY(-50%) rotate(45deg) skew(5deg, 5deg);
             transform-origin: 50% 50%;
-            background-color: @navLysGra;
+            background-color: @navds-global-color-gray-100;
         }
     }
 }

@@ -1,4 +1,4 @@
-@import '../../../../node_modules/nav-frontend-core/less/_variabler';
+@import '../../../../node_modules/@navikt/ds-tokens/dist/tokens';
 
 @desktopLimitWidth: 672px;
 @padding: 2rem;
@@ -10,7 +10,7 @@
     width: @ukebredde;
     margin-top: 1.5rem;
     outline: 0;
-    border: 2px solid @navBla;
+    border: 2px solid @navds-semantic-color-interaction-primary;
 
     .kalender__tittel {
         text-align: center;
@@ -45,7 +45,7 @@
         font-size: 0.9rem;
         font-style: italic;
         padding: 0.9rem 0;
-        border-right: 1px solid @navGra40;
+        border-right: 1px solid @navds-global-color-gray-400;
     }
 
     .kalenderdag {
@@ -55,7 +55,7 @@
 
         label {
             &:hover {
-                background-color: @navLysGra;
+                background-color: @navds-global-color-gray-100;
                 cursor: pointer;
             }
         }
@@ -65,30 +65,30 @@
             min-width: 100%;
             padding: 0.9rem 0;
             text-align: center;
-            color: @navMorkGra;
-            border-right: 1px solid @white;
-            border-bottom: 1px solid @white;
+            color: @navds-global-color-gray-900;
+            border-right: 1px solid @navds-global-color-white;
+            border-bottom: 1px solid @navds-global-color-white;
         }
 
         &.sun {
             label, span.label {
-                color: @redError;
+                color: @navds-global-color-red-500;
             }
         }
 
         &.foran, &.etter {
-            background-color: @navLysGra;
+            background-color: @navds-global-color-gray-100;
 
             label, span.label {
-                color: @navGra60;
+                color: @navds-global-color-gray-600;
                 font-weight: normal;
             }
         }
 
         input {
             &.checked + label {
-                background-color: @navBla;
-                color: @white;
+                background-color: @navds-semantic-color-interaction-primary;
+                color: @navds-global-color-white;
             }
         }
     }
@@ -102,7 +102,7 @@
             &:focus {
                 box-shadow: none;
                 background-color: transparent;
-                color: @navBla;
+                color: @navds-semantic-color-interaction-primary;
                 text-decoration: underline;
 
                 &:hover {
