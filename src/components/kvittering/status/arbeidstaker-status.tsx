@@ -15,7 +15,10 @@ const ArbeidstakerStatus = () => {
     const [ tilNavDato, setTilNavDato ] = useState<string>()
     const [ tilArbDato, setTilArbDato ] = useState<string>()
 
-    const medKopi = tekst('kvittering.med-kopi-til-nav')
+    let medKopi = tekst('kvittering.med-kopi-til-nav')
+    if (valgtSoknad!.sendtTilArbeidsgiverDato && valgtSoknad!.sendtTilNAVDato) {
+        medKopi = ''
+    }
 
     useEffect(() => {
         opprettDatoer()
@@ -46,7 +49,7 @@ const ArbeidstakerStatus = () => {
                         <Label as="h3" className="sendt-tittel">
                             {tekst('kvittering.sendt-til')}
                         </Label>
-                        <Avkrysset tekst={`${tilArbNavn} ${tilOrg}, ${medKopi}`} />
+                        <Avkrysset tekst={`${tilArbNavn} ${tilOrg}${medKopi}`} />
                         <Detail size="small">{tilArbDato}</Detail>
                     </>
                 }
