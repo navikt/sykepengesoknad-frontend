@@ -34,10 +34,12 @@ interface EkspanderProps {
 const Oppsummering = ({ ekspandert }: EkspanderProps) => {
     const { valgtSoknad } = useAppStore()
 
+    const tittel = tekst('sykepengesoknad.oppsummering.tittel')
     return (
         <Utvidbar className={'oppsummering lilla' + (ekspandert ? ' apen' : '')}
             ikon={sjekkbokser} ikonHover={sjekkbokserHover} erApen={ekspandert}
-            tittel={tekst('sykepengesoknad.oppsummering.tittel')}
+            amplitudeProps={{ 'component': tittel }}
+            tittel={tittel}
             ikonAltTekst=""
         >
             {valgtSoknad!.sporsmal
