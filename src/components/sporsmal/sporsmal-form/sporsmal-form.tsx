@@ -27,6 +27,8 @@ import Opplysninger from '../../opplysninger-fra-sykmelding/opplysninger'
 import Oppsummering from '../../oppsummering/oppsummering'
 import Vis from '../../vis'
 import BjornOverSporsmalstekst from '../bjorn/bjorn-over-sporsmalstekst'
+import { EndringUtenEndringModal } from '../endring-uten-endring/endring-uten-endring-modal'
+import { harLikeSvar } from '../endring-uten-endring/harLikeSvar'
 import { hentFormState, hentSvar } from '../hent-svar'
 import InfotekstOverSubmit from '../infotekst-over-submit'
 import { settSvar } from '../sett-svar'
@@ -49,6 +51,7 @@ const SporsmalForm = () => {
     const { logEvent } = useAmplitudeInstance()
     const [ erSiste, setErSiste ] = useState<boolean>(false)
     const [ poster, setPoster ] = useState<boolean>(false)
+    const [ endringUtenEndringAapen, setEndringUtenEndringAapen ] = useState<boolean>(false)
     const { stegId } = useParams<RouteParams>()
     const history = useHistory()
     const spmIndex = parseInt(stegId) - 1
@@ -66,7 +69,7 @@ const SporsmalForm = () => {
     useEffect(() => {
         methods.reset(hentFormState(sporsmal), { keepValues: false })
         // eslint-disable-next-line
-    }, [ sporsmal ])
+    }, [sporsmal])
 
     useEffect(() => {
         function erSiste() {
@@ -81,7 +84,7 @@ const SporsmalForm = () => {
         setErSiste(sisteSide)
         if (sisteSide) hentMottaker()
         // eslint-disable-next-line
-    }, [ spmIndex ])
+    }, [spmIndex])
 
     const sendOppdaterSporsmal = async() => {
         let soknad = valgtSoknad
@@ -156,6 +159,15 @@ const SporsmalForm = () => {
     const sendSoknad = async() => {
         if (!valgtSoknad) {
             return
+        }
+        if (valgtSoknad.status == RSSoknadstatus.UTKAST_TIL_KORRIGERING) {
+            const originalSoknad = soknader.find((a) => a.id == valgtSoknad.korrigerer)
+
+            if (originalSoknad && harLikeSvar(originalSoknad, valgtSoknad)) {
+                setEndringUtenEndringAapen(true)
+                return
+            }
+
         }
         const res = await fetcher(env.flexGatewayRoot() + `/syfosoknad/api/soknader/${valgtSoknad.id}/send`, {
             method: 'POST',
@@ -246,7 +258,12 @@ const SporsmalForm = () => {
         }
     }
 
-    return (
+    return (<>
+        <EndringUtenEndringModal
+            aapen={endringUtenEndringAapen}
+            setAapen={setEndringUtenEndringAapen}
+        />
+
         <FormProvider {...methods}>
             <form onSubmit={methods.handleSubmit(onSubmit)}
                 onSubmitCapture={preSubmit}
@@ -279,8 +296,8 @@ const SporsmalForm = () => {
 
                 <Vis hvis={
                     (valgtSoknad!.soknadstype === RSSoknadstype.REISETILSKUDD
-                        && sporsmal.svartype !== RSSvartype.KVITTERING)
-                    || valgtSoknad!.soknadstype !== RSSoknadstype.REISETILSKUDD
+                            && sporsmal.svartype !== RSSvartype.KVITTERING)
+                        || valgtSoknad!.soknadstype !== RSSoknadstype.REISETILSKUDD
                 } render={() =>
                     <FeilOppsummering sporsmal={sporsmal} />
                 } />
@@ -292,6 +309,7 @@ const SporsmalForm = () => {
                 />
             </form>
         </FormProvider>
+    </>
     )
 }
 

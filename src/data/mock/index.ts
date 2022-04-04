@@ -8,7 +8,7 @@ import { RSSoknadstype } from '../../types/rs-types/rs-soknadstype'
 import env from '../../utils/environment'
 import { jsonDeepCopy } from '../../utils/json-deep-copy'
 import KvitteringJPG from './data/kvittering.jpg'
-import { delvisUtfyltReisetilskudd,gradertReisetilskudd, nyttReisetilskudd } from './data/reisetilskudd'
+import { delvisUtfyltReisetilskudd, gradertReisetilskudd, nyttReisetilskudd } from './data/reisetilskudd'
 import {
     arbeidstakerDeltPeriodeForsteUtenforArbeidsgiverperiodeKvittering,
     arbeidstakerInnenforArbeidsgiverperiodeKvittering,
@@ -69,12 +69,19 @@ mock.put(`${env.flexGatewayRoot()}/syfosoknad/api/soknader/:soknad/sporsmal/:spo
         })
     })
 
+
 mock.post(`${env.flexGatewayRoot()}/syfosoknad/api/soknader/:soknad/korriger`,
     (req, res, ctx) => {
-        const soknad = jsonDeepCopy(soknader.find((sok: RSSoknad) =>
+        const original = soknader.find((sok: RSSoknad) =>
             sok.id === req.pathParams.soknad
-        ))!
+        )
+        if (!original) {
+            window.alert('Du kan ikke endre en endret søknad i labs versjonen')
+            return res( ctx.status(500))
+        }
+        const soknad = jsonDeepCopy(original)
         soknad.id = uuid.v4()
+        soknad.korrigerer = original.id
         soknad.status = RSSoknadstatus.UTKAST_TIL_KORRIGERING
         return res(ctx.json(soknad))
     })
