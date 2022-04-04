@@ -323,7 +323,7 @@ describe('Teste førsteside i reisetilskuddsøknaden', () => {
             cy.get('.navds-alert--info')
                 .should('contain', 'Hva skjer videre?')
                 .and('contain', 'NAV behandler søknaden din')
-                .and('contain', 'Saksbehandlingstidene kan variere noe')
+                .and('contain', 'Saksbehandlingstiden regnes fra NAV har mottatt all nødvendig dokumentasjon. Etter dette må du regne med å vente minst fire uker før søknaden er behandlet. Men saksbehandlingstidene kan variere noe.')
         })
     })
 })
