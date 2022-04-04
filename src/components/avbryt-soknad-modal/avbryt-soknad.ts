@@ -29,22 +29,10 @@ export async function avbrytSoknad({ valgtSoknad, setSoknader, soknader, setValg
         return
     }
     else if (status === 200) {
-        if (valgtSoknad.soknadstype === RSSoknadstype.OPPHOLD_UTLAND) {
+        if (valgtSoknad.soknadstype === RSSoknadstype.OPPHOLD_UTLAND || valgtSoknad.status === RSSoknadstatus.UTKAST_TIL_KORRIGERING) {
             setSoknader(soknader.filter(s => s.id !== valgtSoknad.id))
             setValgtSoknad(undefined)
             history.push('/')
-        }  else  if (valgtSoknad.status === RSSoknadstatus.UTKAST_TIL_KORRIGERING) {
-            const korrigertSoknad = soknader.find(s => s.id === valgtSoknad.korrigerer)
-
-            setSoknader(soknader.filter(s => s.id !== valgtSoknad.id))
-            if(korrigertSoknad){
-                setValgtSoknad(korrigertSoknad)
-                history.push(`/soknader/${korrigertSoknad!.id}`)
-            }else {
-                setValgtSoknad(undefined)
-                history.push('/')
-            }
-
         } else {
             const nySoknad = { ...valgtSoknad, status: RSSoknadstatus.AVBRUTT, avbruttDato: new Date() }
             setSoknader(soknader.map(s => s.id === valgtSoknad!.id ? nySoknad : s) as any)
