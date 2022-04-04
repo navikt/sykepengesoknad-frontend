@@ -33,7 +33,8 @@ const Endreknapp = () => {
             credentials: 'include',
             headers: { 'Content-Type': 'application/json' }
         }, (fetchState: FetchState<RSSoknad>) => {
-            if (hasData(fetchState)) {
+
+            if (hasData(fetchState) && fetchState.httpCode >= 200 && fetchState.httpCode < 400) {
                 const soknad = new Soknad(fetchState.data)
                 if (!soknader.find(sok => sok.id === soknad.id)) {
                     soknader.push(soknad)
