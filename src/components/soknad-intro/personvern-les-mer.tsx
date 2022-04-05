@@ -6,12 +6,14 @@ import React, { MouseEvent, useState } from 'react'
 
 import { useAppStore } from '../../data/stores/app-store'
 import { tekst } from '../../utils/tekster'
+import { useAmplitudeInstance } from '../amplitude/amplitude'
 
 type Event = MouseEvent<HTMLAnchorElement | HTMLButtonElement>
 
 const PersonvernLesMer = () => {
     const [ aapen, setAapen ] = useState<boolean>(false)
     const { valgtSoknad } = useAppStore()
+    const { logEvent } = useAmplitudeInstance()
 
     if (!valgtSoknad) {
         return null
@@ -20,6 +22,15 @@ const PersonvernLesMer = () => {
     const handleAapen = (event: Event) => {
         event.preventDefault()
         setAapen(true)
+        logEvent('knapp klikket', {
+            'tekst': tekst('sykepengesoknad.soknad-intro.personvern-les-mer'),
+            'soknadstype': valgtSoknad?.soknadstype
+        })
+    }
+    const amplitudeLukketPopup = () => {
+        logEvent('popup lukket', {
+            'component': tekst('sykepengesoknad.soknad-intro.personvern-les-mer')
+        })
     }
 
     return (
@@ -27,8 +38,11 @@ const PersonvernLesMer = () => {
             <Button variant="tertiary" onClick={handleAapen}>
                 {tekst('sykepengesoknad.soknad-intro.personvern-les-mer')}
             </Button>
-            <Modal className="personvern-modal" onClose={() => setAapen(false)}
-                open={aapen}
+            <Modal className="personvern-modal" onClose={() => {
+                setAapen(false)
+                amplitudeLukketPopup()
+            }}
+            open={aapen}
             >
                 <Modal.Content>
                     <Heading size="medium" level="3" className="modal__tittel">
@@ -37,7 +51,10 @@ const PersonvernLesMer = () => {
                     {parser(tekst('sykepengesoknad.soknad-intro.personvern-modal-innhold'))}
 
                     <div className="lukk-wrapper">
-                        <button type="button" className="no-border navds-link" onClick={() => setAapen(false)}>
+                        <button type="button" className="no-border navds-link" onClick={() => {
+                            setAapen(false)
+                            amplitudeLukketPopup()
+                        }}>
                             <BodyShort as="span">Lukk</BodyShort>
                         </button>
                     </div>
