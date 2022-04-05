@@ -50,7 +50,7 @@ describe('Tester endring uten en endringer', () => {
         cy.contains('Gå videre').click()
         cy.get('.skjemaelement__label').click({ force: true })
 
-        cy.contains('Send søknaden').click()
+        cy.contains('Send endringene').click()
     })
 
     it('Vi ser en popup og lander på listevisninga', function() {
