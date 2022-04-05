@@ -278,7 +278,7 @@ const SporsmalForm = () => {
                     render={() =>
                         <>
                             <Oppsummering ekspandert={false} />
-                            <Opplysninger ekspandert={false} steg={sporsmal.tag} />
+                            <Opplysninger ekspandert={false} steg={sporsmal.tag} visPersonvern={false} />
                             <CheckboxPanel sporsmal={nesteSporsmal} />
                             <SendesTil />
                         </>

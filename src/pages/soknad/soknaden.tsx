@@ -14,7 +14,6 @@ import { hentHotjarJsTrigger, HotjarTrigger } from '../../components/hotjar-trig
 import HvorforSoknadSykepenger from '../../components/hvorfor-soknad-sykepenger/hvorfor-soknad-sykepenger'
 import OmReisetilskudd from '../../components/om-reisetilskudd/om-reisetilskudd'
 import Opplysninger from '../../components/opplysninger-fra-sykmelding/opplysninger'
-import PersonvernLesMer from '../../components/soknad-intro/personvern-les-mer'
 import { ViktigInformasjon } from '../../components/soknad-intro/viktig-informasjon'
 import SoknadMedToDeler from '../../components/soknad-med-to-deler/soknad-med-to-deler'
 import GjenapneSoknad from '../../components/soknader/avbryt/gjenapneknapp'
@@ -168,16 +167,14 @@ const Fordeling = () => {
                         render={
                             () => {
                                 const sporsmal = valgtSoknad!.sporsmal[stegNo - 1]
-                                return <Opplysninger ekspandert={true} steg={sporsmal.tag} />
+                                return <Opplysninger ekspandert={true} steg={sporsmal.tag}
+                                    visPersonvern={stegNo === 1} />
                             }}
                     />
 
                     <Vis hvis={stegNo === 1 && !erUtlandssoknad}
                         render={() =>
-                            <>
-                                <PersonvernLesMer />
-                                <HvorforSoknadSykepenger soknadstype={valgtSoknad.soknadstype} />
-                            </>
+                            <HvorforSoknadSykepenger soknadstype={valgtSoknad.soknadstype} />
                         }
                     />
 
@@ -212,7 +209,7 @@ const Fordeling = () => {
                         </BodyLong>
                     </div>
 
-                    <Opplysninger ekspandert={true} steg="avbrutt-søknad" />
+                    <Opplysninger ekspandert={true} steg="avbrutt-søknad" visPersonvern={false} />
                     <HvorforSoknadSykepenger soknadstype={valgtSoknad.soknadstype} />
                     <GjenapneSoknad />
                 </>

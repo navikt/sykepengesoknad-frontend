@@ -15,7 +15,8 @@ interface UtvidbarProps {
     amplitudeProps?: object
     ikonAltTekst?: string
     className?: string
-    type?: 'intern' | undefined
+    type?: 'intern' | undefined,
+    skjulLukk?: boolean
 }
 
 const Utvidbar = (props: UtvidbarProps) => {
@@ -23,6 +24,7 @@ const Utvidbar = (props: UtvidbarProps) => {
 
     const btnImage = useRef<HTMLImageElement>(null)
     const { logEvent } = useAmplitudeInstance()
+    const visLukk = props.skjulLukk !== true
 
     useEffect(() => {
         setErApen(props.erApen)
@@ -71,16 +73,21 @@ const Utvidbar = (props: UtvidbarProps) => {
 
                 <Accordion.Content>
                     {props.children}
-                    <div className="lenkerad ikke-print">
-                        <button type="button" className="navds-link" aria-pressed={!erApen}
-                            tabIndex={(erApen ? null : -1) as any} onClick={(e: any) => {
-                                e.preventDefault()
-                                setErApen(!erApen)
-                            }}
-                        >
-                            <BodyShort as="span">Lukk</BodyShort>
-                        </button>
-                    </div>
+                    <Vis hvis={visLukk}
+                        render={() =>
+                            <div className="lenkerad ikke-print">
+                                <button type="button" className="navds-link" aria-pressed={!erApen}
+                                    tabIndex={(erApen ? null : -1) as any} onClick={(e: any) => {
+                                        e.preventDefault()
+                                        setErApen(!erApen)
+                                    }}
+                                >
+                                    <BodyShort as="span">Lukk</BodyShort>
+                                </button>
+                            </div>
+                        }
+                    />
+
                 </Accordion.Content>
             </Accordion.Item>
         </Accordion>
