@@ -14,6 +14,7 @@ import { hentHotjarJsTrigger, HotjarTrigger } from '../../components/hotjar-trig
 import HvorforSoknadSykepenger from '../../components/hvorfor-soknad-sykepenger/hvorfor-soknad-sykepenger'
 import OmReisetilskudd from '../../components/om-reisetilskudd/om-reisetilskudd'
 import Opplysninger from '../../components/opplysninger-fra-sykmelding/opplysninger'
+import PersonvernLesMer from '../../components/soknad-intro/personvern-les-mer'
 import { ViktigInformasjon } from '../../components/soknad-intro/viktig-informasjon'
 import SoknadMedToDeler from '../../components/soknad-med-to-deler/soknad-med-to-deler'
 import GjenapneSoknad from '../../components/soknader/avbryt/gjenapneknapp'
@@ -61,7 +62,7 @@ const Soknaden = () => {
             soknadstatus: filtrertSoknad?.status,
         })
         // eslint-disable-next-line
-    }, [ id ])
+    }, [id])
 
     useEffect(() => {
         setBodyClass('soknaden')
@@ -135,13 +136,15 @@ const Fordeling = () => {
                         render={() =>
                             <Link to={'/soknader/' + valgtSoknad.id + SEPARATOR + (stegNo - 1)}
                                 className="navds-link tilbakelenke"
-                                onClick={() => { logEvent('navigere', {
-                                    lenketekst: tekst('soknad.tilbakeknapp'),
-                                    fra: valgtSoknad!.sporsmal[stegNo].tag,
-                                    til: valgtSoknad!.sporsmal[stegNo - 1].tag,
-                                    'soknadstype': valgtSoknad?.soknadstype,
-                                    'stegId': stegId
-                                })}}
+                                onClick={() => {
+                                    logEvent('navigere', {
+                                        lenketekst: tekst('soknad.tilbakeknapp'),
+                                        fra: valgtSoknad!.sporsmal[stegNo].tag,
+                                        til: valgtSoknad!.sporsmal[stegNo - 1].tag,
+                                        'soknadstype': valgtSoknad?.soknadstype,
+                                        'stegId': stegId
+                                    })
+                                }}
                             >
                                 <Back className="chevron--venstre" />
                                 <BodyShort as="span">{tekst('soknad.tilbakeknapp')}</BodyShort>
@@ -164,14 +167,17 @@ const Fordeling = () => {
                     <Vis hvis={!erUtlandssoknad && (stegNo === 1)}
                         render={
                             () => {
-                                const sporsmal = valgtSoknad!.sporsmal[ stegNo - 1 ]
+                                const sporsmal = valgtSoknad!.sporsmal[stegNo - 1]
                                 return <Opplysninger ekspandert={true} steg={sporsmal.tag} />
                             }}
                     />
 
                     <Vis hvis={stegNo === 1 && !erUtlandssoknad}
                         render={() =>
-                            <HvorforSoknadSykepenger soknadstype={valgtSoknad.soknadstype} />
+                            <>
+                                <PersonvernLesMer />
+                                <HvorforSoknadSykepenger soknadstype={valgtSoknad.soknadstype} />
+                            </>
                         }
                     />
 
