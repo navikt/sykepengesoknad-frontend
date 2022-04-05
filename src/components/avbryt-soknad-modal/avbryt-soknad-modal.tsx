@@ -6,9 +6,36 @@ import { useHistory, useParams } from 'react-router-dom'
 
 import { RouteParams } from '../../app'
 import { useAppStore } from '../../data/stores/app-store'
+import { RSSoknadstatus } from '../../types/rs-types/rs-soknadstatus'
 import { tekst } from '../../utils/tekster'
 import { useAmplitudeInstance } from '../amplitude/amplitude'
+import { EndringUtenEndringModal } from '../sporsmal/endring-uten-endring/endring-uten-endring-modal'
 import { avbrytSoknad } from './avbryt-soknad'
+
+const AvbrytKorrigering = () => {
+    const { logEvent } = useAmplitudeInstance()
+
+    const [ aapen, setAapen ] = useState<boolean>(false)
+    const { valgtSoknad } = useAppStore()
+    const { stegId } = useParams<RouteParams>()
+
+    return <>
+        <Button variant="tertiary" className="avbryt_rødknapp"
+            onClick={
+                (e) => {
+                    logEvent('popup åpnet', {
+                        'component': tekst('avbryt.korrigering.knapp'),
+                        'soknadstype': valgtSoknad?.soknadstype,
+                        'steg': stegId
+                    })
+                    setAapen(true)
+                    e.preventDefault()
+                }}>
+            {tekst('avbryt.korrigering.knapp')}
+        </Button>
+        <EndringUtenEndringModal aapen={aapen} setAapen={setAapen} />
+    </>
+}
 
 const AvbrytSoknadModal = () => {
     const { logEvent } = useAmplitudeInstance()
@@ -17,6 +44,13 @@ const AvbrytSoknadModal = () => {
     const { valgtSoknad, soknader, setSoknader, setValgtSoknad, setFeilmeldingTekst } = useAppStore()
     const history = useHistory()
 
+    if (!valgtSoknad) {
+        return null
+    }
+    if (valgtSoknad.status == RSSoknadstatus.UTKAST_TIL_KORRIGERING) {
+        return <AvbrytKorrigering />
+    }
+
     return (
         <>
             <Button variant="tertiary" className="avbryt_rødknapp"
@@ -24,7 +58,7 @@ const AvbrytSoknadModal = () => {
                     (e) => {
                         logEvent('popup åpnet', {
                             'component': tekst('avbryt.popup.tittel'),
-                            'soknadstype': valgtSoknad?.soknadstype,
+                            'soknadstype': valgtSoknad.soknadstype,
                             'steg': stegId
                         })
                         setAapen(true)
@@ -37,7 +71,7 @@ const AvbrytSoknadModal = () => {
                     setAapen(false)
                     logEvent('popup lukket', {
                         'component': tekst('avbryt.popup.tittel'),
-                        'soknadstype': valgtSoknad?.soknadstype,
+                        'soknadstype': valgtSoknad.soknadstype,
                         'steg': stegId
                     })
                 }}
@@ -52,12 +86,12 @@ const AvbrytSoknadModal = () => {
                         () => {
                             logEvent('knapp klikket', {
                                 'tekst': tekst('avbryt.popup.ja'),
-                                'soknadstype': valgtSoknad?.soknadstype,
+                                'soknadstype': valgtSoknad.soknadstype,
                                 'component': tekst('avbryt.popup.tittel'),
-                                'steg': stegId
+                                'steg': stegId,
                             })
                             avbrytSoknad({
-                                valgtSoknad: valgtSoknad!,
+                                valgtSoknad: valgtSoknad,
                                 setSoknader: setSoknader,
                                 soknader: soknader,
                                 setValgtSoknad: setValgtSoknad,
@@ -74,7 +108,7 @@ const AvbrytSoknadModal = () => {
                             setAapen(false)
                             logEvent('knapp klikket', {
                                 'tekst': tekst('avbryt.popup.nei'),
-                                'soknadstype': valgtSoknad?.soknadstype,
+                                'soknadstype': valgtSoknad.soknadstype,
                                 'component': tekst('avbryt.popup.tittel'),
                                 'steg': stegId
                             })
