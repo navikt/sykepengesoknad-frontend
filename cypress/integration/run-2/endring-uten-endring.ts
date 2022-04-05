@@ -19,10 +19,6 @@ describe('Tester endring uten en endringer', () => {
         cy.get('.navds-alert--info')
             .should('contain', 'Rett opp det som er feil i søknaden, og send den inn på nytt.')
 
-        // ANSVARSERKLARING er resatt
-        //   cy.get('.skjemaelement__input.checkboks[type=checkbox]').should('not.be.checked')
-        //   cy.get('.skjemaelement__label').click({ force: true })
-        //  cy.get('.skjemaelement__input.checkboks[type=checkbox]').should('be.checked')
         cy.contains('Gå videre').click()
     })
 
@@ -30,6 +26,9 @@ describe('Tester endring uten en endringer', () => {
     it('Svarer det samme søknaden', function() {
         cy.url().should('include', '/2')
         cy.contains('Gå videre').click()
+
+        cy.contains('Avslutt uten å endre søknaden')
+        cy.contains('Jeg vil ikke søke om sykepenger').should('not.exist')
 
         cy.url().should('include', '/3')
         cy.contains('Gå videre').click()
