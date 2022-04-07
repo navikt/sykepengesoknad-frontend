@@ -56,7 +56,7 @@ const PeriodeKomp = ({ sporsmal, index, slettPeriode }: AllProps) => {
                         validate: {
                             fom: () => {
                                 const validert = validerFom(sporsmal, id, getValues())
-                                const div: HTMLElement | null = document.getElementById(id + '_fom')
+                                const div: HTMLElement | null = document.getElementById(id + '_fom')!.parentElement
                                 if (validert !== true) {
                                     div?.classList.add('skjemaelement__input--harFeil')
                                 } else {
@@ -66,7 +66,7 @@ const PeriodeKomp = ({ sporsmal, index, slettPeriode }: AllProps) => {
                             },
                             tom: () => {
                                 const validert = validerTom(sporsmal, id, getValues())
-                                const div: HTMLElement | null = document.getElementById(id + '_tom')
+                                const div: HTMLElement | null = document.getElementById(id + '_tom')!.parentElement
                                 if (validert !== true) {
                                     div?.classList.add('skjemaelement__input--harFeil')
                                 } else {
@@ -76,7 +76,7 @@ const PeriodeKomp = ({ sporsmal, index, slettPeriode }: AllProps) => {
                             },
                             periode: () => {
                                 const validert = validerPeriode(sporsmal, id, getValues())
-                                const div: HTMLElement | null = document.getElementById(id + '_fom')
+                                const div: HTMLElement | null = document.getElementById(id + '_fom')!.parentElement
                                 if (validert !== true) {
                                     div?.classList.add('skjemaelement__input--harFeil')
                                 } else {
