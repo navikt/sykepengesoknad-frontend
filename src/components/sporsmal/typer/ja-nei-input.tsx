@@ -9,6 +9,7 @@ import { getLedetekst, tekst } from '../../../utils/tekster'
 import AnimateOnMount from '../../animate-on-mount'
 import FeilLokal from '../../feil/feil-lokal'
 import Vis from '../../vis'
+import PaskeHjelpetekst from '../bendiksen/paske-hjelpetekst'
 import Bjorn from '../bjorn/bjorn'
 import BjornUnderSporsmalstekst from '../bjorn/bjorn-under-sporsmalstekst'
 import SporsmalBjorn from '../bjorn/sporsmal-bjorn'
@@ -61,6 +62,8 @@ const JaNeiInput = ({ sporsmal }: SpmProps) => {
                 </Label>
 
                 <BjornUnderSporsmalstekst sporsmal={sporsmal} />
+
+                <PaskeHjelpetekst sporsmal={sporsmal} />
 
                 <EkspanderbarHjelp sporsmal={sporsmal} />
 
