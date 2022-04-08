@@ -1,4 +1,5 @@
-@import 'node_modules/nav-frontend-core/less/_variabler';
+@import '../../../../../node_modules/@navikt/ds-tokens/dist/tokens';
+@import '../../../../basic';
 
 .opplasting {
     .opplasting__tekst {
@@ -33,7 +34,7 @@
 
         &:focus {
             outline: 0;
-            box-shadow: 0 0 0 3px @fokusFarge;
+            box-shadow: 0 0 0 3px @navds-global-color-blue-800;
         }
     }
 
@@ -64,11 +65,11 @@
     width: 400px;
 
     .navds-modal__content {
-        .nav-datovelger {
+        .ds-datepicker {
             display: block;
         }
 
-        .skjemaelement, .nav-datovelger__inputContainer {
+        .skjemaelement, .ds-datepicker__inputContainer {
             width: 100%;
         }
 
@@ -109,7 +110,7 @@
         margin: 1rem 0;
     }
 
-    .nav-datovelger__inputContainer {
+    .ds-datepicker__inputContainer {
         width: auto;
     }
 
@@ -141,6 +142,6 @@
 }
 
 .navds-alert--warning.reisetilskudd {
-    background-color: @white;
+    background-color: @navds-global-color-white;
     margin-top: 1.5rem;
 }

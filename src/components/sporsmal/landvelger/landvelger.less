@@ -1,5 +1,4 @@
-@import '../../../../node_modules/nav-frontend-core/less/_variabler';
-@import '../../../../node_modules/nav-frontend-skjema-style/src/index';
+@import '../../../../node_modules/@navikt/ds-tokens/dist/tokens';
 
 .landvelger {
     .react-autosuggest__container {
@@ -16,9 +15,9 @@
 
     .react-autosuggest__suggestions-container--open {
         position: absolute;
-        border: 1px solid @navGra40;
+        border: 1px solid @navds-global-color-gray-400;
         z-index: 1;
-        background: @white;
+        background: @navds-global-color-white;
 
         ul {
             list-style-type: none;
@@ -28,26 +27,26 @@
 
         .react-autosuggest__suggestion {
             padding: .75rem;
-            border-bottom: 1px solid @grayBackground;
-            color: @navBla;
+            border-bottom: 1px solid @navds-semantic-color-canvas-background;
+            color: @navds-semantic-color-interaction-primary;
             text-decoration: underline;
         }
 
         li:hover, .react-autosuggest__suggestion--highlighted {
-            background-color: @grayBackground;
+            background-color: @navds-semantic-color-canvas-background;
             cursor: pointer;
         }
 
         mark {
             background: transparent;
-            color: @navBla;
+            color: @navds-semantic-color-interaction-primary;
             font-weight: 600;
         }
     }
 
     .etikett--tag {
         margin: .5rem 1rem 0 0;
-        background-color: @navBlaLighten80;
+        background-color: @navds-global-color-blue-100;
     }
 
     .etikett--info {
@@ -68,12 +67,12 @@
 
     .etikett__slett:focus {
         outline: none;
-        background-color: @navOransje;
+        background-color: @navds-global-color-orange-500;
         color: inherit;
     }
 
     .etikett__slett:hover {
-        color: @navBla;
+        color: @navds-semantic-color-interaction-primary;
     }
 
     .etikett__slett-label--skjermleser {

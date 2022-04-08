@@ -1,0 +1,58 @@
+@import '../../../../../node_modules/@navikt/ds-tokens/dist/tokens';
+@import './input';
+
+.textarea--medMeta {
+    resize: none;
+    width: 100%;
+    overflow: hidden;
+    min-height: 4rem;
+    transition: height 0.1s ease-out;
+    display: block;
+
+    &__wrapper {
+        width: 100%;
+        position: relative;
+    }
+
+    &__teller {
+        pointer-events: none;
+        color: @navds-global-color-gray-600;
+        font-style: italic;
+        position: absolute;
+        text-align: right;
+        left: 32px;
+        right: 12px;
+        bottom: 10px;
+        margin: 0;
+        padding: 0;
+
+        .teller-tekst {
+            &--overflow {
+                color: @navds-global-color-red-500;
+                font-weight: bold;
+            }
+        }
+    }
+}
+
+// NB: viktig at denne styles slik at tekstbrytning blir identisk med textareaet
+.textareamirror {
+    font-family: @navds-font-family;
+    font-size: 16px;
+    line-height: 22px;
+    font-weight: 400;
+
+    .skjemaelement__input;
+
+    white-space: pre-wrap;
+    display: inline-block;
+    width: 100%;
+    word-wrap: break-word;
+    position: absolute;
+    left: -99999px;
+    top: 0;
+}
+
+.textarea__container {
+    position: relative; // begrenser bredden til textareamirror, viktig for at tekstbryting blir riktig
+}

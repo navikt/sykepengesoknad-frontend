@@ -1,0 +1,57 @@
+@import '../../../../../node_modules/@navikt/ds-tokens/dist/tokens';
+
+.skjemagruppe,
+.skjemagruppe fieldset,
+.skjemagruppe__fieldset {
+    margin: 0;
+    padding: 0;
+    border: 0;
+
+    .skjemaelement {
+        margin-bottom: 1rem;
+    }
+
+    .skjemagruppe {
+        &.inputPanelGruppe,
+        &.radiogruppe,
+        &.checkboxgruppe {
+            margin-bottom: 1rem;
+        }
+    }
+}
+
+.skjemagruppe__description {
+    font-family: @navds-font-family;
+    font-size: 16px;
+    line-height: 22px;
+    font-weight: 400;
+    margin-bottom: 1rem;
+}
+
+.skjemagruppe legend,
+.skjemagruppe__legend {
+    font-family: @navds-font-family;
+    font-size: 18px;
+    line-height: 24px;
+    font-weight: normal;
+    margin-bottom: 1rem;
+}
+
+.skjemagruppe {
+    &.inputPanelGruppe,
+    &.radiogruppe,
+    &.checkboxgruppe {
+        .skjemaelement {
+            margin-bottom: 1rem;
+        }
+
+        legend,
+        .skjemagruppe__legend {
+            font-family: @navds-font-family;
+            font-size: 16px;
+            line-height: 22px;
+            font-weight: bold;
+            margin-bottom: 1rem;
+        }
+    }
+}

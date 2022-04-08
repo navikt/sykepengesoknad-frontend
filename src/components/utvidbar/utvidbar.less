@@ -1,13 +1,13 @@
-@import '../../../node_modules/nav-frontend-core/less/_variabler';
+@import '../../../node_modules/@navikt/ds-tokens/dist/tokens';
 @import '../../basic';
 
 .utvidbar {
-    border: 1px solid @navGra40;
+    border: 1px solid @navds-global-color-gray-400;
     border-radius: 4px;
     margin: 2rem 0;
 
     .navds-accordion__header {
-        background-color: @navDypBlaLighten80;
+        background-color: @navds-global-color-deepblue-100;
     }
 
     .utvidbar__handling {
@@ -36,7 +36,7 @@
 
     &.lilla {
         .navds-accordion__header {
-            background-color: @navLillaLighten80;
+            background-color: @navds-global-color-purple-100;
         }
     }
 
@@ -48,8 +48,8 @@
             display: inline-flex;
             padding: 0;
             width: auto;
-            color: @navBla;
-            background-color: @white;
+            color: @navds-semantic-color-interaction-primary;
+            background-color: @navds-global-color-white;
             border-bottom: 0;
 
             &:hover {
@@ -78,7 +78,7 @@
             em {
                 position: static;
                 font-size: medium;
-                color: @navBla;
+                color: @navds-semantic-color-interaction-primary;
             }
         }
     }

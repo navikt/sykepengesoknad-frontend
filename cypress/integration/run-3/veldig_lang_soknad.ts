@@ -23,7 +23,7 @@ describe('Tester støtte for gamle spørsmål', () => {
 
     function velgDato() {
         const velgDato = 10
-        const className = '.nav-datovelger__kalenderknapp'
+        const className = '.ds-datepicker__kalenderknapp'
 
         cy.get(className).click()
         cy.get('.DayPicker-Day').contains(velgDato).first().click()
@@ -32,7 +32,7 @@ describe('Tester støtte for gamle spørsmål', () => {
     function velgPeriode() {
         const fom = '12'
         const tom = '15'
-        const className = '.nav-datovelger__kalenderknapp'
+        const className = '.ds-datepicker__kalenderknapp'
 
         cy.get('.fom ' + className).click()
         cy.get('.DayPicker-Day').contains(fom).click()

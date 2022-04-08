@@ -1,4 +1,4 @@
-@import 'node_modules/nav-frontend-core/less/_variabler';
+@import '../../../node_modules/@navikt/ds-tokens/dist/tokens';
 
 .feiloppsummering {
     margin: 2rem 0;
@@ -13,12 +13,12 @@
 
     &:focus {
         outline: none;
-        box-shadow: 0 0 0 5px @white, 0 0 0 10px @fokusFarge;
+        box-shadow: 0 0 0 5px @navds-global-color-white, 0 0 0 10px @navds-global-color-blue-800;
     }
 
     a:focus {
-        color: @navMorkGra;
-        background-color: @fokusFarge;
+        color: @navds-global-color-gray-900;
+        background-color: @navds-global-color-blue-800;
     }
 }
 

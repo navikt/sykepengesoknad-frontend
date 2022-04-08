@@ -1,0 +1,79 @@
+@import '../../../../../node_modules/@navikt/ds-tokens/dist/tokens';
+
+.input--xxs {
+    width: 35px;
+}
+
+.input--xs {
+    width: 70px;
+}
+
+.input--s {
+    width: 140px;
+}
+
+.input--m {
+    width: 100%;
+    max-width: 210px;
+}
+
+.input--l {
+    width: 100%;
+    max-width: 280px;
+}
+
+.input--xl {
+    width: 100%;
+    max-width: 350px;
+}
+
+.input--xxl {
+    width: 100%;
+    max-width: 420px;
+}
+
+.input--fullbredde {
+    width: 100%;
+}
+
+.skjemaelement__input() {
+    font-family: @navds-font-family;
+    font-size: 16px;
+    font-weight: 400;
+    appearance: none;
+    padding: 0.5rem;
+    background-color: @navds-global-color-white;
+    border-radius: @navds-border-radius-medium;
+    border: 1px solid @navds-global-color-gray-600;
+    box-sizing: border-box;
+    line-height: 1.375rem;
+
+    &:focus {
+        outline: 0;
+        box-shadow: 0 0 0 3px @navds-global-color-blue-800;
+    }
+
+    &:hover {
+        border-color: @navds-semantic-color-interaction-primary;
+    }
+
+    &:disabled,
+    &[readonly] {
+        background-color: @navds-global-color-gray-100;
+        border-color: @navds-global-color-gray-600;
+        box-shadow: none;
+        color: @navds-global-color-gray-900;
+
+        &:hover {
+            cursor: not-allowed;
+        }
+    }
+
+    &--mini {
+        padding: 0.25rem;
+    }
+}
+
+.skjemaelement__input {
+    .skjemaelement__input();
+}

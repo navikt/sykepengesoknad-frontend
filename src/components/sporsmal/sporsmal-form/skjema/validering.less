@@ -1,0 +1,44 @@
+@import '../../../../../node_modules/@navikt/ds-tokens/dist/tokens';
+
+.skjemagruppe--feil {
+    .skjemaelement__input:not(:focus):not(:hover):not(:active):not(:checked) {
+        .skjemaelement-feilmarkering-mixin();
+
+        &.checkboks + .skjemaelement__label::before,
+        &.radioknapp + .skjemaelement__label::before {
+            .skjemaelement-feilmarkering-mixin();
+        }
+    }
+
+    .inputPanel:not(.inputPanel--focused):not(.inputPanel--checked):not(.inputPanel--disabled) {
+        .skjemaelement-feilmarkering-mixin();
+    }
+}
+
+.skjemaelement__feilmelding {
+    margin-top: 0.5rem;
+}
+
+.skjemaelement__feilmelding:empty {
+    margin: 0;
+}
+
+.skjemaelement__input--harFeil:not(:focus):not(:hover):not(:active) {
+    .navds-text-field__input, & + .ds-datepicker__kalenderknapp {
+        .skjemaelement-feilmarkering-mixin();
+    }
+
+    &.checkboks,
+    &.radio {
+        &:not(:checked) + .skjemaelement__label {
+            &::before {
+                .skjemaelement-feilmarkering-mixin();
+            }
+        }
+    }
+}
+
+.skjemaelement-feilmarkering-mixin() {
+    border-color: @navds-global-color-red-500;
+    box-shadow: 0 0 0 1px @navds-global-color-red-500;
+}

@@ -96,9 +96,9 @@ describe('Tester kvittering', () => {
             cy.get(`#soknader-list-til-behandling article a[href*=${oppholdUtlandKvittering.id}]`).click({ force: true })
 
             // Svar og send
-            cy.get('#1_0 .fom .nav-datovelger__kalenderknapp').click()
+            cy.get('#1_0 .fom .ds-datepicker__kalenderknapp').click()
             cy.get('.DayPicker-Day').contains('17').click()
-            cy.get('#1_0 .tom .nav-datovelger__kalenderknapp').click()
+            cy.get('#1_0 .tom .ds-datepicker__kalenderknapp').click()
             cy.get('.DayPicker-Day').contains('24').click()
             cy.contains('Gå videre').click()
             cy.get('.skjemaelement__input').type('Fransk')

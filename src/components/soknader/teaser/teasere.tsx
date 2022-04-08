@@ -1,5 +1,4 @@
 import { Heading, Label } from '@navikt/ds-react'
-import { Select } from 'nav-frontend-skjema'
 import React, { useState } from 'react'
 
 import { RSSoknadstatus } from '../../../types/rs-types/rs-soknadstatus'
@@ -47,14 +46,21 @@ const Teasere = ({ soknader, className, tittel, tomListeTekst, id, kanSorteres =
             <header className="teasere__header">
                 <Vis hvis={kanSorteres && sorterteSoknader().length > 0}
                     render={() =>
-                        <Select label="Sorter etter"
-                            className="inngangspanel__sortering"
-                            onChange={(event) => setSortering(event.target.value as Sortering)}
-                        >
-                            {Object.values(Sortering).map((sort, idx) => {
-                                return <option value={sort} key={idx}>{sort}</option>
-                            })}
-                        </Select>
+                        <div className="skjemaelement inngangspanel__sortering">
+                            <label className="skjemaelement__label" htmlFor="select_sort">
+                                Sorter etter
+                            </label>
+                            <div className="selectContainer input--fullbredde">
+                                <select id="select_sort"
+                                    className="skjemaelement__input"
+                                    onChange={(event) => setSortering(event.target.value as Sortering)}
+                                >
+                                    {Object.values(Sortering).map((sort, idx) => {
+                                        return <option value={sort} key={idx}>{sort}</option>
+                                    })}
+                                </select>
+                            </div>
+                        </div>
                     }
                 />
 

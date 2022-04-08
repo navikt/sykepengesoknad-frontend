@@ -1,7 +1,8 @@
+import '@navikt/ds-datepicker/lib/index.css'
 import './periode-komp.less'
 
+import { Datepicker } from '@navikt/ds-datepicker'
 import { BodyShort } from '@navikt/ds-react'
-import { Datepicker } from 'nav-datovelger'
 import React, { useEffect, useState } from 'react'
 import { Controller, useFormContext } from 'react-hook-form'
 
@@ -55,7 +56,7 @@ const PeriodeKomp = ({ sporsmal, index, slettPeriode }: AllProps) => {
                         validate: {
                             fom: () => {
                                 const validert = validerFom(sporsmal, id, getValues())
-                                const div: HTMLElement | null = document.getElementById(id + '_fom')
+                                const div: HTMLElement | null = document.getElementById(id + '_fom')!.parentElement
                                 if (validert !== true) {
                                     div?.classList.add('skjemaelement__input--harFeil')
                                 } else {
@@ -65,7 +66,7 @@ const PeriodeKomp = ({ sporsmal, index, slettPeriode }: AllProps) => {
                             },
                             tom: () => {
                                 const validert = validerTom(sporsmal, id, getValues())
-                                const div: HTMLElement | null = document.getElementById(id + '_tom')
+                                const div: HTMLElement | null = document.getElementById(id + '_tom')!.parentElement
                                 if (validert !== true) {
                                     div?.classList.add('skjemaelement__input--harFeil')
                                 } else {
@@ -75,7 +76,7 @@ const PeriodeKomp = ({ sporsmal, index, slettPeriode }: AllProps) => {
                             },
                             periode: () => {
                                 const validert = validerPeriode(sporsmal, id, getValues())
-                                const div: HTMLElement | null = document.getElementById(id + '_fom')
+                                const div: HTMLElement | null = document.getElementById(id + '_fom')!.parentElement
                                 if (validert !== true) {
                                     div?.classList.add('skjemaelement__input--harFeil')
                                 } else {
@@ -95,7 +96,7 @@ const PeriodeKomp = ({ sporsmal, index, slettPeriode }: AllProps) => {
                                 <Datepicker
                                     locale="nb"
                                     inputId={sporsmal.id + '_' + index + '_fom'}
-                                    onChange={(value) => onChange(value, undefined)}
+                                    onChange={(value: any) => onChange(value, undefined)}
                                     value={periode.fom}
                                     inputProps={{
                                         name: sporsmal.id + '_' + index + '_fom'
@@ -122,7 +123,7 @@ const PeriodeKomp = ({ sporsmal, index, slettPeriode }: AllProps) => {
                                 <Datepicker
                                     locale="nb"
                                     inputId={sporsmal.id + '_' + index + '_tom'}
-                                    onChange={(value) => onChange(undefined, value)}
+                                    onChange={(value: any) => onChange(undefined, value)}
                                     value={periode.tom}
                                     inputProps={{
                                         name: sporsmal.id + '_' + index + '_tom'

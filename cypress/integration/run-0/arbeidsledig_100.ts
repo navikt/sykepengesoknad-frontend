@@ -34,7 +34,7 @@ describe('Tester arbeidsledigsøknad', () => {
         // Test spørsmål
         cy.get('.inputPanelGruppe__inner label:nth-child(2) > input[value=NEI]').click({ force: true })
         cy.contains('Fra hvilken dato trengte du ikke lenger sykmeldingen?')
-        cy.get('.nav-datovelger__kalenderknapp').click()
+        cy.get('.ds-datepicker__kalenderknapp').click()
         cy.get('.DayPicker-Day').contains('20').click()
 
         cy.contains('Gå videre').click()
@@ -73,7 +73,7 @@ describe('Tester arbeidsledigsøknad', () => {
 
         // Underspørsmål 1
         cy.contains('Når startet du på utdanningen?')
-        cy.get('.nav-datovelger__kalenderknapp').click()
+        cy.get('.ds-datepicker__kalenderknapp').click()
         cy.get('.DayPicker-Day').contains('10').click()
 
         // Underspørsmål 2 - dato
@@ -93,9 +93,9 @@ describe('Tester arbeidsledigsøknad', () => {
 
         // Underspørsmål 1
         cy.contains('Når var du utenfor EØS?')
-        cy.get('#687423_0 .fom .nav-datovelger__kalenderknapp').click()
+        cy.get('#687423_0 .fom .ds-datepicker__kalenderknapp').click()
         cy.get('.DayPicker-Day').contains('17').click()
-        cy.get('#687423_0 .tom .nav-datovelger__kalenderknapp').click({ force: true })
+        cy.get('#687423_0 .tom .ds-datepicker__kalenderknapp').click({ force: true })
         cy.get('.DayPicker-Day').contains('24').click()
 
         // Underspørsmål 2
@@ -112,7 +112,7 @@ describe('Tester arbeidsledigsøknad', () => {
         // Test spørsmål
         cy.get('.inputPanelGruppe__inner label:first-child > input[value=JA]').click({ force: true })
         cy.contains('Velg første dag i permitteringen')
-        cy.get('.nav-datovelger__kalenderknapp').click()
+        cy.get('.ds-datepicker__kalenderknapp').click()
         cy.get('.DayPicker-Day').contains('20').click()
 
         cy.contains('Gå videre').click()
@@ -125,16 +125,16 @@ describe('Tester arbeidsledigsøknad', () => {
         cy.get('.inputPanelGruppe__inner label:first-child > input[value=JA]').click({ force: true })
 
         // Periode 1
-        cy.get('#687399_0 .fom .nav-datovelger__kalenderknapp').click()
+        cy.get('#687399_0 .fom .ds-datepicker__kalenderknapp').click()
         cy.get('.DayPicker-Day').contains('10').click()
-        cy.get('#687399_0 .tom .nav-datovelger__kalenderknapp').click()
+        cy.get('#687399_0 .tom .ds-datepicker__kalenderknapp').click()
         cy.get('.DayPicker-Day').contains('13').click()
 
         // Periode 2 - overlapper
         cy.contains('+ Legg til ekstra periode').click()
-        cy.get('#687399_1 .fom .nav-datovelger__kalenderknapp').click()
+        cy.get('#687399_1 .fom .ds-datepicker__kalenderknapp').click()
         cy.get('.DayPicker-Day').contains('12').click()
-        cy.get('#687399_1 .tom .nav-datovelger__kalenderknapp').click()
+        cy.get('#687399_1 .tom .ds-datepicker__kalenderknapp').click()
         cy.get('.DayPicker-Day').contains('14').click()
 
         // Feilmelding
@@ -143,9 +143,9 @@ describe('Tester arbeidsledigsøknad', () => {
         cy.contains('Du kan ikke legge inn perioder som overlapper med hverandre')
 
         // Endre periode 2
-        cy.get('#687399_1 .fom .nav-datovelger__kalenderknapp').click()
+        cy.get('#687399_1 .fom .ds-datepicker__kalenderknapp').click()
         cy.get('.DayPicker-Day').contains('14').click()
-        cy.get('#687399_1 .tom .nav-datovelger__kalenderknapp').click({ force: true })
+        cy.get('#687399_1 .tom .ds-datepicker__kalenderknapp').click({ force: true })
         cy.get('.DayPicker-Day').contains('16').click()
         cy.get('#687399_1_fom')
             .should('have.value', '14.11.2020')
@@ -166,7 +166,7 @@ describe('Tester arbeidsledigsøknad', () => {
 
         // Periode 3 - Må velge 2 datoer
         cy.contains('+ Legg til ekstra periode').click()
-        cy.get('#687399_2 .fom .nav-datovelger__kalenderknapp').click()
+        cy.get('#687399_2 .fom .ds-datepicker__kalenderknapp').click()
         cy.get('.DayPicker-Day').contains('10').click()
         cy.contains('Gå videre').click()
 
@@ -175,9 +175,9 @@ describe('Tester arbeidsledigsøknad', () => {
         cy.contains('Du må oppgi en til og med dato')
 
         // Endre periode 3
-        cy.get('#687399_2 .fom .nav-datovelger__kalenderknapp').click()
+        cy.get('#687399_2 .fom .ds-datepicker__kalenderknapp').click()
         cy.get('.DayPicker-Day').contains('20').click()
-        cy.get('#687399_2 .tom .nav-datovelger__kalenderknapp').click({ force: true })
+        cy.get('#687399_2 .tom .ds-datepicker__kalenderknapp').click({ force: true })
         cy.get('.DayPicker-Day').contains('22').click()
         cy.get('#687399_2_fom')
             .should('have.value', '20.11.2020')

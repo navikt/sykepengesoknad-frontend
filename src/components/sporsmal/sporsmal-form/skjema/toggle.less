@@ -1,0 +1,53 @@
+@import '../../../../../node_modules/@navikt/ds-tokens/dist/tokens';
+
+.toggle {
+    display: flex;
+}
+
+.toggle > :first-child .toggle__label {
+    border-radius: @navds-border-radius-small 0 0 @navds-border-radius-small;
+}
+
+.toggle > :last-child .toggle__label {
+    border-radius: 0 @navds-border-radius-small @navds-border-radius-small 0;
+    border-right: 1px solid @navds-global-color-gray-900;
+    margin-left: -1px;
+}
+
+.toggle__label {
+    font-family: @navds-font-family;
+    font-size: 16px;
+    line-height: 22px;
+    font-weight: 400;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: @navds-global-color-white;
+    border: 1px solid @navds-global-color-gray-900;
+    border-right: 0;
+    color: @navds-global-color-gray-900;
+    cursor: pointer;
+    min-width: 6.25rem;
+    height: 2rem;
+    padding-left: 1rem;
+    padding-right: 1rem;
+    border-radius: 0;
+}
+
+.toggle__label:hover {
+    border-color: @navds-semantic-color-interaction-primary;
+    color: @navds-semantic-color-interaction-primary;
+}
+
+.toggle__input:checked + label {
+    background-color: @navds-global-color-deepblue-500;
+    color: @navds-global-color-white;
+    border-color: @navds-global-color-deepblue-500;
+}
+
+.toggle__input:focus + label {
+    position: relative;
+    z-index: 999;
+    box-shadow: 0 0 0 3px @navds-semantic-color-focus;
+}

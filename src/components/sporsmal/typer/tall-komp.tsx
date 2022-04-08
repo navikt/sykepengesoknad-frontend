@@ -122,7 +122,7 @@ const TallKomp = ({ sporsmal }: SpmProps) => {
             <Vis hvis={sporsmal.tag === TagTyper.HVOR_MANGE_TIMER_PER_UKE && watchTall && watchTall < 10}
                 render={() =>
                     <Alert variant="warning">
-                        <BodyShort spacing>{tekst('sykepengesoknad.jobb-underveis-under-10-timer-uke')}</BodyShort>
+                        <BodyShort>{tekst('sykepengesoknad.jobb-underveis-under-10-timer-uke')}</BodyShort>
                     </Alert>
                 }
             />

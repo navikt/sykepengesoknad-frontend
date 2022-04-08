@@ -1,9 +1,8 @@
-@import '../../../node_modules/nav-frontend-core/less/_variabler';
-@import '../../../src/basic';
+@import '../../../node_modules/@navikt/ds-tokens/dist/tokens';
+@import '../../basic';
 
 .brodsmuler {
     max-height: 40px;
-    background-color: @alternativBakgrunn;
     padding: 8px 0 8px 1rem;
 
     .limit {
@@ -25,7 +24,7 @@
         .chevron--opp {
             display: block;
             margin-right: 0.5rem;
-            color: @navBla;
+            color: @navds-semantic-color-interaction-primary;
         }
     }
 
@@ -60,8 +59,9 @@
 
     .js-toggle {
         border: 0;
+        background: none;
         padding: 0 0.5rem;
-        color: @navBla;
+        color: @navds-semantic-color-interaction-primary;
         cursor: pointer;
 
         &:focus {
@@ -90,6 +90,10 @@
         display: flex;
         position: relative;
         margin-bottom: 1em;
+
+        .limit {
+            padding-left: 1rem;
+        }
 
         .smule {
             &:first-child:after {
