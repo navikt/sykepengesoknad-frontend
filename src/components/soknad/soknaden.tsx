@@ -1,5 +1,3 @@
-import './soknaden.less'
-
 import { Back } from '@navikt/ds-icons'
 import { Alert, BodyLong, BodyShort, Heading } from '@navikt/ds-react'
 import React, { useEffect } from 'react'

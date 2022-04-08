@@ -1,5 +1,3 @@
-import './dager-komp.less'
-
 import { BodyShort } from '@navikt/ds-react'
 import dayjs, { Dayjs } from 'dayjs'
 import isoWeek from 'dayjs/plugin/isoWeek'

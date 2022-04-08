@@ -1,5 +1,3 @@
-import './gjenapneknapp.less'
-
 import { Button } from '@navikt/ds-react'
 import React, { useEffect, useState } from 'react'
 import { useHistory, useParams } from 'react-router'

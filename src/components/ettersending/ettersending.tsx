@@ -1,5 +1,3 @@
-import './ettersending.less'
-
 import { Alert, Button, Heading, Modal } from '@navikt/ds-react'
 import React, { useState } from 'react'
 

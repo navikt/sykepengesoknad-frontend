@@ -1,5 +1,3 @@
-import './soknad-med-to-deler.less'
-
 import { BodyLong, GuidePanel, Heading } from '@navikt/ds-react'
 import React from 'react'
 

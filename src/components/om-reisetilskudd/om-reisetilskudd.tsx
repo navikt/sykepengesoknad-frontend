@@ -1,5 +1,3 @@
-import './om-reisetilskudd.less'
-
 import { Accordion, BodyLong, Heading, Label, Link } from '@navikt/ds-react'
 import parser from 'html-react-parser'
 import React, { useState } from 'react'

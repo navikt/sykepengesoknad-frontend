@@ -1,5 +1,3 @@
-import './feil-oppsummering.less'
-
 import { Heading } from '@navikt/ds-react'
 import React, { useEffect, useRef, useState } from 'react'
 import { useFormContext } from 'react-hook-form'

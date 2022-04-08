@@ -1,5 +1,3 @@
-import './personvern-les-mer.less'
-
 import { BodyShort, Button, Heading, Modal } from '@navikt/ds-react'
 import parser from 'html-react-parser'
 import React, { MouseEvent, useState } from 'react'

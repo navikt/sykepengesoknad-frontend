@@ -1,6 +1,3 @@
-import './app.less'
-import '@navikt/ds-css'
-
 import { Modal } from '@navikt/ds-react'
 import React, { useEffect } from 'react'
 import { Route, Switch, useLocation } from 'react-router-dom'

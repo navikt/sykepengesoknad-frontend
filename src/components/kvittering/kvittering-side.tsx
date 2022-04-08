@@ -1,5 +1,3 @@
-import './kvittering-side.less'
-
 import { Back } from '@navikt/ds-icons'
 import { BodyShort } from '@navikt/ds-react'
 import React, { useEffect, useState } from 'react'

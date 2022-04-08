@@ -1,5 +1,3 @@
-import './landvelger.less'
-
 import React, { useState } from 'react'
 
 import { Forslag } from './Forslag'

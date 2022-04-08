@@ -1,5 +1,4 @@
 import '@navikt/ds-datepicker/lib/index.css'
-import './periode-komp.less'
 
 import { Datepicker } from '@navikt/ds-datepicker'
 import { BodyShort } from '@navikt/ds-react'

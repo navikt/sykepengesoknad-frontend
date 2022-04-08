@@ -1,5 +1,3 @@
-import './slettknapp.less'
-
 import { Alert, Button, Heading, Modal } from '@navikt/ds-react'
 import React, { useState } from 'react'
 

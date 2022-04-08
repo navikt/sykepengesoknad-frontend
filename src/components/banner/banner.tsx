@@ -1,5 +1,3 @@
-import './banner.less'
-
 import { Heading } from '@navikt/ds-react'
 import React from 'react'
 

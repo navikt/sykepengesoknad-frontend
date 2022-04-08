@@ -1,5 +1,3 @@
-import './opplasting.less'
-
 import { Alert, BodyLong, BodyShort, Button, Label, Modal } from '@navikt/ds-react'
 import parser from 'html-react-parser'
 import React, { useRef } from 'react'

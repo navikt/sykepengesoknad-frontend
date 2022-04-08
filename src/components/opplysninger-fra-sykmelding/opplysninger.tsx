@@ -1,5 +1,3 @@
-import './opplysninger.less'
-
 import React from 'react'
 
 import { tekst } from '../../utils/tekster'

@@ -1,5 +1,3 @@
-import './inngangspanel.less'
-
 import { Tag } from '@navikt/ds-react'
 import React from 'react'
 

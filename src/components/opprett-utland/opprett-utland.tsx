@@ -1,5 +1,3 @@
-import './opprett-utland.less'
-
 import { Alert, Button, Heading } from '@navikt/ds-react'
 import parser from 'html-react-parser'
 import React from 'react'

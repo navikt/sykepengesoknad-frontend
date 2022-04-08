@@ -1,5 +1,3 @@
-import './avbryt-soknad-modal.less'
-
 import { BodyLong, Button, Modal } from '@navikt/ds-react'
 import React, { useState } from 'react'
 import { useHistory, useParams } from 'react-router-dom'

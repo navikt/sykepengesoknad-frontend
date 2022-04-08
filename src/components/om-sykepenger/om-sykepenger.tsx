@@ -1,5 +1,3 @@
-import './om-sykepenger.less'
-
 import { Accordion, Alert, BodyLong, BodyShort, Heading, Label, Link } from '@navikt/ds-react'
 import parser from 'html-react-parser'
 import React, { useState } from 'react'

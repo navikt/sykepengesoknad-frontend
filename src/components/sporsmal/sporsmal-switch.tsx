@@ -1,5 +1,3 @@
-import './undersporsmal/undersporsmal.less'
-
 import React from 'react'
 
 import { RSSvartype } from '../../types/rs-types/rs-svartype'

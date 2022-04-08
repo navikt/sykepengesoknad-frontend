@@ -1,5 +1,3 @@
-import './avslutt-og-fortsett-senere.less'
-
 import { BodyShort, Button, Heading, Modal } from '@navikt/ds-react'
 import React, { useState } from 'react'
 import { useParams } from 'react-router-dom'

@@ -1,5 +1,3 @@
-import './soknader.less'
-
 import { BodyShort, Link } from '@navikt/ds-react'
 import React, { useEffect } from 'react'
 

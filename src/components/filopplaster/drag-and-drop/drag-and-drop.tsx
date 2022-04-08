@@ -1,5 +1,3 @@
-import './drag-and-drop.less'
-
 import { BodyShort, Label } from '@navikt/ds-react'
 import React, { useCallback, useEffect, useState } from 'react'
 import { useDropzone } from 'react-dropzone'

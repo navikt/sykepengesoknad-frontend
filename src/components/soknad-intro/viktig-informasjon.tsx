@@ -1,5 +1,3 @@
-import './viktig-informasjon.less'
-
 import { BodyLong, GuidePanel, Label } from '@navikt/ds-react'
 import React from 'react'
 

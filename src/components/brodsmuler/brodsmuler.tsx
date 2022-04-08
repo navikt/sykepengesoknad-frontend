@@ -1,5 +1,3 @@
-import './brodsmuler.less'
-
 import { Collapse } from '@navikt/ds-icons'
 import { BodyShort } from '@navikt/ds-react'
 import React, { useEffect, useRef, useState } from 'react'

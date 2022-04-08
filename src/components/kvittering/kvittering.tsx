@@ -1,5 +1,3 @@
-import './kvittering.less'
-
 import { Alert, Button } from '@navikt/ds-react'
 import React, { useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom'

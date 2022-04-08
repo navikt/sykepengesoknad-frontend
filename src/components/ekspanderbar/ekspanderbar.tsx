@@ -1,5 +1,3 @@
-import './ekspanderbar.less'
-
 import { Accordion, BodyShort, Label } from '@navikt/ds-react'
 import React, { useEffect, useState } from 'react'
 

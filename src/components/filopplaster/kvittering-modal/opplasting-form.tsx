@@ -1,5 +1,3 @@
-import './opplasting-form.less'
-
 import { Alert, BodyLong, BodyShort, Button, Heading, Label } from '@navikt/ds-react'
 import dayjs from 'dayjs'
 import parser from 'html-react-parser'

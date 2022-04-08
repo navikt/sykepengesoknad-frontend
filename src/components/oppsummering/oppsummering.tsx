@@ -1,5 +1,3 @@
-import './oppsummering.less'
-
 import React from 'react'
 
 import { useAppStore } from '../../data/stores/app-store'
