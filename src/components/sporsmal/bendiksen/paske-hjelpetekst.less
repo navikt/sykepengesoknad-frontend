@@ -1,0 +1,59 @@
+@import '../../../../node_modules/@navikt/ds-tokens/dist/tokens';
+@import '../../../basic';
+
+.bendiksen-container {
+    margin: 1rem 0 2rem;
+
+    .bendiksen {
+        display: flex;
+        justify-content: center;
+
+        svg {
+            width: auto;
+            height: 100px;
+            margin-top: 0.5rem;
+        }
+    }
+
+    .bendiksen::after {
+        content: "";
+        border: 1em solid transparent;
+        border-top-color: @navds-semantic-color-canvas-background;
+        width: 0;
+        height: 0;
+        right: 1rem;
+        position: relative;
+        transform: skewX(-45deg);
+    }
+
+    .bendiksen-hjelpetekst {
+        padding: 1rem 2rem;
+        background-color: @navds-semantic-color-canvas-background;
+        border-radius: 0.5rem;
+    }
+}
+
+@media (min-width: @screen-sm) {
+    .bendiksen-container {
+        display: flex;
+        flex-direction: row-reverse;
+        flex: 1;
+        align-items: center;
+
+        .bendiksen {
+            position: relative;
+            align-items: center;
+
+            svg {
+                height: 120px;
+                margin-top: 0;
+            }
+        }
+
+        .bendiksen::after {
+            top: 50%;
+            right: 0;
+            transform: rotate(90deg);
+        }
+    }
+}

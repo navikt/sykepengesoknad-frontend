@@ -7,6 +7,7 @@ import { RSSoknadstatus } from '../../../types/rs-types/rs-soknadstatus'
 import { tekst } from '../../../utils/tekster'
 import { useAmplitudeInstance } from '../../amplitude/amplitude'
 import Vis from '../../vis'
+import { innenforPaske } from '../bendiksen/paske-utils'
 import { SpmProps } from '../sporsmal-form/sporsmal-form'
 import { fjernIndexFraTag } from '../sporsmal-utils'
 import Bjorn from './bjorn'
@@ -21,7 +22,7 @@ const BjornUnderSporsmalstekst = ({ sporsmal }: SpmProps) => {
         tag === TagTyper.ENKELTSTAENDE_BEHANDLINGSDAGER
 
     const bjornVeilederOgMaaler = (tag: TagTyper) =>
-        tag === TagTyper.FERIE_V2 && valgtSoknad?.status === RSSoknadstatus.NY
+        tag === TagTyper.FERIE_V2 && valgtSoknad?.status === RSSoknadstatus.NY && !innenforPaske(valgtSoknad.fom, valgtSoknad.tom)
 
     return (
         <>
