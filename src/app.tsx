@@ -7,14 +7,14 @@ import { Route, Switch, useLocation } from 'react-router-dom'
 import { CSSTransition, TransitionGroup } from 'react-transition-group'
 
 import { Amplitude } from './components/amplitude/amplitudeProvider'
+import RedirectTilOversikt from './components/feil/redirect-til-oversikt'
+import { RefreshHvisFeilState } from './components/feil/refresh-hvis-feil-state'
+import KvitteringSide from './components/kvittering/kvittering-side'
+import OpprettUtland from './components/opprett-utland/opprett-utland'
+import Soknad from './components/soknad/soknaden'
+import Soknader from './components/soknader/soknader'
 import { DataFetcher } from './data/data-fetcher'
 import StoreProvider from './data/stores/store-provider'
-import RedirectTilOversikt from './pages/feil/redirect-til-oversikt'
-import { RefreshHvisFeilState } from './pages/feil/refresh-hvis-feil-state'
-import KvitteringSide from './pages/kvittering/kvittering-side'
-import OpprettUtland from './pages/opprett-utland/opprett-utland'
-import Soknad from './pages/soknad/soknaden'
-import Soknader from './pages/soknader/soknader'
 
 export interface RouteParams {
     stegId: string

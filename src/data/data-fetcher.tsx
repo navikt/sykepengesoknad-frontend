@@ -1,7 +1,7 @@
 import { Loader } from '@navikt/ds-react'
 import React, { useEffect } from 'react'
 
-import IngenData from '../pages/feil/ingen-data'
+import IngenData from '../components/feil/ingen-data'
 import { RSSoknad } from '../types/rs-types/rs-soknad'
 import { Sykmelding } from '../types/sykmelding'
 import { Soknad } from '../types/types'

@@ -5,8 +5,6 @@ import parser from 'html-react-parser'
 import React from 'react'
 import { useHistory } from 'react-router'
 
-import Bjorn from '../../components/sporsmal/bjorn/bjorn'
-import Vis from '../../components/vis'
 import useFetch from '../../data/rest/use-fetch'
 import { FetchState, hasData } from '../../data/rest/utils'
 import { useAppStore } from '../../data/stores/app-store'
@@ -16,6 +14,8 @@ import env from '../../utils/environment'
 import { logger } from '../../utils/logger'
 import { tekst } from '../../utils/tekster'
 import { urlTilSoknad } from '../soknad/soknad-link'
+import Bjorn from '../sporsmal/bjorn/bjorn'
+import Vis from '../vis'
 
 const OpprettUtland = () => {
     const { soknader, setSoknader, setFeilmeldingTekst, feilmeldingTekst } = useAppStore()

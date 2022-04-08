@@ -2,12 +2,12 @@ import { Next } from '@navikt/ds-icons'
 import { Detail, Heading } from '@navikt/ds-react'
 import React from 'react'
 
-import { erDelvisUtfyltNySoknad } from '../../../pages/soknad/soknad-link'
 import { RSSoknadstatus } from '../../../types/rs-types/rs-soknadstatus'
 import { RSSoknadstype } from '../../../types/rs-types/rs-soknadstype'
 import { tilLesbarPeriodeMedArstall } from '../../../utils/dato-utils'
 import env from '../../../utils/environment'
 import { tekst } from '../../../utils/tekster'
+import { erDelvisUtfyltNySoknad } from '../../soknad/soknad-link'
 import Vis from '../../vis'
 import { InngangsIkon, Inngangspanel, InngangsStatus } from '../inngang/inngangspanel'
 import {

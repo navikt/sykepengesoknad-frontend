@@ -7,13 +7,13 @@ import { useHistory } from 'react-router'
 import useFetch from '../../data/rest/use-fetch'
 import { FetchState, hasData } from '../../data/rest/utils'
 import { useAppStore } from '../../data/stores/app-store'
-import { urlTilSoknad } from '../../pages/soknad/soknad-link'
 import { RSSoknad } from '../../types/rs-types/rs-soknad'
 import { Soknad } from '../../types/types'
 import env from '../../utils/environment'
 import { logger } from '../../utils/logger'
 import { tekst } from '../../utils/tekster'
 import { useAmplitudeInstance } from '../amplitude/amplitude'
+import { urlTilSoknad } from '../soknad/soknad-link'
 
 const Endreknapp = () => {
     const { valgtSoknad, soknader, setSoknader, setFeilmeldingTekst } = useAppStore()

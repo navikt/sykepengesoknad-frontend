@@ -3,11 +3,6 @@ import './soknader.less'
 import { BodyShort, Link } from '@navikt/ds-react'
 import React, { useEffect } from 'react'
 
-import Banner from '../../components/banner/banner'
-import Brodsmuler from '../../components/brodsmuler/brodsmuler'
-import OmSykepenger from '../../components/om-sykepenger/om-sykepenger'
-import Teasere from '../../components/soknader/teaser/teasere'
-import Vis from '../../components/vis'
 import { useAppStore } from '../../data/stores/app-store'
 import { RSSoknadstatus } from '../../types/rs-types/rs-soknadstatus'
 import { Brodsmule } from '../../types/types'
@@ -15,6 +10,11 @@ import env from '../../utils/environment'
 import { sorterEtterNyesteTom } from '../../utils/sorter-soknader'
 import { tekst } from '../../utils/tekster'
 import { setBodyClass } from '../../utils/utils'
+import Banner from '../banner/banner'
+import Brodsmuler from '../brodsmuler/brodsmuler'
+import OmSykepenger from '../om-sykepenger/om-sykepenger'
+import Vis from '../vis'
+import Teasere from './teaser/teasere'
 
 const brodsmuler: Brodsmule[] = [ {
     tittel: tekst('soknader.sidetittel'),
