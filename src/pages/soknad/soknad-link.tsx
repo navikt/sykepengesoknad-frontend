@@ -12,16 +12,13 @@ interface SoknadLinkProps {
 }
 
 export const urlTilSoknad = (soknad: Soknad) => {
-    if (soknad.status === RSSoknadstatus.SENDT) {
-        return `/kvittering/${soknad.id}`
-    }
-
-    const alltidTilForsteSporsmal = [
-        RSSoknadstatus.AVBRUTT,
-        RSSoknadstatus.UTKAST_TIL_KORRIGERING
-    ]
-    if (alltidTilForsteSporsmal.includes(soknad.status)) {
-        return `/soknader/${soknad.id}/1`
+    switch (soknad.status) {
+        case RSSoknadstatus.SENDT:
+            return `/kvittering/${soknad.id}`
+        case RSSoknadstatus.AVBRUTT:
+            return `/avbrutt/${soknad.id}`
+        case RSSoknadstatus.UTKAST_TIL_KORRIGERING:
+            return `/soknader/${soknad.id}/1`
     }
 
     const soknaderUrl = `/soknader/${soknad.id}`

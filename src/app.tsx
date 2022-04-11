@@ -9,6 +9,7 @@ import { CSSTransition, TransitionGroup } from 'react-transition-group'
 import { Amplitude } from './components/amplitude/amplitudeProvider'
 import { DataFetcher } from './data/data-fetcher'
 import StoreProvider from './data/stores/store-provider'
+import AvbruttSoknad from './pages/avbrutt/avbrutt-soknad'
 import RedirectTilOversikt from './pages/feil/redirect-til-oversikt'
 import { RefreshHvisFeilState } from './pages/feil/refresh-hvis-feil-state'
 import KvitteringSide from './pages/kvittering/kvittering-side'
@@ -55,6 +56,7 @@ const App = (): any => {
                                         <Route path="/soknader/:id/:stegId" component={Soknad} />
                                         <Route path="/soknader/:id" component={Soknad} />
                                         <Route path="/soknader/" component={RedirectTilOversikt} />
+                                        <Route path="/avbrutt/:id" component={AvbruttSoknad} />
                                         <Route path="/kvittering/:id" component={KvitteringSide} />
                                         <Route path="/sykepengesoknad-utland" component={OpprettUtland} />
                                     </Switch>
