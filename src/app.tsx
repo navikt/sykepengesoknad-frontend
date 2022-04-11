@@ -1,8 +1,10 @@
 import { Modal } from '@navikt/ds-react'
 import React from 'react'
-import { BrowserRouter, Route, Switch } from 'react-router-dom'
+import { Redirect, BrowserRouter, Route, Switch } from 'react-router-dom'
 import { CSSTransition, TransitionGroup } from 'react-transition-group'
 
+import AvbruttSoknad from './pages/avbrutt/avbrutt-soknad'
+import SendtSide from './pages/sendt/sendt-side'
 import { Amplitude } from './components/amplitude/amplitudeProvider'
 import RedirectTilOversikt from './components/feil/redirect-til-oversikt'
 import { RefreshHvisFeilState } from './components/feil/refresh-hvis-feil-state'
@@ -78,13 +80,24 @@ const App = (): any => {
                                                 component={RedirectTilOversikt}
                                             />
                                             <Route
+                                                path="/avbrutt/:id"
+                                                component={AvbruttSoknad}
+                                            />
+                                            <Route
                                                 path="/kvittering/:id"
                                                 component={KvitteringSide}
+                                            />
+                                            <Route
+                                                path="/sendt/:id"
+                                                component={SendtSide}
                                             />
                                             <Route
                                                 path="/sykepengesoknad-utland"
                                                 component={OpprettUtland}
                                             />
+                                            <Route path="">
+                                                <Redirect to="/" />
+                                            </Route>
                                         </Switch>
                                     </RefreshHvisFeilState>
                                 </main>

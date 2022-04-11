@@ -2,6 +2,7 @@ import * as H from 'history'
 import React from 'react'
 
 import { redirectTilLoginHvis401 } from '../../data/rest/utils'
+import { urlTilSoknad } from '../../pages/soknad/soknad-link'
 import { RSSoknadstatus } from '../../types/rs-types/rs-soknadstatus'
 import { RSSoknadstype } from '../../types/rs-types/rs-soknadstype'
 import { Soknad } from '../../types/types'
@@ -58,7 +59,7 @@ export async function avbrytSoknad({
                 ) as any
             )
             setValgtSoknad(nySoknad)
-            history.push(`/soknader/${valgtSoknad!.id}/1`)
+            history.push(urlTilSoknad(nySoknad))
         }
 
         setFeilmeldingTekst('')

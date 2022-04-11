@@ -95,7 +95,7 @@ describe('Tester ettersending og korrigering', () => {
         cy.contains('Send søknaden').click()
     })
 
-    it('Ettersend', () => {
+    it('Kvittering', () => {
         cy.url().should('include', `/kvittering/${soknad.id}`)
 
         // Sendt til
@@ -103,7 +103,14 @@ describe('Tester ettersending og korrigering', () => {
             .should('contain', 'POSTEN NORGE AS, BÆRUM (Org.nr. 974654458)')
             .and('contain', 'NAV')
 
-        // Ettersend
+        // Kan ikke ettersende til nav på kvittering
+        cy.contains('Send til NAV').should('not.exist')
+    })
+
+    it('Ettersend', () => {
+        cy.get('.brodsmuler__smuler .navds-link:contains(Søknader)').click({ force: true })
+        cy.get(`#soknader-sendt article a[href*=${soknad.id}]`).click({ force: true })
+
         cy.contains('Send til NAV').click()
         cy.contains(
             'Vanligvis sendes søknaden bare til NAV hvis det samlede sykefraværet ' +
@@ -116,7 +123,7 @@ describe('Tester ettersending og korrigering', () => {
 
     it('Korriger', () => {
         // Endre søknaden
-        cy.url().should('include', `/kvittering/${soknad.id}`)
+        cy.url().should('include', `/sendt/${soknad.id}`)
         cy.contains('Jeg vil endre svarene i søknaden').click()
         cy.contains('Ok').click()
 

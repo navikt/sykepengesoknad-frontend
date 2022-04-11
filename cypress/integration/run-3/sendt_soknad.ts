@@ -25,7 +25,7 @@ describe('Tester sendt søknad', () => {
         ).click()
         cy.url().should(
             'equal',
-            `http://localhost:8080/syk/sykepengesoknad/kvittering/${sendtArbeidsledig.id}`
+            `http://localhost:8080/syk/sykepengesoknad/sendt/${sendtArbeidsledig.id}`
         )
     })
 
@@ -38,7 +38,7 @@ describe('Tester sendt søknad', () => {
         cy.contains('Søknaden er sendt til NAV')
         cy.url().should(
             'equal',
-            `http://localhost:8080/syk/sykepengesoknad/kvittering/${sendtArbeidsledig.id}`
+            `http://localhost:8080/syk/sykepengesoknad/sendt/${sendtArbeidsledig.id}`
         )
     })
 })

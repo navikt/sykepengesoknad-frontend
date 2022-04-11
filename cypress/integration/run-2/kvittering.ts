@@ -82,7 +82,7 @@ describe('Tester kvittering', () => {
             ).click()
             cy.url().should(
                 'include',
-                `/kvittering/${sendtArbeidsledigKvittering.id}`
+                `/sendt/${sendtArbeidsledigKvittering.id}`
             )
 
             // Sendt datoer
@@ -266,6 +266,12 @@ describe('Tester kvittering', () => {
                 `/kvittering/${arbeidstakerInnenforArbeidsgiverperiodeKvittering.id}`
             )
             inntil16dagerKvittering()
+
+            // Ettersending til nav vises ikke i kvittering
+            cy.contains('Send til NAV').should('not.exist')
+            cy.get('.brodsmuler__smuler .navds-link:contains(Søknader)').click({ force: true })
+            cy.get(`#soknader-sendt article a[href*=${arbeidstakerInnenforArbeidsgiverperiodeKvittering.id}]`).click({ force: true })
+            cy.url().should('include', `/sendt/${arbeidstakerInnenforArbeidsgiverperiodeKvittering.id}`)
 
             // Ettersend
             cy.contains('Send til NAV').click()
@@ -460,7 +466,7 @@ const inntil16dagerKvittering = () => {
 
     // Knapperad ( Endre, Ettersend)
     cy.contains('Jeg vil endre svarene i søknaden').should('exist')
-    cy.contains('Send til NAV').should('exist')
+    cy.contains('Send til NAV').should('not.exist')
     cy.contains('Send til arbeidsgiver').should('not.exist')
 }
 

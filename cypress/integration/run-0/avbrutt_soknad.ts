@@ -17,11 +17,9 @@ describe('Tester avryting av søknad', () => {
             .should('include.text', 'Avbrutt av deg')
     })
 
-    it('Ved klikk så åpnes avbrutt søknad visning', function () {
-        cy.get(
-            `#soknader-sendt article[aria-labelledby*=${avbruttSoknad.id}]`
-        ).click()
-        cy.url().should('include', `${avbruttSoknad.id}/1`)
+    it('Ved klikk så åpnes avbrutt søknad visning', function() {
+        cy.get(`#soknader-sendt article[aria-labelledby*=${avbruttSoknad.id}]`).click()
+        cy.url().should('include', `avbrutt/${avbruttSoknad.id}`)
     })
 
     it('Avbrutt tekster stemmer', function () {
@@ -70,11 +68,9 @@ describe('Tester avryting av søknad', () => {
             '.modal__avbryt_popup button:contains(Nei, jeg vil bruke søknaden)'
         ).should('not.exist')
 
-        cy.contains('Jeg vil ikke bruke denne søknaden').click()
-        cy.get(
-            '.modal__avbryt_popup button:contains(Ja, jeg er sikker)'
-        ).click()
-        cy.url().should('include', `${avbruttSoknad.id}/1`)
+        cy.contains('Jeg vil ikke søke om sykepenger').click()
+        cy.get('.modal__avbryt_popup button:contains(Ja, jeg er sikker)').click()
+        cy.url().should('include', `avbrutt/${avbruttSoknad.id}`)
         cy.contains('Gjenåpne søknad')
     })
 })

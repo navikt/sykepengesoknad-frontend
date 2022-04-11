@@ -1,57 +1,46 @@
-import { Alert, Button } from '@navikt/ds-react'
+import './sendt-side.less'
+
+import { Alert } from '@navikt/ds-react'
 import React, { useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom'
 
 import { RouteParams } from '../../app'
+import { useAmplitudeInstance } from '../../components/amplitude/amplitude'
+import Banner from '../../components/banner/banner'
+import Brodsmuler from '../../components/brodsmuler/brodsmuler'
+import Endreknapp from '../../components/endreknapp/endreknapp'
+import Ettersending from '../../components/ettersending/ettersending'
+import { hentHotjarJsTrigger, HotjarTrigger } from '../../components/hotjar-trigger'
+import Kvittering from '../../components/kvittering/kvittering'
+import Vis from '../../components/vis'
 import { useAppStore } from '../../data/stores/app-store'
 import { RSSoknadstatus } from '../../types/rs-types/rs-soknadstatus'
 import { RSSoknadstype } from '../../types/rs-types/rs-soknadstype'
-import Endreknapp from '../../components/endreknapp/endreknapp'
 import { Brodsmule } from '../../types/types'
 import { SEPARATOR } from '../../utils/constants'
-import env from '../../utils/environment'
 import { tekst } from '../../utils/tekster'
-import { setBodyClass } from '../../utils/utils'
-import { useAmplitudeInstance } from '../amplitude/amplitude'
-import Banner from '../banner/banner'
-import Brodsmuler from '../brodsmuler/brodsmuler'
-import { hentHotjarJsTrigger, HotjarTrigger } from '../hotjar-trigger'
-import Vis from '../vis'
-import Kvittering from './kvittering'
 
-const brodsmuler: Brodsmule[] = [
-    {
-        tittel: tekst('soknader.sidetittel'),
-        sti: SEPARATOR,
-        erKlikkbar: true,
-    },
-    {
-        tittel: tekst('kvittering.sidetittel'),
-        sti: null as any,
-        erKlikkbar: false,
-    },
-]
+const brodsmuler: Brodsmule[] = [ {
+    tittel: tekst('soknader.sidetittel'),
+    sti: SEPARATOR,
+    erKlikkbar: true
+}, {
+    tittel: tekst('kvittering.sidetittel'),
+    sti: null as any,
+    erKlikkbar: false,
+} ]
 
-const KvitteringSide = () => {
-    const {
-        valgtSoknad,
-        soknader,
-        setValgtSoknad,
-        setValgtSykmelding,
-        sykmeldinger,
-        feilmeldingTekst,
-    } = useAppStore()
-    const [rerendreKvittering, setRerendrekvittering] = useState<Date>(new Date())
+const SendtSide = () => {
+    const { valgtSoknad, soknader, setValgtSoknad, setValgtSykmelding, sykmeldinger, feilmeldingTekst } = useAppStore()
+    const [ rerendreKvittering, setRerendrekvittering ] = useState<Date>(new Date())
     const { logEvent } = useAmplitudeInstance()
     const { id } = useParams<RouteParams>()
 
     useEffect(() => {
-        const filtrertSoknad = soknader.find((soknad) => soknad.id === id)
+        const filtrertSoknad = soknader.find(soknad => soknad.id === id)
         setValgtSoknad(filtrertSoknad)
 
-        const sykmelding = sykmeldinger.find(
-            (sm) => sm.id === filtrertSoknad?.sykmeldingId
-        )
+        const sykmelding = sykmeldinger.find(sm => sm.id === filtrertSoknad?.sykmeldingId)
         setValgtSykmelding(sykmelding)
 
         logEvent('skjema åpnet', {
@@ -69,19 +58,20 @@ const KvitteringSide = () => {
 
     if (!valgtSoknad) return null
 
+    const erSendtTilNav = valgtSoknad.sendtTilNAVDato !== null
     const erSendtTilArbeidsgiver = valgtSoknad.sendtTilArbeidsgiverDato !== null
 
     const skalViseEndre = valgtSoknad.status !== RSSoknadstatus.KORRIGERT
     const skalViseSendTilArbeidsgiver = valgtSoknad.arbeidsgiver !== undefined && !erSendtTilArbeidsgiver && valgtSoknad.soknadstype !== RSSoknadstype.REISETILSKUDD
-    const skalViseKnapperad = valgtSoknad.soknadstype !== RSSoknadstype.OPPHOLD_UTLAND && (skalViseEndre || skalViseSendTilArbeidsgiver)
+    const skalViseKnapperad = valgtSoknad.soknadstype !== RSSoknadstype.OPPHOLD_UTLAND && (skalViseEndre || !erSendtTilNav || skalViseSendTilArbeidsgiver)
 
     return (
         <>
             <Banner />
             <Brodsmuler brodsmuler={brodsmuler} />
 
-            <div className="limit kvittering-side">
-                <HotjarTrigger jsTrigger={hentHotjarJsTrigger(valgtSoknad.soknadstype, 'kvittering')}>
+            <div className="limit sendt-side">
+                <HotjarTrigger jsTrigger={hentHotjarJsTrigger(valgtSoknad.soknadstype, 'sendt')}>
                     <Kvittering />
 
                     <Vis hvis={skalViseKnapperad}
@@ -89,6 +79,11 @@ const KvitteringSide = () => {
                             <div className="knapperad">
                                 <Vis hvis={skalViseEndre}
                                     render={() => <Endreknapp />}
+                                />
+
+                                <Vis
+                                    hvis={!erSendtTilNav}
+                                    render={() => <Ettersending gjelder="nav" setRerendrekvittering={setRerendrekvittering} />}
                                 />
 
                                 <Vis hvis={skalViseSendTilArbeidsgiver}
@@ -99,21 +94,6 @@ const KvitteringSide = () => {
                             </div>
                         }
                     />
-
-                    <Button className="avslutt-knapp" onClick={
-                        () => {
-                            logEvent('knapp klikket', {
-                                'tekst': tekst('kvittering.avslutt'),
-                                'soknadstype': valgtSoknad?.soknadstype,
-                            })
-                            // Må sikre at amplitude får logget ferdig
-                            window.setTimeout(() => {
-                                window.location.href = env.dittNavUrl()
-                            }, 200)
-                        }
-                    }>
-                        {tekst('kvittering.avslutt')}
-                    </Button>
 
                     <div aria-live="polite">
                         <Vis hvis={feilmeldingTekst}
@@ -126,4 +106,4 @@ const KvitteringSide = () => {
     )
 }
 
-export default KvitteringSide
+export default SendtSide

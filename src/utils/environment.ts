@@ -58,10 +58,6 @@ export function dittNavUrl() {
     return publicRuntimeConfig.dittNavUrl
 }
 
-export function sendTilNavKnappDelaySeconds(): number {
-    return publicRuntimeConfig.sendTilNavKnappDelaySeconds
-}
-
 export function dinesakerUrl(): string {
     return publicRuntimeConfig.dineSakerUrl
 }

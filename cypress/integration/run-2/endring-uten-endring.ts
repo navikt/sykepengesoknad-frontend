@@ -4,9 +4,7 @@ describe('Tester endring uten en endringer', () => {
     const soknad = sendtArbeidsledigKvittering
 
     before(() => {
-        cy.visit(
-            `http://localhost:8080/syk/sykepengesoknad/kvittering/${soknad.id}`
-        )
+        cy.visit(`http://localhost:8080/syk/sykepengesoknad/sendt/${soknad.id}`)
     })
 
     it('Jeg vil endre svarene i søknaden', () => {
@@ -15,7 +13,7 @@ describe('Tester endring uten en endringer', () => {
         cy.contains('Ok').click()
 
         // Ny søknad
-        cy.url().should('not.include', `/kvittering/${soknad.id}`)
+        cy.url().should('not.include', `/sendt/${soknad.id}`)
         cy.url().should('include', '/1')
 
         cy.contains('Gå videre').click()
