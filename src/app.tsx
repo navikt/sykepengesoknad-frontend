@@ -3,7 +3,7 @@ import '@navikt/ds-css'
 
 import { Modal } from '@navikt/ds-react'
 import React, { useEffect } from 'react'
-import { Route, Switch, useLocation } from 'react-router-dom'
+import { Redirect, Route, Switch, useLocation } from 'react-router-dom'
 import { CSSTransition, TransitionGroup } from 'react-transition-group'
 
 import { Amplitude } from './components/amplitude/amplitudeProvider'
@@ -59,6 +59,9 @@ const App = (): any => {
                                         <Route path="/avbrutt/:id" component={AvbruttSoknad} />
                                         <Route path="/kvittering/:id" component={KvitteringSide} />
                                         <Route path="/sykepengesoknad-utland" component={OpprettUtland} />
+                                        <Route path="">
+                                            <Redirect to="/" />
+                                        </Route>
                                     </Switch>
                                 </RefreshHvisFeilState>
                             </main>
