@@ -72,7 +72,7 @@ describe('Tester ettersending og korrigering', () => {
         cy.contains('Send søknaden').click()
     })
 
-    it('Ettersend', () => {
+    it('Kvittering', () => {
         cy.url().should('include', `/kvittering/${soknad.id}`)
 
         // Sendt til
@@ -80,17 +80,22 @@ describe('Tester ettersending og korrigering', () => {
             .should('contain', 'POSTEN NORGE AS, BÆRUM (Org.nr. 974654458)')
             .and('contain', 'NAV')
 
-        // Ettersend
+        // Kan ikke ettersende til nav på kvittering
+        cy.contains('Send til NAV').should('not.exist')
+    })
+
+    it('Ettersend', () => {
+        cy.get('.brodsmuler__smuler .navds-link:contains(Søknader)').click({ force: true })
+        cy.get(`#soknader-sendt article a[href*=${soknad.id}]`).click({ force: true })
+
         cy.contains('Send til NAV').click()
         cy.contains('Vanligvis sendes søknaden bare til NAV hvis det samlede sykefraværet er 16 dager eller mer. Denne søknaden er beregnet til å være kortere. Hvis arbeidsgiveren din eller NAV har bedt deg sende den likevel, gjør du det her')
         cy.contains('Ja, send søknaden').click()
         cy.contains('Send til NAV').should('not.exist')
-
     })
 
     it('Korriger', () => {
-        // Endre søknaden
-        cy.url().should('include', `/kvittering/${soknad.id}`)
+        cy.url().should('include', `/sendt/${soknad.id}`)
         cy.contains('Endre søknaden').click()
 
         // Ny søknad

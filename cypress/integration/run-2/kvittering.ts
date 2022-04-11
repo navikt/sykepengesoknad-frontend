@@ -55,7 +55,7 @@ describe('Tester kvittering', () => {
                 .and('have.attr', 'aria-expanded', 'false')
 
             // Knapperad ( Endre, Ettersend)
-            cy.contains('Endre søknaden').should('exist')
+            cy.contains('Endre søknaden').should('not.exist')
         })
 
         it('Etter 30 dager', () => {
@@ -63,7 +63,7 @@ describe('Tester kvittering', () => {
 
             cy.get(`#soknader-sendt article[aria-labelledby*=${sendtArbeidsledigKvittering.id}]`).scrollIntoView({ duration: 400 })
             cy.get(`[aria-labelledby="soknader-header-${sendtArbeidsledigKvittering.id}"] > .inngangspanel > .inngangspanel__ytre > .inngangspanel__del1 > .inngangspanel__ikon--normal > img`).click()
-            cy.url().should('include', `/kvittering/${sendtArbeidsledigKvittering.id}`)
+            cy.url().should('include', `/sendt/${sendtArbeidsledigKvittering.id}`)
 
             // Sendt datoer
             cy.get('.kvittering .navds-alert--success')
@@ -186,7 +186,7 @@ describe('Tester kvittering', () => {
                 .and('have.attr', 'aria-expanded', 'false')
 
             // Knapperad ( Endre, Ettersend)
-            cy.contains('Endre søknaden').should('exist')
+            cy.contains('Endre søknaden').should('not.exist')
             cy.contains('Send til NAV').should('not.exist')
             cy.contains('Send til arbeidsgiver').should('not.exist')
         })
@@ -200,6 +200,12 @@ describe('Tester kvittering', () => {
             besvarSoknad()
             cy.url().should('include', `/kvittering/${arbeidstakerInnenforArbeidsgiverperiodeKvittering.id}`)
             inntil16dagerKvittering()
+
+            // Ettersending til nav vises ikke i kvittering
+            cy.contains('Send til NAV').should('not.exist')
+            cy.get('.brodsmuler__smuler .navds-link:contains(Søknader)').click({ force: true })
+            cy.get(`#soknader-sendt article a[href*=${arbeidstakerInnenforArbeidsgiverperiodeKvittering.id}]`).click({ force: true })
+            cy.url().should('include', `/sendt/${arbeidstakerInnenforArbeidsgiverperiodeKvittering.id}`)
 
             // Ettersend
             cy.contains('Send til NAV').click()
@@ -334,8 +340,8 @@ const inntil16dagerKvittering = () => {
         .and('have.attr', 'aria-expanded', 'false')
 
     // Knapperad ( Endre, Ettersend)
-    cy.contains('Endre søknaden').should('exist')
-    cy.contains('Send til NAV').should('exist')
+    cy.contains('Endre søknaden').should('not.exist')
+    cy.contains('Send til NAV').should('not.exist')
     cy.contains('Send til arbeidsgiver').should('not.exist')
 }
 
@@ -384,7 +390,7 @@ const over16dagerKvittering = () => {
         .and('have.attr', 'aria-expanded', 'false')
 
     // Knapperad ( Endre, Ettersend)
-    cy.contains('Endre søknaden').should('exist')
+    cy.contains('Endre søknaden').should('not.exist')
     cy.contains('Send til NAV').should('not.exist')
     cy.contains('Send til arbeidsgiver').should('not.exist')
 }
@@ -421,7 +427,7 @@ const utenOppholdKvittering = () => {
         .and('have.attr', 'aria-expanded', 'false')
 
     // Knapperad ( Endre, Ettersend)
-    cy.contains('Endre søknaden').should('exist')
+    cy.contains('Endre søknaden').should('not.exist')
     cy.contains('Send til NAV').should('not.exist')
     cy.contains('Send til arbeidsgiver').should('exist')
 }
@@ -465,7 +471,7 @@ const medOppholdKvittering = () => {
         .and('have.attr', 'aria-expanded', 'false')
 
     // Knapperad ( Endre, Ettersend)
-    cy.contains('Endre søknaden').should('exist')
+    cy.contains('Endre søknaden').should('not.exist')
     cy.contains('Send til NAV').should('not.exist')
     cy.contains('Send til arbeidsgiver').should('exist')
 }

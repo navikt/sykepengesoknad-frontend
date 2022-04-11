@@ -5,7 +5,7 @@ describe('Tester endring uten en endringer', () => {
     const soknad = sendtArbeidsledigKvittering
 
     before(() => {
-        cy.visit(`http://localhost:8080/syk/sykepengesoknad/kvittering/${soknad.id}`)
+        cy.visit(`http://localhost:8080/syk/sykepengesoknad/sendt/${soknad.id}`)
     })
 
 
@@ -14,7 +14,7 @@ describe('Tester endring uten en endringer', () => {
         cy.contains('Endre søknaden').click()
 
         // Ny søknad
-        cy.url().should('not.include', `/kvittering/${soknad.id}`)
+        cy.url().should('not.include', `/sendt/${soknad.id}`)
         cy.url().should('include', '/1')
         cy.get('.navds-alert--info')
             .should('contain', 'Rett opp det som er feil i søknaden, og send den inn på nytt.')

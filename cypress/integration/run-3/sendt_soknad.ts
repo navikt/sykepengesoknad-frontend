@@ -2,7 +2,6 @@ import { sendtArbeidsledig } from '../../../src/data/mock/data/soknader-integrat
 
 describe('Tester sendt søknad', () => {
 
-
     before(() => {
         cy.visit('http://localhost:8080/syk/sykepengesoknad')
     })
@@ -15,24 +14,21 @@ describe('Tester sendt søknad', () => {
         cy.get(`#soknader-sendt article[aria-labelledby*=${sendtArbeidsledig.id}]`)
             .should('include.text', '27. mai – 11. juni 2020')
             .should('include.text', 'Sendt til NAV')
-
     })
 
     it('Ved klikk så åpnes kvittering søknad visning', function() {
         cy.get(`#soknader-sendt article[aria-labelledby*=${sendtArbeidsledig.id}]`).click()
-        cy.url().should('equal', `http://localhost:8080/syk/sykepengesoknad/kvittering/${sendtArbeidsledig.id}`)
+        cy.url().should('equal', `http://localhost:8080/syk/sykepengesoknad/sendt/${sendtArbeidsledig.id}`)
     })
 
     it('Tekster stemmer', function() {
         cy.contains('Søknaden er sendt til NAV')
-
     })
 
     it('Siden kan refreshes', function() {
         cy.reload()
         cy.contains('Søknaden er sendt til NAV')
-        cy.url().should('equal', `http://localhost:8080/syk/sykepengesoknad/kvittering/${sendtArbeidsledig.id}`)
-
+        cy.url().should('equal', `http://localhost:8080/syk/sykepengesoknad/sendt/${sendtArbeidsledig.id}`)
     })
 
 })
