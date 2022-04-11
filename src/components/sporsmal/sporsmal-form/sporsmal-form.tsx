@@ -8,6 +8,7 @@ import { RouteParams } from '../../../app'
 import useFetch from '../../../data/rest/use-fetch'
 import { FetchState, hasData, redirectTilLoginHvis401 } from '../../../data/rest/utils'
 import { useAppStore } from '../../../data/stores/app-store'
+import { urlTilSoknad } from '../../../pages/soknad/soknad-link'
 import { TagTyper } from '../../../types/enums'
 import { RSMottakerResponse } from '../../../types/rs-types/rest-response/rs-mottakerresponse'
 import { RSOppdaterSporsmalResponse } from '../../../types/rs-types/rest-response/rs-oppdatersporsmalresponse'
@@ -191,7 +192,6 @@ const SporsmalForm = () => {
                     valgtSoknad.sendtTilNAVDato = new Date()
                 }
 
-                history.push(pathUtenSteg(history.location.pathname).replace('soknader', 'kvittering'))
                 valgtSoknad.status = RSSoknadstatus.SENDT
                 setValgtSoknad(valgtSoknad)
                 soknader[soknader.findIndex(sok => sok.id === valgtSoknad.id)] = valgtSoknad
@@ -199,6 +199,8 @@ const SporsmalForm = () => {
                     soknader.find(sok => sok.id === valgtSoknad.korrigerer)!.status = RSSoknadstatus.KORRIGERT
                 }
                 setSoknader(soknader)
+
+                history.push(urlTilSoknad(valgtSoknad))
             } else {
                 logger.error('Feil ved sending av søknad', res)
                 restFeilet = true
