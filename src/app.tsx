@@ -14,6 +14,7 @@ import RedirectTilOversikt from './pages/feil/redirect-til-oversikt'
 import { RefreshHvisFeilState } from './pages/feil/refresh-hvis-feil-state'
 import KvitteringSide from './pages/kvittering/kvittering-side'
 import OpprettUtland from './pages/opprett-utland/opprett-utland'
+import SendtSide from './pages/sendt/sendt-side'
 import Soknad from './pages/soknad/soknaden'
 import Soknader from './pages/soknader/soknader'
 
@@ -58,6 +59,7 @@ const App = (): any => {
                                         <Route path="/soknader/" component={RedirectTilOversikt} />
                                         <Route path="/avbrutt/:id" component={AvbruttSoknad} />
                                         <Route path="/kvittering/:id" component={KvitteringSide} />
+                                        <Route path="/sendt/:id" component={SendtSide} />
                                         <Route path="/sykepengesoknad-utland" component={OpprettUtland} />
                                         <Route path="">
                                             <Redirect to="/" />

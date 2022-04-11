@@ -1,0 +1,38 @@
+@import '../../basic';
+
+.kvittering-side {
+    .knapperad {
+        display: flex;
+        justify-content: flex-start;
+        align-items: flex-start;
+        flex-wrap: wrap;
+        margin: 3rem 0 4rem;
+
+        .navds-button {
+            margin-right: 1rem;
+            margin-bottom: 1rem;
+
+            &:last-child {
+                margin-bottom: 0.5rem;
+            }
+        }
+    }
+
+    .avslutt-knapp {
+        margin-bottom: 4rem;
+
+        .navds-button__inner {
+            margin: 0 17px 0 17px;
+        }
+    }
+}
+
+@media (min-width: @screen-sm) {
+    .kvittering-side {
+        .knapperad {
+            .navds-button {
+                margin-bottom: 0;
+            }
+        }
+    }
+}

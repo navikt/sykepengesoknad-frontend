@@ -8,7 +8,6 @@ import { RouteParams } from '../../../app'
 import useFetch from '../../../data/rest/use-fetch'
 import { FetchState, hasData, redirectTilLoginHvis401 } from '../../../data/rest/utils'
 import { useAppStore } from '../../../data/stores/app-store'
-import { urlTilSoknad } from '../../../pages/soknad/soknad-link'
 import { TagTyper } from '../../../types/enums'
 import { RSMottakerResponse } from '../../../types/rs-types/rest-response/rs-mottakerresponse'
 import { RSOppdaterSporsmalResponse } from '../../../types/rs-types/rest-response/rs-oppdatersporsmalresponse'
@@ -200,7 +199,7 @@ const SporsmalForm = () => {
                 }
                 setSoknader(soknader)
 
-                history.push(urlTilSoknad(valgtSoknad))
+                history.push(`/kvittering/${valgtSoknad!.id}`)
             } else {
                 logger.error('Feil ved sending av søknad', res)
                 restFeilet = true

@@ -14,7 +14,7 @@ interface SoknadLinkProps {
 export const urlTilSoknad = (soknad: Soknad) => {
     switch (soknad.status) {
         case RSSoknadstatus.SENDT:
-            return `/kvittering/${soknad.id}`
+            return `/sendt/${soknad.id}`
         case RSSoknadstatus.AVBRUTT:
             return `/avbrutt/${soknad.id}`
         case RSSoknadstatus.UTKAST_TIL_KORRIGERING:

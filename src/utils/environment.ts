@@ -57,10 +57,6 @@ class Environment implements EnvironmentInterface {
         return this.env.DITTNAV_URL
     }
 
-    sendTilNavKnappDelaySeconds(): number {
-        return 10
-    }
-
     dinesakerUrl(): string {
         return this.env.DINESAKER_URL
     }
@@ -97,21 +93,19 @@ interface EnvironmentInterface {
     isQ1(): boolean
 
     isProd(): boolean
-
-    sendTilNavKnappDelaySeconds(): number
 }
 
 function hentEnvironment(): EnvironmentInterface {
     if (process.env.NODE_ENV === 'development') {
         return {
             dinesakerUrl(): string {
-                return ''
+                return 'https://person.nav.no/mine-saker/tema/SYK'
             }, amplitudeEnabled(): boolean {
                 return false
             }, amplitudeKey(): string {
                 return ''
             }, dittNavUrl(): string {
-                return ''
+                return 'https://flex-dittnav-brukertest.labs.nais.io/person/dittnav/?testperson=soknad'
             }, flexGatewayRoot(): string {
                 return ''
             }, isDev(): boolean {
@@ -131,14 +125,10 @@ function hentEnvironment(): EnvironmentInterface {
             }, loginServiceUrl(): string {
                 return ''
             }, sykefravaerUrl(): string {
-                return ''
+                return 'https://ditt-sykefravaer.labs.nais.io/syk/sykefravaer'
             }, sykmeldingerBackendProxyRoot(): string {
                 return ''
             },
-            sendTilNavKnappDelaySeconds(): number {
-                return -1
-            }
-
         }
     }
     return new Environment()

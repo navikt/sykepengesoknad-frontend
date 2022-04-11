@@ -1,0 +1,30 @@
+@import '../../basic';
+
+.sendt-side {
+    .knapperad {
+        display: flex;
+        justify-content: flex-start;
+        align-items: flex-start;
+        flex-wrap: wrap;
+        margin: 3rem 0 4rem;
+
+        .navds-button {
+            margin-right: 1rem;
+            margin-bottom: 1rem;
+
+            &:last-child {
+                margin-bottom: 0.5rem;
+            }
+        }
+    }
+}
+
+@media (min-width: @screen-sm) {
+    .sendt-side {
+        .knapperad {
+            .navds-button {
+                margin-bottom: 0;
+            }
+        }
+    }
+}

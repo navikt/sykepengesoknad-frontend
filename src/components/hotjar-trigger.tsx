@@ -13,8 +13,8 @@ interface HotjarWindow extends Window {
     hj: (name: string, value: string) => void
 }
 
-export const hentHotjarJsTrigger = (soknadstype: RSSoknadstype, sted: 'kvittering' | 'soknad'): string | null => {
-    if (sted == 'soknad' || sted == 'kvittering') {
+export const hentHotjarJsTrigger = (soknadstype: RSSoknadstype, sted: 'sendt' | 'kvittering' | 'soknad'): string | null => {
+    if (sted == 'soknad' || sted == 'kvittering' || sted == 'sendt') {
         switch (soknadstype) {
             case RSSoknadstype.SELVSTENDIGE_OG_FRILANSERE:
                 return 'SOKNAD_FRILANSER_NAERINGSDRIVENDE'

@@ -92,13 +92,6 @@ export const sendtForMerEnn30DagerSiden = (sendtTilArbeidsgiverDato?: Date, send
     return dagerSidenArb && dagerSidenNav
 }
 
-export const sendtArbeidsgiverForMerEnnAntallSekunderSiden = (sekunder: number, sendtTilArbeidsgiverDato?: Date) => {
-    if (sendtTilArbeidsgiverDato) {
-        return dayjs(new Date()).diff(dayjs(sendtTilArbeidsgiverDato), 'seconds') > sekunder
-    }
-    return true
-}
-
 export const sammeMnd = (sporsmal: Sporsmal): boolean => {
     const firstMonth = dayjs(sporsmal.min!).month()
     const lastMonth = dayjs(sporsmal.max!).month()
