@@ -52,7 +52,7 @@ const AvbrytSoknadModal = () => {
     }
 
     return (
-        <>
+        <div>
             <Button variant="tertiary" className="avbryt_rødknapp"
                 onClick={
                     (e) => {
@@ -117,7 +117,7 @@ const AvbrytSoknadModal = () => {
                     </Button>
                 </Modal.Content>
             </Modal>
-        </>
+        </div>
     )
 }
 
