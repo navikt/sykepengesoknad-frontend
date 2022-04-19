@@ -48,13 +48,15 @@ const Knapperad = ({ poster }: KnapperadProps) => {
             <Button variant="primary" type="submit" loading={poster}>{tekst(nokkel())}</Button>
             <div className="avbrytDialog blokk-l">
                 <AvsluttOgFortsettSenere />
-                <hr />
+                <AvbrytSoknadModal />
                 <Vis hvis={stegNo === 1 && !erUtlandssoknad}
                     render={() =>
-                        <PersonvernLesMer />
+                        <>
+                            <hr />
+                            <PersonvernLesMer />
+                        </>
                     }
                 />
-                <AvbrytSoknadModal />
             </div>
 
         </div>
