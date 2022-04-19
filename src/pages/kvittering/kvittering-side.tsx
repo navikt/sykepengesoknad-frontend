@@ -8,11 +8,13 @@ import { RouteParams } from '../../app'
 import { useAmplitudeInstance } from '../../components/amplitude/amplitude'
 import Banner from '../../components/banner/banner'
 import Brodsmuler from '../../components/brodsmuler/brodsmuler'
+import Endreknapp from '../../components/endreknapp/endreknapp'
 import Ettersending from '../../components/ettersending/ettersending'
 import { hentHotjarJsTrigger, HotjarTrigger } from '../../components/hotjar-trigger'
 import Kvittering from '../../components/kvittering/kvittering'
 import Vis from '../../components/vis'
 import { useAppStore } from '../../data/stores/app-store'
+import { RSSoknadstatus } from '../../types/rs-types/rs-soknadstatus'
 import { RSSoknadstype } from '../../types/rs-types/rs-soknadstype'
 import { Brodsmule } from '../../types/types'
 import { SEPARATOR } from '../../utils/constants'
@@ -59,7 +61,9 @@ const KvitteringSide = () => {
 
     const erSendtTilArbeidsgiver = valgtSoknad.sendtTilArbeidsgiverDato !== null
 
+    const skalViseEndre = valgtSoknad.status !== RSSoknadstatus.KORRIGERT
     const skalViseSendTilArbeidsgiver = valgtSoknad.arbeidsgiver !== undefined && !erSendtTilArbeidsgiver && valgtSoknad.soknadstype !== RSSoknadstype.REISETILSKUDD
+    const skalViseKnapperad = valgtSoknad.soknadstype !== RSSoknadstype.OPPHOLD_UTLAND && (skalViseEndre || skalViseSendTilArbeidsgiver)
 
     return (
         <>
@@ -70,10 +74,18 @@ const KvitteringSide = () => {
                 <HotjarTrigger jsTrigger={hentHotjarJsTrigger(valgtSoknad.soknadstype, 'kvittering')}>
                     <Kvittering />
 
-                    <Vis hvis={skalViseSendTilArbeidsgiver}
+                    <Vis hvis={skalViseKnapperad}
                         render={() =>
                             <div className="knapperad">
-                                <Ettersending gjelder="arbeidsgiver" setRerendrekvittering={setRerendrekvittering} />
+                                <Vis hvis={skalViseEndre}
+                                    render={() => <Endreknapp />}
+                                />
+
+                                <Vis hvis={skalViseSendTilArbeidsgiver}
+                                    render={() =>
+                                        <Ettersending gjelder="arbeidsgiver" setRerendrekvittering={setRerendrekvittering} />
+                                    }
+                                />
                             </div>
                         }
                     />
