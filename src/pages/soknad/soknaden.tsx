@@ -1,7 +1,7 @@
 import './soknaden.less'
 
 import { Back } from '@navikt/ds-icons'
-import { Alert, BodyLong, BodyShort, Heading, Ingress } from '@navikt/ds-react'
+import { Alert, BodyLong, BodyShort, Heading } from '@navikt/ds-react'
 import React, { useEffect } from 'react'
 import { Link, useHistory, useParams } from 'react-router-dom'
 
@@ -198,11 +198,17 @@ const Fordeling = () => {
                     </Alert>
 
                     <div className="avbrutt-info">
-                        <Ingress>
-                            {tekst('sykepengesoknad.avbrutt.informasjon-tittel')}
-                        </Ingress>
                         <BodyLong spacing>
-                            {tekst('sykepengesoknad.avbrutt.informasjon-innhold')}
+                            {tekst('sykepengesoknad.avbrutt.informasjon-innhold-1')}
+                        </BodyLong>
+                        <BodyLong spacing>
+                            {tekst('sykepengesoknad.avbrutt.informasjon-innhold-2')}
+                        </BodyLong>
+                        <BodyLong spacing>
+                            {tekst('sykepengesoknad.avbrutt.informasjon-innhold-3')}
+                        </BodyLong>
+                        <BodyLong spacing>
+                            {tekst('sykepengesoknad.avbrutt.informasjon-innhold-4')}
                         </BodyLong>
                     </div>
 

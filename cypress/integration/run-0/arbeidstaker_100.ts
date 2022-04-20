@@ -40,7 +40,7 @@ describe('Tester arbeidstakersøknad', () => {
         cy.contains('Opplysninger fra sykmeldingen').click({ force: true })
 
         // Avbryt dialog vises
-        cy.contains('Jeg vil ikke søke om sykepenger').click()
+        cy.contains('Jeg vil ikke bruke denne søknaden').click()
         cy.get('.modal__avbryt_popup button:contains(Nei, jeg vil bruke søknaden)').click()
         cy.get('.modal__avbryt_popup button:contains(Nei, jeg vil bruke søknaden)').should('not.exist')
 
