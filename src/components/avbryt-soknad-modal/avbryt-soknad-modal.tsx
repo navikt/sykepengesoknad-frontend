@@ -19,7 +19,7 @@ const AvbrytKorrigering = () => {
     const { valgtSoknad } = useAppStore()
     const { stegId } = useParams<RouteParams>()
 
-    return <>
+    return <div>
         <Button variant="tertiary" className="avbryt_rødknapp"
             onClick={
                 (e) => {
@@ -34,7 +34,7 @@ const AvbrytKorrigering = () => {
             {tekst('avbryt.korrigering.knapp')}
         </Button>
         <EndringUtenEndringModal aapen={aapen} setAapen={setAapen} />
-    </>
+    </div>
 }
 
 const AvbrytSoknadModal = () => {
