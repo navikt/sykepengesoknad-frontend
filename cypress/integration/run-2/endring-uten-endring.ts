@@ -28,7 +28,7 @@ describe('Tester endring uten en endringer', () => {
         cy.contains('Gå videre').click()
 
         cy.contains('Avslutt uten å endre søknaden')
-        cy.contains('Jeg vil ikke søke om sykepenger').should('not.exist')
+        cy.contains('Jeg vil ikke bruke denne søknaden').should('not.exist')
 
         cy.url().should('include', '/3')
         cy.contains('Gå videre').click()

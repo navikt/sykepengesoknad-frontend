@@ -75,6 +75,7 @@ const AvbrytSoknadModal = () => {
                         'steg': stegId
                     })
                 }}
+                closeButton={false}
                 open={aapen}
             >
                 <Modal.Content>
