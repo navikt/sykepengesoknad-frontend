@@ -1,14 +1,17 @@
-import { Alert, BodyLong, BodyShort } from '@navikt/ds-react'
+import { Alert, BodyLong, BodyShort,Label, Radio, RadioGroup } from '@navikt/ds-react'
 import React, { useEffect } from 'react'
 import { useFormContext } from 'react-hook-form'
 import useForceUpdate from 'use-force-update'
 
+import { useAppStore } from '../../../data/stores/app-store'
 import { RSSvartype } from '../../../types/rs-types/rs-svartype'
 import validerArbeidsgrad from '../../../utils/sporsmal/valider-arbeidsgrad'
-import { getLedetekst, tekst } from '../../../utils/tekster'
+import { getLedetekst,tekst } from '../../../utils/tekster'
 import AnimateOnMount from '../../animate-on-mount'
+import { Ekspanderbar } from '../../ekspanderbar/ekspanderbar'
 import FeilLokal from '../../feil/feil-lokal'
 import Vis from '../../vis'
+import { rodeUkeDagerIPerioden } from '../bendiksen/helligdager-utils'
 import { SpmProps } from '../sporsmal-form/sporsmal-form'
 import { hentFeilmelding } from '../sporsmal-utils'
 import SporsmalstekstH3 from '../sporsmalstekst/sporsmalstekstH3'
@@ -19,7 +22,8 @@ const RadioKomp = ({ sporsmal }: SpmProps) => {
     const watchRadio = watch(sporsmal.id)
     const feilmelding = hentFeilmelding(sporsmal)
     const forceUpdate = useForceUpdate()
-    const { beregnGrad } = validerArbeidsgrad(sporsmal)
+    const { valgtSoknad } = useAppStore()
+    const { validerGrad, beregnGrad } = validerArbeidsgrad(sporsmal)
 
     useEffect(() => {
         // Tvangsoppdatering for å få riktig grad i advarselboksen (NB! vi vet det er stygt)
@@ -27,6 +31,7 @@ const RadioKomp = ({ sporsmal }: SpmProps) => {
         // eslint-disable-next-line
     }, [ sporsmal ])
 
+    const lavereProsentHjelpTittel = tekst('ekspanderbarhjelp.prosenten_lavere_enn_forventet_arbeidstaker.tittel')
     return (
         <>
             <SporsmalstekstH3 sporsmal={sporsmal} />
@@ -72,7 +77,7 @@ const RadioKomp = ({ sporsmal }: SpmProps) => {
 
             <FeilLokal sporsmal={sporsmal} />
 
-            <Vis hvis={watchRadio && watchRadio.toLowerCase() === 'timer' && beregnGrad && beregnGrad()}
+            <Vis hvis={watchRadio && watchRadio.toLowerCase() === 'timer' && beregnGrad && beregnGrad() && validerGrad!() == true}
                 render={() =>
                     <Alert variant="info" style={{ marginTop: '1rem' }}>
                         <BodyShort>
@@ -82,6 +87,29 @@ const RadioKomp = ({ sporsmal }: SpmProps) => {
                             )}
                         </BodyShort>
                     </Alert>
+                }
+            />
+
+            <Vis hvis={watchRadio && watchRadio.toLowerCase() === 'timer' && validerGrad!() !== true && rodeUkeDagerIPerioden(valgtSoknad!.fom, valgtSoknad!.tom)}
+                render={() =>
+                    <>
+                        <Ekspanderbar
+                            title={lavereProsentHjelpTittel}
+                            sporsmalId={sporsmal.id}
+                            amplitudeProps={{ 'component': lavereProsentHjelpTittel, sporsmaltag: sporsmal.tag }}>
+                            <div className="avsnitt">
+                                <Label size="medium" as="h3" className="helligdager-tittel">
+                                    {tekst('ekspanderbarhjelp.helligdager.tittel')}
+                                </Label>
+                                <BodyLong spacing>{tekst('ekspanderbarhjelp.prosenten_lavere_enn_forventet_arbeidstaker.innhold1')}</BodyLong>
+                                <BodyLong spacing>{tekst('ekspanderbarhjelp.prosenten_lavere_enn_forventet_arbeidstaker.innhold2')}</BodyLong>
+                                <RadioGroup legend={tekst('ekspanderbarhjelp.helligdager.enkelt-tittel')} size="medium">
+                                    <Radio value="ja">ja</Radio>
+                                    <Radio value="nei">nei</Radio>
+                                </RadioGroup>
+                            </div>
+                        </Ekspanderbar>
+                    </>
                 }
             />
         </>

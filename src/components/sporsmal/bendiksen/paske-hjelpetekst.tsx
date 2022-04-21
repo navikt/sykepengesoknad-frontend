@@ -11,7 +11,7 @@ import { useAmplitudeInstance } from '../../amplitude/amplitude'
 import Vis from '../../vis'
 import { SpmProps } from '../sporsmal-form/sporsmal-form'
 import Bendiksen from './bendiksen'
-import { innenforPaske } from './paske-utils'
+import { innenforPaske } from './helligdager-utils'
 
 const PaskeHjelpetekst = ({ sporsmal }: SpmProps) => {
     const { logEvent } = useAmplitudeInstance()
