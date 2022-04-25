@@ -115,6 +115,11 @@ const Endreknapp = () => {
                             value={tekst('endre.popup.survey.alternativ5')}>
                             {tekst('endre.popup.survey.alternativ5')}
                         </Checkbox>
+                        <Checkbox {...register('survey')}
+                            onClick={boxClicked}
+                            value={tekst('endre.popup.survey.alternativ6')}>
+                            {tekst('endre.popup.survey.alternativ6')}
+                        </Checkbox>
                     </CheckboxGroup>
 
                     <Button size="small" variant="primary" className="midtstilt-knapp" onClick={

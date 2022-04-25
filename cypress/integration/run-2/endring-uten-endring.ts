@@ -12,7 +12,7 @@ describe('Tester endring uten en endringer', () => {
     it('Endre søknaden', () => {
         // Endre søknaden
         cy.contains('Endre søknaden').click()
-        cy.contains('Jeg skal endre et svar fordi jeg selv oppdaget at jeg hadde svart feil.').click()
+        cy.contains('Jeg skal rette et svar.').click()
         cy.contains('Gå videre').click()
 
         // Ny søknad
