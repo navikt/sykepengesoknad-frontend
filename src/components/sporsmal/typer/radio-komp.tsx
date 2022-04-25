@@ -7,6 +7,7 @@ import { useAppStore } from '../../../data/stores/app-store'
 import { RSSvartype } from '../../../types/rs-types/rs-svartype'
 import validerArbeidsgrad from '../../../utils/sporsmal/valider-arbeidsgrad'
 import { getLedetekst,tekst } from '../../../utils/tekster'
+import { useAmplitudeInstance } from '../../amplitude/amplitude'
 import AnimateOnMount from '../../animate-on-mount'
 import { Ekspanderbar } from '../../ekspanderbar/ekspanderbar'
 import FeilLokal from '../../feil/feil-lokal'
@@ -24,6 +25,7 @@ const RadioKomp = ({ sporsmal }: SpmProps) => {
     const forceUpdate = useForceUpdate()
     const { valgtSoknad } = useAppStore()
     const { validerGrad, beregnGrad } = validerArbeidsgrad(sporsmal)
+    const { logEvent } = useAmplitudeInstance()
 
     useEffect(() => {
         // Tvangsoppdatering for å få riktig grad i advarselboksen (NB! vi vet det er stygt)
@@ -103,9 +105,16 @@ const RadioKomp = ({ sporsmal }: SpmProps) => {
                                 </Label>
                                 <BodyLong spacing>{tekst('ekspanderbarhjelp.prosenten_lavere_enn_forventet_arbeidstaker.innhold1')}</BodyLong>
                                 <BodyLong spacing>{tekst('ekspanderbarhjelp.prosenten_lavere_enn_forventet_arbeidstaker.innhold2')}</BodyLong>
-                                <RadioGroup legend={tekst('ekspanderbarhjelp.helligdager.enkelt-tittel')} size="medium">
-                                    <Radio value="ja">ja</Radio>
-                                    <Radio value="nei">nei</Radio>
+                                <RadioGroup
+                                    legend={tekst('ekspanderbarhjelp.helligdager.enkelt-tittel')}
+                                    size="medium"
+                                    onClick={() =>
+                                        logEvent('radio survey besvart', {
+                                            'component': tekst('ekspanderbarhjelp.helligdager.enkelt-tittel')
+                                        })
+                                    }>
+                                    <Radio value="ja">Ja</Radio>
+                                    <Radio value="nei">Nei</Radio>
                                 </RadioGroup>
                             </div>
                         </Ekspanderbar>
