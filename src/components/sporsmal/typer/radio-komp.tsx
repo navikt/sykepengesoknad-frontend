@@ -1,5 +1,5 @@
 import { Alert, BodyLong, BodyShort,Label, Radio, RadioGroup } from '@navikt/ds-react'
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import { useFormContext } from 'react-hook-form'
 import useForceUpdate from 'use-force-update'
 
@@ -25,6 +25,7 @@ const RadioKomp = ({ sporsmal }: SpmProps) => {
     const forceUpdate = useForceUpdate()
     const { valgtSoknad } = useAppStore()
     const { validerGrad, beregnGrad } = validerArbeidsgrad(sporsmal)
+    const [ surveySvart, setSurveySvart ] = useState<boolean>(false)
     const { logEvent } = useAmplitudeInstance()
 
     useEffect(() => {
@@ -107,14 +108,27 @@ const RadioKomp = ({ sporsmal }: SpmProps) => {
                                 <BodyLong spacing>{tekst('ekspanderbarhjelp.prosenten_lavere_enn_forventet_arbeidstaker.innhold2')}</BodyLong>
                                 <RadioGroup
                                     legend={tekst('ekspanderbarhjelp.helligdager.enkelt-tittel')}
-                                    size="medium"
-                                    onClick={() =>
-                                        logEvent('radio survey besvart', {
-                                            'component': tekst('ekspanderbarhjelp.helligdager.enkelt-tittel')
-                                        })
-                                    }>
-                                    <Radio value="ja">Ja</Radio>
-                                    <Radio value="nei">Nei</Radio>
+                                    size="medium">
+                                    <Radio value={tekst('ekspanderbarhjelp.helligdager.enkelt-svar-Ja')} onClick={() => {
+                                        if (!surveySvart) {
+                                            setSurveySvart(true)
+                                            logEvent('hjelpetekst survey besvart', {
+                                                'component': tekst('ekspanderbarhjelp.helligdager.enkelt-tittel'),
+                                                'tekst': tekst('ekspanderbarhjelp.helligdager.enkelt-svar-Ja')
+                                            })
+                                        }
+                                    }
+                                    }>{tekst('ekspanderbarhjelp.helligdager.enkelt-svar-Ja')}</Radio>
+                                    <Radio value={tekst('ekspanderbarhjelp.helligdager.enkelt-svar-Nei')} onClick={() => {
+                                        if (!surveySvart) {
+                                            setSurveySvart(true)
+                                            logEvent('hjelpetekst survey besvart', {
+                                                'component': tekst('ekspanderbarhjelp.helligdager.enkelt-tittel'),
+                                                'tekst': tekst('ekspanderbarhjelp.helligdager.enkelt-svar-Nei')
+                                            })
+                                        }
+                                    }
+                                    }>{tekst('ekspanderbarhjelp.helligdager.enkelt-svar-Nei')}</Radio>
                                 </RadioGroup>
                             </div>
                         </Ekspanderbar>
