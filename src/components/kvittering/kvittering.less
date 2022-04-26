@@ -21,13 +21,10 @@
     }
 
     .knapperad {
-        display: flex;
-        justify-content: flex-start;
-        align-items: flex-start;
-        flex-wrap: wrap;
         margin: 3rem 0 4rem;
 
         .navds-button {
+            display: block;
             margin-right: 1rem;
             margin-bottom: 1rem;
 
@@ -38,7 +35,6 @@
     }
 
     .avslutt-knapp {
-        margin-bottom: 4rem;
 
         .navds-button__inner {
             margin: 0 17px 0 17px;
@@ -106,16 +102,6 @@
 
         .navds-detail--small {
             margin: 0.25rem 0 0 1.6rem;
-        }
-    }
-}
-
-@media (min-width: @screen-sm) {
-    .kvittering {
-        .knapperad {
-            .navds-button {
-                margin-bottom: 0;
-            }
         }
     }
 }

@@ -55,7 +55,7 @@ describe('Tester kvittering', () => {
                 .and('have.attr', 'aria-expanded', 'false')
 
             // Knapperad ( Endre, Ettersend)
-            cy.contains('Endre søknaden').should('exist')
+            cy.contains('Jeg vil endre svarene i søknaden').should('exist')
         })
 
         it('Etter 30 dager', () => {
@@ -84,7 +84,7 @@ describe('Tester kvittering', () => {
                 .should('contain', 'Opplysninger fra sykmeldingen')
 
             // Knapperad ( Endre, Ettersend)
-            cy.contains('Endre søknaden').should('exist')
+            cy.contains('Jeg vil endre svarene i søknaden').should('exist')
         })
     })
 
@@ -139,7 +139,7 @@ describe('Tester kvittering', () => {
             cy.contains('Opplysninger fra sykmeldingen').should('not.exist')
 
             // Knapperad finnes ikke
-            cy.contains('Endre søknaden').should('not.exist')
+            cy.contains('Jeg vil endre svarene i søknaden').should('not.exist')
             cy.contains('Send til NAV').should('not.exist')
             cy.contains('Send til arbeidsgiver').should('not.exist')
         })
@@ -186,7 +186,7 @@ describe('Tester kvittering', () => {
                 .and('have.attr', 'aria-expanded', 'false')
 
             // Knapperad ( Endre, Ettersend)
-            cy.contains('Endre søknaden').should('exist')
+            cy.contains('Jeg vil endre svarene i søknaden').should('exist')
             cy.contains('Send til NAV').should('not.exist')
             cy.contains('Send til arbeidsgiver').should('not.exist')
         })
@@ -334,7 +334,7 @@ const inntil16dagerKvittering = () => {
         .and('have.attr', 'aria-expanded', 'false')
 
     // Knapperad ( Endre, Ettersend)
-    cy.contains('Endre søknaden').should('exist')
+    cy.contains('Jeg vil endre svarene i søknaden').should('exist')
     cy.contains('Send til NAV').should('exist')
     cy.contains('Send til arbeidsgiver').should('not.exist')
 }
@@ -384,7 +384,7 @@ const over16dagerKvittering = () => {
         .and('have.attr', 'aria-expanded', 'false')
 
     // Knapperad ( Endre, Ettersend)
-    cy.contains('Endre søknaden').should('exist')
+    cy.contains('Jeg vil endre svarene i søknaden').should('exist')
     cy.contains('Send til NAV').should('not.exist')
     cy.contains('Send til arbeidsgiver').should('not.exist')
 }
@@ -421,7 +421,7 @@ const utenOppholdKvittering = () => {
         .and('have.attr', 'aria-expanded', 'false')
 
     // Knapperad ( Endre, Ettersend)
-    cy.contains('Endre søknaden').should('exist')
+    cy.contains('Jeg vil endre svarene i søknaden').should('exist')
     cy.contains('Send til NAV').should('not.exist')
     cy.contains('Send til arbeidsgiver').should('exist')
 }
@@ -465,7 +465,7 @@ const medOppholdKvittering = () => {
         .and('have.attr', 'aria-expanded', 'false')
 
     // Knapperad ( Endre, Ettersend)
-    cy.contains('Endre søknaden').should('exist')
+    cy.contains('Jeg vil endre svarene i søknaden').should('exist')
     cy.contains('Send til NAV').should('not.exist')
     cy.contains('Send til arbeidsgiver').should('exist')
 }

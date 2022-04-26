@@ -119,13 +119,6 @@ const Fordeling = () => {
             }
             return (
                 <>
-                    <Vis hvis={valgtSoknad.status === RSSoknadstatus.UTKAST_TIL_KORRIGERING}
-                        render={() =>
-                            <Alert variant="info" className="blokk-s">
-                                <span>{tekst('sykepengesoknad.utkast-til-korrigering.info')}</span>
-                            </Alert>
-                        }
-                    />
 
                     <Vis hvis={stegNo > 1 || erUtlandssoknad}
                         render={() => <SporsmalSteg />}

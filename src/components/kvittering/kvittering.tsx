@@ -76,40 +76,47 @@ const Kvittering = () => {
             <Vis hvis={skalViseKnapperad}
                 render={() =>
                     <>
+
                         <div className="knapperad">
-                            <Vis hvis={valgtSoknad!.status !== RSSoknadstatus.KORRIGERT}
-                                render={() => <Endreknapp />}
+                            <Vis hvis={valgtSoknad?.status !== RSSoknadstatus.SENDT}
+                                render={() =>
+                                    <Button className="avslutt-knapp" onClick={
+                                        () => {
+                                            logEvent('knapp klikket', {
+                                                'tekst': tekst('kvittering.avslutt'),
+                                                'soknadstype': valgtSoknad?.soknadstype,
+                                            })
+                                            // Må sikre at amplitude får logget ferdig
+                                            window.setTimeout(() => {
+                                                window.location.href = env.dittNavUrl()
+                                            }, 200)
+                                        }
+                                    }>
+                                        {tekst('kvittering.avslutt')}
+                                    </Button>
+                                }
                             />
 
                             <Vis
                                 hvis={!erSendtTilNav && sendtArbeidsgiverForMerEnnAntallSekunderSiden(env.sendTilNavKnappDelaySeconds(), valgtSoknad?.sendtTilArbeidsgiverDato)}
-                                render={() => <Ettersending gjelder="nav" setRerendrekvittering={setRerendrekvittering} />}
+                                render={() => <Ettersending gjelder="nav"
+                                    setRerendrekvittering={setRerendrekvittering} />}
                             />
 
                             <Vis hvis={skalViseSendTilArbeidsgiver}
                                 render={() =>
-                                    <Ettersending gjelder="arbeidsgiver" setRerendrekvittering={setRerendrekvittering} />
+                                    <Ettersending gjelder="arbeidsgiver"
+                                        setRerendrekvittering={setRerendrekvittering} />
+                                }
+                            />
+                            <Vis hvis={valgtSoknad!.status !== RSSoknadstatus.KORRIGERT}
+                                render={() =>
+
+                                    <Endreknapp />
                                 }
                             />
                         </div>
-                        <Vis hvis={valgtSoknad?.status !== RSSoknadstatus.SENDT}
-                            render={() =>
-                                <Button className="avslutt-knapp" onClick={
-                                    () => {
-                                        logEvent('knapp klikket', {
-                                            'tekst': tekst('kvittering.avslutt'),
-                                            'soknadstype': valgtSoknad?.soknadstype,
-                                        })
-                                        // Må sikre at amplitude får logget ferdig
-                                        window.setTimeout(() => {
-                                            window.location.href = env.dittNavUrl()
-                                        }, 200)
-                                    }
-                                }>
-                                    {tekst('kvittering.avslutt')}
-                                </Button>
-                            }
-                        />
+
                     </>
                 }
             />
