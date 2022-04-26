@@ -220,7 +220,7 @@ describe('Tester feilmeldinger', () => {
         gaVidere()
         feilmeldingHandtering(
             'Timene utgjør mindre enn 50 %.',
-            'Antall timer du skrev inn, betyr at du har jobbet 0 % av det du gjør når du er frisk. Du må enten svare nei på øverste spørsmålet eller endre antall timer totalt.',
+            'Timene du skrev inn tyder på at du har jobbet mindre enn 50 %. Du må enten svare nei på øverste spørsmålet eller endre antall timer totalt.',
             arbeidstakerGradert.sporsmal[6].undersporsmal[1].undersporsmal[0].undersporsmal[0].id
         )
     })
