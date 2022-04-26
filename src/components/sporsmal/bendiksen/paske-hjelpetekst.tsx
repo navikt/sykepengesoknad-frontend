@@ -6,12 +6,12 @@ import React from 'react'
 
 import { useAppStore } from '../../../data/stores/app-store'
 import { TagTyper } from '../../../types/enums'
+import { innenforPaske } from '../../../utils/helligdager-utils'
 import { tekst } from '../../../utils/tekster'
 import { useAmplitudeInstance } from '../../amplitude/amplitude'
 import Vis from '../../vis'
 import { SpmProps } from '../sporsmal-form/sporsmal-form'
 import Bendiksen from './bendiksen'
-import { innenforPaske } from './paske-utils'
 
 const PaskeHjelpetekst = ({ sporsmal }: SpmProps) => {
     const { logEvent } = useAmplitudeInstance()
