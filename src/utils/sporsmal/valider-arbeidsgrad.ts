@@ -68,7 +68,7 @@ const useValiderArbeidsgrad = (sporsmal: Sporsmal) => {
 
         return faktiskArbeidsGrad < forventetArbeidsGrad
             ? getLedetekst(tekst('soknad.feilmelding.MINDRE_TIMER_ENN_FORVENTET'),
-                { '%GRAD%': Math.round(forventetArbeidsGrad * 100) })
+                { '%PROSENT%': Math.floor(faktiskArbeidsGrad! * 100) })
             : true
     }
 
