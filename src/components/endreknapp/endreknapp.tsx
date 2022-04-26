@@ -1,6 +1,6 @@
 import './endre-soknad-modal.less'
 
-import { Button, Label, Modal } from '@navikt/ds-react'
+import { BodyShort, Button, Modal } from '@navikt/ds-react'
 import React, { useState } from 'react'
 import { useHistory } from 'react-router'
 
@@ -75,9 +75,8 @@ const Endreknapp = () => {
             open={aapen}
             >
                 <Modal.Content>
-                    <Label size="medium" className="tittel" spacing>
-                        {tekst('endre.modal.info')}
-                    </Label>
+
+                    <BodyShort>{tekst('endre.modal.info')}</BodyShort>
 
 
                     <Button size="small" variant="primary" className="midtstilt-knapp" onClick={
