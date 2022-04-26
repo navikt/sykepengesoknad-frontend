@@ -140,7 +140,6 @@ describe('Tester arbeidstakersøknad', () => {
             .should('not.exist')
         // Svarer timer
         cy.get('.undersporsmal .skjemaelement__input#687355').focus().type('21')
-        cy.contains('Er prosenten lavere enn du forventet?').should('not.exist')
         // Denne personen har vært tilbake i arbeid 20 april, har hatt ferie 16-23 april, og hatt permisjon 14-22 april
         cy.get('.undersporsmal .navds-alert--info').should('contain', 'Antall timer du skrev inn, betyr at du har jobbet 129% av det du gjør når du er frisk.')
 
