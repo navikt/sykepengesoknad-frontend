@@ -9,15 +9,14 @@ describe('Tester endring uten en endringer', () => {
     })
 
 
-    it('Endre søknaden', () => {
+    it('Jeg vil endre svarene i søknaden', () => {
         // Endre søknaden
-        cy.contains('Endre søknaden').click()
+        cy.contains('Jeg vil endre svarene i søknaden').click()
+        cy.contains('Ok').click()
 
         // Ny søknad
         cy.url().should('not.include', `/kvittering/${soknad.id}`)
         cy.url().should('include', '/1')
-        cy.get('.navds-alert--info')
-            .should('contain', 'Rett opp det som er feil i søknaden, og send den inn på nytt.')
 
         cy.contains('Gå videre').click()
     })

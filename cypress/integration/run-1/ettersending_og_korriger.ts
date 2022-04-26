@@ -91,13 +91,12 @@ describe('Tester ettersending og korrigering', () => {
     it('Korriger', () => {
         // Endre søknaden
         cy.url().should('include', `/kvittering/${soknad.id}`)
-        cy.contains('Endre søknaden').click()
+        cy.contains('Jeg vil endre svarene i søknaden').click()
+        cy.contains('Ok').click()
 
         // Ny søknad
         cy.url().should('not.include', `/kvittering/${soknad.id}`)
         cy.url().should('include', '/1')
-        cy.get('.navds-alert--info')
-            .should('contain', 'Rett opp det som er feil i søknaden, og send den inn på nytt.')
 
         // ANSVARSERKLARING er resatt
         cy.get('.skjemaelement__input.checkboks[type=checkbox]').should('not.be.checked')

@@ -3,7 +3,7 @@ const KvitteringTekster = {
     'kvittering.sidetittel': 'Kvittering',
     'kvittering.status': 'Status',
     'kvittering.utbetaling.tittel': 'Utbetaling av sykepenger',
-    'kvittering.knapp.endre': 'Endre søknaden',
+    'kvittering.knapp.endre': 'Jeg vil endre svarene i søknaden',
     'kvittering.knapp.send-nav': 'Send til NAV',
     'kvittering.knapp.send-arbeidsgiver': 'Send til arbeidsgiver',
 
