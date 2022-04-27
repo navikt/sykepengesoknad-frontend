@@ -3,6 +3,7 @@ import React from 'react'
 import { Link } from 'react-router-dom'
 
 import { RSSoknadstatus } from '../../types/rs-types/rs-soknadstatus'
+import { Sykmelding } from '../../types/sykmelding'
 import { Soknad } from '../../types/types'
 import { tekst } from '../../utils/tekster'
 import { useAmplitudeInstance } from '../amplitude/amplitude'

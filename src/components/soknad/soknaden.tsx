@@ -105,7 +105,7 @@ const Soknaden = () => {
 export default Soknaden
 
 const Fordeling = () => {
-    const { valgtSoknad, soknader } = useAppStore()
+    const { valgtSoknad, soknader, sykmeldinger } = useAppStore()
     const { stegId } = useParams<RouteParams>()
     const stegNo = parseInt(stegId)
     const history = useHistory()
@@ -136,8 +136,12 @@ const Fordeling = () => {
                 valgtSoknad,
                 soknader
             )
+            const usendtSykmelding = harEldreUsendtSykmelding(sykmeldinger)
             if (eldreUsendtSoknad != null) {
                 return <EldreUsendtSoknad eldreSoknad={eldreUsendtSoknad} />
+            }
+            if (usendtSykmelding) {
+                return (<UsendtSykmelding />)
             }
             return (
                 <>

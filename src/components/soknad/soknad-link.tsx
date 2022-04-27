@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom'
 import { RSSoknadstatus } from '../../types/rs-types/rs-soknadstatus'
 import { RSSvartype } from '../../types/rs-types/rs-svartype'
 import { Soknad } from '../../types/types'
+import env from '../../utils/environment'
 
 interface SoknadLinkProps {
     soknad: Soknad
@@ -28,6 +29,10 @@ export const urlTilSoknad = (soknad: Soknad) => {
     return erDelvisUtfylt(soknad)
         ? `${soknaderUrl}/${finnPosisjonPaSisteBesvarteSporsmal(soknad) + 1}`
         : `${soknaderUrl}/1`
+}
+
+export const urlTilSykmeldinger = () => {
+    return env.dinesakerUrl()
 }
 
 export const erDelvisUtfyltNySoknad = (soknad: Soknad): boolean => {
