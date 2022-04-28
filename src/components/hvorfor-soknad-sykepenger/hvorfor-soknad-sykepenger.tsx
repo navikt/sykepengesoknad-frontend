@@ -5,6 +5,7 @@ import React, { useState } from 'react'
 
 import { RSSoknadstype } from '../../types/rs-types/rs-soknadstype'
 import { tekst } from '../../utils/tekster'
+import { useAmplitudeInstance } from '../amplitude/amplitude'
 import Vis from '../vis'
 
 interface HvorforSoknadSykepengerProps {
@@ -13,11 +14,18 @@ interface HvorforSoknadSykepengerProps {
 
 const HvorforSoknadSykepenger = ({ soknadstype }: HvorforSoknadSykepengerProps) => {
     const [ open, setOpen ] = useState<boolean>(false)
+    const { logEvent } = useAmplitudeInstance()
 
     return (
         <Accordion>
             <Accordion.Item open={open} className="hvorfor-soknad-sykepenger">
-                <Accordion.Header onClick={() => setOpen(!open)}>
+                <Accordion.Header onClick={() => {
+                    logEvent('popup åpnet', {
+                        'component': tekst('hvorfor-soknad-sykepenger.overskrift')
+                    })
+                    setOpen(!open)
+                }
+                }>
                     <Heading size="small" level="2">{tekst('hvorfor-soknad-sykepenger.overskrift')}</Heading>
                 </Accordion.Header>
                 <Accordion.Content>
