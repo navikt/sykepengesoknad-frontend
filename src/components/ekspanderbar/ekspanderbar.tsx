@@ -10,14 +10,21 @@ interface EkspanderbarProps {
     amplitudeProps?: object
     children: any
     sporsmalId: string
+    logVedVisning?: string
 }
 
-export const Ekspanderbar = ({ title, children, amplitudeProps, sporsmalId }: EkspanderbarProps) => {
+export const Ekspanderbar = ({ title, children, amplitudeProps, sporsmalId, logVedVisning }: EkspanderbarProps) => {
     const [ expanded, setExpanded ] = useState<boolean>(false)
     const { logEvent } = useAmplitudeInstance()
 
     // Lukker mellom hvert spørsmål
-    useEffect(() => setExpanded(false), [ sporsmalId ])
+    useEffect(() => {
+        setExpanded(false)
+        if (logVedVisning) {
+            logEvent('hjelpetekst vist', { 'tekst': logVedVisning })
+        }
+        // eslint-disable-next-line
+    }, [ sporsmalId ])
 
     return (
         <Accordion>

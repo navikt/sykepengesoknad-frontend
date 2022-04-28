@@ -99,7 +99,9 @@ const RadioKomp = ({ sporsmal }: SpmProps) => {
                         <Ekspanderbar
                             title={lavereProsentHjelpTittel}
                             sporsmalId={sporsmal.id}
-                            amplitudeProps={{ 'component': lavereProsentHjelpTittel, sporsmaltag: sporsmal.tag }}>
+                            amplitudeProps={{ 'component': lavereProsentHjelpTittel, sporsmaltag: sporsmal.tag }}
+                            logVedVisning={lavereProsentHjelpTittel}
+                        >
                             <div className="avsnitt">
                                 <Label size="medium" as="h3" className="helligdager-tittel">
                                     {tekst('ekspanderbarhjelp.helligdager.tittel')}
