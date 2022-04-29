@@ -20,7 +20,7 @@ const HvorforSoknadSykepenger = ({ soknadstype }: HvorforSoknadSykepengerProps) 
         <Accordion>
             <Accordion.Item open={open} className="hvorfor-soknad-sykepenger">
                 <Accordion.Header onClick={() => {
-                    logEvent('popup åpnet', {
+                    logEvent('accordion ekspandert', {
                         'component': tekst('hvorfor-soknad-sykepenger.overskrift')
                     })
                     setOpen(!open)
