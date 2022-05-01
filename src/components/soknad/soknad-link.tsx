@@ -32,7 +32,7 @@ export const urlTilSoknad = (soknad: Soknad) => {
 }
 
 export const urlTilSykmeldinger = () => {
-    return env.dinesakerUrl()
+    return env.sykmeldingUrl()
 }
 
 export const erDelvisUtfyltNySoknad = (soknad: Soknad): boolean => {
