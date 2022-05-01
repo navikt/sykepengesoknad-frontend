@@ -137,8 +137,8 @@ const Fordeling = () => {
                 soknader
             )
             const usendtSykmelding = harEldreUsendtSykmelding(sykmeldinger)
-            if (eldreUsendtSoknad != null) {
-                return <EldreUsendtSoknad eldreSoknad={eldreUsendtSoknad} />
+            if (eldreUsendtSoknad != null && !usendtSykmelding) {
+                return (<EldreUsendtSoknad eldreSoknad={eldreUsendtSoknad} />)
             }
             if (usendtSykmelding) {
                 return (<UsendtSykmelding />)
