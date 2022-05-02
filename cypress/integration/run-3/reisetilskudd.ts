@@ -181,7 +181,7 @@ describe('Teste førsteside i reisetilskuddsøknaden', () => {
         it('Sletting av kvittering som er valgt', () => {
             cy.get('.fil_liste').contains('Taxi').click()
 
-            cy.get('.knapperad').contains('Slett').click()
+            cy.get('.knapperad').contains('Slett').click({ force: true })
             cy.get('.bekreft-dialog').within(() => {
                 cy.contains('Vil du slette kvitteringen?')
                 cy.contains('Ja, jeg er sikker')
