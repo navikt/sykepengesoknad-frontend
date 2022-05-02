@@ -79,6 +79,10 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v2
+      - name: Install
+        run: npm ci
+      - name: Build server
+        run: npm run build
       - name: Setup kernel for react native, increase watchers
         run: echo fs.inotify.max_user_watches=524288 | sudo tee -a /etc/sysctl.conf && sudo sysctl -p
       # download cached ~/.npm and ~/.cache/Cypress
