@@ -14,9 +14,8 @@ export const UsendtSykmelding = () => {
     return (
         <Alert variant="warning">
             {tekst('usendt.sykmelding.alert')}
-            <BodyShort as="li" size="small" className="navds-link">
+            <BodyShort as="li" size="small">
                 <a href={env.sykmeldingUrl()}
-                    className="navds-link"
                     onClick={() => logEvent('navigere', { lenketekst: tekst('usendt.sykmelding.gaa-til') })}
                 >{tekst('usendt.sykmelding.gaa-til')}</a>
             </BodyShort>
