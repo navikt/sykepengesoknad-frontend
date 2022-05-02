@@ -74,10 +74,7 @@ const Endreknapp = () => {
             open={aapen}
             >
                 <Modal.Content>
-
                     <BodyShort>{tekst('endre.modal.info')}</BodyShort>
-
-
                     <Button size="small" variant="primary" className="midtstilt-knapp" onClick={
                         (e) => {
 

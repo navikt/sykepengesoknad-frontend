@@ -82,7 +82,7 @@ const Kvittering = () => {
                                             })
                                             // Må sikre at amplitude får logget ferdig
                                             window.setTimeout(() => {
-                                                window.location.href = env.dittNavUrl()
+                                                window.location.href = dittNavUrl()
                                             }, 200)
                                         }
                                     }>
@@ -92,7 +92,7 @@ const Kvittering = () => {
                             />
 
                             <Vis
-                                hvis={!erSendtTilNav && sendtArbeidsgiverForMerEnnAntallSekunderSiden(env.sendTilNavKnappDelaySeconds(), valgtSoknad?.sendtTilArbeidsgiverDato)}
+                                hvis={!erSendtTilNav && sendtArbeidsgiverForMerEnnAntallSekunderSiden(sendTilNavKnappDelaySeconds(), valgtSoknad?.sendtTilArbeidsgiverDato)}
                                 render={() => <Ettersending gjelder="nav"
                                     setRerendrekvittering={setRerendrekvittering} />}
                             />
