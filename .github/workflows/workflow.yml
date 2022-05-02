@@ -74,8 +74,8 @@ jobs:
       - name: Run cypress
         uses: cypress-io/github-action@v2
         with:
-          start: npm run start-mock
-          wait-on: http://localhost:8080
+          start: npm run start-ingen-dekorator
+          wait-on: http://localhost:8080/syk/sykepengesoknad/api/isAlive
           spec: cypress/integration/run-${{ matrix.containers }}/**
       - uses: actions/upload-artifact@v2
         if: ${{ always() }}
