@@ -4,16 +4,15 @@ import React, { useEffect, useRef, useState } from 'react'
 import { Link } from 'react-router-dom'
 
 import { Brodsmule } from '../../types/types'
-import env from '../../utils/environment'
+import { dittNavUrl, sykefravaerUrl } from '../../utils/environment'
 import { useAmplitudeInstance } from '../amplitude/amplitude'
 import Vis from '../vis'
-import personIkon from './person.svg'
 
 const LITEN = 768
 
 const faste: Brodsmule[] = [
-    { tittel: 'Ditt NAV', sti: env.dittNavUrl(), erKlikkbar: true },
-    { tittel: 'Ditt sykefravær', sti: env.sykefravaerUrl(), erKlikkbar: true }
+    { tittel: 'Ditt NAV', sti: dittNavUrl(), erKlikkbar: true },
+    { tittel: 'Ditt sykefravær', sti: sykefravaerUrl(), erKlikkbar: true }
 ]
 
 const BrodsmuleBit = ({ sti, tittel, erKlikkbar }: Brodsmule) => {
@@ -82,7 +81,7 @@ const Brodsmuler = ({ brodsmuler }: BrodsmulerProps) => {
     return (
         <nav className="brodsmuler" ref={smulesti} aria-label="Du er her: ">
             <div className="limit">
-                <img src={personIkon} alt="Du" className="brodsmuler__ikon" />
+                <img src="/syk/sykepengesoknad/static/person.svg" alt="Du" className="brodsmuler__ikon" />
                 <ul className="brodsmuler__smuler">
                     <Vis hvis={skjerm <= LITEN}
                         render={() =>

@@ -5,7 +5,7 @@ import React from 'react'
 import { RSSoknadstatus } from '../../../types/rs-types/rs-soknadstatus'
 import { RSSoknadstype } from '../../../types/rs-types/rs-soknadstype'
 import { tilLesbarPeriodeMedArstall } from '../../../utils/dato-utils'
-import env from '../../../utils/environment'
+import { isOpplaering } from '../../../utils/environment'
 import { tekst } from '../../../utils/tekster'
 import { erDelvisUtfyltNySoknad } from '../../soknad/soknad-link'
 import Vis from '../../vis'
@@ -46,7 +46,7 @@ const Teaser = ({ soknad }: SykepengesoknadTeaserProps) => {
 
                             {periodeListevisning(soknad)}
 
-                            <Vis hvis={env.isOpplaering()}
+                            <Vis hvis={isOpplaering()}
                                 render={() => leggTilSoknadstypeForDemoside(soknad)}
                             />
                         </div>

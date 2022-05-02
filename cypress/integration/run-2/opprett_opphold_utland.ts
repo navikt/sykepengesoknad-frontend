@@ -12,7 +12,6 @@ describe('Tester opprettelse av søknad om å beholde sykepenger utenfor EØS', 
         cy.get(`#soknader-list-til-behandling article a[href*=${arbeidstakersoknadMedUtenlandsoppholdSoktSykepenger.id}]`).click()
     })
 
-
     it('Søknad ANSVARSERKLARING - steg 1', function() {
         cy.url().should('include', `${arbeidstakersoknadMedUtenlandsoppholdSoktSykepenger.id}/1`)
 
@@ -44,7 +43,7 @@ describe('Tester opprettelse av søknad om å beholde sykepenger utenfor EØS', 
     })
 
     it('Vi åpner opprettelse av søknad siden', function() {
-        cy.visit('/sykepengesoknad-utland')
+        cy.visit('/syk/sykepengesoknad/sykepengesoknad-utland')
         cy.contains('Søknad om å beholde sykepenger utenfor EØS')
         cy.contains('Fortsett til søknaden').click()
     })

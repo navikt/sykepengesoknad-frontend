@@ -1,11 +1,11 @@
 import React from 'react'
 
+import plaster from '../../../public/static/plaster.svg'
+import plasterHover from '../../../public/static/plaster-hover.svg'
 import { tekst } from '../../utils/tekster'
 import Utvidbar from '../utvidbar/utvidbar'
 import ArbeidsgiverInfo from './arbeidsgiver-info'
 import ArbeidssituasjonInfo from './arbeidssituasjon-info'
-import plaster from './plaster.svg'
-import plasterHover from './plaster-hover.svg'
 import SykmeldingDato from './sykmelding-dato'
 import ForsikringInfo from './sykmelding-forsikring'
 import FravaersperioderInfo from './sykmelding-fravaersperioder'

@@ -16,7 +16,6 @@ describe('Tester feilsituasjoner ', () => {
             cy.get(`#soknader-list-til-behandling article a[href*=${soknadSomTriggerSporsmalFinnesIkkeISoknad.id}]`).click()
         })
 
-
         it('Ved svar på første spørsmål får vi en SPORSMAL_FINNES_IKKE_I_SOKNAD feil fra backend som gir oss refresh mulighet', function() {
             cy.url().should('include', `${soknadSomTriggerSporsmalFinnesIkkeISoknad.id}/1`)
 
@@ -39,7 +38,6 @@ describe('Tester feilsituasjoner ', () => {
             cy.visit('http://localhost:8080/syk/sykepengesoknad')
         })
 
-
         it('Vi går inn på en annen søknad som gir en annen feil', function() {
             cy.get(`#soknader-list-til-behandling article a[href*=${soknadSomTriggerFeilStatusForOppdaterSporsmal.id}]`).click()
         })
@@ -60,5 +58,4 @@ describe('Tester feilsituasjoner ', () => {
             cy.get('.navds-heading--xlarge').should('be.visible').and('have.text', 'Søknader')
         })
     })
-
 })

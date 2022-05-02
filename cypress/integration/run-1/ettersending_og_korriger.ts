@@ -13,12 +13,10 @@ describe('Tester ettersending og korrigering', () => {
         cy.get(`#soknader-list-til-behandling article a[href*=${soknad.id}]`).click()
     })
 
-
     it('Svar på søknad', function() {
         cy.url().should('include', `${soknad.id}/1`)
         cy.get('.skjemaelement__label').click({ force: true })
         cy.contains('Gå videre').click()
-
 
         cy.url().should('include', `${soknad.id}/2`)
         cy.get('.inputPanelGruppe__inner label:nth-child(2) > input[value=NEI]').click({ force: true })
@@ -82,10 +80,11 @@ describe('Tester ettersending og korrigering', () => {
 
         // Ettersend
         cy.contains('Send til NAV').click()
-        cy.contains('Vanligvis sendes søknaden bare til NAV hvis det samlede sykefraværet er 16 dager eller mer. Denne søknaden er beregnet til å være kortere. Hvis arbeidsgiveren din eller NAV har bedt deg sende den likevel, gjør du det her')
+        cy.contains('Vanligvis sendes søknaden bare til NAV hvis det samlede sykefraværet ' +
+            'er 16 dager eller mer. Denne søknaden er beregnet til å være kortere. ' +
+            'Hvis arbeidsgiveren din eller NAV har bedt deg sende den likevel, gjør du det her')
         cy.contains('Ja, send søknaden').click()
         cy.contains('Send til NAV').should('not.exist')
-
     })
 
     it('Korriger', () => {

@@ -2,7 +2,7 @@ import amplitude from 'amplitude-js'
 import constate from 'constate'
 import { useEffect, useRef } from 'react'
 
-import env from '../../utils/environment'
+import { amplitudeEnabled, amplitudeKey } from '../../utils/environment'
 
 export const [ AmplitudeProvider, useAmplitudeInstance ] = constate(() => {
 
@@ -19,11 +19,11 @@ export const [ AmplitudeProvider, useAmplitudeInstance ] = constate(() => {
     })
 
     useEffect(() => {
-        if (env.amplitudeEnabled()) {
+        if (amplitudeEnabled()) {
             instance.current = amplitude.getInstance()
         }
         instance.current.init(
-            env.amplitudeKey(), null, {
+            amplitudeKey(), null, {
                 apiEndpoint: 'amplitude.nav.no/collect',
                 saveEvents: false,
                 includeUtm: true,

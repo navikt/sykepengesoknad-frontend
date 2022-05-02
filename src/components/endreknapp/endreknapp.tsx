@@ -9,7 +9,7 @@ import { FetchState, hasData } from '../../data/rest/utils'
 import { useAppStore } from '../../data/stores/app-store'
 import { RSSoknad } from '../../types/rs-types/rs-soknad'
 import { Soknad } from '../../types/types'
-import env from '../../utils/environment'
+import { flexGatewayRoot } from '../../utils/environment'
 import { logger } from '../../utils/logger'
 import { tekst } from '../../utils/tekster'
 import { useAmplitudeInstance } from '../amplitude/amplitude'
@@ -25,12 +25,11 @@ const Endreknapp = () => {
     const [ korrigerer, setKorrigerer ] = useState<boolean>(false)
     const endreKnappTekst = tekst('kvittering.knapp.endre')
 
-
     const korriger = () => {
         if (korrigerer) return
         setKorrigerer(true)
 
-        korrigerSoknad.fetch(env.flexGatewayRoot() + `/syfosoknad/api/soknader/${valgtSoknad!.id}/korriger`, {
+        korrigerSoknad.fetch(flexGatewayRoot() + `/syfosoknad/api/soknader/${valgtSoknad!.id}/korriger`, {
             method: 'POST',
             credentials: 'include',
             headers: { 'Content-Type': 'application/json' }

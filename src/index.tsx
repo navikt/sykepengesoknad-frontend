@@ -7,13 +7,13 @@ import { BrowserRouter } from 'react-router-dom'
 import smoothscroll from 'smoothscroll-polyfill'
 
 import App from './app'
-import env from './utils/environment'
+import { isMockBackend, isProd, isQ1 } from './utils/environment'
 
 smoothscroll.polyfill()
 
 dayjs.locale('nb')
 
-if (env.isMockBackend()) {
+if (isMockBackend()) {
     require('./data/mock')
 }
 
@@ -25,7 +25,7 @@ ReactDOM.render(
 )
 
 const frontendloggerSrc = () => {
-    if (env.isQ1() || env.isProd()) {
+    if (isQ1() || isProd()) {
         return '/frontendlogger/logger.js'
     }
     return '/syk/sykepengesoknad/dev-frontendlogger.js'

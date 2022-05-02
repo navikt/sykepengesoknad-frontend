@@ -7,11 +7,8 @@ import { useAppStore } from '../../data/stores/app-store'
 import { RSArbeidssituasjon } from '../../types/rs-types/rs-arbeidssituasjon'
 import { RSSoknadstatus } from '../../types/rs-types/rs-soknadstatus'
 import { RSSoknadstype } from '../../types/rs-types/rs-soknadstype'
-import {
-    sendtArbeidsgiverForMerEnnAntallSekunderSiden,
-    sendtForMerEnn30DagerSiden
-} from '../../utils/dato-utils'
-import env from '../../utils/environment'
+import { sendtArbeidsgiverForMerEnnAntallSekunderSiden, sendtForMerEnn30DagerSiden } from '../../utils/dato-utils'
+import { dittNavUrl, sendTilNavKnappDelaySeconds } from '../../utils/environment'
 import { tekst } from '../../utils/tekster'
 import { useAmplitudeInstance } from '../amplitude/amplitude'
 import Endreknapp from '../endreknapp/endreknapp'
@@ -74,7 +71,6 @@ const Kvittering = () => {
             <Vis hvis={skalViseKnapperad}
                 render={() =>
                     <>
-
                         <div className="knapperad">
                             <Vis hvis={valgtSoknad?.status !== RSSoknadstatus.SENDT}
                                 render={() =>

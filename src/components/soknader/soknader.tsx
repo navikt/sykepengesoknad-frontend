@@ -4,7 +4,7 @@ import React, { useEffect } from 'react'
 import { useAppStore } from '../../data/stores/app-store'
 import { RSSoknadstatus } from '../../types/rs-types/rs-soknadstatus'
 import { Brodsmule } from '../../types/types'
-import env from '../../utils/environment'
+import { dinesakerUrl } from '../../utils/environment'
 import { sorterEtterNyesteTom } from '../../utils/sorter-soknader'
 import { tekst } from '../../utils/tekster'
 import { setBodyClass } from '../../utils/utils'
@@ -70,7 +70,7 @@ const Soknader = () => {
                     }
                 />
 
-                <Link className="dinesaker-lenke" href={env.dinesakerUrl()}>
+                <Link className="dinesaker-lenke" href={dinesakerUrl()}>
                     <BodyShort as="span">{tekst('dinesaker.lenke')}</BodyShort>
                 </Link>
             </div>

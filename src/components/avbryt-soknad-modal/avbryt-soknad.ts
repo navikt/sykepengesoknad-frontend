@@ -5,7 +5,7 @@ import { redirectTilLoginHvis401 } from '../../data/rest/utils'
 import { RSSoknadstatus } from '../../types/rs-types/rs-soknadstatus'
 import { RSSoknadstype } from '../../types/rs-types/rs-soknadstype'
 import { Soknad } from '../../types/types'
-import env from '../../utils/environment'
+import { flexGatewayRoot } from '../../utils/environment'
 import fetcher from '../../utils/fetcher'
 import { logger } from '../../utils/logger'
 import { tekst } from '../../utils/tekster'
@@ -20,7 +20,7 @@ interface AvbrytSoknadReq {
 }
 
 export async function avbrytSoknad({ valgtSoknad, setSoknader, soknader, setValgtSoknad, history, setFeilmeldingTekst }: AvbrytSoknadReq) {
-    const res = await fetcher(env.flexGatewayRoot() + `/syfosoknad/api/soknader/${valgtSoknad!.id}/avbryt`, {
+    const res = await fetcher(flexGatewayRoot() + `/syfosoknad/api/soknader/${valgtSoknad!.id}/avbryt`, {
         method: 'POST',
         credentials: 'include',
     })

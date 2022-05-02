@@ -1,8 +1,8 @@
 import { useEffect } from 'react'
 
 import { RSSoknadstype } from '../types/rs-types/rs-soknadstype'
+import { isIntegrationtest } from '../utils/environment'
 import { info } from '../utils/logger'
-import env from './../utils/environment'
 
 interface HotjarTriggerProps {
     jsTrigger: string | null
@@ -48,7 +48,7 @@ export const HotjarTrigger = ({ jsTrigger, children }: HotjarTriggerProps) => {
     useEffect(() => {
         const hotJarWindow = (window as unknown as HotjarWindow)
 
-        if (jsTrigger && !env.isIntegrationtest()) {
+        if (jsTrigger && !isIntegrationtest()) {
             setTimeout(() => {
                 if (typeof hotJarWindow.hj !== 'function') {
                     info('Hotjar ble ikke lastet inn...')

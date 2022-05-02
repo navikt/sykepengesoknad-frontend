@@ -5,13 +5,13 @@ import weekOfYear from 'dayjs/plugin/weekOfYear'
 import React from 'react'
 import { useFormContext, useWatch } from 'react-hook-form'
 
+import SlettIkon from '../../../../public/static/slett-ikon.svg'
 import { maaneder, sammeAar, sammeMnd } from '../../../utils/dato-utils'
 import { tekst } from '../../../utils/tekster'
 import FeilLokal from '../../feil/feil-lokal'
 import { SpmProps } from '../sporsmal-form/sporsmal-form'
 import { hentFeilmelding } from '../sporsmal-utils'
 import SporsmalstekstH3 from '../sporsmalstekst/sporsmalstekstH3'
-import SlettIkon from './slett-ikon.svg'
 
 dayjs.extend(weekOfYear)
 dayjs.extend(isoWeek)

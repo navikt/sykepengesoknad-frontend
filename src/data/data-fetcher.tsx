@@ -5,7 +5,7 @@ import IngenData from '../components/feil/ingen-data'
 import { RSSoknad } from '../types/rs-types/rs-soknad'
 import { Sykmelding } from '../types/sykmelding'
 import { Soknad } from '../types/types'
-import env from '../utils/environment'
+import { flexGatewayRoot, loginServiceRedirectUrl, loginServiceUrl, sykmeldingerBackendProxyRoot } from '../utils/environment'
 import { logger } from '../utils/logger'
 import useFetch from './rest/use-fetch'
 import { FetchState, hasAny401, hasAnyFailed, hasData, isAnyNotStartedOrPending, isNotStarted } from './rest/utils'
@@ -19,7 +19,7 @@ export function DataFetcher(props: { children: any }) {
 
     useEffect(() => {
         if (isNotStarted(rssoknader)) {
-            rssoknader.fetch(env.flexGatewayRoot() + '/syfosoknad/api/soknader', {
+            rssoknader.fetch(flexGatewayRoot() + '/syfosoknad/api/soknader', {
                 credentials: 'include',
             }, (fetchState: FetchState<RSSoknad[]>) => {
                 if (hasData(fetchState)) {
@@ -30,7 +30,7 @@ export function DataFetcher(props: { children: any }) {
             })
         }
         if (isNotStarted(sykmeldinger)) {
-            const url = `${env.sykmeldingerBackendProxyRoot()}/api/v1/sykmeldinger`
+            const url = `${sykmeldingerBackendProxyRoot()}/api/v1/sykmeldinger`
             sykmeldinger.fetch(url, {
                 credentials: 'include',
             }, (fetchState: FetchState<Sykmelding[]>) => {
@@ -62,7 +62,7 @@ export function DataFetcher(props: { children: any }) {
 
 export const hentLoginUrl = () => {
     if (window.location.href.includes('sykepengesoknad-utland')) {
-        return `${env.loginServiceUrl()}?redirect=${env.loginServiceRedirectUrl()}/sykepengesoknad-utland`
+        return `${loginServiceUrl()}?redirect=${loginServiceRedirectUrl()}/sykepengesoknad-utland`
     }
-    return `${env.loginServiceUrl()}?redirect=${env.loginServiceRedirectUrl()}`
+    return `${loginServiceUrl()}?redirect=${loginServiceRedirectUrl()}`
 }

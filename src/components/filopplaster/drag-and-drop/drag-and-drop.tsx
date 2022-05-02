@@ -4,7 +4,7 @@ import { useDropzone } from 'react-dropzone'
 import { useFormContext } from 'react-hook-form'
 
 import { useAppStore } from '../../../data/stores/app-store'
-import env from '../../../utils/environment'
+import { flexGatewayRoot } from '../../../utils/environment'
 import {
     customTruncet,
     formaterFilstørrelse,
@@ -15,7 +15,6 @@ import { logger } from '../../../utils/logger'
 import { getLedetekst, tekst } from '../../../utils/tekster'
 import Utvidbar from '../../utvidbar/utvidbar'
 import Vis from '../../vis'
-import binders from './binders.svg'
 
 const maks = formaterFilstørrelse(maxFilstørrelse)
 
@@ -26,12 +25,14 @@ const DragAndDrop = () => {
 
     useEffect(() => {
         if (valgtKvittering?.blobId) {
+            console.log('hent blob', `${flexGatewayRoot()}/flex-bucket-uploader/kvittering/${valgtKvittering.blobId}`) // eslint-disable-line
             setFormErDisabled(true)
-            fetch(`${env.flexGatewayRoot()}/flex-bucket-uploader/kvittering/${valgtKvittering.blobId}`, {
+            fetch(`${flexGatewayRoot()}/flex-bucket-uploader/kvittering/${valgtKvittering.blobId}`, {
                 method: 'GET',
                 credentials: 'include',
                 headers: { 'Content-Type': 'application/json' }
             }).then((res) => {
+                console.log('res', res) // eslint-disable-line
                 if (res.ok) {
                     res.blob().then((blob) => {
                         setValgtFil(blob as any)
@@ -52,6 +53,7 @@ const DragAndDrop = () => {
     const onDropCallback = useCallback(
         (filer) => {
             filer.forEach((fil: File) => {
+                console.log('fil', fil) // eslint-disable-line
                 setValgtFil(fil)
             })
         },
@@ -134,7 +136,7 @@ const DragAndDrop = () => {
                                     }
                                 })}
                             />
-                            <img src={binders} className="opplastingsikon" alt="Opplastingsikon" />
+                            <img src="/syk/sykepengesoknad/static/binders.svg" className="opplastingsikon" alt="Opplastingsikon" />
                             <BodyShort as="span" className="tekst">
                                 {isDragActive
                                     ? tekst('drag_and_drop.dragtekst.aktiv')

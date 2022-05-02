@@ -3,7 +3,7 @@ import { RSSoknad } from '../../../src/types/rs-types/rs-soknad'
 
 describe('Tester feilmeldinger', () => {
     function gaTilSoknad(soknad: RSSoknad, steg: string) {
-        cy.visit(`http://localhost:8080/soknader/${soknad.id}/${steg}`)
+        cy.visit(`http://localhost:8080/syk/sykepengesoknad/soknader/${soknad.id}/${steg}`)
     }
 
     function gaVidere() {
