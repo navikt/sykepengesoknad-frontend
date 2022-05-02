@@ -1,4 +1,4 @@
-import { Alert } from '@navikt/ds-react'
+import { Alert, BodyShort } from '@navikt/ds-react'
 import React from 'react'
 
 import { Sykmelding } from '../../types/sykmelding'
@@ -14,11 +14,9 @@ export const UsendtSykmelding = () => {
     return (
         <Alert variant="warning">
             {tekst('usendt.sykmelding.alert')}
-            <a href={env.sykmeldingUrl()}
-                className="navds-link"
-                onClick={() => logEvent('navigere', { lenketekst: tekst('usendt.sykmelding.gaa-til') })}>
-                {tekst('usendt.sykmelding.gaa-til')}
-            </a>
+            <BodyShort as="li" size="small" className="smule">
+                <a href={env.sykmeldingUrl()} className="navds-link">{tekst('usendt.sykmelding.gaa-til')}</a>
+            </BodyShort>
         </Alert>
     )
 }
