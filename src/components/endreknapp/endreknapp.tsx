@@ -1,5 +1,3 @@
-import './endre-soknad-modal.less'
-
 import { BodyShort, Button, Modal } from '@navikt/ds-react'
 import React, { useState } from 'react'
 import { useHistory } from 'react-router'

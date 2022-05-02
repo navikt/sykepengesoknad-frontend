@@ -40,6 +40,8 @@ import '../components/feil/refresh-hvis-feil-state.less'
 import '../components/opprett-utland/opprett-utland.less'
 import '../components/soknader/soknader.less'
 import '../components/soknad/soknaden.less'
+import '../components/endreknapp/endre-soknad-modal.less'
+import '../components/sporsmal/bendiksen/paske-hjelpetekst.less'
 
 import dayjs from 'dayjs'
 import nb from 'dayjs/locale/nb'
