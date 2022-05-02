@@ -205,7 +205,7 @@ describe('Teste førsteside i reisetilskuddsøknaden', () => {
             cy.get('.lagre-kvittering').contains('Bekreft').click()
 
             cy.get('.sumlinje').should('exist')
-            cy.get('.slette-kvittering').click()
+            cy.get('.slette-kvittering').click({ force: true })
             cy.contains('Ja, jeg er sikker').click()
             cy.get('.sumlinje').should('not.exist')
         })
