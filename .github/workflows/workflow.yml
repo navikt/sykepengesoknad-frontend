@@ -31,7 +31,7 @@ jobs:
       - name: Run lint
         run: npm run lint
       - name: Run tests
-        run: CI=true npm run test
+        run: npm run test:ci
       - name: Build application
         run: npm run build
       - name: Build server
