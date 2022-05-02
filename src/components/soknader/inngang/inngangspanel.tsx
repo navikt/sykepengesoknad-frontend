@@ -1,11 +1,9 @@
 import { Tag } from '@navikt/ds-react'
 import React from 'react'
 
-import { useAppStore } from '../../../data/stores/app-store'
 import SoknadLink from '../../../pages/soknad/soknad-link'
 import { RSSoknadstatus } from '../../../types/rs-types/rs-soknadstatus'
 import { Soknad } from '../../../types/types'
-import { harEldreUsendtSykmelding } from '../../eldre-usendt-soknad/eldre-usendt-soknad'
 import Vis from '../../vis'
 
 interface InngangsIkonProps {
