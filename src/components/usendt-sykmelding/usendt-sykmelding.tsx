@@ -1,6 +1,5 @@
 import { Alert } from '@navikt/ds-react'
 import React from 'react'
-import { Link } from 'react-router-dom'
 
 import { Sykmelding } from '../../types/sykmelding'
 import env from '../../utils/environment'
@@ -15,10 +14,11 @@ export const UsendtSykmelding = () => {
     return (
         <Alert variant="warning">
             {tekst('usendt.sykmelding.alert')}
-            <Link onClick={() => logEvent('navigere', { lenketekst: tekst('usendt.sykmelding.gaa-til') })}
-                to={env.sykmeldingUrl()}>
+            <a href={env.sykmeldingUrl()}
+                className="navds-link"
+                onClick={() => logEvent('navigere', { lenketekst: tekst('usendt.sykmelding.gaa-til') })}>
                 {tekst('usendt.sykmelding.gaa-til')}
-            </Link>
+            </a>
         </Alert>
     )
 }
