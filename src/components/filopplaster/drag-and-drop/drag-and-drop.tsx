@@ -25,14 +25,12 @@ const DragAndDrop = () => {
 
     useEffect(() => {
         if (valgtKvittering?.blobId) {
-            console.log('hent blob', `${flexGatewayRoot()}/flex-bucket-uploader/kvittering/${valgtKvittering.blobId}`) // eslint-disable-line
             setFormErDisabled(true)
             fetch(`${flexGatewayRoot()}/flex-bucket-uploader/kvittering/${valgtKvittering.blobId}`, {
                 method: 'GET',
                 credentials: 'include',
                 headers: { 'Content-Type': 'application/json' }
             }).then((res) => {
-                console.log('res', res) // eslint-disable-line
                 if (res.ok) {
                     res.blob().then((blob) => {
                         setValgtFil(blob as any)
@@ -53,7 +51,6 @@ const DragAndDrop = () => {
     const onDropCallback = useCallback(
         (filer) => {
             filer.forEach((fil: File) => {
-                console.log('fil', fil) // eslint-disable-line
                 setValgtFil(fil)
             })
         },
