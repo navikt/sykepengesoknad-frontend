@@ -1,13 +1,13 @@
 import { sendtArbeidsledigKvittering } from '../../../src/data/mock/data/soknader-integration'
 
 describe('Tester endring uten en endringer', () => {
-
     const soknad = sendtArbeidsledigKvittering
 
     before(() => {
-        cy.visit(`http://localhost:8080/syk/sykepengesoknad/kvittering/${soknad.id}`)
+        cy.visit(
+            `http://localhost:8080/syk/sykepengesoknad/kvittering/${soknad.id}`
+        )
     })
-
 
     it('Jeg vil endre svarene i søknaden', () => {
         // Endre søknaden
@@ -21,8 +21,7 @@ describe('Tester endring uten en endringer', () => {
         cy.contains('Gå videre').click()
     })
 
-
-    it('Svarer det samme søknaden', function() {
+    it('Svarer det samme søknaden', function () {
         cy.url().should('include', '/2')
         cy.contains('Gå videre').click()
 
@@ -51,8 +50,10 @@ describe('Tester endring uten en endringer', () => {
         cy.contains('Send endringene').click()
     })
 
-    it('Vi ser en popup og lander på listevisninga', function() {
-        cy.contains('Du har ikke gjort noen endringer. Vi behandler den opprinnelige sykepengesøknaden din.').click()
+    it('Vi ser en popup og lander på listevisninga', function () {
+        cy.contains(
+            'Du har ikke gjort noen endringer. Vi behandler den opprinnelige sykepengesøknaden din.'
+        ).click()
 
         cy.contains('OK').click()
         cy.url().should('equal', 'http://localhost:8080/syk/sykepengesoknad/')

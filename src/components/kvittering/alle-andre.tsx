@@ -13,10 +13,12 @@ const AlleAndre = () => {
     return (
         <>
             <KvitteringStatus />
-            <Vis hvis={valgtSoknad!.soknadstype !== RSSoknadstype.OPPHOLD_UTLAND}
+            <Vis
+                hvis={valgtSoknad!.soknadstype !== RSSoknadstype.OPPHOLD_UTLAND}
                 render={() => <KvitteringVidere />}
             />
-            <Vis hvis={valgtSoknad!.soknadstype === RSSoknadstype.OPPHOLD_UTLAND}
+            <Vis
+                hvis={valgtSoknad!.soknadstype === RSSoknadstype.OPPHOLD_UTLAND}
                 render={() => <KvitteringUtenlands />}
             />
         </>

@@ -13,7 +13,11 @@ const InfotekstOverSubmit = ({ sporsmal }: SpmProps) => {
     const { valgtSoknad } = useAppStore()
 
     const tekstNokkel = (tag: TagTyper) => {
-        if (tag === TagTyper.FERIE_V2 && valgtSoknad?.soknadstype === RSSoknadstype.ARBEIDSTAKERE && valgtSoknad?.status === RSSoknadstatus.UTKAST_TIL_KORRIGERING) {
+        if (
+            tag === TagTyper.FERIE_V2 &&
+            valgtSoknad?.soknadstype === RSSoknadstype.ARBEIDSTAKERE &&
+            valgtSoknad?.status === RSSoknadstatus.UTKAST_TIL_KORRIGERING
+        ) {
             return 'ferie-ingen-sykepenger'
         }
         return null
@@ -25,12 +29,13 @@ const InfotekstOverSubmit = ({ sporsmal }: SpmProps) => {
     }
 
     return (
-        <Vis hvis={tekstNokkel(sporsmal.tag)}
-            render={() =>
+        <Vis
+            hvis={tekstNokkel(sporsmal.tag)}
+            render={() => (
                 <Alert variant="info" style={{ marginTop: '1rem' }}>
                     <BodyShort>{tekst(nokkel)}</BodyShort>
                 </Alert>
-            }
+            )}
         />
     )
 }

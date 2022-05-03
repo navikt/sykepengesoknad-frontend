@@ -12,17 +12,20 @@ const ArbeidssituasjonInfo = () => {
     const arbeidssituasjon = hentArbeidssituasjon(valgtSykmelding)
 
     return (
-        <Vis hvis={arbeidssituasjon}
-            render={() =>
+        <Vis
+            hvis={arbeidssituasjon}
+            render={() => (
                 <div className="avsnitt">
                     <Label size="small" as="h3" className="avsnitt-hode">
                         {tekst('din-sykmelding.arbeidssituasjon.tittel.2')}
                     </Label>
                     <BodyShort>
-                        {tekst(`din-sykmelding.arbeidssituasjon.alternativ.${arbeidssituasjon!.toLowerCase()}` as any)}
+                        {tekst(
+                            `din-sykmelding.arbeidssituasjon.alternativ.${arbeidssituasjon!.toLowerCase()}` as any
+                        )}
                     </BodyShort>
                 </div>
-            }
+            )}
         />
     )
 }

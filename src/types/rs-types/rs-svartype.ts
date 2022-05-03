@@ -24,26 +24,25 @@ export enum RSSvartype {
 }
 
 export type RSSvartypeType =
-    'RADIO_GRUPPE_UKEKALENDER' |
-    'INFO_BEHANDLINGSDAGER' |
-    'CHECKBOX' |
-    'CHECKBOX_GRUPPE' |
-    'CHECKBOX_PANEL' |
-    'DATO' |
-    'FRITEKST' |
-    'IKKE_RELEVANT' |
-    'JA_NEI' |
-    'LAND' |
-    'PERIODE' |
-    'PERIODER' |
-    'PROSENT' |
-    'RADIO' |
-    'RADIO_GRUPPE' |
-    'RADIO_GRUPPE_TIMER_PROSENT' |
-    'TALL' |
-    'TIMER' |
-    'KILOMETER' |
-    'BELOP' |
-    'DATOER' |
-    'KVITTERING'
-
+    | 'RADIO_GRUPPE_UKEKALENDER'
+    | 'INFO_BEHANDLINGSDAGER'
+    | 'CHECKBOX'
+    | 'CHECKBOX_GRUPPE'
+    | 'CHECKBOX_PANEL'
+    | 'DATO'
+    | 'FRITEKST'
+    | 'IKKE_RELEVANT'
+    | 'JA_NEI'
+    | 'LAND'
+    | 'PERIODE'
+    | 'PERIODER'
+    | 'PROSENT'
+    | 'RADIO'
+    | 'RADIO_GRUPPE'
+    | 'RADIO_GRUPPE_TIMER_PROSENT'
+    | 'TALL'
+    | 'TIMER'
+    | 'KILOMETER'
+    | 'BELOP'
+    | 'DATOER'
+    | 'KVITTERING'

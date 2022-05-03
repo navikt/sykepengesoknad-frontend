@@ -19,7 +19,7 @@ const Fremdriftsbar = ({ antallSteg }: FremdriftsbarProps) => {
     const { stegId } = useParams<RouteParams>()
     const stegNo = parseInt(stegId)
     const style = {
-        width: `${((100 / antallSteg) * stegNo)}%`,
+        width: `${(100 / antallSteg) * stegNo}%`,
     }
 
     return (
@@ -37,16 +37,30 @@ const SporsmalSteg = () => {
     const { valgtSoknad } = useAppStore()
     const { stegId } = useParams<RouteParams>()
     const aktivtSteg = parseInt(stegId)
-    const steg = valgtSoknad!.sporsmal.filter(s => s.tag !== TagTyper.VAER_KLAR_OVER_AT)
+    const steg = valgtSoknad!.sporsmal.filter(
+        (s) => s.tag !== TagTyper.VAER_KLAR_OVER_AT
+    )
 
     return (
-        <div className="stegindikator-med-fremdriftsbar" role="progressbar"
-            aria-valuenow={aktivtSteg} aria-valuemin={1} aria-valuemax={steg.length}
+        <div
+            className="stegindikator-med-fremdriftsbar"
+            role="progressbar"
+            aria-valuenow={aktivtSteg}
+            aria-valuemin={1}
+            aria-valuemax={steg.length}
         >
             <div className="stegindikator stegindikator--kompakt">
                 <ol className="stegindikator__liste">
                     {steg.map((sporsmal: Sporsmal, idx: number) => {
-                        return <Steg index={idx} key={idx} label={tekst(hentNokkel(valgtSoknad!, idx + 1) as any)} />
+                        return (
+                            <Steg
+                                index={idx}
+                                key={idx}
+                                label={tekst(
+                                    hentNokkel(valgtSoknad!, idx + 1) as any
+                                )}
+                            />
+                        )
                     })}
                 </ol>
             </div>

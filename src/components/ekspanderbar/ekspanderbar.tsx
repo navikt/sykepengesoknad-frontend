@@ -11,22 +11,31 @@ interface EkspanderbarProps {
     logVedVisning?: string
 }
 
-export const Ekspanderbar = ({ title, children, amplitudeProps, sporsmalId, logVedVisning }: EkspanderbarProps) => {
-    const [ expanded, setExpanded ] = useState<boolean>(false)
+export const Ekspanderbar = ({
+    title,
+    children,
+    amplitudeProps,
+    sporsmalId,
+    logVedVisning,
+}: EkspanderbarProps) => {
+    const [expanded, setExpanded] = useState<boolean>(false)
     const { logEvent } = useAmplitudeInstance()
 
     // Lukker mellom hvert spørsmål
     useEffect(() => {
         setExpanded(false)
         if (logVedVisning) {
-            logEvent('hjelpetekst vist', { 'tekst': logVedVisning })
+            logEvent('hjelpetekst vist', { tekst: logVedVisning })
         }
         // eslint-disable-next-line
-    }, [ sporsmalId ])
+    }, [sporsmalId])
 
     return (
         <Accordion>
-            <Accordion.Item className="ekspanderbar" renderContentWhenClosed={true}>
+            <Accordion.Item
+                className="ekspanderbar"
+                renderContentWhenClosed={true}
+            >
                 <Accordion.Header
                     type="button"
                     onClick={() => {
@@ -39,10 +48,13 @@ export const Ekspanderbar = ({ title, children, amplitudeProps, sporsmalId, logV
                     <Label>{title}</Label>
                 </Accordion.Header>
                 <Accordion.Content>
-                    {typeof children === 'string' ? <BodyShort>{children}</BodyShort> : children}
+                    {typeof children === 'string' ? (
+                        <BodyShort>{children}</BodyShort>
+                    ) : (
+                        children
+                    )}
                 </Accordion.Content>
             </Accordion.Item>
         </Accordion>
     )
 }
-

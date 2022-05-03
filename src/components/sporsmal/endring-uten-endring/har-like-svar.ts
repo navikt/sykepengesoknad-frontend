@@ -16,7 +16,6 @@ export function harLikeSvar(a: Soknad, b: Soknad) {
     return true
 }
 
-
 function harLikeSvarPaSporsmal(a: Sporsmal, b: Sporsmal) {
     if (a.tag != b.tag) {
         return false
@@ -34,7 +33,8 @@ function harLikeSvarPaSporsmal(a: Sporsmal, b: Sporsmal) {
         }
     }
 
-    if (!a.kriterieForVisningAvUndersporsmal ||
+    if (
+        !a.kriterieForVisningAvUndersporsmal ||
         a.kriterieForVisningAvUndersporsmal === oversporsmalSvar()
     ) {
         return harLikeSvarPaUnderSporsmal(a, b)
@@ -49,7 +49,10 @@ function harLikeSvarPaUnderSporsmal(a: Sporsmal, b: Sporsmal) {
     }
 
     for (let i = 0; i < a.undersporsmal.length; i++) {
-        const like = harLikeSvarPaSporsmal(a.undersporsmal[i], b.undersporsmal[i])
+        const like = harLikeSvarPaSporsmal(
+            a.undersporsmal[i],
+            b.undersporsmal[i]
+        )
         if (!like) {
             return false
         }
@@ -57,9 +60,7 @@ function harLikeSvarPaUnderSporsmal(a: Sporsmal, b: Sporsmal) {
     return true
 }
 
-
 function svarErLike(a: RSSvar[], b: RSSvar[]) {
-
     const predicate = (a: RSSvar) => {
         return a.verdi
     }

@@ -6,9 +6,7 @@ interface VisProps {
 }
 
 const Vis = ({ hvis, render }: VisProps) => {
-    return hvis
-        ? render()
-        : null
+    return hvis ? render() : null
 }
 
 export default Vis

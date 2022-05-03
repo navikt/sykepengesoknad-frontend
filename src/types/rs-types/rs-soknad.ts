@@ -28,5 +28,3 @@ export interface RSSoknad {
     soknadPerioder: RSSoknadsperiode[]
     merknaderFraSykmelding?: RSMerknad[]
 }
-
-

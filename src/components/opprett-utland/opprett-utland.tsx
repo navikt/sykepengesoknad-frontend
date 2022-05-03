@@ -16,42 +16,60 @@ import Bjorn from '../sporsmal/bjorn/bjorn'
 import Vis from '../vis'
 
 const OpprettUtland = () => {
-    const { soknader, setSoknader, setFeilmeldingTekst, feilmeldingTekst } = useAppStore()
+    const { soknader, setSoknader, setFeilmeldingTekst, feilmeldingTekst } =
+        useAppStore()
 
     const opprettUtland = useFetch<RSSoknad>()
     const history = useHistory()
 
     const opprett = () => {
-        opprettUtland.fetch(`${flexGatewayRoot()}/syfosoknad/api/opprettSoknadUtland`, {
-            method: 'POST',
-            credentials: 'include',
-            headers: { 'Content-Type': 'application/json' }
-        }, (fetchState: FetchState<RSSoknad>) => {
-            if (hasData(fetchState)) {
-                const soknad = new Soknad(fetchState.data)
-                if (!soknader.find(s => s.id === soknad.id)) {
-                    soknader.push(soknad)
-                    setSoknader(soknader)
+        opprettUtland.fetch(
+            `${flexGatewayRoot()}/syfosoknad/api/opprettSoknadUtland`,
+            {
+                method: 'POST',
+                credentials: 'include',
+                headers: { 'Content-Type': 'application/json' },
+            },
+            (fetchState: FetchState<RSSoknad>) => {
+                if (hasData(fetchState)) {
+                    const soknad = new Soknad(fetchState.data)
+                    if (!soknader.find((s) => s.id === soknad.id)) {
+                        soknader.push(soknad)
+                        setSoknader(soknader)
+                    }
+                    history.push(urlTilSoknad(soknad))
+                    setFeilmeldingTekst('')
+                } else {
+                    logger.error(
+                        'Feil ved opprettelse av utlandssøknad',
+                        fetchState
+                    )
+                    setFeilmeldingTekst(tekst('opprett-utland.feilet'))
                 }
-                history.push(urlTilSoknad(soknad))
-                setFeilmeldingTekst('')
-            } else {
-                logger.error('Feil ved opprettelse av utlandssøknad', fetchState)
-                setFeilmeldingTekst(tekst('opprett-utland.feilet'))
             }
-        })
+        )
     }
 
     return (
         <div id="opprett_utland_main" className="opprett-utland">
             <div className="sidebanner sidebanner--utenramme">
                 <div className="sidebanner__innhold blokk--xl">
-                    <Bjorn nokkel="opprett-utland.bjorn" hvit={true} vertikal={true} stor={true} />
+                    <Bjorn
+                        nokkel="opprett-utland.bjorn"
+                        hvit={true}
+                        vertikal={true}
+                        stor={true}
+                    />
                 </div>
             </div>
             <div className="begrensning">
                 <header className="sidetopp">
-                    <Heading spacing size="xlarge" level="1" className="opprett-utland__tittel">
+                    <Heading
+                        spacing
+                        size="xlarge"
+                        level="1"
+                        className="opprett-utland__tittel"
+                    >
                         {tekst('opprett-utland.tittel')}
                     </Heading>
                 </header>
@@ -61,19 +79,27 @@ const OpprettUtland = () => {
                 </div>
 
                 <div className="knapperad">
-                    <Button variant="primary" type="button"
-                        onClick={opprett}>{tekst('opprett-utland.fortsett')}
+                    <Button variant="primary" type="button" onClick={opprett}>
+                        {tekst('opprett-utland.fortsett')}
                     </Button>
 
                     <div aria-live="polite">
-                        <Vis hvis={feilmeldingTekst}
-                            render={() => <Alert variant="error">{feilmeldingTekst}</Alert>}
+                        <Vis
+                            hvis={feilmeldingTekst}
+                            render={() => (
+                                <Alert variant="error">
+                                    {feilmeldingTekst}
+                                </Alert>
+                            )}
                         />
                     </div>
 
-                    <a className="blokk"
+                    <a
+                        className="blokk"
                         href="https://www.nav.no/no/NAV+og+samfunn/Om+NAV/personvern-i-arbeids-og-velferdsetaten"
-                        target="_blank" rel="noopener noreferrer">
+                        target="_blank"
+                        rel="noopener noreferrer"
+                    >
                         {tekst('opprett-utland.personvern')}
                     </a>
                 </div>
@@ -83,4 +109,3 @@ const OpprettUtland = () => {
 }
 
 export default OpprettUtland
-

@@ -17,12 +17,13 @@ export const InngangsIkon = ({ ikon, ikonHover }: InngangsIkonProps) => {
             <span className="inngangspanel__ikon inngangspanel__ikon--normal">
                 <img alt="" src={ikon} />
             </span>
-            <Vis hvis={ikonHover}
-                render={() =>
+            <Vis
+                hvis={ikonHover}
+                render={() => (
                     <span className="inngangspanel__ikon inngangspanel__ikon--hover">
                         <img alt="" src={ikonHover || ikon} />
                     </span>
-                }
+                )}
             />
         </>
     )
@@ -34,7 +35,11 @@ interface InngangspanelProps {
     className?: string
 }
 
-export const Inngangspanel = ({ soknad, children, className }: InngangspanelProps) => {
+export const Inngangspanel = ({
+    soknad,
+    children,
+    className,
+}: InngangspanelProps) => {
     return (
         <SoknadLink soknad={soknad} className={`inngangspanel ${className}`}>
             {children}
@@ -51,7 +56,9 @@ export const InngangsStatus = ({ status, tekst }: InngangsStatusProps) => {
     const type = statusTilType(status)
     return (
         <div className="inngangspanel__status">
-            <Tag variant={type} size="small">{tekst}</Tag>
+            <Tag variant={type} size="small">
+                {tekst}
+            </Tag>
         </div>
     )
 }

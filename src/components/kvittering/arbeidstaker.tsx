@@ -19,11 +19,17 @@ import PerioderMedOpphold from './innhold/arbeidstaker/perioder-med-opphold'
 import PerioderUtenOpphold from './innhold/arbeidstaker/perioder-uten-opphold'
 import ArbeidstakerStatus from './status/arbeidstaker-status'
 
-type ArbeidstakerKvitteringTekst = 'inntil16dager' | 'over16dager' | 'utenOpphold' | 'medOpphold' | undefined
+type ArbeidstakerKvitteringTekst =
+    | 'inntil16dager'
+    | 'over16dager'
+    | 'utenOpphold'
+    | 'medOpphold'
+    | undefined
 
 const Arbeidstaker = () => {
     const { valgtSoknad, valgtSykmelding, soknader } = useAppStore()
-    const [ kvitteringTekst, setKvitteringTekst ] = useState<ArbeidstakerKvitteringTekst>()
+    const [kvitteringTekst, setKvitteringTekst] =
+        useState<ArbeidstakerKvitteringTekst>()
 
     const settRiktigKvitteringTekst = () => {
         if (!valgtSoknad) return
@@ -35,11 +41,22 @@ const Arbeidstaker = () => {
                 setKvitteringTekst('utenOpphold')
             } else {
                 const tidligereSoknader = soknader
-                    .filter(sok => sok.status !== RSSoknadstatus.UTGAATT)                                 // Vi sjekker ikke utgåtte søknader
-                    .filter(sok => sok.soknadstype === RSSoknadstype.ARBEIDSTAKERE)                       // Gjelder arbeidstakersøknad
-                    .filter(sok => sok.arbeidsgiver?.orgnummer === valgtSoknad?.arbeidsgiver?.orgnummer)  // Samme arbeidstaker
-                    .filter(senereSok => senereSok.tom! < valgtSoknad!.fom!)                              // Gjelder søknader før valgt
-                    .filter(tidligereSok => tidligereSoknaderInnenfor16Dager(tidligereSok.tom!, valgtSoknad.fom!))
+                    .filter((sok) => sok.status !== RSSoknadstatus.UTGAATT) // Vi sjekker ikke utgåtte søknader
+                    .filter(
+                        (sok) => sok.soknadstype === RSSoknadstype.ARBEIDSTAKERE
+                    ) // Gjelder arbeidstakersøknad
+                    .filter(
+                        (sok) =>
+                            sok.arbeidsgiver?.orgnummer ===
+                            valgtSoknad?.arbeidsgiver?.orgnummer
+                    ) // Samme arbeidstaker
+                    .filter((senereSok) => senereSok.tom! < valgtSoknad!.fom!) // Gjelder søknader før valgt
+                    .filter((tidligereSok) =>
+                        tidligereSoknaderInnenfor16Dager(
+                            tidligereSok.tom!,
+                            valgtSoknad.fom!
+                        )
+                    )
                 if (tidligereSoknader.length > 0) {
                     if (harTidligereUtenOpphold(tidligereSoknader)) {
                         utenOppholdSjekkArbeidsgiverperiode(tidligereSoknader)
@@ -56,7 +73,10 @@ const Arbeidstaker = () => {
     const erInnenforArbeidsgiverperiode = () => {
         if (!valgtSoknad) return
 
-        return valgtSoknad.sendtTilArbeidsgiverDato !== null && valgtSoknad.sendtTilNAVDato === null
+        return (
+            valgtSoknad.sendtTilArbeidsgiverDato !== null &&
+            valgtSoknad.sendtTilNAVDato === null
+        )
     }
 
     const erSykmeldingperiodeDeltOverFlereSoknader = () => {
@@ -72,14 +92,24 @@ const Arbeidstaker = () => {
     const harTidligereUtenOpphold = (tidligereSoknader: Soknad[]) => {
         if (!valgtSoknad) return
 
-        return tidligereSoknader.filter(sok => dayjs(valgtSoknad.fom!).diff(sok.tom!, 'day') <= 1).length > 0
+        return (
+            tidligereSoknader.filter(
+                (sok) => dayjs(valgtSoknad.fom!).diff(sok.tom!, 'day') <= 1
+            ).length > 0
+        )
     }
 
-    const utenOppholdSjekkArbeidsgiverperiode = async(tidligereSoknader: Soknad[]) => {
+    const utenOppholdSjekkArbeidsgiverperiode = async (
+        tidligereSoknader: Soknad[]
+    ) => {
         if (!valgtSoknad) return
 
-        const forrigeSoknad = tidligereSoknader.find(sok => dayjs(valgtSoknad.fom).diff(sok.tom!, 'day') <= 1)
-        const forste = await erForsteSoknadUtenforArbeidsgiverperiode(forrigeSoknad?.id)
+        const forrigeSoknad = tidligereSoknader.find(
+            (sok) => dayjs(valgtSoknad.fom).diff(sok.tom!, 'day') <= 1
+        )
+        const forste = await erForsteSoknadUtenforArbeidsgiverperiode(
+            forrigeSoknad?.id
+        )
         if (forste) {
             setKvitteringTekst('over16dager')
         } else {
@@ -87,9 +117,15 @@ const Arbeidstaker = () => {
         }
     }
 
-    const medOppholdSjekkArbeidsgiverperiode = async(tidligereSoknader: Soknad[]) => {
-        const forrigeSoknad = tidligereSoknader.sort((a, b) => a.tom!.getTime() - b.tom!.getTime()).reverse()[0]
-        const forste = await erForsteSoknadUtenforArbeidsgiverperiode(forrigeSoknad?.id)
+    const medOppholdSjekkArbeidsgiverperiode = async (
+        tidligereSoknader: Soknad[]
+    ) => {
+        const forrigeSoknad = tidligereSoknader
+            .sort((a, b) => a.tom!.getTime() - b.tom!.getTime())
+            .reverse()[0]
+        const forste = await erForsteSoknadUtenforArbeidsgiverperiode(
+            forrigeSoknad?.id
+        )
         if (forste) {
             setKvitteringTekst('over16dager')
         } else {
@@ -99,11 +135,14 @@ const Arbeidstaker = () => {
 
     async function erForsteSoknadUtenforArbeidsgiverperiode(id?: string) {
         if (id === undefined) return true
-        const res = await fetcher(flexGatewayRoot() + `/syfosoknad/api/soknader/${id}/finnMottaker`, {
-            method: 'POST',
-            credentials: 'include',
-            headers: { 'Content-Type': 'application/json' }
-        })
+        const res = await fetcher(
+            flexGatewayRoot() + `/syfosoknad/api/soknader/${id}/finnMottaker`,
+            {
+                method: 'POST',
+                credentials: 'include',
+                headers: { 'Content-Type': 'application/json' },
+            }
+        )
         const data: RSMottakerResponse = await res.json()
         return data.mottaker === RSMottaker.ARBEIDSGIVER
     }
@@ -113,7 +152,14 @@ const Arbeidstaker = () => {
             case 'inntil16dager':
                 return <Inntil16dager />
             case 'over16dager':
-                return <Over16dager erGradert={valgtSoknad?.soknadstype === RSSoknadstype.GRADERT_REISETILSKUDD} />
+                return (
+                    <Over16dager
+                        erGradert={
+                            valgtSoknad?.soknadstype ===
+                            RSSoknadstype.GRADERT_REISETILSKUDD
+                        }
+                    />
+                )
             case 'utenOpphold':
                 return <PerioderUtenOpphold />
             case 'medOpphold':
@@ -141,24 +187,35 @@ const Arbeidstaker = () => {
                 <ArbeidstakerStatus />
 
                 <Vis
-                    hvis={!sendtForMerEnn30DagerSiden(valgtSoknad?.sendtTilArbeidsgiverDato, valgtSoknad?.sendtTilNAVDato)}
+                    hvis={
+                        !sendtForMerEnn30DagerSiden(
+                            valgtSoknad?.sendtTilArbeidsgiverDato,
+                            valgtSoknad?.sendtTilNAVDato
+                        )
+                    }
                     render={() => {
                         return (
                             <div className="hva-skjer">
                                 <Alert variant="info" size="small">
-                                    <Vis hvis={kvitteringTekst === 'medOpphold'}
-                                        render={() =>
+                                    <Vis
+                                        hvis={kvitteringTekst === 'medOpphold'}
+                                        render={() => (
                                             <Heading size="small" level="3">
-                                                {tekst('kvittering.viktig-informasjon')}
+                                                {tekst(
+                                                    'kvittering.viktig-informasjon'
+                                                )}
                                             </Heading>
-                                        }
+                                        )}
                                     />
-                                    <Vis hvis={kvitteringTekst !== 'medOpphold'}
-                                        render={() =>
+                                    <Vis
+                                        hvis={kvitteringTekst !== 'medOpphold'}
+                                        render={() => (
                                             <Heading size="small" level="3">
-                                                {tekst('kvittering.hva-skjer-videre')}
+                                                {tekst(
+                                                    'kvittering.hva-skjer-videre'
+                                                )}
                                             </Heading>
-                                        }
+                                        )}
                                     />
                                 </Alert>
                                 <div className="avsnitt">

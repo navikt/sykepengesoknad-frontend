@@ -6,10 +6,13 @@ import { SpmProps } from '../sporsmal-form/sporsmal-form'
 
 const SporsmalstekstH3 = ({ sporsmal }: SpmProps) => {
     return (
-        <Vis hvis={sporsmal.sporsmalstekst}
-            render={() =>
-                <Label as="h3" className="skjema__sporsmal">{sporsmal.sporsmalstekst}</Label>
-            }
+        <Vis
+            hvis={sporsmal.sporsmalstekst}
+            render={() => (
+                <Label as="h3" className="skjema__sporsmal">
+                    {sporsmal.sporsmalstekst}
+                </Label>
+            )}
         />
     )
 }

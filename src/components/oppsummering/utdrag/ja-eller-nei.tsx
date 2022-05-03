@@ -9,9 +9,13 @@ import Avkrysset from './avkrysset'
 import UndersporsmalSum from './undersporsmal-sum'
 
 const erUndersporsmalStilt = (sporsmal: Sporsmal): boolean => {
-    return sporsmal.svarliste.svar.map((s) => {
-        return s.verdi
-    }).indexOf(sporsmal.kriterieForVisningAvUndersporsmal) > -1
+    return (
+        sporsmal.svarliste.svar
+            .map((s) => {
+                return s.verdi
+            })
+            .indexOf(sporsmal.kriterieForVisningAvUndersporsmal) > -1
+    )
 }
 
 const JaEllerNei = ({ sporsmal }: OppsummeringProps) => {
@@ -25,8 +29,11 @@ const JaEllerNei = ({ sporsmal }: OppsummeringProps) => {
         <div className="oppsummering-sporsmal">
             <Label as="h3">{sporsmal.sporsmalstekst}</Label>
             <Avkrysset tekst={svartekst} />
-            <Vis hvis={erUndersporsmalStilt(sporsmal)}
-                render={() => <UndersporsmalSum sporsmalsliste={sporsmal.undersporsmal} />}
+            <Vis
+                hvis={erUndersporsmalStilt(sporsmal)}
+                render={() => (
+                    <UndersporsmalSum sporsmalsliste={sporsmal.undersporsmal} />
+                )}
             />
         </div>
     )

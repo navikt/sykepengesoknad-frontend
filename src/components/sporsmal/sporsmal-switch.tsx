@@ -39,10 +39,11 @@ const SporsmalSwitch = ({ sporsmal }: UndersporsmalProps) => {
             return <DagerKomp sporsmal={sporsmal} />
 
         case RSSvartype.JA_NEI:
-            if (!sporsmal.erHovedsporsmal &&
-                (sporsmal.parentKriterie === 'CHECKED'
-                    || sporsmal.parentKriterie === 'JA'
-                    || sporsmal.undersporsmal.length === 0)
+            if (
+                !sporsmal.erHovedsporsmal &&
+                (sporsmal.parentKriterie === 'CHECKED' ||
+                    sporsmal.parentKriterie === 'JA' ||
+                    sporsmal.undersporsmal.length === 0)
             ) {
                 return <JaNeiRadio sporsmal={sporsmal} />
             }

@@ -12,7 +12,7 @@ interface AnimateOnMountProps {
 
 const AnimateOnMount = (props: AnimateOnMountProps) => {
     const { mounted, enter, leave, start, children } = props
-    const [ styles, setStyles ] = useState<string>(null as any)
+    const [styles, setStyles] = useState<string>(null as any)
     const animRef = useRef<HTMLDivElement>(null)
 
     useEffect(() => {
@@ -22,12 +22,11 @@ const AnimateOnMount = (props: AnimateOnMountProps) => {
             setStyles(leave)
         }
         // eslint-disable-next-line
-    }, [ mounted ])
-
+    }, [mounted])
 
     return (
         <div ref={animRef} className={`${start} ${styles}`}>
-            <Vis hvis={ mounted } render={() => children} />
+            <Vis hvis={mounted} render={() => children} />
         </div>
     )
 }

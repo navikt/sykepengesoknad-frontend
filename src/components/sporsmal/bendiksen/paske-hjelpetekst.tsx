@@ -18,21 +18,31 @@ const PaskeHjelpetekst = ({ sporsmal }: SpmProps) => {
     if (!valgtSoknad) return null
 
     const paskeVeileder = (tag: TagTyper) =>
-        (tag === TagTyper.FERIE_V2 && innenforPaske(valgtSoknad.fom, valgtSoknad.tom))
+        tag === TagTyper.FERIE_V2 &&
+        innenforPaske(valgtSoknad.fom, valgtSoknad.tom)
 
     return (
-        <Vis hvis={paskeVeileder(sporsmal.tag)}
-            render={() =>
+        <Vis
+            hvis={paskeVeileder(sporsmal.tag)}
+            render={() => (
                 <div className="bendiksen-container">
                     <div className="bendiksen-hjelpetekst">
-
                         <Label>{tekst('soknad.bendiksen.paske.label')}</Label>
-                        <BodyShort spacing>{tekst('soknad.bendiksen.paske.tekst')}</BodyShort>
+                        <BodyShort spacing>
+                            {tekst('soknad.bendiksen.paske.tekst')}
+                        </BodyShort>
 
                         <BodyShort>
                             {parser(tekst('soknad.bendiksen.paske.tips'))}
-                            <Link href={tekst('soknad.bendiksen.paske.lenke')}
-                                onClick={() => { logEvent('navigere', { lenketekst: tekst('soknad.bendiksen.paske.lenketekst') })}}
+                            <Link
+                                href={tekst('soknad.bendiksen.paske.lenke')}
+                                onClick={() => {
+                                    logEvent('navigere', {
+                                        lenketekst: tekst(
+                                            'soknad.bendiksen.paske.lenketekst'
+                                        ),
+                                    })
+                                }}
                                 target="_blank"
                             >
                                 {tekst('soknad.bendiksen.paske.lenketekst')}
@@ -42,7 +52,7 @@ const PaskeHjelpetekst = ({ sporsmal }: SpmProps) => {
 
                     <Bendiksen />
                 </div>
-            }
+            )}
         />
     )
 }

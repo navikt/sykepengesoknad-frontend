@@ -8,7 +8,7 @@ import { getLedetekst, tekst } from '../../../utils/tekster'
 
 const SendesTil = () => {
     const { valgtSoknad, mottaker } = useAppStore()
-    const [ nokkel, setNokkel ] = useState<string>()
+    const [nokkel, setNokkel] = useState<string>()
 
     useEffect(() => {
         if (mottaker === RSMottaker.ARBEIDSGIVER) {
@@ -19,13 +19,19 @@ const SendesTil = () => {
             setNokkel('sykepengesoknad.oppsummering.nav-som-mottaker')
         }
         if (mottaker === RSMottaker.ARBEIDSGIVER_OG_NAV) {
-            setNokkel('sykepengesoknad.oppsummering.nav-arbeidsgiver-som-mottaker')
+            setNokkel(
+                'sykepengesoknad.oppsummering.nav-arbeidsgiver-som-mottaker'
+            )
         }
 
         // eslint-disable-next-line
     }, [mottaker])
 
-    if (!mottaker || !nokkel || valgtSoknad?.arbeidssituasjon !== 'ARBEIDSTAKER') {
+    if (
+        !mottaker ||
+        !nokkel ||
+        valgtSoknad?.arbeidssituasjon !== 'ARBEIDSTAKER'
+    ) {
         return null
     }
 
@@ -33,11 +39,12 @@ const SendesTil = () => {
         <div className="bottom_line">
             <BodyShort as="div">
                 {valgtSoknad!.arbeidsgiver !== undefined
-                    ? parser(getLedetekst(tekst(nokkel as any), {
-                        '%ARBEIDSGIVER%': valgtSoknad?.arbeidsgiver.navn,
-                    }))
-                    : parser(tekst(nokkel as any))
-                }
+                    ? parser(
+                          getLedetekst(tekst(nokkel as any), {
+                              '%ARBEIDSGIVER%': valgtSoknad?.arbeidsgiver.navn,
+                          })
+                      )
+                    : parser(tekst(nokkel as any))}
             </BodyShort>
         </div>
     )

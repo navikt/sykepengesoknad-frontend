@@ -10,10 +10,10 @@ import { Mottaker } from './kvittering-status'
 
 const ArbeidstakerStatus = () => {
     const { valgtSoknad } = useAppStore()
-    const [ tilArbNavn, setTilArbNavn ] = useState<string>()
-    const [ tilOrg, setTilOrg ] = useState<string>()
-    const [ tilNavDato, setTilNavDato ] = useState<string>()
-    const [ tilArbDato, setTilArbDato ] = useState<string>()
+    const [tilArbNavn, setTilArbNavn] = useState<string>()
+    const [tilOrg, setTilOrg] = useState<string>()
+    const [tilNavDato, setTilNavDato] = useState<string>()
+    const [tilArbDato, setTilArbDato] = useState<string>()
 
     let medKopi = tekst('kvittering.med-kopi-til-nav')
     if (valgtSoknad!.sendtTilArbeidsgiverDato && valgtSoknad!.sendtTilNAVDato) {
@@ -36,31 +36,43 @@ const ArbeidstakerStatus = () => {
         if (sendtTilArb) {
             const datoArb = dayjs(sendtTilArb).format('dddd D. MMM, kl HH:mm')
             setTilArbDato(datoArb.charAt(0).toUpperCase() + datoArb.slice(1))
-            setTilArbNavn(valgtSoknad?.arbeidsgiver?.navn ? valgtSoknad?.arbeidsgiver?.navn : Mottaker.ARBEIDSGIVER)
-            setTilOrg(valgtSoknad?.arbeidsgiver?.orgnummer ? `(Org.nr. ${valgtSoknad.arbeidsgiver.orgnummer})` : '')
+            setTilArbNavn(
+                valgtSoknad?.arbeidsgiver?.navn
+                    ? valgtSoknad?.arbeidsgiver?.navn
+                    : Mottaker.ARBEIDSGIVER
+            )
+            setTilOrg(
+                valgtSoknad?.arbeidsgiver?.orgnummer
+                    ? `(Org.nr. ${valgtSoknad.arbeidsgiver.orgnummer})`
+                    : ''
+            )
         }
     }
 
     return (
         <div className="sendt-inner">
-            <Vis hvis={valgtSoknad!.sendtTilArbeidsgiverDato}
-                render={() =>
+            <Vis
+                hvis={valgtSoknad!.sendtTilArbeidsgiverDato}
+                render={() => (
                     <>
                         <Label as="h3" className="sendt-tittel">
                             {tekst('kvittering.sendt-til')}
                         </Label>
-                        <Avkrysset tekst={`${tilArbNavn} ${tilOrg}${medKopi}`} />
+                        <Avkrysset
+                            tekst={`${tilArbNavn} ${tilOrg}${medKopi}`}
+                        />
                         <Detail size="small">{tilArbDato}</Detail>
                     </>
-                }
+                )}
             />
-            <Vis hvis={valgtSoknad!.sendtTilNAVDato}
-                render={() =>
+            <Vis
+                hvis={valgtSoknad!.sendtTilNAVDato}
+                render={() => (
                     <>
                         <Avkrysset tekst={Mottaker.NAV} />
                         <Detail size="small">{tilNavDato}</Detail>
                     </>
-                }
+                )}
             />
         </div>
     )

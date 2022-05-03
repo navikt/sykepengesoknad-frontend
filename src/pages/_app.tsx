@@ -59,15 +59,19 @@ dayjs.locale({
 })
 
 function MyApp({ Component, pageProps }: AppProps): JSX.Element {
-
     return (
         <>
             <Head>
                 <title>Søknad om sykepenger</title>
                 <meta name="robots" content="noindex" />
-                <meta name="viewport" content="width=device-width, initial-scale=1" />
+                <meta
+                    name="viewport"
+                    content="width=device-width, initial-scale=1"
+                />
             </Head>
-            <div id="root"><Component {...pageProps} /></div>
+            <div id="root">
+                <Component {...pageProps} />
+            </div>
         </>
     )
 }

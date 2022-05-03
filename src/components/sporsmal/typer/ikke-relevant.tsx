@@ -7,13 +7,18 @@ import { SpmProps } from '../sporsmal-form/sporsmal-form'
 
 const IkkeRelevant = ({ sporsmal }: SpmProps) => {
     return (
-        <Vis hvis={sporsmal.sporsmalstekst}
-            render={() =>
+        <Vis
+            hvis={sporsmal.sporsmalstekst}
+            render={() => (
                 <div className="til_slutt_seksjon">
-                    <Label as="h3" className="skjema__sporsmal">{sporsmal.sporsmalstekst}</Label>
-                    <BodyLong as="div" className="redaksjonelt-innhold">{parser(sporsmal.undertekst)}</BodyLong>
+                    <Label as="h3" className="skjema__sporsmal">
+                        {sporsmal.sporsmalstekst}
+                    </Label>
+                    <BodyLong as="div" className="redaksjonelt-innhold">
+                        {parser(sporsmal.undertekst)}
+                    </BodyLong>
                 </div>
-            }
+            )}
         />
     )
 }

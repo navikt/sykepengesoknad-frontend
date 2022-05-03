@@ -59,7 +59,7 @@
             background-position: center center;
             background-repeat: no-repeat;
             background-size: 75%;
-            content: "";
+            content: '';
             height: 1.5rem;
             width: 1.5rem;
             position: absolute;
@@ -140,7 +140,9 @@
             .inputPanel__label {
                 &::before {
                     border: 2px solid @navds-semantic-color-interaction-primary;
-                    box-shadow: 0 0 0 3px @navds-global-color-white inset, 0 0 0 12px @navds-semantic-color-interaction-primary inset;
+                    box-shadow: 0 0 0 3px @navds-global-color-white inset,
+                        0 0 0 12px @navds-semantic-color-interaction-primary
+                            inset;
                     border-radius: 50%;
                 }
             }
@@ -150,7 +152,9 @@
                     &::before {
                         .mixin-transition(200ms, box-shadow);
 
-                        box-shadow: 0 0 0 3px @navds-global-color-white inset, 0 0 0 12px @navds-semantic-color-interaction-primary inset;
+                        box-shadow: 0 0 0 3px @navds-global-color-white inset,
+                            0 0 0 12px @navds-semantic-color-interaction-primary
+                                inset;
                     }
                 }
             }

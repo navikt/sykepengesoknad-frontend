@@ -18,7 +18,7 @@ export const urlTilSoknad = (soknad: Soknad) => {
 
     const alltidTilForsteSporsmal = [
         RSSoknadstatus.AVBRUTT,
-        RSSoknadstatus.UTKAST_TIL_KORRIGERING
+        RSSoknadstatus.UTKAST_TIL_KORRIGERING,
     ]
     if (alltidTilForsteSporsmal.includes(soknad.status)) {
         return `/soknader/${soknad.id}/1`
@@ -31,21 +31,32 @@ export const urlTilSoknad = (soknad: Soknad) => {
 }
 
 export const erDelvisUtfyltNySoknad = (soknad: Soknad): boolean => {
-    return erDelvisUtfylt(soknad) && soknad.status !== RSSoknadstatus.UTKAST_TIL_KORRIGERING
+    return (
+        erDelvisUtfylt(soknad) &&
+        soknad.status !== RSSoknadstatus.UTKAST_TIL_KORRIGERING
+    )
 }
 
 const erDelvisUtfylt = (soknad: Soknad): boolean => {
     const antallRelevanteSporsmal = hentRelevanteSporsmal(soknad).length
-    const posisjonPaSisteBesvarteSporsmal = finnPosisjonPaSisteBesvarteSporsmal(soknad)
-    return posisjonPaSisteBesvarteSporsmal > 0 && (posisjonPaSisteBesvarteSporsmal !== antallRelevanteSporsmal)
+    const posisjonPaSisteBesvarteSporsmal =
+        finnPosisjonPaSisteBesvarteSporsmal(soknad)
+    return (
+        posisjonPaSisteBesvarteSporsmal > 0 &&
+        posisjonPaSisteBesvarteSporsmal !== antallRelevanteSporsmal
+    )
 }
 
 const hentRelevanteSporsmal = (soknad: Soknad) => {
-    return soknad.sporsmal.filter((sporsmal) => sporsmal.svartype !== RSSvartype.IKKE_RELEVANT)
+    return soknad.sporsmal.filter(
+        (sporsmal) => sporsmal.svartype !== RSSvartype.IKKE_RELEVANT
+    )
 }
 
 const finnPosisjonPaSisteBesvarteSporsmal = (soknad: Soknad) => {
-    const reversertSporsmalsListe = hentRelevanteSporsmal(soknad).slice().reverse()
+    const reversertSporsmalsListe = hentRelevanteSporsmal(soknad)
+        .slice()
+        .reverse()
     let ubesvarteSporsmal = 0
 
     for (const sporsmal of reversertSporsmalsListe) {
@@ -58,7 +69,6 @@ const finnPosisjonPaSisteBesvarteSporsmal = (soknad: Soknad) => {
 }
 
 const SoknadLink = ({ soknad, children, className }: SoknadLinkProps) => {
-
     const url = urlTilSoknad(soknad)
 
     return (

@@ -24,7 +24,8 @@ const DatoInput = ({ sporsmal }: SpmProps) => {
                 name={sporsmal.id}
                 rules={{
                     validate: () => {
-                        const div: HTMLDivElement | null = document.querySelector('.ds-datepicker__input')
+                        const div: HTMLDivElement | null =
+                            document.querySelector('.ds-datepicker__input')
                         const detteFeilet = validerDato(sporsmal, getValues())
                         if (detteFeilet !== true) {
                             div?.classList.add('skjemaelement__input--harFeil')
@@ -32,7 +33,7 @@ const DatoInput = ({ sporsmal }: SpmProps) => {
                         }
                         div?.classList.remove('skjemaelement__input--harFeil')
                         return true
-                    }
+                    },
                 }}
                 render={({ field }) => (
                     <Datepicker
@@ -41,20 +42,20 @@ const DatoInput = ({ sporsmal }: SpmProps) => {
                         onChange={field.onChange}
                         value={field.value}
                         inputProps={{
-                            name: field.name
+                            name: field.name,
                         }}
                         calendarSettings={{
                             showWeekNumbers: true,
-                            position: skalBrukeFullskjermKalender()
+                            position: skalBrukeFullskjermKalender(),
                         }}
                         showYearSelector={false}
                         limitations={{
                             weekendsNotSelectable: false,
                             minDate: sporsmal.min || undefined,
-                            maxDate: sporsmal.max || undefined
+                            maxDate: sporsmal.max || undefined,
                         }}
                         dayPickerProps={{
-                            initialMonth: fraBackendTilDate(sporsmal.max!)
+                            initialMonth: fraBackendTilDate(sporsmal.max!),
                         }}
                     />
                 )}

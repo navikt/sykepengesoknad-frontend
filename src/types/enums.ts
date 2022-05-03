@@ -4,15 +4,18 @@ export enum InntektskildeTyper {
     SELVSTENDIG_NAERINGSDRIVENDE_DAGMAMMA = 'SELVSTENDIG_NAERINGSDRIVENDE_DAGMAMMA',
     JORDBRUKER_FISKER_REINDRIFTSUTOEVER = 'JORDBRUKER_FISKER_REINDRIFTSUTOEVER',
     FRILANSER = 'FRILANSER',
-    ANNET = 'ANNET'
+    ANNET = 'ANNET',
 }
 
-
-export type SykmeldingStatuser = 'NY' | 'SENDT' | 'UTGAATT' | 'AVBRUTT' | 'BEKREFTET' | 'TIL_SENDING'
-
+export type SykmeldingStatuser =
+    | 'NY'
+    | 'SENDT'
+    | 'UTGAATT'
+    | 'AVBRUTT'
+    | 'BEKREFTET'
+    | 'TIL_SENDING'
 
 export type AvgittAvTyper = 'TIDLIGERE_SOKNAD'
-
 
 export enum TagTyper {
     ANDRE_INNTEKTSKILDER = 'ANDRE_INNTEKTSKILDER',
@@ -113,11 +116,9 @@ export enum TagTyper {
     UTBETALING = 'UTBETALING',
 }
 
-
 export enum SvarEnums {
     JA = 'JA',
     NEI = 'NEI',
     CHECKED = 'CHECKED',
-    UNCHECKED = 'UNCHECKED'
+    UNCHECKED = 'UNCHECKED',
 }
-

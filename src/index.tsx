@@ -20,8 +20,6 @@ if (isMockBackend()) {
 ReactDOM.render(
     <BrowserRouter basename="/syk/sykepengesoknad">
         <App />
-    </BrowserRouter>
-    , document.getElementById('root') as HTMLElement
+    </BrowserRouter>,
+    document.getElementById('root') as HTMLElement
 )
-
-

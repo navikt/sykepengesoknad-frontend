@@ -9,15 +9,18 @@ const ArbeidsgiverInfo = () => {
     const { valgtSoknad } = useAppStore()
 
     return (
-        <Vis hvis={valgtSoknad?.arbeidsgiver}
-            render={() =>
+        <Vis
+            hvis={valgtSoknad?.arbeidsgiver}
+            render={() => (
                 <div className="avsnitt">
                     <Label size="small" as="h3" className="avsnitt-hode">
-                        {tekst('sykepengesoknad.sykmelding-utdrag.arbeidsgiver')}
+                        {tekst(
+                            'sykepengesoknad.sykmelding-utdrag.arbeidsgiver'
+                        )}
                     </Label>
                     <BodyShort>{valgtSoknad!.arbeidsgiver!.navn}</BodyShort>
                 </div>
-            }
+            )}
         />
     )
 }

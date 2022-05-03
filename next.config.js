@@ -23,8 +23,10 @@ module.exports = withLess({
         amplitudeKey: process.env.AMPLITUDE_KEY,
         amplitudeEnabled: process.env.AMPLITUDE_ENABLED,
         environment: process.env.ENVIRONMENT,
-        sykmeldingerBackendProxyRoot: process.env.SYKMELDINGER_BACKEND_PROXY_ROOT,
-        sendTilNavKnappDelaySeconds: process.env.SEND_TIL_NAV_KNAPP_DELAY_SECONDS,
-        dineSakerUrl: process.env.DINESAKER_URL
+        sykmeldingerBackendProxyRoot:
+            process.env.SYKMELDINGER_BACKEND_PROXY_ROOT,
+        sendTilNavKnappDelaySeconds:
+            process.env.SEND_TIL_NAV_KNAPP_DELAY_SECONDS,
+        dineSakerUrl: process.env.DINESAKER_URL,
     },
 })

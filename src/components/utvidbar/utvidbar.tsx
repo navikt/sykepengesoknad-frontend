@@ -17,49 +17,75 @@ interface UtvidbarProps {
 }
 
 const Utvidbar = (props: UtvidbarProps) => {
-    const [ erApen, setErApen ] = useState<boolean>(props.erApen)
+    const [erApen, setErApen] = useState<boolean>(props.erApen)
 
     const btnImage = useRef<HTMLImageElement>(null)
     const { logEvent } = useAmplitudeInstance()
 
     useEffect(() => {
         setErApen(props.erApen)
-    }, [ props ])
+    }, [props])
 
     const onKlikk = () => {
         if (props.amplitudeProps) {
-            logEvent(erApen ? 'panel lukket' : 'panel åpnet', props.amplitudeProps)
+            logEvent(
+                erApen ? 'panel lukket' : 'panel åpnet',
+                props.amplitudeProps
+            )
         }
         setErApen(!erApen)
     }
 
     return (
         <Accordion>
-            <Accordion.Item renderContentWhenClosed={true} open={erApen}
-                className={`utvidbar ${props.className ? props.className : ''} ${props.type ? props.type : ''}`}
+            <Accordion.Item
+                renderContentWhenClosed={true}
+                open={erApen}
+                className={`utvidbar ${
+                    props.className ? props.className : ''
+                } ${props.type ? props.type : ''}`}
             >
                 <Accordion.Header
                     type="button"
-                    onMouseEnter={props.ikon !== undefined ? () => btnImage.current!.src = props.ikonHover! : undefined}
-                    onMouseLeave={props.ikon !== undefined ? () => btnImage.current!.src = props.ikon! : undefined}
+                    onMouseEnter={
+                        props.ikon !== undefined
+                            ? () => (btnImage.current!.src = props.ikonHover!)
+                            : undefined
+                    }
+                    onMouseLeave={
+                        props.ikon !== undefined
+                            ? () => (btnImage.current!.src = props.ikon!)
+                            : undefined
+                    }
                     onClick={onKlikk}
                 >
-                    <Vis hvis={props.ikon}
-                        render={() =>
-                            <img aria-hidden="true" className="utvidbar__ikon"
+                    <Vis
+                        hvis={props.ikon}
+                        render={() => (
+                            <img
+                                aria-hidden="true"
+                                className="utvidbar__ikon"
                                 ref={btnImage}
                                 alt={props.ikonAltTekst}
                                 src={props.ikon}
                             />
-                        }
+                        )}
                     />
 
-                    <Vis hvis={props.type === undefined}
-                        render={() => <Heading size="small" level="2">{props.tittel}</Heading>}
+                    <Vis
+                        hvis={props.type === undefined}
+                        render={() => (
+                            <Heading size="small" level="2">
+                                {props.tittel}
+                            </Heading>
+                        )}
                     />
 
-                    <Vis hvis={props.type === 'intern'}
-                        render={() => <BodyShort as="h2">{props.tittel}</BodyShort>}
+                    <Vis
+                        hvis={props.type === 'intern'}
+                        render={() => (
+                            <BodyShort as="h2">{props.tittel}</BodyShort>
+                        )}
                     />
 
                     <BodyShort as="em" className="utvidbar__handling">
@@ -70,8 +96,12 @@ const Utvidbar = (props: UtvidbarProps) => {
                 <Accordion.Content>
                     {props.children}
                     <div className="lenkerad ikke-print">
-                        <button type="button" className="navds-link" aria-pressed={!erApen}
-                            tabIndex={(erApen ? null : -1) as any} onClick={(e: any) => {
+                        <button
+                            type="button"
+                            className="navds-link"
+                            aria-pressed={!erApen}
+                            tabIndex={(erApen ? null : -1) as any}
+                            onClick={(e: any) => {
                                 e.preventDefault()
                                 setErApen(!erApen)
                             }}

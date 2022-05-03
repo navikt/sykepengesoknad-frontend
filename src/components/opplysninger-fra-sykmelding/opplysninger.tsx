@@ -17,12 +17,14 @@ interface OpplysningerProps {
 }
 
 const Opplysninger = ({ ekspandert, steg }: OpplysningerProps) => {
-
     const tittel = tekst('sykepengesoknad.sykmelding-utdrag.tittel')
     return (
-        <Utvidbar className="ekspander"
-            ikon={plaster} ikonHover={plasterHover} erApen={ekspandert}
-            amplitudeProps={{ 'component': tittel, steg: steg }}
+        <Utvidbar
+            className="ekspander"
+            ikon={plaster}
+            ikonHover={plasterHover}
+            erApen={ekspandert}
+            amplitudeProps={{ component: tittel, steg: steg }}
             tittel={tittel}
             ikonAltTekst=""
         >

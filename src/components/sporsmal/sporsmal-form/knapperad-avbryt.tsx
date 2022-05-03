@@ -9,7 +9,13 @@ import { avbrytSoknad } from '../../avbryt-soknad-modal/avbryt-soknad'
 type Event = MouseEvent<HTMLAnchorElement | HTMLButtonElement>
 
 const KnapperadAvbryt = () => {
-    const { valgtSoknad, soknader, setSoknader, setValgtSoknad, setFeilmeldingTekst } = useAppStore()
+    const {
+        valgtSoknad,
+        soknader,
+        setSoknader,
+        setValgtSoknad,
+        setFeilmeldingTekst,
+    } = useAppStore()
     const history = useHistory()
 
     const handleAvbryt = (event: Event) => {
@@ -21,7 +27,7 @@ const KnapperadAvbryt = () => {
             soknader: soknader,
             setValgtSoknad: setValgtSoknad,
             history: history,
-            setFeilmeldingTekst: setFeilmeldingTekst
+            setFeilmeldingTekst: setFeilmeldingTekst,
         })
     }
 

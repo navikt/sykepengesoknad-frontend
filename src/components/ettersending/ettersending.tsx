@@ -13,25 +13,35 @@ interface EttersendingProps {
     setRerendrekvittering: (d: Date) => void
 }
 
-const Ettersending = ({ gjelder, setRerendrekvittering }: EttersendingProps) => {
-    const { valgtSoknad, setValgtSoknad, soknader, setSoknader, setFeilmeldingTekst } = useAppStore()
-    const [ vilEttersende, setVilEttersende ] = useState<boolean>(false)
-    const [ ettersender, setEttersender ] = useState<boolean>(false)
+const Ettersending = ({
+    gjelder,
+    setRerendrekvittering,
+}: EttersendingProps) => {
+    const {
+        valgtSoknad,
+        setValgtSoknad,
+        soknader,
+        setSoknader,
+        setFeilmeldingTekst,
+    } = useAppStore()
+    const [vilEttersende, setVilEttersende] = useState<boolean>(false)
+    const [ettersender, setEttersender] = useState<boolean>(false)
 
     const hentTekst = (text: string) => {
-        const tilSuffix = (gjelder === 'nav') ? '-nav' : '-arbeidsgiver'
+        const tilSuffix = gjelder === 'nav' ? '-nav' : '-arbeidsgiver'
         return tekst(`${text}${tilSuffix}` as any)
     }
 
     const oppdaterSoknad = () => {
         setValgtSoknad(valgtSoknad)
-        soknader[soknader.findIndex(sok => sok.id === valgtSoknad!.id)] = valgtSoknad as any
+        soknader[soknader.findIndex((sok) => sok.id === valgtSoknad!.id)] =
+            valgtSoknad as any
         setSoknader(soknader)
         setFeilmeldingTekst('')
         setRerendrekvittering(new Date())
     }
 
-    const ettersend = async() => {
+    const ettersend = async () => {
         if (ettersender) return
         setEttersender(true)
         try {
@@ -46,12 +56,16 @@ const Ettersending = ({ gjelder, setRerendrekvittering }: EttersendingProps) => 
         }
     }
 
-    const ettersendNav = async() => {
-        const res = await fetcher(flexGatewayRoot() + `/syfosoknad/api/soknader/${valgtSoknad!.id}/ettersendTilNav`, {
-            method: 'POST',
-            credentials: 'include',
-            headers: { 'Content-Type': 'application/json' }
-        })
+    const ettersendNav = async () => {
+        const res = await fetcher(
+            flexGatewayRoot() +
+                `/syfosoknad/api/soknader/${valgtSoknad!.id}/ettersendTilNav`,
+            {
+                method: 'POST',
+                credentials: 'include',
+                headers: { 'Content-Type': 'application/json' },
+            }
+        )
 
         if (redirectTilLoginHvis401(res)) {
             return
@@ -64,12 +78,18 @@ const Ettersending = ({ gjelder, setRerendrekvittering }: EttersendingProps) => 
         }
     }
 
-    const ettersendArbeidsgiver = async() => {
-        const res = await fetcher(flexGatewayRoot() + `/syfosoknad/api/soknader/${valgtSoknad!.id}/ettersendTilArbeidsgiver`, {
-            method: 'POST',
-            credentials: 'include',
-            headers: { 'Content-Type': 'application/json' }
-        })
+    const ettersendArbeidsgiver = async () => {
+        const res = await fetcher(
+            flexGatewayRoot() +
+                `/syfosoknad/api/soknader/${
+                    valgtSoknad!.id
+                }/ettersendTilArbeidsgiver`,
+            {
+                method: 'POST',
+                credentials: 'include',
+                headers: { 'Content-Type': 'application/json' },
+            }
+        )
         if (redirectTilLoginHvis401(res)) {
             return
         } else if (res.ok) {
@@ -81,31 +101,52 @@ const Ettersending = ({ gjelder, setRerendrekvittering }: EttersendingProps) => 
         }
     }
 
-    return (<>
-        <Button variant="secondary" onClick={() => {
-            setVilEttersende(true)
-        }}>
-            {tekst(`kvittering.knapp.send-${gjelder}` as any)}
-        </Button>
+    return (
+        <>
+            <Button
+                variant="secondary"
+                onClick={() => {
+                    setVilEttersende(true)
+                }}
+            >
+                {tekst(`kvittering.knapp.send-${gjelder}` as any)}
+            </Button>
 
-        <Modal onClose={() => setVilEttersende(false)}
-            className="ettersending"
-            open={vilEttersende}
-        >
-            <Modal.Content>
-                <Heading spacing size="small" level="3" className="modal__tittel">
-                    {hentTekst('kvittering.tittel.send-til')}
-                </Heading>
-                <Alert variant="info">{hentTekst('kvittering.info.send-til')}</Alert>
-                <Button variant="primary" loading={ettersender} onClick={ettersend}>
-                    {hentTekst('kvittering.knapp.bekreft.send-til')}
-                </Button>
-                <Button variant="tertiary" className="lenkeknapp" onClick={() => setVilEttersende(false)}>
-                    {tekst('kvittering.knapp.angre')}
-                </Button>
-            </Modal.Content>
-        </Modal>
-    </>)
+            <Modal
+                onClose={() => setVilEttersende(false)}
+                className="ettersending"
+                open={vilEttersende}
+            >
+                <Modal.Content>
+                    <Heading
+                        spacing
+                        size="small"
+                        level="3"
+                        className="modal__tittel"
+                    >
+                        {hentTekst('kvittering.tittel.send-til')}
+                    </Heading>
+                    <Alert variant="info">
+                        {hentTekst('kvittering.info.send-til')}
+                    </Alert>
+                    <Button
+                        variant="primary"
+                        loading={ettersender}
+                        onClick={ettersend}
+                    >
+                        {hentTekst('kvittering.knapp.bekreft.send-til')}
+                    </Button>
+                    <Button
+                        variant="tertiary"
+                        className="lenkeknapp"
+                        onClick={() => setVilEttersende(false)}
+                    >
+                        {tekst('kvittering.knapp.angre')}
+                    </Button>
+                </Modal.Content>
+            </Modal>
+        </>
+    )
 }
 
 export default Ettersending

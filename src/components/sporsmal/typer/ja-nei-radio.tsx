@@ -15,16 +15,23 @@ import { SpmProps } from '../sporsmal-form/sporsmal-form'
 import { hentFeilmelding } from '../sporsmal-utils'
 import UndersporsmalListe from '../undersporsmal/undersporsmal-liste'
 
-const jaNeiValg = [ {
-    value: 'JA',
-    label: 'Ja',
-}, {
-    value: 'NEI',
-    label: 'Nei',
-} ]
+const jaNeiValg = [
+    {
+        value: 'JA',
+        label: 'Ja',
+    },
+    {
+        value: 'NEI',
+        label: 'Nei',
+    },
+]
 
 const JaNeiRadio = ({ sporsmal }: SpmProps) => {
-    const { register, formState: { errors }, watch } = useFormContext()
+    const {
+        register,
+        formState: { errors },
+        watch,
+    } = useFormContext()
     const watchJaNei = watch(sporsmal.id)
     const feilmelding = hentFeilmelding(sporsmal)
 
@@ -32,56 +39,91 @@ const JaNeiRadio = ({ sporsmal }: SpmProps) => {
         const spm = sporsmal
         if (spm.tag && valgt) {
             if (spm.tag === TagTyper.UTLANDSOPPHOLD_SOKT_SYKEPENGER) {
-                const utenlandsopphold = watchJaNei === SvarEnums.JA
-                    ? 'soknad.infotekst.utlandsopphold_sokt_sykepenger.ja'
-                    : 'soknad.infotekst.utlandsopphold_sokt_sykepenger.nei'
-                return <div className="ekstrasporsmal">
-                    <BodyShort as="span">
-                        {parser(getLedetekst(tekst(utenlandsopphold), { '%URL%': utlandssoknadUrl }))}
-                    </BodyShort>
-                </div>
+                const utenlandsopphold =
+                    watchJaNei === SvarEnums.JA
+                        ? 'soknad.infotekst.utlandsopphold_sokt_sykepenger.ja'
+                        : 'soknad.infotekst.utlandsopphold_sokt_sykepenger.nei'
+                return (
+                    <div className="ekstrasporsmal">
+                        <BodyShort as="span">
+                            {parser(
+                                getLedetekst(tekst(utenlandsopphold), {
+                                    '%URL%': utlandssoknadUrl,
+                                })
+                            )}
+                        </BodyShort>
+                    </div>
+                )
             }
             if (spm.tag.startsWith('INNTEKTSKILDE_') && watchJaNei === 'JA') {
-                return <div className="presisering">
-                    <BodyShort as="span">
-                        {tekst('soknad.presisering.' + spm.tag as any)}
-                    </BodyShort>
-                </div>
+                return (
+                    <div className="presisering">
+                        <BodyShort as="span">
+                            {tekst(('soknad.presisering.' + spm.tag) as any)}
+                        </BodyShort>
+                    </div>
+                )
             }
-            if (spm.tag === 'INNTEKTSKILDE_SELVSTENDIG_ER_DU_SYKMELDT' && watchJaNei === 'NEI') {
-                return <div className="presisering">
-                    <BodyShort as="span">
-                        {parser(getLedetekst(
-                            tekst('soknad.presisering.' + spm.tag + '_NEI' as any),
-                            { '%URL%': tekst('soknad.presisering.INNTEKTSKILDE_SELVSTENDIG_ER_DU_SYKMELDT_NEI.url') }
-                        ))}
-                    </BodyShort>
-                </div>
+            if (
+                spm.tag === 'INNTEKTSKILDE_SELVSTENDIG_ER_DU_SYKMELDT' &&
+                watchJaNei === 'NEI'
+            ) {
+                return (
+                    <div className="presisering">
+                        <BodyShort as="span">
+                            {parser(
+                                getLedetekst(
+                                    tekst(
+                                        ('soknad.presisering.' +
+                                            spm.tag +
+                                            '_NEI') as any
+                                    ),
+                                    {
+                                        '%URL%': tekst(
+                                            'soknad.presisering.INNTEKTSKILDE_SELVSTENDIG_ER_DU_SYKMELDT_NEI.url'
+                                        ),
+                                    }
+                                )
+                            )}
+                        </BodyShort>
+                    </div>
+                )
             }
         } else return <></>
     }
 
     return (
         <>
-            <div className={
-                'skjemaelement' +
-                (sporsmal.parentKriterie ? ' kriterie--' + sporsmal.parentKriterie.toLowerCase() : '') +
-                (errors[sporsmal.id] ? ' skjemagruppe--feil' : '')
-            }>
-
-                <Label as="h3" className="skjema__sporsmal">{sporsmal.sporsmalstekst}</Label>
+            <div
+                className={
+                    'skjemaelement' +
+                    (sporsmal.parentKriterie
+                        ? ' kriterie--' + sporsmal.parentKriterie.toLowerCase()
+                        : '') +
+                    (errors[sporsmal.id] ? ' skjemagruppe--feil' : '')
+                }
+            >
+                <Label as="h3" className="skjema__sporsmal">
+                    {sporsmal.sporsmalstekst}
+                </Label>
 
                 {jaNeiValg.map((valg, idx) => {
                     const OK = watchJaNei === valg.value
                     return (
                         <div className="radioContainer" key={idx}>
-                            <input type="radio"
+                            <input
+                                type="radio"
                                 id={sporsmal.id + '_' + idx}
                                 value={valg.value}
-                                {...register(sporsmal.id, { required: feilmelding.global })}
+                                {...register(sporsmal.id, {
+                                    required: feilmelding.global,
+                                })}
                                 className="skjemaelement__input radioknapp"
                             />
-                            <label className="skjemaelement__label" htmlFor={sporsmal.id + '_' + idx}>
+                            <label
+                                className="skjemaelement__label"
+                                htmlFor={sporsmal.id + '_' + idx}
+                            >
                                 {valg.label}
                             </label>
                             {presisering(OK)}
@@ -91,26 +133,39 @@ const JaNeiRadio = ({ sporsmal }: SpmProps) => {
                 <FeilLokal sporsmal={sporsmal} />
             </div>
 
-            <Vis hvis={sporsmal.tag === TagTyper.SYKMELDINGSGRAD && watchJaNei === 'NEI'}
-                render={() =>
-                    <Bjorn className="press" nokkel="sykepengesoknad-utland.skjema.bjorn" ekstraMarginTop={true} />
+            <Vis
+                hvis={
+                    sporsmal.tag === TagTyper.SYKMELDINGSGRAD &&
+                    watchJaNei === 'NEI'
                 }
+                render={() => (
+                    <Bjorn
+                        className="press"
+                        nokkel="sykepengesoknad-utland.skjema.bjorn"
+                        ekstraMarginTop={true}
+                    />
+                )}
             />
 
-            <Vis hvis={sporsmal.tag === TagTyper.FERIE && watchJaNei === 'JA'}
-                render={() =>
+            <Vis
+                hvis={sporsmal.tag === TagTyper.FERIE && watchJaNei === 'JA'}
+                render={() => (
                     <>
-                        <Bjorn className="press" nokkel="sykepengesoknad-utland.skjema.ferie-sporsmal-bjorn"
-                            ekstraMarginTop={true} />
+                        <Bjorn
+                            className="press"
+                            nokkel="sykepengesoknad-utland.skjema.ferie-sporsmal-bjorn"
+                            ekstraMarginTop={true}
+                        />
                         <KnapperadAvbryt />
                     </>
-                }
+                )}
             />
 
             <div aria-live="assertive">
                 <AnimateOnMount
                     mounted={
-                        watchJaNei === sporsmal.kriterieForVisningAvUndersporsmal &&
+                        watchJaNei ===
+                            sporsmal.kriterieForVisningAvUndersporsmal &&
                         sporsmal.tag !== TagTyper.UTLANDSOPPHOLD_SOKT_SYKEPENGER
                         // TODO: Dette er en fix for å ikke vise underspørsmål, fjern denne etter hvert
                     }
@@ -118,7 +173,10 @@ const JaNeiRadio = ({ sporsmal }: SpmProps) => {
                     leave="undersporsmal--skjul"
                     start="undersporsmal"
                 >
-                    <UndersporsmalListe oversporsmal={sporsmal} oversporsmalSvar={watchJaNei} />
+                    <UndersporsmalListe
+                        oversporsmal={sporsmal}
+                        oversporsmalSvar={watchJaNei}
+                    />
                 </AnimateOnMount>
             </div>
         </>

@@ -1,4 +1,4 @@
-const FilListeTekster= {
+const FilListeTekster = {
     'fil_liste.utlegg': 'Utlegg',
     'fil_liste.fjern': 'Fjern',
     'fil_liste.belop': 'Beløp',

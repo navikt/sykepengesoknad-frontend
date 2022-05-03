@@ -6,17 +6,23 @@ import { empty } from '../../utils/constants'
 
 const hentVerdier = (sporsmal: Sporsmal, verdier: Record<string, any>) => {
     let verdi = verdier[sporsmal.id]
-    if (sporsmal.svartype === RSSvartype.PERIODE || sporsmal.svartype === RSSvartype.PERIODER) {
+    if (
+        sporsmal.svartype === RSSvartype.PERIODE ||
+        sporsmal.svartype === RSSvartype.PERIODER
+    ) {
         const startMed = sporsmal.id + '_'
         verdi = Object.entries(verdier)
-            .filter(([ key ]) => key.startsWith(startMed))
-            .map(([ key ]) => verdier[key])
-            .filter(verdi => verdi !== empty && verdi !== false)
+            .filter(([key]) => key.startsWith(startMed))
+            .map(([key]) => verdier[key])
+            .filter((verdi) => verdi !== empty && verdi !== false)
     }
     return verdi
 }
 
-export const settSvar = (sporsmal: Sporsmal, verdier: Record<string, any>): void => {
+export const settSvar = (
+    sporsmal: Sporsmal,
+    verdier: Record<string, any>
+): void => {
     const verdi = hentVerdier(sporsmal, verdier)
     if (verdi === undefined) {
         return
@@ -55,7 +61,7 @@ export const settSvar = (sporsmal: Sporsmal, verdier: Record<string, any>): void
         default:
             sporsmal.svarliste = {
                 sporsmalId: sporsmal.id,
-                svar: [ { verdi: verdi ? verdi.toString() : '' } ]
+                svar: [{ verdi: verdi ? verdi.toString() : '' }],
             }
     }
 
@@ -64,11 +70,17 @@ export const settSvar = (sporsmal: Sporsmal, verdier: Record<string, any>): void
     })
 }
 
-
 const checkboxSvar = (sporsmal: Sporsmal, verdi: any) => {
     sporsmal.svarliste = {
         sporsmalId: sporsmal.id,
-        svar: [ { verdi: (verdi === SvarEnums.CHECKED || verdi === true) ? SvarEnums.CHECKED : '' } ]
+        svar: [
+            {
+                verdi:
+                    verdi === SvarEnums.CHECKED || verdi === true
+                        ? SvarEnums.CHECKED
+                        : '',
+            },
+        ],
     }
 }
 
@@ -77,16 +89,16 @@ const landSvar = (sporsmal: Sporsmal, verdi: string[]) => {
         sporsmalId: sporsmal.id,
         svar: verdi.map((a) => {
             return { verdi: a }
-        })
+        }),
     }
 }
 
 const radiogruppeSvar = (sporsmal: Sporsmal, verdi: any) => {
-    sporsmal.undersporsmal.forEach(uspm => {
-        const erValgt = (uspm.sporsmalstekst === verdi)
+    sporsmal.undersporsmal.forEach((uspm) => {
+        const erValgt = uspm.sporsmalstekst === verdi
         uspm.svarliste = {
             sporsmalId: uspm.id,
-            svar: [ { verdi: erValgt ? SvarEnums.CHECKED : '' } ]
+            svar: [{ verdi: erValgt ? SvarEnums.CHECKED : '' }],
         }
     })
 }
@@ -94,7 +106,7 @@ const radiogruppeSvar = (sporsmal: Sporsmal, verdi: any) => {
 const ukekalenderSvar = (sporsmal: Sporsmal, verdi: any) => {
     sporsmal.svarliste = {
         sporsmalId: sporsmal.id,
-        svar: [ { verdi: verdi ? verdi.toString() : 'Ikke til behandling' } ]
+        svar: [{ verdi: verdi ? verdi.toString() : 'Ikke til behandling' }],
     }
 }
 
@@ -102,10 +114,9 @@ const periodeSvar = (sporsmal: Sporsmal, verdi: any) => {
     if (Array.isArray(verdi)) {
         sporsmal.svarliste = {
             sporsmalId: sporsmal.id,
-            svar: verdi
-                .map((periode) => {
-                    return { verdi: JSON.stringify(periode) }
-                }),
+            svar: verdi.map((periode) => {
+                return { verdi: JSON.stringify(periode) }
+            }),
         }
     }
 }
@@ -113,14 +124,17 @@ const periodeSvar = (sporsmal: Sporsmal, verdi: any) => {
 const datoerSvar = (sporsmal: Sporsmal, verdi: any) => {
     const svar: RSSvar[] = []
     if (verdi !== undefined) {
-        verdi.toString().split(',').map((dag: string) =>
-            svar.push({
-                verdi: dag
-            })
-        )
+        verdi
+            .toString()
+            .split(',')
+            .map((dag: string) =>
+                svar.push({
+                    verdi: dag,
+                })
+            )
     }
     sporsmal.svarliste = {
         sporsmalId: sporsmal.id,
-        svar: svar
+        svar: svar,
     }
 }

@@ -12,21 +12,37 @@ import SporsmalstekstH3 from '../sporsmalstekst/sporsmalstekstH3'
 import UndersporsmalListe from '../undersporsmal/undersporsmal-liste'
 
 const CheckboxKomp = ({ sporsmal }: SpmProps) => {
-    const { formState: { errors } } = useFormContext()
+    const {
+        formState: { errors },
+    } = useFormContext()
 
     return (
         <>
             <SporsmalstekstH3 sporsmal={sporsmal} />
 
-            <div className={'skjemagruppe checkboxgruppe' + (errors[sporsmal.undersporsmal[0].id] ? ' skjemagruppe--feil' : '')}>
+            <div
+                className={
+                    'skjemagruppe checkboxgruppe' +
+                    (errors[sporsmal.undersporsmal[0].id]
+                        ? ' skjemagruppe--feil'
+                        : '')
+                }
+            >
                 {sporsmal.undersporsmal.map((uspm, idx) => {
-                    return <CheckboxSingle parent={sporsmal} sporsmal={uspm} key={idx} />
+                    return (
+                        <CheckboxSingle
+                            parent={sporsmal}
+                            sporsmal={uspm}
+                            key={idx}
+                        />
+                    )
                 })}
 
-                <Vis hvis={sporsmal.undertekst}
-                    render={() =>
+                <Vis
+                    hvis={sporsmal.undertekst}
+                    render={() => (
                         <BodyShort as="div"> {sporsmal.undertekst} </BodyShort>
-                    }
+                    )}
                 />
 
                 <FeilLokal sporsmal={sporsmal.undersporsmal[0]} />
@@ -65,9 +81,10 @@ const CheckboxSingle = ({ parent, sporsmal }: AllProps) => {
 
     return (
         <div className="checkboksContainer">
-            <input type="checkbox"
+            <input
+                type="checkbox"
                 id={sporsmal.id}
-                {...register(sporsmal.id,{ validate: () => valider() })}
+                {...register(sporsmal.id, { validate: () => valider() })}
                 className="skjemaelement__input checkboks"
             />
             <label className="skjemaelement__label" htmlFor={sporsmal.id}>
@@ -81,7 +98,10 @@ const CheckboxSingle = ({ parent, sporsmal }: AllProps) => {
                     leave="undersporsmal--skjul"
                     start="undersporsmal"
                 >
-                    <UndersporsmalListe oversporsmal={sporsmal} oversporsmalSvar={watchCheck ? 'CHECKED' : ''} />
+                    <UndersporsmalListe
+                        oversporsmal={sporsmal}
+                        oversporsmalSvar={watchCheck ? 'CHECKED' : ''}
+                    />
                 </AnimateOnMount>
             </div>
         </div>
@@ -89,7 +109,9 @@ const CheckboxSingle = ({ parent, sporsmal }: AllProps) => {
 }
 
 const harValgtNoe = (parent: Sporsmal, values: FieldValues): boolean => {
-    return parent.undersporsmal.filter(uspm => {
-        return values[uspm.id]
-    }).length > 0
+    return (
+        parent.undersporsmal.filter((uspm) => {
+            return values[uspm.id]
+        }).length > 0
+    )
 }

@@ -11,55 +11,74 @@ describe('Tester arbeidstakersøknad', () => {
         cy.visit('http://localhost:8080/syk/sykepengesoknad')
     })
 
-    it('Laster startside', function() {
-        cy.get('.navds-heading--xlarge').should('be.visible').and('have.text', 'Søknader')
-        cy.get(`#soknader-list-til-behandling article a[href*=${soknad.id}]`).click()
+    it('Laster startside', function () {
+        cy.get('.navds-heading--xlarge')
+            .should('be.visible')
+            .and('have.text', 'Søknader')
+        cy.get(
+            `#soknader-list-til-behandling article a[href*=${soknad.id}]`
+        ).click()
     })
 
-
-    it('Søknad ANSVARSERKLARING', function() {
+    it('Søknad ANSVARSERKLARING', function () {
         cy.url().should('include', `${soknad.id}/1`)
 
         cy.contains('Før du begynner').should('not.exist')
-        cy.contains('Det du fyller ut brukes til å vurdere om du har rett til sykepenger').should('not.exist')
+        cy.contains(
+            'Det du fyller ut brukes til å vurdere om du har rett til sykepenger'
+        ).should('not.exist')
 
         // Personvern erklæring
         cy.get('.hvorfor-soknad-sykepenger').click()
-        cy.contains('Les mer om hvordan NAV behandler personopplysninger').click()
+        cy.contains(
+            'Les mer om hvordan NAV behandler personopplysninger'
+        ).click()
         cy.contains('Slik behandler NAV personopplysningene dine')
-        cy.contains('Søknaden din vil bli behandlet automatisk hvis NAV har tilstrekkelige opplysninger')
+        cy.contains(
+            'Søknaden din vil bli behandlet automatisk hvis NAV har tilstrekkelige opplysninger'
+        )
         cy.get('.no-border > .navds-body-short').contains('Lukk').click()
-
 
         // Sykmelding
         cy.contains('1. april - 24. april 2020 • 24 dager')
         cy.contains('POSTEN NORGE AS, BÆRUM')
         cy.contains('100% sykmeldt')
-        cy.contains('Sykmeldingen din er lang, derfor er den delt opp i flere søknader om sykepenger').should('not.exist')
+        cy.contains(
+            'Sykmeldingen din er lang, derfor er den delt opp i flere søknader om sykepenger'
+        ).should('not.exist')
 
         cy.contains('Opplysninger fra sykmeldingen').click({ force: true })
 
         // Avbryt dialog vises
         cy.contains('Jeg vil ikke bruke denne søknaden').click()
-        cy.get('.modal__avbryt_popup button:contains(Nei, jeg vil bruke søknaden)').click()
-        cy.get('.modal__avbryt_popup button:contains(Nei, jeg vil bruke søknaden)').should('not.exist')
+        cy.get(
+            '.modal__avbryt_popup button:contains(Nei, jeg vil bruke søknaden)'
+        ).click()
+        cy.get(
+            '.modal__avbryt_popup button:contains(Nei, jeg vil bruke søknaden)'
+        ).should('not.exist')
 
         // Må godkjenne ANSVARSERKLARING først
         cy.contains('Gå videre').click()
         cy.contains('Det er 1 feil i skjemaet')
-        cy.get('.bekreftCheckboksPanel.skjemaelement__input--harFeil').should('exist')
-        cy.contains('Du må bekrefte at du har lest og forstått informasjonen før du kan gå videre')
+        cy.get('.bekreftCheckboksPanel.skjemaelement__input--harFeil').should(
+            'exist'
+        )
+        cy.contains(
+            'Du må bekrefte at du har lest og forstått informasjonen før du kan gå videre'
+        )
         cy.get('.skjemaelement__label').click({ force: true })
 
         cy.contains('Gå videre').click()
     })
 
-
-    it('Søknad TILBAKE_I_ARBEID ', function() {
+    it('Søknad TILBAKE_I_ARBEID ', function () {
         cy.url().should('include', `${soknad.id}/2`)
 
         // Test spørsmål
-        cy.get('.inputPanelGruppe__inner label:first-child > input[value=JA]').click({ force: true })
+        cy.get(
+            '.inputPanelGruppe__inner label:first-child > input[value=JA]'
+        ).click({ force: true })
         cy.contains('Når begynte du å jobbe igjen?')
         cy.get('.ds-datepicker__kalenderknapp').click()
         cy.get('.DayPicker-Day').contains('20').click()
@@ -67,12 +86,13 @@ describe('Tester arbeidstakersøknad', () => {
         cy.contains('Gå videre').click()
     })
 
-
-    it('Søknad FERIE_V2', function() {
+    it('Søknad FERIE_V2', function () {
         cy.url().should('include', `${soknad.id}/3`)
 
         // Test spørsmål
-        cy.get('.inputPanelGruppe__inner label:first-child > input[value=JA]').click({ force: true })
+        cy.get(
+            '.inputPanelGruppe__inner label:first-child > input[value=JA]'
+        ).click({ force: true })
         cy.contains('Når tok du ut feriedager?')
         cy.get('#687344_0 .fom .ds-datepicker__kalenderknapp').click()
         cy.get('.DayPicker-Day').contains('16').click()
@@ -82,17 +102,22 @@ describe('Tester arbeidstakersøknad', () => {
         cy.contains('Gå videre').click()
     })
 
-
-    it('Søknad PERMISJON_V2', function() {
+    it('Søknad PERMISJON_V2', function () {
         cy.url().should('include', `${soknad.id}/4`)
 
         cy.contains('Hva mener vi med permisjon')
-        cy.contains('Med permisjon mener vi dager du var borte fra jobben av andre grunner enn sykdom').should('not.be.visible')
+        cy.contains(
+            'Med permisjon mener vi dager du var borte fra jobben av andre grunner enn sykdom'
+        ).should('not.be.visible')
         cy.contains('Hva mener vi med permisjon').click()
-        cy.contains('Med permisjon mener vi dager du var borte fra jobben av andre grunner enn sykdom').should('be.visible')
+        cy.contains(
+            'Med permisjon mener vi dager du var borte fra jobben av andre grunner enn sykdom'
+        ).should('be.visible')
 
         // Test spørsmål
-        cy.get('.inputPanelGruppe__inner label:first-child > input[value=JA]').click({ force: true })
+        cy.get(
+            '.inputPanelGruppe__inner label:first-child > input[value=JA]'
+        ).click({ force: true })
         cy.contains('Når tok du permisjon?')
         cy.get('#687346_0 .fom .ds-datepicker__kalenderknapp').click()
         cy.get('.DayPicker-Day').contains('14').click()
@@ -102,12 +127,13 @@ describe('Tester arbeidstakersøknad', () => {
         cy.contains('Gå videre').click()
     })
 
-
-    it('Søknad UTLAND_V2 ', function() {
+    it('Søknad UTLAND_V2 ', function () {
         cy.url().should('include', `${soknad.id}/5`)
 
         // Test spørsmål
-        cy.get('.inputPanelGruppe__inner label:first-child > input[value=JA]').click({ force: true })
+        cy.get(
+            '.inputPanelGruppe__inner label:first-child > input[value=JA]'
+        ).click({ force: true })
         cy.contains('Når var du utenfor EØS?')
         cy.get('#687348_0 .fom .ds-datepicker__kalenderknapp').click()
         cy.get('.DayPicker-Day').contains('14').click()
@@ -117,42 +143,57 @@ describe('Tester arbeidstakersøknad', () => {
         cy.contains('Gå videre').click()
     })
 
-
-    it('Søknad JOBBET_DU_100_PROSENT', function() {
+    it('Søknad JOBBET_DU_100_PROSENT', function () {
         cy.url().should('include', `${soknad.id}/6`)
 
         // Test spørsmål
-        cy.get('.inputPanelGruppe__inner label:first-child > input[value=JA]').click({ force: true })
+        cy.get(
+            '.inputPanelGruppe__inner label:first-child > input[value=JA]'
+        ).click({ force: true })
 
         // Underspørsmål 1
-        cy.contains('Hvor mange timer i uken jobber du vanligvis når du er frisk? Varierer det, kan du oppgi gjennomsnittet.')
+        cy.contains(
+            'Hvor mange timer i uken jobber du vanligvis når du er frisk? Varierer det, kan du oppgi gjennomsnittet.'
+        )
         cy.get('.undersporsmal .skjemaelement__input#687350').focus().type('9')
-        cy.get('.undersporsmal .navds-alert--warning').should('contain', 'Du skriver at du jobber mindre enn 10 timer per uke')
+        cy.get('.undersporsmal .navds-alert--warning').should(
+            'contain',
+            'Du skriver at du jobber mindre enn 10 timer per uke'
+        )
 
         // Underspørsmål 2
         cy.contains('Hvor mye jobbet du tilsammen 1. - 24. april 2020?')
         // Svarer prosent
-        cy.get('.undersporsmal .skjemaelement__input.radioknapp[value=Prosent]').focus().click({ force: true })
+        cy.get('.undersporsmal .skjemaelement__input.radioknapp[value=Prosent]')
+            .focus()
+            .click({ force: true })
         cy.get('.undersporsmal .skjemaelement__input#687353').focus().type('21')
         // Velger timer
-        cy.get('.undersporsmal .skjemaelement__input.radioknapp[value=Timer]').focus().click({ force: true })
-        cy.contains('Antall timer du skrev inn, betyr at du har jobbet')
-            .should('not.exist')
+        cy.get('.undersporsmal .skjemaelement__input.radioknapp[value=Timer]')
+            .focus()
+            .click({ force: true })
+        cy.contains('Antall timer du skrev inn, betyr at du har jobbet').should(
+            'not.exist'
+        )
         // Svarer timer
         cy.get('.undersporsmal .skjemaelement__input#687355').focus().type('21')
         cy.contains('Er prosenten lavere enn du forventet?').should('not.exist')
         // Denne personen har vært tilbake i arbeid 20 april, har hatt ferie 16-23 april, og hatt permisjon 14-22 april
-        cy.get('.undersporsmal .navds-alert--info').should('contain', 'Antall timer du skrev inn, betyr at du har jobbet 129% av det du gjør når du er frisk.')
+        cy.get('.undersporsmal .navds-alert--info').should(
+            'contain',
+            'Antall timer du skrev inn, betyr at du har jobbet 129% av det du gjør når du er frisk.'
+        )
 
         cy.contains('Gå videre').click()
     })
 
-
-    it('Søknad ANDRE_INNTEKTSKILDER', function() {
+    it('Søknad ANDRE_INNTEKTSKILDER', function () {
         cy.url().should('include', `${soknad.id}/7`)
 
         // Test spørsmål
-        cy.get('.inputPanelGruppe__inner label:first-child > input[value=JA]').click({ force: true })
+        cy.get(
+            '.inputPanelGruppe__inner label:first-child > input[value=JA]'
+        ).click({ force: true })
 
         // Svarer JA
         // Underspørsmål nivå 1 - checkbox
@@ -161,27 +202,39 @@ describe('Tester arbeidstakersøknad', () => {
             .should('include.text', 'andre arbeidsforhold')
             .click({ force: true })
         // Underspørsmål nivå 2 - radio
-        cy.get('.undersporsmal .checkboxgruppe .radioContainer .radioknapp#687359_0')
-            .click({ force: true })
-        cy.contains('Du må sende egen sykepengesøknad for dette. ' +
-            'Det betyr også at legen må skrive en sykmelding for hvert arbeidsforhold du er sykmeldt fra.')
+        cy.get(
+            '.undersporsmal .checkboxgruppe .radioContainer .radioknapp#687359_0'
+        ).click({ force: true })
+        cy.contains(
+            'Du må sende egen sykepengesøknad for dette. ' +
+                'Det betyr også at legen må skrive en sykmelding for hvert arbeidsforhold du er sykmeldt fra.'
+        )
 
         // Svarer NEI
         // Underspørsmål nivå 1 - checkbox
         cy.contains('Hvilke andre inntektskilder har du?')
-        cy.get('.undersporsmal .checkboxgruppe label[for=687360]').should('include.text', 'selvstendig næringsdrivende')
-        cy.get('.undersporsmal .checkboxgruppe .checkboks#687360').click({ force: true })
+        cy.get('.undersporsmal .checkboxgruppe label[for=687360]').should(
+            'include.text',
+            'selvstendig næringsdrivende'
+        )
+        cy.get('.undersporsmal .checkboxgruppe .checkboks#687360').click({
+            force: true,
+        })
         // Underspørsmål nivå 2 - radio
-        cy.get('.undersporsmal .checkboxgruppe .radioContainer .radioknapp#687361_1').click({ force: true })
+        cy.get(
+            '.undersporsmal .checkboxgruppe .radioContainer .radioknapp#687361_1'
+        ).click({ force: true })
 
         cy.contains('Gå videre').click()
     })
 
-    it('Søknad UTDANNING', function() {
+    it('Søknad UTDANNING', function () {
         cy.url().should('include', `${soknad.id}/8`)
 
         // Test spørsmål
-        cy.get('.inputPanelGruppe__inner label:first-child > input[value=JA]').click({ force: true })
+        cy.get(
+            '.inputPanelGruppe__inner label:first-child > input[value=JA]'
+        ).click({ force: true })
 
         // Underspørsmål 1
         cy.contains('Når startet du på utdanningen?')
@@ -191,18 +244,20 @@ describe('Tester arbeidstakersøknad', () => {
         // Underspørsmål 2 - dato
         cy.contains('Er utdanningen et fulltidsstudium?')
         // Underspørsmål 2 - radio
-        cy.get('.undersporsmal .skjemaelement .radioContainer .radioknapp#687371_0').click({ force: true })
+        cy.get(
+            '.undersporsmal .skjemaelement .radioContainer .radioknapp#687371_0'
+        ).click({ force: true })
 
         cy.contains('Gå videre').click()
     })
 
-
-    it('Søknad PERMITTERT_NAA', function() {
+    it('Søknad PERMITTERT_NAA', function () {
         cy.url().should('include', `${soknad.id}/9`)
 
-
         // Test spørsmål
-        cy.get('.inputPanelGruppe__inner label:first-child > input[value=JA]').click({ force: true })
+        cy.get(
+            '.inputPanelGruppe__inner label:first-child > input[value=JA]'
+        ).click({ force: true })
         cy.contains('Velg første dag i permitteringen')
         cy.get('.ds-datepicker__kalenderknapp').click()
         cy.get('.DayPicker-Day').contains('20').click()
@@ -211,13 +266,14 @@ describe('Tester arbeidstakersøknad', () => {
         cy.contains('Gå videre').click()
         cy.url().should('include', `${soknad.id}/10`)
         cy.contains('Tilbake').click({ force: true })
-        cy.get('.inputPanelGruppe__inner label:nth-child(2) > input[value=NEI]').click({ force: true })
+        cy.get(
+            '.inputPanelGruppe__inner label:nth-child(2) > input[value=NEI]'
+        ).click({ force: true })
 
         cy.contains('Gå videre').click()
     })
 
-
-    it('Søknad PERMITTERT_PERIODE', function() {
+    it('Søknad PERMITTERT_PERIODE', function () {
         cy.url().should('include', `${soknad.id}/10`)
 
         // Må velge ja/nei
@@ -225,7 +281,9 @@ describe('Tester arbeidstakersøknad', () => {
         cy.contains('Du må svare på om du har vært permittert')
 
         // Test spørsmål
-        cy.get('.inputPanelGruppe__inner label:first-child > input[value=JA]').click({ force: true })
+        cy.get(
+            '.inputPanelGruppe__inner label:first-child > input[value=JA]'
+        ).click({ force: true })
         cy.get('#687340_0 .fom .ds-datepicker__kalenderknapp').click()
         cy.get('.DayPicker-Day').contains('10').click()
         cy.get('#687340_0 .tom .ds-datepicker__kalenderknapp').click()
@@ -234,17 +292,22 @@ describe('Tester arbeidstakersøknad', () => {
         cy.contains('Gå videre').click()
     })
 
-
-    it('Søknad ANSVARSERKLARING - steg 11', function() {
+    it('Søknad ANSVARSERKLARING - steg 11', function () {
         cy.url().should('include', `${soknad.id}/11`)
 
         cy.contains('Oppsummering fra søknaden').click({ force: true })
-        cy.contains('Jeg vet at jeg kan miste retten til sykepenger hvis opplysningene jeg gir ikke er riktige eller fullstendige')
+        cy.contains(
+            'Jeg vet at jeg kan miste retten til sykepenger hvis opplysningene jeg gir ikke er riktige eller fullstendige'
+        )
         cy.contains('Det er 1 feil i skjemaet').should('not.exist')
 
         cy.get('.skjemaelement__label').click({ force: true })
-        cy.contains('Jeg har lest all informasjonen jeg har fått i søknaden og bekrefter at opplysningene jeg har gitt er korrekte.')
-        cy.contains('Søknaden sendes til NAV. Kopi av søknaden sendes til POSTEN NORGE AS, BÆRUM.')
+        cy.contains(
+            'Jeg har lest all informasjonen jeg har fått i søknaden og bekrefter at opplysningene jeg har gitt er korrekte.'
+        )
+        cy.contains(
+            'Søknaden sendes til NAV. Kopi av søknaden sendes til POSTEN NORGE AS, BÆRUM.'
+        )
 
         cy.contains('Send søknaden').click()
     })

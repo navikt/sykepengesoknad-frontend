@@ -17,27 +17,38 @@ import { hentHotjarJsTrigger, HotjarTrigger } from '../hotjar-trigger'
 import Vis from '../vis'
 import Kvittering from './kvittering'
 
-const brodsmuler: Brodsmule[] = [ {
-    tittel: tekst('soknader.sidetittel'),
-    sti: SEPARATOR,
-    erKlikkbar: true
-}, {
-    tittel: tekst('kvittering.sidetittel'),
-    sti: null as any,
-    erKlikkbar: false,
-} ]
+const brodsmuler: Brodsmule[] = [
+    {
+        tittel: tekst('soknader.sidetittel'),
+        sti: SEPARATOR,
+        erKlikkbar: true,
+    },
+    {
+        tittel: tekst('kvittering.sidetittel'),
+        sti: null as any,
+        erKlikkbar: false,
+    },
+]
 
 const KvitteringSide = () => {
-    const { valgtSoknad, soknader, setValgtSoknad, setValgtSykmelding, sykmeldinger } = useAppStore()
-    const [ erSiste, setErSiste ] = useState<boolean>()
+    const {
+        valgtSoknad,
+        soknader,
+        setValgtSoknad,
+        setValgtSykmelding,
+        sykmeldinger,
+    } = useAppStore()
+    const [erSiste, setErSiste] = useState<boolean>()
     const { logEvent } = useAmplitudeInstance()
     const { id } = useParams<RouteParams>()
 
     useEffect(() => {
-        const filtrertSoknad = soknader.find(soknad => soknad.id === id)
+        const filtrertSoknad = soknader.find((soknad) => soknad.id === id)
         setValgtSoknad(filtrertSoknad)
 
-        const sykmelding = sykmeldinger.find(sm => sm.id === filtrertSoknad?.sykmeldingId)
+        const sykmelding = sykmeldinger.find(
+            (sm) => sm.id === filtrertSoknad?.sykmeldingId
+        )
         setValgtSykmelding(sykmelding)
 
         logEvent('skjema åpnet', {
@@ -62,19 +73,25 @@ const KvitteringSide = () => {
             <Brodsmuler brodsmuler={brodsmuler} />
 
             <div className="limit">
-                <HotjarTrigger jsTrigger={hentHotjarJsTrigger(valgtSoknad.soknadstype, 'kvittering')}>
+                <HotjarTrigger
+                    jsTrigger={hentHotjarJsTrigger(
+                        valgtSoknad.soknadstype,
+                        'kvittering'
+                    )}
+                >
                     <Kvittering />
                 </HotjarTrigger>
 
-                <Vis hvis={erSiste}
-                    render={() =>
+                <Vis
+                    hvis={erSiste}
+                    render={() => (
                         <Link to="/" className="gaa-videre">
                             <BodyShort as="span">
                                 <Back className="chevron--venstre" />
                                 {tekst('sykepengesoknad.navigasjon.gaa-til')}
                             </BodyShort>
                         </Link>
-                    }
+                    )}
                 />
             </div>
         </>

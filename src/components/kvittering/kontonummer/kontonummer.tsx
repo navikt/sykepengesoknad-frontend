@@ -8,7 +8,7 @@ import { tekst } from '../../../utils/tekster'
 import Vis from '../../vis'
 
 const Kontonummer = () => {
-    const [ kontonummer, setKontonummer ] = useState<string>()
+    const [kontonummer, setKontonummer] = useState<string>()
 
     useEffect(() => {
         hentKontonummer()
@@ -16,16 +16,19 @@ const Kontonummer = () => {
 
     async function hentKontonummer() {
         if (isProd()) {
-            const res = await fetch('https://www.nav.no/person/personopplysninger-api/personalia', {
-                method: 'GET',
-                credentials: 'include',
-                headers: { 'Content-Type': 'application/json' }
-            })
+            const res = await fetch(
+                'https://www.nav.no/person/personopplysninger-api/personalia',
+                {
+                    method: 'GET',
+                    credentials: 'include',
+                    headers: { 'Content-Type': 'application/json' },
+                }
+            )
             const data: Personalia = await res.json()
             setKontonummer(data?.personalia?.kontonr)
         }
 
-        if(isMockBackend()) {
+        if (isMockBackend()) {
             setKontonummer('12332112332')
         }
     }
@@ -37,20 +40,20 @@ const Kontonummer = () => {
 
     return (
         <>
-            <Label as="h2">
-                {tekst('kvittering.kontonummer.tittel')}
-            </Label>
+            <Label as="h2">{tekst('kvittering.kontonummer.tittel')}</Label>
 
-            <Vis hvis={!kontonummer}
-                render={() =>
+            <Vis
+                hvis={!kontonummer}
+                render={() => (
                     <BodyShort>
                         {parser(tekst('kvittering.kontonummer.mangler'))}
                     </BodyShort>
-                }
+                )}
             />
 
-            <Vis hvis={kontonummer}
-                render={() =>
+            <Vis
+                hvis={kontonummer}
+                render={() => (
                     <>
                         <BodyShort>
                             <strong>{formatterKontonr(kontonummer!)}</strong>
@@ -59,7 +62,7 @@ const Kontonummer = () => {
                             {parser(tekst('kvittering.kontonummer.endre'))}
                         </BodyShort>
                     </>
-                }
+                )}
             />
         </>
     )

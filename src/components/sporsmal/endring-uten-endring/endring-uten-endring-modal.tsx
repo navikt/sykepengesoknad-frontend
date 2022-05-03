@@ -12,32 +12,43 @@ interface EndringUtenEndringModalProps {
     setAapen: (p: boolean) => void
 }
 
-export const EndringUtenEndringModal = (props: EndringUtenEndringModalProps) => {
+export const EndringUtenEndringModal = (
+    props: EndringUtenEndringModalProps
+) => {
     const { logEvent } = useAmplitudeInstance()
 
-    const { valgtSoknad, soknader, setSoknader, setValgtSoknad, setFeilmeldingTekst } = useAppStore()
+    const {
+        valgtSoknad,
+        soknader,
+        setSoknader,
+        setValgtSoknad,
+        setFeilmeldingTekst,
+    } = useAppStore()
     const history = useHistory()
 
     return (
         <>
-            <Modal className="modal__endring-uten-endring_popup"
+            <Modal
+                className="modal__endring-uten-endring_popup"
                 onClose={() => {
                     props.setAapen(false)
                 }}
                 open={props.aapen}
             >
                 <Modal.Content>
+                    <BodyShort>
+                        {tekst('endring-uten-endring.popup.innhold')}
+                    </BodyShort>
 
-                    <BodyShort>{tekst('endring-uten-endring.popup.innhold')}</BodyShort>
-
-
-                    <Button variant="primary" className="midtstilt-knapp"
+                    <Button
+                        variant="primary"
+                        className="midtstilt-knapp"
                         onClick={() => {
                             props.setAapen(false)
                             logEvent('knapp klikket', {
-                                'tekst': tekst('endring-uten-endring.popup.ok'),
-                                'soknadstype': valgtSoknad?.soknadstype,
-                                'component': 'endring-uten-endring-modal',
+                                tekst: tekst('endring-uten-endring.popup.ok'),
+                                soknadstype: valgtSoknad?.soknadstype,
+                                component: 'endring-uten-endring-modal',
                             })
                             avbrytSoknad({
                                 valgtSoknad: valgtSoknad!,
@@ -45,16 +56,14 @@ export const EndringUtenEndringModal = (props: EndringUtenEndringModalProps) => 
                                 soknader: soknader,
                                 setValgtSoknad: setValgtSoknad,
                                 history: history,
-                                setFeilmeldingTekst: setFeilmeldingTekst
+                                setFeilmeldingTekst: setFeilmeldingTekst,
                             })
-                        }}>
+                        }}
+                    >
                         {tekst('endring-uten-endring.popup.ok')}
                     </Button>
-
                 </Modal.Content>
             </Modal>
         </>
     )
 }
-
-

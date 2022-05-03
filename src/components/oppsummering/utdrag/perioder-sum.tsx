@@ -14,12 +14,17 @@ const PerioderSum = ({ sporsmal }: OppsummeringProps) => {
                 {sporsmal.svarliste.svar.map((p, i) => {
                     const periode = hentPeriode(sporsmal, i)
                     return (
-                        <Vis hvis={p.verdi} key={i}
-                            render={() =>
+                        <Vis
+                            hvis={p.verdi}
+                            key={i}
+                            render={() => (
                                 <BodyShort className="oppsummering__dato">
-                                    {tilLesbarPeriodeMedArstall(periode.fom, periode.tom)}
+                                    {tilLesbarPeriodeMedArstall(
+                                        periode.fom,
+                                        periode.tom
+                                    )}
                                 </BodyShort>
-                            }
+                            )}
                         />
                     )
                 })}

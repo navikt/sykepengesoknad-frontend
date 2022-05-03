@@ -1,6 +1,9 @@
 import { Forslag } from './Forslag'
 
-export const tilForslagsliste = (suggestions: string[], verdiArray: string[] = []): Forslag[] => {
+export const tilForslagsliste = (
+    suggestions: string[],
+    verdiArray: string[] = []
+): Forslag[] => {
     return suggestions
         .filter((suggestion: string) => {
             return verdiArray && verdiArray.includes
@@ -12,11 +15,16 @@ export const tilForslagsliste = (suggestions: string[], verdiArray: string[] = [
         })
 }
 
-export const forslagFinnesIForslagsliste = (forslagsliste: string[], forslag: Forslag) => {
+export const forslagFinnesIForslagsliste = (
+    forslagsliste: string[],
+    forslag: Forslag
+) => {
     const formatertliste = tilForslagsliste(forslagsliste)
-    return formatertliste.find((t) => {
-        return t.id === forslag.id
-    }) !== undefined
+    return (
+        formatertliste.find((t) => {
+            return t.id === forslag.id
+        }) !== undefined
+    )
 }
 
 export const finnForslag = (forslagsliste: string[], forslag: Forslag) => {

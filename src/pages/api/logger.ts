@@ -10,7 +10,11 @@ const handler = (req: NextApiRequest, res: NextApiResponse): void => {
         const log = typeof msg === 'string' ? { msg } : msg
         // eslint-disable-next-line @typescript-eslint/no-explicit-any,@typescript-eslint/ban-ts-comment
         // @ts-ignore
-        logger[ level.label ]({ ...log, isFrontend: true, x_userAgent: req.headers[ 'user-agent' ] })
+        logger[level.label]({
+            ...log,
+            isFrontend: true,
+            x_userAgent: req.headers['user-agent'],
+        })
     })
 
     res.status(200).json({ ok: 'ok' })
