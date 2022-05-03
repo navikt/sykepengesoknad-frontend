@@ -13,7 +13,7 @@ module.exports = withLess({
     },
     publicRuntimeConfig: {
         // Will be available on both server and client
-        loginserviceUrl: process.env.LOGINSERVICE_URL,
+        loginServiceUrl: process.env.LOGINSERVICE_URL,
         loginServiceRedirectUrl: process.env.LOGINSERVICE_REDIRECT_URL,
         flexGatewayRoot: process.env.FLEX_GATEWAY_ROOT,
         mockBackend: process.env.MOCK_BACKEND,
