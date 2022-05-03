@@ -23,7 +23,7 @@ export const UsendtSykmelding = () => {
     )
 }
 
-export function harEldreUsendtSykmelding(sykmeldinger: Sykmelding[]): Boolean {
+export function harUsendtSykmelding(sykmeldinger: Sykmelding[]): Boolean {
     const enSykmeldingSomIkkeErSendt = sykmeldinger.find((sykmelding) =>
         sykmelding.sykmeldingStatus.statusEvent == 'APEN'
     )
