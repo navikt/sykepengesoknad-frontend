@@ -20,7 +20,7 @@ import {
     harEldreUsendtSoknad,
 } from '../eldre-usendt-soknad/eldre-usendt-soknad'
 import RedirectTilOversikt from '../feil/redirect-til-oversikt'
-import { hentHotjarJsTrigger,HotjarTrigger } from '../hotjar-trigger'
+import { hentHotjarJsTrigger, HotjarTrigger } from '../hotjar-trigger'
 import HvorforSoknadSykepenger from '../hvorfor-soknad-sykepenger/hvorfor-soknad-sykepenger'
 import OmReisetilskudd from '../om-reisetilskudd/om-reisetilskudd'
 import Opplysninger from '../opplysninger-fra-sykmelding/opplysninger'
@@ -30,7 +30,10 @@ import GjenapneSoknad from '../soknader/avbryt/gjenapneknapp'
 import SporsmalForm from '../sporsmal/sporsmal-form/sporsmal-form'
 import SporsmalSteg from '../sporsmal/sporsmal-steg/sporsmal-steg'
 import { hentNokkel } from '../sporsmal/sporsmal-utils'
-import { harUsendtSykmelding, UsendtSykmelding } from '../usendt-sykmelding/usendt-sykmelding'
+import {
+    harUsendtSykmelding,
+    UsendtSykmelding,
+} from '../usendt-sykmelding/usendt-sykmelding'
 import Vis from '../vis'
 import { urlTilSoknad } from './soknad-link'
 
@@ -139,10 +142,10 @@ const Fordeling = () => {
             )
             const usendtSykmelding = harUsendtSykmelding(sykmeldinger)
             if (eldreUsendtSoknad != null && !usendtSykmelding) {
-                return (<EldreUsendtSoknad eldreSoknad={eldreUsendtSoknad} />)
+                return <EldreUsendtSoknad eldreSoknad={eldreUsendtSoknad} />
             }
             if (usendtSykmelding) {
-                return (<UsendtSykmelding />)
+                return <UsendtSykmelding />
             }
             return (
                 <>
