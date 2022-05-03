@@ -50,3 +50,5 @@ spec:
       value: "https://person.nav.no/mine-saker/tema/SYK"
     - name: SEND_TIL_NAV_KNAPP_DELAY_SECONDS
       value: "10"
+    - name: ASSET_PREFIX
+      value: "https://flex-static-files.nav.no/sykepengesoknad"

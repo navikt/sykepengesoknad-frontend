@@ -33,6 +33,30 @@ jobs:
               run: npm run test:ci
             - name: Build application
               run: npm run build
+            - name: Login GCP dev
+              if: github.ref == 'refs/heads/master' || startsWith(github.ref, 'refs/heads/dev-')
+              uses: google-github-actions/auth@v0.7.1
+              with:
+                  credentials_json: ${{ secrets.STATIC_FILES_DEV }}
+            - name: Last opp statiske filer til dev
+              if: github.ref == 'refs/heads/master' || startsWith(github.ref, 'refs/heads/dev-')
+              uses: google-github-actions/upload-cloud-storage@v0.9.0
+              with:
+                  path: .next/static
+                  parent: false
+                  destination: flex-static-files-dev/sykepengesoknad/_next/static
+            - name: Login GCP prod
+              if: github.ref == 'refs/heads/master'
+              uses: google-github-actions/auth@v0.7.1
+              with:
+                  credentials_json: ${{ secrets.STATIC_FILES_PROD }}
+            - name: Last opp statiske filer til prod
+              if: github.ref == 'refs/heads/master'
+              uses: google-github-actions/upload-cloud-storage@v0.9.0
+              with:
+                  path: .next/static
+                  parent: false
+                  destination: flex-static-files-prod/sykepengesoknad/_next/static
             - name: Docker login
               env:
                   GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
