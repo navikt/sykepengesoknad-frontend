@@ -1,7 +1,6 @@
 const sessionTimestamp = new Date().toISOString()
 
 function updateOptions(url: string, options?: RequestInit): RequestInit {
-
     const update: RequestInit = { ...options }
     if (url.indexOf('/api/soknader') > -1) {
         update.headers = {

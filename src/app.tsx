@@ -53,15 +53,38 @@ const App = (): any => {
                                 timeout={{ enter: 500, exit: 0 }}
                                 classNames="fade"
                             >
-                                <main id="maincontent" role="main" tabIndex={-1}>
+                                <main
+                                    id="maincontent"
+                                    role="main"
+                                    tabIndex={-1}
+                                >
                                     <RefreshHvisFeilState>
                                         <Switch>
-                                            <Route exact={true} path="/" component={Soknader} />
-                                            <Route path="/soknader/:id/:stegId" component={Soknad} />
-                                            <Route path="/soknader/:id" component={Soknad} />
-                                            <Route path="/soknader/" component={RedirectTilOversikt} />
-                                            <Route path="/kvittering/:id" component={KvitteringSide} />
-                                            <Route path="/sykepengesoknad-utland" component={OpprettUtland} />
+                                            <Route
+                                                exact={true}
+                                                path="/"
+                                                component={Soknader}
+                                            />
+                                            <Route
+                                                path="/soknader/:id/:stegId"
+                                                component={Soknad}
+                                            />
+                                            <Route
+                                                path="/soknader/:id"
+                                                component={Soknad}
+                                            />
+                                            <Route
+                                                path="/soknader/"
+                                                component={RedirectTilOversikt}
+                                            />
+                                            <Route
+                                                path="/kvittering/:id"
+                                                component={KvitteringSide}
+                                            />
+                                            <Route
+                                                path="/sykepengesoknad-utland"
+                                                component={OpprettUtland}
+                                            />
                                         </Switch>
                                     </RefreshHvisFeilState>
                                 </main>

@@ -26,9 +26,8 @@ export const Bjorn = ({
     stor = false,
     vertikal = false,
     ekstraMarginTop = false,
-    className = ''
+    className = '',
 }: BjornProps) => {
-
     const classNames = cls(`hjelpeboble ${className}`, {
         'hjelpeboble--horisontal': !vertikal,
         'hjelpeboble--margin--top': ekstraMarginTop,
@@ -53,7 +52,11 @@ export const Bjorn = ({
     return (
         <div className={classNames}>
             <div className={bobleClassNames}>
-                {nokkel !== undefined ? <BodyShort>{parser(tekst(nokkel as any))}</BodyShort> : children}
+                {nokkel !== undefined ? (
+                    <BodyShort>{parser(tekst(nokkel as any))}</BodyShort>
+                ) : (
+                    children
+                )}
             </div>
             <div className={bildeClassNames}>
                 <Bilde alt={bildeAlt} />

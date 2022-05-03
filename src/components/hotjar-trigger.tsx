@@ -13,7 +13,10 @@ interface HotjarWindow extends Window {
     hj: (name: string, value: string) => void
 }
 
-export const hentHotjarJsTrigger = (soknadstype: RSSoknadstype, sted: 'kvittering' | 'soknad'): string | null => {
+export const hentHotjarJsTrigger = (
+    soknadstype: RSSoknadstype,
+    sted: 'kvittering' | 'soknad'
+): string | null => {
     if (sted == 'soknad' || sted == 'kvittering') {
         switch (soknadstype) {
             case RSSoknadstype.SELVSTENDIGE_OG_FRILANSERE:
@@ -44,9 +47,8 @@ export const hentHotjarJsTrigger = (soknadstype: RSSoknadstype, sted: 'kvitterin
 }
 
 export const HotjarTrigger = ({ jsTrigger, children }: HotjarTriggerProps) => {
-
     useEffect(() => {
-        const hotJarWindow = (window as unknown as HotjarWindow)
+        const hotJarWindow = window as unknown as HotjarWindow
 
         if (jsTrigger && !isIntegrationtest()) {
             setTimeout(() => {
@@ -57,7 +59,6 @@ export const HotjarTrigger = ({ jsTrigger, children }: HotjarTriggerProps) => {
                 }
             }, 500)
         }
-
     })
 
     return children

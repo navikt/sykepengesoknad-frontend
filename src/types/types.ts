@@ -49,9 +49,7 @@ export class Soknad {
     korrigerer: string | null
     merknaderFraSykmelding?: RSMerknad[]
 
-    constructor(
-        soknad: RSSoknad
-    ) {
+    constructor(soknad: RSSoknad) {
         this.id = soknad.id
         this.sykmeldingId = soknad.sykmeldingId!
         const type = soknad.soknadstype as keyof typeof RSSoknadstype
@@ -64,12 +62,14 @@ export class Soknad {
         this.avbruttDato = dayjsToDate(soknad.avbruttDato!)!
         this.opprettetDato = dayjsToDate(soknad.opprettetDato!)!
         this.sendtTilNAVDato = dayjsToDate(soknad.sendtTilNAVDato!)!
-        this.sendtTilArbeidsgiverDato = dayjsToDate(soknad.sendtTilArbeidsgiverDato!)!
+        this.sendtTilArbeidsgiverDato = dayjsToDate(
+            soknad.sendtTilArbeidsgiverDato!
+        )!
         if (soknad.arbeidsgiver) {
             this.arbeidsgiver = {
                 naermesteLeder: soknad.arbeidsgiver.naermesteLeder,
                 navn: soknad.arbeidsgiver.navn,
-                orgnummer: soknad.arbeidsgiver.orgnummer
+                orgnummer: soknad.arbeidsgiver.orgnummer,
             }
         }
         this.arbeidssituasjon = soknad.arbeidssituasjon as any
@@ -95,7 +95,11 @@ export class Sporsmal {
     parentKriterie: RSVisningskriterieType | null
     erHovedsporsmal: boolean
 
-    constructor(spm: RSSporsmal, kriterie: RSVisningskriterieType | null, erHovedsporsmal: boolean) {
+    constructor(
+        spm: RSSporsmal,
+        kriterie: RSVisningskriterieType | null,
+        erHovedsporsmal: boolean
+    ) {
         this.id = spm.id
         const orgarr: string[] = spm.tag.split('_')
         const numtag: number = parseInt(orgarr.pop() as any)
@@ -106,15 +110,18 @@ export class Sporsmal {
         }
         const idtag = tag as keyof typeof TagTyper
         this.tag = TagTyper[idtag]
-        this.sporsmalstekst = spm.sporsmalstekst === null ? '' : spm.sporsmalstekst
+        this.sporsmalstekst =
+            spm.sporsmalstekst === null ? '' : spm.sporsmalstekst
         this.undertekst = spm.undertekst
         this.svartype = spm.svartype as any as RSSvartype
         this.min = spm.min
         this.max = spm.max
         this.pavirkerAndreSporsmal = spm.pavirkerAndreSporsmal
-        this.kriterieForVisningAvUndersporsmal = spm.kriterieForVisningAvUndersporsmal as any
+        this.kriterieForVisningAvUndersporsmal =
+            spm.kriterieForVisningAvUndersporsmal as any
         this.svarliste = {
-            sporsmalId: spm.id, svar: spm.svar.map((svar) => {
+            sporsmalId: spm.id,
+            svar: spm.svar.map((svar) => {
                 const hentVerdi = () => {
                     if (spm.svartype == RSSvartype.BELOP) {
                         return (Number(svar.verdi) / 100).toString()
@@ -126,25 +133,37 @@ export class Sporsmal {
                     verdi: hentVerdi(),
                     avgittAv: svar.avgittAv,
                 }
-            })
+            }),
         }
-        this.undersporsmal = rsToSporsmal(spm.undersporsmal, spm.kriterieForVisningAvUndersporsmal, false)
+        this.undersporsmal = rsToSporsmal(
+            spm.undersporsmal,
+            spm.kriterieForVisningAvUndersporsmal,
+            false
+        )
         this.parentKriterie = kriterie
         this.erHovedsporsmal = erHovedsporsmal
     }
 }
 
-function rsToSporsmal(spms: RSSporsmal[], kriterie: RSVisningskriterieType | null, erHovedsporsmal: boolean) {
+function rsToSporsmal(
+    spms: RSSporsmal[],
+    kriterie: RSVisningskriterieType | null,
+    erHovedsporsmal: boolean
+) {
     const sporsmals: Sporsmal[] = []
     if (spms === undefined) {
         return sporsmals
     }
-    spms.forEach(rssp => {
+    spms.forEach((rssp) => {
         const spm: Sporsmal = new Sporsmal(rssp, kriterie, erHovedsporsmal)
         sporsmals.push(spm)
     })
 
-    if (sporsmals.length >= 2 && sporsmals[sporsmals.length - 1].tag === TagTyper.VAER_KLAR_OVER_AT && sporsmals[sporsmals.length - 2].tag === TagTyper.BEKREFT_OPPLYSNINGER) {
+    if (
+        sporsmals.length >= 2 &&
+        sporsmals[sporsmals.length - 1].tag === TagTyper.VAER_KLAR_OVER_AT &&
+        sporsmals[sporsmals.length - 2].tag === TagTyper.BEKREFT_OPPLYSNINGER
+    ) {
         // Det finnes tilfeller opprettet i db før 15 Mai 2020 hvor disse er i "feil rekkefølge" Dette fikser sorteringa
         // Se også https://github.com/navikt/syfosoknad/commit/1983d32f3a7fb28bbf17126ea227d91589ad5f35
         const tmp = sporsmals[sporsmals.length - 1]
@@ -190,7 +209,7 @@ export enum UtgiftTyper {
     OFFENTLIG_TRANSPORT = 'Offentlig transport',
     TAXI = 'Taxi',
     PARKERING = 'Parkering',
-    ANNET = 'Annet'
+    ANNET = 'Annet',
 }
 
 export function svarverdiToKvittering(kvittering: string): Kvittering {

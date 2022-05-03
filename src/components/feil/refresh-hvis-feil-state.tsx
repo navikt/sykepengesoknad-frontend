@@ -22,7 +22,10 @@ export function FeilView() {
                 <Alert variant="error">{tekst('feilstate.alert')}</Alert>
             </div>
             <div className="knappewrapper">
-                <Button variant="secondary" onClick={() => window.location.reload()}>
+                <Button
+                    variant="secondary"
+                    onClick={() => window.location.reload()}
+                >
                     {tekst('feilstate.refresh')}
                 </Button>
             </div>
@@ -30,14 +33,12 @@ export function FeilView() {
     )
 }
 
-
 export function RefreshHvisFeilState(props: { children: React.ReactNode }) {
     const { feilState } = useAppStore()
 
     if (feilState) {
-        return (<FeilView />)
+        return <FeilView />
     }
 
-    return (<>{props.children}</>)
+    return <>{props.children}</>
 }
-

@@ -17,21 +17,25 @@ interface KnapperadProps {
 }
 
 const Knapperad = ({ poster }: KnapperadProps) => {
-
     const { valgtSoknad } = useAppStore()
     const { stegId } = useParams<RouteParams>()
 
     const stegNo = parseInt(stegId)
     const spmIndex = stegNo - 2
-    const erUtlandssoknad = valgtSoknad!.soknadstype === RSSoknadstype.OPPHOLD_UTLAND
+    const erUtlandssoknad =
+        valgtSoknad!.soknadstype === RSSoknadstype.OPPHOLD_UTLAND
 
     if (!valgtSoknad) {
         return null
     }
 
     const nokkel = () => {
-
-        const erSisteSteg = spmIndex === valgtSoknad.sporsmal.length - (valgtSoknad.soknadstype === RSSoknadstype.OPPHOLD_UTLAND ? 2 : 3)
+        const erSisteSteg =
+            spmIndex ===
+            valgtSoknad.sporsmal.length -
+                (valgtSoknad.soknadstype === RSSoknadstype.OPPHOLD_UTLAND
+                    ? 2
+                    : 3)
         if (erSisteSteg) {
             if (valgtSoknad.status === RSSoknadstatus.UTKAST_TIL_KORRIGERING) {
                 return 'sykepengesoknad.send.endringene'
@@ -39,26 +43,26 @@ const Knapperad = ({ poster }: KnapperadProps) => {
             return 'sykepengesoknad.send'
         }
         return 'sykepengesoknad.ga-videre'
-
     }
-
 
     return (
         <div className="knapperad">
-            <Button variant="primary" type="submit" loading={poster}>{tekst(nokkel())}</Button>
+            <Button variant="primary" type="submit" loading={poster}>
+                {tekst(nokkel())}
+            </Button>
             <div className="avbrytDialog blokk-l">
                 <AvsluttOgFortsettSenere />
                 <AvbrytSoknadModal />
-                <Vis hvis={stegNo === 1 && !erUtlandssoknad}
-                    render={() =>
+                <Vis
+                    hvis={stegNo === 1 && !erUtlandssoknad}
+                    render={() => (
                         <>
                             <hr />
                             <PersonvernLesMer />
                         </>
-                    }
+                    )}
                 />
             </div>
-
         </div>
     )
 }

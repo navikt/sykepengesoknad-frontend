@@ -17,13 +17,22 @@ export const EkspanderbarHjelp = ({ sporsmal }: SpmProps) => {
     const { valgtSoknad } = useAppStore()
 
     const skapNokkel = () => {
-        if (sporsmal.tag == TagTyper.TILBAKE_I_ARBEID && valgtSoknad!.soknadstype == RSSoknadstype.GRADERT_REISETILSKUDD) {
+        if (
+            sporsmal.tag == TagTyper.TILBAKE_I_ARBEID &&
+            valgtSoknad!.soknadstype == RSSoknadstype.GRADERT_REISETILSKUDD
+        ) {
             return 'tilbake_i_arbeid_gradert_reisetilskudd'
         }
-        if (fjernIndexFraTag(sporsmal.tag) == TagTyper.JOBBET_DU_GRADERT && valgtSoknad!.arbeidssituasjon == RSArbeidssituasjon.ARBEIDSTAKER) {
+        if (
+            fjernIndexFraTag(sporsmal.tag) == TagTyper.JOBBET_DU_GRADERT &&
+            valgtSoknad!.arbeidssituasjon == RSArbeidssituasjon.ARBEIDSTAKER
+        ) {
             return 'jobbet_du_gradert_arbeidstaker'
         }
-        if (sporsmal.tag == TagTyper.ANDRE_INNTEKTSKILDER && valgtSoknad!.arbeidssituasjon == RSArbeidssituasjon.FRILANSER) {
+        if (
+            sporsmal.tag == TagTyper.ANDRE_INNTEKTSKILDER &&
+            valgtSoknad!.arbeidssituasjon == RSArbeidssituasjon.FRILANSER
+        ) {
             // Hjelpeteksten er ikke kompatibel med svaralternativene for frilanser
             return null
         }
@@ -33,25 +42,40 @@ export const EkspanderbarHjelp = ({ sporsmal }: SpmProps) => {
     const nokkel = skapNokkel()
 
     const harTekst = () => {
-        return `ekspanderbarhjelp.${nokkel}.tittel` in EkspanderbarHjelpTekster
-            && `ekspanderbarhjelp.${nokkel}.innhold` in EkspanderbarHjelpTekster
+        return (
+            `ekspanderbarhjelp.${nokkel}.tittel` in EkspanderbarHjelpTekster &&
+            `ekspanderbarhjelp.${nokkel}.innhold` in EkspanderbarHjelpTekster
+        )
     }
 
     return (
-        <Vis hvis={nokkel && harTekst()}
+        <Vis
+            hvis={nokkel && harTekst()}
             render={() => {
-
-                const tittel = tekst(`ekspanderbarhjelp.${nokkel}.tittel` as any)
-                return <>
-                    <Ekspanderbar
-                        title={tittel}
-                        sporsmalId={sporsmal.id}
-                        amplitudeProps={{ 'component': tittel, sporsmaltag: nokkel }}>
-                        <BodyLong>{parser(tekst(`ekspanderbarhjelp.${nokkel}.innhold` as any))}</BodyLong>
-                    </Ekspanderbar>
-                </>
+                const tittel = tekst(
+                    `ekspanderbarhjelp.${nokkel}.tittel` as any
+                )
+                return (
+                    <>
+                        <Ekspanderbar
+                            title={tittel}
+                            sporsmalId={sporsmal.id}
+                            amplitudeProps={{
+                                component: tittel,
+                                sporsmaltag: nokkel,
+                            }}
+                        >
+                            <BodyLong>
+                                {parser(
+                                    tekst(
+                                        `ekspanderbarhjelp.${nokkel}.innhold` as any
+                                    )
+                                )}
+                            </BodyLong>
+                        </Ekspanderbar>
+                    </>
+                )
             }}
         />
     )
 }
-

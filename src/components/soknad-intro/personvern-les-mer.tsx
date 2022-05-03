@@ -9,7 +9,7 @@ import { useAmplitudeInstance } from '../amplitude/amplitude'
 type Event = MouseEvent<HTMLAnchorElement | HTMLButtonElement>
 
 const PersonvernLesMer = () => {
-    const [ aapen, setAapen ] = useState<boolean>(false)
+    const [aapen, setAapen] = useState<boolean>(false)
     const { valgtSoknad } = useAppStore()
     const { logEvent } = useAmplitudeInstance()
 
@@ -21,13 +21,13 @@ const PersonvernLesMer = () => {
         event.preventDefault()
         setAapen(true)
         logEvent('knapp klikket', {
-            'tekst': tekst('sykepengesoknad.soknad-intro.personvern-les-mer'),
-            'soknadstype': valgtSoknad?.soknadstype
+            tekst: tekst('sykepengesoknad.soknad-intro.personvern-les-mer'),
+            soknadstype: valgtSoknad?.soknadstype,
         })
     }
     const amplitudeLukketPopup = () => {
         logEvent('popup lukket', {
-            'component': tekst('sykepengesoknad.soknad-intro.personvern-les-mer')
+            component: tekst('sykepengesoknad.soknad-intro.personvern-les-mer'),
         })
     }
 
@@ -36,23 +36,35 @@ const PersonvernLesMer = () => {
             <Button variant="tertiary" onClick={handleAapen}>
                 {tekst('sykepengesoknad.soknad-intro.personvern-les-mer')}
             </Button>
-            <Modal className="personvern-modal" onClose={() => {
-                setAapen(false)
-                amplitudeLukketPopup()
-            }}
-            open={aapen}
+            <Modal
+                className="personvern-modal"
+                onClose={() => {
+                    setAapen(false)
+                    amplitudeLukketPopup()
+                }}
+                open={aapen}
             >
                 <Modal.Content>
                     <Heading size="medium" level="3" className="modal__tittel">
-                        {tekst('sykepengesoknad.soknad-intro.personvern-modal-header')}
+                        {tekst(
+                            'sykepengesoknad.soknad-intro.personvern-modal-header'
+                        )}
                     </Heading>
-                    {parser(tekst('sykepengesoknad.soknad-intro.personvern-modal-innhold'))}
+                    {parser(
+                        tekst(
+                            'sykepengesoknad.soknad-intro.personvern-modal-innhold'
+                        )
+                    )}
 
                     <div className="lukk-wrapper">
-                        <button type="button" className="no-border navds-link" onClick={() => {
-                            setAapen(false)
-                            amplitudeLukketPopup()
-                        }}>
+                        <button
+                            type="button"
+                            className="no-border navds-link"
+                            onClick={() => {
+                                setAapen(false)
+                                amplitudeLukketPopup()
+                            }}
+                        >
                             <BodyShort as="span">Lukk</BodyShort>
                         </button>
                     </div>

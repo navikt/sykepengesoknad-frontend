@@ -3,17 +3,18 @@ import dynamic from 'next/dynamic'
 import React from 'react'
 
 function App() {
-    const CreateReactAppEntryPoint = dynamic(
-        () => import('../app'),
-        { ssr: false }
-    )
+    const CreateReactAppEntryPoint = dynamic(() => import('../app'), {
+        ssr: false,
+    })
 
-    return <>
-        <CreateReactAppEntryPoint />
-    </>
+    return (
+        <>
+            <CreateReactAppEntryPoint />
+        </>
+    )
 }
 
-export const getServerSideProps: GetServerSideProps = async() => {
+export const getServerSideProps: GetServerSideProps = async () => {
     // Tving disabling av statisk rendring
     return { props: {} }
 }

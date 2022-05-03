@@ -1,1 +1,1 @@
-export type OrNothing<T> = T | undefined | null;
+export type OrNothing<T> = T | undefined | null

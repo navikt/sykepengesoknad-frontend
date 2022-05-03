@@ -11,37 +11,72 @@ interface gradertReisetilskuddProps {
 }
 
 const Over16dager = ({ erGradert }: gradertReisetilskuddProps) => {
-
     return (
         <div className="avsnitt">
-            <Label as="h2" className="arbeidstaker-tittel">{tekst('kvittering.naeringsdrivende.tittel')}</Label>
+            <Label as="h2" className="arbeidstaker-tittel">
+                {tekst('kvittering.naeringsdrivende.tittel')}
+            </Label>
             <BodyLong spacing as="span">
-                {erGradert ?
-                    tekst('kvittering.arbeidstaker.over16.gradertreisetilskudd.brodtekst') :
-                    tekst('kvittering.arbeidstaker.over16.brodtekst')
-                }
+                {erGradert
+                    ? tekst(
+                          'kvittering.arbeidstaker.over16.gradertreisetilskudd.brodtekst'
+                      )
+                    : tekst('kvittering.arbeidstaker.over16.brodtekst')}
             </BodyLong>
-            <Utvidbar erApen={false} type="intern" tittel={tekst('kvittering.arbeidstaker.hvorfor-skille-ved-16-dager')}>
+            <Utvidbar
+                erApen={false}
+                type="intern"
+                tittel={tekst(
+                    'kvittering.arbeidstaker.hvorfor-skille-ved-16-dager'
+                )}
+            >
                 <BodyLong spacing>
-                    {erGradert ?
-                        tekst('kvittering.arbeidsgiveren-skal-betale-gradertreisetilskudd') :
-                        tekst('kvittering.arbeidsgiveren-skal-betale')
-                    }
+                    {erGradert
+                        ? tekst(
+                              'kvittering.arbeidsgiveren-skal-betale-gradertreisetilskudd'
+                          )
+                        : tekst('kvittering.arbeidsgiveren-skal-betale')}
                 </BodyLong>
             </Utvidbar>
-            <Utvidbar erApen={false} type="intern" tittel={tekst('kvittering.hva-er-inntektsmelding')}>
-                <BodyLong spacing>{tekst('kvittering.arbeidstaker.over16.inntektsmelding.brodtekst')}</BodyLong>
+            <Utvidbar
+                erApen={false}
+                type="intern"
+                tittel={tekst('kvittering.hva-er-inntektsmelding')}
+            >
+                <BodyLong spacing>
+                    {tekst(
+                        'kvittering.arbeidstaker.over16.inntektsmelding.brodtekst'
+                    )}
+                </BodyLong>
             </Utvidbar>
             <div className="avsnitt hva-skjer">
-                <Label as="h2" className="arbeidstaker-tittel">{tekst('kvittering.nav-behandler-soknaden')}</Label>
-                <BodyLong spacing as="span">{tekst('kvittering.arbeidstaker.saksbehandlingstid')} </BodyLong>
-                <Link target="_blank" href={tekst('kvittering.arbeidstaker.saksbehandlingstid.lenke.url')}>
-                    <BodyShort as="span">{tekst('kvittering.arbeidstaker.saksbehandlingstid.lenke')}</BodyShort>
-                </Link>.
+                <Label as="h2" className="arbeidstaker-tittel">
+                    {tekst('kvittering.nav-behandler-soknaden')}
+                </Label>
+                <BodyLong spacing as="span">
+                    {tekst('kvittering.arbeidstaker.saksbehandlingstid')}{' '}
+                </BodyLong>
+                <Link
+                    target="_blank"
+                    href={tekst(
+                        'kvittering.arbeidstaker.saksbehandlingstid.lenke.url'
+                    )}
+                >
+                    <BodyShort as="span">
+                        {tekst(
+                            'kvittering.arbeidstaker.saksbehandlingstid.lenke'
+                        )}
+                    </BodyShort>
+                </Link>
+                .
             </div>
             <div className="avsnitt">
-                <Label as="h2" className="arbeidstaker-tittel">{tekst('kvittering.naar-blir-pengene')}</Label>
-                <BodyLong spacing as="span">{parser(tekst('kvittering.arbeidstaker.over16.utbetaling'))} </BodyLong>
+                <Label as="h2" className="arbeidstaker-tittel">
+                    {tekst('kvittering.naar-blir-pengene')}
+                </Label>
+                <BodyLong spacing as="span">
+                    {parser(tekst('kvittering.arbeidstaker.over16.utbetaling'))}{' '}
+                </BodyLong>
             </div>
             <div className="avsnitt">
                 <Kontonummer />

@@ -2,21 +2,27 @@ import { soknaderOpplaering as soknader } from '../../../src/data/mock/data/sokn
 import { RSSoknad } from '../../../src/types/rs-types/rs-soknad'
 
 describe('Tester søknad om å beholde sykepenger utenfor EØS', () => {
-
-    const soknad = soknader.find((sok: RSSoknad) => sok.id === 'b9d67b0d-b1f8-44a5-bcbd-6010b60b90ce')!
+    const soknad = soknader.find(
+        (sok: RSSoknad) => sok.id === 'b9d67b0d-b1f8-44a5-bcbd-6010b60b90ce'
+    )!
 
     before(() => {
         cy.visit('http://localhost:8080/syk/sykepengesoknad')
     })
 
-    it('Laster startside', function() {
-        cy.get('.navds-heading--xlarge').should('be.visible').and('have.text', 'Søknader')
-        cy.get(`#soknader-list-til-behandling article a[href*=${soknad.id}]`).should('include.text', 'Søknad om å beholde sykepenger utenfor EØS')
-        cy.get(`#soknader-list-til-behandling article a[href*=${soknad.id}]`).click()
+    it('Laster startside', function () {
+        cy.get('.navds-heading--xlarge')
+            .should('be.visible')
+            .and('have.text', 'Søknader')
+        cy.get(
+            `#soknader-list-til-behandling article a[href*=${soknad.id}]`
+        ).should('include.text', 'Søknad om å beholde sykepenger utenfor EØS')
+        cy.get(
+            `#soknader-list-til-behandling article a[href*=${soknad.id}]`
+        ).click()
     })
 
-
-    it('PERIODEUTLAND - steg 1', function() {
+    it('PERIODEUTLAND - steg 1', function () {
         cy.url().should('include', `${soknad.id}/1`)
 
         cy.contains('Opplysninger fra sykmeldingen').should('not.exist')
@@ -30,12 +36,14 @@ describe('Tester søknad om å beholde sykepenger utenfor EØS', () => {
         cy.contains('Gå videre').click()
     })
 
-    it('LAND - steg 2', function() {
+    it('LAND - steg 2', function () {
         cy.url().should('include', `${soknad.id}/2`)
         cy.contains('Gå videre').click({ force: true })
         cy.contains('Du må velge ett land')
         cy.contains('Det er 1 feil i skjemaet')
-        cy.contains('Du må oppgi et land utenfor EØS. Innenfor EØS trenger du ikke søke.')
+        cy.contains(
+            'Du må oppgi et land utenfor EØS. Innenfor EØS trenger du ikke søke.'
+        )
 
         cy.contains('Hvilket land skal du reise til?')
         cy.get('.skjemaelement__input').type('Fransk', { force: true })
@@ -62,12 +70,12 @@ describe('Tester søknad om å beholde sykepenger utenfor EØS', () => {
         cy.contains('Gå videre').click({ force: true })
     })
 
-    it('Gå tilbake og frem', function() {
+    it('Gå tilbake og frem', function () {
         cy.contains('Tilbake').click({ force: true })
         cy.contains('Gå videre').click({ force: true })
     })
 
-    it('ARBEIDSGIVER', function() {
+    it('ARBEIDSGIVER', function () {
         cy.url().should('include', `${soknad.id}/3`)
 
         cy.contains('Har du arbeidsgiver?')
@@ -76,18 +84,19 @@ describe('Tester søknad om å beholde sykepenger utenfor EØS', () => {
         cy.contains('Gå videre').click({ force: true })
     })
 
-    it('BEKRFEFT', function() {
+    it('BEKRFEFT', function () {
         cy.url().should('include', `${soknad.id}/4`)
-
 
         cy.contains('Bekreft opplysninger')
         cy.contains('Før du reiser ber vi deg bekrefte')
-        cy.contains('Jeg bekrefter de to punktene ovenfor').click({ force: true })
+        cy.contains('Jeg bekrefter de to punktene ovenfor').click({
+            force: true,
+        })
 
         cy.contains('Send søknaden').click({ force: true })
     })
 
-    it('Kvittering', function() {
+    it('Kvittering', function () {
         cy.url().should('include', `kvittering/${soknad.id}`)
         // Hva skjer videre
         cy.get('.opplysninger.navds-alert--info')
@@ -97,5 +106,4 @@ describe('Tester søknad om å beholde sykepenger utenfor EØS', () => {
             .and('contain', 'Les mer om sykepenger når du er på reise.')
             .and('contain', 'Du søker om sykepenger')
     })
-
 })

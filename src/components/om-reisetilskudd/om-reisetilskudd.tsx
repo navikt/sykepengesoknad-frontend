@@ -5,13 +5,15 @@ import React, { useState } from 'react'
 import { tekst } from '../../utils/tekster'
 
 const OmReisetilskudd = () => {
-    const [ open, setOpen ] = useState<boolean>(false)
+    const [open, setOpen] = useState<boolean>(false)
 
     return (
         <Accordion>
             <Accordion.Item open={open} className="om-reisetilskudd">
                 <Accordion.Header onClick={() => setOpen(!open)}>
-                    <Heading size="small">{tekst('tilskudd.start.om-reisetilskudd')}</Heading>
+                    <Heading size="small">
+                        {tekst('tilskudd.start.om-reisetilskudd')}
+                    </Heading>
                 </Accordion.Header>
                 <Accordion.Content>
                     <Label as="h3">{tekst('tilskudd.start.hva-dekker')}</Label>
@@ -30,9 +32,14 @@ const OmReisetilskudd = () => {
                     </BodyLong>
 
                     <BodyLong spacing>
-                        <Link href="https://nav.no/reisetilskudd" target="_blank" rel="noopener">
+                        <Link
+                            href="https://nav.no/reisetilskudd"
+                            target="_blank"
+                            rel="noopener"
+                        >
                             {tekst('tilskudd.start.les-mer-reisetilskudd')}
-                        </Link>.
+                        </Link>
+                        .
                     </BodyLong>
                 </Accordion.Content>
             </Accordion.Item>

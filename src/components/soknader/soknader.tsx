@@ -14,26 +14,35 @@ import OmSykepenger from '../om-sykepenger/om-sykepenger'
 import Vis from '../vis'
 import Teasere from './teaser/teasere'
 
-const brodsmuler: Brodsmule[] = [ {
-    tittel: tekst('soknader.sidetittel'),
-    mobilTittel: tekst('soknader.brodsmuler.sidetittel'),
-    sti: '/soknader',
-    erKlikkbar: false
-} ]
+const brodsmuler: Brodsmule[] = [
+    {
+        tittel: tekst('soknader.sidetittel'),
+        mobilTittel: tekst('soknader.brodsmuler.sidetittel'),
+        sti: '/soknader',
+        erKlikkbar: false,
+    },
+]
 
 const Soknader = () => {
     const { soknader, setValgtSoknad } = useAppStore()
-    const nyeSoknader = soknader.filter((soknad) =>
-        soknad.status === RSSoknadstatus.NY
-        || soknad.status === RSSoknadstatus.UTKAST_TIL_KORRIGERING
-        || soknad.status === RSSoknadstatus.FREMTIDIG
-    ).sort(sorterEtterNyesteTom).reverse()
+    const nyeSoknader = soknader
+        .filter(
+            (soknad) =>
+                soknad.status === RSSoknadstatus.NY ||
+                soknad.status === RSSoknadstatus.UTKAST_TIL_KORRIGERING ||
+                soknad.status === RSSoknadstatus.FREMTIDIG
+        )
+        .sort(sorterEtterNyesteTom)
+        .reverse()
 
-    const tidligereSoknader = soknader.filter((soknad) =>
-        soknad.status === RSSoknadstatus.SENDT
-        || soknad.status === RSSoknadstatus.AVBRUTT
-        || soknad.status === RSSoknadstatus.UTGAATT
-    ).sort(sorterEtterNyesteTom)
+    const tidligereSoknader = soknader
+        .filter(
+            (soknad) =>
+                soknad.status === RSSoknadstatus.SENDT ||
+                soknad.status === RSSoknadstatus.AVBRUTT ||
+                soknad.status === RSSoknadstatus.UTGAATT
+        )
+        .sort(sorterEtterNyesteTom)
 
     useEffect(() => {
         setBodyClass('soknader')
@@ -47,7 +56,6 @@ const Soknader = () => {
             <Brodsmuler brodsmuler={brodsmuler} />
 
             <div className="limit">
-
                 <OmSykepenger />
 
                 <Teasere
@@ -58,8 +66,9 @@ const Soknader = () => {
                     id="soknader-list-til-behandling"
                 />
 
-                <Vis hvis={tidligereSoknader.length > 0}
-                    render={() =>
+                <Vis
+                    hvis={tidligereSoknader.length > 0}
+                    render={() => (
                         <Teasere
                             className="soknader_teasere"
                             soknader={tidligereSoknader}
@@ -67,7 +76,7 @@ const Soknader = () => {
                             id="soknader-sendt"
                             kanSorteres={true}
                         />
-                    }
+                    )}
                 />
 
                 <Link className="dinesaker-lenke" href={dinesakerUrl()}>

@@ -1,15 +1,29 @@
 import 'node-fetch'
 
-import { Components, fetchDecoratorReact } from '@navikt/nav-dekoratoren-moduler/ssr'
+import {
+    Components,
+    fetchDecoratorReact,
+} from '@navikt/nav-dekoratoren-moduler/ssr'
 import getConfig from 'next/config'
-import Document, { DocumentContext, DocumentInitialProps, Head, Html, Main, NextScript } from 'next/document'
+import Document, {
+    DocumentContext,
+    DocumentInitialProps,
+    Head,
+    Html,
+    Main,
+    NextScript,
+} from 'next/document'
 import React from 'react'
 
 const { serverRuntimeConfig } = getConfig()
 
 // The 'head'-field of the document initialProps contains data from <head> (meta-tags etc)
-const getDocumentParameter = (initialProps: DocumentInitialProps, name: string) => {
-    return initialProps.head?.find((element) => element?.props?.name === name)?.props?.content
+const getDocumentParameter = (
+    initialProps: DocumentInitialProps,
+    name: string
+) => {
+    return initialProps.head?.find((element) => element?.props?.name === name)
+        ?.props?.content
 }
 
 interface Props {
@@ -18,7 +32,9 @@ interface Props {
 }
 
 class MyDocument extends Document<Props> {
-    static async getInitialProps(ctx: DocumentContext): Promise<DocumentInitialProps & Props> {
+    static async getInitialProps(
+        ctx: DocumentContext
+    ): Promise<DocumentInitialProps & Props> {
         const initialProps = await Document.getInitialProps(ctx)
 
         const Decorator = await fetchDecoratorReact({
@@ -40,16 +56,16 @@ class MyDocument extends Document<Props> {
         const showDecorator = serverRuntimeConfig.noDecorator != 'true'
         return (
             <Html lang={language || 'no'}>
-                <Head>
-                    {showDecorator && <Decorator.Styles />}
-                </Head>
+                <Head>{showDecorator && <Decorator.Styles />}</Head>
                 <body>
                     {showDecorator && <Decorator.Header />}
                     <Main />
-                    {showDecorator && <>
-                        <Decorator.Footer />
-                        <Decorator.Scripts />
-                    </>}
+                    {showDecorator && (
+                        <>
+                            <Decorator.Footer />
+                            <Decorator.Scripts />
+                        </>
+                    )}
                     <NextScript />
                 </body>
             </Html>

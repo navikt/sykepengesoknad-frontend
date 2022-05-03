@@ -15,7 +15,10 @@ import { setBodyClass } from '../../utils/utils'
 import { useAmplitudeInstance } from '../amplitude/amplitude'
 import Banner from '../banner/banner'
 import Brodsmuler from '../brodsmuler/brodsmuler'
-import { EldreUsendtSoknad, harEldreUsendtSoknad } from '../eldre-usendt-soknad/eldre-usendt-soknad'
+import {
+    EldreUsendtSoknad,
+    harEldreUsendtSoknad,
+} from '../eldre-usendt-soknad/eldre-usendt-soknad'
 import RedirectTilOversikt from '../feil/redirect-til-oversikt'
 import { hentHotjarJsTrigger, HotjarTrigger } from '../hotjar-trigger'
 import HvorforSoknadSykepenger from '../hvorfor-soknad-sykepenger/hvorfor-soknad-sykepenger'
@@ -30,27 +33,38 @@ import { hentNokkel } from '../sporsmal/sporsmal-utils'
 import Vis from '../vis'
 import { urlTilSoknad } from './soknad-link'
 
-const brodsmuler: Brodsmule[] = [ {
-    tittel: tekst('soknader.sidetittel'),
-    mobilTittel: tekst('soknader.brodsmuler.sidetittel'),
-    sti: SEPARATOR,
-    erKlikkbar: true
-}, {
-    tittel: tekst('soknad.sidetittel'),
-    sti: null as any,
-    erKlikkbar: false,
-} ]
+const brodsmuler: Brodsmule[] = [
+    {
+        tittel: tekst('soknader.sidetittel'),
+        mobilTittel: tekst('soknader.brodsmuler.sidetittel'),
+        sti: SEPARATOR,
+        erKlikkbar: true,
+    },
+    {
+        tittel: tekst('soknad.sidetittel'),
+        sti: null as any,
+        erKlikkbar: false,
+    },
+]
 
 const Soknaden = () => {
-    const { soknader, valgtSoknad, setValgtSoknad, sykmeldinger, setValgtSykmelding } = useAppStore()
+    const {
+        soknader,
+        valgtSoknad,
+        setValgtSoknad,
+        sykmeldinger,
+        setValgtSykmelding,
+    } = useAppStore()
     const { logEvent } = useAmplitudeInstance()
     const { id } = useParams<RouteParams>()
 
     useEffect(() => {
-        const filtrertSoknad = soknader.find(soknad => soknad.id === id)
+        const filtrertSoknad = soknader.find((soknad) => soknad.id === id)
         setValgtSoknad(filtrertSoknad)
 
-        const sykmelding = sykmeldinger.find(sm => sm.id === filtrertSoknad?.sykmeldingId)
+        const sykmelding = sykmeldinger.find(
+            (sm) => sm.id === filtrertSoknad?.sykmeldingId
+        )
         setValgtSykmelding(sykmelding)
 
         logEvent('skjema åpnet', {
@@ -59,7 +73,7 @@ const Soknaden = () => {
             soknadstatus: filtrertSoknad?.status,
         })
         // eslint-disable-next-line
-    }, [ id ])
+    }, [id])
 
     useEffect(() => {
         setBodyClass('soknaden')
@@ -75,7 +89,12 @@ const Soknaden = () => {
             <Brodsmuler brodsmuler={brodsmuler} />
 
             <div className="limit">
-                <HotjarTrigger jsTrigger={hentHotjarJsTrigger(valgtSoknad.soknadstype, 'soknad')}>
+                <HotjarTrigger
+                    jsTrigger={hentHotjarJsTrigger(
+                        valgtSoknad.soknadstype,
+                        'soknad'
+                    )}
+                >
                     <Fordeling />
                 </HotjarTrigger>
             </div>
@@ -101,77 +120,112 @@ const Fordeling = () => {
         return null
     }
 
-
     const tittel = tekst(hentNokkel(valgtSoknad!, stegNo) as any)
-    const erUtlandssoknad = valgtSoknad.soknadstype === RSSoknadstype.OPPHOLD_UTLAND
-    const erReisetilskuddsoknad = valgtSoknad.soknadstype === RSSoknadstype.REISETILSKUDD
-    const erGradertReisetilskuddsoknad = valgtSoknad.soknadstype === RSSoknadstype.GRADERT_REISETILSKUDD
+    const erUtlandssoknad =
+        valgtSoknad.soknadstype === RSSoknadstype.OPPHOLD_UTLAND
+    const erReisetilskuddsoknad =
+        valgtSoknad.soknadstype === RSSoknadstype.REISETILSKUDD
+    const erGradertReisetilskuddsoknad =
+        valgtSoknad.soknadstype === RSSoknadstype.GRADERT_REISETILSKUDD
 
     switch (valgtSoknad.status) {
         // Nye søknader
         case RSSoknadstatus.NY:
         case RSSoknadstatus.UTKAST_TIL_KORRIGERING: {
-            const eldreUsendtSoknad = harEldreUsendtSoknad(valgtSoknad, soknader)
+            const eldreUsendtSoknad = harEldreUsendtSoknad(
+                valgtSoknad,
+                soknader
+            )
             if (eldreUsendtSoknad != null) {
-                return (<EldreUsendtSoknad eldreSoknad={eldreUsendtSoknad} />)
+                return <EldreUsendtSoknad eldreSoknad={eldreUsendtSoknad} />
             }
             return (
                 <>
-
-                    <Vis hvis={stegNo > 1 || erUtlandssoknad}
+                    <Vis
+                        hvis={stegNo > 1 || erUtlandssoknad}
                         render={() => <SporsmalSteg />}
                     />
 
-                    <Vis hvis={stegNo > 1}
-                        render={() =>
-                            <Link to={'/soknader/' + valgtSoknad.id + SEPARATOR + (stegNo - 1)}
+                    <Vis
+                        hvis={stegNo > 1}
+                        render={() => (
+                            <Link
+                                to={
+                                    '/soknader/' +
+                                    valgtSoknad.id +
+                                    SEPARATOR +
+                                    (stegNo - 1)
+                                }
                                 className="navds-link tilbakelenke"
-                                onClick={() => { logEvent('navigere', {
-                                    lenketekst: tekst('soknad.tilbakeknapp'),
-                                    fra: valgtSoknad!.sporsmal[stegNo].tag,
-                                    til: valgtSoknad!.sporsmal[stegNo - 1].tag,
-                                    'soknadstype': valgtSoknad?.soknadstype,
-                                    'stegId': stegId
-                                })}}
+                                onClick={() => {
+                                    logEvent('navigere', {
+                                        lenketekst: tekst(
+                                            'soknad.tilbakeknapp'
+                                        ),
+                                        fra: valgtSoknad!.sporsmal[stegNo].tag,
+                                        til: valgtSoknad!.sporsmal[stegNo - 1]
+                                            .tag,
+                                        soknadstype: valgtSoknad?.soknadstype,
+                                        stegId: stegId,
+                                    })
+                                }}
                             >
                                 <Back className="chevron--venstre" />
-                                <BodyShort as="span">{tekst('soknad.tilbakeknapp')}</BodyShort>
+                                <BodyShort as="span">
+                                    {tekst('soknad.tilbakeknapp')}
+                                </BodyShort>
                             </Link>
+                        )}
+                    />
+
+                    <Vis
+                        hvis={stegNo === 1 && !erUtlandssoknad}
+                        render={() => <ViktigInformasjon />}
+                    />
+
+                    <Vis
+                        hvis={stegNo === 1 && erGradertReisetilskuddsoknad}
+                        render={() => <SoknadMedToDeler />}
+                    />
+
+                    <Vis
+                        hvis={!erUtlandssoknad && stegNo === 1}
+                        render={() => {
+                            const sporsmal = valgtSoknad!.sporsmal[stegNo - 1]
+                            return (
+                                <Opplysninger
+                                    ekspandert={true}
+                                    steg={sporsmal.tag}
+                                />
+                            )
+                        }}
+                    />
+
+                    <Vis
+                        hvis={stegNo === 1 && !erUtlandssoknad}
+                        render={() => (
+                            <HvorforSoknadSykepenger
+                                soknadstype={valgtSoknad.soknadstype}
+                            />
+                        )}
+                    />
+
+                    <Vis
+                        hvis={
+                            stegNo === 1 &&
+                            (erReisetilskuddsoknad ||
+                                erGradertReisetilskuddsoknad)
                         }
-                    />
-
-                    <Vis hvis={stegNo === 1 && !erUtlandssoknad}
-                        render={() =>
-                            <ViktigInformasjon />
-                        }
-                    />
-
-                    <Vis hvis={stegNo === 1 && erGradertReisetilskuddsoknad}
-                        render={() =>
-                            <SoknadMedToDeler />
-                        }
-                    />
-
-                    <Vis hvis={!erUtlandssoknad && (stegNo === 1)}
-                        render={
-                            () => {
-                                const sporsmal = valgtSoknad!.sporsmal[ stegNo - 1 ]
-                                return <Opplysninger ekspandert={true} steg={sporsmal.tag} />
-                            }}
-                    />
-
-                    <Vis hvis={stegNo === 1 && !erUtlandssoknad}
-                        render={() =>
-                            <HvorforSoknadSykepenger soknadstype={valgtSoknad.soknadstype} />
-                        }
-                    />
-
-                    <Vis hvis={stegNo === 1 && (erReisetilskuddsoknad || erGradertReisetilskuddsoknad)}
                         render={() => <OmReisetilskudd />}
                     />
 
-                    <Vis hvis={tittel}
-                        render={() => <Heading size="medium" className="sporsmal__tittel">{tittel}</Heading>}
+                    <Vis
+                        hvis={tittel}
+                        render={() => (
+                            <Heading size="medium" className="sporsmal__tittel">
+                                {tittel}
+                            </Heading>
+                        )}
                     />
 
                     <SporsmalForm />
@@ -184,32 +238,43 @@ const Fordeling = () => {
                 <>
                     <Alert variant="warning">
                         <BodyShort>
-                            {tekst('sykepengesoknad.avbrutt.tidspunkt')} {tilLesbarDatoMedArstall(valgtSoknad!.avbruttDato)}.
+                            {tekst('sykepengesoknad.avbrutt.tidspunkt')}{' '}
+                            {tilLesbarDatoMedArstall(valgtSoknad!.avbruttDato)}.
                         </BodyShort>
                     </Alert>
 
                     <div className="avbrutt-info">
                         <BodyLong spacing>
-                            {tekst('sykepengesoknad.avbrutt.informasjon-innhold-1')}
+                            {tekst(
+                                'sykepengesoknad.avbrutt.informasjon-innhold-1'
+                            )}
                         </BodyLong>
                         <BodyLong spacing>
-                            {tekst('sykepengesoknad.avbrutt.informasjon-innhold-2')}
+                            {tekst(
+                                'sykepengesoknad.avbrutt.informasjon-innhold-2'
+                            )}
                         </BodyLong>
                         <BodyLong spacing>
-                            {tekst('sykepengesoknad.avbrutt.informasjon-innhold-3')}
+                            {tekst(
+                                'sykepengesoknad.avbrutt.informasjon-innhold-3'
+                            )}
                         </BodyLong>
                         <BodyLong spacing>
-                            {tekst('sykepengesoknad.avbrutt.informasjon-innhold-4')}
+                            {tekst(
+                                'sykepengesoknad.avbrutt.informasjon-innhold-4'
+                            )}
                         </BodyLong>
                     </div>
 
                     <Opplysninger ekspandert={true} steg="avbrutt-søknad" />
-                    <HvorforSoknadSykepenger soknadstype={valgtSoknad.soknadstype} />
+                    <HvorforSoknadSykepenger
+                        soknadstype={valgtSoknad.soknadstype}
+                    />
                     <GjenapneSoknad />
                 </>
             )
     }
 
     // Brukeren skal ikke komme hit ved andre statuser. Sender tilbake til forsiden
-    return (<RedirectTilOversikt />)
+    return <RedirectTilOversikt />
 }

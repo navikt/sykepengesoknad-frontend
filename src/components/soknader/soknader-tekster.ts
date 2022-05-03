@@ -1,5 +1,4 @@
 const SoknaderTekster = {
-
     'soknader.sidetittel': 'Søknader',
     'soknader.brodsmuler.sidetittel': 'Søknader',
     'soknader.nye.tittel': 'Nye søknader',
@@ -8,7 +7,6 @@ const SoknaderTekster = {
     'soknader.sendt.tittel': 'Tidligere søknader',
     'landingside.sidetittel': 'Ditt sykefravær',
     'dinesaker.lenke': 'Se alle sykepengedokumentene på Ditt NAV',
-
 }
 
 export default SoknaderTekster

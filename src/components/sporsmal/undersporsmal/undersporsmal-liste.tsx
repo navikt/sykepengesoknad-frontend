@@ -9,25 +9,31 @@ interface UndersporsmalListeProps {
     oversporsmalSvar?: string
 }
 
-const UndersporsmalListe = ({ oversporsmal, oversporsmalSvar }: UndersporsmalListeProps) => {
+const UndersporsmalListe = ({
+    oversporsmal,
+    oversporsmalSvar,
+}: UndersporsmalListeProps) => {
     return (
-        <>{oversporsmal.undersporsmal.map((underspm: Sporsmal, idx: number) => {
-            return (
-                <Vis
-                    hvis={
-                        !oversporsmal.kriterieForVisningAvUndersporsmal ||
-                        oversporsmal.kriterieForVisningAvUndersporsmal === oversporsmalSvar
-                    }
-                    key={idx}
-                    render={() =>
-                        <SporsmalSwitch sporsmal={underspm} />
-                    }
-                />
-            )
-        }).filter((underspm: any) => underspm !== null)}
+        <>
+            {oversporsmal.undersporsmal
+                .map((underspm: Sporsmal, idx: number) => {
+                    return (
+                        <Vis
+                            hvis={
+                                !oversporsmal.kriterieForVisningAvUndersporsmal ||
+                                oversporsmal.kriterieForVisningAvUndersporsmal ===
+                                    oversporsmalSvar
+                            }
+                            key={idx}
+                            render={() => (
+                                <SporsmalSwitch sporsmal={underspm} />
+                            )}
+                        />
+                    )
+                })
+                .filter((underspm: any) => underspm !== null)}
         </>
     )
 }
 
 export default UndersporsmalListe
-

@@ -5,9 +5,15 @@ import { RSSoknadstype } from '../../../types/rs-types/rs-soknadstype'
 import { Soknad, Sporsmal } from '../../../types/types'
 import { hentSporsmal } from '../../../utils/soknad-utils'
 
-export default (soknad: Soknad, sporsmal: Sporsmal, formValues: FieldValues) => {
-    if (soknad.soknadstype === RSSoknadstype.OPPHOLD_UTLAND && sporsmal.tag === TagTyper.ARBEIDSGIVER) {
-
+export default (
+    soknad: Soknad,
+    sporsmal: Sporsmal,
+    formValues: FieldValues
+) => {
+    if (
+        soknad.soknadstype === RSSoknadstype.OPPHOLD_UTLAND &&
+        sporsmal.tag === TagTyper.ARBEIDSGIVER
+    ) {
         const arbiedsgiverId = hentSporsmal(soknad, TagTyper.ARBEIDSGIVER)!.id
         const ferieId = hentSporsmal(soknad, TagTyper.FERIE)!.id
 

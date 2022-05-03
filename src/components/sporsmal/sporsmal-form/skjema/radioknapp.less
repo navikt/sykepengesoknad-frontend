@@ -13,24 +13,28 @@
 
     &:checked + .skjemaelement__label::before {
         border: 2px solid @navds-semantic-color-interaction-primary;
-        box-shadow: 0 0 0 3px @navds-global-color-white inset, 0 0 0 12px @navds-semantic-color-interaction-primary inset;
+        box-shadow: 0 0 0 3px @navds-global-color-white inset,
+            0 0 0 12px @navds-semantic-color-interaction-primary inset;
     }
 
     &:disabled {
         &:checked + .skjemaelement__label::before {
             border: 2px solid @navds-global-color-gray-400;
-            box-shadow: 0 0 0 3px @navds-global-color-white inset, 0 0 0 12px @navds-global-color-gray-400 inset;
+            box-shadow: 0 0 0 3px @navds-global-color-white inset,
+                0 0 0 12px @navds-global-color-gray-400 inset;
         }
     }
 
     &:focus + .skjemaelement__label::before {
-        box-shadow: 0 0 0 3px @navds-global-color-blue-800, 0 0 0 12px @navds-global-color-white inset;
+        box-shadow: 0 0 0 3px @navds-global-color-blue-800,
+            0 0 0 12px @navds-global-color-white inset;
     }
 
     &:checked:focus + .skjemaelement__label::before {
         .mixin-transition(200ms, box-shadow);
 
-        box-shadow: 0 0 0 3px @navds-global-color-blue-800, 0 0 0 3px @navds-global-color-white inset,
-        0 0 0 12px @navds-semantic-color-interaction-primary inset;
+        box-shadow: 0 0 0 3px @navds-global-color-blue-800,
+            0 0 0 3px @navds-global-color-white inset,
+            0 0 0 12px @navds-semantic-color-interaction-primary inset;
     }
 }

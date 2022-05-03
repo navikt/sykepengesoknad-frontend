@@ -11,7 +11,7 @@ import PeriodeKomp from './periode-komp'
 
 const Perioder = ({ sporsmal }: SpmProps) => {
     const { unregister } = useFormContext()
-    const [ lokal, setLokal ] = useState<number[]>([ 0 ])
+    const [lokal, setLokal] = useState<number[]>([0])
     const periodeliste = useRef<HTMLUListElement>(null)
     const forceUpdate = useForceUpdate()
 
@@ -19,11 +19,11 @@ const Perioder = ({ sporsmal }: SpmProps) => {
         const svar = hentPerioder(sporsmal)
         setLokal(svar.length > 0 ? svar : lokal)
         // eslint-disable-next-line
-    }, [ sporsmal ])
+    }, [sporsmal])
 
     const slettPeriode = (e: any, idx: number) => {
         e.preventDefault()
-        const index = lokal.findIndex(value => value === idx)
+        const index = lokal.findIndex((value) => value === idx)
         lokal.splice(index, 1)
         setLokal(lokal)
         unregister(sporsmal.id + '_' + idx, { keepValue: false })
@@ -37,18 +37,35 @@ const Perioder = ({ sporsmal }: SpmProps) => {
     }
 
     return (
-        <div className={sporsmal.parentKriterie ? 'kriterie--' + sporsmal.parentKriterie.toLowerCase() : ''}>
+        <div
+            className={
+                sporsmal.parentKriterie
+                    ? 'kriterie--' + sporsmal.parentKriterie.toLowerCase()
+                    : ''
+            }
+        >
             <Label as="h3" className="skjema__sporsmal">
                 {sporsmal.sporsmalstekst}
             </Label>
 
             <ul className="periodeliste" ref={periodeliste}>
                 {lokal.map((idx) => {
-                    return <PeriodeKomp sporsmal={sporsmal} index={idx} slettPeriode={slettPeriode} key={sporsmal.id + '_' + idx} />
+                    return (
+                        <PeriodeKomp
+                            sporsmal={sporsmal}
+                            index={idx}
+                            slettPeriode={slettPeriode}
+                            key={sporsmal.id + '_' + idx}
+                        />
+                    )
                 })}
             </ul>
 
-            <button role="link" className="lenkeknapp navds-link" onClick={leggTilPeriode}>
+            <button
+                role="link"
+                className="lenkeknapp navds-link"
+                onClick={leggTilPeriode}
+            >
                 {tekst('sykepengesoknad.periodevelger.legg-til-ekstra')}
             </button>
 

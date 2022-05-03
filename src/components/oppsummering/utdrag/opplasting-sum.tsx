@@ -16,19 +16,18 @@ const OpplastingSum = ({ sporsmal }: OppsummeringProps) => {
 
     let svartekst = ''
     if (svar.length === 0) {
-        svartekst = (tekst('oppsummering.opplasting.tom'))
+        svartekst = tekst('oppsummering.opplasting.tom')
     } else if (svar.length === 1) {
-        svartekst = (getLedetekst(tekst('oppsummering.opplasting.en'), {
+        svartekst = getLedetekst(tekst('oppsummering.opplasting.en'), {
             '%ANTALL%': antall,
             '%SUM%': formatterTall(sum, 0),
-        }))
+        })
     } else {
-        svartekst = (getLedetekst(tekst('oppsummering.opplasting.fler'), {
+        svartekst = getLedetekst(tekst('oppsummering.opplasting.fler'), {
             '%ANTALL%': antall,
             '%SUM%': formatterTall(sum, 0),
-        }))
+        })
     }
-
 
     return (
         <div className="oppsummering__sporsmal">

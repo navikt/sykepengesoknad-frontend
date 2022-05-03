@@ -7,9 +7,5 @@ interface AmplitudeProps {
 }
 
 export const Amplitude = (props: AmplitudeProps) => {
-    return (
-        <AmplitudeProvider>
-            { props.children }
-        </AmplitudeProvider>
-    )
+    return <AmplitudeProvider>{props.children}</AmplitudeProvider>
 }

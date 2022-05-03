@@ -34,9 +34,12 @@ const Oppsummering = ({ ekspandert }: EkspanderProps) => {
 
     const tittel = tekst('sykepengesoknad.oppsummering.tittel')
     return (
-        <Utvidbar className={'oppsummering lilla' + (ekspandert ? ' apen' : '')}
-            ikon={sjekkbokser} ikonHover={sjekkbokserHover} erApen={ekspandert}
-            amplitudeProps={{ 'component': tittel }}
+        <Utvidbar
+            className={'oppsummering lilla' + (ekspandert ? ' apen' : '')}
+            ikon={sjekkbokser}
+            ikonHover={sjekkbokserHover}
+            erApen={ekspandert}
+            amplitudeProps={{ component: tittel }}
             tittel={tittel}
             ikonAltTekst=""
         >
@@ -50,8 +53,7 @@ const Oppsummering = ({ ekspandert }: EkspanderProps) => {
                             <SporsmalVarianter sporsmal={sporsmal} />
                         </div>
                     )
-                })
-            }
+                })}
         </Utvidbar>
     )
 }
@@ -59,9 +61,7 @@ const Oppsummering = ({ ekspandert }: EkspanderProps) => {
 export default Oppsummering
 
 export const SporsmalVarianter = ({ sporsmal }: OppsummeringProps) => {
-
     switch (sporsmal.svartype) {
-
         case RSSvartype.CHECKBOX_PANEL:
         case RSSvartype.CHECKBOX: {
             return <CheckboxSum sporsmal={sporsmal} />
@@ -93,7 +93,7 @@ export const SporsmalVarianter = ({ sporsmal }: OppsummeringProps) => {
         }
 
         case RSSvartype.CHECKBOX_GRUPPE: {
-            return (<CheckboxGruppe sporsmal={sporsmal} />)
+            return <CheckboxGruppe sporsmal={sporsmal} />
         }
 
         case RSSvartype.TALL:

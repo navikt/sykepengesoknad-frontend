@@ -12,24 +12,33 @@ const Land = ({ sporsmal }: SpmProps) => {
 
     return (
         <>
-            <div className={sporsmal.parentKriterie
-                ? 'kriterie--' + sporsmal.parentKriterie.toLowerCase() + ' skjemaelement'
-                : 'skjemaelement'
-            }>
-
-                <Label as="h3" className="skjema__sporsmal">{sporsmal.sporsmalstekst}</Label>
+            <div
+                className={
+                    sporsmal.parentKriterie
+                        ? 'kriterie--' +
+                          sporsmal.parentKriterie.toLowerCase() +
+                          ' skjemaelement'
+                        : 'skjemaelement'
+                }
+            >
+                <Label as="h3" className="skjema__sporsmal">
+                    {sporsmal.sporsmalstekst}
+                </Label>
 
                 <Controller
                     name={sporsmal.id}
                     rules={{
-                        validate: () => validerLand(sporsmal, getValues(sporsmal.id))
+                        validate: () =>
+                            validerLand(sporsmal, getValues(sporsmal.id)),
                     }}
                     render={({ field }) => (
                         <LandvelgerComponent
-                            verdierInn={sporsmal.svarliste.svar.map((i) => i.verdi)}
-                            sporsmalId={ field.name }
-                            name={ field.name }
-                            onChange={ field.onChange }
+                            verdierInn={sporsmal.svarliste.svar.map(
+                                (i) => i.verdi
+                            )}
+                            sporsmalId={field.name}
+                            name={field.name}
+                            onChange={field.onChange}
                         />
                     )}
                 />

@@ -2,7 +2,6 @@ import { arbeidstakerTilKorrigering } from '../../../src/data/mock/data/soknader
 import { tekst } from '../../../src/utils/tekster'
 
 describe('Tester utkast til korrigerte søknader', () => {
-
     const tilKorrigering = arbeidstakerTilKorrigering
 
     before(() => {
@@ -10,16 +9,21 @@ describe('Tester utkast til korrigerte søknader', () => {
     })
 
     it('Henter liste med søknader', () => {
-        cy.get('.navds-heading--xlarge').should('be.visible').and('have.text', 'Søknader')
+        cy.get('.navds-heading--xlarge')
+            .should('be.visible')
+            .and('have.text', 'Søknader')
     })
 
     it('En søknad til korringeringer markert som til korrigering', () => {
-        cy.get(`#soknader-list-til-behandling article a[href*=${tilKorrigering.id}] .inngangspanel__status`)
-            .contains(tekst('soknad.teaser.utkast-korrigering.tekst'))
+        cy.get(
+            `#soknader-list-til-behandling article a[href*=${tilKorrigering.id}] .inngangspanel__status`
+        ).contains(tekst('soknad.teaser.utkast-korrigering.tekst'))
     })
 
     it('Korrigert første spørsmål er ubesvart', () => {
-        cy.get(`#soknader-list-til-behandling article a[href*=${tilKorrigering.id}]`).click()
+        cy.get(
+            `#soknader-list-til-behandling article a[href*=${tilKorrigering.id}]`
+        ).click()
         cy.url().should('include', `${tilKorrigering.id}/1`)
         cy.get('input.skjemaelement__input').should('not.be.checked')
     })

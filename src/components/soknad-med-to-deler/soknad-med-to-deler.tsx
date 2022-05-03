@@ -8,7 +8,9 @@ const SoknadMedToDeler = () => {
     return (
         <div className="to-deler">
             <GuidePanel poster illustration={VeilederSVG}>
-                <Heading size="small" level="2">{tekst('to-deler.overskrift')}</Heading>
+                <Heading size="small" level="2">
+                    {tekst('to-deler.overskrift')}
+                </Heading>
                 <BodyLong>{tekst('to-deler.avsnitt.1')}</BodyLong>
                 <BodyLong>{tekst('to-deler.avsnitt.2')}</BodyLong>
             </GuidePanel>

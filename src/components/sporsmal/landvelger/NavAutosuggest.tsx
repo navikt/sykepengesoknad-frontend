@@ -5,9 +5,7 @@ import Autosuggest, { SuggestionSelectedEventData } from 'react-autosuggest'
 import { Forslag } from './Forslag'
 
 const getQueryIndex = (query: string, forslag: Forslag) => {
-    return forslag.text
-        .toLowerCase()
-        .indexOf(query.toLowerCase())
+    return forslag.text.toLowerCase().indexOf(query.toLowerCase())
 }
 
 const getSuggestionValue = (forslag: Forslag) => {
@@ -31,8 +29,8 @@ export interface NavAutosuggestProps {
 }
 
 const NavAutosuggest = (props: NavAutosuggestProps) => {
-    const [ value, setValue ] = useState('')
-    const [ suggestions, setSuggestions ] = useState<Forslag[]>([])
+    const [value, setValue] = useState('')
+    const [suggestions, setSuggestions] = useState<Forslag[]>([])
 
     const onChange = (event: any, { newValue }: any) => {
         setValue(newValue)
@@ -58,7 +56,7 @@ const NavAutosuggest = (props: NavAutosuggestProps) => {
             return getQueryIndex(value, forslag) > 0
         })
 
-        const suggestions = [ ...eksakteForslag, ...delvisMatchForslag ]
+        const suggestions = [...eksakteForslag, ...delvisMatchForslag]
             .filter((forslag) => {
                 return forslag.id !== 'NORGE'
             })
@@ -71,7 +69,10 @@ const NavAutosuggest = (props: NavAutosuggestProps) => {
         props.onAdd(suggestion)
     }
 
-    const onSuggestionSelected = (event: React.FormEvent, { suggestion, method }: SuggestionSelectedEventData<Forslag>) => {
+    const onSuggestionSelected = (
+        event: React.FormEvent,
+        { suggestion, method }: SuggestionSelectedEventData<Forslag>
+    ) => {
         if (method === 'enter') {
             event.preventDefault()
         }
@@ -94,20 +95,19 @@ const NavAutosuggest = (props: NavAutosuggestProps) => {
             getSuggestionValue={getSuggestionValue}
             renderSuggestion={renderSuggestion}
             suggestions={suggestions}
-            inputProps={
-                {
-                    id: props.sporsmalId,
-                    name: props.sporsmalId,
-                    value: value,
-                    onChange: onChange,
-                    onKeyPress: onKeypress,
-                    onBlur: onBlur,
-                    className: cn('skjemaelement__input input--l input--autocomplete'),
-                }
-            }
+            inputProps={{
+                id: props.sporsmalId,
+                name: props.sporsmalId,
+                value: value,
+                onChange: onChange,
+                onKeyPress: onKeypress,
+                onBlur: onBlur,
+                className: cn(
+                    'skjemaelement__input input--l input--autocomplete'
+                ),
+            }}
         />
     )
 }
-
 
 export default NavAutosuggest

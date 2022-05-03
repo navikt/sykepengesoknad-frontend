@@ -14,7 +14,8 @@ import Vis from '../vis'
 
 const SykmeldingPerioder = () => {
     const { valgtSoknad, valgtSykmelding } = useAppStore()
-    const sortertePerioder = valgtSykmelding?.sykmeldingsperioder.sort(sorterEtterEldsteTom) || []
+    const sortertePerioder =
+        valgtSykmelding?.sykmeldingsperioder.sort(sorterEtterEldsteTom) || []
 
     const hentPeriodeTekst = (periode: Periode) => {
         switch (periode.type) {
@@ -48,30 +49,39 @@ const SykmeldingPerioder = () => {
                         </Label>
 
                         <BodyShort>
-                            <strong>{fom} - {tom}</strong> &bull; {dager} dager
+                            <strong>
+                                {fom} - {tom}
+                            </strong>{' '}
+                            &bull; {dager} dager
                         </BodyShort>
 
-                        <BodyShort>
-                            {hentPeriodeTekst(periode)}
-                        </BodyShort>
+                        <BodyShort>{hentPeriodeTekst(periode)}</BodyShort>
 
-                        <Vis hvis={periode.gradert?.reisetilskudd}
-                            render={() =>
+                        <Vis
+                            hvis={periode.gradert?.reisetilskudd}
+                            render={() => (
                                 <>
-                                    <img style={{ width: 16, height: 16 }} src={CheckBoxImg} alt="Avkrysset" />
+                                    <img
+                                        style={{ width: 16, height: 16 }}
+                                        src={CheckBoxImg}
+                                        alt="Avkrysset"
+                                    />
                                     <BodyShort as="span">
-                                        {' Kan være i delvis arbeid ved bruk av reisetilskudd'}
+                                        {
+                                            ' Kan være i delvis arbeid ved bruk av reisetilskudd'
+                                        }
                                     </BodyShort>
                                 </>
-                            }
+                            )}
                         />
                     </div>
                 )
             })}
-            <Vis hvis={erOppdelt(valgtSoknad, valgtSykmelding)}
-                render={() =>
+            <Vis
+                hvis={erOppdelt(valgtSoknad, valgtSykmelding)}
+                render={() => (
                     <Bjorn nokkel="sykepengesoknad.sykmelding-utdrag.oppdelt.bjorn" />
-                }
+                )}
             />
         </div>
     )

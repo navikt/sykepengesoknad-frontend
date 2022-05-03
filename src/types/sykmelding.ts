@@ -38,7 +38,8 @@ class MedisinskArsak {
     constructor(medisinskArsak: any) {
         this.beskrivelse = medisinskArsak.beskrivelse
         this.arsak = medisinskArsak.arsak.map(
-            (arsak: string) => MedisinskArsakType[arsak as keyof typeof MedisinskArsakType],
+            (arsak: string) =>
+                MedisinskArsakType[arsak as keyof typeof MedisinskArsakType]
         )
     }
 }
@@ -55,7 +56,10 @@ class ArbeidsrelatertArsak {
     constructor(arbeidsrelatertArsak: any) {
         this.beskrivelse = arbeidsrelatertArsak.beskrivelse
         this.arsak = arbeidsrelatertArsak.arsak.map(
-            (arsak: string) => ArbeidsrelatertArsakType[arsak as keyof typeof ArbeidsrelatertArsakType],
+            (arsak: string) =>
+                ArbeidsrelatertArsakType[
+                    arsak as keyof typeof ArbeidsrelatertArsakType
+                ]
         )
     }
 }
@@ -65,8 +69,12 @@ class AktivitetIkkeMulig {
     arbeidsrelatertArsak: ArbeidsrelatertArsak
 
     constructor(aktivitetIkkeMulig: any) {
-        this.medisinskArsak = new MedisinskArsak(aktivitetIkkeMulig.medisinskArsak)
-        this.arbeidsrelatertArsak = new ArbeidsrelatertArsak(aktivitetIkkeMulig.arbeidsrelatertArsak)
+        this.medisinskArsak = new MedisinskArsak(
+            aktivitetIkkeMulig.medisinskArsak
+        )
+        this.arbeidsrelatertArsak = new ArbeidsrelatertArsak(
+            aktivitetIkkeMulig.arbeidsrelatertArsak
+        )
     }
 }
 
@@ -75,7 +83,12 @@ interface Gradert {
     reisetilskudd: boolean
 }
 
-type Periodetype = 'AKTIVITET_IKKE_MULIG' | 'AVVENTENDE' | 'BEHANDLINGSDAGER' | 'GRADERT' | 'REISETILSKUDD';
+type Periodetype =
+    | 'AKTIVITET_IKKE_MULIG'
+    | 'AVVENTENDE'
+    | 'BEHANDLINGSDAGER'
+    | 'GRADERT'
+    | 'REISETILSKUDD'
 
 export class Periode {
     fom: Date
@@ -101,7 +114,7 @@ export class Periode {
 
 // ------ STATUS
 
-export type StatusEvent = 'SENDT' | 'APEN' | 'AVBRUTT' | 'UTGATT' | 'BEKREFTET';
+export type StatusEvent = 'SENDT' | 'APEN' | 'AVBRUTT' | 'UTGATT' | 'BEKREFTET'
 
 interface ArbeidsgiverStatus {
     orgnummer: string
@@ -109,14 +122,19 @@ interface ArbeidsgiverStatus {
     orgNavn: string
 }
 
-type SvarType = 'ARBEIDSSITUASJON' | 'PERIODER' | 'JA_NEI';
+type SvarType = 'ARBEIDSSITUASJON' | 'PERIODER' | 'JA_NEI'
 
 interface Svar {
     svar: string
     svarType: SvarType
 }
 
-type SporsmalShortName = 'ARBEIDSSITUASJON' | 'NY_NARMESTE_LEDER' | 'FRAVAER' | 'PERIODE' | 'FORSIKRING';
+type SporsmalShortName =
+    | 'ARBEIDSSITUASJON'
+    | 'NY_NARMESTE_LEDER'
+    | 'FRAVAER'
+    | 'PERIODE'
+    | 'FORSIKRING'
 
 interface SporsmalOgSvar {
     tekst?: string
@@ -151,7 +169,10 @@ export class Diagnose {
 
     constructor(diagnose: any) {
         this.kode = diagnose.kode
-        this.system = DiagnosekodeSystem[diagnose.system as keyof typeof DiagnosekodeSystem]
+        this.system =
+            DiagnosekodeSystem[
+                diagnose.system as keyof typeof DiagnosekodeSystem
+            ]
         this.tekst = diagnose.tekst
     }
 }
@@ -176,7 +197,8 @@ export class AnnenFraversArsak {
     constructor(annenFraversArsak: any) {
         this.beskrivelse = annenFraversArsak.beskrivelse
         this.grunn = annenFraversArsak.grunn.map(
-            (grunn: string) => AnnenFraverGrunn[grunn as keyof typeof AnnenFraverGrunn],
+            (grunn: string) =>
+                AnnenFraverGrunn[grunn as keyof typeof AnnenFraverGrunn]
         )
     }
 }
@@ -191,7 +213,9 @@ export class MedisinskVurdering {
 
     constructor(medisinskVurdering: any) {
         this.hovedDiagnose = new Diagnose(medisinskVurdering.hovedDiagnose)
-        this.biDiagnoser = medisinskVurdering.biDiagnoser.map((biDiagnose: any) => new Diagnose(biDiagnose))
+        this.biDiagnoser = medisinskVurdering.biDiagnoser.map(
+            (biDiagnose: any) => new Diagnose(biDiagnose)
+        )
         this.svangerskap = medisinskVurdering.svangerskap
         this.yrkesskade = medisinskVurdering.yrkesskade
         this.yrkesskadeDato = new Date(medisinskVurdering.yrkesskadeDato)
@@ -210,8 +234,12 @@ class ErIArbeid {
     constructor(erIArbeid: any) {
         this.egetArbeidPaSikt = erIArbeid.egetArbeidPaSikt
         this.annetArbeidPaSikt = erIArbeid.annetArbeidPaSikt
-        this.arbeidFOM = erIArbeid.arbeidFOM ? new Date(erIArbeid.arbeidFOM) : undefined
-        this.vurderingsdato = erIArbeid.vurderingsdato ? new Date(erIArbeid.vurderingsdato) : undefined
+        this.arbeidFOM = erIArbeid.arbeidFOM
+            ? new Date(erIArbeid.arbeidFOM)
+            : undefined
+        this.vurderingsdato = erIArbeid.vurderingsdato
+            ? new Date(erIArbeid.vurderingsdato)
+            : undefined
     }
 }
 
@@ -222,8 +250,12 @@ class ErIkkeIArbeid {
 
     constructor(erIkkeIArbeid: any) {
         this.arbeidsforPaSikt = erIkkeIArbeid.arbeidsforPaSikt
-        this.arbeidsforFOM = erIkkeIArbeid.arbeidsforFOM ? new Date(erIkkeIArbeid.arbeidsforFOM) : undefined
-        this.vurderingsdato = erIkkeIArbeid.vurderingsdato ? new Date(erIkkeIArbeid.vurderingsdato) : undefined
+        this.arbeidsforFOM = erIkkeIArbeid.arbeidsforFOM
+            ? new Date(erIkkeIArbeid.arbeidsforFOM)
+            : undefined
+        this.vurderingsdato = erIkkeIArbeid.vurderingsdato
+            ? new Date(erIkkeIArbeid.vurderingsdato)
+            : undefined
     }
 }
 
@@ -236,14 +268,18 @@ export class Prognose {
     constructor(prognose: any) {
         this.arbeidsforEtterPeriode = prognose.arbeidsforEtterPeriode
         this.hensynArbeidsplassen = prognose.hensynArbeidsplassen
-        this.erIArbeid = prognose.erIArbeid ? new ErIArbeid(prognose.erIArbeid) : undefined
-        this.erIkkeIArbeid = prognose.erIkkeIArbeid ? new ErIkkeIArbeid(prognose.erIkkeIArbeid) : undefined
+        this.erIArbeid = prognose.erIArbeid
+            ? new ErIArbeid(prognose.erIArbeid)
+            : undefined
+        this.erIkkeIArbeid = prognose.erIkkeIArbeid
+            ? new ErIkkeIArbeid(prognose.erIkkeIArbeid)
+            : undefined
     }
 }
 
 // ------ UTDYPENDE_OPPLYSNINGER
 
-type Restriksjoner = 'SKJERMET_FOR_ARBEIDSGIVER' | 'SKJERMET_FOR_NAV';
+type Restriksjoner = 'SKJERMET_FOR_ARBEIDSGIVER' | 'SKJERMET_FOR_NAV'
 
 export interface UtdypendeOpplysning {
     sporsmal: string
@@ -265,7 +301,9 @@ export class KontaktMedPasient {
     begrunnelseIkkeKontakt?: string
 
     constructor(kontaktMedPasient: any) {
-        this.kontaktDato = kontaktMedPasient.kontaktDato ? new Date(kontaktMedPasient.kontaktDato) : undefined
+        this.kontaktDato = kontaktMedPasient.kontaktDato
+            ? new Date(kontaktMedPasient.kontaktDato)
+            : undefined
         this.begrunnelseIkkeKontakt = kontaktMedPasient.begrunnelseIkkeKontakt
     }
 }
@@ -322,7 +360,10 @@ export class Sykmelding {
         Object.keys(utdypendeOpplysninger).forEach((outerKey) => {
             const opplysning = new Map<string, UtdypendeOpplysning>()
             Object.keys(utdypendeOpplysninger[outerKey]).forEach((innerKey) => {
-                opplysning.set(innerKey, utdypendeOpplysninger[outerKey][innerKey])
+                opplysning.set(
+                    innerKey,
+                    utdypendeOpplysninger[outerKey][innerKey]
+                )
             })
             this.utdypendeOpplysninger.set(outerKey, opplysning)
         })
@@ -334,27 +375,39 @@ export class Sykmelding {
         this.behandlingsutfall = sykmelding.behandlingsutfall
         this.legekontorOrgnummer = sykmelding.legekontorOrgnummer
         this.arbeidsgiver = sykmelding.arbeidsgiver
-        this.sykmeldingsperioder = sykmelding.sykmeldingsperioder.map((periode: any) => new Periode(periode))
-        this.sykmeldingStatus = new SykmeldingStatus(sykmelding.sykmeldingStatus)
+        this.sykmeldingsperioder = sykmelding.sykmeldingsperioder.map(
+            (periode: any) => new Periode(periode)
+        )
+        this.sykmeldingStatus = new SykmeldingStatus(
+            sykmelding.sykmeldingStatus
+        )
         this.medisinskVurdering = sykmelding.medisinskVurdering
             ? new MedisinskVurdering(sykmelding.medisinskVurdering)
             : undefined
         this.skjermesForPasient = sykmelding.skjermesForPasient
-        this.prognose = sykmelding.prognose ? new Prognose(sykmelding.prognose) : undefined
-        this.utdypendeOpplysninger = new Map<string, Map<string, UtdypendeOpplysning>>()
+        this.prognose = sykmelding.prognose
+            ? new Prognose(sykmelding.prognose)
+            : undefined
+        this.utdypendeOpplysninger = new Map<
+            string,
+            Map<string, UtdypendeOpplysning>
+        >()
         this.setUtdypendeOpplysninger(sykmelding.utdypendeOpplysninger)
         this.tiltakArbeidsplassen = sykmelding.tiltakArbeidsplassen
         this.tiltakNAV = sykmelding.tiltakNAV
         this.andreTiltak = sykmelding.andreTiltak
         this.meldingTilNAV = sykmelding.meldingTilNAV
         this.meldingTilArbeidsgiver = sykmelding.meldingTilArbeidsgiver
-        this.kontaktMedPasient = new KontaktMedPasient(sykmelding.kontaktMedPasient)
+        this.kontaktMedPasient = new KontaktMedPasient(
+            sykmelding.kontaktMedPasient
+        )
         this.behandletTidspunkt = new Date(sykmelding.behandletTidspunkt)
         this.behandler = sykmelding.behandler
         this.syketilfelleStartDato = new Date(sykmelding.syketilfelleStartDato)
         this.navnFastlege = sykmelding.navnFastlege
         this.egenmeldt = sykmelding.egenmeldt
         this.papirsykmelding = sykmelding.papirsykmelding
-        this.harRedusertArbeidsgiverperiode = sykmelding.harRedusertArbeidsgiverperiode
+        this.harRedusertArbeidsgiverperiode =
+            sykmelding.harRedusertArbeidsgiverperiode
     }
 }

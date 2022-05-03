@@ -6,19 +6,36 @@ import { tekst } from '../../../../utils/tekster'
 import Kontonummer from '../../kontonummer/kontonummer'
 
 const PerioderUtenOpphold = () => {
-
     return (
         <div className="avsnitt">
             <div className="avsnitt">
-                <Label as="h2" className="arbeidstaker-tittel">{tekst('kvittering.nav-behandler-soknaden')}</Label>
-                <BodyLong spacing as="span">{tekst('kvittering.arbeidstaker.saksbehandlingstid')} </BodyLong>
-                <Link target="_blank" href={tekst('kvittering.arbeidstaker.saksbehandlingstid.lenke.url')}>
-                    <BodyLong spacing as="span">{tekst('kvittering.arbeidstaker.saksbehandlingstid.lenke')}</BodyLong>
-                </Link>.
+                <Label as="h2" className="arbeidstaker-tittel">
+                    {tekst('kvittering.nav-behandler-soknaden')}
+                </Label>
+                <BodyLong spacing as="span">
+                    {tekst('kvittering.arbeidstaker.saksbehandlingstid')}{' '}
+                </BodyLong>
+                <Link
+                    target="_blank"
+                    href={tekst(
+                        'kvittering.arbeidstaker.saksbehandlingstid.lenke.url'
+                    )}
+                >
+                    <BodyLong spacing as="span">
+                        {tekst(
+                            'kvittering.arbeidstaker.saksbehandlingstid.lenke'
+                        )}
+                    </BodyLong>
+                </Link>
+                .
             </div>
             <div className="avsnitt">
-                <Label as="h2" className="arbeidstaker-tittel">{tekst('kvittering.naar-blir-pengene')}</Label>
-                <BodyLong spacing as="span">{parser(tekst('kvittering.arbeidstaker.over16.utbetaling'))} </BodyLong>
+                <Label as="h2" className="arbeidstaker-tittel">
+                    {tekst('kvittering.naar-blir-pengene')}
+                </Label>
+                <BodyLong spacing as="span">
+                    {parser(tekst('kvittering.arbeidstaker.over16.utbetaling'))}{' '}
+                </BodyLong>
             </div>
             <div className="avsnitt">
                 <Kontonummer />

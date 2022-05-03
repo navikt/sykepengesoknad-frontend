@@ -6,16 +6,15 @@ export enum RSSoknadstatus {
     KORRIGERT = 'KORRIGERT',
     AVBRUTT = 'AVBRUTT',
     SLETTET = 'SLETTET',
-    UTGAATT = 'UTGAATT'
+    UTGAATT = 'UTGAATT',
 }
 
-
 export type RSSoknadstatusType =
-    'NY' |
-    'SENDT' |
-    'FREMTIDIG' |
-    'UTKAST_TIL_KORRIGERING' |
-    'KORRIGERT' |
-    'AVBRUTT' |
-    'SLETTET' |
-    'UTGAATT'
+    | 'NY'
+    | 'SENDT'
+    | 'FREMTIDIG'
+    | 'UTKAST_TIL_KORRIGERING'
+    | 'KORRIGERT'
+    | 'AVBRUTT'
+    | 'SLETTET'
+    | 'UTGAATT'

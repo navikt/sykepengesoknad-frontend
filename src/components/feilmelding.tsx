@@ -7,16 +7,17 @@ interface FeilmeldingProps {
     children?: ReactNode
 }
 
-const Feilmelding = (
-    {
-        tittel = 'Beklager, det oppstod en feil',
-        melding = 'Vennligst prøv igjen litt senere.',
-        children
-    }: FeilmeldingProps) => {
+const Feilmelding = ({
+    tittel = 'Beklager, det oppstod en feil',
+    melding = 'Vennligst prøv igjen litt senere.',
+    children,
+}: FeilmeldingProps) => {
     return (
         <div className="panel">
             <div className="hode hode--feil">
-                <Heading size="medium" level="1" className="hode__tittel">{tittel}</Heading>
+                <Heading size="medium" level="1" className="hode__tittel">
+                    {tittel}
+                </Heading>
                 <p className="hode__melding">{children || melding}</p>
             </div>
         </div>

@@ -14,7 +14,7 @@ const innerCls = (aktiv: boolean, ferdig: boolean, disabled: boolean) =>
         'stegindikator__steg-inner--aktiv': aktiv,
         'stegindikator__steg-inner--ferdig': ferdig,
         'stegindikator__steg-inner--disabled': disabled,
-        'stegindikator__steg-inner--interaktiv': !aktiv
+        'stegindikator__steg-inner--interaktiv': !aktiv,
     })
 
 export interface StegProps {
@@ -34,29 +34,42 @@ const Steg = ({ label, index }: StegProps) => {
     const history = useHistory()
 
     function goTo(idx: number) {
-        logEvent('navigere', { fra: valgtSoknad!.sporsmal[aktivtSteg - 1].tag, til: valgtSoknad!.sporsmal[idx - 1].tag })
-        history.push(pathUtenSteg(history.location.pathname) + SEPARATOR + (idx))
+        logEvent('navigere', {
+            fra: valgtSoknad!.sporsmal[aktivtSteg - 1].tag,
+            til: valgtSoknad!.sporsmal[idx - 1].tag,
+        })
+        history.push(pathUtenSteg(history.location.pathname) + SEPARATOR + idx)
     }
 
     return (
-        <li className="stegindikator__steg" aria-current={(erAktiv) ? 'step' : undefined}>
-            <Vis hvis={aktivtSteg >= index + 2}
-                render={() =>
-                    <button className={innerCls(erAktiv, erPassert, disabled)}
-                        title={label} disabled={disabled}
+        <li
+            className="stegindikator__steg"
+            aria-current={erAktiv ? 'step' : undefined}
+        >
+            <Vis
+                hvis={aktivtSteg >= index + 2}
+                render={() => (
+                    <button
+                        className={innerCls(erAktiv, erPassert, disabled)}
+                        title={label}
+                        disabled={disabled}
                         onClick={() => goTo(num)}
                     >
                         <div className="stegindikator__steg-num">{num}</div>
                     </button>
-                }
+                )}
             />
 
-            <Vis hvis={aktivtSteg < index + 2}
-                render={() =>
-                    <div className={innerCls(erAktiv, erPassert, disabled)} title={label}>
+            <Vis
+                hvis={aktivtSteg < index + 2}
+                render={() => (
+                    <div
+                        className={innerCls(erAktiv, erPassert, disabled)}
+                        title={label}
+                    >
                         <div className="stegindikator__steg-num">{num}</div>
                     </div>
-                }
+                )}
             />
         </li>
     )

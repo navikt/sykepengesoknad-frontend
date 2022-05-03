@@ -1,12 +1,7 @@
 export enum RSVisningskriterie {
     NEI = 'NEI',
     JA = 'JA',
-    CHECKED = 'CHECKED'
+    CHECKED = 'CHECKED',
 }
 
-
-export type RSVisningskriterieType =
-    'NEI' |
-    'JA' |
-    'CHECKED'
-
+export type RSVisningskriterieType = 'NEI' | 'JA' | 'CHECKED'

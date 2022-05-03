@@ -10,7 +10,9 @@ interface UkjentSporsmalProps {
 const UkjentSporsmal = ({ sporsmal }: UkjentSporsmalProps) => {
     return (
         <>
-            <Label as="h3" className="skjema__sporsmal">Ukjent svartype: <code>{sporsmal.svartype}</code></Label>
+            <Label as="h3" className="skjema__sporsmal">
+                Ukjent svartype: <code>{sporsmal.svartype}</code>
+            </Label>
             <pre>{JSON.stringify(sporsmal, null, 2)}</pre>
         </>
     )

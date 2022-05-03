@@ -38,9 +38,13 @@ const DagerKomp = ({ sporsmal }: SpmProps) => {
         if (enmnd && etaar) {
             return `${maaneder[min.month()]} ${min.year()}`
         } else if (!enmnd && etaar) {
-            return `${maaneder[min.month()]} - ${maaneder[max.month()]} ${max.year()}`
+            return `${maaneder[min.month()]} - ${
+                maaneder[max.month()]
+            } ${max.year()}`
         } else if (!enmnd && !etaar) {
-            return `${maaneder[min.month()]} ${min.year()} - ${maaneder[max.month()]} ${max.year()}`
+            return `${maaneder[min.month()]} ${min.year()} - ${
+                maaneder[max.month()]
+            } ${max.year()}`
         }
     }
 
@@ -50,9 +54,17 @@ const DagerKomp = ({ sporsmal }: SpmProps) => {
     const sisteDagIKalender = max.endOf('isoWeek')
 
     const alleUker: KalenderUke[] = []
-    for (let uke = forsteDagIKalender; uke.endOf('isoWeek') <= sisteDagIKalender; uke = uke.add(1, 'week')) {
+    for (
+        let uke = forsteDagIKalender;
+        uke.endOf('isoWeek') <= sisteDagIKalender;
+        uke = uke.add(1, 'week')
+    ) {
         const dager: KalenderDag[] = []
-        for(let dag = uke.startOf('isoWeek'); dag <= uke.endOf('isoWeek'); dag = dag.add(1, 'day')) {
+        for (
+            let dag = uke.startOf('isoWeek');
+            dag <= uke.endOf('isoWeek');
+            dag = dag.add(1, 'day')
+        ) {
             if (dag < min) {
                 dager.push({ dayjs: dag, tid: 'foran' })
             } else if (dag > max) {
@@ -63,7 +75,7 @@ const DagerKomp = ({ sporsmal }: SpmProps) => {
         }
         alleUker.push({
             ukenr: uke.isoWeek(),
-            dager: dager
+            dager: dager,
         })
     }
 
@@ -87,11 +99,21 @@ const DagerKomp = ({ sporsmal }: SpmProps) => {
         if (dag.tid !== 'foran' && dag.tid !== 'etter') {
             return (
                 <>
-                    <input type="checkbox"
+                    <input
+                        type="checkbox"
                         id={`${sporsmal.id}_${ukeidx}_${idx}`}
                         value={dag.dayjs.format('YYYY-MM-DD')}
-                        {...register(sporsmal.id, { required: feilmelding.global })}
-                        className={'checkboks' + (watchDager?.includes(dag.dayjs.format('YYYY-MM-DD')) ? ' checked' : '')}
+                        {...register(sporsmal.id, {
+                            required: feilmelding.global,
+                        })}
+                        className={
+                            'checkboks' +
+                            (watchDager?.includes(
+                                dag.dayjs.format('YYYY-MM-DD')
+                            )
+                                ? ' checked'
+                                : '')
+                        }
                     />
                     <label htmlFor={`${sporsmal.id}_${ukeidx}_${idx}`}>
                         {dag.dayjs.format('DD')}
@@ -107,8 +129,10 @@ const DagerKomp = ({ sporsmal }: SpmProps) => {
         <>
             <SporsmalstekstH3 sporsmal={sporsmal} />
 
-            <div className="skjemaelement skjema__dager" tabIndex={-1} >
-                <BodyShort as="h4" className="kalender__tittel">{kalTittel()}</BodyShort>
+            <div className="skjemaelement skjema__dager" tabIndex={-1}>
+                <BodyShort as="h4" className="kalender__tittel">
+                    {kalTittel()}
+                </BodyShort>
                 <BodyShort as="div" className="ukedager">
                     <span>uke</span>
                     <span>Man</span>
@@ -126,9 +150,13 @@ const DagerKomp = ({ sporsmal }: SpmProps) => {
                             <div className="ukenr">{uke.ukenr}</div>
 
                             {uke.dager.map((dag, idx) => {
-                                const sunday = dag.dayjs.isoWeekday() === 7 ? 'sun' : ''
+                                const sunday =
+                                    dag.dayjs.isoWeekday() === 7 ? 'sun' : ''
                                 return (
-                                    <div className={`kalenderdag ${dag.tid} ${sunday}`} key={idx}>
+                                    <div
+                                        className={`kalenderdag ${dag.tid} ${sunday}`}
+                                        key={idx}
+                                    >
                                         {kalenderdag(dag, uke.ukenr, idx)}
                                     </div>
                                 )
@@ -140,11 +168,22 @@ const DagerKomp = ({ sporsmal }: SpmProps) => {
                 <FeilLokal sporsmal={sporsmal} />
 
                 <BodyShort className="kalendervalg">
-                    <button type="button" className="lenkeknapp velgalle" onClick={velgAlleUkedager}>
+                    <button
+                        type="button"
+                        className="lenkeknapp velgalle"
+                        onClick={velgAlleUkedager}
+                    >
                         {tekst('sporsmal.egen-bil.kalender.ukedager')}
                     </button>
-                    <button type="button" className="lenkeknapp fjernalle" onClick={fjernAlle}>
-                        <img src="/syk/sykepengesoknad/static/slettknapp.svg" alt="" />
+                    <button
+                        type="button"
+                        className="lenkeknapp fjernalle"
+                        onClick={fjernAlle}
+                    >
+                        <img
+                            src="/syk/sykepengesoknad/static/slettknapp.svg"
+                            alt=""
+                        />
                         {tekst('sporsmal.egen-bil.kalender.fjern')}
                     </button>
                 </BodyShort>

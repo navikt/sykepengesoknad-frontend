@@ -7,8 +7,9 @@ import { fjernIndexFraTag } from '../sporsmal-utils'
 import Bjorn from './bjorn'
 
 const BjornOverSporsmalstekst = ({ sporsmal }: SpmProps) => {
-
-    const bjornTekst= `soknad.bjorn.${fjernIndexFraTag(sporsmal.tag).toLowerCase()}`
+    const bjornTekst = `soknad.bjorn.${fjernIndexFraTag(
+        sporsmal.tag
+    ).toLowerCase()}`
 
     const bjornVeileder = (tag: TagTyper) =>
         tag === TagTyper.BRUKTE_REISETILSKUDDET ||
@@ -17,10 +18,9 @@ const BjornOverSporsmalstekst = ({ sporsmal }: SpmProps) => {
 
     return (
         <>
-            <Vis hvis={bjornVeileder(sporsmal.tag)}
-                render={() =>
-                    <Bjorn className="blokk-m" nokkel={ bjornTekst } />
-                }
+            <Vis
+                hvis={bjornVeileder(sporsmal.tag)}
+                render={() => <Bjorn className="blokk-m" nokkel={bjornTekst} />}
             />
         </>
     )

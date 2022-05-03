@@ -1,178 +1,177 @@
 name: Push
 on: push
 env:
-  APP: sykepengesok
-  branchname: ${{ github.ref_name }}
+    APP: sykepengesok
+    branchname: ${{ github.ref_name }}
 jobs:
-  build-and-publish:
-    name: Bygg, test og push Docker image
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v1
-      - name: Generer versjon og image navn
-        run: |
-          TIME=$(TZ="Europe/Oslo" date +%Y.%m.%d-%H.%M)
-          COMMIT=$(git rev-parse --short=8 HEAD)
-          VERSION=$TIME-$COMMIT
-          echo "IMAGE=docker.pkg.github.com/${GITHUB_REPOSITORY}/$APP:$VERSION" >> $GITHUB_ENV
-          echo "VERSION=$VERSION" >> $GITHUB_ENV
-      - run: echo $VERSION > VERSION.txt
-      - name: Last opp VERSION til neste job
-        uses: actions/upload-artifact@v1
-        with:
-          name: VERSION.txt
-          path: VERSION.txt
-      - name: Install npm dependencies
-        run: npm ci
-      - name: Run lint
-        run: npm run lint
-      - name: Run tests
-        run: npm run test:ci
-      - name: Build application
-        run: npm run build
-      - name: Docker login
-        env:
-            GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        run: docker login docker.pkg.github.com -u ${GITHUB_REPOSITORY} -p ${GITHUB_TOKEN}
-      - name: Bygg og push Docker image
-        run: |
-          docker build . -t ${IMAGE}
-          docker push ${IMAGE}
+    build-and-publish:
+        name: Bygg, test og push Docker image
+        runs-on: ubuntu-latest
+        steps:
+            - name: Checkout code
+              uses: actions/checkout@v1
+            - name: Generer versjon og image navn
+              run: |
+                  TIME=$(TZ="Europe/Oslo" date +%Y.%m.%d-%H.%M)
+                  COMMIT=$(git rev-parse --short=8 HEAD)
+                  VERSION=$TIME-$COMMIT
+                  echo "IMAGE=docker.pkg.github.com/${GITHUB_REPOSITORY}/$APP:$VERSION" >> $GITHUB_ENV
+                  echo "VERSION=$VERSION" >> $GITHUB_ENV
+            - run: echo $VERSION > VERSION.txt
+            - name: Last opp VERSION til neste job
+              uses: actions/upload-artifact@v1
+              with:
+                  name: VERSION.txt
+                  path: VERSION.txt
+            - name: Install npm dependencies
+              run: npm ci
+            - name: Run prettier
+              run: npm run prettier:check
+            - name: Run lint
+              run: npm run lint
+            - name: Run tests
+              run: npm run test:ci
+            - name: Build application
+              run: npm run build
+            - name: Docker login
+              env:
+                  GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+              run: docker login docker.pkg.github.com -u ${GITHUB_REPOSITORY} -p ${GITHUB_TOKEN}
+            - name: Bygg og push Docker image
+              run: |
+                  docker build . -t ${IMAGE}
+                  docker push ${IMAGE}
 
-  integrasjonstest-install:
-    name: Integrasjonstest install
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v2
-      - name: Install cypress & npm
-        uses: cypress-io/github-action@v2
-        with:
-          runTests: false
+    integrasjonstest-install:
+        name: Integrasjonstest install
+        runs-on: ubuntu-latest
+        steps:
+            - name: Checkout code
+              uses: actions/checkout@v2
+            - name: Install cypress & npm
+              uses: cypress-io/github-action@v2
+              with:
+                  runTests: false
 
-  integrasjonstest-run:
-    name: Integrasjonstest run
-    needs: integrasjonstest-install
-    runs-on: ubuntu-latest
-    strategy:
-      fail-fast: false
-      matrix:
-        # run copies of the current job in parallel
-        containers: [ 0, 1, 2, 3 ]
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v2
-      - name: Install
-        run: npm ci
-      - name: Build server
-        run: npm run build
-      - name: Setup kernel for react native, increase watchers
-        run: echo fs.inotify.max_user_watches=524288 | sudo tee -a /etc/sysctl.conf && sudo sysctl -p
-      # download cached ~/.npm and ~/.cache/Cypress
-      # and install node_modules and run tests
-      - name: Run cypress
-        uses: cypress-io/github-action@v2
-        with:
-          start: npm run start-ingen-dekorator
-          wait-on: http://localhost:8080/syk/sykepengesoknad/api/isAlive
-          spec: cypress/integration/run-${{ matrix.containers }}/**
-      - uses: actions/upload-artifact@v2
-        if: ${{ always() }}
-        with:
-          name: cypress-screenshots
-          path: cypress/screenshots
+    integrasjonstest-run:
+        name: Integrasjonstest run
+        needs: integrasjonstest-install
+        runs-on: ubuntu-latest
+        strategy:
+            fail-fast: false
+            matrix:
+                # run copies of the current job in parallel
+                containers: [0, 1, 2, 3]
+        steps:
+            - name: Checkout code
+              uses: actions/checkout@v2
+            - name: Install
+              run: npm ci
+            - name: Build server
+              run: npm run build
+            - name: Setup kernel for react native, increase watchers
+              run: echo fs.inotify.max_user_watches=524288 | sudo tee -a /etc/sysctl.conf && sudo sysctl -p
+            # download cached ~/.npm and ~/.cache/Cypress
+            # and install node_modules and run tests
+            - name: Run cypress
+              uses: cypress-io/github-action@v2
+              with:
+                  start: npm run start-ingen-dekorator
+                  wait-on: http://localhost:8080/syk/sykepengesoknad/api/isAlive
+                  spec: cypress/integration/run-${{ matrix.containers }}/**
+            - uses: actions/upload-artifact@v2
+              if: ${{ always() }}
+              with:
+                  name: cypress-screenshots
+                  path: cypress/screenshots
 
+    deploy-to-q1-dev-gcp:
+        if: github.ref == 'refs/heads/master' || startsWith(github.ref, 'refs/heads/dev-')
+        name: Deploy to q1 dev-gcp
+        needs: [build-and-publish, integrasjonstest-run]
+        runs-on: ubuntu-latest
+        steps:
+            - uses: actions/checkout@v1
+            - uses: actions/download-artifact@v1
+              with:
+                  name: VERSION.txt
+                  path: .
+            - run: echo "VERSION=`cat VERSION.txt`" >> $GITHUB_ENV
+            - run: echo "IMAGE=docker.pkg.github.com/${GITHUB_REPOSITORY}/$APP:$VERSION" >> $GITHUB_ENV
+            - name: Deploy to dev-gcp
+              uses: nais/deploy/actions/deploy@v1
+              env:
+                  APIKEY: ${{ secrets.NAIS_DEPLOY_APIKEY }}
+                  CLUSTER: dev-gcp
+                  RESOURCE: nais-dev-gcp.yaml
 
+    deploy-to-prod-gcp:
+        if: github.ref == 'refs/heads/master'
+        name: Deploy to prod-gcp
+        needs: [build-and-publish, integrasjonstest-run]
+        runs-on: ubuntu-latest
+        steps:
+            - uses: actions/checkout@v1
+            - uses: actions/download-artifact@v1
+              with:
+                  name: VERSION.txt
+                  path: .
+            - run: echo "VERSION=`cat VERSION.txt`" >> $GITHUB_ENV
+            - run: echo "IMAGE=docker.pkg.github.com/${GITHUB_REPOSITORY}/$APP:$VERSION" >> $GITHUB_ENV
+            - name: Deploy to prod-gcp
+              uses: nais/deploy/actions/deploy@v1
+              env:
+                  APIKEY: ${{ secrets.NAIS_DEPLOY_APIKEY }}
+                  CLUSTER: prod-gcp
+                  RESOURCE: nais-prod-gcp.yaml
 
-  deploy-to-q1-dev-gcp:
-    if: github.ref == 'refs/heads/master' || startsWith(github.ref, 'refs/heads/dev-')
-    name: Deploy to q1 dev-gcp
-    needs: [build-and-publish, integrasjonstest-run]
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v1
-      - uses: actions/download-artifact@v1
-        with:
-          name: VERSION.txt
-          path: .
-      - run: echo "VERSION=`cat VERSION.txt`" >> $GITHUB_ENV
-      - run: echo "IMAGE=docker.pkg.github.com/${GITHUB_REPOSITORY}/$APP:$VERSION" >> $GITHUB_ENV
-      - name: Deploy to dev-gcp
-        uses: nais/deploy/actions/deploy@v1
-        env:
-          APIKEY: ${{ secrets.NAIS_DEPLOY_APIKEY }}
-          CLUSTER: dev-gcp
-          RESOURCE: nais-dev-gcp.yaml
+    deploy-to-labs-gcp:
+        if: github.ref == 'refs/heads/master'
+        name: Deploy to labs-gcp (Demo)
+        needs: [build-and-publish, integrasjonstest-run]
+        runs-on: ubuntu-latest
+        steps:
+            - uses: actions/checkout@v1
+            - uses: actions/download-artifact@v1
+              with:
+                  name: VERSION.txt
+                  path: .
+            - run: echo "VERSION=`cat VERSION.txt`" >> $GITHUB_ENV
+            - run: echo "IMAGE=docker.pkg.github.com/${GITHUB_REPOSITORY}/$APP:$VERSION" >> $GITHUB_ENV
+            - name: Deploy to labs-gcp
+              uses: nais/deploy/actions/deploy@v1
+              env:
+                  APIKEY: ${{ secrets.NAIS_DEPLOY_APIKEY }}
+                  CLUSTER: labs-gcp
+                  RESOURCE: nais-labs.yaml
 
-  deploy-to-prod-gcp:
-    if: github.ref == 'refs/heads/master'
-    name: Deploy to prod-gcp
-    needs: [build-and-publish, integrasjonstest-run]
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v1
-      - uses: actions/download-artifact@v1
-        with:
-          name: VERSION.txt
-          path: .
-      - run: echo "VERSION=`cat VERSION.txt`" >> $GITHUB_ENV
-      - run: echo "IMAGE=docker.pkg.github.com/${GITHUB_REPOSITORY}/$APP:$VERSION" >> $GITHUB_ENV
-      - name: Deploy to prod-gcp
-        uses: nais/deploy/actions/deploy@v1
-        env:
-          APIKEY: ${{ secrets.NAIS_DEPLOY_APIKEY }}
-          CLUSTER: prod-gcp
-          RESOURCE: nais-prod-gcp.yaml
-
-
-  deploy-to-labs-gcp:
-    if: github.ref == 'refs/heads/master'
-    name: Deploy to labs-gcp (Demo)
-    needs: [build-and-publish, integrasjonstest-run]
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v1
-      - uses: actions/download-artifact@v1
-        with:
-          name: VERSION.txt
-          path: .
-      - run: echo "VERSION=`cat VERSION.txt`" >> $GITHUB_ENV
-      - run: echo "IMAGE=docker.pkg.github.com/${GITHUB_REPOSITORY}/$APP:$VERSION" >> $GITHUB_ENV
-      - name: Deploy to labs-gcp
-        uses: nais/deploy/actions/deploy@v1
-        env:
-          APIKEY: ${{ secrets.NAIS_DEPLOY_APIKEY }}
-          CLUSTER: labs-gcp
-          RESOURCE: nais-labs.yaml
-
-  deploy-branch-to-labs-gcp:
-    if: startsWith(github.ref, 'refs/heads/labs-')
-    name: Deploy branch to labs-gcp (Demo)
-    needs: build-and-publish
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v1
-      - uses: actions/download-artifact@v1
-        with:
-          name: VERSION.txt
-          path: .
-      - run: echo "VERSION=`cat VERSION.txt`" >> $GITHUB_ENV
-      - run: echo "IMAGE=docker.pkg.github.com/${GITHUB_REPOSITORY}/$APP:$VERSION" >> $GITHUB_ENV
-      - name: Deploy to labs-gcp
-        uses: nais/deploy/actions/deploy@v1
-        env:
-          APIKEY: ${{ secrets.NAIS_DEPLOY_APIKEY }}
-          CLUSTER: labs-gcp
-          RESOURCE: nais-labs-branch.yaml
-          VAR: appname=${{ env.branchname }},replicas=1,branchState=alive
-      - name: Slack Notification
-        uses: rtCamp/action-slack-notify@v2
-        env:
-          SLACK_CHANNEL: flex-labs-deploy
-          SLACK_COLOR: ${{ job.status }} # or a specific color like 'good' or '#ff00ff'
-          SLACK_MESSAGE: 'Ny versjon av sykepengesøknad ute i labs :rocket: https://sykepengesoknad-${{ env.branchname }}.labs.nais.io/syk/sykepengesoknad'
-          SLACK_TITLE: ${{ env.branchname }}
-          SLACK_USERNAME: Labs deploy
-          SLACK_ICON: ":lab_coat:"
-          SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK }}
+    deploy-branch-to-labs-gcp:
+        if: startsWith(github.ref, 'refs/heads/labs-')
+        name: Deploy branch to labs-gcp (Demo)
+        needs: build-and-publish
+        runs-on: ubuntu-latest
+        steps:
+            - uses: actions/checkout@v1
+            - uses: actions/download-artifact@v1
+              with:
+                  name: VERSION.txt
+                  path: .
+            - run: echo "VERSION=`cat VERSION.txt`" >> $GITHUB_ENV
+            - run: echo "IMAGE=docker.pkg.github.com/${GITHUB_REPOSITORY}/$APP:$VERSION" >> $GITHUB_ENV
+            - name: Deploy to labs-gcp
+              uses: nais/deploy/actions/deploy@v1
+              env:
+                  APIKEY: ${{ secrets.NAIS_DEPLOY_APIKEY }}
+                  CLUSTER: labs-gcp
+                  RESOURCE: nais-labs-branch.yaml
+                  VAR: appname=${{ env.branchname }},replicas=1,branchState=alive
+            - name: Slack Notification
+              uses: rtCamp/action-slack-notify@v2
+              env:
+                  SLACK_CHANNEL: flex-labs-deploy
+                  SLACK_COLOR: ${{ job.status }} # or a specific color like 'good' or '#ff00ff'
+                  SLACK_MESSAGE: 'Ny versjon av sykepengesøknad ute i labs :rocket: https://sykepengesoknad-${{ env.branchname }}.labs.nais.io/syk/sykepengesoknad'
+                  SLACK_TITLE: ${{ env.branchname }}
+                  SLACK_USERNAME: Labs deploy
+                  SLACK_ICON: ':lab_coat:'
+                  SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK }}

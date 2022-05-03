@@ -4,7 +4,7 @@ const getFrontendLogger = (): pino.Logger =>
     pino({
         browser: {
             transmit: {
-                send: async(level, logEvent) => {
+                send: async (level, logEvent) => {
                     try {
                         await fetch('/syk/sykepengesoknad/api/logger', {
                             method: 'POST',

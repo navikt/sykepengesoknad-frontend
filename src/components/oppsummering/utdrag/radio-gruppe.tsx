@@ -11,18 +11,29 @@ import UndersporsmalSum from './undersporsmal-sum'
 
 const RadioGruppe = ({ sporsmal }: OppsummeringProps) => {
     const besvartUndersporsmal: Sporsmal = sporsmal.undersporsmal.find((s) => {
-        return s.svarliste.svar.length > 0 && s.svarliste.svar[0].verdi === SvarEnums.CHECKED
+        return (
+            s.svarliste.svar.length > 0 &&
+            s.svarliste.svar[0].verdi === SvarEnums.CHECKED
+        )
     })!
     return (
-        <Vis hvis={besvartUndersporsmal}
-            render={() =>
+        <Vis
+            hvis={besvartUndersporsmal}
+            render={() => (
                 <div className="oppsummering__sporsmal">
-                    <Label as="h3" className="oppsummering__overskrift">{sporsmal.sporsmalstekst}</Label>
-                    {sporsmal.svartype === RSSvartype.RADIO_GRUPPE &&
-                    <Avkrysset tekst={besvartUndersporsmal.sporsmalstekst} />}
-                    <UndersporsmalSum sporsmalsliste={besvartUndersporsmal.undersporsmal} />
+                    <Label as="h3" className="oppsummering__overskrift">
+                        {sporsmal.sporsmalstekst}
+                    </Label>
+                    {sporsmal.svartype === RSSvartype.RADIO_GRUPPE && (
+                        <Avkrysset
+                            tekst={besvartUndersporsmal.sporsmalstekst}
+                        />
+                    )}
+                    <UndersporsmalSum
+                        sporsmalsliste={besvartUndersporsmal.undersporsmal}
+                    />
                 </div>
-            }
+            )}
         />
     )
 }

@@ -60,7 +60,8 @@
             }
         }
 
-        label, span.label {
+        label,
+        span.label {
             display: inline-block;
             min-width: 100%;
             padding: 0.9rem 0;
@@ -71,15 +72,18 @@
         }
 
         &.sun {
-            label, span.label {
+            label,
+            span.label {
                 color: @navds-global-color-red-500;
             }
         }
 
-        &.foran, &.etter {
+        &.foran,
+        &.etter {
             background-color: @navds-global-color-gray-100;
 
-            label, span.label {
+            label,
+            span.label {
                 color: @navds-global-color-gray-600;
                 font-weight: normal;
             }
@@ -98,7 +102,8 @@
         justify-content: space-around;
         margin: 2rem 0 3rem;
 
-        .velgalle, .fjernalle {
+        .velgalle,
+        .fjernalle {
             &:focus {
                 box-shadow: none;
                 background-color: transparent;
@@ -129,7 +134,10 @@
     .skjema__dager {
         width: @ukebreddeDesktop;
 
-        .tomdag, .ukenr, .kalenderdag, .ukedager span {
+        .tomdag,
+        .ukenr,
+        .kalenderdag,
+        .ukedager span {
             width: @dagbreddeDesktop;
         }
     }

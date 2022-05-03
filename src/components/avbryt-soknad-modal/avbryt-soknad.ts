@@ -19,32 +19,51 @@ interface AvbrytSoknadReq {
     setFeilmeldingTekst: React.Dispatch<React.SetStateAction<string>>
 }
 
-export async function avbrytSoknad({ valgtSoknad, setSoknader, soknader, setValgtSoknad, history, setFeilmeldingTekst }: AvbrytSoknadReq) {
-    const res = await fetcher(flexGatewayRoot() + `/syfosoknad/api/soknader/${valgtSoknad!.id}/avbryt`, {
-        method: 'POST',
-        credentials: 'include',
-    })
+export async function avbrytSoknad({
+    valgtSoknad,
+    setSoknader,
+    soknader,
+    setValgtSoknad,
+    history,
+    setFeilmeldingTekst,
+}: AvbrytSoknadReq) {
+    const res = await fetcher(
+        flexGatewayRoot() +
+            `/syfosoknad/api/soknader/${valgtSoknad!.id}/avbryt`,
+        {
+            method: 'POST',
+            credentials: 'include',
+        }
+    )
     const status = res.status
     if (redirectTilLoginHvis401(res)) {
         return
-    }
-    else if (status === 200) {
-        if (valgtSoknad.soknadstype === RSSoknadstype.OPPHOLD_UTLAND || valgtSoknad.status === RSSoknadstatus.UTKAST_TIL_KORRIGERING) {
-            setSoknader(soknader.filter(s => s.id !== valgtSoknad.id))
+    } else if (status === 200) {
+        if (
+            valgtSoknad.soknadstype === RSSoknadstype.OPPHOLD_UTLAND ||
+            valgtSoknad.status === RSSoknadstatus.UTKAST_TIL_KORRIGERING
+        ) {
+            setSoknader(soknader.filter((s) => s.id !== valgtSoknad.id))
             setValgtSoknad(undefined)
             history.push('/')
         } else {
-            const nySoknad = { ...valgtSoknad, status: RSSoknadstatus.AVBRUTT, avbruttDato: new Date() }
-            setSoknader(soknader.map(s => s.id === valgtSoknad!.id ? nySoknad : s) as any)
+            const nySoknad = {
+                ...valgtSoknad,
+                status: RSSoknadstatus.AVBRUTT,
+                avbruttDato: new Date(),
+            }
+            setSoknader(
+                soknader.map((s) =>
+                    s.id === valgtSoknad!.id ? nySoknad : s
+                ) as any
+            )
             setValgtSoknad(nySoknad)
             history.push(`/soknader/${valgtSoknad!.id}/1`)
         }
-
 
         setFeilmeldingTekst('')
     } else {
         logger.error('Feil ved AVBYTING av søknad', res)
         setFeilmeldingTekst(tekst('avbryt.feilet'))
     }
-
 }

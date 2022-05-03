@@ -13,7 +13,7 @@ export enum Mottaker {
 
 const KvitteringStatus = () => {
     const { valgtSoknad } = useAppStore()
-    const [ tilNavDato, setTilNavDato ] = useState<string>()
+    const [tilNavDato, setTilNavDato] = useState<string>()
 
     useEffect(() => {
         opprettDatoer()
@@ -29,17 +29,19 @@ const KvitteringStatus = () => {
     }
 
     return (
-        <Vis hvis={valgtSoknad?.sendtTilNAVDato}
-            render={() =>
+        <Vis
+            hvis={valgtSoknad?.sendtTilNAVDato}
+            render={() => (
                 <Alert variant="success">
                     <Heading size="small" level="2">
-                        {tekst('kvittering.soknaden-er-sendt-til')} {Mottaker.NAV}
+                        {tekst('kvittering.soknaden-er-sendt-til')}{' '}
+                        {Mottaker.NAV}
                     </Heading>
                     <BodyShort>
                         {tekst('kvittering.mottatt')}: {tilNavDato}
                     </BodyShort>
                 </Alert>
-            }
+            )}
         />
     )
 }

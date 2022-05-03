@@ -11,17 +11,20 @@ interface FeilProps {
 }
 
 const FeilLokal = ({ sporsmal }: FeilProps) => {
-    const { formState: { errors } } = useFormContext()
+    const {
+        formState: { errors },
+    } = useFormContext()
     const feilmelding = hentFeilmelding(sporsmal, errors[sporsmal.id])
 
     return (
         <div role="alert" aria-live="assertive">
-            <Vis hvis={errors[sporsmal.id]}
-                render={() =>
+            <Vis
+                hvis={errors[sporsmal.id]}
+                render={() => (
                     <BodyShort as="span" className="skjemaelement__feilmelding">
                         {feilmelding.lokal}
                     </BodyShort>
-                }
+                )}
             />
         </div>
     )

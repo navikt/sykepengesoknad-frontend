@@ -10,32 +10,34 @@ import { useAmplitudeInstance } from '../amplitude/amplitude'
 
 const AvsluttOgFortsettSenere = () => {
     const { logEvent } = useAmplitudeInstance()
-    const [ aapen, setAapen ] = useState<boolean>(false)
+    const [aapen, setAapen] = useState<boolean>(false)
     const { stegId } = useParams<RouteParams>()
     const { valgtSoknad } = useAppStore()
 
     return (
         <>
-            <Button variant="tertiary"
-                onClick={
-                    (e) => {
-                        logEvent('popup åpnet', {
-                            'component': tekst('avslutt.popup.tittel'),
-                            'soknadstype': valgtSoknad?.soknadstype,
-                            'steg': stegId
-                        })
-                        setAapen(true)
-                        e.preventDefault()
-                    }}>
+            <Button
+                variant="tertiary"
+                onClick={(e) => {
+                    logEvent('popup åpnet', {
+                        component: tekst('avslutt.popup.tittel'),
+                        soknadstype: valgtSoknad?.soknadstype,
+                        steg: stegId,
+                    })
+                    setAapen(true)
+                    e.preventDefault()
+                }}
+            >
                 {tekst('avslutt.popup.tittel')}
             </Button>
-            <Modal className="modal__avslutt_fortsett_popup"
+            <Modal
+                className="modal__avslutt_fortsett_popup"
                 onClose={() => {
                     setAapen(false)
                     logEvent('popup lukket', {
-                        'component': tekst('avslutt.popup.tittel'),
-                        'soknadstype': valgtSoknad?.soknadstype,
-                        'steg': stegId
+                        component: tekst('avslutt.popup.tittel'),
+                        soknadstype: valgtSoknad?.soknadstype,
+                        steg: stegId,
                     })
                 }}
                 open={aapen}
@@ -46,33 +48,37 @@ const AvsluttOgFortsettSenere = () => {
                     </Heading>
                     <BodyShort>{tekst('avslutt.popup.innhold')}</BodyShort>
                     <BodyShort>{tekst('avslutt.popup.sporsmal')}</BodyShort>
-                    <Button variant="primary" className="midtstilt-knapp" onClick={
-                        () => {
+                    <Button
+                        variant="primary"
+                        className="midtstilt-knapp"
+                        onClick={() => {
                             logEvent('knapp klikket', {
-                                'tekst': tekst('avslutt.popup.ja'),
-                                'soknadstype': valgtSoknad?.soknadstype,
-                                'component': tekst('avslutt.popup.tittel'),
-                                'steg': stegId
+                                tekst: tekst('avslutt.popup.ja'),
+                                soknadstype: valgtSoknad?.soknadstype,
+                                component: tekst('avslutt.popup.tittel'),
+                                steg: stegId,
                             })
                             // Må sikre at amplitude får logget ferdig
                             window.setTimeout(() => {
                                 window.location.href = dittNavUrl()
                             }, 200)
-
-                        }
-                    }>
+                        }}
+                    >
                         {tekst('avslutt.popup.ja')}
                     </Button>
-                    <Button variant="secondary" className="midtstilt-knapp"
+                    <Button
+                        variant="secondary"
+                        className="midtstilt-knapp"
                         onClick={() => {
                             setAapen(false)
                             logEvent('knapp klikket', {
-                                'tekst': tekst('avslutt.popup.nei'),
-                                'soknadstype': valgtSoknad?.soknadstype,
-                                'component': tekst('avslutt.popup.tittel'),
-                                'steg': stegId
+                                tekst: tekst('avslutt.popup.nei'),
+                                soknadstype: valgtSoknad?.soknadstype,
+                                component: tekst('avslutt.popup.tittel'),
+                                steg: stegId,
                             })
-                        }}>
+                        }}
+                    >
                         {tekst('avslutt.popup.nei')}
                     </Button>
                 </Modal.Content>

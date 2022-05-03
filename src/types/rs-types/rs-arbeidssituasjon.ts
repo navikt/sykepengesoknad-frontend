@@ -6,5 +6,9 @@ export enum RSArbeidssituasjon {
     ANNET = 'ANNET',
 }
 
-export type RSArbeidssituasjonType = 'NAERINGSDRIVENDE' | 'FRILANSER' | 'ARBEIDSTAKER' | 'ARBEIDSLEDIG' | 'ANNET'
-
+export type RSArbeidssituasjonType =
+    | 'NAERINGSDRIVENDE'
+    | 'FRILANSER'
+    | 'ARBEIDSTAKER'
+    | 'ARBEIDSLEDIG'
+    | 'ANNET'

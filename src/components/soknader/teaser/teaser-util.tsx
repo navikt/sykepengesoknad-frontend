@@ -13,8 +13,12 @@ import { getRiktigDato, getSendtTilSuffix } from '../../../utils/soknad-utils'
 import { getLedetekst, tekst } from '../../../utils/tekster'
 
 export const erSendtTilBeggeMenIkkeSamtidig = (soknad: Soknad) => {
-    return soknad.sendtTilNAVDato && soknad.sendtTilArbeidsgiverDato
-        && soknad.sendtTilNAVDato.toDateString() !== soknad.sendtTilArbeidsgiverDato.toDateString()
+    return (
+        soknad.sendtTilNAVDato &&
+        soknad.sendtTilArbeidsgiverDato &&
+        soknad.sendtTilNAVDato.toDateString() !==
+            soknad.sendtTilArbeidsgiverDato.toDateString()
+    )
 }
 
 export const teaserTittel = (soknad: Soknad) => {
@@ -32,7 +36,9 @@ export const teaserTittel = (soknad: Soknad) => {
 }
 
 export const finnArbeidsgivernavn = (soknad: Soknad) => {
-    return soknad.arbeidsgiver && soknad.arbeidsgiver.navn ? soknad.arbeidsgiver.navn : ''
+    return soknad.arbeidsgiver && soknad.arbeidsgiver.navn
+        ? soknad.arbeidsgiver.navn
+        : ''
 }
 
 interface SendtUliktProps {
@@ -42,10 +48,15 @@ interface SendtUliktProps {
 export const SendtUlikt = ({ soknad }: SendtUliktProps) => {
     return (
         <BodyLong spacing as="span">
-            {getLedetekst(tekst('soknad.teaser.status.SENDT.til-arbeidsgiver'), {
-                '%DATO%': dayjs(soknad.sendtTilArbeidsgiverDato).format('DD.MM.YYYY'),
-                '%ARBEIDSGIVER%': finnArbeidsgivernavn(soknad),
-            })}
+            {getLedetekst(
+                tekst('soknad.teaser.status.SENDT.til-arbeidsgiver'),
+                {
+                    '%DATO%': dayjs(soknad.sendtTilArbeidsgiverDato).format(
+                        'DD.MM.YYYY'
+                    ),
+                    '%ARBEIDSGIVER%': finnArbeidsgivernavn(soknad),
+                }
+            )}
             <br />
             {getLedetekst(tekst('soknad.teaser.status.SENDT.til-nav'), {
                 '%DATO%': dayjs(soknad.sendtTilNAVDato).format('DD.MM.YYYY'),
@@ -104,10 +115,9 @@ export const hentIkonHover = (soknad: Soknad) => {
 
 export const beregnUndertekst = (soknad: Soknad) => {
     if (soknad.status === RSSoknadstatus.AVBRUTT) {
-        return getLedetekst(
-            tekst('soknad.teaser.status.AVBRUTT'),
-            { '%DATO%': dayjs(soknad.avbruttDato).format('DD.MM.YYYY') }
-        )
+        return getLedetekst(tekst('soknad.teaser.status.AVBRUTT'), {
+            '%DATO%': dayjs(soknad.avbruttDato).format('DD.MM.YYYY'),
+        })
     }
 
     if (soknad.status === RSSoknadstatus.FREMTIDIG) {
@@ -124,24 +134,34 @@ export const beregnUndertekst = (soknad: Soknad) => {
         case RSSoknadstype.SELVSTENDIGE_OG_FRILANSERE: {
             return soknad.status === RSSoknadstatus.SENDT
                 ? getLedetekst(tekst('soknad.teaser.status.SENDT.til-nav'), {
-                    '%DATO%': dayjs(datoher).format('DD.MM.YYYY'),
-                })
+                      '%DATO%': dayjs(datoher).format('DD.MM.YYYY'),
+                  })
                 : ''
         }
         default: {
             switch (soknad.status) {
                 case RSSoknadstatus.SENDT:
-                    return erSendtTilBeggeMenIkkeSamtidig(soknad)
-                        ? <SendtUlikt soknad={soknad} />
-                        : getLedetekst(tekst(`soknad.teaser.status.${soknad.status}${endelse}` as any), {
-                            '%DATO%': dayjs(datoher).format('DD.MM.YYYY'),
-                            '%ARBEIDSGIVER%': finnArbeidsgivernavn(soknad),
-                        })
+                    return erSendtTilBeggeMenIkkeSamtidig(soknad) ? (
+                        <SendtUlikt soknad={soknad} />
+                    ) : (
+                        getLedetekst(
+                            tekst(
+                                `soknad.teaser.status.${soknad.status}${endelse}` as any
+                            ),
+                            {
+                                '%DATO%': dayjs(datoher).format('DD.MM.YYYY'),
+                                '%ARBEIDSGIVER%': finnArbeidsgivernavn(soknad),
+                            }
+                        )
+                    )
                 case RSSoknadstatus.NY:
                 case RSSoknadstatus.UTKAST_TIL_KORRIGERING: {
-                    return getLedetekst(tekst('soknad.teaser.undertekst' as any), {
-                        '%ARBEIDSGIVER%': finnArbeidsgivernavn(soknad),
-                    })
+                    return getLedetekst(
+                        tekst('soknad.teaser.undertekst' as any),
+                        {
+                            '%ARBEIDSGIVER%': finnArbeidsgivernavn(soknad),
+                        }
+                    )
                 }
                 default: {
                     return ''
@@ -152,13 +172,19 @@ export const beregnUndertekst = (soknad: Soknad) => {
 }
 
 export const leggTilSoknadstypeForDemoside = (soknad: Soknad) => {
-    if (isOpplaering() && soknad.soknadstype !== RSSoknadstype.OPPHOLD_UTLAND && soknad.soknadstype !== RSSoknadstype.REISETILSKUDD) {
-        const forste = soknad.id === arbeidstakerGradert.id ? 'førstegangssøknad' : ''
+    if (
+        isOpplaering() &&
+        soknad.soknadstype !== RSSoknadstype.OPPHOLD_UTLAND &&
+        soknad.soknadstype !== RSSoknadstype.REISETILSKUDD
+    ) {
+        const forste =
+            soknad.id === arbeidstakerGradert.id ? 'førstegangssøknad' : ''
         const arbeidssituasjon = soknad.arbeidssituasjon?.toLowerCase()
-        const soknadstype = soknad.soknadstype === RSSoknadstype.BEHANDLINGSDAGER
-            ? soknad.soknadstype.toLowerCase()
-            : ''
-        const grad = soknad.soknadPerioder.map(periode => periode.grad + '%')
+        const soknadstype =
+            soknad.soknadstype === RSSoknadstype.BEHANDLINGSDAGER
+                ? soknad.soknadstype.toLowerCase()
+                : ''
+        const grad = soknad.soknadPerioder.map((periode) => periode.grad + '%')
         return (
             <BodyShort className="inngangspanel__undertekst__demo">
                 {`${arbeidssituasjon} ${forste} ${soknadstype}, ${grad} sykmeldt`}
@@ -169,21 +195,32 @@ export const leggTilSoknadstypeForDemoside = (soknad: Soknad) => {
 }
 
 export const hentTeaserStatustekst = (soknad: Soknad) => {
-    if (soknad.status === RSSoknadstatus.AVBRUTT ||
-        soknad.status === RSSoknadstatus.UTGAATT) {
+    if (
+        soknad.status === RSSoknadstatus.AVBRUTT ||
+        soknad.status === RSSoknadstatus.UTGAATT
+    ) {
         return tekst(`soknad.teaser.status.${soknad.status}` as any)
     }
     if (soknad.status === RSSoknadstatus.FREMTIDIG) {
-        return getLedetekst(tekst(`soknad.teaser.status.${soknad.status}` as any), {
-            '%DATO%': tilLesbarDatoMedArstall(dayjs(soknad.tom).add(1, 'day'))
-        })
+        return getLedetekst(
+            tekst(`soknad.teaser.status.${soknad.status}` as any),
+            {
+                '%DATO%': tilLesbarDatoMedArstall(
+                    dayjs(soknad.tom).add(1, 'day')
+                ),
+            }
+        )
     }
     if (soknad.status === RSSoknadstatus.SENDT) {
         if (soknad.sendtTilArbeidsgiverDato) {
             if (soknad.sendtTilNAVDato) {
-                return tekst(`soknad.teaser.status.${soknad.status}.til-arbeidsgiver-og-nav` as any)
+                return tekst(
+                    `soknad.teaser.status.${soknad.status}.til-arbeidsgiver-og-nav` as any
+                )
             }
-            return tekst(`soknad.teaser.status.${soknad.status}.til-arbeidsgiver` as any)
+            return tekst(
+                `soknad.teaser.status.${soknad.status}.til-arbeidsgiver` as any
+            )
         }
         return tekst(`soknad.teaser.status.${soknad.status}.til-nav` as any)
     }
@@ -191,35 +228,50 @@ export const hentTeaserStatustekst = (soknad: Soknad) => {
 }
 
 export const periodeListevisning = (soknad: Soknad) => {
-    if (soknad.soknadstype === RSSoknadstype.BEHANDLINGSDAGER &&
-        soknad.arbeidssituasjon !== RSArbeidssituasjon.ARBEIDSTAKER) {
+    if (
+        soknad.soknadstype === RSSoknadstype.BEHANDLINGSDAGER &&
+        soknad.arbeidssituasjon !== RSArbeidssituasjon.ARBEIDSTAKER
+    ) {
         return ''
     }
 
-    const perioder = soknad.soknadPerioder.map(p => {
-        if (soknad.soknadstype === RSSoknadstype.BEHANDLINGSDAGER) {
-            return getLedetekst(tekst('soknad.teaser.sykmeldt-behandlingsdager-fra'), {
-                '%ARBEIDSGIVER%': finnArbeidsgivernavn(soknad)
-            })
-        }
-        if (soknad.soknadstype === RSSoknadstype.ARBEIDSTAKERE) {
-            return getLedetekst(tekst('soknad.teaser.sykmeldt-fra'), {
+    const perioder = soknad.soknadPerioder
+        .map((p) => {
+            if (soknad.soknadstype === RSSoknadstype.BEHANDLINGSDAGER) {
+                return getLedetekst(
+                    tekst('soknad.teaser.sykmeldt-behandlingsdager-fra'),
+                    {
+                        '%ARBEIDSGIVER%': finnArbeidsgivernavn(soknad),
+                    }
+                )
+            }
+            if (soknad.soknadstype === RSSoknadstype.ARBEIDSTAKERE) {
+                return getLedetekst(tekst('soknad.teaser.sykmeldt-fra'), {
+                    '%GRAD%': p.grad,
+                    '%ARBEIDSGIVER%': finnArbeidsgivernavn(soknad),
+                })
+            }
+            if (soknad.soknadstype === RSSoknadstype.REISETILSKUDD) {
+                return null
+            }
+            return getLedetekst(tekst('soknad.teaser.sykmeldt'), {
                 '%GRAD%': p.grad,
-                '%ARBEIDSGIVER%': finnArbeidsgivernavn(soknad),
             })
-        }
-        if (soknad.soknadstype === RSSoknadstype.REISETILSKUDD) {
-            return null
-        }
-        return getLedetekst(tekst('soknad.teaser.sykmeldt'), {
-            '%GRAD%': p.grad,
         })
-    }).filter(p => p != null)
+        .filter((p) => p != null)
 
-    return (perioder.length === 0) ? '' :
+    return perioder.length === 0 ? (
+        ''
+    ) : (
         <ul className="inngangspanel__periode__undertekst">
-            {perioder.map((p, i) => <BodyShort as="li" key={i}> {p} </BodyShort>)}
+            {perioder.map((p, i) => (
+                <BodyShort as="li" key={i}>
+                    {' '}
+                    {p}{' '}
+                </BodyShort>
+            ))}
         </ul>
+    )
 }
 
 export interface SykepengesoknadTeaserProps {

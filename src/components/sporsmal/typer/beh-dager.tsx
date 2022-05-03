@@ -25,7 +25,12 @@ const BehDager = ({ sporsmal }: SpmProps) => {
 
                     {sporsmal.undersporsmal.map((ukespm, ukeidx) => {
                         return (
-                            <BehandlingsUke key={ukeidx} sporsmal={sporsmal} ukespm={ukespm} ukeidx={ukeidx} />
+                            <BehandlingsUke
+                                key={ukeidx}
+                                sporsmal={sporsmal}
+                                ukespm={ukespm}
+                                ukeidx={ukeidx}
+                            />
                         )
                     })}
                 </div>
