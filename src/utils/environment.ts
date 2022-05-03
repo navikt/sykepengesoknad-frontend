@@ -63,5 +63,5 @@ export function sendTilNavKnappDelaySeconds(): number {
 }
 
 export function dinesakerUrl(): string {
-    return publicRuntimeConfig.DINESAKER_URL
+    return publicRuntimeConfig.dineSakerUrl
 }
