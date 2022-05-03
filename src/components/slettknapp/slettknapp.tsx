@@ -1,7 +1,6 @@
 import { Alert, Button, Heading, Modal } from '@navikt/ds-react'
 import React, { useState } from 'react'
 
-import SlettIkon from '../../../public/static/slettknapp.svg'
 import { redirectTilLoginHvis401 } from '../../data/rest/utils'
 import { useAppStore } from '../../data/stores/app-store'
 import { Kvittering, Sporsmal, svarverdiToKvittering } from '../../types/types'
@@ -63,7 +62,7 @@ const Slettknapp = ({ sporsmal, kvittering, update }: SlettknappProps) => {
                     <button type="button" className="slette-kvittering" aria-label={tekst('opplasting_modal.slett')}
                         onClick={() => setVilSlette(true)} title={tekst('opplasting_modal.slett')}
                     >
-                        <img src={SlettIkon} alt="" />
+                        <img src="/syk/sykepengesoknad/static/slettknapp.svg" alt="" />
                     </button>
                 }
             />

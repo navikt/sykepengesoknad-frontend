@@ -5,7 +5,6 @@ import weekOfYear from 'dayjs/plugin/weekOfYear'
 import React from 'react'
 import { useFormContext, useWatch } from 'react-hook-form'
 
-import SlettIkon from '../../../../public/static/slett-ikon.svg'
 import { maaneder, sammeAar, sammeMnd } from '../../../utils/dato-utils'
 import { tekst } from '../../../utils/tekster'
 import FeilLokal from '../../feil/feil-lokal'
@@ -145,7 +144,7 @@ const DagerKomp = ({ sporsmal }: SpmProps) => {
                         {tekst('sporsmal.egen-bil.kalender.ukedager')}
                     </button>
                     <button type="button" className="lenkeknapp fjernalle" onClick={fjernAlle}>
-                        <img src={SlettIkon} alt="" />
+                        <img src="/syk/sykepengesoknad/static/slettknapp.svg" alt="" />
                         {tekst('sporsmal.egen-bil.kalender.fjern')}
                     </button>
                 </BodyShort>
