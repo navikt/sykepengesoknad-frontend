@@ -20,6 +20,7 @@ module.exports = withLess({
         mockBackend: process.env.MOCK_BACKEND,
         opplaering: process.env.OPPLAERING,
         sykefravaerUrl: process.env.SYKEFRAVAER_URL,
+        sykmeldingerUrl: process.env.SYKMELDINGER_URL,
         dittNavUrl: process.env.DITTNAV_URL,
         amplitudeKey: process.env.AMPLITUDE_KEY,
         amplitudeEnabled: process.env.AMPLITUDE_ENABLED,
