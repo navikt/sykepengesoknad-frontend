@@ -22,11 +22,11 @@ import SoknaderTekster from '../components/soknader/soknader-tekster'
 import TeaserTekster from '../components/soknader/teaser/teaser-tekster'
 import BendiksenTekster from '../components/sporsmal/bendiksen/bendiksen-tekster'
 import BjornTekster from '../components/sporsmal/bjorn/bjorn-tekster'
-import UsendtSykmeldingTekster from '../components/usendt-sykmelding/usendt-sykmelding-tekster'
 import { EkspanderbarHjelpTekster } from '../components/sporsmal/ekspanderbar-hjelp/ekspanderbar-hjelp-tekst'
 import { EndringUtenEndringTekster } from '../components/sporsmal/endring-uten-endring/endring-uten-endring-tekster'
 import KnapperadTekster from '../components/sporsmal/sporsmal-form/knapperad-tekster'
 import SporsmalTekster from '../components/sporsmal/sporsmal-tekster'
+import UsendtSykmeldingTekster from '../components/usendt-sykmelding/usendt-sykmelding-tekster'
 import { logger } from './logger'
 
 const tekster = {
