@@ -1,5 +1,3 @@
-import './gjenapneknapp.less'
-
 import { Button } from '@navikt/ds-react'
 import React, { useEffect, useState } from 'react'
 import { useHistory, useParams } from 'react-router'
@@ -8,7 +6,7 @@ import { RouteParams } from '../../../app'
 import { redirectTilLoginHvis401 } from '../../../data/rest/utils'
 import { useAppStore } from '../../../data/stores/app-store'
 import { RSSoknadstatus } from '../../../types/rs-types/rs-soknadstatus'
-import env from '../../../utils/environment'
+import { flexGatewayRoot } from '../../../utils/environment'
 import fetcher from '../../../utils/fetcher'
 import { logger } from '../../../utils/logger'
 import { useAmplitudeInstance } from '../../amplitude/amplitude'
@@ -34,7 +32,7 @@ const GjenapneSoknad = () => {
         if (gjenapner) return
         setGjenapner(true)
         try {
-            const res = await fetcher(env.flexGatewayRoot() + `/syfosoknad/api/soknader/${valgtSoknad!.id}/gjenapne`, {
+            const res = await fetcher(flexGatewayRoot() + `/syfosoknad/api/soknader/${valgtSoknad!.id}/gjenapne`, {
                 method: 'POST',
                 credentials: 'include',
                 headers: { 'Content-Type': 'application/json' }

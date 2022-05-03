@@ -50,7 +50,7 @@ describe('Tester frilansersøknad', () => {
         cy.get('.ds-datepicker__kalenderknapp').click()
         cy.get('.DayPicker-Day').contains('20').click()
 
-        cy.contains('Gå videre').click()
+        cy.contains('Gå videre').click({ force: true })
     })
 
     it('Søknad JOBBET_DU_100_PROSENT - steg 3', function() {

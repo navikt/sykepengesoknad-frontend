@@ -5,7 +5,6 @@
 *.iml
 
 # dependencies
-/server/node_modules
 /node_modules
 /.pnp
 .pnp.js
@@ -16,8 +15,8 @@
 # production
 /build
 /dist
-/sources-with-sourcemaps
 settings.json
+.next
 
 # misc
 .DS_Store

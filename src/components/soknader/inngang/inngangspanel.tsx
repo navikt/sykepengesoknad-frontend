@@ -1,11 +1,9 @@
-import './inngangspanel.less'
-
 import { Tag } from '@navikt/ds-react'
 import React from 'react'
 
-import SoknadLink from '../../../pages/soknad/soknad-link'
 import { RSSoknadstatus } from '../../../types/rs-types/rs-soknadstatus'
 import { Soknad } from '../../../types/types'
+import SoknadLink from '../../soknad/soknad-link'
 import Vis from '../../vis'
 
 interface InngangsIkonProps {

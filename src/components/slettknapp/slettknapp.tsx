@@ -1,17 +1,14 @@
-import './slettknapp.less'
-
 import { Alert, Button, Heading, Modal } from '@navikt/ds-react'
 import React, { useState } from 'react'
 
 import { redirectTilLoginHvis401 } from '../../data/rest/utils'
 import { useAppStore } from '../../data/stores/app-store'
 import { Kvittering, Sporsmal, svarverdiToKvittering } from '../../types/types'
-import env from '../../utils/environment'
+import { flexGatewayRoot } from '../../utils/environment'
 import fetcher from '../../utils/fetcher'
 import { logger } from '../../utils/logger'
 import { tekst } from '../../utils/tekster'
 import Vis from '../vis'
-import SlettIkon from './slettknapp.svg'
 
 interface SlettknappProps {
     sporsmal: Sporsmal
@@ -32,7 +29,7 @@ const Slettknapp = ({ sporsmal, kvittering, update }: SlettknappProps) => {
             const idx = sporsmal!.svarliste.svar.findIndex(svar => svarverdiToKvittering(svar?.verdi).blobId === kvittering?.blobId)
             const svar = sporsmal?.svarliste.svar.find(svar => svarverdiToKvittering(svar?.verdi).blobId === kvittering?.blobId)
 
-            const res = await fetcher(`${env.flexGatewayRoot()}/syfosoknad/api/soknader/${valgtSoknad?.id}/sporsmal/${sporsmal?.id}/svar/${svar?.id}`, {
+            const res = await fetcher(`${flexGatewayRoot()}/syfosoknad/api/soknader/${valgtSoknad?.id}/sporsmal/${sporsmal?.id}/svar/${svar?.id}`, {
                 method: 'DELETE',
                 credentials: 'include'
             })
@@ -65,7 +62,7 @@ const Slettknapp = ({ sporsmal, kvittering, update }: SlettknappProps) => {
                     <button type="button" className="slette-kvittering" aria-label={tekst('opplasting_modal.slett')}
                         onClick={() => setVilSlette(true)} title={tekst('opplasting_modal.slett')}
                     >
-                        <img src={SlettIkon} alt="" />
+                        <img src="/syk/sykepengesoknad/static/slettknapp.svg" alt="" />
                     </button>
                 }
             />

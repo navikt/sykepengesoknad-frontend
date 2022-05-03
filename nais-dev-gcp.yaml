@@ -22,9 +22,9 @@ spec:
       cpu: 200m
       memory: 256Mi
   liveness:
-    path: internal/isAlive
+    path: syk/sykepengesoknad/api/isAlive
   readiness:
-    path: internal/isReady
+    path: syk/sykepengesoknad/api/isReady
   env:
     - name: FLEX_GATEWAY_ROOT
       value: "https://flex-gateway.dev.nav.no"
@@ -50,3 +50,5 @@ spec:
       value: "dev"
     - name: DINESAKER_URL
       value: "https://person.dev.nav.no/mine-saker/tema/SYK"
+    - name: SEND_TIL_NAV_KNAPP_DELAY_SECONDS
+      value: "10"

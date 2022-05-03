@@ -3,7 +3,7 @@ import { useParams } from 'react-router'
 
 import { RouteParams } from '../../app'
 import { useAppStore } from '../../data/stores/app-store'
-import env from '../../utils/environment'
+import { isDev } from '../../utils/environment'
 import Vis from '../vis'
 
 const SykSokLokalt = () => {
@@ -17,7 +17,7 @@ const SykSokLokalt = () => {
         return () => window.removeEventListener('resize', () => setWidth(window.innerWidth) as any)
     })
 
-    if (!env.isDev()) {
+    if (!isDev()) {
         return null
     }
 

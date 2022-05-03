@@ -1,5 +1,3 @@
-import './tall-komp.less'
-
 import { Alert, BodyShort } from '@navikt/ds-react'
 import React, { useRef } from 'react'
 import { useFormContext } from 'react-hook-form'

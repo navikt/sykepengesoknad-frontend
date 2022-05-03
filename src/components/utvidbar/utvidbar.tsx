@@ -1,5 +1,3 @@
-import './utvidbar.less'
-
 import { Accordion, BodyShort, Heading } from '@navikt/ds-react'
 import React, { useEffect, useRef, useState } from 'react'
 

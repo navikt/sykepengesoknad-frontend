@@ -1,21 +1,19 @@
-import './opprett-utland.less'
-
 import { Alert, Button, Heading } from '@navikt/ds-react'
 import parser from 'html-react-parser'
 import React from 'react'
 import { useHistory } from 'react-router'
 
-import Bjorn from '../../components/sporsmal/bjorn/bjorn'
-import Vis from '../../components/vis'
 import useFetch from '../../data/rest/use-fetch'
 import { FetchState, hasData } from '../../data/rest/utils'
 import { useAppStore } from '../../data/stores/app-store'
 import { RSSoknad } from '../../types/rs-types/rs-soknad'
 import { Soknad } from '../../types/types'
-import env from '../../utils/environment'
+import { flexGatewayRoot } from '../../utils/environment'
 import { logger } from '../../utils/logger'
 import { tekst } from '../../utils/tekster'
 import { urlTilSoknad } from '../soknad/soknad-link'
+import Bjorn from '../sporsmal/bjorn/bjorn'
+import Vis from '../vis'
 
 const OpprettUtland = () => {
     const { soknader, setSoknader, setFeilmeldingTekst, feilmeldingTekst } = useAppStore()
@@ -24,7 +22,7 @@ const OpprettUtland = () => {
     const history = useHistory()
 
     const opprett = () => {
-        opprettUtland.fetch(`${env.flexGatewayRoot()}/syfosoknad/api/opprettSoknadUtland`, {
+        opprettUtland.fetch(`${flexGatewayRoot()}/syfosoknad/api/opprettSoknadUtland`, {
             method: 'POST',
             credentials: 'include',
             headers: { 'Content-Type': 'application/json' }

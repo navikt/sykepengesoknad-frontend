@@ -1,12 +1,10 @@
-import './drag-and-drop.less'
-
 import { BodyShort, Label } from '@navikt/ds-react'
 import React, { useCallback, useEffect, useState } from 'react'
 import { useDropzone } from 'react-dropzone'
 import { useFormContext } from 'react-hook-form'
 
 import { useAppStore } from '../../../data/stores/app-store'
-import env from '../../../utils/environment'
+import { flexGatewayRoot } from '../../../utils/environment'
 import {
     customTruncet,
     formaterFilstørrelse,
@@ -17,7 +15,6 @@ import { logger } from '../../../utils/logger'
 import { getLedetekst, tekst } from '../../../utils/tekster'
 import Utvidbar from '../../utvidbar/utvidbar'
 import Vis from '../../vis'
-import binders from './binders.svg'
 
 const maks = formaterFilstørrelse(maxFilstørrelse)
 
@@ -29,7 +26,7 @@ const DragAndDrop = () => {
     useEffect(() => {
         if (valgtKvittering?.blobId) {
             setFormErDisabled(true)
-            fetch(`${env.flexGatewayRoot()}/flex-bucket-uploader/kvittering/${valgtKvittering.blobId}`, {
+            fetch(`${flexGatewayRoot()}/flex-bucket-uploader/kvittering/${valgtKvittering.blobId}`, {
                 method: 'GET',
                 credentials: 'include',
                 headers: { 'Content-Type': 'application/json' }
@@ -136,7 +133,7 @@ const DragAndDrop = () => {
                                     }
                                 })}
                             />
-                            <img src={binders} className="opplastingsikon" alt="Opplastingsikon" />
+                            <img src="/syk/sykepengesoknad/static/binders.svg" className="opplastingsikon" alt="Opplastingsikon" />
                             <BodyShort as="span" className="tekst">
                                 {isDragActive
                                     ? tekst('drag_and_drop.dragtekst.aktiv')

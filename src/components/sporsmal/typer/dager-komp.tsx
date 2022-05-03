@@ -1,5 +1,3 @@
-import './dager-komp.less'
-
 import { BodyShort } from '@navikt/ds-react'
 import dayjs, { Dayjs } from 'dayjs'
 import isoWeek from 'dayjs/plugin/isoWeek'
@@ -13,7 +11,6 @@ import FeilLokal from '../../feil/feil-lokal'
 import { SpmProps } from '../sporsmal-form/sporsmal-form'
 import { hentFeilmelding } from '../sporsmal-utils'
 import SporsmalstekstH3 from '../sporsmalstekst/sporsmalstekstH3'
-import SlettIkon from './slett-ikon.svg'
 
 dayjs.extend(weekOfYear)
 dayjs.extend(isoWeek)
@@ -147,7 +144,7 @@ const DagerKomp = ({ sporsmal }: SpmProps) => {
                         {tekst('sporsmal.egen-bil.kalender.ukedager')}
                     </button>
                     <button type="button" className="lenkeknapp fjernalle" onClick={fjernAlle}>
-                        <img src={SlettIkon} alt="" />
+                        <img src="/syk/sykepengesoknad/static/slettknapp.svg" alt="" />
                         {tekst('sporsmal.egen-bil.kalender.fjern')}
                     </button>
                 </BodyShort>

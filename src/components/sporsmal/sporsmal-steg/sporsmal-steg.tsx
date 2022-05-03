@@ -1,5 +1,3 @@
-import './sporsmal-steg.less'
-
 import { BodyShort } from '@navikt/ds-react'
 import parser from 'html-react-parser'
 import React from 'react'

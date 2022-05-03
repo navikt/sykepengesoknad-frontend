@@ -1,5 +1,3 @@
-import './opplasting-form.less'
-
 import { Alert, BodyLong, BodyShort, Button, Heading, Label } from '@navikt/ds-react'
 import dayjs from 'dayjs'
 import parser from 'html-react-parser'
@@ -13,7 +11,7 @@ import { useAppStore } from '../../../data/stores/app-store'
 import { RSOppdaterSporsmalResponse } from '../../../types/rs-types/rest-response/rs-oppdatersporsmalresponse'
 import { RSSvar } from '../../../types/rs-types/rs-svar'
 import { Kvittering, Sporsmal, UtgiftTyper } from '../../../types/types'
-import env from '../../../utils/environment'
+import { flexGatewayRoot } from '../../../utils/environment'
 import fetcher from '../../../utils/fetcher'
 import { formaterFilstørrelse, formattertFiltyper, maxFilstørrelse } from '../../../utils/fil-utils'
 import { logger } from '../../../utils/logger'
@@ -84,7 +82,7 @@ const OpplastingForm = ({ sporsmal }: SpmProps) => {
     const opplastingTilBucket = async() => {
         const requestData = new FormData()
         requestData.append('file', valgtFil as Blob)
-        const bucketRes = await fetcher(`${env.flexGatewayRoot()}/flex-bucket-uploader/opplasting`, {
+        const bucketRes = await fetcher(`${flexGatewayRoot()}/flex-bucket-uploader/opplasting`, {
             method: 'POST',
             body: requestData,
             credentials: 'include'
@@ -114,7 +112,7 @@ const OpplastingForm = ({ sporsmal }: SpmProps) => {
         }
         const svar: RSSvar = { verdi: JSON.stringify(kvittering) }
 
-        const syfosoknadRes = await fetcher(`${env.flexGatewayRoot()}/syfosoknad/api/soknader/${valgtSoknad!.id}/sporsmal/${sporsmal!.id}/svar`, {
+        const syfosoknadRes = await fetcher(`${flexGatewayRoot()}/syfosoknad/api/soknader/${valgtSoknad!.id}/sporsmal/${sporsmal!.id}/svar`, {
             method: 'POST',
             body: JSON.stringify(svar),
             credentials: 'include',

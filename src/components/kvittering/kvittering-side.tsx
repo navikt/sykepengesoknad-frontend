@@ -1,23 +1,21 @@
-import './kvittering.less'
-
 import { Back } from '@navikt/ds-icons'
 import { BodyShort } from '@navikt/ds-react'
 import React, { useEffect, useState } from 'react'
 import { Link, useParams } from 'react-router-dom'
 
 import { RouteParams } from '../../app'
-import { useAmplitudeInstance } from '../../components/amplitude/amplitude'
-import Banner from '../../components/banner/banner'
-import Brodsmuler from '../../components/brodsmuler/brodsmuler'
-import { hentHotjarJsTrigger, HotjarTrigger } from '../../components/hotjar-trigger'
-import Kvittering from '../../components/kvittering/kvittering'
-import Vis from '../../components/vis'
 import { useAppStore } from '../../data/stores/app-store'
 import { RSSoknadstatus } from '../../types/rs-types/rs-soknadstatus'
 import { Brodsmule } from '../../types/types'
 import { SEPARATOR } from '../../utils/constants'
 import { tekst } from '../../utils/tekster'
 import { setBodyClass } from '../../utils/utils'
+import { useAmplitudeInstance } from '../amplitude/amplitude'
+import Banner from '../banner/banner'
+import Brodsmuler from '../brodsmuler/brodsmuler'
+import { hentHotjarJsTrigger, HotjarTrigger } from '../hotjar-trigger'
+import Vis from '../vis'
+import Kvittering from './kvittering'
 
 const brodsmuler: Brodsmule[] = [ {
     tittel: tekst('soknader.sidetittel'),

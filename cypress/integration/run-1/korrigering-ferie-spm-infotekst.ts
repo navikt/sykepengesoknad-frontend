@@ -4,10 +4,9 @@ describe('Ved korrigering av ferie forsvinner bjørn og det er en infotekst om i
 
     const soknad = arbeidstakerTilKorrigering
 
-
     it('Vi kan gå direkte til søknaden fra sykefravaer', function() {
-        cy.visit(`http://localhost:8080/soknader/${soknad.id}/3`)
-        cy.url().should('equal', `http://localhost:8080/soknader/${soknad.id}/3`)
+        cy.visit(`http://localhost:8080/syk/sykepengesoknad/soknader/${soknad.id}/3`)
+        cy.url().should('equal', `http://localhost:8080/syk/sykepengesoknad/soknader/${soknad.id}/3`)
 
         cy.contains('Tok du ut feriedager i tidsrommet 1. - 24. april 2020?')
         cy.contains('Du får ikke sykepenger de dagene du tar ut ferie.')

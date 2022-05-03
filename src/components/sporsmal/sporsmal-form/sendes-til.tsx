@@ -1,5 +1,3 @@
-import './sendes-til.less'
-
 import { BodyShort } from '@navikt/ds-react'
 import parser from 'html-react-parser'
 import React, { useEffect, useState } from 'react'

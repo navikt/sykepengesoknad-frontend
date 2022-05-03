@@ -1,5 +1,3 @@
-import './refresh-hvis-feil-state.less'
-
 import { Alert, Button } from '@navikt/ds-react'
 import React, { useEffect } from 'react'
 import { useHistory } from 'react-router-dom'

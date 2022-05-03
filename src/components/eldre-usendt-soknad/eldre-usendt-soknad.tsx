@@ -2,11 +2,11 @@ import { Alert } from '@navikt/ds-react'
 import React from 'react'
 import { Link } from 'react-router-dom'
 
-import { urlTilSoknad } from '../../pages/soknad/soknad-link'
 import { RSSoknadstatus } from '../../types/rs-types/rs-soknadstatus'
 import { Soknad } from '../../types/types'
 import { tekst } from '../../utils/tekster'
 import { useAmplitudeInstance } from '../amplitude/amplitude'
+import { urlTilSoknad } from '../soknad/soknad-link'
 
 interface EldreUsendtSoknadProps {
     eldreSoknad: Soknad

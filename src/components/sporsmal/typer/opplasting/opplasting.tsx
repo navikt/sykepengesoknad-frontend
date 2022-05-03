@@ -1,17 +1,15 @@
-import './opplasting.less'
-
 import { Alert, BodyLong, BodyShort, Button, Label, Modal } from '@navikt/ds-react'
 import parser from 'html-react-parser'
 import React, { useRef } from 'react'
 
+import PlussIkon from '../../../../../public/static/pluss-ikon.svg'
+import PlussIkonHover from '../../../../../public/static/pluss-ikon-hover.svg'
 import { useAppStore } from '../../../../data/stores/app-store'
 import { tekst } from '../../../../utils/tekster'
 import { Ekspanderbar } from '../../../ekspanderbar/ekspanderbar'
 import FilListe from '../../../filopplaster/fil-liste/fil-liste'
 import OpplastingForm from '../../../filopplaster/kvittering-modal/opplasting-form'
 import { SpmProps } from '../../sporsmal-form/sporsmal-form'
-import PlussIkon from './pluss-ikon.svg'
-import PlussIkonHover from './pluss-ikon-hover.svg'
 
 const Opplasting = ({ sporsmal }: SpmProps) => {
     const { setValgtKvittering, openModal, setOpenModal } = useAppStore()

@@ -8,19 +8,9 @@ import { RSSoknadstatus } from '../../../types/rs-types/rs-soknadstatus'
 import { RSSoknadstype } from '../../../types/rs-types/rs-soknadstype'
 import { Soknad } from '../../../types/types'
 import { tilLesbarDatoMedArstall } from '../../../utils/dato-utils'
-import env from '../../../utils/environment'
+import { isOpplaering } from '../../../utils/environment'
 import { getRiktigDato, getSendtTilSuffix } from '../../../utils/soknad-utils'
 import { getLedetekst, tekst } from '../../../utils/tekster'
-import SoknadAvbruttHoverIkon from './img/hover/soknad-avbrutt.svg'
-import SoknadFremtidigHoverIkon from './img/hover/soknad-fremtidig.svg'
-import SoknadNyHoverIkon from './img/hover/soknad-ny.svg'
-import SoknadNyUtlandHoverIkon from './img/hover/soknad-ny-utland.svg'
-import SoknadSendtHoverIkon from './img/hover/soknad-sendt.svg'
-import SoknadAvbruttIkon from './img/soknad-avbrutt.svg'
-import SoknadFremtidigIkon from './img/soknad-fremtidig.svg'
-import SoknadNyIkon from './img/soknad-ny.svg'
-import SoknadNyUtlandIkon from './img/soknad-ny-utland.svg'
-import SoknadSendtIkon from './img/soknad-sendt.svg'
 
 export const erSendtTilBeggeMenIkkeSamtidig = (soknad: Soknad) => {
     return soknad.sendtTilNAVDato && soknad.sendtTilArbeidsgiverDato
@@ -64,27 +54,29 @@ export const SendtUlikt = ({ soknad }: SendtUliktProps) => {
     )
 }
 
+const imgPath = '/syk/sykepengesoknad/static/'
+
 export const hentIkon = (soknad: Soknad) => {
     switch (soknad.status) {
         case RSSoknadstatus.NY:
         case RSSoknadstatus.UTKAST_TIL_KORRIGERING: {
             if (soknad.soknadstype === RSSoknadstype.OPPHOLD_UTLAND) {
-                return SoknadNyUtlandIkon
+                return imgPath + 'soknad-ny-utland.svg'
             }
-            return SoknadNyIkon
+            return imgPath + 'soknad-ny.svg'
         }
         case RSSoknadstatus.FREMTIDIG: {
-            return SoknadFremtidigIkon
+            return imgPath + 'soknad-fremtidig.svg'
         }
         case RSSoknadstatus.SENDT: {
-            return SoknadSendtIkon
+            return imgPath + 'soknad-sendt.svg'
         }
         case RSSoknadstatus.AVBRUTT:
         case RSSoknadstatus.UTGAATT: {
-            return SoknadAvbruttIkon
+            return imgPath + 'soknad-avbrutt.svg'
         }
     }
-    return SoknadNyIkon
+    return imgPath + 'soknad-ny.svg'
 }
 
 export const hentIkonHover = (soknad: Soknad) => {
@@ -92,22 +84,22 @@ export const hentIkonHover = (soknad: Soknad) => {
         case RSSoknadstatus.NY:
         case RSSoknadstatus.UTKAST_TIL_KORRIGERING: {
             if (soknad.soknadstype === RSSoknadstype.OPPHOLD_UTLAND) {
-                return SoknadNyUtlandHoverIkon
+                return imgPath + 'soknad-ny-utland-hover.svg'
             }
-            return SoknadNyHoverIkon
+            return imgPath + 'soknad-ny-hover.svg'
         }
         case RSSoknadstatus.FREMTIDIG: {
-            return SoknadFremtidigHoverIkon
+            return imgPath + 'soknad-fremtidig-hover.svg'
         }
         case RSSoknadstatus.SENDT: {
-            return SoknadSendtHoverIkon
+            return imgPath + 'soknad-sendt-hover.svg'
         }
         case RSSoknadstatus.AVBRUTT:
         case RSSoknadstatus.UTGAATT: {
-            return SoknadAvbruttHoverIkon
+            return imgPath + 'soknad-avbrutt-hover.svg'
         }
     }
-    return SoknadNyHoverIkon
+    return imgPath + 'soknad-ny-hover.svg'
 }
 
 export const beregnUndertekst = (soknad: Soknad) => {
@@ -160,7 +152,7 @@ export const beregnUndertekst = (soknad: Soknad) => {
 }
 
 export const leggTilSoknadstypeForDemoside = (soknad: Soknad) => {
-    if (env.isOpplaering() && soknad.soknadstype !== RSSoknadstype.OPPHOLD_UTLAND && soknad.soknadstype !== RSSoknadstype.REISETILSKUDD) {
+    if (isOpplaering() && soknad.soknadstype !== RSSoknadstype.OPPHOLD_UTLAND && soknad.soknadstype !== RSSoknadstype.REISETILSKUDD) {
         const forste = soknad.id === arbeidstakerGradert.id ? 'førstegangssøknad' : ''
         const arbeidssituasjon = soknad.arbeidssituasjon?.toLowerCase()
         const soknadstype = soknad.soknadstype === RSSoknadstype.BEHANDLINGSDAGER

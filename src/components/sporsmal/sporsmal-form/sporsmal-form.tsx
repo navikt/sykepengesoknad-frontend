@@ -1,5 +1,3 @@
-import './sporsmal-form.less'
-
 import React, { useEffect, useState } from 'react'
 import { FormProvider, useForm } from 'react-hook-form'
 import { useHistory, useParams } from 'react-router-dom'
@@ -18,7 +16,7 @@ import { sporsmalToRS } from '../../../types/rs-types/rs-sporsmal'
 import { RSSvartype } from '../../../types/rs-types/rs-svartype'
 import { Soknad, Sporsmal } from '../../../types/types'
 import { SEPARATOR } from '../../../utils/constants'
-import env from '../../../utils/environment'
+import { flexGatewayRoot } from '../../../utils/environment'
 import fetcher from '../../../utils/fetcher'
 import { logger } from '../../../utils/logger'
 import { useAmplitudeInstance } from '../../amplitude/amplitude'
@@ -89,7 +87,7 @@ const SporsmalForm = () => {
     const sendOppdaterSporsmal = async() => {
         let soknad = valgtSoknad
 
-        const res = await fetcher(env.flexGatewayRoot() + `/syfosoknad/api/soknader/${soknad!.id}/sporsmal/${sporsmal.id}`, {
+        const res = await fetcher(flexGatewayRoot() + `/syfosoknad/api/soknader/${soknad!.id}/sporsmal/${sporsmal.id}`, {
             method: 'PUT',
             credentials: 'include',
             body: JSON.stringify(sporsmalToRS(sporsmal)),
@@ -143,7 +141,7 @@ const SporsmalForm = () => {
     }
 
     const hentMottaker = () => {
-        rsMottakerResponseFetch.fetch(env.flexGatewayRoot() + `/syfosoknad/api/soknader/${valgtSoknad!.id}/finnMottaker`, {
+        rsMottakerResponseFetch.fetch(flexGatewayRoot() + `/syfosoknad/api/soknader/${valgtSoknad!.id}/finnMottaker`, {
             method: 'POST',
             credentials: 'include',
             headers: { 'Content-Type': 'application/json' }
@@ -169,7 +167,7 @@ const SporsmalForm = () => {
             }
 
         }
-        const res = await fetcher(env.flexGatewayRoot() + `/syfosoknad/api/soknader/${valgtSoknad.id}/send`, {
+        const res = await fetcher(flexGatewayRoot() + `/syfosoknad/api/soknader/${valgtSoknad.id}/send`, {
             method: 'POST',
             credentials: 'include',
             headers: { 'Content-Type': 'application/json' }

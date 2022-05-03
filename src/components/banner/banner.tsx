@@ -1,5 +1,3 @@
-import './banner.less'
-
 import { Heading } from '@navikt/ds-react'
 import React from 'react'
 
@@ -7,7 +5,6 @@ import { useAppStore } from '../../data/stores/app-store'
 import { RSSoknadstype } from '../../types/rs-types/rs-soknadstype'
 import { tilLesbarPeriodeMedArstall } from '../../utils/dato-utils'
 import { tekst } from '../../utils/tekster'
-import SykSokLokalt from '../brodsmuler/syk-sok-lokalt'
 import Vis from '../vis'
 
 interface BannerProps {
@@ -34,7 +31,9 @@ const Banner = ({ overskrift }: BannerProps) => {
 
     return (
         <header className="sidebanner">
+            {/*
             <SykSokLokalt />
+            */}
             <Heading size="xlarge" level="1" className="sidebanner__tittel">
                 {overskrift === undefined ? tittel() : overskrift}
             </Heading>

@@ -1,5 +1,3 @@
-import './paske-hjelpetekst.less'
-
 import { BodyShort, Label, Link } from '@navikt/ds-react'
 import parser from 'html-react-parser'
 import React from 'react'

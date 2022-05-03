@@ -1,15 +1,13 @@
-import './oppsummering.less'
-
 import React from 'react'
 
+import sjekkbokser from '../../../public/static/sjekkbokser.svg'
+import sjekkbokserHover from '../../../public/static/sjekkbokser-hover.svg'
 import { useAppStore } from '../../data/stores/app-store'
 import { TagTyper } from '../../types/enums'
 import { RSSvartype } from '../../types/rs-types/rs-svartype'
 import { Sporsmal } from '../../types/types'
 import { tekst } from '../../utils/tekster'
 import Utvidbar from '../utvidbar/utvidbar'
-import sjekkbokser from './sjekkbokser.svg'
-import sjekkbokserHover from './sjekkbokser-hover.svg'
 import Behandlingsdager from './utdrag/behandlingsdager'
 import CheckboxGruppe from './utdrag/checkbox-gruppe'
 import CheckboxSum from './utdrag/checkbox-sum'

@@ -1,5 +1,3 @@
-import './beh.dager.less'
-
 import React from 'react'
 
 import FeilLokal from '../../feil/feil-lokal'

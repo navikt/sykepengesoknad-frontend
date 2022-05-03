@@ -1,5 +1,3 @@
-import './hvorfor-soknad-sykepenger.less'
-
 import { Accordion, BodyLong, Heading } from '@navikt/ds-react'
 import React, { useState } from 'react'
 

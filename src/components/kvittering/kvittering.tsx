@@ -1,5 +1,3 @@
-import './kvittering.less'
-
 import { Alert, Button } from '@navikt/ds-react'
 import React, { useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom'
@@ -9,11 +7,8 @@ import { useAppStore } from '../../data/stores/app-store'
 import { RSArbeidssituasjon } from '../../types/rs-types/rs-arbeidssituasjon'
 import { RSSoknadstatus } from '../../types/rs-types/rs-soknadstatus'
 import { RSSoknadstype } from '../../types/rs-types/rs-soknadstype'
-import {
-    sendtArbeidsgiverForMerEnnAntallSekunderSiden,
-    sendtForMerEnn30DagerSiden
-} from '../../utils/dato-utils'
-import env from '../../utils/environment'
+import { sendtArbeidsgiverForMerEnnAntallSekunderSiden, sendtForMerEnn30DagerSiden } from '../../utils/dato-utils'
+import { dittNavUrl, sendTilNavKnappDelaySeconds } from '../../utils/environment'
 import { tekst } from '../../utils/tekster'
 import { useAmplitudeInstance } from '../amplitude/amplitude'
 import Endreknapp from '../endreknapp/endreknapp'
@@ -76,7 +71,6 @@ const Kvittering = () => {
             <Vis hvis={skalViseKnapperad}
                 render={() =>
                     <>
-
                         <div className="knapperad">
                             <Vis hvis={valgtSoknad?.status !== RSSoknadstatus.SENDT}
                                 render={() =>
@@ -88,7 +82,7 @@ const Kvittering = () => {
                                             })
                                             // Må sikre at amplitude får logget ferdig
                                             window.setTimeout(() => {
-                                                window.location.href = env.dittNavUrl()
+                                                window.location.href = dittNavUrl()
                                             }, 200)
                                         }
                                     }>
@@ -98,7 +92,7 @@ const Kvittering = () => {
                             />
 
                             <Vis
-                                hvis={!erSendtTilNav && sendtArbeidsgiverForMerEnnAntallSekunderSiden(env.sendTilNavKnappDelaySeconds(), valgtSoknad?.sendtTilArbeidsgiverDato)}
+                                hvis={!erSendtTilNav && sendtArbeidsgiverForMerEnnAntallSekunderSiden(sendTilNavKnappDelaySeconds(), valgtSoknad?.sendtTilArbeidsgiverDato)}
                                 render={() => <Ettersending gjelder="nav"
                                     setRerendrekvittering={setRerendrekvittering} />}
                             />

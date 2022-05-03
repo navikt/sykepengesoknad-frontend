@@ -1,5 +1,3 @@
-import './fil-liste.less'
-
 import { BodyShort, Heading } from '@navikt/ds-react'
 import React from 'react'
 import useForceUpdate from 'use-force-update'

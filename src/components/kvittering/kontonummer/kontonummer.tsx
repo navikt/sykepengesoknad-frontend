@@ -3,7 +3,7 @@ import parser from 'html-react-parser'
 import React, { useEffect, useState } from 'react'
 
 import { Personalia } from '../../../types/types'
-import env from '../../../utils/environment'
+import { isMockBackend, isProd } from '../../../utils/environment'
 import { tekst } from '../../../utils/tekster'
 import Vis from '../../vis'
 
@@ -15,7 +15,7 @@ const Kontonummer = () => {
     }, [])
 
     async function hentKontonummer() {
-        if (env.isProd()) {
+        if (isProd()) {
             const res = await fetch('https://www.nav.no/person/personopplysninger-api/personalia', {
                 method: 'GET',
                 credentials: 'include',
@@ -25,7 +25,7 @@ const Kontonummer = () => {
             setKontonummer(data?.personalia?.kontonr)
         }
 
-        if(env.isMockBackend()) {
+        if(isMockBackend()) {
             setKontonummer('12332112332')
         }
     }

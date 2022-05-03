@@ -25,28 +25,12 @@ jobs:
           path: VERSION.txt
       - name: Install npm dependencies
         run: npm ci
-      - name: Install server npm dependencies
-        run: npm ci
-        working-directory: server
       - name: Run lint
         run: npm run lint
       - name: Run tests
-        run: CI=true npm run test
+        run: npm run test:ci
       - name: Build application
         run: npm run build
-      - name: Build server
-        run: npm run build
-        working-directory: server
-      - name: Upload sources with sourcemaps
-        if: github.ref == 'refs/heads/master'
-        uses: actions/upload-artifact@v1
-        with:
-          name: sources-with-sourcemaps
-          path: build/static
-      - name: Slett sourcemaps
-        run: |
-          rm ./build/static/js/*.map
-          rm ./build/static/css/*.map
       - name: Docker login
         env:
             GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
@@ -79,6 +63,10 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v2
+      - name: Install
+        run: npm ci
+      - name: Build server
+        run: npm run build
       - name: Setup kernel for react native, increase watchers
         run: echo fs.inotify.max_user_watches=524288 | sudo tee -a /etc/sysctl.conf && sudo sysctl -p
       # download cached ~/.npm and ~/.cache/Cypress
@@ -86,8 +74,8 @@ jobs:
       - name: Run cypress
         uses: cypress-io/github-action@v2
         with:
-          start: npm run start-mock
-          wait-on: http://localhost:8080
+          start: npm run start-ingen-dekorator
+          wait-on: http://localhost:8080/syk/sykepengesoknad/api/isAlive
           spec: cypress/integration/run-${{ matrix.containers }}/**
       - uses: actions/upload-artifact@v2
         if: ${{ always() }}
@@ -188,26 +176,3 @@ jobs:
           SLACK_USERNAME: Labs deploy
           SLACK_ICON: ":lab_coat:"
           SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK }}
-
-  tag-image-as-latest:
-    if: github.ref == 'refs/heads/master'
-    name: Tag dockerimage as latest
-    runs-on: ubuntu-latest
-    needs: [build-and-publish, integrasjonstest-run]
-    steps:
-      - name: Last ned versjon
-        uses: actions/download-artifact@v1
-        with:
-          name: VERSION.txt
-          path: .
-      - run: echo "VERSION=`cat VERSION.txt`" >> $GITHUB_ENV
-      - run: echo "IMAGE=docker.pkg.github.com/${GITHUB_REPOSITORY}/$APP:$VERSION" >> $GITHUB_ENV
-      - run: echo "LATEST=docker.pkg.github.com/${GITHUB_REPOSITORY}/$APP:latest" >> $GITHUB_ENV
-      - name: Tag and push docker image
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        run: |
-          docker login docker.pkg.github.com -u ${GITHUB_REPOSITORY} -p ${GITHUB_TOKEN}
-          docker pull ${IMAGE}
-          docker tag ${IMAGE} ${LATEST}
-          docker push ${LATEST}

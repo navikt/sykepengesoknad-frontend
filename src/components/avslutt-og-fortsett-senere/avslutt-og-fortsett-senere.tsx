@@ -1,12 +1,10 @@
-import './avslutt-og-fortsett-senere.less'
-
 import { BodyShort, Button, Heading, Modal } from '@navikt/ds-react'
 import React, { useState } from 'react'
 import { useParams } from 'react-router-dom'
 
 import { RouteParams } from '../../app'
 import { useAppStore } from '../../data/stores/app-store'
-import env from '../../utils/environment'
+import { dittNavUrl } from '../../utils/environment'
 import { tekst } from '../../utils/tekster'
 import { useAmplitudeInstance } from '../amplitude/amplitude'
 
@@ -58,7 +56,7 @@ const AvsluttOgFortsettSenere = () => {
                             })
                             // Må sikre at amplitude får logget ferdig
                             window.setTimeout(() => {
-                                window.location.href = env.dittNavUrl()
+                                window.location.href = dittNavUrl()
                             }, 200)
 
                         }

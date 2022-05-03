@@ -1,5 +1,3 @@
-import './endring-uten-endring.less'
-
 import { BodyShort, Button, Modal } from '@navikt/ds-react'
 import React from 'react'
 import { useHistory } from 'react-router-dom'
