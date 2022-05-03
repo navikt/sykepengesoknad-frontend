@@ -20,17 +20,6 @@ import {
     harEldreUsendtSoknad,
 } from '../eldre-usendt-soknad/eldre-usendt-soknad'
 import RedirectTilOversikt from '../feil/redirect-til-oversikt'
-import { hentHotjarJsTrigger, HotjarTrigger } from '../hotjar-trigger'
-import HvorforSoknadSykepenger from '../hvorfor-soknad-sykepenger/hvorfor-soknad-sykepenger'
-import OmReisetilskudd from '../om-reisetilskudd/om-reisetilskudd'
-import Opplysninger from '../opplysninger-fra-sykmelding/opplysninger'
-import { ViktigInformasjon } from '../soknad-intro/viktig-informasjon'
-import SoknadMedToDeler from '../soknad-med-to-deler/soknad-med-to-deler'
-import GjenapneSoknad from '../soknader/avbryt/gjenapneknapp'
-import SporsmalForm from '../sporsmal/sporsmal-form/sporsmal-form'
-import SporsmalSteg from '../sporsmal/sporsmal-steg/sporsmal-steg'
-import { hentNokkel } from '../sporsmal/sporsmal-utils'
-import Vis from '../vis'
 import { urlTilSoknad } from './soknad-link'
 
 const brodsmuler: Brodsmule[] = [

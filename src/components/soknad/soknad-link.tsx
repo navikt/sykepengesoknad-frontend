@@ -3,12 +3,10 @@ import { Link } from 'react-router-dom'
 
 import { RSSoknadstatus } from '../../types/rs-types/rs-soknadstatus'
 import { RSSvartype } from '../../types/rs-types/rs-svartype'
-import { Sykmelding } from '../../types/sykmelding'
 import { Soknad } from '../../types/types'
 
 interface SoknadLinkProps {
     soknad: Soknad
-    sykmeldinger?: Sykmelding[]
     children: React.ReactNode
     className: string
 }
