@@ -1,7 +1,5 @@
 import React from 'react'
 
-import plaster from '../../../public/static/plaster.svg'
-import plasterHover from '../../../public/static/plaster-hover.svg'
 import { tekst } from '../../utils/tekster'
 import Utvidbar from '../utvidbar/utvidbar'
 import ArbeidsgiverInfo from './arbeidsgiver-info'
@@ -21,8 +19,8 @@ const Opplysninger = ({ ekspandert, steg }: OpplysningerProps) => {
     return (
         <Utvidbar
             className="ekspander"
-            ikon={plaster}
-            ikonHover={plasterHover}
+            ikon={'/syk/sykepengesoknad/static/plaster.svg'}
+            ikonHover={'/syk/sykepengesoknad/static/plaster-hover.svg'}
             erApen={ekspandert}
             amplitudeProps={{ component: tittel, steg: steg }}
             tittel={tittel}

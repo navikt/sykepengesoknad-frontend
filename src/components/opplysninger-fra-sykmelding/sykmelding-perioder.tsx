@@ -2,7 +2,6 @@ import { BodyShort, Label } from '@navikt/ds-react'
 import dayjs from 'dayjs'
 import React from 'react'
 
-import CheckBoxImg from '../../../public/static/check-box-1.png'
 import { useAppStore } from '../../data/stores/app-store'
 import { Periode } from '../../types/sykmelding'
 import { getDuration } from '../../utils/dato-utils'
@@ -63,7 +62,9 @@ const SykmeldingPerioder = () => {
                                 <>
                                     <img
                                         style={{ width: 16, height: 16 }}
-                                        src={CheckBoxImg}
+                                        src={
+                                            '/syk/sykepengesoknad/static/check-box-1.png'
+                                        }
                                         alt="Avkrysset"
                                     />
                                     <BodyShort as="span">

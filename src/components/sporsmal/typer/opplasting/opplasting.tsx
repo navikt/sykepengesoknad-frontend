@@ -9,8 +9,6 @@ import {
 import parser from 'html-react-parser'
 import React, { useRef } from 'react'
 
-import PlussIkon from '../../../../../public/static/pluss-ikon.svg'
-import PlussIkonHover from '../../../../../public/static/pluss-ikon-hover.svg'
 import { useAppStore } from '../../../../data/stores/app-store'
 import { tekst } from '../../../../utils/tekster'
 import { Ekspanderbar } from '../../../ekspanderbar/ekspanderbar'
@@ -79,13 +77,19 @@ const Opplasting = ({ sporsmal }: SpmProps) => {
                 variant="secondary"
                 className="fler-vedlegg"
                 onClick={aktiverModal}
-                onMouseEnter={() => (ikonRef.current!.src = PlussIkonHover)}
-                onMouseLeave={() => (ikonRef.current!.src = PlussIkon)}
+                onMouseEnter={() =>
+                    (ikonRef.current!.src =
+                        '/syk/sykepengesoknad/static/pluss-ikon-hover.svg')
+                }
+                onMouseLeave={() =>
+                    (ikonRef.current!.src =
+                        '/syk/sykepengesoknad/static/pluss-ikon.svg')
+                }
             >
                 <img
                     ref={ikonRef}
                     className="pluss-ikon"
-                    src={PlussIkon}
+                    src={'/syk/sykepengesoknad/static/pluss-ikon.svg'}
                     alt=""
                 />
                 <BodyShort as="span">{tekst('opplasting.legg-til')}</BodyShort>

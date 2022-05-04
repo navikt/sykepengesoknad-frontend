@@ -1,7 +1,5 @@
 import React from 'react'
 
-import sjekkbokser from '../../../public/static/sjekkbokser.svg'
-import sjekkbokserHover from '../../../public/static/sjekkbokser-hover.svg'
 import { useAppStore } from '../../data/stores/app-store'
 import { TagTyper } from '../../types/enums'
 import { RSSvartype } from '../../types/rs-types/rs-svartype'
@@ -36,8 +34,8 @@ const Oppsummering = ({ ekspandert }: EkspanderProps) => {
     return (
         <Utvidbar
             className={'oppsummering lilla' + (ekspandert ? ' apen' : '')}
-            ikon={sjekkbokser}
-            ikonHover={sjekkbokserHover}
+            ikon={'/syk/sykepengesoknad/static/sjekkbokser.svg'}
+            ikonHover={'/syk/sykepengesoknad/static/sjekkbokser-hover.svg'}
             erApen={ekspandert}
             amplitudeProps={{ component: tittel }}
             tittel={tittel}
