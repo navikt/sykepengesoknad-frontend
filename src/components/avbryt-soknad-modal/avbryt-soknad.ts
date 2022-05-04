@@ -2,7 +2,6 @@ import * as H from 'history'
 import React from 'react'
 
 import { redirectTilLoginHvis401 } from '../../data/rest/utils'
-import { urlTilSoknad } from '../../pages/soknad/soknad-link'
 import { RSSoknadstatus } from '../../types/rs-types/rs-soknadstatus'
 import { RSSoknadstype } from '../../types/rs-types/rs-soknadstype'
 import { Soknad } from '../../types/types'
@@ -10,6 +9,7 @@ import { flexGatewayRoot } from '../../utils/environment'
 import fetcher from '../../utils/fetcher'
 import { logger } from '../../utils/logger'
 import { tekst } from '../../utils/tekster'
+import { urlTilSoknad } from '../soknad/soknad-link'
 
 interface AvbrytSoknadReq {
     valgtSoknad: Soknad

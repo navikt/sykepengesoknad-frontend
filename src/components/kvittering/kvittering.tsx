@@ -3,17 +3,7 @@ import React from 'react'
 import { useAppStore } from '../../data/stores/app-store'
 import { RSArbeidssituasjon } from '../../types/rs-types/rs-arbeidssituasjon'
 import { RSSoknadstype } from '../../types/rs-types/rs-soknadstype'
-import {
-    sendtForMerEnn30DagerSiden
-} from '../../utils/dato-utils'
-import {
-    dittNavUrl,
-    sendTilNavKnappDelaySeconds,
-} from '../../utils/environment'
-import { tekst } from '../../utils/tekster'
-import { useAmplitudeInstance } from '../amplitude/amplitude'
-import Endreknapp from '../endreknapp/endreknapp'
-import Ettersending from '../ettersending/ettersending'
+import { sendtForMerEnn30DagerSiden } from '../../utils/dato-utils'
 import Opplysninger from '../opplysninger-fra-sykmelding/opplysninger'
 import Oppsummering from '../oppsummering/oppsummering'
 import Vis from '../vis'

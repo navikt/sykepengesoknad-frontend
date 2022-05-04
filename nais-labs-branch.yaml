@@ -39,5 +39,3 @@ spec:
       value: "prod"
     - name: DINESAKER_URL
       value: "https://person.nav.no/mine-saker/tema/SYK"
-    - name: SEND_TIL_NAV_KNAPP_DELAY_SECONDS
-      value: "10"

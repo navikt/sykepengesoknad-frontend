@@ -108,8 +108,12 @@ describe('Tester ettersending og korrigering', () => {
     })
 
     it('Ettersend', () => {
-        cy.get('.brodsmuler__smuler .navds-link:contains(Søknader)').click({ force: true })
-        cy.get(`#soknader-sendt article a[href*=${soknad.id}]`).click({ force: true })
+        cy.get('.brodsmuler__smuler .navds-link:contains(Søknader)').click({
+            force: true,
+        })
+        cy.get(`#soknader-sendt article a[href*=${soknad.id}]`).click({
+            force: true,
+        })
 
         cy.contains('Send til NAV').click()
         cy.contains(

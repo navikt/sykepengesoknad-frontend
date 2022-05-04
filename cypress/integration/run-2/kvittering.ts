@@ -269,9 +269,16 @@ describe('Tester kvittering', () => {
 
             // Ettersending til nav vises ikke i kvittering
             cy.contains('Send til NAV').should('not.exist')
-            cy.get('.brodsmuler__smuler .navds-link:contains(Søknader)').click({ force: true })
-            cy.get(`#soknader-sendt article a[href*=${arbeidstakerInnenforArbeidsgiverperiodeKvittering.id}]`).click({ force: true })
-            cy.url().should('include', `/sendt/${arbeidstakerInnenforArbeidsgiverperiodeKvittering.id}`)
+            cy.get('.brodsmuler__smuler .navds-link:contains(Søknader)').click({
+                force: true,
+            })
+            cy.get(
+                `#soknader-sendt article a[href*=${arbeidstakerInnenforArbeidsgiverperiodeKvittering.id}]`
+            ).click({ force: true })
+            cy.url().should(
+                'include',
+                `/sendt/${arbeidstakerInnenforArbeidsgiverperiodeKvittering.id}`
+            )
 
             // Ettersend
             cy.contains('Send til NAV').click()

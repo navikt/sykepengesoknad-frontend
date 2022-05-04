@@ -18,11 +18,21 @@ describe('Tester å åpne søknaden direkte fra sykefravaer', () => {
         cy.contains('100% sykmeldt')
     })
 
-    it('Åpner en sendt søknad på en annen siden og sendes til sendt-side', function() {
-        cy.visit(`http://localhost:8080/syk/sykepengesoknad/soknader/${sendtArbeidsledig.id}`)
-        cy.url().should('equal', `http://localhost:8080/syk/sykepengesoknad/sendt/${sendtArbeidsledig.id}`)
-        cy.visit(`http://localhost:8080/syk/sykepengesoknad/soknader/${sendtArbeidsledig.id}/3`)
-        cy.url().should('equal', `http://localhost:8080/syk/sykepengesoknad/sendt/${sendtArbeidsledig.id}`)
+    it('Åpner en sendt søknad på en annen siden og sendes til sendt-side', function () {
+        cy.visit(
+            `http://localhost:8080/syk/sykepengesoknad/soknader/${sendtArbeidsledig.id}`
+        )
+        cy.url().should(
+            'equal',
+            `http://localhost:8080/syk/sykepengesoknad/sendt/${sendtArbeidsledig.id}`
+        )
+        cy.visit(
+            `http://localhost:8080/syk/sykepengesoknad/soknader/${sendtArbeidsledig.id}/3`
+        )
+        cy.url().should(
+            'equal',
+            `http://localhost:8080/syk/sykepengesoknad/sendt/${sendtArbeidsledig.id}`
+        )
     })
 
     it('Hvis vi går til /soknader sendes vi til oversikten', function () {

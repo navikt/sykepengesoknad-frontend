@@ -17,7 +17,7 @@ export const hentHotjarJsTrigger = (
     soknadstype: RSSoknadstype,
     sted: 'kvittering' | 'sendt' | 'soknad'
 ): string | null => {
-    if (sted == 'soknad' || sted == 'sendt' | sted == 'kvittering') {
+    if (sted == 'soknad' || sted == 'sendt' || sted == 'kvittering') {
         switch (soknadstype) {
             case RSSoknadstype.SELVSTENDIGE_OG_FRILANSERE:
                 return 'SOKNAD_FRILANSER_NAERINGSDRIVENDE'
