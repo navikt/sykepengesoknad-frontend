@@ -30,10 +30,6 @@ import GjenapneSoknad from '../soknader/avbryt/gjenapneknapp'
 import SporsmalForm from '../sporsmal/sporsmal-form/sporsmal-form'
 import SporsmalSteg from '../sporsmal/sporsmal-steg/sporsmal-steg'
 import { hentNokkel } from '../sporsmal/sporsmal-utils'
-import {
-    harUsendtSykmelding,
-    UsendtSykmelding,
-} from '../usendt-sykmelding/usendt-sykmelding'
 import Vis from '../vis'
 import { urlTilSoknad } from './soknad-link'
 
@@ -109,7 +105,7 @@ const Soknaden = () => {
 export default Soknaden
 
 const Fordeling = () => {
-    const { valgtSoknad, soknader, sykmeldinger } = useAppStore()
+    const { valgtSoknad, soknader } = useAppStore()
     const { stegId } = useParams<RouteParams>()
     const stegNo = parseInt(stegId)
     const history = useHistory()
@@ -140,12 +136,8 @@ const Fordeling = () => {
                 valgtSoknad,
                 soknader
             )
-            const usendtSykmelding = harUsendtSykmelding(sykmeldinger)
-            if (eldreUsendtSoknad != null && !usendtSykmelding) {
+            if (eldreUsendtSoknad != null) {
                 return <EldreUsendtSoknad eldreSoknad={eldreUsendtSoknad} />
-            }
-            if (usendtSykmelding) {
-                return <UsendtSykmelding />
             }
             return (
                 <>
