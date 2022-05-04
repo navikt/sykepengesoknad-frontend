@@ -31,8 +31,6 @@ spec:
       value: "gcp"
     - name: SYKEFRAVAER_URL
       value: "https://ditt-sykefravaer.labs.nais.io/syk/sykefravaer"
-    - name: SYKMELDINGER_URL
-      value: "https://sykmeldinger.labs.nais.io/syk/sykmeldinger"
     - name: DITTNAV_URL
       value: "https://flex-dittnav-brukertest.labs.nais.io/person/dittnav/?testperson=soknad"
     - name: OPPLAERING
