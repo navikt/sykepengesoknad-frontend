@@ -50,8 +50,8 @@ export function amplitudeEnabled() {
     return publicRuntimeConfig.amplitudeEnabled === 'true'
 }
 
-export function sykmeldingUrl() {
-    return publicRuntimeConfig.sykmeldingUrl
+export function sykmeldingerUrl() {
+    return publicRuntimeConfig.sykmeldingerUrl
 }
 
 export function sykefravaerUrl() {

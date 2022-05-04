@@ -2,7 +2,7 @@ import { Alert, BodyShort } from '@navikt/ds-react'
 import React from 'react'
 
 import { Sykmelding } from '../../types/sykmelding'
-import { sykmeldingUrl } from '../../utils/environment'
+import { sykmeldingerUrl } from '../../utils/environment'
 import { tekst } from '../../utils/tekster'
 import { useAmplitudeInstance } from '../amplitude/amplitude'
 
@@ -16,7 +16,7 @@ export const UsendtSykmelding = () => {
             {tekst('usendt.sykmelding.alert')}
             <BodyShort size="small">
                 <a
-                    href={sykmeldingUrl()}
+                    href={sykmeldingerUrl()}
                     onClick={() =>
                         logEvent('navigere', {
                             lenketekst: tekst('usendt.sykmelding.gaa-til'),
