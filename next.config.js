@@ -21,6 +21,7 @@ module.exports = withLess({
         opplaering: process.env.OPPLAERING,
         sykefravaerUrl: process.env.SYKEFRAVAER_URL,
         dittNavUrl: process.env.DITTNAV_URL,
+        env: process.env.ENVIRONMENT,
         amplitudeKey: process.env.AMPLITUDE_KEY,
         amplitudeEnabled: process.env.AMPLITUDE_ENABLED,
         environment: process.env.ENVIRONMENT,
