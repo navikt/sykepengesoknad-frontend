@@ -42,7 +42,7 @@ spec:
       value: "prod"
     - name: SYKEFRAVAER_URL
       value: "https://www.nav.no/syk/sykefravaer"
-    - name: SYKMELDING_URL
+    - name: SYKMELDINGER_URL
       value: "https://www.nav.no/syk/sykmeldinger"
     - name: DITTNAV_URL
       value: "https://www.nav.no/person/dittnav"
