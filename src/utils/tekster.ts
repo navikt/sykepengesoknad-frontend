@@ -1,7 +1,7 @@
 import AvbrytSoknadModalTekster from '../components/avbryt-soknad-modal/avbryt-soknad-modal-tekster'
 import AvsluttOgFortsettSenereTekster from '../components/avslutt-og-fortsett-senere/avslutt-og-fortsett-senere-tekster'
 import BannerTekster from '../components/banner/banner-tekster'
-import EldreUsendtTekster from '../components/eldre-usendt-soknad/eldre-usendt-soknad-tekster'
+import EldreUsendtSoknaderTekster from '../components/eldre-usendt-soknad/eldre-usendt-soknad-tekster'
 import { EndreSoknadModalTekster } from '../components/endreknapp/endre-soknad-modal-tekster'
 import RefreshHvisFeilStateTekster from '../components/feil/refresh-hvis-feil-state-tekster'
 import DragAndDropTekster from '../components/filopplaster/drag-and-drop/drag-and-drop-tekster'
@@ -26,6 +26,7 @@ import { EkspanderbarHjelpTekster } from '../components/sporsmal/ekspanderbar-hj
 import { EndringUtenEndringTekster } from '../components/sporsmal/endring-uten-endring/endring-uten-endring-tekster'
 import KnapperadTekster from '../components/sporsmal/sporsmal-form/knapperad-tekster'
 import SporsmalTekster from '../components/sporsmal/sporsmal-tekster'
+import UsendtSykmeldingTekster from '../components/usendt-sykmelding/usendt-sykmelding-tekster'
 import { logger } from './logger'
 
 const tekster = {
@@ -51,7 +52,8 @@ const tekster = {
     ...FilListeTekster,
     ...DragAndDropTekster,
     ...OpplastingTekster,
-    ...EldreUsendtTekster,
+    ...EldreUsendtSoknaderTekster,
+    ...UsendtSykmeldingTekster,
     ...AvsluttOgFortsettSenereTekster,
     ...SoknadMedToDelerTekster,
     ...ViktigInformasjonTekster,
