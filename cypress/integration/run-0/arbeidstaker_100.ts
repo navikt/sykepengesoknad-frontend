@@ -156,10 +156,6 @@ describe('Tester arbeidstakersøknad', () => {
             'Hvor mange timer i uken jobber du vanligvis når du er frisk? Varierer det, kan du oppgi gjennomsnittet.'
         )
         cy.get('.undersporsmal .skjemaelement__input#687350').focus().type('9')
-        cy.get('.undersporsmal .navds-alert--warning').should(
-            'contain',
-            'Du skriver at du jobber mindre enn 10 timer per uke'
-        )
 
         // Underspørsmål 2
         cy.contains('Hvor mye jobbet du tilsammen 1. - 24. april 2020?')
