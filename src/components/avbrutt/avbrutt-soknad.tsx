@@ -1,9 +1,10 @@
 import { Alert, BodyLong, BodyShort } from '@navikt/ds-react'
 import React, { useEffect } from 'react'
-import { useParams } from 'react-router-dom'
+import { useHistory, useParams } from 'react-router-dom'
 
 import { RouteParams } from '../../app'
 import { useAppStore } from '../../data/stores/app-store'
+import { RSSoknadstatus } from '../../types/rs-types/rs-soknadstatus'
 import { Brodsmule } from '../../types/types'
 import { SEPARATOR } from '../../utils/constants'
 import { tilLesbarDatoMedArstall } from '../../utils/dato-utils'
@@ -13,6 +14,7 @@ import Banner from '../banner/banner'
 import Brodsmuler from '../brodsmuler/brodsmuler'
 import HvorforSoknadSykepenger from '../hvorfor-soknad-sykepenger/hvorfor-soknad-sykepenger'
 import Opplysninger from '../opplysninger-fra-sykmelding/opplysninger'
+import { urlTilSoknad } from '../soknad/soknad-link'
 import GjenapneSoknad from '../soknader/avbryt/gjenapneknapp'
 
 const brodsmuler: Brodsmule[] = [
@@ -39,6 +41,7 @@ const AvbruttSoknad = () => {
     } = useAppStore()
     const { logEvent } = useAmplitudeInstance()
     const { id } = useParams<RouteParams>()
+    const history = useHistory()
 
     useEffect(() => {
         const filtrertSoknad = soknader.find((soknad) => soknad.id === id)
@@ -58,6 +61,11 @@ const AvbruttSoknad = () => {
     }, [id])
 
     if (!valgtSoknad) return null
+
+    if (valgtSoknad.status !== RSSoknadstatus.AVBRUTT) {
+        history.replace(urlTilSoknad(valgtSoknad))
+        return null
+    }
 
     return (
         <>
