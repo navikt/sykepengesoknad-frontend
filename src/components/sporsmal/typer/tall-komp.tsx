@@ -1,4 +1,4 @@
-import { Alert, BodyShort } from '@navikt/ds-react'
+import { BodyShort } from '@navikt/ds-react'
 import React, { useRef } from 'react'
 import { useFormContext } from 'react-hook-form'
 
@@ -155,23 +155,6 @@ const TallKomp = ({ sporsmal }: SpmProps) => {
                     )}
                 />
             </div>
-
-            <Vis
-                hvis={
-                    sporsmal.tag === TagTyper.HVOR_MANGE_TIMER_PER_UKE &&
-                    watchTall &&
-                    watchTall < 10
-                }
-                render={() => (
-                    <Alert variant="warning">
-                        <BodyShort>
-                            {tekst(
-                                'sykepengesoknad.jobb-underveis-under-10-timer-uke'
-                            )}
-                        </BodyShort>
-                    </Alert>
-                )}
-            />
 
             <div
                 aria-live="assertive"
