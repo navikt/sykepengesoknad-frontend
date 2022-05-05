@@ -65,7 +65,7 @@ const AvbruttSoknad = () => {
             <Brodsmuler brodsmuler={brodsmuler} />
 
             <div className="limit">
-                <Alert variant="warning">
+                <Alert variant="warning" style={{ marginBottom: '1rem' }}>
                     <BodyShort>
                         {tekst('sykepengesoknad.avbrutt.tidspunkt')}{' '}
                         {tilLesbarDatoMedArstall(valgtSoknad!.avbruttDato)}.
