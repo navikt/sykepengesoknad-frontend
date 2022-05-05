@@ -76,10 +76,9 @@
   "scripts": {
     "dev": "next dev -p 8080",
     "dev-ingen-dekorator": "NO_DECORATOR=true npm run dev",
+    "dev-opp": "OPPLAERING=true npm run dev",
     "start": "next start -p 8080",
     "start-ingen-dekorator": "NO_DECORATOR=true npm start",
-    "start-opp": "OPPLAERING=true npm start",
-    "start-mock": "npm start",
     "build": "next build",
     "test": "MOCK_BACKEND=true jest --watch",
     "test:ci": "jest --ci",
@@ -88,7 +87,8 @@
     "prettier:write": "prettier --write .",
     "prettier:check": "prettier --check .",
     "lint": "eslint --ext=ts,tsx src cypress",
-    "lint:fix": "eslint --ext=ts,tsx src cypress --fix"
+    "lint:fix": "eslint --ext=ts,tsx src cypress --fix",
+    "format": "npm run prettier:write && npm run lint:fix"
   },
   "eslintConfig": {
     "extends": "react-app"
