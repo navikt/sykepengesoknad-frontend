@@ -9,6 +9,7 @@ import { flexGatewayRoot } from '../../utils/environment'
 import fetcher from '../../utils/fetcher'
 import { logger } from '../../utils/logger'
 import { tekst } from '../../utils/tekster'
+import { urlTilSoknad } from '../soknad/soknad-link'
 
 interface AvbrytSoknadReq {
     valgtSoknad: Soknad
@@ -58,7 +59,7 @@ export async function avbrytSoknad({
                 ) as any
             )
             setValgtSoknad(nySoknad)
-            history.push(`/soknader/${valgtSoknad!.id}/1`)
+            history.push(urlTilSoknad(nySoknad))
         }
 
         setFeilmeldingTekst('')

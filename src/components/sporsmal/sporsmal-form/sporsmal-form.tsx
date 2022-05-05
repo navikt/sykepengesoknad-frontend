@@ -249,12 +249,6 @@ const SporsmalForm = () => {
                     valgtSoknad.sendtTilNAVDato = new Date()
                 }
 
-                history.push(
-                    pathUtenSteg(history.location.pathname).replace(
-                        'soknader',
-                        'kvittering'
-                    )
-                )
                 valgtSoknad.status = RSSoknadstatus.SENDT
                 setValgtSoknad(valgtSoknad)
                 soknader[
@@ -266,6 +260,8 @@ const SporsmalForm = () => {
                     )!.status = RSSoknadstatus.KORRIGERT
                 }
                 setSoknader(soknader)
+
+                history.push(`/kvittering/${valgtSoknad!.id}`)
             } else {
                 logger.error('Feil ved sending av søknad', res)
                 restFeilet = true

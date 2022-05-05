@@ -1,13 +1,15 @@
 import { Modal } from '@navikt/ds-react'
 import React from 'react'
-import { BrowserRouter, Route, Switch } from 'react-router-dom'
+import { BrowserRouter, Redirect, Route, Switch } from 'react-router-dom'
 import { CSSTransition, TransitionGroup } from 'react-transition-group'
 
 import { Amplitude } from './components/amplitude/amplitudeProvider'
+import AvbruttSoknad from './components/avbrutt/avbrutt-soknad'
 import RedirectTilOversikt from './components/feil/redirect-til-oversikt'
 import { RefreshHvisFeilState } from './components/feil/refresh-hvis-feil-state'
 import KvitteringSide from './components/kvittering/kvittering-side'
 import OpprettUtland from './components/opprett-utland/opprett-utland'
+import SendtSide from './components/sendt/sendt-side'
 import Soknad from './components/soknad/soknaden'
 import Soknader from './components/soknader/soknader'
 import { DataFetcher } from './data/data-fetcher'
@@ -78,13 +80,24 @@ const App = (): any => {
                                                 component={RedirectTilOversikt}
                                             />
                                             <Route
+                                                path="/avbrutt/:id"
+                                                component={AvbruttSoknad}
+                                            />
+                                            <Route
                                                 path="/kvittering/:id"
                                                 component={KvitteringSide}
+                                            />
+                                            <Route
+                                                path="/sendt/:id"
+                                                component={SendtSide}
                                             />
                                             <Route
                                                 path="/sykepengesoknad-utland"
                                                 component={OpprettUtland}
                                             />
+                                            <Route path="">
+                                                <Redirect to="/" />
+                                            </Route>
                                         </Switch>
                                     </RefreshHvisFeilState>
                                 </main>

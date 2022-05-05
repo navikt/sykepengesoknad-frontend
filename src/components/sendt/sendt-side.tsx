@@ -1,23 +1,22 @@
-import { Alert, Button } from '@navikt/ds-react'
+import { Alert } from '@navikt/ds-react'
 import React, { useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom'
 
 import { RouteParams } from '../../app'
-import Endreknapp from '../../components/endreknapp/endreknapp'
 import { useAppStore } from '../../data/stores/app-store'
 import { RSSoknadstatus } from '../../types/rs-types/rs-soknadstatus'
 import { RSSoknadstype } from '../../types/rs-types/rs-soknadstype'
 import { Brodsmule } from '../../types/types'
 import { SEPARATOR } from '../../utils/constants'
-import { dittNavUrl } from '../../utils/environment'
 import { tekst } from '../../utils/tekster'
 import { useAmplitudeInstance } from '../amplitude/amplitude'
 import Banner from '../banner/banner'
 import Brodsmuler from '../brodsmuler/brodsmuler'
+import Endreknapp from '../endreknapp/endreknapp'
 import Ettersending from '../ettersending/ettersending'
 import { hentHotjarJsTrigger, HotjarTrigger } from '../hotjar-trigger'
+import Kvittering from '../kvittering/kvittering'
 import Vis from '../vis'
-import Kvittering from './kvittering'
 
 const brodsmuler: Brodsmule[] = [
     {
@@ -32,7 +31,7 @@ const brodsmuler: Brodsmule[] = [
     },
 ]
 
-const KvitteringSide = () => {
+const SendtSide = () => {
     const {
         valgtSoknad,
         soknader,
@@ -69,6 +68,7 @@ const KvitteringSide = () => {
 
     if (!valgtSoknad) return null
 
+    const erSendtTilNav = valgtSoknad.sendtTilNAVDato !== null
     const erSendtTilArbeidsgiver = valgtSoknad.sendtTilArbeidsgiverDato !== null
 
     const skalViseEndre = valgtSoknad.status !== RSSoknadstatus.KORRIGERT
@@ -78,18 +78,18 @@ const KvitteringSide = () => {
         valgtSoknad.soknadstype !== RSSoknadstype.REISETILSKUDD
     const skalViseKnapperad =
         valgtSoknad.soknadstype !== RSSoknadstype.OPPHOLD_UTLAND &&
-        (skalViseEndre || skalViseSendTilArbeidsgiver)
+        (skalViseEndre || !erSendtTilNav || skalViseSendTilArbeidsgiver)
 
     return (
         <>
             <Banner />
             <Brodsmuler brodsmuler={brodsmuler} />
 
-            <div className="limit kvittering-side">
+            <div className="limit sendt-side">
                 <HotjarTrigger
                     jsTrigger={hentHotjarJsTrigger(
                         valgtSoknad.soknadstype,
-                        'kvittering'
+                        'sendt'
                     )}
                 >
                     <Kvittering />
@@ -98,22 +98,22 @@ const KvitteringSide = () => {
                         hvis={skalViseKnapperad}
                         render={() => (
                             <div className="knapperad">
-                                <Button
-                                    className="avslutt-knapp"
-                                    onClick={() => {
-                                        logEvent('knapp klikket', {
-                                            tekst: tekst('kvittering.avslutt'),
-                                            soknadstype:
-                                                valgtSoknad?.soknadstype,
-                                        })
-                                        // Må sikre at amplitude får logget ferdig
-                                        window.setTimeout(() => {
-                                            window.location.href = dittNavUrl()
-                                        }, 200)
-                                    }}
-                                >
-                                    {tekst('kvittering.avslutt')}
-                                </Button>
+                                <Vis
+                                    hvis={skalViseEndre}
+                                    render={() => <Endreknapp />}
+                                />
+
+                                <Vis
+                                    hvis={!erSendtTilNav}
+                                    render={() => (
+                                        <Ettersending
+                                            gjelder="nav"
+                                            setRerendrekvittering={
+                                                setRerendrekvittering
+                                            }
+                                        />
+                                    )}
+                                />
 
                                 <Vis
                                     hvis={skalViseSendTilArbeidsgiver}
@@ -125,11 +125,6 @@ const KvitteringSide = () => {
                                             }
                                         />
                                     )}
-                                />
-
-                                <Vis
-                                    hvis={skalViseEndre}
-                                    render={() => <Endreknapp />}
                                 />
                             </div>
                         )}
@@ -151,4 +146,4 @@ const KvitteringSide = () => {
     )
 }
 
-export default KvitteringSide
+export default SendtSide

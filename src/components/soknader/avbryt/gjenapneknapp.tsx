@@ -86,7 +86,6 @@ const GjenapneSoknad = () => {
             variant="secondary"
             className="gjenapne-knapp"
             loading={gjenapner}
-            size="small"
             onClick={gjenapneSoknad}
         >
             Gjenåpne søknad
