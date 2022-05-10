@@ -1289,3 +1289,9 @@ export const delvisUtfyltReisetilskudd: RSSoknad = {
     ],
     egenmeldtSykmelding: false,
 }
+
+export const soknaderReisetilskudd = [
+    nyttReisetilskudd,
+    gradertReisetilskudd,
+    delvisUtfyltReisetilskudd,
+]
