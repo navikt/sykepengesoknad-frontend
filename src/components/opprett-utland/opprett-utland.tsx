@@ -8,7 +8,7 @@ import { FetchState, hasData } from '../../data/rest/utils'
 import { useAppStore } from '../../data/stores/app-store'
 import { RSSoknad } from '../../types/rs-types/rs-soknad'
 import { Soknad } from '../../types/types'
-import { flexGatewayRoot } from '../../utils/environment'
+import { backendApp, flexGatewayRoot } from '../../utils/environment'
 import { logger } from '../../utils/logger'
 import { tekst } from '../../utils/tekster'
 import { urlTilSoknad } from '../soknad/soknad-link'
@@ -24,7 +24,7 @@ const OpprettUtland = () => {
 
     const opprett = () => {
         opprettUtland.fetch(
-            `${flexGatewayRoot()}/syfosoknad/api/opprettSoknadUtland`,
+            `${flexGatewayRoot()}/${backendApp()}/api/opprettSoknadUtland`,
             {
                 method: 'POST',
                 credentials: 'include',

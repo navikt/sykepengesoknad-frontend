@@ -6,6 +6,7 @@ import { RSSoknad } from '../types/rs-types/rs-soknad'
 import { Sykmelding } from '../types/sykmelding'
 import { Soknad } from '../types/types'
 import {
+    backendApp,
     flexGatewayRoot,
     loginServiceRedirectUrl,
     loginServiceUrl,
@@ -32,7 +33,7 @@ export function DataFetcher(props: { children: any }) {
     useEffect(() => {
         if (isNotStarted(rssoknader)) {
             rssoknader.fetch(
-                flexGatewayRoot() + '/syfosoknad/api/soknader',
+                `${flexGatewayRoot()}/${backendApp()}/api/soknader`,
                 {
                     credentials: 'include',
                 },

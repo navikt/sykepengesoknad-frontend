@@ -28,5 +28,7 @@ module.exports = withLess({
         sykmeldingerBackendProxyRoot:
             process.env.SYKMELDINGER_BACKEND_PROXY_ROOT,
         dineSakerUrl: process.env.DINESAKER_URL,
+        backendApp: process.env.BACKEND_APP,
+        vedlikehold: process.env.VEDLIKEHOLD,
     },
 })

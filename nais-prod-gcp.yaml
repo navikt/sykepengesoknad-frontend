@@ -50,3 +50,7 @@ spec:
       value: "https://person.nav.no/mine-saker/tema/SYK"
     - name: ASSET_PREFIX
       value: "https://flex-static-files.nav.no/sykepengesoknad"
+    - name: BACKEND_APP
+      value: "syfosoknad"
+    - name: VEDLIKEHOLD
+      value: "false"

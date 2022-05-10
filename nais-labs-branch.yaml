@@ -39,3 +39,7 @@ spec:
       value: "prod"
     - name: DINESAKER_URL
       value: "https://person.nav.no/mine-saker/tema/SYK"
+    - name: BACKEND_APP
+      value: "syfosoknad"
+    - name: VEDLIKEHOLD
+      value: "false"

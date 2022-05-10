@@ -20,7 +20,7 @@ import { sporsmalToRS } from '../../../types/rs-types/rs-sporsmal'
 import { RSSvartype } from '../../../types/rs-types/rs-svartype'
 import { Soknad, Sporsmal } from '../../../types/types'
 import { SEPARATOR } from '../../../utils/constants'
-import { flexGatewayRoot } from '../../../utils/environment'
+import { backendApp, flexGatewayRoot } from '../../../utils/environment'
 import fetcher from '../../../utils/fetcher'
 import { logger } from '../../../utils/logger'
 import { useAmplitudeInstance } from '../../amplitude/amplitude'
@@ -105,7 +105,7 @@ const SporsmalForm = () => {
 
         const res = await fetcher(
             flexGatewayRoot() +
-                `/syfosoknad/api/soknader/${soknad!.id}/sporsmal/${
+                `/${backendApp()}/api/soknader/${soknad!.id}/sporsmal/${
                     sporsmal.id
                 }`,
             {
@@ -190,7 +190,7 @@ const SporsmalForm = () => {
     const hentMottaker = () => {
         rsMottakerResponseFetch.fetch(
             flexGatewayRoot() +
-                `/syfosoknad/api/soknader/${valgtSoknad!.id}/finnMottaker`,
+                `/${backendApp()}/api/soknader/${valgtSoknad!.id}/finnMottaker`,
             {
                 method: 'POST',
                 credentials: 'include',
@@ -225,7 +225,7 @@ const SporsmalForm = () => {
         }
         const res = await fetcher(
             flexGatewayRoot() +
-                `/syfosoknad/api/soknader/${valgtSoknad.id}/send`,
+                `/${backendApp()}/api/soknader/${valgtSoknad.id}/send`,
             {
                 method: 'POST',
                 credentials: 'include',
