@@ -4,7 +4,7 @@ import React, { useState } from 'react'
 import { redirectTilLoginHvis401 } from '../../data/rest/utils'
 import { useAppStore } from '../../data/stores/app-store'
 import { Kvittering, Sporsmal, svarverdiToKvittering } from '../../types/types'
-import { flexGatewayRoot } from '../../utils/environment'
+import { backendApp, flexGatewayRoot } from '../../utils/environment'
 import fetcher from '../../utils/fetcher'
 import { logger } from '../../utils/logger'
 import { tekst } from '../../utils/tekster'
@@ -44,7 +44,7 @@ const Slettknapp = ({ sporsmal, kvittering, update }: SlettknappProps) => {
             )
 
             const res = await fetcher(
-                `${flexGatewayRoot()}/syfosoknad/api/soknader/${
+                `${flexGatewayRoot()}/${backendApp()}/api/soknader/${
                     valgtSoknad?.id
                 }/sporsmal/${sporsmal?.id}/svar/${svar?.id}`,
                 {

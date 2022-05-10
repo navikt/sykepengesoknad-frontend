@@ -12,9 +12,10 @@ import OpprettUtland from './components/opprett-utland/opprett-utland'
 import SendtSide from './components/sendt/sendt-side'
 import Soknad from './components/soknad/soknaden'
 import Soknader from './components/soknader/soknader'
+import Vedlikehold from './components/vedlikehold/vedlikehold'
 import { DataFetcher } from './data/data-fetcher'
 import StoreProvider from './data/stores/store-provider'
-import { isMockBackend } from './utils/environment'
+import { isMockBackend, vedlikehold } from './utils/environment'
 
 export interface RouteParams {
     stegId: string
@@ -26,24 +27,13 @@ if (isMockBackend()) {
 }
 
 const App = (): any => {
-    // const location = useLocation()
     // eslint-disable-next-line
     // @ts-ignore
     Modal.setAppElement('#root')
 
-    /*
-        useEffect(() => {
-            const desktop = window.matchMedia('(min-width: 768px)')
-            let offset = document.getElementById('decorator-header')?.clientHeight || 0
-            if (!desktop.matches) {
-                offset += document.querySelector('.sidebanner')?.clientHeight || 0
-            }
-            setTimeout(() => {
-                window.scrollTo(0, offset)
-            }, 1)
-
-        }, [ location ])
-    */
+    if (vedlikehold()) {
+        return <Vedlikehold />
+    }
 
     return (
         <BrowserRouter basename="/syk/sykepengesoknad">

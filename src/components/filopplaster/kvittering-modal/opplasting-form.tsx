@@ -18,7 +18,7 @@ import { useAppStore } from '../../../data/stores/app-store'
 import { RSOppdaterSporsmalResponse } from '../../../types/rs-types/rest-response/rs-oppdatersporsmalresponse'
 import { RSSvar } from '../../../types/rs-types/rs-svar'
 import { Kvittering, Sporsmal, UtgiftTyper } from '../../../types/types'
-import { flexGatewayRoot } from '../../../utils/environment'
+import { backendApp, flexGatewayRoot } from '../../../utils/environment'
 import fetcher from '../../../utils/fetcher'
 import {
     formaterFilstørrelse,
@@ -147,7 +147,7 @@ const OpplastingForm = ({ sporsmal }: SpmProps) => {
         const svar: RSSvar = { verdi: JSON.stringify(kvittering) }
 
         const syfosoknadRes = await fetcher(
-            `${flexGatewayRoot()}/syfosoknad/api/soknader/${
+            `${flexGatewayRoot()}/${backendApp()}/api/soknader/${
                 valgtSoknad!.id
             }/sporsmal/${sporsmal!.id}/svar`,
             {

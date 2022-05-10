@@ -61,3 +61,11 @@ export function dittNavUrl() {
 export function dinesakerUrl(): string {
     return publicRuntimeConfig.dineSakerUrl
 }
+
+export function backendApp(): string {
+    return publicRuntimeConfig.backendApp
+}
+
+export function vedlikehold(): boolean {
+    return publicRuntimeConfig.vedlikehold === 'true'
+}

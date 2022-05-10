@@ -6,6 +6,7 @@ import { RSSoknad } from '../../types/rs-types/rs-soknad'
 import { RSSoknadstatus } from '../../types/rs-types/rs-soknadstatus'
 import { RSSoknadstype } from '../../types/rs-types/rs-soknadstype'
 import {
+    backendApp,
     flexGatewayRoot,
     isOpplaering,
     sykmeldingerBackendProxyRoot,
@@ -64,7 +65,7 @@ const finnSoknader = (): RSSoknad[] => {
 const soknader = finnSoknader()
 
 mock.put(
-    `${flexGatewayRoot()}/syfosoknad/api/soknader/:soknad/sporsmal/:sporsmal`,
+    `${flexGatewayRoot()}/${backendApp()}/api/soknader/:soknad/sporsmal/:sporsmal`,
     (req) => {
         if (
             req.pathParams.soknad ===
@@ -96,7 +97,7 @@ mock.put(
 )
 
 mock.post(
-    `${flexGatewayRoot()}/syfosoknad/api/soknader/:soknad/korriger`,
+    `${flexGatewayRoot()}/${backendApp()}/api/soknader/:soknad/korriger`,
     (req, res, ctx) => {
         const original = soknader.find(
             (sok: RSSoknad) => sok.id === req.pathParams.soknad
@@ -114,7 +115,7 @@ mock.post(
 )
 
 mock.post(
-    `${flexGatewayRoot()}/syfosoknad/api/opprettSoknadUtland`,
+    `${flexGatewayRoot()}/${backendApp()}/api/opprettSoknadUtland`,
     (req, res, ctx) => {
         const soknad = soknader.find(
             (sok: RSSoknad) =>
@@ -138,7 +139,7 @@ mock.post(
 )
 
 mock.post(
-    `${flexGatewayRoot()}/syfosoknad/api/soknader/:soknad/finnMottaker`,
+    `${flexGatewayRoot()}/${backendApp()}/api/soknader/:soknad/finnMottaker`,
     (req, res, ctx) => {
         const soknadId = req.pathParams.soknad
 
@@ -167,7 +168,7 @@ mock.post(
     }
 )
 
-mock.get(`${flexGatewayRoot()}/syfosoknad/api/soknader`, (req, res, ctx) =>
+mock.get(`${flexGatewayRoot()}/${backendApp()}/api/soknader`, (req, res, ctx) =>
     res(ctx.json(soknader))
 )
 
@@ -176,30 +177,33 @@ mock.get(
     (req, res, ctx) => res(ctx.json(sykmeldinger))
 )
 
-mock.post(`${flexGatewayRoot()}/syfosoknad/api/soknader/:soknad/send`, () =>
-    Promise.resolve({ status: 200 })
-)
-
 mock.post(
-    `${flexGatewayRoot()}/syfosoknad/api/soknader/:soknad/ettersendTilNav`,
+    `${flexGatewayRoot()}/${backendApp()}/api/soknader/:soknad/send`,
     () => Promise.resolve({ status: 200 })
 )
 
 mock.post(
-    `${flexGatewayRoot()}/syfosoknad/api/soknader/:soknad/ettersendTilArbeidsgiver`,
+    `${flexGatewayRoot()}/${backendApp()}/api/soknader/:soknad/ettersendTilNav`,
     () => Promise.resolve({ status: 200 })
 )
 
-mock.post(`${flexGatewayRoot()}/syfosoknad/api/soknader/:soknad/avbryt`, () =>
-    Promise.resolve({ status: 200 })
+mock.post(
+    `${flexGatewayRoot()}/${backendApp()}/api/soknader/:soknad/ettersendTilArbeidsgiver`,
+    () => Promise.resolve({ status: 200 })
 )
 
-mock.post(`${flexGatewayRoot()}/syfosoknad/api/soknader/:soknad/gjenapne`, () =>
-    Promise.resolve({ status: 200 })
+mock.post(
+    `${flexGatewayRoot()}/${backendApp()}/api/soknader/:soknad/avbryt`,
+    () => Promise.resolve({ status: 200 })
+)
+
+mock.post(
+    `${flexGatewayRoot()}/${backendApp()}/api/soknader/:soknad/gjenapne`,
+    () => Promise.resolve({ status: 200 })
 )
 
 mock.delete(
-    `${flexGatewayRoot()}/syfosoknad/api/soknader/:soknad/sporsmal/:spmid/svar/:svarid`,
+    `${flexGatewayRoot()}/${backendApp()}/api/soknader/:soknad/sporsmal/:spmid/svar/:svarid`,
     () => Promise.resolve({ status: 204 })
 )
 
@@ -215,7 +219,7 @@ mock.post(
 )
 
 mock.post(
-    `${flexGatewayRoot()}/syfosoknad/api/soknader/:soknad/sporsmal/:spmid/svar`,
+    `${flexGatewayRoot()}/${backendApp()}/api/soknader/:soknad/sporsmal/:spmid/svar`,
     (req) => {
         const r = soknader.find((r) => r.id === req.pathParams.soknad)
         const spm = jsonDeepCopy(

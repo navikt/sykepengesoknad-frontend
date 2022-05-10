@@ -9,7 +9,7 @@ import { RSSoknadstatus } from '../../types/rs-types/rs-soknadstatus'
 import { RSSoknadstype } from '../../types/rs-types/rs-soknadstype'
 import { Soknad } from '../../types/types'
 import { sendtForMerEnn30DagerSiden } from '../../utils/dato-utils'
-import { flexGatewayRoot } from '../../utils/environment'
+import { backendApp, flexGatewayRoot } from '../../utils/environment'
 import fetcher from '../../utils/fetcher'
 import { tekst } from '../../utils/tekster'
 import Vis from '../vis'
@@ -136,7 +136,7 @@ const Arbeidstaker = () => {
     async function erForsteSoknadUtenforArbeidsgiverperiode(id?: string) {
         if (id === undefined) return true
         const res = await fetcher(
-            flexGatewayRoot() + `/syfosoknad/api/soknader/${id}/finnMottaker`,
+            `${flexGatewayRoot()}/${backendApp()}/api/soknader/${id}/finnMottaker`,
             {
                 method: 'POST',
                 credentials: 'include',
