@@ -23,7 +23,9 @@ const articleTilSoknad = (articles: any) => {
 
 describe('Tester sortering av søknader', () => {
     it('Laster startside', function () {
-        cy.visit('http://localhost:8080/syk/sykepengesoknad')
+        cy.visit(
+            'http://localhost:8080/syk/sykepengesoknad?testperson=alle-soknader'
+        )
         cy.get('.navds-heading--xlarge')
             .should('be.visible')
             .and('have.text', 'Søknader')

@@ -106,7 +106,9 @@ describe('Tester støtte for gamle spørsmål', () => {
     }
 
     before(() => {
-        cy.visit('http://localhost:8080/syk/sykepengesoknad')
+        cy.visit(
+            'http://localhost:8080/syk/sykepengesoknad?testperson=alle-soknader'
+        )
     })
 
     it('Laster startside', () => {

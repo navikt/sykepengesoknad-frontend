@@ -20,14 +20,14 @@ describe('Tester å åpne søknaden direkte fra sykefravaer', () => {
 
     it('Åpner en sendt søknad på en annen siden og sendes til sendt-side', function () {
         cy.visit(
-            `http://localhost:8080/syk/sykepengesoknad/soknader/${sendtArbeidsledig.id}`
+            `http://localhost:8080/syk/sykepengesoknad/soknader/${sendtArbeidsledig.id}?testperson=alle-soknader`
         )
         cy.url().should(
             'equal',
             `http://localhost:8080/syk/sykepengesoknad/sendt/${sendtArbeidsledig.id}`
         )
         cy.visit(
-            `http://localhost:8080/syk/sykepengesoknad/soknader/${sendtArbeidsledig.id}/3`
+            `http://localhost:8080/syk/sykepengesoknad/soknader/${sendtArbeidsledig.id}/3?testperson=alle-soknader`
         )
         cy.url().should(
             'equal',

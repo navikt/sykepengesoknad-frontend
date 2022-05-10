@@ -4,7 +4,9 @@ describe('Tester endring uten en endringer', () => {
     const soknad = sendtArbeidsledigKvittering
 
     before(() => {
-        cy.visit(`http://localhost:8080/syk/sykepengesoknad/sendt/${soknad.id}`)
+        cy.visit(
+            `http://localhost:8080/syk/sykepengesoknad/sendt/${soknad.id}?testperson=alle-soknader`
+        )
     })
 
     it('Jeg vil endre svarene i søknaden', () => {

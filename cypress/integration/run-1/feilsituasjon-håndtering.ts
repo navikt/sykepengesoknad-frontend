@@ -6,7 +6,9 @@ import {
 describe('Tester feilsituasjoner ', () => {
     describe('Tester SPORSMAL_FINNES_IKKE_I_SOKNAD ', () => {
         before(() => {
-            cy.visit('http://localhost:8080/syk/sykepengesoknad')
+            cy.visit(
+                'http://localhost:8080/syk/sykepengesoknad?testperson=alle-soknader'
+            )
         })
 
         it('Laster startside og åpner søknad', function () {
@@ -46,7 +48,9 @@ describe('Tester feilsituasjoner ', () => {
 
     describe('Tester FEIL_STATUS_FOR_OPPDATER_SPORSMAL ', () => {
         before(() => {
-            cy.visit('http://localhost:8080/syk/sykepengesoknad')
+            cy.visit(
+                'http://localhost:8080/syk/sykepengesoknad?testperson=alle-soknader'
+            )
         })
 
         it('Vi går inn på en annen søknad som gir en annen feil', function () {

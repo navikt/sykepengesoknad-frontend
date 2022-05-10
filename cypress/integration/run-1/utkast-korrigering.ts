@@ -5,7 +5,9 @@ describe('Tester utkast til korrigerte søknader', () => {
     const tilKorrigering = arbeidstakerTilKorrigering
 
     before(() => {
-        cy.visit('http://localhost:8080/syk/sykepengesoknad')
+        cy.visit(
+            'http://localhost:8080/syk/sykepengesoknad?testperson=alle-soknader'
+        )
     })
 
     it('Henter liste med søknader', () => {

@@ -7,6 +7,7 @@ import { Brodsmule } from '../../types/types'
 import { dittNavUrl, sykefravaerUrl } from '../../utils/environment'
 import { useAmplitudeInstance } from '../amplitude/amplitude'
 import Vis from '../vis'
+import Person from './Person'
 
 const LITEN = 768
 
@@ -99,11 +100,7 @@ const Brodsmuler = ({ brodsmuler }: BrodsmulerProps) => {
     return (
         <nav className="brodsmuler" ref={smulesti} aria-label="Du er her: ">
             <div className="limit">
-                <img
-                    src="/syk/sykepengesoknad/static/person.svg"
-                    alt="Du"
-                    className="brodsmuler__ikon"
-                />
+                <Person />
                 <ul className="brodsmuler__smuler">
                     <Vis
                         hvis={skjerm <= LITEN}

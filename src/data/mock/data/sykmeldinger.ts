@@ -1,4 +1,6 @@
-export const arbeidstaker100Syk = {
+import { Sykmelding } from '../../../types/sykmelding'
+
+export const arbeidstaker100Syk = new Sykmelding({
     id: '61e04c94-a4be-45f5-8dbd-5c0b7a8707ea',
     mottattTidspunkt: '2020-04-01T20:00:00Z',
     behandlingsutfall: {
@@ -136,8 +138,8 @@ export const arbeidstaker100Syk = {
     papirsykmelding: false,
     harRedusertArbeidsgiverperiode: false,
     merknader: null,
-}
-export const arbeidstaker50Syk = {
+})
+export const arbeidstaker50Syk = new Sykmelding({
     id: 'c27f8d88-64f5-4926-b1d0-559e69d40849',
     mottattTidspunkt: '2020-04-01T20:00:00Z',
     behandlingsutfall: {
@@ -269,8 +271,8 @@ export const arbeidstaker50Syk = {
     papirsykmelding: false,
     harRedusertArbeidsgiverperiode: false,
     merknader: null,
-}
-export const arbeidsledig100Syk = {
+})
+export const arbeidsledig100Syk = new Sykmelding({
     id: '17ee4fc0-43cc-48ac-b765-6cdc5682f544',
     mottattTidspunkt: '2020-04-01T20:00:00Z',
     behandlingsutfall: {
@@ -404,8 +406,8 @@ export const arbeidsledig100Syk = {
     papirsykmelding: false,
     harRedusertArbeidsgiverperiode: false,
     merknader: null,
-}
-export const frilanser100Syk = {
+})
+export const frilanser100Syk = new Sykmelding({
     id: '7abc3d05-f5dc-4aef-913d-8823b3a5c065',
     mottattTidspunkt: '2020-03-31T20:00:00Z',
     behandlingsutfall: {
@@ -563,8 +565,8 @@ export const frilanser100Syk = {
     papirsykmelding: false,
     harRedusertArbeidsgiverperiode: false,
     merknader: null,
-}
-export const arbeidstakerBehandlingsdagSyk = {
+})
+export const arbeidstakerBehandlingsdagSyk = new Sykmelding({
     id: '9acc8456-ef38-45a3-a3b7-efb4dac24f93',
     mottattTidspunkt: '2020-04-01T20:00:00Z',
     behandlingsutfall: {
@@ -693,8 +695,8 @@ export const arbeidstakerBehandlingsdagSyk = {
     papirsykmelding: false,
     harRedusertArbeidsgiverperiode: false,
     merknader: null,
-}
-export const arbeidstakerReisetilskuddSyk = {
+})
+export const arbeidstakerReisetilskuddSyk = new Sykmelding({
     id: '8bb5be49-593c-465b-b77b-cb277a132b71',
     mottattTidspunkt: '2020-03-31T20:00:00Z',
     behandlingsutfall: {
@@ -823,9 +825,9 @@ export const arbeidstakerReisetilskuddSyk = {
     papirsykmelding: false,
     harRedusertArbeidsgiverperiode: false,
     merknader: null,
-}
+})
 
-export const syk1 = {
+export const syk1 = new Sykmelding({
     ...arbeidstaker100Syk,
     id: 'syk1',
     sykmeldingsperioder: [
@@ -849,8 +851,8 @@ export const syk1 = {
             reisetilskudd: false,
         },
     ],
-}
-export const syk2 = {
+})
+export const syk2 = new Sykmelding({
     ...arbeidstaker100Syk,
     id: 'syk2',
     sykmeldingsperioder: [
@@ -874,8 +876,8 @@ export const syk2 = {
             reisetilskudd: false,
         },
     ],
-}
-export const syk3 = {
+})
+export const syk3 = new Sykmelding({
     ...arbeidstaker100Syk,
     id: 'syk3',
     sykmeldingsperioder: [
@@ -899,8 +901,8 @@ export const syk3 = {
             reisetilskudd: false,
         },
     ],
-}
-export const syk4 = {
+})
+export const syk4 = new Sykmelding({
     ...arbeidstaker100Syk,
     id: 'syk4',
     sykmeldingsperioder: [
@@ -924,8 +926,8 @@ export const syk4 = {
             reisetilskudd: false,
         },
     ],
-}
-export const syk5 = {
+})
+export const syk5 = new Sykmelding({
     ...arbeidstaker100Syk,
     id: 'syk5',
     sykmeldingsperioder: [
@@ -949,8 +951,8 @@ export const syk5 = {
             reisetilskudd: false,
         },
     ],
-}
-export const syk7 = {
+})
+export const syk7 = new Sykmelding({
     ...arbeidstaker100Syk,
     id: 'syk7',
     sykmeldingsperioder: [
@@ -974,8 +976,8 @@ export const syk7 = {
             reisetilskudd: false,
         },
     ],
-}
-export const syk8 = {
+})
+export const syk8 = new Sykmelding({
     ...arbeidstaker100Syk,
     id: 'syk8',
     sykmeldingsperioder: [
@@ -999,9 +1001,9 @@ export const syk8 = {
             reisetilskudd: false,
         },
     ],
-}
+})
 
-export const gradertReisetilskuddSm = {
+export const gradertReisetilskuddSm = new Sykmelding({
     id: '76214ab1-2eae-439b-8f73-2713eb97989e',
     pasient: {
         fnr: '24127426046',
@@ -1120,9 +1122,9 @@ export const gradertReisetilskuddSm = {
     papirsykmelding: false,
     harRedusertArbeidsgiverperiode: false,
     merknader: null,
-}
+})
 
-const brukertestSykmelding = {
+export const brukertestSykmelding = new Sykmelding({
     id: 'abc5acf2-a44f-42e5-87b2-02c9d0b39ce8',
     pasient: {
         fnr: '08089404496',
@@ -1224,9 +1226,35 @@ const brukertestSykmelding = {
     papirsykmelding: false,
     harRedusertArbeidsgiverperiode: false,
     merknader: null,
-} as any
+    utdypendeOpplysninger: {
+        '6.2': {
+            '6.2.1': {
+                sporsmal:
+                    'Beskriv kort sykehistorie, symptomer og funn i dagens situasjon.',
+                svar: 'Langvarig korsryggsmerter. Ømhet og smerte',
+                restriksjoner: ['SKJERMET_FOR_ARBEIDSGIVER'],
+            },
+            '6.2.2': {
+                sporsmal: 'Hvordan påvirker sykdommen arbeidsevnen',
+                svar: 'Kan ikke utføre arbeidsoppgaver 100% som kreves fra yrket. Duplikatbuster: d79c75bb-af99-4357-8b7d-b0d5cbfd8f1b',
+                restriksjoner: ['SKJERMET_FOR_ARBEIDSGIVER'],
+            },
+            '6.2.3': {
+                sporsmal: 'Har behandlingen frem til nå bedret arbeidsevnen?',
+                svar: 'Nei',
+                restriksjoner: ['SKJERMET_FOR_ARBEIDSGIVER'],
+            },
+            '6.2.4': {
+                sporsmal:
+                    'Beskriv Pågående og planlagt henvisning, utredning og/eller behandling',
+                svar: 'Henvist til fysio',
+                restriksjoner: ['SKJERMET_FOR_ARBEIDSGIVER'],
+            },
+        },
+    },
+})
 
-export const sykmeldinger = [
+export const sykmeldinger: Sykmelding[] = [
     arbeidstaker100Syk,
     arbeidstaker50Syk,
     arbeidsledig100Syk,
