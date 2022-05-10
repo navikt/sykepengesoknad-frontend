@@ -2,7 +2,9 @@ import { sendtArbeidsledig } from '../../../src/data/mock/data/soknader-integrat
 
 describe('Tester sendt søknad', () => {
     before(() => {
-        cy.visit('http://localhost:8080/syk/sykepengesoknad')
+        cy.visit(
+            'http://localhost:8080/syk/sykepengesoknad?testperson=alle-soknader'
+        )
     })
 
     it('Laster startside', function () {
@@ -27,18 +29,19 @@ describe('Tester sendt søknad', () => {
             'equal',
             `http://localhost:8080/syk/sykepengesoknad/sendt/${sendtArbeidsledig.id}`
         )
-    })
-
-    it('Tekster stemmer', function () {
         cy.contains('Søknaden er sendt til NAV')
     })
 
     it('Siden kan refreshes', function () {
+        cy.visit(
+            `http://localhost:8080/syk/sykepengesoknad/sendt/${sendtArbeidsledig.id}?testperson=alle-soknader`
+        )
+        cy.contains('Søknaden er sendt til NAV')
         cy.reload()
         cy.contains('Søknaden er sendt til NAV')
         cy.url().should(
             'equal',
-            `http://localhost:8080/syk/sykepengesoknad/sendt/${sendtArbeidsledig.id}`
+            `http://localhost:8080/syk/sykepengesoknad/sendt/${sendtArbeidsledig.id}?testperson=alle-soknader`
         )
     })
 })

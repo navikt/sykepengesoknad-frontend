@@ -3,7 +3,9 @@ import { oppholdUtland } from '../../../src/data/mock/data/soknader-opplaering'
 
 describe('Tester opprettelse av søknad om å beholde sykepenger utenfor EØS', () => {
     before(() => {
-        cy.visit('http://localhost:8080/syk/sykepengesoknad')
+        cy.visit(
+            'http://localhost:8080/syk/sykepengesoknad?testperson=alle-soknader'
+        )
     })
 
     it('Laster startside', function () {

@@ -79,7 +79,9 @@ const setUpMock = (person: Persona) => {
                 (sok: RSSoknad) => sok.id === req.pathParams.soknad
             )
             if (!original) {
-                window.alert('Du kan ikke endre en endret søknad i labs versjonen')
+                window.alert(
+                    'Du kan ikke endre en endret søknad i labs versjonen'
+                )
                 return res(ctx.status(500))
             }
             const soknad = jsonDeepCopy(original)
@@ -93,7 +95,7 @@ const setUpMock = (person: Persona) => {
     mock.post(
         `${flexGatewayRoot()}/${backendApp()}/api/opprettSoknadUtland`,
         (req, res, ctx) => {
-            const soknad = soknader.find(
+            const soknad = person.soknader.find(
                 (sok: RSSoknad) =>
                     sok.soknadstype === RSSoknadstype.OPPHOLD_UTLAND &&
                     sok.status === RSSoknadstatus.NY
@@ -121,7 +123,8 @@ const setUpMock = (person: Persona) => {
 
             if (
                 soknadId === arbeidstaker.id ||
-                soknadId === arbeidstakerUtenforArbeidsgiverperiodeKvittering.id ||
+                soknadId ===
+                    arbeidstakerUtenforArbeidsgiverperiodeKvittering.id ||
                 soknadId ===
                     arbeidstakerDeltPeriodeForsteUtenforArbeidsgiverperiodeKvittering.id ||
                 soknadId ===
@@ -130,11 +133,14 @@ const setUpMock = (person: Persona) => {
                 soknadId ===
                     arbeidstakerMedOppholdForsteUtenforArbeidsgiverperiodeKvittering.id
             ) {
-                return res(ctx.json({ mottaker: RSMottaker.ARBEIDSGIVER_OG_NAV }))
+                return res(
+                    ctx.json({ mottaker: RSMottaker.ARBEIDSGIVER_OG_NAV })
+                )
             }
             if (
                 soknadId === arbeidstakerGradert.id ||
-                soknadId === arbeidstakerInnenforArbeidsgiverperiodeKvittering.id ||
+                soknadId ===
+                    arbeidstakerInnenforArbeidsgiverperiodeKvittering.id ||
                 soknadId === sok6.id
             ) {
                 return res(ctx.json({ mottaker: RSMottaker.ARBEIDSGIVER }))
@@ -144,8 +150,9 @@ const setUpMock = (person: Persona) => {
         }
     )
 
-    mock.get(`${flexGatewayRoot()}/${backendApp()}/api/soknader`, (req, res, ctx) =>
-        res(ctx.json(person.soknader))
+    mock.get(
+        `${flexGatewayRoot()}/${backendApp()}/api/soknader`,
+        (req, res, ctx) => res(ctx.json(person.soknader))
     )
 
     mock.get(
