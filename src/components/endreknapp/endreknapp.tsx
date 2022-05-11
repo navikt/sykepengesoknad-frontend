@@ -52,8 +52,7 @@ const Endreknapp = () => {
                     setFeilmeldingTekst('')
                 } else {
                     logger.error(
-                        'Feil ved opprettelse av UTKAST_TIL_KORRIGERING',
-                        fetchState
+                        `Feil ved opprettelse av UTKAST_TIL_KORRIGERING ${fetchState.httpCode}`
                     )
                     setFeilmeldingTekst(tekst('kvittering.korrigering.feilet'))
                 }

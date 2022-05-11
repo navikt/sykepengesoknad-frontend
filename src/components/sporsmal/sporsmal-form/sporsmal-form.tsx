@@ -155,9 +155,6 @@ const SporsmalForm = () => {
                 typeof data === 'object' &&
                 data.reason === 'FEIL_STATUS_FOR_OPPDATER_SPORSMAL'
             ) {
-                logger.warn(
-                    'FEIL_STATUS_FOR_OPPDATER_SPORSMAL, gir bruker mulighet for å refreshe siden for å resette state'
-                )
                 restFeilet = true
                 setFeilState(true)
             } else if (
@@ -182,7 +179,6 @@ const SporsmalForm = () => {
                 restFeilet = true
             }
         } catch (e) {
-            logger.error('Feil ved kall OPPDATER_SPORSMAL med exception', e)
             restFeilet = true
         }
     }
@@ -201,8 +197,7 @@ const SporsmalForm = () => {
                     setMottaker(fetchState.data.mottaker)
                 } else {
                     logger.error(
-                        'Klarte ikke hente MOTTAKER av søknad',
-                        fetchState
+                        `Klarte ikke hente MOTTAKER av søknad ${fetchState.httpCode}`
                     )
                 }
             }

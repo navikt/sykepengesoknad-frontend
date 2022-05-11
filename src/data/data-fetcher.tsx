@@ -17,8 +17,8 @@ import useFetch from './rest/use-fetch'
 import {
     FetchState,
     hasAny401,
-    hasAnyFailed,
     hasData,
+    hasFailed,
     isAnyNotStartedOrPending,
     isNotStarted,
 } from './rest/utils'
@@ -73,9 +73,18 @@ export function DataFetcher(props: { children: any }) {
         )
     } else if (hasAny401([rssoknader, sykmeldinger])) {
         window.location.href = hentLoginUrl()
-    } else if (hasAnyFailed([rssoknader, sykmeldinger])) {
+    } else if (hasFailed(rssoknader)) {
         logger.warn(
-            `Klarer ikke hente en av disse [ soknader = ${rssoknader.httpCode}, sykmeldinger = ${sykmeldinger.httpCode} ]`
+            `Klarer ikke hente soknader = ${
+                rssoknader.httpCode
+            } ${JSON.stringify(rssoknader.error, null, 2)} ]`
+        )
+        return <IngenData />
+    } else if (hasFailed(sykmeldinger)) {
+        logger.warn(
+            `Klarer ikke hente sykmeldinger = ${
+                sykmeldinger.httpCode
+            } ${JSON.stringify(sykmeldinger.error, null, 2)} ]`
         )
         return <IngenData />
     }
