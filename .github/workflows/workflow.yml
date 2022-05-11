@@ -103,11 +103,11 @@ jobs:
                   start: npm run start-ingen-dekorator
                   wait-on: http://localhost:8080/syk/sykepengesoknad/api/isAlive
                   spec: cypress/integration/run-${{ matrix.containers }}/**
-            - uses: actions/upload-artifact@v2
-              if: ${{ always() }}
+            - uses: actions/upload-artifact@v3
               with:
                   name: cypress-screenshots
                   path: cypress/screenshots
+                  if-no-files-found: ignore
 
     deploy-to-q1-dev-gcp:
         if: github.ref == 'refs/heads/master' || startsWith(github.ref, 'refs/heads/dev-')
