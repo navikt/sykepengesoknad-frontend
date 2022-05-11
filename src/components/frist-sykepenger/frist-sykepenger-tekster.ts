@@ -3,9 +3,9 @@ const FristSykepengerTekster = {
     'frist-sykepenger.innsending':
         'Jo raskere du sender inn søknaden, jo raskere vil den vanligvis bli behandlet. Med andre ord er det ingen grunn til å vente med å sende inn søknaden.',
     'frist-sykepenger.hovedregel':
-        'Om du velger å søke på et senere tidspunkt, er fristen for å søke som hovedregel 3 hele kalendermåneder etter den måneden du hadde sykedager. Se eksempel 1.',
+        'Om du velger å søke på et senere tidspunkt, er fristen for å søke som hovedregel <strong>3 hele kalendermåneder etter den måneden du hadde sykedager</strong>. Se eksempel 1.',
     'frist-sykepenger.ulike.måneder':
-        'Hvis sykmeldingen gjelder dager i to ulike måneder, gjelder det to ulike frister. Se eksempel 2.',
+        'Hvis sykmeldingen <strong>gjelder dager i to ulike måneder</strong>, gjelder det to ulike frister. Se eksempel 2.',
     'frist-sykepenger.eksempel.en.tittel': 'Eksempel 1',
     'frist-sykepenger.eksempel.en.tekst':
         'Har du sykedager i mai, vil fristen for å søke bli siste dagen i august.',

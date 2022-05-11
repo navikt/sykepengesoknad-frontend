@@ -1,4 +1,5 @@
 import { Accordion, BodyLong, BodyShort, Heading } from '@navikt/ds-react'
+import parser from 'html-react-parser'
 import React, { useState } from 'react'
 
 import { RSSoknadstype } from '../../types/rs-types/rs-soknadstype'
@@ -34,9 +35,11 @@ const FristSykepenger = ({ soknadstype }: FristSykepengerProps) => {
                 </Accordion.Header>
                 <Accordion.Content>
                     <BodyLong>{tekst('frist-sykepenger.innsending')}</BodyLong>
-                    <BodyLong>{tekst('frist-sykepenger.hovedregel')}</BodyLong>
                     <BodyLong>
-                        {tekst('frist-sykepenger.ulike.måneder')}
+                        {parser(tekst('frist-sykepenger.hovedregel'))}
+                    </BodyLong>
+                    <BodyLong>
+                        {parser(tekst('frist-sykepenger.ulike.måneder'))}
                     </BodyLong>
 
                     <Utvidbar erApen={false} type="intern" tittel="Eksempel">
@@ -79,7 +82,9 @@ const FristSykepenger = ({ soknadstype }: FristSykepengerProps) => {
                         />
                     </Utvidbar>
 
-                    <BodyShort>{tekst('frist-sykepenger.husk')}</BodyShort>
+                    <BodyLong spacing>
+                        {tekst('frist-sykepenger.husk')}
+                    </BodyLong>
 
                     <HvorforSoknadSykepenger soknadstype={soknadstype} />
                 </Accordion.Content>
