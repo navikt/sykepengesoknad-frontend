@@ -7,7 +7,7 @@ import RefreshHvisFeilStateTekster from '../components/feil/refresh-hvis-feil-st
 import DragAndDropTekster from '../components/filopplaster/drag-and-drop/drag-and-drop-tekster'
 import FilListeTekster from '../components/filopplaster/fil-liste/fil-liste-tekster'
 import OpplastingTekster from '../components/filopplaster/kvittering-modal/opplasting-tekster'
-import HvorforSoknadSykepengerTekster from '../components/hvorfor-soknad-sykepenger/hvorfor-soknad-sykepenger-tekster'
+import FristSykepengerTekster from '../components/frist-sykepenger/frist-sykepenger-tekster'
 import KvitteringTekster from '../components/kvittering/kvittering-tekster'
 import OmReisetilskuddTekster from '../components/om-reisetilskudd/om-reisetilskudd-tekster'
 import OmSykepengerTekster from '../components/om-sykepenger/om-sykepenger-tekster'
@@ -55,7 +55,7 @@ const tekster = {
     ...AvsluttOgFortsettSenereTekster,
     ...SoknadMedToDelerTekster,
     ...ViktigInformasjonTekster,
-    ...HvorforSoknadSykepengerTekster,
+    ...FristSykepengerTekster,
     ...BendiksenTekster,
 }
 

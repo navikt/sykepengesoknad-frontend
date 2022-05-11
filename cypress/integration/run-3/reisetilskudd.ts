@@ -37,7 +37,7 @@ describe('Teste førsteside i reisetilskuddsøknaden', () => {
         })
 
         it('Skal ha egen folketrygloven tekst', () => {
-            cy.get('.hvorfor-soknad-sykepenger').click()
+            cy.get('.frist-sykepenger').click()
             cy.contains(
                 'Ifølge folketrygdloven kan du få reisetilskudd hvis du har rett til sykepenger. Reisetilskuddet kommer da i stedet for sykepengene.'
             )

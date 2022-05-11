@@ -29,7 +29,7 @@ describe('Tester arbeidstakersøknad', () => {
         ).should('not.exist')
 
         // Personvern erklæring
-        cy.get('.hvorfor-soknad-sykepenger').click()
+        cy.get('.frist-sykepenger').click()
         cy.contains(
             'Les mer om hvordan NAV behandler personopplysninger'
         ).click()

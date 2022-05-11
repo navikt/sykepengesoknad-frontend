@@ -12,7 +12,7 @@ import { tekst } from '../../utils/tekster'
 import { useAmplitudeInstance } from '../amplitude/amplitude'
 import Banner from '../banner/banner'
 import Brodsmuler from '../brodsmuler/brodsmuler'
-import HvorforSoknadSykepenger from '../hvorfor-soknad-sykepenger/hvorfor-soknad-sykepenger'
+import FristSykepenger from '../frist-sykepenger/frist-sykepenger'
 import Opplysninger from '../opplysninger-fra-sykmelding/opplysninger'
 import { urlTilSoknad } from '../soknad/soknad-link'
 import GjenapneSoknad from '../soknader/avbryt/gjenapneknapp'
@@ -96,9 +96,7 @@ const AvbruttSoknad = () => {
                 </div>
 
                 <Opplysninger ekspandert={true} steg="avbrutt-søknad" />
-                <HvorforSoknadSykepenger
-                    soknadstype={valgtSoknad.soknadstype}
-                />
+                <FristSykepenger soknadstype={valgtSoknad.soknadstype} />
                 <GjenapneSoknad />
             </div>
         </>

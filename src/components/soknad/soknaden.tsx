@@ -6,7 +6,6 @@ import { Link, useHistory, useParams } from 'react-router-dom'
 import { RouteParams } from '../../app'
 import Banner from '../../components/banner/banner'
 import Brodsmuler from '../../components/brodsmuler/brodsmuler'
-import HvorforSoknadSykepenger from '../../components/hvorfor-soknad-sykepenger/hvorfor-soknad-sykepenger'
 import OmReisetilskudd from '../../components/om-reisetilskudd/om-reisetilskudd'
 import Opplysninger from '../../components/opplysninger-fra-sykmelding/opplysninger'
 import SoknadMedToDeler from '../../components/soknad-med-to-deler/soknad-med-to-deler'
@@ -24,6 +23,7 @@ import {
     EldreUsendtSoknad,
     harEldreUsendtSoknad,
 } from '../eldre-usendt-soknad/eldre-usendt-soknad'
+import FristSykepenger from '../frist-sykepenger/frist-sykepenger'
 import { hentHotjarJsTrigger, HotjarTrigger } from '../hotjar-trigger'
 import { ViktigInformasjon } from '../soknad-intro/viktig-informasjon'
 import { hentNokkel } from '../sporsmal/sporsmal-utils'
@@ -193,9 +193,7 @@ const Fordeling = () => {
             <Vis
                 hvis={stegNo === 1 && !erUtlandssoknad}
                 render={() => (
-                    <HvorforSoknadSykepenger
-                        soknadstype={valgtSoknad.soknadstype}
-                    />
+                    <FristSykepenger soknadstype={valgtSoknad.soknadstype} />
                 )}
             />
 

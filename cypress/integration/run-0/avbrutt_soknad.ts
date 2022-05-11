@@ -44,7 +44,7 @@ describe('Tester avryting av søknad', () => {
 
         // Sykmelding
         cy.contains('1. april - 24. april 2020 • 24 dager')
-        cy.contains('Hvorfor må jeg søke om sykepenger?')
+        cy.contains('Frist for å søke')
     })
 
     it('Søknad kan gjenåpnes', function () {
