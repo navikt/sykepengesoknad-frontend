@@ -42,7 +42,12 @@ const FristSykepenger = ({ soknadstype }: FristSykepengerProps) => {
                         {parser(tekst('frist-sykepenger.ulike.måneder'))}
                     </BodyLong>
 
-                    <Utvidbar erApen={false} type="intern" tittel="Eksempel">
+                    <Utvidbar
+                        erApen={false}
+                        type="intern"
+                        tittel="Eksempel"
+                        amplitudeProps={{ component: 'Eksempel' }}
+                    >
                         <Heading size="xsmall" level="3">
                             {tekst('frist-sykepenger.eksempel.en.tittel')}
                         </Heading>
