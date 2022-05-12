@@ -1,0 +1,108 @@
+@import '../../../node_modules/@navikt/ds-tokens/dist/tokens';
+@import '../basic';
+
+.frist-sykepenger {
+    margin: 1rem 0;
+    border: 1px solid @navds-global-color-gray-400;
+    border-radius: 4px;
+
+    p {
+        margin: 0.5rem 0 1rem;
+    }
+
+    .navds-accordion__header {
+        background-color: @navds-global-color-white;
+    }
+
+    .navds-accordion__content {
+        .intern {
+            button {
+                flex-flow: row-reverse;
+                padding-right: 1rem;
+            }
+
+            .navds-accordion__content {
+                border-left: 3px solid @navds-global-color-gray-600;
+                margin-left: -3px;
+                padding-right: 0;
+            }
+        }
+
+        .eksempel-container {
+            background-color: @navds-semantic-color-component-background-alternate;
+            padding: 1rem;
+
+            .maned-container {
+                display: inline-flex;
+                border-top: 1px solid @navds-global-color-gray-600;
+                padding-top: 1rem;
+                position: relative;
+
+                &::before {
+                    position: absolute;
+                    content: '';
+                    height: 0;
+                    width: 0;
+                    right: 0;
+                    top: -5px;
+                    border-top: 5px solid transparent;
+                    border-bottom: 5px solid transparent;
+                    border-left: 10px solid @navds-global-color-gray-600;
+                }
+
+                div {
+                    margin: 0 0.25rem;
+                    padding: 0.5rem;
+                    border-radius: 4px;
+                    box-shadow: @navds-global-color-gray-400 0 2px 1px 0;
+
+                    &:nth-child(1) {
+                        background-color: @navds-semantic-color-interaction-primary-hover-subtle;
+                        margin-left: 0;
+                    }
+                    &:nth-child(2) {
+                        background-color: @navds-global-color-orange-50;
+                    }
+                    &:nth-child(3) {
+                        background-color: @navds-global-color-orange-100;
+                    }
+                    &:nth-child(4) {
+                        background-color: @navds-global-color-orange-200;
+                        margin-right: 0;
+                    }
+                }
+            }
+        }
+
+        .eksempel-container + h3.navds-heading {
+            margin-top: 1rem;
+        }
+    }
+}
+
+@media (min-width: @screen-sm) {
+    .frist-sykepenger {
+        .navds-accordion__header {
+            padding-left: 2rem;
+        }
+        .navds-accordion__content {
+            padding-left: 2rem;
+
+            .intern {
+                .navds-accordion__content {
+                    margin-left: 0.75rem;
+                    padding: 1rem;
+                }
+            }
+
+            .eksempel-container {
+                .maned-container {
+                    div {
+                        text-align: center;
+                        width: 6rem;
+                    }
+                }
+            }
+        }
+    }
+}
