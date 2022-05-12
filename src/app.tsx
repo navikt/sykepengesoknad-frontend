@@ -26,12 +26,18 @@ if (isMockBackend()) {
     require('./data/mock')
 }
 
+function erFlex(): boolean {
+    const url = new URL(window.location.href)
+    const flex = url.searchParams.get('flex')
+    return flex === 'true'
+}
+
 const App = (): any => {
     // eslint-disable-next-line
     // @ts-ignore
     Modal.setAppElement('#root')
 
-    if (vedlikehold()) {
+    if (vedlikehold() && !erFlex()) {
         return <Vedlikehold />
     }
 
