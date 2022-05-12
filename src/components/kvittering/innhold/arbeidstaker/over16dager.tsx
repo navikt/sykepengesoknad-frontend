@@ -74,8 +74,17 @@ const Over16dager = ({ erGradert }: gradertReisetilskuddProps) => {
                 <Label as="h2" className="arbeidstaker-tittel">
                     {tekst('kvittering.naar-blir-pengene')}
                 </Label>
+                <BodyLong spacing>
+                    {parser(
+                        tekst(
+                            'kvittering.arbeidstaker.over16.utbetaling-arbeidsgiver'
+                        )
+                    )}{' '}
+                </BodyLong>
                 <BodyLong spacing as="span">
-                    {parser(tekst('kvittering.arbeidstaker.over16.utbetaling'))}{' '}
+                    {parser(
+                        tekst('kvittering.arbeidstaker.over16.utbetaling-NAV')
+                    )}{' '}
                 </BodyLong>
             </div>
             <div className="avsnitt">

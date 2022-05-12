@@ -326,7 +326,11 @@ describe('Tester kvittering', () => {
                 .and('contain', 'Når blir pengene utbetalt')
                 .and(
                     'contain',
-                    'Du får vanligvis utbetalt sykepengene enten innen den 25. i måneden, eller innen fem dager etter at vi har sendt deg svar på søknaden din. Hvis søknaden din gjelder dager i to ulike kalendermåneder, kan utbetalingen bli delt i to. Les mer om når du kan forvente å få pengene.'
+                    'Hvis du får sykepenger fra arbeidsgiveren din, vil du vanligvis få sykepenger til samme tid som du ellers får lønn.'
+                )
+                .and(
+                    'contain',
+                    'Hvis du får sykepenger utbetalt fra NAV, får du vanligvis utbetalt sykepengene enten innen den 25. i måneden, eller innen fem dager etter at vi har sendt deg svar på søknaden din. Hvis søknaden din gjelder dager i to ulike kalendermåneder, kan utbetalingen bli delt i to. Les mer om når du kan forvente å få pengene.'
                 )
                 .and('not.contain', 'Du får sykepengene fra arbeidsgiveren din')
 
@@ -525,7 +529,11 @@ const over16dagerKvittering = () => {
         .and('contain', 'Når blir pengene utbetalt')
         .and(
             'contain',
-            'Du får vanligvis utbetalt sykepengene enten innen den 25. i måneden, eller innen fem dager etter at vi har sendt deg svar på søknaden din. Hvis søknaden din gjelder dager i to ulike kalendermåneder, kan utbetalingen bli delt i to. Les mer om når du kan forvente å få pengene.'
+            'Hvis du får sykepenger fra arbeidsgiveren din, vil du vanligvis få sykepenger til samme tid som du ellers får lønn.'
+        )
+        .and(
+            'contain',
+            'Hvis du får sykepenger utbetalt fra NAV, får du vanligvis utbetalt sykepengene enten innen den 25. i måneden, eller innen fem dager etter at vi har sendt deg svar på søknaden din. Hvis søknaden din gjelder dager i to ulike kalendermåneder, kan utbetalingen bli delt i to. Les mer om når du kan forvente å få pengene.'
         )
         .and('not.contain', 'Du får sykepengene fra arbeidsgiveren din')
 
@@ -587,7 +595,11 @@ const utenOppholdKvittering = () => {
         .and('contain', 'Når blir pengene utbetalt')
         .and(
             'contain',
-            'Du får vanligvis utbetalt sykepengene enten innen den 25. i måneden, eller innen fem dager etter at vi har sendt deg svar på søknaden din. Hvis søknaden din gjelder dager i to ulike kalendermåneder, kan utbetalingen bli delt i to. Les mer om når du kan forvente å få pengene.'
+            'Hvis du får sykepenger fra arbeidsgiveren din, vil du vanligvis få sykepenger til samme tid som du ellers får lønn.'
+        )
+        .and(
+            'contain',
+            'Hvis du får sykepenger utbetalt fra NAV, får du vanligvis utbetalt sykepengene enten innen den 25. i måneden, eller innen fem dager etter at vi har sendt deg svar på søknaden din. Hvis søknaden din gjelder dager i to ulike kalendermåneder, kan utbetalingen bli delt i to. Les mer om når du kan forvente å få pengene.'
         )
         .and('not.contain', 'Før NAV kan behandle søknaden')
         .and('not.contain', 'Du får sykepengene fra arbeidsgiveren din')
@@ -640,7 +652,11 @@ const medOppholdKvittering = () => {
         .and('contain', 'Når blir pengene utbetalt')
         .and(
             'contain',
-            'Du får vanligvis utbetalt sykepengene enten innen den 25. i måneden, eller innen fem dager etter at vi har sendt deg svar på søknaden din. Hvis søknaden din gjelder dager i to ulike kalendermåneder, kan utbetalingen bli delt i to. Les mer om når du kan forvente å få pengene.'
+            'Hvis du får sykepenger fra arbeidsgiveren din, vil du vanligvis få sykepenger til samme tid som du ellers får lønn.'
+        )
+        .and(
+            'contain',
+            'Hvis du får sykepenger utbetalt fra NAV, får du vanligvis utbetalt sykepengene enten innen den 25. i måneden, eller innen fem dager etter at vi har sendt deg svar på søknaden din. Hvis søknaden din gjelder dager i to ulike kalendermåneder, kan utbetalingen bli delt i to. Les mer om når du kan forvente å få pengene.'
         )
         .and('not.contain', 'Du får sykepengene fra arbeidsgiveren din')
 

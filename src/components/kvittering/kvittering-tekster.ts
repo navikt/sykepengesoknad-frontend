@@ -108,6 +108,10 @@ const KvitteringTekster = {
         'Arbeidsplassen din sender inntektsopplysninger og annen informasjon som NAV trenger for å behandle søkaden din. Inntektsmeldingen sendes digitalt fra arbeidsplassens lønns- og personalsystem eller fra Altinn.no.',
     'kvittering.arbeidstaker.over16.utbetaling':
         'Du får vanligvis utbetalt sykepengene enten innen den 25. i måneden, eller innen fem dager etter at vi har sendt deg svar på søknaden din. Hvis søknaden din gjelder dager i to ulike kalendermåneder, kan utbetalingen bli delt i to. <a href="https://www.nav.no/no/nav-og-samfunn/kontakt-nav/utbetalinger/utbetalinger/utbetalingsdatoer-feriepenger-og-skattetrekk/sykepenger_kap" target="_blank" rel="noreferrer">Les mer om når du kan forvente å få pengene.</a>',
+    'kvittering.arbeidstaker.over16.utbetaling-arbeidsgiver':
+        'Hvis du får sykepenger fra arbeidsgiveren din, vil du vanligvis få sykepenger til samme tid som du ellers får lønn.',
+    'kvittering.arbeidstaker.over16.utbetaling-NAV':
+        ' Hvis du får sykepenger utbetalt fra NAV, får du vanligvis utbetalt sykepengene enten innen den 25. i måneden, eller innen fem dager etter at vi har sendt deg svar på søknaden din. Hvis søknaden din gjelder dager i to ulike kalendermåneder, kan utbetalingen bli delt i to. <a href="https://www.nav.no/no/nav-og-samfunn/kontakt-nav/utbetalinger/utbetalinger/utbetalingsdatoer-feriepenger-og-skattetrekk/sykepenger_kap" target="_blank" rel="noreferrer">Les mer om når du kan forvente å få pengene.</a>',
 
     'kvittering.arbeidstaker.med-opphold':
         'Du har vært friskmeldt inntil 16 dager siden sist du søkte om sykepenger. Da må arbeidsgiver sende oss inntektsmelding på nytt. Hør gjerne med arbeidsgiveren din hvis du er usikker på om den er sendt.',
