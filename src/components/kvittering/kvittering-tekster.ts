@@ -6,6 +6,20 @@ const KvitteringTekster = {
     'kvittering.knapp.send-nav': 'Send til NAV',
     'kvittering.knapp.send-arbeidsgiver': 'Send til arbeidsgiver',
 
+    'kvittering.knapp.send-arbeidsgiver-survey':
+        'Vi vil gjerne lære mer om hvorfor noen velger å trykke på denne knappen.',
+    'kvittering.knapp.send-arbeidsgiver-survey-sporsmal': 'Hvorfor trykket du?',
+    'kvittering.knapp.send-arbeidsgiver-survey-anonymt':
+        'Svaret ditt er anonymt og vil ikke brukes i saksbehandling.',
+    'kvittering.knapp.send-arbeidsgiver-survey-alt1':
+        'Fordi arbeidsgiveren min har bedt meg om å gjøre det.',
+    'kvittering.knapp.send-arbeidsgiver-survey-alt2':
+        'Fordi en veileder i NAV har bedt meg om å gjøre det.',
+    'kvittering.knapp.send-arbeidsgiver-survey-alt3':
+        'Vet ikke. Følte jeg må gjøre det for å få søknaden min behandlet.',
+    'kvittering.knapp.send-arbeidsgiver-survey-alt4':
+        'Ingen av alternativene passer for meg.',
+
     'kvittering.knapp.angre': 'Angre',
     'kvittering.korrigering.feilet': 'Beklager, søknaden kunne ikke endres',
     'kvittering.ettersending.feilet':
