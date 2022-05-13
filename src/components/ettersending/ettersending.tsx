@@ -163,7 +163,7 @@ const Ettersending = ({
                         size="medium"
                         error={error}
                         legend={tekst(
-                            'kvittering.knapp.send-arbeidsgiver-survey-sporsmål'
+                            'kvittering.knapp.send-arbeidsgiver-survey-sporsmal'
                         )}
                         description={tekst(
                             'kvittering.knapp.send-arbeidsgiver-survey-anonymt'
