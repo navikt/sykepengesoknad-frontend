@@ -121,6 +121,9 @@ describe('Tester ettersending og korrigering', () => {
                 'er 16 dager eller mer. Denne søknaden er beregnet til å være kortere. ' +
                 'Hvis arbeidsgiveren din eller NAV har bedt deg sende den likevel, gjør du det her'
         )
+        cy.contains(
+            'Fordi arbeidsgiveren min har bedt meg om å gjøre det.'
+        ).click()
         cy.contains('Ja, send søknaden').click()
         cy.contains('Send til NAV').should('not.exist')
     })
