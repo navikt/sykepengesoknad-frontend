@@ -16,7 +16,7 @@ const KvitteringTekster = {
     'kvittering.knapp.send-arbeidsgiver-survey-alt2':
         'Fordi en veileder i NAV har bedt meg om å gjøre det.',
     'kvittering.knapp.send-arbeidsgiver-survey-alt3':
-        'Vet ikke. Følte jeg må gjøre det for å få søknaden min behandlet.',
+        'Vet ikke. Føler jeg må gjøre noe for å få søknaden min behandlet.',
     'kvittering.knapp.send-arbeidsgiver-survey-alt4':
         'Ingen av alternativene passer for meg.',
 
