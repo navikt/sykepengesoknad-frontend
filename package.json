@@ -6,7 +6,7 @@
     "@navikt/ds-css": "^0.15.2",
     "@navikt/ds-datepicker": "^1.0.4",
     "@navikt/ds-icons": "^0.8.4",
-    "@navikt/ds-react": "^0.16.4",
+    "@navikt/ds-react": "^0.18.1",
     "@navikt/ds-tokens": "^0.8.4",
     "@navikt/nav-dekoratoren-moduler": "^1.6.9",
     "@types/smoothscroll-polyfill": "^0.3.1",
