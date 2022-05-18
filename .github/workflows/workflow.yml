@@ -34,7 +34,7 @@ jobs:
             - name: Build application
               run: npm run build
               env:
-                  ENABLE_SENTRY: true
+                  ENABLE_SENTRY: false
                   SENTRY_URL: https://sentry.gc.nav.no/
                   SENTRY_ORG: nav
                   SENTRY_PROJECT: sykepengesoknad
