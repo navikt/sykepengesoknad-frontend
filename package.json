@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "private": true,
   "dependencies": {
-    "@navikt/ds-css": "^0.15.2",
+    "@navikt/ds-css": "^0.16.21",
     "@navikt/ds-datepicker": "^1.0.4",
     "@navikt/ds-icons": "^0.8.4",
     "@navikt/ds-react": "^0.16.4",
