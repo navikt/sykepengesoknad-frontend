@@ -53,4 +53,4 @@ spec:
     - name: BACKEND_APP
       value: "syfosoknad"
     - name: VEDLIKEHOLD
-      value: "false"
+      value: "true"
