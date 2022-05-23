@@ -295,7 +295,6 @@ describe('Tester kvittering', () => {
             cy.contains(
                 'Vanligvis sendes søknaden bare til NAV hvis det samlede sykefraværet er 16 dager eller mer. Denne søknaden er beregnet til å være kortere. Hvis arbeidsgiveren din eller NAV har bedt deg sende den likevel, gjør du det her'
             )
-            cy.contains('Ingen av alternativene passer for meg.').click()
             cy.contains('Ja, send søknaden').click()
             cy.contains('Send til NAV').should('not.exist')
 
