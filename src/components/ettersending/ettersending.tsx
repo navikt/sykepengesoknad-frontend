@@ -1,14 +1,5 @@
-import {
-    Alert,
-    BodyLong,
-    Button,
-    Checkbox,
-    CheckboxGroup,
-    Heading,
-    Modal,
-} from '@navikt/ds-react'
+import { Alert, Button, Heading, Modal } from '@navikt/ds-react'
 import React, { useState } from 'react'
-import { FormProvider, useForm, useFormContext } from 'react-hook-form'
 
 import { redirectTilLoginHvis401 } from '../../data/rest/utils'
 import { useAppStore } from '../../data/stores/app-store'
@@ -16,7 +7,6 @@ import { backendApp, flexGatewayRoot } from '../../utils/environment'
 import fetcher from '../../utils/fetcher'
 import { logger } from '../../utils/logger'
 import { tekst } from '../../utils/tekster'
-import { useAmplitudeInstance } from '../amplitude/amplitude'
 
 interface EttersendingProps {
     gjelder: 'nav' | 'arbeidsgiver'
@@ -36,14 +26,6 @@ const Ettersending = ({
     } = useAppStore()
     const [vilEttersende, setVilEttersende] = useState<boolean>(false)
     const [ettersender, setEttersender] = useState<boolean>(false)
-    const { logEvent } = useAmplitudeInstance()
-    const [error, setError] = useState<string>('')
-    const { register, getValues } = useFormContext()
-
-    const boxClicked = () => {
-        const surveyValues = getValues('survey')
-        if (!surveyValues || surveyValues.length === 0) setError('')
-    }
 
     const hentTekst = (text: string) => {
         const tilSuffix = gjelder === 'nav' ? '-nav' : '-arbeidsgiver'
@@ -121,8 +103,6 @@ const Ettersending = ({
         }
     }
 
-    const ettersendingSurvey = 'Ettersending survey'
-
     return (
         <>
             <Button
@@ -135,13 +115,7 @@ const Ettersending = ({
             </Button>
 
             <Modal
-                onClose={() => {
-                    setVilEttersende(false)
-                    logEvent('popup lukket', {
-                        component: ettersendingSurvey,
-                        soknadstype: valgtSoknad?.soknadstype,
-                    })
-                }}
+                onClose={() => setVilEttersende(false)}
                 className="ettersending"
                 open={vilEttersende}
             >
@@ -154,95 +128,13 @@ const Ettersending = ({
                     >
                         {hentTekst('kvittering.tittel.send-til')}
                     </Heading>
-
-                    <BodyLong spacing size={'medium'}>
-                        {tekst('kvittering.knapp.send-arbeidsgiver-survey')}
-                    </BodyLong>
-
-                    <CheckboxGroup
-                        size="medium"
-                        error={error}
-                        legend={tekst(
-                            'kvittering.knapp.send-arbeidsgiver-survey-sporsmal'
-                        )}
-                        description={tekst(
-                            'kvittering.knapp.send-arbeidsgiver-survey-anonymt'
-                        )}
-                        className={'popup-survey'}
-                    >
-                        <Checkbox
-                            {...register('survey')}
-                            onClick={boxClicked}
-                            value={tekst(
-                                'kvittering.knapp.send-arbeidsgiver-survey-alt1'
-                            )}
-                        >
-                            {tekst(
-                                'kvittering.knapp.send-arbeidsgiver-survey-alt1'
-                            )}
-                        </Checkbox>
-                        <Checkbox
-                            {...register('survey')}
-                            onClick={boxClicked}
-                            value={tekst(
-                                'kvittering.knapp.send-arbeidsgiver-survey-alt2'
-                            )}
-                        >
-                            {tekst(
-                                'kvittering.knapp.send-arbeidsgiver-survey-alt2'
-                            )}
-                        </Checkbox>
-                        <Checkbox
-                            {...register('survey')}
-                            onClick={boxClicked}
-                            value={tekst(
-                                'kvittering.knapp.send-arbeidsgiver-survey-alt3'
-                            )}
-                        >
-                            {tekst(
-                                'kvittering.knapp.send-arbeidsgiver-survey-alt3'
-                            )}
-                        </Checkbox>
-                        <Checkbox
-                            {...register('survey')}
-                            onClick={boxClicked}
-                            value={tekst(
-                                'kvittering.knapp.send-arbeidsgiver-survey-alt4'
-                            )}
-                        >
-                            {tekst(
-                                'kvittering.knapp.send-arbeidsgiver-survey-alt4'
-                            )}
-                        </Checkbox>
-                    </CheckboxGroup>
-
                     <Alert variant="info">
                         {hentTekst('kvittering.info.send-til')}
                     </Alert>
-
                     <Button
                         variant="primary"
                         loading={ettersender}
-                        onClick={(e) => {
-                            const surveyValues = getValues('survey')
-                            if (!surveyValues || surveyValues.length === 0) {
-                                setError(
-                                    tekst('soknad.feilmelding.checkbox.lokal')
-                                )
-                                return
-                            }
-                            e.preventDefault()
-                            logEvent('knapp klikket', {
-                                tekst: hentTekst(
-                                    'kvittering.knapp.bekreft.send-til' +
-                                        gjelder
-                                ),
-                                soknadstype: valgtSoknad?.soknadstype,
-                                component: ettersendingSurvey,
-                                'ettersending survey': surveyValues,
-                            })
-                            ettersend()
-                        }}
+                        onClick={ettersend}
                     >
                         {hentTekst('kvittering.knapp.bekreft.send-til')}
                     </Button>
@@ -259,23 +151,4 @@ const Ettersending = ({
     )
 }
 
-const EttersendingMedForm = ({
-    gjelder,
-    setRerendrekvittering,
-}: EttersendingProps) => {
-    const methods = useForm({
-        mode: 'onBlur',
-        reValidateMode: 'onChange',
-        shouldUnregister: true,
-    })
-    return (
-        <FormProvider {...methods}>
-            <Ettersending
-                gjelder={gjelder}
-                setRerendrekvittering={setRerendrekvittering}
-            />
-        </FormProvider>
-    )
-}
-
-export default EttersendingMedForm
+export default Ettersending
