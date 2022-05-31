@@ -184,12 +184,14 @@ const RadioKomp = ({ sporsmal }: SpmProps) => {
                                             if (!surveySvart) {
                                                 setSurveySvart(true)
                                                 logEvent(
-                                                    'hjelpetekst survey besvart',
+                                                    'skjema spørsmål besvart',
                                                     {
-                                                        component: tekst(
+                                                        skjemanavn:
+                                                            'hjelpetekst',
+                                                        spørsmål: tekst(
                                                             'ekspanderbarhjelp.helligdager.enkelt-tittel'
                                                         ),
-                                                        tekst: tekst(
+                                                        svar: tekst(
                                                             'ekspanderbarhjelp.helligdager.enkelt-svar-Ja'
                                                         ),
                                                     }
@@ -209,12 +211,14 @@ const RadioKomp = ({ sporsmal }: SpmProps) => {
                                             if (!surveySvart) {
                                                 setSurveySvart(true)
                                                 logEvent(
-                                                    'hjelpetekst survey besvart',
+                                                    'skjema spørsmål besvart',
                                                     {
-                                                        component: tekst(
+                                                        skjemanavn:
+                                                            'hjelpetekst',
+                                                        spørsmål: tekst(
                                                             'ekspanderbarhjelp.helligdager.enkelt-tittel'
                                                         ),
-                                                        tekst: tekst(
+                                                        svar: tekst(
                                                             'ekspanderbarhjelp.helligdager.enkelt-svar-Nei'
                                                         ),
                                                     }

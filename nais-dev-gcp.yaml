@@ -34,8 +34,6 @@ spec:
       value: "https://loginservice.dev.nav.no/login"
     - name: LOGINSERVICE_REDIRECT_URL
       value: "https://www-gcp.dev.nav.no/syk/sykepengesoknad"
-    - name: AMPLITUDE_KEY
-      value: "7a887ba3e5a07c755526c6591810101a"
     - name: AMPLITUDE_ENABLED
       value: "true"
     - name: DECORATOR_URL

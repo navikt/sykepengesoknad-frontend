@@ -25,7 +25,10 @@ export const Ekspanderbar = ({
     useEffect(() => {
         setExpanded(false)
         if (logVedVisning) {
-            logEvent('hjelpetekst vist', { tekst: logVedVisning })
+            logEvent('accordion åpnet', {
+                tekst: logVedVisning,
+                type: 'hjelpetekst',
+            })
         }
         // eslint-disable-next-line
     }, [sporsmalId])
@@ -40,7 +43,7 @@ export const Ekspanderbar = ({
                     type="button"
                     onClick={() => {
                         if (!expanded && amplitudeProps) {
-                            logEvent('panel åpnet', amplitudeProps)
+                            logEvent('accordion åpnet', amplitudeProps)
                         }
                         setExpanded((prev) => !prev)
                     }}

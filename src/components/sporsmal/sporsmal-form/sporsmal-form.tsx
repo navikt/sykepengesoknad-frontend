@@ -287,12 +287,14 @@ const SporsmalForm = () => {
                 await sendSoknad()
                 logEvent('skjema fullført', {
                     soknadstype: valgtSoknad!.soknadstype,
+                    skjemanavn: 'sykepengesoknad',
                 })
             } else {
                 await sendOppdaterSporsmal()
-                logEvent('Spørsmål svart', {
+                logEvent('skjema spørsmål besvart', {
                     soknadstype: valgtSoknad!.soknadstype,
-                    sporsmalstag: sporsmal.tag,
+                    skjemanavn: 'sykepengesoknad',
+                    spørsmål: sporsmal.tag,
                     svar: hentSvar(sporsmal),
                 })
             }

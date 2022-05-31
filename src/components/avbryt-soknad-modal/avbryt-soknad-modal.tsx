@@ -23,7 +23,7 @@ const AvbrytKorrigering = () => {
                 variant="tertiary"
                 className="avbryt_rødknapp"
                 onClick={(e) => {
-                    logEvent('popup åpnet', {
+                    logEvent('modal åpnet', {
                         component: tekst('avbryt.korrigering.knapp'),
                         soknadstype: valgtSoknad?.soknadstype,
                         steg: stegId,
@@ -65,7 +65,7 @@ const AvbrytSoknadModal = () => {
                 variant="tertiary"
                 className="avbryt_rødknapp"
                 onClick={(e) => {
-                    logEvent('popup åpnet', {
+                    logEvent('modal åpnet', {
                         component: tekst('avbryt.popup.tittel'),
                         soknadstype: valgtSoknad.soknadstype,
                         steg: stegId,
@@ -80,7 +80,7 @@ const AvbrytSoknadModal = () => {
                 className="modal__avbryt_popup"
                 onClose={() => {
                     setAapen(false)
-                    logEvent('popup lukket', {
+                    logEvent('modal lukket', {
                         component: tekst('avbryt.popup.tittel'),
                         soknadstype: valgtSoknad.soknadstype,
                         steg: stegId,
