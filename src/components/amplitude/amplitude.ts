@@ -2,7 +2,7 @@ import amplitude from 'amplitude-js'
 import constate from 'constate'
 import { useEffect, useRef } from 'react'
 
-import { amplitudeEnabled, amplitudeKey } from '../../utils/environment'
+import { amplitudeEnabled } from '../../utils/environment'
 
 export const [AmplitudeProvider, useAmplitudeInstance] = constate(() => {
     const instance: any = useRef({
@@ -25,26 +25,34 @@ export const [AmplitudeProvider, useAmplitudeInstance] = constate(() => {
         if (amplitudeEnabled()) {
             instance.current = amplitude.getInstance()
         }
-        instance.current.init(amplitudeKey(), null, {
-            apiEndpoint: 'amplitude.nav.no/collect',
+        instance.current.init('default', '', {
+            apiEndpoint: 'amplitude.nav.no/collect-auto',
             saveEvents: false,
             includeUtm: true,
-            batchEvents: false,
             includeReferrer: true,
-            trackingOptions: {
-                city: false,
-                ip_address: false, // eslint-disable-line
-                version_name: false, // eslint-disable-line
-                region: false,
-                country: false,
-                dma: false,
-            },
+            platform: window.location.toString(),
+            batchEvents: false,
         })
-        instance.current._userAgent = ''
         // eslint-disable-next-line
     }, [])
 
-    function logEvent(eventName: string, eventProperties: any) {
+    type validEventNames =
+        | 'navigere'
+        | 'skjema validering feilet'
+        | 'alert vist'
+        | 'accordion åpnet'
+        | 'accordion lukket'
+        | 'knapp klikket'
+        | 'skjema åpnet'
+        | 'skjema fullført'
+        | 'skjema spørsmål besvart'
+        | 'modal åpnet'
+        | 'modal lukket' //Bruk kun navn fra taksonomien
+
+    function logEvent(
+        eventName: validEventNames,
+        eventProperties: Record<string, any>
+    ) {
         instance.current.logEvent(eventName, eventProperties)
     }
 

@@ -29,7 +29,7 @@ const Utvidbar = (props: UtvidbarProps) => {
     const onKlikk = () => {
         if (props.amplitudeProps) {
             logEvent(
-                erApen ? 'panel lukket' : 'panel åpnet',
+                erApen ? 'accordion lukket' : 'accordion åpnet',
                 props.amplitudeProps
             )
         }

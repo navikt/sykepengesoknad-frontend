@@ -19,7 +19,7 @@ const AvsluttOgFortsettSenere = () => {
             <Button
                 variant="tertiary"
                 onClick={(e) => {
-                    logEvent('popup åpnet', {
+                    logEvent('modal åpnet', {
                         component: tekst('avslutt.popup.tittel'),
                         soknadstype: valgtSoknad?.soknadstype,
                         steg: stegId,
@@ -34,7 +34,7 @@ const AvsluttOgFortsettSenere = () => {
                 className="modal__avslutt_fortsett_popup"
                 onClose={() => {
                     setAapen(false)
-                    logEvent('popup lukket', {
+                    logEvent('modal lukket', {
                         component: tekst('avslutt.popup.tittel'),
                         soknadstype: valgtSoknad?.soknadstype,
                         steg: stegId,

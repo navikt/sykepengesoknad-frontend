@@ -18,7 +18,10 @@ const FeilOppsummering = ({ sporsmal }: SpmProps) => {
     useEffect(() => {
         setEntries(Object.entries(formState.errors))
         if (Object.entries(formState.errors).length > 0) {
-            logEvent('skjemavalidering feilet', { sporsmalstag: sporsmal.tag })
+            logEvent('skjema validering feilet', {
+                sporsmalstag: sporsmal.tag,
+                skjemanavn: 'sykepengesoknad',
+            })
         }
         // eslint-disable-next-line
     }, [formState])

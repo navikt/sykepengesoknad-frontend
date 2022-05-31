@@ -15,7 +15,10 @@ interface EldreUsendtSoknadProps {
 export const EldreUsendtSoknad = ({ eldreSoknad }: EldreUsendtSoknadProps) => {
     const { logEvent } = useAmplitudeInstance()
 
-    logEvent('komponent vist', { komponent: 'eldre usendt søknad' })
+    logEvent('alert vist', {
+        tekst: tekst('eldre.usendt.alert'),
+        variant: 'warning',
+    })
 
     return (
         <Alert variant="warning">

@@ -80,7 +80,7 @@ const Endreknapp = () => {
                 className="modal__endre_popup"
                 onClose={() => {
                     setAapen(false)
-                    logEvent('popup lukket', {
+                    logEvent('modal lukket', {
                         component: endreSøknadPopup,
                         soknadstype: valgtSoknad?.soknadstype,
                     })

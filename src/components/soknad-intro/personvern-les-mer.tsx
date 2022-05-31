@@ -26,7 +26,7 @@ const PersonvernLesMer = () => {
         })
     }
     const amplitudeLukketPopup = () => {
-        logEvent('popup lukket', {
+        logEvent('modal lukket', {
             component: tekst('sykepengesoknad.soknad-intro.personvern-les-mer'),
         })
     }

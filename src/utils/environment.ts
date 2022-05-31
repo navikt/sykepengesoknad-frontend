@@ -6,10 +6,6 @@ export function isDev() {
     return publicRuntimeConfig.env === 'dev'
 }
 
-export function isQ1() {
-    return publicRuntimeConfig.env === 'q1'
-}
-
 export function isProd() {
     return publicRuntimeConfig.env === 'prod'
 }
@@ -40,10 +36,6 @@ export function loginServiceUrl() {
 
 export function loginServiceRedirectUrl() {
     return publicRuntimeConfig.loginServiceRedirectUrl
-}
-
-export function amplitudeKey() {
-    return publicRuntimeConfig.amplitudeKey
 }
 
 export function amplitudeEnabled() {
