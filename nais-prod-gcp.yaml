@@ -14,6 +14,8 @@ spec:
     min: 2
     max: 3
     cpuThresholdPercentage: 50
+  tokenx:
+    enabled: true
   resources:
     limits:
       cpu: 500m
