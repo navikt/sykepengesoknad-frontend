@@ -40,7 +40,7 @@ class MyDocument extends Document<Props> {
         const Decorator = await fetchDecoratorReact({
             dekoratorenUrl: serverRuntimeConfig.decoratorUrl,
             env: serverRuntimeConfig.decoratorEnv,
-            simple: false,
+            simple: true,
             chatbot: false,
             feedback: false,
             urlLookupTable: false,
