@@ -10,7 +10,7 @@ import {
     flexGatewayRoot,
     loginServiceRedirectUrl,
     loginServiceUrl,
-    sykmeldingerBackendProxyRoot,
+    sykmeldingerBackendRoot,
 } from '../utils/environment'
 import { logger } from '../utils/logger'
 import useFetch from './rest/use-fetch'
@@ -49,7 +49,7 @@ export function DataFetcher(props: { children: any }) {
             )
         }
         if (isNotStarted(sykmeldinger)) {
-            const url = `${sykmeldingerBackendProxyRoot()}/api/v1/sykmeldinger`
+            const url = `${sykmeldingerBackendRoot()}/api/v1/sykmeldinger`
             sykmeldinger.fetch(
                 url,
                 {
