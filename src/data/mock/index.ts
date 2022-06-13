@@ -8,7 +8,7 @@ import { RSSoknadstype } from '../../types/rs-types/rs-soknadstype'
 import {
     backendApp,
     flexGatewayRoot,
-    sykmeldingerBackendRoot,
+    sykmeldingerBackendProxyRoot,
 } from '../../utils/environment'
 import { jsonDeepCopy } from '../../utils/json-deep-copy'
 import {
@@ -156,7 +156,7 @@ const setUpMock = (person: Persona) => {
     )
 
     mock.get(
-        `${sykmeldingerBackendRoot()}/api/v1/sykmeldinger`,
+        `${sykmeldingerBackendProxyRoot()}/api/v1/sykmeldinger`,
         (req, res, ctx) => res(ctx.json(person.sykmeldinger))
     )
 
