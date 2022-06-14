@@ -8,7 +8,7 @@ const createLogger = (): pino.Logger =>
             level: (label) => {
                 return { level: label.toUpperCase() }
             },
-        }
+        },
     })
 
 export const logger = createLogger()
