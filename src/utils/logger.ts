@@ -22,15 +22,4 @@ const getFrontendLogger = (): pino.Logger =>
         },
     })
 
-const createBackendLogger = (): pino.Logger =>
-    pino({
-        timestamp: pino.stdTimeFunctions.isoTime,
-        formatters: {
-            level: (label) => {
-                return { level: label.toUpperCase() }
-            },
-        },
-    })
-
-export const logger =
-    typeof window !== 'undefined' ? getFrontendLogger() : createBackendLogger()
+export const logger = getFrontendLogger()
