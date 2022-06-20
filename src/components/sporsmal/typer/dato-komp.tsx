@@ -39,6 +39,7 @@ const DatoInput = ({ sporsmal }: SpmProps) => {
                     <Datepicker
                         locale="nb"
                         inputId={field.name}
+                        inputLabel="Oppgi dato"
                         onChange={field.onChange}
                         value={field.value}
                         inputProps={{

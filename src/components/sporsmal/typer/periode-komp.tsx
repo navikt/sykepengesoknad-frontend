@@ -143,6 +143,7 @@ const PeriodeKomp = ({ sporsmal, index, slettPeriode }: AllProps) => {
                                 <Datepicker
                                     locale="nb"
                                     inputId={sporsmal.id + '_' + index + '_fom'}
+                                    inputLabel="Oppgi dato"
                                     onChange={(value: any) =>
                                         onChange(value, undefined)
                                     }
@@ -182,6 +183,7 @@ const PeriodeKomp = ({ sporsmal, index, slettPeriode }: AllProps) => {
                                 <Datepicker
                                     locale="nb"
                                     inputId={sporsmal.id + '_' + index + '_tom'}
+                                    inputLabel="Oppgi dato"
                                     onChange={(value: any) =>
                                         onChange(undefined, value)
                                     }
