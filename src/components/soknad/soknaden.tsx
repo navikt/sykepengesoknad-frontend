@@ -16,6 +16,7 @@ import { RSSoknadstatus } from '../../types/rs-types/rs-soknadstatus'
 import { RSSoknadstype } from '../../types/rs-types/rs-soknadstype'
 import { Brodsmule } from '../../types/types'
 import { SEPARATOR } from '../../utils/constants'
+import { absoluttTvang } from '../../utils/environment'
 import { tekst } from '../../utils/tekster'
 import { setBodyClass } from '../../utils/utils'
 import { useAmplitudeInstance } from '../amplitude/amplitude'
@@ -27,6 +28,8 @@ import FristSykepenger from '../frist-sykepenger/frist-sykepenger'
 import { hentHotjarJsTrigger, HotjarTrigger } from '../hotjar-trigger'
 import { ViktigInformasjon } from '../soknad-intro/viktig-informasjon'
 import { hentNokkel } from '../sporsmal/sporsmal-utils'
+import { UsendtSykmelding } from '../usendt-sykmelding/usendt-sykmelding'
+import { usendteSykmeldinger } from '../usendt-sykmelding/usendteSykmeldinger'
 import Vis from '../vis'
 import { urlTilSoknad } from './soknad-link'
 
@@ -102,7 +105,7 @@ const Soknaden = () => {
 export default Soknaden
 
 const Fordeling = () => {
-    const { valgtSoknad, soknader } = useAppStore()
+    const { valgtSoknad, soknader, sykmeldinger } = useAppStore()
     const { stegId } = useParams<RouteParams>()
     const stegNo = parseInt(stegId)
     const history = useHistory()
@@ -129,92 +132,113 @@ const Fordeling = () => {
     const erGradertReisetilskuddsoknad =
         valgtSoknad.soknadstype === RSSoknadstype.GRADERT_REISETILSKUDD
 
-    const eldreUsendtSoknad = harEldreUsendtSoknad(valgtSoknad, soknader)
-    if (eldreUsendtSoknad != null) {
-        return <EldreUsendtSoknad eldreSoknad={eldreUsendtSoknad} />
-    }
+    switch (valgtSoknad.status) {
+        // Nye søknader
+        case RSSoknadstatus.NY:
+        case RSSoknadstatus.UTKAST_TIL_KORRIGERING: {
+            const eldreUsendtSoknad = harEldreUsendtSoknad(
+                valgtSoknad,
+                soknader
+            )
+            const usendteSm = usendteSykmeldinger(sykmeldinger)
+            if (absoluttTvang() && usendteSm.length > 0) {
+                return <UsendtSykmelding usendteSykmeldinger={usendteSm} />
+            }
+            if (eldreUsendtSoknad != null) {
+                return <EldreUsendtSoknad eldreSoknad={eldreUsendtSoknad} />
+            }
+            return (
+                <>
+                    <Vis
+                        hvis={stegNo > 1 || erUtlandssoknad}
+                        render={() => <SporsmalSteg />}
+                    />
 
-    return (
-        <>
-            <Vis
-                hvis={stegNo > 1 || erUtlandssoknad}
-                render={() => <SporsmalSteg />}
-            />
+                    <Vis
+                        hvis={stegNo > 1}
+                        render={() => (
+                            <Link
+                                to={
+                                    '/soknader/' +
+                                    valgtSoknad.id +
+                                    SEPARATOR +
+                                    (stegNo - 1)
+                                }
+                                className="navds-link tilbakelenke"
+                                onClick={() => {
+                                    logEvent('navigere', {
+                                        lenketekst: tekst(
+                                            'soknad.tilbakeknapp'
+                                        ),
+                                        fra: valgtSoknad!.sporsmal[stegNo].tag,
+                                        til: valgtSoknad!.sporsmal[stegNo - 1]
+                                            .tag,
+                                        soknadstype: valgtSoknad?.soknadstype,
+                                        stegId: stegId,
+                                    })
+                                }}
+                            >
+                                <Back className="chevron--venstre" />
+                                <BodyShort as="span">
+                                    {tekst('soknad.tilbakeknapp')}
+                                </BodyShort>
+                            </Link>
+                        )}
+                    />
 
-            <Vis
-                hvis={stegNo > 1}
-                render={() => (
-                    <Link
-                        to={
-                            '/soknader/' +
-                            valgtSoknad.id +
-                            SEPARATOR +
-                            (stegNo - 1)
-                        }
-                        className="navds-link tilbakelenke"
-                        onClick={() => {
-                            logEvent('navigere', {
-                                lenketekst: tekst('soknad.tilbakeknapp'),
-                                fra: valgtSoknad!.sporsmal[stegNo].tag,
-                                til: valgtSoknad!.sporsmal[stegNo - 1].tag,
-                                soknadstype: valgtSoknad?.soknadstype,
-                                stegId: stegId,
-                            })
+                    <Vis
+                        hvis={stegNo === 1 && !erUtlandssoknad}
+                        render={() => <ViktigInformasjon />}
+                    />
+
+                    <Vis
+                        hvis={stegNo === 1 && erGradertReisetilskuddsoknad}
+                        render={() => <SoknadMedToDeler />}
+                    />
+
+                    <Vis
+                        hvis={!erUtlandssoknad && stegNo === 1}
+                        render={() => {
+                            const sporsmal = valgtSoknad!.sporsmal[stegNo - 1]
+                            return (
+                                <Opplysninger
+                                    ekspandert={true}
+                                    steg={sporsmal.tag}
+                                />
+                            )
                         }}
-                    >
-                        <Back className="chevron--venstre" />
-                        <BodyShort as="span">
-                            {tekst('soknad.tilbakeknapp')}
-                        </BodyShort>
-                    </Link>
-                )}
-            />
+                    />
 
-            <Vis
-                hvis={stegNo === 1 && !erUtlandssoknad}
-                render={() => <ViktigInformasjon />}
-            />
+                    <Vis
+                        hvis={stegNo === 1 && !erUtlandssoknad}
+                        render={() => (
+                            <FristSykepenger
+                                soknadstype={valgtSoknad.soknadstype}
+                            />
+                        )}
+                    />
 
-            <Vis
-                hvis={stegNo === 1 && erGradertReisetilskuddsoknad}
-                render={() => <SoknadMedToDeler />}
-            />
+                    <Vis
+                        hvis={
+                            stegNo === 1 &&
+                            (erReisetilskuddsoknad ||
+                                erGradertReisetilskuddsoknad)
+                        }
+                        render={() => <OmReisetilskudd />}
+                    />
 
-            <Vis
-                hvis={!erUtlandssoknad && stegNo === 1}
-                render={() => {
-                    const sporsmal = valgtSoknad!.sporsmal[stegNo - 1]
-                    return (
-                        <Opplysninger ekspandert={true} steg={sporsmal.tag} />
-                    )
-                }}
-            />
+                    <Vis
+                        hvis={tittel}
+                        render={() => (
+                            <Heading size="medium" className="sporsmal__tittel">
+                                {tittel}
+                            </Heading>
+                        )}
+                    />
 
-            <Vis
-                hvis={stegNo === 1 && !erUtlandssoknad}
-                render={() => (
-                    <FristSykepenger soknadstype={valgtSoknad.soknadstype} />
-                )}
-            />
-
-            <Vis
-                hvis={
-                    stegNo === 1 &&
-                    (erReisetilskuddsoknad || erGradertReisetilskuddsoknad)
-                }
-                render={() => <OmReisetilskudd />}
-            />
-
-            <Vis
-                hvis={tittel}
-                render={() => (
-                    <Heading size="medium" className="sporsmal__tittel">
-                        {tittel}
-                    </Heading>
-                )}
-            />
-
-            <SporsmalForm />
-        </>
-    )
+                    <SporsmalForm />
+                </>
+            )
+        }
+    }
 }

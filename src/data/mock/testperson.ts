@@ -1,8 +1,10 @@
 import {
     alleData,
+    enUsendtSykmelding,
     opplaering,
     Persona,
     reisetilskudd,
+    toUsendteSykmeldinger,
     utenData,
 } from './personas'
 
@@ -15,4 +17,6 @@ export const personas: StringFunctionMap = {
     reisetilskudd: () => reisetilskudd,
     opplaering: () => opplaering,
     'alle-soknader': () => alleData,
+    'en-usendt-sykmelding': () => enUsendtSykmelding(),
+    'to-usendte-sykmeldinger': () => toUsendteSykmeldinger(),
 }

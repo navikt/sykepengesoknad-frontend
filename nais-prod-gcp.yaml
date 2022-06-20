@@ -40,6 +40,8 @@ spec:
       value: "prod"
     - name: SYKEFRAVAER_URL
       value: "https://www.nav.no/syk/sykefravaer"
+    - name: SYKMELDINGER_URL
+      value: "https://www.nav.no/syk/sykmeldinger"
     - name: DITTNAV_URL
       value: "https://www.nav.no/person/dittnav"
     - name: DECORATOR_ENV
@@ -51,4 +53,6 @@ spec:
     - name: BACKEND_APP
       value: "sykepengesoknad-backend"
     - name: VEDLIKEHOLD
+      value: "false"
+    - name: ABSOLUTT_TVANG
       value: "false"
