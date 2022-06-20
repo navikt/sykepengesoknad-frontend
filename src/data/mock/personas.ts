@@ -1,9 +1,10 @@
 import { RSSoknad } from '../../types/rs-types/rs-soknad'
 import { Sykmelding } from '../../types/sykmelding'
+import { jsonDeepCopy } from '../../utils/json-deep-copy'
 import { soknaderReisetilskudd } from './data/reisetilskudd'
 import { soknaderIntegration } from './data/soknader-integration'
-import { soknaderOpplaering } from './data/soknader-opplaering'
-import { sykmeldinger } from './data/sykmeldinger'
+import { arbeidstaker, soknaderOpplaering } from './data/soknader-opplaering'
+import { arbeidstaker100Syk, sykmeldinger } from './data/sykmeldinger'
 
 export interface Persona {
     soknader: RSSoknad[]
@@ -31,4 +32,25 @@ export const alleData: Persona = {
         ...soknaderReisetilskudd,
     ],
     sykmeldinger: sykmeldinger,
+}
+
+export const enUsendtSykmelding = () => {
+    const usendt = jsonDeepCopy(arbeidstaker100Syk)
+    usendt.sykmeldingStatus.statusEvent = 'APEN'
+    usendt.mottattTidspunkt = new Date()
+    usendt.id = 'APEN'
+    return {
+        soknader: [arbeidstaker],
+        sykmeldinger: [arbeidstaker100Syk, usendt],
+    } as Persona
+}
+
+export const toUsendteSykmeldinger = () => {
+    const usendt = jsonDeepCopy(arbeidstaker100Syk)
+    usendt.sykmeldingStatus.statusEvent = 'APEN'
+    usendt.mottattTidspunkt = new Date()
+    return {
+        soknader: [arbeidstaker],
+        sykmeldinger: [arbeidstaker100Syk, usendt, usendt],
+    } as Persona
 }

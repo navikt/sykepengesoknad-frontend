@@ -42,6 +42,10 @@ export function amplitudeEnabled() {
     return publicRuntimeConfig.amplitudeEnabled === 'true'
 }
 
+export function sykmeldingerUrl() {
+    return publicRuntimeConfig.sykmeldingerUrl
+}
+
 export function sykefravaerUrl() {
     return publicRuntimeConfig.sykefravaerUrl
 }
@@ -60,4 +64,8 @@ export function backendApp(): string {
 
 export function vedlikehold(): boolean {
     return publicRuntimeConfig.vedlikehold === 'true'
+}
+
+export function absoluttTvang(): boolean {
+    return publicRuntimeConfig.absoluttTvang === 'true'
 }
