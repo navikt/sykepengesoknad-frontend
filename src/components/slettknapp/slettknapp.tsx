@@ -6,7 +6,6 @@ import { useAppStore } from '../../data/stores/app-store'
 import { Kvittering, Sporsmal, svarverdiToKvittering } from '../../types/types'
 import { backendApp, flexGatewayRoot } from '../../utils/environment'
 import fetcher from '../../utils/fetcher'
-import { logger } from '../../utils/logger'
 import { tekst } from '../../utils/tekster'
 import Vis from '../vis'
 
@@ -27,7 +26,12 @@ const Slettknapp = ({ sporsmal, kvittering, update }: SlettknappProps) => {
     const [vilSlette, setVilSlette] = useState<boolean>(false)
     const [sletter, setSletter] = useState<boolean>(false)
 
+    const nullstillFeilmelding = () => {
+        setFeilmeldingTekst('')
+    }
+
     const slettKvittering = async () => {
+        let feilVedSletting = false
         try {
             if (sletter) return
             setSletter(true)
@@ -65,17 +69,13 @@ const Slettknapp = ({ sporsmal, kvittering, update }: SlettknappProps) => {
             } else if (redirectTilLoginHvis401(res)) {
                 return null
             } else {
-                logger.warn('Feil under sletting av kvittering i syfosoknad')
-                setFeilmeldingTekst(
-                    'Det skjedde en feil i baksystemene, prøv igjen senere'
-                )
+                feilVedSletting = true
+                setFeilmeldingTekst(tekst('opplasting_modal.slett.feilmelding'))
                 return null
             }
-        } catch (error) {
-            logger.error('Feil under sletting av kvittering', error)
         } finally {
             setSletter(false)
-            setVilSlette(false)
+            setVilSlette(feilVedSletting)
             if (update) update()
         }
     }
@@ -89,7 +89,10 @@ const Slettknapp = ({ sporsmal, kvittering, update }: SlettknappProps) => {
                         type="button"
                         className="slette-kvittering"
                         aria-label={tekst('opplasting_modal.slett')}
-                        onClick={() => setVilSlette(true)}
+                        onClick={() => {
+                            setVilSlette(true)
+                            nullstillFeilmelding()
+                        }}
                         title={tekst('opplasting_modal.slett')}
                     >
                         <img
@@ -107,7 +110,10 @@ const Slettknapp = ({ sporsmal, kvittering, update }: SlettknappProps) => {
                         variant="danger"
                         type="button"
                         className="lagre-kvittering"
-                        onClick={() => setVilSlette(true)}
+                        onClick={() => {
+                            setVilSlette(true)
+                            nullstillFeilmelding()
+                        }}
                     >
                         {tekst('opplasting_modal.slett')}
                     </Button>
@@ -144,11 +150,11 @@ const Slettknapp = ({ sporsmal, kvittering, update }: SlettknappProps) => {
                     </div>
                     <Button
                         variant="secondary"
-                        className="avbrytlenke lenkeknapp"
+                        className="lenkeknapp"
                         type="button"
                         onClick={() => setVilSlette(false)}
                     >
-                        {tekst('opplasting_modal.vil-slette.angre')}
+                        {tekst('opplasting_modal.vil-slette.lukk')}
                     </Button>
                 </Modal.Content>
             </Modal>

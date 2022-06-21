@@ -20,9 +20,11 @@ const OpplastingTekster = {
     'opplasting_modal.maksfilstr': ' Maks bildestørrelse er %MAKSFILSTR%.',
     'opplasting_modal.bekreft': 'Bekreft',
     'opplasting_modal.slett': 'Slett',
+    'opplasting_modal.slett.feilmelding':
+        'Det skjedde en feil ved sletting av kvitteringen. Dette blir logget og fanget opp men prøv gjerne senere!',
     'opplasting_modal.vil-slette': 'Vil du slette kvitteringen?',
     'opplasting_modal.vil-slette.ja': 'Ja, jeg er sikker',
-    'opplasting_modal.vil-slette.angre': 'Angre',
+    'opplasting_modal.vil-slette.lukk': 'Lukk',
     'opplasting_modal.tilbake': 'Tilbake',
     'opplasting_modal.type-utgift.label': 'Type utgift',
     'opplasting_modal.endre-utlegg.hjelpetekst':

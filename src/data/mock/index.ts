@@ -11,6 +11,7 @@ import {
     sykmeldingerBackendRoot,
 } from '../../utils/environment'
 import { jsonDeepCopy } from '../../utils/json-deep-copy'
+import { feilVedSlettingAvKvittering } from './data/reisetilskudd'
 import {
     arbeidstakerDeltPeriodeForsteUtenforArbeidsgiverperiodeKvittering,
     arbeidstakerInnenforArbeidsgiverperiodeKvittering,
@@ -187,7 +188,12 @@ const setUpMock = (person: Persona) => {
 
     mock.delete(
         `${flexGatewayRoot()}/${backendApp()}/api/soknader/:soknad/sporsmal/:spmid/svar/:svarid`,
-        () => Promise.resolve({ status: 204 })
+        (req) => {
+            if (req.pathParams.soknad === feilVedSlettingAvKvittering.id) {
+                return Promise.resolve({ status: 500 })
+            }
+            return Promise.resolve({ status: 204 })
+        }
     )
 
     mock.post(
