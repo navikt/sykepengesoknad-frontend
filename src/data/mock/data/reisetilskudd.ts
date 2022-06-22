@@ -1,4 +1,5 @@
 import { RSSoknad } from '../../../types/rs-types/rs-soknad'
+import { jsonDeepCopy } from '../../../utils/json-deep-copy'
 import {
     arbeidstakerReisetilskuddSyk,
     gradertReisetilskuddSm,
@@ -1290,8 +1291,13 @@ export const delvisUtfyltReisetilskudd: RSSoknad = {
     egenmeldtSykmelding: false,
 }
 
+export const feilVedSlettingAvKvittering: RSSoknad =
+    jsonDeepCopy(nyttReisetilskudd)
+feilVedSlettingAvKvittering.id = 'd4ce1c57-1f91-411b-ab64-beabbba29b65'
+
 export const soknaderReisetilskudd = [
     nyttReisetilskudd,
     gradertReisetilskudd,
     delvisUtfyltReisetilskudd,
+    feilVedSlettingAvKvittering,
 ]
