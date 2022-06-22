@@ -21,7 +21,7 @@ const OpplastingTekster = {
     'opplasting_modal.bekreft': 'Bekreft',
     'opplasting_modal.slett': 'Slett',
     'opplasting_modal.slett.feilmelding':
-        'Det skjedde en feil ved sletting av kvitteringen. Dette blir logget og fanget opp men prøv gjerne senere!',
+        'Det skjedde en feil ved sletting av kvitteringen. Vi jobber med saken. Prøv igjen senere.',
     'opplasting_modal.vil-slette': 'Vil du slette kvitteringen?',
     'opplasting_modal.vil-slette.ja': 'Ja, jeg er sikker',
     'opplasting_modal.vil-slette.lukk': 'Lukk',
