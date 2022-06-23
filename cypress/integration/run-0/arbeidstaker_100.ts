@@ -1,4 +1,5 @@
 import { arbeidstaker } from '../../../src/data/mock/data/soknader-opplaering'
+import { feilVedSlettingAvKvittering } from '../../../src/data/mock/data/reisetilskudd'
 
 describe('Tester arbeidstakersøknad', () => {
     //-----
@@ -317,5 +318,9 @@ describe('Tester arbeidstakersøknad', () => {
             .and('contain', 'Hva er en inntektsmelding')
             .and('contain', 'NAV behandler søknaden')
             .and('contain', 'Når blir pengene utbetalt')
+    })
+
+    it('Siden har en Ferdig-knapp', () => {
+        cy.contains('Ferdig')
     })
 })

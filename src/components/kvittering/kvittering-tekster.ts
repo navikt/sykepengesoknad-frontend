@@ -125,7 +125,7 @@ const KvitteringTekster = {
         'Vi har ikke registrert noe kontonummer på deg, og anbefaler at du legger det inn på <a target="_blank" href="https://www.nav.no/person/personopplysninger/#utbetaling">Din profil</a>',
     'kvittering.kontonummer.endre':
         'Dersom du vil benytte et annet kontonummer for utbetaling fra NAV, kan du endre det på <a target="_blank" href="https://www.nav.no/person/personopplysninger/#utbetaling">Din profil</a>',
-    'kvittering.avslutt': 'Avslutt',
+    'kvittering.ferdig': 'Ferdig',
 }
 
 export default KvitteringTekster

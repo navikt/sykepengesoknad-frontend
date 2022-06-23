@@ -102,7 +102,7 @@ const KvitteringSide = () => {
                                     className="avslutt-knapp"
                                     onClick={() => {
                                         logEvent('knapp klikket', {
-                                            tekst: tekst('kvittering.avslutt'),
+                                            tekst: tekst('kvittering.ferdig'),
                                             soknadstype:
                                                 valgtSoknad?.soknadstype,
                                         })
@@ -112,7 +112,7 @@ const KvitteringSide = () => {
                                         }, 200)
                                     }}
                                 >
-                                    {tekst('kvittering.avslutt')}
+                                    {tekst('kvittering.ferdig')}
                                 </Button>
 
                                 <Vis
