@@ -1,5 +1,4 @@
 import { arbeidstaker } from '../../../src/data/mock/data/soknader-opplaering'
-import { feilVedSlettingAvKvittering } from '../../../src/data/mock/data/reisetilskudd'
 
 describe('Tester arbeidstakersøknad', () => {
     //-----

@@ -9,7 +9,7 @@ import { RSSoknadstatus } from '../../types/rs-types/rs-soknadstatus'
 import { RSSoknadstype } from '../../types/rs-types/rs-soknadstype'
 import { Brodsmule } from '../../types/types'
 import { SEPARATOR } from '../../utils/constants'
-import { dittNavUrl, sykefravaerUrl } from '../../utils/environment'
+import { sykefravaerUrl } from '../../utils/environment'
 import { tekst } from '../../utils/tekster'
 import { useAmplitudeInstance } from '../amplitude/amplitude'
 import Banner from '../banner/banner'
@@ -108,7 +108,8 @@ const KvitteringSide = () => {
                                         })
                                         // Må sikre at amplitude får logget ferdig
                                         window.setTimeout(() => {
-                                            window.location.href = sykefravaerUrl()
+                                            window.location.href =
+                                                sykefravaerUrl()
                                         }, 200)
                                     }}
                                 >
