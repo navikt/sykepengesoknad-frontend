@@ -99,7 +99,7 @@ const KvitteringSide = () => {
                         render={() => (
                             <div className="knapperad">
                                 <Button
-                                    className="avslutt-knapp"
+                                    className="ferdig-knapp"
                                     onClick={() => {
                                         logEvent('knapp klikket', {
                                             tekst: tekst('kvittering.ferdig'),
