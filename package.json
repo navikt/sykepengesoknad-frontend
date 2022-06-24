@@ -79,7 +79,7 @@
     "build": "next build",
     "test": "MOCK_BACKEND=true jest --watch",
     "test:ci": "jest --ci",
-    "cy:open": "cypress open",
+    "cy:open": "cypress open --config-file=cypress.config.ts",
     "e2e": "start-test dev-ingen-dekorator http://localhost:8080/syk/sykepengesoknad cy:open",
     "prettier:write": "prettier --write .",
     "prettier:check": "prettier --check .",
