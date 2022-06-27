@@ -232,7 +232,7 @@ describe('Teste førsteside i reisetilskuddsøknaden', () => {
             cy.get('.bekreft-dialog').within(() => {
                 cy.contains('Vil du slette kvitteringen?')
                 cy.contains('Ja, jeg er sikker')
-                cy.contains('Angre').click()
+                cy.contains('Lukk').click()
             })
             cy.contains('Vil du slette kvitteringen?').should('not.exist')
 

@@ -44,7 +44,6 @@ const OpplastingForm = ({ sporsmal }: SpmProps) => {
         valgtKvittering,
         setOpenModal,
         valgtFil,
-        feilmeldingTekst,
         setFeilmeldingTekst,
     } = useAppStore()
     const [laster, setLaster] = useState<boolean>(false)
@@ -360,15 +359,6 @@ const OpplastingForm = ({ sporsmal }: SpmProps) => {
                 </div>
 
                 <DragAndDrop />
-
-                <Vis
-                    hvis={feilmeldingTekst}
-                    render={() => (
-                        <Alert variant="warning">
-                            <BodyShort>{feilmeldingTekst}</BodyShort>
-                        </Alert>
-                    )}
-                />
 
                 <div className="knapperad">
                     <Vis

@@ -26,8 +26,8 @@ export function isOpplaering() {
     return publicRuntimeConfig.opplaering === 'true'
 }
 
-export function sykmeldingerBackendProxyRoot() {
-    return publicRuntimeConfig.sykmeldingerBackendProxyRoot
+export function sykmeldingerBackendRoot() {
+    return publicRuntimeConfig.sykmeldingerBackendRoot
 }
 
 export function loginServiceUrl() {
@@ -40,6 +40,10 @@ export function loginServiceRedirectUrl() {
 
 export function amplitudeEnabled() {
     return publicRuntimeConfig.amplitudeEnabled === 'true'
+}
+
+export function sykmeldingerUrl() {
+    return publicRuntimeConfig.sykmeldingerUrl
 }
 
 export function sykefravaerUrl() {
@@ -60,4 +64,8 @@ export function backendApp(): string {
 
 export function vedlikehold(): boolean {
     return publicRuntimeConfig.vedlikehold === 'true'
+}
+
+export function absoluttTvang(): boolean {
+    return publicRuntimeConfig.absoluttTvang === 'true'
 }

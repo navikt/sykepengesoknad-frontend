@@ -38,7 +38,8 @@ const lyttTilNettverksKall = (a: any) => {
         const url = args[0]
         const req = args[1]
 
-        if (url.includes('sporsmal')) {
+        // DELETE har ikke body som kan parses til JSON.
+        if (url.includes('sporsmal') && req['method'] !== 'DELETE') {
             const headers = req['headers']
             const sporsmal = JSON.parse(req['body']) as RSSporsmal
             expect(headers['Content-Type'], '/sporsmal').to.eql(

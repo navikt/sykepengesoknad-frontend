@@ -9,7 +9,7 @@ import { RSSoknadstatus } from '../../types/rs-types/rs-soknadstatus'
 import { RSSoknadstype } from '../../types/rs-types/rs-soknadstype'
 import { Brodsmule } from '../../types/types'
 import { SEPARATOR } from '../../utils/constants'
-import { dittNavUrl } from '../../utils/environment'
+import { sykefravaerUrl } from '../../utils/environment'
 import { tekst } from '../../utils/tekster'
 import { useAmplitudeInstance } from '../amplitude/amplitude'
 import Banner from '../banner/banner'
@@ -99,20 +99,21 @@ const KvitteringSide = () => {
                         render={() => (
                             <div className="knapperad">
                                 <Button
-                                    className="avslutt-knapp"
+                                    className="ferdig-knapp"
                                     onClick={() => {
                                         logEvent('knapp klikket', {
-                                            tekst: tekst('kvittering.avslutt'),
+                                            tekst: tekst('kvittering.ferdig'),
                                             soknadstype:
                                                 valgtSoknad?.soknadstype,
                                         })
                                         // Må sikre at amplitude får logget ferdig
                                         window.setTimeout(() => {
-                                            window.location.href = dittNavUrl()
+                                            window.location.href =
+                                                sykefravaerUrl()
                                         }, 200)
                                     }}
                                 >
-                                    {tekst('kvittering.avslutt')}
+                                    {tekst('kvittering.ferdig')}
                                 </Button>
 
                                 <Vis

@@ -28,8 +28,8 @@ spec:
   env:
     - name: FLEX_GATEWAY_ROOT
       value: "https://flex-gateway.nav.no"
-    - name: SYKMELDINGER_BACKEND_PROXY_ROOT
-      value: "https://sykmelding-gateway.nav.no/sykmeldinger-backend"
+    - name: SYKMELDINGER_BACKEND_ROOT
+      value: "https://sykmeldinger-backend.nav.no"
     - name: LOGINSERVICE_URL
       value: "https://loginservice.nav.no/login"
     - name: LOGINSERVICE_REDIRECT_URL
@@ -40,6 +40,8 @@ spec:
       value: "prod"
     - name: SYKEFRAVAER_URL
       value: "https://www.nav.no/syk/sykefravaer"
+    - name: SYKMELDINGER_URL
+      value: "https://www.nav.no/syk/sykmeldinger"
     - name: DITTNAV_URL
       value: "https://www.nav.no/person/dittnav"
     - name: DECORATOR_ENV
@@ -51,4 +53,6 @@ spec:
     - name: BACKEND_APP
       value: "sykepengesoknad-backend"
     - name: VEDLIKEHOLD
+      value: "false"
+    - name: ABSOLUTT_TVANG
       value: "false"

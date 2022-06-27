@@ -34,15 +34,16 @@ module.exports = withPlugins(
             mockBackend: process.env.MOCK_BACKEND,
             opplaering: process.env.OPPLAERING,
             sykefravaerUrl: process.env.SYKEFRAVAER_URL,
+            sykmeldingerUrl: process.env.SYKMELDINGER_URL,
             dittNavUrl: process.env.DITTNAV_URL,
             env: process.env.ENVIRONMENT,
             amplitudeEnabled: process.env.AMPLITUDE_ENABLED,
             environment: process.env.ENVIRONMENT,
-            sykmeldingerBackendProxyRoot:
-                process.env.SYKMELDINGER_BACKEND_PROXY_ROOT,
+            sykmeldingerBackendRoot: process.env.SYKMELDINGER_BACKEND_ROOT,
             dineSakerUrl: process.env.DINESAKER_URL,
             backendApp: process.env.BACKEND_APP,
             vedlikehold: process.env.VEDLIKEHOLD,
+            absoluttTvang: process.env.ABSOLUTT_TVANG,
         },
     }
 )

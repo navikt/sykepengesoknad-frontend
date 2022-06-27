@@ -80,7 +80,7 @@ describe('Tester feilmeldinger', () => {
     })
 
     it('DATO mindre enn min', () => {
-        cy.get('.ds-datepicker__input').type('01.01.1900')
+        cy.get('.ds-datepicker').type('01.01.1900')
         gaVidere()
         feilmeldingHandtering(
             'Datoen kan ikke være før 01.04.2020',
@@ -90,7 +90,7 @@ describe('Tester feilmeldinger', () => {
     })
 
     it('DATO større enn max', () => {
-        cy.get('.ds-datepicker__input').clear().type('01.01.5000')
+        cy.get('.ds-datepicker').clear().type('01.01.5000')
         gaVidere()
         feilmeldingHandtering(
             'Datoen kan ikke være etter 24.04.2020',
@@ -100,7 +100,7 @@ describe('Tester feilmeldinger', () => {
     })
 
     it('DATO ugyldig format', () => {
-        cy.get('.ds-datepicker__input').clear().type('abc')
+        cy.get('.ds-datepicker').clear().type('abc')
         gaVidere()
         feilmeldingHandtering(
             'Datoen følger ikke formatet dd.mm.åååå',
@@ -110,7 +110,7 @@ describe('Tester feilmeldinger', () => {
     })
 
     it('DATO ugyldig format', () => {
-        cy.get('.ds-datepicker__input').clear().type('2020')
+        cy.get('.ds-datepicker').clear().type('2020')
         gaVidere()
         feilmeldingHandtering(
             'Datoen følger ikke formatet dd.mm.åååå',

@@ -318,4 +318,8 @@ describe('Tester arbeidstakersøknad', () => {
             .and('contain', 'NAV behandler søknaden')
             .and('contain', 'Når blir pengene utbetalt')
     })
+
+    it('Siden har en Ferdig-knapp', () => {
+        cy.contains('Ferdig')
+    })
 })

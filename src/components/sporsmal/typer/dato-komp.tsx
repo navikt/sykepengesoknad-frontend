@@ -25,7 +25,7 @@ const DatoInput = ({ sporsmal }: SpmProps) => {
                 rules={{
                     validate: () => {
                         const div: HTMLDivElement | null =
-                            document.querySelector('.ds-datepicker__input')
+                            document.querySelector('.ds-datepicker')
                         const detteFeilet = validerDato(sporsmal, getValues())
                         if (detteFeilet !== true) {
                             div?.classList.add('skjemaelement__input--harFeil')
@@ -39,6 +39,7 @@ const DatoInput = ({ sporsmal }: SpmProps) => {
                     <Datepicker
                         locale="nb"
                         inputId={field.name}
+                        inputLabel="Oppgi dato"
                         onChange={field.onChange}
                         value={field.value}
                         inputProps={{

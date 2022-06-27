@@ -1,5 +1,10 @@
 @import '../../basic';
 
+.ds-datepicker .navds-form-field {
+    grid-gap: 0;
+    gap: 0;
+}
+
 .periode {
     padding-top: 1rem;
 
@@ -9,10 +14,6 @@
         .skjemaelement {
             padding-right: 0.5rem;
             margin-bottom: 0;
-        }
-
-        .ds-datepicker__inputContainer {
-            width: 8.5rem;
         }
     }
 
@@ -31,12 +32,6 @@
 @media (min-width: @screen-sm) {
     .periode {
         display: flex;
-
-        .skjemagruppe {
-            .ds-datepicker__inputContainer {
-                width: 11rem;
-            }
-        }
 
         button {
             &.slett.navds-link {
