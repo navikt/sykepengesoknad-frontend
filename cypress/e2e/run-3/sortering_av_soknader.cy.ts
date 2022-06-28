@@ -2,7 +2,7 @@ import { soknaderIntegration } from '../../../src/data/mock/data/soknader-integr
 import { soknaderOpplaering } from '../../../src/data/mock/data/soknader-opplaering'
 import { Soknad } from '../../../src/types/types'
 import {
-    getTomFraSoknad,
+    getFomFraSoknad,
     senesteSendtDato,
 } from '../../../src/utils/sorter-soknader'
 
@@ -38,8 +38,8 @@ describe('Tester sortering av søknader', () => {
                 let forrigeSoknad = soknader[0]
                 soknader.forEach((sok: Soknad) => {
                     assert.isTrue(
-                        getTomFraSoknad(forrigeSoknad).getTime() <=
-                            getTomFraSoknad(sok).getTime()
+                        getFomFraSoknad(forrigeSoknad).getTime() <=
+                            getFomFraSoknad(sok).getTime()
                     )
                     forrigeSoknad = sok
                 })
@@ -66,8 +66,8 @@ describe('Tester sortering av søknader', () => {
             let forrigeSoknad = soknader[0]
             soknader.forEach((sok: Soknad) => {
                 assert.isTrue(
-                    getTomFraSoknad(forrigeSoknad).getTime() >=
-                        getTomFraSoknad(sok).getTime()
+                    getFomFraSoknad(forrigeSoknad).getTime() >=
+                        getFomFraSoknad(sok).getTime()
                 )
                 forrigeSoknad = sok
             })

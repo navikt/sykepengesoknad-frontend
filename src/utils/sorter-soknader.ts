@@ -2,10 +2,10 @@ import { TagTyper } from '../types/enums'
 import { RSSoknadstatus } from '../types/rs-types/rs-soknadstatus'
 import { RSSoknadstype } from '../types/rs-types/rs-soknadstype'
 import { Soknad, Sporsmal } from '../types/types'
-import { senesteTom } from './periode-utils'
+import { senesteFom } from './periode-utils'
 
-export const getTomFraSoknad = (soknad: Soknad): Date => {
-    const getTomForUtland = (_soknad: Soknad) => {
+export const getFomFraSoknad = (soknad: Soknad): Date => {
+    const getFomForUtland = (_soknad: Soknad) => {
         const perioder = _soknad.sporsmal
             .find((spm: Sporsmal) => spm.tag === TagTyper.PERIODEUTLAND)!
             .svarliste.svar.map((periode) => {
@@ -15,14 +15,14 @@ export const getTomFraSoknad = (soknad: Soknad): Date => {
                     tom: new Date(jsonPeriode.tom),
                 }
             })
-        return senesteTom(perioder)
+        return senesteFom(perioder)
     }
 
     if (
         soknad.soknadstype === RSSoknadstype.OPPHOLD_UTLAND &&
         soknad.status === RSSoknadstatus.SENDT
     ) {
-        return getTomForUtland(soknad) || soknad.opprettetDato
+        return getFomForUtland(soknad) || soknad.opprettetDato
     }
 
     if (
@@ -31,7 +31,7 @@ export const getTomFraSoknad = (soknad: Soknad): Date => {
     ) {
         return soknad.opprettetDato
     }
-    return soknad.tom || soknad.opprettetDato
+    return soknad.fom || soknad.opprettetDato
 }
 
 export const senesteSendtDato = (soknad: Soknad) => {
@@ -47,12 +47,12 @@ export const sorterEtterSendt = (soknad1: Soknad, soknad2: Soknad) => {
     ) {
         return senesteSendtDato(soknad2) - senesteSendtDato(soknad1)
     }
-    return sorterEtterNyesteTom(soknad1, soknad2)
+    return sorterEtterNyesteFom(soknad1, soknad2)
 }
 
 export const sorterEtterStatus = (soknad1: Soknad, soknad2: Soknad) => {
     if (soknad1.status === soknad2.status) {
-        return sorterEtterNyesteTom(soknad1, soknad2)
+        return sorterEtterNyesteFom(soknad1, soknad2)
     }
     if (soknad1.status === RSSoknadstatus.AVBRUTT) {
         return -1
@@ -66,12 +66,12 @@ export const sorterEtterStatus = (soknad1: Soknad, soknad2: Soknad) => {
     if (soknad1.status === RSSoknadstatus.UTGAATT) {
         return 1
     }
-    return sorterEtterNyesteTom(soknad1, soknad2)
+    return sorterEtterNyesteFom(soknad1, soknad2)
 }
 
-export const sorterEtterNyesteTom = (soknad1: Soknad, soknad2: Soknad) => {
-    const tom1 = getTomFraSoknad(soknad1)
-    const tom2 = getTomFraSoknad(soknad2)
+export const sorterEtterNyesteFom = (soknad1: Soknad, soknad2: Soknad) => {
+    const tom1 = getFomFraSoknad(soknad1)
+    const tom2 = getFomFraSoknad(soknad2)
     const diff = tom2.getTime() - tom1.getTime()
     if (diff == 0) {
         if (soknad2.soknadstype == RSSoknadstype.ARBEIDSTAKERE) {
