@@ -193,8 +193,12 @@ describe('Tester kvittering', () => {
 
             // Knapperad finnes ikke
             cy.contains('Jeg vil endre svarene i søknaden').should('not.exist')
-            cy.contains('Send til NAV').should('not.exist')
-            cy.contains('Send til arbeidsgiver').should('not.exist')
+            cy.contains('Jeg vil at søknaden skal behandles av NAV').should(
+                'not.exist'
+            )
+            cy.contains(
+                'Jeg vil sende en kopi av søknaden til arbeidsgiveren min'
+            ).should('not.exist')
         })
     })
 
@@ -256,8 +260,12 @@ describe('Tester kvittering', () => {
 
             // Knapperad ( Endre, Ettersend)
             cy.contains('Jeg vil endre svarene i søknaden').should('exist')
-            cy.contains('Send til NAV').should('not.exist')
-            cy.contains('Send til arbeidsgiver').should('not.exist')
+            cy.contains('Jeg vil at søknaden skal behandles av NAV').should(
+                'not.exist'
+            )
+            cy.contains(
+                'Jeg vil sende en kopi av søknaden til arbeidsgiveren min'
+            ).should('not.exist')
         })
     })
 
@@ -278,7 +286,9 @@ describe('Tester kvittering', () => {
             inntil16dagerKvittering()
 
             // Ettersending til nav vises ikke i kvittering
-            cy.contains('Send til NAV').should('not.exist')
+            cy.contains('Jeg vil at søknaden skal behandles av NAV').should(
+                'not.exist'
+            )
             cy.get('.brodsmuler__smuler .navds-link:contains(Søknader)').click({
                 force: true,
             })
@@ -291,12 +301,14 @@ describe('Tester kvittering', () => {
             )
 
             // Ettersend
-            cy.contains('Send til NAV').click()
+            cy.contains('Jeg vil at søknaden skal behandles av NAV').click()
             cy.contains(
-                'Vanligvis sendes søknaden bare til NAV hvis det samlede sykefraværet er 16 dager eller mer. Denne søknaden er beregnet til å være kortere. Hvis arbeidsgiveren din eller NAV har bedt deg sende den likevel, gjør du det her'
+                'Vanligvis behandles søknaden bare av NAV hvis det samlede sykefraværet er 16 dager eller mer. Denne søknaden er beregnet til å være kortere. Hvis arbeidsgiveren din eller NAV har bedt deg sende den likevel, gjør du det her.'
             )
-            cy.contains('Ja, send søknaden').click()
-            cy.contains('Send til NAV').should('not.exist')
+            cy.contains('Send søknaden til NAV').click()
+            cy.contains('Jeg vil at søknaden skal behandles av NAV').should(
+                'not.exist'
+            )
 
             // Sendt datoer
             cy.get('.kvittering .navds-alert--success').should(
@@ -499,8 +511,10 @@ const inntil16dagerKvittering = () => {
 
     // Knapperad ( Endre, Ettersend)
     cy.contains('Jeg vil endre svarene i søknaden').should('exist')
-    cy.contains('Send til NAV').should('not.exist')
-    cy.contains('Send til arbeidsgiver').should('not.exist')
+    cy.contains('Jeg vil at søknaden skal behandles av NAV').should('not.exist')
+    cy.contains(
+        'Jeg vil sende en kopi av søknaden til arbeidsgiveren min'
+    ).should('not.exist')
 }
 
 const over16dagerKvittering = () => {
@@ -572,8 +586,10 @@ const over16dagerKvittering = () => {
 
     // Knapperad ( Endre, Ettersend)
     cy.contains('Jeg vil endre svarene i søknaden').should('exist')
-    cy.contains('Send til NAV').should('not.exist')
-    cy.contains('Send til arbeidsgiver').should('not.exist')
+    cy.contains('Jeg vil at søknaden skal behandles av NAV').should('not.exist')
+    cy.contains(
+        'Jeg vil sende en kopi av søknaden til arbeidsgiveren min'
+    ).should('not.exist')
 }
 
 const utenOppholdKvittering = () => {
@@ -623,8 +639,10 @@ const utenOppholdKvittering = () => {
 
     // Knapperad ( Endre, Ettersend)
     cy.contains('Jeg vil endre svarene i søknaden').should('exist')
-    cy.contains('Send til NAV').should('not.exist')
-    cy.contains('Send til arbeidsgiver').should('exist')
+    cy.contains('Jeg vil at søknaden skal behandles av NAV').should('not.exist')
+    cy.contains(
+        'Jeg vil sende en kopi av søknaden til arbeidsgiveren min'
+    ).should('exist')
 }
 
 const medOppholdKvittering = () => {
@@ -688,6 +706,8 @@ const medOppholdKvittering = () => {
 
     // Knapperad ( Endre, Ettersend)
     cy.contains('Jeg vil endre svarene i søknaden').should('exist')
-    cy.contains('Send til NAV').should('not.exist')
-    cy.contains('Send til arbeidsgiver').should('exist')
+    cy.contains('Jeg vil at søknaden skal behandles av NAV').should('not.exist')
+    cy.contains(
+        'Jeg vil sende en kopi av søknaden til arbeidsgiveren min'
+    ).should('exist')
 }

@@ -117,6 +117,11 @@ const KvitteringSide = () => {
                                 </Button>
 
                                 <Vis
+                                    hvis={skalViseEndre}
+                                    render={() => <Endreknapp />}
+                                />
+
+                                <Vis
                                     hvis={skalViseSendTilArbeidsgiver}
                                     render={() => (
                                         <Ettersending
@@ -126,11 +131,6 @@ const KvitteringSide = () => {
                                             }
                                         />
                                     )}
-                                />
-
-                                <Vis
-                                    hvis={skalViseEndre}
-                                    render={() => <Endreknapp />}
                                 />
                             </div>
                         )}

@@ -1,4 +1,5 @@
-import { Alert, Button, Heading, Modal } from '@navikt/ds-react'
+import { BodyShort, Button, Modal } from '@navikt/ds-react'
+import parser from 'html-react-parser'
 import React, { useState } from 'react'
 
 import { redirectTilLoginHvis401 } from '../../data/rest/utils'
@@ -106,7 +107,7 @@ const Ettersending = ({
     return (
         <>
             <Button
-                variant="secondary"
+                variant="tertiary"
                 onClick={() => {
                     setVilEttersende(true)
                 }}
@@ -120,18 +121,11 @@ const Ettersending = ({
                 open={vilEttersende}
             >
                 <Modal.Content>
-                    <Heading
-                        spacing
-                        size="small"
-                        level="3"
-                        className="modal__tittel"
-                    >
-                        {hentTekst('kvittering.tittel.send-til')}
-                    </Heading>
-                    <Alert variant="info">
-                        {hentTekst('kvittering.info.send-til')}
-                    </Alert>
+                    <BodyShort>
+                        {parser(hentTekst('kvittering.info.send-til'))}
+                    </BodyShort>
                     <Button
+                        size="small"
                         variant="primary"
                         loading={ettersender}
                         onClick={ettersend}
