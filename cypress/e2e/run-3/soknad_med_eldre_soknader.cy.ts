@@ -1,11 +1,11 @@
-import {
-    behandlingsdager,
-    nySoknadSomIkkeKanFyllesUt,
-} from '../../../src/data/mock/data/soknader-opplaering'
+import { nySoknadSomIkkeKanFyllesUt } from '../../../src/data/mock/data/eldre-usendt-soknad'
+import { arbeidstaker } from '../../../src/data/mock/data/soknader-opplaering'
 
 describe('Tester soknad med eldre søknader', () => {
     before(() => {
-        cy.visit('http://localhost:8080/syk/sykepengesoknad')
+        cy.visit(
+            'http://localhost:8080/syk/sykepengesoknad?testperson=eldre-usendt-soknad'
+        )
     })
 
     it('Laster startside', function () {
@@ -26,6 +26,6 @@ describe('Tester soknad med eldre søknader', () => {
     })
 
     it('Vi endre på den eldste søknaden', function () {
-        cy.url().should('include', `${behandlingsdager.id}/1`)
+        cy.url().should('include', `${arbeidstaker.id}/1`)
     })
 })

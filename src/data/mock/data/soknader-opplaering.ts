@@ -1,5 +1,5 @@
 import { RSSoknad } from '../../../types/rs-types/rs-soknad'
-import { jsonDeepCopy } from '../../../utils/json-deep-copy'
+import { gradertReisetilskudd, nyttReisetilskudd } from './reisetilskudd'
 import {
     arbeidsledig100Syk,
     arbeidstaker50Syk,
@@ -2522,18 +2522,14 @@ export const fremtidigSoknad: RSSoknad = {
     egenmeldtSykmelding: false,
 }
 
-export const nySoknadSomIkkeKanFyllesUt: RSSoknad = jsonDeepCopy(arbeidstaker)
-nySoknadSomIkkeKanFyllesUt.id = 'ny-som-ikke-kan-fylles-ut'
-nySoknadSomIkkeKanFyllesUt.fom = '2020-04-25'
-nySoknadSomIkkeKanFyllesUt.tom = '2020-04-30'
-
 export const soknaderOpplaering = [
-    behandlingsdager,
-    arbeidstaker,
     arbeidstakerGradert,
+    arbeidstaker,
     arbeidsledig,
     frilanser,
+    behandlingsdager,
     oppholdUtland,
-    nySoknadSomIkkeKanFyllesUt,
+    nyttReisetilskudd,
+    gradertReisetilskudd,
     fremtidigSoknad,
 ] as RSSoknad[]

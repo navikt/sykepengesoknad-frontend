@@ -3,7 +3,7 @@ import { feilVedSlettingAvKvittering } from '../../../src/data/mock/data/reiseti
 describe('Test sletting av kvittering som feiler', () => {
     before(() => {
         cy.visit(
-            `syk/sykepengesoknad/soknader/${feilVedSlettingAvKvittering.id}/4`
+            `syk/sykepengesoknad/soknader/${feilVedSlettingAvKvittering.id}/4?testperson=reisetilskudd`
         )
     })
 
