@@ -16,7 +16,7 @@ describe('Tester at åpne sykmeldinger må sendes inn', () => {
             cy.url().should('include', `${arbeidstaker.id}/1`)
 
             cy.contains(
-                'OBS: Du har en usendt sykmelding som du må ta i bruk eller avbryte'
+                'Du har en eldre sykmelding du må velge om du skal bruke eller ikke, før du kan fylle ut denne søknaden.'
             )
 
             cy.contains('Gå til sykmeldingen').click()
@@ -45,16 +45,16 @@ describe('Tester at åpne sykmeldinger må sendes inn', () => {
             cy.url().should('include', `${arbeidstaker.id}/1`)
 
             cy.contains(
-                'OBS: Du har usendte sykmeldinger som du må ta i bruk eller avbryte'
+                'Du har to eldre sykmeldinger du må velge om du skal bruke eller ikke, før du kan fylle ut denne søknaden.'
             )
 
-            cy.contains('Gå til sykmeldingsoversikt').click()
+            cy.contains('Gå til sykmeldingen').click()
         })
 
-        it('Vi lander på listevisningen', function () {
+        it('Vi lander på sykmeldingen', function () {
             cy.url().should(
                 'equal',
-                'https://sykmeldinger.labs.nais.io/syk/sykmeldinger'
+                'https://sykmeldinger.labs.nais.io/syk/sykmeldinger/APEN'
             )
         })
     })

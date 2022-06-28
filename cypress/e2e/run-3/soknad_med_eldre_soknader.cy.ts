@@ -20,7 +20,9 @@ describe('Tester soknad med eldre søknader', () => {
     it('Viser advarsel om at det finnes eldre søknad', function () {
         cy.url().should('include', `${nySoknadSomIkkeKanFyllesUt.id}/1`)
 
-        cy.contains('OBS: Du har en eldre søknad som du må fylle ut først')
+        cy.contains(
+            'Du har en eldre søknad du må velge om du skal bruke eller ikke, før du kan fylle ut denne søknaden.'
+        )
 
         cy.contains('Gå til den eldste søknaden').click()
     })

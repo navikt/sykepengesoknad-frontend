@@ -14,17 +14,19 @@ interface SoknadLinkProps {
 export const urlTilSoknad = (soknad: Soknad) => {
     switch (soknad.status) {
         case RSSoknadstatus.SENDT:
-            return `/sendt/${soknad.id}`
+            return `/sendt/${soknad.id}${window.location.search}`
         case RSSoknadstatus.AVBRUTT:
-            return `/avbrutt/${soknad.id}`
+            return `/avbrutt/${soknad.id}${window.location.search}`
         case RSSoknadstatus.UTKAST_TIL_KORRIGERING:
-            return `/soknader/${soknad.id}/1`
+            return `/soknader/${soknad.id}/1${window.location.search}`
     }
 
     const soknaderUrl = `/soknader/${soknad.id}`
     return erDelvisUtfylt(soknad)
-        ? `${soknaderUrl}/${finnPosisjonPaSisteBesvarteSporsmal(soknad) + 1}`
-        : `${soknaderUrl}/1`
+        ? `${soknaderUrl}/${finnPosisjonPaSisteBesvarteSporsmal(soknad) + 1}${
+              window.location.search
+          }`
+        : `${soknaderUrl}/1${window.location.search}`
 }
 
 export const erDelvisUtfyltNySoknad = (soknad: Soknad): boolean => {

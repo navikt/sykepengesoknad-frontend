@@ -106,11 +106,7 @@ const KvitteringSide = () => {
                                             soknadstype:
                                                 valgtSoknad?.soknadstype,
                                         })
-                                        // Må sikre at amplitude får logget ferdig
-                                        window.setTimeout(() => {
-                                            window.location.href =
-                                                sykefravaerUrl()
-                                        }, 200)
+                                        window.location.href = sykefravaerUrl()
                                     }}
                                 >
                                     {tekst('kvittering.ferdig')}

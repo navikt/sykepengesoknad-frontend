@@ -37,7 +37,7 @@ const brodsmuler: Brodsmule[] = [
     {
         tittel: tekst('soknader.sidetittel'),
         mobilTittel: tekst('soknader.brodsmuler.sidetittel'),
-        sti: SEPARATOR,
+        sti: SEPARATOR + window.location.search,
         erKlikkbar: true,
     },
     {
@@ -144,8 +144,13 @@ const Fordeling = () => {
             if (absoluttTvang() && usendteSm.length > 0) {
                 return <UsendtSykmelding usendteSykmeldinger={usendteSm} />
             }
-            if (eldreUsendtSoknad != null) {
-                return <EldreUsendtSoknad eldreSoknad={eldreUsendtSoknad} />
+            if (eldreUsendtSoknad.eldsteSoknad) {
+                return (
+                    <EldreUsendtSoknad
+                        eldreSoknad={eldreUsendtSoknad.eldsteSoknad}
+                        antall={eldreUsendtSoknad.antall}
+                    />
+                )
             }
             return (
                 <>

@@ -5,6 +5,8 @@
 
 // ------ BEHANDLIGGSUTFALL
 
+import dayjs from 'dayjs'
+
 import { dayjsToDate } from '../utils/dato-utils'
 import { Arbeidsgiver } from './types'
 
@@ -162,6 +164,7 @@ export enum DiagnosekodeSystem {
     '2.16.578.1.12.4.1.1.7110' = 'ICD-10',
     '2.16.578.1.12.4.1.1.7170' = 'ICPC-2',
 }
+
 export class Diagnose {
     kode: string
     system: DiagnosekodeSystem
@@ -410,4 +413,15 @@ export class Sykmelding {
         this.harRedusertArbeidsgiverperiode =
             sykmelding.harRedusertArbeidsgiverperiode
     }
+}
+
+export function getSykmeldingStartDate(sykmelding: Sykmelding): dayjs.Dayjs {
+    return dayjs(
+        sykmelding.sykmeldingsperioder.reduce((acc, value) => {
+            if (dayjs(value.fom).isBefore(dayjs(acc.fom))) {
+                return value
+            }
+            return acc
+        }).fom
+    )
 }

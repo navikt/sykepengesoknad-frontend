@@ -1,50 +1,48 @@
-import { Alert } from '@navikt/ds-react'
 import React from 'react'
-import { Link } from 'react-router-dom'
 
 import { RSSoknadstatus } from '../../types/rs-types/rs-soknadstatus'
 import { Soknad } from '../../types/types'
-import { tekst } from '../../utils/tekster'
-import { useAmplitudeInstance } from '../amplitude/amplitude'
+import { tallTilSpråk } from '../../utils/tallTilSpraak'
+import { getLedetekst, tekst } from '../../utils/tekster'
+import { AlertMedKnapp } from '../alert-med-knapp/alert-med-knapp'
 import { urlTilSoknad } from '../soknad/soknad-link'
 
 interface EldreUsendtSoknadProps {
     eldreSoknad: Soknad
+    antall: number
 }
 
-export const EldreUsendtSoknad = ({ eldreSoknad }: EldreUsendtSoknadProps) => {
-    const { logEvent } = useAmplitudeInstance()
-
-    logEvent('alert vist', {
-        tekst: tekst('eldre.usendt.alert'),
-        variant: 'warning',
-    })
-
+export const EldreUsendtSoknad = ({
+    eldreSoknad,
+    antall,
+}: EldreUsendtSoknadProps) => {
     return (
-        <Alert variant="warning">
-            {tekst('eldre.usendt.alert')}
-            <Link
-                onClick={() =>
-                    logEvent('navigere', {
-                        lenketekst: tekst('eldre.usendt.gaa-til'),
-                    })
-                }
-                to={urlTilSoknad(eldreSoknad)}
-            >
-                {tekst('eldre.usendt.gaa-til')}
-            </Link>
-        </Alert>
+        <AlertMedKnapp
+            heading={'Før du kan fylle ut søknaden'}
+            innhold={getLedetekst(tekst('eldre.usendt.alert'), {
+                '%ANTALL%': tallTilSpråk(antall),
+                '%FLERTALL%': antall > 1 ? 'er' : '',
+            })}
+            url={urlTilSoknad(eldreSoknad)}
+            knappeTekst={tekst('eldre.usendt.gaa-til')}
+            komponent="usendt sykmelding"
+        />
     )
+}
+
+interface EldreUsendteSoknader {
+    eldsteSoknad?: Soknad
+    antall: number
 }
 
 export function harEldreUsendtSoknad(
     valgtSoknad: Soknad,
     soknader: Soknad[]
-): Soknad | undefined {
+): EldreUsendteSoknader {
     if (!valgtSoknad.fom) {
-        return undefined
+        return { antall: 0 }
     }
-    return soknader
+    const eldreSoknader = soknader
         .filter(
             (s) =>
                 s.status == RSSoknadstatus.NY ||
@@ -53,5 +51,10 @@ export function harEldreUsendtSoknad(
         .filter((s) => s.fom != null)
         .filter((s) => s.fom! < valgtSoknad.fom!)
         .sort((a, b) => a.fom!.getMilliseconds() - b.fom!.getMilliseconds())
-        .find((s) => s.id != valgtSoknad.id)
+        .filter((s) => s.id != valgtSoknad.id)
+
+    return {
+        antall: eldreSoknader.length,
+        eldsteSoknad: eldreSoknader.find(() => true),
+    }
 }
