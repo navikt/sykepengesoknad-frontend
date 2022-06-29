@@ -1,4 +1,5 @@
 import { Alert, BodyLong, BodyShort } from '@navikt/ds-react'
+import dayjs from 'dayjs'
 import React, { useEffect } from 'react'
 import { useHistory, useParams } from 'react-router-dom'
 
@@ -13,9 +14,14 @@ import { useAmplitudeInstance } from '../amplitude/amplitude'
 import Banner from '../banner/banner'
 import Brodsmuler from '../brodsmuler/brodsmuler'
 import FristSykepenger from '../frist-sykepenger/frist-sykepenger'
+import {
+    GjenstaendeSoknader,
+    hentGjenstaendeSoknader,
+} from '../gjenstaende-soknader/gjenstaende-soknader'
 import Opplysninger from '../opplysninger-fra-sykmelding/opplysninger'
 import { urlTilSoknad } from '../soknad/soknad-link'
 import GjenapneSoknad from '../soknader/avbryt/gjenapneknapp'
+import Vis from '../vis'
 
 const brodsmuler: Brodsmule[] = [
     {
@@ -66,6 +72,7 @@ const AvbruttSoknad = () => {
         history.replace(urlTilSoknad(valgtSoknad))
         return null
     }
+    const gjenstaendeSoknader = hentGjenstaendeSoknader(soknader)
 
     return (
         <>
@@ -98,6 +105,14 @@ const AvbruttSoknad = () => {
                 <Opplysninger ekspandert={true} steg="avbrutt-søknad" />
                 <FristSykepenger soknadstype={valgtSoknad.soknadstype} />
                 <GjenapneSoknad />
+                <Vis
+                    hvis={dayjs(valgtSoknad.avbruttDato).isAfter(
+                        dayjs().subtract(2, 'seconds')
+                    )}
+                    render={() => (
+                        <GjenstaendeSoknader soknader={gjenstaendeSoknader} />
+                    )}
+                />
             </div>
         </>
     )

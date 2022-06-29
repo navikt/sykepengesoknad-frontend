@@ -15,9 +15,12 @@ import { useAmplitudeInstance } from '../amplitude/amplitude'
 import Banner from '../banner/banner'
 import Brodsmuler from '../brodsmuler/brodsmuler'
 import Ettersending from '../ettersending/ettersending'
+import {
+    GjenstaendeSoknader,
+    hentGjenstaendeSoknader,
+} from '../gjenstaende-soknader/gjenstaende-soknader'
 import { hentHotjarJsTrigger, HotjarTrigger } from '../hotjar-trigger'
 import Vis from '../vis'
-import { GjenstaendeSoknader } from './gjenstaende-soknader'
 import Kvittering from './kvittering'
 
 const brodsmuler: Brodsmule[] = [
@@ -81,9 +84,7 @@ const KvitteringSide = () => {
         valgtSoknad.soknadstype !== RSSoknadstype.OPPHOLD_UTLAND &&
         (skalViseEndre || skalViseSendTilArbeidsgiver)
 
-    const gjenstaendeSoknader = soknader
-        .filter((s) => s.status === RSSoknadstatus.NY)
-        .filter((s) => s.soknadstype !== RSSoknadstype.OPPHOLD_UTLAND)
+    const gjenstaendeSoknader = hentGjenstaendeSoknader(soknader)
 
     return (
         <>

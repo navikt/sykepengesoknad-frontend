@@ -8,7 +8,7 @@ import DragAndDropTekster from '../components/filopplaster/drag-and-drop/drag-an
 import FilListeTekster from '../components/filopplaster/fil-liste/fil-liste-tekster'
 import OpplastingTekster from '../components/filopplaster/kvittering-modal/opplasting-tekster'
 import FristSykepengerTekster from '../components/frist-sykepenger/frist-sykepenger-tekster'
-import { GjenstaendeSoknaderTekster } from '../components/kvittering/gjenstaende-soknader'
+import { GjenstaendeSoknaderTekster } from '../components/gjenstaende-soknader/gjenstaende-soknader-tekster'
 import KvitteringTekster from '../components/kvittering/kvittering-tekster'
 import OmReisetilskuddTekster from '../components/om-reisetilskudd/om-reisetilskudd-tekster'
 import OmSykepengerTekster from '../components/om-sykepenger/om-sykepenger-tekster'
