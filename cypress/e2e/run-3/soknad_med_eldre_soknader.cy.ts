@@ -22,10 +22,10 @@ describe('Eldre søknader', () => {
             cy.url().should('include', `${nySoknadSomIkkeKanFyllesUt.id}/1`)
 
             cy.contains(
-                'Du har en eldre søknad du må velge om du skal bruke eller ikke, før du kan fylle ut denne søknaden.'
+                'Du har en eldre søknad du må velge om du skal bruke eller ikke, før du kan fylle ut denne.'
             )
 
-            cy.contains('Gå til den eldste søknaden').click()
+            cy.contains('Gå til eldste søknad').click()
         })
 
         it('Vi ender på den eldste søknaden', function () {
@@ -52,31 +52,54 @@ describe('Eldre søknader', () => {
             cy.url().should('include', `${nySoknadSomIkkeKanFyllesUt.id}/1`)
 
             cy.contains(
-                'Du har to eldre søknader du må velge om du skal bruke eller ikke, før du kan fylle ut denne søknaden.'
+                'Du har to eldre søknader du må velge om du skal bruke eller ikke, før du kan fylle ut denne.'
             )
 
-            cy.contains('Gå til den eldste søknaden').click()
+            cy.contains('Gå til eldste søknad').click()
         })
 
         it('Vi ender på den eldste søknaden', function () {
             cy.url().should('include', `${kortArbeidstakerSoknad.id}/1`)
         })
-        it('Fyller ut søknaden', () => {
-            cy.contains(
-                'Jeg vet at jeg kan miste retten til sykepenger hvis opplysningene jeg gir ikke er riktige eller fullstendige.'
-            ).click({ force: true })
-            cy.contains('Gå videre').click()
 
-            cy.get(
-                '.inputPanelGruppe__inner label:nth-child(2) > input[value=NEI]'
-            ).click({ force: true })
+        fyllUtSoknad()
 
-            cy.contains('Gå videre').click()
-            cy.contains(
-                'Jeg har lest all informasjonen jeg har fått i søknaden og bekrefter at opplysningene jeg har gitt er korrekte.'
-            ).click()
+        it('Vi har lenke til neste søknad', function () {
+            cy.contains('Du har to søknader du må velge om du skal bruke.')
+            cy.contains('Gå til neste søknad').click()
+        })
 
-            cy.contains('Send søknaden').click()
+        fyllUtSoknad()
+
+        it('Vi har lenke til neste søknad', function () {
+            cy.contains('Du har en søknad du må velge om du skal bruke.')
+            cy.contains('Gå til søknaden').click()
+        })
+
+        fyllUtSoknad()
+
+        it('Siden har en Ferdig-knapp', () => {
+            cy.contains('Ferdig')
         })
     })
 })
+
+function fyllUtSoknad() {
+    it('Fyller ut søknaden', () => {
+        cy.contains(
+            'Jeg vet at jeg kan miste retten til sykepenger hvis opplysningene jeg gir ikke er riktige eller fullstendige.'
+        ).click({ force: true })
+        cy.contains('Gå videre').click()
+
+        cy.get(
+            '.inputPanelGruppe__inner label:nth-child(2) > input[value=NEI]'
+        ).click({ force: true })
+
+        cy.contains('Gå videre').click()
+        cy.contains(
+            'Jeg har lest all informasjonen jeg har fått i søknaden og bekrefter at opplysningene jeg har gitt er korrekte.'
+        ).click()
+
+        cy.contains('Send søknaden').click()
+    })
+}

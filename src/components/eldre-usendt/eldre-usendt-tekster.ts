@@ -4,6 +4,6 @@ export const EldreUsendtTekster = {
         'Du har %ANTALL% eldre sykmelding%FLERTALL% du må velge om du skal bruke eller ikke, før du kan fylle ut denne søknaden.',
     'eldre.usendt.sykmelding.gaa-til-sykmeldingen': 'Gå til sykmeldingen',
     'eldre.usendt.soknad.alert':
-        'Du har %ANTALL% eldre søknad%FLERTALL% du må velge om du skal bruke eller ikke, før du kan fylle ut denne søknaden.',
-    'eldre.usendt.soknad.gaa-til': 'Gå til den eldste søknaden',
+        'Du har %ANTALL% eldre søknad%FLERTALL% du må velge om du skal bruke eller ikke, før du kan fylle ut denne.',
+    'eldre.usendt.soknad.gaa-til': 'Gå til eldste søknad',
 }
