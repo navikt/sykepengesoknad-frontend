@@ -17,6 +17,7 @@ import Brodsmuler from '../brodsmuler/brodsmuler'
 import Ettersending from '../ettersending/ettersending'
 import { hentHotjarJsTrigger, HotjarTrigger } from '../hotjar-trigger'
 import Vis from '../vis'
+import { GjenstaendeSoknader } from './gjenstaende-soknader'
 import Kvittering from './kvittering'
 
 const brodsmuler: Brodsmule[] = [
@@ -83,7 +84,6 @@ const KvitteringSide = () => {
     const gjenstaendeSoknader = soknader
         .filter((s) => s.status === RSSoknadstatus.NY)
         .filter((s) => s.soknadstype !== RSSoknadstype.OPPHOLD_UTLAND)
-        .sort((a, b) => a.fom!.getMilliseconds() - b.fom!.getMilliseconds())
 
     return (
         <>
@@ -98,25 +98,32 @@ const KvitteringSide = () => {
                     )}
                 >
                     <Kvittering />
-
-                    <b>Gjenstående {gjenstaendeSoknader.length}</b>
+                    <GjenstaendeSoknader soknader={gjenstaendeSoknader} />
                     <Vis
                         hvis={skalViseKnapperad}
                         render={() => (
                             <div className="knapperad">
-                                <Button
-                                    className="ferdig-knapp"
-                                    onClick={() => {
-                                        logEvent('knapp klikket', {
-                                            tekst: tekst('kvittering.ferdig'),
-                                            soknadstype:
-                                                valgtSoknad?.soknadstype,
-                                        })
-                                        window.location.href = sykefravaerUrl()
-                                    }}
-                                >
-                                    {tekst('kvittering.ferdig')}
-                                </Button>
+                                <Vis
+                                    hvis={gjenstaendeSoknader.length == 0}
+                                    render={() => (
+                                        <Button
+                                            className="ferdig-knapp"
+                                            onClick={() => {
+                                                logEvent('knapp klikket', {
+                                                    tekst: tekst(
+                                                        'kvittering.ferdig'
+                                                    ),
+                                                    soknadstype:
+                                                        valgtSoknad?.soknadstype,
+                                                })
+                                                window.location.href =
+                                                    sykefravaerUrl()
+                                            }}
+                                        >
+                                            {tekst('kvittering.ferdig')}
+                                        </Button>
+                                    )}
+                                ></Vis>
 
                                 <Vis
                                     hvis={skalViseEndre}

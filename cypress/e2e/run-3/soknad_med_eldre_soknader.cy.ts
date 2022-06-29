@@ -1,5 +1,5 @@
 import { nySoknadSomIkkeKanFyllesUt } from '../../../src/data/mock/data/eldre-usendt-soknad'
-import { kortArbeidstakerSoknad } from "../../../src/data/mock/data/kort-soknad";
+import { kortArbeidstakerSoknad } from '../../../src/data/mock/data/kort-soknad'
 
 describe('Eldre søknader', () => {
     describe('soknad med en eldre søknad', () => {
@@ -78,6 +78,5 @@ describe('Eldre søknader', () => {
 
             cy.contains('Send søknaden').click()
         })
-
     })
 })

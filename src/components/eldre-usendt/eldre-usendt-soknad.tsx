@@ -50,7 +50,7 @@ export function harEldreUsendtSoknad(
         )
         .filter((s) => s.fom != null)
         .filter((s) => s.fom! < valgtSoknad.fom!)
-        .sort((a, b) => a.fom!.getMilliseconds() - b.fom!.getMilliseconds())
+        .sort((a, b) => a.fom!.getTime() - b.fom!.getTime())
         .filter((s) => s.id != valgtSoknad.id)
 
     return {
