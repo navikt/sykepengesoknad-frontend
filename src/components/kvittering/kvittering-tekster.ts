@@ -3,24 +3,24 @@ const KvitteringTekster = {
     'kvittering.status': 'Status',
     'kvittering.utbetaling.tittel': 'Utbetaling av sykepenger',
     'kvittering.knapp.endre': 'Jeg vil endre svarene i søknaden',
-    'kvittering.knapp.send-nav': 'Send til NAV',
-    'kvittering.knapp.send-arbeidsgiver': 'Send til arbeidsgiver',
+    'kvittering.knapp.send-nav': 'Jeg vil at søknaden skal behandles av NAV',
+    'kvittering.knapp.send-arbeidsgiver':
+        'Jeg vil sende en kopi av søknaden til arbeidsgiveren min',
 
     'kvittering.knapp.angre': 'Angre',
     'kvittering.korrigering.feilet': 'Beklager, søknaden kunne ikke endres',
     'kvittering.ettersending.feilet':
         'Beklager, søknaden kunne ikke ettersendes',
 
-    'kvittering.tittel.send-til-arbeidsgiver':
-        'Send søknaden til arbeidsgiveren din',
     'kvittering.info.send-til-arbeidsgiver':
-        'Er du sikker på at du vil sende søknaden til arbeidsgiveren din?',
-    'kvittering.knapp.bekreft.send-til-arbeidsgiver': 'Ja, send søknaden',
+        'NAV har allerede mottatt søknaden din og behandler denne. <br> <br> Hvis din arbeidsgiver har bedt deg sende en kopi, eller du av andre årsaker likevel  ønsker å sende søknaden til arbeidsgiveren din, kan du gjøre det her.',
+    'kvittering.knapp.bekreft.send-til-arbeidsgiver':
+        'Send kopi av søknaden til arbeidsgiver',
 
     'kvittering.tittel.send-til-nav': 'Send søknaden til NAV',
     'kvittering.info.send-til-nav':
-        'Vanligvis sendes søknaden bare til NAV hvis det samlede sykefraværet er 16 dager eller mer. Denne søknaden er beregnet til å være kortere. Hvis arbeidsgiveren din eller NAV har bedt deg sende den likevel, gjør du det her:',
-    'kvittering.knapp.bekreft.send-til-nav': 'Ja, send søknaden',
+        'Vanligvis behandles søknaden bare av NAV hvis det samlede sykefraværet er 16 dager eller mer. Denne søknaden er beregnet til å være kortere. Hvis arbeidsgiveren din eller NAV har bedt deg sende den likevel, gjør du det her.',
+    'kvittering.knapp.bekreft.send-til-nav': 'Send søknaden til NAV',
 
     'kvittering.soknaden-er-sendt-til': 'Søknaden er sendt til',
     'kvittering.soknaden-er-sendt': 'Søknaden er sendt',

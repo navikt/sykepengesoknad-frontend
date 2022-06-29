@@ -22,7 +22,7 @@ export const reisetilskudd: Persona = {
 }
 
 export const opplaering: Persona = {
-    soknader: [...soknaderOpplaering, ...soknaderReisetilskudd],
+    soknader: soknaderOpplaering,
     sykmeldinger: sykmeldinger,
 }
 export const alleData: Persona = {

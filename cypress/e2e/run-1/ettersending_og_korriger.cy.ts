@@ -104,7 +104,9 @@ describe('Tester ettersending og korrigering', () => {
             .and('contain', 'NAV')
 
         // Kan ikke ettersende til nav på kvittering
-        cy.contains('Send til NAV').should('not.exist')
+        cy.contains('Jeg vil at søknaden skal behandles av NAV').should(
+            'not.exist'
+        )
     })
 
     it('Ettersend', () => {
@@ -115,14 +117,14 @@ describe('Tester ettersending og korrigering', () => {
             force: true,
         })
 
-        cy.contains('Send til NAV').click()
+        cy.contains('Jeg vil at søknaden skal behandles av NAV').click()
         cy.contains(
-            'Vanligvis sendes søknaden bare til NAV hvis det samlede sykefraværet ' +
-                'er 16 dager eller mer. Denne søknaden er beregnet til å være kortere. ' +
-                'Hvis arbeidsgiveren din eller NAV har bedt deg sende den likevel, gjør du det her'
+            'Vanligvis behandles søknaden bare av NAV hvis det samlede sykefraværet er 16 dager eller mer. Denne søknaden er beregnet til å være kortere. Hvis arbeidsgiveren din eller NAV har bedt deg sende den likevel, gjør du det her.'
         )
-        cy.contains('Ja, send søknaden').click()
-        cy.contains('Send til NAV').should('not.exist')
+        cy.contains('Send søknaden til NAV').click()
+        cy.contains('Jeg vil at søknaden skal behandles av NAV').should(
+            'not.exist'
+        )
     })
 
     it('Korriger', () => {

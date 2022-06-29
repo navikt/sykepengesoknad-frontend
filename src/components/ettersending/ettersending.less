@@ -1,18 +1,22 @@
 .ettersending {
-    max-width: 400px;
+    max-width: 500px;
+
+    p {
+        margin-top: 2rem;
+    }
 
     .navds-modal__content {
-        .modal__tittel {
-            margin-top: 0.4rem;
-        }
-
-        .navds-alert {
-            margin: 1rem 0 2rem;
-        }
-
         .navds-button {
-            display: block;
-            margin: 1rem auto;
+            margin: 1rem auto 1rem;
+            display: flex;
+            justify-content: center;
+            align-items: center;
         }
+    }
+}
+
+@media (min-width: 768px) {
+    .ettersending {
+        width: 500px;
     }
 }

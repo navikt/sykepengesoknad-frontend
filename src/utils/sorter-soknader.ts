@@ -72,5 +72,11 @@ export const sorterEtterStatus = (soknad1: Soknad, soknad2: Soknad) => {
 export const sorterEtterNyesteTom = (soknad1: Soknad, soknad2: Soknad) => {
     const tom1 = getTomFraSoknad(soknad1)
     const tom2 = getTomFraSoknad(soknad2)
-    return tom2.getTime() - tom1.getTime()
+    const diff = tom2.getTime() - tom1.getTime()
+    if (diff == 0) {
+        if (soknad2.soknadstype == RSSoknadstype.ARBEIDSTAKERE) {
+            return -1
+        }
+    }
+    return diff
 }

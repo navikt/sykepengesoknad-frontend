@@ -5,7 +5,9 @@ describe('Tester delvis utfylt søknad med reisetilskudd', () => {
     const delvisUtfyltSoknad = delvisUtfyltReisetilskudd
 
     before(() => {
-        cy.visit('http://localhost:8080/syk/sykepengesoknad')
+        cy.visit(
+            'http://localhost:8080/syk/sykepengesoknad?testperson=reisetilskudd'
+        )
     })
 
     it('Henter liste med søknader', () => {
