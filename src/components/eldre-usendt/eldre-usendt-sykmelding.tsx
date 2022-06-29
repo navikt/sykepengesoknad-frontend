@@ -10,7 +10,7 @@ interface UsendtSykmeldingProps {
     usendteSykmeldinger: Sykmelding[]
 }
 
-export const UsendtSykmelding = ({
+export const EldreUsendtSykmelding = ({
     usendteSykmeldinger,
 }: UsendtSykmeldingProps) => {
     const sorterteUsendte = [...usendteSykmeldinger].sort((a, b) =>
@@ -19,13 +19,13 @@ export const UsendtSykmelding = ({
 
     return (
         <AlertMedKnapp
-            heading={'Før du kan fylle ut søknaden'}
-            innhold={getLedetekst(tekst('usendt.sykmelding.alert'), {
+            heading={tekst('eldre.usendt.header')}
+            innhold={getLedetekst(tekst('eldre.usendt.sykmelding.alert'), {
                 '%ANTALL%': tallTilSpråk(usendteSykmeldinger.length),
                 '%FLERTALL%': usendteSykmeldinger.length > 1 ? 'er' : '',
             })}
             url={sykmeldingerUrl() + '/' + sorterteUsendte[0].id}
-            knappeTekst={tekst('usendt.sykmelding.gaa-til-sykmeldingen')}
+            knappeTekst={tekst('eldre.usendt.sykmelding.gaa-til-sykmeldingen')}
             komponent="usendt sykmelding"
         />
     )

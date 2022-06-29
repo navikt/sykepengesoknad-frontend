@@ -18,13 +18,13 @@ export const EldreUsendtSoknad = ({
 }: EldreUsendtSoknadProps) => {
     return (
         <AlertMedKnapp
-            heading={'Før du kan fylle ut søknaden'}
-            innhold={getLedetekst(tekst('eldre.usendt.alert'), {
+            heading={tekst('eldre.usendt.header')}
+            innhold={getLedetekst(tekst('eldre.usendt.soknad.alert'), {
                 '%ANTALL%': tallTilSpråk(antall),
                 '%FLERTALL%': antall > 1 ? 'er' : '',
             })}
             url={urlTilSoknad(eldreSoknad)}
-            knappeTekst={tekst('eldre.usendt.gaa-til')}
+            knappeTekst={tekst('eldre.usendt.soknad.gaa-til')}
             komponent="usendt sykmelding"
         />
     )
