@@ -7,7 +7,7 @@ import useFetch from '../../../data/rest/use-fetch'
 import {
     FetchState,
     hasData,
-    redirectTilLoginHvis401,
+    redirectTilLoginHvis401
 } from '../../../data/rest/utils'
 import { useAppStore } from '../../../data/stores/app-store'
 import { TagTyper } from '../../../types/enums'
@@ -42,7 +42,7 @@ import SendesTil from './sendes-til'
 import skalViseKnapperad from './skal-vise-knapperad'
 
 export interface SpmProps {
-    sporsmal: Sporsmal
+    sporsmal: Sporsmal;
 }
 
 const SporsmalForm = () => {
@@ -54,7 +54,7 @@ const SporsmalForm = () => {
         mottaker,
         setTop,
         setMottaker,
-        setFeilState,
+        setFeilState
     } = useAppStore()
     const { logEvent } = useAmplitudeInstance()
     const [erSiste, setErSiste] = useState<boolean>(false)
@@ -67,7 +67,7 @@ const SporsmalForm = () => {
     const methods = useForm({
         mode: 'onBlur',
         reValidateMode: 'onChange',
-        shouldUnregister: true,
+        shouldUnregister: true
     })
     const erUtlandssoknad =
         valgtSoknad!.soknadstype === RSSoknadstype.OPPHOLD_UTLAND
@@ -79,7 +79,7 @@ const SporsmalForm = () => {
     useEffect(() => {
         methods.reset(hentFormState(sporsmal), { keepValues: false })
         // eslint-disable-next-line
-    }, [sporsmal])
+    }, [sporsmal]);
 
     useEffect(() => {
         function erSiste() {
@@ -98,21 +98,21 @@ const SporsmalForm = () => {
         setErSiste(sisteSide)
         if (sisteSide) hentMottaker()
         // eslint-disable-next-line
-    }, [spmIndex])
+    }, [spmIndex]);
 
     const sendOppdaterSporsmal = async () => {
         let soknad = valgtSoknad
 
         const res = await fetcher(
             flexGatewayRoot() +
-                `/${backendApp()}/api/soknader/${soknad!.id}/sporsmal/${
-                    sporsmal.id
-                }`,
+            `/${backendApp()}/api/soknader/${soknad!.id}/sporsmal/${
+                sporsmal.id
+            }`,
             {
                 method: 'PUT',
                 credentials: 'include',
                 body: JSON.stringify(sporsmalToRS(sporsmal)),
-                headers: { 'Content-Type': 'application/json' },
+                headers: { 'Content-Type': 'application/json' }
             }
         )
 
@@ -135,15 +135,15 @@ const SporsmalForm = () => {
                     const spm = rsOppdaterSporsmalResponse.oppdatertSporsmal
                     erSiste
                         ? (soknad!.sporsmal[spmIndex + 1] = new Sporsmal(
-                              spm,
-                              undefined as any,
-                              true
-                          ))
+                            spm,
+                            undefined as any,
+                            true
+                        ))
                         : (soknad!.sporsmal[spmIndex] = new Sporsmal(
-                              spm,
-                              undefined as any,
-                              true
-                          ))
+                            spm,
+                            undefined as any,
+                            true
+                        ))
                 }
                 soknader[soknader.findIndex((sok) => sok.id === soknad!.id)] =
                     soknad as any
@@ -186,11 +186,11 @@ const SporsmalForm = () => {
     const hentMottaker = () => {
         rsMottakerResponseFetch.fetch(
             flexGatewayRoot() +
-                `/${backendApp()}/api/soknader/${valgtSoknad!.id}/finnMottaker`,
+            `/${backendApp()}/api/soknader/${valgtSoknad!.id}/finnMottaker`,
             {
                 method: 'POST',
                 credentials: 'include',
-                headers: { 'Content-Type': 'application/json' },
+                headers: { 'Content-Type': 'application/json' }
             },
             (fetchState: FetchState<RSMottakerResponse>) => {
                 if (hasData(fetchState)) {
@@ -220,11 +220,11 @@ const SporsmalForm = () => {
         }
         const res = await fetcher(
             flexGatewayRoot() +
-                `/${backendApp()}/api/soknader/${valgtSoknad.id}/send`,
+            `/${backendApp()}/api/soknader/${valgtSoknad.id}/send`,
             {
                 method: 'POST',
                 credentials: 'include',
-                headers: { 'Content-Type': 'application/json' },
+                headers: { 'Content-Type': 'application/json' }
             }
         )
 
@@ -248,7 +248,7 @@ const SporsmalForm = () => {
                 setValgtSoknad(valgtSoknad)
                 soknader[
                     soknader.findIndex((sok) => sok.id === valgtSoknad.id)
-                ] = valgtSoknad
+                    ] = valgtSoknad
                 if (valgtSoknad.korrigerer !== null) {
                     soknader.find(
                         (sok) => sok.id === valgtSoknad.korrigerer
@@ -256,7 +256,7 @@ const SporsmalForm = () => {
                 }
                 setSoknader(soknader)
 
-                history.push(`/kvittering/${valgtSoknad!.id}`)
+                history.push(`/kvittering/${valgtSoknad!.id}${window.location.search}`)
             } else {
                 logger.error('Feil ved sending av søknad', res)
                 restFeilet = true
@@ -287,7 +287,7 @@ const SporsmalForm = () => {
                 await sendSoknad()
                 logEvent('skjema fullført', {
                     soknadstype: valgtSoknad!.soknadstype,
-                    skjemanavn: 'sykepengesoknad',
+                    skjemanavn: 'sykepengesoknad'
                 })
             } else {
                 await sendOppdaterSporsmal()
@@ -295,14 +295,14 @@ const SporsmalForm = () => {
                     soknadstype: valgtSoknad!.soknadstype,
                     skjemanavn: 'sykepengesoknad',
                     spørsmål: sporsmal.tag,
-                    svar: hentSvar(sporsmal),
+                    svar: hentSvar(sporsmal)
                 })
             }
 
             if (restFeilet) {
                 methods.setError('syfosoknad', {
                     type: 'rest-feilet',
-                    message: 'Beklager, det oppstod en feil',
+                    message: 'Beklager, det oppstod en feil'
                 })
                 sporsmal = valgtSoknad!.sporsmal[spmIndex]
             } else {
@@ -311,8 +311,9 @@ const SporsmalForm = () => {
                 if (!erSiste) {
                     history.push(
                         pathUtenSteg(history.location.pathname) +
-                            SEPARATOR +
-                            (spmIndex + 2)
+                        SEPARATOR +
+                        (spmIndex + 2)
+                        + window.location.search
                     )
                 }
             }
@@ -372,7 +373,7 @@ const SporsmalForm = () => {
                                 RSSoknadstype.REISETILSKUDD &&
                                 sporsmal.svartype !== RSSvartype.KVITTERING) ||
                             valgtSoknad!.soknadstype !==
-                                RSSoknadstype.REISETILSKUDD
+                            RSSoknadstype.REISETILSKUDD
                         }
                         render={() => <FeilOppsummering sporsmal={sporsmal} />}
                     />

@@ -1,5 +1,5 @@
 import { nySoknadSomIkkeKanFyllesUt } from '../../../src/data/mock/data/eldre-usendt-soknad'
-import { arbeidstaker } from '../../../src/data/mock/data/soknader-opplaering'
+import { kortArbeidstakerSoknad } from "../../../src/data/mock/data/kort-soknad";
 
 describe('Eldre søknader', () => {
     describe('soknad med en eldre søknad', () => {
@@ -29,7 +29,7 @@ describe('Eldre søknader', () => {
         })
 
         it('Vi ender på den eldste søknaden', function () {
-            cy.url().should('include', `${arbeidstaker.id}/1`)
+            cy.url().should('include', `${kortArbeidstakerSoknad.id}/1`)
         })
     })
     describe('soknad med to eldre søknad', () => {
@@ -59,7 +59,25 @@ describe('Eldre søknader', () => {
         })
 
         it('Vi ender på den eldste søknaden', function () {
-            cy.url().should('include', `${arbeidstaker.id}/1`)
+            cy.url().should('include', `${kortArbeidstakerSoknad.id}/1`)
         })
+        it('Fyller ut søknaden', () => {
+            cy.contains(
+                'Jeg vet at jeg kan miste retten til sykepenger hvis opplysningene jeg gir ikke er riktige eller fullstendige.'
+            ).click({ force: true })
+            cy.contains('Gå videre').click()
+
+            cy.get(
+                '.inputPanelGruppe__inner label:nth-child(2) > input[value=NEI]'
+            ).click({ force: true })
+
+            cy.contains('Gå videre').click()
+            cy.contains(
+                'Jeg har lest all informasjonen jeg har fått i søknaden og bekrefter at opplysningene jeg har gitt er korrekte.'
+            ).click()
+
+            cy.contains('Send søknaden').click()
+        })
+
     })
 })

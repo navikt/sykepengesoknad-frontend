@@ -26,6 +26,19 @@ test('En usendt ny sykmelding returnerer true', () => {
     expect(eldreUsendteSykmeldinger([sykmelding1], new Date())).toHaveLength(1)
 })
 
+test('En usendt ny sykmelding returnerer false når søknad fom er eldre', () => {
+    const sykmelding1 = sykmelding()
+    sykmelding1.sykmeldingStatus.statusEvent = 'APEN'
+    sykmelding1.mottattTidspunkt = new Date()
+    sykmelding1.sykmeldingsperioder[0].fom = new Date()
+    expect(
+        eldreUsendteSykmeldinger(
+            [sykmelding1],
+            dayjs().subtract(1, 'day').toDate()
+        )
+    ).toHaveLength(0)
+})
+
 test('En usendt 366 dager gammel sykmelding returnerer false', () => {
     const sykmelding1 = sykmelding()
     sykmelding1.sykmeldingStatus.statusEvent = 'APEN'

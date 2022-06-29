@@ -80,6 +80,11 @@ const KvitteringSide = () => {
         valgtSoknad.soknadstype !== RSSoknadstype.OPPHOLD_UTLAND &&
         (skalViseEndre || skalViseSendTilArbeidsgiver)
 
+    const gjenstaendeSoknader = soknader
+        .filter((s) => s.status === RSSoknadstatus.NY)
+        .filter((s) => s.soknadstype !== RSSoknadstype.OPPHOLD_UTLAND)
+        .sort((a, b) => a.fom!.getMilliseconds() - b.fom!.getMilliseconds())
+
     return (
         <>
             <Banner />
@@ -94,6 +99,7 @@ const KvitteringSide = () => {
                 >
                     <Kvittering />
 
+                    <b>Gjenstående {gjenstaendeSoknader.length}</b>
                     <Vis
                         hvis={skalViseKnapperad}
                         render={() => (
