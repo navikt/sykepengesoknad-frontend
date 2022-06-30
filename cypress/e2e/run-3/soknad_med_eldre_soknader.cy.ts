@@ -22,7 +22,7 @@ describe('Eldre søknader', () => {
             cy.url().should('include', `${nySoknadSomIkkeKanFyllesUt.id}/1`)
 
             cy.contains(
-                'Du har en eldre søknad du må velge om du skal bruke eller ikke, før du kan fylle ut denne.'
+                'Du har en eldre søknad du må velge om du skal bruke, før du kan begynne på denne.'
             )
 
             cy.contains('Gå til eldste søknad').click()
@@ -52,7 +52,7 @@ describe('Eldre søknader', () => {
             cy.url().should('include', `${nySoknadSomIkkeKanFyllesUt.id}/1`)
 
             cy.contains(
-                'Du har to eldre søknader du må velge om du skal bruke eller ikke, før du kan fylle ut denne.'
+                'Du har to eldre søknader du må velge om du skal bruke, før du kan begynne på denne.'
             )
 
             cy.contains('Gå til eldste søknad').click()

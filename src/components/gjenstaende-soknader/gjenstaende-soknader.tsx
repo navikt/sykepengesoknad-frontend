@@ -1,5 +1,5 @@
-import { Button, GuidePanel } from '@navikt/ds-react'
-import React from 'react'
+import { Button, GuidePanel, Heading } from '@navikt/ds-react'
+import React, { CSSProperties } from 'react'
 import { useHistory } from 'react-router-dom'
 
 import { RSSoknadstatus } from '../../types/rs-types/rs-soknadstatus'
@@ -11,9 +11,10 @@ import { urlTilSoknad } from '../soknad/soknad-link'
 
 interface Props {
     soknader: Soknad[]
+    style?: CSSProperties | undefined
 }
 
-export const GjenstaendeSoknader = ({ soknader }: Props) => {
+export const GjenstaendeSoknader = ({ soknader, style }: Props) => {
     const history = useHistory()
 
     if (soknader.length == 0) {
@@ -26,8 +27,17 @@ export const GjenstaendeSoknader = ({ soknader }: Props) => {
         }
         return tekst('gjenstaende.neste.entall')
     }
+    const heading = () => {
+        if (soknader.length > 1) {
+            return 'Du har flere søknader'
+        }
+        return 'Du har en søknad til'
+    }
     return (
-        <GuidePanel>
+        <GuidePanel style={style}>
+            <Heading size="small" spacing>
+                {heading()}
+            </Heading>
             {getLedetekst(tekst('gjenstaende.panel.tekst'), {
                 '%ANTALL%': tallTilSpråk(soknader.length),
                 '%FLERTALL%': soknader.length > 1 ? 'er' : '',

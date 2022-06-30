@@ -1,4 +1,4 @@
-import { Alert, BodyShort, Button, Heading } from '@navikt/ds-react'
+import { BodyShort, Button, GuidePanel, Heading } from '@navikt/ds-react'
 import React from 'react'
 import { useHistory } from 'react-router-dom'
 
@@ -29,7 +29,7 @@ export const AlertMedKnapp = ({
     })
 
     return (
-        <Alert variant="warning">
+        <GuidePanel>
             <Heading size="small" spacing>
                 {heading}
             </Heading>
@@ -52,6 +52,6 @@ export const AlertMedKnapp = ({
             >
                 {knappeTekst}
             </Button>
-        </Alert>
+        </GuidePanel>
     )
 }

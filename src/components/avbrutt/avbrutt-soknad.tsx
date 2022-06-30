@@ -86,7 +86,6 @@ const AvbruttSoknad = () => {
                         {tilLesbarDatoMedArstall(valgtSoknad!.avbruttDato)}.
                     </BodyShort>
                 </Alert>
-
                 <div className="avbrutt-info">
                     <BodyLong spacing>
                         {tekst('sykepengesoknad.avbrutt.informasjon-innhold-1')}
@@ -104,15 +103,19 @@ const AvbruttSoknad = () => {
 
                 <Opplysninger ekspandert={true} steg="avbrutt-søknad" />
                 <FristSykepenger soknadstype={valgtSoknad.soknadstype} />
-                <GjenapneSoknad />
+
                 <Vis
                     hvis={dayjs(valgtSoknad.avbruttDato).isAfter(
                         dayjs().subtract(2, 'seconds')
                     )}
                     render={() => (
-                        <GjenstaendeSoknader soknader={gjenstaendeSoknader} />
+                        <GjenstaendeSoknader
+                            style={{ marginTop: '1rem', marginBottom: '1rem' }}
+                            soknader={gjenstaendeSoknader}
+                        />
                     )}
                 />
+                <GjenapneSoknad />
             </div>
         </>
     )
