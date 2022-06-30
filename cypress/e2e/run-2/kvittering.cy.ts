@@ -29,10 +29,6 @@ describe('Tester kvittering', () => {
                 'Jeg vet at jeg kan miste retten til sykepenger hvis opplysningene jeg gir ikke er riktige eller fullstendige.'
             ).click({ force: true })
             cy.contains('Gå videre').click()
-            cy.get(
-                '.inputPanelGruppe__inner label:nth-child(2) > input[value=NEI]'
-            ).click({ force: true })
-            cy.contains('Gå videre').click()
             cy.get('.skjemaelement__label').click({ force: true })
             cy.contains('Send søknaden').click()
             cy.url().should(
@@ -469,10 +465,6 @@ describe('Tester kvittering', () => {
 const besvarSoknad = () => {
     cy.contains(
         'Jeg vet at jeg kan miste retten til sykepenger hvis opplysningene jeg gir ikke er riktige eller fullstendige.'
-    ).click({ force: true })
-    cy.contains('Gå videre').click({ force: true })
-    cy.get(
-        '.inputPanelGruppe__inner label:nth-child(2) > input[value=NEI]'
     ).click({ force: true })
     cy.contains('Gå videre').click({ force: true })
     cy.get('.skjemaelement__label').click({ force: true })

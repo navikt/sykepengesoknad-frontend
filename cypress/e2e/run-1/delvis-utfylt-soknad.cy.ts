@@ -36,15 +36,14 @@ describe('Tester delvis utfylt søknad', () => {
         cy.get(
             `#soknader-list-til-behandling article a[href*=${delvisUtfyltSoknad.id}]`
         ).click()
-        cy.url().should('include', `${delvisUtfyltSoknad.id}/4`)
+        cy.url().should('include', `${delvisUtfyltSoknad.id}/3`)
         cy.get('.inputPanel').should('not.be.checked')
     })
 
     it('Forrige spørsmål er besvart', () => {
         cy.contains('Tilbake').click()
-        cy.url().should('include', `${delvisUtfyltSoknad.id}/3`)
-        cy.get('.inputPanel--checked').contains('Ja')
-        cy.get('.skjemaelement__label').contains('Fra og med')
-        cy.get('.skjemaelement__label').contains('Til og med')
+        cy.url().should('include', `${delvisUtfyltSoknad.id}/2`)
+        cy.contains('Arbeid utenfor Norge')
+        cy.get('.inputPanel--checked').contains('Nei')
     })
 })

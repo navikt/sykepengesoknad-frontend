@@ -247,49 +247,8 @@ describe('Tester arbeidstakersøknad', () => {
         cy.contains('Gå videre').click()
     })
 
-    it('Søknad PERMITTERT_NAA', function () {
+    it('Søknad ANSVARSERKLARING', function () {
         cy.url().should('include', `${soknad.id}/9`)
-
-        // Test spørsmål
-        cy.get(
-            '.inputPanelGruppe__inner label:first-child > input[value=JA]'
-        ).click({ force: true })
-        cy.contains('Velg første dag i permitteringen')
-        cy.get('.ds-datepicker__kalenderknapp').click()
-        cy.get('.DayPicker-Day').contains('20').click()
-
-        // Gå til neste, så tilbake å svar nei
-        cy.contains('Gå videre').click()
-        cy.url().should('include', `${soknad.id}/10`)
-        cy.contains('Tilbake').click({ force: true })
-        cy.get(
-            '.inputPanelGruppe__inner label:nth-child(2) > input[value=NEI]'
-        ).click({ force: true })
-
-        cy.contains('Gå videre').click()
-    })
-
-    it('Søknad PERMITTERT_PERIODE', function () {
-        cy.url().should('include', `${soknad.id}/10`)
-
-        // Må velge ja/nei
-        cy.contains('Gå videre').click()
-        cy.contains('Du må svare på om du har vært permittert')
-
-        // Test spørsmål
-        cy.get(
-            '.inputPanelGruppe__inner label:first-child > input[value=JA]'
-        ).click({ force: true })
-        cy.get('#687340_0 .fom .ds-datepicker__kalenderknapp').click()
-        cy.get('.DayPicker-Day').contains('10').click()
-        cy.get('#687340_0 .tom .ds-datepicker__kalenderknapp').click()
-        cy.get('.DayPicker-Day').contains('13').click()
-
-        cy.contains('Gå videre').click()
-    })
-
-    it('Søknad ANSVARSERKLARING - steg 11', function () {
-        cy.url().should('include', `${soknad.id}/11`)
 
         cy.contains('Oppsummering fra søknaden').click({ force: true })
         cy.contains(
