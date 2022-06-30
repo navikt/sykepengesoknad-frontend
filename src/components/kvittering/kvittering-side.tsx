@@ -26,7 +26,7 @@ import Kvittering from './kvittering'
 const brodsmuler: Brodsmule[] = [
     {
         tittel: tekst('soknader.sidetittel'),
-        sti: SEPARATOR,
+        sti: SEPARATOR + window.location.search,
         erKlikkbar: true,
     },
     {

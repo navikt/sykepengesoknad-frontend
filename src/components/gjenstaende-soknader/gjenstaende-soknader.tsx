@@ -51,7 +51,7 @@ export const GjenstaendeSoknader = ({ soknader, style }: Props) => {
             <Heading size="small" spacing>
                 {heading()}
             </Heading>
-            {tekst}
+            {innhold}
             <Button
                 style={{ display: 'block', marginTop: '1em' }}
                 onClick={() => {

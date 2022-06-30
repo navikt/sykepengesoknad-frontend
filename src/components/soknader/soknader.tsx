@@ -18,7 +18,7 @@ const brodsmuler: Brodsmule[] = [
     {
         tittel: tekst('soknader.sidetittel'),
         mobilTittel: tekst('soknader.brodsmuler.sidetittel'),
-        sti: '/soknader',
+        sti: null as any,
         erKlikkbar: false,
     },
 ]

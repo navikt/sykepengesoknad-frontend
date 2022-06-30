@@ -17,6 +17,14 @@ export const EldreUsendtSykmelding = ({
         getSykmeldingStartDate(a).diff(getSykmeldingStartDate(b))
     )
 
+    const knappetekst = () => {
+        if (usendteSykmeldinger.length == 1) {
+            return tekst('eldre.usendt.sykmelding.gaa-til-sykmeldingen')
+        }
+
+        return tekst('eldre.usendt.sykmelding.gaa-til-sykmeldingene')
+    }
+
     return (
         <GuidepanelMedKnapp
             heading={tekst('eldre.usendt.header')}
@@ -25,7 +33,7 @@ export const EldreUsendtSykmelding = ({
                 '%FLERTALL%': usendteSykmeldinger.length > 1 ? 'er' : '',
             })}
             url={sykmeldingerUrl() + '/' + sorterteUsendte[0].id}
-            knappeTekst={tekst('eldre.usendt.sykmelding.gaa-til-sykmeldingen')}
+            knappeTekst={knappetekst()}
             komponent="eldre usendt sykmelding"
         />
     )

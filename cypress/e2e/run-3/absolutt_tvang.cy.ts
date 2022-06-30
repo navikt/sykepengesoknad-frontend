@@ -16,7 +16,7 @@ describe('Tester at åpne sykmeldinger må sendes inn', () => {
             cy.url().should('include', `${arbeidstaker.id}/1`)
 
             cy.contains(
-                'Du har en eldre sykmelding du må velge om du skal bruke eller ikke, før du kan fylle ut denne søknaden.'
+                'Du har en sykmelding du må velge om du skal bruke, før du kan begynne på denne søknaden.'
             )
 
             cy.contains('Gå til sykmeldingen').click()
@@ -45,7 +45,7 @@ describe('Tester at åpne sykmeldinger må sendes inn', () => {
             cy.url().should('include', `${arbeidstaker.id}/1`)
 
             cy.contains(
-                'Du har to eldre sykmeldinger du må velge om du skal bruke eller ikke, før du kan fylle ut denne søknaden.'
+                'Du har to sykmeldinger du må velge om du skal bruke, før du kan begynne på denne søknaden.'
             )
 
             cy.contains('Gå til sykmeldingen').click()

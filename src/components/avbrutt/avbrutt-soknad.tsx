@@ -27,7 +27,7 @@ const brodsmuler: Brodsmule[] = [
     {
         tittel: tekst('soknader.sidetittel'),
         mobilTittel: tekst('soknader.brodsmuler.sidetittel'),
-        sti: SEPARATOR,
+        sti: SEPARATOR + window.location.search,
         erKlikkbar: true,
     },
     {
@@ -101,7 +101,7 @@ const AvbruttSoknad = () => {
                     </BodyLong>
                 </div>
 
-                <Opplysninger ekspandert={true} steg="avbrutt-søknad" />
+                <Opplysninger ekspandert={false} steg="avbrutt-søknad" />
                 <FristSykepenger soknadstype={valgtSoknad.soknadstype} />
 
                 <Vis
