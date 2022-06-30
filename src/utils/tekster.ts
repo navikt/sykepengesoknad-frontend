@@ -1,13 +1,14 @@
 import AvbrytSoknadModalTekster from '../components/avbryt-soknad-modal/avbryt-soknad-modal-tekster'
 import AvsluttOgFortsettSenereTekster from '../components/avslutt-og-fortsett-senere/avslutt-og-fortsett-senere-tekster'
 import BannerTekster from '../components/banner/banner-tekster'
-import EldreUsendtSoknaderTekster from '../components/eldre-usendt-soknad/eldre-usendt-soknad-tekster'
+import { EldreUsendtTekster } from '../components/eldre-usendt/eldre-usendt-tekster'
 import { EndreSoknadModalTekster } from '../components/endreknapp/endre-soknad-modal-tekster'
 import RefreshHvisFeilStateTekster from '../components/feil/refresh-hvis-feil-state-tekster'
 import DragAndDropTekster from '../components/filopplaster/drag-and-drop/drag-and-drop-tekster'
 import FilListeTekster from '../components/filopplaster/fil-liste/fil-liste-tekster'
 import OpplastingTekster from '../components/filopplaster/kvittering-modal/opplasting-tekster'
 import FristSykepengerTekster from '../components/frist-sykepenger/frist-sykepenger-tekster'
+import { GjenstaendeSoknaderTekster } from '../components/gjenstaende-soknader/gjenstaende-soknader-tekster'
 import KvitteringTekster from '../components/kvittering/kvittering-tekster'
 import OmReisetilskuddTekster from '../components/om-reisetilskudd/om-reisetilskudd-tekster'
 import OmSykepengerTekster from '../components/om-sykepenger/om-sykepenger-tekster'
@@ -26,7 +27,6 @@ import { EkspanderbarHjelpTekster } from '../components/sporsmal/ekspanderbar-hj
 import { EndringUtenEndringTekster } from '../components/sporsmal/endring-uten-endring/endring-uten-endring-tekster'
 import KnapperadTekster from '../components/sporsmal/sporsmal-form/knapperad-tekster'
 import SporsmalTekster from '../components/sporsmal/sporsmal-tekster'
-import UsendtSykmeldingTekster from '../components/usendt-sykmelding/usendt-sykmelding-tekster'
 import { logger } from './logger'
 
 const tekster = {
@@ -52,8 +52,8 @@ const tekster = {
     ...FilListeTekster,
     ...DragAndDropTekster,
     ...OpplastingTekster,
-    ...EldreUsendtSoknaderTekster,
-    ...UsendtSykmeldingTekster,
+    ...EldreUsendtTekster,
+    ...GjenstaendeSoknaderTekster,
     ...AvsluttOgFortsettSenereTekster,
     ...SoknadMedToDelerTekster,
     ...ViktigInformasjonTekster,

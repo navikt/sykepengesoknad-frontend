@@ -21,7 +21,7 @@ import Vis from '../vis'
 const brodsmuler: Brodsmule[] = [
     {
         tittel: tekst('soknader.sidetittel'),
-        sti: SEPARATOR,
+        sti: SEPARATOR + window.location.search,
         erKlikkbar: true,
     },
     {

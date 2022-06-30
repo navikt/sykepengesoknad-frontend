@@ -10,6 +10,7 @@ import { backendApp, flexGatewayRoot } from '../../../utils/environment'
 import fetcher from '../../../utils/fetcher'
 import { logger } from '../../../utils/logger'
 import { useAmplitudeInstance } from '../../amplitude/amplitude'
+import styles from './gjenapneknapp.module.css'
 
 const GjenapneSoknad = () => {
     const {
@@ -52,7 +53,7 @@ const GjenapneSoknad = () => {
             )
 
             logEvent('knapp klikket', {
-                tekst: 'Gjenåpne søknad',
+                tekst: 'Jeg vil bruke denne søknaden likevel',
                 soknadstype: valgtSoknad?.soknadstype,
                 component: 'Avbrutt søknad visning',
             })
@@ -82,14 +83,16 @@ const GjenapneSoknad = () => {
     }
 
     return (
-        <Button
-            variant="secondary"
-            className="gjenapne-knapp"
-            loading={gjenapner}
-            onClick={gjenapneSoknad}
-        >
-            Gjenåpne søknad
-        </Button>
+        <div className={styles.knapperad}>
+            <Button
+                variant="tertiary"
+                className={styles.knappen}
+                loading={gjenapner}
+                onClick={gjenapneSoknad}
+            >
+                Jeg vil bruke denne søknaden likevel
+            </Button>
+        </div>
     )
 }
 

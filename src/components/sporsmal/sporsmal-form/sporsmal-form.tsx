@@ -256,7 +256,9 @@ const SporsmalForm = () => {
                 }
                 setSoknader(soknader)
 
-                history.push(`/kvittering/${valgtSoknad!.id}`)
+                history.push(
+                    `/kvittering/${valgtSoknad!.id}${window.location.search}`
+                )
             } else {
                 logger.error('Feil ved sending av søknad', res)
                 restFeilet = true
@@ -312,7 +314,8 @@ const SporsmalForm = () => {
                     history.push(
                         pathUtenSteg(history.location.pathname) +
                             SEPARATOR +
-                            (spmIndex + 2)
+                            (spmIndex + 2) +
+                            window.location.search
                     )
                 }
             }

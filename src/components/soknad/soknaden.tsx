@@ -23,13 +23,13 @@ import { useAmplitudeInstance } from '../amplitude/amplitude'
 import {
     EldreUsendtSoknad,
     harEldreUsendtSoknad,
-} from '../eldre-usendt-soknad/eldre-usendt-soknad'
+} from '../eldre-usendt/eldre-usendt-soknad'
+import { EldreUsendtSykmelding } from '../eldre-usendt/eldre-usendt-sykmelding'
+import { eldreUsendteSykmeldinger } from '../eldre-usendt/eldreUsendteSykmeldinger'
 import FristSykepenger from '../frist-sykepenger/frist-sykepenger'
 import { hentHotjarJsTrigger, HotjarTrigger } from '../hotjar-trigger'
 import { ViktigInformasjon } from '../soknad-intro/viktig-informasjon'
 import { hentNokkel } from '../sporsmal/sporsmal-utils'
-import { UsendtSykmelding } from '../usendt-sykmelding/usendt-sykmelding'
-import { usendteSykmeldinger } from '../usendt-sykmelding/usendteSykmeldinger'
 import Vis from '../vis'
 import { urlTilSoknad } from './soknad-link'
 
@@ -37,7 +37,7 @@ const brodsmuler: Brodsmule[] = [
     {
         tittel: tekst('soknader.sidetittel'),
         mobilTittel: tekst('soknader.brodsmuler.sidetittel'),
-        sti: SEPARATOR,
+        sti: SEPARATOR + window.location.search,
         erKlikkbar: true,
     },
     {
@@ -136,16 +136,30 @@ const Fordeling = () => {
         // Nye søknader
         case RSSoknadstatus.NY:
         case RSSoknadstatus.UTKAST_TIL_KORRIGERING: {
-            const eldreUsendtSoknad = harEldreUsendtSoknad(
-                valgtSoknad,
-                soknader
-            )
-            const usendteSm = usendteSykmeldinger(sykmeldinger)
-            if (absoluttTvang() && usendteSm.length > 0) {
-                return <UsendtSykmelding usendteSykmeldinger={usendteSm} />
-            }
-            if (eldreUsendtSoknad != null) {
-                return <EldreUsendtSoknad eldreSoknad={eldreUsendtSoknad} />
+            if (!erUtlandssoknad) {
+                const eldreUsendtSoknad = harEldreUsendtSoknad(
+                    valgtSoknad,
+                    soknader
+                )
+                const usendteSm = eldreUsendteSykmeldinger(
+                    sykmeldinger,
+                    valgtSoknad.tom!
+                )
+                if (absoluttTvang() && usendteSm.length > 0) {
+                    return (
+                        <EldreUsendtSykmelding
+                            usendteSykmeldinger={usendteSm}
+                        />
+                    )
+                }
+                if (eldreUsendtSoknad.eldsteSoknad) {
+                    return (
+                        <EldreUsendtSoknad
+                            eldreSoknad={eldreUsendtSoknad.eldsteSoknad}
+                            antall={eldreUsendtSoknad.antall}
+                        />
+                    )
+                }
             }
             return (
                 <>

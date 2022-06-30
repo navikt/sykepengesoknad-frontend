@@ -1,1 +1,15 @@
 @import '~@navikt/ds-css/dist/index.css';
+
+:root {
+    --screen-sm: '768px';
+}
+
+#root {
+    min-height: 65vh;
+}
+
+@media (min-width: var(--screen-sm)) {
+    #root {
+        min-height: 75vh;
+    }
+}

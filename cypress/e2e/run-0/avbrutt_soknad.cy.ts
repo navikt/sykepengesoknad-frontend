@@ -48,7 +48,7 @@ describe('Tester avryting av søknad', () => {
     })
 
     it('Søknad kan gjenåpnes', function () {
-        cy.contains('Gjenåpne søknad').click()
+        cy.contains('Jeg vil bruke denne søknaden likevel').click()
         cy.url().should('include', `${avbruttSoknad.id}/1`)
         cy.contains('Gå videre')
     })
@@ -77,6 +77,6 @@ describe('Tester avryting av søknad', () => {
             '.modal__avbryt_popup button:contains(Ja, jeg er sikker)'
         ).click()
         cy.url().should('include', `avbrutt/${avbruttSoknad.id}`)
-        cy.contains('Gjenåpne søknad')
+        cy.contains('Jeg vil bruke denne søknaden likevel')
     })
 })

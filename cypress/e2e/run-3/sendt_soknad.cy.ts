@@ -27,7 +27,7 @@ describe('Tester sendt søknad', () => {
         ).click()
         cy.url().should(
             'equal',
-            `http://localhost:8080/syk/sykepengesoknad/sendt/${sendtArbeidsledig.id}`
+            `http://localhost:8080/syk/sykepengesoknad/sendt/${sendtArbeidsledig.id}?testperson=alle-soknader`
         )
         cy.contains('Søknaden er sendt til NAV')
     })

@@ -1,4 +1,7 @@
-import { eldreUsendtSoknad } from './data/eldre-usendt-soknad'
+import {
+    eldreUsendtSoknad,
+    flereEldreUsendteSoknader,
+} from './data/eldre-usendt-soknad'
 import {
     alleData,
     enUsendtSykmelding,
@@ -20,5 +23,6 @@ export const personas: StringFunctionMap = {
     'alle-soknader': () => alleData,
     'en-usendt-sykmelding': () => enUsendtSykmelding(),
     'to-usendte-sykmeldinger': () => toUsendteSykmeldinger(),
-    'eldre-usendt-soknad': () => eldreUsendtSoknad,
+    'en-eldre-usendt-soknad': () => eldreUsendtSoknad,
+    'to-eldre-usendte-soknader': () => flereEldreUsendteSoknader,
 }

@@ -27,7 +27,7 @@ export const [AmplitudeProvider, useAmplitudeInstance] = constate(() => {
         }
         instance.current.init('default', '', {
             apiEndpoint: 'amplitude.nav.no/collect-auto',
-            saveEvents: false,
+            saveEvents: true,
             includeUtm: true,
             includeReferrer: true,
             platform: window.location.toString(),
@@ -40,6 +40,7 @@ export const [AmplitudeProvider, useAmplitudeInstance] = constate(() => {
         | 'navigere'
         | 'skjema validering feilet'
         | 'alert vist'
+        | 'guidepanel vist'
         | 'accordion åpnet'
         | 'accordion lukket'
         | 'knapp klikket'

@@ -15,6 +15,10 @@ import { useAmplitudeInstance } from '../amplitude/amplitude'
 import Banner from '../banner/banner'
 import Brodsmuler from '../brodsmuler/brodsmuler'
 import Ettersending from '../ettersending/ettersending'
+import {
+    GjenstaendeSoknader,
+    hentGjenstaendeSoknader,
+} from '../gjenstaende-soknader/gjenstaende-soknader'
 import { hentHotjarJsTrigger, HotjarTrigger } from '../hotjar-trigger'
 import Vis from '../vis'
 import Kvittering from './kvittering'
@@ -22,7 +26,7 @@ import Kvittering from './kvittering'
 const brodsmuler: Brodsmule[] = [
     {
         tittel: tekst('soknader.sidetittel'),
-        sti: SEPARATOR,
+        sti: SEPARATOR + window.location.search,
         erKlikkbar: true,
     },
     {
@@ -80,6 +84,8 @@ const KvitteringSide = () => {
         valgtSoknad.soknadstype !== RSSoknadstype.OPPHOLD_UTLAND &&
         (skalViseEndre || skalViseSendTilArbeidsgiver)
 
+    const gjenstaendeSoknader = hentGjenstaendeSoknader(soknader)
+
     return (
         <>
             <Banner />
@@ -93,28 +99,32 @@ const KvitteringSide = () => {
                     )}
                 >
                     <Kvittering />
-
+                    <GjenstaendeSoknader soknader={gjenstaendeSoknader} />
                     <Vis
                         hvis={skalViseKnapperad}
                         render={() => (
                             <div className="knapperad">
-                                <Button
-                                    className="ferdig-knapp"
-                                    onClick={() => {
-                                        logEvent('knapp klikket', {
-                                            tekst: tekst('kvittering.ferdig'),
-                                            soknadstype:
-                                                valgtSoknad?.soknadstype,
-                                        })
-                                        // Må sikre at amplitude får logget ferdig
-                                        window.setTimeout(() => {
-                                            window.location.href =
-                                                sykefravaerUrl()
-                                        }, 200)
-                                    }}
-                                >
-                                    {tekst('kvittering.ferdig')}
-                                </Button>
+                                <Vis
+                                    hvis={gjenstaendeSoknader.length == 0}
+                                    render={() => (
+                                        <Button
+                                            className="ferdig-knapp"
+                                            onClick={() => {
+                                                logEvent('knapp klikket', {
+                                                    tekst: tekst(
+                                                        'kvittering.ferdig'
+                                                    ),
+                                                    soknadstype:
+                                                        valgtSoknad?.soknadstype,
+                                                })
+                                                window.location.href =
+                                                    sykefravaerUrl()
+                                            }}
+                                        >
+                                            {tekst('kvittering.ferdig')}
+                                        </Button>
+                                    )}
+                                ></Vis>
 
                                 <Vis
                                     hvis={skalViseEndre}

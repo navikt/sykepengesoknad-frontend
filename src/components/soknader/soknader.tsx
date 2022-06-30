@@ -5,7 +5,7 @@ import { useAppStore } from '../../data/stores/app-store'
 import { RSSoknadstatus } from '../../types/rs-types/rs-soknadstatus'
 import { Brodsmule } from '../../types/types'
 import { dinesakerUrl } from '../../utils/environment'
-import { sorterEtterNyesteTom } from '../../utils/sorter-soknader'
+import { sorterEtterNyesteFom } from '../../utils/sorter-soknader'
 import { tekst } from '../../utils/tekster'
 import { setBodyClass } from '../../utils/utils'
 import Banner from '../banner/banner'
@@ -18,7 +18,7 @@ const brodsmuler: Brodsmule[] = [
     {
         tittel: tekst('soknader.sidetittel'),
         mobilTittel: tekst('soknader.brodsmuler.sidetittel'),
-        sti: '/soknader',
+        sti: null as any,
         erKlikkbar: false,
     },
 ]
@@ -32,7 +32,7 @@ const Soknader = () => {
                 soknad.status === RSSoknadstatus.UTKAST_TIL_KORRIGERING ||
                 soknad.status === RSSoknadstatus.FREMTIDIG
         )
-        .sort(sorterEtterNyesteTom)
+        .sort(sorterEtterNyesteFom)
         .reverse()
 
     const tidligereSoknader = soknader
@@ -42,7 +42,7 @@ const Soknader = () => {
                 soknad.status === RSSoknadstatus.AVBRUTT ||
                 soknad.status === RSSoknadstatus.UTGAATT
         )
-        .sort(sorterEtterNyesteTom)
+        .sort(sorterEtterNyesteFom)
 
     useEffect(() => {
         setBodyClass('soknader')

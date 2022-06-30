@@ -4,7 +4,7 @@ import React, { useState } from 'react'
 import { RSSoknadstatus } from '../../../types/rs-types/rs-soknadstatus'
 import { Soknad } from '../../../types/types'
 import {
-    sorterEtterNyesteTom,
+    sorterEtterNyesteFom,
     sorterEtterSendt,
     sorterEtterStatus,
 } from '../../../utils/sorter-soknader'
@@ -42,7 +42,7 @@ const Teasere = ({
     const sorterteSoknader = () => {
         if (kanSorteres) {
             if (sortering === 'Dato') {
-                return soknader.sort(sorterEtterNyesteTom)
+                return soknader.sort(sorterEtterNyesteFom)
             } else if (sortering === 'Status') {
                 return soknader.sort(sorterEtterStatus)
             } else if (sortering === 'Sendt') {
