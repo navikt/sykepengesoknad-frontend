@@ -40,6 +40,7 @@ export const [AmplitudeProvider, useAmplitudeInstance] = constate(() => {
         | 'navigere'
         | 'skjema validering feilet'
         | 'alert vist'
+        | 'guidepanel vist'
         | 'accordion åpnet'
         | 'accordion lukket'
         | 'knapp klikket'

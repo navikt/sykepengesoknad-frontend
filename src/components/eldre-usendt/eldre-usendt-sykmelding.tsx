@@ -4,7 +4,7 @@ import { getSykmeldingStartDate, Sykmelding } from '../../types/sykmelding'
 import { sykmeldingerUrl } from '../../utils/environment'
 import { tallTilSpråk } from '../../utils/tallTilSpraak'
 import { getLedetekst, tekst } from '../../utils/tekster'
-import { AlertMedKnapp } from '../alert-med-knapp/alert-med-knapp'
+import { GuidepanelMedKnapp } from './guidepanel-med-knapp'
 
 interface UsendtSykmeldingProps {
     usendteSykmeldinger: Sykmelding[]
@@ -18,7 +18,7 @@ export const EldreUsendtSykmelding = ({
     )
 
     return (
-        <AlertMedKnapp
+        <GuidepanelMedKnapp
             heading={tekst('eldre.usendt.header')}
             innhold={getLedetekst(tekst('eldre.usendt.sykmelding.alert'), {
                 '%ANTALL%': tallTilSpråk(usendteSykmeldinger.length),
@@ -26,7 +26,7 @@ export const EldreUsendtSykmelding = ({
             })}
             url={sykmeldingerUrl() + '/' + sorterteUsendte[0].id}
             knappeTekst={tekst('eldre.usendt.sykmelding.gaa-til-sykmeldingen')}
-            komponent="usendt sykmelding"
+            komponent="eldre usendt sykmelding"
         />
     )
 }

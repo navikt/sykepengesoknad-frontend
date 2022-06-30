@@ -4,7 +4,7 @@ import { useHistory } from 'react-router-dom'
 
 import { useAmplitudeInstance } from '../amplitude/amplitude'
 
-interface AlertMedKnappProps {
+interface GuidepanelMedKnappProps {
     heading: string
     innhold: string
     knappeTekst: string
@@ -12,20 +12,20 @@ interface AlertMedKnappProps {
     komponent: string
 }
 
-export const AlertMedKnapp = ({
+export const GuidepanelMedKnapp = ({
     heading,
     innhold,
     knappeTekst,
     url,
     komponent,
-}: AlertMedKnappProps) => {
+}: GuidepanelMedKnappProps) => {
     const { logEvent } = useAmplitudeInstance()
     const history = useHistory()
 
-    logEvent('alert vist', {
+    logEvent('guidepanel vist', {
         tekst: innhold,
-        heading: heading,
-        variant: 'warning',
+        heading,
+        komponent,
     })
 
     return (

@@ -7,6 +7,7 @@ import { RSSoknadstype } from '../../types/rs-types/rs-soknadstype'
 import { Soknad } from '../../types/types'
 import { tallTilSpråk } from '../../utils/tallTilSpraak'
 import { getLedetekst, tekst } from '../../utils/tekster'
+import { useAmplitudeInstance } from '../amplitude/amplitude'
 import { urlTilSoknad } from '../soknad/soknad-link'
 
 interface Props {
@@ -16,6 +17,7 @@ interface Props {
 
 export const GjenstaendeSoknader = ({ soknader, style }: Props) => {
     const history = useHistory()
+    const { logEvent } = useAmplitudeInstance()
 
     if (soknader.length == 0) {
         return null
@@ -33,18 +35,30 @@ export const GjenstaendeSoknader = ({ soknader, style }: Props) => {
         }
         return 'Du har en søknad til'
     }
+    const innhold = getLedetekst(tekst('gjenstaende.panel.tekst'), {
+        '%ANTALL%': tallTilSpråk(soknader.length),
+        '%FLERTALL%': soknader.length > 1 ? 'er' : '',
+    })
+    const komponent = 'gjenstående søknader'
+    logEvent('guidepanel vist', {
+        tekst: innhold,
+        heading: heading(),
+        komponent,
+    })
+
     return (
         <GuidePanel style={style}>
             <Heading size="small" spacing>
                 {heading()}
             </Heading>
-            {getLedetekst(tekst('gjenstaende.panel.tekst'), {
-                '%ANTALL%': tallTilSpråk(soknader.length),
-                '%FLERTALL%': soknader.length > 1 ? 'er' : '',
-            })}
+            {tekst}
             <Button
                 style={{ display: 'block', marginTop: '1em' }}
                 onClick={() => {
+                    logEvent('knapp klikket', {
+                        tekst: knappetekst(),
+                        komponent,
+                    })
                     history.push(urlTilSoknad(soknader[0]))
                 }}
             >

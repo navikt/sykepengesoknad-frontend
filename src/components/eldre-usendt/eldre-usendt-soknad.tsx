@@ -4,8 +4,8 @@ import { RSSoknadstatus } from '../../types/rs-types/rs-soknadstatus'
 import { Soknad } from '../../types/types'
 import { tallTilSpråk } from '../../utils/tallTilSpraak'
 import { getLedetekst, tekst } from '../../utils/tekster'
-import { AlertMedKnapp } from '../alert-med-knapp/alert-med-knapp'
 import { urlTilSoknad } from '../soknad/soknad-link'
+import { GuidepanelMedKnapp } from './guidepanel-med-knapp'
 
 interface EldreUsendtSoknadProps {
     eldreSoknad: Soknad
@@ -17,7 +17,7 @@ export const EldreUsendtSoknad = ({
     antall,
 }: EldreUsendtSoknadProps) => {
     return (
-        <AlertMedKnapp
+        <GuidepanelMedKnapp
             heading={tekst('eldre.usendt.header')}
             innhold={getLedetekst(tekst('eldre.usendt.soknad.alert'), {
                 '%ANTALL%': tallTilSpråk(antall),
@@ -25,7 +25,7 @@ export const EldreUsendtSoknad = ({
             })}
             url={urlTilSoknad(eldreSoknad)}
             knappeTekst={tekst('eldre.usendt.soknad.gaa-til')}
-            komponent="usendt sykmelding"
+            komponent="eldre usendt søknad"
         />
     )
 }
