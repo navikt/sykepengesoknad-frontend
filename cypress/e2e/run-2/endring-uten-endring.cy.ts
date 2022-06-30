@@ -37,13 +37,7 @@ describe('Tester endring uten en endringer', () => {
         cy.url().should('include', '/5')
         cy.contains('Gå videre').click()
 
-        cy.url().should('include', '/6')
-        cy.contains('Gå videre').click()
-
-        cy.url().should('include', '/7')
-        cy.contains('Gå videre').click()
-
-        cy.url().should('include', '/8')
+        cy.url().should('include', '/')
         cy.contains('Gå videre').click()
         cy.get('.skjemaelement__label').click({ force: true })
 

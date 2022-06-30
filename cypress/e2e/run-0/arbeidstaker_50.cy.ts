@@ -260,79 +260,8 @@ describe('Tester arbeidstakersøknad - gradert 50%', () => {
         cy.contains('Gå videre').click()
     })
 
-    it('Søknad PERMITTERT_NAA', function () {
-        cy.url().should('include', `${soknad.id}/11`)
-
-        // Test spørsmål
-        cy.get(
-            '.inputPanelGruppe__inner label:first-child > input[value=JA]'
-        ).click({ force: true })
-        cy.contains('Velg første dag i permitteringen')
-        cy.get('.ds-datepicker__kalenderknapp').click()
-        cy.get('.DayPicker-Day').contains('20').click()
-
-        // Gå til neste, så tilbake å svar nei
-        cy.contains('Gå videre').click()
-        cy.url().should('include', `${soknad.id}/12`)
-        cy.contains('Tilbake').click({ force: true })
-        cy.get(
-            '.inputPanelGruppe__inner label:nth-child(2) > input[value=NEI]'
-        ).click({ force: true })
-
-        cy.contains('Gå videre').click()
-    })
-
-    it('Søknad PERMITTERT_PERIODE', function () {
-        cy.url().should('include', `${soknad.id}/12`)
-
-        // Hovedspørsmål
-        cy.get(
-            '.inputPanelGruppe__inner label:first-child > input[value=JA]'
-        ).click({ force: true })
-
-        // Periode 1
-        cy.get('#687295_0 .fom .ds-datepicker__kalenderknapp').click()
-        cy.get('.DayPicker-Day').contains('4').click()
-        cy.get('#687295_0 .tom .ds-datepicker__kalenderknapp').click()
-        cy.get('.DayPicker-Day').contains('5').click()
-
-        // Periode 2
-        cy.contains('+ Legg til ekstra periode').click()
-        cy.get('#687295_1 .fom .ds-datepicker__kalenderknapp').click()
-        cy.get('.DayPicker-Day').contains('11').click()
-        cy.get('#687295_1 .tom .ds-datepicker__kalenderknapp').click()
-        cy.get('.DayPicker-Day').contains('12').click()
-        cy.get('#687295_1_fom').should('have.value', '11.04.2020')
-        cy.get('#687295_1_tom').should('have.value', '12.04.2020')
-
-        // Periode 3
-        cy.contains('+ Legg til ekstra periode').click()
-        cy.get('#687295_2 .fom .ds-datepicker__kalenderknapp').click()
-        cy.get('.DayPicker-Day').contains('18').click()
-        cy.get('#687295_2 .tom .ds-datepicker__kalenderknapp').click()
-        cy.get('.DayPicker-Day').contains('19').click()
-        cy.get('#687295_2_fom').should('have.value', '18.04.2020')
-        cy.get('#687295_2_tom').should('have.value', '19.04.2020')
-
-        // Fjern periode 2
-        cy.get('#btn_687295_1').contains('Slett periode').click({ force: true })
-        cy.get('#687295_2_fom')
-            .should('exist')
-            .should('have.value', '18.04.2020')
-        cy.get('#687295_2_tom')
-            .should('exist')
-            .should('have.value', '19.04.2020')
-        cy.get('#687295_1_tom').should('not.exist')
-
-        // Fjern periode 3
-        cy.get('#btn_687295_2').contains('Slett periode').click({ force: true })
-        cy.get('#687295_2_tom').should('not.exist')
-
-        cy.contains('Gå videre').click()
-    })
-
     it('Søknad ANSVARSERKLARING ', function () {
-        cy.url().should('include', `${soknad.id}/13`)
+        cy.url().should('include', `${soknad.id}/11`)
         cy.get('.skjemaelement__label').click({ force: true })
         cy.contains(
             'Jeg har lest all informasjonen jeg har fått i søknaden og bekrefter at opplysningene jeg har gitt er korrekte.'

@@ -16,7 +16,7 @@ describe('Tester arbeidsledigsøknad', () => {
         ).click()
     })
 
-    it('Søknad ANSVARSERKLARING - steg 1', () => {
+    it('Søknad ANSVARSERKLARING', () => {
         cy.url().should('include', `${soknad.id}/1`)
 
         // Sykmelding
@@ -32,7 +32,7 @@ describe('Tester arbeidsledigsøknad', () => {
         cy.contains('Gå videre').click()
     })
 
-    it('Søknad FRISKMELDT - steg 2', () => {
+    it('Søknad FRISKMELDT', () => {
         cy.url().should('include', `${soknad.id}/2`)
 
         // Test spørsmål
@@ -46,7 +46,7 @@ describe('Tester arbeidsledigsøknad', () => {
         cy.contains('Gå videre').click()
     })
 
-    it('Søknad ANDRE_INNTEKTSKILDER - steg 3', () => {
+    it('Søknad ANDRE_INNTEKTSKILDER', () => {
         cy.url().should('include', `${soknad.id}/3`)
 
         // Test spørsmål
@@ -84,7 +84,7 @@ describe('Tester arbeidsledigsøknad', () => {
         cy.contains('Gå videre').click()
     })
 
-    it('Søknad UTDANNING - steg 4', () => {
+    it('Søknad UTDANNING', () => {
         cy.url().should('include', `${soknad.id}/4`)
 
         // Test spørsmål
@@ -107,7 +107,7 @@ describe('Tester arbeidsledigsøknad', () => {
         cy.contains('Gå videre').click({ force: true })
     })
 
-    it('Søknad ARBEIDSLEDIG_UTLAND - steg 5', () => {
+    it('Søknad ARBEIDSLEDIG_UTLAND', () => {
         cy.url().should('include', `${soknad.id}/5`)
 
         // Test spørsmål
@@ -134,93 +134,8 @@ describe('Tester arbeidsledigsøknad', () => {
         cy.contains('Gå videre').click()
     })
 
-    it('Søknad PERMITTERT_NAA - steg 6', () => {
+    it('Søknad VAER_KLAR_OVER_AT', () => {
         cy.url().should('include', `${soknad.id}/6`)
-
-        // Test spørsmål
-        cy.get(
-            '.inputPanelGruppe__inner label:first-child > input[value=JA]'
-        ).click({ force: true })
-        cy.contains('Velg første dag i permitteringen')
-        cy.get('.ds-datepicker__kalenderknapp').click()
-        cy.get('.DayPicker-Day').contains('20').click()
-
-        cy.contains('Gå videre').click()
-    })
-
-    it('Søknad PERMITTERT_PERIODE - steg 7', () => {
-        cy.url().should('include', `${soknad.id}/7`)
-
-        // Hovedspørsmål
-        cy.get(
-            '.inputPanelGruppe__inner label:first-child > input[value=JA]'
-        ).click({ force: true })
-
-        // Periode 1
-        cy.get('#687399_0 .fom .ds-datepicker__kalenderknapp').click()
-        cy.get('.DayPicker-Day').contains('10').click()
-        cy.get('#687399_0 .tom .ds-datepicker__kalenderknapp').click()
-        cy.get('.DayPicker-Day').contains('13').click()
-
-        // Periode 2 - overlapper
-        cy.contains('+ Legg til ekstra periode').click()
-        cy.get('#687399_1 .fom .ds-datepicker__kalenderknapp').click()
-        cy.get('.DayPicker-Day').contains('12').click()
-        cy.get('#687399_1 .tom .ds-datepicker__kalenderknapp').click()
-        cy.get('.DayPicker-Day').contains('14').click()
-
-        // Feilmelding
-        cy.contains('Gå videre').click()
-        cy.contains('Det er 1 feil i skjemaet')
-        cy.contains(
-            'Du kan ikke legge inn perioder som overlapper med hverandre'
-        )
-
-        // Endre periode 2
-        cy.get('#687399_1 .fom .ds-datepicker__kalenderknapp').click()
-        cy.get('.DayPicker-Day').contains('14').click()
-        cy.get('#687399_1 .tom .ds-datepicker__kalenderknapp').click({
-            force: true,
-        })
-        cy.get('.DayPicker-Day').contains('16').click()
-        cy.get('#687399_1_fom').should('have.value', '14.11.2020')
-        cy.get('#687399_1_tom').should('have.value', '16.11.2020')
-
-        // Gå frem også tilbake
-        cy.contains('Gå videre').click()
-        cy.url().should('include', `${soknad.id}/8`)
-        cy.contains('Tilbake').click()
-        cy.url().should('include', `${soknad.id}/7`)
-
-        // Periode 1 - hentSvar og formater
-        cy.get('#687399_0_fom').should('have.value', '10.11.2020')
-        cy.get('#687399_0_tom').should('have.value', '13.11.2020')
-
-        // Periode 3 - Må velge 2 datoer
-        cy.contains('+ Legg til ekstra periode').click()
-        cy.get('#687399_2 .fom .ds-datepicker__kalenderknapp').click()
-        cy.get('.DayPicker-Day').contains('10').click()
-        cy.contains('Gå videre').click()
-
-        // Feilmelding
-        cy.contains('Det er 1 feil i skjemaet')
-        cy.contains('Du må oppgi en til og med dato')
-
-        // Endre periode 3
-        cy.get('#687399_2 .fom .ds-datepicker__kalenderknapp').click()
-        cy.get('.DayPicker-Day').contains('20').click()
-        cy.get('#687399_2 .tom .ds-datepicker__kalenderknapp').click({
-            force: true,
-        })
-        cy.get('.DayPicker-Day').contains('22').click()
-        cy.get('#687399_2_fom').should('have.value', '20.11.2020')
-        cy.get('#687399_2_tom').should('have.value', '22.11.2020')
-
-        cy.contains('Gå videre').click()
-    })
-
-    it('Søknad VAER_KLAR_OVER_AT - steg 8', () => {
-        cy.url().should('include', `${soknad.id}/8`)
         cy.get('.skjemaelement__label').click({ force: true })
         cy.contains(
             'Jeg har lest all informasjonen jeg har fått i søknaden og bekrefter at opplysningene jeg har gitt er korrekte.'
