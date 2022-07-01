@@ -67,7 +67,7 @@ jobs:
               env:
                   GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
               run: |
-                echo ${GITHUB_TOKEN} | docker login ghcr.io --username ${GITHUB_REPOSITORY} --password-stdin
+                  echo ${GITHUB_TOKEN} | docker login ghcr.io --username ${GITHUB_REPOSITORY} --password-stdin
             - name: Bygg og push Docker image
               run: |
                   docker build . -t ${IMAGE}
