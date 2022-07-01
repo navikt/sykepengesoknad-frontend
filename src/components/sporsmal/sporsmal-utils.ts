@@ -1,4 +1,4 @@
-import { FieldError } from 'react-hook-form'
+import { FieldError, FieldErrors, Merge } from 'react-hook-form'
 
 import { TagTyper } from '../../types/enums'
 import { RSSoknadstype } from '../../types/rs-types/rs-soknadstype'
@@ -67,7 +67,7 @@ interface FeilmeldingProps {
 
 export const hentFeilmelding = (
     sporsmal: Sporsmal,
-    error?: FieldError
+    error?: Merge<FieldError, FieldErrors<any>> | FieldError | undefined
 ): FeilmeldingProps => {
     const feilmelding: FeilmeldingProps = {
         global: tekst(('soknad.feilmelding.' + sporsmal.tag) as any),
@@ -81,7 +81,7 @@ export const hentFeilmelding = (
 
 export const hentGeneriskFeilmelding = (
     svartype: RSSvartype,
-    error?: FieldError
+    error?: Merge<FieldError, FieldErrors<any>> | FieldError | undefined
 ) => {
     const type = error?.type
 
@@ -111,16 +111,16 @@ export const hentGeneriskFeilmelding = (
                     (error?.ref as HTMLInputElement).max
                 }`
             }
-            return error?.message
+            return error?.message as string
         }
         case RSSvartype.PERIODER:
         case RSSvartype.PERIODE: {
             if (type === 'fom' || type === 'tom') {
-                return error?.message
+                return error?.message as string
             } else if (type === 'periode') {
                 return 'Perioder kan ikke overlappe'
             }
-            return error?.message
+            return error?.message as string
         }
         case RSSvartype.DATOER:
         case RSSvartype.RADIO_GRUPPE_UKEKALENDER: {
@@ -133,7 +133,7 @@ export const hentGeneriskFeilmelding = (
             return 'Du må velge ett land'
         }
         case RSSvartype.DATO: {
-            return error?.message
+            return error?.message as string
         }
         case RSSvartype.KVITTERING:
         case RSSvartype.IKKE_RELEVANT:
