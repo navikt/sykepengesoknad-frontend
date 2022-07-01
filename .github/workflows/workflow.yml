@@ -15,7 +15,7 @@ jobs:
                   TIME=$(TZ="Europe/Oslo" date +%Y.%m.%d-%H.%M)
                   COMMIT=$(git rev-parse --short=8 HEAD)
                   VERSION=$TIME-$COMMIT
-                  echo "IMAGE=docker.pkg.github.com/${GITHUB_REPOSITORY}/$APP:$VERSION" >> $GITHUB_ENV
+                  echo "IMAGE=ghcr.io/navikt/$APP:$VERSION" >> $GITHUB_ENV
                   echo "VERSION=$VERSION" >> $GITHUB_ENV
             - run: echo $VERSION > VERSION.txt
             - name: Last opp VERSION til neste job
@@ -128,7 +128,7 @@ jobs:
                   name: VERSION.txt
                   path: .
             - run: echo "VERSION=`cat VERSION.txt`" >> $GITHUB_ENV
-            - run: echo "IMAGE=docker.pkg.github.com/${GITHUB_REPOSITORY}/$APP:$VERSION" >> $GITHUB_ENV
+            - run: echo "IMAGE=ghcr.io/navikt/$APP:$VERSION" >> $GITHUB_ENV
             - name: Deploy to dev-gcp
               uses: nais/deploy/actions/deploy@v1
               env:
@@ -148,7 +148,7 @@ jobs:
                   name: VERSION.txt
                   path: .
             - run: echo "VERSION=`cat VERSION.txt`" >> $GITHUB_ENV
-            - run: echo "IMAGE=docker.pkg.github.com/${GITHUB_REPOSITORY}/$APP:$VERSION" >> $GITHUB_ENV
+            - run: echo "IMAGE=ghcr.io/navikt/$APP:$VERSION" >> $GITHUB_ENV
             - name: Deploy to prod-gcp
               uses: nais/deploy/actions/deploy@v1
               env:
@@ -168,7 +168,7 @@ jobs:
                   name: VERSION.txt
                   path: .
             - run: echo "VERSION=`cat VERSION.txt`" >> $GITHUB_ENV
-            - run: echo "IMAGE=docker.pkg.github.com/${GITHUB_REPOSITORY}/$APP:$VERSION" >> $GITHUB_ENV
+            - run: echo "IMAGE=ghcr.io/navikt/$APP:$VERSION" >> $GITHUB_ENV
             - name: Deploy to labs-gcp
               uses: nais/deploy/actions/deploy@v1
               env:
@@ -188,7 +188,7 @@ jobs:
                   name: VERSION.txt
                   path: .
             - run: echo "VERSION=`cat VERSION.txt`" >> $GITHUB_ENV
-            - run: echo "IMAGE=docker.pkg.github.com/${GITHUB_REPOSITORY}/$APP:$VERSION" >> $GITHUB_ENV
+            - run: echo "IMAGE=ghcr.io/navikt/$APP:$VERSION" >> $GITHUB_ENV
             - name: Deploy to labs-gcp
               uses: nais/deploy/actions/deploy@v1
               env:

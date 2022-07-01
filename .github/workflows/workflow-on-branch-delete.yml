@@ -10,7 +10,7 @@ jobs:
         runs-on: ubuntu-latest
         steps:
             - uses: actions/checkout@v1
-            - run: echo "IMAGE=docker.pkg.github.com/${GITHUB_REPOSITORY}/$APP:latest" >> $GITHUB_ENV
+            - run: echo "IMAGE=ghcr.io/navikt/$APP:latest" >> $GITHUB_ENV
             - name: Scale down labs-gcp
               uses: nais/deploy/actions/deploy@v1
               env:
