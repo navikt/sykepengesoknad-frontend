@@ -24,7 +24,12 @@ export const settSvar = (
     verdier: Record<string, any>
 ): void => {
     const verdi = hentVerdier(sporsmal, verdier)
-    if (verdi === undefined) {
+    if (
+        verdi === undefined &&
+        sporsmal.svartype !== RSSvartype.CHECKBOX_GRUPPE &&
+        sporsmal.svartype !== RSSvartype.RADIO &&
+        sporsmal.svartype !== RSSvartype.INFO_BEHANDLINGSDAGER
+    ) {
         return
     }
     switch (sporsmal.svartype) {

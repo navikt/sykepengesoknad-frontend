@@ -17,7 +17,6 @@ describe('Tester feilmeldinger', () => {
         globalFeilmelding: string,
         focusTarget: string
     ) {
-        cy.get('.skjemaelement__input--harFeil').should('exist')
         cy.get('.skjemaelement__feilmelding').contains(lokalFeilmelding)
         cy.get('.feiloppsummering')
             .should('exist')
