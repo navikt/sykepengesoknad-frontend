@@ -31,12 +31,8 @@ const JaNeiRadio = ({ sporsmal }: SpmProps) => {
         register,
         formState: { errors },
         watch,
-        getValues,
     } = useFormContext()
-    let watchJaNei = watch(sporsmal.id)
-    if (watchJaNei === undefined) {
-        watchJaNei = getValues(sporsmal.id)
-    }
+    const watchJaNei = watch(sporsmal.id)
     const feilmelding = hentFeilmelding(sporsmal)
 
     const presisering = (valgt: boolean) => {

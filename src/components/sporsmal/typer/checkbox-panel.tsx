@@ -6,13 +6,16 @@ import FeilLokal from '../../feil/feil-lokal'
 import { SpmProps } from '../sporsmal-form/sporsmal-form'
 import { hentFeilmelding } from '../sporsmal-utils'
 
-const CheckboxPanel = ({ sporsmal }: SpmProps) => {
-    const { register } = useFormContext()
+const CheckboxInput = ({ sporsmal }: SpmProps) => {
+    const {
+        register,
+        formState: { errors },
+    } = useFormContext()
     const feilmelding = hentFeilmelding(sporsmal)
     const watchCheckbox = useWatch({ name: sporsmal.id })
 
     if (sporsmal.tag === TagTyper.BEKREFT_OPPLYSNINGER_UTLAND_INFO) {
-        return <CheckboxPanel sporsmal={sporsmal.undersporsmal[0]} />
+        return <CheckboxInput sporsmal={sporsmal.undersporsmal[0]} />
     }
 
     return (
@@ -20,7 +23,10 @@ const CheckboxPanel = ({ sporsmal }: SpmProps) => {
             <div
                 className={
                     'bekreftCheckboksPanel' +
-                    (watchCheckbox ? ' bekreftCheckboksPanel--checked' : '')
+                    (watchCheckbox ? ' bekreftCheckboksPanel--checked' : '') +
+                    (errors[sporsmal.id]
+                        ? ' skjemaelement__input--harFeil'
+                        : '')
                 }
             >
                 <div className="skjemaelement skjemaelement--horisontal">
@@ -46,4 +52,4 @@ const CheckboxPanel = ({ sporsmal }: SpmProps) => {
     )
 }
 
-export default CheckboxPanel
+export default CheckboxInput

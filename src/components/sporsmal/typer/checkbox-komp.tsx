@@ -61,11 +61,7 @@ type AllProps = SpmProps & CheckboxProps
 
 const CheckboxSingle = ({ parent, sporsmal }: AllProps) => {
     const { getValues, register, watch, clearErrors } = useFormContext()
-
-    let watchCheck = watch(sporsmal.id)
-    if (watchCheck === undefined) {
-        watchCheck = getValues(sporsmal.id)
-    }
+    const watchCheck = watch(sporsmal.id)
     const feilmelding = hentFeilmelding(parent)
 
     const valider = () => {

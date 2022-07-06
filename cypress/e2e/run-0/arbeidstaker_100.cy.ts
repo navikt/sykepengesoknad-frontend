@@ -61,6 +61,9 @@ describe('Tester arbeidstakersøknad', () => {
         // Må godkjenne ANSVARSERKLARING først
         cy.contains('Gå videre').click()
         cy.contains('Det er 1 feil i skjemaet')
+        cy.get('.bekreftCheckboksPanel.skjemaelement__input--harFeil').should(
+            'exist'
+        )
         cy.contains(
             'Du må bekrefte at du har lest og forstått informasjonen før du kan gå videre'
         )

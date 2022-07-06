@@ -17,12 +17,8 @@ const TallKomp = ({ sporsmal }: SpmProps) => {
         register,
         formState: { errors },
         watch,
-        getValues,
     } = useFormContext()
-    let watchTall = watch(sporsmal.id)
-    if (watchTall === undefined) {
-        watchTall = getValues(sporsmal.id)
-    }
+    const watchTall = watch(sporsmal.id)
 
     const feilmelding = hentFeilmelding(sporsmal, errors[sporsmal.id])
     const undersporsmal = useRef<HTMLDivElement>(null)
