@@ -16,7 +16,6 @@ import { RSSoknadstatus } from '../../types/rs-types/rs-soknadstatus'
 import { RSSoknadstype } from '../../types/rs-types/rs-soknadstype'
 import { Brodsmule } from '../../types/types'
 import { SEPARATOR } from '../../utils/constants'
-import { absoluttTvang } from '../../utils/environment'
 import { tekst } from '../../utils/tekster'
 import { setBodyClass } from '../../utils/utils'
 import { useAmplitudeInstance } from '../amplitude/amplitude'
@@ -145,7 +144,7 @@ const Fordeling = () => {
                     sykmeldinger,
                     valgtSoknad.tom!
                 )
-                if (absoluttTvang() && usendteSm.length > 0) {
+                if (usendteSm.length > 0) {
                     return (
                         <EldreUsendtSykmelding
                             usendteSykmeldinger={usendteSm}

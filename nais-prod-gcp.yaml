@@ -56,5 +56,3 @@ spec:
       value: "sykepengesoknad-backend"
     - name: VEDLIKEHOLD
       value: "false"
-    - name: ABSOLUTT_TVANG
-      value: "false"

@@ -65,7 +65,3 @@ export function backendApp(): string {
 export function vedlikehold(): boolean {
     return publicRuntimeConfig.vedlikehold === 'true'
 }
-
-export function absoluttTvang(): boolean {
-    return publicRuntimeConfig.absoluttTvang === 'true'
-}
