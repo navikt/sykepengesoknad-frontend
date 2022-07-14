@@ -52,5 +52,3 @@ spec:
       value: "syfosoknad"
     - name: VEDLIKEHOLD
       value: "false"
-    - name: ABSOLUTT_TVANG
-      value: "true"

@@ -95,7 +95,6 @@ module.exports = withPlugins(
             dineSakerUrl: process.env.DINESAKER_URL,
             backendApp: process.env.BACKEND_APP,
             vedlikehold: process.env.VEDLIKEHOLD,
-            absoluttTvang: process.env.ABSOLUTT_TVANG,
         },
     }
 )
