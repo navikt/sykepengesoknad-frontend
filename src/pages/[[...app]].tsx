@@ -1,6 +1,7 @@
-import { GetServerSideProps } from 'next'
 import dynamic from 'next/dynamic'
 import React from 'react'
+
+import { beskyttetSideUtenProps } from '../auth/beskyttetSide'
 
 function App() {
     const CreateReactAppEntryPoint = dynamic(() => import('../app'), {
@@ -14,9 +15,6 @@ function App() {
     )
 }
 
-export const getServerSideProps: GetServerSideProps = async () => {
-    // Tving disabling av statisk rendring
-    return { props: {} }
-}
+export const getServerSideProps = beskyttetSideUtenProps
 
 export default App

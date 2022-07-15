@@ -1,5 +1,4 @@
 import { logger } from '../../utils/logger'
-import { hentLoginUrl } from '../data-fetcher'
 
 export enum FetchStatus {
     NOT_STARTED = 'NOT_STARTED',
@@ -73,7 +72,7 @@ export const hasData = <D = {}>(
 export const redirectTilLoginHvis401 = (res: Response) => {
     if (res.status === 401) {
         logger.info('Redirecter til login grunnet 401')
-        window.location.href = hentLoginUrl()
+        window.location.reload()
         return true
     }
     return false
