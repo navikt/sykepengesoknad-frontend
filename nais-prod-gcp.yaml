@@ -16,6 +16,11 @@ spec:
     cpuThresholdPercentage: 50
   tokenx:
     enabled: true
+  idporten:
+    enabled: true
+    sidecar:
+      enabled: true
+      level: Level4
   resources:
     limits:
       cpu: 500m
@@ -27,6 +32,8 @@ spec:
     path: syk/sykepengesoknad/api/isAlive
   readiness:
     path: syk/sykepengesoknad/api/isReady
+  envFrom:
+    - configmap: loginservice-idporten
   env:
     - name: FLEX_GATEWAY_ROOT
       value: "https://flex-gateway.nav.no"
