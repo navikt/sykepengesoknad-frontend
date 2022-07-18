@@ -1,6 +1,6 @@
 import getConfig from 'next/config'
 
-const { publicRuntimeConfig } = getConfig()
+const { publicRuntimeConfig, serverRuntimeConfig } = getConfig()
 
 export function isDev() {
     return publicRuntimeConfig.env === 'dev'
@@ -31,11 +31,11 @@ export function sykmeldingerBackendRoot() {
 }
 
 export function loginServiceUrl() {
-    return publicRuntimeConfig.loginServiceUrl
+    return serverRuntimeConfig.loginServiceUrl
 }
 
 export function loginServiceRedirectUrl() {
-    return publicRuntimeConfig.loginServiceRedirectUrl
+    return serverRuntimeConfig.loginServiceRedirectUrl
 }
 
 export function amplitudeEnabled() {

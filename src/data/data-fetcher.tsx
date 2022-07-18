@@ -8,8 +8,6 @@ import { Soknad } from '../types/types'
 import {
     backendApp,
     flexGatewayRoot,
-    loginServiceRedirectUrl,
-    loginServiceUrl,
     sykmeldingerBackendRoot,
 } from '../utils/environment'
 import { logger } from '../utils/logger'
@@ -72,7 +70,7 @@ export function DataFetcher(props: { children: any }) {
             </div>
         )
     } else if (hasAny401([rssoknader, sykmeldinger])) {
-        window.location.href = hentLoginUrl()
+        window.location.reload() // refresher slik at ssr authen rydder opp
     } else if (hasFailed(rssoknader)) {
         logger.warn(
             `Klarer ikke hente soknader = ${
@@ -90,11 +88,4 @@ export function DataFetcher(props: { children: any }) {
     }
 
     return props.children
-}
-
-export const hentLoginUrl = () => {
-    if (window.location.href.includes('sykepengesoknad-utland')) {
-        return `${loginServiceUrl()}?redirect=${loginServiceRedirectUrl()}/sykepengesoknad-utland`
-    }
-    return `${loginServiceUrl()}?redirect=${loginServiceRedirectUrl()}`
 }
