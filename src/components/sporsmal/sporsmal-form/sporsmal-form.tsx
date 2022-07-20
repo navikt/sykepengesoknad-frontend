@@ -218,8 +218,7 @@ const SporsmalForm = () => {
             }
         }
         const res = await fetch(
-            flexGatewayRoot() +
-                `/${backendApp()}/api/soknader/${valgtSoknad.id}/send`,
+            `/syk/sykepengesoknad/api/v1/soknader/${valgtSoknad!.id}/send`,
             {
                 method: 'POST',
                 credentials: 'include',

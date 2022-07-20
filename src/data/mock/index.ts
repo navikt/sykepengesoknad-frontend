@@ -155,9 +155,8 @@ const setUpMock = (person: Persona) => {
         res(ctx.json(person.sykmeldinger))
     )
 
-    mock.post(
-        `${flexGatewayRoot()}/${backendApp()}/api/soknader/:soknad/send`,
-        () => Promise.resolve({ status: 200 })
+    mock.post('/syk/sykepengesoknad/api/v1/soknader/:soknad/send', () =>
+        Promise.resolve({ status: 200 })
     )
 
     mock.post(
@@ -170,14 +169,12 @@ const setUpMock = (person: Persona) => {
         () => Promise.resolve({ status: 200 })
     )
 
-    mock.post(
-        `${flexGatewayRoot()}/${backendApp()}/api/soknader/:soknad/avbryt`,
-        () => Promise.resolve({ status: 200 })
+    mock.post('/syk/sykepengesoknad/api/v1/soknader/:soknad/avbryt', () =>
+        Promise.resolve({ status: 200 })
     )
 
-    mock.post(
-        `${flexGatewayRoot()}/${backendApp()}/api/soknader/:soknad/gjenapne`,
-        () => Promise.resolve({ status: 200 })
+    mock.post('/syk/sykepengesoknad/api/v1/soknader/:soknad/gjenapne', () =>
+        Promise.resolve({ status: 200 })
     )
 
     mock.delete(
