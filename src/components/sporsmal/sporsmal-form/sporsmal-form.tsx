@@ -21,7 +21,6 @@ import { RSSvartype } from '../../../types/rs-types/rs-svartype'
 import { Soknad, Sporsmal } from '../../../types/types'
 import { SEPARATOR } from '../../../utils/constants'
 import { backendApp, flexGatewayRoot } from '../../../utils/environment'
-import fetcher from '../../../utils/fetcher'
 import { logger } from '../../../utils/logger'
 import { useAmplitudeInstance } from '../../amplitude/amplitude'
 import FeilOppsummering from '../../feil/feil-oppsummering'
@@ -103,7 +102,7 @@ const SporsmalForm = () => {
     const sendOppdaterSporsmal = async () => {
         let soknad = valgtSoknad
 
-        const res = await fetcher(
+        const res = await fetch(
             flexGatewayRoot() +
                 `/${backendApp()}/api/soknader/${soknad!.id}/sporsmal/${
                     sporsmal.id
@@ -218,7 +217,7 @@ const SporsmalForm = () => {
                 return
             }
         }
-        const res = await fetcher(
+        const res = await fetch(
             flexGatewayRoot() +
                 `/${backendApp()}/api/soknader/${valgtSoknad.id}/send`,
             {

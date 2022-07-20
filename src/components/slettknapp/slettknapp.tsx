@@ -5,7 +5,6 @@ import { redirectTilLoginHvis401 } from '../../data/rest/utils'
 import { useAppStore } from '../../data/stores/app-store'
 import { Kvittering, Sporsmal, svarverdiToKvittering } from '../../types/types'
 import { backendApp, flexGatewayRoot } from '../../utils/environment'
-import fetcher from '../../utils/fetcher'
 import { tekst } from '../../utils/tekster'
 import Vis from '../vis'
 
@@ -47,7 +46,7 @@ const Slettknapp = ({ sporsmal, kvittering, update }: SlettknappProps) => {
                     kvittering?.blobId
             )
 
-            const res = await fetcher(
+            const res = await fetch(
                 `${flexGatewayRoot()}/${backendApp()}/api/soknader/${
                     valgtSoknad?.id
                 }/sporsmal/${sporsmal?.id}/svar/${svar?.id}`,

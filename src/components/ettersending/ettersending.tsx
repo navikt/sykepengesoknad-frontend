@@ -5,7 +5,6 @@ import React, { useState } from 'react'
 import { redirectTilLoginHvis401 } from '../../data/rest/utils'
 import { useAppStore } from '../../data/stores/app-store'
 import { backendApp, flexGatewayRoot } from '../../utils/environment'
-import fetcher from '../../utils/fetcher'
 import { logger } from '../../utils/logger'
 import { tekst } from '../../utils/tekster'
 
@@ -58,7 +57,7 @@ const Ettersending = ({
     }
 
     const ettersendNav = async () => {
-        const res = await fetcher(
+        const res = await fetch(
             flexGatewayRoot() +
                 `/${backendApp()}/api/soknader/${
                     valgtSoknad!.id
@@ -82,7 +81,7 @@ const Ettersending = ({
     }
 
     const ettersendArbeidsgiver = async () => {
-        const res = await fetcher(
+        const res = await fetch(
             flexGatewayRoot() +
                 `/${backendApp()}/api/soknader/${
                     valgtSoknad!.id

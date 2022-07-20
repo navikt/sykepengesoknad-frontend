@@ -19,7 +19,6 @@ import { RSOppdaterSporsmalResponse } from '../../../types/rs-types/rest-respons
 import { RSSvar } from '../../../types/rs-types/rs-svar'
 import { Kvittering, Sporsmal, UtgiftTyper } from '../../../types/types'
 import { backendApp, flexGatewayRoot } from '../../../utils/environment'
-import fetcher from '../../../utils/fetcher'
 import {
     formaterFilstørrelse,
     formattertFiltyper,
@@ -106,7 +105,7 @@ const OpplastingForm = ({ sporsmal }: SpmProps) => {
     const opplastingTilBucket = async () => {
         const requestData = new FormData()
         requestData.append('file', valgtFil as Blob)
-        const bucketRes = await fetcher(
+        const bucketRes = await fetch(
             `${flexGatewayRoot()}/flex-bucket-uploader/opplasting`,
             {
                 method: 'POST',
@@ -145,7 +144,7 @@ const OpplastingForm = ({ sporsmal }: SpmProps) => {
         }
         const svar: RSSvar = { verdi: JSON.stringify(kvittering) }
 
-        const syfosoknadRes = await fetcher(
+        const syfosoknadRes = await fetch(
             `${flexGatewayRoot()}/${backendApp()}/api/soknader/${
                 valgtSoknad!.id
             }/sporsmal/${sporsmal!.id}/svar`,

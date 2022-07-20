@@ -1,6 +1,5 @@
 import { useCallback, useMemo, useState } from 'react'
 
-import fetcher from '../../utils/fetcher'
 import { FetchState, FetchStatus, redirectTilLoginHvis401 } from './utils'
 
 export interface Fetch<D = any, FP = any> extends FetchState<D> {
@@ -49,7 +48,7 @@ const useFetch = <D = {}>(): Fetch<D> => {
     ) => {
         setFetchState(createPendingFetchState())
 
-        fetcher(url, request)
+        fetch(url, request)
             .then(async (res) => {
                 const httpCode = res.status
                 let state: FetchState<D>

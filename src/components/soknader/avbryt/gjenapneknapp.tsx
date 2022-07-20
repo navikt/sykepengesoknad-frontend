@@ -7,7 +7,6 @@ import { redirectTilLoginHvis401 } from '../../../data/rest/utils'
 import { useAppStore } from '../../../data/stores/app-store'
 import { RSSoknadstatus } from '../../../types/rs-types/rs-soknadstatus'
 import { backendApp, flexGatewayRoot } from '../../../utils/environment'
-import fetcher from '../../../utils/fetcher'
 import { logger } from '../../../utils/logger'
 import { useAmplitudeInstance } from '../../amplitude/amplitude'
 import styles from './gjenapneknapp.module.css'
@@ -42,7 +41,7 @@ const GjenapneSoknad = () => {
         if (gjenapner) return
         setGjenapner(true)
         try {
-            const res = await fetcher(
+            const res = await fetch(
                 flexGatewayRoot() +
                     `/${backendApp()}/api/soknader/${valgtSoknad!.id}/gjenapne`,
                 {
