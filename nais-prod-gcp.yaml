@@ -29,16 +29,23 @@ spec:
       cpu: 200m
       memory: 256Mi
   liveness:
-    path: syk/sykepengesoknad/api/isAlive
+    path: syk/sykepengesoknad/api/internal/isAlive
   readiness:
-    path: syk/sykepengesoknad/api/isReady
+    path: syk/sykepengesoknad/api/internal/isReady
+  prometheus:
+    enabled: true
+    path: /syk/sykepengesoknad/api/internal/prometheus
+  accessPolicy:
+    outbound:
+      rules:
+        - application: sykepengesoknad-backend
+        - application: sykmeldinger-backend
+          namespace: teamsykmelding
   envFrom:
     - configmap: loginservice-idporten
   env:
     - name: FLEX_GATEWAY_ROOT
       value: "https://flex-gateway.nav.no"
-    - name: SYKMELDINGER_BACKEND_ROOT
-      value: "https://sykmeldinger-backend.nav.no"
     - name: LOGINSERVICE_URL
       value: "https://loginservice.nav.no/login"
     - name: LOGINSERVICE_REDIRECT_URL
@@ -63,3 +70,7 @@ spec:
       value: "sykepengesoknad-backend"
     - name: VEDLIKEHOLD
       value: "false"
+    - name: SYKMELDINGER_BACKEND_CLIENT_ID
+      value: "prod-gcp:teamsykmelding:sykmeldinger-backend"
+    - name: SYKEPENGESOKNAD_BACKEND_CLIENT_ID
+      value: "prod-gcp:flex:sykepengesoknad-backend"

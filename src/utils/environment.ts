@@ -26,10 +26,6 @@ export function isOpplaering() {
     return publicRuntimeConfig.opplaering === 'true'
 }
 
-export function sykmeldingerBackendRoot() {
-    return publicRuntimeConfig.sykmeldingerBackendRoot
-}
-
 export function loginServiceUrl() {
     return serverRuntimeConfig.loginServiceUrl
 }

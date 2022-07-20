@@ -66,6 +66,15 @@ module.exports = withPlugins(
                     source: '/:path*',
                     headers: cspHeader,
                 },
+                {
+                    source: '/api/:path*',
+                    headers: [
+                        {
+                            key: 'Cache-Control',
+                            value: 'private, no-cache, no-store, max-age=0, must-revalidate',
+                        },
+                    ],
+                },
             ]
         },
         basePath: '/syk/sykepengesoknad',
@@ -87,6 +96,10 @@ module.exports = withPlugins(
             tokenXClientId: process.env.TOKEN_X_CLIENT_ID,
             idportenClientId: process.env.IDPORTEN_CLIENT_ID,
             idportenWellKnownUrl: process.env.IDPORTEN_WELL_KNOWN_URL,
+            sykmeldingerBackendClientId:
+                process.env.SYKMELDINGER_BACKEND_CLIENT_ID,
+            sykepengesoknadBackendClientId:
+                process.env.SYKEPENGESOKNAD_BACKEND_CLIENT_ID,
         },
         publicRuntimeConfig: {
             // Will be available on both server and client
@@ -99,7 +112,6 @@ module.exports = withPlugins(
             env: process.env.ENVIRONMENT,
             amplitudeEnabled: process.env.AMPLITUDE_ENABLED,
             environment: process.env.ENVIRONMENT,
-            sykmeldingerBackendRoot: process.env.SYKMELDINGER_BACKEND_ROOT,
             dineSakerUrl: process.env.DINESAKER_URL,
             backendApp: process.env.BACKEND_APP,
             vedlikehold: process.env.VEDLIKEHOLD,

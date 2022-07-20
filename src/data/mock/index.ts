@@ -5,11 +5,7 @@ import { RSMottaker } from '../../types/rs-types/rs-mottaker'
 import { RSSoknad } from '../../types/rs-types/rs-soknad'
 import { RSSoknadstatus } from '../../types/rs-types/rs-soknadstatus'
 import { RSSoknadstype } from '../../types/rs-types/rs-soknadstype'
-import {
-    backendApp,
-    flexGatewayRoot,
-    sykmeldingerBackendRoot,
-} from '../../utils/environment'
+import { backendApp, flexGatewayRoot } from '../../utils/environment'
 import { jsonDeepCopy } from '../../utils/json-deep-copy'
 import { feilVedSlettingAvKvittering } from './data/reisetilskudd'
 import {
@@ -151,14 +147,12 @@ const setUpMock = (person: Persona) => {
         }
     )
 
-    mock.get(
-        `${flexGatewayRoot()}/${backendApp()}/api/soknader`,
-        (req, res, ctx) => res(ctx.json(person.soknader))
+    mock.get('/syk/sykepengesoknad/api/v1/soknader', (req, res, ctx) =>
+        res(ctx.json(person.soknader))
     )
 
-    mock.get(
-        `${sykmeldingerBackendRoot()}/api/v1/sykmeldinger`,
-        (req, res, ctx) => res(ctx.json(person.sykmeldinger))
+    mock.get('/syk/sykepengesoknad/api/v1/sykmeldinger', (req, res, ctx) =>
+        res(ctx.json(person.sykmeldinger))
     )
 
     mock.post(
