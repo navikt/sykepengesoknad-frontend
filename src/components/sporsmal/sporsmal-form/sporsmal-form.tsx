@@ -184,8 +184,9 @@ const SporsmalForm = () => {
 
     const hentMottaker = () => {
         rsMottakerResponseFetch.fetch(
-            flexGatewayRoot() +
-                `/${backendApp()}/api/soknader/${valgtSoknad!.id}/finnMottaker`,
+            `/syk/sykepengesoknad/api/v1/soknader/${
+                valgtSoknad!.id
+            }/finnMottaker`,
             {
                 method: 'POST',
                 credentials: 'include',

@@ -21,6 +21,7 @@ export const tokenXProxy = async (opts: Opts) => {
     const response = await fetch(opts.url, {
         method: opts.req.method,
         headers: { Authorization: `Bearer ${tokenxToken}` },
+        body: opts.req.body,
     })
 
     if (response.status != 200) {

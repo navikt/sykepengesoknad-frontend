@@ -114,7 +114,7 @@ const setUpMock = (person: Persona) => {
     )
 
     mock.post(
-        `${flexGatewayRoot()}/${backendApp()}/api/soknader/:soknad/finnMottaker`,
+        '/syk/sykepengesoknad/api/v1/soknader/:soknad/finnMottaker',
         (req, res, ctx) => {
             const soknadId = req.pathParams.soknad
 
