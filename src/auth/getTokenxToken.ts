@@ -15,6 +15,7 @@ async function issuer() {
             throw new TypeError(
                 'Miljøvariabelen "TOKEN_X_WELL_KNOWN_URL må være satt'
             )
+        logger.info('discovrer issuer')
         _issuer = await Issuer.discover(serverRuntimeConfig.tokenXWellKnownUrl)
     }
     return _issuer
@@ -42,6 +43,7 @@ async function client() {
             },
             { keys: [_jwk] }
         )
+        logger.info('skaper client')
     }
     return _client
 }
