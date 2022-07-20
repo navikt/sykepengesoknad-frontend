@@ -4,7 +4,6 @@ import React, { useState } from 'react'
 
 import { redirectTilLoginHvis401 } from '../../data/rest/utils'
 import { useAppStore } from '../../data/stores/app-store'
-import { backendApp, flexGatewayRoot } from '../../utils/environment'
 import { logger } from '../../utils/logger'
 import { tekst } from '../../utils/tekster'
 
@@ -58,10 +57,9 @@ const Ettersending = ({
 
     const ettersendNav = async () => {
         const res = await fetch(
-            flexGatewayRoot() +
-                `/${backendApp()}/api/soknader/${
-                    valgtSoknad!.id
-                }/ettersendTilNav`,
+            `/syk/sykepengesoknad/api/v1/soknader/${
+                valgtSoknad!.id
+            }/ettersendTilNav`,
             {
                 method: 'POST',
                 credentials: 'include',
@@ -82,10 +80,9 @@ const Ettersending = ({
 
     const ettersendArbeidsgiver = async () => {
         const res = await fetch(
-            flexGatewayRoot() +
-                `/${backendApp()}/api/soknader/${
-                    valgtSoknad!.id
-                }/ettersendTilArbeidsgiver`,
+            `/syk/sykepengesoknad/api/v1/soknader/${
+                valgtSoknad!.id
+            }/ettersendTilArbeidsgiver`,
             {
                 method: 'POST',
                 credentials: 'include',

@@ -70,7 +70,7 @@ const setUpMock = (person: Persona) => {
     )
 
     mock.post(
-        `${flexGatewayRoot()}/${backendApp()}/api/soknader/:soknad/korriger`,
+        '/syk/sykepengesoknad/api/v1/soknader/:soknad/korriger',
         (req, res, ctx) => {
             const original = soknader.find(
                 (sok: RSSoknad) => sok.id === req.pathParams.soknad
@@ -160,12 +160,12 @@ const setUpMock = (person: Persona) => {
     )
 
     mock.post(
-        `${flexGatewayRoot()}/${backendApp()}/api/soknader/:soknad/ettersendTilNav`,
+        '/syk/sykepengesoknad/api/v1/soknader/:soknad/ettersendTilNav',
         () => Promise.resolve({ status: 200 })
     )
 
     mock.post(
-        `${flexGatewayRoot()}/${backendApp()}/api/soknader/:soknad/ettersendTilArbeidsgiver`,
+        '/syk/sykepengesoknad/api/v1/soknader/:soknad/ettersendTilArbeidsgiver',
         () => Promise.resolve({ status: 200 })
     )
 
