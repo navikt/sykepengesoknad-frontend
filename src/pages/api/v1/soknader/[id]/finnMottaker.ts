@@ -10,14 +10,14 @@ const handler = beskyttetApi(
     async (req: NextApiRequest, res: NextApiResponse) => {
         const id = req.query.id as string
 
-        await tokenXProxy({
+        const response = await tokenXProxy({
             url: `http://sykepengesoknad-backend/api/v2/soknader/${id}/finnMottaker`,
             method: 'POST',
             req: req,
             clientId: serverRuntimeConfig.sykepengesoknadBackendClientId,
         })
 
-        res.status(200).send(null)
+        res.status(200).send(response)
     }
 )
 
