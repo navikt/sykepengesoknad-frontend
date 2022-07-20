@@ -90,7 +90,7 @@ const setUpMock = (person: Persona) => {
     )
 
     mock.post(
-        `${flexGatewayRoot()}/${backendApp()}/api/opprettSoknadUtland`,
+        '/syk/sykepengesoknad/api/v1/opprettSoknadUtland',
         (req, res, ctx) => {
             const soknad = person.soknader.find(
                 (sok: RSSoknad) =>
