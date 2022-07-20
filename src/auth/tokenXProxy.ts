@@ -9,6 +9,7 @@ interface Opts {
     clientId: string
     method: 'GET' | 'POST'
     noResponse?: boolean
+    withBody?: boolean
 }
 
 export const tokenXProxy = async (opts: Opts) => {
@@ -18,11 +19,14 @@ export const tokenXProxy = async (opts: Opts) => {
 
     const idportenToken = opts.req.headers.authorization!.split(' ')[1]
     const tokenxToken = await getTokenxToken(idportenToken, opts.clientId)
-    const response = await fetch(opts.url, {
+    const init: RequestInit = {
         method: opts.req.method,
         headers: { Authorization: `Bearer ${tokenxToken}` },
-        body: opts.req.body,
-    })
+    }
+    if (opts.withBody) {
+        init.body = opts.req.body
+    }
+    const response = await fetch(opts.url, init)
 
     if (response.status != 200) {
         throw new ErrorMedStatus(`Ikke 200 svar fra ${opts.url}`, 500)
