@@ -3,6 +3,7 @@ on: push
 env:
     APP: sykepengesok
     branchname: ${{ github.ref_name }}
+    NPM_AUTH_TOKEN: ${{ secrets.READER_TOKEN }}
 jobs:
     build-and-publish:
         name: Bygg, test og push Docker image
