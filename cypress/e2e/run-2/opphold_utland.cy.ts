@@ -79,9 +79,52 @@ describe('Tester søknad om å beholde sykepenger utenfor EØS', () => {
         cy.url().should('include', `${soknad.id}/3`)
 
         cy.contains('Har du arbeidsgiver?')
-        cy.contains('Nei').click({ force: true })
+        cy.contains('Ja').click({ force: true })
+
+        cy.contains('Er du 100 % sykmeldt?').siblings().contains('Ja').click()
+
+        cy.contains(
+            'Har du avtalt med arbeidsgiveren din at du skal ta ut feriedager i hele perioden?'
+        )
+            .siblings()
+            .contains('Nei')
+            .click()
 
         cy.contains('Gå videre').click({ force: true })
+    })
+
+    it('Oppsummering fra søknaden', function () {
+        cy.url().should('include', `${soknad.id}/4`)
+
+        cy.contains('Oppsummering fra søknaden').click()
+
+        cy.get('.oppsummering .oppsummering__seksjon')
+            .contains('Når skal du reise?')
+            .siblings()
+            .should('contain', '17. – 24. desember 2020')
+
+        cy.get('.oppsummering .oppsummering__seksjon')
+            .contains('Hvilket land skal du reise til?')
+            .siblings()
+            .should('contain', 'Søre franske territorier')
+            .and('contain', 'De okkuperte palestinske områdene')
+
+        cy.get('.oppsummering .oppsummering__seksjon')
+            .contains('Har du arbeidsgiver?')
+            .siblings()
+            .should('contain', 'Ja')
+            .get('.oppsummering__undersporsmalsliste')
+            .within(() => {
+                cy.contains('Er du 100 % sykmeldt?')
+                    .siblings()
+                    .should('contain', 'Ja')
+
+                cy.contains(
+                    'Har du avtalt med arbeidsgiveren din at du skal ta ut feriedager i hele perioden?'
+                )
+                    .siblings()
+                    .should('contain', 'Nei')
+            })
     })
 
     it('BEKRFEFT', function () {
