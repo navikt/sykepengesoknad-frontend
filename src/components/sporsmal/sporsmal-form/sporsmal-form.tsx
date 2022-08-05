@@ -65,7 +65,7 @@ const SporsmalForm = () => {
     const history = useHistory()
     const spmIndex = parseInt(stegId) - 1
     const methods = useForm({
-        mode: 'onBlur',
+        mode: 'onChange',
         reValidateMode: 'onChange',
         shouldUnregister: true,
     })
