@@ -71,6 +71,7 @@ jobs:
               run: |
                   echo ${GITHUB_TOKEN} | docker login ghcr.io --username ${GITHUB_REPOSITORY} --password-stdin
             - name: Bygg og push Docker image
+              if: github.ref == 'refs/heads/master' || startsWith(github.ref, 'refs/heads/dev-')  || startsWith(github.ref, 'refs/heads/labs-')
               run: |
                   docker build . -t ${IMAGE}
                   docker push ${IMAGE}
