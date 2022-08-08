@@ -391,7 +391,7 @@ describe('Teste førsteside i reisetilskuddsøknaden', () => {
                 'include.text',
                 'Du lastet opp 1 utgift på 99 kr'
             )
-            cy.get('.skjemaelement__label').should(
+            cy.get('.navds-checkbox__label').should(
                 'contain',
                 'Jeg har lest all informasjonen jeg har fått i søknaden og bekrefter at opplysningene jeg har gitt er korrekte.'
             )
