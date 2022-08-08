@@ -29,7 +29,7 @@ describe('Tester kvittering', () => {
                 'Jeg bekrefter at jeg vil gi så riktige og fullstendige opplysninger som mulig.'
             ).click({ force: true })
             cy.contains('Gå videre').click()
-            cy.get('.skjemaelement__label').click({ force: true })
+            cy.get('.navds-checkbox__label').click({ force: true })
             cy.contains('Send søknaden').click()
             cy.url().should(
                 'include',
@@ -218,7 +218,7 @@ describe('Tester kvittering', () => {
                 '.inputPanelGruppe__inner label:nth-child(2) > input[value=NEI]'
             ).click({ force: true })
             cy.contains('Gå videre').click()
-            cy.get('.skjemaelement__label').click({ force: true })
+            cy.get('.navds-checkbox__label').click({ force: true })
             cy.contains('Send søknaden').click()
             cy.url().should(
                 'include',
@@ -467,7 +467,7 @@ const besvarSoknad = () => {
         'Jeg bekrefter at jeg vil gi så riktige og fullstendige opplysninger som mulig.'
     ).click({ force: true })
     cy.contains('Gå videre').click({ force: true })
-    cy.get('.skjemaelement__label').click({ force: true })
+    cy.get('.navds-checkbox__label').click({ force: true })
     cy.contains('Send søknaden').click({ force: true })
 }
 

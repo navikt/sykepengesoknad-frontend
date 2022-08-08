@@ -271,6 +271,7 @@ const SporsmalTekster = {
         ' Velg dager fra %FRA% - %TIL%',
     'sporsmal.egen-bil.kalender.ukedager': 'Velg alle ukedager',
     'sporsmal.egen-bil.kalender.fjern': 'Fjern valgte',
+    'sporsmal.riktige-opplysninger-tittel': 'Vi stoler på deg',
 
     'ferie-ingen-sykepenger':
         'Du får ikke sykepenger de dagene du tar ut ferie.',

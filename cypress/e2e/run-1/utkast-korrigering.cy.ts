@@ -27,6 +27,6 @@ describe('Tester utkast til korrigerte søknader', () => {
             `#soknader-list-til-behandling article a[href*=${tilKorrigering.id}]`
         ).click()
         cy.url().should('include', `${tilKorrigering.id}/1`)
-        cy.get('input.skjemaelement__input').should('not.be.checked')
+        cy.get('.navds-checkbox__input').should('not.be.checked')
     })
 })

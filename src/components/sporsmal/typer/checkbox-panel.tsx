@@ -1,51 +1,49 @@
+import { ConfirmationPanel, Label } from '@navikt/ds-react'
 import React from 'react'
 import { useFormContext, useWatch } from 'react-hook-form'
 
 import { TagTyper } from '../../../types/enums'
+import { tekst } from '../../../utils/tekster'
 import FeilLokal from '../../feil/feil-lokal'
+import Vis from '../../vis'
 import { SpmProps } from '../sporsmal-form/sporsmal-form'
 import { hentFeilmelding } from '../sporsmal-utils'
 
 const CheckboxInput = ({ sporsmal }: SpmProps) => {
-    const {
-        register,
-        formState: { errors },
-    } = useFormContext()
+    const { register } = useFormContext()
     const feilmelding = hentFeilmelding(sporsmal)
     const watchCheckbox = useWatch({ name: sporsmal.id })
+    const watchCheckboxUtland = useWatch({
+        name: sporsmal.undersporsmal[0]?.id,
+    })
 
-    if (sporsmal.tag === TagTyper.BEKREFT_OPPLYSNINGER_UTLAND_INFO) {
-        return <CheckboxInput sporsmal={sporsmal.undersporsmal[0]} />
-    }
+    const bekreftUtland =
+        sporsmal.tag === TagTyper.BEKREFT_OPPLYSNINGER_UTLAND_INFO
+    const id = bekreftUtland ? sporsmal.undersporsmal[0].id : sporsmal.id
+    const sporsmalsTekst = bekreftUtland
+        ? sporsmal.undersporsmal[0].sporsmalstekst
+        : sporsmal.sporsmalstekst
 
     return (
         <>
-            <div
-                className={
-                    'bekreftCheckboksPanel' +
-                    (watchCheckbox ? ' bekreftCheckboksPanel--checked' : '') +
-                    (errors[sporsmal.id]
-                        ? ' skjemaelement__input--harFeil'
-                        : '')
-                }
+            <ConfirmationPanel
+                className={'bekreftCheckboksPanel'}
+                label={sporsmalsTekst}
+                id={id}
+                {...register(id, {
+                    required: feilmelding.global,
+                })}
+                checked={bekreftUtland ? watchCheckboxUtland : watchCheckbox}
             >
-                <div className="skjemaelement skjemaelement--horisontal">
-                    <input
-                        type="checkbox"
-                        className="skjemaelement__input checkboks"
-                        id={sporsmal.id}
-                        {...register(sporsmal.id, {
-                            required: feilmelding.global,
-                        })}
-                    />
-                    <label
-                        className="skjemaelement__label"
-                        htmlFor={sporsmal.id}
-                    >
-                        {sporsmal.sporsmalstekst}
-                    </label>
-                </div>
-            </div>
+                <Vis
+                    hvis={sporsmal.tag === TagTyper.ANSVARSERKLARING}
+                    render={() => (
+                        <Label>
+                            {tekst('sporsmal.riktige-opplysninger-tittel')}
+                        </Label>
+                    )}
+                />
+            </ConfirmationPanel>
 
             <FeilLokal sporsmal={sporsmal} />
         </>

@@ -18,7 +18,7 @@ describe('Tester ettersending og korrigering', () => {
 
     it('Svar på søknad', function () {
         cy.url().should('include', `${soknad.id}/1`)
-        cy.get('.skjemaelement__label').click({ force: true })
+        cy.get('.navds-checkbox__label').click({ force: true })
         cy.contains('Gå videre').click()
 
         cy.url().should('include', `${soknad.id}/2`)
@@ -76,7 +76,7 @@ describe('Tester ettersending og korrigering', () => {
         cy.contains('Gå videre').click()
 
         cy.url().should('include', `${soknad.id}/11`)
-        cy.get('.skjemaelement__label').click({ force: true })
+        cy.get('.navds-checkbox__label').click({ force: true })
         cy.contains('Send søknaden').click()
     })
 
@@ -123,13 +123,9 @@ describe('Tester ettersending og korrigering', () => {
         cy.url().should('include', '/1')
 
         // ANSVARSERKLARING er resatt
-        cy.get('.skjemaelement__input.checkboks[type=checkbox]').should(
-            'not.be.checked'
-        )
-        cy.get('.skjemaelement__label').click({ force: true })
-        cy.get('.skjemaelement__input.checkboks[type=checkbox]').should(
-            'be.checked'
-        )
+        cy.get('.navds-checkbox__input[type=checkbox]').should('not.be.checked')
+        cy.get('.navds-checkbox__label').click({ force: true })
+        cy.get('.navds-checkbox__input[type=checkbox]').should('be.checked')
         cy.contains('Gå videre').click()
 
         // Alle andre er satt

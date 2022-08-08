@@ -39,7 +39,7 @@ describe('Tester endring uten en endringer', () => {
 
         cy.url().should('include', '/')
         cy.contains('Gå videre').click()
-        cy.get('.skjemaelement__label').click({ force: true })
+        cy.get('.navds-checkbox__label').click({ force: true })
 
         cy.contains('Send endringene').click()
     })

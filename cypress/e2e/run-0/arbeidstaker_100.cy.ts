@@ -61,13 +61,11 @@ describe('Tester arbeidstakersøknad', () => {
         // Må godkjenne ANSVARSERKLARING først
         cy.contains('Gå videre').click()
         cy.contains('Det er 1 feil i skjemaet')
-        cy.get('.bekreftCheckboksPanel.skjemaelement__input--harFeil').should(
-            'exist'
-        )
+        cy.get('.navds-confirmation-panel__inner').should('exist')
         cy.contains(
             'Du må bekrefte at du har lest og forstått informasjonen før du kan gå videre'
         )
-        cy.get('.skjemaelement__label').click({ force: true })
+        cy.get('.navds-checkbox__label').click({ force: true })
 
         cy.contains('Gå videre').click()
     })
@@ -256,7 +254,7 @@ describe('Tester arbeidstakersøknad', () => {
         )
         cy.contains('Det er 1 feil i skjemaet').should('not.exist')
 
-        cy.get('.skjemaelement__label').click({ force: true })
+        cy.get('.navds-checkbox__label').click({ force: true })
         cy.contains(
             'Jeg har lest all informasjonen jeg har fått i søknaden og bekrefter at opplysningene jeg har gitt er korrekte.'
         )

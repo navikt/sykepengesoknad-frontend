@@ -22,7 +22,7 @@ describe('Tester støtte for gamle spørsmål', () => {
     }
 
     function svarCheckboxPanel() {
-        cy.get('.skjemaelement__label').click({ force: true })
+        cy.get('.navds-checkbox__label').click({ force: true })
     }
 
     function velgDato() {

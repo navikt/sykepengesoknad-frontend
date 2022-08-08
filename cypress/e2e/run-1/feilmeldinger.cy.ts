@@ -37,9 +37,21 @@ describe('Tester feilmeldinger', () => {
         gaTilSoknad(arbeidstakerGradert, '1')
         gaVidere()
 
-        feilmeldingHandtering(
-            'Du må bekrefte at du har lest og forstått informasjonen før du kan gå videre',
-            'Du må bekrefte at du har lest og forstått informasjonen før du kan gå videre',
+        cy.get('.navds-confirmation-panel__inner').should('exist')
+        cy.get('.skjemaelement__feilmelding').contains(
+            'Du må bekrefte at du har lest og forstått informasjonen før du kan gå videre'
+        )
+        cy.get('.feiloppsummering')
+            .should('exist')
+            .within(() => {
+                cy.contains('Det er 1 feil i skjemaet')
+                cy.contains(
+                    'Du må bekrefte at du har lest og forstått informasjonen før du kan gå videre'
+                ).click()
+            })
+        cy.focused().should(
+            'have.attr',
+            'name',
             arbeidstakerGradert.sporsmal[0].id
         )
         cy.focused().click({ force: true })

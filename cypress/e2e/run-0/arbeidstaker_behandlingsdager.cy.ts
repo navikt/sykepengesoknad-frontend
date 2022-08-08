@@ -91,7 +91,7 @@ describe('Tester behandlingsdagersøknad', () => {
 
     it('Søknad VAER_KLAR_OVER_AT - steg 4', function () {
         cy.url().should('include', `${soknad.id}/4`)
-        cy.get('.skjemaelement__label').click({ force: true })
+        cy.get('.navds-checkbox__label').click({ force: true })
         cy.contains(
             'Jeg har lest all informasjonen jeg har fått i søknaden og bekrefter at opplysningene jeg har gitt er korrekte.'
         )
