@@ -78,11 +78,10 @@ jobs:
               uses: rtCamp/action-slack-notify@v2
               if: failure() && github.ref == 'refs/heads/master'
               env:
-                SLACK_COLOR: '#ff0000'
-                SLACK_MESSAGE: 'sykepengesoknad-frontend bygget feiler på master'
-                SLACK_TITLE: 'Auda :alert:'
-                SLACK_WEBHOOK: ${{ secrets.SPOKELSER_WEBHOOK }}
-
+                  SLACK_COLOR: '#ff0000'
+                  SLACK_MESSAGE: 'sykepengesoknad-frontend bygget feiler på master'
+                  SLACK_TITLE: 'Auda :alert:'
+                  SLACK_WEBHOOK: ${{ secrets.SPOKELSER_WEBHOOK }}
 
     integrasjonstest-run:
         name: Integrasjonstest run
@@ -115,10 +114,10 @@ jobs:
               uses: rtCamp/action-slack-notify@v2
               if: failure() && github.ref == 'refs/heads/master'
               env:
-                SLACK_COLOR: '#ff0000'
-                SLACK_MESSAGE: 'sykepengesoknad-frontend cypress tester feiler på master'
-                SLACK_TITLE: 'Auda :alert:'
-                SLACK_WEBHOOK: ${{ secrets.SPOKELSER_WEBHOOK }}
+                  SLACK_COLOR: '#ff0000'
+                  SLACK_MESSAGE: 'sykepengesoknad-frontend cypress tester feiler på master'
+                  SLACK_TITLE: 'Auda :alert:'
+                  SLACK_WEBHOOK: ${{ secrets.SPOKELSER_WEBHOOK }}
 
     deploy-to-q1-dev-gcp:
         if: github.ref == 'refs/heads/master' || startsWith(github.ref, 'refs/heads/dev-')
@@ -163,10 +162,10 @@ jobs:
               uses: rtCamp/action-slack-notify@v2
               if: failure() && github.ref == 'refs/heads/master'
               env:
-                SLACK_COLOR: '#ff0000'
-                SLACK_MESSAGE: 'sykepengesoknad-frontend deploy til prod feiler på master'
-                SLACK_TITLE: 'Auda :alert:'
-                SLACK_WEBHOOK: ${{ secrets.SPOKELSER_WEBHOOK }}
+                  SLACK_COLOR: '#ff0000'
+                  SLACK_MESSAGE: 'sykepengesoknad-frontend deploy til prod feiler på master'
+                  SLACK_TITLE: 'Auda :alert:'
+                  SLACK_WEBHOOK: ${{ secrets.SPOKELSER_WEBHOOK }}
 
     deploy-to-labs-gcp:
         if: github.ref == 'refs/heads/master'
