@@ -10,30 +10,26 @@ import { SpmProps } from '../sporsmal-form/sporsmal-form'
 import { hentFeilmelding } from '../sporsmal-utils'
 
 const CheckboxInput = ({ sporsmal }: SpmProps) => {
-    const { register } = useFormContext()
-    const feilmelding = hentFeilmelding(sporsmal)
-    const watchCheckbox = useWatch({ name: sporsmal.id })
-    const watchCheckboxUtland = useWatch({
-        name: sporsmal.undersporsmal[0]?.id,
-    })
-
-    const bekreftUtland =
+    const spm =
         sporsmal.tag === TagTyper.BEKREFT_OPPLYSNINGER_UTLAND_INFO
-    const id = bekreftUtland ? sporsmal.undersporsmal[0].id : sporsmal.id
-    const sporsmalsTekst = bekreftUtland
-        ? sporsmal.undersporsmal[0].sporsmalstekst
-        : sporsmal.sporsmalstekst
+            ? sporsmal.undersporsmal[0]
+            : sporsmal
+
+    const { register } = useFormContext()
+
+    const feilmelding = hentFeilmelding(spm)
+    const watchCheckbox = useWatch({ name: spm.id })
 
     return (
         <>
             <ConfirmationPanel
                 className={'bekreftCheckboksPanel'}
-                label={sporsmalsTekst}
-                id={id}
-                {...register(id, {
+                label={spm.sporsmalstekst}
+                id={spm.id}
+                {...register(spm.id, {
                     required: feilmelding.global,
                 })}
-                checked={bekreftUtland ? watchCheckboxUtland : watchCheckbox}
+                checked={watchCheckbox}
             >
                 <Vis
                     hvis={sporsmal.tag === TagTyper.ANSVARSERKLARING}
@@ -45,7 +41,7 @@ const CheckboxInput = ({ sporsmal }: SpmProps) => {
                 />
             </ConfirmationPanel>
 
-            <FeilLokal sporsmal={sporsmal} />
+            <FeilLokal sporsmal={spm} />
         </>
     )
 }
