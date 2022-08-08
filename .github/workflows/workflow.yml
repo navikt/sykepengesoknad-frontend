@@ -31,10 +31,12 @@ jobs:
               run: npm run lint
             - name: Run tests
               run: npm run test:ci
+            - name: Enable sentry i master
+              if: github.ref == 'refs/heads/master'
+              run: echo "ENABLE_SENTRY=true" >> $GITHUB_ENV
             - name: Build application
               run: npm run build
               env:
-                  ENABLE_SENTRY: true
                   SENTRY_URL: https://sentry.gc.nav.no/
                   SENTRY_ORG: nav
                   SENTRY_PROJECT: sykepengesoknad
@@ -72,21 +74,18 @@ jobs:
               run: |
                   docker build . -t ${IMAGE}
                   docker push ${IMAGE}
+            - name: Slack Notification
+              uses: rtCamp/action-slack-notify@v2
+              if: failure() && github.ref == 'refs/heads/master'
+              env:
+                SLACK_COLOR: '#ff0000'
+                SLACK_MESSAGE: 'sykepengesoknad-frontend bygget feiler på master'
+                SLACK_TITLE: 'Auda :alert:'
+                SLACK_WEBHOOK: ${{ secrets.SPOKELSER_WEBHOOK }}
 
-    integrasjonstest-install:
-        name: Integrasjonstest install
-        runs-on: ubuntu-latest
-        steps:
-            - name: Checkout code
-              uses: actions/checkout@v2
-            - name: Install cypress & npm
-              uses: cypress-io/github-action@v2
-              with:
-                  runTests: false
 
     integrasjonstest-run:
         name: Integrasjonstest run
-        needs: integrasjonstest-install
         runs-on: ubuntu-latest
         strategy:
             fail-fast: false
@@ -100,10 +99,6 @@ jobs:
               run: npm ci
             - name: Build server
               run: npm run build
-            - name: Setup kernel for react native, increase watchers
-              run: echo fs.inotify.max_user_watches=524288 | sudo tee -a /etc/sysctl.conf && sudo sysctl -p
-            # download cached ~/.npm and ~/.cache/Cypress
-            # and install node_modules and run tests
             - name: Run cypress
               uses: cypress-io/github-action@v2
               with:
@@ -116,6 +111,14 @@ jobs:
                   name: cypress-screenshots
                   path: cypress/screenshots
                   if-no-files-found: ignore
+            - name: Slack Notification
+              uses: rtCamp/action-slack-notify@v2
+              if: failure() && github.ref == 'refs/heads/master'
+              env:
+                SLACK_COLOR: '#ff0000'
+                SLACK_MESSAGE: 'sykepengesoknad-frontend cypress tester feiler på master'
+                SLACK_TITLE: 'Auda :alert:'
+                SLACK_WEBHOOK: ${{ secrets.SPOKELSER_WEBHOOK }}
 
     deploy-to-q1-dev-gcp:
         if: github.ref == 'refs/heads/master' || startsWith(github.ref, 'refs/heads/dev-')
@@ -156,6 +159,14 @@ jobs:
                   APIKEY: ${{ secrets.NAIS_DEPLOY_APIKEY }}
                   CLUSTER: prod-gcp
                   RESOURCE: nais-prod-gcp.yaml
+            - name: Slack Notification
+              uses: rtCamp/action-slack-notify@v2
+              if: failure() && github.ref == 'refs/heads/master'
+              env:
+                SLACK_COLOR: '#ff0000'
+                SLACK_MESSAGE: 'sykepengesoknad-frontend deploy til prod feiler på master'
+                SLACK_TITLE: 'Auda :alert:'
+                SLACK_WEBHOOK: ${{ secrets.SPOKELSER_WEBHOOK }}
 
     deploy-to-labs-gcp:
         if: github.ref == 'refs/heads/master'
