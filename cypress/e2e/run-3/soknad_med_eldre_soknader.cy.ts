@@ -87,7 +87,7 @@ describe('Eldre søknader', () => {
 function fyllUtSoknad() {
     it('Fyller ut søknaden', () => {
         cy.contains(
-            'Jeg vet at jeg kan miste retten til sykepenger hvis opplysningene jeg gir ikke er riktige eller fullstendige.'
+            'Jeg bekrefter at jeg vil gi så riktige og fullstendige opplysninger som mulig.'
         ).click({ force: true })
         cy.contains('Gå videre').click()
 

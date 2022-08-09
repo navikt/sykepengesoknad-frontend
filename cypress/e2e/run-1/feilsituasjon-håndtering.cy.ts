@@ -26,7 +26,7 @@ describe('Tester feilsituasjoner ', () => {
                 `${soknadSomTriggerSporsmalFinnesIkkeISoknad.id}/1`
             )
 
-            cy.get('.skjemaelement__label').click({ force: true })
+            cy.get('.navds-checkbox__label').click({ force: true })
             cy.contains('Gå videre').click()
         })
 
@@ -65,7 +65,7 @@ describe('Tester feilsituasjoner ', () => {
                 `${soknadSomTriggerFeilStatusForOppdaterSporsmal.id}/1`
             )
 
-            cy.get('.skjemaelement__label').click({ force: true })
+            cy.get('.navds-checkbox__label').click({ force: true })
             cy.contains('Gå videre').click()
         })
 

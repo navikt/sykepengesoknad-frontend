@@ -26,7 +26,7 @@ describe('Tester arbeidsledigsøknad', () => {
 
         // Godkjenne ANSVARSERKLARING
         cy.contains(
-            'Jeg vet at jeg kan miste retten til sykepenger hvis opplysningene jeg gir ikke er riktige eller fullstendige.'
+            'Jeg bekrefter at jeg vil gi så riktige og fullstendige opplysninger som mulig.'
         ).click({ force: true })
 
         cy.contains('Gå videre').click()
@@ -136,7 +136,7 @@ describe('Tester arbeidsledigsøknad', () => {
 
     it('Søknad VAER_KLAR_OVER_AT', () => {
         cy.url().should('include', `${soknad.id}/6`)
-        cy.get('.skjemaelement__label').click({ force: true })
+        cy.get('.navds-checkbox__label').click({ force: true })
         cy.contains(
             'Jeg har lest all informasjonen jeg har fått i søknaden og bekrefter at opplysningene jeg har gitt er korrekte.'
         )

@@ -1,70 +1,7 @@
-@import '../../../../../node_modules/@navikt/ds-tokens/dist/tokens';
-@import './assets/symbols';
-
 .bekreftCheckboksPanel {
     display: block;
-    padding: 1rem;
-    border-radius: @navds-border-radius-medium;
+}
 
-    &:focus,
-    &--focus {
-        box-shadow: 0 0 0 3px @navds-global-color-blue-800;
-        outline: none;
-    }
-
-    background-color: @navds-global-color-orange-100;
-    border-color: @navds-global-color-orange-100;
-    cursor: unset;
-    transition: background-color linear 100ms;
-
-    .bekreftCheckboksPanel__innhold {
-        max-width: 80ch;
-        margin-bottom: 1rem;
-    }
-
-    .skjemaelement {
-        margin-bottom: 0;
-    }
-
-    &--checked {
-        background-color: @navds-global-color-green-100;
-        border-color: @navds-global-color-green-100;
-
-        .checkboks {
-            + .skjemaelement__label {
-                &::before {
-                    transition: none;
-                    background-color: @navds-global-color-green-500;
-                    border-color: @navds-global-color-green-500;
-                    background-image: @checkWhite;
-                }
-
-                &:hover {
-                    &::before {
-                        background-color: @navds-global-color-green-300;
-                        border-color: @navds-global-color-green-300;
-                    }
-                }
-            }
-
-            &:focus {
-                + .skjemaelement__label {
-                    &::before {
-                        border-color: @navds-global-color-blue-800;
-                    }
-
-                    &:hover {
-                        &::before {
-                            background-image: @checkWhite;
-                        }
-                    }
-                }
-            }
-        }
-    }
-
-    &--error {
-        background-color: @navds-global-color-red-50;
-        border: 1px solid transparent;
-    }
+.navds-confirmation-panel__inner {
+    gap: unset;
 }
