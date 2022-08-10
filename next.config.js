@@ -42,7 +42,7 @@ const cspString = Object.entries(csp)
 
 const cspHeader = [
     {
-        key: 'Content-Security-Policy',
+        key: 'Content-Security-Policy-Report-Only',
         value: cspString,
     },
 ]
