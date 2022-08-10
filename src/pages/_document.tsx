@@ -38,7 +38,6 @@ class MyDocument extends Document<Props> {
         const initialProps = await Document.getInitialProps(ctx)
 
         const Decorator = await fetchDecoratorReact({
-            dekoratorenUrl: serverRuntimeConfig.decoratorUrl,
             env: serverRuntimeConfig.decoratorEnv,
             simple: true,
             chatbot: false,
