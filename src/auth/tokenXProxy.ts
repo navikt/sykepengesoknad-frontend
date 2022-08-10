@@ -7,7 +7,7 @@ interface Opts {
     url: string
     req: NextApiRequest
     clientId: string
-    method: 'GET' | 'POST'
+    method: 'GET' | 'POST' | 'PUT' | 'DELETE'
     noResponse?: boolean
     withBody?: boolean
 }

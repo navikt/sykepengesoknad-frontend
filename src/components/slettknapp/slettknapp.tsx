@@ -4,7 +4,6 @@ import React, { useState } from 'react'
 import { redirectTilLoginHvis401 } from '../../data/rest/utils'
 import { useAppStore } from '../../data/stores/app-store'
 import { Kvittering, Sporsmal, svarverdiToKvittering } from '../../types/types'
-import { backendApp, flexGatewayRoot } from '../../utils/environment'
 import { tekst } from '../../utils/tekster'
 import Vis from '../vis'
 
@@ -47,9 +46,7 @@ const Slettknapp = ({ sporsmal, kvittering, update }: SlettknappProps) => {
             )
 
             const res = await fetch(
-                `${flexGatewayRoot()}/${backendApp()}/api/soknader/${
-                    valgtSoknad?.id
-                }/sporsmal/${sporsmal?.id}/svar/${svar?.id}`,
+                `/syk/sykepengesoknad/api/v1/soknader/${valgtSoknad?.id}/sporsmal/${sporsmal?.id}/svar/${svar?.id}`,
                 {
                     method: 'DELETE',
                     credentials: 'include',

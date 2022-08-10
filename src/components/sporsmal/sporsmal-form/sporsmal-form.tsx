@@ -20,7 +20,6 @@ import { sporsmalToRS } from '../../../types/rs-types/rs-sporsmal'
 import { RSSvartype } from '../../../types/rs-types/rs-svartype'
 import { Soknad, Sporsmal } from '../../../types/types'
 import { SEPARATOR } from '../../../utils/constants'
-import { backendApp, flexGatewayRoot } from '../../../utils/environment'
 import { logger } from '../../../utils/logger'
 import { useAmplitudeInstance } from '../../amplitude/amplitude'
 import FeilOppsummering from '../../feil/feil-oppsummering'
@@ -103,10 +102,9 @@ const SporsmalForm = () => {
         let soknad = valgtSoknad
 
         const res = await fetch(
-            flexGatewayRoot() +
-                `/${backendApp()}/api/soknader/${soknad!.id}/sporsmal/${
-                    sporsmal.id
-                }`,
+            `/syk/sykepengesoknad/api/v1/soknader/${soknad!.id}/sporsmal/${
+                sporsmal.id
+            }`,
             {
                 method: 'PUT',
                 credentials: 'include',

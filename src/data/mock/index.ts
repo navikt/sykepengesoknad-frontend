@@ -5,7 +5,7 @@ import { RSMottaker } from '../../types/rs-types/rs-mottaker'
 import { RSSoknad } from '../../types/rs-types/rs-soknad'
 import { RSSoknadstatus } from '../../types/rs-types/rs-soknadstatus'
 import { RSSoknadstype } from '../../types/rs-types/rs-soknadstype'
-import { backendApp, flexGatewayRoot } from '../../utils/environment'
+import { flexGatewayRoot } from '../../utils/environment'
 import { jsonDeepCopy } from '../../utils/json-deep-copy'
 import { feilVedSlettingAvKvittering } from './data/reisetilskudd'
 import {
@@ -38,7 +38,7 @@ const setUpMock = (person: Persona) => {
     })
 
     mock.put(
-        `${flexGatewayRoot()}/${backendApp()}/api/soknader/:soknad/sporsmal/:sporsmal`,
+        '/syk/sykepengesoknad/api/v1/soknader/:soknad/sporsmal/:sporsmal',
         (req) => {
             if (
                 req.pathParams.soknad ===
@@ -178,12 +178,27 @@ const setUpMock = (person: Persona) => {
     )
 
     mock.delete(
-        `${flexGatewayRoot()}/${backendApp()}/api/soknader/:soknad/sporsmal/:spmid/svar/:svarid`,
+        '/syk/sykepengesoknad/api/v1/soknader/:soknad/sporsmal/:spmid/svar/:svarid',
         (req) => {
             if (req.pathParams.soknad === feilVedSlettingAvKvittering.id) {
                 return Promise.resolve({ status: 500 })
             }
             return Promise.resolve({ status: 204 })
+        }
+    )
+
+    mock.post(
+        '/syk/sykepengesoknad/api/v1/soknader/:soknad/sporsmal/:spmid/svar',
+        (req) => {
+            const r = soknader.find((r) => r.id === req.pathParams.soknad)
+            const spm = jsonDeepCopy(
+                r!.sporsmal.find((spm) => spm.id === req.pathParams.spmid)
+            )
+            spm!.svar.push(req.body)
+            return Promise.resolve({
+                status: 201,
+                body: JSON.stringify({ oppdatertSporsmal: spm }),
+            })
         }
     )
 
@@ -196,21 +211,6 @@ const setUpMock = (person: Persona) => {
                     melding: 'opprettet',
                 })
             )
-    )
-
-    mock.post(
-        `${flexGatewayRoot()}/${backendApp()}/api/soknader/:soknad/sporsmal/:spmid/svar`,
-        (req) => {
-            const r = soknader.find((r) => r.id === req.pathParams.soknad)
-            const spm = jsonDeepCopy(
-                r!.sporsmal.find((spm) => spm.id === req.pathParams.spmid)
-            )
-            spm!.svar.push(req.body)
-            return Promise.resolve({
-                status: 201,
-                body: JSON.stringify({ oppdatertSporsmal: spm }),
-            })
-        }
     )
 
     mock.get(`${flexGatewayRoot()}/flex-bucket-uploader/kvittering/:blob`, () =>
