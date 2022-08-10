@@ -19,12 +19,14 @@ export const tokenXProxy = async (opts: Opts) => {
 
     const idportenToken = opts.req.headers.authorization!.split(' ')[1]
     const tokenxToken = await getTokenxToken(idportenToken, opts.clientId)
-    const init: RequestInit = {
+    const init = {
         method: opts.req.method,
-        headers: { Authorization: `Bearer ${tokenxToken}` },
+        headers: { Authorization: `Bearer ${tokenxToken}` } as any,
+        body: undefined as string | undefined,
     }
     if (opts.withBody) {
-        init.body = opts.req.body
+        init.body = JSON.stringify(opts.req.body)
+        init.headers['Content-Type'] = 'application/json'
     }
     const response = await fetch(opts.url, init)
 
