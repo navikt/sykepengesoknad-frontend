@@ -15,6 +15,7 @@ const handler = beskyttetApi(
             url: `http://sykepengesoknad-backend/api/v2/soknader/${id}/sporsmal/${sporsmalId}`,
             method: 'PUT',
             req: req,
+            withBody: true,
             clientId: serverRuntimeConfig.sykepengesoknadBackendClientId,
         })
 
