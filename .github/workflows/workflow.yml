@@ -104,7 +104,7 @@ jobs:
               uses: cypress-io/github-action@v2
               with:
                   start: npm run start-ingen-dekorator
-                  wait-on: http://localhost:8080/syk/sykepengesoknad/api/isAlive
+                  wait-on: http://localhost:8080/syk/sykepengesoknad/api/internal/isAlive
                   config-file: cypress.config.ts
                   spec: cypress/e2e/run-${{ matrix.containers }}/**
             - uses: actions/upload-artifact@v3

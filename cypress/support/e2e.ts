@@ -45,28 +45,20 @@ const lyttTilNettverksKall = (a: any) => {
             expect(headers['Content-Type'], '/sporsmal').to.eql(
                 'application/json'
             )
-            expect(headers['X-App-Started-Timestamp'], '/sporsmal').not.to.be
-                .undefined
             svarFormat(sporsmal)
         } else if (url.includes('/finnMottaker')) {
             const headers = req['headers']
             expect(headers['Content-Type'], '/finnMottaker').to.eql(
                 'application/json'
             )
-            expect(headers['X-App-Started-Timestamp'], '/finnMottaker').not.to
-                .be.undefined
         } else if (url.includes('/send')) {
             const headers = req['headers']
             expect(headers['Content-Type'], '/send').to.eql('application/json')
-            expect(headers['X-App-Started-Timestamp'], '/send').not.to.be
-                .undefined
         } else if (url.includes('/gjenapne')) {
             const headers = req['headers']
             expect(headers['Content-Type'], '/gjenapne').to.eql(
                 'application/json'
             )
-            expect(headers['X-App-Started-Timestamp'], '/gjenapne').not.to.be
-                .undefined
         } else {
             cy.log('Sjekker ikke kallet til', url)
         }
