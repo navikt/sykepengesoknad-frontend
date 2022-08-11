@@ -7,7 +7,6 @@ import { FetchState, hasData } from '../../data/rest/utils'
 import { useAppStore } from '../../data/stores/app-store'
 import { RSSoknad } from '../../types/rs-types/rs-soknad'
 import { Soknad } from '../../types/types'
-import { backendApp, flexGatewayRoot } from '../../utils/environment'
 import { logger } from '../../utils/logger'
 import { tekst } from '../../utils/tekster'
 import { useAmplitudeInstance } from '../amplitude/amplitude'
@@ -29,8 +28,7 @@ const Endreknapp = () => {
         setKorrigerer(true)
 
         korrigerSoknad.fetch(
-            flexGatewayRoot() +
-                `/${backendApp()}/api/soknader/${valgtSoknad!.id}/korriger`,
+            `/syk/sykepengesoknad/api/v1/soknader/${valgtSoknad!.id}/korriger`,
             {
                 method: 'POST',
                 credentials: 'include',

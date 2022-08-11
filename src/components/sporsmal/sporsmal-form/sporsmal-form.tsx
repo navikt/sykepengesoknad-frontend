@@ -20,8 +20,6 @@ import { sporsmalToRS } from '../../../types/rs-types/rs-sporsmal'
 import { RSSvartype } from '../../../types/rs-types/rs-svartype'
 import { Soknad, Sporsmal } from '../../../types/types'
 import { SEPARATOR } from '../../../utils/constants'
-import { backendApp, flexGatewayRoot } from '../../../utils/environment'
-import fetcher from '../../../utils/fetcher'
 import { logger } from '../../../utils/logger'
 import { useAmplitudeInstance } from '../../amplitude/amplitude'
 import FeilOppsummering from '../../feil/feil-oppsummering'
@@ -103,11 +101,10 @@ const SporsmalForm = () => {
     const sendOppdaterSporsmal = async () => {
         let soknad = valgtSoknad
 
-        const res = await fetcher(
-            flexGatewayRoot() +
-                `/${backendApp()}/api/soknader/${soknad!.id}/sporsmal/${
-                    sporsmal.id
-                }`,
+        const res = await fetch(
+            `/syk/sykepengesoknad/api/v1/soknader/${soknad!.id}/sporsmal/${
+                sporsmal.id
+            }`,
             {
                 method: 'PUT',
                 credentials: 'include',
@@ -185,8 +182,9 @@ const SporsmalForm = () => {
 
     const hentMottaker = () => {
         rsMottakerResponseFetch.fetch(
-            flexGatewayRoot() +
-                `/${backendApp()}/api/soknader/${valgtSoknad!.id}/finnMottaker`,
+            `/syk/sykepengesoknad/api/v1/soknader/${
+                valgtSoknad!.id
+            }/finnMottaker`,
             {
                 method: 'POST',
                 credentials: 'include',
@@ -218,9 +216,8 @@ const SporsmalForm = () => {
                 return
             }
         }
-        const res = await fetcher(
-            flexGatewayRoot() +
-                `/${backendApp()}/api/soknader/${valgtSoknad.id}/send`,
+        const res = await fetch(
+            `/syk/sykepengesoknad/api/v1/soknader/${valgtSoknad!.id}/send`,
             {
                 method: 'POST',
                 credentials: 'include',

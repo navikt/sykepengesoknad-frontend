@@ -6,8 +6,6 @@ import { RouteParams } from '../../../app'
 import { redirectTilLoginHvis401 } from '../../../data/rest/utils'
 import { useAppStore } from '../../../data/stores/app-store'
 import { RSSoknadstatus } from '../../../types/rs-types/rs-soknadstatus'
-import { backendApp, flexGatewayRoot } from '../../../utils/environment'
-import fetcher from '../../../utils/fetcher'
 import { logger } from '../../../utils/logger'
 import { useAmplitudeInstance } from '../../amplitude/amplitude'
 import styles from './gjenapneknapp.module.css'
@@ -42,9 +40,10 @@ const GjenapneSoknad = () => {
         if (gjenapner) return
         setGjenapner(true)
         try {
-            const res = await fetcher(
-                flexGatewayRoot() +
-                    `/${backendApp()}/api/soknader/${valgtSoknad!.id}/gjenapne`,
+            const res = await fetch(
+                `/syk/sykepengesoknad/api/v1/soknader/${
+                    valgtSoknad!.id
+                }/gjenapne`,
                 {
                     method: 'POST',
                     credentials: 'include',

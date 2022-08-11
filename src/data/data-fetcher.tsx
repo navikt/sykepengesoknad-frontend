@@ -5,11 +5,6 @@ import IngenData from '../components/feil/ingen-data'
 import { RSSoknad } from '../types/rs-types/rs-soknad'
 import { Sykmelding } from '../types/sykmelding'
 import { Soknad } from '../types/types'
-import {
-    backendApp,
-    flexGatewayRoot,
-    sykmeldingerBackendRoot,
-} from '../utils/environment'
 import { logger } from '../utils/logger'
 import useFetch from './rest/use-fetch'
 import {
@@ -31,7 +26,7 @@ export function DataFetcher(props: { children: any }) {
     useEffect(() => {
         if (isNotStarted(rssoknader)) {
             rssoknader.fetch(
-                `${flexGatewayRoot()}/${backendApp()}/api/soknader`,
+                '/syk/sykepengesoknad/api/v1/soknader',
                 {
                     credentials: 'include',
                 },
@@ -47,7 +42,7 @@ export function DataFetcher(props: { children: any }) {
             )
         }
         if (isNotStarted(sykmeldinger)) {
-            const url = `${sykmeldingerBackendRoot()}/api/v1/sykmeldinger`
+            const url = '/syk/sykepengesoknad/api/v1/sykmeldinger'
             sykmeldinger.fetch(
                 url,
                 {

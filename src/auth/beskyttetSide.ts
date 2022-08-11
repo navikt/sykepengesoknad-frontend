@@ -1,6 +1,7 @@
 import cookie from 'cookie'
 import { NextPageContext } from 'next'
 
+import metrics, { cleanPathForMetric, shouldLogMetricForPath } from '../metrics'
 import {
     isMockBackend,
     loginServiceRedirectUrl,
@@ -21,6 +22,7 @@ function beskyttetSide(handler: PageHandler) {
         }
 
         const request = context.req
+
         if (request == null) {
             throw new Error(
                 'Context is missing request. This should not happen'
@@ -32,6 +34,11 @@ function beskyttetSide(handler: PageHandler) {
             }
             return loginServiceRedirectUrl()
         }
+
+        const cleanPath = cleanPathForMetric(request.url)
+        if (shouldLogMetricForPath(cleanPath)) {
+            metrics.pageInitialLoadCounter.inc({ path: cleanPath }, 1)
+        }
         const loginserviceRedirect = {
             redirect: {
                 destination: `${loginServiceUrl()}?redirect=${skapLoginserviceRedirectUrl()}`,
@@ -41,11 +48,17 @@ function beskyttetSide(handler: PageHandler) {
         const cookies = cookie.parse(context.req?.headers.cookie || '')
         const selvbetjeningIdtoken = cookies['selvbetjening-idtoken']
         if (!selvbetjeningIdtoken) {
+            if (shouldLogMetricForPath(cleanPath)) {
+                metrics.loginserviceRedirect.inc({ path: cleanPath }, 1)
+            }
             return loginserviceRedirect
         }
         try {
             await validerLoginserviceToken(selvbetjeningIdtoken)
         } catch (e) {
+            if (shouldLogMetricForPath(cleanPath)) {
+                metrics.loginserviceRedirect.inc({ path: cleanPath }, 1)
+            }
             return loginserviceRedirect
         }
 
@@ -60,11 +73,17 @@ function beskyttetSide(handler: PageHandler) {
         const bearerToken: string | null | undefined =
             request.headers['authorization']
         if (!bearerToken) {
+            if (shouldLogMetricForPath(cleanPath)) {
+                metrics.wonderwallRedirect.inc({ path: cleanPath }, 1)
+            }
             return wonderwallRedirect
         }
         try {
             await verifyIdportenAccessToken(bearerToken)
         } catch (e) {
+            if (shouldLogMetricForPath(cleanPath)) {
+                metrics.wonderwallRedirect.inc({ path: cleanPath }, 1)
+            }
             logger.error('kunne ikke validere idportentoken i beskyttetSide', e)
             return wonderwallRedirect
         }

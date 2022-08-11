@@ -18,8 +18,7 @@ import { useAppStore } from '../../../data/stores/app-store'
 import { RSOppdaterSporsmalResponse } from '../../../types/rs-types/rest-response/rs-oppdatersporsmalresponse'
 import { RSSvar } from '../../../types/rs-types/rs-svar'
 import { Kvittering, Sporsmal, UtgiftTyper } from '../../../types/types'
-import { backendApp, flexGatewayRoot } from '../../../utils/environment'
-import fetcher from '../../../utils/fetcher'
+import { flexGatewayRoot } from '../../../utils/environment'
 import {
     formaterFilstørrelse,
     formattertFiltyper,
@@ -106,7 +105,7 @@ const OpplastingForm = ({ sporsmal }: SpmProps) => {
     const opplastingTilBucket = async () => {
         const requestData = new FormData()
         requestData.append('file', valgtFil as Blob)
-        const bucketRes = await fetcher(
+        const bucketRes = await fetch(
             `${flexGatewayRoot()}/flex-bucket-uploader/opplasting`,
             {
                 method: 'POST',
@@ -145,10 +144,10 @@ const OpplastingForm = ({ sporsmal }: SpmProps) => {
         }
         const svar: RSSvar = { verdi: JSON.stringify(kvittering) }
 
-        const syfosoknadRes = await fetcher(
-            `${flexGatewayRoot()}/${backendApp()}/api/soknader/${
-                valgtSoknad!.id
-            }/sporsmal/${sporsmal!.id}/svar`,
+        const syfosoknadRes = await fetch(
+            `/syk/sykepengesoknad/api/v1/soknader/${valgtSoknad!.id}/sporsmal/${
+                sporsmal!.id
+            }/svar`,
             {
                 method: 'POST',
                 body: JSON.stringify(svar),
