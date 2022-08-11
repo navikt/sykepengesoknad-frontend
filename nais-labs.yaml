@@ -22,9 +22,9 @@ spec:
       cpu: 200m
       memory: 256Mi
   liveness:
-    path: syk/sykepengesoknad/api/isAlive
+    path: syk/sykepengesoknad/api/internal/isAlive
   readiness:
-    path: syk/sykepengesoknad/api/isReady
+    path: syk/sykepengesoknad/api/internal/isReady
   env:
     - name: FLEX_GATEWAY_ROOT
       value: "https://flex-gateway.dev.nav.no"

@@ -1,4 +1,3 @@
-import cookie from 'cookie'
 import { NextApiRequest, NextApiResponse } from 'next'
 
 import { logger } from '../utils/logger'
@@ -15,11 +14,6 @@ export function beskyttetApi(handler: ApiHandler): ApiHandler {
             res.status(401).json({ message: 'Access denied' })
         }
 
-        const cookies = cookie.parse(req?.headers.cookie || '')
-        const selvbetjeningIdtoken = cookies['selvbetjening-idtoken']
-        if (!selvbetjeningIdtoken) {
-            return send401()
-        }
         const bearerToken: string | null | undefined =
             req.headers['authorization']
         if (!bearerToken) {

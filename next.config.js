@@ -66,10 +66,20 @@ module.exports = withPlugins(
                     source: '/:path*',
                     headers: cspHeader,
                 },
+                {
+                    source: '/api/:path*',
+                    headers: [
+                        {
+                            key: 'Cache-Control',
+                            value: 'private, no-cache, no-store, max-age=0, must-revalidate',
+                        },
+                    ],
+                },
             ]
         },
         basePath: '/syk/sykepengesoknad',
         lessLoaderOptions: {},
+        pageExtensions: ['page.tsx', 'api.ts'],
         assetPrefix: process.env.ASSET_PREFIX || '',
         generateEtags: false, //Disabler etag i pages
         serverRuntimeConfig: {
@@ -87,6 +97,10 @@ module.exports = withPlugins(
             tokenXClientId: process.env.TOKEN_X_CLIENT_ID,
             idportenClientId: process.env.IDPORTEN_CLIENT_ID,
             idportenWellKnownUrl: process.env.IDPORTEN_WELL_KNOWN_URL,
+            sykmeldingerBackendClientId:
+                process.env.SYKMELDINGER_BACKEND_CLIENT_ID,
+            sykepengesoknadBackendClientId:
+                process.env.SYKEPENGESOKNAD_BACKEND_CLIENT_ID,
         },
         publicRuntimeConfig: {
             // Will be available on both server and client
