@@ -26,10 +26,6 @@ export function isOpplaering() {
     return publicRuntimeConfig.opplaering === 'true'
 }
 
-export function sykmeldingerBackendRoot() {
-    return publicRuntimeConfig.sykmeldingerBackendRoot
-}
-
 export function loginServiceUrl() {
     return serverRuntimeConfig.loginServiceUrl
 }
@@ -56,10 +52,6 @@ export function dittNavUrl() {
 
 export function dinesakerUrl(): string {
     return publicRuntimeConfig.dineSakerUrl
-}
-
-export function backendApp(): string {
-    return publicRuntimeConfig.backendApp
 }
 
 export function vedlikehold(): boolean {

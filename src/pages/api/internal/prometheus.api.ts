@@ -1,7 +1,7 @@
 import type { NextApiRequest, NextApiResponse } from 'next'
 import { register } from 'prom-client'
 
-async function prometheus(
+async function prometheusApi(
     req: NextApiRequest,
     res: NextApiResponse
 ): Promise<void> {
@@ -9,4 +9,4 @@ async function prometheus(
     res.send(await register.metrics())
 }
 
-export default prometheus
+export default prometheusApi

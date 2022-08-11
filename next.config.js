@@ -113,9 +113,7 @@ module.exports = withPlugins(
             env: process.env.ENVIRONMENT,
             amplitudeEnabled: process.env.AMPLITUDE_ENABLED,
             environment: process.env.ENVIRONMENT,
-            sykmeldingerBackendRoot: process.env.SYKMELDINGER_BACKEND_ROOT,
             dineSakerUrl: process.env.DINESAKER_URL,
-            backendApp: process.env.BACKEND_APP,
             vedlikehold: process.env.VEDLIKEHOLD,
         },
     }

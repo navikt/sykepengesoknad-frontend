@@ -4,8 +4,6 @@ import React, { useState } from 'react'
 
 import { redirectTilLoginHvis401 } from '../../data/rest/utils'
 import { useAppStore } from '../../data/stores/app-store'
-import { backendApp, flexGatewayRoot } from '../../utils/environment'
-import fetcher from '../../utils/fetcher'
 import { logger } from '../../utils/logger'
 import { tekst } from '../../utils/tekster'
 
@@ -58,11 +56,10 @@ const Ettersending = ({
     }
 
     const ettersendNav = async () => {
-        const res = await fetcher(
-            flexGatewayRoot() +
-                `/${backendApp()}/api/soknader/${
-                    valgtSoknad!.id
-                }/ettersendTilNav`,
+        const res = await fetch(
+            `/syk/sykepengesoknad/api/v1/soknader/${
+                valgtSoknad!.id
+            }/ettersendTilNav`,
             {
                 method: 'POST',
                 credentials: 'include',
@@ -82,11 +79,10 @@ const Ettersending = ({
     }
 
     const ettersendArbeidsgiver = async () => {
-        const res = await fetcher(
-            flexGatewayRoot() +
-                `/${backendApp()}/api/soknader/${
-                    valgtSoknad!.id
-                }/ettersendTilArbeidsgiver`,
+        const res = await fetch(
+            `/syk/sykepengesoknad/api/v1/soknader/${
+                valgtSoknad!.id
+            }/ettersendTilArbeidsgiver`,
             {
                 method: 'POST',
                 credentials: 'include',
