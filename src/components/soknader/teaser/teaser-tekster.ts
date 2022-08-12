@@ -26,7 +26,8 @@ const TeaserTekster = {
         'Sykmeldt fra %ARBEIDSGIVER%',
     'soknad.teaser.utgaatt.popup.header': 'Søknaden er utgått',
     'soknad.teaser.utgaatt.popup.innhold':
-        'Du får ikke åpnet denne søknaden fordi den ikke ble sendt innen fristen.',
+        'Du får ikke åpnet denne søknaden fordi den ikke ble sendt innen fristen. <br/> <br/>' +
+        'Det kan gjøres unntak fra fristen dersom du ikke har vært i stand til å søke, eller dersom NAV har gitt misvisende opplysninger. Hvis du mener dette gjelder deg, ber vi deg kontakte NAV.',
     'soknad.reisetilskudd.teaser.tittel': 'Søknad om reisetilskudd',
     'soknad.gradert-reisetilskudd.teaser.tittel':
         'Søknad om sykepenger med reisetilskudd',
