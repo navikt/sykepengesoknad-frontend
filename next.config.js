@@ -11,6 +11,7 @@ const csp = {
         'https://www.google-analytics.com',
         'https://nav.psplugin.com',
         'https://ta-survey-v2.herokuapp.com',
+        'https://surveystats.hotjar.io',
     ],
     'img-src': [
         "'self'",
@@ -18,8 +19,14 @@ const csp = {
         'blob:',
         'https://*.nav.no',
         'https://www.google-analytics.com',
+        'https://script.hotjar.com',
     ],
-    'font-src': ["'self'", 'data:', 'https://*.psplugin.com'],
+    'font-src': [
+        "'self'",
+        'data:',
+        'https://*.psplugin.com',
+        'https://script.hotjar.com',
+    ],
     'frame-src': ["'self'", 'data:', 'https://vars.hotjar.com'],
     'worker-src': ['blob:', '*.nais.io'],
     'style-src': ["'self'", "'unsafe-inline'", 'https://*.nav.no'],
