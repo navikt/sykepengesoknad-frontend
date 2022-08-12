@@ -15,6 +15,7 @@ const csp = {
     'img-src': [
         "'self'",
         'data:',
+        'blob:',
         'https://*.nav.no',
         'https://www.google-analytics.com',
     ],
