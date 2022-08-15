@@ -109,6 +109,8 @@ module.exports = withPlugins(
                 process.env.SYKMELDINGER_BACKEND_CLIENT_ID,
             sykepengesoknadBackendClientId:
                 process.env.SYKEPENGESOKNAD_BACKEND_CLIENT_ID,
+            flexBucketUploaderClientId:
+                process.env.FLEX_BUCKET_UPLOADER_CLIENT_ID,
         },
         publicRuntimeConfig: {
             // Will be available on both server and client

@@ -72,3 +72,5 @@ spec:
       value: "prod-gcp:teamsykmelding:sykmeldinger-backend"
     - name: SYKEPENGESOKNAD_BACKEND_CLIENT_ID
       value: "prod-gcp:flex:sykepengesoknad-backend"
+    - name: FLEX_BUCKET_UPLOADER_CLIENT_ID
+      value: "prod-gcp:flex:flex-bucket-uploader"
