@@ -1,41 +1,32 @@
-import httpProxy from 'http-proxy'
 import { NextApiRequest, NextApiResponse } from 'next'
 import getConfig from 'next/config'
 
 import { beskyttetApi } from '../../../auth/beskyttetApi'
-import { getTokenxToken } from '../../../auth/getTokenxToken'
-import { logger } from '../../../utils/logger'
+import { proxyKallTilBackend } from '../../../proxy/backendproxy'
 
 const { serverRuntimeConfig } = getConfig()
 
-const tillatteApier = ['GET /api/v2/soknader']
+const tillatteApier = [
+    'GET /api/v2/soknader',
+    'POST /api/v2/opprettSoknadUtland',
+    'POST /api/v2/soknader/[uuid]/avbryt',
+    'POST /api/v2/soknader/[uuid]/send',
+    'POST /api/v2/soknader/[uuid]/korriger',
+    'POST /api/v2/soknader/[uuid]/gjenapne',
+    'POST /api/v2/soknader/[uuid]/finnMottaker',
+    'POST /api/v2/soknader/[uuid]/ettersendTilNav',
+    'POST /api/v2/soknader/[uuid]/ettersendTilArbeidsgiver',
+]
 
 const handler = beskyttetApi(
     async (req: NextApiRequest, res: NextApiResponse) => {
-        const rewritedPath = req.url!.replace('/sykepengesoknad-backend', '')
-        const api = `${req.method} ${rewritedPath}`
-        if (!tillatteApier.includes(api)) {
-            logger.warn('404 Ukjent api: ' + api)
-            res.status(404)
-            res.send(null)
-            return
-        }
-
-        const idportenToken = req.headers.authorization!.split(' ')[1]
-        const tokenxToken = await getTokenxToken(
-            idportenToken,
-            serverRuntimeConfig.sykepengesoknadBackendClientId
-        )
-
-        const proxy = httpProxy.createProxyServer()
-        proxy.on('proxyReq', (proxyReq, req, res, options) => {
-            proxyReq.removeHeader('Authorization')
-            proxyReq.setHeader('Authorization', `Bearer ${tokenxToken}`)
-            proxyReq.path = rewritedPath
-        })
-        proxy.web(req, res, {
-            target: 'http://sykepengesoknad-backend',
-            changeOrigin: true,
+        await proxyKallTilBackend({
+            req,
+            res,
+            tillatteApier,
+            backend: 'sykepengesoknad-backend',
+            backendUrl: 'http://sykepengesoknad-backend',
+            backendClientId: serverRuntimeConfig.sykepengesoknadBackendClientId,
         })
     }
 )

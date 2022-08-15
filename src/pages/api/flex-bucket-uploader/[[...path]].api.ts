@@ -1,32 +1,25 @@
-import httpProxy from 'http-proxy'
 import { NextApiRequest, NextApiResponse } from 'next'
 import getConfig from 'next/config'
 
 import { beskyttetApi } from '../../../auth/beskyttetApi'
-import { getTokenxToken } from '../../../auth/getTokenxToken'
+import { proxyKallTilBackend } from '../../../proxy/backendproxy'
 
-const proxy = httpProxy.createProxyServer()
 const { serverRuntimeConfig } = getConfig()
 
-proxy.on('proxyReq', async function (proxyReq, req, res, options) {
-    const idportenToken = req.headers.authorization!.split(' ')[1]
-    proxyReq.removeHeader('Authorization')
-
-    const tokenxToken = await getTokenxToken(
-        idportenToken,
-        serverRuntimeConfig.flexBucketUploaderClientId
-    )
-    proxyReq.setHeader('Authorization', `Bearer ${tokenxToken}`)
-
-    const rewritedPath = req.url!.replace('/flex-bucket-uploader', '/')
-    proxyReq.path = rewritedPath
-})
+const tillatteApier = [
+    'GET /api/v2/kvittering/[uuid]',
+    'POST /api/v2/opplasting',
+]
 
 const handler = beskyttetApi(
     async (req: NextApiRequest, res: NextApiResponse) => {
-        proxy.web(req, res, {
-            target: 'http://flex-bucket-uploader',
-            changeOrigin: true,
+        await proxyKallTilBackend({
+            req: req,
+            res: res,
+            tillatteApier: tillatteApier,
+            backend: 'flex-bucket-uploader',
+            backendUrl: 'http://flex-bucket-uploader',
+            backendClientId: serverRuntimeConfig.flexBucketUploaderClientId,
         })
     }
 )
@@ -34,6 +27,7 @@ const handler = beskyttetApi(
 export const config = {
     api: {
         bodyParser: false,
+        externalResolver: true,
     },
 }
 
