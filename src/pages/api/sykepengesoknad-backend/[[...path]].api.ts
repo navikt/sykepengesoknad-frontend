@@ -6,22 +6,20 @@ import { beskyttetApi } from '../../../auth/beskyttetApi'
 import { getTokenxToken } from '../../../auth/getTokenxToken'
 import { logger } from '../../../utils/logger'
 
-const proxy = httpProxy.createProxyServer()
 const { serverRuntimeConfig } = getConfig()
 
 const tillatteApier = ['GET /api/v2/soknader']
 
 const handler = beskyttetApi(
     async (req: NextApiRequest, res: NextApiResponse) => {
-        const path = req.url!.replace('/sykepengesoknad-backend', '')
-        const api = `${req.method} ${path}`
+        const rewritedPath = req.url!.replace('/sykepengesoknad-backend', '')
+        const api = `${req.method} ${rewritedPath}`
         if (!tillatteApier.includes(api)) {
             logger.warn('404 Ukjent api: ' + api)
             res.status(404)
             res.send(null)
             return
         }
-        req.url = path
 
         const idportenToken = req.headers.authorization!.split(' ')[1]
         const tokenxToken = await getTokenxToken(
@@ -29,8 +27,12 @@ const handler = beskyttetApi(
             serverRuntimeConfig.sykepengesoknadBackendClientId
         )
 
-        req.headers['Authorization'] = `Bearer ${tokenxToken}`
-
+        const proxy = httpProxy.createProxyServer()
+        proxy.on('proxyReq', (proxyReq, req, res, options) => {
+            proxyReq.removeHeader('Authorization')
+            proxyReq.setHeader('Authorization', `Bearer ${tokenxToken}`)
+            proxyReq.path = rewritedPath
+        })
         proxy.web(req, res, {
             target: 'http://sykepengesoknad-backend',
             changeOrigin: true,
