@@ -14,18 +14,30 @@
 // ***********************************************************
 /* eslint-disable no-undef */
 import './commands'
+import 'cypress-axe'
 
 import { SvarEnums } from '../../src/types/enums'
 import { RSSporsmal } from '../../src/types/rs-types/rs-sporsmal'
 import { RSSvartype } from '../../src/types/rs-types/rs-svartype'
 
 beforeEach(() => {
+    cy.injectAxe()
     cy.window().then((win) => {
         cy.spy(win, 'fetch').as('winFetch')
     })
 })
 
 afterEach(() => {
+    cy.checkA11y(
+        undefined,
+        {
+            rules: {
+                'svg-img-alt': { enabled: false },
+            },
+        },
+        undefined,
+        true
+    )
     cy.get('@winFetch').should((a: any) => {
         lyttTilNettverksKall(a)
     })
