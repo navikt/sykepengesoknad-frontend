@@ -12,7 +12,7 @@ type ApiHandler = (
 
 export function beskyttetApi(handler: ApiHandler): ApiHandler {
     return async function withBearerTokenHandler(req, res) {
-        const cleanPath = cleanPathForMetric(req.url)
+        const cleanPath = cleanPathForMetric(req.url!)
 
         function send401() {
             metrics.apiUnauthorized.inc({ path: cleanPath }, 1)
