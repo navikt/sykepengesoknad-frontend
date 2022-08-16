@@ -75,6 +75,11 @@ const SporsmalForm = () => {
     const rsMottakerResponseFetch = useFetch<RSMottakerResponse>()
 
     useEffect(() => {
+        const formState = hentFormState(sporsmal)
+
+        // eslint-disable-next-line no-console
+        console.log(`NJM: formState: ${JSON.stringify(formState)}`)
+
         methods.reset(hentFormState(sporsmal), { keepValues: false })
         // eslint-disable-next-line
     }, [sporsmal])
@@ -100,7 +105,9 @@ const SporsmalForm = () => {
 
     const sendOppdaterSporsmal = async () => {
         let soknad = valgtSoknad
-
+        const body = JSON.stringify(sporsmalToRS(sporsmal))
+        // eslint-disable-next-line no-console
+        console.log(`NJM: sendOppdaterSporsmal.body | ${body}`)
         const res = await fetch(
             `/syk/sykepengesoknad/api/v1/soknader/${soknad!.id}/sporsmal/${
                 sporsmal.id
@@ -108,7 +115,7 @@ const SporsmalForm = () => {
             {
                 method: 'PUT',
                 credentials: 'include',
-                body: JSON.stringify(sporsmalToRS(sporsmal)),
+                body: body,
                 headers: { 'Content-Type': 'application/json' },
             }
         )
@@ -271,6 +278,12 @@ const SporsmalForm = () => {
     }
 
     const onSubmit = async (data: any) => {
+        // eslint-disable-next-line no-console
+        console.log(
+            `NJM: methods.getValues: ${JSON.stringify(methods.getValues())}`
+        )
+        // eslint-disable-next-line no-console
+        console.log(`NJM: onSubmit, data er: ${JSON.stringify(data)}`)
         if (poster) return
         setPoster(true)
         restFeilet = false

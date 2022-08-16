@@ -24,9 +24,24 @@ export const settSvar = (
     verdier: Record<string, any>
 ): void => {
     const verdi = hentVerdier(sporsmal, verdier)
-    if (verdi === undefined) {
+    // eslint-disable-next-line no-console
+    console.log(`NJM: settSvar.sporsmal: ${JSON.stringify(sporsmal)}`)
+    // eslint-disable-next-line no-console
+    console.log(`NJM: settSvar.verdi: ${verdi}`)
+    if (
+        verdi === undefined &&
+        sporsmal.svartype !== RSSvartype.IKKE_RELEVANT &&
+        sporsmal.svartype !== RSSvartype.CHECKBOX_GRUPPE &&
+        sporsmal.svartype !== RSSvartype.RADIO &&
+        sporsmal.svartype !== RSSvartype.INFO_BEHANDLINGSDAGER
+    ) {
         return
     }
+
+    // eslint-disable-next-line no-console
+    console.log(
+        `NJM: settSvar.sporsmal.svartype | ${JSON.stringify(sporsmal.svartype)}`
+    )
     switch (sporsmal.svartype) {
         case RSSvartype.CHECKBOX_PANEL:
         case RSSvartype.CHECKBOX:
@@ -71,6 +86,8 @@ export const settSvar = (
 }
 
 const checkboxSvar = (sporsmal: Sporsmal, verdi: any) => {
+    // eslint-disable-next-line no-console
+    console.log(`NJM: checkboxSvar | ${sporsmal} - ${verdi}`)
     sporsmal.svarliste = {
         sporsmalId: sporsmal.id,
         svar: [
