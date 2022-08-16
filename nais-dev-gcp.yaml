@@ -3,6 +3,8 @@ kind: "Application"
 metadata:
   name: sykepengesoknad
   namespace: flex
+  annotations:
+    nginx.ingress.kubernetes.io/proxy-body-size: "20M"
   labels:
     team: flex
 spec:
@@ -39,6 +41,7 @@ spec:
     outbound:
       rules:
         - application: sykepengesoknad-backend
+        - application: flex-bucket-uploader
         - application: sykmeldinger-backend
           namespace: teamsykmelding
   envFrom:
@@ -72,3 +75,5 @@ spec:
       value: "dev-gcp:teamsykmelding:sykmeldinger-backend"
     - name: SYKEPENGESOKNAD_BACKEND_CLIENT_ID
       value: "dev-gcp:flex:sykepengesoknad-backend"
+    - name: FLEX_BUCKET_UPLOADER_CLIENT_ID
+      value: "dev-gcp:flex:flex-bucket-uploader"

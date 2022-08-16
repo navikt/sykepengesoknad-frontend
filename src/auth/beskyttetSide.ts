@@ -35,7 +35,7 @@ function beskyttetSide(handler: PageHandler) {
             return loginServiceRedirectUrl()
         }
 
-        const cleanPath = cleanPathForMetric(request.url)
+        const cleanPath = cleanPathForMetric(request.url!)
         if (shouldLogMetricForPath(cleanPath)) {
             metrics.pageInitialLoadCounter.inc({ path: cleanPath }, 1)
         }
