@@ -18,7 +18,7 @@ const handler = beskyttetApi(
             res: res,
             tillatteApier: tillatteApier,
             backend: 'flex-bucket-uploader',
-            backendUrl: 'http://flex-bucket-uploader',
+            backendHostname: 'flex-bucket-uploader',
             backendClientId: serverRuntimeConfig.flexBucketUploaderClientId,
         })
     }
