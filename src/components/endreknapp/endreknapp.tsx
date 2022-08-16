@@ -28,7 +28,9 @@ const Endreknapp = () => {
         setKorrigerer(true)
 
         korrigerSoknad.fetch(
-            `/syk/sykepengesoknad/api/v1/soknader/${valgtSoknad!.id}/korriger`,
+            `/syk/sykepengesoknad/api/sykepengesoknad-backend/api/v2/soknader/${
+                valgtSoknad!.id
+            }/korriger`,
             {
                 method: 'POST',
                 credentials: 'include',

@@ -41,7 +41,7 @@ const GjenapneSoknad = () => {
         setGjenapner(true)
         try {
             const res = await fetch(
-                `/syk/sykepengesoknad/api/v1/soknader/${
+                `/syk/sykepengesoknad/api/sykepengesoknad-backend/api/v2/soknader/${
                     valgtSoknad!.id
                 }/gjenapne`,
                 {

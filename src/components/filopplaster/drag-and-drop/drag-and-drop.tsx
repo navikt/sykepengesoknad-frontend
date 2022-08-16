@@ -4,7 +4,6 @@ import { useDropzone } from 'react-dropzone'
 import { useFormContext } from 'react-hook-form'
 
 import { useAppStore } from '../../../data/stores/app-store'
-import { flexGatewayRoot } from '../../../utils/environment'
 import {
     customTruncet,
     formaterFilstørrelse,
@@ -31,9 +30,7 @@ const DragAndDrop = () => {
         if (valgtKvittering?.blobId) {
             setFormErDisabled(true)
             fetch(
-                `${flexGatewayRoot()}/flex-bucket-uploader/kvittering/${
-                    valgtKvittering.blobId
-                }`,
+                `/syk/sykepengesoknad/api/flex-bucket-uploader/api/v2/kvittering/${valgtKvittering.blobId}`,
                 {
                     method: 'GET',
                     credentials: 'include',

@@ -5,7 +5,6 @@ import { RSMottaker } from '../../types/rs-types/rs-mottaker'
 import { RSSoknad } from '../../types/rs-types/rs-soknad'
 import { RSSoknadstatus } from '../../types/rs-types/rs-soknadstatus'
 import { RSSoknadstype } from '../../types/rs-types/rs-soknadstype'
-import { flexGatewayRoot } from '../../utils/environment'
 import { jsonDeepCopy } from '../../utils/json-deep-copy'
 import { feilVedSlettingAvKvittering } from './data/reisetilskudd'
 import {
@@ -38,7 +37,7 @@ const setUpMock = (person: Persona) => {
     })
 
     mock.put(
-        '/syk/sykepengesoknad/api/v1/soknader/:soknad/sporsmal/:sporsmal',
+        '/syk/sykepengesoknad/api/sykepengesoknad-backend/api/v2/soknader/:soknad/sporsmal/:sporsmal',
         (req) => {
             if (
                 req.pathParams.soknad ===
@@ -70,7 +69,7 @@ const setUpMock = (person: Persona) => {
     )
 
     mock.post(
-        '/syk/sykepengesoknad/api/v1/soknader/:soknad/korriger',
+        '/syk/sykepengesoknad/api/sykepengesoknad-backend/api/v2/soknader/:soknad/korriger',
         (req, res, ctx) => {
             const original = soknader.find(
                 (sok: RSSoknad) => sok.id === req.pathParams.soknad
@@ -90,7 +89,7 @@ const setUpMock = (person: Persona) => {
     )
 
     mock.post(
-        '/syk/sykepengesoknad/api/v1/opprettSoknadUtland',
+        '/syk/sykepengesoknad/api/sykepengesoknad-backend/v2/opprettSoknadUtland',
         (req, res, ctx) => {
             const soknad = person.soknader.find(
                 (sok: RSSoknad) =>
@@ -114,7 +113,7 @@ const setUpMock = (person: Persona) => {
     )
 
     mock.post(
-        '/syk/sykepengesoknad/api/v1/soknader/:soknad/finnMottaker',
+        '/syk/sykepengesoknad/api/sykepengesoknad-backend/api/v2/soknader/:soknad/finnMottaker',
         (req, res, ctx) => {
             const soknadId = req.pathParams.soknad
 
@@ -147,38 +146,43 @@ const setUpMock = (person: Persona) => {
         }
     )
 
-    mock.get('/syk/sykepengesoknad/api/v1/soknader', (req, res, ctx) =>
-        res(ctx.json(person.soknader))
+    mock.get(
+        '/syk/sykepengesoknad/api/sykepengesoknad-backend/api/v2/soknader',
+        (req, res, ctx) => res(ctx.json(person.soknader))
     )
 
-    mock.get('/syk/sykepengesoknad/api/v1/sykmeldinger', (req, res, ctx) =>
-        res(ctx.json(person.sykmeldinger))
-    )
-
-    mock.post('/syk/sykepengesoknad/api/v1/soknader/:soknad/send', () =>
-        Promise.resolve({ status: 200 })
+    mock.get(
+        '/syk/sykepengesoknad/api/sykmeldinger-backend/api/v2/sykmeldinger',
+        (req, res, ctx) => res(ctx.json(person.sykmeldinger))
     )
 
     mock.post(
-        '/syk/sykepengesoknad/api/v1/soknader/:soknad/ettersendTilNav',
+        '/syk/sykepengesoknad/api/sykepengesoknad-backend/api/v2/soknader/:soknad/send',
         () => Promise.resolve({ status: 200 })
     )
 
     mock.post(
-        '/syk/sykepengesoknad/api/v1/soknader/:soknad/ettersendTilArbeidsgiver',
+        '/syk/sykepengesoknad/api/sykepengesoknad-backend/api/v2/soknader/:soknad/ettersendTilNav',
         () => Promise.resolve({ status: 200 })
     )
 
-    mock.post('/syk/sykepengesoknad/api/v1/soknader/:soknad/avbryt', () =>
-        Promise.resolve({ status: 200 })
+    mock.post(
+        '/syk/sykepengesoknad/api/sykepengesoknad-backend/api/v2/soknader/:soknad/ettersendTilArbeidsgiver',
+        () => Promise.resolve({ status: 200 })
     )
 
-    mock.post('/syk/sykepengesoknad/api/v1/soknader/:soknad/gjenapne', () =>
-        Promise.resolve({ status: 200 })
+    mock.post(
+        '/syk/sykepengesoknad/api/sykepengesoknad-backend/api/v2/soknader/:soknad/avbryt',
+        () => Promise.resolve({ status: 200 })
+    )
+
+    mock.post(
+        '/syk/sykepengesoknad/api/sykepengesoknad-backend/api/v2/soknader/:soknad/gjenapne',
+        () => Promise.resolve({ status: 200 })
     )
 
     mock.delete(
-        '/syk/sykepengesoknad/api/v1/soknader/:soknad/sporsmal/:spmid/svar/:svarid',
+        '/syk/sykepengesoknad/api/sykepengesoknad-backend/api/v2/soknader/:soknad/sporsmal/:spmid/svar/:svarid',
         (req) => {
             if (req.pathParams.soknad === feilVedSlettingAvKvittering.id) {
                 return Promise.resolve({ status: 500 })
@@ -188,7 +192,7 @@ const setUpMock = (person: Persona) => {
     )
 
     mock.post(
-        '/syk/sykepengesoknad/api/v1/soknader/:soknad/sporsmal/:spmid/svar',
+        '/syk/sykepengesoknad/api/sykepengesoknad-backend/api/v2/soknader/:soknad/sporsmal/:spmid/svar',
         (req) => {
             const r = soknader.find((r) => r.id === req.pathParams.soknad)
             const spm = jsonDeepCopy(
@@ -203,7 +207,7 @@ const setUpMock = (person: Persona) => {
     )
 
     mock.post(
-        `${flexGatewayRoot()}/flex-bucket-uploader/opplasting`,
+        '/syk/sykepengesoknad/api/flex-bucket-uploader/api/v2/opplasting',
         (req, res, ctx) =>
             res(
                 ctx.json({
@@ -213,8 +217,9 @@ const setUpMock = (person: Persona) => {
             )
     )
 
-    mock.get(`${flexGatewayRoot()}/flex-bucket-uploader/kvittering/:blob`, () =>
-        fetch('/syk/sykepengesok/static/kvittering.jpg')
+    mock.get(
+        '/syk/sykepengesoknad/api/flex-bucket-uploader/api/v2/kvittering/:blob',
+        () => fetch('/syk/sykepengesok/static/kvittering.jpg')
     )
 }
 

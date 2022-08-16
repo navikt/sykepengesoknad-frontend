@@ -46,7 +46,7 @@ const Slettknapp = ({ sporsmal, kvittering, update }: SlettknappProps) => {
             )
 
             const res = await fetch(
-                `/syk/sykepengesoknad/api/v1/soknader/${valgtSoknad?.id}/sporsmal/${sporsmal?.id}/svar/${svar?.id}`,
+                `/syk/sykepengesoknad/api/sykepengesoknad-backend/api/v2/soknader/${valgtSoknad?.id}/sporsmal/${sporsmal?.id}/svar/${svar?.id}`,
                 {
                     method: 'DELETE',
                     credentials: 'include',
