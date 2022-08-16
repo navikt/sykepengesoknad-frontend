@@ -21,13 +21,13 @@ import { RSSporsmal } from '../../src/types/rs-types/rs-sporsmal'
 import { RSSvartype } from '../../src/types/rs-types/rs-svartype'
 
 beforeEach(() => {
-    cy.injectAxe()
     cy.window().then((win) => {
         cy.spy(win, 'fetch').as('winFetch')
     })
 })
 
 afterEach(() => {
+    cy.injectAxe()
     cy.checkA11y(
         undefined,
         {
