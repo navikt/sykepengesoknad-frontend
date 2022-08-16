@@ -23,7 +23,7 @@ const OpprettUtland = () => {
 
     const opprett = () => {
         opprettUtland.fetch(
-            '/syk/sykepengesoknad/api/sykepengesoknad-backend/v2/opprettSoknadUtland',
+            '/syk/sykepengesoknad/api/sykepengesoknad-backend/api/v2/opprettSoknadUtland',
             {
                 method: 'POST',
                 credentials: 'include',

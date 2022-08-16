@@ -89,7 +89,7 @@ const setUpMock = (person: Persona) => {
     )
 
     mock.post(
-        '/syk/sykepengesoknad/api/sykepengesoknad-backend/v2/opprettSoknadUtland',
+        '/syk/sykepengesoknad/api/sykepengesoknad-backend/api/v2/opprettSoknadUtland',
         (req, res, ctx) => {
             const soknad = person.soknader.find(
                 (sok: RSSoknad) =>
