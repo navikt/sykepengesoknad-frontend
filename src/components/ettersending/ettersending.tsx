@@ -57,7 +57,7 @@ const Ettersending = ({
 
     const ettersendNav = async () => {
         const res = await fetch(
-            `/syk/sykepengesoknad/api/v1/soknader/${
+            `/syk/sykepengesoknad/api/sykepengesoknad-backend/api/v2/soknader/${
                 valgtSoknad!.id
             }/ettersendTilNav`,
             {
@@ -80,7 +80,7 @@ const Ettersending = ({
 
     const ettersendArbeidsgiver = async () => {
         const res = await fetch(
-            `/syk/sykepengesoknad/api/v1/soknader/${
+            `/syk/sykepengesoknad/api/sykepengesoknad-backend/api/v2/soknader/${
                 valgtSoknad!.id
             }/ettersendTilArbeidsgiver`,
             {

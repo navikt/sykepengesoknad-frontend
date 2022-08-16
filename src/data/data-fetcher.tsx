@@ -26,7 +26,7 @@ export function DataFetcher(props: { children: any }) {
     useEffect(() => {
         if (isNotStarted(rssoknader)) {
             rssoknader.fetch(
-                '/syk/sykepengesoknad/api/v1/soknader',
+                '/syk/sykepengesoknad/api/sykepengesoknad-backend/api/v2/soknader',
                 {
                     credentials: 'include',
                 },
@@ -42,7 +42,8 @@ export function DataFetcher(props: { children: any }) {
             )
         }
         if (isNotStarted(sykmeldinger)) {
-            const url = '/syk/sykepengesoknad/api/v1/sykmeldinger'
+            const url =
+                '/syk/sykepengesoknad/api/sykmeldinger-backend/api/v2/sykmeldinger'
             sykmeldinger.fetch(
                 url,
                 {

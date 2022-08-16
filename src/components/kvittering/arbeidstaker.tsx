@@ -134,7 +134,7 @@ const Arbeidstaker = () => {
     async function erForsteSoknadUtenforArbeidsgiverperiode(id?: string) {
         if (id === undefined) return true
         const res = await fetch(
-            `/syk/sykepengesoknad/api/v1/soknader/${id}/finnMottaker`,
+            `/syk/sykepengesoknad/api/sykepengesoknad-backend/api/v2/soknader/${id}/finnMottaker`,
             {
                 method: 'POST',
                 credentials: 'include',

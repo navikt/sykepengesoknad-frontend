@@ -102,9 +102,9 @@ const SporsmalForm = () => {
         let soknad = valgtSoknad
 
         const res = await fetch(
-            `/syk/sykepengesoknad/api/v1/soknader/${soknad!.id}/sporsmal/${
-                sporsmal.id
-            }`,
+            `/syk/sykepengesoknad/api/sykepengesoknad-backend/api/v2/soknader/${
+                soknad!.id
+            }/sporsmal/${sporsmal.id}`,
             {
                 method: 'PUT',
                 credentials: 'include',
@@ -182,7 +182,7 @@ const SporsmalForm = () => {
 
     const hentMottaker = () => {
         rsMottakerResponseFetch.fetch(
-            `/syk/sykepengesoknad/api/v1/soknader/${
+            `/syk/sykepengesoknad/api/sykepengesoknad-backend/api/v2/soknader/${
                 valgtSoknad!.id
             }/finnMottaker`,
             {
@@ -217,7 +217,9 @@ const SporsmalForm = () => {
             }
         }
         const res = await fetch(
-            `/syk/sykepengesoknad/api/v1/soknader/${valgtSoknad!.id}/send`,
+            `/syk/sykepengesoknad/api/sykepengesoknad-backend/api/v2/soknader/${
+                valgtSoknad!.id
+            }/send`,
             {
                 method: 'POST',
                 credentials: 'include',

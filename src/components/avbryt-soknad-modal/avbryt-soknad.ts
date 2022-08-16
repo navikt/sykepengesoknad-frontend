@@ -27,7 +27,9 @@ export async function avbrytSoknad({
     setFeilmeldingTekst,
 }: AvbrytSoknadReq) {
     const res = await fetch(
-        `/syk/sykepengesoknad/api/v1/soknader/${valgtSoknad!.id}/avbryt`,
+        `/syk/sykepengesoknad/api/sykepengesoknad-backend/api/v2/soknader/${
+            valgtSoknad!.id
+        }/avbryt`,
         {
             method: 'POST',
             credentials: 'include',
