@@ -31,12 +31,32 @@ afterEach(() => {
     cy.checkA11y(
         undefined,
         {
+            // prettier-ignore
             rules: {
-                'svg-img-alt': { enabled: false },
+                'svg-img-alt': { enabled: false }, // Trenger ikke alt tekst på bilder
+                // TODO: Se på disse :point_down:
+                'aria-allowed-attr': { enabled: false },
+                'heading-order': { enabled: false },
+                'aria-progressbar-name': { enabled: false },
+                'nested-interactive': { enabled: false },
+                'aria-hidden-focus': { enabled: false },
+                'duplicate-id-aria': { enabled: false },
+                'duplicate-id': { enabled: false },
+                'label': { enabled: false },
+                'list': { enabled: false },
+                'listitem': { enabled: false },
+                'color-contrast': { enabled: false },
+                'page-has-heading-one': { enabled: false },
+                'aria-dialog-name': { enabled: false },
+                'landmark-one-main': { enabled: false },
+                'aria-input-field-name': { enabled: false },
+                'document-title': { enabled: false },
+                'region': { enabled: false },
+                'button-name': { enabled: false },
             },
         },
         terminalLog,
-        true
+        false
     )
     cy.get('@winFetch').should((a: any) => {
         lyttTilNettverksKall(a)
