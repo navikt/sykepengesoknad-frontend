@@ -20,13 +20,13 @@ describe('Tester at åpne sykmeldinger må sendes inn', () => {
             )
 
             cy.contains('Gå til sykmeldingen').click()
-        })
-
-        it('Vi lander på sykmeldingen', function () {
             cy.url().should(
                 'equal',
                 'https://sykmeldinger.labs.nais.io/syk/sykmeldinger/APEN'
             )
+
+            // Går tilbake til soknaden for å ikke kjøre cypress axe på sykmeldinger sin frontend
+            cy.go('back')
         })
     })
 
@@ -49,13 +49,14 @@ describe('Tester at åpne sykmeldinger må sendes inn', () => {
             )
 
             cy.contains('Gå til sykmeldingen').click()
-        })
 
-        it('Vi lander på sykmeldingen', function () {
             cy.url().should(
                 'equal',
                 'https://sykmeldinger.labs.nais.io/syk/sykmeldinger/APEN'
             )
+
+            // Går tilbake til soknaden for å ikke kjøre cypress axe på sykmeldinger sin frontend
+            cy.go('back')
         })
     })
 })
