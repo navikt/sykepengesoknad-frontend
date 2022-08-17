@@ -63,9 +63,14 @@ export async function proxyKallTilBackend(opts: Opts) {
         res2.on('data', (d: any) => {
             opts.res.write(d)
         })
-        res2.on('end', (d: any) => {
+        res2.on('end', () => {
             opts.res.end()
         })
+        stream.on('error', (err) =>
+            logger.error(
+                `Feil ved lesing av backend stream. Message: ${err.message}, Cause: ${err.cause}, URL: ${opts.req.url}`
+            )
+        )
     })
 
     backendReq.write(bodyin)
