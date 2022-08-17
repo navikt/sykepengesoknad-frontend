@@ -30,8 +30,12 @@ const RadioKomp = ({ sporsmal }: SpmProps) => {
         register,
         formState: { errors },
         watch,
+        getValues,
     } = useFormContext()
-    const watchRadio = watch(sporsmal.id)
+    let watchRadio = watch(sporsmal.id)
+    if (watchRadio === undefined) {
+        watchRadio = getValues(sporsmal.id)
+    }
     const feilmelding = hentFeilmelding(sporsmal)
     const forceUpdate = useForceUpdate()
     const { valgtSoknad } = useAppStore()

@@ -75,6 +75,7 @@ const SporsmalForm = () => {
     const rsMottakerResponseFetch = useFetch<RSMottakerResponse>()
 
     useEffect(() => {
+        const formState = hentFormState(sporsmal)
         methods.reset(hentFormState(sporsmal), { keepValues: false })
         // eslint-disable-next-line
     }, [sporsmal])
@@ -100,7 +101,6 @@ const SporsmalForm = () => {
 
     const sendOppdaterSporsmal = async () => {
         let soknad = valgtSoknad
-
         const res = await fetch(
             `/syk/sykepengesoknad/api/sykepengesoknad-backend/api/v2/soknader/${
                 soknad!.id

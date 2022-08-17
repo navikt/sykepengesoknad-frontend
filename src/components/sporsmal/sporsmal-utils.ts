@@ -1,4 +1,4 @@
-import { FieldError } from 'react-hook-form'
+import { FieldError, FieldErrorsImpl, Merge } from 'react-hook-form'
 
 import { TagTyper } from '../../types/enums'
 import { RSSoknadstype } from '../../types/rs-types/rs-soknadstype'
@@ -67,21 +67,24 @@ interface FeilmeldingProps {
 
 export const hentFeilmelding = (
     sporsmal: Sporsmal,
-    error?: FieldError
+    error?: FieldError | Merge<FieldError, FieldErrorsImpl<any>> | undefined
 ): FeilmeldingProps => {
     const feilmelding: FeilmeldingProps = {
         global: tekst(('soknad.feilmelding.' + sporsmal.tag) as any),
         lokal: tekst(('soknad.feilmelding.' + sporsmal.tag + '.lokal') as any),
     }
     if (feilmelding.lokal === undefined) {
-        feilmelding.lokal = hentGeneriskFeilmelding(sporsmal.svartype, error)!
+        feilmelding.lokal = hentGeneriskFeilmelding(
+            sporsmal.svartype,
+            error
+        )! as string
     }
     return feilmelding
 }
 
 export const hentGeneriskFeilmelding = (
     svartype: RSSvartype,
-    error?: FieldError
+    error?: FieldError | Merge<FieldError, FieldErrorsImpl<any>> | undefined
 ) => {
     const type = error?.type
 
