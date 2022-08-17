@@ -134,7 +134,9 @@ describe('Tester arbeidstakersøknad - gradert 50%', () => {
         cy.contains(
             'Hvor mange timer i uken jobber du vanligvis når du er frisk? Varierer det, kan du oppgi gjennomsnittet.'
         )
-        cy.get('.undersporsmal .skjemaelement__input#687312').focus().type('12')
+        cy.get('.undersporsmal .navds-text-field__input#687312')
+            .focus()
+            .type('12')
 
         // Underspørsmål 2
         cy.contains('Hvor mye jobbet du tilsammen 1. - 24. april 2020?')
@@ -143,7 +145,9 @@ describe('Tester arbeidstakersøknad - gradert 50%', () => {
         cy.get('.undersporsmal .skjemaelement__input.radioknapp[value=Prosent]')
             .focus()
             .click({ force: true })
-        cy.get('.undersporsmal .skjemaelement__input#687315').focus().type('51')
+        cy.get('.undersporsmal .navds-text-field__input#687315')
+            .focus()
+            .type('51')
         // Svarer timer
         cy.get('.undersporsmal .skjemaelement__input.radioknapp[value=Timer]')
             .focus()
@@ -151,7 +155,7 @@ describe('Tester arbeidstakersøknad - gradert 50%', () => {
         // Ferie/permisjon/tilbake i arbeid dekker alle datoer fra dag 14.
         // Gradkalkulatoren dermed vil regne ut at man har hatt 9 arbeidsdager i denne perioden
         // 12 timer * (9 dager/5) * 0.5 (50% sykefraværsgrad) = 10.8 timer, så vi prøver litt lavere enn det
-        cy.get('.undersporsmal .skjemaelement__input#687317')
+        cy.get('.undersporsmal .navds-text-field__input#687317')
             .focus()
             .type('10.7')
 
@@ -169,7 +173,7 @@ describe('Tester arbeidstakersøknad - gradert 50%', () => {
         )
 
         // Endre timer til 11, som er mer enn 10.8
-        cy.get('.undersporsmal .skjemaelement__input#687317')
+        cy.get('.undersporsmal .navds-text-field__input#687317')
             .focus()
             .type('{selectall}')
             .type('11')

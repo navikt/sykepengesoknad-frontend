@@ -447,7 +447,7 @@ export const gradertReisetilskudd: RSSoknad = {
                     tag: 'HVOR_MANGE_TIMER_PER_UKE_0',
                     sporsmalstekst:
                         'Hvor mange timer i uken jobber du vanligvis når du er frisk? Varierer det, kan du oppgi gjennomsnittet.',
-                    undertekst: 'timer per uke',
+                    undertekst: 'Oppgi timer per uke',
                     svartype: 'TALL',
                     min: '1',
                     max: '150',

@@ -153,7 +153,9 @@ describe('Tester arbeidstakersøknad', () => {
         cy.contains(
             'Hvor mange timer i uken jobber du vanligvis når du er frisk? Varierer det, kan du oppgi gjennomsnittet.'
         )
-        cy.get('.undersporsmal .skjemaelement__input#687350').focus().type('9')
+        cy.get('.undersporsmal .navds-text-field__input#687350')
+            .focus()
+            .type('9')
 
         // Underspørsmål 2
         cy.contains('Hvor mye jobbet du tilsammen 1. - 24. april 2020?')
@@ -161,7 +163,9 @@ describe('Tester arbeidstakersøknad', () => {
         cy.get('.undersporsmal .skjemaelement__input.radioknapp[value=Prosent]')
             .focus()
             .click({ force: true })
-        cy.get('.undersporsmal .skjemaelement__input#687353').focus().type('21')
+        cy.get('.undersporsmal .navds-text-field__input#687353')
+            .focus()
+            .type('21')
         // Velger timer
         cy.get('.undersporsmal .skjemaelement__input.radioknapp[value=Timer]')
             .focus()
@@ -170,7 +174,9 @@ describe('Tester arbeidstakersøknad', () => {
             'not.exist'
         )
         // Svarer timer
-        cy.get('.undersporsmal .skjemaelement__input#687355').focus().type('21')
+        cy.get('.undersporsmal .navds-text-field__input#687355')
+            .focus()
+            .type('21')
         cy.contains('Er prosenten lavere enn du forventet?').should('not.exist')
         // Denne personen har vært tilbake i arbeid 20 april, har hatt ferie 16-23 april, og hatt permisjon 14-22 april
         cy.get('.undersporsmal .navds-alert--info').should(

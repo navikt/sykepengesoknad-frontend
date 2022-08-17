@@ -56,15 +56,13 @@ describe('Tester støtte for gamle spørsmål', () => {
         cy.get('.undersporsmal .skjemaelement__input.radioknapp[value=timer]')
             .focus()
             .click({ force: true })
-        cy.get(`.undersporsmal .skjemaelement__input#${id}`).focus().type('21')
+        cy.get(`.undersporsmal .navds-text-field__input#${id}`)
+            .focus()
+            .type('21')
     }
 
     function velgTall(sporsmalstekst: string, verdi: string) {
-        cy.contains(sporsmalstekst)
-            .siblings()
-            .within(() => {
-                cy.get('.skjemaelement__input').type(verdi)
-            })
+        cy.contains(sporsmalstekst).get('.navds-text-field__input').type(verdi)
     }
 
     function velgCheckbox(gjelder: string) {
