@@ -45,7 +45,7 @@ const FristSykepenger = ({ soknadstype }: FristSykepengerProps) => {
                     <Utvidbar
                         erApen={false}
                         type="intern"
-                        tittel="Eksempel"
+                        tittel="Vis eksempler"
                         amplitudeProps={{ component: 'Eksempel' }}
                     >
                         <Heading size="xsmall" level="3">
