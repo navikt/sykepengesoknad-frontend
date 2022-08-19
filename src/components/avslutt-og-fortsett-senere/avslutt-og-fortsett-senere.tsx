@@ -46,7 +46,7 @@ const AvsluttOgFortsettSenere = () => {
                 <Modal.Content>
                     <Heading
                         size="small"
-                        level="3"
+                        level="1"
                         className="modal__tittel"
                         id="modal-tittel"
                     >

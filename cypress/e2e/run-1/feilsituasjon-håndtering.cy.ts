@@ -35,9 +35,8 @@ describe('Tester feilsituasjoner ', () => {
                 'equal',
                 'http://localhost:8080/syk/sykepengesoknad/'
             )
-            cy.contains(
-                'Ooops! Her har det skjedd noe rart. Du må laste inn siden på nytt for å fortsette'
-            )
+            cy.contains('Ooops! Her har det skjedd noe rart')
+            cy.contains('Du må laste inn siden på nytt for å fortsette')
 
             cy.contains('Last inn siden på nytt').click()
             cy.get('.navds-heading--xlarge')
@@ -74,9 +73,8 @@ describe('Tester feilsituasjoner ', () => {
                 'equal',
                 'http://localhost:8080/syk/sykepengesoknad/'
             )
-            cy.contains(
-                'Ooops! Her har det skjedd noe rart. Du må laste inn siden på nytt for å fortsette'
-            )
+            cy.contains('Ooops! Her har det skjedd noe rart')
+            cy.contains('Du må laste inn siden på nytt for å fortsette')
 
             cy.contains('Last inn siden på nytt').click()
             cy.get('.navds-heading--xlarge')

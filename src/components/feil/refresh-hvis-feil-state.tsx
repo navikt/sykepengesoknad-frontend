@@ -1,4 +1,4 @@
-import { Alert, Button } from '@navikt/ds-react'
+import { Alert, BodyShort, Button, Heading } from '@navikt/ds-react'
 import React, { useEffect } from 'react'
 import { useHistory } from 'react-router-dom'
 
@@ -19,7 +19,12 @@ export function FeilView() {
     return (
         <div className="limit">
             <div aria-live="polite">
-                <Alert variant="error">{tekst('feilstate.alert')}</Alert>
+                <Alert variant="error">
+                    <Heading level="1" size="small">
+                        {tekst('feilstate.tittel')}
+                    </Heading>
+                    <BodyShort>{tekst('feilstate.alert')}</BodyShort>
+                </Alert>
             </div>
             <div className="knappewrapper">
                 <Button

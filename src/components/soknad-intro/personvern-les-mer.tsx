@@ -48,7 +48,7 @@ const PersonvernLesMer = () => {
                 <Modal.Content>
                     <Heading
                         size="medium"
-                        level="3"
+                        level="1"
                         className="modal__tittel"
                         id="modal-tittel"
                     >
