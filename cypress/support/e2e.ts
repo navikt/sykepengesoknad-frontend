@@ -49,7 +49,7 @@ afterEach(() => {
                 'page-has-heading-one': { enabled: false },
                 'aria-dialog-name': { enabled: false },
                 'landmark-one-main': { enabled: false },
-                'aria-input-field-name': { enabled: false },
+                'aria-input-field-name': { enabled: false },    // Kanskje vi må bytte ut LandvelgerComponent
             },
         },
         terminalLog,
