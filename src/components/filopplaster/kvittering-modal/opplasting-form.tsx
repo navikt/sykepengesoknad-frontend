@@ -173,7 +173,11 @@ const OpplastingForm = ({ sporsmal }: SpmProps) => {
     return (
         <FormProvider {...methods}>
             <form className="opplasting-form" key="opplasting_form">
-                <Heading size="medium" className="opplasting-header">
+                <Heading
+                    size="medium"
+                    className="opplasting-header"
+                    id="modal-tittel"
+                >
                     {kvitteringHeader}
                 </Heading>
 

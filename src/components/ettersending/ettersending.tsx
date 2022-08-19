@@ -115,6 +115,7 @@ const Ettersending = ({
                 onClose={() => setVilEttersende(false)}
                 className="ettersending"
                 open={vilEttersende}
+                aria-label="Ettersend søknad"
             >
                 <Modal.Content>
                     <BodyShort>

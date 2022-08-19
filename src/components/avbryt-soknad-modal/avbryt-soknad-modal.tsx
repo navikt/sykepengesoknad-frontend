@@ -88,6 +88,7 @@ const AvbrytSoknadModal = () => {
                 }}
                 closeButton={false}
                 open={aapen}
+                aria-label="Ønsker ikke bruke søknaden"
             >
                 <Modal.Content>
                     <BodyLong spacing size="medium">

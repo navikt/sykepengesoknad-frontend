@@ -47,7 +47,6 @@ afterEach(() => {
                 'listitem': { enabled: false },
                 'color-contrast': { enabled: false },
                 'page-has-heading-one': { enabled: false },
-                'aria-dialog-name': { enabled: false },
                 'landmark-one-main': { enabled: false },        // Hvorfor godtar den ikke role="dialog" på modalene
                 'aria-input-field-name': { enabled: false },    // Kanskje vi må bytte ut LandvelgerComponent
             },

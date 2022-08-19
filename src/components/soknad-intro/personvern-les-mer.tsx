@@ -43,9 +43,15 @@ const PersonvernLesMer = () => {
                     amplitudeLukketPopup()
                 }}
                 open={aapen}
+                aria-labelledby="modal-tittel"
             >
                 <Modal.Content>
-                    <Heading size="medium" level="3" className="modal__tittel">
+                    <Heading
+                        size="medium"
+                        level="3"
+                        className="modal__tittel"
+                        id="modal-tittel"
+                    >
                         {tekst(
                             'sykepengesoknad.soknad-intro.personvern-modal-header'
                         )}

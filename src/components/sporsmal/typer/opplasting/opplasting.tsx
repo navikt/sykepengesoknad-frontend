@@ -100,6 +100,7 @@ const Opplasting = ({ sporsmal }: SpmProps) => {
                 onClose={lukkModal}
                 closeButton
                 className="opplasting_modal"
+                aria-labelledby="modal-tittel"
             >
                 <Modal.Content>
                     <OpplastingForm sporsmal={sporsmal} />

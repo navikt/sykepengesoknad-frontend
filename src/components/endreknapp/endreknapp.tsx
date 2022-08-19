@@ -86,6 +86,7 @@ const Endreknapp = () => {
                     })
                 }}
                 open={aapen}
+                aria-label="Endre svar i søknaden"
             >
                 <Modal.Content>
                     <BodyShort>{tekst('endre.modal.info')}</BodyShort>

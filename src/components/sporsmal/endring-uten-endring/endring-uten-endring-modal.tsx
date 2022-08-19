@@ -34,6 +34,7 @@ export const EndringUtenEndringModal = (
                     props.setAapen(false)
                 }}
                 open={props.aapen}
+                aria-label="Ingen endring i søknaden"
             >
                 <Modal.Content>
                     <BodyShort>
