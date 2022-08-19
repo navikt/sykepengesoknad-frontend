@@ -496,7 +496,7 @@ export const gradertReisetilskudd: RSSoknad = {
                                     id: '1547253',
                                     tag: 'HVOR_MYE_PROSENT_VERDI_0',
                                     sporsmalstekst: null,
-                                    undertekst: 'prosent',
+                                    undertekst: 'Oppgi prosent',
                                     svartype: 'TALL',
                                     min: '41',
                                     max: '99',
