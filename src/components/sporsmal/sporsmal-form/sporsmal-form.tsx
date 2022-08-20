@@ -16,6 +16,7 @@ import { sporsmalToRS } from '../../../types/rs-types/rs-sporsmal'
 import { RSSvartype } from '../../../types/rs-types/rs-svartype'
 import { Soknad, Sporsmal } from '../../../types/types'
 import { SEPARATOR } from '../../../utils/constants'
+import fetchMedRequestId from '../../../utils/fetch'
 import { logger } from '../../../utils/logger'
 import { useAmplitudeInstance } from '../../amplitude/amplitude'
 import FeilOppsummering from '../../feil/feil-oppsummering'
@@ -90,68 +91,69 @@ const SporsmalForm = () => {
 
     const sendOppdaterSporsmal = async () => {
         let soknad = valgtSoknad
-        const res = await fetch(
-            `/syk/sykepengesoknad/api/sykepengesoknad-backend/api/v2/soknader/${soknad!.id}/sporsmal/${sporsmal.id}`,
-            {
-                method: 'PUT',
-                credentials: 'include',
-                body: JSON.stringify(sporsmalToRS(sporsmal)),
-                headers: { 'Content-Type': 'application/json' },
-            }
-        )
 
+        let response
         try {
-            let data: any = {}
-            try {
-                data = await res.json()
-                // eslint-disable-next-line no-empty
-            } finally {
-            }
-
-            const httpCode = res.status
-            if ([200, 201, 203, 206].includes(httpCode)) {
-                const rsOppdaterSporsmalResponse: RSOppdaterSporsmalResponse = data
-
-                if (rsOppdaterSporsmalResponse.mutertSoknad) {
-                    soknad = new Soknad(rsOppdaterSporsmalResponse.mutertSoknad)
-                } else {
-                    const spm = rsOppdaterSporsmalResponse.oppdatertSporsmal
-                    erSiste
-                        ? (soknad!.sporsmal[spmIndex + 1] = new Sporsmal(spm, undefined as any, true))
-                        : (soknad!.sporsmal[spmIndex] = new Sporsmal(spm, undefined as any, true))
+            response = await fetchMedRequestId(`/syk/sykepengesoknad/api/sykepengesoknad-backend/api/v2/soknader/${soknad!.id
+                }/sporsmal/${sporsmal.id}`,
+                {
+                    method: 'PUT',
+                    credentials: 'include',
+                    body: JSON.stringify(sporsmalToRS(sporsmal)),
+                    headers: { 'Content-Type': 'application/json' },
                 }
-                soknader[soknader.findIndex((sok) => sok.id === soknad!.id)] = soknad as any
-                setSoknader(soknader)
-                setValgtSoknad(soknad)
-            } else if (
-                httpCode === 400 &&
-                data !== null &&
-                typeof data === 'object' &&
-                data.reason === 'FEIL_STATUS_FOR_OPPDATER_SPORSMAL'
-            ) {
-                restFeilet = true
-                setFeilState(true)
-            } else if (
-                httpCode === 400 &&
-                data !== null &&
-                typeof data === 'object' &&
-                data.reason === 'SPORSMAL_FINNES_IKKE_I_SOKNAD'
-            ) {
-                logger.warn(
-                    'SPORSMAL_FINNES_IKKE_I_SOKNAD, gir bruker mulighet for å refreshe siden for å resette state'
-                )
-                restFeilet = true
-                setFeilState(true)
-            } else {
-                if (redirectTilLoginHvis401(res)) {
-                    return
-                }
-                logger.error(`Feil ved kall OPPDATER_SPORSMAL, uhåndtert http kode ${httpCode}`, res)
-                restFeilet = true
-            }
+            )
         } catch (e) {
             restFeilet = true
+            return
         }
+
+        if (redirectTilLoginHvis401(response)) {
+            return
+        }
+
+        let data
+        try {
+            data = await response.json()
+        } catch (e) {
+            logger.error('Feilet ved parsing av JSON.', e)
+            restFeilet = true
+            return
+        }
+
+        if (!response.ok) {
+            if (['FEIL_STATUS_FOR_OPPDATER_SPORSMAL', 'SPORSMAL_FINNES_IKKE_I_SOKNAD', ].includes(data.reason)) {
+                setFeilState(true)
+            } else {
+                logger.error(`Feilet ved kall OPPDATER_SPORSMAL med uhåndtert http kode ${response.status}.`, response)
+            }
+
+            restFeilet = true
+            return
+        }
+
+        const rsOppdaterSporsmalResponse: RSOppdaterSporsmalResponse = data
+        if (rsOppdaterSporsmalResponse.mutertSoknad) {
+            soknad = new Soknad(rsOppdaterSporsmalResponse.mutertSoknad)
+        } else {
+            const spm = rsOppdaterSporsmalResponse.oppdatertSporsmal
+            erSiste
+                ? (soknad!.sporsmal[spmIndex + 1] = new Sporsmal(
+                      spm,
+                      undefined as any,
+                      true
+                  ))
+                : (soknad!.sporsmal[spmIndex] = new Sporsmal(
+                      spm,
+                      undefined as any,
+                      true
+                  ))
+        }
+
+        soknader[soknader.findIndex((sok) => sok.id === soknad!.id)] =
+            soknad as any
+        setSoknader(soknader)
+        setValgtSoknad(soknad)
     }
 
     const hentMottaker = () => {
