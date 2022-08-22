@@ -1,5 +1,5 @@
 import { Alert, BodyLong, BodyShort, Label, Radio, RadioGroup } from '@navikt/ds-react'
-import React, { useEffect, useState } from 'react'
+import React, { useState } from 'react'
 import { useFormContext } from 'react-hook-form'
 
 import { useAppStore } from '../../../data/stores/app-store'
@@ -34,10 +34,7 @@ const RadioKomp = ({ sporsmal }: SpmProps) => {
     // noinspection JSUnusedLocalSymbols
     const watchTimer =
         watchRadio?.toLowerCase() === 'timer'
-            ? watch(
-                  hentUndersporsmal(sporsmal!, TagTyper.HVOR_MYE_TIMER_VERDI)!
-                      .id
-              )
+            ? watch(hentUndersporsmal(sporsmal!, TagTyper.HVOR_MYE_TIMER_VERDI)!.id)
             : undefined
     const feilmelding = hentFeilmelding(sporsmal)
     const { valgtSoknad } = useAppStore()
@@ -45,9 +42,7 @@ const RadioKomp = ({ sporsmal }: SpmProps) => {
     const [surveySvart, setSurveySvart] = useState<boolean>(false)
     const { logEvent } = useAmplitudeInstance()
 
-    const lavereProsentHjelpTittel = tekst(
-        'ekspanderbarhjelp.prosenten_lavere_enn_forventet_arbeidstaker.tittel'
-    )
+    const lavereProsentHjelpTittel = tekst('ekspanderbarhjelp.prosenten_lavere_enn_forventet_arbeidstaker.tittel')
     return (
         <>
             <SporsmalstekstH3 sporsmal={sporsmal} />
@@ -96,11 +91,7 @@ const RadioKomp = ({ sporsmal }: SpmProps) => {
             <FeilLokal sporsmal={sporsmal} />
 
             <Vis
-                hvis={
-                    watchRadio?.toLowerCase() === 'timer' &&
-                    beregnGrad?.() &&
-                    validerGrad!() == true
-                }
+                hvis={watchRadio?.toLowerCase() === 'timer' && beregnGrad?.() && validerGrad!() == true}
                 render={() => (
                     <Alert variant="info" style={{ marginTop: '1rem' }}>
                         <BodyShort>

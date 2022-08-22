@@ -91,27 +91,18 @@ const TallKomp = ({ sporsmal }: SpmProps) => {
                     min: {
                         value: sporsmal.min!,
                         message: sporsmal.max
-                            ? getLedetekst(
-                                  tekst('soknad.feilmelding.TALL_MIN_MAX'),
-                                  {
-                                      '%MIN%': sporsmal.min,
-                                      '%MAX%': sporsmal.max,
-                                  }
-                              )
-                            : getLedetekst(
-                                  tekst('soknad.feilmelding.TALL_MIN'),
-                                  { '%MIN%': sporsmal.min }
-                              ),
+                            ? getLedetekst(tekst('soknad.feilmelding.TALL_MIN_MAX'), {
+                                  '%MIN%': sporsmal.min,
+                                  '%MAX%': sporsmal.max,
+                              })
+                            : getLedetekst(tekst('soknad.feilmelding.TALL_MIN'), { '%MIN%': sporsmal.min }),
                     },
                     max: {
                         value: sporsmal.max!,
-                        message: getLedetekst(
-                            tekst('soknad.feilmelding.TALL_MIN_MAX'),
-                            {
-                                '%MIN%': sporsmal.min,
-                                '%MAX%': sporsmal.max,
-                            }
-                        ),
+                        message: getLedetekst(tekst('soknad.feilmelding.TALL_MIN_MAX'), {
+                            '%MIN%': sporsmal.min,
+                            '%MAX%': sporsmal.max,
+                        }),
                     },
                 })}
             />
