@@ -2,17 +2,12 @@ import { feilVedSlettingAvKvittering } from '../../../src/data/mock/data/reiseti
 
 describe('Test sletting av kvittering som feiler', () => {
     before(() => {
-        cy.visit(
-            `syk/sykepengesoknad/soknader/${feilVedSlettingAvKvittering.id}/4?testperson=reisetilskudd`
-        )
+        cy.visit(`syk/sykepengesoknad/soknader/${feilVedSlettingAvKvittering.id}/4?testperson=reisetilskudd`)
     })
 
     describe('Sletting', () => {
         it('URL er riktig', () => {
-            cy.url().should(
-                'include',
-                `/syk/sykepengesoknad/soknader/${feilVedSlettingAvKvittering.id}/4`
-            )
+            cy.url().should('include', `/syk/sykepengesoknad/soknader/${feilVedSlettingAvKvittering.id}/4`)
         })
 
         it('Laster opp Taxi-kvittering', () => {
@@ -20,9 +15,7 @@ describe('Test sletting av kvittering som feiler', () => {
             cy.contains('Legg til reiseutgift')
             cy.get('select[name=transportmiddel]').select('TAXI')
             cy.get('input[name=belop_input]').type('1234')
-            cy.get('.filopplasteren input[type=file]').attachFile(
-                'kvittering.jpg'
-            )
+            cy.get('.filopplasteren input[type=file]').attachFile('kvittering.jpg')
             cy.get('.lagre-kvittering').contains('Bekreft').click()
         })
 

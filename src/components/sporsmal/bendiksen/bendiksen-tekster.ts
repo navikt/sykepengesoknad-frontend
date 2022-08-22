@@ -1,6 +1,5 @@
 const BendiksenTekster = {
-    'soknad.bendiksen.paske.label':
-        'Jeg var syk på de røde dagene i påsken. Er det ferie?',
+    'soknad.bendiksen.paske.label': 'Jeg var syk på de røde dagene i påsken. Er det ferie?',
     'soknad.bendiksen.paske.tekst':
         'En offentlig helligdag ("rød dag") regnes ikke som en feriedag, med mindre du har avtalt med arbeidsgiveren din at du skal ta ut ferie på en rød dag.',
     'soknad.bendiksen.paske.tips':

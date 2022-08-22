@@ -1,12 +1,4 @@
-import {
-    Accordion,
-    Alert,
-    BodyLong,
-    BodyShort,
-    Heading,
-    Label,
-    Link,
-} from '@navikt/ds-react'
+import { Accordion, Alert, BodyLong, BodyShort, Heading, Label, Link } from '@navikt/ds-react'
 import parser from 'html-react-parser'
 import React, { useState } from 'react'
 
@@ -36,21 +28,9 @@ const OmSykepenger = () => {
                                 {tekst('om.sykepenger.arbeidstakere.tittel')}
                             </Accordion.Header>
                             <Accordion.Content>
-                                <BodyLong spacing>
-                                    {tekst(
-                                        'om.sykepenger.arbeidstakere.tekst1'
-                                    )}
-                                </BodyLong>
-                                <BodyLong spacing>
-                                    {tekst(
-                                        'om.sykepenger.arbeidstakere.tekst2'
-                                    )}
-                                </BodyLong>
-                                <Alert variant="info">
-                                    {tekst(
-                                        'om.sykepenger.arbeidstakere.alertstripe'
-                                    )}
-                                </Alert>
+                                <BodyLong spacing>{tekst('om.sykepenger.arbeidstakere.tekst1')}</BodyLong>
+                                <BodyLong spacing>{tekst('om.sykepenger.arbeidstakere.tekst2')}</BodyLong>
+                                <Alert variant="info">{tekst('om.sykepenger.arbeidstakere.alertstripe')}</Alert>
                             </Accordion.Content>
                         </Accordion.Item>
 
@@ -59,54 +39,22 @@ const OmSykepenger = () => {
                                 {tekst('om.sykepenger.selvstendige.tittel')}
                             </Accordion.Header>
                             <Accordion.Content>
-                                <BodyLong spacing>
-                                    {parser(
-                                        tekst(
-                                            'om.sykepenger.selvstendige.tekst1'
-                                        )
-                                    )}
-                                </BodyLong>
-                                <BodyLong spacing>
-                                    {tekst('om.sykepenger.selvstendige.tekst2')}
-                                </BodyLong>
-                                <BodyLong spacing>
-                                    {tekst('om.sykepenger.selvstendige.tekst3')}
-                                </BodyLong>
-                                <Label as="h3">
-                                    {tekst('om.sykepenger.selvstendige.husk')}
-                                </Label>
-                                <BodyLong spacing>
-                                    {parser(
-                                        tekst(
-                                            'om.sykepenger.selvstendige.tekst4'
-                                        )
-                                    )}
-                                </BodyLong>
-                                <Alert variant="info">
-                                    {parser(
-                                        tekst(
-                                            'om.sykepenger.selvstendige.alertstripe'
-                                        )
-                                    )}
-                                </Alert>
+                                <BodyLong spacing>{parser(tekst('om.sykepenger.selvstendige.tekst1'))}</BodyLong>
+                                <BodyLong spacing>{tekst('om.sykepenger.selvstendige.tekst2')}</BodyLong>
+                                <BodyLong spacing>{tekst('om.sykepenger.selvstendige.tekst3')}</BodyLong>
+                                <Label as="h3">{tekst('om.sykepenger.selvstendige.husk')}</Label>
+                                <BodyLong spacing>{parser(tekst('om.sykepenger.selvstendige.tekst4'))}</BodyLong>
+                                <Alert variant="info">{parser(tekst('om.sykepenger.selvstendige.alertstripe'))}</Alert>
                             </Accordion.Content>
                         </Accordion.Item>
                     </Accordion>
 
                     <Label as="h3">{tekst('om.sykepenger.tittel2')}</Label>
-                    <Link
-                        href={tekst('om.sykepenger.lenke1.url')}
-                        target="_blank"
-                        rel="noopener"
-                    >
+                    <Link href={tekst('om.sykepenger.lenke1.url')} target="_blank" rel="noopener">
                         <BodyShort>{tekst('om.sykepenger.lenke1')}</BodyShort>
                     </Link>
 
-                    <Link
-                        href={tekst('om.sykepenger.lenke2.url')}
-                        target="_blank"
-                        rel="noopener"
-                    >
+                    <Link href={tekst('om.sykepenger.lenke2.url')} target="_blank" rel="noopener">
                         <BodyShort>{tekst('om.sykepenger.lenke2')}</BodyShort>
                     </Link>
                 </Accordion.Content>

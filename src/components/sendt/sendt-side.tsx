@@ -32,17 +32,8 @@ const brodsmuler: Brodsmule[] = [
 ]
 
 const SendtSide = () => {
-    const {
-        valgtSoknad,
-        soknader,
-        setValgtSoknad,
-        setValgtSykmelding,
-        sykmeldinger,
-        feilmeldingTekst,
-    } = useAppStore()
-    const [rerendreKvittering, setRerendrekvittering] = useState<Date>(
-        new Date()
-    )
+    const { valgtSoknad, soknader, setValgtSoknad, setValgtSykmelding, sykmeldinger, feilmeldingTekst } = useAppStore()
+    const [rerendreKvittering, setRerendrekvittering] = useState<Date>(new Date())
     const { logEvent } = useAmplitudeInstance()
     const { id } = useParams<RouteParams>()
 
@@ -50,9 +41,7 @@ const SendtSide = () => {
         const filtrertSoknad = soknader.find((soknad) => soknad.id === id)
         setValgtSoknad(filtrertSoknad)
 
-        const sykmelding = sykmeldinger.find(
-            (sm) => sm.id === filtrertSoknad?.sykmeldingId
-        )
+        const sykmelding = sykmeldinger.find((sm) => sm.id === filtrertSoknad?.sykmeldingId)
         setValgtSykmelding(sykmelding)
 
         logEvent('skjema åpnet', {
@@ -86,32 +75,19 @@ const SendtSide = () => {
             <Brodsmuler brodsmuler={brodsmuler} />
 
             <div className="limit sendt-side">
-                <HotjarTrigger
-                    jsTrigger={hentHotjarJsTrigger(
-                        valgtSoknad.soknadstype,
-                        'sendt'
-                    )}
-                >
+                <HotjarTrigger jsTrigger={hentHotjarJsTrigger(valgtSoknad.soknadstype, 'sendt')}>
                     <Kvittering />
 
                     <Vis
                         hvis={skalViseKnapperad}
                         render={() => (
                             <div className="knapperad">
-                                <Vis
-                                    hvis={skalViseEndre}
-                                    render={() => <Endreknapp />}
-                                />
+                                <Vis hvis={skalViseEndre} render={() => <Endreknapp />} />
 
                                 <Vis
                                     hvis={!erSendtTilNav}
                                     render={() => (
-                                        <Ettersending
-                                            gjelder="nav"
-                                            setRerendrekvittering={
-                                                setRerendrekvittering
-                                            }
-                                        />
+                                        <Ettersending gjelder="nav" setRerendrekvittering={setRerendrekvittering} />
                                     )}
                                 />
 
@@ -120,9 +96,7 @@ const SendtSide = () => {
                                     render={() => (
                                         <Ettersending
                                             gjelder="arbeidsgiver"
-                                            setRerendrekvittering={
-                                                setRerendrekvittering
-                                            }
+                                            setRerendrekvittering={setRerendrekvittering}
                                         />
                                     )}
                                 />
@@ -131,14 +105,7 @@ const SendtSide = () => {
                     />
 
                     <div aria-live="polite">
-                        <Vis
-                            hvis={feilmeldingTekst}
-                            render={() => (
-                                <Alert variant="error">
-                                    {feilmeldingTekst}
-                                </Alert>
-                            )}
-                        />
+                        <Vis hvis={feilmeldingTekst} render={() => <Alert variant="error">{feilmeldingTekst}</Alert>} />
                     </div>
                 </HotjarTrigger>
             </div>

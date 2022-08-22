@@ -12,10 +12,7 @@ interface EldreUsendtSoknadProps {
     antall: number
 }
 
-export const EldreUsendtSoknad = ({
-    eldreSoknad,
-    antall,
-}: EldreUsendtSoknadProps) => {
+export const EldreUsendtSoknad = ({ eldreSoknad, antall }: EldreUsendtSoknadProps) => {
     return (
         <GuidepanelMedKnapp
             heading={tekst('eldre.usendt.header')}
@@ -35,19 +32,12 @@ interface EldreUsendteSoknader {
     antall: number
 }
 
-export function harEldreUsendtSoknad(
-    valgtSoknad: Soknad,
-    soknader: Soknad[]
-): EldreUsendteSoknader {
+export function harEldreUsendtSoknad(valgtSoknad: Soknad, soknader: Soknad[]): EldreUsendteSoknader {
     if (!valgtSoknad.fom) {
         return { antall: 0 }
     }
     const eldreSoknader = soknader
-        .filter(
-            (s) =>
-                s.status == RSSoknadstatus.NY ||
-                s.status == RSSoknadstatus.UTKAST_TIL_KORRIGERING
-        )
+        .filter((s) => s.status == RSSoknadstatus.NY || s.status == RSSoknadstatus.UTKAST_TIL_KORRIGERING)
         .filter((s) => s.fom != null)
         .filter((s) => s.fom! < valgtSoknad.fom!)
         .sort((a, b) => a.fom!.getTime() - b.fom!.getTime())

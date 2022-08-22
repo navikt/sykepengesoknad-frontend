@@ -13,8 +13,7 @@ import Vis from '../vis'
 
 const SykmeldingPerioder = () => {
     const { valgtSoknad, valgtSykmelding } = useAppStore()
-    const sortertePerioder =
-        valgtSykmelding?.sykmeldingsperioder.sort(sorterEtterEldsteTom) || []
+    const sortertePerioder = valgtSykmelding?.sykmeldingsperioder.sort(sorterEtterEldsteTom) || []
 
     const hentPeriodeTekst = (periode: Periode) => {
         switch (periode.type) {
@@ -62,15 +61,11 @@ const SykmeldingPerioder = () => {
                                 <>
                                     <img
                                         style={{ width: 16, height: 16 }}
-                                        src={
-                                            '/syk/sykepengesoknad/static/check-box-1.png'
-                                        }
+                                        src={'/syk/sykepengesoknad/static/check-box-1.png'}
                                         alt="Avkrysset"
                                     />
                                     <BodyShort as="span">
-                                        {
-                                            ' Kan være i delvis arbeid ved bruk av reisetilskudd'
-                                        }
+                                        {' Kan være i delvis arbeid ved bruk av reisetilskudd'}
                                     </BodyShort>
                                 </>
                             )}
@@ -80,9 +75,7 @@ const SykmeldingPerioder = () => {
             })}
             <Vis
                 hvis={erOppdelt(valgtSoknad, valgtSykmelding)}
-                render={() => (
-                    <Bjorn nokkel="sykepengesoknad.sykmelding-utdrag.oppdelt.bjorn" />
-                )}
+                render={() => <Bjorn nokkel="sykepengesoknad.sykmelding-utdrag.oppdelt.bjorn" />}
             />
         </div>
     )

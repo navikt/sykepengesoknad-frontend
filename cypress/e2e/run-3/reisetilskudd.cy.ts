@@ -7,9 +7,7 @@ describe('Teste førsteside i reisetilskuddsøknaden', () => {
 
     describe('Landingside og listevisning', () => {
         it('Laster startside', () => {
-            cy.get('.navds-heading--xlarge')
-                .should('be.visible')
-                .and('have.text', 'Søknader')
+            cy.get('.navds-heading--xlarge').should('be.visible').and('have.text', 'Søknader')
         })
 
         it('Søknad har forventa tekst', () => {
@@ -21,19 +19,13 @@ describe('Teste førsteside i reisetilskuddsøknaden', () => {
 
         it('Ved klikk så åpnes søknaden om reisetilskudd', () => {
             cy.get(`article[aria-labelledby*=${nyttReisetilskudd.id}]`).click()
-            cy.url().should(
-                'equal',
-                `http://localhost:8080/syk/sykepengesoknad/soknader/${nyttReisetilskudd.id}/1`
-            )
+            cy.url().should('equal', `http://localhost:8080/syk/sykepengesoknad/soknader/${nyttReisetilskudd.id}/1`)
         })
     })
 
     describe('Ansvarserklæring - Reisetilskudd', () => {
         it('URL er riktig', () => {
-            cy.url().should(
-                'include',
-                `/syk/sykepengesoknad/soknader/${nyttReisetilskudd.id}/1`
-            )
+            cy.url().should('include', `/syk/sykepengesoknad/soknader/${nyttReisetilskudd.id}/1`)
         })
 
         it('Skal ha egen folketrygloven tekst', () => {
@@ -71,20 +63,12 @@ describe('Teste førsteside i reisetilskuddsøknaden', () => {
 
     describe('Før du fikk sykmelding - Reisetilskudd', () => {
         it('URL er riktig', () => {
-            cy.url().should(
-                'include',
-                `/syk/sykepengesoknad/soknader/${nyttReisetilskudd.id}/2`
-            )
-            cy.get('.sporsmal__tittel').should(
-                'have.text',
-                'Før du fikk sykmelding'
-            )
+            cy.url().should('include', `/syk/sykepengesoknad/soknader/${nyttReisetilskudd.id}/2`)
+            cy.get('.sporsmal__tittel').should('have.text', 'Før du fikk sykmelding')
         })
 
         it('Tester beløp valget', () => {
-            cy.get(
-                '.inputPanelGruppe__inner label:first-child > input[value=JA]'
-            ).click({ force: true })
+            cy.get('.inputPanelGruppe__inner label:first-child > input[value=JA]').click({ force: true })
             cy.get(':nth-child(1) > .skjemaelement__label').click({
                 force: true,
             })
@@ -105,17 +89,12 @@ describe('Teste førsteside i reisetilskuddsøknaden', () => {
 
     describe('Reise med bil - Reisetilskudd', () => {
         it('URL er riktig', () => {
-            cy.url().should(
-                'include',
-                `/syk/sykepengesoknad/soknader/${nyttReisetilskudd.id}/3`
-            )
+            cy.url().should('include', `/syk/sykepengesoknad/soknader/${nyttReisetilskudd.id}/3`)
             cy.get('.sporsmal__tittel').should('have.text', 'Reise med bil')
         })
 
         it('Svar ja på hovedspørsmålet', () => {
-            cy.get(
-                '.inputPanelGruppe__inner label:first-child > input[value=JA]'
-            ).click({ force: true })
+            cy.get('.inputPanelGruppe__inner label:first-child > input[value=JA]').click({ force: true })
             cy.get('.undersporsmal > :nth-child(1)').should(
                 'have.text',
                 'Hvilke dager reiste du med bil i perioden 23. desember 2020 - 7. januar 2021?'
@@ -151,9 +130,7 @@ describe('Teste førsteside i reisetilskuddsøknaden', () => {
                     cy.get('.kalenderdag.etter').contains('08')
                 })
 
-            cy.get(
-                '.undersporsmal > .kriterie--ja > .radioContainer > input[value=JA]'
-            ).click({ force: true })
+            cy.get('.undersporsmal > .kriterie--ja > .radioContainer > input[value=JA]').click({ force: true })
             cy.get('#1566447').focus().type('1000')
             cy.get('#1566448').focus().type('42')
 
@@ -172,16 +149,11 @@ describe('Teste førsteside i reisetilskuddsøknaden', () => {
 
     describe('Opplasting - Reisetilskudd', () => {
         it('URL er riktig', () => {
-            cy.url().should(
-                'include',
-                `/syk/sykepengesoknad/soknader/${nyttReisetilskudd.id}/4`
-            )
+            cy.url().should('include', `/syk/sykepengesoknad/soknader/${nyttReisetilskudd.id}/4`)
         })
 
         it('Laster bjørn med info', () => {
-            cy.contains(
-                'Du må laste opp kvitteringer hvis du har hatt ekstra utgifter til'
-            )
+            cy.contains('Du må laste opp kvitteringer hvis du har hatt ekstra utgifter til')
         })
 
         it('Legger inn taxi kvittering', () => {
@@ -189,9 +161,7 @@ describe('Teste førsteside i reisetilskuddsøknaden', () => {
             cy.contains('Legg til reiseutgift')
             cy.get('select[name=transportmiddel]').select('TAXI')
             cy.get('input[name=belop_input]').type('1234')
-            cy.get('.filopplasteren input[type=file]').attachFile(
-                'kvittering.jpg'
-            )
+            cy.get('.filopplasteren input[type=file]').attachFile('kvittering.jpg')
             cy.get('.lagre-kvittering').contains('Bekreft').click()
         })
 
@@ -211,10 +181,7 @@ describe('Teste førsteside i reisetilskuddsøknaden', () => {
             cy.get('.navds-alert--info').contains(
                 'Du kan foreløpig ikke redigere utgifter som du har lagt til. Men du kan slette den som er feil, og legge inn på nytt.'
             )
-            cy.get('select[name=transportmiddel]').should(
-                'have.attr',
-                'disabled'
-            )
+            cy.get('select[name=transportmiddel]').should('have.attr', 'disabled')
             cy.get('input[name=belop_input]').should('have.attr', 'disabled')
             cy.get('.filopplasteren input[type=file]').should('not.exist')
             cy.get('.knapperad').within(() => {
@@ -247,9 +214,7 @@ describe('Teste førsteside i reisetilskuddsøknaden', () => {
             cy.contains('Legg til reiseutgift')
             cy.get('select[name=transportmiddel]').select('TAXI')
             cy.get('input[name=belop_input]').type('1234')
-            cy.get('.filopplasteren input[type=file]').attachFile(
-                'kvittering.jpg'
-            )
+            cy.get('.filopplasteren input[type=file]').attachFile('kvittering.jpg')
             cy.get('.lagre-kvittering').contains('Bekreft').click()
 
             cy.get('.sumlinje').should('exist')
@@ -267,37 +232,23 @@ describe('Teste førsteside i reisetilskuddsøknaden', () => {
             cy.get('.fler-vedlegg').click()
             cy.get('.lagre-kvittering').contains('Bekreft').click()
 
-            cy.get('.skjemaelement__feilmelding').contains(
-                'Du må velge transportmiddel'
-            )
-            cy.get('.skjemaelement__feilmelding').contains(
-                'Du må skrive inn beløp'
-            )
-            cy.get('.skjemaelement__feilmelding').contains(
-                'Du må laste opp kvittering'
-            )
+            cy.get('.skjemaelement__feilmelding').contains('Du må velge transportmiddel')
+            cy.get('.skjemaelement__feilmelding').contains('Du må skrive inn beløp')
+            cy.get('.skjemaelement__feilmelding').contains('Du må laste opp kvittering')
         })
 
         describe('Transportmiddel feilmeldinger', () => {
             it('Ugyldig valg', () => {
                 cy.get('select[name=transportmiddel]').select('')
                 cy.get('.lagre-kvittering').contains('Bekreft').click()
-                cy.get('.skjemaelement__feilmelding').contains(
-                    'Du må velge transportmiddel'
-                )
+                cy.get('.skjemaelement__feilmelding').contains('Du må velge transportmiddel')
             })
 
             it('Velger egen bil', () => {
-                cy.get('select[name=transportmiddel]').should(
-                    'have.class',
-                    'skjemaelement__input--harFeil'
-                )
+                cy.get('select[name=transportmiddel]').should('have.class', 'skjemaelement__input--harFeil')
                 cy.get('select[name=transportmiddel]').select('TAXI')
                 cy.get('.lagre-kvittering').contains('Bekreft').click()
-                cy.get('select[name=transportmiddel]').should(
-                    'not.have.class',
-                    'skjemaelement__input--harFeil'
-                )
+                cy.get('select[name=transportmiddel]').should('not.have.class', 'skjemaelement__input--harFeil')
             })
         })
 
@@ -305,17 +256,13 @@ describe('Teste førsteside i reisetilskuddsøknaden', () => {
             it('Negative beløp', () => {
                 cy.get('input[name=belop_input]').type('-100')
                 cy.get('.lagre-kvittering').contains('Bekreft').click()
-                cy.get('.skjemaelement__feilmelding').contains(
-                    'Beløp kan ikke være negativt'
-                )
+                cy.get('.skjemaelement__feilmelding').contains('Beløp kan ikke være negativt')
             })
 
             it('Høyere beløp enn maks', () => {
                 cy.get('input[name=belop_input]').clear().type('1000000000')
                 cy.get('.lagre-kvittering').contains('Bekreft').click()
-                cy.get('.skjemaelement__feilmelding').contains(
-                    'Beløp kan ikke være større enn 10 000'
-                )
+                cy.get('.skjemaelement__feilmelding').contains('Beløp kan ikke være større enn 10 000')
             })
 
             it('Kan ikke skrive inn med 3 desimaler', () => {
@@ -331,27 +278,19 @@ describe('Teste førsteside i reisetilskuddsøknaden', () => {
             it('Gyldig beløp med 2 desimaler', () => {
                 cy.get('input[name=belop_input]').clear().type('100.30')
                 cy.get('.lagre-kvittering').contains('Bekreft').click()
-                cy.get('input[name=belop_input]').should(
-                    'not.have.class',
-                    'skjemaelement__input--harFeil'
-                )
+                cy.get('input[name=belop_input]').should('not.have.class', 'skjemaelement__input--harFeil')
             })
 
             it('Gyldig beløp uten desimaler', () => {
                 cy.get('input[name=belop_input]').clear().type('99')
                 cy.get('.lagre-kvittering').contains('Bekreft').click()
-                cy.get('input[name=belop_input]').should(
-                    'not.have.class',
-                    'skjemaelement__input--harFeil'
-                )
+                cy.get('input[name=belop_input]').should('not.have.class', 'skjemaelement__input--harFeil')
             })
         })
 
         describe('Kvittering feilmeldinger', () => {
             it('Legger inn gyldig kvittering', () => {
-                cy.get('.filopplasteren input[type=file]').attachFile(
-                    'kvittering.jpg'
-                )
+                cy.get('.filopplasteren input[type=file]').attachFile('kvittering.jpg')
                 cy.get('.lagre-kvittering').contains('Bekreft').click()
             })
 
@@ -368,9 +307,7 @@ describe('Teste førsteside i reisetilskuddsøknaden', () => {
         })
 
         it('Arbeidsgiveren legger ut for reisene', () => {
-            cy.get(
-                '.inputPanelGruppe__inner label:first-child > input[value=JA]'
-            ).click({ force: true })
+            cy.get('.inputPanelGruppe__inner label:first-child > input[value=JA]').click({ force: true })
             cy.contains('Gå videre').click()
         })
     })

@@ -33,8 +33,7 @@ export const kortArbeidstakerSoknad: RSSoknad = {
         {
             id: '687336',
             tag: 'ANSVARSERKLARING',
-            sporsmalstekst:
-                'Jeg bekrefter at jeg vil gi så riktige og fullstendige opplysninger som mulig.',
+            sporsmalstekst: 'Jeg bekrefter at jeg vil gi så riktige og fullstendige opplysninger som mulig.',
             undertekst: null,
             svartype: 'CHECKBOX_PANEL',
             min: null,

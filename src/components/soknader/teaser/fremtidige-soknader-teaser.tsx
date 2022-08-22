@@ -1,20 +1,10 @@
 import { Next } from '@navikt/ds-icons'
-import {
-    BodyLong,
-    Button,
-    Detail,
-    Heading,
-    Label,
-    Modal,
-} from '@navikt/ds-react'
+import { BodyLong, Button, Detail, Heading, Label, Modal } from '@navikt/ds-react'
 import dayjs from 'dayjs'
 import React, { useState } from 'react'
 
 import { RSSoknadstype } from '../../../types/rs-types/rs-soknadstype'
-import {
-    tilLesbarDatoMedArstall,
-    tilLesbarPeriodeMedArstall,
-} from '../../../utils/dato-utils'
+import { tilLesbarDatoMedArstall, tilLesbarPeriodeMedArstall } from '../../../utils/dato-utils'
 import { getLedetekst, tekst } from '../../../utils/tekster'
 import { useAmplitudeInstance } from '../../amplitude/amplitude'
 import Utvidbar from '../../utvidbar/utvidbar'
@@ -50,42 +40,23 @@ const FremtidigeSoknaderTeaser = ({ soknad }: SykepengesoknadTeaserProps) => {
             >
                 <div className="inngangspanel__ytre">
                     <div className="inngangspanel__del1">
-                        <InngangsIkon
-                            ikon={hentIkon(soknad)}
-                            ikonHover={hentIkonHover(soknad)}
-                        />
-                        <div
-                            id={`soknader-header-${soknad.id}`}
-                            className="inngangspanel__innhold"
-                        >
+                        <InngangsIkon ikon={hentIkon(soknad)} ikonHover={hentIkonHover(soknad)} />
+                        <div id={`soknader-header-${soknad.id}`} className="inngangspanel__innhold">
                             <Vis
-                                hvis={
-                                    soknad.soknadstype !==
-                                    RSSoknadstype.OPPHOLD_UTLAND
-                                }
+                                hvis={soknad.soknadstype !== RSSoknadstype.OPPHOLD_UTLAND}
                                 render={() => (
                                     <Detail className="inngangspanel__periode">
-                                        {tilLesbarPeriodeMedArstall(
-                                            soknad.fom,
-                                            soknad.tom
-                                        )}
+                                        {tilLesbarPeriodeMedArstall(soknad.fom, soknad.tom)}
                                     </Detail>
                                 )}
                             />
-                            <Heading
-                                size="small"
-                                level="3"
-                                className="inngangspanel__tittel"
-                            >
+                            <Heading size="small" level="3" className="inngangspanel__tittel">
                                 {teaserTittel(soknad)}
                             </Heading>
                             {periodeListevisning(soknad)}
                         </div>
                     </div>
-                    <InngangsStatus
-                        status={soknad.status}
-                        tekst={hentTeaserStatustekst(soknad)}
-                    />
+                    <InngangsStatus status={soknad.status} tekst={hentTeaserStatustekst(soknad)} />
                 </div>
                 <Next className="chevron--hoyre" />
             </button>
@@ -106,35 +77,18 @@ const FremtidigeSoknaderTeaser = ({ soknad }: SykepengesoknadTeaserProps) => {
                         {tekst('soknader.teaser.fremtidig.modal.tittel')}
                     </Heading>
                     <BodyLong spacing>
-                        {getLedetekst(
-                            tekst('soknader.teaser.fremtidig.modal.tekst'),
-                            {
-                                '%DATO%': tilLesbarDatoMedArstall(
-                                    dayjs(soknad.tom).add(1, 'day')
-                                ),
-                            }
-                        )}
+                        {getLedetekst(tekst('soknader.teaser.fremtidig.modal.tekst'), {
+                            '%DATO%': tilLesbarDatoMedArstall(dayjs(soknad.tom).add(1, 'day')),
+                        })}
                     </BodyLong>
-                    <BodyLong spacing>
-                        {tekst('soknader.teaser.fremtidig.modal.tekst2')}
-                    </BodyLong>
+                    <BodyLong spacing>{tekst('soknader.teaser.fremtidig.modal.tekst2')}</BodyLong>
 
                     <Utvidbar
                         erApen={false}
                         type="intern"
-                        tittel={
-                            <Label>
-                                {tekst(
-                                    'soknader.teaser.fremtidig.modal.utvidbar.tittel'
-                                )}
-                            </Label>
-                        }
+                        tittel={<Label>{tekst('soknader.teaser.fremtidig.modal.utvidbar.tittel')}</Label>}
                     >
-                        <BodyLong spacing>
-                            {tekst(
-                                'soknader.teaser.fremtidig.modal.utvidbar.tekst'
-                            )}
-                        </BodyLong>
+                        <BodyLong spacing>{tekst('soknader.teaser.fremtidig.modal.utvidbar.tekst')}</BodyLong>
                     </Utvidbar>
                     <Button variant="primary" onClick={() => setAapen(false)}>
                         Lukk

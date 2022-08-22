@@ -28,10 +28,7 @@ const Utvidbar = (props: UtvidbarProps) => {
 
     const onKlikk = () => {
         if (props.amplitudeProps) {
-            logEvent(
-                erApen ? 'accordion lukket' : 'accordion åpnet',
-                props.amplitudeProps
-            )
+            logEvent(erApen ? 'accordion lukket' : 'accordion åpnet', props.amplitudeProps)
         }
         setErApen(!erApen)
     }
@@ -41,22 +38,14 @@ const Utvidbar = (props: UtvidbarProps) => {
             <Accordion.Item
                 renderContentWhenClosed={true}
                 open={erApen}
-                className={`utvidbar ${
-                    props.className ? props.className : ''
-                } ${props.type ? props.type : ''}`}
+                className={`utvidbar ${props.className ? props.className : ''} ${props.type ? props.type : ''}`}
             >
                 <Accordion.Header
                     type="button"
                     onMouseEnter={
-                        props.ikon !== undefined
-                            ? () => (btnImage.current!.src = props.ikonHover!)
-                            : undefined
+                        props.ikon !== undefined ? () => (btnImage.current!.src = props.ikonHover!) : undefined
                     }
-                    onMouseLeave={
-                        props.ikon !== undefined
-                            ? () => (btnImage.current!.src = props.ikon!)
-                            : undefined
-                    }
+                    onMouseLeave={props.ikon !== undefined ? () => (btnImage.current!.src = props.ikon!) : undefined}
                     onClick={onKlikk}
                 >
                     <Vis
@@ -81,12 +70,7 @@ const Utvidbar = (props: UtvidbarProps) => {
                         )}
                     />
 
-                    <Vis
-                        hvis={props.type === 'intern'}
-                        render={() => (
-                            <BodyShort as="h2">{props.tittel}</BodyShort>
-                        )}
-                    />
+                    <Vis hvis={props.type === 'intern'} render={() => <BodyShort as="h2">{props.tittel}</BodyShort>} />
 
                     <BodyShort as="em" className="utvidbar__handling">
                         {erApen ? 'Lukk' : 'Åpne'}

@@ -9,10 +9,7 @@ interface UndersporsmalListeProps {
     oversporsmalSvar?: string
 }
 
-const UndersporsmalListe = ({
-    oversporsmal,
-    oversporsmalSvar,
-}: UndersporsmalListeProps) => {
+const UndersporsmalListe = ({ oversporsmal, oversporsmalSvar }: UndersporsmalListeProps) => {
     return (
         <>
             {oversporsmal.undersporsmal
@@ -21,13 +18,10 @@ const UndersporsmalListe = ({
                         <Vis
                             hvis={
                                 !oversporsmal.kriterieForVisningAvUndersporsmal ||
-                                oversporsmal.kriterieForVisningAvUndersporsmal ===
-                                    oversporsmalSvar
+                                oversporsmal.kriterieForVisningAvUndersporsmal === oversporsmalSvar
                             }
                             key={idx}
-                            render={() => (
-                                <SporsmalSwitch sporsmal={underspm} />
-                            )}
+                            render={() => <SporsmalSwitch sporsmal={underspm} />}
                         />
                     )
                 })

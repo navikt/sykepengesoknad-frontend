@@ -31,12 +31,7 @@ const TallKomp = ({ sporsmal }: SpmProps) => {
 
     const valider = () => {
         if (validerGrad) {
-            if (
-                ![
-                    TagTyper.JOBBET_DU_GRADERT,
-                    TagTyper.JOBBET_DU_100_PROSENT,
-                ].includes(hovedSporsmal!.tag)
-            ) {
+            if (![TagTyper.JOBBET_DU_GRADERT, TagTyper.JOBBET_DU_100_PROSENT].includes(hovedSporsmal!.tag)) {
                 return true // hopp over validering dersom det ikke er spørsmål av denne typen
             }
 
@@ -51,10 +46,7 @@ const TallKomp = ({ sporsmal }: SpmProps) => {
 
     const className = () => {
         if (!sporsmal.parentKriterie) return ''
-        if (
-            sporsmal.tag === TagTyper.KM_HJEM_JOBB ||
-            sporsmal.tag === TagTyper.OFFENTLIG_TRANSPORT_BELOP
-        ) {
+        if (sporsmal.tag === TagTyper.KM_HJEM_JOBB || sporsmal.tag === TagTyper.OFFENTLIG_TRANSPORT_BELOP) {
             return `kriterie--${sporsmal.parentKriterie.toLowerCase()} skjemaelement`
         }
         return 'skjemaelement'
@@ -84,24 +76,18 @@ const TallKomp = ({ sporsmal }: SpmProps) => {
                         min: {
                             value: sporsmal.min!,
                             message: sporsmal.max
-                                ? getLedetekst(
-                                      tekst('soknad.feilmelding.TALL_MIN_MAX'),
-                                      {
-                                          '%MIN%': sporsmal.min,
-                                          '%MAX%': sporsmal.max,
-                                      }
-                                  )
-                                : getLedetekst(
-                                      tekst('soknad.feilmelding.TALL_MIN'),
-                                      { '%MIN%': sporsmal.min }
-                                  ),
+                                ? getLedetekst(tekst('soknad.feilmelding.TALL_MIN_MAX'), {
+                                      '%MIN%': sporsmal.min,
+                                      '%MAX%': sporsmal.max,
+                                  })
+                                : getLedetekst(tekst('soknad.feilmelding.TALL_MIN'), { '%MIN%': sporsmal.min }),
                         },
                         max: {
                             value: sporsmal.max!,
-                            message: getLedetekst(
-                                tekst('soknad.feilmelding.TALL_MIN_MAX'),
-                                { '%MIN%': sporsmal.min, '%MAX%': sporsmal.max }
-                            ),
+                            message: getLedetekst(tekst('soknad.feilmelding.TALL_MIN_MAX'), {
+                                '%MIN%': sporsmal.min,
+                                '%MAX%': sporsmal.max,
+                            }),
                         },
                     })}
                     min={sporsmal.min!}
@@ -109,9 +95,7 @@ const TallKomp = ({ sporsmal }: SpmProps) => {
                     className={
                         'skjemaelement__input' +
                         inputSize() +
-                        (errors[sporsmal.id]
-                            ? ' skjemaelement__input--harFeil'
-                            : '')
+                        (errors[sporsmal.id] ? ' skjemaelement__input--harFeil' : '')
                     }
                     autoComplete="off"
                 />
@@ -128,10 +112,7 @@ const TallKomp = ({ sporsmal }: SpmProps) => {
                             <Vis
                                 hvis={errors[sporsmal.id]?.type !== 'validate'}
                                 render={() => (
-                                    <BodyShort
-                                        as="span"
-                                        className="skjemaelement__feilmelding"
-                                    >
+                                    <BodyShort as="span" className="skjemaelement__feilmelding">
                                         {feilmelding.lokal}
                                     </BodyShort>
                                 )}
@@ -139,20 +120,13 @@ const TallKomp = ({ sporsmal }: SpmProps) => {
                             <Vis
                                 hvis={
                                     errors[sporsmal.id]?.type === 'validate' &&
-                                    sporsmal.tag ===
-                                        TagTyper.HVOR_MYE_TIMER_VERDI
+                                    sporsmal.tag === TagTyper.HVOR_MYE_TIMER_VERDI
                                 }
                                 render={() => (
-                                    <BodyShort
-                                        as="span"
-                                        className="skjemaelement__feilmelding"
-                                    >
-                                        {getLedetekst(
-                                            tekst(
-                                                'soknad.feilmelding.MINDRE_TIMER_ENN_FORVENTET.lokal'
-                                            ),
-                                            { '%GRAD%': 100 - periode!.grad }
-                                        )}
+                                    <BodyShort as="span" className="skjemaelement__feilmelding">
+                                        {getLedetekst(tekst('soknad.feilmelding.MINDRE_TIMER_ENN_FORVENTET.lokal'), {
+                                            '%GRAD%': 100 - periode!.grad,
+                                        })}
                                     </BodyShort>
                                 )}
                             />
@@ -161,17 +135,8 @@ const TallKomp = ({ sporsmal }: SpmProps) => {
                 />
             </div>
 
-            <div
-                aria-live="assertive"
-                className="undersporsmal"
-                ref={undersporsmal}
-            >
-                <Vis
-                    hvis={watchTall}
-                    render={() => (
-                        <UndersporsmalListe oversporsmal={sporsmal} />
-                    )}
-                />
+            <div aria-live="assertive" className="undersporsmal" ref={undersporsmal}>
+                <Vis hvis={watchTall} render={() => <UndersporsmalListe oversporsmal={sporsmal} />} />
             </div>
         </div>
     )

@@ -35,26 +35,15 @@ export const flattenSporsmal = (sporsmal: Sporsmal[]) => {
     return flatArr
 }
 
-export const hentSporsmal = (
-    soknad: Soknad,
-    tag: string
-): Sporsmal | undefined => {
+export const hentSporsmal = (soknad: Soknad, tag: string): Sporsmal | undefined => {
     return flattenSporsmal(soknad.sporsmal).find((spm) => spm.tag === tag)
 }
 
-export const hentUndersporsmal = (
-    sporsmal: Sporsmal,
-    tag: string
-): Sporsmal | undefined => {
-    return flattenSporsmal(sporsmal.undersporsmal).find(
-        (spm) => spm.tag === tag
-    )
+export const hentUndersporsmal = (sporsmal: Sporsmal, tag: string): Sporsmal | undefined => {
+    return flattenSporsmal(sporsmal.undersporsmal).find((spm) => spm.tag === tag)
 }
 
-export const finnHovedSporsmal = (
-    soknad: Soknad,
-    sporsmal: Sporsmal
-): Sporsmal | undefined => {
+export const finnHovedSporsmal = (soknad: Soknad, sporsmal: Sporsmal): Sporsmal | undefined => {
     if (sporsmal.erHovedsporsmal) {
         return sporsmal
     }

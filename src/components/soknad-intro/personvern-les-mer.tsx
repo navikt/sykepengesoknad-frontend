@@ -56,11 +56,7 @@ const PersonvernLesMer = () => {
                             'sykepengesoknad.soknad-intro.personvern-modal-header'
                         )}
                     </Heading>
-                    {parser(
-                        tekst(
-                            'sykepengesoknad.soknad-intro.personvern-modal-innhold'
-                        )
-                    )}
+                    {parser(tekst('sykepengesoknad.soknad-intro.personvern-modal-innhold'))}
 
                     <div className="lukk-wrapper">
                         <button

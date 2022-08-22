@@ -37,13 +37,7 @@ const Perioder = ({ sporsmal }: SpmProps) => {
     }
 
     return (
-        <div
-            className={
-                sporsmal.parentKriterie
-                    ? 'kriterie--' + sporsmal.parentKriterie.toLowerCase()
-                    : ''
-            }
-        >
+        <div className={sporsmal.parentKriterie ? 'kriterie--' + sporsmal.parentKriterie.toLowerCase() : ''}>
             <Label as="h3" className="skjema__sporsmal">
                 {sporsmal.sporsmalstekst}
             </Label>
@@ -61,11 +55,7 @@ const Perioder = ({ sporsmal }: SpmProps) => {
                 })}
             </ul>
 
-            <button
-                role="link"
-                className="lenkeknapp navds-link"
-                onClick={leggTilPeriode}
-            >
+            <button role="link" className="lenkeknapp navds-link" onClick={leggTilPeriode}>
                 {tekst('sykepengesoknad.periodevelger.legg-til-ekstra')}
             </button>
 

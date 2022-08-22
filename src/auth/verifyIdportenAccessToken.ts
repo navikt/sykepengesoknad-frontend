@@ -1,9 +1,4 @@
-import {
-    createRemoteJWKSet,
-    FlattenedJWSInput,
-    JWSHeaderParameters,
-    jwtVerify,
-} from 'jose'
+import { createRemoteJWKSet, FlattenedJWSInput, JWSHeaderParameters, jwtVerify } from 'jose'
 import { GetKeyFunction } from 'jose/dist/types/types'
 import getConfig from 'next/config'
 import { Client, Issuer } from 'openid-client'
@@ -22,9 +17,7 @@ async function validerToken(token: string | Uint8Array) {
 async function jwks() {
     if (typeof _remoteJWKSet === 'undefined') {
         const iss = await issuer()
-        _remoteJWKSet = createRemoteJWKSet(
-            new URL(<string>iss.metadata.jwks_uri)
-        )
+        _remoteJWKSet = createRemoteJWKSet(new URL(<string>iss.metadata.jwks_uri))
     }
 
     return _remoteJWKSet
@@ -33,12 +26,8 @@ async function jwks() {
 async function issuer() {
     if (typeof _issuer === 'undefined') {
         if (!serverRuntimeConfig.idportenWellKnownUrl)
-            throw new Error(
-                'Miljøvariabelen "IDPORTEN_WELL_KNOWN_URL" må være satt'
-            )
-        _issuer = await Issuer.discover(
-            serverRuntimeConfig.idportenWellKnownUrl
-        )
+            throw new Error('Miljøvariabelen "IDPORTEN_WELL_KNOWN_URL" må være satt')
+        _issuer = await Issuer.discover(serverRuntimeConfig.idportenWellKnownUrl)
     }
     return _issuer
 }

@@ -17,9 +17,7 @@ export interface FetchStateWithData<D = {}> extends FetchState<D> {
     data: D
 }
 
-export const isAnyNotStartedOrPending = (
-    fetch: FetchState | FetchState[]
-): boolean => {
+export const isAnyNotStartedOrPending = (fetch: FetchState | FetchState[]): boolean => {
     if (Array.isArray(fetch)) {
         return fetch.some((f) => isNotStartedOrPending(f))
     }
@@ -45,10 +43,7 @@ export const isNotStarted = (fetch: FetchState): boolean => {
 }
 
 export const isNotStartedOrPending = (fetch: FetchState): boolean => {
-    return (
-        fetch.status === FetchStatus.NOT_STARTED ||
-        fetch.status === FetchStatus.PENDING
-    )
+    return fetch.status === FetchStatus.NOT_STARTED || fetch.status === FetchStatus.PENDING
 }
 
 export const hasFinished = (fetch: FetchState): boolean => {
@@ -63,9 +58,7 @@ export const has401 = (fetch: FetchState): boolean => {
     return fetch.httpCode === 401
 }
 
-export const hasData = <D = {}>(
-    fetch: FetchState<D>
-): fetch is FetchStateWithData<D> => {
+export const hasData = <D = {}>(fetch: FetchState<D>): fetch is FetchStateWithData<D> => {
     return fetch.data != null
 }
 

@@ -24,8 +24,7 @@ const DatoInput = ({ sporsmal }: SpmProps) => {
                 name={sporsmal.id}
                 rules={{
                     validate: () => {
-                        const div: HTMLDivElement | null =
-                            document.querySelector('.ds-datepicker')
+                        const div: HTMLDivElement | null = document.querySelector('.ds-datepicker')
                         const detteFeilet = validerDato(sporsmal, getValues())
                         if (detteFeilet !== true) {
                             div?.classList.add('skjemaelement__input--harFeil')

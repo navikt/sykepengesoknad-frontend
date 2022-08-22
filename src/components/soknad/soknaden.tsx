@@ -19,10 +19,7 @@ import { SEPARATOR } from '../../utils/constants'
 import { tekst } from '../../utils/tekster'
 import { setBodyClass } from '../../utils/utils'
 import { useAmplitudeInstance } from '../amplitude/amplitude'
-import {
-    EldreUsendtSoknad,
-    harEldreUsendtSoknad,
-} from '../eldre-usendt/eldre-usendt-soknad'
+import { EldreUsendtSoknad, harEldreUsendtSoknad } from '../eldre-usendt/eldre-usendt-soknad'
 import { EldreUsendtSykmelding } from '../eldre-usendt/eldre-usendt-sykmelding'
 import { eldreUsendteSykmeldinger } from '../eldre-usendt/eldreUsendteSykmeldinger'
 import FristSykepenger from '../frist-sykepenger/frist-sykepenger'
@@ -47,13 +44,7 @@ const brodsmuler: Brodsmule[] = [
 ]
 
 const Soknaden = () => {
-    const {
-        soknader,
-        valgtSoknad,
-        setValgtSoknad,
-        sykmeldinger,
-        setValgtSykmelding,
-    } = useAppStore()
+    const { soknader, valgtSoknad, setValgtSoknad, sykmeldinger, setValgtSykmelding } = useAppStore()
     const { logEvent } = useAmplitudeInstance()
     const { id } = useParams<RouteParams>()
 
@@ -61,9 +52,7 @@ const Soknaden = () => {
         const filtrertSoknad = soknader.find((soknad) => soknad.id === id)
         setValgtSoknad(filtrertSoknad)
 
-        const sykmelding = sykmeldinger.find(
-            (sm) => sm.id === filtrertSoknad?.sykmeldingId
-        )
+        const sykmelding = sykmeldinger.find((sm) => sm.id === filtrertSoknad?.sykmeldingId)
         setValgtSykmelding(sykmelding)
 
         logEvent('skjema åpnet', {
@@ -88,12 +77,7 @@ const Soknaden = () => {
             <Brodsmuler brodsmuler={brodsmuler} />
 
             <div className="limit">
-                <HotjarTrigger
-                    jsTrigger={hentHotjarJsTrigger(
-                        valgtSoknad.soknadstype,
-                        'soknad'
-                    )}
-                >
+                <HotjarTrigger jsTrigger={hentHotjarJsTrigger(valgtSoknad.soknadstype, 'soknad')}>
                     <Fordeling />
                 </HotjarTrigger>
             </div>
@@ -116,40 +100,26 @@ const Fordeling = () => {
 
     if (
         isNaN(stegNo) ||
-        (valgtSoknad.status !== RSSoknadstatus.NY &&
-            valgtSoknad.status !== RSSoknadstatus.UTKAST_TIL_KORRIGERING)
+        (valgtSoknad.status !== RSSoknadstatus.NY && valgtSoknad.status !== RSSoknadstatus.UTKAST_TIL_KORRIGERING)
     ) {
         history.replace(urlTilSoknad(valgtSoknad))
         return null
     }
 
     const tittel = tekst(hentNokkel(valgtSoknad!, stegNo) as any)
-    const erUtlandssoknad =
-        valgtSoknad.soknadstype === RSSoknadstype.OPPHOLD_UTLAND
-    const erReisetilskuddsoknad =
-        valgtSoknad.soknadstype === RSSoknadstype.REISETILSKUDD
-    const erGradertReisetilskuddsoknad =
-        valgtSoknad.soknadstype === RSSoknadstype.GRADERT_REISETILSKUDD
+    const erUtlandssoknad = valgtSoknad.soknadstype === RSSoknadstype.OPPHOLD_UTLAND
+    const erReisetilskuddsoknad = valgtSoknad.soknadstype === RSSoknadstype.REISETILSKUDD
+    const erGradertReisetilskuddsoknad = valgtSoknad.soknadstype === RSSoknadstype.GRADERT_REISETILSKUDD
 
     switch (valgtSoknad.status) {
         // Nye søknader
         case RSSoknadstatus.NY:
         case RSSoknadstatus.UTKAST_TIL_KORRIGERING: {
             if (!erUtlandssoknad) {
-                const eldreUsendtSoknad = harEldreUsendtSoknad(
-                    valgtSoknad,
-                    soknader
-                )
-                const usendteSm = eldreUsendteSykmeldinger(
-                    sykmeldinger,
-                    valgtSoknad.tom!
-                )
+                const eldreUsendtSoknad = harEldreUsendtSoknad(valgtSoknad, soknader)
+                const usendteSm = eldreUsendteSykmeldinger(sykmeldinger, valgtSoknad.tom!)
                 if (usendteSm.length > 0) {
-                    return (
-                        <EldreUsendtSykmelding
-                            usendteSykmeldinger={usendteSm}
-                        />
-                    )
+                    return <EldreUsendtSykmelding usendteSykmeldinger={usendteSm} />
                 }
                 if (eldreUsendtSoknad.eldsteSoknad) {
                     return (
@@ -162,81 +132,49 @@ const Fordeling = () => {
             }
             return (
                 <>
-                    <Vis
-                        hvis={stegNo > 1 || erUtlandssoknad}
-                        render={() => <SporsmalSteg />}
-                    />
+                    <Vis hvis={stegNo > 1 || erUtlandssoknad} render={() => <SporsmalSteg />} />
 
                     <Vis
                         hvis={stegNo > 1}
                         render={() => (
                             <Link
-                                to={
-                                    '/soknader/' +
-                                    valgtSoknad.id +
-                                    SEPARATOR +
-                                    (stegNo - 1)
-                                }
+                                to={'/soknader/' + valgtSoknad.id + SEPARATOR + (stegNo - 1)}
                                 className="navds-link tilbakelenke"
                                 onClick={() => {
                                     logEvent('navigere', {
-                                        lenketekst: tekst(
-                                            'soknad.tilbakeknapp'
-                                        ),
+                                        lenketekst: tekst('soknad.tilbakeknapp'),
                                         fra: valgtSoknad!.sporsmal[stegNo].tag,
-                                        til: valgtSoknad!.sporsmal[stegNo - 1]
-                                            .tag,
+                                        til: valgtSoknad!.sporsmal[stegNo - 1].tag,
                                         soknadstype: valgtSoknad?.soknadstype,
                                         stegId: stegId,
                                     })
                                 }}
                             >
                                 <Back className="chevron--venstre" />
-                                <BodyShort as="span">
-                                    {tekst('soknad.tilbakeknapp')}
-                                </BodyShort>
+                                <BodyShort as="span">{tekst('soknad.tilbakeknapp')}</BodyShort>
                             </Link>
                         )}
                     />
 
-                    <Vis
-                        hvis={stegNo === 1 && !erUtlandssoknad}
-                        render={() => <ViktigInformasjon />}
-                    />
+                    <Vis hvis={stegNo === 1 && !erUtlandssoknad} render={() => <ViktigInformasjon />} />
 
-                    <Vis
-                        hvis={stegNo === 1 && erGradertReisetilskuddsoknad}
-                        render={() => <SoknadMedToDeler />}
-                    />
+                    <Vis hvis={stegNo === 1 && erGradertReisetilskuddsoknad} render={() => <SoknadMedToDeler />} />
 
                     <Vis
                         hvis={!erUtlandssoknad && stegNo === 1}
                         render={() => {
                             const sporsmal = valgtSoknad!.sporsmal[stegNo - 1]
-                            return (
-                                <Opplysninger
-                                    ekspandert={true}
-                                    steg={sporsmal.tag}
-                                />
-                            )
+                            return <Opplysninger ekspandert={true} steg={sporsmal.tag} />
                         }}
                     />
 
                     <Vis
                         hvis={stegNo === 1 && !erUtlandssoknad}
-                        render={() => (
-                            <FristSykepenger
-                                soknadstype={valgtSoknad.soknadstype}
-                            />
-                        )}
+                        render={() => <FristSykepenger soknadstype={valgtSoknad.soknadstype} />}
                     />
 
                     <Vis
-                        hvis={
-                            stegNo === 1 &&
-                            (erReisetilskuddsoknad ||
-                                erGradertReisetilskuddsoknad)
-                        }
+                        hvis={stegNo === 1 && (erReisetilskuddsoknad || erGradertReisetilskuddsoknad)}
                         render={() => <OmReisetilskudd />}
                     />
 

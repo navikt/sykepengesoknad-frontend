@@ -16,14 +16,11 @@ const Kontonummer = () => {
 
     async function hentKontonummer() {
         if (isProd()) {
-            const res = await fetch(
-                'https://www.nav.no/person/personopplysninger-api/personalia',
-                {
-                    method: 'GET',
-                    credentials: 'include',
-                    headers: { 'Content-Type': 'application/json' },
-                }
-            )
+            const res = await fetch('https://www.nav.no/person/personopplysninger-api/personalia', {
+                method: 'GET',
+                credentials: 'include',
+                headers: { 'Content-Type': 'application/json' },
+            })
             const data: Personalia = await res.json()
             setKontonummer(data?.personalia?.kontonr)
         }
@@ -34,9 +31,7 @@ const Kontonummer = () => {
     }
 
     const formatterKontonr = (kontonummer: string) =>
-        kontonummer.length === 11
-            ? kontonummer.replace(/^(.{4})(.{2})(.*)$/, '$1 $2 $3')
-            : kontonummer
+        kontonummer.length === 11 ? kontonummer.replace(/^(.{4})(.{2})(.*)$/, '$1 $2 $3') : kontonummer
 
     return (
         <>
@@ -44,11 +39,7 @@ const Kontonummer = () => {
 
             <Vis
                 hvis={!kontonummer}
-                render={() => (
-                    <BodyShort>
-                        {parser(tekst('kvittering.kontonummer.mangler'))}
-                    </BodyShort>
-                )}
+                render={() => <BodyShort>{parser(tekst('kvittering.kontonummer.mangler'))}</BodyShort>}
             />
 
             <Vis
@@ -58,9 +49,7 @@ const Kontonummer = () => {
                         <BodyShort>
                             <strong>{formatterKontonr(kontonummer!)}</strong>
                         </BodyShort>
-                        <BodyShort>
-                            {parser(tekst('kvittering.kontonummer.endre'))}
-                        </BodyShort>
+                        <BodyShort>{parser(tekst('kvittering.kontonummer.endre'))}</BodyShort>
                     </>
                 )}
             />

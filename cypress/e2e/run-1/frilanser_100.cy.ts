@@ -12,12 +12,8 @@ describe('Tester frilansersøknad', () => {
     })
 
     it('Laster startside', function () {
-        cy.get('.navds-heading--xlarge')
-            .should('be.visible')
-            .and('have.text', 'Søknader')
-        cy.get(
-            `#soknader-list-til-behandling article a[href*=${soknad.id}]`
-        ).click()
+        cy.get('.navds-heading--xlarge').should('be.visible').and('have.text', 'Søknader')
+        cy.get(`#soknader-list-til-behandling article a[href*=${soknad.id}]`).click()
     })
 
     it('Søknad ANSVARSERKLARING - steg 1', function () {
@@ -25,29 +21,23 @@ describe('Tester frilansersøknad', () => {
 
         // Sykmelding
         cy.contains('1. april - 24. april 2020 • 24 dager')
-        cy.contains(
-            'Har ikke forsikring som gjelder de første 16 dagene av sykefraværet'
-        )
+        cy.contains('Har ikke forsikring som gjelder de første 16 dagene av sykefraværet')
         cy.contains('Egenmelding og/eller sykmelding på papir')
         cy.contains('1. januar – 13. mars 2020')
         cy.contains('Opplysninger fra sykmeldingen').click()
-        cy.contains(
-            'Har ikke forsikring som gjelder de første 16 dagene av sykefraværet'
-        ).should('not.be.visible')
+        cy.contains('Har ikke forsikring som gjelder de første 16 dagene av sykefraværet').should('not.be.visible')
 
         // Viktig informasjon grunnet tilbakedatering
         cy.get('.viktig-informasjon > .navds-guide-panel').should('be.visible')
-        cy.get('.viktig-informasjon > .navds-guide-panel').contains(
-            'Viktig informasjon'
-        )
+        cy.get('.viktig-informasjon > .navds-guide-panel').contains('Viktig informasjon')
         cy.get('.viktig-informasjon > .navds-guide-panel').contains(
             'Vanligvis starter sykmeldingen den dagen du er hos legen. I ditt tilfelle har legen skrevet at den startet tidligere.'
         )
 
         // Godkjenne ANSVARSERKLARING
-        cy.contains(
-            'Jeg bekrefter at jeg vil gi så riktige og fullstendige opplysninger som mulig.'
-        ).click({ force: true })
+        cy.contains('Jeg bekrefter at jeg vil gi så riktige og fullstendige opplysninger som mulig.').click({
+            force: true,
+        })
 
         cy.contains('Gå videre').click()
     })
@@ -56,9 +46,7 @@ describe('Tester frilansersøknad', () => {
         cy.url().should('include', `${soknad.id}/2`)
 
         // Test spørsmål
-        cy.get(
-            '.inputPanelGruppe__inner label:first-child > input[value=JA]'
-        ).click({ force: true })
+        cy.get('.inputPanelGruppe__inner label:first-child > input[value=JA]').click({ force: true })
         cy.contains('Når begynte du å jobbe igjen?')
         cy.get('.ds-datepicker__kalenderknapp').click()
         cy.get('.DayPicker-Day').contains('20').click()
@@ -70,9 +58,7 @@ describe('Tester frilansersøknad', () => {
         cy.url().should('include', `${soknad.id}/3`)
 
         // Test spørsmål
-        cy.get(
-            '.inputPanelGruppe__inner label:first-child > input[value=JA]'
-        ).click({ force: true })
+        cy.get('.inputPanelGruppe__inner label:first-child > input[value=JA]').click({ force: true })
 
         // Underspørsmål 1
         cy.contains(
@@ -83,9 +69,7 @@ describe('Tester frilansersøknad', () => {
         // Underspørsmål 2
         cy.contains('Hvor mye jobbet du tilsammen 1. - 24. april 2020?')
         // Svarer prosent
-        cy.get('.undersporsmal .skjemaelement__input.radioknapp[value=Prosent]')
-            .focus()
-            .click({ force: true })
+        cy.get('.undersporsmal .skjemaelement__input.radioknapp[value=Prosent]').focus().click({ force: true })
         cy.get('.undersporsmal .skjemaelement__input#687435').focus().type('21')
 
         cy.contains('Gå videre').click()
@@ -95,9 +79,7 @@ describe('Tester frilansersøknad', () => {
         cy.url().should('include', `${soknad.id}/4`)
 
         // Test spørsmål
-        cy.get(
-            '.inputPanelGruppe__inner label:first-child > input[value=JA]'
-        ).click({ force: true })
+        cy.get('.inputPanelGruppe__inner label:first-child > input[value=JA]').click({ force: true })
 
         // Svarer JA
         // Underspørsmål nivå 1 - checkbox
@@ -106,9 +88,7 @@ describe('Tester frilansersøknad', () => {
             .should('include.text', 'arbeidsforhold')
             .click({ force: true })
         // Underspørsmål nivå 2 - radio
-        cy.get(
-            '.undersporsmal .checkboxgruppe .radioContainer .radioknapp#687441_0'
-        ).click({ force: true })
+        cy.get('.undersporsmal .checkboxgruppe .radioContainer .radioknapp#687441_0').click({ force: true })
         cy.contains(
             'Du må sende egen sykepengesøknad for dette. ' +
                 'Det betyr også at legen må skrive en sykmelding for hvert arbeidsforhold du er sykmeldt fra.'
@@ -121,12 +101,8 @@ describe('Tester frilansersøknad', () => {
         cy.url().should('include', `${soknad.id}/5`)
 
         // Test spørsmål
-        cy.contains(
-            'Har du vært utenfor EØS mens du var sykmeldt 1. - 24. april 2020?'
-        )
-        cy.get(
-            '.inputPanelGruppe__inner label:first-child > input[value=JA]'
-        ).click({ force: true })
+        cy.contains('Har du vært utenfor EØS mens du var sykmeldt 1. - 24. april 2020?')
+        cy.get('.inputPanelGruppe__inner label:first-child > input[value=JA]').click({ force: true })
 
         // Underspørsmål 1
         cy.contains('Når var du utenfor EØS?')
@@ -146,11 +122,7 @@ describe('Tester frilansersøknad', () => {
                 'Du må ha sendt en egen utenlandssøknad for å svare ja på dette spørsmålet. Husk at du også må fullføre denne søknaden om sykepenger.'
             )
             .find('a')
-            .should(
-                'have.attr',
-                'href',
-                '/syk/sykepengesoknad/sykepengesoknad-utland'
-            )
+            .should('have.attr', 'href', '/syk/sykepengesoknad/sykepengesoknad-utland')
 
         // Underspørsmål 2 - Nei
         cy.get('.undersporsmal .radioContainer .radioknapp#687449_1').click({
@@ -162,11 +134,7 @@ describe('Tester frilansersøknad', () => {
                 'I utgangspunktet kan du bare få sykepenger mens du er i et land innenfor EØS. Du kan likevel søke NAV om å få reise ut av EØS og beholde sykepengene i en begrenset periode.'
             )
             .find('a')
-            .should(
-                'have.attr',
-                'href',
-                '/syk/sykepengesoknad/sykepengesoknad-utland'
-            )
+            .should('have.attr', 'href', '/syk/sykepengesoknad/sykepengesoknad-utland')
 
         cy.contains('Gå videre').click()
     })
@@ -175,12 +143,8 @@ describe('Tester frilansersøknad', () => {
         cy.url().should('include', `${soknad.id}/6`)
 
         // Test spørsmål
-        cy.get(
-            '.inputPanelGruppe__inner label:first-child > input[value=JA]'
-        ).click({ force: true })
-        cy.contains(
-            'Har du arbeidet i utlandet i løpet av de siste 12 månedene?'
-        )
+        cy.get('.inputPanelGruppe__inner label:first-child > input[value=JA]').click({ force: true })
+        cy.contains('Har du arbeidet i utlandet i løpet av de siste 12 månedene?')
 
         cy.contains('Gå videre').click()
     })
@@ -189,12 +153,8 @@ describe('Tester frilansersøknad', () => {
         cy.url().should('include', `${soknad.id}/7`)
 
         // Test spørsmål
-        cy.contains(
-            'Har du vært under utdanning i løpet av perioden 1. - 24. april 2020?'
-        )
-        cy.get(
-            '.inputPanelGruppe__inner label:first-child > input[value=JA]'
-        ).click({ force: true })
+        cy.contains('Har du vært under utdanning i løpet av perioden 1. - 24. april 2020?')
+        cy.get('.inputPanelGruppe__inner label:first-child > input[value=JA]').click({ force: true })
 
         // Underspørsmål 1
         cy.contains('Når startet du på utdanningen?')
@@ -203,9 +163,7 @@ describe('Tester frilansersøknad', () => {
 
         // Underspørsmål 2 - radio
         cy.contains('Er utdanningen et fulltidsstudium?')
-        cy.get(
-            '.undersporsmal .skjemaelement .radioContainer .radioknapp#687454_0'
-        ).click({ force: true })
+        cy.get('.undersporsmal .skjemaelement .radioContainer .radioknapp#687454_0').click({ force: true })
 
         cy.contains('Gå videre').click()
     })

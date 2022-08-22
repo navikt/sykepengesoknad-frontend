@@ -14,10 +14,7 @@ import { useAmplitudeInstance } from '../amplitude/amplitude'
 import Banner from '../banner/banner'
 import Brodsmuler from '../brodsmuler/brodsmuler'
 import FristSykepenger from '../frist-sykepenger/frist-sykepenger'
-import {
-    GjenstaendeSoknader,
-    hentGjenstaendeSoknader,
-} from '../gjenstaende-soknader/gjenstaende-soknader'
+import { GjenstaendeSoknader, hentGjenstaendeSoknader } from '../gjenstaende-soknader/gjenstaende-soknader'
 import Opplysninger from '../opplysninger-fra-sykmelding/opplysninger'
 import { urlTilSoknad } from '../soknad/soknad-link'
 import GjenapneSoknad from '../soknader/avbryt/gjenapneknapp'
@@ -38,13 +35,7 @@ const brodsmuler: Brodsmule[] = [
 ]
 
 const AvbruttSoknad = () => {
-    const {
-        valgtSoknad,
-        soknader,
-        setValgtSoknad,
-        setValgtSykmelding,
-        sykmeldinger,
-    } = useAppStore()
+    const { valgtSoknad, soknader, setValgtSoknad, setValgtSykmelding, sykmeldinger } = useAppStore()
     const { logEvent } = useAmplitudeInstance()
     const { id } = useParams<RouteParams>()
     const history = useHistory()
@@ -53,9 +44,7 @@ const AvbruttSoknad = () => {
         const filtrertSoknad = soknader.find((soknad) => soknad.id === id)
         setValgtSoknad(filtrertSoknad)
 
-        const sykmelding = sykmeldinger.find(
-            (sm) => sm.id === filtrertSoknad?.sykmeldingId
-        )
+        const sykmelding = sykmeldinger.find((sm) => sm.id === filtrertSoknad?.sykmeldingId)
         setValgtSykmelding(sykmelding)
 
         logEvent('skjema åpnet', {
@@ -82,32 +71,22 @@ const AvbruttSoknad = () => {
             <div className="limit">
                 <Alert variant="warning" style={{ marginBottom: '1rem' }}>
                     <BodyShort>
-                        {tekst('sykepengesoknad.avbrutt.tidspunkt')}{' '}
-                        {tilLesbarDatoMedArstall(valgtSoknad!.avbruttDato)}.
+                        {tekst('sykepengesoknad.avbrutt.tidspunkt')} {tilLesbarDatoMedArstall(valgtSoknad!.avbruttDato)}
+                        .
                     </BodyShort>
                 </Alert>
                 <div className="avbrutt-info">
-                    <BodyLong spacing>
-                        {tekst('sykepengesoknad.avbrutt.informasjon-innhold-1')}
-                    </BodyLong>
-                    <BodyLong spacing>
-                        {tekst('sykepengesoknad.avbrutt.informasjon-innhold-2')}
-                    </BodyLong>
-                    <BodyLong spacing>
-                        {tekst('sykepengesoknad.avbrutt.informasjon-innhold-3')}
-                    </BodyLong>
-                    <BodyLong spacing>
-                        {tekst('sykepengesoknad.avbrutt.informasjon-innhold-4')}
-                    </BodyLong>
+                    <BodyLong spacing>{tekst('sykepengesoknad.avbrutt.informasjon-innhold-1')}</BodyLong>
+                    <BodyLong spacing>{tekst('sykepengesoknad.avbrutt.informasjon-innhold-2')}</BodyLong>
+                    <BodyLong spacing>{tekst('sykepengesoknad.avbrutt.informasjon-innhold-3')}</BodyLong>
+                    <BodyLong spacing>{tekst('sykepengesoknad.avbrutt.informasjon-innhold-4')}</BodyLong>
                 </div>
 
                 <Opplysninger ekspandert={false} steg="avbrutt-søknad" />
                 <FristSykepenger soknadstype={valgtSoknad.soknadstype} />
 
                 <Vis
-                    hvis={dayjs(valgtSoknad.avbruttDato).isAfter(
-                        dayjs().subtract(2, 'seconds')
-                    )}
+                    hvis={dayjs(valgtSoknad.avbruttDato).isAfter(dayjs().subtract(2, 'seconds'))}
                     render={() => (
                         <GjenstaendeSoknader
                             style={{ marginTop: '1rem', marginBottom: '1rem' }}

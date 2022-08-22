@@ -18,36 +18,22 @@ const Over16dager = ({ erGradert }: gradertReisetilskuddProps) => {
             </Label>
             <BodyLong spacing as="span">
                 {erGradert
-                    ? tekst(
-                          'kvittering.arbeidstaker.over16.gradertreisetilskudd.brodtekst'
-                      )
+                    ? tekst('kvittering.arbeidstaker.over16.gradertreisetilskudd.brodtekst')
                     : tekst('kvittering.arbeidstaker.over16.brodtekst')}
             </BodyLong>
             <Utvidbar
                 erApen={false}
                 type="intern"
-                tittel={tekst(
-                    'kvittering.arbeidstaker.hvorfor-skille-ved-16-dager'
-                )}
+                tittel={tekst('kvittering.arbeidstaker.hvorfor-skille-ved-16-dager')}
             >
                 <BodyLong spacing>
                     {erGradert
-                        ? tekst(
-                              'kvittering.arbeidsgiveren-skal-betale-gradertreisetilskudd'
-                          )
+                        ? tekst('kvittering.arbeidsgiveren-skal-betale-gradertreisetilskudd')
                         : tekst('kvittering.arbeidsgiveren-skal-betale')}
                 </BodyLong>
             </Utvidbar>
-            <Utvidbar
-                erApen={false}
-                type="intern"
-                tittel={tekst('kvittering.hva-er-inntektsmelding')}
-            >
-                <BodyLong spacing>
-                    {tekst(
-                        'kvittering.arbeidstaker.over16.inntektsmelding.brodtekst'
-                    )}
-                </BodyLong>
+            <Utvidbar erApen={false} type="intern" tittel={tekst('kvittering.hva-er-inntektsmelding')}>
+                <BodyLong spacing>{tekst('kvittering.arbeidstaker.over16.inntektsmelding.brodtekst')}</BodyLong>
             </Utvidbar>
             <div className="avsnitt hva-skjer">
                 <Label as="h2" className="arbeidstaker-tittel">
@@ -56,17 +42,8 @@ const Over16dager = ({ erGradert }: gradertReisetilskuddProps) => {
                 <BodyLong spacing as="span">
                     {tekst('kvittering.arbeidstaker.saksbehandlingstid')}{' '}
                 </BodyLong>
-                <Link
-                    target="_blank"
-                    href={tekst(
-                        'kvittering.arbeidstaker.saksbehandlingstid.lenke.url'
-                    )}
-                >
-                    <BodyShort as="span">
-                        {tekst(
-                            'kvittering.arbeidstaker.saksbehandlingstid.lenke'
-                        )}
-                    </BodyShort>
+                <Link target="_blank" href={tekst('kvittering.arbeidstaker.saksbehandlingstid.lenke.url')}>
+                    <BodyShort as="span">{tekst('kvittering.arbeidstaker.saksbehandlingstid.lenke')}</BodyShort>
                 </Link>
                 .
             </div>
@@ -74,17 +51,9 @@ const Over16dager = ({ erGradert }: gradertReisetilskuddProps) => {
                 <Label as="h2" className="arbeidstaker-tittel">
                     {tekst('kvittering.naar-blir-pengene')}
                 </Label>
-                <BodyLong spacing>
-                    {parser(
-                        tekst(
-                            'kvittering.arbeidstaker.over16.utbetaling-arbeidsgiver'
-                        )
-                    )}{' '}
-                </BodyLong>
+                <BodyLong spacing>{parser(tekst('kvittering.arbeidstaker.over16.utbetaling-arbeidsgiver'))} </BodyLong>
                 <BodyLong spacing as="span">
-                    {parser(
-                        tekst('kvittering.arbeidstaker.over16.utbetaling-NAV')
-                    )}{' '}
+                    {parser(tekst('kvittering.arbeidstaker.over16.utbetaling-NAV'))}{' '}
                 </BodyLong>
             </div>
             <div className="avsnitt">

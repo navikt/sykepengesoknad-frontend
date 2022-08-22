@@ -13,12 +13,7 @@ import Kontonummer from '../kontonummer/kontonummer'
 const KvitteringVidere = () => {
     const { valgtSoknad } = useAppStore()
 
-    if (
-        sendtForMerEnn30DagerSiden(
-            valgtSoknad?.sendtTilArbeidsgiverDato,
-            valgtSoknad?.sendtTilNAVDato
-        )
-    ) {
+    if (sendtForMerEnn30DagerSiden(valgtSoknad?.sendtTilArbeidsgiverDato, valgtSoknad?.sendtTilNAVDato)) {
         return null
     }
 
@@ -29,24 +24,14 @@ const KvitteringVidere = () => {
             </Heading>
 
             <Vis
-                hvis={
-                    valgtSoknad?.arbeidssituasjon ===
-                    RSArbeidssituasjon.NAERINGSDRIVENDE
-                }
+                hvis={valgtSoknad?.arbeidssituasjon === RSArbeidssituasjon.NAERINGSDRIVENDE}
                 render={() => (
                     <div className="avsnitt">
-                        <Label as="h2">
-                            {tekst('kvittering.naeringsdrivende.tittel')}
-                        </Label>
+                        <Label as="h2">{tekst('kvittering.naeringsdrivende.tittel')}</Label>
                         <BodyLong spacing as="span">
                             {tekst('kvittering.naeringsdrivende.brodtekst')}{' '}
                         </BodyLong>
-                        <Link
-                            target="_blank"
-                            href={tekst(
-                                'kvittering.naeringsdrivende.lenke.url'
-                            )}
-                        >
+                        <Link target="_blank" href={tekst('kvittering.naeringsdrivende.lenke.url')}>
                             <BodyLong spacing as="span">
                                 {tekst('kvittering.naeringsdrivende.lenke')}
                             </BodyLong>
@@ -56,42 +41,24 @@ const KvitteringVidere = () => {
                 )}
             />
             <div className="avsnitt hva-skjer">
-                <Label as="h2">
-                    {tekst('kvittering.nav-behandler-soknaden')}
-                </Label>
+                <Label as="h2">{tekst('kvittering.nav-behandler-soknaden')}</Label>
                 <BodyLong spacing as="span">
                     {tekst('kvittering.arbeidstaker.saksbehandlingstid')}{' '}
                 </BodyLong>
-                <Link
-                    target="_blank"
-                    href={tekst(
-                        'kvittering.arbeidstaker.saksbehandlingstid.lenke.url'
-                    )}
-                >
+                <Link target="_blank" href={tekst('kvittering.arbeidstaker.saksbehandlingstid.lenke.url')}>
                     <BodyLong spacing as="span">
-                        {tekst(
-                            'kvittering.arbeidstaker.saksbehandlingstid.lenke'
-                        )}
+                        {tekst('kvittering.arbeidstaker.saksbehandlingstid.lenke')}
                     </BodyLong>
                 </Link>
             </div>
 
             <Vis
-                hvis={
-                    valgtSoknad &&
-                    valgtSoknad.soknadstype !== RSSoknadstype.REISETILSKUDD
-                }
+                hvis={valgtSoknad && valgtSoknad.soknadstype !== RSSoknadstype.REISETILSKUDD}
                 render={() => (
                     <div className="avsnitt">
-                        <Label as="h2">
-                            {tekst('kvittering.naar-blir-pengene')}
-                        </Label>
+                        <Label as="h2">{tekst('kvittering.naar-blir-pengene')}</Label>
                         <BodyLong spacing as="span">
-                            {parser(
-                                tekst(
-                                    'kvittering.arbeidstaker.over16.utbetaling'
-                                )
-                            )}
+                            {parser(tekst('kvittering.arbeidstaker.over16.utbetaling'))}
                         </BodyLong>
                     </div>
                 )}

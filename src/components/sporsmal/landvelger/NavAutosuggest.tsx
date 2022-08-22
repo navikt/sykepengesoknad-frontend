@@ -102,9 +102,7 @@ const NavAutosuggest = (props: NavAutosuggestProps) => {
                 onChange: onChange,
                 onKeyPress: onKeypress,
                 onBlur: onBlur,
-                className: cn(
-                    'skjemaelement__input input--l input--autocomplete'
-                ),
+                className: cn('skjemaelement__input input--l input--autocomplete'),
             }}
         />
     )

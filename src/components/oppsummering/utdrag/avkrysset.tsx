@@ -8,10 +8,7 @@ interface AvkryssetProps {
 const Avkrysset = ({ tekst }: AvkryssetProps) => {
     return (
         <div className="oppsummering__avkrysset">
-            <img
-                src="/syk/sykepengesoknad/static/check-box-1.png"
-                alt="Avkrysset"
-            />
+            <img src="/syk/sykepengesoknad/static/check-box-1.png" alt="Avkrysset" />
             <BodyShort>{tekst}</BodyShort>
         </div>
     )

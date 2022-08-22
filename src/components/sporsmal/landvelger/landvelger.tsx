@@ -13,11 +13,7 @@ interface LandvelgerComponentProps {
     onChange: (verdier: string[]) => void
 }
 
-const LandvelgerComponent = ({
-    verdierInn,
-    sporsmalId,
-    onChange,
-}: LandvelgerComponentProps) => {
+const LandvelgerComponent = ({ verdierInn, sporsmalId, onChange }: LandvelgerComponentProps) => {
     const [verdier, setVerdier] = useState(verdierInn)
 
     const onAdd = (verdi: Forslag) => {

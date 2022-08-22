@@ -20,9 +20,7 @@ const ArbeidssituasjonInfo = () => {
                         {tekst('din-sykmelding.arbeidssituasjon.tittel.2')}
                     </Label>
                     <BodyShort>
-                        {tekst(
-                            `din-sykmelding.arbeidssituasjon.alternativ.${arbeidssituasjon!.toLowerCase()}` as any
-                        )}
+                        {tekst(`din-sykmelding.arbeidssituasjon.alternativ.${arbeidssituasjon!.toLowerCase()}` as any)}
                     </BodyShort>
                 </div>
             )}

@@ -62,9 +62,7 @@ export class Soknad {
         this.avbruttDato = dayjsToDate(soknad.avbruttDato!)!
         this.opprettetDato = dayjsToDate(soknad.opprettetDato!)!
         this.sendtTilNAVDato = dayjsToDate(soknad.sendtTilNAVDato!)!
-        this.sendtTilArbeidsgiverDato = dayjsToDate(
-            soknad.sendtTilArbeidsgiverDato!
-        )!
+        this.sendtTilArbeidsgiverDato = dayjsToDate(soknad.sendtTilArbeidsgiverDato!)!
         if (soknad.arbeidsgiver) {
             this.arbeidsgiver = {
                 naermesteLeder: soknad.arbeidsgiver.naermesteLeder,
@@ -95,11 +93,7 @@ export class Sporsmal {
     parentKriterie: RSVisningskriterieType | null
     erHovedsporsmal: boolean
 
-    constructor(
-        spm: RSSporsmal,
-        kriterie: RSVisningskriterieType | null,
-        erHovedsporsmal: boolean
-    ) {
+    constructor(spm: RSSporsmal, kriterie: RSVisningskriterieType | null, erHovedsporsmal: boolean) {
         this.id = spm.id
         const orgarr: string[] = spm.tag.split('_')
         const numtag: number = parseInt(orgarr.pop() as any)
@@ -110,15 +104,13 @@ export class Sporsmal {
         }
         const idtag = tag as keyof typeof TagTyper
         this.tag = TagTyper[idtag]
-        this.sporsmalstekst =
-            spm.sporsmalstekst === null ? '' : spm.sporsmalstekst
+        this.sporsmalstekst = spm.sporsmalstekst === null ? '' : spm.sporsmalstekst
         this.undertekst = spm.undertekst
         this.svartype = spm.svartype as any as RSSvartype
         this.min = spm.min
         this.max = spm.max
         this.pavirkerAndreSporsmal = spm.pavirkerAndreSporsmal
-        this.kriterieForVisningAvUndersporsmal =
-            spm.kriterieForVisningAvUndersporsmal as any
+        this.kriterieForVisningAvUndersporsmal = spm.kriterieForVisningAvUndersporsmal as any
         this.svarliste = {
             sporsmalId: spm.id,
             svar: spm.svar.map((svar) => {
@@ -135,21 +127,13 @@ export class Sporsmal {
                 }
             }),
         }
-        this.undersporsmal = rsToSporsmal(
-            spm.undersporsmal,
-            spm.kriterieForVisningAvUndersporsmal,
-            false
-        )
+        this.undersporsmal = rsToSporsmal(spm.undersporsmal, spm.kriterieForVisningAvUndersporsmal, false)
         this.parentKriterie = kriterie
         this.erHovedsporsmal = erHovedsporsmal
     }
 }
 
-function rsToSporsmal(
-    spms: RSSporsmal[],
-    kriterie: RSVisningskriterieType | null,
-    erHovedsporsmal: boolean
-) {
+function rsToSporsmal(spms: RSSporsmal[], kriterie: RSVisningskriterieType | null, erHovedsporsmal: boolean) {
     const sporsmals: Sporsmal[] = []
     if (spms === undefined) {
         return sporsmals

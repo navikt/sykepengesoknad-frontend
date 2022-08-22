@@ -35,11 +35,7 @@ interface InngangspanelProps {
     className?: string
 }
 
-export const Inngangspanel = ({
-    soknad,
-    children,
-    className,
-}: InngangspanelProps) => {
+export const Inngangspanel = ({ soknad, children, className }: InngangspanelProps) => {
     return (
         <SoknadLink soknad={soknad} className={`inngangspanel ${className}`}>
             {children}

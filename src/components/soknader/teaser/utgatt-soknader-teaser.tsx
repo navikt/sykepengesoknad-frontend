@@ -33,48 +33,26 @@ const UtgaattSoknaderTeaser = ({ soknad }: SykepengesoknadTeaserProps) => {
                 })
             }}
         >
-            <button
-                className="inngangspanel inngangspanel__btn"
-                onClick={() => setAapen(true)}
-            >
+            <button className="inngangspanel inngangspanel__btn" onClick={() => setAapen(true)}>
                 <div className="inngangspanel__ytre">
                     <div className="inngangspanel__del1">
-                        <InngangsIkon
-                            ikon={hentIkon(soknad)}
-                            ikonHover={hentIkonHover(soknad)}
-                        />
-                        <div
-                            id={`soknader-header-${soknad.id}`}
-                            className="inngangspanel--inaktivt"
-                        >
+                        <InngangsIkon ikon={hentIkon(soknad)} ikonHover={hentIkonHover(soknad)} />
+                        <div id={`soknader-header-${soknad.id}`} className="inngangspanel--inaktivt">
                             <Vis
-                                hvis={
-                                    soknad.soknadstype !==
-                                    RSSoknadstype.OPPHOLD_UTLAND
-                                }
+                                hvis={soknad.soknadstype !== RSSoknadstype.OPPHOLD_UTLAND}
                                 render={() => (
                                     <Detail className="inngangspanel__periode">
-                                        {tilLesbarPeriodeMedArstall(
-                                            soknad.fom,
-                                            soknad.tom
-                                        )}
+                                        {tilLesbarPeriodeMedArstall(soknad.fom, soknad.tom)}
                                     </Detail>
                                 )}
                             />
-                            <Heading
-                                size="small"
-                                level="3"
-                                className="inngangspanel__tittel"
-                            >
+                            <Heading size="small" level="3" className="inngangspanel__tittel">
                                 {teaserTittel(soknad)}
                             </Heading>
                             {periodeListevisning(soknad)}
                         </div>
                     </div>
-                    <InngangsStatus
-                        status={soknad.status}
-                        tekst={hentTeaserStatustekst(soknad)}
-                    />
+                    <InngangsStatus status={soknad.status} tekst={hentTeaserStatustekst(soknad)} />
                 </div>
                 <Next className="chevron--hoyre" />
             </button>
@@ -93,9 +71,7 @@ const UtgaattSoknaderTeaser = ({ soknad }: SykepengesoknadTeaserProps) => {
                     >
                         {tekst('soknad.teaser.utgaatt.popup.header')}
                     </Heading>
-                    <Alert variant="info">
-                        {parser(tekst('soknad.teaser.utgaatt.popup.innhold'))}
-                    </Alert>
+                    <Alert variant="info">{parser(tekst('soknad.teaser.utgaatt.popup.innhold'))}</Alert>
                     <Button variant="primary" onClick={() => setAapen(false)}>
                         Lukk
                     </Button>

@@ -7,14 +7,7 @@ import { Sykmelding } from '../types/sykmelding'
 import { Soknad } from '../types/types'
 import { logger } from '../utils/logger'
 import useFetch from './rest/use-fetch'
-import {
-    FetchState,
-    hasAny401,
-    hasData,
-    hasFailed,
-    isAnyNotStartedOrPending,
-    isNotStarted,
-} from './rest/utils'
+import { FetchState, hasAny401, hasData, hasFailed, isAnyNotStartedOrPending, isNotStarted } from './rest/utils'
 import { useAppStore } from './stores/app-store'
 
 export function DataFetcher(props: { children: any }) {
@@ -42,8 +35,7 @@ export function DataFetcher(props: { children: any }) {
             )
         }
         if (isNotStarted(sykmeldinger)) {
-            const url =
-                '/syk/sykepengesoknad/api/sykmeldinger-backend/api/v2/sykmeldinger'
+            const url = '/syk/sykepengesoknad/api/sykmeldinger-backend/api/v2/sykmeldinger'
             sykmeldinger.fetch(
                 url,
                 {
@@ -69,16 +61,12 @@ export function DataFetcher(props: { children: any }) {
         window.location.reload() // refresher slik at ssr authen rydder opp
     } else if (hasFailed(rssoknader)) {
         logger.warn(
-            `Klarer ikke hente soknader = ${
-                rssoknader.httpCode
-            } ${JSON.stringify(rssoknader.error, null, 2)} ]`
+            `Klarer ikke hente soknader = ${rssoknader.httpCode} ${JSON.stringify(rssoknader.error, null, 2)} ]`
         )
         return <IngenData />
     } else if (hasFailed(sykmeldinger)) {
         logger.warn(
-            `Klarer ikke hente sykmeldinger = ${
-                sykmeldinger.httpCode
-            } ${JSON.stringify(sykmeldinger.error, null, 2)} ]`
+            `Klarer ikke hente sykmeldinger = ${sykmeldinger.httpCode} ${JSON.stringify(sykmeldinger.error, null, 2)} ]`
         )
         return <IngenData />
     }

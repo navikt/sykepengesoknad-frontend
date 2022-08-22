@@ -11,14 +11,7 @@ import { useAmplitudeInstance } from '../../amplitude/amplitude'
 import styles from './gjenapneknapp.module.css'
 
 const GjenapneSoknad = () => {
-    const {
-        valgtSoknad,
-        setValgtSoknad,
-        setValgtSykmelding,
-        sykmeldinger,
-        soknader,
-        setSoknader,
-    } = useAppStore()
+    const { valgtSoknad, setValgtSoknad, setValgtSykmelding, sykmeldinger, soknader, setSoknader } = useAppStore()
     const history = useHistory()
     const { id } = useParams<RouteParams>()
     const [gjenapner, setGjenapner] = useState<boolean>(false)
@@ -28,9 +21,7 @@ const GjenapneSoknad = () => {
         if (!valgtSoknad) {
             const filtrertSoknad = soknader.find((soknad) => soknad.id === id)
             setValgtSoknad(filtrertSoknad)
-            const sykmelding = sykmeldinger.find(
-                (sm) => sm.id === filtrertSoknad?.sykmeldingId
-            )
+            const sykmelding = sykmeldinger.find((sm) => sm.id === filtrertSoknad?.sykmeldingId)
             setValgtSykmelding(sykmelding)
         }
         // eslint-disable-next-line
@@ -41,9 +32,7 @@ const GjenapneSoknad = () => {
         setGjenapner(true)
         try {
             const res = await fetch(
-                `/syk/sykepengesoknad/api/sykepengesoknad-backend/api/v2/soknader/${
-                    valgtSoknad!.id
-                }/gjenapne`,
+                `/syk/sykepengesoknad/api/sykepengesoknad-backend/api/v2/soknader/${valgtSoknad!.id}/gjenapne`,
                 {
                     method: 'POST',
                     credentials: 'include',
@@ -65,9 +54,7 @@ const GjenapneSoknad = () => {
                     valgtSoknad!.status = RSSoknadstatus.NY
                     valgtSoknad!.avbruttDato = undefined
                     setValgtSoknad(valgtSoknad)
-                    soknader[
-                        soknader.findIndex((sok) => sok.id === valgtSoknad!.id)
-                    ] = valgtSoknad!
+                    soknader[soknader.findIndex((sok) => sok.id === valgtSoknad!.id)] = valgtSoknad!
                     setSoknader(soknader)
                     history.push(`/soknader/${valgtSoknad!.id}/1`)
                 } else {
@@ -83,12 +70,7 @@ const GjenapneSoknad = () => {
 
     return (
         <div className={styles.knapperad}>
-            <Button
-                variant="tertiary"
-                className={styles.knappen}
-                loading={gjenapner}
-                onClick={gjenapneSoknad}
-            >
+            <Button variant="tertiary" className={styles.knappen} loading={gjenapner} onClick={gjenapneSoknad}>
                 Jeg vil bruke denne søknaden likevel
             </Button>
         </div>

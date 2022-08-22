@@ -1,15 +1,9 @@
-import {
-    sendtArbeidsledig,
-    sok6,
-} from '../../../data/mock/data/soknader-integration'
+import { sendtArbeidsledig, sok6 } from '../../../data/mock/data/soknader-integration'
 import { Soknad } from '../../../types/types'
 import { harLikeSvar } from './har-like-svar'
 
 test('Har helt like svar', () => {
-    const like = harLikeSvar(
-        new Soknad(sendtArbeidsledig),
-        new Soknad(sendtArbeidsledig)
-    )
+    const like = harLikeSvar(new Soknad(sendtArbeidsledig), new Soknad(sendtArbeidsledig))
     expect(like).toBeTruthy()
 })
 

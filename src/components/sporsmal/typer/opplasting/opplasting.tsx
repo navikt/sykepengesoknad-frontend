@@ -1,11 +1,4 @@
-import {
-    Alert,
-    BodyLong,
-    BodyShort,
-    Button,
-    Label,
-    Modal,
-} from '@navikt/ds-react'
+import { Alert, BodyLong, BodyShort, Button, Label, Modal } from '@navikt/ds-react'
 import parser from 'html-react-parser'
 import React, { useRef } from 'react'
 
@@ -42,33 +35,20 @@ const Opplasting = ({ sporsmal }: SpmProps) => {
             </div>
 
             <Alert variant="warning" className="reisetilskudd">
-                <BodyShort as="strong">
-                    {tekst('soknad.info.kvitteringer-del1')}
-                </BodyShort>
+                <BodyShort as="strong">{tekst('soknad.info.kvitteringer-del1')}</BodyShort>
                 <ul style={{ minWidth: 190 }}>
                     <BodyShort>
-                        <li>
-                            {tekst('soknad.info.kvitteringer-del2-kulepunkt1')}
-                        </li>
-                        <li>
-                            {tekst('soknad.info.kvitteringer-del2-kulepunkt2')}
-                        </li>
-                        <li>
-                            {tekst('soknad.info.kvitteringer-del2-kulepunkt3')}
-                        </li>
+                        <li>{tekst('soknad.info.kvitteringer-del2-kulepunkt1')}</li>
+                        <li>{tekst('soknad.info.kvitteringer-del2-kulepunkt2')}</li>
+                        <li>{tekst('soknad.info.kvitteringer-del2-kulepunkt3')}</li>
                     </BodyShort>
                 </ul>
                 <BodyShort>{tekst('soknad.info.kvitteringer-del3')}</BodyShort>
             </Alert>
 
             <div className="pdf-hjelp">
-                <Ekspanderbar
-                    title={tekst('soknad.info.kvitteringer-PDF-tittel')}
-                    sporsmalId={sporsmal.id}
-                >
-                    <BodyLong>
-                        {parser(tekst('soknad.info.kvitteringer-PDF-tekst'))}
-                    </BodyLong>
+                <Ekspanderbar title={tekst('soknad.info.kvitteringer-PDF-tittel')} sporsmalId={sporsmal.id}>
+                    <BodyLong>{parser(tekst('soknad.info.kvitteringer-PDF-tekst'))}</BodyLong>
                 </Ekspanderbar>
             </div>
 
@@ -77,21 +57,10 @@ const Opplasting = ({ sporsmal }: SpmProps) => {
                 variant="secondary"
                 className="fler-vedlegg"
                 onClick={aktiverModal}
-                onMouseEnter={() =>
-                    (ikonRef.current!.src =
-                        '/syk/sykepengesoknad/static/pluss-ikon-hover.svg')
-                }
-                onMouseLeave={() =>
-                    (ikonRef.current!.src =
-                        '/syk/sykepengesoknad/static/pluss-ikon.svg')
-                }
+                onMouseEnter={() => (ikonRef.current!.src = '/syk/sykepengesoknad/static/pluss-ikon-hover.svg')}
+                onMouseLeave={() => (ikonRef.current!.src = '/syk/sykepengesoknad/static/pluss-ikon.svg')}
             >
-                <img
-                    ref={ikonRef}
-                    className="pluss-ikon"
-                    src={'/syk/sykepengesoknad/static/pluss-ikon.svg'}
-                    alt=""
-                />
+                <img ref={ikonRef} className="pluss-ikon" src={'/syk/sykepengesoknad/static/pluss-ikon.svg'} alt="" />
                 <BodyShort as="span">{tekst('opplasting.legg-til')}</BodyShort>
             </Button>
 

@@ -41,9 +41,7 @@ const Kvittering = () => {
 
             <Vis
                 hvis={valgtSoknad!.soknadstype !== RSSoknadstype.OPPHOLD_UTLAND}
-                render={() => (
-                    <Opplysninger ekspandert={false} steg="kvittering" />
-                )}
+                render={() => <Opplysninger ekspandert={false} steg="kvittering" />}
             />
         </div>
     )

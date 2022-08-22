@@ -23,39 +23,26 @@ export const urlTilSoknad = (soknad: Soknad) => {
 
     const soknaderUrl = `/soknader/${soknad.id}`
     return erDelvisUtfylt(soknad)
-        ? `${soknaderUrl}/${finnPosisjonPaSisteBesvarteSporsmal(soknad) + 1}${
-              window.location.search
-          }`
+        ? `${soknaderUrl}/${finnPosisjonPaSisteBesvarteSporsmal(soknad) + 1}${window.location.search}`
         : `${soknaderUrl}/1${window.location.search}`
 }
 
 export const erDelvisUtfyltNySoknad = (soknad: Soknad): boolean => {
-    return (
-        erDelvisUtfylt(soknad) &&
-        soknad.status !== RSSoknadstatus.UTKAST_TIL_KORRIGERING
-    )
+    return erDelvisUtfylt(soknad) && soknad.status !== RSSoknadstatus.UTKAST_TIL_KORRIGERING
 }
 
 const erDelvisUtfylt = (soknad: Soknad): boolean => {
     const antallRelevanteSporsmal = hentRelevanteSporsmal(soknad).length
-    const posisjonPaSisteBesvarteSporsmal =
-        finnPosisjonPaSisteBesvarteSporsmal(soknad)
-    return (
-        posisjonPaSisteBesvarteSporsmal > 0 &&
-        posisjonPaSisteBesvarteSporsmal !== antallRelevanteSporsmal
-    )
+    const posisjonPaSisteBesvarteSporsmal = finnPosisjonPaSisteBesvarteSporsmal(soknad)
+    return posisjonPaSisteBesvarteSporsmal > 0 && posisjonPaSisteBesvarteSporsmal !== antallRelevanteSporsmal
 }
 
 const hentRelevanteSporsmal = (soknad: Soknad) => {
-    return soknad.sporsmal.filter(
-        (sporsmal) => sporsmal.svartype !== RSSvartype.IKKE_RELEVANT
-    )
+    return soknad.sporsmal.filter((sporsmal) => sporsmal.svartype !== RSSvartype.IKKE_RELEVANT)
 }
 
 const finnPosisjonPaSisteBesvarteSporsmal = (soknad: Soknad) => {
-    const reversertSporsmalsListe = hentRelevanteSporsmal(soknad)
-        .slice()
-        .reverse()
+    const reversertSporsmalsListe = hentRelevanteSporsmal(soknad).slice().reverse()
     let ubesvarteSporsmal = 0
 
     for (const sporsmal of reversertSporsmalsListe) {

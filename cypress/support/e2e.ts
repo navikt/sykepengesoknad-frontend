@@ -61,19 +61,17 @@ afterEach(() => {
 function terminalLog(violations: any) {
     cy.task(
         'log',
-        `${violations.length} accessibility violation${
-            violations.length === 1 ? '' : 's'
-        } ${violations.length === 1 ? 'was' : 'were'} detected`
+        `${violations.length} accessibility violation${violations.length === 1 ? '' : 's'} ${
+            violations.length === 1 ? 'was' : 'were'
+        } detected`
     )
     // pluck specific keys to keep the table readable
-    const violationData = violations.map(
-        ({ id, impact, description, nodes }: any) => ({
-            id,
-            impact,
-            description,
-            nodes: nodes.length,
-        })
-    )
+    const violationData = violations.map(({ id, impact, description, nodes }: any) => ({
+        id,
+        impact,
+        description,
+        nodes: nodes.length,
+    }))
 
     cy.task('table', violationData)
 }
@@ -89,23 +87,17 @@ const lyttTilNettverksKall = (a: any) => {
         if (url.includes('sporsmal') && req['method'] !== 'DELETE') {
             const headers = req['headers']
             const sporsmal = JSON.parse(req['body']) as RSSporsmal
-            expect(headers['Content-Type'], '/sporsmal').to.eql(
-                'application/json'
-            )
+            expect(headers['Content-Type'], '/sporsmal').to.eql('application/json')
             svarFormat(sporsmal)
         } else if (url.includes('/finnMottaker')) {
             const headers = req['headers']
-            expect(headers['Content-Type'], '/finnMottaker').to.eql(
-                'application/json'
-            )
+            expect(headers['Content-Type'], '/finnMottaker').to.eql('application/json')
         } else if (url.includes('/send')) {
             const headers = req['headers']
             expect(headers['Content-Type'], '/send').to.eql('application/json')
         } else if (url.includes('/gjenapne')) {
             const headers = req['headers']
-            expect(headers['Content-Type'], '/gjenapne').to.eql(
-                'application/json'
-            )
+            expect(headers['Content-Type'], '/gjenapne').to.eql('application/json')
         } else {
             cy.log('Sjekker ikke kallet til', url)
         }
@@ -160,9 +152,7 @@ const svarFormat = (sporsmal: RSSporsmal) => {
             break
         case RSSvartype.PERIODER:
             expect(sporsmal.svar[0]?.verdi).to.match(
-                RegExp(
-                    '{"fom":"\\d{4}-\\d{2}-\\d{2}","tom":"\\d{4}-\\d{2}-\\d{2}"}'
-                ),
+                RegExp('{"fom":"\\d{4}-\\d{2}-\\d{2}","tom":"\\d{4}-\\d{2}-\\d{2}"}'),
                 `Svar format ${sporsmal.svartype}`
             )
             break
@@ -170,16 +160,10 @@ const svarFormat = (sporsmal: RSSporsmal) => {
         case RSSvartype.KILOMETER:
         case RSSvartype.PROSENT:
         case RSSvartype.TIMER:
-            expect(sporsmal.svar[0]?.verdi).to.match(
-                RegExp('\\d+|'),
-                `Svar format ${sporsmal.svartype}`
-            )
+            expect(sporsmal.svar[0]?.verdi).to.match(RegExp('\\d+|'), `Svar format ${sporsmal.svartype}`)
             break
         case RSSvartype.BELOP:
-            expect(sporsmal.svar[0]?.verdi).to.match(
-                RegExp('\\d+|'),
-                `Svar format ${sporsmal.svartype}`
-            )
+            expect(sporsmal.svar[0]?.verdi).to.match(RegExp('\\d+|'), `Svar format ${sporsmal.svartype}`)
             if (sporsmal.id == '5fb4961f-90d5-4893-9821-24b3a68cf3e1') {
                 // Tester at frontend poster med øre
                 expect(sporsmal.svar[0]?.verdi).to.eq('100000')
@@ -192,10 +176,7 @@ const svarFormat = (sporsmal: RSSporsmal) => {
             )
             break
         case RSSvartype.LAND:
-            expect(sporsmal.svar[0]?.verdi).to.match(
-                RegExp('\\S+'),
-                `Svar format ${sporsmal.svartype}`
-            )
+            expect(sporsmal.svar[0]?.verdi).to.match(RegExp('\\S+'), `Svar format ${sporsmal.svartype}`)
             break
         case RSSvartype.FRITEKST:
         case RSSvartype.IKKE_RELEVANT:
@@ -211,8 +192,7 @@ const svarFormat = (sporsmal: RSSporsmal) => {
             */
             break
         default:
-            expect(true, `Mangler format på sporsmal ${sporsmal.svartype}`).to
-                .be.false
+            expect(true, `Mangler format på sporsmal ${sporsmal.svartype}`).to.be.false
     }
     if (
         !sporsmal.kriterieForVisningAvUndersporsmal ||

@@ -36,16 +36,8 @@ const ArbeidstakerStatus = () => {
         if (sendtTilArb) {
             const datoArb = dayjs(sendtTilArb).format('dddd D. MMM, kl HH:mm')
             setTilArbDato(datoArb.charAt(0).toUpperCase() + datoArb.slice(1))
-            setTilArbNavn(
-                valgtSoknad?.arbeidsgiver?.navn
-                    ? valgtSoknad?.arbeidsgiver?.navn
-                    : Mottaker.ARBEIDSGIVER
-            )
-            setTilOrg(
-                valgtSoknad?.arbeidsgiver?.orgnummer
-                    ? `(Org.nr. ${valgtSoknad.arbeidsgiver.orgnummer})`
-                    : ''
-            )
+            setTilArbNavn(valgtSoknad?.arbeidsgiver?.navn ? valgtSoknad?.arbeidsgiver?.navn : Mottaker.ARBEIDSGIVER)
+            setTilOrg(valgtSoknad?.arbeidsgiver?.orgnummer ? `(Org.nr. ${valgtSoknad.arbeidsgiver.orgnummer})` : '')
         }
     }
 
@@ -58,9 +50,7 @@ const ArbeidstakerStatus = () => {
                         <Label as="h3" className="sendt-tittel">
                             {tekst('kvittering.sendt-til')}
                         </Label>
-                        <Avkrysset
-                            tekst={`${tilArbNavn} ${tilOrg}${medKopi}`}
-                        />
+                        <Avkrysset tekst={`${tilArbNavn} ${tilOrg}${medKopi}`} />
                         <Detail size="small">{tilArbDato}</Detail>
                     </>
                 )}

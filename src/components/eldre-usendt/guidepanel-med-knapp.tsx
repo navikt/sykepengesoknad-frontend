@@ -12,13 +12,7 @@ interface GuidepanelMedKnappProps {
     komponent: string
 }
 
-export const GuidepanelMedKnapp = ({
-    heading,
-    innhold,
-    knappeTekst,
-    url,
-    komponent,
-}: GuidepanelMedKnappProps) => {
+export const GuidepanelMedKnapp = ({ heading, innhold, knappeTekst, url, komponent }: GuidepanelMedKnappProps) => {
     const { logEvent } = useAmplitudeInstance()
     const history = useHistory()
 

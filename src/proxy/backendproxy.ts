@@ -28,10 +28,7 @@ export async function proxyKallTilBackend(opts: Opts) {
     }
 
     const idportenToken = opts.req.headers.authorization!.split(' ')[1]
-    const tokenxToken = await getTokenxToken(
-        idportenToken,
-        opts.backendClientId
-    )
+    const tokenxToken = await getTokenxToken(idportenToken, opts.backendClientId)
 
     const options: RequestOptions = {
         hostname: opts.backendHostname,
