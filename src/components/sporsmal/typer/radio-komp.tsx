@@ -32,11 +32,13 @@ const RadioKomp = ({ sporsmal }: SpmProps) => {
     }
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
     // noinspection JSUnusedLocalSymbols
-    const watchTimer = (watchRadio?.toLowerCase() === 'timer')?
-        watch(
-            hentUndersporsmal(sporsmal!,
-                TagTyper.HVOR_MYE_TIMER_VERDI)!.id
-        ) : undefined
+    const watchTimer =
+        watchRadio?.toLowerCase() === 'timer'
+            ? watch(
+                  hentUndersporsmal(sporsmal!, TagTyper.HVOR_MYE_TIMER_VERDI)!
+                      .id
+              )
+            : undefined
     const feilmelding = hentFeilmelding(sporsmal)
     const { valgtSoknad } = useAppStore()
     const { validerGrad, beregnGrad } = validerArbeidsgrad(sporsmal)
