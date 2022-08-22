@@ -10,11 +10,7 @@ import { tekst } from '../../utils/tekster'
 export const erSisteSide = (soknad: Soknad, sidenummer: number) => {
     const sporsmal = soknad.sporsmal[sidenummer - 1]
     const tag = sporsmal.tag
-    return (
-        [TagTyper.VAER_KLAR_OVER_AT, TagTyper.BEKREFT_OPPLYSNINGER].indexOf(
-            tag
-        ) > -1
-    )
+    return [TagTyper.VAER_KLAR_OVER_AT, TagTyper.BEKREFT_OPPLYSNINGER].indexOf(tag) > -1
 }
 
 export const hentNokkel = (soknad: Soknad, sidenummer: number) => {
@@ -23,15 +19,10 @@ export const hentNokkel = (soknad: Soknad, sidenummer: number) => {
         return ''
     }
     const nokkel = fjernIndexFraTag(sporsmal.tag).toLowerCase()
-    if (
-        sidenummer === 1 &&
-        soknad.soknadstype !== RSSoknadstype.OPPHOLD_UTLAND
-    ) {
+    if (sidenummer === 1 && soknad.soknadstype !== RSSoknadstype.OPPHOLD_UTLAND) {
         return ''
     }
-    return erSisteSide(soknad, sidenummer)
-        ? 'sykepengesoknad.til-slutt.tittel'
-        : `sykepengesoknad.${nokkel}.tittel`
+    return erSisteSide(soknad, sidenummer) ? 'sykepengesoknad.til-slutt.tittel' : `sykepengesoknad.${nokkel}.tittel`
 }
 
 export const pathUtenSteg = (pathname: string) => {
@@ -74,10 +65,7 @@ export const hentFeilmelding = (
         lokal: tekst(('soknad.feilmelding.' + sporsmal.tag + '.lokal') as any),
     }
     if (feilmelding.lokal === undefined) {
-        feilmelding.lokal = hentGeneriskFeilmelding(
-            sporsmal.svartype,
-            error
-        )! as string
+        feilmelding.lokal = hentGeneriskFeilmelding(sporsmal.svartype, error)! as string
     }
     return feilmelding
 }
@@ -110,9 +98,7 @@ export const hentGeneriskFeilmelding = (
             } else if (type === 'min') {
                 return `Må være minimum ${(error?.ref as HTMLInputElement).min}`
             } else if (type === 'max') {
-                return `Må være maksimum ${
-                    (error?.ref as HTMLInputElement).max
-                }`
+                return `Må være maksimum ${(error?.ref as HTMLInputElement).max}`
             }
             return error?.message
         }

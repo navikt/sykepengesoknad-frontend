@@ -21,18 +21,16 @@ const tillatteApier = [
     'DELETE /api/v2/soknader/[uuid]/sporsmal/[uuid]/svar/[uuid]',
 ]
 
-const handler = beskyttetApi(
-    async (req: NextApiRequest, res: NextApiResponse) => {
-        await proxyKallTilBackend({
-            req,
-            res,
-            tillatteApier,
-            backend: 'sykepengesoknad-backend',
-            backendHostname: 'sykepengesoknad-backend',
-            backendClientId: serverRuntimeConfig.sykepengesoknadBackendClientId,
-        })
-    }
-)
+const handler = beskyttetApi(async (req: NextApiRequest, res: NextApiResponse) => {
+    await proxyKallTilBackend({
+        req,
+        res,
+        tillatteApier,
+        backend: 'sykepengesoknad-backend',
+        backendHostname: 'sykepengesoknad-backend',
+        backendClientId: serverRuntimeConfig.sykepengesoknadBackendClientId,
+    })
+})
 
 export const config = {
     api: {

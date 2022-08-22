@@ -4,18 +4,13 @@ const OpplysningerTekster = {
     'sykepengesoknad.sykmelding-utdrag.arbeidsgiver': 'Arbeidsgiver',
     'din-sykmelding.arbeidssituasjon.tittel.2': 'Hva passer best for deg?',
     'din-sykmelding.arbeidssituasjon.alternativ.frilanser': 'Jeg er frilanser',
-    'din-sykmelding.arbeidssituasjon.alternativ.naeringsdrivende':
-        'Jeg er selvstendig næringsdrivende',
-    'din-sykmelding.arbeidssituasjon.alternativ.annet':
-        'Uavklart arbeidssituasjon',
-    'din-sykmelding.arbeidssituasjon.alternativ.arbeidsledig':
-        'Jeg er arbeidsledig eller permittert',
+    'din-sykmelding.arbeidssituasjon.alternativ.naeringsdrivende': 'Jeg er selvstendig næringsdrivende',
+    'din-sykmelding.arbeidssituasjon.alternativ.annet': 'Uavklart arbeidssituasjon',
+    'din-sykmelding.arbeidssituasjon.alternativ.arbeidsledig': 'Jeg er arbeidsledig eller permittert',
     'din-sykmelding.arbeidssituasjon.alternativ.arbeidstaker': 'Jeg er ansatt',
-    'sykepengesoknad.sykmelding-utdrag.dato-sykmeldingen-ble-skrevet':
-        'Dato sykmeldingen ble skrevet',
+    'sykepengesoknad.sykmelding-utdrag.dato-sykmeldingen-ble-skrevet': 'Dato sykmeldingen ble skrevet',
     'sykepengesoknad.avbrutt.tidspunkt': 'Søknaden ble avbrutt av deg',
-    'sykepengesoknad.avbrutt.informasjon-innhold-1':
-        'Det betyr at du ikke vil få sykepenger basert på denne søknaden.',
+    'sykepengesoknad.avbrutt.informasjon-innhold-1': 'Det betyr at du ikke vil få sykepenger basert på denne søknaden.',
     'sykepengesoknad.avbrutt.informasjon-innhold-2':
         'For å få sykepenger fra NAV, må du søke. Så hvis du ikke har sendt inn søknad som gjelder samme periode og samme arbeidsgiver på papir, vil du ikke få sykepenger fra NAV for denne perioden.',
     'sykepengesoknad.avbrutt.informasjon-innhold-3':
@@ -26,10 +21,8 @@ const OpplysningerTekster = {
     'sykepengesoknad.sykmelding-utdrag.forsikring-nei':
         'Har ikke forsikring som gjelder de første 16 dagene av sykefraværet',
     'sykepengesoknad.sykmelding-utdrag.forsikring': 'Forsikring',
-    'sykepengesoknad.sykmelding-utdrag.egenmelding-papir':
-        'Egenmelding og/eller sykmelding på papir',
-    'sykepengesoknad.sykmelding-utdrag.egenmelding-papir-nei':
-        'Har ikke hatt egenmelding og/eller sykmelding på papir',
+    'sykepengesoknad.sykmelding-utdrag.egenmelding-papir': 'Egenmelding og/eller sykmelding på papir',
+    'sykepengesoknad.sykmelding-utdrag.egenmelding-papir-nei': 'Har ikke hatt egenmelding og/eller sykmelding på papir',
 }
 
 export default OpplysningerTekster

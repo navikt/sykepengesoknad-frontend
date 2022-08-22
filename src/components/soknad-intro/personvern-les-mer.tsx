@@ -46,15 +46,9 @@ const PersonvernLesMer = () => {
             >
                 <Modal.Content>
                     <Heading size="medium" level="3" className="modal__tittel">
-                        {tekst(
-                            'sykepengesoknad.soknad-intro.personvern-modal-header'
-                        )}
+                        {tekst('sykepengesoknad.soknad-intro.personvern-modal-header')}
                     </Heading>
-                    {parser(
-                        tekst(
-                            'sykepengesoknad.soknad-intro.personvern-modal-innhold'
-                        )
-                    )}
+                    {parser(tekst('sykepengesoknad.soknad-intro.personvern-modal-innhold'))}
 
                     <div className="lukk-wrapper">
                         <button

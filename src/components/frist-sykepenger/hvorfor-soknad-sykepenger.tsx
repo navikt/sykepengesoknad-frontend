@@ -9,9 +9,7 @@ interface HvorforSoknadSykepengerProps {
     soknadstype: RSSoknadstype
 }
 
-const HvorforSoknadSykepenger = ({
-    soknadstype,
-}: HvorforSoknadSykepengerProps) => {
+const HvorforSoknadSykepenger = ({ soknadstype }: HvorforSoknadSykepengerProps) => {
     return (
         <>
             <Heading size="small" level="3">
@@ -20,40 +18,27 @@ const HvorforSoknadSykepenger = ({
 
             <Vis
                 hvis={soknadstype === RSSoknadstype.REISETILSKUDD}
-                render={() => (
-                    <BodyLong spacing>
-                        {tekst('hvorfor-soknad-reisetilskudd')}
-                    </BodyLong>
-                )}
+                render={() => <BodyLong spacing>{tekst('hvorfor-soknad-reisetilskudd')}</BodyLong>}
             />
 
             <Vis
                 hvis={soknadstype === RSSoknadstype.GRADERT_REISETILSKUDD}
                 render={() => (
                     <>
-                        <BodyLong spacing>
-                            {tekst('hvorfor-soknad-gradertreisetilskudd')}
-                        </BodyLong>
-                        <BodyLong spacing>
-                            {tekst('hvorfor-soknad-sykepenger.jobba')}
-                        </BodyLong>
+                        <BodyLong spacing>{tekst('hvorfor-soknad-gradertreisetilskudd')}</BodyLong>
+                        <BodyLong spacing>{tekst('hvorfor-soknad-sykepenger.jobba')}</BodyLong>
                     </>
                 )}
             />
 
             <Vis
                 hvis={
-                    soknadstype !== RSSoknadstype.REISETILSKUDD &&
-                    soknadstype !== RSSoknadstype.GRADERT_REISETILSKUDD
+                    soknadstype !== RSSoknadstype.REISETILSKUDD && soknadstype !== RSSoknadstype.GRADERT_REISETILSKUDD
                 }
                 render={() => (
                     <>
-                        <BodyLong spacing>
-                            {tekst('hvorfor-soknad-sykepenger')}
-                        </BodyLong>
-                        <BodyLong spacing>
-                            {tekst('hvorfor-soknad-sykepenger.jobba')}
-                        </BodyLong>
+                        <BodyLong spacing>{tekst('hvorfor-soknad-sykepenger')}</BodyLong>
+                        <BodyLong spacing>{tekst('hvorfor-soknad-sykepenger.jobba')}</BodyLong>
                     </>
                 )}
             />

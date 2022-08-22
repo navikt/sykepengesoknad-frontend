@@ -27,9 +27,7 @@ export async function avbrytSoknad({
     setFeilmeldingTekst,
 }: AvbrytSoknadReq) {
     const res = await fetch(
-        `/syk/sykepengesoknad/api/sykepengesoknad-backend/api/v2/soknader/${
-            valgtSoknad!.id
-        }/avbryt`,
+        `/syk/sykepengesoknad/api/sykepengesoknad-backend/api/v2/soknader/${valgtSoknad!.id}/avbryt`,
         {
             method: 'POST',
             credentials: 'include',
@@ -52,11 +50,7 @@ export async function avbrytSoknad({
                 status: RSSoknadstatus.AVBRUTT,
                 avbruttDato: new Date(),
             }
-            setSoknader(
-                soknader.map((s) =>
-                    s.id === valgtSoknad!.id ? nySoknad : s
-                ) as any
-            )
+            setSoknader(soknader.map((s) => (s.id === valgtSoknad!.id ? nySoknad : s)) as any)
             setValgtSoknad(nySoknad)
             history.push(urlTilSoknad(nySoknad))
         }

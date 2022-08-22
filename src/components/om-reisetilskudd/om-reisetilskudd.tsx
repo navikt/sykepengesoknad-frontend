@@ -11,32 +11,20 @@ const OmReisetilskudd = () => {
         <Accordion>
             <Accordion.Item open={open} className="om-reisetilskudd">
                 <Accordion.Header onClick={() => setOpen(!open)}>
-                    <Heading size="small">
-                        {tekst('tilskudd.start.om-reisetilskudd')}
-                    </Heading>
+                    <Heading size="small">{tekst('tilskudd.start.om-reisetilskudd')}</Heading>
                 </Accordion.Header>
                 <Accordion.Content>
                     <Label as="h3">{tekst('tilskudd.start.hva-dekker')}</Label>
-                    <BodyLong spacing>
-                        {parser(tekst('tilskudd.start.hva-dekker-tekst'))}
-                    </BodyLong>
+                    <BodyLong spacing>{parser(tekst('tilskudd.start.hva-dekker-tekst'))}</BodyLong>
 
                     <Label as="h3">{tekst('tilskudd.start.forste-16')}</Label>
-                    <BodyLong spacing>
-                        {tekst('tilskudd.start.forste-16-tekst')}
-                    </BodyLong>
+                    <BodyLong spacing>{tekst('tilskudd.start.forste-16-tekst')}</BodyLong>
 
                     <Label as="h3">{tekst('tilskudd.start.legg-ved')}</Label>
-                    <BodyLong spacing>
-                        {tekst('tilskudd.start.legg-ved-tekst')}
-                    </BodyLong>
+                    <BodyLong spacing>{tekst('tilskudd.start.legg-ved-tekst')}</BodyLong>
 
                     <BodyLong spacing>
-                        <Link
-                            href="https://nav.no/reisetilskudd"
-                            target="_blank"
-                            rel="noopener"
-                        >
+                        <Link href="https://nav.no/reisetilskudd" target="_blank" rel="noopener">
                             {tekst('tilskudd.start.les-mer-reisetilskudd')}
                         </Link>
                         .

@@ -4,18 +4,15 @@ const KvitteringTekster = {
     'kvittering.utbetaling.tittel': 'Utbetaling av sykepenger',
     'kvittering.knapp.endre': 'Jeg vil endre svarene i søknaden',
     'kvittering.knapp.send-nav': 'Jeg vil at søknaden skal behandles av NAV',
-    'kvittering.knapp.send-arbeidsgiver':
-        'Jeg vil sende en kopi av søknaden til arbeidsgiveren min',
+    'kvittering.knapp.send-arbeidsgiver': 'Jeg vil sende en kopi av søknaden til arbeidsgiveren min',
 
     'kvittering.knapp.angre': 'Angre',
     'kvittering.korrigering.feilet': 'Beklager, søknaden kunne ikke endres',
-    'kvittering.ettersending.feilet':
-        'Beklager, søknaden kunne ikke ettersendes',
+    'kvittering.ettersending.feilet': 'Beklager, søknaden kunne ikke ettersendes',
 
     'kvittering.info.send-til-arbeidsgiver':
         'NAV har allerede mottatt søknaden din og behandler denne. <br> <br> Hvis din arbeidsgiver har bedt deg sende en kopi, eller du av andre årsaker likevel  ønsker å sende søknaden til arbeidsgiveren din, kan du gjøre det her.',
-    'kvittering.knapp.bekreft.send-til-arbeidsgiver':
-        'Send kopi av søknaden til arbeidsgiver',
+    'kvittering.knapp.bekreft.send-til-arbeidsgiver': 'Send kopi av søknaden til arbeidsgiver',
 
     'kvittering.tittel.send-til-nav': 'Send søknaden til NAV',
     'kvittering.info.send-til-nav':
@@ -33,8 +30,7 @@ const KvitteringTekster = {
     'kvittering.saksbehandling-avhenger-av':
         'Saksbehandlingstid avhenger av hvilket fylke du bor i og om det er førstegangs-søknad eller søknad om forlengelse.',
     'kvittering.finn-ut': 'Finn ut hva som gjelder for ditt fylke her',
-    'kvittering.finn-ut.url':
-        'https://www.nav.no/no/nav-og-samfunn/om-nav/saksbehandlingstider-i-nav',
+    'kvittering.finn-ut.url': 'https://www.nav.no/no/nav-og-samfunn/om-nav/saksbehandlingstider-i-nav',
     'kvittering.naar-blir-pengene': 'Når blir pengene utbetalt?',
     'kvittering.det-er-ulike-regler':
         'Det er ulike regler for sykepenger avhengig av hva slags arbeid du har eller hvilken situasjon du er i.',
@@ -46,8 +42,7 @@ const KvitteringTekster = {
         'Søker du etter arbeidsgiverperioden må arbeidsgiveren din sende inn inntekts-melding så fort som mulig. Er du usikker på om den er sendt, bør du forhøre deg med arbeidsgiveren din.',
     'kvittering.hva-er-arbeidsgiverperioden': 'Hva er arbeidsgiverperioden?',
     'kvittering.hva-er-inntektsmelding': 'Hva er en inntektsmelding?',
-    'kvittering.viktig-for-selvstendige':
-        'Viktig for selvstendige næringsdrivende og frilansere',
+    'kvittering.viktig-for-selvstendige': 'Viktig for selvstendige næringsdrivende og frilansere',
     'kvittering.for-at-nav.1': 'For at NAV skal kunne behandle søknaden må du',
     'kvittering.for-at-nav.2': 'sende inn skjema om inntekts-opplysninger',
     'kvittering.for-at-nav.2.url':
@@ -65,22 +60,17 @@ const KvitteringTekster = {
     'kvittering.naeringsdrivende.tittel': 'Før NAV kan behandle søknaden',
     'kvittering.naeringsdrivende.brodtekst':
         'Vi trenger inntektsopplysninger fra deg som du sender inn på eget skjema. Du trenger bare å sende inn skjemaet én gang, selv om sykmeldingen eventuelt blir forlenget.',
-    'kvittering.naeringsdrivende.lenke':
-        'Gå til skjema for inntekstopplysninger her',
+    'kvittering.naeringsdrivende.lenke': 'Gå til skjema for inntekstopplysninger her',
     'kvittering.naeringsdrivende.lenke.url':
         'https://www.nav.no/soknader/nb/bedrift/inntekt-og-trekk/inntektsopplysninger-sykepenger',
 
     'kvittering.utenlands.overskrift1': 'Du får svar på om du kan reise',
     'kvittering.utenlands.brodtekst1':
         'NAV vurderer om reisen vil forlenge sykefraværet ditt eller hindre planlagte aktiviteter.',
-    'kvittering.utenlands.overskrift2':
-        'Risiko ved reise før du har mottatt svar',
-    'kvittering.utenlands.liste1':
-        'Du kan risikere at sykepengene stanses i perioden du er på Reise.',
-    'kvittering.utenlands.liste2':
-        'Sykepengene kan beregnes etter et lavere grunnlag når du er tilbake.',
-    'kvittering.utenlands.liste3':
-        'Du kan få avslag på videre sykepenger hvis reisen varer fire uker eller mer.',
+    'kvittering.utenlands.overskrift2': 'Risiko ved reise før du har mottatt svar',
+    'kvittering.utenlands.liste1': 'Du kan risikere at sykepengene stanses i perioden du er på Reise.',
+    'kvittering.utenlands.liste2': 'Sykepengene kan beregnes etter et lavere grunnlag når du er tilbake.',
+    'kvittering.utenlands.liste3': 'Du kan få avslag på videre sykepenger hvis reisen varer fire uker eller mer.',
     'kvittering.utenlands.lenke': 'Les mer om sykepenger når du er på reise',
     'kvittering.utenlands.lenke.url':
         'https://www.nav.no/no/person/arbeid/sykmeldt-arbeidsavklaringspenger-og-yrkesskade/sykepenger/sykepenger-ved-utenlandsopphold',
@@ -88,14 +78,11 @@ const KvitteringTekster = {
     'kvittering.utenlands.brodtekst3':
         'Etter at sykefraværsperioden er over, søker du om sykepenger på vanlig måte. Du får en melding fra NAV når søknaden er klar til å fylles ut.',
 
-    'kvittering.arbeidstaker.tittel':
-        'Du får sykepengene fra arbeidsgiveren din',
-    'kvittering.arbeidstaker.hvorfor-skille-ved-16-dager':
-        'Hvorfor går det et skille ved 16 dager?',
+    'kvittering.arbeidstaker.tittel': 'Du får sykepengene fra arbeidsgiveren din',
+    'kvittering.arbeidstaker.hvorfor-skille-ved-16-dager': 'Hvorfor går det et skille ved 16 dager?',
     'kvittering.arbeidstaker.saksbehandlingstid':
         'Saksbehandlingstiden regnes fra NAV har mottatt all nødvendig dokumentasjon. Etter dette må du regne med å vente minst fire uker før søknaden er behandlet. Men saksbehandlingstidene kan variere noe.',
-    'kvittering.arbeidstaker.saksbehandlingstid.lenke':
-        'Sjekk saksbehandlingstidene i ditt fylke',
+    'kvittering.arbeidstaker.saksbehandlingstid.lenke': 'Sjekk saksbehandlingstidene i ditt fylke',
     'kvittering.arbeidstaker.saksbehandlingstid.lenke.url':
         'https://www.nav.no/no/nav-og-samfunn/om-nav/saksbehandlingstider-i-nav',
     'kvittering.arbeidstaker.brodtekst':
@@ -115,8 +102,7 @@ const KvitteringTekster = {
 
     'kvittering.arbeidstaker.med-opphold':
         'Du har vært friskmeldt inntil 16 dager siden sist du søkte om sykepenger. Da må arbeidsgiver sende oss inntektsmelding på nytt. Hør gjerne med arbeidsgiveren din hvis du er usikker på om den er sendt.',
-    'kvittering.arbeidstaker.hvorfor-inntektsmelding-pa-nytt':
-        'Hvorfor inntektsmeldingen må sendes på nytt?',
+    'kvittering.arbeidstaker.hvorfor-inntektsmelding-pa-nytt': 'Hvorfor inntektsmeldingen må sendes på nytt?',
     'kvittering.arbeidstaker.hvorfor-inntektsmelding-pa-nytt.tekst':
         'Lønn eller arbeidstid kan ha endret seg siden du var syk forrige gang. Dette får vi bare informasjon om gjennom inntektsmeldingen.',
 

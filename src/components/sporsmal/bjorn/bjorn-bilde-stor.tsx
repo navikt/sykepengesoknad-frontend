@@ -74,13 +74,7 @@ const BjornBildeStor = ({ alt }: BjornBildeProps) => {
             <defs>
                 <circle id="path-1-bjorn" cx="50" cy="50" r="50" />
             </defs>
-            <g
-                id="Illustrasjoner"
-                stroke="none"
-                strokeWidth="1"
-                fill="none"
-                fillRule="evenodd"
-            >
+            <g id="Illustrasjoner" stroke="none" strokeWidth="1" fill="none" fillRule="evenodd">
                 <g id="Group-5">
                     <g id="Group-3">
                         <g id="Group-10-Copy-3">
@@ -88,11 +82,7 @@ const BjornBildeStor = ({ alt }: BjornBildeProps) => {
                                 <mask id="mask-2-bjorn" fill="white">
                                     <use xlinkHref="#path-1-bjorn" />
                                 </mask>
-                                <use
-                                    id="Mask"
-                                    fill="#A4DFF7"
-                                    xlinkHref="#path-1-bjorn"
-                                />
+                                <use id="Mask" fill="#A4DFF7" xlinkHref="#path-1-bjorn" />
                                 <g id="Group" mask="url(#mask-2-bjorn)">
                                     <g transform="translate(25.000000, 15.500000)">
                                         <path
@@ -154,10 +144,7 @@ const BjornBildeStor = ({ alt }: BjornBildeProps) => {
                                 </g>
                             </g>
                         </g>
-                        <g
-                            id="Group-12-Copy"
-                            transform="translate(55.952381, 76.190476)"
-                        >
+                        <g id="Group-12-Copy" transform="translate(55.952381, 76.190476)">
                             <g id="NAV-Copy-2">
                                 <g id="Group-11">
                                     <g id="Navansatt-mann">

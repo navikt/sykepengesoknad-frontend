@@ -1,24 +1,16 @@
 import { Forslag } from './Forslag'
 
-export const tilForslagsliste = (
-    suggestions: string[],
-    verdiArray: string[] = []
-): Forslag[] => {
+export const tilForslagsliste = (suggestions: string[], verdiArray: string[] = []): Forslag[] => {
     return suggestions
         .filter((suggestion: string) => {
-            return verdiArray && verdiArray.includes
-                ? !verdiArray.includes(suggestion)
-                : true
+            return verdiArray && verdiArray.includes ? !verdiArray.includes(suggestion) : true
         })
         .map((tag: string) => {
             return new Forslag(tag)
         })
 }
 
-export const forslagFinnesIForslagsliste = (
-    forslagsliste: string[],
-    forslag: Forslag
-) => {
+export const forslagFinnesIForslagsliste = (forslagsliste: string[], forslag: Forslag) => {
     const formatertliste = tilForslagsliste(forslagsliste)
     return (
         formatertliste.find((t) => {

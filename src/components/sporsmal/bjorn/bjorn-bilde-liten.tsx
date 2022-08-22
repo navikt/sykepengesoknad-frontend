@@ -16,13 +16,7 @@ const BjornBildeLiten = ({ alt }: BjornBildeProps) => {
             <defs>
                 <circle id="path-1-bjorn" cx="32" cy="32" r="32" />
             </defs>
-            <g
-                id="Page-1"
-                stroke="none"
-                strokeWidth="1"
-                fill="none"
-                fillRule="evenodd"
-            >
+            <g id="Page-1" stroke="none" strokeWidth="1" fill="none" fillRule="evenodd">
                 <g id="Group-5">
                     <g id="Group-3">
                         <g id="Group-10-Copy-3">
@@ -30,17 +24,10 @@ const BjornBildeLiten = ({ alt }: BjornBildeProps) => {
                                 <mask id="mask-2-bjorn" fill="white">
                                     <use xlinkHref="#path-1-bjorn" />
                                 </mask>
-                                <use
-                                    id="Mask"
-                                    fill="#A4DFF7"
-                                    xlinkHref="#path-1-bjorn"
-                                />
+                                <use id="Mask" fill="#A4DFF7" xlinkHref="#path-1-bjorn" />
                                 <g id="Group-150" mask="url(#mask-2-bjorn)">
                                     <g transform="translate(6.400000, 3.840000)">
-                                        <g
-                                            id="Group"
-                                            transform="translate(0.324907, 0.170667)"
-                                        >
+                                        <g id="Group" transform="translate(0.324907, 0.170667)">
                                             <path
                                                 d="M25.1245478,45.154717 L17.5391463,45.154717 C13.4494717,45.154717 0,53.5789644 0,61.4209844 L0,82.0553459 L50.2490956,82.0553459 L50.2490956,61.4209844 C50.2490956,53.5789644 36.7996239,45.154717 32.7099493,45.154717 L25.1245478,45.154717 Z"
                                                 id="Fill-29-Copy"
@@ -51,10 +38,7 @@ const BjornBildeLiten = ({ alt }: BjornBildeProps) => {
                                                 id="Fill-44-Copy"
                                                 fill="#E7E5E2"
                                             />
-                                            <g
-                                                id="blid-mann"
-                                                transform="translate(16.489509, 21.363522)"
-                                            >
+                                            <g id="blid-mann" transform="translate(16.489509, 21.363522)">
                                                 <path
                                                     d="M1.49174441,4.77918496 C0.150483845,4.87973917 -0.224920806,2.91201313 0.178291597,1.62694873 C0.255226377,1.38340458 0.699223483,0.275463195 1.48525594,0.275463195 C2.27036147,0.275463195 2.61703144,0.880633509 2.66523155,0.984877786 C3.24270586,2.23765414 2.95906679,4.66848307 1.49174441,4.77918496"
                                                     id="Fill-61"
@@ -86,10 +70,7 @@ const BjornBildeLiten = ({ alt }: BjornBildeProps) => {
                                                 strokeLinecap="round"
                                             />
                                         </g>
-                                        <g
-                                            id="Group-149"
-                                            transform="translate(5.871573, 30.037333)"
-                                        >
+                                        <g id="Group-149" transform="translate(5.871573, 30.037333)">
                                             <path
                                                 d="M0.417539191,0.405729167 C1.05990718,1.90518353 2.03119076,4.36697989 2.21133045,4.89796627 C2.47098709,5.66333975 2.98312611,6.89831619 3.74774752,8.60289559 L4.6795132,10.0320188 L1.6439212,10.7360367 C1.90569934,9.67109606 2.06850531,8.85948065 2.13233911,8.30119048 C2.16232841,8.03890416 1.87561781,7.46443921 1.6439212,6.33239087 C1.48225994,5.54252877 1.07336643,3.07020942 0.121736799,0.525068204 C0.0854678568,0.428066623 0.144950187,0.431134469 0.223263201,0.405729167 C0.305863439,0.378933058 0.334469194,0.211822134 0.417539191,0.405729167 Z"
                                                 id="Rectangle-3"

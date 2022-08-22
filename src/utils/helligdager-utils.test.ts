@@ -1,11 +1,6 @@
 import dayjs from 'dayjs'
 
-import {
-    andrePinsedag,
-    easterSunday,
-    førstePinsedag,
-    kristiHimmelfartsdag,
-} from './helligdager-utils'
+import { andrePinsedag, easterSunday, førstePinsedag, kristiHimmelfartsdag } from './helligdager-utils'
 
 test('Påske 2020', () => {
     expect(easterSunday(2020)).toEqual(dayjs('2020.04.12'))

@@ -8,18 +8,16 @@ const { serverRuntimeConfig } = getConfig()
 
 const tillatteApier = ['GET /api/v2/sykmeldinger']
 
-const handler = beskyttetApi(
-    async (req: NextApiRequest, res: NextApiResponse) => {
-        await proxyKallTilBackend({
-            req: req,
-            res: res,
-            tillatteApier: tillatteApier,
-            backend: 'sykmeldinger-backend',
-            backendHostname: 'sykmeldinger-backend.teamsykmelding',
-            backendClientId: serverRuntimeConfig.sykmeldingerBackendClientId,
-        })
-    }
-)
+const handler = beskyttetApi(async (req: NextApiRequest, res: NextApiResponse) => {
+    await proxyKallTilBackend({
+        req: req,
+        res: res,
+        tillatteApier: tillatteApier,
+        backend: 'sykmeldinger-backend',
+        backendHostname: 'sykmeldinger-backend.teamsykmelding',
+        backendClientId: serverRuntimeConfig.sykmeldingerBackendClientId,
+    })
+})
 
 export const config = {
     api: {

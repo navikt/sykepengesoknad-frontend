@@ -18,17 +18,11 @@ export const getFomFraSoknad = (soknad: Soknad): Date => {
         return senesteFom(perioder)
     }
 
-    if (
-        soknad.soknadstype === RSSoknadstype.OPPHOLD_UTLAND &&
-        soknad.status === RSSoknadstatus.SENDT
-    ) {
+    if (soknad.soknadstype === RSSoknadstype.OPPHOLD_UTLAND && soknad.status === RSSoknadstatus.SENDT) {
         return getFomForUtland(soknad) || soknad.opprettetDato
     }
 
-    if (
-        soknad.soknadstype === RSSoknadstype.OPPHOLD_UTLAND &&
-        soknad.status === RSSoknadstatus.NY
-    ) {
+    if (soknad.soknadstype === RSSoknadstype.OPPHOLD_UTLAND && soknad.status === RSSoknadstatus.NY) {
         return soknad.opprettetDato
     }
     return soknad.fom || soknad.opprettetDato
@@ -41,10 +35,7 @@ export const senesteSendtDato = (soknad: Soknad) => {
 }
 
 export const sorterEtterSendt = (soknad1: Soknad, soknad2: Soknad) => {
-    if (
-        soknad1.status === RSSoknadstatus.SENDT ||
-        soknad2.status === RSSoknadstatus.SENDT
-    ) {
+    if (soknad1.status === RSSoknadstatus.SENDT || soknad2.status === RSSoknadstatus.SENDT) {
         return senesteSendtDato(soknad2) - senesteSendtDato(soknad1)
     }
     return sorterEtterNyesteFom(soknad1, soknad2)

@@ -12,12 +12,8 @@ describe('Tester behandlingsdagersøknad', () => {
     })
 
     it('Laster startside', function () {
-        cy.get('.navds-heading--xlarge')
-            .should('be.visible')
-            .and('have.text', 'Søknader')
-        cy.get(
-            `#soknader-list-til-behandling article a[href*=${soknad.id}]`
-        ).click()
+        cy.get('.navds-heading--xlarge').should('be.visible').and('have.text', 'Søknader')
+        cy.get(`#soknader-list-til-behandling article a[href*=${soknad.id}]`).click()
     })
 
     it('Søknad ANSVARSERKLARING - steg 1', function () {
@@ -30,9 +26,9 @@ describe('Tester behandlingsdagersøknad', () => {
         cy.contains('Opplysninger fra sykmeldingen').click()
 
         // Godkjenne ANSVARSERKLARING
-        cy.contains(
-            'Jeg bekrefter at jeg vil gi så riktige og fullstendige opplysninger som mulig.'
-        ).click({ force: true })
+        cy.contains('Jeg bekrefter at jeg vil gi så riktige og fullstendige opplysninger som mulig.').click({
+            force: true,
+        })
 
         cy.contains('Gå videre').click()
     })
@@ -59,22 +55,15 @@ describe('Tester behandlingsdagersøknad', () => {
         cy.url().should('include', `${soknad.id}/3`)
 
         // Test spørsmål
-        cy.get(
-            '.inputPanelGruppe__inner label:first-child > input[value=JA]'
-        ).click({ force: true })
+        cy.get('.inputPanelGruppe__inner label:first-child > input[value=JA]').click({ force: true })
 
         // Svarer JA
         // Underspørsmål nivå 1 - checkbox
         cy.contains('Hvilke andre inntektskilder har du?')
-        cy.get('.undersporsmal .checkboxgruppe label[for=687382]').should(
-            'include.text',
-            'andre arbeidsforhold'
-        )
+        cy.get('.undersporsmal .checkboxgruppe label[for=687382]').should('include.text', 'andre arbeidsforhold')
         cy.get('.undersporsmal .checkboxgruppe .checkboks#687382').click()
         // Underspørsmål nivå 2 - radio
-        cy.get(
-            '.undersporsmal .checkboxgruppe .radioContainer .radioknapp#687383_0'
-        ).click({ force: true })
+        cy.get('.undersporsmal .checkboxgruppe .radioContainer .radioknapp#687383_0').click({ force: true })
         cy.contains(
             'Du må sende egen sykepengesøknad for dette. ' +
                 'Det betyr også at legen må skrive en sykmelding for hvert arbeidsforhold du er sykmeldt fra.'
@@ -102,14 +91,8 @@ describe('Tester behandlingsdagersøknad', () => {
             .contains('31. mars – 3. april')
             .siblings()
             .should('contain', 'Ikke til behandling')
-        cy.get('.oppsummering__sporsmal')
-            .contains('6. – 10. april')
-            .siblings()
-            .should('contain', '10. april')
-        cy.get('.oppsummering__sporsmal')
-            .contains('13. – 17. april')
-            .siblings()
-            .should('contain', '15. april')
+        cy.get('.oppsummering__sporsmal').contains('6. – 10. april').siblings().should('contain', '10. april')
+        cy.get('.oppsummering__sporsmal').contains('13. – 17. april').siblings().should('contain', '15. april')
         cy.get('.oppsummering__sporsmal')
             .contains('20. – 24. april')
             .siblings()

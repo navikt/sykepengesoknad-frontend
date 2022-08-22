@@ -85,8 +85,7 @@ export const arbeidstaker100Syk = new Sykmelding({
     utdypendeOpplysninger: {
         '6.2': {
             '6.2.1': {
-                sporsmal:
-                    'Beskriv kort sykehistorie, symptomer og funn i dagens situasjon.',
+                sporsmal: 'Beskriv kort sykehistorie, symptomer og funn i dagens situasjon.',
                 svar: 'Langvarig korsryggsmerter. Ømhet og smerte',
                 restriksjoner: ['SKJERMET_FOR_ARBEIDSGIVER'],
             },
@@ -101,8 +100,7 @@ export const arbeidstaker100Syk = new Sykmelding({
                 restriksjoner: ['SKJERMET_FOR_ARBEIDSGIVER'],
             },
             '6.2.4': {
-                sporsmal:
-                    'Beskriv Pågående og planlagt henvisning, utredning og/eller behandling',
+                sporsmal: 'Beskriv Pågående og planlagt henvisning, utredning og/eller behandling',
                 svar: 'Henvist til fysio',
                 restriksjoner: ['SKJERMET_FOR_ARBEIDSGIVER'],
             },
@@ -218,8 +216,7 @@ export const arbeidstaker50Syk = new Sykmelding({
     utdypendeOpplysninger: {
         '6.2': {
             '6.2.1': {
-                sporsmal:
-                    'Beskriv kort sykehistorie, symptomer og funn i dagens situasjon.',
+                sporsmal: 'Beskriv kort sykehistorie, symptomer og funn i dagens situasjon.',
                 svar: 'Langvarig korsryggsmerter. Ømhet og smerte',
                 restriksjoner: ['SKJERMET_FOR_ARBEIDSGIVER'],
             },
@@ -234,8 +231,7 @@ export const arbeidstaker50Syk = new Sykmelding({
                 restriksjoner: ['SKJERMET_FOR_ARBEIDSGIVER'],
             },
             '6.2.4': {
-                sporsmal:
-                    'Beskriv Pågående og planlagt henvisning, utredning og/eller behandling',
+                sporsmal: 'Beskriv Pågående og planlagt henvisning, utredning og/eller behandling',
                 svar: 'Henvist til fysio',
                 restriksjoner: ['SKJERMET_FOR_ARBEIDSGIVER'],
             },
@@ -353,8 +349,7 @@ export const arbeidsledig100Syk = new Sykmelding({
     utdypendeOpplysninger: {
         '6.2': {
             '6.2.1': {
-                sporsmal:
-                    'Beskriv kort sykehistorie, symptomer og funn i dagens situasjon.',
+                sporsmal: 'Beskriv kort sykehistorie, symptomer og funn i dagens situasjon.',
                 svar: 'Langvarig korsryggsmerter. Ømhet og smerte',
                 restriksjoner: ['SKJERMET_FOR_ARBEIDSGIVER'],
             },
@@ -369,8 +364,7 @@ export const arbeidsledig100Syk = new Sykmelding({
                 restriksjoner: ['SKJERMET_FOR_ARBEIDSGIVER'],
             },
             '6.2.4': {
-                sporsmal:
-                    'Beskriv Pågående og planlagt henvisning, utredning og/eller behandling',
+                sporsmal: 'Beskriv Pågående og planlagt henvisning, utredning og/eller behandling',
                 svar: 'Henvist til fysio',
                 restriksjoner: ['SKJERMET_FOR_ARBEIDSGIVER'],
             },
@@ -512,8 +506,7 @@ export const frilanser100Syk = new Sykmelding({
     utdypendeOpplysninger: {
         '6.2': {
             '6.2.1': {
-                sporsmal:
-                    'Beskriv kort sykehistorie, symptomer og funn i dagens situasjon.',
+                sporsmal: 'Beskriv kort sykehistorie, symptomer og funn i dagens situasjon.',
                 svar: 'Langvarig korsryggsmerter. Ømhet og smerte',
                 restriksjoner: ['SKJERMET_FOR_ARBEIDSGIVER'],
             },
@@ -528,8 +521,7 @@ export const frilanser100Syk = new Sykmelding({
                 restriksjoner: ['SKJERMET_FOR_ARBEIDSGIVER'],
             },
             '6.2.4': {
-                sporsmal:
-                    'Beskriv Pågående og planlagt henvisning, utredning og/eller behandling',
+                sporsmal: 'Beskriv Pågående og planlagt henvisning, utredning og/eller behandling',
                 svar: 'Henvist til fysio',
                 restriksjoner: ['SKJERMET_FOR_ARBEIDSGIVER'],
             },
@@ -642,8 +634,7 @@ export const arbeidstakerBehandlingsdagSyk = new Sykmelding({
     utdypendeOpplysninger: {
         '6.2': {
             '6.2.1': {
-                sporsmal:
-                    'Beskriv kort sykehistorie, symptomer og funn i dagens situasjon.',
+                sporsmal: 'Beskriv kort sykehistorie, symptomer og funn i dagens situasjon.',
                 svar: 'Langvarig korsryggsmerter. Ømhet og smerte',
                 restriksjoner: ['SKJERMET_FOR_ARBEIDSGIVER'],
             },
@@ -658,8 +649,7 @@ export const arbeidstakerBehandlingsdagSyk = new Sykmelding({
                 restriksjoner: ['SKJERMET_FOR_ARBEIDSGIVER'],
             },
             '6.2.4': {
-                sporsmal:
-                    'Beskriv Pågående og planlagt henvisning, utredning og/eller behandling',
+                sporsmal: 'Beskriv Pågående og planlagt henvisning, utredning og/eller behandling',
                 svar: 'Henvist til fysio',
                 restriksjoner: ['SKJERMET_FOR_ARBEIDSGIVER'],
             },
@@ -772,8 +762,7 @@ export const arbeidstakerReisetilskuddSyk = new Sykmelding({
     utdypendeOpplysninger: {
         '6.2': {
             '6.2.1': {
-                sporsmal:
-                    'Beskriv kort sykehistorie, symptomer og funn i dagens situasjon.',
+                sporsmal: 'Beskriv kort sykehistorie, symptomer og funn i dagens situasjon.',
                 svar: 'Langvarig korsryggsmerter. Ømhet og smerte',
                 restriksjoner: ['SKJERMET_FOR_ARBEIDSGIVER'],
             },
@@ -788,8 +777,7 @@ export const arbeidstakerReisetilskuddSyk = new Sykmelding({
                 restriksjoner: ['SKJERMET_FOR_ARBEIDSGIVER'],
             },
             '6.2.4': {
-                sporsmal:
-                    'Beskriv Pågående og planlagt henvisning, utredning og/eller behandling',
+                sporsmal: 'Beskriv Pågående og planlagt henvisning, utredning og/eller behandling',
                 svar: 'Henvist til fysio',
                 restriksjoner: ['SKJERMET_FOR_ARBEIDSGIVER'],
             },
@@ -1049,9 +1037,7 @@ export const gradertReisetilskuddSm = new Sykmelding({
             system: 'ICPC-2',
             tekst: 'TENDINITT INA',
         },
-        biDiagnoser: [
-            { kode: 'L87', system: 'ICPC-2', tekst: 'GANGLION SENE' },
-        ],
+        biDiagnoser: [{ kode: 'L87', system: 'ICPC-2', tekst: 'GANGLION SENE' }],
         annenFraversArsak: null,
         svangerskap: false,
         yrkesskade: false,
@@ -1072,8 +1058,7 @@ export const gradertReisetilskuddSm = new Sykmelding({
     utdypendeOpplysninger: {
         '6.2': {
             '6.2.1': {
-                sporsmal:
-                    'Beskriv kort sykehistorie, symptomer og funn i dagens situasjon.',
+                sporsmal: 'Beskriv kort sykehistorie, symptomer og funn i dagens situasjon.',
                 svar: 'Langvarig korsryggsmerter. Ømhet og smerte',
                 restriksjoner: ['SKJERMET_FOR_ARBEIDSGIVER'],
             },
@@ -1088,8 +1073,7 @@ export const gradertReisetilskuddSm = new Sykmelding({
                 restriksjoner: ['SKJERMET_FOR_ARBEIDSGIVER'],
             },
             '6.2.4': {
-                sporsmal:
-                    'Beskriv Pågående og planlagt henvisning, utredning og/eller behandling',
+                sporsmal: 'Beskriv Pågående og planlagt henvisning, utredning og/eller behandling',
                 svar: 'Henvist til fysio',
                 restriksjoner: ['SKJERMET_FOR_ARBEIDSGIVER'],
             },
@@ -1179,9 +1163,7 @@ export const brukertestSykmelding = new Sykmelding({
             system: 'ICPC-2',
             tekst: 'TENDINITT INA',
         },
-        biDiagnoser: [
-            { kode: 'L87', system: 'ICPC-2', tekst: 'GANGLION SENE' },
-        ],
+        biDiagnoser: [{ kode: 'L87', system: 'ICPC-2', tekst: 'GANGLION SENE' }],
         annenFraversArsak: null,
         svangerskap: false,
         yrkesskade: false,
@@ -1229,8 +1211,7 @@ export const brukertestSykmelding = new Sykmelding({
     utdypendeOpplysninger: {
         '6.2': {
             '6.2.1': {
-                sporsmal:
-                    'Beskriv kort sykehistorie, symptomer og funn i dagens situasjon.',
+                sporsmal: 'Beskriv kort sykehistorie, symptomer og funn i dagens situasjon.',
                 svar: 'Langvarig korsryggsmerter. Ømhet og smerte',
                 restriksjoner: ['SKJERMET_FOR_ARBEIDSGIVER'],
             },
@@ -1245,8 +1226,7 @@ export const brukertestSykmelding = new Sykmelding({
                 restriksjoner: ['SKJERMET_FOR_ARBEIDSGIVER'],
             },
             '6.2.4': {
-                sporsmal:
-                    'Beskriv Pågående og planlagt henvisning, utredning og/eller behandling',
+                sporsmal: 'Beskriv Pågående og planlagt henvisning, utredning og/eller behandling',
                 svar: 'Henvist til fysio',
                 restriksjoner: ['SKJERMET_FOR_ARBEIDSGIVER'],
             },

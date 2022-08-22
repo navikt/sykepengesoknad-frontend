@@ -70,15 +70,8 @@ export const erOppdelt = (soknad?: Soknad, sykmelding?: Sykmelding) => {
         return false
     }
 
-    const fomSykmelding = dayjs(
-        tidligsteFom(sykmelding.sykmeldingsperioder.map(tilTidsperiode))!
-    ).toDate()
-    const tomSykmelding = dayjs(
-        senesteTom(sykmelding.sykmeldingsperioder.map(tilTidsperiode))!
-    ).toDate()
+    const fomSykmelding = dayjs(tidligsteFom(sykmelding.sykmeldingsperioder.map(tilTidsperiode))!).toDate()
+    const tomSykmelding = dayjs(senesteTom(sykmelding.sykmeldingsperioder.map(tilTidsperiode))!).toDate()
 
-    return !(
-        soknad.fom!.getTime() === fomSykmelding.getTime() &&
-        soknad.tom!.getTime() === tomSykmelding.getTime()
-    )
+    return !(soknad.fom!.getTime() === fomSykmelding.getTime() && soknad.tom!.getTime() === tomSykmelding.getTime())
 }

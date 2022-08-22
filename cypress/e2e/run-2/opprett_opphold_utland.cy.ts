@@ -3,51 +3,34 @@ import { oppholdUtland } from '../../../src/data/mock/data/soknader-opplaering'
 
 describe('Tester opprettelse av søknad om å beholde sykepenger utenfor EØS', () => {
     before(() => {
-        cy.visit(
-            'http://localhost:8080/syk/sykepengesoknad?testperson=alle-soknader'
-        )
+        cy.visit('http://localhost:8080/syk/sykepengesoknad?testperson=alle-soknader')
     })
 
     it('Laster startside', function () {
-        cy.get('.navds-heading--xlarge')
-            .should('be.visible')
-            .and('have.text', 'Søknader')
+        cy.get('.navds-heading--xlarge').should('be.visible').and('have.text', 'Søknader')
         cy.get(
             `#soknader-list-til-behandling article a[href*=${arbeidstakersoknadMedUtenlandsoppholdSoktSykepenger.id}]`
         ).click()
     })
 
     it('Søknad ANSVARSERKLARING - steg 1', function () {
-        cy.url().should(
-            'include',
-            `${arbeidstakersoknadMedUtenlandsoppholdSoktSykepenger.id}/1`
-        )
+        cy.url().should('include', `${arbeidstakersoknadMedUtenlandsoppholdSoktSykepenger.id}/1`)
 
         // Godkjenne ANSVARSERKLARING
-        cy.contains(
-            'Jeg bekrefter at jeg vil gi så riktige og fullstendige opplysninger som mulig.'
-        ).click({ force: true })
+        cy.contains('Jeg bekrefter at jeg vil gi så riktige og fullstendige opplysninger som mulig.').click({
+            force: true,
+        })
 
         cy.contains('Gå videre').click()
     })
 
     it('Søknad UTLANDSOPPHOLD_SOKT_SYKEPENGER - steg 2', function () {
-        cy.url().should(
-            'include',
-            `${arbeidstakersoknadMedUtenlandsoppholdSoktSykepenger.id}/2`
-        )
+        cy.url().should('include', `${arbeidstakersoknadMedUtenlandsoppholdSoktSykepenger.id}/2`)
 
         // Test spørsmål
-        cy.get('.sporsmal__tittel').should(
-            'have.text',
-            'Sykepenger utenfor EØS'
-        )
-        cy.contains(
-            'Har du søkt om å beholde sykepengene for de dagene du var utenfor EØS?'
-        )
-        cy.get(
-            '.inputPanelGruppe__inner label:first-child > input[value=JA]'
-        ).click({ force: true })
+        cy.get('.sporsmal__tittel').should('have.text', 'Sykepenger utenfor EØS')
+        cy.contains('Har du søkt om å beholde sykepengene for de dagene du var utenfor EØS?')
+        cy.get('.inputPanelGruppe__inner label:first-child > input[value=JA]').click({ force: true })
 
         cy.get('.utland_infotekst')
             .should(
@@ -55,11 +38,7 @@ describe('Tester opprettelse av søknad om å beholde sykepenger utenfor EØS', 
                 'Du må ha sendt en egen utenlandssøknad for å svare ja på dette spørsmålet. Husk at du også må fullføre denne søknaden om sykepenger.'
             )
             .find('a')
-            .should(
-                'have.attr',
-                'href',
-                '/syk/sykepengesoknad/sykepengesoknad-utland'
-            )
+            .should('have.attr', 'href', '/syk/sykepengesoknad/sykepengesoknad-utland')
 
         cy.get('.inputPanelGruppe__inner input[value=NEI]').click({
             force: true,
@@ -71,11 +50,7 @@ describe('Tester opprettelse av søknad om å beholde sykepenger utenfor EØS', 
                 'I utgangspunktet kan du bare få sykepenger mens du er i et land innenfor EØS. Du kan likevel søke NAV om å få reise ut av EØS og beholde sykepengene i en begrenset periode.'
             )
             .find('a')
-            .should(
-                'have.attr',
-                'href',
-                '/syk/sykepengesoknad/sykepengesoknad-utland'
-            )
+            .should('have.attr', 'href', '/syk/sykepengesoknad/sykepengesoknad-utland')
     })
 
     it('Vi åpner opprettelse av søknad siden', function () {

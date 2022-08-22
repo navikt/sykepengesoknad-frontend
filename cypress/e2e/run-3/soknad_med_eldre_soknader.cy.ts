@@ -4,26 +4,18 @@ import { kortArbeidstakerSoknad } from '../../../src/data/mock/data/kort-soknad'
 describe('Eldre søknader', () => {
     describe('soknad med en eldre søknad', () => {
         before(() => {
-            cy.visit(
-                'http://localhost:8080/syk/sykepengesoknad?testperson=en-eldre-usendt-soknad'
-            )
+            cy.visit('http://localhost:8080/syk/sykepengesoknad?testperson=en-eldre-usendt-soknad')
         })
 
         it('Laster startside', function () {
-            cy.get('.navds-heading--xlarge')
-                .should('be.visible')
-                .and('have.text', 'Søknader')
-            cy.get(
-                `#soknader-list-til-behandling article a[href*=${nySoknadSomIkkeKanFyllesUt.id}]`
-            ).click()
+            cy.get('.navds-heading--xlarge').should('be.visible').and('have.text', 'Søknader')
+            cy.get(`#soknader-list-til-behandling article a[href*=${nySoknadSomIkkeKanFyllesUt.id}]`).click()
         })
 
         it('Viser advarsel om at det finnes eldre søknad', function () {
             cy.url().should('include', `${nySoknadSomIkkeKanFyllesUt.id}/1`)
 
-            cy.contains(
-                'Du har en eldre søknad du må velge om du skal bruke, før du kan begynne på denne.'
-            )
+            cy.contains('Du har en eldre søknad du må velge om du skal bruke, før du kan begynne på denne.')
 
             cy.contains('Gå til eldste søknad').click()
         })
@@ -34,26 +26,18 @@ describe('Eldre søknader', () => {
     })
     describe('soknad med to eldre søknad', () => {
         before(() => {
-            cy.visit(
-                'http://localhost:8080/syk/sykepengesoknad?testperson=to-eldre-usendte-soknader'
-            )
+            cy.visit('http://localhost:8080/syk/sykepengesoknad?testperson=to-eldre-usendte-soknader')
         })
 
         it('Laster startside', function () {
-            cy.get('.navds-heading--xlarge')
-                .should('be.visible')
-                .and('have.text', 'Søknader')
-            cy.get(
-                `#soknader-list-til-behandling article a[href*=${nySoknadSomIkkeKanFyllesUt.id}]`
-            ).click()
+            cy.get('.navds-heading--xlarge').should('be.visible').and('have.text', 'Søknader')
+            cy.get(`#soknader-list-til-behandling article a[href*=${nySoknadSomIkkeKanFyllesUt.id}]`).click()
         })
 
         it('Viser advarsel om at det finnes eldre søknader', function () {
             cy.url().should('include', `${nySoknadSomIkkeKanFyllesUt.id}/1`)
 
-            cy.contains(
-                'Du har to eldre søknader du må velge om du skal bruke, før du kan begynne på denne.'
-            )
+            cy.contains('Du har to eldre søknader du må velge om du skal bruke, før du kan begynne på denne.')
 
             cy.contains('Gå til eldste søknad').click()
         })
@@ -86,14 +70,12 @@ describe('Eldre søknader', () => {
 
 function fyllUtSoknad() {
     it('Fyller ut søknaden', () => {
-        cy.contains(
-            'Jeg bekrefter at jeg vil gi så riktige og fullstendige opplysninger som mulig.'
-        ).click({ force: true })
+        cy.contains('Jeg bekrefter at jeg vil gi så riktige og fullstendige opplysninger som mulig.').click({
+            force: true,
+        })
         cy.contains('Gå videre').click()
 
-        cy.get(
-            '.inputPanelGruppe__inner label:nth-child(2) > input[value=NEI]'
-        ).click({ force: true })
+        cy.get('.inputPanelGruppe__inner label:nth-child(2) > input[value=NEI]').click({ force: true })
 
         cy.contains('Gå videre').click()
         cy.contains(

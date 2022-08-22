@@ -7,13 +7,7 @@ export enum InntektskildeTyper {
     ANNET = 'ANNET',
 }
 
-export type SykmeldingStatuser =
-    | 'NY'
-    | 'SENDT'
-    | 'UTGAATT'
-    | 'AVBRUTT'
-    | 'BEKREFTET'
-    | 'TIL_SENDING'
+export type SykmeldingStatuser = 'NY' | 'SENDT' | 'UTGAATT' | 'AVBRUTT' | 'BEKREFTET' | 'TIL_SENDING'
 
 export type AvgittAvTyper = 'TIDLIGERE_SOKNAD'
 

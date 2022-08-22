@@ -1,7 +1,4 @@
-import {
-    eldreUsendtSoknad,
-    flereEldreUsendteSoknader,
-} from './data/eldre-usendt-soknad'
+import { eldreUsendtSoknad, flereEldreUsendteSoknader } from './data/eldre-usendt-soknad'
 import {
     alleData,
     enUsendtSykmelding,

@@ -32,8 +32,7 @@ export const tilBackendDato = (datoArg: string) => {
 }
 
 export const fraBackendTilDate = (datoArg: string) => {
-    if (datoArg && datoArg.match(RegExp('\\d{4}-\\d{2}-\\d{2}')))
-        return dayjs(datoArg).toDate()
+    if (datoArg && datoArg.match(RegExp('\\d{4}-\\d{2}-\\d{2}'))) return dayjs(datoArg).toDate()
 }
 
 export const tilLesbarDatoUtenAarstall = (datoArg: any): string => {
@@ -48,11 +47,7 @@ export const tilLesbarDatoUtenAarstall = (datoArg: any): string => {
 }
 
 export const tilLesbarDatoMedArstall = (datoArg: any) => {
-    return datoArg
-        ? `${tilLesbarDatoUtenAarstall(dayjsToDate(datoArg))} ${dayjsToDate(
-              datoArg
-          )!.getFullYear()}`
-        : null
+    return datoArg ? `${tilLesbarDatoUtenAarstall(dayjsToDate(datoArg))} ${dayjsToDate(datoArg)!.getFullYear()}` : null
 }
 
 export const tilLesbarPeriodeMedArstall = (fomArg: any, tomArg: any) => {
@@ -61,16 +56,10 @@ export const tilLesbarPeriodeMedArstall = (fomArg: any, tomArg: any) => {
     const erSammeAar = fom?.getFullYear() === tom?.getFullYear()
     const erSammeMaaned = fom?.getMonth() === tom?.getMonth()
     return erSammeAar && erSammeMaaned
-        ? `${fom?.getDate()}. ${SKILLETEGN_PERIODE} ${tilLesbarDatoMedArstall(
-              tom
-          )}`
+        ? `${fom?.getDate()}. ${SKILLETEGN_PERIODE} ${tilLesbarDatoMedArstall(tom)}`
         : erSammeAar
-        ? `${tilLesbarDatoUtenAarstall(
-              fom
-          )} ${SKILLETEGN_PERIODE} ${tilLesbarDatoMedArstall(tom)}`
-        : `${tilLesbarDatoMedArstall(
-              fom
-          )} ${SKILLETEGN_PERIODE} ${tilLesbarDatoMedArstall(tom)}`
+        ? `${tilLesbarDatoUtenAarstall(fom)} ${SKILLETEGN_PERIODE} ${tilLesbarDatoMedArstall(tom)}`
+        : `${tilLesbarDatoMedArstall(fom)} ${SKILLETEGN_PERIODE} ${tilLesbarDatoMedArstall(tom)}`
 }
 
 export const tilLesbarPeriodeUtenArstall = (fomArg: any, tomArg: any) => {
@@ -78,12 +67,8 @@ export const tilLesbarPeriodeUtenArstall = (fomArg: any, tomArg: any) => {
     const tom = dayjsToDate(tomArg)!
     const erSammeMaaned = fom.getMonth() === tom.getMonth()
     return erSammeMaaned
-        ? `${fom.getDate()}. ${SKILLETEGN_PERIODE} ${tilLesbarDatoUtenAarstall(
-              tom
-          )}`
-        : `${tilLesbarDatoUtenAarstall(
-              fom
-          )} ${SKILLETEGN_PERIODE} ${tilLesbarDatoUtenAarstall(tom)}`
+        ? `${fom.getDate()}. ${SKILLETEGN_PERIODE} ${tilLesbarDatoUtenAarstall(tom)}`
+        : `${tilLesbarDatoUtenAarstall(fom)} ${SKILLETEGN_PERIODE} ${tilLesbarDatoUtenAarstall(tom)}`
 }
 
 export const getDuration = (from: any, to: any) => {
@@ -104,19 +89,14 @@ export const dayjsToDate = (dato: string) => {
     return dato !== null ? dayjs(dato).toDate() : null
 }
 
-export const sendtForMerEnn30DagerSiden = (
-    sendtTilArbeidsgiverDato?: Date,
-    sendtTilNAVDato?: Date
-) => {
+export const sendtForMerEnn30DagerSiden = (sendtTilArbeidsgiverDato?: Date, sendtTilNAVDato?: Date) => {
     let dagerSidenArb = true
     let dagerSidenNav = true
     if (sendtTilArbeidsgiverDato) {
-        dagerSidenArb =
-            dayjs(new Date()).diff(dayjs(sendtTilArbeidsgiverDato), 'day') > 30
+        dagerSidenArb = dayjs(new Date()).diff(dayjs(sendtTilArbeidsgiverDato), 'day') > 30
     }
     if (sendtTilNAVDato) {
-        dagerSidenNav =
-            dayjs(new Date()).diff(dayjs(sendtTilNAVDato), 'day') > 30
+        dagerSidenNav = dayjs(new Date()).diff(dayjs(sendtTilNAVDato), 'day') > 30
     }
     return dagerSidenArb && dagerSidenNav
 }

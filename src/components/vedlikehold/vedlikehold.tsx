@@ -23,8 +23,7 @@ const Vedlikehold = () => {
 
             <div className="limit">
                 <Alert variant={'warning'}>
-                    Vi gjør dessverre vedlikehold på denne siden akkurat nå.
-                    Vennligst prøv igjen om noen timer.
+                    Vi gjør dessverre vedlikehold på denne siden akkurat nå. Vennligst prøv igjen om noen timer.
                 </Alert>
             </div>
         </>

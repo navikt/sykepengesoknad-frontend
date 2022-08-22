@@ -40,8 +40,7 @@ export const behandlingsdager: RSSoknad = {
         {
             id: '687374',
             tag: 'ANSVARSERKLARING',
-            sporsmalstekst:
-                'Jeg bekrefter at jeg vil gi så riktige og fullstendige opplysninger som mulig.',
+            sporsmalstekst: 'Jeg bekrefter at jeg vil gi så riktige og fullstendige opplysninger som mulig.',
             undertekst: null,
             svartype: 'CHECKBOX_PANEL',
             min: null,
@@ -121,8 +120,7 @@ export const behandlingsdager: RSSoknad = {
         {
             id: '687380',
             tag: 'ANDRE_INNTEKTSKILDER',
-            sporsmalstekst:
-                'Har du andre inntektskilder enn POSTEN NORGE AS, BÆRUM?',
+            sporsmalstekst: 'Har du andre inntektskilder enn POSTEN NORGE AS, BÆRUM?',
             undertekst: null,
             svartype: 'JA_NEI',
             min: null,
@@ -358,8 +356,7 @@ export const arbeidstaker: RSSoknad = {
         {
             id: '687336',
             tag: 'ANSVARSERKLARING',
-            sporsmalstekst:
-                'Jeg bekrefter at jeg vil gi så riktige og fullstendige opplysninger som mulig.',
+            sporsmalstekst: 'Jeg bekrefter at jeg vil gi så riktige og fullstendige opplysninger som mulig.',
             undertekst: null,
             svartype: 'CHECKBOX_PANEL',
             min: null,
@@ -400,8 +397,7 @@ export const arbeidstaker: RSSoknad = {
         {
             id: '687343',
             tag: 'FERIE_V2',
-            sporsmalstekst:
-                'Tok du ut feriedager i tidsrommet 1. - 24. april 2020?',
+            sporsmalstekst: 'Tok du ut feriedager i tidsrommet 1. - 24. april 2020?',
             undertekst: null,
             svartype: 'JA_NEI',
             min: null,
@@ -428,8 +424,7 @@ export const arbeidstaker: RSSoknad = {
         {
             id: '687345',
             tag: 'PERMISJON_V2',
-            sporsmalstekst:
-                'Tok du permisjon mens du var sykmeldt 1. - 24. april 2020?',
+            sporsmalstekst: 'Tok du permisjon mens du var sykmeldt 1. - 24. april 2020?',
             undertekst: null,
             svartype: 'JA_NEI',
             min: null,
@@ -456,8 +451,7 @@ export const arbeidstaker: RSSoknad = {
         {
             id: '687347',
             tag: 'UTLAND_V2',
-            sporsmalstekst:
-                'Var du på reise utenfor EØS mens du var sykmeldt 1. - 24. april 2020?',
+            sporsmalstekst: 'Var du på reise utenfor EØS mens du var sykmeldt 1. - 24. april 2020?',
             undertekst: null,
             svartype: 'JA_NEI',
             min: null,
@@ -511,8 +505,7 @@ export const arbeidstaker: RSSoknad = {
                 {
                     id: '687351',
                     tag: 'HVOR_MYE_HAR_DU_JOBBET_0',
-                    sporsmalstekst:
-                        'Hvor mye jobbet du tilsammen 1. - 24. april 2020?',
+                    sporsmalstekst: 'Hvor mye jobbet du tilsammen 1. - 24. april 2020?',
                     undertekst: 'Velg timer eller prosent',
                     svartype: 'RADIO_GRUPPE_TIMER_PROSENT',
                     min: null,
@@ -582,8 +575,7 @@ export const arbeidstaker: RSSoknad = {
         {
             id: '687356',
             tag: 'ANDRE_INNTEKTSKILDER',
-            sporsmalstekst:
-                'Har du andre inntektskilder enn POSTEN NORGE AS, BÆRUM?',
+            sporsmalstekst: 'Har du andre inntektskilder enn POSTEN NORGE AS, BÆRUM?',
             undertekst: null,
             svartype: 'JA_NEI',
             min: null,
@@ -759,8 +751,7 @@ export const arbeidstaker: RSSoknad = {
         {
             id: '687369',
             tag: 'UTDANNING',
-            sporsmalstekst:
-                'Har du vært under utdanning i løpet av perioden 1. - 24. april 2020?',
+            sporsmalstekst: 'Har du vært under utdanning i løpet av perioden 1. - 24. april 2020?',
             undertekst: null,
             svartype: 'JA_NEI',
             min: null,
@@ -860,8 +851,7 @@ export const arbeidstakerGradert: RSSoknad = {
         {
             id: '687291',
             tag: 'ANSVARSERKLARING',
-            sporsmalstekst:
-                'Jeg bekrefter at jeg vil gi så riktige og fullstendige opplysninger som mulig.',
+            sporsmalstekst: 'Jeg bekrefter at jeg vil gi så riktige og fullstendige opplysninger som mulig.',
             undertekst: null,
             svartype: 'CHECKBOX_PANEL',
             min: null,
@@ -874,8 +864,7 @@ export const arbeidstakerGradert: RSSoknad = {
         {
             id: '687296',
             tag: 'FRAVAR_FOR_SYKMELDINGEN',
-            sporsmalstekst:
-                'Var du syk og borte fra jobb før du ble sykmeldt, i perioden 16. - 31. mars 2020?',
+            sporsmalstekst: 'Var du syk og borte fra jobb før du ble sykmeldt, i perioden 16. - 31. mars 2020?',
             undertekst: null,
             svartype: 'JA_NEI',
             min: null,
@@ -931,8 +920,7 @@ export const arbeidstakerGradert: RSSoknad = {
         {
             id: '687304',
             tag: 'FERIE_V2',
-            sporsmalstekst:
-                'Tok du ut feriedager i tidsrommet 1. - 24. april 2020?',
+            sporsmalstekst: 'Tok du ut feriedager i tidsrommet 1. - 24. april 2020?',
             undertekst: null,
             svartype: 'JA_NEI',
             min: null,
@@ -959,8 +947,7 @@ export const arbeidstakerGradert: RSSoknad = {
         {
             id: '687306',
             tag: 'PERMISJON_V2',
-            sporsmalstekst:
-                'Tok du permisjon mens du var sykmeldt 1. - 24. april 2020?',
+            sporsmalstekst: 'Tok du permisjon mens du var sykmeldt 1. - 24. april 2020?',
             undertekst: null,
             svartype: 'JA_NEI',
             min: null,
@@ -987,8 +974,7 @@ export const arbeidstakerGradert: RSSoknad = {
         {
             id: '687308',
             tag: 'UTLAND_V2',
-            sporsmalstekst:
-                'Var du på reise utenfor EØS mens du var sykmeldt 1. - 24. april 2020?',
+            sporsmalstekst: 'Var du på reise utenfor EØS mens du var sykmeldt 1. - 24. april 2020?',
             undertekst: null,
             svartype: 'JA_NEI',
             min: null,
@@ -1015,8 +1001,7 @@ export const arbeidstakerGradert: RSSoknad = {
         {
             id: '687311',
             tag: 'JOBBET_DU_GRADERT_0',
-            sporsmalstekst:
-                'Sykmeldingen sier du kunne jobbe 50 %. Jobbet du mer enn det?',
+            sporsmalstekst: 'Sykmeldingen sier du kunne jobbe 50 %. Jobbet du mer enn det?',
             undertekst: null,
             svartype: 'JA_NEI',
             min: null,
@@ -1042,8 +1027,7 @@ export const arbeidstakerGradert: RSSoknad = {
                 {
                     id: '687313',
                     tag: 'HVOR_MYE_HAR_DU_JOBBET_0',
-                    sporsmalstekst:
-                        'Hvor mye jobbet du tilsammen 1. - 24. april 2020?',
+                    sporsmalstekst: 'Hvor mye jobbet du tilsammen 1. - 24. april 2020?',
                     undertekst: 'Velg timer eller prosent',
                     svartype: 'RADIO_GRUPPE_TIMER_PROSENT',
                     min: null,
@@ -1113,8 +1097,7 @@ export const arbeidstakerGradert: RSSoknad = {
         {
             id: '687310',
             tag: 'ARBEID_UTENFOR_NORGE',
-            sporsmalstekst:
-                'Har du arbeidet i utlandet i løpet av de siste 12 månedene?',
+            sporsmalstekst: 'Har du arbeidet i utlandet i løpet av de siste 12 månedene?',
             undertekst: null,
             svartype: 'JA_NEI',
             min: null,
@@ -1127,8 +1110,7 @@ export const arbeidstakerGradert: RSSoknad = {
         {
             id: '687318',
             tag: 'ANDRE_INNTEKTSKILDER',
-            sporsmalstekst:
-                'Har du andre inntektskilder enn POSTEN NORGE AS, BÆRUM?',
+            sporsmalstekst: 'Har du andre inntektskilder enn POSTEN NORGE AS, BÆRUM?',
             undertekst: null,
             svartype: 'JA_NEI',
             min: null,
@@ -1304,8 +1286,7 @@ export const arbeidstakerGradert: RSSoknad = {
         {
             id: '687331',
             tag: 'UTDANNING',
-            sporsmalstekst:
-                'Har du vært under utdanning i løpet av perioden 1. - 24. april 2020?',
+            sporsmalstekst: 'Har du vært under utdanning i løpet av perioden 1. - 24. april 2020?',
             undertekst: null,
             svartype: 'JA_NEI',
             min: null,
@@ -1402,8 +1383,7 @@ export const arbeidsledig: RSSoknad = {
         {
             id: '687395',
             tag: 'ANSVARSERKLARING',
-            sporsmalstekst:
-                'Jeg bekrefter at jeg vil gi så riktige og fullstendige opplysninger som mulig.',
+            sporsmalstekst: 'Jeg bekrefter at jeg vil gi så riktige og fullstendige opplysninger som mulig.',
             undertekst: null,
             svartype: 'CHECKBOX_PANEL',
             min: null,
@@ -1416,8 +1396,7 @@ export const arbeidsledig: RSSoknad = {
         {
             id: '687400',
             tag: 'FRISKMELDT',
-            sporsmalstekst:
-                'Brukte du hele sykmeldingen fram til 24. april 2020?',
+            sporsmalstekst: 'Brukte du hele sykmeldingen fram til 24. april 2020?',
             undertekst: null,
             svartype: 'JA_NEI',
             min: null,
@@ -1429,8 +1408,7 @@ export const arbeidsledig: RSSoknad = {
                 {
                     id: '687401',
                     tag: 'FRISKMELDT_START',
-                    sporsmalstekst:
-                        'Fra hvilken dato trengte du ikke lenger sykmeldingen?',
+                    sporsmalstekst: 'Fra hvilken dato trengte du ikke lenger sykmeldingen?',
                     undertekst: null,
                     svartype: 'DATO',
                     min: '2020-04-01',
@@ -1445,8 +1423,7 @@ export const arbeidsledig: RSSoknad = {
         {
             id: '687402',
             tag: 'ANDRE_INNTEKTSKILDER',
-            sporsmalstekst:
-                'Har du hatt inntekt mens du har vært sykmeldt i perioden 1. - 24. april 2020?',
+            sporsmalstekst: 'Har du hatt inntekt mens du har vært sykmeldt i perioden 1. - 24. april 2020?',
             undertekst: null,
             svartype: 'JA_NEI',
             min: null,
@@ -1676,8 +1653,7 @@ export const arbeidsledig: RSSoknad = {
         {
             id: '687419',
             tag: 'UTDANNING',
-            sporsmalstekst:
-                'Har du vært under utdanning i løpet av perioden 1. - 24. april 2020?',
+            sporsmalstekst: 'Har du vært under utdanning i løpet av perioden 1. - 24. april 2020?',
             undertekst: null,
             svartype: 'JA_NEI',
             min: null,
@@ -1717,8 +1693,7 @@ export const arbeidsledig: RSSoknad = {
         {
             id: '687422',
             tag: 'ARBEIDSLEDIG_UTLAND',
-            sporsmalstekst:
-                'Var du på reise utenfor EØS mens du var sykmeldt 1. - 24. april 2020?',
+            sporsmalstekst: 'Var du på reise utenfor EØS mens du var sykmeldt 1. - 24. april 2020?',
             undertekst: null,
             svartype: 'JA_NEI',
             min: null,
@@ -1743,8 +1718,7 @@ export const arbeidsledig: RSSoknad = {
                 {
                     id: '687424',
                     tag: 'UTLANDSOPPHOLD_SOKT_SYKEPENGER',
-                    sporsmalstekst:
-                        'Har du søkt om å beholde sykepengene for disse dagene?',
+                    sporsmalstekst: 'Har du søkt om å beholde sykepengene for disse dagene?',
                     undertekst: null,
                     svartype: 'JA_NEI',
                     min: null,
@@ -1817,8 +1791,7 @@ export const frilanser: RSSoknad = {
         {
             id: '687428',
             tag: 'ANSVARSERKLARING',
-            sporsmalstekst:
-                'Jeg bekrefter at jeg vil gi så riktige og fullstendige opplysninger som mulig.',
+            sporsmalstekst: 'Jeg bekrefter at jeg vil gi så riktige og fullstendige opplysninger som mulig.',
             undertekst: null,
             svartype: 'CHECKBOX_PANEL',
             min: null,
@@ -1831,8 +1804,7 @@ export const frilanser: RSSoknad = {
         {
             id: '687429',
             tag: 'TILBAKE_I_ARBEID',
-            sporsmalstekst:
-                'Var du tilbake i fullt arbeid som frilanser før sykmeldingsperioden utløp 24. april 2020?',
+            sporsmalstekst: 'Var du tilbake i fullt arbeid som frilanser før sykmeldingsperioden utløp 24. april 2020?',
             undertekst: null,
             svartype: 'JA_NEI',
             min: null,
@@ -1886,8 +1858,7 @@ export const frilanser: RSSoknad = {
                 {
                     id: '687433',
                     tag: 'HVOR_MYE_HAR_DU_JOBBET_0',
-                    sporsmalstekst:
-                        'Hvor mye jobbet du tilsammen 1. - 24. april 2020?',
+                    sporsmalstekst: 'Hvor mye jobbet du tilsammen 1. - 24. april 2020?',
                     undertekst: 'Velg timer eller prosent',
                     svartype: 'RADIO_GRUPPE_TIMER_PROSENT',
                     min: null,
@@ -1957,8 +1928,7 @@ export const frilanser: RSSoknad = {
         {
             id: '687438',
             tag: 'ANDRE_INNTEKTSKILDER',
-            sporsmalstekst:
-                'Har du annen inntekt? Du trenger ikke oppgi penger fra NAV.',
+            sporsmalstekst: 'Har du annen inntekt? Du trenger ikke oppgi penger fra NAV.',
             undertekst: null,
             svartype: 'JA_NEI',
             min: null,
@@ -2080,8 +2050,7 @@ export const frilanser: RSSoknad = {
         {
             id: '687447',
             tag: 'UTLAND',
-            sporsmalstekst:
-                'Har du vært utenfor EØS mens du var sykmeldt 1. - 24. april 2020?',
+            sporsmalstekst: 'Har du vært utenfor EØS mens du var sykmeldt 1. - 24. april 2020?',
             undertekst: null,
             svartype: 'JA_NEI',
             min: null,
@@ -2106,8 +2075,7 @@ export const frilanser: RSSoknad = {
                 {
                     id: '687449',
                     tag: 'UTLANDSOPPHOLD_SOKT_SYKEPENGER',
-                    sporsmalstekst:
-                        'Har du søkt om å beholde sykepengene for disse dagene?',
+                    sporsmalstekst: 'Har du søkt om å beholde sykepengene for disse dagene?',
                     undertekst: null,
                     svartype: 'JA_NEI',
                     min: null,
@@ -2122,8 +2090,7 @@ export const frilanser: RSSoknad = {
         {
             id: '687451',
             tag: 'ARBEID_UTENFOR_NORGE',
-            sporsmalstekst:
-                'Har du arbeidet i utlandet i løpet av de siste 12 månedene?',
+            sporsmalstekst: 'Har du arbeidet i utlandet i løpet av de siste 12 månedene?',
             undertekst: null,
             svartype: 'JA_NEI',
             min: null,
@@ -2136,8 +2103,7 @@ export const frilanser: RSSoknad = {
         {
             id: '687452',
             tag: 'UTDANNING',
-            sporsmalstekst:
-                'Har du vært under utdanning i løpet av perioden 1. - 24. april 2020?',
+            sporsmalstekst: 'Har du vært under utdanning i løpet av perioden 1. - 24. april 2020?',
             undertekst: null,
             svartype: 'JA_NEI',
             min: null,
@@ -2278,8 +2244,7 @@ export const oppholdUtland: RSSoknad = {
                 {
                     id: '5',
                     tag: 'FERIE',
-                    sporsmalstekst:
-                        'Har du avtalt med arbeidsgiveren din at du skal ta ut feriedager i hele perioden?',
+                    sporsmalstekst: 'Har du avtalt med arbeidsgiveren din at du skal ta ut feriedager i hele perioden?',
                     undertekst: null,
                     svartype: 'JA_NEI',
                     min: null,

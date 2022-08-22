@@ -37,8 +37,7 @@ export const hentSvar = (sporsmal: Sporsmal): any => {
     }
 
     if (svar === undefined) {
-        return sporsmal.svartype.toString().startsWith('PERIODE') ||
-            sporsmal.svartype.toString().startsWith('DATOER')
+        return sporsmal.svartype.toString().startsWith('PERIODE') || sporsmal.svartype.toString().startsWith('DATOER')
             ? []
             : ''
     }

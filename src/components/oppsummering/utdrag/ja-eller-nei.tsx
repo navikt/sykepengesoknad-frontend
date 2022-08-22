@@ -31,9 +31,7 @@ const JaEllerNei = ({ sporsmal }: OppsummeringProps) => {
             <Avkrysset tekst={svartekst} />
             <Vis
                 hvis={erUndersporsmalStilt(sporsmal)}
-                render={() => (
-                    <UndersporsmalSum sporsmalsliste={sporsmal.undersporsmal} />
-                )}
+                render={() => <UndersporsmalSum sporsmalsliste={sporsmal.undersporsmal} />}
             />
         </div>
     )

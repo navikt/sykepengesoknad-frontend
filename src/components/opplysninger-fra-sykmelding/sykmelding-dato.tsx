@@ -13,15 +13,9 @@ const SykmeldingDato = () => {
     return (
         <div className="avsnitt">
             <Label size="small" as="h3" className="avsnitt-hode">
-                {tekst(
-                    'sykepengesoknad.sykmelding-utdrag.dato-sykmeldingen-ble-skrevet'
-                )}
+                {tekst('sykepengesoknad.sykmelding-utdrag.dato-sykmeldingen-ble-skrevet')}
             </Label>
-            <BodyShort>
-                {dayjs(valgtSykmelding!.behandletTidspunkt).format(
-                    'D. MMM YYYY'
-                )}
-            </BodyShort>
+            <BodyShort>{dayjs(valgtSykmelding!.behandletTidspunkt).format('D. MMM YYYY')}</BodyShort>
         </div>
     )
 }

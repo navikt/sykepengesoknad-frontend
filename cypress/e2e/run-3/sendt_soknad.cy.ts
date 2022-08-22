@@ -2,29 +2,21 @@ import { sendtArbeidsledig } from '../../../src/data/mock/data/soknader-integrat
 
 describe('Tester sendt søknad', () => {
     before(() => {
-        cy.visit(
-            'http://localhost:8080/syk/sykepengesoknad?testperson=alle-soknader'
-        )
+        cy.visit('http://localhost:8080/syk/sykepengesoknad?testperson=alle-soknader')
     })
 
     it('Laster startside', function () {
-        cy.get('.navds-heading--xlarge')
-            .should('be.visible')
-            .and('have.text', 'Søknader')
+        cy.get('.navds-heading--xlarge').should('be.visible').and('have.text', 'Søknader')
     })
 
     it('Sendt søknad har forventa tekst', function () {
-        cy.get(
-            `#soknader-sendt article[aria-labelledby*=${sendtArbeidsledig.id}]`
-        )
+        cy.get(`#soknader-sendt article[aria-labelledby*=${sendtArbeidsledig.id}]`)
             .should('include.text', '27. mai – 11. juni 2020')
             .should('include.text', 'Sendt til NAV')
     })
 
     it('Ved klikk så åpnes kvittering søknad visning', function () {
-        cy.get(
-            `#soknader-sendt article[aria-labelledby*=${sendtArbeidsledig.id}]`
-        ).click()
+        cy.get(`#soknader-sendt article[aria-labelledby*=${sendtArbeidsledig.id}]`).click()
         cy.url().should(
             'equal',
             `http://localhost:8080/syk/sykepengesoknad/sendt/${sendtArbeidsledig.id}?testperson=alle-soknader`
@@ -33,9 +25,7 @@ describe('Tester sendt søknad', () => {
     })
 
     it('Siden kan refreshes', function () {
-        cy.visit(
-            `http://localhost:8080/syk/sykepengesoknad/sendt/${sendtArbeidsledig.id}?testperson=alle-soknader`
-        )
+        cy.visit(`http://localhost:8080/syk/sykepengesoknad/sendt/${sendtArbeidsledig.id}?testperson=alle-soknader`)
         cy.contains('Søknaden er sendt til NAV')
         cy.reload()
         cy.contains('Søknaden er sendt til NAV')

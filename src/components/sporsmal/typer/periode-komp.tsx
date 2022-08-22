@@ -7,11 +7,7 @@ import { Controller, useFormContext } from 'react-hook-form'
 
 import { skalBrukeFullskjermKalender } from '../../../utils/browser-utils'
 import { fraBackendTilDate } from '../../../utils/dato-utils'
-import {
-    validerFom,
-    validerPeriode,
-    validerTom,
-} from '../../../utils/sporsmal/valider-periode'
+import { validerFom, validerPeriode, validerTom } from '../../../utils/sporsmal/valider-periode'
 import { tekst } from '../../../utils/tekster'
 import Vis from '../../vis'
 import { hentPeriode } from '../hent-svar'
@@ -62,65 +58,32 @@ const PeriodeKomp = ({ sporsmal, index, slettPeriode }: AllProps) => {
                     rules={{
                         validate: {
                             fom: () => {
-                                const validert = validerFom(
-                                    sporsmal,
-                                    id,
-                                    getValues()
-                                )
-                                const div: HTMLElement | null =
-                                    document.getElementById(
-                                        id + '_fom'
-                                    )!.parentElement
+                                const validert = validerFom(sporsmal, id, getValues())
+                                const div: HTMLElement | null = document.getElementById(id + '_fom')!.parentElement
                                 if (validert !== true) {
-                                    div?.classList.add(
-                                        'skjemaelement__input--harFeil'
-                                    )
+                                    div?.classList.add('skjemaelement__input--harFeil')
                                 } else {
-                                    div?.classList.remove(
-                                        'skjemaelement__input--harFeil'
-                                    )
+                                    div?.classList.remove('skjemaelement__input--harFeil')
                                 }
                                 return validert
                             },
                             tom: () => {
-                                const validert = validerTom(
-                                    sporsmal,
-                                    id,
-                                    getValues()
-                                )
-                                const div: HTMLElement | null =
-                                    document.getElementById(
-                                        id + '_tom'
-                                    )!.parentElement
+                                const validert = validerTom(sporsmal, id, getValues())
+                                const div: HTMLElement | null = document.getElementById(id + '_tom')!.parentElement
                                 if (validert !== true) {
-                                    div?.classList.add(
-                                        'skjemaelement__input--harFeil'
-                                    )
+                                    div?.classList.add('skjemaelement__input--harFeil')
                                 } else {
-                                    div?.classList.remove(
-                                        'skjemaelement__input--harFeil'
-                                    )
+                                    div?.classList.remove('skjemaelement__input--harFeil')
                                 }
                                 return validert
                             },
                             periode: () => {
-                                const validert = validerPeriode(
-                                    sporsmal,
-                                    id,
-                                    getValues()
-                                )
-                                const div: HTMLElement | null =
-                                    document.getElementById(
-                                        id + '_fom'
-                                    )!.parentElement
+                                const validert = validerPeriode(sporsmal, id, getValues())
+                                const div: HTMLElement | null = document.getElementById(id + '_fom')!.parentElement
                                 if (validert !== true) {
-                                    div?.classList.add(
-                                        'skjemaelement__input--harFeil'
-                                    )
+                                    div?.classList.add('skjemaelement__input--harFeil')
                                 } else {
-                                    div?.classList.remove(
-                                        'skjemaelement__input--harFeil'
-                                    )
+                                    div?.classList.remove('skjemaelement__input--harFeil')
                                 }
                                 return validert
                             },
@@ -130,27 +93,17 @@ const PeriodeKomp = ({ sporsmal, index, slettPeriode }: AllProps) => {
                     render={() => (
                         <fieldset className="skjemagruppe">
                             <div className="fom skjemaelement">
-                                <label
-                                    className="skjemaelement__label"
-                                    htmlFor={sporsmal.id + '_' + index + '_fom'}
-                                >
-                                    <BodyShort as="span">
-                                        {tekst(
-                                            'sykepengesoknad.periodevelger.fom'
-                                        )}
-                                    </BodyShort>
+                                <label className="skjemaelement__label" htmlFor={sporsmal.id + '_' + index + '_fom'}>
+                                    <BodyShort as="span">{tekst('sykepengesoknad.periodevelger.fom')}</BodyShort>
                                 </label>
                                 <Datepicker
                                     locale="nb"
                                     inputId={sporsmal.id + '_' + index + '_fom'}
                                     inputLabel="Oppgi dato"
-                                    onChange={(value: any) =>
-                                        onChange(value, undefined)
-                                    }
+                                    onChange={(value: any) => onChange(value, undefined)}
                                     value={periode.fom}
                                     inputProps={{
-                                        name:
-                                            sporsmal.id + '_' + index + '_fom',
+                                        name: sporsmal.id + '_' + index + '_fom',
                                     }}
                                     calendarSettings={{
                                         showWeekNumbers: true,
@@ -163,34 +116,22 @@ const PeriodeKomp = ({ sporsmal, index, slettPeriode }: AllProps) => {
                                         maxDate: sporsmal.max || undefined,
                                     }}
                                     dayPickerProps={{
-                                        initialMonth: fraBackendTilDate(
-                                            sporsmal.max!
-                                        ),
+                                        initialMonth: fraBackendTilDate(sporsmal.max!),
                                     }}
                                 />
                             </div>
                             <div className="tom skjemaelement">
-                                <label
-                                    className="skjemaelement__label"
-                                    htmlFor={sporsmal.id + '_' + index + '_tom'}
-                                >
-                                    <BodyShort as="span">
-                                        {tekst(
-                                            'sykepengesoknad.periodevelger.tom'
-                                        )}
-                                    </BodyShort>
+                                <label className="skjemaelement__label" htmlFor={sporsmal.id + '_' + index + '_tom'}>
+                                    <BodyShort as="span">{tekst('sykepengesoknad.periodevelger.tom')}</BodyShort>
                                 </label>
                                 <Datepicker
                                     locale="nb"
                                     inputId={sporsmal.id + '_' + index + '_tom'}
                                     inputLabel="Oppgi dato"
-                                    onChange={(value: any) =>
-                                        onChange(undefined, value)
-                                    }
+                                    onChange={(value: any) => onChange(undefined, value)}
                                     value={periode.tom}
                                     inputProps={{
-                                        name:
-                                            sporsmal.id + '_' + index + '_tom',
+                                        name: sporsmal.id + '_' + index + '_tom',
                                     }}
                                     calendarSettings={{
                                         showWeekNumbers: true,
@@ -203,9 +144,7 @@ const PeriodeKomp = ({ sporsmal, index, slettPeriode }: AllProps) => {
                                         maxDate: sporsmal.max || undefined,
                                     }}
                                     dayPickerProps={{
-                                        initialMonth: fraBackendTilDate(
-                                            sporsmal.max!
-                                        ),
+                                        initialMonth: fraBackendTilDate(sporsmal.max!),
                                     }}
                                 />
                             </div>
@@ -231,10 +170,7 @@ const PeriodeKomp = ({ sporsmal, index, slettPeriode }: AllProps) => {
                 <Vis
                     hvis={errors[id]}
                     render={() => (
-                        <BodyShort
-                            as="span"
-                            className="skjemaelement__feilmelding"
-                        >
+                        <BodyShort as="span" className="skjemaelement__feilmelding">
                             {feilmelding.lokal}
                         </BodyShort>
                     )}

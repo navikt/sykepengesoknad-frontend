@@ -22,8 +22,7 @@ const Knapperad = ({ poster }: KnapperadProps) => {
 
     const stegNo = parseInt(stegId)
     const spmIndex = stegNo - 2
-    const erUtlandssoknad =
-        valgtSoknad!.soknadstype === RSSoknadstype.OPPHOLD_UTLAND
+    const erUtlandssoknad = valgtSoknad!.soknadstype === RSSoknadstype.OPPHOLD_UTLAND
 
     if (!valgtSoknad) {
         return null
@@ -32,10 +31,7 @@ const Knapperad = ({ poster }: KnapperadProps) => {
     const nokkel = () => {
         const erSisteSteg =
             spmIndex ===
-            valgtSoknad.sporsmal.length -
-                (valgtSoknad.soknadstype === RSSoknadstype.OPPHOLD_UTLAND
-                    ? 2
-                    : 3)
+            valgtSoknad.sporsmal.length - (valgtSoknad.soknadstype === RSSoknadstype.OPPHOLD_UTLAND ? 2 : 3)
         if (erSisteSteg) {
             if (valgtSoknad.status === RSSoknadstatus.UTKAST_TIL_KORRIGERING) {
                 return 'sykepengesoknad.send.endringene'

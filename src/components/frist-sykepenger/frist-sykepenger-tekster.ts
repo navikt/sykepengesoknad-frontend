@@ -7,19 +7,15 @@ const FristSykepengerTekster = {
     'frist-sykepenger.ulike.måneder':
         'Hvis sykmeldingen <strong>gjelder dager i to ulike måneder</strong>, gjelder det to ulike frister. Se eksempel 2.',
     'frist-sykepenger.eksempel.en.tittel': 'Eksempel 1',
-    'frist-sykepenger.eksempel.en.tekst':
-        'Har du sykedager i mai, vil fristen for å søke bli siste dagen i august.',
+    'frist-sykepenger.eksempel.en.tekst': 'Har du sykedager i mai, vil fristen for å søke bli siste dagen i august.',
     'frist-sykepenger.eksempel.to.tittel': 'Eksempel 2',
     'frist-sykepenger.eksempel.to.tekst':
         'Har du én sykmelding som går fra januar til februar vil det gjelde to ulike frister.',
 
-    'frist-sykepenger.husk':
-        'Husk at du må søke innen fristen for å få sykepenger.',
+    'frist-sykepenger.husk': 'Husk at du må søke innen fristen for å få sykepenger.',
 
-    'hvorfor-soknad-sykepenger.overskrift':
-        'Hvorfor må jeg søke om sykepenger?',
-    'hvorfor-soknad-sykepenger':
-        'Ifølge folketrygdloven kan du få sykepenger hvis du oppfyller kravene.',
+    'hvorfor-soknad-sykepenger.overskrift': 'Hvorfor må jeg søke om sykepenger?',
+    'hvorfor-soknad-sykepenger': 'Ifølge folketrygdloven kan du få sykepenger hvis du oppfyller kravene.',
     'hvorfor-soknad-reisetilskudd':
         'Ifølge folketrygdloven kan du få reisetilskudd hvis du har rett til sykepenger. Reisetilskuddet kommer da i stedet for sykepengene.',
     'hvorfor-soknad-gradertreisetilskudd':

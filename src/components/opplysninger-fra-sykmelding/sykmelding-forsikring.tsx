@@ -3,11 +3,7 @@ import React from 'react'
 
 import { useAppStore } from '../../data/stores/app-store'
 import { RSArbeidssituasjon } from '../../types/rs-types/rs-arbeidssituasjon'
-import {
-    harForsikring,
-    harSpmOmForsikring,
-    hentArbeidssituasjon,
-} from '../../utils/sykmelding-utils'
+import { harForsikring, harSpmOmForsikring, hentArbeidssituasjon } from '../../utils/sykmelding-utils'
 import { tekst } from '../../utils/tekster'
 import Vis from '../vis'
 

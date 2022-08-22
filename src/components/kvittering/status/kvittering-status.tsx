@@ -34,8 +34,7 @@ const KvitteringStatus = () => {
             render={() => (
                 <Alert variant="success">
                     <Heading size="small" level="2">
-                        {tekst('kvittering.soknaden-er-sendt-til')}{' '}
-                        {Mottaker.NAV}
+                        {tekst('kvittering.soknaden-er-sendt-til')} {Mottaker.NAV}
                     </Heading>
                     <BodyShort>
                         {tekst('kvittering.mottatt')}: {tilNavDato}

@@ -10,9 +10,7 @@ interface UsendtSykmeldingProps {
     usendteSykmeldinger: Sykmelding[]
 }
 
-export const EldreUsendtSykmelding = ({
-    usendteSykmeldinger,
-}: UsendtSykmeldingProps) => {
+export const EldreUsendtSykmelding = ({ usendteSykmeldinger }: UsendtSykmeldingProps) => {
     const sorterteUsendte = [...usendteSykmeldinger].sort((a, b) =>
         getSykmeldingStartDate(a).diff(getSykmeldingStartDate(b))
     )

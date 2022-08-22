@@ -61,20 +61,12 @@ const BehandlingsUke = ({ sporsmal, ukeidx, ukespm }: UkeProps) => {
                             type="radio"
                             id={ukespm.id + '_' + idx}
                             {...register(ukespm.id)}
-                            onChange={() =>
-                                radioKlikk(
-                                    dag.format('YYYY-MM-DD'),
-                                    ukeidx,
-                                    ukespm.id
-                                )
-                            }
+                            onChange={() => radioKlikk(dag.format('YYYY-MM-DD'), ukeidx, ukespm.id)}
                             value={dag.format('YYYY-MM-DD')}
                             defaultChecked={checked}
                             className="radioknapp"
                         />
-                        <label htmlFor={ukespm.id + '_' + idx}>
-                            {dag.date()}
-                        </label>
+                        <label htmlFor={ukespm.id + '_' + idx}>{dag.date()}</label>
                     </div>
                 )
             })}
@@ -86,13 +78,7 @@ const BehandlingsUke = ({ sporsmal, ukeidx, ukespm }: UkeProps) => {
                 })}
 
             <div className="kalenderdag">
-                <input
-                    type="radio"
-                    name={ukespm.id}
-                    className="radioknapp"
-                    value=""
-                    id={ukespm.id + '_fjern'}
-                />
+                <input type="radio" name={ukespm.id} className="radioknapp" value="" id={ukespm.id + '_fjern'} />
                 <label
                     htmlFor={ukespm.id + '_fjern'}
                     id={ukespm.id + '_label'}

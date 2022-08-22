@@ -15,10 +15,7 @@ import { useAmplitudeInstance } from '../amplitude/amplitude'
 import Banner from '../banner/banner'
 import Brodsmuler from '../brodsmuler/brodsmuler'
 import Ettersending from '../ettersending/ettersending'
-import {
-    GjenstaendeSoknader,
-    hentGjenstaendeSoknader,
-} from '../gjenstaende-soknader/gjenstaende-soknader'
+import { GjenstaendeSoknader, hentGjenstaendeSoknader } from '../gjenstaende-soknader/gjenstaende-soknader'
 import { hentHotjarJsTrigger, HotjarTrigger } from '../hotjar-trigger'
 import Vis from '../vis'
 import Kvittering from './kvittering'
@@ -37,17 +34,8 @@ const brodsmuler: Brodsmule[] = [
 ]
 
 const KvitteringSide = () => {
-    const {
-        valgtSoknad,
-        soknader,
-        setValgtSoknad,
-        setValgtSykmelding,
-        sykmeldinger,
-        feilmeldingTekst,
-    } = useAppStore()
-    const [rerendreKvittering, setRerendrekvittering] = useState<Date>(
-        new Date()
-    )
+    const { valgtSoknad, soknader, setValgtSoknad, setValgtSykmelding, sykmeldinger, feilmeldingTekst } = useAppStore()
+    const [rerendreKvittering, setRerendrekvittering] = useState<Date>(new Date())
     const { logEvent } = useAmplitudeInstance()
     const { id } = useParams<RouteParams>()
 
@@ -55,9 +43,7 @@ const KvitteringSide = () => {
         const filtrertSoknad = soknader.find((soknad) => soknad.id === id)
         setValgtSoknad(filtrertSoknad)
 
-        const sykmelding = sykmeldinger.find(
-            (sm) => sm.id === filtrertSoknad?.sykmeldingId
-        )
+        const sykmelding = sykmeldinger.find((sm) => sm.id === filtrertSoknad?.sykmeldingId)
         setValgtSykmelding(sykmelding)
 
         logEvent('skjema åpnet', {
@@ -81,8 +67,7 @@ const KvitteringSide = () => {
         !erSendtTilArbeidsgiver &&
         valgtSoknad.soknadstype !== RSSoknadstype.REISETILSKUDD
     const skalViseKnapperad =
-        valgtSoknad.soknadstype !== RSSoknadstype.OPPHOLD_UTLAND &&
-        (skalViseEndre || skalViseSendTilArbeidsgiver)
+        valgtSoknad.soknadstype !== RSSoknadstype.OPPHOLD_UTLAND && (skalViseEndre || skalViseSendTilArbeidsgiver)
 
     const gjenstaendeSoknader = hentGjenstaendeSoknader(soknader)
 
@@ -92,12 +77,7 @@ const KvitteringSide = () => {
             <Brodsmuler brodsmuler={brodsmuler} />
 
             <div className="limit kvittering-side">
-                <HotjarTrigger
-                    jsTrigger={hentHotjarJsTrigger(
-                        valgtSoknad.soknadstype,
-                        'kvittering'
-                    )}
-                >
+                <HotjarTrigger jsTrigger={hentHotjarJsTrigger(valgtSoknad.soknadstype, 'kvittering')}>
                     <Kvittering />
                     <GjenstaendeSoknader soknader={gjenstaendeSoknader} />
                     <Vis
@@ -111,14 +91,10 @@ const KvitteringSide = () => {
                                             className="ferdig-knapp"
                                             onClick={() => {
                                                 logEvent('knapp klikket', {
-                                                    tekst: tekst(
-                                                        'kvittering.ferdig'
-                                                    ),
-                                                    soknadstype:
-                                                        valgtSoknad?.soknadstype,
+                                                    tekst: tekst('kvittering.ferdig'),
+                                                    soknadstype: valgtSoknad?.soknadstype,
                                                 })
-                                                window.location.href =
-                                                    sykefravaerUrl()
+                                                window.location.href = sykefravaerUrl()
                                             }}
                                         >
                                             {tekst('kvittering.ferdig')}
@@ -126,19 +102,14 @@ const KvitteringSide = () => {
                                     )}
                                 ></Vis>
 
-                                <Vis
-                                    hvis={skalViseEndre}
-                                    render={() => <Endreknapp />}
-                                />
+                                <Vis hvis={skalViseEndre} render={() => <Endreknapp />} />
 
                                 <Vis
                                     hvis={skalViseSendTilArbeidsgiver}
                                     render={() => (
                                         <Ettersending
                                             gjelder="arbeidsgiver"
-                                            setRerendrekvittering={
-                                                setRerendrekvittering
-                                            }
+                                            setRerendrekvittering={setRerendrekvittering}
                                         />
                                     )}
                                 />
@@ -147,14 +118,7 @@ const KvitteringSide = () => {
                     />
 
                     <div aria-live="polite">
-                        <Vis
-                            hvis={feilmeldingTekst}
-                            render={() => (
-                                <Alert variant="error">
-                                    {feilmeldingTekst}
-                                </Alert>
-                            )}
-                        />
+                        <Vis hvis={feilmeldingTekst} render={() => <Alert variant="error">{feilmeldingTekst}</Alert>} />
                     </div>
                 </HotjarTrigger>
             </div>

@@ -76,8 +76,7 @@ export const avbruttSoknad: RSSoknad = {
         {
             id: '84',
             tag: 'ANSVARSERKLARING',
-            sporsmalstekst:
-                'Jeg bekrefter at jeg vil gi så riktige og fullstendige opplysninger som mulig.',
+            sporsmalstekst: 'Jeg bekrefter at jeg vil gi så riktige og fullstendige opplysninger som mulig.',
             undertekst: null,
             svartype: 'CHECKBOX_PANEL',
             min: null,
@@ -203,8 +202,7 @@ export const avbruttSoknad: RSSoknad = {
         {
             id: '97',
             tag: 'FERIE_V2',
-            sporsmalstekst:
-                'Tok du ut feriedager i tidsrommet 20. mai - 5. juni 2020?',
+            sporsmalstekst: 'Tok du ut feriedager i tidsrommet 20. mai - 5. juni 2020?',
             undertekst: null,
             svartype: 'JA_NEI',
             min: null,
@@ -231,8 +229,7 @@ export const avbruttSoknad: RSSoknad = {
         {
             id: '99',
             tag: 'PERMISJON_V2',
-            sporsmalstekst:
-                'Tok du permisjon mens du var sykmeldt 20. mai - 5. juni 2020?',
+            sporsmalstekst: 'Tok du permisjon mens du var sykmeldt 20. mai - 5. juni 2020?',
             undertekst: null,
             svartype: 'JA_NEI',
             min: null,
@@ -259,8 +256,7 @@ export const avbruttSoknad: RSSoknad = {
         {
             id: '101',
             tag: 'UTLAND_V2',
-            sporsmalstekst:
-                'Var du på reise utenfor EØS mens du var sykmeldt 20. mai - 5. juni 2020?',
+            sporsmalstekst: 'Var du på reise utenfor EØS mens du var sykmeldt 20. mai - 5. juni 2020?',
             undertekst: null,
             svartype: 'JA_NEI',
             min: null,
@@ -314,8 +310,7 @@ export const avbruttSoknad: RSSoknad = {
                 {
                     id: '106',
                     tag: 'HVOR_MYE_HAR_DU_JOBBET_0',
-                    sporsmalstekst:
-                        'Hvor mye jobbet du totalt 20. mai - 5. juni 2020 hos 995816598 sitt orgnavn :)?',
+                    sporsmalstekst: 'Hvor mye jobbet du totalt 20. mai - 5. juni 2020 hos 995816598 sitt orgnavn :)?',
                     undertekst: null,
                     svartype: 'RADIO_GRUPPE_TIMER_PROSENT',
                     min: null,
@@ -385,8 +380,7 @@ export const avbruttSoknad: RSSoknad = {
         {
             id: '103',
             tag: 'ARBEID_UTENFOR_NORGE',
-            sporsmalstekst:
-                'Har du arbeidet i utlandet i løpet av de siste 12 månedene?',
+            sporsmalstekst: 'Har du arbeidet i utlandet i løpet av de siste 12 månedene?',
             undertekst: null,
             svartype: 'JA_NEI',
             min: null,
@@ -399,8 +393,7 @@ export const avbruttSoknad: RSSoknad = {
         {
             id: '111',
             tag: 'ANDRE_INNTEKTSKILDER',
-            sporsmalstekst:
-                'Har du andre inntektskilder enn 995816598 sitt orgnavn :)?',
+            sporsmalstekst: 'Har du andre inntektskilder enn 995816598 sitt orgnavn :)?',
             undertekst: null,
             svartype: 'JA_NEI',
             min: null,
@@ -576,8 +569,7 @@ export const avbruttSoknad: RSSoknad = {
         {
             id: '124',
             tag: 'UTDANNING',
-            sporsmalstekst:
-                'Har du vært under utdanning i løpet av perioden 20. mai - 5. juni 2020?',
+            sporsmalstekst: 'Har du vært under utdanning i løpet av perioden 20. mai - 5. juni 2020?',
             undertekst: null,
             svartype: 'JA_NEI',
             min: null,
@@ -675,8 +667,7 @@ export const arbeidstakersoknadMedUtenlandsoppholdSoktSykepenger: RSSoknad = {
         {
             id: '636',
             tag: 'ANSVARSERKLARING',
-            sporsmalstekst:
-                'Jeg bekrefter at jeg vil gi så riktige og fullstendige opplysninger som mulig.',
+            sporsmalstekst: 'Jeg bekrefter at jeg vil gi så riktige og fullstendige opplysninger som mulig.',
             undertekst: null,
             svartype: 'CHECKBOX_PANEL',
             min: null,
@@ -689,8 +680,7 @@ export const arbeidstakersoknadMedUtenlandsoppholdSoktSykepenger: RSSoknad = {
         {
             id: '655',
             tag: 'UTLANDSOPPHOLD_SOKT_SYKEPENGER',
-            sporsmalstekst:
-                'Har du søkt om å beholde sykepengene for de dagene du var utenfor EØS?',
+            sporsmalstekst: 'Har du søkt om å beholde sykepengene for de dagene du var utenfor EØS?',
             undertekst: null,
             svartype: 'JA_NEI',
             min: null,
@@ -760,8 +750,7 @@ export const sendtArbeidsledig: RSSoknad = {
         {
             id: '42',
             tag: 'ANSVARSERKLARING',
-            sporsmalstekst:
-                'Jeg bekrefter at jeg vil gi så riktige og fullstendige opplysninger som mulig.',
+            sporsmalstekst: 'Jeg bekrefter at jeg vil gi så riktige og fullstendige opplysninger som mulig.',
             undertekst: null,
             svartype: 'CHECKBOX_PANEL',
             min: null,
@@ -774,8 +763,7 @@ export const sendtArbeidsledig: RSSoknad = {
         {
             id: '47',
             tag: 'FRISKMELDT',
-            sporsmalstekst:
-                'Brukte du hele sykmeldingen fram til 11. juni 2020?',
+            sporsmalstekst: 'Brukte du hele sykmeldingen fram til 11. juni 2020?',
             undertekst: null,
             svartype: 'JA_NEI',
             min: null,
@@ -787,8 +775,7 @@ export const sendtArbeidsledig: RSSoknad = {
                 {
                     id: '48',
                     tag: 'FRISKMELDT_START',
-                    sporsmalstekst:
-                        'Fra hvilken dato trengte du ikke lenger sykmeldingen?',
+                    sporsmalstekst: 'Fra hvilken dato trengte du ikke lenger sykmeldingen?',
                     undertekst: null,
                     svartype: 'DATO',
                     min: '2020-05-27',
@@ -803,8 +790,7 @@ export const sendtArbeidsledig: RSSoknad = {
         {
             id: '49',
             tag: 'ANDRE_INNTEKTSKILDER',
-            sporsmalstekst:
-                'Har du hatt inntekt mens du har vært sykmeldt i perioden 27. mai - 11. juni 2020?',
+            sporsmalstekst: 'Har du hatt inntekt mens du har vært sykmeldt i perioden 27. mai - 11. juni 2020?',
             undertekst: null,
             svartype: 'JA_NEI',
             min: null,
@@ -1034,8 +1020,7 @@ export const sendtArbeidsledig: RSSoknad = {
         {
             id: '66',
             tag: 'UTDANNING',
-            sporsmalstekst:
-                'Har du vært under utdanning i løpet av perioden 27. mai - 11. juni 2020?',
+            sporsmalstekst: 'Har du vært under utdanning i løpet av perioden 27. mai - 11. juni 2020?',
             undertekst: null,
             svartype: 'JA_NEI',
             min: null,
@@ -1075,8 +1060,7 @@ export const sendtArbeidsledig: RSSoknad = {
         {
             id: '69',
             tag: 'ARBEIDSLEDIG_UTLAND',
-            sporsmalstekst:
-                'Var du på reise utenfor EØS mens du var sykmeldt 27. mai - 11. juni 2020?',
+            sporsmalstekst: 'Var du på reise utenfor EØS mens du var sykmeldt 27. mai - 11. juni 2020?',
             undertekst: null,
             svartype: 'JA_NEI',
             min: null,
@@ -1101,8 +1085,7 @@ export const sendtArbeidsledig: RSSoknad = {
                 {
                     id: '71',
                     tag: 'UTLANDSOPPHOLD_SOKT_SYKEPENGER',
-                    sporsmalstekst:
-                        'Har du søkt om å beholde sykepengene for disse dagene?',
+                    sporsmalstekst: 'Har du søkt om å beholde sykepengene for disse dagene?',
                     undertekst: null,
                     svartype: 'JA_NEI',
                     min: null,
@@ -1117,8 +1100,7 @@ export const sendtArbeidsledig: RSSoknad = {
         {
             id: '73',
             tag: 'ARBEID_UTENFOR_NORGE',
-            sporsmalstekst:
-                'Har du arbeidet i utlandet i løpet av de siste 12 månedene?',
+            sporsmalstekst: 'Har du arbeidet i utlandet i løpet av de siste 12 månedene?',
             undertekst: null,
             svartype: 'JA_NEI',
             min: null,
@@ -1191,8 +1173,7 @@ export const veldigLangSoknad: RSSoknad = {
         {
             id: '687336',
             tag: 'ANSVARSERKLARING',
-            sporsmalstekst:
-                'Jeg bekrefter at jeg vil gi så riktige og fullstendige opplysninger som mulig.',
+            sporsmalstekst: 'Jeg bekrefter at jeg vil gi så riktige og fullstendige opplysninger som mulig.',
             undertekst: null,
             svartype: 'CHECKBOX_PANEL',
             min: null,
@@ -1205,8 +1186,7 @@ export const veldigLangSoknad: RSSoknad = {
         {
             id: '687356',
             tag: 'ANDRE_INNTEKTSKILDER',
-            sporsmalstekst:
-                'Har du andre inntektskilder enn POSTEN NORGE AS, BÆRUM?',
+            sporsmalstekst: 'Har du andre inntektskilder enn POSTEN NORGE AS, BÆRUM?',
             undertekst: null,
             svartype: 'JA_NEI',
             min: null,
@@ -1382,8 +1362,7 @@ export const veldigLangSoknad: RSSoknad = {
         {
             id: '49',
             tag: 'ANDRE_INNTEKTSKILDER',
-            sporsmalstekst:
-                'Har du hatt inntekt mens du har vært sykmeldt i perioden 27. mai - 11. juni 2020?',
+            sporsmalstekst: 'Har du hatt inntekt mens du har vært sykmeldt i perioden 27. mai - 11. juni 2020?',
             undertekst: null,
             svartype: 'JA_NEI',
             min: null,
@@ -1667,8 +1646,7 @@ export const veldigLangSoknad: RSSoknad = {
         {
             id: '103',
             tag: 'ARBEID_UTENFOR_NORGE',
-            sporsmalstekst:
-                'Har du arbeidet i utlandet i løpet av de siste 12 månedene?',
+            sporsmalstekst: 'Har du arbeidet i utlandet i løpet av de siste 12 månedene?',
             undertekst: null,
             svartype: 'JA_NEI',
             min: null,
@@ -1706,8 +1684,7 @@ export const veldigLangSoknad: RSSoknad = {
                 {
                     id: '5',
                     tag: 'FERIE',
-                    sporsmalstekst:
-                        'Har du avtalt med arbeidsgiveren din at du skal ta ut feriedager i hele perioden?',
+                    sporsmalstekst: 'Har du avtalt med arbeidsgiveren din at du skal ta ut feriedager i hele perioden?',
                     undertekst: null,
                     svartype: 'JA_NEI',
                     min: null,
@@ -1722,8 +1699,7 @@ export const veldigLangSoknad: RSSoknad = {
         {
             id: '687422',
             tag: 'ARBEIDSLEDIG_UTLAND',
-            sporsmalstekst:
-                'Var du på reise utenfor EØS mens du var sykmeldt 1. - 24. april 2020?',
+            sporsmalstekst: 'Var du på reise utenfor EØS mens du var sykmeldt 1. - 24. april 2020?',
             undertekst: null,
             svartype: 'JA_NEI',
             min: null,
@@ -1748,8 +1724,7 @@ export const veldigLangSoknad: RSSoknad = {
                 {
                     id: '687424',
                     tag: 'UTLANDSOPPHOLD_SOKT_SYKEPENGER',
-                    sporsmalstekst:
-                        'Har du søkt om å beholde sykepengene for disse dagene?',
+                    sporsmalstekst: 'Har du søkt om å beholde sykepengene for disse dagene?',
                     undertekst: null,
                     svartype: 'JA_NEI',
                     min: null,
@@ -1864,8 +1839,7 @@ export const veldigLangSoknad: RSSoknad = {
         {
             id: '12345678',
             tag: 'FRAVAR_FOR_SYKMELDINGEN',
-            sporsmalstekst:
-                'Var du syk og borte fra jobb før du ble sykmeldt, i perioden 16. - 31. mars 2020?',
+            sporsmalstekst: 'Var du syk og borte fra jobb før du ble sykmeldt, i perioden 16. - 31. mars 2020?',
             undertekst: null,
             svartype: 'JA_NEI',
             min: null,
@@ -1960,8 +1934,7 @@ export const veldigLangSoknad: RSSoknad = {
         {
             id: '687343',
             tag: 'FERIE_V2',
-            sporsmalstekst:
-                'Tok du ut feriedager i tidsrommet 1. - 24. april 2020?',
+            sporsmalstekst: 'Tok du ut feriedager i tidsrommet 1. - 24. april 2020?',
             undertekst: null,
             svartype: 'JA_NEI',
             min: null,
@@ -2183,8 +2156,7 @@ export const veldigLangSoknad: RSSoknad = {
         {
             id: '47',
             tag: 'FRISKMELDT',
-            sporsmalstekst:
-                'Brukte du hele sykmeldingen fram til 11. juni 2020?',
+            sporsmalstekst: 'Brukte du hele sykmeldingen fram til 11. juni 2020?',
             undertekst: null,
             svartype: 'JA_NEI',
             min: null,
@@ -2196,8 +2168,7 @@ export const veldigLangSoknad: RSSoknad = {
                 {
                     id: '48',
                     tag: 'FRISKMELDT_START',
-                    sporsmalstekst:
-                        'Fra hvilken dato trengte du ikke lenger sykmeldingen?',
+                    sporsmalstekst: 'Fra hvilken dato trengte du ikke lenger sykmeldingen?',
                     undertekst: null,
                     svartype: 'DATO',
                     min: '2020-05-27',
@@ -2239,8 +2210,7 @@ export const veldigLangSoknad: RSSoknad = {
                 {
                     id: '687351',
                     tag: 'HVOR_MYE_HAR_DU_JOBBET_0',
-                    sporsmalstekst:
-                        'Hvor mye jobbet du totalt 1. - 24. april 2020 hos POSTEN NORGE AS, BÆRUM?',
+                    sporsmalstekst: 'Hvor mye jobbet du totalt 1. - 24. april 2020 hos POSTEN NORGE AS, BÆRUM?',
                     undertekst: null,
                     svartype: 'RADIO_GRUPPE_TIMER_PROSENT',
                     min: null,
@@ -2337,8 +2307,7 @@ export const veldigLangSoknad: RSSoknad = {
                 {
                     id: '106',
                     tag: 'HVOR_MYE_HAR_DU_JOBBET_0',
-                    sporsmalstekst:
-                        'Hvor mye jobbet du totalt 20. mai - 5. juni 2020 hos 995816598 sitt orgnavn :)?',
+                    sporsmalstekst: 'Hvor mye jobbet du totalt 20. mai - 5. juni 2020 hos 995816598 sitt orgnavn :)?',
                     undertekst: null,
                     svartype: 'RADIO_GRUPPE_TIMER_PROSENT',
                     min: null,
@@ -2434,8 +2403,7 @@ export const veldigLangSoknad: RSSoknad = {
         {
             id: '687345',
             tag: 'PERMISJON_V2',
-            sporsmalstekst:
-                'Tok du permisjon mens du var sykmeldt 1. - 24. april 2020?',
+            sporsmalstekst: 'Tok du permisjon mens du var sykmeldt 1. - 24. april 2020?',
             undertekst: null,
             svartype: 'JA_NEI',
             min: null,
@@ -2462,8 +2430,7 @@ export const veldigLangSoknad: RSSoknad = {
         {
             id: '687337',
             tag: 'PERMITTERT_NAA',
-            sporsmalstekst:
-                'Var du permittert av arbeidsgiveren din da du ble sykmeldt 4. januar 2021?',
+            sporsmalstekst: 'Var du permittert av arbeidsgiveren din da du ble sykmeldt 4. januar 2021?',
             undertekst: null,
             svartype: 'JA_NEI',
             min: null,
@@ -2546,8 +2513,7 @@ export const veldigLangSoknad: RSSoknad = {
         {
             id: '687369',
             tag: 'UTDANNING',
-            sporsmalstekst:
-                'Har du vært under utdanning i løpet av perioden 1. - 24. april 2020?',
+            sporsmalstekst: 'Har du vært under utdanning i løpet av perioden 1. - 24. april 2020?',
             undertekst: null,
             svartype: 'JA_NEI',
             min: null,
@@ -2587,8 +2553,7 @@ export const veldigLangSoknad: RSSoknad = {
         {
             id: '423',
             tag: 'UTLAND',
-            sporsmalstekst:
-                'Har du vært utenfor EØS mens du var sykmeldt 1. - 24. april 2020?',
+            sporsmalstekst: 'Har du vært utenfor EØS mens du var sykmeldt 1. - 24. april 2020?',
             undertekst: null,
             svartype: 'JA_NEI',
             min: null,
@@ -2613,8 +2578,7 @@ export const veldigLangSoknad: RSSoknad = {
                 {
                     id: '425',
                     tag: 'UTLANDSOPPHOLD_SOKT_SYKEPENGER',
-                    sporsmalstekst:
-                        'Har du søkt om å beholde sykepengene for disse dagene?',
+                    sporsmalstekst: 'Har du søkt om å beholde sykepengene for disse dagene?',
                     undertekst: null,
                     svartype: 'JA_NEI',
                     min: null,
@@ -2644,8 +2608,7 @@ export const veldigLangSoknad: RSSoknad = {
         {
             id: '687347',
             tag: 'UTLAND_V2',
-            sporsmalstekst:
-                'Var du på reise utenfor EØS mens du var sykmeldt 1. - 24. april 2020?',
+            sporsmalstekst: 'Var du på reise utenfor EØS mens du var sykmeldt 1. - 24. april 2020?',
             undertekst: null,
             svartype: 'JA_NEI',
             min: null,
@@ -2672,8 +2635,7 @@ export const veldigLangSoknad: RSSoknad = {
         {
             id: '1563341',
             tag: 'BRUKTE_REISETILSKUDDET',
-            sporsmalstekst:
-                'Har du brukt reisetilskuddet mens du var sykmeldt?',
+            sporsmalstekst: 'Har du brukt reisetilskuddet mens du var sykmeldt?',
             undertekst: null,
             svartype: 'JA_NEI',
             min: null,
@@ -2686,8 +2648,7 @@ export const veldigLangSoknad: RSSoknad = {
         {
             id: 'b59b2bea-1d4c-49e7-9e05-351aaf083232',
             tag: 'TRANSPORT_TIL_DAGLIG',
-            sporsmalstekst:
-                'Brukte du bil eller offentlig transport til og fra jobben før du ble sykmeldt?',
+            sporsmalstekst: 'Brukte du bil eller offentlig transport til og fra jobben før du ble sykmeldt?',
             undertekst: null,
             svartype: 'JA_NEI',
             min: null,
@@ -2723,8 +2684,7 @@ export const veldigLangSoknad: RSSoknad = {
                                 {
                                     id: 'c56ca825-5993-4a13-bba7-29d592944b20',
                                     tag: 'KM_HJEM_JOBB',
-                                    sporsmalstekst:
-                                        'Hvor mange km er kjøreturen mellom hjemmet ditt og jobben?',
+                                    sporsmalstekst: 'Hvor mange km er kjøreturen mellom hjemmet ditt og jobben?',
                                     undertekst: 'km',
                                     svartype: 'KILOMETER',
                                     min: '0',
@@ -2751,8 +2711,7 @@ export const veldigLangSoknad: RSSoknad = {
                                 {
                                     id: 'veldigLangSoknadTestReisetilskudd',
                                     tag: 'OFFENTLIG_TRANSPORT_BELOP',
-                                    sporsmalstekst:
-                                        'Hvor mye betaler du vanligvis i måneden for offentlig transport?',
+                                    sporsmalstekst: 'Hvor mye betaler du vanligvis i måneden for offentlig transport?',
                                     undertekst: 'kr',
                                     svartype: 'BELOP',
                                     min: '0',
@@ -2771,8 +2730,7 @@ export const veldigLangSoknad: RSSoknad = {
         {
             id: '7f8e5fd4-325b-4614-9eb3-39faa2bb511f',
             tag: 'REISE_MED_BIL',
-            sporsmalstekst:
-                'Reiste du med egen bil, leiebil eller en kollega til jobben fra 1. - 24. april 2020?',
+            sporsmalstekst: 'Reiste du med egen bil, leiebil eller en kollega til jobben fra 1. - 24. april 2020?',
             undertekst: null,
             svartype: 'JA_NEI',
             min: null,
@@ -2784,8 +2742,7 @@ export const veldigLangSoknad: RSSoknad = {
                 {
                     id: 'deaac8aa-11b9-4e60-86e2-b90af5cf8b04',
                     tag: 'BIL_DATOER',
-                    sporsmalstekst:
-                        'Hvilke dager reiste du med bil i perioden 1. - 24. april 2020?',
+                    sporsmalstekst: 'Hvilke dager reiste du med bil i perioden 1. - 24. april 2020?',
                     undertekst: null,
                     svartype: 'DATOER',
                     min: '2020-04-01',
@@ -2810,8 +2767,7 @@ export const veldigLangSoknad: RSSoknad = {
                         {
                             id: '616cc0cb-434e-4114-a68b-b5708e033e9e',
                             tag: 'BIL_BOMPENGER_BELOP',
-                            sporsmalstekst:
-                                'Hvor mye betalte du i bompenger mellom hjemmet ditt og jobben i perioden?',
+                            sporsmalstekst: 'Hvor mye betalte du i bompenger mellom hjemmet ditt og jobben i perioden?',
                             undertekst: 'kr',
                             svartype: 'BELOP',
                             min: '0',
@@ -2828,8 +2784,7 @@ export const veldigLangSoknad: RSSoknad = {
         {
             id: 'c5e8e211-d8d1-404d-85a7-d6e073f1fd4b',
             tag: 'KVITTERINGER',
-            sporsmalstekst:
-                'Last opp kvitteringer for reiseutgifter til jobben fra 1. - 24. april 2020.',
+            sporsmalstekst: 'Last opp kvitteringer for reiseutgifter til jobben fra 1. - 24. april 2020.',
             undertekst: null,
             svartype: 'KVITTERING',
             min: null,
@@ -2912,8 +2867,7 @@ export const arbeidsledigKvittering: RSSoknad = {
         {
             id: '127',
             tag: 'ANSVARSERKLARING',
-            sporsmalstekst:
-                'Jeg bekrefter at jeg vil gi så riktige og fullstendige opplysninger som mulig.',
+            sporsmalstekst: 'Jeg bekrefter at jeg vil gi så riktige og fullstendige opplysninger som mulig.',
             undertekst: null,
             svartype: 'CHECKBOX_PANEL',
             min: null,
@@ -2983,8 +2937,7 @@ export const sendtArbeidsledigKvittering: RSSoknad = {
         {
             id: '93',
             tag: 'ANSVARSERKLARING',
-            sporsmalstekst:
-                'Jeg bekrefter at jeg vil gi så riktige og fullstendige opplysninger som mulig.',
+            sporsmalstekst: 'Jeg bekrefter at jeg vil gi så riktige og fullstendige opplysninger som mulig.',
             undertekst: null,
             svartype: 'CHECKBOX_PANEL',
             min: null,
@@ -3002,8 +2955,7 @@ export const sendtArbeidsledigKvittering: RSSoknad = {
         {
             id: '98',
             tag: 'FRISKMELDT',
-            sporsmalstekst:
-                'Brukte du hele sykmeldingen fram til 10. januar 2020?',
+            sporsmalstekst: 'Brukte du hele sykmeldingen fram til 10. januar 2020?',
             undertekst: null,
             svartype: 'JA_NEI',
             min: null,
@@ -3020,8 +2972,7 @@ export const sendtArbeidsledigKvittering: RSSoknad = {
                 {
                     id: '99',
                     tag: 'FRISKMELDT_START',
-                    sporsmalstekst:
-                        'Fra hvilken dato trengte du ikke lenger sykmeldingen?',
+                    sporsmalstekst: 'Fra hvilken dato trengte du ikke lenger sykmeldingen?',
                     undertekst: null,
                     svartype: 'DATO',
                     min: '2020-01-01',
@@ -3036,8 +2987,7 @@ export const sendtArbeidsledigKvittering: RSSoknad = {
         {
             id: '100',
             tag: 'ANDRE_INNTEKTSKILDER',
-            sporsmalstekst:
-                'Har du hatt inntekt mens du har vært sykmeldt i perioden 1. - 10. januar 2020?',
+            sporsmalstekst: 'Har du hatt inntekt mens du har vært sykmeldt i perioden 1. - 10. januar 2020?',
             undertekst: null,
             svartype: 'JA_NEI',
             min: null,
@@ -3272,8 +3222,7 @@ export const sendtArbeidsledigKvittering: RSSoknad = {
         {
             id: '117',
             tag: 'UTDANNING',
-            sporsmalstekst:
-                'Har du vært under utdanning i løpet av perioden 1. - 10. januar 2020?',
+            sporsmalstekst: 'Har du vært under utdanning i løpet av perioden 1. - 10. januar 2020?',
             undertekst: null,
             svartype: 'JA_NEI',
             min: null,
@@ -3318,8 +3267,7 @@ export const sendtArbeidsledigKvittering: RSSoknad = {
         {
             id: '120',
             tag: 'ARBEIDSLEDIG_UTLAND',
-            sporsmalstekst:
-                'Var du på reise utenfor EØS mens du var sykmeldt 1. - 10. januar 2020?',
+            sporsmalstekst: 'Var du på reise utenfor EØS mens du var sykmeldt 1. - 10. januar 2020?',
             undertekst: null,
             svartype: 'JA_NEI',
             min: null,
@@ -3349,8 +3297,7 @@ export const sendtArbeidsledigKvittering: RSSoknad = {
                 {
                     id: '122',
                     tag: 'UTLANDSOPPHOLD_SOKT_SYKEPENGER',
-                    sporsmalstekst:
-                        'Har du søkt om å beholde sykepengene for disse dagene?',
+                    sporsmalstekst: 'Har du søkt om å beholde sykepengene for disse dagene?',
                     undertekst: null,
                     svartype: 'JA_NEI',
                     min: null,
@@ -3365,8 +3312,7 @@ export const sendtArbeidsledigKvittering: RSSoknad = {
         {
             id: '124',
             tag: 'ARBEID_UTENFOR_NORGE',
-            sporsmalstekst:
-                'Har du arbeidet i utlandet i løpet av de siste 12 månedene?',
+            sporsmalstekst: 'Har du arbeidet i utlandet i løpet av de siste 12 månedene?',
             undertekst: null,
             svartype: 'JA_NEI',
             min: null,
@@ -3446,8 +3392,7 @@ export const delvisUtfylltArbeidsledig: RSSoknad = {
         {
             id: '93',
             tag: 'ANSVARSERKLARING',
-            sporsmalstekst:
-                'Jeg bekrefter at jeg vil gi så riktige og fullstendige opplysninger som mulig.',
+            sporsmalstekst: 'Jeg bekrefter at jeg vil gi så riktige og fullstendige opplysninger som mulig.',
             undertekst: null,
             svartype: 'CHECKBOX_PANEL',
             min: null,
@@ -3465,8 +3410,7 @@ export const delvisUtfylltArbeidsledig: RSSoknad = {
         {
             id: '1243',
             tag: 'ARBEID_UTENFOR_NORGE',
-            sporsmalstekst:
-                'Har du arbeidet i utlandet i løpet av de siste 12 månedene?',
+            sporsmalstekst: 'Har du arbeidet i utlandet i løpet av de siste 12 månedene?',
             undertekst: null,
             svartype: 'JA_NEI',
             min: null,
@@ -3484,8 +3428,7 @@ export const delvisUtfylltArbeidsledig: RSSoknad = {
         {
             id: '1334',
             tag: 'ARBEID_UTENFOR_NORGE',
-            sporsmalstekst:
-                'Har du arbeidet i utlandet i løpet av de siste 12 månedene?',
+            sporsmalstekst: 'Har du arbeidet i utlandet i løpet av de siste 12 månedene?',
             undertekst: null,
             svartype: 'JA_NEI',
             min: null,
@@ -3599,8 +3542,7 @@ export const oppholdUtlandKvittering: RSSoknad = {
                 {
                     id: '5',
                     tag: 'FERIE',
-                    sporsmalstekst:
-                        'Har du avtalt med arbeidsgiveren din at du skal ta ut feriedager i hele perioden?',
+                    sporsmalstekst: 'Har du avtalt med arbeidsgiveren din at du skal ta ut feriedager i hele perioden?',
                     undertekst: null,
                     svartype: 'JA_NEI',
                     min: null,
@@ -3672,8 +3614,7 @@ export const selvstendigKvittering: RSSoknad = {
         {
             id: '161',
             tag: 'ANSVARSERKLARING',
-            sporsmalstekst:
-                'Jeg bekrefter at jeg vil gi så riktige og fullstendige opplysninger som mulig.',
+            sporsmalstekst: 'Jeg bekrefter at jeg vil gi så riktige og fullstendige opplysninger som mulig.',
             undertekst: null,
             svartype: 'CHECKBOX_PANEL',
             min: null,
@@ -3686,8 +3627,7 @@ export const selvstendigKvittering: RSSoknad = {
         {
             id: '185',
             tag: 'UTDANNING',
-            sporsmalstekst:
-                'Har du vært under utdanning i løpet av perioden 1. - 22. juni 2020?',
+            sporsmalstekst: 'Har du vært under utdanning i løpet av perioden 1. - 22. juni 2020?',
             undertekst: null,
             svartype: 'JA_NEI',
             min: null,
@@ -3761,8 +3701,7 @@ export const arbeidstakerInnenforArbeidsgiverperiodeKvittering: RSSoknad = {
         {
             id: '318',
             tag: 'ANSVARSERKLARING',
-            sporsmalstekst:
-                'Jeg bekrefter at jeg vil gi så riktige og fullstendige opplysninger som mulig.',
+            sporsmalstekst: 'Jeg bekrefter at jeg vil gi så riktige og fullstendige opplysninger som mulig.',
             undertekst: null,
             svartype: 'CHECKBOX_PANEL',
             min: null,
@@ -3835,8 +3774,7 @@ export const arbeidstakerUtenforArbeidsgiverperiodeKvittering: RSSoknad = {
         {
             id: '318',
             tag: 'ANSVARSERKLARING',
-            sporsmalstekst:
-                'Jeg bekrefter at jeg vil gi så riktige og fullstendige opplysninger som mulig.',
+            sporsmalstekst: 'Jeg bekrefter at jeg vil gi så riktige og fullstendige opplysninger som mulig.',
             undertekst: null,
             svartype: 'CHECKBOX_PANEL',
             min: null,
@@ -3877,156 +3815,152 @@ export const arbeidstakerUtenforArbeidsgiverperiodeKvittering: RSSoknad = {
     ],
     egenmeldtSykmelding: false,
 }
-export const arbeidstakerDeltPeriodeForsteUtenforArbeidsgiverperiodeKvittering: RSSoknad =
-    {
-        id: 'sok3',
-        sykmeldingId: syk3.id,
-        soknadstype: 'ARBEIDSTAKERE',
-        status: 'NY',
-        fom: '2020-04-01',
-        tom: '2020-04-10',
-        opprettetDato: '2020-01-10',
-        sendtTilNAVDato: null,
-        sendtTilArbeidsgiverDato: null,
-        avbruttDato: null,
-        startSykeforlop: '2020-01-01',
-        sykmeldingUtskrevet: '2020-01-10',
-        arbeidsgiver: {
-            navn: 'arb3',
-            orgnummer: '3',
+export const arbeidstakerDeltPeriodeForsteUtenforArbeidsgiverperiodeKvittering: RSSoknad = {
+    id: 'sok3',
+    sykmeldingId: syk3.id,
+    soknadstype: 'ARBEIDSTAKERE',
+    status: 'NY',
+    fom: '2020-04-01',
+    tom: '2020-04-10',
+    opprettetDato: '2020-01-10',
+    sendtTilNAVDato: null,
+    sendtTilArbeidsgiverDato: null,
+    avbruttDato: null,
+    startSykeforlop: '2020-01-01',
+    sykmeldingUtskrevet: '2020-01-10',
+    arbeidsgiver: {
+        navn: 'arb3',
+        orgnummer: '3',
+    },
+    korrigerer: null,
+    korrigertAv: null,
+    arbeidssituasjon: 'ARBEIDSTAKER',
+    soknadPerioder: [
+        {
+            fom: '2020-04-01',
+            tom: '2020-04-10',
+            grad: 100,
+            sykmeldingstype: 'AKTIVITET_IKKE_MULIG',
         },
-        korrigerer: null,
-        korrigertAv: null,
-        arbeidssituasjon: 'ARBEIDSTAKER',
-        soknadPerioder: [
-            {
-                fom: '2020-04-01',
-                tom: '2020-04-10',
-                grad: 100,
-                sykmeldingstype: 'AKTIVITET_IKKE_MULIG',
-            },
-        ],
-        sporsmal: [
-            {
-                id: '318',
-                tag: 'ANSVARSERKLARING',
-                sporsmalstekst:
-                    'Jeg bekrefter at jeg vil gi så riktige og fullstendige opplysninger som mulig.',
-                undertekst: null,
-                svartype: 'CHECKBOX_PANEL',
-                min: null,
-                max: null,
-                pavirkerAndreSporsmal: false,
-                kriterieForVisningAvUndersporsmal: null,
-                svar: [],
-                undersporsmal: [],
-            },
-            {
-                id: '361',
-                tag: 'VAER_KLAR_OVER_AT',
-                sporsmalstekst: 'Viktig å være klar over:',
-                undertekst:
-                    '<ul><li>Du kan bare få sykepenger hvis det er din egen sykdom eller skade som hindrer deg i å jobbe. Sosiale eller økonomiske problemer gir ikke rett til sykepenger.</li><li>Du kan miste retten til sykepenger hvis du nekter å opplyse om din egen arbeidsevne, eller hvis du ikke tar imot behandling eller tilrettelegging.</li><li>Retten til sykepenger gjelder bare inntekt du har mottatt som lønn og betalt skatt av på sykmeldingstidspunktet.</li><li>NAV kan innhente opplysninger som er nødvendige for å behandle søknaden.</li><li>Du må melde fra til NAV hvis du satt i varetekt, sonet straff eller var under forvaring i sykmeldingsperioden.</li><li>Fristen for å søke sykepenger er som hovedregel 3 måneder</li></ul><p>Du kan lese mer om rettigheter og plikter på <a href="https://www.nav.no/sykepenger" target="_blank">nav.no/sykepenger</a>.</p>',
-                svartype: 'IKKE_RELEVANT',
-                min: null,
-                max: null,
-                pavirkerAndreSporsmal: false,
-                kriterieForVisningAvUndersporsmal: null,
-                svar: [],
-                undersporsmal: [],
-            },
-            {
-                id: '362',
-                tag: 'BEKREFT_OPPLYSNINGER',
-                sporsmalstekst:
-                    'Jeg har lest all informasjonen jeg har fått i søknaden og bekrefter at opplysningene jeg har gitt er korrekte.',
-                undertekst: null,
-                svartype: 'CHECKBOX_PANEL',
-                min: null,
-                max: null,
-                pavirkerAndreSporsmal: false,
-                kriterieForVisningAvUndersporsmal: null,
-                svar: [],
-                undersporsmal: [],
-            },
-        ],
-        egenmeldtSykmelding: false,
-    }
-export const arbeidstakerUtenOppholdForsteUtenforArbeidsgiverperiodeKvittering: RSSoknad =
-    {
-        id: 'sok4',
-        sykmeldingId: syk4.id,
-        soknadstype: 'ARBEIDSTAKERE',
-        status: 'NY',
-        fom: '2020-04-01',
-        tom: '2020-04-16',
-        opprettetDato: '2020-01-06',
-        sendtTilNAVDato: null,
-        sendtTilArbeidsgiverDato: null,
-        avbruttDato: null,
-        startSykeforlop: '2020-01-01',
-        sykmeldingUtskrevet: '2020-01-06',
-        arbeidsgiver: {
-            navn: 'arb1',
-            orgnummer: '1',
+    ],
+    sporsmal: [
+        {
+            id: '318',
+            tag: 'ANSVARSERKLARING',
+            sporsmalstekst: 'Jeg bekrefter at jeg vil gi så riktige og fullstendige opplysninger som mulig.',
+            undertekst: null,
+            svartype: 'CHECKBOX_PANEL',
+            min: null,
+            max: null,
+            pavirkerAndreSporsmal: false,
+            kriterieForVisningAvUndersporsmal: null,
+            svar: [],
+            undersporsmal: [],
         },
-        korrigerer: null,
-        korrigertAv: null,
-        arbeidssituasjon: 'ARBEIDSTAKER',
-        soknadPerioder: [
-            {
-                fom: '2020-01-06',
-                tom: '2020-01-20',
-                grad: 100,
-                sykmeldingstype: 'AKTIVITET_IKKE_MULIG',
-            },
-        ],
-        sporsmal: [
-            {
-                id: '318',
-                tag: 'ANSVARSERKLARING',
-                sporsmalstekst:
-                    'Jeg bekrefter at jeg vil gi så riktige og fullstendige opplysninger som mulig.',
-                undertekst: null,
-                svartype: 'CHECKBOX_PANEL',
-                min: null,
-                max: null,
-                pavirkerAndreSporsmal: false,
-                kriterieForVisningAvUndersporsmal: null,
-                svar: [],
-                undersporsmal: [],
-            },
-            {
-                id: '361',
-                tag: 'VAER_KLAR_OVER_AT',
-                sporsmalstekst: 'Viktig å være klar over:',
-                undertekst:
-                    '<ul><li>Du kan bare få sykepenger hvis det er din egen sykdom eller skade som hindrer deg i å jobbe. Sosiale eller økonomiske problemer gir ikke rett til sykepenger.</li><li>Du kan miste retten til sykepenger hvis du nekter å opplyse om din egen arbeidsevne, eller hvis du ikke tar imot behandling eller tilrettelegging.</li><li>Retten til sykepenger gjelder bare inntekt du har mottatt som lønn og betalt skatt av på sykmeldingstidspunktet.</li><li>NAV kan innhente opplysninger som er nødvendige for å behandle søknaden.</li><li>Du må melde fra til NAV hvis du satt i varetekt, sonet straff eller var under forvaring i sykmeldingsperioden.</li><li>Fristen for å søke sykepenger er som hovedregel 3 måneder</li></ul><p>Du kan lese mer om rettigheter og plikter på <a href="https://www.nav.no/sykepenger" target="_blank">nav.no/sykepenger</a>.</p>',
-                svartype: 'IKKE_RELEVANT',
-                min: null,
-                max: null,
-                pavirkerAndreSporsmal: false,
-                kriterieForVisningAvUndersporsmal: null,
-                svar: [],
-                undersporsmal: [],
-            },
-            {
-                id: '362',
-                tag: 'BEKREFT_OPPLYSNINGER',
-                sporsmalstekst:
-                    'Jeg har lest all informasjonen jeg har fått i søknaden og bekrefter at opplysningene jeg har gitt er korrekte.',
-                undertekst: null,
-                svartype: 'CHECKBOX_PANEL',
-                min: null,
-                max: null,
-                pavirkerAndreSporsmal: false,
-                kriterieForVisningAvUndersporsmal: null,
-                svar: [],
-                undersporsmal: [],
-            },
-        ],
-        egenmeldtSykmelding: false,
-    }
+        {
+            id: '361',
+            tag: 'VAER_KLAR_OVER_AT',
+            sporsmalstekst: 'Viktig å være klar over:',
+            undertekst:
+                '<ul><li>Du kan bare få sykepenger hvis det er din egen sykdom eller skade som hindrer deg i å jobbe. Sosiale eller økonomiske problemer gir ikke rett til sykepenger.</li><li>Du kan miste retten til sykepenger hvis du nekter å opplyse om din egen arbeidsevne, eller hvis du ikke tar imot behandling eller tilrettelegging.</li><li>Retten til sykepenger gjelder bare inntekt du har mottatt som lønn og betalt skatt av på sykmeldingstidspunktet.</li><li>NAV kan innhente opplysninger som er nødvendige for å behandle søknaden.</li><li>Du må melde fra til NAV hvis du satt i varetekt, sonet straff eller var under forvaring i sykmeldingsperioden.</li><li>Fristen for å søke sykepenger er som hovedregel 3 måneder</li></ul><p>Du kan lese mer om rettigheter og plikter på <a href="https://www.nav.no/sykepenger" target="_blank">nav.no/sykepenger</a>.</p>',
+            svartype: 'IKKE_RELEVANT',
+            min: null,
+            max: null,
+            pavirkerAndreSporsmal: false,
+            kriterieForVisningAvUndersporsmal: null,
+            svar: [],
+            undersporsmal: [],
+        },
+        {
+            id: '362',
+            tag: 'BEKREFT_OPPLYSNINGER',
+            sporsmalstekst:
+                'Jeg har lest all informasjonen jeg har fått i søknaden og bekrefter at opplysningene jeg har gitt er korrekte.',
+            undertekst: null,
+            svartype: 'CHECKBOX_PANEL',
+            min: null,
+            max: null,
+            pavirkerAndreSporsmal: false,
+            kriterieForVisningAvUndersporsmal: null,
+            svar: [],
+            undersporsmal: [],
+        },
+    ],
+    egenmeldtSykmelding: false,
+}
+export const arbeidstakerUtenOppholdForsteUtenforArbeidsgiverperiodeKvittering: RSSoknad = {
+    id: 'sok4',
+    sykmeldingId: syk4.id,
+    soknadstype: 'ARBEIDSTAKERE',
+    status: 'NY',
+    fom: '2020-04-01',
+    tom: '2020-04-16',
+    opprettetDato: '2020-01-06',
+    sendtTilNAVDato: null,
+    sendtTilArbeidsgiverDato: null,
+    avbruttDato: null,
+    startSykeforlop: '2020-01-01',
+    sykmeldingUtskrevet: '2020-01-06',
+    arbeidsgiver: {
+        navn: 'arb1',
+        orgnummer: '1',
+    },
+    korrigerer: null,
+    korrigertAv: null,
+    arbeidssituasjon: 'ARBEIDSTAKER',
+    soknadPerioder: [
+        {
+            fom: '2020-01-06',
+            tom: '2020-01-20',
+            grad: 100,
+            sykmeldingstype: 'AKTIVITET_IKKE_MULIG',
+        },
+    ],
+    sporsmal: [
+        {
+            id: '318',
+            tag: 'ANSVARSERKLARING',
+            sporsmalstekst: 'Jeg bekrefter at jeg vil gi så riktige og fullstendige opplysninger som mulig.',
+            undertekst: null,
+            svartype: 'CHECKBOX_PANEL',
+            min: null,
+            max: null,
+            pavirkerAndreSporsmal: false,
+            kriterieForVisningAvUndersporsmal: null,
+            svar: [],
+            undersporsmal: [],
+        },
+        {
+            id: '361',
+            tag: 'VAER_KLAR_OVER_AT',
+            sporsmalstekst: 'Viktig å være klar over:',
+            undertekst:
+                '<ul><li>Du kan bare få sykepenger hvis det er din egen sykdom eller skade som hindrer deg i å jobbe. Sosiale eller økonomiske problemer gir ikke rett til sykepenger.</li><li>Du kan miste retten til sykepenger hvis du nekter å opplyse om din egen arbeidsevne, eller hvis du ikke tar imot behandling eller tilrettelegging.</li><li>Retten til sykepenger gjelder bare inntekt du har mottatt som lønn og betalt skatt av på sykmeldingstidspunktet.</li><li>NAV kan innhente opplysninger som er nødvendige for å behandle søknaden.</li><li>Du må melde fra til NAV hvis du satt i varetekt, sonet straff eller var under forvaring i sykmeldingsperioden.</li><li>Fristen for å søke sykepenger er som hovedregel 3 måneder</li></ul><p>Du kan lese mer om rettigheter og plikter på <a href="https://www.nav.no/sykepenger" target="_blank">nav.no/sykepenger</a>.</p>',
+            svartype: 'IKKE_RELEVANT',
+            min: null,
+            max: null,
+            pavirkerAndreSporsmal: false,
+            kriterieForVisningAvUndersporsmal: null,
+            svar: [],
+            undersporsmal: [],
+        },
+        {
+            id: '362',
+            tag: 'BEKREFT_OPPLYSNINGER',
+            sporsmalstekst:
+                'Jeg har lest all informasjonen jeg har fått i søknaden og bekrefter at opplysningene jeg har gitt er korrekte.',
+            undertekst: null,
+            svartype: 'CHECKBOX_PANEL',
+            min: null,
+            max: null,
+            pavirkerAndreSporsmal: false,
+            kriterieForVisningAvUndersporsmal: null,
+            svar: [],
+            undersporsmal: [],
+        },
+    ],
+    egenmeldtSykmelding: false,
+}
 export const arbeidstakerUtenOppholdKvittering: RSSoknad = {
     id: 'sok5',
     sykmeldingId: syk5.id,
@@ -4059,8 +3993,7 @@ export const arbeidstakerUtenOppholdKvittering: RSSoknad = {
         {
             id: '318',
             tag: 'ANSVARSERKLARING',
-            sporsmalstekst:
-                'Jeg bekrefter at jeg vil gi så riktige og fullstendige opplysninger som mulig.',
+            sporsmalstekst: 'Jeg bekrefter at jeg vil gi så riktige og fullstendige opplysninger som mulig.',
             undertekst: null,
             svartype: 'CHECKBOX_PANEL',
             min: null,
@@ -4133,8 +4066,7 @@ export const sok6: RSSoknad = {
         {
             id: '318',
             tag: 'ANSVARSERKLARING',
-            sporsmalstekst:
-                'Jeg bekrefter at jeg vil gi så riktige og fullstendige opplysninger som mulig.',
+            sporsmalstekst: 'Jeg bekrefter at jeg vil gi så riktige og fullstendige opplysninger som mulig.',
             undertekst: null,
             svartype: 'CHECKBOX_PANEL',
             min: null,
@@ -4175,81 +4107,79 @@ export const sok6: RSSoknad = {
     ],
     egenmeldtSykmelding: false,
 }
-export const arbeidstakerMedOppholdForsteUtenforArbeidsgiverperiodeKvittering: RSSoknad =
-    {
-        id: 'sok7',
-        sykmeldingId: syk7.id,
-        soknadstype: 'ARBEIDSTAKERE',
-        status: 'NY',
-        fom: '2020-04-01',
-        tom: '2020-04-16',
-        opprettetDato: '2020-01-10',
-        sendtTilNAVDato: null,
-        sendtTilArbeidsgiverDato: null,
-        avbruttDato: null,
-        startSykeforlop: '2020-01-01',
-        sykmeldingUtskrevet: '2020-01-10',
-        arbeidsgiver: {
-            navn: 'arb4',
-            orgnummer: '4',
+export const arbeidstakerMedOppholdForsteUtenforArbeidsgiverperiodeKvittering: RSSoknad = {
+    id: 'sok7',
+    sykmeldingId: syk7.id,
+    soknadstype: 'ARBEIDSTAKERE',
+    status: 'NY',
+    fom: '2020-04-01',
+    tom: '2020-04-16',
+    opprettetDato: '2020-01-10',
+    sendtTilNAVDato: null,
+    sendtTilArbeidsgiverDato: null,
+    avbruttDato: null,
+    startSykeforlop: '2020-01-01',
+    sykmeldingUtskrevet: '2020-01-10',
+    arbeidsgiver: {
+        navn: 'arb4',
+        orgnummer: '4',
+    },
+    korrigerer: null,
+    korrigertAv: null,
+    arbeidssituasjon: 'ARBEIDSTAKER',
+    soknadPerioder: [
+        {
+            fom: '2020-01-10',
+            tom: '2020-01-25',
+            grad: 100,
+            sykmeldingstype: 'AKTIVITET_IKKE_MULIG',
         },
-        korrigerer: null,
-        korrigertAv: null,
-        arbeidssituasjon: 'ARBEIDSTAKER',
-        soknadPerioder: [
-            {
-                fom: '2020-01-10',
-                tom: '2020-01-25',
-                grad: 100,
-                sykmeldingstype: 'AKTIVITET_IKKE_MULIG',
-            },
-        ],
-        sporsmal: [
-            {
-                id: '318',
-                tag: 'ANSVARSERKLARING',
-                sporsmalstekst:
-                    'Jeg bekrefter at jeg vil gi så riktige og fullstendige opplysninger som mulig.',
-                undertekst: null,
-                svartype: 'CHECKBOX_PANEL',
-                min: null,
-                max: null,
-                pavirkerAndreSporsmal: false,
-                kriterieForVisningAvUndersporsmal: null,
-                svar: [],
-                undersporsmal: [],
-            },
-            {
-                id: '361',
-                tag: 'VAER_KLAR_OVER_AT',
-                sporsmalstekst: 'Viktig å være klar over:',
-                undertekst:
-                    '<ul><li>Du kan bare få sykepenger hvis det er din egen sykdom eller skade som hindrer deg i å jobbe. Sosiale eller økonomiske problemer gir ikke rett til sykepenger.</li><li>Du kan miste retten til sykepenger hvis du nekter å opplyse om din egen arbeidsevne, eller hvis du ikke tar imot behandling eller tilrettelegging.</li><li>Retten til sykepenger gjelder bare inntekt du har mottatt som lønn og betalt skatt av på sykmeldingstidspunktet.</li><li>NAV kan innhente opplysninger som er nødvendige for å behandle søknaden.</li><li>Du må melde fra til NAV hvis du satt i varetekt, sonet straff eller var under forvaring i sykmeldingsperioden.</li><li>Fristen for å søke sykepenger er som hovedregel 3 måneder</li></ul><p>Du kan lese mer om rettigheter og plikter på <a href="https://www.nav.no/sykepenger" target="_blank">nav.no/sykepenger</a>.</p>',
-                svartype: 'IKKE_RELEVANT',
-                min: null,
-                max: null,
-                pavirkerAndreSporsmal: false,
-                kriterieForVisningAvUndersporsmal: null,
-                svar: [],
-                undersporsmal: [],
-            },
-            {
-                id: '362',
-                tag: 'BEKREFT_OPPLYSNINGER',
-                sporsmalstekst:
-                    'Jeg har lest all informasjonen jeg har fått i søknaden og bekrefter at opplysningene jeg har gitt er korrekte.',
-                undertekst: null,
-                svartype: 'CHECKBOX_PANEL',
-                min: null,
-                max: null,
-                pavirkerAndreSporsmal: false,
-                kriterieForVisningAvUndersporsmal: null,
-                svar: [],
-                undersporsmal: [],
-            },
-        ],
-        egenmeldtSykmelding: false,
-    }
+    ],
+    sporsmal: [
+        {
+            id: '318',
+            tag: 'ANSVARSERKLARING',
+            sporsmalstekst: 'Jeg bekrefter at jeg vil gi så riktige og fullstendige opplysninger som mulig.',
+            undertekst: null,
+            svartype: 'CHECKBOX_PANEL',
+            min: null,
+            max: null,
+            pavirkerAndreSporsmal: false,
+            kriterieForVisningAvUndersporsmal: null,
+            svar: [],
+            undersporsmal: [],
+        },
+        {
+            id: '361',
+            tag: 'VAER_KLAR_OVER_AT',
+            sporsmalstekst: 'Viktig å være klar over:',
+            undertekst:
+                '<ul><li>Du kan bare få sykepenger hvis det er din egen sykdom eller skade som hindrer deg i å jobbe. Sosiale eller økonomiske problemer gir ikke rett til sykepenger.</li><li>Du kan miste retten til sykepenger hvis du nekter å opplyse om din egen arbeidsevne, eller hvis du ikke tar imot behandling eller tilrettelegging.</li><li>Retten til sykepenger gjelder bare inntekt du har mottatt som lønn og betalt skatt av på sykmeldingstidspunktet.</li><li>NAV kan innhente opplysninger som er nødvendige for å behandle søknaden.</li><li>Du må melde fra til NAV hvis du satt i varetekt, sonet straff eller var under forvaring i sykmeldingsperioden.</li><li>Fristen for å søke sykepenger er som hovedregel 3 måneder</li></ul><p>Du kan lese mer om rettigheter og plikter på <a href="https://www.nav.no/sykepenger" target="_blank">nav.no/sykepenger</a>.</p>',
+            svartype: 'IKKE_RELEVANT',
+            min: null,
+            max: null,
+            pavirkerAndreSporsmal: false,
+            kriterieForVisningAvUndersporsmal: null,
+            svar: [],
+            undersporsmal: [],
+        },
+        {
+            id: '362',
+            tag: 'BEKREFT_OPPLYSNINGER',
+            sporsmalstekst:
+                'Jeg har lest all informasjonen jeg har fått i søknaden og bekrefter at opplysningene jeg har gitt er korrekte.',
+            undertekst: null,
+            svartype: 'CHECKBOX_PANEL',
+            min: null,
+            max: null,
+            pavirkerAndreSporsmal: false,
+            kriterieForVisningAvUndersporsmal: null,
+            svar: [],
+            undersporsmal: [],
+        },
+    ],
+    egenmeldtSykmelding: false,
+}
 export const arbeidstakerMedOppholdKvittering: RSSoknad = {
     id: 'sok8',
     sykmeldingId: syk8.id,
@@ -4282,8 +4212,7 @@ export const arbeidstakerMedOppholdKvittering: RSSoknad = {
         {
             id: '318',
             tag: 'ANSVARSERKLARING',
-            sporsmalstekst:
-                'Jeg bekrefter at jeg vil gi så riktige og fullstendige opplysninger som mulig.',
+            sporsmalstekst: 'Jeg bekrefter at jeg vil gi så riktige og fullstendige opplysninger som mulig.',
             undertekst: null,
             svartype: 'CHECKBOX_PANEL',
             min: null,
@@ -4324,22 +4253,16 @@ export const arbeidstakerMedOppholdKvittering: RSSoknad = {
     ],
     egenmeldtSykmelding: false,
 }
-export const foranArbeidstakerMedOppholdKvittering: RSSoknad = jsonDeepCopy(
-    arbeidstakerMedOppholdKvittering
-)
+export const foranArbeidstakerMedOppholdKvittering: RSSoknad = jsonDeepCopy(arbeidstakerMedOppholdKvittering)
 foranArbeidstakerMedOppholdKvittering.id = 'foran-sok-8'
 foranArbeidstakerMedOppholdKvittering.status = 'SENDT'
 foranArbeidstakerMedOppholdKvittering.fom = '2020-03-25'
 foranArbeidstakerMedOppholdKvittering.tom = '2020-03-27'
 
-export const soknadSomTriggerSporsmalFinnesIkkeISoknad: RSSoknad =
-    jsonDeepCopy(arbeidstaker)
-soknadSomTriggerSporsmalFinnesIkkeISoknad.id =
-    '2c45e5b3-1e0b-486a-ab6c-555b1ea02ed1'
-export const soknadSomTriggerFeilStatusForOppdaterSporsmal: RSSoknad =
-    jsonDeepCopy(arbeidstaker)
-soknadSomTriggerFeilStatusForOppdaterSporsmal.id =
-    '3335e5b3-1e0b-486a-ab6c-555b1ea02ed1'
+export const soknadSomTriggerSporsmalFinnesIkkeISoknad: RSSoknad = jsonDeepCopy(arbeidstaker)
+soknadSomTriggerSporsmalFinnesIkkeISoknad.id = '2c45e5b3-1e0b-486a-ab6c-555b1ea02ed1'
+export const soknadSomTriggerFeilStatusForOppdaterSporsmal: RSSoknad = jsonDeepCopy(arbeidstaker)
+soknadSomTriggerFeilStatusForOppdaterSporsmal.id = '3335e5b3-1e0b-486a-ab6c-555b1ea02ed1'
 
 export const arbeidstakerTilKorrigering: RSSoknad = jsonDeepCopy(arbeidstaker)
 arbeidstakerTilKorrigering.id = '3335e5b3-1e0b-486a-ab6c-555b1ea02e99'
@@ -4374,8 +4297,7 @@ export const brukertestSoknad: RSSoknad = {
         {
             id: '1623807',
             tag: 'ANSVARSERKLARING',
-            sporsmalstekst:
-                'Jeg bekrefter at jeg vil gi så riktige og fullstendige opplysninger som mulig.',
+            sporsmalstekst: 'Jeg bekrefter at jeg vil gi så riktige og fullstendige opplysninger som mulig.',
             undertekst: null,
             svartype: 'CHECKBOX_PANEL',
             min: null,
@@ -4445,8 +4367,7 @@ export const brukertestSoknad: RSSoknad = {
         {
             id: '1623810',
             tag: 'FERIE_V2',
-            sporsmalstekst:
-                'Tok du ut feriedager i tidsrommet 8. - 21. februar 2021?',
+            sporsmalstekst: 'Tok du ut feriedager i tidsrommet 8. - 21. februar 2021?',
             undertekst: null,
             svartype: 'JA_NEI',
             min: null,
@@ -4473,8 +4394,7 @@ export const brukertestSoknad: RSSoknad = {
         {
             id: '1623812',
             tag: 'PERMISJON_V2',
-            sporsmalstekst:
-                'Tok du permisjon mens du var sykmeldt 8. - 21. februar 2021?',
+            sporsmalstekst: 'Tok du permisjon mens du var sykmeldt 8. - 21. februar 2021?',
             undertekst: null,
             svartype: 'JA_NEI',
             min: null,
@@ -4501,8 +4421,7 @@ export const brukertestSoknad: RSSoknad = {
         {
             id: '1623814',
             tag: 'UTLAND_V2',
-            sporsmalstekst:
-                'Var du på reise utenfor EØS mens du var sykmeldt 8. - 21. februar 2021?',
+            sporsmalstekst: 'Var du på reise utenfor EØS mens du var sykmeldt 8. - 21. februar 2021?',
             undertekst: null,
             svartype: 'JA_NEI',
             min: null,
@@ -4542,8 +4461,7 @@ export const brukertestSoknad: RSSoknad = {
                 {
                     id: '1623843',
                     tag: 'HVOR_MYE_HAR_DU_JOBBET_0',
-                    sporsmalstekst:
-                        'Hvor mye jobbet du tilsammen 8. - 21. februar 2021?',
+                    sporsmalstekst: 'Hvor mye jobbet du tilsammen 8. - 21. februar 2021?',
                     undertekst: 'Velg timer eller prosent',
                     svartype: 'RADIO_GRUPPE_TIMER_PROSENT',
                     min: null,
@@ -4627,8 +4545,7 @@ export const brukertestSoknad: RSSoknad = {
         {
             id: '1623836',
             tag: 'ARBEID_UTENFOR_NORGE',
-            sporsmalstekst:
-                'Har du arbeidet i utlandet i løpet av de siste 12 månedene?',
+            sporsmalstekst: 'Har du arbeidet i utlandet i løpet av de siste 12 månedene?',
             undertekst: null,
             svartype: 'JA_NEI',
             min: null,
@@ -4817,8 +4734,7 @@ export const brukertestSoknad: RSSoknad = {
         {
             id: '1623829',
             tag: 'UTDANNING',
-            sporsmalstekst:
-                'Har du vært under utdanning i løpet av perioden 8. - 21. februar 2021?',
+            sporsmalstekst: 'Har du vært under utdanning i løpet av perioden 8. - 21. februar 2021?',
             undertekst: null,
             svartype: 'JA_NEI',
             min: null,

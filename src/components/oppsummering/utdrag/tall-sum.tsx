@@ -7,10 +7,7 @@ import Vis from '../../vis'
 import { OppsummeringProps } from '../oppsummering'
 
 const TallSum = ({ sporsmal }: OppsummeringProps) => {
-    const labelnokkel =
-        sporsmal.svartype === RSSvartype.TIMER
-            ? 'soknad.timer-totalt'
-            : 'soknad.prosent'
+    const labelnokkel = sporsmal.svartype === RSSvartype.TIMER ? 'soknad.timer-totalt' : 'soknad.prosent'
     const label = sporsmal.undertekst || tekst(labelnokkel as any)
     return (
         <div className="oppsummering__sporsmal">

@@ -32,5 +32,4 @@ const createBackendLogger = (): pino.Logger =>
         },
     })
 
-export const logger =
-    typeof window !== 'undefined' ? getFrontendLogger() : createBackendLogger()
+export const logger = typeof window !== 'undefined' ? getFrontendLogger() : createBackendLogger()

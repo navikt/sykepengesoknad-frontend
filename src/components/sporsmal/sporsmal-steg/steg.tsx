@@ -42,10 +42,7 @@ const Steg = ({ label, index }: StegProps) => {
     }
 
     return (
-        <li
-            className="stegindikator__steg"
-            aria-current={erAktiv ? 'step' : undefined}
-        >
+        <li className="stegindikator__steg" aria-current={erAktiv ? 'step' : undefined}>
             <Vis
                 hvis={aktivtSteg >= index + 2}
                 render={() => (
@@ -63,10 +60,7 @@ const Steg = ({ label, index }: StegProps) => {
             <Vis
                 hvis={aktivtSteg < index + 2}
                 render={() => (
-                    <div
-                        className={innerCls(erAktiv, erPassert, disabled)}
-                        title={label}
-                    >
+                    <div className={innerCls(erAktiv, erPassert, disabled)} title={label}>
                         <div className="stegindikator__steg-num">{num}</div>
                     </div>
                 )}
