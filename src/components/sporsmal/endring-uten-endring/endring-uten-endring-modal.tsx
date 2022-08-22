@@ -1,4 +1,4 @@
-import { BodyShort, Button, Modal } from '@navikt/ds-react'
+import { BodyShort, Button, Heading, Modal } from '@navikt/ds-react'
 import React from 'react'
 import { useHistory } from 'react-router-dom'
 
@@ -26,8 +26,13 @@ export const EndringUtenEndringModal = (props: EndringUtenEndringModalProps) => 
                     props.setAapen(false)
                 }}
                 open={props.aapen}
+                aria-labelledby="modal-tittel"
             >
                 <Modal.Content>
+                    <Heading size="small" level="1" id="modal-tittel" spacing>
+                        {tekst('endring-uten-endring.popup.tittel')}
+                    </Heading>
+
                     <BodyShort>{tekst('endring-uten-endring.popup.innhold')}</BodyShort>
 
                     <Button

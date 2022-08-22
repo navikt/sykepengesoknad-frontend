@@ -25,7 +25,8 @@ describe('Tester feilsituasjoner ', () => {
 
         it('Vi havner på feilstate siden', function () {
             cy.url().should('equal', 'http://localhost:8080/syk/sykepengesoknad/')
-            cy.contains('Ooops! Her har det skjedd noe rart. Du må laste inn siden på nytt for å fortsette')
+            cy.contains('Ooops! Her har det skjedd noe rart')
+            cy.contains('Du må laste inn siden på nytt for å fortsette')
 
             cy.contains('Last inn siden på nytt').click()
             cy.get('.navds-heading--xlarge').should('be.visible').and('have.text', 'Søknader')
@@ -52,7 +53,8 @@ describe('Tester feilsituasjoner ', () => {
 
         it('Vi havner på feilstate siden pga FEIL_STATUS_FOR_OPPDATER_SPORSMAL', function () {
             cy.url().should('equal', 'http://localhost:8080/syk/sykepengesoknad/')
-            cy.contains('Ooops! Her har det skjedd noe rart. Du må laste inn siden på nytt for å fortsette')
+            cy.contains('Ooops! Her har det skjedd noe rart')
+            cy.contains('Du må laste inn siden på nytt for å fortsette')
 
             cy.contains('Last inn siden på nytt').click()
             cy.get('.navds-heading--xlarge').should('be.visible').and('have.text', 'Søknader')

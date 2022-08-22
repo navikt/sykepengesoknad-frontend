@@ -1,4 +1,4 @@
-import { BodyShort, Button, Modal } from '@navikt/ds-react'
+import { BodyShort, Button, Heading, Modal } from '@navikt/ds-react'
 import React, { useState } from 'react'
 import { useHistory } from 'react-router'
 
@@ -77,9 +77,15 @@ const Endreknapp = () => {
                     })
                 }}
                 open={aapen}
+                aria-labelledby="modal-tittel"
             >
                 <Modal.Content>
+                    <Heading size="small" level="1" id="modal-tittel" spacing>
+                        {endreKnappTekst}
+                    </Heading>
+
                     <BodyShort>{tekst('endre.modal.info')}</BodyShort>
+
                     <Button
                         size="small"
                         variant="primary"

@@ -104,9 +104,10 @@ const Slettknapp = ({ sporsmal, kvittering, update }: SlettknappProps) => {
                 onClose={() => setVilSlette(false)}
                 open={vilSlette}
                 closeButton={false}
+                aria-labelledby="modal-tittel"
             >
                 <Modal.Content className="bekreft-dialog">
-                    <Heading spacing size="small" level="3">
+                    <Heading spacing size="small" level="1" id="modal-tittel">
                         {tekst('opplasting_modal.vil-slette')}
                     </Heading>
                     <Button variant="danger" loading={sletter} type="button" onClick={slettKvittering}>

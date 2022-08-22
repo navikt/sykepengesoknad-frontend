@@ -1,4 +1,4 @@
-import { BodyShort, Button, Modal } from '@navikt/ds-react'
+import { BodyShort, Button, Heading, Modal } from '@navikt/ds-react'
 import parser from 'html-react-parser'
 import React, { useState } from 'react'
 
@@ -16,6 +16,7 @@ const Ettersending = ({ gjelder, setRerendrekvittering }: EttersendingProps) => 
     const { valgtSoknad, setValgtSoknad, soknader, setSoknader, setFeilmeldingTekst } = useAppStore()
     const [vilEttersende, setVilEttersende] = useState<boolean>(false)
     const [ettersender, setEttersender] = useState<boolean>(false)
+    const knappeTekst = tekst(`kvittering.knapp.send-${gjelder}` as any)
 
     const hentTekst = (text: string) => {
         const tilSuffix = gjelder === 'nav' ? '-nav' : '-arbeidsgiver'
@@ -96,11 +97,19 @@ const Ettersending = ({ gjelder, setRerendrekvittering }: EttersendingProps) => 
                     setVilEttersende(true)
                 }}
             >
-                {tekst(`kvittering.knapp.send-${gjelder}` as any)}
+                {knappeTekst}
             </Button>
 
-            <Modal onClose={() => setVilEttersende(false)} className="ettersending" open={vilEttersende}>
+            <Modal
+                onClose={() => setVilEttersende(false)}
+                className="ettersending"
+                open={vilEttersende}
+                aria-labelledby="modal-tittel"
+            >
                 <Modal.Content>
+                    <Heading size="small" level="1" id="modal-tittel" spacing>
+                        {knappeTekst}
+                    </Heading>
                     <BodyShort>{parser(hentTekst('kvittering.info.send-til'))}</BodyShort>
                     <Button size="small" variant="primary" loading={ettersender} onClick={ettersend}>
                         {hentTekst('kvittering.knapp.bekreft.send-til')}

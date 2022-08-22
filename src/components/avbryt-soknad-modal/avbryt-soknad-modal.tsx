@@ -1,4 +1,4 @@
-import { BodyLong, Button, Modal } from '@navikt/ds-react'
+import { BodyLong, Button, Heading, Modal } from '@navikt/ds-react'
 import React, { useState } from 'react'
 import { useHistory, useParams } from 'react-router-dom'
 
@@ -82,8 +82,13 @@ const AvbrytSoknadModal = () => {
                 }}
                 closeButton={false}
                 open={aapen}
+                aria-labelledby="modal-tittel"
             >
                 <Modal.Content>
+                    <Heading level="1" size="small" id="modal-tittel" spacing>
+                        {tekst('avbryt.popup.tittel')}
+                    </Heading>
+
                     <BodyLong spacing size="medium">
                         {tekst('avbryt.popup.sporsmal')}
                     </BodyLong>

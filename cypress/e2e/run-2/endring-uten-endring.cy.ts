@@ -43,7 +43,8 @@ describe('Tester endring uten en endringer', () => {
     })
 
     it('Vi ser en popup og lander på listevisninga', function () {
-        cy.contains('Du har ikke gjort noen endringer. Vi behandler den opprinnelige sykepengesøknaden din.').click()
+        cy.contains('Du har ikke gjort noen endringer')
+        cy.contains('Vi behandler den opprinnelige sykepengesøknaden din.')
 
         cy.contains('OK').click()
         cy.url().should('equal', 'http://localhost:8080/syk/sykepengesoknad/')
