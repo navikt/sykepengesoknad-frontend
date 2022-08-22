@@ -1,11 +1,12 @@
 import { Alert, BodyLong, BodyShort, Label, Radio, RadioGroup } from '@navikt/ds-react'
 import React, { useEffect, useState } from 'react'
 import { useFormContext } from 'react-hook-form'
-import useForceUpdate from 'use-force-update'
 
 import { useAppStore } from '../../../data/stores/app-store'
+import { TagTyper } from '../../../types/enums'
 import { RSSvartype } from '../../../types/rs-types/rs-svartype'
 import { rodeUkeDagerIPerioden } from '../../../utils/helligdager-utils'
+import { hentUndersporsmal } from '../../../utils/soknad-utils'
 import validerArbeidsgrad from '../../../utils/sporsmal/valider-arbeidsgrad'
 import { getLedetekst, tekst } from '../../../utils/tekster'
 import { useAmplitudeInstance } from '../../amplitude/amplitude'
@@ -29,20 +30,22 @@ const RadioKomp = ({ sporsmal }: SpmProps) => {
     if (watchRadio === undefined) {
         watchRadio = getValues(sporsmal.id)
     }
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
+    // noinspection JSUnusedLocalSymbols
+    const watchTimer = (watchRadio?.toLowerCase() === 'timer')?
+        watch(
+            hentUndersporsmal(sporsmal!,
+                TagTyper.HVOR_MYE_TIMER_VERDI)!.id
+        ) : undefined
     const feilmelding = hentFeilmelding(sporsmal)
-    const forceUpdate = useForceUpdate()
     const { valgtSoknad } = useAppStore()
     const { validerGrad, beregnGrad } = validerArbeidsgrad(sporsmal)
     const [surveySvart, setSurveySvart] = useState<boolean>(false)
     const { logEvent } = useAmplitudeInstance()
 
-    useEffect(() => {
-        // Tvangsoppdatering for å få riktig grad i advarselboksen (NB! vi vet det er stygt)
-        if (watchRadio && watchRadio.toLowerCase() === 'timer') forceUpdate()
-        // eslint-disable-next-line
-    }, [sporsmal])
-
-    const lavereProsentHjelpTittel = tekst('ekspanderbarhjelp.prosenten_lavere_enn_forventet_arbeidstaker.tittel')
+    const lavereProsentHjelpTittel = tekst(
+        'ekspanderbarhjelp.prosenten_lavere_enn_forventet_arbeidstaker.tittel'
+    )
     return (
         <>
             <SporsmalstekstH3 sporsmal={sporsmal} />
@@ -92,10 +95,8 @@ const RadioKomp = ({ sporsmal }: SpmProps) => {
 
             <Vis
                 hvis={
-                    watchRadio &&
-                    watchRadio.toLowerCase() === 'timer' &&
-                    beregnGrad &&
-                    beregnGrad() &&
+                    watchRadio?.toLowerCase() === 'timer' &&
+                    beregnGrad?.() &&
                     validerGrad!() == true
                 }
                 render={() => (
@@ -111,8 +112,7 @@ const RadioKomp = ({ sporsmal }: SpmProps) => {
 
             <Vis
                 hvis={
-                    watchRadio &&
-                    watchRadio.toLowerCase() === 'timer' &&
+                    watchRadio?.toLowerCase() === 'timer' &&
                     validerGrad!() !== true &&
                     rodeUkeDagerIPerioden(valgtSoknad!.fom, valgtSoknad!.tom)
                 }
