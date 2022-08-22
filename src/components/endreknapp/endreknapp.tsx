@@ -13,8 +13,7 @@ import { useAmplitudeInstance } from '../amplitude/amplitude'
 import { urlTilSoknad } from '../soknad/soknad-link'
 
 const Endreknapp = () => {
-    const { valgtSoknad, soknader, setSoknader, setFeilmeldingTekst } =
-        useAppStore()
+    const { valgtSoknad, soknader, setSoknader, setFeilmeldingTekst } = useAppStore()
     const korrigerSoknad = useFetch<RSSoknad>()
     const history = useHistory()
     const { logEvent } = useAmplitudeInstance()
@@ -28,20 +27,14 @@ const Endreknapp = () => {
         setKorrigerer(true)
 
         korrigerSoknad.fetch(
-            `/syk/sykepengesoknad/api/sykepengesoknad-backend/api/v2/soknader/${
-                valgtSoknad!.id
-            }/korriger`,
+            `/syk/sykepengesoknad/api/sykepengesoknad-backend/api/v2/soknader/${valgtSoknad!.id}/korriger`,
             {
                 method: 'POST',
                 credentials: 'include',
                 headers: { 'Content-Type': 'application/json' },
             },
             (fetchState: FetchState<RSSoknad>) => {
-                if (
-                    hasData(fetchState) &&
-                    fetchState.httpCode >= 200 &&
-                    fetchState.httpCode < 400
-                ) {
+                if (hasData(fetchState) && fetchState.httpCode >= 200 && fetchState.httpCode < 400) {
                     const soknad = new Soknad(fetchState.data)
                     if (!soknader.find((sok) => sok.id === soknad.id)) {
                         soknader.push(soknad)
@@ -51,9 +44,7 @@ const Endreknapp = () => {
                     history.push(urlTilSoknad(soknad))
                     setFeilmeldingTekst('')
                 } else {
-                    logger.error(
-                        `Feil ved opprettelse av UTKAST_TIL_KORRIGERING ${fetchState.httpCode}`
-                    )
+                    logger.error(`Feil ved opprettelse av UTKAST_TIL_KORRIGERING ${fetchState.httpCode}`)
                     setFeilmeldingTekst(tekst('kvittering.korrigering.feilet'))
                 }
                 setKorrigerer(false)

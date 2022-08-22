@@ -2,11 +2,7 @@ import cookie from 'cookie'
 import { NextPageContext } from 'next'
 
 import metrics, { cleanPathForMetric, shouldLogMetricForPath } from '../metrics'
-import {
-    isMockBackend,
-    loginServiceRedirectUrl,
-    loginServiceUrl,
-} from '../utils/environment'
+import { isMockBackend, loginServiceRedirectUrl, loginServiceUrl } from '../utils/environment'
 import { logger } from '../utils/logger'
 import { verifyIdportenAccessToken } from './verifyIdportenAccessToken'
 import { validerLoginserviceToken } from './verifyLoginserviceAccessToken'
@@ -14,9 +10,7 @@ import { validerLoginserviceToken } from './verifyLoginserviceAccessToken'
 type PageHandler = (context: NextPageContext) => void | Promise<any>
 
 function beskyttetSide(handler: PageHandler) {
-    return async function withBearerTokenHandler(
-        context: NextPageContext
-    ): Promise<ReturnType<typeof handler>> {
+    return async function withBearerTokenHandler(context: NextPageContext): Promise<ReturnType<typeof handler>> {
         if (isMockBackend()) {
             return handler(context)
         }
@@ -24,9 +18,7 @@ function beskyttetSide(handler: PageHandler) {
         const request = context.req
 
         if (request == null) {
-            throw new Error(
-                'Context is missing request. This should not happen'
-            )
+            throw new Error('Context is missing request. This should not happen')
         }
         const skapLoginserviceRedirectUrl = () => {
             if (context.req?.url?.includes('sykepengesoknad-utland')) {
@@ -64,14 +56,11 @@ function beskyttetSide(handler: PageHandler) {
 
         const wonderwallRedirect = {
             redirect: {
-                destination:
-                    '/oauth2/login?redirect=/syk/sykepengesoknad' +
-                    context.req?.url,
+                destination: '/oauth2/login?redirect=/syk/sykepengesoknad' + context.req?.url,
                 permanent: false,
             },
         }
-        const bearerToken: string | null | undefined =
-            request.headers['authorization']
+        const bearerToken: string | null | undefined = request.headers['authorization']
         if (!bearerToken) {
             if (shouldLogMetricForPath(cleanPath)) {
                 metrics.wonderwallRedirect.inc({ path: cleanPath }, 1)
@@ -91,10 +80,8 @@ function beskyttetSide(handler: PageHandler) {
     }
 }
 
-export const beskyttetSideUtenProps = beskyttetSide(
-    async (ctx): Promise<any> => {
-        return {
-            props: {},
-        }
+export const beskyttetSideUtenProps = beskyttetSide(async (ctx): Promise<any> => {
+    return {
+        props: {},
     }
-)
+})

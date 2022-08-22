@@ -3,13 +3,7 @@ import React from 'react'
 const Bendiksen = () => {
     return (
         <div className="bendiksen">
-            <svg
-                width="120"
-                height="123"
-                viewBox="0 0 120 123"
-                fill="none"
-                xmlns="http://www.w3.org/2000/svg"
-            >
+            <svg width="120" height="123" viewBox="0 0 120 123" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <g clipPath="url(#clip0_19_3622)">
                     <path
                         d="M2.75781 103.916C2.75781 103.916 47.9567 79.5181 114.633 102.826C114.633 102.826 112.62 124.269 53.7569 122.324C8.67465 120.838 10.8793 115.429 2.75781 103.916Z"

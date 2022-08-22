@@ -28,9 +28,7 @@ const FravaersperioderInfo = () => {
             render={() => (
                 <div className="avsnitt">
                     <Detail as="h3" className="avsnitt-hode">
-                        {tekst(
-                            'sykepengesoknad.sykmelding-utdrag.egenmelding-papir'
-                        )}
+                        {tekst('sykepengesoknad.sykmelding-utdrag.egenmelding-papir')}
                     </Detail>
 
                     <Vis
@@ -39,10 +37,7 @@ const FravaersperioderInfo = () => {
                             <ul className="nokkelopplysning__liste">
                                 {perioder.map((p, idx) => (
                                     <BodyShort as="li" key={idx}>
-                                        {tilLesbarPeriodeMedArstall(
-                                            p.fom,
-                                            p.tom
-                                        )}
+                                        {tilLesbarPeriodeMedArstall(p.fom, p.tom)}
                                     </BodyShort>
                                 ))}
                             </ul>
@@ -52,11 +47,7 @@ const FravaersperioderInfo = () => {
                     <Vis
                         hvis={perioder.length === 0}
                         render={() => (
-                            <BodyShort>
-                                {tekst(
-                                    'sykepengesoknad.sykmelding-utdrag.egenmelding-papir-nei'
-                                )}
-                            </BodyShort>
+                            <BodyShort>{tekst('sykepengesoknad.sykmelding-utdrag.egenmelding-papir-nei')}</BodyShort>
                         )}
                     />
                 </div>

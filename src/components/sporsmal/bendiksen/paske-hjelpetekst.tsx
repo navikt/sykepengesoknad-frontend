@@ -18,8 +18,7 @@ const PaskeHjelpetekst = ({ sporsmal }: SpmProps) => {
     if (!valgtSoknad) return null
 
     const paskeVeileder = (tag: TagTyper) =>
-        tag === TagTyper.FERIE_V2 &&
-        innenforPaske(valgtSoknad.fom, valgtSoknad.tom)
+        tag === TagTyper.FERIE_V2 && innenforPaske(valgtSoknad.fom, valgtSoknad.tom)
 
     return (
         <Vis
@@ -28,9 +27,7 @@ const PaskeHjelpetekst = ({ sporsmal }: SpmProps) => {
                 <div className="bendiksen-container">
                     <div className="bendiksen-hjelpetekst">
                         <Label>{tekst('soknad.bendiksen.paske.label')}</Label>
-                        <BodyShort spacing>
-                            {tekst('soknad.bendiksen.paske.tekst')}
-                        </BodyShort>
+                        <BodyShort spacing>{tekst('soknad.bendiksen.paske.tekst')}</BodyShort>
 
                         <BodyShort>
                             {parser(tekst('soknad.bendiksen.paske.tips'))}
@@ -38,9 +35,7 @@ const PaskeHjelpetekst = ({ sporsmal }: SpmProps) => {
                                 href={tekst('soknad.bendiksen.paske.lenke')}
                                 onClick={() => {
                                     logEvent('navigere', {
-                                        lenketekst: tekst(
-                                            'soknad.bendiksen.paske.lenketekst'
-                                        ),
+                                        lenketekst: tekst('soknad.bendiksen.paske.lenketekst'),
                                     })
                                 }}
                                 target="_blank"

@@ -62,32 +62,20 @@ const JaNeiRadio = ({ sporsmal }: SpmProps) => {
             if (spm.tag.startsWith('INNTEKTSKILDE_') && watchJaNei === 'JA') {
                 return (
                     <div className="presisering">
-                        <BodyShort as="span">
-                            {tekst(('soknad.presisering.' + spm.tag) as any)}
-                        </BodyShort>
+                        <BodyShort as="span">{tekst(('soknad.presisering.' + spm.tag) as any)}</BodyShort>
                     </div>
                 )
             }
-            if (
-                spm.tag === 'INNTEKTSKILDE_SELVSTENDIG_ER_DU_SYKMELDT' &&
-                watchJaNei === 'NEI'
-            ) {
+            if (spm.tag === 'INNTEKTSKILDE_SELVSTENDIG_ER_DU_SYKMELDT' && watchJaNei === 'NEI') {
                 return (
                     <div className="presisering">
                         <BodyShort as="span">
                             {parser(
-                                getLedetekst(
-                                    tekst(
-                                        ('soknad.presisering.' +
-                                            spm.tag +
-                                            '_NEI') as any
+                                getLedetekst(tekst(('soknad.presisering.' + spm.tag + '_NEI') as any), {
+                                    '%URL%': tekst(
+                                        'soknad.presisering.INNTEKTSKILDE_SELVSTENDIG_ER_DU_SYKMELDT_NEI.url'
                                     ),
-                                    {
-                                        '%URL%': tekst(
-                                            'soknad.presisering.INNTEKTSKILDE_SELVSTENDIG_ER_DU_SYKMELDT_NEI.url'
-                                        ),
-                                    }
-                                )
+                                })
                             )}
                         </BodyShort>
                     </div>
@@ -101,9 +89,7 @@ const JaNeiRadio = ({ sporsmal }: SpmProps) => {
             <div
                 className={
                     'skjemaelement' +
-                    (sporsmal.parentKriterie
-                        ? ' kriterie--' + sporsmal.parentKriterie.toLowerCase()
-                        : '') +
+                    (sporsmal.parentKriterie ? ' kriterie--' + sporsmal.parentKriterie.toLowerCase() : '') +
                     (errors[sporsmal.id] ? ' skjemagruppe--feil' : '')
                 }
             >
@@ -124,10 +110,7 @@ const JaNeiRadio = ({ sporsmal }: SpmProps) => {
                                 })}
                                 className="skjemaelement__input radioknapp"
                             />
-                            <label
-                                className="skjemaelement__label"
-                                htmlFor={sporsmal.id + '_' + idx}
-                            >
+                            <label className="skjemaelement__label" htmlFor={sporsmal.id + '_' + idx}>
                                 {valg.label}
                             </label>
                             {presisering(OK)}
@@ -138,16 +121,9 @@ const JaNeiRadio = ({ sporsmal }: SpmProps) => {
             </div>
 
             <Vis
-                hvis={
-                    sporsmal.tag === TagTyper.SYKMELDINGSGRAD &&
-                    watchJaNei === 'NEI'
-                }
+                hvis={sporsmal.tag === TagTyper.SYKMELDINGSGRAD && watchJaNei === 'NEI'}
                 render={() => (
-                    <Bjorn
-                        className="press"
-                        nokkel="sykepengesoknad-utland.skjema.bjorn"
-                        ekstraMarginTop={true}
-                    />
+                    <Bjorn className="press" nokkel="sykepengesoknad-utland.skjema.bjorn" ekstraMarginTop={true} />
                 )}
             />
 
@@ -168,8 +144,7 @@ const JaNeiRadio = ({ sporsmal }: SpmProps) => {
             <div aria-live="assertive">
                 <AnimateOnMount
                     mounted={
-                        watchJaNei ===
-                            sporsmal.kriterieForVisningAvUndersporsmal &&
+                        watchJaNei === sporsmal.kriterieForVisningAvUndersporsmal &&
                         sporsmal.tag !== TagTyper.UTLANDSOPPHOLD_SOKT_SYKEPENGER
                         // TODO: Dette er en fix for å ikke vise underspørsmål, fjern denne etter hvert
                     }
@@ -177,10 +152,7 @@ const JaNeiRadio = ({ sporsmal }: SpmProps) => {
                     leave="undersporsmal--skjul"
                     start="undersporsmal"
                 >
-                    <UndersporsmalListe
-                        oversporsmal={sporsmal}
-                        oversporsmalSvar={watchJaNei}
-                    />
+                    <UndersporsmalListe oversporsmal={sporsmal} oversporsmalSvar={watchJaNei} />
                 </AnimateOnMount>
             </div>
         </>

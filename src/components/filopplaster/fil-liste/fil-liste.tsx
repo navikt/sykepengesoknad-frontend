@@ -41,10 +41,7 @@ const FilListe = ({ sporsmal, fjernKnapp }: Props) => {
         <Vis
             hvis={kvitteringer.length > 0}
             render={() => (
-                <BodyShort
-                    as="table"
-                    className="tabell tabell--stripet fil_liste"
-                >
+                <BodyShort as="table" className="tabell tabell--stripet fil_liste">
                     <Vis
                         hvis={fjernKnapp}
                         render={() => (
@@ -62,51 +59,33 @@ const FilListe = ({ sporsmal, fjernKnapp }: Props) => {
                         )}
                     />
                     <tbody>
-                        {kvitteringer
-                            .reverse()
-                            .map((kvittering: Kvittering, idx: number) => (
-                                <tr key={idx}>
-                                    <td className="transport">
-                                        <button
-                                            type="button"
-                                            tabIndex={0}
-                                            className="lenkeknapp"
-                                            onClick={() =>
-                                                visKvittering(kvittering)
-                                            }
-                                        >
-                                            {UtgiftTyper[kvittering.typeUtgift]}
-                                        </button>
-                                    </td>
-                                    <td className="belop">
-                                        {formatterTall(kvittering.belop! / 100)}{' '}
-                                        kr
-                                    </td>
-                                    <td>
-                                        <Slettknapp
-                                            sporsmal={sporsmal}
-                                            kvittering={kvittering}
-                                            update={update}
-                                        />
-                                    </td>
-                                </tr>
-                            ))}
+                        {kvitteringer.reverse().map((kvittering: Kvittering, idx: number) => (
+                            <tr key={idx}>
+                                <td className="transport">
+                                    <button
+                                        type="button"
+                                        tabIndex={0}
+                                        className="lenkeknapp"
+                                        onClick={() => visKvittering(kvittering)}
+                                    >
+                                        {UtgiftTyper[kvittering.typeUtgift]}
+                                    </button>
+                                </td>
+                                <td className="belop">{formatterTall(kvittering.belop! / 100)} kr</td>
+                                <td>
+                                    <Slettknapp sporsmal={sporsmal} kvittering={kvittering} update={update} />
+                                </td>
+                            </tr>
+                        ))}
                     </tbody>
                     <tbody className="sumlinje">
                         <tr>
                             <td>
                                 <Heading size="small" as="span">
-                                    {getLedetekst(
-                                        tekst('fil_liste.utlegg.sum'),
-                                        {
-                                            '%ANTALL_BILAG%':
-                                                kvitteringer.length,
-                                            '%FLERTALL%':
-                                                kvitteringer.length > 1
-                                                    ? 'er'
-                                                    : '',
-                                        }
-                                    )}
+                                    {getLedetekst(tekst('fil_liste.utlegg.sum'), {
+                                        '%ANTALL_BILAG%': kvitteringer.length,
+                                        '%FLERTALL%': kvitteringer.length > 1 ? 'er' : '',
+                                    })}
                                 </Heading>
                             </td>
                             <td className="belop">

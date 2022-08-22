@@ -9,11 +9,7 @@ export const [AmplitudeProvider, useAmplitudeInstance] = constate(() => {
         _userAgent: '',
         logEvent: (eventName: string, data?: any) => {
             // eslint-disable-next-line
-            console.log(
-                `Logger ${eventName} - Event properties: ${JSON.stringify(
-                    data
-                )}`
-            )
+            console.log(`Logger ${eventName} - Event properties: ${JSON.stringify(data)}`)
             return 1
         },
         init: () => {
@@ -50,10 +46,7 @@ export const [AmplitudeProvider, useAmplitudeInstance] = constate(() => {
         | 'modal åpnet'
         | 'modal lukket' //Bruk kun navn fra taksonomien
 
-    function logEvent(
-        eventName: validEventNames,
-        eventProperties: Record<string, any>
-    ) {
+    function logEvent(eventName: validEventNames, eventProperties: Record<string, any>) {
         instance.current.logEvent(eventName, eventProperties)
     }
 

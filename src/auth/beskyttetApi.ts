@@ -5,10 +5,7 @@ import metrics from '../metrics'
 import { logger } from '../utils/logger'
 import { verifyIdportenAccessToken } from './verifyIdportenAccessToken'
 
-type ApiHandler = (
-    req: NextApiRequest,
-    res: NextApiResponse
-) => void | Promise<void>
+type ApiHandler = (req: NextApiRequest, res: NextApiResponse) => void | Promise<void>
 
 export function beskyttetApi(handler: ApiHandler): ApiHandler {
     return async function withBearerTokenHandler(req, res) {
@@ -20,8 +17,7 @@ export function beskyttetApi(handler: ApiHandler): ApiHandler {
             res.status(401).json({ message: 'Access denied' })
         }
 
-        const bearerToken: string | null | undefined =
-            req.headers['authorization']
+        const bearerToken: string | null | undefined = req.headers['authorization']
         if (!bearerToken) {
             return send401()
         }

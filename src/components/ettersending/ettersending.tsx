@@ -12,17 +12,8 @@ interface EttersendingProps {
     setRerendrekvittering: (d: Date) => void
 }
 
-const Ettersending = ({
-    gjelder,
-    setRerendrekvittering,
-}: EttersendingProps) => {
-    const {
-        valgtSoknad,
-        setValgtSoknad,
-        soknader,
-        setSoknader,
-        setFeilmeldingTekst,
-    } = useAppStore()
+const Ettersending = ({ gjelder, setRerendrekvittering }: EttersendingProps) => {
+    const { valgtSoknad, setValgtSoknad, soknader, setSoknader, setFeilmeldingTekst } = useAppStore()
     const [vilEttersende, setVilEttersende] = useState<boolean>(false)
     const [ettersender, setEttersender] = useState<boolean>(false)
 
@@ -33,8 +24,7 @@ const Ettersending = ({
 
     const oppdaterSoknad = () => {
         setValgtSoknad(valgtSoknad)
-        soknader[soknader.findIndex((sok) => sok.id === valgtSoknad!.id)] =
-            valgtSoknad as any
+        soknader[soknader.findIndex((sok) => sok.id === valgtSoknad!.id)] = valgtSoknad as any
         setSoknader(soknader)
         setFeilmeldingTekst('')
         setRerendrekvittering(new Date())
@@ -57,9 +47,7 @@ const Ettersending = ({
 
     const ettersendNav = async () => {
         const res = await fetch(
-            `/syk/sykepengesoknad/api/sykepengesoknad-backend/api/v2/soknader/${
-                valgtSoknad!.id
-            }/ettersendTilNav`,
+            `/syk/sykepengesoknad/api/sykepengesoknad-backend/api/v2/soknader/${valgtSoknad!.id}/ettersendTilNav`,
             {
                 method: 'POST',
                 credentials: 'include',
@@ -111,28 +99,13 @@ const Ettersending = ({
                 {tekst(`kvittering.knapp.send-${gjelder}` as any)}
             </Button>
 
-            <Modal
-                onClose={() => setVilEttersende(false)}
-                className="ettersending"
-                open={vilEttersende}
-            >
+            <Modal onClose={() => setVilEttersende(false)} className="ettersending" open={vilEttersende}>
                 <Modal.Content>
-                    <BodyShort>
-                        {parser(hentTekst('kvittering.info.send-til'))}
-                    </BodyShort>
-                    <Button
-                        size="small"
-                        variant="primary"
-                        loading={ettersender}
-                        onClick={ettersend}
-                    >
+                    <BodyShort>{parser(hentTekst('kvittering.info.send-til'))}</BodyShort>
+                    <Button size="small" variant="primary" loading={ettersender} onClick={ettersend}>
                         {hentTekst('kvittering.knapp.bekreft.send-til')}
                     </Button>
-                    <Button
-                        variant="tertiary"
-                        className="lenkeknapp"
-                        onClick={() => setVilEttersende(false)}
-                    >
+                    <Button variant="tertiary" className="lenkeknapp" onClick={() => setVilEttersende(false)}>
                         {tekst('kvittering.knapp.angre')}
                     </Button>
                 </Modal.Content>

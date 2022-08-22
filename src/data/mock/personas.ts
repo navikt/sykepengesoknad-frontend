@@ -26,11 +26,7 @@ export const opplaering: Persona = {
     sykmeldinger: sykmeldinger,
 }
 export const alleData: Persona = {
-    soknader: [
-        ...soknaderIntegration,
-        ...soknaderOpplaering,
-        ...soknaderReisetilskudd,
-    ],
+    soknader: [...soknaderIntegration, ...soknaderOpplaering, ...soknaderReisetilskudd],
     sykmeldinger: sykmeldinger,
 }
 

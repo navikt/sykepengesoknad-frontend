@@ -14,13 +14,7 @@ interface SlettknappProps {
 }
 
 const Slettknapp = ({ sporsmal, kvittering, update }: SlettknappProps) => {
-    const {
-        valgtSoknad,
-        setValgtSoknad,
-        feilmeldingTekst,
-        setFeilmeldingTekst,
-        setOpenModal,
-    } = useAppStore()
+    const { valgtSoknad, setValgtSoknad, feilmeldingTekst, setFeilmeldingTekst, setOpenModal } = useAppStore()
     const [vilSlette, setVilSlette] = useState<boolean>(false)
     const [sletter, setSletter] = useState<boolean>(false)
 
@@ -35,14 +29,10 @@ const Slettknapp = ({ sporsmal, kvittering, update }: SlettknappProps) => {
             setSletter(true)
 
             const idx = sporsmal!.svarliste.svar.findIndex(
-                (svar) =>
-                    svarverdiToKvittering(svar?.verdi).blobId ===
-                    kvittering?.blobId
+                (svar) => svarverdiToKvittering(svar?.verdi).blobId === kvittering?.blobId
             )
             const svar = sporsmal?.svarliste.svar.find(
-                (svar) =>
-                    svarverdiToKvittering(svar?.verdi).blobId ===
-                    kvittering?.blobId
+                (svar) => svarverdiToKvittering(svar?.verdi).blobId === kvittering?.blobId
             )
 
             const res = await fetch(
@@ -55,11 +45,7 @@ const Slettknapp = ({ sporsmal, kvittering, update }: SlettknappProps) => {
 
             if (res.ok) {
                 sporsmal.svarliste.svar.splice(idx, 1)
-                valgtSoknad!.sporsmal[
-                    valgtSoknad!.sporsmal.findIndex(
-                        (spm) => spm.id === sporsmal.id
-                    )
-                ] = sporsmal
+                valgtSoknad!.sporsmal[valgtSoknad!.sporsmal.findIndex((spm) => spm.id === sporsmal.id)] = sporsmal
                 setValgtSoknad(valgtSoknad)
                 setOpenModal(false)
             } else if (redirectTilLoginHvis401(res)) {
@@ -91,10 +77,7 @@ const Slettknapp = ({ sporsmal, kvittering, update }: SlettknappProps) => {
                         }}
                         title={tekst('opplasting_modal.slett')}
                     >
-                        <img
-                            src="/syk/sykepengesoknad/static/slettknapp.svg"
-                            alt=""
-                        />
+                        <img src="/syk/sykepengesoknad/static/slettknapp.svg" alt="" />
                     </button>
                 )}
             />
@@ -126,23 +109,11 @@ const Slettknapp = ({ sporsmal, kvittering, update }: SlettknappProps) => {
                     <Heading spacing size="small" level="3">
                         {tekst('opplasting_modal.vil-slette')}
                     </Heading>
-                    <Button
-                        variant="danger"
-                        loading={sletter}
-                        type="button"
-                        onClick={slettKvittering}
-                    >
+                    <Button variant="danger" loading={sletter} type="button" onClick={slettKvittering}>
                         {tekst('opplasting_modal.vil-slette.ja')}
                     </Button>
                     <div aria-live="polite">
-                        <Vis
-                            hvis={feilmeldingTekst}
-                            render={() => (
-                                <Alert variant="error">
-                                    {feilmeldingTekst}
-                                </Alert>
-                            )}
-                        />
+                        <Vis hvis={feilmeldingTekst} render={() => <Alert variant="error">{feilmeldingTekst}</Alert>} />
                     </div>
                     <Button
                         variant="secondary"

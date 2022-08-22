@@ -16,11 +16,7 @@ const LandSum = ({ sporsmal }: OppsummeringProps) => {
             <ul className="oppsummering__landliste">
                 {sporsmal.svarliste.svar.map((s) => {
                     return (
-                        <BodyShort
-                            as="li"
-                            className="oppsummering__land"
-                            key={s.verdi.toString()}
-                        >
+                        <BodyShort as="li" className="oppsummering__land" key={s.verdi.toString()}>
                             {s.verdi}
                         </BodyShort>
                     )

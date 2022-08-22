@@ -40,11 +40,7 @@ export function innenforPaske(min?: Date, max?: Date) {
     let erInnenforPaske = false
 
     paske.forEach((dag) => {
-        if (
-            start.isSame(dag, 'day') ||
-            slutt.isSame(dag, 'day') ||
-            (start.isBefore(dag) && slutt.isAfter(dag))
-        ) {
+        if (start.isSame(dag, 'day') || slutt.isSame(dag, 'day') || (start.isBefore(dag) && slutt.isAfter(dag))) {
             erInnenforPaske = true
         }
     })
@@ -103,9 +99,7 @@ export function rodeUkeDagerIPerioden(min?: Date, max?: Date) {
 
     roodeDager.forEach((dag) => {
         if (
-            (start.isSame(dag, 'day') ||
-                slutt.isSame(dag, 'day') ||
-                (start.isBefore(dag) && slutt.isAfter(dag))) &&
+            (start.isSame(dag, 'day') || slutt.isSame(dag, 'day') || (start.isBefore(dag) && slutt.isAfter(dag))) &&
             dag.day() !== 0 &&
             dag.day() !== 6
         ) {

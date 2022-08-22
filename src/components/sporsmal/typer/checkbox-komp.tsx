@@ -22,27 +22,16 @@ const CheckboxKomp = ({ sporsmal }: SpmProps) => {
 
             <div
                 className={
-                    'skjemagruppe checkboxgruppe' +
-                    (errors[sporsmal.undersporsmal[0].id]
-                        ? ' skjemagruppe--feil'
-                        : '')
+                    'skjemagruppe checkboxgruppe' + (errors[sporsmal.undersporsmal[0].id] ? ' skjemagruppe--feil' : '')
                 }
             >
                 {sporsmal.undersporsmal.map((uspm, idx) => {
-                    return (
-                        <CheckboxSingle
-                            parent={sporsmal}
-                            sporsmal={uspm}
-                            key={idx}
-                        />
-                    )
+                    return <CheckboxSingle parent={sporsmal} sporsmal={uspm} key={idx} />
                 })}
 
                 <Vis
                     hvis={sporsmal.undertekst}
-                    render={() => (
-                        <BodyShort as="div"> {sporsmal.undertekst} </BodyShort>
-                    )}
+                    render={() => <BodyShort as="div"> {sporsmal.undertekst} </BodyShort>}
                 />
 
                 <FeilLokal sporsmal={sporsmal.undersporsmal[0]} />
@@ -103,10 +92,7 @@ const CheckboxSingle = ({ parent, sporsmal }: AllProps) => {
                     leave="undersporsmal--skjul"
                     start="undersporsmal"
                 >
-                    <UndersporsmalListe
-                        oversporsmal={sporsmal}
-                        oversporsmalSvar={watchCheck ? 'CHECKED' : ''}
-                    />
+                    <UndersporsmalListe oversporsmal={sporsmal} oversporsmalSvar={watchCheck ? 'CHECKED' : ''} />
                 </AnimateOnMount>
             </div>
         </div>

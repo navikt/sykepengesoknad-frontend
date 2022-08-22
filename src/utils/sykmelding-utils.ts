@@ -8,32 +8,26 @@ export const sorterEtterEldsteTom = (p1: Periode, p2: Periode) => {
 }
 
 export const hentArbeidssituasjon = (valgtSykmelding?: Sykmelding) => {
-    return valgtSykmelding?.sykmeldingStatus.sporsmalOgSvarListe?.find(
-        (s) => s.shortName === 'ARBEIDSSITUASJON'
-    )?.svar?.svar
+    return valgtSykmelding?.sykmeldingStatus.sporsmalOgSvarListe?.find((s) => s.shortName === 'ARBEIDSSITUASJON')?.svar
+        ?.svar
 }
 
 export const harForsikring = (valgtSykmelding?: Sykmelding) => {
     return (
-        valgtSykmelding?.sykmeldingStatus.sporsmalOgSvarListe?.find(
-            (s) => s.shortName === 'FORSIKRING'
-        )?.svar?.svar === 'JA'
+        valgtSykmelding?.sykmeldingStatus.sporsmalOgSvarListe?.find((s) => s.shortName === 'FORSIKRING')?.svar?.svar ===
+        'JA'
     )
 }
 
 export const harSpmOmForsikring = (valgtSykmelding?: Sykmelding) => {
     return (
-        valgtSykmelding?.sykmeldingStatus.sporsmalOgSvarListe?.find(
-            (s) => s.shortName === 'FORSIKRING'
-        ) !== undefined
+        valgtSykmelding?.sykmeldingStatus.sporsmalOgSvarListe?.find((s) => s.shortName === 'FORSIKRING') !== undefined
     )
 }
 
 export const hentPerioderFørSykmelding = (valgtSykmelding?: Sykmelding) => {
-    const perioder =
-        valgtSykmelding?.sykmeldingStatus.sporsmalOgSvarListe?.find(
-            (s) => s.shortName === 'PERIODE'
-        )?.svar?.svar
+    const perioder = valgtSykmelding?.sykmeldingStatus.sporsmalOgSvarListe?.find((s) => s.shortName === 'PERIODE')?.svar
+        ?.svar
     if (perioder) {
         const p: TidsPeriode[] = JSON.parse(perioder)
         return p
@@ -42,9 +36,5 @@ export const hentPerioderFørSykmelding = (valgtSykmelding?: Sykmelding) => {
 }
 
 export const harSpmOmPerioderFørSykmelding = (valgtSykmelding?: Sykmelding) => {
-    return (
-        valgtSykmelding?.sykmeldingStatus.sporsmalOgSvarListe?.find(
-            (s) => s.shortName === 'PERIODE'
-        ) !== undefined
-    )
+    return valgtSykmelding?.sykmeldingStatus.sporsmalOgSvarListe?.find((s) => s.shortName === 'PERIODE') !== undefined
 }

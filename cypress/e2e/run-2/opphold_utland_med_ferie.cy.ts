@@ -2,24 +2,19 @@ import { soknaderOpplaering as soknader } from '../../../src/data/mock/data/sokn
 import { RSSoknad } from '../../../src/types/rs-types/rs-soknad'
 
 describe('Tester søknad om å beholde sykepenger utenfor EØS', () => {
-    const soknad = soknader.find(
-        (sok: RSSoknad) => sok.id === 'b9d67b0d-b1f8-44a5-bcbd-6010b60b90ce'
-    )!
+    const soknad = soknader.find((sok: RSSoknad) => sok.id === 'b9d67b0d-b1f8-44a5-bcbd-6010b60b90ce')!
 
     before(() => {
         cy.visit('http://localhost:8080/syk/sykepengesoknad')
     })
 
     it('Laster startside', function () {
-        cy.get('.navds-heading--xlarge')
-            .should('be.visible')
-            .and('have.text', 'Søknader')
-        cy.get(
-            `#soknader-list-til-behandling article a[href*=${soknad.id}]`
-        ).should('include.text', 'Søknad om å beholde sykepenger utenfor EØS')
-        cy.get(
-            `#soknader-list-til-behandling article a[href*=${soknad.id}]`
-        ).click()
+        cy.get('.navds-heading--xlarge').should('be.visible').and('have.text', 'Søknader')
+        cy.get(`#soknader-list-til-behandling article a[href*=${soknad.id}]`).should(
+            'include.text',
+            'Søknad om å beholde sykepenger utenfor EØS'
+        )
+        cy.get(`#soknader-list-til-behandling article a[href*=${soknad.id}]`).click()
     })
 
     it('PERIODEUTLAND - steg 1', function () {
@@ -68,9 +63,7 @@ describe('Tester søknad om å beholde sykepenger utenfor EØS', () => {
     })
 
     it('Gå videre forsvinner og bjørn vises når man har avtalt ferie', function () {
-        cy.contains(
-            'Har du avtalt med arbeidsgiveren din at du skal ta ut feriedager i hele perioden?'
-        )
+        cy.contains('Har du avtalt med arbeidsgiveren din at du skal ta ut feriedager i hele perioden?')
         cy.contains('Gå videre')
 
         cy.get('#5_0').click({ force: true })
@@ -86,11 +79,7 @@ describe('Tester søknad om å beholde sykepenger utenfor EØS', () => {
 
         cy.url().should('equal', 'http://localhost:8080/syk/sykepengesoknad/')
 
-        cy.get('.navds-heading--xlarge')
-            .should('be.visible')
-            .and('have.text', 'Søknader')
-        cy.get(
-            `#soknader-list-til-behandling article a[href*=${soknad.id}]`
-        ).should('not.exist')
+        cy.get('.navds-heading--xlarge').should('be.visible').and('have.text', 'Søknader')
+        cy.get(`#soknader-list-til-behandling article a[href*=${soknad.id}]`).should('not.exist')
     })
 })

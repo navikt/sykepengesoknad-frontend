@@ -3,11 +3,7 @@ import { useCallback, useMemo, useState } from 'react'
 import { FetchState, FetchStatus, redirectTilLoginHvis401 } from './utils'
 
 export interface Fetch<D = any, FP = any> extends FetchState<D> {
-    fetch: (
-        url: string,
-        request?: RequestInit,
-        onFinished?: (fetchState: FetchState<D>) => void
-    ) => void
+    fetch: (url: string, request?: RequestInit, onFinished?: (fetchState: FetchState<D>) => void) => void
     reset: () => void
 }
 
@@ -25,11 +21,7 @@ const createPendingFetchState = (): FetchState<any> => ({
     httpCode: -1,
 })
 
-const createFinishedFetchState = <D = {}>(
-    data: D | null,
-    error: any,
-    httpCode: number
-): FetchState<any> => ({
+const createFinishedFetchState = <D = {}>(data: D | null, error: any, httpCode: number): FetchState<any> => ({
     status: FetchStatus.FINISHED,
     error,
     data: data,
@@ -37,15 +29,9 @@ const createFinishedFetchState = <D = {}>(
 })
 
 const useFetch = <D = {}>(): Fetch<D> => {
-    const [fetchState, setFetchState] = useState<FetchState<D>>(
-        createInitialFetchState()
-    )
+    const [fetchState, setFetchState] = useState<FetchState<D>>(createInitialFetchState())
 
-    const apiFetch = (
-        url: string,
-        request?: RequestInit,
-        onFinished?: (fetchState: FetchState<D>) => void
-    ) => {
+    const apiFetch = (url: string, request?: RequestInit, onFinished?: (fetchState: FetchState<D>) => void) => {
         setFetchState(createPendingFetchState())
 
         fetch(url, request)
@@ -83,10 +69,7 @@ const useFetch = <D = {}>(): Fetch<D> => {
     }
 
     const apiFetchCallback = useCallback(apiFetch, [])
-    const resetCallback = useCallback(
-        () => setFetchState(createInitialFetchState()),
-        []
-    )
+    const resetCallback = useCallback(() => setFetchState(createInitialFetchState()), [])
 
     return useMemo(() => {
         return { ...fetchState, fetch: apiFetchCallback, reset: resetCallback }

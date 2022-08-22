@@ -5,11 +5,7 @@ import React from 'react'
 import { RSSoknadstype } from '../../../types/rs-types/rs-soknadstype'
 import { tilLesbarPeriodeMedArstall } from '../../../utils/dato-utils'
 import Vis from '../../vis'
-import {
-    InngangsIkon,
-    Inngangspanel,
-    InngangsStatus,
-} from '../inngang/inngangspanel'
+import { InngangsIkon, Inngangspanel, InngangsStatus } from '../inngang/inngangspanel'
 import {
     hentIkon,
     hentIkonHover,
@@ -25,42 +21,23 @@ const TidligereSoknaderTeaser = ({ soknad }: SykepengesoknadTeaserProps) => {
             <Inngangspanel soknad={soknad}>
                 <div className="inngangspanel__ytre">
                     <div className="inngangspanel__del1">
-                        <InngangsIkon
-                            ikon={hentIkon(soknad)}
-                            ikonHover={hentIkonHover(soknad)}
-                        />
-                        <div
-                            id={`soknader-header-${soknad.id}`}
-                            className="inngangspanel__innhold"
-                        >
+                        <InngangsIkon ikon={hentIkon(soknad)} ikonHover={hentIkonHover(soknad)} />
+                        <div id={`soknader-header-${soknad.id}`} className="inngangspanel__innhold">
                             <Vis
-                                hvis={
-                                    soknad.soknadstype !==
-                                    RSSoknadstype.OPPHOLD_UTLAND
-                                }
+                                hvis={soknad.soknadstype !== RSSoknadstype.OPPHOLD_UTLAND}
                                 render={() => (
                                     <Detail className="inngangspanel__periode">
-                                        {tilLesbarPeriodeMedArstall(
-                                            soknad.fom,
-                                            soknad.tom
-                                        )}
+                                        {tilLesbarPeriodeMedArstall(soknad.fom, soknad.tom)}
                                     </Detail>
                                 )}
                             />
-                            <Heading
-                                size="small"
-                                level="3"
-                                className="inngangspanel__tittel"
-                            >
+                            <Heading size="small" level="3" className="inngangspanel__tittel">
                                 {teaserTittel(soknad)}
                             </Heading>
                             {periodeListevisning(soknad)}
                         </div>
                     </div>
-                    <InngangsStatus
-                        status={soknad.status}
-                        tekst={hentTeaserStatustekst(soknad)}
-                    />
+                    <InngangsStatus status={soknad.status} tekst={hentTeaserStatustekst(soknad)} />
                 </div>
                 <Next className="chevron--hoyre" />
             </Inngangspanel>

@@ -33,10 +33,7 @@ function harLikeSvarPaSporsmal(a: Sporsmal, b: Sporsmal) {
         }
     }
 
-    if (
-        !a.kriterieForVisningAvUndersporsmal ||
-        a.kriterieForVisningAvUndersporsmal === oversporsmalSvar()
-    ) {
+    if (!a.kriterieForVisningAvUndersporsmal || a.kriterieForVisningAvUndersporsmal === oversporsmalSvar()) {
         return harLikeSvarPaUnderSporsmal(a, b)
     }
 
@@ -49,10 +46,7 @@ function harLikeSvarPaUnderSporsmal(a: Sporsmal, b: Sporsmal) {
     }
 
     for (let i = 0; i < a.undersporsmal.length; i++) {
-        const like = harLikeSvarPaSporsmal(
-            a.undersporsmal[i],
-            b.undersporsmal[i]
-        )
+        const like = harLikeSvarPaSporsmal(a.undersporsmal[i], b.undersporsmal[i])
         if (!like) {
             return false
         }

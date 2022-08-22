@@ -17,9 +17,7 @@ const DatoSum = ({ sporsmal }: OppsummeringProps) => {
                             key={index}
                             render={() => (
                                 <BodyShort className="oppsummering__dato">
-                                    {dayjs(svarverdi.verdi.toString()).format(
-                                        'DD.MM.YYYY'
-                                    )}
+                                    {dayjs(svarverdi.verdi.toString()).format('DD.MM.YYYY')}
                                 </BodyShort>
                             )}
                         />

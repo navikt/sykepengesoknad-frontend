@@ -1,9 +1,6 @@
 import { RSSoknad } from '../../../types/rs-types/rs-soknad'
 import { jsonDeepCopy } from '../../../utils/json-deep-copy'
-import {
-    arbeidstakerReisetilskuddSyk,
-    gradertReisetilskuddSm,
-} from './sykmeldinger'
+import { arbeidstakerReisetilskuddSyk, gradertReisetilskuddSm } from './sykmeldinger'
 
 export const nyttReisetilskudd: RSSoknad = {
     id: '5294bdbd-38a2-4d2a-9917-0fcaf6cf205a',
@@ -51,8 +48,7 @@ export const nyttReisetilskudd: RSSoknad = {
         {
             id: '1566424',
             tag: 'TRANSPORT_TIL_DAGLIG',
-            sporsmalstekst:
-                'Brukte du bil eller offentlig transport til og fra jobben før du ble sykmeldt?',
+            sporsmalstekst: 'Brukte du bil eller offentlig transport til og fra jobben før du ble sykmeldt?',
             undertekst: null,
             svartype: 'JA_NEI',
             min: null,
@@ -88,8 +84,7 @@ export const nyttReisetilskudd: RSSoknad = {
                                 {
                                     id: '1566427',
                                     tag: 'OFFENTLIG_TRANSPORT_BELOP',
-                                    sporsmalstekst:
-                                        'Hvor mye betaler du vanligvis i måneden for offentlig transport?',
+                                    sporsmalstekst: 'Hvor mye betaler du vanligvis i måneden for offentlig transport?',
                                     undertekst: 'kr',
                                     svartype: 'BELOP',
                                     min: '0',
@@ -134,8 +129,7 @@ export const nyttReisetilskudd: RSSoknad = {
                 {
                     id: '1566445',
                     tag: 'BIL_DATOER',
-                    sporsmalstekst:
-                        'Hvilke dager reiste du med bil i perioden 23. desember 2020 - 7. januar 2021?',
+                    sporsmalstekst: 'Hvilke dager reiste du med bil i perioden 23. desember 2020 - 7. januar 2021?',
                     undertekst: null,
                     svartype: 'DATOER',
                     min: '2020-12-23',
@@ -160,8 +154,7 @@ export const nyttReisetilskudd: RSSoknad = {
                         {
                             id: '1566447',
                             tag: 'BIL_BOMPENGER_BELOP',
-                            sporsmalstekst:
-                                'Hvor mye betalte du i bompenger mellom hjemmet ditt og jobben?',
+                            sporsmalstekst: 'Hvor mye betalte du i bompenger mellom hjemmet ditt og jobben?',
                             undertekst: 'kr',
                             svartype: 'BELOP',
                             min: '0',
@@ -176,8 +169,7 @@ export const nyttReisetilskudd: RSSoknad = {
                 {
                     id: '1566448',
                     tag: 'KM_HJEM_JOBB',
-                    sporsmalstekst:
-                        'Hvor mange kilometer er kjøreturen mellom hjemmet ditt og jobben én vei?',
+                    sporsmalstekst: 'Hvor mange kilometer er kjøreturen mellom hjemmet ditt og jobben én vei?',
                     undertekst: 'km',
                     svartype: 'KILOMETER',
                     min: '0',
@@ -192,8 +184,7 @@ export const nyttReisetilskudd: RSSoknad = {
         {
             id: '1566434',
             tag: 'KVITTERINGER',
-            sporsmalstekst:
-                'Last opp kvitteringer for reiser til og fra jobben mellom 1. - 24. april 2020.',
+            sporsmalstekst: 'Last opp kvitteringer for reiser til og fra jobben mellom 1. - 24. april 2020.',
             undertekst: null,
             svartype: 'KVITTERING',
             min: null,
@@ -291,8 +282,7 @@ export const gradertReisetilskudd: RSSoknad = {
         {
             id: '1547242',
             tag: 'FRAVAR_FOR_SYKMELDINGEN',
-            sporsmalstekst:
-                'Var du syk og borte fra jobb før du ble sykmeldt, i perioden 16. - 31. mars 2020?',
+            sporsmalstekst: 'Var du syk og borte fra jobb før du ble sykmeldt, i perioden 16. - 31. mars 2020?',
             undertekst: null,
             svartype: 'JA_NEI',
             min: null,
@@ -320,8 +310,7 @@ export const gradertReisetilskudd: RSSoknad = {
         {
             id: '1547216',
             tag: 'TILBAKE_I_ARBEID',
-            sporsmalstekst:
-                'Var du tilbake i ditt vanlige arbeid uten ekstra reiseutgifter før 25. april?',
+            sporsmalstekst: 'Var du tilbake i ditt vanlige arbeid uten ekstra reiseutgifter før 25. april?',
             undertekst: null,
             svartype: 'JA_NEI',
             min: null,
@@ -348,8 +337,7 @@ export const gradertReisetilskudd: RSSoknad = {
         {
             id: '1547218',
             tag: 'FERIE_V2',
-            sporsmalstekst:
-                'Tok du ut feriedager i tidsrommet 1. - 24. april 2020?',
+            sporsmalstekst: 'Tok du ut feriedager i tidsrommet 1. - 24. april 2020?',
             undertekst: null,
             svartype: 'JA_NEI',
             min: null,
@@ -376,8 +364,7 @@ export const gradertReisetilskudd: RSSoknad = {
         {
             id: '1547220',
             tag: 'PERMISJON_V2',
-            sporsmalstekst:
-                'Tok du permisjon mens du var sykmeldt 1. - 24. april 2020?',
+            sporsmalstekst: 'Tok du permisjon mens du var sykmeldt 1. - 24. april 2020?',
             undertekst: null,
             svartype: 'JA_NEI',
             min: null,
@@ -404,8 +391,7 @@ export const gradertReisetilskudd: RSSoknad = {
         {
             id: '1547222',
             tag: 'UTLAND_V2',
-            sporsmalstekst:
-                'Var du på reise utenfor EØS mens du var sykmeldt 1. - 24. april 2020?',
+            sporsmalstekst: 'Var du på reise utenfor EØS mens du var sykmeldt 1. - 24. april 2020?',
             undertekst: null,
             svartype: 'JA_NEI',
             min: null,
@@ -432,8 +418,7 @@ export const gradertReisetilskudd: RSSoknad = {
         {
             id: '1547249',
             tag: 'JOBBET_DU_GRADERT_0',
-            sporsmalstekst:
-                'Sykmeldingen sier du kunne jobbe 40 %. Jobbet du mer enn det?',
+            sporsmalstekst: 'Sykmeldingen sier du kunne jobbe 40 %. Jobbet du mer enn det?',
             undertekst: null,
             svartype: 'JA_NEI',
             min: null,
@@ -459,8 +444,7 @@ export const gradertReisetilskudd: RSSoknad = {
                 {
                     id: '1547251',
                     tag: 'HVOR_MYE_HAR_DU_JOBBET_0',
-                    sporsmalstekst:
-                        'Hvor mye jobbet du til sammen 1. - 24. april 2020?',
+                    sporsmalstekst: 'Hvor mye jobbet du til sammen 1. - 24. april 2020?',
                     undertekst: 'Velg timer eller prosent',
                     svartype: 'RADIO_GRUPPE_TIMER_PROSENT',
                     min: null,
@@ -530,8 +514,7 @@ export const gradertReisetilskudd: RSSoknad = {
         {
             id: '1547244',
             tag: 'ARBEID_UTENFOR_NORGE',
-            sporsmalstekst:
-                'Har du arbeidet i utlandet i løpet av de siste 12 månedene?',
+            sporsmalstekst: 'Har du arbeidet i utlandet i løpet av de siste 12 månedene?',
             undertekst: null,
             svartype: 'JA_NEI',
             min: null,
@@ -720,8 +703,7 @@ export const gradertReisetilskudd: RSSoknad = {
         {
             id: '1547237',
             tag: 'UTDANNING',
-            sporsmalstekst:
-                'Har du vært under utdanning i løpet av perioden 1. - 24. april 2020?',
+            sporsmalstekst: 'Har du vært under utdanning i løpet av perioden 1. - 24. april 2020?',
             undertekst: null,
             svartype: 'JA_NEI',
             min: null,
@@ -761,8 +743,7 @@ export const gradertReisetilskudd: RSSoknad = {
         {
             id: '1563341',
             tag: 'BRUKTE_REISETILSKUDDET',
-            sporsmalstekst:
-                'Hadde du ekstra reiseutgifter mens du var sykmeldt?',
+            sporsmalstekst: 'Hadde du ekstra reiseutgifter mens du var sykmeldt?',
             undertekst: null,
             svartype: 'JA_NEI',
             min: null,
@@ -775,8 +756,7 @@ export const gradertReisetilskudd: RSSoknad = {
         {
             id: '1547256',
             tag: 'TRANSPORT_TIL_DAGLIG',
-            sporsmalstekst:
-                'Brukte du bil eller offentlig transport til og fra jobben før du ble sykmeldt?',
+            sporsmalstekst: 'Brukte du bil eller offentlig transport til og fra jobben før du ble sykmeldt?',
             undertekst: null,
             svartype: 'JA_NEI',
             min: null,
@@ -812,8 +792,7 @@ export const gradertReisetilskudd: RSSoknad = {
                                 {
                                     id: '1547259',
                                     tag: 'OFFENTLIG_TRANSPORT_BELOP',
-                                    sporsmalstekst:
-                                        'Hvor mye betaler du vanligvis i måneden for offentlig transport?',
+                                    sporsmalstekst: 'Hvor mye betaler du vanligvis i måneden for offentlig transport?',
                                     undertekst: 'kr',
                                     svartype: 'BELOP',
                                     min: '0',
@@ -845,8 +824,7 @@ export const gradertReisetilskudd: RSSoknad = {
         {
             id: '1547261',
             tag: 'REISE_MED_BIL',
-            sporsmalstekst:
-                'Reiste du med egen bil, leiebil eller kollega til jobben mellom 1. - 24. april 2020?',
+            sporsmalstekst: 'Reiste du med egen bil, leiebil eller kollega til jobben mellom 1. - 24. april 2020?',
             undertekst: null,
             svartype: 'JA_NEI',
             min: null,
@@ -858,8 +836,7 @@ export const gradertReisetilskudd: RSSoknad = {
                 {
                     id: '1547262',
                     tag: 'BIL_DATOER',
-                    sporsmalstekst:
-                        'Hvilke dager reiste du med bil i perioden 1. - 24. april 2020?',
+                    sporsmalstekst: 'Hvilke dager reiste du med bil i perioden 1. - 24. april 2020?',
                     undertekst: null,
                     svartype: 'DATOER',
                     min: '2020-04-01',
@@ -884,8 +861,7 @@ export const gradertReisetilskudd: RSSoknad = {
                         {
                             id: '1547264',
                             tag: 'BIL_BOMPENGER_BELOP',
-                            sporsmalstekst:
-                                'Hvor mye betalte du i bompenger mellom hjemmet ditt og jobben?',
+                            sporsmalstekst: 'Hvor mye betalte du i bompenger mellom hjemmet ditt og jobben?',
                             undertekst: 'kr',
                             svartype: 'BELOP',
                             min: '0',
@@ -900,8 +876,7 @@ export const gradertReisetilskudd: RSSoknad = {
                 {
                     id: '1547265',
                     tag: 'KM_HJEM_JOBB',
-                    sporsmalstekst:
-                        'Hvor mange kilometer er kjøreturen mellom hjemmet ditt og jobben én vei?',
+                    sporsmalstekst: 'Hvor mange kilometer er kjøreturen mellom hjemmet ditt og jobben én vei?',
                     undertekst: 'km',
                     svartype: 'KILOMETER',
                     min: '0',
@@ -916,8 +891,7 @@ export const gradertReisetilskudd: RSSoknad = {
         {
             id: '1547266',
             tag: 'KVITTERINGER',
-            sporsmalstekst:
-                'Last opp kvitteringer for reiser til og fra jobben mellom 1. - 24. april 2020.',
+            sporsmalstekst: 'Last opp kvitteringer for reiser til og fra jobben mellom 1. - 24. april 2020.',
             undertekst: null,
             svartype: 'KVITTERING',
             min: null,
@@ -1023,8 +997,7 @@ export const delvisUtfyltReisetilskudd: RSSoknad = {
         {
             id: '1566424',
             tag: 'TRANSPORT_TIL_DAGLIG',
-            sporsmalstekst:
-                'Brukte du bil eller offentlig transport til og fra jobben før du ble sykmeldt?',
+            sporsmalstekst: 'Brukte du bil eller offentlig transport til og fra jobben før du ble sykmeldt?',
             undertekst: null,
             svartype: 'JA_NEI',
             min: null,
@@ -1065,8 +1038,7 @@ export const delvisUtfyltReisetilskudd: RSSoknad = {
                                 {
                                     id: '1566427',
                                     tag: 'OFFENTLIG_TRANSPORT_BELOP',
-                                    sporsmalstekst:
-                                        'Hvor mye betaler du vanligvis i måneden for offentlig transport?',
+                                    sporsmalstekst: 'Hvor mye betaler du vanligvis i måneden for offentlig transport?',
                                     undertekst: 'kr',
                                     svartype: 'BELOP',
                                     min: '0',
@@ -1116,8 +1088,7 @@ export const delvisUtfyltReisetilskudd: RSSoknad = {
                 {
                     id: '1566445',
                     tag: 'BIL_DATOER',
-                    sporsmalstekst:
-                        'Hvilke dager reiste du med bil i perioden 23. desember 2020 - 7. januar 2021?',
+                    sporsmalstekst: 'Hvilke dager reiste du med bil i perioden 23. desember 2020 - 7. januar 2021?',
                     undertekst: null,
                     svartype: 'DATOER',
                     min: '2020-12-23',
@@ -1142,8 +1113,7 @@ export const delvisUtfyltReisetilskudd: RSSoknad = {
                         {
                             id: '1566447',
                             tag: 'BIL_BOMPENGER_BELOP',
-                            sporsmalstekst:
-                                'Hvor mye betalte du i bompenger mellom hjemmet ditt og jobben?',
+                            sporsmalstekst: 'Hvor mye betalte du i bompenger mellom hjemmet ditt og jobben?',
                             undertekst: 'kr',
                             svartype: 'BELOP',
                             min: '0',
@@ -1158,8 +1128,7 @@ export const delvisUtfyltReisetilskudd: RSSoknad = {
                 {
                     id: '1566448',
                     tag: 'KM_HJEM_JOBB',
-                    sporsmalstekst:
-                        'Hvor mange kilometer er kjøreturen mellom hjemmet ditt og jobben én vei?',
+                    sporsmalstekst: 'Hvor mange kilometer er kjøreturen mellom hjemmet ditt og jobben én vei?',
                     undertekst: 'km',
                     svartype: 'KILOMETER',
                     min: '0',
@@ -1174,8 +1143,7 @@ export const delvisUtfyltReisetilskudd: RSSoknad = {
         {
             id: '1566434',
             tag: 'KVITTERINGER',
-            sporsmalstekst:
-                'Last opp kvitteringer for reiser til og fra jobben mellom 1. - 24. april 2020.',
+            sporsmalstekst: 'Last opp kvitteringer for reiser til og fra jobben mellom 1. - 24. april 2020.',
             undertekst: null,
             svartype: 'KVITTERING',
             min: null,
@@ -1235,8 +1203,7 @@ export const delvisUtfyltReisetilskudd: RSSoknad = {
     egenmeldtSykmelding: false,
 }
 
-export const feilVedSlettingAvKvittering: RSSoknad =
-    jsonDeepCopy(nyttReisetilskudd)
+export const feilVedSlettingAvKvittering: RSSoknad = jsonDeepCopy(nyttReisetilskudd)
 feilVedSlettingAvKvittering.id = 'd4ce1c57-1f91-411b-ab64-beabbba29b65'
 
 export const soknaderReisetilskudd = [

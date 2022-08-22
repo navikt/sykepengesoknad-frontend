@@ -6,10 +6,7 @@ import { empty } from '../../utils/constants'
 
 const hentVerdier = (sporsmal: Sporsmal, verdier: Record<string, any>) => {
     let verdi = verdier[sporsmal.id]
-    if (
-        sporsmal.svartype === RSSvartype.PERIODE ||
-        sporsmal.svartype === RSSvartype.PERIODER
-    ) {
+    if (sporsmal.svartype === RSSvartype.PERIODE || sporsmal.svartype === RSSvartype.PERIODER) {
         const startMed = sporsmal.id + '_'
         verdi = Object.entries(verdier)
             .filter(([key]) => key.startsWith(startMed))
@@ -19,10 +16,7 @@ const hentVerdier = (sporsmal: Sporsmal, verdier: Record<string, any>) => {
     return verdi
 }
 
-export const settSvar = (
-    sporsmal: Sporsmal,
-    verdier: Record<string, any>
-): void => {
+export const settSvar = (sporsmal: Sporsmal, verdier: Record<string, any>): void => {
     const verdi = hentVerdier(sporsmal, verdier)
     if (
         verdi === undefined &&
@@ -82,10 +76,7 @@ const checkboxSvar = (sporsmal: Sporsmal, verdi: any) => {
         sporsmalId: sporsmal.id,
         svar: [
             {
-                verdi:
-                    verdi === SvarEnums.CHECKED || verdi === true
-                        ? SvarEnums.CHECKED
-                        : '',
+                verdi: verdi === SvarEnums.CHECKED || verdi === true ? SvarEnums.CHECKED : '',
             },
         ],
     }

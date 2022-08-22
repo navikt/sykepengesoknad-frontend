@@ -43,13 +43,7 @@ const AvbrytSoknadModal = () => {
     const { logEvent } = useAmplitudeInstance()
     const [aapen, setAapen] = useState<boolean>(false)
     const { stegId } = useParams<RouteParams>()
-    const {
-        valgtSoknad,
-        soknader,
-        setSoknader,
-        setValgtSoknad,
-        setFeilmeldingTekst,
-    } = useAppStore()
+    const { valgtSoknad, soknader, setSoknader, setValgtSoknad, setFeilmeldingTekst } = useAppStore()
     const history = useHistory()
 
     if (!valgtSoknad) {

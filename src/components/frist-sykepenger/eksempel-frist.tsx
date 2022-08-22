@@ -10,14 +10,7 @@ interface EksempelKalenderProps {
     mndFire: string
 }
 
-const EksempelFrist = ({
-    normalTekst,
-    boldTekst,
-    mndEn,
-    mndTo,
-    mndTre,
-    mndFire,
-}: EksempelKalenderProps) => {
+const EksempelFrist = ({ normalTekst, boldTekst, mndEn, mndTo, mndTre, mndFire }: EksempelKalenderProps) => {
     return (
         <div className="eksempel-container">
             <BodyShort>

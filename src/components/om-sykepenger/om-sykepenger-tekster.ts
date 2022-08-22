@@ -12,8 +12,7 @@ const OmSykepengerTekster = {
         'Uansett må arbeidsgiveren din sende oss inntektsmelding. Den inneholder opplysninger om inntekten din, som vi må ha for å behandle søknaden.',
     'om.sykepenger.arbeidstakere.alertstripe':
         'Hør gjerne med arbeidsgiveren din om inntektsmeldingen er sendt. Vi får ikke behandlet søknaden din før vi har den.',
-    'om.sykepenger.selvstendige.tittel':
-        'For selvstendig næringsdrivende og frilansere',
+    'om.sykepenger.selvstendige.tittel': 'For selvstendig næringsdrivende og frilansere',
     'om.sykepenger.selvstendige.tekst1':
         'Har du tegnet <a href="https://www.nav.no/no/bedrift/tjenester-og-skjemaer/selvstendig-naringsdrivende-med-flere/forsikring" target="_blank" rel="noopener">forsikring</a>, får du sykepenger fra første dag i sykefraværet. Du leverer søknaden om sykepenger etter sykmeldingsperioden. ',
     'om.sykepenger.selvstendige.tekst2':

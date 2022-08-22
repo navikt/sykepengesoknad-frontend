@@ -5,13 +5,8 @@ describe('Tester å åpne søknaden direkte fra sykefravaer', () => {
     const soknad = arbeidstaker
 
     it('Vi kan gå direkte til søknaden fra sykefravaer', function () {
-        cy.visit(
-            `http://localhost:8080/syk/sykepengesoknad/soknader/${soknad.id}`
-        )
-        cy.url().should(
-            'equal',
-            `http://localhost:8080/syk/sykepengesoknad/soknader/${soknad.id}/1`
-        )
+        cy.visit(`http://localhost:8080/syk/sykepengesoknad/soknader/${soknad.id}`)
+        cy.url().should('equal', `http://localhost:8080/syk/sykepengesoknad/soknader/${soknad.id}/1`)
 
         cy.contains('1. april - 24. april 2020 • 24 dager')
         cy.contains('POSTEN NORGE AS, BÆRUM')
@@ -19,9 +14,7 @@ describe('Tester å åpne søknaden direkte fra sykefravaer', () => {
     })
 
     it('Åpner en sendt søknad på en annen siden og sendes til sendt-side', function () {
-        cy.visit(
-            `http://localhost:8080/syk/sykepengesoknad/soknader/${sendtArbeidsledig.id}?testperson=alle-soknader`
-        )
+        cy.visit(`http://localhost:8080/syk/sykepengesoknad/soknader/${sendtArbeidsledig.id}?testperson=alle-soknader`)
         cy.url().should(
             'equal',
             `http://localhost:8080/syk/sykepengesoknad/sendt/${sendtArbeidsledig.id}?testperson=alle-soknader`

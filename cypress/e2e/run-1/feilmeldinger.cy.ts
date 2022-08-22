@@ -3,20 +3,14 @@ import { RSSoknad } from '../../../src/types/rs-types/rs-soknad'
 
 describe('Tester feilmeldinger', () => {
     function gaTilSoknad(soknad: RSSoknad, steg: string) {
-        cy.visit(
-            `http://localhost:8080/syk/sykepengesoknad/soknader/${soknad.id}/${steg}`
-        )
+        cy.visit(`http://localhost:8080/syk/sykepengesoknad/soknader/${soknad.id}/${steg}`)
     }
 
     function gaVidere() {
         cy.contains('Gå videre').click({ force: true })
     }
 
-    function feilmeldingHandtering(
-        lokalFeilmelding: string,
-        globalFeilmelding: string,
-        focusTarget: string
-    ) {
+    function feilmeldingHandtering(lokalFeilmelding: string, globalFeilmelding: string, focusTarget: string) {
         cy.get('.skjemaelement__input--harFeil').should('exist')
         cy.get('.skjemaelement__feilmelding').contains(lokalFeilmelding)
         cy.get('.feiloppsummering')
@@ -45,15 +39,9 @@ describe('Tester feilmeldinger', () => {
             .should('exist')
             .within(() => {
                 cy.contains('Det er 1 feil i skjemaet')
-                cy.contains(
-                    'Du må bekrefte at du har lest og forstått informasjonen før du kan gå videre'
-                ).click()
+                cy.contains('Du må bekrefte at du har lest og forstått informasjonen før du kan gå videre').click()
             })
-        cy.focused().should(
-            'have.attr',
-            'name',
-            arbeidstakerGradert.sporsmal[0].id
-        )
+        cy.focused().should('have.attr', 'name', arbeidstakerGradert.sporsmal[0].id)
         cy.focused().click({ force: true })
 
         ingenFeilmeldinger()
@@ -64,20 +52,14 @@ describe('Tester feilmeldinger', () => {
         gaVidere()
 
         cy.get('.skjemagruppe--feil').should('exist')
-        cy.get('.skjemaelement__feilmelding').contains(
-            'Du må velge et alternativ'
-        )
+        cy.get('.skjemaelement__feilmelding').contains('Du må velge et alternativ')
         cy.get('.feiloppsummering')
             .should('exist')
             .within(() => {
                 cy.contains('Det er 1 feil i skjemaet')
-                cy.contains(
-                    'Du må oppgi om du var tilbake i arbeid før friskmeldingsperioden utløp'
-                ).click()
+                cy.contains('Du må oppgi om du var tilbake i arbeid før friskmeldingsperioden utløp').click()
             })
-        cy.focused()
-            .should('have.attr', 'name', arbeidstakerGradert.sporsmal[2].id)
-            .click({ force: true })
+        cy.focused().should('have.attr', 'name', arbeidstakerGradert.sporsmal[2].id).click({ force: true })
 
         ingenFeilmeldinger()
     })
@@ -193,19 +175,14 @@ describe('Tester feilmeldinger', () => {
     it('TALL ingen valg', () => {
         gaTilSoknad(arbeidstakerGradert, '7')
         cy.get('input[value=JA]').click({ force: true })
-        cy.get('.undersporsmal .skjemaelement__input.radioknapp[value=Prosent]')
-            .focus()
-            .click({ force: true })
-        cy.get(
-            `input[name=${arbeidstakerGradert.sporsmal[6].undersporsmal[0].id}]`
-        ).type('37.5')
+        cy.get('.undersporsmal .skjemaelement__input.radioknapp[value=Prosent]').focus().click({ force: true })
+        cy.get(`input[name=${arbeidstakerGradert.sporsmal[6].undersporsmal[0].id}]`).type('37.5')
         gaVidere()
 
         feilmeldingHandtering(
             'Du må oppgi en verdi',
             'Du må svare på hvor mye du jobbet totalt',
-            arbeidstakerGradert.sporsmal[6].undersporsmal[1].undersporsmal[1]
-                .undersporsmal[0].id
+            arbeidstakerGradert.sporsmal[6].undersporsmal[1].undersporsmal[1].undersporsmal[0].id
         )
     })
 
@@ -215,8 +192,7 @@ describe('Tester feilmeldinger', () => {
         feilmeldingHandtering(
             'Må være minimum 51',
             'Vennligst fyll ut et tall mellom 51 og 99',
-            arbeidstakerGradert.sporsmal[6].undersporsmal[1].undersporsmal[1]
-                .undersporsmal[0].id
+            arbeidstakerGradert.sporsmal[6].undersporsmal[1].undersporsmal[1].undersporsmal[0].id
         )
     })
 
@@ -226,29 +202,26 @@ describe('Tester feilmeldinger', () => {
         feilmeldingHandtering(
             'Må være maksimum 99',
             'Vennligst fyll ut et tall mellom 51 og 99',
-            arbeidstakerGradert.sporsmal[6].undersporsmal[1].undersporsmal[1]
-                .undersporsmal[0].id
+            arbeidstakerGradert.sporsmal[6].undersporsmal[1].undersporsmal[1].undersporsmal[0].id
         )
     })
 
     it('TALL grad mindre enn sykmeldingsgrad', () => {
-        cy.get(
-            `input[id=${arbeidstakerGradert.sporsmal[6].undersporsmal[1].undersporsmal[0].id}]`
-        ).click({ force: true })
+        cy.get(`input[id=${arbeidstakerGradert.sporsmal[6].undersporsmal[1].undersporsmal[0].id}]`).click({
+            force: true,
+        })
         gaVidere()
         feilmeldingHandtering(
             'Du må oppgi en verdi',
             'Du må svare på hvor mye du jobbet totalt',
-            arbeidstakerGradert.sporsmal[6].undersporsmal[1].undersporsmal[0]
-                .undersporsmal[0].id
+            arbeidstakerGradert.sporsmal[6].undersporsmal[1].undersporsmal[0].undersporsmal[0].id
         )
         cy.focused().type('1')
         gaVidere()
         feilmeldingHandtering(
             'Timene utgjør mindre enn 50 %.',
             'Antall timer du skrev inn, betyr at du har jobbet 0 % av det du gjør når du er frisk. Du må enten svare nei på øverste spørsmålet eller endre antall timer totalt.',
-            arbeidstakerGradert.sporsmal[6].undersporsmal[1].undersporsmal[0]
-                .undersporsmal[0].id
+            arbeidstakerGradert.sporsmal[6].undersporsmal[1].undersporsmal[0].undersporsmal[0].id
         )
     })
 
@@ -263,20 +236,14 @@ describe('Tester feilmeldinger', () => {
         gaVidere()
 
         cy.get('.checkboxgruppe.skjemagruppe--feil').should('exist')
-        cy.get('.skjemaelement__feilmelding').contains(
-            'Du må velge et alternativ'
-        )
+        cy.get('.skjemaelement__feilmelding').contains('Du må velge et alternativ')
         cy.get('.feiloppsummering')
             .should('exist')
             .within(() => {
                 cy.contains('Det er 1 feil i skjemaet')
                 cy.contains('Du må oppgi hvilke inntektskilder du har').click()
             })
-        cy.focused().should(
-            'have.attr',
-            'name',
-            arbeidstakerGradert.sporsmal[8].undersporsmal[0].undersporsmal[0].id
-        )
+        cy.focused().should('have.attr', 'name', arbeidstakerGradert.sporsmal[8].undersporsmal[0].undersporsmal[0].id)
     })
 
     it('CHECKBOX_GRUPPE feilmelding går bort', () => {

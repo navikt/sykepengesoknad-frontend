@@ -6,23 +6,18 @@ import { proxyKallTilBackend } from '../../../proxy/backendproxy'
 
 const { serverRuntimeConfig } = getConfig()
 
-const tillatteApier = [
-    'GET /api/v2/kvittering/[uuid]',
-    'POST /api/v2/opplasting',
-]
+const tillatteApier = ['GET /api/v2/kvittering/[uuid]', 'POST /api/v2/opplasting']
 
-const handler = beskyttetApi(
-    async (req: NextApiRequest, res: NextApiResponse) => {
-        await proxyKallTilBackend({
-            req: req,
-            res: res,
-            tillatteApier: tillatteApier,
-            backend: 'flex-bucket-uploader',
-            backendHostname: 'flex-bucket-uploader',
-            backendClientId: serverRuntimeConfig.flexBucketUploaderClientId,
-        })
-    }
-)
+const handler = beskyttetApi(async (req: NextApiRequest, res: NextApiResponse) => {
+    await proxyKallTilBackend({
+        req: req,
+        res: res,
+        tillatteApier: tillatteApier,
+        backend: 'flex-bucket-uploader',
+        backendHostname: 'flex-bucket-uploader',
+        backendClientId: serverRuntimeConfig.flexBucketUploaderClientId,
+    })
+})
 
 export const config = {
     api: {

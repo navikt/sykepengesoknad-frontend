@@ -1,11 +1,4 @@
-import {
-    Alert,
-    BodyLong,
-    BodyShort,
-    Label,
-    Radio,
-    RadioGroup,
-} from '@navikt/ds-react'
+import { Alert, BodyLong, BodyShort, Label, Radio, RadioGroup } from '@navikt/ds-react'
 import React, { useEffect, useState } from 'react'
 import { useFormContext } from 'react-hook-form'
 import useForceUpdate from 'use-force-update'
@@ -49,28 +42,16 @@ const RadioKomp = ({ sporsmal }: SpmProps) => {
         // eslint-disable-next-line
     }, [sporsmal])
 
-    const lavereProsentHjelpTittel = tekst(
-        'ekspanderbarhjelp.prosenten_lavere_enn_forventet_arbeidstaker.tittel'
-    )
+    const lavereProsentHjelpTittel = tekst('ekspanderbarhjelp.prosenten_lavere_enn_forventet_arbeidstaker.tittel')
     return (
         <>
             <SporsmalstekstH3 sporsmal={sporsmal} />
             <Vis
-                hvis={
-                    sporsmal.undertekst &&
-                    sporsmal.svartype == RSSvartype.RADIO_GRUPPE_TIMER_PROSENT
-                }
-                render={() => (
-                    <BodyLong spacing> {sporsmal.undertekst}</BodyLong>
-                )}
+                hvis={sporsmal.undertekst && sporsmal.svartype == RSSvartype.RADIO_GRUPPE_TIMER_PROSENT}
+                render={() => <BodyLong spacing> {sporsmal.undertekst}</BodyLong>}
             />
 
-            <div
-                className={
-                    'skjemaelement' +
-                    (errors[sporsmal.id] ? ' skjemagruppe--feil' : '')
-                }
-            >
+            <div className={'skjemaelement' + (errors[sporsmal.id] ? ' skjemagruppe--feil' : '')}>
                 {sporsmal.undersporsmal.map((uspm, idx) => {
                     const checked = watchRadio === uspm.sporsmalstekst
 
@@ -85,10 +66,7 @@ const RadioKomp = ({ sporsmal }: SpmProps) => {
                                 })}
                                 className="skjemaelement__input radioknapp"
                             />
-                            <label
-                                className="skjemaelement__label"
-                                htmlFor={uspm.id}
-                            >
+                            <label className="skjemaelement__label" htmlFor={uspm.id}>
                                 {uspm.sporsmalstekst}
                             </label>
 
@@ -101,9 +79,7 @@ const RadioKomp = ({ sporsmal }: SpmProps) => {
                                 >
                                     <UndersporsmalListe
                                         oversporsmal={uspm}
-                                        oversporsmalSvar={
-                                            checked ? 'CHECKED' : ''
-                                        }
+                                        oversporsmalSvar={checked ? 'CHECKED' : ''}
                                     />
                                 </AnimateOnMount>
                             </div>
@@ -125,12 +101,9 @@ const RadioKomp = ({ sporsmal }: SpmProps) => {
                 render={() => (
                     <Alert variant="info" style={{ marginTop: '1rem' }}>
                         <BodyShort>
-                            {getLedetekst(
-                                tekst(
-                                    'sykepengesoknad.jobb-underveis-timer-i-prosent'
-                                ),
-                                { '%PROSENT%': Math.floor(beregnGrad!() * 100) }
-                            )}
+                            {getLedetekst(tekst('sykepengesoknad.jobb-underveis-timer-i-prosent'), {
+                                '%PROSENT%': Math.floor(beregnGrad!() * 100),
+                            })}
                         </BodyShort>
                     </Alert>
                 )}
@@ -155,84 +128,45 @@ const RadioKomp = ({ sporsmal }: SpmProps) => {
                             logVedVisning={lavereProsentHjelpTittel}
                         >
                             <div className="avsnitt">
-                                <Label
-                                    size="medium"
-                                    as="h3"
-                                    className="helligdager-tittel"
-                                >
-                                    {tekst(
-                                        'ekspanderbarhjelp.helligdager.tittel'
-                                    )}
+                                <Label size="medium" as="h3" className="helligdager-tittel">
+                                    {tekst('ekspanderbarhjelp.helligdager.tittel')}
                                 </Label>
                                 <BodyLong spacing>
-                                    {tekst(
-                                        'ekspanderbarhjelp.prosenten_lavere_enn_forventet_arbeidstaker.innhold1'
-                                    )}
+                                    {tekst('ekspanderbarhjelp.prosenten_lavere_enn_forventet_arbeidstaker.innhold1')}
                                 </BodyLong>
                                 <BodyLong spacing>
-                                    {tekst(
-                                        'ekspanderbarhjelp.prosenten_lavere_enn_forventet_arbeidstaker.innhold2'
-                                    )}
+                                    {tekst('ekspanderbarhjelp.prosenten_lavere_enn_forventet_arbeidstaker.innhold2')}
                                 </BodyLong>
-                                <RadioGroup
-                                    legend={tekst(
-                                        'ekspanderbarhjelp.helligdager.enkelt-tittel'
-                                    )}
-                                    size="medium"
-                                >
+                                <RadioGroup legend={tekst('ekspanderbarhjelp.helligdager.enkelt-tittel')} size="medium">
                                     <Radio
-                                        value={tekst(
-                                            'ekspanderbarhjelp.helligdager.enkelt-svar-Ja'
-                                        )}
+                                        value={tekst('ekspanderbarhjelp.helligdager.enkelt-svar-Ja')}
                                         onClick={() => {
                                             if (!surveySvart) {
                                                 setSurveySvart(true)
-                                                logEvent(
-                                                    'skjema spørsmål besvart',
-                                                    {
-                                                        skjemanavn:
-                                                            'hjelpetekst',
-                                                        spørsmål: tekst(
-                                                            'ekspanderbarhjelp.helligdager.enkelt-tittel'
-                                                        ),
-                                                        svar: tekst(
-                                                            'ekspanderbarhjelp.helligdager.enkelt-svar-Ja'
-                                                        ),
-                                                    }
-                                                )
+                                                logEvent('skjema spørsmål besvart', {
+                                                    skjemanavn: 'hjelpetekst',
+                                                    spørsmål: tekst('ekspanderbarhjelp.helligdager.enkelt-tittel'),
+                                                    svar: tekst('ekspanderbarhjelp.helligdager.enkelt-svar-Ja'),
+                                                })
                                             }
                                         }}
                                     >
-                                        {tekst(
-                                            'ekspanderbarhjelp.helligdager.enkelt-svar-Ja'
-                                        )}
+                                        {tekst('ekspanderbarhjelp.helligdager.enkelt-svar-Ja')}
                                     </Radio>
                                     <Radio
-                                        value={tekst(
-                                            'ekspanderbarhjelp.helligdager.enkelt-svar-Nei'
-                                        )}
+                                        value={tekst('ekspanderbarhjelp.helligdager.enkelt-svar-Nei')}
                                         onClick={() => {
                                             if (!surveySvart) {
                                                 setSurveySvart(true)
-                                                logEvent(
-                                                    'skjema spørsmål besvart',
-                                                    {
-                                                        skjemanavn:
-                                                            'hjelpetekst',
-                                                        spørsmål: tekst(
-                                                            'ekspanderbarhjelp.helligdager.enkelt-tittel'
-                                                        ),
-                                                        svar: tekst(
-                                                            'ekspanderbarhjelp.helligdager.enkelt-svar-Nei'
-                                                        ),
-                                                    }
-                                                )
+                                                logEvent('skjema spørsmål besvart', {
+                                                    skjemanavn: 'hjelpetekst',
+                                                    spørsmål: tekst('ekspanderbarhjelp.helligdager.enkelt-tittel'),
+                                                    svar: tekst('ekspanderbarhjelp.helligdager.enkelt-svar-Nei'),
+                                                })
                                             }
                                         }}
                                     >
-                                        {tekst(
-                                            'ekspanderbarhjelp.helligdager.enkelt-svar-Nei'
-                                        )}
+                                        {tekst('ekspanderbarhjelp.helligdager.enkelt-svar-Nei')}
                                     </Radio>
                                 </RadioGroup>
                             </div>

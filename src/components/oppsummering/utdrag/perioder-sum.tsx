@@ -19,10 +19,7 @@ const PerioderSum = ({ sporsmal }: OppsummeringProps) => {
                             key={i}
                             render={() => (
                                 <BodyShort className="oppsummering__dato">
-                                    {tilLesbarPeriodeMedArstall(
-                                        periode.fom,
-                                        periode.tom
-                                    )}
+                                    {tilLesbarPeriodeMedArstall(periode.fom, periode.tom)}
                                 </BodyShort>
                             )}
                         />

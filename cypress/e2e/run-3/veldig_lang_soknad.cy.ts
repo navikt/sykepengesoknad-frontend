@@ -10,15 +10,11 @@ describe('Tester støtte for gamle spørsmål', () => {
     let steg = 1
 
     function svarJaHovedsporsmal() {
-        cy.get(
-            '.inputPanelGruppe__inner label:first-child > input[value=JA]'
-        ).click({ force: true })
+        cy.get('.inputPanelGruppe__inner label:first-child > input[value=JA]').click({ force: true })
     }
 
     function svarNeiHovedsporsmal() {
-        cy.get(
-            '.inputPanelGruppe__inner label:nth-child(2) > input[value=NEI]'
-        ).click({ force: true })
+        cy.get('.inputPanelGruppe__inner label:nth-child(2) > input[value=NEI]').click({ force: true })
     }
 
     function svarCheckboxPanel() {
@@ -50,12 +46,8 @@ describe('Tester støtte for gamle spørsmål', () => {
     }
 
     function velgTimer() {
-        const id =
-            soknad.sporsmal[steg - 1].undersporsmal[1].undersporsmal[1]
-                .undersporsmal[0].id
-        cy.get('.undersporsmal .skjemaelement__input.radioknapp[value=timer]')
-            .focus()
-            .click({ force: true })
+        const id = soknad.sporsmal[steg - 1].undersporsmal[1].undersporsmal[1].undersporsmal[0].id
+        cy.get('.undersporsmal .skjemaelement__input.radioknapp[value=timer]').focus().click({ force: true })
         cy.get(`.undersporsmal .skjemaelement__input#${id}`).focus().type('21')
     }
 
@@ -68,9 +60,7 @@ describe('Tester støtte for gamle spørsmål', () => {
     }
 
     function velgCheckbox(gjelder: string) {
-        cy.get('.undersporsmal .checkboxgruppe')
-            .contains(gjelder)
-            .click({ force: true })
+        cy.get('.undersporsmal .checkboxgruppe').contains(gjelder).click({ force: true })
     }
 
     function svarRadioJaEllerNei(gjelder: string, svar: 'Ja' | 'Nei') {
@@ -106,18 +96,12 @@ describe('Tester støtte for gamle spørsmål', () => {
     }
 
     before(() => {
-        cy.visit(
-            'http://localhost:8080/syk/sykepengesoknad?testperson=alle-soknader'
-        )
+        cy.visit('http://localhost:8080/syk/sykepengesoknad?testperson=alle-soknader')
     })
 
     it('Laster startside', () => {
-        cy.get('.navds-heading--xlarge')
-            .should('be.visible')
-            .and('have.text', 'Søknader')
-        cy.get(
-            `#soknader-list-til-behandling article a[href*=${soknad.id}]`
-        ).click()
+        cy.get('.navds-heading--xlarge').should('be.visible').and('have.text', 'Søknader')
+        cy.get(`#soknader-list-til-behandling article a[href*=${soknad.id}]`).click()
     })
     it('ANSVARSERKLARING', () => {
         svarCheckboxPanel()
@@ -143,19 +127,13 @@ describe('Tester støtte for gamle spørsmål', () => {
     it('ARBEIDSGIVER', () => {
         svarJaHovedsporsmal()
         svarRadioJaEllerNei('Er du 100 % sykmeldt?', 'Ja')
-        svarRadioJaEllerNei(
-            'Har du avtalt med arbeidsgiveren din at du skal ta ut feriedager i hele perioden?',
-            'Ja'
-        )
+        svarRadioJaEllerNei('Har du avtalt med arbeidsgiveren din at du skal ta ut feriedager i hele perioden?', 'Ja')
         gaVidere()
     })
     it('ARBEIDSLEDIG_UTLAND', () => {
         svarJaHovedsporsmal()
         velgPeriode()
-        svarRadioJaEllerNei(
-            'Har du søkt om å beholde sykepengene for disse dagene?',
-            'Ja'
-        )
+        svarRadioJaEllerNei('Har du søkt om å beholde sykepengene for disse dagene?', 'Ja')
         gaVidere()
     })
     it('EGENMELDINGER', () => {
@@ -249,10 +227,7 @@ describe('Tester støtte for gamle spørsmål', () => {
     it('UTLAND', () => {
         svarJaHovedsporsmal()
         velgPeriode()
-        svarRadioJaEllerNei(
-            'Har du søkt om å beholde sykepengene for disse dagene?',
-            'Ja'
-        )
+        svarRadioJaEllerNei('Har du søkt om å beholde sykepengene for disse dagene?', 'Ja')
         gaVidere()
     })
     it('UTLAND_V2', () => {
@@ -267,10 +242,7 @@ describe('Tester støtte for gamle spørsmål', () => {
     it('TRANSPORT_TIL_DAGLIG', () => {
         svarJaHovedsporsmal()
         velgCheckbox('Offentlig transport')
-        velgTall(
-            'Hvor mye betaler du vanligvis i måneden for offentlig transport?',
-            '21'
-        )
+        velgTall('Hvor mye betaler du vanligvis i måneden for offentlig transport?', '21')
         gaVidere()
     })
     it('REISE_MED_BIL', () => {

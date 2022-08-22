@@ -16,12 +16,9 @@ const BjornUnderSporsmalstekst = ({ sporsmal }: SpmProps) => {
     const { valgtSoknad } = useAppStore()
     const { logEvent } = useAmplitudeInstance()
 
-    const bjornTekst = `soknad.bjorn.${fjernIndexFraTag(
-        sporsmal.tag
-    ).toLowerCase()}`
+    const bjornTekst = `soknad.bjorn.${fjernIndexFraTag(sporsmal.tag).toLowerCase()}`
 
-    const bjornVeileder = (tag: TagTyper) =>
-        tag === TagTyper.ENKELTSTAENDE_BEHANDLINGSDAGER
+    const bjornVeileder = (tag: TagTyper) => tag === TagTyper.ENKELTSTAENDE_BEHANDLINGSDAGER
 
     const bjornVeilederOgMaaler = (tag: TagTyper) =>
         tag === TagTyper.FERIE_V2 &&
@@ -30,10 +27,7 @@ const BjornUnderSporsmalstekst = ({ sporsmal }: SpmProps) => {
 
     return (
         <>
-            <Vis
-                hvis={bjornVeileder(sporsmal.tag)}
-                render={() => <Bjorn className="blokk-m" nokkel={bjornTekst} />}
-            />
+            <Vis hvis={bjornVeileder(sporsmal.tag)} render={() => <Bjorn className="blokk-m" nokkel={bjornTekst} />} />
             <Vis
                 hvis={bjornVeilederOgMaaler(sporsmal.tag)}
                 render={() => (
@@ -44,9 +38,7 @@ const BjornUnderSporsmalstekst = ({ sporsmal }: SpmProps) => {
                                 href={tekst((bjornTekst + '_lenke') as any)}
                                 onClick={() => {
                                     logEvent('navigere', {
-                                        lenketekst: tekst(
-                                            (bjornTekst + '_lenketekst') as any
-                                        ),
+                                        lenketekst: tekst((bjornTekst + '_lenketekst') as any),
                                     })
                                 }}
                                 target="_blank"

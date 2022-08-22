@@ -22,10 +22,9 @@ const FristSykepenger = ({ soknadstype }: FristSykepengerProps) => {
             <Accordion.Item open={open} className="frist-sykepenger">
                 <Accordion.Header
                     onClick={() => {
-                        logEvent(
-                            open ? 'accordion lukket' : 'accordion åpnet',
-                            { component: tekst('frist-sykepenger.overskrift') }
-                        )
+                        logEvent(open ? 'accordion lukket' : 'accordion åpnet', {
+                            component: tekst('frist-sykepenger.overskrift'),
+                        })
                         setOpen(!open)
                     }}
                 >
@@ -35,12 +34,8 @@ const FristSykepenger = ({ soknadstype }: FristSykepengerProps) => {
                 </Accordion.Header>
                 <Accordion.Content>
                     <BodyLong>{tekst('frist-sykepenger.innsending')}</BodyLong>
-                    <BodyLong>
-                        {parser(tekst('frist-sykepenger.hovedregel'))}
-                    </BodyLong>
-                    <BodyLong>
-                        {parser(tekst('frist-sykepenger.ulike.måneder'))}
-                    </BodyLong>
+                    <BodyLong>{parser(tekst('frist-sykepenger.hovedregel'))}</BodyLong>
+                    <BodyLong>{parser(tekst('frist-sykepenger.ulike.måneder'))}</BodyLong>
 
                     <Utvidbar
                         erApen={false}
@@ -51,9 +46,7 @@ const FristSykepenger = ({ soknadstype }: FristSykepengerProps) => {
                         <Heading size="xsmall" level="3">
                             {tekst('frist-sykepenger.eksempel.en.tittel')}
                         </Heading>
-                        <BodyShort>
-                            {tekst('frist-sykepenger.eksempel.en.tekst')}
-                        </BodyShort>
+                        <BodyShort>{tekst('frist-sykepenger.eksempel.en.tekst')}</BodyShort>
                         <EksempelFrist
                             normalTekst="Frist for sykedager i mai: "
                             boldTekst="31.august"
@@ -66,9 +59,7 @@ const FristSykepenger = ({ soknadstype }: FristSykepengerProps) => {
                         <Heading size="xsmall" level="3">
                             {tekst('frist-sykepenger.eksempel.to.tittel')}
                         </Heading>
-                        <BodyShort>
-                            {tekst('frist-sykepenger.eksempel.to.tekst')}
-                        </BodyShort>
+                        <BodyShort>{tekst('frist-sykepenger.eksempel.to.tekst')}</BodyShort>
                         <EksempelFrist
                             normalTekst="Frist for sykedager i januar: "
                             boldTekst="30.april"
@@ -87,9 +78,7 @@ const FristSykepenger = ({ soknadstype }: FristSykepengerProps) => {
                         />
                     </Utvidbar>
 
-                    <BodyLong spacing>
-                        {tekst('frist-sykepenger.husk')}
-                    </BodyLong>
+                    <BodyLong spacing>{tekst('frist-sykepenger.husk')}</BodyLong>
 
                     <HvorforSoknadSykepenger soknadstype={soknadstype} />
                 </Accordion.Content>

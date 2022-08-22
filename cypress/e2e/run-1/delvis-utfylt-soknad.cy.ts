@@ -1,7 +1,4 @@
-import {
-    delvisUtfylltArbeidsledig,
-    selvstendigKvittering,
-} from '../../../src/data/mock/data/soknader-integration'
+import { delvisUtfylltArbeidsledig, selvstendigKvittering } from '../../../src/data/mock/data/soknader-integration'
 import { tekst } from '../../../src/utils/tekster'
 
 describe('Tester delvis utfylt søknad', () => {
@@ -9,21 +6,17 @@ describe('Tester delvis utfylt søknad', () => {
     const ikkeUtfyltSoknad = selvstendigKvittering
 
     before(() => {
-        cy.visit(
-            'http://localhost:8080/syk/sykepengesoknad?testperson=alle-soknader'
-        )
+        cy.visit('http://localhost:8080/syk/sykepengesoknad?testperson=alle-soknader')
     })
 
     it('Henter liste med søknader', () => {
-        cy.get('.navds-heading--xlarge')
-            .should('be.visible')
-            .and('have.text', 'Søknader')
+        cy.get('.navds-heading--xlarge').should('be.visible').and('have.text', 'Søknader')
     })
 
     it('En ikke påbegynt søknad er ikke markert som delvis utfylt', () => {
-        cy.get(
-            `#soknader-list-til-behandling article a[href*=${ikkeUtfyltSoknad.id}] .inngangspanel__status`
-        ).should('not.exist')
+        cy.get(`#soknader-list-til-behandling article a[href*=${ikkeUtfyltSoknad.id}] .inngangspanel__status`).should(
+            'not.exist'
+        )
     })
 
     it('En påbegynt søknad er markert med delvis utfylt label', () => {
@@ -33,9 +26,7 @@ describe('Tester delvis utfylt søknad', () => {
     })
 
     it('Går til første ubesvarte spørsmål', () => {
-        cy.get(
-            `#soknader-list-til-behandling article a[href*=${delvisUtfyltSoknad.id}]`
-        ).click()
+        cy.get(`#soknader-list-til-behandling article a[href*=${delvisUtfyltSoknad.id}]`).click()
         cy.url().should('include', `${delvisUtfyltSoknad.id}/3`)
         cy.get('.inputPanel').should('not.be.checked')
     })

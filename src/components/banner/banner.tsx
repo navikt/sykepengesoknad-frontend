@@ -22,9 +22,7 @@ const Banner = ({ overskrift }: BannerProps) => {
             if (valgtSoknad.soknadstype === RSSoknadstype.REISETILSKUDD) {
                 return tekst('reisetilskuddsoknad.tittel')
             }
-            if (
-                valgtSoknad.soknadstype === RSSoknadstype.GRADERT_REISETILSKUDD
-            ) {
+            if (valgtSoknad.soknadstype === RSSoknadstype.GRADERT_REISETILSKUDD) {
                 return tekst('gradert-reisetilskuddsoknad.tittel')
             }
         }
@@ -42,12 +40,7 @@ const Banner = ({ overskrift }: BannerProps) => {
             <Vis
                 hvis={valgtSoknad && valgtSoknad.fom && valgtSoknad.tom}
                 render={() => (
-                    <Heading size="medium">
-                        {tilLesbarPeriodeMedArstall(
-                            valgtSoknad!.fom,
-                            valgtSoknad!.tom
-                        )}
-                    </Heading>
+                    <Heading size="medium">{tilLesbarPeriodeMedArstall(valgtSoknad!.fom, valgtSoknad!.tom)}</Heading>
                 )}
             />
         </header>

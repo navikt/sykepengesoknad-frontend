@@ -52,11 +52,7 @@ export const Bjorn = ({
     return (
         <div className={classNames}>
             <div className={bobleClassNames}>
-                {nokkel !== undefined ? (
-                    <BodyShort>{parser(tekst(nokkel as any))}</BodyShort>
-                ) : (
-                    children
-                )}
+                {nokkel !== undefined ? <BodyShort>{parser(tekst(nokkel as any))}</BodyShort> : children}
             </div>
             <div className={bildeClassNames}>
                 <Bilde alt={bildeAlt} />

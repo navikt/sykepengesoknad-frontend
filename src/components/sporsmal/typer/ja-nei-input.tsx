@@ -40,13 +40,9 @@ const JaNeiInput = ({ sporsmal }: SpmProps) => {
     const watchJaNei = watch(sporsmal.id)
 
     const visAvgittAvBjorn = () => {
-        const undersporsmal = sporsmal.undersporsmal.find(
-            (uspm) => uspm.tag === TagTyper.EGENMELDINGER_NAR
-        )
+        const undersporsmal = sporsmal.undersporsmal.find((uspm) => uspm.tag === TagTyper.EGENMELDINGER_NAR)
         if (undersporsmal) {
-            return undersporsmal.svarliste.svar.some(
-                (svaret) => svaret.avgittAv === 'TIDLIGERE_SOKNAD'
-            )
+            return undersporsmal.svarliste.svar.some((svaret) => svaret.avgittAv === 'TIDLIGERE_SOKNAD')
         }
         return false
     }
@@ -67,8 +63,7 @@ const JaNeiInput = ({ sporsmal }: SpmProps) => {
         <>
             <div
                 className={
-                    'inputPanelGruppe inputPanelGruppe--horisontal' +
-                    (errors[sporsmal.id] ? ' skjemagruppe--feil' : '')
+                    'inputPanelGruppe inputPanelGruppe--horisontal' + (errors[sporsmal.id] ? ' skjemagruppe--feil' : '')
                 }
             >
                 <Label as="h3" className="skjema__sporsmal">
@@ -85,13 +80,7 @@ const JaNeiInput = ({ sporsmal }: SpmProps) => {
                     {jaNeiValg.map((valg, idx) => {
                         const OK = watchJaNei === valg.value
                         return (
-                            <label
-                                className={
-                                    'inputPanel radioPanel' +
-                                    (OK ? ' inputPanel--checked' : '')
-                                }
-                                key={idx}
-                            >
+                            <label className={'inputPanel radioPanel' + (OK ? ' inputPanel--checked' : '')} key={idx}>
                                 <input
                                     type="radio"
                                     id={sporsmal.id + '_' + idx}
@@ -102,20 +91,14 @@ const JaNeiInput = ({ sporsmal }: SpmProps) => {
                                         required: feilmelding.global,
                                     })}
                                 />
-                                <span className="inputPanel__label">
-                                    {valg.label}
-                                </span>
+                                <span className="inputPanel__label">{valg.label}</span>
                             </label>
                         )
                     })}
                 </div>
 
                 <Vis
-                    hvis={
-                        sporsmal?.tag ===
-                            TagTyper.UTLANDSOPPHOLD_SOKT_SYKEPENGER &&
-                        watchJaNei
-                    }
+                    hvis={sporsmal?.tag === TagTyper.UTLANDSOPPHOLD_SOKT_SYKEPENGER && watchJaNei}
                     render={() => (
                         <BodyLong spacing className="utland_infotekst">
                             {parser(
@@ -136,29 +119,18 @@ const JaNeiInput = ({ sporsmal }: SpmProps) => {
 
             <div aria-live="assertive">
                 <AnimateOnMount
-                    mounted={
-                        watchJaNei ===
-                        sporsmal.kriterieForVisningAvUndersporsmal
-                    }
+                    mounted={watchJaNei === sporsmal.kriterieForVisningAvUndersporsmal}
                     enter="undersporsmal--vis"
                     leave="undersporsmal--skjul"
                     start="undersporsmal"
                 >
-                    <UndersporsmalListe
-                        oversporsmal={sporsmal}
-                        oversporsmalSvar={watchJaNei}
-                    />
+                    <UndersporsmalListe oversporsmal={sporsmal} oversporsmalSvar={watchJaNei} />
                 </AnimateOnMount>
             </div>
 
             <Vis
                 hvis={visAvgittAvBjorn()}
-                render={() => (
-                    <Bjorn
-                        className="press"
-                        nokkel="sykepengesoknad.egenmeldingsdager.preutfylt-melding"
-                    />
-                )}
+                render={() => <Bjorn className="press" nokkel="sykepengesoknad.egenmeldingsdager.preutfylt-melding" />}
             />
 
             <SporsmalBjorn sporsmal={sporsmal} />

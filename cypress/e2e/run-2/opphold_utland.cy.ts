@@ -2,24 +2,19 @@ import { soknaderOpplaering as soknader } from '../../../src/data/mock/data/sokn
 import { RSSoknad } from '../../../src/types/rs-types/rs-soknad'
 
 describe('Tester søknad om å beholde sykepenger utenfor EØS', () => {
-    const soknad = soknader.find(
-        (sok: RSSoknad) => sok.id === 'b9d67b0d-b1f8-44a5-bcbd-6010b60b90ce'
-    )!
+    const soknad = soknader.find((sok: RSSoknad) => sok.id === 'b9d67b0d-b1f8-44a5-bcbd-6010b60b90ce')!
 
     before(() => {
         cy.visit('http://localhost:8080/syk/sykepengesoknad')
     })
 
     it('Laster startside', function () {
-        cy.get('.navds-heading--xlarge')
-            .should('be.visible')
-            .and('have.text', 'Søknader')
-        cy.get(
-            `#soknader-list-til-behandling article a[href*=${soknad.id}]`
-        ).should('include.text', 'Søknad om å beholde sykepenger utenfor EØS')
-        cy.get(
-            `#soknader-list-til-behandling article a[href*=${soknad.id}]`
-        ).click()
+        cy.get('.navds-heading--xlarge').should('be.visible').and('have.text', 'Søknader')
+        cy.get(`#soknader-list-til-behandling article a[href*=${soknad.id}]`).should(
+            'include.text',
+            'Søknad om å beholde sykepenger utenfor EØS'
+        )
+        cy.get(`#soknader-list-til-behandling article a[href*=${soknad.id}]`).click()
     })
 
     it('PERIODEUTLAND - steg 1', function () {
@@ -41,9 +36,7 @@ describe('Tester søknad om å beholde sykepenger utenfor EØS', () => {
         cy.contains('Gå videre').click({ force: true })
         cy.contains('Du må velge ett land')
         cy.contains('Det er 1 feil i skjemaet')
-        cy.contains(
-            'Du må oppgi et land utenfor EØS. Innenfor EØS trenger du ikke søke.'
-        )
+        cy.contains('Du må oppgi et land utenfor EØS. Innenfor EØS trenger du ikke søke.')
 
         cy.contains('Hvilket land skal du reise til?')
         cy.get('.skjemaelement__input').type('Fransk', { force: true })
@@ -83,9 +76,7 @@ describe('Tester søknad om å beholde sykepenger utenfor EØS', () => {
 
         cy.contains('Er du 100 % sykmeldt?').siblings().contains('Ja').click()
 
-        cy.contains(
-            'Har du avtalt med arbeidsgiveren din at du skal ta ut feriedager i hele perioden?'
-        )
+        cy.contains('Har du avtalt med arbeidsgiveren din at du skal ta ut feriedager i hele perioden?')
             .siblings()
             .contains('Nei')
             .click()
@@ -115,13 +106,9 @@ describe('Tester søknad om å beholde sykepenger utenfor EØS', () => {
             .should('contain', 'Ja')
             .get('.oppsummering__undersporsmalsliste')
             .within(() => {
-                cy.contains('Er du 100 % sykmeldt?')
-                    .siblings()
-                    .should('contain', 'Ja')
+                cy.contains('Er du 100 % sykmeldt?').siblings().should('contain', 'Ja')
 
-                cy.contains(
-                    'Har du avtalt med arbeidsgiveren din at du skal ta ut feriedager i hele perioden?'
-                )
+                cy.contains('Har du avtalt med arbeidsgiveren din at du skal ta ut feriedager i hele perioden?')
                     .siblings()
                     .should('contain', 'Nei')
             })
