@@ -46,15 +46,8 @@ const PersonvernLesMer = () => {
                 aria-labelledby="modal-tittel"
             >
                 <Modal.Content>
-                    <Heading
-                        size="medium"
-                        level="1"
-                        className="modal__tittel"
-                        id="modal-tittel"
-                    >
-                        {tekst(
-                            'sykepengesoknad.soknad-intro.personvern-modal-header'
-                        )}
+                    <Heading size="medium" level="1" className="modal__tittel" id="modal-tittel">
+                        {tekst('sykepengesoknad.soknad-intro.personvern-modal-header')}
                     </Heading>
                     {parser(tekst('sykepengesoknad.soknad-intro.personvern-modal-innhold'))}
 

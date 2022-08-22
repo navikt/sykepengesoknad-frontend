@@ -44,12 +44,7 @@ const AvsluttOgFortsettSenere = () => {
                 aria-labelledby="modal-tittel"
             >
                 <Modal.Content>
-                    <Heading
-                        size="small"
-                        level="1"
-                        className="modal__tittel"
-                        id="modal-tittel"
-                    >
+                    <Heading size="small" level="1" className="modal__tittel" id="modal-tittel">
                         {tekst('avslutt.popup.tittel')}
                     </Heading>
                     <BodyShort>{tekst('avslutt.popup.innhold')}</BodyShort>

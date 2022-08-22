@@ -63,12 +63,7 @@ const UtgaattSoknaderTeaser = ({ soknad }: SykepengesoknadTeaserProps) => {
                 aria-labelledby="modal-tittel"
             >
                 <Modal.Content>
-                    <Heading
-                        size="medium"
-                        level="1"
-                        className="modal__tittel"
-                        id="modal-tittel"
-                    >
+                    <Heading size="medium" level="1" className="modal__tittel" id="modal-tittel">
                         {tekst('soknad.teaser.utgaatt.popup.header')}
                     </Heading>
                     <Alert variant="info">{parser(tekst('soknad.teaser.utgaatt.popup.innhold'))}</Alert>

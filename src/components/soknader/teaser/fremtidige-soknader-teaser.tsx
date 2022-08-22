@@ -68,12 +68,7 @@ const FremtidigeSoknaderTeaser = ({ soknad }: SykepengesoknadTeaserProps) => {
                 aria-labelledby="modal-tittel"
             >
                 <Modal.Content>
-                    <Heading
-                        size="small"
-                        level="1"
-                        className="modal__tittel"
-                        id="modal-tittel"
-                    >
+                    <Heading size="small" level="1" className="modal__tittel" id="modal-tittel">
                         {tekst('soknader.teaser.fremtidig.modal.tittel')}
                     </Heading>
                     <BodyLong spacing>

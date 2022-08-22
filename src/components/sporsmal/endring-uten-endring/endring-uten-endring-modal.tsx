@@ -33,9 +33,7 @@ export const EndringUtenEndringModal = (props: EndringUtenEndringModalProps) => 
                         {tekst('endring-uten-endring.popup.tittel')}
                     </Heading>
 
-                    <BodyShort>
-                        {tekst('endring-uten-endring.popup.innhold')}
-                    </BodyShort>
+                    <BodyShort>{tekst('endring-uten-endring.popup.innhold')}</BodyShort>
 
                     <Button
                         variant="primary"
