@@ -129,7 +129,7 @@
 @media (min-width: 768px) {
     @paddingDesktop: calc(100vw - (@desktopLimitWidth - 2rem));
     @ukebreddeDesktop: calc(100vw - @paddingDesktop);
-    @dagbreddeDesktop: calc(@ukebreddeDesktop / 8);
+    @dagbreddeDesktop: calc((@ukebreddeDesktop - @border) / 8);
 
     .skjema__dager {
         width: @ukebreddeDesktop;
