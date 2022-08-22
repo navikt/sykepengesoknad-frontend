@@ -52,31 +52,21 @@ const TallKomp = ({ sporsmal }: SpmProps) => {
         }
     }
 
+    const manglerSporsmalsTekst = sporsmal.sporsmalstekst === ''
+
     const labels = () => {
-        if (sporsmal.sporsmalstekst) {
+        if (sporsmal.tag === TagTyper.HVOR_MANGE_TIMER_PER_UKE || sporsmal.tag === TagTyper.KM_HJEM_JOBB) {
             return ' tallKompLabel'
-        } else {
+        } if (manglerSporsmalsTekst) {
             return ' tallKompDescription'
-        }
-    }
-
-    // Dette er en workaround for å gjøre textField accessible, siden noen av underspørsmålene ikke har spørsmålstekst og label er derfor tom
-    let label: string
-    let description: string | null
-
-    if (sporsmal.sporsmalstekst !== '') {
-        label = sporsmal.sporsmalstekst
-        description = tekst(('soknad.undertekst.' + sporsmal.tag) as any)
-    } else {
-        label = tekst(('soknad.undertekst.' + sporsmal.tag) as any)
-        description = ''
+        } return ''
     }
 
     return (
         <div className={className()}>
             <TextField
-                label={label}
-                description={description}
+                label={manglerSporsmalsTekst ? tekst(('soknad.undertekst.' + sporsmal.tag) as any) : sporsmal.sporsmalstekst}
+                description={manglerSporsmalsTekst ? '' : tekst(('soknad.undertekst.' + sporsmal.tag) as any)}
                 className={`${inputSize()} ${labels()}`}
                 type="number"
                 id={sporsmal.id}
