@@ -14,17 +14,9 @@ const TallKomp = ({ sporsmal }: SpmProps) => {
     const {
         register,
         formState: { errors },
-        watch,
-        getValues,
     } = useFormContext()
 
-    let watchTall = watch(sporsmal.id)
-    if (watchTall === undefined) {
-        watchTall = getValues(sporsmal.id)
-    }
-
     const feilmelding = hentFeilmelding(sporsmal, errors[sporsmal.id])
-    const undersporsmal = useRef<HTMLDivElement>(null)
     const { validerGrad, periode, hovedSporsmal } = validerArbeidsgrad(sporsmal)
 
     const valider = () => {
@@ -74,9 +66,9 @@ const TallKomp = ({ sporsmal }: SpmProps) => {
 
     if (sporsmal.sporsmalstekst !== '') {
         label = sporsmal.sporsmalstekst
-        description = sporsmal.undertekst
+        description = tekst(('soknad.undertekst.' + sporsmal.tag) as any)
     } else {
-        label = sporsmal.undertekst!
+        label = tekst(('soknad.undertekst.' + sporsmal.tag) as any)
         description = ''
     }
 
