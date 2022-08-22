@@ -94,8 +94,10 @@ const SporsmalForm = () => {
 
         let response
         try {
-            response = await fetchMedRequestId(`/syk/sykepengesoknad/api/sykepengesoknad-backend/api/v2/soknader/${soknad!.id
-                }/sporsmal/${sporsmal.id}`,
+            response = await fetchMedRequestId(
+                `/syk/sykepengesoknad/api/sykepengesoknad-backend/api/v2/soknader/${soknad!.id}/sporsmal/${
+                    sporsmal.id
+                }`,
                 {
                     method: 'PUT',
                     credentials: 'include',
@@ -122,7 +124,7 @@ const SporsmalForm = () => {
         }
 
         if (!response.ok) {
-            if (['FEIL_STATUS_FOR_OPPDATER_SPORSMAL', 'SPORSMAL_FINNES_IKKE_I_SOKNAD', ].includes(data.reason)) {
+            if (['FEIL_STATUS_FOR_OPPDATER_SPORSMAL', 'SPORSMAL_FINNES_IKKE_I_SOKNAD'].includes(data.reason)) {
                 setFeilState(true)
             } else {
                 logger.error(`Feilet ved kall OPPDATER_SPORSMAL med uhåndtert http kode ${response.status}.`, response)
@@ -138,20 +140,11 @@ const SporsmalForm = () => {
         } else {
             const spm = rsOppdaterSporsmalResponse.oppdatertSporsmal
             erSiste
-                ? (soknad!.sporsmal[spmIndex + 1] = new Sporsmal(
-                      spm,
-                      undefined as any,
-                      true
-                  ))
-                : (soknad!.sporsmal[spmIndex] = new Sporsmal(
-                      spm,
-                      undefined as any,
-                      true
-                  ))
+                ? (soknad!.sporsmal[spmIndex + 1] = new Sporsmal(spm, undefined as any, true))
+                : (soknad!.sporsmal[spmIndex] = new Sporsmal(spm, undefined as any, true))
         }
 
-        soknader[soknader.findIndex((sok) => sok.id === soknad!.id)] =
-            soknad as any
+        soknader[soknader.findIndex((sok) => sok.id === soknad!.id)] = soknad as any
         setSoknader(soknader)
         setValgtSoknad(soknad)
     }

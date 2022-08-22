@@ -5,9 +5,7 @@ import { logger } from './logger'
 const fetchMedRequestId = async (path: string, options: RequestInit) => {
     const uuid = uuidv4()
 
-    options.headers = options.headers
-        ? { ...options.headers, 'x-request-id': uuid }
-        : { 'x-request-id': uuid }
+    options.headers = options.headers ? { ...options.headers, 'x-request-id': uuid } : { 'x-request-id': uuid }
 
     try {
         return await fetch(path, options)
