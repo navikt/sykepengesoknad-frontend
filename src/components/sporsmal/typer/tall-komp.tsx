@@ -57,15 +57,21 @@ const TallKomp = ({ sporsmal }: SpmProps) => {
     const labels = () => {
         if (sporsmal.tag === TagTyper.HVOR_MANGE_TIMER_PER_UKE || sporsmal.tag === TagTyper.KM_HJEM_JOBB) {
             return ' tallKompLabel'
-        } if (manglerSporsmalsTekst) {
+        }
+        if (manglerSporsmalsTekst) {
             return ' tallKompDescription'
-        } return ''
+        }
+        return ''
     }
 
     return (
         <div className={className()}>
             <TextField
-                label={manglerSporsmalsTekst ? tekst(('soknad.undertekst.' + sporsmal.tag) as any) : sporsmal.sporsmalstekst}
+                label={
+                    manglerSporsmalsTekst
+                        ? tekst(('soknad.undertekst.' + sporsmal.tag) as any)
+                        : sporsmal.sporsmalstekst
+                }
                 description={manglerSporsmalsTekst ? '' : tekst(('soknad.undertekst.' + sporsmal.tag) as any)}
                 className={`${inputSize()} ${labels()}`}
                 type="number"
