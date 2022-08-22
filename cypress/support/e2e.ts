@@ -43,7 +43,6 @@ afterEach(() => {
                 'duplicate-id-aria': { enabled: false },
                 'duplicate-id': { enabled: false },
                 'label': { enabled: false },
-                'listitem': { enabled: false },
                 'color-contrast': { enabled: false },
                 'landmark-one-main': { enabled: false },        // Hvorfor godtar den ikke role="dialog" på modalene
                 'aria-input-field-name': { enabled: false },    // Kanskje vi må bytte ut LandvelgerComponent
