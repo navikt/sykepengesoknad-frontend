@@ -103,6 +103,7 @@ const NavAutosuggest = (props: NavAutosuggestProps) => {
                 onKeyPress: onKeypress,
                 onBlur: onBlur,
                 className: cn('skjemaelement__input input--l input--autocomplete'),
+                'aria-labelledby': 'landvelger-label',
             }}
         />
     )

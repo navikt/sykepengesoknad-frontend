@@ -19,7 +19,7 @@ const Land = ({ sporsmal }: SpmProps) => {
                         : 'skjemaelement'
                 }
             >
-                <Label as="h3" className="skjema__sporsmal">
+                <Label as="h3" className="skjema__sporsmal" id="landvelger-label">
                     {sporsmal.sporsmalstekst}
                 </Label>
 

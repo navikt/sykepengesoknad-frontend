@@ -35,12 +35,12 @@ const BehandlingsUke = ({ sporsmal, ukeidx, ukespm }: UkeProps) => {
         return 5 - dayjs(spm.max!).day()
     }
 
-    const radioKlikk = (value: string, index: number, name: string) => {
+    const radioKlikk = (value: string) => {
         setLokal(value)
         setValue(ukespm.id, value)
     }
 
-    const fjernKlikk = (ukespm: Sporsmal, index: number) => {
+    const fjernKlikk = (ukespm: Sporsmal) => {
         setLokal('')
         setValue(ukespm.id, '')
     }
@@ -61,7 +61,7 @@ const BehandlingsUke = ({ sporsmal, ukeidx, ukespm }: UkeProps) => {
                             type="radio"
                             id={ukespm.id + '_' + idx}
                             {...register(ukespm.id)}
-                            onChange={() => radioKlikk(dag.format('YYYY-MM-DD'), ukeidx, ukespm.id)}
+                            onChange={() => radioKlikk(dag.format('YYYY-MM-DD'))}
                             value={dag.format('YYYY-MM-DD')}
                             defaultChecked={checked}
                             className="radioknapp"
@@ -77,13 +77,13 @@ const BehandlingsUke = ({ sporsmal, ukeidx, ukespm }: UkeProps) => {
                     return <div className="kalenderdag tomdag" key={idx} />
                 })}
 
-            <div className="kalenderdag">
+            <div className={lokal ? 'kalenderdag' : 'kalenderdag skjul'}>
                 <input type="radio" name={ukespm.id} className="radioknapp" value="" id={ukespm.id + '_fjern'} />
                 <label
                     htmlFor={ukespm.id + '_fjern'}
                     id={ukespm.id + '_label'}
-                    className={lokal ? 'fjern' : 'fjern skjul'}
-                    onClick={() => fjernKlikk(ukespm, ukeidx)}
+                    className="fjern"
+                    onClick={() => fjernKlikk(ukespm)}
                     ref={fjernRef}
                 >
                     fjern
