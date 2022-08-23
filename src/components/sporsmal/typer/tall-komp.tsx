@@ -56,10 +56,10 @@ const TallKomp = ({ sporsmal }: SpmProps) => {
 
     const labels = () => {
         if (sporsmal.tag === TagTyper.HVOR_MANGE_TIMER_PER_UKE || sporsmal.tag === TagTyper.KM_HJEM_JOBB) {
-            return ' tallKompLabel'
+            return ' undersporsmalSpacing'
         }
         if (manglerSporsmalsTekst) {
-            return ' tallKompDescription'
+            return ' normalFont'
         }
         return ''
     }
