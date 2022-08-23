@@ -40,7 +40,6 @@ afterEach(() => {
                 'aria-progressbar-name': { enabled: false },
                 'nested-interactive': { enabled: false },
                 'aria-hidden-focus': { enabled: false },
-                'duplicate-id-aria': { enabled: false },
                 'label': { enabled: false },
                 'color-contrast': { enabled: false },
                 'landmark-one-main': { enabled: false },        // Hvorfor godtar den ikke role="dialog" på modalene

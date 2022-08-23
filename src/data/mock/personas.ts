@@ -26,7 +26,10 @@ export const opplaering: Persona = {
     sykmeldinger: sykmeldinger,
 }
 export const alleData: Persona = {
-    soknader: [...soknaderIntegration, ...soknaderOpplaering, ...soknaderReisetilskudd],
+    // Alle søknader filtrert på unik id
+    soknader: [...soknaderIntegration, ...soknaderOpplaering, ...soknaderReisetilskudd].filter(
+        (value, index, array) => array.findIndex((a) => a.id === value.id) === index
+    ),
     sykmeldinger: sykmeldinger,
 }
 
