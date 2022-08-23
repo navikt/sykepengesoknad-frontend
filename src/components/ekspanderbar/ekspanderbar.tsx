@@ -29,7 +29,7 @@ export const Ekspanderbar = ({ title, children, amplitudeProps, sporsmalId, logV
 
     return (
         <Accordion>
-            <Accordion.Item className="ekspanderbar" renderContentWhenClosed={true}>
+            <Accordion.Item className="ekspanderbar">
                 <Accordion.Header
                     type="button"
                     onClick={() => {

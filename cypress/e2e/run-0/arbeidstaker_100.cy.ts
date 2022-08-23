@@ -85,12 +85,10 @@ describe('Tester arbeidstakersøknad', () => {
 
         cy.contains('Hva mener vi med permisjon')
         cy.contains('Med permisjon mener vi dager du var borte fra jobben av andre grunner enn sykdom').should(
-            'not.be.visible'
+            'not.exist'
         )
         cy.contains('Hva mener vi med permisjon').click()
-        cy.contains('Med permisjon mener vi dager du var borte fra jobben av andre grunner enn sykdom').should(
-            'be.visible'
-        )
+        cy.contains('Med permisjon mener vi dager du var borte fra jobben av andre grunner enn sykdom').should('exist')
 
         // Test spørsmål
         cy.get('.inputPanelGruppe__inner label:first-child > input[value=JA]').click({ force: true })
