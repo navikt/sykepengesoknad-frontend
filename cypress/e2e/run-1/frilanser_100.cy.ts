@@ -64,13 +64,13 @@ describe('Tester frilansersøknad', () => {
         cy.contains(
             'Hvor mange timer i uken jobber du vanligvis når du er frisk? Varierer det, kan du oppgi gjennomsnittet.'
         )
-        cy.get('.undersporsmal .skjemaelement__input#687432').focus().type('12')
+        cy.get('.undersporsmal .navds-text-field__input#687432').focus().type('12')
 
         // Underspørsmål 2
         cy.contains('Hvor mye jobbet du tilsammen 1. - 24. april 2020?')
         // Svarer prosent
         cy.get('.undersporsmal .skjemaelement__input.radioknapp[value=Prosent]').focus().click({ force: true })
-        cy.get('.undersporsmal .skjemaelement__input#687435').focus().type('21')
+        cy.get('.undersporsmal .navds-text-field__input#687435').focus().type('21')
 
         cy.contains('Gå videre').click()
     })

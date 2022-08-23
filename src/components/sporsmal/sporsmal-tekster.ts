@@ -192,6 +192,13 @@ const SporsmalTekster = {
     'soknad.presisering.INNTEKTSKILDE_FOSTERHJEM_ER_DU_SYKMELDT':
         'Legen må sende inn én sykmelding for hver arbeidssituasjon du er sykmeldt fra, og du må søke om sykepenger for hver av dem.',
 
+    'soknad.undertekst.OFFENTLIG_TRANSPORT_BELOP': 'Oppgi i kroner',
+    'soknad.undertekst.BIL_BOMPENGER_BELOP': 'Oppgi i kroner',
+    'soknad.undertekst.KM_HJEM_JOBB': 'Oppgi i kilometer',
+    'soknad.undertekst.HVOR_MANGE_TIMER_PER_UKE': 'Oppgi timer per uke',
+    'soknad.undertekst.HVOR_MYE_TIMER_VERDI': 'Oppgi timer totalt',
+    'soknad.undertekst.HVOR_MYE_PROSENT_VERDI': 'Oppgi prosent',
+
     'reisetilskudd.datoer.egen-bil.kalender.hjelp': ' Velg dager fra %FRA% - %TIL%',
     'sporsmal.egen-bil.kalender.ukedager': 'Velg alle ukedager',
     'sporsmal.egen-bil.kalender.fjern': 'Fjern valgte',

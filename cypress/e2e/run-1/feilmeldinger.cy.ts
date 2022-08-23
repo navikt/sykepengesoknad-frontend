@@ -22,6 +22,23 @@ describe('Tester feilmeldinger', () => {
         cy.focused().should('have.attr', 'name', focusTarget)
     }
 
+    //Denne erstatter feilmeldingHandtering funksjonen ettersom vi bytter ut komponentene med de fra designsystemet
+    function feilmeldingHandteringForNyeKomponenter(
+        lokalFeilmelding: string,
+        globalFeilmelding: string,
+        focusTarget: string
+    ) {
+        cy.get('.navds-form-field__error').should('exist')
+        cy.get('.skjemaelement__feilmelding').contains(lokalFeilmelding)
+        cy.get('.feiloppsummering')
+            .should('exist')
+            .within(() => {
+                cy.contains('Det er 1 feil i skjemaet')
+                cy.contains(globalFeilmelding).click()
+            })
+        cy.focused().should('have.attr', 'name', focusTarget)
+    }
+
     function ingenFeilmeldinger() {
         cy.get('.skjemaelement__input--harFeil').should('not.exist')
         cy.get('.feiloppsummering').should('not.exist')
@@ -179,7 +196,7 @@ describe('Tester feilmeldinger', () => {
         cy.get(`input[name=${arbeidstakerGradert.sporsmal[6].undersporsmal[0].id}]`).type('37.5')
         gaVidere()
 
-        feilmeldingHandtering(
+        feilmeldingHandteringForNyeKomponenter(
             'Du må oppgi en verdi',
             'Du må svare på hvor mye du jobbet totalt',
             arbeidstakerGradert.sporsmal[6].undersporsmal[1].undersporsmal[1].undersporsmal[0].id
@@ -189,7 +206,7 @@ describe('Tester feilmeldinger', () => {
     it('TALL mindre enn min', () => {
         cy.focused().type('-10')
         gaVidere()
-        feilmeldingHandtering(
+        feilmeldingHandteringForNyeKomponenter(
             'Må være minimum 51',
             'Vennligst fyll ut et tall mellom 51 og 99',
             arbeidstakerGradert.sporsmal[6].undersporsmal[1].undersporsmal[1].undersporsmal[0].id
@@ -199,7 +216,7 @@ describe('Tester feilmeldinger', () => {
     it('TALL større enn max', () => {
         cy.focused().clear().type('1000')
         gaVidere()
-        feilmeldingHandtering(
+        feilmeldingHandteringForNyeKomponenter(
             'Må være maksimum 99',
             'Vennligst fyll ut et tall mellom 51 og 99',
             arbeidstakerGradert.sporsmal[6].undersporsmal[1].undersporsmal[1].undersporsmal[0].id
@@ -211,14 +228,14 @@ describe('Tester feilmeldinger', () => {
             force: true,
         })
         gaVidere()
-        feilmeldingHandtering(
+        feilmeldingHandteringForNyeKomponenter(
             'Du må oppgi en verdi',
             'Du må svare på hvor mye du jobbet totalt',
             arbeidstakerGradert.sporsmal[6].undersporsmal[1].undersporsmal[0].undersporsmal[0].id
         )
         cy.focused().type('1')
         gaVidere()
-        feilmeldingHandtering(
+        feilmeldingHandteringForNyeKomponenter(
             'Timene utgjør mindre enn 50 %.',
             'Antall timer du skrev inn, betyr at du har jobbet 0 % av det du gjør når du er frisk. Du må enten svare nei på øverste spørsmålet eller endre antall timer totalt.',
             arbeidstakerGradert.sporsmal[6].undersporsmal[1].undersporsmal[0].undersporsmal[0].id

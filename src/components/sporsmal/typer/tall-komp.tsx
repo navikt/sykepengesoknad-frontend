@@ -1,5 +1,5 @@
-import { BodyShort } from '@navikt/ds-react'
-import React, { useRef } from 'react'
+import { BodyShort, TextField } from '@navikt/ds-react'
+import React from 'react'
 import { useFormContext } from 'react-hook-form'
 
 import { TagTyper } from '../../../types/enums'
@@ -9,24 +9,14 @@ import { getLedetekst, tekst } from '../../../utils/tekster'
 import Vis from '../../vis'
 import { SpmProps } from '../sporsmal-form/sporsmal-form'
 import { hentFeilmelding } from '../sporsmal-utils'
-import SporsmalstekstH3 from '../sporsmalstekst/sporsmalstekstH3'
-import UndersporsmalListe from '../undersporsmal/undersporsmal-liste'
 
 const TallKomp = ({ sporsmal }: SpmProps) => {
     const {
         register,
         formState: { errors },
-        watch,
-        getValues,
     } = useFormContext()
 
-    let watchTall = watch(sporsmal.id)
-    if (watchTall === undefined) {
-        watchTall = getValues(sporsmal.id)
-    }
-
     const feilmelding = hentFeilmelding(sporsmal, errors[sporsmal.id])
-    const undersporsmal = useRef<HTMLDivElement>(null)
     const { validerGrad, periode, hovedSporsmal } = validerArbeidsgrad(sporsmal)
 
     const valider = () => {
@@ -62,47 +52,56 @@ const TallKomp = ({ sporsmal }: SpmProps) => {
         }
     }
 
+    const manglerSporsmalsTekst = sporsmal.sporsmalstekst === ''
+
+    const labels = () => {
+        if (sporsmal.tag === TagTyper.HVOR_MANGE_TIMER_PER_UKE || sporsmal.tag === TagTyper.KM_HJEM_JOBB) {
+            return ' undersporsmalSpacing'
+        }
+        if (manglerSporsmalsTekst) {
+            return ' normalFont'
+        }
+        return ''
+    }
+
     return (
         <div className={className()}>
-            <SporsmalstekstH3 sporsmal={sporsmal} />
-
-            <div className="medEnhet">
-                <input
-                    type="number"
-                    id={sporsmal.id}
-                    {...register(sporsmal.id, {
-                        required: feilmelding.global,
-                        validate: () => valider(),
-                        min: {
-                            value: sporsmal.min!,
-                            message: sporsmal.max
-                                ? getLedetekst(tekst('soknad.feilmelding.TALL_MIN_MAX'), {
-                                      '%MIN%': sporsmal.min,
-                                      '%MAX%': sporsmal.max,
-                                  })
-                                : getLedetekst(tekst('soknad.feilmelding.TALL_MIN'), { '%MIN%': sporsmal.min }),
-                        },
-                        max: {
-                            value: sporsmal.max!,
-                            message: getLedetekst(tekst('soknad.feilmelding.TALL_MIN_MAX'), {
-                                '%MIN%': sporsmal.min,
-                                '%MAX%': sporsmal.max,
-                            }),
-                        },
-                    })}
-                    min={sporsmal.min!}
-                    max={sporsmal.max!}
-                    className={
-                        'skjemaelement__input' +
-                        inputSize() +
-                        (errors[sporsmal.id] ? ' skjemaelement__input--harFeil' : '')
-                    }
-                    autoComplete="off"
-                />
-                <label className="medEnhet__enhet" htmlFor={sporsmal.id}>
-                    {sporsmal.undertekst}
-                </label>
-            </div>
+            <TextField
+                label={
+                    manglerSporsmalsTekst
+                        ? tekst(('soknad.undertekst.' + sporsmal.tag) as any)
+                        : sporsmal.sporsmalstekst
+                }
+                description={manglerSporsmalsTekst ? '' : tekst(('soknad.undertekst.' + sporsmal.tag) as any)}
+                className={`${inputSize()} ${labels()}`}
+                type="number"
+                id={sporsmal.id}
+                min={sporsmal.min!}
+                max={sporsmal.max!}
+                error={errors[sporsmal.id] !== undefined}
+                autoComplete="off"
+                inputMode="numeric"
+                {...register(sporsmal.id, {
+                    required: feilmelding.global,
+                    validate: () => valider(),
+                    min: {
+                        value: sporsmal.min!,
+                        message: sporsmal.max
+                            ? getLedetekst(tekst('soknad.feilmelding.TALL_MIN_MAX'), {
+                                  '%MIN%': sporsmal.min,
+                                  '%MAX%': sporsmal.max,
+                              })
+                            : getLedetekst(tekst('soknad.feilmelding.TALL_MIN'), { '%MIN%': sporsmal.min }),
+                    },
+                    max: {
+                        value: sporsmal.max!,
+                        message: getLedetekst(tekst('soknad.feilmelding.TALL_MIN_MAX'), {
+                            '%MIN%': sporsmal.min,
+                            '%MAX%': sporsmal.max,
+                        }),
+                    },
+                })}
+            />
 
             <div role="alert" aria-live="assertive">
                 <Vis
@@ -133,10 +132,6 @@ const TallKomp = ({ sporsmal }: SpmProps) => {
                         </>
                     )}
                 />
-            </div>
-
-            <div aria-live="assertive" className="undersporsmal" ref={undersporsmal}>
-                <Vis hvis={watchTall} render={() => <UndersporsmalListe oversporsmal={sporsmal} />} />
             </div>
         </div>
     )
