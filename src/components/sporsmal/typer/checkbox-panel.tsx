@@ -32,8 +32,6 @@ const CheckboxInput = ({ sporsmal }: SpmProps) => {
                     render={() => <Label as="span">{tekst('sporsmal.riktige-opplysninger-tittel')}</Label>}
                 />
             </ConfirmationPanel>
-
-            <FeilLokal sporsmal={spm} />
         </>
     )
 }
