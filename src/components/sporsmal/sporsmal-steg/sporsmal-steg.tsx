@@ -46,6 +46,7 @@ const SporsmalSteg = () => {
             aria-valuenow={aktivtSteg}
             aria-valuemin={1}
             aria-valuemax={steg.length}
+            aria-label="Søknadssteg"
         >
             <div className="stegindikator stegindikator--kompakt">
                 <ol className="stegindikator__liste">
