@@ -227,6 +227,8 @@ describe('Tester feilmeldinger', () => {
         cy.get(`input[id=${arbeidstakerGradert.sporsmal[6].undersporsmal[1].undersporsmal[0].id}]`).click({
             force: true,
         })
+        cy.focused().type('1')
+        cy.get('.navds-form-field__error').should('not.exist')
         gaVidere()
         feilmeldingHandteringForNyeKomponenter(
             'Du må oppgi en verdi',

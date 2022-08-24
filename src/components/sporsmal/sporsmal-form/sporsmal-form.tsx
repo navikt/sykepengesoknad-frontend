@@ -50,7 +50,7 @@ const SporsmalForm = () => {
     const history = useHistory()
     const spmIndex = parseInt(stegId) - 1
     const methods = useForm({
-        mode: 'onChange',
+        mode: 'onSubmit',
         reValidateMode: 'onChange',
         shouldUnregister: true,
     })
@@ -61,10 +61,16 @@ const SporsmalForm = () => {
     const rsMottakerResponseFetch = useFetch<RSMottakerResponse>()
 
     useEffect(() => {
-        const formState = hentFormState(sporsmal)
         methods.reset(hentFormState(sporsmal), { keepValues: false })
         // eslint-disable-next-line
     }, [sporsmal])
+
+    useEffect(() => {
+        if (methods.formState.isSubmitSuccessful) {
+            methods.reset(hentFormState(sporsmal), { keepValues: false })
+        }
+        // eslint-disable-next-line
+    }, [methods.formState.isSubmitSuccessful])
 
     useEffect(() => {
         function erSiste() {
