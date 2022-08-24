@@ -228,7 +228,8 @@ describe('Tester feilmeldinger', () => {
             force: true,
         })
         cy.focused().type('1')
-        cy.get('.navds-form-field__error').should('not.exist')
+        cy.get('.skjemaelement__input--harFeil').should('not.exist')
+        cy.get('.feiloppsummering').should('not.exist')
         gaVidere()
         feilmeldingHandteringForNyeKomponenter(
             'Du må oppgi en verdi',
