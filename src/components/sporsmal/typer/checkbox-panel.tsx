@@ -1,6 +1,6 @@
 import { ConfirmationPanel, Label } from '@navikt/ds-react'
 import React from 'react'
-import { useFormContext, useWatch } from 'react-hook-form'
+import { Controller } from 'react-hook-form'
 
 import { TagTyper } from '../../../types/enums'
 import { tekst } from '../../../utils/tekster'
@@ -11,31 +11,29 @@ import { hentFeilmelding } from '../sporsmal-utils'
 const CheckboxInput = ({ sporsmal }: SpmProps) => {
     const spm = sporsmal.tag === TagTyper.BEKREFT_OPPLYSNINGER_UTLAND_INFO ? sporsmal.undersporsmal[0] : sporsmal
 
-    const {
-        register,
-        formState: { errors },
-    } = useFormContext()
-
     const feilmelding = hentFeilmelding(spm)
-    const watchCheckbox = useWatch({ name: spm.id })
-
     return (
         <>
-            <ConfirmationPanel
-                className={'bekreftCheckboksPanel'}
-                label={spm.sporsmalstekst}
-                id={spm.id}
-                {...register(spm.id, {
-                    required: feilmelding.global,
-                })}
-                error={errors[spm.id]?.message}
-                checked={watchCheckbox}
-            >
-                <Vis
-                    hvis={sporsmal.tag === TagTyper.ANSVARSERKLARING}
-                    render={() => <Label as="span">{tekst('sporsmal.riktige-opplysninger-tittel')}</Label>}
-                />
-            </ConfirmationPanel>
+            <Controller
+                defaultValue={false}
+                name={spm.id}
+                rules={{ required: feilmelding.global }}
+                render={({ field, fieldState }) => (
+                    <ConfirmationPanel
+                        {...field}
+                        className={'bekreftCheckboksPanel'}
+                        checked={field.value}
+                        id={field.name}
+                        label={spm.sporsmalstekst}
+                        error={fieldState.error?.message}
+                    >
+                        <Vis
+                            hvis={sporsmal.tag === TagTyper.ANSVARSERKLARING}
+                            render={() => <Label as="span">{tekst('sporsmal.riktige-opplysninger-tittel')}</Label>}
+                        />
+                    </ConfirmationPanel>
+                )}
+            />
         </>
     )
 }
