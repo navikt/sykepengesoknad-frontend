@@ -11,7 +11,10 @@ import { hentFeilmelding } from '../sporsmal-utils'
 const CheckboxInput = ({ sporsmal }: SpmProps) => {
     const spm = sporsmal.tag === TagTyper.BEKREFT_OPPLYSNINGER_UTLAND_INFO ? sporsmal.undersporsmal[0] : sporsmal
 
-    const { register } = useFormContext()
+    const {
+        register,
+        formState: { errors },
+    } = useFormContext()
 
     const feilmelding = hentFeilmelding(spm)
     const watchCheckbox = useWatch({ name: spm.id })
@@ -25,6 +28,7 @@ const CheckboxInput = ({ sporsmal }: SpmProps) => {
                 {...register(spm.id, {
                     required: feilmelding.global,
                 })}
+                error={errors[spm.id]?.message}
                 checked={watchCheckbox}
             >
                 <Vis

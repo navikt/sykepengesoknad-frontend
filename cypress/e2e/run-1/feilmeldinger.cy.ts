@@ -49,7 +49,7 @@ describe('Tester feilmeldinger', () => {
         gaVidere()
 
         cy.get('.navds-confirmation-panel__inner').should('exist')
-        cy.get('.skjemaelement__feilmelding').contains(
+        cy.get('.navds-error-message').contains(
             'Du må bekrefte at du har lest og forstått informasjonen før du kan gå videre'
         )
         cy.get('.feiloppsummering')
