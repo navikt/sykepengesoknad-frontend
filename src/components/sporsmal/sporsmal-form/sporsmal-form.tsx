@@ -200,7 +200,7 @@ const SporsmalForm = () => {
         }
 
         if (!response.ok) {
-            logger.error(`Feil ved sending av søknad ${valgtSoknad.id} med http kode ${response.status}`, response)
+            logger.error(`Feilet ved sending av søknad ${valgtSoknad.id} med http kode ${response.status}`, response)
             restFeilet = true
             return
         }
