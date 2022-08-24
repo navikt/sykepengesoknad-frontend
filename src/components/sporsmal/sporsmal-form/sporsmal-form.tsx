@@ -179,48 +179,52 @@ const SporsmalForm = () => {
                 return
             }
         }
-        const res = await fetch(
-            `/syk/sykepengesoknad/api/sykepengesoknad-backend/api/v2/soknader/${valgtSoknad!.id}/send`,
-            {
-                method: 'POST',
-                credentials: 'include',
-                headers: { 'Content-Type': 'application/json' },
-            }
-        )
 
+        let response
         try {
-            const httpCode = res.status
-            if (redirectTilLoginHvis401(res)) {
-                return
-            } else if ([200, 201, 203, 206].includes(httpCode)) {
-                if (mottaker === RSMottaker.ARBEIDSGIVER) {
-                    valgtSoknad.sendtTilArbeidsgiverDato = new Date()
+            response = await fetchMedRequestId(
+                `/syk/sykepengesoknad/api/sykepengesoknad-backend/api/v2/soknader/${valgtSoknad!.id}/send`,
+                {
+                    method: 'POST',
+                    credentials: 'include',
+                    headers: { 'Content-Type': 'application/json' },
                 }
-                if (mottaker === RSMottaker.NAV) {
-                    valgtSoknad.sendtTilNAVDato = new Date()
-                }
-                if (mottaker === RSMottaker.ARBEIDSGIVER_OG_NAV) {
-                    valgtSoknad.sendtTilArbeidsgiverDato = new Date()
-                    valgtSoknad.sendtTilNAVDato = new Date()
-                }
-
-                valgtSoknad.status = RSSoknadstatus.SENDT
-                setValgtSoknad(valgtSoknad)
-                soknader[soknader.findIndex((sok) => sok.id === valgtSoknad.id)] = valgtSoknad
-                if (valgtSoknad.korrigerer !== null) {
-                    soknader.find((sok) => sok.id === valgtSoknad.korrigerer)!.status = RSSoknadstatus.KORRIGERT
-                }
-                setSoknader(soknader)
-
-                history.push(`/kvittering/${valgtSoknad!.id}${window.location.search}`)
-            } else {
-                logger.error('Feil ved sending av søknad', res)
-                restFeilet = true
-            }
+            )
         } catch (e) {
-            logger.error('Feil ved sending av søknad', e)
             restFeilet = true
+            return
         }
+
+        if (redirectTilLoginHvis401(response)) {
+            return
+        }
+
+        if (!response.ok) {
+            logger.error(`Feil ved sending av søknad ${valgtSoknad.id} med http kode ${response.status}`, response)
+            restFeilet = true
+            return
+        }
+
+        if (mottaker === RSMottaker.ARBEIDSGIVER) {
+            valgtSoknad.sendtTilArbeidsgiverDato = new Date()
+        }
+        if (mottaker === RSMottaker.NAV) {
+            valgtSoknad.sendtTilNAVDato = new Date()
+        }
+        if (mottaker === RSMottaker.ARBEIDSGIVER_OG_NAV) {
+            valgtSoknad.sendtTilArbeidsgiverDato = new Date()
+            valgtSoknad.sendtTilNAVDato = new Date()
+        }
+
+        valgtSoknad.status = RSSoknadstatus.SENDT
+        setValgtSoknad(valgtSoknad)
+        soknader[soknader.findIndex((sok) => sok.id === valgtSoknad.id)] = valgtSoknad
+        if (valgtSoknad.korrigerer !== null) {
+            soknader.find((sok) => sok.id === valgtSoknad.korrigerer)!.status = RSSoknadstatus.KORRIGERT
+        }
+        setSoknader(soknader)
+
+        history.push(`/kvittering/${valgtSoknad!.id}${window.location.search}`)
     }
 
     const preSubmit = () => {
