@@ -37,9 +37,7 @@ afterEach(() => {
                 // TODO: Se på disse :point_down:
                 'aria-allowed-attr': { enabled: false },
                 'heading-order': { enabled: false },
-                'aria-progressbar-name': { enabled: false },
-                'nested-interactive': { enabled: false },
-                'aria-hidden-focus': { enabled: false },
+                'nested-interactive': { enabled: false },       // Skjermleser klarer å lese opp både progress og navigering mellom stegene
                 'color-contrast': { enabled: false },
                 'landmark-one-main': { enabled: false },        // Hvorfor godtar den ikke role="dialog" på modalene
                 'aria-input-field-name': { enabled: false },    // Kanskje vi må bytte ut LandvelgerComponent
