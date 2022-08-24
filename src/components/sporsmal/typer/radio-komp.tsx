@@ -16,7 +16,6 @@ import FeilLokal from '../../feil/feil-lokal'
 import Vis from '../../vis'
 import { SpmProps } from '../sporsmal-form/sporsmal-form'
 import { hentFeilmelding } from '../sporsmal-utils'
-import SporsmalstekstH3 from '../sporsmalstekst/sporsmalstekstH3'
 import UndersporsmalListe from '../undersporsmal/undersporsmal-liste'
 
 const RadioKomp = ({ sporsmal }: SpmProps) => {
@@ -46,7 +45,9 @@ const RadioKomp = ({ sporsmal }: SpmProps) => {
     const lavereProsentHjelpTittel = tekst('ekspanderbarhjelp.prosenten_lavere_enn_forventet_arbeidstaker.tittel')
     return (
         <>
-            <SporsmalstekstH3 sporsmal={sporsmal} />
+            <Label as="h3" className="skjema__sporsmal">
+                {sporsmal.sporsmalstekst}
+            </Label>
             <Vis
                 hvis={sporsmal.undertekst && sporsmal.svartype == RSSvartype.RADIO_GRUPPE_TIMER_PROSENT}
                 render={() => <BodyLong spacing> {sporsmal.undertekst}</BodyLong>}

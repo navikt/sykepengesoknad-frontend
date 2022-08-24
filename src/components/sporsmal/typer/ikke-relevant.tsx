@@ -11,7 +11,7 @@ const IkkeRelevant = ({ sporsmal }: SpmProps) => {
             hvis={sporsmal.sporsmalstekst}
             render={() => (
                 <div className="til_slutt_seksjon">
-                    <Label as="h3" className="skjema__sporsmal">
+                    <Label as="h2" className="skjema__sporsmal">
                         {sporsmal.sporsmalstekst}
                     </Label>
                     <BodyLong as="div" className="redaksjonelt-innhold">

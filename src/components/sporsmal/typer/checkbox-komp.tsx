@@ -1,4 +1,4 @@
-import { BodyShort } from '@navikt/ds-react'
+import { BodyShort, Label } from '@navikt/ds-react'
 import React from 'react'
 import { FieldValues, useFormContext } from 'react-hook-form'
 
@@ -8,7 +8,6 @@ import FeilLokal from '../../feil/feil-lokal'
 import Vis from '../../vis'
 import { SpmProps } from '../sporsmal-form/sporsmal-form'
 import { hentFeilmelding } from '../sporsmal-utils'
-import SporsmalstekstH3 from '../sporsmalstekst/sporsmalstekstH3'
 import UndersporsmalListe from '../undersporsmal/undersporsmal-liste'
 
 const CheckboxKomp = ({ sporsmal }: SpmProps) => {
@@ -18,7 +17,9 @@ const CheckboxKomp = ({ sporsmal }: SpmProps) => {
 
     return (
         <>
-            <SporsmalstekstH3 sporsmal={sporsmal} />
+            <Label as="h3" className="skjema__sporsmal">
+                {sporsmal.sporsmalstekst}
+            </Label>
 
             <div
                 className={
