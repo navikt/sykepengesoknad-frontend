@@ -5,6 +5,7 @@ import { redirectTilLoginHvis401 } from '../../data/rest/utils'
 import { RSSoknadstatus } from '../../types/rs-types/rs-soknadstatus'
 import { RSSoknadstype } from '../../types/rs-types/rs-soknadstype'
 import { Soknad } from '../../types/types'
+import fetchMedRequestId from '../../utils/fetch'
 import { logger } from '../../utils/logger'
 import { tekst } from '../../utils/tekster'
 import { urlTilSoknad } from '../soknad/soknad-link'
@@ -26,38 +27,47 @@ export async function avbrytSoknad({
     history,
     setFeilmeldingTekst,
 }: AvbrytSoknadReq) {
-    const res = await fetch(
-        `/syk/sykepengesoknad/api/sykepengesoknad-backend/api/v2/soknader/${valgtSoknad!.id}/avbryt`,
-        {
-            method: 'POST',
-            credentials: 'include',
-        }
-    )
-    const status = res.status
-    if (redirectTilLoginHvis401(res)) {
-        return
-    } else if (status === 200) {
-        if (
-            valgtSoknad.soknadstype === RSSoknadstype.OPPHOLD_UTLAND ||
-            valgtSoknad.status === RSSoknadstatus.UTKAST_TIL_KORRIGERING
-        ) {
-            setSoknader(soknader.filter((s) => s.id !== valgtSoknad.id))
-            setValgtSoknad(undefined)
-            history.push('/')
-        } else {
-            const nySoknad = {
-                ...valgtSoknad,
-                status: RSSoknadstatus.AVBRUTT,
-                avbruttDato: new Date(),
+    let response: Response
+    try {
+        response = await fetchMedRequestId(
+            `/syk/sykepengesoknad/api/sykepengesoknad-backend/api/v2/soknader/${valgtSoknad!.id}/avbryt`,
+            {
+                method: 'POST',
+                credentials: 'include',
             }
-            setSoknader(soknader.map((s) => (s.id === valgtSoknad!.id ? nySoknad : s)) as any)
-            setValgtSoknad(nySoknad)
-            history.push(urlTilSoknad(nySoknad))
-        }
-
-        setFeilmeldingTekst('')
-    } else {
-        logger.error('Feil ved AVBYTING av søknad', res)
+        )
+    } catch (e) {
         setFeilmeldingTekst(tekst('avbryt.feilet'))
+        return
     }
+
+    if (redirectTilLoginHvis401(response)) {
+        return
+    }
+
+    if (!response.ok) {
+        logger.error(`Feilet ved avbryting av soknad ${valgtSoknad.id} med http kode ${response.status}`)
+        // TODO: Vis feilmeldingen til bruker.
+        setFeilmeldingTekst(tekst('avbryt.feilet'))
+        return
+    }
+    if (
+        valgtSoknad.soknadstype === RSSoknadstype.OPPHOLD_UTLAND ||
+        valgtSoknad.status === RSSoknadstatus.UTKAST_TIL_KORRIGERING
+    ) {
+        setSoknader(soknader.filter((s) => s.id !== valgtSoknad.id))
+        setValgtSoknad(undefined)
+        history.push('/')
+    } else {
+        const nySoknad = {
+            ...valgtSoknad,
+            status: RSSoknadstatus.AVBRUTT,
+            avbruttDato: new Date(),
+        }
+        setSoknader(soknader.map((s) => (s.id === valgtSoknad!.id ? nySoknad : s)) as any)
+        setValgtSoknad(nySoknad)
+        history.push(urlTilSoknad(nySoknad))
+    }
+
+    setFeilmeldingTekst('')
 }
