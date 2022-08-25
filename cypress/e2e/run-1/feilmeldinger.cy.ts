@@ -189,12 +189,14 @@ describe('Tester feilmeldinger', () => {
         ingenFeilmeldinger()
     })
 
-    it('TALL validering på onSubmit og onChange', function() {
+    it('TALL validering på onSubmit og onChange', function () {
         gaTilSoknad(arbeidstakerGradert, '7')
         cy.get('input[value=JA]').click({ force: true })
         cy.get(`input[name=${arbeidstakerGradert.sporsmal[6].undersporsmal[0].id}]`).type('37.5')
         cy.get('.undersporsmal .skjemaelement__input.radioknapp[value=Timer]').focus().click({ force: true })
-        cy.get(`input[name=${arbeidstakerGradert.sporsmal[6].undersporsmal[1].undersporsmal[0].undersporsmal[0].id}]`).type('1')
+        cy.get(
+            `input[name=${arbeidstakerGradert.sporsmal[6].undersporsmal[1].undersporsmal[0].undersporsmal[0].id}]`
+        ).type('1')
         cy.get('.skjemaelement__feilmelding').should('not.exist')
         cy.get('.feiloppsummering').should('not.exist')
         gaVidere()

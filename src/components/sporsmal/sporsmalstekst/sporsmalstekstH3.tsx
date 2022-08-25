@@ -9,7 +9,10 @@ const SporsmalstekstH3 = ({ sporsmal }: SpmProps) => {
         <Vis
             hvis={sporsmal.sporsmalstekst}
             render={() => (
-                <Label as="h3" className={sporsmal.undertekst? 'skjema__sporsmal_med_undersporsmal' : 'skjema__sporsmal'}>
+                <Label
+                    as="h3"
+                    className={sporsmal.undertekst ? 'skjema__sporsmal_med_undersporsmal' : 'skjema__sporsmal'}
+                >
                     {sporsmal.sporsmalstekst}
                 </Label>
             )}
