@@ -48,24 +48,36 @@ const Ettersending = ({ gjelder, setRerendrekvittering }: EttersendingProps) => 
     }
 
     const ettersendNav = async () => {
-        const res = await fetch(
-            `/syk/sykepengesoknad/api/sykepengesoknad-backend/api/v2/soknader/${valgtSoknad!.id}/ettersendTilNav`,
-            {
-                method: 'POST',
-                credentials: 'include',
-                headers: { 'Content-Type': 'application/json' },
-            }
-        )
-
-        if (redirectTilLoginHvis401(res)) {
-            return
-        } else if (res.ok) {
-            valgtSoknad!.sendtTilNAVDato = new Date()
-            oppdaterSoknad()
-        } else {
-            logger.error('Feil ved ettersending til NAV', res)
+        let response
+        try {
+            response = await fetchMedRequestId(
+                `/syk/sykepengesoknad/api/sykepengesoknad-backend/api/v2/soknader/${valgtSoknad!.id}/ettersendTilNav`,
+                {
+                    method: 'POST',
+                    credentials: 'include',
+                    headers: { 'Content-Type': 'application/json' },
+                }
+            )
+        } catch (e) {
             setFeilmeldingTekst(tekst('kvittering.ettersending.feilet'))
+            return
         }
+
+        if (redirectTilLoginHvis401(response)) {
+            return
+        }
+
+        if (!response.ok) {
+            logger.error(
+                `Feil ved ettersending av søknad ${valgtSoknad!.id} til NAV med feilkode ${response.status}.`,
+                response
+            )
+            setFeilmeldingTekst(tekst('kvittering.ettersending.feilet'))
+            return
+        }
+
+        valgtSoknad!.sendtTilNAVDato = new Date()
+        oppdaterSoknad()
     }
 
     const ettersendArbeidsgiver = async () => {
