@@ -63,9 +63,7 @@ const OpplastingForm = ({ sporsmal }: SpmProps) => {
             const opplastingResponse: OpplastetKvittering = await opplastingTilBucket()
             if (!opplastingResponse) return
 
-            const rsOppdaterSporsmalResponse: RSOppdaterSporsmalResponse = await lagreSvarISyfosoknad(
-                opplastingResponse
-            )
+            const rsOppdaterSporsmalResponse: RSOppdaterSporsmalResponse = await lagreSvar(opplastingResponse)
             if (!rsOppdaterSporsmalResponse) return
 
             valgtSoknad!.sporsmal[spmIndex] = new Sporsmal(rsOppdaterSporsmalResponse.oppdatertSporsmal, null, true)
@@ -111,7 +109,7 @@ const OpplastingForm = ({ sporsmal }: SpmProps) => {
         return result.json()
     }
 
-    const lagreSvarISyfosoknad = async (opplastingResponse: OpplastetKvittering) => {
+    const lagreSvar = async (opplastingResponse: OpplastetKvittering) => {
         const kvittering: Kvittering = {
             blobId: opplastingResponse.id,
             belop: methods.getValues('belop_input') * 100,
