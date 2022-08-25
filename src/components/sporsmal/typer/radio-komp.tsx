@@ -30,6 +30,7 @@ const RadioKomp = ({ sporsmal }: SpmProps) => {
     if (watchRadio === undefined) {
         watchRadio = getValues(sporsmal.id)
     }
+    // watchTimer er lagt inn for å rendre prosent-alerten
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
     // noinspection JSUnusedLocalSymbols
     const watchTimer =

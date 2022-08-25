@@ -189,6 +189,24 @@ describe('Tester feilmeldinger', () => {
         ingenFeilmeldinger()
     })
 
+    it('TALL validering på onSubmit og onChange', function () {
+        gaTilSoknad(arbeidstakerGradert, '7')
+        cy.get('input[value=JA]').click({ force: true })
+        cy.get(`input[name=${arbeidstakerGradert.sporsmal[6].undersporsmal[0].id}]`).type('37.5')
+        cy.get('.undersporsmal .skjemaelement__input.radioknapp[value=Timer]').focus().click({ force: true })
+        cy.get(
+            `input[name=${arbeidstakerGradert.sporsmal[6].undersporsmal[1].undersporsmal[0].undersporsmal[0].id}]`
+        ).type('1')
+        cy.get('.skjemaelement__feilmelding').should('not.exist')
+        cy.get('.feiloppsummering').should('not.exist')
+        gaVidere()
+        feilmeldingHandteringForNyeKomponenter(
+            'Timene utgjør mindre enn 50 %.',
+            'Antall timer du skrev inn, betyr at du har jobbet 0 % av det du gjør når du er frisk. Du må enten svare nei på øverste spørsmålet eller endre antall timer totalt.',
+            arbeidstakerGradert.sporsmal[6].undersporsmal[1].undersporsmal[0].undersporsmal[0].id
+        )
+    })
+
     it('TALL ingen valg', () => {
         gaTilSoknad(arbeidstakerGradert, '7')
         cy.get('input[value=JA]').click({ force: true })
