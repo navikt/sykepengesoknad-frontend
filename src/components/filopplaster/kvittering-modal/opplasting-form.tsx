@@ -11,6 +11,7 @@ import { useAppStore } from '../../../data/stores/app-store'
 import { RSOppdaterSporsmalResponse } from '../../../types/rs-types/rest-response/rs-oppdatersporsmalresponse'
 import { RSSvar } from '../../../types/rs-types/rs-svar'
 import { Kvittering, Sporsmal, UtgiftTyper } from '../../../types/types'
+import fetchMedRequestId from '../../../utils/fetch'
 import { formaterFilstørrelse, formattertFiltyper, maxFilstørrelse } from '../../../utils/fil-utils'
 import { logger } from '../../../utils/logger'
 import { getLedetekst, tekst } from '../../../utils/tekster'
@@ -80,25 +81,34 @@ const OpplastingForm = ({ sporsmal }: SpmProps) => {
     const opplastingTilBucket = async () => {
         const requestData = new FormData()
         requestData.append('file', valgtFil as Blob)
-        const bucketRes = await fetch('/syk/sykepengesoknad/api/flex-bucket-uploader/api/v2/opplasting', {
-            method: 'POST',
-            body: requestData,
-            credentials: 'include',
-        })
 
-        if (bucketRes.ok) {
-            return bucketRes.json()
-        } else if (redirectTilLoginHvis401(bucketRes)) {
-            return null
-        } else if (bucketRes.status === 413) {
-            logger.warn('Feil under opplasting fordi filen du prøvde å laste opp er for stor')
-            setFeilmeldingTekst('Filen du prøvde å laste opp er for stor')
-            return null
-        } else {
-            logger.warn('Feil under opplasting av kvittering')
+        let result
+        try {
+            result = await fetchMedRequestId('/syk/sykepengesoknad/api/flex-bucket-uploader/api/v2/opplasting', {
+                method: 'POST',
+                body: requestData,
+                credentials: 'include',
+            })
+        } catch (e) {
             setFeilmeldingTekst('Det skjedde en feil i baksystemene, prøv igjen senere')
-            return null
+            return
         }
+
+        if (redirectTilLoginHvis401(result)) {
+            return
+        }
+
+        if (!result.ok) {
+            logger.error(`Feil under opplasting av kvittering med feilkode ${result.status}.`)
+            if (result.status === 413) {
+                setFeilmeldingTekst('Filen du prøvde å laste opp er for stor')
+            } else {
+                setFeilmeldingTekst('Det skjedde en feil i baksystemene, prøv igjen senere')
+            }
+            return
+        }
+
+        return result.json()
     }
 
     const lagreSvarISyfosoknad = async (opplastingResponse: OpplastetKvittering) => {
