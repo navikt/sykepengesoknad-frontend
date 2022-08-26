@@ -32,9 +32,9 @@ afterEach(() => {
         // prettier-ignore
         rules: [
             { id: 'svg-img-alt', enabled: false },              // Trenger ikke alt tekst på bilder
-            // TODO: Se på disse :point_down:
+
             { id: 'nested-interactive', enabled: false },       // Skjermleser klarer å lese opp både progress og navigering mellom stegene
-            { id: 'color-contrast', enabled: false },
+            { id: 'color-contrast', enabled: false },           // Slår ut når det dukker opp flere feilmeldinger
             { id: 'landmark-one-main', enabled: false },        // Hvorfor godtar den ikke role="dialog" på modalene
             { id: 'aria-input-field-name', enabled: false },    // Kanskje vi må bytte ut LandvelgerComponent
 
