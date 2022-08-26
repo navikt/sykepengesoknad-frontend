@@ -118,27 +118,33 @@ const OpplastingForm = ({ sporsmal }: SpmProps) => {
         }
         const svar: RSSvar = { verdi: JSON.stringify(kvittering) }
 
-        const syfosoknadRes = await fetch(
-            `/syk/sykepengesoknad/api/sykepengesoknad-backend/api/v2/soknader/${valgtSoknad!.id}/sporsmal/${
-                sporsmal!.id
-            }/svar`,
-            {
-                method: 'POST',
-                body: JSON.stringify(svar),
-                credentials: 'include',
-                headers: { 'Content-Type': 'application/json' },
-            }
-        )
-
-        if (syfosoknadRes.ok) {
-            return syfosoknadRes.json()
-        } else if (redirectTilLoginHvis401(syfosoknadRes)) {
-            return null
-        } else {
-            logger.warn('Feil under lagring av kvittering svar i syfosoknad')
+        let result: Response
+        try {
+            result = await fetchMedRequestId(
+                `/syk/sykepengesoknad/api/sykepengesoknad-backend/api/v2/soknader/${valgtSoknad!.id}/sporsmal/${
+                    sporsmal!.id
+                }/svar`,
+                {
+                    method: 'POST',
+                    body: JSON.stringify(svar),
+                    credentials: 'include',
+                    headers: { 'Content-Type': 'application/json' },
+                }
+            )
+        } catch (e) {
             setFeilmeldingTekst('Det skjedde en feil i baksystemene, prøv igjen senere')
-            return null
+            return
         }
+
+        if (redirectTilLoginHvis401(result)) {
+            return
+        }
+
+        if (!result.ok) {
+            logger.error(`Feil under lagring av kvittering med feilkode ${result.status}.`)
+            setFeilmeldingTekst('Det skjedde en feil i baksystemene, prøv igjen senere')
+        }
+        return result.json()
     }
 
     if (!valgtSoknad) return null
