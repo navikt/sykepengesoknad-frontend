@@ -4,6 +4,8 @@ import React, { useEffect, useState } from 'react'
 
 import { Personalia } from '../../../types/types'
 import { isMockBackend, isProd } from '../../../utils/environment'
+import fetchMedRequestId from '../../../utils/fetch'
+import { logger } from '../../../utils/logger'
 import { tekst } from '../../../utils/tekster'
 import Vis from '../../vis'
 
@@ -11,24 +13,36 @@ const Kontonummer = () => {
     const [kontonummer, setKontonummer] = useState<string>()
 
     useEffect(() => {
-        hentKontonummer()
-    }, [])
+        const fetchData = async () => {
+            let response
+            try {
+                response = await fetchMedRequestId('https://www.nav.no/person/personopplysninger-api/personalia', {
+                    method: 'GET',
+                    credentials: 'include',
+                    headers: { 'Content-Type': 'application/json' },
+                })
+            } catch (e) {
+                return
+            }
 
-    async function hentKontonummer() {
-        if (isProd()) {
-            const res = await fetch('https://www.nav.no/person/personopplysninger-api/personalia', {
-                method: 'GET',
-                credentials: 'include',
-                headers: { 'Content-Type': 'application/json' },
-            })
-            const data: Personalia = await res.json()
+            let data: Personalia
+            try {
+                data = await response.json()
+            } catch (e) {
+                logger.error('Feilet ved parsing av JSON.', e)
+                return
+            }
             setKontonummer(data?.personalia?.kontonr)
+        }
+
+        if (isProd()) {
+            fetchData().catch((e: Error) => logger.error(e.message))
         }
 
         if (isMockBackend()) {
             setKontonummer('12332112332')
         }
-    }
+    }, [])
 
     const formatterKontonr = (kontonummer: string) =>
         kontonummer.length === 11 ? kontonummer.replace(/^(.{4})(.{2})(.*)$/, '$1 $2 $3') : kontonummer
