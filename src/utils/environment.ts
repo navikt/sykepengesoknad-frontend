@@ -46,8 +46,8 @@ export function sykefravaerUrl() {
     return publicRuntimeConfig.sykefravaerUrl
 }
 
-export function dittNavUrl() {
-    return publicRuntimeConfig.dittNavUrl
+export function minSideUrl() {
+    return publicRuntimeConfig.minSideUrl
 }
 
 export function dinesakerUrl(): string {

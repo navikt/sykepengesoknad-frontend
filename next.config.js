@@ -109,7 +109,7 @@ module.exports = withPlugins(
             opplaering: process.env.OPPLAERING,
             sykefravaerUrl: process.env.SYKEFRAVAER_URL,
             sykmeldingerUrl: process.env.SYKMELDINGER_URL,
-            dittNavUrl: process.env.DITTNAV_URL,
+            minSideUrl: process.env.MINSIDE_URL,
             env: process.env.ENVIRONMENT,
             amplitudeEnabled: process.env.AMPLITUDE_ENABLED,
             environment: process.env.ENVIRONMENT,
