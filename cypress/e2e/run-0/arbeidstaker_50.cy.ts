@@ -133,10 +133,10 @@ describe('Tester arbeidstakersøknad - gradert 50%', () => {
         // 12 timer * (9 dager/5) * 0.5 (50% sykefraværsgrad) = 10.8 timer, så vi prøver litt lavere enn det
         cy.get('.undersporsmal .navds-text-field__input#687317').focus().type('10.7')
 
+        cy.contains('Gå videre').click()
+
         cy.contains('Er prosenten lavere enn du forventet?')
         cy.get('.undersporsmal .navds-alert--info').should('not.exist')
-
-        cy.contains('Gå videre').click()
 
         // Feilmelding
         cy.get('.skjemaelement__feilmelding').contains('Timene utgjør mindre enn 50 %.')

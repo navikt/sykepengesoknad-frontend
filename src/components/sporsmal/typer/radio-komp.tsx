@@ -16,7 +16,6 @@ import FeilLokal from '../../feil/feil-lokal'
 import Vis from '../../vis'
 import { SpmProps } from '../sporsmal-form/sporsmal-form'
 import { hentFeilmelding } from '../sporsmal-utils'
-import SporsmalstekstH3 from '../sporsmalstekst/sporsmalstekstH3'
 import UndersporsmalListe from '../undersporsmal/undersporsmal-liste'
 
 const RadioKomp = ({ sporsmal }: SpmProps) => {
@@ -30,13 +29,13 @@ const RadioKomp = ({ sporsmal }: SpmProps) => {
     if (watchRadio === undefined) {
         watchRadio = getValues(sporsmal.id)
     }
+
     // watchTimer er lagt inn for å rendre prosent-alerten
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
     // noinspection JSUnusedLocalSymbols
-    const watchTimer =
-        watchRadio?.toLowerCase() === 'timer'
-            ? watch(hentUndersporsmal(sporsmal!, TagTyper.HVOR_MYE_TIMER_VERDI)!.id)
-            : undefined
+    const watchTimer = watch(hentUndersporsmal(sporsmal!, TagTyper.HVOR_MYE_TIMER_VERDI)!.id)
+    const errorTimer = errors[hentUndersporsmal(sporsmal!, TagTyper.HVOR_MYE_TIMER_VERDI)!.id]
+
     const feilmelding = hentFeilmelding(sporsmal)
     const { valgtSoknad } = useAppStore()
     const { validerGrad, beregnGrad } = validerArbeidsgrad(sporsmal)
@@ -46,7 +45,9 @@ const RadioKomp = ({ sporsmal }: SpmProps) => {
     const lavereProsentHjelpTittel = tekst('ekspanderbarhjelp.prosenten_lavere_enn_forventet_arbeidstaker.tittel')
     return (
         <>
-            <SporsmalstekstH3 sporsmal={sporsmal} />
+            <Label as="h3" className={sporsmal.undertekst ? 'skjema__sporsmal_med_undersporsmal' : 'skjema__sporsmal'}>
+                {sporsmal.sporsmalstekst}
+            </Label>
             <Vis
                 hvis={sporsmal.undertekst && sporsmal.svartype == RSSvartype.RADIO_GRUPPE_TIMER_PROSENT}
                 render={() => <BodyLong spacing> {sporsmal.undertekst}</BodyLong>}
@@ -105,11 +106,7 @@ const RadioKomp = ({ sporsmal }: SpmProps) => {
             />
 
             <Vis
-                hvis={
-                    watchRadio?.toLowerCase() === 'timer' &&
-                    validerGrad!() !== true &&
-                    rodeUkeDagerIPerioden(valgtSoknad!.fom, valgtSoknad!.tom)
-                }
+                hvis={errorTimer && rodeUkeDagerIPerioden(valgtSoknad!.fom, valgtSoknad!.tom)}
                 render={() => (
                     <>
                         <Ekspanderbar

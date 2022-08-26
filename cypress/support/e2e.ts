@@ -28,24 +28,23 @@ beforeEach(() => {
 
 afterEach(() => {
     cy.injectAxe()
-    cy.checkA11y(
-        undefined,
-        {
-            // prettier-ignore
-            rules: {
-                'svg-img-alt': { enabled: false }, // Trenger ikke alt tekst på bilder
-                // TODO: Se på disse :point_down:
-                'aria-allowed-attr': { enabled: false },
-                'heading-order': { enabled: false },
-                'nested-interactive': { enabled: false },       // Skjermleser klarer å lese opp både progress og navigering mellom stegene
-                'color-contrast': { enabled: false },
-                'landmark-one-main': { enabled: false },        // Hvorfor godtar den ikke role="dialog" på modalene
-                'aria-input-field-name': { enabled: false },    // Kanskje vi må bytte ut LandvelgerComponent
-            },
-        },
-        terminalLog,
-        false
-    )
+    cy.configureAxe({
+        // prettier-ignore
+        rules: [
+            { id: 'svg-img-alt', enabled: false },              // Trenger ikke alt tekst på bilder
+            // TODO: Se på disse :point_down:
+            { id: 'aria-allowed-attr', enabled: false },
+            { id: 'nested-interactive', enabled: false },       // Skjermleser klarer å lese opp både progress og navigering mellom stegene
+            { id: 'color-contrast', enabled: false },
+            { id: 'landmark-one-main', enabled: false },        // Hvorfor godtar den ikke role="dialog" på modalene
+            { id: 'aria-input-field-name', enabled: false },    // Kanskje vi må bytte ut LandvelgerComponent
+
+            // Opphold utland bruker periode komp uten h2 heading, sjekker alt annet
+            { id: 'heading-order', enabled: true, selector: '*:not(h3:contains("Når skal du reise?"))' },
+        ],
+    })
+    cy.checkA11y(undefined, undefined, terminalLog, false)
+
     cy.get('@winFetch').should((a: any) => {
         lyttTilNettverksKall(a)
     })

@@ -66,7 +66,7 @@ const JaNeiInput = ({ sporsmal }: SpmProps) => {
                     'inputPanelGruppe inputPanelGruppe--horisontal' + (errors[sporsmal.id] ? ' skjemagruppe--feil' : '')
                 }
             >
-                <Label as="h3" className="skjema__sporsmal">
+                <Label as="h2" className="skjema__sporsmal">
                     {sporsmal.sporsmalstekst}
                 </Label>
 

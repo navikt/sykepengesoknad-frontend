@@ -1,4 +1,4 @@
-import { BodyShort } from '@navikt/ds-react'
+import { BodyShort, Label } from '@navikt/ds-react'
 import dayjs, { Dayjs } from 'dayjs'
 import isoWeek from 'dayjs/plugin/isoWeek'
 import weekOfYear from 'dayjs/plugin/weekOfYear'
@@ -10,7 +10,6 @@ import { tekst } from '../../../utils/tekster'
 import FeilLokal from '../../feil/feil-lokal'
 import { SpmProps } from '../sporsmal-form/sporsmal-form'
 import { hentFeilmelding } from '../sporsmal-utils'
-import SporsmalstekstH3 from '../sporsmalstekst/sporsmalstekstH3'
 
 dayjs.extend(weekOfYear)
 dayjs.extend(isoWeek)
@@ -108,7 +107,9 @@ const DagerKomp = ({ sporsmal }: SpmProps) => {
 
     return (
         <>
-            <SporsmalstekstH3 sporsmal={sporsmal} />
+            <Label as="h3" className="skjema__sporsmal">
+                {sporsmal.sporsmalstekst}
+            </Label>
 
             <div className="skjemaelement skjema__dager" tabIndex={-1}>
                 <BodyShort as="h4" className="kalender__tittel">

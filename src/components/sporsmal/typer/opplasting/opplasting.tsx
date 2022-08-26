@@ -29,7 +29,7 @@ const Opplasting = ({ sporsmal }: SpmProps) => {
     return (
         <div className="opplasting">
             <div className="opplasting__tekst">
-                <Label as="h3" className="skjema__sporsmal">
+                <Label as="h2" className="skjema__sporsmal">
                     {sporsmal.sporsmalstekst}
                 </Label>
             </div>
