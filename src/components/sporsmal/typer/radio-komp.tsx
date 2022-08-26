@@ -45,7 +45,7 @@ const RadioKomp = ({ sporsmal }: SpmProps) => {
     const lavereProsentHjelpTittel = tekst('ekspanderbarhjelp.prosenten_lavere_enn_forventet_arbeidstaker.tittel')
     return (
         <>
-            <Label as="h3" className="skjema__sporsmal">
+            <Label as="h3" className={sporsmal.undertekst ? 'skjema__sporsmal_med_undersporsmal' : 'skjema__sporsmal'}>
                 {sporsmal.sporsmalstekst}
             </Label>
             <Vis
