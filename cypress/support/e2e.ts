@@ -33,12 +33,13 @@ afterEach(() => {
         rules: [
             { id: 'svg-img-alt', enabled: false },              // Trenger ikke alt tekst på bilder
             // TODO: Se på disse :point_down:
-            { id: 'aria-allowed-attr', enabled: false },
             { id: 'nested-interactive', enabled: false },       // Skjermleser klarer å lese opp både progress og navigering mellom stegene
             { id: 'color-contrast', enabled: false },
             { id: 'landmark-one-main', enabled: false },        // Hvorfor godtar den ikke role="dialog" på modalene
             { id: 'aria-input-field-name', enabled: false },    // Kanskje vi må bytte ut LandvelgerComponent
 
+            // Sjekker ikke aria-labelledby på accordion (denne kan fjernes når vi oppgraderer til nyere versjon av ds)
+            { id: 'aria-allowed-attr', enabled: true, selector: '*:not(.navds-accordion__item > div)' },
             // Opphold utland bruker periode komp uten h2 heading, sjekker alt annet
             { id: 'heading-order', enabled: true, selector: '*:not(h3:contains("Når skal du reise?"))' },
         ],
