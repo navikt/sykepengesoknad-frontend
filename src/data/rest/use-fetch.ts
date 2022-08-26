@@ -1,5 +1,7 @@
+
 import { useCallback, useMemo, useState } from 'react'
 
+import fetchMedRequestId from '../../utils/fetch'
 import { FetchState, FetchStatus, redirectTilLoginHvis401 } from './utils'
 
 export interface Fetch<D = any, FP = any> extends FetchState<D> {
@@ -34,7 +36,7 @@ const useFetch = <D = {}>(): Fetch<D> => {
     const apiFetch = (url: string, request?: RequestInit, onFinished?: (fetchState: FetchState<D>) => void) => {
         setFetchState(createPendingFetchState())
 
-        fetch(url, request)
+        fetchMedRequestId(url, request)
             .then(async (res) => {
                 const httpCode = res.status
                 let state: FetchState<D>

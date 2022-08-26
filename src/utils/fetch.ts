@@ -2,7 +2,7 @@ import { v4 as uuidv4 } from 'uuid'
 
 import { logger } from './logger'
 
-const fetchMedRequestId = async (url: string, options: RequestInit) => {
+const fetchMedRequestId = async (url: string, options: RequestInit = {}) => {
     const uuid = uuidv4()
 
     options.headers = options.headers ? { ...options.headers, 'x-request-id': uuid } : { 'x-request-id': uuid }
