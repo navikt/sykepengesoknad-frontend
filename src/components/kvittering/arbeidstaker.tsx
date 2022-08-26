@@ -9,6 +9,8 @@ import { RSSoknadstatus } from '../../types/rs-types/rs-soknadstatus'
 import { RSSoknadstype } from '../../types/rs-types/rs-soknadstype'
 import { Soknad } from '../../types/types'
 import { sendtForMerEnn30DagerSiden } from '../../utils/dato-utils'
+import fetchMedRequestId from '../../utils/fetch'
+import { logger } from '../../utils/logger'
 import { tekst } from '../../utils/tekster'
 import Vis from '../vis'
 import Inntil16dager from './innhold/arbeidstaker/inntil16dager'
@@ -97,12 +99,27 @@ const Arbeidstaker = () => {
 
     async function erForsteSoknadUtenforArbeidsgiverperiode(id?: string) {
         if (id === undefined) return true
-        const res = await fetch(`/syk/sykepengesoknad/api/sykepengesoknad-backend/api/v2/soknader/${id}/finnMottaker`, {
-            method: 'POST',
-            credentials: 'include',
-            headers: { 'Content-Type': 'application/json' },
-        })
-        const data: RSMottakerResponse = await res.json()
+        let result: Response
+        try {
+            result = await fetchMedRequestId(
+                `/syk/sykepengesoknad/api/sykepengesoknad-backend/api/v2/soknader/${id}/finnMottaker`,
+                {
+                    method: 'POST',
+                    credentials: 'include',
+                    headers: { 'Content-Type': 'application/json' },
+                }
+            )
+        } catch (e) {
+            return
+        }
+
+        let data: RSMottakerResponse
+        try {
+            data = await result.json()
+        } catch (e) {
+            logger.error('Feilet ved parsing av JSON.', e)
+            return
+        }
         return data.mottaker === RSMottaker.ARBEIDSGIVER
     }
 
