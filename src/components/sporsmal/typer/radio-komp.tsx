@@ -29,13 +29,13 @@ const RadioKomp = ({ sporsmal }: SpmProps) => {
     if (watchRadio === undefined) {
         watchRadio = getValues(sporsmal.id)
     }
+
     // watchTimer er lagt inn for å rendre prosent-alerten
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
     // noinspection JSUnusedLocalSymbols
-    const watchTimer =
-        watchRadio?.toLowerCase() === 'timer'
-            ? watch(hentUndersporsmal(sporsmal!, TagTyper.HVOR_MYE_TIMER_VERDI)!.id)
-            : undefined
+    const watchTimer = watch(hentUndersporsmal(sporsmal!, TagTyper.HVOR_MYE_TIMER_VERDI)!.id)
+    const errorTimer = errors[hentUndersporsmal(sporsmal!, TagTyper.HVOR_MYE_TIMER_VERDI)!.id]
+
     const feilmelding = hentFeilmelding(sporsmal)
     const { valgtSoknad } = useAppStore()
     const { validerGrad, beregnGrad } = validerArbeidsgrad(sporsmal)
@@ -106,11 +106,7 @@ const RadioKomp = ({ sporsmal }: SpmProps) => {
             />
 
             <Vis
-                hvis={
-                    watchRadio?.toLowerCase() === 'timer' &&
-                    validerGrad!() !== true &&
-                    rodeUkeDagerIPerioden(valgtSoknad!.fom, valgtSoknad!.tom)
-                }
+                hvis={errorTimer && rodeUkeDagerIPerioden(valgtSoknad!.fom, valgtSoknad!.tom)}
                 render={() => (
                     <>
                         <Ekspanderbar
