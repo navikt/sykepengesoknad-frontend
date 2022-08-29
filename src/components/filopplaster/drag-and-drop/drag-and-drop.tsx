@@ -27,31 +27,31 @@ const DragAndDrop = () => {
     } = useFormContext()
     const [formErDisabled, setFormErDisabled] = useState<boolean>(false)
 
-    useEffect(() => {
-        const fetchData = async () => {
-            let result
-            try {
-                result = await fetchMedRequestId(
-                    `/syk/sykepengesoknad/api/flex-bucket-uploader/api/v2/kvittering/${valgtKvittering!.blobId}`,
-                    {
-                        method: 'GET',
-                        credentials: 'include',
-                        headers: { 'Content-Type': 'application/json' },
-                    }
-                )
-            } catch (e) {
-                return
-            }
-
-            if (!result.ok) {
-                throw new Error(`Feilet wed henting av bilde fra flex-bucket-uploader med feilkode: ${result.status}`)
-            }
-
-            result.blob().then((blob) => {
-                setValgtFil(blob as any)
-            })
+    const fetchData = useCallback(async () => {
+        let result
+        try {
+            result = await fetchMedRequestId(
+                `/syk/sykepengesoknad/api/flex-bucket-uploader/api/v2/kvittering/${valgtKvittering!.blobId}`,
+                {
+                    method: 'GET',
+                    credentials: 'include',
+                    headers: { 'Content-Type': 'application/json' },
+                }
+            )
+        } catch (e) {
+            return
         }
 
+        if (!result.ok) {
+            throw new Error(`Feilet wed henting av bilde fra flex-bucket-uploader med feilkode: ${result.status}`)
+        }
+
+        result.blob().then((blob) => {
+            setValgtFil(blob as any)
+        })
+    }, [setValgtFil, valgtKvittering])
+
+    useEffect(() => {
         if (valgtKvittering?.blobId) {
             setFormErDisabled(true)
             fetchData().catch((e: Error) => logger.error(e.message))
@@ -62,7 +62,7 @@ const DragAndDrop = () => {
         return () => {
             setValgtFil(undefined)
         }
-    }, [setValgtFil, valgtKvittering])
+    }, [setValgtFil, valgtKvittering, fetchData])
 
     const onDropCallback = useCallback(
         (filer) => {
