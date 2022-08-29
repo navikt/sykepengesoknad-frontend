@@ -101,11 +101,11 @@ describe('Tester frilansersøknad', () => {
         cy.url().should('include', `${soknad.id}/5`)
 
         // Test spørsmål
-        cy.contains('Har du vært utenfor EØS mens du var sykmeldt 1. - 24. april 2020?')
+        cy.contains('Har du vært utenfor EU/EØS/Storbritannia mens du var sykmeldt 1. - 24. april 2020?')
         cy.get('.inputPanelGruppe__inner label:first-child > input[value=JA]').click({ force: true })
 
         // Underspørsmål 1
-        cy.contains('Når var du utenfor EØS?')
+        cy.contains('Når var du utenfor EU/EØS/Storbritannia?')
         cy.get('#687448_0 .fom .ds-datepicker__kalenderknapp').click()
         cy.get('.DayPicker-Day').contains('17').click()
         cy.get('#687448_0 .tom .ds-datepicker__kalenderknapp').click()
@@ -131,7 +131,7 @@ describe('Tester frilansersøknad', () => {
         cy.get('.ekstrasporsmal')
             .should(
                 'have.text',
-                'I utgangspunktet kan du bare få sykepenger mens du er i et land innenfor EØS. Du kan likevel søke NAV om å få reise ut av EØS og beholde sykepengene i en begrenset periode.'
+                'I utgangspunktet kan du bare få sykepenger mens du er i et land innenfor EU/EØS/Storbritannia. Du kan likevel søke NAV om å få reise ut av EU/EØS/Storbritannia og beholde sykepengene i en begrenset periode.'
             )
             .find('a')
             .should('have.attr', 'href', '/syk/sykepengesoknad/sykepengesoknad-utland')

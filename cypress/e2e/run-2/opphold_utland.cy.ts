@@ -1,7 +1,7 @@
 import { soknaderOpplaering as soknader } from '../../../src/data/mock/data/soknader-opplaering'
 import { RSSoknad } from '../../../src/types/rs-types/rs-soknad'
 
-describe('Tester søknad om å beholde sykepenger utenfor EØS', () => {
+describe('Tester søknad om å beholde sykepenger utenfor EU/EØS/Storbritannia', () => {
     const soknad = soknader.find((sok: RSSoknad) => sok.id === 'b9d67b0d-b1f8-44a5-bcbd-6010b60b90ce')!
 
     before(() => {
@@ -12,7 +12,7 @@ describe('Tester søknad om å beholde sykepenger utenfor EØS', () => {
         cy.get('.navds-heading--xlarge').should('be.visible').and('have.text', 'Søknader')
         cy.get(`#soknader-list-til-behandling article a[href*=${soknad.id}]`).should(
             'include.text',
-            'Søknad om å beholde sykepenger utenfor EØS'
+            'Søknad om å beholde sykepenger utenfor EU/EØS/Storbritannia'
         )
         cy.get(`#soknader-list-til-behandling article a[href*=${soknad.id}]`).click()
     })
@@ -36,7 +36,9 @@ describe('Tester søknad om å beholde sykepenger utenfor EØS', () => {
         cy.contains('Gå videre').click({ force: true })
         cy.contains('Du må velge ett land')
         cy.contains('Det er 1 feil i skjemaet')
-        cy.contains('Du må oppgi et land utenfor EØS. Innenfor EØS trenger du ikke søke.')
+        cy.contains(
+            'Du må oppgi et land utenfor EU/EØS/Storbritannia. Innenfor EU/EØS/Storbritannia trenger du ikke søke.'
+        )
 
         cy.contains('Hvilket land skal du reise til?')
         cy.get('.skjemaelement__input').type('Fransk', { force: true })

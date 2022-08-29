@@ -169,7 +169,6 @@ const landliste = [
     'Somalia',
     'Sri Lanka',
     'St. Helena',
-    'Storbritannia',
     'Sudan',
     'Surinam',
     'Swaziland',
