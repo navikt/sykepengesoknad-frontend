@@ -113,7 +113,6 @@ module.exports = withPlugins(
             env: process.env.ENVIRONMENT,
             amplitudeEnabled: process.env.AMPLITUDE_ENABLED,
             environment: process.env.ENVIRONMENT,
-            dineSakerUrl: process.env.DINESAKER_URL,
             vedlikehold: process.env.VEDLIKEHOLD,
         },
     }

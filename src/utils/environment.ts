@@ -50,10 +50,6 @@ export function minSideUrl() {
     return publicRuntimeConfig.minSideUrl
 }
 
-export function dinesakerUrl(): string {
-    return publicRuntimeConfig.dineSakerUrl
-}
-
 export function vedlikehold(): boolean {
     return publicRuntimeConfig.vedlikehold === 'true'
 }

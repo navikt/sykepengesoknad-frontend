@@ -65,8 +65,6 @@ spec:
       value: "https://www.dev.nav.no/minside/"
     - name: DECORATOR_ENV
       value: "dev"
-    - name: DINESAKER_URL
-      value: "https://person.dev.nav.no/mine-saker/tema/SYK"
     - name: ASSET_PREFIX
       value: "https://flex-static-files.dev.nav.no/sykepengesoknad"
     - name: VEDLIKEHOLD
