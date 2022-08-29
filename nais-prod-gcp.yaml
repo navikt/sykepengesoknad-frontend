@@ -61,12 +61,10 @@ spec:
       value: "https://www.nav.no/syk/sykefravaer"
     - name: SYKMELDINGER_URL
       value: "https://www.nav.no/syk/sykmeldinger"
-    - name: DITTNAV_URL
-      value: "https://www.nav.no/person/dittnav"
+    - name: MINSIDE_URL
+      value: "https://www.nav.no/minside"
     - name: DECORATOR_ENV
       value: "prod"
-    - name: DINESAKER_URL
-      value: "https://person.nav.no/mine-saker/tema/SYK"
     - name: ASSET_PREFIX
       value: "https://flex-static-files.nav.no/sykepengesoknad"
     - name: VEDLIKEHOLD

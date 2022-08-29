@@ -4,7 +4,7 @@ import { useParams } from 'react-router-dom'
 
 import { RouteParams } from '../../app'
 import { useAppStore } from '../../data/stores/app-store'
-import { dittNavUrl } from '../../utils/environment'
+import { minSideUrl } from '../../utils/environment'
 import { tekst } from '../../utils/tekster'
 import { useAmplitudeInstance } from '../amplitude/amplitude'
 
@@ -61,7 +61,7 @@ const AvsluttOgFortsettSenere = () => {
                             })
                             // Må sikre at amplitude får logget ferdig
                             window.setTimeout(() => {
-                                window.location.href = dittNavUrl()
+                                window.location.href = minSideUrl()
                             }, 200)
                         }}
                     >

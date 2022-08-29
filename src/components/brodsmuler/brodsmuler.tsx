@@ -4,7 +4,7 @@ import React, { useEffect, useRef, useState } from 'react'
 import { Link } from 'react-router-dom'
 
 import { Brodsmule } from '../../types/types'
-import { dittNavUrl, sykefravaerUrl } from '../../utils/environment'
+import { minSideUrl, sykefravaerUrl } from '../../utils/environment'
 import { useAmplitudeInstance } from '../amplitude/amplitude'
 import Vis from '../vis'
 import Person from './Person'
@@ -12,7 +12,7 @@ import Person from './Person'
 const LITEN = 768
 
 const faste: Brodsmule[] = [
-    { tittel: 'Ditt NAV', sti: dittNavUrl(), erKlikkbar: true },
+    { tittel: 'Min side', sti: minSideUrl(), erKlikkbar: true },
     { tittel: 'Ditt sykefravær', sti: sykefravaerUrl(), erKlikkbar: true },
 ]
 

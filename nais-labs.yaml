@@ -40,13 +40,11 @@ spec:
       value: "https://ditt-sykefravaer.labs.nais.io/syk/sykefravaer"
     - name: SYKMELDINGER_URL
       value: "https://sykmeldinger.labs.nais.io/syk/sykmeldinger"
-    - name: DITTNAV_URL
-      value: "https://flex-dittnav-brukertest.labs.nais.io/person/dittnav/?testperson=soknad"
+    - name: MINSIDE_URL
+      value: "https://www.dev.nav.no/minside/"
     - name: OPPLAERING
       value: "true"
     - name: DECORATOR_ENV
       value: "prod"
-    - name: DINESAKER_URL
-      value: "https://person.nav.no/mine-saker/tema/SYK"
     - name: VEDLIKEHOLD
       value: "false"
