@@ -1,4 +1,3 @@
-
 import { useCallback, useMemo, useState } from 'react'
 
 import fetchMedRequestId from '../../utils/fetch'

@@ -69,35 +69,47 @@ function terminalLog(violations: any) {
     cy.task('table', violationData)
 }
 
+const asLowerCase = (key: string, target: any): string | undefined => {
+    const lowerCaseKey = key.toLowerCase()
+    const index = Object.keys(target).find((key) => key.toLowerCase() === lowerCaseKey)
+    return index ? target[index] : undefined
+}
+
 const lyttTilNettverksKall = (a: any) => {
     const spy = a ? a['getCalls']() : []
     for (const call of spy) {
         const { args } = call
         const url = args[0]
-        const req = args[1]
+        const request = args[1]
 
-        // DELETE har ikke body som kan parses til JSON.
-        if (url.includes('sporsmal') && req['method'] !== 'DELETE') {
-            const headers = req['headers']
-            const sporsmal = JSON.parse(req['body']) as RSSporsmal
-            expect(headers['Content-Type'], '/sporsmal').to.eql('application/json')
-            svarFormat(sporsmal)
-        } else if (url.includes('/finnMottaker')) {
-            const headers = req['headers']
-            expect(headers['Content-Type'], '/finnMottaker').to.eql('application/json')
-        } else if (url.includes('/send')) {
-            const headers = req['headers']
-            expect(headers['Content-Type'], '/send').to.eql('application/json')
-        } else if (url.includes('/gjenapne')) {
-            const headers = req['headers']
-            expect(headers['Content-Type'], '/gjenapne').to.eql('application/json')
-        } else {
-            cy.log('Sjekker ikke kallet til', url)
+        // Forhndrer at test feiler på grunn av fetch i mock-kode og Next hot-reloading.
+        if (url.includes('/static')) {
+            return
         }
+
+        const headers = request['headers']
+
+        switch (request['method']) {
+            case 'POST': {
+                if (!url.includes('/avbryt') && !url.includes('/opplasting')) {
+                    expect(asLowerCase('Content-Type', headers)).to.eql('application/json')
+                }
+                break
+            }
+            case 'PUT': {
+                if (url.includes('/sporsmal')) {
+                    verifiserSvarFormat(JSON.parse(request['body']) as RSSporsmal)
+                }
+                expect(asLowerCase('Content-Type', headers)).to.eql('application/json')
+                break
+            }
+        }
+
+        expect(asLowerCase('x-request-id', headers)).to.be.a('string')
     }
 }
 
-const svarFormat = (sporsmal: RSSporsmal) => {
+const verifiserSvarFormat = (sporsmal: RSSporsmal) => {
     switch (sporsmal.svartype) {
         case RSSvartype.CHECKBOX_PANEL:
             expect(sporsmal.svar[0]?.verdi).to.match(
@@ -192,7 +204,7 @@ const svarFormat = (sporsmal: RSSporsmal) => {
         sporsmal.kriterieForVisningAvUndersporsmal === sporsmal.svar[0]?.verdi
     ) {
         for (const undersporsmal of sporsmal.undersporsmal) {
-            svarFormat(undersporsmal)
+            verifiserSvarFormat(undersporsmal)
         }
     }
 }
