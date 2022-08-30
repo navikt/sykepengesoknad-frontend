@@ -40,9 +40,9 @@ const Slettknapp = ({ sporsmal, kvittering, update }: SlettknappProps) => {
             (svar) => svarverdiToKvittering(svar?.verdi).blobId === kvittering?.blobId
         )
 
-        let response
+        let fetchResult
         try {
-            response = await fetchMedRequestId(
+            fetchResult = await fetchMedRequestId(
                 `/syk/sykepengesoknad/api/sykepengesoknad-backend/api/v2/soknader/${valgtSoknad?.id}/sporsmal/${sporsmal?.id}/svar/${svar?.id}`,
                 {
                     method: 'DELETE',
@@ -50,13 +50,14 @@ const Slettknapp = ({ sporsmal, kvittering, update }: SlettknappProps) => {
                 }
             )
 
+            const response = fetchResult.response
             if (redirectTilLoginHvis401(response)) {
                 return
             }
 
             if (!response.ok) {
                 logger.error(
-                    `Feilet ved sletting av spørsmål ${sporsmal.id} med http kode ${response.status}`,
+                    `Feilet ved sletting av spørsmål ${sporsmal.id} med http kode ${response.status} og x_request_id ${fetchResult.requestId}`,
                     response
                 )
                 feilVedSletting = true

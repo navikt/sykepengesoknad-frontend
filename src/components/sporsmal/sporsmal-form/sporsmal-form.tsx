@@ -92,9 +92,9 @@ const SporsmalForm = () => {
     const sendOppdaterSporsmal = async () => {
         let soknad = valgtSoknad
 
-        let response
+        let fetchResult
         try {
-            response = await fetchMedRequestId(
+            fetchResult = await fetchMedRequestId(
                 `/syk/sykepengesoknad/api/sykepengesoknad-backend/api/v2/soknader/${soknad!.id}/sporsmal/${
                     sporsmal.id
                 }`,
@@ -110,6 +110,7 @@ const SporsmalForm = () => {
             return
         }
 
+        const response = fetchResult.response
         if (redirectTilLoginHvis401(response)) {
             return
         }
@@ -118,7 +119,7 @@ const SporsmalForm = () => {
         try {
             data = await response.json()
         } catch (e) {
-            logger.error('Feilet ved parsing av JSON.', e)
+            logger.error(`Feilet ved parsing av JSON for x_request_id ${fetchResult.requestId}.`, e)
             restFeilet = true
             return
         }
@@ -180,9 +181,9 @@ const SporsmalForm = () => {
             }
         }
 
-        let response
+        let fetchResult
         try {
-            response = await fetchMedRequestId(
+            fetchResult = await fetchMedRequestId(
                 `/syk/sykepengesoknad/api/sykepengesoknad-backend/api/v2/soknader/${valgtSoknad!.id}/send`,
                 {
                     method: 'POST',
@@ -195,12 +196,16 @@ const SporsmalForm = () => {
             return
         }
 
+        const response = fetchResult.response
         if (redirectTilLoginHvis401(response)) {
             return
         }
 
         if (!response.ok) {
-            logger.error(`Feilet ved sending av søknad ${valgtSoknad.id} med http kode ${response.status}`, response)
+            logger.error(
+                `Feilet ved sending av søknad ${valgtSoknad.id} med http kode ${response.status} og x_request_id ${fetchResult.requestId}`,
+                response
+            )
             restFeilet = true
             return
         }

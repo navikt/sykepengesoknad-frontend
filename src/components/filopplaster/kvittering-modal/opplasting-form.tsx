@@ -80,9 +80,9 @@ const OpplastingForm = ({ sporsmal }: SpmProps) => {
         const requestData = new FormData()
         requestData.append('file', valgtFil as Blob)
 
-        let result
+        let fetchResult
         try {
-            result = await fetchMedRequestId('/syk/sykepengesoknad/api/flex-bucket-uploader/api/v2/opplasting', {
+            fetchResult = await fetchMedRequestId('/syk/sykepengesoknad/api/flex-bucket-uploader/api/v2/opplasting', {
                 method: 'POST',
                 body: requestData,
                 credentials: 'include',
@@ -92,13 +92,16 @@ const OpplastingForm = ({ sporsmal }: SpmProps) => {
             return
         }
 
-        if (redirectTilLoginHvis401(result)) {
+        const response = fetchResult.response
+        if (redirectTilLoginHvis401(response)) {
             return
         }
 
-        if (!result.ok) {
-            logger.error(`Feil under opplasting av kvittering med feilkode ${result.status}.`)
-            if (result.status === 413) {
+        if (!response.ok) {
+            logger.error(
+                `Feil under opplasting av kvittering med feilkode ${response.status} og x_request_id ${fetchResult.requestId}.`
+            )
+            if (response.status === 413) {
                 setFeilmeldingTekst('Filen du prøvde å laste opp er for stor')
             } else {
                 setFeilmeldingTekst('Det skjedde en feil i baksystemene, prøv igjen senere')
@@ -106,7 +109,12 @@ const OpplastingForm = ({ sporsmal }: SpmProps) => {
             return
         }
 
-        return result.json()
+        try {
+            return await fetchResult.response.json()
+        } catch (e) {
+            logger.error(`Feilet ved parsing av JSON for x_request_id ${fetchResult.requestId}.`, e)
+            return
+        }
     }
 
     const lagreSvar = async (opplastingResponse: OpplastetKvittering) => {
@@ -118,9 +126,9 @@ const OpplastingForm = ({ sporsmal }: SpmProps) => {
         }
         const svar: RSSvar = { verdi: JSON.stringify(kvittering) }
 
-        let result: Response
+        let fetchResult
         try {
-            result = await fetchMedRequestId(
+            fetchResult = await fetchMedRequestId(
                 `/syk/sykepengesoknad/api/sykepengesoknad-backend/api/v2/soknader/${valgtSoknad!.id}/sporsmal/${
                     sporsmal!.id
                 }/svar`,
@@ -136,15 +144,24 @@ const OpplastingForm = ({ sporsmal }: SpmProps) => {
             return
         }
 
-        if (redirectTilLoginHvis401(result)) {
+        const response = fetchResult.response
+        if (redirectTilLoginHvis401(response)) {
             return
         }
 
-        if (!result.ok) {
-            logger.error(`Feil under lagring av kvittering med feilkode ${result.status}.`)
+        if (!response.ok) {
+            logger.error(
+                `Feil under lagring av kvittering med feilkode ${response.status} og x_request_id ${fetchResult.requestId}.`
+            )
             setFeilmeldingTekst('Det skjedde en feil i baksystemene, prøv igjen senere')
         }
-        return result.json()
+
+        try {
+            return await fetchResult.response.json()
+        } catch (e) {
+            logger.error(`Feilet ved parsing av JSON for x_request_id ${fetchResult.requestId}.`, e)
+            return
+        }
     }
 
     if (!valgtSoknad) return null

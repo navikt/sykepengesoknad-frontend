@@ -48,9 +48,9 @@ const Ettersending = ({ gjelder, setRerendrekvittering }: EttersendingProps) => 
     }
 
     const ettersendNav = async () => {
-        let response
+        let fetchResult
         try {
-            response = await fetchMedRequestId(
+            fetchResult = await fetchMedRequestId(
                 `/syk/sykepengesoknad/api/sykepengesoknad-backend/api/v2/soknader/${valgtSoknad!.id}/ettersendTilNav`,
                 {
                     method: 'POST',
@@ -63,13 +63,16 @@ const Ettersending = ({ gjelder, setRerendrekvittering }: EttersendingProps) => 
             return
         }
 
+        const response = fetchResult.response
         if (redirectTilLoginHvis401(response)) {
             return
         }
 
         if (!response.ok) {
             logger.error(
-                `Feil ved ettersending av søknad ${valgtSoknad!.id} til NAV med feilkode ${response.status}.`,
+                `Feil ved ettersending av søknad ${valgtSoknad!.id} til NAV med feilkode ${
+                    response.status
+                } og x_request_id ${fetchResult.requestId}.`,
                 response
             )
             setFeilmeldingTekst(tekst('kvittering.ettersending.feilet'))
@@ -81,9 +84,9 @@ const Ettersending = ({ gjelder, setRerendrekvittering }: EttersendingProps) => 
     }
 
     const ettersendArbeidsgiver = async () => {
-        let response
+        let fetchResult
         try {
-            response = await fetchMedRequestId(
+            fetchResult = await fetchMedRequestId(
                 `/syk/sykepengesoknad/api/sykepengesoknad-backend/api/v2/soknader/${
                     valgtSoknad!.id
                 }/ettersendTilArbeidsgiver`,
@@ -98,13 +101,16 @@ const Ettersending = ({ gjelder, setRerendrekvittering }: EttersendingProps) => 
             return
         }
 
+        const response = fetchResult.response
         if (redirectTilLoginHvis401(response)) {
             return
         }
 
         if (!response.ok) {
             logger.error(
-                `Feil ved ettersending av søknad ${valgtSoknad!.id} til ARBEIDSGIVER med feilkode ${response.status}.`,
+                `Feil ved ettersending av søknad ${valgtSoknad!.id} til ARBEIDSGIVER med feilkode ${
+                    response.status
+                } og x_request_id ${fetchResult.requestId}.`,
                 response
             )
             setFeilmeldingTekst(tekst('kvittering.ettersending.feilet'))

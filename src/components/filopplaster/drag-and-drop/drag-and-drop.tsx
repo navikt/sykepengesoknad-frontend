@@ -28,9 +28,9 @@ const DragAndDrop = () => {
     const [formErDisabled, setFormErDisabled] = useState<boolean>(false)
 
     const fetchData = useCallback(async () => {
-        let result
+        let fetchResult
         try {
-            result = await fetchMedRequestId(
+            fetchResult = await fetchMedRequestId(
                 `/syk/sykepengesoknad/api/flex-bucket-uploader/api/v2/kvittering/${valgtKvittering!.blobId}`,
                 {
                     method: 'GET',
@@ -42,8 +42,11 @@ const DragAndDrop = () => {
             return
         }
 
+        const result = fetchResult.response
         if (!result.ok) {
-            throw new Error(`Feilet wed henting av bilde fra flex-bucket-uploader med feilkode: ${result.status}`)
+            throw new Error(
+                `Feilet ved henting av kvittering fra flex-bucket-uploader med feilkode: ${result.status} og x_request_id ${fetchResult.requestId}`
+            )
         }
 
         result.blob().then((blob) => {

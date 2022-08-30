@@ -41,9 +41,9 @@ const GjenapneSoknad = () => {
             component: 'Avbrutt søknad visning',
         })
 
-        let response: Response
+        let fetchResult
         try {
-            response = await fetchMedRequestId(
+            fetchResult = await fetchMedRequestId(
                 `/syk/sykepengesoknad/api/sykepengesoknad-backend/api/v2/soknader/${valgtSoknad!.id}/gjenapne`,
                 {
                     method: 'POST',
@@ -52,17 +52,20 @@ const GjenapneSoknad = () => {
                 }
             )
         } catch (e) {
-            // TODO: Vis feilmelding til bruker.
             return
         }
 
+        const response = fetchResult.response
         if (redirectTilLoginHvis401(response)) {
             return
         }
 
         if (!response.ok) {
-            logger.error(`Feilet ved gjenåpning av soknad ${valgtSoknad!.id} med http kode ${response.status}`)
-            // TODO: Vis feilmelding til bruker.
+            logger.error(
+                `Feilet ved gjenåpning av soknad ${valgtSoknad!.id} med http kode ${response.status} og x_request_id ${
+                    fetchResult.requestId
+                }`
+            )
             return
         }
 

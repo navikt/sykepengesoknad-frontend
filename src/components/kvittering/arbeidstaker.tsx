@@ -1,9 +1,8 @@
 import { Alert, Heading } from '@navikt/ds-react'
 import dayjs from 'dayjs'
-import React, { useEffect, useState } from 'react'
+import React, { useCallback, useEffect, useState } from 'react'
 
 import { useAppStore } from '../../data/stores/app-store'
-import { RSMottakerResponse } from '../../types/rs-types/rest-response/rs-mottakerresponse'
 import { RSMottaker } from '../../types/rs-types/rs-mottaker'
 import { RSSoknadstatus } from '../../types/rs-types/rs-soknadstatus'
 import { RSSoknadstype } from '../../types/rs-types/rs-soknadstype'
@@ -24,34 +23,6 @@ type ArbeidstakerKvitteringTekst = 'inntil16dager' | 'over16dager' | 'utenOpphol
 const Arbeidstaker = () => {
     const { valgtSoknad, valgtSykmelding, soknader } = useAppStore()
     const [kvitteringTekst, setKvitteringTekst] = useState<ArbeidstakerKvitteringTekst>()
-
-    const settRiktigKvitteringTekst = () => {
-        if (!valgtSoknad) return
-
-        if (erInnenforArbeidsgiverperiode()) {
-            setKvitteringTekst('inntil16dager')
-        } else {
-            if (erSykmeldingperiodeDeltOverFlereSoknader()) {
-                setKvitteringTekst('utenOpphold')
-            } else {
-                const tidligereSoknader = soknader
-                    .filter((sok) => sok.status !== RSSoknadstatus.UTGAATT) // Vi sjekker ikke utgåtte søknader
-                    .filter((sok) => sok.soknadstype === RSSoknadstype.ARBEIDSTAKERE) // Gjelder arbeidstakersøknad
-                    .filter((sok) => sok.arbeidsgiver?.orgnummer === valgtSoknad?.arbeidsgiver?.orgnummer) // Samme arbeidstaker
-                    .filter((senereSok) => senereSok.tom! < valgtSoknad!.fom!) // Gjelder søknader før valgt
-                    .filter((tidligereSok) => tidligereSoknaderInnenfor16Dager(tidligereSok.tom!, valgtSoknad.fom!))
-                if (tidligereSoknader.length > 0) {
-                    if (harTidligereUtenOpphold(tidligereSoknader)) {
-                        utenOppholdSjekkArbeidsgiverperiode(tidligereSoknader)
-                    } else {
-                        medOppholdSjekkArbeidsgiverperiode(tidligereSoknader)
-                    }
-                } else {
-                    setKvitteringTekst('over16dager')
-                }
-            }
-        }
-    }
 
     const erInnenforArbeidsgiverperiode = () => {
         if (!valgtSoknad) return
@@ -99,9 +70,9 @@ const Arbeidstaker = () => {
 
     async function erForsteSoknadUtenforArbeidsgiverperiode(id?: string) {
         if (id === undefined) return true
-        let result: Response
+        let fetchResult
         try {
-            result = await fetchMedRequestId(
+            fetchResult = await fetchMedRequestId(
                 `/syk/sykepengesoknad/api/sykepengesoknad-backend/api/v2/soknader/${id}/finnMottaker`,
                 {
                     method: 'POST',
@@ -113,14 +84,23 @@ const Arbeidstaker = () => {
             return
         }
 
-        let data: RSMottakerResponse
-        try {
-            data = await result.json()
-        } catch (e) {
-            logger.error('Feilet ved parsing av JSON.', e)
+        const response = fetchResult.response
+        if (!response.ok) {
+            logger.error(
+                `Feil ved sjekk om første søknad er utenfor arbeidsgiverperioden med feilkode ${response.status} og x_request_id ${fetchResult.requestId}.`,
+                response
+            )
             return
         }
-        return data.mottaker === RSMottaker.ARBEIDSGIVER
+
+        let data
+        try {
+            data = await response.json()
+            return data.mottaker === RSMottaker.ARBEIDSGIVER
+        } catch (e) {
+            logger.error(`Feilet ved parsing av JSON for x_request_id ${fetchResult.requestId}.`, e)
+            return
+        }
     }
 
     const kvitteringInnhold = () => {
@@ -138,15 +118,44 @@ const Arbeidstaker = () => {
         }
     }
 
-    useEffect(() => {
-        settRiktigKvitteringTekst()
+    const settRiktigKvitteringTekst = useCallback(async () => {
+        if (!valgtSoknad) return
+
+        if (erInnenforArbeidsgiverperiode()) {
+            setKvitteringTekst('inntil16dager')
+        } else {
+            if (erSykmeldingperiodeDeltOverFlereSoknader()) {
+                setKvitteringTekst('utenOpphold')
+            } else {
+                const tidligereSoknader = soknader
+                    .filter((sok) => sok.status !== RSSoknadstatus.UTGAATT) // Vi sjekker ikke utgåtte søknader
+                    .filter((sok) => sok.soknadstype === RSSoknadstype.ARBEIDSTAKERE) // Gjelder arbeidstakersøknad
+                    .filter((sok) => sok.arbeidsgiver?.orgnummer === valgtSoknad?.arbeidsgiver?.orgnummer) // Samme arbeidstaker
+                    .filter((senereSok) => senereSok.tom! < valgtSoknad!.fom!) // Gjelder søknader før valgt
+                    .filter((tidligereSok) => tidligereSoknaderInnenfor16Dager(tidligereSok.tom!, valgtSoknad.fom!))
+                if (tidligereSoknader.length > 0) {
+                    if (harTidligereUtenOpphold(tidligereSoknader)) {
+                        await utenOppholdSjekkArbeidsgiverperiode(tidligereSoknader)
+                    } else {
+                        await medOppholdSjekkArbeidsgiverperiode(tidligereSoknader)
+                    }
+                } else {
+                    setKvitteringTekst('over16dager')
+                }
+            }
+        }
         // eslint-disable-next-line
-    }, [valgtSoknad?.sendtTilNAVDato])
+    }, [])
+
+    useEffect(() => {
+        settRiktigKvitteringTekst().catch((e: Error) => logger.error(e.message))
+    }, [settRiktigKvitteringTekst, valgtSoknad?.sendtTilNAVDato])
 
     if (!valgtSoknad || !valgtSykmelding) return null
 
     return (
         <>
+            x
             <Alert variant="success">
                 <Heading size="small" level="2">
                     {tekst('kvittering.soknaden-er-sendt')}

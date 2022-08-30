@@ -36,17 +36,18 @@ const useFetch = <D = {}>(): Fetch<D> => {
         setFetchState(createPendingFetchState())
 
         fetchMedRequestId(url, request)
-            .then(async (res) => {
-                const httpCode = res.status
+            .then(async (fetchResult) => {
+                const response = fetchResult.response
+                const httpCode = response.status
                 let state: FetchState<D>
-                if (redirectTilLoginHvis401(res)) {
+                if (redirectTilLoginHvis401(response)) {
                     state = createFinishedFetchState(null, null, httpCode)
                     return state
                 }
 
-                if ([200, 201, 203, 206].includes(httpCode)) {
+                if (response.ok) {
                     try {
-                        const data = await res.json()
+                        const data = await response.json()
                         state = createFinishedFetchState(data, null, httpCode)
                     } catch (error) {
                         state = createFinishedFetchState(null, error, httpCode)
