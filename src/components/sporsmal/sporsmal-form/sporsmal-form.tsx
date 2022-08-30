@@ -115,22 +115,22 @@ const SporsmalForm = () => {
             return
         }
 
+        if (!response.ok) {
+            if (response.status === 400) {
+                setFeilState(true)
+            } else {
+                logger.error(`Feilet ved kall OPPDATER_SPORSMAL med http kode ${response.status}.`, response)
+            }
+
+            restFeilet = true
+            return
+        }
+
         let data
         try {
             data = await response.json()
         } catch (e) {
             logger.error(`Feilet ved parsing av JSON for x_request_id ${fetchResult.requestId}.`, e)
-            restFeilet = true
-            return
-        }
-
-        if (!response.ok) {
-            if (['FEIL_STATUS_FOR_OPPDATER_SPORSMAL', 'SPORSMAL_FINNES_IKKE_I_SOKNAD'].includes(data.reason)) {
-                setFeilState(true)
-            } else {
-                logger.error(`Feilet ved kall OPPDATER_SPORSMAL med uhåndtert http kode ${response.status}.`, response)
-            }
-
             restFeilet = true
             return
         }
