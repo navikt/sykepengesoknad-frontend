@@ -2,6 +2,7 @@ import { BodyShort, Label } from '@navikt/ds-react'
 import parser from 'html-react-parser'
 import React, { useCallback, useEffect, useState } from 'react'
 
+import { redirectTilLoginHvis401 } from '../../../data/rest/utils'
 import { isMockBackend, isProd } from '../../../utils/environment'
 import fetchMedRequestId from '../../../utils/fetch'
 import { logger } from '../../../utils/logger'
@@ -24,9 +25,13 @@ const Kontonummer = () => {
         }
 
         const response = fetchResult.response
+        if (redirectTilLoginHvis401(response)) {
+            return
+        }
+
         if (!response.ok) {
             logger.error(
-                `Feil ved henting av kontornummer med feilkode ${response.status} og x_request_id ${fetchResult.requestId}.`,
+                `Feil ved henting av kontonummer med feilkode ${response.status} og x_request_id ${fetchResult.requestId}.`,
                 response
             )
             return

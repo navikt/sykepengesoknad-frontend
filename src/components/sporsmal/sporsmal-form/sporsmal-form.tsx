@@ -1,13 +1,11 @@
-import React, { useEffect, useState } from 'react'
+import React, { useCallback, useEffect, useState } from 'react'
 import { FormProvider, useForm } from 'react-hook-form'
 import { useHistory, useParams } from 'react-router-dom'
 
 import { RouteParams } from '../../../app'
-import useFetch from '../../../data/rest/use-fetch'
-import { FetchState, hasData, redirectTilLoginHvis401 } from '../../../data/rest/utils'
+import { redirectTilLoginHvis401 } from '../../../data/rest/utils'
 import { useAppStore } from '../../../data/stores/app-store'
 import { TagTyper } from '../../../types/enums'
-import { RSMottakerResponse } from '../../../types/rs-types/rest-response/rs-mottakerresponse'
 import { RSOppdaterSporsmalResponse } from '../../../types/rs-types/rest-response/rs-oppdatersporsmalresponse'
 import { RSMottaker } from '../../../types/rs-types/rs-mottaker'
 import { RSSoknadstatus } from '../../../types/rs-types/rs-soknadstatus'
@@ -59,7 +57,6 @@ const SporsmalForm = () => {
     let restFeilet = false
     let sporsmal = valgtSoknad!.sporsmal[spmIndex]
     const nesteSporsmal = valgtSoknad!.sporsmal[spmIndex + 1]
-    const rsMottakerResponseFetch = useFetch<RSMottakerResponse>()
 
     useEffect(() => {
         methods.reset(hentFormState(sporsmal), { keepValues: false })
@@ -85,7 +82,9 @@ const SporsmalForm = () => {
 
         const sisteSide = erSiste()
         setErSiste(sisteSide)
-        if (sisteSide) hentMottaker()
+        if (sisteSide) {
+            hentMottaker().catch((e: Error) => logger.error(e.message))
+        }
         // eslint-disable-next-line
     }, [spmIndex])
 
@@ -119,7 +118,10 @@ const SporsmalForm = () => {
             if (response.status === 400) {
                 setFeilState(true)
             } else {
-                logger.error(`Feilet ved kall OPPDATER_SPORSMAL med http kode ${response.status}.`, response)
+                logger.error(
+                    `Feilet ved kall OPPDATER_SPORSMAL med http kode ${response.status} og x_request_id ${fetchResult.requestId}.`,
+                    response
+                )
             }
 
             restFeilet = true
@@ -150,23 +152,43 @@ const SporsmalForm = () => {
         setValgtSoknad(soknad)
     }
 
-    const hentMottaker = () => {
-        rsMottakerResponseFetch.fetch(
-            `/syk/sykepengesoknad/api/sykepengesoknad-backend/api/v2/soknader/${valgtSoknad!.id}/finnMottaker`,
-            {
-                method: 'POST',
-                credentials: 'include',
-                headers: { 'Content-Type': 'application/json' },
-            },
-            (fetchState: FetchState<RSMottakerResponse>) => {
-                if (hasData(fetchState)) {
-                    setMottaker(fetchState.data.mottaker)
-                } else {
-                    logger.error(`Klarte ikke hente MOTTAKER av søknad ${fetchState.httpCode}`)
+    const hentMottaker = useCallback(async () => {
+        let fetchResult
+        try {
+            fetchResult = await fetchMedRequestId(
+                `/syk/sykepengesoknad/api/sykepengesoknad-backend/api/v2/soknader/${valgtSoknad!.id}/finnMottaker`,
+                {
+                    method: 'POST',
+                    credentials: 'include',
+                    headers: { 'Content-Type': 'application/json' },
                 }
-            }
-        )
-    }
+            )
+        } catch (e) {
+            return
+        }
+
+        const response = fetchResult.response
+        if (redirectTilLoginHvis401(response)) {
+            return
+        }
+
+        if (!response.ok) {
+            logger.error(
+                `Klarte ikke hente MOTTAKER av søknad http kode ${response.status} og x_request_id ${fetchResult.requestId}.`,
+                response
+            )
+            return
+        }
+
+        try {
+            const data = await response.json()
+            setMottaker(data.mottaker)
+        } catch (e) {
+            logger.error(`Feilet ved parsing av JSON for x_request_id ${fetchResult.requestId}.`, e)
+            return
+        }
+        // eslint-disable-next-line
+    }, [])
 
     const sendSoknad = async () => {
         if (!valgtSoknad) {

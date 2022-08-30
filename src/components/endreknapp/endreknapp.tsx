@@ -3,10 +3,11 @@ import React, { useState } from 'react'
 import { useHistory } from 'react-router'
 
 import useFetch from '../../data/rest/use-fetch'
-import { FetchState, hasData } from '../../data/rest/utils'
+import { redirectTilLoginHvis401 } from '../../data/rest/utils'
 import { useAppStore } from '../../data/stores/app-store'
 import { RSSoknad } from '../../types/rs-types/rs-soknad'
 import { Soknad } from '../../types/types'
+import fetchMedRequestId from '../../utils/fetch'
 import { logger } from '../../utils/logger'
 import { tekst } from '../../utils/tekster'
 import { useAmplitudeInstance } from '../amplitude/amplitude'
@@ -22,35 +23,56 @@ const Endreknapp = () => {
     const [korrigerer, setKorrigerer] = useState<boolean>(false)
     const endreKnappTekst = tekst('kvittering.knapp.endre')
 
-    const korriger = () => {
+    const korriger = async () => {
         if (korrigerer) return
         setKorrigerer(true)
 
-        korrigerSoknad.fetch(
-            `/syk/sykepengesoknad/api/sykepengesoknad-backend/api/v2/soknader/${valgtSoknad!.id}/korriger`,
-            {
-                method: 'POST',
-                credentials: 'include',
-                headers: { 'Content-Type': 'application/json' },
-            },
-            (fetchState: FetchState<RSSoknad>) => {
-                if (hasData(fetchState) && fetchState.httpCode >= 200 && fetchState.httpCode < 400) {
-                    const soknad = new Soknad(fetchState.data)
-                    if (!soknader.find((sok) => sok.id === soknad.id)) {
-                        soknader.push(soknad)
-                        setSoknader(soknader)
-                    }
-                    setAapen(false)
-                    history.push(urlTilSoknad(soknad))
-                    setFeilmeldingTekst('')
-                } else {
-                    logger.error(`Feil ved opprettelse av UTKAST_TIL_KORRIGERING ${fetchState.httpCode}`)
-                    setFeilmeldingTekst(tekst('kvittering.korrigering.feilet'))
+        let fetchResult
+
+        try {
+            fetchResult = await fetchMedRequestId(
+                `/syk/sykepengesoknad/api/sykepengesoknad-backend/api/v2/soknader/${valgtSoknad!.id}/korriger`,
+                {
+                    method: 'POST',
+                    credentials: 'include',
+                    headers: { 'Content-Type': 'application/json' },
                 }
-                setKorrigerer(false)
-            }
-        )
+            )
+        } catch (e) {
+            return
+        }
+
+        const response = fetchResult.response
+        if (redirectTilLoginHvis401(response)) {
+            return
+        }
+
+        if (!response.ok) {
+            logger.error(
+                `Feil ved opprettelse av UTKAST_TIL_KORRIGERING med http kode ${response.status} og x_request_id ${fetchResult.requestId}.`,
+                response
+            )
+            setFeilmeldingTekst(tekst('kvittering.korrigering.feilet'))
+        }
+
+        let data
+        try {
+            data = await response.json()
+        } catch (e) {
+            logger.error(`Feilet ved parsing av JSON for x_request_id ${fetchResult.requestId}.`, e)
+            return
+        }
+
+        const soknad = new Soknad(data)
+        if (!soknader.find((sok) => sok.id === soknad.id)) {
+            soknader.push(soknad)
+            setSoknader(soknader)
+        }
+        setAapen(false)
+        history.push(urlTilSoknad(soknad))
+        setFeilmeldingTekst('')
     }
+
     const endreSøknadPopup = 'Endre søknad popup'
 
     return (
