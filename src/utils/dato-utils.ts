@@ -112,3 +112,11 @@ export const sammeAar = (sporsmal: Sporsmal): boolean => {
     const lastYear = dayjs(sporsmal.max!).year().toString()
     return firstYear === lastYear
 }
+
+export function kalkulerStartsmaneden(sporsmal: Sporsmal) {
+    const idag = dayjs()
+    if (idag.isAfter(sporsmal.max) || idag.isBefore(sporsmal.min)) {
+        return fraBackendTilDate(sporsmal.max!)
+    }
+    return fraBackendTilDate(idag.toString())
+}
