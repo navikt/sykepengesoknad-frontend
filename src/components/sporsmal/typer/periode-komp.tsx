@@ -30,7 +30,7 @@ const PeriodeKomp = ({ sporsmal, index, slettPeriode }: AllProps) => {
         getValues,
         formState: { errors },
     } = useFormContext()
-    const [ periode, setPeriode ] = useState<FormPeriode>({ fom: '', tom: '' })
+    const [periode, setPeriode] = useState<FormPeriode>({ fom: '', tom: '' })
     const id = sporsmal.id + '_' + index
     const feilmelding = hentFeilmelding(sporsmal, errors[id])
 
@@ -38,7 +38,7 @@ const PeriodeKomp = ({ sporsmal, index, slettPeriode }: AllProps) => {
         const periode = hentPeriode(sporsmal, index)
         setPeriode(periode)
         // eslint-disable-next-line
-    }, [ sporsmal ])
+    }, [sporsmal])
 
     const onChange = (fom?: string, tom?: string) => {
         const nyFom = fom ? fom : periode.fom
