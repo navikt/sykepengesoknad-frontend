@@ -20,9 +20,9 @@ const SporsmalTekster = {
     'soknad.feilmelding.BEKREFT_OPPLYSNINGER.lokal':
         'Du må bekrefte at du har lest informasjonen du har fått i søknaden og at opplysningene du har gitt er korrekte.',
     'soknad.feilmelding.BEKREFT_OPPLYSNINGER_UTLAND':
-        'Du må bekrefte at du oppfyller punktene over for å søke om å beholde sykepenger utenfor EØS',
+        'Du må bekrefte at du oppfyller punktene over for å søke om å beholde sykepenger utenfor EU/EØS/Storbritannia',
     'soknad.feilmelding.BEKREFT_OPPLYSNINGER_UTLAND.lokal':
-        'Du må bekrefte at du oppfyller punktene over for å søke om å beholde sykepenger utenfor EØS',
+        'Du må bekrefte at du oppfyller punktene over for å søke om å beholde sykepenger utenfor EU/EØS/Storbritannia',
     'soknad.feilmelding.BETALER_ARBEIDSGIVER': 'Du må svare på om arbeidsgiveren betaler lønnen din når du er syk',
     'soknad.feilmelding.FRAVER_FOR_BEHANDLING':
         'Du må svare på om du brukte egenmeldinger eller var sykmeldt i denne perioden',
@@ -132,12 +132,13 @@ const SporsmalTekster = {
     'soknad.feilmelding.UTDANNING': 'Du må svare på om du har vært under utdanning i denne perioden',
     'soknad.feilmelding.UTDANNING_START': 'Du må svare på når du startet på utdanningen',
     'soknad.feilmelding.UTLAND': 'Du må svare på om du har oppholdt deg i utlandet i denne perioden',
-    'soknad.feilmelding.UTLAND_V2': 'Du må svare på om du har vært utenfor EØS i denne perioden',
+    'soknad.feilmelding.UTLAND_V2': 'Du må svare på om du har vært utenfor EU/EØS/Storbritannia i denne perioden',
     'soknad.feilmelding.UTLAND_NAR': 'Du må svare på om du har oppholdt deg i utlandet i denne perioden',
-    'soknad.feilmelding.UTLAND_NAR_V2': 'Du må svare på om du har vært utenfor EØS i denne perioden',
-    'soknad.feilmelding.PERIODER': 'Du må svare på om du har vært utenfor EØS i denne perioden',
+    'soknad.feilmelding.UTLAND_NAR_V2': 'Du må svare på om du har vært utenfor EU/EØS/Storbritannia i denne perioden',
+    'soknad.feilmelding.PERIODER': 'Du må svare på om du har vært utenfor EU/EØS/Storbritannia i denne perioden',
     'soknad.feilmelding.PERIODEUTLAND': 'Du må oppgi når du skal reise',
-    'soknad.feilmelding.ARBEIDSLEDIG_UTLAND': 'Du må svare på om du har vært utenfor EØS i denne perioden',
+    'soknad.feilmelding.ARBEIDSLEDIG_UTLAND':
+        'Du må svare på om du har vært utenfor EU/EØS/Storbritannia i denne perioden',
     'soknad.feilmelding.UTLANDSOPPHOLD_SOKT_SYKEPENGER':
         'Du må svare på om du har søkt om å beholde sykepenger under dette oppholdet utenfor Norge',
     'soknad.feilmelding.ENKELTSTAENDE_BEHANDLINGSDAGER_UKE': 'Du må oppgi hvilke dager du var til behandling',
@@ -162,7 +163,7 @@ const SporsmalTekster = {
     'soknad.infotekst.utlandsopphold_sokt_sykepenger.ja':
         'Du må ha sendt en egen <a target="_blank" href="%URL%">utenlandssøknad</a> for å svare ja på dette spørsmålet. Husk at du også må fullføre denne søknaden om sykepenger.',
     'soknad.infotekst.utlandsopphold_sokt_sykepenger.nei':
-        'I utgangspunktet kan du bare få sykepenger mens du er i et land innenfor EØS. Du kan likevel <a href="%URL%" target="_blank">søke NAV om å få reise ut av EØS</a> og beholde sykepengene i en begrenset periode.',
+        'I utgangspunktet kan du bare få sykepenger mens du er i et land innenfor EU/EØS/Storbritannia. Du kan likevel <a href="%URL%" target="_blank">søke NAV om å få reise ut av EU/EØS/Storbritannia</a> og beholde sykepengene i en begrenset periode.',
 
     'sykepengesoknad.periodevelger.legg-til-ekstra': '+ Legg til ekstra periode',
     'sykepengesoknad.periodevelger.slett': 'Slett periode',
