@@ -2,10 +2,8 @@ import { BodyShort, Button, Heading, Modal } from '@navikt/ds-react'
 import React, { useState } from 'react'
 import { useHistory } from 'react-router'
 
-import useFetch from '../../data/rest/use-fetch'
 import { redirectTilLoginHvis401 } from '../../data/rest/utils'
 import { useAppStore } from '../../data/stores/app-store'
-import { RSSoknad } from '../../types/rs-types/rs-soknad'
 import { Soknad } from '../../types/types'
 import fetchMedRequestId from '../../utils/fetch'
 import { logger } from '../../utils/logger'
@@ -15,7 +13,6 @@ import { urlTilSoknad } from '../soknad/soknad-link'
 
 const Endreknapp = () => {
     const { valgtSoknad, soknader, setSoknader, setFeilmeldingTekst } = useAppStore()
-    const korrigerSoknad = useFetch<RSSoknad>()
     const history = useHistory()
     const { logEvent } = useAmplitudeInstance()
     const [aapen, setAapen] = useState<boolean>(false)
@@ -26,9 +23,9 @@ const Endreknapp = () => {
     const korriger = async () => {
         if (korrigerer) return
         setKorrigerer(true)
+        setFeilmeldingTekst('')
 
         let fetchResult
-
         try {
             fetchResult = await fetchMedRequestId(
                 `/syk/sykepengesoknad/api/sykepengesoknad-backend/api/v2/soknader/${valgtSoknad!.id}/korriger`,
@@ -70,7 +67,6 @@ const Endreknapp = () => {
         }
         setAapen(false)
         history.push(urlTilSoknad(soknad))
-        setFeilmeldingTekst('')
     }
 
     const endreSøknadPopup = 'Endre søknad popup'
@@ -119,7 +115,7 @@ const Endreknapp = () => {
                                 soknadstype: valgtSoknad?.soknadstype,
                                 component: endreSøknadPopup,
                             })
-                            korriger()
+                            korriger().catch((e: Error) => logger.error(e.message))
                         }}
                     >
                         {tekst('endre.modal.bekreft')}
