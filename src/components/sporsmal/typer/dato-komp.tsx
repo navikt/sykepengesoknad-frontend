@@ -1,7 +1,4 @@
-import '@navikt/ds-datepicker/lib/index.css'
-
 import { Datepicker } from '@navikt/ds-datepicker'
-import { Label } from '@navikt/ds-react'
 import React from 'react'
 import { Controller, useFormContext } from 'react-hook-form'
 
@@ -17,9 +14,6 @@ const DatoInput = ({ sporsmal }: SpmProps) => {
 
     return (
         <div className="dato-komp">
-            <label className="skjema__sporsmal" htmlFor={sporsmal.id}>
-                <Label>{sporsmal.sporsmalstekst}</Label>
-            </label>
             <Controller
                 name={sporsmal.id}
                 rules={{
@@ -37,13 +31,11 @@ const DatoInput = ({ sporsmal }: SpmProps) => {
                 render={({ field }) => (
                     <Datepicker
                         locale="nb"
-                        inputId={field.name}
-                        inputLabel="Oppgi dato"
+                        id={sporsmal.id}
+                        label={sporsmal.sporsmalstekst}
                         onChange={field.onChange}
                         value={field.value}
-                        inputProps={{
-                            name: field.name,
-                        }}
+                        inputName={field.name}
                         calendarSettings={{
                             showWeekNumbers: true,
                             position: skalBrukeFullskjermKalender(),

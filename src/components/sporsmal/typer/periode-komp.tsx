@@ -1,5 +1,3 @@
-import '@navikt/ds-datepicker/lib/index.css'
-
 import { Datepicker } from '@navikt/ds-datepicker'
 import { BodyShort } from '@navikt/ds-react'
 import React, { useEffect, useState } from 'react'
@@ -32,7 +30,7 @@ const PeriodeKomp = ({ sporsmal, index, slettPeriode }: AllProps) => {
         getValues,
         formState: { errors },
     } = useFormContext()
-    const [periode, setPeriode] = useState<FormPeriode>({ fom: '', tom: '' })
+    const [ periode, setPeriode ] = useState<FormPeriode>({ fom: '', tom: '' })
     const id = sporsmal.id + '_' + index
     const feilmelding = hentFeilmelding(sporsmal, errors[id])
 
@@ -40,7 +38,7 @@ const PeriodeKomp = ({ sporsmal, index, slettPeriode }: AllProps) => {
         const periode = hentPeriode(sporsmal, index)
         setPeriode(periode)
         // eslint-disable-next-line
-    }, [sporsmal])
+    }, [ sporsmal ])
 
     const onChange = (fom?: string, tom?: string) => {
         const nyFom = fom ? fom : periode.fom
@@ -93,18 +91,13 @@ const PeriodeKomp = ({ sporsmal, index, slettPeriode }: AllProps) => {
                     render={() => (
                         <fieldset className="skjemagruppe">
                             <div className="fom skjemaelement">
-                                <label className="skjemaelement__label" htmlFor={sporsmal.id + '_' + index + '_fom'}>
-                                    <BodyShort as="span">{tekst('sykepengesoknad.periodevelger.fom')}</BodyShort>
-                                </label>
                                 <Datepicker
                                     locale="nb"
-                                    inputId={sporsmal.id + '_' + index + '_fom'}
-                                    inputLabel="Oppgi dato"
+                                    id={sporsmal.id + '_' + index + '_fom'}
+                                    label={tekst('sykepengesoknad.periodevelger.fom')}
                                     onChange={(value: any) => onChange(value, undefined)}
                                     value={periode.fom}
-                                    inputProps={{
-                                        name: sporsmal.id + '_' + index + '_fom',
-                                    }}
+                                    inputName={sporsmal.id + '_' + index + '_fom'}
                                     calendarSettings={{
                                         showWeekNumbers: true,
                                         position: skalBrukeFullskjermKalender(),
@@ -121,18 +114,13 @@ const PeriodeKomp = ({ sporsmal, index, slettPeriode }: AllProps) => {
                                 />
                             </div>
                             <div className="tom skjemaelement">
-                                <label className="skjemaelement__label" htmlFor={sporsmal.id + '_' + index + '_tom'}>
-                                    <BodyShort as="span">{tekst('sykepengesoknad.periodevelger.tom')}</BodyShort>
-                                </label>
                                 <Datepicker
                                     locale="nb"
-                                    inputId={sporsmal.id + '_' + index + '_tom'}
-                                    inputLabel="Oppgi dato"
+                                    id={sporsmal.id + '_' + index + '_tom'}
+                                    label={tekst('sykepengesoknad.periodevelger.tom')}
                                     onChange={(value: any) => onChange(undefined, value)}
                                     value={periode.tom}
-                                    inputProps={{
-                                        name: sporsmal.id + '_' + index + '_tom',
-                                    }}
+                                    inputName={sporsmal.id + '_' + index + '_tom'}
                                     calendarSettings={{
                                         showWeekNumbers: true,
                                         position: skalBrukeFullskjermKalender(),
