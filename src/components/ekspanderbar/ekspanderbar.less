@@ -5,7 +5,6 @@
 
     .navds-accordion__header {
         justify-content: flex-start;
-        color: #005b82;
         background-color: @navds-global-color-white;
         border-bottom: 0;
         padding: 0;
@@ -18,10 +17,15 @@
         .navds-accordion__header-content {
             width: auto;
         }
+
+        .navds-heading, .navds-heading:hover {
+            color: @navds-global-color-deepblue-500;
+        }
     }
 
     .navds-accordion__content {
-        background-color: #f1f1f1;
+        background-color: @navds-global-color-gray-100;
+        color: @navds-global-color-deepblue-500;
         padding: 1.2rem 1.5rem 1.5rem;
         border-bottom: 0;
         border-radius: 5px;
