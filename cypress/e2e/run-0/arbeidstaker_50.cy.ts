@@ -99,7 +99,7 @@ describe('Tester arbeidstakersøknad - gradert 50%', () => {
 
         // Test spørsmål
         cy.get('.inputPanelGruppe__inner label:first-child > input[value=JA]').click({ force: true })
-        cy.contains('Når var du utenfor EØS?')
+        cy.contains('Når var du utenfor EU/EØS/Storbritannia?')
         cy.get('#687309_0 .fom .ds-datepicker__calendarButton').click()
         cy.get('.DayPicker-Day').contains('14').click()
         cy.get('#687309_0 .tom .ds-datepicker__calendarButton').click()

@@ -4,7 +4,7 @@ import React, { useEffect, useState } from 'react'
 import { Controller, useFormContext } from 'react-hook-form'
 
 import { skalBrukeFullskjermKalender } from '../../../utils/browser-utils'
-import { fraBackendTilDate } from '../../../utils/dato-utils'
+import { kalkulerStartsmaneden } from '../../../utils/dato-utils'
 import { validerFom, validerPeriode, validerTom } from '../../../utils/sporsmal/valider-periode'
 import { tekst } from '../../../utils/tekster'
 import Vis from '../../vis'
@@ -109,7 +109,7 @@ const PeriodeKomp = ({ sporsmal, index, slettPeriode }: AllProps) => {
                                         maxDate: sporsmal.max || undefined,
                                     }}
                                     dayPickerProps={{
-                                        initialMonth: fraBackendTilDate(sporsmal.max!),
+                                        initialMonth: kalkulerStartsmaneden(sporsmal),
                                     }}
                                 />
                             </div>
@@ -132,7 +132,7 @@ const PeriodeKomp = ({ sporsmal, index, slettPeriode }: AllProps) => {
                                         maxDate: sporsmal.max || undefined,
                                     }}
                                     dayPickerProps={{
-                                        initialMonth: fraBackendTilDate(sporsmal.max!),
+                                        initialMonth: kalkulerStartsmaneden(sporsmal),
                                     }}
                                 />
                             </div>

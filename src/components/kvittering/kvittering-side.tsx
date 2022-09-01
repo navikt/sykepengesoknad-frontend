@@ -66,7 +66,7 @@ const KvitteringSide = () => {
         valgtSoknad.arbeidsgiver !== undefined &&
         !erSendtTilArbeidsgiver &&
         valgtSoknad.soknadstype !== RSSoknadstype.REISETILSKUDD
-    const skalViseKnapperad =
+    const skalViseEndreEllerEttersend =
         valgtSoknad.soknadstype !== RSSoknadstype.OPPHOLD_UTLAND && (skalViseEndre || skalViseSendTilArbeidsgiver)
 
     const gjenstaendeSoknader = hentGjenstaendeSoknader(soknader)
@@ -80,43 +80,44 @@ const KvitteringSide = () => {
                 <HotjarTrigger jsTrigger={hentHotjarJsTrigger(valgtSoknad.soknadstype, 'kvittering')}>
                     <Kvittering />
                     <GjenstaendeSoknader soknader={gjenstaendeSoknader} />
-                    <Vis
-                        hvis={skalViseKnapperad}
-                        render={() => (
-                            <div className="knapperad">
-                                <Vis
-                                    hvis={gjenstaendeSoknader.length == 0}
-                                    render={() => (
-                                        <Button
-                                            className="ferdig-knapp"
-                                            onClick={() => {
-                                                logEvent('knapp klikket', {
-                                                    tekst: tekst('kvittering.ferdig'),
-                                                    soknadstype: valgtSoknad?.soknadstype,
-                                                })
-                                                window.location.href = sykefravaerUrl()
-                                            }}
-                                        >
-                                            {tekst('kvittering.ferdig')}
-                                        </Button>
-                                    )}
-                                ></Vis>
 
-                                <Vis hvis={skalViseEndre} render={() => <Endreknapp />} />
+                    <div className="knapperad">
+                        <Vis
+                            hvis={gjenstaendeSoknader.length == 0}
+                            render={() => (
+                                <Button
+                                    className="ferdig-knapp"
+                                    onClick={() => {
+                                        logEvent('knapp klikket', {
+                                            tekst: tekst('kvittering.ferdig'),
+                                            soknadstype: valgtSoknad?.soknadstype,
+                                        })
+                                        window.location.href = sykefravaerUrl()
+                                    }}
+                                >
+                                    {tekst('kvittering.ferdig')}
+                                </Button>
+                            )}
+                        ></Vis>
 
-                                <Vis
-                                    hvis={skalViseSendTilArbeidsgiver}
-                                    render={() => (
-                                        <Ettersending
-                                            gjelder="arbeidsgiver"
-                                            setRerendrekvittering={setRerendrekvittering}
-                                        />
-                                    )}
-                                />
-                            </div>
-                        )}
-                    />
-
+                        <Vis
+                            hvis={skalViseEndreEllerEttersend}
+                            render={() => (
+                                <>
+                                    <Vis hvis={skalViseEndre} render={() => <Endreknapp />} />
+                                    <Vis
+                                        hvis={skalViseSendTilArbeidsgiver}
+                                        render={() => (
+                                            <Ettersending
+                                                gjelder="arbeidsgiver"
+                                                setRerendrekvittering={setRerendrekvittering}
+                                            />
+                                        )}
+                                    />
+                                </>
+                            )}
+                        />
+                    </div>
                     <div aria-live="polite">
                         <Vis hvis={feilmeldingTekst} render={() => <Alert variant="error">{feilmeldingTekst}</Alert>} />
                     </div>

@@ -3,7 +3,7 @@ import { Sykmelding } from '../../types/sykmelding'
 import { jsonDeepCopy } from '../../utils/json-deep-copy'
 import { soknaderReisetilskudd } from './data/reisetilskudd'
 import { soknaderIntegration } from './data/soknader-integration'
-import { arbeidstaker, soknaderOpplaering } from './data/soknader-opplaering'
+import { arbeidstaker, oppholdUtland, soknaderOpplaering } from './data/soknader-opplaering'
 import { arbeidstaker100Syk, sykmeldinger } from './data/sykmeldinger'
 
 export interface Persona {
@@ -59,5 +59,12 @@ export const toUsendteSykmeldinger = () => {
     return {
         soknader: [arbeidstaker],
         sykmeldinger: [arbeidstaker100Syk, usendt, eldsteUsendte],
+    } as Persona
+}
+
+export const bareUtland = () => {
+    return {
+        soknader: [oppholdUtland],
+        sykmeldinger: [arbeidstaker100Syk],
     } as Persona
 }
