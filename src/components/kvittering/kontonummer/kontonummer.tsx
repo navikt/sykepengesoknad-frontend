@@ -1,34 +1,61 @@
 import { BodyShort, Label } from '@navikt/ds-react'
 import parser from 'html-react-parser'
-import React, { useEffect, useState } from 'react'
+import React, { useCallback, useEffect, useState } from 'react'
 
-import { Personalia } from '../../../types/types'
+import { redirectTilLoginHvis401 } from '../../../data/rest/utils'
 import { isMockBackend, isProd } from '../../../utils/environment'
+import fetchMedRequestId from '../../../utils/fetch'
+import { logger } from '../../../utils/logger'
 import { tekst } from '../../../utils/tekster'
 import Vis from '../../vis'
 
 const Kontonummer = () => {
     const [kontonummer, setKontonummer] = useState<string>()
 
-    useEffect(() => {
-        hentKontonummer()
-    }, [])
-
-    async function hentKontonummer() {
-        if (isProd()) {
-            const res = await fetch('https://www.nav.no/person/personopplysninger-api/personalia', {
+    const fetchData = useCallback(async () => {
+        let fetchResult
+        try {
+            fetchResult = await fetchMedRequestId('https://www.nav.no/person/personopplysninger-api/personalia', {
                 method: 'GET',
                 credentials: 'include',
                 headers: { 'Content-Type': 'application/json' },
             })
-            const data: Personalia = await res.json()
-            setKontonummer(data?.personalia?.kontonr)
+        } catch (e) {
+            return
+        }
+
+        const response = fetchResult.response
+        if (redirectTilLoginHvis401(response)) {
+            return
+        }
+
+        if (!response.ok) {
+            logger.error(
+                `Feil ved henting av kontonummer med feilkode ${response.status} og x_request_id ${fetchResult.requestId}.`,
+                response
+            )
+            return
+        }
+
+        let data
+        try {
+            data = await fetchResult.response.json()
+        } catch (e) {
+            logger.error(`Feilet ved parsing av JSON for x_request_id ${fetchResult.requestId}.`, e)
+            return
+        }
+        setKontonummer(data?.personalia?.kontonr)
+    }, [])
+
+    useEffect(() => {
+        if (isProd()) {
+            fetchData().catch((e: Error) => logger.error(e.message))
         }
 
         if (isMockBackend()) {
             setKontonummer('12332112332')
         }
-    }
+    }, [fetchData])
 
     const formatterKontonr = (kontonummer: string) =>
         kontonummer.length === 11 ? kontonummer.replace(/^(.{4})(.{2})(.*)$/, '$1 $2 $3') : kontonummer
