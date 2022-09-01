@@ -1,11 +1,13 @@
-import React, { useCallback, useEffect, useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { FormProvider, useForm } from 'react-hook-form'
 import { useHistory, useParams } from 'react-router-dom'
 
 import { RouteParams } from '../../../app'
-import { redirectTilLoginHvis401 } from '../../../data/rest/utils'
+import useFetch from '../../../data/rest/use-fetch'
+import { FetchState, hasData, redirectTilLoginHvis401 } from '../../../data/rest/utils'
 import { useAppStore } from '../../../data/stores/app-store'
 import { TagTyper } from '../../../types/enums'
+import { RSMottakerResponse } from '../../../types/rs-types/rest-response/rs-mottakerresponse'
 import { RSOppdaterSporsmalResponse } from '../../../types/rs-types/rest-response/rs-oppdatersporsmalresponse'
 import { RSMottaker } from '../../../types/rs-types/rs-mottaker'
 import { RSSoknadstatus } from '../../../types/rs-types/rs-soknadstatus'
@@ -14,7 +16,6 @@ import { sporsmalToRS } from '../../../types/rs-types/rs-sporsmal'
 import { RSSvartype } from '../../../types/rs-types/rs-svartype'
 import { Soknad, Sporsmal } from '../../../types/types'
 import { SEPARATOR } from '../../../utils/constants'
-import fetchMedRequestId from '../../../utils/fetch'
 import { logger } from '../../../utils/logger'
 import { useAmplitudeInstance } from '../../amplitude/amplitude'
 import FeilOppsummering from '../../feil/feil-oppsummering'
@@ -57,6 +58,7 @@ const SporsmalForm = () => {
     let restFeilet = false
     let sporsmal = valgtSoknad!.sporsmal[spmIndex]
     const nesteSporsmal = valgtSoknad!.sporsmal[spmIndex + 1]
+    const rsMottakerResponseFetch = useFetch<RSMottakerResponse>()
 
     useEffect(() => {
         methods.reset(hentFormState(sporsmal), { keepValues: false })
@@ -82,113 +84,93 @@ const SporsmalForm = () => {
 
         const sisteSide = erSiste()
         setErSiste(sisteSide)
-        if (sisteSide) {
-            hentMottaker().catch((e: Error) => logger.error(e.message))
-        }
+        if (sisteSide) hentMottaker()
         // eslint-disable-next-line
     }, [spmIndex])
 
     const sendOppdaterSporsmal = async () => {
         let soknad = valgtSoknad
+        const res = await fetch(
+            `/syk/sykepengesoknad/api/sykepengesoknad-backend/api/v2/soknader/${soknad!.id}/sporsmal/${sporsmal.id}`,
+            {
+                method: 'PUT',
+                credentials: 'include',
+                body: JSON.stringify(sporsmalToRS(sporsmal)),
+                headers: { 'Content-Type': 'application/json' },
+            }
+        )
 
-        let fetchResult
         try {
-            fetchResult = await fetchMedRequestId(
-                `/syk/sykepengesoknad/api/sykepengesoknad-backend/api/v2/soknader/${soknad!.id}/sporsmal/${
-                    sporsmal.id
-                }`,
-                {
-                    method: 'PUT',
-                    credentials: 'include',
-                    body: JSON.stringify(sporsmalToRS(sporsmal)),
-                    headers: { 'Content-Type': 'application/json' },
-                }
-            )
-        } catch (e) {
-            restFeilet = true
-            return
-        }
-
-        const response = fetchResult.response
-        if (redirectTilLoginHvis401(response)) {
-            return
-        }
-
-        if (!response.ok) {
-            if (response.status === 400) {
-                setFeilState(true)
-            } else {
-                logger.error(
-                    `Feilet ved kall OPPDATER_SPORSMAL med http kode ${response.status} og x_request_id ${fetchResult.requestId}.`,
-                    response
-                )
+            let data: any = {}
+            try {
+                data = await res.json()
+                // eslint-disable-next-line no-empty
+            } finally {
             }
 
-            restFeilet = true
-            return
-        }
+            const httpCode = res.status
+            if ([200, 201, 203, 206].includes(httpCode)) {
+                const rsOppdaterSporsmalResponse: RSOppdaterSporsmalResponse = data
 
-        let data
-        try {
-            data = await response.json()
+                if (rsOppdaterSporsmalResponse.mutertSoknad) {
+                    soknad = new Soknad(rsOppdaterSporsmalResponse.mutertSoknad)
+                } else {
+                    const spm = rsOppdaterSporsmalResponse.oppdatertSporsmal
+                    erSiste
+                        ? (soknad!.sporsmal[spmIndex + 1] = new Sporsmal(spm, undefined as any, true))
+                        : (soknad!.sporsmal[spmIndex] = new Sporsmal(spm, undefined as any, true))
+                }
+                soknader[soknader.findIndex((sok) => sok.id === soknad!.id)] = soknad as any
+                setSoknader(soknader)
+                setValgtSoknad(soknad)
+            } else if (
+                httpCode === 400 &&
+                data !== null &&
+                typeof data === 'object' &&
+                data.reason === 'FEIL_STATUS_FOR_OPPDATER_SPORSMAL'
+            ) {
+                restFeilet = true
+                setFeilState(true)
+            } else if (
+                httpCode === 400 &&
+                data !== null &&
+                typeof data === 'object' &&
+                data.reason === 'SPORSMAL_FINNES_IKKE_I_SOKNAD'
+            ) {
+                logger.warn(
+                    'SPORSMAL_FINNES_IKKE_I_SOKNAD, gir bruker mulighet for å refreshe siden for å resette state'
+                )
+                restFeilet = true
+                setFeilState(true)
+            } else {
+                if (redirectTilLoginHvis401(res)) {
+                    return
+                }
+                logger.error(`Feil ved kall OPPDATER_SPORSMAL, uhåndtert http kode ${httpCode}`, res)
+                restFeilet = true
+            }
         } catch (e) {
-            logger.error(`Feilet ved parsing av JSON for x_request_id ${fetchResult.requestId}.`, e)
             restFeilet = true
-            return
         }
-
-        const rsOppdaterSporsmalResponse: RSOppdaterSporsmalResponse = data
-        if (rsOppdaterSporsmalResponse.mutertSoknad) {
-            soknad = new Soknad(rsOppdaterSporsmalResponse.mutertSoknad)
-        } else {
-            const spm = rsOppdaterSporsmalResponse.oppdatertSporsmal
-            erSiste
-                ? (soknad!.sporsmal[spmIndex + 1] = new Sporsmal(spm, undefined as any, true))
-                : (soknad!.sporsmal[spmIndex] = new Sporsmal(spm, undefined as any, true))
-        }
-
-        soknader[soknader.findIndex((sok) => sok.id === soknad!.id)] = soknad as any
-        setSoknader(soknader)
-        setValgtSoknad(soknad)
     }
 
-    const hentMottaker = useCallback(async () => {
-        let fetchResult
-        try {
-            fetchResult = await fetchMedRequestId(
-                `/syk/sykepengesoknad/api/sykepengesoknad-backend/api/v2/soknader/${valgtSoknad!.id}/finnMottaker`,
-                {
-                    method: 'POST',
-                    credentials: 'include',
-                    headers: { 'Content-Type': 'application/json' },
+    const hentMottaker = () => {
+        rsMottakerResponseFetch.fetch(
+            `/syk/sykepengesoknad/api/sykepengesoknad-backend/api/v2/soknader/${valgtSoknad!.id}/finnMottaker`,
+            {
+                method: 'POST',
+                credentials: 'include',
+                headers: { 'Content-Type': 'application/json' },
+            },
+            (fetchState: FetchState<RSMottakerResponse>) => {
+                if (hasData(fetchState)) {
+                    setMottaker(fetchState.data.mottaker)
+                } else {
+                    logger.error(`Klarte ikke hente MOTTAKER av søknad ${fetchState.httpCode}`)
                 }
-            )
-        } catch (e) {
-            return
-        }
-
-        const response = fetchResult.response
-        if (redirectTilLoginHvis401(response)) {
-            return
-        }
-
-        if (!response.ok) {
-            logger.error(
-                `Klarte ikke hente MOTTAKER av søknad http kode ${response.status} og x_request_id ${fetchResult.requestId}.`,
-                response
-            )
-            return
-        }
-
-        try {
-            const data = await response.json()
-            setMottaker(data.mottaker)
-        } catch (e) {
-            logger.error(`Feilet ved parsing av JSON for x_request_id ${fetchResult.requestId}.`, e)
-            return
-        }
-        // eslint-disable-next-line
-    }, [])
+            }
+        )
+    }
 
     const sendSoknad = async () => {
         if (!valgtSoknad) {
@@ -202,56 +184,48 @@ const SporsmalForm = () => {
                 return
             }
         }
+        const res = await fetch(
+            `/syk/sykepengesoknad/api/sykepengesoknad-backend/api/v2/soknader/${valgtSoknad!.id}/send`,
+            {
+                method: 'POST',
+                credentials: 'include',
+                headers: { 'Content-Type': 'application/json' },
+            }
+        )
 
-        let fetchResult
         try {
-            fetchResult = await fetchMedRequestId(
-                `/syk/sykepengesoknad/api/sykepengesoknad-backend/api/v2/soknader/${valgtSoknad!.id}/send`,
-                {
-                    method: 'POST',
-                    credentials: 'include',
-                    headers: { 'Content-Type': 'application/json' },
+            const httpCode = res.status
+            if (redirectTilLoginHvis401(res)) {
+                return
+            } else if ([200, 201, 203, 206].includes(httpCode)) {
+                if (mottaker === RSMottaker.ARBEIDSGIVER) {
+                    valgtSoknad.sendtTilArbeidsgiverDato = new Date()
                 }
-            )
+                if (mottaker === RSMottaker.NAV) {
+                    valgtSoknad.sendtTilNAVDato = new Date()
+                }
+                if (mottaker === RSMottaker.ARBEIDSGIVER_OG_NAV) {
+                    valgtSoknad.sendtTilArbeidsgiverDato = new Date()
+                    valgtSoknad.sendtTilNAVDato = new Date()
+                }
+
+                valgtSoknad.status = RSSoknadstatus.SENDT
+                setValgtSoknad(valgtSoknad)
+                soknader[soknader.findIndex((sok) => sok.id === valgtSoknad.id)] = valgtSoknad
+                if (valgtSoknad.korrigerer !== null) {
+                    soknader.find((sok) => sok.id === valgtSoknad.korrigerer)!.status = RSSoknadstatus.KORRIGERT
+                }
+                setSoknader(soknader)
+
+                history.push(`/kvittering/${valgtSoknad!.id}${window.location.search}`)
+            } else {
+                logger.error('Feil ved sending av søknad', res)
+                restFeilet = true
+            }
         } catch (e) {
+            logger.error('Feil ved sending av søknad', e)
             restFeilet = true
-            return
         }
-
-        const response = fetchResult.response
-        if (redirectTilLoginHvis401(response)) {
-            return
-        }
-
-        if (!response.ok) {
-            logger.error(
-                `Feilet ved sending av søknad ${valgtSoknad.id} med http kode ${response.status} og x_request_id ${fetchResult.requestId}`,
-                response
-            )
-            restFeilet = true
-            return
-        }
-
-        if (mottaker === RSMottaker.ARBEIDSGIVER) {
-            valgtSoknad.sendtTilArbeidsgiverDato = new Date()
-        }
-        if (mottaker === RSMottaker.NAV) {
-            valgtSoknad.sendtTilNAVDato = new Date()
-        }
-        if (mottaker === RSMottaker.ARBEIDSGIVER_OG_NAV) {
-            valgtSoknad.sendtTilArbeidsgiverDato = new Date()
-            valgtSoknad.sendtTilNAVDato = new Date()
-        }
-
-        valgtSoknad.status = RSSoknadstatus.SENDT
-        setValgtSoknad(valgtSoknad)
-        soknader[soknader.findIndex((sok) => sok.id === valgtSoknad.id)] = valgtSoknad
-        if (valgtSoknad.korrigerer !== null) {
-            soknader.find((sok) => sok.id === valgtSoknad.korrigerer)!.status = RSSoknadstatus.KORRIGERT
-        }
-        setSoknader(soknader)
-
-        history.push(`/kvittering/${valgtSoknad!.id}${window.location.search}`)
     }
 
     const preSubmit = () => {

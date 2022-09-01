@@ -1,110 +1,73 @@
 import { Loader } from '@navikt/ds-react'
-import React, { useCallback, useEffect, useState } from 'react'
+import React, { useEffect } from 'react'
 
 import IngenData from '../components/feil/ingen-data'
+import { RSSoknad } from '../types/rs-types/rs-soknad'
+import { Sykmelding } from '../types/sykmelding'
 import { Soknad } from '../types/types'
-import fetchMedRequestId from '../utils/fetch'
 import { logger } from '../utils/logger'
-import { redirectTilLoginHvis401 } from './rest/utils'
+import useFetch from './rest/use-fetch'
+import { FetchState, hasAny401, hasData, hasFailed, isAnyNotStartedOrPending, isNotStarted } from './rest/utils'
 import { useAppStore } from './stores/app-store'
 
 export function DataFetcher(props: { children: any }) {
-    const { setSoknader, setSykmeldinger, soknader, sykmeldinger } = useAppStore()
-    const [laster, setLaster] = useState<boolean>(false)
-    const [soknaderFeilet, setSoknaderFeilet] = useState<boolean>(false)
-    const [sykmeldingerFeilet, setSykmeldingerFeilet] = useState<boolean>(false)
+    const { setSoknader, setSykmeldinger } = useAppStore()
 
-    const hentSoknader = useCallback(async () => {
-        let fetchResult
-
-        try {
-            fetchResult = await fetchMedRequestId('/syk/sykepengesoknad/api/sykepengesoknad-backend/api/v2/soknader', {
-                credentials: 'include',
-            })
-        } catch (e) {
-            setSoknaderFeilet(true)
-            return
-        }
-
-        const response = fetchResult.response
-        if (redirectTilLoginHvis401(response)) {
-            return
-        }
-
-        if (!response.ok) {
-            logger.error(
-                `Feil ved henting av sykepengesoknader med feilkode ${response.status} og x_request_id ${fetchResult.requestId}.`,
-                response
-            )
-            setSoknaderFeilet(true)
-            return
-        }
-
-        try {
-            const data = await fetchResult.response.json()
-            setSoknader(
-                data!.map((s: any) => {
-                    return new Soknad(s)
-                })
-            )
-        } catch (e) {
-            logger.error(`Feilet ved parsing av JSON for x_request_id ${fetchResult.requestId}.`, e)
-            setSoknaderFeilet(true)
-            return
-        }
-    }, [setSoknader])
-
-    const hentSykmeldinger = useCallback(async () => {
-        let fetchResult
-        try {
-            fetchResult = await fetchMedRequestId('/syk/sykepengesoknad/api/sykmeldinger-backend/api/v2/sykmeldinger', {
-                credentials: 'include',
-            })
-        } catch (e) {
-            setSykmeldingerFeilet(true)
-            return
-        }
-
-        const response = fetchResult.response
-        if (redirectTilLoginHvis401(response)) {
-            return
-        }
-
-        if (!response.ok) {
-            logger.error(
-                `Feil ved henting av sykmeldinger med feilkode ${response.status} og x_request_id ${fetchResult.requestId}.`,
-                response
-            )
-            setSykmeldingerFeilet(true)
-            return
-        }
-
-        try {
-            const data = await fetchResult.response.json()
-            setSykmeldinger(data)
-        } catch (e) {
-            logger.error(`Feilet ved parsing av JSON for x_request_id ${fetchResult.requestId}.`, e)
-            setSykmeldingerFeilet(true)
-            return
-        }
-    }, [setSykmeldinger])
+    const rssoknader = useFetch<RSSoknad[]>()
+    const sykmeldinger = useFetch<Sykmelding[]>()
 
     useEffect(() => {
-        setLaster(true)
-        hentSoknader().catch((e: Error) => logger.error(e.message))
-        hentSykmeldinger().catch((e: Error) => logger.error(e.message))
-        setLaster(false)
-    }, [hentSoknader, hentSykmeldinger])
+        if (isNotStarted(rssoknader)) {
+            rssoknader.fetch(
+                '/syk/sykepengesoknad/api/sykepengesoknad-backend/api/v2/soknader',
+                {
+                    credentials: 'include',
+                },
+                (fetchState: FetchState<RSSoknad[]>) => {
+                    if (hasData(fetchState)) {
+                        setSoknader(
+                            fetchState.data!.map((soknad) => {
+                                return new Soknad(soknad)
+                            })
+                        )
+                    }
+                }
+            )
+        }
+        if (isNotStarted(sykmeldinger)) {
+            const url = '/syk/sykepengesoknad/api/sykmeldinger-backend/api/v2/sykmeldinger'
+            sykmeldinger.fetch(
+                url,
+                {
+                    credentials: 'include',
+                },
+                (fetchState: FetchState<Sykmelding[]>) => {
+                    if (hasData(fetchState)) {
+                        setSykmeldinger(fetchState.data)
+                    }
+                }
+            )
+        }
+        // eslint-disable-next-line
+    }, [rssoknader])
 
-    if (laster) {
+    if (isAnyNotStartedOrPending([rssoknader, sykmeldinger])) {
         return (
             <div className="data-loader">
                 <Loader variant="neutral" size="2xlarge" />
             </div>
         )
-    }
-
-    if (soknaderFeilet || sykmeldingerFeilet) {
+    } else if (hasAny401([rssoknader, sykmeldinger])) {
+        window.location.reload() // refresher slik at ssr authen rydder opp
+    } else if (hasFailed(rssoknader)) {
+        logger.warn(
+            `Klarer ikke hente soknader = ${rssoknader.httpCode} ${JSON.stringify(rssoknader.error, null, 2)} ]`
+        )
+        return <IngenData />
+    } else if (hasFailed(sykmeldinger)) {
+        logger.warn(
+            `Klarer ikke hente sykmeldinger = ${sykmeldinger.httpCode} ${JSON.stringify(sykmeldinger.error, null, 2)} ]`
+        )
         return <IngenData />
     }
 

@@ -4,7 +4,6 @@ import { useDropzone } from 'react-dropzone'
 import { useFormContext } from 'react-hook-form'
 
 import { useAppStore } from '../../../data/stores/app-store'
-import fetchMedRequestId from '../../../utils/fetch'
 import {
     customTruncet,
     formaterFilstørrelse,
@@ -27,37 +26,22 @@ const DragAndDrop = () => {
     } = useFormContext()
     const [formErDisabled, setFormErDisabled] = useState<boolean>(false)
 
-    const fetchData = useCallback(async () => {
-        let fetchResult
-        try {
-            fetchResult = await fetchMedRequestId(
-                `/syk/sykepengesoknad/api/flex-bucket-uploader/api/v2/kvittering/${valgtKvittering!.blobId}`,
-                {
-                    method: 'GET',
-                    credentials: 'include',
-                    headers: { 'Content-Type': 'application/json' },
-                }
-            )
-        } catch (e) {
-            return
-        }
-
-        const result = fetchResult.response
-        if (!result.ok) {
-            throw new Error(
-                `Feilet ved henting av kvittering fra flex-bucket-uploader med feilkode: ${result.status} og x_request_id ${fetchResult.requestId}`
-            )
-        }
-
-        result.blob().then((blob) => {
-            setValgtFil(blob as any)
-        })
-    }, [setValgtFil, valgtKvittering])
-
     useEffect(() => {
         if (valgtKvittering?.blobId) {
             setFormErDisabled(true)
-            fetchData().catch((e: Error) => logger.error(e.message))
+            fetch(`/syk/sykepengesoknad/api/flex-bucket-uploader/api/v2/kvittering/${valgtKvittering.blobId}`, {
+                method: 'GET',
+                credentials: 'include',
+                headers: { 'Content-Type': 'application/json' },
+            }).then((res) => {
+                if (res.ok) {
+                    res.blob().then((blob) => {
+                        setValgtFil(blob as any)
+                    })
+                } else {
+                    logger.warn(`Klarte ikke hente bilde fra flex-bucket-uploader, status: ${res.status}`)
+                }
+            })
         } else {
             setFormErDisabled(false)
         }
@@ -65,7 +49,7 @@ const DragAndDrop = () => {
         return () => {
             setValgtFil(undefined)
         }
-    }, [setValgtFil, valgtKvittering, fetchData])
+    }, [setValgtFil, valgtKvittering])
 
     const onDropCallback = useCallback(
         (filer) => {

@@ -4,7 +4,6 @@ import React, { useState } from 'react'
 
 import { redirectTilLoginHvis401 } from '../../data/rest/utils'
 import { useAppStore } from '../../data/stores/app-store'
-import fetchMedRequestId from '../../utils/fetch'
 import { logger } from '../../utils/logger'
 import { tekst } from '../../utils/tekster'
 
@@ -48,77 +47,46 @@ const Ettersending = ({ gjelder, setRerendrekvittering }: EttersendingProps) => 
     }
 
     const ettersendNav = async () => {
-        let fetchResult
-        try {
-            fetchResult = await fetchMedRequestId(
-                `/syk/sykepengesoknad/api/sykepengesoknad-backend/api/v2/soknader/${valgtSoknad!.id}/ettersendTilNav`,
-                {
-                    method: 'POST',
-                    credentials: 'include',
-                    headers: { 'Content-Type': 'application/json' },
-                }
-            )
-        } catch (e) {
+        const res = await fetch(
+            `/syk/sykepengesoknad/api/sykepengesoknad-backend/api/v2/soknader/${valgtSoknad!.id}/ettersendTilNav`,
+            {
+                method: 'POST',
+                credentials: 'include',
+                headers: { 'Content-Type': 'application/json' },
+            }
+        )
+
+        if (redirectTilLoginHvis401(res)) {
+            return
+        } else if (res.ok) {
+            valgtSoknad!.sendtTilNAVDato = new Date()
+            oppdaterSoknad()
+        } else {
+            logger.error('Feil ved ettersending til NAV', res)
             setFeilmeldingTekst(tekst('kvittering.ettersending.feilet'))
-            return
         }
-
-        const response = fetchResult.response
-        if (redirectTilLoginHvis401(response)) {
-            return
-        }
-
-        if (!response.ok) {
-            logger.error(
-                `Feil ved ettersending av søknad ${valgtSoknad!.id} til NAV med feilkode ${
-                    response.status
-                } og x_request_id ${fetchResult.requestId}.`,
-                response
-            )
-            setFeilmeldingTekst(tekst('kvittering.ettersending.feilet'))
-            return
-        }
-
-        valgtSoknad!.sendtTilNAVDato = new Date()
-        oppdaterSoknad()
     }
 
     const ettersendArbeidsgiver = async () => {
-        let fetchResult
-        try {
-            fetchResult = await fetchMedRequestId(
-                `/syk/sykepengesoknad/api/sykepengesoknad-backend/api/v2/soknader/${
-                    valgtSoknad!.id
-                }/ettersendTilArbeidsgiver`,
-                {
-                    method: 'POST',
-                    credentials: 'include',
-                    headers: { 'Content-Type': 'application/json' },
-                }
-            )
-        } catch (e) {
+        const res = await fetch(
+            `/syk/sykepengesoknad/api/sykepengesoknad-backend/api/v2/soknader/${
+                valgtSoknad!.id
+            }/ettersendTilArbeidsgiver`,
+            {
+                method: 'POST',
+                credentials: 'include',
+                headers: { 'Content-Type': 'application/json' },
+            }
+        )
+        if (redirectTilLoginHvis401(res)) {
+            return
+        } else if (res.ok) {
+            valgtSoknad!.sendtTilArbeidsgiverDato = new Date()
+            oppdaterSoknad()
+        } else {
+            logger.error('Feil ved ettersending til ARBEIDSGIVER', res)
             setFeilmeldingTekst(tekst('kvittering.ettersending.feilet'))
-            return
         }
-
-        const response = fetchResult.response
-        if (redirectTilLoginHvis401(response)) {
-            return
-        }
-
-        if (!response.ok) {
-            logger.error(
-                `Feil ved ettersending av søknad ${valgtSoknad!.id} til ARBEIDSGIVER med feilkode ${
-                    response.status
-                } og x_request_id ${fetchResult.requestId}.`,
-                response
-            )
-            setFeilmeldingTekst(tekst('kvittering.ettersending.feilet'))
-            return
-        }
-
-        valgtSoknad!.sendtTilArbeidsgiverDato = new Date()
-        oppdaterSoknad()
     }
 
     return (

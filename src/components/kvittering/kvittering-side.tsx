@@ -52,7 +52,7 @@ const KvitteringSide = () => {
             soknadstatus: filtrertSoknad?.status,
         })
         // eslint-disable-next-line
-    }, [id, soknader])
+    }, [id])
 
     // eslint-disable-next-line @typescript-eslint/no-empty-function
     useEffect(() => {}, [rerendreKvittering])
