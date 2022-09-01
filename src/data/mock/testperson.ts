@@ -1,6 +1,7 @@
 import { eldreUsendtSoknad, flereEldreUsendteSoknader } from './data/eldre-usendt-soknad'
 import {
     alleData,
+    bareUtland,
     enUsendtSykmelding,
     opplaering,
     Persona,
@@ -22,4 +23,5 @@ export const personas: StringFunctionMap = {
     'to-usendte-sykmeldinger': () => toUsendteSykmeldinger(),
     'en-eldre-usendt-soknad': () => eldreUsendtSoknad,
     'to-eldre-usendte-soknader': () => flereEldreUsendteSoknader,
+    'bare-utland': () => bareUtland(),
 }
