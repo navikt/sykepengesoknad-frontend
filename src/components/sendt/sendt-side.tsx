@@ -50,7 +50,7 @@ const SendtSide = () => {
             soknadstatus: filtrertSoknad?.status,
         })
         // eslint-disable-next-line
-    }, [id, soknader])
+    }, [id, soknader, sykmeldinger])
 
     // eslint-disable-next-line @typescript-eslint/no-empty-function
     useEffect(() => {}, [rerendreKvittering])

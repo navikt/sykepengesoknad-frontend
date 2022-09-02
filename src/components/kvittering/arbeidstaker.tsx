@@ -119,7 +119,7 @@ const Arbeidstaker = () => {
     }
 
     const settRiktigKvitteringTekst = useCallback(async () => {
-        if (!valgtSoknad) return
+        if (!valgtSoknad || !valgtSykmelding) return
 
         if (erInnenforArbeidsgiverperiode()) {
             setKvitteringTekst('inntil16dager')
@@ -151,11 +151,10 @@ const Arbeidstaker = () => {
         settRiktigKvitteringTekst().catch((e: Error) => logger.error(e.message))
     }, [settRiktigKvitteringTekst, valgtSoknad?.sendtTilNAVDato])
 
-    if (!valgtSoknad || !valgtSykmelding) return null
+    if (!valgtSoknad) return null
 
     return (
         <>
-            x
             <Alert variant="success">
                 <Heading size="small" level="2">
                     {tekst('kvittering.soknaden-er-sendt')}
