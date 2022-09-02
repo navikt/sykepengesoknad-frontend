@@ -104,7 +104,6 @@ module.exports = withPlugins(
         },
         publicRuntimeConfig: {
             // Will be available on both server and client
-            flexGatewayRoot: process.env.FLEX_GATEWAY_ROOT,
             mockBackend: process.env.MOCK_BACKEND,
             opplaering: process.env.OPPLAERING,
             sykefravaerUrl: process.env.SYKEFRAVAER_URL,

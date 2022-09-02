@@ -10,7 +10,7 @@ spec:
   image: {{ image }}
   port: 8080
   ingresses:
-    - "https://sykepengesoknad-{{appname}}.labs.nais.io/"
+    - {{ ingress }}
   replicas:
     min: {{ replicas }}
     max: {{ replicas }}
