@@ -9,7 +9,7 @@ import { redirectTilLoginHvis401 } from './rest/utils'
 import { useAppStore } from './stores/app-store'
 
 export function DataFetcher(props: { children: any }) {
-    const { setSoknader, setSykmeldinger, soknader, sykmeldinger } = useAppStore()
+    const { setSoknader, setSykmeldinger } = useAppStore()
     const [laster, setLaster] = useState<boolean>(false)
     const [soknaderFeilet, setSoknaderFeilet] = useState<boolean>(false)
     const [sykmeldingerFeilet, setSykmeldingerFeilet] = useState<boolean>(false)
@@ -33,8 +33,7 @@ export function DataFetcher(props: { children: any }) {
 
         if (!response.ok) {
             logger.error(
-                `Feil ved henting av sykepengesoknader med feilkode ${response.status} og x_request_id ${fetchResult.requestId}.`,
-                response
+                `Feil ved henting av sykepengesoknader med feilkode ${response.status} og x_request_id ${fetchResult.requestId}.`
             )
             setSoknaderFeilet(true)
             return
@@ -48,7 +47,7 @@ export function DataFetcher(props: { children: any }) {
                 })
             )
         } catch (e) {
-            logger.error(`Feilet ved parsing av JSON for x_request_id ${fetchResult.requestId}.`, e)
+            logger.error(`Feilet ved parsing av JSON for x_request_id ${fetchResult.requestId}. Error: ${e}.`)
             setSoknaderFeilet(true)
             return
         }
@@ -72,8 +71,7 @@ export function DataFetcher(props: { children: any }) {
 
         if (!response.ok) {
             logger.error(
-                `Feil ved henting av sykmeldinger med feilkode ${response.status} og x_request_id ${fetchResult.requestId}.`,
-                response
+                `Feil ved henting av sykmeldinger med feilkode ${response.status} og x_request_id ${fetchResult.requestId}.`
             )
             setSykmeldingerFeilet(true)
             return
@@ -83,7 +81,7 @@ export function DataFetcher(props: { children: any }) {
             const data = await fetchResult.response.json()
             setSykmeldinger(data)
         } catch (e) {
-            logger.error(`Feilet ved parsing av JSON for x_request_id ${fetchResult.requestId}.`, e)
+            logger.error(`Feilet ved parsing av JSON for x_request_id ${fetchResult.requestId}. Error: ${e}.`)
             setSykmeldingerFeilet(true)
             return
         }

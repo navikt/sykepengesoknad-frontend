@@ -21,7 +21,7 @@ export async function proxyKallTilBackend(opts: Opts) {
     const rewritedPath = opts.req.url!.replace(`/api/${opts.backend}`, '')
     const api = `${opts.req.method} ${rewritedPath}`
     if (!opts.tillatteApier.includes(<String>cleanPathForMetric(api))) {
-        logger.warn('404 Ukjent api: ' + api)
+        logger.warn(`404 Ukjent api: ${api}.`)
         opts.res.status(404)
         opts.res.send(null)
         return
@@ -65,7 +65,7 @@ export async function proxyKallTilBackend(opts: Opts) {
         })
         stream.on('error', (err) =>
             logger.error(
-                `Feil ved lesing av backend stream. Message: ${err.message}, Cause: ${err.cause}, URL: ${opts.req.url}`
+                `Feil ved lesing av backend stream. Message: ${err.message}, Cause: ${err.cause}, URL: ${opts.req.url}.`
             )
         )
     })

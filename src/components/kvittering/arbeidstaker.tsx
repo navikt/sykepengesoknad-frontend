@@ -87,8 +87,7 @@ const Arbeidstaker = () => {
         const response = fetchResult.response
         if (!response.ok) {
             logger.error(
-                `Feil ved sjekk om første søknad er utenfor arbeidsgiverperioden med feilkode ${response.status} og x_request_id ${fetchResult.requestId}.`,
-                response
+                `Feil ved sjekk om første søknad er utenfor arbeidsgiverperioden med feilkode ${response.status} og x_request_id ${fetchResult.requestId}.`
             )
             return
         }
@@ -98,7 +97,7 @@ const Arbeidstaker = () => {
             data = await response.json()
             return data.mottaker === RSMottaker.ARBEIDSGIVER
         } catch (e) {
-            logger.error(`Feilet ved parsing av JSON for x_request_id ${fetchResult.requestId}.`, e)
+            logger.error(`Feilet ved parsing av JSON for x_request_id ${fetchResult.requestId}. Error: ${e}.`)
             return
         }
     }

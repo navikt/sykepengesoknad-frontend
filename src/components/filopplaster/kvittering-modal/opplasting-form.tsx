@@ -112,7 +112,7 @@ const OpplastingForm = ({ sporsmal }: SpmProps) => {
         try {
             return await fetchResult.response.json()
         } catch (e) {
-            logger.error(`Feilet ved parsing av JSON for x_request_id ${fetchResult.requestId}.`, e)
+            logger.error(`Feilet ved parsing av JSON for x_request_id ${fetchResult.requestId}. Error: ${e}.`)
             return
         }
     }
@@ -159,7 +159,7 @@ const OpplastingForm = ({ sporsmal }: SpmProps) => {
         try {
             return await fetchResult.response.json()
         } catch (e) {
-            logger.error(`Feilet ved parsing av JSON for x_request_id ${fetchResult.requestId}.`, e)
+            logger.error(`Feilet ved parsing av JSON for x_request_id ${fetchResult.requestId}. Error: ${e}.`)
             return
         }
     }

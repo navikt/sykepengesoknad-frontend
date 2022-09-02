@@ -46,8 +46,7 @@ const Endreknapp = () => {
 
         if (!response.ok) {
             logger.error(
-                `Feil ved opprettelse av UTKAST_TIL_KORRIGERING med http kode ${response.status} og x_request_id ${fetchResult.requestId}.`,
-                response
+                `Feil ved opprettelse av UTKAST_TIL_KORRIGERING med http kode ${response.status} og x_request_id ${fetchResult.requestId}.`
             )
             setFeilmeldingTekst(tekst('kvittering.korrigering.feilet'))
         }
@@ -56,7 +55,7 @@ const Endreknapp = () => {
         try {
             data = await response.json()
         } catch (e) {
-            logger.error(`Feilet ved parsing av JSON for x_request_id ${fetchResult.requestId}.`, e)
+            logger.error(`Feilet ved parsing av JSON for x_request_id ${fetchResult.requestId}. Error: ${e}.`)
             return
         }
 

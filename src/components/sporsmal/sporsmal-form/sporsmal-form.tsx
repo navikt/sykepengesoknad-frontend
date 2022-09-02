@@ -132,7 +132,7 @@ const SporsmalForm = () => {
         try {
             data = await response.json()
         } catch (e) {
-            logger.error(`Feilet ved parsing av JSON for x_request_id ${fetchResult.requestId}.`, e)
+            logger.error(`Feilet ved parsing av JSON for x_request_id ${fetchResult.requestId}. Error: ${e}.`)
             restFeilet = true
             return
         }
@@ -184,7 +184,7 @@ const SporsmalForm = () => {
             const data = await response.json()
             setMottaker(data.mottaker)
         } catch (e) {
-            logger.error(`Feilet ved parsing av JSON for x_request_id ${fetchResult.requestId}.`, e)
+            logger.error(`Feilet ved parsing av JSON for x_request_id ${fetchResult.requestId}. Error: ${e}.`)
             return
         }
         // eslint-disable-next-line
@@ -225,8 +225,7 @@ const SporsmalForm = () => {
 
         if (!response.ok) {
             logger.error(
-                `Feilet ved sending av søknad ${valgtSoknad.id} med http kode ${response.status} og x_request_id ${fetchResult.requestId}`,
-                response
+                `Feilet ved sending av søknad ${valgtSoknad.id} med http kode ${response.status} og x_request_id ${fetchResult.requestId}.`
             )
             restFeilet = true
             return

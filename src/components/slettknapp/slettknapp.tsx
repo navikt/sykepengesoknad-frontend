@@ -57,8 +57,7 @@ const Slettknapp = ({ sporsmal, kvittering, update }: SlettknappProps) => {
 
             if (!response.ok) {
                 logger.error(
-                    `Feilet ved sletting av spørsmål ${sporsmal.id} med http kode ${response.status} og x_request_id ${fetchResult.requestId}`,
-                    response
+                    `Feilet ved sletting av spørsmål ${sporsmal.id} med http kode ${response.status} og x_request_id ${fetchResult.requestId}`
                 )
                 feilVedSletting = true
                 setFeilmeldingTekst(tekst('opplasting_modal.slett.feilmelding'))

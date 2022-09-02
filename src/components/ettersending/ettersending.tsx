@@ -72,8 +72,7 @@ const Ettersending = ({ gjelder, setRerendrekvittering }: EttersendingProps) => 
             logger.error(
                 `Feil ved ettersending av søknad ${valgtSoknad!.id} til NAV med feilkode ${
                     response.status
-                } og x_request_id ${fetchResult.requestId}.`,
-                response
+                } og x_request_id ${fetchResult.requestId}.`
             )
             setFeilmeldingTekst(tekst('kvittering.ettersending.feilet'))
             return
@@ -110,8 +109,7 @@ const Ettersending = ({ gjelder, setRerendrekvittering }: EttersendingProps) => 
             logger.error(
                 `Feil ved ettersending av søknad ${valgtSoknad!.id} til ARBEIDSGIVER med feilkode ${
                     response.status
-                } og x_request_id ${fetchResult.requestId}.`,
-                response
+                } og x_request_id ${fetchResult.requestId}.`
             )
             setFeilmeldingTekst(tekst('kvittering.ettersending.feilet'))
             return

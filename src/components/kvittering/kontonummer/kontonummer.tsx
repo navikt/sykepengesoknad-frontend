@@ -31,8 +31,7 @@ const Kontonummer = () => {
 
         if (!response.ok) {
             logger.error(
-                `Feil ved henting av kontonummer med feilkode ${response.status} og x_request_id ${fetchResult.requestId}.`,
-                response
+                `Feil ved henting av kontonummer med feilkode ${response.status} og x_request_id ${fetchResult.requestId}.`
             )
             return
         }
@@ -41,7 +40,7 @@ const Kontonummer = () => {
         try {
             data = await fetchResult.response.json()
         } catch (e) {
-            logger.error(`Feilet ved parsing av JSON for x_request_id ${fetchResult.requestId}.`, e)
+            logger.error(`Feilet ved parsing av JSON for x_request_id ${fetchResult.requestId}. Error: ${e}.`)
             return
         }
         setKontonummer(data?.personalia?.kontonr)

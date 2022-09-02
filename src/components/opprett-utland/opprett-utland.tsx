@@ -41,8 +41,7 @@ const OpprettUtland = () => {
 
         if (!response.ok) {
             logger.error(
-                `Feil ved opprettelse av utlandssøknad med http kode ${response.status} og x_request_id ${fetchResult.requestId}.`,
-                response
+                `Feil ved opprettelse av utlandssøknad med http kode ${response.status} og x_request_id ${fetchResult.requestId}.`
             )
             setFeilmeldingTekst(tekst('opprett-utland.feilet'))
             return
@@ -52,7 +51,7 @@ const OpprettUtland = () => {
         try {
             data = await response.json()
         } catch (e) {
-            logger.error(`Feilet ved parsing av JSON for x_request_id ${fetchResult.requestId}.`, e)
+            logger.error(`Feilet ved parsing av JSON for x_request_id ${fetchResult.requestId}. Error: ${e}.`)
             return
         }
 

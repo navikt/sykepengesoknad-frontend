@@ -64,7 +64,7 @@ const GjenapneSoknad = () => {
             logger.error(
                 `Feilet ved gjenåpning av soknad ${valgtSoknad!.id} med http kode ${response.status} og x_request_id ${
                     fetchResult.requestId
-                }`
+                }.`
             )
             return
         }
