@@ -1,0 +1,54 @@
+apiVersion: "nais.io/v1alpha1"
+kind: "Application"
+metadata:
+  name: sykepengesoknad
+  namespace: flex
+  annotations:
+    nginx.ingress.kubernetes.io/proxy-body-size: "20M"
+  labels:
+    team: flex
+spec:
+  image: {{ image }}
+  port: 8080
+  ingresses:
+    - {{ingress}}
+  replicas:
+    min: 2
+    max: 3
+    cpuThresholdPercentage: 50
+  tokenx:
+    enabled: true
+  idporten:
+    enabled: true
+    sidecar:
+      enabled: true
+      level: Level4
+  resources:
+    limits:
+      cpu: 500m
+      memory: 256Mi
+    requests:
+      cpu: 200m
+      memory: 256Mi
+  liveness:
+    path: syk/sykepengesoknad/api/internal/isAlive
+  readiness:
+    path: syk/sykepengesoknad/api/internal/isReady
+  prometheus:
+    enabled: true
+    path: /syk/sykepengesoknad/api/internal/prometheus
+  accessPolicy:
+    outbound:
+      rules:
+        - application: sykepengesoknad-backend
+        - application: flex-bucket-uploader
+        - application: sykmeldinger-backend
+          namespace: teamsykmelding
+  envFrom:
+    - configmap: loginservice-idporten
+  env:
+  {{#each env}}
+     - name: {{@key}}
+       value: "{{this}}"
+  {{/each}}
+
