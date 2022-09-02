@@ -42,15 +42,14 @@ const GjenapneSoknad = () => {
         })
 
         let fetchResult
+        const url = `/syk/sykepengesoknad/api/sykepengesoknad-backend/api/v2/soknader/${valgtSoknad!.id}/gjenapne`
+        const options: RequestInit = {
+            method: 'POST',
+            credentials: 'include',
+            headers: { 'Content-Type': 'application/json' },
+        }
         try {
-            fetchResult = await fetchMedRequestId(
-                `/syk/sykepengesoknad/api/sykepengesoknad-backend/api/v2/soknader/${valgtSoknad!.id}/gjenapne`,
-                {
-                    method: 'POST',
-                    credentials: 'include',
-                    headers: { 'Content-Type': 'application/json' },
-                }
-            )
+            fetchResult = await fetchMedRequestId(url, options)
         } catch (e) {
             return
         }
@@ -62,9 +61,7 @@ const GjenapneSoknad = () => {
 
         if (!response.ok) {
             logger.error(
-                `Feilet ved gjenåpning av soknad ${valgtSoknad!.id} med http kode ${response.status} og x_request_id ${
-                    fetchResult.requestId
-                }.`
+                `Feil ved kall til: ${options.method} ${url} med HTTP-kode: ${response.status} og x_request_id: ${fetchResult.requestId}.`
             )
             return
         }

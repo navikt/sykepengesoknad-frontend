@@ -92,18 +92,17 @@ const SporsmalForm = () => {
         let soknad = valgtSoknad
 
         let fetchResult
+        const url = `/syk/sykepengesoknad/api/sykepengesoknad-backend/api/v2/soknader/${soknad!.id}/sporsmal/${
+            sporsmal.id
+        }`
+        const options: RequestInit = {
+            method: 'PUT',
+            credentials: 'include',
+            body: JSON.stringify(sporsmalToRS(sporsmal)),
+            headers: { 'Content-Type': 'application/json' },
+        }
         try {
-            fetchResult = await fetchMedRequestId(
-                `/syk/sykepengesoknad/api/sykepengesoknad-backend/api/v2/soknader/${soknad!.id}/sporsmal/${
-                    sporsmal.id
-                }`,
-                {
-                    method: 'PUT',
-                    credentials: 'include',
-                    body: JSON.stringify(sporsmalToRS(sporsmal)),
-                    headers: { 'Content-Type': 'application/json' },
-                }
-            )
+            fetchResult = await fetchMedRequestId(url, options)
         } catch (e) {
             restFeilet = true
             return
@@ -119,8 +118,7 @@ const SporsmalForm = () => {
                 setFeilState(true)
             } else {
                 logger.error(
-                    `Feilet ved kall OPPDATER_SPORSMAL med http kode ${response.status} og x_request_id ${fetchResult.requestId}.`,
-                    response
+                    `Feil ved kall til: ${options.method} ${url} med HTTP-kode: ${response.status} og x_request_id: ${fetchResult.requestId}.`
                 )
             }
 
@@ -132,7 +130,9 @@ const SporsmalForm = () => {
         try {
             data = await response.json()
         } catch (e) {
-            logger.error(`Feilet ved parsing av JSON for x_request_id ${fetchResult.requestId}. Error: ${e}.`)
+            logger.error(
+                `Feil ved kall til: ${options.method} ${url} med HTTP-kode: ${response.status} og x_request_id: ${fetchResult.requestId}.`
+            )
             restFeilet = true
             return
         }
@@ -154,15 +154,14 @@ const SporsmalForm = () => {
 
     const hentMottaker = useCallback(async () => {
         let fetchResult
+        const url = `/syk/sykepengesoknad/api/sykepengesoknad-backend/api/v2/soknader/${valgtSoknad!.id}/finnMottaker`
+        const options: RequestInit = {
+            method: 'POST',
+            credentials: 'include',
+            headers: { 'Content-Type': 'application/json' },
+        }
         try {
-            fetchResult = await fetchMedRequestId(
-                `/syk/sykepengesoknad/api/sykepengesoknad-backend/api/v2/soknader/${valgtSoknad!.id}/finnMottaker`,
-                {
-                    method: 'POST',
-                    credentials: 'include',
-                    headers: { 'Content-Type': 'application/json' },
-                }
-            )
+            fetchResult = await fetchMedRequestId(url, options)
         } catch (e) {
             return
         }
@@ -174,8 +173,7 @@ const SporsmalForm = () => {
 
         if (!response.ok) {
             logger.error(
-                `Klarte ikke hente MOTTAKER av søknad http kode ${response.status} og x_request_id ${fetchResult.requestId}.`,
-                response
+                `Feil ved kall til: ${options.method} ${url} med HTTP-kode: ${response.status} og x_request_id: ${fetchResult.requestId}.`
             )
             return
         }
@@ -184,7 +182,9 @@ const SporsmalForm = () => {
             const data = await response.json()
             setMottaker(data.mottaker)
         } catch (e) {
-            logger.error(`Feilet ved parsing av JSON for x_request_id ${fetchResult.requestId}. Error: ${e}.`)
+            logger.error(
+                `${e} - Kall til: ${options.method} ${url} feilet HTTP-kode: ${response.status} ved parsing av JSON for x_request_id: ${fetchResult.requestId} med data: ${response.body}`
+            )
             return
         }
         // eslint-disable-next-line
@@ -204,15 +204,14 @@ const SporsmalForm = () => {
         }
 
         let fetchResult
+        const url = `/syk/sykepengesoknad/api/sykepengesoknad-backend/api/v2/soknader/${valgtSoknad!.id}/send`
+        const options: RequestInit = {
+            method: 'POST',
+            credentials: 'include',
+            headers: { 'Content-Type': 'application/json' },
+        }
         try {
-            fetchResult = await fetchMedRequestId(
-                `/syk/sykepengesoknad/api/sykepengesoknad-backend/api/v2/soknader/${valgtSoknad!.id}/send`,
-                {
-                    method: 'POST',
-                    credentials: 'include',
-                    headers: { 'Content-Type': 'application/json' },
-                }
-            )
+            fetchResult = await fetchMedRequestId(url, options)
         } catch (e) {
             restFeilet = true
             return
@@ -225,7 +224,7 @@ const SporsmalForm = () => {
 
         if (!response.ok) {
             logger.error(
-                `Feilet ved sending av søknad ${valgtSoknad.id} med http kode ${response.status} og x_request_id ${fetchResult.requestId}.`
+                `Feil ved kall til: ${options.method} ${url} med HTTP-kode: ${response.status} og x_request_id: ${fetchResult.requestId}.`
             )
             restFeilet = true
             return

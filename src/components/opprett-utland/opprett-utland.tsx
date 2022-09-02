@@ -20,16 +20,14 @@ const OpprettUtland = () => {
 
     const opprett = async () => {
         let fetchResult
-
+        const url = '/syk/sykepengesoknad/api/sykepengesoknad-backend/api/v2/opprettSoknadUtland'
+        const options: RequestInit = {
+            method: 'POST',
+            credentials: 'include',
+            headers: { 'Content-Type': 'application/json' },
+        }
         try {
-            fetchResult = await fetchMedRequestId(
-                '/syk/sykepengesoknad/api/sykepengesoknad-backend/api/v2/opprettSoknadUtland',
-                {
-                    method: 'POST',
-                    credentials: 'include',
-                    headers: { 'Content-Type': 'application/json' },
-                }
-            )
+            fetchResult = await fetchMedRequestId(url, options)
         } catch (e) {
             return
         }
@@ -41,7 +39,7 @@ const OpprettUtland = () => {
 
         if (!response.ok) {
             logger.error(
-                `Feil ved opprettelse av utlandssøknad med http kode ${response.status} og x_request_id ${fetchResult.requestId}.`
+                `Feil ved kall til: ${options.method} ${url} med HTTP-kode: ${response.status} og x_request_id: ${fetchResult.requestId}.`
             )
             setFeilmeldingTekst(tekst('opprett-utland.feilet'))
             return
@@ -51,7 +49,9 @@ const OpprettUtland = () => {
         try {
             data = await response.json()
         } catch (e) {
-            logger.error(`Feilet ved parsing av JSON for x_request_id ${fetchResult.requestId}. Error: ${e}.`)
+            logger.error(
+                `${e} - Kall til: ${options.method} ${url} feilet HTTP-kode: ${response.status} ved parsing av JSON for x_request_id: ${fetchResult.requestId} med data: ${response.body}`
+            )
             return
         }
 

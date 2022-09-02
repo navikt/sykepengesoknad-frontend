@@ -14,12 +14,14 @@ const Kontonummer = () => {
 
     const fetchData = useCallback(async () => {
         let fetchResult
+        const url = 'https://www.nav.no/person/personopplysninger-api/personalia'
+        const options: RequestInit = {
+            method: 'GET',
+            credentials: 'include',
+            headers: { 'Content-Type': 'application/json' },
+        }
         try {
-            fetchResult = await fetchMedRequestId('https://www.nav.no/person/personopplysninger-api/personalia', {
-                method: 'GET',
-                credentials: 'include',
-                headers: { 'Content-Type': 'application/json' },
-            })
+            fetchResult = await fetchMedRequestId(url, options)
         } catch (e) {
             return
         }
@@ -31,7 +33,7 @@ const Kontonummer = () => {
 
         if (!response.ok) {
             logger.error(
-                `Feil ved henting av kontonummer med feilkode ${response.status} og x_request_id ${fetchResult.requestId}.`
+                `Feil ved kall til: ${options.method} ${url} med HTTP-kode: ${response.status} og x_request_id: ${fetchResult.requestId}.`
             )
             return
         }
@@ -40,7 +42,9 @@ const Kontonummer = () => {
         try {
             data = await fetchResult.response.json()
         } catch (e) {
-            logger.error(`Feilet ved parsing av JSON for x_request_id ${fetchResult.requestId}. Error: ${e}.`)
+            logger.error(
+                `${e} - Kall til: ${options.method} ${url} feilet HTTP-kode: ${response.status} ved parsing av JSON for x_request_id: ${fetchResult.requestId} med data: ${response.body}`
+            )
             return
         }
         setKontonummer(data?.personalia?.kontonr)

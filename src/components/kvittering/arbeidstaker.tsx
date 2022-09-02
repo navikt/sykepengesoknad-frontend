@@ -71,15 +71,14 @@ const Arbeidstaker = () => {
     async function erForsteSoknadUtenforArbeidsgiverperiode(id?: string) {
         if (id === undefined) return true
         let fetchResult
+        const url = `/syk/sykepengesoknad/api/sykepengesoknad-backend/api/v2/soknader/${id}/finnMottaker`
+        const options: RequestInit = {
+            method: 'POST',
+            credentials: 'include',
+            headers: { 'Content-Type': 'application/json' },
+        }
         try {
-            fetchResult = await fetchMedRequestId(
-                `/syk/sykepengesoknad/api/sykepengesoknad-backend/api/v2/soknader/${id}/finnMottaker`,
-                {
-                    method: 'POST',
-                    credentials: 'include',
-                    headers: { 'Content-Type': 'application/json' },
-                }
-            )
+            fetchResult = await fetchMedRequestId(url, options)
         } catch (e) {
             return
         }
@@ -87,7 +86,7 @@ const Arbeidstaker = () => {
         const response = fetchResult.response
         if (!response.ok) {
             logger.error(
-                `Feil ved sjekk om første søknad er utenfor arbeidsgiverperioden med feilkode ${response.status} og x_request_id ${fetchResult.requestId}.`
+                `Feil ved kall til: ${options.method} ${url} med HTTP-kode: ${response.status} og x_request_id: ${fetchResult.requestId}.`
             )
             return
         }
@@ -97,7 +96,9 @@ const Arbeidstaker = () => {
             data = await response.json()
             return data.mottaker === RSMottaker.ARBEIDSGIVER
         } catch (e) {
-            logger.error(`Feilet ved parsing av JSON for x_request_id ${fetchResult.requestId}. Error: ${e}.`)
+            logger.error(
+                `${e} - Kall til: ${options.method} ${url} feilet HTTP-kode: ${response.status} ved parsing av JSON for x_request_id: ${fetchResult.requestId} med data: ${response.body}`
+            )
             return
         }
     }

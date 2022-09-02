@@ -15,7 +15,7 @@ const getFrontendLogger = (): pino.Logger =>
                         })
                     } catch (e) {
                         // eslint-disable-next-line no-console
-                        console.warn(`Klarte ikke å logge følgende event til backend: ${logEvent}`, e)
+                        console.warn(`${e} - Klarte ikke å logge følgende event til backend: ${logEvent}.`)
                     }
                 },
             },

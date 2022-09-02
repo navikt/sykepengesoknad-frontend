@@ -41,14 +41,13 @@ const Slettknapp = ({ sporsmal, kvittering, update }: SlettknappProps) => {
         )
 
         let fetchResult
+        const url = `/syk/sykepengesoknad/api/sykepengesoknad-backend/api/v2/soknader/${valgtSoknad?.id}/sporsmal/${sporsmal?.id}/svar/${svar?.id}`
+        const options: RequestInit = {
+            method: 'DELETE',
+            credentials: 'include',
+        }
         try {
-            fetchResult = await fetchMedRequestId(
-                `/syk/sykepengesoknad/api/sykepengesoknad-backend/api/v2/soknader/${valgtSoknad?.id}/sporsmal/${sporsmal?.id}/svar/${svar?.id}`,
-                {
-                    method: 'DELETE',
-                    credentials: 'include',
-                }
-            )
+            fetchResult = await fetchMedRequestId(url, options)
 
             const response = fetchResult.response
             if (redirectTilLoginHvis401(response)) {
@@ -57,7 +56,7 @@ const Slettknapp = ({ sporsmal, kvittering, update }: SlettknappProps) => {
 
             if (!response.ok) {
                 logger.error(
-                    `Feilet ved sletting av spørsmål ${sporsmal.id} med http kode ${response.status} og x_request_id ${fetchResult.requestId}`
+                    `Feil ved kall til: ${options.method} ${url} med HTTP-kode: ${response.status} og x_request_id: ${fetchResult.requestId}.`
                 )
                 feilVedSletting = true
                 setFeilmeldingTekst(tekst('opplasting_modal.slett.feilmelding'))

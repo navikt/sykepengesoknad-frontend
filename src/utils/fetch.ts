@@ -18,7 +18,7 @@ const fetchMedRequestId = async (url: string, options: RequestInit = {}): Promis
     } catch (e: any) {
         // Logger x_request_id i stedet for x-request-id for å matche logging fra
         // ingress-controller og sykepengesoknad-backend.
-        logger.error(`Kall til url: ${url} med x_request_id: ${requestId} feilet. Error: ${e}.`)
+        logger.error(`${e} - Kall til url: ${options.method} ${url} med x_request_id: ${requestId} feilet.`)
         throw e
     }
 }

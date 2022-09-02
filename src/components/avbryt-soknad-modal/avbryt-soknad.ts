@@ -28,14 +28,13 @@ export async function avbrytSoknad({
     setFeilmeldingTekst,
 }: AvbrytSoknadReq) {
     let fetchResult
+    const url = `/syk/sykepengesoknad/api/sykepengesoknad-backend/api/v2/soknader/${valgtSoknad!.id}/avbryt`
+    const options: RequestInit = {
+        method: 'POST',
+        credentials: 'include',
+    }
     try {
-        fetchResult = await fetchMedRequestId(
-            `/syk/sykepengesoknad/api/sykepengesoknad-backend/api/v2/soknader/${valgtSoknad!.id}/avbryt`,
-            {
-                method: 'POST',
-                credentials: 'include',
-            }
-        )
+        fetchResult = await fetchMedRequestId(url, options)
     } catch (e) {
         setFeilmeldingTekst(tekst('avbryt.feilet'))
         return
@@ -48,7 +47,7 @@ export async function avbrytSoknad({
 
     if (!response.ok) {
         logger.error(
-            `Feilet ved avbryting av soknad ${valgtSoknad.id} med http kode ${response.status} og x_request_id ${fetchResult.requestId}.`
+            `Feil ved kall til: ${options.method} ${url} med HTTP-kode: ${response.status} og x_request_id: ${fetchResult.requestId}.`
         )
         // TODO: Vis feilmeldingen til bruker.
         setFeilmeldingTekst(tekst('avbryt.feilet'))

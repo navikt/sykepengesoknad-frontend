@@ -49,15 +49,16 @@ const Ettersending = ({ gjelder, setRerendrekvittering }: EttersendingProps) => 
 
     const ettersendNav = async () => {
         let fetchResult
+        const url = `/syk/sykepengesoknad/api/sykepengesoknad-backend/api/v2/soknader/${
+            valgtSoknad!.id
+        }/ettersendTilNav`
+        const options: RequestInit = {
+            method: 'POST',
+            credentials: 'include',
+            headers: { 'Content-Type': 'application/json' },
+        }
         try {
-            fetchResult = await fetchMedRequestId(
-                `/syk/sykepengesoknad/api/sykepengesoknad-backend/api/v2/soknader/${valgtSoknad!.id}/ettersendTilNav`,
-                {
-                    method: 'POST',
-                    credentials: 'include',
-                    headers: { 'Content-Type': 'application/json' },
-                }
-            )
+            fetchResult = await fetchMedRequestId(url, options)
         } catch (e) {
             setFeilmeldingTekst(tekst('kvittering.ettersending.feilet'))
             return
@@ -70,9 +71,7 @@ const Ettersending = ({ gjelder, setRerendrekvittering }: EttersendingProps) => 
 
         if (!response.ok) {
             logger.error(
-                `Feil ved ettersending av søknad ${valgtSoknad!.id} til NAV med feilkode ${
-                    response.status
-                } og x_request_id ${fetchResult.requestId}.`
+                `Feil ved kall til: ${options.method} ${url} med HTTP-kode: ${response.status} og x_request_id: ${fetchResult.requestId}.`
             )
             setFeilmeldingTekst(tekst('kvittering.ettersending.feilet'))
             return
@@ -84,17 +83,17 @@ const Ettersending = ({ gjelder, setRerendrekvittering }: EttersendingProps) => 
 
     const ettersendArbeidsgiver = async () => {
         let fetchResult
+        const url = `/syk/sykepengesoknad/api/sykepengesoknad-backend/api/v2/soknader/${
+            valgtSoknad!.id
+        }/ettersendTilArbeidsgiver`
+
+        const options: RequestInit = {
+            method: 'POST',
+            credentials: 'include',
+            headers: { 'Content-Type': 'application/json' },
+        }
         try {
-            fetchResult = await fetchMedRequestId(
-                `/syk/sykepengesoknad/api/sykepengesoknad-backend/api/v2/soknader/${
-                    valgtSoknad!.id
-                }/ettersendTilArbeidsgiver`,
-                {
-                    method: 'POST',
-                    credentials: 'include',
-                    headers: { 'Content-Type': 'application/json' },
-                }
-            )
+            fetchResult = await fetchMedRequestId(url, options)
         } catch (e) {
             setFeilmeldingTekst(tekst('kvittering.ettersending.feilet'))
             return
@@ -107,9 +106,7 @@ const Ettersending = ({ gjelder, setRerendrekvittering }: EttersendingProps) => 
 
         if (!response.ok) {
             logger.error(
-                `Feil ved ettersending av søknad ${valgtSoknad!.id} til ARBEIDSGIVER med feilkode ${
-                    response.status
-                } og x_request_id ${fetchResult.requestId}.`
+                `Feil ved kall til: ${options.method} ${url} med HTTP-kode: ${response.status} og x_request_id: ${fetchResult.requestId}.`
             )
             setFeilmeldingTekst(tekst('kvittering.ettersending.feilet'))
             return

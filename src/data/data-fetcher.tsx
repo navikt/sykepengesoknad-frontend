@@ -16,11 +16,13 @@ export function DataFetcher(props: { children: any }) {
 
     const hentSoknader = useCallback(async () => {
         let fetchResult
-
+        const url = '/syk/sykepengesoknad/api/sykepengesoknad-backend/api/v2/soknader'
+        const options: RequestInit = {
+            method: 'GET',
+            credentials: 'include',
+        }
         try {
-            fetchResult = await fetchMedRequestId('/syk/sykepengesoknad/api/sykepengesoknad-backend/api/v2/soknader', {
-                credentials: 'include',
-            })
+            fetchResult = await fetchMedRequestId(url, options)
         } catch (e) {
             setSoknaderFeilet(true)
             return
@@ -33,7 +35,7 @@ export function DataFetcher(props: { children: any }) {
 
         if (!response.ok) {
             logger.error(
-                `Feil ved henting av sykepengesoknader med feilkode ${response.status} og x_request_id ${fetchResult.requestId}.`
+                `Feil ved kall til: ${options.method} ${url} med HTTP-kode: ${response.status} og x_request_id: ${fetchResult.requestId}.`
             )
             setSoknaderFeilet(true)
             return
@@ -47,7 +49,9 @@ export function DataFetcher(props: { children: any }) {
                 })
             )
         } catch (e) {
-            logger.error(`Feilet ved parsing av JSON for x_request_id ${fetchResult.requestId}. Error: ${e}.`)
+            logger.error(
+                `${e} - Kall til: ${options.method} ${url} feilet HTTP-kode: ${response.status} ved parsing av JSON for x_request_id: ${fetchResult.requestId} med data: ${response.body}`
+            )
             setSoknaderFeilet(true)
             return
         }
@@ -55,10 +59,13 @@ export function DataFetcher(props: { children: any }) {
 
     const hentSykmeldinger = useCallback(async () => {
         let fetchResult
+        const url = '/syk/sykepengesoknad/api/sykmeldinger-backend/api/v2/sykmeldinger'
+        const options: RequestInit = {
+            method: 'GET',
+            credentials: 'include',
+        }
         try {
-            fetchResult = await fetchMedRequestId('/syk/sykepengesoknad/api/sykmeldinger-backend/api/v2/sykmeldinger', {
-                credentials: 'include',
-            })
+            fetchResult = await fetchMedRequestId(url, options)
         } catch (e) {
             setSykmeldingerFeilet(true)
             return
@@ -71,7 +78,7 @@ export function DataFetcher(props: { children: any }) {
 
         if (!response.ok) {
             logger.error(
-                `Feil ved henting av sykmeldinger med feilkode ${response.status} og x_request_id ${fetchResult.requestId}.`
+                `Feil ved kall til: ${options.method} ${url} med HTTP-kode: ${response.status} og x_request_id: ${fetchResult.requestId}.`
             )
             setSykmeldingerFeilet(true)
             return
@@ -81,7 +88,9 @@ export function DataFetcher(props: { children: any }) {
             const data = await fetchResult.response.json()
             setSykmeldinger(data)
         } catch (e) {
-            logger.error(`Feilet ved parsing av JSON for x_request_id ${fetchResult.requestId}. Error: ${e}.`)
+            logger.error(
+                `${e} - Kall til: ${options.method} ${url} feilet HTTP-kode: ${response.status} ved parsing av JSON for x_request_id: ${fetchResult.requestId} med data: ${response.body}`
+            )
             setSykmeldingerFeilet(true)
             return
         }

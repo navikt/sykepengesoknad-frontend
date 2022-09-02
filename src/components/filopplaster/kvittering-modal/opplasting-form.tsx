@@ -81,12 +81,14 @@ const OpplastingForm = ({ sporsmal }: SpmProps) => {
         requestData.append('file', valgtFil as Blob)
 
         let fetchResult
+        const url = '/syk/sykepengesoknad/api/flex-bucket-uploader/api/v2/opplasting'
+        const options: RequestInit = {
+            method: 'POST',
+            body: requestData,
+            credentials: 'include',
+        }
         try {
-            fetchResult = await fetchMedRequestId('/syk/sykepengesoknad/api/flex-bucket-uploader/api/v2/opplasting', {
-                method: 'POST',
-                body: requestData,
-                credentials: 'include',
-            })
+            fetchResult = await fetchMedRequestId(url, options)
         } catch (e) {
             setFeilmeldingTekst('Det skjedde en feil i baksystemene, prøv igjen senere')
             return
@@ -99,10 +101,10 @@ const OpplastingForm = ({ sporsmal }: SpmProps) => {
 
         if (!response.ok) {
             logger.error(
-                `Feil under opplasting av kvittering med feilkode ${response.status} og x_request_id ${fetchResult.requestId}.`
+                `Feil ved kall til: ${options.method} ${url} med HTTP-kode: ${response.status} og x_request_id: ${fetchResult.requestId}.`
             )
             if (response.status === 413) {
-                setFeilmeldingTekst('Filen du prøvde å laste opp er for stor')
+                setFeilmeldingTekst('Filen du prøvde  laste opp er for stor')
             } else {
                 setFeilmeldingTekst('Det skjedde en feil i baksystemene, prøv igjen senere')
             }
@@ -112,7 +114,9 @@ const OpplastingForm = ({ sporsmal }: SpmProps) => {
         try {
             return await fetchResult.response.json()
         } catch (e) {
-            logger.error(`Feilet ved parsing av JSON for x_request_id ${fetchResult.requestId}. Error: ${e}.`)
+            logger.error(
+                `${e} - Kall til: ${options.method} ${url} feilet HTTP-kode: ${response.status} ved parsing av JSON for x_request_id: ${fetchResult.requestId} med data: ${response.body}`
+            )
             return
         }
     }
@@ -127,18 +131,17 @@ const OpplastingForm = ({ sporsmal }: SpmProps) => {
         const svar: RSSvar = { verdi: JSON.stringify(kvittering) }
 
         let fetchResult
+        const url = `/syk/sykepengesoknad/api/sykepengesoknad-backend/api/v2/soknader/${valgtSoknad!.id}/sporsmal/${
+            sporsmal!.id
+        }/svar`
+        const options: RequestInit = {
+            method: 'POST',
+            body: JSON.stringify(svar),
+            credentials: 'include',
+            headers: { 'Content-Type': 'application/json' },
+        }
         try {
-            fetchResult = await fetchMedRequestId(
-                `/syk/sykepengesoknad/api/sykepengesoknad-backend/api/v2/soknader/${valgtSoknad!.id}/sporsmal/${
-                    sporsmal!.id
-                }/svar`,
-                {
-                    method: 'POST',
-                    body: JSON.stringify(svar),
-                    credentials: 'include',
-                    headers: { 'Content-Type': 'application/json' },
-                }
-            )
+            fetchResult = await fetchMedRequestId(url, options)
         } catch (e) {
             setFeilmeldingTekst('Det skjedde en feil i baksystemene, prøv igjen senere')
             return
@@ -151,7 +154,7 @@ const OpplastingForm = ({ sporsmal }: SpmProps) => {
 
         if (!response.ok) {
             logger.error(
-                `Feil under lagring av kvittering med feilkode ${response.status} og x_request_id ${fetchResult.requestId}.`
+                `Feil ved kall til: ${options.method} ${url} med HTTP-kode: ${response.status} og x_request_id: ${fetchResult.requestId}.`
             )
             setFeilmeldingTekst('Det skjedde en feil i baksystemene, prøv igjen senere')
         }
@@ -159,7 +162,9 @@ const OpplastingForm = ({ sporsmal }: SpmProps) => {
         try {
             return await fetchResult.response.json()
         } catch (e) {
-            logger.error(`Feilet ved parsing av JSON for x_request_id ${fetchResult.requestId}. Error: ${e}.`)
+            logger.error(
+                `${e} - Kall til: ${options.method} ${url} feilet HTTP-kode: ${response.status} ved parsing av JSON for x_request_id: ${fetchResult.requestId} med data: ${response.body}`
+            )
             return
         }
     }
