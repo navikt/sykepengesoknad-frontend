@@ -14,10 +14,6 @@ export function isIntegrationtest() {
     return isMockBackend() && !isOpplaering()
 }
 
-export function flexGatewayRoot() {
-    return publicRuntimeConfig.flexGatewayRoot
-}
-
 export function isMockBackend() {
     return publicRuntimeConfig.mockBackend === 'true'
 }
