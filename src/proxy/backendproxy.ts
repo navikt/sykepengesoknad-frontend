@@ -49,22 +49,27 @@ export async function proxyKallTilBackend(opts: Opts) {
     const stream = Readable.from(opts.req)
     const bodyin = await stream2buffer(stream)
 
-    const backendReq = http.request(options, (res2) => {
-        if (res2.statusCode != null) {
-            opts.res.status(res2.statusCode)
+    const backendRequest = http.request(options, (backendResponse) => {
+        if (backendResponse.statusCode != null) {
+            opts.res.status(backendResponse.statusCode)
         }
-        for (const headersKey in res2.headers) {
-            opts.res.setHeader(headersKey, res2.headers[headersKey]!)
+        for (const headersKey in backendResponse.headers) {
+            opts.res.setHeader(headersKey, backendResponse.headers[headersKey]!)
         }
 
-        res2.on('data', (d: any) => {
+        backendResponse.on('data', (d: any) => {
             opts.res.write(d)
         })
-        res2.on('end', (d: any) => {
+        backendResponse.on('end', () => {
             opts.res.end()
         })
+        stream.on('error', (err) =>
+            logger.error(
+                `Feil ved lesing av backend stream. Message: ${err.message}, Cause: ${err.cause}, URL: ${opts.req.url}`
+            )
+        )
     })
 
-    backendReq.write(bodyin)
-    backendReq.end()
+    backendRequest.write(bodyin)
+    backendRequest.end()
 }

@@ -6,6 +6,7 @@ import { RouteParams } from '../../../app'
 import { redirectTilLoginHvis401 } from '../../../data/rest/utils'
 import { useAppStore } from '../../../data/stores/app-store'
 import { RSSoknadstatus } from '../../../types/rs-types/rs-soknadstatus'
+import fetchMedRequestId from '../../../utils/fetch'
 import { logger } from '../../../utils/logger'
 import { useAmplitudeInstance } from '../../amplitude/amplitude'
 import styles from './gjenapneknapp.module.css'
@@ -28,10 +29,21 @@ const GjenapneSoknad = () => {
     }, [])
 
     const gjenapneSoknad = async () => {
-        if (gjenapner) return
-        setGjenapner(true)
+        if (gjenapner) {
+            return
+        } else {
+            setGjenapner(true)
+        }
+
+        logEvent('knapp klikket', {
+            tekst: 'Jeg vil bruke denne søknaden likevel',
+            soknadstype: valgtSoknad?.soknadstype,
+            component: 'Avbrutt søknad visning',
+        })
+
+        let fetchResult
         try {
-            const res = await fetch(
+            fetchResult = await fetchMedRequestId(
                 `/syk/sykepengesoknad/api/sykepengesoknad-backend/api/v2/soknader/${valgtSoknad!.id}/gjenapne`,
                 {
                     method: 'POST',
@@ -39,33 +51,32 @@ const GjenapneSoknad = () => {
                     headers: { 'Content-Type': 'application/json' },
                 }
             )
-
-            logEvent('knapp klikket', {
-                tekst: 'Jeg vil bruke denne søknaden likevel',
-                soknadstype: valgtSoknad?.soknadstype,
-                component: 'Avbrutt søknad visning',
-            })
-
-            try {
-                const httpCode = res.status
-                if (redirectTilLoginHvis401(res)) {
-                    return
-                } else if ([200, 201, 203, 206].includes(httpCode)) {
-                    valgtSoknad!.status = RSSoknadstatus.NY
-                    valgtSoknad!.avbruttDato = undefined
-                    setValgtSoknad(valgtSoknad)
-                    soknader[soknader.findIndex((sok) => sok.id === valgtSoknad!.id)] = valgtSoknad!
-                    setSoknader(soknader)
-                    history.push(`/soknader/${valgtSoknad!.id}/1`)
-                } else {
-                    logger.error('Feil ved gjenåpning av søknad', res)
-                }
-            } catch (e) {
-                logger.error('Feil ved gjenåpning av søknad', e)
-            }
-        } finally {
-            setGjenapner(false)
+        } catch (e) {
+            return
         }
+
+        const response = fetchResult.response
+        if (redirectTilLoginHvis401(response)) {
+            return
+        }
+
+        if (!response.ok) {
+            logger.error(
+                `Feilet ved gjenåpning av soknad ${valgtSoknad!.id} med http kode ${response.status} og x_request_id ${
+                    fetchResult.requestId
+                }`
+            )
+            return
+        }
+
+        valgtSoknad!.status = RSSoknadstatus.NY
+        valgtSoknad!.avbruttDato = undefined
+        setValgtSoknad(valgtSoknad)
+        soknader[soknader.findIndex((sok) => sok.id === valgtSoknad!.id)] = valgtSoknad!
+        setSoknader(soknader)
+        history.push(`/soknader/${valgtSoknad!.id}/1`)
+
+        setGjenapner(false)
     }
 
     return (
