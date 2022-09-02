@@ -29,7 +29,7 @@ async function jwks() {
 async function issuer() {
     if (typeof _issuer === 'undefined') {
         if (!serverRuntimeConfig.loginserviceIdportenDiscoveryUrl) {
-            logger.error('Miljøvariabelen  "LOGINSERVICE_IDPORTEN_DISCOVERY_URL" er ikke satt')
+            logger.error('Miljøvariabelen "LOGINSERVICE_IDPORTEN_DISCOVERY_URL" er ikke satt.')
         }
         _issuer = await Issuer.discover(serverRuntimeConfig.loginserviceIdportenDiscoveryUrl)
     }

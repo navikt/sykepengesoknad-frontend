@@ -3,11 +3,10 @@ import parser from 'html-react-parser'
 import React from 'react'
 import { useHistory } from 'react-router'
 
-import useFetch from '../../data/rest/use-fetch'
-import { FetchState, hasData } from '../../data/rest/utils'
+import { redirectTilLoginHvis401 } from '../../data/rest/utils'
 import { useAppStore } from '../../data/stores/app-store'
-import { RSSoknad } from '../../types/rs-types/rs-soknad'
 import { Soknad } from '../../types/types'
+import fetchMedRequestId from '../../utils/fetch'
 import { logger } from '../../utils/logger'
 import { tekst } from '../../utils/tekster'
 import { urlTilSoknad } from '../soknad/soknad-link'
@@ -17,32 +16,52 @@ import Vis from '../vis'
 const OpprettUtland = () => {
     const { soknader, setSoknader, setFeilmeldingTekst, feilmeldingTekst } = useAppStore()
 
-    const opprettUtland = useFetch<RSSoknad>()
     const history = useHistory()
 
-    const opprett = () => {
-        opprettUtland.fetch(
-            '/syk/sykepengesoknad/api/sykepengesoknad-backend/api/v2/opprettSoknadUtland',
-            {
-                method: 'POST',
-                credentials: 'include',
-                headers: { 'Content-Type': 'application/json' },
-            },
-            (fetchState: FetchState<RSSoknad>) => {
-                if (hasData(fetchState)) {
-                    const soknad = new Soknad(fetchState.data)
-                    if (!soknader.find((s) => s.id === soknad.id)) {
-                        soknader.push(soknad)
-                        setSoknader(soknader)
-                    }
-                    history.push(urlTilSoknad(soknad))
-                    setFeilmeldingTekst('')
-                } else {
-                    logger.error('Feil ved opprettelse av utlandssøknad', fetchState)
-                    setFeilmeldingTekst(tekst('opprett-utland.feilet'))
+    const opprett = async () => {
+        let fetchResult
+
+        try {
+            fetchResult = await fetchMedRequestId(
+                '/syk/sykepengesoknad/api/sykepengesoknad-backend/api/v2/opprettSoknadUtland',
+                {
+                    method: 'POST',
+                    credentials: 'include',
+                    headers: { 'Content-Type': 'application/json' },
                 }
-            }
-        )
+            )
+        } catch (e) {
+            return
+        }
+
+        const response = fetchResult.response
+        if (redirectTilLoginHvis401(response)) {
+            return
+        }
+
+        if (!response.ok) {
+            logger.error(
+                `Feil ved opprettelse av utlandssøknad med http kode ${response.status} og x_request_id ${fetchResult.requestId}.`
+            )
+            setFeilmeldingTekst(tekst('opprett-utland.feilet'))
+            return
+        }
+
+        let data
+        try {
+            data = await response.json()
+        } catch (e) {
+            logger.error(`Feilet ved parsing av JSON for x_request_id ${fetchResult.requestId}. Error: ${e}.`)
+            return
+        }
+
+        const soknad = new Soknad(data)
+        if (!soknader.find((s) => s.id === soknad.id)) {
+            soknader.push(soknad)
+            setSoknader(soknader)
+        }
+        history.push(urlTilSoknad(soknad))
+        setFeilmeldingTekst('')
     }
 
     return (

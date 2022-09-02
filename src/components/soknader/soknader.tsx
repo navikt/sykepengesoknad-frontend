@@ -45,8 +45,7 @@ const Soknader = () => {
     useEffect(() => {
         setBodyClass('soknader')
         setValgtSoknad(undefined)
-        // eslint-disable-next-line
-    }, [])
+    }, [setValgtSoknad, soknader])
 
     return (
         <>

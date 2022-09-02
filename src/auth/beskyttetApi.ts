@@ -24,7 +24,7 @@ export function beskyttetApi(handler: ApiHandler): ApiHandler {
         try {
             await verifyIdportenAccessToken(bearerToken)
         } catch (e) {
-            logger.warn('kunne ikke validere idportentoken i beskyttetApi', e)
+            logger.warn(`Kunne ikke validere token fra ID-porten i beskyttetApi. Error: ${e}.`)
             return send401()
         }
         metrics.apiAuthorized.inc({ path: cleanPath }, 1)

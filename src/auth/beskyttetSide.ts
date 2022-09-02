@@ -73,14 +73,14 @@ function beskyttetSide(handler: PageHandler) {
             if (shouldLogMetricForPath(cleanPath)) {
                 metrics.wonderwallRedirect.inc({ path: cleanPath }, 1)
             }
-            logger.error('kunne ikke validere idportentoken i beskyttetSide', e)
+            logger.warn(`Kunne ikke validere token fra ID-porten i beskyttetSide. Error: ${e}.`)
             return wonderwallRedirect
         }
         return handler(context)
     }
 }
 
-export const beskyttetSideUtenProps = beskyttetSide(async (ctx): Promise<any> => {
+export const beskyttetSideUtenProps = beskyttetSide(async (): Promise<any> => {
     return {
         props: {},
     }
