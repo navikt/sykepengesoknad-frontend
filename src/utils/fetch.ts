@@ -23,4 +23,33 @@ const fetchMedRequestId = async (url: string, options: RequestInit = {}): Promis
     }
 }
 
+export const tryFetch = async (url: string, options: RequestInit = {}, errorHandler: Function) => {
+    const requestId = uuidv4()
+
+    options.headers = options.headers
+        ? { ...options.headers, 'x-request-id': requestId }
+        : { 'x-request-id': requestId }
+
+    let response
+    try {
+        response = await fetch(url, options)
+    } catch (e: any) {
+        throw new FetchError(`${e} - Feil ved kall til url: ${options.method} ${url} med x_request_id: ${requestId}.`)
+    }
+
+    if (response.status == 401) {
+        window.location.reload()
+        throw new Error()
+    }
+
+    if (!response.ok) {
+        errorHandler()
+        throw new FetchError(
+            `Feil ved kall til: ${options.method} ${url} med HTTP-kode: ${response.status} og x_request_id: ${requestId}.`
+        )
+    }
+}
+
+export class FetchError extends Error {}
+
 export default fetchMedRequestId
