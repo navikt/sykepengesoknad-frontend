@@ -1,10 +1,10 @@
+/* eslint-disable no-console */
 import { Alert, Button, Heading, Modal } from '@navikt/ds-react'
 import React, { useState } from 'react'
 
-import { redirectTilLoginHvis401 } from '../../data/rest/utils'
 import { useAppStore } from '../../data/stores/app-store'
 import { Kvittering, Sporsmal, svarverdiToKvittering } from '../../types/types'
-import fetchMedRequestId from '../../utils/fetch'
+import { tryFetch } from '../../utils/fetch'
 import { logger } from '../../utils/logger'
 import { tekst } from '../../utils/tekster'
 import Vis from '../vis'
@@ -40,39 +40,31 @@ const Slettknapp = ({ sporsmal, kvittering, update }: SlettknappProps) => {
             (svar) => svarverdiToKvittering(svar?.verdi).blobId === kvittering?.blobId
         )
 
-        let fetchResult
-        const url = `/syk/sykepengesoknad/api/sykepengesoknad-backend/api/v2/soknader/${valgtSoknad?.id}/sporsmal/${sporsmal?.id}/svar/${svar?.id}`
-        const options: RequestInit = {
-            method: 'DELETE',
-            credentials: 'include',
-        }
         try {
-            fetchResult = await fetchMedRequestId(url, options)
+            await tryFetch(
+                `/syk/sykepengesoknad/api/sykepengesoknad-backend/api/v2/soknader/${valgtSoknad?.id}/sporsmal/${sporsmal?.id}/svar/${svar?.id}`,
+                {
+                    method: 'DELETE',
+                    credentials: 'include',
+                },
+                () => {
+                    feilVedSletting = true
+                    setFeilmeldingTekst(tekst('opplasting_modal.slett.feilmelding'))
+                }
+            )
+        } catch ({ message }) {
+            logger.error(message)
+            return
+        }
+        sporsmal.svarliste.svar.splice(idx, 1)
+        valgtSoknad!.sporsmal[valgtSoknad!.sporsmal.findIndex((spm) => spm.id === sporsmal.id)] = sporsmal
+        setValgtSoknad(valgtSoknad)
 
-            const response = fetchResult.response
-            if (redirectTilLoginHvis401(response)) {
-                return
-            }
-
-            if (!response.ok) {
-                logger.error(
-                    `Feil ved kall til: ${options.method} ${url} med HTTP-kode: ${response.status} og x_request_id: ${fetchResult.requestId}.`
-                )
-                feilVedSletting = true
-                setFeilmeldingTekst(tekst('opplasting_modal.slett.feilmelding'))
-                return
-            }
-
-            sporsmal.svarliste.svar.splice(idx, 1)
-            valgtSoknad!.sporsmal[valgtSoknad!.sporsmal.findIndex((spm) => spm.id === sporsmal.id)] = sporsmal
-            setValgtSoknad(valgtSoknad)
-            setOpenModal(false)
-        } catch (e) {
-            feilVedSletting = true
-        } finally {
-            setSletter(false)
-            setVilSlette(feilVedSletting)
-            if (update) update()
+        setOpenModal(false)
+        setSletter(false)
+        setVilSlette(feilVedSletting)
+        if (update) {
+            update()
         }
     }
 

@@ -46,7 +46,7 @@ export const tryFetch = async (
     }
 
     if (!response.ok) {
-        if (errorHandler !== undefined) {
+        if (errorHandler) {
             errorHandler(response)
         }
         throw new FetchError(
