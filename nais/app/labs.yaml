@@ -10,7 +10,7 @@ spec:
   image: {{ image }}
   port: 8080
   ingresses:
-    - "https://sykepengesoknad-{{appname}}.labs.nais.io/"
+    - {{ ingress }}
   replicas:
     min: {{ replicas }}
     max: {{ replicas }}
@@ -22,7 +22,7 @@ spec:
     - name: FLEX_GATEWAY_ROOT
       value: "https://flex-gateway.dev.nav.no"
     - name: LOGINSERVICE_URL
-      value: "https://loginservice-q.nav.no/login"
+      value: "https://loginservice-dev.nav.no/login"
     - name: AMPLITUDE_ENABLED
       value: "false"
     - name: MOCK_BACKEND

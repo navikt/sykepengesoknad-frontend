@@ -61,14 +61,15 @@ const Soknaden = () => {
             soknadstatus: filtrertSoknad?.status,
         })
         // eslint-disable-next-line
-    }, [id])
+    }, [id, soknader, sykmeldinger])
 
     useEffect(() => {
         setBodyClass('soknaden')
     }, [])
 
-    if (!valgtSoknad) return null
-
+    if (!valgtSoknad) {
+        return null
+    }
     if (valgtSoknad.id !== id) return null
 
     return (

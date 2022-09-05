@@ -11,6 +11,7 @@ import { useAppStore } from '../../../data/stores/app-store'
 import { RSOppdaterSporsmalResponse } from '../../../types/rs-types/rest-response/rs-oppdatersporsmalresponse'
 import { RSSvar } from '../../../types/rs-types/rs-svar'
 import { Kvittering, Sporsmal, UtgiftTyper } from '../../../types/types'
+import fetchMedRequestId from '../../../utils/fetch'
 import { formaterFilstørrelse, formattertFiltyper, maxFilstørrelse } from '../../../utils/fil-utils'
 import { logger } from '../../../utils/logger'
 import { getLedetekst, tekst } from '../../../utils/tekster'
@@ -62,9 +63,7 @@ const OpplastingForm = ({ sporsmal }: SpmProps) => {
             const opplastingResponse: OpplastetKvittering = await opplastingTilBucket()
             if (!opplastingResponse) return
 
-            const rsOppdaterSporsmalResponse: RSOppdaterSporsmalResponse = await lagreSvarISyfosoknad(
-                opplastingResponse
-            )
+            const rsOppdaterSporsmalResponse: RSOppdaterSporsmalResponse = await lagreSvar(opplastingResponse)
             if (!rsOppdaterSporsmalResponse) return
 
             valgtSoknad!.sporsmal[spmIndex] = new Sporsmal(rsOppdaterSporsmalResponse.oppdatertSporsmal, null, true)
@@ -80,28 +79,45 @@ const OpplastingForm = ({ sporsmal }: SpmProps) => {
     const opplastingTilBucket = async () => {
         const requestData = new FormData()
         requestData.append('file', valgtFil as Blob)
-        const bucketRes = await fetch('/syk/sykepengesoknad/api/flex-bucket-uploader/api/v2/opplasting', {
-            method: 'POST',
-            body: requestData,
-            credentials: 'include',
-        })
 
-        if (bucketRes.ok) {
-            return bucketRes.json()
-        } else if (redirectTilLoginHvis401(bucketRes)) {
-            return null
-        } else if (bucketRes.status === 413) {
-            logger.warn('Feil under opplasting fordi filen du prøvde å laste opp er for stor')
-            setFeilmeldingTekst('Filen du prøvde å laste opp er for stor')
-            return null
-        } else {
-            logger.warn('Feil under opplasting av kvittering')
+        let fetchResult
+        try {
+            fetchResult = await fetchMedRequestId('/syk/sykepengesoknad/api/flex-bucket-uploader/api/v2/opplasting', {
+                method: 'POST',
+                body: requestData,
+                credentials: 'include',
+            })
+        } catch (e) {
             setFeilmeldingTekst('Det skjedde en feil i baksystemene, prøv igjen senere')
-            return null
+            return
+        }
+
+        const response = fetchResult.response
+        if (redirectTilLoginHvis401(response)) {
+            return
+        }
+
+        if (!response.ok) {
+            logger.error(
+                `Feil under opplasting av kvittering med feilkode ${response.status} og x_request_id ${fetchResult.requestId}.`
+            )
+            if (response.status === 413) {
+                setFeilmeldingTekst('Filen du prøvde å laste opp er for stor')
+            } else {
+                setFeilmeldingTekst('Det skjedde en feil i baksystemene, prøv igjen senere')
+            }
+            return
+        }
+
+        try {
+            return await fetchResult.response.json()
+        } catch (e) {
+            logger.error(`Feilet ved parsing av JSON for x_request_id ${fetchResult.requestId}. Error: ${e}.`)
+            return
         }
     }
 
-    const lagreSvarISyfosoknad = async (opplastingResponse: OpplastetKvittering) => {
+    const lagreSvar = async (opplastingResponse: OpplastetKvittering) => {
         const kvittering: Kvittering = {
             blobId: opplastingResponse.id,
             belop: methods.getValues('belop_input') * 100,
@@ -110,26 +126,41 @@ const OpplastingForm = ({ sporsmal }: SpmProps) => {
         }
         const svar: RSSvar = { verdi: JSON.stringify(kvittering) }
 
-        const syfosoknadRes = await fetch(
-            `/syk/sykepengesoknad/api/sykepengesoknad-backend/api/v2/soknader/${valgtSoknad!.id}/sporsmal/${
-                sporsmal!.id
-            }/svar`,
-            {
-                method: 'POST',
-                body: JSON.stringify(svar),
-                credentials: 'include',
-                headers: { 'Content-Type': 'application/json' },
-            }
-        )
-
-        if (syfosoknadRes.ok) {
-            return syfosoknadRes.json()
-        } else if (redirectTilLoginHvis401(syfosoknadRes)) {
-            return null
-        } else {
-            logger.warn('Feil under lagring av kvittering svar i syfosoknad')
+        let fetchResult
+        try {
+            fetchResult = await fetchMedRequestId(
+                `/syk/sykepengesoknad/api/sykepengesoknad-backend/api/v2/soknader/${valgtSoknad!.id}/sporsmal/${
+                    sporsmal!.id
+                }/svar`,
+                {
+                    method: 'POST',
+                    body: JSON.stringify(svar),
+                    credentials: 'include',
+                    headers: { 'Content-Type': 'application/json' },
+                }
+            )
+        } catch (e) {
             setFeilmeldingTekst('Det skjedde en feil i baksystemene, prøv igjen senere')
-            return null
+            return
+        }
+
+        const response = fetchResult.response
+        if (redirectTilLoginHvis401(response)) {
+            return
+        }
+
+        if (!response.ok) {
+            logger.error(
+                `Feil under lagring av kvittering med feilkode ${response.status} og x_request_id ${fetchResult.requestId}.`
+            )
+            setFeilmeldingTekst('Det skjedde en feil i baksystemene, prøv igjen senere')
+        }
+
+        try {
+            return await fetchResult.response.json()
+        } catch (e) {
+            logger.error(`Feilet ved parsing av JSON for x_request_id ${fetchResult.requestId}. Error: ${e}.`)
+            return
         }
     }
 

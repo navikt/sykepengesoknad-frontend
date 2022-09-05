@@ -24,7 +24,7 @@ export function shouldLogMetricForPath(cleanPath: string | undefined): boolean {
 
 export class AppMetrics {
     constructor() {
-        logger.info('Initializing metrics client')
+        logger.info('Initializing metrics client.')
         collectDefaultMetrics()
     }
 

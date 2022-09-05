@@ -66,11 +66,9 @@ export async function getTokenxToken(subject_token: string, audience: string): P
         switch (err.constructor) {
             case OPError:
                 logger.error(
-                    `Noe gikk galt med token exchange mot TokenX.
-            Feilmelding fra openid-client: (${err}).
-            HTTP Status fra TokenX: (${err.response.statusCode} ${err.response.statusMessage})
-            Body fra TokenX:`,
-                    err.response.body
+                    `Noe gikk galt med token exchange mot TokenX. Feilmelding fra openid-client: (${err}).
+                    HTTP Status fra TokenX: (${err.response.statusCode} ${err.response.statusMessage})
+                    Body fra TokenX: ${err.response.body}`
                 )
                 break
         }

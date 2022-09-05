@@ -2,11 +2,10 @@ import { BodyShort, Button, Heading, Modal } from '@navikt/ds-react'
 import React, { useState } from 'react'
 import { useHistory } from 'react-router'
 
-import useFetch from '../../data/rest/use-fetch'
-import { FetchState, hasData } from '../../data/rest/utils'
+import { redirectTilLoginHvis401 } from '../../data/rest/utils'
 import { useAppStore } from '../../data/stores/app-store'
-import { RSSoknad } from '../../types/rs-types/rs-soknad'
 import { Soknad } from '../../types/types'
+import fetchMedRequestId from '../../utils/fetch'
 import { logger } from '../../utils/logger'
 import { tekst } from '../../utils/tekster'
 import { useAmplitudeInstance } from '../amplitude/amplitude'
@@ -14,7 +13,6 @@ import { urlTilSoknad } from '../soknad/soknad-link'
 
 const Endreknapp = () => {
     const { valgtSoknad, soknader, setSoknader, setFeilmeldingTekst } = useAppStore()
-    const korrigerSoknad = useFetch<RSSoknad>()
     const history = useHistory()
     const { logEvent } = useAmplitudeInstance()
     const [aapen, setAapen] = useState<boolean>(false)
@@ -22,35 +20,54 @@ const Endreknapp = () => {
     const [korrigerer, setKorrigerer] = useState<boolean>(false)
     const endreKnappTekst = tekst('kvittering.knapp.endre')
 
-    const korriger = () => {
+    const korriger = async () => {
         if (korrigerer) return
         setKorrigerer(true)
+        setFeilmeldingTekst('')
 
-        korrigerSoknad.fetch(
-            `/syk/sykepengesoknad/api/sykepengesoknad-backend/api/v2/soknader/${valgtSoknad!.id}/korriger`,
-            {
-                method: 'POST',
-                credentials: 'include',
-                headers: { 'Content-Type': 'application/json' },
-            },
-            (fetchState: FetchState<RSSoknad>) => {
-                if (hasData(fetchState) && fetchState.httpCode >= 200 && fetchState.httpCode < 400) {
-                    const soknad = new Soknad(fetchState.data)
-                    if (!soknader.find((sok) => sok.id === soknad.id)) {
-                        soknader.push(soknad)
-                        setSoknader(soknader)
-                    }
-                    setAapen(false)
-                    history.push(urlTilSoknad(soknad))
-                    setFeilmeldingTekst('')
-                } else {
-                    logger.error(`Feil ved opprettelse av UTKAST_TIL_KORRIGERING ${fetchState.httpCode}`)
-                    setFeilmeldingTekst(tekst('kvittering.korrigering.feilet'))
+        let fetchResult
+        try {
+            fetchResult = await fetchMedRequestId(
+                `/syk/sykepengesoknad/api/sykepengesoknad-backend/api/v2/soknader/${valgtSoknad!.id}/korriger`,
+                {
+                    method: 'POST',
+                    credentials: 'include',
+                    headers: { 'Content-Type': 'application/json' },
                 }
-                setKorrigerer(false)
-            }
-        )
+            )
+        } catch (e) {
+            return
+        }
+
+        const response = fetchResult.response
+        if (redirectTilLoginHvis401(response)) {
+            return
+        }
+
+        if (!response.ok) {
+            logger.error(
+                `Feil ved opprettelse av UTKAST_TIL_KORRIGERING med http kode ${response.status} og x_request_id ${fetchResult.requestId}.`
+            )
+            setFeilmeldingTekst(tekst('kvittering.korrigering.feilet'))
+        }
+
+        let data
+        try {
+            data = await response.json()
+        } catch (e) {
+            logger.error(`Feilet ved parsing av JSON for x_request_id ${fetchResult.requestId}. Error: ${e}.`)
+            return
+        }
+
+        const soknad = new Soknad(data)
+        if (!soknader.find((sok) => sok.id === soknad.id)) {
+            soknader.push(soknad)
+            setSoknader(soknader)
+        }
+        setAapen(false)
+        history.push(urlTilSoknad(soknad))
     }
+
     const endreSøknadPopup = 'Endre søknad popup'
 
     return (
@@ -97,7 +114,7 @@ const Endreknapp = () => {
                                 soknadstype: valgtSoknad?.soknadstype,
                                 component: endreSøknadPopup,
                             })
-                            korriger()
+                            korriger().catch((e: Error) => logger.error(e.message))
                         }}
                     >
                         {tekst('endre.modal.bekreft')}
