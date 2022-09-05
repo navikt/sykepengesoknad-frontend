@@ -10,3 +10,4 @@ jobs:
             static-files-path: sykepengesoknad
             base-path: syk/sykepengesoknad
             labs-ingress: sykepengesoknad
+            sentry-project: sykepengesoknad
