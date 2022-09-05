@@ -6,12 +6,11 @@ import { FormProvider, useForm } from 'react-hook-form'
 import { useParams } from 'react-router-dom'
 
 import { RouteParams } from '../../../app'
-import { redirectTilLoginHvis401 } from '../../../data/rest/utils'
 import { useAppStore } from '../../../data/stores/app-store'
 import { RSOppdaterSporsmalResponse } from '../../../types/rs-types/rest-response/rs-oppdatersporsmalresponse'
 import { RSSvar } from '../../../types/rs-types/rs-svar'
 import { Kvittering, Sporsmal, UtgiftTyper } from '../../../types/types'
-import fetchMedRequestId from '../../../utils/fetch'
+import { FetchError, tryFetchData } from '../../../utils/fetch'
 import { formaterFilstørrelse, formattertFiltyper, maxFilstørrelse } from '../../../utils/fil-utils'
 import { logger } from '../../../utils/logger'
 import { getLedetekst, tekst } from '../../../utils/tekster'
@@ -80,44 +79,29 @@ const OpplastingForm = ({ sporsmal }: SpmProps) => {
         const requestData = new FormData()
         requestData.append('file', valgtFil as Blob)
 
-        let fetchResult
-        const url = '/syk/sykepengesoknad/api/flex-bucket-uploader/api/v2/opplasting'
-        const options: RequestInit = {
-            method: 'POST',
-            body: requestData,
-            credentials: 'include',
-        }
         try {
-            fetchResult = await fetchMedRequestId(url, options)
-        } catch (e) {
-            setFeilmeldingTekst('Det skjedde en feil i baksystemene, prøv igjen senere')
-            return
-        }
-
-        const response = fetchResult.response
-        if (redirectTilLoginHvis401(response)) {
-            return
-        }
-
-        if (!response.ok) {
-            logger.error(
-                `Feil ved kall til: ${options.method} ${url} med HTTP-kode: ${response.status} og x_request_id: ${fetchResult.requestId}.`
+            return await tryFetchData(
+                '/syk/sykepengesoknad/api/flex-bucket-uploader/api/v2/opplasting',
+                {
+                    method: 'POST',
+                    body: requestData,
+                    credentials: 'include',
+                },
+                (response) => {
+                    if (response.status === 413) {
+                        setFeilmeldingTekst('Filen du prøvde å laste opp er for stor.')
+                    } else {
+                        setFeilmeldingTekst('Det skjedde en feil i baksystemene, prøv igjen senere.')
+                    }
+                }
             )
-            if (response.status === 413) {
-                setFeilmeldingTekst('Filen du prøvde  laste opp er for stor')
-            } else {
-                setFeilmeldingTekst('Det skjedde en feil i baksystemene, prøv igjen senere')
+        } catch (e: any) {
+            if (e instanceof FetchError) {
+                logger.error(e.message)
             }
             return
-        }
-
-        try {
-            return await fetchResult.response.json()
-        } catch (e) {
-            logger.error(
-                `${e} - Kall til: ${options.method} ${url} feilet HTTP-kode: ${response.status} ved parsing av JSON for x_request_id: ${fetchResult.requestId} med data: ${response.body}`
-            )
-            return
+        } finally {
+            setFeilmeldingTekst('')
         }
     }
 
@@ -130,42 +114,28 @@ const OpplastingForm = ({ sporsmal }: SpmProps) => {
         }
         const svar: RSSvar = { verdi: JSON.stringify(kvittering) }
 
-        let fetchResult
-        const url = `/syk/sykepengesoknad/api/sykepengesoknad-backend/api/v2/soknader/${valgtSoknad!.id}/sporsmal/${
-            sporsmal!.id
-        }/svar`
-        const options: RequestInit = {
-            method: 'POST',
-            body: JSON.stringify(svar),
-            credentials: 'include',
-            headers: { 'Content-Type': 'application/json' },
-        }
         try {
-            fetchResult = await fetchMedRequestId(url, options)
-        } catch (e) {
-            setFeilmeldingTekst('Det skjedde en feil i baksystemene, prøv igjen senere')
-            return
-        }
-
-        const response = fetchResult.response
-        if (redirectTilLoginHvis401(response)) {
-            return
-        }
-
-        if (!response.ok) {
-            logger.error(
-                `Feil ved kall til: ${options.method} ${url} med HTTP-kode: ${response.status} og x_request_id: ${fetchResult.requestId}.`
+            return await tryFetchData(
+                `/syk/sykepengesoknad/api/sykepengesoknad-backend/api/v2/soknader/${valgtSoknad!.id}/sporsmal/${
+                    sporsmal!.id
+                }/svar`,
+                {
+                    method: 'POST',
+                    body: JSON.stringify(svar),
+                    credentials: 'include',
+                    headers: { 'Content-Type': 'application/json' },
+                },
+                () => {
+                    setFeilmeldingTekst('Det skjedde en feil i baksystemene, prøv igjen senere.')
+                }
             )
-            setFeilmeldingTekst('Det skjedde en feil i baksystemene, prøv igjen senere')
-        }
-
-        try {
-            return await fetchResult.response.json()
-        } catch (e) {
-            logger.error(
-                `${e} - Kall til: ${options.method} ${url} feilet HTTP-kode: ${response.status} ved parsing av JSON for x_request_id: ${fetchResult.requestId} med data: ${response.body}`
-            )
+        } catch (e: any) {
+            if (e instanceof FetchError) {
+                logger.error(e.message)
+            }
             return
+        } finally {
+            setFeilmeldingTekst('')
         }
     }
 
