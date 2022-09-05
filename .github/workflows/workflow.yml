@@ -9,3 +9,4 @@ jobs:
             app: sykepengesoknad
             static-files-path: sykepengesoknad
             base-path: syk/sykepengesoknad
+            labs-ingress: sykepengesoknad
