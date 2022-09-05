@@ -8,7 +8,7 @@ import { RSSoknadstatus } from '../../types/rs-types/rs-soknadstatus'
 import { RSSoknadstype } from '../../types/rs-types/rs-soknadstype'
 import { Soknad } from '../../types/types'
 import { sendtForMerEnn30DagerSiden } from '../../utils/dato-utils'
-import fetchMedRequestId from '../../utils/fetch'
+import { FetchError, tryFetchData } from '../../utils/fetch'
 import { logger } from '../../utils/logger'
 import { tekst } from '../../utils/tekster'
 import Vis from '../vis'
@@ -69,38 +69,27 @@ const Arbeidstaker = () => {
     }
 
     async function erForsteSoknadUtenforArbeidsgiverperiode(id?: string) {
-        if (id === undefined) return true
-        let fetchResult
-        const url = `/syk/sykepengesoknad/api/sykepengesoknad-backend/api/v2/soknader/${id}/finnMottaker`
-        const options: RequestInit = {
-            method: 'POST',
-            credentials: 'include',
-            headers: { 'Content-Type': 'application/json' },
-        }
-        try {
-            fetchResult = await fetchMedRequestId(url, options)
-        } catch (e) {
-            return
-        }
-
-        const response = fetchResult.response
-        if (!response.ok) {
-            logger.error(
-                `Feil ved kall til: ${options.method} ${url} med HTTP-kode: ${response.status} og x_request_id: ${fetchResult.requestId}.`
-            )
-            return
+        if (id === undefined) {
+            return true
         }
 
         let data
         try {
-            data = await response.json()
-            return data.mottaker === RSMottaker.ARBEIDSGIVER
-        } catch (e) {
-            logger.error(
-                `${e} - Kall til: ${options.method} ${url} feilet HTTP-kode: ${response.status} ved parsing av JSON for x_request_id: ${fetchResult.requestId} med data: ${response.body}`
+            data = await tryFetchData(
+                `/syk/sykepengesoknad/api/sykepengesoknad-backend/api/v2/soknader/${id}/finnMottaker`,
+                {
+                    method: 'POST',
+                    credentials: 'include',
+                    headers: { 'Content-Type': 'application/json' },
+                }
             )
+        } catch (e: any) {
+            if (e instanceof FetchError) {
+                logger.error(e.message)
+            }
             return
         }
+        return data.mottaker === RSMottaker.ARBEIDSGIVER
     }
 
     const kvitteringInnhold = () => {

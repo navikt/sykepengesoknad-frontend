@@ -57,7 +57,7 @@ export const tryFetch = async (
     return { requestId, response }
 }
 
-export const tryFetchData = async (url: string, options: RequestInit = {}, errorHandler: ErrorHandler) => {
+export const tryFetchData = async (url: string, options: RequestInit = {}, errorHandler?: ErrorHandler) => {
     const fetchResult = await tryFetch(url, options, errorHandler)
     const response = fetchResult.response
 
