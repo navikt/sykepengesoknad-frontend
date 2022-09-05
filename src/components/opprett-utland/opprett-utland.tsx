@@ -3,10 +3,9 @@ import parser from 'html-react-parser'
 import React from 'react'
 import { useHistory } from 'react-router'
 
-import { redirectTilLoginHvis401 } from '../../data/rest/utils'
 import { useAppStore } from '../../data/stores/app-store'
 import { Soknad } from '../../types/types'
-import fetchMedRequestId from '../../utils/fetch'
+import { FetchError, tryFetchData } from '../../utils/fetch'
 import { logger } from '../../utils/logger'
 import { tekst } from '../../utils/tekster'
 import { urlTilSoknad } from '../soknad/soknad-link'
@@ -19,40 +18,26 @@ const OpprettUtland = () => {
     const history = useHistory()
 
     const opprett = async () => {
-        let fetchResult
-        const url = '/syk/sykepengesoknad/api/sykepengesoknad-backend/api/v2/opprettSoknadUtland'
-        const options: RequestInit = {
-            method: 'POST',
-            credentials: 'include',
-            headers: { 'Content-Type': 'application/json' },
-        }
-        try {
-            fetchResult = await fetchMedRequestId(url, options)
-        } catch (e) {
-            return
-        }
-
-        const response = fetchResult.response
-        if (redirectTilLoginHvis401(response)) {
-            return
-        }
-
-        if (!response.ok) {
-            logger.error(
-                `Feil ved kall til: ${options.method} ${url} med HTTP-kode: ${response.status} og x_request_id: ${fetchResult.requestId}.`
-            )
-            setFeilmeldingTekst(tekst('opprett-utland.feilet'))
-            return
-        }
-
         let data
         try {
-            data = await response.json()
-        } catch (e) {
-            logger.error(
-                `${e} - Kall til: ${options.method} ${url} feilet HTTP-kode: ${response.status} ved parsing av JSON for x_request_id: ${fetchResult.requestId} med data: ${response.body}`
+            data = await tryFetchData(
+                '/syk/sykepengesoknad/api/sykepengesoknad-backend/api/v2/opprettSoknadUtland',
+                {
+                    method: 'POST',
+                    credentials: 'include',
+                    headers: { 'Content-Type': 'application/json' },
+                },
+                () => {
+                    setFeilmeldingTekst(tekst('opprett-utland.feilet'))
+                }
             )
+        } catch (e: any) {
+            if (e instanceof FetchError) {
+                logger.error(e.message)
+            }
             return
+        } finally {
+            setFeilmeldingTekst('')
         }
 
         const soknad = new Soknad(data)
@@ -61,7 +46,6 @@ const OpprettUtland = () => {
             setSoknader(soknader)
         }
         history.push(urlTilSoknad(soknad))
-        setFeilmeldingTekst('')
     }
 
     return (
