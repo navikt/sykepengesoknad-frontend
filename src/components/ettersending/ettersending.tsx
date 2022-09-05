@@ -2,9 +2,8 @@ import { BodyShort, Button, Heading, Modal } from '@navikt/ds-react'
 import parser from 'html-react-parser'
 import React, { useState } from 'react'
 
-import { redirectTilLoginHvis401 } from '../../data/rest/utils'
 import { useAppStore } from '../../data/stores/app-store'
-import fetchMedRequestId from '../../utils/fetch'
+import { FetchError, tryFetch } from '../../utils/fetch'
 import { logger } from '../../utils/logger'
 import { tekst } from '../../utils/tekster'
 
@@ -48,33 +47,25 @@ const Ettersending = ({ gjelder, setRerendrekvittering }: EttersendingProps) => 
     }
 
     const ettersendNav = async () => {
-        let fetchResult
-        const url = `/syk/sykepengesoknad/api/sykepengesoknad-backend/api/v2/soknader/${
-            valgtSoknad!.id
-        }/ettersendTilNav`
-        const options: RequestInit = {
-            method: 'POST',
-            credentials: 'include',
-            headers: { 'Content-Type': 'application/json' },
-        }
         try {
-            fetchResult = await fetchMedRequestId(url, options)
-        } catch (e) {
-            setFeilmeldingTekst(tekst('kvittering.ettersending.feilet'))
-            return
-        }
-
-        const response = fetchResult.response
-        if (redirectTilLoginHvis401(response)) {
-            return
-        }
-
-        if (!response.ok) {
-            logger.error(
-                `Feil ved kall til: ${options.method} ${url} med HTTP-kode: ${response.status} og x_request_id: ${fetchResult.requestId}.`
+            await tryFetch(
+                `/syk/sykepengesoknad/api/sykepengesoknad-backend/api/v2/soknader/${valgtSoknad!.id}/ettersendTilNav`,
+                {
+                    method: 'POST',
+                    credentials: 'include',
+                    headers: { 'Content-Type': 'application/json' },
+                },
+                () => {
+                    setFeilmeldingTekst(tekst('kvittering.ettersending.feilet'))
+                }
             )
-            setFeilmeldingTekst(tekst('kvittering.ettersending.feilet'))
+        } catch (e: any) {
+            if (e instanceof FetchError) {
+                logger.error(e.message)
+            }
             return
+        } finally {
+            setFeilmeldingTekst('')
         }
 
         valgtSoknad!.sendtTilNAVDato = new Date()
@@ -82,34 +73,27 @@ const Ettersending = ({ gjelder, setRerendrekvittering }: EttersendingProps) => 
     }
 
     const ettersendArbeidsgiver = async () => {
-        let fetchResult
-        const url = `/syk/sykepengesoknad/api/sykepengesoknad-backend/api/v2/soknader/${
-            valgtSoknad!.id
-        }/ettersendTilArbeidsgiver`
-
-        const options: RequestInit = {
-            method: 'POST',
-            credentials: 'include',
-            headers: { 'Content-Type': 'application/json' },
-        }
         try {
-            fetchResult = await fetchMedRequestId(url, options)
-        } catch (e) {
-            setFeilmeldingTekst(tekst('kvittering.ettersending.feilet'))
-            return
-        }
-
-        const response = fetchResult.response
-        if (redirectTilLoginHvis401(response)) {
-            return
-        }
-
-        if (!response.ok) {
-            logger.error(
-                `Feil ved kall til: ${options.method} ${url} med HTTP-kode: ${response.status} og x_request_id: ${fetchResult.requestId}.`
+            await tryFetch(
+                `/syk/sykepengesoknad/api/sykepengesoknad-backend/api/v2/soknader/${
+                    valgtSoknad!.id
+                }/ettersendTilArbeidsgiver`,
+                {
+                    method: 'POST',
+                    credentials: 'include',
+                    headers: { 'Content-Type': 'application/json' },
+                },
+                () => {
+                    setFeilmeldingTekst(tekst('kvittering.ettersending.feilet'))
+                }
             )
-            setFeilmeldingTekst(tekst('kvittering.ettersending.feilet'))
+        } catch (e: any) {
+            if (e instanceof FetchError) {
+                logger.error(e.message)
+            }
             return
+        } finally {
+            setFeilmeldingTekst('')
         }
 
         valgtSoknad!.sendtTilArbeidsgiverDato = new Date()
