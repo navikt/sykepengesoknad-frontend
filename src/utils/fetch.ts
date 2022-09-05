@@ -23,7 +23,8 @@ const fetchMedRequestId = async (url: string, options: RequestInit = {}): Promis
 export const tryFetch = async (
     url: string,
     options: RequestInit = {},
-    errorHandler: Function
+    // eslint-disable-next-line @typescript-eslint/no-empty-function
+    errorHandler?: Function
 ): Promise<FetchResult> => {
     const requestId = uuidv4()
 
@@ -44,7 +45,9 @@ export const tryFetch = async (
     }
 
     if (!response.ok) {
-        errorHandler()
+        if (errorHandler !== undefined) {
+            errorHandler()
+        }
         throw new FetchError(
             `Feil ved kall til: ${options.method} ${url} med HTTP-kode: ${response.status} med x_request_id: ${requestId}.`
         )
@@ -68,6 +71,7 @@ export const tryFetchData = async (url: string, options: RequestInit = {}, error
 }
 
 export class FetchError extends Error {}
+
 export class AuthenticationError extends Error {}
 
 export default fetchMedRequestId

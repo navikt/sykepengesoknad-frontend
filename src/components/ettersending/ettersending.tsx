@@ -87,7 +87,7 @@ const Ettersending = ({ gjelder, setRerendrekvittering }: EttersendingProps) => 
                     setFeilmeldingTekst(tekst('kvittering.ettersending.feilet'))
                 }
             )
-        } catch (e: any) {
+        } catch (e) {
             if (e instanceof FetchError) {
                 logger.error(e.message)
             }

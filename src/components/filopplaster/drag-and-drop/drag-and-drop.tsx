@@ -4,7 +4,7 @@ import { useDropzone } from 'react-dropzone'
 import { useFormContext } from 'react-hook-form'
 
 import { useAppStore } from '../../../data/stores/app-store'
-import fetchMedRequestId from '../../../utils/fetch'
+import { FetchError, tryFetch } from '../../../utils/fetch'
 import {
     customTruncet,
     formaterFilstørrelse,
@@ -28,26 +28,15 @@ const DragAndDrop = () => {
     const [formErDisabled, setFormErDisabled] = useState<boolean>(false)
 
     const hentKvittering = useCallback(async () => {
-        let fetchResult
-        const url = `/syk/sykepengesoknad/api/flex-bucket-uploader/api/v2/kvittering/${valgtKvittering!.blobId}`
-        const options: RequestInit = {
-            method: 'GET',
-            credentials: 'include',
-            headers: { 'Content-Type': 'application/json' },
-        }
-        try {
-            fetchResult = await fetchMedRequestId(url, options)
-        } catch (e) {
-            return
-        }
-        const response = fetchResult.response
-        if (!response.ok) {
-            throw new Error(
-                `Feil ved kall til: ${options.method} ${url} med HTTP-kode: ${response.status} og x_request_id: ${fetchResult.requestId}.`
-            )
-        }
-
-        response.blob().then((blob) => {
+        const fetchResult = await tryFetch(
+            `/syk/sykepengesoknad/api/flex-bucket-uploader/api/v2/kvittering/${valgtKvittering!.blobId}`,
+            {
+                method: 'GET',
+                credentials: 'include',
+                headers: { 'Content-Type': 'application/json' },
+            }
+        )
+        fetchResult.response.blob().then((blob) => {
             setValgtFil(blob as any)
         })
     }, [setValgtFil, valgtKvittering])
@@ -55,7 +44,12 @@ const DragAndDrop = () => {
     useEffect(() => {
         if (valgtKvittering?.blobId) {
             setFormErDisabled(true)
-            hentKvittering().catch((e: Error) => logger.error(e.message))
+            hentKvittering().catch((e) => {
+                if (e instanceof FetchError) {
+                    logger.error(e.message)
+                }
+                return
+            })
         } else {
             setFormErDisabled(false)
         }
