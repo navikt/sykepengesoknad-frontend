@@ -4,6 +4,8 @@ import { logger } from './logger'
 
 export type FetchResult = { requestId: string; response: Response }
 
+export type ErrorHandler = (result: any) => void
+
 const fetchMedRequestId = async (url: string, options: RequestInit = {}): Promise<FetchResult> => {
     const requestId = uuidv4()
 
@@ -23,8 +25,7 @@ const fetchMedRequestId = async (url: string, options: RequestInit = {}): Promis
 export const tryFetch = async (
     url: string,
     options: RequestInit = {},
-    // eslint-disable-next-line @typescript-eslint/no-empty-function
-    errorHandler?: Function
+    errorHandler?: ErrorHandler
 ): Promise<FetchResult> => {
     const requestId = uuidv4()
 
@@ -46,7 +47,7 @@ export const tryFetch = async (
 
     if (!response.ok) {
         if (errorHandler !== undefined) {
-            errorHandler()
+            errorHandler(response)
         }
         throw new FetchError(
             `Feil ved kall til: ${options.method} ${url} med HTTP-kode: ${response.status} med x_request_id: ${requestId}.`
@@ -56,7 +57,7 @@ export const tryFetch = async (
     return { requestId, response }
 }
 
-export const tryFetchData = async (url: string, options: RequestInit = {}, errorHandler: Function) => {
+export const tryFetchData = async (url: string, options: RequestInit = {}, errorHandler: ErrorHandler) => {
     const fetchResult = await tryFetch(url, options, errorHandler)
     const response = fetchResult.response
 

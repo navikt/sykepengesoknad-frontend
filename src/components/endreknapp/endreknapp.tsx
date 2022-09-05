@@ -20,7 +20,9 @@ const Endreknapp = () => {
     const endreKnappTekst = tekst('kvittering.knapp.endre')
 
     const korriger = async () => {
-        if (korrigerer) return
+        if (korrigerer) {
+            return
+        }
         setKorrigerer(true)
         setFeilmeldingTekst('')
 
