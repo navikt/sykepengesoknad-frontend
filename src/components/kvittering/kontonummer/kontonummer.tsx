@@ -2,9 +2,8 @@ import { BodyShort, Label } from '@navikt/ds-react'
 import parser from 'html-react-parser'
 import React, { useCallback, useEffect, useState } from 'react'
 
-import { redirectTilLoginHvis401 } from '../../../data/rest/utils'
 import { isMockBackend, isProd } from '../../../utils/environment'
-import fetchMedRequestId from '../../../utils/fetch'
+import { FetchError, tryFetchData } from '../../../utils/fetch'
 import { logger } from '../../../utils/logger'
 import { tekst } from '../../../utils/tekster'
 import Vis from '../../vis'
@@ -13,46 +12,22 @@ const Kontonummer = () => {
     const [kontonummer, setKontonummer] = useState<string>()
 
     const fetchData = useCallback(async () => {
-        let fetchResult
-        const url = 'https://www.nav.no/person/personopplysninger-api/personalia'
-        const options: RequestInit = {
+        const data = await tryFetchData('https://www.nav.no/person/personopplysninger-api/personalia', {
             method: 'GET',
             credentials: 'include',
             headers: { 'Content-Type': 'application/json' },
-        }
-        try {
-            fetchResult = await fetchMedRequestId(url, options)
-        } catch (e) {
-            return
-        }
-
-        const response = fetchResult.response
-        if (redirectTilLoginHvis401(response)) {
-            return
-        }
-
-        if (!response.ok) {
-            logger.error(
-                `Feil ved kall til: ${options.method} ${url} med HTTP-kode: ${response.status} og x_request_id: ${fetchResult.requestId}.`
-            )
-            return
-        }
-
-        let data
-        try {
-            data = await fetchResult.response.json()
-        } catch (e) {
-            logger.error(
-                `${e} - Kall til: ${options.method} ${url} feilet HTTP-kode: ${response.status} ved parsing av JSON for x_request_id: ${fetchResult.requestId} med data: ${response.body}`
-            )
-            return
-        }
+        })
         setKontonummer(data?.personalia?.kontonr)
     }, [])
 
     useEffect(() => {
         if (isProd()) {
-            fetchData().catch((e: Error) => logger.error(e.message))
+            fetchData().catch((e: Error) => {
+                if (e instanceof FetchError) {
+                    logger.error(e.message)
+                }
+                return
+            })
         }
 
         if (isMockBackend()) {
