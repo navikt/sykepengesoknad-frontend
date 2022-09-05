@@ -2,10 +2,9 @@ import { BodyShort, Button, Heading, Modal } from '@navikt/ds-react'
 import React, { useState } from 'react'
 import { useHistory } from 'react-router'
 
-import { redirectTilLoginHvis401 } from '../../data/rest/utils'
 import { useAppStore } from '../../data/stores/app-store'
 import { Soknad } from '../../types/types'
-import fetchMedRequestId from '../../utils/fetch'
+import { FetchError, tryFetchData } from '../../utils/fetch'
 import { logger } from '../../utils/logger'
 import { tekst } from '../../utils/tekster'
 import { useAmplitudeInstance } from '../amplitude/amplitude'
@@ -24,39 +23,27 @@ const Endreknapp = () => {
         if (korrigerer) return
         setKorrigerer(true)
         setFeilmeldingTekst('')
-        const url = `/syk/sykepengesoknad/api/sykepengesoknad-backend/api/v2/soknader/${valgtSoknad!.id}/korriger`
-        let fetchResult
-        const options: RequestInit = {
-            method: 'POST',
-            credentials: 'include',
-            headers: { 'Content-Type': 'application/json' },
-        }
-        try {
-            fetchResult = await fetchMedRequestId(url, options)
-        } catch (e) {
-            return
-        }
-
-        const response = fetchResult.response
-        if (redirectTilLoginHvis401(response)) {
-            return
-        }
-
-        if (!response.ok) {
-            logger.error(
-                `Feil ved kall til: ${options.method} ${url} med HTTP-kode: ${response.status} og x_request_id: ${fetchResult.requestId}.`
-            )
-            setFeilmeldingTekst(tekst('kvittering.korrigering.feilet'))
-        }
 
         let data
         try {
-            data = await response.json()
-        } catch (e) {
-            logger.error(
-                `${e} - Kall til: ${options.method} ${url} feilet HTTP-kode: ${response.status} ved parsing av JSON for x_request_id: ${fetchResult.requestId} med data: ${response.body}`
+            data = await tryFetchData(
+                `/syk/sykepengesoknad/api/sykepengesoknad-backend/api/v2/soknader/${valgtSoknad!.id}/korriger`,
+                {
+                    method: 'POST',
+                    credentials: 'include',
+                    headers: { 'Content-Type': 'application/json' },
+                },
+                () => {
+                    setFeilmeldingTekst(tekst('kvittering.korrigering.feilet'))
+                }
             )
+        } catch (e: any) {
+            if (e instanceof FetchError) {
+                logger.error(e.message)
+            }
             return
+        } finally {
+            setFeilmeldingTekst('')
         }
 
         const soknad = new Soknad(data)

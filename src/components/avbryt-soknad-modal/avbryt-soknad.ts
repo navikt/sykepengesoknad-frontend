@@ -9,7 +9,7 @@ import { logger } from '../../utils/logger'
 import { tekst } from '../../utils/tekster'
 import { urlTilSoknad } from '../soknad/soknad-link'
 
-interface AvbrytSoknadReq {
+interface AvbrytSoknadRequest {
     valgtSoknad: Soknad
     setSoknader: React.Dispatch<React.SetStateAction<Soknad[]>>
     soknader: Soknad[]
@@ -25,7 +25,7 @@ export async function avbrytSoknad({
     setValgtSoknad,
     history,
     setFeilmeldingTekst,
-}: AvbrytSoknadReq) {
+}: AvbrytSoknadRequest) {
     try {
         await tryFetch(
             `/syk/sykepengesoknad/api/sykepengesoknad-backend/api/v2/soknader/${valgtSoknad!.id}/avbryt`,

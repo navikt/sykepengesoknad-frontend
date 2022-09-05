@@ -12,18 +12,19 @@ const fetchMedRequestId = async (url: string, options: RequestInit = {}): Promis
         : { 'x-request-id': requestId }
 
     try {
-        // fetch() kaster exception for nettverksfeil, men ikke HTTP-statuskoder.
         const response = await fetch(url, options)
         return { requestId, response }
     } catch (e: any) {
-        // Logger x_request_id i stedet for x-request-id for å matche logging fra
-        // ingress-controller og sykepengesoknad-backend.
         logger.error(`${e} - Kall til url: ${options.method} ${url} med x_request_id: ${requestId} feilet.`)
         throw e
     }
 }
 
-export const tryFetch = async (url: string, options: RequestInit = {}, errorHandler: Function) => {
+export const tryFetch = async (
+    url: string,
+    options: RequestInit = {},
+    errorHandler: Function
+): Promise<FetchResult> => {
     const requestId = uuidv4()
 
     options.headers = options.headers
@@ -33,23 +34,40 @@ export const tryFetch = async (url: string, options: RequestInit = {}, errorHand
     let response
     try {
         response = await fetch(url, options)
-    } catch (e: any) {
+    } catch (e) {
         throw new FetchError(`${e} - Feil ved kall til url: ${options.method} ${url} med x_request_id: ${requestId}.`)
     }
 
     if (response.status == 401) {
         window.location.reload()
-        throw new Error()
+        throw new AuthenticationError('Reloader siden på grunn av HTTP-kode 401 fra backend.')
     }
 
     if (!response.ok) {
         errorHandler()
         throw new FetchError(
-            `Feil ved kall til: ${options.method} ${url} med HTTP-kode: ${response.status} og x_request_id: ${requestId}.`
+            `Feil ved kall til: ${options.method} ${url} med HTTP-kode: ${response.status} med x_request_id: ${requestId}.`
+        )
+    }
+
+    return { requestId, response }
+}
+
+export const tryFetchData = async (url: string, options: RequestInit = {}, errorHandler: Function) => {
+    const fetchResult = await tryFetch(url, options, errorHandler)
+    const response = fetchResult.response
+
+    try {
+        return await response.json()
+    } catch (e) {
+        throw new FetchError(
+            `${e} - Kall til: ${options.method} ${url} feilet HTTP-kode: ${response.status} ved parsing av JSON
+            med x_request_id: ${fetchResult.requestId} og body: ${response.body}`
         )
     }
 }
 
 export class FetchError extends Error {}
+export class AuthenticationError extends Error {}
 
 export default fetchMedRequestId
