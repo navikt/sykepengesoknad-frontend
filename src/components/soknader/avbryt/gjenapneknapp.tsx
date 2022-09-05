@@ -3,10 +3,9 @@ import React, { useEffect, useState } from 'react'
 import { useHistory, useParams } from 'react-router'
 
 import { RouteParams } from '../../../app'
-import { redirectTilLoginHvis401 } from '../../../data/rest/utils'
 import { useAppStore } from '../../../data/stores/app-store'
 import { RSSoknadstatus } from '../../../types/rs-types/rs-soknadstatus'
-import fetchMedRequestId from '../../../utils/fetch'
+import { FetchError, tryFetch } from '../../../utils/fetch'
 import { logger } from '../../../utils/logger'
 import { useAmplitudeInstance } from '../../amplitude/amplitude'
 import styles from './gjenapneknapp.module.css'
@@ -41,29 +40,22 @@ const GjenapneSoknad = () => {
             component: 'Avbrutt søknad visning',
         })
 
-        let fetchResult
-        const url = `/syk/sykepengesoknad/api/sykepengesoknad-backend/api/v2/soknader/${valgtSoknad!.id}/gjenapne`
-        const options: RequestInit = {
-            method: 'POST',
-            credentials: 'include',
-            headers: { 'Content-Type': 'application/json' },
-        }
         try {
-            fetchResult = await fetchMedRequestId(url, options)
-        } catch (e) {
-            return
-        }
-
-        const response = fetchResult.response
-        if (redirectTilLoginHvis401(response)) {
-            return
-        }
-
-        if (!response.ok) {
-            logger.error(
-                `Feil ved kall til: ${options.method} ${url} med HTTP-kode: ${response.status} og x_request_id: ${fetchResult.requestId}.`
+            await tryFetch(
+                `/syk/sykepengesoknad/api/sykepengesoknad-backend/api/v2/soknader/${valgtSoknad!.id}/gjenapne`,
+                {
+                    method: 'POST',
+                    credentials: 'include',
+                    headers: { 'Content-Type': 'application/json' },
+                }
             )
+        } catch (e: any) {
+            if (e instanceof FetchError) {
+                logger.error(e.message)
+            }
             return
+        } finally {
+            setGjenapner(false)
         }
 
         valgtSoknad!.status = RSSoknadstatus.NY
@@ -72,8 +64,6 @@ const GjenapneSoknad = () => {
         soknader[soknader.findIndex((sok) => sok.id === valgtSoknad!.id)] = valgtSoknad!
         setSoknader(soknader)
         history.push(`/soknader/${valgtSoknad!.id}/1`)
-
-        setGjenapner(false)
     }
 
     return (
