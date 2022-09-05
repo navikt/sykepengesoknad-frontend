@@ -159,6 +159,7 @@ const Arbeidstaker = () => {
                     {tekst('kvittering.soknaden-er-sendt')}
                 </Heading>
             </Alert>
+
             <div className="sendt-info">
                 <ArbeidstakerStatus />
 
@@ -187,6 +188,7 @@ const Arbeidstaker = () => {
                                         )}
                                     />
                                 </Alert>
+
                                 <div className="avsnitt">
                                     <div className="sendt-inner">{kvitteringInnhold()}</div>
                                 </div>

@@ -15,9 +15,9 @@ describe('Tester søknad om å beholde sykepenger utenfor EU/EØS/Storbritannia'
     it('Velger periode for utenlandsopphold', function () {
         cy.url().should('include', `${soknad.id}/1`)
 
-        cy.get('#1_0 .fom .ds-datepicker__kalenderknapp').click()
+        cy.get('#1_0 .fom .ds-datepicker__calendarButton').click()
         cy.get('.DayPicker-Day').contains('17').click()
-        cy.get('#1_0 .tom .ds-datepicker__kalenderknapp').click()
+        cy.get('#1_0 .tom .ds-datepicker__calendarButton').click()
         cy.get('.DayPicker-Day').contains('24').click()
 
         cy.contains('Gå videre').click()

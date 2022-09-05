@@ -42,29 +42,34 @@ const ArbeidstakerStatus = () => {
     }
 
     return (
-        <div className="sendt-inner">
-            <Vis
-                hvis={valgtSoknad!.sendtTilArbeidsgiverDato}
-                render={() => (
-                    <>
-                        <Label as="h3" className="sendt-tittel">
-                            {tekst('kvittering.sendt-til')}
-                        </Label>
-                        <Avkrysset tekst={`${tilArbNavn} ${tilOrg}${medKopi}`} />
-                        <Detail size="small">{tilArbDato}</Detail>
-                    </>
-                )}
-            />
-            <Vis
-                hvis={valgtSoknad!.sendtTilNAVDato}
-                render={() => (
-                    <>
-                        <Avkrysset tekst={Mottaker.NAV} />
-                        <Detail size="small">{tilNavDato}</Detail>
-                    </>
-                )}
-            />
-        </div>
+        <Vis
+            hvis={valgtSoknad!.sendtTilArbeidsgiverDato || valgtSoknad!.sendtTilNAVDato}
+            render={() => (
+                <div className="sendt-inner">
+                    <Vis
+                        hvis={valgtSoknad!.sendtTilArbeidsgiverDato}
+                        render={() => (
+                            <>
+                                <Label as="h3" className="sendt-tittel">
+                                    {tekst('kvittering.sendt-til')}
+                                </Label>
+                                <Avkrysset tekst={`${tilArbNavn} ${tilOrg}${medKopi}`} />
+                                <Detail size="small">{tilArbDato}</Detail>
+                            </>
+                        )}
+                    />
+                    <Vis
+                        hvis={valgtSoknad!.sendtTilNAVDato}
+                        render={() => (
+                            <>
+                                <Avkrysset tekst={Mottaker.NAV} />
+                                <Detail size="small">{tilNavDato}</Detail>
+                            </>
+                        )}
+                    />
+                </div>
+            )}
+        />
     )
 }
 

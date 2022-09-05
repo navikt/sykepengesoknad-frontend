@@ -45,10 +45,10 @@ describe('Tester arbeidstakersøknad - gradert 50%', () => {
         cy.contains(
             'Hvilke dager var du syk og borte fra jobb, før du ble sykmeldt? Du trenger bare oppgi dager før 1. april 2020.'
         )
-        cy.get('#687299_0 .fom .ds-datepicker__kalenderknapp').click()
+        cy.get('#687299_0 .fom .ds-datepicker__calendarButton').click()
 
         cy.get('.DayPicker-Day').contains('11').click()
-        cy.get('#687299_0 .tom .ds-datepicker__kalenderknapp').click()
+        cy.get('#687299_0 .tom .ds-datepicker__calendarButton').click()
         cy.get('.DayPicker-Day').contains('12').click()
 
         cy.contains('Gå videre').click()
@@ -60,7 +60,7 @@ describe('Tester arbeidstakersøknad - gradert 50%', () => {
         // Test spørsmål
         cy.get('.inputPanelGruppe__inner label:first-child > input[value=JA]').click({ force: true })
         cy.contains('Når begynte du å jobbe igjen?')
-        cy.get('.ds-datepicker__kalenderknapp').click()
+        cy.get('.ds-datepicker__calendarButton').click()
         cy.get('.DayPicker-Day').contains('20').click()
 
         cy.contains('Gå videre').click()
@@ -72,9 +72,9 @@ describe('Tester arbeidstakersøknad - gradert 50%', () => {
         // Test spørsmål
         cy.get('.inputPanelGruppe__inner label:first-child > input[value=JA]').click({ force: true })
         cy.contains('Når tok du ut feriedager?')
-        cy.get('#687305_0 .fom .ds-datepicker__kalenderknapp').click()
+        cy.get('#687305_0 .fom .ds-datepicker__calendarButton').click()
         cy.get('.DayPicker-Day').contains('16').click()
-        cy.get('#687305_0 .tom .ds-datepicker__kalenderknapp').click()
+        cy.get('#687305_0 .tom .ds-datepicker__calendarButton').click()
         cy.get('.DayPicker-Day').contains('23').click()
 
         cy.contains('Gå videre').click()
@@ -86,9 +86,9 @@ describe('Tester arbeidstakersøknad - gradert 50%', () => {
         // Test spørsmål
         cy.get('.inputPanelGruppe__inner label:first-child > input[value=JA]').click({ force: true })
         cy.contains('Når tok du permisjon?')
-        cy.get('#687307_0 .fom .ds-datepicker__kalenderknapp').click()
+        cy.get('#687307_0 .fom .ds-datepicker__calendarButton').click()
         cy.get('.DayPicker-Day').contains('14').click()
-        cy.get('#687307_0 .tom .ds-datepicker__kalenderknapp').click()
+        cy.get('#687307_0 .tom .ds-datepicker__calendarButton').click()
         cy.get('.DayPicker-Day').contains('22').click()
 
         cy.contains('Gå videre').click()
@@ -100,9 +100,9 @@ describe('Tester arbeidstakersøknad - gradert 50%', () => {
         // Test spørsmål
         cy.get('.inputPanelGruppe__inner label:first-child > input[value=JA]').click({ force: true })
         cy.contains('Når var du utenfor EU/EØS/Storbritannia?')
-        cy.get('#687309_0 .fom .ds-datepicker__kalenderknapp').click()
+        cy.get('#687309_0 .fom .ds-datepicker__calendarButton').click()
         cy.get('.DayPicker-Day').contains('14').click()
-        cy.get('#687309_0 .tom .ds-datepicker__kalenderknapp').click()
+        cy.get('#687309_0 .tom .ds-datepicker__calendarButton').click()
         cy.get('.DayPicker-Day').contains('22').click()
 
         cy.contains('Gå videre').click()
@@ -202,7 +202,7 @@ describe('Tester arbeidstakersøknad - gradert 50%', () => {
 
         // Underspørsmål 1
         cy.contains('Når startet du på utdanningen?')
-        cy.get('.ds-datepicker__kalenderknapp').click()
+        cy.get('.ds-datepicker__calendarButton').click()
         cy.get('.DayPicker-Day').contains('10').click()
 
         // Underspørsmål 2 - dato

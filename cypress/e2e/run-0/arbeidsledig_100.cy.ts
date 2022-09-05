@@ -34,7 +34,7 @@ describe('Tester arbeidsledigsøknad', () => {
         // Test spørsmål
         cy.get('.inputPanelGruppe__inner label:nth-child(2) > input[value=NEI]').click({ force: true })
         cy.contains('Fra hvilken dato trengte du ikke lenger sykmeldingen?')
-        cy.get('.ds-datepicker__kalenderknapp').click()
+        cy.get('.ds-datepicker__calendarButton').click()
         cy.get('.DayPicker-Day').contains('20').click()
 
         cy.contains('Gå videre').click()
@@ -77,7 +77,7 @@ describe('Tester arbeidsledigsøknad', () => {
 
         // Underspørsmål 1
         cy.contains('Når startet du på utdanningen?')
-        cy.get('.ds-datepicker__kalenderknapp').click()
+        cy.get('.ds-datepicker__calendarButton').click()
         cy.get('.DayPicker-Day').contains('10').click()
 
         // Underspørsmål 2 - dato
@@ -97,9 +97,9 @@ describe('Tester arbeidsledigsøknad', () => {
 
         // Underspørsmål 1
         cy.contains('Når var du utenfor EU/EØS/Storbritannia?')
-        cy.get('#687423_0 .fom .ds-datepicker__kalenderknapp').click()
+        cy.get('#687423_0 .fom .ds-datepicker__calendarButton').click()
         cy.get('.DayPicker-Day').contains('17').click()
-        cy.get('#687423_0 .tom .ds-datepicker__kalenderknapp').click({
+        cy.get('#687423_0 .tom .ds-datepicker__calendarButton').click({
             force: true,
         })
         cy.get('.DayPicker-Day').contains('24').click()

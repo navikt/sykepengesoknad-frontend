@@ -57,6 +57,7 @@ export const EkspanderbarHjelp = ({ sporsmal }: SpmProps) => {
                     <>
                         <Ekspanderbar
                             title={tittel}
+                            className="intern"
                             sporsmalId={sporsmal.id}
                             amplitudeProps={{
                                 component: tittel,

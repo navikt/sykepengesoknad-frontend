@@ -1,20 +1,25 @@
 @import '../../basic';
 
-.ds-datepicker .navds-form-field {
-    grid-gap: 0;
-    gap: 0;
-}
-
 .periode {
     margin-top: 1rem;
 
     .skjemagruppe {
         display: flex;
+        flex-wrap: wrap;
 
         .skjemaelement {
+            width: 100%;
             padding-right: 0.5rem;
             margin-bottom: 0;
+
+            &.tom {
+                margin-top: 1rem;
+            }
         }
+    }
+
+    .navds-label {
+        font-weight: normal;
     }
 
     button {
@@ -32,6 +37,16 @@
 @media (min-width: @screen-sm) {
     .periode {
         display: flex;
+
+        .skjemagruppe {
+            .skjemaelement {
+                width: 50%;
+
+                &.tom {
+                    margin-top: initial;
+                }
+            }
+        }
 
         button {
             &.slett.navds-link {

@@ -23,9 +23,9 @@ describe('Tester søknad om å beholde sykepenger utenfor EU/EØS/Storbritannia'
         cy.contains('Opplysninger fra sykmeldingen').should('not.exist')
         cy.contains('Når skal du reise?')
 
-        cy.get('#1_0 .fom .ds-datepicker__kalenderknapp').click()
+        cy.get('#1_0 .fom .ds-datepicker__calendarButton').click()
         cy.get('.DayPicker-Day').contains('17').click()
-        cy.get('#1_0 .tom .ds-datepicker__kalenderknapp').click()
+        cy.get('#1_0 .tom .ds-datepicker__calendarButton').click()
         cy.get('.DayPicker-Day').contains('24').click()
 
         cy.contains('Gå videre').click()

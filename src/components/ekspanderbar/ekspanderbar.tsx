@@ -5,13 +5,21 @@ import { useAmplitudeInstance } from '../amplitude/amplitude'
 
 interface EkspanderbarProps {
     title: string
+    className?: string
     amplitudeProps?: object
     children: any
     sporsmalId: string
     logVedVisning?: string
 }
 
-export const Ekspanderbar = ({ title, children, amplitudeProps, sporsmalId, logVedVisning }: EkspanderbarProps) => {
+export const Ekspanderbar = ({
+    title,
+    className,
+    children,
+    amplitudeProps,
+    sporsmalId,
+    logVedVisning,
+}: EkspanderbarProps) => {
     const [expanded, setExpanded] = useState<boolean>(false)
     const { logEvent } = useAmplitudeInstance()
 
@@ -29,7 +37,7 @@ export const Ekspanderbar = ({ title, children, amplitudeProps, sporsmalId, logV
 
     return (
         <Accordion>
-            <Accordion.Item className="ekspanderbar">
+            <Accordion.Item className={`ekspanderbar ${className}`}>
                 <Accordion.Header
                     type="button"
                     onClick={() => {

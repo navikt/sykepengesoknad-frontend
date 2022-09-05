@@ -77,10 +77,22 @@ a {
     }
 }
 
+// TODO: Fjern overstyring av accordion flex-styling når mulig
+
 .navds-accordion {
     .navds-accordion__header {
+        align-items: center;
+
         .navds-heading {
+            display: flex;
+            justify-content: space-between;
+            gap: @navds-spacing-4;
+            width: 100%;
             color: @navds-semantic-color-text;
+
+            &:hover {
+                color: @navds-semantic-color-link;
+            }
         }
     }
 }

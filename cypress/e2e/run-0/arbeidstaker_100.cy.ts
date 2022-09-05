@@ -60,7 +60,7 @@ describe('Tester arbeidstakersøknad', () => {
         // Test spørsmål
         cy.get('.inputPanelGruppe__inner label:first-child > input[value=JA]').click({ force: true })
         cy.contains('Når begynte du å jobbe igjen?')
-        cy.get('.ds-datepicker__kalenderknapp').click()
+        cy.get('.ds-datepicker__calendarButton').click()
         cy.get('.DayPicker-Day').contains('20').click()
 
         cy.contains('Gå videre').click()
@@ -72,9 +72,9 @@ describe('Tester arbeidstakersøknad', () => {
         // Test spørsmål
         cy.get('.inputPanelGruppe__inner label:first-child > input[value=JA]').click({ force: true })
         cy.contains('Når tok du ut feriedager?')
-        cy.get('#687344_0 .fom .ds-datepicker__kalenderknapp').click()
+        cy.get('#687344_0 .fom .ds-datepicker__calendarButton').click()
         cy.get('.DayPicker-Day').contains('16').click()
-        cy.get('#687344_0 .tom .ds-datepicker__kalenderknapp').click()
+        cy.get('#687344_0 .tom .ds-datepicker__calendarButton').click()
         cy.get('.DayPicker-Day').contains('23').click()
 
         cy.contains('Gå videre').click()
@@ -85,7 +85,7 @@ describe('Tester arbeidstakersøknad', () => {
 
         cy.contains('Hva mener vi med permisjon')
         cy.contains('Med permisjon mener vi dager du var borte fra jobben av andre grunner enn sykdom').should(
-            'not.exist'
+            'not.be.visible'
         )
         cy.contains('Hva mener vi med permisjon').click()
         cy.contains('Med permisjon mener vi dager du var borte fra jobben av andre grunner enn sykdom').should('exist')
@@ -93,9 +93,9 @@ describe('Tester arbeidstakersøknad', () => {
         // Test spørsmål
         cy.get('.inputPanelGruppe__inner label:first-child > input[value=JA]').click({ force: true })
         cy.contains('Når tok du permisjon?')
-        cy.get('#687346_0 .fom .ds-datepicker__kalenderknapp').click()
+        cy.get('#687346_0 .fom .ds-datepicker__calendarButton').click()
         cy.get('.DayPicker-Day').contains('14').click()
-        cy.get('#687346_0 .tom .ds-datepicker__kalenderknapp').click()
+        cy.get('#687346_0 .tom .ds-datepicker__calendarButton').click()
         cy.get('.DayPicker-Day').contains('22').click()
 
         cy.contains('Gå videre').click()
@@ -107,9 +107,9 @@ describe('Tester arbeidstakersøknad', () => {
         // Test spørsmål
         cy.get('.inputPanelGruppe__inner label:first-child > input[value=JA]').click({ force: true })
         cy.contains('Når var du utenfor EU/EØS/Storbritannia?')
-        cy.get('#687348_0 .fom .ds-datepicker__kalenderknapp').click()
+        cy.get('#687348_0 .fom .ds-datepicker__calendarButton').click()
         cy.get('.DayPicker-Day').contains('14').click()
-        cy.get('#687348_0 .tom .ds-datepicker__kalenderknapp').click()
+        cy.get('#687348_0 .tom .ds-datepicker__calendarButton').click()
         cy.get('.DayPicker-Day').contains('22').click()
 
         cy.contains('Gå videre').click()
@@ -187,7 +187,7 @@ describe('Tester arbeidstakersøknad', () => {
 
         // Underspørsmål 1
         cy.contains('Når startet du på utdanningen?')
-        cy.get('.ds-datepicker__kalenderknapp').click()
+        cy.get('.ds-datepicker__calendarButton').click()
         cy.get('.DayPicker-Day').contains('10').click()
 
         // Underspørsmål 2 - dato

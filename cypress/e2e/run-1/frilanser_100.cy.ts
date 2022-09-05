@@ -25,7 +25,7 @@ describe('Tester frilansersøknad', () => {
         cy.contains('Egenmelding og/eller sykmelding på papir')
         cy.contains('1. januar – 13. mars 2020')
         cy.contains('Opplysninger fra sykmeldingen').click()
-        cy.contains('Har ikke forsikring som gjelder de første 16 dagene av sykefraværet').should('not.exist')
+        cy.contains('Har ikke forsikring som gjelder de første 16 dagene av sykefraværet').should('not.be.visible')
 
         // Viktig informasjon grunnet tilbakedatering
         cy.get('.viktig-informasjon > .navds-guide-panel').should('be.visible')
@@ -48,7 +48,7 @@ describe('Tester frilansersøknad', () => {
         // Test spørsmål
         cy.get('.inputPanelGruppe__inner label:first-child > input[value=JA]').click({ force: true })
         cy.contains('Når begynte du å jobbe igjen?')
-        cy.get('.ds-datepicker__kalenderknapp').click()
+        cy.get('.ds-datepicker__calendarButton').click()
         cy.get('.DayPicker-Day').contains('20').click()
 
         cy.contains('Gå videre').click({ force: true })
@@ -106,9 +106,9 @@ describe('Tester frilansersøknad', () => {
 
         // Underspørsmål 1
         cy.contains('Når var du utenfor EU/EØS/Storbritannia?')
-        cy.get('#687448_0 .fom .ds-datepicker__kalenderknapp').click()
+        cy.get('#687448_0 .fom .ds-datepicker__calendarButton').click()
         cy.get('.DayPicker-Day').contains('17').click()
-        cy.get('#687448_0 .tom .ds-datepicker__kalenderknapp').click()
+        cy.get('#687448_0 .tom .ds-datepicker__calendarButton').click()
         cy.get('.DayPicker-Day').contains('24').click()
 
         // Underspørsmål 2 - Ja
@@ -158,7 +158,7 @@ describe('Tester frilansersøknad', () => {
 
         // Underspørsmål 1
         cy.contains('Når startet du på utdanningen?')
-        cy.get('.ds-datepicker__kalenderknapp').click()
+        cy.get('.ds-datepicker__calendarButton').click()
         cy.get('.DayPicker-Day').contains('10').click()
 
         // Underspørsmål 2 - radio
