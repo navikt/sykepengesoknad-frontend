@@ -23,7 +23,9 @@ const fetchMedRequestId = async (
     try {
         response = await fetch(url, options)
     } catch (e) {
-        throw new FetchError(`${e} - Feil ved kall til url: ${options.method} ${url} med x_request_id: ${requestId}.`)
+        throw new FetchError(
+            `${e} - Kall til url: ${options.method} ${url} og x_request_id: ${requestId} feilet uten svar fra backend.`
+        )
     }
 
     if (response.status == 401) {
@@ -36,7 +38,7 @@ const fetchMedRequestId = async (
             errorHandler(response)
         }
         throw new FetchError(
-            `Feil ved kall til: ${options.method} ${url} med HTTP-kode: ${response.status} med x_request_id: ${requestId}.`
+            `Kall til url: ${options.method} ${url} og x_request_id: ${requestId} feilet med HTTP-kode: ${response.status}.`
         )
     }
 
@@ -51,7 +53,7 @@ export const fetchJsonMedRequestId = async (url: string, options: RequestInit = 
         return await response.json()
     } catch (e) {
         throw new FetchError(
-            `${e} - Kall til: ${options.method} ${url} feilet HTTP-kode: ${response.status} ved parsing av JSON med x_request_id: ${fetchResult.requestId}.`
+            `${e} - Kall til url: ${options.method} ${url} og x_request_id: ${fetchResult.requestId} feilet ved parsing av JSON med HTTP-kode: ${response.status}.`
         )
     }
 }
