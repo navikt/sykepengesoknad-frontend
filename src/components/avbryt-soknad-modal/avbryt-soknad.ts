@@ -32,13 +32,11 @@ export async function avbrytSoknad({
             {
                 method: 'POST',
                 credentials: 'include',
-            },
-            () => {
-                setFeilmeldingTekst(tekst('avbryt.feilet'))
             }
         )
     } catch (e: any) {
         if (e instanceof FetchError) {
+            setFeilmeldingTekst(tekst('avbryt.feilet'))
             logger.error(e.message)
         }
         return

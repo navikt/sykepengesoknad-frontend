@@ -174,13 +174,11 @@ const SporsmalForm = () => {
                     method: 'POST',
                     credentials: 'include',
                     headers: { 'Content-Type': 'application/json' },
-                },
-                () => {
-                    restFeilet = true
                 }
             )
         } catch (e: any) {
             if (e instanceof FetchError) {
+                restFeilet = true
                 logger.error(e.message)
             }
             return

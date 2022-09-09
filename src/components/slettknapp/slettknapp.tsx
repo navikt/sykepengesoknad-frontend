@@ -4,7 +4,7 @@ import React, { useState } from 'react'
 
 import { useAppStore } from '../../data/stores/app-store'
 import { Kvittering, Sporsmal, svarverdiToKvittering } from '../../types/types'
-import fetchMedRequestId from '../../utils/fetch'
+import fetchMedRequestId, { FetchError } from '../../utils/fetch'
 import { logger } from '../../utils/logger'
 import { tekst } from '../../utils/tekster'
 import Vis from '../vis'
@@ -46,16 +46,17 @@ const Slettknapp = ({ sporsmal, kvittering, update }: SlettknappProps) => {
                 {
                     method: 'DELETE',
                     credentials: 'include',
-                },
-                () => {
-                    feilVedSletting = true
-                    setFeilmeldingTekst(tekst('opplasting_modal.slett.feilmelding'))
                 }
             )
-        } catch ({ message }) {
-            logger.error(message)
+        } catch (e: any) {
+            if (e instanceof FetchError) {
+                logger.error(e.message)
+                feilVedSletting = true
+                setFeilmeldingTekst(tekst('opplasting_modal.slett.feilmelding'))
+            }
             return
         }
+
         sporsmal.svarliste.svar.splice(idx, 1)
         valgtSoknad!.sporsmal[valgtSoknad!.sporsmal.findIndex((spm) => spm.id === sporsmal.id)] = sporsmal
         setValgtSoknad(valgtSoknad)

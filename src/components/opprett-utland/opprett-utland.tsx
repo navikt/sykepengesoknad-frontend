@@ -26,13 +26,11 @@ const OpprettUtland = () => {
                     method: 'POST',
                     credentials: 'include',
                     headers: { 'Content-Type': 'application/json' },
-                },
-                () => {
-                    setFeilmeldingTekst(tekst('opprett-utland.feilet'))
                 }
             )
         } catch (e: any) {
             if (e instanceof FetchError) {
+                setFeilmeldingTekst(tekst('opprett-utland.feilet'))
                 logger.error(e.message)
             }
             return

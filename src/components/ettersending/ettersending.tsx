@@ -54,13 +54,11 @@ const Ettersending = ({ gjelder, setRerendrekvittering }: EttersendingProps) => 
                     method: 'POST',
                     credentials: 'include',
                     headers: { 'Content-Type': 'application/json' },
-                },
-                () => {
-                    setFeilmeldingTekst(tekst('kvittering.ettersending.feilet'))
                 }
             )
         } catch (e: any) {
             if (e instanceof FetchError) {
+                setFeilmeldingTekst(tekst('kvittering.ettersending.feilet'))
                 logger.error(e.message)
             }
             return
@@ -82,13 +80,11 @@ const Ettersending = ({ gjelder, setRerendrekvittering }: EttersendingProps) => 
                     method: 'POST',
                     credentials: 'include',
                     headers: { 'Content-Type': 'application/json' },
-                },
-                () => {
-                    setFeilmeldingTekst(tekst('kvittering.ettersending.feilet'))
                 }
             )
         } catch (e) {
             if (e instanceof FetchError) {
+                setFeilmeldingTekst(tekst('kvittering.ettersending.feilet'))
                 logger.error(e.message)
             }
             return

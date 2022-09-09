@@ -16,18 +16,13 @@ export function DataFetcher(props: { children: any }) {
     const hentSoknader = useCallback(async () => {
         let data
         try {
-            data = await fetchJsonMedRequestId(
-                '/syk/sykepengesoknad/api/sykepengesoknad-backend/api/v2/soknader',
-                {
-                    method: 'GET',
-                    credentials: 'include',
-                },
-                () => {
-                    setSoknaderFeilet(true)
-                }
-            )
+            data = await fetchJsonMedRequestId('/syk/sykepengesoknad/api/sykepengesoknad-backend/api/v2/soknader', {
+                method: 'GET',
+                credentials: 'include',
+            })
         } catch (e: any) {
             if (e instanceof FetchError) {
+                setSoknaderFeilet(true)
                 logger.error(e.message)
             }
             return
@@ -43,18 +38,13 @@ export function DataFetcher(props: { children: any }) {
     const hentSykmeldinger = useCallback(async () => {
         let data
         try {
-            data = await fetchJsonMedRequestId(
-                '/syk/sykepengesoknad/api/sykmeldinger-backend/api/v2/sykmeldinger',
-                {
-                    method: 'GET',
-                    credentials: 'include',
-                },
-                () => {
-                    setSykmeldingerFeilet(true)
-                }
-            )
+            data = await fetchJsonMedRequestId('/syk/sykepengesoknad/api/sykmeldinger-backend/api/v2/sykmeldinger', {
+                method: 'GET',
+                credentials: 'include',
+            })
         } catch (e: any) {
             if (e instanceof FetchError) {
+                setSykmeldingerFeilet(true)
                 logger.error(e.message)
             }
             return

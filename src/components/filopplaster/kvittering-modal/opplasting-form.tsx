@@ -124,13 +124,11 @@ const OpplastingForm = ({ sporsmal }: SpmProps) => {
                     body: JSON.stringify(svar),
                     credentials: 'include',
                     headers: { 'Content-Type': 'application/json' },
-                },
-                () => {
-                    setFeilmeldingTekst('Det skjedde en feil i baksystemene, prøv igjen senere.')
                 }
             )
         } catch (e: any) {
             if (e instanceof FetchError) {
+                setFeilmeldingTekst('Det skjedde en feil i baksystemene, prøv igjen senere.')
                 logger.error(e.message)
             }
             return

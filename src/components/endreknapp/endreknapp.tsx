@@ -34,13 +34,11 @@ const Endreknapp = () => {
                     method: 'POST',
                     credentials: 'include',
                     headers: { 'Content-Type': 'application/json' },
-                },
-                () => {
-                    setFeilmeldingTekst(tekst('kvittering.korrigering.feilet'))
                 }
             )
         } catch (e: any) {
             if (e instanceof FetchError) {
+                setFeilmeldingTekst(tekst('kvittering.korrigering.feilet'))
                 logger.error(e.message)
             }
             return
