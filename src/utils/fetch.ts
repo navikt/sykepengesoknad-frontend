@@ -1,26 +1,12 @@
 import { v4 as uuidv4 } from 'uuid'
 
-import { logger } from './logger'
-
 export type FetchResult = { requestId: string; response: Response }
 
 export type ErrorHandler = (result: any) => void
 
-const fetchMedRequestId = async (url: string, options: RequestInit = {}): Promise<FetchResult> => {
-    const requestId = uuidv4()
+export class FetchError extends Error {}
 
-    options.headers = options.headers
-        ? { ...options.headers, 'x-request-id': requestId }
-        : { 'x-request-id': requestId }
-
-    try {
-        const response = await fetch(url, options)
-        return { requestId, response }
-    } catch (e: any) {
-        logger.error(`${e} - Kall til url: ${options.method} ${url} med x_request_id: ${requestId} feilet.`)
-        throw e
-    }
-}
+export class AuthenticationError extends Error {}
 
 export const tryFetch = async (
     url: string,
@@ -70,9 +56,3 @@ export const tryFetchData = async (url: string, options: RequestInit = {}, error
         )
     }
 }
-
-export class FetchError extends Error {}
-
-export class AuthenticationError extends Error {}
-
-export default fetchMedRequestId
