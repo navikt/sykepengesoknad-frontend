@@ -8,7 +8,7 @@ export class FetchError extends Error {}
 
 export class AuthenticationError extends Error {}
 
-export const tryFetch = async (
+const fetchMedRequestId = async (
     url: string,
     options: RequestInit = {},
     errorHandler?: ErrorHandler
@@ -44,7 +44,7 @@ export const tryFetch = async (
 }
 
 export const tryFetchData = async (url: string, options: RequestInit = {}, errorHandler?: ErrorHandler) => {
-    const fetchResult = await tryFetch(url, options, errorHandler)
+    const fetchResult = await fetchMedRequestId(url, options, errorHandler)
     const response = fetchResult.response
 
     try {
@@ -56,3 +56,5 @@ export const tryFetchData = async (url: string, options: RequestInit = {}, error
         )
     }
 }
+
+export default fetchMedRequestId

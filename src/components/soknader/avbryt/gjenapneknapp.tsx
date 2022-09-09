@@ -5,7 +5,7 @@ import { useHistory, useParams } from 'react-router'
 import { RouteParams } from '../../../app'
 import { useAppStore } from '../../../data/stores/app-store'
 import { RSSoknadstatus } from '../../../types/rs-types/rs-soknadstatus'
-import { FetchError, tryFetch } from '../../../utils/fetch'
+import fetchMedRequestId, { FetchError } from '../../../utils/fetch'
 import { logger } from '../../../utils/logger'
 import { useAmplitudeInstance } from '../../amplitude/amplitude'
 import styles from './gjenapneknapp.module.css'
@@ -41,7 +41,7 @@ const GjenapneSoknad = () => {
         })
 
         try {
-            await tryFetch(
+            await fetchMedRequestId(
                 `/syk/sykepengesoknad/api/sykepengesoknad-backend/api/v2/soknader/${valgtSoknad!.id}/gjenapne`,
                 {
                     method: 'POST',

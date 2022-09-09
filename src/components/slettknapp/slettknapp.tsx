@@ -4,7 +4,7 @@ import React, { useState } from 'react'
 
 import { useAppStore } from '../../data/stores/app-store'
 import { Kvittering, Sporsmal, svarverdiToKvittering } from '../../types/types'
-import { tryFetch } from '../../utils/fetch'
+import fetchMedRequestId from '../../utils/fetch'
 import { logger } from '../../utils/logger'
 import { tekst } from '../../utils/tekster'
 import Vis from '../vis'
@@ -41,7 +41,7 @@ const Slettknapp = ({ sporsmal, kvittering, update }: SlettknappProps) => {
         )
 
         try {
-            await tryFetch(
+            await fetchMedRequestId(
                 `/syk/sykepengesoknad/api/sykepengesoknad-backend/api/v2/soknader/${valgtSoknad?.id}/sporsmal/${sporsmal?.id}/svar/${svar?.id}`,
                 {
                     method: 'DELETE',

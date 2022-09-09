@@ -3,7 +3,7 @@ import parser from 'html-react-parser'
 import React, { useState } from 'react'
 
 import { useAppStore } from '../../data/stores/app-store'
-import { FetchError, tryFetch } from '../../utils/fetch'
+import fetchMedRequestId, { FetchError } from '../../utils/fetch'
 import { logger } from '../../utils/logger'
 import { tekst } from '../../utils/tekster'
 
@@ -48,7 +48,7 @@ const Ettersending = ({ gjelder, setRerendrekvittering }: EttersendingProps) => 
 
     const ettersendNav = async () => {
         try {
-            await tryFetch(
+            await fetchMedRequestId(
                 `/syk/sykepengesoknad/api/sykepengesoknad-backend/api/v2/soknader/${valgtSoknad!.id}/ettersendTilNav`,
                 {
                     method: 'POST',
@@ -74,7 +74,7 @@ const Ettersending = ({ gjelder, setRerendrekvittering }: EttersendingProps) => 
 
     const ettersendArbeidsgiver = async () => {
         try {
-            await tryFetch(
+            await fetchMedRequestId(
                 `/syk/sykepengesoknad/api/sykepengesoknad-backend/api/v2/soknader/${
                     valgtSoknad!.id
                 }/ettersendTilArbeidsgiver`,

@@ -4,7 +4,7 @@ import { useDropzone } from 'react-dropzone'
 import { useFormContext } from 'react-hook-form'
 
 import { useAppStore } from '../../../data/stores/app-store'
-import { FetchError, tryFetch } from '../../../utils/fetch'
+import fetchMedRequestId, { FetchError } from '../../../utils/fetch'
 import {
     customTruncet,
     formaterFilstørrelse,
@@ -28,7 +28,7 @@ const DragAndDrop = () => {
     const [formErDisabled, setFormErDisabled] = useState<boolean>(false)
 
     const hentKvittering = useCallback(async () => {
-        const fetchResult = await tryFetch(
+        const fetchResult = await fetchMedRequestId(
             `/syk/sykepengesoknad/api/flex-bucket-uploader/api/v2/kvittering/${valgtKvittering!.blobId}`,
             {
                 method: 'GET',

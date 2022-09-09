@@ -1,6 +1,6 @@
 import pino from 'pino'
 
-import { tryFetch } from './fetch'
+import fetchMedRequestId from './fetch'
 
 const getFrontendLogger = (): pino.Logger =>
     pino({
@@ -8,7 +8,7 @@ const getFrontendLogger = (): pino.Logger =>
             transmit: {
                 send: async (level, logEvent) => {
                     try {
-                        await tryFetch('/syk/sykepengesoknad/api/logger', {
+                        await fetchMedRequestId('/syk/sykepengesoknad/api/logger', {
                             method: 'POST',
                             headers: { 'content-type': 'application/json' },
                             body: JSON.stringify(logEvent),
