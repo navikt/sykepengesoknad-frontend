@@ -1,10 +1,10 @@
+/* eslint-disable no-console */
 import { Alert, Button, Heading, Modal } from '@navikt/ds-react'
 import React, { useState } from 'react'
 
-import { redirectTilLoginHvis401 } from '../../data/rest/utils'
 import { useAppStore } from '../../data/stores/app-store'
 import { Kvittering, Sporsmal, svarverdiToKvittering } from '../../types/types'
-import fetchMedRequestId from '../../utils/fetch'
+import fetchMedRequestId, { FetchError } from '../../utils/fetch'
 import { logger } from '../../utils/logger'
 import { tekst } from '../../utils/tekster'
 import Vis from '../vis'
@@ -40,40 +40,32 @@ const Slettknapp = ({ sporsmal, kvittering, update }: SlettknappProps) => {
             (svar) => svarverdiToKvittering(svar?.verdi).blobId === kvittering?.blobId
         )
 
-        let fetchResult
         try {
-            fetchResult = await fetchMedRequestId(
+            await fetchMedRequestId(
                 `/syk/sykepengesoknad/api/sykepengesoknad-backend/api/v2/soknader/${valgtSoknad?.id}/sporsmal/${sporsmal?.id}/svar/${svar?.id}`,
                 {
                     method: 'DELETE',
                     credentials: 'include',
                 }
             )
-
-            const response = fetchResult.response
-            if (redirectTilLoginHvis401(response)) {
-                return
-            }
-
-            if (!response.ok) {
-                logger.error(
-                    `Feilet ved sletting av spørsmål ${sporsmal.id} med http kode ${response.status} og x_request_id ${fetchResult.requestId}`
-                )
+        } catch (e: any) {
+            if (e instanceof FetchError) {
+                logger.error(e.message)
                 feilVedSletting = true
                 setFeilmeldingTekst(tekst('opplasting_modal.slett.feilmelding'))
-                return
             }
+            return
+        }
 
-            sporsmal.svarliste.svar.splice(idx, 1)
-            valgtSoknad!.sporsmal[valgtSoknad!.sporsmal.findIndex((spm) => spm.id === sporsmal.id)] = sporsmal
-            setValgtSoknad(valgtSoknad)
-            setOpenModal(false)
-        } catch (e) {
-            feilVedSletting = true
-        } finally {
-            setSletter(false)
-            setVilSlette(feilVedSletting)
-            if (update) update()
+        sporsmal.svarliste.svar.splice(idx, 1)
+        valgtSoknad!.sporsmal[valgtSoknad!.sporsmal.findIndex((spm) => spm.id === sporsmal.id)] = sporsmal
+        setValgtSoknad(valgtSoknad)
+
+        setOpenModal(false)
+        setSletter(false)
+        setVilSlette(feilVedSletting)
+        if (update) {
+            update()
         }
     }
 

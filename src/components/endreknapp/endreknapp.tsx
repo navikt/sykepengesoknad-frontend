@@ -2,10 +2,9 @@ import { BodyShort, Button, Heading, Modal } from '@navikt/ds-react'
 import React, { useState } from 'react'
 import { useHistory } from 'react-router'
 
-import { redirectTilLoginHvis401 } from '../../data/rest/utils'
 import { useAppStore } from '../../data/stores/app-store'
 import { Soknad } from '../../types/types'
-import fetchMedRequestId from '../../utils/fetch'
+import { FetchError, fetchJsonMedRequestId } from '../../utils/fetch'
 import { logger } from '../../utils/logger'
 import { tekst } from '../../utils/tekster'
 import { useAmplitudeInstance } from '../amplitude/amplitude'
@@ -21,13 +20,15 @@ const Endreknapp = () => {
     const endreKnappTekst = tekst('kvittering.knapp.endre')
 
     const korriger = async () => {
-        if (korrigerer) return
+        if (korrigerer) {
+            return
+        }
         setKorrigerer(true)
         setFeilmeldingTekst('')
 
-        let fetchResult
+        let data
         try {
-            fetchResult = await fetchMedRequestId(
+            data = await fetchJsonMedRequestId(
                 `/syk/sykepengesoknad/api/sykepengesoknad-backend/api/v2/soknader/${valgtSoknad!.id}/korriger`,
                 {
                     method: 'POST',
@@ -35,28 +36,14 @@ const Endreknapp = () => {
                     headers: { 'Content-Type': 'application/json' },
                 }
             )
-        } catch (e) {
+        } catch (e: any) {
+            if (e instanceof FetchError) {
+                setFeilmeldingTekst(tekst('kvittering.korrigering.feilet'))
+                logger.error(e.message)
+            }
             return
-        }
-
-        const response = fetchResult.response
-        if (redirectTilLoginHvis401(response)) {
-            return
-        }
-
-        if (!response.ok) {
-            logger.error(
-                `Feil ved opprettelse av UTKAST_TIL_KORRIGERING med http kode ${response.status} og x_request_id ${fetchResult.requestId}.`
-            )
-            setFeilmeldingTekst(tekst('kvittering.korrigering.feilet'))
-        }
-
-        let data
-        try {
-            data = await response.json()
-        } catch (e) {
-            logger.error(`Feilet ved parsing av JSON for x_request_id ${fetchResult.requestId}. Error: ${e}.`)
-            return
+        } finally {
+            setFeilmeldingTekst('')
         }
 
         const soknad = new Soknad(data)

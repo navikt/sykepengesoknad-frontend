@@ -1,16 +1,15 @@
 import * as H from 'history'
 import React from 'react'
 
-import { redirectTilLoginHvis401 } from '../../data/rest/utils'
 import { RSSoknadstatus } from '../../types/rs-types/rs-soknadstatus'
 import { RSSoknadstype } from '../../types/rs-types/rs-soknadstype'
 import { Soknad } from '../../types/types'
-import fetchMedRequestId from '../../utils/fetch'
+import fetchMedRequestId, { FetchError } from '../../utils/fetch'
 import { logger } from '../../utils/logger'
 import { tekst } from '../../utils/tekster'
 import { urlTilSoknad } from '../soknad/soknad-link'
 
-interface AvbrytSoknadReq {
+interface AvbrytSoknadRequest {
     valgtSoknad: Soknad
     setSoknader: React.Dispatch<React.SetStateAction<Soknad[]>>
     soknader: Soknad[]
@@ -26,34 +25,25 @@ export async function avbrytSoknad({
     setValgtSoknad,
     history,
     setFeilmeldingTekst,
-}: AvbrytSoknadReq) {
-    let fetchResult
+}: AvbrytSoknadRequest) {
     try {
-        fetchResult = await fetchMedRequestId(
+        await fetchMedRequestId(
             `/syk/sykepengesoknad/api/sykepengesoknad-backend/api/v2/soknader/${valgtSoknad!.id}/avbryt`,
             {
                 method: 'POST',
                 credentials: 'include',
             }
         )
-    } catch (e) {
-        setFeilmeldingTekst(tekst('avbryt.feilet'))
+    } catch (e: any) {
+        if (e instanceof FetchError) {
+            setFeilmeldingTekst(tekst('avbryt.feilet'))
+            logger.error(e.message)
+        }
         return
+    } finally {
+        setFeilmeldingTekst('')
     }
 
-    const response = fetchResult.response
-    if (redirectTilLoginHvis401(response)) {
-        return
-    }
-
-    if (!response.ok) {
-        logger.error(
-            `Feilet ved avbryting av soknad ${valgtSoknad.id} med http kode ${response.status} og x_request_id ${fetchResult.requestId}.`
-        )
-        // TODO: Vis feilmeldingen til bruker.
-        setFeilmeldingTekst(tekst('avbryt.feilet'))
-        return
-    }
     if (
         valgtSoknad.soknadstype === RSSoknadstype.OPPHOLD_UTLAND ||
         valgtSoknad.status === RSSoknadstatus.UTKAST_TIL_KORRIGERING
@@ -71,6 +61,4 @@ export async function avbrytSoknad({
         setValgtSoknad(nySoknad)
         history.push(urlTilSoknad(nySoknad))
     }
-
-    setFeilmeldingTekst('')
 }

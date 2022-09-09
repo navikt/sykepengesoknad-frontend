@@ -3,9 +3,8 @@ import React, { useCallback, useEffect, useState } from 'react'
 
 import IngenData from '../components/feil/ingen-data'
 import { Soknad } from '../types/types'
-import fetchMedRequestId from '../utils/fetch'
+import { FetchError, fetchJsonMedRequestId } from '../utils/fetch'
 import { logger } from '../utils/logger'
-import { redirectTilLoginHvis401 } from './rest/utils'
 import { useAppStore } from './stores/app-store'
 
 export function DataFetcher(props: { children: any }) {
@@ -15,76 +14,43 @@ export function DataFetcher(props: { children: any }) {
     const [sykmeldingerFeilet, setSykmeldingerFeilet] = useState<boolean>(false)
 
     const hentSoknader = useCallback(async () => {
-        let fetchResult
-
+        let data
         try {
-            fetchResult = await fetchMedRequestId('/syk/sykepengesoknad/api/sykepengesoknad-backend/api/v2/soknader', {
+            data = await fetchJsonMedRequestId('/syk/sykepengesoknad/api/sykepengesoknad-backend/api/v2/soknader', {
+                method: 'GET',
                 credentials: 'include',
             })
-        } catch (e) {
-            setSoknaderFeilet(true)
+        } catch (e: any) {
+            if (e instanceof FetchError) {
+                setSoknaderFeilet(true)
+                logger.error(e.message)
+            }
             return
         }
 
-        const response = fetchResult.response
-        if (redirectTilLoginHvis401(response)) {
-            return
-        }
-
-        if (!response.ok) {
-            logger.error(
-                `Feil ved henting av sykepengesoknader med feilkode ${response.status} og x_request_id ${fetchResult.requestId}.`
-            )
-            setSoknaderFeilet(true)
-            return
-        }
-
-        try {
-            const data = await fetchResult.response.json()
-            setSoknader(
-                data!.map((s: any) => {
-                    return new Soknad(s)
-                })
-            )
-        } catch (e) {
-            logger.error(`Feilet ved parsing av JSON for x_request_id ${fetchResult.requestId}. Error: ${e}.`)
-            setSoknaderFeilet(true)
-            return
-        }
+        setSoknader(
+            data!.map((s: any) => {
+                return new Soknad(s)
+            })
+        )
     }, [setSoknader])
 
     const hentSykmeldinger = useCallback(async () => {
-        let fetchResult
+        let data
         try {
-            fetchResult = await fetchMedRequestId('/syk/sykepengesoknad/api/sykmeldinger-backend/api/v2/sykmeldinger', {
+            data = await fetchJsonMedRequestId('/syk/sykepengesoknad/api/sykmeldinger-backend/api/v2/sykmeldinger', {
+                method: 'GET',
                 credentials: 'include',
             })
-        } catch (e) {
-            setSykmeldingerFeilet(true)
+        } catch (e: any) {
+            if (e instanceof FetchError) {
+                setSykmeldingerFeilet(true)
+                logger.error(e.message)
+            }
             return
         }
 
-        const response = fetchResult.response
-        if (redirectTilLoginHvis401(response)) {
-            return
-        }
-
-        if (!response.ok) {
-            logger.error(
-                `Feil ved henting av sykmeldinger med feilkode ${response.status} og x_request_id ${fetchResult.requestId}.`
-            )
-            setSykmeldingerFeilet(true)
-            return
-        }
-
-        try {
-            const data = await fetchResult.response.json()
-            setSykmeldinger(data)
-        } catch (e) {
-            logger.error(`Feilet ved parsing av JSON for x_request_id ${fetchResult.requestId}. Error: ${e}.`)
-            setSykmeldingerFeilet(true)
-            return
-        }
+        setSykmeldinger(data)
     }, [setSykmeldinger])
 
     useEffect(() => {

@@ -8,7 +8,7 @@ import { RSSoknadstatus } from '../../types/rs-types/rs-soknadstatus'
 import { RSSoknadstype } from '../../types/rs-types/rs-soknadstype'
 import { Soknad } from '../../types/types'
 import { sendtForMerEnn30DagerSiden } from '../../utils/dato-utils'
-import fetchMedRequestId from '../../utils/fetch'
+import { FetchError, fetchJsonMedRequestId } from '../../utils/fetch'
 import { logger } from '../../utils/logger'
 import { tekst } from '../../utils/tekster'
 import Vis from '../vis'
@@ -69,10 +69,13 @@ const Arbeidstaker = () => {
     }
 
     async function erForsteSoknadUtenforArbeidsgiverperiode(id?: string) {
-        if (id === undefined) return true
-        let fetchResult
+        if (id === undefined) {
+            return true
+        }
+
+        let data
         try {
-            fetchResult = await fetchMedRequestId(
+            data = await fetchJsonMedRequestId(
                 `/syk/sykepengesoknad/api/sykepengesoknad-backend/api/v2/soknader/${id}/finnMottaker`,
                 {
                     method: 'POST',
@@ -80,26 +83,13 @@ const Arbeidstaker = () => {
                     headers: { 'Content-Type': 'application/json' },
                 }
             )
-        } catch (e) {
+        } catch (e: any) {
+            if (e instanceof FetchError) {
+                logger.error(e.message)
+            }
             return
         }
-
-        const response = fetchResult.response
-        if (!response.ok) {
-            logger.error(
-                `Feil ved sjekk om første søknad er utenfor arbeidsgiverperioden med feilkode ${response.status} og x_request_id ${fetchResult.requestId}.`
-            )
-            return
-        }
-
-        let data
-        try {
-            data = await response.json()
-            return data.mottaker === RSMottaker.ARBEIDSGIVER
-        } catch (e) {
-            logger.error(`Feilet ved parsing av JSON for x_request_id ${fetchResult.requestId}. Error: ${e}.`)
-            return
-        }
+        return data.mottaker === RSMottaker.ARBEIDSGIVER
     }
 
     const kvitteringInnhold = () => {

@@ -4,7 +4,7 @@ import { useDropzone } from 'react-dropzone'
 import { useFormContext } from 'react-hook-form'
 
 import { useAppStore } from '../../../data/stores/app-store'
-import fetchMedRequestId from '../../../utils/fetch'
+import fetchMedRequestId, { FetchError } from '../../../utils/fetch'
 import {
     customTruncet,
     formaterFilstørrelse,
@@ -27,29 +27,16 @@ const DragAndDrop = () => {
     } = useFormContext()
     const [formErDisabled, setFormErDisabled] = useState<boolean>(false)
 
-    const fetchData = useCallback(async () => {
-        let fetchResult
-        try {
-            fetchResult = await fetchMedRequestId(
-                `/syk/sykepengesoknad/api/flex-bucket-uploader/api/v2/kvittering/${valgtKvittering!.blobId}`,
-                {
-                    method: 'GET',
-                    credentials: 'include',
-                    headers: { 'Content-Type': 'application/json' },
-                }
-            )
-        } catch (e) {
-            return
-        }
-
-        const result = fetchResult.response
-        if (!result.ok) {
-            throw new Error(
-                `Feilet ved henting av kvittering fra flex-bucket-uploader med feilkode: ${result.status} og x_request_id ${fetchResult.requestId}`
-            )
-        }
-
-        result.blob().then((blob) => {
+    const hentKvittering = useCallback(async () => {
+        const fetchResult = await fetchMedRequestId(
+            `/syk/sykepengesoknad/api/flex-bucket-uploader/api/v2/kvittering/${valgtKvittering!.blobId}`,
+            {
+                method: 'GET',
+                credentials: 'include',
+                headers: { 'Content-Type': 'application/json' },
+            }
+        )
+        fetchResult.response.blob().then((blob) => {
             setValgtFil(blob as any)
         })
     }, [setValgtFil, valgtKvittering])
@@ -57,7 +44,12 @@ const DragAndDrop = () => {
     useEffect(() => {
         if (valgtKvittering?.blobId) {
             setFormErDisabled(true)
-            fetchData().catch((e: Error) => logger.error(e.message))
+            hentKvittering().catch((e) => {
+                if (e instanceof FetchError) {
+                    logger.error(e.message)
+                }
+                return
+            })
         } else {
             setFormErDisabled(false)
         }
@@ -65,7 +57,7 @@ const DragAndDrop = () => {
         return () => {
             setValgtFil(undefined)
         }
-    }, [setValgtFil, valgtKvittering, fetchData])
+    }, [setValgtFil, valgtKvittering, hentKvittering])
 
     const onDropCallback = useCallback(
         (filer) => {

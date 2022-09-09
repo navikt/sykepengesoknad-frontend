@@ -3,10 +3,9 @@ import React, { useEffect, useState } from 'react'
 import { useHistory, useParams } from 'react-router'
 
 import { RouteParams } from '../../../app'
-import { redirectTilLoginHvis401 } from '../../../data/rest/utils'
 import { useAppStore } from '../../../data/stores/app-store'
 import { RSSoknadstatus } from '../../../types/rs-types/rs-soknadstatus'
-import fetchMedRequestId from '../../../utils/fetch'
+import fetchMedRequestId, { FetchError } from '../../../utils/fetch'
 import { logger } from '../../../utils/logger'
 import { useAmplitudeInstance } from '../../amplitude/amplitude'
 import styles from './gjenapneknapp.module.css'
@@ -41,9 +40,8 @@ const GjenapneSoknad = () => {
             component: 'Avbrutt søknad visning',
         })
 
-        let fetchResult
         try {
-            fetchResult = await fetchMedRequestId(
+            await fetchMedRequestId(
                 `/syk/sykepengesoknad/api/sykepengesoknad-backend/api/v2/soknader/${valgtSoknad!.id}/gjenapne`,
                 {
                     method: 'POST',
@@ -51,22 +49,13 @@ const GjenapneSoknad = () => {
                     headers: { 'Content-Type': 'application/json' },
                 }
             )
-        } catch (e) {
+        } catch (e: any) {
+            if (e instanceof FetchError) {
+                logger.error(e.message)
+            }
             return
-        }
-
-        const response = fetchResult.response
-        if (redirectTilLoginHvis401(response)) {
-            return
-        }
-
-        if (!response.ok) {
-            logger.error(
-                `Feilet ved gjenåpning av soknad ${valgtSoknad!.id} med http kode ${response.status} og x_request_id ${
-                    fetchResult.requestId
-                }.`
-            )
-            return
+        } finally {
+            setGjenapner(false)
         }
 
         valgtSoknad!.status = RSSoknadstatus.NY
@@ -75,8 +64,6 @@ const GjenapneSoknad = () => {
         soknader[soknader.findIndex((sok) => sok.id === valgtSoknad!.id)] = valgtSoknad!
         setSoknader(soknader)
         history.push(`/soknader/${valgtSoknad!.id}/1`)
-
-        setGjenapner(false)
     }
 
     return (

@@ -2,9 +2,8 @@ import { BodyShort, Button, Heading, Modal } from '@navikt/ds-react'
 import parser from 'html-react-parser'
 import React, { useState } from 'react'
 
-import { redirectTilLoginHvis401 } from '../../data/rest/utils'
 import { useAppStore } from '../../data/stores/app-store'
-import fetchMedRequestId from '../../utils/fetch'
+import fetchMedRequestId, { FetchError } from '../../utils/fetch'
 import { logger } from '../../utils/logger'
 import { tekst } from '../../utils/tekster'
 
@@ -48,9 +47,8 @@ const Ettersending = ({ gjelder, setRerendrekvittering }: EttersendingProps) => 
     }
 
     const ettersendNav = async () => {
-        let fetchResult
         try {
-            fetchResult = await fetchMedRequestId(
+            await fetchMedRequestId(
                 `/syk/sykepengesoknad/api/sykepengesoknad-backend/api/v2/soknader/${valgtSoknad!.id}/ettersendTilNav`,
                 {
                     method: 'POST',
@@ -58,24 +56,14 @@ const Ettersending = ({ gjelder, setRerendrekvittering }: EttersendingProps) => 
                     headers: { 'Content-Type': 'application/json' },
                 }
             )
-        } catch (e) {
-            setFeilmeldingTekst(tekst('kvittering.ettersending.feilet'))
+        } catch (e: any) {
+            if (e instanceof FetchError) {
+                setFeilmeldingTekst(tekst('kvittering.ettersending.feilet'))
+                logger.error(e.message)
+            }
             return
-        }
-
-        const response = fetchResult.response
-        if (redirectTilLoginHvis401(response)) {
-            return
-        }
-
-        if (!response.ok) {
-            logger.error(
-                `Feil ved ettersending av søknad ${valgtSoknad!.id} til NAV med feilkode ${
-                    response.status
-                } og x_request_id ${fetchResult.requestId}.`
-            )
-            setFeilmeldingTekst(tekst('kvittering.ettersending.feilet'))
-            return
+        } finally {
+            setFeilmeldingTekst('')
         }
 
         valgtSoknad!.sendtTilNAVDato = new Date()
@@ -83,9 +71,8 @@ const Ettersending = ({ gjelder, setRerendrekvittering }: EttersendingProps) => 
     }
 
     const ettersendArbeidsgiver = async () => {
-        let fetchResult
         try {
-            fetchResult = await fetchMedRequestId(
+            await fetchMedRequestId(
                 `/syk/sykepengesoknad/api/sykepengesoknad-backend/api/v2/soknader/${
                     valgtSoknad!.id
                 }/ettersendTilArbeidsgiver`,
@@ -96,23 +83,13 @@ const Ettersending = ({ gjelder, setRerendrekvittering }: EttersendingProps) => 
                 }
             )
         } catch (e) {
-            setFeilmeldingTekst(tekst('kvittering.ettersending.feilet'))
+            if (e instanceof FetchError) {
+                setFeilmeldingTekst(tekst('kvittering.ettersending.feilet'))
+                logger.error(e.message)
+            }
             return
-        }
-
-        const response = fetchResult.response
-        if (redirectTilLoginHvis401(response)) {
-            return
-        }
-
-        if (!response.ok) {
-            logger.error(
-                `Feil ved ettersending av søknad ${valgtSoknad!.id} til ARBEIDSGIVER med feilkode ${
-                    response.status
-                } og x_request_id ${fetchResult.requestId}.`
-            )
-            setFeilmeldingTekst(tekst('kvittering.ettersending.feilet'))
-            return
+        } finally {
+            setFeilmeldingTekst('')
         }
 
         valgtSoknad!.sendtTilArbeidsgiverDato = new Date()

@@ -3,10 +3,9 @@ import parser from 'html-react-parser'
 import React from 'react'
 import { useHistory } from 'react-router'
 
-import { redirectTilLoginHvis401 } from '../../data/rest/utils'
 import { useAppStore } from '../../data/stores/app-store'
 import { Soknad } from '../../types/types'
-import fetchMedRequestId from '../../utils/fetch'
+import { FetchError, fetchJsonMedRequestId } from '../../utils/fetch'
 import { logger } from '../../utils/logger'
 import { tekst } from '../../utils/tekster'
 import { urlTilSoknad } from '../soknad/soknad-link'
@@ -19,10 +18,9 @@ const OpprettUtland = () => {
     const history = useHistory()
 
     const opprett = async () => {
-        let fetchResult
-
+        let data
         try {
-            fetchResult = await fetchMedRequestId(
+            data = await fetchJsonMedRequestId(
                 '/syk/sykepengesoknad/api/sykepengesoknad-backend/api/v2/opprettSoknadUtland',
                 {
                     method: 'POST',
@@ -30,29 +28,14 @@ const OpprettUtland = () => {
                     headers: { 'Content-Type': 'application/json' },
                 }
             )
-        } catch (e) {
+        } catch (e: any) {
+            if (e instanceof FetchError) {
+                setFeilmeldingTekst(tekst('opprett-utland.feilet'))
+                logger.error(e.message)
+            }
             return
-        }
-
-        const response = fetchResult.response
-        if (redirectTilLoginHvis401(response)) {
-            return
-        }
-
-        if (!response.ok) {
-            logger.error(
-                `Feil ved opprettelse av utlandssøknad med http kode ${response.status} og x_request_id ${fetchResult.requestId}.`
-            )
-            setFeilmeldingTekst(tekst('opprett-utland.feilet'))
-            return
-        }
-
-        let data
-        try {
-            data = await response.json()
-        } catch (e) {
-            logger.error(`Feilet ved parsing av JSON for x_request_id ${fetchResult.requestId}. Error: ${e}.`)
-            return
+        } finally {
+            setFeilmeldingTekst('')
         }
 
         const soknad = new Soknad(data)
@@ -61,7 +44,6 @@ const OpprettUtland = () => {
             setSoknader(soknader)
         }
         history.push(urlTilSoknad(soknad))
-        setFeilmeldingTekst('')
     }
 
     return (

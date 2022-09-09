@@ -2,9 +2,8 @@ import { BodyShort, Label } from '@navikt/ds-react'
 import parser from 'html-react-parser'
 import React, { useCallback, useEffect, useState } from 'react'
 
-import { redirectTilLoginHvis401 } from '../../../data/rest/utils'
 import { isMockBackend, isProd } from '../../../utils/environment'
-import fetchMedRequestId from '../../../utils/fetch'
+import { FetchError, fetchJsonMedRequestId } from '../../../utils/fetch'
 import { logger } from '../../../utils/logger'
 import { tekst } from '../../../utils/tekster'
 import Vis from '../../vis'
@@ -13,42 +12,22 @@ const Kontonummer = () => {
     const [kontonummer, setKontonummer] = useState<string>()
 
     const fetchData = useCallback(async () => {
-        let fetchResult
-        try {
-            fetchResult = await fetchMedRequestId('https://www.nav.no/person/personopplysninger-api/personalia', {
-                method: 'GET',
-                credentials: 'include',
-                headers: { 'Content-Type': 'application/json' },
-            })
-        } catch (e) {
-            return
-        }
-
-        const response = fetchResult.response
-        if (redirectTilLoginHvis401(response)) {
-            return
-        }
-
-        if (!response.ok) {
-            logger.error(
-                `Feil ved henting av kontonummer med feilkode ${response.status} og x_request_id ${fetchResult.requestId}.`
-            )
-            return
-        }
-
-        let data
-        try {
-            data = await fetchResult.response.json()
-        } catch (e) {
-            logger.error(`Feilet ved parsing av JSON for x_request_id ${fetchResult.requestId}. Error: ${e}.`)
-            return
-        }
+        const data = await fetchJsonMedRequestId('https://www.nav.no/person/personopplysninger-api/personalia', {
+            method: 'GET',
+            credentials: 'include',
+            headers: { 'Content-Type': 'application/json' },
+        })
         setKontonummer(data?.personalia?.kontonr)
     }, [])
 
     useEffect(() => {
         if (isProd()) {
-            fetchData().catch((e: Error) => logger.error(e.message))
+            fetchData().catch((e: Error) => {
+                if (e instanceof FetchError) {
+                    logger.error(e.message)
+                }
+                return
+            })
         }
 
         if (isMockBackend()) {

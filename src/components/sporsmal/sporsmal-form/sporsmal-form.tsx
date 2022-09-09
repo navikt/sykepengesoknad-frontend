@@ -3,7 +3,6 @@ import { FormProvider, useForm } from 'react-hook-form'
 import { useHistory, useParams } from 'react-router-dom'
 
 import { RouteParams } from '../../../app'
-import { redirectTilLoginHvis401 } from '../../../data/rest/utils'
 import { useAppStore } from '../../../data/stores/app-store'
 import { TagTyper } from '../../../types/enums'
 import { RSOppdaterSporsmalResponse } from '../../../types/rs-types/rest-response/rs-oppdatersporsmalresponse'
@@ -14,7 +13,7 @@ import { sporsmalToRS } from '../../../types/rs-types/rs-sporsmal'
 import { RSSvartype } from '../../../types/rs-types/rs-svartype'
 import { Soknad, Sporsmal } from '../../../types/types'
 import { SEPARATOR } from '../../../utils/constants'
-import fetchMedRequestId from '../../../utils/fetch'
+import fetchMedRequestId, { FetchError, fetchJsonMedRequestId } from '../../../utils/fetch'
 import { logger } from '../../../utils/logger'
 import { useAmplitudeInstance } from '../../amplitude/amplitude'
 import FeilOppsummering from '../../feil/feil-oppsummering'
@@ -91,9 +90,9 @@ const SporsmalForm = () => {
     const sendOppdaterSporsmal = async () => {
         let soknad = valgtSoknad
 
-        let fetchResult
+        let data
         try {
-            fetchResult = await fetchMedRequestId(
+            data = await fetchJsonMedRequestId(
                 `/syk/sykepengesoknad/api/sykepengesoknad-backend/api/v2/soknader/${soknad!.id}/sporsmal/${
                     sporsmal.id
                 }`,
@@ -102,38 +101,18 @@ const SporsmalForm = () => {
                     credentials: 'include',
                     body: JSON.stringify(sporsmalToRS(sporsmal)),
                     headers: { 'Content-Type': 'application/json' },
+                },
+                (response) => {
+                    if (response.status === 400) {
+                        setFeilState(true)
+                    }
+                    restFeilet = true
                 }
             )
-        } catch (e) {
-            restFeilet = true
-            return
-        }
-
-        const response = fetchResult.response
-        if (redirectTilLoginHvis401(response)) {
-            return
-        }
-
-        if (!response.ok) {
-            if (response.status === 400) {
-                setFeilState(true)
-            } else {
-                logger.error(
-                    `Feilet ved kall OPPDATER_SPORSMAL med http kode ${response.status} og x_request_id ${fetchResult.requestId}.`,
-                    response
-                )
+        } catch (e: any) {
+            if (e instanceof FetchError) {
+                logger.error(e.message)
             }
-
-            restFeilet = true
-            return
-        }
-
-        let data
-        try {
-            data = await response.json()
-        } catch (e) {
-            logger.error(`Feilet ved parsing av JSON for x_request_id ${fetchResult.requestId}. Error: ${e}.`)
-            restFeilet = true
             return
         }
 
@@ -153,9 +132,9 @@ const SporsmalForm = () => {
     }
 
     const hentMottaker = useCallback(async () => {
-        let fetchResult
+        let data
         try {
-            fetchResult = await fetchMedRequestId(
+            data = await fetchJsonMedRequestId(
                 `/syk/sykepengesoknad/api/sykepengesoknad-backend/api/v2/soknader/${valgtSoknad!.id}/finnMottaker`,
                 {
                     method: 'POST',
@@ -163,30 +142,15 @@ const SporsmalForm = () => {
                     headers: { 'Content-Type': 'application/json' },
                 }
             )
-        } catch (e) {
+        } catch (e: any) {
+            if (e instanceof FetchError) {
+                logger.error(e.message)
+            }
             return
         }
 
-        const response = fetchResult.response
-        if (redirectTilLoginHvis401(response)) {
-            return
-        }
+        setMottaker(data.mottaker)
 
-        if (!response.ok) {
-            logger.error(
-                `Klarte ikke hente MOTTAKER av søknad http kode ${response.status} og x_request_id ${fetchResult.requestId}.`,
-                response
-            )
-            return
-        }
-
-        try {
-            const data = await response.json()
-            setMottaker(data.mottaker)
-        } catch (e) {
-            logger.error(`Feilet ved parsing av JSON for x_request_id ${fetchResult.requestId}. Error: ${e}.`)
-            return
-        }
         // eslint-disable-next-line
     }, [])
 
@@ -203,9 +167,8 @@ const SporsmalForm = () => {
             }
         }
 
-        let fetchResult
         try {
-            fetchResult = await fetchMedRequestId(
+            await fetchMedRequestId(
                 `/syk/sykepengesoknad/api/sykepengesoknad-backend/api/v2/soknader/${valgtSoknad!.id}/send`,
                 {
                     method: 'POST',
@@ -213,21 +176,11 @@ const SporsmalForm = () => {
                     headers: { 'Content-Type': 'application/json' },
                 }
             )
-        } catch (e) {
-            restFeilet = true
-            return
-        }
-
-        const response = fetchResult.response
-        if (redirectTilLoginHvis401(response)) {
-            return
-        }
-
-        if (!response.ok) {
-            logger.error(
-                `Feilet ved sending av søknad ${valgtSoknad.id} med http kode ${response.status} og x_request_id ${fetchResult.requestId}.`
-            )
-            restFeilet = true
+        } catch (e: any) {
+            if (e instanceof FetchError) {
+                restFeilet = true
+                logger.error(e.message)
+            }
             return
         }
 
