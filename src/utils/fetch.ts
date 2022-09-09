@@ -52,7 +52,7 @@ export const fetchJsonMedRequestId = async (url: string, options: RequestInit = 
     } catch (e) {
         throw new FetchError(
             `${e} - Kall til: ${options.method} ${url} feilet HTTP-kode: ${response.status} ved parsing av JSON
-            med x_request_id: ${fetchResult.requestId} og body: ${response.body}`
+            med x_request_id: ${fetchResult.requestId}.`
         )
     }
 }
