@@ -8,6 +8,7 @@ const { serverRuntimeConfig } = getConfig()
 
 const tillatteApier = [
     'GET /api/v2/soknader',
+    'GET /api/v2/soknader/[uuid]/mottaker',
     'POST /api/v2/opprettSoknadUtland',
     'POST /api/v2/soknader/[uuid]/avbryt',
     'POST /api/v2/soknader/[uuid]/send',

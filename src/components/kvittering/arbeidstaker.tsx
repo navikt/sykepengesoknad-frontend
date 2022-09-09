@@ -76,9 +76,9 @@ const Arbeidstaker = () => {
         let data
         try {
             data = await fetchJsonMedRequestId(
-                `/syk/sykepengesoknad/api/sykepengesoknad-backend/api/v2/soknader/${id}/finnMottaker`,
+                `/syk/sykepengesoknad/api/sykepengesoknad-backend/api/v2/soknader/${id}/mottaker`,
                 {
-                    method: 'POST',
+                    method: 'GET',
                     credentials: 'include',
                     headers: { 'Content-Type': 'application/json' },
                 }

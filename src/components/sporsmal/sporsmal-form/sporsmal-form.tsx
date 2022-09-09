@@ -135,9 +135,9 @@ const SporsmalForm = () => {
         let data
         try {
             data = await fetchJsonMedRequestId(
-                `/syk/sykepengesoknad/api/sykepengesoknad-backend/api/v2/soknader/${valgtSoknad!.id}/finnMottaker`,
+                `/syk/sykepengesoknad/api/sykepengesoknad-backend/api/v2/soknader/${valgtSoknad!.id}/mottaker`,
                 {
-                    method: 'POST',
+                    method: 'GET',
                     credentials: 'include',
                     headers: { 'Content-Type': 'application/json' },
                 }
