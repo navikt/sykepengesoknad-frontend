@@ -83,32 +83,29 @@ const setUpMock = (person: Persona) => {
         return res(ctx.json(soknadOriginal))
     })
 
-    mock.post(
-        '/syk/sykepengesoknad/api/sykepengesoknad-backend/api/v2/soknader/:soknad/finnMottaker',
-        (req, res, ctx) => {
-            const soknadId = req.pathParams.soknad
+    mock.get('/syk/sykepengesoknad/api/sykepengesoknad-backend/api/v2/soknader/:soknad/mottaker', (req, res, ctx) => {
+        const soknadId = req.pathParams.soknad
 
-            if (
-                soknadId === arbeidstaker.id ||
-                soknadId === arbeidstakerUtenforArbeidsgiverperiodeKvittering.id ||
-                soknadId === arbeidstakerDeltPeriodeForsteUtenforArbeidsgiverperiodeKvittering.id ||
-                soknadId === arbeidstakerUtenOppholdForsteUtenforArbeidsgiverperiodeKvittering.id ||
-                soknadId === foranArbeidstakerMedOppholdKvittering.id ||
-                soknadId === arbeidstakerMedOppholdForsteUtenforArbeidsgiverperiodeKvittering.id
-            ) {
-                return res(ctx.json({ mottaker: RSMottaker.ARBEIDSGIVER_OG_NAV }))
-            }
-            if (
-                soknadId === arbeidstakerGradert.id ||
-                soknadId === arbeidstakerInnenforArbeidsgiverperiodeKvittering.id ||
-                soknadId === sok6.id
-            ) {
-                return res(ctx.json({ mottaker: RSMottaker.ARBEIDSGIVER }))
-            }
-
-            return res(ctx.json({ mottaker: RSMottaker.NAV }))
+        if (
+            soknadId === arbeidstaker.id ||
+            soknadId === arbeidstakerUtenforArbeidsgiverperiodeKvittering.id ||
+            soknadId === arbeidstakerDeltPeriodeForsteUtenforArbeidsgiverperiodeKvittering.id ||
+            soknadId === arbeidstakerUtenOppholdForsteUtenforArbeidsgiverperiodeKvittering.id ||
+            soknadId === foranArbeidstakerMedOppholdKvittering.id ||
+            soknadId === arbeidstakerMedOppholdForsteUtenforArbeidsgiverperiodeKvittering.id
+        ) {
+            return res(ctx.json({ mottaker: RSMottaker.ARBEIDSGIVER_OG_NAV }))
         }
-    )
+        if (
+            soknadId === arbeidstakerGradert.id ||
+            soknadId === arbeidstakerInnenforArbeidsgiverperiodeKvittering.id ||
+            soknadId === sok6.id
+        ) {
+            return res(ctx.json({ mottaker: RSMottaker.ARBEIDSGIVER }))
+        }
+
+        return res(ctx.json({ mottaker: RSMottaker.NAV }))
+    })
 
     mock.get('/syk/sykepengesoknad/api/sykepengesoknad-backend/api/v2/soknader', (req, res, ctx) =>
         res(ctx.json(person.soknader))
