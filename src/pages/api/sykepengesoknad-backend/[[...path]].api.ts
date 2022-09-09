@@ -14,7 +14,6 @@ const tillatteApier = [
     'POST /api/v2/soknader/[uuid]/send',
     'POST /api/v2/soknader/[uuid]/korriger',
     'POST /api/v2/soknader/[uuid]/gjenapne',
-    'POST /api/v2/soknader/[uuid]/finnMottaker',
     'POST /api/v2/soknader/[uuid]/ettersendTilNav',
     'POST /api/v2/soknader/[uuid]/ettersendTilArbeidsgiver',
     'PUT /api/v2/soknader/[uuid]/sporsmal/[uuid]',
