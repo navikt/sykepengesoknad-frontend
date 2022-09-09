@@ -4,7 +4,7 @@ import { useHistory } from 'react-router'
 
 import { useAppStore } from '../../data/stores/app-store'
 import { Soknad } from '../../types/types'
-import { FetchError, tryFetchData } from '../../utils/fetch'
+import { FetchError, fetchJsonMedRequestId } from '../../utils/fetch'
 import { logger } from '../../utils/logger'
 import { tekst } from '../../utils/tekster'
 import { useAmplitudeInstance } from '../amplitude/amplitude'
@@ -28,7 +28,7 @@ const Endreknapp = () => {
 
         let data
         try {
-            data = await tryFetchData(
+            data = await fetchJsonMedRequestId(
                 `/syk/sykepengesoknad/api/sykepengesoknad-backend/api/v2/soknader/${valgtSoknad!.id}/korriger`,
                 {
                     method: 'POST',

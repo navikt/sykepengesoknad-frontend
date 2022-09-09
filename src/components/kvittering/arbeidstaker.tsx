@@ -8,7 +8,7 @@ import { RSSoknadstatus } from '../../types/rs-types/rs-soknadstatus'
 import { RSSoknadstype } from '../../types/rs-types/rs-soknadstype'
 import { Soknad } from '../../types/types'
 import { sendtForMerEnn30DagerSiden } from '../../utils/dato-utils'
-import { FetchError, tryFetchData } from '../../utils/fetch'
+import { FetchError, fetchJsonMedRequestId } from '../../utils/fetch'
 import { logger } from '../../utils/logger'
 import { tekst } from '../../utils/tekster'
 import Vis from '../vis'
@@ -75,7 +75,7 @@ const Arbeidstaker = () => {
 
         let data
         try {
-            data = await tryFetchData(
+            data = await fetchJsonMedRequestId(
                 `/syk/sykepengesoknad/api/sykepengesoknad-backend/api/v2/soknader/${id}/finnMottaker`,
                 {
                     method: 'POST',

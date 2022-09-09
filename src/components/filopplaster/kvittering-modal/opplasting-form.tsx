@@ -10,7 +10,7 @@ import { useAppStore } from '../../../data/stores/app-store'
 import { RSOppdaterSporsmalResponse } from '../../../types/rs-types/rest-response/rs-oppdatersporsmalresponse'
 import { RSSvar } from '../../../types/rs-types/rs-svar'
 import { Kvittering, Sporsmal, UtgiftTyper } from '../../../types/types'
-import { FetchError, tryFetchData } from '../../../utils/fetch'
+import { FetchError, fetchJsonMedRequestId } from '../../../utils/fetch'
 import { formaterFilstørrelse, formattertFiltyper, maxFilstørrelse } from '../../../utils/fil-utils'
 import { logger } from '../../../utils/logger'
 import { getLedetekst, tekst } from '../../../utils/tekster'
@@ -80,7 +80,7 @@ const OpplastingForm = ({ sporsmal }: SpmProps) => {
         requestData.append('file', valgtFil as Blob)
 
         try {
-            return await tryFetchData(
+            return await fetchJsonMedRequestId(
                 '/syk/sykepengesoknad/api/flex-bucket-uploader/api/v2/opplasting',
                 {
                     method: 'POST',
@@ -115,7 +115,7 @@ const OpplastingForm = ({ sporsmal }: SpmProps) => {
         const svar: RSSvar = { verdi: JSON.stringify(kvittering) }
 
         try {
-            return await tryFetchData(
+            return await fetchJsonMedRequestId(
                 `/syk/sykepengesoknad/api/sykepengesoknad-backend/api/v2/soknader/${valgtSoknad!.id}/sporsmal/${
                     sporsmal!.id
                 }/svar`,

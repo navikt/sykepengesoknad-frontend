@@ -3,7 +3,7 @@ import React, { useCallback, useEffect, useState } from 'react'
 
 import IngenData from '../components/feil/ingen-data'
 import { Soknad } from '../types/types'
-import { FetchError, tryFetchData } from '../utils/fetch'
+import { FetchError, fetchJsonMedRequestId } from '../utils/fetch'
 import { logger } from '../utils/logger'
 import { useAppStore } from './stores/app-store'
 
@@ -16,7 +16,7 @@ export function DataFetcher(props: { children: any }) {
     const hentSoknader = useCallback(async () => {
         let data
         try {
-            data = await tryFetchData(
+            data = await fetchJsonMedRequestId(
                 '/syk/sykepengesoknad/api/sykepengesoknad-backend/api/v2/soknader',
                 {
                     method: 'GET',
@@ -43,7 +43,7 @@ export function DataFetcher(props: { children: any }) {
     const hentSykmeldinger = useCallback(async () => {
         let data
         try {
-            data = await tryFetchData(
+            data = await fetchJsonMedRequestId(
                 '/syk/sykepengesoknad/api/sykmeldinger-backend/api/v2/sykmeldinger',
                 {
                     method: 'GET',

@@ -13,7 +13,7 @@ import { sporsmalToRS } from '../../../types/rs-types/rs-sporsmal'
 import { RSSvartype } from '../../../types/rs-types/rs-svartype'
 import { Soknad, Sporsmal } from '../../../types/types'
 import { SEPARATOR } from '../../../utils/constants'
-import fetchMedRequestId, { FetchError, tryFetchData } from '../../../utils/fetch'
+import fetchMedRequestId, { FetchError, fetchJsonMedRequestId } from '../../../utils/fetch'
 import { logger } from '../../../utils/logger'
 import { useAmplitudeInstance } from '../../amplitude/amplitude'
 import FeilOppsummering from '../../feil/feil-oppsummering'
@@ -92,7 +92,7 @@ const SporsmalForm = () => {
 
         let data
         try {
-            data = await tryFetchData(
+            data = await fetchJsonMedRequestId(
                 `/syk/sykepengesoknad/api/sykepengesoknad-backend/api/v2/soknader/${soknad!.id}/sporsmal/${
                     sporsmal.id
                 }`,
@@ -134,7 +134,7 @@ const SporsmalForm = () => {
     const hentMottaker = useCallback(async () => {
         let data
         try {
-            data = await tryFetchData(
+            data = await fetchJsonMedRequestId(
                 `/syk/sykepengesoknad/api/sykepengesoknad-backend/api/v2/soknader/${valgtSoknad!.id}/finnMottaker`,
                 {
                     method: 'POST',

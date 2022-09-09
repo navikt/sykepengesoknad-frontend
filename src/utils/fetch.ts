@@ -43,7 +43,7 @@ const fetchMedRequestId = async (
     return { requestId, response }
 }
 
-export const tryFetchData = async (url: string, options: RequestInit = {}, errorHandler?: ErrorHandler) => {
+export const fetchJsonMedRequestId = async (url: string, options: RequestInit = {}, errorHandler?: ErrorHandler) => {
     const fetchResult = await fetchMedRequestId(url, options, errorHandler)
     const response = fetchResult.response
 

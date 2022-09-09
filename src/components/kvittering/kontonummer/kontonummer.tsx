@@ -3,7 +3,7 @@ import parser from 'html-react-parser'
 import React, { useCallback, useEffect, useState } from 'react'
 
 import { isMockBackend, isProd } from '../../../utils/environment'
-import { FetchError, tryFetchData } from '../../../utils/fetch'
+import { FetchError, fetchJsonMedRequestId } from '../../../utils/fetch'
 import { logger } from '../../../utils/logger'
 import { tekst } from '../../../utils/tekster'
 import Vis from '../../vis'
@@ -12,7 +12,7 @@ const Kontonummer = () => {
     const [kontonummer, setKontonummer] = useState<string>()
 
     const fetchData = useCallback(async () => {
-        const data = await tryFetchData('https://www.nav.no/person/personopplysninger-api/personalia', {
+        const data = await fetchJsonMedRequestId('https://www.nav.no/person/personopplysninger-api/personalia', {
             method: 'GET',
             credentials: 'include',
             headers: { 'Content-Type': 'application/json' },
