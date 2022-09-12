@@ -1,11 +1,11 @@
 import { BodyShort, Button, Heading, Modal } from '@navikt/ds-react'
+import { logger } from '@navikt/next-logger'
 import React, { useState } from 'react'
 import { useHistory } from 'react-router'
 
 import { useAppStore } from '../../data/stores/app-store'
 import { Soknad } from '../../types/types'
 import { FetchError, fetchJsonMedRequestId } from '../../utils/fetch'
-import { logger } from '../../utils/logger'
 import { tekst } from '../../utils/tekster'
 import { useAmplitudeInstance } from '../amplitude/amplitude'
 import { urlTilSoknad } from '../soknad/soknad-link'
@@ -39,7 +39,7 @@ const Endreknapp = () => {
         } catch (e: any) {
             if (e instanceof FetchError) {
                 setFeilmeldingTekst(tekst('kvittering.korrigering.feilet'))
-                logger.error(e.message)
+                logger.error(e)
             }
             return
         } finally {
@@ -101,7 +101,7 @@ const Endreknapp = () => {
                                 soknadstype: valgtSoknad?.soknadstype,
                                 component: endreSøknadPopup,
                             })
-                            korriger().catch((e: Error) => logger.error(e.message))
+                            korriger().catch((e: Error) => logger.error(e))
                         }}
                     >
                         {tekst('endre.modal.bekreft')}

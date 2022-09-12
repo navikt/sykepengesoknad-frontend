@@ -1,11 +1,11 @@
 /* eslint-disable no-console */
 import { Alert, Button, Heading, Modal } from '@navikt/ds-react'
+import { logger } from '@navikt/next-logger'
 import React, { useState } from 'react'
 
 import { useAppStore } from '../../data/stores/app-store'
 import { Kvittering, Sporsmal, svarverdiToKvittering } from '../../types/types'
 import fetchMedRequestId, { FetchError } from '../../utils/fetch'
-import { logger } from '../../utils/logger'
 import { tekst } from '../../utils/tekster'
 import Vis from '../vis'
 
@@ -50,7 +50,7 @@ const Slettknapp = ({ sporsmal, kvittering, update }: SlettknappProps) => {
             )
         } catch (e: any) {
             if (e instanceof FetchError) {
-                logger.error(e.message)
+                logger.error(e)
                 feilVedSletting = true
                 setFeilmeldingTekst(tekst('opplasting_modal.slett.feilmelding'))
             }

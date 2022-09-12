@@ -1,3 +1,4 @@
+import { logger } from '@navikt/next-logger'
 import * as H from 'history'
 import React from 'react'
 
@@ -5,7 +6,6 @@ import { RSSoknadstatus } from '../../types/rs-types/rs-soknadstatus'
 import { RSSoknadstype } from '../../types/rs-types/rs-soknadstype'
 import { Soknad } from '../../types/types'
 import fetchMedRequestId, { FetchError } from '../../utils/fetch'
-import { logger } from '../../utils/logger'
 import { tekst } from '../../utils/tekster'
 import { urlTilSoknad } from '../soknad/soknad-link'
 
@@ -37,7 +37,7 @@ export async function avbrytSoknad({
     } catch (e: any) {
         if (e instanceof FetchError) {
             setFeilmeldingTekst(tekst('avbryt.feilet'))
-            logger.error(e.message)
+            logger.error(e)
         }
         return
     } finally {

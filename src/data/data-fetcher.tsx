@@ -1,10 +1,10 @@
 import { Loader } from '@navikt/ds-react'
+import { logger } from '@navikt/next-logger'
 import React, { useCallback, useEffect, useState } from 'react'
 
 import IngenData from '../components/feil/ingen-data'
 import { Soknad } from '../types/types'
 import { FetchError, fetchJsonMedRequestId } from '../utils/fetch'
-import { logger } from '../utils/logger'
 import { useAppStore } from './stores/app-store'
 
 export function DataFetcher(props: { children: any }) {
@@ -23,7 +23,7 @@ export function DataFetcher(props: { children: any }) {
         } catch (e: any) {
             if (e instanceof FetchError) {
                 setSoknaderFeilet(true)
-                logger.error(e.message)
+                logger.error(e)
             }
             return
         }
@@ -45,7 +45,7 @@ export function DataFetcher(props: { children: any }) {
         } catch (e: any) {
             if (e instanceof FetchError) {
                 setSykmeldingerFeilet(true)
-                logger.error(e.message)
+                logger.error(e)
             }
             return
         }
@@ -55,8 +55,8 @@ export function DataFetcher(props: { children: any }) {
 
     useEffect(() => {
         setLaster(true)
-        hentSoknader().catch((e: Error) => logger.error(e.message))
-        hentSykmeldinger().catch((e: Error) => logger.error(e.message))
+        hentSoknader().catch((e: Error) => logger.error(e))
+        hentSykmeldinger().catch((e: Error) => logger.error(e))
         setLaster(false)
     }, [hentSoknader, hentSykmeldinger])
 

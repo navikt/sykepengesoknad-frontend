@@ -1,10 +1,10 @@
 import { BodyShort, Button, Heading, Modal } from '@navikt/ds-react'
+import { logger } from '@navikt/next-logger'
 import parser from 'html-react-parser'
 import React, { useState } from 'react'
 
 import { useAppStore } from '../../data/stores/app-store'
 import fetchMedRequestId, { FetchError } from '../../utils/fetch'
-import { logger } from '../../utils/logger'
 import { tekst } from '../../utils/tekster'
 
 interface EttersendingProps {
@@ -59,7 +59,7 @@ const Ettersending = ({ gjelder, setRerendrekvittering }: EttersendingProps) => 
         } catch (e: any) {
             if (e instanceof FetchError) {
                 setFeilmeldingTekst(tekst('kvittering.ettersending.feilet'))
-                logger.error(e.message)
+                logger.error(e)
             }
             return
         } finally {
@@ -85,7 +85,7 @@ const Ettersending = ({ gjelder, setRerendrekvittering }: EttersendingProps) => 
         } catch (e) {
             if (e instanceof FetchError) {
                 setFeilmeldingTekst(tekst('kvittering.ettersending.feilet'))
-                logger.error(e.message)
+                logger.error(e)
             }
             return
         } finally {

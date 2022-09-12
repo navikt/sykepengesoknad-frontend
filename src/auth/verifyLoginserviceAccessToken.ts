@@ -1,9 +1,8 @@
+import { logger } from '@navikt/next-logger'
 import { createRemoteJWKSet, FlattenedJWSInput, JWSHeaderParameters, jwtVerify } from 'jose'
 import { GetKeyFunction } from 'jose/dist/types/types'
 import getConfig from 'next/config'
 import { Client, Issuer } from 'openid-client'
-
-import { logger } from '../utils/logger'
 
 const { serverRuntimeConfig } = getConfig()
 

@@ -1,8 +1,8 @@
+import { logger } from '@navikt/next-logger'
 import { NextApiRequest, NextApiResponse } from 'next'
 
 import { cleanPathForMetric } from '../metrics'
 import metrics from '../metrics'
-import { logger } from '../utils/logger'
 import { verifyIdportenAccessToken } from './verifyIdportenAccessToken'
 
 type ApiHandler = (req: NextApiRequest, res: NextApiResponse) => void | Promise<void>

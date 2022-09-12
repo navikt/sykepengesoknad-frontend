@@ -1,4 +1,5 @@
 import { Button } from '@navikt/ds-react'
+import { logger } from '@navikt/next-logger'
 import React, { useEffect, useState } from 'react'
 import { useHistory, useParams } from 'react-router'
 
@@ -6,7 +7,6 @@ import { RouteParams } from '../../../app'
 import { useAppStore } from '../../../data/stores/app-store'
 import { RSSoknadstatus } from '../../../types/rs-types/rs-soknadstatus'
 import fetchMedRequestId, { FetchError } from '../../../utils/fetch'
-import { logger } from '../../../utils/logger'
 import { useAmplitudeInstance } from '../../amplitude/amplitude'
 import styles from './gjenapneknapp.module.css'
 
@@ -51,7 +51,7 @@ const GjenapneSoknad = () => {
             )
         } catch (e: any) {
             if (e instanceof FetchError) {
-                logger.error(e.message)
+                logger.error(e)
             }
             return
         } finally {

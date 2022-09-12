@@ -1,9 +1,9 @@
+import { logger } from '@navikt/next-logger'
 import cookie from 'cookie'
 import { NextPageContext } from 'next'
 
 import metrics, { cleanPathForMetric, shouldLogMetricForPath } from '../metrics'
 import { isMockBackend, loginServiceRedirectUrl, loginServiceUrl } from '../utils/environment'
-import { logger } from '../utils/logger'
 import { verifyIdportenAccessToken } from './verifyIdportenAccessToken'
 import { validerLoginserviceToken } from './verifyLoginserviceAccessToken'
 
