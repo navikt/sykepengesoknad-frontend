@@ -64,6 +64,21 @@ const TallKomp = ({ sporsmal }: SpmProps) => {
         return ''
     }
 
+    const antallDesimaler = (() => {
+        switch (sporsmal.svartype) {
+            case RSSvartype.PROSENT:
+                return 0
+            case RSSvartype.KILOMETER:
+                return 1
+            case RSSvartype.TALL:
+            case RSSvartype.TIMER:
+            case RSSvartype.BELOP:
+                return 2
+            default:
+                return 0
+        }
+    })()
+
     return (
         <div className={className()}>
             <TextField
@@ -84,6 +99,13 @@ const TallKomp = ({ sporsmal }: SpmProps) => {
                 {...register(sporsmal.id, {
                     required: feilmelding.global,
                     validate: () => valider(),
+                    setValueAs: (v) => {
+                        if (antallDesimaler === 0) {
+                            return parseInt(v)
+                        }
+
+                        return parseFloat(v).toFixed(antallDesimaler)
+                    },
                     min: {
                         value: sporsmal.min!,
                         message: sporsmal.max
