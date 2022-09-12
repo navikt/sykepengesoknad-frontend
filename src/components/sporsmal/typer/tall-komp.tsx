@@ -100,11 +100,13 @@ const TallKomp = ({ sporsmal }: SpmProps) => {
                     required: feilmelding.global,
                     validate: () => valider(),
                     setValueAs: (v) => {
-                        if (antallDesimaler === 0) {
+                        if (!v) {
+                            return undefined
+                        } else if (antallDesimaler === 0) {
                             return parseInt(v)
+                        } else {
+                            return parseFloat(v).toFixed(antallDesimaler)
                         }
-
-                        return parseFloat(v).toFixed(antallDesimaler)
                     },
                     min: {
                         value: sporsmal.min!,
