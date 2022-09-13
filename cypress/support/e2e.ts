@@ -83,7 +83,7 @@ const lyttTilNettverksKall = (a: any) => {
         const request = args[1]
 
         // Forhndrer at test feiler på grunn av fetch i mock-kode og Next hot-reloading.
-        if (url.includes('/static')) {
+        if (url.includes('/static') || url.includes('/_next')) {
             return
         }
 
