@@ -14,7 +14,7 @@ import { sporsmalToRS } from '../../../types/rs-types/rs-sporsmal'
 import { RSSvartype } from '../../../types/rs-types/rs-svartype'
 import { Soknad, Sporsmal } from '../../../types/types'
 import { SEPARATOR } from '../../../utils/constants'
-import fetchMedRequestId, { FetchError, fetchJsonMedRequestId } from '../../../utils/fetch'
+import fetchMedRequestId, { AuthenticationError, fetchJsonMedRequestId } from '../../../utils/fetch'
 import { useAmplitudeInstance } from '../../amplitude/amplitude'
 import FeilOppsummering from '../../feil/feil-oppsummering'
 import Opplysninger from '../../opplysninger-fra-sykmelding/opplysninger'
@@ -110,7 +110,7 @@ const SporsmalForm = () => {
                 }
             )
         } catch (e: any) {
-            if (e instanceof FetchError) {
+            if (!(e instanceof AuthenticationError)) {
                 logger.error(e)
             }
             return
@@ -143,7 +143,7 @@ const SporsmalForm = () => {
                 }
             )
         } catch (e: any) {
-            if (e instanceof FetchError) {
+            if (!(e instanceof AuthenticationError)) {
                 logger.error(e)
             }
             return
@@ -177,7 +177,7 @@ const SporsmalForm = () => {
                 }
             )
         } catch (e: any) {
-            if (e instanceof FetchError) {
+            if (!(e instanceof AuthenticationError)) {
                 restFeilet = true
                 logger.error(e)
             }

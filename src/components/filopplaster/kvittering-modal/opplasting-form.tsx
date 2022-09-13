@@ -11,7 +11,7 @@ import { useAppStore } from '../../../data/stores/app-store'
 import { RSOppdaterSporsmalResponse } from '../../../types/rs-types/rest-response/rs-oppdatersporsmalresponse'
 import { RSSvar } from '../../../types/rs-types/rs-svar'
 import { Kvittering, Sporsmal, UtgiftTyper } from '../../../types/types'
-import { FetchError, fetchJsonMedRequestId } from '../../../utils/fetch'
+import { AuthenticationError, fetchJsonMedRequestId } from '../../../utils/fetch'
 import { formaterFilstørrelse, formattertFiltyper, maxFilstørrelse } from '../../../utils/fil-utils'
 import { getLedetekst, tekst } from '../../../utils/tekster'
 import { Ekspanderbar } from '../../ekspanderbar/ekspanderbar'
@@ -96,7 +96,7 @@ const OpplastingForm = ({ sporsmal }: SpmProps) => {
                 }
             )
         } catch (e: any) {
-            if (e instanceof FetchError) {
+            if (!(e instanceof AuthenticationError)) {
                 logger.error(e)
             }
             return
@@ -127,7 +127,7 @@ const OpplastingForm = ({ sporsmal }: SpmProps) => {
                 }
             )
         } catch (e: any) {
-            if (e instanceof FetchError) {
+            if (!(e instanceof AuthenticationError)) {
                 setFeilmeldingTekst('Det skjedde en feil i baksystemene, prøv igjen senere.')
                 logger.error(e)
             }

@@ -4,7 +4,7 @@ import React, { useCallback, useEffect, useState } from 'react'
 
 import IngenData from '../components/feil/ingen-data'
 import { Soknad } from '../types/types'
-import { FetchError, fetchJsonMedRequestId } from '../utils/fetch'
+import { AuthenticationError, fetchJsonMedRequestId } from '../utils/fetch'
 import { useAppStore } from './stores/app-store'
 
 export function DataFetcher(props: { children: any }) {
@@ -21,7 +21,7 @@ export function DataFetcher(props: { children: any }) {
                 credentials: 'include',
             })
         } catch (e: any) {
-            if (e instanceof FetchError) {
+            if (!(e instanceof AuthenticationError)) {
                 setSoknaderFeilet(true)
                 logger.error(e)
             }
@@ -43,7 +43,7 @@ export function DataFetcher(props: { children: any }) {
                 credentials: 'include',
             })
         } catch (e: any) {
-            if (e instanceof FetchError) {
+            if (!(e instanceof AuthenticationError)) {
                 setSykmeldingerFeilet(true)
                 logger.error(e)
             }

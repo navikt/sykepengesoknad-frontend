@@ -5,7 +5,7 @@ import { useHistory } from 'react-router'
 
 import { useAppStore } from '../../data/stores/app-store'
 import { Soknad } from '../../types/types'
-import { FetchError, fetchJsonMedRequestId } from '../../utils/fetch'
+import { AuthenticationError, fetchJsonMedRequestId } from '../../utils/fetch'
 import { tekst } from '../../utils/tekster'
 import { useAmplitudeInstance } from '../amplitude/amplitude'
 import { urlTilSoknad } from '../soknad/soknad-link'
@@ -37,7 +37,7 @@ const Endreknapp = () => {
                 }
             )
         } catch (e: any) {
-            if (e instanceof FetchError) {
+            if (!(e instanceof AuthenticationError)) {
                 setFeilmeldingTekst(tekst('kvittering.korrigering.feilet'))
                 logger.error(e)
             }

@@ -6,7 +6,7 @@ import { useHistory } from 'react-router'
 
 import { useAppStore } from '../../data/stores/app-store'
 import { Soknad } from '../../types/types'
-import { FetchError, fetchJsonMedRequestId } from '../../utils/fetch'
+import { AuthenticationError, fetchJsonMedRequestId } from '../../utils/fetch'
 import { tekst } from '../../utils/tekster'
 import { urlTilSoknad } from '../soknad/soknad-link'
 import Bjorn from '../sporsmal/bjorn/bjorn'
@@ -29,7 +29,7 @@ const OpprettUtland = () => {
                 }
             )
         } catch (e: any) {
-            if (e instanceof FetchError) {
+            if (!(e instanceof AuthenticationError)) {
                 setFeilmeldingTekst(tekst('opprett-utland.feilet'))
                 logger.error(e)
             }

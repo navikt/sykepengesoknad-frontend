@@ -5,7 +5,7 @@ import React, { useState } from 'react'
 
 import { useAppStore } from '../../data/stores/app-store'
 import { Kvittering, Sporsmal, svarverdiToKvittering } from '../../types/types'
-import fetchMedRequestId, { FetchError } from '../../utils/fetch'
+import fetchMedRequestId, { AuthenticationError } from '../../utils/fetch'
 import { tekst } from '../../utils/tekster'
 import Vis from '../vis'
 
@@ -49,7 +49,7 @@ const Slettknapp = ({ sporsmal, kvittering, update }: SlettknappProps) => {
                 }
             )
         } catch (e: any) {
-            if (e instanceof FetchError) {
+            if (!(e instanceof AuthenticationError)) {
                 logger.error(e)
                 feilVedSletting = true
                 setFeilmeldingTekst(tekst('opplasting_modal.slett.feilmelding'))

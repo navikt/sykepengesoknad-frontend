@@ -9,7 +9,7 @@ import { RSSoknadstatus } from '../../types/rs-types/rs-soknadstatus'
 import { RSSoknadstype } from '../../types/rs-types/rs-soknadstype'
 import { Soknad } from '../../types/types'
 import { sendtForMerEnn30DagerSiden } from '../../utils/dato-utils'
-import { FetchError, fetchJsonMedRequestId } from '../../utils/fetch'
+import { AuthenticationError, fetchJsonMedRequestId } from '../../utils/fetch'
 import { tekst } from '../../utils/tekster'
 import Vis from '../vis'
 import Inntil16dager from './innhold/arbeidstaker/inntil16dager'
@@ -84,7 +84,7 @@ const Arbeidstaker = () => {
                 }
             )
         } catch (e: any) {
-            if (e instanceof FetchError) {
+            if (!(e instanceof AuthenticationError)) {
                 logger.error(e)
             }
             return

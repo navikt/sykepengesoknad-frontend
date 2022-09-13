@@ -4,7 +4,7 @@ import parser from 'html-react-parser'
 import React, { useCallback, useEffect, useState } from 'react'
 
 import { isMockBackend, isProd } from '../../../utils/environment'
-import { FetchError, fetchJsonMedRequestId } from '../../../utils/fetch'
+import { AuthenticationError, fetchJsonMedRequestId } from '../../../utils/fetch'
 import { tekst } from '../../../utils/tekster'
 import Vis from '../../vis'
 
@@ -23,7 +23,7 @@ const Kontonummer = () => {
     useEffect(() => {
         if (isProd()) {
             fetchData().catch((e: Error) => {
-                if (e instanceof FetchError) {
+                if (!(e instanceof AuthenticationError)) {
                     logger.error(e)
                 }
                 return
