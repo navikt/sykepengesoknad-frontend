@@ -1,6 +1,6 @@
 import { gradertReisetilskudd } from '../../../src/data/mock/data/reisetilskudd'
 
-describe('Teste førsteside i reisetilskuddsøknaden', () => {
+describe('Tester at riktig antall desimaler sendes til backend', () => {
     it('Oppgir desimaler på svartype TALL og PROSENT', () => {
         cy.visit(`http://localhost:8080/syk/sykepengesoknad/soknader/${gradertReisetilskudd.id}/7`)
         cy.get('.inputPanelGruppe__inner label:first-child > input[value=JA]').click({ force: true })
@@ -8,7 +8,7 @@ describe('Teste førsteside i reisetilskuddsøknaden', () => {
         cy.get('input#1547250').focus().type('37.321') // maks 2 desimaler tas med på TALL
 
         cy.get('label[for=1547252]').click()
-        cy.get('input#1547253').focus().type('50.321') // ingen desimaler tas med PROSENT
+        cy.get('input#1547253').focus().type('50.321') // ingen desimaler tas med på PROSENT
 
         cy.contains('Gå videre').click()
         cy.contains('Tilbake').click()
