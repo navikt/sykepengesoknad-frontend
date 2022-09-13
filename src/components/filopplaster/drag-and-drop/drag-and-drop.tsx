@@ -5,7 +5,7 @@ import { useDropzone } from 'react-dropzone'
 import { useFormContext } from 'react-hook-form'
 
 import { useAppStore } from '../../../data/stores/app-store'
-import fetchMedRequestId, { FetchError } from '../../../utils/fetch'
+import fetchMedRequestId, { AuthenticationError } from '../../../utils/fetch'
 import {
     customTruncet,
     formaterFilstørrelse,
@@ -45,7 +45,7 @@ const DragAndDrop = () => {
         if (valgtKvittering?.blobId) {
             setFormErDisabled(true)
             hentKvittering().catch((e) => {
-                if (e instanceof FetchError) {
+                if (!(e instanceof AuthenticationError)) {
                     logger.error(e)
                 }
                 return

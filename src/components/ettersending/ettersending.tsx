@@ -4,7 +4,7 @@ import parser from 'html-react-parser'
 import React, { useState } from 'react'
 
 import { useAppStore } from '../../data/stores/app-store'
-import fetchMedRequestId, { FetchError } from '../../utils/fetch'
+import fetchMedRequestId, { AuthenticationError } from '../../utils/fetch'
 import { tekst } from '../../utils/tekster'
 
 interface EttersendingProps {
@@ -57,7 +57,7 @@ const Ettersending = ({ gjelder, setRerendrekvittering }: EttersendingProps) => 
                 }
             )
         } catch (e: any) {
-            if (e instanceof FetchError) {
+            if (!(e instanceof AuthenticationError)) {
                 setFeilmeldingTekst(tekst('kvittering.ettersending.feilet'))
                 logger.error(e)
             }
@@ -82,8 +82,8 @@ const Ettersending = ({ gjelder, setRerendrekvittering }: EttersendingProps) => 
                     headers: { 'Content-Type': 'application/json' },
                 }
             )
-        } catch (e) {
-            if (e instanceof FetchError) {
+        } catch (e: any) {
+            if (!(e instanceof AuthenticationError)) {
                 setFeilmeldingTekst(tekst('kvittering.ettersending.feilet'))
                 logger.error(e)
             }

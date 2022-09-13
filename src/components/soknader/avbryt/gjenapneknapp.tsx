@@ -6,7 +6,7 @@ import { useHistory, useParams } from 'react-router'
 import { RouteParams } from '../../../app'
 import { useAppStore } from '../../../data/stores/app-store'
 import { RSSoknadstatus } from '../../../types/rs-types/rs-soknadstatus'
-import fetchMedRequestId, { FetchError } from '../../../utils/fetch'
+import fetchMedRequestId, { AuthenticationError } from '../../../utils/fetch'
 import { useAmplitudeInstance } from '../../amplitude/amplitude'
 import styles from './gjenapneknapp.module.css'
 
@@ -50,7 +50,7 @@ const GjenapneSoknad = () => {
                 }
             )
         } catch (e: any) {
-            if (e instanceof FetchError) {
+            if (!(e instanceof AuthenticationError)) {
                 logger.error(e)
             }
             return

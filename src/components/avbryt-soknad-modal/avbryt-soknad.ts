@@ -5,7 +5,7 @@ import React from 'react'
 import { RSSoknadstatus } from '../../types/rs-types/rs-soknadstatus'
 import { RSSoknadstype } from '../../types/rs-types/rs-soknadstype'
 import { Soknad } from '../../types/types'
-import fetchMedRequestId, { FetchError } from '../../utils/fetch'
+import fetchMedRequestId, { AuthenticationError } from '../../utils/fetch'
 import { tekst } from '../../utils/tekster'
 import { urlTilSoknad } from '../soknad/soknad-link'
 
@@ -35,7 +35,7 @@ export async function avbrytSoknad({
             }
         )
     } catch (e: any) {
-        if (e instanceof FetchError) {
+        if (!(e instanceof AuthenticationError)) {
             setFeilmeldingTekst(tekst('avbryt.feilet'))
             logger.error(e)
         }
