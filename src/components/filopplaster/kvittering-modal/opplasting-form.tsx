@@ -1,4 +1,5 @@
 import { Alert, BodyLong, BodyShort, Button, Heading, Label } from '@navikt/ds-react'
+import { logger } from '@navikt/next-logger'
 import dayjs from 'dayjs'
 import parser from 'html-react-parser'
 import React, { useEffect, useState } from 'react'
@@ -12,7 +13,6 @@ import { RSSvar } from '../../../types/rs-types/rs-svar'
 import { Kvittering, Sporsmal, UtgiftTyper } from '../../../types/types'
 import { FetchError, fetchJsonMedRequestId } from '../../../utils/fetch'
 import { formaterFilstørrelse, formattertFiltyper, maxFilstørrelse } from '../../../utils/fil-utils'
-import { logger } from '../../../utils/logger'
 import { getLedetekst, tekst } from '../../../utils/tekster'
 import { Ekspanderbar } from '../../ekspanderbar/ekspanderbar'
 import Slettknapp from '../../slettknapp/slettknapp'
@@ -97,7 +97,7 @@ const OpplastingForm = ({ sporsmal }: SpmProps) => {
             )
         } catch (e: any) {
             if (e instanceof FetchError) {
-                logger.error(e.message)
+                logger.error(e)
             }
             return
         } finally {
@@ -129,7 +129,7 @@ const OpplastingForm = ({ sporsmal }: SpmProps) => {
         } catch (e: any) {
             if (e instanceof FetchError) {
                 setFeilmeldingTekst('Det skjedde en feil i baksystemene, prøv igjen senere.')
-                logger.error(e.message)
+                logger.error(e)
             }
             return
         } finally {

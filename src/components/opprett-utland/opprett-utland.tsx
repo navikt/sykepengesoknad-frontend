@@ -1,4 +1,5 @@
 import { Alert, Button, Heading } from '@navikt/ds-react'
+import { logger } from '@navikt/next-logger'
 import parser from 'html-react-parser'
 import React from 'react'
 import { useHistory } from 'react-router'
@@ -6,7 +7,6 @@ import { useHistory } from 'react-router'
 import { useAppStore } from '../../data/stores/app-store'
 import { Soknad } from '../../types/types'
 import { FetchError, fetchJsonMedRequestId } from '../../utils/fetch'
-import { logger } from '../../utils/logger'
 import { tekst } from '../../utils/tekster'
 import { urlTilSoknad } from '../soknad/soknad-link'
 import Bjorn from '../sporsmal/bjorn/bjorn'
@@ -31,7 +31,7 @@ const OpprettUtland = () => {
         } catch (e: any) {
             if (e instanceof FetchError) {
                 setFeilmeldingTekst(tekst('opprett-utland.feilet'))
-                logger.error(e.message)
+                logger.error(e)
             }
             return
         } finally {

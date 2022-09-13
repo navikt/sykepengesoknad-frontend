@@ -1,4 +1,5 @@
 import { BodyShort, Label } from '@navikt/ds-react'
+import { logger } from '@navikt/next-logger'
 import React, { useCallback, useEffect, useState } from 'react'
 import { useDropzone } from 'react-dropzone'
 import { useFormContext } from 'react-hook-form'
@@ -12,7 +13,6 @@ import {
     maxFilstørrelse,
     tillatteFiltyper,
 } from '../../../utils/fil-utils'
-import { logger } from '../../../utils/logger'
 import { getLedetekst, tekst } from '../../../utils/tekster'
 import Utvidbar from '../../utvidbar/utvidbar'
 import Vis from '../../vis'
@@ -46,7 +46,7 @@ const DragAndDrop = () => {
             setFormErDisabled(true)
             hentKvittering().catch((e) => {
                 if (e instanceof FetchError) {
-                    logger.error(e.message)
+                    logger.error(e)
                 }
                 return
             })

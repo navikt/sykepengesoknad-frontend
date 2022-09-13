@@ -1,4 +1,4 @@
-import { logger } from '../../utils/logger'
+import { logger } from '@navikt/next-logger'
 
 export const redirectTilLoginHvis401 = (response: Response) => {
     if (response.status == 401) {

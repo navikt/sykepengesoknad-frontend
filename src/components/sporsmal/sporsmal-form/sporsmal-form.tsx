@@ -1,3 +1,4 @@
+import { logger } from '@navikt/next-logger'
 import React, { useCallback, useEffect, useState } from 'react'
 import { FormProvider, useForm } from 'react-hook-form'
 import { useHistory, useParams } from 'react-router-dom'
@@ -14,7 +15,6 @@ import { RSSvartype } from '../../../types/rs-types/rs-svartype'
 import { Soknad, Sporsmal } from '../../../types/types'
 import { SEPARATOR } from '../../../utils/constants'
 import fetchMedRequestId, { FetchError, fetchJsonMedRequestId } from '../../../utils/fetch'
-import { logger } from '../../../utils/logger'
 import { useAmplitudeInstance } from '../../amplitude/amplitude'
 import FeilOppsummering from '../../feil/feil-oppsummering'
 import Opplysninger from '../../opplysninger-fra-sykmelding/opplysninger'
@@ -82,7 +82,7 @@ const SporsmalForm = () => {
         const sisteSide = erSiste()
         setErSiste(sisteSide)
         if (sisteSide) {
-            hentMottaker().catch((e: Error) => logger.error(e.message))
+            hentMottaker().catch((e: Error) => logger.error(e))
         }
         // eslint-disable-next-line
     }, [spmIndex])
@@ -111,7 +111,7 @@ const SporsmalForm = () => {
             )
         } catch (e: any) {
             if (e instanceof FetchError) {
-                logger.error(e.message)
+                logger.error(e)
             }
             return
         }
@@ -144,7 +144,7 @@ const SporsmalForm = () => {
             )
         } catch (e: any) {
             if (e instanceof FetchError) {
-                logger.error(e.message)
+                logger.error(e)
             }
             return
         }
@@ -179,7 +179,7 @@ const SporsmalForm = () => {
         } catch (e: any) {
             if (e instanceof FetchError) {
                 restFeilet = true
-                logger.error(e.message)
+                logger.error(e)
             }
             return
         }

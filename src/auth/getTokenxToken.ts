@@ -1,7 +1,6 @@
+import { logger } from '@navikt/next-logger'
 import getConfig from 'next/config'
 import { Client, errors, GrantBody, Issuer } from 'openid-client'
-
-import { logger } from '../utils/logger'
 
 const { serverRuntimeConfig } = getConfig()
 const OPError = errors.OPError

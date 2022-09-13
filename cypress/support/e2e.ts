@@ -41,7 +41,7 @@ afterEach(() => {
             // Sjekker ikke aria-labelledby på accordion (denne kan fjernes når vi oppgraderer til nyere versjon av ds)
             { id: 'aria-allowed-attr', enabled: true, selector: '*:not(.navds-accordion__item > div)' },
             // Opphold utland bruker periode komp uten h2 heading, sjekker alt annet
-            { id: 'heading-order', enabled: true, selector: '*:not(h3:contains("Når skal du reise?"))' },
+            { id: 'heading-order', enabled: true, selector: '*:not(h3:contains("Når skal du reise?"))' }
         ],
     })
     cy.checkA11y(undefined, undefined, terminalLog, false)
@@ -104,8 +104,11 @@ const lyttTilNettverksKall = (a: any) => {
                 break
             }
         }
-
-        expect(asLowerCase('x-request-id', headers)).to.be.a('string')
+        if (url.includes('/api/logger')) {
+            // Logger libben legger ikke på x-request id
+        } else {
+            expect(asLowerCase('x-request-id', headers)).to.be.a('string')
+        }
     }
 }
 

@@ -1,8 +1,8 @@
+import { logger } from '@navikt/next-logger'
 import { useEffect } from 'react'
 
 import { RSSoknadstype } from '../types/rs-types/rs-soknadstype'
 import { isIntegrationtest } from '../utils/environment'
-import { logger } from '../utils/logger'
 
 interface HotjarTriggerProps {
     jsTrigger: string | null

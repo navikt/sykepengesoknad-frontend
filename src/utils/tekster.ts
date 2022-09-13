@@ -1,3 +1,5 @@
+import { logger } from '@navikt/next-logger'
+
 import AvbrytSoknadModalTekster from '../components/avbryt-soknad-modal/avbryt-soknad-modal-tekster'
 import AvsluttOgFortsettSenereTekster from '../components/avslutt-og-fortsett-senere/avslutt-og-fortsett-senere-tekster'
 import BannerTekster from '../components/banner/banner-tekster'
@@ -27,7 +29,6 @@ import { EkspanderbarHjelpTekster } from '../components/sporsmal/ekspanderbar-hj
 import { EndringUtenEndringTekster } from '../components/sporsmal/endring-uten-endring/endring-uten-endring-tekster'
 import KnapperadTekster from '../components/sporsmal/sporsmal-form/knapperad-tekster'
 import SporsmalTekster from '../components/sporsmal/sporsmal-tekster'
-import { logger } from './logger'
 
 const tekster = {
     ...OpplysningerTekster,
@@ -65,8 +66,6 @@ export const tekst = (tekst: keyof typeof tekster): string => {
     const verdi = tekster[tekst]
     // Generiskfeilmelding har ingen tekst
     if (!verdi === undefined && !tekst.includes('soknad.feilmelding')) {
-        // eslint-disable-next-line no-console
-        console.log(`Mangler teksten [ ${tekst} ]`)
         logger.error(`Mangler teksten [ ${tekst} ]`)
         return undefined as any
     }

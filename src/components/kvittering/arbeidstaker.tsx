@@ -1,4 +1,5 @@
 import { Alert, Heading } from '@navikt/ds-react'
+import { logger } from '@navikt/next-logger'
 import dayjs from 'dayjs'
 import React, { useCallback, useEffect, useState } from 'react'
 
@@ -9,7 +10,6 @@ import { RSSoknadstype } from '../../types/rs-types/rs-soknadstype'
 import { Soknad } from '../../types/types'
 import { sendtForMerEnn30DagerSiden } from '../../utils/dato-utils'
 import { FetchError, fetchJsonMedRequestId } from '../../utils/fetch'
-import { logger } from '../../utils/logger'
 import { tekst } from '../../utils/tekster'
 import Vis from '../vis'
 import Inntil16dager from './innhold/arbeidstaker/inntil16dager'
@@ -85,7 +85,7 @@ const Arbeidstaker = () => {
             )
         } catch (e: any) {
             if (e instanceof FetchError) {
-                logger.error(e.message)
+                logger.error(e)
             }
             return
         }
@@ -137,7 +137,7 @@ const Arbeidstaker = () => {
     }, [])
 
     useEffect(() => {
-        settRiktigKvitteringTekst().catch((e: Error) => logger.error(e.message))
+        settRiktigKvitteringTekst().catch((e: Error) => logger.error(e))
     }, [settRiktigKvitteringTekst, valgtSoknad?.sendtTilNAVDato])
 
     if (!valgtSoknad) return null
