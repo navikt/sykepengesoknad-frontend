@@ -155,5 +155,4 @@ describe('Tester søknad om å beholde sykepenger utenfor EU/EØS/Storbritannia'
         cy.url().should('include', `kvittering/${soknad.id}`)
         cy.contains('Ferdig')
     })
-
 })
