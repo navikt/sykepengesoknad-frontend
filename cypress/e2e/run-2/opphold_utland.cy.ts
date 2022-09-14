@@ -8,7 +8,7 @@ describe('Tester søknad om å beholde sykepenger utenfor EU/EØS/Storbritannia'
         cy.visit('http://localhost:8080/syk/sykepengesoknad')
     })
 
-    it('Laster startside og velger søknad', function () {
+    it('Går til søknad som har påfølgende søknader som må fylles ut', function () {
         cy.get('.navds-heading--xlarge').should('be.visible').and('have.text', 'Søknader')
         cy.get(`#soknader-list-til-behandling article a[href*=${soknad.id}]`).should(
             'include.text',
@@ -128,7 +128,7 @@ describe('Tester søknad om å beholde sykepenger utenfor EU/EØS/Storbritannia'
         cy.contains('Send søknaden').click({ force: true })
     })
 
-    it('Viser kvittering', function () {
+    it('Viser kvittering med knapp til neste søknad', function () {
         cy.url().should('include', `kvittering/${soknad.id}`)
         // Hva skjer videre
         cy.get('.opplysninger.navds-alert--info')
@@ -140,4 +140,20 @@ describe('Tester søknad om å beholde sykepenger utenfor EU/EØS/Storbritannia'
 
         cy.contains('Gå til neste søknad')
     })
+
+    it('Sender inn søknad som ikke har påfølgende søknader', function () {
+        cy.visit(`http://localhost:8080/syk/sykepengesoknad/soknader/${soknad.id}/4?testperson=bare-utland`)
+
+        cy.url().should('include', `${soknad.id}/4`)
+        cy.contains('Jeg bekrefter de to punktene ovenfor').click({
+            force: true,
+        })
+        cy.contains('Send søknaden').click({ force: true })
+    })
+
+    it('Viser kvittering med Ferdig-knapp', function () {
+        cy.url().should('include', `kvittering/${soknad.id}`)
+        cy.contains('Ferdig')
+    })
+
 })
