@@ -83,6 +83,10 @@ const NavAutosuggest = (props: NavAutosuggestProps) => {
         setSuggestions([])
     }
 
+    const shouldRenderSuggestions = (value: string, reason: string) => {
+        return reason !== 'input-blurred'
+    }
+
     const onKeypress = (e: any) => {
         e.key === 'Enter' && e.preventDefault()
     }
@@ -94,6 +98,7 @@ const NavAutosuggest = (props: NavAutosuggestProps) => {
             onSuggestionSelected={onSuggestionSelected}
             getSuggestionValue={getSuggestionValue}
             renderSuggestion={renderSuggestion}
+            shouldRenderSuggestions={shouldRenderSuggestions}
             suggestions={suggestions}
             inputProps={{
                 id: props.sporsmalId,
