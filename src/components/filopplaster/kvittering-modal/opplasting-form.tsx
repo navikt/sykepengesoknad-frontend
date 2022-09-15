@@ -68,8 +68,6 @@ const OpplastingForm = ({ sporsmal }: SpmProps) => {
             valgtSoknad!.sporsmal[spmIndex] = new Sporsmal(rsOppdaterSporsmalResponse.oppdatertSporsmal, null, true)
             setValgtSoknad(valgtSoknad)
             setOpenModal(false)
-        } catch (ex) {
-            setFeilmeldingTekst('Det skjedde en feil i baksystemene, prøv igjen senere')
         } finally {
             setLaster(false)
         }
@@ -100,8 +98,6 @@ const OpplastingForm = ({ sporsmal }: SpmProps) => {
                 logger.error(e)
             }
             return
-        } finally {
-            setFeilmeldingTekst('')
         }
     }
 
@@ -132,8 +128,6 @@ const OpplastingForm = ({ sporsmal }: SpmProps) => {
                 logger.error(e)
             }
             return
-        } finally {
-            setFeilmeldingTekst('')
         }
     }
 

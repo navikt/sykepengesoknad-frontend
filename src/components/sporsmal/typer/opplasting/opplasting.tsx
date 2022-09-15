@@ -10,7 +10,7 @@ import OpplastingForm from '../../../filopplaster/kvittering-modal/opplasting-fo
 import { SpmProps } from '../../sporsmal-form/sporsmal-form'
 
 const Opplasting = ({ sporsmal }: SpmProps) => {
-    const { setValgtKvittering, openModal, setOpenModal } = useAppStore()
+    const { setValgtKvittering, openModal, setOpenModal, setFeilmeldingTekst } = useAppStore()
     const ikonRef = useRef<HTMLImageElement>(null)
 
     // eslint-disable-next-line
@@ -20,6 +20,7 @@ const Opplasting = ({ sporsmal }: SpmProps) => {
     const aktiverModal = () => {
         setOpenModal(true)
         setValgtKvittering(undefined)
+        setFeilmeldingTekst('')
     }
 
     const lukkModal = () => {
