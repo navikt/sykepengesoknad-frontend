@@ -56,10 +56,9 @@ const NavAutosuggest = (props: NavAutosuggestProps) => {
             return getQueryIndex(value, forslag) > 0
         })
 
-        const suggestions = [...eksakteForslag, ...delvisMatchForslag]
-            .filter((forslag) => {
-                return forslag.id !== 'NORGE'
-            })
+        const suggestions = [...eksakteForslag, ...delvisMatchForslag].filter((forslag) => {
+            return forslag.id !== 'NORGE'
+        })
         setSuggestions(suggestions)
     }
 
