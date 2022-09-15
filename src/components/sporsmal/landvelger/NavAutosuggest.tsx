@@ -60,7 +60,6 @@ const NavAutosuggest = (props: NavAutosuggestProps) => {
             .filter((forslag) => {
                 return forslag.id !== 'NORGE'
             })
-            .slice(0, 5)
         setSuggestions(suggestions)
     }
 
