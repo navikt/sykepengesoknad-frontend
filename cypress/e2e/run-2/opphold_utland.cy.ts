@@ -33,6 +33,11 @@ describe('Tester søknad om å beholde sykepenger utenfor EU/EØS/Storbritannia'
 
     it('Velger land', function () {
         cy.url().should('include', `${soknad.id}/2`)
+        cy.get('.skjemaelement__input').click({ force: true })
+        cy.contains('Afghanistan').click({ force: true })
+        cy.contains('Albania').should('not.exist')
+        cy.get('.etikett__slett').click({ force: true })
+
         cy.contains('Gå videre').click({ force: true })
         cy.contains('Du må velge ett land')
         cy.contains('Det er 1 feil i skjemaet')
