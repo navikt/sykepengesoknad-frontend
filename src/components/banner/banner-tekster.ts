@@ -1,5 +1,5 @@
 const BannerTekster = {
-    'sykepengesoknad-utland.tittel': 'Søknad om å beholde sykepenger utenfor EU/EØS/Storbritannia',
+    'sykepengesoknad-utland.tittel': 'Søknad om å beholde sykepenger utenfor EØS',
     'reisetilskuddsoknad.tittel': 'Søknad om reisetilskudd',
     'gradert-reisetilskuddsoknad.tittel': 'Søknad om sykepenger med reisetilskudd',
     'sykepengesoknad.sidetittel': 'Søknad om sykepenger',
