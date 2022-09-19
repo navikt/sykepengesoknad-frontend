@@ -77,7 +77,8 @@ export const avbruttSoknad: RSSoknad = {
         {
             id: '84',
             tag: 'ANSVARSERKLARING',
-            sporsmalstekst: 'Jeg bekrefter at jeg vil gi så riktige og fullstendige opplysninger som mulig.',
+            sporsmalstekst:
+                'Jeg vet at jeg kan miste retten til sykepenger hvis opplysningene jeg gir ikke er riktige eller fullstendige. Jeg vet også at NAV kan holde igjen eller kreve tilbake penger, og at å gi feil opplysninger kan være straffbart.',
             undertekst: null,
             svartype: 'CHECKBOX_PANEL',
             min: null,
@@ -668,7 +669,8 @@ export const arbeidstakersoknadMedUtenlandsoppholdSoktSykepenger: RSSoknad = {
         {
             id: '636',
             tag: 'ANSVARSERKLARING',
-            sporsmalstekst: 'Jeg bekrefter at jeg vil gi så riktige og fullstendige opplysninger som mulig.',
+            sporsmalstekst:
+                'Jeg vet at jeg kan miste retten til sykepenger hvis opplysningene jeg gir ikke er riktige eller fullstendige. Jeg vet også at NAV kan holde igjen eller kreve tilbake penger, og at å gi feil opplysninger kan være straffbart.',
             undertekst: null,
             svartype: 'CHECKBOX_PANEL',
             min: null,
@@ -751,7 +753,8 @@ export const sendtArbeidsledig: RSSoknad = {
         {
             id: '42',
             tag: 'ANSVARSERKLARING',
-            sporsmalstekst: 'Jeg bekrefter at jeg vil gi så riktige og fullstendige opplysninger som mulig.',
+            sporsmalstekst:
+                'Jeg vet at jeg kan miste retten til sykepenger hvis opplysningene jeg gir ikke er riktige eller fullstendige. Jeg vet også at NAV kan holde igjen eller kreve tilbake penger, og at å gi feil opplysninger kan være straffbart.',
             undertekst: null,
             svartype: 'CHECKBOX_PANEL',
             min: null,
@@ -1174,7 +1177,8 @@ export const veldigLangSoknad: RSSoknad = {
         {
             id: '687336',
             tag: 'ANSVARSERKLARING',
-            sporsmalstekst: 'Jeg bekrefter at jeg vil gi så riktige og fullstendige opplysninger som mulig.',
+            sporsmalstekst:
+                'Jeg vet at jeg kan miste retten til sykepenger hvis opplysningene jeg gir ikke er riktige eller fullstendige. Jeg vet også at NAV kan holde igjen eller kreve tilbake penger, og at å gi feil opplysninger kan være straffbart.',
             undertekst: null,
             svartype: 'CHECKBOX_PANEL',
             min: null,
@@ -2868,7 +2872,8 @@ export const arbeidsledigKvittering: RSSoknad = {
         {
             id: '127',
             tag: 'ANSVARSERKLARING',
-            sporsmalstekst: 'Jeg bekrefter at jeg vil gi så riktige og fullstendige opplysninger som mulig.',
+            sporsmalstekst:
+                'Jeg vet at jeg kan miste retten til sykepenger hvis opplysningene jeg gir ikke er riktige eller fullstendige. Jeg vet også at NAV kan holde igjen eller kreve tilbake penger, og at å gi feil opplysninger kan være straffbart.',
             undertekst: null,
             svartype: 'CHECKBOX_PANEL',
             min: null,
@@ -2938,7 +2943,8 @@ export const sendtArbeidsledigKvittering: RSSoknad = {
         {
             id: '93',
             tag: 'ANSVARSERKLARING',
-            sporsmalstekst: 'Jeg bekrefter at jeg vil gi så riktige og fullstendige opplysninger som mulig.',
+            sporsmalstekst:
+                'Jeg vet at jeg kan miste retten til sykepenger hvis opplysningene jeg gir ikke er riktige eller fullstendige. Jeg vet også at NAV kan holde igjen eller kreve tilbake penger, og at å gi feil opplysninger kan være straffbart.',
             undertekst: null,
             svartype: 'CHECKBOX_PANEL',
             min: null,
@@ -3393,7 +3399,8 @@ export const delvisUtfylltArbeidsledig: RSSoknad = {
         {
             id: '93',
             tag: 'ANSVARSERKLARING',
-            sporsmalstekst: 'Jeg bekrefter at jeg vil gi så riktige og fullstendige opplysninger som mulig.',
+            sporsmalstekst:
+                'Jeg vet at jeg kan miste retten til sykepenger hvis opplysningene jeg gir ikke er riktige eller fullstendige. Jeg vet også at NAV kan holde igjen eller kreve tilbake penger, og at å gi feil opplysninger kan være straffbart.',
             undertekst: null,
             svartype: 'CHECKBOX_PANEL',
             min: null,
@@ -3615,7 +3622,8 @@ export const selvstendigKvittering: RSSoknad = {
         {
             id: '161',
             tag: 'ANSVARSERKLARING',
-            sporsmalstekst: 'Jeg bekrefter at jeg vil gi så riktige og fullstendige opplysninger som mulig.',
+            sporsmalstekst:
+                'Jeg vet at jeg kan miste retten til sykepenger hvis opplysningene jeg gir ikke er riktige eller fullstendige. Jeg vet også at NAV kan holde igjen eller kreve tilbake penger, og at å gi feil opplysninger kan være straffbart.',
             undertekst: null,
             svartype: 'CHECKBOX_PANEL',
             min: null,
@@ -3702,7 +3710,8 @@ export const arbeidstakerInnenforArbeidsgiverperiodeKvittering: RSSoknad = {
         {
             id: '318',
             tag: 'ANSVARSERKLARING',
-            sporsmalstekst: 'Jeg bekrefter at jeg vil gi så riktige og fullstendige opplysninger som mulig.',
+            sporsmalstekst:
+                'Jeg vet at jeg kan miste retten til sykepenger hvis opplysningene jeg gir ikke er riktige eller fullstendige. Jeg vet også at NAV kan holde igjen eller kreve tilbake penger, og at å gi feil opplysninger kan være straffbart.',
             undertekst: null,
             svartype: 'CHECKBOX_PANEL',
             min: null,
@@ -3775,7 +3784,8 @@ export const arbeidstakerUtenforArbeidsgiverperiodeKvittering: RSSoknad = {
         {
             id: '318',
             tag: 'ANSVARSERKLARING',
-            sporsmalstekst: 'Jeg bekrefter at jeg vil gi så riktige og fullstendige opplysninger som mulig.',
+            sporsmalstekst:
+                'Jeg vet at jeg kan miste retten til sykepenger hvis opplysningene jeg gir ikke er riktige eller fullstendige. Jeg vet også at NAV kan holde igjen eller kreve tilbake penger, og at å gi feil opplysninger kan være straffbart.',
             undertekst: null,
             svartype: 'CHECKBOX_PANEL',
             min: null,
@@ -3848,7 +3858,8 @@ export const arbeidstakerDeltPeriodeForsteUtenforArbeidsgiverperiodeKvittering: 
         {
             id: '318',
             tag: 'ANSVARSERKLARING',
-            sporsmalstekst: 'Jeg bekrefter at jeg vil gi så riktige og fullstendige opplysninger som mulig.',
+            sporsmalstekst:
+                'Jeg vet at jeg kan miste retten til sykepenger hvis opplysningene jeg gir ikke er riktige eller fullstendige. Jeg vet også at NAV kan holde igjen eller kreve tilbake penger, og at å gi feil opplysninger kan være straffbart.',
             undertekst: null,
             svartype: 'CHECKBOX_PANEL',
             min: null,
@@ -3921,7 +3932,8 @@ export const arbeidstakerUtenOppholdForsteUtenforArbeidsgiverperiodeKvittering: 
         {
             id: '318',
             tag: 'ANSVARSERKLARING',
-            sporsmalstekst: 'Jeg bekrefter at jeg vil gi så riktige og fullstendige opplysninger som mulig.',
+            sporsmalstekst:
+                'Jeg vet at jeg kan miste retten til sykepenger hvis opplysningene jeg gir ikke er riktige eller fullstendige. Jeg vet også at NAV kan holde igjen eller kreve tilbake penger, og at å gi feil opplysninger kan være straffbart.',
             undertekst: null,
             svartype: 'CHECKBOX_PANEL',
             min: null,
@@ -3994,7 +4006,8 @@ export const arbeidstakerUtenOppholdKvittering: RSSoknad = {
         {
             id: '318',
             tag: 'ANSVARSERKLARING',
-            sporsmalstekst: 'Jeg bekrefter at jeg vil gi så riktige og fullstendige opplysninger som mulig.',
+            sporsmalstekst:
+                'Jeg vet at jeg kan miste retten til sykepenger hvis opplysningene jeg gir ikke er riktige eller fullstendige. Jeg vet også at NAV kan holde igjen eller kreve tilbake penger, og at å gi feil opplysninger kan være straffbart.',
             undertekst: null,
             svartype: 'CHECKBOX_PANEL',
             min: null,
@@ -4067,7 +4080,8 @@ export const sok6: RSSoknad = {
         {
             id: '318',
             tag: 'ANSVARSERKLARING',
-            sporsmalstekst: 'Jeg bekrefter at jeg vil gi så riktige og fullstendige opplysninger som mulig.',
+            sporsmalstekst:
+                'Jeg vet at jeg kan miste retten til sykepenger hvis opplysningene jeg gir ikke er riktige eller fullstendige. Jeg vet også at NAV kan holde igjen eller kreve tilbake penger, og at å gi feil opplysninger kan være straffbart.',
             undertekst: null,
             svartype: 'CHECKBOX_PANEL',
             min: null,
@@ -4140,7 +4154,8 @@ export const arbeidstakerMedOppholdForsteUtenforArbeidsgiverperiodeKvittering: R
         {
             id: '318',
             tag: 'ANSVARSERKLARING',
-            sporsmalstekst: 'Jeg bekrefter at jeg vil gi så riktige og fullstendige opplysninger som mulig.',
+            sporsmalstekst:
+                'Jeg vet at jeg kan miste retten til sykepenger hvis opplysningene jeg gir ikke er riktige eller fullstendige. Jeg vet også at NAV kan holde igjen eller kreve tilbake penger, og at å gi feil opplysninger kan være straffbart.',
             undertekst: null,
             svartype: 'CHECKBOX_PANEL',
             min: null,
@@ -4213,7 +4228,8 @@ export const arbeidstakerMedOppholdKvittering: RSSoknad = {
         {
             id: '318',
             tag: 'ANSVARSERKLARING',
-            sporsmalstekst: 'Jeg bekrefter at jeg vil gi så riktige og fullstendige opplysninger som mulig.',
+            sporsmalstekst:
+                'Jeg vet at jeg kan miste retten til sykepenger hvis opplysningene jeg gir ikke er riktige eller fullstendige. Jeg vet også at NAV kan holde igjen eller kreve tilbake penger, og at å gi feil opplysninger kan være straffbart.',
             undertekst: null,
             svartype: 'CHECKBOX_PANEL',
             min: null,

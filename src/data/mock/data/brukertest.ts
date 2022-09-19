@@ -157,7 +157,8 @@ export const brukertestSoknad: RSSoknad = {
         {
             id: '1623807',
             tag: 'ANSVARSERKLARING',
-            sporsmalstekst: 'Jeg bekrefter at jeg vil gi så riktige og fullstendige opplysninger som mulig.',
+            sporsmalstekst:
+                'Jeg vet at jeg kan miste retten til sykepenger hvis opplysningene jeg gir ikke er riktige eller fullstendige. Jeg vet også at NAV kan holde igjen eller kreve tilbake penger, og at å gi feil opplysninger kan være straffbart.',
             undertekst: null,
             svartype: 'CHECKBOX_PANEL',
             min: null,

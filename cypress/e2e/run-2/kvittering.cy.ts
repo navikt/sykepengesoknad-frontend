@@ -21,7 +21,9 @@ describe('Tester kvittering', () => {
             cy.get(`#soknader-list-til-behandling article a[href*=${arbeidsledigKvittering.id}]`).click()
 
             // Svar og send
-            cy.contains('Jeg bekrefter at jeg vil gi så riktige og fullstendige opplysninger som mulig.').click({
+            cy.contains(
+                'Jeg vet at jeg kan miste retten til sykepenger hvis opplysningene jeg gir ikke er riktige eller fullstendige. Jeg vet også at NAV kan holde igjen eller kreve tilbake penger, og at å gi feil opplysninger kan være straffbart.'
+            ).click({
                 force: true,
             })
             cy.contains('Gå videre').click()
@@ -174,7 +176,9 @@ describe('Tester kvittering', () => {
             cy.get(`#soknader-list-til-behandling article a[href*=${selvstendigKvittering.id}]`).click()
 
             // Svar og send
-            cy.contains('Jeg bekrefter at jeg vil gi så riktige og fullstendige opplysninger som mulig.').click({
+            cy.contains(
+                'Jeg vet at jeg kan miste retten til sykepenger hvis opplysningene jeg gir ikke er riktige eller fullstendige. Jeg vet også at NAV kan holde igjen eller kreve tilbake penger, og at å gi feil opplysninger kan være straffbart.'
+            ).click({
                 force: true,
             })
             cy.contains('Gå videre').click()
@@ -379,7 +383,9 @@ describe('Tester kvittering', () => {
 })
 
 const besvarSoknad = () => {
-    cy.contains('Jeg bekrefter at jeg vil gi så riktige og fullstendige opplysninger som mulig.').click({ force: true })
+    cy.contains(
+        'Jeg vet at jeg kan miste retten til sykepenger hvis opplysningene jeg gir ikke er riktige eller fullstendige. Jeg vet også at NAV kan holde igjen eller kreve tilbake penger, og at å gi feil opplysninger kan være straffbart.'
+    ).click({ force: true })
     cy.contains('Gå videre').click({ force: true })
     cy.get('.navds-checkbox__label').click({ force: true })
     cy.contains('Send søknaden').click({ force: true })
