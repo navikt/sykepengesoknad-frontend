@@ -2,9 +2,9 @@ import { RSSoknad } from '../../types/rs-types/rs-soknad'
 import { Sykmelding } from '../../types/sykmelding'
 import { jsonDeepCopy } from '../../utils/json-deep-copy'
 import { soknaderReisetilskudd } from './data/reisetilskudd'
-import { brukertestSoknad, soknaderIntegration } from './data/soknader-integration'
+import { soknaderIntegration } from './data/soknader-integration'
 import { arbeidstaker, oppholdUtland, soknaderOpplaering } from './data/soknader-opplaering'
-import { arbeidstaker100Syk, brukertestSykmelding, sykmeldinger } from './data/sykmeldinger'
+import { arbeidstaker100Syk, sykmeldinger } from './data/sykmeldinger'
 
 export interface Persona {
     soknader: RSSoknad[]
@@ -66,12 +66,5 @@ export const bareUtland = () => {
     return {
         soknader: [oppholdUtland],
         sykmeldinger: [arbeidstaker100Syk],
-    } as Persona
-}
-
-export const brukertest = () => {
-    return {
-        soknader: [brukertestSoknad],
-        sykmeldinger: [brukertestSykmelding],
     } as Persona
 }

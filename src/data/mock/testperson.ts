@@ -1,8 +1,8 @@
+import { brukertest } from './data/brukertest'
 import { eldreUsendtSoknad, flereEldreUsendteSoknader } from './data/eldre-usendt-soknad'
 import {
     alleData,
     bareUtland,
-    brukertest,
     enUsendtSykmelding,
     opplaering,
     Persona,
