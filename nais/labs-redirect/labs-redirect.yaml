@@ -1,0 +1,25 @@
+# Manuelt applyet for å håndtere gammel ingress i labs
+
+apiVersion: networking.k8s.io/v1
+kind: 'Ingress'
+metadata:
+  annotations:
+    nginx.ingress.kubernetes.io/permanent-redirect: https://ditt-sykefravaer.labs.nais.io
+  labels:
+    app: ditt-sykefravaer
+    team: flex
+  name: sykefravaer-labs-redirect
+  namespace: flex
+spec:
+  ingressClassName: gw-labs-nais-io
+  rules:
+    - host: sykefravaer.labs.nais.io
+      http:
+        paths:
+          - backend:
+              service:
+                name: ditt-sykefravaer
+                port:
+                  number: 80
+            path: /
+            pathType: ImplementationSpecific
