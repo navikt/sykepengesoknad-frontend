@@ -281,8 +281,7 @@ export const brukertestSoknad: RSSoknad = {
         {
             id: '1623814',
             tag: 'UTLAND_V2',
-            sporsmalstekst:
-                'Var du på reise utenfor EU/EØS/Storbritannia mens du var sykmeldt 8. - 21. september 2022?',
+            sporsmalstekst: 'Var du på reise utenfor EØS mens du var sykmeldt 8. - 21. september 2022?',
             undertekst: null,
             svartype: 'JA_NEI',
             min: null,
@@ -294,7 +293,7 @@ export const brukertestSoknad: RSSoknad = {
                 {
                     id: '1623815',
                     tag: 'UTLAND_NAR_V2',
-                    sporsmalstekst: 'Når var du utenfor EU/EØS/Storbritannia?',
+                    sporsmalstekst: 'Når var du utenfor EØS?',
                     undertekst: null,
                     svartype: 'PERIODER',
                     min: '2022-09-08',

@@ -257,7 +257,7 @@ export const avbruttSoknad: RSSoknad = {
         {
             id: '101',
             tag: 'UTLAND_V2',
-            sporsmalstekst: 'Var du på reise utenfor EU/EØS/Storbritannia mens du var sykmeldt 20. mai - 5. juni 2020?',
+            sporsmalstekst: 'Var du på reise utenfor EØS mens du var sykmeldt 20. mai - 5. juni 2020?',
             undertekst: null,
             svartype: 'JA_NEI',
             min: null,
@@ -269,7 +269,7 @@ export const avbruttSoknad: RSSoknad = {
                 {
                     id: '102',
                     tag: 'UTLAND_NAR_V2',
-                    sporsmalstekst: 'Når var du utenfor EU/EØS/Storbritannia?',
+                    sporsmalstekst: 'Når var du utenfor EØS?',
                     undertekst: null,
                     svartype: 'PERIODER',
                     min: '2020-05-20',
@@ -681,7 +681,7 @@ export const arbeidstakersoknadMedUtenlandsoppholdSoktSykepenger: RSSoknad = {
         {
             id: '655',
             tag: 'UTLANDSOPPHOLD_SOKT_SYKEPENGER',
-            sporsmalstekst: 'Har du søkt om å beholde sykepengene for de dagene du var utenfor EU/EØS/Storbritannia?',
+            sporsmalstekst: 'Har du søkt om å beholde sykepengene for de dagene du var utenfor EØS?',
             undertekst: null,
             svartype: 'JA_NEI',
             min: null,
@@ -1061,8 +1061,7 @@ export const sendtArbeidsledig: RSSoknad = {
         {
             id: '69',
             tag: 'ARBEIDSLEDIG_UTLAND',
-            sporsmalstekst:
-                'Var du på reise utenfor EU/EØS/Storbritannia mens du var sykmeldt 27. mai - 11. juni 2020?',
+            sporsmalstekst: 'Var du på reise utenfor EØS mens du var sykmeldt 27. mai - 11. juni 2020?',
             undertekst: null,
             svartype: 'JA_NEI',
             min: null,
@@ -1074,7 +1073,7 @@ export const sendtArbeidsledig: RSSoknad = {
                 {
                     id: '70',
                     tag: 'UTLAND_NAR',
-                    sporsmalstekst: 'Når var du utenfor EU/EØS/Storbritannia?',
+                    sporsmalstekst: 'Når var du utenfor EØS?',
                     undertekst: null,
                     svartype: 'PERIODER',
                     min: '2020-05-27',
@@ -1701,7 +1700,7 @@ export const veldigLangSoknad: RSSoknad = {
         {
             id: '687422',
             tag: 'ARBEIDSLEDIG_UTLAND',
-            sporsmalstekst: 'Var du på reise utenfor EU/EØS/Storbritannia mens du var sykmeldt 1. - 24. april 2020?',
+            sporsmalstekst: 'Var du på reise utenfor EØS mens du var sykmeldt 1. - 24. april 2020?',
             undertekst: null,
             svartype: 'JA_NEI',
             min: null,
@@ -1713,7 +1712,7 @@ export const veldigLangSoknad: RSSoknad = {
                 {
                     id: '687423',
                     tag: 'UTLAND_NAR',
-                    sporsmalstekst: 'Når var du utenfor EU/EØS/Storbritannia?',
+                    sporsmalstekst: 'Når var du utenfor EØS?',
                     undertekst: null,
                     svartype: 'PERIODER',
                     min: '2020-04-01',
@@ -1740,7 +1739,7 @@ export const veldigLangSoknad: RSSoknad = {
                             tag: 'IKKE_SOKT_UTENLANDSOPPHOLD_INFORMASJON',
                             sporsmalstekst: null,
                             undertekst:
-                                "<p>DENNE SKAL IKKE VISES  I! utgangspunktet kan du bare få sykepenger mens du er i et land innenfor EU/EØS/Storbritannia. Du kan likevel <a target='_blank' href='https://tjenester.nav.no/sykefravaer/sykepengesoknad-utland'>søke NAV om å få reise ut av EU/EØS/Storbritannia</a> og beholde sykepengene i en begrenset periode.</p>",
+                                "<p>DENNE SKAL IKKE VISES  I! utgangspunktet kan du bare få sykepenger mens du er i et land innenfor EØS. Du kan likevel <a target='_blank' href='https://tjenester.nav.no/sykefravaer/sykepengesoknad-utland'>søke NAV om å få reise ut av EØS</a> og beholde sykepengene i en begrenset periode.</p>",
                             svartype: 'IKKE_RELEVANT',
                             min: null,
                             max: null,
@@ -1964,7 +1963,7 @@ export const veldigLangSoknad: RSSoknad = {
             id: '4935',
             tag: 'FERIE_PERMISJON_UTLAND',
             sporsmalstekst:
-                'Har du hatt ferie, permisjon eller vært utenfor EU/EØS/Storbritannia mens du var sykmeldt 1. - 24. april 2020?',
+                'Har du hatt ferie, permisjon eller vært utenfor EØS mens du var sykmeldt 1. - 24. april 2020?',
             undertekst: null,
             svartype: 'JA_NEI',
             min: null,
@@ -2042,7 +2041,7 @@ export const veldigLangSoknad: RSSoknad = {
                         {
                             id: '5537',
                             tag: 'UTLAND',
-                            sporsmalstekst: 'Jeg var utenfor EU/EØS/Storbritannia',
+                            sporsmalstekst: 'Jeg var utenfor EØS',
                             undertekst: null,
                             svartype: 'CHECKBOX',
                             min: null,
@@ -2555,7 +2554,7 @@ export const veldigLangSoknad: RSSoknad = {
         {
             id: '423',
             tag: 'UTLAND',
-            sporsmalstekst: 'Har du vært utenfor EU/EØS/Storbritannia mens du var sykmeldt 1. - 24. april 2020?',
+            sporsmalstekst: 'Har du vært utenfor EØS mens du var sykmeldt 1. - 24. april 2020?',
             undertekst: null,
             svartype: 'JA_NEI',
             min: null,
@@ -2567,7 +2566,7 @@ export const veldigLangSoknad: RSSoknad = {
                 {
                     id: '424',
                     tag: 'PERIODER',
-                    sporsmalstekst: 'Når var du utenfor EU/EØS/Storbritannia?',
+                    sporsmalstekst: 'Når var du utenfor EØS?',
                     undertekst: null,
                     svartype: 'PERIODER',
                     min: '2020-04-01',
@@ -2593,7 +2592,7 @@ export const veldigLangSoknad: RSSoknad = {
                             id: '426',
                             tag: 'IKKE_SOKT_UTENLANDSOPPHOLD_INFORMASJON',
                             sporsmalstekst:
-                                '<p>I utgangspunktet kan du bare få sykepenger mens du er i et land innenfor EU/EØS/Storbritannia. Du kan likevel <a target="_blank" href="https://tjenester.nav.no/sykefravaer/sykepengesoknad-utland">søke NAV om å få reise ut av EU/EØS/Storbritannia</a> og beholde sykepengene i en begrenset periode.</p>',
+                                '<p>I utgangspunktet kan du bare få sykepenger mens du er i et land innenfor EØS. Du kan likevel <a target="_blank" href="https://tjenester.nav.no/sykefravaer/sykepengesoknad-utland">søke NAV om å få reise ut av EØS</a> og beholde sykepengene i en begrenset periode.</p>',
                             undertekst: null,
                             svartype: 'IKKE_RELEVANT',
                             min: null,
@@ -2610,7 +2609,7 @@ export const veldigLangSoknad: RSSoknad = {
         {
             id: '687347',
             tag: 'UTLAND_V2',
-            sporsmalstekst: 'Var du på reise utenfor EU/EØS/Storbritannia mens du var sykmeldt 1. - 24. april 2020?',
+            sporsmalstekst: 'Var du på reise utenfor EØS mens du var sykmeldt 1. - 24. april 2020?',
             undertekst: null,
             svartype: 'JA_NEI',
             min: null,
@@ -2622,7 +2621,7 @@ export const veldigLangSoknad: RSSoknad = {
                 {
                     id: '687348',
                     tag: 'UTLAND_NAR_V2',
-                    sporsmalstekst: 'Når var du utenfor EU/EØS/Storbritannia?',
+                    sporsmalstekst: 'Når var du utenfor EØS?',
                     undertekst: null,
                     svartype: 'PERIODER',
                     min: '2020-04-01',
@@ -3269,7 +3268,7 @@ export const sendtArbeidsledigKvittering: RSSoknad = {
         {
             id: '120',
             tag: 'ARBEIDSLEDIG_UTLAND',
-            sporsmalstekst: 'Var du på reise utenfor EU/EØS/Storbritannia mens du var sykmeldt 1. - 10. januar 2020?',
+            sporsmalstekst: 'Var du på reise utenfor EØS mens du var sykmeldt 1. - 10. januar 2020?',
             undertekst: null,
             svartype: 'JA_NEI',
             min: null,
@@ -3286,7 +3285,7 @@ export const sendtArbeidsledigKvittering: RSSoknad = {
                 {
                     id: '121',
                     tag: 'UTLAND_NAR',
-                    sporsmalstekst: 'Når var du utenfor EU/EØS/Storbritannia?',
+                    sporsmalstekst: 'Når var du utenfor EØS?',
                     undertekst: null,
                     svartype: 'PERIODER',
                     min: '2020-01-01',

@@ -92,11 +92,11 @@ describe('Tester arbeidsledigsøknad', () => {
         cy.url().should('include', `${soknad.id}/5`)
 
         // Test spørsmål
-        cy.contains('Var du på reise utenfor EU/EØS/Storbritannia mens du var sykmeldt 1. - 24. april 2020?')
+        cy.contains('Var du på reise utenfor EØS mens du var sykmeldt 1. - 24. april 2020?')
         cy.get('.inputPanelGruppe__inner label:first-child > input[value=JA]').click({ force: true })
 
         // Underspørsmål 1
-        cy.contains('Når var du utenfor EU/EØS/Storbritannia?')
+        cy.contains('Når var du utenfor EØS?')
         cy.get('#687423_0 .fom .ds-datepicker__calendarButton').click()
         cy.get('.DayPicker-Day').contains('17').click()
         cy.get('#687423_0 .tom .ds-datepicker__calendarButton').click({
