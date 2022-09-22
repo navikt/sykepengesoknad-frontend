@@ -108,7 +108,7 @@ const DragAndDrop = () => {
                 render={() => (
                     <>
                         <div className="filopplasteren" {...getRootProps()}>
-                            <input {...getInputProps()} id="ddfil" />
+                            <input {...getInputProps()} accept={tillatteFiltyper} id="ddfil" />
                             <input
                                 type="hidden"
                                 id="fil_input"
@@ -121,7 +121,7 @@ const DragAndDrop = () => {
                                             }
                                         },
                                         fil_type: () => {
-                                            if (valgtFil && !tillatteFiltyper.includes(valgtFil.type)) {
+                                            if (valgtFil && !tillatteFiltyper.split(',').includes(valgtFil.type)) {
                                                 settInputHarFeil()
                                                 return getLedetekst(tekst('drag_and_drop.filtype'), {
                                                     '%FILNAVN%': valgtFil.name,
