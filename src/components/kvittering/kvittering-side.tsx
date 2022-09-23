@@ -17,7 +17,9 @@ import Brodsmuler from '../brodsmuler/brodsmuler'
 import Ettersending from '../ettersending/ettersending'
 import { GjenstaendeSoknader, hentGjenstaendeSoknader } from '../gjenstaende-soknader/gjenstaende-soknader'
 import { hentHotjarJsTrigger, HotjarTrigger } from '../hotjar-trigger'
+import { UxSignalsWidget } from '../ux-signals/UxSignalsWidget'
 import Vis from '../vis'
+import { harSvartJaPåAndreInntektskilder } from './harSvartJaAndreInntektskilder'
 import Kvittering from './kvittering'
 
 const brodsmuler: Brodsmule[] = [
@@ -79,6 +81,7 @@ const KvitteringSide = () => {
             <div className="limit kvittering-side">
                 <HotjarTrigger jsTrigger={hentHotjarJsTrigger(valgtSoknad.soknadstype, 'kvittering')}>
                     <Kvittering />
+
                     <GjenstaendeSoknader soknader={gjenstaendeSoknader} />
 
                     <div className="knapperad">
@@ -99,7 +102,10 @@ const KvitteringSide = () => {
                                 </Button>
                             )}
                         ></Vis>
-
+                        <Vis
+                            hvis={harSvartJaPåAndreInntektskilder(valgtSoknad) && gjenstaendeSoknader.length == 0}
+                            render={() => <UxSignalsWidget study={'study-xaur1kqpdz'} />}
+                        />
                         <Vis
                             hvis={skalViseEndreEllerEttersend}
                             render={() => (
