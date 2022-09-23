@@ -16,7 +16,7 @@
     "classnames": "^2.3.1",
     "constate": "^3.3.0",
     "cookie": "^0.5.0",
-    "dayjs": "^1.10.6",
+    "dayjs": "^1.11.5",
     "html-react-parser": "^1.2.7",
     "jose": "^4.9.2",
     "next-compose-plugins": "^2.2.1",
@@ -37,7 +37,7 @@
     "react-transition-group": "^4.4.2",
     "smoothscroll-polyfill": "^0.4.4",
     "use-force-update": "^1.0.7",
-    "uuid": "^8.3.2"
+    "uuid": "^9.0.0"
   },
   "devDependencies": {
     "@cypress/webpack-preprocessor": "^5.11.1",
