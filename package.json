@@ -24,7 +24,7 @@
     "openid-client": "^5.1.8",
     "pino": "^8.5.0",
     "pino-pretty": "^9.1.0",
-    "prom-client": "^14.0.1",
+    "prom-client": "^14.1.0",
     "react": "^17.0.2",
     "react-autosuggest": "^10.1.0",
     "react-day-picker": "^7.4.10",
