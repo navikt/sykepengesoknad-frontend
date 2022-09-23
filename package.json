@@ -37,7 +37,7 @@
     "react-transition-group": "^4.4.2",
     "smoothscroll-polyfill": "^0.4.4",
     "use-force-update": "^1.0.7",
-    "uuid": "^8.3.2"
+    "uuid": "^9.0.0"
   },
   "devDependencies": {
     "@cypress/webpack-preprocessor": "^5.11.1",
