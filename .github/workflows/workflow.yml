@@ -2,12 +2,12 @@ name: workflow
 on: push
 
 jobs:
-    felles-workflow:
-        uses: navikt/flex-github-actions-workflows/.github/workflows/next-js.yml@master
-        secrets: inherit
-        with:
-            app: sykepengesoknad
-            static-files-path: sykepengesoknad
-            base-path: syk/sykepengesoknad
-            labs-ingress: sykepengesoknad
-            sentry-project: sykepengesoknad
+  felles-workflow:
+    uses: navikt/flex-github-actions-workflows/.github/workflows/next-js.yml@master
+    secrets: inherit
+    with:
+      app: sykepengesoknad
+      static-files-path: sykepengesoknad
+      base-path: syk/sykepengesoknad
+      labs-ingress: sykepengesoknad
+      sentry-project: sykepengesoknad

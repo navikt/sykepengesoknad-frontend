@@ -2,6 +2,6 @@ name: Labs delete
 on: delete
 
 jobs:
-    branch-delete:
-        uses: navikt/flex-github-actions-workflows/.github/workflows/labs-delete.yml@master
-        secrets: inherit
+  branch-delete:
+    uses: navikt/flex-github-actions-workflows/.github/workflows/labs-delete.yml@master
+    secrets: inherit
