@@ -13,6 +13,7 @@ const csp = {
         'https://ta-survey-v2.herokuapp.com',
         'https://*.hotjar.com',
         'https://*.hotjar.io',
+        'https://*.uxsignals.com',
         'wss://*.hotjar.com',
     ],
     'img-src': [
@@ -23,7 +24,7 @@ const csp = {
         'https://www.google-analytics.com',
         'https://*.hotjar.com',
     ],
-    'font-src': ["'self'", 'data:', 'https://*.psplugin.com', 'https://*.hotjar.com'],
+    'font-src': ["'self'", 'data:', 'https://*.psplugin.com', 'https://*.hotjar.com', 'https://fonts.gstatic.com'],
     'frame-src': ["'self'", 'data:', 'https://*.hotjar.com'],
     'worker-src': ['blob:', '*.nais.io'],
     'style-src': ["'self'", "'unsafe-inline'", 'https://*.nav.no', 'https://*.hotjar.com'],
@@ -37,6 +38,7 @@ const csp = {
         'https://*.hotjar.com',
         'https://in2.taskanalytics.com',
         'https://account.psplugin.com',
+        'https://uxsignals-frontend.uxsignals.app.iterate.no',
     ],
 }
 
