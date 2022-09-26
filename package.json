@@ -12,7 +12,7 @@
     "@navikt/next-logger": "^1.11.0",
     "@sentry/nextjs": "^7.13.0",
     "@types/smoothscroll-polyfill": "^0.3.1",
-    "amplitude-js": "^8.4.0",
+    "amplitude-js": "^8.21.1",
     "classnames": "^2.3.2",
     "constate": "^3.3.0",
     "cookie": "^0.5.0",
@@ -41,7 +41,7 @@
   },
   "devDependencies": {
     "@cypress/webpack-preprocessor": "^5.12.2",
-    "@types/amplitude-js": "~8.0.1",
+    "@types/amplitude-js": "~8.16.2",
     "@types/classnames": "^2.3.0",
     "@types/cookie": "^0.5.1",
     "@types/jest": "^26.0.24",
