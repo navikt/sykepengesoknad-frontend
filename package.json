@@ -17,7 +17,7 @@
     "constate": "^3.3.0",
     "cookie": "^0.5.0",
     "dayjs": "^1.11.5",
-    "html-react-parser": "^1.2.7",
+    "html-react-parser": "^3.0.4",
     "jose": "^4.9.3",
     "next-compose-plugins": "^2.2.1",
     "next-logger": "^3.0.1",
