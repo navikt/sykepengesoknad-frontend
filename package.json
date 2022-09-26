@@ -40,7 +40,7 @@
     "uuid": "^9.0.0"
   },
   "devDependencies": {
-    "@cypress/webpack-preprocessor": "^5.11.1",
+    "@cypress/webpack-preprocessor": "^5.12.2",
     "@types/amplitude-js": "~8.0.1",
     "@types/classnames": "^2.3.0",
     "@types/cookie": "^0.5.1",
