@@ -1,7 +1,6 @@
 /* eslint-disable @typescript-eslint/no-var-requires */
 const withLess = require('next-with-less')
 const { withSentryConfig } = require('@sentry/nextjs')
-const withPlugins = require('next-compose-plugins')
 
 const csp = {
     'default-src': ["'none'"],
@@ -53,69 +52,68 @@ const cspHeader = [
     },
 ]
 
-module.exports = withPlugins(
-    [
-        [withLess],
-        [
-            (nextConfig) =>
-                process.env.ENABLE_SENTRY
-                    ? withSentryConfig(nextConfig, {
-                          silent: true,
-                      })
-                    : nextConfig,
-        ],
-    ],
-    {
-        async headers() {
-            return [
-                {
-                    source: '/:path*',
-                    headers: cspHeader,
-                },
-                {
-                    source: '/api/:path*',
-                    headers: [
-                        {
-                            key: 'Cache-Control',
-                            value: 'private, no-cache, no-store, max-age=0, must-revalidate',
-                        },
-                    ],
-                },
-            ]
-        },
-        basePath: '/syk/sykepengesoknad',
-        lessLoaderOptions: {},
-        pageExtensions: ['page.tsx', 'api.ts'],
-        assetPrefix: process.env.ASSET_PREFIX || '',
-        generateEtags: false, //Disabler etag i pages
-        serverRuntimeConfig: {
-            // Will only be available on the server side
-            decoratorEnv: process.env.DECORATOR_ENV,
-            noDecorator: process.env.NO_DECORATOR,
-            loginServiceUrl: process.env.LOGINSERVICE_URL,
-            loginServiceRedirectUrl: process.env.LOGINSERVICE_REDIRECT_URL,
-            loginserviceIdportenDiscoveryUrl: process.env.LOGINSERVICE_IDPORTEN_DISCOVERY_URL,
-            loginserviceIdportenAudience: process.env.LOGINSERVICE_IDPORTEN_AUDIENCE,
-            tokenXWellKnownUrl: process.env.TOKEN_X_WELL_KNOWN_URL,
-            tokenXPrivateJwk: process.env.TOKEN_X_PRIVATE_JWK,
-            tokenXClientId: process.env.TOKEN_X_CLIENT_ID,
-            idportenClientId: process.env.IDPORTEN_CLIENT_ID,
-            idportenWellKnownUrl: process.env.IDPORTEN_WELL_KNOWN_URL,
-            sykmeldingerBackendClientId: process.env.SYKMELDINGER_BACKEND_CLIENT_ID,
-            sykepengesoknadBackendClientId: process.env.SYKEPENGESOKNAD_BACKEND_CLIENT_ID,
-            flexBucketUploaderClientId: process.env.FLEX_BUCKET_UPLOADER_CLIENT_ID,
-        },
-        publicRuntimeConfig: {
-            // Will be available on both server and client
-            mockBackend: process.env.MOCK_BACKEND,
-            opplaering: process.env.OPPLAERING,
-            sykefravaerUrl: process.env.SYKEFRAVAER_URL,
-            sykmeldingerUrl: process.env.SYKMELDINGER_URL,
-            minSideUrl: process.env.MINSIDE_URL,
-            env: process.env.ENVIRONMENT,
-            amplitudeEnabled: process.env.AMPLITUDE_ENABLED,
-            environment: process.env.ENVIRONMENT,
-            vedlikehold: process.env.VEDLIKEHOLD,
-        },
-    }
-)
+/**
+ * @type {import("next").NextConfig}
+ */
+const nextConfig = {
+    async headers() {
+        return [
+            {
+                source: '/:path*',
+                headers: cspHeader,
+            },
+            {
+                source: '/api/:path*',
+                headers: [
+                    {
+                        key: 'Cache-Control',
+                        value: 'private, no-cache, no-store, max-age=0, must-revalidate',
+                    },
+                ],
+            },
+        ]
+    },
+    basePath: '/syk/sykepengesoknad',
+    lessLoaderOptions: {},
+    pageExtensions: ['page.tsx', 'api.ts'],
+    assetPrefix: process.env.ASSET_PREFIX || undefined,
+    generateEtags: false, //Disabler etag i pages
+    serverRuntimeConfig: {
+        // Will only be available on the server side
+        decoratorEnv: process.env.DECORATOR_ENV,
+        noDecorator: process.env.NO_DECORATOR,
+        loginServiceUrl: process.env.LOGINSERVICE_URL,
+        loginServiceRedirectUrl: process.env.LOGINSERVICE_REDIRECT_URL,
+        loginserviceIdportenDiscoveryUrl: process.env.LOGINSERVICE_IDPORTEN_DISCOVERY_URL,
+        loginserviceIdportenAudience: process.env.LOGINSERVICE_IDPORTEN_AUDIENCE,
+        tokenXWellKnownUrl: process.env.TOKEN_X_WELL_KNOWN_URL,
+        tokenXPrivateJwk: process.env.TOKEN_X_PRIVATE_JWK,
+        tokenXClientId: process.env.TOKEN_X_CLIENT_ID,
+        idportenClientId: process.env.IDPORTEN_CLIENT_ID,
+        idportenWellKnownUrl: process.env.IDPORTEN_WELL_KNOWN_URL,
+        sykmeldingerBackendClientId: process.env.SYKMELDINGER_BACKEND_CLIENT_ID,
+        sykepengesoknadBackendClientId: process.env.SYKEPENGESOKNAD_BACKEND_CLIENT_ID,
+        flexBucketUploaderClientId: process.env.FLEX_BUCKET_UPLOADER_CLIENT_ID,
+    },
+    publicRuntimeConfig: {
+        // Will be available on both server and client
+        mockBackend: process.env.MOCK_BACKEND,
+        opplaering: process.env.OPPLAERING,
+        sykefravaerUrl: process.env.SYKEFRAVAER_URL,
+        sykmeldingerUrl: process.env.SYKMELDINGER_URL,
+        minSideUrl: process.env.MINSIDE_URL,
+        env: process.env.ENVIRONMENT,
+        amplitudeEnabled: process.env.AMPLITUDE_ENABLED,
+        environment: process.env.ENVIRONMENT,
+        vedlikehold: process.env.VEDLIKEHOLD,
+    },
+}
+
+const withSentry = (nextConfig) =>
+    process.env.ENABLE_SENTRY
+        ? withSentryConfig(nextConfig, {
+              silent: true,
+          })
+        : nextConfig
+
+module.exports = withLess(withSentry(nextConfig))
