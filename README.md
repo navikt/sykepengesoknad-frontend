@@ -10,6 +10,39 @@ I din `.bashrc` eller `.zshrc`, sett følgende miljøvariabel:
 
 `export NPM_AUTH_TOKEN=<din PAT med read:packages>`
 
+## Dette logges i Amplitude
+
+
+| brukers handling/logg                                      | skjemanavn | søknadstype | søknadsstatus | spøsmålstag | tekst | svar (hoved) | komponentnavn |
+|------------------------------------------------------------|:----------:|:-----------:|:-------------:|:-----------:|:-----:|:------------:|:-------------:|
+| Åpne skjema                                                |     x      |      x      |       x       |             |       |              |               |
+| Fullføre skjema                                            |     x      |      x      |               |             |       |              |               |
+| Svare på spørsmål                                          |     x      |      x      |               |      x      |       |      x       |               |
+| Åpne/lukke "Om sykepenger"                                 |            |             |               |             |   x   |              |       x       |
+| Åpne/lukke "For Arbeidstakere"                             |            |             |               |             |   x   |              |       x       |
+| Åpne/lukke "For selvstendig næringsdrivende og frilansere" |            |             |               |             |   x   |              |       x       |
+| Åpne/lukke "Opplysninger fra sykmeldingen"                 |            |             |               |      x      |       |              |       x       |
+| Åpne/lukke "Oppsummering fra søknaden"                     |            |             |               |             |       |              |       x       |
+| Åpne/lukke "Frist for å søke" samt eksemplet               |            |             |               |             |       |              |       x       |
+| Åpne hjelpetekst i alle spørsmål untatt noen få            |            |             |               |      x      |       |              |       x       |
+| Åpne/lukke "Slik behandler NAV personopplysningene dine"   |            |      x      |               |             |   x   |              |       x       |
+| Åpne/lukke "Avslutt og fortsett senere"                    |            |      x      |               |             |       |              |       x       |
+| Åpne/lukke "Jeg vil ikke bruke denne søknaden"             |            |      x      |               |             |       |              |       x       |
+| Åpne/lukke "Jeg vil endre svarene i søknaden"              |            |             |               |             |   x   |              |               |
+| Navigering i brødsmulesti                                  |            |             |               |             |   x   |              |               |
+| Navigering fra/til andre spørsmål via "tilbake" knappen    |            |      x      |               |      x      |   x   |              |               |
+| Navigering fra/til andre spørsmål via stegindikator        |            |             |               |      x      |       |              |               |
+| Navigering til veiledningen "Hvorfor spør vi om ferie ..." |            |             |               |             |   x   |              |               |
+| Klikk på "Gå til eldste søknad"                            |            |             |               |             |   x   |              |       x       |
+| Klikk på "Gå til sykmeldingen"                             |            |             |               |             |   x   |              |       x       |
+| Klikk på "Gå til sykmeldingene"                            |            |             |               |             |   x   |              |       x       |
+| Klikk på "Gå til søknaden"                                 |            |             |               |             |   x   |              |       x       |
+| Klikk på "Gå til neste søknad"                             |            |             |               |             |   x   |              |       x       |
+| Klikk på "Ferdig" i kvitteringssiden                       |            |      x      |               |             |   x   |              |               |
+| Svare survey om helligdager                                |     x      |             |               |             |   x   |      x       |               |
+| Ved valideringsfeil                                        |     x      |             |               |      x      |       |              |               |
+
+
 # Henvendelser
 
 Spørsmål knyttet til koden eller prosjektet kan stilles til flex@nav.no
