@@ -2,6 +2,10 @@ import { RSSoknad } from '../../../types/rs-types/rs-soknad'
 import { Sykmelding } from '../../../types/sykmelding'
 import { Persona } from '../personas'
 
+const url = new URL(window.location.href)
+
+const hovedjobb = url.searchParams.get('hovedjobb') ?? 'MATBUTIKKEN AS'
+
 export const brukertestSykmelding = new Sykmelding({
     id: 'abc5acf2-a44f-42e5-87b2-02c9d0b39ce8',
     pasient: {
@@ -41,7 +45,7 @@ export const brukertestSykmelding = new Sykmelding({
         arbeidsgiver: {
             orgnummer: '967170232',
             juridiskOrgnummer: '928497704',
-            orgNavn: 'MATBUTIKKEN AS',
+            orgNavn: `${hovedjobb}`,
         },
         sporsmalOgSvarListe: [
             {
@@ -141,7 +145,7 @@ export const brukertestSoknad: RSSoknad = {
     avbruttDato: null,
     startSykeforlop: '2022-09-08',
     sykmeldingUtskrevet: '2022-09-08',
-    arbeidsgiver: { navn: 'MATBUTIKKEN AS', orgnummer: '967170232' },
+    arbeidsgiver: { navn: `${hovedjobb}`, orgnummer: '967170232' },
     korrigerer: null,
     korrigertAv: null,
     arbeidssituasjon: 'ARBEIDSTAKER',
@@ -200,8 +204,7 @@ export const brukertestSoknad: RSSoknad = {
         {
             id: '1623808',
             tag: 'TILBAKE_I_ARBEID',
-            sporsmalstekst:
-                'Var du tilbake i fullt arbeid hos MATBUTIKKEN AS i løpet av perioden 8. - 21. september 2022?',
+            sporsmalstekst: `Var du tilbake i fullt arbeid hos ${hovedjobb} i løpet av perioden 8. - 21. september 2022?`,
             undertekst: null,
             svartype: 'JA_NEI',
             min: null,
@@ -309,8 +312,7 @@ export const brukertestSoknad: RSSoknad = {
         {
             id: '1623841',
             tag: 'JOBBET_DU_100_PROSENT_0',
-            sporsmalstekst:
-                'I perioden 8. - 21. september 2022 var du 100 % sykmeldt fra MATBUTIKKEN AS. Jobbet du noe i denne perioden?',
+            sporsmalstekst: `I perioden 8. - 21. september 2022 var du 100 % sykmeldt fra ${hovedjobb}. Jobbet du noe i denne perioden?`,
             undertekst: null,
             svartype: 'JA_NEI',
             min: null,
@@ -419,7 +421,7 @@ export const brukertestSoknad: RSSoknad = {
         {
             id: '1623816',
             tag: 'ANDRE_INNTEKTSKILDER',
-            sporsmalstekst: 'Har du andre inntektskilder enn MATBUTIKKEN AS?',
+            sporsmalstekst: `Har du andre inntektskilder enn ${hovedjobb}?`,
             undertekst: null,
             svartype: 'JA_NEI',
             min: null,
