@@ -59,7 +59,7 @@ const OpplastingForm = ({ sporsmal }: SpmProps) => {
             const valid = await methods.trigger()
             if (!valid) return
 
-            const opplastingResponse: OpplastetKvittering = await opplastingTilBucket()
+            const opplastingResponse: OpplastetKvittering = await lastOppKvittering()
             if (!opplastingResponse) return
 
             const rsOppdaterSporsmalResponse: RSOppdaterSporsmalResponse = await lagreSvar(opplastingResponse)
@@ -75,13 +75,13 @@ const OpplastingForm = ({ sporsmal }: SpmProps) => {
         }
     }
 
-    const opplastingTilBucket = async () => {
+    const lastOppKvittering = async () => {
         const requestData = new FormData()
         requestData.append('file', valgtFil as Blob)
 
         try {
             return await fetchJsonMedRequestId(
-                '/syk/sykepengesoknad/api/flex-bucket-uploader/api/v2/opplasting',
+                '/syk/sykepengesoknad/api/sykepengesoknad-kvitteringer/api/v2/opplasting',
                 {
                     method: 'POST',
                     body: requestData,

@@ -41,7 +41,7 @@ spec:
     outbound:
       rules:
         - application: sykepengesoknad-backend
-        - application: flex-bucket-uploader
+        - application: sykepengesoknad-kvitteringer
         - application: sykmeldinger-backend
           namespace: teamsykmelding
   envFrom:

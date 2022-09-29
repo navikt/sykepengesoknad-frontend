@@ -29,7 +29,7 @@ const DragAndDrop = () => {
 
     const hentKvittering = useCallback(async () => {
         const fetchResult = await fetchMedRequestId(
-            `/syk/sykepengesoknad/api/flex-bucket-uploader/api/v2/kvittering/${valgtKvittering!.blobId}`,
+            `/syk/sykepengesoknad/api/sykepengesoknad-kvitteringer/api/v2/kvittering/${valgtKvittering!.blobId}`,
             {
                 method: 'GET',
                 credentials: 'include',
