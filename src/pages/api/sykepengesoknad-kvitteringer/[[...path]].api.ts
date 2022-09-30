@@ -13,7 +13,7 @@ const handler = beskyttetApi(async (req: NextApiRequest, res: NextApiResponse) =
         req: req,
         res: res,
         tillatteApier: tillatteApier,
-        backend: 'flex-bucket-uploader',
+        backend: 'sykepengesoknad-kvitteringer',
         backendHostname: 'sykepengesoknad-kvitteringer',
         backendClientId: serverRuntimeConfig.sykepengesoknadKvitteringerClientId,
     })

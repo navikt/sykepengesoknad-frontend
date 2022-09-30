@@ -93,7 +93,7 @@ const nextConfig = {
         idportenWellKnownUrl: process.env.IDPORTEN_WELL_KNOWN_URL,
         sykmeldingerBackendClientId: process.env.SYKMELDINGER_BACKEND_CLIENT_ID,
         sykepengesoknadBackendClientId: process.env.SYKEPENGESOKNAD_BACKEND_CLIENT_ID,
-        flexBucketUploaderClientId: process.env.FLEX_BUCKET_UPLOADER_CLIENT_ID,
+        sykepengesoknadKvitteringerClientId: process.env.SYKEPENGESOKNAD_KVITTERINGER_CLIENT_ID,
     },
     publicRuntimeConfig: {
         // Will be available on both server and client

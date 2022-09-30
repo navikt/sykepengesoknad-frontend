@@ -12,4 +12,4 @@ env:
   VEDLIKEHOLD: false
   SYKMELDINGER_BACKEND_CLIENT_ID: dev-gcp:teamsykmelding:sykmeldinger-backend
   SYKEPENGESOKNAD_BACKEND_CLIENT_ID: dev-gcp:flex:sykepengesoknad-backend
-  FLEX_BUCKET_UPLOADER_CLIENT_ID: dev-gcp:flex:flex-bucket-uploader
+  SYKEPENGESOKNAD_KVITTERINGER_CLIENT_ID: dev-gcp:flex:sykepengesoknad-kvitteringer

@@ -158,7 +158,7 @@ const setUpMock = (person: Persona) => {
         }
     )
 
-    mock.post('/syk/sykepengesoknad/api/flex-bucket-uploader/api/v2/opplasting', (req, res, ctx) =>
+    mock.post('/syk/sykepengesoknad/api/sykepengesoknad-kvitteringer/api/v2/opplasting', (req, res, ctx) =>
         res(
             ctx.json({
                 id: uuid.v4(),
@@ -167,7 +167,7 @@ const setUpMock = (person: Persona) => {
         )
     )
 
-    mock.get('/syk/sykepengesoknad/api/flex-bucket-uploader/api/v2/kvittering/:blob', () =>
+    mock.get('/syk/sykepengesoknad/api/sykepengesoknad-kvitteringer/api/v2/kvittering/:blob', () =>
         fetch('/syk/sykepengesok/static/kvittering.jpg')
     )
 }
