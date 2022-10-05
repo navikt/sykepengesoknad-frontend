@@ -151,7 +151,7 @@ const verifiserSvarFormat = (sporsmal: RSSporsmal) => {
             )
             break
         case RSSvartype.KVITTERING:
-            expect(sporsmal.svar[0]?.verdi).to.match(
+            expect(sporsmal.svar[0]!.verdi).to.match(
                 RegExp(
                     '{"blobId":"\\w{8}-\\w{4}-\\w{4}-\\w{4}-\\w{12}","belop":\\d+,"typeUtgift":"\\w+","opprettet":"\\d{4}-\\d{2}-\\d{2}T\\d{2}:\\d{2}:\\d{2}.\\d{3}Z"}'
                 ),
