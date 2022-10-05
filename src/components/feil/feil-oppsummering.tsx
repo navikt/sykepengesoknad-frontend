@@ -1,4 +1,4 @@
-import { Heading } from '@navikt/ds-react'
+import { ErrorSummary } from '@navikt/ds-react'
 import React, { useEffect, useRef, useState } from 'react'
 import { useFormContext } from 'react-hook-form'
 
@@ -76,26 +76,25 @@ const FeilOppsummering = ({ sporsmal }: SpmProps) => {
             <Vis
                 hvis={entries.length > 0}
                 render={() => (
-                    <div ref={oppsummering} tabIndex={0} role="region" className="feiloppsummering">
-                        <Heading size="small">{'Det er ' + entries.length + ' feil i skjemaet'}</Heading>
-                        <ul className="feiloppsummering__liste">
-                            {entries
-                                .sort((list) => list[0][0])
-                                .map((list, index) => (
-                                    <li key={index}>
-                                        <div
-                                            role="link"
-                                            className="navds-link"
-                                            tabIndex={0}
-                                            onKeyDown={(e) => handleKeyDown(e, list)}
-                                            onClick={() => handleClick(list)}
-                                        >
-                                            {list[1].message}
-                                        </div>
-                                    </li>
-                                ))}
-                        </ul>
-                    </div>
+                    <ErrorSummary
+                        ref={oppsummering}
+                        size="medium"
+                        heading={'Det er ' + entries.length + ' feil i skjemaet'}
+                        className="feiloppsummering"
+                    >
+                        {entries
+                            .sort((list) => list[0][0])
+                            .map((list, index) => (
+                                <ErrorSummary.Item
+                                    key={index}
+                                    tabIndex={0}
+                                    onKeyDown={(e) => handleKeyDown(e, list)}
+                                    onClick={() => handleClick(list)}
+                                >
+                                    {list[1].message}
+                                </ErrorSummary.Item>
+                            ))}
+                    </ErrorSummary>
                 )}
             />
         </div>
