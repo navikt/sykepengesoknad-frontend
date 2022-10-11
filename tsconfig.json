@@ -16,7 +16,8 @@
         "jsx": "preserve",
         "strictNullChecks": true,
         "noFallthroughCasesInSwitch": true,
-        "incremental": true
+        "incremental": true,
+        "baseUrl": "/syk/sykepengesoknad"
     },
     "include": ["src"],
     "exclude": ["node_modules"]
