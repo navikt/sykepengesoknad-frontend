@@ -17,14 +17,21 @@ export const validerPeriode = (sporsmal: Sporsmal, id: string, values: Record<st
         tom: fraBackendTilDate(formPeriode.tom),
     } as Periode
 
-    const perioder = Object.entries(values)
+    const andreBesvartePerioder = Object.entries(values)
         .filter(([key]) => key.startsWith(sporsmal.id) && key !== id)
-        .map(([key]) => {
-            return {
-                fom: fraBackendTilDate(values[key].fom),
-                tom: fraBackendTilDate(values[key].tom),
-            } as Periode
-        })
+        .filter(([key]) => values[key] !== undefined)
+
+    if (andreBesvartePerioder.length === 0) {
+        return true
+    }
+
+    const perioder = andreBesvartePerioder.map(([key]) => {
+        return {
+            fom: fraBackendTilDate(values[key].fom),
+            tom: fraBackendTilDate(values[key].tom),
+        } as Periode
+    })
+
     // Overlapper
     let overlapper = false
     perioder.forEach((p: Periode) => {
