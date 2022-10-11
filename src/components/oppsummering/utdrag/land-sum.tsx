@@ -1,4 +1,4 @@
-import { BodyLong, BodyShort, Label } from '@navikt/ds-react'
+import { BodyShort, Label } from '@navikt/ds-react'
 import React from 'react'
 
 import { OppsummeringProps } from '../oppsummering'
@@ -26,7 +26,7 @@ const LandSum = ({ sporsmal }: OppsummeringProps) => {
     return (
         <div className="oppsummering__fritekst">
             <Label as="h3">{sporsmal.sporsmalstekst}</Label>
-            <BodyLong className="oppsummering__tekstsvar">{svarliste}</BodyLong>
+            <div className="oppsummering__tekstsvar">{svarliste}</div>
         </div>
     )
 }

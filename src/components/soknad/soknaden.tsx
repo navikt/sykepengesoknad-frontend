@@ -144,8 +144,8 @@ const Fordeling = () => {
                                 onClick={() => {
                                     logEvent('navigere', {
                                         lenketekst: tekst('soknad.tilbakeknapp'),
-                                        fra: valgtSoknad!.sporsmal[stegNo].tag,
-                                        til: valgtSoknad!.sporsmal[stegNo - 1].tag,
+                                        fra: valgtSoknad!.sporsmal[stegNo - 1].tag,
+                                        til: valgtSoknad!.sporsmal[stegNo - 2].tag,
                                         soknadstype: valgtSoknad?.soknadstype,
                                         stegId: stegId,
                                     })
