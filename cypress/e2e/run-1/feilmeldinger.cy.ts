@@ -171,9 +171,18 @@ describe('Tester feilmeldinger', () => {
         )
     })
 
-    it('PERIODER overlapper', () => {
+    it('PERIODER legges til uten å besvares', () => {
         cy.get('#687305_0 .fom').clear().type('01.04.2020')
         cy.contains('+ Legg til ekstra periode').click()
+        gaVidere()
+        feilmeldingHandtering(
+            'Du må oppgi en fra og med dato',
+            'Du må oppgi en fra og med dato',
+            arbeidstakerGradert.sporsmal[3].undersporsmal[0].id + '_1_fom'
+        )
+    })
+
+    it('PERIODER overlapper', () => {
         cy.get('#687305_1 .fom').type('05.04.2020')
         cy.get('#687305_1 .tom').type('20.04.2020')
         gaVidere()
