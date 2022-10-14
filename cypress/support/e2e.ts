@@ -12,7 +12,6 @@
 // You can read more here:
 // https://on.cypress.io/configuration
 // ***********************************************************
-/* eslint-disable no-undef */
 import './commands'
 import 'cypress-axe'
 
@@ -20,36 +19,51 @@ import { SvarEnums } from '../../src/types/enums'
 import { RSSporsmal } from '../../src/types/rs-types/rs-sporsmal'
 import { RSSvartype } from '../../src/types/rs-types/rs-svartype'
 
+const disableCypressSpy = Cypress.env('DISABLE_SPY') === true
+
 beforeEach(() => {
-    cy.window().then((win) => {
-        cy.spy(win, 'fetch').as('winFetch')
-    })
+    // Slår av Cypress.spy (i dev-mode) siden det gjør at yet-another-fetch-mock
+    // blir disablet sånn at kallene som skal fanges opp av mock går til backend.
+    // Dette startet med next.js 12.2.0.
+    if (!disableCypressSpy) {
+        cy.window().then((win) => {
+            cy.spy(win, 'fetch').as('winFetch')
+        })
+    }
 })
 
 afterEach(() => {
+    setupAxe()
+
+    if (!disableCypressSpy) {
+        cy.get('@winFetch').should((a: any) => {
+            lyttTilNettverksKall(a)
+        })
+    }
+})
+
+function setupAxe() {
     cy.injectAxe()
     cy.configureAxe({
-        // prettier-ignore
         rules: [
-            { id: 'svg-img-alt', enabled: false },              // Trenger ikke alt tekst på bilder
-
-            { id: 'nested-interactive', enabled: false },       // Skjermleser klarer å lese opp både progress og navigering mellom stegene
-            { id: 'color-contrast', enabled: false },           // Slår ut når det dukker opp flere feilmeldinger
-            { id: 'landmark-one-main', enabled: false },        // Hvorfor godtar den ikke role="dialog" på modalene
-            { id: 'aria-input-field-name', enabled: false },    // Kanskje vi må bytte ut LandvelgerComponent
-
+            // Trenger ikke "alt" tekst på bilder.
+            { id: 'svg-img-alt', enabled: false },
+            // Skjermleser klarer å lese opp både progress og navigering mellom stegene.
+            { id: 'nested-interactive', enabled: false },
+            // Slår ut når det dukker opp flere feilmeldinger.
+            { id: 'color-contrast', enabled: false },
+            // Hvorfor godtar den ikke role="dialog" på modalene.
+            { id: 'landmark-one-main', enabled: false },
+            // Kanskje vi må bytte ut LandvelgerComponent
+            { id: 'aria-input-field-name', enabled: false },
             // Sjekker ikke aria-labelledby på accordion (denne kan fjernes når vi oppgraderer til nyere versjon av ds)
             { id: 'aria-allowed-attr', enabled: true, selector: '*:not(.navds-accordion__item > div)' },
             // Opphold utland bruker periode komp uten h2 heading, sjekker alt annet
-            { id: 'heading-order', enabled: true, selector: '*:not(h3:contains("Når skal du reise?"))' }
+            { id: 'heading-order', enabled: true, selector: '*:not(h3:contains("Når skal du reise?"))' },
         ],
     })
     cy.checkA11y(undefined, undefined, terminalLog, false)
-
-    cy.get('@winFetch').should((a: any) => {
-        lyttTilNettverksKall(a)
-    })
-})
+}
 
 function terminalLog(violations: any) {
     cy.task(
