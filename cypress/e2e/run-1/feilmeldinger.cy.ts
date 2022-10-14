@@ -183,9 +183,14 @@ describe('Tester feilmeldinger', () => {
     })
 
     it('PERIODER overlapper', () => {
-        cy.get('#687305_1 .fom').type('05.04.2020')
-        cy.get('#687305_1 .tom').type('20.04.2020')
-        gaVidere()
+        cy.focused().type('05.04.2020').blur()
+        feilmeldingHandtering(
+            'Du må oppgi en til og med dato',
+            'Du må oppgi en til og med dato',
+            arbeidstakerGradert.sporsmal[3].undersporsmal[0].id + '_1_tom'
+        )
+
+        cy.focused().type('20.04.2020').blur()
         feilmeldingHandtering(
             'Perioder kan ikke overlappe',
             'Du kan ikke legge inn perioder som overlapper med hverandre',
@@ -193,7 +198,10 @@ describe('Tester feilmeldinger', () => {
         )
     })
 
-    it('PERIODER slett feil', () => {
+    it('PERIODER slett', () => {
+        cy.focused().clear().type('15.04.2020').blur()
+        ingenFeilmeldinger()
+
         cy.contains('Slett periode').click()
         ingenFeilmeldinger()
     })
