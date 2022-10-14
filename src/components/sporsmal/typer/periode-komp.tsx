@@ -28,7 +28,8 @@ const PeriodeKomp = ({ sporsmal, index, slettPeriode }: AllProps) => {
     const {
         setValue,
         getValues,
-        formState: { errors },
+        formState: { errors, isSubmitted },
+        trigger,
     } = useFormContext()
     const [periode, setPeriode] = useState<FormPeriode>({ fom: '', tom: '' })
     const id = sporsmal.id + '_' + index
@@ -41,12 +42,16 @@ const PeriodeKomp = ({ sporsmal, index, slettPeriode }: AllProps) => {
     }, [sporsmal])
 
     const onChange = (fom?: string, tom?: string) => {
-        const nyFom = fom ? fom : periode.fom
-        const nyTom = tom ? tom : periode.tom
+        const nyFom = fom ? fom : ''
+        const nyTom = tom ? tom : ''
         const nyPeriode = { fom: nyFom, tom: nyTom }
 
         setPeriode(nyPeriode)
         setValue(id, nyPeriode)
+
+        if (isSubmitted) {
+            trigger(id)
+        }
     }
 
     return (
@@ -95,7 +100,7 @@ const PeriodeKomp = ({ sporsmal, index, slettPeriode }: AllProps) => {
                                     locale="nb"
                                     id={sporsmal.id + '_' + index + '_fom'}
                                     label={tekst('sykepengesoknad.periodevelger.fom')}
-                                    onChange={(value: any) => onChange(value, undefined)}
+                                    onChange={(value: any) => onChange(value, periode.tom)}
                                     value={periode.fom}
                                     inputName={sporsmal.id + '_' + index + '_fom'}
                                     calendarSettings={{
@@ -118,7 +123,7 @@ const PeriodeKomp = ({ sporsmal, index, slettPeriode }: AllProps) => {
                                     locale="nb"
                                     id={sporsmal.id + '_' + index + '_tom'}
                                     label={tekst('sykepengesoknad.periodevelger.tom')}
-                                    onChange={(value: any) => onChange(undefined, value)}
+                                    onChange={(value: any) => onChange(periode.fom, value)}
                                     value={periode.tom}
                                     inputName={sporsmal.id + '_' + index + '_tom'}
                                     calendarSettings={{
