@@ -86,7 +86,7 @@
     "test": "MOCK_BACKEND=true jest --watch",
     "test:ci": "jest --ci",
     "cy:open": "cypress open --e2e",
-    "e2e": "start-test dev-ingen-dekorator http://localhost:8080/syk/sykepengesoknad cy:open",
+    "e2e": "CYPRESS_DISABLE_SPY=true start-test dev-ingen-dekorator http://localhost:8080/syk/sykepengesoknad cy:open",
     "prettier:write": "prettier --write .",
     "prettier:check": "prettier --check .",
     "lint": "eslint --ext=ts,tsx src cypress",
