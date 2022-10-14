@@ -28,7 +28,8 @@ const PeriodeKomp = ({ sporsmal, index, slettPeriode }: AllProps) => {
     const {
         setValue,
         getValues,
-        formState: { errors },
+        formState: { errors, isSubmitted },
+        trigger,
     } = useFormContext()
     const [periode, setPeriode] = useState<FormPeriode>({ fom: '', tom: '' })
     const id = sporsmal.id + '_' + index
@@ -47,6 +48,10 @@ const PeriodeKomp = ({ sporsmal, index, slettPeriode }: AllProps) => {
 
         setPeriode(nyPeriode)
         setValue(id, nyPeriode)
+
+        if (isSubmitted) {
+            trigger(id)
+        }
     }
 
     return (
