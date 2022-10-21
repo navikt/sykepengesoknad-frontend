@@ -95,7 +95,7 @@ const TallKomp = ({ sporsmal }: SpmProps) => {
                 max={sporsmal.max!}
                 error={errors[sporsmal.id] !== undefined}
                 autoComplete="off"
-                inputMode="numeric"
+                inputMode={antallDesimaler > 0 ? 'decimal' : 'numeric'}
                 {...register(sporsmal.id, {
                     required: feilmelding.global,
                     validate: () => valider(),
