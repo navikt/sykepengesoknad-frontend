@@ -116,6 +116,11 @@ describe('Tester støtte for gamle spørsmål', () => {
         svarRadioJaEllerNei('Er du sykmeldt fra dette?', 'Ja')
         gaVidere()
     })
+    it('ANDRE_INNTEKTSKILDER_V2', () => {
+        svarJaHovedsporsmal()
+        velgCheckbox('dagmamma')
+        gaVidere()
+    })
     it('ARBEID_UTENFOR_NORGE', () => {
         svarNeiHovedsporsmal()
         gaVidere()

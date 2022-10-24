@@ -58,6 +58,7 @@ const SoknadenTekster = {
     'sykepengesoknad.utbetaling.tittel': 'Utbetaling',
 
     'sykepengesoknad.andre_inntektskilder.tittel': 'Andre inntektskilder',
+    'sykepengesoknad.andre_inntektskilder_v2.tittel': 'Andre inntektskilder',
     'sykepengesoknad.andre-inntektskilder.ANDRE_ARBEIDSFORHOLD.label': 'Andre arbeidsforhold',
     'sykepengesoknad.andre-inntektskilder.ANNET.label': 'Annet',
     'sykepengesoknad.andre-inntektskilder.FRILANSER.label': 'Frilanser',

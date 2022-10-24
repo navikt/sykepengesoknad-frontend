@@ -11,6 +11,7 @@ const SporsmalTekster = {
     'soknad.feilmelding.ANSVARSERKLARING.lokal':
         'Du må bekrefte at du har lest og forstått informasjonen før du kan gå videre',
     'soknad.feilmelding.ANDRE_INNTEKTSKILDER': 'Du må svare på om du har andre inntektskilder eller arbeidsforhold',
+    'soknad.feilmelding.ANDRE_INNTEKTSKILDER_V2': 'Du må svare på om du har andre inntektskilder eller arbeidsforhold',
     'soknad.feilmelding.ARBEID_UTENFOR_NORGE.lokal': 'Du må svare på om du har jobbet utenfor Norge',
     'soknad.feilmelding.ARBEIDSGIVER': 'Du må oppgi om du har arbeidsgiver',
     'soknad.feilmelding.ARBEID_UTENFOR_NORGE':
@@ -117,6 +118,7 @@ const SporsmalTekster = {
     'soknad.feilmelding.INNTEKTSKILDE_ANNET': 'Du må svare på om du er sykmeldt fra dette',
     'soknad.feilmelding.INNTEKTSKILDE_OMSORGSLONN': 'Du må svare på om du er sykmeldt med omsorgslønn',
     'soknad.feilmelding.INNTEKTSKILDE_FOSTERHJEM': 'Du må svare på om du er sykmeldt med fosterhjemgodtgjørelse',
+    'soknad.feilmelding.INNTEKTSKILDE_STYREVERV': '',
 
     'soknad.feilmelding.JOBBET_DU_100_PROSENT': 'Du må svare på om du jobbet noe i denne perioden',
     'soknad.feilmelding.JOBBET_DU_GRADERT': 'Vennligst svar på om du jobbet mer enn sykmeldingen tilsier',
