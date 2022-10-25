@@ -2,7 +2,10 @@ import amplitude from 'amplitude-js'
 import constate from 'constate'
 import { useEffect, useRef } from 'react'
 
+import { TagTyper } from '../../types/enums'
+import { Kvittering, Sporsmal } from '../../types/types'
 import { amplitudeEnabled } from '../../utils/environment'
+import { hentSvar } from '../sporsmal/hent-svar'
 
 export const [AmplitudeProvider, useAmplitudeInstance] = constate(() => {
     const instance: any = useRef({
@@ -52,3 +55,13 @@ export const [AmplitudeProvider, useAmplitudeInstance] = constate(() => {
 
     return { logEvent }
 })
+
+export const hentAnnonymisertSvar = (sporsmal: Sporsmal): any => {
+    const hovedSpmSvar = hentSvar(sporsmal)
+
+    if (sporsmal.tag === TagTyper.KVITTERINGER) {
+        return hovedSpmSvar.map((svar: Kvittering) => svar.typeUtgift)
+    }
+
+    return hovedSpmSvar
+}
