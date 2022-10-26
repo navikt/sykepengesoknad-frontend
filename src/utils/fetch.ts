@@ -54,7 +54,8 @@ export const fetchJsonMedRequestId = async (url: string, options: RequestInit = 
     try {
         return await response.json()
     } catch (e) {
-        logger.warn(`${e} - Kall til url: ${options.method} ${url} og x_request_id: ${fetchResult.requestId} feilet ved parsing av JSON med HTTP-kode: ${response.status}.`
+        logger.warn(
+            `${e} - Kall til url: ${options.method} ${url} og x_request_id: ${fetchResult.requestId} feilet ved parsing av JSON med HTTP-kode: ${response.status}.`
         )
         throw e
     }
