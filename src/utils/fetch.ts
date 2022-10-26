@@ -1,3 +1,4 @@
+import { logger } from '@navikt/next-logger'
 import { v4 as uuidv4 } from 'uuid'
 
 export type FetchResult = { requestId: string; response: Response }
@@ -23,9 +24,10 @@ const fetchMedRequestId = async (
     try {
         response = await fetch(url, options)
     } catch (e) {
-        throw new FetchError(
+        logger.warn(
             `${e} - Kall til url: ${options.method} ${url} og x_request_id: ${requestId} feilet uten svar fra backend.`
         )
+        throw e
     }
 
     if (response.status == 401) {
@@ -52,9 +54,9 @@ export const fetchJsonMedRequestId = async (url: string, options: RequestInit = 
     try {
         return await response.json()
     } catch (e) {
-        throw new FetchError(
-            `${e} - Kall til url: ${options.method} ${url} og x_request_id: ${fetchResult.requestId} feilet ved parsing av JSON med HTTP-kode: ${response.status}.`
+        logger.warn(`${e} - Kall til url: ${options.method} ${url} og x_request_id: ${fetchResult.requestId} feilet ved parsing av JSON med HTTP-kode: ${response.status}.`
         )
+        throw e
     }
 }
 
