@@ -8,6 +8,7 @@ import { useAppStore } from '../../../data/stores/app-store'
 import { RSSoknadstatus } from '../../../types/rs-types/rs-soknadstatus'
 import fetchMedRequestId, { AuthenticationError } from '../../../utils/fetch'
 import { useAmplitudeInstance } from '../../amplitude/amplitude'
+
 import styles from './gjenapneknapp.module.css'
 
 const GjenapneSoknad = () => {
@@ -47,7 +48,7 @@ const GjenapneSoknad = () => {
                     method: 'POST',
                     credentials: 'include',
                     headers: { 'Content-Type': 'application/json' },
-                }
+                },
             )
         } catch (e: any) {
             if (!(e instanceof AuthenticationError)) {
@@ -68,7 +69,7 @@ const GjenapneSoknad = () => {
 
     return (
         <div className={styles.knapperad}>
-            <Button variant="tertiary" className={styles.knappen} loading={gjenapner} onClick={gjenapneSoknad}>
+            <Button variant="tertiary" loading={gjenapner} onClick={gjenapneSoknad}>
                 Jeg vil bruke denne søknaden likevel
             </Button>
         </div>

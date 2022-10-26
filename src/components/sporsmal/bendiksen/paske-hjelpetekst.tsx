@@ -9,6 +9,7 @@ import { tekst } from '../../../utils/tekster'
 import { useAmplitudeInstance } from '../../amplitude/amplitude'
 import Vis from '../../vis'
 import { SpmProps } from '../sporsmal-form/sporsmal-form'
+
 import Bendiksen from './bendiksen'
 
 const PaskeHjelpetekst = ({ sporsmal }: SpmProps) => {

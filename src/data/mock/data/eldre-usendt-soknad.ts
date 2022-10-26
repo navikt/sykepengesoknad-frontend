@@ -1,6 +1,7 @@
 import { RSSoknad } from '../../../types/rs-types/rs-soknad'
 import { jsonDeepCopy } from '../../../utils/json-deep-copy'
 import { Persona } from '../personas'
+
 import { kortArbeidstakerSoknad } from './kort-soknad'
 import { sykmeldinger } from './sykmeldinger'
 

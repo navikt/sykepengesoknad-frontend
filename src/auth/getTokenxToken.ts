@@ -33,7 +33,7 @@ async function client() {
                 client_id: serverRuntimeConfig.tokenXClientId,
                 token_endpoint_auth_method: 'private_key_jwt',
             },
-            { keys: [_jwk] }
+            { keys: [_jwk] },
         )
     }
     return _client
@@ -67,7 +67,7 @@ export async function getTokenxToken(subject_token: string, audience: string): P
                 logger.error(
                     `Noe gikk galt med token exchange mot TokenX. Feilmelding fra openid-client: (${err}).
                     HTTP Status fra TokenX: (${err.response.statusCode} ${err.response.statusMessage})
-                    Body fra TokenX: ${err.response.body}`
+                    Body fra TokenX: ${err.response.body}`,
                 )
                 break
         }

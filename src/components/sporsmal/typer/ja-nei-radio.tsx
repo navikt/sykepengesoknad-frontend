@@ -53,7 +53,7 @@ const JaNeiRadio = ({ sporsmal }: SpmProps) => {
                             {parser(
                                 getLedetekst(tekst(utenlandsopphold), {
                                     '%URL%': utlandssoknadUrl,
-                                })
+                                }),
                             )}
                         </BodyShort>
                     </div>
@@ -73,9 +73,9 @@ const JaNeiRadio = ({ sporsmal }: SpmProps) => {
                             {parser(
                                 getLedetekst(tekst(('soknad.presisering.' + spm.tag + '_NEI') as any), {
                                     '%URL%': tekst(
-                                        'soknad.presisering.INNTEKTSKILDE_SELVSTENDIG_ER_DU_SYKMELDT_NEI.url'
+                                        'soknad.presisering.INNTEKTSKILDE_SELVSTENDIG_ER_DU_SYKMELDT_NEI.url',
                                     ),
-                                })
+                                }),
                             )}
                         </BodyShort>
                     </div>

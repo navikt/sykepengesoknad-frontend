@@ -19,6 +19,7 @@ import { GjenstaendeSoknader, hentGjenstaendeSoknader } from '../gjenstaende-sok
 import { hentHotjarJsTrigger, HotjarTrigger } from '../hotjar-trigger'
 import { UxSignalsWidget } from '../ux-signals/UxSignalsWidget'
 import Vis from '../vis'
+
 import { harSvartJaPåAndreInntektskilder } from './harSvartJaAndreInntektskilder'
 import Kvittering from './kvittering'
 

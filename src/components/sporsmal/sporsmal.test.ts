@@ -4,6 +4,7 @@ import { RSSvartype } from '../../types/rs-types/rs-svartype'
 import { Soknad, Sporsmal } from '../../types/types'
 import { flattenSporsmal } from '../../utils/soknad-utils'
 import { tekst } from '../../utils/tekster'
+
 import { fjernIndexFraTag, hentGeneriskFeilmelding } from './sporsmal-utils'
 
 test('Alle tags har global feilmelding', () => {

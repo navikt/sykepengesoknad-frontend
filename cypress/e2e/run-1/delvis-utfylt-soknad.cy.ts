@@ -15,13 +15,13 @@ describe('Tester delvis utfylt søknad', () => {
 
     it('En ikke påbegynt søknad er ikke markert som delvis utfylt', () => {
         cy.get(`#soknader-list-til-behandling article a[href*=${ikkeUtfyltSoknad.id}] .inngangspanel__status`).should(
-            'not.exist'
+            'not.exist',
         )
     })
 
     it('En påbegynt søknad er markert med delvis utfylt label', () => {
         cy.get(
-            `#soknader-list-til-behandling article a[href*=${delvisUtfyltSoknad.id}] .inngangspanel__status`
+            `#soknader-list-til-behandling article a[href*=${delvisUtfyltSoknad.id}] .inngangspanel__status`,
         ).contains(tekst('soknad.teaser.delvis-utfylt.tekst'))
     })
 

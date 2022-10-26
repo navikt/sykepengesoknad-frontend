@@ -7,6 +7,7 @@ import { Brodsmule } from '../../types/types'
 import { minSideUrl, sykefravaerUrl } from '../../utils/environment'
 import { useAmplitudeInstance } from '../amplitude/amplitude'
 import Vis from '../vis'
+
 import Person from './Person'
 
 const LITEN = 768

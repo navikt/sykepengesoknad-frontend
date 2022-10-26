@@ -13,7 +13,7 @@ describe('Teste førsteside i reisetilskuddsøknaden', () => {
         it('Søknad har forventa tekst', () => {
             cy.get(`article[aria-labelledby*=${nyttReisetilskudd.id}]`).should(
                 'include.text',
-                'Søknad om reisetilskudd'
+                'Søknad om reisetilskudd',
             )
         })
 
@@ -31,7 +31,7 @@ describe('Teste førsteside i reisetilskuddsøknaden', () => {
         it('Skal ha egen folketrygloven tekst', () => {
             cy.get('.frist-sykepenger').click()
             cy.contains(
-                'Ifølge folketrygdloven kan du få reisetilskudd hvis du har rett til sykepenger. Reisetilskuddet kommer da i stedet for sykepengene.'
+                'Ifølge folketrygdloven kan du få reisetilskudd hvis du har rett til sykepenger. Reisetilskuddet kommer da i stedet for sykepengene.',
             )
         })
 
@@ -43,13 +43,13 @@ describe('Teste førsteside i reisetilskuddsøknaden', () => {
 
             cy.get('.navds-label').contains('Hva dekker reisetilskuddet')
             cy.get('.navds-body-long').contains(
-                'Reisetilskuddet dekker nødvendige ekstra reiseutgifter til og fra jobben mens du er syk, altså reiseutgifter utover det du har til vanlig.'
+                'Reisetilskuddet dekker nødvendige ekstra reiseutgifter til og fra jobben mens du er syk, altså reiseutgifter utover det du har til vanlig.',
             )
 
             cy.get('.navds-label').contains('De første 16 dagene')
             cy.get('.navds-label').contains('Legg ved kvitteringer')
             cy.get('.navds-body-long').contains(
-                'Du må legge ved bilde av kvitteringene dine når du søker NAV om å dekke utgiftene. Fyller du ut fra telefonen, kan du ta bilde av kvitteringene og bruke dem direkte i søknaden.'
+                'Du må legge ved bilde av kvitteringene dine når du søker NAV om å dekke utgiftene. Fyller du ut fra telefonen, kan du ta bilde av kvitteringene og bruke dem direkte i søknaden.',
             )
         })
 
@@ -95,7 +95,7 @@ describe('Teste førsteside i reisetilskuddsøknaden', () => {
             cy.get('.inputPanelGruppe__inner label:first-child > input[value=JA]').click({ force: true })
             cy.get('.undersporsmal > :nth-child(1)').should(
                 'have.text',
-                'Hvilke dager reiste du med bil i perioden 23. desember 2020 - 7. januar 2021?'
+                'Hvilke dager reiste du med bil i perioden 23. desember 2020 - 7. januar 2021?',
             )
         })
 
@@ -177,7 +177,7 @@ describe('Teste førsteside i reisetilskuddsøknaden', () => {
             cy.get('.fil_liste').contains('Taxi').click()
             cy.contains('Endre reiseutgift')
             cy.get('.navds-alert--info').contains(
-                'Du kan foreløpig ikke redigere utgifter som du har lagt til. Men du kan slette den som er feil, og legge inn på nytt.'
+                'Du kan foreløpig ikke redigere utgifter som du har lagt til. Men du kan slette den som er feil, og legge inn på nytt.',
             )
             cy.get('select[name=transportmiddel]').should('have.attr', 'disabled')
             cy.get('input[name=belop_input]').should('have.attr', 'disabled')
@@ -320,15 +320,15 @@ describe('Teste førsteside i reisetilskuddsøknaden', () => {
             cy.get('.oppsummering').click()
             cy.get('.navds-accordion__content > :nth-child(4)').should(
                 'include.text',
-                'Last opp kvitteringer for reiser til og fra jobben mellom 1. - 24. april 2020.'
+                'Last opp kvitteringer for reiser til og fra jobben mellom 1. - 24. april 2020.',
             )
             cy.get('.navds-accordion__content > :nth-child(4)').should(
                 'include.text',
-                'Du lastet opp 1 utgift på 99 kr'
+                'Du lastet opp 1 utgift på 99 kr',
             )
             cy.get('.navds-checkbox__label').should(
                 'contain',
-                'Jeg har lest all informasjonen jeg har fått i søknaden og bekrefter at opplysningene jeg har gitt er korrekte.'
+                'Jeg har lest all informasjonen jeg har fått i søknaden og bekrefter at opplysningene jeg har gitt er korrekte.',
             )
             cy.get('.navds-checkbox__label').click({ force: true })
 
@@ -347,7 +347,7 @@ describe('Teste førsteside i reisetilskuddsøknaden', () => {
                 .and('contain', 'NAV behandler søknaden din')
                 .and(
                     'contain',
-                    'Saksbehandlingstiden regnes fra NAV har mottatt all nødvendig dokumentasjon. Etter dette må du regne med å vente minst fire uker før søknaden er behandlet. Men saksbehandlingstidene kan variere noe.'
+                    'Saksbehandlingstiden regnes fra NAV har mottatt all nødvendig dokumentasjon. Etter dette må du regne med å vente minst fire uker før søknaden er behandlet. Men saksbehandlingstidene kan variere noe.',
                 )
         })
     })

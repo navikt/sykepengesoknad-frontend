@@ -29,6 +29,7 @@ import { settSvar } from '../sett-svar'
 import SporsmalSwitch from '../sporsmal-switch'
 import { pathUtenSteg } from '../sporsmal-utils'
 import CheckboxPanel from '../typer/checkbox-panel'
+
 import Knapperad from './knapperad'
 import SendesTil from './sendes-til'
 import skalViseKnapperad from './skal-vise-knapperad'
@@ -107,7 +108,7 @@ const SporsmalForm = () => {
                         setFeilState(true)
                     }
                     restFeilet = true
-                }
+                },
             )
         } catch (e: any) {
             if (!(e instanceof AuthenticationError)) {
@@ -140,7 +141,7 @@ const SporsmalForm = () => {
                     method: 'GET',
                     credentials: 'include',
                     headers: { 'Content-Type': 'application/json' },
-                }
+                },
             )
         } catch (e: any) {
             if (!(e instanceof AuthenticationError)) {
@@ -174,7 +175,7 @@ const SporsmalForm = () => {
                     method: 'POST',
                     credentials: 'include',
                     headers: { 'Content-Type': 'application/json' },
-                }
+                },
             )
         } catch (e: any) {
             if (!(e instanceof AuthenticationError)) {
@@ -249,7 +250,7 @@ const SporsmalForm = () => {
                 setTop(0)
                 if (!erSiste) {
                     history.push(
-                        pathUtenSteg(history.location.pathname) + SEPARATOR + (spmIndex + 2) + window.location.search
+                        pathUtenSteg(history.location.pathname) + SEPARATOR + (spmIndex + 2) + window.location.search,
                     )
                 }
             }

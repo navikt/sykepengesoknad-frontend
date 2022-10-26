@@ -3,6 +3,7 @@ import React from 'react'
 import { SvarEnums } from '../../../types/enums'
 import Vis from '../../vis'
 import { OppsummeringProps } from '../oppsummering'
+
 import Avkrysset from './avkrysset'
 import UndersporsmalSum from './undersporsmal-sum'
 

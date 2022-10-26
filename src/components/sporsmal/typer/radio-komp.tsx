@@ -32,7 +32,6 @@ const RadioKomp = ({ sporsmal }: SpmProps) => {
 
     // watchTimer er lagt inn for å rendre prosent-alerten
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
-    // noinspection JSUnusedLocalSymbols
     const watchTimer = watch(hentUndersporsmal(sporsmal!, TagTyper.HVOR_MYE_TIMER_VERDI)!.id)
     const errorTimer = errors[hentUndersporsmal(sporsmal!, TagTyper.HVOR_MYE_TIMER_VERDI)!.id]
 

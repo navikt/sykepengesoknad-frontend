@@ -1,5 +1,6 @@
 import { jsonDeepCopy } from '../../../utils/json-deep-copy'
 import { Persona } from '../personas'
+
 import { arbeidstaker } from './opplaering'
 import { arbeidstaker100Syk } from './sykmeldinger'
 

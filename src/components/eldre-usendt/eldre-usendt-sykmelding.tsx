@@ -4,6 +4,7 @@ import { getSykmeldingStartDate, Sykmelding } from '../../types/sykmelding'
 import { sykmeldingerUrl } from '../../utils/environment'
 import { tallTilSpråk } from '../../utils/tallTilSpraak'
 import { getLedetekst, tekst } from '../../utils/tekster'
+
 import { GuidepanelMedKnapp } from './guidepanel-med-knapp'
 
 interface UsendtSykmeldingProps {
@@ -12,7 +13,7 @@ interface UsendtSykmeldingProps {
 
 export const EldreUsendtSykmelding = ({ usendteSykmeldinger }: UsendtSykmeldingProps) => {
     const sorterteUsendte = [...usendteSykmeldinger].sort((a, b) =>
-        getSykmeldingStartDate(a).diff(getSykmeldingStartDate(b))
+        getSykmeldingStartDate(a).diff(getSykmeldingStartDate(b)),
     )
 
     const knappetekst = () => {

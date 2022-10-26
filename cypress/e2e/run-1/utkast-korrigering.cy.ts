@@ -14,7 +14,7 @@ describe('Tester utkast til korrigerte søknader', () => {
 
     it('En søknad til korringeringer markert som til korrigering', () => {
         cy.get(`#soknader-list-til-behandling article a[href*=${tilKorrigering.id}] .inngangspanel__status`).contains(
-            tekst('soknad.teaser.utkast-korrigering.tekst')
+            tekst('soknad.teaser.utkast-korrigering.tekst'),
         )
     })
 

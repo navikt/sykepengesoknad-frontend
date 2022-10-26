@@ -10,6 +10,7 @@ import { useAmplitudeInstance } from '../../amplitude/amplitude'
 import Utvidbar from '../../utvidbar/utvidbar'
 import Vis from '../../vis'
 import { InngangsIkon, InngangsStatus } from '../inngang/inngangspanel'
+
 import {
     hentIkon,
     hentIkonHover,

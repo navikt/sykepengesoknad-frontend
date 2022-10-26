@@ -9,6 +9,7 @@ import { TagTyper } from '../../../types/enums'
 import { Sporsmal } from '../../../types/types'
 import { tekst } from '../../../utils/tekster'
 import { hentNokkel } from '../sporsmal-utils'
+
 import Steg from './steg'
 
 interface FremdriftsbarProps {

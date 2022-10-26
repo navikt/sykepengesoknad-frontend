@@ -26,7 +26,7 @@ const OpprettUtland = () => {
                     method: 'POST',
                     credentials: 'include',
                     headers: { 'Content-Type': 'application/json' },
-                }
+                },
             )
         } catch (e: any) {
             if (!(e instanceof AuthenticationError)) {

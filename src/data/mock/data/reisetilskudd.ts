@@ -1,6 +1,7 @@
 import { RSSoknad } from '../../../types/rs-types/rs-soknad'
 import { jsonDeepCopy } from '../../../utils/json-deep-copy'
 import { Persona } from '../personas'
+
 import { arbeidstakerReisetilskuddSyk, gradertReisetilskuddSm, sykmeldinger } from './sykmeldinger'
 
 export const nyttReisetilskudd: RSSoknad = {

@@ -14,7 +14,7 @@ describe('Tester delvis utfylt søknad med reisetilskudd', () => {
 
     it('Delvis utfylt søknad med reisetilskudd er markert med delvis utfylt label', () => {
         cy.get(
-            `#soknader-list-til-behandling article a[href*=${delvisUtfyltSoknad.id}] .inngangspanel__status`
+            `#soknader-list-til-behandling article a[href*=${delvisUtfyltSoknad.id}] .inngangspanel__status`,
         ).contains(tekst('soknad.teaser.delvis-utfylt.tekst'))
     })
 

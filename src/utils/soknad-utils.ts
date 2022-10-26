@@ -50,6 +50,6 @@ export const finnHovedSporsmal = (soknad: Soknad, sporsmal: Sporsmal): Sporsmal 
     return soknad.sporsmal.find((spm) =>
         flattenSporsmal(spm.undersporsmal)
             .map((underspm) => underspm.id)
-            .includes(sporsmal.id)
+            .includes(sporsmal.id),
     )
 }

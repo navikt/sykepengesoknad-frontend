@@ -1,4 +1,5 @@
 import { Arbeidsgiver } from '../types'
+
 import { RSArbeidssituasjonType } from './rs-arbeidssituasjon'
 import { RSMerknad } from './rs-merknad'
 import { RSSoknadsperiode } from './rs-soknadsperiode'

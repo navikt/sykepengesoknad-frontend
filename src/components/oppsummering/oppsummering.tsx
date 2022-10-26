@@ -6,6 +6,7 @@ import { RSSvartype } from '../../types/rs-types/rs-svartype'
 import { Sporsmal } from '../../types/types'
 import { tekst } from '../../utils/tekster'
 import Utvidbar from '../utvidbar/utvidbar'
+
 import Behandlingsdager from './utdrag/behandlingsdager'
 import CheckboxGruppe from './utdrag/checkbox-gruppe'
 import CheckboxSum from './utdrag/checkbox-sum'

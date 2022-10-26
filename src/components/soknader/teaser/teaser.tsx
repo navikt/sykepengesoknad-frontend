@@ -10,6 +10,7 @@ import { tekst } from '../../../utils/tekster'
 import { erDelvisUtfyltNySoknad } from '../../soknad/soknad-link'
 import Vis from '../../vis'
 import { InngangsIkon, Inngangspanel, InngangsStatus } from '../inngang/inngangspanel'
+
 import {
     hentIkon,
     hentIkonHover,

@@ -27,6 +27,7 @@ import { hentHotjarJsTrigger, HotjarTrigger } from '../hotjar-trigger'
 import { ViktigInformasjon } from '../soknad-intro/viktig-informasjon'
 import { hentNokkel } from '../sporsmal/sporsmal-utils'
 import Vis from '../vis'
+
 import { urlTilSoknad } from './soknad-link'
 
 const brodsmuler: Brodsmule[] = [

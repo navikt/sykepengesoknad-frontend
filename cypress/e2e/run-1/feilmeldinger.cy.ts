@@ -26,7 +26,7 @@ describe('Tester feilmeldinger', () => {
     function feilmeldingHandteringForNyeKomponenter(
         lokalFeilmelding: string,
         globalFeilmelding: string,
-        focusTarget: string
+        focusTarget: string,
     ) {
         cy.get('.navds-form-field__error').should('exist')
         cy.get('.skjemaelement__feilmelding').contains(lokalFeilmelding)
@@ -50,7 +50,7 @@ describe('Tester feilmeldinger', () => {
 
         cy.get('.navds-confirmation-panel__inner').should('exist')
         cy.get('.navds-error-message').contains(
-            'Du må bekrefte at du har lest og forstått informasjonen før du kan gå videre'
+            'Du må bekrefte at du har lest og forstått informasjonen før du kan gå videre',
         )
         cy.get('.feiloppsummering')
             .should('exist')
@@ -86,7 +86,7 @@ describe('Tester feilmeldinger', () => {
         feilmeldingHandtering(
             'Du må oppgi en gyldig dato',
             'Du må oppgi en gyldig dato',
-            arbeidstakerGradert.sporsmal[2].undersporsmal[0].id
+            arbeidstakerGradert.sporsmal[2].undersporsmal[0].id,
         )
     })
 
@@ -96,7 +96,7 @@ describe('Tester feilmeldinger', () => {
         feilmeldingHandtering(
             'Datoen kan ikke være før 01.04.2020',
             'Datoen kan ikke være før 01.04.2020',
-            arbeidstakerGradert.sporsmal[2].undersporsmal[0].id
+            arbeidstakerGradert.sporsmal[2].undersporsmal[0].id,
         )
     })
 
@@ -106,7 +106,7 @@ describe('Tester feilmeldinger', () => {
         feilmeldingHandtering(
             'Datoen kan ikke være etter 24.04.2020',
             'Datoen kan ikke være etter 24.04.2020',
-            arbeidstakerGradert.sporsmal[2].undersporsmal[0].id
+            arbeidstakerGradert.sporsmal[2].undersporsmal[0].id,
         )
     })
 
@@ -116,7 +116,7 @@ describe('Tester feilmeldinger', () => {
         feilmeldingHandtering(
             'Datoen følger ikke formatet dd.mm.åååå',
             'Datoen følger ikke formatet dd.mm.åååå',
-            arbeidstakerGradert.sporsmal[2].undersporsmal[0].id
+            arbeidstakerGradert.sporsmal[2].undersporsmal[0].id,
         )
     })
 
@@ -126,7 +126,7 @@ describe('Tester feilmeldinger', () => {
         feilmeldingHandtering(
             'Datoen følger ikke formatet dd.mm.åååå',
             'Datoen følger ikke formatet dd.mm.åååå',
-            arbeidstakerGradert.sporsmal[2].undersporsmal[0].id
+            arbeidstakerGradert.sporsmal[2].undersporsmal[0].id,
         )
     })
 
@@ -137,7 +137,7 @@ describe('Tester feilmeldinger', () => {
         feilmeldingHandtering(
             'Du må oppgi en fra og med dato',
             'Du må oppgi en fra og med dato',
-            arbeidstakerGradert.sporsmal[3].undersporsmal[0].id + '_0_fom'
+            arbeidstakerGradert.sporsmal[3].undersporsmal[0].id + '_0_fom',
         )
     })
 
@@ -147,7 +147,7 @@ describe('Tester feilmeldinger', () => {
         feilmeldingHandtering(
             'Du må oppgi en til og med dato',
             'Du må oppgi en til og med dato',
-            arbeidstakerGradert.sporsmal[3].undersporsmal[0].id + '_0_tom'
+            arbeidstakerGradert.sporsmal[3].undersporsmal[0].id + '_0_tom',
         )
     })
 
@@ -157,7 +157,7 @@ describe('Tester feilmeldinger', () => {
         feilmeldingHandtering(
             'Til og med følger ikke formatet dd.mm.åååå',
             'Til og med følger ikke formatet dd.mm.åååå',
-            arbeidstakerGradert.sporsmal[3].undersporsmal[0].id + '_0_tom'
+            arbeidstakerGradert.sporsmal[3].undersporsmal[0].id + '_0_tom',
         )
     })
 
@@ -167,7 +167,7 @@ describe('Tester feilmeldinger', () => {
         feilmeldingHandtering(
             'Fra og med må være før til og med',
             'Fra og med må være før til og med',
-            arbeidstakerGradert.sporsmal[3].undersporsmal[0].id + '_0_fom'
+            arbeidstakerGradert.sporsmal[3].undersporsmal[0].id + '_0_fom',
         )
     })
 
@@ -178,7 +178,7 @@ describe('Tester feilmeldinger', () => {
         feilmeldingHandtering(
             'Du må oppgi en fra og med dato',
             'Du må oppgi en fra og med dato',
-            arbeidstakerGradert.sporsmal[3].undersporsmal[0].id + '_1_fom'
+            arbeidstakerGradert.sporsmal[3].undersporsmal[0].id + '_1_fom',
         )
     })
 
@@ -187,14 +187,14 @@ describe('Tester feilmeldinger', () => {
         feilmeldingHandtering(
             'Du må oppgi en til og med dato',
             'Du må oppgi en til og med dato',
-            arbeidstakerGradert.sporsmal[3].undersporsmal[0].id + '_1_tom'
+            arbeidstakerGradert.sporsmal[3].undersporsmal[0].id + '_1_tom',
         )
 
         cy.focused().type('20.04.2020').blur()
         feilmeldingHandtering(
             'Perioder kan ikke overlappe',
             'Du kan ikke legge inn perioder som overlapper med hverandre',
-            arbeidstakerGradert.sporsmal[3].undersporsmal[0].id + '_1_fom'
+            arbeidstakerGradert.sporsmal[3].undersporsmal[0].id + '_1_fom',
         )
     })
 
@@ -212,7 +212,7 @@ describe('Tester feilmeldinger', () => {
         cy.get(`input[name=${arbeidstakerGradert.sporsmal[6].undersporsmal[0].id}]`).type('37.5')
         cy.get('.undersporsmal .skjemaelement__input.radioknapp[value=Timer]').focus().click({ force: true })
         cy.get(
-            `input[name=${arbeidstakerGradert.sporsmal[6].undersporsmal[1].undersporsmal[0].undersporsmal[0].id}]`
+            `input[name=${arbeidstakerGradert.sporsmal[6].undersporsmal[1].undersporsmal[0].undersporsmal[0].id}]`,
         ).type('1')
         cy.get('.skjemaelement__feilmelding').should('not.exist')
         cy.get('.feiloppsummering').should('not.exist')
@@ -220,7 +220,7 @@ describe('Tester feilmeldinger', () => {
         feilmeldingHandteringForNyeKomponenter(
             'Timene utgjør mindre enn 50 %.',
             'Antall timer du skrev inn, betyr at du har jobbet 0 % av det du gjør når du er frisk. Du må enten svare nei på øverste spørsmålet eller endre antall timer totalt.',
-            arbeidstakerGradert.sporsmal[6].undersporsmal[1].undersporsmal[0].undersporsmal[0].id
+            arbeidstakerGradert.sporsmal[6].undersporsmal[1].undersporsmal[0].undersporsmal[0].id,
         )
     })
 
@@ -234,7 +234,7 @@ describe('Tester feilmeldinger', () => {
         feilmeldingHandteringForNyeKomponenter(
             'Du må oppgi en verdi',
             'Du må svare på hvor mye du jobbet totalt',
-            arbeidstakerGradert.sporsmal[6].undersporsmal[1].undersporsmal[1].undersporsmal[0].id
+            arbeidstakerGradert.sporsmal[6].undersporsmal[1].undersporsmal[1].undersporsmal[0].id,
         )
     })
 
@@ -244,7 +244,7 @@ describe('Tester feilmeldinger', () => {
         feilmeldingHandteringForNyeKomponenter(
             'Må være minimum 51',
             'Vennligst fyll ut et tall mellom 51 og 99',
-            arbeidstakerGradert.sporsmal[6].undersporsmal[1].undersporsmal[1].undersporsmal[0].id
+            arbeidstakerGradert.sporsmal[6].undersporsmal[1].undersporsmal[1].undersporsmal[0].id,
         )
     })
 
@@ -254,7 +254,7 @@ describe('Tester feilmeldinger', () => {
         feilmeldingHandteringForNyeKomponenter(
             'Må være maksimum 99',
             'Vennligst fyll ut et tall mellom 51 og 99',
-            arbeidstakerGradert.sporsmal[6].undersporsmal[1].undersporsmal[1].undersporsmal[0].id
+            arbeidstakerGradert.sporsmal[6].undersporsmal[1].undersporsmal[1].undersporsmal[0].id,
         )
     })
 
@@ -266,14 +266,14 @@ describe('Tester feilmeldinger', () => {
         feilmeldingHandteringForNyeKomponenter(
             'Du må oppgi en verdi',
             'Du må svare på hvor mye du jobbet totalt',
-            arbeidstakerGradert.sporsmal[6].undersporsmal[1].undersporsmal[0].undersporsmal[0].id
+            arbeidstakerGradert.sporsmal[6].undersporsmal[1].undersporsmal[0].undersporsmal[0].id,
         )
         cy.focused().type('1')
         gaVidere()
         feilmeldingHandteringForNyeKomponenter(
             'Timene utgjør mindre enn 50 %.',
             'Antall timer du skrev inn, betyr at du har jobbet 0 % av det du gjør når du er frisk. Du må enten svare nei på øverste spørsmålet eller endre antall timer totalt.',
-            arbeidstakerGradert.sporsmal[6].undersporsmal[1].undersporsmal[0].undersporsmal[0].id
+            arbeidstakerGradert.sporsmal[6].undersporsmal[1].undersporsmal[0].undersporsmal[0].id,
         )
     })
 

@@ -5,6 +5,7 @@ import { Sporsmal } from '../../../types/types'
 import { tekst } from '../../../utils/tekster'
 import Vis from '../../vis'
 import { OppsummeringProps } from '../oppsummering'
+
 import Avkrysset from './avkrysset'
 import UndersporsmalSum from './undersporsmal-sum'
 

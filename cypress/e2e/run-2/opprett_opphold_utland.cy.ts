@@ -9,7 +9,7 @@ describe('Tester opprettelse av søknad om å beholde sykepenger utenfor EØS', 
     it('Laster startside', function () {
         cy.get('.navds-heading--xlarge').should('be.visible').and('have.text', 'Søknader')
         cy.get(
-            `#soknader-list-til-behandling article a[href*=${arbeidstakersoknadMedUtenlandsoppholdSoktSykepenger.id}]`
+            `#soknader-list-til-behandling article a[href*=${arbeidstakersoknadMedUtenlandsoppholdSoktSykepenger.id}]`,
         ).click()
     })
 
@@ -18,7 +18,7 @@ describe('Tester opprettelse av søknad om å beholde sykepenger utenfor EØS', 
 
         // Godkjenne ANSVARSERKLARING
         cy.contains(
-            'Jeg vet at jeg kan miste retten til sykepenger hvis opplysningene jeg gir ikke er riktige eller fullstendige. Jeg vet også at NAV kan holde igjen eller kreve tilbake penger, og at å gi feil opplysninger kan være straffbart.'
+            'Jeg vet at jeg kan miste retten til sykepenger hvis opplysningene jeg gir ikke er riktige eller fullstendige. Jeg vet også at NAV kan holde igjen eller kreve tilbake penger, og at å gi feil opplysninger kan være straffbart.',
         ).click({
             force: true,
         })
@@ -37,7 +37,7 @@ describe('Tester opprettelse av søknad om å beholde sykepenger utenfor EØS', 
         cy.get('.utland_infotekst')
             .should(
                 'include.text',
-                'Du må ha sendt en egen utenlandssøknad for å svare ja på dette spørsmålet. Husk at du også må fullføre denne søknaden om sykepenger.'
+                'Du må ha sendt en egen utenlandssøknad for å svare ja på dette spørsmålet. Husk at du også må fullføre denne søknaden om sykepenger.',
             )
             .find('a')
             .should('have.attr', 'href', '/syk/sykepengesoknad/sykepengesoknad-utland')
@@ -49,7 +49,7 @@ describe('Tester opprettelse av søknad om å beholde sykepenger utenfor EØS', 
         cy.get('.utland_infotekst')
             .should(
                 'include.text',
-                'I utgangspunktet kan du bare få sykepenger mens du er i et land innenfor EØS. Du kan likevel søke NAV om å få reise ut av EØS og beholde sykepengene i en begrenset periode.'
+                'I utgangspunktet kan du bare få sykepenger mens du er i et land innenfor EØS. Du kan likevel søke NAV om å få reise ut av EØS og beholde sykepengene i en begrenset periode.',
             )
             .find('a')
             .should('have.attr', 'href', '/syk/sykepengesoknad/sykepengesoknad-utland')

@@ -78,7 +78,7 @@ describe('Tester ettersending og korrigering', () => {
 
         cy.contains('Jeg vil at søknaden skal behandles av NAV').click()
         cy.contains(
-            'Vanligvis behandles søknaden bare av NAV hvis det samlede sykefraværet er 16 dager eller mer. Denne søknaden er beregnet til å være kortere. Hvis arbeidsgiveren din eller NAV har bedt deg sende den likevel, gjør du det her.'
+            'Vanligvis behandles søknaden bare av NAV hvis det samlede sykefraværet er 16 dager eller mer. Denne søknaden er beregnet til å være kortere. Hvis arbeidsgiveren din eller NAV har bedt deg sende den likevel, gjør du det her.',
         )
         cy.contains('Send søknaden til NAV').click()
         cy.contains('Jeg vil at søknaden skal behandles av NAV').should('not.exist')

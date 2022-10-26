@@ -22,7 +22,7 @@ describe('Tester arbeidsledigsøknad', () => {
 
         // Godkjenne ANSVARSERKLARING
         cy.contains(
-            'Jeg vet at jeg kan miste retten til sykepenger hvis opplysningene jeg gir ikke er riktige eller fullstendige. Jeg vet også at NAV kan holde igjen eller kreve tilbake penger, og at å gi feil opplysninger kan være straffbart.'
+            'Jeg vet at jeg kan miste retten til sykepenger hvis opplysningene jeg gir ikke er riktige eller fullstendige. Jeg vet også at NAV kan holde igjen eller kreve tilbake penger, og at å gi feil opplysninger kan være straffbart.',
         ).click({
             force: true,
         })
@@ -65,7 +65,7 @@ describe('Tester arbeidsledigsøknad', () => {
         cy.get('.undersporsmal .checkboxgruppe .radioContainer .radioknapp#687405_0').click({ force: true })
         cy.contains(
             'Du må sende egen sykepengesøknad for dette. ' +
-                'Det betyr også at legen må skrive en sykmelding for hvert arbeidsforhold du er sykmeldt fra.'
+                'Det betyr også at legen må skrive en sykmelding for hvert arbeidsforhold du er sykmeldt fra.',
         )
 
         cy.contains('Gå videre').click()
@@ -117,7 +117,7 @@ describe('Tester arbeidsledigsøknad', () => {
         cy.url().should('include', `${soknad.id}/6`)
         cy.get('.navds-checkbox__label').click({ force: true })
         cy.contains(
-            'Jeg har lest all informasjonen jeg har fått i søknaden og bekrefter at opplysningene jeg har gitt er korrekte.'
+            'Jeg har lest all informasjonen jeg har fått i søknaden og bekrefter at opplysningene jeg har gitt er korrekte.',
         )
         cy.contains('Søknaden sendes til').should('not.exist')
 

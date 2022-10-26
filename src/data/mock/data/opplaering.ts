@@ -1,5 +1,6 @@
 import { RSSoknad } from '../../../types/rs-types/rs-soknad'
 import { Persona } from '../personas'
+
 import { oppholdUtland } from './opphold-utland'
 import { gradertReisetilskudd, nyttReisetilskudd } from './reisetilskudd'
 import {

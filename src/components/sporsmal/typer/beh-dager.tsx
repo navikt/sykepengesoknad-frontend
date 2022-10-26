@@ -4,6 +4,7 @@ import React from 'react'
 import FeilLokal from '../../feil/feil-lokal'
 import BjornUnderSporsmalstekst from '../bjorn/bjorn-under-sporsmalstekst'
 import { SpmProps } from '../sporsmal-form/sporsmal-form'
+
 import BehandlingsUke from './behandlings-uke'
 
 const BehDager = ({ sporsmal }: SpmProps) => {

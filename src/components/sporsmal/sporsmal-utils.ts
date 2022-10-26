@@ -58,7 +58,7 @@ interface FeilmeldingProps {
 
 export const hentFeilmelding = (
     sporsmal: Sporsmal,
-    error?: FieldError | Merge<FieldError, FieldErrorsImpl<any>> | undefined
+    error?: FieldError | Merge<FieldError, FieldErrorsImpl<any>> | undefined,
 ): FeilmeldingProps => {
     const feilmelding: FeilmeldingProps = {
         global: tekst(('soknad.feilmelding.' + sporsmal.tag) as any),
@@ -72,7 +72,7 @@ export const hentFeilmelding = (
 
 export const hentGeneriskFeilmelding = (
     svartype: RSSvartype,
-    error?: FieldError | Merge<FieldError, FieldErrorsImpl<any>> | undefined
+    error?: FieldError | Merge<FieldError, FieldErrorsImpl<any>> | undefined,
 ) => {
     const type = error?.type
 

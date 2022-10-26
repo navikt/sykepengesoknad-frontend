@@ -70,7 +70,7 @@ function terminalLog(violations: any) {
         'log',
         `${violations.length} accessibility violation${violations.length === 1 ? '' : 's'} ${
             violations.length === 1 ? 'was' : 'were'
-        } detected`
+        } detected`,
     )
     // pluck specific keys to keep the table readable
     const violationData = violations.map(({ id, impact, description, nodes }: any) => ({
@@ -131,51 +131,51 @@ const verifiserSvarFormat = (sporsmal: RSSporsmal) => {
         case RSSvartype.CHECKBOX_PANEL:
             expect(sporsmal.svar[0]?.verdi).to.match(
                 RegExp(`(${SvarEnums.CHECKED}|${SvarEnums.UNCHECKED})`),
-                `Svar format ${sporsmal.svartype}`
+                `Svar format ${sporsmal.svartype}`,
             )
             break
         case RSSvartype.JA_NEI:
             expect(sporsmal.svar[0]?.verdi).to.match(
                 RegExp(`(${SvarEnums.JA}|${SvarEnums.NEI}|)`),
-                `Svar format ${sporsmal.svartype}`
+                `Svar format ${sporsmal.svartype}`,
             )
             break
         case RSSvartype.RADIO_GRUPPE_UKEKALENDER:
             expect(sporsmal.svar[0]?.verdi).to.match(
                 RegExp('(Ikke til behandling|\\d{4}-\\d{2}-\\d{2})'),
-                `Svar format ${sporsmal.svartype}`
+                `Svar format ${sporsmal.svartype}`,
             )
             break
         case RSSvartype.CHECKBOX:
             expect(sporsmal.svar[0]?.verdi).to.match(
                 RegExp(`(${SvarEnums.CHECKED}|)`),
-                `Svar format ${sporsmal.svartype}`
+                `Svar format ${sporsmal.svartype}`,
             )
             break
         case RSSvartype.DATO:
             expect(sporsmal.svar[0]?.verdi).to.match(
                 RegExp('(\\d{4}-\\d{2}-\\d{2})'),
-                `Svar format ${sporsmal.svartype}`
+                `Svar format ${sporsmal.svartype}`,
             )
             break
         case RSSvartype.DATOER:
             expect(sporsmal.svar[0]?.verdi).to.match(
                 RegExp('(\\d{4}-\\d{2}-\\d{2})'),
-                `Svar format ${sporsmal.svartype}`
+                `Svar format ${sporsmal.svartype}`,
             )
             break
         case RSSvartype.KVITTERING:
             expect(sporsmal.svar[0]?.verdi).to.match(
                 RegExp(
-                    '{"blobId":"\\w{8}-\\w{4}-\\w{4}-\\w{4}-\\w{12}","belop":\\d+,"typeUtgift":"\\w+","opprettet":"\\d{4}-\\d{2}-\\d{2}T\\d{2}:\\d{2}:\\d{2}.\\d{3}Z"}'
+                    '{"blobId":"\\w{8}-\\w{4}-\\w{4}-\\w{4}-\\w{12}","belop":\\d+,"typeUtgift":"\\w+","opprettet":"\\d{4}-\\d{2}-\\d{2}T\\d{2}:\\d{2}:\\d{2}.\\d{3}Z"}',
                 ),
-                `Svar format ${sporsmal.svartype}`
+                `Svar format ${sporsmal.svartype}`,
             )
             break
         case RSSvartype.PERIODER:
             expect(sporsmal.svar[0]?.verdi).to.match(
                 RegExp('{"fom":"\\d{4}-\\d{2}-\\d{2}","tom":"\\d{4}-\\d{2}-\\d{2}"}'),
-                `Svar format ${sporsmal.svartype}`
+                `Svar format ${sporsmal.svartype}`,
             )
             break
         case RSSvartype.TALL:
@@ -194,7 +194,7 @@ const verifiserSvarFormat = (sporsmal: RSSporsmal) => {
         case RSSvartype.RADIO:
             expect(sporsmal.svar[0]?.verdi).to.match(
                 RegExp(`(${SvarEnums.CHECKED}|)`),
-                `Svar format ${sporsmal.svartype}`
+                `Svar format ${sporsmal.svartype}`,
             )
             break
         case RSSvartype.LAND:

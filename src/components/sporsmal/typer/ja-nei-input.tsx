@@ -105,10 +105,10 @@ const JaNeiInput = ({ sporsmal }: SpmProps) => {
                                 getLedetekst(
                                     tekst(
                                         ('soknad.infotekst.utlandsopphold_sokt_sykepenger.' +
-                                            watchJaNei?.toLowerCase()) as any
+                                            watchJaNei?.toLowerCase()) as any,
                                     ),
-                                    { '%URL%': utlandssoknadUrl }
-                                )
+                                    { '%URL%': utlandssoknadUrl },
+                                ),
                             )}
                         </BodyLong>
                     )}

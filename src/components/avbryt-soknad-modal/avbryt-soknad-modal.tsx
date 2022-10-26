@@ -8,6 +8,7 @@ import { RSSoknadstatus } from '../../types/rs-types/rs-soknadstatus'
 import { tekst } from '../../utils/tekster'
 import { useAmplitudeInstance } from '../amplitude/amplitude'
 import { EndringUtenEndringModal } from '../sporsmal/endring-uten-endring/endring-uten-endring-modal'
+
 import { avbrytSoknad } from './avbryt-soknad'
 
 const AvbrytKorrigering = () => {

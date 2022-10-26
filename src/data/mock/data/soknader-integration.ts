@@ -2,6 +2,7 @@ import dayjs from 'dayjs'
 
 import { RSSoknad } from '../../../types/rs-types/rs-soknad'
 import { jsonDeepCopy } from '../../../utils/json-deep-copy'
+
 import { brukertestSoknad } from './brukertest'
 import { arbeidstaker } from './opplaering'
 import {

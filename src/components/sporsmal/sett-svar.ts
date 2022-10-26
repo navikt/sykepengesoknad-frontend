@@ -128,7 +128,7 @@ const datoerSvar = (sporsmal: Sporsmal, verdi: any) => {
             .map((dag: string) =>
                 svar.push({
                     verdi: dag,
-                })
+                }),
             )
     }
     sporsmal.svarliste = {

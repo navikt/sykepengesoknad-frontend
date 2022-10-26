@@ -5,6 +5,7 @@ import { Soknad } from '../../types/types'
 import { tallTilSpråk } from '../../utils/tallTilSpraak'
 import { getLedetekst, tekst } from '../../utils/tekster'
 import { urlTilSoknad } from '../soknad/soknad-link'
+
 import { GuidepanelMedKnapp } from './guidepanel-med-knapp'
 
 interface EldreUsendtSoknadProps {

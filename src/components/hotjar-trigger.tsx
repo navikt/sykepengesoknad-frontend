@@ -15,7 +15,7 @@ interface HotjarWindow extends Window {
 
 export const hentHotjarJsTrigger = (
     soknadstype: RSSoknadstype,
-    sted: 'kvittering' | 'sendt' | 'soknad'
+    sted: 'kvittering' | 'sendt' | 'soknad',
 ): string | null => {
     if (sted == 'soknad' || sted == 'sendt' || sted == 'kvittering') {
         switch (soknadstype) {

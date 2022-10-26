@@ -32,7 +32,7 @@ export async function avbrytSoknad({
             {
                 method: 'POST',
                 credentials: 'include',
-            }
+            },
         )
     } catch (e: any) {
         if (!(e instanceof AuthenticationError)) {

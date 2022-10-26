@@ -23,7 +23,7 @@ describe('Tester arbeidstakersøknad - gradert 50%', () => {
 
         // Godkjenne ANSVARSERKLARING
         cy.contains(
-            'Jeg vet at jeg kan miste retten til sykepenger hvis opplysningene jeg gir ikke er riktige eller fullstendige. Jeg vet også at NAV kan holde igjen eller kreve tilbake penger, og at å gi feil opplysninger kan være straffbart.'
+            'Jeg vet at jeg kan miste retten til sykepenger hvis opplysningene jeg gir ikke er riktige eller fullstendige. Jeg vet også at NAV kan holde igjen eller kreve tilbake penger, og at å gi feil opplysninger kan være straffbart.',
         ).click({
             force: true,
         })
@@ -45,7 +45,7 @@ describe('Tester arbeidstakersøknad - gradert 50%', () => {
         cy.get('.inputPanelGruppe__inner label:first-child > input[value=JA]').click({ force: true })
 
         cy.contains(
-            'Hvilke dager var du syk og borte fra jobb, før du ble sykmeldt? Du trenger bare oppgi dager før 1. april 2020.'
+            'Hvilke dager var du syk og borte fra jobb, før du ble sykmeldt? Du trenger bare oppgi dager før 1. april 2020.',
         )
         cy.get('#687299_0 .fom .ds-datepicker__calendarButton').click()
 
@@ -118,7 +118,7 @@ describe('Tester arbeidstakersøknad - gradert 50%', () => {
 
         // Underspørsmål 1
         cy.contains(
-            'Hvor mange timer i uken jobber du vanligvis når du er frisk? Varierer det, kan du oppgi gjennomsnittet.'
+            'Hvor mange timer i uken jobber du vanligvis når du er frisk? Varierer det, kan du oppgi gjennomsnittet.',
         )
         cy.get('.undersporsmal .navds-text-field__input#687312').focus().type('12')
 
@@ -143,7 +143,7 @@ describe('Tester arbeidstakersøknad - gradert 50%', () => {
         // Feilmelding
         cy.get('.skjemaelement__feilmelding').contains('Timene utgjør mindre enn 50 %.')
         cy.contains(
-            'Antall timer du skrev inn, betyr at du har jobbet 49 % av det du gjør når du er frisk. Du må enten svare nei på øverste spørsmålet eller endre antall timer totalt.'
+            'Antall timer du skrev inn, betyr at du har jobbet 49 % av det du gjør når du er frisk. Du må enten svare nei på øverste spørsmålet eller endre antall timer totalt.',
         )
 
         // Endre timer til 11, som er mer enn 10.8
@@ -172,7 +172,7 @@ describe('Tester arbeidstakersøknad - gradert 50%', () => {
         cy.contains('Velg inntektskildene som passer for deg. Finner du ikke noe som passer for deg, svarer du nei')
         cy.get('.undersporsmal .checkboxgruppe label[for=d9ac4359-5519-34f1-b59d-b5ab24e55821]').should(
             'include.text',
-            'ansatt et annet sted enn nevnt over'
+            'ansatt et annet sted enn nevnt over',
         )
         cy.get('.undersporsmal .checkboxgruppe .checkboks#d9ac4359-5519-34f1-b59d-b5ab24e55821').click({ force: true })
 
@@ -202,7 +202,7 @@ describe('Tester arbeidstakersøknad - gradert 50%', () => {
         cy.url().should('include', `${soknad.id}/11`)
         cy.get('.navds-checkbox__label').click({ force: true })
         cy.contains(
-            'Jeg har lest all informasjonen jeg har fått i søknaden og bekrefter at opplysningene jeg har gitt er korrekte.'
+            'Jeg har lest all informasjonen jeg har fått i søknaden og bekrefter at opplysningene jeg har gitt er korrekte.',
         )
         cy.contains('Søknaden sendes til POSTEN NORGE AS, BÆRUM med kopi til NAV.')
 

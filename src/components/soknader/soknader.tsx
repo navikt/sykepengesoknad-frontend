@@ -10,6 +10,7 @@ import Banner from '../banner/banner'
 import Brodsmuler from '../brodsmuler/brodsmuler'
 import OmSykepenger from '../om-sykepenger/om-sykepenger'
 import Vis from '../vis'
+
 import Teasere from './teaser/teasere'
 
 const brodsmuler: Brodsmule[] = [
@@ -28,7 +29,7 @@ const Soknader = () => {
             (soknad) =>
                 soknad.status === RSSoknadstatus.NY ||
                 soknad.status === RSSoknadstatus.UTKAST_TIL_KORRIGERING ||
-                soknad.status === RSSoknadstatus.FREMTIDIG
+                soknad.status === RSSoknadstatus.FREMTIDIG,
         )
         .sort(sorterEtterNyesteFom)
         .reverse()
@@ -38,7 +39,7 @@ const Soknader = () => {
             (soknad) =>
                 soknad.status === RSSoknadstatus.SENDT ||
                 soknad.status === RSSoknadstatus.AVBRUTT ||
-                soknad.status === RSSoknadstatus.UTGAATT
+                soknad.status === RSSoknadstatus.UTGAATT,
         )
         .sort(sorterEtterNyesteFom)
 

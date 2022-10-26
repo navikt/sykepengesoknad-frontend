@@ -7,7 +7,7 @@ describe('Ved korrigering av ferie forsvinner bjørn og det er en infotekst om i
         cy.visit(`http://localhost:8080/syk/sykepengesoknad/soknader/${soknad.id}/3?testperson=alle-soknader`)
         cy.url().should(
             'equal',
-            `http://localhost:8080/syk/sykepengesoknad/soknader/${soknad.id}/3?testperson=alle-soknader`
+            `http://localhost:8080/syk/sykepengesoknad/soknader/${soknad.id}/3?testperson=alle-soknader`,
         )
 
         cy.contains('Tok du ut feriedager i tidsrommet 1. - 24. april 2020?')

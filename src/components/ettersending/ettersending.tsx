@@ -54,7 +54,7 @@ const Ettersending = ({ gjelder, setRerendrekvittering }: EttersendingProps) => 
                     method: 'POST',
                     credentials: 'include',
                     headers: { 'Content-Type': 'application/json' },
-                }
+                },
             )
         } catch (e: any) {
             if (!(e instanceof AuthenticationError)) {
@@ -80,7 +80,7 @@ const Ettersending = ({ gjelder, setRerendrekvittering }: EttersendingProps) => 
                     method: 'POST',
                     credentials: 'include',
                     headers: { 'Content-Type': 'application/json' },
-                }
+                },
             )
         } catch (e: any) {
             if (!(e instanceof AuthenticationError)) {

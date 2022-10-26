@@ -1,4 +1,5 @@
 import { Sykmelding } from '../../../types/sykmelding'
+
 import { brukertestSykmelding } from './brukertest'
 
 export const arbeidstaker100Syk = new Sykmelding({
