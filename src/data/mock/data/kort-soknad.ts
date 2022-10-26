@@ -57,7 +57,6 @@ export const kortArbeidstakerSoknad: RSSoknad = {
             svar: [],
             undersporsmal: [],
         },
-
         {
             id: '687372',
             tag: 'VAER_KLAR_OVER_AT',

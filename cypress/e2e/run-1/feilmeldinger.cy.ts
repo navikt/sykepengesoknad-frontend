@@ -1,4 +1,4 @@
-import { arbeidstakerGradert } from '../../../src/data/mock/data/soknader-opplaering'
+import { arbeidstakerGradert } from '../../../src/data/mock/data/opplaering'
 import { RSSoknad } from '../../../src/types/rs-types/rs-soknad'
 
 describe('Tester feilmeldinger', () => {

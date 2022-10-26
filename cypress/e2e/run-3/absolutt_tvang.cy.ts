@@ -1,4 +1,4 @@
-import { arbeidstaker } from '../../../src/data/mock/data/soknader-opplaering'
+import { arbeidstaker } from '../../../src/data/mock/data/opplaering'
 
 describe('Tester at åpne sykmeldinger må sendes inn', () => {
     describe('Tester med en usendt sykmelding', () => {

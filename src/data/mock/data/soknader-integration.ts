@@ -3,7 +3,7 @@ import dayjs from 'dayjs'
 import { RSSoknad } from '../../../types/rs-types/rs-soknad'
 import { jsonDeepCopy } from '../../../utils/json-deep-copy'
 import { brukertestSoknad } from './brukertest'
-import { arbeidstaker } from './soknader-opplaering'
+import { arbeidstaker } from './opplaering'
 import {
     arbeidsledig100Syk,
     arbeidstaker100Syk,
@@ -393,8 +393,8 @@ export const avbruttSoknad: RSSoknad = {
             undersporsmal: [],
         },
         {
-            id: '111',
-            tag: 'ANDRE_INNTEKTSKILDER',
+            id: 'ed62a3b3-4203-3b61-a684-2300bea2ffac',
+            tag: 'ANDRE_INNTEKTSKILDER_V2',
             sporsmalstekst: 'Har du andre inntektskilder enn 995816598 sitt orgnavn :)?',
             undertekst: null,
             svartype: 'JA_NEI',
@@ -405,9 +405,10 @@ export const avbruttSoknad: RSSoknad = {
             svar: [],
             undersporsmal: [
                 {
-                    id: '112',
+                    id: 'd25b338d-9a9a-379f-b474-517738a9523b',
                     tag: 'HVILKE_ANDRE_INNTEKTSKILDER',
-                    sporsmalstekst: 'Hvilke andre inntektskilder har du?',
+                    sporsmalstekst:
+                        'Velg inntektskildene som passer for deg. Finner du ikke noe som passer for deg, svarer du nei',
                     undertekst: null,
                     svartype: 'CHECKBOX_GRUPPE',
                     min: null,
@@ -417,34 +418,20 @@ export const avbruttSoknad: RSSoknad = {
                     svar: [],
                     undersporsmal: [
                         {
-                            id: '113',
+                            id: 'd9ac4359-5519-34f1-b59d-b5ab24e55821',
                             tag: 'INNTEKTSKILDE_ANDRE_ARBEIDSFORHOLD',
-                            sporsmalstekst: 'andre arbeidsforhold',
+                            sporsmalstekst: 'ansatt et annet sted enn nevnt over',
                             undertekst: null,
                             svartype: 'CHECKBOX',
                             min: null,
                             max: null,
                             pavirkerAndreSporsmal: false,
-                            kriterieForVisningAvUndersporsmal: 'CHECKED',
+                            kriterieForVisningAvUndersporsmal: null,
                             svar: [],
-                            undersporsmal: [
-                                {
-                                    id: '114',
-                                    tag: 'INNTEKTSKILDE_ANDRE_ARBEIDSFORHOLD_ER_DU_SYKMELDT',
-                                    sporsmalstekst: 'Er du sykmeldt fra dette?',
-                                    undertekst: null,
-                                    svartype: 'JA_NEI',
-                                    min: null,
-                                    max: null,
-                                    pavirkerAndreSporsmal: false,
-                                    kriterieForVisningAvUndersporsmal: null,
-                                    svar: [],
-                                    undersporsmal: [],
-                                },
-                            ],
+                            undersporsmal: [],
                         },
                         {
-                            id: '115',
+                            id: '989711be-5362-3f24-a02a-f1b3e3c31f99',
                             tag: 'INNTEKTSKILDE_SELVSTENDIG',
                             sporsmalstekst: 'selvstendig næringsdrivende',
                             undertekst: null,
@@ -452,53 +439,25 @@ export const avbruttSoknad: RSSoknad = {
                             min: null,
                             max: null,
                             pavirkerAndreSporsmal: false,
-                            kriterieForVisningAvUndersporsmal: 'CHECKED',
+                            kriterieForVisningAvUndersporsmal: null,
                             svar: [],
-                            undersporsmal: [
-                                {
-                                    id: '116',
-                                    tag: 'INNTEKTSKILDE_SELVSTENDIG_ER_DU_SYKMELDT',
-                                    sporsmalstekst: 'Er du sykmeldt fra dette?',
-                                    undertekst: null,
-                                    svartype: 'JA_NEI',
-                                    min: null,
-                                    max: null,
-                                    pavirkerAndreSporsmal: false,
-                                    kriterieForVisningAvUndersporsmal: null,
-                                    svar: [],
-                                    undersporsmal: [],
-                                },
-                            ],
+                            undersporsmal: [],
                         },
                         {
-                            id: '117',
+                            id: '3e710b2b-1e91-3d62-8d5d-55cb5eef120f',
                             tag: 'INNTEKTSKILDE_SELVSTENDIG_DAGMAMMA',
-                            sporsmalstekst: 'dagmamma',
+                            sporsmalstekst: 'dagmammma',
                             undertekst: null,
                             svartype: 'CHECKBOX',
                             min: null,
                             max: null,
                             pavirkerAndreSporsmal: false,
-                            kriterieForVisningAvUndersporsmal: 'CHECKED',
+                            kriterieForVisningAvUndersporsmal: null,
                             svar: [],
-                            undersporsmal: [
-                                {
-                                    id: '118',
-                                    tag: 'INNTEKTSKILDE_SELVSTENDIG_DAGMAMMA_ER_DU_SYKMELDT',
-                                    sporsmalstekst: 'Er du sykmeldt fra dette?',
-                                    undertekst: null,
-                                    svartype: 'JA_NEI',
-                                    min: null,
-                                    max: null,
-                                    pavirkerAndreSporsmal: false,
-                                    kriterieForVisningAvUndersporsmal: null,
-                                    svar: [],
-                                    undersporsmal: [],
-                                },
-                            ],
+                            undersporsmal: [],
                         },
                         {
-                            id: '119',
+                            id: 'c1a746d9-bd9f-396a-99b9-18feece3b9cc',
                             tag: 'INNTEKTSKILDE_JORDBRUKER',
                             sporsmalstekst: 'jordbruk / fiske / reindrift',
                             undertekst: null,
@@ -506,26 +465,12 @@ export const avbruttSoknad: RSSoknad = {
                             min: null,
                             max: null,
                             pavirkerAndreSporsmal: false,
-                            kriterieForVisningAvUndersporsmal: 'CHECKED',
+                            kriterieForVisningAvUndersporsmal: null,
                             svar: [],
-                            undersporsmal: [
-                                {
-                                    id: '120',
-                                    tag: 'INNTEKTSKILDE_JORDBRUKER_ER_DU_SYKMELDT',
-                                    sporsmalstekst: 'Er du sykmeldt fra dette?',
-                                    undertekst: null,
-                                    svartype: 'JA_NEI',
-                                    min: null,
-                                    max: null,
-                                    pavirkerAndreSporsmal: false,
-                                    kriterieForVisningAvUndersporsmal: null,
-                                    svar: [],
-                                    undersporsmal: [],
-                                },
-                            ],
+                            undersporsmal: [],
                         },
                         {
-                            id: '121',
+                            id: 'ab377350-e3fe-3e46-8eb7-d3bb38d6506d',
                             tag: 'INNTEKTSKILDE_FRILANSER',
                             sporsmalstekst: 'frilanser',
                             undertekst: null,
@@ -533,28 +478,27 @@ export const avbruttSoknad: RSSoknad = {
                             min: null,
                             max: null,
                             pavirkerAndreSporsmal: false,
-                            kriterieForVisningAvUndersporsmal: 'CHECKED',
+                            kriterieForVisningAvUndersporsmal: null,
                             svar: [],
-                            undersporsmal: [
-                                {
-                                    id: '122',
-                                    tag: 'INNTEKTSKILDE_FRILANSER_ER_DU_SYKMELDT',
-                                    sporsmalstekst: 'Er du sykmeldt fra dette?',
-                                    undertekst: null,
-                                    svartype: 'JA_NEI',
-                                    min: null,
-                                    max: null,
-                                    pavirkerAndreSporsmal: false,
-                                    kriterieForVisningAvUndersporsmal: null,
-                                    svar: [],
-                                    undersporsmal: [],
-                                },
-                            ],
+                            undersporsmal: [],
                         },
                         {
-                            id: '123',
-                            tag: 'INNTEKTSKILDE_ANNET',
-                            sporsmalstekst: 'annet',
+                            id: '7b4d4adc-de4f-38fd-a997-e5337fbb9a5c',
+                            tag: 'INNTEKTSKILDE_FOSTERHJEM',
+                            sporsmalstekst: 'fosterhjemsgodtgjørelse',
+                            undertekst: null,
+                            svartype: 'CHECKBOX',
+                            min: null,
+                            max: null,
+                            pavirkerAndreSporsmal: false,
+                            kriterieForVisningAvUndersporsmal: null,
+                            svar: [],
+                            undersporsmal: [],
+                        },
+                        {
+                            id: 'bb9418bf-8b6a-3472-9ae6-ecd464e86b7a',
+                            tag: 'INNTEKTSKILDE_STYREVERV',
+                            sporsmalstekst: 'styreverv',
                             undertekst: null,
                             svartype: 'CHECKBOX',
                             min: null,
@@ -4436,6 +4380,7 @@ foranArbeidstakerMedOppholdKvittering.tom = '2020-03-27'
 
 export const soknadSomTriggerSporsmalFinnesIkkeISoknad: RSSoknad = jsonDeepCopy(arbeidstaker)
 soknadSomTriggerSporsmalFinnesIkkeISoknad.id = '2c45e5b3-1e0b-486a-ab6c-555b1ea02ed1'
+
 export const soknadSomTriggerFeilStatusForOppdaterSporsmal: RSSoknad = jsonDeepCopy(arbeidstaker)
 soknadSomTriggerFeilStatusForOppdaterSporsmal.id = '3335e5b3-1e0b-486a-ab6c-555b1ea02ed1'
 

@@ -1,4 +1,4 @@
-import { arbeidstakerGradert } from '../../../src/data/mock/data/soknader-opplaering'
+import { arbeidstakerGradert } from '../../../src/data/mock/data/opplaering'
 
 describe('Tester ettersending og korrigering', () => {
     const soknad = arbeidstakerGradert

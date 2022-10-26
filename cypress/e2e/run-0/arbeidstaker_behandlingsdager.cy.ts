@@ -1,4 +1,4 @@
-import { behandlingsdager } from '../../../src/data/mock/data/soknader-opplaering'
+import { behandlingsdager } from '../../../src/data/mock/data/opplaering'
 
 describe('Tester behandlingsdagersøknad', () => {
     //-----
