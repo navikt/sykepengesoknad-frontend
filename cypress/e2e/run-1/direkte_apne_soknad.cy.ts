@@ -1,5 +1,5 @@
+import { arbeidstaker } from '../../../src/data/mock/data/opplaering'
 import { sendtArbeidsledig } from '../../../src/data/mock/data/soknader-integration'
-import { arbeidstaker } from '../../../src/data/mock/data/soknader-opplaering'
 
 describe('Tester å åpne søknaden direkte fra sykefravaer', () => {
     const soknad = arbeidstaker

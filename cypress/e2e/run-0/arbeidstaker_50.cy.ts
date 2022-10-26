@@ -1,4 +1,4 @@
-import { arbeidstakerGradert } from '../../../src/data/mock/data/soknader-opplaering'
+import { arbeidstakerGradert } from '../../../src/data/mock/data/opplaering'
 
 describe('Tester arbeidstakersøknad - gradert 50%', () => {
     const soknad = arbeidstakerGradert
@@ -162,36 +162,19 @@ describe('Tester arbeidstakersøknad - gradert 50%', () => {
         cy.contains('Gå videre').click()
     })
 
-    it('Søknad ANDRE_INNTEKTSKILDER', function () {
+    it('Søknad ANDRE_INNTEKTSKILDER_V2', function () {
         cy.url().should('include', `${soknad.id}/9`)
 
-        // Test spørsmål
+        cy.contains('Har du andre inntektskilder enn Posten Norge AS, Bærum?')
+
         cy.get('.inputPanelGruppe__inner label:first-child > input[value=JA]').click({ force: true })
 
-        // Svarer JA
-        // Underspørsmål nivå 1 - checkbox
-        cy.contains('Hvilke andre inntektskilder har du?')
-        cy.get('.undersporsmal .checkboxgruppe label[for=687320]').should('include.text', 'andre arbeidsforhold')
-        cy.get('.undersporsmal .checkboxgruppe .checkboks#687320').click({
-            force: true,
-        })
-        // Underspørsmål nivå 2 - radio
-        cy.get('.undersporsmal .checkboxgruppe .radioContainer .radioknapp#687321_0').click({ force: true })
-        cy.contains(
-            'Du må sende egen sykepengesøknad for dette. ' +
-                'Det betyr også at legen må skrive en sykmelding for hvert arbeidsforhold du er sykmeldt fra.'
+        cy.contains('Velg inntektskildene som passer for deg. Finner du ikke noe som passer for deg, svarer du nei')
+        cy.get('.undersporsmal .checkboxgruppe label[for=d9ac4359-5519-34f1-b59d-b5ab24e55821]').should(
+            'include.text',
+            'ansatt et annet sted enn nevnt over'
         )
-
-        // Svarer NEI
-        // Underspørsmål nivå 1 - checkbox
-        cy.contains('Hvilke andre inntektskilder har du?')
-        cy.get('.undersporsmal .checkboxgruppe label[for=687322]').should('include.text', 'selvstendig næringsdrivende')
-        cy.get('.undersporsmal .checkboxgruppe .checkboks#687322').click({
-            force: true,
-        })
-
-        // Underspørsmål nivå 2 - radio
-        cy.get('.undersporsmal .checkboxgruppe .radioContainer .radioknapp#687323_1').click()
+        cy.get('.undersporsmal .checkboxgruppe .checkboks#d9ac4359-5519-34f1-b59d-b5ab24e55821').click({ force: true })
 
         cy.contains('Gå videre').click()
     })

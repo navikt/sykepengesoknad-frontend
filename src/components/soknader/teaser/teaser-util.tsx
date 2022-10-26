@@ -2,7 +2,7 @@ import { BodyLong, BodyShort } from '@navikt/ds-react'
 import dayjs from 'dayjs'
 import React from 'react'
 
-import { arbeidstakerGradert } from '../../../data/mock/data/soknader-opplaering'
+import { arbeidstakerGradert } from '../../../data/mock/data/opplaering'
 import { RSArbeidssituasjon } from '../../../types/rs-types/rs-arbeidssituasjon'
 import { RSSoknadstatus } from '../../../types/rs-types/rs-soknadstatus'
 import { RSSoknadstype } from '../../../types/rs-types/rs-soknadstype'

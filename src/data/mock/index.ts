@@ -6,6 +6,7 @@ import { RSSoknad } from '../../types/rs-types/rs-soknad'
 import { RSSoknadstatus } from '../../types/rs-types/rs-soknadstatus'
 import { RSSoknadstype } from '../../types/rs-types/rs-soknadstype'
 import { jsonDeepCopy } from '../../utils/json-deep-copy'
+import { arbeidstaker, arbeidstakerGradert, opplaering, soknaderOpplaering } from './data/opplaering'
 import { feilVedSlettingAvKvittering } from './data/reisetilskudd'
 import {
     arbeidstakerDeltPeriodeForsteUtenforArbeidsgiverperiodeKvittering,
@@ -18,8 +19,7 @@ import {
     soknadSomTriggerFeilStatusForOppdaterSporsmal,
     soknadSomTriggerSporsmalFinnesIkkeISoknad,
 } from './data/soknader-integration'
-import { arbeidstaker, arbeidstakerGradert, soknaderOpplaering } from './data/soknader-opplaering'
-import { alleData, opplaering, Persona } from './personas'
+import { alleData, Persona } from './personas'
 import { personas } from './testperson'
 
 const soknader = alleData.soknader

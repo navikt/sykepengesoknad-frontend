@@ -1,4 +1,4 @@
-import { arbeidsledig } from '../../../src/data/mock/data/soknader-opplaering'
+import { arbeidsledig } from '../../../src/data/mock/data/opplaering'
 
 describe('Tester arbeidsledigsøknad', () => {
     const soknad = arbeidsledig

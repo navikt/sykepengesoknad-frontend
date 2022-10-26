@@ -1,5 +1,5 @@
+import { oppholdUtland } from '../../../src/data/mock/data/opphold-utland'
 import { arbeidstakersoknadMedUtenlandsoppholdSoktSykepenger } from '../../../src/data/mock/data/soknader-integration'
-import { oppholdUtland } from '../../../src/data/mock/data/soknader-opplaering'
 
 describe('Tester opprettelse av søknad om å beholde sykepenger utenfor EØS', () => {
     before(() => {

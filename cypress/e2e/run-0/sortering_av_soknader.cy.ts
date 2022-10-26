@@ -1,5 +1,5 @@
+import { soknaderOpplaering } from '../../../src/data/mock/data/opplaering'
 import { soknaderIntegration } from '../../../src/data/mock/data/soknader-integration'
-import { soknaderOpplaering } from '../../../src/data/mock/data/soknader-opplaering'
 import { Soknad } from '../../../src/types/types'
 import { getFomFraSoknad, senesteSendtDato } from '../../../src/utils/sorter-soknader'
 

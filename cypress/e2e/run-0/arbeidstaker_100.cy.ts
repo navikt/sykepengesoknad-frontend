@@ -1,4 +1,4 @@
-import { arbeidstaker } from '../../../src/data/mock/data/soknader-opplaering'
+import { arbeidstaker } from '../../../src/data/mock/data/opplaering'
 
 describe('Tester arbeidstakersøknad', () => {
     //-----
@@ -147,34 +147,23 @@ describe('Tester arbeidstakersøknad', () => {
         cy.contains('Gå videre').click()
     })
 
-    it('Søknad ANDRE_INNTEKTSKILDER', function () {
+    it('Søknad ANDRE_INNTEKTSKILDER_V2', function () {
         cy.url().should('include', `${soknad.id}/7`)
 
-        // Test spørsmål
+        cy.contains('Har du andre inntektskilder enn Posten Norge AS, Bærum?')
+
         cy.get('.inputPanelGruppe__inner label:first-child > input[value=JA]').click({ force: true })
 
-        // Svarer JA
-        // Underspørsmål nivå 1 - checkbox
-        cy.contains('Hvilke andre inntektskilder har du?')
-        cy.get('.undersporsmal .checkboxgruppe label[for=687358]')
-            .should('include.text', 'andre arbeidsforhold')
+        cy.contains('Velg inntektskildene som passer for deg. Finner du ikke noe som passer for deg, svarer du nei')
+        cy.get('.undersporsmal .checkboxgruppe label[for=d9ac4359-5519-34f1-b59d-b5ab24e55821]')
+            .should('include.text', 'ansatt et annet sted enn nevnt over')
             .click({ force: true })
-        // Underspørsmål nivå 2 - radio
-        cy.get('.undersporsmal .checkboxgruppe .radioContainer .radioknapp#687359_0').click({ force: true })
-        cy.contains(
-            'Du må sende egen sykepengesøknad for dette. ' +
-                'Det betyr også at legen må skrive en sykmelding for hvert arbeidsforhold du er sykmeldt fra.'
-        )
 
-        // Svarer NEI
-        // Underspørsmål nivå 1 - checkbox
-        cy.contains('Hvilke andre inntektskilder har du?')
-        cy.get('.undersporsmal .checkboxgruppe label[for=687360]').should('include.text', 'selvstendig næringsdrivende')
-        cy.get('.undersporsmal .checkboxgruppe .checkboks#687360').click({
-            force: true,
-        })
-        // Underspørsmål nivå 2 - radio
-        cy.get('.undersporsmal .checkboxgruppe .radioContainer .radioknapp#687361_1').click({ force: true })
+        cy.get('.undersporsmal .checkboxgruppe label[for=989711be-5362-3f24-a02a-f1b3e3c31f99]').should(
+            'include.text',
+            'selvstendig næringsdrivende'
+        )
+        cy.get('.undersporsmal .checkboxgruppe .checkboks#989711be-5362-3f24-a02a-f1b3e3c31f99').click({ force: true })
 
         cy.contains('Gå videre').click()
     })
