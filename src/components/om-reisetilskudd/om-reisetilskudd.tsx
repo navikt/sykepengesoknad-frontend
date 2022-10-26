@@ -3,14 +3,23 @@ import parser from 'html-react-parser'
 import React, { useState } from 'react'
 
 import { tekst } from '../../utils/tekster'
+import { useAmplitudeInstance } from '../amplitude/amplitude'
 
 const OmReisetilskudd = () => {
     const [open, setOpen] = useState<boolean>(false)
+    const { logEvent } = useAmplitudeInstance()
 
     return (
         <Accordion>
             <Accordion.Item open={open} className="om-reisetilskudd">
-                <Accordion.Header onClick={() => setOpen(!open)}>
+                <Accordion.Header
+                    onClick={() => {
+                        logEvent(open ? 'accordion lukket' : 'accordion åpnet', {
+                            component: tekst('tilskudd.start.om-reisetilskudd'),
+                        })
+                        setOpen(!open)
+                    }}
+                >
                     <Heading size="small">{tekst('tilskudd.start.om-reisetilskudd')}</Heading>
                 </Accordion.Header>
                 <Accordion.Content>

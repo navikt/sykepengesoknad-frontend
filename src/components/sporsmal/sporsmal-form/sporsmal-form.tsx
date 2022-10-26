@@ -15,7 +15,7 @@ import { RSSvartype } from '../../../types/rs-types/rs-svartype'
 import { Soknad, Sporsmal } from '../../../types/types'
 import { SEPARATOR } from '../../../utils/constants'
 import fetchMedRequestId, { AuthenticationError, fetchJsonMedRequestId } from '../../../utils/fetch'
-import { useAmplitudeInstance } from '../../amplitude/amplitude'
+import { hentAnnonymisertSvar, useAmplitudeInstance } from '../../amplitude/amplitude'
 import FeilOppsummering from '../../feil/feil-oppsummering'
 import Opplysninger from '../../opplysninger-fra-sykmelding/opplysninger'
 import Oppsummering from '../../oppsummering/oppsummering'
@@ -23,7 +23,7 @@ import Vis from '../../vis'
 import BjornOverSporsmalstekst from '../bjorn/bjorn-over-sporsmalstekst'
 import { EndringUtenEndringModal } from '../endring-uten-endring/endring-uten-endring-modal'
 import { harLikeSvar } from '../endring-uten-endring/har-like-svar'
-import { hentFormState, hentSvar } from '../hent-svar'
+import { hentFormState } from '../hent-svar'
 import InfotekstOverSubmit from '../infotekst-over-submit'
 import { settSvar } from '../sett-svar'
 import SporsmalSwitch from '../sporsmal-switch'
@@ -234,7 +234,7 @@ const SporsmalForm = () => {
                     soknadstype: valgtSoknad!.soknadstype,
                     skjemanavn: 'sykepengesoknad',
                     spørsmål: sporsmal.tag,
-                    svar: hentSvar(sporsmal),
+                    svar: hentAnnonymisertSvar(sporsmal),
                 })
             }
 
