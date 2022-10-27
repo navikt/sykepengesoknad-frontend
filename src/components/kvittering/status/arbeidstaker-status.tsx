@@ -6,6 +6,7 @@ import { useAppStore } from '../../../data/stores/app-store'
 import { tekst } from '../../../utils/tekster'
 import Avkrysset from '../../oppsummering/utdrag/avkrysset'
 import Vis from '../../vis'
+
 import { Mottaker } from './kvittering-status'
 
 const ArbeidstakerStatus = () => {

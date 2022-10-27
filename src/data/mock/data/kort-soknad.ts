@@ -1,4 +1,5 @@
 import { RSSoknad } from '../../../types/rs-types/rs-soknad'
+
 import { arbeidstaker100Syk } from './sykmeldinger'
 
 export const kortArbeidstakerSoknad: RSSoknad = {

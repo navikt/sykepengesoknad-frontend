@@ -11,6 +11,7 @@ import { Ekspanderbar } from '../../ekspanderbar/ekspanderbar'
 import Vis from '../../vis'
 import { SpmProps } from '../sporsmal-form/sporsmal-form'
 import { fjernIndexFraTag } from '../sporsmal-utils'
+
 import { EkspanderbarHjelpTekster } from './ekspanderbar-hjelp-tekst'
 
 export const EkspanderbarHjelp = ({ sporsmal }: SpmProps) => {

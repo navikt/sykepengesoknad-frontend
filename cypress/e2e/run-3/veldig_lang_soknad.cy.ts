@@ -177,7 +177,7 @@ describe('Tester støtte for gamle spørsmål', () => {
         svarJaHovedsporsmal()
         velgTall(
             'Hvor mange timer i uken jobber du vanligvis når du er frisk? Varierer det, kan du oppgi gjennomsnittet.',
-            '12'
+            '12',
         )
         velgTimer()
         gaVidere()
@@ -186,7 +186,7 @@ describe('Tester støtte for gamle spørsmål', () => {
         svarJaHovedsporsmal()
         velgTall(
             'Hvor mange timer i uken jobber du vanligvis når du er frisk? Varierer det, kan du oppgi gjennomsnittet.',
-            '12'
+            '12',
         )
         velgTimer()
         gaVidere()

@@ -3,6 +3,7 @@ import React from 'react'
 
 import { useAppStore } from '../../data/stores/app-store'
 import { tekst } from '../../utils/tekster'
+
 import VeilederSVG from './veileder'
 
 export const ViktigInformasjon = () => {

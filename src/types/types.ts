@@ -1,4 +1,5 @@
 import { dayjsToDate } from '../utils/dato-utils'
+
 import { TagTyper } from './enums'
 import { RSArbeidssituasjon } from './rs-types/rs-arbeidssituasjon'
 import { RSMerknad } from './rs-types/rs-merknad'

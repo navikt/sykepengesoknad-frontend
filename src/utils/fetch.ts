@@ -12,7 +12,7 @@ export class AuthenticationError extends Error {}
 const fetchMedRequestId = async (
     url: string,
     options: RequestInit = {},
-    errorHandler?: ErrorHandler
+    errorHandler?: ErrorHandler,
 ): Promise<FetchResult> => {
     const requestId = uuidv4()
 
@@ -25,7 +25,7 @@ const fetchMedRequestId = async (
         response = await fetch(url, options)
     } catch (e) {
         logger.warn(
-            `${e} - Kall til url: ${options.method} ${url} og x_request_id: ${requestId} feilet uten svar fra backend.`
+            `${e} - Kall til url: ${options.method} ${url} og x_request_id: ${requestId} feilet uten svar fra backend.`,
         )
         throw e
     }
@@ -40,7 +40,7 @@ const fetchMedRequestId = async (
             errorHandler(response)
         }
         throw new FetchError(
-            `Kall til url: ${options.method} ${url} og x_request_id: ${requestId} feilet med HTTP-kode: ${response.status}.`
+            `Kall til url: ${options.method} ${url} og x_request_id: ${requestId} feilet med HTTP-kode: ${response.status}.`,
         )
     }
 
@@ -55,7 +55,7 @@ export const fetchJsonMedRequestId = async (url: string, options: RequestInit = 
         return await response.json()
     } catch (e) {
         logger.warn(
-            `${e} - Kall til url: ${options.method} ${url} og x_request_id: ${fetchResult.requestId} feilet ved parsing av JSON med HTTP-kode: ${response.status}.`
+            `${e} - Kall til url: ${options.method} ${url} og x_request_id: ${fetchResult.requestId} feilet ved parsing av JSON med HTTP-kode: ${response.status}.`,
         )
         throw e
     }

@@ -6,6 +6,7 @@ import { getLedetekst, tekst } from '../../../utils/tekster'
 import { formatterTall } from '../../../utils/utils'
 import { hentSvar } from '../../sporsmal/hent-svar'
 import { OppsummeringProps } from '../oppsummering'
+
 import Avkrysset from './avkrysset'
 
 const OpplastingSum = ({ sporsmal }: OppsummeringProps) => {

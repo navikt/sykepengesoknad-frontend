@@ -9,6 +9,7 @@ import { tekst } from '../../../utils/tekster'
 import { useAmplitudeInstance } from '../../amplitude/amplitude'
 import Vis from '../../vis'
 import { InngangsIkon, InngangsStatus } from '../inngang/inngangspanel'
+
 import {
     hentIkon,
     hentIkonHover,

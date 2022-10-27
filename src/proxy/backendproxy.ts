@@ -1,17 +1,19 @@
-import { logger } from '@navikt/next-logger'
 import * as http from 'http'
 import { RequestOptions } from 'http'
-import { NextApiRequest, NextApiResponse } from 'next'
 import { Readable } from 'stream'
+
+import { NextApiRequest, NextApiResponse } from 'next'
+import { logger } from '@navikt/next-logger'
 
 import { getTokenxToken } from '../auth/getTokenxToken'
 import { cleanPathForMetric } from '../metrics'
+
 import { stream2buffer } from './stream2buffer'
 
 interface Opts {
     req: NextApiRequest
     res: NextApiResponse
-    tillatteApier: String[]
+    tillatteApier: string[]
     backend: string
     backendHostname: string
     backendClientId: string
@@ -20,7 +22,7 @@ interface Opts {
 export async function proxyKallTilBackend(opts: Opts) {
     const rewritedPath = opts.req.url!.replace(`/api/${opts.backend}`, '')
     const api = `${opts.req.method} ${rewritedPath}`
-    if (!opts.tillatteApier.includes(<String>cleanPathForMetric(api))) {
+    if (!opts.tillatteApier.includes(<string>cleanPathForMetric(api))) {
         logger.warn(`404 Ukjent api: ${api}.`)
         opts.res.status(404)
         opts.res.send(null)
@@ -65,8 +67,8 @@ export async function proxyKallTilBackend(opts: Opts) {
         })
         stream.on('error', (err) =>
             logger.error(
-                `Feil ved lesing av backend stream. Message: ${err.message}, Cause: ${err.cause}, URL: ${opts.req.url}.`
-            )
+                `Feil ved lesing av backend stream. Message: ${err.message}, Cause: ${err.cause}, URL: ${opts.req.url}.`,
+            ),
         )
     })
 

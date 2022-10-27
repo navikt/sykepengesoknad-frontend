@@ -5,6 +5,7 @@ import { RSSoknadstatus } from '../../../types/rs-types/rs-soknadstatus'
 import { Soknad } from '../../../types/types'
 import { sorterEtterNyesteFom, sorterEtterSendt, sorterEtterStatus } from '../../../utils/sorter-soknader'
 import Vis from '../../vis'
+
 import FremtidigeSoknaderTeaser from './fremtidige-soknader-teaser'
 import Teaser from './teaser'
 import TidligereSoknaderTeaser from './tidligere-soknader-teaser'

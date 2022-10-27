@@ -1,4 +1,5 @@
 import { Sporsmal } from '../types'
+
 import { RSSvar } from './rs-svar'
 import { RSSvartype, RSSvartypeType } from './rs-svartype'
 import { RSVisningskriterie, RSVisningskriterieType } from './rs-visningskriterie'

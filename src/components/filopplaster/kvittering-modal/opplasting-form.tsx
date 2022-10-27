@@ -93,7 +93,7 @@ const OpplastingForm = ({ sporsmal }: SpmProps) => {
                     } else {
                         setFeilmeldingTekst('Det skjedde en feil i baksystemene, prøv igjen senere.')
                     }
-                }
+                },
             )
         } catch (e: any) {
             if (!(e instanceof AuthenticationError)) {
@@ -124,7 +124,7 @@ const OpplastingForm = ({ sporsmal }: SpmProps) => {
                     body: JSON.stringify(svar),
                     credentials: 'include',
                     headers: { 'Content-Type': 'application/json' },
-                }
+                },
             )
         } catch (e: any) {
             if (!(e instanceof AuthenticationError)) {

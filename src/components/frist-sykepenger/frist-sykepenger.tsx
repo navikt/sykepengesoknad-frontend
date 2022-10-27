@@ -6,6 +6,7 @@ import { RSSoknadstype } from '../../types/rs-types/rs-soknadstype'
 import { tekst } from '../../utils/tekster'
 import { useAmplitudeInstance } from '../amplitude/amplitude'
 import Utvidbar from '../utvidbar/utvidbar'
+
 import EksempelFrist from './eksempel-frist'
 import HvorforSoknadSykepenger from './hvorfor-soknad-sykepenger'
 

@@ -34,7 +34,7 @@ describe('Tester arbeidstakersøknad', () => {
         cy.contains('POSTEN NORGE AS, BÆRUM')
         cy.contains('100% sykmeldt')
         cy.contains('Sykmeldingen din er lang, derfor er den delt opp i flere søknader om sykepenger').should(
-            'not.exist'
+            'not.exist',
         )
 
         cy.contains('Opplysninger fra sykmeldingen').click({ force: true })
@@ -85,7 +85,7 @@ describe('Tester arbeidstakersøknad', () => {
 
         cy.contains('Hva mener vi med permisjon')
         cy.contains('Med permisjon mener vi dager du var borte fra jobben av andre grunner enn sykdom').should(
-            'not.be.visible'
+            'not.be.visible',
         )
         cy.contains('Hva mener vi med permisjon').click()
         cy.contains('Med permisjon mener vi dager du var borte fra jobben av andre grunner enn sykdom').should('exist')
@@ -123,7 +123,7 @@ describe('Tester arbeidstakersøknad', () => {
 
         // Underspørsmål 1
         cy.contains(
-            'Hvor mange timer i uken jobber du vanligvis når du er frisk? Varierer det, kan du oppgi gjennomsnittet.'
+            'Hvor mange timer i uken jobber du vanligvis når du er frisk? Varierer det, kan du oppgi gjennomsnittet.',
         )
         cy.get('.undersporsmal .navds-text-field__input#687350').focus().type('9')
 
@@ -141,7 +141,7 @@ describe('Tester arbeidstakersøknad', () => {
         // Denne personen har vært tilbake i arbeid 20 april, har hatt ferie 16-23 april, og hatt permisjon 14-22 april
         cy.get('.undersporsmal .navds-alert--info').should(
             'contain',
-            'Antall timer du skrev inn, betyr at du har jobbet 129% av det du gjør når du er frisk.'
+            'Antall timer du skrev inn, betyr at du har jobbet 129% av det du gjør når du er frisk.',
         )
 
         cy.contains('Gå videre').click()
@@ -161,7 +161,7 @@ describe('Tester arbeidstakersøknad', () => {
 
         cy.get('.undersporsmal .checkboxgruppe label[for=989711be-5362-3f24-a02a-f1b3e3c31f99]').should(
             'include.text',
-            'selvstendig næringsdrivende'
+            'selvstendig næringsdrivende',
         )
         cy.get('.undersporsmal .checkboxgruppe .checkboks#989711be-5362-3f24-a02a-f1b3e3c31f99').click({ force: true })
 
@@ -192,13 +192,13 @@ describe('Tester arbeidstakersøknad', () => {
 
         cy.contains('Oppsummering fra søknaden').click({ force: true })
         cy.contains(
-            'Jeg vet at jeg kan miste retten til sykepenger hvis opplysningene jeg gir ikke er riktige eller fullstendige. Jeg vet også at NAV kan holde igjen eller kreve tilbake penger, og at å gi feil opplysninger kan være straffbart.'
+            'Jeg vet at jeg kan miste retten til sykepenger hvis opplysningene jeg gir ikke er riktige eller fullstendige. Jeg vet også at NAV kan holde igjen eller kreve tilbake penger, og at å gi feil opplysninger kan være straffbart.',
         )
         cy.contains('Det er 1 feil i skjemaet').should('not.exist')
 
         cy.get('.navds-checkbox__label').click({ force: true })
         cy.contains(
-            'Jeg har lest all informasjonen jeg har fått i søknaden og bekrefter at opplysningene jeg har gitt er korrekte.'
+            'Jeg har lest all informasjonen jeg har fått i søknaden og bekrefter at opplysningene jeg har gitt er korrekte.',
         )
         cy.contains('Søknaden sendes til NAV. Kopi av søknaden sendes til POSTEN NORGE AS, BÆRUM.')
 

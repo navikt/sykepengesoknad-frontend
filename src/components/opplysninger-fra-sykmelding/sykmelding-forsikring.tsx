@@ -29,7 +29,7 @@ const ForsikringInfo = () => {
                         {tekst(
                             forsikring
                                 ? 'sykepengesoknad.sykmelding-utdrag.forsikring-ja'
-                                : 'sykepengesoknad.sykmelding-utdrag.forsikring-nei'
+                                : 'sykepengesoknad.sykmelding-utdrag.forsikring-nei',
                         )}
                     </BodyShort>
                 </div>

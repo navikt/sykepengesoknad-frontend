@@ -34,7 +34,7 @@ const DragAndDrop = () => {
                 method: 'GET',
                 credentials: 'include',
                 headers: { 'Content-Type': 'application/json' },
-            }
+            },
         )
         fetchResult.response.blob().then((blob) => {
             setValgtFil(blob as any)
@@ -66,7 +66,7 @@ const DragAndDrop = () => {
             })
         },
         // eslint-disable-next-line
-        []
+        [],
     )
 
     const { getRootProps, getInputProps, isDragActive, rootRef } = useDropzone({

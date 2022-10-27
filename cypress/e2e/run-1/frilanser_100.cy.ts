@@ -31,12 +31,12 @@ describe('Tester frilansersøknad', () => {
         cy.get('.viktig-informasjon > .navds-guide-panel').should('be.visible')
         cy.get('.viktig-informasjon > .navds-guide-panel').contains('Viktig informasjon')
         cy.get('.viktig-informasjon > .navds-guide-panel').contains(
-            'Vanligvis starter sykmeldingen den dagen du er hos legen. I ditt tilfelle har legen skrevet at den startet tidligere.'
+            'Vanligvis starter sykmeldingen den dagen du er hos legen. I ditt tilfelle har legen skrevet at den startet tidligere.',
         )
 
         // Godkjenne ANSVARSERKLARING
         cy.contains(
-            'Jeg vet at jeg kan miste retten til sykepenger hvis opplysningene jeg gir ikke er riktige eller fullstendige. Jeg vet også at NAV kan holde igjen eller kreve tilbake penger, og at å gi feil opplysninger kan være straffbart.'
+            'Jeg vet at jeg kan miste retten til sykepenger hvis opplysningene jeg gir ikke er riktige eller fullstendige. Jeg vet også at NAV kan holde igjen eller kreve tilbake penger, og at å gi feil opplysninger kan være straffbart.',
         ).click({
             force: true,
         })
@@ -64,7 +64,7 @@ describe('Tester frilansersøknad', () => {
 
         // Underspørsmål 1
         cy.contains(
-            'Hvor mange timer i uken jobber du vanligvis når du er frisk? Varierer det, kan du oppgi gjennomsnittet.'
+            'Hvor mange timer i uken jobber du vanligvis når du er frisk? Varierer det, kan du oppgi gjennomsnittet.',
         )
         cy.get('.undersporsmal .navds-text-field__input#687432').focus().type('12')
 
@@ -93,7 +93,7 @@ describe('Tester frilansersøknad', () => {
         cy.get('.undersporsmal .checkboxgruppe .radioContainer .radioknapp#687441_0').click({ force: true })
         cy.contains(
             'Du må sende egen sykepengesøknad for dette. ' +
-                'Det betyr også at legen må skrive en sykmelding for hvert arbeidsforhold du er sykmeldt fra.'
+                'Det betyr også at legen må skrive en sykmelding for hvert arbeidsforhold du er sykmeldt fra.',
         )
 
         cy.contains('Gå videre').click()
@@ -121,7 +121,7 @@ describe('Tester frilansersøknad', () => {
         cy.get('.ekstrasporsmal')
             .should(
                 'have.text',
-                'Du må ha sendt en egen utenlandssøknad for å svare ja på dette spørsmålet. Husk at du også må fullføre denne søknaden om sykepenger.'
+                'Du må ha sendt en egen utenlandssøknad for å svare ja på dette spørsmålet. Husk at du også må fullføre denne søknaden om sykepenger.',
             )
             .find('a')
             .should('have.attr', 'href', '/syk/sykepengesoknad/sykepengesoknad-utland')
@@ -133,7 +133,7 @@ describe('Tester frilansersøknad', () => {
         cy.get('.ekstrasporsmal')
             .should(
                 'have.text',
-                'I utgangspunktet kan du bare få sykepenger mens du er i et land innenfor EØS. Du kan likevel søke NAV om å få reise ut av EØS og beholde sykepengene i en begrenset periode.'
+                'I utgangspunktet kan du bare få sykepenger mens du er i et land innenfor EØS. Du kan likevel søke NAV om å få reise ut av EØS og beholde sykepengene i en begrenset periode.',
             )
             .find('a')
             .should('have.attr', 'href', '/syk/sykepengesoknad/sykepengesoknad-utland')
@@ -174,7 +174,7 @@ describe('Tester frilansersøknad', () => {
         cy.url().should('include', `${soknad.id}/8`)
         cy.get('.navds-checkbox__label').click({ force: true })
         cy.contains(
-            'Jeg har lest all informasjonen jeg har fått i søknaden og bekrefter at opplysningene jeg har gitt er korrekte.'
+            'Jeg har lest all informasjonen jeg har fått i søknaden og bekrefter at opplysningene jeg har gitt er korrekte.',
         )
 
         cy.contains('Send søknaden').click()

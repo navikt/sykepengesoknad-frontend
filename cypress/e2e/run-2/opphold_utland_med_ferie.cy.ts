@@ -12,7 +12,7 @@ describe('Tester søknad om å beholde sykepenger utenfor EØS', () => {
         cy.get('.navds-heading--xlarge').should('be.visible').and('have.text', 'Søknader')
         cy.get(`#soknader-list-til-behandling article a[href*=${soknad.id}]`).should(
             'include.text',
-            'Søknad om å beholde sykepenger utenfor EØS'
+            'Søknad om å beholde sykepenger utenfor EØS',
         )
         cy.get(`#soknader-list-til-behandling article a[href*=${soknad.id}]`).click()
     })
@@ -52,7 +52,7 @@ describe('Tester søknad om å beholde sykepenger utenfor EØS', () => {
     it('Vi svarer Nei på 100% sykmeldt spørsmålet og får en bjørn', function () {
         cy.get('#4_1').click({ force: true })
         cy.contains(
-            'Det er ikke mulig å ta ut ferie de dagene eller timene du skulle arbeidet og få utbetalt sykepenger for de andre. Men har du spart opp fleksitid, kan du avspasere dagene eller timene du skulle jobbet og få sykepenger for de andre dagene. Eksempel: Er du 50 prosent sykmeldt og ønsker å reise til utlandet noen dager, kan du avspasere halvparten av dagene. Har du ikke nok fleksitid å avspasere, må du ta ut hele feriedager.'
+            'Det er ikke mulig å ta ut ferie de dagene eller timene du skulle arbeidet og få utbetalt sykepenger for de andre. Men har du spart opp fleksitid, kan du avspasere dagene eller timene du skulle jobbet og få sykepenger for de andre dagene. Eksempel: Er du 50 prosent sykmeldt og ønsker å reise til utlandet noen dager, kan du avspasere halvparten av dagene. Har du ikke nok fleksitid å avspasere, må du ta ut hele feriedager.',
         )
     })
 
@@ -68,7 +68,7 @@ describe('Tester søknad om å beholde sykepenger utenfor EØS', () => {
 
         cy.get('#5_0').click({ force: true })
         cy.contains(
-            'Du får ikke sykepenger mens du har ferie. Det betyr at du ikke trenger å sende denne søknaden. God tur!'
+            'Du får ikke sykepenger mens du har ferie. Det betyr at du ikke trenger å sende denne søknaden. God tur!',
         )
 
         cy.contains('Gå videre').should('not.exist')

@@ -69,7 +69,7 @@ const NavAutosuggest = (props: NavAutosuggestProps) => {
 
     const onSuggestionSelected = (
         event: React.FormEvent,
-        { suggestion, method }: SuggestionSelectedEventData<Forslag>
+        { suggestion, method }: SuggestionSelectedEventData<Forslag>,
     ) => {
         if (method === 'enter') {
             event.preventDefault()

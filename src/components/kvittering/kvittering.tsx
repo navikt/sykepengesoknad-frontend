@@ -7,6 +7,7 @@ import { sendtForMerEnn30DagerSiden } from '../../utils/dato-utils'
 import Opplysninger from '../opplysninger-fra-sykmelding/opplysninger'
 import Oppsummering from '../oppsummering/oppsummering'
 import Vis from '../vis'
+
 import AlleAndre from './alle-andre'
 import Arbeidstaker from './arbeidstaker'
 
@@ -35,7 +36,7 @@ const Kvittering = () => {
             <Oppsummering
                 ekspandert={sendtForMerEnn30DagerSiden(
                     valgtSoknad?.sendtTilArbeidsgiverDato,
-                    valgtSoknad?.sendtTilNAVDato
+                    valgtSoknad?.sendtTilNAVDato,
                 )}
             />
 

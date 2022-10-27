@@ -6,6 +6,7 @@ import { RSSoknad } from '../../types/rs-types/rs-soknad'
 import { RSSoknadstatus } from '../../types/rs-types/rs-soknadstatus'
 import { RSSoknadstype } from '../../types/rs-types/rs-soknadstype'
 import { jsonDeepCopy } from '../../utils/json-deep-copy'
+
 import { arbeidstaker, arbeidstakerGradert, opplaering, soknaderOpplaering } from './data/opplaering'
 import { feilVedSlettingAvKvittering } from './data/reisetilskudd'
 import {
@@ -68,15 +69,15 @@ const setUpMock = (person: Persona) => {
 
     mock.post('/syk/sykepengesoknad/api/sykepengesoknad-backend/api/v2/opprettSoknadUtland', (req, res, ctx) => {
         const soknad = person.soknader.find(
-            (sok: RSSoknad) => sok.soknadstype === RSSoknadstype.OPPHOLD_UTLAND && sok.status === RSSoknadstatus.NY
+            (sok: RSSoknad) => sok.soknadstype === RSSoknadstype.OPPHOLD_UTLAND && sok.status === RSSoknadstatus.NY,
         )
         if (soknad) {
             return res(ctx.json(soknad))
         }
         const soknadOriginal = jsonDeepCopy(
             soknaderOpplaering.find(
-                (sok: RSSoknad) => sok.soknadstype === RSSoknadstype.OPPHOLD_UTLAND && sok.status === RSSoknadstatus.NY
-            )!
+                (sok: RSSoknad) => sok.soknadstype === RSSoknadstype.OPPHOLD_UTLAND && sok.status === RSSoknadstatus.NY,
+            )!,
         )
         soknadOriginal.id = uuid.v4()
         soknadOriginal.status = RSSoknadstatus.NY
@@ -108,31 +109,31 @@ const setUpMock = (person: Persona) => {
     })
 
     mock.get('/syk/sykepengesoknad/api/sykepengesoknad-backend/api/v2/soknader', (req, res, ctx) =>
-        res(ctx.json(person.soknader))
+        res(ctx.json(person.soknader)),
     )
 
     mock.get('/syk/sykepengesoknad/api/sykmeldinger-backend/api/v2/sykmeldinger', (req, res, ctx) =>
-        res(ctx.json(person.sykmeldinger))
+        res(ctx.json(person.sykmeldinger)),
     )
 
     mock.post('/syk/sykepengesoknad/api/sykepengesoknad-backend/api/v2/soknader/:soknad/send', () =>
-        Promise.resolve({ status: 200 })
+        Promise.resolve({ status: 200 }),
     )
 
     mock.post('/syk/sykepengesoknad/api/sykepengesoknad-backend/api/v2/soknader/:soknad/ettersendTilNav', () =>
-        Promise.resolve({ status: 200 })
+        Promise.resolve({ status: 200 }),
     )
 
     mock.post('/syk/sykepengesoknad/api/sykepengesoknad-backend/api/v2/soknader/:soknad/ettersendTilArbeidsgiver', () =>
-        Promise.resolve({ status: 200 })
+        Promise.resolve({ status: 200 }),
     )
 
     mock.post('/syk/sykepengesoknad/api/sykepengesoknad-backend/api/v2/soknader/:soknad/avbryt', () =>
-        Promise.resolve({ status: 200 })
+        Promise.resolve({ status: 200 }),
     )
 
     mock.post('/syk/sykepengesoknad/api/sykepengesoknad-backend/api/v2/soknader/:soknad/gjenapne', () =>
-        Promise.resolve({ status: 200 })
+        Promise.resolve({ status: 200 }),
     )
 
     mock.delete(
@@ -142,7 +143,7 @@ const setUpMock = (person: Persona) => {
                 return Promise.resolve({ status: 500 })
             }
             return Promise.resolve({ status: 204 })
-        }
+        },
     )
 
     mock.post(
@@ -155,7 +156,7 @@ const setUpMock = (person: Persona) => {
                 status: 201,
                 body: JSON.stringify({ oppdatertSporsmal: spm }),
             })
-        }
+        },
     )
 
     mock.post('/syk/sykepengesoknad/api/sykepengesoknad-kvitteringer/api/v2/opplasting', (req, res, ctx) =>
@@ -163,12 +164,12 @@ const setUpMock = (person: Persona) => {
             ctx.json({
                 id: uuid.v4(),
                 melding: 'opprettet',
-            })
-        )
+            }),
+        ),
     )
 
     mock.get('/syk/sykepengesoknad/api/sykepengesoknad-kvitteringer/api/v2/kvittering/:blob', () =>
-        fetch('/syk/sykepengesok/static/kvittering.jpg')
+        fetch('/syk/sykepengesok/static/kvittering.jpg'),
     )
 }
 

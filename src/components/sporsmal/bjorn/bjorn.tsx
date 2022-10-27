@@ -4,6 +4,7 @@ import parser from 'html-react-parser'
 import React from 'react'
 
 import { tekst } from '../../../utils/tekster'
+
 import BjornBildeLiten from './bjorn-bilde-liten'
 import BjornBildeStor from './bjorn-bilde-stor'
 

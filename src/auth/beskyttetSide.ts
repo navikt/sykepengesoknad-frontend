@@ -4,6 +4,7 @@ import { NextPageContext } from 'next'
 
 import metrics, { cleanPathForMetric, shouldLogMetricForPath } from '../metrics'
 import { isMockBackend, loginServiceRedirectUrl, loginServiceUrl } from '../utils/environment'
+
 import { verifyIdportenAccessToken } from './verifyIdportenAccessToken'
 import { validerLoginserviceToken } from './verifyLoginserviceAccessToken'
 

@@ -5,6 +5,7 @@ import React, { useCallback, useEffect, useState } from 'react'
 import IngenData from '../components/feil/ingen-data'
 import { Soknad } from '../types/types'
 import { AuthenticationError, fetchJsonMedRequestId } from '../utils/fetch'
+
 import { useAppStore } from './stores/app-store'
 
 export function DataFetcher(props: { children: any }) {
@@ -31,7 +32,7 @@ export function DataFetcher(props: { children: any }) {
         setSoknader(
             data!.map((s: any) => {
                 return new Soknad(s)
-            })
+            }),
         )
     }, [setSoknader])
 

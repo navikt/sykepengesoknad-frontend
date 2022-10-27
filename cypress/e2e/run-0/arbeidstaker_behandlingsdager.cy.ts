@@ -27,7 +27,7 @@ describe('Tester behandlingsdagersøknad', () => {
 
         // Godkjenne ANSVARSERKLARING
         cy.contains(
-            'Jeg vet at jeg kan miste retten til sykepenger hvis opplysningene jeg gir ikke er riktige eller fullstendige. Jeg vet også at NAV kan holde igjen eller kreve tilbake penger, og at å gi feil opplysninger kan være straffbart.'
+            'Jeg vet at jeg kan miste retten til sykepenger hvis opplysningene jeg gir ikke er riktige eller fullstendige. Jeg vet også at NAV kan holde igjen eller kreve tilbake penger, og at å gi feil opplysninger kan være straffbart.',
         ).click({
             force: true,
         })
@@ -39,10 +39,10 @@ describe('Tester behandlingsdagersøknad', () => {
         cy.url().should('include', `${soknad.id}/2`)
 
         cy.contains(
-            'Du kan bare få én behandlingsdag i løpet av en uke. Trenger du flere slike dager, ber du legen om en gradert sykmelding i stedet.'
+            'Du kan bare få én behandlingsdag i løpet av en uke. Trenger du flere slike dager, ber du legen om en gradert sykmelding i stedet.',
         )
         cy.contains(
-            'Hvilke dager måtte du være helt borte fra jobben på grunn av behandling mellom 1. - 24. april 2020?'
+            'Hvilke dager måtte du være helt borte fra jobben på grunn av behandling mellom 1. - 24. april 2020?',
         )
         cy.get('.skjema__beh-dager').contains('1').click({ force: true })
         cy.get('.skjema__beh-dager').contains('10').click({ force: true })
@@ -68,7 +68,7 @@ describe('Tester behandlingsdagersøknad', () => {
         cy.get('.undersporsmal .checkboxgruppe .radioContainer .radioknapp#687383_0').click({ force: true })
         cy.contains(
             'Du må sende egen sykepengesøknad for dette. ' +
-                'Det betyr også at legen må skrive en sykmelding for hvert arbeidsforhold du er sykmeldt fra.'
+                'Det betyr også at legen må skrive en sykmelding for hvert arbeidsforhold du er sykmeldt fra.',
         )
 
         cy.contains('Gå videre').click()
@@ -84,7 +84,7 @@ describe('Tester behandlingsdagersøknad', () => {
         cy.url().should('include', `${soknad.id}/4`)
         cy.get('.navds-checkbox__label').click({ force: true })
         cy.contains(
-            'Jeg har lest all informasjonen jeg har fått i søknaden og bekrefter at opplysningene jeg har gitt er korrekte.'
+            'Jeg har lest all informasjonen jeg har fått i søknaden og bekrefter at opplysningene jeg har gitt er korrekte.',
         )
         cy.contains('Søknaden sendes til NAV.')
 

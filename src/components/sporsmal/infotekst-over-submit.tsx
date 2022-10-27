@@ -7,6 +7,7 @@ import { RSSoknadstatus } from '../../types/rs-types/rs-soknadstatus'
 import { RSSoknadstype } from '../../types/rs-types/rs-soknadstype'
 import { tekst } from '../../utils/tekster'
 import Vis from '../vis'
+
 import { SpmProps } from './sporsmal-form/sporsmal-form'
 
 const InfotekstOverSubmit = ({ sporsmal }: SpmProps) => {

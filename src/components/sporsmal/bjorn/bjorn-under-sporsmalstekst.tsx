@@ -10,6 +10,7 @@ import { useAmplitudeInstance } from '../../amplitude/amplitude'
 import Vis from '../../vis'
 import { SpmProps } from '../sporsmal-form/sporsmal-form'
 import { fjernIndexFraTag } from '../sporsmal-utils'
+
 import Bjorn from './bjorn'
 
 const BjornUnderSporsmalstekst = ({ sporsmal }: SpmProps) => {

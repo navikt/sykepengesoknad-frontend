@@ -12,6 +12,7 @@ import { sendtForMerEnn30DagerSiden } from '../../utils/dato-utils'
 import { AuthenticationError, fetchJsonMedRequestId } from '../../utils/fetch'
 import { tekst } from '../../utils/tekster'
 import Vis from '../vis'
+
 import Inntil16dager from './innhold/arbeidstaker/inntil16dager'
 import Over16dager from './innhold/arbeidstaker/over16dager'
 import PerioderMedOpphold from './innhold/arbeidstaker/perioder-med-opphold'
@@ -81,7 +82,7 @@ const Arbeidstaker = () => {
                     method: 'GET',
                     credentials: 'include',
                     headers: { 'Content-Type': 'application/json' },
-                }
+                },
             )
         } catch (e: any) {
             if (!(e instanceof AuthenticationError)) {

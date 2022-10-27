@@ -3,6 +3,7 @@ import { NextApiRequest, NextApiResponse } from 'next'
 
 import { cleanPathForMetric } from '../metrics'
 import metrics from '../metrics'
+
 import { verifyIdportenAccessToken } from './verifyIdportenAccessToken'
 
 type ApiHandler = (req: NextApiRequest, res: NextApiResponse) => void | Promise<void>

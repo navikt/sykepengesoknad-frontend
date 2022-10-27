@@ -3,6 +3,7 @@ import React from 'react'
 import { SvarEnums, TagTyper } from '../../../types/enums'
 import Vis from '../../vis'
 import { SpmProps } from '../sporsmal-form/sporsmal-form'
+
 import Bjorn from './bjorn'
 
 export const SporsmalBjorn = ({ sporsmal }: SpmProps) => {

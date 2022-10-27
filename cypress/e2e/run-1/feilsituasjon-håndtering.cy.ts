@@ -12,7 +12,7 @@ describe('Tester feilsituasjoner ', () => {
         it('Laster startside og åpner søknad', function () {
             cy.get('.navds-heading--xlarge').should('be.visible').and('have.text', 'Søknader')
             cy.get(
-                `#soknader-list-til-behandling article a[href*=${soknadSomTriggerSporsmalFinnesIkkeISoknad.id}]`
+                `#soknader-list-til-behandling article a[href*=${soknadSomTriggerSporsmalFinnesIkkeISoknad.id}]`,
             ).click()
         })
 
@@ -40,7 +40,7 @@ describe('Tester feilsituasjoner ', () => {
 
         it('Vi går inn på en annen søknad som gir en annen feil', function () {
             cy.get(
-                `#soknader-list-til-behandling article a[href*=${soknadSomTriggerFeilStatusForOppdaterSporsmal.id}]`
+                `#soknader-list-til-behandling article a[href*=${soknadSomTriggerFeilStatusForOppdaterSporsmal.id}]`,
             ).click()
         })
 

@@ -2,6 +2,7 @@ import React from 'react'
 
 import { RSSvartype } from '../../types/rs-types/rs-svartype'
 import { Sporsmal } from '../../types/types'
+
 import BehDager from './typer/beh-dager'
 import CheckboxKomp from './typer/checkbox-komp'
 import CheckboxPanel from './typer/checkbox-panel'

@@ -19,7 +19,7 @@ describe('Tester sendt søknad', () => {
         cy.get(`#soknader-sendt article[aria-labelledby*=${sendtArbeidsledig.id}]`).click()
         cy.url().should(
             'equal',
-            `http://localhost:8080/syk/sykepengesoknad/sendt/${sendtArbeidsledig.id}?testperson=alle-soknader`
+            `http://localhost:8080/syk/sykepengesoknad/sendt/${sendtArbeidsledig.id}?testperson=alle-soknader`,
         )
         cy.contains('Søknaden er sendt til NAV')
     })
@@ -31,7 +31,7 @@ describe('Tester sendt søknad', () => {
         cy.contains('Søknaden er sendt til NAV')
         cy.url().should(
             'equal',
-            `http://localhost:8080/syk/sykepengesoknad/sendt/${sendtArbeidsledig.id}?testperson=alle-soknader`
+            `http://localhost:8080/syk/sykepengesoknad/sendt/${sendtArbeidsledig.id}?testperson=alle-soknader`,
         )
     })
 })

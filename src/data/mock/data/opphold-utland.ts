@@ -1,5 +1,6 @@
 import { RSSoknad } from '../../../types/rs-types/rs-soknad'
 import { Persona } from '../personas'
+
 import { arbeidstaker100Syk } from './sykmeldinger'
 
 export const oppholdUtland: RSSoknad = {

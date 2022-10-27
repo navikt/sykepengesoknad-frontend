@@ -2,6 +2,7 @@ import dayjs from 'dayjs'
 
 import { arbeidstaker100Syk } from '../../data/mock/data/sykmeldinger'
 import { jsonDeepCopy } from '../../utils/json-deep-copy'
+
 import { eldreUsendteSykmeldinger } from './eldreUsendteSykmeldinger'
 
 test('Tom liste returnerer false', () => {

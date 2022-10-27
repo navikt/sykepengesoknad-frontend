@@ -2,6 +2,7 @@ import { TagTyper } from '../types/enums'
 import { RSSoknadstatus } from '../types/rs-types/rs-soknadstatus'
 import { RSSoknadstype } from '../types/rs-types/rs-soknadstype'
 import { Soknad, Sporsmal } from '../types/types'
+
 import { senesteFom } from './periode-utils'
 
 export const getFomFraSoknad = (soknad: Soknad): Date => {

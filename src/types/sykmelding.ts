@@ -8,6 +8,7 @@
 import dayjs from 'dayjs'
 
 import { dayjsToDate } from '../utils/dato-utils'
+
 import { Arbeidsgiver } from './types'
 
 export type RegelStatus = 'OK' | 'MANUAL_PROCESSING' | 'INVALID'
@@ -40,7 +41,7 @@ class MedisinskArsak {
     constructor(medisinskArsak: any) {
         this.beskrivelse = medisinskArsak.beskrivelse
         this.arsak = medisinskArsak.arsak.map(
-            (arsak: string) => MedisinskArsakType[arsak as keyof typeof MedisinskArsakType]
+            (arsak: string) => MedisinskArsakType[arsak as keyof typeof MedisinskArsakType],
         )
     }
 }
@@ -57,7 +58,7 @@ class ArbeidsrelatertArsak {
     constructor(arbeidsrelatertArsak: any) {
         this.beskrivelse = arbeidsrelatertArsak.beskrivelse
         this.arsak = arbeidsrelatertArsak.arsak.map(
-            (arsak: string) => ArbeidsrelatertArsakType[arsak as keyof typeof ArbeidsrelatertArsakType]
+            (arsak: string) => ArbeidsrelatertArsakType[arsak as keyof typeof ArbeidsrelatertArsakType],
         )
     }
 }
@@ -179,7 +180,7 @@ export class AnnenFraversArsak {
     constructor(annenFraversArsak: any) {
         this.beskrivelse = annenFraversArsak.beskrivelse
         this.grunn = annenFraversArsak.grunn.map(
-            (grunn: string) => AnnenFraverGrunn[grunn as keyof typeof AnnenFraverGrunn]
+            (grunn: string) => AnnenFraverGrunn[grunn as keyof typeof AnnenFraverGrunn],
         )
     }
 }
@@ -369,6 +370,6 @@ export function getSykmeldingStartDate(sykmelding: Sykmelding): dayjs.Dayjs {
                 return value
             }
             return acc
-        }).fom
+        }).fom,
     )
 }

@@ -36,7 +36,7 @@ const SendesTil = () => {
                     ? parser(
                           getLedetekst(tekst(nokkel as any), {
                               '%ARBEIDSGIVER%': valgtSoknad?.arbeidsgiver.navn,
-                          })
+                          }),
                       )
                     : parser(tekst(nokkel as any))}
             </BodyShort>
