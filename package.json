@@ -52,8 +52,6 @@
         "@types/react-router-hash-link": "^2.4.1",
         "@types/react-transition-group": "^4.4.5",
         "@types/uuid": "^8.3.1",
-        "@typescript-eslint/eslint-plugin": "^5.40.0",
-        "@typescript-eslint/parser": "^5.40.0",
         "cypress": "^10.9.0",
         "cypress-axe": "^1.0.0",
         "cypress-file-upload": "^5.0.8",
