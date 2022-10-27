@@ -37,11 +37,6 @@ export class AppMetrics {
         help: 'Requests redirected to wonderwall login',
         labelNames: ['path'],
     })
-    public loginserviceRedirect = new Counter({
-        name: 'loginservice_redirect_counter',
-        help: 'Requests redirected to loginservice login',
-        labelNames: ['path'],
-    })
     public apiUnauthorized = new Counter({
         name: 'api_unauthorized_counter',
         help: 'Requests to API routes that are unauthorized',

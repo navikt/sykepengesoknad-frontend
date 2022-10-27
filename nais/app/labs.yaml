@@ -21,8 +21,6 @@ spec:
   env:
     - name: FLEX_GATEWAY_ROOT
       value: "https://flex-gateway.dev.nav.no"
-    - name: LOGINSERVICE_URL
-      value: "https://loginservice-dev.nav.no/login"
     - name: AMPLITUDE_ENABLED
       value: "false"
     - name: MOCK_BACKEND

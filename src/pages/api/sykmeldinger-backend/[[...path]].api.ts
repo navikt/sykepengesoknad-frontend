@@ -14,8 +14,9 @@ const handler = beskyttetApi(async (req: NextApiRequest, res: NextApiResponse) =
         res: res,
         tillatteApier: tillatteApier,
         backend: 'sykmeldinger-backend',
-        backendHostname: 'sykmeldinger-backend.teamsykmelding',
+        hostname: 'sykmeldinger-backend.teamsykmelding',
         backendClientId: serverRuntimeConfig.sykmeldingerBackendClientId,
+        https: false,
     })
 })
 

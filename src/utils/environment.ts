@@ -1,6 +1,6 @@
 import getConfig from 'next/config'
 
-const { publicRuntimeConfig, serverRuntimeConfig } = getConfig()
+const { publicRuntimeConfig } = getConfig()
 
 export function isDev() {
     return publicRuntimeConfig.env === 'dev'
@@ -20,14 +20,6 @@ export function isMockBackend() {
 
 export function isOpplaering() {
     return publicRuntimeConfig.opplaering === 'true'
-}
-
-export function loginServiceUrl() {
-    return serverRuntimeConfig.loginServiceUrl
-}
-
-export function loginServiceRedirectUrl() {
-    return serverRuntimeConfig.loginServiceRedirectUrl
 }
 
 export function amplitudeEnabled() {

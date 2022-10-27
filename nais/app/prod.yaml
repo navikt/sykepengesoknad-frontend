@@ -1,7 +1,5 @@
 ingress: https://www.nav.no/syk/sykepengesoknad
 env:
-  LOGINSERVICE_URL: https://loginservice.nav.no/login
-  LOGINSERVICE_REDIRECT_URL: https://www.nav.no/syk/sykepengesoknad
   AMPLITUDE_ENABLED: true
   ENVIRONMENT: prod
   SYKEFRAVAER_URL: https://www.nav.no/syk/sykefravaer
