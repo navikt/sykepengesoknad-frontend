@@ -8,7 +8,6 @@ import { RSSoknadstype } from '../../../types/rs-types/rs-soknadstype'
 import { sendtForMerEnn30DagerSiden } from '../../../utils/dato-utils'
 import { tekst } from '../../../utils/tekster'
 import Vis from '../../vis'
-import Kontonummer from '../kontonummer/kontonummer'
 
 const KvitteringVidere = () => {
     const { valgtSoknad } = useAppStore()
@@ -63,10 +62,6 @@ const KvitteringVidere = () => {
                     </div>
                 )}
             />
-
-            <div className="avsnitt">
-                <Kontonummer />
-            </div>
         </Alert>
     )
 }

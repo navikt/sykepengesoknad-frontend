@@ -4,7 +4,6 @@ import React from 'react'
 
 import { tekst } from '../../../../utils/tekster'
 import Utvidbar from '../../../utvidbar/utvidbar'
-import Kontonummer from '../../kontonummer/kontonummer'
 
 const PerioderMedOpphold = () => {
     return (
@@ -44,9 +43,6 @@ const PerioderMedOpphold = () => {
                 <BodyLong spacing as="span">
                     {parser(tekst('kvittering.arbeidstaker.over16.utbetaling-NAV'))}{' '}
                 </BodyLong>
-            </div>
-            <div className="avsnitt">
-                <Kontonummer />
             </div>
         </div>
     )
