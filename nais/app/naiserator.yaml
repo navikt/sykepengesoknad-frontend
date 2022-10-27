@@ -44,8 +44,6 @@ spec:
         - application: sykepengesoknad-kvitteringer
         - application: sykmeldinger-backend
           namespace: teamsykmelding
-  envFrom:
-    - configmap: loginservice-idporten
   env:
   {{#each env}}
      - name: {{@key}}

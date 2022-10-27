@@ -27,8 +27,9 @@ const handler = beskyttetApi(async (req: NextApiRequest, res: NextApiResponse) =
         res,
         tillatteApier,
         backend: 'sykepengesoknad-backend',
-        backendHostname: 'sykepengesoknad-backend',
+        hostname: 'sykepengesoknad-backend',
         backendClientId: serverRuntimeConfig.sykepengesoknadBackendClientId,
+        https: false,
     })
 })
 
