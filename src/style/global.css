@@ -13,3 +13,7 @@
         min-height: 75vh;
     }
 }
+
+html {
+    --desktop-limit-width: 672px;
+}

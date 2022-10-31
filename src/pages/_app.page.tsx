@@ -53,6 +53,8 @@ import type { AppProps as NextAppProps } from 'next/app'
 import Head from 'next/head'
 import React, { PropsWithChildren } from 'react'
 
+import { LabsWarning } from '../components/labs-warning/LabsWarning'
+
 interface AppProps extends Omit<NextAppProps, 'pageProps'> {
     pageProps: PropsWithChildren<unknown>
 }
@@ -75,6 +77,7 @@ function MyApp({ Component, pageProps }: AppProps): JSX.Element {
                 <meta name="viewport" content="width=device-width, initial-scale=1" />
             </Head>
             <div id="root">
+                <LabsWarning />
                 <Component {...pageProps} />
             </div>
         </>

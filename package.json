@@ -70,7 +70,7 @@
         "yet-another-fetch-mock": "^4.1.0"
     },
     "scripts": {
-        "dev": "OPPLAERING=true next dev -p 8080  | pino-pretty",
+        "dev": "next dev -p 8080  | pino-pretty",
         "dev-ingen-dekorator": "NO_DECORATOR=true npm run dev  | pino-pretty",
         "start": "next start -p 8080",
         "start-ingen-dekorator": "NO_DECORATOR=true npm start",
