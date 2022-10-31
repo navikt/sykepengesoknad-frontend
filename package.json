@@ -18,7 +18,7 @@
         "constate": "^3.3.0",
         "dayjs": "^1.11.5",
         "html-react-parser": "^3.0.4",
-        "jose": "^4.10.0",
+        "jose": "^4.10.4",
         "next-logger": "^3.0.1",
         "openid-client": "^5.2.1",
         "pino-pretty": "^9.1.1",
