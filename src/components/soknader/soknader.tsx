@@ -1,6 +1,5 @@
 import React, { useEffect } from 'react'
 
-import { useAppStore } from '../../data/stores/app-store'
 import { RSSoknadstatus } from '../../types/rs-types/rs-soknadstatus'
 import { Brodsmule } from '../../types/types'
 import { sorterEtterNyesteFom } from '../../utils/sorter-soknader'
@@ -10,6 +9,7 @@ import Banner from '../banner/banner'
 import Brodsmuler from '../brodsmuler/brodsmuler'
 import OmSykepenger from '../om-sykepenger/om-sykepenger'
 import Vis from '../vis'
+import useSoknader from '../../hooks/useSoknader'
 
 import Teasere from './teaser/teasere'
 
@@ -23,7 +23,15 @@ const brodsmuler: Brodsmule[] = [
 ]
 
 const Soknader = () => {
-    const { soknader, setValgtSoknad } = useAppStore()
+    // TODO: Feilhåndtering / visning dersom søknader ikke kan hentes
+    const { data: soknader } = useSoknader()
+
+    useEffect(() => {
+        setBodyClass('soknader')
+    }, [])
+
+    if (!soknader) return null
+
     const nyeSoknader = soknader
         .filter(
             (soknad) =>
@@ -42,11 +50,6 @@ const Soknader = () => {
                 soknad.status === RSSoknadstatus.UTGAATT,
         )
         .sort(sorterEtterNyesteFom)
-
-    useEffect(() => {
-        setBodyClass('soknader')
-        setValgtSoknad(undefined)
-    }, [setValgtSoknad, soknader])
 
     return (
         <>

@@ -7,7 +7,6 @@ import { RSSoknadstype } from '../../../types/rs-types/rs-soknadstype'
 import { tilLesbarPeriodeMedArstall } from '../../../utils/dato-utils'
 import { isOpplaering } from '../../../utils/environment'
 import { tekst } from '../../../utils/tekster'
-import { erDelvisUtfyltNySoknad } from '../../soknad/soknad-link'
 import Vis from '../../vis'
 import { InngangsIkon, Inngangspanel, InngangsStatus } from '../inngang/inngangspanel'
 
@@ -20,7 +19,7 @@ import {
     teaserTittel,
 } from './teaser-util'
 
-const Teaser = ({ soknad }: SykepengesoknadTeaserProps) => {
+const NyeSoknaderTeaser = ({ soknad }: SykepengesoknadTeaserProps) => {
     return (
         <article aria-labelledby={`soknader-header-${soknad.id}`}>
             <Inngangspanel soknad={soknad} className="inngangspanel--ny">
@@ -46,12 +45,15 @@ const Teaser = ({ soknad }: SykepengesoknadTeaserProps) => {
                         </div>
                     </div>
 
+                    {/*
+                    // TODO: Dette må løses på en annen måte
                     <Vis
                         hvis={erDelvisUtfyltNySoknad(soknad)}
                         render={() => (
                             <InngangsStatus status={soknad.status} tekst={tekst('soknad.teaser.delvis-utfylt.tekst')} />
                         )}
                     />
+                    */}
 
                     <Vis
                         hvis={soknad.status === RSSoknadstatus.UTKAST_TIL_KORRIGERING}
@@ -69,4 +71,4 @@ const Teaser = ({ soknad }: SykepengesoknadTeaserProps) => {
     )
 }
 
-export default Teaser
+export default NyeSoknaderTeaser

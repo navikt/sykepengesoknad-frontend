@@ -29,7 +29,7 @@ export interface NaermesteLeder {
 export interface Arbeidsgiver {
     navn: string
     orgnummer: string
-    naermesteLeder?: NaermesteLeder
+    naermesteLeder?: NaermesteLeder // TODO: Denne tror jeg ikke finnes
 }
 
 export class Soknad {

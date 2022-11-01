@@ -2,17 +2,17 @@ import { Heading, Label } from '@navikt/ds-react'
 import React, { useState } from 'react'
 
 import { RSSoknadstatus } from '../../../types/rs-types/rs-soknadstatus'
-import { Soknad } from '../../../types/types'
 import { sorterEtterNyesteFom, sorterEtterSendt, sorterEtterStatus } from '../../../utils/sorter-soknader'
 import Vis from '../../vis'
+import { RSSoknadmetadata } from '../../../types/rs-types/rs-soknadmetadata'
 
 import FremtidigeSoknaderTeaser from './fremtidige-soknader-teaser'
-import Teaser from './teaser'
+import NyeSoknaderTeaser from './nye-soknader-teaser'
 import TidligereSoknaderTeaser from './tidligere-soknader-teaser'
 import UtgaattSoknaderTeaser from './utgatt-soknader-teaser'
 
 interface SoknaderTeasereProps {
-    soknader: Soknad[]
+    soknader: RSSoknadmetadata[]
     className?: string
     tittel: string
     tomListeTekst?: string
@@ -92,7 +92,7 @@ const Teasere = ({ soknader, className, tittel, tomListeTekst, id, kanSorteres =
                         case RSSoknadstatus.UTGAATT:
                             return <UtgaattSoknaderTeaser key={idx} soknad={soknad} />
                         default:
-                            return <Teaser key={idx} soknad={soknad} />
+                            return <NyeSoknaderTeaser key={idx} soknad={soknad} />
                     }
                 })}
                 <Vis

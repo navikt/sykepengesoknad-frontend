@@ -112,6 +112,11 @@ const setUpMock = (person: Persona) => {
         res(ctx.json(person.soknader)),
     )
 
+    mock.get('/syk/sykepengesoknad/api/sykepengesoknad-backend/api/v2/soknader/metadata', (req, res, ctx) =>
+        // TODO: Sjekk om vi bare kan gjenbruke søknader, eller om vi må fjerne spørsmål
+        res(ctx.json(person.soknader)),
+    )
+
     mock.get('/syk/sykepengesoknad/api/sykmeldinger-backend/api/v2/sykmeldinger', (req, res, ctx) =>
         res(ctx.json(person.sykmeldinger)),
     )

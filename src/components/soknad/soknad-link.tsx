@@ -4,14 +4,15 @@ import { Link } from 'react-router-dom'
 import { RSSoknadstatus } from '../../types/rs-types/rs-soknadstatus'
 import { RSSvartype } from '../../types/rs-types/rs-svartype'
 import { Soknad } from '../../types/types'
+import { RSSoknadmetadata } from '../../types/rs-types/rs-soknadmetadata'
 
 interface SoknadLinkProps {
-    soknad: Soknad
+    soknad: RSSoknadmetadata
     children: React.ReactNode
     className: string
 }
 
-export const urlTilSoknad = (soknad: Soknad) => {
+export const urlTilSoknad = (soknad: Soknad | RSSoknadmetadata) => {
     switch (soknad.status) {
         case RSSoknadstatus.SENDT:
             return `/sendt/${soknad.id}${window.location.search}`
@@ -22,9 +23,15 @@ export const urlTilSoknad = (soknad: Soknad) => {
     }
 
     const soknaderUrl = `/soknader/${soknad.id}`
+
+    /*
+    TODO: Denne må flyttes inn i søknaden
     return erDelvisUtfylt(soknad)
         ? `${soknaderUrl}/${finnPosisjonPaSisteBesvarteSporsmal(soknad) + 1}${window.location.search}`
         : `${soknaderUrl}/1${window.location.search}`
+    */
+
+    return `${soknaderUrl}/1${window.location.search}`
 }
 
 export const erDelvisUtfyltNySoknad = (soknad: Soknad): boolean => {
