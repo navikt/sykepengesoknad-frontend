@@ -52,7 +52,7 @@ import nb from 'dayjs/locale/nb'
 import type { AppProps as NextAppProps } from 'next/app'
 import Head from 'next/head'
 import React, { PropsWithChildren } from 'react'
-import { QueryClient, QueryClientProvider } from 'react-query'
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
 
 import { LabsWarning } from '../components/labs-warning/LabsWarning'
 
