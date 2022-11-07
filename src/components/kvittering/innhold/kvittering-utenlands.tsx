@@ -1,12 +1,15 @@
 import { Alert, BodyLong, BodyShort, Heading, Label, Link } from '@navikt/ds-react'
 import React from 'react'
+import { useParams } from 'react-router-dom'
 
-import { useAppStore } from '../../../data/stores/app-store'
 import { sendtForMerEnn30DagerSiden } from '../../../utils/dato-utils'
 import { tekst } from '../../../utils/tekster'
+import { RouteParams } from '../../../app'
+import useSoknad from '../../../hooks/useSoknad'
 
 const KvitteringUtenlands = () => {
-    const { valgtSoknad } = useAppStore()
+    const { id } = useParams<RouteParams>()
+    const { data: valgtSoknad } = useSoknad(id)
 
     if (sendtForMerEnn30DagerSiden(valgtSoknad?.sendtTilArbeidsgiverDato, valgtSoknad?.sendtTilNAVDato)) {
         return null

@@ -4,11 +4,11 @@ import React from 'react'
 import { useParams } from 'react-router-dom'
 
 import { RouteParams } from '../../../app'
-import { useAppStore } from '../../../data/stores/app-store'
 import { TagTyper } from '../../../types/enums'
 import { Sporsmal } from '../../../types/types'
 import { tekst } from '../../../utils/tekster'
 import { hentNokkel } from '../sporsmal-utils'
+import useSoknad from '../../../hooks/useSoknad'
 
 import Steg from './steg'
 
@@ -35,8 +35,9 @@ const Fremdriftsbar = ({ antallSteg }: FremdriftsbarProps) => {
 }
 
 const SporsmalSteg = () => {
-    const { valgtSoknad } = useAppStore()
-    const { stegId } = useParams<RouteParams>()
+    const { id, stegId } = useParams<RouteParams>()
+    const { data: valgtSoknad } = useSoknad(id)
+
     const aktivtSteg = parseInt(stegId)
     const steg = valgtSoknad!.sporsmal.filter((s) => s.tag !== TagTyper.VAER_KLAR_OVER_AT)
 

@@ -3,11 +3,11 @@ import React from 'react'
 import { useHistory, useParams } from 'react-router'
 
 import { RouteParams } from '../../../app'
-import { useAppStore } from '../../../data/stores/app-store'
 import { SEPARATOR } from '../../../utils/constants'
 import { useAmplitudeInstance } from '../../amplitude/amplitude'
 import Vis from '../../vis'
 import { pathUtenSteg } from '../sporsmal-utils'
+import useSoknad from '../../../hooks/useSoknad'
 
 const innerCls = (aktiv: boolean, ferdig: boolean, disabled: boolean) =>
     cls('stegindikator__steg-inner', {
@@ -23,8 +23,9 @@ export interface StegProps {
 }
 
 const Steg = ({ label, index }: StegProps) => {
-    const { stegId } = useParams<RouteParams>()
-    const { valgtSoknad } = useAppStore()
+    const { id, stegId } = useParams<RouteParams>()
+    const { data: valgtSoknad } = useSoknad(id)
+
     const { logEvent } = useAmplitudeInstance()
     const aktivtSteg = parseInt(stegId)
     const num = index + 1

@@ -19,6 +19,8 @@ import { GjenstaendeSoknader, hentGjenstaendeSoknader } from '../gjenstaende-sok
 import { hentHotjarJsTrigger, HotjarTrigger } from '../hotjar-trigger'
 import { UxSignalsWidget } from '../ux-signals/UxSignalsWidget'
 import Vis from '../vis'
+import useSoknad from '../../hooks/useSoknad'
+import useSoknader from '../../hooks/useSoknader'
 
 import Kvittering from './kvittering'
 import { harSvartJaFravaerForSykmeldingen, harSvartJaJobbetDuUnderveis } from './harSvartJa'
@@ -37,30 +39,32 @@ const brodsmuler: Brodsmule[] = [
 ]
 
 const KvitteringSide = () => {
-    const { valgtSoknad, soknader, setValgtSoknad, setValgtSykmelding, sykmeldinger, feilmeldingTekst } = useAppStore()
+    const { id } = useParams<RouteParams>()
+    const { data: valgtSoknad } = useSoknad(id)
+    const { data: soknader } = useSoknader()
+
+    const { setValgtSykmelding, sykmeldinger, feilmeldingTekst } = useAppStore()
     const [rerendreKvittering, setRerendrekvittering] = useState<Date>(new Date())
     const { logEvent } = useAmplitudeInstance()
-    const { id } = useParams<RouteParams>()
 
     useEffect(() => {
-        const filtrertSoknad = soknader.find((soknad) => soknad.id === id)
-        setValgtSoknad(filtrertSoknad)
+        if (!valgtSoknad) return
 
-        const sykmelding = sykmeldinger.find((sm) => sm.id === filtrertSoknad?.sykmeldingId)
+        const sykmelding = sykmeldinger.find((sm) => sm.id === valgtSoknad.sykmeldingId)
         setValgtSykmelding(sykmelding)
 
         logEvent('skjema åpnet', {
             skjemanavn: 'sykepengesoknad',
-            soknadstype: filtrertSoknad?.soknadstype,
-            soknadstatus: filtrertSoknad?.status,
+            soknadstype: valgtSoknad.soknadstype,
+            soknadstatus: valgtSoknad.status,
         })
         // eslint-disable-next-line
-    }, [id, soknader, sykmeldinger])
+    }, [valgtSoknad])
 
     // eslint-disable-next-line @typescript-eslint/no-empty-function
     useEffect(() => {}, [rerendreKvittering])
 
-    if (!valgtSoknad) return null
+    if (!valgtSoknad || !soknader) return null
 
     const erSendtTilArbeidsgiver = valgtSoknad.sendtTilArbeidsgiverDato !== null
 
@@ -94,7 +98,7 @@ const KvitteringSide = () => {
                                     onClick={() => {
                                         logEvent('knapp klikket', {
                                             tekst: tekst('kvittering.ferdig'),
-                                            soknadstype: valgtSoknad?.soknadstype,
+                                            soknadstype: valgtSoknad.soknadstype,
                                         })
                                         window.location.href = sykefravaerUrl()
                                     }}

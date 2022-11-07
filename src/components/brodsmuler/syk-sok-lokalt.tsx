@@ -5,10 +5,13 @@ import { RouteParams } from '../../app'
 import { useAppStore } from '../../data/stores/app-store'
 import { isDev } from '../../utils/environment'
 import Vis from '../vis'
+import useSoknad from '../../hooks/useSoknad'
 
 const SykSokLokalt = () => {
-    const { valgtSoknad, valgtSykmelding } = useAppStore()
-    const { stegId } = useParams<RouteParams>()
+    const { id, stegId } = useParams<RouteParams>()
+    const { data: valgtSoknad } = useSoknad(id)
+
+    const { valgtSykmelding } = useAppStore()
     const [width, setWidth] = useState<number>(window.innerWidth)
 
     // eslint-disable-next-line

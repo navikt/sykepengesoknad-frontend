@@ -1,8 +1,8 @@
 import { Alert, BodyLong, BodyShort, Label, Radio, RadioGroup } from '@navikt/ds-react'
 import React, { useState } from 'react'
 import { useFormContext } from 'react-hook-form'
+import { useParams } from 'react-router'
 
-import { useAppStore } from '../../../data/stores/app-store'
 import { TagTyper } from '../../../types/enums'
 import { RSSvartype } from '../../../types/rs-types/rs-svartype'
 import { rodeUkeDagerIPerioden } from '../../../utils/helligdager-utils'
@@ -17,6 +17,8 @@ import Vis from '../../vis'
 import { SpmProps } from '../sporsmal-form/sporsmal-form'
 import { hentFeilmelding } from '../sporsmal-utils'
 import UndersporsmalListe from '../undersporsmal/undersporsmal-liste'
+import { RouteParams } from '../../../app'
+import useSoknad from '../../../hooks/useSoknad'
 
 const RadioKomp = ({ sporsmal }: SpmProps) => {
     const {
@@ -36,7 +38,8 @@ const RadioKomp = ({ sporsmal }: SpmProps) => {
     const errorTimer = errors[hentUndersporsmal(sporsmal!, TagTyper.HVOR_MYE_TIMER_VERDI)!.id]
 
     const feilmelding = hentFeilmelding(sporsmal)
-    const { valgtSoknad } = useAppStore()
+    const { id } = useParams<RouteParams>()
+    const { data: valgtSoknad } = useSoknad(id)
     const { validerGrad, beregnGrad } = validerArbeidsgrad(sporsmal)
     const [surveySvart, setSurveySvart] = useState<boolean>(false)
     const { logEvent } = useAmplitudeInstance()

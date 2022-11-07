@@ -4,7 +4,6 @@ import React, { useCallback, useEffect, useState } from 'react'
 import { useDropzone } from 'react-dropzone'
 import { useFormContext } from 'react-hook-form'
 
-import { useAppStore } from '../../../data/stores/app-store'
 import fetchMedRequestId, { AuthenticationError } from '../../../utils/fetch'
 import {
     customTruncet,
@@ -16,11 +15,17 @@ import {
 import { getLedetekst, tekst } from '../../../utils/tekster'
 import Utvidbar from '../../utvidbar/utvidbar'
 import Vis from '../../vis'
+import { Kvittering } from '../../../types/types'
 
 const maks = formaterFilstørrelse(maxFilstørrelse)
 
-const DragAndDrop = () => {
-    const { valgtFil, setValgtFil, valgtKvittering } = useAppStore()
+export interface DragAndDropProps {
+    valgtFil?: File
+    setValgtFil: (arg0?: File) => void
+    valgtKvittering?: Kvittering
+}
+
+const DragAndDrop = ({ valgtFil, setValgtFil, valgtKvittering }: DragAndDropProps) => {
     const {
         formState: { errors },
         register,

@@ -27,6 +27,8 @@ import { hentHotjarJsTrigger, HotjarTrigger } from '../hotjar-trigger'
 import { ViktigInformasjon } from '../soknad-intro/viktig-informasjon'
 import { hentNokkel } from '../sporsmal/sporsmal-utils'
 import Vis from '../vis'
+import useSoknad from '../../hooks/useSoknad'
+import useSoknader from '../../hooks/useSoknader'
 
 import { urlTilSoknad } from './soknad-link'
 
@@ -45,33 +47,36 @@ const brodsmuler: Brodsmule[] = [
 ]
 
 const Soknaden = () => {
-    const { soknader, valgtSoknad, setValgtSoknad, sykmeldinger, setValgtSykmelding } = useAppStore()
-    const { logEvent } = useAmplitudeInstance()
     const { id } = useParams<RouteParams>()
+    const { data: valgtSoknad } = useSoknad(id)
+    const { logEvent } = useAmplitudeInstance()
+
+    const { sykmeldinger, setValgtSykmelding } = useAppStore()
 
     useEffect(() => {
-        const filtrertSoknad = soknader.find((soknad) => soknad.id === id)
-        setValgtSoknad(filtrertSoknad)
+        if (!valgtSoknad) return
 
-        const sykmelding = sykmeldinger.find((sm) => sm.id === filtrertSoknad?.sykmeldingId)
+        const sykmelding = sykmeldinger.find((sm) => sm.id === valgtSoknad.sykmeldingId)
         setValgtSykmelding(sykmelding)
 
         logEvent('skjema åpnet', {
             skjemanavn: 'sykepengesoknad',
-            soknadstype: filtrertSoknad?.soknadstype,
-            soknadstatus: filtrertSoknad?.status,
+            soknadstype: valgtSoknad.soknadstype,
+            soknadstatus: valgtSoknad.status,
         })
         // eslint-disable-next-line
-    }, [id, soknader, sykmeldinger])
+    }, [valgtSoknad])
 
     useEffect(() => {
         setBodyClass('soknaden')
     }, [])
 
-    if (!valgtSoknad) {
+    if (!valgtSoknad) return null
+    if (valgtSoknad.id !== id) {
+        //TODO: dette skjer nok ikke, fjern etter at dette er testet
+        console.log('valgtSoknad har ikke samme id som param', id, valgtSoknad.id) // eslint-disable-line
         return null
     }
-    if (valgtSoknad.id !== id) return null
 
     return (
         <>
@@ -90,13 +95,16 @@ const Soknaden = () => {
 export default Soknaden
 
 const Fordeling = () => {
-    const { valgtSoknad, soknader, sykmeldinger } = useAppStore()
-    const { stegId } = useParams<RouteParams>()
-    const stegNo = parseInt(stegId)
-    const history = useHistory()
-    const { logEvent } = useAmplitudeInstance()
+    const { id, stegId } = useParams<RouteParams>()
+    const { data: valgtSoknad } = useSoknad(id)
+    const { data: soknader } = useSoknader()
 
-    if (!valgtSoknad) {
+    const { sykmeldinger } = useAppStore()
+    const { logEvent } = useAmplitudeInstance()
+    const history = useHistory()
+    const stegNo = parseInt(stegId)
+
+    if (!valgtSoknad || !soknader) {
         return null
     }
 

@@ -4,14 +4,14 @@ import { useHistory } from 'react-router-dom'
 
 import { RSSoknadstatus } from '../../types/rs-types/rs-soknadstatus'
 import { RSSoknadstype } from '../../types/rs-types/rs-soknadstype'
-import { Soknad } from '../../types/types'
 import { tallTilSpråk } from '../../utils/tallTilSpraak'
 import { getLedetekst, tekst } from '../../utils/tekster'
 import { useAmplitudeInstance } from '../amplitude/amplitude'
 import { urlTilSoknad } from '../soknad/soknad-link'
+import { RSSoknadmetadata } from '../../types/rs-types/rs-soknadmetadata'
 
 interface Props {
-    soknader: Soknad[]
+    soknader: RSSoknadmetadata[]
     style?: CSSProperties | undefined
 }
 
@@ -68,7 +68,7 @@ export const GjenstaendeSoknader = ({ soknader, style }: Props) => {
     )
 }
 
-export function hentGjenstaendeSoknader(soknader: Soknad[]) {
+export function hentGjenstaendeSoknader(soknader: RSSoknadmetadata[]) {
     return soknader
         .filter((s) => s.status === RSSoknadstatus.NY)
         .filter((s) => s.soknadstype !== RSSoknadstype.OPPHOLD_UTLAND)

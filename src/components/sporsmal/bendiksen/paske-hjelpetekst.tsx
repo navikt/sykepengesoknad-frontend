@@ -1,20 +1,23 @@
 import { BodyShort, Label, Link } from '@navikt/ds-react'
 import parser from 'html-react-parser'
 import React from 'react'
+import { useParams } from 'react-router'
 
-import { useAppStore } from '../../../data/stores/app-store'
 import { TagTyper } from '../../../types/enums'
 import { innenforPaske } from '../../../utils/helligdager-utils'
 import { tekst } from '../../../utils/tekster'
 import { useAmplitudeInstance } from '../../amplitude/amplitude'
 import Vis from '../../vis'
 import { SpmProps } from '../sporsmal-form/sporsmal-form'
+import { RouteParams } from '../../../app'
+import useSoknad from '../../../hooks/useSoknad'
 
 import Bendiksen from './bendiksen'
 
 const PaskeHjelpetekst = ({ sporsmal }: SpmProps) => {
+    const { id } = useParams<RouteParams>()
+    const { data: valgtSoknad } = useSoknad(id)
     const { logEvent } = useAmplitudeInstance()
-    const { valgtSoknad } = useAppStore()
 
     if (!valgtSoknad) return null
 

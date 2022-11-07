@@ -17,6 +17,7 @@ import Ettersending from '../ettersending/ettersending'
 import { hentHotjarJsTrigger, HotjarTrigger } from '../hotjar-trigger'
 import Kvittering from '../kvittering/kvittering'
 import Vis from '../vis'
+import useSoknad from '../../hooks/useSoknad'
 
 const brodsmuler: Brodsmule[] = [
     {
@@ -32,25 +33,26 @@ const brodsmuler: Brodsmule[] = [
 ]
 
 const SendtSide = () => {
-    const { valgtSoknad, soknader, setValgtSoknad, setValgtSykmelding, sykmeldinger, feilmeldingTekst } = useAppStore()
+    const { id } = useParams<RouteParams>()
+    const { data: valgtSoknad } = useSoknad(id)
+
+    const { setValgtSykmelding, sykmeldinger, feilmeldingTekst } = useAppStore()
     const [rerendreKvittering, setRerendrekvittering] = useState<Date>(new Date())
     const { logEvent } = useAmplitudeInstance()
-    const { id } = useParams<RouteParams>()
 
     useEffect(() => {
-        const filtrertSoknad = soknader.find((soknad) => soknad.id === id)
-        setValgtSoknad(filtrertSoknad)
+        if (!valgtSoknad) return
 
-        const sykmelding = sykmeldinger.find((sm) => sm.id === filtrertSoknad?.sykmeldingId)
+        const sykmelding = sykmeldinger.find((sm) => sm.id === valgtSoknad.sykmeldingId)
         setValgtSykmelding(sykmelding)
 
         logEvent('skjema åpnet', {
             skjemanavn: 'sykepengesoknad',
-            soknadstype: filtrertSoknad?.soknadstype,
-            soknadstatus: filtrertSoknad?.status,
+            soknadstype: valgtSoknad.soknadstype,
+            soknadstatus: valgtSoknad.status,
         })
         // eslint-disable-next-line
-    }, [id, soknader, sykmeldinger])
+    }, [valgtSoknad])
 
     // eslint-disable-next-line @typescript-eslint/no-empty-function
     useEffect(() => {}, [rerendreKvittering])

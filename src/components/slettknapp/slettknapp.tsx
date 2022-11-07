@@ -2,21 +2,30 @@
 import { Alert, Button, Heading, Modal } from '@navikt/ds-react'
 import { logger } from '@navikt/next-logger'
 import React, { useState } from 'react'
+import { useParams } from 'react-router-dom'
+import { useQueryClient } from '@tanstack/react-query'
 
 import { useAppStore } from '../../data/stores/app-store'
 import { Kvittering, Sporsmal, svarverdiToKvittering } from '../../types/types'
 import fetchMedRequestId, { AuthenticationError } from '../../utils/fetch'
 import { tekst } from '../../utils/tekster'
 import Vis from '../vis'
+import useSoknad from '../../hooks/useSoknad'
+import { RouteParams } from '../../app'
 
 interface SlettknappProps {
     sporsmal: Sporsmal
     kvittering: Kvittering
+    setOpenModal: (arg0: boolean) => void
     update?: () => void
 }
 
-const Slettknapp = ({ sporsmal, kvittering, update }: SlettknappProps) => {
-    const { valgtSoknad, setValgtSoknad, feilmeldingTekst, setFeilmeldingTekst, setOpenModal } = useAppStore()
+const Slettknapp = ({ sporsmal, kvittering, setOpenModal, update }: SlettknappProps) => {
+    const { id } = useParams<RouteParams>()
+    const { data: valgtSoknad } = useSoknad(id)
+    const queryClient = useQueryClient()
+
+    const { feilmeldingTekst, setFeilmeldingTekst } = useAppStore()
     const [vilSlette, setVilSlette] = useState<boolean>(false)
     const [sletter, setSletter] = useState<boolean>(false)
 
@@ -25,8 +34,6 @@ const Slettknapp = ({ sporsmal, kvittering, update }: SlettknappProps) => {
     }
 
     const slettKvittering = async () => {
-        let feilVedSletting = false
-
         if (sletter) {
             return
         } else {
@@ -51,7 +58,6 @@ const Slettknapp = ({ sporsmal, kvittering, update }: SlettknappProps) => {
         } catch (e: any) {
             if (!(e instanceof AuthenticationError)) {
                 logger.error(e)
-                feilVedSletting = true
                 setFeilmeldingTekst(tekst('opplasting_modal.slett.feilmelding'))
             }
             return
@@ -59,11 +65,11 @@ const Slettknapp = ({ sporsmal, kvittering, update }: SlettknappProps) => {
 
         sporsmal.svarliste.svar.splice(idx, 1)
         valgtSoknad!.sporsmal[valgtSoknad!.sporsmal.findIndex((spm) => spm.id === sporsmal.id)] = sporsmal
-        setValgtSoknad(valgtSoknad)
+        queryClient.setQueriesData(['soknad', valgtSoknad!.id], valgtSoknad)
 
         setOpenModal(false)
         setSletter(false)
-        setVilSlette(feilVedSletting)
+        setVilSlette(false)
         if (update) {
             update()
         }

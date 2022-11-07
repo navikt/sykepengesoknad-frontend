@@ -1,6 +1,7 @@
 import { BodyShort, Label } from '@navikt/ds-react'
 import dayjs from 'dayjs'
 import React from 'react'
+import { useParams } from 'react-router-dom'
 
 import { useAppStore } from '../../data/stores/app-store'
 import { Periode } from '../../types/sykmelding'
@@ -10,9 +11,14 @@ import { sorterEtterEldsteTom } from '../../utils/sykmelding-utils'
 import { tekst } from '../../utils/tekster'
 import Bjorn from '../sporsmal/bjorn/bjorn'
 import Vis from '../vis'
+import { RouteParams } from '../../app'
+import useSoknad from '../../hooks/useSoknad'
 
 const SykmeldingPerioder = () => {
-    const { valgtSoknad, valgtSykmelding } = useAppStore()
+    const { id } = useParams<RouteParams>()
+    const { data: valgtSoknad } = useSoknad(id)
+
+    const { valgtSykmelding } = useAppStore()
     const sortertePerioder = valgtSykmelding?.sykmeldingsperioder.sort(sorterEtterEldsteTom) || []
 
     const hentPeriodeTekst = (periode: Periode) => {

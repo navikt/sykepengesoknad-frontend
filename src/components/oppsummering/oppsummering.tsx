@@ -1,6 +1,5 @@
 import React from 'react'
 
-import { useAppStore } from '../../data/stores/app-store'
 import { TagTyper } from '../../types/enums'
 import { RSSvartype } from '../../types/rs-types/rs-svartype'
 import { Sporsmal } from '../../types/types'
@@ -26,11 +25,10 @@ export interface OppsummeringProps {
 
 interface EkspanderProps {
     ekspandert: boolean
+    sporsmal: Sporsmal[]
 }
 
-const Oppsummering = ({ ekspandert }: EkspanderProps) => {
-    const { valgtSoknad } = useAppStore()
-
+const Oppsummering = ({ ekspandert, sporsmal }: EkspanderProps) => {
     const tittel = tekst('sykepengesoknad.oppsummering.tittel')
     return (
         <Utvidbar
@@ -42,7 +40,7 @@ const Oppsummering = ({ ekspandert }: EkspanderProps) => {
             tittel={tittel}
             ikonAltTekst=""
         >
-            {valgtSoknad!.sporsmal
+            {sporsmal
                 .filter((sporsmal) => {
                     return skalVisesIOppsummering(sporsmal)
                 })

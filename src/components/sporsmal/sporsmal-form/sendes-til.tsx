@@ -5,15 +5,19 @@ import React, { useEffect, useState } from 'react'
 import { useAppStore } from '../../../data/stores/app-store'
 import { RSMottaker } from '../../../types/rs-types/rs-mottaker'
 import { getLedetekst, tekst } from '../../../utils/tekster'
+import { Soknad } from '../../../types/types'
 
-const SendesTil = () => {
-    const { valgtSoknad, mottaker } = useAppStore()
+export interface SendesTilProps {
+    soknad?: Soknad
+}
+
+const SendesTil = ({ soknad }: SendesTilProps) => {
+    const { mottaker } = useAppStore()
     const [nokkel, setNokkel] = useState<string>()
 
     useEffect(() => {
         if (mottaker === RSMottaker.ARBEIDSGIVER) {
             setNokkel('sykepengesoknad.oppsummering.arbeidsgiver-som-mottaker')
-            valgtSoknad!.sendtTilArbeidsgiverDato = new Date()
         }
         if (mottaker === RSMottaker.NAV) {
             setNokkel('sykepengesoknad.oppsummering.nav-som-mottaker')
@@ -25,17 +29,17 @@ const SendesTil = () => {
         // eslint-disable-next-line
     }, [mottaker])
 
-    if (!mottaker || !nokkel || valgtSoknad?.arbeidssituasjon !== 'ARBEIDSTAKER') {
+    if (!mottaker || !nokkel || soknad?.arbeidssituasjon !== 'ARBEIDSTAKER') {
         return null
     }
 
     return (
         <div className="bottom_line">
             <BodyShort as="div">
-                {valgtSoknad!.arbeidsgiver !== undefined
+                {soknad.arbeidsgiver !== undefined
                     ? parser(
                           getLedetekst(tekst(nokkel as any), {
-                              '%ARBEIDSGIVER%': valgtSoknad?.arbeidsgiver.navn,
+                              '%ARBEIDSGIVER%': soknad.arbeidsgiver.navn,
                           }),
                       )
                     : parser(tekst(nokkel as any))}

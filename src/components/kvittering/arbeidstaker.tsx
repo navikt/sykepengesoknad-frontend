@@ -2,16 +2,20 @@ import { Alert, Heading } from '@navikt/ds-react'
 import { logger } from '@navikt/next-logger'
 import dayjs from 'dayjs'
 import React, { useCallback, useEffect, useState } from 'react'
+import { useParams } from 'react-router-dom'
 
 import { useAppStore } from '../../data/stores/app-store'
 import { RSMottaker } from '../../types/rs-types/rs-mottaker'
 import { RSSoknadstatus } from '../../types/rs-types/rs-soknadstatus'
 import { RSSoknadstype } from '../../types/rs-types/rs-soknadstype'
-import { Soknad } from '../../types/types'
 import { sendtForMerEnn30DagerSiden } from '../../utils/dato-utils'
 import { AuthenticationError, fetchJsonMedRequestId } from '../../utils/fetch'
 import { tekst } from '../../utils/tekster'
 import Vis from '../vis'
+import { RouteParams } from '../../app'
+import useSoknad from '../../hooks/useSoknad'
+import useSoknader from '../../hooks/useSoknader'
+import { RSSoknadmetadata } from '../../types/rs-types/rs-soknadmetadata'
 
 import Inntil16dager from './innhold/arbeidstaker/inntil16dager'
 import Over16dager from './innhold/arbeidstaker/over16dager'
@@ -22,7 +26,10 @@ import ArbeidstakerStatus from './status/arbeidstaker-status'
 type ArbeidstakerKvitteringTekst = 'inntil16dager' | 'over16dager' | 'utenOpphold' | 'medOpphold' | undefined
 
 const Arbeidstaker = () => {
-    const { valgtSoknad, valgtSykmelding, soknader } = useAppStore()
+    const { id } = useParams<RouteParams>()
+    const { data: valgtSoknad } = useSoknad(id)
+    const { data: soknader } = useSoknader()
+    const { valgtSykmelding } = useAppStore()
     const [kvitteringTekst, setKvitteringTekst] = useState<ArbeidstakerKvitteringTekst>()
 
     const erInnenforArbeidsgiverperiode = () => {
@@ -41,13 +48,11 @@ const Arbeidstaker = () => {
         return dayjs(d2).diff(d1, 'day') <= 16
     }
 
-    const harTidligereUtenOpphold = (tidligereSoknader: Soknad[]) => {
-        if (!valgtSoknad) return
-
-        return tidligereSoknader.filter((sok) => dayjs(valgtSoknad.fom!).diff(sok.tom!, 'day') <= 1).length > 0
+    const harTidligereUtenOpphold = (tidligereSoknader: RSSoknadmetadata[]) => {
+        return tidligereSoknader.filter((sok) => dayjs(valgtSoknad!.fom!).diff(sok.tom!, 'day') <= 1).length > 0
     }
 
-    const utenOppholdSjekkArbeidsgiverperiode = async (tidligereSoknader: Soknad[]) => {
+    const utenOppholdSjekkArbeidsgiverperiode = async (tidligereSoknader: RSSoknadmetadata[]) => {
         if (!valgtSoknad) return
 
         const forrigeSoknad = tidligereSoknader.find((sok) => dayjs(valgtSoknad.fom).diff(sok.tom!, 'day') <= 1)
@@ -59,7 +64,7 @@ const Arbeidstaker = () => {
         }
     }
 
-    const medOppholdSjekkArbeidsgiverperiode = async (tidligereSoknader: Soknad[]) => {
+    const medOppholdSjekkArbeidsgiverperiode = async (tidligereSoknader: RSSoknadmetadata[]) => {
         const forrigeSoknad = tidligereSoknader.sort((a, b) => a.tom!.getTime() - b.tom!.getTime()).reverse()[0]
         const forste = await erForsteSoknadUtenforArbeidsgiverperiode(forrigeSoknad?.id)
         if (forste) {
@@ -109,7 +114,7 @@ const Arbeidstaker = () => {
     }
 
     const settRiktigKvitteringTekst = useCallback(async () => {
-        if (!valgtSoknad || !valgtSykmelding) return
+        if (!valgtSoknad || !valgtSykmelding || !soknader) return
 
         if (erInnenforArbeidsgiverperiode()) {
             setKvitteringTekst('inntil16dager')
@@ -141,7 +146,7 @@ const Arbeidstaker = () => {
         settRiktigKvitteringTekst().catch((e: Error) => logger.error(e))
     }, [settRiktigKvitteringTekst, valgtSoknad?.sendtTilNAVDato])
 
-    if (!valgtSoknad) return null
+    if (!valgtSoknad || !soknader) return null
 
     return (
         <>
@@ -156,7 +161,7 @@ const Arbeidstaker = () => {
 
                 <Vis
                     hvis={
-                        !sendtForMerEnn30DagerSiden(valgtSoknad?.sendtTilArbeidsgiverDato, valgtSoknad?.sendtTilNAVDato)
+                        !sendtForMerEnn30DagerSiden(valgtSoknad.sendtTilArbeidsgiverDato, valgtSoknad.sendtTilNAVDato)
                     }
                     render={() => {
                         return (

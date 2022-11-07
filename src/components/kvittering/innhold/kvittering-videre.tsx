@@ -1,20 +1,25 @@
 import { Alert, BodyLong, Heading, Label, Link } from '@navikt/ds-react'
 import parser from 'html-react-parser'
 import React from 'react'
+import { useParams } from 'react-router-dom'
 
-import { useAppStore } from '../../../data/stores/app-store'
 import { RSArbeidssituasjon } from '../../../types/rs-types/rs-arbeidssituasjon'
 import { RSSoknadstype } from '../../../types/rs-types/rs-soknadstype'
 import { sendtForMerEnn30DagerSiden } from '../../../utils/dato-utils'
 import { tekst } from '../../../utils/tekster'
 import Vis from '../../vis'
+import { RouteParams } from '../../../app'
+import useSoknad from '../../../hooks/useSoknad'
 
 const KvitteringVidere = () => {
-    const { valgtSoknad } = useAppStore()
+    const { id } = useParams<RouteParams>()
+    const { data: valgtSoknad } = useSoknad(id)
 
     if (sendtForMerEnn30DagerSiden(valgtSoknad?.sendtTilArbeidsgiverDato, valgtSoknad?.sendtTilNAVDato)) {
         return null
     }
+
+    if (!valgtSoknad) return null
 
     return (
         <Alert variant="info" className="opplysninger">
@@ -23,7 +28,7 @@ const KvitteringVidere = () => {
             </Heading>
 
             <Vis
-                hvis={valgtSoknad?.arbeidssituasjon === RSArbeidssituasjon.NAERINGSDRIVENDE}
+                hvis={valgtSoknad.arbeidssituasjon === RSArbeidssituasjon.NAERINGSDRIVENDE}
                 render={() => (
                     <div className="avsnitt">
                         <Label as="h2">{tekst('kvittering.naeringsdrivende.tittel')}</Label>
@@ -52,7 +57,7 @@ const KvitteringVidere = () => {
             </div>
 
             <Vis
-                hvis={valgtSoknad && valgtSoknad.soknadstype !== RSSoknadstype.REISETILSKUDD}
+                hvis={valgtSoknad.soknadstype !== RSSoknadstype.REISETILSKUDD}
                 render={() => (
                     <div className="avsnitt">
                         <Label as="h2">{tekst('kvittering.naar-blir-pengene')}</Label>

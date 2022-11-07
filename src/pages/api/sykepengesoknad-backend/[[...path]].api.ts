@@ -7,7 +7,8 @@ import { proxyKallTilBackend } from '../../../proxy/backendproxy'
 const { serverRuntimeConfig } = getConfig()
 
 const tillatteApier = [
-    'GET /api/v2/soknader',
+    'GET /api/v2/soknad/[uuid]',
+    'GET /api/v2/soknader/metadata',
     'GET /api/v2/soknader/[uuid]/mottaker',
     'POST /api/v2/opprettSoknadUtland',
     'POST /api/v2/soknader/[uuid]/avbryt',

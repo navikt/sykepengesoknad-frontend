@@ -5,6 +5,7 @@ import parser from 'html-react-parser'
 import React, { useEffect, useState } from 'react'
 import { FormProvider, useForm } from 'react-hook-form'
 import { useParams } from 'react-router-dom'
+import { useQueryClient } from '@tanstack/react-query'
 
 import { RouteParams } from '../../../app'
 import { useAppStore } from '../../../data/stores/app-store'
@@ -16,20 +17,32 @@ import { formaterFilstørrelse, formattertFiltyper, maxFilstørrelse } from '../
 import { getLedetekst, tekst } from '../../../utils/tekster'
 import { Ekspanderbar } from '../../ekspanderbar/ekspanderbar'
 import Slettknapp from '../../slettknapp/slettknapp'
-import { SpmProps } from '../../sporsmal/sporsmal-form/sporsmal-form'
 import Vis from '../../vis'
 import DragAndDrop from '../drag-and-drop/drag-and-drop'
+import useSoknad from '../../../hooks/useSoknad'
 
 interface OpplastetKvittering {
     id: string
 }
 
-const OpplastingForm = ({ sporsmal }: SpmProps) => {
-    const { valgtSoknad, setValgtSoknad, valgtKvittering, setOpenModal, valgtFil, setFeilmeldingTekst } = useAppStore()
+export interface OpplastingFromProps {
+    valgtKvittering?: Kvittering
+    sporsmal: Sporsmal
+    setOpenModal: (arg0: boolean) => void
+    valgtFil?: File
+    setValgtFil: (arg0?: File) => void
+}
+
+const OpplastingForm = ({ valgtKvittering, sporsmal, setOpenModal, valgtFil, setValgtFil }: OpplastingFromProps) => {
+    const { id, stegId } = useParams<RouteParams>()
+    const { data: valgtSoknad } = useSoknad(id)
+    const queryClient = useQueryClient()
+
+    const { setFeilmeldingTekst } = useAppStore()
     const [laster, setLaster] = useState<boolean>(false)
     const [kvitteringHeader, setKvitteringHeader] = useState<string>('')
     const [formErDisabled, setFormErDisabled] = useState<boolean>(false)
-    const { stegId } = useParams<RouteParams>()
+
     const stegNum = Number(stegId)
     const spmIndex = stegNum - 1
     const maks = formaterFilstørrelse(maxFilstørrelse)
@@ -66,7 +79,7 @@ const OpplastingForm = ({ sporsmal }: SpmProps) => {
             if (!rsOppdaterSporsmalResponse) return
 
             valgtSoknad!.sporsmal[spmIndex] = new Sporsmal(rsOppdaterSporsmalResponse.oppdatertSporsmal, null, true)
-            setValgtSoknad(valgtSoknad)
+            queryClient.setQueriesData(['soknad', valgtSoknad!.id], valgtSoknad)
             setOpenModal(false)
         } catch (ex) {
             setFeilmeldingTekst('Det skjedde en feil i baksystemene, prøv igjen senere')
@@ -259,7 +272,7 @@ const OpplastingForm = ({ sporsmal }: SpmProps) => {
                     </div>
                 </div>
 
-                <DragAndDrop />
+                <DragAndDrop valgtFil={valgtFil} setValgtFil={setValgtFil} valgtKvittering={valgtKvittering} />
 
                 <div className="knapperad">
                     <Vis
@@ -290,7 +303,9 @@ const OpplastingForm = ({ sporsmal }: SpmProps) => {
 
                     <Vis
                         hvis={formErDisabled}
-                        render={() => <Slettknapp sporsmal={sporsmal} kvittering={valgtKvittering!} />}
+                        render={() => (
+                            <Slettknapp sporsmal={sporsmal} kvittering={valgtKvittering!} setOpenModal={setOpenModal} />
+                        )}
                     />
                 </div>
             </form>
