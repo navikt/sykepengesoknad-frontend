@@ -15,7 +15,7 @@ interface BannerProps {
 
 const Banner = ({ overskrift }: BannerProps) => {
     const { id } = useParams<RouteParams>()
-    const { data: valgtSoknad } = useSoknad(id)
+    const { data: valgtSoknad } = useSoknad(id, id !== undefined)
 
     const tittel = () => {
         if (valgtSoknad) {

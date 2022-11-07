@@ -179,7 +179,7 @@ const SporsmalForm = () => {
             return
         }
 
-        if (valgtSoknad.korrigerer !== null) {
+        if (valgtSoknad.korrigerer !== undefined) {
             await queryClient.invalidateQueries(['soknad', valgtSoknad.korrigerer])
         }
         await queryClient.invalidateQueries(['soknad', valgtSoknad.id])

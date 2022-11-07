@@ -9,7 +9,7 @@ import useSoknad from '../../hooks/useSoknad'
 
 const SykSokLokalt = () => {
     const { id, stegId } = useParams<RouteParams>()
-    const { data: valgtSoknad } = useSoknad(id)
+    const { data: valgtSoknad } = useSoknad(id, id !== undefined)
 
     const { valgtSykmelding } = useAppStore()
     const [width, setWidth] = useState<number>(window.innerWidth)

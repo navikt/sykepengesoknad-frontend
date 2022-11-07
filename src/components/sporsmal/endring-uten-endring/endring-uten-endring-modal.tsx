@@ -7,10 +7,11 @@ import { useAppStore } from '../../../data/stores/app-store'
 import { tekst } from '../../../utils/tekster'
 import { useAmplitudeInstance } from '../../amplitude/amplitude'
 import { avbrytSoknad } from '../../avbryt-soknad-modal/avbryt-soknad'
-import { RSSoknadstatus } from '../../../types/rs-types/rs-soknadstatus'
 import useSoknad from '../../../hooks/useSoknad'
 import { RouteParams } from '../../../app'
 import useSoknader from '../../../hooks/useSoknader'
+
+import { harLikeSvar } from './har-like-svar'
 
 interface EndringUtenEndringModalProps {
     aapen: boolean
@@ -21,6 +22,7 @@ interface EndringUtenEndringModalProps {
 export const EndringUtenEndringModal = (props: EndringUtenEndringModalProps) => {
     const { id } = useParams<RouteParams>()
     const { data: valgtSoknad } = useSoknad(id)
+    const { data: korrigerer } = useSoknad(valgtSoknad?.korrigerer, valgtSoknad?.korrigerer !== undefined)
     const { data: soknader } = useSoknader()
     const queryClient = useQueryClient()
 
@@ -28,15 +30,33 @@ export const EndringUtenEndringModal = (props: EndringUtenEndringModalProps) => 
     const { setFeilmeldingTekst } = useAppStore()
     const history = useHistory()
 
-    // TODO: Sjekk om det hjelper at denne prefetches
+    // Følger med på endring av svar
     useEffect(() => {
-        if (valgtSoknad?.status == RSSoknadstatus.UTKAST_TIL_KORRIGERING) {
-            queryClient.prefetchQuery(['soknad', valgtSoknad!.korrigerer])
+        if (!valgtSoknad) {
+            return
         }
+        if (!korrigerer) {
+            props.setAapen(false)
+            return
+        }
+        props.setAapen(harLikeSvar(korrigerer, valgtSoknad))
         // eslint-disable-next-line
-    }, [valgtSoknad])
+    }, [valgtSoknad, korrigerer])
 
-    if (!valgtSoknad || !soknader) return null
+    if (!valgtSoknad || !soknader || !korrigerer || !props.erSiste) return null
+
+    const lukkDersomUlikeSvar = () => {
+        if (props.aapen) {
+            if (!harLikeSvar(korrigerer, valgtSoknad)) {
+                props.setAapen(false)
+                return true
+            }
+        }
+        return false
+    }
+
+    // TODO: test om dette funker
+    if (lukkDersomUlikeSvar()) return null
 
     return (
         <>
@@ -45,7 +65,7 @@ export const EndringUtenEndringModal = (props: EndringUtenEndringModalProps) => 
                 onClose={() => {
                     props.setAapen(false)
                 }}
-                open={props.aapen && props.erSiste}
+                open={props.aapen}
                 aria-labelledby="modal-tittel"
             >
                 <Modal.Content>
