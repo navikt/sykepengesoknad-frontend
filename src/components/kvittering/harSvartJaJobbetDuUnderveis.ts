@@ -1,12 +1,14 @@
-import { TagTyper } from '../../types/enums'
 import { RSSoknadstype } from '../../types/rs-types/rs-soknadstype'
 import { Soknad } from '../../types/types'
+import { TagTyper } from '../../types/enums'
 
-export function harSvartJaPåAndreInntektskilder(soknad: Soknad) {
+export function harSvartJaJobbetDuUnderveis(soknad: Soknad) {
     if (soknad.soknadstype != RSSoknadstype.ARBEIDSTAKERE) {
         return false
     }
-    const spm = soknad.sporsmal.find((s) => s.tag == TagTyper.ANDRE_INNTEKTSKILDER)
+    const spm = soknad.sporsmal.find(
+        (s) => s.tag == TagTyper.JOBBET_DU_100_PROSENT || s.tag == TagTyper.JOBBET_DU_GRADERT,
+    )
     if (!spm) {
         return false
     }
