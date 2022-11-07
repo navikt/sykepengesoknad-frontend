@@ -20,8 +20,8 @@ import { hentHotjarJsTrigger, HotjarTrigger } from '../hotjar-trigger'
 import { UxSignalsWidget } from '../ux-signals/UxSignalsWidget'
 import Vis from '../vis'
 
-import { harSvartJaPåAndreInntektskilder } from './harSvartJaAndreInntektskilder'
 import Kvittering from './kvittering'
+import { harSvartJaJobbetDuUnderveis } from './harSvartJaJobbetDuUnderveis'
 
 const brodsmuler: Brodsmule[] = [
     {
@@ -104,8 +104,8 @@ const KvitteringSide = () => {
                             )}
                         ></Vis>
                         <Vis
-                            hvis={harSvartJaPåAndreInntektskilder(valgtSoknad) && gjenstaendeSoknader.length == 0}
-                            render={() => <UxSignalsWidget study={'study-xaur1kqpdz'} />}
+                            hvis={harSvartJaJobbetDuUnderveis(valgtSoknad) && gjenstaendeSoknader.length == 0}
+                            render={() => <UxSignalsWidget study={'study-241w19s2m9'} />}
                         />
                         <Vis
                             hvis={skalViseEndreEllerEttersend}
