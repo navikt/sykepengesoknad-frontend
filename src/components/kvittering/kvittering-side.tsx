@@ -21,7 +21,7 @@ import { UxSignalsWidget } from '../ux-signals/UxSignalsWidget'
 import Vis from '../vis'
 
 import Kvittering from './kvittering'
-import { harSvartJaJobbetDuUnderveis } from './harSvartJaJobbetDuUnderveis'
+import { harSvartJaFravaerForSykmeldingen, harSvartJaJobbetDuUnderveis } from './harSvartJa'
 
 const brodsmuler: Brodsmule[] = [
     {
@@ -104,8 +104,16 @@ const KvitteringSide = () => {
                             )}
                         ></Vis>
                         <Vis
-                            hvis={harSvartJaJobbetDuUnderveis(valgtSoknad) && gjenstaendeSoknader.length == 0}
-                            render={() => <UxSignalsWidget study={'study-241w19s2m9'} />}
+                            hvis={gjenstaendeSoknader.length == 0}
+                            render={() => {
+                                if (harSvartJaJobbetDuUnderveis(valgtSoknad)) {
+                                    return <UxSignalsWidget study={'study-241w19s2m9'} />
+                                }
+                                if (harSvartJaFravaerForSykmeldingen(valgtSoknad)) {
+                                    return <UxSignalsWidget study={'study-2neea8stgf'} />
+                                }
+                                return null
+                            }}
                         />
                         <Vis
                             hvis={skalViseEndreEllerEttersend}
