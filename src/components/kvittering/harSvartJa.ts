@@ -17,3 +17,17 @@ export function harSvartJaJobbetDuUnderveis(soknad: Soknad) {
     }
     return false
 }
+
+export function harSvartJaFravaerForSykmeldingen(soknad: Soknad) {
+    if (soknad.soknadstype != RSSoknadstype.ARBEIDSTAKERE) {
+        return false
+    }
+    const spm = soknad.sporsmal.find((s) => s.tag == TagTyper.FRAVAR_FOR_SYKMELDINGEN)
+    if (!spm) {
+        return false
+    }
+    if (spm.svarliste.svar.length == 1) {
+        return spm.svarliste.svar[0].verdi == 'JA'
+    }
+    return false
+}
