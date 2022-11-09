@@ -3,7 +3,7 @@ import dayjs from 'dayjs'
 import { RSSoknad } from '../../../types/rs-types/rs-soknad'
 import { Sykmelding } from '../../../types/sykmelding'
 import { Persona } from '../personas'
-import { formatterPeriode } from '../formatterPeriode'
+import { tilLesbarPeriodeMedArstall } from '../../../utils/dato-utils'
 
 const url = new URL(window.location.href)
 
@@ -11,8 +11,8 @@ const hovedjobb = url.searchParams.get('hovedjobb') ?? 'MATBUTIKKEN AS'
 const fom = url.searchParams.get('fom') ?? '2022-09-08'
 const tom = url.searchParams.get('tom') ?? '2022-09-21'
 
-const periodeTekst = formatterPeriode(dayjs(fom), dayjs(tom))
-const fravaerFoerTekst = formatterPeriode(dayjs(fom).subtract(16, 'days'), dayjs(fom).subtract(1, 'day'))
+const periodeTekst = tilLesbarPeriodeMedArstall(dayjs(fom), dayjs(tom))
+const fravaerFoerTekst = tilLesbarPeriodeMedArstall(dayjs(fom).subtract(16, 'days'), dayjs(fom).subtract(1, 'day'))
 export const brukertestSykmelding = new Sykmelding({
     id: 'abc5acf2-a44f-42e5-87b2-02c9d0b39ce8',
     pasient: {
