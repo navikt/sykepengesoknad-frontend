@@ -33,6 +33,7 @@ const SoknadenTekster = {
     'sykepengesoknad.friskmeldt.tittel': 'Friskmeldt',
     'sykepengesoknad.enkeltstaende_behandlingsdager.tittel': 'Behandlingsdager',
     'sykepengesoknad.jobbet_du_gradert.tittel': 'Jobb underveis i sykefraværet',
+    'sykepengesoknad.jobbet_du_poc.tittel': 'Jobb underveis i sykefraværet',
     'sykepengesoknad.fraver_for_behandling.tittel': 'Fravær før behandlingsdager',
 
     'sykepengesoknad.jobbet_du_100_prosent.tittel': 'Jobb underveis i sykefraværet',

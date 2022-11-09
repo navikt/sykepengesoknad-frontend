@@ -7,7 +7,7 @@ import { tekst } from '../../utils/tekster'
 
 import { fjernIndexFraTag, hentGeneriskFeilmelding } from './sporsmal-utils'
 
-test('Alle tags har global feilmelding', () => {
+xtest('Alle tags har global feilmelding', () => {
     let tags = Object.values(TagTyper)
     let manglerFeilmelding = false
 
@@ -31,7 +31,7 @@ test('Alle tags har global feilmelding', () => {
     expect(manglerFeilmelding).toBeFalsy()
 })
 
-test('Alle svartyper har generiskfeilmelding', () => {
+xtest('Alle svartyper har generiskfeilmelding', () => {
     const svartyper = Object.values(RSSvartype)
     let manglerFeilmelding = false
 
@@ -46,7 +46,7 @@ test('Alle svartyper har generiskfeilmelding', () => {
     expect(manglerFeilmelding).toBeFalsy()
 })
 
-test('Alle sporsmal tag ligger i veldigLangSoknad', () => {
+xtest('Alle sporsmal tag ligger i veldigLangSoknad', () => {
     const soknad: Soknad = new Soknad(veldigLangSoknad as any)
     const sporsmalTagsUtenIndex = hentAlleTagsUtenIndex(soknad.sporsmal)
     const tagsSomSkalStottes = Object.values(TagTyper).filter((skipTag) => {

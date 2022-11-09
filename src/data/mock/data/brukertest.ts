@@ -7,7 +7,7 @@ import { tilLesbarPeriodeMedArstall } from '../../../utils/dato-utils'
 
 const url = new URL(window.location.href)
 
-const hovedjobb = url.searchParams.get('hovedjobb') ?? 'MATBUTIKKEN AS'
+const hovedjobb = url.searchParams.get('hovedjobb') ?? 'Matbutikken AS'
 const fom = url.searchParams.get('fom') ?? '2022-09-08'
 const tom = url.searchParams.get('tom') ?? '2022-09-21'
 
@@ -318,7 +318,7 @@ export const brukertestSoknad: RSSoknad = {
         {
             id: '1623841',
             tag: 'JOBBET_DU_POC',
-            sporsmalstekst: `I perioden ${periodeTekst} var du 100 % sykmeldt fra ${hovedjobb}. Jobbet du noe i denne perioden?`,
+            sporsmalstekst: `I perioden ${periodeTekst} var du sykmeldt fra ${hovedjobb}. Jobbet du noe i denne perioden?`,
             undertekst: null,
             svartype: 'JA_NEI',
             min: null,
@@ -328,10 +328,9 @@ export const brukertestSoknad: RSSoknad = {
             svar: [],
             undersporsmal: [
                 {
-                    id: '1623842',
+                    id: '4324235432',
                     tag: 'JOBBET_DU_POC_UKE_1',
-                    sporsmalstekst:
-                        `Hvor mange timer i uken jobbet i perioden ${periodeTekst}.`,
+                    sporsmalstekst: `Hvor mange timer jobbet du i perioden ${periodeTekst} hos ${hovedjobb}?`,
                     undertekst: null,
                     svartype: 'TALL',
                     min: '1',
@@ -342,22 +341,22 @@ export const brukertestSoknad: RSSoknad = {
                     undersporsmal: [],
                 },
                 {
-                    id: '1623842',
+                    id: '1623842456',
                     tag: 'HVOR_MANGE_TIMER_PER_UKE_0',
-                    sporsmalstekst: 'Jobber du vanligvis 37,5 timer i uka når du er frisk?',
+                    sporsmalstekst: `Jobber du vanligvis 37,5 timer i uka hos ${hovedjobb}?`,
                     undertekst: null,
                     svartype: 'JA_NEI',
                     min: null,
                     max: null,
                     pavirkerAndreSporsmal: false,
-                    kriterieForVisningAvUndersporsmal: 'JA',
+                    kriterieForVisningAvUndersporsmal: 'NEI',
                     svar: [],
                     undersporsmal: [
                         {
-                            id: '1623848',
-                            tag: 'HVOR_MANGE_TIMER_PER_UKE_0',
+                            id: '42342112',
+                            tag: 'HVOR_MANGE_TIMER_PER_UKE_POC',
                             sporsmalstekst:
-                                'Hvor mange timer i uken jobber du vanligvis når du er frisk? Varierer det, kan du oppgi gjennomsnittet.',
+                                'Hvor mange timer i uken jobber du vanligvis? Varierer det, kan du oppgi gjennomsnittet.',
                             undertekst: null,
                             svartype: 'TALL',
                             min: '1',
