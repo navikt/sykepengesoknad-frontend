@@ -1,11 +1,18 @@
+import dayjs from 'dayjs'
+
 import { RSSoknad } from '../../../types/rs-types/rs-soknad'
 import { Sykmelding } from '../../../types/sykmelding'
 import { Persona } from '../personas'
+import { formatterPeriode } from '../formatterPeriode'
 
 const url = new URL(window.location.href)
 
 const hovedjobb = url.searchParams.get('hovedjobb') ?? 'MATBUTIKKEN AS'
+const fom = url.searchParams.get('fom') ?? '2022-09-08'
+const tom = url.searchParams.get('tom') ?? '2022-09-21'
 
+const periodeTekst = formatterPeriode(dayjs(fom), dayjs(tom))
+const fravaerFoerTekst = formatterPeriode(dayjs(fom).subtract(16, 'days'), dayjs(fom).subtract(1, 'day'))
 export const brukertestSykmelding = new Sykmelding({
     id: 'abc5acf2-a44f-42e5-87b2-02c9d0b39ce8',
     pasient: {
@@ -20,8 +27,8 @@ export const brukertestSykmelding = new Sykmelding({
     arbeidsgiver: { navn: hovedjobb, stillingsprosent: 100 },
     sykmeldingsperioder: [
         {
-            fom: '2022-09-08',
-            tom: '2022-09-21',
+            fom: fom,
+            tom: tom,
             gradert: null,
             behandlingsdager: null,
             innspillTilArbeidsgiver: null,
@@ -65,7 +72,7 @@ export const brukertestSykmelding = new Sykmelding({
         annenFraversArsak: null,
         svangerskap: false,
         yrkesskade: false,
-        yrkesskadeDato: '2022-09-08',
+        yrkesskadeDato: fom,
     },
     skjermesForPasient: false,
     prognose: {
@@ -74,8 +81,8 @@ export const brukertestSykmelding = new Sykmelding({
         erIArbeid: {
             egetArbeidPaSikt: true,
             annetArbeidPaSikt: true,
-            arbeidFOM: '2022-09-08',
-            vurderingsdato: '2022-09-08',
+            arbeidFOM: fom,
+            vurderingsdato: fom,
         },
         erIkkeIArbeid: null,
     },
@@ -100,7 +107,7 @@ export const brukertestSykmelding = new Sykmelding({
         },
         tlf: 'tel:94431152',
     },
-    syketilfelleStartDato: '2022-09-08',
+    syketilfelleStartDato: fom,
     navnFastlege: 'Victor Frankenstein',
     egenmeldt: false,
     papirsykmelding: false,
@@ -137,22 +144,22 @@ export const brukertestSoknad: RSSoknad = {
     sykmeldingId: 'abc5acf2-a44f-42e5-87b2-02c9d0b39ce8',
     soknadstype: 'ARBEIDSTAKERE',
     status: 'NY',
-    fom: '2022-09-08',
-    tom: '2022-09-21',
+    fom: fom,
+    tom: tom,
     opprettetDato: '2022-11-17',
     sendtTilNAVDato: null,
     sendtTilArbeidsgiverDato: null,
     avbruttDato: null,
-    startSykeforlop: '2022-09-08',
-    sykmeldingUtskrevet: '2022-09-08',
+    startSykeforlop: fom,
+    sykmeldingUtskrevet: fom,
     arbeidsgiver: { navn: `${hovedjobb}`, orgnummer: '967170232' },
     korrigerer: null,
     korrigertAv: null,
     arbeidssituasjon: 'ARBEIDSTAKER',
     soknadPerioder: [
         {
-            fom: '2022-09-08',
-            tom: '2022-09-21',
+            fom: fom,
+            tom: tom,
             grad: 100,
             sykmeldingstype: 'AKTIVITET_IKKE_MULIG',
         },
@@ -175,8 +182,7 @@ export const brukertestSoknad: RSSoknad = {
         {
             id: '1623834',
             tag: 'FRAVAR_FOR_SYKMELDINGEN',
-            sporsmalstekst:
-                'Var du syk og borte fra jobb før du ble sykmeldt, i perioden 23. august - 7. september 2022?',
+            sporsmalstekst: `Var du syk og borte fra jobb før du ble sykmeldt, i perioden ${fravaerFoerTekst}?`,
             undertekst: null,
             svartype: 'JA_NEI',
             min: null,
@@ -204,7 +210,7 @@ export const brukertestSoknad: RSSoknad = {
         {
             id: '1623808',
             tag: 'TILBAKE_I_ARBEID',
-            sporsmalstekst: `Var du tilbake i fullt arbeid hos ${hovedjobb} i løpet av perioden 8. - 21. september 2022?`,
+            sporsmalstekst: `Var du tilbake i fullt arbeid hos ${hovedjobb} i løpet av perioden ${periodeTekst}?`,
             undertekst: null,
             svartype: 'JA_NEI',
             min: null,
@@ -219,8 +225,8 @@ export const brukertestSoknad: RSSoknad = {
                     sporsmalstekst: 'Når begynte du å jobbe igjen?',
                     undertekst: null,
                     svartype: 'DATO',
-                    min: '2022-09-08',
-                    max: '2022-09-21',
+                    min: fom,
+                    max: tom,
                     pavirkerAndreSporsmal: true,
                     kriterieForVisningAvUndersporsmal: null,
                     svar: [],
@@ -231,7 +237,7 @@ export const brukertestSoknad: RSSoknad = {
         {
             id: '1623810',
             tag: 'FERIE_V2',
-            sporsmalstekst: 'Tok du ut feriedager i tidsrommet 8. - 21. september 2022?',
+            sporsmalstekst: `Tok du ut feriedager i tidsrommet ${periodeTekst}?`,
             undertekst: null,
             svartype: 'JA_NEI',
             min: null,
@@ -246,8 +252,8 @@ export const brukertestSoknad: RSSoknad = {
                     sporsmalstekst: 'Når tok du ut feriedager?',
                     undertekst: null,
                     svartype: 'PERIODER',
-                    min: '2022-09-08',
-                    max: '2022-09-21',
+                    min: fom,
+                    max: tom,
                     pavirkerAndreSporsmal: false,
                     kriterieForVisningAvUndersporsmal: null,
                     svar: [],
@@ -258,7 +264,7 @@ export const brukertestSoknad: RSSoknad = {
         {
             id: '1623812',
             tag: 'PERMISJON_V2',
-            sporsmalstekst: 'Tok du permisjon mens du var sykmeldt 8. - 21. september 2022?',
+            sporsmalstekst: `Tok du permisjon mens du var sykmeldt ${periodeTekst}?`,
             undertekst: null,
             svartype: 'JA_NEI',
             min: null,
@@ -273,8 +279,8 @@ export const brukertestSoknad: RSSoknad = {
                     sporsmalstekst: 'Når tok du permisjon?',
                     undertekst: null,
                     svartype: 'PERIODER',
-                    min: '2022-09-08',
-                    max: '2022-09-21',
+                    min: fom,
+                    max: tom,
                     pavirkerAndreSporsmal: false,
                     kriterieForVisningAvUndersporsmal: null,
                     svar: [],
@@ -285,7 +291,7 @@ export const brukertestSoknad: RSSoknad = {
         {
             id: '1623814',
             tag: 'UTLAND_V2',
-            sporsmalstekst: 'Var du på reise utenfor EØS mens du var sykmeldt 8. - 21. september 2022?',
+            sporsmalstekst: `Var du på reise utenfor EØS mens du var sykmeldt ${periodeTekst}?`,
             undertekst: null,
             svartype: 'JA_NEI',
             min: null,
@@ -300,8 +306,8 @@ export const brukertestSoknad: RSSoknad = {
                     sporsmalstekst: 'Når var du utenfor EØS?',
                     undertekst: null,
                     svartype: 'PERIODER',
-                    min: '2022-09-08',
-                    max: '2022-09-21',
+                    min: fom,
+                    max: tom,
                     pavirkerAndreSporsmal: false,
                     kriterieForVisningAvUndersporsmal: null,
                     svar: [],
@@ -312,7 +318,7 @@ export const brukertestSoknad: RSSoknad = {
         {
             id: '1623841',
             tag: 'JOBBET_DU_100_PROSENT_0',
-            sporsmalstekst: `I perioden 8. - 21. september 2022 var du 100 % sykmeldt fra ${hovedjobb}. Jobbet du noe i denne perioden?`,
+            sporsmalstekst: `I perioden ${periodeTekst} var du 100 % sykmeldt fra ${hovedjobb}. Jobbet du noe i denne perioden?`,
             undertekst: null,
             svartype: 'JA_NEI',
             min: null,
@@ -324,7 +330,7 @@ export const brukertestSoknad: RSSoknad = {
                 {
                     id: '1623843',
                     tag: 'HVOR_MYE_HAR_DU_JOBBET_0',
-                    sporsmalstekst: 'Hvor mye jobbet du tilsammen 8. - 21. september 2022?',
+                    sporsmalstekst: `Hvor mye jobbet du tilsammen ${periodeTekst}?`,
                     undertekst: 'Velg timer eller prosent',
                     svartype: 'RADIO_GRUPPE_TIMER_PROSENT',
                     min: null,
@@ -554,7 +560,7 @@ export const brukertestSoknad: RSSoknad = {
         {
             id: '1623829',
             tag: 'UTDANNING',
-            sporsmalstekst: 'Har du vært under utdanning i løpet av perioden 8. - 21. september 2022?',
+            sporsmalstekst: `Har du vært under utdanning i løpet av perioden ${periodeTekst}?`,
             undertekst: null,
             svartype: 'JA_NEI',
             min: null,
@@ -570,7 +576,7 @@ export const brukertestSoknad: RSSoknad = {
                     undertekst: null,
                     svartype: 'DATO',
                     min: null,
-                    max: '2022-09-21',
+                    max: tom,
                     pavirkerAndreSporsmal: false,
                     kriterieForVisningAvUndersporsmal: null,
                     svar: [],
