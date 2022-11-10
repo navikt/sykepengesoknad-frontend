@@ -35,7 +35,7 @@ const Arbeidstaker = () => {
     const erInnenforArbeidsgiverperiode = () => {
         if (!valgtSoknad) return
 
-        return valgtSoknad.sendtTilArbeidsgiverDato !== null && valgtSoknad.sendtTilNAVDato === null
+        return valgtSoknad.sendtTilArbeidsgiverDato !== undefined && !valgtSoknad.sendtTilNAVDato
     }
 
     const erSykmeldingperiodeDeltOverFlereSoknader = () => {

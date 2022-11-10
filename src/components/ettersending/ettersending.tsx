@@ -74,7 +74,6 @@ const Ettersending = ({ gjelder, setRerendrekvittering }: EttersendingProps) => 
             setFeilmeldingTekst('')
         }
 
-        valgtSoknad!.sendtTilNAVDato = new Date()
         oppdaterSoknad()
     }
 
@@ -100,7 +99,6 @@ const Ettersending = ({ gjelder, setRerendrekvittering }: EttersendingProps) => 
             setFeilmeldingTekst('')
         }
 
-        valgtSoknad!.sendtTilArbeidsgiverDato = new Date()
         oppdaterSoknad()
     }
 

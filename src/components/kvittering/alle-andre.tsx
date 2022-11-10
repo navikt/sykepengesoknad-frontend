@@ -14,6 +14,8 @@ const AlleAndre = () => {
     const { id } = useParams<RouteParams>()
     const { data: valgtSoknad } = useSoknad(id)
 
+    if (!valgtSoknad) return null
+
     return (
         <>
             <KvitteringStatus />

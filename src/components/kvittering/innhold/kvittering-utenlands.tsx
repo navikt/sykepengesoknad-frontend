@@ -11,7 +11,9 @@ const KvitteringUtenlands = () => {
     const { id } = useParams<RouteParams>()
     const { data: valgtSoknad } = useSoknad(id)
 
-    if (sendtForMerEnn30DagerSiden(valgtSoknad?.sendtTilArbeidsgiverDato, valgtSoknad?.sendtTilNAVDato)) {
+    if (!valgtSoknad) return null
+
+    if (sendtForMerEnn30DagerSiden(valgtSoknad.sendtTilArbeidsgiverDato, valgtSoknad.sendtTilNAVDato)) {
         return null
     }
 
