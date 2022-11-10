@@ -22,11 +22,11 @@ const InfotekstOverSubmit = ({ soknad, sporsmal }: InfotekstOverSubmit) => {
         ) {
             return 'ferie-ingen-sykepenger'
         }
-        return null
+        return undefined
     }
 
     const nokkel = tekstNokkel(sporsmal.tag)
-    if (nokkel == null) {
+    if (!nokkel) {
         return null
     }
 

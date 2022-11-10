@@ -73,7 +73,7 @@ const KvitteringSide = () => {
 
     if (!valgtSoknad || !soknader) return null
 
-    const erSendtTilArbeidsgiver = valgtSoknad.sendtTilArbeidsgiverDato !== null
+    const erSendtTilArbeidsgiver = valgtSoknad.sendtTilArbeidsgiverDato !== undefined
 
     const skalViseEndre = valgtSoknad.status !== RSSoknadstatus.KORRIGERT
     const skalViseSendTilArbeidsgiver =

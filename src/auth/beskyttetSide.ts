@@ -16,7 +16,7 @@ function beskyttetSide(handler: PageHandler) {
 
         const request = context.req
 
-        if (request == null) {
+        if (!request) {
             throw new Error('Context is missing request. This should not happen')
         }
 
