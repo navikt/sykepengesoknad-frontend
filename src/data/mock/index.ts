@@ -86,15 +86,21 @@ const setUpMock = (person: Persona) => {
     })
 
     mock.post('/syk/sykepengesoknad/api/sykepengesoknad-backend/api/v2/soknader/:soknad/korriger', (req, res, ctx) => {
-        const original = soknader.find((sok: RSSoknad) => sok.id === req.pathParams.soknad)
+        const original = person.soknader.find((sok: RSSoknad) => sok.id === req.pathParams.soknad)
         if (!original) {
             window.alert('Du kan ikke endre en endret søknad i labs versjonen')
             return res(ctx.status(500))
         }
+
         const soknad = jsonDeepCopy(original)
         soknad.id = uuid.v4()
         soknad.korrigerer = original.id
         soknad.status = RSSoknadstatus.UTKAST_TIL_KORRIGERING
+        soknad.sendtTilArbeidsgiverDato = null
+        soknad.sendtTilNAVDato = null
+
+        person.soknader.push(soknad)
+
         return res(ctx.json(soknad))
     })
 

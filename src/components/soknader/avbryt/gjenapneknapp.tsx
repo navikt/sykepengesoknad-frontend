@@ -1,11 +1,10 @@
 import { Button } from '@navikt/ds-react'
 import { logger } from '@navikt/next-logger'
-import React, { useEffect, useState } from 'react'
-import { useHistory, useParams } from 'react-router'
+import React, { useState } from 'react'
+import { useParams } from 'react-router'
 import { useQueryClient } from '@tanstack/react-query'
 
 import { RouteParams } from '../../../app'
-import { useAppStore } from '../../../data/stores/app-store'
 import fetchMedRequestId, { AuthenticationError } from '../../../utils/fetch'
 import { useAmplitudeInstance } from '../../amplitude/amplitude'
 import useSoknad from '../../../hooks/useSoknad'
@@ -17,18 +16,8 @@ const GjenapneSoknad = () => {
     const { data: valgtSoknad } = useSoknad(id)
     const queryClient = useQueryClient()
 
-    const { setValgtSykmelding, sykmeldinger } = useAppStore()
-    const history = useHistory()
     const [gjenapner, setGjenapner] = useState<boolean>(false)
     const { logEvent } = useAmplitudeInstance()
-
-    useEffect(() => {
-        if (!valgtSoknad) return
-
-        const sykmelding = sykmeldinger.find((sm) => sm.id === valgtSoknad.sykmeldingId)
-        setValgtSykmelding(sykmelding)
-        // eslint-disable-next-line
-    }, [valgtSoknad])
 
     const gjenapneSoknad = async () => {
         if (gjenapner) {
@@ -53,7 +42,7 @@ const GjenapneSoknad = () => {
                 },
             )
             await queryClient.invalidateQueries(['soknad', valgtSoknad!.id])
-            await queryClient.invalidateQueries(['soknader'])
+            queryClient.invalidateQueries(['soknader'])
         } catch (e: any) {
             if (!(e instanceof AuthenticationError)) {
                 logger.error(e)
@@ -62,7 +51,6 @@ const GjenapneSoknad = () => {
         } finally {
             setGjenapner(false)
         }
-        history.push(`/soknader/${valgtSoknad!.id}/1`)
     }
 
     return (

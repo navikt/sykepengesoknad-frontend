@@ -24,14 +24,9 @@ export const urlTilSoknad = (soknad: Soknad | RSSoknadmetadata) => {
 
     const soknaderUrl = `/soknader/${soknad.id}`
 
-    /*
-    TODO: Denne må flyttes inn i søknaden
-    return erDelvisUtfylt(soknad)
+    return soknad instanceof Soknad && erDelvisUtfylt(soknad)
         ? `${soknaderUrl}/${finnPosisjonPaSisteBesvarteSporsmal(soknad) + 1}${window.location.search}`
         : `${soknaderUrl}/1${window.location.search}`
-    */
-
-    return `${soknaderUrl}/1${window.location.search}`
 }
 
 export const erDelvisUtfyltNySoknad = (soknad: Soknad): boolean => {

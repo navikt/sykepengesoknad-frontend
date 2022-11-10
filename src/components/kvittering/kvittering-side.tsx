@@ -1,6 +1,6 @@
 import { Alert, Button } from '@navikt/ds-react'
 import React, { useEffect, useState } from 'react'
-import { useParams } from 'react-router-dom'
+import { useHistory, useParams } from 'react-router-dom'
 
 import { RouteParams } from '../../app'
 import Endreknapp from '../../components/endreknapp/endreknapp'
@@ -21,6 +21,7 @@ import { UxSignalsWidget } from '../ux-signals/UxSignalsWidget'
 import Vis from '../vis'
 import useSoknad from '../../hooks/useSoknad'
 import useSoknader from '../../hooks/useSoknader'
+import { urlTilSoknad } from '../soknad/soknad-link'
 
 import Kvittering from './kvittering'
 import { harSvartJaFravaerForSykmeldingen, harSvartJaJobbetDuUnderveis } from './harSvartJa'
@@ -45,10 +46,16 @@ const KvitteringSide = () => {
 
     const { setValgtSykmelding, sykmeldinger, feilmeldingTekst } = useAppStore()
     const [rerendreKvittering, setRerendrekvittering] = useState<Date>(new Date())
+    const history = useHistory()
     const { logEvent } = useAmplitudeInstance()
 
     useEffect(() => {
         if (!valgtSoknad) return
+
+        if (valgtSoknad.status !== RSSoknadstatus.SENDT) {
+            history.replace(urlTilSoknad(valgtSoknad))
+            return
+        }
 
         const sykmelding = sykmeldinger.find((sm) => sm.id === valgtSoknad.sykmeldingId)
         setValgtSykmelding(sykmelding)

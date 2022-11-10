@@ -47,14 +47,24 @@ const brodsmuler: Brodsmule[] = [
 ]
 
 const Soknaden = () => {
-    const { id } = useParams<RouteParams>()
+    const { id, stegId } = useParams<RouteParams>()
     const { data: valgtSoknad } = useSoknad(id)
-    const { logEvent } = useAmplitudeInstance()
 
     const { sykmeldinger, setValgtSykmelding } = useAppStore()
+    const { logEvent } = useAmplitudeInstance()
+    const history = useHistory()
 
     useEffect(() => {
         if (!valgtSoknad) return
+
+        if (
+            !stegId ||
+            (valgtSoknad.status !== RSSoknadstatus.NY && valgtSoknad.status !== RSSoknadstatus.UTKAST_TIL_KORRIGERING)
+        ) {
+            const url = urlTilSoknad(valgtSoknad).replace('/sendt/', '/kvittering/')
+            history.push(url)
+            return
+        }
 
         const sykmelding = sykmeldinger.find((sm) => sm.id === valgtSoknad.sykmeldingId)
         setValgtSykmelding(sykmelding)
@@ -69,14 +79,15 @@ const Soknaden = () => {
 
     useEffect(() => {
         setBodyClass('soknaden')
-    }, [])
+
+        if (!valgtSoknad || stegId !== '1') return
+
+        // finn posisjon på siste besvarte spørsmål
+        history.push(urlTilSoknad(valgtSoknad))
+        // eslint-disable-next-line
+    }, [valgtSoknad?.id])
 
     if (!valgtSoknad) return null
-    if (valgtSoknad.id !== id) {
-        //TODO: dette skjer nok ikke, fjern etter at dette er testet
-        console.log('valgtSoknad har ikke samme id som param', id, valgtSoknad.id) // eslint-disable-line
-        return null
-    }
 
     return (
         <>
@@ -101,18 +112,9 @@ const Fordeling = () => {
 
     const { sykmeldinger } = useAppStore()
     const { logEvent } = useAmplitudeInstance()
-    const history = useHistory()
     const stegNo = parseInt(stegId)
 
     if (!valgtSoknad || !soknader) {
-        return null
-    }
-
-    if (
-        isNaN(stegNo) ||
-        (valgtSoknad.status !== RSSoknadstatus.NY && valgtSoknad.status !== RSSoknadstatus.UTKAST_TIL_KORRIGERING)
-    ) {
-        history.replace(urlTilSoknad(valgtSoknad))
         return null
     }
 
@@ -201,5 +203,7 @@ const Fordeling = () => {
                 </>
             )
         }
+        default:
+            return null
     }
 }

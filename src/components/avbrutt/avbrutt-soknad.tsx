@@ -48,6 +48,11 @@ const AvbruttSoknad = () => {
     useEffect(() => {
         if (!valgtSoknad) return
 
+        if (valgtSoknad.status !== RSSoknadstatus.AVBRUTT) {
+            history.replace(urlTilSoknad(valgtSoknad))
+            return
+        }
+
         const sykmelding = sykmeldinger.find((sm) => sm.id === valgtSoknad.sykmeldingId)
         setValgtSykmelding(sykmelding)
 
@@ -61,10 +66,6 @@ const AvbruttSoknad = () => {
 
     if (!valgtSoknad || !soknader) return null
 
-    if (valgtSoknad.status !== RSSoknadstatus.AVBRUTT) {
-        history.replace(urlTilSoknad(valgtSoknad))
-        return null
-    }
     const gjenstaendeSoknader = hentGjenstaendeSoknader(soknader)
 
     return (

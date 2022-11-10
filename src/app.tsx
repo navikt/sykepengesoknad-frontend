@@ -5,7 +5,6 @@ import { CSSTransition, TransitionGroup } from 'react-transition-group'
 
 import { Amplitude } from './components/amplitude/amplitudeProvider'
 import AvbruttSoknad from './components/avbrutt/avbrutt-soknad'
-import RedirectTilOversikt from './components/feil/redirect-til-oversikt'
 import { RefreshHvisFeilState } from './components/feil/refresh-hvis-feil-state'
 import KvitteringSide from './components/kvittering/kvittering-side'
 import OpprettUtland from './components/opprett-utland/opprett-utland'
@@ -54,11 +53,13 @@ const App = (): any => {
                                             <Route exact={true} path="/" component={Soknader} />
                                             <Route path="/soknader/:id/:stegId" component={Soknad} />
                                             <Route path="/soknader/:id" component={Soknad} />
-                                            <Route path="/soknader/" component={RedirectTilOversikt} />
                                             <Route path="/avbrutt/:id" component={AvbruttSoknad} />
                                             <Route path="/kvittering/:id" component={KvitteringSide} />
                                             <Route path="/sendt/:id" component={SendtSide} />
                                             <Route path="/sykepengesoknad-utland" component={OpprettUtland} />
+                                            <Route path="/soknader/">
+                                                <Redirect to="/" />
+                                            </Route>
                                             <Route path="">
                                                 <Redirect to="/" />
                                             </Route>

@@ -1,6 +1,6 @@
 import { Alert } from '@navikt/ds-react'
 import React, { useEffect, useState } from 'react'
-import { useParams } from 'react-router-dom'
+import { useHistory, useParams } from 'react-router-dom'
 
 import { RouteParams } from '../../app'
 import { useAppStore } from '../../data/stores/app-store'
@@ -18,6 +18,7 @@ import { hentHotjarJsTrigger, HotjarTrigger } from '../hotjar-trigger'
 import Kvittering from '../kvittering/kvittering'
 import Vis from '../vis'
 import useSoknad from '../../hooks/useSoknad'
+import { urlTilSoknad } from '../soknad/soknad-link'
 
 const brodsmuler: Brodsmule[] = [
     {
@@ -39,9 +40,15 @@ const SendtSide = () => {
     const { setValgtSykmelding, sykmeldinger, feilmeldingTekst } = useAppStore()
     const [rerendreKvittering, setRerendrekvittering] = useState<Date>(new Date())
     const { logEvent } = useAmplitudeInstance()
+    const history = useHistory()
 
     useEffect(() => {
         if (!valgtSoknad) return
+
+        if (valgtSoknad.status !== RSSoknadstatus.SENDT) {
+            history.replace(urlTilSoknad(valgtSoknad))
+            return
+        }
 
         const sykmelding = sykmeldinger.find((sm) => sm.id === valgtSoknad.sykmeldingId)
         setValgtSykmelding(sykmelding)

@@ -179,13 +179,13 @@ const SporsmalForm = () => {
             return
         }
 
-        if (valgtSoknad.korrigerer !== undefined) {
-            await queryClient.invalidateQueries(['soknad', valgtSoknad.korrigerer])
-        }
-        await queryClient.invalidateQueries(['soknad', valgtSoknad.id])
-        await queryClient.invalidateQueries(['soknader'])
+        queryClient.invalidateQueries(['soknad', valgtSoknad.id])
 
-        history.push(`/kvittering/${valgtSoknad.id}${window.location.search}`)
+        queryClient.invalidateQueries(['soknader'])
+
+        if (valgtSoknad.korrigerer !== undefined) {
+            queryClient.invalidateQueries(['soknad', valgtSoknad.korrigerer])
+        }
     }
 
     const preSubmit = () => {
