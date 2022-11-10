@@ -21,10 +21,8 @@ import {
     soknadSomTriggerFeilStatusForOppdaterSporsmal,
     soknadSomTriggerSporsmalFinnesIkkeISoknad,
 } from './data/soknader-integration'
-import { alleData, Persona } from './personas'
+import { Persona } from './personas'
 import { personas } from './testperson'
-
-const soknader = alleData.soknader
 
 const mottaker = (soknadId: string): RSMottaker => {
     if (
@@ -197,7 +195,7 @@ const setUpMock = (person: Persona) => {
             if (req.pathParams.soknad === feilVedSlettingAvKvittering.id) {
                 return Promise.resolve({ status: 500 })
             }
-            const sok = soknader.find((s) => s.id === req.pathParams.soknad)!
+            const sok = person.soknader.find((s) => s.id === req.pathParams.soknad)!
             const spm = sok.sporsmal.find((s) => s.id === req.pathParams.spmid)!
             const svarIdx = spm.svar.findIndex((s) => s.id === req.pathParams.svarid)!
             spm.svar.splice(svarIdx, 1)
@@ -209,7 +207,7 @@ const setUpMock = (person: Persona) => {
     mock.post(
         '/syk/sykepengesoknad/api/sykepengesoknad-backend/api/v2/soknader/:soknad/sporsmal/:spmid/svar',
         (req) => {
-            const sok = soknader.find((r) => r.id === req.pathParams.soknad)!
+            const sok = person.soknader.find((r) => r.id === req.pathParams.soknad)!
             const spm = sok.sporsmal.find((spm) => spm.id === req.pathParams.spmid)
             spm!.svar.push(req.body)
 

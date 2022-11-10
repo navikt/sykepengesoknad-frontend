@@ -34,7 +34,7 @@ export interface OpplastingFromProps {
 }
 
 const OpplastingForm = ({ valgtKvittering, sporsmal, setOpenModal, valgtFil, setValgtFil }: OpplastingFromProps) => {
-    const { id, stegId } = useParams<RouteParams>()
+    const { id } = useParams<RouteParams>()
     const { data: valgtSoknad } = useSoknad(id)
     const queryClient = useQueryClient()
 
@@ -43,8 +43,6 @@ const OpplastingForm = ({ valgtKvittering, sporsmal, setOpenModal, valgtFil, set
     const [kvitteringHeader, setKvitteringHeader] = useState<string>('')
     const [formErDisabled, setFormErDisabled] = useState<boolean>(false)
 
-    const stegNum = Number(stegId)
-    const spmIndex = stegNum - 1
     const maks = formaterFilstørrelse(maxFilstørrelse)
 
     const methods = useForm({
@@ -78,8 +76,9 @@ const OpplastingForm = ({ valgtKvittering, sporsmal, setOpenModal, valgtFil, set
             const rsOppdaterSporsmalResponse: RSOppdaterSporsmalResponse = await lagreSvar(opplastingResponse)
             if (!rsOppdaterSporsmalResponse) return
 
-            valgtSoknad!.sporsmal[spmIndex] = new Sporsmal(rsOppdaterSporsmalResponse.oppdatertSporsmal, null, true)
-            queryClient.setQueriesData(['soknad', valgtSoknad!.id], valgtSoknad)
+            // TODO: Sjekk hvorfor setQueriesData ikke klarer å oppdatere lista med kvitteringer
+            await queryClient.invalidateQueries(['soknad', valgtSoknad!.id])
+
             setOpenModal(false)
         } catch (ex) {
             setFeilmeldingTekst('Det skjedde en feil i baksystemene, prøv igjen senere')
