@@ -66,8 +66,8 @@ const SendtSide = () => {
 
     if (!valgtSoknad) return null
 
-    const erSendtTilNav = valgtSoknad.sendtTilNAVDato !== null
-    const erSendtTilArbeidsgiver = valgtSoknad.sendtTilArbeidsgiverDato !== null
+    const erSendtTilNav = valgtSoknad.sendtTilNAVDato !== undefined
+    const erSendtTilArbeidsgiver = valgtSoknad.sendtTilArbeidsgiverDato !== undefined
 
     const skalViseEndre = valgtSoknad.status !== RSSoknadstatus.KORRIGERT
     const skalViseSendTilArbeidsgiver =
