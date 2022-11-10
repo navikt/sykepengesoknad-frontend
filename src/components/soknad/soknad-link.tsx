@@ -29,10 +29,6 @@ export const urlTilSoknad = (soknad: Soknad | RSSoknadmetadata) => {
         : `${soknaderUrl}/1${window.location.search}`
 }
 
-export const erDelvisUtfyltNySoknad = (soknad: Soknad): boolean => {
-    return erDelvisUtfylt(soknad) && soknad.status !== RSSoknadstatus.UTKAST_TIL_KORRIGERING
-}
-
 const erDelvisUtfylt = (soknad: Soknad): boolean => {
     const antallRelevanteSporsmal = hentRelevanteSporsmal(soknad).length
     const posisjonPaSisteBesvarteSporsmal = finnPosisjonPaSisteBesvarteSporsmal(soknad)

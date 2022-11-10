@@ -45,16 +45,6 @@ const NyeSoknaderTeaser = ({ soknad }: SykepengesoknadTeaserProps) => {
                         </div>
                     </div>
 
-                    {/*
-                    // TODO: Dette må løses på en annen måte
-                    <Vis
-                        hvis={erDelvisUtfyltNySoknad(soknad)}
-                        render={() => (
-                            <InngangsStatus status={soknad.status} tekst={tekst('soknad.teaser.delvis-utfylt.tekst')} />
-                        )}
-                    />
-                    */}
-
                     <Vis
                         hvis={soknad.status === RSSoknadstatus.UTKAST_TIL_KORRIGERING}
                         render={() => (
