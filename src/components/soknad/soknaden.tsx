@@ -14,7 +14,7 @@ import SporsmalSteg from '../../components/sporsmal/sporsmal-steg/sporsmal-steg'
 import { useAppStore } from '../../data/stores/app-store'
 import { RSSoknadstatus } from '../../types/rs-types/rs-soknadstatus'
 import { RSSoknadstype } from '../../types/rs-types/rs-soknadstype'
-import { Brodsmule } from '../../types/types'
+import { Brodsmule, Soknad } from '../../types/types'
 import { SEPARATOR } from '../../utils/constants'
 import { tekst } from '../../utils/tekster'
 import { setBodyClass } from '../../utils/utils'
@@ -29,6 +29,8 @@ import { hentNokkel } from '../sporsmal/sporsmal-utils'
 import Vis from '../vis'
 import useSoknad from '../../hooks/useSoknad'
 import useSoknader from '../../hooks/useSoknader'
+import { RSSoknadmetadata } from '../../types/rs-types/rs-soknadmetadata'
+import { Sykmelding } from '../../types/sykmelding'
 
 import { urlTilSoknad } from './soknad-link'
 
@@ -49,10 +51,29 @@ const brodsmuler: Brodsmule[] = [
 const Soknaden = () => {
     const { id, stegId } = useParams<RouteParams>()
     const { data: valgtSoknad } = useSoknad(id)
+    const { data: soknader } = useSoknader()
 
     const { sykmeldinger, setValgtSykmelding } = useAppStore()
     const { logEvent } = useAmplitudeInstance()
     const history = useHistory()
+
+    useEffect(() => {
+        setBodyClass('soknaden')
+
+        if (!valgtSoknad || stegId !== '1') return
+
+        // finn posisjon på siste besvarte spørsmål
+        history.push(urlTilSoknad(valgtSoknad))
+        // eslint-disable-next-line
+    }, [valgtSoknad?.id])
+
+    useEffect(() => {
+        if (!valgtSoknad || !sykmeldinger) return
+
+        const sykmelding = sykmeldinger.find((sm) => sm.id === valgtSoknad.sykmeldingId)
+        setValgtSykmelding(sykmelding)
+        // eslint-disable-next-line
+    }, [valgtSoknad, sykmeldinger])
 
     useEffect(() => {
         if (!valgtSoknad) return
@@ -66,9 +87,6 @@ const Soknaden = () => {
             return
         }
 
-        const sykmelding = sykmeldinger.find((sm) => sm.id === valgtSoknad.sykmeldingId)
-        setValgtSykmelding(sykmelding)
-
         logEvent('skjema åpnet', {
             skjemanavn: 'sykepengesoknad',
             soknadstype: valgtSoknad.soknadstype,
@@ -77,17 +95,7 @@ const Soknaden = () => {
         // eslint-disable-next-line
     }, [valgtSoknad])
 
-    useEffect(() => {
-        setBodyClass('soknaden')
-
-        if (!valgtSoknad || stegId !== '1') return
-
-        // finn posisjon på siste besvarte spørsmål
-        history.push(urlTilSoknad(valgtSoknad))
-        // eslint-disable-next-line
-    }, [valgtSoknad?.id])
-
-    if (!valgtSoknad) return null
+    if (!valgtSoknad || !sykmeldinger || !soknader || !stegId) return null
 
     return (
         <>
@@ -96,7 +104,7 @@ const Soknaden = () => {
 
             <div className="limit">
                 <HotjarTrigger jsTrigger={hentHotjarJsTrigger(valgtSoknad.soknadstype, 'soknad')}>
-                    <Fordeling />
+                    <Fordeling valgtSoknad={valgtSoknad} soknader={soknader} sykmeldinger={sykmeldinger} />
                 </HotjarTrigger>
             </div>
         </>
@@ -105,18 +113,17 @@ const Soknaden = () => {
 
 export default Soknaden
 
-const Fordeling = () => {
-    const { id, stegId } = useParams<RouteParams>()
-    const { data: valgtSoknad } = useSoknad(id)
-    const { data: soknader } = useSoknader()
+interface FordelingProps {
+    valgtSoknad: Soknad
+    soknader: RSSoknadmetadata[]
+    sykmeldinger: Sykmelding[]
+}
 
-    const { sykmeldinger } = useAppStore()
+const Fordeling = ({ valgtSoknad, soknader, sykmeldinger }: FordelingProps) => {
+    const { stegId } = useParams<RouteParams>()
+
     const { logEvent } = useAmplitudeInstance()
     const stegNo = parseInt(stegId)
-
-    if (!valgtSoknad || !soknader) {
-        return null
-    }
 
     const tittel = tekst(hentNokkel(valgtSoknad!, stegNo) as any)
     const erUtlandssoknad = valgtSoknad.soknadstype === RSSoknadstype.OPPHOLD_UTLAND
@@ -175,7 +182,7 @@ const Fordeling = () => {
                     <Vis
                         hvis={!erUtlandssoknad && stegNo === 1}
                         render={() => {
-                            const sporsmal = valgtSoknad!.sporsmal[stegNo - 1]
+                            const sporsmal = valgtSoknad.sporsmal[stegNo - 1]
                             return <Opplysninger ekspandert={true} steg={sporsmal.tag} />
                         }}
                     />

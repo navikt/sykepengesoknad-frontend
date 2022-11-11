@@ -39,6 +39,8 @@ const SykmeldingPerioder = () => {
         }
     }
 
+    if (!valgtSoknad || !valgtSykmelding) return null
+
     return (
         <div className="sykmelding-perioder">
             {sortertePerioder.map((periode: Periode, index: number) => {

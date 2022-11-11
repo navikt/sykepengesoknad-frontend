@@ -46,7 +46,7 @@ const AvbruttSoknad = () => {
     const history = useHistory()
 
     useEffect(() => {
-        if (!valgtSoknad) return
+        if (!valgtSoknad || !sykmeldinger) return
 
         if (valgtSoknad.status !== RSSoknadstatus.AVBRUTT) {
             history.replace(urlTilSoknad(valgtSoknad))
@@ -62,7 +62,7 @@ const AvbruttSoknad = () => {
             soknadstatus: valgtSoknad.status,
         })
         // eslint-disable-next-line
-    }, [valgtSoknad])
+    }, [valgtSoknad, sykmeldinger])
 
     if (!valgtSoknad || !soknader) return null
 

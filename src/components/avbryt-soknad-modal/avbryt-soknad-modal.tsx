@@ -40,7 +40,7 @@ const AvbrytKorrigering = () => {
             >
                 {tekst('avbryt.korrigering.knapp')}
             </Button>
-            <EndringUtenEndringModal aapen={aapen} setAapen={setAapen} erSiste={true} />
+            <EndringUtenEndringModal aapen={aapen} setAapen={setAapen} />
         </div>
     )
 }

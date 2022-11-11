@@ -28,6 +28,8 @@ import SporsmalSwitch from '../sporsmal-switch'
 import { pathUtenSteg } from '../sporsmal-utils'
 import CheckboxPanel from '../typer/checkbox-panel'
 import useSoknad from '../../../hooks/useSoknad'
+import { RSSoknadstatus } from '../../../types/rs-types/rs-soknadstatus'
+import { harLikeSvar } from '../endring-uten-endring/har-like-svar'
 
 import Knapperad from './knapperad'
 import SendesTil from './sendes-til'
@@ -38,16 +40,16 @@ export interface SpmProps {
 }
 
 const SporsmalForm = () => {
-    const { id } = useParams<RouteParams>()
+    const { id, stegId } = useParams<RouteParams>()
     const { data: valgtSoknad } = useSoknad(id)
+    const { data: korrigerer } = useSoknad(valgtSoknad?.korrigerer, valgtSoknad?.korrigerer !== undefined)
     const queryClient = useQueryClient()
 
     const { setTop, setMottaker, setFeilState } = useAppStore()
     const { logEvent } = useAmplitudeInstance()
     const [erSiste, setErSiste] = useState<boolean>(false)
     const [poster, setPoster] = useState<boolean>(false)
-    const [endringUtenEndringAapen, setEndringUtenEndringAapen] = useState<boolean>(true)
-    const { stegId } = useParams<RouteParams>()
+    const [endringUtenEndringAapen, setEndringUtenEndringAapen] = useState<boolean>(false)
     const history = useHistory()
     const spmIndex = parseInt(stegId) - 1
     const methods = useForm({
@@ -158,8 +160,11 @@ const SporsmalForm = () => {
             return
         }
 
-        if (endringUtenEndringAapen) {
-            return
+        if (valgtSoknad.status == RSSoknadstatus.UTKAST_TIL_KORRIGERING) {
+            if (korrigerer && harLikeSvar(korrigerer, valgtSoknad)) {
+                setEndringUtenEndringAapen(true)
+                return
+            }
         }
 
         try {
@@ -244,11 +249,7 @@ const SporsmalForm = () => {
 
     return (
         <>
-            <EndringUtenEndringModal
-                aapen={endringUtenEndringAapen}
-                setAapen={setEndringUtenEndringAapen}
-                erSiste={erSiste}
-            />
+            <EndringUtenEndringModal aapen={endringUtenEndringAapen} setAapen={setEndringUtenEndringAapen} />
 
             <FormProvider {...methods}>
                 <form

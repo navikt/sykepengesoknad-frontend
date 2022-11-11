@@ -50,10 +50,11 @@ const KvitteringSide = () => {
     const { logEvent } = useAmplitudeInstance()
 
     useEffect(() => {
-        if (!valgtSoknad) return
+        if (!valgtSoknad || !sykmeldinger) return
 
         if (valgtSoknad.status !== RSSoknadstatus.SENDT) {
-            history.replace(urlTilSoknad(valgtSoknad))
+            const url = urlTilSoknad(valgtSoknad)
+            history.replace(url)
             return
         }
 
@@ -66,7 +67,7 @@ const KvitteringSide = () => {
             soknadstatus: valgtSoknad.status,
         })
         // eslint-disable-next-line
-    }, [valgtSoknad])
+    }, [valgtSoknad, sykmeldinger])
 
     // eslint-disable-next-line @typescript-eslint/no-empty-function
     useEffect(() => {}, [rerendreKvittering])

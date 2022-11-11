@@ -5,7 +5,7 @@ import { RSMottaker } from '../../types/rs-types/rs-mottaker'
 import { Sykmelding } from '../../types/sykmelding'
 
 export const [AppStoreProvider, useAppStore] = constate(() => {
-    const [sykmeldinger, setSykmeldinger] = useState<Sykmelding[]>([])
+    const [sykmeldinger, setSykmeldinger] = useState<Sykmelding[]>()
     const [valgtSykmelding, setValgtSykmelding] = useState<Sykmelding>()
     const [mottaker, setMottaker] = useState<RSMottaker>()
     const [top, setTop] = useState<number>(0)

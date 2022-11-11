@@ -43,7 +43,7 @@ const SendtSide = () => {
     const history = useHistory()
 
     useEffect(() => {
-        if (!valgtSoknad) return
+        if (!valgtSoknad || !sykmeldinger) return
 
         if (valgtSoknad.status !== RSSoknadstatus.SENDT) {
             history.replace(urlTilSoknad(valgtSoknad))
@@ -59,7 +59,7 @@ const SendtSide = () => {
             soknadstatus: valgtSoknad.status,
         })
         // eslint-disable-next-line
-    }, [valgtSoknad])
+    }, [valgtSoknad, sykmeldinger])
 
     // eslint-disable-next-line @typescript-eslint/no-empty-function
     useEffect(() => {}, [rerendreKvittering])
