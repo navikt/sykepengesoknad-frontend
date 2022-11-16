@@ -184,7 +184,7 @@ const SporsmalForm = () => {
             return
         }
 
-        queryClient.invalidateQueries(['soknad', valgtSoknad.id])
+        await queryClient.invalidateQueries(['soknad', valgtSoknad.id])
 
         queryClient.invalidateQueries(['soknader'])
 
