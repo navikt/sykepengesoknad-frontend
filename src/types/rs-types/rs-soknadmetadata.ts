@@ -47,7 +47,6 @@ export class RSSoknadmetadata {
         this.sendtTilArbeidsgiverDato = dayjsToDate(json.sendtTilArbeidsgiverDato)
         if (json.arbeidsgiver) {
             this.arbeidsgiver = {
-                naermesteLeder: json.arbeidsgiver.naermesteLeder, // TODO: Denne tror jeg ikke finnes
                 navn: json.arbeidsgiver.navn,
                 orgnummer: json.arbeidsgiver.orgnummer,
             }

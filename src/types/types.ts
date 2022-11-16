@@ -17,19 +17,9 @@ export interface TidsPeriode {
     tom: Date
 }
 
-export interface NaermesteLeder {
-    navn: string
-    epost: string
-    mobil: string
-    orgnummer: string
-    organisasjonsnavn: string
-    aktivTom: string
-}
-
 export interface Arbeidsgiver {
     navn: string
     orgnummer: string
-    naermesteLeder?: NaermesteLeder // TODO: Denne tror jeg ikke finnes
 }
 
 export class Soknad {
@@ -66,7 +56,6 @@ export class Soknad {
         this.sendtTilArbeidsgiverDato = dayjsToDate(soknad.sendtTilArbeidsgiverDato!)!
         if (soknad.arbeidsgiver) {
             this.arbeidsgiver = {
-                naermesteLeder: soknad.arbeidsgiver.naermesteLeder,
                 navn: soknad.arbeidsgiver.navn,
                 orgnummer: soknad.arbeidsgiver.orgnummer,
             }
