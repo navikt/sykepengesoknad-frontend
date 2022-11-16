@@ -100,9 +100,20 @@ describe('Tester ettersending og korrigering', () => {
         cy.get('.navds-checkbox__input[type=checkbox]').should('be.checked')
         cy.contains('Gå videre').click()
 
-        // Alle andre er satt
-        cy.url().should('include', '/2')
-        // TODO: Se på mulighet for at mock setter svar ved /korriger
+        cy.contains('Gå videre').click()
+        cy.contains('Gå videre').click()
+        cy.contains('Gå videre').click()
+        cy.contains('Gå videre').click()
+        cy.contains('Gå videre').click()
+        cy.contains('Gå videre').click()
+        cy.contains('Ja').click()
+        cy.contains('Gå videre').click()
+        cy.contains('Gå videre').click()
+        cy.contains('Gå videre').click()
+        cy.get('.navds-checkbox__label').click({ force: true })
+        cy.contains('Send endringene').click()
+
+        cy.url().should('include', `/kvittering/`)
     })
 
     it('Søknad har teaser', () => {
