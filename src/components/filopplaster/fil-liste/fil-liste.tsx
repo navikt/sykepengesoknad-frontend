@@ -1,24 +1,35 @@
 import { BodyShort, Heading } from '@navikt/ds-react'
 import React from 'react'
 import useForceUpdate from 'use-force-update'
+import { useParams } from 'react-router-dom'
 
-import { Kvittering, Sporsmal, UtgiftTyper } from '../../../types/types'
+import { Kvittering, UtgiftTyper } from '../../../types/types'
 import { getLedetekst, tekst } from '../../../utils/tekster'
 import { formatterTall } from '../../../utils/utils'
 import Slettknapp from '../../slettknapp/slettknapp'
 import { hentSvar } from '../../sporsmal/hent-svar'
 import Vis from '../../vis'
+import { RouteParams } from '../../../app'
+import useSoknad from '../../../hooks/useSoknad'
 
 interface Props {
-    sporsmal: Sporsmal
     fjernKnapp?: boolean
     setValgtKvittering: (arg0: Kvittering) => void
     setOpenModal: (arg0: boolean) => void
 }
 
-const FilListe = ({ sporsmal, fjernKnapp, setValgtKvittering, setOpenModal }: Props) => {
-    const kvitteringer = hentSvar(sporsmal)
+const FilListe = ({ fjernKnapp, setValgtKvittering, setOpenModal }: Props) => {
+    const { id, stegId } = useParams<RouteParams>()
+    const { data: valgtSoknad } = useSoknad(id)
+
+    const stegNum = Number(stegId)
+    const spmIndex = stegNum - 1
     const forceUpdate = useForceUpdate()
+
+    if (!valgtSoknad) return null
+
+    const sporsmal = valgtSoknad.sporsmal[spmIndex]
+    const kvitteringer = hentSvar(sporsmal)
 
     const update = () => {
         forceUpdate()

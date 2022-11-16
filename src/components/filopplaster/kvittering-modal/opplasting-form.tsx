@@ -2,7 +2,7 @@ import { Alert, BodyLong, BodyShort, Button, Heading, Label } from '@navikt/ds-r
 import { logger } from '@navikt/next-logger'
 import dayjs from 'dayjs'
 import parser from 'html-react-parser'
-import React, { useEffect, useState } from 'react'
+import React, { useState } from 'react'
 import { FormProvider, useForm } from 'react-hook-form'
 import { useParams } from 'react-router-dom'
 import { useQueryClient } from '@tanstack/react-query'
@@ -11,7 +11,7 @@ import { RouteParams } from '../../../app'
 import { useAppStore } from '../../../data/stores/app-store'
 import { RSOppdaterSporsmalResponse } from '../../../types/rs-types/rest-response/rs-oppdatersporsmalresponse'
 import { RSSvar } from '../../../types/rs-types/rs-svar'
-import { Kvittering, Sporsmal, UtgiftTyper } from '../../../types/types'
+import { Kvittering, Soknad, Sporsmal, UtgiftTyper } from '../../../types/types'
 import { AuthenticationError, fetchJsonMedRequestId } from '../../../utils/fetch'
 import { formaterFilstørrelse, formattertFiltyper, maxFilstørrelse } from '../../../utils/fil-utils'
 import { getLedetekst, tekst } from '../../../utils/tekster'
@@ -19,31 +19,25 @@ import { Ekspanderbar } from '../../ekspanderbar/ekspanderbar'
 import Slettknapp from '../../slettknapp/slettknapp'
 import Vis from '../../vis'
 import DragAndDrop from '../drag-and-drop/drag-and-drop'
-import useSoknad from '../../../hooks/useSoknad'
 
 interface OpplastetKvittering {
     id: string
 }
 
 export interface OpplastingFromProps {
+    valgtSoknad?: Soknad
     valgtKvittering?: Kvittering
-    sporsmal: Sporsmal
     setOpenModal: (arg0: boolean) => void
     valgtFil?: File
     setValgtFil: (arg0?: File) => void
 }
 
-const OpplastingForm = ({ valgtKvittering, sporsmal, setOpenModal, valgtFil, setValgtFil }: OpplastingFromProps) => {
-    const { id } = useParams<RouteParams>()
-    const { data: valgtSoknad } = useSoknad(id)
+const OpplastingForm = ({ valgtSoknad, valgtKvittering, setOpenModal, valgtFil, setValgtFil }: OpplastingFromProps) => {
+    const { stegId } = useParams<RouteParams>()
     const queryClient = useQueryClient()
 
-    const { setFeilmeldingTekst } = useAppStore()
+    const { feilmeldingTekst, setFeilmeldingTekst } = useAppStore()
     const [laster, setLaster] = useState<boolean>(false)
-    const [kvitteringHeader, setKvitteringHeader] = useState<string>('')
-    const [formErDisabled, setFormErDisabled] = useState<boolean>(false)
-
-    const maks = formaterFilstørrelse(maxFilstørrelse)
 
     const methods = useForm({
         mode: 'onBlur',
@@ -51,16 +45,16 @@ const OpplastingForm = ({ valgtKvittering, sporsmal, setOpenModal, valgtFil, set
         shouldUnregister: true,
     })
 
-    useEffect(() => {
-        if (valgtKvittering) {
-            setKvitteringHeader(tekst('opplasting_modal.endre-utlegg.tittel'))
-            setFormErDisabled(true)
-        } else {
-            setKvitteringHeader(tekst('opplasting_modal.nytt-utlegg.tittel'))
-            setFormErDisabled(false)
-        }
-        // eslint-disable-next-line
-    }, [valgtSoknad, valgtKvittering])
+    if (!valgtSoknad) return null
+
+    const maks = formaterFilstørrelse(maxFilstørrelse)
+    const stegNum = Number(stegId)
+    const spmIndex = stegNum - 1
+    const sporsmal = valgtSoknad.sporsmal[spmIndex]
+    const formErDisabled = valgtKvittering !== undefined
+    const kvitteringHeader = valgtKvittering
+        ? tekst('opplasting_modal.endre-utlegg.tittel')
+        : tekst('opplasting_modal.nytt-utlegg.tittel')
 
     const onSubmit = async () => {
         try {
@@ -76,13 +70,15 @@ const OpplastingForm = ({ valgtKvittering, sporsmal, setOpenModal, valgtFil, set
             const rsOppdaterSporsmalResponse: RSOppdaterSporsmalResponse = await lagreSvar(opplastingResponse)
             if (!rsOppdaterSporsmalResponse) return
 
-            // TODO: Sjekk hvorfor setQueriesData ikke klarer å oppdatere lista med kvitteringer
-            await queryClient.invalidateQueries(['soknad', valgtSoknad!.id])
+            valgtSoknad.sporsmal[spmIndex] = new Sporsmal(rsOppdaterSporsmalResponse.oppdatertSporsmal, null, true)
+            queryClient.setQueriesData(['soknad', valgtSoknad!.id], valgtSoknad)
 
             setOpenModal(false)
-        } catch (ex) {
+        } catch (e: any) {
+            if (!(e instanceof AuthenticationError)) {
+                logger.error(e)
+            }
             setFeilmeldingTekst('Det skjedde en feil i baksystemene, prøv igjen senere')
-        } finally {
             setLaster(false)
         }
     }
@@ -91,30 +87,21 @@ const OpplastingForm = ({ valgtKvittering, sporsmal, setOpenModal, valgtFil, set
         const requestData = new FormData()
         requestData.append('file', valgtFil as Blob)
 
-        try {
-            return await fetchJsonMedRequestId(
-                '/syk/sykepengesoknad/api/sykepengesoknad-kvitteringer/api/v2/opplasting',
-                {
-                    method: 'POST',
-                    body: requestData,
-                    credentials: 'include',
-                },
-                (response) => {
-                    if (response.status === 413) {
-                        setFeilmeldingTekst('Filen du prøvde å laste opp er for stor.')
-                    } else {
-                        setFeilmeldingTekst('Det skjedde en feil i baksystemene, prøv igjen senere.')
-                    }
-                },
-            )
-        } catch (e: any) {
-            if (!(e instanceof AuthenticationError)) {
-                logger.error(e)
-            }
-            return
-        } finally {
-            setFeilmeldingTekst('')
-        }
+        return await fetchJsonMedRequestId(
+            '/syk/sykepengesoknad/api/sykepengesoknad-kvitteringer/api/v2/opplasting',
+            {
+                method: 'POST',
+                body: requestData,
+                credentials: 'include',
+            },
+            (response) => {
+                if (response.status === 413) {
+                    setFeilmeldingTekst('Filen du prøvde å laste opp er for stor.')
+                } else {
+                    setFeilmeldingTekst('Det skjedde en feil i baksystemene, prøv igjen senere.')
+                }
+            },
+        )
     }
 
     const lagreSvar = async (opplastingResponse: OpplastetKvittering) => {
@@ -126,30 +113,16 @@ const OpplastingForm = ({ valgtKvittering, sporsmal, setOpenModal, valgtFil, set
         }
         const svar: RSSvar = { verdi: JSON.stringify(kvittering) }
 
-        try {
-            return await fetchJsonMedRequestId(
-                `/syk/sykepengesoknad/api/sykepengesoknad-backend/api/v2/soknader/${valgtSoknad!.id}/sporsmal/${
-                    sporsmal!.id
-                }/svar`,
-                {
-                    method: 'POST',
-                    body: JSON.stringify(svar),
-                    credentials: 'include',
-                    headers: { 'Content-Type': 'application/json' },
-                },
-            )
-        } catch (e: any) {
-            if (!(e instanceof AuthenticationError)) {
-                setFeilmeldingTekst('Det skjedde en feil i baksystemene, prøv igjen senere.')
-                logger.error(e)
-            }
-            return
-        } finally {
-            setFeilmeldingTekst('')
-        }
+        return await fetchJsonMedRequestId(
+            `/syk/sykepengesoknad/api/sykepengesoknad-backend/api/v2/soknader/${valgtSoknad.id}/sporsmal/${sporsmal.id}/svar`,
+            {
+                method: 'POST',
+                body: JSON.stringify(svar),
+                credentials: 'include',
+                headers: { 'Content-Type': 'application/json' },
+            },
+        )
     }
-
-    if (!valgtSoknad) return null
 
     return (
         <FormProvider {...methods}>
@@ -274,6 +247,15 @@ const OpplastingForm = ({ valgtKvittering, sporsmal, setOpenModal, valgtFil, set
                 <DragAndDrop valgtFil={valgtFil} setValgtFil={setValgtFil} valgtKvittering={valgtKvittering} />
 
                 <div className="knapperad">
+                    <Vis
+                        hvis={feilmeldingTekst}
+                        render={() => (
+                            <Alert variant="warning">
+                                <BodyShort>{feilmeldingTekst}</BodyShort>
+                            </Alert>
+                        )}
+                    />
+
                     <Vis
                         hvis={!formErDisabled}
                         render={() => (
