@@ -24,7 +24,7 @@ export function DataFetcher(props: { children: any }) {
         } catch (e: any) {
             if (!(e instanceof AuthenticationError)) {
                 setSoknaderFeilet(true)
-                logger.error(e)
+                logger.warn(e)
             }
             return
         }
@@ -46,7 +46,7 @@ export function DataFetcher(props: { children: any }) {
         } catch (e: any) {
             if (!(e instanceof AuthenticationError)) {
                 setSykmeldingerFeilet(true)
-                logger.error(e)
+                logger.warn(e)
             }
             return
         }
