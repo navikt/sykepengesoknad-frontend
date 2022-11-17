@@ -14,7 +14,7 @@ spec:
     - {{ingress}}
   replicas:
     min: 2
-    max: 3
+    max: 5
     cpuThresholdPercentage: 50
   tokenx:
     enabled: true
@@ -25,11 +25,11 @@ spec:
       level: Level4
   resources:
     limits:
-      cpu: 500m
-      memory: 256Mi
+      cpu: 3000m
+      memory: 1000Mi
     requests:
-      cpu: 200m
-      memory: 256Mi
+      cpu: 2000m
+      memory: 1000Mi
   liveness:
     path: syk/sykepengesoknad/api/internal/isAlive
   readiness:
