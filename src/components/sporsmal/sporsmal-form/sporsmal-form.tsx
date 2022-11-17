@@ -112,7 +112,7 @@ const SporsmalForm = () => {
             )
         } catch (e: any) {
             if (!(e instanceof AuthenticationError)) {
-                logger.warn(e)
+                logger.error(e)
             }
             return
         }
@@ -145,7 +145,7 @@ const SporsmalForm = () => {
             )
         } catch (e: any) {
             if (!(e instanceof AuthenticationError)) {
-                logger.warn(e)
+                logger.error(e)
             }
             return
         }
@@ -180,7 +180,7 @@ const SporsmalForm = () => {
         } catch (e: any) {
             if (!(e instanceof AuthenticationError)) {
                 restFeilet = true
-                logger.warn(e)
+                logger.error(e)
             }
             return
         }

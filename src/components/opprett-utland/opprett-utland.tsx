@@ -31,7 +31,7 @@ const OpprettUtland = () => {
         } catch (e: any) {
             if (!(e instanceof AuthenticationError)) {
                 setFeilmeldingTekst(tekst('opprett-utland.feilet'))
-                logger.warn(e)
+                logger.error(e)
             }
             return
         } finally {

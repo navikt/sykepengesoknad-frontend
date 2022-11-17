@@ -50,7 +50,7 @@ const Slettknapp = ({ sporsmal, kvittering, update }: SlettknappProps) => {
             )
         } catch (e: any) {
             if (!(e instanceof AuthenticationError)) {
-                logger.warn(e)
+                logger.error(e)
                 feilVedSletting = true
                 setFeilmeldingTekst(tekst('opplasting_modal.slett.feilmelding'))
             }

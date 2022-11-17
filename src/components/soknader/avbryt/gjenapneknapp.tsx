@@ -52,7 +52,7 @@ const GjenapneSoknad = () => {
             )
         } catch (e: any) {
             if (!(e instanceof AuthenticationError)) {
-                logger.warn(e)
+                logger.error(e)
             }
             return
         } finally {

@@ -46,7 +46,7 @@ const DragAndDrop = () => {
             setFormErDisabled(true)
             hentKvittering().catch((e) => {
                 if (!(e instanceof AuthenticationError)) {
-                    logger.warn(e)
+                    logger.error(e)
                 }
                 return
             })

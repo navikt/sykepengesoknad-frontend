@@ -64,8 +64,9 @@ const tekster = {
 
 export const tekst = (tekst: keyof typeof tekster): string => {
     const verdi = tekster[tekst]
-    logger.error(`Mangler teksten [ ${tekst} ].`)
+    // Generiskfeilmelding har ingen tekst
     if (!verdi === undefined && !tekst.includes('soknad.feilmelding')) {
+        logger.error(`Mangler teksten [ ${tekst} ]`)
         return undefined as any
     }
     return verdi

@@ -97,7 +97,7 @@ const OpplastingForm = ({ sporsmal }: SpmProps) => {
             )
         } catch (e: any) {
             if (!(e instanceof AuthenticationError)) {
-                logger.warn(e)
+                logger.error(e)
             }
             return
         } finally {
@@ -129,7 +129,7 @@ const OpplastingForm = ({ sporsmal }: SpmProps) => {
         } catch (e: any) {
             if (!(e instanceof AuthenticationError)) {
                 setFeilmeldingTekst('Det skjedde en feil i baksystemene, prøv igjen senere.')
-                logger.warn(e)
+                logger.error(e)
             }
             return
         } finally {

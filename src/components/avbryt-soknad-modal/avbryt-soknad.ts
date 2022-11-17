@@ -37,7 +37,7 @@ export async function avbrytSoknad({
     } catch (e: any) {
         if (!(e instanceof AuthenticationError)) {
             setFeilmeldingTekst(tekst('avbryt.feilet'))
-            logger.warn(e)
+            logger.error(e)
         }
         return
     } finally {
