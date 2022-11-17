@@ -79,6 +79,7 @@ const OpplastingForm = ({ valgtSoknad, valgtKvittering, setOpenModal, valgtFil, 
                 logger.error(e)
             }
             setFeilmeldingTekst('Det skjedde en feil i baksystemene, prøv igjen senere')
+        } finally {
             setLaster(false)
         }
     }
