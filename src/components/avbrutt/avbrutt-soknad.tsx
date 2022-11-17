@@ -21,6 +21,7 @@ import GjenapneSoknad from '../soknader/avbryt/gjenapneknapp'
 import Vis from '../vis'
 import useSoknader from '../../hooks/useSoknader'
 import useSoknad from '../../hooks/useSoknad'
+import QueryStatusPanel from '../queryStatusPanel/QueryStatusPanel'
 
 const brodsmuler: Brodsmule[] = [
     {
@@ -64,7 +65,7 @@ const AvbruttSoknad = () => {
         // eslint-disable-next-line
     }, [valgtSoknad, sykmeldinger])
 
-    if (!valgtSoknad || !soknader) return null
+    if (!valgtSoknad || !soknader) return <QueryStatusPanel valgSoknadId={id} />
 
     const gjenstaendeSoknader = hentGjenstaendeSoknader(soknader)
 

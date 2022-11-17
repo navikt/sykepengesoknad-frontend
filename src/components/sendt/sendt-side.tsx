@@ -19,6 +19,7 @@ import Kvittering from '../kvittering/kvittering'
 import Vis from '../vis'
 import useSoknad from '../../hooks/useSoknad'
 import { urlTilSoknad } from '../soknad/soknad-link'
+import QueryStatusPanel from '../queryStatusPanel/QueryStatusPanel'
 
 const brodsmuler: Brodsmule[] = [
     {
@@ -64,7 +65,7 @@ const SendtSide = () => {
     // eslint-disable-next-line @typescript-eslint/no-empty-function
     useEffect(() => {}, [rerendreKvittering])
 
-    if (!valgtSoknad) return null
+    if (!valgtSoknad) return <QueryStatusPanel valgSoknadId={id} />
 
     const erSendtTilNav = valgtSoknad.sendtTilNAVDato !== undefined
     const erSendtTilArbeidsgiver = valgtSoknad.sendtTilArbeidsgiverDato !== undefined

@@ -22,6 +22,7 @@ import Vis from '../vis'
 import useSoknad from '../../hooks/useSoknad'
 import useSoknader from '../../hooks/useSoknader'
 import { urlTilSoknad } from '../soknad/soknad-link'
+import QueryStatusPanel from '../queryStatusPanel/QueryStatusPanel'
 
 import Kvittering from './kvittering'
 import { harSvartJaFravaerForSykmeldingen, harSvartJaJobbetDuUnderveis } from './harSvartJa'
@@ -72,7 +73,7 @@ const KvitteringSide = () => {
     // eslint-disable-next-line @typescript-eslint/no-empty-function
     useEffect(() => {}, [rerendreKvittering])
 
-    if (!valgtSoknad || !soknader) return null
+    if (!valgtSoknad || !soknader) return <QueryStatusPanel valgSoknadId={id} />
 
     const erSendtTilArbeidsgiver = valgtSoknad.sendtTilArbeidsgiverDato !== undefined
 

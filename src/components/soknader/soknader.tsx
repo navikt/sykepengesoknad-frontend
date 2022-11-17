@@ -10,6 +10,7 @@ import Brodsmuler from '../brodsmuler/brodsmuler'
 import OmSykepenger from '../om-sykepenger/om-sykepenger'
 import Vis from '../vis'
 import useSoknader from '../../hooks/useSoknader'
+import QueryStatusPanel from '../queryStatusPanel/QueryStatusPanel'
 
 import Teasere from './teaser/teasere'
 
@@ -23,14 +24,13 @@ const brodsmuler: Brodsmule[] = [
 ]
 
 const Soknader = () => {
-    // TODO: Feilhåndtering / visning dersom søknader ikke kan hentes
     const { data: soknader } = useSoknader()
 
     useEffect(() => {
         setBodyClass('soknader')
     }, [])
 
-    if (!soknader) return null
+    if (!soknader) return <QueryStatusPanel />
 
     const nyeSoknader = soknader
         .filter(

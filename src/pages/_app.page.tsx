@@ -45,6 +45,7 @@ import '../components/soknader/soknader.less'
 import '../components/soknad/soknaden.less'
 import '../components/endreknapp/endre-soknad-modal.less'
 import '../components/sporsmal/bendiksen/paske-hjelpetekst.less'
+import '../components/queryStatusPanel/QueryStatusPanel.less'
 
 import { configureLogger } from '@navikt/next-logger'
 import dayjs from 'dayjs'

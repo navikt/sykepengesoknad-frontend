@@ -31,6 +31,7 @@ import useSoknad from '../../hooks/useSoknad'
 import useSoknader from '../../hooks/useSoknader'
 import { RSSoknadmetadata } from '../../types/rs-types/rs-soknadmetadata'
 import { Sykmelding } from '../../types/sykmelding'
+import QueryStatusPanel from '../queryStatusPanel/QueryStatusPanel'
 
 import { urlTilSoknad } from './soknad-link'
 
@@ -95,7 +96,7 @@ const Soknaden = () => {
         // eslint-disable-next-line
     }, [valgtSoknad])
 
-    if (!valgtSoknad || !sykmeldinger || !soknader || !stegId) return null
+    if (!valgtSoknad || !sykmeldinger || !soknader || !stegId) return <QueryStatusPanel valgSoknadId={id} />
 
     return (
         <>
