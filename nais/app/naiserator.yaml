@@ -25,11 +25,11 @@ spec:
       level: Level4
   resources:
     limits:
-      cpu: 3000m
-      memory: 1000Mi
-    requests:
       cpu: 2000m
-      memory: 1000Mi
+      memory: 256Mi
+    requests:
+      cpu: 500m
+      memory: 256Mi
   liveness:
     path: syk/sykepengesoknad/api/internal/isAlive
   readiness:
