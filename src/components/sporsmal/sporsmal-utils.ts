@@ -18,10 +18,10 @@ export const hentNokkel = (soknad: Soknad, sidenummer: number) => {
     if (sporsmal === undefined) {
         return ''
     }
-    const nokkel = fjernIndexFraTag(sporsmal.tag).toLowerCase()
     if (sidenummer === 1 && soknad.soknadstype !== RSSoknadstype.OPPHOLD_UTLAND) {
-        return ''
+        return 'sykepengesoknad.start.tittel'
     }
+    const nokkel = fjernIndexFraTag(sporsmal.tag).toLowerCase()
     return erSisteSide(soknad, sidenummer) ? 'sykepengesoknad.til-slutt.tittel' : `sykepengesoknad.${nokkel}.tittel`
 }
 
