@@ -4,9 +4,14 @@ const SoknadenTekster = {
     'kvittering.sidetittel': 'Kvittering',
     'soknad.tilbakeknapp': 'Tilbake',
     'statuspanel.status': 'Status',
+    'sykepengesoknad.start.tittel': 'Ansvarserklæring',
     'sykepengesoknad.til-slutt.tittel': 'Til slutt',
     'sykepengesoknad.sykepengeinfo.til-nav':
         'Sykepenger utbetales etter at NAV har innvilget søknaden. <a class="navds-link" href="https://www.nav.no/no/NAV+og+samfunn/Kontakt+NAV/Utbetalinger/Utbetalinger/Utbetalingsdatoer%2C+feriepenger+og+skattetrekk?kap=499628" target="_blank">Les om sykepenger og saksbehandlingstider.</a>',
+
+    'sykepengesoknad.periodeutland.tittel': 'Når skal du reise',
+    'sykepengesoknad.land.tittel': 'Hvilket land skal du reise til',
+    'sykepengesoknad.arbeidsgiver.tittel': 'Har du arbeidsgiver',
 
     'sykepengesoknad.permittert_naa.tittel': 'Permittert av arbeidsgiveren',
     'sykepengesoknad.permittert_periode.tittel': 'Permittert av arbeidsgiveren',
