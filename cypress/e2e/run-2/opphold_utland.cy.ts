@@ -123,7 +123,6 @@ describe('Tester søknad om å beholde sykepenger utenfor EØS', () => {
     it('Sender søknaden', function () {
         cy.url().should('include', `${soknad.id}/4`)
 
-        cy.contains('Bekreft opplysninger')
         cy.contains('Før du reiser ber vi deg bekrefte')
         cy.contains('Jeg bekrefter de to punktene ovenfor').click({
             force: true,
