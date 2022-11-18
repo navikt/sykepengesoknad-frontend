@@ -33,8 +33,6 @@ const Slettknapp = ({ sporsmal, kvittering, update }: SlettknappProps) => {
             setSletter(true)
         }
 
-        console.log(`NJM:`, sporsmal)
-
         const idx = sporsmal!.svarliste.svar.findIndex(
             (svar) => svarverdiToKvittering(svar?.verdi).blobId === kvittering?.blobId,
         )
