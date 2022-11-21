@@ -138,7 +138,10 @@ describe('Teste førsteside i reisetilskuddsøknaden', () => {
         it('Beløpet er riktig når vi går frem og tilbake', () => {
             cy.url().should('include', `${nyttReisetilskudd.id}/4`)
             cy.contains('Tilbake').click({ force: true })
+
             cy.url().should('include', `${nyttReisetilskudd.id}/3`)
+            cy.get('.skjema__dager').contains('23').siblings().first().should('not.have.class', 'checked')
+            cy.get('.skjema__dager').contains('24').siblings().first().should('have.class', 'checked')
             cy.get('#1566447').should('have.value', '1000')
 
             cy.contains('Gå videre').click()
