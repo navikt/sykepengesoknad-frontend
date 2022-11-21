@@ -1,13 +1,34 @@
 import { BodyShort, Label } from '@navikt/ds-react'
 import React from 'react'
+import { logger } from '@navikt/next-logger'
 
 import { RSSvartype } from '../../../types/rs-types/rs-svartype'
 import { tekst } from '../../../utils/tekster'
 import Vis from '../../vis'
 import { OppsummeringProps } from '../oppsummering'
+import { fjernIndexFraTag } from '../../sporsmal/sporsmal-utils'
 
 const TallSum = ({ sporsmal }: OppsummeringProps) => {
-    const labelnokkel = sporsmal.svartype === RSSvartype.TIMER ? 'soknad.timer-totalt' : 'soknad.prosent'
+    let labelnokkel = ''
+
+    if (fjernIndexFraTag(sporsmal.tag) === 'HVOR_MANGE_TIMER_PER_UKE') {
+        labelnokkel = 'oppsummering.timer'
+    } else if (fjernIndexFraTag(sporsmal.tag) === 'HVOR_MYE_TIMER_VERDI') {
+        labelnokkel = 'oppsummering.timer-totalt'
+    } else {
+        switch (sporsmal.svartype) {
+            case RSSvartype.PROSENT:
+            case RSSvartype.TALL:
+            case RSSvartype.TIMER:
+            case RSSvartype.KILOMETER:
+            case RSSvartype.BELOP:
+                labelnokkel = `oppsummering.${sporsmal.svartype.toLowerCase()}`
+                break
+            default:
+                logger.warn(`Finner ikke oppsummeringstekst for svartype ${sporsmal.svartype}.`)
+        }
+    }
+
     const label = sporsmal.undertekst || tekst(labelnokkel as any)
     return (
         <div className="oppsummering__sporsmal">
