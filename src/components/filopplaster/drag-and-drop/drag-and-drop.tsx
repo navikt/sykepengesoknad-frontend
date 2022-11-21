@@ -51,7 +51,7 @@ const DragAndDrop = ({ valgtFil, setValgtFil, valgtKvittering }: DragAndDropProp
             setFormErDisabled(true)
             hentKvittering().catch((e) => {
                 if (!(e instanceof AuthenticationError)) {
-                    logger.error(e)
+                    logger.warn(e)
                 }
                 return
             })

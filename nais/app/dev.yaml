@@ -6,7 +6,7 @@ env:
   SYKMELDINGER_URL: https://www-gcp.dev.nav.no/syk/sykmeldinger
   MINSIDE_URL: https://www.dev.nav.no/minside/
   DECORATOR_ENV: dev
-  ASSET_PREFIX: https://flex-static-files.dev.nav.no/sykepengesoknad
+  ASSET_PREFIX: https://cdn.dev.nav.no/flex/sykepengesoknad-frontend
   VEDLIKEHOLD: false
   SYKMELDINGER_BACKEND_CLIENT_ID: dev-gcp:teamsykmelding:sykmeldinger-backend
   SYKEPENGESOKNAD_BACKEND_CLIENT_ID: dev-gcp:flex:sykepengesoknad-backend

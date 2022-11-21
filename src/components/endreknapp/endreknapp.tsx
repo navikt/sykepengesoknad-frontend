@@ -48,7 +48,7 @@ const Endreknapp = () => {
         } catch (e: any) {
             if (!(e instanceof AuthenticationError)) {
                 setFeilmeldingTekst(tekst('kvittering.korrigering.feilet'))
-                logger.error(e)
+                logger.warn(e)
             }
             return
         } finally {

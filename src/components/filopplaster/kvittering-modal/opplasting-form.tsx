@@ -76,7 +76,7 @@ const OpplastingForm = ({ valgtSoknad, valgtKvittering, setOpenModal, valgtFil, 
             setOpenModal(false)
         } catch (e: any) {
             if (!(e instanceof AuthenticationError)) {
-                logger.error(e)
+                logger.warn(e)
             }
             setFeilmeldingTekst('Det skjedde en feil i baksystemene, prøv igjen senere')
         } finally {

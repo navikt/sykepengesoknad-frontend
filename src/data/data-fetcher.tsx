@@ -22,7 +22,7 @@ export function DataFetcher(props: { children: any }) {
         } catch (e: any) {
             if (!(e instanceof AuthenticationError)) {
                 setSykmeldingerFeilet(true)
-                logger.error(e)
+                logger.warn(e)
             }
             return
         }
@@ -32,7 +32,7 @@ export function DataFetcher(props: { children: any }) {
 
     useEffect(() => {
         setLaster(true)
-        hentSykmeldinger().catch((e: Error) => logger.error(e))
+        hentSykmeldinger().catch((e: Error) => logger.warn(e))
         setLaster(false)
     }, [hentSykmeldinger])
 

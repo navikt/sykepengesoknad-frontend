@@ -67,7 +67,7 @@ const Ettersending = ({ gjelder, setRerendrekvittering }: EttersendingProps) => 
         } catch (e: any) {
             if (!(e instanceof AuthenticationError)) {
                 setFeilmeldingTekst(tekst('kvittering.ettersending.feilet'))
-                logger.error(e)
+                logger.warn(e)
             }
             return
         } finally {
@@ -92,7 +92,7 @@ const Ettersending = ({ gjelder, setRerendrekvittering }: EttersendingProps) => 
         } catch (e: any) {
             if (!(e instanceof AuthenticationError)) {
                 setFeilmeldingTekst(tekst('kvittering.ettersending.feilet'))
-                logger.error(e)
+                logger.warn(e)
             }
             return
         } finally {

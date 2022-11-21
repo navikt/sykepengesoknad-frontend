@@ -199,7 +199,7 @@ const Fordeling = ({ valgtSoknad, soknader, sykmeldinger }: FordelingProps) => {
                     />
 
                     <Vis
-                        hvis={tittel}
+                        hvis={tittel && stegNo !== 1 && !erUtlandssoknad}
                         render={() => (
                             <Heading size="medium" className="sporsmal__tittel">
                                 {tittel}
