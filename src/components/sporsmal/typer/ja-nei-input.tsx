@@ -35,9 +35,13 @@ const JaNeiInput = ({ sporsmal }: SpmProps) => {
         formState: { errors },
         clearErrors,
         watch,
+        getValues,
     } = useFormContext()
     const feilmelding = hentFeilmelding(sporsmal, errors[sporsmal.id])
-    const watchJaNei = watch(sporsmal.id)
+    let watchJaNei = watch(sporsmal.id)
+    if (watchJaNei === undefined) {
+        watchJaNei = getValues(sporsmal.id)
+    }
 
     const visAvgittAvBjorn = () => {
         const undersporsmal = sporsmal.undersporsmal.find((uspm) => uspm.tag === TagTyper.EGENMELDINGER_NAR)
