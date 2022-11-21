@@ -25,9 +25,12 @@ interface KalenderDag {
 }
 
 const DagerKomp = ({ sporsmal }: SpmProps) => {
-    const { register, setValue } = useFormContext()
+    const { register, setValue, getValues } = useFormContext()
     const feilmelding = hentFeilmelding(sporsmal)
-    const watchDager = useWatch({ name: sporsmal.id })
+    let watchDager = useWatch({ name: sporsmal.id })
+    if (watchDager === undefined) {
+        watchDager = getValues(sporsmal.id)
+    }
 
     const kalTittel = () => {
         const etaar = sammeAar(sporsmal)
