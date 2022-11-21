@@ -194,6 +194,12 @@ describe('Tester arbeidstakersøknad', () => {
         cy.contains(
             'Jeg vet at jeg kan miste retten til sykepenger hvis opplysningene jeg gir ikke er riktige eller fullstendige. Jeg vet også at NAV kan holde igjen eller kreve tilbake penger, og at å gi feil opplysninger kan være straffbart.',
         )
+
+        cy.get('.oppsummering').within(() => {
+            cy.contains('9.00 timer')
+            cy.contains('21.00 timer')
+        })
+
         cy.contains('Det er 1 feil i skjemaet').should('not.exist')
 
         cy.get('.navds-checkbox__label').click({ force: true })
