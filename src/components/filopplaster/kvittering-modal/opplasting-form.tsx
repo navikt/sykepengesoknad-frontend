@@ -8,7 +8,6 @@ import { useParams } from 'react-router-dom'
 import { useQueryClient } from '@tanstack/react-query'
 
 import { RouteParams } from '../../../app'
-import { useAppStore } from '../../../data/stores/app-store'
 import { RSOppdaterSporsmalResponse } from '../../../types/rs-types/rest-response/rs-oppdatersporsmalresponse'
 import { RSSvar } from '../../../types/rs-types/rs-svar'
 import { Kvittering, Soknad, Sporsmal, UtgiftTyper } from '../../../types/types'
@@ -36,8 +35,8 @@ const OpplastingForm = ({ valgtSoknad, valgtKvittering, setOpenModal, valgtFil, 
     const { stegId } = useParams<RouteParams>()
     const queryClient = useQueryClient()
 
-    const { feilmeldingTekst, setFeilmeldingTekst } = useAppStore()
     const [laster, setLaster] = useState<boolean>(false)
+    const [feilmelding, setFeilmelding] = useState<string>()
 
     const methods = useForm({
         mode: 'onBlur',
@@ -59,7 +58,7 @@ const OpplastingForm = ({ valgtSoknad, valgtKvittering, setOpenModal, valgtFil, 
     const onSubmit = async () => {
         try {
             setLaster(true)
-            setFeilmeldingTekst('')
+            setFeilmelding(undefined)
 
             const valid = await methods.trigger()
             if (!valid) return
@@ -78,7 +77,7 @@ const OpplastingForm = ({ valgtSoknad, valgtKvittering, setOpenModal, valgtFil, 
             if (!(e instanceof AuthenticationError)) {
                 logger.warn(e)
             }
-            setFeilmeldingTekst('Det skjedde en feil i baksystemene, prøv igjen senere')
+            setFeilmelding('Det skjedde en feil i baksystemene, prøv igjen senere')
         } finally {
             setLaster(false)
         }
@@ -97,9 +96,9 @@ const OpplastingForm = ({ valgtSoknad, valgtKvittering, setOpenModal, valgtFil, 
             },
             (response) => {
                 if (response.status === 413) {
-                    setFeilmeldingTekst('Filen du prøvde å laste opp er for stor.')
+                    setFeilmelding('Filen du prøvde å laste opp er for stor.')
                 } else {
-                    setFeilmeldingTekst('Det skjedde en feil i baksystemene, prøv igjen senere.')
+                    setFeilmelding('Det skjedde en feil i baksystemene, prøv igjen senere.')
                 }
             },
         )
@@ -249,10 +248,10 @@ const OpplastingForm = ({ valgtSoknad, valgtKvittering, setOpenModal, valgtFil, 
 
                 <div className="knapperad">
                     <Vis
-                        hvis={feilmeldingTekst}
+                        hvis={feilmelding}
                         render={() => (
                             <Alert variant="warning">
-                                <BodyShort>{feilmeldingTekst}</BodyShort>
+                                <BodyShort>{feilmelding}</BodyShort>
                             </Alert>
                         )}
                     />

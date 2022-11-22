@@ -5,7 +5,6 @@ import React, { useState } from 'react'
 import { useParams } from 'react-router-dom'
 import { useQueryClient } from '@tanstack/react-query'
 
-import { useAppStore } from '../../data/stores/app-store'
 import { Kvittering, Sporsmal, svarverdiToKvittering } from '../../types/types'
 import fetchMedRequestId, { AuthenticationError } from '../../utils/fetch'
 import { tekst } from '../../utils/tekster'
@@ -17,20 +16,20 @@ interface SlettknappProps {
     sporsmal: Sporsmal
     kvittering: Kvittering
     setOpenModal: (arg0: boolean) => void
-    update?: () => void
+    updateFilliste?: () => void
 }
 
-const Slettknapp = ({ sporsmal, kvittering, setOpenModal, update }: SlettknappProps) => {
+const Slettknapp = ({ sporsmal, kvittering, setOpenModal, updateFilliste }: SlettknappProps) => {
     const { id } = useParams<RouteParams>()
     const { data: valgtSoknad } = useSoknad(id)
     const queryClient = useQueryClient()
 
-    const { feilmeldingTekst, setFeilmeldingTekst } = useAppStore()
     const [vilSlette, setVilSlette] = useState<boolean>(false)
     const [sletter, setSletter] = useState<boolean>(false)
+    const [feilmelding, setFeilmelding] = useState<string>()
 
     const nullstillFeilmelding = () => {
-        setFeilmeldingTekst('')
+        setFeilmelding(undefined)
     }
 
     const slettKvittering = async () => {
@@ -58,8 +57,9 @@ const Slettknapp = ({ sporsmal, kvittering, setOpenModal, update }: SlettknappPr
         } catch (e: any) {
             if (!(e instanceof AuthenticationError)) {
                 logger.warn(e)
-                setFeilmeldingTekst(tekst('opplasting_modal.slett.feilmelding'))
+                setFeilmelding(tekst('opplasting_modal.slett.feilmelding'))
             }
+            setSletter(false)
             return
         }
 
@@ -70,15 +70,15 @@ const Slettknapp = ({ sporsmal, kvittering, setOpenModal, update }: SlettknappPr
         setOpenModal(false)
         setSletter(false)
         setVilSlette(false)
-        if (update) {
-            update()
+        if (updateFilliste) {
+            updateFilliste()
         }
     }
 
     return (
         <>
             <Vis
-                hvis={update}
+                hvis={updateFilliste}
                 render={() => (
                     <button
                         type="button"
@@ -96,7 +96,7 @@ const Slettknapp = ({ sporsmal, kvittering, setOpenModal, update }: SlettknappPr
             />
 
             <Vis
-                hvis={!update}
+                hvis={!updateFilliste}
                 render={() => (
                     <Button
                         variant="danger"
@@ -127,7 +127,7 @@ const Slettknapp = ({ sporsmal, kvittering, setOpenModal, update }: SlettknappPr
                         {tekst('opplasting_modal.vil-slette.ja')}
                     </Button>
                     <div aria-live="polite">
-                        <Vis hvis={feilmeldingTekst} render={() => <Alert variant="error">{feilmeldingTekst}</Alert>} />
+                        <Vis hvis={feilmelding} render={() => <Alert variant="error">{feilmelding}</Alert>} />
                     </div>
                     <Button
                         variant="secondary"

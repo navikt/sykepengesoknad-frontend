@@ -31,7 +31,7 @@ const FilListe = ({ fjernKnapp, setValgtKvittering, setOpenModal }: Props) => {
     const sporsmal = valgtSoknad.sporsmal[spmIndex]
     const kvitteringer = hentSvar(sporsmal)
 
-    const update = () => {
+    const updateFilliste = () => {
         forceUpdate()
     }
 
@@ -88,7 +88,7 @@ const FilListe = ({ fjernKnapp, setValgtKvittering, setOpenModal }: Props) => {
                                         sporsmal={sporsmal}
                                         kvittering={kvittering}
                                         setOpenModal={setOpenModal}
-                                        update={update}
+                                        updateFilliste={updateFilliste}
                                     />
                                 </td>
                             </tr>
