@@ -14,4 +14,3 @@ jobs:
       base-path: syk/sykepengesoknad
       labs-ingress: sykepengesoknad
       sentry-project: sykepengesoknad
-      sentry-enabled: false
