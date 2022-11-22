@@ -1,6 +1,6 @@
 import { Alert } from '@navikt/ds-react'
 import React, { useEffect, useState } from 'react'
-import { useParams } from 'react-router-dom'
+import { useHistory, useParams } from 'react-router-dom'
 
 import { RouteParams } from '../../app'
 import { useAppStore } from '../../data/stores/app-store'
@@ -17,6 +17,9 @@ import Ettersending from '../ettersending/ettersending'
 import { hentHotjarJsTrigger, HotjarTrigger } from '../hotjar-trigger'
 import Kvittering from '../kvittering/kvittering'
 import Vis from '../vis'
+import useSoknad from '../../hooks/useSoknad'
+import { urlTilSoknad } from '../soknad/soknad-link'
+import QueryStatusPanel from '../queryStatusPanel/QueryStatusPanel'
 
 const brodsmuler: Brodsmule[] = [
     {
@@ -32,33 +35,40 @@ const brodsmuler: Brodsmule[] = [
 ]
 
 const SendtSide = () => {
-    const { valgtSoknad, soknader, setValgtSoknad, setValgtSykmelding, sykmeldinger, feilmeldingTekst } = useAppStore()
+    const { id } = useParams<RouteParams>()
+    const { data: valgtSoknad } = useSoknad(id)
+
+    const { setValgtSykmelding, sykmeldinger, feilmeldingTekst } = useAppStore()
     const [rerendreKvittering, setRerendrekvittering] = useState<Date>(new Date())
     const { logEvent } = useAmplitudeInstance()
-    const { id } = useParams<RouteParams>()
+    const history = useHistory()
 
     useEffect(() => {
-        const filtrertSoknad = soknader.find((soknad) => soknad.id === id)
-        setValgtSoknad(filtrertSoknad)
+        if (!valgtSoknad || !sykmeldinger) return
 
-        const sykmelding = sykmeldinger.find((sm) => sm.id === filtrertSoknad?.sykmeldingId)
+        if (valgtSoknad.status !== RSSoknadstatus.SENDT) {
+            history.replace(urlTilSoknad(valgtSoknad))
+            return
+        }
+
+        const sykmelding = sykmeldinger.find((sm) => sm.id === valgtSoknad.sykmeldingId)
         setValgtSykmelding(sykmelding)
 
         logEvent('skjema åpnet', {
             skjemanavn: 'sykepengesoknad',
-            soknadstype: filtrertSoknad?.soknadstype,
-            soknadstatus: filtrertSoknad?.status,
+            soknadstype: valgtSoknad.soknadstype,
+            soknadstatus: valgtSoknad.status,
         })
         // eslint-disable-next-line
-    }, [id, soknader, sykmeldinger])
+    }, [valgtSoknad, sykmeldinger])
 
     // eslint-disable-next-line @typescript-eslint/no-empty-function
     useEffect(() => {}, [rerendreKvittering])
 
-    if (!valgtSoknad) return null
+    if (!valgtSoknad) return <QueryStatusPanel valgSoknadId={id} />
 
-    const erSendtTilNav = valgtSoknad.sendtTilNAVDato !== null
-    const erSendtTilArbeidsgiver = valgtSoknad.sendtTilArbeidsgiverDato !== null
+    const erSendtTilNav = valgtSoknad.sendtTilNAVDato !== undefined
+    const erSendtTilArbeidsgiver = valgtSoknad.sendtTilArbeidsgiverDato !== undefined
 
     const skalViseEndre = valgtSoknad.status !== RSSoknadstatus.KORRIGERT
     const skalViseSendTilArbeidsgiver =

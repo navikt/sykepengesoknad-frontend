@@ -1,7 +1,7 @@
 import { BodyShort, Link } from '@navikt/ds-react'
 import React from 'react'
+import { useParams } from 'react-router'
 
-import { useAppStore } from '../../../data/stores/app-store'
 import { TagTyper } from '../../../types/enums'
 import { RSSoknadstatus } from '../../../types/rs-types/rs-soknadstatus'
 import { innenforPaske } from '../../../utils/helligdager-utils'
@@ -10,11 +10,14 @@ import { useAmplitudeInstance } from '../../amplitude/amplitude'
 import Vis from '../../vis'
 import { SpmProps } from '../sporsmal-form/sporsmal-form'
 import { fjernIndexFraTag } from '../sporsmal-utils'
+import { RouteParams } from '../../../app'
+import useSoknad from '../../../hooks/useSoknad'
 
 import Bjorn from './bjorn'
 
 const BjornUnderSporsmalstekst = ({ sporsmal }: SpmProps) => {
-    const { valgtSoknad } = useAppStore()
+    const { id } = useParams<RouteParams>()
+    const { data: valgtSoknad } = useSoknad(id)
     const { logEvent } = useAmplitudeInstance()
 
     const bjornTekst = `soknad.bjorn.${fjernIndexFraTag(sporsmal.tag).toLowerCase()}`

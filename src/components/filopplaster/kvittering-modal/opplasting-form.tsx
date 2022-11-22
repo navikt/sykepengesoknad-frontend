@@ -2,21 +2,20 @@ import { Alert, BodyLong, BodyShort, Button, Heading, Label } from '@navikt/ds-r
 import { logger } from '@navikt/next-logger'
 import dayjs from 'dayjs'
 import parser from 'html-react-parser'
-import React, { useEffect, useState } from 'react'
+import React, { useState } from 'react'
 import { FormProvider, useForm } from 'react-hook-form'
 import { useParams } from 'react-router-dom'
+import { useQueryClient } from '@tanstack/react-query'
 
 import { RouteParams } from '../../../app'
-import { useAppStore } from '../../../data/stores/app-store'
 import { RSOppdaterSporsmalResponse } from '../../../types/rs-types/rest-response/rs-oppdatersporsmalresponse'
 import { RSSvar } from '../../../types/rs-types/rs-svar'
-import { Kvittering, Sporsmal, UtgiftTyper } from '../../../types/types'
+import { Kvittering, Soknad, Sporsmal, UtgiftTyper } from '../../../types/types'
 import { AuthenticationError, fetchJsonMedRequestId } from '../../../utils/fetch'
 import { formaterFilstørrelse, formattertFiltyper, maxFilstørrelse } from '../../../utils/fil-utils'
 import { getLedetekst, tekst } from '../../../utils/tekster'
 import { Ekspanderbar } from '../../ekspanderbar/ekspanderbar'
 import Slettknapp from '../../slettknapp/slettknapp'
-import { SpmProps } from '../../sporsmal/sporsmal-form/sporsmal-form'
 import Vis from '../../vis'
 import DragAndDrop from '../drag-and-drop/drag-and-drop'
 
@@ -24,15 +23,20 @@ interface OpplastetKvittering {
     id: string
 }
 
-const OpplastingForm = ({ sporsmal }: SpmProps) => {
-    const { valgtSoknad, setValgtSoknad, valgtKvittering, setOpenModal, valgtFil, setFeilmeldingTekst } = useAppStore()
-    const [laster, setLaster] = useState<boolean>(false)
-    const [kvitteringHeader, setKvitteringHeader] = useState<string>('')
-    const [formErDisabled, setFormErDisabled] = useState<boolean>(false)
+export interface OpplastingFromProps {
+    valgtSoknad?: Soknad
+    valgtKvittering?: Kvittering
+    setOpenModal: (arg0: boolean) => void
+    valgtFil?: File
+    setValgtFil: (arg0?: File) => void
+}
+
+const OpplastingForm = ({ valgtSoknad, valgtKvittering, setOpenModal, valgtFil, setValgtFil }: OpplastingFromProps) => {
     const { stegId } = useParams<RouteParams>()
-    const stegNum = Number(stegId)
-    const spmIndex = stegNum - 1
-    const maks = formaterFilstørrelse(maxFilstørrelse)
+    const queryClient = useQueryClient()
+
+    const [laster, setLaster] = useState<boolean>(false)
+    const [feilmelding, setFeilmelding] = useState<string>()
 
     const methods = useForm({
         mode: 'onBlur',
@@ -40,21 +44,21 @@ const OpplastingForm = ({ sporsmal }: SpmProps) => {
         shouldUnregister: true,
     })
 
-    useEffect(() => {
-        if (valgtKvittering) {
-            setKvitteringHeader(tekst('opplasting_modal.endre-utlegg.tittel'))
-            setFormErDisabled(true)
-        } else {
-            setKvitteringHeader(tekst('opplasting_modal.nytt-utlegg.tittel'))
-            setFormErDisabled(false)
-        }
-        // eslint-disable-next-line
-    }, [valgtSoknad, valgtKvittering])
+    if (!valgtSoknad) return null
+
+    const maks = formaterFilstørrelse(maxFilstørrelse)
+    const stegNum = Number(stegId)
+    const spmIndex = stegNum - 1
+    const sporsmal = valgtSoknad.sporsmal[spmIndex]
+    const formErDisabled = valgtKvittering !== undefined
+    const kvitteringHeader = valgtKvittering
+        ? tekst('opplasting_modal.endre-utlegg.tittel')
+        : tekst('opplasting_modal.nytt-utlegg.tittel')
 
     const onSubmit = async () => {
         try {
             setLaster(true)
-            setFeilmeldingTekst('')
+            setFeilmelding(undefined)
 
             const valid = await methods.trigger()
             if (!valid) return
@@ -65,11 +69,15 @@ const OpplastingForm = ({ sporsmal }: SpmProps) => {
             const rsOppdaterSporsmalResponse: RSOppdaterSporsmalResponse = await lagreSvar(opplastingResponse)
             if (!rsOppdaterSporsmalResponse) return
 
-            valgtSoknad!.sporsmal[spmIndex] = new Sporsmal(rsOppdaterSporsmalResponse.oppdatertSporsmal, null, true)
-            setValgtSoknad(valgtSoknad)
+            valgtSoknad.sporsmal[spmIndex] = new Sporsmal(rsOppdaterSporsmalResponse.oppdatertSporsmal, null, true)
+            queryClient.setQueriesData(['soknad', valgtSoknad!.id], valgtSoknad)
+
             setOpenModal(false)
-        } catch (ex) {
-            setFeilmeldingTekst('Det skjedde en feil i baksystemene, prøv igjen senere')
+        } catch (e: any) {
+            if (!(e instanceof AuthenticationError)) {
+                logger.warn(e)
+            }
+            setFeilmelding('Det skjedde en feil i baksystemene, prøv igjen senere')
         } finally {
             setLaster(false)
         }
@@ -79,30 +87,21 @@ const OpplastingForm = ({ sporsmal }: SpmProps) => {
         const requestData = new FormData()
         requestData.append('file', valgtFil as Blob)
 
-        try {
-            return await fetchJsonMedRequestId(
-                '/syk/sykepengesoknad/api/sykepengesoknad-kvitteringer/api/v2/opplasting',
-                {
-                    method: 'POST',
-                    body: requestData,
-                    credentials: 'include',
-                },
-                (response) => {
-                    if (response.status === 413) {
-                        setFeilmeldingTekst('Filen du prøvde å laste opp er for stor.')
-                    } else {
-                        setFeilmeldingTekst('Det skjedde en feil i baksystemene, prøv igjen senere.')
-                    }
-                },
-            )
-        } catch (e: any) {
-            if (!(e instanceof AuthenticationError)) {
-                logger.warn(e)
-            }
-            return
-        } finally {
-            setFeilmeldingTekst('')
-        }
+        return await fetchJsonMedRequestId(
+            '/syk/sykepengesoknad/api/sykepengesoknad-kvitteringer/api/v2/opplasting',
+            {
+                method: 'POST',
+                body: requestData,
+                credentials: 'include',
+            },
+            (response) => {
+                if (response.status === 413) {
+                    setFeilmelding('Filen du prøvde å laste opp er for stor.')
+                } else {
+                    setFeilmelding('Det skjedde en feil i baksystemene, prøv igjen senere.')
+                }
+            },
+        )
     }
 
     const lagreSvar = async (opplastingResponse: OpplastetKvittering) => {
@@ -114,30 +113,16 @@ const OpplastingForm = ({ sporsmal }: SpmProps) => {
         }
         const svar: RSSvar = { verdi: JSON.stringify(kvittering) }
 
-        try {
-            return await fetchJsonMedRequestId(
-                `/syk/sykepengesoknad/api/sykepengesoknad-backend/api/v2/soknader/${valgtSoknad!.id}/sporsmal/${
-                    sporsmal!.id
-                }/svar`,
-                {
-                    method: 'POST',
-                    body: JSON.stringify(svar),
-                    credentials: 'include',
-                    headers: { 'Content-Type': 'application/json' },
-                },
-            )
-        } catch (e: any) {
-            if (!(e instanceof AuthenticationError)) {
-                setFeilmeldingTekst('Det skjedde en feil i baksystemene, prøv igjen senere.')
-                logger.warn(e)
-            }
-            return
-        } finally {
-            setFeilmeldingTekst('')
-        }
+        return await fetchJsonMedRequestId(
+            `/syk/sykepengesoknad/api/sykepengesoknad-backend/api/v2/soknader/${valgtSoknad.id}/sporsmal/${sporsmal.id}/svar`,
+            {
+                method: 'POST',
+                body: JSON.stringify(svar),
+                credentials: 'include',
+                headers: { 'Content-Type': 'application/json' },
+            },
+        )
     }
-
-    if (!valgtSoknad) return null
 
     return (
         <FormProvider {...methods}>
@@ -259,9 +244,18 @@ const OpplastingForm = ({ sporsmal }: SpmProps) => {
                     </div>
                 </div>
 
-                <DragAndDrop />
+                <DragAndDrop valgtFil={valgtFil} setValgtFil={setValgtFil} valgtKvittering={valgtKvittering} />
 
                 <div className="knapperad">
+                    <Vis
+                        hvis={feilmelding}
+                        render={() => (
+                            <Alert variant="warning">
+                                <BodyShort>{feilmelding}</BodyShort>
+                            </Alert>
+                        )}
+                    />
+
                     <Vis
                         hvis={!formErDisabled}
                         render={() => (
@@ -290,7 +284,9 @@ const OpplastingForm = ({ sporsmal }: SpmProps) => {
 
                     <Vis
                         hvis={formErDisabled}
-                        render={() => <Slettknapp sporsmal={sporsmal} kvittering={valgtKvittering!} />}
+                        render={() => (
+                            <Slettknapp sporsmal={sporsmal} kvittering={valgtKvittering!} setOpenModal={setOpenModal} />
+                        )}
                     />
                 </div>
             </form>

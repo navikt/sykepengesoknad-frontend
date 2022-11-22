@@ -1,26 +1,37 @@
 import { BodyShort, Heading } from '@navikt/ds-react'
 import React from 'react'
 import useForceUpdate from 'use-force-update'
+import { useParams } from 'react-router-dom'
 
-import { useAppStore } from '../../../data/stores/app-store'
-import { Kvittering, Sporsmal, UtgiftTyper } from '../../../types/types'
+import { Kvittering, UtgiftTyper } from '../../../types/types'
 import { getLedetekst, tekst } from '../../../utils/tekster'
 import { formatterTall } from '../../../utils/utils'
 import Slettknapp from '../../slettknapp/slettknapp'
 import { hentSvar } from '../../sporsmal/hent-svar'
 import Vis from '../../vis'
+import { RouteParams } from '../../../app'
+import useSoknad from '../../../hooks/useSoknad'
 
 interface Props {
-    sporsmal: Sporsmal
     fjernKnapp?: boolean
+    setValgtKvittering: (arg0: Kvittering) => void
+    setOpenModal: (arg0: boolean) => void
 }
 
-const FilListe = ({ sporsmal, fjernKnapp }: Props) => {
-    const { setValgtKvittering, setOpenModal } = useAppStore()
-    const kvitteringer = hentSvar(sporsmal)
+const FilListe = ({ fjernKnapp, setValgtKvittering, setOpenModal }: Props) => {
+    const { id, stegId } = useParams<RouteParams>()
+    const { data: valgtSoknad } = useSoknad(id)
+
+    const stegNum = Number(stegId)
+    const spmIndex = stegNum - 1
     const forceUpdate = useForceUpdate()
 
-    const update = () => {
+    if (!valgtSoknad) return null
+
+    const sporsmal = valgtSoknad.sporsmal[spmIndex]
+    const kvitteringer = hentSvar(sporsmal)
+
+    const updateFilliste = () => {
         forceUpdate()
     }
 
@@ -73,7 +84,12 @@ const FilListe = ({ sporsmal, fjernKnapp }: Props) => {
                                 </td>
                                 <td className="belop">{formatterTall(kvittering.belop! / 100)} kr</td>
                                 <td>
-                                    <Slettknapp sporsmal={sporsmal} kvittering={kvittering} update={update} />
+                                    <Slettknapp
+                                        sporsmal={sporsmal}
+                                        kvittering={kvittering}
+                                        setOpenModal={setOpenModal}
+                                        updateFilliste={updateFilliste}
+                                    />
                                 </td>
                             </tr>
                         ))}

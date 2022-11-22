@@ -1,17 +1,20 @@
 import dayjs from 'dayjs'
 import { useFormContext } from 'react-hook-form'
+import { useParams } from 'react-router-dom'
 
 import { hentPeriodeListe, hentSvar } from '../../components/sporsmal/hent-svar'
-import { useAppStore } from '../../data/stores/app-store'
 import { TagTyper } from '../../types/enums'
 import { RSSoknadstype } from '../../types/rs-types/rs-soknadstype'
 import { Sporsmal } from '../../types/types'
 import { ukeDatoListe } from '../dato-utils'
 import { finnHovedSporsmal, hentSporsmal, hentUndersporsmal } from '../soknad-utils'
 import { getLedetekst, tekst } from '../tekster'
+import useSoknad from '../../hooks/useSoknad'
+import { RouteParams } from '../../app'
 
 const useValiderArbeidsgrad = (sporsmal: Sporsmal) => {
-    const { valgtSoknad } = useAppStore()
+    const { id } = useParams<RouteParams>()
+    const { data: valgtSoknad } = useSoknad(id)
     const { getValues } = useFormContext()
     if (
         !valgtSoknad ||

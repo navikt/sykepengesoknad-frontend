@@ -1,16 +1,26 @@
 import { Alert, BodyLong, BodyShort, Button, Label, Modal } from '@navikt/ds-react'
 import parser from 'html-react-parser'
-import React, { useRef } from 'react'
+import React, { useRef, useState } from 'react'
+import { useParams } from 'react-router-dom'
 
-import { useAppStore } from '../../../../data/stores/app-store'
 import { tekst } from '../../../../utils/tekster'
 import { Ekspanderbar } from '../../../ekspanderbar/ekspanderbar'
 import FilListe from '../../../filopplaster/fil-liste/fil-liste'
 import OpplastingForm from '../../../filopplaster/kvittering-modal/opplasting-form'
 import { SpmProps } from '../../sporsmal-form/sporsmal-form'
+import { Kvittering } from '../../../../types/types'
+import { RouteParams } from '../../../../app'
+import useSoknad from '../../../../hooks/useSoknad'
+import { useAppStore } from '../../../../data/stores/app-store'
 
 const Opplasting = ({ sporsmal }: SpmProps) => {
-    const { setValgtKvittering, openModal, setOpenModal } = useAppStore()
+    const { id } = useParams<RouteParams>()
+    const { data: valgtSoknad } = useSoknad(id)
+
+    const { setFeilmeldingTekst } = useAppStore()
+    const [valgtKvittering, setValgtKvittering] = useState<Kvittering>()
+    const [openModal, setOpenModal] = useState<boolean>(false)
+    const [valgtFil, setValgtFil] = useState<File>()
     const ikonRef = useRef<HTMLImageElement>(null)
 
     // eslint-disable-next-line
@@ -20,6 +30,7 @@ const Opplasting = ({ sporsmal }: SpmProps) => {
     const aktiverModal = () => {
         setOpenModal(true)
         setValgtKvittering(undefined)
+        setFeilmeldingTekst('')
     }
 
     const lukkModal = () => {
@@ -70,11 +81,17 @@ const Opplasting = ({ sporsmal }: SpmProps) => {
                 aria-labelledby="modal-tittel"
             >
                 <Modal.Content>
-                    <OpplastingForm sporsmal={sporsmal} />
+                    <OpplastingForm
+                        valgtSoknad={valgtSoknad}
+                        valgtKvittering={valgtKvittering}
+                        setOpenModal={setOpenModal}
+                        valgtFil={valgtFil}
+                        setValgtFil={setValgtFil}
+                    />
                 </Modal.Content>
             </Modal>
 
-            <FilListe sporsmal={sporsmal} fjernKnapp />
+            <FilListe fjernKnapp setValgtKvittering={setValgtKvittering} setOpenModal={setOpenModal} />
         </div>
     )
 }

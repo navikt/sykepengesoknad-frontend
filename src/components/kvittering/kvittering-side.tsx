@@ -1,6 +1,6 @@
 import { Alert, Button } from '@navikt/ds-react'
 import React, { useEffect, useState } from 'react'
-import { useParams } from 'react-router-dom'
+import { useHistory, useParams } from 'react-router-dom'
 
 import { RouteParams } from '../../app'
 import Endreknapp from '../../components/endreknapp/endreknapp'
@@ -19,6 +19,10 @@ import { GjenstaendeSoknader, hentGjenstaendeSoknader } from '../gjenstaende-sok
 import { hentHotjarJsTrigger, HotjarTrigger } from '../hotjar-trigger'
 import { UxSignalsWidget } from '../ux-signals/UxSignalsWidget'
 import Vis from '../vis'
+import useSoknad from '../../hooks/useSoknad'
+import useSoknader from '../../hooks/useSoknader'
+import { urlTilSoknad } from '../soknad/soknad-link'
+import QueryStatusPanel from '../queryStatusPanel/QueryStatusPanel'
 
 import Kvittering from './kvittering'
 import { harSvartJaFravaerForSykmeldingen, harSvartJaJobbetDuUnderveis } from './harSvartJa'
@@ -37,32 +41,41 @@ const brodsmuler: Brodsmule[] = [
 ]
 
 const KvitteringSide = () => {
-    const { valgtSoknad, soknader, setValgtSoknad, setValgtSykmelding, sykmeldinger, feilmeldingTekst } = useAppStore()
-    const [rerendreKvittering, setRerendrekvittering] = useState<Date>(new Date())
-    const { logEvent } = useAmplitudeInstance()
     const { id } = useParams<RouteParams>()
+    const { data: valgtSoknad } = useSoknad(id)
+    const { data: soknader } = useSoknader()
+
+    const { setValgtSykmelding, sykmeldinger, feilmeldingTekst } = useAppStore()
+    const [rerendreKvittering, setRerendrekvittering] = useState<Date>(new Date())
+    const history = useHistory()
+    const { logEvent } = useAmplitudeInstance()
 
     useEffect(() => {
-        const filtrertSoknad = soknader.find((soknad) => soknad.id === id)
-        setValgtSoknad(filtrertSoknad)
+        if (!valgtSoknad || !sykmeldinger) return
 
-        const sykmelding = sykmeldinger.find((sm) => sm.id === filtrertSoknad?.sykmeldingId)
+        if (valgtSoknad.status !== RSSoknadstatus.SENDT) {
+            const url = urlTilSoknad(valgtSoknad)
+            history.replace(url)
+            return
+        }
+
+        const sykmelding = sykmeldinger.find((sm) => sm.id === valgtSoknad.sykmeldingId)
         setValgtSykmelding(sykmelding)
 
         logEvent('skjema åpnet', {
             skjemanavn: 'sykepengesoknad',
-            soknadstype: filtrertSoknad?.soknadstype,
-            soknadstatus: filtrertSoknad?.status,
+            soknadstype: valgtSoknad.soknadstype,
+            soknadstatus: valgtSoknad.status,
         })
         // eslint-disable-next-line
-    }, [id, soknader, sykmeldinger])
+    }, [valgtSoknad, sykmeldinger])
 
     // eslint-disable-next-line @typescript-eslint/no-empty-function
     useEffect(() => {}, [rerendreKvittering])
 
-    if (!valgtSoknad) return null
+    if (!valgtSoknad || !soknader) return <QueryStatusPanel valgSoknadId={id} />
 
-    const erSendtTilArbeidsgiver = valgtSoknad.sendtTilArbeidsgiverDato !== null
+    const erSendtTilArbeidsgiver = valgtSoknad.sendtTilArbeidsgiverDato !== undefined
 
     const skalViseEndre = valgtSoknad.status !== RSSoknadstatus.KORRIGERT
     const skalViseSendTilArbeidsgiver =
@@ -94,7 +107,7 @@ const KvitteringSide = () => {
                                     onClick={() => {
                                         logEvent('knapp klikket', {
                                             tekst: tekst('kvittering.ferdig'),
-                                            soknadstype: valgtSoknad?.soknadstype,
+                                            soknadstype: valgtSoknad.soknadstype,
                                         })
                                         window.location.href = sykefravaerUrl()
                                     }}

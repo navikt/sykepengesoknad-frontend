@@ -19,6 +19,9 @@ import Opplysninger from '../opplysninger-fra-sykmelding/opplysninger'
 import { urlTilSoknad } from '../soknad/soknad-link'
 import GjenapneSoknad from '../soknader/avbryt/gjenapneknapp'
 import Vis from '../vis'
+import useSoknader from '../../hooks/useSoknader'
+import useSoknad from '../../hooks/useSoknad'
+import QueryStatusPanel from '../queryStatusPanel/QueryStatusPanel'
 
 const brodsmuler: Brodsmule[] = [
     {
@@ -35,32 +38,35 @@ const brodsmuler: Brodsmule[] = [
 ]
 
 const AvbruttSoknad = () => {
-    const { valgtSoknad, soknader, setValgtSoknad, setValgtSykmelding, sykmeldinger } = useAppStore()
-    const { logEvent } = useAmplitudeInstance()
     const { id } = useParams<RouteParams>()
+    const { data: valgtSoknad } = useSoknad(id)
+    const { data: soknader } = useSoknader()
+
+    const { setValgtSykmelding, sykmeldinger } = useAppStore()
+    const { logEvent } = useAmplitudeInstance()
     const history = useHistory()
 
     useEffect(() => {
-        const filtrertSoknad = soknader.find((soknad) => soknad.id === id)
-        setValgtSoknad(filtrertSoknad)
+        if (!valgtSoknad || !sykmeldinger) return
 
-        const sykmelding = sykmeldinger.find((sm) => sm.id === filtrertSoknad?.sykmeldingId)
+        if (valgtSoknad.status !== RSSoknadstatus.AVBRUTT) {
+            history.replace(urlTilSoknad(valgtSoknad))
+            return
+        }
+
+        const sykmelding = sykmeldinger.find((sm) => sm.id === valgtSoknad.sykmeldingId)
         setValgtSykmelding(sykmelding)
 
         logEvent('skjema åpnet', {
             skjemanavn: 'sykepengesoknad',
-            soknadstype: filtrertSoknad?.soknadstype,
-            soknadstatus: filtrertSoknad?.status,
+            soknadstype: valgtSoknad.soknadstype,
+            soknadstatus: valgtSoknad.status,
         })
         // eslint-disable-next-line
-    }, [id])
+    }, [valgtSoknad, sykmeldinger])
 
-    if (!valgtSoknad) return null
+    if (!valgtSoknad || !soknader) return <QueryStatusPanel valgSoknadId={id} />
 
-    if (valgtSoknad.status !== RSSoknadstatus.AVBRUTT) {
-        history.replace(urlTilSoknad(valgtSoknad))
-        return null
-    }
     const gjenstaendeSoknader = hentGjenstaendeSoknader(soknader)
 
     return (
@@ -71,8 +77,7 @@ const AvbruttSoknad = () => {
             <div className="limit">
                 <Alert variant="warning" style={{ marginBottom: '1rem' }}>
                     <BodyShort>
-                        {tekst('sykepengesoknad.avbrutt.tidspunkt')} {tilLesbarDatoMedArstall(valgtSoknad!.avbruttDato)}
-                        .
+                        {tekst('sykepengesoknad.avbrutt.tidspunkt')} {tilLesbarDatoMedArstall(valgtSoknad.avbruttDato)}.
                     </BodyShort>
                 </Alert>
                 <div className="avbrutt-info">

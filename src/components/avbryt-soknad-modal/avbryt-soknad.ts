@@ -1,6 +1,7 @@
 import { logger } from '@navikt/next-logger'
 import * as H from 'history'
 import React from 'react'
+import { QueryClient } from '@tanstack/react-query'
 
 import { RSSoknadstatus } from '../../types/rs-types/rs-soknadstatus'
 import { RSSoknadstype } from '../../types/rs-types/rs-soknadstype'
@@ -8,27 +9,26 @@ import { Soknad } from '../../types/types'
 import fetchMedRequestId, { AuthenticationError } from '../../utils/fetch'
 import { tekst } from '../../utils/tekster'
 import { urlTilSoknad } from '../soknad/soknad-link'
+import { RSSoknadmetadata } from '../../types/rs-types/rs-soknadmetadata'
 
 interface AvbrytSoknadRequest {
     valgtSoknad: Soknad
-    setSoknader: React.Dispatch<React.SetStateAction<Soknad[]>>
-    soknader: Soknad[]
-    setValgtSoknad: React.Dispatch<React.SetStateAction<Soknad | undefined>>
+    soknader: RSSoknadmetadata[]
+    queryClient: QueryClient
     history: H.History
     setFeilmeldingTekst: React.Dispatch<React.SetStateAction<string>>
 }
 
 export async function avbrytSoknad({
     valgtSoknad,
-    setSoknader,
     soknader,
-    setValgtSoknad,
+    queryClient,
     history,
     setFeilmeldingTekst,
 }: AvbrytSoknadRequest) {
     try {
         await fetchMedRequestId(
-            `/syk/sykepengesoknad/api/sykepengesoknad-backend/api/v2/soknader/${valgtSoknad!.id}/avbryt`,
+            `/syk/sykepengesoknad/api/sykepengesoknad-backend/api/v2/soknader/${valgtSoknad.id}/avbryt`,
             {
                 method: 'POST',
                 credentials: 'include',
@@ -48,8 +48,10 @@ export async function avbrytSoknad({
         valgtSoknad.soknadstype === RSSoknadstype.OPPHOLD_UTLAND ||
         valgtSoknad.status === RSSoknadstatus.UTKAST_TIL_KORRIGERING
     ) {
-        setSoknader(soknader.filter((s) => s.id !== valgtSoknad.id))
-        setValgtSoknad(undefined)
+        const nyeSoknader = soknader.filter((s) => s.id !== valgtSoknad.id)
+        queryClient.removeQueries(['soknad', valgtSoknad.id])
+        queryClient.setQueriesData(['soknader'], nyeSoknader)
+
         history.push('/')
     } else {
         const nySoknad = {
@@ -57,8 +59,10 @@ export async function avbrytSoknad({
             status: RSSoknadstatus.AVBRUTT,
             avbruttDato: new Date(),
         }
-        setSoknader(soknader.map((s) => (s.id === valgtSoknad!.id ? nySoknad : s)) as any)
-        setValgtSoknad(nySoknad)
+        const nyeSoknader = soknader.map((s) => (s.id === valgtSoknad!.id ? new RSSoknadmetadata(nySoknad) : s))
+        queryClient.setQueriesData(['soknad', valgtSoknad.id], nySoknad)
+        queryClient.setQueriesData(['soknader'], nyeSoknader)
+
         history.push(urlTilSoknad(nySoknad))
     }
 }

@@ -5,11 +5,12 @@ import { Soknad } from '../../types/types'
 import { tallTilSpråk } from '../../utils/tallTilSpraak'
 import { getLedetekst, tekst } from '../../utils/tekster'
 import { urlTilSoknad } from '../soknad/soknad-link'
+import { RSSoknadmetadata } from '../../types/rs-types/rs-soknadmetadata'
 
 import { GuidepanelMedKnapp } from './guidepanel-med-knapp'
 
 interface EldreUsendtSoknadProps {
-    eldreSoknad: Soknad
+    eldreSoknad: RSSoknadmetadata
     antall: number
 }
 
@@ -29,11 +30,11 @@ export const EldreUsendtSoknad = ({ eldreSoknad, antall }: EldreUsendtSoknadProp
 }
 
 interface EldreUsendteSoknader {
-    eldsteSoknad?: Soknad
+    eldsteSoknad?: RSSoknadmetadata
     antall: number
 }
 
-export function harEldreUsendtSoknad(valgtSoknad: Soknad, soknader: Soknad[]): EldreUsendteSoknader {
+export function harEldreUsendtSoknad(valgtSoknad: Soknad, soknader: RSSoknadmetadata[]): EldreUsendteSoknader {
     if (!valgtSoknad.fom) {
         return { antall: 0 }
     }

@@ -45,6 +45,7 @@ import '../components/soknader/soknader.less'
 import '../components/soknad/soknaden.less'
 import '../components/endreknapp/endre-soknad-modal.less'
 import '../components/sporsmal/bendiksen/paske-hjelpetekst.less'
+import '../components/queryStatusPanel/QueryStatusPanel.less'
 
 import { configureLogger } from '@navikt/next-logger'
 import dayjs from 'dayjs'
@@ -52,6 +53,7 @@ import nb from 'dayjs/locale/nb'
 import type { AppProps as NextAppProps } from 'next/app'
 import Head from 'next/head'
 import React, { PropsWithChildren } from 'react'
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
 
 import { LabsWarning } from '../components/labs-warning/LabsWarning'
 
@@ -69,6 +71,17 @@ configureLogger({
 })
 
 function MyApp({ Component, pageProps }: AppProps): JSX.Element {
+    const queryClient = new QueryClient({
+        defaultOptions: {
+            queries: {
+                // Setting this to true causes query request after initial
+                // mount even if the query was hydrated from the server side.
+                refetchOnMount: false,
+                refetchOnWindowFocus: false,
+            },
+        },
+    })
+
     return (
         <>
             <Head>
@@ -76,10 +89,12 @@ function MyApp({ Component, pageProps }: AppProps): JSX.Element {
                 <meta name="robots" content="noindex" />
                 <meta name="viewport" content="width=device-width, initial-scale=1" />
             </Head>
-            <div id="root">
-                <LabsWarning />
-                <Component {...pageProps} />
-            </div>
+            <QueryClientProvider client={queryClient}>
+                <div id="root">
+                    <LabsWarning />
+                    <Component {...pageProps} />
+                </div>
+            </QueryClientProvider>
         </>
     )
 }

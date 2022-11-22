@@ -3,16 +3,19 @@ import React, { useState } from 'react'
 import { useParams } from 'react-router-dom'
 
 import { RouteParams } from '../../app'
-import { useAppStore } from '../../data/stores/app-store'
 import { minSideUrl } from '../../utils/environment'
 import { tekst } from '../../utils/tekster'
 import { useAmplitudeInstance } from '../amplitude/amplitude'
+import useSoknad from '../../hooks/useSoknad'
 
 const AvsluttOgFortsettSenere = () => {
+    const { id, stegId } = useParams<RouteParams>()
+    const { data: valgtSoknad } = useSoknad(id)
+
     const { logEvent } = useAmplitudeInstance()
     const [aapen, setAapen] = useState<boolean>(false)
-    const { stegId } = useParams<RouteParams>()
-    const { valgtSoknad } = useAppStore()
+
+    if (!valgtSoknad) return null
 
     return (
         <>
@@ -21,7 +24,7 @@ const AvsluttOgFortsettSenere = () => {
                 onClick={(e) => {
                     logEvent('modal åpnet', {
                         component: tekst('avslutt.popup.tittel'),
-                        soknadstype: valgtSoknad?.soknadstype,
+                        soknadstype: valgtSoknad.soknadstype,
                         steg: stegId,
                     })
                     setAapen(true)
@@ -36,7 +39,7 @@ const AvsluttOgFortsettSenere = () => {
                     setAapen(false)
                     logEvent('modal lukket', {
                         component: tekst('avslutt.popup.tittel'),
-                        soknadstype: valgtSoknad?.soknadstype,
+                        soknadstype: valgtSoknad.soknadstype,
                         steg: stegId,
                     })
                 }}
@@ -55,7 +58,7 @@ const AvsluttOgFortsettSenere = () => {
                         onClick={() => {
                             logEvent('knapp klikket', {
                                 tekst: tekst('avslutt.popup.ja'),
-                                soknadstype: valgtSoknad?.soknadstype,
+                                soknadstype: valgtSoknad.soknadstype,
                                 component: tekst('avslutt.popup.tittel'),
                                 steg: stegId,
                             })
@@ -74,7 +77,7 @@ const AvsluttOgFortsettSenere = () => {
                             setAapen(false)
                             logEvent('knapp klikket', {
                                 tekst: tekst('avslutt.popup.nei'),
-                                soknadstype: valgtSoknad?.soknadstype,
+                                soknadstype: valgtSoknad.soknadstype,
                                 component: tekst('avslutt.popup.tittel'),
                                 steg: stegId,
                             })

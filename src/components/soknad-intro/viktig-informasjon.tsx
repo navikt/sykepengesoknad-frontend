@@ -1,13 +1,16 @@
 import { BodyLong, GuidePanel, Label } from '@navikt/ds-react'
 import React from 'react'
+import { useParams } from 'react-router-dom'
 
-import { useAppStore } from '../../data/stores/app-store'
 import { tekst } from '../../utils/tekster'
+import { RouteParams } from '../../app'
+import useSoknad from '../../hooks/useSoknad'
 
 import VeilederSVG from './veileder'
 
 export const ViktigInformasjon = () => {
-    const { valgtSoknad } = useAppStore()
+    const { id } = useParams<RouteParams>()
+    const { data: valgtSoknad } = useSoknad(id)
 
     if (!valgtSoknad) {
         return null

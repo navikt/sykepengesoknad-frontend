@@ -17,19 +17,9 @@ export interface TidsPeriode {
     tom: Date
 }
 
-export interface NaermesteLeder {
-    navn: string
-    epost: string
-    mobil: string
-    orgnummer: string
-    organisasjonsnavn: string
-    aktivTom: string
-}
-
 export interface Arbeidsgiver {
     navn: string
     orgnummer: string
-    naermesteLeder?: NaermesteLeder
 }
 
 export class Soknad {
@@ -37,7 +27,7 @@ export class Soknad {
     sykmeldingId: string
     soknadstype: RSSoknadstype
     status: RSSoknadstatus
-    arbeidssituasjon: RSArbeidssituasjon | null
+    arbeidssituasjon?: RSArbeidssituasjon
     fom?: Date
     tom?: Date
     avbruttDato?: Date
@@ -47,7 +37,7 @@ export class Soknad {
     arbeidsgiver?: Arbeidsgiver
     sporsmal: Sporsmal[]
     soknadPerioder: RSSoknadsperiode[]
-    korrigerer: string | null
+    korrigerer?: string
     merknaderFraSykmelding?: RSMerknad[]
 
     constructor(soknad: RSSoknad) {
@@ -59,19 +49,18 @@ export class Soknad {
         this.status = RSSoknadstatus[stat]
         this.fom = dayjsToDate(soknad.fom!)!
         this.tom = dayjsToDate(soknad.tom!)!
-        this.korrigerer = soknad.korrigerer
+        this.korrigerer = soknad.korrigerer || undefined
         this.avbruttDato = dayjsToDate(soknad.avbruttDato!)!
         this.opprettetDato = dayjsToDate(soknad.opprettetDato!)!
         this.sendtTilNAVDato = dayjsToDate(soknad.sendtTilNAVDato!)!
         this.sendtTilArbeidsgiverDato = dayjsToDate(soknad.sendtTilArbeidsgiverDato!)!
         if (soknad.arbeidsgiver) {
             this.arbeidsgiver = {
-                naermesteLeder: soknad.arbeidsgiver.naermesteLeder,
                 navn: soknad.arbeidsgiver.navn,
                 orgnummer: soknad.arbeidsgiver.orgnummer,
             }
         }
-        this.arbeidssituasjon = soknad.arbeidssituasjon as any
+        this.arbeidssituasjon = soknad.arbeidssituasjon ? RSArbeidssituasjon[soknad.arbeidssituasjon] : undefined
         this.sporsmal = rsToSporsmal(soknad.sporsmal, undefined as any, true)
         this.soknadPerioder = soknad.soknadPerioder
         this.merknaderFraSykmelding = soknad.merknaderFraSykmelding

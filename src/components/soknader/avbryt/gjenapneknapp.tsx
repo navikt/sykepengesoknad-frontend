@@ -1,32 +1,23 @@
 import { Button } from '@navikt/ds-react'
 import { logger } from '@navikt/next-logger'
-import React, { useEffect, useState } from 'react'
-import { useHistory, useParams } from 'react-router'
+import React, { useState } from 'react'
+import { useParams } from 'react-router'
+import { useQueryClient } from '@tanstack/react-query'
 
 import { RouteParams } from '../../../app'
-import { useAppStore } from '../../../data/stores/app-store'
-import { RSSoknadstatus } from '../../../types/rs-types/rs-soknadstatus'
 import fetchMedRequestId, { AuthenticationError } from '../../../utils/fetch'
 import { useAmplitudeInstance } from '../../amplitude/amplitude'
+import useSoknad from '../../../hooks/useSoknad'
 
 import styles from './gjenapneknapp.module.css'
 
 const GjenapneSoknad = () => {
-    const { valgtSoknad, setValgtSoknad, setValgtSykmelding, sykmeldinger, soknader, setSoknader } = useAppStore()
-    const history = useHistory()
     const { id } = useParams<RouteParams>()
+    const { data: valgtSoknad } = useSoknad(id)
+    const queryClient = useQueryClient()
+
     const [gjenapner, setGjenapner] = useState<boolean>(false)
     const { logEvent } = useAmplitudeInstance()
-
-    useEffect(() => {
-        if (!valgtSoknad) {
-            const filtrertSoknad = soknader.find((soknad) => soknad.id === id)
-            setValgtSoknad(filtrertSoknad)
-            const sykmelding = sykmeldinger.find((sm) => sm.id === filtrertSoknad?.sykmeldingId)
-            setValgtSykmelding(sykmelding)
-        }
-        // eslint-disable-next-line
-    }, [])
 
     const gjenapneSoknad = async () => {
         if (gjenapner) {
@@ -50,6 +41,8 @@ const GjenapneSoknad = () => {
                     headers: { 'Content-Type': 'application/json' },
                 },
             )
+            await queryClient.invalidateQueries(['soknad', valgtSoknad!.id])
+            queryClient.invalidateQueries(['soknader'])
         } catch (e: any) {
             if (!(e instanceof AuthenticationError)) {
                 logger.warn(e)
@@ -58,13 +51,6 @@ const GjenapneSoknad = () => {
         } finally {
             setGjenapner(false)
         }
-
-        valgtSoknad!.status = RSSoknadstatus.NY
-        valgtSoknad!.avbruttDato = undefined
-        setValgtSoknad(valgtSoknad)
-        soknader[soknader.findIndex((sok) => sok.id === valgtSoknad!.id)] = valgtSoknad!
-        setSoknader(soknader)
-        history.push(`/soknader/${valgtSoknad!.id}/1`)
     }
 
     return (

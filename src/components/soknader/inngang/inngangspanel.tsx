@@ -1,10 +1,10 @@
 import { Tag } from '@navikt/ds-react'
 import React from 'react'
 
-import { RSSoknadstatus } from '../../../types/rs-types/rs-soknadstatus'
-import { Soknad } from '../../../types/types'
+import { RSSoknadstatus, RSSoknadstatusType } from '../../../types/rs-types/rs-soknadstatus'
 import SoknadLink from '../../soknad/soknad-link'
 import Vis from '../../vis'
+import { RSSoknadmetadata } from '../../../types/rs-types/rs-soknadmetadata'
 
 interface InngangsIkonProps {
     ikon: string
@@ -30,7 +30,7 @@ export const InngangsIkon = ({ ikon, ikonHover }: InngangsIkonProps) => {
 }
 
 interface InngangspanelProps {
-    soknad: Soknad
+    soknad: RSSoknadmetadata
     children: React.ReactNode
     className?: string
 }
@@ -44,7 +44,7 @@ export const Inngangspanel = ({ soknad, children, className }: InngangspanelProp
 }
 
 interface InngangsStatusProps {
-    status: RSSoknadstatus
+    status: RSSoknadstatusType
     tekst: string
 }
 
@@ -59,7 +59,7 @@ export const InngangsStatus = ({ status, tekst }: InngangsStatusProps) => {
     )
 }
 
-const statusTilType = (status: RSSoknadstatus) => {
+const statusTilType = (status: RSSoknadstatusType) => {
     switch (status) {
         case RSSoknadstatus.SENDT:
             return 'success'

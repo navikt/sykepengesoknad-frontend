@@ -86,7 +86,7 @@ export const ukeDatoListe = (min: string, max: string) => {
 }
 
 export const dayjsToDate = (dato: string) => {
-    return dato !== null ? dayjs(dato).toDate() : null
+    return dato !== null ? dayjs(dato).toDate() : undefined
 }
 
 export const sendtForMerEnn30DagerSiden = (sendtTilArbeidsgiverDato?: Date, sendtTilNAVDato?: Date) => {

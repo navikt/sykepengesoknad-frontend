@@ -2,13 +2,12 @@ import { logger } from '@navikt/next-logger'
 import React, { useCallback, useEffect, useState } from 'react'
 import { FormProvider, useForm } from 'react-hook-form'
 import { useHistory, useParams } from 'react-router-dom'
+import { useQueryClient } from '@tanstack/react-query'
 
 import { RouteParams } from '../../../app'
 import { useAppStore } from '../../../data/stores/app-store'
 import { TagTyper } from '../../../types/enums'
 import { RSOppdaterSporsmalResponse } from '../../../types/rs-types/rest-response/rs-oppdatersporsmalresponse'
-import { RSMottaker } from '../../../types/rs-types/rs-mottaker'
-import { RSSoknadstatus } from '../../../types/rs-types/rs-soknadstatus'
 import { RSSoknadstype } from '../../../types/rs-types/rs-soknadstype'
 import { sporsmalToRS } from '../../../types/rs-types/rs-sporsmal'
 import { RSSvartype } from '../../../types/rs-types/rs-svartype'
@@ -22,13 +21,15 @@ import Oppsummering from '../../oppsummering/oppsummering'
 import Vis from '../../vis'
 import BjornOverSporsmalstekst from '../bjorn/bjorn-over-sporsmalstekst'
 import { EndringUtenEndringModal } from '../endring-uten-endring/endring-uten-endring-modal'
-import { harLikeSvar } from '../endring-uten-endring/har-like-svar'
 import { hentFormState } from '../hent-svar'
 import InfotekstOverSubmit from '../infotekst-over-submit'
 import { settSvar } from '../sett-svar'
 import SporsmalSwitch from '../sporsmal-switch'
 import { pathUtenSteg } from '../sporsmal-utils'
 import CheckboxPanel from '../typer/checkbox-panel'
+import useSoknad from '../../../hooks/useSoknad'
+import { RSSoknadstatus } from '../../../types/rs-types/rs-soknadstatus'
+import { harLikeSvar } from '../endring-uten-endring/har-like-svar'
 
 import Knapperad from './knapperad'
 import SendesTil from './sendes-til'
@@ -39,13 +40,16 @@ export interface SpmProps {
 }
 
 const SporsmalForm = () => {
-    const { soknader, setSoknader, setValgtSoknad, valgtSoknad, mottaker, setTop, setMottaker, setFeilState } =
-        useAppStore()
+    const { id, stegId } = useParams<RouteParams>()
+    const { data: valgtSoknad } = useSoknad(id)
+    const { data: korrigerer } = useSoknad(valgtSoknad?.korrigerer, valgtSoknad?.korrigerer !== undefined)
+    const queryClient = useQueryClient()
+
+    const { setTop, setMottaker, setFeilState } = useAppStore()
     const { logEvent } = useAmplitudeInstance()
     const [erSiste, setErSiste] = useState<boolean>(false)
     const [poster, setPoster] = useState<boolean>(false)
     const [endringUtenEndringAapen, setEndringUtenEndringAapen] = useState<boolean>(false)
-    const { stegId } = useParams<RouteParams>()
     const history = useHistory()
     const spmIndex = parseInt(stegId) - 1
     const methods = useForm({
@@ -60,6 +64,13 @@ const SporsmalForm = () => {
 
     useEffect(() => {
         methods.reset(hentFormState(sporsmal), { keepValues: false })
+
+        const sisteSide = erSisteSpm()
+        setErSiste(sisteSide)
+
+        if (sisteSide) {
+            hentMottaker().catch((e: Error) => logger.error(e))
+        }
         // eslint-disable-next-line
     }, [sporsmal])
 
@@ -70,23 +81,14 @@ const SporsmalForm = () => {
         // eslint-disable-next-line
     }, [methods.formState.isSubmitSuccessful])
 
-    useEffect(() => {
-        function erSiste() {
-            const snartSlutt =
-                sporsmal.svartype === RSSvartype.IKKE_RELEVANT || sporsmal.svartype === RSSvartype.CHECKBOX_PANEL
-            if (erUtlandssoknad) {
-                return sporsmal.tag === TagTyper.BEKREFT_OPPLYSNINGER_UTLAND_INFO
-            }
-            return snartSlutt && spmIndex === valgtSoknad!.sporsmal.length - 2
+    const erSisteSpm = () => {
+        const snartSlutt =
+            sporsmal.svartype === RSSvartype.IKKE_RELEVANT || sporsmal.svartype === RSSvartype.CHECKBOX_PANEL
+        if (erUtlandssoknad) {
+            return sporsmal.tag === TagTyper.BEKREFT_OPPLYSNINGER_UTLAND_INFO
         }
-
-        const sisteSide = erSiste()
-        setErSiste(sisteSide)
-        if (sisteSide) {
-            hentMottaker().catch((e: Error) => logger.error(e))
-        }
-        // eslint-disable-next-line
-    }, [spmIndex])
+        return snartSlutt && spmIndex === valgtSoknad!.sporsmal.length - 2
+    }
 
     const sendOppdaterSporsmal = async () => {
         let soknad = valgtSoknad
@@ -127,9 +129,7 @@ const SporsmalForm = () => {
                 : (soknad!.sporsmal[spmIndex] = new Sporsmal(spm, undefined as any, true))
         }
 
-        soknader[soknader.findIndex((sok) => sok.id === soknad!.id)] = soknad as any
-        setSoknader(soknader)
-        setValgtSoknad(soknad)
+        queryClient.setQueriesData(['soknad', id], soknad)
     }
 
     const hentMottaker = useCallback(async () => {
@@ -159,10 +159,9 @@ const SporsmalForm = () => {
         if (!valgtSoknad) {
             return
         }
-        if (valgtSoknad.status == RSSoknadstatus.UTKAST_TIL_KORRIGERING) {
-            const originalSoknad = soknader.find((a) => a.id == valgtSoknad.korrigerer)
 
-            if (originalSoknad && harLikeSvar(originalSoknad, valgtSoknad)) {
+        if (valgtSoknad.status == RSSoknadstatus.UTKAST_TIL_KORRIGERING) {
+            if (korrigerer && harLikeSvar(korrigerer, valgtSoknad)) {
                 setEndringUtenEndringAapen(true)
                 return
             }
@@ -170,7 +169,7 @@ const SporsmalForm = () => {
 
         try {
             await fetchMedRequestId(
-                `/syk/sykepengesoknad/api/sykepengesoknad-backend/api/v2/soknader/${valgtSoknad!.id}/send`,
+                `/syk/sykepengesoknad/api/sykepengesoknad-backend/api/v2/soknader/${valgtSoknad.id}/send`,
                 {
                     method: 'POST',
                     credentials: 'include',
@@ -185,26 +184,13 @@ const SporsmalForm = () => {
             return
         }
 
-        if (mottaker === RSMottaker.ARBEIDSGIVER) {
-            valgtSoknad.sendtTilArbeidsgiverDato = new Date()
-        }
-        if (mottaker === RSMottaker.NAV) {
-            valgtSoknad.sendtTilNAVDato = new Date()
-        }
-        if (mottaker === RSMottaker.ARBEIDSGIVER_OG_NAV) {
-            valgtSoknad.sendtTilArbeidsgiverDato = new Date()
-            valgtSoknad.sendtTilNAVDato = new Date()
-        }
+        await queryClient.invalidateQueries(['soknad', valgtSoknad.id])
 
-        valgtSoknad.status = RSSoknadstatus.SENDT
-        setValgtSoknad(valgtSoknad)
-        soknader[soknader.findIndex((sok) => sok.id === valgtSoknad.id)] = valgtSoknad
-        if (valgtSoknad.korrigerer !== null) {
-            soknader.find((sok) => sok.id === valgtSoknad.korrigerer)!.status = RSSoknadstatus.KORRIGERT
-        }
-        setSoknader(soknader)
+        queryClient.invalidateQueries(['soknader'])
 
-        history.push(`/kvittering/${valgtSoknad!.id}${window.location.search}`)
+        if (valgtSoknad.korrigerer !== undefined) {
+            queryClient.invalidateQueries(['soknad', valgtSoknad.korrigerer])
+        }
     }
 
     const preSubmit = () => {
@@ -259,6 +245,8 @@ const SporsmalForm = () => {
         }
     }
 
+    if (!valgtSoknad) return null
+
     return (
         <>
             <EndringUtenEndringModal aapen={endringUtenEndringAapen} setAapen={setEndringUtenEndringAapen} />
@@ -278,10 +266,10 @@ const SporsmalForm = () => {
                         hvis={erSiste && !erUtlandssoknad}
                         render={() => (
                             <>
-                                <Oppsummering ekspandert={false} />
+                                <Oppsummering ekspandert={false} sporsmal={valgtSoknad.sporsmal} />
                                 <Opplysninger ekspandert={false} steg={sporsmal.tag} />
                                 <CheckboxPanel sporsmal={nesteSporsmal} />
-                                <SendesTil />
+                                <SendesTil soknad={valgtSoknad} />
                             </>
                         )}
                     />
@@ -290,7 +278,7 @@ const SporsmalForm = () => {
                         hvis={erSiste && erUtlandssoknad}
                         render={() => (
                             <>
-                                <Oppsummering ekspandert={false} />
+                                <Oppsummering ekspandert={false} sporsmal={valgtSoknad.sporsmal} />
                                 <CheckboxPanel sporsmal={sporsmal} />
                             </>
                         )}
@@ -298,18 +286,18 @@ const SporsmalForm = () => {
 
                     <Vis
                         hvis={
-                            (valgtSoknad!.soknadstype === RSSoknadstype.REISETILSKUDD &&
+                            (valgtSoknad.soknadstype === RSSoknadstype.REISETILSKUDD &&
                                 sporsmal.svartype !== RSSvartype.KVITTERING) ||
-                            valgtSoknad!.soknadstype !== RSSoknadstype.REISETILSKUDD
+                            valgtSoknad.soknadstype !== RSSoknadstype.REISETILSKUDD
                         }
                         render={() => <FeilOppsummering sporsmal={sporsmal} />}
                     />
 
-                    <InfotekstOverSubmit sporsmal={sporsmal} />
+                    <InfotekstOverSubmit soknad={valgtSoknad} sporsmal={sporsmal} />
 
                     <Vis
-                        hvis={skalViseKnapperad(valgtSoknad!, sporsmal, methods.getValues())}
-                        render={() => <Knapperad poster={poster} />}
+                        hvis={skalViseKnapperad(valgtSoknad, sporsmal, methods.getValues())}
+                        render={() => <Knapperad soknad={valgtSoknad} poster={poster} />}
                     />
                 </form>
             </FormProvider>

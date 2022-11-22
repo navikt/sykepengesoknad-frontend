@@ -2,31 +2,37 @@
 import { Alert, Button, Heading, Modal } from '@navikt/ds-react'
 import { logger } from '@navikt/next-logger'
 import React, { useState } from 'react'
+import { useParams } from 'react-router-dom'
+import { useQueryClient } from '@tanstack/react-query'
 
-import { useAppStore } from '../../data/stores/app-store'
 import { Kvittering, Sporsmal, svarverdiToKvittering } from '../../types/types'
 import fetchMedRequestId, { AuthenticationError } from '../../utils/fetch'
 import { tekst } from '../../utils/tekster'
 import Vis from '../vis'
+import useSoknad from '../../hooks/useSoknad'
+import { RouteParams } from '../../app'
 
 interface SlettknappProps {
     sporsmal: Sporsmal
     kvittering: Kvittering
-    update?: () => void
+    setOpenModal: (arg0: boolean) => void
+    updateFilliste?: () => void
 }
 
-const Slettknapp = ({ sporsmal, kvittering, update }: SlettknappProps) => {
-    const { valgtSoknad, setValgtSoknad, feilmeldingTekst, setFeilmeldingTekst, setOpenModal } = useAppStore()
+const Slettknapp = ({ sporsmal, kvittering, setOpenModal, updateFilliste }: SlettknappProps) => {
+    const { id } = useParams<RouteParams>()
+    const { data: valgtSoknad } = useSoknad(id)
+    const queryClient = useQueryClient()
+
     const [vilSlette, setVilSlette] = useState<boolean>(false)
     const [sletter, setSletter] = useState<boolean>(false)
+    const [feilmelding, setFeilmelding] = useState<string>()
 
     const nullstillFeilmelding = () => {
-        setFeilmeldingTekst('')
+        setFeilmelding(undefined)
     }
 
     const slettKvittering = async () => {
-        let feilVedSletting = false
-
         if (sletter) {
             return
         } else {
@@ -51,28 +57,28 @@ const Slettknapp = ({ sporsmal, kvittering, update }: SlettknappProps) => {
         } catch (e: any) {
             if (!(e instanceof AuthenticationError)) {
                 logger.warn(e)
-                feilVedSletting = true
-                setFeilmeldingTekst(tekst('opplasting_modal.slett.feilmelding'))
+                setFeilmelding(tekst('opplasting_modal.slett.feilmelding'))
             }
+            setSletter(false)
             return
         }
 
         sporsmal.svarliste.svar.splice(idx, 1)
         valgtSoknad!.sporsmal[valgtSoknad!.sporsmal.findIndex((spm) => spm.id === sporsmal.id)] = sporsmal
-        setValgtSoknad(valgtSoknad)
+        queryClient.setQueriesData(['soknad', valgtSoknad!.id], valgtSoknad)
 
         setOpenModal(false)
         setSletter(false)
-        setVilSlette(feilVedSletting)
-        if (update) {
-            update()
+        setVilSlette(false)
+        if (updateFilliste) {
+            updateFilliste()
         }
     }
 
     return (
         <>
             <Vis
-                hvis={update}
+                hvis={updateFilliste}
                 render={() => (
                     <button
                         type="button"
@@ -90,7 +96,7 @@ const Slettknapp = ({ sporsmal, kvittering, update }: SlettknappProps) => {
             />
 
             <Vis
-                hvis={!update}
+                hvis={!updateFilliste}
                 render={() => (
                     <Button
                         variant="danger"
@@ -121,7 +127,7 @@ const Slettknapp = ({ sporsmal, kvittering, update }: SlettknappProps) => {
                         {tekst('opplasting_modal.vil-slette.ja')}
                     </Button>
                     <div aria-live="polite">
-                        <Vis hvis={feilmeldingTekst} render={() => <Alert variant="error">{feilmeldingTekst}</Alert>} />
+                        <Vis hvis={feilmelding} render={() => <Alert variant="error">{feilmelding}</Alert>} />
                     </div>
                     <Button
                         variant="secondary"

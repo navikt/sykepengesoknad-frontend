@@ -15,11 +15,12 @@ describe('Tester endring uten en endringer', () => {
         // Ny søknad
         cy.url().should('not.include', `/sendt/${soknad.id}`)
         cy.url().should('include', '/1')
-
-        cy.contains('Gå videre').click()
     })
 
     it('Svarer det samme søknaden', function () {
+        cy.contains('kan være straffbart').click()
+        cy.contains('Gå videre').click()
+
         cy.url().should('include', '/2')
         cy.contains('Gå videre').click()
 

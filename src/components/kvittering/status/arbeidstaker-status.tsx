@@ -1,70 +1,68 @@
 import { Detail, Label } from '@navikt/ds-react'
 import dayjs from 'dayjs'
-import React, { useEffect, useState } from 'react'
+import React from 'react'
+import { useParams } from 'react-router-dom'
 
-import { useAppStore } from '../../../data/stores/app-store'
 import { tekst } from '../../../utils/tekster'
 import Avkrysset from '../../oppsummering/utdrag/avkrysset'
 import Vis from '../../vis'
+import { RouteParams } from '../../../app'
+import useSoknad from '../../../hooks/useSoknad'
 
 import { Mottaker } from './kvittering-status'
 
 const ArbeidstakerStatus = () => {
-    const { valgtSoknad } = useAppStore()
-    const [tilArbNavn, setTilArbNavn] = useState<string>()
-    const [tilOrg, setTilOrg] = useState<string>()
-    const [tilNavDato, setTilNavDato] = useState<string>()
-    const [tilArbDato, setTilArbDato] = useState<string>()
+    const { id } = useParams<RouteParams>()
+    const { data: valgtSoknad } = useSoknad(id)
 
     let medKopi = tekst('kvittering.med-kopi-til-nav')
     if (valgtSoknad!.sendtTilArbeidsgiverDato && valgtSoknad!.sendtTilNAVDato) {
         medKopi = ''
     }
 
-    useEffect(() => {
-        opprettDatoer()
-        // eslint-disable-next-line
-    }, [])
-
-    const opprettDatoer = () => {
-        const sendtTilNav = valgtSoknad?.sendtTilNAVDato
-        if (sendtTilNav) {
-            const datoNav = dayjs(sendtTilNav).format('dddd D. MMM, kl HH:mm')
-            setTilNavDato(datoNav.charAt(0).toUpperCase() + datoNav.slice(1))
-        }
-
-        const sendtTilArb = valgtSoknad?.sendtTilArbeidsgiverDato
-        if (sendtTilArb) {
-            const datoArb = dayjs(sendtTilArb).format('dddd D. MMM, kl HH:mm')
-            setTilArbDato(datoArb.charAt(0).toUpperCase() + datoArb.slice(1))
-            setTilArbNavn(valgtSoknad?.arbeidsgiver?.navn ? valgtSoknad?.arbeidsgiver?.navn : Mottaker.ARBEIDSGIVER)
-            setTilOrg(valgtSoknad?.arbeidsgiver?.orgnummer ? `(Org.nr. ${valgtSoknad.arbeidsgiver.orgnummer})` : '')
-        }
+    const tilNavDato = () => {
+        const datoNav = dayjs(valgtSoknad?.sendtTilNAVDato).format('dddd D. MMM, kl HH:mm')
+        return datoNav.charAt(0).toUpperCase() + datoNav.slice(1)
     }
+
+    const tilArbDato = () => {
+        const datoArb = dayjs(valgtSoknad?.sendtTilArbeidsgiverDato).format('dddd D. MMM, kl HH:mm')
+        return datoArb.charAt(0).toUpperCase() + datoArb.slice(1)
+    }
+
+    const tilArbNavn = () => {
+        return valgtSoknad?.arbeidsgiver?.navn ? valgtSoknad?.arbeidsgiver?.navn : Mottaker.ARBEIDSGIVER
+    }
+
+    const tilOrg = () => {
+        return valgtSoknad?.arbeidsgiver?.orgnummer ? `(Org.nr. ${valgtSoknad.arbeidsgiver.orgnummer})` : ''
+    }
+
+    if (!valgtSoknad) return null
 
     return (
         <Vis
-            hvis={valgtSoknad!.sendtTilArbeidsgiverDato || valgtSoknad!.sendtTilNAVDato}
+            hvis={valgtSoknad.sendtTilArbeidsgiverDato || valgtSoknad.sendtTilNAVDato}
             render={() => (
                 <div className="sendt-inner">
                     <Vis
-                        hvis={valgtSoknad!.sendtTilArbeidsgiverDato}
+                        hvis={valgtSoknad.sendtTilArbeidsgiverDato}
                         render={() => (
                             <>
                                 <Label as="h3" className="sendt-tittel">
                                     {tekst('kvittering.sendt-til')}
                                 </Label>
-                                <Avkrysset tekst={`${tilArbNavn} ${tilOrg}${medKopi}`} />
-                                <Detail size="small">{tilArbDato}</Detail>
+                                <Avkrysset tekst={`${tilArbNavn()} ${tilOrg()}${medKopi}`} />
+                                <Detail size="small">{tilArbDato()}</Detail>
                             </>
                         )}
                     />
                     <Vis
-                        hvis={valgtSoknad!.sendtTilNAVDato}
+                        hvis={valgtSoknad.sendtTilNAVDato}
                         render={() => (
                             <>
                                 <Avkrysset tekst={Mottaker.NAV} />
-                                <Detail size="small">{tilNavDato}</Detail>
+                                <Detail size="small">{tilNavDato()}</Detail>
                             </>
                         )}
                     />

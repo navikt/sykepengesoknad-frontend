@@ -1,6 +1,7 @@
 import { BodyLong, Button, Heading, Modal } from '@navikt/ds-react'
 import React, { useState } from 'react'
 import { useHistory, useParams } from 'react-router-dom'
+import { useQueryClient } from '@tanstack/react-query'
 
 import { RouteParams } from '../../app'
 import { useAppStore } from '../../data/stores/app-store'
@@ -8,15 +9,19 @@ import { RSSoknadstatus } from '../../types/rs-types/rs-soknadstatus'
 import { tekst } from '../../utils/tekster'
 import { useAmplitudeInstance } from '../amplitude/amplitude'
 import { EndringUtenEndringModal } from '../sporsmal/endring-uten-endring/endring-uten-endring-modal'
+import useSoknad from '../../hooks/useSoknad'
+import useSoknader from '../../hooks/useSoknader'
 
 import { avbrytSoknad } from './avbryt-soknad'
 
 const AvbrytKorrigering = () => {
+    const { id, stegId } = useParams<RouteParams>()
+    const { data: valgtSoknad } = useSoknad(id)
     const { logEvent } = useAmplitudeInstance()
 
     const [aapen, setAapen] = useState<boolean>(false)
-    const { valgtSoknad } = useAppStore()
-    const { stegId } = useParams<RouteParams>()
+
+    if (!valgtSoknad) return null
 
     return (
         <div>
@@ -26,7 +31,7 @@ const AvbrytKorrigering = () => {
                 onClick={(e) => {
                     logEvent('modal åpnet', {
                         component: tekst('avbryt.korrigering.knapp'),
-                        soknadstype: valgtSoknad?.soknadstype,
+                        soknadstype: valgtSoknad.soknadstype,
                         steg: stegId,
                     })
                     setAapen(true)
@@ -41,13 +46,17 @@ const AvbrytKorrigering = () => {
 }
 
 const AvbrytSoknadModal = () => {
+    const { id, stegId } = useParams<RouteParams>()
+    const { data: valgtSoknad } = useSoknad(id)
+    const { data: soknader } = useSoknader()
+    const queryClient = useQueryClient()
+
     const { logEvent } = useAmplitudeInstance()
     const [aapen, setAapen] = useState<boolean>(false)
-    const { stegId } = useParams<RouteParams>()
-    const { valgtSoknad, soknader, setSoknader, setValgtSoknad, setFeilmeldingTekst } = useAppStore()
+    const { setFeilmeldingTekst } = useAppStore()
     const history = useHistory()
 
-    if (!valgtSoknad) {
+    if (!valgtSoknad || !soknader) {
         return null
     }
     if (valgtSoknad.status == RSSoknadstatus.UTKAST_TIL_KORRIGERING) {
@@ -106,9 +115,8 @@ const AvbrytSoknadModal = () => {
                             })
                             avbrytSoknad({
                                 valgtSoknad: valgtSoknad,
-                                setSoknader: setSoknader,
                                 soknader: soknader,
-                                setValgtSoknad: setValgtSoknad,
+                                queryClient: queryClient,
                                 history: history,
                                 setFeilmeldingTekst: setFeilmeldingTekst,
                             })

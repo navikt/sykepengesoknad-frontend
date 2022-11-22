@@ -1,18 +1,21 @@
 import { Heading } from '@navikt/ds-react'
 import React from 'react'
+import { useParams } from 'react-router'
 
-import { useAppStore } from '../../data/stores/app-store'
 import { RSSoknadstype } from '../../types/rs-types/rs-soknadstype'
 import { tilLesbarPeriodeMedArstall } from '../../utils/dato-utils'
 import { tekst } from '../../utils/tekster'
 import Vis from '../vis'
+import { RouteParams } from '../../app'
+import useSoknad from '../../hooks/useSoknad'
 
 interface BannerProps {
     overskrift?: string
 }
 
 const Banner = ({ overskrift }: BannerProps) => {
-    const { valgtSoknad } = useAppStore()
+    const { id } = useParams<RouteParams>()
+    const { data: valgtSoknad } = useSoknad(id, id !== undefined)
 
     const tittel = () => {
         if (valgtSoknad) {

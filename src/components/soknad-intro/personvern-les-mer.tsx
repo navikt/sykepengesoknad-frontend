@@ -2,27 +2,26 @@ import { BodyShort, Button, Heading, Modal } from '@navikt/ds-react'
 import parser from 'html-react-parser'
 import React, { MouseEvent, useState } from 'react'
 
-import { useAppStore } from '../../data/stores/app-store'
 import { tekst } from '../../utils/tekster'
 import { useAmplitudeInstance } from '../amplitude/amplitude'
+import { RSSoknadstypeType } from '../../types/rs-types/rs-soknadstype'
 
 type Event = MouseEvent<HTMLAnchorElement | HTMLButtonElement>
 
-const PersonvernLesMer = () => {
-    const [aapen, setAapen] = useState<boolean>(false)
-    const { valgtSoknad } = useAppStore()
-    const { logEvent } = useAmplitudeInstance()
+export interface PersonvernLesMerProps {
+    soknadstype: RSSoknadstypeType
+}
 
-    if (!valgtSoknad) {
-        return null
-    }
+const PersonvernLesMer = ({ soknadstype }: PersonvernLesMerProps) => {
+    const [aapen, setAapen] = useState<boolean>(false)
+    const { logEvent } = useAmplitudeInstance()
 
     const handleAapen = (event: Event) => {
         event.preventDefault()
         setAapen(true)
         logEvent('knapp klikket', {
             tekst: tekst('sykepengesoknad.soknad-intro.personvern-les-mer'),
-            soknadstype: valgtSoknad?.soknadstype,
+            soknadstype: soknadstype,
         })
     }
     const amplitudeLukketPopup = () => {

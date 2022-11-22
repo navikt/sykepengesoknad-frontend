@@ -1,31 +1,32 @@
 import { Alert, BodyShort } from '@navikt/ds-react'
 import React from 'react'
 
-import { useAppStore } from '../../data/stores/app-store'
 import { TagTyper } from '../../types/enums'
 import { RSSoknadstatus } from '../../types/rs-types/rs-soknadstatus'
 import { RSSoknadstype } from '../../types/rs-types/rs-soknadstype'
 import { tekst } from '../../utils/tekster'
 import Vis from '../vis'
+import { Soknad, Sporsmal } from '../../types/types'
 
-import { SpmProps } from './sporsmal-form/sporsmal-form'
+export interface InfotekstOverSubmit {
+    soknad: Soknad
+    sporsmal: Sporsmal
+}
 
-const InfotekstOverSubmit = ({ sporsmal }: SpmProps) => {
-    const { valgtSoknad } = useAppStore()
-
+const InfotekstOverSubmit = ({ soknad, sporsmal }: InfotekstOverSubmit) => {
     const tekstNokkel = (tag: TagTyper) => {
         if (
             tag === TagTyper.FERIE_V2 &&
-            valgtSoknad?.soknadstype === RSSoknadstype.ARBEIDSTAKERE &&
-            valgtSoknad?.status === RSSoknadstatus.UTKAST_TIL_KORRIGERING
+            soknad.soknadstype === RSSoknadstype.ARBEIDSTAKERE &&
+            soknad.status === RSSoknadstatus.UTKAST_TIL_KORRIGERING
         ) {
             return 'ferie-ingen-sykepenger'
         }
-        return null
+        return undefined
     }
 
     const nokkel = tekstNokkel(sporsmal.tag)
-    if (nokkel == null) {
+    if (!nokkel) {
         return null
     }
 
