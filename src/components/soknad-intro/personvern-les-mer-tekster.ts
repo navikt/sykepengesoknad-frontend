@@ -10,7 +10,7 @@ const PersonvernLesMerTekster = {
                 Folkeregisteret: <b>navn, fødselsnummer, adresse, familie o.l.</b>
             </li>
             <li>
-                Arbeidstaker- og arbeidsgiverregisteret og Enhetsregisteret: <b>arbeidsforholdene dine</b>
+                 Arbeidstaker- arbeidsgiver-, Enhets-, og aksjonærregisteret: <b>Arbeidsforholdene dine og din relasjon til arbeidsgiver</b>
             </li>
             <li>
                 A-ordningen: <b>inntekten din</b>
