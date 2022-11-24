@@ -120,7 +120,7 @@ const KvitteringSide = () => {
                             hvis={gjenstaendeSoknader.length == 0}
                             render={() => {
                                 if (harSvartJaJobbetDuUnderveis(valgtSoknad)) {
-                                    return <UxSignalsWidget study={'study-241w19s2m9'} />
+                                    return <UxSignalsWidget study={'study-pjz4cz8bwh'} />
                                 }
                                 if (harSvartJaFravaerForSykmeldingen(valgtSoknad)) {
                                     return <UxSignalsWidget study={'study-2neea8stgf'} />
