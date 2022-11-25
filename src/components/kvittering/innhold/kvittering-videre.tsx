@@ -10,6 +10,7 @@ import { tekst } from '../../../utils/tekster'
 import Vis from '../../vis'
 import { RouteParams } from '../../../app'
 import useSoknad from '../../../hooks/useSoknad'
+import Kontonummer from '../kontonummer/kontonummer'
 
 const KvitteringVidere = () => {
     const { id } = useParams<RouteParams>()
@@ -67,6 +68,10 @@ const KvitteringVidere = () => {
                     </div>
                 )}
             />
+
+            <div className="avsnitt">
+                <Kontonummer />
+            </div>
         </Alert>
     )
 }
