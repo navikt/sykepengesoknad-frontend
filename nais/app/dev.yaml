@@ -11,3 +11,4 @@ env:
   SYKMELDINGER_BACKEND_CLIENT_ID: dev-gcp:teamsykmelding:sykmeldinger-backend
   SYKEPENGESOKNAD_BACKEND_CLIENT_ID: dev-gcp:flex:sykepengesoknad-backend
   SYKEPENGESOKNAD_KVITTERINGER_CLIENT_ID: dev-gcp:flex:sykepengesoknad-kvitteringer
+  SOKOS_KONTOREGISTER_PERSON_CLIENT_ID: dev-gcp:okonomi:sokos-kontoregister-person

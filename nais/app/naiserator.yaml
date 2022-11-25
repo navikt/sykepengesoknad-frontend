@@ -42,6 +42,8 @@ spec:
       rules:
         - application: sykepengesoknad-backend
         - application: sykepengesoknad-kvitteringer
+        - application: sokos-kontoregister-person
+          namespace: okonomi
         - application: sykmeldinger-backend
           namespace: teamsykmelding
   env:

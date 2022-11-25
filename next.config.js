@@ -90,6 +90,7 @@ const nextConfig = {
         sykmeldingerBackendClientId: process.env.SYKMELDINGER_BACKEND_CLIENT_ID,
         sykepengesoknadBackendClientId: process.env.SYKEPENGESOKNAD_BACKEND_CLIENT_ID,
         sykepengesoknadKvitteringerClientId: process.env.SYKEPENGESOKNAD_KVITTERINGER_CLIENT_ID,
+        sokosKontoregisterPersonClientId: process.env.SOKOS_KONTOREGISTER_PERSON_CLIENT_ID,
     },
     publicRuntimeConfig: {
         // Will be available on both server and client
