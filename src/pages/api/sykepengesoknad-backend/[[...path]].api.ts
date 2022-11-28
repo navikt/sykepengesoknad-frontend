@@ -7,7 +7,6 @@ import { proxyKallTilBackend } from '../../../proxy/backendproxy'
 const { serverRuntimeConfig } = getConfig()
 
 const tillatteApier = [
-    'GET /api/v2/soknader', // TODO: Fjern denne når alle har ny frontend kode
     'GET /api/v2/soknad/[uuid]',
     'GET /api/v2/soknader/metadata',
     'GET /api/v2/soknader/[uuid]/mottaker',
