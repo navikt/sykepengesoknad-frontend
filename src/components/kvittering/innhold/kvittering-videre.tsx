@@ -69,7 +69,7 @@ const KvitteringVidere = () => {
                 )}
             />
 
-            <div className="avsnitt">
+            <div className="avsnitt kontonummer">
                 <Kontonummer />
             </div>
         </Alert>

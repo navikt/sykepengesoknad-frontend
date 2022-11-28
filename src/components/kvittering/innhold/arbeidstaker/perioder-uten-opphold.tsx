@@ -31,7 +31,7 @@ const PerioderUtenOpphold = () => {
                     {parser(tekst('kvittering.arbeidstaker.over16.utbetaling-NAV'))}{' '}
                 </BodyLong>
             </div>
-            <div className="avsnitt">
+            <div className="avsnitt kontonummer">
                 <Kontonummer />
             </div>
         </div>

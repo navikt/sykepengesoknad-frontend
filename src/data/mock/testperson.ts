@@ -4,7 +4,7 @@ import { bareUtland } from './data/opphold-utland'
 import { opplaering } from './data/opplaering'
 import { reisetilskudd } from './data/reisetilskudd'
 import { enUsendtSykmelding, toUsendteSykmeldinger } from './data/usendte-sykmeldinger'
-import { alleData, Persona, utenData } from './personas'
+import { alleData, harIkkeKontonummer, harKontonummer, Persona, utenData } from './personas'
 
 export interface StringFunctionMap {
     [index: string]: () => Persona
@@ -21,4 +21,16 @@ export const personas: StringFunctionMap = {
     'to-eldre-usendte-soknader': () => flereEldreUsendteSoknader,
     'bare-utland': () => bareUtland,
     brukertest: () => brukertest,
+    'har kontonummer': () => harKontonummer,
+    'har ikke kontonummer': () => harIkkeKontonummer,
+}
+
+export function hentTestperson(url?: string): Persona | null {
+    const parsetUrl = new URL(`https://test${url}`)
+
+    const testperson = parsetUrl.searchParams.get('testperson')
+    if (!testperson) {
+        return null
+    }
+    return personas[testperson]()
 }

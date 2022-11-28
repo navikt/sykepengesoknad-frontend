@@ -3,12 +3,16 @@ import { Sykmelding } from '../../types/sykmelding'
 
 import { soknaderOpplaering } from './data/opplaering'
 import { soknaderReisetilskudd } from './data/reisetilskudd'
-import { soknaderIntegration } from './data/soknader-integration'
-import { sykmeldinger } from './data/sykmeldinger'
+import {
+    arbeidstakerMedOppholdForsteUtenforArbeidsgiverperiodeKvittering,
+    soknaderIntegration,
+} from './data/soknader-integration'
+import { syk7, sykmeldinger } from './data/sykmeldinger'
 
 export interface Persona {
     soknader: RSSoknad[]
     sykmeldinger: Sykmelding[]
+    kontonummer?: string
 }
 
 export const utenData: Persona = {
@@ -16,6 +20,17 @@ export const utenData: Persona = {
     sykmeldinger: [],
 }
 
+export const harKontonummer: Persona = {
+    soknader: [arbeidstakerMedOppholdForsteUtenforArbeidsgiverperiodeKvittering],
+    sykmeldinger: [syk7],
+    kontonummer: '12340012345',
+}
+
+export const harIkkeKontonummer: Persona = {
+    soknader: [arbeidstakerMedOppholdForsteUtenforArbeidsgiverperiodeKvittering],
+    sykmeldinger: [syk7],
+    kontonummer: undefined,
+}
 export const alleData: Persona = {
     // Alle søknader filtrert på unik id
     soknader: [...soknaderIntegration, ...soknaderOpplaering, ...soknaderReisetilskudd].filter(

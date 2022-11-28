@@ -2,13 +2,13 @@ import { v4 as uuidv4 } from 'uuid'
 
 export type FetchResult = { requestId: string; response: Response }
 
-export type ErrorHandler = (result: any) => void
+export type ErrorHandler = (result: Response, requestId: string, defaultErrorHandler: () => void) => void
 
 export class FetchError extends Error {}
 
 export class AuthenticationError extends Error {}
 
-const fetchMedRequestId = async (
+export const fetchMedRequestId = async (
     url: string,
     options: RequestInit = {},
     errorHandler?: ErrorHandler,
@@ -19,14 +19,17 @@ const fetchMedRequestId = async (
         ? { ...options.headers, 'x-request-id': requestId }
         : { 'x-request-id': requestId }
 
-    let response
-    try {
-        response = await fetch(url, options)
-    } catch (e) {
-        throw new FetchError(
-            `${e} - Kall til url: ${options.method} ${url} og x_request_id: ${requestId} feilet uten svar fra backend.`,
-        )
+    const fetchUrl = async () => {
+        try {
+            return await fetch(url, options)
+        } catch (e) {
+            throw new FetchError(
+                `${e} - Kall til url: ${options.method} ${url} og x_request_id: ${requestId} feilet uten svar fra backend.`,
+            )
+        }
     }
+
+    const response = await fetchUrl()
 
     if (response.status == 401) {
         window.location.reload()
@@ -34,12 +37,16 @@ const fetchMedRequestId = async (
     }
 
     if (!response.ok) {
-        if (errorHandler) {
-            errorHandler(response)
+        const defaultErrorHandler = () => {
+            throw new FetchError(
+                `Kall til url: ${options.method} ${url} og x_request_id: ${requestId} feilet med HTTP-kode: ${response.status}.`,
+            )
         }
-        throw new FetchError(
-            `Kall til url: ${options.method} ${url} og x_request_id: ${requestId} feilet med HTTP-kode: ${response.status}.`,
-        )
+        if (errorHandler) {
+            errorHandler(response, requestId, defaultErrorHandler)
+        } else {
+            defaultErrorHandler()
+        }
     }
 
     return { requestId, response }
