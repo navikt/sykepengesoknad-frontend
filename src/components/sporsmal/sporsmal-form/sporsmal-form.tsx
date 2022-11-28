@@ -94,6 +94,7 @@ const SporsmalForm = () => {
         let soknad = valgtSoknad
 
         let data
+        let fikk400 = false
         try {
             data = await fetchJsonMedRequestId(
                 `/syk/sykepengesoknad/api/sykepengesoknad-backend/api/v2/soknader/${soknad!.id}/sporsmal/${
@@ -107,6 +108,7 @@ const SporsmalForm = () => {
                 },
                 (response) => {
                     if (response.status === 400) {
+                        fikk400 = true
                         setFeilState(true)
                     }
                     restFeilet = true
@@ -118,7 +120,9 @@ const SporsmalForm = () => {
             }
             return
         }
-
+        if (fikk400) {
+            return
+        }
         const rsOppdaterSporsmalResponse: RSOppdaterSporsmalResponse = data
         if (rsOppdaterSporsmalResponse.mutertSoknad) {
             soknad = new Soknad(rsOppdaterSporsmalResponse.mutertSoknad)

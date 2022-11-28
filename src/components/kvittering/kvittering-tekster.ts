@@ -105,6 +105,12 @@ const KvitteringTekster = {
     'kvittering.arbeidstaker.hvorfor-inntektsmelding-pa-nytt': 'Hvorfor inntektsmeldingen må sendes på nytt?',
     'kvittering.arbeidstaker.hvorfor-inntektsmelding-pa-nytt.tekst':
         'Lønn eller arbeidstid kan ha endret seg siden du var syk forrige gang. Dette får vi bare informasjon om gjennom inntektsmeldingen.',
+
+    'kvittering.kontonummer.tittel': 'Kontonummer for utbetaling',
+    'kvittering.kontonummer.mangler':
+        'Vi har ikke registrert noe kontonummer på deg, og anbefaler at du legger det inn på <a target="_blank" href="https://www.nav.no/person/personopplysninger/#utbetaling">Min side</a>',
+    'kvittering.kontonummer.endre':
+        'Dersom du vil benytte et annet kontonummer for utbetaling fra NAV, kan du endre det på <a target="_blank" href="https://www.nav.no/person/personopplysninger/#utbetaling">Min side</a>',
     'kvittering.ferdig': 'Ferdig',
 }
 

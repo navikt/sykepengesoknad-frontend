@@ -5,7 +5,14 @@ import { Sykmelding } from '../../../types/sykmelding'
 import { Persona } from '../personas'
 import { tilLesbarPeriodeMedArstall } from '../../../utils/dato-utils'
 
-const url = new URL(window.location.href)
+function hentUrl() {
+    if (typeof window === 'undefined') {
+        return new URL('http://test')
+    }
+    return new URL(window.location.href)
+}
+
+const url = hentUrl()
 
 const hovedjobb = url.searchParams.get('hovedjobb') ?? 'MATBUTIKKEN AS'
 const fom = url.searchParams.get('fom') ?? '2022-09-08'
@@ -632,4 +639,5 @@ export const brukertestSoknad: RSSoknad = {
 export const brukertest: Persona = {
     soknader: [brukertestSoknad],
     sykmeldinger: [brukertestSykmelding],
+    kontonummer: '12340000000',
 }

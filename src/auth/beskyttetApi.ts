@@ -3,6 +3,7 @@ import { NextApiRequest, NextApiResponse } from 'next'
 
 import { cleanPathForMetric } from '../metrics'
 import metrics from '../metrics'
+import { isMockBackend } from '../utils/environment'
 
 import { verifyIdportenAccessToken } from './verifyIdportenAccessToken'
 
@@ -16,6 +17,10 @@ export function beskyttetApi(handler: ApiHandler): ApiHandler {
             metrics.apiUnauthorized.inc({ path: cleanPath }, 1)
 
             res.status(401).json({ message: 'Access denied' })
+        }
+
+        if (isMockBackend()) {
+            return handler(req, res)
         }
 
         const bearerToken: string | null | undefined = req.headers['authorization']
