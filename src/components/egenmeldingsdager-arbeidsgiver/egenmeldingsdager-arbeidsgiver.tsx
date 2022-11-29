@@ -1,17 +1,15 @@
 import React from 'react'
 import { BodyShort, GuidePanel, Heading } from '@navikt/ds-react'
 
+import { tekst } from '../../utils/tekster'
+
 const EgenmeldingsdagerArbeidsgiver = () => {
     return (
         <GuidePanel style={{ margin: '1rem 0' }}>
             <Heading level="2" size="small" spacing>
-                {'Du må søke om sykepenger'}
+                {tekst('egenmeldingsdager.guidepanel.tittel')}
             </Heading>
-            <BodyShort>
-                {
-                    'Arbeidsgiveren utbetaler vanligvis sykepenger i arbeidsgiverperioden (16 første dagene). Siden sykefraværet ditt er på mer enn 16 dager må du søke om sykepenger.'
-                }
-            </BodyShort>
+            <BodyShort>{tekst('egenmeldingsdager.guidepanel.innhold')}</BodyShort>
         </GuidePanel>
     )
 }
