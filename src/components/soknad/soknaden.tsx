@@ -32,6 +32,7 @@ import useSoknader from '../../hooks/useSoknader'
 import { RSSoknadmetadata } from '../../types/rs-types/rs-soknadmetadata'
 import { Sykmelding } from '../../types/sykmelding'
 import QueryStatusPanel from '../queryStatusPanel/QueryStatusPanel'
+import EgenmeldingsdagerArbeidsgiver from '../egenmeldingsdager-arbeidsgiver/egenmeldingsdager-arbeidsgiver'
 
 import { urlTilSoknad } from './soknad-link'
 
@@ -181,11 +182,13 @@ const Fordeling = ({ valgtSoknad, soknader, sykmeldinger }: FordelingProps) => {
                     <Vis hvis={stegNo === 1 && erGradertReisetilskuddsoknad} render={() => <SoknadMedToDeler />} />
 
                     <Vis
-                        hvis={!erUtlandssoknad && stegNo === 1}
-                        render={() => {
-                            const sporsmal = valgtSoknad.sporsmal[stegNo - 1]
-                            return <Opplysninger ekspandert={true} steg={sporsmal.tag} />
-                        }}
+                        hvis={stegNo === 1 && valgtSoknad.egenmeldingsdagerArbeidsgiver}
+                        render={() => <EgenmeldingsdagerArbeidsgiver />}
+                    />
+
+                    <Vis
+                        hvis={stegNo === 1 && !erUtlandssoknad}
+                        render={() => <Opplysninger ekspandert={true} steg={valgtSoknad.sporsmal[stegNo - 1].tag} />}
                     />
 
                     <Vis

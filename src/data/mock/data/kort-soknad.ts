@@ -1,4 +1,5 @@
 import { RSSoknad } from '../../../types/rs-types/rs-soknad'
+import { jsonDeepCopy } from '../../../utils/json-deep-copy'
 
 import { arbeidstaker100Syk } from './sykmeldinger'
 
@@ -88,4 +89,20 @@ export const kortArbeidstakerSoknad: RSSoknad = {
         },
     ],
     egenmeldtSykmelding: false,
+}
+
+export const kortFomTomArbeidstakerSoknad = jsonDeepCopy(kortArbeidstakerSoknad)
+kortFomTomArbeidstakerSoknad.fom = '2022-04-01'
+kortFomTomArbeidstakerSoknad.tom = '2022-04-10'
+kortFomTomArbeidstakerSoknad.opprettetDato = '2022-04-01'
+kortFomTomArbeidstakerSoknad.startSykeforlop = '2022-03-15'
+kortFomTomArbeidstakerSoknad.sykmeldingUtskrevet = '2022-03-31'
+kortFomTomArbeidstakerSoknad.egenmeldingsdagerArbeidsgiver = true
+kortFomTomArbeidstakerSoknad.soknadPerioder = [
+    { fom: '2022-04-01', tom: '2022-04-10', grad: 100, sykmeldingstype: 'AKTIVITET_IKKE_MULIG' },
+]
+
+export const egenmeldingsdagerArbeidsgiver = {
+    soknader: [kortFomTomArbeidstakerSoknad],
+    sykmeldinger: [arbeidstaker100Syk],
 }

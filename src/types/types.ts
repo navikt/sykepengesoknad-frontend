@@ -39,6 +39,7 @@ export class Soknad {
     soknadPerioder: RSSoknadsperiode[]
     korrigerer?: string
     merknaderFraSykmelding?: RSMerknad[]
+    egenmeldingsdagerArbeidsgiver: boolean
 
     constructor(soknad: RSSoknad) {
         this.id = soknad.id
@@ -64,6 +65,7 @@ export class Soknad {
         this.sporsmal = rsToSporsmal(soknad.sporsmal, undefined as any, true)
         this.soknadPerioder = soknad.soknadPerioder
         this.merknaderFraSykmelding = soknad.merknaderFraSykmelding
+        this.egenmeldingsdagerArbeidsgiver = soknad.egenmeldingsdagerArbeidsgiver || false
     }
 }
 

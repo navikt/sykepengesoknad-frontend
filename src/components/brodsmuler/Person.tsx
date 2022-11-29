@@ -28,7 +28,7 @@ const Person = () => {
                         open={visInnhold}
                         onClose={() => setVisInnhold(false)}
                     >
-                        <ul style={{ minWidth: 190 }}>
+                        <ul style={{ minWidth: 190, marginRight: '1rem' }}>
                             {Object.keys(personas).map((p, idx) => (
                                 <li key={idx}>
                                     <a href={`/syk/sykepengesoknad?testperson=${p}`}>{p}</a>
