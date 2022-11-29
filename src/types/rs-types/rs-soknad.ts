@@ -28,5 +28,5 @@ export interface RSSoknad {
     sporsmal: RSSporsmal[]
     soknadPerioder: RSSoknadsperiode[]
     merknaderFraSykmelding?: RSMerknad[]
-    egenmeldingsdagerArbeidsgiver?: boolean | null
+    triggetAvInntektsmelding?: boolean | null
 }

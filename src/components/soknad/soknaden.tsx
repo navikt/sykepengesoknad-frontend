@@ -182,7 +182,7 @@ const Fordeling = ({ valgtSoknad, soknader, sykmeldinger }: FordelingProps) => {
                     <Vis hvis={stegNo === 1 && erGradertReisetilskuddsoknad} render={() => <SoknadMedToDeler />} />
 
                     <Vis
-                        hvis={stegNo === 1 && valgtSoknad.egenmeldingsdagerArbeidsgiver}
+                        hvis={stegNo === 1 && valgtSoknad.triggetAvInntektsmelding}
                         render={() => <EgenmeldingsdagerArbeidsgiver />}
                     />
 
