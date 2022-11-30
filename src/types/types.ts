@@ -65,7 +65,7 @@ export class Soknad {
         this.sporsmal = rsToSporsmal(soknad.sporsmal, undefined as any, true)
         this.soknadPerioder = soknad.soknadPerioder
         this.merknaderFraSykmelding = soknad.merknaderFraSykmelding
-        this.opprettetAvInntektsmelding = soknad.opprettetAvInntektsmelding || false
+        this.opprettetAvInntektsmelding = soknad.opprettetAvInntektsmelding
     }
 }
 
