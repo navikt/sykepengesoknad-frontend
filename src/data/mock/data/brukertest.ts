@@ -634,6 +634,7 @@ export const brukertestSoknad: RSSoknad = {
         },
     ],
     egenmeldtSykmelding: false,
+    opprettetAvInntektsmelding: false,
 }
 
 export const brukertest: Persona = {

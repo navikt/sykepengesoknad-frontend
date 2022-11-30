@@ -118,6 +118,7 @@ export const oppholdUtland: RSSoknad = {
         },
     ],
     egenmeldtSykmelding: null,
+    opprettetAvInntektsmelding: false,
 }
 
 export const bareUtland: Persona = {

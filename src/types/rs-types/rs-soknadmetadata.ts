@@ -27,6 +27,7 @@ export class RSSoknadmetadata {
     arbeidsgiver?: Arbeidsgiver
     soknadPerioder: RSSoknadsperiode[]
     merknaderFraSykmelding?: RSMerknad[]
+    opprettetAvInntektsmelding: boolean
 
     constructor(json: any) {
         this.id = json.id
@@ -53,5 +54,6 @@ export class RSSoknadmetadata {
         }
         this.soknadPerioder = json.soknadPerioder
         this.merknaderFraSykmelding = json.merknaderFraSykmelding
+        this.opprettetAvInntektsmelding = json.opprettetAvInntektsmelding
     }
 }

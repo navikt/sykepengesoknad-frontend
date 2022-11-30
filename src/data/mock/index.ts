@@ -23,6 +23,7 @@ import {
 } from './data/soknader-integration'
 import { Persona } from './personas'
 import { personas } from './testperson'
+import { kortFomTomArbeidstakerSoknad } from './data/kort-soknad'
 
 const mottaker = (soknadId: string): RSMottaker => {
     if (
@@ -31,7 +32,8 @@ const mottaker = (soknadId: string): RSMottaker => {
         soknadId === arbeidstakerDeltPeriodeForsteUtenforArbeidsgiverperiodeKvittering.id ||
         soknadId === arbeidstakerUtenOppholdForsteUtenforArbeidsgiverperiodeKvittering.id ||
         soknadId === foranArbeidstakerMedOppholdKvittering.id ||
-        soknadId === arbeidstakerMedOppholdForsteUtenforArbeidsgiverperiodeKvittering.id
+        soknadId === arbeidstakerMedOppholdForsteUtenforArbeidsgiverperiodeKvittering.id ||
+        soknadId === kortFomTomArbeidstakerSoknad.id
     ) {
         return RSMottaker.ARBEIDSGIVER_OG_NAV
     }

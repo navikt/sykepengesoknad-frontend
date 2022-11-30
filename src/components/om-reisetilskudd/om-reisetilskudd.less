@@ -1,4 +1,5 @@
 @import '../../../node_modules/@navikt/ds-tokens/dist/tokens';
+@import '../basic';
 
 .om-reisetilskudd {
     border: 1px solid @navds-global-color-gray-400;
@@ -8,16 +9,14 @@
     p {
         margin: 0.5rem 0 1rem;
     }
-
-    .navds-accordion__content {
-        padding-left: 2rem;
-
-        :first-child {
-            margin-top: 0.5rem;
+}
+@media (min-width: @screen-sm) {
+    .om-reisetilskudd {
+        .navds-accordion__header {
+            padding-left: 2rem;
         }
-    }
-
-    .navds-accordion__header {
-        padding-left: 2rem;
+        .navds-accordion__content {
+            padding-left: 2rem;
+        }
     }
 }

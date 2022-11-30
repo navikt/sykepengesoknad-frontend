@@ -239,6 +239,7 @@ export const nyttReisetilskudd: RSSoknad = {
         },
     ],
     egenmeldtSykmelding: false,
+    opprettetAvInntektsmelding: false,
 }
 
 export const gradertReisetilskudd: RSSoknad = {
@@ -903,6 +904,7 @@ export const gradertReisetilskudd: RSSoknad = {
         },
     ],
     egenmeldtSykmelding: false,
+    opprettetAvInntektsmelding: false,
 }
 
 export const delvisUtfyltReisetilskudd: RSSoknad = {
@@ -1160,6 +1162,7 @@ export const delvisUtfyltReisetilskudd: RSSoknad = {
         },
     ],
     egenmeldtSykmelding: false,
+    opprettetAvInntektsmelding: false,
 }
 
 export const feilVedSlettingAvKvittering: RSSoknad = jsonDeepCopy(nyttReisetilskudd)
