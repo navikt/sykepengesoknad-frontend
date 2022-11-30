@@ -89,6 +89,7 @@ export const kortArbeidstakerSoknad: RSSoknad = {
         },
     ],
     egenmeldtSykmelding: false,
+    opprettetAvInntektsmelding: false,
 }
 
 export const kortFomTomArbeidstakerSoknad = jsonDeepCopy(kortArbeidstakerSoknad)

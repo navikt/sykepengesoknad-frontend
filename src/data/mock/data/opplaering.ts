@@ -328,6 +328,7 @@ export const behandlingsdager: RSSoknad = {
         },
     ],
     egenmeldtSykmelding: false,
+    opprettetAvInntektsmelding: false,
 }
 export const arbeidstaker: RSSoknad = {
     id: 'faba11f5-c4f2-4647-8c8a-58b28ce2f3ef',
@@ -781,6 +782,7 @@ export const arbeidstaker: RSSoknad = {
         },
     ],
     egenmeldtSykmelding: false,
+    opprettetAvInntektsmelding: false,
 }
 export const arbeidstakerGradert: RSSoknad = {
     id: '5b769c04-e171-47c9-b79b-23ab8fce331e',
@@ -1274,6 +1276,7 @@ export const arbeidstakerGradert: RSSoknad = {
         },
     ],
     egenmeldtSykmelding: false,
+    opprettetAvInntektsmelding: false,
 }
 export const arbeidsledig: RSSoknad = {
     id: '934f39f4-cb47-459f-8209-0dbef6d36059',
@@ -1682,6 +1685,7 @@ export const arbeidsledig: RSSoknad = {
         },
     ],
     egenmeldtSykmelding: false,
+    opprettetAvInntektsmelding: false,
 }
 export const frilanser: RSSoknad = {
     id: 'a8e40578-682b-4a04-bfda-b7768af2ae13',
@@ -2093,6 +2097,7 @@ export const frilanser: RSSoknad = {
         },
     ],
     egenmeldtSykmelding: false,
+    opprettetAvInntektsmelding: false,
 }
 export const fremtidigSoknad: RSSoknad = {
     id: '5b74f271-5b94-455a-b79f-428f593f2b99',
@@ -2124,6 +2129,7 @@ export const fremtidigSoknad: RSSoknad = {
     ],
     sporsmal: [],
     egenmeldtSykmelding: false,
+    opprettetAvInntektsmelding: false,
 }
 
 export const soknaderOpplaering = [

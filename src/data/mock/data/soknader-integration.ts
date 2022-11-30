@@ -45,6 +45,7 @@ export const utgattSoknad: RSSoknad = {
     ],
     sporsmal: [],
     egenmeldtSykmelding: false,
+    opprettetAvInntektsmelding: false,
 }
 export const avbruttSoknad: RSSoknad = {
     id: '811d15b2-2a76-4623-9530-1ba55617e0a5',
@@ -596,6 +597,7 @@ export const avbruttSoknad: RSSoknad = {
         },
     ],
     egenmeldtSykmelding: false,
+    opprettetAvInntektsmelding: false,
 }
 
 export const arbeidstakersoknadMedUtenlandsoppholdSoktSykepenger: RSSoknad = {
@@ -681,6 +683,7 @@ export const arbeidstakersoknadMedUtenlandsoppholdSoktSykepenger: RSSoknad = {
         },
     ],
     egenmeldtSykmelding: false,
+    opprettetAvInntektsmelding: false,
 }
 export const sendtArbeidsledig: RSSoknad = {
     id: '3848e75e-4069-4076-95c0-3f9f0b63e498',
@@ -1102,6 +1105,7 @@ export const sendtArbeidsledig: RSSoknad = {
         },
     ],
     egenmeldtSykmelding: false,
+    opprettetAvInntektsmelding: false,
 }
 export const veldigLangSoknad: RSSoknad = {
     id: 'faba11f5-123-abc-8c8a-58b28ce2f3ef',
@@ -2971,6 +2975,7 @@ export const veldigLangSoknad: RSSoknad = {
         },
     ],
     egenmeldtSykmelding: false,
+    opprettetAvInntektsmelding: false,
 }
 export const arbeidsledigKvittering: RSSoknad = {
     id: 'd3756302-4488-4f15-837b-38d51bc9b773',
@@ -3042,6 +3047,7 @@ export const arbeidsledigKvittering: RSSoknad = {
         },
     ],
     egenmeldtSykmelding: false,
+    opprettetAvInntektsmelding: false,
 }
 export const sendtArbeidsledigKvittering: RSSoknad = {
     id: '162b42d7-2600-44ea-905e-d3bae7f23404',
@@ -3498,6 +3504,7 @@ export const sendtArbeidsledigKvittering: RSSoknad = {
         },
     ],
     egenmeldtSykmelding: false,
+    opprettetAvInntektsmelding: false,
 }
 export const delvisUtfylltArbeidsledig: RSSoknad = {
     id: '162b42d7-2600-44ea-905e-d3bae7f234047',
@@ -3605,6 +3612,7 @@ export const delvisUtfylltArbeidsledig: RSSoknad = {
         },
     ],
     egenmeldtSykmelding: false,
+    opprettetAvInntektsmelding: false,
 }
 export const oppholdUtlandKvittering: RSSoknad = {
     id: 'b9d67b0d-b1f8-44a5-bcbd-6010111122',
@@ -3721,6 +3729,7 @@ export const oppholdUtlandKvittering: RSSoknad = {
         },
     ],
     egenmeldtSykmelding: null,
+    opprettetAvInntektsmelding: false,
 }
 export const selvstendigKvittering: RSSoknad = {
     id: '8e267bc7-b213-4f19-a423-1543e09e0dc1',
@@ -3805,6 +3814,7 @@ export const selvstendigKvittering: RSSoknad = {
         },
     ],
     egenmeldtSykmelding: false,
+    opprettetAvInntektsmelding: false,
 }
 
 export const arbeidstakerInnenforArbeidsgiverperiodeKvittering: RSSoknad = {
@@ -3880,6 +3890,7 @@ export const arbeidstakerInnenforArbeidsgiverperiodeKvittering: RSSoknad = {
         },
     ],
     egenmeldtSykmelding: false,
+    opprettetAvInntektsmelding: false,
 }
 export const arbeidstakerUtenforArbeidsgiverperiodeKvittering: RSSoknad = {
     id: 'sok2',
@@ -3954,6 +3965,7 @@ export const arbeidstakerUtenforArbeidsgiverperiodeKvittering: RSSoknad = {
         },
     ],
     egenmeldtSykmelding: false,
+    opprettetAvInntektsmelding: false,
 }
 export const arbeidstakerDeltPeriodeForsteUtenforArbeidsgiverperiodeKvittering: RSSoknad = {
     id: 'sok3',
@@ -4028,6 +4040,7 @@ export const arbeidstakerDeltPeriodeForsteUtenforArbeidsgiverperiodeKvittering: 
         },
     ],
     egenmeldtSykmelding: false,
+    opprettetAvInntektsmelding: false,
 }
 export const arbeidstakerUtenOppholdForsteUtenforArbeidsgiverperiodeKvittering: RSSoknad = {
     id: 'sok4',
@@ -4102,6 +4115,7 @@ export const arbeidstakerUtenOppholdForsteUtenforArbeidsgiverperiodeKvittering: 
         },
     ],
     egenmeldtSykmelding: false,
+    opprettetAvInntektsmelding: false,
 }
 export const arbeidstakerUtenOppholdKvittering: RSSoknad = {
     id: 'sok5',
@@ -4176,6 +4190,7 @@ export const arbeidstakerUtenOppholdKvittering: RSSoknad = {
         },
     ],
     egenmeldtSykmelding: false,
+    opprettetAvInntektsmelding: false,
 }
 export const sok6: RSSoknad = {
     id: 'sok6',
@@ -4250,6 +4265,7 @@ export const sok6: RSSoknad = {
         },
     ],
     egenmeldtSykmelding: false,
+    opprettetAvInntektsmelding: false,
 }
 export const arbeidstakerMedOppholdForsteUtenforArbeidsgiverperiodeKvittering: RSSoknad = {
     id: 'sok7',
@@ -4324,6 +4340,7 @@ export const arbeidstakerMedOppholdForsteUtenforArbeidsgiverperiodeKvittering: R
         },
     ],
     egenmeldtSykmelding: false,
+    opprettetAvInntektsmelding: false,
 }
 export const arbeidstakerMedOppholdKvittering: RSSoknad = {
     id: 'sok8',
@@ -4398,6 +4415,7 @@ export const arbeidstakerMedOppholdKvittering: RSSoknad = {
         },
     ],
     egenmeldtSykmelding: false,
+    opprettetAvInntektsmelding: false,
 }
 export const foranArbeidstakerMedOppholdKvittering: RSSoknad = jsonDeepCopy(arbeidstakerMedOppholdKvittering)
 foranArbeidstakerMedOppholdKvittering.id = 'foran-sok-8'
