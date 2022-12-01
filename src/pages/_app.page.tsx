@@ -56,6 +56,7 @@ import React, { PropsWithChildren } from 'react'
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
 
 import { LabsWarning } from '../components/labs-warning/LabsWarning'
+import { useFangHotjarEmotion } from '../hooks/useFangHotjarEmotion'
 
 interface AppProps extends Omit<NextAppProps, 'pageProps'> {
     pageProps: PropsWithChildren<unknown>
@@ -71,6 +72,8 @@ configureLogger({
 })
 
 function MyApp({ Component, pageProps }: AppProps): JSX.Element {
+    useFangHotjarEmotion()
+
     const queryClient = new QueryClient({
         defaultOptions: {
             queries: {
