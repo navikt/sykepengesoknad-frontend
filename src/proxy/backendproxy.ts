@@ -11,7 +11,7 @@ interface Opts {
     tillatteApier: string[]
     backend: string
     hostname: string
-    backendClientId: string
+    backendClientId?: string
     https: boolean
 }
 
@@ -25,8 +25,13 @@ export async function proxyKallTilBackend(opts: Opts) {
         return
     }
 
-    const idportenToken = opts.req.headers.authorization!.split(' ')[1]
-    const tokenxToken = await getTokenxToken(idportenToken, opts.backendClientId)
+    async function bearerToken(): Promise<string | undefined> {
+        if (opts.backendClientId) {
+            const idportenToken = opts.req.headers.authorization!.split(' ')[1]
+            return await getTokenxToken(idportenToken, opts.backendClientId)
+        }
+        return undefined
+    }
 
-    await proxyApiRouteRequest({ ...opts, path: rewritedPath, bearerToken: tokenxToken! })
+    await proxyApiRouteRequest({ ...opts, path: rewritedPath, bearerToken: await bearerToken() })
 }
