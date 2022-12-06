@@ -2,6 +2,10 @@ import { RSSoknadstype } from '../../types/rs-types/rs-soknadstype'
 import { Soknad } from '../../types/types'
 import { TagTyper } from '../../types/enums'
 
+export function erArbeidstakersoknad(soknad: Soknad) {
+    return soknad.soknadstype == RSSoknadstype.ARBEIDSTAKERE
+}
+
 export function harSvartJaJobbetDuUnderveis(soknad: Soknad) {
     if (soknad.soknadstype != RSSoknadstype.ARBEIDSTAKERE) {
         return false

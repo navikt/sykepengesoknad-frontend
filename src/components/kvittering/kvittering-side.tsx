@@ -25,7 +25,7 @@ import { urlTilSoknad } from '../soknad/soknad-link'
 import QueryStatusPanel from '../queryStatusPanel/QueryStatusPanel'
 
 import Kvittering from './kvittering'
-import { harSvartJaFravaerForSykmeldingen, harSvartJaJobbetDuUnderveis } from './harSvartJa'
+import { erArbeidstakersoknad } from './harSvartJa'
 
 const brodsmuler: Brodsmule[] = [
     {
@@ -119,11 +119,8 @@ const KvitteringSide = () => {
                         <Vis
                             hvis={gjenstaendeSoknader.length == 0}
                             render={() => {
-                                if (harSvartJaJobbetDuUnderveis(valgtSoknad)) {
-                                    return <UxSignalsWidget study={'study-pjz4cz8bwh'} />
-                                }
-                                if (harSvartJaFravaerForSykmeldingen(valgtSoknad)) {
-                                    return <UxSignalsWidget study={'study-2neea8stgf'} />
+                                if (erArbeidstakersoknad(valgtSoknad)) {
+                                    return <UxSignalsWidget study={'study-9az2sq2f5s'} />
                                 }
                                 return null
                             }}
