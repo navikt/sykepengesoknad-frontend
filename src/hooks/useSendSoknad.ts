@@ -1,21 +1,11 @@
 import { useMutation, useQueryClient } from '@tanstack/react-query'
 import { useParams } from 'react-router-dom'
-import { logger } from '@navikt/next-logger'
 
-import Fetch, { AuthenticationError } from '../utils/fetch'
+import { FetchError } from '../utils/fetch'
 import { RouteParams } from '../app'
 import fetchMedRequestId from '../utils/fetch'
 
 import useSoknad from './useSoknad'
-
-export class SendSoknadError extends Error {
-    status: number
-
-    constructor(status: number) {
-        super()
-        this.status = status
-    }
-}
 
 export function useSendSoknad() {
     const { id } = useParams<RouteParams>()
@@ -26,25 +16,16 @@ export function useSendSoknad() {
     if (!valgtSoknad) {
         throw Error('Skal ha valgt søknad')
     }
-    return useMutation<unknown, SendSoknadError>({
-        mutationFn: async () => {
-            throw new SendSoknadError(400)
-            try {
-                await fetchMedRequestId(
-                    `/syk/sykepengesoknad/api/sykepengesoknad-backend/api/v2/soknader/${valgtSoknad!.id}/send`,
-                    {
-                        method: 'POST',
-                        credentials: 'include',
-                        headers: { 'Content-Type': 'application/json' },
-                    },
-                )
-            } catch (e: any) {
-                if (!(e instanceof AuthenticationError)) {
-                    logger.warn(e)
-                }
-                return
-            }
-        },
+    return useMutation<unknown, FetchError>({
+        mutationFn: async () =>
+            fetchMedRequestId(
+                `/syk/sykepengesoknad/api/sykepengesoknad-backend/api/v2/soknader/${valgtSoknad!.id}/send`,
+                {
+                    method: 'POST',
+                    credentials: 'include',
+                    headers: { 'Content-Type': 'application/json' },
+                },
+            ),
         mutationKey: ['sendsoknad'],
 
         onSuccess: async () => {

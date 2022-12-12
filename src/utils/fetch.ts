@@ -4,9 +4,20 @@ export type FetchResult = { requestId: string; response: Response }
 
 export type ErrorHandler = (result: Response, requestId: string, defaultErrorHandler: () => void) => void
 
-export class FetchError extends Error {}
+export class FetchError extends Error {
+    status: number
 
-export class AuthenticationError extends Error {}
+    constructor(message: string, status: number) {
+        super()
+        this.status = status
+    }
+}
+
+export class AuthenticationError extends FetchError {
+    constructor(message: string) {
+        super(message, 401)
+    }
+}
 
 export const fetchMedRequestId = async (
     url: string,
@@ -25,6 +36,7 @@ export const fetchMedRequestId = async (
         } catch (e) {
             throw new FetchError(
                 `${e} - Kall til url: ${options.method} ${url} og x_request_id: ${requestId} feilet uten svar fra backend.`,
+                response.status,
             )
         }
     }
@@ -40,6 +52,7 @@ export const fetchMedRequestId = async (
         const defaultErrorHandler = () => {
             throw new FetchError(
                 `Kall til url: ${options.method} ${url} og x_request_id: ${requestId} feilet med HTTP-kode: ${response.status}.`,
+                response.status,
             )
         }
         if (errorHandler) {
@@ -61,6 +74,7 @@ export const fetchJsonMedRequestId = async (url: string, options: RequestInit = 
     } catch (e) {
         throw new FetchError(
             `${e} - Kall til url: ${options.method} ${url} og x_request_id: ${fetchResult.requestId} feilet ved parsing av JSON med HTTP-kode: ${response.status}.`,
+            response.status,
         )
     }
 }

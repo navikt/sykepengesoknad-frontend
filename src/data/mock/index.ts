@@ -145,6 +145,13 @@ const setUpMock = (person: Persona) => {
 
     mock.post('/syk/sykepengesoknad/api/sykepengesoknad-backend/api/v2/soknader/:soknad/send', (req) => {
         const soknadId = req.pathParams.soknad
+        if (soknadId == '400-ved-send-soknad') {
+            return Promise.resolve({ status: 400 })
+        }
+        if (soknadId == '500-ved-send-soknad') {
+            return Promise.resolve({ status: 500 })
+        }
+
         const soknad = person.soknader.find((s) => s.id === soknadId)!
         const sendesTil = mottaker(soknadId)
         const tidspunkt = dayjs().toJSON()

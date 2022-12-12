@@ -1,21 +1,27 @@
-import { Alert, ErrorSummary } from "@navikt/ds-react";
+import { ErrorSummary } from '@navikt/ds-react'
 import React, { useEffect, useRef, useState } from 'react'
 import { useFormContext } from 'react-hook-form'
 
 import { RSSvartype } from '../../types/rs-types/rs-svartype'
-import { Sporsmal } from '../../types/types'
+import { Soknad, Sporsmal } from '../../types/types'
 import { flattenSporsmal } from '../../utils/soknad-utils'
 import { useAmplitudeInstance } from '../amplitude/amplitude'
-import { SpmProps } from '../sporsmal/sporsmal-form/sporsmal-form'
 import Vis from '../vis'
-import { useSendSoknad } from "../../hooks/useSendSoknad";
+import { FetchError } from '../../utils/fetch'
 
-const FeilOppsummering = ({ sporsmal }: SpmProps) => {
+const FeilOppsummering = ({
+    valgtSoknad,
+    sporsmal,
+    sendError,
+}: {
+    valgtSoknad: Soknad
+    sporsmal: Sporsmal
+    sendError: FetchError | null
+}) => {
     const { formState } = useFormContext()
     const [entries, setEntries] = useState<any[]>([])
     const oppsummering = useRef<HTMLDivElement>(null)
     const { logEvent } = useAmplitudeInstance()
-    const { error: sendError } = useSendSoknad()
 
     useEffect(() => {
         setEntries(Object.entries(formState.errors))
@@ -29,7 +35,6 @@ const FeilOppsummering = ({ sporsmal }: SpmProps) => {
     }, [formState])
 
     const handleClick = (list: any) => {
-        console.log(list)
         const id = `${list[0]}`
         const idarr = id.split('_')
 
@@ -74,33 +79,17 @@ const FeilOppsummering = ({ sporsmal }: SpmProps) => {
         }
     }
 
+    const antall = entries.length + (sendError == null ? 0 : 1)
+
     return (
         <div aria-live="polite" role="alert">
-
             <Vis
-                hvis={sendError}
-                render={() => {
-                    if (sendError?.status == 400) {
-                        return <Alert variant={'error'}>Vi kasta 400</Alert>
-                    }
-                    return <Alert variant={'error'}>Sorry dette gikk skikkelig dårlig</Alert>
-                }}
-            ></Vis>
-
-            <Vis
-                hvis={!sendError}
-                render={() => {
-                    return <Alert variant={'success'}>Send error er ikke satt</Alert>
-
-                }}
-            ></Vis>
-            <Vis
-                hvis={entries.length > 0}
+                hvis={antall > 0}
                 render={() => (
                     <ErrorSummary
                         ref={oppsummering}
                         size="medium"
-                        heading={'Det er ' + entries.length + ' feil i skjemaet'}
+                        heading={'Det er ' + antall + ' feil i skjemaet'}
                         className="feiloppsummering"
                     >
                         {entries
@@ -115,6 +104,30 @@ const FeilOppsummering = ({ sporsmal }: SpmProps) => {
                                     {list[1].message}
                                 </ErrorSummary.Item>
                             ))}
+                        <Vis
+                            hvis={sendError}
+                            render={() => {
+                                const message =
+                                    sendError?.status == 400
+                                        ? 'Beklager, det oppstod en feil. Klikk her for å laste inn søknaden på nytt.'
+                                        : 'Beklager, det oppstod en teknisk feil.'
+                                const klikk = () => {
+                                    if (sendError?.status == 400) {
+                                        window.location.href = `/syk/sykepengesoknad/soknader/${valgtSoknad.id}${window.location.search}`
+                                    }
+                                }
+                                const handleKeyDown = (e: any) => {
+                                    if (e.key === 'Enter') {
+                                        klikk()
+                                    }
+                                }
+                                return (
+                                    <ErrorSummary.Item onKeyDown={(e) => handleKeyDown(e)} onClick={() => klikk()}>
+                                        {message}
+                                    </ErrorSummary.Item>
+                                )
+                            }}
+                        ></Vis>
                     </ErrorSummary>
                 )}
             />

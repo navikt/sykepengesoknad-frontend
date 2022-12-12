@@ -4,7 +4,15 @@ import { bareUtland } from './data/opphold-utland'
 import { opplaering } from './data/opplaering'
 import { reisetilskudd } from './data/reisetilskudd'
 import { enUsendtSykmelding, toUsendteSykmeldinger } from './data/usendte-sykmeldinger'
-import { alleData, harIkkeKontonummer, harKontonummer, Persona, utenData } from './personas'
+import {
+    alleData,
+    får400vedSendSoknad,
+    får500vedSendSoknad,
+    harIkkeKontonummer,
+    harKontonummer,
+    Persona,
+    utenData,
+} from './personas'
 import { egenmeldingsdagerArbeidsgiver } from './data/kort-soknad'
 
 export interface StringFunctionMap {
@@ -25,6 +33,8 @@ export const personas: StringFunctionMap = {
     'har kontonummer': () => harKontonummer,
     'har ikke kontonummer': () => harIkkeKontonummer,
     'egenmeldingsdager arbeidsgiver': () => egenmeldingsdagerArbeidsgiver,
+    'HTTP 400 ved send soknad': () => får400vedSendSoknad,
+    'HTTP 500 ved send soknad': () => får500vedSendSoknad,
 }
 
 export function hentTestperson(url?: string): Persona | null {

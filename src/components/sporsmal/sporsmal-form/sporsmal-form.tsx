@@ -3,7 +3,6 @@ import React, { useCallback, useEffect, useState } from 'react'
 import { FormProvider, useForm } from 'react-hook-form'
 import { useHistory, useParams } from 'react-router-dom'
 import { useQueryClient } from '@tanstack/react-query'
-import { Alert } from '@navikt/ds-react'
 
 import { RouteParams } from '../../../app'
 import { useAppStore } from '../../../data/stores/app-store'
@@ -14,7 +13,7 @@ import { sporsmalToRS } from '../../../types/rs-types/rs-sporsmal'
 import { RSSvartype } from '../../../types/rs-types/rs-svartype'
 import { Soknad, Sporsmal } from '../../../types/types'
 import { SEPARATOR } from '../../../utils/constants'
-import fetchMedRequestId, { AuthenticationError, fetchJsonMedRequestId } from '../../../utils/fetch'
+import { AuthenticationError, fetchJsonMedRequestId } from '../../../utils/fetch'
 import { hentAnnonymisertSvar, useAmplitudeInstance } from '../../amplitude/amplitude'
 import FeilOppsummering from '../../feil/feil-oppsummering'
 import Opplysninger from '../../opplysninger-fra-sykmelding/opplysninger'
@@ -44,7 +43,7 @@ export interface SpmProps {
 const SporsmalForm = () => {
     const { id, stegId } = useParams<RouteParams>()
     const { data: valgtSoknad } = useSoknad(id)
-    const { mutate: sendSoknadMutation, error: sendError } = useSendSoknad()
+    const { mutate: sendSoknadMutation, isLoading: senderSoknad, error: sendError } = useSendSoknad()
     const { data: korrigerer } = useSoknad(valgtSoknad?.korrigerer, valgtSoknad?.korrigerer !== undefined)
     const queryClient = useQueryClient()
 
@@ -66,13 +65,6 @@ const SporsmalForm = () => {
     const nesteSporsmal = valgtSoknad!.sporsmal[spmIndex + 1]
 
     useEffect(() => {
-        methods.setError('tjaa', {
-            type: 'rest-feilet',
-            message: 'Beklager, det oppstod en feil- Refresh og start igjen',
-        })
-    }, [sendError])
-
-    useEffect(() => {
         methods.reset(hentFormState(sporsmal), { keepValues: false })
 
         const sisteSide = erSisteSpm()
@@ -82,14 +74,14 @@ const SporsmalForm = () => {
             hentMottaker().catch((e: Error) => logger.error(e))
         }
         // eslint-disable-next-line
-    }, [sporsmal]);
+    }, [sporsmal])
 
     useEffect(() => {
         if (methods.formState.isSubmitSuccessful) {
             methods.reset(hentFormState(sporsmal), { keepValues: false })
         }
         // eslint-disable-next-line
-    }, [methods.formState.isSubmitSuccessful]);
+    }, [methods.formState.isSubmitSuccessful])
 
     const erSisteSpm = () => {
         const snartSlutt =
@@ -167,7 +159,7 @@ const SporsmalForm = () => {
         setMottaker(data.mottaker)
 
         // eslint-disable-next-line
-    }, []);
+    }, [])
 
     const sendSoknad = async () => {
         if (!valgtSoknad) {
@@ -188,7 +180,7 @@ const SporsmalForm = () => {
     }
 
     const onSubmit = async (data: any) => {
-        if (poster) return
+        if (poster || senderSoknad) return
         setPoster(true)
         restFeilet = false
         try {
@@ -280,14 +272,16 @@ const SporsmalForm = () => {
                                 sporsmal.svartype !== RSSvartype.KVITTERING) ||
                             valgtSoknad.soknadstype !== RSSoknadstype.REISETILSKUDD
                         }
-                        render={() => <FeilOppsummering sporsmal={sporsmal} />}
+                        render={() => (
+                            <FeilOppsummering valgtSoknad={valgtSoknad} sporsmal={sporsmal} sendError={sendError} />
+                        )}
                     />
 
                     <InfotekstOverSubmit soknad={valgtSoknad} sporsmal={sporsmal} />
 
                     <Vis
                         hvis={skalViseKnapperad(valgtSoknad, sporsmal, methods.getValues())}
-                        render={() => <Knapperad soknad={valgtSoknad} poster={poster} />}
+                        render={() => <Knapperad soknad={valgtSoknad} poster={poster || senderSoknad} />}
                     />
                 </form>
             </FormProvider>
