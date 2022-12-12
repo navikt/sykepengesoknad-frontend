@@ -1,30 +1,22 @@
 import React, { useEffect } from 'react'
 
 import { RSSoknadstatus } from '../../types/rs-types/rs-soknadstatus'
-import { Brodsmule } from '../../types/types'
 import { sorterEtterNyesteFom } from '../../utils/sorter-soknader'
 import { tekst } from '../../utils/tekster'
 import { setBodyClass } from '../../utils/utils'
 import Banner from '../banner/banner'
-import Brodsmuler from '../brodsmuler/brodsmuler'
 import OmSykepenger from '../om-sykepenger/om-sykepenger'
 import Vis from '../vis'
 import useSoknader from '../../hooks/useSoknader'
 import QueryStatusPanel from '../queryStatusPanel/QueryStatusPanel'
+import { useUpdateBreadcrumbs } from '../../hooks/useBreadcrumbs'
 
 import Teasere from './teaser/teasere'
 
-const brodsmuler: Brodsmule[] = [
-    {
-        tittel: tekst('soknader.sidetittel'),
-        mobilTittel: tekst('soknader.brodsmuler.sidetittel'),
-        sti: null as any,
-        erKlikkbar: false,
-    },
-]
-
 const Soknader = () => {
     const { data: soknader } = useSoknader()
+
+    useUpdateBreadcrumbs(() => [], [])
 
     useEffect(() => {
         setBodyClass('soknader')
@@ -54,7 +46,6 @@ const Soknader = () => {
     return (
         <>
             <Banner overskrift={tekst('soknader.sidetittel')} />
-            <Brodsmuler brodsmuler={brodsmuler} />
 
             <div className="limit">
                 <OmSykepenger />

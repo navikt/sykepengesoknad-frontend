@@ -4,7 +4,7 @@ import '../components/app.less'
 import '../components/avbryt-soknad-modal/avbryt-soknad-modal.less'
 import '../components/avslutt-og-fortsett-senere/avslutt-og-fortsett-senere.less'
 import '../components/banner/banner.less'
-import '../components/brodsmuler/brodsmuler.less'
+import '../components/person/person.less'
 import '../components/ekspanderbar/ekspanderbar.less'
 import '../components/ettersending/ettersending.less'
 import '../components/feil/feil-oppsummering.less'
@@ -57,6 +57,7 @@ import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
 
 import { LabsWarning } from '../components/labs-warning/LabsWarning'
 import { useFangHotjarEmotion } from '../hooks/useFangHotjarEmotion'
+import { useHandleDecoratorClicks } from '../hooks/useBreadcrumbs'
 
 interface AppProps extends Omit<NextAppProps, 'pageProps'> {
     pageProps: PropsWithChildren<unknown>
@@ -72,6 +73,7 @@ configureLogger({
 })
 
 function MyApp({ Component, pageProps }: AppProps): JSX.Element {
+    useHandleDecoratorClicks()
     useFangHotjarEmotion()
 
     const queryClient = new QueryClient({

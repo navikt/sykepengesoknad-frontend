@@ -8,6 +8,7 @@ import { tekst } from '../../utils/tekster'
 import Vis from '../vis'
 import { RouteParams } from '../../app'
 import useSoknad from '../../hooks/useSoknad'
+import Person from '../person/Person'
 
 interface BannerProps {
     overskrift?: string
@@ -39,13 +40,16 @@ const Banner = ({ overskrift }: BannerProps) => {
             */}
             <Heading size="xlarge" level="1" className="sidebanner__tittel">
                 {overskrift === undefined ? tittel() : overskrift}
+                <Vis
+                    hvis={valgtSoknad && valgtSoknad.fom && valgtSoknad.tom}
+                    render={() => (
+                        <Heading size="medium" as="span">
+                            {tilLesbarPeriodeMedArstall(valgtSoknad!.fom, valgtSoknad!.tom)}
+                        </Heading>
+                    )}
+                />
             </Heading>
-            <Vis
-                hvis={valgtSoknad && valgtSoknad.fom && valgtSoknad.tom}
-                render={() => (
-                    <Heading size="medium">{tilLesbarPeriodeMedArstall(valgtSoknad!.fom, valgtSoknad!.tom)}</Heading>
-                )}
-            />
+            <Person />
         </header>
     )
 }

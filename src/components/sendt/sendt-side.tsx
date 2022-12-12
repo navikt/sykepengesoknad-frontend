@@ -6,12 +6,8 @@ import { RouteParams } from '../../app'
 import { useAppStore } from '../../data/stores/app-store'
 import { RSSoknadstatus } from '../../types/rs-types/rs-soknadstatus'
 import { RSSoknadstype } from '../../types/rs-types/rs-soknadstype'
-import { Brodsmule } from '../../types/types'
-import { SEPARATOR } from '../../utils/constants'
-import { tekst } from '../../utils/tekster'
 import { useAmplitudeInstance } from '../amplitude/amplitude'
 import Banner from '../banner/banner'
-import Brodsmuler from '../brodsmuler/brodsmuler'
 import Endreknapp from '../endreknapp/endreknapp'
 import Ettersending from '../ettersending/ettersending'
 import { hentHotjarJsTrigger, HotjarTrigger } from '../hotjar-trigger'
@@ -20,19 +16,7 @@ import Vis from '../vis'
 import useSoknad from '../../hooks/useSoknad'
 import { urlTilSoknad } from '../soknad/soknad-link'
 import QueryStatusPanel from '../queryStatusPanel/QueryStatusPanel'
-
-const brodsmuler: Brodsmule[] = [
-    {
-        tittel: tekst('soknader.sidetittel'),
-        sti: SEPARATOR + window.location.search,
-        erKlikkbar: true,
-    },
-    {
-        tittel: tekst('kvittering.sidetittel'),
-        sti: null as any,
-        erKlikkbar: false,
-    },
-]
+import { kvitteringBreadcrumb, useUpdateBreadcrumbs } from '../../hooks/useBreadcrumbs'
 
 const SendtSide = () => {
     const { id } = useParams<RouteParams>()
@@ -42,6 +26,8 @@ const SendtSide = () => {
     const [rerendreKvittering, setRerendrekvittering] = useState<Date>(new Date())
     const { logEvent } = useAmplitudeInstance()
     const history = useHistory()
+
+    useUpdateBreadcrumbs(() => [{ ...kvitteringBreadcrumb, handleInApp: true }], [])
 
     useEffect(() => {
         if (!valgtSoknad || !sykmeldinger) return
@@ -82,7 +68,6 @@ const SendtSide = () => {
     return (
         <>
             <Banner />
-            <Brodsmuler brodsmuler={brodsmuler} />
 
             <div className="limit sendt-side">
                 <HotjarTrigger jsTrigger={hentHotjarJsTrigger(valgtSoknad.soknadstype, 'sendt')}>

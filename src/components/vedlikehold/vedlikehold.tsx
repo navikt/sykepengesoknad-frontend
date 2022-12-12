@@ -1,25 +1,16 @@
 import { Alert } from '@navikt/ds-react'
 import React from 'react'
 
-import { Brodsmule } from '../../types/types'
 import { tekst } from '../../utils/tekster'
 import Banner from '../banner/banner'
-import Brodsmuler from '../brodsmuler/brodsmuler'
-
-const brodsmuler: Brodsmule[] = [
-    {
-        tittel: tekst('soknader.sidetittel'),
-        mobilTittel: tekst('soknader.brodsmuler.sidetittel'),
-        sti: '/soknader',
-        erKlikkbar: false,
-    },
-]
+import { useUpdateBreadcrumbs } from '../../hooks/useBreadcrumbs'
 
 const Vedlikehold = () => {
+    useUpdateBreadcrumbs(() => [], [])
+
     return (
         <>
             <Banner overskrift={tekst('soknader.sidetittel')} />
-            <Brodsmuler brodsmuler={brodsmuler} />
 
             <div className="limit">
                 <Alert variant={'warning'}>

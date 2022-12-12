@@ -7,13 +7,10 @@ import Endreknapp from '../../components/endreknapp/endreknapp'
 import { useAppStore } from '../../data/stores/app-store'
 import { RSSoknadstatus } from '../../types/rs-types/rs-soknadstatus'
 import { RSSoknadstype } from '../../types/rs-types/rs-soknadstype'
-import { Brodsmule } from '../../types/types'
-import { SEPARATOR } from '../../utils/constants'
 import { sykefravaerUrl } from '../../utils/environment'
 import { tekst } from '../../utils/tekster'
 import { useAmplitudeInstance } from '../amplitude/amplitude'
 import Banner from '../banner/banner'
-import Brodsmuler from '../brodsmuler/brodsmuler'
 import Ettersending from '../ettersending/ettersending'
 import { GjenstaendeSoknader, hentGjenstaendeSoknader } from '../gjenstaende-soknader/gjenstaende-soknader'
 import { hentHotjarJsTrigger, HotjarTrigger } from '../hotjar-trigger'
@@ -23,22 +20,10 @@ import useSoknad from '../../hooks/useSoknad'
 import useSoknader from '../../hooks/useSoknader'
 import { urlTilSoknad } from '../soknad/soknad-link'
 import QueryStatusPanel from '../queryStatusPanel/QueryStatusPanel'
+import { kvitteringBreadcrumb, useUpdateBreadcrumbs } from '../../hooks/useBreadcrumbs'
 
 import Kvittering from './kvittering'
-import { erArbeidstakersoknad } from './harSvartJa'
-
-const brodsmuler: Brodsmule[] = [
-    {
-        tittel: tekst('soknader.sidetittel'),
-        sti: SEPARATOR + window.location.search,
-        erKlikkbar: true,
-    },
-    {
-        tittel: tekst('kvittering.sidetittel'),
-        sti: null as any,
-        erKlikkbar: false,
-    },
-]
+import { harSvartJaFravaerForSykmeldingen, harSvartJaJobbetDuUnderveis } from './harSvartJa'
 
 const KvitteringSide = () => {
     const { id } = useParams<RouteParams>()
@@ -49,6 +34,8 @@ const KvitteringSide = () => {
     const [rerendreKvittering, setRerendrekvittering] = useState<Date>(new Date())
     const history = useHistory()
     const { logEvent } = useAmplitudeInstance()
+
+    useUpdateBreadcrumbs(() => [{ ...kvitteringBreadcrumb, handleInApp: true }], [])
 
     useEffect(() => {
         if (!valgtSoknad || !sykmeldinger) return
@@ -90,7 +77,6 @@ const KvitteringSide = () => {
     return (
         <>
             <Banner />
-            <Brodsmuler brodsmuler={brodsmuler} />
 
             <div className="limit kvittering-side">
                 <HotjarTrigger jsTrigger={hentHotjarJsTrigger(valgtSoknad.soknadstype, 'kvittering')}>
@@ -119,8 +105,11 @@ const KvitteringSide = () => {
                         <Vis
                             hvis={gjenstaendeSoknader.length == 0}
                             render={() => {
-                                if (erArbeidstakersoknad(valgtSoknad)) {
-                                    return <UxSignalsWidget study={'study-9az2sq2f5s'} />
+                                if (harSvartJaJobbetDuUnderveis(valgtSoknad)) {
+                                    return <UxSignalsWidget study={'study-pjz4cz8bwh'} />
+                                }
+                                if (harSvartJaFravaerForSykmeldingen(valgtSoknad)) {
+                                    return <UxSignalsWidget study={'study-2neea8stgf'} />
                                 }
                                 return null
                             }}

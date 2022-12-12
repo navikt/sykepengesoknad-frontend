@@ -1,0 +1,29 @@
+@import '../../../node_modules/@navikt/ds-tokens/dist/tokens';
+@import '../basic';
+
+.person {
+    .person__ikon {
+        display: none;
+    }
+
+    .lenkeknapp:focus {
+        background: none;
+    }
+}
+
+@media (min-width: @screen-sm) {
+    .person {
+        .person__ikon {
+            width: 2em;
+            height: 2em;
+            display: inline-block;
+            cursor: pointer;
+        }
+    }
+}
+
+@media print {
+    .person {
+        display: none;
+    }
+}
