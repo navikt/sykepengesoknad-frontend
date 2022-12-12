@@ -3,6 +3,7 @@ import React, { useCallback, useEffect, useState } from 'react'
 import { FormProvider, useForm } from 'react-hook-form'
 import { useHistory, useParams } from 'react-router-dom'
 import { useQueryClient } from '@tanstack/react-query'
+import { Alert } from '@navikt/ds-react'
 
 import { RouteParams } from '../../../app'
 import { useAppStore } from '../../../data/stores/app-store'
@@ -30,6 +31,7 @@ import CheckboxPanel from '../typer/checkbox-panel'
 import useSoknad from '../../../hooks/useSoknad'
 import { RSSoknadstatus } from '../../../types/rs-types/rs-soknadstatus'
 import { harLikeSvar } from '../endring-uten-endring/har-like-svar'
+import { useSendSoknad } from '../../../hooks/useSendSoknad'
 
 import Knapperad from './knapperad'
 import SendesTil from './sendes-til'
@@ -42,6 +44,7 @@ export interface SpmProps {
 const SporsmalForm = () => {
     const { id, stegId } = useParams<RouteParams>()
     const { data: valgtSoknad } = useSoknad(id)
+    const { mutate: sendSoknadMutation, error: sendError } = useSendSoknad()
     const { data: korrigerer } = useSoknad(valgtSoknad?.korrigerer, valgtSoknad?.korrigerer !== undefined)
     const queryClient = useQueryClient()
 
@@ -63,6 +66,13 @@ const SporsmalForm = () => {
     const nesteSporsmal = valgtSoknad!.sporsmal[spmIndex + 1]
 
     useEffect(() => {
+        methods.setError('tjaa', {
+            type: 'rest-feilet',
+            message: 'Beklager, det oppstod en feil- Refresh og start igjen',
+        })
+    }, [sendError])
+
+    useEffect(() => {
         methods.reset(hentFormState(sporsmal), { keepValues: false })
 
         const sisteSide = erSisteSpm()
@@ -72,14 +82,14 @@ const SporsmalForm = () => {
             hentMottaker().catch((e: Error) => logger.error(e))
         }
         // eslint-disable-next-line
-    }, [sporsmal])
+    }, [sporsmal]);
 
     useEffect(() => {
         if (methods.formState.isSubmitSuccessful) {
             methods.reset(hentFormState(sporsmal), { keepValues: false })
         }
         // eslint-disable-next-line
-    }, [methods.formState.isSubmitSuccessful])
+    }, [methods.formState.isSubmitSuccessful]);
 
     const erSisteSpm = () => {
         const snartSlutt =
@@ -121,7 +131,7 @@ const SporsmalForm = () => {
             return
         }
         if (fikk400) {
-            return
+            throw Error('400') //TODO er dette greit? Evt return false
         }
         const rsOppdaterSporsmalResponse: RSOppdaterSporsmalResponse = data
         if (rsOppdaterSporsmalResponse.mutertSoknad) {
@@ -157,7 +167,7 @@ const SporsmalForm = () => {
         setMottaker(data.mottaker)
 
         // eslint-disable-next-line
-    }, [])
+    }, []);
 
     const sendSoknad = async () => {
         if (!valgtSoknad) {
@@ -170,31 +180,7 @@ const SporsmalForm = () => {
                 return
             }
         }
-
-        try {
-            await fetchMedRequestId(
-                `/syk/sykepengesoknad/api/sykepengesoknad-backend/api/v2/soknader/${valgtSoknad.id}/send`,
-                {
-                    method: 'POST',
-                    credentials: 'include',
-                    headers: { 'Content-Type': 'application/json' },
-                },
-            )
-        } catch (e: any) {
-            if (!(e instanceof AuthenticationError)) {
-                restFeilet = true
-                logger.warn(e)
-            }
-            return
-        }
-
-        await queryClient.invalidateQueries(['soknad', valgtSoknad.id])
-
-        queryClient.invalidateQueries(['soknader'])
-
-        if (valgtSoknad.korrigerer !== undefined) {
-            queryClient.invalidateQueries(['soknad', valgtSoknad.korrigerer])
-        }
+        sendSoknadMutation()
     }
 
     const preSubmit = () => {
@@ -219,15 +205,17 @@ const SporsmalForm = () => {
                     soknadstype: valgtSoknad!.soknadstype,
                     skjemanavn: 'sykepengesoknad',
                 })
-            } else {
-                await sendOppdaterSporsmal()
-                logEvent('skjema spørsmål besvart', {
-                    soknadstype: valgtSoknad!.soknadstype,
-                    skjemanavn: 'sykepengesoknad',
-                    spørsmål: sporsmal.tag,
-                    svar: hentAnnonymisertSvar(sporsmal),
-                })
+                setTop(0)
+
+                return
             }
+            await sendOppdaterSporsmal()
+            logEvent('skjema spørsmål besvart', {
+                soknadstype: valgtSoknad!.soknadstype,
+                skjemanavn: 'sykepengesoknad',
+                spørsmål: sporsmal.tag,
+                svar: hentAnnonymisertSvar(sporsmal),
+            })
 
             if (restFeilet) {
                 methods.setError('syfosoknad', {
@@ -238,11 +226,9 @@ const SporsmalForm = () => {
             } else {
                 methods.clearErrors()
                 setTop(0)
-                if (!erSiste) {
-                    history.push(
-                        pathUtenSteg(history.location.pathname) + SEPARATOR + (spmIndex + 2) + window.location.search,
-                    )
-                }
+                history.push(
+                    pathUtenSteg(history.location.pathname) + SEPARATOR + (spmIndex + 2) + window.location.search,
+                )
             }
         } finally {
             setPoster(false)

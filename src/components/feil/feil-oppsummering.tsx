@@ -1,4 +1,4 @@
-import { ErrorSummary } from '@navikt/ds-react'
+import { Alert, ErrorSummary } from "@navikt/ds-react";
 import React, { useEffect, useRef, useState } from 'react'
 import { useFormContext } from 'react-hook-form'
 
@@ -8,12 +8,14 @@ import { flattenSporsmal } from '../../utils/soknad-utils'
 import { useAmplitudeInstance } from '../amplitude/amplitude'
 import { SpmProps } from '../sporsmal/sporsmal-form/sporsmal-form'
 import Vis from '../vis'
+import { useSendSoknad } from "../../hooks/useSendSoknad";
 
 const FeilOppsummering = ({ sporsmal }: SpmProps) => {
     const { formState } = useFormContext()
     const [entries, setEntries] = useState<any[]>([])
     const oppsummering = useRef<HTMLDivElement>(null)
     const { logEvent } = useAmplitudeInstance()
+    const { error: sendError } = useSendSoknad()
 
     useEffect(() => {
         setEntries(Object.entries(formState.errors))
@@ -27,6 +29,7 @@ const FeilOppsummering = ({ sporsmal }: SpmProps) => {
     }, [formState])
 
     const handleClick = (list: any) => {
+        console.log(list)
         const id = `${list[0]}`
         const idarr = id.split('_')
 
@@ -73,6 +76,24 @@ const FeilOppsummering = ({ sporsmal }: SpmProps) => {
 
     return (
         <div aria-live="polite" role="alert">
+
+            <Vis
+                hvis={sendError}
+                render={() => {
+                    if (sendError?.status == 400) {
+                        return <Alert variant={'error'}>Vi kasta 400</Alert>
+                    }
+                    return <Alert variant={'error'}>Sorry dette gikk skikkelig dårlig</Alert>
+                }}
+            ></Vis>
+
+            <Vis
+                hvis={!sendError}
+                render={() => {
+                    return <Alert variant={'success'}>Send error er ikke satt</Alert>
+
+                }}
+            ></Vis>
             <Vis
                 hvis={entries.length > 0}
                 render={() => (
