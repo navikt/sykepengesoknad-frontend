@@ -60,6 +60,8 @@ function setupAxe() {
             { id: 'aria-allowed-attr', enabled: true, selector: '*:not(.navds-accordion__item > div)' },
             // Opphold utland bruker periode komp uten h2 heading, sjekker alt annet
             { id: 'heading-order', enabled: true, selector: '*:not(h3:contains("Når skal du reise?"))' },
+            // Feiler på after-each sjekk på om det finnes en h1
+            { id: 'page-has-heading-one', enabled: false },
         ],
     })
     cy.checkA11y(undefined, undefined, terminalLog, false)

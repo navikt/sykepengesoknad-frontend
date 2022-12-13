@@ -237,9 +237,7 @@ describe('Tester kvittering', () => {
 
             // Ettersending til nav vises ikke i kvittering
             cy.contains('Jeg vil at søknaden skal behandles av NAV').should('not.exist')
-            cy.get('.brodsmuler__smuler .navds-link:contains(Søknader)').click({
-                force: true,
-            })
+            cy.get('*[class^=brodsmulesti] a').contains('Søknader').click({ force: true })
             cy.get(`#soknader-sendt article a[href*=${arbeidstakerInnenforArbeidsgiverperiodeKvittering.id}]`).click({
                 force: true,
             })

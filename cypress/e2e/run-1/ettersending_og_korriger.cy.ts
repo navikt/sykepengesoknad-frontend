@@ -69,7 +69,7 @@ describe('Tester ettersending og korrigering', () => {
     })
 
     it('Ettersend', () => {
-        cy.get('.brodsmuler__smuler .navds-link:contains(Søknader)').click({
+        cy.get('*[class^=brodsmulesti] a').contains('Søknader').click({
             force: true,
         })
         cy.get(`#soknader-sendt article a[href*=${soknad.id}]`).click({
@@ -117,7 +117,7 @@ describe('Tester ettersending og korrigering', () => {
     })
 
     it('Søknad har teaser', () => {
-        cy.get('.brodsmuler__smuler .smule .navds-link:contains(Søknader)').click({ force: true })
+        cy.get('*[class^=brodsmulesti] a').contains('Søknader').click({ force: true })
         cy.get('.navds-heading--xlarge').should('be.visible').and('have.text', 'Søknader')
 
         cy.get(`#soknader-list-til-behandling article a[href*=${soknad.id}]`).should('not.exist')
