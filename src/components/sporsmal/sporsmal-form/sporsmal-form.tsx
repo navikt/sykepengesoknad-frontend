@@ -92,7 +92,7 @@ const SporsmalForm = () => {
         return snartSlutt && spmIndex === valgtSoknad!.sporsmal.length - 2
     }
 
-    const sendOppdaterSporsmal = async () => {
+    const sendOppdaterSporsmal = async (): Promise<boolean> => {
         let soknad = valgtSoknad
 
         let data
@@ -120,10 +120,10 @@ const SporsmalForm = () => {
             if (!(e instanceof AuthenticationError)) {
                 logger.warn(e)
             }
-            return
+            return false
         }
         if (fikk400) {
-            throw Error('400') //TODO er dette greit? Evt return false
+            return false
         }
         const rsOppdaterSporsmalResponse: RSOppdaterSporsmalResponse = data
         if (rsOppdaterSporsmalResponse.mutertSoknad) {
@@ -136,6 +136,7 @@ const SporsmalForm = () => {
         }
 
         queryClient.setQueriesData(['soknad', id], soknad)
+        return true
     }
 
     const hentMottaker = useCallback(async () => {
@@ -190,8 +191,10 @@ const SporsmalForm = () => {
                     settSvar(nesteSporsmal, data)
                     sporsmal = nesteSporsmal
                 }
-                await sendOppdaterSporsmal()
-
+                const oppdatertOk = await sendOppdaterSporsmal()
+                if (!oppdatertOk) {
+                    return
+                }
                 await sendSoknad()
                 logEvent('skjema fullført', {
                     soknadstype: valgtSoknad!.soknadstype,
