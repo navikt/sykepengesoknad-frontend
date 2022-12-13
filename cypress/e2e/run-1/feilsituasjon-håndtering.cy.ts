@@ -60,4 +60,41 @@ describe('Tester feilsituasjoner ', () => {
             cy.get('.navds-heading--xlarge').should('be.visible').and('have.text', 'Søknader')
         })
     })
+    describe('Tester 400 ved send søknad', () => {
+        before(() => {
+            cy.visit(
+                'http://localhost:8080/syk/sykepengesoknad/soknader/400-ved-send-soknad/2?testperson=HTTP%20400%20ved%20send%20soknad',
+            )
+        })
+        it('Når vi sender søknad som får 400 får vi en feilmelding som lar oss refreshe', function () {
+            cy.get(
+                'Jeg har lest all informasjonen jeg har fått i søknaden og bekrefter at opplysningene jeg har gitt er korrekte.',
+            ).click({ force: true })
+            cy.contains('Send søknaden').click()
+            cy.contains('Beklager, det oppstod en feil. Klikk her for å laste inn søknaden på nytt').click()
+            cy.url().should(
+                'equal',
+                'http://localhost:8080/syk/sykepengesoknad/soknader/400-ved-send-soknad/1?testperson=HTTP%20400%20ved%20send%20soknad',
+            )
+        })
+    })
+
+    describe('Tester 500 ved send søknad', () => {
+        before(() => {
+            cy.visit(
+                'http://localhost:8080/syk/sykepengesoknad/soknader/400-ved-send-soknad/2?testperson=HTTP%20500%20ved%20send%20soknad',
+            )
+        })
+        it('Når vi sender søknad som får 500 får vi en feilmelding', function () {
+            cy.get(
+                'Jeg har lest all informasjonen jeg har fått i søknaden og bekrefter at opplysningene jeg har gitt er korrekte.',
+            ).click({ force: true })
+            cy.contains('Send søknaden').click()
+            cy.contains('Beklager, det oppstod en feil.').click()
+            cy.url().should(
+                'equal',
+                'http://localhost:8080/syk/sykepengesoknad/soknader/400-ved-send-soknad/2?testperson=HTTP%20500%20ved%20send%20soknad',
+            )
+        })
+    })
 })
