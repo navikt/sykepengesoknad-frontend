@@ -91,7 +91,7 @@ describe('Tester feilmeldinger', () => {
     })
 
     it('DATO mindre enn min', () => {
-        cy.get('.ds-datepicker').type('01.01.1900')
+        cy.get('.navds-text-field__input').type('01.01.1900')
         gaVidere()
         feilmeldingHandtering(
             'Datoen kan ikke være før 01.04.2020',
