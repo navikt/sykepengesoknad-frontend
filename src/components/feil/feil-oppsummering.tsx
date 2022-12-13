@@ -81,55 +81,51 @@ const FeilOppsummering = ({
 
     const antall = entries.length + (sendError == null ? 0 : 1)
 
+    const klikk = () => {
+        if (sendError?.status == 400) {
+            window.location.href = `/syk/sykepengesoknad/soknader/${valgtSoknad.id}${window.location.search}`
+        }
+    }
+    const handleKeyDownSendError = (e: any) => {
+        if (e.key === 'Enter') {
+            klikk()
+        }
+    }
     return (
         <div aria-live="polite" role="alert">
             <Vis
                 hvis={antall > 0}
-                render={() => (
-                    <ErrorSummary
-                        ref={oppsummering}
-                        size="medium"
-                        heading={'Det er ' + antall + ' feil i skjemaet'}
-                        className="feiloppsummering"
-                    >
-                        {entries
-                            .sort((list) => list[0][0])
-                            .map((list, index) => (
-                                <ErrorSummary.Item
-                                    key={index}
-                                    tabIndex={0}
-                                    onKeyDown={(e) => handleKeyDown(e, list)}
-                                    onClick={() => handleClick(list)}
-                                >
-                                    {list[1].message}
-                                </ErrorSummary.Item>
-                            ))}
-                        <Vis
-                            hvis={sendError}
-                            render={() => {
-                                const message =
-                                    sendError?.status == 400
-                                        ? 'Beklager, det oppstod en feil. Klikk her for å laste inn søknaden på nytt.'
-                                        : 'Beklager, det oppstod en teknisk feil.'
-                                const klikk = () => {
-                                    if (sendError?.status == 400) {
-                                        window.location.href = `/syk/sykepengesoknad/soknader/${valgtSoknad.id}${window.location.search}`
-                                    }
-                                }
-                                const handleKeyDown = (e: any) => {
-                                    if (e.key === 'Enter') {
-                                        klikk()
-                                    }
-                                }
-                                return (
-                                    <ErrorSummary.Item onKeyDown={(e) => handleKeyDown(e)} onClick={() => klikk()}>
-                                        {message}
-                                    </ErrorSummary.Item>
-                                )
-                            }}
-                        ></Vis>
-                    </ErrorSummary>
-                )}
+                render={() => {
+                    const elements = entries
+                        .sort((list) => list[0][0])
+                        .map((list, index) => (
+                            <ErrorSummary.Item
+                                key={index}
+                                tabIndex={0}
+                                onKeyDown={(e) => handleKeyDown(e, list)}
+                                onClick={() => handleClick(list)}
+                            >
+                                {list[1].message}
+                            </ErrorSummary.Item>
+                        ))
+                    if (sendError) {
+                        elements.push(
+                            <ErrorSummary.Item onKeyDown={(e) => handleKeyDownSendError(e)} onClick={() => klikk()}>
+                                {sendError?.status == 400
+                                    ? 'Vi har lagret dine svar, men du må laste inn siden på nytt før du kan sende søknaden. Klikk her for å laste inn siden på nytt.'
+                                    : 'Beklager, det oppstod en teknisk feil.'}
+                            </ErrorSummary.Item>,
+                        )
+                    }
+                    const heading = sendError
+                        ? 'Beklager, det oppstod en feil'
+                        : 'Det er ' + antall + ' feil i skjemaet'
+                    return (
+                        <ErrorSummary ref={oppsummering} size="medium" heading={heading} className="feiloppsummering">
+                            {elements}
+                        </ErrorSummary>
+                    )
+                }}
             />
         </div>
     )

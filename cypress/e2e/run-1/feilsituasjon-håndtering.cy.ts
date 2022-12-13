@@ -67,11 +67,13 @@ describe('Tester feilsituasjoner ', () => {
             )
         })
         it('Når vi sender søknad som får 400 får vi en feilmelding som lar oss refreshe', function () {
-            cy.get(
+            cy.contains(
                 'Jeg har lest all informasjonen jeg har fått i søknaden og bekrefter at opplysningene jeg har gitt er korrekte.',
             ).click({ force: true })
             cy.contains('Send søknaden').click()
-            cy.contains('Beklager, det oppstod en feil. Klikk her for å laste inn søknaden på nytt').click()
+            cy.contains(
+                'Vi har lagret dine svar, men du må laste inn siden på nytt før du kan sende søknaden. Klikk her for å laste inn siden på nytt.',
+            ).click()
             cy.url().should(
                 'equal',
                 'http://localhost:8080/syk/sykepengesoknad/soknader/400-ved-send-soknad/1?testperson=HTTP%20400%20ved%20send%20soknad',
@@ -82,18 +84,18 @@ describe('Tester feilsituasjoner ', () => {
     describe('Tester 500 ved send søknad', () => {
         before(() => {
             cy.visit(
-                'http://localhost:8080/syk/sykepengesoknad/soknader/400-ved-send-soknad/2?testperson=HTTP%20500%20ved%20send%20soknad',
+                'http://localhost:8080/syk/sykepengesoknad/soknader/500-ved-send-soknad/2?testperson=HTTP%20500%20ved%20send%20soknad',
             )
         })
         it('Når vi sender søknad som får 500 får vi en feilmelding', function () {
-            cy.get(
+            cy.contains(
                 'Jeg har lest all informasjonen jeg har fått i søknaden og bekrefter at opplysningene jeg har gitt er korrekte.',
             ).click({ force: true })
             cy.contains('Send søknaden').click()
-            cy.contains('Beklager, det oppstod en feil.').click()
+            cy.contains('Beklager, det oppstod en teknisk feil.').click()
             cy.url().should(
                 'equal',
-                'http://localhost:8080/syk/sykepengesoknad/soknader/400-ved-send-soknad/2?testperson=HTTP%20500%20ved%20send%20soknad',
+                'http://localhost:8080/syk/sykepengesoknad/soknader/500-ved-send-soknad/2?testperson=HTTP%20500%20ved%20send%20soknad',
             )
         })
     })
