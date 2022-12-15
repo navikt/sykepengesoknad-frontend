@@ -96,6 +96,9 @@ export class Sporsmal {
         }
         const idtag = tag as keyof typeof TagTyper
         this.tag = TagTyper[idtag]
+        if (!this.tag) {
+            window.alert('Ukjent tag: ' + spm.tag)
+        }
         this.sporsmalstekst = spm.sporsmalstekst === null ? '' : spm.sporsmalstekst
         this.undertekst = spm.undertekst
         this.svartype = spm.svartype as any as RSSvartype

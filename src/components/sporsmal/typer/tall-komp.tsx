@@ -53,6 +53,7 @@ const TallKomp = ({ sporsmal }: SpmProps) => {
     }
 
     const manglerSporsmalsTekst = sporsmal.sporsmalstekst === ''
+    const harUndertekst = !!sporsmal.undertekst
 
     const labels = () => {
         if (sporsmal.tag === TagTyper.HVOR_MANGE_TIMER_PER_UKE || sporsmal.tag === TagTyper.KM_HJEM_JOBB) {
@@ -79,6 +80,11 @@ const TallKomp = ({ sporsmal }: SpmProps) => {
         }
     })()
 
+    const description = harUndertekst
+        ? sporsmal.undertekst
+        : manglerSporsmalsTekst
+        ? ''
+        : tekst(('soknad.undertekst.' + sporsmal.tag) as any)
     return (
         <div className={className()}>
             <TextField
@@ -87,7 +93,7 @@ const TallKomp = ({ sporsmal }: SpmProps) => {
                         ? tekst(('soknad.undertekst.' + sporsmal.tag) as any)
                         : sporsmal.sporsmalstekst
                 }
-                description={manglerSporsmalsTekst ? '' : tekst(('soknad.undertekst.' + sporsmal.tag) as any)}
+                description={description}
                 className={`${inputSize()} ${labels()}`}
                 type="number"
                 id={sporsmal.id}

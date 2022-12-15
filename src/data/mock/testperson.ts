@@ -14,6 +14,7 @@ import {
     utenData,
 } from './personas'
 import { egenmeldingsdagerArbeidsgiver } from './data/kort-soknad'
+import { nyttArbeidUnderveisPerson } from './data/nytt-arbeidunderveis'
 
 export interface StringFunctionMap {
     [index: string]: () => Persona
@@ -23,6 +24,7 @@ export const personas: StringFunctionMap = {
     'uten-data': () => utenData,
     reisetilskudd: () => reisetilskudd,
     opplaering: () => opplaering,
+    'nytt-arbeid-underveis': () => nyttArbeidUnderveisPerson,
     'alle-soknader': () => alleData,
     'en-usendt-sykmelding': () => enUsendtSykmelding,
     'to-usendte-sykmeldinger': () => toUsendteSykmeldinger,
