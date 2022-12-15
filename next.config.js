@@ -94,6 +94,7 @@ const nextConfig = {
     },
     publicRuntimeConfig: {
         // Will be available on both server and client
+        publicPath: '/syk/sykepengesoknad',
         mockBackend: process.env.MOCK_BACKEND,
         opplaering: process.env.OPPLAERING,
         sykefravaerUrl: process.env.SYKEFRAVAER_URL,

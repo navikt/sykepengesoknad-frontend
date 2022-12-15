@@ -6,13 +6,10 @@ import { useHistory, useParams } from 'react-router-dom'
 import { RouteParams } from '../../app'
 import { useAppStore } from '../../data/stores/app-store'
 import { RSSoknadstatus } from '../../types/rs-types/rs-soknadstatus'
-import { Brodsmule } from '../../types/types'
-import { SEPARATOR } from '../../utils/constants'
 import { tilLesbarDatoMedArstall } from '../../utils/dato-utils'
 import { tekst } from '../../utils/tekster'
 import { useAmplitudeInstance } from '../amplitude/amplitude'
 import Banner from '../banner/banner'
-import Brodsmuler from '../brodsmuler/brodsmuler'
 import FristSykepenger from '../frist-sykepenger/frist-sykepenger'
 import { GjenstaendeSoknader, hentGjenstaendeSoknader } from '../gjenstaende-soknader/gjenstaende-soknader'
 import Opplysninger from '../opplysninger-fra-sykmelding/opplysninger'
@@ -22,20 +19,7 @@ import Vis from '../vis'
 import useSoknader from '../../hooks/useSoknader'
 import useSoknad from '../../hooks/useSoknad'
 import QueryStatusPanel from '../queryStatusPanel/QueryStatusPanel'
-
-const brodsmuler: Brodsmule[] = [
-    {
-        tittel: tekst('soknader.sidetittel'),
-        mobilTittel: tekst('soknader.brodsmuler.sidetittel'),
-        sti: SEPARATOR + window.location.search,
-        erKlikkbar: true,
-    },
-    {
-        tittel: tekst('soknad.sidetittel'),
-        sti: null as any,
-        erKlikkbar: false,
-    },
-]
+import { soknadBreadcrumb, useUpdateBreadcrumbs } from '../../hooks/useBreadcrumbs'
 
 const AvbruttSoknad = () => {
     const { id } = useParams<RouteParams>()
@@ -45,6 +29,8 @@ const AvbruttSoknad = () => {
     const { setValgtSykmelding, sykmeldinger } = useAppStore()
     const { logEvent } = useAmplitudeInstance()
     const history = useHistory()
+
+    useUpdateBreadcrumbs(() => [{ ...soknadBreadcrumb, handleInApp: true }], [])
 
     useEffect(() => {
         if (!valgtSoknad || !sykmeldinger) return
@@ -72,7 +58,6 @@ const AvbruttSoknad = () => {
     return (
         <>
             <Banner />
-            <Brodsmuler brodsmuler={brodsmuler} />
 
             <div className="limit">
                 <Alert variant="warning" style={{ marginBottom: '1rem' }}>

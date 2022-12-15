@@ -1,24 +1,27 @@
 @import '../basic';
 
-@headerFarge: #d1eff9;
-
 .sidebanner {
     display: flex;
-    justify-content: center;
+    justify-content: space-between;
     align-items: center;
-    flex-direction: column;
-    background-color: @headerFarge;
-    padding: 1.4rem 0;
+    margin: 1rem auto 0;
+    padding: 1rem;
 
     .sidebanner__tittel {
-        text-align: center;
+        span {
+            display: block;
+        }
     }
 }
 
 @media (min-width: @screen-sm) {
     .sidebanner {
+        width: calc(800px - 10rem);
+        padding-left: 0;
+
         .sidebanner__tittel {
-            text-align: left;
+            display: inline;
+            margin-right: 1.4rem;
         }
     }
 }

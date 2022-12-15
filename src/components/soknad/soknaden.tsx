@@ -5,7 +5,6 @@ import { Link, useHistory, useParams } from 'react-router-dom'
 
 import { RouteParams } from '../../app'
 import Banner from '../../components/banner/banner'
-import Brodsmuler from '../../components/brodsmuler/brodsmuler'
 import OmReisetilskudd from '../../components/om-reisetilskudd/om-reisetilskudd'
 import Opplysninger from '../../components/opplysninger-fra-sykmelding/opplysninger'
 import SoknadMedToDeler from '../../components/soknad-med-to-deler/soknad-med-to-deler'
@@ -14,7 +13,7 @@ import SporsmalSteg from '../../components/sporsmal/sporsmal-steg/sporsmal-steg'
 import { useAppStore } from '../../data/stores/app-store'
 import { RSSoknadstatus } from '../../types/rs-types/rs-soknadstatus'
 import { RSSoknadstype } from '../../types/rs-types/rs-soknadstype'
-import { Brodsmule, Soknad } from '../../types/types'
+import { Soknad } from '../../types/types'
 import { SEPARATOR } from '../../utils/constants'
 import { tekst } from '../../utils/tekster'
 import { setBodyClass } from '../../utils/utils'
@@ -32,23 +31,10 @@ import useSoknader from '../../hooks/useSoknader'
 import { RSSoknadmetadata } from '../../types/rs-types/rs-soknadmetadata'
 import { Sykmelding } from '../../types/sykmelding'
 import QueryStatusPanel from '../queryStatusPanel/QueryStatusPanel'
+import { soknadBreadcrumb, useUpdateBreadcrumbs } from '../../hooks/useBreadcrumbs'
 import EgenmeldingsdagerArbeidsgiver from '../egenmeldingsdager-arbeidsgiver/egenmeldingsdager-arbeidsgiver'
 
 import { urlTilSoknad } from './soknad-link'
-
-const brodsmuler: Brodsmule[] = [
-    {
-        tittel: tekst('soknader.sidetittel'),
-        mobilTittel: tekst('soknader.brodsmuler.sidetittel'),
-        sti: SEPARATOR + window.location.search,
-        erKlikkbar: true,
-    },
-    {
-        tittel: tekst('soknad.sidetittel'),
-        sti: null as any,
-        erKlikkbar: false,
-    },
-]
 
 const Soknaden = () => {
     const { id, stegId } = useParams<RouteParams>()
@@ -58,6 +44,8 @@ const Soknaden = () => {
     const { sykmeldinger, setValgtSykmelding } = useAppStore()
     const { logEvent } = useAmplitudeInstance()
     const history = useHistory()
+
+    useUpdateBreadcrumbs(() => [{ ...soknadBreadcrumb, handleInApp: true }], [])
 
     useEffect(() => {
         setBodyClass('soknaden')
@@ -102,7 +90,6 @@ const Soknaden = () => {
     return (
         <>
             <Banner />
-            <Brodsmuler brodsmuler={brodsmuler} />
 
             <div className="limit">
                 <HotjarTrigger jsTrigger={hentHotjarJsTrigger(valgtSoknad.soknadstype, 'soknad')}>

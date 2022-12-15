@@ -34,6 +34,10 @@ export function sykefravaerUrl() {
     return publicRuntimeConfig.sykefravaerUrl
 }
 
+export function publicPath() {
+    return publicRuntimeConfig.publicPath
+}
+
 export function minSideUrl() {
     return publicRuntimeConfig.minSideUrl
 }

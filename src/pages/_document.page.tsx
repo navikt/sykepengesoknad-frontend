@@ -5,6 +5,8 @@ import getConfig from 'next/config'
 import Document, { DocumentContext, DocumentInitialProps, Head, Html, Main, NextScript } from 'next/document'
 import React from 'react'
 
+import { createInitialServerSideBreadcrumbs } from '../hooks/useBreadcrumbs'
+
 const { serverRuntimeConfig } = getConfig()
 
 // The 'head'-field of the document initialProps contains data from <head> (meta-tags etc)
@@ -27,6 +29,7 @@ class MyDocument extends Document<Props> {
             chatbot: false,
             feedback: false,
             urlLookupTable: false,
+            breadcrumbs: createInitialServerSideBreadcrumbs(ctx.pathname),
         })
 
         const language = getDocumentParameter(initialProps, 'lang')
