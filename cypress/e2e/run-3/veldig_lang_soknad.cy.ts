@@ -104,12 +104,15 @@ describe('Tester støtte for gamle spørsmål', () => {
         gaVidere()
     })
 
-    it('ANDRE_INNTEKTSKILDER', () => {
-        svarJaHovedsporsmal()
-        velgCheckbox('dagmamma')
-        svarRadioJaEllerNei('Er du sykmeldt fra dette?', 'Ja')
+    it('ARBEID_UNDERVEIS_100_PROSENT_0', () => {
+        svarNeiHovedsporsmal()
         gaVidere()
     })
+    it('ARBEID_UNDERVEIS_GRADERT_0', () => {
+        svarNeiHovedsporsmal()
+        gaVidere()
+    })
+
     it('ANDRE_INNTEKTSKILDER', () => {
         svarJaHovedsporsmal()
         velgCheckbox('frilanser')

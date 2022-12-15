@@ -183,7 +183,7 @@ export const nyArbeidUnderveisSoknad: RSSoknad = {
             id: 'f085f79a-ced7-36b0-9259-0806aa57da5f',
             tag: 'ARBEID_UNDERVEIS_100_PROSENT_0',
             sporsmalstekst:
-                'I perioden 12. - 29. august 2021 var du 100 % sykmeldt fra Butikken. Jobbet du noe i denne perioden?',
+                'I perioden 12. - 29. august 2021 var du 100 % sykmeldt fra Butikken. Jobbet du noe hos Butikken i denne perioden?',
             undertekst: null,
             svartype: 'JA_NEI',
             min: null,
@@ -214,14 +214,18 @@ export const nyArbeidUnderveisSoknad: RSSoknad = {
                             max: null,
                             pavirkerAndreSporsmal: false,
                             kriterieForVisningAvUndersporsmal: 'CHECKED',
-                            svar: [],
+                            svar: [
+                                {
+                                    verdi: 'CHECKED',
+                                },
+                            ],
                             undersporsmal: [
                                 {
                                     id: '5d8e54ed-85af-3481-b7b9-435138d3441a',
                                     tag: 'HVOR_MYE_TIMER_VERDI_0',
                                     sporsmalstekst:
-                                        'Oppgi totalt antall timer du jobbet i perioden 12. - 29. august 2021 hos Butikken?',
-                                    undertekst: 'Eksempel 12 timer',
+                                        'Oppgi totalt antall timer du jobbet hos Butikken i perioden 12. - 29. august 2021',
+                                    undertekst: 'Oppgi i timer. Eksempel: 12',
                                     svartype: 'TIMER',
                                     min: '1',
                                     max: '386',
@@ -248,8 +252,8 @@ export const nyArbeidUnderveisSoknad: RSSoknad = {
                                     id: 'a16a854c-c822-3526-8654-159dc2eb6fb0',
                                     tag: 'HVOR_MYE_PROSENT_VERDI_0',
                                     sporsmalstekst:
-                                        'Oppgi totalt prosent du jobbet i perioden 12. - 29. august 2021 hos Butikken?',
-                                    undertekst: 'Eksempel 40%',
+                                        'Oppgi hvor mange prosent av din normale arbeidstid du jobbet hos Butikken i perioden 12. - 29. august. 2021',
+                                    undertekst: 'Oppgi i prosent. Eksempel: 40',
                                     svartype: 'PROSENT',
                                     min: '1',
                                     max: '99',
