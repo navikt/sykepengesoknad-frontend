@@ -1,5 +1,6 @@
 import { RSSoknad } from '../../types/rs-types/rs-soknad'
 import { Sykmelding } from '../../types/sykmelding'
+import { jsonDeepCopy } from '../../utils/json-deep-copy'
 
 import { soknaderOpplaering } from './data/opplaering'
 import { soknaderReisetilskudd } from './data/reisetilskudd'
@@ -18,6 +19,21 @@ export interface Persona {
 export const utenData: Persona = {
     soknader: [],
     sykmeldinger: [],
+}
+
+const kortSoknadMedID = (id: string) => {
+    const soknad = jsonDeepCopy(arbeidstakerMedOppholdForsteUtenforArbeidsgiverperiodeKvittering)
+    soknad.id = id
+    return soknad
+}
+export const får400vedSendSoknad: Persona = {
+    soknader: [kortSoknadMedID('400-ved-send-soknad')],
+    sykmeldinger: [syk7],
+}
+
+export const får500vedSendSoknad: Persona = {
+    soknader: [kortSoknadMedID('500-ved-send-soknad')],
+    sykmeldinger: [syk7],
 }
 
 export const harKontonummer: Persona = {

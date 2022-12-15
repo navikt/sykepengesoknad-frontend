@@ -3,13 +3,21 @@ import React, { useEffect, useRef, useState } from 'react'
 import { useFormContext } from 'react-hook-form'
 
 import { RSSvartype } from '../../types/rs-types/rs-svartype'
-import { Sporsmal } from '../../types/types'
+import { Soknad, Sporsmal } from '../../types/types'
 import { flattenSporsmal } from '../../utils/soknad-utils'
 import { useAmplitudeInstance } from '../amplitude/amplitude'
-import { SpmProps } from '../sporsmal/sporsmal-form/sporsmal-form'
 import Vis from '../vis'
+import { FetchError } from '../../utils/fetch'
 
-const FeilOppsummering = ({ sporsmal }: SpmProps) => {
+const FeilOppsummering = ({
+    valgtSoknad,
+    sporsmal,
+    sendError,
+}: {
+    valgtSoknad: Soknad
+    sporsmal: Sporsmal
+    sendError: FetchError | null
+}) => {
     const { formState } = useFormContext()
     const [entries, setEntries] = useState<any[]>([])
     const oppsummering = useRef<HTMLDivElement>(null)
@@ -71,31 +79,53 @@ const FeilOppsummering = ({ sporsmal }: SpmProps) => {
         }
     }
 
+    const antall = entries.length + (sendError == null ? 0 : 1)
+
+    const klikk = () => {
+        if (sendError?.status == 400) {
+            window.location.href = `/syk/sykepengesoknad/soknader/${valgtSoknad.id}${window.location.search}`
+        }
+    }
+    const handleKeyDownSendError = (e: any) => {
+        if (e.key === 'Enter') {
+            klikk()
+        }
+    }
     return (
         <div aria-live="polite" role="alert">
             <Vis
-                hvis={entries.length > 0}
-                render={() => (
-                    <ErrorSummary
-                        ref={oppsummering}
-                        size="medium"
-                        heading={'Det er ' + entries.length + ' feil i skjemaet'}
-                        className="feiloppsummering"
-                    >
-                        {entries
-                            .sort((list) => list[0][0])
-                            .map((list, index) => (
-                                <ErrorSummary.Item
-                                    key={index}
-                                    tabIndex={0}
-                                    onKeyDown={(e) => handleKeyDown(e, list)}
-                                    onClick={() => handleClick(list)}
-                                >
-                                    {list[1].message}
-                                </ErrorSummary.Item>
-                            ))}
-                    </ErrorSummary>
-                )}
+                hvis={antall > 0}
+                render={() => {
+                    const elements = entries
+                        .sort((list) => list[0][0])
+                        .map((list, index) => (
+                            <ErrorSummary.Item
+                                key={index}
+                                tabIndex={0}
+                                onKeyDown={(e) => handleKeyDown(e, list)}
+                                onClick={() => handleClick(list)}
+                            >
+                                {list[1].message}
+                            </ErrorSummary.Item>
+                        ))
+                    if (sendError) {
+                        elements.push(
+                            <ErrorSummary.Item onKeyDown={(e) => handleKeyDownSendError(e)} onClick={() => klikk()}>
+                                {sendError?.status == 400
+                                    ? 'Vi har lagret dine svar, men du må laste inn siden på nytt før du kan sende søknaden. Klikk her for å laste inn siden på nytt.'
+                                    : 'Beklager, det oppstod en teknisk feil.'}
+                            </ErrorSummary.Item>,
+                        )
+                    }
+                    const heading = sendError
+                        ? 'Beklager, det oppstod en feil'
+                        : 'Det er ' + antall + ' feil i skjemaet'
+                    return (
+                        <ErrorSummary ref={oppsummering} size="medium" heading={heading} className="feiloppsummering">
+                            {elements}
+                        </ErrorSummary>
+                    )
+                }}
             />
         </div>
     )
