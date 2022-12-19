@@ -20,6 +20,8 @@ import UndersporsmalListe from '../undersporsmal/undersporsmal-liste'
 import { RouteParams } from '../../../app'
 import useSoknad from '../../../hooks/useSoknad'
 
+import { RadioKompForenklet } from './radio-komp-forenklet'
+
 const RadioKomp = ({ sporsmal }: SpmProps) => {
     const {
         register,
@@ -43,6 +45,15 @@ const RadioKomp = ({ sporsmal }: SpmProps) => {
     const { validerGrad, beregnGrad } = validerArbeidsgrad(sporsmal)
     const [surveySvart, setSurveySvart] = useState<boolean>(false)
     const { logEvent } = useAmplitudeInstance()
+
+    const arbeidUnderveisUnderspm = valgtSoknad?.sporsmal
+        .filter((spm) => spm.tag.startsWith('ARBEID_UNDERVEIS_100_PROSENT'))
+        .flatMap((spm) => spm.undersporsmal)
+        .map((spm) => spm.id)
+
+    if (arbeidUnderveisUnderspm?.includes(sporsmal.id)) {
+        return <RadioKompForenklet sporsmal={sporsmal} />
+    }
 
     const lavereProsentHjelpTittel = tekst('ekspanderbarhjelp.prosenten_lavere_enn_forventet_arbeidstaker.tittel')
     return (
