@@ -162,7 +162,7 @@ const SporsmalTekster = {
     'soknad.feilmelding.JOBBER_DU_NORMAL_ARBEIDSUKE_': 'Du må svare på hvor mye du jobber normalt',
 
     'soknad.feilmelding.server.FOR_LAV_GRAD':
-        'Antall timer du skrev inn, betyr at du har jobbet %PROSENT% % av det du gjør når du er frisk. Du må enten svare nei på øverste spørsmålet eller endre antall timer totalt.',
+        'Antall timer du skrev inn, betyr at du har jobbet kalkulertGrad % av det du gjør når du er frisk. Du må enten svare nei på øverste spørsmålet eller endre antall timer totalt.',
 
     'soknad.infotekst.utlandsopphold_sokt_sykepenger.ja':
         'Du må ha sendt en egen <a target="_blank" href="%URL%">utenlandssøknad</a> for å svare ja på dette spørsmålet. Husk at du også må fullføre denne søknaden om sykepenger.',

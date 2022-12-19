@@ -1,22 +1,13 @@
-import { BodyLong, Label, Radio, RadioGroup } from '@navikt/ds-react'
-import React, { useState } from 'react'
+import { BodyLong, Label } from '@navikt/ds-react'
+import React from 'react'
 import { useFormContext } from 'react-hook-form'
-import { useParams } from 'react-router'
 
-import { TagTyper } from '../../../types/enums'
 import { RSSvartype } from '../../../types/rs-types/rs-svartype'
-import { rodeUkeDagerIPerioden } from '../../../utils/helligdager-utils'
-import { hentUndersporsmal } from '../../../utils/soknad-utils'
-import { tekst } from '../../../utils/tekster'
-import { useAmplitudeInstance } from '../../amplitude/amplitude'
-import { Ekspanderbar } from '../../ekspanderbar/ekspanderbar'
 import FeilLokal from '../../feil/feil-lokal'
 import Vis from '../../vis'
 import { SpmProps } from '../sporsmal-form/sporsmal-form'
 import { hentFeilmelding } from '../sporsmal-utils'
 import UndersporsmalListe from '../undersporsmal/undersporsmal-liste'
-import { RouteParams } from '../../../app'
-import useSoknad from '../../../hooks/useSoknad'
 
 const RadioKomp = ({ sporsmal }: SpmProps) => {
     const {
@@ -30,15 +21,8 @@ const RadioKomp = ({ sporsmal }: SpmProps) => {
         watchRadio = getValues(sporsmal.id)
     }
 
-    const errorTimer = errors[hentUndersporsmal(sporsmal!, TagTyper.HVOR_MYE_TIMER_VERDI)!.id]
-
     const feilmelding = hentFeilmelding(sporsmal)
-    const { id } = useParams<RouteParams>()
-    const { data: valgtSoknad } = useSoknad(id)
-    const [surveySvart, setSurveySvart] = useState<boolean>(false)
-    const { logEvent } = useAmplitudeInstance()
 
-    const lavereProsentHjelpTittel = tekst('ekspanderbarhjelp.prosenten_lavere_enn_forventet_arbeidstaker.tittel')
     return (
         <>
             <Label as="h3" className={sporsmal.undertekst ? 'skjema__sporsmal_med_undersporsmal' : 'skjema__sporsmal'}>
@@ -82,67 +66,6 @@ const RadioKomp = ({ sporsmal }: SpmProps) => {
             </div>
 
             <FeilLokal sporsmal={sporsmal} />
-
-            <Vis
-                hvis={errorTimer && rodeUkeDagerIPerioden(valgtSoknad!.fom, valgtSoknad!.tom)}
-                render={() => (
-                    <>
-                        <Ekspanderbar
-                            title={lavereProsentHjelpTittel}
-                            sporsmalId={sporsmal.id}
-                            amplitudeProps={{
-                                component: lavereProsentHjelpTittel,
-                                sporsmaltag: sporsmal.tag,
-                            }}
-                            logVedVisning={lavereProsentHjelpTittel}
-                        >
-                            <div className="avsnitt">
-                                <Label size="medium" as="h3" className="helligdager-tittel">
-                                    {tekst('ekspanderbarhjelp.helligdager.tittel')}
-                                </Label>
-                                <BodyLong spacing>
-                                    {tekst('ekspanderbarhjelp.prosenten_lavere_enn_forventet_arbeidstaker.innhold1')}
-                                </BodyLong>
-                                <BodyLong spacing>
-                                    {tekst('ekspanderbarhjelp.prosenten_lavere_enn_forventet_arbeidstaker.innhold2')}
-                                </BodyLong>
-                                <RadioGroup legend={tekst('ekspanderbarhjelp.helligdager.enkelt-tittel')} size="medium">
-                                    <Radio
-                                        value={tekst('ekspanderbarhjelp.helligdager.enkelt-svar-Ja')}
-                                        onClick={() => {
-                                            if (!surveySvart) {
-                                                setSurveySvart(true)
-                                                logEvent('skjema spørsmål besvart', {
-                                                    skjemanavn: 'hjelpetekst',
-                                                    spørsmål: tekst('ekspanderbarhjelp.helligdager.enkelt-tittel'),
-                                                    svar: tekst('ekspanderbarhjelp.helligdager.enkelt-svar-Ja'),
-                                                })
-                                            }
-                                        }}
-                                    >
-                                        {tekst('ekspanderbarhjelp.helligdager.enkelt-svar-Ja')}
-                                    </Radio>
-                                    <Radio
-                                        value={tekst('ekspanderbarhjelp.helligdager.enkelt-svar-Nei')}
-                                        onClick={() => {
-                                            if (!surveySvart) {
-                                                setSurveySvart(true)
-                                                logEvent('skjema spørsmål besvart', {
-                                                    skjemanavn: 'hjelpetekst',
-                                                    spørsmål: tekst('ekspanderbarhjelp.helligdager.enkelt-tittel'),
-                                                    svar: tekst('ekspanderbarhjelp.helligdager.enkelt-svar-Nei'),
-                                                })
-                                            }
-                                        }}
-                                    >
-                                        {tekst('ekspanderbarhjelp.helligdager.enkelt-svar-Nei')}
-                                    </Radio>
-                                </RadioGroup>
-                            </div>
-                        </Ekspanderbar>
-                    </>
-                )}
-            />
         </>
     )
 }

@@ -48,15 +48,6 @@ export function innenforPaske(min?: Date, max?: Date) {
     return erInnenforPaske
 }
 
-export const førsteNyttårsdag = (inputYear: number) => {
-    return dayjs(`${inputYear}-1-1`)
-} // New Year's Day
-export const arbeidernesDag = (inputYear: number) => {
-    return dayjs(`${inputYear}-5-1`)
-} // labor day
-export const grunnlovsdagen = (inputYear: number) => {
-    return dayjs(`${inputYear}-5-17`)
-} // constitution day
 export const kristiHimmelfartsdag = (inputYear: number) => {
     return easterSunday(inputYear).add(39, 'days')
 } // ascension day
@@ -66,46 +57,3 @@ export const førstePinsedag = (inputYear: number) => {
 export const andrePinsedag = (inputYear: number) => {
     return easterSunday(inputYear).add(50, 'days')
 } // white monday
-export const førsteJuledag = (inputYear: number) => {
-    return dayjs(`${inputYear}-12-25`)
-} // Christmas day
-export const andreJuledag = (inputYear: number) => {
-    return dayjs(`${inputYear}-12-26`)
-} // boxing day
-
-export const rodeDager = (inputYear: number) => {
-    const rodeDagerMinusPaske = [
-        førsteNyttårsdag(inputYear),
-        arbeidernesDag(inputYear),
-        grunnlovsdagen(inputYear),
-        kristiHimmelfartsdag(inputYear),
-        førstePinsedag(inputYear),
-        andrePinsedag(inputYear),
-        førsteJuledag(inputYear),
-        andreJuledag(inputYear),
-    ]
-    return rodeDagerMinusPaske.concat(paskedager(inputYear))
-}
-
-export function rodeUkeDagerIPerioden(min?: Date, max?: Date) {
-    if (!min || !max) {
-        return false
-    }
-
-    const start = dayjs(min)
-    const slutt = dayjs(max)
-    const roodeDager = rodeDager(start.year())
-    let rodDagErIUkeDag = false
-
-    roodeDager.forEach((dag) => {
-        if (
-            (start.isSame(dag, 'day') || slutt.isSame(dag, 'day') || (start.isBefore(dag) && slutt.isAfter(dag))) &&
-            dag.day() !== 0 &&
-            dag.day() !== 6
-        ) {
-            rodDagErIUkeDag = true
-        }
-    })
-
-    return rodDagErIUkeDag
-}
