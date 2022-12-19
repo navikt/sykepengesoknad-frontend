@@ -4,7 +4,6 @@ import { useFormContext } from 'react-hook-form'
 
 import { TagTyper } from '../../../types/enums'
 import { RSSvartype } from '../../../types/rs-types/rs-svartype'
-import validerArbeidsgrad from '../../../utils/sporsmal/valider-arbeidsgrad'
 import { getLedetekst, tekst } from '../../../utils/tekster'
 import Vis from '../../vis'
 import { SpmProps } from '../sporsmal-form/sporsmal-form'
@@ -17,22 +16,6 @@ const TallKomp = ({ sporsmal }: SpmProps) => {
     } = useFormContext()
 
     const feilmelding = hentFeilmelding(sporsmal, errors[sporsmal.id])
-    const { validerGrad, periode, hovedSporsmal } = validerArbeidsgrad(sporsmal)
-
-    const valider = () => {
-        if (validerGrad) {
-            if (![TagTyper.JOBBET_DU_GRADERT, TagTyper.JOBBET_DU_100_PROSENT].includes(hovedSporsmal!.tag)) {
-                return true // hopp over validering dersom det ikke er spørsmål av denne typen
-            }
-
-            if (sporsmal.tag !== TagTyper.HVOR_MYE_TIMER_VERDI) {
-                return true
-            }
-            return validerGrad()
-        } else {
-            return true
-        }
-    }
 
     const className = () => {
         if (!sporsmal.parentKriterie) return ''
@@ -104,7 +87,6 @@ const TallKomp = ({ sporsmal }: SpmProps) => {
                 inputMode={antallDesimaler > 0 ? 'decimal' : 'numeric'}
                 {...register(sporsmal.id, {
                     required: feilmelding.global,
-                    validate: () => valider(),
                     setValueAs: (v) => {
                         if (!v) {
                             return undefined
@@ -143,19 +125,6 @@ const TallKomp = ({ sporsmal }: SpmProps) => {
                                 render={() => (
                                     <BodyShort as="span" className="skjemaelement__feilmelding">
                                         {feilmelding.lokal}
-                                    </BodyShort>
-                                )}
-                            />
-                            <Vis
-                                hvis={
-                                    errors[sporsmal.id]?.type === 'validate' &&
-                                    sporsmal.tag === TagTyper.HVOR_MYE_TIMER_VERDI
-                                }
-                                render={() => (
-                                    <BodyShort as="span" className="skjemaelement__feilmelding">
-                                        {getLedetekst(tekst('soknad.feilmelding.MINDRE_TIMER_ENN_FORVENTET.lokal'), {
-                                            '%GRAD%': 100 - periode!.grad,
-                                        })}
                                     </BodyShort>
                                 )}
                             />

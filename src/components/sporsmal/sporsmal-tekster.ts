@@ -70,9 +70,6 @@ const SporsmalTekster = {
 
     'soknad.feilmelding.HVOR_MYE_TIMER': 'Du må velge et alternativ',
     'soknad.feilmelding.HVOR_MYE_TIMER_VERDI': 'Du må svare på hvor mye du jobbet totalt',
-    'soknad.feilmelding.MINDRE_TIMER_ENN_FORVENTET':
-        'Antall timer du skrev inn, betyr at du har jobbet %PROSENT% % av det du gjør når du er frisk. Du må enten svare nei på øverste spørsmålet eller endre antall timer totalt.',
-    'soknad.feilmelding.MINDRE_TIMER_ENN_FORVENTET.lokal': 'Timene utgjør mindre enn %GRAD% %.',
 
     'soknad.feilmelding.TIDLIGERE_SYK': 'Du må svare på om du var syk med egenmelding eller papirsykmelding',
     'soknad.feilmelding.TIDLIGERE_SYK.lokal': 'Du må velge et av alternativene',
@@ -163,6 +160,9 @@ const SporsmalTekster = {
     'soknad.feilmelding.ARBEID_UNDERVEIS_100_PROSENT': 'Du må svare på om du jobbet noe i denne perioden',
     'soknad.feilmelding.ARBEID_UNDERVEIS_GRADERT': 'Vennligst svar på om du jobbet mer enn sykmeldingen tilsier',
     'soknad.feilmelding.JOBBER_DU_NORMAL_ARBEIDSUKE_': 'Du må svare på hvor mye du jobber normalt',
+
+    'soknad.feilmelding.server.FOR_LAV_GRAD':
+        'Antall timer du skrev inn, betyr at du har jobbet %PROSENT% % av det du gjør når du er frisk. Du må enten svare nei på øverste spørsmålet eller endre antall timer totalt.',
 
     'soknad.infotekst.utlandsopphold_sokt_sykepenger.ja':
         'Du må ha sendt en egen <a target="_blank" href="%URL%">utenlandssøknad</a> for å svare ja på dette spørsmålet. Husk at du også må fullføre denne søknaden om sykepenger.',

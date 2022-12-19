@@ -8,15 +8,18 @@ import { flattenSporsmal } from '../../utils/soknad-utils'
 import { useAmplitudeInstance } from '../amplitude/amplitude'
 import Vis from '../vis'
 import { FetchError } from '../../utils/fetch'
+import { getLedetekst, tekst } from '../../utils/tekster'
 
 const FeilOppsummering = ({
     valgtSoknad,
     sporsmal,
     sendError,
+    oppdaterError,
 }: {
     valgtSoknad: Soknad
     sporsmal: Sporsmal
     sendError: FetchError | null
+    oppdaterError: any | null
 }) => {
     const { formState } = useFormContext()
     const [entries, setEntries] = useState<any[]>([])
@@ -79,7 +82,7 @@ const FeilOppsummering = ({
         }
     }
 
-    const antall = entries.length + (sendError == null ? 0 : 1)
+    const antall = entries.length + (sendError == null ? 0 : 1) + (oppdaterError == null ? 0 : 1)
 
     const klikk = () => {
         if (sendError?.status == 400) {
@@ -114,6 +117,16 @@ const FeilOppsummering = ({
                                 {sendError?.status == 400
                                     ? 'Vi har lagret dine svar, men du må laste inn siden på nytt før du kan sende søknaden. Klikk her for å laste inn siden på nytt.'
                                     : 'Beklager, det oppstod en teknisk feil.'}
+                            </ErrorSummary.Item>,
+                        )
+                    }
+                    if (oppdaterError) {
+                        elements.push(
+                            <ErrorSummary.Item onKeyDown={() => null} onClick={() => null}>
+                                {getLedetekst(
+                                    tekst(`soknad.feilmelding.server.${oppdaterError.reason}` as any),
+                                    oppdaterError,
+                                )}
                             </ErrorSummary.Item>,
                         )
                     }

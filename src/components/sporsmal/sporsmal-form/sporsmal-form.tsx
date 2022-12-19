@@ -51,6 +51,7 @@ const SporsmalForm = () => {
     const { logEvent } = useAmplitudeInstance()
     const [erSiste, setErSiste] = useState<boolean>(false)
     const [poster, setPoster] = useState<boolean>(false)
+    const [oppdaterError, setOppdaterError] = useState<any | null>(null)
     const [endringUtenEndringAapen, setEndringUtenEndringAapen] = useState<boolean>(false)
     const history = useHistory()
     const spmIndex = parseInt(stegId) - 1
@@ -94,7 +95,7 @@ const SporsmalForm = () => {
 
     const sendOppdaterSporsmal = async (): Promise<boolean> => {
         let soknad = valgtSoknad
-
+        setOppdaterError(null)
         let data
         let fikk400 = false
         try {
@@ -108,12 +109,13 @@ const SporsmalForm = () => {
                     body: JSON.stringify(sporsmalToRS(sporsmal)),
                     headers: { 'Content-Type': 'application/json' },
                 },
-                (response) => {
+                async (response) => {
                     if (response.status === 400) {
                         fikk400 = true
-                        setFeilState(true)
+                        restFeilet = true //TODO denne rest feilet er ikke bra
+                    } else {
+                        restFeilet = true
                     }
-                    restFeilet = true
                 },
             )
         } catch (e: any) {
@@ -123,6 +125,11 @@ const SporsmalForm = () => {
             return false
         }
         if (fikk400) {
+            if (data.feilmeldingMedTekst) {
+                setOppdaterError(data)
+            } else {
+                setFeilState(true)
+            }
             return false
         }
         const rsOppdaterSporsmalResponse: RSOppdaterSporsmalResponse = data
@@ -276,7 +283,12 @@ const SporsmalForm = () => {
                             valgtSoknad.soknadstype !== RSSoknadstype.REISETILSKUDD
                         }
                         render={() => (
-                            <FeilOppsummering valgtSoknad={valgtSoknad} sporsmal={sporsmal} sendError={sendError} />
+                            <FeilOppsummering
+                                valgtSoknad={valgtSoknad}
+                                sporsmal={sporsmal}
+                                sendError={sendError}
+                                oppdaterError={oppdaterError}
+                            />
                         )}
                     />
 

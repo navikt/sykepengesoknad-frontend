@@ -1,4 +1,4 @@
-import { Alert, BodyLong, BodyShort, Label, Radio, RadioGroup } from '@navikt/ds-react'
+import { BodyLong, Label, Radio, RadioGroup } from '@navikt/ds-react'
 import React, { useState } from 'react'
 import { useFormContext } from 'react-hook-form'
 import { useParams } from 'react-router'
@@ -7,8 +7,7 @@ import { TagTyper } from '../../../types/enums'
 import { RSSvartype } from '../../../types/rs-types/rs-svartype'
 import { rodeUkeDagerIPerioden } from '../../../utils/helligdager-utils'
 import { hentUndersporsmal } from '../../../utils/soknad-utils'
-import validerArbeidsgrad from '../../../utils/sporsmal/valider-arbeidsgrad'
-import { getLedetekst, tekst } from '../../../utils/tekster'
+import { tekst } from '../../../utils/tekster'
 import { useAmplitudeInstance } from '../../amplitude/amplitude'
 import { Ekspanderbar } from '../../ekspanderbar/ekspanderbar'
 import FeilLokal from '../../feil/feil-lokal'
@@ -31,15 +30,11 @@ const RadioKomp = ({ sporsmal }: SpmProps) => {
         watchRadio = getValues(sporsmal.id)
     }
 
-    // watchTimer er lagt inn for å rendre prosent-alerten
-    // eslint-disable-next-line @typescript-eslint/no-unused-vars
-    const watchTimer = watch(hentUndersporsmal(sporsmal!, TagTyper.HVOR_MYE_TIMER_VERDI)!.id)
     const errorTimer = errors[hentUndersporsmal(sporsmal!, TagTyper.HVOR_MYE_TIMER_VERDI)!.id]
 
     const feilmelding = hentFeilmelding(sporsmal)
     const { id } = useParams<RouteParams>()
     const { data: valgtSoknad } = useSoknad(id)
-    const { validerGrad, beregnGrad } = validerArbeidsgrad(sporsmal)
     const [surveySvart, setSurveySvart] = useState<boolean>(false)
     const { logEvent } = useAmplitudeInstance()
 
@@ -87,19 +82,6 @@ const RadioKomp = ({ sporsmal }: SpmProps) => {
             </div>
 
             <FeilLokal sporsmal={sporsmal} />
-
-            <Vis
-                hvis={watchRadio?.toLowerCase() === 'timer' && beregnGrad?.() && validerGrad!() == true}
-                render={() => (
-                    <Alert variant="info" style={{ marginTop: '1rem' }}>
-                        <BodyShort>
-                            {getLedetekst(tekst('sykepengesoknad.jobb-underveis-timer-i-prosent'), {
-                                '%PROSENT%': Math.floor(beregnGrad!() * 100),
-                            })}
-                        </BodyShort>
-                    </Alert>
-                )}
-            />
 
             <Vis
                 hvis={errorTimer && rodeUkeDagerIPerioden(valgtSoknad!.fom, valgtSoknad!.tom)}

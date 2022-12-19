@@ -7,6 +7,7 @@ import { RSSoknad } from '../../types/rs-types/rs-soknad'
 import { RSSoknadstatus } from '../../types/rs-types/rs-soknadstatus'
 import { RSSoknadstype } from '../../types/rs-types/rs-soknadstype'
 import { jsonDeepCopy } from '../../utils/json-deep-copy'
+import { RSSporsmal } from '../../types/rs-types/rs-sporsmal'
 
 import { arbeidstaker, arbeidstakerGradert, opplaering, soknaderOpplaering } from './data/opplaering'
 import { feilVedSlettingAvKvittering } from './data/reisetilskudd'
@@ -73,6 +74,22 @@ const setUpMock = (person: Persona) => {
                     reason: 'FEIL_STATUS_FOR_OPPDATER_SPORSMAL',
                 }),
             })
+        }
+
+        if (soknadId === arbeidstakerGradert.id && sporsmalId === '687311') {
+            const request = req.body as RSSporsmal
+            const timesvar = request.undersporsmal[1].undersporsmal[0].undersporsmal[0].svar[0].verdi
+            if (timesvar && Number(timesvar) < 40) {
+                return Promise.resolve({
+                    status: 400,
+                    body: JSON.stringify({
+                        reason: 'FOR_LAV_GRAD',
+                        feilmeldingMedTekst: true,
+                        kalkulertGrad: 40,
+                        minimumGrad: 50,
+                    }),
+                })
+            }
         }
 
         const soknad = person.soknader.find((s) => s.id === soknadId)!
