@@ -23,7 +23,7 @@ import QueryStatusPanel from '../queryStatusPanel/QueryStatusPanel'
 import { kvitteringBreadcrumb, useUpdateBreadcrumbs } from '../../hooks/useBreadcrumbs'
 
 import Kvittering from './kvittering'
-import { harSvartJaFravaerForSykmeldingen, harSvartJaJobbetDuUnderveis } from './harSvartJa'
+import { erArbeidstakersoknad } from './harSvartJa'
 
 const KvitteringSide = () => {
     const { id } = useParams<RouteParams>()
@@ -105,11 +105,8 @@ const KvitteringSide = () => {
                         <Vis
                             hvis={gjenstaendeSoknader.length == 0}
                             render={() => {
-                                if (harSvartJaJobbetDuUnderveis(valgtSoknad)) {
+                                if (erArbeidstakersoknad(valgtSoknad)) {
                                     return <UxSignalsWidget study={'study-pjz4cz8bwh'} />
-                                }
-                                if (harSvartJaFravaerForSykmeldingen(valgtSoknad)) {
-                                    return <UxSignalsWidget study={'study-2neea8stgf'} />
                                 }
                                 return null
                             }}
