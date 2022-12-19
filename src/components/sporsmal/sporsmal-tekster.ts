@@ -160,6 +160,8 @@ const SporsmalTekster = {
     'soknad.feilmelding.BIL_BOMPENGER_BELOP': 'Du må svare på hvor mye du betalte i bompenger',
     'soknad.feilmelding.KVITTERINGER': 'Du må oppgi utgift for reisen',
     'soknad.feilmelding.UTBETALING': 'Du må svare på om arbeidsgiveren din legger ut for reisene',
+    'soknad.feilmelding.ARBEID_UNDERVEIS_100_PROSENT': 'Du må svare på om du jobbet noe i denne perioden',
+    'soknad.feilmelding.JOBBER_DU_NORMAL_ARBEIDSUKE_': 'Du må svare på hvor mye du jobber normalt',
 
     'soknad.infotekst.utlandsopphold_sokt_sykepenger.ja':
         'Du må ha sendt en egen <a target="_blank" href="%URL%">utenlandssøknad</a> for å svare ja på dette spørsmålet. Husk at du også må fullføre denne søknaden om sykepenger.',
