@@ -10,7 +10,6 @@ import { hentUndersporsmal } from '../../../utils/soknad-utils'
 import validerArbeidsgrad from '../../../utils/sporsmal/valider-arbeidsgrad'
 import { getLedetekst, tekst } from '../../../utils/tekster'
 import { useAmplitudeInstance } from '../../amplitude/amplitude'
-import AnimateOnMount from '../../animate-on-mount'
 import { Ekspanderbar } from '../../ekspanderbar/ekspanderbar'
 import FeilLokal from '../../feil/feil-lokal'
 import Vis from '../../vis'
@@ -57,8 +56,6 @@ const RadioKomp = ({ sporsmal }: SpmProps) => {
 
             <div className={'skjemaelement' + (errors[sporsmal.id] ? ' skjemagruppe--feil' : '')}>
                 {sporsmal.undersporsmal.map((uspm, idx) => {
-                    const checked = watchRadio === uspm.sporsmalstekst
-
                     return (
                         <div className="radioContainer" key={idx}>
                             <input
@@ -73,19 +70,16 @@ const RadioKomp = ({ sporsmal }: SpmProps) => {
                             <label className="skjemaelement__label" htmlFor={uspm.id}>
                                 {uspm.sporsmalstekst}
                             </label>
+                        </div>
+                    )
+                })}
+                {sporsmal.undersporsmal.map((uspm, idx) => {
+                    const checked = watchRadio === uspm.sporsmalstekst
 
+                    return (
+                        <div key={idx + 'under'} style={{ marginTop: '1rem' }}>
                             <div aria-live="assertive">
-                                <AnimateOnMount
-                                    mounted={checked}
-                                    enter="undersporsmal--vis"
-                                    leave="undersporsmal--skjul"
-                                    start="undersporsmal"
-                                >
-                                    <UndersporsmalListe
-                                        oversporsmal={uspm}
-                                        oversporsmalSvar={checked ? 'CHECKED' : ''}
-                                    />
-                                </AnimateOnMount>
+                                <UndersporsmalListe oversporsmal={uspm} oversporsmalSvar={checked ? 'CHECKED' : ''} />
                             </div>
                         </div>
                     )
