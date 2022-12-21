@@ -25,7 +25,7 @@ export const EkspanderbarHjelpTekster = {
         'Det er helt greit å gå tilbake til vanlig jobb før sykmeldingen er slutt - hvis du er klar for det. Da svarer du ja og skriver inn den dagen du ikke lenger trengte sykmelding.',
     'ekspanderbarhjelp.arbeid_underveis_100_prosent.tittel': 'Hvorfor spør vi om dette?',
     'ekspanderbarhjelp.arbeid_underveis_100_prosent.innhold':
-        'Hvis du er i form til det, kan du jobbe selv om du er helt sykmeldt. Du må da registrere antall timer eller prosent du har jobbet i denne perioden. Vi trenger disse opplysningene for å beregne hvor mye du skal få utbetalt i sykepenger, fordi du har bare rett til sykepenger for den delen du ikke er i jobb',
+        'Hvis du er i form til det, kan du jobbe selv om du er helt sykmeldt. Du må da registrere antall timer eller prosent du har jobbet i denne perioden. Vi trenger disse opplysningene for å beregne hvor mye du skal få utbetalt i sykepenger, fordi du har bare rett til sykepenger for den delen du ikke er i jobb.',
     'ekspanderbarhjelp.jobbet_du_gradert_arbeidstaker.tittel': 'Hvis du hadde færre arbeidsoppgaver',
     'ekspanderbarhjelp.jobbet_du_gradert_arbeidstaker.innhold':
         'Du har kanskje avtalt med arbeidsgiveren din at du skal ha færre arbeidsoppgaver, men bruke lengre tid på dem? Da svarer du i prosent hvor stor mengde av arbeidsoppgavene dine du har utført.',
