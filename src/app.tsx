@@ -47,24 +47,26 @@ const App = (): any => {
                     <Amplitude>
                         <TransitionGroup component={null}>
                             <CSSTransition timeout={{ enter: 500, exit: 0 }} classNames="fade">
-                                <main id="maincontent" role="navigation" tabIndex={-1}>
-                                    <RefreshHvisFeilState>
-                                        <Switch>
-                                            <Route exact={true} path="/" component={Soknader} />
-                                            <Route path="/soknader/:id/:stegId" component={Soknad} />
-                                            <Route path="/soknader/:id" component={Soknad} />
-                                            <Route path="/avbrutt/:id" component={AvbruttSoknad} />
-                                            <Route path="/kvittering/:id" component={KvitteringSide} />
-                                            <Route path="/sendt/:id" component={SendtSide} />
-                                            <Route path="/sykepengesoknad-utland" component={OpprettUtland} />
-                                            <Route path="/soknader/">
-                                                <Redirect to="/" />
-                                            </Route>
-                                            <Route path="">
-                                                <Redirect to="/" />
-                                            </Route>
-                                        </Switch>
-                                    </RefreshHvisFeilState>
+                                <main id="maincontent" role="main" tabIndex={-1}>
+                                    <div role="navigation">
+                                        <RefreshHvisFeilState>
+                                            <Switch>
+                                                <Route exact={true} path="/" component={Soknader} />
+                                                <Route path="/soknader/:id/:stegId" component={Soknad} />
+                                                <Route path="/soknader/:id" component={Soknad} />
+                                                <Route path="/avbrutt/:id" component={AvbruttSoknad} />
+                                                <Route path="/kvittering/:id" component={KvitteringSide} />
+                                                <Route path="/sendt/:id" component={SendtSide} />
+                                                <Route path="/sykepengesoknad-utland" component={OpprettUtland} />
+                                                <Route path="/soknader/">
+                                                    <Redirect to="/" />
+                                                </Route>
+                                                <Route path="">
+                                                    <Redirect to="/" />
+                                                </Route>
+                                            </Switch>
+                                        </RefreshHvisFeilState>
+                                    </div>
                                 </main>
                             </CSSTransition>
                         </TransitionGroup>
