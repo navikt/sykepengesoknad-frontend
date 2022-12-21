@@ -47,7 +47,7 @@ export const Ekspanderbar = ({
                         setExpanded((prev) => !prev)
                     }}
                 >
-                    <Label>{title}</Label>
+                    <Label as="span">{title}</Label>
                 </Accordion.Header>
                 <Accordion.Content>
                     {typeof children === 'string' ? <BodyShort>{children}</BodyShort> : children}

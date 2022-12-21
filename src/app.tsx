@@ -47,7 +47,7 @@ const App = (): any => {
                     <Amplitude>
                         <TransitionGroup component={null}>
                             <CSSTransition timeout={{ enter: 500, exit: 0 }} classNames="fade">
-                                <main id="maincontent" role="main" tabIndex={-1}>
+                                <main id="maincontent" role="navigation" tabIndex={-1}>
                                     <RefreshHvisFeilState>
                                         <Switch>
                                             <Route exact={true} path="/" component={Soknader} />
