@@ -1,7 +1,7 @@
 import { nySoknadSomIkkeKanFyllesUt } from '../../../src/data/mock/data/eldre-usendt-soknad'
 import { kortArbeidstakerSoknad } from '../../../src/data/mock/data/kort-soknad'
 
-xdescribe('Eldre søknader', () => {
+describe('Eldre søknader', () => {
     describe('soknad med en eldre søknad', () => {
         before(() => {
             cy.visit('http://localhost:8080/syk/sykepengesoknad?testperson=en-eldre-usendt-soknad')
