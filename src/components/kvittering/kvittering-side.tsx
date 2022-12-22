@@ -72,7 +72,7 @@ const KvitteringSide = () => {
     const skalViseEndreEllerEttersend =
         valgtSoknad.soknadstype !== RSSoknadstype.OPPHOLD_UTLAND && (skalViseEndre || skalViseSendTilArbeidsgiver)
 
-    const gjenstaendeSoknader = hentGjenstaendeSoknader(soknader)
+    const gjenstaendeSoknader = hentGjenstaendeSoknader(soknader, valgtSoknad)
 
     return (
         <>

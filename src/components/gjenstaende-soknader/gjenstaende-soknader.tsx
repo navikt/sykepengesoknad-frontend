@@ -9,6 +9,7 @@ import { getLedetekst, tekst } from '../../utils/tekster'
 import { useAmplitudeInstance } from '../amplitude/amplitude'
 import { urlTilSoknad } from '../soknad/soknad-link'
 import { RSSoknadmetadata } from '../../types/rs-types/rs-soknadmetadata'
+import { Soknad } from '../../types/types'
 
 interface Props {
     soknader: RSSoknadmetadata[]
@@ -68,8 +69,9 @@ export const GjenstaendeSoknader = ({ soknader, style }: Props) => {
     )
 }
 
-export function hentGjenstaendeSoknader(soknader: RSSoknadmetadata[]) {
+export function hentGjenstaendeSoknader(soknader: RSSoknadmetadata[], valgtSoknad: Soknad) {
     return soknader
+        .filter((s) => s.id !== valgtSoknad.id)
         .filter((s) => s.status === RSSoknadstatus.NY)
         .filter((s) => s.soknadstype !== RSSoknadstype.OPPHOLD_UTLAND)
         .sort((a, b) => a.fom!.getTime() - b.fom!.getTime())

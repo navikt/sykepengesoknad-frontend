@@ -53,7 +53,7 @@ const AvbruttSoknad = () => {
 
     if (!valgtSoknad || !soknader) return <QueryStatusPanel valgSoknadId={id} />
 
-    const gjenstaendeSoknader = hentGjenstaendeSoknader(soknader)
+    const gjenstaendeSoknader = hentGjenstaendeSoknader(soknader, valgtSoknad)
 
     return (
         <>
