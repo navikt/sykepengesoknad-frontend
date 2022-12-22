@@ -9,7 +9,7 @@ import { getLedetekst, tekst } from '../../utils/tekster'
 import { useAmplitudeInstance } from '../amplitude/amplitude'
 import { urlTilSoknad } from '../soknad/soknad-link'
 import { RSSoknadmetadata } from '../../types/rs-types/rs-soknadmetadata'
-import { Soknad } from "../../types/types";
+import { Soknad } from '../../types/types'
 
 interface Props {
     soknader: RSSoknadmetadata[]
