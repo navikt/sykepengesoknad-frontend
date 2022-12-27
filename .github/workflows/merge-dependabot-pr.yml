@@ -1,0 +1,9 @@
+name: merge-dependabot-pr
+on: workflow_dispatch
+
+jobs:
+  label-dependabot-pr:
+    uses: navikt/flex-github-actions-workflows/.github/workflows/merge-dependabot-pr.yml@master
+    permissions:
+      pull-requests: write
+    secrets: inherit
