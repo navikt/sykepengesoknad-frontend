@@ -1,0 +1,13 @@
+name: label-dependabot-pr
+on:
+  pull_request:
+    types: [opened, reopened]
+
+jobs:
+  label-dependabot-pr:
+    uses: navikt/flex-github-actions-workflows/.github/workflows/label-dependabot-pr.yml@master
+    permissions:
+      pull-requests: write
+      issues: write
+      repository-projects: write
+    secrets: inherit
