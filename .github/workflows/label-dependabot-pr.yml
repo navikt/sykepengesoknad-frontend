@@ -1,7 +1,7 @@
 name: label-dependabot-pr
 on:
   pull_request:
-    types: [opened, unlabeled]
+    types: [opened]
 
 jobs:
   label-dependabot-pr:

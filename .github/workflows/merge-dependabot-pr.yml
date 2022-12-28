@@ -6,8 +6,7 @@ jobs:
     uses: navikt/flex-github-actions-workflows/.github/workflows/merge-dependabot-pr.yml@master
     permissions:
       actions: write
-      checks: write
+      checks: read
       contents: write
-      issues: write
       pull-requests: write
       statuses: read
