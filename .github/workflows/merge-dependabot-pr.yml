@@ -9,8 +9,6 @@ jobs:
       checks: write
       contents: write
       issues: write
-      discussions: write
-      packages: write
       pull-requests: write
       repository-projects: write
       security-events: write
