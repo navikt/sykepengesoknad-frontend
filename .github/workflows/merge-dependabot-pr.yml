@@ -3,14 +3,18 @@ on: workflow_dispatch
 
 jobs:
   merge-dependabot-pr:
-    runs-on: ubuntu-latest
-    permissions: write-all
-    steps:
-      - uses: actions/checkout@v3
-      - run: echo "prnumber=$(gh pr list --search "status:success label:automerge" -A app/dependabot -L 1 --json number --template '{{range .}}{{printf "%.0f\n" .number}}{{end}}')" >> $GITHUB_ENV
-        env:
-          GH_TOKEN: ${{ github.token }}
-      - run: echo "${{ env.prnumber }}"
-      - run: gh pr merge ${{ env.prnumber }} --squash
-        env:
-          GH_TOKEN: ${{ github.token }}
+    uses: navikt/flex-github-actions-workflows/.github/workflows/merge-dependabot-pr.yml@master
+    permissions:
+      actions: write
+      checks: write
+      contents: write
+      deployments: write
+      id-token: write
+      issues: write
+      discussions: write
+      packages: write
+      pages: write
+      pull-requests: write
+      repository-projects: write
+      security-events: write
+      statuses: write
