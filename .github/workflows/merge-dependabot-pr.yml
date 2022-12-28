@@ -4,10 +4,7 @@ on: workflow_dispatch
 jobs:
   merge-dependabot-pr:
     runs-on: ubuntu-latest
-    permissions:
-      checks: write
-      contents: read
-      pull-requests: write
+    permissions: write-all
     steps:
       - uses: actions/checkout@v3
       - run: echo "prnumber=$(gh pr list --search "status:success label:automerge" -A app/dependabot -L 1 --json number --template '{{range .}}{{printf "%.0f\n" .number}}{{end}}')" >> $GITHUB_ENV
