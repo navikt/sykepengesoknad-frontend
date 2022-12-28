@@ -10,4 +10,4 @@ jobs:
       pull-requests: write
       issues: write
       repository-projects: write
-    secrets: inherit
+
