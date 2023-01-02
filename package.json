@@ -53,7 +53,7 @@
         "@types/react-router-hash-link": "^2.4.1",
         "@types/react-transition-group": "^4.4.5",
         "@types/uuid": "^9.0.0",
-        "cypress": "^10.11.0",
+        "cypress": "^12.2.0",
         "cypress-axe": "^1.2.0",
         "cypress-file-upload": "^5.0.8",
         "eslint": "^8.31.0",
