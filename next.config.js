@@ -1,66 +1,28 @@
 /* eslint-disable @typescript-eslint/no-var-requires */
 const withLess = require('next-with-less')
 const { withSentryConfig } = require('@sentry/nextjs')
+const { buildCspHeader } = require('@navikt/nav-dekoratoren-moduler/ssr')
 
-const csp = {
-    'default-src': ["'none'"],
-    'connect-src': [
-        "'self'",
-        'https://*.nav.no',
-        'https://www.google-analytics.com',
-        'https://nav.psplugin.com',
-        'https://ta-survey-v2.herokuapp.com',
-        'https://*.hotjar.com',
-        'https://*.hotjar.io',
-        'https://*.uxsignals.com',
-        'wss://*.hotjar.com',
-    ],
-    'img-src': [
-        "'self'",
-        'data:',
-        'blob:',
-        'https://*.nav.no',
-        'https://www.google-analytics.com',
-        'https://*.hotjar.com',
-    ],
-    'font-src': ["'self'", 'data:', 'https://*.psplugin.com', 'https://*.hotjar.com', 'https://fonts.gstatic.com'],
-    'frame-src': ["'self'", 'data:', 'https://*.hotjar.com'],
-    'worker-src': ['blob:', '*.nais.io'],
-    'style-src': ["'self'", "'unsafe-inline'", 'https://*.nav.no', 'https://*.hotjar.com'],
-    'script-src': [
-        "'self'",
-        "'unsafe-inline'",
-        "'unsafe-eval'",
-        'https://*.nav.no',
-        'https://www.googletagmanager.com',
-        'https://www.google-analytics.com',
-        'https://*.hotjar.com',
-        'https://in2.taskanalytics.com',
-        'https://account.psplugin.com',
-        'https://uxsignals-frontend.uxsignals.app.iterate.no',
-    ],
-}
-
-const cspString = Object.entries(csp)
-    .map((entry) => `${entry[0]} ${entry[1].join(' ')}`)
-    .join('; ')
-
-const cspHeader = [
-    {
-        key: 'Content-Security-Policy',
-        value: cspString,
-    },
-]
+const appDirectives = {}
 
 /**
  * @type {import("next").NextConfig}
  */
 const nextConfig = {
     async headers() {
+        const env = { env: process.env.ENVIRONMENT }
+        const cspKey = env === 'prod' ? 'Content-Security-Policy-Report-Only' : 'Content-Security-Policy'
+        const csp = await buildCspHeader(appDirectives, env)
+
         return [
             {
                 source: '/:path*',
-                headers: cspHeader,
+                headers: [
+                    {
+                        key: cspKey,
+                        value: csp,
+                    },
+                ],
             },
             {
                 source: '/api/:path*',
