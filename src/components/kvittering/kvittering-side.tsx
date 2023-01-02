@@ -105,8 +105,8 @@ const KvitteringSide = () => {
                         <Vis
                             hvis={gjenstaendeSoknader.length == 0}
                             render={() => {
-                                if (erArbeidstakersoknad(valgtSoknad)) {
-                                    return <UxSignalsWidget study={'study-v2flg001ur'} />
+                                if (erArbeidstakersoknad(valgtSoknad) && valgtSoknad.korrigerer) {
+                                    return <UxSignalsWidget study={'study-zeh32lhqyb'} />
                                 }
                                 return null
                             }}
