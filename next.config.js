@@ -3,7 +3,10 @@ const withLess = require('next-with-less')
 const { withSentryConfig } = require('@sentry/nextjs')
 const { buildCspHeader } = require('@navikt/nav-dekoratoren-moduler/ssr')
 
-const appDirectives = {}
+const appDirectives = {
+    'script-src': ['https://uxsignals-frontend.uxsignals.app.iterate.no'],
+    'font-src': ['https://fonts.gstatic.com'],
+}
 
 /**
  * @type {import("next").NextConfig}
