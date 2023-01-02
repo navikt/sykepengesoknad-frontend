@@ -18,39 +18,39 @@ describe('Tester ettersending og korrigering', () => {
         cy.contains('Gå videre').click()
 
         cy.url().should('include', `${soknad.id}/2`)
-        cy.get('.inputPanelGruppe__inner label:nth-child(2) > input[value=NEI]').click({ force: true })
+        cy.get('.radioGruppe-jaNei input[value=NEI]').click({ force: true })
         cy.contains('Gå videre').click()
 
         cy.url().should('include', `${soknad.id}/3`)
-        cy.get('.inputPanelGruppe__inner label:nth-child(2) > input[value=NEI]').click({ force: true })
+        cy.get('.radioGruppe-jaNei input[value=NEI]').click({ force: true })
         cy.contains('Gå videre').click()
 
         cy.url().should('include', `${soknad.id}/4`)
-        cy.get('.inputPanelGruppe__inner label:nth-child(2) > input[value=NEI]').click({ force: true })
+        cy.get('.radioGruppe-jaNei input[value=NEI]').click({ force: true })
         cy.contains('Gå videre').click()
 
         cy.url().should('include', `${soknad.id}/5`)
-        cy.get('.inputPanelGruppe__inner label:nth-child(2) > input[value=NEI]').click({ force: true })
+        cy.get('.radioGruppe-jaNei input[value=NEI]').click({ force: true })
         cy.contains('Gå videre').click()
 
         cy.url().should('include', `${soknad.id}/6`)
-        cy.get('.inputPanelGruppe__inner label:nth-child(2) > input[value=NEI]').click({ force: true })
+        cy.get('.radioGruppe-jaNei input[value=NEI]').click({ force: true })
         cy.contains('Gå videre').click()
 
         cy.url().should('include', `${soknad.id}/7`)
-        cy.get('.inputPanelGruppe__inner label:nth-child(2) > input[value=NEI]').click({ force: true })
+        cy.get('.radioGruppe-jaNei input[value=NEI]').click({ force: true })
         cy.contains('Gå videre').click()
 
         cy.url().should('include', `${soknad.id}/8`)
-        cy.get('.inputPanelGruppe__inner label:nth-child(2) > input[value=NEI]').click({ force: true })
+        cy.get('.radioGruppe-jaNei input[value=NEI]').click({ force: true })
         cy.contains('Gå videre').click()
 
         cy.url().should('include', `${soknad.id}/9`)
-        cy.get('.inputPanelGruppe__inner label:nth-child(2) > input[value=NEI]').click({ force: true })
+        cy.get('.radioGruppe-jaNei input[value=NEI]').click({ force: true })
         cy.contains('Gå videre').click()
 
         cy.url().should('include', `${soknad.id}/10`)
-        cy.get('.inputPanelGruppe__inner label:nth-child(2) > input[value=NEI]').click({ force: true })
+        cy.get('.radioGruppe-jaNei input[value=NEI]').click({ force: true })
         cy.contains('Gå videre').click()
 
         cy.url().should('include', `${soknad.id}/11`)

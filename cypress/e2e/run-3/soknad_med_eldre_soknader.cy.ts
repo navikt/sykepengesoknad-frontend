@@ -77,7 +77,7 @@ function fyllUtSoknad() {
         })
         cy.contains('Gå videre').click()
 
-        cy.get('.inputPanelGruppe__inner label:nth-child(2) > input[value=NEI]').click({ force: true })
+        cy.get('.radioGruppe-jaNei input[value=NEI]').click({ force: true })
 
         cy.contains('Gå videre').click()
         cy.contains(

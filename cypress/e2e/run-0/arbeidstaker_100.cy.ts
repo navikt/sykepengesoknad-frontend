@@ -58,7 +58,7 @@ describe('Tester arbeidstakersøknad', () => {
         cy.url().should('include', `${soknad.id}/2`)
 
         // Test spørsmål
-        cy.get('.inputPanelGruppe__inner label:first-child > input[value=JA]').click({ force: true })
+        cy.get('.radioGruppe-jaNei input[value=JA]').click({ force: true })
         cy.contains('Når begynte du å jobbe igjen?')
         cy.get('.ds-datepicker__calendarButton').click()
         cy.get('.DayPicker-Day').contains('20').click()
@@ -70,7 +70,7 @@ describe('Tester arbeidstakersøknad', () => {
         cy.url().should('include', `${soknad.id}/3`)
 
         // Test spørsmål
-        cy.get('.inputPanelGruppe__inner label:first-child > input[value=JA]').click({ force: true })
+        cy.get('.radioGruppe-jaNei input[value=JA]').click({ force: true })
         cy.contains('Når tok du ut feriedager?')
         cy.get('#687344_0 .fom .ds-datepicker__calendarButton').click()
         cy.get('.DayPicker-Day').contains('16').click()
@@ -91,7 +91,7 @@ describe('Tester arbeidstakersøknad', () => {
         cy.contains('Med permisjon mener vi dager du var borte fra jobben av andre grunner enn sykdom').should('exist')
 
         // Test spørsmål
-        cy.get('.inputPanelGruppe__inner label:first-child > input[value=JA]').click({ force: true })
+        cy.get('.radioGruppe-jaNei input[value=JA]').click({ force: true })
         cy.contains('Når tok du permisjon?')
         cy.get('#687346_0 .fom .ds-datepicker__calendarButton').click()
         cy.get('.DayPicker-Day').contains('14').click()
@@ -105,7 +105,7 @@ describe('Tester arbeidstakersøknad', () => {
         cy.url().should('include', `${soknad.id}/5`)
 
         // Test spørsmål
-        cy.get('.inputPanelGruppe__inner label:first-child > input[value=JA]').click({ force: true })
+        cy.get('.radioGruppe-jaNei input[value=JA]').click({ force: true })
         cy.contains('Når var du utenfor EØS?')
         cy.get('#687348_0 .fom .ds-datepicker__calendarButton').click()
         cy.get('.DayPicker-Day').contains('14').click()
@@ -119,7 +119,7 @@ describe('Tester arbeidstakersøknad', () => {
         cy.url().should('include', `${soknad.id}/6`)
 
         // Test spørsmål
-        cy.get('.inputPanelGruppe__inner label:first-child > input[value=JA]').click({ force: true })
+        cy.get('.radioGruppe-jaNei input[value=JA]').click({ force: true })
 
         // Underspørsmål 1
         cy.contains(
@@ -152,7 +152,7 @@ describe('Tester arbeidstakersøknad', () => {
 
         cy.contains('Har du andre inntektskilder enn Posten Norge AS, Bærum?')
 
-        cy.get('.inputPanelGruppe__inner label:first-child > input[value=JA]').click({ force: true })
+        cy.get('.radioGruppe-jaNei input[value=JA]').click({ force: true })
 
         cy.contains('Velg inntektskildene som passer for deg. Finner du ikke noe som passer for deg, svarer du nei')
         cy.get('.undersporsmal .checkboxgruppe label[for=d9ac4359-5519-34f1-b59d-b5ab24e55821]')
@@ -172,7 +172,7 @@ describe('Tester arbeidstakersøknad', () => {
         cy.url().should('include', `${soknad.id}/8`)
 
         // Test spørsmål
-        cy.get('.inputPanelGruppe__inner label:first-child > input[value=JA]').click({ force: true })
+        cy.get('.radioGruppe-jaNei input[value=JA]').click({ force: true })
 
         // Underspørsmål 1
         cy.contains('Når startet du på utdanningen?')
