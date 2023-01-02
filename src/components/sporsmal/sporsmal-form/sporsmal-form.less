@@ -92,17 +92,6 @@
         }
     }
 
-    .inputPanelGruppe__inner {
-        display: flex;
-        justify-content: space-between;
-        flex-wrap: wrap;
-
-        .inputPanel {
-            width: 100%;
-        }
-    }
-
-    .inputPanel__label,
     .checkboks + .skjemaelement__label,
     .radioknapp + .skjemaelement__label {
         font-size: 1.125rem;
@@ -230,18 +219,6 @@
 
 @media (min-width: @screen-sm) {
     .sporsmal__form {
-        .inputPanelGruppe {
-            .inputPanel:not(:last-child) {
-                margin-bottom: 0;
-            }
-        }
-
-        .inputPanelGruppe__inner {
-            .inputPanel {
-                width: 48.7%;
-            }
-        }
-
         .knapperad {
             margin: 2rem 0;
         }
