@@ -15,7 +15,6 @@ const appDirectives = {
 const nextConfig = {
     async headers() {
         const env = { env: process.env.ENVIRONMENT }
-        const cspKey = env === 'prod' ? 'Content-Security-Policy-Report-Only' : 'Content-Security-Policy'
         const csp = await buildCspHeader(appDirectives, env)
 
         return [
@@ -23,7 +22,7 @@ const nextConfig = {
                 source: '/:path*',
                 headers: [
                     {
-                        key: cspKey,
+                        key: 'Content-Security-Policy',
                         value: csp,
                     },
                 ],
@@ -74,10 +73,6 @@ const nextConfig = {
 }
 
 const withSentry = (nextConfig) =>
-    process.env.ENABLE_SENTRY
-        ? withSentryConfig(nextConfig, {
-              silent: true,
-          })
-        : nextConfig
+    process.env.ENABLE_SENTRY ? withSentryConfig(nextConfig, { silent: true }) : nextConfig
 
 module.exports = withLess(withSentry(nextConfig))
