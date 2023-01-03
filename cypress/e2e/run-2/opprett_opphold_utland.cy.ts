@@ -42,9 +42,7 @@ describe('Tester opprettelse av søknad om å beholde sykepenger utenfor EØS', 
             .find('a')
             .should('have.attr', 'href', '/syk/sykepengesoknad/sykepengesoknad-utland')
 
-        cy.get('.inputPanelGruppe__inner input[value=NEI]').click({
-            force: true,
-        })
+        cy.get('.radioGruppe-jaNei input[value=NEI]').click({ force: true })
 
         cy.get('.utland_infotekst')
             .should(
