@@ -6,8 +6,7 @@ const BjornTekster = {
     'soknad.bjorn.ferie_v2':
         'Et lite tips! Syns du det er vanskelig å svare på om du har tatt ut ferie eller ikke, finnes det en ',
     'soknad.bjorn.ferie_v2_lenketekst': 'veiledning på nav.no',
-    'soknad.bjorn.ferie_v2_lenke':
-        'https://www.nav.no/no/person/arbeid/sykmeldt-arbeidsavklaringspenger-og-yrkesskade/papirsykmelding/hvorfor-spor-vi-om-ferie-i-soknaden-om-sykepenger',
+    'soknad.bjorn.ferie_v2_lenke': 'https://www.nav.no/sykepenger#ferie',
     'soknad.bjorn.fraver_for_behandling':
         'Vi trenger å vite om du har brukt egenmeldinger eller en papirsykmelding noen dager før denne sykmeldingen. Det er for å kunne beregne sykepengene dine riktig.',
     'soknad.bjorn.periodeutland':
