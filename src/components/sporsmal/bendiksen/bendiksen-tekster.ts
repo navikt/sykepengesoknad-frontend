@@ -5,8 +5,7 @@ const BendiksenTekster = {
     'soknad.bendiksen.paske.tips':
         '<strong>Et lite tips!</strong> Synes du det er vanskelig å svare på om du har tatt ut ferie eller ikke, finnes det en ',
     'soknad.bendiksen.paske.lenketekst': 'veiledning på nav.no',
-    'soknad.bendiksen.paske.lenke':
-        'https://www.nav.no/no/person/arbeid/sykmeldt-arbeidsavklaringspenger-og-yrkesskade/papirsykmelding/hvorfor-spor-vi-om-ferie-i-soknaden-om-sykepenger',
+    'soknad.bendiksen.paske.lenke': 'https://www.nav.no/sykepenger#ferie',
 }
 
 export default BendiksenTekster
