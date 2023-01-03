@@ -68,22 +68,16 @@ const JaNeiInput = ({ sporsmal }: SpmProps) => {
                     name={sporsmal.id}
                     rules={{ validate: (value) => valider(value), required: feilmelding.global }}
                     render={({ field }) => (
-                        <RadioGroup
-                            legend=""
-                            name={field.name}
-                            hideLegend={true}
-                            className="radioGruppe-jaNei"
-                            onChange={field.onChange}
-                        >
+                        <RadioGroup {...field} legend="" hideLegend={true} className="radioGruppe-jaNei">
                             <Radio
-                                id={sporsmal.id + '_' + '0'}
+                                id={field.name + '_' + '0'}
                                 value="JA"
                                 className={'radio-input' + (watchJaNei === 'JA' ? ' radio-checked' : '')}
                             >
                                 Ja
                             </Radio>
                             <Radio
-                                id={sporsmal.id + '_' + '1'}
+                                id={field.name + '_' + '1'}
                                 value="NEI"
                                 className={'radio-input' + (watchJaNei === 'NEI' ? ' radio-checked' : '')}
                             >
