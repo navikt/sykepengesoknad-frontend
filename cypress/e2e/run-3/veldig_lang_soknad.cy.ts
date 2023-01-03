@@ -10,11 +10,11 @@ describe('Tester støtte for gamle spørsmål', () => {
     let steg = 1
 
     function svarJaHovedsporsmal() {
-        cy.get('.inputPanelGruppe__inner label:first-child > input[value=JA]').click({ force: true })
+        cy.get('.radioGruppe-jaNei input[value=JA]').click({ force: true })
     }
 
     function svarNeiHovedsporsmal() {
-        cy.get('.inputPanelGruppe__inner label:nth-child(2) > input[value=NEI]').click({ force: true })
+        cy.get('.radioGruppe-jaNei input[value=NEI]').click({ force: true })
     }
 
     function svarCheckboxPanel() {

@@ -48,7 +48,7 @@ describe('Tester frilansersøknad', () => {
         cy.url().should('include', `${soknad.id}/2`)
 
         // Test spørsmål
-        cy.get('.inputPanelGruppe__inner label:first-child > input[value=JA]').click({ force: true })
+        cy.get('.radioGruppe-jaNei input[value=JA]').click({ force: true })
         cy.contains('Når begynte du å jobbe igjen?')
         cy.get('.ds-datepicker__calendarButton').click()
         cy.get('.DayPicker-Day').contains('20').click()
@@ -60,7 +60,7 @@ describe('Tester frilansersøknad', () => {
         cy.url().should('include', `${soknad.id}/3`)
 
         // Test spørsmål
-        cy.get('.inputPanelGruppe__inner label:first-child > input[value=JA]').click({ force: true })
+        cy.get('.radioGruppe-jaNei input[value=JA]').click({ force: true })
 
         // Underspørsmål 1
         cy.contains(
@@ -81,7 +81,7 @@ describe('Tester frilansersøknad', () => {
         cy.url().should('include', `${soknad.id}/4`)
 
         // Test spørsmål
-        cy.get('.inputPanelGruppe__inner label:first-child > input[value=JA]').click({ force: true })
+        cy.get('.radioGruppe-jaNei input[value=JA]').click({ force: true })
 
         // Svarer JA
         // Underspørsmål nivå 1 - checkbox
@@ -104,7 +104,7 @@ describe('Tester frilansersøknad', () => {
 
         // Test spørsmål
         cy.contains('Har du vært utenfor EØS mens du var sykmeldt 1. - 24. april 2020?')
-        cy.get('.inputPanelGruppe__inner label:first-child > input[value=JA]').click({ force: true })
+        cy.get('.radioGruppe-jaNei input[value=JA]').click({ force: true })
 
         // Underspørsmål 1
         cy.contains('Når var du utenfor EØS?')
@@ -145,7 +145,7 @@ describe('Tester frilansersøknad', () => {
         cy.url().should('include', `${soknad.id}/6`)
 
         // Test spørsmål
-        cy.get('.inputPanelGruppe__inner label:first-child > input[value=JA]').click({ force: true })
+        cy.get('.radioGruppe-jaNei input[value=JA]').click({ force: true })
         cy.contains('Har du arbeidet i utlandet i løpet av de siste 12 månedene?')
 
         cy.contains('Gå videre').click()
@@ -156,7 +156,7 @@ describe('Tester frilansersøknad', () => {
 
         // Test spørsmål
         cy.contains('Har du vært under utdanning i løpet av perioden 1. - 24. april 2020?')
-        cy.get('.inputPanelGruppe__inner label:first-child > input[value=JA]').click({ force: true })
+        cy.get('.radioGruppe-jaNei input[value=JA]').click({ force: true })
 
         // Underspørsmål 1
         cy.contains('Når startet du på utdanningen?')

@@ -34,7 +34,7 @@ describe('Tester arbeidsledigsøknad', () => {
         cy.url().should('include', `${soknad.id}/2`)
 
         // Test spørsmål
-        cy.get('.inputPanelGruppe__inner label:nth-child(2) > input[value=NEI]').click({ force: true })
+        cy.get('.radioGruppe-jaNei input[value=NEI]').click({ force: true })
         cy.contains('Fra hvilken dato trengte du ikke lenger sykmeldingen?')
         cy.get('.ds-datepicker__calendarButton').click()
         cy.get('.DayPicker-Day').contains('20').click()
@@ -47,7 +47,7 @@ describe('Tester arbeidsledigsøknad', () => {
 
         // Test spørsmål
         cy.contains('Har du hatt inntekt mens du har vært sykmeldt i perioden 1. - 24. april 2020?')
-        cy.get('.inputPanelGruppe__inner label:first-child > input[value=JA]').click({ force: true })
+        cy.get('.radioGruppe-jaNei input[value=JA]').click({ force: true })
 
         // Når ingen velges så dukker bare 1 feilmelding opp
         cy.contains('Gå videre').click()
@@ -75,7 +75,7 @@ describe('Tester arbeidsledigsøknad', () => {
         cy.url().should('include', `${soknad.id}/4`)
 
         // Test spørsmål
-        cy.get('.inputPanelGruppe__inner label:first-child > input[value=JA]').click({ force: true })
+        cy.get('.radioGruppe-jaNei input[value=JA]').click({ force: true })
 
         // Underspørsmål 1
         cy.contains('Når startet du på utdanningen?')
@@ -95,7 +95,7 @@ describe('Tester arbeidsledigsøknad', () => {
 
         // Test spørsmål
         cy.contains('Var du på reise utenfor EØS mens du var sykmeldt 1. - 24. april 2020?')
-        cy.get('.inputPanelGruppe__inner label:first-child > input[value=JA]').click({ force: true })
+        cy.get('.radioGruppe-jaNei input[value=JA]').click({ force: true })
 
         // Underspørsmål 1
         cy.contains('Når var du utenfor EØS?')

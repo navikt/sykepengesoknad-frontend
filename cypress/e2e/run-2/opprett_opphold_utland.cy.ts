@@ -32,7 +32,7 @@ describe('Tester opprettelse av søknad om å beholde sykepenger utenfor EØS', 
         // Test spørsmål
         cy.get('.sporsmal__tittel').should('have.text', 'Sykepenger utenfor EØS')
         cy.contains('Har du søkt om å beholde sykepengene for de dagene du var utenfor EØS?')
-        cy.get('.inputPanelGruppe__inner label:first-child > input[value=JA]').click({ force: true })
+        cy.get('.radioGruppe-jaNei input[value=JA]').click({ force: true })
 
         cy.get('.utland_infotekst')
             .should(
@@ -42,9 +42,7 @@ describe('Tester opprettelse av søknad om å beholde sykepenger utenfor EØS', 
             .find('a')
             .should('have.attr', 'href', '/syk/sykepengesoknad/sykepengesoknad-utland')
 
-        cy.get('.inputPanelGruppe__inner input[value=NEI]').click({
-            force: true,
-        })
+        cy.get('.radioGruppe-jaNei input[value=NEI]').click({ force: true })
 
         cy.get('.utland_infotekst')
             .should(

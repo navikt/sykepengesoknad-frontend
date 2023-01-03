@@ -1,0 +1,43 @@
+@import '../../../../node_modules/@navikt/ds-tokens/dist/tokens';
+@import '../../basic';
+
+.radioGruppe-jaNei {
+    width: 100%;
+
+    .navds-radio-buttons {
+        display: flex;
+        justify-content: space-between;
+        flex-wrap: wrap;
+
+        .radio-input {
+            width: 100%;
+            border: 1px solid @navds-global-color-gray-600;
+            border-radius: 0.25rem;
+            display: block;
+            padding: 0.3rem 1rem;
+
+            &:not(:last-child) {
+                margin-bottom: 0.5rem;
+            }
+
+            &.radio-checked {
+                border: 1px solid @navds-semantic-color-interaction-primary;
+                background-color: @navds-global-color-blue-100;
+            }
+        }
+    }
+}
+
+@media (min-width: @screen-sm) {
+    .radioGruppe-jaNei {
+        .navds-radio-buttons {
+            .radio-input {
+                width: 48.7%;
+
+                &:not(:last-child) {
+                    margin-bottom: 0;
+                }
+            }
+        }
+    }
+}

@@ -182,7 +182,7 @@ describe('Tester kvittering', () => {
                 force: true,
             })
             cy.contains('Gå videre').click()
-            cy.get('.inputPanelGruppe__inner label:nth-child(2) > input[value=NEI]').click({ force: true })
+            cy.get('.radioGruppe-jaNei input[value=NEI]').click({ force: true })
             cy.contains('Gå videre').click()
             cy.get('.navds-checkbox__label').click({ force: true })
             cy.contains('Send søknaden').click()

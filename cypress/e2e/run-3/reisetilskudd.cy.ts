@@ -66,7 +66,7 @@ describe('Teste førsteside i reisetilskuddsøknaden', () => {
         })
 
         it('Tester beløp valget', () => {
-            cy.get('.inputPanelGruppe__inner label:first-child > input[value=JA]').click({ force: true })
+            cy.get('.radioGruppe-jaNei input[value=JA]').click({ force: true })
             cy.get(':nth-child(1) > .skjemaelement__label').click({
                 force: true,
             })
@@ -92,7 +92,7 @@ describe('Teste førsteside i reisetilskuddsøknaden', () => {
         })
 
         it('Svar ja på hovedspørsmålet', () => {
-            cy.get('.inputPanelGruppe__inner label:first-child > input[value=JA]').click({ force: true })
+            cy.get('.radioGruppe-jaNei input[value=JA]').click({ force: true })
             cy.get('.undersporsmal > :nth-child(1)').should(
                 'have.text',
                 'Hvilke dager reiste du med bil i perioden 23. desember 2020 - 7. januar 2021?',
@@ -308,7 +308,7 @@ describe('Teste førsteside i reisetilskuddsøknaden', () => {
         })
 
         it('Arbeidsgiveren legger ut for reisene', () => {
-            cy.get('.inputPanelGruppe__inner label:first-child > input[value=JA]').click({ force: true })
+            cy.get('.radioGruppe-jaNei input[value=JA]').click({ force: true })
             cy.contains('Gå videre').click()
         })
     })

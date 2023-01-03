@@ -1,7 +1,7 @@
-import { BodyLong, Label } from '@navikt/ds-react'
+import { BodyLong, Label, RadioGroup, Radio } from '@navikt/ds-react'
 import parser from 'html-react-parser'
 import React from 'react'
-import { useFormContext } from 'react-hook-form'
+import { useFormContext, Controller } from 'react-hook-form'
 
 import { TagTyper } from '../../../types/enums'
 import { getLedetekst, tekst } from '../../../utils/tekster'
@@ -18,20 +18,8 @@ import { SpmProps } from '../sporsmal-form/sporsmal-form'
 import { hentFeilmelding, sporsmalIdListe } from '../sporsmal-utils'
 import UndersporsmalListe from '../undersporsmal/undersporsmal-liste'
 
-const jaNeiValg = [
-    {
-        value: 'JA',
-        label: 'Ja',
-    },
-    {
-        value: 'NEI',
-        label: 'Nei',
-    },
-]
-
 const JaNeiInput = ({ sporsmal }: SpmProps) => {
     const {
-        register,
         formState: { errors },
         clearErrors,
         watch,
@@ -65,11 +53,7 @@ const JaNeiInput = ({ sporsmal }: SpmProps) => {
 
     return (
         <>
-            <div
-                className={
-                    'inputPanelGruppe inputPanelGruppe--horisontal' + (errors[sporsmal.id] ? ' skjemagruppe--feil' : '')
-                }
-            >
+            <div className={'inputPanelGruppe' + (errors[sporsmal.id] ? ' skjemagruppe--feil' : '')}>
                 <Label as="h2" className="skjema__sporsmal">
                     {sporsmal.sporsmalstekst}
                 </Label>
@@ -80,26 +64,28 @@ const JaNeiInput = ({ sporsmal }: SpmProps) => {
 
                 <EkspanderbarHjelp sporsmal={sporsmal} />
 
-                <div className="inputPanelGruppe__inner">
-                    {jaNeiValg.map((valg, idx) => {
-                        const OK = watchJaNei === valg.value
-                        return (
-                            <label className={'inputPanel radioPanel' + (OK ? ' inputPanel--checked' : '')} key={idx}>
-                                <input
-                                    type="radio"
-                                    id={sporsmal.id + '_' + idx}
-                                    className="inputPanel__field"
-                                    value={valg.value}
-                                    {...register(sporsmal.id, {
-                                        validate: (value) => valider(value),
-                                        required: feilmelding.global,
-                                    })}
-                                />
-                                <span className="inputPanel__label">{valg.label}</span>
-                            </label>
-                        )
-                    })}
-                </div>
+                <Controller
+                    name={sporsmal.id}
+                    rules={{ validate: (value) => valider(value), required: feilmelding.global }}
+                    render={({ field }) => (
+                        <RadioGroup {...field} legend="" hideLegend={true} className="radioGruppe-jaNei">
+                            <Radio
+                                id={field.name + '_' + '0'}
+                                value="JA"
+                                className={'radio-input' + (watchJaNei === 'JA' ? ' radio-checked' : '')}
+                            >
+                                Ja
+                            </Radio>
+                            <Radio
+                                id={field.name + '_' + '1'}
+                                value="NEI"
+                                className={'radio-input' + (watchJaNei === 'NEI' ? ' radio-checked' : '')}
+                            >
+                                Nei
+                            </Radio>
+                        </RadioGroup>
+                    )}
+                />
 
                 <Vis
                     hvis={sporsmal?.tag === TagTyper.UTLANDSOPPHOLD_SOKT_SYKEPENGER && watchJaNei}
