@@ -17,7 +17,8 @@
         "strictNullChecks": true,
         "noFallthroughCasesInSwitch": true,
         "incremental": true,
-        "baseUrl": "/syk/sykepengesoknad"
+        "baseUrl": "/syk/sykepengesoknad",
+        "types": ["cypress", "node", "cypress-real-events"]
     },
     "include": ["src"],
     "exclude": ["node_modules"]
