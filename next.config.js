@@ -4,8 +4,9 @@ const { withSentryConfig } = require('@sentry/nextjs')
 const { buildCspHeader } = require('@navikt/nav-dekoratoren-moduler/ssr')
 
 const appDirectives = {
+    'script-src-elem': ['navtest.boost.ai'],
     'connect-src': ['https://*.uxsignals.com'],
-    'script-src': ['https://uxsignals-frontend.uxsignals.app.iterate.no'],
+    'script-src': ['https://uxsignals-frontend.uxsignals.app.iterate.no', 'navtest.boost.ai'],
     'font-src': ['https://fonts.gstatic.com'],
 }
 
@@ -14,8 +15,7 @@ const appDirectives = {
  */
 const nextConfig = {
     async headers() {
-        const env = { env: process.env.ENVIRONMENT }
-        const csp = await buildCspHeader(appDirectives, env)
+        const csp = await buildCspHeader(appDirectives, { env: process.env.ENVIRONMENT })
 
         return [
             {
