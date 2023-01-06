@@ -236,7 +236,7 @@ const OpplastingForm = ({ valgtSoknad, valgtKvittering, setOpenModal, valgtFil, 
                                 hvis={methods.formState.errors['belop_input']?.message}
                                 render={() => (
                                     <BodyShort as="span" className="skjemaelement__feilmelding">
-                                        {methods.formState.errors['belop_input']?.message}
+                                        <>{methods.formState.errors['belop_input']?.message}</>
                                     </BodyShort>
                                 )}
                             />
