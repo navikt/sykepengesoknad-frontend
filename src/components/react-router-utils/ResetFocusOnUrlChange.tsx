@@ -1,5 +1,5 @@
 import { useEffect, useRef } from 'react'
-import { useHistory, useLocation } from 'react-router-dom'
+import { useLocation } from 'react-router-dom'
 
 interface ResetFocusOnUrlChangeProps {
     children: React.ReactNode
@@ -7,7 +7,6 @@ interface ResetFocusOnUrlChangeProps {
 
 const ResetFocusOnUrlChange = (props: ResetFocusOnUrlChangeProps) => {
     const ref = useRef<HTMLDivElement>(null)
-    const history = useHistory()
     const location = useLocation()
 
     // remove once react-router accessibility issue is fixed
