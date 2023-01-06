@@ -10,7 +10,7 @@
     width: @ukebredde;
     margin-top: 1.5rem;
     outline: 0;
-    border: 2px solid @navds-semantic-color-interaction-primary;
+    border: 2px solid @a-surface-action;
 
     .kalender__tittel {
         text-align: center;
@@ -45,7 +45,7 @@
         font-size: 0.9rem;
         font-style: italic;
         padding: 0.9rem 0;
-        border-right: 1px solid @navds-global-color-gray-400;
+        border-right: 1px solid @a-gray-400;
     }
 
     .kalenderdag {
@@ -55,7 +55,7 @@
 
         label {
             &:hover {
-                background-color: @navds-global-color-gray-100;
+                background-color: @a-gray-100;
                 cursor: pointer;
             }
         }
@@ -66,33 +66,33 @@
             min-width: 100%;
             padding: 0.9rem 0;
             text-align: center;
-            color: @navds-global-color-gray-900;
-            border-right: 1px solid @navds-global-color-white;
-            border-bottom: 1px solid @navds-global-color-white;
+            color: @a-gray-900;
+            border-right: 1px solid @a-bg-default;
+            border-bottom: 1px solid @a-bg-default;
         }
 
         &.sun {
             label,
             span.label {
-                color: @navds-global-color-red-500;
+                color: @a-red-500;
             }
         }
 
         &.foran,
         &.etter {
-            background-color: @navds-global-color-gray-100;
+            background-color: @a-gray-100;
 
             label,
             span.label {
-                color: @navds-global-color-gray-600;
+                color: @a-gray-600;
                 font-weight: normal;
             }
         }
 
         input {
             &.checked + label {
-                background-color: @navds-semantic-color-interaction-primary;
-                color: @navds-global-color-white;
+                background-color: @a-surface-action;
+                color: @a-bg-default;
             }
         }
     }
@@ -107,7 +107,7 @@
             &:focus {
                 box-shadow: none;
                 background-color: transparent;
-                color: @navds-semantic-color-interaction-primary;
+                color: @a-surface-action;
                 text-decoration: underline;
 
                 &:hover {

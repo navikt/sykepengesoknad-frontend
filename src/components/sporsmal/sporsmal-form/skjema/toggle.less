@@ -5,17 +5,17 @@
 }
 
 .toggle > :first-child .toggle__label {
-    border-radius: @navds-border-radius-small 0 0 @navds-border-radius-small;
+    border-radius: @a-border-radius-small 0 0 @a-border-radius-small;
 }
 
 .toggle > :last-child .toggle__label {
-    border-radius: 0 @navds-border-radius-small @navds-border-radius-small 0;
-    border-right: 1px solid @navds-global-color-gray-900;
+    border-radius: 0 @a-border-radius-small @a-border-radius-small 0;
+    border-right: 1px solid @a-gray-900;
     margin-left: -1px;
 }
 
 .toggle__label {
-    font-family: @navds-font-family;
+    font-family: @a-font-family;
     font-size: 16px;
     line-height: 22px;
     font-weight: 400;
@@ -23,10 +23,10 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    background-color: @navds-global-color-white;
-    border: 1px solid @navds-global-color-gray-900;
+    background-color: @a-bg-default;
+    border: 1px solid @a-gray-900;
     border-right: 0;
-    color: @navds-global-color-gray-900;
+    color: @a-gray-900;
     cursor: pointer;
     min-width: 6.25rem;
     height: 2rem;
@@ -36,18 +36,18 @@
 }
 
 .toggle__label:hover {
-    border-color: @navds-semantic-color-interaction-primary;
-    color: @navds-semantic-color-interaction-primary;
+    border-color: @a-surface-action;
+    color: @a-surface-action;
 }
 
 .toggle__input:checked + label {
-    background-color: @navds-global-color-deepblue-500;
-    color: @navds-global-color-white;
-    border-color: @navds-global-color-deepblue-500;
+    background-color: @a-deepblue-500;
+    color: @a-bg-default;
+    border-color: @a-deepblue-500;
 }
 
 .toggle__input:focus + label {
     position: relative;
     z-index: 999;
-    box-shadow: 0 0 0 3px @navds-semantic-color-focus;
+    box-shadow: 0 0 0 3px @a-border-focus;
 }

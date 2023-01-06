@@ -57,32 +57,32 @@
 }
 
 .skjemaelement__input() {
-    font-family: @navds-font-family;
+    font-family: @a-font-family;
     font-size: 16px;
     font-weight: 400;
     appearance: none;
     padding: 0.5rem;
-    background-color: @navds-global-color-white;
-    border-radius: @navds-border-radius-medium;
-    border: 1px solid @navds-global-color-gray-600;
+    background-color: @a-bg-default;
+    border-radius: @a-border-radius-medium;
+    border: 1px solid @a-gray-600;
     box-sizing: border-box;
     line-height: 1.375rem;
 
     &:focus {
         outline: 0;
-        box-shadow: 0 0 0 3px @navds-global-color-blue-800;
+        box-shadow: 0 0 0 3px @a-blue-800;
     }
 
     &:hover {
-        border-color: @navds-semantic-color-interaction-primary;
+        border-color: @a-surface-action;
     }
 
     &:disabled,
     &[readonly] {
-        background-color: @navds-global-color-gray-100;
-        border-color: @navds-global-color-gray-600;
+        background-color: @a-gray-100;
+        border-color: @a-gray-600;
         box-shadow: none;
-        color: @navds-global-color-gray-900;
+        color: @a-gray-900;
 
         &:hover {
             cursor: not-allowed;
