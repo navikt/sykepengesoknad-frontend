@@ -126,7 +126,7 @@ const OpplastingForm = ({ valgtSoknad, valgtKvittering, setOpenModal, valgtFil, 
 
     return (
         <FormProvider {...methods}>
-            <form className="opplasting-form" key="opplasting_form">
+            <form className="opplasting-form" key="opplasting_form" data-cy="opplasting-form">
                 <Heading size="medium" className="opplasting-header" id="modal-tittel">
                     {kvitteringHeader}
                 </Heading>
@@ -278,6 +278,7 @@ const OpplastingForm = ({ valgtSoknad, valgtKvittering, setOpenModal, valgtFil, 
                         onClick={() => {
                             setOpenModal(false)
                         }}
+                        data-cy="opplasting-modal-tilbake"
                     >
                         {tekst('opplasting_modal.tilbake')}
                     </Button>

@@ -38,7 +38,10 @@ const Perioder = ({ sporsmal }: SpmProps) => {
     }
 
     return (
-        <div className={sporsmal.parentKriterie ? 'kriterie--' + sporsmal.parentKriterie.toLowerCase() : ''}>
+        <div
+            className={sporsmal.parentKriterie ? 'kriterie--' + sporsmal.parentKriterie.toLowerCase() : ''}
+            data-cy="perioder"
+        >
             <Label as="h3" className="skjema__sporsmal">
                 {sporsmal.sporsmalstekst}
             </Label>

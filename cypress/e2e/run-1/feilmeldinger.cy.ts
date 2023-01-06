@@ -13,7 +13,8 @@ describe('Tester feilmeldinger', () => {
     function feilmeldingHandtering(lokalFeilmelding: string, globalFeilmelding: string, focusTarget: string) {
         cy.get('.skjemaelement__input--harFeil').should('exist')
         cy.get('.skjemaelement__feilmelding').contains(lokalFeilmelding)
-        cy.get('.feiloppsummering')
+
+        cy.get('[data-cy="feil-oppsumering"]')
             .should('exist')
             .within(() => {
                 cy.contains('Det er 1 feil i skjemaet')
@@ -30,7 +31,7 @@ describe('Tester feilmeldinger', () => {
     ) {
         cy.get('.navds-form-field__error').should('exist')
         cy.get('.skjemaelement__feilmelding').contains(lokalFeilmelding)
-        cy.get('.feiloppsummering')
+        cy.get('[data-cy="feil-oppsumering"]')
             .should('exist')
             .within(() => {
                 cy.contains('Det er 1 feil i skjemaet')
@@ -42,6 +43,19 @@ describe('Tester feilmeldinger', () => {
     function ingenFeilmeldinger() {
         cy.get('.skjemaelement__input--harFeil').should('not.exist')
         cy.get('.feiloppsummering').should('not.exist')
+    }
+
+    function resetAllePeriodeDateFelter() {
+        cy.get('[data-cy="perioder"]')
+            .find('input[type=text]')
+            .each(($el) => {
+                cy.wrap($el).clear()
+            })
+    }
+
+    function setPeriodeDateFieldMedIndex(index: number, datestring: string) {
+        /*  Fra og med felter er 0 eller partall og til og med felter er oddetall. */
+        cy.get('[data-cy="perioder"]').find('input[type=text]').eq(index).type(datestring)
     }
 
     it('CHECKBOX_PANEL ingen valg', () => {
@@ -172,25 +186,34 @@ describe('Tester feilmeldinger', () => {
     })
 
     it('PERIODER legges til uten å besvares', () => {
-        cy.get('#687305_0 .fom').clear().type('01.04.2020')
+        resetAllePeriodeDateFelter()
+        setPeriodeDateFieldMedIndex(1, '01.04.2020')
         cy.contains('+ Legg til ekstra periode').click()
-        gaVidere()
         feilmeldingHandtering(
             'Du må oppgi en fra og med dato',
             'Du må oppgi en fra og med dato',
-            arbeidstakerGradert.sporsmal[3].undersporsmal[0].id + '_1_fom',
+            arbeidstakerGradert.sporsmal[3].undersporsmal[0].id + '_0_fom',
         )
     })
 
     it('PERIODER overlapper', () => {
-        cy.focused().type('05.04.2020').blur()
+        resetAllePeriodeDateFelter()
+        setPeriodeDateFieldMedIndex(0, '05.04.2020')
+        setPeriodeDateFieldMedIndex(1, '20.04.2020')
+        setPeriodeDateFieldMedIndex(2, '21.04.2020')
+        cy.focused().blur()
         feilmeldingHandtering(
             'Du må oppgi en til og med dato',
             'Du må oppgi en til og med dato',
             arbeidstakerGradert.sporsmal[3].undersporsmal[0].id + '_1_tom',
         )
 
-        cy.focused().type('20.04.2020').blur()
+        resetAllePeriodeDateFelter()
+        setPeriodeDateFieldMedIndex(0, '04.04.2020')
+        setPeriodeDateFieldMedIndex(1, '21.04.2020')
+        setPeriodeDateFieldMedIndex(2, '20.04.2020')
+        setPeriodeDateFieldMedIndex(3, '24.04.2020')
+        cy.focused().blur()
         feilmeldingHandtering(
             'Perioder kan ikke overlappe',
             'Du kan ikke legge inn perioder som overlapper med hverandre',
@@ -199,7 +222,13 @@ describe('Tester feilmeldinger', () => {
     })
 
     it('PERIODER slett', () => {
-        cy.focused().clear().type('15.04.2020').blur()
+        resetAllePeriodeDateFelter()
+        setPeriodeDateFieldMedIndex(0, '04.04.2020')
+        setPeriodeDateFieldMedIndex(1, '19.04.2020')
+        setPeriodeDateFieldMedIndex(2, '20.04.2020')
+        setPeriodeDateFieldMedIndex(3, '24.04.2020')
+        cy.focused().blur()
+
         ingenFeilmeldinger()
 
         cy.contains('Slett periode').click()

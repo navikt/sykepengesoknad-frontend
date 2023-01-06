@@ -185,12 +185,14 @@ describe('Teste førsteside i reisetilskuddsøknaden', () => {
             cy.get('select[name=transportmiddel]').should('have.attr', 'disabled')
             cy.get('input[name=belop_input]').should('have.attr', 'disabled')
             cy.get('.filopplasteren input[type=file]').should('not.exist')
-            cy.get('.knapperad').within(() => {
+            cy.get('[data-cy="opplasting-form"]')
+            cy.get('[data-cy="opplasting-form"]').within(() => {
                 cy.contains('Tilbake')
                 cy.contains('Slett')
                 cy.contains('Bekreft').should('not.exist')
             })
-            cy.get('.opplasting_modal > .navds-modal__button').click()
+            // cy.get('.opplasting_modal > .navds-modal__button').click() // hva er det meningen å trykke på her??
+            cy.get('[data-cy="opplasting-modal-tilbake"]').click()
         })
 
         it('Sletting av kvittering som er valgt', () => {
