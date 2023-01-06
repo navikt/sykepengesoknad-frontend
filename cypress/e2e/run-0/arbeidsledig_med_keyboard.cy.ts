@@ -94,6 +94,6 @@ describe('Tester arbeidsledigsøknad', () => {
         cy.focused().contains('Send søknaden')
         cy.realPress('Enter')
         cy.contains('Søknaden er sendt til NAV')
-        cy.contains('Motatt')
+        cy.contains('Mottatt')
     })
 })
