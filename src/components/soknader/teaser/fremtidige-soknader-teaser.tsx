@@ -59,8 +59,7 @@ const FremtidigeSoknaderTeaser = ({ soknad }: SykepengesoknadTeaserProps) => {
                     </div>
                     <InngangsStatus status={soknad.status} tekst={hentTeaserStatustekst(soknad)} />
                 </div>
-                {/* TODO: fjern onResize og onResizeCapture ved oppdatering til React 18. */}
-                <Next className="chevron--hoyre" onResize={undefined} onResizeCapture={undefined} />
+                <Next className="chevron--hoyre" />
             </button>
 
             <Modal

@@ -55,8 +55,7 @@ const NyeSoknaderTeaser = ({ soknad }: SykepengesoknadTeaserProps) => {
                         )}
                     />
                 </div>
-                {/* TODO: fjern onResize og onResizeCapture ved oppdatering til React 18. */}
-                <Next className="chevron--hoyre" onResize={undefined} onResizeCapture={undefined} />
+                <Next className="chevron--hoyre" />
             </Inngangspanel>
         </article>
     )

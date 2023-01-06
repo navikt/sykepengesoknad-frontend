@@ -158,8 +158,7 @@ const Fordeling = ({ valgtSoknad, soknader, sykmeldinger }: FordelingProps) => {
                                     })
                                 }}
                             >
-                                {/* TODO: fjern onResize og onResizeCapture ved oppdatering til React 18. */}
-                                <Back className="chevron--venstre" onResize={undefined} onResizeCapture={undefined} />
+                                <Back className="chevron--venstre" />
                                 <BodyShort as="span">{tekst('soknad.tilbakeknapp')}</BodyShort>
                             </Link>
                         )}

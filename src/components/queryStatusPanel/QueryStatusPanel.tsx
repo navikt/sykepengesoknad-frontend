@@ -44,8 +44,7 @@ const QueryStatusPanel = ({ valgSoknadId }: QueryStatusPanelProps) => {
                 render={() => (
                     <div className="query-status-panel">
                         <Heading size="small">Henter dine data</Heading>
-                        {/* TODO: fjern onResize og onResizeCapture ved oppdatering til React 18. */}
-                        <Loader onResize={undefined} onResizeCapture={undefined} />
+                        <Loader />
                     </div>
                 )}
             />

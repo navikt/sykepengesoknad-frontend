@@ -39,8 +39,7 @@ export function DataFetcher(props: { children: any }) {
     if (laster) {
         return (
             <div className="data-loader">
-                {/* TODO: fjern onResize og onResizeCapture ved oppdatering til React 18. */}
-                <Loader variant="neutral" size="2xlarge" onResize={undefined} onResizeCapture={undefined} />
+                <Loader variant="neutral" size="2xlarge" />
             </div>
         )
     }
