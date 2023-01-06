@@ -92,7 +92,7 @@ const FeilOppsummering = ({
         }
     }
     return (
-        <div aria-live="polite" role="alert">
+        <div aria-live="polite" role="alert" data-cy="feil-oppsumering">
             <Vis
                 hvis={antall > 0}
                 render={() => {
