@@ -12,7 +12,7 @@
         "@navikt/next-api-proxy": "^2.1.0",
         "@navikt/next-logger": "^1.13.0",
         "@sentry/nextjs": "^7.29.0",
-        "@tanstack/react-query": "^4.20.9",
+        "@tanstack/react-query": "^4.22.0",
         "@types/smoothscroll-polyfill": "^0.3.1",
         "amplitude-js": "^8.21.3",
         "classnames": "^2.3.2",
