@@ -285,10 +285,9 @@ export const avbruttSoknad: RSSoknad = {
             ],
         },
         {
-            id: '104',
+            id: 'd146b1c5-661f-35ed-b72f-172fc17ead5d',
             tag: 'JOBBET_DU_GRADERT_0',
-            sporsmalstekst:
-                'I perioden 20. mai - 5. juni 2020 skulle du jobbe 20 % av ditt normale arbeid hos 995816598 sitt orgnavn :). Jobbet du mer enn dette?',
+            sporsmalstekst: 'Sykmeldingen sier du kunne jobbe 20 %. Jobbet du mer enn det?',
             undertekst: null,
             svartype: 'JA_NEI',
             min: null,
@@ -298,7 +297,7 @@ export const avbruttSoknad: RSSoknad = {
             svar: [],
             undersporsmal: [
                 {
-                    id: '105',
+                    id: '495730df-717d-3774-bd19-e6bcf76e3ba2',
                     tag: 'HVOR_MANGE_TIMER_PER_UKE_0',
                     sporsmalstekst:
                         'Hvor mange timer i uken jobber du vanligvis når du er frisk? Varierer det, kan du oppgi gjennomsnittet.',
@@ -312,10 +311,10 @@ export const avbruttSoknad: RSSoknad = {
                     undersporsmal: [],
                 },
                 {
-                    id: '106',
+                    id: 'e3a6bd7d-8f10-381c-8cd3-cdab3e410c95',
                     tag: 'HVOR_MYE_HAR_DU_JOBBET_0',
-                    sporsmalstekst: 'Hvor mye jobbet du totalt 20. mai - 5. juni 2020 hos 995816598 sitt orgnavn :)?',
-                    undertekst: null,
+                    sporsmalstekst: 'Hvor mye jobbet du tilsammen 20. mai - 5. juni 2020?',
+                    undertekst: 'Velg timer eller prosent',
                     svartype: 'RADIO_GRUPPE_TIMER_PROSENT',
                     min: null,
                     max: null,
@@ -324,9 +323,9 @@ export const avbruttSoknad: RSSoknad = {
                     svar: [],
                     undersporsmal: [
                         {
-                            id: '107',
+                            id: '0e368ffc-1840-35e5-bbb5-b994cbaa8ef1',
                             tag: 'HVOR_MYE_PROSENT_0',
-                            sporsmalstekst: 'prosent',
+                            sporsmalstekst: 'Prosent',
                             undertekst: null,
                             svartype: 'RADIO',
                             min: null,
@@ -336,11 +335,11 @@ export const avbruttSoknad: RSSoknad = {
                             svar: [],
                             undersporsmal: [
                                 {
-                                    id: '108',
+                                    id: '13acfccb-3f39-3893-8054-058270add6ab',
                                     tag: 'HVOR_MYE_PROSENT_VERDI_0',
                                     sporsmalstekst: null,
                                     undertekst: null,
-                                    svartype: 'TALL',
+                                    svartype: 'PROSENT',
                                     min: '21',
                                     max: '99',
                                     pavirkerAndreSporsmal: false,
@@ -351,9 +350,9 @@ export const avbruttSoknad: RSSoknad = {
                             ],
                         },
                         {
-                            id: '109',
+                            id: '348f75cd-a87d-397b-8428-cbcb9e50a5d7',
                             tag: 'HVOR_MYE_TIMER_0',
-                            sporsmalstekst: 'timer',
+                            sporsmalstekst: 'Timer',
                             undertekst: null,
                             svartype: 'RADIO',
                             min: null,
@@ -363,11 +362,11 @@ export const avbruttSoknad: RSSoknad = {
                             svar: [],
                             undersporsmal: [
                                 {
-                                    id: '110',
+                                    id: '34c3cb3f-1aeb-3095-9ac6-d8f4f4c9e539',
                                     tag: 'HVOR_MYE_TIMER_VERDI_0',
                                     sporsmalstekst: null,
                                     undertekst: null,
-                                    svartype: 'TALL',
+                                    svartype: 'TIMER',
                                     min: '1',
                                     max: '364',
                                     pavirkerAndreSporsmal: false,
