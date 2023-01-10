@@ -1,6 +1,15 @@
-import { RSSoknadstype } from '../../types/rs-types/rs-soknadstype'
-import { Soknad } from '../../types/types'
+import dayjs from 'dayjs'
 
-export function erArbeidstakersoknad(soknad: Soknad) {
-    return soknad.soknadstype == RSSoknadstype.ARBEIDSTAKERE
+import { RSSoknadmetadata } from '../../types/rs-types/rs-soknadmetadata'
+
+export function harKorrigertArbeidstakersoknadIDetSiste(soknader: RSSoknadmetadata[]) {
+    const enMndSiden = dayjs().subtract(32, 'days').toDate()
+
+    return (
+        soknader
+            .filter((s) => s.status === 'SENDT')
+            .filter((s) => s.soknadstype === 'ARBEIDSTAKERE')
+            .filter((s) => s.korrigerer)
+            .filter((s) => s.opprettetDato > enMndSiden).length > 0
+    )
 }
