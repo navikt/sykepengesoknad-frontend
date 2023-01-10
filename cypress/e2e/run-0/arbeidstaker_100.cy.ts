@@ -196,7 +196,7 @@ describe('Tester arbeidstakersøknad', () => {
         )
 
         cy.get('.oppsummering').within(() => {
-            cy.contains('9.00 timer')
+            cy.contains('Jobber du vanligvis 37,5 timer i uka')
             cy.contains('21.00 timer')
         })
 

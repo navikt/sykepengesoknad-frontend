@@ -26,6 +26,7 @@ const SoknadenTekster = {
         'Du skal bare oppgi feriedager som du har brukt. Hvis du har avtalt å utsette ferien, skriver du ikke noe her.\n\nJobber du vanligvis bare noen dager i uken? Da gjelder ferien likevel hele uker, ikke bare de enkeltdagene du skulle vært på jobb.',
     'sykepengesoknad.ferie.hjelpetekst.tittel': 'Ferie',
     'sykepengesoknad.ferie_v2.tittel': 'Ferie',
+    'sykepengesoknad.ferie_permisjon_utland.tittel': 'Ferie, permisjon eller opphold i utlandet',
 
     'sykepengesoknad.permisjon.tittel': 'Permisjon',
     'sykepengesoknad.permisjon_v2.tittel': 'Permisjon',
