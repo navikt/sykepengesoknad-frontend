@@ -59,7 +59,7 @@ describe('Tester støtte for gamle spørsmål', () => {
         cy.get('.undersporsmal .checkboxgruppe').contains(gjelder).click({ force: true })
     }
 
-    function svarRadioJaEllerNei(gjelder: string, svar: 'Ja' | 'Nei') {
+    function svarRadio(gjelder: string, svar: 'Ja' | 'Nei' | 'Prosent' | 'Timer') {
         cy.contains(gjelder).siblings().contains(svar).click({ force: true })
     }
 
@@ -112,14 +112,14 @@ describe('Tester støtte for gamle spørsmål', () => {
     it('ANDRE_INNTEKTSKILDER', () => {
         svarJaHovedsporsmal()
         velgCheckbox('dagmamma')
-        svarRadioJaEllerNei('Er du sykmeldt fra dette?', 'Ja')
+        svarRadio('Er du sykmeldt fra dette?', 'Ja')
         gaVidere()
     })
 
     it('ANDRE_INNTEKTSKILDER', () => {
         svarJaHovedsporsmal()
         velgCheckbox('frilanser')
-        svarRadioJaEllerNei('Er du sykmeldt fra dette?', 'Ja')
+        svarRadio('Er du sykmeldt fra dette?', 'Ja')
         gaVidere()
     })
     it('ANDRE_INNTEKTSKILDER_V2', () => {
@@ -133,14 +133,14 @@ describe('Tester støtte for gamle spørsmål', () => {
     })
     it('ARBEIDSGIVER', () => {
         svarJaHovedsporsmal()
-        svarRadioJaEllerNei('Er du 100 % sykmeldt?', 'Ja')
-        svarRadioJaEllerNei('Har du avtalt med arbeidsgiveren din at du skal ta ut feriedager i hele perioden?', 'Ja')
+        svarRadio('Er du 100 % sykmeldt?', 'Ja')
+        svarRadio('Har du avtalt med arbeidsgiveren din at du skal ta ut feriedager i hele perioden?', 'Ja')
         gaVidere()
     })
     it('ARBEIDSLEDIG_UTLAND', () => {
         svarJaHovedsporsmal()
         velgPeriode()
-        svarRadioJaEllerNei('Har du søkt om å beholde sykepengene for disse dagene?', 'Ja')
+        svarRadio('Har du søkt om å beholde sykepengene for disse dagene?', 'Ja')
         gaVidere()
     })
     it('EGENMELDINGER', () => {
@@ -228,13 +228,13 @@ describe('Tester støtte for gamle spørsmål', () => {
     it('UTDANNING', () => {
         svarJaHovedsporsmal()
         velgDato()
-        svarRadioJaEllerNei('Er utdanningen et fulltidsstudium?', 'Ja')
+        svarRadio('Er utdanningen et fulltidsstudium?', 'Ja')
         gaVidere()
     })
     it('UTLAND', () => {
         svarJaHovedsporsmal()
         velgPeriode()
-        svarRadioJaEllerNei('Har du søkt om å beholde sykepengene for disse dagene?', 'Ja')
+        svarRadio('Har du søkt om å beholde sykepengene for disse dagene?', 'Ja')
         gaVidere()
     })
     it('UTLAND_V2', () => {
@@ -255,7 +255,7 @@ describe('Tester støtte for gamle spørsmål', () => {
     it('REISE_MED_BIL', () => {
         svarJaHovedsporsmal()
         velgKalenderdag()
-        svarRadioJaEllerNei('Hadde du utgifter til bompenger?', 'Nei')
+        svarRadio('Hadde du utgifter til bompenger?', 'Nei')
         gaVidere()
     })
     it('KVITTERINGER', () => {
@@ -264,6 +264,13 @@ describe('Tester støtte for gamle spørsmål', () => {
     })
     it('UTBETALING', () => {
         svarJaHovedsporsmal()
+        gaVidere()
+    })
+    it('ARBEID_UNDERVEIS_100_PROSENT', () => {
+        svarJaHovedsporsmal()
+        svarRadio('Oppgi arbeidsmengde i timer eller prosent:', 'Timer')
+        velgTall('Oppgi totalt antall timer du jobbet i perioden 1. - 24. april 2020 hos POSTEN NORGE AS, BÆRUM', '12')
+        svarRadio('Jobber du vanligvis 37,5 timer i uka hos POSTEN NORGE AS, BÆRUM?', 'Ja')
         gaVidere()
     })
 

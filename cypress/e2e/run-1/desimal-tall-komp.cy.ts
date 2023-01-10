@@ -5,16 +5,16 @@ describe('Tester at riktig antall desimaler sendes til backend', () => {
         cy.visit(`http://localhost:8080/syk/sykepengesoknad/soknader/${gradertReisetilskudd.id}/7`)
         cy.get('.radioGruppe-jaNei input[value=JA]').click({ force: true })
 
-        cy.get('input#1547250').focus().type('37.321') // maks 2 desimaler tas med på TALL
+        cy.get('input#495730df-717d-3774-bd19-e6bcf76e3ba2').focus().type('37.321') // maks 2 desimaler tas med på TALL
 
-        cy.get('label[for=1547252]').click()
-        cy.get('input#1547253').focus().type('50.321') // ingen desimaler tas med på PROSENT
+        cy.get('label[for=0e368ffc-1840-35e5-bbb5-b994cbaa8ef1]').click()
+        cy.get('input#13acfccb-3f39-3893-8054-058270add6ab').focus().type('50.321') // ingen desimaler tas med på PROSENT
 
         cy.contains('Gå videre').click()
         cy.contains('Tilbake').click()
 
-        cy.get('input#1547250').should('have.value', '37.32')
-        cy.get('input#1547253').should('have.value', '50')
+        cy.get('input#495730df-717d-3774-bd19-e6bcf76e3ba2').should('have.value', '37.32')
+        cy.get('input#13acfccb-3f39-3893-8054-058270add6ab').should('have.value', '50')
     })
 
     it('Oppgir desimaler på svartype BELOP og KILOMETER', () => {
