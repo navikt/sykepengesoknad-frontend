@@ -2,7 +2,6 @@ import { Label } from '@navikt/ds-react'
 import React from 'react'
 
 import { SvarEnums } from '../../../types/enums'
-import { RSSvartype } from '../../../types/rs-types/rs-svartype'
 import { Sporsmal } from '../../../types/types'
 import Vis from '../../vis'
 import { OppsummeringProps } from '../oppsummering'
@@ -22,9 +21,7 @@ const RadioGruppe = ({ sporsmal }: OppsummeringProps) => {
                     <Label as="h3" className="oppsummering__overskrift">
                         {sporsmal.sporsmalstekst}
                     </Label>
-                    {sporsmal.svartype === RSSvartype.RADIO_GRUPPE && (
-                        <Avkrysset tekst={besvartUndersporsmal.sporsmalstekst} />
-                    )}
+                    <Avkrysset tekst={besvartUndersporsmal.sporsmalstekst} />
                     <UndersporsmalSum sporsmalsliste={besvartUndersporsmal.undersporsmal} />
                 </div>
             )}

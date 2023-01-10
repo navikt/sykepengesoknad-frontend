@@ -56,23 +56,22 @@ describe('Tester frilansersøknad', () => {
         cy.contains('Gå videre').click({ force: true })
     })
 
-    it('Søknad JOBBET_DU_100_PROSENT - steg 3', function () {
+    it('Søknad ARBEID_UNDERVEIS_100_PROSENT - steg 3', function () {
         cy.url().should('include', `${soknad.id}/3`)
 
         // Test spørsmål
         cy.get('.radioGruppe-jaNei input[value=JA]').click({ force: true })
 
         // Underspørsmål 1
-        cy.contains(
-            'Hvor mange timer i uken jobber du vanligvis når du er frisk? Varierer det, kan du oppgi gjennomsnittet.',
-        )
-        cy.get('.undersporsmal .navds-text-field__input#687432').focus().type('12')
-
-        // Underspørsmål 2
-        cy.contains('Hvor mye jobbet du tilsammen 1. - 24. april 2020?')
+        cy.contains('Oppgi arbeidsmengde i timer eller prosent')
         // Svarer prosent
         cy.get('.undersporsmal .skjemaelement__input.radioknapp[value=Prosent]').focus().click({ force: true })
-        cy.get('.undersporsmal .navds-text-field__input#687435').focus().type('21')
+        cy.contains('Oppgi hvor mange prosent av din normale arbeidstid du jobbet i perioden 1. - 24. april 2020?')
+        cy.get('.undersporsmal .navds-text-field__input#b68db08b-9ad1-38e5-bcdd-2c98963c2b8d').focus().type('21')
+
+        // Underspørsmål 2
+        cy.contains('Jobber du vanligvis 37,5 timer i uka?')
+        cy.get('.undersporsmal input#9163fd91-7e4f-3474-ae32-405f18004af0_0').click({ force: true })
 
         cy.contains('Gå videre').click()
     })

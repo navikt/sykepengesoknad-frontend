@@ -29,7 +29,9 @@ const TallSum = ({ sporsmal }: OppsummeringProps) => {
         }
     }
 
-    const label = sporsmal.undertekst || tekst(labelnokkel as any)
+    const undertekst = sporsmal.undertekst?.includes('Eksempel') === false ? sporsmal.undertekst : undefined
+    const label = undertekst || tekst(labelnokkel as any)
+
     return (
         <div className="oppsummering__sporsmal">
             <Label as="h3">{sporsmal.sporsmalstekst}</Label>

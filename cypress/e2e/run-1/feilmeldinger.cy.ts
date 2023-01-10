@@ -241,7 +241,7 @@ describe('Tester feilmeldinger', () => {
         cy.get(`input[name=${arbeidstakerGradert.sporsmal[6].undersporsmal[0].id}]`).type('37.5')
         cy.get('.undersporsmal .skjemaelement__input.radioknapp[value=Timer]').focus().click({ force: true })
         cy.get(
-            `input[name=${arbeidstakerGradert.sporsmal[6].undersporsmal[1].undersporsmal[0].undersporsmal[0].id}]`,
+            `input[name=${arbeidstakerGradert.sporsmal[6].undersporsmal[1].undersporsmal[1].undersporsmal[0].id}]`,
         ).type('1')
         cy.get('.skjemaelement__feilmelding').should('not.exist')
         cy.get('.feiloppsummering').should('not.exist')
@@ -249,7 +249,7 @@ describe('Tester feilmeldinger', () => {
         feilmeldingHandteringForNyeKomponenter(
             'Timene utgjør mindre enn 50 %.',
             'Antall timer du skrev inn, betyr at du har jobbet 0 % av det du gjør når du er frisk. Du må enten svare nei på øverste spørsmålet eller endre antall timer totalt.',
-            arbeidstakerGradert.sporsmal[6].undersporsmal[1].undersporsmal[0].undersporsmal[0].id,
+            arbeidstakerGradert.sporsmal[6].undersporsmal[1].undersporsmal[1].undersporsmal[0].id,
         )
     })
 
@@ -263,7 +263,7 @@ describe('Tester feilmeldinger', () => {
         feilmeldingHandteringForNyeKomponenter(
             'Du må oppgi en verdi',
             'Du må svare på hvor mye du jobbet totalt',
-            arbeidstakerGradert.sporsmal[6].undersporsmal[1].undersporsmal[1].undersporsmal[0].id,
+            arbeidstakerGradert.sporsmal[6].undersporsmal[1].undersporsmal[0].undersporsmal[0].id,
         )
     })
 
@@ -273,7 +273,7 @@ describe('Tester feilmeldinger', () => {
         feilmeldingHandteringForNyeKomponenter(
             'Må være minimum 51',
             'Vennligst fyll ut et tall mellom 51 og 99',
-            arbeidstakerGradert.sporsmal[6].undersporsmal[1].undersporsmal[1].undersporsmal[0].id,
+            arbeidstakerGradert.sporsmal[6].undersporsmal[1].undersporsmal[0].undersporsmal[0].id,
         )
     })
 
@@ -283,26 +283,26 @@ describe('Tester feilmeldinger', () => {
         feilmeldingHandteringForNyeKomponenter(
             'Må være maksimum 99',
             'Vennligst fyll ut et tall mellom 51 og 99',
-            arbeidstakerGradert.sporsmal[6].undersporsmal[1].undersporsmal[1].undersporsmal[0].id,
+            arbeidstakerGradert.sporsmal[6].undersporsmal[1].undersporsmal[0].undersporsmal[0].id,
         )
     })
 
     it('TALL grad mindre enn sykmeldingsgrad', () => {
-        cy.get(`input[id=${arbeidstakerGradert.sporsmal[6].undersporsmal[1].undersporsmal[0].id}]`).click({
+        cy.get(`input[id=${arbeidstakerGradert.sporsmal[6].undersporsmal[1].undersporsmal[1].id}]`).click({
             force: true,
         })
         gaVidere()
         feilmeldingHandteringForNyeKomponenter(
             'Du må oppgi en verdi',
             'Du må svare på hvor mye du jobbet totalt',
-            arbeidstakerGradert.sporsmal[6].undersporsmal[1].undersporsmal[0].undersporsmal[0].id,
+            arbeidstakerGradert.sporsmal[6].undersporsmal[1].undersporsmal[1].undersporsmal[0].id,
         )
         cy.focused().type('1')
         gaVidere()
         feilmeldingHandteringForNyeKomponenter(
             'Timene utgjør mindre enn 50 %.',
             'Antall timer du skrev inn, betyr at du har jobbet 0 % av det du gjør når du er frisk. Du må enten svare nei på øverste spørsmålet eller endre antall timer totalt.',
-            arbeidstakerGradert.sporsmal[6].undersporsmal[1].undersporsmal[0].undersporsmal[0].id,
+            arbeidstakerGradert.sporsmal[6].undersporsmal[1].undersporsmal[1].undersporsmal[0].id,
         )
     })
 
