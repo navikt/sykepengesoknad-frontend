@@ -9,7 +9,7 @@ export function harKorrigertArbeidstakersoknadIDetSiste(soknader: RSSoknadmetada
         soknader
             .filter((s) => s.status === 'SENDT')
             .filter((s) => s.soknadstype === 'ARBEIDSTAKERE')
-            .filter((s) => s.korrigerer !== undefined)
+            .filter((s) => s.korrigerer)
             .filter((s) => s.opprettetDato > enMndSiden).length > 0
     )
 }
