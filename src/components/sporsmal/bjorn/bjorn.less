@@ -11,7 +11,7 @@
 .hjelpeboble__boble {
     position: relative;
     border-radius: 0.5rem;
-    background-color: @navds-semantic-color-canvas-background;
+    background-color: @a-bg-subtle;
     padding: 1rem 2rem;
     margin-bottom: 1.5rem;
 
@@ -27,7 +27,7 @@
 }
 
 .hjelpeboble__boble--hvit {
-    background-color: @navds-global-color-white;
+    background-color: @a-bg-default;
 }
 
 .hjelpeboble__bilde {
@@ -55,7 +55,7 @@
 .hjelpeboble__bilde:after {
     content: '';
     border: 1em solid transparent;
-    border-top-color: @navds-semantic-color-canvas-background;
+    border-top-color: @a-bg-subtle;
     width: 0;
     height: 0;
     display: block;
@@ -66,7 +66,7 @@
 }
 
 .hjelpeboble__bilde--hvit:after {
-    border-top-color: @navds-global-color-white;
+    border-top-color: @a-bg-default;
 }
 
 @media (min-width: 30em) {
@@ -94,11 +94,11 @@
         top: 25%;
         right: 1rem;
         border-top-color: transparent;
-        border-right-color: @navds-semantic-color-canvas-background;
+        border-right-color: @a-bg-subtle;
         transform: translateX(50%);
     }
 
     .hjelpeboble__bilde--horisontal.hjelpeboble__bilde--hvit:after {
-        border-right-color: @navds-global-color-white;
+        border-right-color: @a-bg-default;
     }
 }

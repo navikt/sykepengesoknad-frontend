@@ -65,7 +65,7 @@ const DragAndDrop = ({ valgtFil, setValgtFil, valgtKvittering }: DragAndDropProp
     }, [setValgtFil, valgtKvittering, hentKvittering])
 
     const onDropCallback = useCallback(
-        (filer) => {
+        (filer: File[]) => {
             filer.forEach((fil: File) => {
                 setValgtFil(fil)
             })

@@ -24,11 +24,11 @@
         position: absolute;
         display: block;
         text-align: center;
-        background-color: @navds-global-color-white;
+        background-color: @a-bg-default;
         background-position: center center;
         background-repeat: no-repeat;
-        border: 1px solid @navds-global-color-gray-600;
-        color: @navds-global-color-gray-600;
+        border: 1px solid @a-gray-600;
+        color: @a-gray-600;
         width: 24px;
         height: 24px;
         left: 0;
@@ -36,25 +36,25 @@
     }
 
     &:hover + .skjemaelement__label {
-        color: @navds-semantic-color-interaction-primary;
+        color: @a-surface-action;
 
         &::before {
-            border-color: @navds-semantic-color-interaction-primary;
-            background-color: @navds-global-color-blue-100;
+            border-color: @a-surface-action;
+            background-color: @a-blue-100;
         }
     }
 
     &:disabled {
         + .skjemaelement__label {
-            color: @navds-global-color-gray-600;
+            color: @a-gray-600;
 
             &:hover {
                 cursor: not-allowed;
             }
 
             &::before {
-                background-color: @navds-global-color-gray-100;
-                border-color: @navds-global-color-gray-600;
+                background-color: @a-gray-100;
+                border-color: @a-gray-600;
                 box-shadow: none;
             }
         }
@@ -64,7 +64,7 @@
 .checkboks--mork,
 .radioknapp--mork {
     + .skjemaelement__label::before {
-        border-color: @navds-global-color-gray-600;
+        border-color: @a-gray-600;
     }
 }
 
@@ -73,7 +73,7 @@
     opacity: 0;
 
     &:focus + .skjemaelement__label::before {
-        box-shadow: 0 0 0 3px @navds-global-color-blue-800;
+        box-shadow: 0 0 0 3px @a-blue-800;
     }
 
     + .skjemaelement__label::before {
@@ -83,8 +83,8 @@
     &:checked {
         &:disabled {
             + .skjemaelement__label::before {
-                border-color: @navds-global-color-gray-400;
-                background-color: @navds-global-color-gray-400;
+                border-color: @a-gray-400;
+                background-color: @a-gray-400;
             }
         }
 
@@ -100,9 +100,9 @@
             background-position: center center;
             background-repeat: no-repeat;
             background-size: 75%;
-            border-color: @navds-semantic-color-interaction-primary;
+            border-color: @a-surface-action;
             border-width: 2px;
-            background-color: @navds-semantic-color-interaction-primary;
+            background-color: @a-surface-action;
         }
     }
 }

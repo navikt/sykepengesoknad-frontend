@@ -2,7 +2,7 @@
 @import './checkbox';
 
 .radioknapp {
-    font-family: @navds-font-family;
+    font-family: @a-font-family;
     font-size: 16px;
     line-height: 22px;
     font-weight: 400;
@@ -12,26 +12,24 @@
     }
 
     &:checked + .skjemaelement__label::before {
-        border: 2px solid @navds-semantic-color-interaction-primary;
-        box-shadow: 0 0 0 3px @navds-global-color-white inset,
-            0 0 0 12px @navds-semantic-color-interaction-primary inset;
+        border: 2px solid @a-surface-action;
+        box-shadow: 0 0 0 3px @a-bg-default inset, 0 0 0 12px @a-surface-action inset;
     }
 
     &:disabled {
         &:checked + .skjemaelement__label::before {
-            border: 2px solid @navds-global-color-gray-400;
-            box-shadow: 0 0 0 3px @navds-global-color-white inset, 0 0 0 12px @navds-global-color-gray-400 inset;
+            border: 2px solid @a-gray-400;
+            box-shadow: 0 0 0 3px @a-bg-default inset, 0 0 0 12px @a-gray-400 inset;
         }
     }
 
     &:focus + .skjemaelement__label::before {
-        box-shadow: 0 0 0 3px @navds-global-color-blue-800, 0 0 0 12px @navds-global-color-white inset;
+        box-shadow: 0 0 0 3px @a-blue-800, 0 0 0 12px @a-bg-default inset;
     }
 
     &:checked:focus + .skjemaelement__label::before {
         .mixin-transition(200ms, box-shadow);
 
-        box-shadow: 0 0 0 3px @navds-global-color-blue-800, 0 0 0 3px @navds-global-color-white inset,
-            0 0 0 12px @navds-semantic-color-interaction-primary inset;
+        box-shadow: 0 0 0 3px @a-blue-800, 0 0 0 3px @a-bg-default inset, 0 0 0 12px @a-surface-action inset;
     }
 }

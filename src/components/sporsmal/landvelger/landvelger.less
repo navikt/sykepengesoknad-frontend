@@ -15,9 +15,9 @@
 
     .react-autosuggest__suggestions-container--open {
         position: absolute;
-        border: 1px solid @navds-global-color-gray-400;
+        border: 1px solid @a-gray-400;
         z-index: 1;
-        background: @navds-global-color-white;
+        background: @a-bg-default;
         max-height: 200px;
         overflow-y: auto;
 
@@ -29,27 +29,27 @@
 
         .react-autosuggest__suggestion {
             padding: 0.75rem;
-            border-bottom: 1px solid @navds-semantic-color-canvas-background;
-            color: @navds-semantic-color-interaction-primary;
+            border-bottom: 1px solid @a-bg-subtle;
+            color: @a-surface-action;
             text-decoration: underline;
         }
 
         li:hover,
         .react-autosuggest__suggestion--highlighted {
-            background-color: @navds-semantic-color-canvas-background;
+            background-color: @a-bg-subtle;
             cursor: pointer;
         }
 
         mark {
             background: transparent;
-            color: @navds-semantic-color-interaction-primary;
+            color: @a-surface-action;
             font-weight: 600;
         }
     }
 
     .etikett--tag {
         margin: 0.5rem 1rem 0 0;
-        background-color: @navds-global-color-blue-100;
+        background-color: @a-blue-100;
     }
 
     .etikett--info {
@@ -70,12 +70,12 @@
 
     .etikett__slett:focus {
         outline: none;
-        background-color: @navds-global-color-orange-500;
+        background-color: @a-orange-500;
         color: inherit;
     }
 
     .etikett__slett:hover {
-        color: @navds-semantic-color-interaction-primary;
+        color: @a-surface-action;
     }
 
     .etikett__slett-label--skjermleser {
