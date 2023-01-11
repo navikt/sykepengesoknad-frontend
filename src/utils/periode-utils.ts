@@ -65,11 +65,7 @@ const tilTidsperiode = (p: Periode) => {
     }
 }
 
-export const erOppdelt = (soknad?: Soknad, sykmelding?: Sykmelding) => {
-    if (!sykmelding || !soknad) {
-        return false
-    }
-
+export const erOppdelt = (soknad: Soknad, sykmelding: Sykmelding) => {
     const fomSykmelding = dayjs(tidligsteFom(sykmelding.sykmeldingsperioder.map(tilTidsperiode))!).toDate()
     const tomSykmelding = dayjs(senesteTom(sykmelding.sykmeldingsperioder.map(tilTidsperiode))!).toDate()
 

@@ -22,7 +22,7 @@ const SendtSide = () => {
     const { id } = useParams<RouteParams>()
     const { data: valgtSoknad } = useSoknad(id)
 
-    const { setValgtSykmelding, sykmeldinger, feilmeldingTekst } = useAppStore()
+    const { feilmeldingTekst } = useAppStore()
     const [rerendreKvittering, setRerendrekvittering] = useState<Date>(new Date())
     const { logEvent } = useAmplitudeInstance()
     const history = useHistory()
@@ -30,15 +30,12 @@ const SendtSide = () => {
     useUpdateBreadcrumbs(() => [{ ...kvitteringBreadcrumb, handleInApp: true }], [])
 
     useEffect(() => {
-        if (!valgtSoknad || !sykmeldinger) return
+        if (!valgtSoknad) return
 
         if (valgtSoknad.status !== RSSoknadstatus.SENDT) {
             history.replace(urlTilSoknad(valgtSoknad))
             return
         }
-
-        const sykmelding = sykmeldinger.find((sm) => sm.id === valgtSoknad.sykmeldingId)
-        setValgtSykmelding(sykmelding)
 
         logEvent('skjema åpnet', {
             skjemanavn: 'sykepengesoknad',
@@ -46,7 +43,7 @@ const SendtSide = () => {
             soknadstatus: valgtSoknad.status,
         })
         // eslint-disable-next-line
-    }, [valgtSoknad, sykmeldinger])
+    }, [valgtSoknad])
 
     // eslint-disable-next-line @typescript-eslint/no-empty-function
     useEffect(() => {}, [rerendreKvittering])

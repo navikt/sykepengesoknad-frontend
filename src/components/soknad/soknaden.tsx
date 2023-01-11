@@ -10,7 +10,6 @@ import Opplysninger from '../../components/opplysninger-fra-sykmelding/opplysnin
 import SoknadMedToDeler from '../../components/soknad-med-to-deler/soknad-med-to-deler'
 import SporsmalForm from '../../components/sporsmal/sporsmal-form/sporsmal-form'
 import SporsmalSteg from '../../components/sporsmal/sporsmal-steg/sporsmal-steg'
-import { useAppStore } from '../../data/stores/app-store'
 import { RSSoknadstatus } from '../../types/rs-types/rs-soknadstatus'
 import { RSSoknadstype } from '../../types/rs-types/rs-soknadstype'
 import { Soknad } from '../../types/types'
@@ -33,6 +32,7 @@ import { Sykmelding } from '../../types/sykmelding'
 import QueryStatusPanel from '../queryStatusPanel/QueryStatusPanel'
 import { soknadBreadcrumb, useUpdateBreadcrumbs } from '../../hooks/useBreadcrumbs'
 import EgenmeldingsdagerArbeidsgiver from '../egenmeldingsdager-arbeidsgiver/egenmeldingsdager-arbeidsgiver'
+import useSykmeldinger from '../../hooks/useSykmeldinger'
 
 import { urlTilSoknad } from './soknad-link'
 
@@ -40,8 +40,8 @@ const Soknaden = () => {
     const { id, stegId } = useParams<RouteParams>()
     const { data: valgtSoknad } = useSoknad(id)
     const { data: soknader } = useSoknader()
+    const { data: sykmeldinger } = useSykmeldinger()
 
-    const { sykmeldinger, setValgtSykmelding } = useAppStore()
     const { logEvent } = useAmplitudeInstance()
     const history = useHistory()
 
@@ -56,14 +56,6 @@ const Soknaden = () => {
         history.push(urlTilSoknad(valgtSoknad))
         // eslint-disable-next-line
     }, [valgtSoknad?.id])
-
-    useEffect(() => {
-        if (!valgtSoknad || !sykmeldinger) return
-
-        const sykmelding = sykmeldinger.find((sm) => sm.id === valgtSoknad.sykmeldingId)
-        setValgtSykmelding(sykmelding)
-        // eslint-disable-next-line
-    }, [valgtSoknad, sykmeldinger])
 
     useEffect(() => {
         if (!valgtSoknad) return
@@ -85,7 +77,9 @@ const Soknaden = () => {
         // eslint-disable-next-line
     }, [valgtSoknad])
 
-    if (!valgtSoknad || !sykmeldinger || !soknader || !stegId) return <QueryStatusPanel valgSoknadId={id} />
+    if (!valgtSoknad || !soknader || !sykmeldinger || !stegId) {
+        return <QueryStatusPanel valgSoknadId={id} valgSykmeldingId={valgtSoknad?.sykmeldingId} />
+    }
 
     return (
         <>
