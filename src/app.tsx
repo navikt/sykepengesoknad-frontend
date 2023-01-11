@@ -8,7 +8,7 @@ import AvbruttSoknad from './components/avbrutt/avbrutt-soknad'
 import { RefreshHvisFeilState } from './components/feil/refresh-hvis-feil-state'
 import KvitteringSide from './components/kvittering/kvittering-side'
 import OpprettUtland from './components/opprett-utland/opprett-utland'
-import ResetFocusOnUrlChange from './components/react-router-utils/ResetFocusOnUrlChange'
+import OnUrlChange from './components/react-router-utils/OnUrlChange'
 import SendtSide from './components/sendt/sendt-side'
 import Soknad from './components/soknad/soknaden'
 import Soknader from './components/soknader/soknader'
@@ -42,7 +42,7 @@ const App = (): any => {
     //
     return (
         <BrowserRouter basename="/syk/sykepengesoknad">
-            <ResetFocusOnUrlChange>
+            <OnUrlChange>
                 <StoreProvider>
                     <Amplitude>
                         <TransitionGroup component={null}>
@@ -70,7 +70,7 @@ const App = (): any => {
                         </TransitionGroup>
                     </Amplitude>
                 </StoreProvider>
-            </ResetFocusOnUrlChange>
+            </OnUrlChange>
         </BrowserRouter>
     )
 }
