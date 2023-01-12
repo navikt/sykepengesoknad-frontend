@@ -1,7 +1,7 @@
 import { Alert, Heading } from '@navikt/ds-react'
 import { logger } from '@navikt/next-logger'
 import dayjs from 'dayjs'
-import React, { useCallback, useEffect, useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom'
 
 import { RSMottaker } from '../../types/rs-types/rs-mottaker'
@@ -113,7 +113,7 @@ const Arbeidstaker = () => {
         }
     }
 
-    const settRiktigKvitteringTekst = useCallback(async () => {
+    const settRiktigKvitteringTekst = async () => {
         if (!valgtSoknad || !valgtSykmelding || !soknader) return
 
         if (erInnenforArbeidsgiverperiode()) {
@@ -139,12 +139,12 @@ const Arbeidstaker = () => {
                 }
             }
         }
-        // eslint-disable-next-line
-    }, [])
+    }
 
     useEffect(() => {
         settRiktigKvitteringTekst().catch((e: Error) => logger.error(e))
-    }, [settRiktigKvitteringTekst, valgtSoknad?.sendtTilNAVDato])
+        // eslint-disable-next-line
+    }, [valgtSoknad?.sendtTilNAVDato, valgtSykmelding])
 
     if (!valgtSoknad || !soknader) return null
 
