@@ -21,6 +21,8 @@ describe('Tester å åpne søknaden direkte fra sykefravaer', () => {
             `http://localhost:8080/syk/sykepengesoknad/kvittering/${sendtArbeidsledig.id}?testperson=alle-soknader`,
         )
         cy.contains('Søknad om sykepenger').and('be.visible')
+        cy.contains('NAV behandler søknaden din')
+
         cy.visit(
             `http://localhost:8080/syk/sykepengesoknad/soknader/${sendtArbeidsledig.id}/3?testperson=alle-soknader`,
         )
@@ -29,6 +31,7 @@ describe('Tester å åpne søknaden direkte fra sykefravaer', () => {
             `http://localhost:8080/syk/sykepengesoknad/kvittering/${sendtArbeidsledig.id}?testperson=alle-soknader`,
         )
         cy.contains('Søknad om sykepenger').and('be.visible')
+        cy.contains('NAV behandler søknaden din')
     })
 
     it('Hvis vi går til /soknader sendes vi til oversikten', function () {
