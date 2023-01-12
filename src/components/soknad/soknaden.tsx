@@ -77,12 +77,12 @@ const Soknaden = () => {
         // eslint-disable-next-line
     }, [valgtSoknad])
 
-    if (!valgtSoknad || !soknader || !sykmeldinger || !valgtSykmelding || !stegId) {
+    if (!valgtSoknad || !soknader || !sykmeldinger || !stegId) {
         return <QueryStatusPanel valgSoknadId={id} valgSykmeldingId={valgtSoknad?.sykmeldingId} />
     }
 
     const tittel = tekst(hentNokkel(valgtSoknad!, stegNo) as any)
-    const erUtlandssoknad = valgtSoknad.soknadstype === RSSoknadstype.OPPHOLD_UTLAND
+    const erUtlandssoknad = valgtSoknad.soknadstype === RSSoknadstype.OPPHOLD_UTLAND && !valgtSykmelding
     const erReisetilskuddsoknad = valgtSoknad.soknadstype === RSSoknadstype.REISETILSKUDD
     const erGradertReisetilskuddsoknad = valgtSoknad.soknadstype === RSSoknadstype.GRADERT_REISETILSKUDD
 
