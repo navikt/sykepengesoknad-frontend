@@ -15,21 +15,25 @@ const DatoInput = ({ sporsmal }: SpmProps) => {
     const { getValues } = useFormContext()
 
     // dato validator function
-    const validerDato = (dato: Date) => {
-        if (dato === undefined) return 'Du må oppgi en gyldig dato'
+    const validerDato = (dato: Date) : {valid: boolean, message: string} =>  {
+        if (dato === undefined) return {valid: false, message:  'Du må oppgi en gyldig dato'}
 
-        if (!dato) return 'Datoen følger ikke formatet dd.mm.åååå'
+        if (!dato) return {valid: false, message: 'Datoen følger ikke formatet dd.mm.åååå'}
         // Grenseverdier
         if (sporsmal.min && sporsmal.max) {
+            // slår ut på edgacaset 
+            alert (dato) // denne er midnatt
+            alert(new Date(sporsmal.min)) // DENNE ER 0200 timer
             if (dato < new Date(sporsmal.min)) {
-                return 'Datoen kan ikke være før ' + dayjs(sporsmal.min).format('DD.MM.YYYY')
+                return {valid: false, message: 'Datoen kan ikke være før ' + dayjs(sporsmal.min).format('DD.MM.YYYY')}
             }
+            // slår ut på edgacaset 
             if (dato > new Date(sporsmal.max)) {
-                return 'Datoen kan ikke være etter ' + dayjs(sporsmal.max).format('DD.MM.YYYY')
+                return {valid: false, message:'Datoen kan ikke være etter ' + dayjs(sporsmal.max).format('DD.MM.YYYY')}
             }
         }
 
-        return true
+        return {valid: true, message: ''}
     }
 
     const { datepickerProps, inputProps, selectedDay } = UNSAFE_useDatepicker({
@@ -54,13 +58,14 @@ const DatoInput = ({ sporsmal }: SpmProps) => {
                             const div: HTMLDivElement | null = document.querySelector('.ds-datepicker')
                             const values = getValues()
                             const dato = values[sporsmal.id]
-                            const detteFeilet = validerDato(dato)
-                            if (detteFeilet !== true) {
+                            const valideringsObjekt = validerDato(dato)
+                            if (valideringsObjekt.valid === false) {
                                 div?.classList.add('skjemaelement__input--harFeil')
-                                return detteFeilet
+                                return valideringsObjekt.message
                             }
                             div?.classList.remove('skjemaelement__input--harFeil')
-                            return true
+
+                            return valideringsObjekt.valid
                         },
                     }}
                     render={({ field }) => (
