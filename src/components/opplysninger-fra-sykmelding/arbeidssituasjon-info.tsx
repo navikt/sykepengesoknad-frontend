@@ -1,14 +1,16 @@
 import { BodyShort, Label } from '@navikt/ds-react'
 import React from 'react'
 
-import { useAppStore } from '../../data/stores/app-store'
 import { hentArbeidssituasjon } from '../../utils/sykmelding-utils'
 import { tekst } from '../../utils/tekster'
 import Vis from '../vis'
+import { Sykmelding } from '../../types/sykmelding'
 
-const ArbeidssituasjonInfo = () => {
-    const { valgtSykmelding } = useAppStore()
+interface ArbeidssituasjonInfoProps {
+    valgtSykmelding: Sykmelding
+}
 
+const ArbeidssituasjonInfo = ({ valgtSykmelding }: ArbeidssituasjonInfoProps) => {
     const arbeidssituasjon = hentArbeidssituasjon(valgtSykmelding)
 
     return (

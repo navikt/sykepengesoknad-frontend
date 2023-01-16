@@ -5,9 +5,12 @@ import { useIsFetching, UseQueryResult } from '@tanstack/react-query'
 import useSoknader from '../../hooks/useSoknader'
 import Vis from '../vis'
 import useSoknad from '../../hooks/useSoknad'
+import useSykmeldinger from '../../hooks/useSykmeldinger'
+import useSykmelding from '../../hooks/useSykmelding'
 
 interface QueryStatusPanelProps {
     valgSoknadId?: string
+    valgSykmeldingId?: string
 }
 
 interface QueryOgFeilmelding {
@@ -15,16 +18,19 @@ interface QueryOgFeilmelding {
     message: string
 }
 
-const QueryStatusPanel = ({ valgSoknadId }: QueryStatusPanelProps) => {
+const QueryStatusPanel = ({ valgSoknadId, valgSykmeldingId }: QueryStatusPanelProps) => {
     const isFetching = useIsFetching()
 
-    /*
-    // TODO: Legg også til sykmeldinger
     const sykmeldinger: QueryOgFeilmelding = {
         query: useSykmeldinger(),
         message: 'Kunne ikke hente dine sykmeldinger',
     }
-    */
+
+    const sykmelding: QueryOgFeilmelding = {
+        query: useSykmelding(valgSykmeldingId),
+        message: 'Kunne ikke hente din sykmelding',
+    }
+
     const soknader: QueryOgFeilmelding = {
         query: useSoknader(),
         message: 'Kunne ikke hente dine søknader',
@@ -35,7 +41,7 @@ const QueryStatusPanel = ({ valgSoknadId }: QueryStatusPanelProps) => {
         message: 'Kunne ikke hente din søknad',
     }
 
-    const errorQueries = [soknader, soknad].filter((a) => a.query.isError)
+    const errorQueries = [soknader, soknad, sykmeldinger, sykmelding].filter((a) => a.query.isError)
 
     return (
         <>

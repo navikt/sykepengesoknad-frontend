@@ -19,9 +19,9 @@ const AlleAndre = () => {
     return (
         <>
             <KvitteringStatus />
-            <Vis hvis={valgtSoknad!.soknadstype !== RSSoknadstype.OPPHOLD_UTLAND} render={() => <KvitteringVidere />} />
+            <Vis hvis={valgtSoknad.soknadstype !== RSSoknadstype.OPPHOLD_UTLAND} render={() => <KvitteringVidere />} />
             <Vis
-                hvis={valgtSoknad!.soknadstype === RSSoknadstype.OPPHOLD_UTLAND}
+                hvis={valgtSoknad.soknadstype === RSSoknadstype.OPPHOLD_UTLAND}
                 render={() => <KvitteringUtenlands />}
             />
         </>

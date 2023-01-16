@@ -47,7 +47,7 @@ const SporsmalForm = () => {
     const { data: korrigerer } = useSoknad(valgtSoknad?.korrigerer, valgtSoknad?.korrigerer !== undefined)
     const queryClient = useQueryClient()
 
-    const { setTop, setMottaker, setFeilState } = useAppStore()
+    const { setMottaker, setFeilState } = useAppStore()
     const { logEvent } = useAmplitudeInstance()
     const [erSiste, setErSiste] = useState<boolean>(false)
     const [poster, setPoster] = useState<boolean>(false)
@@ -200,7 +200,6 @@ const SporsmalForm = () => {
                     soknadstype: valgtSoknad!.soknadstype,
                     skjemanavn: 'sykepengesoknad',
                 })
-                setTop(0)
 
                 return
             }
@@ -220,7 +219,6 @@ const SporsmalForm = () => {
                 sporsmal = valgtSoknad!.sporsmal[spmIndex]
             } else {
                 methods.clearErrors()
-                setTop(0)
                 history.push(
                     pathUtenSteg(history.location.pathname) + SEPARATOR + (spmIndex + 2) + window.location.search,
                 )

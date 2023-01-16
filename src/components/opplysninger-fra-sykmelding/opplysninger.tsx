@@ -1,7 +1,11 @@
 import React from 'react'
+import { useParams } from 'react-router-dom'
 
 import { tekst } from '../../utils/tekster'
 import Utvidbar from '../utvidbar/utvidbar'
+import { RouteParams } from '../../app'
+import useSoknad from '../../hooks/useSoknad'
+import useSykmelding from '../../hooks/useSykmelding'
 
 import ArbeidsgiverInfo from './arbeidsgiver-info'
 import ArbeidssituasjonInfo from './arbeidssituasjon-info'
@@ -16,7 +20,14 @@ interface OpplysningerProps {
 }
 
 const Opplysninger = ({ ekspandert, steg }: OpplysningerProps) => {
+    const { id } = useParams<RouteParams>()
+    const { data: valgtSoknad } = useSoknad(id)
+    const { data: valgtSykmelding } = useSykmelding(valgtSoknad?.sykmeldingId)
+
     const tittel = tekst('sykepengesoknad.sykmelding-utdrag.tittel')
+
+    if (!valgtSoknad || !valgtSykmelding) return null
+
     return (
         <Utvidbar
             className="ekspander"
@@ -28,12 +39,12 @@ const Opplysninger = ({ ekspandert, steg }: OpplysningerProps) => {
             ikonAltTekst=""
         >
             <div className="opplysninger">
-                <SykmeldingPerioder />
-                <ArbeidsgiverInfo />
-                <SykmeldingDato />
-                <ArbeidssituasjonInfo />
-                <FravaersperioderInfo />
-                <ForsikringInfo />
+                <SykmeldingPerioder valgtSoknad={valgtSoknad} valgtSykmelding={valgtSykmelding} />
+                <ArbeidsgiverInfo valgtSoknad={valgtSoknad} />
+                <SykmeldingDato valgtSykmelding={valgtSykmelding} />
+                <ArbeidssituasjonInfo valgtSykmelding={valgtSykmelding} />
+                <FravaersperioderInfo valgtSykmelding={valgtSykmelding} />
+                <ForsikringInfo valgtSykmelding={valgtSykmelding} />
             </div>
         </Utvidbar>
     )
