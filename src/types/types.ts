@@ -24,7 +24,7 @@ export interface Arbeidsgiver {
 
 export class Soknad {
     id: string
-    sykmeldingId: string
+    sykmeldingId?: string
     soknadstype: RSSoknadstype
     status: RSSoknadstatus
     arbeidssituasjon?: RSArbeidssituasjon
@@ -43,7 +43,7 @@ export class Soknad {
 
     constructor(soknad: RSSoknad) {
         this.id = soknad.id
-        this.sykmeldingId = soknad.sykmeldingId!
+        this.sykmeldingId = soknad.sykmeldingId || undefined
         const type = soknad.soknadstype as keyof typeof RSSoknadstype
         this.soknadstype = RSSoknadstype[type]
         const stat = soknad.status as keyof typeof RSSoknadstatus
@@ -149,18 +149,6 @@ function rsToSporsmal(spms: RSSporsmal[], kriterie: RSVisningskriterieType | nul
     return sporsmals
 }
 
-export interface Brodsmule {
-    sti: string
-    tittel: string
-    mobilTittel?: string
-    erKlikkbar?: boolean
-}
-
-export interface IdParams {
-    id: string
-    stegId: string
-}
-
 export interface Ettersend {
     type: 'nav' | 'arbeidsgiver'
     dato: Date
@@ -190,10 +178,4 @@ export enum UtgiftTyper {
 
 export function svarverdiToKvittering(kvittering: string): Kvittering {
     return new Kvittering(kvittering)
-}
-
-export interface Personalia {
-    personalia: {
-        kontonr: string
-    }
 }

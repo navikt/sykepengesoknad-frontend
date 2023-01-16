@@ -4,7 +4,6 @@ import React, { useEffect } from 'react'
 import { useHistory, useParams } from 'react-router-dom'
 
 import { RouteParams } from '../../app'
-import { useAppStore } from '../../data/stores/app-store'
 import { RSSoknadstatus } from '../../types/rs-types/rs-soknadstatus'
 import { tilLesbarDatoMedArstall } from '../../utils/dato-utils'
 import { tekst } from '../../utils/tekster'
@@ -23,25 +22,21 @@ import { soknadBreadcrumb, useUpdateBreadcrumbs } from '../../hooks/useBreadcrum
 
 const AvbruttSoknad = () => {
     const { id } = useParams<RouteParams>()
-    const { data: valgtSoknad } = useSoknad(id)
     const { data: soknader } = useSoknader()
+    const { data: valgtSoknad } = useSoknad(id)
 
-    const { setValgtSykmelding, sykmeldinger } = useAppStore()
     const { logEvent } = useAmplitudeInstance()
     const history = useHistory()
 
     useUpdateBreadcrumbs(() => [{ ...soknadBreadcrumb, handleInApp: true }], [])
 
     useEffect(() => {
-        if (!valgtSoknad || !sykmeldinger) return
+        if (!valgtSoknad) return
 
         if (valgtSoknad.status !== RSSoknadstatus.AVBRUTT) {
             history.replace(urlTilSoknad(valgtSoknad))
             return
         }
-
-        const sykmelding = sykmeldinger.find((sm) => sm.id === valgtSoknad.sykmeldingId)
-        setValgtSykmelding(sykmelding)
 
         logEvent('skjema åpnet', {
             skjemanavn: 'sykepengesoknad',
@@ -49,7 +44,7 @@ const AvbruttSoknad = () => {
             soknadstatus: valgtSoknad.status,
         })
         // eslint-disable-next-line
-    }, [valgtSoknad, sykmeldinger])
+    }, [valgtSoknad])
 
     if (!valgtSoknad || !soknader) return <QueryStatusPanel valgSoknadId={id} />
 

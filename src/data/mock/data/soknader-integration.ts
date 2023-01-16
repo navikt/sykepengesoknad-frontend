@@ -692,7 +692,7 @@ export const sendtArbeidsledig: RSSoknad = {
     fom: '2020-05-27',
     tom: '2020-06-11',
     opprettetDato: '2020-06-12',
-    sendtTilNAVDato: '2020-06-12T14:15:39.267',
+    sendtTilNAVDato: dayjs().toISOString(),
     sendtTilArbeidsgiverDato: null,
     avbruttDato: null,
     startSykeforlop: '2020-05-27',
@@ -4643,6 +4643,7 @@ export const arbeidstakerMedOppholdKvittering: RSSoknad = {
 export const foranArbeidstakerMedOppholdKvittering: RSSoknad = jsonDeepCopy(arbeidstakerMedOppholdKvittering)
 foranArbeidstakerMedOppholdKvittering.id = 'foran-sok-8'
 foranArbeidstakerMedOppholdKvittering.status = 'SENDT'
+foranArbeidstakerMedOppholdKvittering.sendtTilArbeidsgiverDato = dayjs().toISOString()
 foranArbeidstakerMedOppholdKvittering.fom = '2020-03-25'
 foranArbeidstakerMedOppholdKvittering.tom = '2020-03-27'
 
