@@ -1,23 +1,25 @@
 import { BodyShort, Label } from '@navikt/ds-react'
 import dayjs from 'dayjs'
 import React from 'react'
+import { useParams } from 'react-router-dom'
 
-import { Periode, Sykmelding } from '../../types/sykmelding'
+import { useAppStore } from '../../data/stores/app-store'
+import { Periode } from '../../types/sykmelding'
 import { getDuration } from '../../utils/dato-utils'
 import { erOppdelt } from '../../utils/periode-utils'
 import { sorterEtterEldsteTom } from '../../utils/sykmelding-utils'
 import { tekst } from '../../utils/tekster'
 import Bjorn from '../sporsmal/bjorn/bjorn'
 import Vis from '../vis'
-import { Soknad } from '../../types/types'
+import { RouteParams } from '../../app'
+import useSoknad from '../../hooks/useSoknad'
 
-interface SykmeldingPerioderProps {
-    valgtSoknad: Soknad
-    valgtSykmelding: Sykmelding
-}
+const SykmeldingPerioder = () => {
+    const { id } = useParams<RouteParams>()
+    const { data: valgtSoknad } = useSoknad(id)
 
-const SykmeldingPerioder = ({ valgtSoknad, valgtSykmelding }: SykmeldingPerioderProps) => {
-    const sortertePerioder = valgtSykmelding.sykmeldingsperioder.sort(sorterEtterEldsteTom) || []
+    const { valgtSykmelding } = useAppStore()
+    const sortertePerioder = valgtSykmelding?.sykmeldingsperioder.sort(sorterEtterEldsteTom) || []
 
     const hentPeriodeTekst = (periode: Periode) => {
         switch (periode.type) {
@@ -36,6 +38,8 @@ const SykmeldingPerioder = ({ valgtSoknad, valgtSykmelding }: SykmeldingPerioder
                 return '1 behandlingsdag'
         }
     }
+
+    if (!valgtSoknad || !valgtSykmelding) return null
 
     return (
         <div className="sykmelding-perioder">

@@ -1,15 +1,16 @@
 import { BodyShort, Label } from '@navikt/ds-react'
 import React from 'react'
+import { useParams } from 'react-router-dom'
 
 import { tekst } from '../../utils/tekster'
 import Vis from '../vis'
-import { Soknad } from '../../types/types'
+import { RouteParams } from '../../app'
+import useSoknad from '../../hooks/useSoknad'
 
-interface ArbeidsgiverInfoProps {
-    valgtSoknad: Soknad
-}
+const ArbeidsgiverInfo = () => {
+    const { id } = useParams<RouteParams>()
+    const { data: valgtSoknad } = useSoknad(id)
 
-const ArbeidsgiverInfo = ({ valgtSoknad }: ArbeidsgiverInfoProps) => {
     return (
         <Vis
             hvis={valgtSoknad?.arbeidsgiver}

@@ -5,7 +5,7 @@ interface ResetFocusOnUrlChangeProps {
     children: React.ReactNode
 }
 
-const OnUrlChange = (props: ResetFocusOnUrlChangeProps) => {
+const ResetFocusOnUrlChange = (props: ResetFocusOnUrlChangeProps) => {
     const ref = useRef<HTMLDivElement>(null)
     const location = useLocation()
 
@@ -13,7 +13,6 @@ const OnUrlChange = (props: ResetFocusOnUrlChangeProps) => {
     // https://github.com/remix-run/react-router/issues/5210
     useEffect(() => {
         ref.current?.focus()
-        ref.current?.scrollIntoView()
     }, [location.pathname])
 
     return (
@@ -23,4 +22,4 @@ const OnUrlChange = (props: ResetFocusOnUrlChangeProps) => {
     )
 }
 
-export default OnUrlChange
+export default ResetFocusOnUrlChange

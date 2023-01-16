@@ -27,10 +27,10 @@ import { harKorrigertArbeidstakersoknadIDetSiste } from './harSvartJa'
 
 const KvitteringSide = () => {
     const { id } = useParams<RouteParams>()
-    const { data: soknader } = useSoknader()
     const { data: valgtSoknad } = useSoknad(id)
+    const { data: soknader } = useSoknader()
 
-    const { feilmeldingTekst } = useAppStore()
+    const { setValgtSykmelding, sykmeldinger, feilmeldingTekst } = useAppStore()
     const [rerendreKvittering, setRerendrekvittering] = useState<Date>(new Date())
     const history = useHistory()
     const { logEvent } = useAmplitudeInstance()
@@ -38,7 +38,7 @@ const KvitteringSide = () => {
     useUpdateBreadcrumbs(() => [{ ...kvitteringBreadcrumb, handleInApp: true }], [])
 
     useEffect(() => {
-        if (!valgtSoknad) return
+        if (!valgtSoknad || !sykmeldinger) return
 
         if (valgtSoknad.status !== RSSoknadstatus.SENDT) {
             const url = urlTilSoknad(valgtSoknad)
@@ -46,13 +46,16 @@ const KvitteringSide = () => {
             return
         }
 
+        const sykmelding = sykmeldinger.find((sm) => sm.id === valgtSoknad.sykmeldingId)
+        setValgtSykmelding(sykmelding)
+
         logEvent('skjema åpnet', {
             skjemanavn: 'sykepengesoknad',
             soknadstype: valgtSoknad.soknadstype,
             soknadstatus: valgtSoknad.status,
         })
         // eslint-disable-next-line
-    }, [valgtSoknad])
+    }, [valgtSoknad, sykmeldinger])
 
     // eslint-disable-next-line @typescript-eslint/no-empty-function
     useEffect(() => {}, [rerendreKvittering])

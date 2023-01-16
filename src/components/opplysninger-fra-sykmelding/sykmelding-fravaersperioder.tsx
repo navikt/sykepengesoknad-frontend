@@ -1,6 +1,7 @@
 import { BodyShort, Detail } from '@navikt/ds-react'
 import React from 'react'
 
+import { useAppStore } from '../../data/stores/app-store'
 import { RSArbeidssituasjon } from '../../types/rs-types/rs-arbeidssituasjon'
 import { tilLesbarPeriodeMedArstall } from '../../utils/dato-utils'
 import {
@@ -10,13 +11,10 @@ import {
 } from '../../utils/sykmelding-utils'
 import { tekst } from '../../utils/tekster'
 import Vis from '../vis'
-import { Sykmelding } from '../../types/sykmelding'
 
-interface FravaersperioderInfoProps {
-    valgtSykmelding: Sykmelding
-}
+const FravaersperioderInfo = () => {
+    const { valgtSykmelding } = useAppStore()
 
-const FravaersperioderInfo = ({ valgtSykmelding }: FravaersperioderInfoProps) => {
     const arbeidssituasjon = hentArbeidssituasjon(valgtSykmelding)
     const perioder = hentPerioderFørSykmelding(valgtSykmelding)
 

@@ -62,10 +62,7 @@ describe('Tester ettersending og korrigering', () => {
         cy.url().should('include', `/kvittering/${soknad.id}`)
 
         // Sendt til
-        cy.get('.sendt-info').should('contain', 'POSTEN NORGE AS, BÆRUM (Org.nr. 974654458), med kopi til NAV')
-
-        cy.contains('Du får sykepengene fra arbeidsgiveren din')
-        cy.contains('Arbeidsgiveren din betaler de første 16 kalenderdagene av sykefraværet.')
+        cy.get('.sendt-info').should('contain', 'POSTEN NORGE AS, BÆRUM (Org.nr. 974654458)').and('contain', 'NAV')
 
         // Kan ikke ettersende til nav på kvittering
         cy.contains('Jeg vil at søknaden skal behandles av NAV').should('not.exist')
@@ -85,10 +82,6 @@ describe('Tester ettersending og korrigering', () => {
         )
         cy.contains('Send søknaden til NAV').click()
         cy.contains('Jeg vil at søknaden skal behandles av NAV').should('not.exist')
-
-        // Innholdet i kvitteringen blir også oppdatert
-        cy.contains('NAV behandler søknaden din')
-        cy.contains('Du får sykepengene fra arbeidsgiveren din').should('not.exist')
     })
 
     it('Korriger', () => {

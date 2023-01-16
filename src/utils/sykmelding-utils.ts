@@ -7,8 +7,8 @@ export const sorterEtterEldsteTom = (p1: Periode, p2: Periode) => {
     return dayjs(p1.tom).unix() - dayjs(p2.tom).unix()
 }
 
-export const hentArbeidssituasjon = (valgtSykmelding: Sykmelding) => {
-    return valgtSykmelding.sykmeldingStatus.sporsmalOgSvarListe?.find((s) => s.shortName === 'ARBEIDSSITUASJON')?.svar
+export const hentArbeidssituasjon = (valgtSykmelding?: Sykmelding) => {
+    return valgtSykmelding?.sykmeldingStatus.sporsmalOgSvarListe?.find((s) => s.shortName === 'ARBEIDSSITUASJON')?.svar
         ?.svar
 }
 
@@ -19,8 +19,10 @@ export const harForsikring = (valgtSykmelding?: Sykmelding) => {
     )
 }
 
-export const harSpmOmForsikring = (valgtSykmelding: Sykmelding) => {
-    return valgtSykmelding.sykmeldingStatus.sporsmalOgSvarListe?.find((s) => s.shortName === 'FORSIKRING') !== undefined
+export const harSpmOmForsikring = (valgtSykmelding?: Sykmelding) => {
+    return (
+        valgtSykmelding?.sykmeldingStatus.sporsmalOgSvarListe?.find((s) => s.shortName === 'FORSIKRING') !== undefined
+    )
 }
 
 export const hentPerioderFørSykmelding = (valgtSykmelding?: Sykmelding) => {
@@ -33,6 +35,6 @@ export const hentPerioderFørSykmelding = (valgtSykmelding?: Sykmelding) => {
     return []
 }
 
-export const harSpmOmPerioderFørSykmelding = (valgtSykmelding: Sykmelding) => {
-    return valgtSykmelding.sykmeldingStatus.sporsmalOgSvarListe?.find((s) => s.shortName === 'PERIODE') !== undefined
+export const harSpmOmPerioderFørSykmelding = (valgtSykmelding?: Sykmelding) => {
+    return valgtSykmelding?.sykmeldingStatus.sporsmalOgSvarListe?.find((s) => s.shortName === 'PERIODE') !== undefined
 }

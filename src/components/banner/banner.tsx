@@ -35,6 +35,9 @@ const Banner = ({ overskrift }: BannerProps) => {
 
     return (
         <header className="sidebanner">
+            {/*
+            <SykSokLokalt />
+            */}
             <Heading size="xlarge" level="1" className="sidebanner__tittel">
                 {overskrift === undefined ? tittel() : overskrift}
                 <Vis
