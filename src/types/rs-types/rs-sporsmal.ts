@@ -1,4 +1,5 @@
 import dayjs from 'dayjs'
+
 import { Sporsmal } from '../types'
 
 import { RSSvar } from './rs-svar'
@@ -40,8 +41,8 @@ const rsSporsmalMapping = (sporsmal: Sporsmal): RSSporsmal => {
                 return (Number(svar.verdi) * 100).toString()
             }
             if (sporsmal.svartype == RSSvartype.DATO) {
-                alert(svar.verdi)
-                alert(dayjs(svar.verdi).format('YYYY-MM-DD'))
+                // alert(svar.verdi)
+                // alert(dayjs(svar.verdi).format('YYYY-MM-DD'))
                 return dayjs(svar.verdi).format('YYYY-MM-DD')
             }
             return svar.verdi
