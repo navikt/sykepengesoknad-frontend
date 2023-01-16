@@ -64,12 +64,16 @@ class ArbeidsrelatertArsak {
 }
 
 class AktivitetIkkeMulig {
-    medisinskArsak: MedisinskArsak
-    arbeidsrelatertArsak: ArbeidsrelatertArsak
+    medisinskArsak?: MedisinskArsak
+    arbeidsrelatertArsak?: ArbeidsrelatertArsak
 
     constructor(aktivitetIkkeMulig: any) {
-        this.medisinskArsak = new MedisinskArsak(aktivitetIkkeMulig.medisinskArsak)
-        this.arbeidsrelatertArsak = new ArbeidsrelatertArsak(aktivitetIkkeMulig.arbeidsrelatertArsak)
+        this.medisinskArsak = aktivitetIkkeMulig.medisinskArsak
+            ? new MedisinskArsak(aktivitetIkkeMulig.medisinskArsak)
+            : undefined
+        this.arbeidsrelatertArsak = aktivitetIkkeMulig.arbeidsrelatertArsak
+            ? new ArbeidsrelatertArsak(aktivitetIkkeMulig.arbeidsrelatertArsak)
+            : undefined
     }
 }
 
