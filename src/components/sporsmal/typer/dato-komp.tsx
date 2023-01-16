@@ -33,6 +33,7 @@ const DatoInput = ({ sporsmal }: SpmProps) => {
                     name={sporsmal.id}
                     rules={{
                         validate: () => {
+                            return true
                         const detteFeilet = validerDato(sporsmal, getValues())
                         if (detteFeilet !== true) {
                             //div?.classList.add('skjemaelement__input--harFeil')
