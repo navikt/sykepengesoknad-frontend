@@ -29,7 +29,7 @@ const DatoInput = ({ sporsmal }: SpmProps) => {
             }
         }
 
-        return true;
+        return true
     }
 
     const { datepickerProps, inputProps, selectedDay } = UNSAFE_useDatepicker({
@@ -61,7 +61,6 @@ const DatoInput = ({ sporsmal }: SpmProps) => {
                             }
                             div?.classList.remove('skjemaelement__input--harFeil')
                             return true
-    
                         },
                     }}
                     render={({ field }) => (
