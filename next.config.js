@@ -7,7 +7,7 @@ const appDirectives = {
     'connect-src': ["'self'", 'https://*.uxsignals.com'],
     'font-src': ['https://fonts.gstatic.com'],
     'script-src': ['https://uxsignals-frontend.uxsignals.app.iterate.no', 'navtest.boost.ai'],
-    'script-src-elem': ["'self'", 'navtest.boost.ai'],
+    'script-src-elem': ["'self'", 'navtest.boost.ai', 'https://uxsignals-frontend.uxsignals.app.iterate.no'],
     'style-src-elem': ["'self'"],
     'img-src': ["'self'", 'data:'],
 }

@@ -7,7 +7,7 @@ import Endreknapp from '../../components/endreknapp/endreknapp'
 import { useAppStore } from '../../data/stores/app-store'
 import { RSSoknadstatus } from '../../types/rs-types/rs-soknadstatus'
 import { RSSoknadstype } from '../../types/rs-types/rs-soknadstype'
-import { sykefravaerUrl } from '../../utils/environment'
+import { isProd, sykefravaerUrl } from '../../utils/environment'
 import { tekst } from '../../utils/tekster'
 import { useAmplitudeInstance } from '../amplitude/amplitude'
 import Banner from '../banner/banner'
@@ -21,14 +21,17 @@ import useSoknader from '../../hooks/useSoknader'
 import { urlTilSoknad } from '../soknad/soknad-link'
 import QueryStatusPanel from '../queryStatusPanel/QueryStatusPanel'
 import { kvitteringBreadcrumb, useUpdateBreadcrumbs } from '../../hooks/useBreadcrumbs'
+import { useStudyStatus } from '../../hooks/useStudyStatus'
 
 import Kvittering from './kvittering'
-import { erArbeidstakersoknad } from './harSvartJa'
+import { harKorrigertArbeidstakersoknadIDetSiste, harSvartTilbakeIArbeid } from './harSvartJa'
 
 const KvitteringSide = () => {
     const { id } = useParams<RouteParams>()
     const { data: valgtSoknad } = useSoknad(id)
     const { data: soknader } = useSoknader()
+    const { data: tilbakeIArbeidStudyActive } = useStudyStatus('study-zeh32lhqyb')
+    const { data: korrigertStudyActive } = useStudyStatus('study-cq87tgrh9f')
 
     const { setValgtSykmelding, sykmeldinger, feilmeldingTekst } = useAppStore()
     const [rerendreKvittering, setRerendrekvittering] = useState<Date>(new Date())
@@ -86,7 +89,7 @@ const KvitteringSide = () => {
 
                     <div className="knapperad">
                         <Vis
-                            hvis={gjenstaendeSoknader.length == 0}
+                            hvis={gjenstaendeSoknader.length === 0}
                             render={() => (
                                 <Button
                                     className="ferdig-knapp"
@@ -103,10 +106,12 @@ const KvitteringSide = () => {
                             )}
                         ></Vis>
                         <Vis
-                            hvis={gjenstaendeSoknader.length == 0}
+                            hvis={gjenstaendeSoknader.length === 0}
                             render={() => {
-                                if (erArbeidstakersoknad(valgtSoknad) && valgtSoknad.korrigerer) {
-                                    return <UxSignalsWidget study={'study-zeh32lhqyb'} />
+                                if (harSvartTilbakeIArbeid(valgtSoknad) && tilbakeIArbeidStudyActive) {
+                                    return <UxSignalsWidget study={'study-zeh32lhqyb'} demo={!isProd()} />
+                                } else if (harKorrigertArbeidstakersoknadIDetSiste(soknader) && korrigertStudyActive) {
+                                    return <UxSignalsWidget study={'study-cq87tgrh9f'} demo={!isProd()} />
                                 }
                                 return null
                             }}
