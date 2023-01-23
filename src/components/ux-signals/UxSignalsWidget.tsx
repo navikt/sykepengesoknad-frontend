@@ -11,9 +11,12 @@ export function UxSignalsWidget({ study, demo }: { study: string; demo: boolean 
                 type="module"
                 strategy="lazyOnload"
                 src="https://uxsignals-frontend.uxsignals.app.iterate.no/embed.js"
-                data-uxsignals-mode={demo ? 'demo' : ''}
             />
-            <div data-uxsignals-embed={study} className={styles.uxSignalsContainer} />
+            <div
+                data-uxsignals-embed={study}
+                data-uxsignals-mode={demo ? 'demo' : ''}
+                className={styles.uxSignalsContainer}
+            />
         </>
     )
 }

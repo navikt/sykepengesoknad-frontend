@@ -7,7 +7,7 @@ import Endreknapp from '../../components/endreknapp/endreknapp'
 import { useAppStore } from '../../data/stores/app-store'
 import { RSSoknadstatus } from '../../types/rs-types/rs-soknadstatus'
 import { RSSoknadstype } from '../../types/rs-types/rs-soknadstype'
-import { isOpplaering, sykefravaerUrl } from '../../utils/environment'
+import { isProd, sykefravaerUrl } from '../../utils/environment'
 import { tekst } from '../../utils/tekster'
 import { useAmplitudeInstance } from '../amplitude/amplitude'
 import Banner from '../banner/banner'
@@ -109,10 +109,10 @@ const KvitteringSide = () => {
                             hvis={gjenstaendeSoknader.length === 0}
                             render={() => {
                                 if (harSvartTilbakeIArbeid(valgtSoknad) && tilbakeIArbeidStudyActive) {
-                                    return <UxSignalsWidget study={'study-zeh32lhqyb'} demo={isOpplaering()} />
+                                    return <UxSignalsWidget study={'study-zeh32lhqyb'} demo={!isProd()} />
                                 } else if (harKorrigertArbeidstakersoknadIDetSiste(soknader) && korrigertStudyActive) {
                                     // TODO: ny study id
-                                    return <UxSignalsWidget study={'study-zeh32lhqyb'} demo={isOpplaering()} />
+                                    return <UxSignalsWidget study={'study-zeh32lhqyb'} demo={!isProd()} />
                                 }
                                 return null
                             }}
