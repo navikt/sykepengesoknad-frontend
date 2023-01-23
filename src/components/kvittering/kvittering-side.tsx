@@ -23,7 +23,7 @@ import QueryStatusPanel from '../queryStatusPanel/QueryStatusPanel'
 import { kvitteringBreadcrumb, useUpdateBreadcrumbs } from '../../hooks/useBreadcrumbs'
 
 import Kvittering from './kvittering'
-import { erArbeidstakersoknad } from './harSvartJa'
+import { harKorrigertArbeidstakersoknadIDetSiste } from './harSvartJa'
 
 const KvitteringSide = () => {
     const { id } = useParams<RouteParams>()
@@ -86,7 +86,7 @@ const KvitteringSide = () => {
 
                     <div className="knapperad">
                         <Vis
-                            hvis={gjenstaendeSoknader.length == 0}
+                            hvis={gjenstaendeSoknader.length === 0}
                             render={() => (
                                 <Button
                                     className="ferdig-knapp"
@@ -103,9 +103,9 @@ const KvitteringSide = () => {
                             )}
                         ></Vis>
                         <Vis
-                            hvis={gjenstaendeSoknader.length == 0}
+                            hvis={gjenstaendeSoknader.length === 0}
                             render={() => {
-                                if (erArbeidstakersoknad(valgtSoknad) && valgtSoknad.korrigerer) {
+                                if (harKorrigertArbeidstakersoknadIDetSiste(soknader)) {
                                     return <UxSignalsWidget study={'study-zeh32lhqyb'} />
                                 }
                                 return null
