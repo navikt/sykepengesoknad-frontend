@@ -30,7 +30,7 @@ const KvitteringSide = () => {
     const { id } = useParams<RouteParams>()
     const { data: valgtSoknad } = useSoknad(id)
     const { data: soknader } = useSoknader()
-    const { data: tilbakeIArbeidStudyActive } = useStudyStatus('study-zeh32lhqyb') // TODO: ny study id
+    const { data: tilbakeIArbeidStudyActive } = useStudyStatus('study-zeh32lhqyb')
     const { data: korrigertStudyActive } = useStudyStatus('study-zeh32lhqyb') // TODO: ny study id
 
     const { setValgtSykmelding, sykmeldinger, feilmeldingTekst } = useAppStore()
@@ -109,7 +109,6 @@ const KvitteringSide = () => {
                             hvis={gjenstaendeSoknader.length === 0}
                             render={() => {
                                 if (harSvartTilbakeIArbeid(valgtSoknad) && tilbakeIArbeidStudyActive) {
-                                    // TODO: ny study id
                                     return <UxSignalsWidget study={'study-zeh32lhqyb'} demo={isOpplaering()} />
                                 } else if (harKorrigertArbeidstakersoknadIDetSiste(soknader) && korrigertStudyActive) {
                                     // TODO: ny study id
