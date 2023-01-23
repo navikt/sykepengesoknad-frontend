@@ -31,7 +31,7 @@ const KvitteringSide = () => {
     const { data: valgtSoknad } = useSoknad(id)
     const { data: soknader } = useSoknader()
     const { data: tilbakeIArbeidStudyActive } = useStudyStatus('study-zeh32lhqyb')
-    const { data: korrigertStudyActive } = useStudyStatus('study-zeh32lhqyb') // TODO: ny study id
+    const { data: korrigertStudyActive } = useStudyStatus('study-cq87tgrh9f')
 
     const { setValgtSykmelding, sykmeldinger, feilmeldingTekst } = useAppStore()
     const [rerendreKvittering, setRerendrekvittering] = useState<Date>(new Date())
@@ -111,8 +111,7 @@ const KvitteringSide = () => {
                                 if (harSvartTilbakeIArbeid(valgtSoknad) && tilbakeIArbeidStudyActive) {
                                     return <UxSignalsWidget study={'study-zeh32lhqyb'} demo={!isProd()} />
                                 } else if (harKorrigertArbeidstakersoknadIDetSiste(soknader) && korrigertStudyActive) {
-                                    // TODO: ny study id
-                                    return <UxSignalsWidget study={'study-zeh32lhqyb'} demo={!isProd()} />
+                                    return <UxSignalsWidget study={'study-cq87tgrh9f'} demo={!isProd()} />
                                 }
                                 return null
                             }}
