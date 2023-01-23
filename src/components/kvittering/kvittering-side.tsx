@@ -7,7 +7,7 @@ import Endreknapp from '../../components/endreknapp/endreknapp'
 import { useAppStore } from '../../data/stores/app-store'
 import { RSSoknadstatus } from '../../types/rs-types/rs-soknadstatus'
 import { RSSoknadstype } from '../../types/rs-types/rs-soknadstype'
-import { sykefravaerUrl } from '../../utils/environment'
+import { isOpplaering, sykefravaerUrl } from '../../utils/environment'
 import { tekst } from '../../utils/tekster'
 import { useAmplitudeInstance } from '../amplitude/amplitude'
 import Banner from '../banner/banner'
@@ -21,6 +21,7 @@ import useSoknader from '../../hooks/useSoknader'
 import { urlTilSoknad } from '../soknad/soknad-link'
 import QueryStatusPanel from '../queryStatusPanel/QueryStatusPanel'
 import { kvitteringBreadcrumb, useUpdateBreadcrumbs } from '../../hooks/useBreadcrumbs'
+import { useStudyStatus } from '../../hooks/useStudyStatus'
 
 import Kvittering from './kvittering'
 import { harKorrigertArbeidstakersoknadIDetSiste } from './harSvartJa'
@@ -29,6 +30,7 @@ const KvitteringSide = () => {
     const { id } = useParams<RouteParams>()
     const { data: valgtSoknad } = useSoknad(id)
     const { data: soknader } = useSoknader()
+    const { data: studyActive } = useStudyStatus('study-zeh32lhqyb')
 
     const { setValgtSykmelding, sykmeldinger, feilmeldingTekst } = useAppStore()
     const [rerendreKvittering, setRerendrekvittering] = useState<Date>(new Date())
@@ -105,8 +107,8 @@ const KvitteringSide = () => {
                         <Vis
                             hvis={gjenstaendeSoknader.length === 0}
                             render={() => {
-                                if (harKorrigertArbeidstakersoknadIDetSiste(soknader)) {
-                                    return <UxSignalsWidget study={'study-zeh32lhqyb'} />
+                                if (harKorrigertArbeidstakersoknadIDetSiste(soknader) && studyActive) {
+                                    return <UxSignalsWidget study={'study-zeh32lhqyb'} demo={isOpplaering()} />
                                 }
                                 return null
                             }}
