@@ -35,7 +35,7 @@ const NyeSoknaderTeaser = ({ soknad }: SykepengesoknadTeaserProps) => {
                                     </Detail>
                                 )}
                             />
-                            <Heading size="small" as="h3" className="inngangspanel__tittel">
+                            <Heading size="small" level="2" className="inngangspanel__tittel">
                                 {teaserTittel(soknad)}
                             </Heading>
 

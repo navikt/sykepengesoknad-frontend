@@ -44,7 +44,7 @@ const Teasere = ({ soknader, className, tittel, tomListeTekst, id, kanSorteres =
 
     return (
         <>
-            <header className="teasere__header">
+            <div className="teasere__header">
                 <Vis
                     hvis={kanSorteres && sorterteSoknader().length > 0}
                     render={() => (
@@ -79,7 +79,7 @@ const Teasere = ({ soknader, className, tittel, tomListeTekst, id, kanSorteres =
                         </Heading>
                     )}
                 />
-            </header>
+            </div>
 
             <div id={id} className={className}>
                 {sorterteSoknader().map((soknad, idx) => {
