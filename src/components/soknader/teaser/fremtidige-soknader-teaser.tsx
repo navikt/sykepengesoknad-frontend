@@ -51,7 +51,7 @@ const FremtidigeSoknaderTeaser = ({ soknad }: SykepengesoknadTeaserProps) => {
                                     </Detail>
                                 )}
                             />
-                            <Heading size="small" level="3" className="inngangspanel__tittel">
+                            <Heading size="small" level="2" className="inngangspanel__tittel">
                                 {teaserTittel(soknad)}
                             </Heading>
                             {periodeListevisning(soknad)}

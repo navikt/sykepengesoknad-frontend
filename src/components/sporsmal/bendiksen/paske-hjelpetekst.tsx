@@ -30,7 +30,7 @@ const PaskeHjelpetekst = ({ sporsmal }: SpmProps) => {
             render={() => (
                 <div className="bendiksen-container">
                     <div className="bendiksen-hjelpetekst">
-                        <Label>{tekst('soknad.bendiksen.paske.label')}</Label>
+                        <Label as="h2">{tekst('soknad.bendiksen.paske.label')}</Label>
                         <BodyShort spacing>{tekst('soknad.bendiksen.paske.tekst')}</BodyShort>
 
                         <BodyShort>
