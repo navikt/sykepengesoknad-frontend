@@ -67,12 +67,9 @@ describe('Tester kvittering', () => {
         it('Etter 30 dager', () => {
             cy.visit('http://localhost:8080/syk/sykepengesoknad?testperson=alle-soknader')
 
-            cy.get(`#soknader-sendt article[aria-labelledby*=${sendtArbeidsledigKvittering.id}]`).scrollIntoView({
-                duration: 400,
-            })
             cy.get(
-                `[aria-labelledby="soknader-header-${sendtArbeidsledigKvittering.id}"] > .inngangspanel > .inngangspanel__ytre > .inngangspanel__del1 > .inngangspanel__ikon--normal > img`,
-            ).click()
+                `#soknader-sendt [aria-labelledby="soknader-header-${sendtArbeidsledigKvittering.id}"] > .inngangspanel > .inngangspanel__ytre > .inngangspanel__del1 > .inngangspanel__ikon--normal > img`,
+            ).click({ force: true })
             cy.url().should('include', `/sendt/${sendtArbeidsledigKvittering.id}`)
 
             // Sendt datoer

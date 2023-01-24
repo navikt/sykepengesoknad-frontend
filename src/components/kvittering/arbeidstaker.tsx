@@ -1,10 +1,9 @@
 import { Alert, Heading } from '@navikt/ds-react'
 import { logger } from '@navikt/next-logger'
 import dayjs from 'dayjs'
-import React, { useCallback, useEffect, useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom'
 
-import { useAppStore } from '../../data/stores/app-store'
 import { RSMottaker } from '../../types/rs-types/rs-mottaker'
 import { RSSoknadstatus } from '../../types/rs-types/rs-soknadstatus'
 import { RSSoknadstype } from '../../types/rs-types/rs-soknadstype'
@@ -16,6 +15,7 @@ import { RouteParams } from '../../app'
 import useSoknad from '../../hooks/useSoknad'
 import useSoknader from '../../hooks/useSoknader'
 import { RSSoknadmetadata } from '../../types/rs-types/rs-soknadmetadata'
+import useSykmelding from '../../hooks/useSykmelding'
 
 import Inntil16dager from './innhold/arbeidstaker/inntil16dager'
 import Over16dager from './innhold/arbeidstaker/over16dager'
@@ -27,9 +27,9 @@ type ArbeidstakerKvitteringTekst = 'inntil16dager' | 'over16dager' | 'utenOpphol
 
 const Arbeidstaker = () => {
     const { id } = useParams<RouteParams>()
-    const { data: valgtSoknad } = useSoknad(id)
     const { data: soknader } = useSoknader()
-    const { valgtSykmelding } = useAppStore()
+    const { data: valgtSoknad } = useSoknad(id)
+    const { data: valgtSykmelding } = useSykmelding(valgtSoknad?.sykmeldingId)
     const [kvitteringTekst, setKvitteringTekst] = useState<ArbeidstakerKvitteringTekst>()
 
     const erInnenforArbeidsgiverperiode = () => {
@@ -113,7 +113,7 @@ const Arbeidstaker = () => {
         }
     }
 
-    const settRiktigKvitteringTekst = useCallback(async () => {
+    const settRiktigKvitteringTekst = async () => {
         if (!valgtSoknad || !valgtSykmelding || !soknader) return
 
         if (erInnenforArbeidsgiverperiode()) {
@@ -125,8 +125,8 @@ const Arbeidstaker = () => {
                 const tidligereSoknader = soknader
                     .filter((sok) => sok.status !== RSSoknadstatus.UTGAATT) // Vi sjekker ikke utgåtte søknader
                     .filter((sok) => sok.soknadstype === RSSoknadstype.ARBEIDSTAKERE) // Gjelder arbeidstakersøknad
-                    .filter((sok) => sok.arbeidsgiver?.orgnummer === valgtSoknad?.arbeidsgiver?.orgnummer) // Samme arbeidstaker
-                    .filter((senereSok) => senereSok.tom! < valgtSoknad!.fom!) // Gjelder søknader før valgt
+                    .filter((sok) => sok.arbeidsgiver?.orgnummer === valgtSoknad.arbeidsgiver?.orgnummer) // Samme arbeidstaker
+                    .filter((senereSok) => senereSok.tom! < valgtSoknad.fom!) // Gjelder søknader før valgt
                     .filter((tidligereSok) => tidligereSoknaderInnenfor16Dager(tidligereSok.tom!, valgtSoknad.fom!))
                 if (tidligereSoknader.length > 0) {
                     if (harTidligereUtenOpphold(tidligereSoknader)) {
@@ -139,12 +139,12 @@ const Arbeidstaker = () => {
                 }
             }
         }
-        // eslint-disable-next-line
-    }, [])
+    }
 
     useEffect(() => {
         settRiktigKvitteringTekst().catch((e: Error) => logger.error(e))
-    }, [settRiktigKvitteringTekst, valgtSoknad?.sendtTilNAVDato])
+        // eslint-disable-next-line
+    }, [valgtSoknad?.sendtTilNAVDato, valgtSykmelding])
 
     if (!valgtSoknad || !soknader) return null
 

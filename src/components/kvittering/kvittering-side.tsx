@@ -28,12 +28,12 @@ import { harKorrigertArbeidstakersoknadIDetSiste, erArbeidstakerSoknad } from '.
 
 const KvitteringSide = () => {
     const { id } = useParams<RouteParams>()
-    const { data: valgtSoknad } = useSoknad(id)
     const { data: soknader } = useSoknader()
+    const { data: valgtSoknad } = useSoknad(id)
     const { data: tilbakeIArbeidStudyActive } = useStudyStatus('study-zeh32lhqyb')
     const { data: korrigertStudyActive } = useStudyStatus('study-cq87tgrh9f')
 
-    const { setValgtSykmelding, sykmeldinger, feilmeldingTekst } = useAppStore()
+    const { feilmeldingTekst } = useAppStore()
     const [rerendreKvittering, setRerendrekvittering] = useState<Date>(new Date())
     const history = useHistory()
     const { logEvent } = useAmplitudeInstance()
@@ -41,7 +41,7 @@ const KvitteringSide = () => {
     useUpdateBreadcrumbs(() => [{ ...kvitteringBreadcrumb, handleInApp: true }], [])
 
     useEffect(() => {
-        if (!valgtSoknad || !sykmeldinger) return
+        if (!valgtSoknad) return
 
         if (valgtSoknad.status !== RSSoknadstatus.SENDT) {
             const url = urlTilSoknad(valgtSoknad)
@@ -49,16 +49,13 @@ const KvitteringSide = () => {
             return
         }
 
-        const sykmelding = sykmeldinger.find((sm) => sm.id === valgtSoknad.sykmeldingId)
-        setValgtSykmelding(sykmelding)
-
         logEvent('skjema åpnet', {
             skjemanavn: 'sykepengesoknad',
             soknadstype: valgtSoknad.soknadstype,
             soknadstatus: valgtSoknad.status,
         })
         // eslint-disable-next-line
-    }, [valgtSoknad, sykmeldinger])
+    }, [valgtSoknad])
 
     // eslint-disable-next-line @typescript-eslint/no-empty-function
     useEffect(() => {}, [rerendreKvittering])
