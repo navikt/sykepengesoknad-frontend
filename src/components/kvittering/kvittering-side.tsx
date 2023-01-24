@@ -24,7 +24,7 @@ import { kvitteringBreadcrumb, useUpdateBreadcrumbs } from '../../hooks/useBread
 import { useStudyStatus } from '../../hooks/useStudyStatus'
 
 import Kvittering from './kvittering'
-import { harKorrigertArbeidstakersoknadIDetSiste, harSvartTilbakeIArbeid } from './harSvartJa'
+import { harKorrigertArbeidstakersoknadIDetSiste, erArbeidstakerSoknad } from './harSvartJa'
 
 const KvitteringSide = () => {
     const { id } = useParams<RouteParams>()
@@ -108,10 +108,11 @@ const KvitteringSide = () => {
                         <Vis
                             hvis={gjenstaendeSoknader.length === 0}
                             render={() => {
-                                if (harSvartTilbakeIArbeid(valgtSoknad) && tilbakeIArbeidStudyActive) {
-                                    return <UxSignalsWidget study={'study-zeh32lhqyb'} demo={!isProd()} />
-                                } else if (harKorrigertArbeidstakersoknadIDetSiste(soknader) && korrigertStudyActive) {
+                                if (harKorrigertArbeidstakersoknadIDetSiste(soknader) && korrigertStudyActive) {
                                     return <UxSignalsWidget study={'study-cq87tgrh9f'} demo={!isProd()} />
+                                }
+                                if (erArbeidstakerSoknad(valgtSoknad) && tilbakeIArbeidStudyActive) {
+                                    return <UxSignalsWidget study={'study-zeh32lhqyb'} demo={!isProd()} />
                                 }
                                 return null
                             }}
