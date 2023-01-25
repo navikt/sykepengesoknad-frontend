@@ -121,7 +121,17 @@ export function kalkulerStartsmaneden(sporsmal: Sporsmal) {
     return fraBackendTilDate(idag.toString())
 }
 
-export function validerDatoObjekt(
+
+// export const tilBackendDato = (datoArg: string) => {
+//     return dayjs(datoArg).format('YYYY-MM-DD')
+// }
+
+// export const fraBackendTilDate = (datoArg: string) => {
+//     if (datoArg && datoArg.match(RegExp('\\d{4}-\\d{2}-\\d{2}'))) return dayjs(datoArg).toDate()
+// }
+
+
+export function validerDatoObjekt2(
     dato: Date | undefined,
     sporsmalMin: string,
     sporsmalMax: string,
@@ -140,7 +150,8 @@ export function validerDatoObjekt(
 
     const sporsmalMinDate = dayjs(sporsmalMin).toDate()
     const sporsmalMaxDate = dayjs(sporsmalMax).toDate()
-
+    alert('min' + sporsmalMinDate)
+    alert('max' + sporsmalMaxDate)
     // dayjs(datoArg).toDate()
     
 
@@ -152,6 +163,36 @@ export function validerDatoObjekt(
     }
 
     if (sporsmalMax && datoSomDate > sporsmalMaxDate) {
+        return {
+            valid: false,
+            message: 'Datoen kan ikke være etter ' + dayjs(sporsmalMax).format('DD.MM.YYYY'),
+        }
+    }
+
+    return { valid: true, message: '' }
+}
+
+export function validerDatoObjekt(
+    dato: Date | undefined,
+    sporsmalMin: string,
+    sporsmalMax: string,
+): { valid: boolean; message: string } {
+    if (dato === undefined || !dato) return { valid: false, message: 'Du må oppgi en gyldig dato i formatet dd.mm.åååå' }
+
+    alert(dato)
+    const sporsmalMinDate = new Date(sporsmalMin)
+    const sporsmalMaxDate = new Date(sporsmalMax)
+    alert('min' + sporsmalMinDate)
+    alert('max' + sporsmalMaxDate)
+
+    if (sporsmalMin && dato < sporsmalMinDate) {
+        return {
+            valid: false,
+            message: 'Datoen kan ikke være før ' + dayjs(sporsmalMin).format('DD.MM.YYYY'),
+        }
+    }
+
+    if (sporsmalMax && dato > sporsmalMaxDate) {
         return {
             valid: false,
             message: 'Datoen kan ikke være etter ' + dayjs(sporsmalMax).format('DD.MM.YYYY'),
