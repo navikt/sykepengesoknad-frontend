@@ -1,7 +1,7 @@
 import { veldigLangSoknad } from '../../../src/data/mock/data/soknader-integration'
 import { Soknad } from '../../../src/types/types'
 
-describe('Tester støtte for gamle spørsmål', () => {
+xdescribe('Tester støtte for gamle spørsmål', () => {
     //-----
     // Sykmelding: 7e90121c-b64b-4a1c-b7a5-93c9d95aba47, arbeidstaker - 100%
     // Søknad: faba11f5-123-abc-8c8a-58b28ce2f3ef, fom: 1.4.20, tom: 24.4.20

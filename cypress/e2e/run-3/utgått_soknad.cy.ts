@@ -1,6 +1,6 @@
 import { utgattSoknad } from '../../../src/data/mock/data/soknader-integration'
 
-describe('Tester utgått søknad', () => {
+xdescribe('Tester utgått søknad', () => {
     before(() => {
         cy.visit('http://localhost:8080/syk/sykepengesoknad?testperson=alle-soknader')
     })

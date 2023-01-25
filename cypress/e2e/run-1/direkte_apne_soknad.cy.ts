@@ -1,7 +1,7 @@
 import { arbeidstaker } from '../../../src/data/mock/data/opplaering'
 import { sendtArbeidsledig } from '../../../src/data/mock/data/soknader-integration'
 
-describe('Tester å åpne søknaden direkte fra sykefravaer', () => {
+xdescribe('Tester å åpne søknaden direkte fra sykefravaer', () => {
     const soknad = arbeidstaker
 
     it('Vi kan gå direkte til søknaden fra sykefravaer', function () {

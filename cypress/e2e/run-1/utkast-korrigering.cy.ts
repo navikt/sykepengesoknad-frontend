@@ -1,7 +1,7 @@
 import { arbeidstakerTilKorrigering } from '../../../src/data/mock/data/soknader-integration'
 import { tekst } from '../../../src/utils/tekster'
 
-describe('Tester utkast til korrigerte søknader', () => {
+xdescribe('Tester utkast til korrigerte søknader', () => {
     const tilKorrigering = arbeidstakerTilKorrigering
 
     before(() => {

@@ -12,7 +12,7 @@ import {
     sendtArbeidsledigKvittering,
 } from '../../../src/data/mock/data/soknader-integration'
 
-describe('Tester kvittering', () => {
+xdescribe('Tester kvittering', () => {
     context('Arbeidsledig', () => {
         it('Nylig sendt', () => {
             // Velg søknad

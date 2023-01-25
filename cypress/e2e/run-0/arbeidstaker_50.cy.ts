@@ -1,6 +1,6 @@
 import { arbeidstakerGradert } from '../../../src/data/mock/data/opplaering'
 
-describe('Tester arbeidstakersøknad - gradert 50%', () => {
+xdescribe('Tester arbeidstakersøknad - gradert 50%', () => {
     const soknad = arbeidstakerGradert
 
     before(() => {

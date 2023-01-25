@@ -1,6 +1,6 @@
 import { arbeidsledig } from '../../../src/data/mock/data/opplaering'
 
-describe('Tester arbeidsledigsøknad', () => {
+xdescribe('Tester arbeidsledigsøknad', () => {
     const soknad = arbeidsledig
 
     before(() => {

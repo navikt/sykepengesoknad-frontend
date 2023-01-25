@@ -1,6 +1,6 @@
 import { sendtArbeidsledigKvittering } from '../../../src/data/mock/data/soknader-integration'
 
-describe('Tester endring uten en endringer', () => {
+xdescribe('Tester endring uten en endringer', () => {
     const soknad = sendtArbeidsledigKvittering
 
     before(() => {

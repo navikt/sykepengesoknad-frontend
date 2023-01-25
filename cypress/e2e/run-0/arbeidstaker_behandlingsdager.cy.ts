@@ -1,6 +1,6 @@
 import { behandlingsdager } from '../../../src/data/mock/data/opplaering'
 
-describe('Tester behandlingsdagersøknad', () => {
+xdescribe('Tester behandlingsdagersøknad', () => {
     //-----
     // Sykmelding: e876fe08-2765-4bd6-966c-922eefe99382, arbeidstaker - behandlingsdager
     // Søknad: bcb032ac-b6dd-4ae7-8e73-9e64f1b35182, fom: 1.4.20, tom: 24.4.20

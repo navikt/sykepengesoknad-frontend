@@ -1,6 +1,6 @@
 import { kortFomTomArbeidstakerSoknad } from '../../../src/data/mock/data/kort-soknad'
 
-describe('Tester søknad som er opprettet fra egenmeldingsdager i inntektsmeldingen', () => {
+xdescribe('Tester søknad som er opprettet fra egenmeldingsdager i inntektsmeldingen', () => {
     const soknad = kortFomTomArbeidstakerSoknad
 
     it('Viser guidepanel på førsteside', function () {

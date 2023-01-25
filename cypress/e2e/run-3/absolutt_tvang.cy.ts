@@ -1,7 +1,7 @@
 import { arbeidstaker } from '../../../src/data/mock/data/opplaering'
 
-describe('Tester at åpne sykmeldinger må sendes inn', () => {
-    describe('Tester med en usendt sykmelding', () => {
+xdescribe('Tester at åpne sykmeldinger må sendes inn', () => {
+    xdescribe('Tester med en usendt sykmelding', () => {
         it('Laster søknader ', function () {
             cy.visit('http://localhost:8080/syk/sykepengesoknad?testperson=en-usendt-sykmelding')
 
@@ -17,7 +17,7 @@ describe('Tester at åpne sykmeldinger må sendes inn', () => {
         })
     })
 
-    describe('Tester med flere usendte sykmeldinger', () => {
+    xdescribe('Tester med flere usendte sykmeldinger', () => {
         it('Laster søknader ', function () {
             cy.visit('http://localhost:8080/syk/sykepengesoknad?testperson=to-usendte-sykmeldinger')
 

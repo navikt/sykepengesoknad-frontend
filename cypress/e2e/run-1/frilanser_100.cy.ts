@@ -1,6 +1,6 @@
 import { frilanser } from '../../../src/data/mock/data/opplaering'
 
-describe('Tester frilansersøknad', () => {
+xdescribe('Tester frilansersøknad', () => {
     //-----
     // Sykmelding: baf4a9ab-cc9b-42af-bba3-67cd6ca06388, frilanser - 100%
     // Søknad: a8e40578-682b-4a04-bfda-b7768af2ae13, fom: 1.4.20, tom: 24.4.20

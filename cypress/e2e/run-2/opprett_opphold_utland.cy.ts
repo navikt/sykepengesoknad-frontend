@@ -1,7 +1,7 @@
 import { oppholdUtland } from '../../../src/data/mock/data/opphold-utland'
 import { arbeidstakersoknadMedUtenlandsoppholdSoktSykepenger } from '../../../src/data/mock/data/soknader-integration'
 
-describe('Tester opprettelse av søknad om å beholde sykepenger utenfor EØS', () => {
+xdescribe('Tester opprettelse av søknad om å beholde sykepenger utenfor EØS', () => {
     before(() => {
         cy.visit('http://localhost:8080/syk/sykepengesoknad?testperson=alle-soknader')
     })

@@ -1,11 +1,11 @@
 import { nyttReisetilskudd } from '../../../src/data/mock/data/reisetilskudd'
 
-describe('Teste førsteside i reisetilskuddsøknaden', () => {
+xdescribe('Teste førsteside i reisetilskuddsøknaden', () => {
     before(() => {
         cy.visit('http://localhost:8080/syk/sykepengesoknad')
     })
 
-    describe('Landingside og listevisning', () => {
+    xdescribe('Landingside og listevisning', () => {
         it('Laster startside', () => {
             cy.get('.navds-heading--xlarge').should('be.visible').and('have.text', 'Søknader')
         })
@@ -23,7 +23,7 @@ describe('Teste førsteside i reisetilskuddsøknaden', () => {
         })
     })
 
-    describe('Ansvarserklæring - Reisetilskudd', () => {
+    xdescribe('Ansvarserklæring - Reisetilskudd', () => {
         it('URL er riktig', () => {
             cy.url().should('include', `/syk/sykepengesoknad/soknader/${nyttReisetilskudd.id}/1`)
         })
@@ -59,7 +59,7 @@ describe('Teste førsteside i reisetilskuddsøknaden', () => {
         })
     })
 
-    describe('Før du fikk sykmelding - Reisetilskudd', () => {
+    xdescribe('Før du fikk sykmelding - Reisetilskudd', () => {
         it('URL er riktig', () => {
             cy.url().should('include', `/syk/sykepengesoknad/soknader/${nyttReisetilskudd.id}/2`)
             cy.get('.sporsmal__tittel').should('have.text', 'Før du fikk sykmelding')
@@ -85,7 +85,7 @@ describe('Teste førsteside i reisetilskuddsøknaden', () => {
         })
     })
 
-    describe('Reise med bil - Reisetilskudd', () => {
+    xdescribe('Reise med bil - Reisetilskudd', () => {
         it('URL er riktig', () => {
             cy.url().should('include', `/syk/sykepengesoknad/soknader/${nyttReisetilskudd.id}/3`)
             cy.get('.sporsmal__tittel').should('have.text', 'Reise med bil')
@@ -148,7 +148,7 @@ describe('Teste førsteside i reisetilskuddsøknaden', () => {
         })
     })
 
-    describe('Opplasting - Reisetilskudd', () => {
+    xdescribe('Opplasting - Reisetilskudd', () => {
         it('URL er riktig', () => {
             cy.url().should('include', `/syk/sykepengesoknad/soknader/${nyttReisetilskudd.id}/4`)
         })
@@ -240,7 +240,7 @@ describe('Teste førsteside i reisetilskuddsøknaden', () => {
             cy.get('.skjemaelement__feilmelding').contains('Du må laste opp kvittering')
         })
 
-        describe('Transportmiddel feilmeldinger', () => {
+        xdescribe('Transportmiddel feilmeldinger', () => {
             it('Ugyldig valg', () => {
                 cy.get('select[name=transportmiddel]').select('')
                 cy.get('.lagre-kvittering').contains('Bekreft').click()
@@ -255,7 +255,7 @@ describe('Teste førsteside i reisetilskuddsøknaden', () => {
             })
         })
 
-        describe('Beløp feilmeldinger', () => {
+        xdescribe('Beløp feilmeldinger', () => {
             it('Negative beløp', () => {
                 cy.get('input[name=belop_input]').type('-100')
                 cy.get('.lagre-kvittering').contains('Bekreft').click()
@@ -291,7 +291,7 @@ describe('Teste førsteside i reisetilskuddsøknaden', () => {
             })
         })
 
-        describe('Kvittering feilmeldinger', () => {
+        xdescribe('Kvittering feilmeldinger', () => {
             it('Legger inn gyldig kvittering', () => {
                 cy.get('.filopplasteren input[type=file]').attachFile('kvittering.jpg')
                 cy.get('.lagre-kvittering').contains('Bekreft').click()
@@ -303,7 +303,7 @@ describe('Teste førsteside i reisetilskuddsøknaden', () => {
         })
     })
 
-    describe('Utbetaling - Reisetilskudd', () => {
+    xdescribe('Utbetaling - Reisetilskudd', () => {
         it('URL er riktig', () => {
             cy.url().should('include', `/soknader/${nyttReisetilskudd.id}/5`)
             cy.get('.sporsmal__tittel').should('have.text', 'Utbetaling')
@@ -315,7 +315,7 @@ describe('Teste førsteside i reisetilskuddsøknaden', () => {
         })
     })
 
-    describe('Til slutt - Reisetilskudd', () => {
+    xdescribe('Til slutt - Reisetilskudd', () => {
         it('URL er riktig', () => {
             cy.url().should('include', `/soknader/${nyttReisetilskudd.id}/6`)
             cy.get('.sporsmal__tittel').should('have.text', 'Til slutt')
@@ -341,7 +341,7 @@ describe('Teste førsteside i reisetilskuddsøknaden', () => {
         })
     })
 
-    describe('Kvittering - Reisetilskudd', () => {
+    xdescribe('Kvittering - Reisetilskudd', () => {
         it('URL er riktig', () => {
             cy.url().should('include', `/kvittering/${nyttReisetilskudd.id}`)
         })

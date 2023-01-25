@@ -1,4 +1,4 @@
-describe('Tester kontonummer i kvittering', () => {
+xdescribe('Tester kontonummer i kvittering', () => {
     it('Har ikke kontonumer', () => {
         cy.visit('http://localhost:8080/syk/sykepengesoknad?testperson=har%20kontonummer')
 

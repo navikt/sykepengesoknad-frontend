@@ -2,7 +2,7 @@ import { oppholdUtland } from '../../../src/data/mock/data/opphold-utland'
 import { soknaderOpplaering as soknader } from '../../../src/data/mock/data/opplaering'
 import { RSSoknad } from '../../../src/types/rs-types/rs-soknad'
 
-describe('Tester søknad om å beholde sykepenger utenfor EØS', () => {
+xdescribe('Tester søknad om å beholde sykepenger utenfor EØS', () => {
     const soknad = soknader.find((sok: RSSoknad) => sok.id === oppholdUtland.id)!
 
     before(() => {

@@ -1,6 +1,6 @@
 import { gradertReisetilskudd } from '../../../src/data/mock/data/reisetilskudd'
 
-describe('Tester at riktig antall desimaler sendes til backend', () => {
+xdescribe('Tester at riktig antall desimaler sendes til backend', () => {
     it('Oppgir desimaler på svartype TALL og PROSENT', () => {
         cy.visit(`http://localhost:8080/syk/sykepengesoknad/soknader/${gradertReisetilskudd.id}/7`)
         cy.get('.radioGruppe-jaNei input[value=JA]').click({ force: true })

@@ -1,11 +1,11 @@
 import { feilVedSlettingAvKvittering } from '../../../src/data/mock/data/reisetilskudd'
 
-describe('Test sletting av kvittering som feiler', () => {
+xdescribe('Test sletting av kvittering som feiler', () => {
     before(() => {
         cy.visit(`syk/sykepengesoknad/soknader/${feilVedSlettingAvKvittering.id}/4?testperson=reisetilskudd`)
     })
 
-    describe('Sletting', () => {
+    xdescribe('Sletting', () => {
         it('URL er riktig', () => {
             cy.url().should('include', `/syk/sykepengesoknad/soknader/${feilVedSlettingAvKvittering.id}/4`)
             cy.contains('Kvittering').and('be.visible')

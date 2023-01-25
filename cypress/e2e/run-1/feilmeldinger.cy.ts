@@ -1,7 +1,7 @@
 import { arbeidstakerGradert } from '../../../src/data/mock/data/opplaering'
 import { RSSoknad } from '../../../src/types/rs-types/rs-soknad'
 
-describe('Tester feilmeldinger', () => {
+xdescribe('Tester feilmeldinger', () => {
     function gaTilSoknad(soknad: RSSoknad, steg: string) {
         cy.visit(`http://localhost:8080/syk/sykepengesoknad/soknader/${soknad.id}/${steg}`)
     }

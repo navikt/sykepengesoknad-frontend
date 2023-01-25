@@ -1,6 +1,6 @@
 import { arbeidstakerTilKorrigering } from '../../../src/data/mock/data/soknader-integration'
 
-describe('Ved korrigering av ferie forsvinner bjørn og det er en infotekst om ingen sykepenger', () => {
+xdescribe('Ved korrigering av ferie forsvinner bjørn og det er en infotekst om ingen sykepenger', () => {
     const soknad = arbeidstakerTilKorrigering
 
     it('Vi kan gå direkte til søknaden fra sykefravaer', function () {

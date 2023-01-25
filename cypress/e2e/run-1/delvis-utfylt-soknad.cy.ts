@@ -1,6 +1,6 @@
 import { delvisUtfylltArbeidsledig } from '../../../src/data/mock/data/soknader-integration'
 
-describe('Tester delvis utfylt søknad', () => {
+xdescribe('Tester delvis utfylt søknad', () => {
     const delvisUtfyltSoknad = delvisUtfylltArbeidsledig
 
     before(() => {

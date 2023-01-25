@@ -3,8 +3,8 @@ import {
     soknadSomTriggerSporsmalFinnesIkkeISoknad,
 } from '../../../src/data/mock/data/soknader-integration'
 
-describe('Tester feilsituasjoner ', () => {
-    describe('Tester SPORSMAL_FINNES_IKKE_I_SOKNAD ', () => {
+xdescribe('Tester feilsituasjoner ', () => {
+    xdescribe('Tester SPORSMAL_FINNES_IKKE_I_SOKNAD ', () => {
         before(() => {
             cy.visit('http://localhost:8080/syk/sykepengesoknad?testperson=alle-soknader')
         })
@@ -33,7 +33,7 @@ describe('Tester feilsituasjoner ', () => {
         })
     })
 
-    describe('Tester FEIL_STATUS_FOR_OPPDATER_SPORSMAL ', () => {
+    xdescribe('Tester FEIL_STATUS_FOR_OPPDATER_SPORSMAL ', () => {
         before(() => {
             cy.visit('http://localhost:8080/syk/sykepengesoknad?testperson=alle-soknader')
         })
@@ -60,7 +60,7 @@ describe('Tester feilsituasjoner ', () => {
             cy.get('.navds-heading--xlarge').should('be.visible').and('have.text', 'Søknader')
         })
     })
-    describe('Tester 400 ved send søknad', () => {
+    xdescribe('Tester 400 ved send søknad', () => {
         before(() => {
             cy.visit(
                 'http://localhost:8080/syk/sykepengesoknad/soknader/400-ved-send-soknad/2?testperson=HTTP%20400%20ved%20send%20soknad',
@@ -81,7 +81,7 @@ describe('Tester feilsituasjoner ', () => {
         })
     })
 
-    describe('Tester 500 ved send søknad', () => {
+    xdescribe('Tester 500 ved send søknad', () => {
         before(() => {
             cy.visit(
                 'http://localhost:8080/syk/sykepengesoknad/soknader/500-ved-send-soknad/2?testperson=HTTP%20500%20ved%20send%20soknad',

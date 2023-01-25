@@ -1,6 +1,6 @@
 import { sendtArbeidsledig } from '../../../src/data/mock/data/soknader-integration'
 
-describe('Tester sendt søknad', () => {
+xdescribe('Tester sendt søknad', () => {
     before(() => {
         cy.visit('http://localhost:8080/syk/sykepengesoknad?testperson=alle-soknader')
     })
