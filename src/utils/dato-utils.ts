@@ -120,3 +120,30 @@ export function kalkulerStartsmaneden(sporsmal: Sporsmal) {
     }
     return fraBackendTilDate(idag.toString())
 }
+
+export function validerDatoObjekt(
+    dato: Date | undefined,
+    sporsmalMin: string,
+    sporsmalMax: string,
+): { valid: boolean; message: string } {
+    if (dato === undefined || !dato) return { valid: false, message: 'Du må oppgi en gyldig dato i formatet dd.mm.åååå' }
+
+    const sporsmalMinDate = new Date(sporsmalMin)
+    const sporsmalMaxDate = new Date(sporsmalMax)
+
+    if (sporsmalMin && dato < sporsmalMinDate) {
+        return {
+            valid: false,
+            message: 'Datoen kan ikke være før ' + dayjs(sporsmalMin).format('DD.MM.YYYY'),
+        }
+    }
+
+    if (sporsmalMax && dato > sporsmalMaxDate) {
+        return {
+            valid: false,
+            message: 'Datoen kan ikke være etter ' + dayjs(sporsmalMax).format('DD.MM.YYYY'),
+        }
+    }
+
+    return { valid: true, message: '' }
+}
