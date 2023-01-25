@@ -128,17 +128,30 @@ export function validerDatoObjekt(
 ): { valid: boolean; message: string } {
     if (dato === undefined || !dato) return { valid: false, message: 'Du må oppgi en gyldig dato i formatet dd.mm.åååå' }
 
-    const sporsmalMinDate = new Date(sporsmalMin)
-    const sporsmalMaxDate = new Date(sporsmalMax)
+//dayjs(date).format('YYY-MM-DD')
+    //dato = dayjs(dato).toDate()
+    //dato = dayjs(day(dato).format('')).toDate()
+    // dayjs(datoArg).format('YYYY-MM-DD')
+    alert(dato)
+    const datoSomString = dayjs(dato).format('YYYY-MM-DD') 
+    alert("dayjs:" + dayjs(dato).toString())
+    const datoSomDate = dayjs(datoSomString).toDate()
+    alert(datoSomDate)
 
-    if (sporsmalMin && dato < sporsmalMinDate) {
+    const sporsmalMinDate = dayjs(sporsmalMin).toDate()
+    const sporsmalMaxDate = dayjs(sporsmalMax).toDate()
+
+    // dayjs(datoArg).toDate()
+    
+
+    if (sporsmalMin && datoSomDate < sporsmalMinDate) {
         return {
             valid: false,
             message: 'Datoen kan ikke være før ' + dayjs(sporsmalMin).format('DD.MM.YYYY'),
         }
     }
 
-    if (sporsmalMax && dato > sporsmalMaxDate) {
+    if (sporsmalMax && datoSomDate > sporsmalMaxDate) {
         return {
             valid: false,
             message: 'Datoen kan ikke være etter ' + dayjs(sporsmalMax).format('DD.MM.YYYY'),

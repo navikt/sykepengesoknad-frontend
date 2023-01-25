@@ -54,8 +54,8 @@ const DatoInput = ({ sporsmal }: SpmProps) => {
                             <div className="min-h-96">
                                 <UNSAFE_DatePicker
                                     {...datepickerProps}
-                                    {...(sporsmal.min && { fromDate: new Date(sporsmal.min) })}
-                                    {...(sporsmal.max && { toDate: new Date(sporsmal.max) })}
+                                    {...(sporsmal.min && { fromDate: dayjs(sporsmal.min).toDate() })}
+                                    {...(sporsmal.max && { toDate: dayjs(sporsmal.max).toDate() })}
                                     dropdownCaption={true}
                                     showWeekNumber={true}
                                     disableWeekends={true}
