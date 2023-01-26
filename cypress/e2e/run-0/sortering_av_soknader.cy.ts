@@ -55,7 +55,15 @@ describe('Tester sortering av søknader', () => {
     })
 
     it('Sorter etter Sendt', function () {
+        cy.get('.inngangspanel__sortering select').contains('Dato')
+        cy.get('#soknader-sendt article').eq(0).contains('27. mai – 11. juni 2020')
+        cy.get('#soknader-sendt article').eq(1).contains('23. mai – 7. juni 2020')
+
         cy.get('.inngangspanel__sortering select').select('Sendt')
+        cy.get('.inngangspanel__sortering select').contains('Sendt')
+
+        cy.get('#soknader-sendt article').eq(0).contains('27. mai – 11. juni 2020')
+        cy.get('#soknader-sendt article').eq(1).contains('25. – 27. mars 2020')
         cy.get('#soknader-sendt article').then((articles: any) => {
             const soknader = articleTilSoknad(articles)
             let forrigeSoknad = soknader[0]
