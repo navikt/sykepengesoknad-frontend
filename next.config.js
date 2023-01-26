@@ -1,6 +1,5 @@
 /* eslint-disable @typescript-eslint/no-var-requires */
 const withLess = require('next-with-less')
-const { withSentryConfig } = require('@sentry/nextjs')
 const { buildCspHeader } = require('@navikt/nav-dekoratoren-moduler/ssr')
 
 const appDirectives = {
@@ -74,7 +73,4 @@ const nextConfig = {
     },
 }
 
-const withSentry = (nextConfig) =>
-    process.env.ENABLE_SENTRY ? withSentryConfig(nextConfig, { silent: true }) : nextConfig
-
-module.exports = withLess(withSentry(nextConfig))
+module.exports = withLess(nextConfig)

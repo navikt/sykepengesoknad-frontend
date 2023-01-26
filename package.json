@@ -11,7 +11,6 @@
         "@navikt/nav-dekoratoren-moduler": "^1.9.0",
         "@navikt/next-api-proxy": "^2.1.0",
         "@navikt/next-logger": "^1.14.0",
-        "@sentry/nextjs": "^7.33.0",
         "@tanstack/react-query": "^4.23.0",
         "@types/smoothscroll-polyfill": "^0.3.1",
         "amplitude-js": "^8.21.4",
