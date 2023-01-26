@@ -39,3 +39,5 @@ spec:
       value: "prod"
     - name: VEDLIKEHOLD
       value: "false"
+    - name: ASSET_PREFIX
+      value: "https://cdn.nav.no/flex/sykepengesoknad-frontend"
