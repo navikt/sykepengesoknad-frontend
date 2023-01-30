@@ -36,7 +36,7 @@ export const fetchMedRequestId = async (
         } catch (e) {
             throw new FetchError(
                 `${e} - Kall til url: ${options.method} ${url} og x_request_id: ${requestId} feilet uten svar fra backend.`,
-                response.status,
+                -1,
             )
         }
     }
