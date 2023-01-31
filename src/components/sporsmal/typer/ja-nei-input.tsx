@@ -1,4 +1,4 @@
-import { BodyLong, Label, RadioGroup, Radio } from '@navikt/ds-react'
+import { BodyLong, RadioGroup, Radio } from '@navikt/ds-react'
 import parser from 'html-react-parser'
 import React from 'react'
 import { useFormContext, Controller } from 'react-hook-form'
@@ -54,21 +54,16 @@ const JaNeiInput = ({ sporsmal }: SpmProps) => {
     return (
         <>
             <div className={'inputPanelGruppe' + (errors[sporsmal.id] ? ' skjemagruppe--feil' : '')}>
-                <Label as="h2" className="skjema__sporsmal">
-                    {sporsmal.sporsmalstekst}
-                </Label>
-
-                <BjornUnderSporsmalstekst sporsmal={sporsmal} />
-
-                <PaskeHjelpetekst sporsmal={sporsmal} />
-
-                <EkspanderbarHjelp sporsmal={sporsmal} />
-
                 <Controller
                     name={sporsmal.id}
                     rules={{ validate: (value) => valider(value), required: feilmelding.global }}
                     render={({ field }) => (
-                        <RadioGroup {...field} legend="" hideLegend={true} className="radioGruppe-jaNei">
+                        <RadioGroup {...field} legend={sporsmal.sporsmalstekst} className="radioGruppe-jaNei">
+                            <BjornUnderSporsmalstekst sporsmal={sporsmal} />
+
+                            <PaskeHjelpetekst sporsmal={sporsmal} />
+
+                            <EkspanderbarHjelp sporsmal={sporsmal} />
                             <Radio
                                 id={field.name + '_' + '0'}
                                 value="JA"
