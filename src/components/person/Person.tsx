@@ -1,4 +1,4 @@
-import { BodyShort, Popover } from '@navikt/ds-react'
+import { BodyShort, Link, Popover } from '@navikt/ds-react'
 import React, { useRef, useState } from 'react'
 import { useHistory } from 'react-router-dom'
 
@@ -38,7 +38,7 @@ const Person = () => {
                     <ul>
                         {Object.keys(personas).map((p, idx) => (
                             <BodyShort size="medium" as="li" key={idx}>
-                                <a href={`?testperson=${p}`}>{p}</a>
+                                <Link href={`/syk/sykepengesoknad/?testperson=${p}`}>{p}</Link>
                             </BodyShort>
                         ))}
                     </ul>
