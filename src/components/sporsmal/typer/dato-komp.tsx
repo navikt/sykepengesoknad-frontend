@@ -29,6 +29,7 @@ const DatoInput = ({ sporsmal }: SpmProps) => {
         onDateChange: field.onChange,
         defaultSelected: field.value,
         defaultMonth: dayjs(sporsmal.max).toDate(),
+        
     })
 
     return (
@@ -41,6 +42,9 @@ const DatoInput = ({ sporsmal }: SpmProps) => {
                     {...(sporsmal.min && { fromDate: dayjs(sporsmal.min).toDate() })}
                     {...(sporsmal.max && { toDate: dayjs(sporsmal.max).toDate() })}
                     open={calendarOpen}
+                    onSelect={() => {
+                        setCalendarOpen(false)
+                    }}
                     onOpenToggle={() => {
                         setCalendarOpen(!calendarOpen)
                     }}
