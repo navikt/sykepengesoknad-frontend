@@ -23,10 +23,10 @@ describe('Tester støtte for gamle spørsmål', () => {
 
     function velgDato() {
         const velgDato = 10
-        const className = '.ds-datepicker__calendarButton'
+        const className = '.navds-date__field-button'
 
         cy.get(className).click()
-        cy.get('.DayPicker-Day').contains(velgDato).first().click()
+        cy.get('.rdp-day').contains(velgDato).first().click()
     }
 
     function velgPeriode() {

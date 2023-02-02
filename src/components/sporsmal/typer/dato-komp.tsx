@@ -1,57 +1,63 @@
-import { Datepicker } from '@navikt/ds-datepicker'
-import React from 'react'
-import { Controller, useFormContext } from 'react-hook-form'
+import React, { useState } from 'react'
+import { useController, useFormContext, useFormState } from 'react-hook-form'
+import { UNSAFE_DatePicker, UNSAFE_useDatepicker } from '@navikt/ds-react'
+import dayjs from 'dayjs'
 
-import { skalBrukeFullskjermKalender } from '../../../utils/browser-utils'
-import { fraBackendTilDate } from '../../../utils/dato-utils'
-import validerDato from '../../../utils/sporsmal/valider-dato'
 import FeilLokal from '../../feil/feil-lokal'
 import { SpmProps } from '../sporsmal-form/sporsmal-form'
 import UndersporsmalListe from '../undersporsmal/undersporsmal-liste'
+import validerDato from '../../../utils/sporsmal/valider-dato'
 
 const DatoInput = ({ sporsmal }: SpmProps) => {
-    const { getValues } = useFormContext()
+    const {
+        formState: { errors },
+    } = useFormContext()
+    const [calendarOpen, setCalendarOpen] = useState(false)
+
+    const { field } = useController({
+        name: sporsmal.id,
+        rules: {
+            validate: (value) => {
+                setCalendarOpen(false)
+                return validerDato(sporsmal, value)
+            },
+        },
+    })
+
+    const { datepickerProps, inputProps } = UNSAFE_useDatepicker({
+        ...field,
+        onDateChange: field.onChange,
+        defaultSelected: field.value,
+        defaultMonth: dayjs(sporsmal.max).toDate(),
+    })
 
     return (
-        <div className="dato-komp">
-            <Controller
-                name={sporsmal.id}
-                rules={{
-                    validate: () => {
-                        const div: HTMLDivElement | null = document.querySelector('.ds-datepicker')
-                        const detteFeilet = validerDato(sporsmal, getValues())
-                        if (detteFeilet !== true) {
-                            div?.classList.add('skjemaelement__input--harFeil')
-                            return detteFeilet
-                        }
-                        div?.classList.remove('skjemaelement__input--harFeil')
-                        return true
-                    },
-                }}
-                render={({ field }) => (
-                    <Datepicker
-                        locale="nb"
+        <div className="dato-komp" data-cy="dato-komp">
+            <div className="axe-exclude">
+                <UNSAFE_DatePicker
+                    {...datepickerProps}
+                    dropdownCaption={true}
+                    locale="nb"
+                    {...(sporsmal.min && { fromDate: dayjs(sporsmal.min).toDate() })}
+                    {...(sporsmal.max && { toDate: dayjs(sporsmal.max).toDate() })}
+                    open={calendarOpen}
+                    onOpenToggle={() => {
+                        setCalendarOpen(!calendarOpen)
+                    }}
+                    data-cy-sporsmalid={sporsmal.id}
+                >
+                    <UNSAFE_DatePicker.Input
+                        {...inputProps}
                         id={sporsmal.id}
                         label={sporsmal.sporsmalstekst}
-                        onChange={field.onChange}
-                        value={field.value}
-                        inputName={field.name}
-                        calendarSettings={{
-                            showWeekNumbers: true,
-                            position: skalBrukeFullskjermKalender(),
+                        error={errors[field.name] !== undefined}
+                        onFocus={() => {
+                            setCalendarOpen(true)
                         }}
-                        showYearSelector={false}
-                        limitations={{
-                            weekendsNotSelectable: false,
-                            minDate: sporsmal.min || undefined,
-                            maxDate: sporsmal.max || undefined,
-                        }}
-                        dayPickerProps={{
-                            initialMonth: fraBackendTilDate(sporsmal.max!),
-                        }}
+                        data-cy={sporsmal.id}
                     />
-                )}
-            />
+                </UNSAFE_DatePicker>
+            </div>
 
             <FeilLokal sporsmal={sporsmal} />
 

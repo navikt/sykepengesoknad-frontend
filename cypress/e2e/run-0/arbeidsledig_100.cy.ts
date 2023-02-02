@@ -36,9 +36,8 @@ describe('Tester arbeidsledigsøknad', () => {
         // Test spørsmål
         cy.get('.radioGruppe-jaNei input[value=NEI]').click({ force: true })
         cy.contains('Fra hvilken dato trengte du ikke lenger sykmeldingen?')
-        cy.get('.ds-datepicker__calendarButton').click()
-        cy.get('.DayPicker-Day').contains('20').click()
-
+        cy.get('.navds-date__field-button').click()
+        cy.get('.rdp-day').contains('10').click()
         cy.contains('Gå videre').click()
     })
 
@@ -79,8 +78,8 @@ describe('Tester arbeidsledigsøknad', () => {
 
         // Underspørsmål 1
         cy.contains('Når startet du på utdanningen?')
-        cy.get('.ds-datepicker__calendarButton').click()
-        cy.get('.DayPicker-Day').contains('10').click()
+        cy.get('.navds-date__field-button').click()
+        cy.get('.rdp-day').contains('10').click()
 
         // Underspørsmål 2 - dato
         cy.contains('Er utdanningen et fulltidsstudium?')

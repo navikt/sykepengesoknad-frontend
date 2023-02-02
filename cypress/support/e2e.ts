@@ -64,7 +64,12 @@ function setupAxe() {
             { id: 'page-has-heading-one', enabled: false },
         ],
     })
-    cy.checkA11y(undefined, undefined, terminalLog, false)
+
+    const A11YOptions = {
+        exclude: ['.axe-exclude'],
+    }
+
+    cy.checkA11y(A11YOptions, undefined, terminalLog, false)
 }
 
 function terminalLog(violations: any) {

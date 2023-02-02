@@ -1,3 +1,5 @@
+import dayjs from 'dayjs'
+
 import { SvarEnums } from '../../types/enums'
 import { RSSvar } from '../../types/rs-types/rs-svar'
 import { RSSvartype } from '../../types/rs-types/rs-svartype'
@@ -27,6 +29,9 @@ export const hentSvar = (sporsmal: Sporsmal): any => {
                     return spm.svarliste.svar[0]?.verdi === SvarEnums.CHECKED
                 })?.sporsmalstekst || undefined
             )
+
+        case RSSvartype.DATO:
+            return svar?.verdi ? dayjs(svar.verdi).toDate() : undefined
 
         case RSSvartype.DATOER:
         case RSSvartype.LAND:

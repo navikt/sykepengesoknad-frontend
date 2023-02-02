@@ -1,3 +1,5 @@
+import dayjs from 'dayjs'
+
 import { SvarEnums } from '../../types/enums'
 import { RSSvar } from '../../types/rs-types/rs-svar'
 import { RSSvartype } from '../../types/rs-types/rs-svartype'
@@ -42,6 +44,9 @@ export const settSvar = (sporsmal: Sporsmal, verdier: Record<string, any>): void
             break
         case RSSvartype.LAND:
             landSvar(sporsmal, verdi)
+            break
+        case RSSvartype.DATO:
+            datoSvar(sporsmal, verdi)
             break
         case RSSvartype.DATOER:
             datoerSvar(sporsmal, verdi)
@@ -116,6 +121,19 @@ const periodeSvar = (sporsmal: Sporsmal, verdi: any) => {
                 return { verdi: JSON.stringify(periode) }
             }),
         }
+    }
+}
+
+const datoSvar = (sporsmal: Sporsmal, verdi: any) => {
+    const svar: RSSvar[] = []
+    if (verdi !== undefined) {
+        svar.push({
+            verdi: dayjs(verdi).format('YYYY-MM-DD'),
+        })
+    }
+    sporsmal.svarliste = {
+        sporsmalId: sporsmal.id,
+        svar: svar,
     }
 }
 
