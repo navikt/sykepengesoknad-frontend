@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { useController, useFormContext, useFormState } from 'react-hook-form'
+import { useController, useFormContext } from 'react-hook-form'
 import { UNSAFE_DatePicker, UNSAFE_useDatepicker } from '@navikt/ds-react'
 import dayjs from 'dayjs'
 
@@ -29,7 +29,6 @@ const DatoInput = ({ sporsmal }: SpmProps) => {
         onDateChange: field.onChange,
         defaultSelected: field.value,
         defaultMonth: dayjs(sporsmal.max).toDate(),
-        
     })
 
     return (
