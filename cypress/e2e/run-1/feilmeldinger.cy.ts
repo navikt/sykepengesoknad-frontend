@@ -15,8 +15,14 @@ describe('Tester feilmeldinger', () => {
         globalFeilmelding: string,
         focusTarget: string,
     ) {
+        const errorColorRgb = 'rgb(195, 0, 0) 0px 0px 0px 1px inset, rgb(0, 52, 125) 0px 0px 0px 3px'
+
         cy.get('[data-cy="feil-oppsumering"]').should('exist')
         cy.get('[data-cy="feil-oppsumering"]').contains(lokalFeilmelding)
+
+        cy.get('[data-cy="feil-lokal"]').should('exist')
+        cy.get('[data-cy="feil-lokal"]').contains(lokalFeilmelding)
+
         cy.get('[data-cy="feil-oppsumering"]')
             .should('exist')
             .within(() => {
@@ -24,7 +30,8 @@ describe('Tester feilmeldinger', () => {
                 cy.contains(globalFeilmelding).click()
             })
 
-        cy.focused().should('have.attr', 'id', focusTarget) // focustarget her er en id som identifiserer at input element tilhorer korrekt sporsmal
+        cy.focused().should('have.attr', 'id', focusTarget)
+        cy.focused().should('have.css', 'box-shadow', errorColorRgb)
     }
 
     function feilmeldingHandtering(lokalFeilmelding: string, globalFeilmelding: string, focusTarget: string) {
