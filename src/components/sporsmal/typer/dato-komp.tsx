@@ -12,23 +12,24 @@ const DatoInput = ({ sporsmal }: SpmProps) => {
     const {
         formState: { errors },
     } = useFormContext()
-    const [calendarOpen, setCalendarOpen] = useState(false)
+    // const [calendarOpen, setCalendarOpen] = useState(false)
 
     const { field } = useController({
         name: sporsmal.id,
         rules: {
             validate: (value) => {
-                setCalendarOpen(false)
+                // setCalendarOpen(false)
                 return validerDato(sporsmal, value)
             },
         },
     })
 
-    const { datepickerProps, inputProps } = UNSAFE_useDatepicker({
+    const { datepickerProps, inputProps, selectedDay } = UNSAFE_useDatepicker({
         ...field,
         onDateChange: field.onChange,
         defaultSelected: field.value,
         defaultMonth: dayjs(sporsmal.max).toDate(),
+        openOnFocus: false
     })
 
     return (
@@ -40,13 +41,13 @@ const DatoInput = ({ sporsmal }: SpmProps) => {
                     locale="nb"
                     {...(sporsmal.min && { fromDate: dayjs(sporsmal.min).toDate() })}
                     {...(sporsmal.max && { toDate: dayjs(sporsmal.max).toDate() })}
-                    open={calendarOpen}
-                    onSelect={() => {
-                        setCalendarOpen(false)
-                    }}
-                    onOpenToggle={() => {
-                        setCalendarOpen(!calendarOpen)
-                    }}
+                    // open={calendarOpen}
+                    // onSelect={() => {
+                    //     setCalendarOpen(false)
+                    // }}
+                    // onOpenToggle={() => {
+                    //     setCalendarOpen(!calendarOpen)
+                    // }}
                     data-cy-sporsmalid={sporsmal.id}
                 >
                     <UNSAFE_DatePicker.Input
@@ -54,10 +55,12 @@ const DatoInput = ({ sporsmal }: SpmProps) => {
                         id={sporsmal.id}
                         label={sporsmal.sporsmalstekst}
                         error={errors[field.name] !== undefined}
-                        onFocus={() => {
-                            setCalendarOpen(true)
-                        }}
+                        // onFocus={() => {
+                        //     setCalendarOpen(true)
+                        // }}
+                        
                         data-cy={sporsmal.id}
+
                     />
                 </UNSAFE_DatePicker>
             </div>
