@@ -30,8 +30,10 @@ const KvitteringSide = () => {
     const { id } = useParams<RouteParams>()
     const { data: soknader } = useSoknader()
     const { data: valgtSoknad } = useSoknad(id)
-    const { data: tilbakeIArbeidStudyActive } = useStudyStatus('study-zeh32lhqyb')
-    const { data: korrigertStudyActive } = useStudyStatus('study-cq87tgrh9f')
+    const arbeidstakersøknadStudy = 'study-4dushnh970'
+    const { data: arbeidstakersoknadStudyActive } = useStudyStatus(arbeidstakersøknadStudy)
+    const korrigertSøknadStudy = 'study-zeh32lhqyb'
+    const { data: korrigertStudyActive } = useStudyStatus(korrigertSøknadStudy)
 
     const { feilmeldingTekst } = useAppStore()
     const [rerendreKvittering, setRerendrekvittering] = useState<Date>(new Date())
@@ -106,10 +108,10 @@ const KvitteringSide = () => {
                             hvis={gjenstaendeSoknader.length === 0}
                             render={() => {
                                 if (harKorrigertArbeidstakersoknadIDetSiste(soknader) && korrigertStudyActive) {
-                                    return <UxSignalsWidget study={'study-cq87tgrh9f'} demo={!isProd()} />
+                                    return <UxSignalsWidget study={korrigertSøknadStudy} demo={!isProd()} />
                                 }
-                                if (erArbeidstakerSoknad(valgtSoknad) && tilbakeIArbeidStudyActive) {
-                                    return <UxSignalsWidget study={'study-zeh32lhqyb'} demo={!isProd()} />
+                                if (erArbeidstakerSoknad(valgtSoknad) && arbeidstakersoknadStudyActive) {
+                                    return <UxSignalsWidget study={arbeidstakersøknadStudy} demo={!isProd()} />
                                 }
                                 return null
                             }}
