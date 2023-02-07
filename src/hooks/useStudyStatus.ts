@@ -1,12 +1,12 @@
 import { useQuery } from '@tanstack/react-query'
 
-import { isIntegrationtest } from '../utils/environment'
+import { isIntegrationtest, isLabs } from '../utils/environment'
 
 export function useStudyStatus(id: string) {
     return useQuery<boolean, Error>({
         queryKey: ['study', id],
         queryFn: async () => {
-            if (isIntegrationtest()) {
+            if (isIntegrationtest() && !isLabs()) {
                 return false
             }
 

@@ -31,8 +31,8 @@ const KvitteringSide = () => {
     const { data: soknader } = useSoknader()
     const { data: valgtSoknad } = useSoknad(id)
     const arbeidstakersøknadStudy = 'study-4dushnh970'
-    const { data: arbeidstakersoknadStudyActive } = useStudyStatus(arbeidstakersøknadStudy)
     const korrigertSøknadStudy = 'study-zeh32lhqyb'
+    const { data: arbeidstakersoknadStudyActive } = useStudyStatus(arbeidstakersøknadStudy)
     const { data: korrigertStudyActive } = useStudyStatus(korrigertSøknadStudy)
 
     const { feilmeldingTekst } = useAppStore()

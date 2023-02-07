@@ -26,7 +26,7 @@ spec:
     - name: MOCK_BACKEND
       value: "true"
     - name: ENVIRONMENT
-      value: "gcp"
+      value: "labs"
     - name: SYKEFRAVAER_URL
       value: "https://ditt-sykefravaer.labs.nais.io/syk/sykefravaer"
     - name: SYKMELDINGER_URL

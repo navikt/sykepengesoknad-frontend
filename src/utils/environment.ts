@@ -9,6 +9,9 @@ export function isDev() {
 export function isProd() {
     return publicRuntimeConfig.env === 'prod'
 }
+export function isLabs() {
+    return publicRuntimeConfig.env === 'labs'
+}
 
 export function isIntegrationtest() {
     return isMockBackend() && !isOpplaering()
