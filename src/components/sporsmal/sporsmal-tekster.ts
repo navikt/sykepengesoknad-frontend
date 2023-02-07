@@ -100,7 +100,8 @@ const SporsmalTekster = {
     'soknad.feilmelding.INNTEKTSKILDE_SELVSTENDIG_ER_DU_SYKMELDT':
         'Du må svare på om du er sykmeldt som selvstendig næringsdrivende',
     'soknad.feilmelding.INNTEKTSKILDE_SELVSTENDIG_ER_DU_SYKMELDT.lokal': 'Du må svare på om du er sykmeldt fra dette',
-    'soknad.feilmelding.INNTEKTSKILDE_OMSORGSLONN_ER_DU_SYKMELDT': 'Du må svare på om du er sykmeldt med omsorgslønn',
+    'soknad.feilmelding.INNTEKTSKILDE_OMSORGSLONN_ER_DU_SYKMELDT':
+        'Du må svare på om du er sykmeldt med kommunal omsorgstønad',
     'soknad.feilmelding.INNTEKTSKILDE_OMSORGSLONN_ER_DU_SYKMELDT.lokal': 'Du må svare på om du er sykmeldt fra dette',
     'soknad.feilmelding.INNTEKTSKILDE_FOSTERHJEM_ER_DU_SYKMELDT':
         'Du må svare på om du er sykmeldt med fosterhjemgodtgjørelse',
@@ -116,7 +117,7 @@ const SporsmalTekster = {
     'soknad.feilmelding.INNTEKTSKILDE_FRILANSER_SELVSTENDIG':
         'Du må svare på om du er sykmeldt som frilanser eller selvstendig næringsdrivende',
     'soknad.feilmelding.INNTEKTSKILDE_ANNET': 'Du må svare på om du er sykmeldt fra dette',
-    'soknad.feilmelding.INNTEKTSKILDE_OMSORGSLONN': 'Du må svare på om du er sykmeldt med omsorgslønn',
+    'soknad.feilmelding.INNTEKTSKILDE_OMSORGSLONN': 'Du må svare på om du er sykmeldt med kommunal omsorgstønad',
     'soknad.feilmelding.INNTEKTSKILDE_FOSTERHJEM': 'Du må svare på om du er sykmeldt med fosterhjemgodtgjørelse',
     'soknad.feilmelding.INNTEKTSKILDE_STYREVERV': '',
 

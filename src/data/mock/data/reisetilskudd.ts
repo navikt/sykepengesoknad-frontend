@@ -620,7 +620,7 @@ export const gradertReisetilskudd: RSSoknad = {
                         {
                             id: '7b4d4adc-de4f-38fd-a997-e5337fbb9888',
                             tag: 'INNTEKTSKILDE_OMSORGSLONN',
-                            sporsmalstekst: 'omsorgslønn fra kommunen',
+                            sporsmalstekst: 'Kommunal omsorgstønad',
                             undertekst: null,
                             svartype: 'CHECKBOX',
                             min: null,

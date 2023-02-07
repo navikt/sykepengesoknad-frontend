@@ -537,7 +537,7 @@ export const brukertestSoknad: RSSoknad = {
                         {
                             id: '7b4d4adc-de4f-38fd-a997-e5337fbb9555',
                             tag: 'INNTEKTSKILDE_OMSORGSLONN',
-                            sporsmalstekst: 'omsorgslønn fra kommunen',
+                            sporsmalstekst: 'Kommunal omsorgstønad',
                             undertekst: null,
                             svartype: 'CHECKBOX',
                             min: null,
