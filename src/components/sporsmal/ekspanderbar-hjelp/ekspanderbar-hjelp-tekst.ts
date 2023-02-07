@@ -43,5 +43,5 @@ export const EkspanderbarHjelpTekster = {
         'Vi mener bare inntekter som er pensjonsgivende. Som oftest vil det si inntekt fra arbeid du har utført. Penger du får fra NAV, trenger du ikke oppgi selv om de er pensjonsgivende.<br/><br/>Svarer du ja på spørsmålet, får du en liste å krysse av på. Velg frilanser hvis du får fosterhjemsgodtgjørelse eller honorar fra verv, for eksempel styreverv i bedrifter eller borettslag.',
     'ekspanderbarhjelp.utdanning.tittel': 'Sykepenger under utdanning',
     'ekspanderbarhjelp.utdanning.innhold':
-        'I noen tilfeller kan du ha rett til sykepenger fra NAV mens du studerer. <a target="_blank" href="https://www.nav.no/no/person/arbeid/sykmeldt-arbeidsavklaringspenger-og-yrkesskade/sykepenger/sykepenger-under-utdanning">Les om hvilken type utdanning det gjelder.</a>',
+        'I noen tilfeller kan du ha rett til sykepenger fra NAV mens du studerer. <a target="_blank" href="https://www.nav.no/sykepenger#situasjoner">Les om hvilken type utdanning det gjelder.</a>',
 }
