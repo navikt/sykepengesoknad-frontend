@@ -10,6 +10,30 @@ describe('Tester feilmeldinger', () => {
         cy.contains('Gå videre').click({ force: true })
     }
 
+    function feilmeldingHandteringForNyDatepicker(
+        lokalFeilmelding: string,
+        globalFeilmelding: string,
+        focusTarget: string,
+    ) {
+        const errorColorRgb = 'rgb(195, 0, 0) 0px 0px 0px 1px inset, rgb(0, 52, 125) 0px 0px 0px 3px'
+
+        cy.get('[data-cy="feil-oppsumering"]').should('exist')
+        cy.get('[data-cy="feil-oppsumering"]').contains(lokalFeilmelding)
+
+        cy.get('[data-cy="feil-lokal"]').should('exist')
+        cy.get('[data-cy="feil-lokal"]').contains(lokalFeilmelding)
+
+        cy.get('[data-cy="feil-oppsumering"]')
+            .should('exist')
+            .within(() => {
+                cy.contains('Det er 1 feil i skjemaet')
+                cy.contains(globalFeilmelding).click()
+            })
+
+        cy.focused().should('have.attr', 'id', focusTarget)
+        cy.focused().should('have.css', 'box-shadow', errorColorRgb)
+    }
+
     function feilmeldingHandtering(lokalFeilmelding: string, globalFeilmelding: string, focusTarget: string) {
         cy.get('.skjemaelement__input--harFeil').should('exist')
         cy.get('.skjemaelement__feilmelding').contains(lokalFeilmelding)
@@ -97,9 +121,9 @@ describe('Tester feilmeldinger', () => {
 
     it('DATO ingen dato', () => {
         gaVidere()
-        feilmeldingHandtering(
-            'Du må oppgi en gyldig dato',
-            'Du må oppgi en gyldig dato',
+        feilmeldingHandteringForNyDatepicker(
+            'Datoen følger ikke formatet dd.mm.åååå',
+            'Datoen følger ikke formatet dd.mm.åååå',
             arbeidstakerGradert.sporsmal[2].undersporsmal[0].id,
         )
     })
@@ -107,7 +131,7 @@ describe('Tester feilmeldinger', () => {
     it('DATO mindre enn min', () => {
         cy.get('.navds-text-field__input').type('01.01.1900')
         gaVidere()
-        feilmeldingHandtering(
+        feilmeldingHandteringForNyDatepicker(
             'Datoen kan ikke være før 01.04.2020',
             'Datoen kan ikke være før 01.04.2020',
             arbeidstakerGradert.sporsmal[2].undersporsmal[0].id,
@@ -117,7 +141,7 @@ describe('Tester feilmeldinger', () => {
     it('DATO større enn max', () => {
         cy.get('.navds-text-field__input').clear().type('01.01.5000')
         gaVidere()
-        feilmeldingHandtering(
+        feilmeldingHandteringForNyDatepicker(
             'Datoen kan ikke være etter 24.04.2020',
             'Datoen kan ikke være etter 24.04.2020',
             arbeidstakerGradert.sporsmal[2].undersporsmal[0].id,
@@ -127,7 +151,7 @@ describe('Tester feilmeldinger', () => {
     it('DATO ugyldig format', () => {
         cy.get('.navds-text-field__input').clear().type('abc')
         gaVidere()
-        feilmeldingHandtering(
+        feilmeldingHandteringForNyDatepicker(
             'Datoen følger ikke formatet dd.mm.åååå',
             'Datoen følger ikke formatet dd.mm.åååå',
             arbeidstakerGradert.sporsmal[2].undersporsmal[0].id,
@@ -137,7 +161,7 @@ describe('Tester feilmeldinger', () => {
     it('DATO ugyldig format', () => {
         cy.get('.navds-text-field__input').clear().type('2020')
         gaVidere()
-        feilmeldingHandtering(
+        feilmeldingHandteringForNyDatepicker(
             'Datoen følger ikke formatet dd.mm.åååå',
             'Datoen følger ikke formatet dd.mm.åååå',
             arbeidstakerGradert.sporsmal[2].undersporsmal[0].id,
