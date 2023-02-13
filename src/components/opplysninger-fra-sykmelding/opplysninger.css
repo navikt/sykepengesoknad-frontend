@@ -1,0 +1,16 @@
+.opplysninger {
+    background-color: #ffffff;
+}
+.opplysninger .avsnitt {
+    margin-bottom: 2rem;
+}
+.opplysninger .avsnitt .navds-label {
+    margin-bottom: 0.3rem;
+}
+.opplysninger .nokkelopplysning__liste {
+    margin: 0;
+    padding-left: 1.5rem;
+}
+.opplysninger .avsnitt-hode {
+    margin-top: 1rem;
+}

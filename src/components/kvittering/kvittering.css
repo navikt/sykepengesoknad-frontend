@@ -1,0 +1,70 @@
+.kvittering .navds-alert--success {
+    border-bottom-left-radius: 0;
+    border-bottom-right-radius: 0;
+    margin-bottom: -2px;
+}
+.kvittering .navds-alert:not(.navds-alert--inline) .navds-link:not(:focus) {
+    color: #0067c5;
+}
+.kvittering .avsnitt {
+    margin: 1.5rem 0;
+}
+.kvittering .avsnitt:first-child {
+    margin-top: 0;
+}
+.kvittering .sendt-info {
+    border-bottom-left-radius: 0;
+    border-bottom-right-radius: 0;
+    border: 1px solid #66cbec;
+    border-top: 0;
+    padding: 1rem;
+}
+.kvittering .sendt-info:empty {
+    border: 0;
+    padding: 0;
+}
+.kvittering .sendt-info .hva-skjer {
+    margin-top: 2rem;
+    padding-top: 1.4rem;
+    border-top: 1px solid #e5e5e5;
+}
+.kvittering .sendt-info .hva-skjer .navds-alert {
+    background-color: transparent;
+    border: 0;
+    padding-left: 0;
+}
+.kvittering .sendt-info .hva-skjer .navds-alert svg {
+    width: 28px;
+    height: 28px;
+}
+.kvittering .sendt-info .hva-skjer .navds-alert .navds-alert__wrapper {
+    margin-left: -3px;
+}
+.kvittering .sendt-info .sendt-inner {
+    padding-left: 2.3rem;
+}
+.kvittering .sendt-info .sendt-inner .sendt-tittel {
+    margin-top: 0.4rem;
+}
+.kvittering .sendt-info .sendt-inner .arbeidstaker-tittel {
+    margin-bottom: 0.4rem;
+}
+.kvittering .sendt-info .oppsummering__avkrysset {
+    display: inline-flex;
+    align-items: center;
+    margin-top: 0.7rem;
+}
+.kvittering .sendt-info .oppsummering__avkrysset img {
+    display: inline-block;
+    width: 1rem;
+    min-width: 1rem;
+    height: 1rem;
+    margin-right: 0.5rem;
+    margin-top: 0.175rem;
+}
+.kvittering .sendt-info .oppsummering__avkrysset p {
+    display: inline;
+}
+.kvittering .sendt-info .navds-detail--small {
+    margin: 0.25rem 0 0 1.6rem;
+}

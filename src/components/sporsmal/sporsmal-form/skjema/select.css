@@ -1,0 +1,38 @@
+.selectContainer {
+    position: relative;
+    display: inline-block;
+}
+.selectContainer select {
+    padding-right: 1.5em;
+    appearance: none;
+    width: 100%;
+}
+.selectContainer select::-ms-expand {
+    display: none;
+}
+.selectContainer::before {
+    pointer-events: none;
+    content: '';
+    background: #262626;
+    height: 2px;
+    width: 10px;
+    border-radius: 10px;
+    right: 0.75rem;
+    top: 50%;
+    z-index: 4;
+    position: absolute;
+    transform: translateX(3px) rotate(-45deg);
+}
+.selectContainer::after {
+    pointer-events: none;
+    content: '';
+    background: #262626;
+    height: 2px;
+    width: 10px;
+    border-radius: 10px;
+    right: 0.75rem;
+    top: 50%;
+    z-index: 4;
+    position: absolute;
+    transform: translateX(-3px) rotate(45deg);
+}

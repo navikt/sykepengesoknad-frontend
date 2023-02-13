@@ -1,0 +1,14 @@
+.viktig-informasjon {
+    --navds-guide-panel-color-border: #ffaa33;
+    --navds-guide-panel-color-illustration-background: #ffd799;
+}
+.viktig-informasjon h2,
+.viktig-informasjon h3 {
+    padding-bottom: 0.5em;
+}
+.viktig-informasjon h2 {
+    font-size: 18px;
+}
+.viktig-informasjon p {
+    padding-bottom: 1em;
+}

@@ -1,0 +1,19 @@
+.person .person__ikon {
+    display: none;
+}
+.person .lenkeknapp:focus {
+    background: none;
+}
+@media (min-width: 768px) {
+    .person .person__ikon {
+        width: 2em;
+        height: 2em;
+        display: inline-block;
+        cursor: pointer;
+    }
+}
+@media print {
+    .person {
+        display: none;
+    }
+}

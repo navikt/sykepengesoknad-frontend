@@ -1,0 +1,22 @@
+.bekreft-dialog {
+    text-align: center;
+    padding: 1rem;
+}
+.bekreft-dialog .navds-heading {
+    margin-bottom: 2rem;
+}
+.bekreft-dialog .navds-button {
+    margin-bottom: 1rem;
+}
+.bekreft-dialog .lenkeknapp {
+    margin-top: 1rem;
+}
+.slette-kvittering {
+    border: 0;
+    background: none;
+    padding: 0;
+    cursor: pointer;
+}
+.slette-kvittering img {
+    width: 20px;
+}

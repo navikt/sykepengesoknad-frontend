@@ -1,0 +1,30 @@
+.om_sykepenger {
+    border: 1px solid #b0b0b0;
+    border-radius: 4px;
+    margin-bottom: 2rem;
+}
+.om_sykepenger .navds-accordion__item {
+    border: 1px solid #b0b0b0;
+    border-radius: 4px;
+}
+.om_sykepenger .navds-accordion__item + .navds-accordion__item {
+    margin-top: 0.7rem;
+}
+.om_sykepenger .navds-accordion__header {
+    background-color: #ffffff;
+}
+.om_sykepenger .navds-accordion__content {
+    padding: 1rem 2rem 2rem;
+}
+.om_sykepenger p + p,
+.om_sykepenger h3,
+.om_sykepenger .navds-accordion,
+.om_sykepenger .navds-alert {
+    margin-top: 1.2rem;
+}
+.om_sykepenger h3 {
+    margin-bottom: 0.5rem;
+}
+.om_sykepenger .navds-accordion + .navds-accordion {
+    margin-top: 0.6rem;
+}

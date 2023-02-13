@@ -1,0 +1,55 @@
+.skjemagruppe,
+.skjemagruppe fieldset,
+.skjemagruppe__fieldset {
+    margin: 0;
+    padding: 0;
+    border: 0;
+}
+.skjemagruppe .skjemaelement,
+.skjemagruppe fieldset .skjemaelement,
+.skjemagruppe__fieldset .skjemaelement {
+    margin-bottom: 1rem;
+}
+.skjemagruppe .skjemagruppe.inputPanelGruppe,
+.skjemagruppe fieldset .skjemagruppe.inputPanelGruppe,
+.skjemagruppe__fieldset .skjemagruppe.inputPanelGruppe,
+.skjemagruppe .skjemagruppe.radiogruppe,
+.skjemagruppe fieldset .skjemagruppe.radiogruppe,
+.skjemagruppe__fieldset .skjemagruppe.radiogruppe,
+.skjemagruppe .skjemagruppe.checkboxgruppe,
+.skjemagruppe fieldset .skjemagruppe.checkboxgruppe,
+.skjemagruppe__fieldset .skjemagruppe.checkboxgruppe {
+    margin-bottom: 1rem;
+}
+.skjemagruppe__description {
+    font-family: 'Source Sans Pro', Arial, sans-serif;
+    font-size: 16px;
+    line-height: 22px;
+    font-weight: 400;
+    margin-bottom: 1rem;
+}
+.skjemagruppe legend,
+.skjemagruppe__legend {
+    font-family: 'Source Sans Pro', Arial, sans-serif;
+    font-size: 18px;
+    line-height: 24px;
+    font-weight: normal;
+    margin-bottom: 1rem;
+}
+.skjemagruppe.inputPanelGruppe .skjemaelement,
+.skjemagruppe.radiogruppe .skjemaelement,
+.skjemagruppe.checkboxgruppe .skjemaelement {
+    margin-bottom: 1rem;
+}
+.skjemagruppe.inputPanelGruppe legend,
+.skjemagruppe.radiogruppe legend,
+.skjemagruppe.checkboxgruppe legend,
+.skjemagruppe.inputPanelGruppe .skjemagruppe__legend,
+.skjemagruppe.radiogruppe .skjemagruppe__legend,
+.skjemagruppe.checkboxgruppe .skjemagruppe__legend {
+    font-family: 'Source Sans Pro', Arial, sans-serif;
+    font-size: 16px;
+    line-height: 22px;
+    font-weight: bold;
+    margin-bottom: 1rem;
+}

@@ -1,0 +1,140 @@
+.oppsummering {
+    margin: 2rem 0;
+}
+.oppsummering__flex-wrapper {
+    padding-bottom: 1px;
+}
+.oppsummering__innhold {
+    padding: 0 1.5rem;
+}
+.oppsummering .sporsmal {
+    display: flex;
+    padding: 2rem 0;
+    border-bottom: 1px solid #b0b0b0;
+}
+.oppsummering .sporsmal:first-child {
+    padding-top: 1rem;
+}
+.oppsummering .sporsmal .bilde {
+    width: 1rem;
+    height: 1rem;
+    margin: 0.175rem 0.5rem;
+}
+.oppsummering .oppsummering__vaerKlarOverAt li {
+    margin-bottom: 1rem;
+}
+.oppsummering .oppsummering__seksjon {
+    border-bottom: 1px solid #b0b0b0;
+    margin: 0 0 2rem;
+    padding-bottom: 2rem;
+}
+.oppsummering .oppsummering__seksjon:last-child {
+    border-bottom-width: 0;
+    margin-bottom: 0;
+    padding-bottom: 0;
+}
+.oppsummering .oppsummering__sporsmalscontainer {
+    margin-bottom: 2rem;
+}
+.oppsummering .oppsummering__sporsmalscontainer:last-child {
+    margin-bottom: 0;
+}
+.oppsummering .oppsummering__sporsmal {
+    margin-top: 0;
+    margin-bottom: 0.5rem;
+}
+.oppsummering .oppsummering__avkrysset {
+    display: flex;
+    margin-top: 0.5rem;
+}
+.oppsummering .oppsummering__avkrysset img {
+    display: block;
+    width: 1rem;
+    min-width: 1rem;
+    height: 1rem;
+    margin-right: 0.5rem;
+    margin-top: 0.175rem;
+}
+.oppsummering .oppsummering__avkrysset span {
+    flex: 1;
+}
+.oppsummering .oppsummering__undersporsmal .oppsummering__undersporsmal {
+    padding-left: 1.5rem;
+    margin-bottom: 1.5rem;
+}
+.oppsummering .oppsummering__undersporsmal + .oppsummering__undersporsmal {
+    margin-top: 1.5rem;
+}
+.oppsummering .oppsummering__tekst,
+.oppsummering .oppsummering__dato {
+    margin-bottom: 0.5rem;
+}
+.oppsummering .oppsummering__avkrysset + .oppsummering__tekstsvar,
+.oppsummering .oppsummering__svarliste + .oppsummering__tekstsvar,
+.oppsummering .oppsummering__avkrysset + .oppsummering__undersporsmalsliste,
+.oppsummering .oppsummering__tekstsvar + .oppsummering__tekstsvar {
+    padding-left: 1.5rem;
+}
+.oppsummering .oppsummering__svarliste:last-child .oppsummering__undersporsmalsliste {
+    margin-bottom: 0;
+}
+.oppsummering .oppsummering__svarliste + .oppsummering__svarliste {
+    margin-top: 1rem;
+}
+.oppsummering .oppsummering__overskrift + .oppsummering__undersporsmalsliste {
+    margin-top: 0;
+}
+.oppsummering .oppsummering__undersporsmalsliste {
+    margin-top: 2rem;
+}
+.oppsummering .oppsummering__sporsmal + .oppsummering__undersporsmalsliste,
+.oppsummering .oppsummering__avkrysset + .oppsummering__undersporsmalsliste {
+    margin-bottom: 1rem;
+    margin-top: 1rem;
+}
+.oppsummering .oppsummering__sporsmal + .oppsummering__undersporsmalsliste > .oppsummering__tekstsvar:first-child,
+.oppsummering .oppsummering__avkrysset + .oppsummering__undersporsmalsliste > .oppsummering__tekstsvar:first-child {
+    margin-top: -1rem;
+}
+.oppsummering .oppsummering__sporsmal + .oppsummering__undersporsmalsliste > .oppsummering__tekstsvar,
+.oppsummering .oppsummering__avkrysset + .oppsummering__undersporsmalsliste > .oppsummering__tekstsvar {
+    padding-left: 0;
+}
+.oppsummering
+    .oppsummering__sporsmal
+    + .oppsummering__undersporsmalsliste
+    .oppsummering__tekstsvar
+    + .oppsummering__sporsmalscontainer,
+.oppsummering
+    .oppsummering__avkrysset
+    + .oppsummering__undersporsmalsliste
+    .oppsummering__tekstsvar
+    + .oppsummering__sporsmalscontainer {
+    margin-top: 1rem;
+}
+.oppsummering .oppsummering__sporsmal + .oppsummering__undersporsmalsliste {
+    margin-top: 0;
+}
+.oppsummering .oppsummering__land {
+    margin-bottom: 0;
+}
+.oppsummering .oppsummering__land:before {
+    content: '\2022';
+    display: inline-block;
+    width: 0.5rem;
+    margin-right: 0.5rem;
+}
+.oppsummering .oppsummering__landliste {
+    margin: 0;
+    padding: 0;
+}
+.oppsummering .oppsummering__land {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+}
+@media (min-width: 768px) {
+    .oppsummering .oppsummering__seksjon {
+        margin: 0 1rem 2rem;
+    }
+}

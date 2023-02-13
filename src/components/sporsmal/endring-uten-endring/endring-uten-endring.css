@@ -1,0 +1,15 @@
+.navds-modal.modal__endring-uten-endring_popup {
+    width: 350px;
+}
+.navds-modal.modal__endring-uten-endring_popup .midtstilt-knapp {
+    margin: 1rem auto 1rem;
+    width: 6rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+@media (min-width: 768px) {
+    .navds-modal.modal__endring-uten-endring_popup {
+        width: 500px;
+    }
+}
