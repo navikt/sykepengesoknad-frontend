@@ -47,30 +47,28 @@ const Soknader = () => {
         <>
             <Banner overskrift={tekst('soknader.sidetittel')} />
 
-            <div className="limit">
-                <OmSykepenger />
+            <OmSykepenger />
 
-                <Teasere
-                    className="soknader_teasere"
-                    soknader={nyeSoknader}
-                    tittel={tekst('soknader.nye.tittel')}
-                    tomListeTekst={tekst('soknader.nye.ingen-soknader')}
-                    id="soknader-list-til-behandling"
-                />
+            <Teasere
+                className="soknader_teasere"
+                soknader={nyeSoknader}
+                tittel={tekst('soknader.nye.tittel')}
+                tomListeTekst={tekst('soknader.nye.ingen-soknader')}
+                id="soknader-list-til-behandling"
+            />
 
-                <Vis
-                    hvis={tidligereSoknader.length > 0}
-                    render={() => (
-                        <Teasere
-                            className="soknader_teasere"
-                            soknader={tidligereSoknader}
-                            tittel={tekst('soknader.sendt.tittel')}
-                            id="soknader-sendt"
-                            kanSorteres={true}
-                        />
-                    )}
-                />
-            </div>
+            <Vis
+                hvis={tidligereSoknader.length > 0}
+                render={() => (
+                    <Teasere
+                        className="soknader_teasere"
+                        soknader={tidligereSoknader}
+                        tittel={tekst('soknader.sendt.tittel')}
+                        id="soknader-sendt"
+                        kanSorteres={true}
+                    />
+                )}
+            />
         </>
     )
 }

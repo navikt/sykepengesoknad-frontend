@@ -54,33 +54,31 @@ const AvbruttSoknad = () => {
         <>
             <Banner />
 
-            <div className="limit">
-                <Alert variant="warning" style={{ marginBottom: '1rem' }}>
-                    <BodyShort>
-                        {tekst('sykepengesoknad.avbrutt.tidspunkt')} {tilLesbarDatoMedArstall(valgtSoknad.avbruttDato)}.
-                    </BodyShort>
-                </Alert>
-                <div className="avbrutt-info">
-                    <BodyLong spacing>{tekst('sykepengesoknad.avbrutt.informasjon-innhold-1')}</BodyLong>
-                    <BodyLong spacing>{tekst('sykepengesoknad.avbrutt.informasjon-innhold-2')}</BodyLong>
-                    <BodyLong spacing>{tekst('sykepengesoknad.avbrutt.informasjon-innhold-3')}</BodyLong>
-                    <BodyLong spacing>{tekst('sykepengesoknad.avbrutt.informasjon-innhold-4')}</BodyLong>
-                </div>
-
-                <Opplysninger ekspandert={false} steg="avbrutt-søknad" />
-                <FristSykepenger soknadstype={valgtSoknad.soknadstype} />
-
-                <Vis
-                    hvis={dayjs(valgtSoknad.avbruttDato).isAfter(dayjs().subtract(2, 'seconds'))}
-                    render={() => (
-                        <GjenstaendeSoknader
-                            style={{ marginTop: '1rem', marginBottom: '1rem' }}
-                            soknader={gjenstaendeSoknader}
-                        />
-                    )}
-                />
-                <GjenapneSoknad />
+            <Alert variant="warning" style={{ marginBottom: '1rem' }}>
+                <BodyShort>
+                    {tekst('sykepengesoknad.avbrutt.tidspunkt')} {tilLesbarDatoMedArstall(valgtSoknad.avbruttDato)}.
+                </BodyShort>
+            </Alert>
+            <div className="avbrutt-info">
+                <BodyLong spacing>{tekst('sykepengesoknad.avbrutt.informasjon-innhold-1')}</BodyLong>
+                <BodyLong spacing>{tekst('sykepengesoknad.avbrutt.informasjon-innhold-2')}</BodyLong>
+                <BodyLong spacing>{tekst('sykepengesoknad.avbrutt.informasjon-innhold-3')}</BodyLong>
+                <BodyLong spacing>{tekst('sykepengesoknad.avbrutt.informasjon-innhold-4')}</BodyLong>
             </div>
+
+            <Opplysninger ekspandert={false} steg="avbrutt-søknad" />
+            <FristSykepenger soknadstype={valgtSoknad.soknadstype} />
+
+            <Vis
+                hvis={dayjs(valgtSoknad.avbruttDato).isAfter(dayjs().subtract(2, 'seconds'))}
+                render={() => (
+                    <GjenstaendeSoknader
+                        style={{ marginTop: '1rem', marginBottom: '1rem' }}
+                        soknader={gjenstaendeSoknader}
+                    />
+                )}
+            />
+            <GjenapneSoknad />
         </>
     )
 }

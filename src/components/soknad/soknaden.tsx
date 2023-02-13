@@ -101,72 +101,68 @@ const Soknaden = () => {
         <>
             <Banner />
 
-            <div className="limit">
-                <HotjarTrigger jsTrigger={hentHotjarJsTrigger(valgtSoknad.soknadstype, 'soknad')}>
-                    <>
-                        <Vis hvis={stegNo > 1 || erUtlandssoknad} render={() => <SporsmalSteg />} />
+            <HotjarTrigger jsTrigger={hentHotjarJsTrigger(valgtSoknad.soknadstype, 'soknad')}>
+                <>
+                    <Vis hvis={stegNo > 1 || erUtlandssoknad} render={() => <SporsmalSteg />} />
 
-                        <Vis
-                            hvis={stegNo > 1}
-                            render={() => (
-                                <Link
-                                    to={'/soknader/' + valgtSoknad.id + SEPARATOR + (stegNo - 1)}
-                                    className="navds-link tilbakelenke"
-                                    onClick={() => {
-                                        logEvent('navigere', {
-                                            lenketekst: tekst('soknad.tilbakeknapp'),
-                                            fra: valgtSoknad!.sporsmal[stegNo - 1].tag,
-                                            til: valgtSoknad!.sporsmal[stegNo - 2].tag,
-                                            soknadstype: valgtSoknad?.soknadstype,
-                                            stegId: stegId,
-                                        })
-                                    }}
-                                >
-                                    <Back className="chevron--venstre" />
-                                    <BodyShort as="span">{tekst('soknad.tilbakeknapp')}</BodyShort>
-                                </Link>
-                            )}
-                        />
+                    <Vis
+                        hvis={stegNo > 1}
+                        render={() => (
+                            <Link
+                                to={'/soknader/' + valgtSoknad.id + SEPARATOR + (stegNo - 1)}
+                                className="navds-link tilbakelenke"
+                                onClick={() => {
+                                    logEvent('navigere', {
+                                        lenketekst: tekst('soknad.tilbakeknapp'),
+                                        fra: valgtSoknad!.sporsmal[stegNo - 1].tag,
+                                        til: valgtSoknad!.sporsmal[stegNo - 2].tag,
+                                        soknadstype: valgtSoknad?.soknadstype,
+                                        stegId: stegId,
+                                    })
+                                }}
+                            >
+                                <Back className="chevron--venstre" />
+                                <BodyShort as="span">{tekst('soknad.tilbakeknapp')}</BodyShort>
+                            </Link>
+                        )}
+                    />
 
-                        <Vis hvis={stegNo === 1 && !erUtlandssoknad} render={() => <ViktigInformasjon />} />
+                    <Vis hvis={stegNo === 1 && !erUtlandssoknad} render={() => <ViktigInformasjon />} />
 
-                        <Vis hvis={stegNo === 1 && erGradertReisetilskuddsoknad} render={() => <SoknadMedToDeler />} />
+                    <Vis hvis={stegNo === 1 && erGradertReisetilskuddsoknad} render={() => <SoknadMedToDeler />} />
 
-                        <Vis
-                            hvis={stegNo === 1 && valgtSoknad.opprettetAvInntektsmelding}
-                            render={() => <EgenmeldingsdagerArbeidsgiver />}
-                        />
+                    <Vis
+                        hvis={stegNo === 1 && valgtSoknad.opprettetAvInntektsmelding}
+                        render={() => <EgenmeldingsdagerArbeidsgiver />}
+                    />
 
-                        <Vis
-                            hvis={stegNo === 1 && !erUtlandssoknad}
-                            render={() => (
-                                <Opplysninger ekspandert={true} steg={valgtSoknad.sporsmal[stegNo - 1].tag} />
-                            )}
-                        />
+                    <Vis
+                        hvis={stegNo === 1 && !erUtlandssoknad}
+                        render={() => <Opplysninger ekspandert={true} steg={valgtSoknad.sporsmal[stegNo - 1].tag} />}
+                    />
 
-                        <Vis
-                            hvis={stegNo === 1 && !erUtlandssoknad}
-                            render={() => <FristSykepenger soknadstype={valgtSoknad.soknadstype} />}
-                        />
+                    <Vis
+                        hvis={stegNo === 1 && !erUtlandssoknad}
+                        render={() => <FristSykepenger soknadstype={valgtSoknad.soknadstype} />}
+                    />
 
-                        <Vis
-                            hvis={stegNo === 1 && (erReisetilskuddsoknad || erGradertReisetilskuddsoknad)}
-                            render={() => <OmReisetilskudd />}
-                        />
+                    <Vis
+                        hvis={stegNo === 1 && (erReisetilskuddsoknad || erGradertReisetilskuddsoknad)}
+                        render={() => <OmReisetilskudd />}
+                    />
 
-                        <Vis
-                            hvis={tittel && stegNo !== 1 && !erUtlandssoknad}
-                            render={() => (
-                                <Heading size="medium" className="sporsmal__tittel">
-                                    {tittel}
-                                </Heading>
-                            )}
-                        />
+                    <Vis
+                        hvis={tittel && stegNo !== 1 && !erUtlandssoknad}
+                        render={() => (
+                            <Heading size="medium" className="sporsmal__tittel">
+                                {tittel}
+                            </Heading>
+                        )}
+                    />
 
-                        <SporsmalForm />
-                    </>
-                </HotjarTrigger>
-            </div>
+                    <SporsmalForm />
+                </>
+            </HotjarTrigger>
         </>
     )
 }
