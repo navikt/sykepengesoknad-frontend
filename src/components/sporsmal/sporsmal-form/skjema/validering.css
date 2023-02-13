@@ -1,0 +1,25 @@
+.skjemagruppe--feil .skjemaelement__input:not(:focus):not(:hover):not(:active):not(:checked) {
+    border-color: #c30000;
+    box-shadow: 0 0 0 1px #c30000;
+}
+.skjemagruppe--feil
+    .skjemaelement__input:not(:focus):not(:hover):not(:active):not(:checked).checkboks
+    + .skjemaelement__label::before,
+.skjemagruppe--feil
+    .skjemaelement__input:not(:focus):not(:hover):not(:active):not(:checked).radioknapp
+    + .skjemaelement__label::before {
+    border-color: #c30000;
+    box-shadow: 0 0 0 1px #c30000;
+}
+.skjemaelement__input--harFeil:not(:focus):not(:hover):not(:active) .navds-text-field__input,
+.skjemaelement__input--harFeil:not(:focus):not(:hover):not(:active) + .ds-datepicker__calendarButton {
+    border-color: #c30000;
+    box-shadow: 0 0 0 1px #c30000;
+}
+.skjemaelement__input--harFeil:not(:focus):not(:hover):not(:active).checkboks:not(:checked)
+    + .skjemaelement__label::before,
+.skjemaelement__input--harFeil:not(:focus):not(:hover):not(:active).radio:not(:checked)
+    + .skjemaelement__label::before {
+    border-color: #c30000;
+    box-shadow: 0 0 0 1px #c30000;
+}

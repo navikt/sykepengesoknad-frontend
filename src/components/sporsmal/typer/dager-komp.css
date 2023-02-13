@@ -1,0 +1,105 @@
+.skjema__dager {
+    width: calc(100vw - 2rem);
+    margin-top: 1.5rem;
+    outline: 0;
+    border: 1px solid #707070;
+    border-radius: 4px;
+}
+.skjema__dager .kalender__tittel {
+    text-align: center;
+    margin: 2rem 0 1rem;
+}
+.skjema__dager .ukedager {
+    font-size: 0.9rem;
+}
+.skjema__dager .ukedager span {
+    display: inline-block;
+    text-align: center;
+    padding: 0.9rem 0 1rem;
+    width: calc((100vw - 2rem - 4px) / 8);
+}
+.skjema__dager .tomdag {
+    width: calc((100vw - 2rem - 4px) / 8);
+}
+.skjema__dager .kalenderuke {
+    display: flex;
+    align-items: center;
+}
+.skjema__dager .ukenr {
+    display: inline-block;
+    text-align: center;
+    width: calc((100vw - 2rem - 4px) / 8);
+    font-size: 0.9rem;
+    padding: 0.9rem 0;
+    border-right: 1px solid #b0b0b0;
+}
+.skjema__dager .kalenderdag {
+    display: inline-block;
+    font-weight: 600;
+    width: calc((100vw - 2rem - 4px) / 8);
+}
+.skjema__dager .kalenderdag label:hover {
+    background-color: #cce1ff;
+    cursor: pointer;
+}
+.skjema__dager .kalenderdag label,
+.skjema__dager .kalenderdag span.label {
+    display: inline-block;
+    min-width: 100%;
+    padding: 0.9rem 0;
+    text-align: center;
+    color: #262626;
+    border-right: 1px solid #ffffff;
+    border-bottom: 1px solid #ffffff;
+}
+.skjema__dager .kalenderdag.sun label,
+.skjema__dager .kalenderdag.sun span.label {
+    color: #c30000;
+}
+.skjema__dager .kalenderdag.foran,
+.skjema__dager .kalenderdag.etter {
+    background-color: #f1f1f1;
+}
+.skjema__dager .kalenderdag.foran label,
+.skjema__dager .kalenderdag.etter label,
+.skjema__dager .kalenderdag.foran span.label,
+.skjema__dager .kalenderdag.etter span.label {
+    font-weight: normal;
+}
+.skjema__dager .kalenderdag input.checked + label {
+    background-color: #0067c5;
+    color: #ffffff;
+}
+.skjema__dager .kalendervalg {
+    display: flex;
+    justify-content: space-around;
+    margin: 2rem 0 3rem;
+}
+.skjema__dager .kalendervalg .velgalle:focus,
+.skjema__dager .kalendervalg .fjernalle:focus {
+    box-shadow: none;
+    background-color: transparent;
+    color: #0067c5;
+    text-decoration: underline;
+}
+.skjema__dager .kalendervalg .velgalle:focus:hover,
+.skjema__dager .kalendervalg .fjernalle:focus:hover {
+    text-decoration: none;
+}
+.skjema__dager .kalendervalg .velgalle img {
+    margin-right: 0.5rem;
+}
+.skjema__dager .kalendervalg .fjernalle img {
+    margin-right: 0.35rem;
+}
+@media (min-width: 768px) {
+    .skjema__dager {
+        width: calc(100vw - calc(100vw - (672px - 2rem)));
+    }
+    .skjema__dager .tomdag,
+    .skjema__dager .ukenr,
+    .skjema__dager .kalenderdag,
+    .skjema__dager .ukedager span {
+        width: calc((calc(100vw - calc(100vw - (672px - 2rem))) - 4px) / 8);
+    }
+}

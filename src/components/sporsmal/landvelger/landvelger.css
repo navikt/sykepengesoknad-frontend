@@ -1,0 +1,74 @@
+.landvelger .react-autosuggest__container {
+    position: relative;
+}
+.landvelger .react-autosuggest__suggestions-container--open {
+    width: 100%;
+    max-width: 280px;
+}
+.landvelger .ReactTags__tagInput {
+    position: relative;
+}
+.landvelger .react-autosuggest__suggestions-container--open {
+    position: absolute;
+    border: 1px solid #b0b0b0;
+    z-index: 1;
+    background: #ffffff;
+    max-height: 200px;
+    overflow-y: auto;
+}
+.landvelger .react-autosuggest__suggestions-container--open ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+}
+.landvelger .react-autosuggest__suggestions-container--open .react-autosuggest__suggestion {
+    padding: 0.75rem;
+    border-bottom: 1px solid #f1f1f1;
+    color: #0067c5;
+    text-decoration: underline;
+}
+.landvelger .react-autosuggest__suggestions-container--open li:hover,
+.landvelger .react-autosuggest__suggestions-container--open .react-autosuggest__suggestion--highlighted {
+    background-color: #f1f1f1;
+    cursor: pointer;
+}
+.landvelger .react-autosuggest__suggestions-container--open mark {
+    background: transparent;
+    color: #0067c5;
+    font-weight: 600;
+}
+.landvelger .etikett--tag {
+    margin: 0.5rem 1rem 0 0;
+    background-color: #cce1ff;
+}
+.landvelger .etikett--info {
+    display: inline-block;
+    padding: 5px 10px;
+    border-radius: 2px;
+}
+.landvelger .etikett__slett {
+    display: inline-block;
+    background: transparent;
+    margin: 0 0 0 0.25rem;
+    padding: 0 0.3rem;
+    cursor: pointer;
+    border: 0;
+    transform: scale(1.3);
+}
+.landvelger .etikett__slett:focus {
+    outline: none;
+    background-color: #ff9100;
+    color: inherit;
+}
+.landvelger .etikett__slett:hover {
+    color: #0067c5;
+}
+.landvelger .etikett__slett-label--skjermleser {
+    position: absolute !important;
+    top: -9999px !important;
+    left: -9999px !important;
+}
+.input--l {
+    width: 100%;
+    max-width: 280px;
+}

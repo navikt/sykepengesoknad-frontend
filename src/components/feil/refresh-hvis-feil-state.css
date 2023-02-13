@@ -1,0 +1,10 @@
+.feil-state #maincontent {
+    background-color: #ffffff;
+}
+.feil-state button {
+    margin-top: 1em;
+}
+.feil-state .knappewrapper {
+    display: flex;
+    justify-content: center;
+}

@@ -1,0 +1,16 @@
+.om-reisetilskudd {
+    border: 1px solid #b0b0b0;
+    border-radius: 4px;
+    margin: 1rem 0;
+}
+.om-reisetilskudd p {
+    margin: 0.5rem 0 1rem;
+}
+@media (min-width: 768px) {
+    .om-reisetilskudd .navds-accordion__header {
+        padding-left: 2rem;
+    }
+    .om-reisetilskudd .navds-accordion__content {
+        padding-left: 2rem;
+    }
+}

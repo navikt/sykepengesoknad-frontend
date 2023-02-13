@@ -1,0 +1,44 @@
+.skjema__beh-dager {
+    margin-top: 1.5rem;
+}
+.skjema__beh-dager .ukedager {
+    width: 300px;
+}
+.skjema__beh-dager .ukedager span {
+    display: inline-block;
+    text-align: center;
+    border-bottom: 1px solid #b0b0b0;
+    padding: 0.5rem 0;
+    min-width: 40px;
+}
+.skjema__beh-dager .tomdag {
+    min-width: 40px;
+}
+.skjema__beh-dager .kalenderdag {
+    display: inline-block;
+}
+.skjema__beh-dager .kalenderdag label {
+    display: inline-block;
+    min-width: 40px;
+    padding: 0.5rem 0;
+    text-align: center;
+    color: #0067c5;
+}
+.skjema__beh-dager .kalenderdag label:hover {
+    background-color: #f1f1f1;
+    cursor: pointer;
+}
+.skjema__beh-dager .kalenderdag label.fjern {
+    margin-left: 2rem;
+}
+.skjema__beh-dager .kalenderdag label.fjern:hover {
+    background-color: transparent;
+    text-decoration: underline;
+}
+.skjema__beh-dager .kalenderdag input:checked + label {
+    background-color: #0067c5;
+    color: #ffffff;
+}
+.skjema__beh-dager .kalenderdag.skjul {
+    display: none;
+}

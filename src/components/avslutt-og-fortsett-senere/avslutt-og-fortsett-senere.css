@@ -1,0 +1,13 @@
+.navds-modal.modal__avslutt_fortsett_popup {
+    width: 350px;
+}
+.navds-modal.modal__avslutt_fortsett_popup .modal__tittel {
+    margin: 0.25rem 0 1rem;
+}
+.navds-modal.modal__avslutt_fortsett_popup p + p {
+    margin-top: 1rem;
+}
+.navds-modal.modal__avslutt_fortsett_popup .midtstilt-knapp {
+    display: block;
+    margin: 2rem auto 1rem;
+}

@@ -1,0 +1,106 @@
+#opprett_utland_main {
+    background-color: #f1f1f1;
+}
+.opprett-utland {
+    font-family: 'Source Sans Pro', Arial, sans-serif;
+}
+.opprett-utland .begrensning {
+    max-width: 42rem;
+    margin-left: auto;
+    margin-right: auto;
+    padding-left: 0.5rem;
+    padding-right: 0.5rem;
+}
+@media (min-width: 321px) {
+    .opprett-utland .begrensning {
+        padding-left: 1rem;
+        padding-right: 1rem;
+    }
+}
+.opprett-utland .sidebanner {
+    border-bottom: 5px solid #87d5ee;
+    background-color: #c2eaf7;
+    position: relative;
+    margin-bottom: 2rem;
+}
+.opprett-utland .sidebanner--utenramme {
+    border-bottom: 0;
+}
+.opprett-utland .sidebanner__innhold {
+    max-width: 42rem;
+    margin-left: auto;
+    margin-right: auto;
+    padding-left: 0.5rem;
+    padding-right: 0.5rem;
+    position: relative;
+    padding-top: 1rem;
+    padding-bottom: 1rem;
+}
+@media (min-width: 321px) {
+    .opprett-utland .sidebanner__innhold {
+        padding-left: 1rem;
+        padding-right: 1rem;
+    }
+}
+.opprett-utland .sidebanner__innhold .brodsmuler {
+    margin-bottom: 1rem;
+}
+.opprett-utland .sidebanner__tittel {
+    margin: 0;
+    text-align: center;
+}
+@media (min-width: 768px) {
+    .opprett-utland .sidebanner__innhold .brodsmuler {
+        margin-bottom: 2rem;
+    }
+    .opprett-utland .sidebanner__tittel {
+        padding-bottom: 1rem;
+        text-align: left;
+    }
+}
+.opprett-utland .blokk--xl {
+    margin-bottom: 4rem;
+}
+.opprett-utland .opprett-utland__tittel {
+    text-align: center;
+    margin-top: 0;
+    margin-bottom: 2rem;
+}
+.opprett-utland .redaksjonelt-innhold h2,
+.opprett-utland .redaksjonelt-innhold h3,
+.opprett-utland .redaksjonelt-innhold h4 {
+    margin-top: 20px;
+    margin-bottom: 0;
+}
+.opprett-utland .redaksjonelt-innhold p:last-child {
+    margin-bottom: 0;
+}
+.opprett-utland .panel {
+    background: #ffffff;
+    padding: 1rem;
+    margin-bottom: 1rem;
+    display: block;
+}
+.opprett-utland .panel:focus {
+    outline: 3px #ff9100 solid;
+}
+.opprett-utland .panel--ramme {
+    border: 1px solid #b0b0b0;
+}
+.opprett-utland .panel__tittel {
+    margin-top: 0;
+}
+@media (min-width: 768px) {
+    .opprett-utland .panel {
+        padding: 2rem;
+    }
+}
+.opprett-utland .knapperad {
+    padding-top: 2rem;
+    padding-bottom: 1rem;
+    text-align: center;
+}
+.opprett-utland .knapperad .blokk {
+    display: block;
+    margin: 1rem 0 2rem;
+}

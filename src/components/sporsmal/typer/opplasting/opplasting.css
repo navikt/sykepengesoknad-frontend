@@ -1,0 +1,100 @@
+.opplasting .opplasting__tekst {
+    display: flex;
+    align-items: center;
+    margin-top: 0.5rem;
+}
+.opplasting .opplasting__tekst .opplasting__hjelpetekst {
+    align-self: flex-start;
+    margin-left: 0.35rem;
+}
+.opplasting .fler-vedlegg {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 2rem;
+    margin: 2rem 0 0;
+    width: 100%;
+    border-radius: 4px;
+    cursor: pointer;
+    text-transform: none;
+}
+.opplasting .fler-vedlegg .pluss-ikon {
+    margin-right: 0.3rem;
+}
+.opplasting .fler-vedlegg:hover {
+    text-decoration: underline;
+}
+.opplasting .fler-vedlegg:focus {
+    outline: 0;
+    box-shadow: 0 0 0 3px #00347d;
+}
+.opplasting .pdf-hjelp {
+    margin-top: 1.2rem;
+}
+.opplasting ul.opplasting-liste {
+    padding-inline-start: 1.3em;
+    line-height: 40px;
+}
+.opplasting li.opplasting-liste {
+    font-size: 25px;
+}
+.opplasting .tekst {
+    margin-left: 10px;
+}
+.opplasting .feilmeldinger {
+    margin: 1rem 0 0 0;
+    text-align: left;
+}
+.opplasting_modal {
+    width: 400px;
+}
+.opplasting_modal .navds-modal__content .enhet {
+    margin-left: 0.5rem;
+}
+.opplasting_modal .navds-modal__content .filstr {
+    margin-top: 0.5rem;
+}
+.opplasting_modal .navds-modal__content .ddfil__wrap {
+    margin-top: 0.5rem;
+    margin-bottom: 2rem;
+}
+.opplasting_modal .navds-modal__content .navds-alert--warning {
+    margin: 2rem 0;
+}
+.opplasting_modal .navds-modal__content .knapperad {
+    flex-direction: column;
+    padding: 0 0 0.5rem;
+}
+.opplasting_modal .navds-modal__content .knapperad .lagre-kvittering {
+    display: block;
+    width: 100%;
+    margin-bottom: 1rem;
+}
+.opplasting_modal .opplasting-header {
+    margin-top: 0.5rem;
+}
+.opplasting_modal .skjemaelement {
+    margin: 1rem 0;
+}
+.opplasting_modal .feilmelding-alert {
+    margin-top: 1rem;
+}
+.opplasting_modal .restriksjoner {
+    display: flex;
+    flex-direction: column;
+    margin-top: 2rem;
+}
+@media (min-width: 768px) {
+    .opplasting_modal .navds-modal__content .knapperad {
+        flex-direction: row;
+    }
+    .opplasting_modal .navds-modal__content .knapperad .lagre-kvittering {
+        display: inline-block;
+        width: auto;
+        margin: 0 0.4rem 1rem;
+    }
+}
+.navds-alert--warning.reisetilskudd {
+    background-color: #ffffff;
+    margin-top: 1.5rem;
+}

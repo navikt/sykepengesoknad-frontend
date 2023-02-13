@@ -1,0 +1,48 @@
+label[for='ddfil'] {
+    display: inline-block;
+}
+.filopplasteren {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 1.5rem 0;
+    font-weight: bold;
+    border: 2px dashed #0067c5;
+    border-radius: 4px;
+    background-color: #f1f6f8;
+    color: #0067c5;
+    margin: 0 auto;
+    cursor: pointer;
+}
+.filopplasteren.skjemaelement__input--harFeil {
+    border: 1px solid #c30000;
+}
+.filopplasteren:focus {
+    outline: 0;
+    box-shadow: 0 0 0 3px #00347d;
+}
+.filopplasteren + .skjemaelement__feilmelding {
+    margin-top: -0.5rem;
+}
+.opplastingsikon {
+    display: inline-block;
+    margin-right: 0.3rem;
+}
+.preview img {
+    width: 100%;
+}
+.modal-fil {
+    margin: 1rem 0 2.5rem;
+    display: flex;
+    justify-content: left;
+}
+.modal-fil .vedleggsikon {
+    width: 1.2rem;
+}
+.modal-fil .endreknapp {
+    margin-left: 1.5rem;
+}
+.modal-fil .endreikon {
+    width: 16px;
+    margin-right: 0.35rem;
+}

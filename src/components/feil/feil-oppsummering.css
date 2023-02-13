@@ -1,0 +1,36 @@
+.feiloppsummering {
+    margin: 2rem 0;
+    padding: 1rem;
+    border-radius: 4px;
+    opacity: 0;
+    animation-name: feiloppsummering;
+    animation-timing-function: cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    animation-fill-mode: forwards;
+    animation-duration: 0.25s;
+    animation-delay: 0.3s;
+}
+.feiloppsummering:focus {
+    outline: none;
+    box-shadow: 0 0 0 5px #ffffff, 0 0 0 10px #00347d;
+}
+.feiloppsummering a:focus {
+    color: #262626;
+    background-color: #00347d;
+}
+.feiloppsummering__tittel {
+    margin-top: 0;
+}
+.feiloppsummering__liste li {
+    margin-bottom: 0.25rem;
+    font-family: 'Source Sans Pro', Arial, sans-serif;
+}
+@keyframes feiloppsummering {
+    0% {
+        transform: translateY(-4rem);
+        opacity: 0;
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}

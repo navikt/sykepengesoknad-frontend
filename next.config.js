@@ -1,5 +1,4 @@
 /* eslint-disable @typescript-eslint/no-var-requires */
-const withLess = require('next-with-less')
 const { buildCspHeader } = require('@navikt/nav-dekoratoren-moduler/ssr')
 
 const appDirectives = {
@@ -73,4 +72,4 @@ const nextConfig = {
     },
 }
 
-module.exports = withLess(nextConfig)
+module.exports = nextConfig

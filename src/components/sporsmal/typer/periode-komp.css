@@ -1,0 +1,40 @@
+.periode {
+    margin-top: 1rem;
+}
+.periode .skjemagruppe {
+    display: flex;
+    flex-wrap: wrap;
+}
+.periode .skjemagruppe .skjemaelement {
+    width: 100%;
+    padding-right: 0.5rem;
+    margin-bottom: 0;
+}
+.periode .skjemagruppe .skjemaelement.tom {
+    margin-top: 1rem;
+}
+.periode .navds-label {
+    font-weight: normal;
+}
+.periode button.slett.navds-link {
+    margin-left: 0;
+    padding-top: 0.5rem;
+}
+.ds-datepicker__kalenderPortal--responsive {
+    transform: translate3d(0, 0, 200px);
+}
+@media (min-width: 768px) {
+    .periode {
+        display: flex;
+    }
+    .periode .skjemagruppe .skjemaelement {
+        width: 50%;
+    }
+    .periode .skjemagruppe .skjemaelement.tom {
+        margin-top: initial;
+    }
+    .periode button.slett.navds-link {
+        display: flex;
+        padding-top: 2.5rem;
+    }
+}

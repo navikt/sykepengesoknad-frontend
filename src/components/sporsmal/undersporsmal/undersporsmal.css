@@ -1,0 +1,79 @@
+.undersporsmal {
+    max-height: 0;
+    overflow: hidden;
+    opacity: 0;
+}
+.undersporsmal .skjema__sporsmal {
+    display: block;
+    margin: 2rem 0 1rem;
+}
+.undersporsmal .skjema__sporsmal_med_undersporsmal {
+    display: block;
+    margin-top: 2rem;
+}
+.undersporsmal .kriterie--checked {
+    position: relative;
+    margin: 1rem 0;
+    padding: 1rem;
+    background-color: #f1f1f1;
+}
+.undersporsmal .kriterie--checked:after {
+    content: '';
+    width: 1rem;
+    height: 1rem;
+    position: absolute;
+    display: block;
+    left: 1.3rem;
+    top: 0;
+    transform: translateY(-50%) rotate(45deg) skew(5deg, 5deg);
+    transform-origin: 50% 50%;
+    background-color: #f1f1f1;
+}
+.undersporsmal .kriterie--checked .skjema__sporsmal {
+    margin-top: 0;
+}
+.undersporsmal .kriterie--checked .presisering {
+    position: relative;
+    background-color: #ffffff;
+    padding: 1rem;
+    margin: 0.7rem 0 1.4rem;
+}
+.undersporsmal .kriterie--checked .presisering:after {
+    content: '';
+    display: block;
+    position: absolute;
+    left: 1.25rem;
+    top: -0.5rem;
+    width: 1rem;
+    height: 1rem;
+    transform: rotate(45deg);
+    background-color: #ffffff;
+}
+.undersporsmal .ekstrasporsmal {
+    position: relative;
+    margin: 0.7rem -1.2rem;
+    padding: 1rem 1.2rem;
+    background-color: #f1f1f1;
+}
+.undersporsmal .ekstrasporsmal:after {
+    content: '';
+    width: 1rem;
+    height: 1rem;
+    position: absolute;
+    display: block;
+    left: 1rem;
+    top: 0;
+    transform: translateY(-50%) rotate(45deg) skew(5deg, 5deg);
+    transform-origin: 50% 50%;
+    background-color: #f1f1f1;
+}
+.undersporsmal--vis {
+    height: auto;
+    max-height: 2600px;
+    overflow: visible;
+    transition: max-height 0.8s ease-in, opacity 0.3s 0.5s ease-in;
+    opacity: 1;
+}
+.undersporsmal--skjul {
+    transition: max-height 0.1s ease-out, opacity 0.3s ease-out;
+}

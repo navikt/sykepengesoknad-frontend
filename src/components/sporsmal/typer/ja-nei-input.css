@@ -1,0 +1,34 @@
+.radioGruppe-jaNei {
+    width: 100%;
+}
+.radioGruppe-jaNei .navds-radio-buttons {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+}
+.radioGruppe-jaNei .navds-radio-buttons .navds-accordion {
+    margin-right: auto;
+    width: 100%;
+}
+.radioGruppe-jaNei .navds-radio-buttons .radio-input {
+    width: 100%;
+    border: 1px solid #707070;
+    border-radius: 0.25rem;
+    display: block;
+    padding: 0.3rem 1rem;
+}
+.radioGruppe-jaNei .navds-radio-buttons .radio-input:not(:last-child) {
+    margin-bottom: 0.5rem;
+}
+.radioGruppe-jaNei .navds-radio-buttons .radio-input.radio-checked {
+    border: 1px solid #0067c5;
+    background-color: #cce1ff;
+}
+@media (min-width: 768px) {
+    .radioGruppe-jaNei .navds-radio-buttons .radio-input {
+        width: 48.7%;
+    }
+    .radioGruppe-jaNei .navds-radio-buttons .radio-input:not(:last-child) {
+        margin-bottom: 0;
+    }
+}

@@ -1,0 +1,660 @@
+[autocomplete='off']::-webkit-contacts-auto-fill-button {
+    visibility: hidden;
+    display: none;
+    pointer-events: none;
+    position: absolute;
+    right: 0;
+}
+.skjemaelement {
+    position: relative;
+}
+.skjemaelement__label {
+    display: block;
+    line-height: 1.4;
+    margin-bottom: 0.5rem;
+}
+.skjemaelement__label + .skjemaelement__description {
+    margin-top: -0.25rem;
+}
+.skjemaelement__description {
+    margin-bottom: 0.5rem;
+}
+.checkboks,
+.radioknapp {
+    position: absolute;
+    opacity: 0;
+}
+.checkboks + .skjemaelement__label,
+.radioknapp + .skjemaelement__label {
+    padding-left: 32px;
+    position: relative;
+    display: inline-block;
+    cursor: pointer;
+    margin-bottom: 0;
+    line-height: 24px;
+}
+.checkboks + .skjemaelement__label::before,
+.radioknapp + .skjemaelement__label::before {
+    content: '';
+    position: absolute;
+    display: block;
+    text-align: center;
+    background-color: #ffffff;
+    background-position: center center;
+    background-repeat: no-repeat;
+    border: 1px solid #707070;
+    color: #707070;
+    width: 24px;
+    height: 24px;
+    left: 0;
+    top: 0;
+}
+.checkboks:hover + .skjemaelement__label,
+.radioknapp:hover + .skjemaelement__label {
+    color: #0067c5;
+}
+.checkboks:hover + .skjemaelement__label::before,
+.radioknapp:hover + .skjemaelement__label::before {
+    border-color: #0067c5;
+    background-color: #cce1ff;
+}
+.checkboks:disabled + .skjemaelement__label,
+.radioknapp:disabled + .skjemaelement__label {
+    color: #707070;
+}
+.checkboks:disabled + .skjemaelement__label:hover,
+.radioknapp:disabled + .skjemaelement__label:hover {
+    cursor: not-allowed;
+}
+.checkboks:disabled + .skjemaelement__label::before,
+.radioknapp:disabled + .skjemaelement__label::before {
+    background-color: #f1f1f1;
+    border-color: #707070;
+    box-shadow: none;
+}
+.checkboks--mork + .skjemaelement__label::before,
+.radioknapp--mork + .skjemaelement__label::before {
+    border-color: #707070;
+}
+.checkboks {
+    position: absolute;
+    opacity: 0;
+}
+.checkboks:focus + .skjemaelement__label::before {
+    box-shadow: 0 0 0 3px #00347d;
+}
+.checkboks + .skjemaelement__label::before {
+    border-radius: 4px;
+}
+.checkboks:checked:disabled + .skjemaelement__label::before {
+    border-color: #b0b0b0;
+    background-color: #b0b0b0;
+}
+.checkboks:checked:focus + .skjemaelement__label::before {
+    background-color: white;
+    background-image: url(data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAxMyAxMCI+ICAgIDxnPiAgICA8cGF0aCBmaWxsPSIjMDA2N0M1IiBkPSJNNCwxMGMtMC40LDAtMC44LTAuMS0xLjEtMC40TDAuNCw3LjFDMC4xLDYuOCwwLDYuNCwwLDZzMC4yLTAuOCwwLjUtMS4xQzEsNC40LDIsNC40LDIuNSw0LjlMNCw2LjRsNi40LTYgICAgQzEwLjgsMC4xLDExLjEsMCwxMS41LDBjMC40LDAsMC44LDAuMiwxLDAuNWMwLjYsMC42LDAuNSwxLjYtMC4xLDIuMXYwTDUsOS42QzQuNyw5LjksNC40LDEwLDQsMTB6IE0xMS44LDEuOUwxMS44LDEuOSAgICBDMTEuOCwxLjksMTEuOCwxLjksMTEuOCwxLjl6IE0xMS4yLDEuMUMxMS4yLDEuMSwxMS4yLDEuMSwxMS4yLDEuMUwxMS4yLDEuMXoiLz4gICAgPC9nPjwvc3ZnPg==);
+}
+.checkboks:checked + .skjemaelement__label::before {
+    background-image: url(data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAxMyAxMCI+ICAgIDxnPiAgICA8cGF0aCBmaWxsPSIjRkZGRkZGIiBkPSJNNCwxMGMtMC40LDAtMC44LTAuMS0xLjEtMC40TDAuNCw3LjFDMC4xLDYuOCwwLDYuNCwwLDZzMC4yLTAuOCwwLjUtMS4xQzEsNC40LDIsNC40LDIuNSw0LjlMNCw2LjRsNi40LTYgICAgQzEwLjgsMC4xLDExLjEsMCwxMS41LDBjMC40LDAsMC44LDAuMiwxLDAuNWMwLjYsMC42LDAuNSwxLjYtMC4xLDIuMXYwTDUsOS42QzQuNyw5LjksNC40LDEwLDQsMTB6IE0xMS44LDEuOUwxMS44LDEuOSAgICBDMTEuOCwxLjksMTEuOCwxLjksMTEuOCwxLjl6IE0xMS4yLDEuMUMxMS4yLDEuMSwxMS4yLDEuMSwxMS4yLDEuMUwxMS4yLDEuMXoiLz4gICAgPC9nPjwvc3ZnPg==);
+    background-position: center center;
+    background-repeat: no-repeat;
+    background-size: 75%;
+    border-color: #0067c5;
+    border-width: 2px;
+    background-color: #0067c5;
+}
+.radioknapp {
+    font-family: 'Source Sans Pro', Arial, sans-serif;
+    font-size: 16px;
+    line-height: 22px;
+    font-weight: 400;
+}
+.radioknapp + .skjemaelement__label::before {
+    border-radius: 50%;
+}
+.radioknapp:checked + .skjemaelement__label::before {
+    border: 2px solid #0067c5;
+    box-shadow: 0 0 0 3px #ffffff inset, 0 0 0 12px #0067c5 inset;
+}
+.radioknapp:disabled:checked + .skjemaelement__label::before {
+    border: 2px solid #b0b0b0;
+    box-shadow: 0 0 0 3px #ffffff inset, 0 0 0 12px #b0b0b0 inset;
+}
+.radioknapp:focus + .skjemaelement__label::before {
+    box-shadow: 0 0 0 3px #00347d, 0 0 0 12px #ffffff inset;
+}
+.radioknapp:checked:focus + .skjemaelement__label::before {
+    transition: box-shadow 200ms cubic-bezier(0.465, 0.183, 0.153, 0.946);
+    box-shadow: 0 0 0 3px #00347d, 0 0 0 3px #ffffff inset, 0 0 0 12px #0067c5 inset;
+}
+.textarea--medMeta {
+    resize: none;
+    width: 100%;
+    overflow: hidden;
+    min-height: 4rem;
+    transition: height 0.1s ease-out;
+    display: block;
+}
+.textarea--medMeta__wrapper {
+    width: 100%;
+    position: relative;
+}
+.textarea--medMeta__teller {
+    pointer-events: none;
+    color: #707070;
+    font-style: italic;
+    position: absolute;
+    text-align: right;
+    left: 32px;
+    right: 12px;
+    bottom: 10px;
+    margin: 0;
+    padding: 0;
+}
+.textarea--medMeta__teller .teller-tekst--overflow {
+    color: #c30000;
+    font-weight: bold;
+}
+.textareamirror {
+    line-height: 22px;
+    font-family: 'Source Sans Pro', Arial, sans-serif;
+    font-size: 16px;
+    font-weight: 400;
+    appearance: none;
+    padding: 0.5rem;
+    background-color: #ffffff;
+    border-radius: 4px;
+    border: 1px solid #707070;
+    box-sizing: border-box;
+    line-height: 1.375rem;
+    white-space: pre-wrap;
+    display: inline-block;
+    width: 100%;
+    word-wrap: break-word;
+    position: absolute;
+    left: -99999px;
+    top: 0;
+}
+.textareamirror:focus {
+    outline: 0;
+    box-shadow: 0 0 0 3px #00347d;
+}
+.textareamirror:hover {
+    border-color: #0067c5;
+}
+.textareamirror:disabled,
+.textareamirror[readonly] {
+    background-color: #f1f1f1;
+    border-color: #707070;
+    box-shadow: none;
+    color: #262626;
+}
+.textareamirror:disabled:hover,
+.textareamirror[readonly]:hover {
+    cursor: not-allowed;
+}
+.textareamirror--mini {
+    padding: 0.25rem;
+}
+.textareamirror:focus {
+    outline: 0;
+    box-shadow: 0 0 0 3px #00347d;
+}
+.textareamirror:hover {
+    border-color: #0067c5;
+}
+.textareamirror:disabled,
+.textareamirror[readonly] {
+    background-color: #f1f1f1;
+    border-color: #707070;
+    box-shadow: none;
+    color: #262626;
+}
+.textareamirror:disabled:hover,
+.textareamirror[readonly]:hover {
+    cursor: not-allowed;
+}
+.textareamirror--mini {
+    padding: 0.25rem;
+}
+.textarea__container {
+    position: relative;
+}
+.selectContainer {
+    position: relative;
+    display: inline-block;
+}
+.selectContainer select {
+    padding-right: 1.5em;
+    appearance: none;
+    width: 100%;
+}
+.selectContainer select::-ms-expand {
+    display: none;
+}
+.selectContainer::before {
+    pointer-events: none;
+    content: '';
+    background: #262626;
+    height: 2px;
+    width: 10px;
+    border-radius: 10px;
+    right: 0.75rem;
+    top: 50%;
+    z-index: 4;
+    position: absolute;
+    transform: translateX(3px) rotate(-45deg);
+}
+.selectContainer::after {
+    pointer-events: none;
+    content: '';
+    background: #262626;
+    height: 2px;
+    width: 10px;
+    border-radius: 10px;
+    right: 0.75rem;
+    top: 50%;
+    z-index: 4;
+    position: absolute;
+    transform: translateX(-3px) rotate(45deg);
+}
+.input--xxs {
+    width: 35px;
+}
+.input--xs input.navds-text-field__input {
+    width: 70px;
+    margin-bottom: 1rem;
+}
+.input--s input.navds-text-field__input {
+    width: 140px;
+}
+.undersporsmalSpacing label.navds-form-field__label {
+    margin-top: 2rem;
+}
+.normalFont label.navds-form-field__label {
+    font-size: var(--navds-font-size-medium);
+    letter-spacing: 0.002em;
+    line-height: var(--navds-font-line-height-medium);
+    font-weight: var(--navds-font-weight-regular);
+}
+.input--m {
+    width: 100%;
+    max-width: 210px;
+}
+.input--l {
+    width: 100%;
+    max-width: 280px;
+}
+.input--xl {
+    width: 100%;
+    max-width: 350px;
+}
+.input--xxl {
+    width: 100%;
+    max-width: 420px;
+}
+.input--fullbredde {
+    width: 100%;
+}
+.skjemaelement__input {
+    font-family: 'Source Sans Pro', Arial, sans-serif;
+    font-size: 16px;
+    font-weight: 400;
+    appearance: none;
+    padding: 0.5rem;
+    background-color: #ffffff;
+    border-radius: 4px;
+    border: 1px solid #707070;
+    box-sizing: border-box;
+    line-height: 1.375rem;
+}
+.skjemaelement__input:focus {
+    outline: 0;
+    box-shadow: 0 0 0 3px #00347d;
+}
+.skjemaelement__input:hover {
+    border-color: #0067c5;
+}
+.skjemaelement__input:disabled,
+.skjemaelement__input[readonly] {
+    background-color: #f1f1f1;
+    border-color: #707070;
+    box-shadow: none;
+    color: #262626;
+}
+.skjemaelement__input:disabled:hover,
+.skjemaelement__input[readonly]:hover {
+    cursor: not-allowed;
+}
+.skjemaelement__input--mini {
+    padding: 0.25rem;
+}
+.skjemaelement__input-fodselsnr::-webkit-outer-spin-button,
+.skjemaelement__input-fodselsnr::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+.skjemaelement__input-fodselsnr [type='number'] {
+    -moz-appearance: textfield;
+}
+.skjemagruppe--feil .skjemaelement__input:not(:focus):not(:hover):not(:active):not(:checked) {
+    border-color: #c30000;
+    box-shadow: 0 0 0 1px #c30000;
+}
+.skjemagruppe--feil
+    .skjemaelement__input:not(:focus):not(:hover):not(:active):not(:checked).checkboks
+    + .skjemaelement__label::before,
+.skjemagruppe--feil
+    .skjemaelement__input:not(:focus):not(:hover):not(:active):not(:checked).radioknapp
+    + .skjemaelement__label::before {
+    border-color: #c30000;
+    box-shadow: 0 0 0 1px #c30000;
+}
+.skjemaelement__input--harFeil:not(:focus):not(:hover):not(:active) .navds-text-field__input,
+.skjemaelement__input--harFeil:not(:focus):not(:hover):not(:active) + .ds-datepicker__calendarButton {
+    border-color: #c30000;
+    box-shadow: 0 0 0 1px #c30000;
+}
+.skjemaelement__input--harFeil:not(:focus):not(:hover):not(:active).checkboks:not(:checked)
+    + .skjemaelement__label::before,
+.skjemaelement__input--harFeil:not(:focus):not(:hover):not(:active).radio:not(:checked)
+    + .skjemaelement__label::before {
+    border-color: #c30000;
+    box-shadow: 0 0 0 1px #c30000;
+}
+.toggle {
+    display: flex;
+}
+.toggle > :first-child .toggle__label {
+    border-radius: 2px 0 0 2px;
+}
+.toggle > :last-child .toggle__label {
+    border-radius: 0 2px 2px 0;
+    border-right: 1px solid #262626;
+    margin-left: -1px;
+}
+.toggle__label {
+    font-family: 'Source Sans Pro', Arial, sans-serif;
+    font-size: 16px;
+    line-height: 22px;
+    font-weight: 400;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #ffffff;
+    border: 1px solid #262626;
+    border-right: 0;
+    color: #262626;
+    cursor: pointer;
+    min-width: 6.25rem;
+    height: 2rem;
+    padding-left: 1rem;
+    padding-right: 1rem;
+    border-radius: 0;
+}
+.toggle__label:hover {
+    border-color: #0067c5;
+    color: #0067c5;
+}
+.toggle__input:checked + label {
+    background-color: #005b82;
+    color: #ffffff;
+    border-color: #005b82;
+}
+.toggle__input:focus + label {
+    position: relative;
+    z-index: 999;
+    box-shadow: 0 0 0 3px #00347d;
+}
+.bekreftCheckboksPanel {
+    display: block;
+}
+.navds-confirmation-panel__inner {
+    gap: unset;
+}
+.feiloppsummering {
+    background-color: #ffffff;
+    display: block;
+    padding: 1rem 1rem 1rem 1rem;
+    border-radius: 0;
+    border: 4px solid #c30000;
+}
+.feiloppsummering:focus,
+.feiloppsummering--focus {
+    box-shadow: 0 0 0 3px #00347d;
+    outline: none;
+}
+.feiloppsummering__liste {
+    margin: 1rem 0;
+}
+.feiloppsummering__liste li {
+    margin-bottom: 0.25rem;
+}
+.skjemagruppe,
+.skjemagruppe fieldset,
+.skjemagruppe__fieldset {
+    margin: 0;
+    padding: 0;
+    border: 0;
+}
+.skjemagruppe .skjemaelement,
+.skjemagruppe fieldset .skjemaelement,
+.skjemagruppe__fieldset .skjemaelement {
+    margin-bottom: 1rem;
+}
+.skjemagruppe .skjemagruppe.inputPanelGruppe,
+.skjemagruppe fieldset .skjemagruppe.inputPanelGruppe,
+.skjemagruppe__fieldset .skjemagruppe.inputPanelGruppe,
+.skjemagruppe .skjemagruppe.radiogruppe,
+.skjemagruppe fieldset .skjemagruppe.radiogruppe,
+.skjemagruppe__fieldset .skjemagruppe.radiogruppe,
+.skjemagruppe .skjemagruppe.checkboxgruppe,
+.skjemagruppe fieldset .skjemagruppe.checkboxgruppe,
+.skjemagruppe__fieldset .skjemagruppe.checkboxgruppe {
+    margin-bottom: 1rem;
+}
+.skjemagruppe__description {
+    font-family: 'Source Sans Pro', Arial, sans-serif;
+    font-size: 16px;
+    line-height: 22px;
+    font-weight: 400;
+    margin-bottom: 1rem;
+}
+.skjemagruppe legend,
+.skjemagruppe__legend {
+    font-family: 'Source Sans Pro', Arial, sans-serif;
+    font-size: 18px;
+    line-height: 24px;
+    font-weight: normal;
+    margin-bottom: 1rem;
+}
+.skjemagruppe.inputPanelGruppe .skjemaelement,
+.skjemagruppe.radiogruppe .skjemaelement,
+.skjemagruppe.checkboxgruppe .skjemaelement {
+    margin-bottom: 1rem;
+}
+.skjemagruppe.inputPanelGruppe legend,
+.skjemagruppe.radiogruppe legend,
+.skjemagruppe.checkboxgruppe legend,
+.skjemagruppe.inputPanelGruppe .skjemagruppe__legend,
+.skjemagruppe.radiogruppe .skjemagruppe__legend,
+.skjemagruppe.checkboxgruppe .skjemagruppe__legend {
+    font-family: 'Source Sans Pro', Arial, sans-serif;
+    font-size: 16px;
+    line-height: 22px;
+    font-weight: bold;
+    margin-bottom: 1rem;
+}
+.skjemaelement__label {
+    font-size: 1.125rem !important;
+}
+.sporsmal__form .skjema__fieldset {
+    border: 0;
+    padding: 0;
+}
+.sporsmal__form .skjema__fieldset legend {
+    margin-bottom: 1rem;
+}
+.sporsmal__form .skjemaelement--horisontal {
+    display: flex;
+    flex-direction: row;
+}
+.sporsmal__form .skjemaelement__feilmelding {
+    display: inline-block;
+    margin-top: 0.5rem;
+    color: #c30000;
+    font-weight: bold;
+}
+.sporsmal__form .skjemaelement__input {
+    font-family: 'Source Sans Pro', Arial, sans-serif;
+    font-size: 1.125rem;
+}
+.sporsmal__form .skjemaelement__input + .skjemaelement__label {
+    padding: 0.5rem 1rem 0.5rem 2.3rem;
+}
+.sporsmal__form .skjemaelement__input + .skjemaelement__label:before {
+    top: 0.5rem;
+}
+.sporsmal__form .bekreftCheckboksPanel .skjemaelement__label {
+    padding: 0 1rem 0 2.3rem;
+}
+.sporsmal__form .bekreftCheckboksPanel .skjemaelement__label:before {
+    top: 0;
+}
+.sporsmal__form .redaksjonelt-innhold {
+    margin-bottom: 2rem;
+}
+.sporsmal__form .redaksjonelt-innhold li + li {
+    margin-top: 0.7rem;
+}
+.sporsmal__form .checkboksContainer .skjemaelement__label {
+    margin-left: 1rem;
+}
+.sporsmal__form .radioContainer {
+    width: auto;
+}
+.sporsmal__form .radioContainer .undersporsmal {
+    margin-top: 0.7rem;
+}
+.sporsmal__form .medHjelpetekst {
+    display: flex;
+    align-items: center;
+}
+.sporsmal__form .medHjelpetekst .hjelpetekst {
+    margin-left: 0.5rem;
+}
+.sporsmal__form .medHjelpetekst .popover {
+    max-width: 20rem;
+}
+.sporsmal__form .inputPanelGruppe .skjema__sporsmal {
+    margin-bottom: 0.75rem;
+}
+.sporsmal__form .checkboks + .skjemaelement__label,
+.sporsmal__form .radioknapp + .skjemaelement__label {
+    font-size: 1.125rem;
+}
+.sporsmal__form .periodeliste {
+    list-style: none;
+    padding-left: 0;
+}
+.sporsmal__form .lenkeknapp {
+    font-size: 1rem;
+}
+.sporsmal__form .lenkeknapp.slett {
+    margin-left: 1rem;
+}
+.sporsmal__form .knapperad {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 2rem 0;
+}
+.sporsmal__form .presisering,
+.sporsmal__form .pekeboble {
+    padding: 1rem;
+    background-color: #ffffff;
+    position: relative;
+}
+@media (min-width: 30rem) {
+    .sporsmal__form .presisering,
+    .sporsmal__form .pekeboble {
+        padding: 2rem;
+    }
+}
+.sporsmal__form .ekstrasporsmal:after,
+.sporsmal__form .presisering:after,
+.sporsmal__form .pekeboble:after {
+    content: '';
+    width: 1rem;
+    height: 1rem;
+    position: absolute;
+    display: block;
+    left: 1rem;
+    transform-origin: 50% 50%;
+}
+@media (min-width: 30rem) {
+    .sporsmal__form .ekstrasporsmal:after,
+    .sporsmal__form .presisering:after,
+    .sporsmal__form .pekeboble:after {
+        left: 1.5rem;
+    }
+}
+.sporsmal__form .pekeboble:after {
+    font-size: 1.33333333rem;
+    left: 50%;
+    top: 0;
+    transform: translate(-50%, -50%) rotate(45deg) skew(5deg, 5deg);
+}
+.sporsmal__form .pekeboble,
+.sporsmal__form .pekeboble:after {
+    background-color: #f7f7f7;
+}
+.sporsmal__form .pekeboble {
+    margin-top: 2rem;
+}
+.sporsmal__form .avbrytDialog {
+    width: 100%;
+    margin-top: 1rem;
+    text-align: center;
+}
+.sporsmal__form div.personvern-les-mer {
+    padding-bottom: 2rem;
+}
+.sporsmal__form hr {
+    margin: 1rem;
+}
+.sporsmal__form .helligdager-tittel {
+    padding-bottom: 0.8rem;
+}
+.sporsmal__form .avbrytDialog__trigger {
+    margin: 0;
+}
+.sporsmal__form .modal__avbryt_popup .panel-relatert:before {
+    left: 50%;
+}
+.sporsmal__form .modal__avbryt_popup .varselstripe__innhold {
+    text-align: left;
+}
+.sporsmal__form .utland_infotekst {
+    position: relative;
+    margin: 1.5rem 0;
+    padding: 1rem 1rem;
+    background-color: #f1f1f1;
+}
+.sporsmal__form .utland_infotekst:after {
+    content: '';
+    width: 1rem;
+    height: 1rem;
+    position: absolute;
+    display: block;
+    left: 1.45rem;
+    top: 0;
+    transform: translateY(-50%) rotate(45deg) skew(5deg, 5deg);
+    transform-origin: 50% 50%;
+    background-color: #f1f1f1;
+}
+@media (min-width: 768px) {
+    .sporsmal__form .knapperad {
+        margin: 2rem 0;
+    }
+}

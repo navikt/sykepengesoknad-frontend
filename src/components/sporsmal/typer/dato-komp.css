@@ -1,0 +1,5 @@
+@import '@navikt/ds-datepicker/lib/index.css';
+.dato-komp .navds-label {
+    font-weight: bold;
+    margin-top: 2rem;
+}

@@ -1,0 +1,48 @@
+.bendiksen-container {
+    margin: 1rem 0 2rem;
+}
+.bendiksen-container .bendiksen {
+    display: flex;
+    justify-content: center;
+}
+.bendiksen-container .bendiksen svg {
+    width: auto;
+    height: 100px;
+    margin-top: 0.5rem;
+}
+.bendiksen-container .bendiksen::after {
+    content: '';
+    border: 1em solid transparent;
+    border-top-color: #f1f1f1;
+    width: 0;
+    height: 0;
+    right: 1rem;
+    position: relative;
+    transform: skewX(-45deg);
+}
+.bendiksen-container .bendiksen-hjelpetekst {
+    padding: 1rem 2rem;
+    background-color: #f1f1f1;
+    border-radius: 0.5rem;
+}
+@media (min-width: 768px) {
+    .bendiksen-container {
+        display: flex;
+        flex-direction: row-reverse;
+        flex: 1;
+        align-items: center;
+    }
+    .bendiksen-container .bendiksen {
+        position: relative;
+        align-items: center;
+    }
+    .bendiksen-container .bendiksen svg {
+        height: 120px;
+        margin-top: 0;
+    }
+    .bendiksen-container .bendiksen::after {
+        top: 50%;
+        right: 0;
+        transform: rotate(90deg);
+    }
+}
