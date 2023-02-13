@@ -39,7 +39,6 @@ const nextConfig = {
         ]
     },
     basePath: '/syk/sykepengesoknad',
-    lessLoaderOptions: {},
     pageExtensions: ['page.tsx', 'api.ts'],
     assetPrefix: process.env.ASSET_PREFIX || undefined,
     generateEtags: false, //Disabler etag i pages
