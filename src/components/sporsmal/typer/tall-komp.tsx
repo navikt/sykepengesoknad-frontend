@@ -110,7 +110,12 @@ const TallKomp = ({ sporsmal }: SpmProps) => {
                 inputMode={antallDesimaler > 0 ? 'decimal' : 'numeric'}
                 {...register(sporsmal.id, {
                     required: feilmelding.global,
-                    validate: () => valider(),
+                    validate: (verdien) => {
+                        if (isNaN(parseFloat(verdien))) {
+                            return feilmelding.global
+                        }
+                        return valider()
+                    },
                     onChange: (e) => {
                         e.target.value = removeCharacters(e.target.value)
                     },
