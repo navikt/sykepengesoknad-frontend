@@ -89,7 +89,12 @@ const RadioKomp = ({ sporsmal }: SpmProps) => {
             <FeilLokal sporsmal={sporsmal} />
 
             <Vis
-                hvis={watchRadio?.toLowerCase() === 'timer' && beregnGrad?.() && validerGrad!() == true}
+                hvis={
+                    watchRadio?.toLowerCase() === 'timer' &&
+                    beregnGrad?.() &&
+                    beregnGrad() !== Infinity &&
+                    validerGrad!() == true
+                }
                 render={() => (
                     <Alert variant="info" style={{ marginTop: '1rem' }}>
                         <BodyShort>
