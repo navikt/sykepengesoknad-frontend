@@ -42,7 +42,6 @@ import '../components/sporsmal/typer/opplasting/opplasting.css'
 import '../components/sporsmal/undersporsmal/undersporsmal.css'
 import '../components/utvidbar/utvidbar.css'
 import '../components/feil/refresh-hvis-feil-state.css'
-import '../components/opprett-utland/opprett-utland.css'
 import '../components/soknader/soknader.css'
 import '../components/soknad/soknaden.css'
 import '../components/endreknapp/endre-soknad-modal.css'
@@ -57,7 +56,6 @@ import Head from 'next/head'
 import React, { PropsWithChildren } from 'react'
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
 
-import { LabsWarning } from '../components/labs-warning/LabsWarning'
 import { useFangHotjarEmotion } from '../hooks/useFangHotjarEmotion'
 import { useHandleDecoratorClicks } from '../hooks/useBreadcrumbs'
 
@@ -98,7 +96,6 @@ function MyApp({ Component, pageProps }: AppProps): JSX.Element {
             </Head>
             <QueryClientProvider client={queryClient}>
                 <div id="root">
-                    <LabsWarning />
                     <Component {...pageProps} />
                 </div>
             </QueryClientProvider>

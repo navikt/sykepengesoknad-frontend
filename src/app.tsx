@@ -15,6 +15,8 @@ import Soknader from './components/soknader/soknader'
 import Vedlikehold from './components/vedlikehold/vedlikehold'
 import StoreProvider from './data/stores/store-provider'
 import { isMockBackend, vedlikehold } from './utils/environment'
+import { PageWrapper } from './components/PageWrapper/PageWrapper'
+import { LabsWarning } from './components/labs-warning/LabsWarning'
 
 export interface RouteParams {
     stegId: string
@@ -48,23 +50,26 @@ const App = (): any => {
                         <TransitionGroup component={null}>
                             <CSSTransition timeout={{ enter: 500, exit: 0 }} classNames="fade">
                                 <main id="maincontent" role="main" tabIndex={-1}>
-                                    <RefreshHvisFeilState>
-                                        <Switch>
-                                            <Route exact={true} path="/" component={Soknader} />
-                                            <Route path="/soknader/:id/:stegId" component={Soknad} />
-                                            <Route path="/soknader/:id" component={Soknad} />
-                                            <Route path="/avbrutt/:id" component={AvbruttSoknad} />
-                                            <Route path="/kvittering/:id" component={KvitteringSide} />
-                                            <Route path="/sendt/:id" component={SendtSide} />
-                                            <Route path="/sykepengesoknad-utland" component={OpprettUtland} />
-                                            <Route path="/soknader/">
-                                                <Redirect to="/" />
-                                            </Route>
-                                            <Route path="">
-                                                <Redirect to="/" />
-                                            </Route>
-                                        </Switch>
-                                    </RefreshHvisFeilState>
+                                    <PageWrapper>
+                                        <LabsWarning />
+                                        <RefreshHvisFeilState>
+                                            <Switch>
+                                                <Route exact={true} path="/" component={Soknader} />
+                                                <Route path="/soknader/:id/:stegId" component={Soknad} />
+                                                <Route path="/soknader/:id" component={Soknad} />
+                                                <Route path="/avbrutt/:id" component={AvbruttSoknad} />
+                                                <Route path="/kvittering/:id" component={KvitteringSide} />
+                                                <Route path="/sendt/:id" component={SendtSide} />
+                                                <Route path="/sykepengesoknad-utland" component={OpprettUtland} />
+                                                <Route path="/soknader/">
+                                                    <Redirect to="/" />
+                                                </Route>
+                                                <Route path="">
+                                                    <Redirect to="/" />
+                                                </Route>
+                                            </Switch>
+                                        </RefreshHvisFeilState>
+                                    </PageWrapper>
                                 </main>
                             </CSSTransition>
                         </TransitionGroup>

@@ -17,7 +17,7 @@ export function FeilView() {
     }, [])
 
     return (
-        <div className="limit">
+        <>
             <div aria-live="polite">
                 <Alert variant="error">
                     <Heading level="1" size="small">
@@ -31,7 +31,7 @@ export function FeilView() {
                     {tekst('feilstate.refresh')}
                 </Button>
             </div>
-        </div>
+        </>
     )
 }
 

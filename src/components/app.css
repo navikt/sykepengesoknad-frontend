@@ -33,10 +33,7 @@ body .data-loader .navds-loader,
 .app {
     min-height: 70vh;
 }
-.limit {
-    position: relative;
-    padding: 1rem 1rem 0;
-}
+
 .vekk {
     line-height: 0;
     color: transparent;
@@ -91,11 +88,4 @@ a {
 }
 .fade-exit.fade-exit-active {
     opacity: 0;
-}
-@media (min-width: 768px) {
-    .limit {
-        width: 672px;
-        margin: 0 auto;
-        padding: 1rem 1rem 2rem;
-    }
 }
