@@ -6,11 +6,14 @@ import { TagTyper } from '../../../types/enums'
 import { SpmProps } from '../sporsmal-form/sporsmal-form'
 import { fjernIndexFraTag } from '../sporsmal-utils'
 import { tekst } from '../../../utils/tekster'
+import { useWindowSize } from '../../../utils/useWindowSize'
 
 import styles from './GuidepanelOverSporsmalstekst.module.css'
+
 const GuidepanelOverSporsmalstekst = ({ sporsmal }: SpmProps) => {
     const bjornTekst = `soknad.bjorn.${fjernIndexFraTag(sporsmal.tag).toLowerCase()}`
 
+    const { mobile } = useWindowSize()
     const bjornVeileder = (tag: TagTyper) =>
         tag === TagTyper.BRUKTE_REISETILSKUDDET ||
         tag === TagTyper.FRAVER_FOR_BEHANDLING ||
@@ -19,7 +22,7 @@ const GuidepanelOverSporsmalstekst = ({ sporsmal }: SpmProps) => {
 
     return (
         <div className={styles.wrapper}>
-            <GuidePanel>
+            <GuidePanel poster={mobile == true}>
                 <BodyShort>{parser(tekst(bjornTekst as any))}</BodyShort>
             </GuidePanel>
         </div>

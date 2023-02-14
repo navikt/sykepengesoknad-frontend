@@ -1,15 +1,16 @@
-import { BodyShort, Label } from '@navikt/ds-react'
+import { BodyShort, GuidePanel, Label } from '@navikt/ds-react'
 import dayjs from 'dayjs'
 import React from 'react'
+import parser from 'html-react-parser'
 
 import { Periode, Sykmelding } from '../../types/sykmelding'
 import { getDuration } from '../../utils/dato-utils'
 import { erOppdelt } from '../../utils/periode-utils'
 import { sorterEtterEldsteTom } from '../../utils/sykmelding-utils'
 import { tekst } from '../../utils/tekster'
-import Bjorn from '../sporsmal/bjorn/bjorn'
 import Vis from '../vis'
 import { Soknad } from '../../types/types'
+import { useWindowSize } from '../../utils/useWindowSize'
 
 interface SykmeldingPerioderProps {
     valgtSoknad: Soknad
@@ -18,6 +19,7 @@ interface SykmeldingPerioderProps {
 
 const SykmeldingPerioder = ({ valgtSoknad, valgtSykmelding }: SykmeldingPerioderProps) => {
     const sortertePerioder = valgtSykmelding.sykmeldingsperioder.sort(sorterEtterEldsteTom) || []
+    const { mobile } = useWindowSize()
 
     const hentPeriodeTekst = (periode: Periode) => {
         switch (periode.type) {
@@ -77,10 +79,11 @@ const SykmeldingPerioder = ({ valgtSoknad, valgtSykmelding }: SykmeldingPerioder
                     </div>
                 )
             })}
-            <Vis
-                hvis={erOppdelt(valgtSoknad, valgtSykmelding)}
-                render={() => <Bjorn nokkel="sykepengesoknad.sykmelding-utdrag.oppdelt.bjorn" />}
-            />
+            {erOppdelt(valgtSoknad, valgtSykmelding) && (
+                <GuidePanel poster={mobile == true}>
+                    <BodyShort>{parser(tekst('sykepengesoknad.sykmelding-utdrag.oppdelt.bjorn'))}</BodyShort>
+                </GuidePanel>
+            )}
         </div>
     )
 }
