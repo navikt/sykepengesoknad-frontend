@@ -1,4 +1,4 @@
-import { BodyShort, GuidePanel, Label } from '@navikt/ds-react'
+import { BodyShort, Label } from '@navikt/ds-react'
 import dayjs from 'dayjs'
 import React from 'react'
 import parser from 'html-react-parser'
@@ -10,7 +10,7 @@ import { sorterEtterEldsteTom } from '../../utils/sykmelding-utils'
 import { tekst } from '../../utils/tekster'
 import Vis from '../vis'
 import { Soknad } from '../../types/types'
-import { useWindowSize } from '../../utils/useWindowSize'
+import { ProgressivtGuidePanel } from '../guidepanel/ProgressivtGuidePanel'
 
 interface SykmeldingPerioderProps {
     valgtSoknad: Soknad
@@ -19,7 +19,6 @@ interface SykmeldingPerioderProps {
 
 const SykmeldingPerioder = ({ valgtSoknad, valgtSykmelding }: SykmeldingPerioderProps) => {
     const sortertePerioder = valgtSykmelding.sykmeldingsperioder.sort(sorterEtterEldsteTom) || []
-    const { mobile } = useWindowSize()
 
     const hentPeriodeTekst = (periode: Periode) => {
         switch (periode.type) {
@@ -80,9 +79,9 @@ const SykmeldingPerioder = ({ valgtSoknad, valgtSykmelding }: SykmeldingPerioder
                 )
             })}
             {erOppdelt(valgtSoknad, valgtSykmelding) && (
-                <GuidePanel poster={mobile == true}>
+                <ProgressivtGuidePanel>
                     <BodyShort>{parser(tekst('sykepengesoknad.sykmelding-utdrag.oppdelt.bjorn'))}</BodyShort>
-                </GuidePanel>
+                </ProgressivtGuidePanel>
             )}
         </div>
     )
