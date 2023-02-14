@@ -38,7 +38,7 @@
     },
     "devDependencies": {
         "cypress-real-events": "^1.7.6",
-        "@cypress/webpack-preprocessor": "^5.16.1",
+        "@cypress/webpack-preprocessor": "^5.16.3",
         "@navikt/eslint-config-teamsykmelding": "^1.4.0",
         "@types/amplitude-js": "~8.16.2",
         "@types/classnames": "^2.3.0",
