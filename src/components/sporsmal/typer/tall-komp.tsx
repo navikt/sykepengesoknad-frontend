@@ -10,6 +10,10 @@ import Vis from '../../vis'
 import { SpmProps } from '../sporsmal-form/sporsmal-form'
 import { hentFeilmelding } from '../sporsmal-utils'
 
+function removeCharacters(value: string) {
+    return value.replace(/[^0-9.,]/g, '')
+}
+
 const TallKomp = ({ sporsmal }: SpmProps) => {
     const {
         register,
@@ -107,14 +111,19 @@ const TallKomp = ({ sporsmal }: SpmProps) => {
                 {...register(sporsmal.id, {
                     required: feilmelding.global,
                     validate: () => valider(),
+                    onChange: (e) => {
+                        e.target.value = removeCharacters(e.target.value)
+                    },
                     setValueAs: (verdi) => {
-                        setVerdien(verdi + ' ' + !verdi)
-                        if (!verdi) {
+                        const ryddaVerdi = removeCharacters(verdi)
+                        setVerdien(ryddaVerdi + ' ' + !ryddaVerdi)
+
+                        if (!ryddaVerdi) {
                             return undefined
                         } else if (antallDesimaler === 0) {
-                            return parseInt(verdi)
+                            return parseInt(ryddaVerdi)
                         } else {
-                            return parseFloat(verdi).toFixed(antallDesimaler)
+                            return parseFloat(ryddaVerdi.replace(',', '.')).toFixed(antallDesimaler)
                         }
                     },
                     min: {
