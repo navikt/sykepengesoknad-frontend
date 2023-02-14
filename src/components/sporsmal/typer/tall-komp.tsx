@@ -20,7 +20,6 @@ const TallKomp = ({ sporsmal }: SpmProps) => {
         formState: { errors },
     } = useFormContext()
 
-    const [verdien, setVerdien] = React.useState('blah')
     const feilmelding = hentFeilmelding(sporsmal, errors[sporsmal.id])
     const { validerGrad, periode, hovedSporsmal } = validerArbeidsgrad(sporsmal)
 
@@ -92,7 +91,6 @@ const TallKomp = ({ sporsmal }: SpmProps) => {
         : tekst(('soknad.undertekst.' + sporsmal.tag) as any)
     return (
         <div className={className()}>
-            <strong>{verdien}</strong>
             <TextField
                 label={
                     manglerSporsmalsTekst
@@ -121,14 +119,15 @@ const TallKomp = ({ sporsmal }: SpmProps) => {
                     },
                     setValueAs: (verdi) => {
                         const ryddaVerdi = removeCharacters(verdi)
-                        setVerdien(ryddaVerdi + ' ' + !ryddaVerdi)
 
                         if (!ryddaVerdi) {
                             return undefined
                         } else if (antallDesimaler === 0) {
                             return parseInt(ryddaVerdi)
                         } else {
-                            return parseFloat(ryddaVerdi.replace(',', '.')).toFixed(antallDesimaler)
+                            const medPunktum = ryddaVerdi.replace(',', '.')
+                            const antallEtterPunktum = medPunktum.split('.')[1]?.length || 0
+                            return parseFloat(medPunktum).toFixed(Math.min(antallDesimaler, antallEtterPunktum))
                         }
                     },
                     min: {
