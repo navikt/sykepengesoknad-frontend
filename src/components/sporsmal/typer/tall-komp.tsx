@@ -10,6 +10,10 @@ import Vis from '../../vis'
 import { SpmProps } from '../sporsmal-form/sporsmal-form'
 import { hentFeilmelding } from '../sporsmal-utils'
 
+function removeCharacters(value: string) {
+    return value.replace(/[^0-9.,]/g, '')
+}
+
 const TallKomp = ({ sporsmal }: SpmProps) => {
     const {
         register,
@@ -95,7 +99,7 @@ const TallKomp = ({ sporsmal }: SpmProps) => {
                 }
                 description={description}
                 className={`${inputSize()} ${labels()}`}
-                type="number"
+                type="text"
                 id={sporsmal.id}
                 min={sporsmal.min!}
                 max={sporsmal.max!}
@@ -104,14 +108,26 @@ const TallKomp = ({ sporsmal }: SpmProps) => {
                 inputMode={antallDesimaler > 0 ? 'decimal' : 'numeric'}
                 {...register(sporsmal.id, {
                     required: feilmelding.global,
-                    validate: () => valider(),
-                    setValueAs: (v) => {
-                        if (!v) {
+                    validate: (verdien) => {
+                        if (isNaN(parseFloat(verdien))) {
+                            return feilmelding.global
+                        }
+                        return valider()
+                    },
+                    onChange: (e) => {
+                        e.target.value = removeCharacters(e.target.value)
+                    },
+                    setValueAs: (verdi) => {
+                        const ryddaVerdi = removeCharacters(verdi)
+
+                        if (!ryddaVerdi) {
                             return undefined
                         } else if (antallDesimaler === 0) {
-                            return parseInt(v)
+                            return parseInt(ryddaVerdi)
                         } else {
-                            return parseFloat(v).toFixed(antallDesimaler)
+                            const medPunktum = ryddaVerdi.replace(',', '.')
+                            const antallEtterPunktum = medPunktum.split('.')[1]?.length || 0
+                            return parseFloat(medPunktum).toFixed(Math.min(antallDesimaler, antallEtterPunktum))
                         }
                     },
                     min: {
