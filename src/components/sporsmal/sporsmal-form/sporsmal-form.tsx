@@ -19,7 +19,7 @@ import FeilOppsummering from '../../feil/feil-oppsummering'
 import Opplysninger from '../../opplysninger-fra-sykmelding/opplysninger'
 import Oppsummering from '../../oppsummering/oppsummering'
 import Vis from '../../vis'
-import BjornOverSporsmalstekst from '../bjorn/bjorn-over-sporsmalstekst'
+import GuidepanelOverSporsmalstekst from '../guidepanel/GuidepanelOverSporsmalstekst'
 import { EndringUtenEndringModal } from '../endring-uten-endring/endring-uten-endring-modal'
 import { hentFormState } from '../hent-svar'
 import InfotekstOverSubmit from '../infotekst-over-submit'
@@ -241,7 +241,7 @@ const SporsmalForm = () => {
                     noValidate={true} // Ikke native validation
                     className={'sporsmal__form ' + nesteSporsmal?.tag?.toLowerCase()}
                 >
-                    <BjornOverSporsmalstekst sporsmal={sporsmal} />
+                    <GuidepanelOverSporsmalstekst sporsmal={sporsmal} />
 
                     <SporsmalSwitch sporsmal={sporsmal} />
 

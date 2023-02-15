@@ -10,9 +10,7 @@ import FeilLokal from '../../feil/feil-lokal'
 import { utlandssoknadUrl } from '../../soknad/soknad-link'
 import Vis from '../../vis'
 import PaskeHjelpetekst from '../bendiksen/paske-hjelpetekst'
-import Bjorn from '../bjorn/bjorn'
-import BjornUnderSporsmalstekst from '../bjorn/bjorn-under-sporsmalstekst'
-import SporsmalBjorn from '../bjorn/sporsmal-bjorn'
+import GuidepanelUnderSporsmalstekst from '../guidepanel/GuidepanelUnderSporsmalstekst'
 import { EkspanderbarHjelp } from '../ekspanderbar-hjelp/ekspanderbar-hjelp'
 import { SpmProps } from '../sporsmal-form/sporsmal-form'
 import { hentFeilmelding, sporsmalIdListe } from '../sporsmal-utils'
@@ -29,14 +27,6 @@ const JaNeiInput = ({ sporsmal }: SpmProps) => {
     let watchJaNei = watch(sporsmal.id)
     if (watchJaNei === undefined) {
         watchJaNei = getValues(sporsmal.id)
-    }
-
-    const visAvgittAvBjorn = () => {
-        const undersporsmal = sporsmal.undersporsmal.find((uspm) => uspm.tag === TagTyper.EGENMELDINGER_NAR)
-        if (undersporsmal) {
-            return undersporsmal.svarliste.svar.some((svaret) => svaret.avgittAv === 'TIDLIGERE_SOKNAD')
-        }
-        return false
     }
 
     const valider = (value: any) => {
@@ -59,7 +49,7 @@ const JaNeiInput = ({ sporsmal }: SpmProps) => {
                     rules={{ validate: (value) => valider(value), required: feilmelding.global }}
                     render={({ field }) => (
                         <RadioGroup {...field} legend={sporsmal.sporsmalstekst} className="radioGruppe-jaNei">
-                            <BjornUnderSporsmalstekst sporsmal={sporsmal} />
+                            <GuidepanelUnderSporsmalstekst sporsmal={sporsmal} />
 
                             <PaskeHjelpetekst sporsmal={sporsmal} />
 
@@ -112,13 +102,6 @@ const JaNeiInput = ({ sporsmal }: SpmProps) => {
                     <UndersporsmalListe oversporsmal={sporsmal} oversporsmalSvar={watchJaNei} />
                 </AnimateOnMount>
             </div>
-
-            <Vis
-                hvis={visAvgittAvBjorn()}
-                render={() => <Bjorn className="press" nokkel="sykepengesoknad.egenmeldingsdager.preutfylt-melding" />}
-            />
-
-            <SporsmalBjorn sporsmal={sporsmal} />
         </>
     )
 }

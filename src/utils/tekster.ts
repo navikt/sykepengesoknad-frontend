@@ -24,7 +24,7 @@ import SoknadMedToDelerTekster from '../components/soknad-med-to-deler/soknad-me
 import SoknaderTekster from '../components/soknader/soknader-tekster'
 import TeaserTekster from '../components/soknader/teaser/teaser-tekster'
 import BendiksenTekster from '../components/sporsmal/bendiksen/bendiksen-tekster'
-import BjornTekster from '../components/sporsmal/bjorn/bjorn-tekster'
+import GuidepanelTekster from '../components/sporsmal/guidepanel/guidepanel-tekster'
 import { EkspanderbarHjelpTekster } from '../components/sporsmal/ekspanderbar-hjelp/ekspanderbar-hjelp-tekst'
 import { EndringUtenEndringTekster } from '../components/sporsmal/endring-uten-endring/endring-uten-endring-tekster'
 import KnapperadTekster from '../components/sporsmal/sporsmal-form/knapperad-tekster'
@@ -37,7 +37,7 @@ const tekster = {
     ...PersonvernLesMerTekster,
     ...SoknaderTekster,
     ...BannerTekster,
-    ...BjornTekster,
+    ...GuidepanelTekster,
     ...KnapperadTekster,
     ...SoknadenTekster,
     ...SporsmalTekster,

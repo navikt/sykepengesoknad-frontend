@@ -1,15 +1,16 @@
 import { BodyShort, Label } from '@navikt/ds-react'
 import dayjs from 'dayjs'
 import React from 'react'
+import parser from 'html-react-parser'
 
 import { Periode, Sykmelding } from '../../types/sykmelding'
 import { getDuration } from '../../utils/dato-utils'
 import { erOppdelt } from '../../utils/periode-utils'
 import { sorterEtterEldsteTom } from '../../utils/sykmelding-utils'
 import { tekst } from '../../utils/tekster'
-import Bjorn from '../sporsmal/bjorn/bjorn'
 import Vis from '../vis'
 import { Soknad } from '../../types/types'
+import { ProgressivtGuidePanel } from '../guidepanel/ProgressivtGuidePanel'
 
 interface SykmeldingPerioderProps {
     valgtSoknad: Soknad
@@ -77,10 +78,11 @@ const SykmeldingPerioder = ({ valgtSoknad, valgtSykmelding }: SykmeldingPerioder
                     </div>
                 )
             })}
-            <Vis
-                hvis={erOppdelt(valgtSoknad, valgtSykmelding)}
-                render={() => <Bjorn nokkel="sykepengesoknad.sykmelding-utdrag.oppdelt.bjorn" />}
-            />
+            {erOppdelt(valgtSoknad, valgtSykmelding) && (
+                <ProgressivtGuidePanel>
+                    <BodyShort>{parser(tekst('sykepengesoknad.sykmelding-utdrag.oppdelt.bjorn'))}</BodyShort>
+                </ProgressivtGuidePanel>
+            )}
         </div>
     )
 }

@@ -9,11 +9,13 @@ import AnimateOnMount from '../../animate-on-mount'
 import FeilLokal from '../../feil/feil-lokal'
 import { utlandssoknadUrl } from '../../soknad/soknad-link'
 import Vis from '../../vis'
-import Bjorn from '../bjorn/bjorn'
 import KnapperadAvbryt from '../sporsmal-form/knapperad-avbryt'
 import { SpmProps } from '../sporsmal-form/sporsmal-form'
 import { hentFeilmelding } from '../sporsmal-utils'
 import UndersporsmalListe from '../undersporsmal/undersporsmal-liste'
+import { ProgressivtGuidePanel } from '../../guidepanel/ProgressivtGuidePanel'
+
+import styles from './JaNeiRadio.module.css'
 
 const jaNeiValg = [
     {
@@ -123,7 +125,9 @@ const JaNeiRadio = ({ sporsmal }: SpmProps) => {
             <Vis
                 hvis={sporsmal.tag === TagTyper.SYKMELDINGSGRAD && watchJaNei === 'NEI'}
                 render={() => (
-                    <Bjorn className="press" nokkel="sykepengesoknad-utland.skjema.bjorn" ekstraMarginTop={true} />
+                    <ProgressivtGuidePanel className={styles.guidepanelWrapper}>
+                        <BodyShort>{parser(tekst('sykepengesoknad-utland.skjema.bjorn'))}</BodyShort>
+                    </ProgressivtGuidePanel>
                 )}
             />
 
@@ -131,11 +135,10 @@ const JaNeiRadio = ({ sporsmal }: SpmProps) => {
                 hvis={sporsmal.tag === TagTyper.FERIE && watchJaNei === 'JA'}
                 render={() => (
                     <>
-                        <Bjorn
-                            className="press"
-                            nokkel="sykepengesoknad-utland.skjema.ferie-sporsmal-bjorn"
-                            ekstraMarginTop={true}
-                        />
+                        <ProgressivtGuidePanel className={styles.guidepanelWrapper}>
+                            <BodyShort>{parser(tekst('sykepengesoknad-utland.skjema.ferie-sporsmal-bjorn'))}</BodyShort>
+                        </ProgressivtGuidePanel>
+
                         <KnapperadAvbryt />
                     </>
                 )}
