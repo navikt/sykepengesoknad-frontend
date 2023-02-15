@@ -1,5 +1,4 @@
-import { GuidePanel } from '@navikt/ds-react'
-import { GuidePanelProps } from '@navikt/ds-react/src/guide-panel/GuidePanel'
+import { GuidePanel, GuidePanelProps } from '@navikt/ds-react'
 
 import { useWindowSize } from '../../utils/useWindowSize'
 

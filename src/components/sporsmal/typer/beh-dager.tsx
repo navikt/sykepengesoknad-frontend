@@ -2,7 +2,7 @@ import { Label } from '@navikt/ds-react'
 import React from 'react'
 
 import FeilLokal from '../../feil/feil-lokal'
-import BjornUnderSporsmalstekst from '../bjorn/bjorn-under-sporsmalstekst'
+import GuidepanelUnderSporsmalstekst from '../guidepanel/GuidepanelUnderSporsmalstekst'
 import { SpmProps } from '../sporsmal-form/sporsmal-form'
 
 import BehandlingsUke from './behandlings-uke'
@@ -14,7 +14,7 @@ const BehDager = ({ sporsmal }: SpmProps) => {
                 {sporsmal.sporsmalstekst}
             </Label>
 
-            <BjornUnderSporsmalstekst sporsmal={sporsmal} />
+            <GuidepanelUnderSporsmalstekst sporsmal={sporsmal} />
 
             <div className="skjemaelement">
                 <div className="skjema__beh-dager">

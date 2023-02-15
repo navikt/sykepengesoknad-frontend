@@ -1,6 +1,7 @@
 import { BodyShort, Link } from '@navikt/ds-react'
 import React from 'react'
 import { useParams } from 'react-router'
+import parser from 'html-react-parser'
 
 import { TagTyper } from '../../../types/enums'
 import { RSSoknadstatus } from '../../../types/rs-types/rs-soknadstatus'
@@ -12,10 +13,11 @@ import { SpmProps } from '../sporsmal-form/sporsmal-form'
 import { fjernIndexFraTag } from '../sporsmal-utils'
 import { RouteParams } from '../../../app'
 import useSoknad from '../../../hooks/useSoknad'
+import { ProgressivtGuidePanel } from '../../guidepanel/ProgressivtGuidePanel'
 
-import Bjorn from './bjorn'
+import styles from './GuidepanelUnderSporsmalstekst.module.css'
 
-const BjornUnderSporsmalstekst = ({ sporsmal }: SpmProps) => {
+const GuidepanelUnderSporsmalstekst = ({ sporsmal }: SpmProps) => {
     const { id } = useParams<RouteParams>()
     const { data: valgtSoknad } = useSoknad(id)
     const { logEvent } = useAmplitudeInstance()
@@ -31,11 +33,18 @@ const BjornUnderSporsmalstekst = ({ sporsmal }: SpmProps) => {
 
     return (
         <>
-            <Vis hvis={bjornVeileder(sporsmal.tag)} render={() => <Bjorn className="blokk-m" nokkel={bjornTekst} />} />
+            <Vis
+                hvis={bjornVeileder(sporsmal.tag)}
+                render={() => (
+                    <ProgressivtGuidePanel className={styles.guidepanelWrapper}>
+                        <BodyShort>{parser(tekst(bjornTekst as any))}</BodyShort>
+                    </ProgressivtGuidePanel>
+                )}
+            />
             <Vis
                 hvis={bjornVeilederOgMaaler(sporsmal.tag)}
                 render={() => (
-                    <Bjorn className="blokk-m">
+                    <ProgressivtGuidePanel className={styles.guidepanelWrapper}>
                         <BodyShort>
                             {tekst(bjornTekst as any)}
                             <Link
@@ -50,11 +59,11 @@ const BjornUnderSporsmalstekst = ({ sporsmal }: SpmProps) => {
                                 {tekst((bjornTekst + '_lenketekst') as any)}
                             </Link>
                         </BodyShort>
-                    </Bjorn>
+                    </ProgressivtGuidePanel>
                 )}
             />
         </>
     )
 }
 
-export default BjornUnderSporsmalstekst
+export default GuidepanelUnderSporsmalstekst

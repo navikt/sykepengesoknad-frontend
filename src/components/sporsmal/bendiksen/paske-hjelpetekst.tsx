@@ -11,9 +11,10 @@ import Vis from '../../vis'
 import { SpmProps } from '../sporsmal-form/sporsmal-form'
 import { RouteParams } from '../../../app'
 import useSoknad from '../../../hooks/useSoknad'
+import { ProgressivtGuidePanel } from '../../guidepanel/ProgressivtGuidePanel'
 
-import Bendiksen from './bendiksen'
-
+import { Bendiksen } from './bendiksen'
+import styles from './PaskeHjelpetekst.module.css'
 const PaskeHjelpetekst = ({ sporsmal }: SpmProps) => {
     const { id } = useParams<RouteParams>()
     const { data: valgtSoknad } = useSoknad(id)
@@ -28,11 +29,10 @@ const PaskeHjelpetekst = ({ sporsmal }: SpmProps) => {
         <Vis
             hvis={paskeVeileder(sporsmal.tag)}
             render={() => (
-                <div className="bendiksen-container">
-                    <div className="bendiksen-hjelpetekst">
+                <div className={styles.wrapper}>
+                    <ProgressivtGuidePanel illustration={<Bendiksen />}>
                         <Label as="h2">{tekst('soknad.bendiksen.paske.label')}</Label>
                         <BodyShort spacing>{tekst('soknad.bendiksen.paske.tekst')}</BodyShort>
-
                         <BodyShort>
                             {parser(tekst('soknad.bendiksen.paske.tips'))}
                             <Link
@@ -47,9 +47,7 @@ const PaskeHjelpetekst = ({ sporsmal }: SpmProps) => {
                                 {tekst('soknad.bendiksen.paske.lenketekst')}
                             </Link>
                         </BodyShort>
-                    </div>
-
-                    <Bendiksen />
+                    </ProgressivtGuidePanel>
                 </div>
             )}
         />

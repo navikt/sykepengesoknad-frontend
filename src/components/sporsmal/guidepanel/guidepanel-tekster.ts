@@ -1,4 +1,4 @@
-const BjornTekster = {
+const GuidepanelTekster = {
     'soknad.bjorn.brukte_reisetilskuddet':
         'Takk for svarene du har gitt om selve sykefraværet. <br /><br />Nå skal vi spørre deg om utgifter du har hatt til reiser til og fra jobben. Har du ikke hatt noen ekstrautgifter, svarer du bare nei og sender søknaden.',
     'soknad.bjorn.enkeltstaende_behandlingsdager':
@@ -29,4 +29,4 @@ const BjornTekster = {
         'Du får ikke sykepenger mens du har ferie. Det betyr at du ikke trenger å sende denne søknaden. God tur!',
 }
 
-export default BjornTekster
+export default GuidepanelTekster
