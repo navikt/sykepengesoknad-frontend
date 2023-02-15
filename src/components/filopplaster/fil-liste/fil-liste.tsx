@@ -64,7 +64,7 @@ const FilListe = ({ fjernKnapp, setValgtKvittering, setOpenModal }: Props) => {
                                     <th role="columnheader" className="belop">
                                         Beløp
                                     </th>
-                                    <th />
+                                    <td />
                                 </tr>
                             </thead>
                         )}
