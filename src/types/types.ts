@@ -34,6 +34,8 @@ export class Soknad {
     opprettetDato: Date
     sendtTilNAVDato?: Date
     sendtTilArbeidsgiverDato?: Date
+    utenlandskSykmelding?: boolean
+
     arbeidsgiver?: Arbeidsgiver
     sporsmal: Sporsmal[]
     soknadPerioder: RSSoknadsperiode[]
@@ -48,6 +50,7 @@ export class Soknad {
         this.soknadstype = RSSoknadstype[type]
         const stat = soknad.status as keyof typeof RSSoknadstatus
         this.status = RSSoknadstatus[stat]
+        this.utenlandskSykmelding = soknad.utenlandskSykmelding
         this.fom = dayjsToDate(soknad.fom!)!
         this.tom = dayjsToDate(soknad.tom!)!
         this.korrigerer = soknad.korrigerer || undefined

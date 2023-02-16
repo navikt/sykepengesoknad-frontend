@@ -106,6 +106,9 @@ const SoknadenTekster = {
     'sykepengesoknad.kvittering.til-nav-arbeidsledig.tittel': 'Søknaden er sendt!',
     'sykepengesoknad.kvittering.tittel': 'Søknaden er sendt!',
     'sykepengesoknad.navigasjon.gaa-til': 'Gå til dine søknader',
+    'sykepengesoknad.bor_i_norge.tittel': 'Bosted',
+    'sykepengesoknad.lonnet_arbeid_utenfor_norge.tittel': 'Lønnet arbeid utenfor Norge',
+    'sykepengesoknad.turnus_rotasjon.tittel': 'Turnus/rotasjon',
 }
 
 export default SoknadenTekster

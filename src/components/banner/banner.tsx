@@ -38,6 +38,14 @@ const Banner = ({ overskrift }: BannerProps) => {
             <Heading size="xlarge" level="1" className="sidebanner__tittel">
                 {overskrift === undefined ? tittel() : overskrift}
                 <Vis
+                    hvis={valgtSoknad && valgtSoknad.utenlandskSykmelding}
+                    render={() => (
+                        <Heading size="small" as="span">
+                            Med egenerklæring for utenlandske sykemeldinger
+                        </Heading>
+                    )}
+                />
+                <Vis
                     hvis={valgtSoknad && valgtSoknad.fom && valgtSoknad.tom}
                     render={() => (
                         <Heading size="medium" as="span">
