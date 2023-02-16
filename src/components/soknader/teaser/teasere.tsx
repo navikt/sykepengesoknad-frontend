@@ -10,7 +10,7 @@ import FremtidigeSoknaderTeaser from './fremtidige-soknader-teaser'
 import NyeSoknaderTeaser from './nye-soknader-teaser'
 import TidligereSoknaderTeaser from './tidligere-soknader-teaser'
 import UtgaattSoknaderTeaser from './utgatt-soknader-teaser'
-
+import styles from './teasere.module.css'
 interface SoknaderTeasereProps {
     soknader: RSSoknadmetadata[]
     className?: string
@@ -48,7 +48,7 @@ const Teasere = ({ soknader, className, tittel, tomListeTekst, id, kanSorteres =
                 <Vis
                     hvis={kanSorteres && sorterteSoknader().length > 0}
                     render={() => (
-                        <div className="skjemaelement inngangspanel__sortering">
+                        <div className={styles.sortering}>
                             <label className="skjemaelement__label" htmlFor="select_sort">
                                 Sorter etter
                             </label>

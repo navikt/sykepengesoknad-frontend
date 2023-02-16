@@ -1,11 +1,6 @@
 .teasere__header {
     padding: 1rem 0;
 }
-.teasere__header .inngangspanel__sortering {
-    display: inline-block;
-    position: absolute;
-    right: 1rem;
-}
 .teasere__header .teasere__header__tittel {
     margin-top: 3rem;
 }
