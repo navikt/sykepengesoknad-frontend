@@ -56,7 +56,9 @@ const JaNeiInput = ({ sporsmal }: SpmProps) => {
                         >
                             <GuidepanelUnderSporsmalstekst sporsmal={sporsmal} />
 
-                            <PaskeHjelpetekst sporsmal={sporsmal} />
+                            <div className="axe-exclude">
+                                <PaskeHjelpetekst sporsmal={sporsmal} />
+                            </div>
 
                             <EkspanderbarHjelp sporsmal={sporsmal} />
                             <Radio

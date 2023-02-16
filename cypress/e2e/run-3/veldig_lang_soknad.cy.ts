@@ -1,5 +1,7 @@
 import { veldigLangSoknad } from '../../../src/data/mock/data/soknader-integration'
 import { Soknad } from '../../../src/types/types'
+import { setPeriodeFraTil } from '../../support/utilities'
+import 'cypress-file-upload'
 
 describe('Tester støtte for gamle spørsmål', () => {
     //-----
@@ -27,17 +29,6 @@ describe('Tester støtte for gamle spørsmål', () => {
 
         cy.get(className).click()
         cy.get('.rdp-day').contains(velgDato).first().click()
-    }
-
-    function velgPeriode() {
-        const fom = '12'
-        const tom = '15'
-        const className = '.ds-datepicker__calendarButton'
-
-        cy.get('.fom ' + className).click()
-        cy.get('.DayPicker-Day').contains(fom).click()
-        cy.get('.tom ' + className).click()
-        cy.get('.DayPicker-Day').contains(tom).click()
     }
 
     function velgKalenderdag() {
@@ -139,19 +130,19 @@ describe('Tester støtte for gamle spørsmål', () => {
     })
     it('ARBEIDSLEDIG_UTLAND', () => {
         svarJaHovedsporsmal()
-        velgPeriode()
+        setPeriodeFraTil(12, 15)
         svarRadio('Har du søkt om å beholde sykepengene for disse dagene?', 'Ja')
         gaVidere()
     })
     it('EGENMELDINGER', () => {
         svarJaHovedsporsmal()
         svarSykMedEgenmelding()
-        velgPeriode()
+        setPeriodeFraTil(12, 15)
         gaVidere()
     })
     it('FRAVAR_FOR_SYKMELDINGEN', () => {
         svarJaHovedsporsmal()
-        velgPeriode()
+        setPeriodeFraTil(12, 15)
         gaVidere()
     })
     it('ENKELTSTAENDE_BEHANDLINGSDAGER', () => {
@@ -160,19 +151,19 @@ describe('Tester støtte for gamle spørsmål', () => {
     })
     it('FERIE_V2', () => {
         svarJaHovedsporsmal()
-        velgPeriode()
+        setPeriodeFraTil(12, 15)
         gaVidere()
     })
     it('FERIE_PERMISJON_UTLAND', () => {
         svarJaHovedsporsmal()
         velgCheckbox('Jeg tok ut ferie')
-        velgPeriode()
+        setPeriodeFraTil(12, 15)
         gaVidere()
     })
     it('FRAVER_FOR_BEHANDLING', () => {
         svarJaHovedsporsmal()
         svarSykMedEgenmelding()
-        velgPeriode()
+        setPeriodeFraTil(12, 15)
         gaVidere()
     })
     it('FRISKMELDT', () => {
@@ -202,12 +193,12 @@ describe('Tester støtte for gamle spørsmål', () => {
         gaVidere()
     })
     it('PERIODEUTLAND', () => {
-        velgPeriode()
+        setPeriodeFraTil(12, 15)
         gaVidere()
     })
     it('PERMISJON_V2', () => {
         svarJaHovedsporsmal()
-        velgPeriode()
+        setPeriodeFraTil(12, 15)
         gaVidere()
     })
     it('PERMITTERT_NAA', () => {
@@ -217,7 +208,7 @@ describe('Tester støtte for gamle spørsmål', () => {
     })
     it('PERMITTERT_PERIODE', () => {
         svarJaHovedsporsmal()
-        velgPeriode()
+        setPeriodeFraTil(12, 15)
         gaVidere()
     })
     it('TILBAKE_I_ARBEID', () => {
@@ -233,13 +224,13 @@ describe('Tester støtte for gamle spørsmål', () => {
     })
     it('UTLAND', () => {
         svarJaHovedsporsmal()
-        velgPeriode()
+        setPeriodeFraTil(12, 15)
         svarRadio('Har du søkt om å beholde sykepengene for disse dagene?', 'Ja')
         gaVidere()
     })
     it('UTLAND_V2', () => {
         svarJaHovedsporsmal()
-        velgPeriode()
+        setPeriodeFraTil(12, 15)
         gaVidere()
     })
     it('BRUKTE_REISETILSKUDDET', () => {

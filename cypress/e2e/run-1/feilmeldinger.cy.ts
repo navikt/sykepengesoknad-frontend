@@ -14,11 +14,12 @@ describe('Tester feilmeldinger', () => {
         lokalFeilmelding: string,
         globalFeilmelding: string,
         focusTarget: string,
+        antallForventedeFeil = 1,
     ) {
-        const errorColorRgb = 'rgb(195, 0, 0) 0px 0px 0px 1px inset, rgb(0, 52, 125) 0px 0px 0px 3px'
+        // const errorColorRgb = 'rgb(195, 0, 0) 0px 0px 0px 1px inset, rgb(0, 52, 125) 0px 0px 0px 3px'
 
         cy.get('[data-cy="feil-oppsumering"]').should('exist')
-        cy.get('[data-cy="feil-oppsumering"]').contains(lokalFeilmelding)
+        cy.get('[data-cy="feil-oppsumering"]').contains(globalFeilmelding)
 
         cy.get('[data-cy="feil-lokal"]').should('exist')
         cy.get('[data-cy="feil-lokal"]').contains(lokalFeilmelding)
@@ -26,25 +27,12 @@ describe('Tester feilmeldinger', () => {
         cy.get('[data-cy="feil-oppsumering"]')
             .should('exist')
             .within(() => {
-                cy.contains('Det er 1 feil i skjemaet')
+                cy.contains(`Det er ${antallForventedeFeil} feil i skjemaet`)
                 cy.contains(globalFeilmelding).click()
             })
 
         cy.focused().should('have.attr', 'id', focusTarget)
         cy.focused().should('have.css', 'box-shadow', errorColorRgb)
-    }
-
-    function feilmeldingHandtering(lokalFeilmelding: string, globalFeilmelding: string, focusTarget: string) {
-        cy.get('.skjemaelement__input--harFeil').should('exist')
-        cy.get('.skjemaelement__feilmelding').contains(lokalFeilmelding)
-
-        cy.get('[data-cy="feil-oppsumering"]')
-            .should('exist')
-            .within(() => {
-                cy.contains('Det er 1 feil i skjemaet')
-                cy.contains(globalFeilmelding).click()
-            })
-        cy.focused().should('have.attr', 'name', focusTarget)
     }
 
     //Denne erstatter feilmeldingHandtering funksjonen ettersom vi bytter ut komponentene med de fra designsystemet
@@ -71,7 +59,8 @@ describe('Tester feilmeldinger', () => {
 
     function resetAllePeriodeDateFelter() {
         cy.get('[data-cy="perioder"]')
-            .find('input[type=text]')
+            //.find('input[type=text]')
+            .find('.navds-text-field__input')
             .each(($el) => {
                 cy.wrap($el).clear()
             })
@@ -79,7 +68,7 @@ describe('Tester feilmeldinger', () => {
 
     function setPeriodeDateFieldMedIndex(index: number, datestring: string) {
         /*  Fra og med felter er 0 eller partall og til og med felter er oddetall. */
-        cy.get('[data-cy="perioder"]').find('input[type=text]').eq(index).type(datestring)
+        cy.get('[data-cy="perioder"]').find('.navds-text-field__input').eq(index).type(datestring)
     }
 
     it('CHECKBOX_PANEL ingen valg', () => {
@@ -172,19 +161,22 @@ describe('Tester feilmeldinger', () => {
         gaTilSoknad(arbeidstakerGradert, '4')
         cy.get('input[value=JA]').click({ force: true })
         gaVidere()
-        feilmeldingHandtering(
-            'Du må oppgi en fra og med dato',
-            'Du må oppgi en fra og med dato',
+
+        feilmeldingHandteringForNyDatepicker(
+            'Du må oppgi en fra og med dato i formatet dd.mm.åååå',
+            'Du må oppgi en fra og med dato i formatet dd.mm.åååå',
             arbeidstakerGradert.sporsmal[3].undersporsmal[0].id + '_0_fom',
         )
     })
 
     it('PERIODER ingen tom', () => {
-        cy.focused().type('15.04.2020')
+        resetAllePeriodeDateFelter()
+        setPeriodeDateFieldMedIndex(0, '15.04.2020')
+        // cy.focused().type('15.04.2020')
         gaVidere()
-        feilmeldingHandtering(
-            'Du må oppgi en til og med dato',
-            'Du må oppgi en til og med dato',
+        feilmeldingHandteringForNyDatepicker(
+            'Du må oppgi en til og med dato i formatet dd.mm.åååå',
+            'Du må oppgi en til og med dato i formatet dd.mm.åååå',
             arbeidstakerGradert.sporsmal[3].undersporsmal[0].id + '_0_tom',
         )
     })
@@ -192,9 +184,9 @@ describe('Tester feilmeldinger', () => {
     it('PERIODER ugyldig format', () => {
         cy.focused().clear().type('abc')
         gaVidere()
-        feilmeldingHandtering(
-            'Til og med følger ikke formatet dd.mm.åååå',
-            'Til og med følger ikke formatet dd.mm.åååå',
+        feilmeldingHandteringForNyDatepicker(
+            'Du må oppgi en til og med dato i formatet dd.mm.åååå',
+            'Du må oppgi en til og med dato i formatet dd.mm.åååå',
             arbeidstakerGradert.sporsmal[3].undersporsmal[0].id + '_0_tom',
         )
     })
@@ -202,10 +194,10 @@ describe('Tester feilmeldinger', () => {
     it('PERIODER tom før fom', () => {
         cy.focused().clear().type('10.04.2020')
         gaVidere()
-        feilmeldingHandtering(
-            'Fra og med må være før til og med',
-            'Fra og med må være før til og med',
-            arbeidstakerGradert.sporsmal[3].undersporsmal[0].id + '_0_fom',
+        feilmeldingHandteringForNyDatepicker(
+            'Til og med må være etter fra og med',
+            'Til og med må være etter fra og med',
+            arbeidstakerGradert.sporsmal[3].undersporsmal[0].id + '_0_tom',
         )
     })
 
@@ -213,10 +205,12 @@ describe('Tester feilmeldinger', () => {
         resetAllePeriodeDateFelter()
         setPeriodeDateFieldMedIndex(1, '01.04.2020')
         cy.contains('+ Legg til ekstra periode').click()
-        feilmeldingHandtering(
-            'Du må oppgi en fra og med dato',
-            'Du må oppgi en fra og med dato',
+        gaVidere()
+        feilmeldingHandteringForNyDatepicker(
+            'Du må oppgi en fra og med dato i formatet dd.mm.åååå',
+            'Du må oppgi en fra og med dato i formatet dd.mm.åååå',
             arbeidstakerGradert.sporsmal[3].undersporsmal[0].id + '_0_fom',
+            2,
         )
     })
 
@@ -226,9 +220,9 @@ describe('Tester feilmeldinger', () => {
         setPeriodeDateFieldMedIndex(1, '20.04.2020')
         setPeriodeDateFieldMedIndex(2, '21.04.2020')
         cy.focused().blur()
-        feilmeldingHandtering(
-            'Du må oppgi en til og med dato',
-            'Du må oppgi en til og med dato',
+        feilmeldingHandteringForNyDatepicker(
+            'Du må oppgi en til og med dato i formatet dd.mm.åååå',
+            'Du må oppgi en til og med dato i formatet dd.mm.åååå',
             arbeidstakerGradert.sporsmal[3].undersporsmal[0].id + '_1_tom',
         )
 
@@ -238,10 +232,11 @@ describe('Tester feilmeldinger', () => {
         setPeriodeDateFieldMedIndex(2, '20.04.2020')
         setPeriodeDateFieldMedIndex(3, '24.04.2020')
         cy.focused().blur()
-        feilmeldingHandtering(
+        feilmeldingHandteringForNyDatepicker(
             'Perioder kan ikke overlappe',
             'Du kan ikke legge inn perioder som overlapper med hverandre',
             arbeidstakerGradert.sporsmal[3].undersporsmal[0].id + '_1_fom',
+            1,
         )
     })
 

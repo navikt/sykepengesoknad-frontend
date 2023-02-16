@@ -1,10 +1,8 @@
-import { Datepicker } from '@navikt/ds-datepicker'
-import { BodyShort } from '@navikt/ds-react'
+import { BodyShort, RangeValidationT, UNSAFE_DatePicker, UNSAFE_useRangeDatepicker } from '@navikt/ds-react'
+import dayjs from 'dayjs'
 import React, { useEffect, useState } from 'react'
 import { Controller, useFormContext } from 'react-hook-form'
 
-import { skalBrukeFullskjermKalender } from '../../../utils/browser-utils'
-import { kalkulerStartsmaneden } from '../../../utils/dato-utils'
 import { validerFom, validerPeriode, validerTom } from '../../../utils/sporsmal/valider-periode'
 import { tekst } from '../../../utils/tekster'
 import Vis from '../../vis'
@@ -12,11 +10,12 @@ import { hentPeriode } from '../hent-svar'
 import { SpmProps } from '../sporsmal-form/sporsmal-form'
 import { hentFeilmelding } from '../sporsmal-utils'
 
+import styles from './periode-komp.module.css'
+
 interface PeriodeProps {
     index: number
     slettPeriode: (e: any, idx: number) => void
 }
-
 export interface FormPeriode {
     fom: string
     tom: string
@@ -31,9 +30,11 @@ const PeriodeKomp = ({ sporsmal, index, slettPeriode }: AllProps) => {
         formState: { errors, isSubmitted },
         trigger,
     } = useFormContext()
+
     const [periode, setPeriode] = useState<FormPeriode>({ fom: '', tom: '' })
     const id = sporsmal.id + '_' + index
     const feilmelding = hentFeilmelding(sporsmal, errors[id])
+    const [rangeValidation, setRangeValidation] = useState<RangeValidationT | null>(null)
 
     useEffect(() => {
         const periode = hentPeriode(sporsmal, index)
@@ -41,27 +42,37 @@ const PeriodeKomp = ({ sporsmal, index, slettPeriode }: AllProps) => {
         // eslint-disable-next-line
     }, [sporsmal])
 
-    const onChange = (fom?: string, tom?: string) => {
-        const nyFom = fom ? fom : ''
-        const nyTom = tom ? tom : ''
-        const nyPeriode = { fom: nyFom, tom: nyTom }
-
-        setPeriode(nyPeriode)
-        setValue(id, nyPeriode)
-
-        if (isSubmitted) {
-            trigger(id)
-        }
-    }
+    const { datepickerProps, toInputProps, fromInputProps } = UNSAFE_useRangeDatepicker({
+        fromDate: sporsmal.min ? new Date(sporsmal.min) : new Date('1900'),
+        toDate: sporsmal.max ? new Date(sporsmal.max) : new Date(),
+        defaultMonth: sporsmal.max ? new Date(sporsmal.max) : new Date(),
+        onRangeChange: (range) => {
+            const fom = range?.from ? dayjs(range?.from).format('YYYY-MM-DD') : ''
+            const tom = range?.to ? dayjs(range?.to).format('YYYY-MM-DD') : ''
+            const nyPeriode = { fom: fom, tom: tom }
+            setPeriode(nyPeriode)
+            setValue(id, nyPeriode)
+        },
+        openOnFocus: false,
+        allowTwoDigitYear: false,
+        onValidate: (val) => {
+            setRangeValidation(val)
+            if (isSubmitted) {
+                trigger(id)
+            }
+        },
+    })
 
     return (
-        <li id={id}>
-            <div className="periode">
+        <li id={id} data-cy="periode">
+            <div>
                 <Controller
+                    name={id}
                     rules={{
                         validate: {
                             fom: () => {
-                                const validert = validerFom(sporsmal, id, getValues())
+                                const validert = validerFom(sporsmal, id, getValues(), rangeValidation)
+
                                 const div: HTMLElement | null = document.getElementById(id + '_fom')!.parentElement
                                 if (validert !== true) {
                                     div?.classList.add('skjemaelement__input--harFeil')
@@ -71,7 +82,8 @@ const PeriodeKomp = ({ sporsmal, index, slettPeriode }: AllProps) => {
                                 return validert
                             },
                             tom: () => {
-                                const validert = validerTom(sporsmal, id, getValues())
+                                // return true
+                                const validert = validerTom(sporsmal, id, getValues(), rangeValidation)
                                 const div: HTMLElement | null = document.getElementById(id + '_tom')!.parentElement
                                 if (validert !== true) {
                                     div?.classList.add('skjemaelement__input--harFeil')
@@ -92,69 +104,45 @@ const PeriodeKomp = ({ sporsmal, index, slettPeriode }: AllProps) => {
                             },
                         },
                     }}
-                    name={id}
                     render={() => (
-                        <fieldset className="skjemagruppe">
-                            <div className="fom skjemaelement">
-                                <Datepicker
-                                    locale="nb"
-                                    id={sporsmal.id + '_' + index + '_fom'}
-                                    label={tekst('sykepengesoknad.periodevelger.fom')}
-                                    onChange={(value: any) => onChange(value, periode.tom)}
-                                    value={periode.fom}
-                                    inputName={sporsmal.id + '_' + index + '_fom'}
-                                    calendarSettings={{
-                                        showWeekNumbers: true,
-                                        position: skalBrukeFullskjermKalender(),
-                                    }}
-                                    showYearSelector={false}
-                                    limitations={{
-                                        weekendsNotSelectable: false,
-                                        minDate: sporsmal.min || undefined,
-                                        maxDate: sporsmal.max || undefined,
-                                    }}
-                                    dayPickerProps={{
-                                        initialMonth: kalkulerStartsmaneden(sporsmal),
-                                    }}
-                                />
-                            </div>
-                            <div className="tom skjemaelement">
-                                <Datepicker
-                                    locale="nb"
-                                    id={sporsmal.id + '_' + index + '_tom'}
-                                    label={tekst('sykepengesoknad.periodevelger.tom')}
-                                    onChange={(value: any) => onChange(periode.fom, value)}
-                                    value={periode.tom}
-                                    inputName={sporsmal.id + '_' + index + '_tom'}
-                                    calendarSettings={{
-                                        showWeekNumbers: true,
-                                        position: skalBrukeFullskjermKalender(),
-                                    }}
-                                    showYearSelector={false}
-                                    limitations={{
-                                        weekendsNotSelectable: false,
-                                        minDate: sporsmal.min || undefined,
-                                        maxDate: sporsmal.max || undefined,
-                                    }}
-                                    dayPickerProps={{
-                                        initialMonth: kalkulerStartsmaneden(sporsmal),
-                                    }}
-                                />
-                            </div>
-                        </fieldset>
-                    )}
-                />
-                <Vis
-                    hvis={index > 0}
-                    render={() => (
-                        <button
-                            role="link"
-                            id={'btn_' + id}
-                            className="lenkeknapp navds-link slett"
-                            onClick={(e) => slettPeriode(e, index)}
-                        >
-                            {tekst('sykepengesoknad.periodevelger.slett')}
-                        </button>
+                        <div>
+                            <fieldset className="skjemagruppe axe-exclude ">
+                                <UNSAFE_DatePicker {...datepickerProps}>
+                                    <div className={styles.displayasrow}>
+                                        <UNSAFE_DatePicker.Input
+                                            {...fromInputProps}
+                                            label={tekst('sykepengesoknad.periodevelger.fom')}
+                                            id={sporsmal.id + '_' + index + '_fom'}
+                                            className={styles.doubletoppadding}
+                                            value={periode.fom ? dayjs(periode.fom).format('DD.MM.YYYY') : undefined}
+                                        />
+
+                                        <UNSAFE_DatePicker.Input
+                                            {...toInputProps}
+                                            label={tekst('sykepengesoknad.periodevelger.tom')}
+                                            id={sporsmal.id + '_' + index + '_tom'}
+                                            className={styles.toppadding}
+                                            value={periode.tom ? dayjs(periode.tom).format('DD.MM.YYYY') : undefined}
+                                        />
+                                        <div className={styles.toppadding}>
+                                            <Vis
+                                                hvis={index > 0}
+                                                render={() => (
+                                                    <button
+                                                        role="link"
+                                                        id={'btn_' + id}
+                                                        className="lenkeknapp navds-link linkatbottom"
+                                                        onClick={(e) => slettPeriode(e, index)}
+                                                    >
+                                                        {tekst('sykepengesoknad.periodevelger.slett')}
+                                                    </button>
+                                                )}
+                                            />
+                                        </div>
+                                    </div>
+                                </UNSAFE_DatePicker>
+                            </fieldset>
+                        </div>
                     )}
                 />
             </div>
@@ -163,7 +151,7 @@ const PeriodeKomp = ({ sporsmal, index, slettPeriode }: AllProps) => {
                 <Vis
                     hvis={errors[id]}
                     render={() => (
-                        <BodyShort as="span" className="skjemaelement__feilmelding">
+                        <BodyShort as="span" className="skjemaelement__feilmelding" data-cy="feil-lokal">
                             {feilmelding.lokal}
                         </BodyShort>
                     )}

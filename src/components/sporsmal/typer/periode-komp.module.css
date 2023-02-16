@@ -1,0 +1,25 @@
+.toppadding {
+    padding-top: 8px;
+    justify-items: bottom;
+}
+
+.toppadding > * {
+    bottom: 0;
+}
+
+.doubletoppadding {
+    padding-top: 16px;
+}
+
+@media (min-width: 768px) {
+    .displayasrow {
+        display: flex;
+        flex-direction: row;
+        column-gap: 8px;
+        align-items: flex-end;
+    }
+
+    .displayasrow > * {
+        padding-top: 8px;
+    }
+}

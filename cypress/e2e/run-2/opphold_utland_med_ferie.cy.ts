@@ -1,5 +1,6 @@
 import { soknaderOpplaering as soknader } from '../../../src/data/mock/data/opplaering'
 import { RSSoknad } from '../../../src/types/rs-types/rs-soknad'
+import { setPeriodeFraTil } from '../../support/utilities'
 
 describe('Tester søknad om å beholde sykepenger utenfor EØS', () => {
     const soknad = soknader.find((sok: RSSoknad) => sok.id === 'b9d67b0d-b1f8-44a5-bcbd-6010b60b90ce')!
@@ -23,10 +24,7 @@ describe('Tester søknad om å beholde sykepenger utenfor EØS', () => {
         cy.contains('Opplysninger fra sykmeldingen').should('not.exist')
         cy.contains('Når skal du reise?')
 
-        cy.get('#1_0 .fom .ds-datepicker__calendarButton').click()
-        cy.get('.DayPicker-Day').contains('17').click()
-        cy.get('#1_0 .tom .ds-datepicker__calendarButton').click()
-        cy.get('.DayPicker-Day').contains('24').click()
+        setPeriodeFraTil(17, 24)
 
         cy.contains('Gå videre').click()
     })

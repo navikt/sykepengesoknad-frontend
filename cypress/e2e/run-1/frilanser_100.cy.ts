@@ -1,4 +1,5 @@
 import { frilanser } from '../../../src/data/mock/data/opplaering'
+import { setPeriodeFraTil } from '../../support/utilities'
 
 describe('Tester frilansersøknad', () => {
     //-----
@@ -107,10 +108,8 @@ describe('Tester frilansersøknad', () => {
 
         // Underspørsmål 1
         cy.contains('Når var du utenfor EØS?')
-        cy.get('#687448_0 .fom .ds-datepicker__calendarButton').click()
-        cy.get('.DayPicker-Day').contains('17').click()
-        cy.get('#687448_0 .tom .ds-datepicker__calendarButton').click()
-        cy.get('.DayPicker-Day').contains('24').click()
+
+        setPeriodeFraTil(14, 22)
 
         // Underspørsmål 2 - Ja
         cy.contains('Har du søkt om å beholde sykepengene for disse dagene?')

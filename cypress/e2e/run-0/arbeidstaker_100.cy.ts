@@ -1,4 +1,5 @@
 import { arbeidstaker } from '../../../src/data/mock/data/opplaering'
+import { setPeriodeFraTil } from '../../support/utilities'
 
 describe('Tester arbeidstakersøknad', () => {
     //-----
@@ -78,10 +79,8 @@ describe('Tester arbeidstakersøknad', () => {
         // Test spørsmål
         cy.get('.radioGruppe-jaNei input[value=JA]').click({ force: true })
         cy.contains('Når tok du ut feriedager?')
-        cy.get('#687344_0 .fom .ds-datepicker__calendarButton').click()
-        cy.get('.DayPicker-Day').contains('16').click()
-        cy.get('#687344_0 .tom .ds-datepicker__calendarButton').click()
-        cy.get('.DayPicker-Day').contains('23').click()
+
+        setPeriodeFraTil(16, 23)
 
         cy.contains('Gå videre').click()
     })
@@ -99,10 +98,8 @@ describe('Tester arbeidstakersøknad', () => {
         // Test spørsmål
         cy.get('.radioGruppe-jaNei input[value=JA]').click({ force: true })
         cy.contains('Når tok du permisjon?')
-        cy.get('#687346_0 .fom .ds-datepicker__calendarButton').click()
-        cy.get('.DayPicker-Day').contains('14').click()
-        cy.get('#687346_0 .tom .ds-datepicker__calendarButton').click()
-        cy.get('.DayPicker-Day').contains('22').click()
+
+        setPeriodeFraTil(14, 22)
 
         cy.contains('Gå videre').click()
     })
@@ -113,10 +110,8 @@ describe('Tester arbeidstakersøknad', () => {
         // Test spørsmål
         cy.get('.radioGruppe-jaNei input[value=JA]').click({ force: true })
         cy.contains('Når var du utenfor EØS?')
-        cy.get('#687348_0 .fom .ds-datepicker__calendarButton').click()
-        cy.get('.DayPicker-Day').contains('14').click()
-        cy.get('#687348_0 .tom .ds-datepicker__calendarButton').click()
-        cy.get('.DayPicker-Day').contains('22').click()
+
+        setPeriodeFraTil(14, 22)
 
         cy.contains('Gå videre').click()
     })

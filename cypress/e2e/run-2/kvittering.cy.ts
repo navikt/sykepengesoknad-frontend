@@ -11,6 +11,7 @@ import {
     selvstendigKvittering,
     sendtArbeidsledigKvittering,
 } from '../../../src/data/mock/data/soknader-integration'
+import { setPeriodeFraTil } from '../../support/utilities'
 
 describe('Tester kvittering', () => {
     context('Arbeidsledig', () => {
@@ -108,10 +109,8 @@ describe('Tester kvittering', () => {
             })
 
             // Svar og send
-            cy.get('#1_0 .fom .ds-datepicker__calendarButton').click()
-            cy.get('.DayPicker-Day').contains('17').click()
-            cy.get('#1_0 .tom .ds-datepicker__calendarButton').click()
-            cy.get('.DayPicker-Day').contains('24').click()
+            setPeriodeFraTil(14, 22)
+
             cy.contains('Gå videre').click()
             cy.get('.skjemaelement__input').type('Fransk')
             cy.contains('Søre franske territorier').click({ force: true })

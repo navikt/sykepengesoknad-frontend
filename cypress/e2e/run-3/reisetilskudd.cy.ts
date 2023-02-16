@@ -162,8 +162,11 @@ describe('Teste førsteside i reisetilskuddsøknaden', () => {
             cy.contains('Legg til reiseutgift')
             cy.get('select[name=transportmiddel]').select('TAXI')
             cy.get('input[name=belop_input]').type('1234')
-            cy.get('.filopplasteren input[type=file]').attachFile('kvittering.jpg')
-            cy.get('.lagre-kvittering').contains('Bekreft').click()
+
+            cy.get('[data-cy="opplasting-form"]')
+                .find('input[type=file]')
+                .selectFile({ contents: 'cypress/fixtures/kvittering.jpg' }, { force: true })
+            cy.get('[data-cy="knapperad"]').contains('Bekreft').click()
         })
 
         it('Fil list oppdateres med kvittering', () => {
@@ -191,7 +194,6 @@ describe('Teste førsteside i reisetilskuddsøknaden', () => {
                 cy.contains('Slett')
                 cy.contains('Bekreft').should('not.exist')
             })
-            // cy.get('.opplasting_modal > .navds-modal__button').click() // hva er det meningen å trykke på her??
             cy.get('[data-cy="opplasting-modal-tilbake"]').click()
         })
 
@@ -217,7 +219,10 @@ describe('Teste førsteside i reisetilskuddsøknaden', () => {
             cy.contains('Legg til reiseutgift')
             cy.get('select[name=transportmiddel]').select('TAXI')
             cy.get('input[name=belop_input]').type('1234')
-            cy.get('.filopplasteren input[type=file]').attachFile('kvittering.jpg')
+
+            cy.get('[data-cy="filopplasteren"]')
+                .find('input[type=file]')
+                .selectFile({ contents: 'cypress/fixtures/kvittering.jpg' }, { force: true })
             cy.get('.lagre-kvittering').contains('Bekreft').click()
 
             cy.get('.sumlinje').should('exist')
@@ -293,7 +298,10 @@ describe('Teste førsteside i reisetilskuddsøknaden', () => {
 
         describe('Kvittering feilmeldinger', () => {
             it('Legger inn gyldig kvittering', () => {
-                cy.get('.filopplasteren input[type=file]').attachFile('kvittering.jpg')
+                cy.get('[data-cy="filopplasteren"]')
+                    .find('input[type=file]')
+                    .selectFile({ contents: 'cypress/fixtures/kvittering.jpg' }, { force: true })
+
                 cy.get('.lagre-kvittering').contains('Bekreft').click()
             })
 

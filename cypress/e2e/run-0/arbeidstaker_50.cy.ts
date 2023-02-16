@@ -1,4 +1,5 @@
 import { arbeidstakerGradert } from '../../../src/data/mock/data/opplaering'
+import { setPeriodeFraTil } from '../../support/utilities'
 
 describe('Tester arbeidstakersøknad - gradert 50%', () => {
     const soknad = arbeidstakerGradert
@@ -47,12 +48,7 @@ describe('Tester arbeidstakersøknad - gradert 50%', () => {
         cy.contains(
             'Hvilke dager var du syk og borte fra jobb, før du ble sykmeldt? Du trenger bare oppgi dager før 1. april 2020.',
         )
-        cy.get('#687299_0 .fom .ds-datepicker__calendarButton').click()
-
-        cy.get('.DayPicker-Day').contains('11').click()
-        cy.get('#687299_0 .tom .ds-datepicker__calendarButton').click()
-        cy.get('.DayPicker-Day').contains('12').click()
-
+        setPeriodeFraTil(11, 12)
         cy.contains('Gå videre').click()
     })
 
@@ -74,10 +70,8 @@ describe('Tester arbeidstakersøknad - gradert 50%', () => {
         // Test spørsmål
         cy.get('.radioGruppe-jaNei input[value=JA]').click({ force: true })
         cy.contains('Når tok du ut feriedager?')
-        cy.get('#687305_0 .fom .ds-datepicker__calendarButton').click()
-        cy.get('.DayPicker-Day').contains('16').click()
-        cy.get('#687305_0 .tom .ds-datepicker__calendarButton').click()
-        cy.get('.DayPicker-Day').contains('23').click()
+
+        setPeriodeFraTil(16, 23)
 
         cy.contains('Gå videre').click()
     })
@@ -88,10 +82,8 @@ describe('Tester arbeidstakersøknad - gradert 50%', () => {
         // Test spørsmål
         cy.get('.radioGruppe-jaNei input[value=JA]').click({ force: true })
         cy.contains('Når tok du permisjon?')
-        cy.get('#687307_0 .fom .ds-datepicker__calendarButton').click()
-        cy.get('.DayPicker-Day').contains('14').click()
-        cy.get('#687307_0 .tom .ds-datepicker__calendarButton').click()
-        cy.get('.DayPicker-Day').contains('22').click()
+
+        setPeriodeFraTil(14, 22)
 
         cy.contains('Gå videre').click()
     })
@@ -102,11 +94,8 @@ describe('Tester arbeidstakersøknad - gradert 50%', () => {
         // Test spørsmål
         cy.get('.radioGruppe-jaNei input[value=JA]').click({ force: true })
         cy.contains('Når var du utenfor EØS?')
-        cy.get('#687309_0 .fom .ds-datepicker__calendarButton').click()
-        cy.get('.DayPicker-Day').contains('14').click()
-        cy.get('#687309_0 .tom .ds-datepicker__calendarButton').click()
-        cy.get('.DayPicker-Day').contains('22').click()
 
+        setPeriodeFraTil(14, 22)
         cy.contains('Gå videre').click()
     })
 
