@@ -20,6 +20,9 @@ const Banner = ({ overskrift }: BannerProps) => {
 
     const tittel = () => {
         if (valgtSoknad) {
+            if (valgtSoknad.utenlandskSykmelding === true) {
+                return 'Egenerklæring for utenlandske sykmeldinger'
+            }
             if (valgtSoknad.soknadstype === RSSoknadstype.OPPHOLD_UTLAND) {
                 return tekst('sykepengesoknad-utland.tittel')
             }
@@ -37,14 +40,6 @@ const Banner = ({ overskrift }: BannerProps) => {
         <header className="sidebanner">
             <Heading size="xlarge" level="1" className="sidebanner__tittel">
                 {overskrift === undefined ? tittel() : overskrift}
-                <Vis
-                    hvis={valgtSoknad && valgtSoknad.utenlandskSykmelding}
-                    render={() => (
-                        <Heading size="small" as="span">
-                            Med egenerklæring for utenlandske sykemeldinger
-                        </Heading>
-                    )}
-                />
                 <Vis
                     hvis={valgtSoknad && valgtSoknad.fom && valgtSoknad.tom}
                     render={() => (
