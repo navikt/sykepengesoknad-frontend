@@ -12,11 +12,12 @@ import Vis from '../../vis'
 import PaskeHjelpetekst from '../bendiksen/paske-hjelpetekst'
 import GuidepanelUnderSporsmalstekst from '../guidepanel/GuidepanelUnderSporsmalstekst'
 import { EkspanderbarHjelp } from '../ekspanderbar-hjelp/ekspanderbar-hjelp'
-import { SpmProps } from '../sporsmal-form/sporsmal-form'
 import { hentFeilmelding, sporsmalIdListe } from '../sporsmal-utils'
 import UndersporsmalListe from '../undersporsmal/undersporsmal-liste'
+import { InfoUnderSporsmalstekst } from '../infotekst/info-under-sporsmalstekst'
+import { Soknad, Sporsmal } from '../../../types/types'
 
-const JaNeiInput = ({ sporsmal }: SpmProps) => {
+const JaNeiInput = ({ sporsmal, soknad }: { sporsmal: Sporsmal; soknad?: Soknad }) => {
     const {
         formState: { errors },
         clearErrors,
@@ -50,6 +51,7 @@ const JaNeiInput = ({ sporsmal }: SpmProps) => {
                     render={({ field }) => (
                         <RadioGroup {...field} legend={sporsmal.sporsmalstekst} className="radioGruppe-jaNei">
                             <GuidepanelUnderSporsmalstekst sporsmal={sporsmal} />
+                            <InfoUnderSporsmalstekst sporsmal={sporsmal} soknad={soknad} />
 
                             <PaskeHjelpetekst sporsmal={sporsmal} />
 

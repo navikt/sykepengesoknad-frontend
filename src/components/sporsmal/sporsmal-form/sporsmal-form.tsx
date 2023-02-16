@@ -243,7 +243,7 @@ const SporsmalForm = () => {
                 >
                     <GuidepanelOverSporsmalstekst sporsmal={sporsmal} />
 
-                    <SporsmalSwitch sporsmal={sporsmal} />
+                    <SporsmalSwitch sporsmal={sporsmal} soknad={valgtSoknad} />
 
                     <Vis
                         hvis={erSiste && !erUtlandssoknad}

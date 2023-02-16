@@ -20,9 +20,6 @@ export const EkspanderbarHjelpTekster = {
     'ekspanderbarhjelp.tilbake_i_arbeid_gradert_reisetilskudd.tittel': 'Hvorfor spør vi om dette?',
     'ekspanderbarhjelp.tilbake_i_arbeid_gradert_reisetilskudd.innhold':
         'Det er helt greit å gå tilbake til vanlig jobb før sykmeldingen er slutt - hvis du er klar for det. Da svarer du ja og skriver inn den dagen du ikke lenger trengte sykmelding og  reisetilskudd.',
-    'ekspanderbarhjelp.tilbake_i_arbeid.tittel': 'Hvorfor spør vi om dette?',
-    'ekspanderbarhjelp.tilbake_i_arbeid.innhold':
-        'Det er helt greit å gå tilbake til vanlig jobb før sykmeldingen er slutt - hvis du er klar for det. Da svarer du ja og skriver inn den dagen du ikke lenger trengte sykmelding.',
     'ekspanderbarhjelp.arbeid_underveis_100_prosent.tittel': 'Hvorfor spør vi om dette?',
     'ekspanderbarhjelp.arbeid_underveis_100_prosent.innhold':
         'Hvis du er i form til det, kan du jobbe selv om du er helt sykmeldt. Du må da registrere antall timer eller prosent du har jobbet i denne perioden. Vi trenger disse opplysningene for å beregne hvor mye du skal få utbetalt i sykepenger, fordi du har bare rett til sykepenger for den delen du ikke er i jobb.',
