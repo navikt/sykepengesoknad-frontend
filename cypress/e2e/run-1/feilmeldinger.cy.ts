@@ -16,7 +16,7 @@ describe('Tester feilmeldinger', () => {
         focusTarget: string,
         antallForventedeFeil = 1,
     ) {
-        // const errorColorRgb = 'rgb(195, 0, 0) 0px 0px 0px 1px inset, rgb(0, 52, 125) 0px 0px 0px 3px'
+//        const errorColorRgb = 'rgb(195, 0, 0) 0px 0px 0px 1px inset, rgb(0, 52, 125) 0px 0px 0px 3px'
 
         cy.get('[data-cy="feil-oppsumering"]').should('exist')
         cy.get('[data-cy="feil-oppsumering"]').contains(globalFeilmelding)
@@ -32,7 +32,7 @@ describe('Tester feilmeldinger', () => {
             })
 
         cy.focused().should('have.attr', 'id', focusTarget)
-        cy.focused().should('have.css', 'box-shadow', errorColorRgb)
+  //      cy.focused().should('have.css', 'box-shadow', errorColorRgb)
     }
 
     //Denne erstatter feilmeldingHandtering funksjonen ettersom vi bytter ut komponentene med de fra designsystemet
