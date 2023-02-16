@@ -1,11 +1,11 @@
 import React from 'react'
 import { BodyLong } from '@navikt/ds-react'
 
-import { Soknad, Sporsmal } from '../../../types/types'
 import { TagTyper } from '../../../types/enums'
 import { Ekspanderbar } from '../../ekspanderbar/ekspanderbar'
+import { SpmProps } from '../sporsmal-form/sporsmal-form'
 
-export const InfoUnderSporsmalstekst = ({ sporsmal }: { sporsmal: Sporsmal; soknad?: Soknad }) => {
+export const InfoUnderSporsmalstekst = ({ sporsmal }: SpmProps) => {
     if (sporsmal.tag == TagTyper.TILBAKE_I_ARBEID) {
         return (
             <Ekspanderbar

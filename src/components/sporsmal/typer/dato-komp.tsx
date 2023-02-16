@@ -1,8 +1,7 @@
 import React, { forwardRef, Ref, SVGProps } from 'react'
 import { useController, useFormContext } from 'react-hook-form'
-import {BodyLong, UNSAFE_DatePicker, UNSAFE_useDatepicker} from '@navikt/ds-react'
+import { BodyLong, UNSAFE_DatePicker, UNSAFE_useDatepicker } from '@navikt/ds-react'
 import dayjs from 'dayjs'
-import { BodyLong } from '@navikt/ds-react'
 
 import FeilLokal from '../../feil/feil-lokal'
 import { SpmProps } from '../sporsmal-form/sporsmal-form'
@@ -56,12 +55,12 @@ const DatoInput = ({ sporsmal }: SpmProps) => {
             {sporsmal.tag == TagTyper.TILBAKE_NAR && field.value && (
                 <CustomAlert>
                     Svaret ditt betyr at du har vært i fullt arbeid fra{` `}
-                    {tilLesbarPeriodeMedArstall(field.value, sporsmal.max)}. Du får ikke utbetalt sykepenger
-                    for denne perioden
+                    {tilLesbarPeriodeMedArstall(field.value, sporsmal.max)}. Du får ikke utbetalt sykepenger for denne
+                    perioden
                     <span style={{ color: '#595959', display: 'block', marginTop: '1em' }}>
-                                    (Hvis du bare var delvis tilbake i jobb svarer du nei på dette spørsmålet og oppgir
-                                    antall timer senere i søknaden.)
-                                </span>
+                        (Hvis du bare var delvis tilbake i jobb svarer du nei på dette spørsmålet og oppgir antall timer
+                        senere i søknaden.)
+                    </span>
                 </CustomAlert>
             )}
 
@@ -75,8 +74,6 @@ const DatoInput = ({ sporsmal }: SpmProps) => {
 }
 
 export default DatoInput
-
-
 
 // eslint-disable-next-line react/display-name
 const CustomAlert = ({ children }: { children: React.ReactNode }) => (

@@ -217,7 +217,7 @@ export const brukertestSoknad: RSSoknad = {
         {
             id: '1623808',
             tag: 'TILBAKE_I_ARBEID',
-            sporsmalstekst: `Var du tilbake i fullt arbeid hos ${hovedjobb}, i løpet av perioden ${periodeTekst}?`,
+            sporsmalstekst: `Var du tilbake i fullt arbeid hos ${hovedjobb} i løpet av perioden ${periodeTekst}?`,
             undertekst: null,
             svartype: 'JA_NEI',
             min: null,

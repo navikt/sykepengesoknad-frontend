@@ -1,7 +1,6 @@
 import React from 'react'
 
 import { RSSvartype } from '../../types/rs-types/rs-svartype'
-import { Soknad, Sporsmal } from '../../types/types'
 
 import BehDager from './typer/beh-dager'
 import CheckboxKomp from './typer/checkbox-komp'
@@ -17,8 +16,9 @@ import Perioder from './typer/perioder'
 import RadioKomp from './typer/radio-komp'
 import TallKomp from './typer/tall-komp'
 import UkjentSporsmal from './typer/ukjent-sporsmal'
+import { SpmProps } from './sporsmal-form/sporsmal-form'
 
-const SporsmalSwitch = ({ sporsmal, soknad }: { sporsmal: Sporsmal; soknad?: Soknad }) => {
+const SporsmalSwitch = ({ sporsmal }: SpmProps) => {
     switch (sporsmal.svartype) {
         case RSSvartype.CHECKBOX_PANEL:
             return <CheckboxPanel sporsmal={sporsmal} />
@@ -44,7 +44,7 @@ const SporsmalSwitch = ({ sporsmal, soknad }: { sporsmal: Sporsmal; soknad?: Sok
             ) {
                 return <JaNeiRadio sporsmal={sporsmal} />
             }
-            return <JaNeiInput sporsmal={sporsmal} soknad={soknad} />
+            return <JaNeiInput sporsmal={sporsmal} />
 
         case RSSvartype.TIMER:
         case RSSvartype.PROSENT:

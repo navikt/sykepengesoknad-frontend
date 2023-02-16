@@ -15,9 +15,9 @@ import { EkspanderbarHjelp } from '../ekspanderbar-hjelp/ekspanderbar-hjelp'
 import { hentFeilmelding, sporsmalIdListe } from '../sporsmal-utils'
 import UndersporsmalListe from '../undersporsmal/undersporsmal-liste'
 import { InfoUnderSporsmalstekst } from '../infotekst/info-under-sporsmalstekst'
-import { Soknad, Sporsmal } from '../../../types/types'
+import { SpmProps } from '../sporsmal-form/sporsmal-form'
 
-const JaNeiInput = ({ sporsmal, soknad }: { sporsmal: Sporsmal; soknad?: Soknad }) => {
+const JaNeiInput = ({ sporsmal }: SpmProps) => {
     const {
         formState: { errors },
         clearErrors,
@@ -51,7 +51,7 @@ const JaNeiInput = ({ sporsmal, soknad }: { sporsmal: Sporsmal; soknad?: Soknad 
                     render={({ field }) => (
                         <RadioGroup {...field} legend={sporsmal.sporsmalstekst} className="radioGruppe-jaNei">
                             <GuidepanelUnderSporsmalstekst sporsmal={sporsmal} />
-                            <InfoUnderSporsmalstekst sporsmal={sporsmal} soknad={soknad} />
+                            <InfoUnderSporsmalstekst sporsmal={sporsmal} />
 
                             <PaskeHjelpetekst sporsmal={sporsmal} />
 
