@@ -11,10 +11,9 @@ import { utlandssoknadUrl } from '../../soknad/soknad-link'
 import Vis from '../../vis'
 import PaskeHjelpetekst from '../bendiksen/paske-hjelpetekst'
 import GuidepanelUnderSporsmalstekst from '../guidepanel/GuidepanelUnderSporsmalstekst'
-import { EkspanderbarHjelp } from '../ekspanderbar-hjelp/ekspanderbar-hjelp'
+import { EkspanderbarHjelp } from '../../hjelpetekster/ekspanderbar-hjelp/ekspanderbar-hjelp'
 import { hentFeilmelding, sporsmalIdListe } from '../sporsmal-utils'
 import UndersporsmalListe from '../undersporsmal/undersporsmal-liste'
-import { InfoUnderSporsmalstekst } from '../infotekst/info-under-sporsmalstekst'
 import { SpmProps } from '../sporsmal-form/sporsmal-form'
 
 const JaNeiInput = ({ sporsmal }: SpmProps) => {
@@ -51,7 +50,6 @@ const JaNeiInput = ({ sporsmal }: SpmProps) => {
                     render={({ field }) => (
                         <RadioGroup {...field} legend={sporsmal.sporsmalstekst} className="radioGruppe-jaNei">
                             <GuidepanelUnderSporsmalstekst sporsmal={sporsmal} />
-                            <InfoUnderSporsmalstekst sporsmal={sporsmal} />
 
                             <PaskeHjelpetekst sporsmal={sporsmal} />
 

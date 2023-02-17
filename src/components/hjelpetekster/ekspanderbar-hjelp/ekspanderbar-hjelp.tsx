@@ -8,12 +8,12 @@ import { RSArbeidssituasjon } from '../../../types/rs-types/rs-arbeidssituasjon'
 import { RSSoknadstype } from '../../../types/rs-types/rs-soknadstype'
 import { tekst } from '../../../utils/tekster'
 import { Ekspanderbar } from '../../ekspanderbar/ekspanderbar'
-import Vis from '../../vis'
-import { SpmProps } from '../sporsmal-form/sporsmal-form'
-import { fjernIndexFraTag } from '../sporsmal-utils'
+import { SpmProps } from '../../sporsmal/sporsmal-form/sporsmal-form'
+import { fjernIndexFraTag } from '../../sporsmal/sporsmal-utils'
 import { RouteParams } from '../../../app'
 import useSoknad from '../../../hooks/useSoknad'
 
+import styles from './ekspanderbar-hjelp.module.css'
 import { EkspanderbarHjelpTekster } from './ekspanderbar-hjelp-tekst'
 
 export const EkspanderbarHjelp = ({ sporsmal }: SpmProps) => {
@@ -47,30 +47,51 @@ export const EkspanderbarHjelp = ({ sporsmal }: SpmProps) => {
 
     const nokkel = skapNokkel()
 
-    const harTekst = () => {
-        return (
-            `ekspanderbarhjelp.${nokkel}.tittel` in EkspanderbarHjelpTekster &&
-            `ekspanderbarhjelp.${nokkel}.innhold` in EkspanderbarHjelpTekster
-        )
-    }
+    const harTekst = `ekspanderbarhjelp.${nokkel}.tittel` in EkspanderbarHjelpTekster
 
-    if (nokkel && harTekst()) {
+    if (nokkel && harTekst) {
         const tittel = tekst(`ekspanderbarhjelp.${nokkel}.tittel` as any)
+
+        const EkspanderbarInnhold = () => {
+            if (sporsmal.tag == TagTyper.TILBAKE_I_ARBEID) {
+                return <TilbakeIArbeidHjelpBody />
+            }
+            return <BodyLong>{parser(tekst(`ekspanderbarhjelp.${nokkel}.innhold` as any))}</BodyLong>
+        }
 
         return (
             <Ekspanderbar
                 title={tittel}
-                className="intern"
                 sporsmalId={sporsmal.id}
                 amplitudeProps={{
                     component: tittel,
                     sporsmaltag: nokkel,
                 }}
             >
-                <BodyLong>{parser(tekst(`ekspanderbarhjelp.${nokkel}.innhold` as any))}</BodyLong>
+                <EkspanderbarInnhold />
             </Ekspanderbar>
         )
     }
 
     return null
+}
+
+const TilbakeIArbeidHjelpBody = () => {
+    return (
+        <>
+            <BodyLong>{EkspanderbarHjelpTekster['ekspanderbarhjelp.tilbake_i_arbeid.body1']}</BodyLong>
+            <BodyLong className={styles.tilbakeIArbeidBodyMargin}>
+                <span className={styles.underlineItalic}>
+                    {EkspanderbarHjelpTekster['ekspanderbarhjelp.tilbake_i_arbeid.body2.span']}
+                </span>
+                {EkspanderbarHjelpTekster['ekspanderbarhjelp.tilbake_i_arbeid.body2']}
+            </BodyLong>
+            <BodyLong className={styles.tilbakeIArbeidBodyMargin}>
+                <span className={styles.underlineItalic}>
+                    {EkspanderbarHjelpTekster['ekspanderbarhjelp.tilbake_i_arbeid.body3.span']}
+                </span>
+                {EkspanderbarHjelpTekster['ekspanderbarhjelp.tilbake_i_arbeid.body3']}
+            </BodyLong>
+        </>
+    )
 }

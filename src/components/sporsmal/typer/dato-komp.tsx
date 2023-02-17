@@ -1,16 +1,16 @@
-import React, { forwardRef, Ref, SVGProps } from 'react'
+import React from 'react'
 import { useController, useFormContext } from 'react-hook-form'
-import { BodyLong, UNSAFE_DatePicker, UNSAFE_useDatepicker } from '@navikt/ds-react'
+import { UNSAFE_DatePicker, UNSAFE_useDatepicker } from '@navikt/ds-react'
 import dayjs from 'dayjs'
 
 import FeilLokal from '../../feil/feil-lokal'
 import { SpmProps } from '../sporsmal-form/sporsmal-form'
 import UndersporsmalListe from '../undersporsmal/undersporsmal-liste'
 import validerDato from '../../../utils/sporsmal/valider-dato'
-import { TagTyper } from '../../../types/enums'
-import { tilLesbarPeriodeMedArstall } from '../../../utils/dato-utils'
+import { TilbakeIArbeidBesvart } from '../../hjelpetekster/tilbake-i-arbeid-besvart/tilbake-i-arbeid-besvart'
 
-const DatoInput = ({ sporsmal }: SpmProps) => {
+function DatoInput(props: SpmProps) {
+    const { sporsmal } = props
     const {
         formState: { errors },
     } = useFormContext()
@@ -52,17 +52,8 @@ const DatoInput = ({ sporsmal }: SpmProps) => {
                     />
                 </UNSAFE_DatePicker>
             </div>
-            {sporsmal.tag == TagTyper.TILBAKE_NAR && field.value && (
-                <CustomAlert>
-                    Svaret ditt betyr at du har vært i fullt arbeid fra{` `}
-                    {tilLesbarPeriodeMedArstall(field.value, sporsmal.max)}. Du får ikke utbetalt sykepenger for denne
-                    perioden
-                    <span style={{ color: '#595959', display: 'block', marginTop: '1em' }}>
-                        (Hvis du bare var delvis tilbake i jobb svarer du nei på dette spørsmålet og oppgir antall timer
-                        senere i søknaden.)
-                    </span>
-                </CustomAlert>
-            )}
+
+            <TilbakeIArbeidBesvart sporsmal={sporsmal} fieldValue={field.value} />
 
             <FeilLokal sporsmal={sporsmal} />
 
@@ -74,54 +65,3 @@ const DatoInput = ({ sporsmal }: SpmProps) => {
 }
 
 export default DatoInput
-
-// eslint-disable-next-line react/display-name
-const CustomAlert = ({ children }: { children: React.ReactNode }) => (
-    <div
-        style={{
-            backgroundColor: '#F1F1F1',
-            border: 'none',
-            marginBottom: '1em',
-            marginTop: '1em',
-            display: 'flex',
-            padding: '1rem',
-            gap: '0.75rem',
-        }}
-    >
-        <SvgInformationColored style={{ flexShrink: 0, height: '30px', width: '30px' }} />
-        <BodyLong as="div" className="navds-alert__wrapper">
-            {children}
-        </BodyLong>
-    </div>
-)
-
-interface SVGRProps {
-    title?: string
-    titleId?: string
-}
-
-// eslint-disable-next-line react/display-name
-const SvgInformationColored = forwardRef(
-    ({ ...props }: SVGProps<SVGSVGElement> & SVGRProps, ref: Ref<SVGSVGElement>) => {
-        return (
-            <svg
-                width="1em"
-                height="1em"
-                viewBox="0 0 24 24"
-                fill="none"
-                xmlns="http://www.w3.org/2000/svg"
-                focusable={false}
-                role="img"
-                ref={ref}
-                {...props}
-            >
-                <path
-                    fillRule="evenodd"
-                    clipRule="evenodd"
-                    d="M0 12C0 5.382 5.382 0 12 0c6.617 0 12 5.382 12 12s-5.383 12-12 12C5.382 24 0 18.618 0 12Zm12-7a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3ZM9 19v-2h2v-5H9v-2h4v7h2v2H9Z"
-                    fill="#595959"
-                />
-            </svg>
-        )
-    },
-)

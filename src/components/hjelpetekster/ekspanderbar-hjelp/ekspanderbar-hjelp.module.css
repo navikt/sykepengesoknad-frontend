@@ -1,0 +1,8 @@
+.tilbakeIArbeidBodyMargin {
+    margin-top: var(--a-spacing-4);
+}
+
+.underlineItalic {
+    text-decoration: underline;
+    font-style: italic;
+}
