@@ -62,7 +62,13 @@ describe('Tester arbeidstakersøknad', () => {
         cy.contains('Når begynte du å jobbe igjen?')
         cy.get('.navds-date__field-button').click()
         cy.get('.rdp-day').contains('20').click()
+        cy.contains(
+            'Svaret ditt betyr at du har vært i fullt arbeid fra 20. – 24. april 2020. Du får ikke utbetalt sykepenger for denne perioden',
+        )
+    })
 
+    it('Søknad TILBAKE_I_ARBEID går videre ', function () {
+        // I egen test for å sjekke axe på hjelpetekst
         cy.contains('Gå videre').click()
     })
 

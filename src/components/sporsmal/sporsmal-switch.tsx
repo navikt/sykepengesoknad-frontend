@@ -1,7 +1,6 @@
 import React from 'react'
 
 import { RSSvartype } from '../../types/rs-types/rs-svartype'
-import { Sporsmal } from '../../types/types'
 
 import BehDager from './typer/beh-dager'
 import CheckboxKomp from './typer/checkbox-komp'
@@ -17,12 +16,9 @@ import Perioder from './typer/perioder'
 import RadioKomp from './typer/radio-komp'
 import TallKomp from './typer/tall-komp'
 import UkjentSporsmal from './typer/ukjent-sporsmal'
+import { SpmProps } from './sporsmal-form/sporsmal-form'
 
-interface UndersporsmalProps {
-    sporsmal: Sporsmal
-}
-
-const SporsmalSwitch = ({ sporsmal }: UndersporsmalProps) => {
+const SporsmalSwitch = ({ sporsmal }: SpmProps) => {
     switch (sporsmal.svartype) {
         case RSSvartype.CHECKBOX_PANEL:
             return <CheckboxPanel sporsmal={sporsmal} />

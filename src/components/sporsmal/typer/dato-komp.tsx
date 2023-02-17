@@ -7,8 +7,10 @@ import FeilLokal from '../../feil/feil-lokal'
 import { SpmProps } from '../sporsmal-form/sporsmal-form'
 import UndersporsmalListe from '../undersporsmal/undersporsmal-liste'
 import validerDato from '../../../utils/sporsmal/valider-dato'
+import { TilbakeIArbeidBesvart } from '../../hjelpetekster/tilbake-i-arbeid-besvart/tilbake-i-arbeid-besvart'
 
-const DatoInput = ({ sporsmal }: SpmProps) => {
+function DatoInput(props: SpmProps) {
+    const { sporsmal } = props
     const {
         formState: { errors },
     } = useFormContext()
@@ -50,6 +52,8 @@ const DatoInput = ({ sporsmal }: SpmProps) => {
                     />
                 </UNSAFE_DatePicker>
             </div>
+
+            <TilbakeIArbeidBesvart sporsmal={sporsmal} fieldValue={field.value} />
 
             <FeilLokal sporsmal={sporsmal} />
 

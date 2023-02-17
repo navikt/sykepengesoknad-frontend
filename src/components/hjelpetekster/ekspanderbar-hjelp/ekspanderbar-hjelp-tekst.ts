@@ -20,9 +20,6 @@ export const EkspanderbarHjelpTekster = {
     'ekspanderbarhjelp.tilbake_i_arbeid_gradert_reisetilskudd.tittel': 'Hvorfor spør vi om dette?',
     'ekspanderbarhjelp.tilbake_i_arbeid_gradert_reisetilskudd.innhold':
         'Det er helt greit å gå tilbake til vanlig jobb før sykmeldingen er slutt - hvis du er klar for det. Da svarer du ja og skriver inn den dagen du ikke lenger trengte sykmelding og  reisetilskudd.',
-    'ekspanderbarhjelp.tilbake_i_arbeid.tittel': 'Hvorfor spør vi om dette?',
-    'ekspanderbarhjelp.tilbake_i_arbeid.innhold':
-        'Det er helt greit å gå tilbake til vanlig jobb før sykmeldingen er slutt - hvis du er klar for det. Da svarer du ja og skriver inn den dagen du ikke lenger trengte sykmelding.',
     'ekspanderbarhjelp.arbeid_underveis_100_prosent.tittel': 'Hvorfor spør vi om dette?',
     'ekspanderbarhjelp.arbeid_underveis_100_prosent.innhold':
         'Hvis du er i form til det, kan du jobbe selv om du er helt sykmeldt. Du må da registrere antall timer eller prosent du har jobbet i denne perioden. Vi trenger disse opplysningene for å beregne hvor mye du skal få utbetalt i sykepenger, fordi du har bare rett til sykepenger for den delen du ikke er i jobb.',
@@ -42,6 +39,16 @@ export const EkspanderbarHjelpTekster = {
     'ekspanderbarhjelp.andre_inntektskilder.innhold':
         'Vi mener bare inntekter som er pensjonsgivende. Som oftest vil det si inntekt fra arbeid du har utført. Penger du får fra NAV, trenger du ikke oppgi selv om de er pensjonsgivende.<br/><br/>Svarer du ja på spørsmålet, får du en liste å krysse av på. Velg frilanser hvis du får fosterhjemsgodtgjørelse eller honorar fra verv, for eksempel styreverv i bedrifter eller borettslag.',
     'ekspanderbarhjelp.utdanning.tittel': 'Sykepenger under utdanning',
+    'ekspanderbarhjelp.tilbake_i_arbeid.tittel': 'Hva betyr dette?',
     'ekspanderbarhjelp.utdanning.innhold':
         'I noen tilfeller kan du ha rett til sykepenger fra NAV mens du studerer. <a target="_blank" href="https://www.nav.no/sykepenger#situasjoner">Les om hvilken type utdanning det gjelder.</a>',
+
+    'ekspanderbarhjelp.tilbake_i_arbeid.body1':
+        'Du kan begynne å jobbe fullt igjen før sykmeldingen er slutt. Vi trenger opplysninger om du var tilbake i fullt arbeid for å beregne hvor mye du skal få utbetalt i sykepenger.',
+    'ekspanderbarhjelp.tilbake_i_arbeid.body2':
+        ', hvis du var fullt tilbake på jobb i løpet av perioden. Dette betyr at du ikke lenger er sykmeldt fra datoen du oppgir under.',
+    'ekspanderbarhjelp.tilbake_i_arbeid.body2.span': 'Svar ja',
+    'ekspanderbarhjelp.tilbake_i_arbeid.body3':
+        ', dersom du kun var delvis tilbake på jobb i denne perioden. Du vil senere i søknaden bli spurt om hvor mange timer du har jobbet.',
+    'ekspanderbarhjelp.tilbake_i_arbeid.body3.span': 'Svar nei',
 }

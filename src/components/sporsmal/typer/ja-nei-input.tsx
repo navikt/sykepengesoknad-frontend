@@ -11,10 +11,10 @@ import { utlandssoknadUrl } from '../../soknad/soknad-link'
 import Vis from '../../vis'
 import PaskeHjelpetekst from '../bendiksen/paske-hjelpetekst'
 import GuidepanelUnderSporsmalstekst from '../guidepanel/GuidepanelUnderSporsmalstekst'
-import { EkspanderbarHjelp } from '../ekspanderbar-hjelp/ekspanderbar-hjelp'
-import { SpmProps } from '../sporsmal-form/sporsmal-form'
+import { EkspanderbarHjelp } from '../../hjelpetekster/ekspanderbar-hjelp/ekspanderbar-hjelp'
 import { hentFeilmelding, sporsmalIdListe } from '../sporsmal-utils'
 import UndersporsmalListe from '../undersporsmal/undersporsmal-liste'
+import { SpmProps } from '../sporsmal-form/sporsmal-form'
 
 const JaNeiInput = ({ sporsmal }: SpmProps) => {
     const {
