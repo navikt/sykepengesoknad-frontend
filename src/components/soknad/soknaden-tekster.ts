@@ -109,6 +109,7 @@ const SoknadenTekster = {
     'sykepengesoknad.bor_i_norge.tittel': 'Bosted',
     'sykepengesoknad.lonnet_arbeid_utenfor_norge.tittel': 'Lønnet arbeid utenfor Norge',
     'sykepengesoknad.turnus_rotasjon.tittel': 'Turnus/rotasjon',
+    'sykepengesoknad.trygd_utenfor_norge.tittel': 'Ytelser i annet EØS land',
 }
 
 export default SoknadenTekster

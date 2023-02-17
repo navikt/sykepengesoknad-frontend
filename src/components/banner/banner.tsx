@@ -18,28 +18,33 @@ const Banner = ({ overskrift }: BannerProps) => {
     const { id } = useParams<RouteParams>()
     const { data: valgtSoknad } = useSoknad(id, id !== undefined)
 
-    const tittel = () => {
+    interface TittelMedSize {
+        tittel: string
+        size: 'xlarge' | 'medium' | 'large'
+    }
+    const tittel = (): TittelMedSize => {
         if (valgtSoknad) {
             if (valgtSoknad.utenlandskSykmelding === true) {
-                return 'Egenerklæring for utenlandske sykmeldinger'
+                return { tittel: 'Egenerklæring for utenlandske sykmeldinger', size: 'medium' }
             }
             if (valgtSoknad.soknadstype === RSSoknadstype.OPPHOLD_UTLAND) {
-                return tekst('sykepengesoknad-utland.tittel')
+                return { tittel: tekst('sykepengesoknad-utland.tittel'), size: 'xlarge' }
             }
             if (valgtSoknad.soknadstype === RSSoknadstype.REISETILSKUDD) {
-                return tekst('reisetilskuddsoknad.tittel')
+                return { tittel: tekst('reisetilskuddsoknad.tittel'), size: 'xlarge' }
             }
             if (valgtSoknad.soknadstype === RSSoknadstype.GRADERT_REISETILSKUDD) {
-                return tekst('gradert-reisetilskuddsoknad.tittel')
+                return { tittel: tekst('gradert-reisetilskuddsoknad.tittel'), size: 'xlarge' }
             }
         }
-        return tekst('sykepengesoknad.sidetittel')
+        return { tittel: tekst('sykepengesoknad.sidetittel'), size: 'xlarge' }
     }
+    const tittelen = tittel()
 
     return (
         <header className="sidebanner">
-            <Heading size="xlarge" level="1" className="sidebanner__tittel">
-                {overskrift === undefined ? tittel() : overskrift}
+            <Heading size={tittelen.size} level="1" className="sidebanner__tittel">
+                {overskrift === undefined ? tittelen.tittel : overskrift}
                 <Vis
                     hvis={valgtSoknad && valgtSoknad.fom && valgtSoknad.tom}
                     render={() => (
