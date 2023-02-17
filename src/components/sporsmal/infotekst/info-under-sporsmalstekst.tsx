@@ -18,12 +18,12 @@ export const InfoUnderSporsmalstekst = ({ sporsmal }: SpmProps) => {
                 }}
             >
                 <BodyLong>
-                    Du kan begynne å jobbe fullt igjen før sykemeldingen er slutt. Vi trenger opplysninger om du var
+                    Du kan begynne å jobbe fullt igjen før sykmeldingen er slutt. Vi trenger opplysninger om du var
                     tilbake i fullt arbeid for å beregne hvor mye du skal få utbetalt i sykepenger.
                 </BodyLong>
                 <BodyLong style={{ marginTop: '1em' }}>
                     <span style={{ textDecoration: 'underline', fontStyle: 'italic' }}>Svar ja</span>, hvis du var fullt
-                    tilbake på jobb i løpet av perioden. Dette betyr at du ikke lenger er sykmeldt fra dato du oppgir
+                    tilbake på jobb i løpet av perioden. Dette betyr at du ikke lenger er sykmeldt fra datoen du oppgir
                     under.{' '}
                 </BodyLong>
                 <BodyLong style={{ marginTop: '1em' }}>

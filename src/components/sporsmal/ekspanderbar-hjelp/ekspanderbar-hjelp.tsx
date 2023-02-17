@@ -54,27 +54,23 @@ export const EkspanderbarHjelp = ({ sporsmal }: SpmProps) => {
         )
     }
 
-    return (
-        <Vis
-            hvis={nokkel && harTekst()}
-            render={() => {
-                const tittel = tekst(`ekspanderbarhjelp.${nokkel}.tittel` as any)
-                return (
-                    <>
-                        <Ekspanderbar
-                            title={tittel}
-                            className="intern"
-                            sporsmalId={sporsmal.id}
-                            amplitudeProps={{
-                                component: tittel,
-                                sporsmaltag: nokkel,
-                            }}
-                        >
-                            <BodyLong>{parser(tekst(`ekspanderbarhjelp.${nokkel}.innhold` as any))}</BodyLong>
-                        </Ekspanderbar>
-                    </>
-                )
-            }}
-        />
-    )
+    if (nokkel && harTekst()) {
+        const tittel = tekst(`ekspanderbarhjelp.${nokkel}.tittel` as any)
+
+        return (
+            <Ekspanderbar
+                title={tittel}
+                className="intern"
+                sporsmalId={sporsmal.id}
+                amplitudeProps={{
+                    component: tittel,
+                    sporsmaltag: nokkel,
+                }}
+            >
+                <BodyLong>{parser(tekst(`ekspanderbarhjelp.${nokkel}.innhold` as any))}</BodyLong>
+            </Ekspanderbar>
+        )
+    }
+
+    return null
 }
