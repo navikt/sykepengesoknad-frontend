@@ -49,31 +49,30 @@ export const EkspanderbarHjelp = ({ sporsmal }: SpmProps) => {
 
     const harTekst = `ekspanderbarhjelp.${nokkel}.tittel` in EkspanderbarHjelpTekster
 
-    if (nokkel && harTekst) {
-        const tittel = tekst(`ekspanderbarhjelp.${nokkel}.tittel` as any)
+    if (!(nokkel && harTekst)) {
+        return null
+    }
+    const tittel = tekst(`ekspanderbarhjelp.${nokkel}.tittel` as any)
 
-        const EkspanderbarInnhold = () => {
-            if (sporsmal.tag == TagTyper.TILBAKE_I_ARBEID) {
-                return <TilbakeIArbeidHjelpBody />
-            }
-            return <BodyLong>{parser(tekst(`ekspanderbarhjelp.${nokkel}.innhold` as any))}</BodyLong>
+    const EkspanderbarInnhold = () => {
+        if (sporsmal.tag == TagTyper.TILBAKE_I_ARBEID) {
+            return <TilbakeIArbeidHjelpBody />
         }
-
-        return (
-            <Ekspanderbar
-                title={tittel}
-                sporsmalId={sporsmal.id}
-                amplitudeProps={{
-                    component: tittel,
-                    sporsmaltag: nokkel,
-                }}
-            >
-                <EkspanderbarInnhold />
-            </Ekspanderbar>
-        )
+        return <BodyLong>{parser(tekst(`ekspanderbarhjelp.${nokkel}.innhold` as any))}</BodyLong>
     }
 
-    return null
+    return (
+        <Ekspanderbar
+            title={tittel}
+            sporsmalId={sporsmal.id}
+            amplitudeProps={{
+                component: tittel,
+                sporsmaltag: nokkel,
+            }}
+        >
+            <EkspanderbarInnhold />
+        </Ekspanderbar>
+    )
 }
 
 const TilbakeIArbeidHjelpBody = () => {
