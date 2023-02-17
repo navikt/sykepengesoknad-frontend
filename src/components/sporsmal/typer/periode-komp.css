@@ -29,6 +29,7 @@
 @media (min-width: 768px) {
     .linkatbottom {
         align-items: bottom;
+        padding-bottom: 17px;
     }
 
     .displayasrow > * {
