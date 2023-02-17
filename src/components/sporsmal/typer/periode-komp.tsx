@@ -63,7 +63,7 @@ const PeriodeKomp = ({ sporsmal, index, slettPeriode }: AllProps) => {
         },
     })
 
-    const backendStrengTilFrontendFormat = (backendDate : string) => {
+    const backendStrengTilFrontendFormat = (backendDate: string) => {
         return dayjs(backendDate).format('DD.MM.YYYY')
     }
 
@@ -118,7 +118,9 @@ const PeriodeKomp = ({ sporsmal, index, slettPeriode }: AllProps) => {
                                             label={tekst('sykepengesoknad.periodevelger.fom')}
                                             id={sporsmal.id + '_' + index + '_fom'}
                                             className={styles.doubletoppadding}
-                                            value={periode.fom ? backendStrengTilFrontendFormat(periode.fom) : undefined}
+                                            value={
+                                                periode.fom ? backendStrengTilFrontendFormat(periode.fom) : undefined
+                                            }
                                         />
 
                                         <UNSAFE_DatePicker.Input
@@ -126,7 +128,9 @@ const PeriodeKomp = ({ sporsmal, index, slettPeriode }: AllProps) => {
                                             label={tekst('sykepengesoknad.periodevelger.tom')}
                                             id={sporsmal.id + '_' + index + '_tom'}
                                             className={styles.toppadding}
-                                            value={periode.tom ? backendStrengTilFrontendFormat(periode.tom) : undefined}
+                                            value={
+                                                periode.tom ? backendStrengTilFrontendFormat(periode.tom) : undefined
+                                            }
                                         />
                                         <div className={styles.toppadding}>
                                             <Vis
