@@ -3,13 +3,12 @@ import parser from 'html-react-parser'
 import React, { useState } from 'react'
 
 import { tekst } from '../../utils/tekster'
-import { useAmplitudeInstance } from '../amplitude/amplitude'
+import { logEvent } from '../amplitude/amplitude'
 
 const OmSykepenger = () => {
     const [open1, setOpen1] = useState<boolean>(false)
     const [open2, setOpen2] = useState<boolean>(false)
     const [open3, setOpen3] = useState<boolean>(false)
-    const { logEvent } = useAmplitudeInstance()
 
     return (
         <Accordion>

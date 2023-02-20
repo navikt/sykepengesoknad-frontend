@@ -11,7 +11,7 @@ import { SpmProps } from '../../sporsmal/sporsmal-form/sporsmal-form'
 import { fjernIndexFraTag } from '../../sporsmal/sporsmal-utils'
 import { RouteParams } from '../../../app'
 import useSoknad from '../../../hooks/useSoknad'
-import { useAmplitudeInstance } from '../../amplitude/amplitude'
+import { logEvent } from '../../amplitude/amplitude'
 
 import styles from './ekspanderbar-hjelp.module.css'
 import { EkspanderbarHjelpTekster } from './ekspanderbar-hjelp-tekst'
@@ -20,7 +20,6 @@ export const EkspanderbarHjelp = ({ sporsmal }: SpmProps) => {
     const { id } = useParams<RouteParams>()
     const { data: valgtSoknad } = useSoknad(id)
     const [expanded, setExpanded] = useState<boolean>(false)
-    const { logEvent } = useAmplitudeInstance()
 
     // Lukker mellom hvert spørsmål
     useEffect(() => {

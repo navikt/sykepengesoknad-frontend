@@ -1,7 +1,7 @@
 import { Accordion, BodyShort, Heading } from '@navikt/ds-react'
 import React, { useEffect, useRef, useState } from 'react'
 
-import { useAmplitudeInstance } from '../amplitude/amplitude'
+import { logEvent } from '../amplitude/amplitude'
 import Vis from '../vis'
 
 interface UtvidbarProps {
@@ -10,7 +10,7 @@ interface UtvidbarProps {
     children: React.ReactNode
     ikon?: string
     ikonHover?: string
-    amplitudeProps?: object
+    amplitudeProps?: Record<string, string | boolean>
     ikonAltTekst?: string
     className?: string
     type?: 'intern' | undefined
@@ -20,7 +20,6 @@ const Utvidbar = (props: UtvidbarProps) => {
     const [erApen, setErApen] = useState<boolean>(props.erApen)
 
     const btnImage = useRef<HTMLImageElement>(null)
-    const { logEvent } = useAmplitudeInstance()
 
     useEffect(() => {
         setErApen(props.erApen)

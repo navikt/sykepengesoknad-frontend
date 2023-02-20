@@ -2,7 +2,7 @@ import { BodyShort, Button, GuidePanel, Heading } from '@navikt/ds-react'
 import React from 'react'
 import { useHistory } from 'react-router-dom'
 
-import { useAmplitudeInstance } from '../amplitude/amplitude'
+import { logEvent } from '../amplitude/amplitude'
 
 interface GuidepanelMedKnappProps {
     heading: string
@@ -13,7 +13,6 @@ interface GuidepanelMedKnappProps {
 }
 
 export const GuidepanelMedKnapp = ({ heading, innhold, knappeTekst, url, komponent }: GuidepanelMedKnappProps) => {
-    const { logEvent } = useAmplitudeInstance()
     const history = useHistory()
 
     logEvent('guidepanel vist', {

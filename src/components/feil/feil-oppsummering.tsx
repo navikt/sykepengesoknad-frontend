@@ -5,7 +5,7 @@ import { useFormContext } from 'react-hook-form'
 import { RSSvartype } from '../../types/rs-types/rs-svartype'
 import { Soknad, Sporsmal } from '../../types/types'
 import { flattenSporsmal } from '../../utils/soknad-utils'
-import { useAmplitudeInstance } from '../amplitude/amplitude'
+import { logEvent } from '../amplitude/amplitude'
 import Vis from '../vis'
 import { FetchError } from '../../utils/fetch'
 
@@ -21,7 +21,6 @@ const FeilOppsummering = ({
     const { formState } = useFormContext()
     const [entries, setEntries] = useState<any[]>([])
     const oppsummering = useRef<HTMLDivElement>(null)
-    const { logEvent } = useAmplitudeInstance()
 
     useEffect(() => {
         setEntries(Object.entries(formState.errors))

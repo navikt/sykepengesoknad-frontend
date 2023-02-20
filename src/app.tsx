@@ -3,7 +3,6 @@ import React from 'react'
 import { BrowserRouter, Redirect, Route, Switch } from 'react-router-dom'
 import { CSSTransition, TransitionGroup } from 'react-transition-group'
 
-import { Amplitude } from './components/amplitude/amplitudeProvider'
 import AvbruttSoknad from './components/avbrutt/avbrutt-soknad'
 import { RefreshHvisFeilState } from './components/feil/refresh-hvis-feil-state'
 import KvitteringSide from './components/kvittering/kvittering-side'
@@ -46,34 +45,32 @@ const App = (): any => {
         <BrowserRouter basename="/syk/sykepengesoknad">
             <OnUrlChange>
                 <StoreProvider>
-                    <Amplitude>
-                        <TransitionGroup component={null}>
-                            <CSSTransition timeout={{ enter: 500, exit: 0 }} classNames="fade">
-                                <main id="maincontent" role="main" tabIndex={-1}>
-                                    <PageWrapper>
-                                        <LabsWarning />
-                                        <RefreshHvisFeilState>
-                                            <Switch>
-                                                <Route exact={true} path="/" component={Soknader} />
-                                                <Route path="/soknader/:id/:stegId" component={Soknad} />
-                                                <Route path="/soknader/:id" component={Soknad} />
-                                                <Route path="/avbrutt/:id" component={AvbruttSoknad} />
-                                                <Route path="/kvittering/:id" component={KvitteringSide} />
-                                                <Route path="/sendt/:id" component={SendtSide} />
-                                                <Route path="/sykepengesoknad-utland" component={OpprettUtland} />
-                                                <Route path="/soknader/">
-                                                    <Redirect to="/" />
-                                                </Route>
-                                                <Route path="">
-                                                    <Redirect to="/" />
-                                                </Route>
-                                            </Switch>
-                                        </RefreshHvisFeilState>
-                                    </PageWrapper>
-                                </main>
-                            </CSSTransition>
-                        </TransitionGroup>
-                    </Amplitude>
+                    <TransitionGroup component={null}>
+                        <CSSTransition timeout={{ enter: 500, exit: 0 }} classNames="fade">
+                            <main id="maincontent" role="main" tabIndex={-1}>
+                                <PageWrapper>
+                                    <LabsWarning />
+                                    <RefreshHvisFeilState>
+                                        <Switch>
+                                            <Route exact={true} path="/" component={Soknader} />
+                                            <Route path="/soknader/:id/:stegId" component={Soknad} />
+                                            <Route path="/soknader/:id" component={Soknad} />
+                                            <Route path="/avbrutt/:id" component={AvbruttSoknad} />
+                                            <Route path="/kvittering/:id" component={KvitteringSide} />
+                                            <Route path="/sendt/:id" component={SendtSide} />
+                                            <Route path="/sykepengesoknad-utland" component={OpprettUtland} />
+                                            <Route path="/soknader/">
+                                                <Redirect to="/" />
+                                            </Route>
+                                            <Route path="">
+                                                <Redirect to="/" />
+                                            </Route>
+                                        </Switch>
+                                    </RefreshHvisFeilState>
+                                </PageWrapper>
+                            </main>
+                        </CSSTransition>
+                    </TransitionGroup>
                 </StoreProvider>
             </OnUrlChange>
         </BrowserRouter>

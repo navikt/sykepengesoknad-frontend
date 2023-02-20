@@ -9,7 +9,7 @@ import { useAppStore } from '../../data/stores/app-store'
 import { Soknad } from '../../types/types'
 import { AuthenticationError, fetchJsonMedRequestId } from '../../utils/fetch'
 import { tekst } from '../../utils/tekster'
-import { useAmplitudeInstance } from '../amplitude/amplitude'
+import { logEvent } from '../amplitude/amplitude'
 import { urlTilSoknad } from '../soknad/soknad-link'
 import { RouteParams } from '../../app'
 import useSoknad from '../../hooks/useSoknad'
@@ -21,13 +21,12 @@ const Endreknapp = () => {
 
     const { setFeilmeldingTekst } = useAppStore()
     const history = useHistory()
-    const { logEvent } = useAmplitudeInstance()
     const [aapen, setAapen] = useState<boolean>(false)
 
     const [korrigerer, setKorrigerer] = useState<boolean>(false)
     const endreKnappTekst = tekst('kvittering.knapp.endre')
     const endreSøknadPopup = 'Endre søknad popup'
-
+    if (!valgtSoknad) return null
     const korriger = async () => {
         if (korrigerer) {
             return
@@ -82,7 +81,7 @@ const Endreknapp = () => {
                     setAapen(false)
                     logEvent('modal lukket', {
                         component: endreSøknadPopup,
-                        soknadstype: valgtSoknad?.soknadstype,
+                        soknadstype: valgtSoknad.soknadstype,
                     })
                 }}
                 open={aapen}
@@ -103,7 +102,7 @@ const Endreknapp = () => {
                             e.preventDefault()
                             logEvent('knapp klikket', {
                                 tekst: tekst('endre.modal.bekreft'),
-                                soknadstype: valgtSoknad?.soknadstype,
+                                soknadstype: valgtSoknad.soknadstype,
                                 component: endreSøknadPopup,
                             })
                             korriger().catch((e: Error) => logger.error(e))

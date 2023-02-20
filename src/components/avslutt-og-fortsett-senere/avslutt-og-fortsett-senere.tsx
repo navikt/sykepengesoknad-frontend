@@ -5,14 +5,13 @@ import { useParams } from 'react-router-dom'
 import { RouteParams } from '../../app'
 import { minSideUrl } from '../../utils/environment'
 import { tekst } from '../../utils/tekster'
-import { useAmplitudeInstance } from '../amplitude/amplitude'
+import { logEvent } from '../amplitude/amplitude'
 import useSoknad from '../../hooks/useSoknad'
 
 const AvsluttOgFortsettSenere = () => {
     const { id, stegId } = useParams<RouteParams>()
     const { data: valgtSoknad } = useSoknad(id)
 
-    const { logEvent } = useAmplitudeInstance()
     const [aapen, setAapen] = useState<boolean>(false)
 
     if (!valgtSoknad) return null

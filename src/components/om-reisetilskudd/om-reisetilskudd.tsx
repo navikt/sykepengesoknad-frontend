@@ -3,11 +3,10 @@ import parser from 'html-react-parser'
 import React, { useState } from 'react'
 
 import { tekst } from '../../utils/tekster'
-import { useAmplitudeInstance } from '../amplitude/amplitude'
+import { logEvent } from '../amplitude/amplitude'
 
 const OmReisetilskudd = () => {
     const [open, setOpen] = useState<boolean>(false)
-    const { logEvent } = useAmplitudeInstance()
 
     return (
         <Accordion>

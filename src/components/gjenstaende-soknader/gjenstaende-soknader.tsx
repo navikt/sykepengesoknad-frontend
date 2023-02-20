@@ -6,7 +6,7 @@ import { RSSoknadstatus } from '../../types/rs-types/rs-soknadstatus'
 import { RSSoknadstype } from '../../types/rs-types/rs-soknadstype'
 import { tallTilSpråk } from '../../utils/tallTilSpraak'
 import { getLedetekst, tekst } from '../../utils/tekster'
-import { useAmplitudeInstance } from '../amplitude/amplitude'
+import { logEvent } from '../amplitude/amplitude'
 import { urlTilSoknad } from '../soknad/soknad-link'
 import { RSSoknadmetadata } from '../../types/rs-types/rs-soknadmetadata'
 import { Soknad } from '../../types/types'
@@ -18,7 +18,6 @@ interface Props {
 
 export const GjenstaendeSoknader = ({ soknader, style }: Props) => {
     const history = useHistory()
-    const { logEvent } = useAmplitudeInstance()
 
     if (soknader.length == 0) {
         return null

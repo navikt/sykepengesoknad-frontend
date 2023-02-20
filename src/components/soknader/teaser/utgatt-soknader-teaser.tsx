@@ -6,9 +6,9 @@ import React, { useState } from 'react'
 import { RSSoknadstype } from '../../../types/rs-types/rs-soknadstype'
 import { tilLesbarPeriodeMedArstall } from '../../../utils/dato-utils'
 import { tekst } from '../../../utils/tekster'
-import { useAmplitudeInstance } from '../../amplitude/amplitude'
 import Vis from '../../vis'
 import { InngangsIkon, InngangsStatus } from '../inngang/inngangspanel'
+import { logEvent } from '../../amplitude/amplitude'
 
 import {
     hentIkon,
@@ -20,7 +20,6 @@ import {
 } from './teaser-util'
 
 const UtgaattSoknaderTeaser = ({ soknad }: SykepengesoknadTeaserProps) => {
-    const { logEvent } = useAmplitudeInstance()
     const [aapen, setAapen] = useState<boolean>(false)
 
     return (

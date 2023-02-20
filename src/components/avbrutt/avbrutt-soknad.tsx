@@ -7,7 +7,7 @@ import { RouteParams } from '../../app'
 import { RSSoknadstatus } from '../../types/rs-types/rs-soknadstatus'
 import { tilLesbarDatoMedArstall } from '../../utils/dato-utils'
 import { tekst } from '../../utils/tekster'
-import { useAmplitudeInstance } from '../amplitude/amplitude'
+import { logEvent } from '../amplitude/amplitude'
 import Banner from '../banner/banner'
 import FristSykepenger from '../frist-sykepenger/frist-sykepenger'
 import { GjenstaendeSoknader, hentGjenstaendeSoknader } from '../gjenstaende-soknader/gjenstaende-soknader'
@@ -25,7 +25,6 @@ const AvbruttSoknad = () => {
     const { data: soknader } = useSoknader()
     const { data: valgtSoknad } = useSoknad(id)
 
-    const { logEvent } = useAmplitudeInstance()
     const history = useHistory()
 
     useUpdateBreadcrumbs(() => [{ ...soknadBreadcrumb, handleInApp: true }], [])
