@@ -83,7 +83,9 @@ export const EkspanderbarHjelp = ({ sporsmal }: SpmProps) => {
                 setExpanded((prev) => !prev)
             }}
         >
-            <EkspanderbarInnhold />
+            <div className={styles.readMoreInnholdWrapper}>
+                <EkspanderbarInnhold />
+            </div>
         </ReadMore>
     )
 }
