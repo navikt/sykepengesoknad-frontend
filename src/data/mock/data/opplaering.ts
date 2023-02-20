@@ -687,7 +687,7 @@ export const arbeidstaker: RSSoknad = {
                         {
                             id: '7b4d4adc-de4f-38fd-a997-e5337fbb9666',
                             tag: 'INNTEKTSKILDE_OMSORGSLONN',
-                            sporsmalstekst: 'omsorgslønn fra kommunen',
+                            sporsmalstekst: 'Kommunal omsorgstønad',
                             undertekst: null,
                             svartype: 'CHECKBOX',
                             min: null,
@@ -1181,7 +1181,7 @@ export const arbeidstakerGradert: RSSoknad = {
                         {
                             id: '7b4d4adc-de4f-38fd-a997-e5337fbb9777',
                             tag: 'INNTEKTSKILDE_OMSORGSLONN',
-                            sporsmalstekst: 'omsorgslønn fra kommunen',
+                            sporsmalstekst: 'Kommunal omsorgstønad',
                             undertekst: null,
                             svartype: 'CHECKBOX',
                             min: null,
@@ -1522,7 +1522,7 @@ export const arbeidsledig: RSSoknad = {
                         {
                             id: '687414',
                             tag: 'INNTEKTSKILDE_OMSORGSLONN',
-                            sporsmalstekst: 'omsorgslønn fra kommunen',
+                            sporsmalstekst: 'Kommunal omsorgstønad',
                             undertekst: null,
                             svartype: 'CHECKBOX',
                             min: null,
