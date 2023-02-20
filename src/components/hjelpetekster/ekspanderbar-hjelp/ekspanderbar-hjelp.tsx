@@ -1,17 +1,17 @@
-import { BodyLong } from '@navikt/ds-react'
+import { BodyLong, ReadMore } from '@navikt/ds-react'
 import parser from 'html-react-parser'
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import { useParams } from 'react-router'
 
 import { TagTyper } from '../../../types/enums'
 import { RSArbeidssituasjon } from '../../../types/rs-types/rs-arbeidssituasjon'
 import { RSSoknadstype } from '../../../types/rs-types/rs-soknadstype'
 import { tekst } from '../../../utils/tekster'
-import { Ekspanderbar } from '../../ekspanderbar/ekspanderbar'
 import { SpmProps } from '../../sporsmal/sporsmal-form/sporsmal-form'
 import { fjernIndexFraTag } from '../../sporsmal/sporsmal-utils'
 import { RouteParams } from '../../../app'
 import useSoknad from '../../../hooks/useSoknad'
+import { useAmplitudeInstance } from '../../amplitude/amplitude'
 
 import styles from './ekspanderbar-hjelp.module.css'
 import { EkspanderbarHjelpTekster } from './ekspanderbar-hjelp-tekst'
@@ -19,6 +19,13 @@ import { EkspanderbarHjelpTekster } from './ekspanderbar-hjelp-tekst'
 export const EkspanderbarHjelp = ({ sporsmal }: SpmProps) => {
     const { id } = useParams<RouteParams>()
     const { data: valgtSoknad } = useSoknad(id)
+    const [expanded, setExpanded] = useState<boolean>(false)
+    const { logEvent } = useAmplitudeInstance()
+
+    // Lukker mellom hvert spørsmål
+    useEffect(() => {
+        setExpanded(false)
+    }, [sporsmal.tag])
 
     if (!valgtSoknad) return null
 
@@ -62,16 +69,24 @@ export const EkspanderbarHjelp = ({ sporsmal }: SpmProps) => {
     }
 
     return (
-        <Ekspanderbar
-            title={tittel}
-            sporsmalId={sporsmal.id}
-            amplitudeProps={{
-                component: tittel,
-                sporsmaltag: nokkel,
+        <ReadMore
+            className={styles.readMoreWrapper}
+            header={tittel}
+            open={expanded}
+            onClick={() => {
+                logEvent(expanded ? 'readmore lukket' : 'readmore åpnet', {
+                    tittel: tittel,
+                    component: 'hjelpetekst',
+                    sporsmaltag: nokkel,
+                })
+
+                setExpanded((prev) => !prev)
             }}
         >
-            <EkspanderbarInnhold />
-        </Ekspanderbar>
+            <div className={styles.readMoreInnholdWrapper}>
+                <EkspanderbarInnhold />
+            </div>
+        </ReadMore>
     )
 }
 

@@ -6,3 +6,13 @@
     text-decoration: underline;
     font-style: italic;
 }
+
+.readMoreWrapper {
+    width: 100%;
+    margin-top: var(--a-spacing-4);
+    margin-bottom: var(--a-spacing-8);
+}
+
+.readMoreInnholdWrapper {
+    margin-top: var(--a-spacing-4);
+}
