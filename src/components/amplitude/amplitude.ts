@@ -1,62 +1,41 @@
-import amplitude from 'amplitude-js'
-import constate from 'constate'
-import { useEffect, useRef } from 'react'
+import { logAmplitudeEvent } from '@navikt/nav-dekoratoren-moduler'
+import { logger } from '@navikt/next-logger'
 
 import { TagTyper } from '../../types/enums'
 import { Kvittering, Sporsmal } from '../../types/types'
 import { amplitudeEnabled } from '../../utils/environment'
 import { hentSvar } from '../sporsmal/hent-svar'
 
-export const [AmplitudeProvider, useAmplitudeInstance] = constate(() => {
-    const instance: any = useRef({
-        _userAgent: '',
-        logEvent: (eventName: string, data?: any) => {
-            // eslint-disable-next-line
-            console.log(`Logger ${eventName} - Event properties: ${JSON.stringify(data)}`)
-            return 1
-        },
-        init: () => {
-            // console.log('Initialiserer mockAmplitude'); // eslint-disable-line
-        },
-    })
+type validEventNames =
+    | 'readmore lukket'
+    | 'readmore åpnet'
+    | 'navigere'
+    | 'skjema validering feilet'
+    | 'alert vist'
+    | 'guidepanel vist'
+    | 'accordion åpnet'
+    | 'accordion lukket'
+    | 'knapp klikket'
+    | 'skjema åpnet'
+    | 'skjema fullført'
+    | 'skjema spørsmål besvart'
+    | 'modal åpnet'
+    | 'modal lukket' //Bruk kun navn fra taksonomien
 
-    useEffect(() => {
+export const logEvent = (eventName: validEventNames, eventData: Record<string, string | boolean>) => {
+    if (window) {
         if (amplitudeEnabled()) {
-            instance.current = amplitude.getInstance()
+            logAmplitudeEvent({
+                origin: 'sykepengesoknad-frontend',
+                eventName,
+                eventData,
+            }).catch((e) => logger.warn(`Feil ved amplitude logging`, e))
+        } else {
+            // eslint-disable-next-line no-console
+            console.log(`Logger ${eventName} - Event properties: ${JSON.stringify(eventData)}!`)
         }
-        instance.current.init('default', '', {
-            apiEndpoint: 'amplitude.nav.no/collect-auto',
-            saveEvents: true,
-            includeUtm: true,
-            includeReferrer: true,
-            platform: window.location.toString(),
-            batchEvents: false,
-        })
-        // eslint-disable-next-line
-    }, [])
-
-    type validEventNames =
-        | 'navigere'
-        | 'skjema validering feilet'
-        | 'alert vist'
-        | 'guidepanel vist'
-        | 'readmore åpnet'
-        | 'readmore lukket'
-        | 'accordion åpnet'
-        | 'accordion lukket'
-        | 'knapp klikket'
-        | 'skjema åpnet'
-        | 'skjema fullført'
-        | 'skjema spørsmål besvart'
-        | 'modal åpnet'
-        | 'modal lukket' //Bruk kun navn fra taksonomien
-
-    function logEvent(eventName: validEventNames, eventProperties: Record<string, any>) {
-        instance.current.logEvent(eventName, eventProperties)
     }
-
-    return { logEvent }
-})
+}
 
 export const hentAnnonymisertSvar = (sporsmal: Sporsmal): any => {
     const hovedSpmSvar = hentSvar(sporsmal)

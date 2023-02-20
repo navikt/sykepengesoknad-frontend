@@ -4,10 +4,10 @@ import { useHistory, useParams } from 'react-router'
 
 import { RouteParams } from '../../../app'
 import { SEPARATOR } from '../../../utils/constants'
-import { useAmplitudeInstance } from '../../amplitude/amplitude'
 import Vis from '../../vis'
 import { pathUtenSteg } from '../sporsmal-utils'
 import useSoknad from '../../../hooks/useSoknad'
+import { logEvent } from '../../amplitude/amplitude'
 
 const innerCls = (aktiv: boolean, ferdig: boolean, disabled: boolean) =>
     cls('stegindikator__steg-inner', {
@@ -26,7 +26,6 @@ const Steg = ({ label, index }: StegProps) => {
     const { id, stegId } = useParams<RouteParams>()
     const { data: valgtSoknad } = useSoknad(id)
 
-    const { logEvent } = useAmplitudeInstance()
     const aktivtSteg = parseInt(stegId)
     const num = index + 1
     const erAktiv = aktivtSteg === num

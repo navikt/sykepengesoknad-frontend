@@ -3,7 +3,7 @@ import parser from 'html-react-parser'
 import React, { MouseEvent, useState } from 'react'
 
 import { tekst } from '../../utils/tekster'
-import { useAmplitudeInstance } from '../amplitude/amplitude'
+import { logEvent } from '../amplitude/amplitude'
 import { RSSoknadstypeType } from '../../types/rs-types/rs-soknadstype'
 
 type Event = MouseEvent<HTMLAnchorElement | HTMLButtonElement>
@@ -14,7 +14,6 @@ export interface PersonvernLesMerProps {
 
 const PersonvernLesMer = ({ soknadstype }: PersonvernLesMerProps) => {
     const [aapen, setAapen] = useState<boolean>(false)
-    const { logEvent } = useAmplitudeInstance()
 
     const handleAapen = (event: Event) => {
         event.preventDefault()

@@ -15,7 +15,7 @@ import { RSSoknadstype } from '../../types/rs-types/rs-soknadstype'
 import { SEPARATOR } from '../../utils/constants'
 import { tekst } from '../../utils/tekster'
 import { setBodyClass } from '../../utils/utils'
-import { useAmplitudeInstance } from '../amplitude/amplitude'
+import { logEvent } from '../amplitude/amplitude'
 import { EldreUsendtSoknad, harEldreUsendtSoknad } from '../eldre-usendt/eldre-usendt-soknad'
 import { EldreUsendtSykmelding } from '../eldre-usendt/eldre-usendt-sykmelding'
 import { eldreUsendteSykmeldinger } from '../eldre-usendt/eldreUsendteSykmeldinger'
@@ -41,7 +41,6 @@ const Soknaden = () => {
     const { data: sykmeldinger } = useSykmeldinger()
     const { data: valgtSykmelding } = useSykmelding(valgtSoknad?.sykmeldingId)
 
-    const { logEvent } = useAmplitudeInstance()
     const history = useHistory()
     const stegNo = parseInt(stegId)
 

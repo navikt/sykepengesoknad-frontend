@@ -1,12 +1,12 @@
 import { Accordion, BodyShort, Label } from '@navikt/ds-react'
 import React, { useEffect, useState } from 'react'
 
-import { useAmplitudeInstance } from '../amplitude/amplitude'
+import { logEvent } from '../amplitude/amplitude'
 
 interface EkspanderbarProps {
     title: string
     className?: string
-    amplitudeProps?: object
+    amplitudeProps?: Record<string, string | boolean>
     children: any
     sporsmalId: string
     logVedVisning?: string
@@ -21,7 +21,6 @@ export const Ekspanderbar = ({
     logVedVisning,
 }: EkspanderbarProps) => {
     const [expanded, setExpanded] = useState<boolean>(false)
-    const { logEvent } = useAmplitudeInstance()
 
     // Lukker mellom hvert spørsmål
     useEffect(() => {

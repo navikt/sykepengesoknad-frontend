@@ -7,20 +7,19 @@ import { TagTyper } from '../../../types/enums'
 import { RSSoknadstatus } from '../../../types/rs-types/rs-soknadstatus'
 import { innenforPaske } from '../../../utils/helligdager-utils'
 import { tekst } from '../../../utils/tekster'
-import { useAmplitudeInstance } from '../../amplitude/amplitude'
 import Vis from '../../vis'
 import { SpmProps } from '../sporsmal-form/sporsmal-form'
 import { fjernIndexFraTag } from '../sporsmal-utils'
 import { RouteParams } from '../../../app'
 import useSoknad from '../../../hooks/useSoknad'
 import { ProgressivtGuidePanel } from '../../guidepanel/ProgressivtGuidePanel'
+import { logEvent } from '../../amplitude/amplitude'
 
 import styles from './GuidepanelUnderSporsmalstekst.module.css'
 
 const GuidepanelUnderSporsmalstekst = ({ sporsmal }: SpmProps) => {
     const { id } = useParams<RouteParams>()
     const { data: valgtSoknad } = useSoknad(id)
-    const { logEvent } = useAmplitudeInstance()
 
     const bjornTekst = `soknad.bjorn.${fjernIndexFraTag(sporsmal.tag).toLowerCase()}`
 

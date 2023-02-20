@@ -6,19 +6,18 @@ import { useParams } from 'react-router'
 import { TagTyper } from '../../../types/enums'
 import { innenforPaske } from '../../../utils/helligdager-utils'
 import { tekst } from '../../../utils/tekster'
-import { useAmplitudeInstance } from '../../amplitude/amplitude'
 import Vis from '../../vis'
 import { SpmProps } from '../sporsmal-form/sporsmal-form'
 import { RouteParams } from '../../../app'
 import useSoknad from '../../../hooks/useSoknad'
 import { ProgressivtGuidePanel } from '../../guidepanel/ProgressivtGuidePanel'
+import { logEvent } from '../../amplitude/amplitude'
 
 import { Bendiksen } from './bendiksen'
 import styles from './PaskeHjelpetekst.module.css'
 const PaskeHjelpetekst = ({ sporsmal }: SpmProps) => {
     const { id } = useParams<RouteParams>()
     const { data: valgtSoknad } = useSoknad(id)
-    const { logEvent } = useAmplitudeInstance()
 
     if (!valgtSoknad) return null
 

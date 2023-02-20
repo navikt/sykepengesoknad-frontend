@@ -9,7 +9,6 @@ import { rodeUkeDagerIPerioden } from '../../../utils/helligdager-utils'
 import { hentUndersporsmal } from '../../../utils/soknad-utils'
 import validerArbeidsgrad from '../../../utils/sporsmal/valider-arbeidsgrad'
 import { getLedetekst, tekst } from '../../../utils/tekster'
-import { useAmplitudeInstance } from '../../amplitude/amplitude'
 import { Ekspanderbar } from '../../ekspanderbar/ekspanderbar'
 import FeilLokal from '../../feil/feil-lokal'
 import Vis from '../../vis'
@@ -18,6 +17,7 @@ import { hentFeilmelding } from '../sporsmal-utils'
 import UndersporsmalListe from '../undersporsmal/undersporsmal-liste'
 import { RouteParams } from '../../../app'
 import useSoknad from '../../../hooks/useSoknad'
+import { logEvent } from '../../amplitude/amplitude'
 
 const RadioKomp = ({ sporsmal }: SpmProps) => {
     const {
@@ -41,7 +41,6 @@ const RadioKomp = ({ sporsmal }: SpmProps) => {
     const { data: valgtSoknad } = useSoknad(id)
     const { validerGrad, beregnGrad } = validerArbeidsgrad(sporsmal)
     const [surveySvart, setSurveySvart] = useState<boolean>(false)
-    const { logEvent } = useAmplitudeInstance()
 
     const lavereProsentHjelpTittel = tekst('ekspanderbarhjelp.prosenten_lavere_enn_forventet_arbeidstaker.tittel')
     return (

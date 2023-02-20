@@ -7,7 +7,7 @@ import { RouteParams } from '../../app'
 import { useAppStore } from '../../data/stores/app-store'
 import { RSSoknadstatus } from '../../types/rs-types/rs-soknadstatus'
 import { tekst } from '../../utils/tekster'
-import { useAmplitudeInstance } from '../amplitude/amplitude'
+import { logEvent } from '../amplitude/amplitude'
 import { EndringUtenEndringModal } from '../sporsmal/endring-uten-endring/endring-uten-endring-modal'
 import useSoknad from '../../hooks/useSoknad'
 import useSoknader from '../../hooks/useSoknader'
@@ -17,7 +17,6 @@ import { avbrytSoknad } from './avbryt-soknad'
 const AvbrytKorrigering = () => {
     const { id, stegId } = useParams<RouteParams>()
     const { data: valgtSoknad } = useSoknad(id)
-    const { logEvent } = useAmplitudeInstance()
 
     const [aapen, setAapen] = useState<boolean>(false)
 
@@ -51,7 +50,6 @@ const AvbrytSoknadModal = () => {
     const { data: soknader } = useSoknader()
     const queryClient = useQueryClient()
 
-    const { logEvent } = useAmplitudeInstance()
     const [aapen, setAapen] = useState<boolean>(false)
     const { setFeilmeldingTekst } = useAppStore()
     const history = useHistory()

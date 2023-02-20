@@ -5,11 +5,11 @@ import { useQueryClient } from '@tanstack/react-query'
 
 import { useAppStore } from '../../../data/stores/app-store'
 import { tekst } from '../../../utils/tekster'
-import { useAmplitudeInstance } from '../../amplitude/amplitude'
 import { avbrytSoknad } from '../../avbryt-soknad-modal/avbryt-soknad'
 import useSoknad from '../../../hooks/useSoknad'
 import { RouteParams } from '../../../app'
 import useSoknader from '../../../hooks/useSoknader'
+import { logEvent } from '../../amplitude/amplitude'
 
 interface EndringUtenEndringModalProps {
     aapen: boolean
@@ -23,7 +23,7 @@ export const EndringUtenEndringModal = (props: EndringUtenEndringModalProps) => 
     const queryClient = useQueryClient()
 
     const { setFeilmeldingTekst } = useAppStore()
-    const { logEvent } = useAmplitudeInstance()
+
     const history = useHistory()
 
     if (!valgtSoknad || !soknader) return null

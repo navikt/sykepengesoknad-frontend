@@ -6,7 +6,7 @@ import { RouteParams } from '../../app'
 import { useAppStore } from '../../data/stores/app-store'
 import { RSSoknadstatus } from '../../types/rs-types/rs-soknadstatus'
 import { RSSoknadstype } from '../../types/rs-types/rs-soknadstype'
-import { useAmplitudeInstance } from '../amplitude/amplitude'
+import { logEvent } from '../amplitude/amplitude'
 import Banner from '../banner/banner'
 import Endreknapp from '../endreknapp/endreknapp'
 import Ettersending from '../ettersending/ettersending'
@@ -24,7 +24,7 @@ const SendtSide = () => {
 
     const { feilmeldingTekst } = useAppStore()
     const [rerendreKvittering, setRerendrekvittering] = useState<Date>(new Date())
-    const { logEvent } = useAmplitudeInstance()
+
     const history = useHistory()
 
     useUpdateBreadcrumbs(() => [{ ...kvitteringBreadcrumb, handleInApp: true }], [])

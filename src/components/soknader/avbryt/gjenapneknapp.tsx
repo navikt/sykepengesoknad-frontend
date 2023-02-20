@@ -6,8 +6,8 @@ import { useQueryClient } from '@tanstack/react-query'
 
 import { RouteParams } from '../../../app'
 import fetchMedRequestId, { AuthenticationError } from '../../../utils/fetch'
-import { useAmplitudeInstance } from '../../amplitude/amplitude'
 import useSoknad from '../../../hooks/useSoknad'
+import { logEvent } from '../../amplitude/amplitude'
 
 import styles from './gjenapneknapp.module.css'
 
@@ -17,7 +17,8 @@ const GjenapneSoknad = () => {
     const queryClient = useQueryClient()
 
     const [gjenapner, setGjenapner] = useState<boolean>(false)
-    const { logEvent } = useAmplitudeInstance()
+
+    if (!valgtSoknad) return null
 
     const gjenapneSoknad = async () => {
         if (gjenapner) {
@@ -28,13 +29,13 @@ const GjenapneSoknad = () => {
 
         logEvent('knapp klikket', {
             tekst: 'Jeg vil bruke denne søknaden likevel',
-            soknadstype: valgtSoknad?.soknadstype,
+            soknadstype: valgtSoknad.soknadstype,
             component: 'Avbrutt søknad visning',
         })
 
         try {
             await fetchMedRequestId(
-                `/syk/sykepengesoknad/api/sykepengesoknad-backend/api/v2/soknader/${valgtSoknad!.id}/gjenapne`,
+                `/syk/sykepengesoknad/api/sykepengesoknad-backend/api/v2/soknader/${valgtSoknad.id}/gjenapne`,
                 {
                     method: 'POST',
                     credentials: 'include',

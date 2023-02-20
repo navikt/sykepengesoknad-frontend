@@ -14,7 +14,7 @@ import { RSSvartype } from '../../../types/rs-types/rs-svartype'
 import { Soknad, Sporsmal } from '../../../types/types'
 import { SEPARATOR } from '../../../utils/constants'
 import { AuthenticationError, fetchJsonMedRequestId } from '../../../utils/fetch'
-import { hentAnnonymisertSvar, useAmplitudeInstance } from '../../amplitude/amplitude'
+import { hentAnnonymisertSvar, logEvent } from '../../amplitude/amplitude'
 import FeilOppsummering from '../../feil/feil-oppsummering'
 import Opplysninger from '../../opplysninger-fra-sykmelding/opplysninger'
 import Oppsummering from '../../oppsummering/oppsummering'
@@ -48,7 +48,7 @@ const SporsmalForm = () => {
     const queryClient = useQueryClient()
 
     const { setMottaker, setFeilState } = useAppStore()
-    const { logEvent } = useAmplitudeInstance()
+
     const [erSiste, setErSiste] = useState<boolean>(false)
     const [poster, setPoster] = useState<boolean>(false)
     const [endringUtenEndringAapen, setEndringUtenEndringAapen] = useState<boolean>(false)
