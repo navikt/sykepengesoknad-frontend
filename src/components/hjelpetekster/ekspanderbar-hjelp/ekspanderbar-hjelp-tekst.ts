@@ -46,9 +46,7 @@ export const EkspanderbarHjelpTekster = {
     'ekspanderbarhjelp.tilbake_i_arbeid.body1':
         'Du kan begynne å jobbe fullt igjen før sykmeldingen er slutt. Vi trenger opplysninger om du var tilbake i fullt arbeid for å beregne hvor mye du skal få utbetalt i sykepenger.',
     'ekspanderbarhjelp.tilbake_i_arbeid.body2':
-        ', hvis du var fullt tilbake på jobb i løpet av perioden. Dette betyr at du ikke lenger er sykmeldt fra datoen du oppgir under.',
-    'ekspanderbarhjelp.tilbake_i_arbeid.body2.span': 'Svar ja',
+        'Svar ja, hvis du var fullt tilbake på jobb i løpet av perioden. Dette betyr at du ikke lenger er sykmeldt fra datoen du oppgir under.',
     'ekspanderbarhjelp.tilbake_i_arbeid.body3':
-        ', dersom du kun var delvis tilbake på jobb i denne perioden. Du vil senere i søknaden bli spurt om hvor mange timer du har jobbet.',
-    'ekspanderbarhjelp.tilbake_i_arbeid.body3.span': 'Svar nei',
+        'Svar nei, dersom du kun var delvis tilbake på jobb i denne perioden. Du vil senere i søknaden bli spurt om hvor mange timer du har jobbet.',
 }
