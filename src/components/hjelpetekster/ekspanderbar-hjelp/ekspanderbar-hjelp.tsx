@@ -94,15 +94,9 @@ const TilbakeIArbeidHjelpBody = () => {
         <>
             <BodyLong>{EkspanderbarHjelpTekster['ekspanderbarhjelp.tilbake_i_arbeid.body1']}</BodyLong>
             <BodyLong className={styles.tilbakeIArbeidBodyMargin}>
-                <span className={styles.underlineItalic}>
-                    {EkspanderbarHjelpTekster['ekspanderbarhjelp.tilbake_i_arbeid.body2.span']}
-                </span>
                 {EkspanderbarHjelpTekster['ekspanderbarhjelp.tilbake_i_arbeid.body2']}
             </BodyLong>
             <BodyLong className={styles.tilbakeIArbeidBodyMargin}>
-                <span className={styles.underlineItalic}>
-                    {EkspanderbarHjelpTekster['ekspanderbarhjelp.tilbake_i_arbeid.body3.span']}
-                </span>
                 {EkspanderbarHjelpTekster['ekspanderbarhjelp.tilbake_i_arbeid.body3']}
             </BodyLong>
         </>
