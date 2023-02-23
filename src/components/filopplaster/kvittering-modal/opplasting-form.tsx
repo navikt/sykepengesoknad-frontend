@@ -1,7 +1,6 @@
-import { Alert, BodyLong, BodyShort, Button, Heading, Label } from '@navikt/ds-react'
+import { Alert, BodyLong, BodyShort, Button, Heading, Label, ReadMore } from '@navikt/ds-react'
 import { logger } from '@navikt/next-logger'
 import dayjs from 'dayjs'
-import parser from 'html-react-parser'
 import React, { useState } from 'react'
 import { FormProvider, useForm } from 'react-hook-form'
 import { useParams } from 'react-router-dom'
@@ -14,11 +13,12 @@ import { Kvittering, Soknad, Sporsmal, UtgiftTyper } from '../../../types/types'
 import { AuthenticationError, fetchJsonMedRequestId } from '../../../utils/fetch'
 import { formaterFilstørrelse, formattertFiltyper, maxFilstørrelse } from '../../../utils/fil-utils'
 import { getLedetekst, tekst } from '../../../utils/tekster'
-import { Ekspanderbar } from '../../ekspanderbar/ekspanderbar'
 import Slettknapp from '../../slettknapp/slettknapp'
 import Vis from '../../vis'
 import DragAndDrop from '../drag-and-drop/drag-and-drop'
 
+import OpplastingTekster from './opplasting-tekster'
+import styles from './opplasting-form.module.css'
 interface OpplastetKvittering {
     id: string
 }
@@ -151,11 +151,10 @@ const OpplastingForm = ({ valgtSoknad, valgtKvittering, setOpenModal, valgtFil, 
                         })}
                     </span>
                 </BodyShort>
-                <div className="pdf-hjelp">
-                    <Ekspanderbar title={tekst('soknad.info.kvitteringer-PDF-tittel')} sporsmalId={sporsmal.id}>
-                        <BodyLong> {parser(tekst('soknad.info.kvitteringer-PDF-tekst'))} </BodyLong>
-                    </Ekspanderbar>
-                </div>
+                <ReadMore className={styles.pdfHjelp} header={OpplastingTekster['soknad.info.kvitteringer-PDF-tittel']}>
+                    <BodyLong>{OpplastingTekster['soknad.info.kvitteringer-PDF-tekst']}</BodyLong>
+                </ReadMore>
+
                 <div className="skjemakolonner">
                     <div className="skjemaelement">
                         <label htmlFor="transportmiddel" className="skjemaelement__label">

@@ -9,7 +9,6 @@ import Utvidbar from '../utvidbar/utvidbar'
 
 import EksempelFrist from './eksempel-frist'
 import HvorforSoknadSykepenger from './hvorfor-soknad-sykepenger'
-
 import styles from './frist-sykepenger.module.css'
 
 interface FristSykepengerProps {

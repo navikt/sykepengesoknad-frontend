@@ -3,7 +3,7 @@
     border: 1px solid var(--a-gray-400);
 }
 
-@media (min-width: var(--screen-sm)) {
+@media (min-width: 768px) {
     .contentPadding {
         padding-left: var(--a-spacing-8);
     }

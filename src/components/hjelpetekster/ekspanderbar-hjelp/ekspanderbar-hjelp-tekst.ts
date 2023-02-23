@@ -27,14 +27,10 @@ export const EkspanderbarHjelpTekster = {
     'ekspanderbarhjelp.jobbet_du_gradert_arbeidstaker.innhold':
         'Du har kanskje avtalt med arbeidsgiveren din at du skal ha færre arbeidsoppgaver, men bruke lengre tid på dem? Da svarer du i prosent hvor stor mengde av arbeidsoppgavene dine du har utført.',
     'ekspanderbarhjelp.prosenten_lavere_enn_forventet_arbeidstaker.tittel': 'Er prosenten lavere enn du forventet?',
-    'ekspanderbarhjelp.helligdager.tittel': 'Helligdager (“røde dager”)',
     'ekspanderbarhjelp.prosenten_lavere_enn_forventet_arbeidstaker.innhold1':
-        'Grunnen kan være at helligdager som havner på mandag-fredag regnes som sykepengedager hos NAV. Derfor fordeles timene dine også på disse dagene selv om du hadde fri.',
+        'Grunnen kan være at helligdager eller røde dager som havner på mandag-fredag regnes som sykepengedager hos NAV. Derfor fordeles timene dine også på disse dagene selv om du hadde fri.',
     'ekspanderbarhjelp.prosenten_lavere_enn_forventet_arbeidstaker.innhold2':
         'Hvis du har fylt inn riktig antall timer, og likevel får beskjed om at timene utgjør mindre enn sykmeldingsprosenten din, kan du svare nei på spørsmålet og gå videre.',
-    'ekspanderbarhjelp.helligdager.enkelt-tittel': 'Var det enkelt å forstå denne hjelpeteksten?',
-    'ekspanderbarhjelp.helligdager.enkelt-svar-Ja': 'Ja',
-    'ekspanderbarhjelp.helligdager.enkelt-svar-Nei': 'Nei',
     'ekspanderbarhjelp.andre_inntektskilder.tittel': 'Hva mener vi med andre inntektskilder?',
     'ekspanderbarhjelp.andre_inntektskilder.innhold':
         'Vi mener bare inntekter som er pensjonsgivende. Som oftest vil det si inntekt fra arbeid du har utført. Penger du får fra NAV, trenger du ikke oppgi selv om de er pensjonsgivende.<br/><br/>Svarer du ja på spørsmålet, får du en liste å krysse av på. Velg frilanser hvis du får fosterhjemsgodtgjørelse eller honorar fra verv, for eksempel styreverv i bedrifter eller borettslag.',
