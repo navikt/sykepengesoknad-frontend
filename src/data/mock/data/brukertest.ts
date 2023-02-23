@@ -373,7 +373,7 @@ export const brukertestSoknad: RSSoknad = {
                     tag: 'TRYGD_HVILKET_LAND',
                     sporsmalstekst: 'I hvilket land?',
                     undertekst: null,
-                    svartype: 'FRITEKST',
+                    svartype: 'LAND',
                     min: null,
                     max: null,
                     pavirkerAndreSporsmal: false,
