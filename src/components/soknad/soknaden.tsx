@@ -19,7 +19,6 @@ import { logEvent } from '../amplitude/amplitude'
 import { EldreUsendtSoknad, harEldreUsendtSoknad } from '../eldre-usendt/eldre-usendt-soknad'
 import { EldreUsendtSykmelding } from '../eldre-usendt/eldre-usendt-sykmelding'
 import { eldreUsendteSykmeldinger } from '../eldre-usendt/eldreUsendteSykmeldinger'
-import FristSykepenger from '../frist-sykepenger/frist-sykepenger'
 import { hentHotjarJsTrigger, HotjarTrigger } from '../hotjar-trigger'
 import { ViktigInformasjon } from '../soknad-intro/viktig-informasjon'
 import { hentNokkel } from '../sporsmal/sporsmal-utils'
@@ -138,11 +137,6 @@ const Soknaden = () => {
                     <Vis
                         hvis={stegNo === 1 && !erUtlandssoknad}
                         render={() => <Opplysninger ekspandert={true} steg={valgtSoknad.sporsmal[stegNo - 1].tag} />}
-                    />
-
-                    <Vis
-                        hvis={stegNo === 1 && !erUtlandssoknad}
-                        render={() => <FristSykepenger soknadstype={valgtSoknad.soknadstype} />}
                     />
 
                     <Vis

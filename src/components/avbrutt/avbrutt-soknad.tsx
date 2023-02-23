@@ -9,7 +9,6 @@ import { tilLesbarDatoMedArstall } from '../../utils/dato-utils'
 import { tekst } from '../../utils/tekster'
 import { logEvent } from '../amplitude/amplitude'
 import Banner from '../banner/banner'
-import FristSykepenger from '../frist-sykepenger/frist-sykepenger'
 import { GjenstaendeSoknader, hentGjenstaendeSoknader } from '../gjenstaende-soknader/gjenstaende-soknader'
 import Opplysninger from '../opplysninger-fra-sykmelding/opplysninger'
 import { urlTilSoknad } from '../soknad/soknad-link'
@@ -66,7 +65,6 @@ const AvbruttSoknad = () => {
             </div>
 
             <Opplysninger ekspandert={false} steg="avbrutt-søknad" />
-            <FristSykepenger soknadstype={valgtSoknad.soknadstype} />
 
             <Vis
                 hvis={dayjs(valgtSoknad.avbruttDato).isAfter(dayjs().subtract(2, 'seconds'))}
