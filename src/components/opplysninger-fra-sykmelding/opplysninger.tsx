@@ -32,7 +32,7 @@ const Opplysninger = ({ ekspandert, steg }: OpplysningerProps) => {
     if (!valgtSoknad || !valgtSykmelding) return null
 
     return (
-        <Accordion className={styles.accordionWrapper}>
+        <Accordion className={styles.accordionWrapper} data-cy="opplysninger-fra-sykmeldingen">
             <Accordion.Item open={open}>
                 <Accordion.Header
                     className={styles.contentPadding}
