@@ -1,5 +1,7 @@
 .accordionWrapper {
-    margin: 1rem 0;
+    margin-bottom: var(--a-spacing-4);
+    margin-top: var(--a-spacing-4);
+
     border: 1px solid var(--a-gray-400);
 }
 
