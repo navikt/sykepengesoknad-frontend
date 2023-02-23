@@ -15,6 +15,31 @@ function DatoInput(props: SpmProps) {
         formState: { errors },
     } = useFormContext()
 
+    const finnMinOgMax = () => {
+        if (!sporsmal.min && !sporsmal.max) {
+            return {
+                fromDate: undefined,
+                toDate: undefined,
+            }
+        }
+        if (!sporsmal.min && sporsmal.max !== undefined) {
+            return {
+                fromDate: dayjs('01.01.1900').toDate(),
+                toDate: dayjs(sporsmal.max).toDate(),
+            }
+        }
+        if (sporsmal.min !== undefined && !sporsmal.max) {
+            return {
+                fromDate: dayjs(sporsmal.min).toDate(),
+                toDate: dayjs('01.01.2100').toDate(),
+            }
+        }
+        return {
+            fromDate: dayjs(sporsmal.min).toDate(),
+            toDate: dayjs(sporsmal.max).toDate(),
+        }
+    }
+
     const { field } = useController({
         name: sporsmal.id,
         rules: {
@@ -37,10 +62,9 @@ function DatoInput(props: SpmProps) {
             <div className="axe-exclude">
                 <UNSAFE_DatePicker
                     {...datepickerProps}
+                    {...finnMinOgMax()}
                     dropdownCaption={true}
                     locale="nb"
-                    {...(sporsmal.min && { fromDate: dayjs(sporsmal.min).toDate() })}
-                    {...(sporsmal.max && { toDate: dayjs(sporsmal.max).toDate() })}
                     data-cy-sporsmalid={sporsmal.id}
                 >
                     <UNSAFE_DatePicker.Input
