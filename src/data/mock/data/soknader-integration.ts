@@ -486,7 +486,7 @@ export const avbruttSoknad: RSSoknad = {
                         {
                             id: '7b4d4adc-de4f-38fd-a997-e5337fbb999',
                             tag: 'INNTEKTSKILDE_OMSORGSLONN',
-                            sporsmalstekst: 'Kommunal omsorgstønad',
+                            sporsmalstekst: 'kommunal omsorgstønad',
                             undertekst: null,
                             svartype: 'CHECKBOX',
                             min: null,
@@ -913,7 +913,7 @@ export const sendtArbeidsledig: RSSoknad = {
                         {
                             id: '61',
                             tag: 'INNTEKTSKILDE_OMSORGSLONN',
-                            sporsmalstekst: 'Kommunal omsorgstønad',
+                            sporsmalstekst: 'kommunal omsorgstønad',
                             undertekst: null,
                             svartype: 'CHECKBOX',
                             min: null,
@@ -1599,7 +1599,7 @@ export const veldigLangSoknad: RSSoknad = {
                         {
                             id: '61',
                             tag: 'INNTEKTSKILDE_OMSORGSLONN',
-                            sporsmalstekst: 'Kommunal omsorgstønad',
+                            sporsmalstekst: 'kommunal omsorgstønad',
                             undertekst: null,
                             svartype: 'CHECKBOX',
                             min: null,
@@ -1813,7 +1813,7 @@ export const veldigLangSoknad: RSSoknad = {
                         {
                             id: '99961',
                             tag: 'INNTEKTSKILDE_OMSORGSLONN',
-                            sporsmalstekst: 'Kommunal omsorgstønad',
+                            sporsmalstekst: 'kommunal omsorgstønad',
                             undertekst: null,
                             svartype: 'CHECKBOX',
                             min: null,
@@ -1839,7 +1839,7 @@ export const veldigLangSoknad: RSSoknad = {
                         {
                             id: '7b4d4adc-de4f-38fd-a997-e5337fbb9333',
                             tag: 'INNTEKTSKILDE_OMSORGSLONN',
-                            sporsmalstekst: 'Kommunal omsorgstønad',
+                            sporsmalstekst: 'kommunal omsorgstønad',
                             undertekst: null,
                             svartype: 'CHECKBOX',
                             min: null,
@@ -3516,7 +3516,7 @@ export const sendtArbeidsledigKvittering: RSSoknad = {
                         {
                             id: '112',
                             tag: 'INNTEKTSKILDE_OMSORGSLONN',
-                            sporsmalstekst: 'Kommunal omsorgstønad',
+                            sporsmalstekst: 'kommunal omsorgstønad',
                             undertekst: null,
                             svartype: 'CHECKBOX',
                             min: null,
