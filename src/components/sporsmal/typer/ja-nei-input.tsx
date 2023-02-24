@@ -48,7 +48,12 @@ const JaNeiInput = ({ sporsmal }: SpmProps) => {
                     name={sporsmal.id}
                     rules={{ validate: (value) => valider(value), required: feilmelding.global }}
                     render={({ field }) => (
-                        <RadioGroup {...field} legend={sporsmal.sporsmalstekst} className="radioGruppe-jaNei">
+                        <RadioGroup
+                            {...field}
+                            legend={sporsmal.sporsmalstekst}
+                            className="radioGruppe-jaNei"
+                            key={sporsmal.id}
+                        >
                             <GuidepanelUnderSporsmalstekst sporsmal={sporsmal} />
 
                             <PaskeHjelpetekst sporsmal={sporsmal} />
