@@ -59,7 +59,6 @@ describe('Tester feilmeldinger', () => {
 
     function resetAllePeriodeDateFelter() {
         cy.get('[data-cy="perioder"]')
-            //.find('input[type=text]')
             .find('.navds-text-field__input')
             .each(($el) => {
                 cy.wrap($el).clear()

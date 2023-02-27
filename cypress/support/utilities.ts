@@ -9,5 +9,4 @@ export const setPeriodeFraTil = (fom: number, tom: number, periodeIndex = 0) => 
 
     cy.get(`[data-cy="periode"]`).eq(periodeIndex).find('.navds-date__field-button').eq(1).click()
     cy.get('.rdp-day').contains(tom.toString()).click()
-    //cy.get(`[data-cy="periode"]`).eq(periodeIndex).find('.navds-date__field-button').eq(1).click() // klikk igjen for å lukke
 }
