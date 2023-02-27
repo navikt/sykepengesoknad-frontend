@@ -9,6 +9,7 @@ import Utvidbar from '../utvidbar/utvidbar'
 
 import EksempelFrist from './eksempel-frist'
 import HvorforSoknadSykepenger from './hvorfor-soknad-sykepenger'
+import styles from './frist-sykepenger.module.css'
 
 interface FristSykepengerProps {
     soknadstype: RSSoknadstype
@@ -18,7 +19,7 @@ const FristSykepenger = ({ soknadstype }: FristSykepengerProps) => {
     const [open, setOpen] = useState<boolean>(false)
 
     return (
-        <Accordion>
+        <Accordion className={styles.accordionWrapper}>
             <Accordion.Item open={open} className="frist-sykepenger">
                 <Accordion.Header
                     onClick={() => {

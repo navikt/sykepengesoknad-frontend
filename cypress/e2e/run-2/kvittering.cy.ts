@@ -56,7 +56,7 @@ describe('Tester kvittering', () => {
                 .and('have.attr', 'aria-expanded', 'false')
 
             // Opplysninger minimert
-            cy.get('.utvidbar.ekspander .navds-accordion__header')
+            cy.get('[data-cy="opplysninger-fra-sykmeldingen"] .navds-accordion__header')
                 .should('contain', 'Opplysninger fra sykmeldingen')
                 .and('have.attr', 'aria-expanded', 'false')
 
@@ -88,7 +88,10 @@ describe('Tester kvittering', () => {
             )
 
             // Opplysninger minimert
-            cy.get('.utvidbar.ekspander .navds-accordion__header').should('contain', 'Opplysninger fra sykmeldingen')
+
+            cy.get('[data-cy="opplysninger-fra-sykmeldingen"] .navds-accordion__header')
+                .should('contain', 'Opplysninger fra sykmeldingen')
+                .and('have.attr', 'aria-expanded', 'false')
 
             // Knapperad ( Endre, Ettersend)
             cy.contains('Jeg vil endre svarene i søknaden').should('exist')
@@ -210,7 +213,7 @@ describe('Tester kvittering', () => {
                 .and('have.attr', 'aria-expanded', 'false')
 
             // Opplysninger minimert
-            cy.get('.utvidbar.ekspander .navds-accordion__header')
+            cy.get('[data-cy="opplysninger-fra-sykmeldingen"] .navds-accordion__header')
                 .should('contain', 'Opplysninger fra sykmeldingen')
                 .and('have.attr', 'aria-expanded', 'false')
 
@@ -411,7 +414,7 @@ const inntil16dagerKvittering = () => {
         .and('have.attr', 'aria-expanded', 'false')
 
     // Opplysninger minimert
-    cy.get('.utvidbar.ekspander .navds-accordion__header')
+    cy.get('[data-cy="opplysninger-fra-sykmeldingen"] .navds-accordion__header')
         .should('contain', 'Opplysninger fra sykmeldingen')
         .and('have.attr', 'aria-expanded', 'false')
 
@@ -481,7 +484,7 @@ const over16dagerKvittering = () => {
         .and('have.attr', 'aria-expanded', 'false')
 
     // Opplysninger minimert
-    cy.get('.utvidbar.ekspander .navds-accordion__header')
+    cy.get('[data-cy="opplysninger-fra-sykmeldingen"] .navds-accordion__header')
         .should('contain', 'Opplysninger fra sykmeldingen')
         .and('have.attr', 'aria-expanded', 'false')
 
@@ -529,7 +532,7 @@ const utenOppholdKvittering = () => {
         .and('have.attr', 'aria-expanded', 'false')
 
     // Opplysninger minimert
-    cy.get('.utvidbar.ekspander .navds-accordion__header')
+    cy.get('[data-cy="opplysninger-fra-sykmeldingen"] .navds-accordion__header')
         .should('contain', 'Opplysninger fra sykmeldingen')
         .and('have.attr', 'aria-expanded', 'false')
 
@@ -591,7 +594,7 @@ const medOppholdKvittering = () => {
         .and('have.attr', 'aria-expanded', 'false')
 
     // Opplysninger minimert
-    cy.get('.utvidbar.ekspander .navds-accordion__header')
+    cy.get('[data-cy="opplysninger-fra-sykmeldingen"] .navds-accordion__header')
         .should('contain', 'Opplysninger fra sykmeldingen')
         .and('have.attr', 'aria-expanded', 'false')
 

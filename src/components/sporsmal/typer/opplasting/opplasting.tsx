@@ -1,10 +1,8 @@
-import { Alert, BodyLong, BodyShort, Button, Label, Modal } from '@navikt/ds-react'
-import parser from 'html-react-parser'
+import { Alert, BodyLong, BodyShort, Button, Label, Modal, ReadMore } from '@navikt/ds-react'
 import React, { useRef, useState } from 'react'
 import { useParams } from 'react-router-dom'
 
 import { tekst } from '../../../../utils/tekster'
-import { Ekspanderbar } from '../../../ekspanderbar/ekspanderbar'
 import FilListe from '../../../filopplaster/fil-liste/fil-liste'
 import OpplastingForm from '../../../filopplaster/kvittering-modal/opplasting-form'
 import { SpmProps } from '../../sporsmal-form/sporsmal-form'
@@ -12,6 +10,9 @@ import { Kvittering } from '../../../../types/types'
 import { RouteParams } from '../../../../app'
 import useSoknad from '../../../../hooks/useSoknad'
 import { useAppStore } from '../../../../data/stores/app-store'
+import OpplastingTekster from '../../../filopplaster/kvittering-modal/opplasting-tekster'
+
+import styles from './opplasting.module.css'
 
 const Opplasting = ({ sporsmal }: SpmProps) => {
     const { id } = useParams<RouteParams>()
@@ -55,11 +56,9 @@ const Opplasting = ({ sporsmal }: SpmProps) => {
                 <BodyShort>{tekst('soknad.info.kvitteringer-del3')}</BodyShort>
             </Alert>
 
-            <div className="pdf-hjelp">
-                <Ekspanderbar title={tekst('soknad.info.kvitteringer-PDF-tittel')} sporsmalId={sporsmal.id}>
-                    <BodyLong>{parser(tekst('soknad.info.kvitteringer-PDF-tekst'))}</BodyLong>
-                </Ekspanderbar>
-            </div>
+            <ReadMore className={styles.pdfHjelp} header={OpplastingTekster['soknad.info.kvitteringer-PDF-tittel']}>
+                <BodyLong>{OpplastingTekster['soknad.info.kvitteringer-PDF-tekst']}</BodyLong>
+            </ReadMore>
 
             <Button
                 type="button"

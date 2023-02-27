@@ -28,9 +28,7 @@
     outline: 0;
     box-shadow: 0 0 0 3px #00347d;
 }
-.opplasting .pdf-hjelp {
-    margin-top: 1.2rem;
-}
+
 .opplasting ul.opplasting-liste {
     padding-inline-start: 1.3em;
     line-height: 40px;
