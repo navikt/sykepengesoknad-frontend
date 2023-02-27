@@ -140,15 +140,13 @@ const datoSvar = (sporsmal: Sporsmal, verdi: any) => {
 const datoerSvar = (sporsmal: Sporsmal, verdi: any) => {
     const svar: RSSvar[] = []
     if (verdi !== undefined) {
-        verdi
-            .toString()
-            .split(',')
-            .map((dag: string) =>
-                svar.push({
-                    verdi: dag,
-                }),
-            )
+        verdi.map((dag: string) =>
+            svar.push({
+                verdi: dayjs(dag).format('YYYY-MM-DD'),
+            }),
+        )
     }
+
     sporsmal.svarliste = {
         sporsmalId: sporsmal.id,
         svar: svar,
