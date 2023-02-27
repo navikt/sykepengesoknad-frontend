@@ -1,112 +1,56 @@
-import { BodyShort, Label } from '@navikt/ds-react'
-import dayjs, { Dayjs } from 'dayjs'
-import isoWeek from 'dayjs/plugin/isoWeek'
-import weekOfYear from 'dayjs/plugin/weekOfYear'
+import {BodyShort, Label, UNSAFE_DatePicker, UNSAFE_useDatepicker} from '@navikt/ds-react'
+import dayjs from 'dayjs'
 import React from 'react'
-import { useFormContext, useWatch } from 'react-hook-form'
+import {useController, useFormContext, useWatch} from 'react-hook-form'
 
-import { maaneder, sammeAar, sammeMnd } from '../../../utils/dato-utils'
-import { tekst } from '../../../utils/tekster'
+import {maaneder, sammeAar, sammeMnd} from '../../../utils/dato-utils'
+import {tekst} from '../../../utils/tekster'
 import FeilLokal from '../../feil/feil-lokal'
-import { SpmProps } from '../sporsmal-form/sporsmal-form'
-import { hentFeilmelding } from '../sporsmal-utils'
+import {SpmProps} from '../sporsmal-form/sporsmal-form'
+import {hentFeilmelding} from '../sporsmal-utils'
+import validerDato from "../../../utils/sporsmal/valider-dato";
 
-dayjs.extend(weekOfYear)
-dayjs.extend(isoWeek)
 
-interface KalenderUke {
-    ukenr: number
-    dager: KalenderDag[]
-}
+const DagerKomp = ({sporsmal}: SpmProps) => {
+    const {register, setValue, getValues} = useFormContext()
+    const {
+        formState: {errors},
+    } = useFormContext()
 
-interface KalenderDag {
-    dayjs: Dayjs
-    tid: 'foran' | 'etter' | 'inni'
-}
-
-const DagerKomp = ({ sporsmal }: SpmProps) => {
-    const { register, setValue, getValues } = useFormContext()
     const feilmelding = hentFeilmelding(sporsmal)
-    let watchDager = useWatch({ name: sporsmal.id })
+    let watchDager = useWatch({name: sporsmal.id})
     if (watchDager === undefined) {
         watchDager = getValues(sporsmal.id)
     }
+    console.log(sporsmal)
 
-    const kalTittel = () => {
-        const etaar = sammeAar(sporsmal)
-        const enmnd = sammeMnd(sporsmal)
-        const min = dayjs(sporsmal.min!)
-        const max = dayjs(sporsmal.max!)
-        if (enmnd && etaar) {
-            return `${maaneder[min.month()]} ${min.year()}`
-        } else if (!enmnd && etaar) {
-            return `${maaneder[min.month()]} - ${maaneder[max.month()]} ${max.year()}`
-        } else if (!enmnd && !etaar) {
-            return `${maaneder[min.month()]} ${min.year()} - ${maaneder[max.month()]} ${max.year()}`
-        }
-    }
 
     const min = dayjs(sporsmal.min!)
     const max = dayjs(sporsmal.max!)
-    const forsteDagIKalender = min.startOf('isoWeek')
-    const sisteDagIKalender = max.endOf('isoWeek')
 
-    const alleUker: KalenderUke[] = []
-    for (let uke = forsteDagIKalender; uke.endOf('isoWeek') <= sisteDagIKalender; uke = uke.add(1, 'week')) {
-        const dager: KalenderDag[] = []
-        for (let dag = uke.startOf('isoWeek'); dag <= uke.endOf('isoWeek'); dag = dag.add(1, 'day')) {
-            if (dag < min) {
-                dager.push({ dayjs: dag, tid: 'foran' })
-            } else if (dag > max) {
-                dager.push({ dayjs: dag, tid: 'etter' })
-            } else {
-                dager.push({ dayjs: dag, tid: 'inni' })
-            }
-        }
-        alleUker.push({
-            ukenr: uke.isoWeek(),
-            dager: dager,
-        })
-    }
+    const {field} = useController({
+        name: sporsmal.id,
+        rules: {
+            validate: (value) => {
+                return true
+            },
+        },
+    })
 
-    const velgAlleUkedager = () => {
-        const dager: string[] = []
-        alleUker.forEach((uke: KalenderUke) => {
-            uke.dager.forEach((dag) => {
-                if (dag.tid === 'inni' && dag.dayjs.isoWeekday() <= 5) {
-                    dager.push(dag.dayjs.format('YYYY-MM-DD'))
-                }
-            })
-        })
-        setValue(sporsmal.id, Array.from(new Set(dager)))
-    }
-
-    const fjernAlle = () => {
-        setValue(sporsmal.id, [])
-    }
-
-    const kalenderdag = (dag: KalenderDag, ukeidx: number, idx: number) => {
-        if (dag.tid !== 'foran' && dag.tid !== 'etter') {
-            return (
-                <>
-                    <input
-                        type="checkbox"
-                        id={`${sporsmal.id}_${ukeidx}_${idx}`}
-                        value={dag.dayjs.format('YYYY-MM-DD')}
-                        {...register(sporsmal.id, {
-                            required: feilmelding.global,
-                        })}
-                        className={
-                            'checkboks' + (watchDager?.includes(dag.dayjs.format('YYYY-MM-DD')) ? ' checked' : '')
-                        }
-                    />
-                    <label htmlFor={`${sporsmal.id}_${ukeidx}_${idx}`}>{dag.dayjs.format('DD')}</label>
-                </>
-            )
-        } else {
-            return <span className="label">{dag.dayjs.format('DD')}</span>
+    const finnMinOgMax = () => {
+        return {
+            fromDate: dayjs(sporsmal.min).toDate(),
+            toDate: dayjs(sporsmal.max).toDate(),
         }
     }
+    const {datepickerProps, inputProps} = UNSAFE_useDatepicker({
+        //...field,
+        onDateChange: field.onChange,
+
+        //defaultMonth: dayjs().toDate(),
+        openOnFocus: false,
+    })
+    console.log(datepickerProps)
 
     return (
         <>
@@ -114,49 +58,21 @@ const DagerKomp = ({ sporsmal }: SpmProps) => {
                 {sporsmal.sporsmalstekst}
             </Label>
 
-            <div className="skjemaelement skjema__dager" tabIndex={-1}>
-                <BodyShort as="h4" className="kalender__tittel">
-                    {kalTittel()}
-                </BodyShort>
-                <BodyShort as="div" className="ukedager">
-                    <span>uke</span>
-                    <span>Man</span>
-                    <span>Tir</span>
-                    <span>Ons</span>
-                    <span>Tor</span>
-                    <span>Fre</span>
-                    <span>Lør</span>
-                    <span>Søn</span>
-                </BodyShort>
+            <div>
 
-                {alleUker.map((uke: KalenderUke) => {
-                    return (
-                        <div className="kalenderuke" key={uke.ukenr}>
-                            <div className="ukenr">{uke.ukenr}</div>
 
-                            {uke.dager.map((dag, idx) => {
-                                const sunday = dag.dayjs.isoWeekday() === 7 ? 'sun' : ''
-                                return (
-                                    <div className={`kalenderdag ${dag.tid} ${sunday}`} key={idx}>
-                                        {kalenderdag(dag, uke.ukenr, idx)}
-                                    </div>
-                                )
-                            })}
-                        </div>
-                    )
-                })}
+                <div className="axe-exclude">
+                    <UNSAFE_DatePicker.Standalone
+                        mode="multiple"
+                        {...finnMinOgMax()}
+                        onSelect={console.log}
+                    />
 
-                <FeilLokal sporsmal={sporsmal} />
+                </div>
 
-                <BodyShort className="kalendervalg">
-                    <button type="button" className="lenkeknapp velgalle" onClick={velgAlleUkedager}>
-                        {tekst('sporsmal.egen-bil.kalender.ukedager')}
-                    </button>
-                    <button type="button" className="lenkeknapp fjernalle" onClick={fjernAlle}>
-                        <img src="/syk/sykepengesoknad/static/slettknapp.svg" alt="" />
-                        {tekst('sporsmal.egen-bil.kalender.fjern')}
-                    </button>
-                </BodyShort>
+
+                <FeilLokal sporsmal={sporsmal}/>
+
             </div>
         </>
     )
