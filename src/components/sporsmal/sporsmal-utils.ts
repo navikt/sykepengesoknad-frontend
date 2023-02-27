@@ -112,6 +112,7 @@ export const hentGeneriskFeilmelding = (
             return error?.message
         }
         case RSSvartype.DATOER:
+            return 'Du må oppgi minst en dag'
         case RSSvartype.RADIO_GRUPPE_UKEKALENDER: {
             return 'Du må oppgi en dag'
         }

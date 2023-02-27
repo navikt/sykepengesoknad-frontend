@@ -15,9 +15,17 @@ const DagerKomp = ({ sporsmal }: SpmProps) => {
                 {sporsmal.sporsmalstekst}
             </Label>
 
-            <div>
+            <div className={'dagerKalender'}>
                 <Controller
                     name={sporsmal.id}
+                    rules={{
+                        validate: () => {
+                            if (verdier.length === 0) {
+                                return 'Du må oppgi hvilke dager du brukte bil'
+                            }
+                            return true
+                        },
+                    }}
                     render={({ field }) => (
                         <DatePicker.Standalone
                             mode="multiple"
