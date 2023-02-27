@@ -1,26 +1,13 @@
-import {BodyShort, Label, UNSAFE_DatePicker, UNSAFE_useDatepicker} from '@navikt/ds-react'
+import { Label, UNSAFE_DatePicker as DatePicker } from '@navikt/ds-react'
 import dayjs from 'dayjs'
-import React, {useState} from 'react'
-import {Controller, useController, useFormContext, useWatch} from 'react-hook-form'
+import React, { useState } from 'react'
+import { Controller } from 'react-hook-form'
 
-import {maaneder, sammeAar, sammeMnd} from '../../../utils/dato-utils'
-import {tekst} from '../../../utils/tekster'
 import FeilLokal from '../../feil/feil-lokal'
-import {SpmProps} from '../sporsmal-form/sporsmal-form'
-import {hentFeilmelding} from '../sporsmal-utils'
-import validerDato from "../../../utils/sporsmal/valider-dato";
-import validerLand from "../../../utils/sporsmal/valider-land";
-import LandvelgerComponent from "../landvelger/landvelger";
+import { SpmProps } from '../sporsmal-form/sporsmal-form'
 
-
-const DagerKomp = ({sporsmal}: SpmProps) => {
-    const {register, setValue, getValues} = useFormContext()
-    const {
-        formState: {errors},
-    } = useFormContext()
-
+const DagerKomp = ({ sporsmal }: SpmProps) => {
     const [verdier, setVerdier] = useState(sporsmal.svarliste.svar.map((i) => new Date(i.verdi)))
-
 
     return (
         <>
@@ -29,12 +16,10 @@ const DagerKomp = ({sporsmal}: SpmProps) => {
             </Label>
 
             <div>
-
-
                 <Controller
                     name={sporsmal.id}
-                    render={({field}) => (
-                        <UNSAFE_DatePicker.Standalone
+                    render={({ field }) => (
+                        <DatePicker.Standalone
                             mode="multiple"
                             fromDate={dayjs(sporsmal.min).toDate()}
                             toDate={dayjs(sporsmal.max).toDate()}
@@ -47,9 +32,7 @@ const DagerKomp = ({sporsmal}: SpmProps) => {
                     )}
                 />
 
-
-                <FeilLokal sporsmal={sporsmal}/>
-
+                <FeilLokal sporsmal={sporsmal} />
             </div>
         </>
     )
