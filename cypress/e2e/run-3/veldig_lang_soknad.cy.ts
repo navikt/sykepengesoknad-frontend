@@ -32,8 +32,7 @@ describe('Tester støtte for gamle spørsmål', () => {
     }
 
     function velgKalenderdag() {
-        const dag = '13'
-        cy.get('.kalenderdag.inni').contains(dag).click()
+        cy.get('[aria-label="13. april (mandag)"]').click()
     }
 
     function velgTimer() {
