@@ -1,7 +1,7 @@
 import {BodyShort, Label, UNSAFE_DatePicker, UNSAFE_useDatepicker} from '@navikt/ds-react'
 import dayjs from 'dayjs'
-import React from 'react'
-import {useController, useFormContext, useWatch} from 'react-hook-form'
+import React, {useState} from 'react'
+import {Controller, useController, useFormContext, useWatch} from 'react-hook-form'
 
 import {maaneder, sammeAar, sammeMnd} from '../../../utils/dato-utils'
 import {tekst} from '../../../utils/tekster'
@@ -9,6 +9,8 @@ import FeilLokal from '../../feil/feil-lokal'
 import {SpmProps} from '../sporsmal-form/sporsmal-form'
 import {hentFeilmelding} from '../sporsmal-utils'
 import validerDato from "../../../utils/sporsmal/valider-dato";
+import validerLand from "../../../utils/sporsmal/valider-land";
+import LandvelgerComponent from "../landvelger/landvelger";
 
 
 const DagerKomp = ({sporsmal}: SpmProps) => {
@@ -17,40 +19,8 @@ const DagerKomp = ({sporsmal}: SpmProps) => {
         formState: {errors},
     } = useFormContext()
 
-    const feilmelding = hentFeilmelding(sporsmal)
-    let watchDager = useWatch({name: sporsmal.id})
-    if (watchDager === undefined) {
-        watchDager = getValues(sporsmal.id)
-    }
-    console.log(sporsmal)
+    const [verdier, setVerdier] = useState(sporsmal.svarliste.svar.map((i) => new Date(i.verdi)))
 
-
-    const min = dayjs(sporsmal.min!)
-    const max = dayjs(sporsmal.max!)
-
-    const {field} = useController({
-        name: sporsmal.id,
-        rules: {
-            validate: (value) => {
-                return true
-            },
-        },
-    })
-
-    const finnMinOgMax = () => {
-        return {
-            fromDate: dayjs(sporsmal.min).toDate(),
-            toDate: dayjs(sporsmal.max).toDate(),
-        }
-    }
-    const {datepickerProps, inputProps} = UNSAFE_useDatepicker({
-        //...field,
-        onDateChange: field.onChange,
-
-        //defaultMonth: dayjs().toDate(),
-        openOnFocus: false,
-    })
-    console.log(datepickerProps)
 
     return (
         <>
@@ -61,14 +31,21 @@ const DagerKomp = ({sporsmal}: SpmProps) => {
             <div>
 
 
-                <div className="axe-exclude">
-                    <UNSAFE_DatePicker.Standalone
-                        mode="multiple"
-                        {...finnMinOgMax()}
-                        onSelect={console.log}
-                    />
-
-                </div>
+                <Controller
+                    name={sporsmal.id}
+                    render={({field}) => (
+                        <UNSAFE_DatePicker.Standalone
+                            mode="multiple"
+                            fromDate={dayjs(sporsmal.min).toDate()}
+                            toDate={dayjs(sporsmal.max).toDate()}
+                            selected={verdier}
+                            onSelect={(a) => {
+                                setVerdier(a || [])
+                                field.onChange(a)
+                            }}
+                        />
+                    )}
+                />
 
 
                 <FeilLokal sporsmal={sporsmal}/>
