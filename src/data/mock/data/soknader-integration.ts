@@ -4643,7 +4643,7 @@ export const arbeidstakerMedOppholdKvittering: RSSoknad = {
 export const foranArbeidstakerMedOppholdKvittering: RSSoknad = jsonDeepCopy(arbeidstakerMedOppholdKvittering)
 foranArbeidstakerMedOppholdKvittering.id = 'foran-sok-8'
 foranArbeidstakerMedOppholdKvittering.status = 'SENDT'
-foranArbeidstakerMedOppholdKvittering.sendtTilArbeidsgiverDato = dayjs().toISOString()
+foranArbeidstakerMedOppholdKvittering.sendtTilArbeidsgiverDato = dayjs().subtract(1, 'day').toISOString()
 foranArbeidstakerMedOppholdKvittering.fom = '2020-03-25'
 foranArbeidstakerMedOppholdKvittering.tom = '2020-03-27'
 
