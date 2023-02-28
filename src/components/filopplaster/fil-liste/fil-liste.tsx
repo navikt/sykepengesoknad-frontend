@@ -52,7 +52,7 @@ const FilListe = ({ fjernKnapp, setValgtKvittering, setOpenModal }: Props) => {
         <Vis
             hvis={kvitteringer.length > 0}
             render={() => (
-                <BodyShort as="table" className="tabell tabell--stripet fil_liste">
+                <BodyShort as="table" className="tabell tabell--stripet fil_liste" data-cy="fil-liste">
                     <Vis
                         hvis={fjernKnapp}
                         render={() => (

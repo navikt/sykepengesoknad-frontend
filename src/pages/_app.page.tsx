@@ -1,6 +1,5 @@
 /* eslint-disable postcss-modules/no-unused-class */
 import '../style/global.css'
-import '@navikt/ds-datepicker/lib/index.css'
 import '../components/app.css'
 import '../components/avbryt-soknad-modal/avbryt-soknad-modal.css'
 import '../components/avslutt-og-fortsett-senere/avslutt-og-fortsett-senere.css'

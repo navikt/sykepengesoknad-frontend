@@ -112,8 +112,8 @@ const DragAndDrop = ({ valgtFil, setValgtFil, valgtKvittering }: DragAndDropProp
                 hvis={!formErDisabled}
                 render={() => (
                     <>
-                        <div className="filopplasteren" {...getRootProps()}>
-                            <input {...getInputProps()} accept={tillatteFiltyper} id="ddfil" />
+                        <div className="filopplasteren" data-cy="filopplasteren" {...getRootProps()}>
+                            <input {...getInputProps()} accept={tillatteFiltyper} id="ddfil" type="file" />
                             <input
                                 type="hidden"
                                 id="fil_input"

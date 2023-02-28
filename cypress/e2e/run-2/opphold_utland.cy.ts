@@ -1,6 +1,7 @@
 import { oppholdUtland } from '../../../src/data/mock/data/opphold-utland'
 import { soknaderOpplaering as soknader } from '../../../src/data/mock/data/opplaering'
 import { RSSoknad } from '../../../src/types/rs-types/rs-soknad'
+import { setPeriodeFraTil } from '../../support/utilities'
 
 describe('Tester søknad om å beholde sykepenger utenfor EØS', () => {
     const soknad = soknader.find((sok: RSSoknad) => sok.id === oppholdUtland.id)!
@@ -24,10 +25,7 @@ describe('Tester søknad om å beholde sykepenger utenfor EØS', () => {
         cy.contains('Opplysninger fra sykmeldingen').should('not.exist')
         cy.contains('Når skal du reise?')
 
-        cy.get('#1_0 .fom .ds-datepicker__calendarButton').click()
-        cy.get('.DayPicker-Day').contains('17').click()
-        cy.get('#1_0 .tom .ds-datepicker__calendarButton').click()
-        cy.get('.DayPicker-Day').contains('24').click()
+        setPeriodeFraTil(17, 24)
 
         cy.contains('Gå videre').click()
     })

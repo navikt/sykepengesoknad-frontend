@@ -1,4 +1,5 @@
 import { arbeidsledig } from '../../../src/data/mock/data/opplaering'
+import { setPeriodeFraTil } from '../../support/utilities'
 
 describe('Tester arbeidsledigsøknad', () => {
     const soknad = arbeidsledig
@@ -98,12 +99,7 @@ describe('Tester arbeidsledigsøknad', () => {
 
         // Underspørsmål 1
         cy.contains('Når var du utenfor EØS?')
-        cy.get('#687423_0 .fom .ds-datepicker__calendarButton').click()
-        cy.get('.DayPicker-Day').contains('17').click()
-        cy.get('#687423_0 .tom .ds-datepicker__calendarButton').click({
-            force: true,
-        })
-        cy.get('.DayPicker-Day').contains('24').click()
+        setPeriodeFraTil(17, 24)
 
         // Underspørsmål 2
         cy.contains('Har du søkt om å beholde sykepengene for disse dagene?')

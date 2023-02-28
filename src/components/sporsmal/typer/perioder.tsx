@@ -59,7 +59,7 @@ const Perioder = ({ sporsmal }: SpmProps) => {
                 })}
             </ul>
 
-            <button role="link" className="lenkeknapp navds-link" onClick={leggTilPeriode}>
+            <button role="link" type="button" className="lenkeknapp navds-link" onClick={leggTilPeriode}>
                 {tekst('sykepengesoknad.periodevelger.legg-til-ekstra')}
             </button>
 

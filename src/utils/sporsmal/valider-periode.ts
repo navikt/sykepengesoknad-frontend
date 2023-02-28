@@ -1,3 +1,4 @@
+import { RangeValidationT } from '@navikt/ds-react'
 import dayjs from 'dayjs'
 
 import { FormPeriode } from '../../components/sporsmal/typer/periode-komp'
@@ -43,42 +44,59 @@ export const validerPeriode = (sporsmal: Sporsmal, id: string, values: Record<st
     return overlapper ? 'Du kan ikke legge inn perioder som overlapper med hverandre' : true
 }
 
-export const validerFom = (sporsmal: Sporsmal, id: string, values: Record<string, any>) => {
+export const validerFom = (
+    sporsmal: Sporsmal,
+    id: string,
+    values: Record<string, any>,
+    rangeValidation: RangeValidationT | null,
+) => {
     const formPeriode = values[id] as FormPeriode
-    // Enkel null sjekk
-    if (formPeriode?.fom === undefined || formPeriode?.fom === '') return 'Du må oppgi en fra og med dato'
+
+    // Grenseverdier
+    if (rangeValidation && rangeValidation.from.isBefore) {
+        return 'Fra og med kan ikke være før ' + dayjs(sporsmal.min).format('DD.MM.YYYY')
+    }
+    if (rangeValidation && rangeValidation.from.isBefore) return 'Fra og med må være før til og med'
+
+    if (!formPeriode?.fom) return 'Du må oppgi en fra og med dato i formatet dd.mm.åååå'
 
     const valgtPeriode = {
         fom: fraBackendTilDate(formPeriode.fom),
         tom: fraBackendTilDate(formPeriode.tom),
     } as Periode
-    // Formattering er riktig når dato er skrevet inn manuelt
-    if (!valgtPeriode.fom) return 'Fra og med følger ikke formatet dd.mm.åååå'
-    // Grenseverdier
-    if (sporsmal.min && valgtPeriode.fom < fraBackendTilDate(sporsmal.min)!) {
-        return 'Fra og med kan ikke være før ' + dayjs(sporsmal.min).format('DD.MM.YYYY')
-    }
-    if (valgtPeriode.fom > valgtPeriode.tom) return 'Fra og med må være før til og med'
+
+    // skriv om til generelt gyldig
+    if (!valgtPeriode.fom) return 'Du må oppgi en fra og med dato i formatet dd.mm.åååå' // 'Fra og med følger ikke formatet dd.mm.åååå'
 
     return true
 }
-
-export const validerTom = (sporsmal: Sporsmal, id: string, values: Record<string, any>) => {
+export const validerTom = (
+    sporsmal: Sporsmal,
+    id: string,
+    values: Record<string, any>,
+    rangeValidation: RangeValidationT | null,
+) => {
     const formPeriode = values[id] as FormPeriode
-    // Enkel null sjekk
-    if (formPeriode?.tom === undefined || formPeriode?.tom === '') return 'Du må oppgi en til og med dato'
+
+    // Grenseverdier
+    if (rangeValidation && rangeValidation.to.isAfter) {
+        return 'Til og med kan ikke være etter ' + dayjs(sporsmal.max).format('DD.MM.YYYY')
+    }
+    if (rangeValidation && rangeValidation?.to.isBeforeFrom) return 'Til og med må være etter fra og med'
+
+    // Grenseverdier
+
+    if (formPeriode?.tom === undefined || formPeriode?.tom === '')
+        return 'Du må oppgi en til og med dato i formatet dd.mm.åååå'
 
     const valgtPeriode = {
         fom: fraBackendTilDate(formPeriode.fom),
         tom: fraBackendTilDate(formPeriode.tom),
     } as Periode
     // Formattering er riktig når dato er skrevet inn manuelt
-    if (!valgtPeriode.tom) return 'Til og med følger ikke formatet dd.mm.åååå'
-    // Grenseverdier
-    if (sporsmal.max && valgtPeriode.tom > fraBackendTilDate(sporsmal.max)!) {
-        return 'Til og med kan ikke være etter ' + dayjs(sporsmal.max).format('DD.MM.YYYY')
-    }
-    if (valgtPeriode.fom > valgtPeriode.tom) return 'Til og med må være etter fra og med'
+
+    // skriv om til generelt gyldig
+    if (!valgtPeriode.tom) return 'Du må oppgi en til og med dato i formatet dd.mm.åååå' // 'Til og med følger ikke formatet dd.mm.åååå'
 
     return true
 }

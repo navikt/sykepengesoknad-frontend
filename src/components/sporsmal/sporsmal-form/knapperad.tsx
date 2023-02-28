@@ -37,7 +37,7 @@ const Knapperad = ({ soknad, poster }: KnapperadProps) => {
     }
 
     return (
-        <div className="knapperad">
+        <div className="knapperad" data-cy="knapperad">
             <Button variant="primary" type="submit" loading={poster}>
                 {tekst(nokkel())}
             </Button>

@@ -1,6 +1,8 @@
 .periode {
     margin-top: 1rem;
+    flex-direction: row;
 }
+
 .periode .skjemagruppe {
     display: flex;
     flex-wrap: wrap;
@@ -13,6 +15,7 @@
 .periode .skjemagruppe .skjemaelement.tom {
     margin-top: 1rem;
 }
+
 .periode .navds-label {
     font-weight: normal;
 }
@@ -24,8 +27,18 @@
     transform: translate3d(0, 0, 200px);
 }
 @media (min-width: 768px) {
+    .linkatbottom {
+        align-items: bottom;
+        padding-bottom: 17px;
+    }
+
+    .displayasrow > * {
+        padding-top: 8px;
+    }
+
     .periode {
         display: flex;
+        flex-direction: row;
     }
     .periode .skjemagruppe .skjemaelement {
         width: 50%;
