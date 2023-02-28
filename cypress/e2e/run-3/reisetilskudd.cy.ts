@@ -101,32 +101,13 @@ describe('Teste førsteside i reisetilskuddsøknaden', () => {
 
         it('Minst en dag må velges', () => {
             cy.contains('Gå videre').click()
-            cy.get('.skjemaelement__feilmelding').contains('Du må oppgi en dag')
+            cy.get('.skjemaelement__feilmelding').contains('Du må oppgi minst en dag')
         })
 
         it('Fyller ut', () => {
-            // Grense før
-            cy.get('.kalenderuke')
-                .first()
-                .within(() => {
-                    cy.get('.ukenr').contains('52')
-                    cy.get('.kalenderdag.foran').contains('22')
-                    cy.get('.kalenderdag.inni').contains('23')
-                })
-
-            // Valg av dager
-            cy.get('.skjema__dager').contains('24').click({ force: true })
-            cy.get('.skjema__dager').contains('25').click({ force: true })
-            cy.get('.skjema__dager').contains('25').click({ force: true })
-
-            // Grense etter
-            cy.get('.kalenderuke')
-                .last()
-                .within(() => {
-                    cy.get('.ukenr').contains('1')
-                    cy.get('.kalenderdag.inni').contains('07')
-                    cy.get('.kalenderdag.etter').contains('08')
-                })
+            cy.get('[aria-label="4. januar (mandag)"]').click()
+            cy.get('[aria-label="5. januar (tirsdag)"]').click()
+            cy.get('[aria-label="6. januar (onsdag)"]').click()
 
             cy.get('.undersporsmal > .kriterie--ja > .radioContainer > input[value=JA]').click({ force: true })
             cy.get('#1566447').focus().type('1000')
@@ -140,8 +121,11 @@ describe('Teste førsteside i reisetilskuddsøknaden', () => {
             cy.contains('Tilbake').click({ force: true })
 
             cy.url().should('include', `${nyttReisetilskudd.id}/3`)
-            cy.get('.skjema__dager').contains('23').siblings().first().should('not.have.class', 'checked')
-            cy.get('.skjema__dager').contains('24').siblings().first().should('have.class', 'checked')
+            cy.get('[aria-label="4. januar (mandag)"]').should('have.class', 'rdp-day_selected')
+            cy.get('[aria-label="5. januar (tirsdag)"]').should('have.class', 'rdp-day_selected')
+            cy.get('[aria-label="6. januar (onsdag)"]').should('have.class', 'rdp-day_selected')
+            cy.get('[aria-label="7. januar (torsdag)"]').should('not.have.class', 'rdp-day_selected')
+
             cy.get('#1566447').should('have.value', '1000')
 
             cy.contains('Gå videre').click()

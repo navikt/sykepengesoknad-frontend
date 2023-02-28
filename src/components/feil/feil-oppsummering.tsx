@@ -56,7 +56,8 @@ const FeilOppsummering = ({
         } else if (detteSpm.svartype.includes('CHECK') || detteSpm.svartype.includes('RADIO')) {
             elmid = idarr[0]
         } else if (detteSpm.svartype === RSSvartype.DATOER) {
-            const kalender: any = document.querySelector('.skjema__dager')
+            const kalender: any = document.querySelector('.dagerKalender')
+            kalender.scrollIntoView()
             kalender.focus()
         } else {
             elmid = id
