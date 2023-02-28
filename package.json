@@ -3,10 +3,10 @@
     "version": "1.0.0",
     "private": true,
     "dependencies": {
-        "@navikt/ds-css": "^2.4.0",
+        "@navikt/ds-css": "^2.4.1",
         "@navikt/ds-icons": "^2.1.6",
-        "@navikt/ds-react": "^2.4.0",
-        "@navikt/ds-tokens": "^2.4.0",
+        "@navikt/ds-react": "^2.4.1",
+        "@navikt/ds-tokens": "^2.4.1",
         "@navikt/nav-dekoratoren-moduler": "^1.9.0",
         "@navikt/next-api-proxy": "^2.1.0",
         "@navikt/next-logger": "^1.14.0",

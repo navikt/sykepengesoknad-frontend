@@ -29,7 +29,7 @@ const DagerKomp = ({ sporsmal }: SpmProps) => {
                         <DatePicker.Standalone
                             mode="multiple"
                             aria-describedby={labelen}
-                            showWeekNumber={true}
+                            fixedWeeks={false}
                             fromDate={dayjs(sporsmal.min).toDate()}
                             toDate={dayjs(sporsmal.max).toDate()}
                             selected={field.value}
