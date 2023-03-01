@@ -3,7 +3,7 @@
     "version": "1.0.0",
     "private": true,
     "dependencies": {
-        "@navikt/ds-css": "^2.4.1",
+        "@navikt/ds-css": "^2.4.2",
         "@navikt/ds-icons": "^2.4.2",
         "@navikt/ds-react": "^2.4.2",
         "@navikt/ds-tokens": "^2.4.2",
