@@ -18,7 +18,7 @@ describe('Tester at riktig antall desimaler sendes til backend', () => {
     })
 
     it('Oppgir desimaler på svartype BELOP og KILOMETER', () => {
-        cy.visit(`http://localhost:8080/syk/sykepengesoknad/soknader/${gradertReisetilskudd.id}/13`)
+        cy.visit(`http://localhost:8080/syk/sykepengesoknad/soknader/${gradertReisetilskudd.id}/12`)
 
         cy.get('.radioGruppe-jaNei input[value=JA]').click({ force: true })
 

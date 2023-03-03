@@ -149,27 +149,8 @@ describe('Tester frilansersøknad', () => {
         cy.contains('Gå videre').click()
     })
 
-    it('Søknad UTDANNING - steg 7', function () {
+    it('Søknad VAER_KLAR_OVER_AT - steg 7', function () {
         cy.url().should('include', `${soknad.id}/7`)
-
-        // Test spørsmål
-        cy.contains('Har du vært under utdanning i løpet av perioden 1. - 24. april 2020?')
-        cy.get('.radioGruppe-jaNei input[value=JA]').click({ force: true })
-
-        // Underspørsmål 1
-        cy.contains('Når startet du på utdanningen?')
-        cy.get('.navds-date__field-button').click()
-        cy.get('.rdp-day').contains('10').click()
-
-        // Underspørsmål 2 - radio
-        cy.contains('Er utdanningen et fulltidsstudium?')
-        cy.get('.undersporsmal .skjemaelement .radioContainer .radioknapp#687454_0').click({ force: true })
-
-        cy.contains('Gå videre').click()
-    })
-
-    it('Søknad VAER_KLAR_OVER_AT - steg 8', function () {
-        cy.url().should('include', `${soknad.id}/8`)
         cy.get('.navds-checkbox__label').click({ force: true })
         cy.contains(
             'Jeg har lest all informasjonen jeg har fått i søknaden og bekrefter at opplysningene jeg har gitt er korrekte.',

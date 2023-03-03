@@ -169,27 +169,8 @@ describe('Tester arbeidstakersøknad', () => {
         cy.contains('Gå videre').click()
     })
 
-    it('Søknad UTDANNING', function () {
-        cy.url().should('include', `${soknad.id}/8`)
-
-        // Test spørsmål
-        cy.get('.radioGruppe-jaNei input[value=JA]').click({ force: true })
-
-        // Underspørsmål 1
-        cy.contains('Når startet du på utdanningen?')
-        cy.get('.navds-date__field-button').click()
-        cy.get('.rdp-day').contains('10').click()
-
-        // Underspørsmål 2 - dato
-        cy.contains('Er utdanningen et fulltidsstudium?')
-        // Underspørsmål 2 - radio
-        cy.get('.undersporsmal .skjemaelement .radioContainer .radioknapp#687371_0').click({ force: true })
-
-        cy.contains('Gå videre').click()
-    })
-
     it('Søknad ANSVARSERKLARING', function () {
-        cy.url().should('include', `${soknad.id}/9`)
+        cy.url().should('include', `${soknad.id}/8`)
 
         cy.contains('Oppsummering fra søknaden').click({ force: true })
         cy.contains(

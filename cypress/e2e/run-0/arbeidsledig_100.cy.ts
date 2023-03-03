@@ -71,27 +71,8 @@ describe('Tester arbeidsledigsøknad', () => {
         cy.contains('Gå videre').click()
     })
 
-    it('Søknad UTDANNING', () => {
-        cy.url().should('include', `${soknad.id}/4`)
-
-        // Test spørsmål
-        cy.get('.radioGruppe-jaNei input[value=JA]').click({ force: true })
-
-        // Underspørsmål 1
-        cy.contains('Når startet du på utdanningen?')
-        cy.get('.navds-date__field-button').click()
-        cy.get('.rdp-day').contains('10').click()
-
-        // Underspørsmål 2 - dato
-        cy.contains('Er utdanningen et fulltidsstudium?')
-        // Underspørsmål 2 - radio
-        cy.get('.undersporsmal .skjemaelement .radioContainer .radioknapp#687421_0').click({ force: true })
-
-        cy.contains('Gå videre').click({ force: true })
-    })
-
     it('Søknad ARBEIDSLEDIG_UTLAND', () => {
-        cy.url().should('include', `${soknad.id}/5`)
+        cy.url().should('include', `${soknad.id}/4`)
 
         // Test spørsmål
         cy.contains('Var du på reise utenfor EØS mens du var sykmeldt 1. - 24. april 2020?')
@@ -109,7 +90,7 @@ describe('Tester arbeidsledigsøknad', () => {
     })
 
     it('Søknad VAER_KLAR_OVER_AT', () => {
-        cy.url().should('include', `${soknad.id}/6`)
+        cy.url().should('include', `${soknad.id}/5`)
         cy.get('.navds-checkbox__label').click({ force: true })
         cy.contains(
             'Jeg har lest all informasjonen jeg har fått i søknaden og bekrefter at opplysningene jeg har gitt er korrekte.',

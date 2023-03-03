@@ -181,8 +181,6 @@ describe('Tester kvittering', () => {
                 force: true,
             })
             cy.contains('Gå videre').click()
-            cy.get('.radioGruppe-jaNei input[value=NEI]').click({ force: true })
-            cy.contains('Gå videre').click()
             cy.get('.navds-checkbox__label').click({ force: true })
             cy.contains('Send søknaden').click()
             cy.url().should('include', `/kvittering/${selvstendigKvittering.id}`)
