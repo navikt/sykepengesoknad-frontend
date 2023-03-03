@@ -4,7 +4,7 @@
     "private": true,
     "dependencies": {
         "@navikt/ds-css": "^2.6.0",
-        "@navikt/ds-icons": "^2.5.0",
+        "@navikt/ds-icons": "^2.6.0",
         "@navikt/ds-react": "^2.5.0",
         "@navikt/ds-tokens": "^2.6.0",
         "@navikt/nav-dekoratoren-moduler": "^1.9.0",
