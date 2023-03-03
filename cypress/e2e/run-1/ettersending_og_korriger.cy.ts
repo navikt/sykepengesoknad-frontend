@@ -50,10 +50,6 @@ describe('Tester ettersending og korrigering', () => {
         cy.contains('Gå videre').click()
 
         cy.url().should('include', `${soknad.id}/10`)
-        cy.get('.radioGruppe-jaNei input[value=NEI]').click({ force: true })
-        cy.contains('Gå videre').click()
-
-        cy.url().should('include', `${soknad.id}/11`)
         cy.get('.navds-checkbox__label').click({ force: true })
         cy.contains('Send søknaden').click()
     })
@@ -114,7 +110,6 @@ describe('Tester ettersending og korrigering', () => {
         cy.contains('Gå videre').click()
         cy.contains('Gå videre').click()
         cy.contains('Ja').click()
-        cy.contains('Gå videre').click()
         cy.contains('Gå videre').click()
         cy.contains('Gå videre').click()
         cy.get('.navds-checkbox__label').click({ force: true })

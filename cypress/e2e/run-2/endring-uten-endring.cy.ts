@@ -33,9 +33,6 @@ describe('Tester endring uten en endringer', () => {
         cy.url().should('include', '/4')
         cy.contains('Gå videre').click()
 
-        cy.url().should('include', '/5')
-        cy.contains('Gå videre').click()
-
         cy.url().should('include', '/')
         cy.contains('Gå videre').click()
         cy.get('.navds-checkbox__label').click({ force: true })

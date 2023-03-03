@@ -171,27 +171,8 @@ describe('Tester arbeidstakersøknad - gradert 50%', () => {
         cy.contains('Gå videre').click()
     })
 
-    it('Søknad UTDANNING', function () {
-        cy.url().should('include', `${soknad.id}/10`)
-
-        // Test spørsmål
-        cy.get('.radioGruppe-jaNei input[value=JA]').click({ force: true })
-
-        // Underspørsmål 1
-        cy.contains('Når startet du på utdanningen?')
-        cy.get('.navds-date__field-button').click()
-        cy.get('.rdp-day').contains('10').click()
-
-        // Underspørsmål 2 - dato
-        cy.contains('Er utdanningen et fulltidsstudium?')
-        // Underspørsmål 2 - radio
-        cy.get('.undersporsmal .skjemaelement .radioContainer .radioknapp#687333_0').click({ force: true })
-
-        cy.contains('Gå videre').click()
-    })
-
     it('Søknad ANSVARSERKLARING ', function () {
-        cy.url().should('include', `${soknad.id}/11`)
+        cy.url().should('include', `${soknad.id}/10`)
         cy.get('.navds-checkbox__label').click({ force: true })
         cy.contains(
             'Jeg har lest all informasjonen jeg har fått i søknaden og bekrefter at opplysningene jeg har gitt er korrekte.',
