@@ -12,6 +12,8 @@ import { RouteParams } from '../../../app'
 import useSoknad from '../../../hooks/useSoknad'
 import Kontonummer from '../kontonummer/kontonummer'
 
+import styles from './kvittering-videre.module.css'
+
 const KvitteringVidere = () => {
     const { id } = useParams<RouteParams>()
     const { data: valgtSoknad } = useSoknad(id)
@@ -23,11 +25,10 @@ const KvitteringVidere = () => {
     if (!valgtSoknad) return null
 
     return (
-        <Alert variant="info" className="opplysninger">
+        <Alert variant="info" className={styles.hvitAlert} data-cy={'kvittering-alert'}>
             <Heading size="small" level="3">
                 {tekst('kvittering.hva-skjer-videre')}
             </Heading>
-
             <Vis
                 hvis={valgtSoknad.arbeidssituasjon === RSArbeidssituasjon.NAERINGSDRIVENDE}
                 render={() => (
