@@ -108,7 +108,6 @@ const SoknadenTekster = {
     'sykepengesoknad.navigasjon.gaa-til': 'Gå til dine søknader',
     'sykepengesoknad.bor_i_norge.tittel': 'Bosted',
     'sykepengesoknad.lonnet_arbeid_utenfor_norge.tittel': 'Lønnet arbeid utenfor Norge',
-    'sykepengesoknad.turnus_rotasjon.tittel': 'Turnus',
     'sykepengesoknad.trygd_utenfor_norge.tittel': 'Sykepenger i andre EØS-land',
 }
 
