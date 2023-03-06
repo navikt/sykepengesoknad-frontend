@@ -38,7 +38,7 @@ describe('Tester kvittering', () => {
                 .and('not.contain', 'Org.nr')
 
             // Hva skjer videre
-            cy.get('.opplysninger.navds-alert--info')
+            cy.get('[data-cy="kvittering-alert"]')
                 .should('contain', 'Hva skjer videre?')
                 .and('contain', 'NAV behandler søknaden din')
                 .and(
@@ -80,7 +80,7 @@ describe('Tester kvittering', () => {
                 .and('not.contain', 'Org.nr')
 
             // Hva skjer videre skal ikke finnes
-            cy.get('.opplysninger.navds-alert--info').should('not.exist')
+            cy.get('[data-cy="kvittering-alert"]').should('not.exist')
 
             // Oppsummering ekspandert
             cy.get('.utvidbar.oppsummering.lilla.apen .navds-accordion__header').should(
@@ -129,7 +129,7 @@ describe('Tester kvittering', () => {
                 .and('not.contain', 'Org.nr')
 
             // Hva skjer videre
-            cy.get('.opplysninger.navds-alert--info')
+            cy.get('[data-cy="kvittering-alert"]')
                 .should('contain', 'Hva skjer videre?')
                 .and('contain', 'Du får svar på om du kan reise')
                 .and(
@@ -191,7 +191,7 @@ describe('Tester kvittering', () => {
                 .and('not.contain', 'Org.nr')
 
             // Hva skjer videre
-            cy.get('.opplysninger.navds-alert--info')
+            cy.get('[data-cy="kvittering-alert"]')
                 .should('contain', 'Hva skjer videre?')
                 .and('contain', 'NAV behandler søknaden din')
                 .and(

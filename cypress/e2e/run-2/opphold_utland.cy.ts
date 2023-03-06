@@ -132,7 +132,7 @@ describe('Tester søknad om å beholde sykepenger utenfor EØS', () => {
     it('Viser kvittering med knapp til neste søknad', function () {
         cy.url().should('include', `kvittering/${soknad.id}`)
         // Hva skjer videre
-        cy.get('.opplysninger.navds-alert--info')
+        cy.get('[data-cy="kvittering-alert"]')
             .should('contain', 'Hva skjer videre?')
             .and('contain', 'Du får svar på om du kan reise')
             .and('contain', 'Risiko ved reise før du har mottatt svar')
