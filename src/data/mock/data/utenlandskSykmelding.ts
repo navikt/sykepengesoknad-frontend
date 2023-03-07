@@ -32,7 +32,7 @@ export const utenlandskSykmeldingSporsmalene: RSSporsmal[] = [
                     {
                         id: '2543524234234345',
                         tag: 'UTENLANDSK_SYKMELDING_CO',
-                        sporsmalstekst: 'C/O (valgfritt)',
+                        sporsmalstekst: 'C/O',
                         undertekst: null,
                         svartype: 'FRITEKST',
                         min: null,
@@ -49,7 +49,7 @@ export const utenlandskSykmeldingSporsmalene: RSSporsmal[] = [
                         sporsmalstekst: 'Vegnavn og husnummer, evt. postboks',
                         undertekst: null,
                         svartype: 'FRITEKST',
-                        min: null,
+                        min: '1',
                         max: null,
 
                         pavirkerAndreSporsmal: false,
@@ -60,7 +60,7 @@ export const utenlandskSykmeldingSporsmalene: RSSporsmal[] = [
                     {
                         id: '254223435234sfd5',
                         tag: 'UTENLANDSK_SYKMELDING_BYGNING',
-                        sporsmalstekst: 'Bygning (valgfritt)',
+                        sporsmalstekst: 'Bygning',
                         undertekst: null,
                         svartype: 'FRITEKST',
                         min: null,
@@ -74,7 +74,7 @@ export const utenlandskSykmeldingSporsmalene: RSSporsmal[] = [
                     {
                         id: '2543523334sfd5',
                         tag: 'UTENLANDSK_SYKMELDING_BY',
-                        sporsmalstekst: 'By / stedsnavn (valgfritt)',
+                        sporsmalstekst: 'By / stedsnavn',
                         undertekst: null,
                         svartype: 'FRITEKST',
                         min: null,
@@ -88,7 +88,7 @@ export const utenlandskSykmeldingSporsmalene: RSSporsmal[] = [
                     {
                         id: '254352323234sfd5',
                         tag: 'UTENLANDSK_SYKMELDING_REGION',
-                        sporsmalstekst: 'Region (valgfritt)',
+                        sporsmalstekst: 'Region',
                         undertekst: null,
                         svartype: 'FRITEKST',
                         min: null,
@@ -105,7 +105,7 @@ export const utenlandskSykmeldingSporsmalene: RSSporsmal[] = [
                         sporsmalstekst: 'Land',
                         undertekst: null,
                         svartype: 'FRITEKST',
-                        min: null,
+                        min: '1',
                         max: null,
 
                         pavirkerAndreSporsmal: false,
@@ -119,7 +119,7 @@ export const utenlandskSykmeldingSporsmalene: RSSporsmal[] = [
                         sporsmalstekst: 'Telefonnummer',
                         undertekst: null,
                         svartype: 'FRITEKST',
-                        min: null,
+                        min: '1',
                         max: null,
 
                         pavirkerAndreSporsmal: false,

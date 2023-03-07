@@ -45,6 +45,10 @@ describe('Tester støtte for gamle spørsmål', () => {
         cy.contains(sporsmalstekst).get('.navds-text-field__input').type(verdi)
     }
 
+    function svarFritekst(tag: string, verdi: string) {
+        cy.get(`[data-cy="${tag}"]`).type(verdi)
+    }
+
     function velgCheckbox(gjelder: string) {
         cy.get('.undersporsmal .checkboxgruppe').contains(gjelder).click({ force: true })
     }
@@ -264,6 +268,25 @@ describe('Tester støtte for gamle spørsmål', () => {
         gaVidere()
     })
 
+    it('BOSTED', () => {
+        svarNeiHovedsporsmal()
+        svarFritekst('UTENLANDSK_SYKMELDING_VEGNAVN', 'Downing Street 10')
+        svarFritekst('UTENLANDSK_SYKMELDING_LAND', 'UK')
+        svarFritekst('UTENLANDSK_SYKMELDING_TELEFONNUMMER', '81549300')
+        setPeriodeFraTil(1, 6)
+
+        gaVidere()
+    })
+    it('LØNNET ARBEID', () => {
+        svarJaHovedsporsmal()
+        svarFritekst('UTENLANDSK_SYKMELDING_LONNET_ARBEID_UTENFOR_NORGE_FRITEKST', 'Britiske staten')
+        gaVidere()
+    })
+    it('Sykepenger i andre EØS-land', () => {
+        svarNeiHovedsporsmal()
+
+        gaVidere()
+    })
     it('VAER_KLAR_OVER_AT & BEKREFT_OPPLYSNINGER', () => {
         svarCheckboxPanel()
         cy.contains('Send søknaden').click()
