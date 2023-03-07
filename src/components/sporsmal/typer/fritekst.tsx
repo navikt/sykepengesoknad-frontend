@@ -4,9 +4,11 @@ import { useFormContext } from 'react-hook-form'
 
 import FeilLokal from '../../feil/feil-lokal'
 import { SpmProps } from '../sporsmal-form/sporsmal-form'
+import { hentFeilmelding } from '../sporsmal-utils'
 
 export const Fritekst = ({ sporsmal }: SpmProps) => {
     const { register } = useFormContext()
+    const feilmelding = hentFeilmelding(sporsmal)
 
     const description = () => {
         const valgfri = sporsmal.min == null
@@ -35,7 +37,10 @@ export const Fritekst = ({ sporsmal }: SpmProps) => {
                             return true
                         }
                         const minLengde = parseFloat(sporsmal.min)
-                        return verdien.trim().length >= minLengde
+                        if (verdien.trim().length >= minLengde) {
+                            return true
+                        }
+                        return feilmelding.global
                     },
                 })}
             />
