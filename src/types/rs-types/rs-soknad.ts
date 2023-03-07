@@ -14,6 +14,7 @@ export interface RSSoknad {
     status: RSSoknadstatusType
     arbeidssituasjon: RSArbeidssituasjonType | null
     fom: string | null
+    utenlandskSykmelding?: boolean
     tom: string | null
     korrigerer: string | null
     korrigertAv: string | null

@@ -17,6 +17,7 @@ import RadioKomp from './typer/radio-komp'
 import TallKomp from './typer/tall-komp'
 import UkjentSporsmal from './typer/ukjent-sporsmal'
 import { SpmProps } from './sporsmal-form/sporsmal-form'
+import { Fritekst } from './typer/fritekst'
 
 const SporsmalSwitch = ({ sporsmal }: SpmProps) => {
     switch (sporsmal.svartype) {
@@ -62,6 +63,9 @@ const SporsmalSwitch = ({ sporsmal }: SpmProps) => {
 
         case RSSvartype.LAND:
             return <Land sporsmal={sporsmal} />
+
+        case RSSvartype.FRITEKST:
+            return <Fritekst sporsmal={sporsmal} />
 
         case RSSvartype.KVITTERING:
             return <Opplasting sporsmal={sporsmal} />

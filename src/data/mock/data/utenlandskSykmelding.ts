@@ -1,0 +1,217 @@
+import { Persona } from '../personas'
+import { RSSporsmal } from '../../../types/rs-types/rs-sporsmal'
+import { jsonDeepCopy } from '../../../utils/json-deep-copy'
+
+import { brukertestSoknad, brukertestSykmelding } from './brukertest'
+
+export const utenlandskSykmeldingSporsmalene: RSSporsmal[] = [
+    {
+        id: '54352523',
+        tag: 'UTENLANDSK_SYKMELDING_BOR_I_NORGE',
+        sporsmalstekst: `Bor du i Norge?`,
+        undertekst: null,
+        svartype: 'JA_NEI',
+        min: null,
+        max: null,
+        pavirkerAndreSporsmal: false,
+        kriterieForVisningAvUndersporsmal: 'NEI',
+        svar: [],
+        undersporsmal: [
+            {
+                id: '2543524234234345',
+                tag: 'UTENLANDSK_SYKMELDING_UTENLANDSK_ADRESSE',
+                sporsmalstekst: 'Utenlandsk kontaktadresse',
+                undertekst: null,
+                svartype: 'IKKE_RELEVANT',
+                min: null,
+                max: null,
+                pavirkerAndreSporsmal: false,
+                kriterieForVisningAvUndersporsmal: null,
+                svar: [],
+                undersporsmal: [
+                    {
+                        id: '2543524234234345',
+                        tag: 'UTENLANDSK_SYKMELDING_CO',
+                        sporsmalstekst: 'C/O (valgfritt)',
+                        undertekst: null,
+                        svartype: 'FRITEKST',
+                        min: null,
+                        max: null,
+
+                        pavirkerAndreSporsmal: false,
+                        kriterieForVisningAvUndersporsmal: null,
+                        svar: [],
+                        undersporsmal: [],
+                    },
+                    {
+                        id: '254342345234sfd5',
+                        tag: 'UTENLANDSK_SYKMELDING_VEGNAVN',
+                        sporsmalstekst: 'Vegnavn og husnummer, evt. postboks',
+                        undertekst: null,
+                        svartype: 'FRITEKST',
+                        min: null,
+                        max: null,
+
+                        pavirkerAndreSporsmal: false,
+                        kriterieForVisningAvUndersporsmal: null,
+                        svar: [],
+                        undersporsmal: [],
+                    },
+                    {
+                        id: '254223435234sfd5',
+                        tag: 'UTENLANDSK_SYKMELDING_BYGNING',
+                        sporsmalstekst: 'Bygning (valgfritt)',
+                        undertekst: null,
+                        svartype: 'FRITEKST',
+                        min: null,
+                        max: null,
+
+                        pavirkerAndreSporsmal: false,
+                        kriterieForVisningAvUndersporsmal: null,
+                        svar: [],
+                        undersporsmal: [],
+                    },
+                    {
+                        id: '2543523334sfd5',
+                        tag: 'UTENLANDSK_SYKMELDING_BY',
+                        sporsmalstekst: 'By / stedsnavn (valgfritt)',
+                        undertekst: null,
+                        svartype: 'FRITEKST',
+                        min: null,
+                        max: null,
+
+                        pavirkerAndreSporsmal: false,
+                        kriterieForVisningAvUndersporsmal: null,
+                        svar: [],
+                        undersporsmal: [],
+                    },
+                    {
+                        id: '254352323234sfd5',
+                        tag: 'UTENLANDSK_SYKMELDING_REGION',
+                        sporsmalstekst: 'Region (valgfritt)',
+                        undertekst: null,
+                        svartype: 'FRITEKST',
+                        min: null,
+                        max: null,
+
+                        pavirkerAndreSporsmal: false,
+                        kriterieForVisningAvUndersporsmal: null,
+                        svar: [],
+                        undersporsmal: [],
+                    },
+                    {
+                        id: '25435234234234sfd5',
+                        tag: 'UTENLANDSK_SYKMELDING_LAND',
+                        sporsmalstekst: 'Land',
+                        undertekst: null,
+                        svartype: 'FRITEKST',
+                        min: null,
+                        max: null,
+
+                        pavirkerAndreSporsmal: false,
+                        kriterieForVisningAvUndersporsmal: null,
+                        svar: [],
+                        undersporsmal: [],
+                    },
+                    {
+                        id: '2543523423423sdfsdf4sfd5',
+                        tag: 'UTENLANDSK_SYKMELDING_TELEFONNUMMER',
+                        sporsmalstekst: 'Telefonnummer',
+                        undertekst: null,
+                        svartype: 'FRITEKST',
+                        min: null,
+                        max: null,
+
+                        pavirkerAndreSporsmal: false,
+                        kriterieForVisningAvUndersporsmal: null,
+                        svar: [],
+                        undersporsmal: [],
+                    },
+                    {
+                        id: '25435234sfd2342345',
+                        tag: 'UTENLANDSK_SYKMELDING_GYLDIGHET_ADRESSE',
+                        sporsmalstekst: 'I hvilken dato skal denne adressen brukes?',
+                        undertekst:
+                            'Du velger selv hvor lenge adressen skal være gyldig, maksimalt 1 år. Etter 1 år må du endre eller forlenge adressen.',
+                        svartype: 'PERIODER',
+                        min: null,
+                        max: null,
+
+                        pavirkerAndreSporsmal: false,
+                        kriterieForVisningAvUndersporsmal: null,
+                        svar: [],
+                        undersporsmal: [],
+                    },
+                ],
+            },
+        ],
+    },
+    {
+        id: '54352523',
+        tag: 'UTENLANDSK_SYKMELDING_LONNET_ARBEID_UTENFOR_NORGE',
+        sporsmalstekst: `Utfører du lønnet arbeid utenfor Norge?`,
+        undertekst: null,
+        svartype: 'JA_NEI',
+        min: null,
+        max: null,
+        pavirkerAndreSporsmal: false,
+        kriterieForVisningAvUndersporsmal: 'JA',
+        svar: [],
+        undersporsmal: [
+            {
+                id: '254352345',
+                tag: 'UTENLANDSK_SYKMELDING_LONNET_ARBEID_UTENFOR_NORGE_FRITEKST',
+                sporsmalstekst: 'Oppgi nærmere opplysninger om arbeid/virksomhet utenfor Norge',
+                undertekst: '(f. eks. navn på arbeidsgivere og nærmere informasjon om din yrkesaktivitet i utlandet)\n',
+                svartype: 'FRITEKST',
+                min: null,
+                max: null,
+                pavirkerAndreSporsmal: false,
+                kriterieForVisningAvUndersporsmal: null,
+                svar: [],
+                undersporsmal: [],
+            },
+        ],
+    },
+    {
+        id: '345435435345345',
+        tag: 'UTENLANDSK_SYKMELDING_TRYGD_UTENFOR_NORGE',
+        sporsmalstekst: `Har du mottatt sykepenger eller lignende i andre EØS-land i løpet av de siste tre årene?`,
+        undertekst: null,
+        svartype: 'JA_NEI',
+        min: null,
+        max: null,
+        pavirkerAndreSporsmal: false,
+        kriterieForVisningAvUndersporsmal: 'JA',
+        svar: [],
+        undersporsmal: [
+            {
+                id: '345345345345',
+                tag: 'UTENLANDSK_SYKMELDING_TRYGD_HVILKET_LAND',
+                sporsmalstekst: 'I hvilket land?',
+                undertekst: null,
+                svartype: 'LAND',
+                min: null,
+                max: null,
+                pavirkerAndreSporsmal: false,
+                kriterieForVisningAvUndersporsmal: null,
+                svar: [],
+                undersporsmal: [],
+            },
+        ],
+    },
+]
+export const soknadTilUtenlandskSykmelding = jsonDeepCopy(brukertestSoknad)
+soknadTilUtenlandskSykmelding.utenlandskSykmelding = true
+const sporsmalene: RSSporsmal[] = []
+sporsmalene.push(soknadTilUtenlandskSykmelding.sporsmal[0])
+sporsmalene.push(...utenlandskSykmeldingSporsmalene)
+sporsmalene.push(...soknadTilUtenlandskSykmelding.sporsmal.slice(1))
+
+soknadTilUtenlandskSykmelding.sporsmal = sporsmalene
+
+export const utenlandskSykmelding: Persona = {
+    soknader: [soknadTilUtenlandskSykmelding],
+    sykmeldinger: [brukertestSykmelding],
+    kontonummer: '12340000000',
+}

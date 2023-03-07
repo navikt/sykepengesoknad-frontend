@@ -66,7 +66,7 @@ const AvbruttSoknad = () => {
             </div>
 
             <Opplysninger ekspandert={false} steg="avbrutt-søknad" />
-            <FristSykepenger soknadstype={valgtSoknad.soknadstype} />
+            <FristSykepenger soknad={valgtSoknad} />
 
             <Vis
                 hvis={dayjs(valgtSoknad.avbruttDato).isAfter(dayjs().subtract(2, 'seconds'))}
