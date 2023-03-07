@@ -38,7 +38,7 @@ const Steg = ({ label, index }: StegProps) => {
             fra: valgtSoknad!.sporsmal[aktivtSteg - 1].tag,
             til: valgtSoknad!.sporsmal[idx - 1].tag,
         })
-        history.push(pathUtenSteg(history.location.pathname) + SEPARATOR + idx)
+        history.push(pathUtenSteg(history.location.pathname) + SEPARATOR + idx + window.location.search)
     }
 
     return (

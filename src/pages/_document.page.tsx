@@ -29,7 +29,7 @@ class MyDocument extends Document<Props> {
             chatbot: false,
             feedback: false,
             urlLookupTable: false,
-            breadcrumbs: createInitialServerSideBreadcrumbs(ctx.pathname),
+            breadcrumbs: createInitialServerSideBreadcrumbs(ctx.pathname, ctx.query),
         })
 
         const language = getDocumentParameter(initialProps, 'lang')
