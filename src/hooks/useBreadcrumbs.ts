@@ -1,3 +1,5 @@
+import { ParsedUrlQuery } from 'querystring'
+
 import { onBreadcrumbClick, setBreadcrumbs } from '@navikt/nav-dekoratoren-moduler'
 import { logger } from '@navikt/next-logger'
 import { useRouter } from 'next/router'
@@ -10,13 +12,20 @@ type Breadcrumb = { title: string; url: string }
 type LastCrumb = { title: string }
 type CompleteCrumb = Parameters<typeof setBreadcrumbs>[0][0]
 
-const baseCrumb: CompleteCrumb[] = [
-    { title: 'Min side', url: minSideUrl(), handleInApp: false },
-    { title: 'Ditt sykefravær', url: sykefravaerUrl(), handleInApp: false },
-    { title: tekst('soknader.sidetittel'), url: publicPath() + '/soknader', handleInApp: true },
-]
+function createCompleteCrumbs(
+    breadcrumbs: [...Breadcrumb[], LastCrumb] | [],
+    query: string | undefined,
+): CompleteCrumb[] {
+    const baseCrumb: CompleteCrumb[] = [
+        { title: 'Min side', url: minSideUrl(), handleInApp: false },
+        { title: 'Ditt sykefravær', url: sykefravaerUrl(), handleInApp: false },
+        {
+            title: tekst('soknader.sidetittel'),
+            url: publicPath() + '/' + (query || ''),
+            handleInApp: true,
+        },
+    ]
 
-function createCompleteCrumbs(breadcrumbs: [...Breadcrumb[], LastCrumb] | []): CompleteCrumb[] {
     const prefixedCrumbs: CompleteCrumb[] = breadcrumbs.map(
         (it): CompleteCrumb => ({
             ...it,
@@ -28,8 +37,17 @@ function createCompleteCrumbs(breadcrumbs: [...Breadcrumb[], LastCrumb] | []): C
     return [...baseCrumb, ...prefixedCrumbs]
 }
 
+function skapTestpersonQuery(query: ParsedUrlQuery): string | undefined {
+    const testpersonQuery = query['testperson']
+    if (testpersonQuery) {
+        return `?testperson=${testpersonQuery}`
+    }
+    return undefined
+}
+
 export function useUpdateBreadcrumbs(makeCrumbs: () => [...Breadcrumb[], LastCrumb] | [], deps?: DependencyList): void {
     const makeCrumbsRef = useRef(makeCrumbs)
+    const router = useRouter()
 
     useEffect(() => {
         makeCrumbsRef.current = makeCrumbs
@@ -38,7 +56,7 @@ export function useUpdateBreadcrumbs(makeCrumbs: () => [...Breadcrumb[], LastCru
     useEffect(() => {
         ;(async () => {
             try {
-                const prefixedCrumbs = createCompleteCrumbs(makeCrumbsRef.current())
+                const prefixedCrumbs = createCompleteCrumbs(makeCrumbsRef.current(), skapTestpersonQuery(router.query))
                 await setBreadcrumbs(prefixedCrumbs)
             } catch (e) {
                 logger.error(`klarte ikke å oppdatere breadcrumbs på ${location.pathname}`)
@@ -75,15 +93,18 @@ export enum SsrPathVariants {
     App = '/[[...app]]',
 }
 
-export function createInitialServerSideBreadcrumbs(pathname: SsrPathVariants | string): CompleteCrumb[] {
+export function createInitialServerSideBreadcrumbs(
+    pathname: SsrPathVariants | string,
+    query: ParsedUrlQuery,
+): CompleteCrumb[] {
     switch (pathname) {
         case SsrPathVariants.Root:
         case SsrPathVariants.NotFound:
         case SsrPathVariants.ServerError:
         case SsrPathVariants.App:
-            return createCompleteCrumbs([])
+            return createCompleteCrumbs([], skapTestpersonQuery(query))
         default:
             logger.error(`Unknown initial path (${pathname}), defaulting to just base breadcrumb`)
-            return createCompleteCrumbs([])
+            return createCompleteCrumbs([], skapTestpersonQuery(query))
     }
 }

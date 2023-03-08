@@ -108,7 +108,7 @@ const Soknaden = () => {
                         hvis={stegNo > 1}
                         render={() => (
                             <Link
-                                to={'/soknader/' + valgtSoknad.id + SEPARATOR + (stegNo - 1)}
+                                to={`/soknader/${valgtSoknad.id}${SEPARATOR}${stegNo - 1}${window.location.search}`}
                                 className="navds-link tilbakelenke"
                                 onClick={() => {
                                     logEvent('navigere', {
