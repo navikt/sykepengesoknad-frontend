@@ -1,6 +1,7 @@
 import { RSSporsmal } from '../../../../types/rs-types/rs-sporsmal'
+import { RSSvar } from '../../../../types/rs-types/rs-svar'
 
-export const bekreftOpplysninger = (): RSSporsmal => {
+export const bekreftOpplysninger = (svar: RSSvar[] = []): RSSporsmal => {
     return {
         id: '1623833',
         tag: 'BEKREFT_OPPLYSNINGER',
@@ -12,7 +13,7 @@ export const bekreftOpplysninger = (): RSSporsmal => {
         max: null,
         pavirkerAndreSporsmal: false,
         kriterieForVisningAvUndersporsmal: null,
-        svar: [],
+        svar,
         undersporsmal: [],
     }
 }
