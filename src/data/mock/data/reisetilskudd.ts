@@ -3,7 +3,7 @@ import { jsonDeepCopy } from '../../../utils/json-deep-copy'
 import { Persona } from '../personas'
 
 import { arbeidstakerReisetilskuddSyk, gradertReisetilskuddSm, sykmeldinger } from './sykmeldinger'
-import { værKlarOverAt } from './sporsmal/vaer-klar-over-at'
+import { værKlarOverAtGradertReisetilskudd, værKlarOverAtReisetilskudd } from './sporsmal/vaer-klar-over-at'
 import { bekreftOpplysninger } from './sporsmal/bekreft-opplysninger'
 
 export const nyttReisetilskudd: RSSoknad = {
@@ -211,7 +211,7 @@ export const nyttReisetilskudd: RSSoknad = {
             svar: [],
             undersporsmal: [],
         },
-        værKlarOverAt(),
+        værKlarOverAtReisetilskudd(),
         bekreftOpplysninger(),
     ],
     egenmeldtSykmelding: false,
@@ -810,7 +810,7 @@ export const gradertReisetilskudd: RSSoknad = {
             svar: [],
             undersporsmal: [],
         },
-        værKlarOverAt(),
+        værKlarOverAtGradertReisetilskudd(),
         bekreftOpplysninger(),
     ],
     egenmeldtSykmelding: false,
@@ -1042,7 +1042,7 @@ export const delvisUtfyltReisetilskudd: RSSoknad = {
             ],
             undersporsmal: [],
         },
-        værKlarOverAt(),
+        værKlarOverAtReisetilskudd(),
         bekreftOpplysninger(),
     ],
     egenmeldtSykmelding: false,

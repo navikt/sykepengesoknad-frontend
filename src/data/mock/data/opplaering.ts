@@ -11,7 +11,7 @@ import {
     frilanser100Syk,
     sykmeldinger,
 } from './sykmeldinger'
-import { værKlarOverAt } from './sporsmal/vaer-klar-over-at'
+import { værKlarOverAt, værKlarOverAtBehandlingsdager } from './sporsmal/vaer-klar-over-at'
 import { bekreftOpplysninger } from './sporsmal/bekreft-opplysninger'
 
 export const behandlingsdager: RSSoknad = {
@@ -300,7 +300,7 @@ export const behandlingsdager: RSSoknad = {
                 },
             ],
         },
-        værKlarOverAt(),
+        værKlarOverAtBehandlingsdager(),
         bekreftOpplysninger(),
     ],
     egenmeldtSykmelding: false,
