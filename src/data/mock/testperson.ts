@@ -15,6 +15,7 @@ import {
 } from './personas'
 import { egenmeldingsdagerArbeidsgiver } from './data/kort-soknad'
 import { nyttArbeidUnderveisPerson } from './data/nytt-arbeidunderveis'
+import { utenlandskSykmelding } from './data/utenlandsk-sykmelding'
 
 export interface StringFunctionMap {
     [index: string]: () => Persona
@@ -23,6 +24,7 @@ export interface StringFunctionMap {
 export const personas: StringFunctionMap = {
     'uten-data': () => utenData,
     reisetilskudd: () => reisetilskudd,
+    'utenlandsk sykmelding': () => utenlandskSykmelding,
     opplaering: () => opplaering,
     'nytt-arbeid-underveis': () => nyttArbeidUnderveisPerson,
     'alle-soknader': () => alleData,
@@ -35,8 +37,8 @@ export const personas: StringFunctionMap = {
     'har kontonummer': () => harKontonummer,
     'har ikke kontonummer': () => harIkkeKontonummer,
     'egenmeldingsdager arbeidsgiver': () => egenmeldingsdagerArbeidsgiver,
-    'HTTP 400 ved send soknad': () => får400vedSendSoknad,
-    'HTTP 500 ved send soknad': () => får500vedSendSoknad,
+    'http 400 ved send soknad': () => får400vedSendSoknad,
+    'http 500 ved send soknad': () => får500vedSendSoknad,
 }
 
 export function hentTestperson(url?: string): Persona | null {

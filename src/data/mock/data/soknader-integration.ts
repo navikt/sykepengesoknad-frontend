@@ -19,6 +19,7 @@ import {
 } from './sykmeldinger'
 import { værKlarOverAt } from './sporsmal/vaer-klar-over-at'
 import { bekreftOpplysninger } from './sporsmal/bekreft-opplysninger'
+import { utenlandskSykmeldingSporsmalene } from './utenlandsk-sykmelding'
 
 export const utgattSoknad: RSSoknad = {
     id: '5b74f271-5b94-455a-b79f-428f593f2b90',
@@ -3012,6 +3013,7 @@ export const veldigLangSoknad: RSSoknad = {
                 },
             ],
         },
+        ...utenlandskSykmeldingSporsmalene,
         værKlarOverAt(),
         bekreftOpplysninger(),
     ],

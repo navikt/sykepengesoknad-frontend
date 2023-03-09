@@ -34,6 +34,7 @@ const Land = ({ sporsmal }: SpmProps) => {
                             sporsmalId={field.name}
                             name={field.name}
                             onChange={field.onChange}
+                            tag={sporsmal.tag}
                         />
                     )}
                 />

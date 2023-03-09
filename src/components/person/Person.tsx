@@ -36,11 +36,13 @@ const Person = () => {
             >
                 <Popover.Content>
                     <ul>
-                        {Object.keys(personas).map((p, idx) => (
-                            <BodyShort size="medium" as="li" key={idx}>
-                                <Link href={`/syk/sykepengesoknad/?testperson=${p}`}>{p}</Link>
-                            </BodyShort>
-                        ))}
+                        {Object.keys(personas)
+                            .sort()
+                            .map((p, idx) => (
+                                <BodyShort size="medium" as="li" key={idx}>
+                                    <Link href={`/syk/sykepengesoknad/?testperson=${p}`}>{p}</Link>
+                                </BodyShort>
+                            ))}
                     </ul>
                 </Popover.Content>
             </Popover>

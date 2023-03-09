@@ -10,3 +10,24 @@ export const setPeriodeFraTil = (fom: number, tom: number, periodeIndex = 0) => 
     cy.get(`[data-cy="periode"]`).eq(periodeIndex).find('.navds-date__field-button').eq(1).click()
     cy.get('.rdp-day').contains(tom.toString()).click()
 }
+
+export function svarFritekst(tag: string, verdi: string) {
+    cy.get(`[data-cy="${tag}"]`).type(verdi)
+}
+
+export function svarJaHovedsporsmal() {
+    cy.get('.radioGruppe-jaNei input[value=JA]').click({ force: true })
+}
+
+export function svarNeiHovedsporsmal() {
+    cy.get('.radioGruppe-jaNei input[value=NEI]').click({ force: true })
+}
+
+export function velgLand(land: string) {
+    cy.get('.skjemaelement__input').type(land)
+    cy.contains(land).click({ force: true })
+}
+
+export function svarCheckboxPanel() {
+    cy.get('.navds-checkbox__label').click({ force: true })
+}

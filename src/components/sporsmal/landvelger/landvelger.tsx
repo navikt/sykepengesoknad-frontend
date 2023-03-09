@@ -1,8 +1,10 @@
 import React, { useState } from 'react'
 
+import { TagTyper } from '../../../types/enums'
+
 import { Forslag } from './Forslag'
 import { tilForslagsliste } from './forslagUtils'
-import landliste from './landliste'
+import { landlisteEøs, landlisteUtenforEøs } from './landliste'
 import NavAutosuggest from './NavAutosuggest'
 import { ValgteTags } from './ValgteTags'
 
@@ -11,15 +13,26 @@ interface LandvelgerComponentProps {
     name: string
     sporsmalId: string
     onChange: (verdier: string[]) => void
+    tag: TagTyper
 }
 
-const LandvelgerComponent = ({ verdierInn, sporsmalId, onChange }: LandvelgerComponentProps) => {
+const LandvelgerComponent = ({ verdierInn, sporsmalId, onChange, tag }: LandvelgerComponentProps) => {
     const [verdier, setVerdier] = useState(verdierInn)
 
     const onAdd = (verdi: Forslag) => {
         const nyeVerdier = [...verdier, verdi.text]
         setVerdier(nyeVerdier)
         onChange(nyeVerdier)
+    }
+
+    const landListe = () => {
+        if (tag == TagTyper.LAND) {
+            return landlisteUtenforEøs
+        }
+        if (tag == TagTyper.UTENLANDSK_SYKMELDING_TRYGD_HVILKET_LAND) {
+            return landlisteEøs
+        }
+        throw new Error('Ugyldig tag for landvelger: ' + tag)
     }
 
     const onDelete = (idx: number) => {
@@ -35,7 +48,7 @@ const LandvelgerComponent = ({ verdierInn, sporsmalId, onChange }: LandvelgerCom
             <NavAutosuggest
                 onAdd={onAdd}
                 sporsmalId={sporsmalId}
-                forslagsliste={tilForslagsliste(landliste, verdier)}
+                forslagsliste={tilForslagsliste(landListe(), verdier)}
             />
             <ValgteTags verdier={verdier} handleDelete={onDelete} />
         </div>

@@ -2,22 +2,20 @@ import { Accordion, BodyLong, BodyShort, Heading } from '@navikt/ds-react'
 import parser from 'html-react-parser'
 import React, { useState } from 'react'
 
-import { RSSoknadstype } from '../../types/rs-types/rs-soknadstype'
 import { tekst } from '../../utils/tekster'
 import { logEvent } from '../amplitude/amplitude'
 import Utvidbar from '../utvidbar/utvidbar'
+import { Soknad } from '../../types/types'
 
 import EksempelFrist from './eksempel-frist'
 import HvorforSoknadSykepenger from './hvorfor-soknad-sykepenger'
 import styles from './frist-sykepenger.module.css'
 
-interface FristSykepengerProps {
-    soknadstype: RSSoknadstype
-}
-
-const FristSykepenger = ({ soknadstype }: FristSykepengerProps) => {
+const FristSykepenger = ({ soknad }: { soknad: Soknad }) => {
     const [open, setOpen] = useState<boolean>(false)
-
+    if (soknad.utenlandskSykmelding) {
+        return null
+    }
     return (
         <Accordion className={styles.accordionWrapper}>
             <Accordion.Item open={open} className="frist-sykepenger">
@@ -34,6 +32,7 @@ const FristSykepenger = ({ soknadstype }: FristSykepengerProps) => {
                     </Heading>
                 </Accordion.Header>
                 <Accordion.Content>
+                    <BodyLong>{tekst('frist-sykepenger.innsending')}</BodyLong>
                     <BodyLong>{tekst('frist-sykepenger.innsending')}</BodyLong>
                     <BodyLong>{parser(tekst('frist-sykepenger.hovedregel'))}</BodyLong>
                     <BodyLong>{parser(tekst('frist-sykepenger.ulike.måneder'))}</BodyLong>
@@ -81,7 +80,7 @@ const FristSykepenger = ({ soknadstype }: FristSykepengerProps) => {
 
                     <BodyLong spacing>{tekst('frist-sykepenger.husk')}</BodyLong>
 
-                    <HvorforSoknadSykepenger soknadstype={soknadstype} />
+                    <HvorforSoknadSykepenger soknadstype={soknad.soknadstype} />
                 </Accordion.Content>
             </Accordion.Item>
         </Accordion>

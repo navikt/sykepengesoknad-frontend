@@ -142,7 +142,7 @@ const Soknaden = () => {
 
                     <Vis
                         hvis={stegNo === 1 && !erUtlandssoknad}
-                        render={() => <FristSykepenger soknadstype={valgtSoknad.soknadstype} />}
+                        render={() => <FristSykepenger soknad={valgtSoknad} />}
                     />
 
                     <Vis

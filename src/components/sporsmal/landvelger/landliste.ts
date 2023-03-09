@@ -1,4 +1,4 @@
-const landliste = [
+export const landlisteUtenforEøs = [
     'Afghanistan',
     'Albania',
     'Algerie',
@@ -210,4 +210,35 @@ const landliste = [
     'Øst-Timor',
 ]
 
-export default landliste
+export const landlisteEøs = [
+    'Belgia',
+    'Bulgaria',
+    'Danmark',
+    'Estland',
+    'Finland',
+    'Frankrike',
+    'Hellas',
+    'Irland',
+    'Island',
+    'Italia',
+    'Kroatia',
+    'Kypros',
+    'Latvia',
+    'Liechtenstein',
+    'Litauen',
+    'Luxembourg',
+    'Malta',
+    'Nederland',
+    'Polen',
+    'Portugal',
+    'Romania',
+    'Sveits',
+    'Sverige',
+    'Slovakia',
+    'Slovenia',
+    'Spania',
+    'Tsjekkia',
+    'Tyskland',
+    'Ungarn',
+    'Østerrike',
+]

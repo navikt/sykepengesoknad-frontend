@@ -63,7 +63,7 @@ describe('Tester feilsituasjoner ', () => {
     describe('Tester 400 ved send søknad', () => {
         before(() => {
             cy.visit(
-                'http://localhost:8080/syk/sykepengesoknad/soknader/400-ved-send-soknad/2?testperson=HTTP%20400%20ved%20send%20soknad',
+                'http://localhost:8080/syk/sykepengesoknad/soknader/400-ved-send-soknad/2?testperson=http%20400%20ved%20send%20soknad',
             )
         })
         it('Når vi sender søknad som får 400 får vi en feilmelding som lar oss refreshe', function () {
@@ -76,7 +76,7 @@ describe('Tester feilsituasjoner ', () => {
             ).click()
             cy.url().should(
                 'equal',
-                'http://localhost:8080/syk/sykepengesoknad/soknader/400-ved-send-soknad/1?testperson=HTTP%20400%20ved%20send%20soknad',
+                'http://localhost:8080/syk/sykepengesoknad/soknader/400-ved-send-soknad/1?testperson=http%20400%20ved%20send%20soknad',
             )
         })
     })
@@ -84,7 +84,7 @@ describe('Tester feilsituasjoner ', () => {
     describe('Tester 500 ved send søknad', () => {
         before(() => {
             cy.visit(
-                'http://localhost:8080/syk/sykepengesoknad/soknader/500-ved-send-soknad/2?testperson=HTTP%20500%20ved%20send%20soknad',
+                'http://localhost:8080/syk/sykepengesoknad/soknader/500-ved-send-soknad/2?testperson=http%20500%20ved%20send%20soknad',
             )
         })
         it('Når vi sender søknad som får 500 får vi en feilmelding', function () {
@@ -95,7 +95,7 @@ describe('Tester feilsituasjoner ', () => {
             cy.contains('Beklager, det oppstod en teknisk feil.').click()
             cy.url().should(
                 'equal',
-                'http://localhost:8080/syk/sykepengesoknad/soknader/500-ved-send-soknad/2?testperson=HTTP%20500%20ved%20send%20soknad',
+                'http://localhost:8080/syk/sykepengesoknad/soknader/500-ved-send-soknad/2?testperson=http%20500%20ved%20send%20soknad',
             )
         })
     })
