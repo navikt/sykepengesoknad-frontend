@@ -17,9 +17,13 @@ import {
     syk7,
     syk8,
 } from './sykmeldinger'
+<<<<<<< HEAD
 import { utenlandskSykmeldingSporsmalene } from './utenlandskSykmelding'
 import { værKlarOverAt } from './sporsmal/vaer-klar-over-at'
 import { bekreftOpplysninger } from './sporsmal/bekreft-opplysninger'
+=======
+import { utenlandskSykmeldingSporsmalene } from './utenlandsk-sykmelding'
+>>>>>>> 7d612109 (sortering)
 
 export const utgattSoknad: RSSoknad = {
     id: '5b74f271-5b94-455a-b79f-428f593f2b90',
