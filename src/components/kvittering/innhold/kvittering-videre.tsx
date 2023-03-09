@@ -1,5 +1,4 @@
 import { Alert, BodyLong, Heading, Label, Link } from '@navikt/ds-react'
-import parser from 'html-react-parser'
 import React from 'react'
 import { useParams } from 'react-router-dom'
 
@@ -11,6 +10,7 @@ import Vis from '../../vis'
 import { RouteParams } from '../../../app'
 import useSoknad from '../../../hooks/useSoknad'
 import Kontonummer from '../kontonummer/kontonummer'
+import { parserWithReplace } from '../../../utils/html-react-parser-utils'
 
 const KvitteringVidere = () => {
     const { id } = useParams<RouteParams>()
@@ -62,7 +62,7 @@ const KvitteringVidere = () => {
                     <div className="avsnitt">
                         <Label as="h2">{tekst('kvittering.naar-blir-pengene')}</Label>
                         <BodyLong spacing as="span">
-                            {parser(tekst('kvittering.arbeidstaker.over16.utbetaling'))}
+                            {parserWithReplace(tekst('kvittering.arbeidstaker.over16.utbetaling'))}
                         </BodyLong>
                     </div>
                 )}

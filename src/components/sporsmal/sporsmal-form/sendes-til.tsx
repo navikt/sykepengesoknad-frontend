@@ -1,11 +1,11 @@
 import { BodyShort } from '@navikt/ds-react'
-import parser from 'html-react-parser'
 import React, { useEffect, useState } from 'react'
 
 import { useAppStore } from '../../../data/stores/app-store'
 import { RSMottaker } from '../../../types/rs-types/rs-mottaker'
 import { getLedetekst, tekst } from '../../../utils/tekster'
 import { Soknad } from '../../../types/types'
+import { parserWithReplace } from '../../../utils/html-react-parser-utils'
 
 export interface SendesTilProps {
     soknad?: Soknad
@@ -37,12 +37,12 @@ const SendesTil = ({ soknad }: SendesTilProps) => {
         <div className="bottom_line">
             <BodyShort as="div">
                 {soknad.arbeidsgiver !== undefined
-                    ? parser(
+                    ? parserWithReplace(
                           getLedetekst(tekst(nokkel as any), {
                               '%ARBEIDSGIVER%': soknad.arbeidsgiver.navn,
                           }),
                       )
-                    : parser(tekst(nokkel as any))}
+                    : parserWithReplace(tekst(nokkel as any))}
             </BodyShort>
         </div>
     )

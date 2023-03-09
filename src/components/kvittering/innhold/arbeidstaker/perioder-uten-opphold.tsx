@@ -1,7 +1,7 @@
 import { BodyLong, Label, Link } from '@navikt/ds-react'
-import parser from 'html-react-parser'
 import React from 'react'
 
+import { parserWithReplace } from '../../../../utils/html-react-parser-utils'
 import { tekst } from '../../../../utils/tekster'
 import Kontonummer from '../../kontonummer/kontonummer'
 
@@ -26,9 +26,11 @@ const PerioderUtenOpphold = () => {
                 <Label as="h2" className="arbeidstaker-tittel">
                     {tekst('kvittering.naar-blir-pengene')}
                 </Label>
-                <BodyLong spacing>{parser(tekst('kvittering.arbeidstaker.over16.utbetaling-arbeidsgiver'))} </BodyLong>
+                <BodyLong spacing>
+                    {parserWithReplace(tekst('kvittering.arbeidstaker.over16.utbetaling-arbeidsgiver'))}{' '}
+                </BodyLong>
                 <BodyLong spacing as="span">
-                    {parser(tekst('kvittering.arbeidstaker.over16.utbetaling-NAV'))}{' '}
+                    {parserWithReplace(tekst('kvittering.arbeidstaker.over16.utbetaling-NAV'))}{' '}
                 </BodyLong>
             </div>
             <div className="avsnitt kontonummer">

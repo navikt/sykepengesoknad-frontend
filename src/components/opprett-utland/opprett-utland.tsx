@@ -1,6 +1,5 @@
 import { Alert, BodyLong, Button, GuidePanel, Heading, Panel } from '@navikt/ds-react'
 import { logger } from '@navikt/next-logger'
-import parser from 'html-react-parser'
 import React from 'react'
 import { useHistory } from 'react-router'
 import { useQueryClient } from '@tanstack/react-query'
@@ -12,6 +11,7 @@ import { tekst } from '../../utils/tekster'
 import { urlTilSoknad } from '../soknad/soknad-link'
 import Vis from '../vis'
 import { useUpdateBreadcrumbs } from '../../hooks/useBreadcrumbs'
+import { parserWithReplace } from '../../utils/html-react-parser-utils'
 
 import styles from './OpprettUtland.module.css'
 
@@ -51,14 +51,14 @@ const OpprettUtland = () => {
 
     return (
         <>
-            <GuidePanel poster={true}>{parser(tekst('opprett-utland.bjorn'))}</GuidePanel>
+            <GuidePanel poster={true}>{parserWithReplace(tekst('opprett-utland.bjorn'))}</GuidePanel>
 
             <Panel border className={styles.panel}>
                 <Heading spacing size="medium" level="1">
                     {tekst('opprett-utland.tittel')}
                 </Heading>
 
-                <BodyLong>{parser(tekst('opprett-utland.trenger-ikke-soke'))}</BodyLong>
+                <BodyLong>{parserWithReplace(tekst('opprett-utland.trenger-ikke-soke'))}</BodyLong>
             </Panel>
             <div className={styles.sentrerteDeler}>
                 <Button variant="primary" type="button" onClick={opprett} className={styles.fortsettKnapp}>

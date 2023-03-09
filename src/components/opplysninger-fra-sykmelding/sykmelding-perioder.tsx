@@ -1,7 +1,6 @@
 import { BodyShort, Label } from '@navikt/ds-react'
 import dayjs from 'dayjs'
 import React from 'react'
-import parser from 'html-react-parser'
 
 import { Periode, Sykmelding } from '../../types/sykmelding'
 import { getDuration } from '../../utils/dato-utils'
@@ -11,6 +10,7 @@ import { tekst } from '../../utils/tekster'
 import Vis from '../vis'
 import { Soknad } from '../../types/types'
 import { ProgressivtGuidePanel } from '../guidepanel/ProgressivtGuidePanel'
+import { parserWithReplace } from '../../utils/html-react-parser-utils'
 
 interface SykmeldingPerioderProps {
     valgtSoknad: Soknad
@@ -80,7 +80,7 @@ const SykmeldingPerioder = ({ valgtSoknad, valgtSykmelding }: SykmeldingPerioder
             })}
             {erOppdelt(valgtSoknad, valgtSykmelding) && (
                 <ProgressivtGuidePanel>
-                    <BodyShort>{parser(tekst('sykepengesoknad.sykmelding-utdrag.oppdelt.bjorn'))}</BodyShort>
+                    <BodyShort>{parserWithReplace(tekst('sykepengesoknad.sykmelding-utdrag.oppdelt.bjorn'))}</BodyShort>
                 </ProgressivtGuidePanel>
             )}
         </div>

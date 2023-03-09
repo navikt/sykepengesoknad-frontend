@@ -85,6 +85,7 @@
         "headless": "CYPRESS_DISABLE_SPY=true MOCK_BACKEND=true start-test dev-ingen-dekorator http://localhost:8080/syk/sykepengesoknad cy:headless-parallel",
         "prettier:write": "prettier --write .",
         "prettier:check": "prettier --check .",
+        "tsc": "tsc",
         "lint": "eslint --ext=ts,tsx src cypress",
         "lint:fix": "eslint --ext=ts,tsx src cypress --fix",
         "format": "npm run prettier:write && npm run lint:fix"

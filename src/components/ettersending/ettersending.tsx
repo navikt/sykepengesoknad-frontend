@@ -1,6 +1,5 @@
 import { BodyShort, Button, Heading, Modal } from '@navikt/ds-react'
 import { logger } from '@navikt/next-logger'
-import parser from 'html-react-parser'
 import React, { useState } from 'react'
 import { useParams } from 'react-router-dom'
 import { useQueryClient } from '@tanstack/react-query'
@@ -10,6 +9,7 @@ import fetchMedRequestId, { AuthenticationError } from '../../utils/fetch'
 import { tekst } from '../../utils/tekster'
 import { RouteParams } from '../../app'
 import useSoknad from '../../hooks/useSoknad'
+import { parserWithReplace } from '../../utils/html-react-parser-utils'
 
 interface EttersendingProps {
     gjelder: 'nav' | 'arbeidsgiver'
@@ -123,7 +123,7 @@ const Ettersending = ({ gjelder, setRerendrekvittering }: EttersendingProps) => 
                     <Heading size="small" level="1" id="modal-tittel" spacing>
                         {knappeTekst}
                     </Heading>
-                    <BodyShort>{parser(hentTekst('kvittering.info.send-til'))}</BodyShort>
+                    <BodyShort>{parserWithReplace(hentTekst('kvittering.info.send-til'))}</BodyShort>
                     <Button size="small" variant="primary" loading={ettersender} onClick={ettersend}>
                         {hentTekst('kvittering.knapp.bekreft.send-til')}
                     </Button>

@@ -1,5 +1,4 @@
 import { BodyLong, RadioGroup, Radio } from '@navikt/ds-react'
-import parser from 'html-react-parser'
 import React from 'react'
 import { useFormContext, Controller } from 'react-hook-form'
 
@@ -15,6 +14,7 @@ import { EkspanderbarHjelp } from '../../hjelpetekster/ekspanderbar-hjelp/ekspan
 import { hentFeilmelding, sporsmalIdListe } from '../sporsmal-utils'
 import UndersporsmalListe from '../undersporsmal/undersporsmal-liste'
 import { SpmProps } from '../sporsmal-form/sporsmal-form'
+import { parserWithReplace } from '../../../utils/html-react-parser-utils'
 
 const JaNeiInput = ({ sporsmal }: SpmProps) => {
     const {
@@ -83,7 +83,7 @@ const JaNeiInput = ({ sporsmal }: SpmProps) => {
                     hvis={sporsmal?.tag === TagTyper.UTLANDSOPPHOLD_SOKT_SYKEPENGER && watchJaNei}
                     render={() => (
                         <BodyLong spacing className="utland_infotekst">
-                            {parser(
+                            {parserWithReplace(
                                 getLedetekst(
                                     tekst(
                                         ('soknad.infotekst.utlandsopphold_sokt_sykepenger.' +

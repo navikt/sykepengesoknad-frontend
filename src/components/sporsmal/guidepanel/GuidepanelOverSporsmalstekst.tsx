@@ -1,12 +1,12 @@
 import React from 'react'
 import { BodyShort } from '@navikt/ds-react'
-import parser from 'html-react-parser'
 
 import { TagTyper } from '../../../types/enums'
 import { SpmProps } from '../sporsmal-form/sporsmal-form'
 import { fjernIndexFraTag } from '../sporsmal-utils'
 import { tekst } from '../../../utils/tekster'
 import { ProgressivtGuidePanel } from '../../guidepanel/ProgressivtGuidePanel'
+import { parserWithReplace } from '../../../utils/html-react-parser-utils'
 
 import styles from './GuidepanelOverSporsmalstekst.module.css'
 
@@ -22,7 +22,7 @@ const GuidepanelOverSporsmalstekst = ({ sporsmal }: SpmProps) => {
     return (
         <div className={styles.wrapper}>
             <ProgressivtGuidePanel>
-                <BodyShort>{parser(tekst(bjornTekst as any))}</BodyShort>
+                <BodyShort>{parserWithReplace(tekst(bjornTekst as any))}</BodyShort>
             </ProgressivtGuidePanel>
         </div>
     )

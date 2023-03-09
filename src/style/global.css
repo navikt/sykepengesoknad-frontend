@@ -19,7 +19,3 @@
 html {
     --desktop-limit-width: 672px;
 }
-
-a {
-    text-decoration: underline;
-}
