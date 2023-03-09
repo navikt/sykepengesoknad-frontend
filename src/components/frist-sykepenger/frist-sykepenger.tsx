@@ -33,7 +33,6 @@ const FristSykepenger = ({ soknad }: { soknad: Soknad }) => {
                 </Accordion.Header>
                 <Accordion.Content>
                     <BodyLong>{tekst('frist-sykepenger.innsending')}</BodyLong>
-                    <BodyLong>{tekst('frist-sykepenger.innsending')}</BodyLong>
                     <BodyLong>{parser(tekst('frist-sykepenger.hovedregel'))}</BodyLong>
                     <BodyLong>{parser(tekst('frist-sykepenger.ulike.måneder'))}</BodyLong>
 
