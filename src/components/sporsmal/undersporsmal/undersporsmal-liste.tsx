@@ -1,8 +1,11 @@
 import React from 'react'
+import { Label } from '@navikt/ds-react'
 
 import { Sporsmal } from '../../../types/types'
-import Vis from '../../vis'
 import SporsmalSwitch from '../sporsmal-switch'
+import { TagTyper } from '../../../types/enums'
+
+import { UndersporsmalTekster } from './undersporsmal-tekster'
 
 interface UndersporsmalListeProps {
     oversporsmal: Sporsmal
@@ -10,21 +13,19 @@ interface UndersporsmalListeProps {
 }
 
 const UndersporsmalListe = ({ oversporsmal, oversporsmalSvar }: UndersporsmalListeProps) => {
+    const skalVise =
+        !oversporsmal.kriterieForVisningAvUndersporsmal ||
+        oversporsmal.kriterieForVisningAvUndersporsmal === oversporsmalSvar
+    if (!skalVise) return null
     return (
         <>
+            {oversporsmal.tag == TagTyper.UTENLANDSK_SYKMELDING_BOSTED && (
+                <Label as="h2" className="mt-8">
+                    {UndersporsmalTekster['undersporsmal.UTENLANDSK_SYKMELDING_BOSTED']}
+                </Label>
+            )}
             {oversporsmal.undersporsmal
-                .map((underspm: Sporsmal, idx: number) => {
-                    return (
-                        <Vis
-                            hvis={
-                                !oversporsmal.kriterieForVisningAvUndersporsmal ||
-                                oversporsmal.kriterieForVisningAvUndersporsmal === oversporsmalSvar
-                            }
-                            key={idx}
-                            render={() => <SporsmalSwitch sporsmal={underspm} />}
-                        />
-                    )
-                })
+                .map((underspm: Sporsmal, idx: number) => <SporsmalSwitch key={idx} sporsmal={underspm} />)
                 .filter((underspm: any) => underspm !== null)}
         </>
     )

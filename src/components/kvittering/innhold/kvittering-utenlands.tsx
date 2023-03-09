@@ -7,8 +7,6 @@ import { tekst } from '../../../utils/tekster'
 import { RouteParams } from '../../../app'
 import useSoknad from '../../../hooks/useSoknad'
 
-import styles from './kvittering-utenlands.module.css'
-
 const KvitteringUtenlands = () => {
     const { id } = useParams<RouteParams>()
     const { data: valgtSoknad } = useSoknad(id)
@@ -20,7 +18,7 @@ const KvitteringUtenlands = () => {
     }
 
     return (
-        <Alert variant="info" className={styles.hvitAlert} data-cy={'kvittering-alert'}>
+        <Alert variant="info" className={'bg-white'} data-cy={'kvittering-alert'}>
             <Heading size="small" level="3">
                 {tekst('kvittering.hva-skjer-videre')}
             </Heading>

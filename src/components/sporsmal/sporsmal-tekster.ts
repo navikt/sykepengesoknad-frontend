@@ -164,7 +164,7 @@ const SporsmalTekster = {
     'soknad.feilmelding.ARBEID_UNDERVEIS_100_PROSENT': 'Du må svare på om du jobbet noe i denne perioden',
     'soknad.feilmelding.JOBBER_DU_NORMAL_ARBEIDSUKE': 'Du må svare på hvor mye du jobber normalt',
 
-    'soknad.feilmelding.UTENLANDSK_SYKMELDING_BOR_I_NORGE': 'Du må svare på om du bor i Norge',
+    'soknad.feilmelding.UTENLANDSK_SYKMELDING_BOSTED': 'Du må svare på om du bor i utlandet',
     'soknad.feilmelding.UTENLANDSK_SYKMELDING_CO': '',
     'soknad.feilmelding.UTENLANDSK_SYKMELDING_VEGNAVN': 'Du må oppgi et vegnavn',
     'soknad.feilmelding.UTENLANDSK_SYKMELDING_BYGNING': '',
@@ -177,7 +177,6 @@ const SporsmalTekster = {
         'Du må svare på om du utfører lønnet arbeid utenfor Norge',
     'soknad.feilmelding.UTENLANDSK_SYKMELDING_LONNET_ARBEID_UTENFOR_NORGE_FRITEKST':
         'Du må oppgi oppgi nærmere opplysninger om arbeidet',
-    'soknad.feilmelding.UTENLANDSK_SYKMELDING_UTENLANDSK_ADRESSE': '',
     'soknad.feilmelding.UTENLANDSK_SYKMELDING_TRYGD_UTENFOR_NORGE':
         'Du må svare på om du har mottatt sykepenger eller lignende i andre EØS-land',
     'soknad.feilmelding.UTENLANDSK_SYKMELDING_TRYGD_HVILKET_LAND': '',

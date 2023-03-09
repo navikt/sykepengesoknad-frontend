@@ -2,12 +2,14 @@ import { TextField } from '@navikt/ds-react'
 import React from 'react'
 import { useFormContext } from 'react-hook-form'
 
-import FeilLokal from '../../feil/feil-lokal'
 import { SpmProps } from '../sporsmal-form/sporsmal-form'
 import { hentFeilmelding } from '../sporsmal-utils'
 
 export const Fritekst = ({ sporsmal }: SpmProps) => {
-    const { register } = useFormContext()
+    const {
+        register,
+        formState: { errors },
+    } = useFormContext()
     const feilmelding = hentFeilmelding(sporsmal)
 
     const description = () => {
@@ -30,6 +32,7 @@ export const Fritekst = ({ sporsmal }: SpmProps) => {
                 type="text"
                 data-cy={sporsmal.tag}
                 id={sporsmal.id}
+                error={errors[sporsmal.id] !== undefined && feilmelding.lokal}
                 autoComplete="off"
                 {...register(sporsmal.id, {
                     validate: (verdien) => {
@@ -44,8 +47,6 @@ export const Fritekst = ({ sporsmal }: SpmProps) => {
                     },
                 })}
             />
-
-            <FeilLokal sporsmal={sporsmal} />
         </div>
     )
 }

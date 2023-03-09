@@ -25,11 +25,11 @@ describe('Tester søknad til utenlandsk sykmelding', () => {
         cy.url().should('include', `${soknad.id}/2`)
 
         cy.contains('Bosted')
-        cy.contains('Bor du i Norge?')
+        cy.contains('Bor du i utlandet?')
         cy.contains('Gå videre').click()
-        cy.contains('Du må svare på om du bor i Norge')
+        cy.contains('Du må svare på om du bor i utlandet')
 
-        svarNeiHovedsporsmal()
+        svarJaHovedsporsmal()
         cy.contains('Oppgi utenlandsk kontaktadresse')
 
         cy.contains('Gå videre').click()
