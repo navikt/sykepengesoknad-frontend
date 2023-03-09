@@ -2,7 +2,7 @@ import { BodyLong, Label } from '@navikt/ds-react'
 import parser from 'html-react-parser'
 import React from 'react'
 
-import { OppsummeringProps } from '../oppsummering'
+import { OppsummeringProps, SporsmalVarianter } from '../oppsummering'
 
 const UndertekstSum = ({ sporsmal }: OppsummeringProps) => {
     return (
@@ -13,6 +13,9 @@ const UndertekstSum = ({ sporsmal }: OppsummeringProps) => {
                     {parser(sporsmal.undertekst)}
                 </BodyLong>
             )}
+            {sporsmal.undersporsmal.map((s, idx) => (
+                <SporsmalVarianter key={idx} sporsmal={s}></SporsmalVarianter>
+            ))}
         </div>
     )
 }

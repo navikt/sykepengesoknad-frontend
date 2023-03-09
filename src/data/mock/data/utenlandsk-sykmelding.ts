@@ -134,9 +134,8 @@ export const utenlandskSykmeldingSporsmalene: RSSporsmal[] = [
                         undertekst:
                             'Du velger selv hvor lenge adressen skal være gyldig, maksimalt 1 år. Etter 1 år må du endre eller forlenge adressen.',
                         svartype: 'PERIODER',
-                        min: null,
-                        max: null,
-
+                        min: '2023-03-01',
+                        max: '2023-03-10',
                         pavirkerAndreSporsmal: false,
                         kriterieForVisningAvUndersporsmal: null,
                         svar: [],
@@ -164,7 +163,7 @@ export const utenlandskSykmeldingSporsmalene: RSSporsmal[] = [
                 sporsmalstekst: 'Oppgi nærmere opplysninger om arbeid/virksomhet utenfor Norge',
                 undertekst: '(f. eks. navn på arbeidsgivere og nærmere informasjon om din yrkesaktivitet i utlandet)\n',
                 svartype: 'FRITEKST',
-                min: null,
+                min: '1',
                 max: null,
                 pavirkerAndreSporsmal: false,
                 kriterieForVisningAvUndersporsmal: null,

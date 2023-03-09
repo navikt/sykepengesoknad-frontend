@@ -164,20 +164,23 @@ const SporsmalTekster = {
     'soknad.feilmelding.ARBEID_UNDERVEIS_100_PROSENT': 'Du må svare på om du jobbet noe i denne perioden',
     'soknad.feilmelding.JOBBER_DU_NORMAL_ARBEIDSUKE': 'Du må svare på hvor mye du jobber normalt',
 
-    'soknad.feilmelding.UTENLANDSK_SYKMELDING_BOR_I_NORGE': 'TODO',
-    'soknad.feilmelding.UTENLANDSK_SYKMELDING_CO': 'TODO',
-    'soknad.feilmelding.UTENLANDSK_SYKMELDING_VEGNAVN': 'TODO',
-    'soknad.feilmelding.UTENLANDSK_SYKMELDING_BYGNING': 'TODO',
-    'soknad.feilmelding.UTENLANDSK_SYKMELDING_BY': 'TODO',
-    'soknad.feilmelding.UTENLANDSK_SYKMELDING_REGION': 'TODO',
-    'soknad.feilmelding.UTENLANDSK_SYKMELDING_LAND': 'TODO',
-    'soknad.feilmelding.UTENLANDSK_SYKMELDING_TELEFONNUMMER': 'TODO',
-    'soknad.feilmelding.UTENLANDSK_SYKMELDING_GYLDIGHET_ADRESSE': 'TODO',
-    'soknad.feilmelding.UTENLANDSK_SYKMELDING_LONNET_ARBEID_UTENFOR_NORGE': 'TODO',
-    'soknad.feilmelding.UTENLANDSK_SYKMELDING_LONNET_ARBEID_UTENFOR_NORGE_FRITEKST': 'TODO',
-    'soknad.feilmelding.UTENLANDSK_SYKMELDING_UTENLANDSK_ADRESSE': 'TODO',
-    'soknad.feilmelding.UTENLANDSK_SYKMELDING_TRYGD_UTENFOR_NORGE': 'TODO',
-    'soknad.feilmelding.UTENLANDSK_SYKMELDING_TRYGD_HVILKET_LAND': 'TODO',
+    'soknad.feilmelding.UTENLANDSK_SYKMELDING_BOR_I_NORGE': 'Du må svare på om du bor i Norge',
+    'soknad.feilmelding.UTENLANDSK_SYKMELDING_CO': '',
+    'soknad.feilmelding.UTENLANDSK_SYKMELDING_VEGNAVN': 'Du må oppgi et vegnavn',
+    'soknad.feilmelding.UTENLANDSK_SYKMELDING_BYGNING': '',
+    'soknad.feilmelding.UTENLANDSK_SYKMELDING_BY': '',
+    'soknad.feilmelding.UTENLANDSK_SYKMELDING_REGION': '',
+    'soknad.feilmelding.UTENLANDSK_SYKMELDING_LAND': 'Du må oppgi et land',
+    'soknad.feilmelding.UTENLANDSK_SYKMELDING_TELEFONNUMMER': 'Du må oppgi et telefonnummer',
+    'soknad.feilmelding.UTENLANDSK_SYKMELDING_GYLDIGHET_ADRESSE': '',
+    'soknad.feilmelding.UTENLANDSK_SYKMELDING_LONNET_ARBEID_UTENFOR_NORGE':
+        'Du må svare på om du utfører lønnet arbeid utenfor Norge',
+    'soknad.feilmelding.UTENLANDSK_SYKMELDING_LONNET_ARBEID_UTENFOR_NORGE_FRITEKST':
+        'Du må oppgi oppgi nærmere opplysninger om arbeidet',
+    'soknad.feilmelding.UTENLANDSK_SYKMELDING_UTENLANDSK_ADRESSE': '',
+    'soknad.feilmelding.UTENLANDSK_SYKMELDING_TRYGD_UTENFOR_NORGE':
+        'Du må svare på om du har mottatt sykepenger eller lignende i andre EØS-land',
+    'soknad.feilmelding.UTENLANDSK_SYKMELDING_TRYGD_HVILKET_LAND': '',
 
     'soknad.infotekst.utlandsopphold_sokt_sykepenger.ja':
         'Du må ha sendt en egen <a target="_blank" href="%URL%">utenlandssøknad</a> for å svare ja på dette spørsmålet. Husk at du også må fullføre denne søknaden om sykepenger.',

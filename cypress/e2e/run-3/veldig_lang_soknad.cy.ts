@@ -1,6 +1,13 @@
 import { veldigLangSoknad } from '../../../src/data/mock/data/soknader-integration'
 import { Soknad } from '../../../src/types/types'
-import { setPeriodeFraTil } from '../../support/utilities'
+import {
+    setPeriodeFraTil,
+    svarFritekst,
+    svarJaHovedsporsmal,
+    svarNeiHovedsporsmal,
+    svarCheckboxPanel,
+    velgLand,
+} from '../../support/utilities'
 import 'cypress-file-upload'
 
 describe('Tester støtte for gamle spørsmål', () => {
@@ -10,18 +17,6 @@ describe('Tester støtte for gamle spørsmål', () => {
     //-----
     const soknad = new Soknad(veldigLangSoknad as any) as Soknad
     let steg = 1
-
-    function svarJaHovedsporsmal() {
-        cy.get('.radioGruppe-jaNei input[value=JA]').click({ force: true })
-    }
-
-    function svarNeiHovedsporsmal() {
-        cy.get('.radioGruppe-jaNei input[value=NEI]').click({ force: true })
-    }
-
-    function svarCheckboxPanel() {
-        cy.get('.navds-checkbox__label').click({ force: true })
-    }
 
     function velgDato() {
         const velgDato = 10
@@ -45,10 +40,6 @@ describe('Tester støtte for gamle spørsmål', () => {
         cy.contains(sporsmalstekst).get('.navds-text-field__input').type(verdi)
     }
 
-    function svarFritekst(tag: string, verdi: string) {
-        cy.get(`[data-cy="${tag}"]`).type(verdi)
-    }
-
     function velgCheckbox(gjelder: string) {
         cy.get('.undersporsmal .checkboxgruppe').contains(gjelder).click({ force: true })
     }
@@ -64,11 +55,6 @@ describe('Tester støtte for gamle spørsmål', () => {
     function velgBehandlingsdager() {
         cy.get('.skjema__beh-dager').contains('10').click({ force: true })
         cy.get('.skjema__beh-dager').contains('16').click({ force: true })
-    }
-
-    function velgLand(land: string) {
-        cy.get('.skjemaelement__input').type(land)
-        cy.contains(land).click({ force: true })
     }
 
     function lastOppKvittering() {
@@ -284,7 +270,6 @@ describe('Tester støtte for gamle spørsmål', () => {
     })
     it('Sykepenger i andre EØS-land', () => {
         svarNeiHovedsporsmal()
-
         gaVidere()
     })
     it('VAER_KLAR_OVER_AT & BEKREFT_OPPLYSNINGER', () => {
