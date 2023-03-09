@@ -99,7 +99,9 @@
             "@typescript-eslint/explicit-function-return-type": "off",
             "@typescript-eslint/no-explicit-any": "off",
             "@typescript-eslint/no-non-null-assertion": "off",
-            "@next/next/no-img-element": "off"
+            "@next/next/no-img-element": "off",
+            "postcss-modules/no-undef-class": "off",
+            "postcss-modules/no-unused-class": "off"
         }
     },
     "prettier": "@navikt/eslint-config-teamsykmelding/prettier"
