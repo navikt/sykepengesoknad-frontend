@@ -255,7 +255,7 @@ describe('Tester støtte for gamle spørsmål', () => {
     })
 
     it('BOSTED', () => {
-        svarNeiHovedsporsmal()
+        svarJaHovedsporsmal()
         svarFritekst('UTENLANDSK_SYKMELDING_VEGNAVN', 'Downing Street 10')
         svarFritekst('UTENLANDSK_SYKMELDING_LAND', 'UK')
         svarFritekst('UTENLANDSK_SYKMELDING_TELEFONNUMMER', '81549300')
