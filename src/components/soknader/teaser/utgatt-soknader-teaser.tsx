@@ -1,6 +1,5 @@
 import { Next } from '@navikt/ds-icons'
 import { Alert, Button, Detail, Heading, Modal } from '@navikt/ds-react'
-import parser from 'html-react-parser'
 import React, { useState } from 'react'
 
 import { RSSoknadstype } from '../../../types/rs-types/rs-soknadstype'
@@ -9,6 +8,7 @@ import { tekst } from '../../../utils/tekster'
 import Vis from '../../vis'
 import { InngangsIkon, InngangsStatus } from '../inngang/inngangspanel'
 import { logEvent } from '../../amplitude/amplitude'
+import { parserWithReplace } from '../../../utils/html-react-parser-utils'
 
 import {
     hentIkon,
@@ -66,7 +66,7 @@ const UtgaattSoknaderTeaser = ({ soknad }: SykepengesoknadTeaserProps) => {
                     <Heading size="medium" level="1" className="modal__tittel" id="modal-tittel">
                         {tekst('soknad.teaser.utgaatt.popup.header')}
                     </Heading>
-                    <Alert variant="info">{parser(tekst('soknad.teaser.utgaatt.popup.innhold'))}</Alert>
+                    <Alert variant="info">{parserWithReplace(tekst('soknad.teaser.utgaatt.popup.innhold'))}</Alert>
                     <Button variant="primary" onClick={() => setAapen(false)}>
                         Lukk
                     </Button>

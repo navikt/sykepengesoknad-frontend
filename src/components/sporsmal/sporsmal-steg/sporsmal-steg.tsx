@@ -1,5 +1,4 @@
 import { BodyShort } from '@navikt/ds-react'
-import parser from 'html-react-parser'
 import React from 'react'
 import { useParams } from 'react-router-dom'
 
@@ -9,6 +8,7 @@ import { Sporsmal } from '../../../types/types'
 import { tekst } from '../../../utils/tekster'
 import { hentNokkel } from '../sporsmal-utils'
 import useSoknad from '../../../hooks/useSoknad'
+import { parserWithReplace } from '../../../utils/html-react-parser-utils'
 
 import Steg from './steg'
 
@@ -26,7 +26,7 @@ const Fremdriftsbar = ({ antallSteg }: FremdriftsbarProps) => {
     return (
         <div className="fremdriftsbar">
             <BodyShort as="span" className="fremdriftsbar__tekst" style={style}>
-                {parser(`${stegId}&nbsp;av&nbsp;${antallSteg}`)}
+                {parserWithReplace(`${stegId}&nbsp;av&nbsp;${antallSteg}`)}
             </BodyShort>
             <div className="fremdriftsbar__fullbredde" />
             <div className="fremdriftsbar__fremdrift" style={style} />

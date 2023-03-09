@@ -1,5 +1,4 @@
 import { BodyLong, ReadMore } from '@navikt/ds-react'
-import parser from 'html-react-parser'
 import React, { useEffect, useState } from 'react'
 import { useParams } from 'react-router'
 
@@ -12,6 +11,7 @@ import { fjernIndexFraTag } from '../../sporsmal/sporsmal-utils'
 import { RouteParams } from '../../../app'
 import useSoknad from '../../../hooks/useSoknad'
 import { logEvent } from '../../amplitude/amplitude'
+import { parserWithReplace } from '../../../utils/html-react-parser-utils'
 
 import styles from './ekspanderbar-hjelp.module.css'
 import { EkspanderbarHjelpTekster } from './ekspanderbar-hjelp-tekst'
@@ -64,7 +64,7 @@ export const EkspanderbarHjelp = ({ sporsmal }: SpmProps) => {
         if (sporsmal.tag == TagTyper.TILBAKE_I_ARBEID) {
             return <TilbakeIArbeidHjelpBody />
         }
-        return <BodyLong>{parser(tekst(`ekspanderbarhjelp.${nokkel}.innhold` as any))}</BodyLong>
+        return <BodyLong>{parserWithReplace(tekst(`ekspanderbarhjelp.${nokkel}.innhold` as any))}</BodyLong>
     }
 
     return (

@@ -1,11 +1,11 @@
 import { Accordion, BodyLong, BodyShort, Heading } from '@navikt/ds-react'
-import parser from 'html-react-parser'
 import React, { useState } from 'react'
 
 import { tekst } from '../../utils/tekster'
 import { logEvent } from '../amplitude/amplitude'
 import Utvidbar from '../utvidbar/utvidbar'
 import { Soknad } from '../../types/types'
+import { parserWithReplace } from '../../utils/html-react-parser-utils'
 
 import EksempelFrist from './eksempel-frist'
 import HvorforSoknadSykepenger from './hvorfor-soknad-sykepenger'
@@ -33,8 +33,8 @@ const FristSykepenger = ({ soknad }: { soknad: Soknad }) => {
                 </Accordion.Header>
                 <Accordion.Content>
                     <BodyLong>{tekst('frist-sykepenger.innsending')}</BodyLong>
-                    <BodyLong>{parser(tekst('frist-sykepenger.hovedregel'))}</BodyLong>
-                    <BodyLong>{parser(tekst('frist-sykepenger.ulike.måneder'))}</BodyLong>
+                    <BodyLong>{parserWithReplace(tekst('frist-sykepenger.hovedregel'))}</BodyLong>
+                    <BodyLong>{parserWithReplace(tekst('frist-sykepenger.ulike.måneder'))}</BodyLong>
 
                     <Utvidbar
                         erApen={false}

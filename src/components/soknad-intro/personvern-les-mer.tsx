@@ -1,10 +1,10 @@
 import { BodyShort, Button, Heading, Modal } from '@navikt/ds-react'
-import parser from 'html-react-parser'
 import React, { MouseEvent, useState } from 'react'
 
 import { tekst } from '../../utils/tekster'
 import { logEvent } from '../amplitude/amplitude'
 import { RSSoknadstypeType } from '../../types/rs-types/rs-soknadstype'
+import { parserWithReplace } from '../../utils/html-react-parser-utils'
 
 type Event = MouseEvent<HTMLAnchorElement | HTMLButtonElement>
 
@@ -47,7 +47,7 @@ const PersonvernLesMer = ({ soknadstype }: PersonvernLesMerProps) => {
                     <Heading size="medium" level="1" className="modal__tittel" id="modal-tittel">
                         {tekst('sykepengesoknad.soknad-intro.personvern-modal-header')}
                     </Heading>
-                    {parser(tekst('sykepengesoknad.soknad-intro.personvern-modal-innhold'))}
+                    {parserWithReplace(tekst('sykepengesoknad.soknad-intro.personvern-modal-innhold'))}
 
                     <div className="lukk-wrapper">
                         <button

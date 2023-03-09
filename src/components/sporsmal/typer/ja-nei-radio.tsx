@@ -1,5 +1,4 @@
 import { BodyShort, Label } from '@navikt/ds-react'
-import parser from 'html-react-parser'
 import React from 'react'
 import { useFormContext } from 'react-hook-form'
 
@@ -14,6 +13,7 @@ import { SpmProps } from '../sporsmal-form/sporsmal-form'
 import { hentFeilmelding } from '../sporsmal-utils'
 import UndersporsmalListe from '../undersporsmal/undersporsmal-liste'
 import { ProgressivtGuidePanel } from '../../guidepanel/ProgressivtGuidePanel'
+import { parserWithReplace } from '../../../utils/html-react-parser-utils'
 
 import styles from './JaNeiRadio.module.css'
 
@@ -52,7 +52,7 @@ const JaNeiRadio = ({ sporsmal }: SpmProps) => {
                 return (
                     <div className="ekstrasporsmal">
                         <BodyShort as="span">
-                            {parser(
+                            {parserWithReplace(
                                 getLedetekst(tekst(utenlandsopphold), {
                                     '%URL%': utlandssoknadUrl,
                                 }),
@@ -72,7 +72,7 @@ const JaNeiRadio = ({ sporsmal }: SpmProps) => {
                 return (
                     <div className="presisering">
                         <BodyShort as="span">
-                            {parser(
+                            {parserWithReplace(
                                 getLedetekst(tekst(('soknad.presisering.' + spm.tag + '_NEI') as any), {
                                     '%URL%': tekst(
                                         'soknad.presisering.INNTEKTSKILDE_SELVSTENDIG_ER_DU_SYKMELDT_NEI.url',
@@ -126,7 +126,7 @@ const JaNeiRadio = ({ sporsmal }: SpmProps) => {
                 hvis={sporsmal.tag === TagTyper.SYKMELDINGSGRAD && watchJaNei === 'NEI'}
                 render={() => (
                     <ProgressivtGuidePanel className={styles.guidepanelWrapper}>
-                        <BodyShort>{parser(tekst('sykepengesoknad-utland.skjema.bjorn'))}</BodyShort>
+                        <BodyShort>{parserWithReplace(tekst('sykepengesoknad-utland.skjema.bjorn'))}</BodyShort>
                     </ProgressivtGuidePanel>
                 )}
             />
@@ -136,7 +136,9 @@ const JaNeiRadio = ({ sporsmal }: SpmProps) => {
                 render={() => (
                     <>
                         <ProgressivtGuidePanel className={styles.guidepanelWrapper}>
-                            <BodyShort>{parser(tekst('sykepengesoknad-utland.skjema.ferie-sporsmal-bjorn'))}</BodyShort>
+                            <BodyShort>
+                                {parserWithReplace(tekst('sykepengesoknad-utland.skjema.ferie-sporsmal-bjorn'))}
+                            </BodyShort>
                         </ProgressivtGuidePanel>
 
                         <KnapperadAvbryt />

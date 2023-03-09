@@ -1,7 +1,6 @@
 import { BodyShort, Link } from '@navikt/ds-react'
 import React from 'react'
 import { useParams } from 'react-router'
-import parser from 'html-react-parser'
 
 import { TagTyper } from '../../../types/enums'
 import { RSSoknadstatus } from '../../../types/rs-types/rs-soknadstatus'
@@ -14,6 +13,7 @@ import { RouteParams } from '../../../app'
 import useSoknad from '../../../hooks/useSoknad'
 import { ProgressivtGuidePanel } from '../../guidepanel/ProgressivtGuidePanel'
 import { logEvent } from '../../amplitude/amplitude'
+import { parserWithReplace } from '../../../utils/html-react-parser-utils'
 
 import styles from './GuidepanelUnderSporsmalstekst.module.css'
 
@@ -36,7 +36,7 @@ const GuidepanelUnderSporsmalstekst = ({ sporsmal }: SpmProps) => {
                 hvis={bjornVeileder(sporsmal.tag)}
                 render={() => (
                     <ProgressivtGuidePanel className={styles.guidepanelWrapper}>
-                        <BodyShort>{parser(tekst(bjornTekst as any))}</BodyShort>
+                        <BodyShort>{parserWithReplace(tekst(bjornTekst as any))}</BodyShort>
                     </ProgressivtGuidePanel>
                 )}
             />

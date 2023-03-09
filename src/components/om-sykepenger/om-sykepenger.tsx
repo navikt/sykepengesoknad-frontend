@@ -1,7 +1,7 @@
 import { Accordion, Alert, BodyLong, BodyShort, Heading, Label, Link } from '@navikt/ds-react'
-import parser from 'html-react-parser'
 import React, { useState } from 'react'
 
+import { parserWithReplace } from '../../utils/html-react-parser-utils'
 import { tekst } from '../../utils/tekster'
 import { logEvent } from '../amplitude/amplitude'
 
@@ -64,12 +64,18 @@ const OmSykepenger = () => {
                                 {tekst('om.sykepenger.selvstendige.tittel')}
                             </Accordion.Header>
                             <Accordion.Content>
-                                <BodyLong spacing>{parser(tekst('om.sykepenger.selvstendige.tekst1'))}</BodyLong>
+                                <BodyLong spacing>
+                                    {parserWithReplace(tekst('om.sykepenger.selvstendige.tekst1'))}
+                                </BodyLong>
                                 <BodyLong spacing>{tekst('om.sykepenger.selvstendige.tekst2')}</BodyLong>
                                 <BodyLong spacing>{tekst('om.sykepenger.selvstendige.tekst3')}</BodyLong>
                                 <Label as="h3">{tekst('om.sykepenger.selvstendige.husk')}</Label>
-                                <BodyLong spacing>{parser(tekst('om.sykepenger.selvstendige.tekst4'))}</BodyLong>
-                                <Alert variant="info">{parser(tekst('om.sykepenger.selvstendige.alertstripe'))}</Alert>
+                                <BodyLong spacing>
+                                    {parserWithReplace(tekst('om.sykepenger.selvstendige.tekst4'))}
+                                </BodyLong>
+                                <Alert variant="info">
+                                    {parserWithReplace(tekst('om.sykepenger.selvstendige.alertstripe'))}
+                                </Alert>
                             </Accordion.Content>
                         </Accordion.Item>
                     </Accordion>

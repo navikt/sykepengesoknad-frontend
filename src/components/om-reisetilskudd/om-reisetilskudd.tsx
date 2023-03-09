@@ -1,7 +1,7 @@
 import { Accordion, BodyLong, Heading, Label, Link } from '@navikt/ds-react'
-import parser from 'html-react-parser'
 import React, { useState } from 'react'
 
+import { parserWithReplace } from '../../utils/html-react-parser-utils'
 import { tekst } from '../../utils/tekster'
 import { logEvent } from '../amplitude/amplitude'
 
@@ -23,7 +23,7 @@ const OmReisetilskudd = () => {
                 </Accordion.Header>
                 <Accordion.Content>
                     <Label as="h3">{tekst('tilskudd.start.hva-dekker')}</Label>
-                    <BodyLong spacing>{parser(tekst('tilskudd.start.hva-dekker-tekst'))}</BodyLong>
+                    <BodyLong spacing>{parserWithReplace(tekst('tilskudd.start.hva-dekker-tekst'))}</BodyLong>
 
                     <Label as="h3">{tekst('tilskudd.start.forste-16')}</Label>
                     <BodyLong spacing>{tekst('tilskudd.start.forste-16-tekst')}</BodyLong>

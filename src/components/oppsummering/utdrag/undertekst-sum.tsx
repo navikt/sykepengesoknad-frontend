@@ -1,7 +1,7 @@
 import { BodyLong, Label } from '@navikt/ds-react'
-import parser from 'html-react-parser'
 import React from 'react'
 
+import { parserWithReplace } from '../../../utils/html-react-parser-utils'
 import { OppsummeringProps } from '../oppsummering'
 
 const UndertekstSum = ({ sporsmal }: OppsummeringProps) => {
@@ -9,7 +9,7 @@ const UndertekstSum = ({ sporsmal }: OppsummeringProps) => {
         <div className="oppsummering__VisUndertekst">
             <Label as="h4">{sporsmal.sporsmalstekst}</Label>
             <BodyLong spacing className="redaksjonelt-innhold">
-                {parser(sporsmal.undertekst)}
+                {parserWithReplace(sporsmal.undertekst ?? '')}
             </BodyLong>
         </div>
     )

@@ -1,5 +1,4 @@
 import { BodyShort, Label, Link } from '@navikt/ds-react'
-import parser from 'html-react-parser'
 import React from 'react'
 import { useParams } from 'react-router'
 
@@ -12,6 +11,7 @@ import { RouteParams } from '../../../app'
 import useSoknad from '../../../hooks/useSoknad'
 import { ProgressivtGuidePanel } from '../../guidepanel/ProgressivtGuidePanel'
 import { logEvent } from '../../amplitude/amplitude'
+import { parserWithReplace } from '../../../utils/html-react-parser-utils'
 
 import { Bendiksen } from './bendiksen'
 import styles from './PaskeHjelpetekst.module.css'
@@ -33,7 +33,7 @@ const PaskeHjelpetekst = ({ sporsmal }: SpmProps) => {
                         <Label as="h2">{tekst('soknad.bendiksen.paske.label')}</Label>
                         <BodyShort spacing>{tekst('soknad.bendiksen.paske.tekst')}</BodyShort>
                         <BodyShort>
-                            {parser(tekst('soknad.bendiksen.paske.tips'))}
+                            {parserWithReplace(tekst('soknad.bendiksen.paske.tips'))}
                             <Link
                                 href={tekst('soknad.bendiksen.paske.lenke')}
                                 onClick={() => {
