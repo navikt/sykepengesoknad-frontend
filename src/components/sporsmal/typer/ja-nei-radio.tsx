@@ -37,15 +37,13 @@ const JaNeiRadio = ({ sporsmal }: SpmProps) => {
                         ? 'soknad.infotekst.utlandsopphold_sokt_sykepenger.ja'
                         : 'soknad.infotekst.utlandsopphold_sokt_sykepenger.nei'
                 return (
-                    <div className="ekstrasporsmal">
-                        <BodyShort as="span">
-                            {parserWithReplace(
-                                getLedetekst(tekst(utenlandsopphold), {
-                                    '%URL%': utlandssoknadUrl,
-                                }),
-                            )}
-                        </BodyShort>
-                    </div>
+                    <Alert variant="info">
+                        {parserWithReplace(
+                            getLedetekst(tekst(utenlandsopphold), {
+                                '%URL%': utlandssoknadUrl,
+                            }),
+                        )}
+                    </Alert>
                 )
             }
             if (spm.tag.startsWith('INNTEKTSKILDE_') && watchJaNei === 'JA') {
