@@ -7,12 +7,14 @@ import { Controller } from 'react-hook-form'
 import FeilLokal from '../../feil/feil-lokal'
 import GuidepanelUnderSporsmalstekst from '../guidepanel/GuidepanelUnderSporsmalstekst'
 import { SpmProps } from '../sporsmal-form/sporsmal-form'
+// import { fraBackendTilDate } from '../../../utils/dato-utils'
 
 const BehDager = ({ sporsmal }: SpmProps) => {
     // todo det er et problem her knyttet til forskyvning av tidligste dato (tidssone?)
     const earliestDate = dayjs(sporsmal.undersporsmal[0].min).toDate()
     const latestDate = dayjs(sporsmal.undersporsmal[sporsmal.undersporsmal.length - 1].max).toDate()
-
+    // const earliestDate = fraBackendTilDate(sporsmal.undersporsmal[0].min || '1900-01-01')
+    // const latestDate = fraBackendTilDate(sporsmal.undersporsmal[sporsmal.undersporsmal.length - 1].max || '2100-01-01')
     dayjs.extend(weekOfYear)
     dayjs.extend(weekOfYear)
 
