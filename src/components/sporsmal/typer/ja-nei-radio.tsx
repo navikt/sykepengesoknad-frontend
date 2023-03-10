@@ -1,11 +1,10 @@
-import { BodyShort, Label } from '@navikt/ds-react'
+import { Alert, BodyShort, Radio, RadioGroup } from '@navikt/ds-react'
 import React from 'react'
-import { useFormContext } from 'react-hook-form'
+import { Controller, useFormContext } from 'react-hook-form'
 
 import { SvarEnums, TagTyper } from '../../../types/enums'
 import { getLedetekst, tekst } from '../../../utils/tekster'
 import AnimateOnMount from '../../animate-on-mount'
-import FeilLokal from '../../feil/feil-lokal'
 import { utlandssoknadUrl } from '../../soknad/soknad-link'
 import Vis from '../../vis'
 import KnapperadAvbryt from '../sporsmal-form/knapperad-avbryt'
@@ -17,20 +16,8 @@ import { parserWithReplace } from '../../../utils/html-react-parser-utils'
 
 import styles from './JaNeiRadio.module.css'
 
-const jaNeiValg = [
-    {
-        value: 'JA',
-        label: 'Ja',
-    },
-    {
-        value: 'NEI',
-        label: 'Nei',
-    },
-]
-
 const JaNeiRadio = ({ sporsmal }: SpmProps) => {
     const {
-        register,
         formState: { errors },
         watch,
         getValues,
@@ -88,38 +75,36 @@ const JaNeiRadio = ({ sporsmal }: SpmProps) => {
 
     return (
         <>
-            <div
-                className={
-                    'skjemaelement' +
-                    (sporsmal.parentKriterie ? ' kriterie--' + sporsmal.parentKriterie.toLowerCase() : '') +
-                    (errors[sporsmal.id] ? ' skjemagruppe--feil' : '')
-                }
-            >
-                <Label as="h3" className="skjema__sporsmal">
-                    {sporsmal.sporsmalstekst}
-                </Label>
-
-                {jaNeiValg.map((valg, idx) => {
-                    const OK = watchJaNei === valg.value
-                    return (
-                        <div className="radioContainer" key={idx}>
-                            <input
-                                type="radio"
-                                id={sporsmal.id + '_' + idx}
-                                value={valg.value}
-                                {...register(sporsmal.id, {
-                                    required: feilmelding.global,
-                                })}
-                                className="skjemaelement__input radioknapp"
-                            />
-                            <label className="skjemaelement__label" htmlFor={sporsmal.id + '_' + idx}>
-                                {valg.label}
-                            </label>
-                            {presisering(OK)}
-                        </div>
-                    )
-                })}
-                <FeilLokal sporsmal={sporsmal} />
+            <div className="skjema__sporsmal">
+                <Controller
+                    name={sporsmal.id}
+                    rules={{ required: feilmelding.global }}
+                    render={({ field }) => (
+                        <RadioGroup
+                            {...field}
+                            legend={sporsmal.sporsmalstekst}
+                            error={errors[sporsmal.id] !== undefined && feilmelding.lokal}
+                            key={sporsmal.id}
+                        >
+                            <Radio
+                                id={field.name + '_' + '0'}
+                                value="JA"
+                                className={'radio-input' + (watchJaNei === 'JA' ? ' radio-checked' : '')}
+                            >
+                                Ja
+                            </Radio>
+                            {presisering(field.value === 'JA')}
+                            <Radio
+                                id={field.name + '_' + '1'}
+                                value="NEI"
+                                className={'radio-input' + (watchJaNei === 'JA' ? ' radio-checked' : '')}
+                            >
+                                Nei
+                            </Radio>
+                            {presisering(field.value === 'NEI')}
+                        </RadioGroup>
+                    )}
+                />
             </div>
 
             <Vis
