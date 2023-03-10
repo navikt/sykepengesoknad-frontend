@@ -1,4 +1,5 @@
 import dayjs from 'dayjs'
+import { AnyNode } from 'domhandler'
 
 import { SvarEnums } from '../../types/enums'
 import { RSSvar } from '../../types/rs-types/rs-svar'
@@ -39,9 +40,9 @@ export const settSvar = (sporsmal: Sporsmal, verdier: Record<string, any>): void
         case RSSvartype.RADIO_GRUPPE_TIMER_PROSENT:
             radiogruppeSvar(sporsmal, verdi)
             break
-        case RSSvartype.RADIO_GRUPPE_UKEKALENDER:
-            ukekalenderSvar(sporsmal, verdi)
-            break
+        case RSSvartype.INFO_BEHANDLINGSDAGER:
+            behandlingsdagerSvar(sporsmal, verdi)
+        // case RSSvartype.RADIO_GRUPPE_UKEKALENDER: // beh relevant
         case RSSvartype.LAND:
             landSvar(sporsmal, verdi)
             break
@@ -60,7 +61,7 @@ export const settSvar = (sporsmal: Sporsmal, verdier: Record<string, any>): void
             return
         case RSSvartype.RADIO:
         case RSSvartype.IKKE_RELEVANT:
-        case RSSvartype.INFO_BEHANDLINGSDAGER:
+
         case RSSvartype.CHECKBOX_GRUPPE:
             // Skal ikke ha svarverdi
             break
@@ -84,6 +85,26 @@ const checkboxSvar = (sporsmal: Sporsmal, verdi: any) => {
                 verdi: verdi === SvarEnums.CHECKED || verdi === true ? SvarEnums.CHECKED : '',
             },
         ],
+    }
+}
+
+const behandlingsdagerSvar = (sporsmal: Sporsmal, verdi: Date[]) => {
+
+    const selectedDays = verdi
+
+    for (let i = 0; i < sporsmal.undersporsmal.length; i++) {
+        sporsmal.undersporsmal[i].svarliste.svar[0] = { verdi: 'Ikke til behandling' }
+    }
+
+    for (let i = 0; i < sporsmal.undersporsmal.length; i++) {
+        for (const date of selectedDays) {
+            if (
+                date <= dayjs(sporsmal.undersporsmal[i].max).toDate() &&
+                date >= dayjs(sporsmal.undersporsmal[i].min).toDate()
+            ) {
+                sporsmal.undersporsmal[i].svarliste.svar[0] = { verdi: dayjs(date).format('YYYY-MM-DD') }
+            }
+        }
     }
 }
 
