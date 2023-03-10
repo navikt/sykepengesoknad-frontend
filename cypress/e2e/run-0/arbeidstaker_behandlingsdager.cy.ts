@@ -95,8 +95,7 @@ describe('Tester behandlingsdagersøknad', () => {
             .should('contain', 'Ikke til behandling')
         cy.get('.oppsummering__sporsmal').contains('6. – 10. april').siblings().should('contain', '10. april')
         cy.get('.oppsummering__sporsmal').contains('13. – 17. april').siblings().should('contain', '15. april')
-        cy.get('.oppsummering__sporsmal')
-            .contains('20. – 24. april')
+        cy.get('.oppsummering__sporsmal').contains('20. – 24. april')
         cy.get('.oppsummering__sporsmal').contains('Ikke til behandling')
 
         cy.contains('Send søknaden').click()

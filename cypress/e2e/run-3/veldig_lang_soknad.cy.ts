@@ -58,8 +58,8 @@ describe('Tester støtte for gamle spørsmål', () => {
     }
 
     function velgBehandlingsdager() {
-        cy.get('.skjema__beh-dager').contains('10').click({ force: true })
-        cy.get('.skjema__beh-dager').contains('16').click({ force: true })
+        cy.get('.rdp-day').contains('10').click({ force: true })
+        cy.get('.rdp-day').contains('16').click({ force: true })
     }
 
     function velgLand(land: string) {

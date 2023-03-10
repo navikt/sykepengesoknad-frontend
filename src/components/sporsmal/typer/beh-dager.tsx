@@ -19,8 +19,6 @@ const BehDager = ({ sporsmal }: SpmProps) => {
         throw new Error('Function not implemented.')
     }
 
-
-
     // todo det er et problem her knyttet til forskyvning av tidligste dato (tidssone?)
     const earliestDate = dayjs(sporsmal.undersporsmal[0].min).toDate()
     const latestDate = dayjs(sporsmal.undersporsmal[sporsmal.undersporsmal.length - 1].max).toDate()
@@ -57,7 +55,6 @@ const BehDager = ({ sporsmal }: SpmProps) => {
                 }}
                 render={({ field }) => (
                     <>
-
                         <UNSAFE_DatePicker.Standalone
                             {...inputProps}
                             selected={field.value}

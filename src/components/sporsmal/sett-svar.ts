@@ -89,7 +89,6 @@ const checkboxSvar = (sporsmal: Sporsmal, verdi: any) => {
 }
 
 const behandlingsdagerSvar = (sporsmal: Sporsmal, verdi: Date[]) => {
-
     const selectedDays = verdi
 
     for (let i = 0; i < sporsmal.undersporsmal.length; i++) {
