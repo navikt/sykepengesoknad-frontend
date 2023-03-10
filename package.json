@@ -50,7 +50,7 @@
         "@types/react-router-hash-link": "^2.4.1",
         "@types/react-transition-group": "^4.4.5",
         "@types/uuid": "^9.0.0",
-        "autoprefixer": "^10.4.13",
+        "autoprefixer": "^10.4.14",
         "cypress": "^12.7.0",
         "cypress-axe": "^1.4.0",
         "cypress-file-upload": "^5.0.8",
