@@ -1,7 +1,5 @@
-import { json } from 'stream/consumers'
-
 import { Label, UNSAFE_DatePicker, UNSAFE_useDatepicker } from '@navikt/ds-react'
-import React, { useState } from 'react'
+import React from 'react'
 import dayjs from 'dayjs'
 import weekOfYear from 'dayjs/plugin/weekOfYear'
 import { Controller } from 'react-hook-form'
@@ -10,15 +8,7 @@ import FeilLokal from '../../feil/feil-lokal'
 import GuidepanelUnderSporsmalstekst from '../guidepanel/GuidepanelUnderSporsmalstekst'
 import { SpmProps } from '../sporsmal-form/sporsmal-form'
 
-import BehandlingsUke from './behandlings-uke'
-
 const BehDager = ({ sporsmal }: SpmProps) => {
-    const [selectedDays, setSelectedDays] = useState<Date[]>([])
-    const [selectedWeekNumbers, setSelectedNumbers] = useState<number[]>([])
-    function setHasError(arg0: boolean) {
-        throw new Error('Function not implemented.')
-    }
-
     // todo det er et problem her knyttet til forskyvning av tidligste dato (tidssone?)
     const earliestDate = dayjs(sporsmal.undersporsmal[0].min).toDate()
     const latestDate = dayjs(sporsmal.undersporsmal[sporsmal.undersporsmal.length - 1].max).toDate()
@@ -29,7 +19,7 @@ const BehDager = ({ sporsmal }: SpmProps) => {
     const minDate = earliestDate
     const maxDate = latestDate
 
-    const { datepickerProps, inputProps, selectedDay } = UNSAFE_useDatepicker({
+    const { inputProps } = UNSAFE_useDatepicker({
         fromDate: minDate,
         toDate: maxDate,
         openOnFocus: false,

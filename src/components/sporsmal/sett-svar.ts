@@ -1,5 +1,4 @@
 import dayjs from 'dayjs'
-import { AnyNode } from 'domhandler'
 
 import { SvarEnums } from '../../types/enums'
 import { RSSvar } from '../../types/rs-types/rs-svar'
@@ -124,13 +123,6 @@ const radiogruppeSvar = (sporsmal: Sporsmal, verdi: any) => {
             svar: [{ verdi: erValgt ? SvarEnums.CHECKED : '' }],
         }
     })
-}
-
-const ukekalenderSvar = (sporsmal: Sporsmal, verdi: any) => {
-    sporsmal.svarliste = {
-        sporsmalId: sporsmal.id,
-        svar: [{ verdi: verdi ? verdi.toString() : 'Ikke til behandling' }],
-    }
 }
 
 const periodeSvar = (sporsmal: Sporsmal, verdi: any) => {
