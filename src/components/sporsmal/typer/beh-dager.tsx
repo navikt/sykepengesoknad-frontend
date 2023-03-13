@@ -49,15 +49,20 @@ const BehDager = ({ sporsmal }: SpmProps) => {
                             disableWeekends={true}
                             onSelect={(date) => {
                                 if (date) {
-                                    // todo det kan være at denne lar den siste dagen ligge igjen
                                     const weekNrs = date.map((day) => dayjs(day).week())
+
+                                    // om disse ikke er like er det mer enn en dag i samme uke som er valgt
                                     if (weekNrs.length === new Set(weekNrs).size) {
                                         field.onChange(date)
                                     } else {
+                                        // tar vare på den nye dagen
                                         const nyDag = date.pop()
+                                        // filtrerer ut alle dager som er i samme uke som den nye dagen
                                         const valgteDagerMinusDenISammeUkeSomNyDag = date.filter((dag) => {
                                             return dayjs(dag).week() !== dayjs(nyDag).week()
                                         })
+
+                                        // legger den nye dagen tilbake
                                         if (nyDag) {
                                             valgteDagerMinusDenISammeUkeSomNyDag.push(nyDag)
                                         }
