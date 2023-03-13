@@ -41,7 +41,7 @@ export const settSvar = (sporsmal: Sporsmal, verdier: Record<string, any>): void
             break
         case RSSvartype.INFO_BEHANDLINGSDAGER:
             behandlingsdagerSvar(sporsmal, verdi)
-        // case RSSvartype.RADIO_GRUPPE_UKEKALENDER: // beh relevant
+            break
         case RSSvartype.LAND:
             landSvar(sporsmal, verdi)
             break
