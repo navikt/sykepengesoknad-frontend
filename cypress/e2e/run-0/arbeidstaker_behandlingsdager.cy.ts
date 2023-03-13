@@ -90,7 +90,7 @@ describe('Tester behandlingsdagersøknad', () => {
 
         cy.get('.oppsummering').click()
         cy.get('.oppsummering__sporsmal')
-            .contains('31. mars – 3. april')
+            .contains('1. – 3. april')
             .siblings()
             .should('contain', 'Ikke til behandling')
         cy.get('.oppsummering__sporsmal').contains('6. – 10. april').siblings().should('contain', '10. april')

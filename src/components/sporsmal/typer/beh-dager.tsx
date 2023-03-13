@@ -9,21 +9,17 @@ import GuidepanelUnderSporsmalstekst from '../guidepanel/GuidepanelUnderSporsmal
 import { SpmProps } from '../sporsmal-form/sporsmal-form'
 // import { fraBackendTilDate } from '../../../utils/dato-utils'
 
+
 const BehDager = ({ sporsmal }: SpmProps) => {
-    // todo det er et problem her knyttet til forskyvning av tidligste dato (tidssone?)
-    const earliestDate = dayjs(sporsmal.undersporsmal[0].min).toDate()
-    const latestDate = dayjs(sporsmal.undersporsmal[sporsmal.undersporsmal.length - 1].max).toDate()
-    // const earliestDate = fraBackendTilDate(sporsmal.undersporsmal[0].min || '1900-01-01')
-    // const latestDate = fraBackendTilDate(sporsmal.undersporsmal[sporsmal.undersporsmal.length - 1].max || '2100-01-01')
-    dayjs.extend(weekOfYear)
+
+
     dayjs.extend(weekOfYear)
 
-    const minDate = earliestDate
-    const maxDate = latestDate
+
+    const minDate = dayjs(sporsmal.undersporsmal[0].min).toDate()
+    const maxDate = dayjs(sporsmal.undersporsmal[sporsmal.undersporsmal.length - 1].max).toDate()
 
     const { inputProps } = UNSAFE_useDatepicker({
-        fromDate: minDate,
-        toDate: maxDate,
         openOnFocus: false,
     })
 
@@ -49,6 +45,7 @@ const BehDager = ({ sporsmal }: SpmProps) => {
                     <>
                         <UNSAFE_DatePicker.Standalone
                             {...inputProps}
+                            locale="nb"
                             selected={field.value}
                             mode="multiple"
                             fromDate={minDate}
