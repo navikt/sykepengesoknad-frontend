@@ -9,12 +9,8 @@ import GuidepanelUnderSporsmalstekst from '../guidepanel/GuidepanelUnderSporsmal
 import { SpmProps } from '../sporsmal-form/sporsmal-form'
 // import { fraBackendTilDate } from '../../../utils/dato-utils'
 
-
 const BehDager = ({ sporsmal }: SpmProps) => {
-
-
     dayjs.extend(weekOfYear)
-
 
     const minDate = dayjs(sporsmal.undersporsmal[0].min).toDate()
     const maxDate = dayjs(sporsmal.undersporsmal[sporsmal.undersporsmal.length - 1].max).toDate()

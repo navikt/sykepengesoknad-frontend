@@ -89,10 +89,7 @@ describe('Tester behandlingsdagersøknad', () => {
         cy.contains('Søknaden sendes til NAV.')
 
         cy.get('.oppsummering').click()
-        cy.get('.oppsummering__sporsmal')
-            .contains('1. – 3. april')
-            .siblings()
-            .should('contain', 'Ikke til behandling')
+        cy.get('.oppsummering__sporsmal').contains('1. – 3. april').siblings().should('contain', 'Ikke til behandling')
         cy.get('.oppsummering__sporsmal').contains('6. – 10. april').siblings().should('contain', '10. april')
         cy.get('.oppsummering__sporsmal').contains('13. – 17. april').siblings().should('contain', '15. april')
         cy.get('.oppsummering__sporsmal').contains('20. – 24. april')
