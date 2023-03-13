@@ -60,11 +60,9 @@ const Perioder = ({ sporsmal }: SpmProps) => {
                 })}
             </ul>
 
-            {![TagTyper.UTENLANDSK_SYKMELDING_GYLDIGHET_ADRESSE].includes(sporsmal.tag) && (
-                <button role="link" type="button" className="lenkeknapp navds-link" onClick={leggTilPeriode}>
-                    {tekst('sykepengesoknad.periodevelger.legg-til-ekstra')}
-                </button>
-            )}
+            <button role="link" type="button" className="lenkeknapp navds-link" onClick={leggTilPeriode}>
+                {tekst('sykepengesoknad.periodevelger.legg-til-ekstra')}
+            </button>
 
             <div aria-live="assertive" className="undersporsmal">
                 <UndersporsmalListe oversporsmal={sporsmal} />
