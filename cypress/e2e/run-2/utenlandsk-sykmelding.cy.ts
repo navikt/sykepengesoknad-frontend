@@ -59,6 +59,15 @@ describe('Tester søknad til utenlandsk sykmelding', () => {
         cy.contains('Gå videre').click()
         cy.contains('Du må oppgi oppgi nærmere opplysninger om arbeidet')
 
+        svarFritekst(
+            'UTENLANDSK_SYKMELDING_LONNET_ARBEID_UTENFOR_NORGE_FRITEKST',
+            'Veldig lang tekstteksttekstteksttekstteksttekstteksttekstteksttekstteksttekstteksttekstteksttekstteksttekstteksttekstteksttekstteksttekstteksttekstteksttekstteksttekstteksttekstteksttekstteksttekstteksttekstteksttekstteksttekstteksttekstteksttekstteksttekstteksttekstteksttekstteksttekstteksttekstteksttekstteksttekstteksttekstteksttekstteksttekstteksttekst',
+        )
+        cy.get(`[data-cy="UTENLANDSK_SYKMELDING_LONNET_ARBEID_UTENFOR_NORGE_FRITEKST"]`)
+            .parent()
+            .parent()
+            .contains('Du kan skrive maks 200 tegn')
+        cy.get(`[data-cy="feil-oppsumering"]`).contains('Du kan skrive maks 200 tegn')
         svarFritekst('UTENLANDSK_SYKMELDING_LONNET_ARBEID_UTENFOR_NORGE_FRITEKST', 'Statsminister i UK')
 
         cy.contains('Gå videre').click()

@@ -24,8 +24,7 @@ export const utenlandskSykmeldingSporsmalene: RSSporsmal[] = [
                 undertekst: null,
                 svartype: 'FRITEKST',
                 min: null,
-                max: null,
-
+                max: '100',
                 pavirkerAndreSporsmal: false,
                 kriterieForVisningAvUndersporsmal: null,
                 svar: [],
@@ -38,8 +37,7 @@ export const utenlandskSykmeldingSporsmalene: RSSporsmal[] = [
                 undertekst: null,
                 svartype: 'FRITEKST',
                 min: '1',
-                max: null,
-
+                max: '100',
                 pavirkerAndreSporsmal: false,
                 kriterieForVisningAvUndersporsmal: null,
                 svar: [],
@@ -52,8 +50,7 @@ export const utenlandskSykmeldingSporsmalene: RSSporsmal[] = [
                 undertekst: null,
                 svartype: 'FRITEKST',
                 min: null,
-                max: null,
-
+                max: '100',
                 pavirkerAndreSporsmal: false,
                 kriterieForVisningAvUndersporsmal: null,
                 svar: [],
@@ -66,8 +63,7 @@ export const utenlandskSykmeldingSporsmalene: RSSporsmal[] = [
                 undertekst: null,
                 svartype: 'FRITEKST',
                 min: null,
-                max: null,
-
+                max: '100',
                 pavirkerAndreSporsmal: false,
                 kriterieForVisningAvUndersporsmal: null,
                 svar: [],
@@ -80,8 +76,7 @@ export const utenlandskSykmeldingSporsmalene: RSSporsmal[] = [
                 undertekst: null,
                 svartype: 'FRITEKST',
                 min: null,
-                max: null,
-
+                max: '100',
                 pavirkerAndreSporsmal: false,
                 kriterieForVisningAvUndersporsmal: null,
                 svar: [],
@@ -94,8 +89,7 @@ export const utenlandskSykmeldingSporsmalene: RSSporsmal[] = [
                 undertekst: null,
                 svartype: 'FRITEKST',
                 min: '1',
-                max: null,
-
+                max: '100',
                 pavirkerAndreSporsmal: false,
                 kriterieForVisningAvUndersporsmal: null,
                 svar: [],
@@ -108,8 +102,7 @@ export const utenlandskSykmeldingSporsmalene: RSSporsmal[] = [
                 undertekst: null,
                 svartype: 'FRITEKST',
                 min: '1',
-                max: null,
-
+                max: '100',
                 pavirkerAndreSporsmal: false,
                 kriterieForVisningAvUndersporsmal: null,
                 svar: [],
@@ -150,7 +143,7 @@ export const utenlandskSykmeldingSporsmalene: RSSporsmal[] = [
                 undertekst: '(f. eks. navn på arbeidsgivere og nærmere informasjon om din yrkesaktivitet i utlandet)\n',
                 svartype: 'FRITEKST',
                 min: '1',
-                max: null,
+                max: '200',
                 pavirkerAndreSporsmal: false,
                 kriterieForVisningAvUndersporsmal: null,
                 svar: [],
