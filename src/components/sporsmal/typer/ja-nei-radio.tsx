@@ -47,11 +47,7 @@ const JaNeiRadio = ({ sporsmal }: SpmProps) => {
                 )
             }
             if (spm.tag.startsWith('INNTEKTSKILDE_') && watchJaNei === 'JA') {
-                return (
-                    <div className="presisering">
-                        <BodyShort as="span">{tekst(('soknad.presisering.' + spm.tag) as any)}</BodyShort>
-                    </div>
-                )
+                return <Alert variant="info">{tekst(('soknad.presisering.' + spm.tag) as any)}</Alert>
             }
             if (spm.tag === 'INNTEKTSKILDE_SELVSTENDIG_ER_DU_SYKMELDT' && watchJaNei === 'NEI') {
                 return (
@@ -73,7 +69,7 @@ const JaNeiRadio = ({ sporsmal }: SpmProps) => {
 
     return (
         <>
-            <div className="skjema__sporsmal">
+            <div>
                 <Controller
                     name={sporsmal.id}
                     rules={{ required: feilmelding.global }}
@@ -84,19 +80,11 @@ const JaNeiRadio = ({ sporsmal }: SpmProps) => {
                             error={errors[sporsmal.id] !== undefined && feilmelding.lokal}
                             key={sporsmal.id}
                         >
-                            <Radio
-                                id={field.name + '_' + '0'}
-                                value="JA"
-                                className={'radio-input' + (watchJaNei === 'JA' ? ' radio-checked' : '')}
-                            >
+                            <Radio id={field.name + '_' + '0'} value="JA">
                                 Ja
                             </Radio>
                             {presisering(field.value === 'JA')}
-                            <Radio
-                                id={field.name + '_' + '1'}
-                                value="NEI"
-                                className={'radio-input' + (watchJaNei === 'JA' ? ' radio-checked' : '')}
-                            >
+                            <Radio id={field.name + '_' + '1'} value="NEI">
                                 Nei
                             </Radio>
                             {presisering(field.value === 'NEI')}

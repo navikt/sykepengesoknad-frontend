@@ -86,7 +86,7 @@ const CheckboxSingle = ({ parent, sporsmal }: AllProps) => {
                 {sporsmal.sporsmalstekst}
             </label>
 
-            <div aria-live="assertive">
+            <div aria-live="assertive" className="ml-4">
                 <AnimateOnMount
                     mounted={watchCheck}
                     enter="undersporsmal--vis"
