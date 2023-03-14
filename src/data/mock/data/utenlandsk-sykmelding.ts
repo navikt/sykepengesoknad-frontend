@@ -119,8 +119,7 @@ export const utenlandskSykmeldingSporsmalene: RSSporsmal[] = [
                 id: '25435234sfd2342345',
                 tag: 'UTENLANDSK_SYKMELDING_GYLDIGHET_ADRESSE',
                 sporsmalstekst: 'Hvor lenge skal denne adressen brukes?',
-                undertekst:
-                    'Du velger selv hvor lenge adressen skal være gyldig, maksimalt 1 år.',
+                undertekst: 'Du velger selv hvor lenge adressen skal være gyldig, maksimalt 1 år.',
                 svartype: 'DATO',
                 min: '2023-03-01',
                 max: '2024-03-10',

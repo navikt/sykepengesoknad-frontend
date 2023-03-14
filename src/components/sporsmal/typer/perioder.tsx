@@ -7,7 +7,6 @@ import { tekst } from '../../../utils/tekster'
 import { hentPerioder } from '../hent-svar'
 import { SpmProps } from '../sporsmal-form/sporsmal-form'
 import UndersporsmalListe from '../undersporsmal/undersporsmal-liste'
-import { TagTyper } from '../../../types/enums'
 
 import PeriodeKomp from './periode-komp'
 
