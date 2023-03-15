@@ -1,5 +1,5 @@
 import { Alert, BodyLong, BodyShort, Button, Label, Modal, ReadMore } from '@navikt/ds-react'
-import React, { useRef, useState } from 'react'
+import React, { useState } from 'react'
 import { useParams } from 'react-router-dom'
 
 import { tekst } from '../../../../utils/tekster'
@@ -22,7 +22,6 @@ const Opplasting = ({ sporsmal }: SpmProps) => {
     const [valgtKvittering, setValgtKvittering] = useState<Kvittering>()
     const [openModal, setOpenModal] = useState<boolean>(false)
     const [valgtFil, setValgtFil] = useState<File>()
-    const ikonRef = useRef<HTMLImageElement>(null)
 
     // eslint-disable-next-line
     // @ts-ignore
@@ -40,15 +39,13 @@ const Opplasting = ({ sporsmal }: SpmProps) => {
 
     return (
         <div className="opplasting">
-            <div className="opplasting__tekst">
-                <Label as="h2" className="skjema__sporsmal">
-                    {sporsmal.sporsmalstekst}
-                </Label>
-            </div>
+            <Label as="h2" className="skjema__sporsmal">
+                {sporsmal.sporsmalstekst}
+            </Label>
 
             <Alert variant="warning" className="reisetilskudd">
                 <BodyShort as="strong">{tekst('soknad.info.kvitteringer-del1')}</BodyShort>
-                <ul style={{ minWidth: 190 }}>
+                <ul>
                     <BodyShort as="li">{tekst('soknad.info.kvitteringer-del2-kulepunkt1')}</BodyShort>
                     <BodyShort as="li">{tekst('soknad.info.kvitteringer-del2-kulepunkt2')}</BodyShort>
                     <BodyShort as="li">{tekst('soknad.info.kvitteringer-del2-kulepunkt3')}</BodyShort>
@@ -60,16 +57,8 @@ const Opplasting = ({ sporsmal }: SpmProps) => {
                 <BodyLong>{OpplastingTekster['soknad.info.kvitteringer-PDF-tekst']}</BodyLong>
             </ReadMore>
 
-            <Button
-                type="button"
-                variant="secondary"
-                className="fler-vedlegg"
-                onClick={aktiverModal}
-                onMouseEnter={() => (ikonRef.current!.src = '/syk/sykepengesoknad/static/pluss-ikon-hover.svg')}
-                onMouseLeave={() => (ikonRef.current!.src = '/syk/sykepengesoknad/static/pluss-ikon.svg')}
-            >
-                <img ref={ikonRef} className="pluss-ikon" src={'/syk/sykepengesoknad/static/pluss-ikon.svg'} alt="" />
-                <BodyShort as="span">{tekst('opplasting.legg-til')}</BodyShort>
+            <Button type="button" variant="secondary" className="mt-6 w-full p-8" onClick={aktiverModal}>
+                <BodyShort>{tekst('opplasting.legg-til')}</BodyShort>
             </Button>
 
             <Modal

@@ -19,3 +19,10 @@
 html {
     --desktop-limit-width: 672px;
 }
+
+@layer base {
+    ul {
+        @apply list-disc;
+        @apply list-inside;
+    }
+}
