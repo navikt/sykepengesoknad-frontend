@@ -31,3 +31,10 @@ export function velgLand(land: string) {
 export function svarCheckboxPanel() {
     cy.get('.navds-checkbox__label').click({ force: true })
 }
+
+export function velgDato(dato = 10) {
+    const className = '.navds-date__field-button'
+
+    cy.get(className).click()
+    cy.get('.rdp-day').contains(dato).first().click()
+}

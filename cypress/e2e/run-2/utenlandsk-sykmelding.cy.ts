@@ -1,10 +1,10 @@
 import { soknadTilUtenlandskSykmelding as soknad } from '../../../src/data/mock/data/utenlandsk-sykmelding'
 import {
-    setPeriodeFraTil,
     svarCheckboxPanel,
     svarFritekst,
     svarJaHovedsporsmal,
     svarNeiHovedsporsmal,
+    velgDato,
     velgLand,
 } from '../../support/utilities'
 
@@ -41,7 +41,8 @@ describe('Tester søknad til utenlandsk sykmelding', () => {
         svarFritekst('UTENLANDSK_SYKMELDING_VEGNAVN', 'Downing Street 10')
         svarFritekst('UTENLANDSK_SYKMELDING_LAND', 'UK')
         svarFritekst('UTENLANDSK_SYKMELDING_TELEFONNUMMER', '81549300')
-        setPeriodeFraTil(1, 6)
+        velgDato(1)
+
         cy.contains('Gå videre').click()
     })
 

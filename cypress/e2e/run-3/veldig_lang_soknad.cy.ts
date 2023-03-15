@@ -7,6 +7,7 @@ import {
     svarNeiHovedsporsmal,
     svarCheckboxPanel,
     velgLand,
+    velgDato,
 } from '../../support/utilities'
 import 'cypress-file-upload'
 
@@ -17,14 +18,6 @@ describe('Tester støtte for gamle spørsmål', () => {
     //-----
     const soknad = new Soknad(veldigLangSoknad as any) as Soknad
     let steg = 1
-
-    function velgDato() {
-        const velgDato = 10
-        const className = '.navds-date__field-button'
-
-        cy.get(className).click()
-        cy.get('.rdp-day').contains(velgDato).first().click()
-    }
 
     function velgKalenderdag() {
         cy.get('[aria-label="13. april (mandag)"]').click()
@@ -259,7 +252,7 @@ describe('Tester støtte for gamle spørsmål', () => {
         svarFritekst('UTENLANDSK_SYKMELDING_VEGNAVN', 'Downing Street 10')
         svarFritekst('UTENLANDSK_SYKMELDING_LAND', 'UK')
         svarFritekst('UTENLANDSK_SYKMELDING_TELEFONNUMMER', '81549300')
-        setPeriodeFraTil(1, 6)
+        velgDato(1)
 
         gaVidere()
     })

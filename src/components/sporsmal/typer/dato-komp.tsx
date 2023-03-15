@@ -1,6 +1,6 @@
 import React from 'react'
 import { useController, useFormContext } from 'react-hook-form'
-import { UNSAFE_DatePicker, UNSAFE_useDatepicker } from '@navikt/ds-react'
+import { BodyShort, UNSAFE_DatePicker, UNSAFE_useDatepicker } from '@navikt/ds-react'
 import dayjs from 'dayjs'
 
 import FeilLokal from '../../feil/feil-lokal'
@@ -70,7 +70,12 @@ function DatoInput(props: SpmProps) {
                     <UNSAFE_DatePicker.Input
                         {...inputProps}
                         id={sporsmal.id}
-                        label={sporsmal.sporsmalstekst}
+                        label={
+                            <>
+                                {sporsmal.sporsmalstekst}
+                                {sporsmal.undertekst && <BodyShort as="div"> {sporsmal.undertekst} </BodyShort>}
+                            </>
+                        }
                         error={errors[field.name] !== undefined}
                         data-cy={sporsmal.id}
                     />
