@@ -20,6 +20,7 @@ import {
 import { værKlarOverAt } from './sporsmal/vaer-klar-over-at'
 import { bekreftOpplysninger } from './sporsmal/bekreft-opplysninger'
 import { utenlandskSykmeldingSporsmalene } from './utenlandsk-sykmelding'
+import { yrkesskadeSporsmalet } from './yrkesskade'
 
 export const utgattSoknad: RSSoknad = {
     id: '5b74f271-5b94-455a-b79f-428f593f2b90',
@@ -994,6 +995,7 @@ export const veldigLangSoknad: RSSoknad = {
             svar: [],
             undersporsmal: [],
         },
+        yrkesskadeSporsmalet,
         {
             id: 'f085f79a-ced7-36b0-9259-0806aa57da5f',
             tag: 'ARBEID_UNDERVEIS_100_PROSENT_0',
