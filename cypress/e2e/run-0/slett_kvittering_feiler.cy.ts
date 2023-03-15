@@ -12,8 +12,7 @@ describe('Test sletting av kvittering som feiler', () => {
         })
 
         it('Laster opp Taxi-kvittering', () => {
-            cy.get('.fler-vedlegg').click()
-            cy.contains('Legg til reiseutgift')
+            cy.get('button').contains('Legg til reiseutgift').click()
             cy.get('select[name=transportmiddel]').select('TAXI')
             cy.get('input[name=belop_input]').type('1234')
             cy.get('.filopplasteren input[type=file]').attachFile('kvittering.jpg')

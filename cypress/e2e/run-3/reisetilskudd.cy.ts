@@ -142,8 +142,7 @@ describe('Teste førsteside i reisetilskuddsøknaden', () => {
         })
 
         it('Legger inn taxi kvittering', () => {
-            cy.get('.fler-vedlegg').click()
-            cy.contains('Legg til reiseutgift')
+            cy.get('button').contains('Legg til reiseutgift').click()
             cy.get('select[name=transportmiddel]').select('TAXI')
             cy.get('input[name=belop_input]').type('1234')
 
@@ -199,8 +198,7 @@ describe('Teste førsteside i reisetilskuddsøknaden', () => {
         })
 
         it('Sletting av kvittering i liste', () => {
-            cy.get('.fler-vedlegg').click()
-            cy.contains('Legg til reiseutgift')
+            cy.get('button').contains('Legg til reiseutgift').click()
             cy.get('select[name=transportmiddel]').select('TAXI')
             cy.get('input[name=belop_input]').type('1234')
 
@@ -216,12 +214,12 @@ describe('Teste førsteside i reisetilskuddsøknaden', () => {
         })
 
         it('Åpner og lukker modal', () => {
-            cy.get('.fler-vedlegg').click()
+            cy.get('button').contains('Legg til reiseutgift').click()
             cy.get('.lagre-kvittering').contains('Tilbake').click()
         })
 
         it('Feilmeldinger når ingenting er valgt', () => {
-            cy.get('.fler-vedlegg').click()
+            cy.get('button').contains('Legg til reiseutgift').click()
             cy.get('.lagre-kvittering').contains('Bekreft').click()
 
             cy.get('.skjemaelement__feilmelding').contains('Du må velge transportmiddel')
