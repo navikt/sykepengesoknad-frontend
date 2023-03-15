@@ -1,12 +1,3 @@
-.opplasting .opplasting__tekst {
-    display: flex;
-    align-items: center;
-    margin-top: 0.5rem;
-}
-.opplasting .opplasting__tekst .opplasting__hjelpetekst {
-    align-self: flex-start;
-    margin-left: 0.35rem;
-}
 .opplasting .fler-vedlegg {
     display: flex;
     justify-content: center;

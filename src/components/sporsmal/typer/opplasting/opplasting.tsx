@@ -40,11 +40,9 @@ const Opplasting = ({ sporsmal }: SpmProps) => {
 
     return (
         <div className="opplasting">
-            <div className="opplasting__tekst">
-                <Label as="h2" className="skjema__sporsmal">
-                    {sporsmal.sporsmalstekst}
-                </Label>
-            </div>
+            <Label as="h2" className="skjema__sporsmal">
+                {sporsmal.sporsmalstekst}
+            </Label>
 
             <Alert variant="warning" className="reisetilskudd">
                 <BodyShort as="strong">{tekst('soknad.info.kvitteringer-del1')}</BodyShort>
