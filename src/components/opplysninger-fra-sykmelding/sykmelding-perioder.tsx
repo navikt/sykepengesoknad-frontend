@@ -68,6 +68,7 @@ const SykmeldingPerioder = ({ valgtSoknad, valgtSykmelding }: SykmeldingPerioder
                                         style={{ width: 16, height: 16 }}
                                         src={'/syk/sykepengesoknad/static/check-box-1.png'}
                                         alt="Avkrysset"
+                                        aria-hidden={true}
                                     />
                                     <BodyShort as="span">
                                         {' Kan være i delvis arbeid ved bruk av reisetilskudd'}

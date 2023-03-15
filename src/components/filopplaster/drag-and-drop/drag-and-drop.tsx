@@ -154,6 +154,7 @@ const DragAndDrop = ({ valgtFil, setValgtFil, valgtKvittering }: DragAndDropProp
                                 src="/syk/sykepengesoknad/static/binders.svg"
                                 className="opplastingsikon"
                                 alt="Opplastingsikon"
+                                aria-hidden={true}
                             />
                             <BodyShort as="span" className="tekst">
                                 {isDragActive
