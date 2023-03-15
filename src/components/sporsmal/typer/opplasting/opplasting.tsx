@@ -48,7 +48,7 @@ const Opplasting = ({ sporsmal }: SpmProps) => {
 
             <Alert variant="warning" className="reisetilskudd">
                 <BodyShort as="strong">{tekst('soknad.info.kvitteringer-del1')}</BodyShort>
-                <ul style={{ minWidth: 190 }}>
+                <ul>
                     <BodyShort as="li">{tekst('soknad.info.kvitteringer-del2-kulepunkt1')}</BodyShort>
                     <BodyShort as="li">{tekst('soknad.info.kvitteringer-del2-kulepunkt2')}</BodyShort>
                     <BodyShort as="li">{tekst('soknad.info.kvitteringer-del2-kulepunkt3')}</BodyShort>
