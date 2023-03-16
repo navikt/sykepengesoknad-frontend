@@ -46,10 +46,10 @@ export const EkspanderbarHjelpTekster = {
     'ekspanderbarhjelp.tilbake_i_arbeid.body3':
         'Svar nei, dersom du kun var delvis tilbake på jobb i denne perioden. Du vil senere i søknaden bli spurt om hvor mange timer du har jobbet.',
     'ekspanderbarhjelp.yrkesskade.tittel': 'Hvorfor spør vi om dette?',
-    'ekspanderbarhjelp.yrkesskade.innhold':
-        'Hvis du er sykmeldt for en godkjent yrkesskade eller yrkessykdom, kan du få yrkesskadefordel i sykepenger.\n' +
-        'Fordelen kan påvirke retten til å få utbetalt sykepenger, hvor lenge sykepenger blir utbetalt og noen ganger også størrelsen på utbetalingen.\n' +
-        '<br /><br /><strong>Hva er en yrkesskade?</strong><br />\n' +
-        'Yrkesskade er en personskade, sykdom eller dødsfall som følge av en arbeidsulykke.\n' +
-        ' <a target="_blank" href="https://www.nav.no/yrkesskade">Du kan lese mer om yrkesskade og sykepenger her.</a>',
+    'ekspanderbarhjelp.yrkesskade.body1': 'Yrkesskade er en personskade eller sykdom som følge av en arbeidsulykke.',
+    'ekspanderbarhjelp.yrkesskade.body2':
+        '    Hvis du er sykmeldt for en godkjent yrkesskade eller yrkessykdom kan det gi deg fordeler som påvirker utbetalingen av sykepenger, hvor lenge sykepenger blir utbetalt og noen ganger også størrelsen på utbetalingen.',
+    'ekspanderbarhjelp.yrkesskade.hva-er-lenke': 'Du kan lese mer om yrkesskade og sykepenger her.',
+    'ekspanderbarhjelp.yrkesskade.body3':
+        'Svar ja, hvis du er sykmeldt for en godkjent yrkesskade, yrkessykdom eller du mener det er årsaken til sykefraværet ditt.',
 }

@@ -5,7 +5,6 @@ import { TagTyper } from '../../../types/enums'
 import { tilLesbarPeriodeMedArstall } from '../../../utils/dato-utils'
 import { Sporsmal } from '../../../types/types'
 
-import styles from './tilbake-i-arbeid-besvart.module.css'
 import { TilbakeIArbeidBesvartHjeletekstTekster } from './tilbake-i-arbeid-besvart-hjeletekst-tekster'
 
 export function TilbakeIArbeidBesvart({ sporsmal, fieldValue }: { sporsmal: Sporsmal; fieldValue: any }) {
@@ -13,11 +12,11 @@ export function TilbakeIArbeidBesvart({ sporsmal, fieldValue }: { sporsmal: Spor
         return null
     }
     return (
-        <Alert variant="info" className={styles.alert}>
+        <Alert variant="info" className={'mt-4'}>
             {TilbakeIArbeidBesvartHjeletekstTekster.del1}
             {tilLesbarPeriodeMedArstall(fieldValue, sporsmal.max)}
             {TilbakeIArbeidBesvartHjeletekstTekster.del2}
-            <span className={styles.span}>{TilbakeIArbeidBesvartHjeletekstTekster.span}</span>
+            <span className={'mt-4 block text-gray-700'}>{TilbakeIArbeidBesvartHjeletekstTekster.span}</span>
         </Alert>
     )
 }

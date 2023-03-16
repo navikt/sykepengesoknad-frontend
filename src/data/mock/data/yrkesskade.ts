@@ -7,7 +7,7 @@ import { brukertestSoknad, brukertestSykmelding } from './brukertest'
 export const yrkesskadeSporsmalet: RSSporsmal = {
     id: '234234234234',
     tag: 'YRKESSKADE',
-    sporsmalstekst: `Er du sykmeldt på grunn av en yrkesskade?`,
+    sporsmalstekst: `Er du sykmeldt på grunn av en yrkesskade eller yrkessykdom?`,
     undertekst: null,
     svartype: 'JA_NEI',
     min: null,
