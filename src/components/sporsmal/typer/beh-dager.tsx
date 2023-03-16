@@ -4,10 +4,8 @@ import dayjs from 'dayjs'
 import weekOfYear from 'dayjs/plugin/weekOfYear'
 import { Controller } from 'react-hook-form'
 
-import FeilLokal from '../../feil/feil-lokal'
 import GuidepanelUnderSporsmalstekst from '../guidepanel/GuidepanelUnderSporsmalstekst'
 import { SpmProps } from '../sporsmal-form/sporsmal-form'
-// import { fraBackendTilDate } from '../../../utils/dato-utils'
 
 const BehDager = ({ sporsmal }: SpmProps) => {
     dayjs.extend(weekOfYear)
