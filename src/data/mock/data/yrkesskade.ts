@@ -7,7 +7,7 @@ import { brukertestSoknad, brukertestSykmelding } from './brukertest'
 export const yrkesskadeSporsmalet: RSSporsmal = {
     id: '234234234234',
     tag: 'YRKESSKADE',
-    sporsmalstekst: `Har sykdommen sammenheng med en yrkesskade?`,
+    sporsmalstekst: `Er du sykmeldt på grunn av en yrkesskade?`,
     undertekst: null,
     svartype: 'JA_NEI',
     min: null,
@@ -15,21 +15,7 @@ export const yrkesskadeSporsmalet: RSSporsmal = {
     pavirkerAndreSporsmal: false,
     kriterieForVisningAvUndersporsmal: 'JA',
     svar: [],
-    undersporsmal: [
-        {
-            id: '2543524234234345',
-            tag: 'YRKESSKADE_GODKJENT',
-            sporsmalstekst: 'Er yrkeskadesaken godkjent av NAV?',
-            undertekst: null,
-            svartype: 'JA_NEI',
-            min: null,
-            max: null,
-            pavirkerAndreSporsmal: false,
-            kriterieForVisningAvUndersporsmal: null,
-            svar: [],
-            undersporsmal: [],
-        },
-    ],
+    undersporsmal: [],
 }
 
 const yrkesskadeSoknad = jsonDeepCopy(brukertestSoknad)

@@ -181,7 +181,6 @@ const SporsmalTekster = {
         'Du må svare på om du har mottatt sykepenger eller lignende i andre EØS-land',
     'soknad.feilmelding.UTENLANDSK_SYKMELDING_TRYGD_HVILKET_LAND': '',
     'soknad.feilmelding.YRKESSKADE': 'Du må svare på om sykdommen er relatert til en yrkesskade',
-    'soknad.feilmelding.YRKESSKADE_GODKJENT': 'Du må svare på om yrkesskaden er godkjent av NAV',
 
     'soknad.infotekst.utlandsopphold_sokt_sykepenger.ja':
         'Du må ha sendt en egen <a target="_blank" href="%URL%">utenlandssøknad</a> for å svare ja på dette spørsmålet. Husk at du også må fullføre denne søknaden om sykepenger.',
