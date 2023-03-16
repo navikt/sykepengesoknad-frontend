@@ -44,11 +44,11 @@ describe('Tester behandlingsdagersøknad', () => {
         cy.contains(
             'Hvilke dager måtte du være helt borte fra jobben på grunn av behandling mellom 1. - 24. april 2020?',
         )
-        cy.get('.skjema__beh-dager').contains('1').click({ force: true })
-        cy.get('.skjema__beh-dager').contains('10').click({ force: true })
-        cy.get('.skjema__beh-dager').contains('16').click({ force: true })
-        cy.get('.skjema__beh-dager').contains('15').click({ force: true })
-        cy.get('.skjema__beh-dager').contains('fjern').click({ force: true })
+        cy.get('.rdp-day').contains('1').click({ force: true })
+        cy.get('.rdp-day').contains('10').click({ force: true })
+        cy.get('.rdp-day').contains('16').click({ force: true })
+        cy.get('.rdp-day').contains('15').click({ force: true })
+        cy.get('.rdp-day').contains('1').click({ force: true })
 
         cy.contains('Gå videre').click()
     })
@@ -89,16 +89,11 @@ describe('Tester behandlingsdagersøknad', () => {
         cy.contains('Søknaden sendes til NAV.')
 
         cy.get('.oppsummering').click()
-        cy.get('.oppsummering__sporsmal')
-            .contains('31. mars – 3. april')
-            .siblings()
-            .should('contain', 'Ikke til behandling')
+        cy.get('.oppsummering__sporsmal').contains('1. – 3. april').siblings().should('contain', 'Ikke til behandling')
         cy.get('.oppsummering__sporsmal').contains('6. – 10. april').siblings().should('contain', '10. april')
         cy.get('.oppsummering__sporsmal').contains('13. – 17. april').siblings().should('contain', '15. april')
-        cy.get('.oppsummering__sporsmal')
-            .contains('20. – 24. april')
-            .siblings()
-            .should('contain', 'Ikke til behandling')
+        cy.get('.oppsummering__sporsmal').contains('20. – 24. april')
+        cy.get('.oppsummering__sporsmal').contains('Ikke til behandling')
 
         cy.contains('Send søknaden').click()
     })

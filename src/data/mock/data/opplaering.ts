@@ -76,7 +76,7 @@ export const behandlingsdager: RSSoknad = {
                     sporsmalstekst: '2020-03-31 - 2020-04-03',
                     undertekst: null,
                     svartype: 'RADIO_GRUPPE_UKEKALENDER',
-                    min: '2020-03-31',
+                    min: '2020-04-01',
                     max: '2020-04-03',
                     pavirkerAndreSporsmal: false,
                     kriterieForVisningAvUndersporsmal: null,

@@ -15,7 +15,10 @@ export const hentSvar = (sporsmal: Sporsmal): any => {
     const svartype = sporsmal.svartype
     switch (svartype) {
         case RSSvartype.INFO_BEHANDLINGSDAGER:
-            return sporsmal.undersporsmal.map((uspm) => uspm.svarliste)
+            return sporsmal.undersporsmal
+                .map((uspm) => uspm.svarliste.svar[0]?.verdi)
+                .filter((v) => v !== undefined && v !== 'Ikke til behandling')
+                .map((s) => dayjs(s).toDate())
 
         case RSSvartype.CHECKBOX:
         case RSSvartype.CHECKBOX_PANEL:

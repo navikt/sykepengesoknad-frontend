@@ -39,8 +39,8 @@ export const settSvar = (sporsmal: Sporsmal, verdier: Record<string, any>): void
         case RSSvartype.RADIO_GRUPPE_TIMER_PROSENT:
             radiogruppeSvar(sporsmal, verdi)
             break
-        case RSSvartype.RADIO_GRUPPE_UKEKALENDER:
-            ukekalenderSvar(sporsmal, verdi)
+        case RSSvartype.INFO_BEHANDLINGSDAGER:
+            behandlingsdagerSvar(sporsmal, verdi)
             break
         case RSSvartype.LAND:
             landSvar(sporsmal, verdi)
@@ -60,7 +60,7 @@ export const settSvar = (sporsmal: Sporsmal, verdier: Record<string, any>): void
             return
         case RSSvartype.RADIO:
         case RSSvartype.IKKE_RELEVANT:
-        case RSSvartype.INFO_BEHANDLINGSDAGER:
+
         case RSSvartype.CHECKBOX_GRUPPE:
             // Skal ikke ha svarverdi
             break
@@ -87,6 +87,25 @@ const checkboxSvar = (sporsmal: Sporsmal, verdi: any) => {
     }
 }
 
+const behandlingsdagerSvar = (sporsmal: Sporsmal, verdi: Date[]) => {
+    const selectedDays = verdi
+
+    for (let i = 0; i < sporsmal.undersporsmal.length; i++) {
+        sporsmal.undersporsmal[i].svarliste.svar[0] = { verdi: 'Ikke til behandling' }
+    }
+
+    for (let i = 0; i < sporsmal.undersporsmal.length; i++) {
+        for (const date of selectedDays) {
+            if (
+                date <= dayjs(sporsmal.undersporsmal[i].max).toDate() &&
+                date >= dayjs(sporsmal.undersporsmal[i].min).toDate()
+            ) {
+                sporsmal.undersporsmal[i].svarliste.svar[0] = { verdi: dayjs(date).format('YYYY-MM-DD') }
+            }
+        }
+    }
+}
+
 const landSvar = (sporsmal: Sporsmal, verdi: string[]) => {
     sporsmal.svarliste = {
         sporsmalId: sporsmal.id,
@@ -104,13 +123,6 @@ const radiogruppeSvar = (sporsmal: Sporsmal, verdi: any) => {
             svar: [{ verdi: erValgt ? SvarEnums.CHECKED : '' }],
         }
     })
-}
-
-const ukekalenderSvar = (sporsmal: Sporsmal, verdi: any) => {
-    sporsmal.svarliste = {
-        sporsmalId: sporsmal.id,
-        svar: [{ verdi: verdi ? verdi.toString() : 'Ikke til behandling' }],
-    }
 }
 
 const periodeSvar = (sporsmal: Sporsmal, verdi: any) => {

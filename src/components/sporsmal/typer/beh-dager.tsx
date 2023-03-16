@@ -1,13 +1,22 @@
-import { Label } from '@navikt/ds-react'
+import { Label, UNSAFE_DatePicker, UNSAFE_useDatepicker } from '@navikt/ds-react'
 import React from 'react'
+import dayjs from 'dayjs'
+import weekOfYear from 'dayjs/plugin/weekOfYear'
+import { Controller } from 'react-hook-form'
 
-import FeilLokal from '../../feil/feil-lokal'
 import GuidepanelUnderSporsmalstekst from '../guidepanel/GuidepanelUnderSporsmalstekst'
 import { SpmProps } from '../sporsmal-form/sporsmal-form'
 
-import BehandlingsUke from './behandlings-uke'
-
 const BehDager = ({ sporsmal }: SpmProps) => {
+    dayjs.extend(weekOfYear)
+
+    const minDate = dayjs(sporsmal.undersporsmal[0].min).toDate()
+    const maxDate = dayjs(sporsmal.undersporsmal[sporsmal.undersporsmal.length - 1].max).toDate()
+
+    const { inputProps } = UNSAFE_useDatepicker({
+        openOnFocus: false,
+    })
+
     return (
         <>
             <Label as="h2" className="skjema__sporsmal">
@@ -16,23 +25,45 @@ const BehDager = ({ sporsmal }: SpmProps) => {
 
             <GuidepanelUnderSporsmalstekst sporsmal={sporsmal} />
 
-            <div className="skjemaelement">
-                <div className="skjema__beh-dager">
-                    <div className="ukedager">
-                        <span>Man</span>
-                        <span>Tir</span>
-                        <span>Ons</span>
-                        <span>Tor</span>
-                        <span>Fre</span>
-                    </div>
+            <Controller
+                name={sporsmal.id}
+                render={({ field }) => (
+                    <>
+                        <UNSAFE_DatePicker.Standalone
+                            {...inputProps}
+                            locale="nb"
+                            selected={field.value}
+                            mode="multiple"
+                            fromDate={minDate}
+                            toDate={maxDate}
+                            disableWeekends={true}
+                            onSelect={(date) => {
+                                if (date) {
+                                    const weekNrs = date.map((day) => dayjs(day).week())
 
-                    {sporsmal.undersporsmal.map((ukespm, ukeidx) => {
-                        return <BehandlingsUke key={ukeidx} sporsmal={sporsmal} ukespm={ukespm} ukeidx={ukeidx} />
-                    })}
-                </div>
-            </div>
+                                    // om disse ikke er like er det mer enn en dag i samme uke som er valgt
+                                    if (weekNrs.length === new Set(weekNrs).size) {
+                                        field.onChange(date)
+                                    } else {
+                                        // tar vare på den nye dagen
+                                        const nyDag = date.pop()
+                                        // filtrerer ut alle dager som er i samme uke som den nye dagen
+                                        const valgteDagerMinusDenISammeUkeSomNyDag = date.filter((dag) => {
+                                            return dayjs(dag).week() !== dayjs(nyDag).week()
+                                        })
 
-            <FeilLokal sporsmal={sporsmal} />
+                                        // legger den nye dagen tilbake
+                                        if (nyDag) {
+                                            valgteDagerMinusDenISammeUkeSomNyDag.push(nyDag)
+                                        }
+                                        field.onChange(valgteDagerMinusDenISammeUkeSomNyDag)
+                                    }
+                                }
+                            }}
+                        ></UNSAFE_DatePicker.Standalone>
+                    </>
+                )}
+            />
         </>
     )
 }
