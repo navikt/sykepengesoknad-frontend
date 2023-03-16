@@ -1,4 +1,5 @@
 import React, { useState } from 'react'
+import { Chips } from '@navikt/ds-react'
 
 import { TagTyper } from '../../../types/enums'
 
@@ -6,7 +7,6 @@ import { Forslag } from './Forslag'
 import { tilForslagsliste } from './forslagUtils'
 import { landlisteEøs, landlisteUtenforEøs } from './landliste'
 import NavAutosuggest from './NavAutosuggest'
-import { ValgteTags } from './ValgteTags'
 
 interface LandvelgerComponentProps {
     verdierInn: string[]
@@ -18,7 +18,6 @@ interface LandvelgerComponentProps {
 
 const LandvelgerComponent = ({ verdierInn, sporsmalId, onChange, tag }: LandvelgerComponentProps) => {
     const [verdier, setVerdier] = useState(verdierInn)
-
     const onAdd = (verdi: Forslag) => {
         const nyeVerdier = [...verdier, verdi.text]
         setVerdier(nyeVerdier)
@@ -50,7 +49,18 @@ const LandvelgerComponent = ({ verdierInn, sporsmalId, onChange, tag }: Landvelg
                 sporsmalId={sporsmalId}
                 forslagsliste={tilForslagsliste(landListe(), verdier)}
             />
-            <ValgteTags verdier={verdier} handleDelete={onDelete} />
+            <Chips aria-live="polite">
+                {verdier.map((verdi, index) => (
+                    <Chips.Removable
+                        key={verdi}
+                        onClick={() => {
+                            onDelete(index)
+                        }}
+                    >
+                        {verdi}
+                    </Chips.Removable>
+                ))}
+            </Chips>
         </div>
     )
 }

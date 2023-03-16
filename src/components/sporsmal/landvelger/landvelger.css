@@ -8,9 +8,11 @@
 .landvelger .ReactTags__tagInput {
     position: relative;
 }
+
 .landvelger .react-autosuggest__suggestions-container--open {
     position: absolute;
     border: 1px solid #b0b0b0;
+    margin-top: 3px;
     z-index: 1;
     background: #ffffff;
     max-height: 200px;
@@ -41,6 +43,11 @@
     margin: 0.5rem 1rem 0 0;
     background-color: #cce1ff;
 }
+
+.landvelger > ul {
+    padding-top: 8px;
+}
+
 .landvelger .etikett--info {
     display: inline-block;
     padding: 5px 10px;

@@ -35,7 +35,7 @@ describe('Tester søknad om å beholde sykepenger utenfor EØS', () => {
         cy.get('.skjemaelement__input').click({ force: true })
         cy.contains('Afghanistan').click({ force: true })
         cy.contains('Albania').should('not.exist')
-        cy.get('.etikett__slett').click({ force: true })
+        cy.get('.navds-chips__removable-icon').click({ force: true })
 
         cy.contains('Gå videre').click({ force: true })
         cy.contains('Du må velge ett land')
@@ -46,7 +46,7 @@ describe('Tester søknad om å beholde sykepenger utenfor EØS', () => {
         cy.get('.skjemaelement__input').type('Fransk', { force: true })
         cy.contains('Fransk Polynesia')
         cy.contains('Søre franske territorier').click({ force: true })
-        cy.get('.etikett__slett').click({ force: true })
+        cy.get('.navds-chips__removable-icon').click({ force: true })
         cy.contains('Du må velge ett land')
         cy.contains('Det er 1 feil i skjemaet')
 
@@ -60,8 +60,7 @@ describe('Tester søknad om å beholde sykepenger utenfor EØS', () => {
 
         cy.get('.skjemaelement__input').type('R')
         cy.contains('Amerikansk Samoa').click({ force: true })
-        cy.contains('Amerikansk Samoa')
-        cy.get(':nth-child(3) > .etikett__slett').click({ force: true })
+        cy.contains('Amerikansk Samoa').find('.navds-chips__removable-icon').click({ force: true })
         cy.contains('Amerikansk Samoa').should('not.exist')
 
         cy.contains('Gå videre').click({ force: true })
