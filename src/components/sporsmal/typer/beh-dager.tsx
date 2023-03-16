@@ -29,14 +29,6 @@ const BehDager = ({ sporsmal }: SpmProps) => {
 
             <Controller
                 name={sporsmal.id}
-                rules={{
-                    validate: (value) => {
-                        if (value.length === 0) {
-                            return 'Du må oppgi hvilke dager du brukte bil'
-                        }
-                        return true
-                    },
-                }}
                 render={({ field }) => (
                     <>
                         <UNSAFE_DatePicker.Standalone
@@ -74,8 +66,6 @@ const BehDager = ({ sporsmal }: SpmProps) => {
                     </>
                 )}
             />
-
-            <FeilLokal sporsmal={sporsmal} />
         </>
     )
 }
