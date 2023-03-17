@@ -45,4 +45,11 @@ export const EkspanderbarHjelpTekster = {
         'Svar ja, hvis du var fullt tilbake på jobb i løpet av perioden. Dette betyr at du ikke lenger er sykmeldt fra datoen du oppgir under.',
     'ekspanderbarhjelp.tilbake_i_arbeid.body3':
         'Svar nei, dersom du kun var delvis tilbake på jobb i denne perioden. Du vil senere i søknaden bli spurt om hvor mange timer du har jobbet.',
+    'ekspanderbarhjelp.yrkesskade.tittel': 'Hvorfor spør vi om dette?',
+    'ekspanderbarhjelp.yrkesskade.body1': 'Yrkesskade er en personskade eller sykdom som følge av en arbeidsulykke.',
+    'ekspanderbarhjelp.yrkesskade.body2':
+        '    Hvis du er sykmeldt for en godkjent yrkesskade eller yrkessykdom kan det gi deg fordeler som påvirker utbetalingen av sykepenger, hvor lenge sykepenger blir utbetalt og noen ganger også størrelsen på utbetalingen.',
+    'ekspanderbarhjelp.yrkesskade.hva-er-lenke': 'Du kan lese mer om yrkesskade og sykepenger her.',
+    'ekspanderbarhjelp.yrkesskade.body3':
+        'Svar ja, hvis du er sykmeldt for en godkjent yrkesskade, yrkessykdom eller du mener det er årsaken til sykefraværet ditt.',
 }

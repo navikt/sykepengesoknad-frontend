@@ -76,6 +76,10 @@ describe('Tester støtte for gamle spørsmål', () => {
         gaVidere()
     })
 
+    it('YRKESSKADE', () => {
+        svarNeiHovedsporsmal()
+        gaVidere()
+    })
     it('ARBEID_UNDERVEIS_100_PROSENT_0', () => {
         svarNeiHovedsporsmal()
         gaVidere()
