@@ -1,9 +1,9 @@
-ingress: https://www-gcp.dev.nav.no/syk/sykepengesoknad
+ingress: https://www.ekstern.dev.nav.no/syk/sykepengesoknad
 env:
   AMPLITUDE_ENABLED: true
   ENVIRONMENT: q1
-  SYKEFRAVAER_URL: https://www-gcp.dev.nav.no/syk/sykefravaer
-  SYKMELDINGER_URL: https://www-gcp.dev.nav.no/syk/sykmeldinger
+  SYKEFRAVAER_URL: https://www.ekstern.dev.nav.no/syk/sykefravaer
+  SYKMELDINGER_URL: https://www.ekstern.dev.nav.no/syk/sykmeldinger
   MINSIDE_URL: https://www.dev.nav.no/minside/
   DECORATOR_ENV: dev
   ASSET_PREFIX: https://cdn.nav.no/flex/sykepengesoknad-frontend
