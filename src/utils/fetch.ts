@@ -90,7 +90,7 @@ export const fetchJsonMedRequestId = async (url: string, options: RequestInit = 
     try {
         return await response.json()
     } catch (e) {
-        lagrePayload({ requestId: fetchResult.requestId, app: 'spinnsyn-frontend', payload: await response.text() })
+        lagrePayload({ requestId: fetchResult.requestId, app: 'sykepengesoknad-frontend', payload: await response.text() })
 
         throw new FetchError(
             `${e} - Kall til url: ${options.method || 'GET'} ${url} og x_request_id: ${
