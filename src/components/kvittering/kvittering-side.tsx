@@ -30,7 +30,7 @@ const KvitteringSide = () => {
     const { id } = useParams<RouteParams>()
     const { data: soknader } = useSoknader()
     const { data: valgtSoknad } = useSoknad(id)
-    const arbeidstakersøknadStudy = 'study-4dushnh970'
+    const arbeidstakersøknadStudy = 'study-hpyhgdokuq'
     const korrigertSøknadStudy = 'study-zeh32lhqyb'
     const { data: arbeidstakersoknadStudyActive } = useStudyStatus(arbeidstakersøknadStudy)
     const { data: korrigertStudyActive } = useStudyStatus(korrigertSøknadStudy)
