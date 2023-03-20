@@ -49,6 +49,24 @@
     transform: rotate(45deg);
     background-color: #ffffff;
 }
+.undersporsmal .ekstrasporsmal {
+    position: relative;
+    margin: 0.7rem -1.2rem;
+    padding: 1rem 1.2rem;
+    background-color: #f1f1f1;
+}
+.undersporsmal .ekstrasporsmal:after {
+    content: '';
+    width: 1rem;
+    height: 1rem;
+    position: absolute;
+    display: block;
+    left: 1rem;
+    top: 0;
+    transform: translateY(-50%) rotate(45deg) skew(5deg, 5deg);
+    transform-origin: 50% 50%;
+    background-color: #f1f1f1;
+}
 .undersporsmal--vis {
     height: auto;
     max-height: 2600px;

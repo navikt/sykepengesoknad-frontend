@@ -69,7 +69,12 @@ const JaNeiRadio = ({ sporsmal }: SpmProps) => {
 
     return (
         <>
-            <div>
+            <div
+                className={
+                    'skjemaelement' +
+                    (sporsmal.parentKriterie ? ' kriterie--' + sporsmal.parentKriterie.toLowerCase() : '')
+                }
+            >
                 <Controller
                     name={sporsmal.id}
                     rules={{ required: feilmelding.global }}
