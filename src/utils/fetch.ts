@@ -53,7 +53,9 @@ export const fetchMedRequestId = async (
     if (!response.ok) {
         const defaultErrorHandler = () => {
             throw new FetchError(
-                `Kall til url: ${options.method} ${url} og x_request_id: ${requestId} feilet med HTTP-kode: ${response.status}.`,
+                `Kall til url: ${options.method || 'GET'} ${url} og x_request_id: ${requestId} feilet med HTTP-kode: ${
+                    response.status
+                }.`,
                 response.status,
             )
         }
@@ -91,7 +93,9 @@ export const fetchJsonMedRequestId = async (url: string, options: RequestInit = 
         lagrePayload({ requestId: fetchResult.requestId, app: 'spinnsyn-frontend', payload: await response.text() })
 
         throw new FetchError(
-            `${e} - Kall til url: ${options.method} ${url} og x_request_id: ${fetchResult.requestId} feilet ved parsing av JSON med HTTP-kode: ${response.status}.`,
+            `${e} - Kall til url: ${options.method || 'GET'} ${url} og x_request_id: ${
+                fetchResult.requestId
+            } feilet ved parsing av JSON med HTTP-kode: ${response.status}.`,
             response.status,
         )
     }
