@@ -41,3 +41,5 @@ spec:
       value: "false"
     - name: ASSET_PREFIX
       value: "https://cdn.nav.no/flex/sykepengesoknad-frontend"
+    - name: FEILMELDINGER_URL
+      value: "https://www.nav.no/syk/feilmeldinger"

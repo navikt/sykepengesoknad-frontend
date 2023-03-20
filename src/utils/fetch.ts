@@ -1,5 +1,7 @@
 import { v4 as uuidv4 } from 'uuid'
 
+import { feilmeldingerUrl } from './environment'
+
 export type FetchResult = { requestId: string; response: Response }
 
 export type ErrorHandler = (result: Response, requestId: string, defaultErrorHandler: () => void) => void
@@ -69,9 +71,25 @@ export const fetchJsonMedRequestId = async (url: string, options: RequestInit = 
     const fetchResult = await fetchMedRequestId(url, options, errorHandler)
     const response = fetchResult.response
 
+    type Payload = { requestId: string; app: string; payload: string }
+
+    function lagrePayload(payload: Payload) {
+        try {
+            fetch(`${feilmeldingerUrl()}/api/v1/feilmelding`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(payload),
+            })
+        } catch (e) {}
+    }
+
     try {
         return await response.json()
     } catch (e) {
+        lagrePayload({ requestId: fetchResult.requestId, app: 'spinnsyn-frontend', payload: await response.text() })
+
         throw new FetchError(
             `${e} - Kall til url: ${options.method} ${url} og x_request_id: ${fetchResult.requestId} feilet ved parsing av JSON med HTTP-kode: ${response.status}.`,
             response.status,
