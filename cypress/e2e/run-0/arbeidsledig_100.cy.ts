@@ -62,7 +62,7 @@ describe('Tester arbeidsledigsøknad', () => {
             force: true,
         })
         // Underspørsmål nivå 2 - radio
-        cy.get('.undersporsmal .checkboxgruppe .radioContainer .radioknapp#687405_0').click({ force: true })
+        cy.get('input[type=radio]#687405_0').click({ force: true })
         cy.contains(
             'Du må sende egen sykepengesøknad for dette. ' +
                 'Det betyr også at legen må skrive en sykmelding for hvert arbeidsforhold du er sykmeldt fra.',
@@ -84,7 +84,7 @@ describe('Tester arbeidsledigsøknad', () => {
 
         // Underspørsmål 2
         cy.contains('Har du søkt om å beholde sykepengene for disse dagene?')
-        cy.get('.skjemaelement__label[for=687424_0]').click({ force: true })
+        cy.get('input[type=radio]#687424_0').click({ force: true })
 
         cy.contains('Gå videre').click()
     })

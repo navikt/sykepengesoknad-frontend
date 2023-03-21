@@ -72,7 +72,7 @@ describe('Tester frilansersøknad', () => {
 
         // Underspørsmål 2
         cy.contains('Jobber du vanligvis 37,5 timer i uka?')
-        cy.get('.undersporsmal input#9163fd91-7e4f-3474-ae32-405f18004af0_0').click({ force: true })
+        cy.get('input[type=radio]#9163fd91-7e4f-3474-ae32-405f18004af0_0').click({ force: true })
 
         cy.contains('Gå videre').click()
     })
@@ -90,7 +90,7 @@ describe('Tester frilansersøknad', () => {
             .should('include.text', 'arbeidsforhold')
             .click({ force: true })
         // Underspørsmål nivå 2 - radio
-        cy.get('.undersporsmal .checkboxgruppe .radioContainer .radioknapp#687441_0').click({ force: true })
+        cy.get('input[type=radio]#687441_0').click({ force: true })
         cy.contains(
             'Du må sende egen sykepengesøknad for dette. ' +
                 'Det betyr også at legen må skrive en sykmelding for hvert arbeidsforhold du er sykmeldt fra.',
@@ -113,26 +113,20 @@ describe('Tester frilansersøknad', () => {
 
         // Underspørsmål 2 - Ja
         cy.contains('Har du søkt om å beholde sykepengene for disse dagene?')
-        cy.get('.undersporsmal .radioContainer .radioknapp#687449_0').click({
+        cy.get('input[type=radio]#687449_0').click({
             force: true,
         })
-        cy.get('.ekstrasporsmal')
-            .should(
-                'have.text',
-                'Du må ha sendt en egen utenlandssøknad for å svare ja på dette spørsmålet. Husk at du også må fullføre denne søknaden om sykepenger.',
-            )
+        cy.contains(
+            'Du må ha sendt en egen utenlandssøknad for å svare ja på dette spørsmålet. Husk at du også må fullføre denne søknaden om sykepenger.',
+        )
             .find('a')
             .should('have.attr', 'href', '/syk/sykepengesoknad/sykepengesoknad-utland')
 
         // Underspørsmål 2 - Nei
-        cy.get('.undersporsmal .radioContainer .radioknapp#687449_1').click({
-            force: true,
-        })
-        cy.get('.ekstrasporsmal')
-            .should(
-                'have.text',
-                'I utgangspunktet kan du bare få sykepenger mens du er i et land innenfor EØS. Du kan likevel søke NAV om å få reise ut av EØS og beholde sykepengene i en begrenset periode.',
-            )
+        cy.get('input[type=radio]#687449_1').click({ force: true })
+        cy.contains(
+            'I utgangspunktet kan du bare få sykepenger mens du er i et land innenfor EØS. Du kan likevel søke NAV om å få reise ut av EØS og beholde sykepengene i en begrenset periode.',
+        )
             .find('a')
             .should('have.attr', 'href', '/syk/sykepengesoknad/sykepengesoknad-utland')
 
