@@ -8,8 +8,8 @@ import CheckboxPanel from './typer/checkbox-panel'
 import DagerKomp from './typer/dager-komp'
 import DatoInput from './typer/dato-komp'
 import IkkeRelevant from './typer/ikke-relevant'
-import JaNeiInput from './typer/ja-nei-input'
-import JaNeiRadio from './typer/ja-nei-radio'
+import JaNeiStor from './typer/ja-nei-stor'
+import JaNeiLiten from './typer/ja-nei-liten'
 import Land from './typer/land'
 import Opplasting from './typer/opplasting/opplasting'
 import Perioder from './typer/perioder'
@@ -43,9 +43,9 @@ const SporsmalSwitch = ({ sporsmal }: SpmProps) => {
                     sporsmal.parentKriterie === 'JA' ||
                     sporsmal.undersporsmal.length === 0)
             ) {
-                return <JaNeiRadio sporsmal={sporsmal} />
+                return <JaNeiLiten sporsmal={sporsmal} />
             }
-            return <JaNeiInput sporsmal={sporsmal} />
+            return <JaNeiStor sporsmal={sporsmal} />
 
         case RSSvartype.TIMER:
         case RSSvartype.PROSENT:

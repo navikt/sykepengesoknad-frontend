@@ -14,7 +14,7 @@ import UndersporsmalListe from '../undersporsmal/undersporsmal-liste'
 import { ProgressivtGuidePanel } from '../../guidepanel/ProgressivtGuidePanel'
 import { parserWithReplace } from '../../../utils/html-react-parser-utils'
 
-const JaNeiRadio = ({ sporsmal }: SpmProps) => {
+const JaNeiLiten = ({ sporsmal }: SpmProps) => {
     const {
         formState: { errors },
         watch,
@@ -139,4 +139,4 @@ const JaNeiRadio = ({ sporsmal }: SpmProps) => {
     )
 }
 
-export default JaNeiRadio
+export default JaNeiLiten
