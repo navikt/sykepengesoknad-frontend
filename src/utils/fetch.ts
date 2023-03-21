@@ -1,4 +1,5 @@
 import { v4 as uuidv4 } from 'uuid'
+import { logger } from '@navikt/next-logger'
 
 import { feilmeldingerUrl } from './environment'
 
@@ -79,13 +80,14 @@ export const fetchJsonMedRequestId = async (url: string, options: RequestInit = 
         try {
             fetch(`${feilmeldingerUrl()}/api/v1/feilmelding`, {
                 method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
+                headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify(payload),
             })
-        } catch (e) {}
+        } catch (e) {
+            logger.error(e)
+        }
     }
+
     // Kloner siden kall til .json() konsumerer data, og vi trenger å gjøre et kall til .text() hvis det ikke er mulig
     // å parse JSON.
     const clonedResponse = response.clone()
