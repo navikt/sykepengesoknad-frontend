@@ -77,15 +77,11 @@ export const fetchJsonMedRequestId = async (url: string, options: RequestInit = 
     type Payload = { requestId: string; app: string; payload: string }
 
     function lagrePayload(payload: Payload) {
-        try {
-            fetch(`${feilmeldingerUrl()}/api/v1/feilmelding`, {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify(payload),
-            })
-        } catch (e) {
-            logger.error(e)
-        }
+        fetch(`${feilmeldingerUrl()}/api/v1/feilmelding`, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(payload),
+        })
     }
 
     // Kloner siden kall til .json() konsumerer data, og vi trenger å gjøre et kall til .text() hvis det ikke er mulig
@@ -94,11 +90,15 @@ export const fetchJsonMedRequestId = async (url: string, options: RequestInit = 
     try {
         return await response.json()
     } catch (e) {
-        lagrePayload({
-            requestId: fetchResult.requestId,
-            app: 'sykepengesoknad-frontend',
-            payload: await clonedResponse.text(),
-        })
+        try {
+            lagrePayload({
+                requestId: fetchResult.requestId,
+                app: 'sykepengesoknad-frontend',
+                payload: await clonedResponse.text(),
+            })
+        } catch (e) {
+            logger.error(e, 'Feilet ved parsing av JSON, men junne ikke lagre payload.')
+        }
 
         throw new FetchError(
             `${e} - Kall til url: ${options.method || 'GET'} ${url} og x_request_id: ${
