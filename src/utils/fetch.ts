@@ -74,14 +74,13 @@ export const fetchJsonMedRequestId = async (url: string, options: RequestInit = 
     const fetchResult = await fetchMedRequestId(url, options, errorHandler)
     const response = fetchResult.response
 
-    type Payload = { requestId: string; app: string; payload: string }
-
-    function lagrePayload(payload: Payload) {
-        fetch(`${feilmeldingerUrl()}/api/v1/feilmelding`, {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify(payload),
-        })
+    type Payload = {
+        requestId: string
+        app: string
+        payload: string
+        method: string
+        responseCode: number
+        contentLength: number
     }
 
     // Kloner siden kall til .json() konsumerer data, og vi trenger å gjøre et kall til .text() hvis det ikke er mulig
@@ -90,15 +89,26 @@ export const fetchJsonMedRequestId = async (url: string, options: RequestInit = 
     try {
         return await response.json()
     } catch (e) {
-        try {
-            lagrePayload({
-                requestId: fetchResult.requestId,
-                app: 'sykepengesoknad-frontend',
-                payload: await clonedResponse.text(),
-            })
-        } catch (e) {
-            logger.error(e, 'Feilet ved parsing av JSON, men junne ikke lagre payload.')
+        const payload: Payload = {
+            requestId: fetchResult.requestId,
+            app: 'sykepengesoknad-frontend',
+            payload: await clonedResponse.text(),
+            method: options.method || 'GET',
+            responseCode: response.status,
+            contentLength: parseInt(response.headers.get('content-length') || '0'),
         }
+
+        fetch(`${feilmeldingerUrl()}/api/v1/feilmelding`, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(payload),
+        })
+            .catch((e) => {
+                logger.error(e, 'Feilet ved parsing av JSON og kunne ikke lagre payload.')
+            })
+            .finally(() => {
+                logger.info('Sendt payload til flex-frontend-feilmeldinger')
+            })
 
         throw new FetchError(
             `${e} - Kall til url: ${options.method || 'GET'} ${url} og x_request_id: ${
