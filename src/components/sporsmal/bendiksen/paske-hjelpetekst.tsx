@@ -28,7 +28,7 @@ const PaskeHjelpetekst = ({ sporsmal }: SpmProps) => {
         <Vis
             hvis={paskeVeileder(sporsmal.tag)}
             render={() => (
-                <div className={styles.wrapper}>
+                <div className={styles.wrapper + ' axe-exclude'}>
                     <ProgressivtGuidePanel illustration={<Bendiksen />}>
                         <Label as="h2">{tekst('soknad.bendiksen.paske.label')}</Label>
                         <BodyShort spacing>{tekst('soknad.bendiksen.paske.tekst')}</BodyShort>

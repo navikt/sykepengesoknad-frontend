@@ -24,7 +24,7 @@ describe('Tester at riktig antall desimaler sendes til backend', () => {
 
         cy.get('[aria-label="8. april (onsdag)"]').click()
 
-        cy.get('label[for=1547263_0]').click()
+        cy.get('input[type=radio]#1547263_0').click()
         cy.get('input#1547264').focus().type('500.321') // maks 2 desimaler tas med på BELOP
 
         cy.get('input#1547265').focus().type('12.321') // maks 1 desimal tas med på KILOMETER

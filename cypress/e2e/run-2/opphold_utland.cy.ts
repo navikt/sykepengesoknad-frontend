@@ -77,12 +77,12 @@ describe('Tester søknad om å beholde sykepenger utenfor EØS', () => {
         cy.contains('Har du arbeidsgiver?')
         cy.contains('Ja').click({ force: true })
 
-        cy.contains('Er du 100 % sykmeldt?').siblings().contains('Ja').click()
+        cy.contains('Er du 100 % sykmeldt?').siblings().contains('Ja').click({ force: true })
 
         cy.contains('Har du avtalt med arbeidsgiveren din at du skal ta ut feriedager i hele perioden?')
             .siblings()
             .contains('Nei')
-            .click()
+            .click({ force: true })
 
         cy.contains('Gå videre').click({ force: true })
     })

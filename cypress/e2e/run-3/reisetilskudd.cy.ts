@@ -109,7 +109,7 @@ describe('Teste førsteside i reisetilskuddsøknaden', () => {
             cy.get('[aria-label="5. januar (tirsdag)"]').click()
             cy.get('[aria-label="6. januar (onsdag)"]').click()
 
-            cy.get('.undersporsmal > .kriterie--ja > .radioContainer > input[value=JA]').click({ force: true })
+            cy.get('input[type=radio]#1566446_0').click({ force: true })
             cy.get('#1566447').focus().type('1000')
             cy.get('#1566448').focus().type('42')
 

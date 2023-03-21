@@ -460,14 +460,6 @@
     font-weight: 400;
     margin-bottom: 1rem;
 }
-.skjemagruppe legend,
-.skjemagruppe__legend {
-    font-family: 'Source Sans Pro', Arial, sans-serif;
-    font-size: 18px;
-    line-height: 24px;
-    font-weight: normal;
-    margin-bottom: 1rem;
-}
 .skjemagruppe.inputPanelGruppe .skjemaelement,
 .skjemagruppe.radiogruppe .skjemaelement,
 .skjemagruppe.checkboxgruppe .skjemaelement {
@@ -475,7 +467,6 @@
 }
 .skjemagruppe.inputPanelGruppe legend,
 .skjemagruppe.radiogruppe legend,
-.skjemagruppe.checkboxgruppe legend,
 .skjemagruppe.inputPanelGruppe .skjemagruppe__legend,
 .skjemagruppe.radiogruppe .skjemagruppe__legend,
 .skjemagruppe.checkboxgruppe .skjemagruppe__legend {

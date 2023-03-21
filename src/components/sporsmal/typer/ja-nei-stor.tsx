@@ -16,7 +16,7 @@ import UndersporsmalListe from '../undersporsmal/undersporsmal-liste'
 import { SpmProps } from '../sporsmal-form/sporsmal-form'
 import { parserWithReplace } from '../../../utils/html-react-parser-utils'
 
-const JaNeiInput = ({ sporsmal }: SpmProps) => {
+const JaNeiStor = ({ sporsmal }: SpmProps) => {
     const {
         formState: { errors },
         clearErrors,
@@ -111,4 +111,4 @@ const JaNeiInput = ({ sporsmal }: SpmProps) => {
     )
 }
 
-export default JaNeiInput
+export default JaNeiStor
