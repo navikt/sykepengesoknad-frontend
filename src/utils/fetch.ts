@@ -86,14 +86,16 @@ export const fetchJsonMedRequestId = async (url: string, options: RequestInit = 
             })
         } catch (e) {}
     }
-
+    // Kloner siden kall til .json() konsumerer data, og vi trenger å gjøre et kall til .text() hvis det ikke er mulig
+    // å parse JSON.
+    const clonedResponse = response.clone()
     try {
         return await response.json()
     } catch (e) {
         lagrePayload({
             requestId: fetchResult.requestId,
             app: 'sykepengesoknad-frontend',
-            payload: await response.text(),
+            payload: await clonedResponse.text(),
         })
 
         throw new FetchError(
