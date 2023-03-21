@@ -14,8 +14,6 @@ import UndersporsmalListe from '../undersporsmal/undersporsmal-liste'
 import { ProgressivtGuidePanel } from '../../guidepanel/ProgressivtGuidePanel'
 import { parserWithReplace } from '../../../utils/html-react-parser-utils'
 
-import styles from './JaNeiRadio.module.css'
-
 const JaNeiRadio = ({ sporsmal }: SpmProps) => {
     const {
         formState: { errors },
@@ -71,7 +69,8 @@ const JaNeiRadio = ({ sporsmal }: SpmProps) => {
         <>
             <div
                 className={
-                    'skjemaelement' +
+                    'mt-8' +
+                    ' skjemaelement' +
                     (sporsmal.parentKriterie ? ' kriterie--' + sporsmal.parentKriterie.toLowerCase() : '')
                 }
             >
@@ -101,7 +100,7 @@ const JaNeiRadio = ({ sporsmal }: SpmProps) => {
             <Vis
                 hvis={sporsmal.tag === TagTyper.SYKMELDINGSGRAD && watchJaNei === 'NEI'}
                 render={() => (
-                    <ProgressivtGuidePanel className={styles.guidepanelWrapper}>
+                    <ProgressivtGuidePanel className="mb-8">
                         <BodyShort>{parserWithReplace(tekst('sykepengesoknad-utland.skjema.bjorn'))}</BodyShort>
                     </ProgressivtGuidePanel>
                 )}
@@ -111,7 +110,7 @@ const JaNeiRadio = ({ sporsmal }: SpmProps) => {
                 hvis={sporsmal.tag === TagTyper.FERIE && watchJaNei === 'JA'}
                 render={() => (
                     <>
-                        <ProgressivtGuidePanel className={styles.guidepanelWrapper}>
+                        <ProgressivtGuidePanel className="mb-8">
                             <BodyShort>
                                 {parserWithReplace(tekst('sykepengesoknad-utland.skjema.ferie-sporsmal-bjorn'))}
                             </BodyShort>
