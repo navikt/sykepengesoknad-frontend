@@ -66,7 +66,7 @@ describe('Tester frilansersøknad', () => {
         // Underspørsmål 1
         cy.contains('Oppgi arbeidsmengde i timer eller prosent')
         // Svarer prosent
-        cy.get('.undersporsmal .skjemaelement__input.radioknapp[value=Prosent]').focus().click({ force: true })
+        cy.get('.undersporsmal input[value=Prosent]').focus().click({ force: true })
         cy.contains('Oppgi hvor mange prosent av din normale arbeidstid du jobbet i perioden 1. - 24. april 2020?')
         cy.get('.undersporsmal .navds-text-field__input#b68db08b-9ad1-38e5-bcdd-2c98963c2b8d').focus().type('21')
 

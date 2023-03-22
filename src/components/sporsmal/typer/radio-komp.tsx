@@ -49,6 +49,7 @@ const RadioKomp = ({ sporsmal }: SpmProps) => {
                         description={sporsmal.undertekst}
                         error={errors[sporsmal.id] !== undefined && feilmelding.lokal}
                         key={sporsmal.id}
+                        className="mt-8"
                     >
                         {sporsmal.undersporsmal.map((uspm) => (
                             <Radio key={uspm.id} id={uspm.id} value={uspm.sporsmalstekst}>
@@ -62,10 +63,8 @@ const RadioKomp = ({ sporsmal }: SpmProps) => {
             {sporsmal.undersporsmal.map((uspm, idx) => {
                 const checked = watchRadio === uspm.sporsmalstekst
                 return (
-                    <div key={idx + 'under'} style={{ marginTop: '1rem' }}>
-                        <div aria-live="assertive">
-                            <UndersporsmalListe oversporsmal={uspm} oversporsmalSvar={checked ? 'CHECKED' : ''} />
-                        </div>
+                    <div aria-live="assertive" key={idx + 'under'}>
+                        <UndersporsmalListe oversporsmal={uspm} oversporsmalSvar={checked ? 'CHECKED' : ''} />
                     </div>
                 )
             })}

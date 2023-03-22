@@ -109,10 +109,10 @@ describe('Tester arbeidstakersøknad - gradert 50%', () => {
         cy.contains('Hvor mye jobbet du tilsammen 1. - 24. april 2020?')
         cy.contains('Velg timer eller prosent')
         // Svarer prosent
-        cy.get('.undersporsmal .skjemaelement__input.radioknapp[value=Prosent]').focus().click({ force: true })
+        cy.get('.undersporsmal input[value=Prosent]').focus().click({ force: true })
         cy.get('.undersporsmal .navds-text-field__input#13acfccb-3f39-3893-8054-058270add6ab').focus().type('51')
         // Svarer timer
-        cy.get('.undersporsmal .skjemaelement__input.radioknapp[value=Timer]').focus().click({ force: true })
+        cy.get('.undersporsmal input[value=Timer]').focus().click({ force: true })
         // Ferie/permisjon/tilbake i arbeid dekker alle datoer fra dag 14.
         // Gradkalkulatoren dermed vil regne ut at man har hatt 9 arbeidsdager i denne perioden
         // 12 timer * (9 dager/5) * 0.5 (50% sykefraværsgrad) = 10.8 timer, så vi prøver litt lavere enn det
