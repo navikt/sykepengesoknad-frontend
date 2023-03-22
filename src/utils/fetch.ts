@@ -107,7 +107,7 @@ export const fetchJsonMedRequestId = async (url: string, options: RequestInit = 
                 logger.error(e, 'Feilet ved parsing av JSON og kunne ikke lagre payload.')
             })
             .finally(() => {
-                logger.info('Sendt payload til flex-frontend-feilmeldinger')
+                logger.info('Sendt payload til flex-frontend-feilmeldinger.')
             })
 
         throw new FetchError(
