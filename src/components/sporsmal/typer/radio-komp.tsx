@@ -1,15 +1,13 @@
-import { Alert, BodyLong, BodyShort, Label, ReadMore } from '@navikt/ds-react'
+import { Alert, BodyLong, BodyShort, ReadMore, RadioGroup, Radio } from '@navikt/ds-react'
 import React from 'react'
-import { useFormContext } from 'react-hook-form'
+import { useFormContext, Controller } from 'react-hook-form'
 import { useParams } from 'react-router'
 
 import { TagTyper } from '../../../types/enums'
-import { RSSvartype } from '../../../types/rs-types/rs-svartype'
 import { rodeUkeDagerIPerioden } from '../../../utils/helligdager-utils'
 import { hentUndersporsmal } from '../../../utils/soknad-utils'
 import validerArbeidsgrad from '../../../utils/sporsmal/valider-arbeidsgrad'
 import { getLedetekst, tekst } from '../../../utils/tekster'
-import FeilLokal from '../../feil/feil-lokal'
 import Vis from '../../vis'
 import { SpmProps } from '../sporsmal-form/sporsmal-form'
 import { hentFeilmelding } from '../sporsmal-utils'
@@ -19,7 +17,6 @@ import useSoknad from '../../../hooks/useSoknad'
 
 const RadioKomp = ({ sporsmal }: SpmProps) => {
     const {
-        register,
         formState: { errors },
         watch,
         getValues,
@@ -42,47 +39,36 @@ const RadioKomp = ({ sporsmal }: SpmProps) => {
     const lavereProsentHjelpTittel = tekst('ekspanderbarhjelp.prosenten_lavere_enn_forventet_arbeidstaker.tittel')
     return (
         <>
-            <Label as="h3" className={sporsmal.undertekst ? 'skjema__sporsmal_med_undersporsmal' : 'skjema__sporsmal'}>
-                {sporsmal.sporsmalstekst}
-            </Label>
-            <Vis
-                hvis={sporsmal.undertekst && sporsmal.svartype == RSSvartype.RADIO_GRUPPE_TIMER_PROSENT}
-                render={() => <BodyLong spacing> {sporsmal.undertekst}</BodyLong>}
+            <Controller
+                name={sporsmal.id}
+                rules={{ required: feilmelding.global }}
+                render={({ field }) => (
+                    <RadioGroup
+                        {...field}
+                        legend={sporsmal.sporsmalstekst}
+                        description={sporsmal.undertekst}
+                        error={errors[sporsmal.id] !== undefined && feilmelding.lokal}
+                        key={sporsmal.id}
+                    >
+                        {sporsmal.undersporsmal.map((uspm) => (
+                            <Radio key={uspm.id} id={uspm.id} value={uspm.sporsmalstekst}>
+                                {uspm.sporsmalstekst}
+                            </Radio>
+                        ))}
+                    </RadioGroup>
+                )}
             />
 
-            <div className={'skjemaelement' + (errors[sporsmal.id] ? ' skjemagruppe--feil' : '')}>
-                {sporsmal.undersporsmal.map((uspm, idx) => {
-                    return (
-                        <div className="radioContainer" key={idx}>
-                            <input
-                                type="radio"
-                                id={uspm.id}
-                                value={uspm.sporsmalstekst}
-                                {...register(sporsmal.id, {
-                                    required: feilmelding.global,
-                                })}
-                                className="skjemaelement__input radioknapp"
-                            />
-                            <label className="skjemaelement__label" htmlFor={uspm.id}>
-                                {uspm.sporsmalstekst}
-                            </label>
+            {sporsmal.undersporsmal.map((uspm, idx) => {
+                const checked = watchRadio === uspm.sporsmalstekst
+                return (
+                    <div key={idx + 'under'} style={{ marginTop: '1rem' }}>
+                        <div aria-live="assertive">
+                            <UndersporsmalListe oversporsmal={uspm} oversporsmalSvar={checked ? 'CHECKED' : ''} />
                         </div>
-                    )
-                })}
-                {sporsmal.undersporsmal.map((uspm, idx) => {
-                    const checked = watchRadio === uspm.sporsmalstekst
-
-                    return (
-                        <div key={idx + 'under'} style={{ marginTop: '1rem' }}>
-                            <div aria-live="assertive">
-                                <UndersporsmalListe oversporsmal={uspm} oversporsmalSvar={checked ? 'CHECKED' : ''} />
-                            </div>
-                        </div>
-                    )
-                })}
-            </div>
-
-            <FeilLokal sporsmal={sporsmal} />
+                    </div>
+                )
+            })}
 
             <Vis
                 hvis={
