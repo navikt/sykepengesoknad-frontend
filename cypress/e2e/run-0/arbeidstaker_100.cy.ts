@@ -128,13 +128,13 @@ describe('Tester arbeidstakersøknad', () => {
         // Underspørsmål 1
         cy.contains('Oppgi arbeidsmengde i timer eller prosent')
         // Svarer prosent
-        cy.get('.undersporsmal .skjemaelement__input.radioknapp[value=Prosent]').focus().click({ force: true })
+        cy.get('.undersporsmal input[value=Prosent]').focus().click({ force: true })
         cy.contains(
             'Oppgi hvor mange prosent av din normale arbeidstid du jobbet hos POSTEN NORGE AS, BÆRUM i perioden 1. - 24. april 2020?',
         )
         cy.get('.undersporsmal .navds-text-field__input#796cf7ed-8a7e-39de-9cbc-6e789aa5af3f').focus().type('21')
         // Velger timer
-        cy.get('.undersporsmal .skjemaelement__input.radioknapp[value=Timer]').focus().click({ force: true })
+        cy.get('.undersporsmal input[value=Timer]').focus().click({ force: true })
         cy.contains('Oppgi totalt antall timer du jobbet i perioden 1. - 24. april 2020 hos POSTEN NORGE AS, BÆRUM')
         cy.contains('Antall timer du skrev inn, betyr at du har jobbet').should('not.exist')
         // Svarer timer
