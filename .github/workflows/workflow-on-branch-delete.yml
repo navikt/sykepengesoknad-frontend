@@ -1,7 +1,10 @@
-name: Labs delete
+name: Demo delete
 on: delete
 
 jobs:
   branch-delete:
-    uses: navikt/flex-github-actions-workflows/.github/workflows/labs-delete.yml@master
+    uses: navikt/flex-github-actions-workflows/.github/workflows/demo-delete.yml@master
     secrets: inherit
+    with:
+      app: sykepengesoknad
+      base-path: syk/sykepengesoknad
