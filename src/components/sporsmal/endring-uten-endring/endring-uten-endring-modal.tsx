@@ -36,18 +36,18 @@ export const EndringUtenEndringModal = (props: EndringUtenEndringModalProps) => 
                     props.setAapen(false)
                 }}
                 open={props.aapen}
-                aria-labelledby="modal-tittel"
+                aria-labelledby={tekst('endring-uten-endring.popup.tittel')}
             >
                 <Modal.Content>
-                    <Heading size="small" level="1" id="modal-tittel" spacing>
+                    <Heading size="small" level="1" spacing>
                         {tekst('endring-uten-endring.popup.tittel')}
                     </Heading>
 
-                    <BodyShort>{tekst('endring-uten-endring.popup.innhold')}</BodyShort>
+                    <BodyShort spacing>{tekst('endring-uten-endring.popup.innhold')}</BodyShort>
 
                     <Button
                         variant="primary"
-                        className="midtstilt-knapp"
+                        className="ml-auto mr-auto block"
                         onClick={() => {
                             props.setAapen(false)
                             logEvent('knapp klikket', {

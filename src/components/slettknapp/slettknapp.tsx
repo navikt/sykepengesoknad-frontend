@@ -113,30 +113,26 @@ const Slettknapp = ({ sporsmal, kvittering, setOpenModal, updateFilliste }: Slet
             />
 
             <Modal
-                className="modal__teaser_popup"
                 onClose={() => setVilSlette(false)}
                 open={vilSlette}
-                closeButton={false}
-                aria-labelledby="modal-tittel"
+                aria-labelledby={tekst('opplasting_modal.vil-slette')}
             >
-                <Modal.Content className="bekreft-dialog">
-                    <Heading spacing size="small" level="1" id="modal-tittel">
+                <Modal.Content>
+                    <Heading size="small" level="1" className="mr-10 mt-1" spacing>
                         {tekst('opplasting_modal.vil-slette')}
                     </Heading>
-                    <Button variant="danger" loading={sletter} type="button" onClick={slettKvittering}>
+                    <Button
+                        className="mt-4 ml-auto mr-auto block"
+                        variant="danger"
+                        loading={sletter}
+                        type="button"
+                        onClick={slettKvittering}
+                    >
                         {tekst('opplasting_modal.vil-slette.ja')}
                     </Button>
                     <div aria-live="polite">
                         <Vis hvis={feilmelding} render={() => <Alert variant="error">{feilmelding}</Alert>} />
                     </div>
-                    <Button
-                        variant="secondary"
-                        className="lenkeknapp"
-                        type="button"
-                        onClick={() => setVilSlette(false)}
-                    >
-                        {tekst('opplasting_modal.vil-slette.lukk')}
-                    </Button>
                 </Modal.Content>
             </Modal>
         </>

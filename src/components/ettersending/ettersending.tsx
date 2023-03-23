@@ -113,21 +113,26 @@ const Ettersending = ({ gjelder, setRerendrekvittering }: EttersendingProps) => 
                 {knappeTekst}
             </Button>
 
-            <Modal
-                onClose={() => setVilEttersende(false)}
-                className="ettersending"
-                open={vilEttersende}
-                aria-labelledby="modal-tittel"
-            >
+            <Modal onClose={() => setVilEttersende(false)} open={vilEttersende} aria-labelledby={knappeTekst}>
                 <Modal.Content>
-                    <Heading size="small" level="1" id="modal-tittel" spacing>
+                    <Heading size="small" level="1" className="mr-10 mt-1" spacing>
                         {knappeTekst}
                     </Heading>
-                    <BodyShort>{parserWithReplace(hentTekst('kvittering.info.send-til'))}</BodyShort>
-                    <Button size="small" variant="primary" loading={ettersender} onClick={ettersend}>
+                    <BodyShort spacing>{parserWithReplace(hentTekst('kvittering.info.send-til'))}</BodyShort>
+                    <Button
+                        size="small"
+                        variant="primary"
+                        loading={ettersender}
+                        onClick={ettersend}
+                        className="ml-auto mr-auto block"
+                    >
                         {hentTekst('kvittering.knapp.bekreft.send-til')}
                     </Button>
-                    <Button variant="tertiary" className="lenkeknapp" onClick={() => setVilEttersende(false)}>
+                    <Button
+                        className="mt-4 ml-auto mr-auto block"
+                        variant="tertiary"
+                        onClick={() => setVilEttersende(false)}
+                    >
                         {tekst('kvittering.knapp.angre')}
                     </Button>
                 </Modal.Content>

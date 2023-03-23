@@ -76,7 +76,8 @@ const Endreknapp = () => {
                 {endreKnappTekst}
             </Button>
             <Modal
-                className="modal__endre_popup"
+                open={aapen}
+                aria-labelledby={endreKnappTekst}
                 onClose={() => {
                     setAapen(false)
                     logEvent('modal lukket', {
@@ -84,20 +85,18 @@ const Endreknapp = () => {
                         soknadstype: valgtSoknad.soknadstype,
                     })
                 }}
-                open={aapen}
-                aria-labelledby="modal-tittel"
             >
                 <Modal.Content>
-                    <Heading size="small" level="1" id="modal-tittel" spacing>
+                    <Heading size="small" level="1" className="mr-10 mt-1" spacing>
                         {endreKnappTekst}
                     </Heading>
 
-                    <BodyShort>{tekst('endre.modal.info')}</BodyShort>
+                    <BodyShort spacing>{tekst('endre.modal.info')}</BodyShort>
 
                     <Button
                         size="small"
                         variant="primary"
-                        className="midtstilt-knapp"
+                        className="ml-auto mr-auto block"
                         onClick={(e) => {
                             e.preventDefault()
                             logEvent('knapp klikket', {

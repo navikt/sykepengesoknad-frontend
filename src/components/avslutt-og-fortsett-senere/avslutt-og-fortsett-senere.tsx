@@ -33,7 +33,8 @@ const AvsluttOgFortsettSenere = () => {
                 {tekst('avslutt.popup.tittel')}
             </Button>
             <Modal
-                className="modal__avslutt_fortsett_popup"
+                open={aapen}
+                aria-labelledby={tekst('avslutt.popup.tittel')}
                 onClose={() => {
                     setAapen(false)
                     logEvent('modal lukket', {
@@ -42,18 +43,16 @@ const AvsluttOgFortsettSenere = () => {
                         steg: stegId,
                     })
                 }}
-                open={aapen}
-                aria-labelledby="modal-tittel"
             >
                 <Modal.Content>
-                    <Heading size="small" level="1" className="modal__tittel" id="modal-tittel">
+                    <Heading size="small" level="1" className="mr-10 mt-1" spacing>
                         {tekst('avslutt.popup.tittel')}
                     </Heading>
-                    <BodyShort>{tekst('avslutt.popup.innhold')}</BodyShort>
-                    <BodyShort>{tekst('avslutt.popup.sporsmal')}</BodyShort>
+                    <BodyShort spacing>{tekst('avslutt.popup.innhold')}</BodyShort>
+                    <BodyShort spacing>{tekst('avslutt.popup.sporsmal')}</BodyShort>
                     <Button
                         variant="primary"
-                        className="midtstilt-knapp"
+                        className="ml-auto mr-auto block"
                         onClick={() => {
                             logEvent('knapp klikket', {
                                 tekst: tekst('avslutt.popup.ja'),
@@ -71,7 +70,7 @@ const AvsluttOgFortsettSenere = () => {
                     </Button>
                     <Button
                         variant="secondary"
-                        className="midtstilt-knapp"
+                        className="mt-4 ml-auto mr-auto block"
                         onClick={() => {
                             setAapen(false)
                             logEvent('knapp klikket', {

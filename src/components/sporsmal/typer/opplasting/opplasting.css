@@ -12,9 +12,6 @@
     margin: 1rem 0 0 0;
     text-align: left;
 }
-.opplasting_modal {
-    width: 400px;
-}
 .opplasting_modal .navds-modal__content .enhet {
     margin-left: 0.5rem;
 }
@@ -36,9 +33,6 @@
     display: block;
     width: 100%;
     margin-bottom: 1rem;
-}
-.opplasting_modal .opplasting-header {
-    margin-top: 0.5rem;
 }
 .opplasting_modal .skjemaelement {
     margin: 1rem 0;

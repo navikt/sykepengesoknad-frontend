@@ -37,6 +37,10 @@ const Opplasting = ({ sporsmal }: SpmProps) => {
         setOpenModal(false)
     }
 
+    const kvitteringHeader = valgtKvittering
+        ? tekst('opplasting_modal.endre-utlegg.tittel')
+        : tekst('opplasting_modal.nytt-utlegg.tittel')
+
     return (
         <div className="opplasting">
             <Label as="h2" className="skjema__sporsmal">
@@ -61,13 +65,7 @@ const Opplasting = ({ sporsmal }: SpmProps) => {
                 <BodyShort>{tekst('opplasting.legg-til')}</BodyShort>
             </Button>
 
-            <Modal
-                open={openModal}
-                onClose={lukkModal}
-                closeButton
-                className="opplasting_modal"
-                aria-labelledby="modal-tittel"
-            >
+            <Modal open={openModal} onClose={lukkModal} closeButton aria-labelledby={kvitteringHeader}>
                 <Modal.Content>
                     <OpplastingForm
                         valgtSoknad={valgtSoknad}

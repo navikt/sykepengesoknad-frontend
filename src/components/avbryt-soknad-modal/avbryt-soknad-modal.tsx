@@ -26,7 +26,7 @@ const AvbrytKorrigering = () => {
         <div>
             <Button
                 variant="tertiary"
-                className="avbryt_rødknapp"
+                className="ring-nav-red" //TODO: finn ut av fargen her
                 onClick={(e) => {
                     logEvent('modal åpnet', {
                         component: tekst('avbryt.korrigering.knapp'),
@@ -65,7 +65,7 @@ const AvbrytSoknadModal = () => {
         <div>
             <Button
                 variant="tertiary"
-                className="avbryt_rødknapp"
+                className="ring-nav-red" //TODO: Finn ut av fargen her
                 onClick={(e) => {
                     logEvent('modal åpnet', {
                         component: tekst('avbryt.popup.tittel'),
@@ -79,7 +79,8 @@ const AvbrytSoknadModal = () => {
                 {tekst('avbryt.popup.tittel')}
             </Button>
             <Modal
-                className="modal__avbryt_popup"
+                open={aapen}
+                aria-labelledby={tekst('avbryt.popup.tittel')}
                 onClose={() => {
                     setAapen(false)
                     logEvent('modal lukket', {
@@ -88,12 +89,9 @@ const AvbrytSoknadModal = () => {
                         steg: stegId,
                     })
                 }}
-                closeButton={false}
-                open={aapen}
-                aria-labelledby="modal-tittel"
             >
                 <Modal.Content>
-                    <Heading level="1" size="small" id="modal-tittel" spacing>
+                    <Heading size="small" level="1" className="mr-10 mt-1" spacing>
                         {tekst('avbryt.popup.tittel')}
                     </Heading>
 
@@ -103,7 +101,7 @@ const AvbrytSoknadModal = () => {
 
                     <Button
                         variant="danger"
-                        className="midtstilt-knapp"
+                        className="ml-auto mr-auto block"
                         onClick={() => {
                             logEvent('knapp klikket', {
                                 tekst: tekst('avbryt.popup.ja'),
@@ -124,7 +122,7 @@ const AvbrytSoknadModal = () => {
                     </Button>
                     <Button
                         variant="secondary"
-                        className="midtstilt-knapp"
+                        className="mt-4 ml-auto mr-auto block"
                         onClick={() => {
                             setAapen(false)
                             logEvent('knapp klikket', {

@@ -1,5 +1,5 @@
 import { Next } from '@navikt/ds-icons'
-import { Alert, Button, Detail, Heading, Modal } from '@navikt/ds-react'
+import { Alert, Detail, Heading, Modal } from '@navikt/ds-react'
 import React, { useState } from 'react'
 
 import { RSSoknadstype } from '../../../types/rs-types/rs-soknadstype'
@@ -57,19 +57,15 @@ const UtgaattSoknaderTeaser = ({ soknad }: SykepengesoknadTeaserProps) => {
                 <Next className="chevron--hoyre" />
             </button>
             <Modal
-                className="modal__teaser_popup"
                 onClose={() => setAapen(false)}
                 open={aapen}
-                aria-labelledby="modal-tittel"
+                aria-labelledby={tekst('soknad.teaser.utgaatt.popup.header')}
             >
                 <Modal.Content>
-                    <Heading size="medium" level="1" className="modal__tittel" id="modal-tittel">
+                    <Heading size="medium" level="1" className="mr-10 mt-1" spacing>
                         {tekst('soknad.teaser.utgaatt.popup.header')}
                     </Heading>
                     <Alert variant="info">{parserWithReplace(tekst('soknad.teaser.utgaatt.popup.innhold'))}</Alert>
-                    <Button variant="primary" onClick={() => setAapen(false)}>
-                        Lukk
-                    </Button>
                 </Modal.Content>
             </Modal>
         </article>
