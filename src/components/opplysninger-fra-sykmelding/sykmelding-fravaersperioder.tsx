@@ -1,4 +1,4 @@
-import { BodyShort, Detail } from '@navikt/ds-react'
+import { BodyShort, Label } from '@navikt/ds-react'
 import React from 'react'
 
 import { RSArbeidssituasjon } from '../../types/rs-types/rs-arbeidssituasjon'
@@ -28,15 +28,15 @@ const FravaersperioderInfo = ({ valgtSykmelding }: FravaersperioderInfoProps) =>
                 harSpmOmPerioderFørSykmelding(valgtSykmelding)
             }
             render={() => (
-                <div className="avsnitt">
-                    <Detail as="h3" className="avsnitt-hode">
+                <section className="mt-8">
+                    <Label size="small" as="h3">
                         {tekst('sykepengesoknad.sykmelding-utdrag.egenmelding-papir')}
-                    </Detail>
+                    </Label>
 
                     <Vis
                         hvis={perioder.length > 0}
                         render={() => (
-                            <ul className="nokkelopplysning__liste">
+                            <ul>
                                 {perioder.map((p, idx) => (
                                     <BodyShort as="li" key={idx}>
                                         {tilLesbarPeriodeMedArstall(p.fom, p.tom)}
@@ -52,7 +52,7 @@ const FravaersperioderInfo = ({ valgtSykmelding }: FravaersperioderInfoProps) =>
                             <BodyShort>{tekst('sykepengesoknad.sykmelding-utdrag.egenmelding-papir-nei')}</BodyShort>
                         )}
                     />
-                </div>
+                </section>
             )}
         />
     )

@@ -17,14 +17,14 @@ const ArbeidssituasjonInfo = ({ valgtSykmelding }: ArbeidssituasjonInfoProps) =>
         <Vis
             hvis={arbeidssituasjon}
             render={() => (
-                <div className="avsnitt">
-                    <Label size="small" as="h3" className="avsnitt-hode">
+                <section className="mt-8">
+                    <Label size="small" as="h3">
                         {tekst('din-sykmelding.arbeidssituasjon.tittel.2')}
                     </Label>
                     <BodyShort>
                         {tekst(`din-sykmelding.arbeidssituasjon.alternativ.${arbeidssituasjon!.toLowerCase()}` as any)}
                     </BodyShort>
-                </div>
+                </section>
             )}
         />
     )

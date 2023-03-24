@@ -50,15 +50,13 @@ const Opplysninger = ({ ekspandert, steg }: OpplysningerProps) => {
                     </Heading>
                 </Accordion.Header>
                 <Accordion.Content className={styles.contentPadding}>
-                    <div className="opplysninger">
-                        <SykmeldingPerioder valgtSoknad={valgtSoknad} valgtSykmelding={valgtSykmelding} />
-                        <ArbeidsgiverInfo valgtSoknad={valgtSoknad} />
-                        <SykmeldingDato valgtSykmelding={valgtSykmelding} />
-                        <ArbeidssituasjonInfo valgtSykmelding={valgtSykmelding} />
-                        <FravaersperioderInfo valgtSykmelding={valgtSykmelding} />
-                        <ForsikringInfo valgtSykmelding={valgtSykmelding} />
-                        <Egenmeldingsdager valgtSykmelding={valgtSykmelding} />
-                    </div>
+                    <SykmeldingPerioder valgtSoknad={valgtSoknad} valgtSykmelding={valgtSykmelding} />
+                    <ArbeidsgiverInfo valgtSoknad={valgtSoknad} />
+                    <SykmeldingDato valgtSykmelding={valgtSykmelding} />
+                    <ArbeidssituasjonInfo valgtSykmelding={valgtSykmelding} />
+                    <FravaersperioderInfo valgtSykmelding={valgtSykmelding} />
+                    <ForsikringInfo valgtSykmelding={valgtSykmelding} />
+                    <Egenmeldingsdager valgtSykmelding={valgtSykmelding} />
                 </Accordion.Content>
             </Accordion.Item>
         </Accordion>

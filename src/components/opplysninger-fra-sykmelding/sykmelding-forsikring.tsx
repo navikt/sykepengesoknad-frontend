@@ -1,4 +1,4 @@
-import { BodyShort, Detail } from '@navikt/ds-react'
+import { BodyShort, Label } from '@navikt/ds-react'
 import React from 'react'
 
 import { RSArbeidssituasjon } from '../../types/rs-types/rs-arbeidssituasjon'
@@ -23,10 +23,10 @@ const ForsikringInfo = ({ valgtSykmelding }: ForsikringInfoProps) => {
                 harSpmOmForsikring(valgtSykmelding)
             }
             render={() => (
-                <div className="avsnitt">
-                    <Detail as="h3" className="avsnitt-hode">
+                <section className="mt-8">
+                    <Label size="small" as="h3">
                         {tekst('sykepengesoknad.sykmelding-utdrag.forsikring')}
-                    </Detail>
+                    </Label>
                     <BodyShort>
                         {tekst(
                             forsikring
@@ -34,7 +34,7 @@ const ForsikringInfo = ({ valgtSykmelding }: ForsikringInfoProps) => {
                                 : 'sykepengesoknad.sykmelding-utdrag.forsikring-nei',
                         )}
                     </BodyShort>
-                </div>
+                </section>
             )}
         />
     )

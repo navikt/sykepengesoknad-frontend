@@ -1,4 +1,4 @@
-import { Label } from '@navikt/ds-react'
+import { BodyShort, Label } from '@navikt/ds-react'
 import React from 'react'
 
 import { hentEgenmeldingsdager } from '../../utils/sykmelding-utils'
@@ -16,16 +16,18 @@ const Egenmeldingsdager = ({ valgtSykmelding }: EgenmeldingsdagerProps) => {
         <Vis
             hvis={dager && dager.length > 0}
             render={() => (
-                <div className="avsnitt">
-                    <Label size="small" as="h3" className="avsnitt-hode">
+                <section className="mt-8">
+                    <Label size="small" as="h3">
                         Egenmeldingsdager ({dager!.length} dager)
                     </Label>
                     <ul>
                         {dager?.map((d, idx) => (
-                            <li key={`egenmeldingdag-${idx}`}>{d}</li>
+                            <BodyShort as="li" key={`egenmeldingdag-${idx}`}>
+                                {d}
+                            </BodyShort>
                         ))}
                     </ul>
-                </div>
+                </section>
             )}
         />
     )
