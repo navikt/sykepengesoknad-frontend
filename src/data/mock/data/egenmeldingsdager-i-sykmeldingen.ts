@@ -3,7 +3,7 @@ import { Persona } from '../personas'
 
 import { sykmeldingMedEgenmeldingsdager } from './sykmeldinger'
 
-const soknadUtenEgenmeldingSporsmal: RSSoknad = {
+export const soknadUtenEgenmeldingSporsmal: RSSoknad = {
     id: '82baf0be-5568-3062-b9c7-f03eab7993be',
     sykmeldingId: sykmeldingMedEgenmeldingsdager.id,
     soknadstype: 'ARBEIDSTAKERE',
