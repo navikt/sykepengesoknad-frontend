@@ -66,6 +66,7 @@ const SykmeldingPerioder = ({ valgtSoknad, valgtSykmelding }: SykmeldingPerioder
                                         src={'/syk/sykepengesoknad/static/check-box-1.png'}
                                         alt="Avkrysset"
                                         aria-hidden={true}
+                                        className="mr-2 mb-1 inline"
                                     />
                                     <BodyShort as="span">
                                         {tekst('din-sykmelding.periode.gradertreisetilskudd')}
