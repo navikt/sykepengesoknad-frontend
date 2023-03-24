@@ -15,6 +15,7 @@ import ForsikringInfo from './sykmelding-forsikring'
 import FravaersperioderInfo from './sykmelding-fravaersperioder'
 import SykmeldingPerioder from './sykmelding-perioder'
 import styles from './opplysninger.module.css'
+import Egenmeldingsdager from './sykmelding-egenmeldingsdager'
 
 interface OpplysningerProps {
     ekspandert: boolean
@@ -56,6 +57,7 @@ const Opplysninger = ({ ekspandert, steg }: OpplysningerProps) => {
                         <ArbeidssituasjonInfo valgtSykmelding={valgtSykmelding} />
                         <FravaersperioderInfo valgtSykmelding={valgtSykmelding} />
                         <ForsikringInfo valgtSykmelding={valgtSykmelding} />
+                        <Egenmeldingsdager valgtSykmelding={valgtSykmelding} />
                     </div>
                 </Accordion.Content>
             </Accordion.Item>

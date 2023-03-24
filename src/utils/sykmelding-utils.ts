@@ -3,6 +3,8 @@ import dayjs from 'dayjs'
 import { Periode, Sykmelding } from '../types/sykmelding'
 import { TidsPeriode } from '../types/types'
 
+import { tilLesbarDatoUtenAarstall } from './dato-utils'
+
 export const sorterEtterEldsteTom = (p1: Periode, p2: Periode) => {
     return dayjs(p1.tom).unix() - dayjs(p2.tom).unix()
 }
@@ -35,4 +37,14 @@ export const hentPerioderFørSykmelding = (valgtSykmelding?: Sykmelding) => {
 
 export const harSpmOmPerioderFørSykmelding = (valgtSykmelding: Sykmelding) => {
     return valgtSykmelding.sykmeldingStatus.sporsmalOgSvarListe?.find((s) => s.shortName === 'PERIODE') !== undefined
+}
+
+export const hentEgenmeldingsdager = (valgtSykmelding: Sykmelding) => {
+    const svar = valgtSykmelding.sykmeldingStatus.sporsmalOgSvarListe?.find((s) => s.shortName === 'EGENMELDINGSDAGER')
+        ?.svar?.svar
+
+    if (!svar) return undefined
+
+    const datoer: string[] = JSON.parse(svar)
+    return datoer.map((d) => tilLesbarDatoUtenAarstall(d))
 }
