@@ -54,11 +54,11 @@ describe('Tester avbryting av søknad', () => {
     it('Søknad kan avbrytes ', function () {
         // Avbryt dialog vises
         cy.contains('Jeg vil ikke bruke denne søknaden').click()
-        cy.get('.modal__avbryt_popup button:contains(Nei, jeg vil bruke søknaden)').click()
-        cy.get('.modal__avbryt_popup button:contains(Nei, jeg vil bruke søknaden)').should('not.exist')
+        cy.get('.navds-modal__content button:contains(Nei, jeg vil bruke søknaden)').click()
+        cy.get('.navds-modal__content button:contains(Nei, jeg vil bruke søknaden)').should('not.exist')
 
         cy.contains('Jeg vil ikke bruke denne søknaden').click()
-        cy.get('.modal__avbryt_popup button:contains(Ja, jeg er sikker)').click()
+        cy.get('.navds-modal__content button:contains(Ja, jeg er sikker)').click()
         cy.url().should('include', `avbrutt/${avbruttSoknad.id}`)
         cy.contains('Jeg vil bruke denne søknaden likevel')
     })

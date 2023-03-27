@@ -113,9 +113,9 @@ const Ettersending = ({ gjelder, setRerendrekvittering }: EttersendingProps) => 
                 {knappeTekst}
             </Button>
 
-            <Modal onClose={() => setVilEttersende(false)} open={vilEttersende} aria-labelledby={knappeTekst}>
+            <Modal onClose={() => setVilEttersende(false)} open={vilEttersende} aria-labelledby="ettersending-modal">
                 <Modal.Content>
-                    <Heading size="small" level="1" className="mr-10 mt-1" spacing>
+                    <Heading size="small" id="ettersending-modal" level="1" className="mr-10 mt-1" spacing>
                         {knappeTekst}
                     </Heading>
                     <BodyShort spacing>{parserWithReplace(hentTekst('kvittering.info.send-til'))}</BodyShort>

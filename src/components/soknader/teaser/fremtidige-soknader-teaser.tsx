@@ -61,13 +61,9 @@ const FremtidigeSoknaderTeaser = ({ soknad }: SykepengesoknadTeaserProps) => {
                 <Next className="chevron--hoyre" />
             </button>
 
-            <Modal
-                onClose={() => setAapen(false)}
-                open={aapen}
-                aria-labelledby={tekst('soknader.teaser.fremtidig.modal.tittel')}
-            >
+            <Modal onClose={() => setAapen(false)} open={aapen} aria-labelledby="fremtidige-soknader-modal">
                 <Modal.Content>
-                    <Heading size="small" level="1" className="mr-10 mt-1" spacing>
+                    <Heading size="small" id="fremtidige-soknader-modal" level="1" className="mr-10 mt-1" spacing>
                         {tekst('soknader.teaser.fremtidig.modal.tittel')}
                     </Heading>
                     <BodyLong spacing>

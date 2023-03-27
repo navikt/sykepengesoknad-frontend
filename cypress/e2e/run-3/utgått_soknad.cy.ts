@@ -17,7 +17,7 @@ describe('Tester utgått søknad', () => {
 
     it('Ved klikk så åpnes popup', function () {
         cy.get(`#soknader-sendt article[aria-labelledby*=${utgattSoknad.id}]`).click()
-        cy.get('.ReactModal__Content')
+        cy.get('.navds-modal__content')
             .should('include.text', 'Søknaden er utgått')
             .get('.navds-alert .navds-body-long')
             .should('include.text', 'Du får ikke åpnet denne søknaden fordi den ikke ble sendt innen fristen.')

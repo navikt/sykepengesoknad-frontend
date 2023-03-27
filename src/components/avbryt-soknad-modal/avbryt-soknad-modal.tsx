@@ -81,7 +81,7 @@ const AvbrytSoknadModal = () => {
             </Button>
             <Modal
                 open={aapen}
-                aria-labelledby={tekst('avbryt.popup.tittel')}
+                aria-labelledby="avbryt-soknad"
                 onClose={() => {
                     setAapen(false)
                     logEvent('modal lukket', {
@@ -92,7 +92,7 @@ const AvbrytSoknadModal = () => {
                 }}
             >
                 <Modal.Content>
-                    <Heading size="small" level="1" className="mr-10 mt-1" spacing>
+                    <Heading size="small" id="avbryt-soknad" level="1" className="mr-10 mt-1" spacing>
                         {tekst('avbryt.popup.tittel')}
                     </Heading>
 

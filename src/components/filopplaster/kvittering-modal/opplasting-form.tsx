@@ -127,7 +127,7 @@ const OpplastingForm = ({ valgtSoknad, valgtKvittering, setOpenModal, valgtFil, 
     return (
         <FormProvider {...methods}>
             <form className="opplasting-form" key="opplasting_form" data-cy="opplasting-form">
-                <Heading size="medium" className="mr-10 mt-1" spacing>
+                <Heading size="medium" id="opplasting-modal" className="mr-10 mt-1" spacing>
                     {kvitteringHeader}
                 </Heading>
 

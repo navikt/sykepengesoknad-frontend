@@ -34,7 +34,7 @@ const AvsluttOgFortsettSenere = () => {
             </Button>
             <Modal
                 open={aapen}
-                aria-labelledby={tekst('avslutt.popup.tittel')}
+                aria-labelledby="avslutt-og-fortsett-senere"
                 onClose={() => {
                     setAapen(false)
                     logEvent('modal lukket', {
@@ -45,7 +45,7 @@ const AvsluttOgFortsettSenere = () => {
                 }}
             >
                 <Modal.Content>
-                    <Heading size="small" level="1" className="mr-10 mt-1" spacing>
+                    <Heading size="small" id="avslutt-og-fortsett-senere" level="1" className="mr-10 mt-1" spacing>
                         {tekst('avslutt.popup.tittel')}
                     </Heading>
                     <BodyShort spacing>{tekst('avslutt.popup.innhold')}</BodyShort>

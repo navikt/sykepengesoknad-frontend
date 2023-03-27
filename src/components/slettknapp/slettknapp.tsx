@@ -112,13 +112,9 @@ const Slettknapp = ({ sporsmal, kvittering, setOpenModal, updateFilliste }: Slet
                 )}
             />
 
-            <Modal
-                onClose={() => setVilSlette(false)}
-                open={vilSlette}
-                aria-labelledby={tekst('opplasting_modal.vil-slette')}
-            >
+            <Modal onClose={() => setVilSlette(false)} open={vilSlette} aria-labelledby="slett-modal">
                 <Modal.Content>
-                    <Heading size="small" level="1" className="mr-10 mt-1" spacing>
+                    <Heading size="small" id="slett-modal" level="1" className="mr-10 mt-1" spacing>
                         {tekst('opplasting_modal.vil-slette')}
                     </Heading>
                     <Button

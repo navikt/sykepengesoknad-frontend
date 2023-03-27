@@ -36,10 +36,10 @@ export const EndringUtenEndringModal = (props: EndringUtenEndringModalProps) => 
                     props.setAapen(false)
                 }}
                 open={props.aapen}
-                aria-labelledby={tekst('endring-uten-endring.popup.tittel')}
+                aria-labelledby="endring-uten-endring"
             >
                 <Modal.Content>
-                    <Heading size="small" level="1" spacing>
+                    <Heading size="small" id="endring-uten-endring" level="1" spacing>
                         {tekst('endring-uten-endring.popup.tittel')}
                     </Heading>
 

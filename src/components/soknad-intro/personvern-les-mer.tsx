@@ -36,14 +36,14 @@ const PersonvernLesMer = ({ soknadstype }: PersonvernLesMerProps) => {
             </Button>
             <Modal
                 open={aapen}
-                aria-labelledby={tekst('sykepengesoknad.soknad-intro.personvern-modal-header')}
+                aria-labelledby="Personvern-modal"
                 onClose={() => {
                     setAapen(false)
                     amplitudeLukketPopup()
                 }}
             >
                 <Modal.Content>
-                    <Heading size="medium" level="1" spacing>
+                    <Heading size="medium" id="Personvern-modal" level="1" spacing>
                         {tekst('sykepengesoknad.soknad-intro.personvern-modal-header')}
                     </Heading>
                     {parserWithReplace(tekst('sykepengesoknad.soknad-intro.personvern-modal-innhold'))}

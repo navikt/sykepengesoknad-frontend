@@ -77,7 +77,7 @@ const Endreknapp = () => {
             </Button>
             <Modal
                 open={aapen}
-                aria-labelledby={endreKnappTekst}
+                aria-labelledby="endre-modal"
                 onClose={() => {
                     setAapen(false)
                     logEvent('modal lukket', {
@@ -87,7 +87,7 @@ const Endreknapp = () => {
                 }}
             >
                 <Modal.Content>
-                    <Heading size="small" level="1" className="mr-10 mt-1" spacing>
+                    <Heading size="small" level="1" id="endre-modal" className="mr-10 mt-1" spacing>
                         {endreKnappTekst}
                     </Heading>
 

@@ -17,7 +17,7 @@ describe('Tester fremtidig søknad', () => {
 
     it('Ved klikk så åpnes popup', function () {
         cy.get(`#soknader-list-til-behandling article[aria-labelledby*=${fremtidigSoknad.id}]`).click()
-        cy.get('.ReactModal__Content .modal__tittel')
+        cy.get('.navds-modal__content')
             .should('include.text', 'Søknaden er ikke klar')
             .get('.utvidbar .navds-label')
             .should('include.text', 'Hvorfor kan jeg ikke søke nå?')
