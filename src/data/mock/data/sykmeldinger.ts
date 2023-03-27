@@ -1110,6 +1110,122 @@ export const gradertReisetilskuddSm = new Sykmelding({
     merknader: null,
 })
 
+export const sykmeldingMedEgenmeldingsdager = new Sykmelding({
+    id: 'd22f6e8d-29c7-4c04-94e2-70103e3b8b5d',
+    pasient: { fnr: '16856899687', fornavn: 'FAMILIÆR', mellomnavn: null, etternavn: 'BETALING' },
+    mottattTidspunkt: '2023-03-16T23:00:00Z',
+    behandlingsutfall: {
+        status: 'MANUAL_PROCESSING',
+        ruleHits: [
+            {
+                messageForSender: 'Pasienten finnes ikke i Infotrygd',
+                messageForUser: 'Pasienten finnes ikke i Infotrygd',
+                ruleName: 'PATIENT_NOT_IN_IP',
+                ruleStatus: 'MANUAL_PROCESSING',
+            },
+        ],
+    },
+    legekontorOrgnummer: '223456789',
+    arbeidsgiver: { navn: 'LOMMEN BARNEHAVE', stillingsprosent: 100 },
+    sykmeldingsperioder: [
+        {
+            fom: '2023-03-17',
+            tom: '2023-03-23',
+            gradert: null,
+            behandlingsdager: null,
+            innspillTilArbeidsgiver: null,
+            type: 'AKTIVITET_IKKE_MULIG',
+            aktivitetIkkeMulig: {
+                medisinskArsak: {
+                    beskrivelse: 'medisinske årsaker til sykefravær',
+                    arsak: ['AKTIVITET_FORHINDRER_BEDRING'],
+                },
+                arbeidsrelatertArsak: { beskrivelse: 'andre årsaker til sykefravær', arsak: ['ANNET'] },
+            },
+            reisetilskudd: false,
+        },
+    ],
+    sykmeldingStatus: {
+        statusEvent: 'SENDT',
+        timestamp: '2023-03-24T08:40:53.971138Z',
+        arbeidsgiver: { orgnummer: '896929119', juridiskOrgnummer: '963743254', orgNavn: 'SAUEFABRIKK' },
+        sporsmalOgSvarListe: [
+            {
+                tekst: 'Jeg er sykmeldt som',
+                shortName: 'ARBEIDSSITUASJON',
+                svar: { svarType: 'ARBEIDSSITUASJON', svar: 'ARBEIDSTAKER' },
+            },
+            {
+                tekst: 'Velg dagene du brukte egenmelding',
+                shortName: 'EGENMELDINGSDAGER',
+                svar: {
+                    svarType: 'DAGER',
+                    svar: '["2023-03-06","2023-03-07","2023-03-08","2023-03-09","2023-03-10","2023-02-20","2023-02-21","2023-02-22","2023-02-23","2023-02-24","2023-02-25","2023-02-26"]',
+                },
+            },
+        ],
+    },
+    medisinskVurdering: {
+        hovedDiagnose: { kode: 'H100', system: '2.16.578.1.12.4.1.1.7110', tekst: 'Mukopurulent konjunktivitt' },
+        biDiagnoser: [],
+        annenFraversArsak: null,
+        svangerskap: false,
+        yrkesskade: false,
+        yrkesskadeDato: null,
+    },
+    skjermesForPasient: false,
+    prognose: {
+        arbeidsforEtterPeriode: true,
+        hensynArbeidsplassen: 'Må ta det pent',
+        erIArbeid: null,
+        erIkkeIArbeid: null,
+    },
+    utdypendeOpplysninger: {
+        '6.5': {
+            '6.5.1': {
+                sporsmal:
+                    'Beskriv kort sykdomsutviklingen, symptomer og funn. Hvordan påvirker helsetilstanden funksjonen i arbeid og dagligliv?',
+                svar: 'Har ikke blitt noe bedre. Klarer ikke å jobbe eller drive med aktiviteter',
+                restriksjoner: ['SKJERMET_FOR_ARBEIDSGIVER'],
+            },
+            '6.5.2': {
+                sporsmal:
+                    'Beskriv pågående og planlagt utredning og/eller behandling. Lar dette seg kombinere med delvis arbeid?',
+                svar: 'Henvist til fysio. Duplikatbuster: b0e5c7f1-3216-47c9-9244-4c9c894d65dc',
+                restriksjoner: ['SKJERMET_FOR_ARBEIDSGIVER'],
+            },
+            '6.5.3': {
+                sporsmal:
+                    'Kan arbeidsevnen bedres gjennom medisinsk behandling og/eller arbeidsrelatert aktivitet? I så fall hvordan? Angi tidsperspektiv',
+                svar: 'Nei',
+                restriksjoner: ['SKJERMET_FOR_ARBEIDSGIVER'],
+            },
+        },
+    },
+    tiltakArbeidsplassen: null,
+    tiltakNAV: null,
+    andreTiltak: null,
+    meldingTilNAV: { bistandUmiddelbart: true, beskrivBistand: 'Trenger bistand' },
+    meldingTilArbeidsgiver: null,
+    kontaktMedPasient: { kontaktDato: null, begrunnelseIkkeKontakt: null },
+    behandletTidspunkt: '2023-03-17T00:00:00Z',
+    behandler: {
+        fornavn: 'NOBEL',
+        mellomnavn: null,
+        etternavn: 'BUSK',
+        adresse: { gate: null, postnummer: null, kommune: null, postboks: null, land: null },
+        tlf: ' 90909090',
+    },
+    syketilfelleStartDato: '2023-03-17',
+    navnFastlege: null,
+    egenmeldt: false,
+    papirsykmelding: false,
+    harRedusertArbeidsgiverperiode: false,
+    merknader: null,
+    rulesetVersion: '3',
+    utenlandskSykmelding: null,
+})
+
 export const sykmeldinger: Sykmelding[] = [
     arbeidstaker100Syk,
     arbeidstaker50Syk,

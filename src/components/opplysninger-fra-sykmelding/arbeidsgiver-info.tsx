@@ -12,14 +12,14 @@ interface ArbeidsgiverInfoProps {
 const ArbeidsgiverInfo = ({ valgtSoknad }: ArbeidsgiverInfoProps) => {
     return (
         <Vis
-            hvis={valgtSoknad?.arbeidsgiver}
+            hvis={valgtSoknad.arbeidsgiver}
             render={() => (
-                <div className="avsnitt">
-                    <Label size="small" as="h3" className="avsnitt-hode">
+                <section className="mt-8">
+                    <Label size="small" as="h3">
                         {tekst('sykepengesoknad.sykmelding-utdrag.arbeidsgiver')}
                     </Label>
-                    <BodyShort>{valgtSoknad!.arbeidsgiver!.navn}</BodyShort>
-                </div>
+                    <BodyShort>{valgtSoknad.arbeidsgiver!.navn}</BodyShort>
+                </section>
             )}
         />
     )

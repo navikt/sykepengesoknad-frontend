@@ -21,7 +21,7 @@ describe('Tester frilansersøknad', () => {
         cy.url().should('include', `${soknad.id}/1`)
 
         // Sykmelding
-        cy.contains('1. april - 24. april 2020 • 24 dager')
+        cy.contains('1. april - 24. april 2020 (24 dager)')
         cy.contains('Har ikke forsikring som gjelder de første 16 dagene av sykefraværet')
         cy.contains('Egenmelding og/eller sykmelding på papir')
         cy.contains('1. januar – 13. mars 2020')

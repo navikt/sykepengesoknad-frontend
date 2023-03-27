@@ -39,24 +39,21 @@ const SykmeldingPerioder = ({ valgtSoknad, valgtSykmelding }: SykmeldingPerioder
     }
 
     return (
-        <div className="sykmelding-perioder">
+        <section>
             {sortertePerioder.map((periode: Periode, index: number) => {
                 const fom = dayjs(periode.fom).format('D. MMM')
                 const tom = dayjs(periode.tom).format('D. MMM YYYY')
                 const dager = getDuration(periode.fom, periode.tom)
 
                 return (
-                    <div className="avsnitt" key={index}>
-                        <Label size="small" as="h3" className="avsnitt-hode">
+                    <div key={index} className="mb-4">
+                        <Label size="small" as="h3">
                             {tekst('din-sykmelding.periode.tittel')}
                         </Label>
 
-                        <BodyShort>
-                            <strong>
-                                {fom} - {tom}
-                            </strong>{' '}
-                            &bull; {dager} dager
-                        </BodyShort>
+                        <Label size="small">
+                            {fom} - {tom} ({dager} dager)
+                        </Label>
 
                         <BodyShort>{hentPeriodeTekst(periode)}</BodyShort>
 
@@ -69,9 +66,10 @@ const SykmeldingPerioder = ({ valgtSoknad, valgtSykmelding }: SykmeldingPerioder
                                         src={'/syk/sykepengesoknad/static/check-box-1.png'}
                                         alt="Avkrysset"
                                         aria-hidden={true}
+                                        className="mr-2 mb-1 inline"
                                     />
                                     <BodyShort as="span">
-                                        {' Kan være i delvis arbeid ved bruk av reisetilskudd'}
+                                        {tekst('din-sykmelding.periode.gradertreisetilskudd')}
                                     </BodyShort>
                                 </>
                             )}
@@ -84,7 +82,7 @@ const SykmeldingPerioder = ({ valgtSoknad, valgtSykmelding }: SykmeldingPerioder
                     <BodyShort>{parserWithReplace(tekst('sykepengesoknad.sykmelding-utdrag.oppdelt.bjorn'))}</BodyShort>
                 </ProgressivtGuidePanel>
             )}
-        </div>
+        </section>
     )
 }
 

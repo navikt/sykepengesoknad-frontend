@@ -1,6 +1,7 @@
 const OpplysningerTekster = {
     'sykepengesoknad.sykmelding-utdrag.tittel': 'Opplysninger fra sykmeldingen',
     'din-sykmelding.periode.tittel': 'Periode',
+    'din-sykmelding.periode.gradertreisetilskudd': 'Kan være i delvis arbeid ved bruk av reisetilskudd',
     'sykepengesoknad.sykmelding-utdrag.arbeidsgiver': 'Arbeidsgiver',
     'din-sykmelding.arbeidssituasjon.tittel.2': 'Hva passer best for deg?',
     'din-sykmelding.arbeidssituasjon.alternativ.frilanser': 'Jeg er frilanser',

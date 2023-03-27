@@ -1,5 +1,5 @@
 describe('Tester kontonummer i kvittering', () => {
-    it('Har ikke kontonumer', () => {
+    it('Har kontonumer', () => {
         cy.visit('http://localhost:8080/syk/sykepengesoknad?testperson=har%20kontonummer')
 
         cy.get(`#soknader-list-til-behandling article a`).click({

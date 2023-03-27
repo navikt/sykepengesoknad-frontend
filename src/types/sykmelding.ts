@@ -90,14 +90,20 @@ interface ArbeidsgiverStatus {
     orgNavn: string
 }
 
-type SvarType = 'ARBEIDSSITUASJON' | 'PERIODER' | 'JA_NEI'
+type SvarType = 'ARBEIDSSITUASJON' | 'PERIODER' | 'JA_NEI' | 'DAGER'
 
 interface Svar {
     svar: string
     svarType: SvarType
 }
 
-type SporsmalShortName = 'ARBEIDSSITUASJON' | 'NY_NARMESTE_LEDER' | 'FRAVAER' | 'PERIODE' | 'FORSIKRING'
+type SporsmalShortName =
+    | 'ARBEIDSSITUASJON'
+    | 'NY_NARMESTE_LEDER'
+    | 'FRAVAER'
+    | 'PERIODE'
+    | 'FORSIKRING'
+    | 'EGENMELDINGSDAGER'
 
 interface SporsmalOgSvar {
     tekst: string

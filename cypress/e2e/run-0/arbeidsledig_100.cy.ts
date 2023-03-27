@@ -17,7 +17,7 @@ describe('Tester arbeidsledigsøknad', () => {
         cy.url().should('include', `${soknad.id}/1`)
 
         // Sykmelding
-        cy.contains('1. april - 24. april 2020 • 24 dager')
+        cy.contains('1. april - 24. april 2020 (24 dager)')
         cy.contains('100% sykmeldt')
         cy.contains('Opplysninger fra sykmeldingen').click()
 

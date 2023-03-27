@@ -11,12 +11,12 @@ interface SykmeldingDatoProps {
 
 const SykmeldingDato = ({ valgtSykmelding }: SykmeldingDatoProps) => {
     return (
-        <div className="avsnitt">
-            <Label size="small" as="h3" className="avsnitt-hode">
+        <section className="mt-8">
+            <Label size="small" as="h3">
                 {tekst('sykepengesoknad.sykmelding-utdrag.dato-sykmeldingen-ble-skrevet')}
             </Label>
             <BodyShort>{dayjs(valgtSykmelding.behandletTidspunkt).format('D. MMM YYYY')}</BodyShort>
-        </div>
+        </section>
     )
 }
 

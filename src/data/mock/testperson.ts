@@ -17,6 +17,7 @@ import { egenmeldingsdagerArbeidsgiver } from './data/kort-soknad'
 import { nyttArbeidUnderveisPerson } from './data/nytt-arbeidunderveis'
 import { utenlandskSykmelding } from './data/utenlandsk-sykmelding'
 import { yrkesskadePerson } from './data/yrkesskade'
+import { egenmeldingSykmeldingaPerson } from './data/egenmeldingsdager-i-sykmeldingen'
 
 export interface StringFunctionMap {
     [index: string]: () => Persona
@@ -39,6 +40,7 @@ export const personas: StringFunctionMap = {
     'har kontonummer': () => harKontonummer,
     'har ikke kontonummer': () => harIkkeKontonummer,
     'egenmeldingsdager arbeidsgiver': () => egenmeldingsdagerArbeidsgiver,
+    'sykmelding med egenmeldingsdager': () => egenmeldingSykmeldingaPerson,
     'http 400 ved send soknad': () => får400vedSendSoknad,
     'http 500 ved send soknad': () => får500vedSendSoknad,
 }
