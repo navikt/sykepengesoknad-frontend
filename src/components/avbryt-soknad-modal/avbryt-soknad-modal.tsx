@@ -13,6 +13,7 @@ import useSoknad from '../../hooks/useSoknad'
 import useSoknader from '../../hooks/useSoknader'
 
 import { avbrytSoknad } from './avbryt-soknad'
+import styles from './avbryt-soknad.module.css'
 
 const AvbrytKorrigering = () => {
     const { id, stegId } = useParams<RouteParams>()
@@ -26,7 +27,7 @@ const AvbrytKorrigering = () => {
         <div>
             <Button
                 variant="tertiary"
-                className="ring-nav-red" //TODO: finn ut av fargen her
+                className={styles.avbryt_rodknapp}
                 onClick={(e) => {
                     logEvent('modal åpnet', {
                         component: tekst('avbryt.korrigering.knapp'),
@@ -65,7 +66,7 @@ const AvbrytSoknadModal = () => {
         <div>
             <Button
                 variant="tertiary"
-                className="ring-nav-red" //TODO: Finn ut av fargen her
+                className={styles.avbryt_rodknapp}
                 onClick={(e) => {
                     logEvent('modal åpnet', {
                         component: tekst('avbryt.popup.tittel'),

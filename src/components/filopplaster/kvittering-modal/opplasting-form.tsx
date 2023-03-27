@@ -261,7 +261,7 @@ const OpplastingForm = ({ valgtSoknad, valgtKvittering, setOpenModal, valgtFil, 
                             <Button
                                 variant="primary"
                                 type="button"
-                                className="lagre-kvittering"
+                                className="mr-3"
                                 onClick={onSubmit}
                                 loading={laster}
                             >
@@ -273,7 +273,6 @@ const OpplastingForm = ({ valgtSoknad, valgtKvittering, setOpenModal, valgtFil, 
                     <Button
                         variant="secondary"
                         type="button"
-                        className="mt-4 ml-auto mr-auto block"
                         onClick={() => {
                             setOpenModal(false)
                         }}
