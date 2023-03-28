@@ -187,8 +187,8 @@ describe('Teste førsteside i reisetilskuddsøknaden', () => {
             cy.get('.navds-modal__content:eq(1)').within(() => {
                 cy.contains('Vil du slette kvitteringen?')
                 cy.contains('Ja, jeg er sikker')
-                cy.contains('Lukk').click()
             })
+            cy.get('.navds-modal__button:eq(1)').click()
             cy.contains('Vil du slette kvitteringen?').should('not.exist')
 
             cy.get('.knapperad').contains('Slett').click()
@@ -205,7 +205,7 @@ describe('Teste førsteside i reisetilskuddsøknaden', () => {
             cy.get('[data-cy="filopplasteren"]')
                 .find('input[type=file]')
                 .selectFile({ contents: 'cypress/fixtures/kvittering.jpg' }, { force: true })
-            cy.get('.lagre-kvittering').contains('Bekreft').click()
+            cy.get('.navds-modal__content').contains('Bekreft').click()
 
             cy.get('.sumlinje').should('exist')
             cy.get('.slette-kvittering').click()
@@ -215,12 +215,12 @@ describe('Teste førsteside i reisetilskuddsøknaden', () => {
 
         it('Åpner og lukker modal', () => {
             cy.get('button').contains('Legg til reiseutgift').click()
-            cy.get('.lagre-kvittering').contains('Tilbake').click()
+            cy.get('.navds-modal__content').contains('Tilbake').click()
         })
 
         it('Feilmeldinger når ingenting er valgt', () => {
             cy.get('button').contains('Legg til reiseutgift').click()
-            cy.get('.lagre-kvittering').contains('Bekreft').click()
+            cy.get('.navds-modal__content').contains('Bekreft').click()
 
             cy.get('.skjemaelement__feilmelding').contains('Du må velge transportmiddel')
             cy.get('.skjemaelement__feilmelding').contains('Du må skrive inn beløp')
@@ -230,14 +230,14 @@ describe('Teste førsteside i reisetilskuddsøknaden', () => {
         describe('Transportmiddel feilmeldinger', () => {
             it('Ugyldig valg', () => {
                 cy.get('select[name=transportmiddel]').select('')
-                cy.get('.lagre-kvittering').contains('Bekreft').click()
+                cy.get('.navds-modal__content').contains('Bekreft').click()
                 cy.get('.skjemaelement__feilmelding').contains('Du må velge transportmiddel')
             })
 
             it('Velger egen bil', () => {
                 cy.get('select[name=transportmiddel]').should('have.class', 'skjemaelement__input--harFeil')
                 cy.get('select[name=transportmiddel]').select('TAXI')
-                cy.get('.lagre-kvittering').contains('Bekreft').click()
+                cy.get('.navds-modal__content').contains('Bekreft').click()
                 cy.get('select[name=transportmiddel]').should('not.have.class', 'skjemaelement__input--harFeil')
             })
         })
@@ -245,19 +245,19 @@ describe('Teste førsteside i reisetilskuddsøknaden', () => {
         describe('Beløp feilmeldinger', () => {
             it('Negative beløp', () => {
                 cy.get('input[name=belop_input]').type('-100')
-                cy.get('.lagre-kvittering').contains('Bekreft').click()
+                cy.get('.navds-modal__content').contains('Bekreft').click()
                 cy.get('.skjemaelement__feilmelding').contains('Beløp kan ikke være negativt')
             })
 
             it('Høyere beløp enn maks', () => {
                 cy.get('input[name=belop_input]').clear().type('1000000000')
-                cy.get('.lagre-kvittering').contains('Bekreft').click()
+                cy.get('.navds-modal__content').contains('Bekreft').click()
                 cy.get('.skjemaelement__feilmelding').contains('Beløp kan ikke være større enn 10 000')
             })
 
             it('Kan ikke skrive inn med 3 desimaler', () => {
                 cy.get('input[name=belop_input]').clear().type('100.253')
-                cy.get('.lagre-kvittering').contains('Bekreft').click()
+                cy.get('.navds-modal__content').contains('Bekreft').click()
                 cy.get('input[name=belop_input]')
                     .invoke('val')
                     .should((val) => {
@@ -267,13 +267,13 @@ describe('Teste førsteside i reisetilskuddsøknaden', () => {
 
             it('Gyldig beløp med 2 desimaler', () => {
                 cy.get('input[name=belop_input]').clear().type('100.30')
-                cy.get('.lagre-kvittering').contains('Bekreft').click()
+                cy.get('.navds-modal__content').contains('Bekreft').click()
                 cy.get('input[name=belop_input]').should('not.have.class', 'skjemaelement__input--harFeil')
             })
 
             it('Gyldig beløp uten desimaler', () => {
                 cy.get('input[name=belop_input]').clear().type('99')
-                cy.get('.lagre-kvittering').contains('Bekreft').click()
+                cy.get('.navds-modal__content').contains('Bekreft').click()
                 cy.get('input[name=belop_input]').should('not.have.class', 'skjemaelement__input--harFeil')
             })
         })
@@ -284,7 +284,7 @@ describe('Teste førsteside i reisetilskuddsøknaden', () => {
                     .find('input[type=file]')
                     .selectFile({ contents: 'cypress/fixtures/kvittering.jpg' }, { force: true })
 
-                cy.get('.lagre-kvittering').contains('Bekreft').click()
+                cy.get('.navds-modal__content').contains('Bekreft').click()
             })
 
             it('Går videre', () => {
