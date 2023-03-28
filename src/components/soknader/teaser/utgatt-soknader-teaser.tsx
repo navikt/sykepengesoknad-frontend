@@ -56,13 +56,9 @@ const UtgaattSoknaderTeaser = ({ soknad }: SykepengesoknadTeaserProps) => {
                 </div>
                 <Next className="chevron--hoyre" />
             </button>
-            <Modal
-                onClose={() => setAapen(false)}
-                open={aapen}
-                aria-labelledby={tekst('soknad.teaser.utgaatt.popup.header')}
-            >
+            <Modal onClose={() => setAapen(false)} open={aapen} aria-labelledby="utgått-soknad-modal">
                 <Modal.Content>
-                    <Heading size="medium" level="1" className="mr-10 mt-1" spacing>
+                    <Heading size="medium" id="utgått-soknad-modal" level="1" className="mr-10 mt-1" spacing>
                         {tekst('soknad.teaser.utgaatt.popup.header')}
                     </Heading>
                     <Alert variant="info">{parserWithReplace(tekst('soknad.teaser.utgaatt.popup.innhold'))}</Alert>
