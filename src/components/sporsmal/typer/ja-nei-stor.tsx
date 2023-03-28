@@ -8,7 +8,6 @@ import AnimateOnMount from '../../animate-on-mount'
 import FeilLokal from '../../feil/feil-lokal'
 import { utlandssoknadUrl } from '../../soknad/soknad-link'
 import Vis from '../../vis'
-import PaskeHjelpetekst from '../bendiksen/paske-hjelpetekst'
 import GuidepanelUnderSporsmalstekst from '../guidepanel/GuidepanelUnderSporsmalstekst'
 import { EkspanderbarHjelp } from '../../hjelpetekster/ekspanderbar-hjelp/ekspanderbar-hjelp'
 import { hentFeilmelding, sporsmalIdListe } from '../sporsmal-utils'
@@ -55,8 +54,6 @@ const JaNeiStor = ({ sporsmal }: SpmProps) => {
                             key={sporsmal.id}
                         >
                             <GuidepanelUnderSporsmalstekst sporsmal={sporsmal} />
-
-                            <PaskeHjelpetekst sporsmal={sporsmal} />
 
                             <EkspanderbarHjelp sporsmal={sporsmal} />
                             <Radio

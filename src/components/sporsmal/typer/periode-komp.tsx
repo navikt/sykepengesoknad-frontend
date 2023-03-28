@@ -1,4 +1,4 @@
-import { BodyShort, RangeValidationT, UNSAFE_DatePicker, UNSAFE_useRangeDatepicker } from '@navikt/ds-react'
+import { Alert, BodyShort, RangeValidationT, UNSAFE_DatePicker, UNSAFE_useRangeDatepicker } from '@navikt/ds-react'
 import dayjs from 'dayjs'
 import React, { useEffect, useState } from 'react'
 import { Controller, useFormContext } from 'react-hook-form'
@@ -9,6 +9,8 @@ import Vis from '../../vis'
 import { hentPeriode } from '../hent-svar'
 import { SpmProps } from '../sporsmal-form/sporsmal-form'
 import { hentFeilmelding } from '../sporsmal-utils'
+import { innenforPaske } from '../../../utils/helligdager-utils'
+import { fraBackendTilDate } from '../../../utils/dato-utils'
 
 import styles from './periode-komp.module.css'
 
@@ -16,6 +18,7 @@ interface PeriodeProps {
     index: number
     slettPeriode: (e: any, idx: number) => void
 }
+
 export interface FormPeriode {
     fom: string
     tom: string
@@ -150,6 +153,16 @@ const PeriodeKomp = ({ sporsmal, index, slettPeriode }: AllProps) => {
                                     </div>
                                 </UNSAFE_DatePicker>
                             </fieldset>
+                            {sporsmal.tag === 'FERIE_NAR_V2' &&
+                                periode.fom &&
+                                periode.tom &&
+                                innenforPaske(fraBackendTilDate(periode.fom), fraBackendTilDate(periode.tom)) && (
+                                    <Alert className={'my-4'} variant={'warning'}>
+                                        Du har valgt en feriedag på en av de røde dagene i påsken. En offentlig
+                                        helligdag (rød dag) regnes ikke som en feriedag, med mindre du har avtalt med
+                                        arbeidsgiveren din at du skal ta ut ferie på en rød dag.
+                                    </Alert>
+                                )}
                         </div>
                     )}
                 />

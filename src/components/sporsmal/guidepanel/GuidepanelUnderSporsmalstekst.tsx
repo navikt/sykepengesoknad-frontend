@@ -4,7 +4,6 @@ import { useParams } from 'react-router'
 
 import { TagTyper } from '../../../types/enums'
 import { RSSoknadstatus } from '../../../types/rs-types/rs-soknadstatus'
-import { innenforPaske } from '../../../utils/helligdager-utils'
 import { tekst } from '../../../utils/tekster'
 import Vis from '../../vis'
 import { SpmProps } from '../sporsmal-form/sporsmal-form'
@@ -26,9 +25,7 @@ const GuidepanelUnderSporsmalstekst = ({ sporsmal }: SpmProps) => {
     const bjornVeileder = (tag: TagTyper) => tag === TagTyper.ENKELTSTAENDE_BEHANDLINGSDAGER
 
     const bjornVeilederOgMaaler = (tag: TagTyper) =>
-        tag === TagTyper.FERIE_V2 &&
-        valgtSoknad?.status === RSSoknadstatus.NY &&
-        !innenforPaske(valgtSoknad.fom, valgtSoknad.tom)
+        tag === TagTyper.FERIE_V2 && valgtSoknad?.status === RSSoknadstatus.NY
 
     return (
         <>
