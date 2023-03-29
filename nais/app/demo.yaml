@@ -18,6 +18,10 @@ spec:
     path: syk/sykepengesoknad/api/internal/isAlive
   readiness:
     path: syk/sykepengesoknad/api/internal/isReady
+  accessPolicy:
+    outbound:
+      external:
+        - host: www.nav.no
   env:
     - name: FLEX_GATEWAY_ROOT
       value: "https://flex-gateway.dev.nav.no"
