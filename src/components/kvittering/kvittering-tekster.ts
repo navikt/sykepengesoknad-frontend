@@ -27,10 +27,6 @@ const KvitteringTekster = {
     'kvittering.hva-skjer-videre': 'Hva skjer videre?',
     'kvittering.viktig-informasjon': 'Viktig informasjon',
     'kvittering.nav-behandler-soknaden': 'NAV behandler søknaden din',
-    'kvittering.saksbehandling-avhenger-av':
-        'Saksbehandlingstid avhenger av hvilket fylke du bor i og om det er førstegangs-søknad eller søknad om forlengelse.',
-    'kvittering.finn-ut': 'Finn ut hva som gjelder for ditt fylke her',
-    'kvittering.finn-ut.url': 'https://www.nav.no/no/nav-og-samfunn/om-nav/saksbehandlingstider-i-nav',
     'kvittering.naar-blir-pengene': 'Når blir pengene utbetalt?',
     'kvittering.det-er-ulike-regler':
         'Det er ulike regler for sykepenger avhengig av hva slags arbeid du har eller hvilken situasjon du er i.',
@@ -81,10 +77,9 @@ const KvitteringTekster = {
     'kvittering.arbeidstaker.tittel': 'Du får sykepengene fra arbeidsgiveren din',
     'kvittering.arbeidstaker.hvorfor-skille-ved-16-dager': 'Hvorfor går det et skille ved 16 dager?',
     'kvittering.arbeidstaker.saksbehandlingstid':
-        'Saksbehandlingstiden regnes fra NAV har mottatt all nødvendig dokumentasjon. Etter dette må du regne med å vente minst fire uker før søknaden er behandlet. Men saksbehandlingstidene kan variere noe.',
-    'kvittering.arbeidstaker.saksbehandlingstid.lenke': 'Sjekk saksbehandlingstidene i ditt fylke',
-    'kvittering.arbeidstaker.saksbehandlingstid.lenke.url':
-        'https://www.nav.no/no/nav-og-samfunn/om-nav/saksbehandlingstider-i-nav',
+        'Saksbehandlingstiden regnes fra NAV har mottatt all nødvendig dokumentasjon. Etter dette må du regne med å vente minst fire uker før søknaden er behandlet.',
+    'kvittering.arbeidstaker.saksbehandlingstid.lenke': 'Sjekk saksbehandlingstidene',
+    'kvittering.arbeidstaker.saksbehandlingstid.lenke.url': 'https://www.nav.no/saksbehandlingstider#sykepenger',
     'kvittering.arbeidstaker.brodtekst':
         'Arbeidsgiveren din betaler de første 16 kalenderdagene av sykefraværet. Hvis du mener sykefraværet har vart lenger enn det, kan du sende søknaden til NAV. Noen arbeidsplasser fortsetter å utbetale sykepenger fra dag 17, men da får de penger tilbake fra NAV.',
     'kvittering.arbeidstaker.over16.brodtekst':
