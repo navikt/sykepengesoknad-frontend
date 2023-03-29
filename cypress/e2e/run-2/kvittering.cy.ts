@@ -43,7 +43,7 @@ describe('Tester kvittering', () => {
                 .and('contain', 'NAV behandler søknaden din')
                 .and(
                     'contain',
-                    'Saksbehandlingstiden regnes fra NAV har mottatt all nødvendig dokumentasjon. Etter dette må du regne med å vente minst fire uker før søknaden er behandlet. Men saksbehandlingstidene kan variere noe. Sjekk saksbehandlingstidene i ditt fylke',
+                    'Saksbehandlingstiden regnes fra NAV har mottatt all nødvendig dokumentasjon. Etter dette må du regne med å vente minst fire uker før søknaden er behandlet. Sjekk saksbehandlingstidene',
                 )
                 .and('contain', 'Når blir pengene utbetalt?')
                 .and(
@@ -149,7 +149,7 @@ describe('Tester kvittering', () => {
                 .and('not.contain', 'NAV behandler søknaden din')
                 .and(
                     'not.contain',
-                    'Saksbehandlingstiden regnes fra NAV har mottatt all nødvendig dokumentasjon. Etter dette må du regne med å vente minst fire uker før søknaden er behandlet. Men saksbehandlingstidene kan variere noe. Sjekk saksbehandlingstidene i ditt fylke',
+                    'Saksbehandlingstiden regnes fra NAV har mottatt all nødvendig dokumentasjon. Etter dette må du regne med å vente minst fire uker før søknaden er behandlet. Sjekk saksbehandlingstidene',
                 )
 
             // Oppsummering minimert
@@ -196,7 +196,7 @@ describe('Tester kvittering', () => {
                 .and('contain', 'NAV behandler søknaden din')
                 .and(
                     'contain',
-                    'Saksbehandlingstiden regnes fra NAV har mottatt all nødvendig dokumentasjon. Etter dette må du regne med å vente minst fire uker før søknaden er behandlet. Men saksbehandlingstidene kan variere noe. Sjekk saksbehandlingstidene i ditt fylke',
+                    'Saksbehandlingstiden regnes fra NAV har mottatt all nødvendig dokumentasjon. Etter dette må du regne med å vente minst fire uker før søknaden er behandlet. Sjekk saksbehandlingstidene',
                 )
                 .and('contain', 'Når blir pengene utbetalt?')
                 .and(
@@ -267,7 +267,7 @@ describe('Tester kvittering', () => {
                 .and('contain', 'NAV behandler søknaden')
                 .and(
                     'contain',
-                    'Saksbehandlingstiden regnes fra NAV har mottatt all nødvendig dokumentasjon. Etter dette må du regne med å vente minst fire uker før søknaden er behandlet. Men saksbehandlingstidene kan variere noe. Sjekk saksbehandlingstidene i ditt fylke',
+                    'Saksbehandlingstiden regnes fra NAV har mottatt all nødvendig dokumentasjon. Etter dette må du regne med å vente minst fire uker før søknaden er behandlet. Sjekk saksbehandlingstidene',
                 )
                 .and('contain', 'Når blir pengene utbetalt')
                 .and(
@@ -281,10 +281,10 @@ describe('Tester kvittering', () => {
                 .and('not.contain', 'Du får sykepengene fra arbeidsgiveren din')
 
             // Behandlingstider lenke
-            cy.contains('Sjekk saksbehandlingstidene i ditt fylke').should(
+            cy.contains('Sjekk saksbehandlingstidene').should(
                 'have.attr',
                 'href',
-                'https://www.nav.no/no/nav-og-samfunn/om-nav/saksbehandlingstider-i-nav',
+                'https://www.nav.no/saksbehandlingstider#sykepenger',
             )
 
             // Arbeidsgiverperiode tekst
@@ -439,7 +439,7 @@ const over16dagerKvittering = () => {
         .and('contain', 'NAV behandler søknaden')
         .and(
             'contain',
-            'Saksbehandlingstiden regnes fra NAV har mottatt all nødvendig dokumentasjon. Etter dette må du regne med å vente minst fire uker før søknaden er behandlet. Men saksbehandlingstidene kan variere noe. Sjekk saksbehandlingstidene i ditt fylke',
+            'Saksbehandlingstiden regnes fra NAV har mottatt all nødvendig dokumentasjon. Etter dette må du regne med å vente minst fire uker før søknaden er behandlet. Sjekk saksbehandlingstidene',
         )
         .and('contain', 'Når blir pengene utbetalt')
         .and(
@@ -453,10 +453,10 @@ const over16dagerKvittering = () => {
         .and('not.contain', 'Du får sykepengene fra arbeidsgiveren din')
 
     // Behandlingstider lenke
-    cy.contains('Sjekk saksbehandlingstidene i ditt fylke').should(
+    cy.contains('Sjekk saksbehandlingstidene').should(
         'have.attr',
         'href',
-        'https://www.nav.no/no/nav-og-samfunn/om-nav/saksbehandlingstider-i-nav',
+        'https://www.nav.no/saksbehandlingstider#sykepenger',
     )
 
     // Arbeidsgiverperiode tekst
@@ -502,7 +502,7 @@ const utenOppholdKvittering = () => {
         .and('contain', 'NAV behandler søknaden')
         .and(
             'contain',
-            'Saksbehandlingstiden regnes fra NAV har mottatt all nødvendig dokumentasjon. Etter dette må du regne med å vente minst fire uker før søknaden er behandlet. Men saksbehandlingstidene kan variere noe. Sjekk saksbehandlingstidene i ditt fylke',
+            'Saksbehandlingstiden regnes fra NAV har mottatt all nødvendig dokumentasjon. Etter dette må du regne med å vente minst fire uker før søknaden er behandlet. Sjekk saksbehandlingstidene',
         )
         .and('contain', 'Når blir pengene utbetalt')
         .and(
@@ -517,10 +517,10 @@ const utenOppholdKvittering = () => {
         .and('not.contain', 'Du får sykepengene fra arbeidsgiveren din')
 
     // Behandlingstider lenke
-    cy.contains('Sjekk saksbehandlingstidene i ditt fylke').should(
+    cy.contains('Sjekk saksbehandlingstidene').should(
         'have.attr',
         'href',
-        'https://www.nav.no/no/nav-og-samfunn/om-nav/saksbehandlingstider-i-nav',
+        'https://www.nav.no/saksbehandlingstider#sykepenger',
     )
 
     // Oppsummering minimert
@@ -556,7 +556,7 @@ const medOppholdKvittering = () => {
         .and('contain', 'NAV behandler søknaden')
         .and(
             'contain',
-            'Saksbehandlingstiden regnes fra NAV har mottatt all nødvendig dokumentasjon. Etter dette må du regne med å vente minst fire uker før søknaden er behandlet. Men saksbehandlingstidene kan variere noe. Sjekk saksbehandlingstidene i ditt fylke',
+            'Saksbehandlingstiden regnes fra NAV har mottatt all nødvendig dokumentasjon. Etter dette må du regne med å vente minst fire uker før søknaden er behandlet. Sjekk saksbehandlingstidene',
         )
         .and('contain', 'Når blir pengene utbetalt')
         .and(
@@ -579,10 +579,10 @@ const medOppholdKvittering = () => {
     )
 
     // Behandlingstider lenke
-    cy.contains('Sjekk saksbehandlingstidene i ditt fylke').should(
+    cy.contains('Sjekk saksbehandlingstidene').should(
         'have.attr',
         'href',
-        'https://www.nav.no/no/nav-og-samfunn/om-nav/saksbehandlingstider-i-nav',
+        'https://www.nav.no/saksbehandlingstider#sykepenger',
     )
 
     // Oppsummering minimert
