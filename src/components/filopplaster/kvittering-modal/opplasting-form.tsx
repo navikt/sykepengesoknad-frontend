@@ -13,7 +13,6 @@ import { Kvittering, Soknad, Sporsmal, UtgiftTyper } from '../../../types/types'
 import { AuthenticationError, fetchJsonMedRequestId } from '../../../utils/fetch'
 import { formaterFilstørrelse, formattertFiltyper, maxFilstørrelse } from '../../../utils/fil-utils'
 import { getLedetekst, tekst } from '../../../utils/tekster'
-import Slettknapp from '../../slettknapp/slettknapp'
 import Vis from '../../vis'
 import DragAndDrop from '../drag-and-drop/drag-and-drop'
 
@@ -280,13 +279,6 @@ const OpplastingForm = ({ valgtSoknad, valgtKvittering, setOpenModal, valgtFil, 
                     >
                         {tekst('opplasting_modal.tilbake')}
                     </Button>
-
-                    <Vis
-                        hvis={formErDisabled}
-                        render={() => (
-                            <Slettknapp sporsmal={sporsmal} kvittering={valgtKvittering!} setOpenModal={setOpenModal} />
-                        )}
-                    />
                 </div>
             </form>
         </FormProvider>

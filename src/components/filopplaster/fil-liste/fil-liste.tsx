@@ -1,7 +1,8 @@
-import { BodyShort, Heading } from '@navikt/ds-react'
+import { BodyShort, Heading, Button } from '@navikt/ds-react'
 import React from 'react'
 import useForceUpdate from 'use-force-update'
 import { useParams } from 'react-router-dom'
+import { PencilWritingIcon } from '@navikt/aksel-icons'
 
 import { Kvittering, UtgiftTyper } from '../../../types/types'
 import { getLedetekst, tekst } from '../../../utils/tekster'
@@ -73,14 +74,19 @@ const FilListe = ({ fjernKnapp, setValgtKvittering, setOpenModal }: Props) => {
                         {kvitteringer.reverse().map((kvittering: Kvittering, idx: number) => (
                             <tr key={idx}>
                                 <td className="transport">
-                                    <button
-                                        type="button"
+                                    <Button
+                                        variant="tertiary"
+                                        icon={<PencilWritingIcon />}
+                                        iconPosition="right"
+                                        className="w-full justify-start p-0"
                                         tabIndex={0}
-                                        className="lenkeknapp"
-                                        onClick={() => visKvittering(kvittering)}
+                                        onClick={(e) => {
+                                            visKvittering(kvittering)
+                                            e.preventDefault()
+                                        }}
                                     >
                                         {UtgiftTyper[kvittering.typeUtgift]}
-                                    </button>
+                                    </Button>
                                 </td>
                                 <td className="belop">{formatterTall(kvittering.belop! / 100)} kr</td>
                                 <td>
