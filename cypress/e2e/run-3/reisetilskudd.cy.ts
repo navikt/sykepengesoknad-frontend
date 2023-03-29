@@ -174,42 +174,19 @@ describe('Teste førsteside i reisetilskuddsøknaden', () => {
             cy.get('[data-cy="opplasting-form"]')
             cy.get('[data-cy="opplasting-form"]').within(() => {
                 cy.contains('Tilbake')
-                cy.contains('Slett')
                 cy.contains('Bekreft').should('not.exist')
             })
             cy.get('[data-cy="opplasting-modal-tilbake"]').click()
         })
 
-        it('Sletting av kvittering som er valgt', () => {
-            cy.get('.fil_liste').contains('Taxi').click()
-
-            cy.get('.knapperad').contains('Slett').click()
-            cy.get('.navds-modal__content:eq(1)').within(() => {
-                cy.contains('Vil du slette kvitteringen?')
-                cy.contains('Ja, jeg er sikker')
-            })
-            cy.get('.navds-modal__button:eq(1)').click()
-            cy.contains('Vil du slette kvitteringen?').should('not.exist')
-
-            cy.get('.knapperad').contains('Slett').click()
-
-            cy.contains('Ja, jeg er sikker').click()
-            cy.get('.sumlinje').should('not.exist')
-        })
-
         it('Sletting av kvittering i liste', () => {
-            cy.get('button').contains('Legg til reiseutgift').click()
-            cy.get('select[name=transportmiddel]').select('TAXI')
-            cy.get('input[name=belop_input]').type('1234')
-
-            cy.get('[data-cy="filopplasteren"]')
-                .find('input[type=file]')
-                .selectFile({ contents: 'cypress/fixtures/kvittering.jpg' }, { force: true })
-            cy.get('.navds-modal__content').contains('Bekreft').click()
-
-            cy.get('.sumlinje').should('exist')
-            cy.get('.slette-kvittering').click()
-            cy.contains('Ja, jeg er sikker').click()
+            cy.get('.fil_liste').contains('Taxi')
+            cy.contains('button', 'Slett').click()
+            cy.get('.navds-modal__content').within(() => {
+                cy.contains('Vil du slette kvitteringen?')
+                cy.contains('Ja, jeg er sikker').click()
+            })
+            cy.contains('Vil du slette kvitteringen?').should('not.exist')
             cy.get('.sumlinje').should('not.exist')
         })
 
