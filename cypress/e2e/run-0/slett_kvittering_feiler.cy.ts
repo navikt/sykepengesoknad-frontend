@@ -16,7 +16,7 @@ describe('Test sletting av kvittering som feiler', () => {
             cy.get('select[name=transportmiddel]').select('TAXI')
             cy.get('input[name=belop_input]').type('1234')
             cy.get('.filopplasteren input[type=file]').attachFile('kvittering.jpg')
-            cy.get('.lagre-kvittering').contains('Bekreft').click()
+            cy.get('.knapperad').contains('Bekreft').click()
         })
 
         it('Liste med kvitteringer er oppdatert', () => {
@@ -40,11 +40,10 @@ describe('Test sletting av kvittering som feiler', () => {
             cy.get('.fil_liste').contains('Taxi').click()
 
             cy.get('.knapperad').contains('Slett').click()
-            cy.get('.bekreft-dialog').within(() => {
+            cy.get('.navds-modal__content:eq(1)').within(() => {
                 cy.contains('Vil du slette kvitteringen?')
                 cy.contains('Ja, jeg er sikker').click()
                 cy.contains('Det skjedde en feil ved sletting av kvitteringen')
-                cy.contains('Lukk').click()
             })
         })
     })

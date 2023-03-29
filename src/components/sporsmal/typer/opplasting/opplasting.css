@@ -12,55 +12,6 @@
     margin: 1rem 0 0 0;
     text-align: left;
 }
-.opplasting_modal {
-    width: 400px;
-}
-.opplasting_modal .navds-modal__content .enhet {
-    margin-left: 0.5rem;
-}
-.opplasting_modal .navds-modal__content .filstr {
-    margin-top: 0.5rem;
-}
-.opplasting_modal .navds-modal__content .ddfil__wrap {
-    margin-top: 0.5rem;
-    margin-bottom: 2rem;
-}
-.opplasting_modal .navds-modal__content .navds-alert--warning {
-    margin: 2rem 0;
-}
-.opplasting_modal .navds-modal__content .knapperad {
-    flex-direction: column;
-    padding: 0 0 0.5rem;
-}
-.opplasting_modal .navds-modal__content .knapperad .lagre-kvittering {
-    display: block;
-    width: 100%;
-    margin-bottom: 1rem;
-}
-.opplasting_modal .opplasting-header {
-    margin-top: 0.5rem;
-}
-.opplasting_modal .skjemaelement {
-    margin: 1rem 0;
-}
-.opplasting_modal .feilmelding-alert {
-    margin-top: 1rem;
-}
-.opplasting_modal .restriksjoner {
-    display: flex;
-    flex-direction: column;
-    margin-top: 2rem;
-}
-@media (min-width: 768px) {
-    .opplasting_modal .navds-modal__content .knapperad {
-        flex-direction: row;
-    }
-    .opplasting_modal .navds-modal__content .knapperad .lagre-kvittering {
-        display: inline-block;
-        width: auto;
-        margin: 0 0.4rem 1rem;
-    }
-}
 .navds-alert--warning.reisetilskudd {
     background-color: #ffffff;
     margin-top: 1.5rem;

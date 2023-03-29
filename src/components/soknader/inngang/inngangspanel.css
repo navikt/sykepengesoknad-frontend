@@ -67,22 +67,7 @@
 .inngangspanel .inngangspanel__periode {
     margin-bottom: 2px;
 }
-.navds-modal.modal__teaser_popup {
-    width: 350px;
-}
-.navds-modal.modal__teaser_popup .modal__tittel {
-    margin: 0.25rem 0 1rem;
-}
-.navds-modal.modal__teaser_popup p + p {
-    margin-top: 1rem;
-}
-.navds-modal.modal__teaser_popup .utvidbar.intern .utvidbar__innhold .navds-alert__icon {
-    display: block;
-}
-.navds-modal.modal__teaser_popup .navds-button.navds-button--primary {
-    display: block;
-    margin: 2rem auto 1rem;
-}
+
 @media (min-width: 768px) {
     .inngangspanel:hover {
         box-shadow: #ccc 0 0 4px 2px;

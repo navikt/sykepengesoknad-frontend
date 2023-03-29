@@ -28,7 +28,7 @@ describe('Tester arbeidstakersøknad', () => {
         cy.contains('Les mer om hvordan NAV behandler personopplysninger').click()
         cy.contains('Slik behandler NAV personopplysningene dine')
         cy.contains('Søknaden din vil bli behandlet automatisk hvis NAV har tilstrekkelige opplysninger')
-        cy.get('.no-border > .navds-body-short').contains('Lukk').click()
+        cy.get('.navds-modal__button').click()
 
         // Sykmelding
         cy.contains('1. april - 24. april 2020 (24 dager)')
@@ -42,8 +42,8 @@ describe('Tester arbeidstakersøknad', () => {
 
         // Avbryt dialog vises
         cy.contains('Jeg vil ikke bruke denne søknaden').click()
-        cy.get('.modal__avbryt_popup button:contains(Nei, jeg vil bruke søknaden)').click()
-        cy.get('.modal__avbryt_popup button:contains(Nei, jeg vil bruke søknaden)').should('not.exist')
+        cy.get('.navds-modal__content button:contains(Nei, jeg vil bruke søknaden)').click()
+        cy.get('.navds-modal__content button:contains(Nei, jeg vil bruke søknaden)').should('not.exist')
 
         // Må godkjenne ANSVARSERKLARING først
         cy.contains('Gå videre').click()

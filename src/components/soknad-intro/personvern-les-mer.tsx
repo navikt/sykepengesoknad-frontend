@@ -1,4 +1,4 @@
-import { BodyShort, Button, Heading, Modal } from '@navikt/ds-react'
+import { Button, Heading, Modal } from '@navikt/ds-react'
 import React, { MouseEvent, useState } from 'react'
 
 import { tekst } from '../../utils/tekster'
@@ -30,40 +30,26 @@ const PersonvernLesMer = ({ soknadstype }: PersonvernLesMerProps) => {
     }
 
     return (
-        <div className="personvern-les-mer">
+        <>
             <Button variant="tertiary" onClick={handleAapen}>
                 {tekst('sykepengesoknad.soknad-intro.personvern-les-mer')}
             </Button>
             <Modal
-                className="personvern-modal"
+                open={aapen}
+                aria-labelledby="Personvern-modal"
                 onClose={() => {
                     setAapen(false)
                     amplitudeLukketPopup()
                 }}
-                open={aapen}
-                aria-labelledby="modal-tittel"
             >
                 <Modal.Content>
-                    <Heading size="medium" level="1" className="modal__tittel" id="modal-tittel">
+                    <Heading size="medium" id="Personvern-modal" level="1" spacing>
                         {tekst('sykepengesoknad.soknad-intro.personvern-modal-header')}
                     </Heading>
                     {parserWithReplace(tekst('sykepengesoknad.soknad-intro.personvern-modal-innhold'))}
-
-                    <div className="lukk-wrapper">
-                        <button
-                            type="button"
-                            className="no-border navds-link"
-                            onClick={() => {
-                                setAapen(false)
-                                amplitudeLukketPopup()
-                            }}
-                        >
-                            <BodyShort as="span">Lukk</BodyShort>
-                        </button>
-                    </div>
                 </Modal.Content>
             </Modal>
-        </div>
+        </>
     )
 }
 

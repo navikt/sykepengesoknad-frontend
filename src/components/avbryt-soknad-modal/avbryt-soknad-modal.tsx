@@ -13,6 +13,7 @@ import useSoknad from '../../hooks/useSoknad'
 import useSoknader from '../../hooks/useSoknader'
 
 import { avbrytSoknad } from './avbryt-soknad'
+import styles from './avbryt-soknad.module.css'
 
 const AvbrytKorrigering = () => {
     const { id, stegId } = useParams<RouteParams>()
@@ -26,7 +27,7 @@ const AvbrytKorrigering = () => {
         <div>
             <Button
                 variant="tertiary"
-                className="avbryt_rødknapp"
+                className={styles.avbryt_rodknapp}
                 onClick={(e) => {
                     logEvent('modal åpnet', {
                         component: tekst('avbryt.korrigering.knapp'),
@@ -65,7 +66,7 @@ const AvbrytSoknadModal = () => {
         <div>
             <Button
                 variant="tertiary"
-                className="avbryt_rødknapp"
+                className={styles.avbryt_rodknapp}
                 onClick={(e) => {
                     logEvent('modal åpnet', {
                         component: tekst('avbryt.popup.tittel'),
@@ -79,7 +80,8 @@ const AvbrytSoknadModal = () => {
                 {tekst('avbryt.popup.tittel')}
             </Button>
             <Modal
-                className="modal__avbryt_popup"
+                open={aapen}
+                aria-labelledby="avbryt-soknad"
                 onClose={() => {
                     setAapen(false)
                     logEvent('modal lukket', {
@@ -88,12 +90,9 @@ const AvbrytSoknadModal = () => {
                         steg: stegId,
                     })
                 }}
-                closeButton={false}
-                open={aapen}
-                aria-labelledby="modal-tittel"
             >
                 <Modal.Content>
-                    <Heading level="1" size="small" id="modal-tittel" spacing>
+                    <Heading size="small" id="avbryt-soknad" level="1" className="mr-10 mt-1" spacing>
                         {tekst('avbryt.popup.tittel')}
                     </Heading>
 
@@ -103,7 +102,7 @@ const AvbrytSoknadModal = () => {
 
                     <Button
                         variant="danger"
-                        className="midtstilt-knapp"
+                        className="ml-auto mr-auto block"
                         onClick={() => {
                             logEvent('knapp klikket', {
                                 tekst: tekst('avbryt.popup.ja'),
@@ -124,7 +123,7 @@ const AvbrytSoknadModal = () => {
                     </Button>
                     <Button
                         variant="secondary"
-                        className="midtstilt-knapp"
+                        className="mt-4 ml-auto mr-auto block"
                         onClick={() => {
                             setAapen(false)
                             logEvent('knapp klikket', {

@@ -1,5 +1,5 @@
 import { Next } from '@navikt/ds-icons'
-import { BodyLong, Button, Detail, Heading, Label, Modal } from '@navikt/ds-react'
+import { BodyLong, Detail, Heading, Label, Modal } from '@navikt/ds-react'
 import dayjs from 'dayjs'
 import React, { useState } from 'react'
 
@@ -61,14 +61,9 @@ const FremtidigeSoknaderTeaser = ({ soknad }: SykepengesoknadTeaserProps) => {
                 <Next className="chevron--hoyre" />
             </button>
 
-            <Modal
-                className="modal__teaser_popup"
-                onClose={() => setAapen(false)}
-                open={aapen}
-                aria-labelledby="modal-tittel"
-            >
+            <Modal onClose={() => setAapen(false)} open={aapen} aria-labelledby="fremtidige-soknader-modal">
                 <Modal.Content>
-                    <Heading size="small" level="1" className="modal__tittel" id="modal-tittel">
+                    <Heading size="small" id="fremtidige-soknader-modal" level="1" className="mr-10 mt-1" spacing>
                         {tekst('soknader.teaser.fremtidig.modal.tittel')}
                     </Heading>
                     <BodyLong spacing>
@@ -85,9 +80,6 @@ const FremtidigeSoknaderTeaser = ({ soknad }: SykepengesoknadTeaserProps) => {
                     >
                         <BodyLong spacing>{tekst('soknader.teaser.fremtidig.modal.utvidbar.tekst')}</BodyLong>
                     </Utvidbar>
-                    <Button variant="primary" onClick={() => setAapen(false)}>
-                        Lukk
-                    </Button>
                 </Modal.Content>
             </Modal>
         </article>
