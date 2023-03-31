@@ -364,7 +364,7 @@ export const nyArbeidUnderveisSoknad: RSSoknad = {
                         {
                             id: 'd0a670e1-4428-324d-9638-ddaecea2a1b1',
                             tag: 'INNTEKTSKILDE_SELVSTENDIG_DAGMAMMA',
-                            sporsmalstekst: 'dagmammma',
+                            sporsmalstekst: 'dagmamma',
                             undertekst: null,
                             svartype: 'CHECKBOX',
                             min: null,

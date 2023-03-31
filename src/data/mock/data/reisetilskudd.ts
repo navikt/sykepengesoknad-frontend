@@ -557,7 +557,7 @@ export const gradertReisetilskudd: RSSoknad = {
                         {
                             id: '3e710b2b-1e91-3d62-8d5d-55cb5eef120f',
                             tag: 'INNTEKTSKILDE_SELVSTENDIG_DAGMAMMA',
-                            sporsmalstekst: 'dagmammma',
+                            sporsmalstekst: 'dagmamma',
                             undertekst: null,
                             svartype: 'CHECKBOX',
                             min: null,
