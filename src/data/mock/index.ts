@@ -239,7 +239,7 @@ const setUpMock = (person: Persona) => {
     )
 
     mock.get('/syk/sykepengesoknad/api/sykepengesoknad-kvitteringer/api/v2/kvittering/:blob', () =>
-        fetch('/syk/sykepengesok/static/kvittering.jpg'),
+        fetch('/syk/sykepengesoknad/static/kvittering.jpg'),
     )
 }
 

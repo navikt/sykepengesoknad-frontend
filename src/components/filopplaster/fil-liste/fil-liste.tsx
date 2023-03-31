@@ -1,25 +1,19 @@
-import { BodyShort, Heading, Button } from '@navikt/ds-react'
 import React from 'react'
 import useForceUpdate from 'use-force-update'
 import { useParams } from 'react-router-dom'
-import { PencilWritingIcon } from '@navikt/aksel-icons'
+import { Table } from '@navikt/ds-react'
 
-import { Kvittering, UtgiftTyper } from '../../../types/types'
+import { Kvittering } from '../../../types/types'
 import { getLedetekst, tekst } from '../../../utils/tekster'
 import { formatterTall } from '../../../utils/utils'
-import Slettknapp from '../../slettknapp/slettknapp'
 import { hentSvar } from '../../sporsmal/hent-svar'
 import Vis from '../../vis'
 import { RouteParams } from '../../../app'
 import useSoknad from '../../../hooks/useSoknad'
 
-interface Props {
-    fjernKnapp?: boolean
-    setValgtKvittering: (arg0: Kvittering) => void
-    setOpenModal: (arg0: boolean) => void
-}
+import KvitteringListeVisning from './kvittering-listevisning'
 
-const FilListe = ({ fjernKnapp, setValgtKvittering, setOpenModal }: Props) => {
+const FilListe = () => {
     const { id, stegId } = useParams<RouteParams>()
     const { data: valgtSoknad } = useSoknad(id)
 
@@ -36,11 +30,6 @@ const FilListe = ({ fjernKnapp, setValgtKvittering, setOpenModal }: Props) => {
         forceUpdate()
     }
 
-    const visKvittering = (kvittering: Kvittering) => {
-        setOpenModal(true)
-        setValgtKvittering(kvittering)
-    }
-
     const totaltBeløp = (): number =>
         (kvitteringer
             ? kvitteringer
@@ -53,72 +42,41 @@ const FilListe = ({ fjernKnapp, setValgtKvittering, setOpenModal }: Props) => {
         <Vis
             hvis={kvitteringer.length > 0}
             render={() => (
-                <BodyShort as="table" className="tabell tabell--stripet fil_liste" data-cy="fil-liste">
-                    <Vis
-                        hvis={fjernKnapp}
-                        render={() => (
-                            <thead>
-                                <tr>
-                                    <th role="columnheader" aria-sort="none">
-                                        Utgift
-                                    </th>
-                                    <th role="columnheader" className="belop">
-                                        Beløp
-                                    </th>
-                                    <td />
-                                </tr>
-                            </thead>
-                        )}
-                    />
-                    <tbody>
-                        {kvitteringer.reverse().map((kvittering: Kvittering, idx: number) => (
-                            <tr key={idx}>
-                                <td className="transport">
-                                    <Button
-                                        variant="tertiary"
-                                        icon={<PencilWritingIcon />}
-                                        iconPosition="right"
-                                        className="w-full justify-start p-0"
-                                        tabIndex={0}
-                                        onClick={(e) => {
-                                            visKvittering(kvittering)
-                                            e.preventDefault()
-                                        }}
-                                    >
-                                        {UtgiftTyper[kvittering.typeUtgift]}
-                                    </Button>
-                                </td>
-                                <td className="belop">{formatterTall(kvittering.belop! / 100)} kr</td>
-                                <td>
-                                    <Slettknapp
-                                        sporsmal={sporsmal}
+                <>
+                    <Table zebraStripes={true}>
+                        <Table.Header>
+                            <Table.Row>
+                                <Table.HeaderCell />
+                                <Table.HeaderCell scope="col">Utgift</Table.HeaderCell>
+                                <Table.HeaderCell scope="col">Beløp</Table.HeaderCell>
+                                <Table.HeaderCell scope="col"></Table.HeaderCell>
+                            </Table.Row>
+                        </Table.Header>
+                        <Table.Body>
+                            {kvitteringer.reverse().map((kvittering: Kvittering) => {
+                                return (
+                                    <KvitteringListeVisning
+                                        key={kvittering.blobId}
                                         kvittering={kvittering}
-                                        setOpenModal={setOpenModal}
                                         updateFilliste={updateFilliste}
+                                        sporsmal={sporsmal}
                                     />
-                                </td>
-                            </tr>
-                        ))}
-                    </tbody>
-                    <tbody className="sumlinje">
-                        <tr>
-                            <td>
-                                <Heading size="small" as="span">
+                                )
+                            })}
+                            <Table.Row>
+                                <Table.DataCell colSpan={2} className="border-b-0 font-bold">
                                     {getLedetekst(tekst('fil_liste.utlegg.sum'), {
                                         '%ANTALL_BILAG%': kvitteringer.length,
                                         '%FLERTALL%': kvitteringer.length > 1 ? 'er' : '',
                                     })}
-                                </Heading>
-                            </td>
-                            <td className="belop">
-                                <Heading size="small" as="span">
+                                </Table.DataCell>
+                                <Table.DataCell colSpan={2} className="border-b-0 font-bold">
                                     {formatterTall(totaltBeløp())} kr
-                                </Heading>
-                            </td>
-                            <td />
-                        </tr>
-                    </tbody>
-                </BodyShort>
+                                </Table.DataCell>
+                            </Table.Row>
+                        </Table.Body>
+                    </Table>
+                </>
             )}
         />
     )

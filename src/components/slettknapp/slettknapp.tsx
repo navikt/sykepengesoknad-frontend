@@ -16,11 +16,10 @@ import { RouteParams } from '../../app'
 interface SlettknappProps {
     sporsmal: Sporsmal
     kvittering: Kvittering
-    setOpenModal: (arg0: boolean) => void
-    updateFilliste?: () => void
+    updateFilliste: () => void
 }
 
-const Slettknapp = ({ sporsmal, kvittering, setOpenModal, updateFilliste }: SlettknappProps) => {
+const Slettknapp = ({ sporsmal, kvittering, updateFilliste }: SlettknappProps) => {
     const { id } = useParams<RouteParams>()
     const { data: valgtSoknad } = useSoknad(id)
     const queryClient = useQueryClient()
@@ -68,12 +67,9 @@ const Slettknapp = ({ sporsmal, kvittering, setOpenModal, updateFilliste }: Slet
         valgtSoknad!.sporsmal[valgtSoknad!.sporsmal.findIndex((spm) => spm.id === sporsmal.id)] = sporsmal
         queryClient.setQueriesData(['soknad', valgtSoknad!.id], valgtSoknad)
 
-        setOpenModal(false)
         setSletter(false)
         setVilSlette(false)
-        if (updateFilliste) {
-            updateFilliste()
-        }
+        updateFilliste()
     }
 
     return (
@@ -86,7 +82,6 @@ const Slettknapp = ({ sporsmal, kvittering, setOpenModal, updateFilliste }: Slet
                             variant="tertiary"
                             icon={<TrashIcon />}
                             iconPosition="right"
-                            className="w-full justify-end p-0"
                             onClick={(e) => {
                                 setVilSlette(true)
                                 nullstillFeilmelding()
@@ -96,23 +91,6 @@ const Slettknapp = ({ sporsmal, kvittering, setOpenModal, updateFilliste }: Slet
                             {tekst('opplasting_modal.slett')}
                         </Button>
                     </>
-                )}
-            />
-
-            <Vis
-                hvis={!updateFilliste}
-                render={() => (
-                    <Button
-                        variant="danger"
-                        type="button"
-                        className="lagre-kvittering"
-                        onClick={() => {
-                            setVilSlette(true)
-                            nullstillFeilmelding()
-                        }}
-                    >
-                        {tekst('opplasting_modal.slett')}
-                    </Button>
                 )}
             />
 

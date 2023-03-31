@@ -50,9 +50,6 @@ const OpplastingForm = ({ valgtSoknad, valgtKvittering, setOpenModal, valgtFil, 
     const spmIndex = stegNum - 1
     const sporsmal = valgtSoknad.sporsmal[spmIndex]
     const formErDisabled = valgtKvittering !== undefined
-    const kvitteringHeader = valgtKvittering
-        ? tekst('opplasting_modal.endre-utlegg.tittel')
-        : tekst('opplasting_modal.nytt-utlegg.tittel')
 
     const onSubmit = async () => {
         try {
@@ -127,17 +124,8 @@ const OpplastingForm = ({ valgtSoknad, valgtKvittering, setOpenModal, valgtFil, 
         <FormProvider {...methods}>
             <form className="opplasting-form" key="opplasting_form" data-cy="opplasting-form">
                 <Heading size="medium" id="opplasting-modal" className="mr-10 mt-1" spacing>
-                    {kvitteringHeader}
+                    {tekst('opplasting_modal.nytt-utlegg.tittel')}
                 </Heading>
-
-                <Vis
-                    hvis={formErDisabled}
-                    render={() => (
-                        <Alert variant="info">
-                            <BodyShort>{tekst('opplasting_modal.endre-utlegg.hjelpetekst')}</BodyShort>
-                        </Alert>
-                    )}
-                />
                 <BodyShort className="restriksjoner">
                     <span className="filtype">
                         {getLedetekst(tekst('opplasting_modal.filtyper'), {
@@ -253,21 +241,9 @@ const OpplastingForm = ({ valgtSoknad, valgtKvittering, setOpenModal, valgtFil, 
                             </Alert>
                         )}
                     />
-
-                    <Vis
-                        hvis={!formErDisabled}
-                        render={() => (
-                            <Button
-                                variant="primary"
-                                type="button"
-                                className="mr-3"
-                                onClick={onSubmit}
-                                loading={laster}
-                            >
-                                {tekst('opplasting_modal.bekreft')}
-                            </Button>
-                        )}
-                    />
+                    <Button variant="primary" type="button" className="mr-3" onClick={onSubmit} loading={laster}>
+                        {tekst('opplasting_modal.bekreft')}
+                    </Button>
 
                     <Button
                         variant="secondary"
