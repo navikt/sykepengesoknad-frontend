@@ -323,7 +323,7 @@ export const soknadUtenEgenmeldingSporsmal: RSSoknad = {
                         {
                             id: 'd77ca260-f916-36bf-a753-a3d93ccbb074',
                             tag: 'INNTEKTSKILDE_SELVSTENDIG_DAGMAMMA',
-                            sporsmalstekst: 'dagmammma',
+                            sporsmalstekst: 'dagmamma',
                             undertekst: null,
                             svartype: 'CHECKBOX',
                             min: null,
