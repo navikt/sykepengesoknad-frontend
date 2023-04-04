@@ -1,10 +1,10 @@
 import { Table, Loader, Label } from '@navikt/ds-react'
-import React, { useEffect, useState } from 'react'
+import React from 'react'
 
 import { UtgiftTyper, Kvittering, Sporsmal } from '../../../types/types'
 import { formatterTall } from '../../../utils/utils'
 import Slettknapp from '../../slettknapp/slettknapp'
-import fetchMedRequestId from '../../../utils/fetch'
+import useKvittering from '../../../hooks/useKvittering'
 
 export interface KvitteringListeVisningProps {
     kvittering: Kvittering
@@ -12,24 +12,21 @@ export interface KvitteringListeVisningProps {
     updateFilliste: () => void
 }
 const KvitteringListeVisning = ({ kvittering, sporsmal, updateFilliste }: KvitteringListeVisningProps) => {
-    const [fil, setFil] = useState<File>()
-    useEffect(() => {
-        fetchMedRequestId(
-            `/syk/sykepengesoknad/api/sykepengesoknad-kvitteringer/api/v2/kvittering/${kvittering.blobId}`,
-            {
-                method: 'GET',
-                credentials: 'include',
-                headers: { 'Content-Type': 'application/json' },
-            },
-        ).then((fetchResult) => {
-            fetchResult.response.blob().then((blob) => {
-                setFil(blob as any)
-            })
-        })
-    }, [kvittering.blobId])
+    const { data: fil } = useKvittering(kvittering.blobId)
 
     return (
-        <Table.ExpandableRow content={fil ? <img alt={fil.name} src={URL.createObjectURL(fil)} /> : <Loader />}>
+        <Table.ExpandableRow
+            content={
+                fil ? (
+                    <img
+                        alt={`kvittering til ${UtgiftTyper[kvittering.typeUtgift].toLowerCase()}`}
+                        src={URL.createObjectURL(fil)}
+                    />
+                ) : (
+                    <Loader />
+                )
+            }
+        >
             <Table.DataCell>
                 <Label as="h2">{UtgiftTyper[kvittering.typeUtgift]}</Label>
             </Table.DataCell>

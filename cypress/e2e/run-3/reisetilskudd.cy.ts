@@ -153,34 +153,24 @@ describe('Teste førsteside i reisetilskuddsøknaden', () => {
         })
 
         it('Fil list oppdateres med kvittering', () => {
-            cy.get('.fil_liste')
-
-            cy.get('.transport').contains('Taxi')
-            cy.get('.belop').contains('1.234 kr')
-
-            cy.get('.sumlinje').contains('1 utgift på til sammen')
-            cy.get('.sumlinje .belop').contains('1.234 kr')
+            cy.get('.navds-table').within(() => {
+                cy.contains('Taxi')
+                cy.contains('1.234 kr')
+                cy.contains('1 utgift på til sammen')
+                cy.contains('1.234 kr')
+            })
         })
 
         it('Endring av kvittering', () => {
-            cy.get('.fil_liste').contains('Taxi').click()
-            cy.contains('Endre reiseutgift')
-            cy.get('.navds-alert--info').contains(
-                'Du kan foreløpig ikke redigere utgifter som du har lagt til. Men du kan slette den som er feil, og legge inn på nytt.',
-            )
-            cy.get('select[name=transportmiddel]').should('have.attr', 'disabled')
-            cy.get('input[name=belop_input]').should('have.attr', 'disabled')
-            cy.get('.filopplasteren input[type=file]').should('not.exist')
-            cy.get('[data-cy="opplasting-form"]')
-            cy.get('[data-cy="opplasting-form"]').within(() => {
-                cy.contains('Tilbake')
-                cy.contains('Bekreft').should('not.exist')
+            cy.get('.navds-table').within(() => {
+                cy.contains('Taxi')
+                cy.get('.navds-table__toggle-expand-button').click()
             })
-            cy.get('[data-cy="opplasting-modal-tilbake"]').click()
+            cy.get('.navds-table__expanded-row-content').find('img[alt="kvittering til taxi"]').should('be.visible')
         })
 
         it('Sletting av kvittering i liste', () => {
-            cy.get('.fil_liste').contains('Taxi')
+            cy.get('.navds-table').contains('Taxi')
             cy.contains('button', 'Slett').click()
             cy.get('.navds-modal__content').within(() => {
                 cy.contains('Vil du slette kvitteringen?')

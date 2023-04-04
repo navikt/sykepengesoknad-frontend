@@ -20,13 +20,11 @@ describe('Test sletting av kvittering som feiler', () => {
         })
 
         it('Liste med kvitteringer er oppdatert', () => {
-            cy.get('.fil_liste')
-
-            cy.get('.transport').contains('Taxi')
-            cy.get('.belop').contains('1.234 kr')
-
-            cy.get('.sumlinje').contains('1 utgift på til sammen')
-            cy.get('.sumlinje .belop').contains('1.234 kr')
+            cy.get('.navds-table').within(() => {
+                cy.contains('Taxi')
+                cy.contains('1.234 kr')
+                cy.contains('1 utgift på til sammen')
+            })
         })
 
         it('Sletting av kvittering fra liste', () => {
