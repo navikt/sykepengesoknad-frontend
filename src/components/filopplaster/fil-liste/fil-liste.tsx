@@ -46,10 +46,14 @@ const FilListe = () => {
                     <Table zebraStripes={true}>
                         <Table.Header>
                             <Table.Row>
-                                <Table.HeaderCell />
+                                <Table.HeaderCell scope="col">
+                                    <span className="sr-only">Ekspander for å se kvitteringen</span>
+                                </Table.HeaderCell>
                                 <Table.HeaderCell scope="col">Utgift</Table.HeaderCell>
                                 <Table.HeaderCell scope="col">Beløp</Table.HeaderCell>
-                                <Table.HeaderCell scope="col"></Table.HeaderCell>
+                                <Table.HeaderCell scope="col">
+                                    <span className="sr-only">Slett kvitteringen</span>
+                                </Table.HeaderCell>
                             </Table.Row>
                         </Table.Header>
                         <Table.Body>
