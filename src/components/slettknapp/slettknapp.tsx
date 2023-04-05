@@ -1,6 +1,7 @@
 /* eslint-disable no-console */
 import { Alert, Button, Heading, Modal } from '@navikt/ds-react'
 import { logger } from '@navikt/next-logger'
+import { TrashIcon } from '@navikt/aksel-icons'
 import React, { useState } from 'react'
 import { useParams } from 'react-router-dom'
 import { useQueryClient } from '@tanstack/react-query'
@@ -15,11 +16,10 @@ import { RouteParams } from '../../app'
 interface SlettknappProps {
     sporsmal: Sporsmal
     kvittering: Kvittering
-    setOpenModal: (arg0: boolean) => void
-    updateFilliste?: () => void
+    updateFilliste: () => void
 }
 
-const Slettknapp = ({ sporsmal, kvittering, setOpenModal, updateFilliste }: SlettknappProps) => {
+const Slettknapp = ({ sporsmal, kvittering, updateFilliste }: SlettknappProps) => {
     const { id } = useParams<RouteParams>()
     const { data: valgtSoknad } = useSoknad(id)
     const queryClient = useQueryClient()
@@ -67,12 +67,9 @@ const Slettknapp = ({ sporsmal, kvittering, setOpenModal, updateFilliste }: Slet
         valgtSoknad!.sporsmal[valgtSoknad!.sporsmal.findIndex((spm) => spm.id === sporsmal.id)] = sporsmal
         queryClient.setQueriesData(['soknad', valgtSoknad!.id], valgtSoknad)
 
-        setOpenModal(false)
         setSletter(false)
         setVilSlette(false)
-        if (updateFilliste) {
-            updateFilliste()
-        }
+        updateFilliste()
     }
 
     return (
@@ -80,35 +77,20 @@ const Slettknapp = ({ sporsmal, kvittering, setOpenModal, updateFilliste }: Slet
             <Vis
                 hvis={updateFilliste}
                 render={() => (
-                    <button
-                        type="button"
-                        className="slette-kvittering"
-                        aria-label={tekst('opplasting_modal.slett')}
-                        onClick={() => {
-                            setVilSlette(true)
-                            nullstillFeilmelding()
-                        }}
-                        title={tekst('opplasting_modal.slett')}
-                    >
-                        <img src="/syk/sykepengesoknad/static/slettknapp.svg" alt="" />
-                    </button>
-                )}
-            />
-
-            <Vis
-                hvis={!updateFilliste}
-                render={() => (
-                    <Button
-                        variant="danger"
-                        type="button"
-                        className="lagre-kvittering"
-                        onClick={() => {
-                            setVilSlette(true)
-                            nullstillFeilmelding()
-                        }}
-                    >
-                        {tekst('opplasting_modal.slett')}
-                    </Button>
+                    <>
+                        <Button
+                            variant="tertiary"
+                            icon={<TrashIcon />}
+                            iconPosition="right"
+                            onClick={(e) => {
+                                setVilSlette(true)
+                                nullstillFeilmelding()
+                                e.preventDefault()
+                            }}
+                        >
+                            {tekst('opplasting_modal.slett')}
+                        </Button>
+                    </>
                 )}
             />
 

@@ -13,7 +13,6 @@ import { Kvittering, Soknad, Sporsmal, UtgiftTyper } from '../../../types/types'
 import { AuthenticationError, fetchJsonMedRequestId } from '../../../utils/fetch'
 import { formaterFilstørrelse, formattertFiltyper, maxFilstørrelse } from '../../../utils/fil-utils'
 import { getLedetekst, tekst } from '../../../utils/tekster'
-import Slettknapp from '../../slettknapp/slettknapp'
 import Vis from '../../vis'
 import DragAndDrop from '../drag-and-drop/drag-and-drop'
 
@@ -51,9 +50,6 @@ const OpplastingForm = ({ valgtSoknad, valgtKvittering, setOpenModal, valgtFil, 
     const spmIndex = stegNum - 1
     const sporsmal = valgtSoknad.sporsmal[spmIndex]
     const formErDisabled = valgtKvittering !== undefined
-    const kvitteringHeader = valgtKvittering
-        ? tekst('opplasting_modal.endre-utlegg.tittel')
-        : tekst('opplasting_modal.nytt-utlegg.tittel')
 
     const onSubmit = async () => {
         try {
@@ -128,17 +124,8 @@ const OpplastingForm = ({ valgtSoknad, valgtKvittering, setOpenModal, valgtFil, 
         <FormProvider {...methods}>
             <form className="opplasting-form" key="opplasting_form" data-cy="opplasting-form">
                 <Heading size="medium" id="opplasting-modal" className="mr-10 mt-1" spacing>
-                    {kvitteringHeader}
+                    {tekst('opplasting_modal.nytt-utlegg.tittel')}
                 </Heading>
-
-                <Vis
-                    hvis={formErDisabled}
-                    render={() => (
-                        <Alert variant="info">
-                            <BodyShort>{tekst('opplasting_modal.endre-utlegg.hjelpetekst')}</BodyShort>
-                        </Alert>
-                    )}
-                />
                 <BodyShort className="restriksjoner">
                     <span className="filtype">
                         {getLedetekst(tekst('opplasting_modal.filtyper'), {
@@ -254,21 +241,9 @@ const OpplastingForm = ({ valgtSoknad, valgtKvittering, setOpenModal, valgtFil, 
                             </Alert>
                         )}
                     />
-
-                    <Vis
-                        hvis={!formErDisabled}
-                        render={() => (
-                            <Button
-                                variant="primary"
-                                type="button"
-                                className="mr-3"
-                                onClick={onSubmit}
-                                loading={laster}
-                            >
-                                {tekst('opplasting_modal.bekreft')}
-                            </Button>
-                        )}
-                    />
+                    <Button variant="primary" type="button" className="mr-3" onClick={onSubmit} loading={laster}>
+                        {tekst('opplasting_modal.bekreft')}
+                    </Button>
 
                     <Button
                         variant="secondary"
@@ -280,13 +255,6 @@ const OpplastingForm = ({ valgtSoknad, valgtKvittering, setOpenModal, valgtFil, 
                     >
                         {tekst('opplasting_modal.tilbake')}
                     </Button>
-
-                    <Vis
-                        hvis={formErDisabled}
-                        render={() => (
-                            <Slettknapp sporsmal={sporsmal} kvittering={valgtKvittering!} setOpenModal={setOpenModal} />
-                        )}
-                    />
                 </div>
             </form>
         </FormProvider>

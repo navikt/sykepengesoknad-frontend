@@ -73,7 +73,7 @@ const Opplasting = ({ sporsmal }: SpmProps) => {
                 </Modal.Content>
             </Modal>
 
-            <FilListe fjernKnapp setValgtKvittering={setValgtKvittering} setOpenModal={setOpenModal} />
+            <FilListe />
         </div>
     )
 }
