@@ -19,7 +19,7 @@ const KvitteringListeVisning = ({ kvittering, sporsmal, updateFilliste }: Kvitte
             content={
                 fil ? (
                     <img
-                        alt={`kvittering til ${UtgiftTyper[kvittering.typeUtgift].toLowerCase()}`}
+                        alt={`kvittering for ${UtgiftTyper[kvittering.typeUtgift].toLowerCase()}`}
                         src={URL.createObjectURL(fil)}
                     />
                 ) : (

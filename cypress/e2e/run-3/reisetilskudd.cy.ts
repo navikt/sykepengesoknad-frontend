@@ -166,7 +166,7 @@ describe('Teste førsteside i reisetilskuddsøknaden', () => {
                 cy.contains('Taxi')
                 cy.get('.navds-table__toggle-expand-button').click()
             })
-            cy.get('.navds-table__expanded-row-content').find('img[alt="kvittering til taxi"]').should('be.visible')
+            cy.get('.navds-table__expanded-row-content').find('img[alt="kvittering for taxi"]').should('be.visible')
         })
 
         it('Sletting av kvittering i liste', () => {
