@@ -8,13 +8,13 @@ import AnimateOnMount from '../../animate-on-mount'
 import FeilLokal from '../../feil/feil-lokal'
 import { utlandssoknadUrl } from '../../soknad/soknad-link'
 import Vis from '../../vis'
-import PaskeHjelpetekst from '../bendiksen/paske-hjelpetekst'
 import GuidepanelUnderSporsmalstekst from '../guidepanel/GuidepanelUnderSporsmalstekst'
 import { EkspanderbarHjelp } from '../../hjelpetekster/ekspanderbar-hjelp/ekspanderbar-hjelp'
 import { hentFeilmelding, sporsmalIdListe } from '../sporsmal-utils'
 import UndersporsmalListe from '../undersporsmal/undersporsmal-liste'
 import { SpmProps } from '../sporsmal-form/sporsmal-form'
 import { parserWithReplace } from '../../../utils/html-react-parser-utils'
+import { PaskeferieInfo } from '../../hjelpetekster/paaskeferie/paskeferie-info'
 
 const JaNeiStor = ({ sporsmal }: SpmProps) => {
     const {
@@ -55,8 +55,6 @@ const JaNeiStor = ({ sporsmal }: SpmProps) => {
                             key={sporsmal.id}
                         >
                             <GuidepanelUnderSporsmalstekst sporsmal={sporsmal} />
-
-                            <PaskeHjelpetekst sporsmal={sporsmal} />
 
                             <EkspanderbarHjelp sporsmal={sporsmal} />
                             <Radio
@@ -104,7 +102,11 @@ const JaNeiStor = ({ sporsmal }: SpmProps) => {
                     leave="undersporsmal--skjul"
                     start="undersporsmal"
                 >
-                    <UndersporsmalListe oversporsmal={sporsmal} oversporsmalSvar={watchJaNei} />
+                    <>
+                        <UndersporsmalListe oversporsmal={sporsmal} oversporsmalSvar={watchJaNei} />
+
+                        <PaskeferieInfo sporsmal={sporsmal} jaNeiSvar={watchJaNei} />
+                    </>
                 </AnimateOnMount>
             </div>
         </>

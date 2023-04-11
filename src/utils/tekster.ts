@@ -23,7 +23,6 @@ import ViktigInformasjonTekster from '../components/soknad-intro/viktig-informas
 import SoknadMedToDelerTekster from '../components/soknad-med-to-deler/soknad-med-to-deler-tekster'
 import SoknaderTekster from '../components/soknader/soknader-tekster'
 import TeaserTekster from '../components/soknader/teaser/teaser-tekster'
-import BendiksenTekster from '../components/sporsmal/bendiksen/bendiksen-tekster'
 import GuidepanelTekster from '../components/sporsmal/guidepanel/guidepanel-tekster'
 import { EkspanderbarHjelpTekster } from '../components/hjelpetekster/ekspanderbar-hjelp/ekspanderbar-hjelp-tekst'
 import { EndringUtenEndringTekster } from '../components/sporsmal/endring-uten-endring/endring-uten-endring-tekster'
@@ -60,7 +59,6 @@ const tekster = {
     ...SoknadMedToDelerTekster,
     ...ViktigInformasjonTekster,
     ...FristSykepengerTekster,
-    ...BendiksenTekster,
     ...EgenmeldingsdagerArbeidsgiverTekster,
 }
 
