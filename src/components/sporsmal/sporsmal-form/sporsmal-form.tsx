@@ -108,12 +108,13 @@ const SporsmalForm = () => {
                     body: JSON.stringify(sporsmalToRS(sporsmal)),
                     headers: { 'Content-Type': 'application/json' },
                 },
-                (response) => {
+                (response, requestId, defaultErrorHandler) => {
                     if (response.status === 400) {
                         fikk400 = true
                         setFeilState(true)
                     }
                     restFeilet = true
+                    defaultErrorHandler()
                 },
             )
         } catch (e: any) {
