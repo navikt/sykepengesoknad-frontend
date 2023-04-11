@@ -1,5 +1,4 @@
 import { v4 as uuidv4 } from 'uuid'
-import { logger } from '@navikt/next-logger'
 
 import { feilmeldingerUrl } from './environment'
 
@@ -82,7 +81,7 @@ type Payload = {
 export const fetchJsonMedRequestId = async (url: string, options: RequestInit = {}, errorHandler?: ErrorHandler) => {
     const fetchResult = await fetchMedRequestId(url, options, errorHandler)
     const response = fetchResult.response
-    // Kloner reponse sånn at den kan konsumere flere ganger siden kall til .json() og .text() konsumerer data.
+    // Kloner reponse sånn at den kan konsumeres flere ganger siden kall til .json() og .text() konsumerer data.
     const clonedResponse = response.clone()
 
     try {
@@ -97,16 +96,14 @@ export const fetchJsonMedRequestId = async (url: string, options: RequestInit = 
             contentLength: parseInt(response.headers.get('Content-Length') || '0'),
         }
 
+        // Vi vil ikke at lagring av payload skal påvirke noe.
         try {
             await fetch(`${feilmeldingerUrl()}/api/v1/feilmelding`, {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify(payload),
             })
-            logger.info('Sendt payload til flex-frontend-feilmeldinger med x_request_id: ' + fetchResult.requestId)
-        } catch (e) {
-            logger.error(e, 'Feilet ved sending av payload til backend.')
-        }
+        } catch (e) {}
 
         throw new FetchError(
             `${e} - Kall til url: ${options.method || 'GET'} ${url} og x_request_id: ${
