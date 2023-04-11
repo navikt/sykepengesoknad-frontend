@@ -1,4 +1,4 @@
-import { BodyLong, RadioGroup, Radio, Alert, BodyShort, Label } from '@navikt/ds-react'
+import { BodyLong, RadioGroup, Radio } from '@navikt/ds-react'
 import React from 'react'
 import { useFormContext, Controller } from 'react-hook-form'
 
@@ -14,6 +14,7 @@ import { hentFeilmelding, sporsmalIdListe } from '../sporsmal-utils'
 import UndersporsmalListe from '../undersporsmal/undersporsmal-liste'
 import { SpmProps } from '../sporsmal-form/sporsmal-form'
 import { parserWithReplace } from '../../../utils/html-react-parser-utils'
+import { PaskeferieInfo } from '../../hjelpetekster/paaskeferie/paskeferie-info'
 
 const JaNeiStor = ({ sporsmal }: SpmProps) => {
     const {
@@ -90,19 +91,6 @@ const JaNeiStor = ({ sporsmal }: SpmProps) => {
                         </BodyLong>
                     )}
                 />
-
-                <Vis
-                    hvis={sporsmal?.tag === TagTyper.FERIE_V2 && watchJaNei == 'JA'} //TODO også sjekk at det er over påsken
-                    render={() => (
-                        <Alert variant={'info'} className={'mt-8'}>
-                            <Label as="h2">Jeg var syk på de røde dagene i påsken. Er det ferie?</Label>
-                            <BodyShort className={'mt-2'}>
-                                {`En offentlig helligdag ("rød dag") regnes ikke som en feriedag, med mindre du har avtalt
-                                med arbeidsgiveren din at du skal ta ut ferie på en rød dag.`}
-                            </BodyShort>
-                        </Alert>
-                    )}
-                />
             </div>
 
             <FeilLokal sporsmal={sporsmal} />
@@ -114,7 +102,11 @@ const JaNeiStor = ({ sporsmal }: SpmProps) => {
                     leave="undersporsmal--skjul"
                     start="undersporsmal"
                 >
-                    <UndersporsmalListe oversporsmal={sporsmal} oversporsmalSvar={watchJaNei} />
+                    <>
+                        <UndersporsmalListe oversporsmal={sporsmal} oversporsmalSvar={watchJaNei} />
+
+                        <PaskeferieInfo sporsmal={sporsmal} jaNeiSvar={watchJaNei} />
+                    </>
                 </AnimateOnMount>
             </div>
         </>
