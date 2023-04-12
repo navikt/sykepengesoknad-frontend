@@ -1,5 +1,5 @@
-import { BodyLong, Button, Heading, Modal } from "@navikt/ds-react"
-import { useEffect, useState } from "react"
+import { BodyLong, Button, Heading, Modal } from '@navikt/ds-react'
+import { useEffect, useState } from 'react'
 
 interface HjelpetekstPopupProps {
     inlinetekst: React.ReactNode
@@ -39,4 +39,3 @@ export const HjelpetekstModal = (props: HjelpetekstPopupProps) => {
         </>
     )
 }
-

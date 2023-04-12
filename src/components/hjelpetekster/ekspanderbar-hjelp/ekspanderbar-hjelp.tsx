@@ -12,6 +12,7 @@ import { RouteParams } from '../../../app'
 import useSoknad from '../../../hooks/useSoknad'
 import { logEvent } from '../../amplitude/amplitude'
 import { parserWithReplace } from '../../../utils/html-react-parser-utils'
+
 import { AndreInntektskilderBody } from './andre-inntektskilder-hjelp'
 import { EkspanderbarHjelpTekster } from './ekspanderbar-hjelp-tekst'
 
@@ -71,7 +72,6 @@ export const EkspanderbarHjelp = ({ sporsmal }: SpmProps) => {
             return <AndreInntektskilderBody />
         }
 
-        
         return <BodyLong>{parserWithReplace(tekst(`ekspanderbarhjelp.${nokkel}.innhold` as any))}</BodyLong>
     }
 
@@ -124,12 +124,4 @@ const YrkesskadeBody = () => {
             <BodyLong className={'mt-4'}>{EkspanderbarHjelpTekster['ekspanderbarhjelp.yrkesskade.body3']}</BodyLong>
         </>
     )
-
-
-    
 }
-
-
-
-
-
