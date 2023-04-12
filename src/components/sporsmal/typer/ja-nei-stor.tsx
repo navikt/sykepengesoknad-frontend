@@ -43,44 +43,44 @@ const JaNeiStor = ({ sporsmal }: SpmProps) => {
         return false
     }
 
-    interface HjelpetekstPopupProps {
-        inlinetekst: React.ReactNode
-        tittel: string
-        children: React.ReactNode
-    }
+    // interface HjelpetekstPopupProps {
+    //     inlinetekst: React.ReactNode
+    //     tittel: string
+    //     children: React.ReactNode
+    // }
 
-    const HjelpetekstModal = (props: HjelpetekstPopupProps) => {
-        const { inlinetekst, tittel, children } = props
-        const [open, setOpen] = useState(false)
+    // const HjelpetekstModal = (props: HjelpetekstPopupProps) => {
+    //     const { inlinetekst, tittel, children } = props
+    //     const [open, setOpen] = useState(false)
 
-        useEffect(() => {
-            Modal.setAppElement('#__next')
-        }, [])
+    //     useEffect(() => {
+    //         Modal.setAppElement('#__next')
+    //     }, [])
 
-        return (
-            <>
-                <a onClick={() => setOpen(true)} className="lenkeknapp">
-                    {inlinetekst}
-                </a>
-                <Modal
-                    open={open}
-                    aria-label="Modal demo"
-                    onClose={() => setOpen((x) => !x)}
-                    aria-labelledby="modal-heading"
-                >
-                    <Modal.Content style={{ maxWidth: '360px' }}>
-                        <Heading size="small" level="3" className="pb-4">
-                            {tittel}
-                        </Heading>
-                        <BodyLong>{children}</BodyLong>
-                        <div className="mt-4 flex justify-end">
-                            <Button onClick={() => setOpen(false)}>OK</Button>
-                        </div>
-                    </Modal.Content>
-                </Modal>
-            </>
-        )
-    }
+    //     return (
+    //         <>
+    //             <a onClick={() => setOpen(true)} className="lenkeknapp">
+    //                 {inlinetekst}
+    //             </a>
+    //             <Modal
+    //                 open={open}
+    //                 aria-label="Modal demo"
+    //                 onClose={() => setOpen((x) => !x)}
+    //                 aria-labelledby="modal-heading"
+    //             >
+    //                 <Modal.Content style={{ maxWidth: '360px' }}>
+    //                     <Heading size="small" level="3" className="pb-4">
+    //                         {tittel}
+    //                     </Heading>
+    //                     <BodyLong>{children}</BodyLong>
+    //                     <div className="mt-4 flex justify-end">
+    //                         <Button onClick={() => setOpen(false)}>OK</Button>
+    //                     </div>
+    //                 </Modal.Content>
+    //             </Modal>
+    //         </>
+    //     )
+    // }
 
     // const HjelpetekstPopup = (props: HjelpetekstPopupProps) => {
     //     const { inlinetekst, tittel, children } = props
@@ -122,7 +122,7 @@ const JaNeiStor = ({ sporsmal }: SpmProps) => {
 
                             <PaskeHjelpetekst sporsmal={sporsmal} />
 
-                            <Vis
+                            {/* <Vis
                                 hvis={sporsmal.tag === TagTyper.ANDRE_INNTEKTSKILDER_V2}
                                 render={() => (
                                     <ReadMore header="Hva betyr dette?" className="mt-4 mb-8 w-full">
@@ -179,7 +179,7 @@ frilans?"
                                         </BodyLong>
                                     </ReadMore>
                                 )}
-                            />
+                            /> */}
 
                             <EkspanderbarHjelp sporsmal={sporsmal} />
 

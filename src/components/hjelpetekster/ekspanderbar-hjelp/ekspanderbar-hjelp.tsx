@@ -1,4 +1,4 @@
-import { BodyLong, Link, ReadMore } from '@navikt/ds-react'
+import { BodyLong, BodyShort, Button, Heading, Link, Modal, ReadMore } from '@navikt/ds-react'
 import React, { useEffect, useState } from 'react'
 import { useParams } from 'react-router'
 
@@ -12,7 +12,7 @@ import { RouteParams } from '../../../app'
 import useSoknad from '../../../hooks/useSoknad'
 import { logEvent } from '../../amplitude/amplitude'
 import { parserWithReplace } from '../../../utils/html-react-parser-utils'
-
+import { AndreInntektskilderBody } from './andre-inntektskilder-hjelp'
 import { EkspanderbarHjelpTekster } from './ekspanderbar-hjelp-tekst'
 
 export const EkspanderbarHjelp = ({ sporsmal }: SpmProps) => {
@@ -66,6 +66,12 @@ export const EkspanderbarHjelp = ({ sporsmal }: SpmProps) => {
         if (sporsmal.tag == TagTyper.YRKESSKADE) {
             return <YrkesskadeBody />
         }
+
+        if (sporsmal.tag == TagTyper.ANDRE_INNTEKTSKILDER_V2) {
+            return <AndreInntektskilderBody />
+        }
+
+        
         return <BodyLong>{parserWithReplace(tekst(`ekspanderbarhjelp.${nokkel}.innhold` as any))}</BodyLong>
     }
 
@@ -118,4 +124,12 @@ const YrkesskadeBody = () => {
             <BodyLong className={'mt-4'}>{EkspanderbarHjelpTekster['ekspanderbarhjelp.yrkesskade.body3']}</BodyLong>
         </>
     )
+
+
+    
 }
+
+
+
+
+
