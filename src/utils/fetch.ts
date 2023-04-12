@@ -84,9 +84,9 @@ export const fetchJsonMedRequestId = async (url: string, options: RequestInit = 
     // Kloner reponse sånn at den kan konsumeres flere ganger siden kall til .json() og .text() konsumerer data.
     const clonedResponse = response.clone()
 
-    // Guard for å sjekke at response er OK før vi prøver å parse JSON. defaultErrorHandler i fetchMedRequestId()
-    // forhindrer normalt at det skal kunne skje ved å kaste en exception, men den funksjonaliteten kan ikke garanteres hvis
-    // custom error handlers er brukt.
+    // Guard som sjekker response er OK før vi prøver å parse JSON. defaultErrorHandler i fetchMedRequestId()
+    // forhindrer normalt at det skal kunne skje ved å kaste en exception, men det kan ikke garanteres hvis
+    // en custom errorHandler er brukt.
     if (!response.ok) {
         throw new Error(
             `Response er ${response.status}, så vi parser ikke JSON for til url: ${

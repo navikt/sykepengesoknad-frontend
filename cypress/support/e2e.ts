@@ -108,8 +108,8 @@ const lyttTilNettverksKall = (a: any) => {
             return
         }
 
-        // Forhndrer at test feiler på grunn av kall til lagring av JSON som feiler.
-        if (url.includes('/syk/feilmeldinger')) {
+        // Forhindrer at test feiler på grunn av kall til lagring av JSON som feiler.
+        if (url.includes('api/v1/feilmelding')) {
             return
         }
 
