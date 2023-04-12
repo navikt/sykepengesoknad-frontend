@@ -68,7 +68,6 @@ const nextConfig = {
         amplitudeEnabled: process.env.AMPLITUDE_ENABLED,
         environment: process.env.ENVIRONMENT,
         vedlikehold: process.env.VEDLIKEHOLD,
-        feilmeldingerUrl: process.env.FEILMELDINGER_URL,
     },
 }
 
