@@ -1,4 +1,4 @@
-import { BodyLong } from '@navikt/ds-react'
+import { BodyLong, Link } from '@navikt/ds-react'
 
 import { EkspanderbarHjelpTekster } from './ekspanderbar-hjelp-tekst'
 

@@ -1,8 +1,5 @@
-import { BodyLong, RadioGroup, Radio, ReadMore, BodyShort, HelpText, Heading, Modal } from '@navikt/ds-react'
-import React, { useEffect } from 'react'
+import { BodyLong, RadioGroup, Radio } from '@navikt/ds-react'
 import { useFormContext, Controller } from 'react-hook-form'
-import { Button, Popover } from '@navikt/ds-react'
-import { useRef, useState } from 'react'
 
 import { TagTyper } from '../../../types/enums'
 import { getLedetekst, tekst } from '../../../utils/tekster'
@@ -43,68 +40,6 @@ const JaNeiStor = ({ sporsmal }: SpmProps) => {
         return false
     }
 
-    // interface HjelpetekstPopupProps {
-    //     inlinetekst: React.ReactNode
-    //     tittel: string
-    //     children: React.ReactNode
-    // }
-
-    // const HjelpetekstModal = (props: HjelpetekstPopupProps) => {
-    //     const { inlinetekst, tittel, children } = props
-    //     const [open, setOpen] = useState(false)
-
-    //     useEffect(() => {
-    //         Modal.setAppElement('#__next')
-    //     }, [])
-
-    //     return (
-    //         <>
-    //             <a onClick={() => setOpen(true)} className="lenkeknapp">
-    //                 {inlinetekst}
-    //             </a>
-    //             <Modal
-    //                 open={open}
-    //                 aria-label="Modal demo"
-    //                 onClose={() => setOpen((x) => !x)}
-    //                 aria-labelledby="modal-heading"
-    //             >
-    //                 <Modal.Content style={{ maxWidth: '360px' }}>
-    //                     <Heading size="small" level="3" className="pb-4">
-    //                         {tittel}
-    //                     </Heading>
-    //                     <BodyLong>{children}</BodyLong>
-    //                     <div className="mt-4 flex justify-end">
-    //                         <Button onClick={() => setOpen(false)}>OK</Button>
-    //                     </div>
-    //                 </Modal.Content>
-    //             </Modal>
-    //         </>
-    //     )
-    // }
-
-    // const HjelpetekstPopup = (props: HjelpetekstPopupProps) => {
-    //     const { inlinetekst, tittel, children } = props
-    //     const buttonRef = useRef<HTMLAnchorElement>(null)
-    //     const [openState, setOpenState] = useState(false)
-    //     return (
-
-    //         <>
-    //             <a ref={buttonRef} onClick={() => setOpenState(true)} className="lenkeknapp">
-    //                 {inlinetekst}
-    //             </a>
-    //             <Popover open={openState} onClose={() => setOpenState(false)} anchorEl={buttonRef.current}>
-
-    //                 <Popover.Content                                                 className="w-48">
-    //                     <Heading size="small" level="3" className='pb-4'>
-    //                         {tittel}
-    //                     </Heading>
-    //                     <BodyLong>{children}</BodyLong>
-    //                     <Button onClick={() => setOpenState(false)}>OK</Button>
-    //                 </Popover.Content>
-    //             </Popover>
-    //         </>
-    //     )
-    // }
     return (
         <>
             <div className={'inputPanelGruppe' + (errors[sporsmal.id] ? ' skjemagruppe--feil' : '')}>
@@ -121,65 +56,6 @@ const JaNeiStor = ({ sporsmal }: SpmProps) => {
                             <GuidepanelUnderSporsmalstekst sporsmal={sporsmal} />
 
                             <PaskeHjelpetekst sporsmal={sporsmal} />
-
-                            {/* <Vis
-                                hvis={sporsmal.tag === TagTyper.ANDRE_INNTEKTSKILDER_V2}
-                                render={() => (
-                                    <ReadMore header="Hva betyr dette?" className="mt-4 mb-8 w-full">
-                                        <BodyShort spacing>
-                                            NAV trenger å vite om dine inntektskilder i sykmeldingsperioden for å kunne
-                                            beregne riktig utbetaling av sykepenger til deg. Arbeidsforhold som er
-                                            registrert på deg henter NAV fra offentlige registre.
-                                        </BodyShort>
-                                        <p className="pb-3">
-                                            Svar ja hvis du har begynt i ny jobb,{' '}
-                                            <HjelpetekstModal
-                                                inlinetekst="jobbet frilans"
-                                                tittel="Hva menes med
-frilans?"
-                                            >
-                                                <BodyShort className="pb-3">
-                                                    Du er frilanser når du mottar inntekt uten å være ansatt hos den du
-                                                    utfører oppdraget for, eller har et enkeltpersonsforetak.
-                                                </BodyShort>
-
-                                                <BodyShort className="pb-3">
-                                                    Eksempler på frilans inntekter kan være: Kommunal omsorgsstønad,
-                                                    Fosterhjemsgodtgjørelse, Dagmamma, Styreverv.
-                                                </BodyShort>
-                                            </HjelpetekstModal>
-                                            , eller mottatt annen{' '}
-                                            <HjelpetekstModal
-                                                inlinetekst="pensjonsgivende inntekt"
-                                                tittel="Hva er pensjonsgivende inntekt?"
-                                            >
-                                                <BodyShort spacing>
-                                                    Pensjonsgivende inntekt er som oftest inntekt du har mottatt for
-                                                    arbeid du har utført og betalt skatt av.{' '}
-                                                </BodyShort>
-                                            </HjelpetekstModal>{' '}
-                                            i sykemeldingsperioden som ikke har blitt registrert enda.
-                                        </p>
-
-                                        <BodyLong className="pb-3">
-                                            <BodyShort className="pb-3"> Svar nei, hvis du mottar:</BodyShort>
-
-                                            <ul className="pl-2">
-                                                <li>
-                                                    Stønader fra folketrygden (uføretrygd, foreldrepenger, AAP,
-                                                    pleiepenger osv.)
-                                                </li>
-                                                <li>
-                                                    Utbetalinger fra private eller offentlige forsikringsordninger (som
-                                                    AFP).
-                                                </li>
-                                                <li>Inntekt fra salg av personlige gjenstander</li>
-                                                <li>Lotterigevinster</li>
-                                            </ul>
-                                        </BodyLong>
-                                    </ReadMore>
-                                )}
-                            /> */}
 
                             <EkspanderbarHjelp sporsmal={sporsmal} />
 

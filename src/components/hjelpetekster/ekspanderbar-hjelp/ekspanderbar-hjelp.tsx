@@ -1,4 +1,4 @@
-import { BodyLong, BodyShort, Button, Heading, Link, Modal, ReadMore } from '@navikt/ds-react'
+import { BodyLong, ReadMore } from '@navikt/ds-react'
 import React, { useEffect, useState } from 'react'
 import { useParams } from 'react-router'
 
@@ -15,6 +15,8 @@ import { parserWithReplace } from '../../../utils/html-react-parser-utils'
 
 import { AndreInntektskilderBody } from './andre-inntektskilder-body'
 import { EkspanderbarHjelpTekster } from './ekspanderbar-hjelp-tekst'
+import { TilbakeIArbeidHjelpBody } from './tilbake-i-arbeid-hjelp-body'
+import { YrkesskadeBody } from './yrkesskad-body'
 
 export const EkspanderbarHjelp = ({ sporsmal }: SpmProps) => {
     const { id } = useParams<RouteParams>()
