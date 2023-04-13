@@ -8,7 +8,7 @@ import { RSSoknadstatus } from '../../types/rs-types/rs-soknadstatus'
 import { RSSoknadstype } from '../../types/rs-types/rs-soknadstype'
 import { jsonDeepCopy } from '../../utils/json-deep-copy'
 
-import { arbeidstaker, arbeidstakerGradert, opplaering, soknaderOpplaering } from './data/opplaering'
+import { arbeidstaker, arbeidstakerGradert } from './data/opplaering'
 import { feilVedSlettingAvKvittering } from './data/reisetilskudd'
 import {
     arbeidstakerDeltPeriodeForsteUtenforArbeidsgiverperiodeKvittering,
@@ -21,7 +21,7 @@ import {
     soknadSomTriggerFeilStatusForOppdaterSporsmal,
     soknadSomTriggerSporsmalFinnesIkkeISoknad,
 } from './data/soknader-integration'
-import { Persona } from './personas'
+import { opplaering, Persona, soknaderOpplaering } from './personas'
 import { personas } from './testperson'
 import { kortFomTomArbeidstakerSoknad } from './data/kort-soknad'
 

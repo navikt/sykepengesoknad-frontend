@@ -2,13 +2,36 @@ import { RSSoknad } from '../../types/rs-types/rs-soknad'
 import { Sykmelding } from '../../types/sykmelding'
 import { jsonDeepCopy } from '../../utils/json-deep-copy'
 
-import { soknaderOpplaering } from './data/opplaering'
-import { soknaderReisetilskudd } from './data/reisetilskudd'
+import { arbeidsledig, arbeidstaker, arbeidstakerGradert, behandlingsdager, fremtidigSoknad } from './data/opplaering'
+import { gradertReisetilskudd, nyttReisetilskudd, soknaderReisetilskudd } from './data/reisetilskudd'
 import {
+    arbeidsledigKvittering,
+    arbeidstakerDeltPeriodeForsteUtenforArbeidsgiverperiodeKvittering,
+    arbeidstakerInnenforArbeidsgiverperiodeKvittering,
     arbeidstakerMedOppholdForsteUtenforArbeidsgiverperiodeKvittering,
-    soknaderIntegration,
+    arbeidstakerMedOppholdKvittering,
+    arbeidstakersoknadMedUtenlandsoppholdSoktSykepenger,
+    arbeidstakerTilKorrigering,
+    arbeidstakerUtenforArbeidsgiverperiodeKvittering,
+    arbeidstakerUtenOppholdForsteUtenforArbeidsgiverperiodeKvittering,
+    arbeidstakerUtenOppholdKvittering,
+    avbruttSoknad,
+    delvisUtfylltArbeidsledig,
+    foranArbeidstakerMedOppholdKvittering,
+    oppholdUtlandKvittering,
+    selvstendigKvittering,
+    sendtArbeidsledig,
+    sendtArbeidsledigKvittering,
+    sok6,
+    soknadSomTriggerFeilStatusForOppdaterSporsmal,
+    soknadSomTriggerSporsmalFinnesIkkeISoknad,
+    utgattSoknad,
 } from './data/soknader-integration'
 import { syk7, sykmeldinger } from './data/sykmeldinger'
+import { brukertestSoknad } from './data/brukertest'
+import { veldigLangSoknad } from './data/veldig-land-soknad'
+import { oppholdUtland } from './data/opphold-utland'
+import { frilanser } from './data/frilanser'
 
 export interface Persona {
     soknader: RSSoknad[]
@@ -47,6 +70,50 @@ export const harIkkeKontonummer: Persona = {
     sykmeldinger: [syk7],
     kontonummer: undefined,
 }
+
+export const soknaderIntegration = [
+    utgattSoknad,
+    arbeidstakersoknadMedUtenlandsoppholdSoktSykepenger,
+    sendtArbeidsledig,
+    avbruttSoknad,
+    veldigLangSoknad,
+    arbeidsledigKvittering,
+    arbeidstakerTilKorrigering,
+    sendtArbeidsledigKvittering,
+    oppholdUtlandKvittering,
+    selvstendigKvittering,
+    foranArbeidstakerMedOppholdKvittering,
+    delvisUtfylltArbeidsledig,
+    arbeidstakerInnenforArbeidsgiverperiodeKvittering,
+    arbeidstakerUtenforArbeidsgiverperiodeKvittering,
+    arbeidstakerDeltPeriodeForsteUtenforArbeidsgiverperiodeKvittering,
+    arbeidstakerUtenOppholdForsteUtenforArbeidsgiverperiodeKvittering,
+    arbeidstakerUtenOppholdKvittering,
+    sok6,
+    arbeidstakerMedOppholdForsteUtenforArbeidsgiverperiodeKvittering,
+    arbeidstakerMedOppholdKvittering,
+    soknadSomTriggerSporsmalFinnesIkkeISoknad,
+    soknadSomTriggerFeilStatusForOppdaterSporsmal,
+    brukertestSoknad,
+] as RSSoknad[]
+
+export const soknaderOpplaering = [
+    arbeidstakerGradert,
+    arbeidstaker,
+    arbeidsledig,
+    frilanser,
+    behandlingsdager,
+    oppholdUtland,
+    nyttReisetilskudd,
+    gradertReisetilskudd,
+    fremtidigSoknad,
+] as RSSoknad[]
+
+export const opplaering: Persona = {
+    soknader: soknaderOpplaering,
+    sykmeldinger: sykmeldinger,
+}
+
 export const alleData: Persona = {
     // Alle søknader filtrert på unik id
     soknader: [...soknaderIntegration, ...soknaderOpplaering, ...soknaderReisetilskudd].filter(
