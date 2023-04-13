@@ -31,7 +31,7 @@ export const brukertestSykmelding = new Sykmelding({
         mellomnavn: null,
         etternavn: 'BOLLE',
     },
-    mottattTidspunkt: '2022-09-07T22:00:00Z',
+    mottattTidspunkt: fom + 'T22:00:00Z',
     behandlingsutfall: { status: 'MANUAL_PROCESSING', ruleHits: [] },
     legekontorOrgnummer: '223456789',
     arbeidsgiver: { navn: hovedjobb, stillingsprosent: 100 },
@@ -58,7 +58,7 @@ export const brukertestSykmelding = new Sykmelding({
     ],
     sykmeldingStatus: {
         statusEvent: 'SENDT',
-        timestamp: '2022-11-17T15:45:33.551189Z',
+        timestamp: fom + 'T15:45:33.551189Z',
         arbeidsgiver: {
             orgnummer: '967170232',
             juridiskOrgnummer: '928497704',
@@ -103,7 +103,7 @@ export const brukertestSykmelding = new Sykmelding({
     meldingTilNAV: null,
     meldingTilArbeidsgiver: null,
     kontaktMedPasient: { kontaktDato: null, begrunnelseIkkeKontakt: null },
-    behandletTidspunkt: '2022-09-08T00:00:00Z',
+    behandletTidspunkt: fom + 'T00:00:00Z',
     behandler: {
         fornavn: 'Frida',
         mellomnavn: 'Perma',
