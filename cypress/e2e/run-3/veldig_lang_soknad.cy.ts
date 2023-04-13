@@ -1,4 +1,3 @@
-import { veldigLangSoknad } from '../../../src/data/mock/data/soknader-integration'
 import { Soknad } from '../../../src/types/types'
 import {
     setPeriodeFraTil,
@@ -10,6 +9,7 @@ import {
     velgDato,
 } from '../../support/utilities'
 import 'cypress-file-upload'
+import { veldigLangSoknad } from '../../../src/data/mock/data/veldig-land-soknad'
 
 describe('Tester støtte for gamle spørsmål', () => {
     //-----

@@ -1,7 +1,6 @@
 import { brukertest } from './data/brukertest'
 import { eldreUsendtSoknad, flereEldreUsendteSoknader } from './data/eldre-usendt-soknad'
 import { bareUtland } from './data/opphold-utland'
-import { opplaering } from './data/opplaering'
 import { reisetilskudd } from './data/reisetilskudd'
 import { enUsendtSykmelding, toUsendteSykmeldinger } from './data/usendte-sykmeldinger'
 import {
@@ -10,6 +9,7 @@ import {
     får500vedSendSoknad,
     harIkkeKontonummer,
     harKontonummer,
+    opplaering,
     Persona,
     utenData,
 } from './personas'
