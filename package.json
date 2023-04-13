@@ -10,7 +10,7 @@
         "@navikt/ds-tokens": "^2.8.12",
         "@navikt/nav-dekoratoren-moduler": "^1.9.0",
         "@navikt/next-api-proxy": "^2.2.0",
-        "@navikt/next-logger": "^1.14.0",
+        "@navikt/next-logger": "^1.18.0",
         "@tanstack/react-query": "^4.28.0",
         "@types/smoothscroll-polyfill": "^0.3.1",
         "classnames": "^2.3.2",
