@@ -1,5 +1,5 @@
-import { frilanser } from '../../../src/data/mock/data/opplaering'
 import { setPeriodeFraTil } from '../../support/utilities'
+import { frilanser } from '../../../src/data/mock/data/frilanser'
 
 describe('Tester frilansersøknad', () => {
     //-----

@@ -1,7 +1,6 @@
-import { soknaderOpplaering } from '../../../src/data/mock/data/opplaering'
 import { Soknad } from '../../../src/types/types'
 import { getFomFraSoknad, senesteSendtDato } from '../../../src/utils/sorter-soknader'
-import { soknaderIntegration } from '../../../src/data/mock/personas'
+import { soknaderIntegration, soknaderOpplaering } from '../../../src/data/mock/personas'
 
 const articleTilSoknad = (articles: any) => {
     const soknader: Soknad[] = []
