@@ -18,6 +18,7 @@ import { nyttArbeidUnderveisPerson } from './data/nytt-arbeidunderveis'
 import { utenlandskSykmelding } from './data/utenlandsk-sykmelding'
 import { yrkesskadePerson } from './data/yrkesskade'
 import { egenmeldingSykmeldingaPerson } from './data/egenmeldingsdager-i-sykmeldingen'
+import { selvstendigNaringsdrivende } from './data/naringsdrivende'
 
 export interface StringFunctionMap {
     [index: string]: () => Persona
@@ -36,6 +37,7 @@ export const personas: StringFunctionMap = {
     'en-eldre-usendt-soknad': () => eldreUsendtSoknad,
     'to-eldre-usendte-soknader': () => flereEldreUsendteSoknader,
     'bare-utland': () => bareUtland,
+    'selvstendig-naringsdrivende': () => selvstendigNaringsdrivende,
     brukertest: () => brukertest,
     'har kontonummer': () => harKontonummer,
     'har ikke kontonummer': () => harIkkeKontonummer,
