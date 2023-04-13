@@ -13,7 +13,7 @@ import useSoknad from '../../../hooks/useSoknad'
 import { logEvent } from '../../amplitude/amplitude'
 import { parserWithReplace } from '../../../utils/html-react-parser-utils'
 
-import { AndreInntektskilderBody } from './andre-inntektskilder-hjelp'
+import { AndreInntektskilderBody } from './andre-inntektskilder-body'
 import { EkspanderbarHjelpTekster } from './ekspanderbar-hjelp-tekst'
 
 export const EkspanderbarHjelp = ({ sporsmal }: SpmProps) => {
@@ -94,34 +94,5 @@ export const EkspanderbarHjelp = ({ sporsmal }: SpmProps) => {
                 <EkspanderbarInnhold />
             </div>
         </ReadMore>
-    )
-}
-
-const TilbakeIArbeidHjelpBody = () => {
-    return (
-        <>
-            <BodyLong>{EkspanderbarHjelpTekster['ekspanderbarhjelp.tilbake_i_arbeid.body1']}</BodyLong>
-            <BodyLong className={'mt-4'}>
-                {EkspanderbarHjelpTekster['ekspanderbarhjelp.tilbake_i_arbeid.body2']}
-            </BodyLong>
-            <BodyLong className={'mt-4'}>
-                {EkspanderbarHjelpTekster['ekspanderbarhjelp.tilbake_i_arbeid.body3']}
-            </BodyLong>
-        </>
-    )
-}
-
-const YrkesskadeBody = () => {
-    return (
-        <>
-            <BodyLong>{EkspanderbarHjelpTekster['ekspanderbarhjelp.yrkesskade.body1']}</BodyLong>
-            <BodyLong className={'mt-4'}>
-                {EkspanderbarHjelpTekster['ekspanderbarhjelp.yrkesskade.body2']}
-                <Link href={'https://www.nav.no/yrkesskade'} target={'_blank'}>
-                    {EkspanderbarHjelpTekster['ekspanderbarhjelp.yrkesskade.hva-er-lenke']}
-                </Link>
-            </BodyLong>
-            <BodyLong className={'mt-4'}>{EkspanderbarHjelpTekster['ekspanderbarhjelp.yrkesskade.body3']}</BodyLong>
-        </>
     )
 }
