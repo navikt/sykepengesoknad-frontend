@@ -48,7 +48,3 @@ export function minSideUrl() {
 export function vedlikehold(): boolean {
     return publicRuntimeConfig.vedlikehold === 'true'
 }
-
-export function feilmeldingerUrl() {
-    return publicRuntimeConfig.feilmeldingerUrl
-}

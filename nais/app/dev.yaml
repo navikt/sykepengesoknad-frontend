@@ -12,4 +12,3 @@ env:
   SYKEPENGESOKNAD_BACKEND_CLIENT_ID: dev-gcp:flex:sykepengesoknad-backend
   SYKEPENGESOKNAD_KVITTERINGER_CLIENT_ID: dev-gcp:flex:sykepengesoknad-kvitteringer
   SOKOS_KONTOREGISTER_PERSON_CLIENT_ID: dev-gcp:okonomi:sokos-kontoregister-person
-  FEILMELDINGER_URL: "https://www.ekstern.dev.nav.no/syk/feilmeldinger"
