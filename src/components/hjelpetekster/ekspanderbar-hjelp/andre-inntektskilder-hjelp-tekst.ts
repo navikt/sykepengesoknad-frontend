@@ -13,7 +13,7 @@ export const AndreInntektskilderHjelpTekster = {
     'modal2.inlinetekst': 'pensjonsgivende inntekt',
     'modal2.tekst':
         'Pensjonsgivende inntekt er som oftest inntekt du har mottatt for arbeid du har utført og betalt skatt av.',
-    'hjelpetekst.del3': '            i sykemeldingsperioden som ikke har blitt registrert enda.',
+    'hjelpetekst.del3': 'i sykemeldingsperioden som ikke har blitt registrert enda.',
     'liste.tittel': 'Svar nei, hvis du mottar:',
     'liste.listepunkt1': 'Stønader fra folketrygden (uføretrygd, foreldrepenger, AAP, pleiepenger osv.)',
     'liste.listepunkt2': 'Utbetalinger fra private eller offentlige forsikringsordninger (som AFP).',
