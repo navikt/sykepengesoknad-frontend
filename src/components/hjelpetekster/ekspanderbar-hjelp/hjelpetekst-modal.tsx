@@ -1,4 +1,4 @@
-import { Button, Heading, Modal } from '@navikt/ds-react'
+import { BodyLong, Button, Heading, Modal } from '@navikt/ds-react'
 import { useEffect, useState } from 'react'
 
 import styles from './hjelpetekst-modal.module.css'
@@ -22,7 +22,11 @@ export const HjelpetekstModal = (props: HjelpetekstPopupProps) => {
                 {inlinetekst}
             </a>
 
-            <Modal open={open} onClose={() => setOpen((x) => !x)} aria-labelledby="modal-heading">
+            <Modal
+                open={open}
+                onClose={() => setOpen((x) => !x)}
+                aria-labelledby="modal-heading"
+            >
                 <Modal.Content style={{ maxWidth: '360px' }}>
                     <Heading size="small" level="3" className="pb-4" id="modal-heading">
                         {tittel}
