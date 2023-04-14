@@ -2,7 +2,7 @@ export const AndreInntektskilderHjelpTekster = {
     'ekspanderbarhjelp.andre_inntektskilder_v2.tittel': 'Hva betyr dette?',
     'hjelpetekst.del1':
         'NAV trenger å vite om dine inntektskilder i sykmeldingsperioden for å kunne beregne riktig utbetaling av sykepenger til deg. Arbeidsforhold som er registrert på deg henter NAV fra offentlige registre.',
-    'hjelpetekst.del2': 'Svar ja hvis du har begynt i ny jobb, ',
+    'hjelpetekst.del2': 'Svar ja, hvis du har begynt i ny jobb, ',
     'modal1.del1':
         'Du er frilanser når du mottar inntekt uten å være ansatt hos den du utfører oppdraget for, eller har et enkeltpersonsforetak.',
     'modal1.del2':
@@ -13,10 +13,11 @@ export const AndreInntektskilderHjelpTekster = {
     'modal2.inlinetekst': 'pensjonsgivende inntekt',
     'modal2.tekst':
         'Pensjonsgivende inntekt er som oftest inntekt du har mottatt for arbeid du har utført og betalt skatt av.',
-    'hjelpetekst.del3': 'i sykemeldingsperioden som ikke har blitt registrert enda.',
+    'hjelpetekst.del3': ', eller mottatt annen',
+    'hjelpetekst.del4': 'i sykemeldingsperioden som ikke har blitt registrert enda.',
     'liste.tittel': 'Svar nei, hvis du mottar:',
     'liste.listepunkt1': 'Stønader fra folketrygden (uføretrygd, foreldrepenger, AAP, pleiepenger osv.)',
-    'liste.listepunkt2': 'Utbetalinger fra private eller offentlige forsikringsordninger (som AFP).',
+    'liste.listepunkt2': 'Utbetalinger fra private eller offentlige forsikringsordninger (som AFP)',
     'liste.listepunkt3': 'Inntekt fra salg av personlige gjenstander',
     'liste.listepunkt4': 'Lotterigevinster',
 }
