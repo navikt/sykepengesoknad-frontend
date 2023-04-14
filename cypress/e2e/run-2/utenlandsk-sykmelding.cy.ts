@@ -10,7 +10,7 @@ import {
 
 describe('Tester søknad til utenlandsk sykmelding', () => {
     before(() => {
-        cy.visit(`http://localhost:8080/syk/sykepengesoknad/soknader/${soknad.id}/1?testperson=utenlandsk%20sykmelding`)
+        cy.visit(`/syk/sykepengesoknad/soknader/${soknad.id}/1?testperson=utenlandsk%20sykmelding`)
     })
 
     it('Ansvarserklæring', function () {

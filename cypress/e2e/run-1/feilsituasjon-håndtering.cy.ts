@@ -6,7 +6,7 @@ import {
 describe('Tester feilsituasjoner ', () => {
     describe('Tester SPORSMAL_FINNES_IKKE_I_SOKNAD ', () => {
         before(() => {
-            cy.visit('http://localhost:8080/syk/sykepengesoknad?testperson=alle-soknader')
+            cy.visit('/syk/sykepengesoknad?testperson=alle-soknader')
         })
 
         it('Laster startside og åpner søknad', function () {
@@ -24,7 +24,7 @@ describe('Tester feilsituasjoner ', () => {
         })
 
         it('Vi havner på feilstate siden', function () {
-            cy.url().should('equal', 'http://localhost:8080/syk/sykepengesoknad/')
+            cy.url().should('equal', Cypress.config().baseUrl + '/syk/sykepengesoknad/')
             cy.contains('Ooops! Her har det skjedd noe rart')
             cy.contains('Du må laste inn siden på nytt for å fortsette')
 
@@ -35,7 +35,7 @@ describe('Tester feilsituasjoner ', () => {
 
     describe('Tester FEIL_STATUS_FOR_OPPDATER_SPORSMAL ', () => {
         before(() => {
-            cy.visit('http://localhost:8080/syk/sykepengesoknad?testperson=alle-soknader')
+            cy.visit('/syk/sykepengesoknad?testperson=alle-soknader')
         })
 
         it('Vi går inn på en annen søknad som gir en annen feil', function () {
@@ -52,7 +52,7 @@ describe('Tester feilsituasjoner ', () => {
         })
 
         it('Vi havner på feilstate siden pga FEIL_STATUS_FOR_OPPDATER_SPORSMAL', function () {
-            cy.url().should('equal', 'http://localhost:8080/syk/sykepengesoknad/')
+            cy.url().should('equal', Cypress.config().baseUrl + '/syk/sykepengesoknad/')
             cy.contains('Ooops! Her har det skjedd noe rart')
             cy.contains('Du må laste inn siden på nytt for å fortsette')
 
@@ -62,9 +62,7 @@ describe('Tester feilsituasjoner ', () => {
     })
     describe('Tester 400 ved send søknad', () => {
         before(() => {
-            cy.visit(
-                'http://localhost:8080/syk/sykepengesoknad/soknader/400-ved-send-soknad/2?testperson=http%20400%20ved%20send%20soknad',
-            )
+            cy.visit('/syk/sykepengesoknad/soknader/400-ved-send-soknad/2?testperson=http%20400%20ved%20send%20soknad')
         })
         it('Når vi sender søknad som får 400 får vi en feilmelding som lar oss refreshe', function () {
             cy.contains(
@@ -76,16 +74,15 @@ describe('Tester feilsituasjoner ', () => {
             ).click()
             cy.url().should(
                 'equal',
-                'http://localhost:8080/syk/sykepengesoknad/soknader/400-ved-send-soknad/1?testperson=http%20400%20ved%20send%20soknad',
+                Cypress.config().baseUrl +
+                    '/syk/sykepengesoknad/soknader/400-ved-send-soknad/1?testperson=http%20400%20ved%20send%20soknad',
             )
         })
     })
 
     describe('Tester 500 ved send søknad', () => {
         before(() => {
-            cy.visit(
-                'http://localhost:8080/syk/sykepengesoknad/soknader/500-ved-send-soknad/2?testperson=http%20500%20ved%20send%20soknad',
-            )
+            cy.visit('/syk/sykepengesoknad/soknader/500-ved-send-soknad/2?testperson=http%20500%20ved%20send%20soknad')
         })
         it('Når vi sender søknad som får 500 får vi en feilmelding', function () {
             cy.contains(
@@ -95,7 +92,8 @@ describe('Tester feilsituasjoner ', () => {
             cy.contains('Beklager, det oppstod en teknisk feil.').click()
             cy.url().should(
                 'equal',
-                'http://localhost:8080/syk/sykepengesoknad/soknader/500-ved-send-soknad/2?testperson=http%20500%20ved%20send%20soknad',
+                Cypress.config().baseUrl +
+                    '/syk/sykepengesoknad/soknader/500-ved-send-soknad/2?testperson=http%20500%20ved%20send%20soknad',
             )
         })
     })
