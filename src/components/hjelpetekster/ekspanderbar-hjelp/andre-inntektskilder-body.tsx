@@ -1,4 +1,4 @@
-import { BodyShort } from '@navikt/ds-react'
+import { BodyLong, BodyShort } from '@navikt/ds-react'
 
 import { HjelpetekstModal } from './hjelpetekst-modal'
 import { AndreInntektskilderHjelpTekster } from './andre-inntektskilder-hjelp-tekst'
@@ -7,7 +7,7 @@ export const AndreInntektskilderBody = () => {
     return (
         <>
             <BodyShort spacing>{AndreInntektskilderHjelpTekster['hjelpetekst.del1']}</BodyShort>
-            <BodyShort spacing>
+            <div>
                 {AndreInntektskilderHjelpTekster['hjelpetekst.del2']}
                 <HjelpetekstModal
                     inlinetekst={AndreInntektskilderHjelpTekster['modal1.inlinetekst']}
@@ -25,7 +25,7 @@ export const AndreInntektskilderBody = () => {
                     <BodyShort spacing>{AndreInntektskilderHjelpTekster['modal2.tekst']}</BodyShort>
                 </HjelpetekstModal>{' '}
                 {AndreInntektskilderHjelpTekster['hjelpetekst.del4']}{' '}
-            </BodyShort>
+            </div>
 
             <BodyShort className="pt-3"> {AndreInntektskilderHjelpTekster['liste.tittel']} </BodyShort>
             <BodyShort as="ul" className="pl-2 pt-3">
