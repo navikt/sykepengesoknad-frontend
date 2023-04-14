@@ -436,7 +436,7 @@ const besvarSoknad = () => {
     cy.contains('Send søknaden').click({ force: true })
 }
 
-    const inntil16dagerKvittering = () => {
+const inntil16dagerKvittering = () => {
     // Sendt datoer
     cy.get('.kvittering .navds-alert--success').should('contain', 'Søknaden er sendt')
     cy.get('.sendt-info .oppsummering__avkrysset').should('contain', 'arb')
