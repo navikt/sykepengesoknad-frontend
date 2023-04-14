@@ -17,8 +17,6 @@ const GuidepanelTekster = {
         'Du har kanskje avtalt med arbeidsgiveren din at du skal ha færre arbeidsoppgaver, men bruke lenger tid på dem enn vanlig? Da svarer du i prosent hvor stor mengde av arbeidsoppgavene dine du har utført.',
     'sykepengesoknad.ferie.bjorn':
         'Du lurer kanskje på hvorfor vi spør om ferie før du ble sykmeldt? Det er fordi vi må se om dette sykefraværet henger sammen med forrige periode du var syk.',
-    'sykepengesoknad.sykmelding-utdrag.oppdelt.bjorn':
-        'Sykmeldingen din er lang, derfor er den delt opp i flere søknader om sykepenger. Da kan du søke før hele perioden er ferdig, slik at du slipper å vente lenge på sykepengene. Du vil få en ny SMS eller e-post når neste søknad er klar.',
     'sykepengesoknad-utland.bjorn':
         '<strong>Er du statsborger i et land utenfor EU/EØS?</strong><br />Skal du reise <strong>innenfor</strong> EU/EØS, må du benytte <a href="https://www.nav.no/soknader/nb/person/til-eller-fra-norge/opphold-eller-arbeid-utenfor-norge/NAV%2008-09.07/brev">søknaden på papir.</a>\n',
     'sykepengesoknad-utland.skjema.bjorn':
