@@ -1,4 +1,4 @@
-import { BodyLong, BodyShort } from '@navikt/ds-react'
+import { BodyShort } from '@navikt/ds-react'
 
 import { HjelpetekstModal } from './hjelpetekst-modal'
 import { AndreInntektskilderHjelpTekster } from './andre-inntektskilder-hjelp-tekst'

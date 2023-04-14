@@ -1,5 +1,5 @@
-import { BodyLong, Button, Heading, Modal } from '@navikt/ds-react'
-import { useEffect, useState } from 'react'
+import { Button, Heading, Modal } from '@navikt/ds-react'
+import { useState } from 'react'
 
 import styles from './hjelpetekst-modal.module.css'
 interface HjelpetekstPopupProps {
@@ -12,21 +12,13 @@ export const HjelpetekstModal = (props: HjelpetekstPopupProps) => {
     const { inlinetekst, tittel, children } = props
     const [open, setOpen] = useState(false)
 
-    useEffect(() => {
-        Modal.setAppElement('#__next')
-    }, [])
-
     return (
         <>
             <a onClick={() => setOpen(true)} className={styles.lenkeknapp}>
                 {inlinetekst}
             </a>
 
-            <Modal
-                open={open}
-                onClose={() => setOpen((x) => !x)}
-                aria-labelledby="modal-heading"
-            >
+            <Modal open={open} onClose={() => setOpen((x) => !x)} aria-labelledby="modal-heading">
                 <Modal.Content style={{ maxWidth: '360px' }}>
                     <Heading size="small" level="3" className="pb-4" id="modal-heading">
                         {tittel}
