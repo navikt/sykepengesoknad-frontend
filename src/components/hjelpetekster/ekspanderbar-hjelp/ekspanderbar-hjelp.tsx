@@ -1,4 +1,4 @@
-import { BodyLong, Link, ReadMore } from '@navikt/ds-react'
+import { BodyLong, ReadMore } from '@navikt/ds-react'
 import React, { useEffect, useState } from 'react'
 import { useParams } from 'react-router'
 
@@ -13,7 +13,10 @@ import useSoknad from '../../../hooks/useSoknad'
 import { logEvent } from '../../amplitude/amplitude'
 import { parserWithReplace } from '../../../utils/html-react-parser-utils'
 
+import { AndreInntektskilderBody } from './andre-inntektskilder-body'
 import { EkspanderbarHjelpTekster } from './ekspanderbar-hjelp-tekst'
+import { TilbakeIArbeidHjelpBody } from './tilbake-i-arbeid-hjelp-body'
+import { YrkesskadeBody } from './yrkesskad-body'
 
 export const EkspanderbarHjelp = ({ sporsmal }: SpmProps) => {
     const { id } = useParams<RouteParams>()
@@ -66,6 +69,11 @@ export const EkspanderbarHjelp = ({ sporsmal }: SpmProps) => {
         if (sporsmal.tag == TagTyper.YRKESSKADE) {
             return <YrkesskadeBody />
         }
+
+        if (sporsmal.tag == TagTyper.ANDRE_INNTEKTSKILDER_V2) {
+            return <AndreInntektskilderBody />
+        }
+
         return <BodyLong>{parserWithReplace(tekst(`ekspanderbarhjelp.${nokkel}.innhold` as any))}</BodyLong>
     }
 
@@ -88,34 +96,5 @@ export const EkspanderbarHjelp = ({ sporsmal }: SpmProps) => {
                 <EkspanderbarInnhold />
             </div>
         </ReadMore>
-    )
-}
-
-const TilbakeIArbeidHjelpBody = () => {
-    return (
-        <>
-            <BodyLong>{EkspanderbarHjelpTekster['ekspanderbarhjelp.tilbake_i_arbeid.body1']}</BodyLong>
-            <BodyLong className={'mt-4'}>
-                {EkspanderbarHjelpTekster['ekspanderbarhjelp.tilbake_i_arbeid.body2']}
-            </BodyLong>
-            <BodyLong className={'mt-4'}>
-                {EkspanderbarHjelpTekster['ekspanderbarhjelp.tilbake_i_arbeid.body3']}
-            </BodyLong>
-        </>
-    )
-}
-
-const YrkesskadeBody = () => {
-    return (
-        <>
-            <BodyLong>{EkspanderbarHjelpTekster['ekspanderbarhjelp.yrkesskade.body1']}</BodyLong>
-            <BodyLong className={'mt-4'}>
-                {EkspanderbarHjelpTekster['ekspanderbarhjelp.yrkesskade.body2']}
-                <Link href={'https://www.nav.no/yrkesskade'} target={'_blank'}>
-                    {EkspanderbarHjelpTekster['ekspanderbarhjelp.yrkesskade.hva-er-lenke']}
-                </Link>
-            </BodyLong>
-            <BodyLong className={'mt-4'}>{EkspanderbarHjelpTekster['ekspanderbarhjelp.yrkesskade.body3']}</BodyLong>
-        </>
     )
 }

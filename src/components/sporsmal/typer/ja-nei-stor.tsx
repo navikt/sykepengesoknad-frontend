@@ -1,5 +1,4 @@
 import { BodyLong, RadioGroup, Radio } from '@navikt/ds-react'
-import React from 'react'
 import { useFormContext, Controller } from 'react-hook-form'
 
 import { TagTyper } from '../../../types/enums'
@@ -57,6 +56,7 @@ const JaNeiStor = ({ sporsmal }: SpmProps) => {
                             <GuidepanelUnderSporsmalstekst sporsmal={sporsmal} />
 
                             <EkspanderbarHjelp sporsmal={sporsmal} />
+
                             <Radio
                                 id={field.name + '_' + '0'}
                                 value="JA"
