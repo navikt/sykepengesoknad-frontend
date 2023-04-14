@@ -17,7 +17,7 @@ export const AndreInntektskilderBody = () => {
 
                     <BodyShort className="pt-3">{AndreInntektskilderHjelpTekster['modal1.del2']}</BodyShort>
                 </HjelpetekstModal>
-                {AndreInntektskilderHjelpTekster['hjelpetekst.del3']} {' '}
+                {AndreInntektskilderHjelpTekster['hjelpetekst.del3']}{' '}
                 <HjelpetekstModal
                     inlinetekst={AndreInntektskilderHjelpTekster['modal2.inlinetekst']}
                     tittel={AndreInntektskilderHjelpTekster['modal2.tittel']}
