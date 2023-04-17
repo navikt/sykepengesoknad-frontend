@@ -4,7 +4,7 @@ import { kortArbeidstakerSoknad } from '../../../src/data/mock/data/kort-soknad'
 describe('Eldre søknader', () => {
     describe('soknad med en eldre søknad', () => {
         before(() => {
-            cy.visit('http://localhost:8080/syk/sykepengesoknad?testperson=en-eldre-usendt-soknad')
+            cy.visit('/syk/sykepengesoknad?testperson=en-eldre-usendt-soknad')
         })
 
         it('Laster startside', function () {
@@ -26,7 +26,7 @@ describe('Eldre søknader', () => {
     })
     describe('soknad med to eldre søknad', () => {
         before(() => {
-            cy.visit('http://localhost:8080/syk/sykepengesoknad?testperson=to-eldre-usendte-soknader')
+            cy.visit('/syk/sykepengesoknad?testperson=to-eldre-usendte-soknader')
         })
 
         it('Laster startside', function () {

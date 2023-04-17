@@ -2,7 +2,7 @@ import { sendtArbeidsledig } from '../../../src/data/mock/data/soknader-integrat
 
 describe('Tester sendt søknad', () => {
     before(() => {
-        cy.visit('http://localhost:8080/syk/sykepengesoknad?testperson=alle-soknader')
+        cy.visit('/syk/sykepengesoknad?testperson=alle-soknader')
     })
 
     it('Laster startside', function () {
@@ -19,19 +19,19 @@ describe('Tester sendt søknad', () => {
         cy.get(`#soknader-sendt article[aria-labelledby*=${sendtArbeidsledig.id}]`).click()
         cy.url().should(
             'equal',
-            `http://localhost:8080/syk/sykepengesoknad/sendt/${sendtArbeidsledig.id}?testperson=alle-soknader`,
+            Cypress.config().baseUrl + `/syk/sykepengesoknad/sendt/${sendtArbeidsledig.id}?testperson=alle-soknader`,
         )
         cy.contains('Søknaden er sendt til NAV')
     })
 
     it('Siden kan refreshes', function () {
-        cy.visit(`http://localhost:8080/syk/sykepengesoknad/sendt/${sendtArbeidsledig.id}?testperson=alle-soknader`)
+        cy.visit(`/syk/sykepengesoknad/sendt/${sendtArbeidsledig.id}?testperson=alle-soknader`)
         cy.contains('Søknaden er sendt til NAV')
         cy.reload()
         cy.contains('Søknaden er sendt til NAV')
         cy.url().should(
             'equal',
-            `http://localhost:8080/syk/sykepengesoknad/sendt/${sendtArbeidsledig.id}?testperson=alle-soknader`,
+            Cypress.config().baseUrl + `/syk/sykepengesoknad/sendt/${sendtArbeidsledig.id}?testperson=alle-soknader`,
         )
     })
 })

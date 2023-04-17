@@ -9,7 +9,7 @@ describe('Tester frilansersøknad', () => {
     const soknad = frilanser
 
     before(() => {
-        cy.visit('http://localhost:8080/syk/sykepengesoknad')
+        cy.visit('/syk/sykepengesoknad')
     })
 
     it('Laster startside', function () {

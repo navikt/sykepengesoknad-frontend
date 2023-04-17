@@ -26,6 +26,7 @@ const CheckboxInput = ({ sporsmal }: SpmProps) => {
                         id={field.name}
                         label={spm.sporsmalstekst}
                         error={fieldState.error?.message}
+                        data-cy="bekreftCheckboksPanel"
                     >
                         <Vis
                             hvis={sporsmal.tag === TagTyper.ANSVARSERKLARING}

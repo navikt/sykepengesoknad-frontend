@@ -2,7 +2,7 @@ import { gradertReisetilskudd } from '../../../src/data/mock/data/reisetilskudd'
 
 describe('Tester at riktig antall desimaler sendes til backend', () => {
     it('Oppgir desimaler på svartype TALL og PROSENT', () => {
-        cy.visit(`http://localhost:8080/syk/sykepengesoknad/soknader/${gradertReisetilskudd.id}/7`)
+        cy.visit(`/syk/sykepengesoknad/soknader/${gradertReisetilskudd.id}/7`)
         cy.get('.radioGruppe-jaNei input[value=JA]').click({ force: true })
 
         cy.get('input#495730df-717d-3774-bd19-e6bcf76e3ba2').focus().type('37.321') // maks 2 desimaler tas med på TALL
@@ -18,7 +18,7 @@ describe('Tester at riktig antall desimaler sendes til backend', () => {
     })
 
     it('Oppgir desimaler på svartype BELOP og KILOMETER', () => {
-        cy.visit(`http://localhost:8080/syk/sykepengesoknad/soknader/${gradertReisetilskudd.id}/12`)
+        cy.visit(`/syk/sykepengesoknad/soknader/${gradertReisetilskudd.id}/12`)
 
         cy.get('.radioGruppe-jaNei input[value=JA]').click({ force: true })
 
@@ -37,7 +37,7 @@ describe('Tester at riktig antall desimaler sendes til backend', () => {
     })
 
     it('Håndterer at man bruker komma istedenfor punktum', () => {
-        cy.visit(`http://localhost:8080/syk/sykepengesoknad/soknader/${gradertReisetilskudd.id}/7`)
+        cy.visit(`/syk/sykepengesoknad/soknader/${gradertReisetilskudd.id}/7`)
         cy.get('.radioGruppe-jaNei input[value=JA]').click({ force: true })
 
         cy.get('input#495730df-717d-3774-bd19-e6bcf76e3ba2').focus().type('36,99') // maks 2 desimaler tas med på TALL
@@ -53,7 +53,7 @@ describe('Tester at riktig antall desimaler sendes til backend', () => {
     })
 
     it('Legger ikke til desimaler', () => {
-        cy.visit(`http://localhost:8080/syk/sykepengesoknad/soknader/${gradertReisetilskudd.id}/7`)
+        cy.visit(`/syk/sykepengesoknad/soknader/${gradertReisetilskudd.id}/7`)
         cy.get('.radioGruppe-jaNei input[value=JA]').click({ force: true })
 
         cy.get('input#495730df-717d-3774-bd19-e6bcf76e3ba2').focus().type('36') // ingen desimaler i input

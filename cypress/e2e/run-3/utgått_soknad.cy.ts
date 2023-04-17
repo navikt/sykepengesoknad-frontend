@@ -2,7 +2,7 @@ import { utgattSoknad } from '../../../src/data/mock/data/soknader-integration'
 
 describe('Tester utgått søknad', () => {
     before(() => {
-        cy.visit('http://localhost:8080/syk/sykepengesoknad?testperson=alle-soknader')
+        cy.visit('/syk/sykepengesoknad?testperson=alle-soknader')
     })
 
     it('Laster startside', function () {

@@ -2,7 +2,7 @@ import { nyttReisetilskudd } from '../../../src/data/mock/data/reisetilskudd'
 
 describe('Teste førsteside i reisetilskuddsøknaden', () => {
     before(() => {
-        cy.visit('http://localhost:8080/syk/sykepengesoknad')
+        cy.visit('/syk/sykepengesoknad')
     })
 
     describe('Landingside og listevisning', () => {
@@ -19,7 +19,10 @@ describe('Teste førsteside i reisetilskuddsøknaden', () => {
 
         it('Ved klikk så åpnes søknaden om reisetilskudd', () => {
             cy.get(`article[aria-labelledby*=${nyttReisetilskudd.id}]`).click()
-            cy.url().should('equal', `http://localhost:8080/syk/sykepengesoknad/soknader/${nyttReisetilskudd.id}/1`)
+            cy.url().should(
+                'equal',
+                Cypress.config().baseUrl + `/syk/sykepengesoknad/soknader/${nyttReisetilskudd.id}/1`,
+            )
         })
     })
 
@@ -292,7 +295,7 @@ describe('Teste førsteside i reisetilskuddsøknaden', () => {
                 'contain',
                 'Jeg har lest all informasjonen jeg har fått i søknaden og bekrefter at opplysningene jeg har gitt er korrekte.',
             )
-            cy.get('.navds-checkbox__label').click({ force: true })
+            cy.get('[data-cy="bekreftCheckboksPanel"]').click()
 
             cy.contains('Send søknaden').click()
         })

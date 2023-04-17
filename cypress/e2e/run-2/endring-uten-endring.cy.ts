@@ -4,7 +4,7 @@ describe('Tester endring uten en endringer', () => {
     const soknad = sendtArbeidsledigKvittering
 
     before(() => {
-        cy.visit(`http://localhost:8080/syk/sykepengesoknad/sendt/${soknad.id}?testperson=alle-soknader`)
+        cy.visit(`/syk/sykepengesoknad/sendt/${soknad.id}?testperson=alle-soknader`)
     })
 
     it('Jeg vil endre svarene i søknaden', () => {
@@ -45,6 +45,6 @@ describe('Tester endring uten en endringer', () => {
         cy.contains('Vi behandler den opprinnelige sykepengesøknaden din.')
 
         cy.contains('OK').click()
-        cy.url().should('equal', 'http://localhost:8080/syk/sykepengesoknad/')
+        cy.url().should('equal', Cypress.config().baseUrl + '/syk/sykepengesoknad/')
     })
 })

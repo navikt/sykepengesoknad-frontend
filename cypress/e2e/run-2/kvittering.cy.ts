@@ -17,7 +17,7 @@ describe('Tester kvittering', () => {
     context('Arbeidsledig', () => {
         it('Nylig sendt', () => {
             // Velg søknad
-            cy.visit('http://localhost:8080/syk/sykepengesoknad?testperson=alle-soknader')
+            cy.visit('/syk/sykepengesoknad?testperson=alle-soknader')
 
             cy.get(`#soknader-list-til-behandling article a[href*=${arbeidsledigKvittering.id}]`).click()
 
@@ -28,8 +28,10 @@ describe('Tester kvittering', () => {
                 force: true,
             })
             cy.contains('Gå videre').click()
-            cy.get('.navds-checkbox__label').click({ force: true })
+
+            cy.get('[data-cy="bekreftCheckboksPanel"]').click()
             cy.contains('Send søknaden').click()
+            cy.location('pathname').should('include', `/kvittering/${arbeidsledigKvittering.id}`)
             cy.url().should('include', `/kvittering/${arbeidsledigKvittering.id}`)
 
             // Sendt datoer
@@ -66,7 +68,7 @@ describe('Tester kvittering', () => {
         })
 
         it('Etter 30 dager', () => {
-            cy.visit('http://localhost:8080/syk/sykepengesoknad?testperson=alle-soknader')
+            cy.visit('/syk/sykepengesoknad?testperson=alle-soknader')
 
             cy.get(
                 `#soknader-sendt [aria-labelledby="soknader-header-${sendtArbeidsledigKvittering.id}"] > .inngangspanel > .inngangspanel__ytre > .inngangspanel__del1 > .inngangspanel__ikon--normal > img`,
@@ -101,7 +103,7 @@ describe('Tester kvittering', () => {
 
     context('Utland', () => {
         it('Nylig sendt', () => {
-            cy.visit('http://localhost:8080/syk/sykepengesoknad?testperson=alle-soknader')
+            cy.visit('/syk/sykepengesoknad?testperson=alle-soknader')
 
             // Velg søknad
             cy.get(`#soknader-list-til-behandling article a[href*=${oppholdUtlandKvittering.id}]`).click({
@@ -121,7 +123,12 @@ describe('Tester kvittering', () => {
                 force: true,
             })
             cy.contains('Send søknaden').click({ force: true })
-            cy.url().should('include', `/kvittering/${oppholdUtlandKvittering.id}`)
+
+            const kvitteringURL = `/kvittering/${oppholdUtlandKvittering.id}`
+
+            cy.location('pathname').should('include', kvitteringURL)
+
+            cy.url().should('include', kvitteringURL)
 
             // Sendt datoer
             cy.get('.kvittering .navds-alert--success')
@@ -169,7 +176,7 @@ describe('Tester kvittering', () => {
 
     context('Selvstendig', () => {
         it('Nylig sendt', () => {
-            cy.visit('http://localhost:8080/syk/sykepengesoknad?testperson=alle-soknader')
+            cy.visit('/syk/sykepengesoknad?testperson=alle-soknader')
 
             // Velg søknad
             cy.get(`#soknader-list-til-behandling article a[href*=${selvstendigKvittering.id}]`).click()
@@ -181,9 +188,14 @@ describe('Tester kvittering', () => {
                 force: true,
             })
             cy.contains('Gå videre').click()
-            cy.get('.navds-checkbox__label').click({ force: true })
+            cy.get('[data-cy="bekreftCheckboksPanel"]').click()
             cy.contains('Send søknaden').click()
-            cy.url().should('include', `/kvittering/${selvstendigKvittering.id}`)
+
+            const kvitteringURL = `/kvittering/${selvstendigKvittering.id}`
+
+            cy.location('pathname').should('include', kvitteringURL)
+
+            cy.url().should('include', kvitteringURL)
 
             // Sendt datoer
             cy.get('.kvittering .navds-alert--success')
@@ -223,13 +235,18 @@ describe('Tester kvittering', () => {
 
     context('Arbeidstaker', () => {
         it('Innenfor arbeidsgiverperiode', () => {
-            cy.visit('http://localhost:8080/syk/sykepengesoknad?testperson=alle-soknader')
-
+            cy.visit('/syk/sykepengesoknad?testperson=alle-soknader')
             cy.get(
                 `#soknader-list-til-behandling article a[href*=${arbeidstakerInnenforArbeidsgiverperiodeKvittering.id}]`,
             ).click({ force: true })
             besvarSoknad()
-            cy.url().should('include', `/kvittering/${arbeidstakerInnenforArbeidsgiverperiodeKvittering.id}`)
+
+            const kvitteringURL = `/kvittering/${arbeidstakerInnenforArbeidsgiverperiodeKvittering.id}`
+
+            cy.location('pathname').should('include', kvitteringURL)
+
+            cy.url().should('include', kvitteringURL)
+
             inntil16dagerKvittering()
 
             // Ettersending til nav vises ikke i kvittering
@@ -305,36 +322,53 @@ describe('Tester kvittering', () => {
         })
 
         it('Utenfor arbeidsgiverperiode', () => {
-            cy.visit('http://localhost:8080/syk/sykepengesoknad?testperson=alle-soknader')
-
+            cy.visit('/syk/sykepengesoknad?testperson=alle-soknader')
+            cy.location('pathname').should('include', '/syk/sykepengesoknad')
             cy.get(
                 `#soknader-list-til-behandling article a[href*=${arbeidstakerUtenforArbeidsgiverperiodeKvittering.id}]`,
             ).click({ force: true })
             besvarSoknad()
-            cy.url().should('include', `/kvittering/${arbeidstakerUtenforArbeidsgiverperiodeKvittering.id}`)
+
+            const kvitteringURL = `/kvittering/${arbeidstakerUtenforArbeidsgiverperiodeKvittering.id}`
+
+            cy.location('pathname').should('include', kvitteringURL)
+
+            cy.url().should('include', kvitteringURL)
+
             over16dagerKvittering()
         })
 
         it('Delt periode og første utenfor arbeidsgiverperiode', () => {
-            cy.visit('http://localhost:8080/syk/sykepengesoknad?testperson=alle-soknader')
+            cy.visit('/syk/sykepengesoknad?testperson=alle-soknader')
+            cy.location('pathname').should('include', '/syk/sykepengesoknad')
 
             cy.get(
                 `#soknader-list-til-behandling article a[href*=${arbeidstakerDeltPeriodeForsteUtenforArbeidsgiverperiodeKvittering.id}]`,
             ).click({ force: true })
             besvarSoknad()
-            cy.url().should(
-                'include',
-                `/kvittering/${arbeidstakerDeltPeriodeForsteUtenforArbeidsgiverperiodeKvittering.id}`,
-            )
+
+            const kvitteringURL = `/kvittering/${arbeidstakerDeltPeriodeForsteUtenforArbeidsgiverperiodeKvittering.id}`
+
+            cy.location('pathname').should('include', kvitteringURL)
+
+            cy.url().should('include', kvitteringURL)
+
             over16dagerKvittering()
         })
 
         it('Oppfølgende periode uten opphold og første utenfor arbeidsgiverperiode', () => {
-            cy.visit('http://localhost:8080/syk/sykepengesoknad?testperson=alle-soknader')
+            cy.visit('/syk/sykepengesoknad?testperson=alle-soknader')
+            cy.location('pathname').should('include', '/syk/sykepengesoknad')
+
             cy.get(
                 `#soknader-list-til-behandling article a[href*=${arbeidstakerUtenOppholdForsteUtenforArbeidsgiverperiodeKvittering.id}]`,
             ).click({ force: true })
             besvarSoknad()
+            cy.location('pathname').should(
+                'include',
+                `/kvittering/${arbeidstakerUtenOppholdForsteUtenforArbeidsgiverperiodeKvittering.id}`,
+            )
+
             cy.url().should(
                 'include',
                 `/kvittering/${arbeidstakerUtenOppholdForsteUtenforArbeidsgiverperiodeKvittering.id}`,
@@ -343,37 +377,50 @@ describe('Tester kvittering', () => {
         })
 
         it('Oppfølgende periode uten opphold', () => {
-            cy.visit('http://localhost:8080/syk/sykepengesoknad?testperson=alle-soknader')
+            cy.visit('/syk/sykepengesoknad?testperson=alle-soknader')
+            cy.location('pathname').should('include', '/syk/sykepengesoknad')
+
             cy.get(`#soknader-list-til-behandling article a[href*=${arbeidstakerUtenOppholdKvittering.id}]`).click({
                 force: true,
             })
             besvarSoknad()
-            cy.url().should('include', `/kvittering/${arbeidstakerUtenOppholdKvittering.id}`)
+            const kvitteringURL = `/kvittering/${arbeidstakerUtenOppholdKvittering.id}`
             utenOppholdKvittering()
+            cy.location('pathname').should('include', kvitteringURL)
+
+            cy.url().should('include', kvitteringURL)
         })
 
         it('Oppfølgende periode 16 eller mindre dager og første utenfor arbeidsgiverperiode', () => {
-            cy.visit('http://localhost:8080/syk/sykepengesoknad?testperson=alle-soknader')
+            cy.visit('/syk/sykepengesoknad?testperson=alle-soknader')
+            cy.location('pathname').should('include', '/syk/sykepengesoknad')
 
             cy.get(
                 `#soknader-list-til-behandling article a[href*=${arbeidstakerMedOppholdForsteUtenforArbeidsgiverperiodeKvittering.id}]`,
             ).click()
             besvarSoknad()
-            cy.url().should(
-                'include',
-                `/kvittering/${arbeidstakerMedOppholdForsteUtenforArbeidsgiverperiodeKvittering.id}`,
-            )
+
+            const kvitteringURL = `/kvittering/${arbeidstakerMedOppholdForsteUtenforArbeidsgiverperiodeKvittering.id}`
+
+            cy.location('pathname').should('include', kvitteringURL)
+
+            cy.url().should('include', kvitteringURL)
+
             over16dagerKvittering()
         })
 
         it('Oppfølgende periode 16 eller mindre dager', () => {
-            cy.visit('http://localhost:8080/syk/sykepengesoknad?testperson=alle-soknader')
+            cy.visit('/syk/sykepengesoknad?testperson=alle-soknader')
+            cy.location('pathname').should('include', '/syk/sykepengesoknad')
 
             cy.get(`#soknader-list-til-behandling article a[href*=${arbeidstakerMedOppholdKvittering.id}]`).click({
                 force: true,
             })
             besvarSoknad()
-            cy.url().should('include', `/kvittering/${arbeidstakerMedOppholdKvittering.id}`)
+
+            const forventetUrl = `/kvittering/${arbeidstakerMedOppholdKvittering.id}`
+            cy.location('pathname').should('include', forventetUrl)
+            cy.url().should('include', forventetUrl)
             medOppholdKvittering()
         })
     })
@@ -384,7 +431,7 @@ const besvarSoknad = () => {
         'Jeg vet at jeg kan miste retten til sykepenger hvis opplysningene jeg gir ikke er riktige eller fullstendige. Jeg vet også at NAV kan holde igjen eller kreve tilbake penger, og at å gi feil opplysninger kan være straffbart.',
     ).click({ force: true })
     cy.contains('Gå videre').click({ force: true })
-    cy.get('.navds-checkbox__label').click({ force: true })
+    cy.get('[data-cy="bekreftCheckboksPanel"]').click()
     cy.contains('Send søknaden').click({ force: true })
 }
 

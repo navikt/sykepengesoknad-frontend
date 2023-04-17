@@ -4,9 +4,7 @@ describe('Tester søknad som er opprettet fra egenmeldingsdager i inntektsmeldin
     const soknad = kortFomTomArbeidstakerSoknad
 
     it('Viser guidepanel på førsteside', function () {
-        cy.visit(
-            `http://localhost:8080/syk/sykepengesoknad/soknader/${soknad.id}?testperson=egenmeldingsdager%20arbeidsgiver`,
-        )
+        cy.visit(`/syk/sykepengesoknad/soknader/${soknad.id}?testperson=egenmeldingsdager%20arbeidsgiver`)
         cy.contains('Søknad om sykepenger').and('be.visible')
 
         cy.get('.navds-guide-panel')

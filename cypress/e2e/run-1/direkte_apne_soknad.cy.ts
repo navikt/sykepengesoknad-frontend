@@ -8,8 +8,8 @@ describe('Tester å åpne søknaden direkte fra sykefravaer', () => {
     const soknad = arbeidstaker
 
     it('Vi kan gå direkte til søknaden fra sykefravaer', function () {
-        cy.visit(`http://localhost:8080/syk/sykepengesoknad/soknader/${soknad.id}`)
-        cy.url().should('equal', `http://localhost:8080/syk/sykepengesoknad/soknader/${soknad.id}/1`)
+        cy.visit(`/syk/sykepengesoknad/soknader/${soknad.id}`)
+        cy.url().should('equal', Cypress.config().baseUrl + `/syk/sykepengesoknad/soknader/${soknad.id}/1`)
 
         cy.contains('Opplysninger fra sykmelding').and('be.visible')
         cy.contains('1. april - 24. april 2020 (24 dager)')
@@ -18,32 +18,31 @@ describe('Tester å åpne søknaden direkte fra sykefravaer', () => {
     })
 
     it('Åpner en sendt søknad på en annen siden og sendes til sendt-side', function () {
-        cy.visit(`http://localhost:8080/syk/sykepengesoknad/soknader/${sendtArbeidsledig.id}?testperson=alle-soknader`)
+        cy.visit(`/syk/sykepengesoknad/soknader/${sendtArbeidsledig.id}?testperson=alle-soknader`)
         cy.url().should(
             'equal',
-            `http://localhost:8080/syk/sykepengesoknad/kvittering/${sendtArbeidsledig.id}?testperson=alle-soknader`,
+            Cypress.config().baseUrl +
+                `/syk/sykepengesoknad/kvittering/${sendtArbeidsledig.id}?testperson=alle-soknader`,
         )
         cy.contains('Søknad om sykepenger').and('be.visible')
         cy.contains('NAV behandler søknaden din')
 
-        cy.visit(
-            `http://localhost:8080/syk/sykepengesoknad/soknader/${sendtArbeidsledig.id}/3?testperson=alle-soknader`,
-        )
+        cy.visit(`/syk/sykepengesoknad/soknader/${sendtArbeidsledig.id}/3?testperson=alle-soknader`)
         cy.url().should(
             'equal',
-            `http://localhost:8080/syk/sykepengesoknad/kvittering/${sendtArbeidsledig.id}?testperson=alle-soknader`,
+            Cypress.config().baseUrl +
+                `/syk/sykepengesoknad/kvittering/${sendtArbeidsledig.id}?testperson=alle-soknader`,
         )
         cy.contains('Søknad om sykepenger').and('be.visible')
         cy.contains('NAV behandler søknaden din')
     })
 
     it('Går direkte til en sendt arbeidstaker søknad og innholdet i kvitteringen blir lastet inn', function () {
-        cy.visit(
-            `http://localhost:8080/syk/sykepengesoknad/kvittering/${foranArbeidstakerMedOppholdKvittering.id}?testperson=alle-soknader`,
-        )
+        cy.visit(`/syk/sykepengesoknad/kvittering/${foranArbeidstakerMedOppholdKvittering.id}?testperson=alle-soknader`)
         cy.url().should(
             'equal',
-            `http://localhost:8080/syk/sykepengesoknad/kvittering/${foranArbeidstakerMedOppholdKvittering.id}?testperson=alle-soknader`,
+            Cypress.config().baseUrl +
+                `/syk/sykepengesoknad/kvittering/${foranArbeidstakerMedOppholdKvittering.id}?testperson=alle-soknader`,
         )
         cy.contains('Søknad om sykepenger').and('be.visible')
         cy.contains('Søknaden er sendt')
@@ -51,8 +50,8 @@ describe('Tester å åpne søknaden direkte fra sykefravaer', () => {
     })
 
     it('Hvis vi går til /soknader sendes vi til oversikten', function () {
-        cy.visit('http://localhost:8080/syk/sykepengesoknad/soknader/')
-        cy.url().should('equal', 'http://localhost:8080/syk/sykepengesoknad/')
+        cy.visit('/syk/sykepengesoknad/soknader/')
+        cy.url().should('equal', Cypress.config().baseUrl + '/syk/sykepengesoknad/')
         cy.contains('Søknad om sykepenger').and('be.visible')
     })
 })

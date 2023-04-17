@@ -1,11 +1,11 @@
 describe('Tester kontonummer i kvittering', () => {
     it('Har kontonumer', () => {
-        cy.visit('http://localhost:8080/syk/sykepengesoknad?testperson=har%20kontonummer')
-
+        cy.visit('/syk/sykepengesoknad?testperson=har%20kontonummer')
         cy.get(`#soknader-list-til-behandling article a`).click({
             force: true,
         })
         besvarSoknad()
+        cy.location('pathname').should('include', `/kvittering/`)
         cy.url().should('include', `/kvittering/`)
         cy.contains('Kontonummer for utbetaling')
         cy.get('.kontonummer')
@@ -17,7 +17,7 @@ describe('Tester kontonummer i kvittering', () => {
     })
 
     it('Har ikke kontonumer', () => {
-        cy.visit('http://localhost:8080/syk/sykepengesoknad?testperson=har%20ikke%20kontonummer')
+        cy.visit('/syk/sykepengesoknad?testperson=har%20ikke%20kontonummer')
 
         cy.get(`#soknader-list-til-behandling article a`).click({
             force: true,
