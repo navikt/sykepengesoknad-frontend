@@ -24,15 +24,13 @@ import { kvitteringBreadcrumb, useUpdateBreadcrumbs } from '../../hooks/useBread
 import { useStudyStatus } from '../../hooks/useStudyStatus'
 
 import Kvittering from './kvittering'
-import { harKorrigertArbeidstakersoknadIDetSiste, erArbeidstakerSoknad } from './harSvartJa'
+import { harKorrigertArbeidstakersoknadIDetSiste } from './harSvartJa'
 
 const KvitteringSide = () => {
     const { id } = useParams<RouteParams>()
     const { data: soknader } = useSoknader()
     const { data: valgtSoknad } = useSoknad(id)
-    const arbeidstakersøknadStudy = 'study-hpyhgdokuq'
     const korrigertSøknadStudy = 'study-zeh32lhqyb'
-    const { data: arbeidstakersoknadStudyActive } = useStudyStatus(arbeidstakersøknadStudy)
     const { data: korrigertStudyActive } = useStudyStatus(korrigertSøknadStudy)
 
     const { feilmeldingTekst } = useAppStore()
@@ -108,9 +106,6 @@ const KvitteringSide = () => {
                             render={() => {
                                 if (harKorrigertArbeidstakersoknadIDetSiste(soknader) && korrigertStudyActive) {
                                     return <UxSignalsWidget study={korrigertSøknadStudy} demo={!isProd()} />
-                                }
-                                if (erArbeidstakerSoknad(valgtSoknad) && arbeidstakersoknadStudyActive) {
-                                    return <UxSignalsWidget study={arbeidstakersøknadStudy} demo={!isProd()} />
                                 }
                                 return null
                             }}
