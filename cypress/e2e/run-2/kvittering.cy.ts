@@ -189,7 +189,6 @@ describe('Tester kvittering', () => {
             })
             cy.contains('Gå videre').click()
             cy.get('[data-cy="bekreftCheckboksPanel"]').click()
-            //cy.get('.navds-checkbox__label').click({ force: true })
             cy.contains('Send søknaden').click()
 
             const kvitteringURL = `/kvittering/${selvstendigKvittering.id}`
