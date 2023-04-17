@@ -1,4 +1,4 @@
-import { BodyShort, Label } from '@navikt/ds-react'
+import { BodyShort } from '@navikt/ds-react'
 import { logger } from '@navikt/next-logger'
 import React, { useCallback, useEffect, useState } from 'react'
 import { useDropzone } from 'react-dropzone'
@@ -88,11 +88,7 @@ const DragAndDrop = ({ valgtFil, setValgtFil, valgtKvittering }: DragAndDropProp
     }
 
     return (
-        <div className="ddfil__wrap">
-            <label htmlFor="ddfil" className="skjemaelement__label">
-                <Label as="strong">{tekst('drag_and_drop.label')}</Label>
-            </label>
-
+        <div className="mt-2">
             <Vis
                 hvis={valgtFil}
                 render={() => (
@@ -101,9 +97,7 @@ const DragAndDrop = ({ valgtFil, setValgtFil, valgtKvittering }: DragAndDropProp
                         tittel={customTruncet(valgtFil?.name || 'Kvittering.png', 20)}
                         type="intern"
                     >
-                        <div className="preview">
-                            {valgtFil ? <img alt="" src={URL.createObjectURL(valgtFil)} /> : null}
-                        </div>
+                        {valgtFil ? <img alt="" src={URL.createObjectURL(valgtFil)} /> : null}
                     </Utvidbar>
                 )}
             />
@@ -156,7 +150,7 @@ const DragAndDrop = ({ valgtFil, setValgtFil, valgtKvittering }: DragAndDropProp
                                 alt="Opplastingsikon"
                                 aria-hidden={true}
                             />
-                            <BodyShort as="span" className="tekst">
+                            <BodyShort as="span">
                                 {isDragActive
                                     ? tekst('drag_and_drop.dragtekst.aktiv')
                                     : valgtFil
@@ -165,8 +159,8 @@ const DragAndDrop = ({ valgtFil, setValgtFil, valgtKvittering }: DragAndDropProp
                             </BodyShort>
                         </div>
 
-                        <div role="alert" aria-live="assertive">
-                            <BodyShort as="span" className="skjemaelement__feilmelding">
+                        <div role="alert" aria-live="assertive" className="mt-2 text-red-600">
+                            <BodyShort as="span">
                                 <Vis hvis={errors.fil_input} render={() => <>{errors.fil_input?.message}</>} />
                             </BodyShort>
                         </div>

@@ -1,4 +1,4 @@
-import { Alert, BodyLong, BodyShort, Button, Heading, Label, ReadMore } from '@navikt/ds-react'
+import { Alert, BodyLong, BodyShort, Button, Heading, Label, ReadMore, Select, TextField } from '@navikt/ds-react'
 import { logger } from '@navikt/next-logger'
 import dayjs from 'dayjs'
 import React, { useState } from 'react'
@@ -17,7 +17,6 @@ import Vis from '../../vis'
 import DragAndDrop from '../drag-and-drop/drag-and-drop'
 
 import OpplastingTekster from './opplasting-tekster'
-import styles from './opplasting-form.module.css'
 interface OpplastetKvittering {
     id: string
 }
@@ -122,117 +121,104 @@ const OpplastingForm = ({ valgtSoknad, valgtKvittering, setOpenModal, valgtFil, 
 
     return (
         <FormProvider {...methods}>
-            <form className="opplasting-form" key="opplasting_form" data-cy="opplasting-form">
+            <form key="opplasting_form" data-cy="opplasting-form">
                 <Heading size="medium" id="opplasting-modal" className="mr-10 mt-1" spacing>
                     {tekst('opplasting_modal.nytt-utlegg.tittel')}
                 </Heading>
-                <BodyShort className="restriksjoner">
-                    <span className="filtype">
-                        {getLedetekst(tekst('opplasting_modal.filtyper'), {
-                            '%FILTYPER%': formattertFiltyper,
-                        })}
-                    </span>
-                    <span className="filstr">
-                        {getLedetekst(tekst('opplasting_modal.maksfilstr'), {
-                            '%MAKSFILSTR%': maks,
-                        })}
-                    </span>
+                <BodyShort>
+                    {getLedetekst(tekst('opplasting_modal.filtyper'), {
+                        '%FILTYPER%': formattertFiltyper,
+                    })}
+                    <br />
+                    {getLedetekst(tekst('opplasting_modal.maksfilstr'), {
+                        '%MAKSFILSTR%': maks,
+                    })}
                 </BodyShort>
-                <ReadMore className={styles.pdfHjelp} header={OpplastingTekster['soknad.info.kvitteringer-PDF-tittel']}>
+                <ReadMore className="mt-4" header={OpplastingTekster['soknad.info.kvitteringer-PDF-tittel']}>
                     <BodyLong>{OpplastingTekster['soknad.info.kvitteringer-PDF-tekst']}</BodyLong>
                 </ReadMore>
 
-                <div className="skjemakolonner">
-                    <div className="skjemaelement">
-                        <label htmlFor="transportmiddel" className="skjemaelement__label">
-                            {tekst('opplasting_modal.type-utgift.label')}
-                        </label>
-                        <select
-                            disabled={formErDisabled}
-                            {...methods.register('transportmiddel', {
-                                required: tekst('opplasting_modal.transportmiddel.feilmelding'),
-                            })}
-                            className={
-                                'skjemaelement__input input--fullbredde kvittering-element' +
-                                (methods.formState.errors['transportmiddel'] ? ' skjemaelement__input--harFeil' : '')
-                            }
-                            id="transportmiddel"
-                            name="transportmiddel"
-                            defaultValue={valgtKvittering?.typeUtgift}
-                        >
-                            <option value="">Velg</option>
-                            {Object.entries(UtgiftTyper).map((keyval, idx) => {
-                                return (
-                                    <option value={keyval[0]} id={keyval[0]} key={idx}>
-                                        {keyval[1]}
-                                    </option>
-                                )
-                            })}
-                        </select>
+                <div>
+                    <Select
+                        className="mt-4"
+                        label={tekst('opplasting_modal.type-utgift.label')}
+                        disabled={formErDisabled}
+                        {...methods.register('transportmiddel', {
+                            required: tekst('opplasting_modal.transportmiddel.feilmelding'),
+                        })}
+                        id="transportmiddel"
+                        name="transportmiddel"
+                        defaultValue={valgtKvittering?.typeUtgift}
+                    >
+                        <option value="">Velg</option>
+                        {Object.entries(UtgiftTyper).map((keyval, idx) => {
+                            return (
+                                <option value={keyval[0]} id={keyval[0]} key={idx}>
+                                    {keyval[1]}
+                                </option>
+                            )
+                        })}
+                    </Select>
 
-                        <div role="alert" aria-live="assertive">
-                            <BodyLong as="span" className="skjemaelement__feilmelding">
-                                <Vis
-                                    hvis={methods.formState.errors['transportmiddel']}
-                                    render={() => <>{methods.formState.errors['transportmiddel']?.message}</>}
-                                />
-                            </BodyLong>
-                        </div>
-                    </div>
-
-                    <div className="skjemaelement">
-                        <label htmlFor="belop_input" className="skjemaelement__label">
-                            <Label as="strong">{tekst('opplasting_modal.tittel')}</Label>
-                        </label>
-                        <input
-                            type="number"
-                            id="belop_input"
-                            {...methods.register('belop_input', {
-                                required: tekst('opplasting_modal.belop.feilmelding'),
-                                min: {
-                                    value: 0,
-                                    message: 'Beløp kan ikke være negativt',
-                                },
-                                max: {
-                                    value: 10000,
-                                    message: 'Beløp kan ikke være større enn 10 000',
-                                },
-                                validate: (val) => {
-                                    let belop = val.toString()
-                                    belop = Number(belop.replace(',', '.').replace(/ /g, ''))
-                                    belop = Math.round(belop * 100) / 100
-                                    methods.setValue('belop_input', belop)
-                                    return true
-                                },
-                            })}
-                            defaultValue={valgtKvittering?.belop ? valgtKvittering.belop / 100 : ''}
-                            className={
-                                'skjemaelement__input input--s periode-element' +
-                                (methods.formState.errors['belop_input'] ? ' skjemaelement__input--harFeil' : '')
-                            }
-                            inputMode="decimal"
-                            step={0.01}
-                            autoComplete="off"
-                            disabled={formErDisabled}
-                        />
-                        <span className="enhet">kr</span>
-
-                        <div role="alert" aria-live="assertive">
+                    <div role="alert" aria-live="assertive" className=" mt-2 text-red-600">
+                        <BodyLong as="span">
                             <Vis
-                                hvis={methods.formState.errors['belop_input']?.message}
-                                render={() => (
-                                    <BodyShort as="span" className="skjemaelement__feilmelding">
-                                        <>{methods.formState.errors['belop_input']?.message}</>
-                                    </BodyShort>
-                                )}
+                                hvis={methods.formState.errors['transportmiddel']}
+                                render={() => <>{methods.formState.errors['transportmiddel']?.message}</>}
                             />
-                        </div>
+                        </BodyLong>
                     </div>
                 </div>
 
+                <div>
+                    <TextField
+                        className="mt-4"
+                        label={tekst('opplasting_modal.tittel')}
+                        description={tekst('soknad.undertekst.OFFENTLIG_TRANSPORT_BELOP')}
+                        type="number"
+                        id="belop_input"
+                        {...methods.register('belop_input', {
+                            required: tekst('opplasting_modal.belop.feilmelding'),
+                            min: {
+                                value: 0,
+                                message: 'Beløp kan ikke være negativt',
+                            },
+                            max: {
+                                value: 10000,
+                                message: 'Beløp kan ikke være større enn 10 000',
+                            },
+                            validate: (val) => {
+                                let belop = val.toString()
+                                belop = Number(belop.replace(',', '.').replace(/ /g, ''))
+                                belop = Math.round(belop * 100) / 100
+                                methods.setValue('belop_input', belop)
+                                return true
+                            },
+                        })}
+                        defaultValue={valgtKvittering?.belop ? valgtKvittering.belop / 100 : ''}
+                        inputMode="decimal"
+                        step={0.01}
+                        autoComplete="off"
+                        disabled={formErDisabled}
+                    />
+
+                    <div role="alert" aria-live="assertive" className="mt-2 mb-4 text-red-600">
+                        <Vis
+                            hvis={methods.formState.errors['belop_input']?.message}
+                            render={() => (
+                                <BodyShort as="span">
+                                    <>{methods.formState.errors['belop_input']?.message}</>
+                                </BodyShort>
+                            )}
+                        />
+                    </div>
+                </div>
+
+                <Label>{tekst('drag_and_drop.label')}</Label>
+
                 <DragAndDrop valgtFil={valgtFil} setValgtFil={setValgtFil} valgtKvittering={valgtKvittering} />
 
-                <div className="knapperad" data-cy="knapperad">
+                <div className="mt-8" data-cy="knapperad">
                     <Vis
                         hvis={feilmelding}
                         render={() => (
@@ -241,7 +227,7 @@ const OpplastingForm = ({ valgtSoknad, valgtKvittering, setOpenModal, valgtFil, 
                             </Alert>
                         )}
                     />
-                    <Button variant="primary" type="button" className="mr-3" onClick={onSubmit} loading={laster}>
+                    <Button variant="primary" type="button" className="mr-4" onClick={onSubmit} loading={laster}>
                         {tekst('opplasting_modal.bekreft')}
                     </Button>
 
