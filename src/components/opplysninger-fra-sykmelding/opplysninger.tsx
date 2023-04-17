@@ -81,9 +81,9 @@ const Opplysninger = ({ ekspandert, steg }: OpplysningerProps) => {
                                     Overlappende sykmelding
                                 </Label>
                                 <BodyShort>
-                                    Deler av denne perioden overlapper med en annen sykmelding. Den overlappende delen
-                                    er derfor erstattet med den nyeste sykmeldingen. Dette gjøres for å unngå å sende
-                                    inn søknad om sykepenger for samme periode.
+                                    Den siste innsendte sykmeldingen fra legen erstatter deler av denne sykmeldingen. Vi
+                                    har derfor tilpasset søknaden slik at du ikke må sende inn søknad om sykepenger for
+                                    samme periode.
                                 </BodyShort>
                             </>
                         )}
