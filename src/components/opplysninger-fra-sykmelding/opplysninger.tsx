@@ -35,7 +35,7 @@ const Opplysninger = ({ ekspandert, steg }: OpplysningerProps) => {
     if (!valgtSoknad || !valgtSykmelding) return null
 
     const oppdelt = erOppdelt(valgtSoknad, valgtSykmelding)
-    const klippet = true
+    const klippet = valgtSoknad.klippet
 
     return (
         <Accordion className={styles.accordionWrapper} data-cy="opplysninger-fra-sykmeldingen">

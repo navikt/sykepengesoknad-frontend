@@ -371,6 +371,7 @@ export const naringsdrivendeSoknad: RSSoknad = {
     ],
     egenmeldtSykmelding: false,
     opprettetAvInntektsmelding: false,
+    klippet: false,
 }
 
 export const selvstendigNaringsdrivende: Persona = {
