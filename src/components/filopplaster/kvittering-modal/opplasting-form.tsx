@@ -218,7 +218,7 @@ const OpplastingForm = ({ valgtSoknad, valgtKvittering, setOpenModal, valgtFil, 
 
                 <DragAndDrop valgtFil={valgtFil} setValgtFil={setValgtFil} valgtKvittering={valgtKvittering} />
 
-                <div className="mt-8" data-cy="knapperad">
+                <div className="mt-8">
                     <Vis
                         hvis={feilmelding}
                         render={() => (

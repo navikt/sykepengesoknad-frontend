@@ -152,7 +152,7 @@ describe('Teste førsteside i reisetilskuddsøknaden', () => {
             cy.get('[data-cy="opplasting-form"]')
                 .find('input[type=file]')
                 .selectFile({ contents: 'cypress/fixtures/kvittering.jpg' }, { force: true })
-            cy.get('[data-cy="knapperad"]').contains('Bekreft').click()
+            cy.get('button').contains('Bekreft').click()
         })
 
         it('Fil list oppdateres med kvittering', () => {
@@ -192,23 +192,23 @@ describe('Teste førsteside i reisetilskuddsøknaden', () => {
             cy.get('button').contains('Legg til reiseutgift').click()
             cy.get('.navds-modal__content').contains('Bekreft').click()
 
-            cy.get('.skjemaelement__feilmelding').contains('Du må velge transportmiddel')
-            cy.get('.skjemaelement__feilmelding').contains('Du må skrive inn beløp')
-            cy.get('.skjemaelement__feilmelding').contains('Du må laste opp kvittering')
+            cy.get('[data-cy="opplasting-form"]').contains('Du må velge transportmiddel')
+            cy.get('[data-cy="opplasting-form"]').contains('Du må skrive inn beløp')
+            cy.get('[data-cy="opplasting-form"]').contains('Du må laste opp kvittering')
         })
 
         describe('Transportmiddel feilmeldinger', () => {
             it('Ugyldig valg', () => {
                 cy.get('select[name=transportmiddel]').select('')
                 cy.get('.navds-modal__content').contains('Bekreft').click()
-                cy.get('.skjemaelement__feilmelding').contains('Du må velge transportmiddel')
+                cy.get('[data-cy="opplasting-form"]').contains('Du må velge transportmiddel')
             })
 
             it('Velger egen bil', () => {
-                cy.get('select[name=transportmiddel]').should('have.class', 'skjemaelement__input--harFeil')
+                cy.get('[data-cy="opplasting-form"]').contains('Du må velge transportmiddel')
                 cy.get('select[name=transportmiddel]').select('TAXI')
                 cy.get('.navds-modal__content').contains('Bekreft').click()
-                cy.get('select[name=transportmiddel]').should('not.have.class', 'skjemaelement__input--harFeil')
+                cy.get('Du må velge transportmiddel').should('not.exist')
             })
         })
 
@@ -216,13 +216,13 @@ describe('Teste førsteside i reisetilskuddsøknaden', () => {
             it('Negative beløp', () => {
                 cy.get('input[name=belop_input]').type('-100')
                 cy.get('.navds-modal__content').contains('Bekreft').click()
-                cy.get('.skjemaelement__feilmelding').contains('Beløp kan ikke være negativt')
+                cy.get('[data-cy="opplasting-form"]').contains('Beløp kan ikke være negativt')
             })
 
             it('Høyere beløp enn maks', () => {
                 cy.get('input[name=belop_input]').clear().type('1000000000')
                 cy.get('.navds-modal__content').contains('Bekreft').click()
-                cy.get('.skjemaelement__feilmelding').contains('Beløp kan ikke være større enn 10 000')
+                cy.get('[data-cy="opplasting-form"]').contains('Beløp kan ikke være større enn 10 000')
             })
 
             it('Kan ikke skrive inn med 3 desimaler', () => {

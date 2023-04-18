@@ -16,7 +16,7 @@ describe('Test sletting av kvittering som feiler', () => {
             cy.get('select[name=transportmiddel]').select('TAXI')
             cy.get('input[name=belop_input]').type('1234')
             cy.get('.filopplasteren input[type=file]').attachFile('kvittering.jpg')
-            cy.get('.knapperad').contains('Bekreft').click()
+            cy.get('button').contains('Bekreft').click()
         })
 
         it('Liste med kvitteringer er oppdatert', () => {
