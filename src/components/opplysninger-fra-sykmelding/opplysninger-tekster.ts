@@ -24,6 +24,12 @@ const OpplysningerTekster = {
     'sykepengesoknad.sykmelding-utdrag.forsikring': 'Forsikring',
     'sykepengesoknad.sykmelding-utdrag.egenmelding-papir': 'Egenmelding og/eller sykmelding på papir',
     'sykepengesoknad.sykmelding-utdrag.egenmelding-papir-nei': 'Har ikke hatt egenmelding og/eller sykmelding på papir',
+    'sykmelding.oppdelt.tittel': 'Sykmeldingen er delt opp',
+    'sykmelding.oppdelt.info':
+        'Når sykmeldingen går over en måned deles den opp, slik at du kan søke om sykepenger før hele perioden er ferdig. Dette gjør at du slipper å vente lenge på sykepengene dine.',
+    'sykmelding.overlapp.tittel': 'Overlappende sykmelding',
+    'sykmelding.overlapp.info':
+        'Den siste innsendte sykmeldingen fra legen erstatter deler av denne sykmeldingen. Vi har derfor tilpasset søknaden slik at du ikke må sende inn søknad om sykepenger for samme periode.',
 }
 
 export default OpplysningerTekster
