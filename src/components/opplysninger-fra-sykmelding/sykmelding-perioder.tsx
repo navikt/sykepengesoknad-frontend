@@ -4,20 +4,15 @@ import React from 'react'
 
 import { Periode, Sykmelding } from '../../types/sykmelding'
 import { getDuration } from '../../utils/dato-utils'
-import { erOppdelt } from '../../utils/periode-utils'
 import { sorterEtterEldsteTom } from '../../utils/sykmelding-utils'
 import { tekst } from '../../utils/tekster'
 import Vis from '../vis'
-import { Soknad } from '../../types/types'
-import { ProgressivtGuidePanel } from '../guidepanel/ProgressivtGuidePanel'
-import { parserWithReplace } from '../../utils/html-react-parser-utils'
 
 interface SykmeldingPerioderProps {
-    valgtSoknad: Soknad
     valgtSykmelding: Sykmelding
 }
 
-const SykmeldingPerioder = ({ valgtSoknad, valgtSykmelding }: SykmeldingPerioderProps) => {
+const SykmeldingPerioder = ({ valgtSykmelding }: SykmeldingPerioderProps) => {
     const sortertePerioder = valgtSykmelding.sykmeldingsperioder.sort(sorterEtterEldsteTom) || []
 
     const hentPeriodeTekst = (periode: Periode) => {
@@ -77,11 +72,6 @@ const SykmeldingPerioder = ({ valgtSoknad, valgtSykmelding }: SykmeldingPerioder
                     </div>
                 )
             })}
-            {erOppdelt(valgtSoknad, valgtSykmelding) && (
-                <ProgressivtGuidePanel>
-                    <BodyShort>{parserWithReplace(tekst('sykepengesoknad.sykmelding-utdrag.oppdelt.bjorn'))}</BodyShort>
-                </ProgressivtGuidePanel>
-            )}
         </section>
     )
 }

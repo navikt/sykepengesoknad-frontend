@@ -434,6 +434,7 @@ export const soknadUtenEgenmeldingSporsmal: RSSoknad = {
     egenmeldtSykmelding: false,
     opprettetAvInntektsmelding: false,
     utenlandskSykmelding: false,
+    klippet: false,
 }
 
 export const egenmeldingSykmeldingaPerson: Persona = {

@@ -16,6 +16,8 @@ import FravaersperioderInfo from './sykmelding-fravaersperioder'
 import SykmeldingPerioder from './sykmelding-perioder'
 import styles from './opplysninger.module.css'
 import Egenmeldingsdager from './sykmelding-egenmeldingsdager'
+import SykmeldingOppdelt from './sykmelding-oppdelt'
+import SykmeldingOverlapp from './sykmelding-overlapp'
 
 interface OpplysningerProps {
     ekspandert: boolean
@@ -50,7 +52,9 @@ const Opplysninger = ({ ekspandert, steg }: OpplysningerProps) => {
                     </Heading>
                 </Accordion.Header>
                 <Accordion.Content className={styles.contentPadding}>
-                    <SykmeldingPerioder valgtSoknad={valgtSoknad} valgtSykmelding={valgtSykmelding} />
+                    <SykmeldingPerioder valgtSykmelding={valgtSykmelding} />
+                    <SykmeldingOppdelt valgtSykmelding={valgtSykmelding} valgtSoknad={valgtSoknad} />
+                    <SykmeldingOverlapp valgtSoknad={valgtSoknad} />
                     <ArbeidsgiverInfo valgtSoknad={valgtSoknad} />
                     <SykmeldingDato valgtSykmelding={valgtSykmelding} />
                     <ArbeidssituasjonInfo valgtSykmelding={valgtSykmelding} />

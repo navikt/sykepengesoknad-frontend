@@ -2075,4 +2075,5 @@ export const veldigLangSoknad: RSSoknad = {
     ],
     egenmeldtSykmelding: false,
     opprettetAvInntektsmelding: false,
+    klippet: false,
 }

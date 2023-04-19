@@ -30,4 +30,5 @@ export interface RSSoknad {
     soknadPerioder: RSSoknadsperiode[]
     merknaderFraSykmelding?: RSMerknad[]
     opprettetAvInntektsmelding: boolean
+    klippet: boolean
 }

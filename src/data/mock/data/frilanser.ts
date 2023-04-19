@@ -364,4 +364,5 @@ export const frilanser: RSSoknad = {
     ],
     egenmeldtSykmelding: false,
     opprettetAvInntektsmelding: false,
+    klippet: false,
 }

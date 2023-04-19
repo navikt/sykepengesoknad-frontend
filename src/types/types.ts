@@ -35,13 +35,13 @@ export class Soknad {
     sendtTilNAVDato?: Date
     sendtTilArbeidsgiverDato?: Date
     utenlandskSykmelding?: boolean
-
     arbeidsgiver?: Arbeidsgiver
     sporsmal: Sporsmal[]
     soknadPerioder: RSSoknadsperiode[]
     korrigerer?: string
     merknaderFraSykmelding?: RSMerknad[]
     opprettetAvInntektsmelding: boolean
+    klippet: boolean
 
     constructor(soknad: RSSoknad) {
         this.id = soknad.id
@@ -69,6 +69,7 @@ export class Soknad {
         this.soknadPerioder = soknad.soknadPerioder
         this.merknaderFraSykmelding = soknad.merknaderFraSykmelding
         this.opprettetAvInntektsmelding = soknad.opprettetAvInntektsmelding
+        this.klippet = soknad.klippet
     }
 }
 

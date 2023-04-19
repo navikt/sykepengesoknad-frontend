@@ -450,6 +450,7 @@ export const nyArbeidUnderveisSoknad: RSSoknad = {
     egenmeldtSykmelding: false,
     merknaderFraSykmelding: [],
     opprettetAvInntektsmelding: false,
+    klippet: false,
 }
 
 export const nyttArbeidUnderveisPerson: Persona = {
