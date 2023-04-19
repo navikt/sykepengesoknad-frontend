@@ -47,6 +47,9 @@ spec:
           namespace: okonomi
         - application: sykmeldinger-backend
           namespace: teamsykmelding
+      external:
+        - host: www.nav.no                      # for prod
+        - host: dekoratoren.ekstern.dev.nav.no  # for dev
   env:
   {{#each env}}
      - name: {{@key}}
