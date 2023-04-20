@@ -12,8 +12,6 @@ import useSoknad from '../../../../hooks/useSoknad'
 import { useAppStore } from '../../../../data/stores/app-store'
 import OpplastingTekster from '../../../filopplaster/kvittering-modal/opplasting-tekster'
 
-import styles from './opplasting.module.css'
-
 const Opplasting = ({ sporsmal }: SpmProps) => {
     const { id } = useParams<RouteParams>()
     const { data: valgtSoknad } = useSoknad(id)
@@ -38,12 +36,12 @@ const Opplasting = ({ sporsmal }: SpmProps) => {
     }
 
     return (
-        <div className="opplasting">
+        <>
             <Label as="h2" className="skjema__sporsmal">
                 {sporsmal.sporsmalstekst}
             </Label>
 
-            <Alert variant="warning" className="reisetilskudd">
+            <Alert variant="warning" className="mt-6 bg-white">
                 <BodyShort as="strong">{tekst('soknad.info.kvitteringer-del1')}</BodyShort>
                 <ul>
                     <BodyShort as="li">{tekst('soknad.info.kvitteringer-del2-kulepunkt1')}</BodyShort>
@@ -53,7 +51,7 @@ const Opplasting = ({ sporsmal }: SpmProps) => {
                 <BodyShort>{tekst('soknad.info.kvitteringer-del3')}</BodyShort>
             </Alert>
 
-            <ReadMore className={styles.pdfHjelp} header={OpplastingTekster['soknad.info.kvitteringer-PDF-tittel']}>
+            <ReadMore className="mt-4" header={OpplastingTekster['soknad.info.kvitteringer-PDF-tittel']}>
                 <BodyLong>{OpplastingTekster['soknad.info.kvitteringer-PDF-tekst']}</BodyLong>
             </ReadMore>
 
@@ -74,7 +72,7 @@ const Opplasting = ({ sporsmal }: SpmProps) => {
             </Modal>
 
             <FilListe />
-        </div>
+        </>
     )
 }
 
