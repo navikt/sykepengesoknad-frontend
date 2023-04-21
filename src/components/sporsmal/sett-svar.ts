@@ -23,8 +23,8 @@ export const settSvar = (sporsmal: Sporsmal, verdier: Record<string, any>): void
     if (
         verdi === undefined &&
         sporsmal.svartype !== RSSvartype.IKKE_RELEVANT &&
-        sporsmal.svartype !== RSSvartype.CHECKBOX_GRUPPE &&
         sporsmal.svartype !== RSSvartype.RADIO &&
+        sporsmal.svartype !== RSSvartype.CHECKBOX &&
         sporsmal.svartype !== RSSvartype.INFO_BEHANDLINGSDAGER
     ) {
         return
@@ -32,8 +32,10 @@ export const settSvar = (sporsmal: Sporsmal, verdier: Record<string, any>): void
 
     switch (sporsmal.svartype) {
         case RSSvartype.CHECKBOX_PANEL:
-        case RSSvartype.CHECKBOX:
             checkboxSvar(sporsmal, verdi)
+            break
+        case RSSvartype.CHECKBOX_GRUPPE:
+            checkboksGruppeSvar(sporsmal, verdi)
             break
         case RSSvartype.RADIO_GRUPPE:
         case RSSvartype.RADIO_GRUPPE_TIMER_PROSENT:
@@ -60,8 +62,7 @@ export const settSvar = (sporsmal: Sporsmal, verdier: Record<string, any>): void
             return
         case RSSvartype.RADIO:
         case RSSvartype.IKKE_RELEVANT:
-
-        case RSSvartype.CHECKBOX_GRUPPE:
+        case RSSvartype.CHECKBOX:
             // Skal ikke ha svarverdi
             break
         default:
@@ -118,6 +119,16 @@ const landSvar = (sporsmal: Sporsmal, verdi: string[]) => {
 const radiogruppeSvar = (sporsmal: Sporsmal, verdi: any) => {
     sporsmal.undersporsmal.forEach((uspm) => {
         const erValgt = uspm.sporsmalstekst === verdi
+        uspm.svarliste = {
+            sporsmalId: uspm.id,
+            svar: [{ verdi: erValgt ? SvarEnums.CHECKED : '' }],
+        }
+    })
+}
+
+const checkboksGruppeSvar = (sporsmal: Sporsmal, verdi: string[]) => {
+    sporsmal.undersporsmal.forEach((uspm) => {
+        const erValgt = verdi.includes(uspm.sporsmalstekst)
         uspm.svarliste = {
             sporsmalId: uspm.id,
             svar: [{ verdi: erValgt ? SvarEnums.CHECKED : '' }],

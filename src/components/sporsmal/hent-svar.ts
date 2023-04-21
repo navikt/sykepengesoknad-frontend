@@ -19,11 +19,15 @@ export const hentSvar = (sporsmal: Sporsmal): any => {
                 .map((uspm) => uspm.svarliste.svar[0]?.verdi)
                 .filter((v) => v !== undefined && v !== 'Ikke til behandling')
                 .map((s) => dayjs(s).toDate())
-
-        case RSSvartype.CHECKBOX:
         case RSSvartype.CHECKBOX_PANEL:
             return svar?.verdi === 'CHECKED'
 
+        case RSSvartype.CHECKBOX_GRUPPE:
+            return sporsmal.undersporsmal
+                .map((spm: Sporsmal) => {
+                    return spm.svarliste.svar[0]?.verdi === SvarEnums.CHECKED ? spm.sporsmalstekst : undefined
+                })
+                .filter((spm) => spm !== undefined)
         case RSSvartype.RADIO_GRUPPE:
         case RSSvartype.RADIO_GRUPPE_TIMER_PROSENT:
         case RSSvartype.RADIO_GRUPPE_UKEKALENDER:
