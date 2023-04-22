@@ -8,7 +8,7 @@ metadata:
   labels:
     team: flex
 spec:
-  image: {{ image }}
+  image: {{image}}
   port: 8080
   ingresses:
     - {{ingress}}
@@ -25,11 +25,10 @@ spec:
       level: Level4
   resources:
     limits:
-      cpu: 2000m
-      memory: 256Mi
+      memory: {{memory}}
     requests:
-      cpu: 500m
-      memory: 256Mi
+      cpu: {{cpu}}
+      memory: {{memory}}
   liveness:
     path: syk/sykepengesoknad/api/internal/isAlive
   readiness:
