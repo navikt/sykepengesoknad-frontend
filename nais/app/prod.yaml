@@ -1,4 +1,6 @@
 ingress: https://www.nav.no/syk/sykepengesoknad
+cpu: 400m
+memory: 256Mi
 env:
   AMPLITUDE_ENABLED: true
   ENVIRONMENT: prod
