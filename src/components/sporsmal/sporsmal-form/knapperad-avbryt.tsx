@@ -1,14 +1,15 @@
 import { Button } from '@navikt/ds-react'
 import React, { MouseEvent } from 'react'
-import { useHistory, useParams } from 'react-router-dom'
+import { useParams } from 'react-router-dom'
 import { useQueryClient } from '@tanstack/react-query'
+import { useNavigate } from 'react-router'
 
 import { useAppStore } from '../../../data/stores/app-store'
 import { tekst } from '../../../utils/tekster'
 import { avbrytSoknad } from '../../avbryt-soknad-modal/avbryt-soknad'
-import { RouteParams } from '../../../app'
 import useSoknad from '../../../hooks/useSoknad'
 import useSoknader from '../../../hooks/useSoknader'
+import { RouteParams } from '../../../app'
 
 type Event = MouseEvent<HTMLAnchorElement | HTMLButtonElement>
 
@@ -17,9 +18,9 @@ const KnapperadAvbryt = () => {
     const { data: valgtSoknad } = useSoknad(id)
     const { data: soknader } = useSoknader()
     const queryClient = useQueryClient()
+    const navigate = useNavigate()
 
     const { setFeilmeldingTekst } = useAppStore()
-    const history = useHistory()
 
     if (!valgtSoknad || !soknader) return null
 
@@ -30,7 +31,7 @@ const KnapperadAvbryt = () => {
             valgtSoknad: valgtSoknad,
             soknader: soknader,
             queryClient: queryClient,
-            history: history,
+            navigate: navigate,
             setFeilmeldingTekst: setFeilmeldingTekst,
         })
     }

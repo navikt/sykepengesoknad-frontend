@@ -1,13 +1,14 @@
 import cls from 'classnames'
 import React from 'react'
-import { useHistory, useParams } from 'react-router'
+import { useNavigate, useParams } from 'react-router'
+import { useLocation } from 'react-router-dom'
 
-import { RouteParams } from '../../../app'
 import { SEPARATOR } from '../../../utils/constants'
 import Vis from '../../vis'
 import { pathUtenSteg } from '../sporsmal-utils'
 import useSoknad from '../../../hooks/useSoknad'
 import { logEvent } from '../../amplitude/amplitude'
+import { RouteParams } from '../../../app'
 
 const innerCls = (aktiv: boolean, ferdig: boolean, disabled: boolean) =>
     cls('stegindikator__steg-inner', {
@@ -25,20 +26,21 @@ export interface StegProps {
 const Steg = ({ label, index }: StegProps) => {
     const { id, stegId } = useParams<RouteParams>()
     const { data: valgtSoknad } = useSoknad(id)
+    const navigate = useNavigate()
+    const location = useLocation()
 
-    const aktivtSteg = parseInt(stegId)
+    const aktivtSteg = parseInt(stegId!)
     const num = index + 1
     const erAktiv = aktivtSteg === num
     const erPassert = aktivtSteg > num
     const disabled = !erPassert && !erAktiv
-    const history = useHistory()
 
     function goTo(idx: number) {
         logEvent('navigere', {
             fra: valgtSoknad!.sporsmal[aktivtSteg - 1].tag,
             til: valgtSoknad!.sporsmal[idx - 1].tag,
         })
-        history.push(pathUtenSteg(history.location.pathname) + SEPARATOR + idx + window.location.search)
+        navigate(pathUtenSteg(location.pathname) + SEPARATOR + idx + location.search)
     }
 
     return (

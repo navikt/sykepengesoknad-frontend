@@ -5,8 +5,8 @@ import { useParams } from 'react-router-dom'
 
 import { tekst } from '../../../utils/tekster'
 import Vis from '../../vis'
-import { RouteParams } from '../../../app'
 import useSoknad from '../../../hooks/useSoknad'
+import { RouteParams } from '../../../app'
 
 export enum Mottaker {
     NAV = 'NAV',

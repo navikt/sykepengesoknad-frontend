@@ -1,8 +1,8 @@
 import { Alert, Button } from '@navikt/ds-react'
 import React, { useEffect, useState } from 'react'
-import { useHistory, useParams } from 'react-router-dom'
+import { useParams } from 'react-router-dom'
+import { useNavigate } from 'react-router'
 
-import { RouteParams } from '../../app'
 import Endreknapp from '../../components/endreknapp/endreknapp'
 import { useAppStore } from '../../data/stores/app-store'
 import { RSSoknadstatus } from '../../types/rs-types/rs-soknadstatus'
@@ -22,6 +22,7 @@ import { urlTilSoknad } from '../soknad/soknad-link'
 import QueryStatusPanel from '../queryStatusPanel/QueryStatusPanel'
 import { kvitteringBreadcrumb, useUpdateBreadcrumbs } from '../../hooks/useBreadcrumbs'
 import { useStudyStatus } from '../../hooks/useStudyStatus'
+import { RouteParams } from '../../app'
 
 import Kvittering from './kvittering'
 import { harKorrigertArbeidstakersoknadIDetSiste } from './harSvartJa'
@@ -32,10 +33,10 @@ const KvitteringSide = () => {
     const { data: valgtSoknad } = useSoknad(id)
     const korrigertSøknadStudy = 'study-zeh32lhqyb'
     const { data: korrigertStudyActive } = useStudyStatus(korrigertSøknadStudy)
+    const navigate = useNavigate()
 
     const { feilmeldingTekst } = useAppStore()
     const [rerendreKvittering, setRerendrekvittering] = useState<Date>(new Date())
-    const history = useHistory()
 
     useUpdateBreadcrumbs(() => [{ ...kvitteringBreadcrumb, handleInApp: true }], [])
 
@@ -44,7 +45,7 @@ const KvitteringSide = () => {
 
         if (valgtSoknad.status !== RSSoknadstatus.SENDT) {
             const url = urlTilSoknad(valgtSoknad)
-            history.replace(url)
+            navigate(url)
             return
         }
 

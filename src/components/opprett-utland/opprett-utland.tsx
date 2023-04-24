@@ -1,8 +1,8 @@
 import { Alert, BodyLong, Button, GuidePanel, Heading, Panel } from '@navikt/ds-react'
 import { logger } from '@navikt/next-logger'
 import React from 'react'
-import { useHistory } from 'react-router'
 import { useQueryClient } from '@tanstack/react-query'
+import { useNavigate } from 'react-router'
 
 import { useAppStore } from '../../data/stores/app-store'
 import { Soknad } from '../../types/types'
@@ -18,8 +18,8 @@ import styles from './OpprettUtland.module.css'
 const OpprettUtland = () => {
     const queryClient = useQueryClient()
     const { setFeilmeldingTekst, feilmeldingTekst } = useAppStore()
+    const navigate = useNavigate()
 
-    const history = useHistory()
     useUpdateBreadcrumbs(() => [{ ...{ title: tekst('opprett-utland.tittel') }, handleInApp: true }], [])
 
     const opprett = async () => {
@@ -46,7 +46,7 @@ const OpprettUtland = () => {
         const soknad = new Soknad(data)
         queryClient.setQueriesData(['soknad', soknad.id], soknad)
         queryClient.invalidateQueries(['soknader'])
-        history.push(urlTilSoknad(soknad))
+        navigate(urlTilSoknad(soknad))
     }
 
     return (

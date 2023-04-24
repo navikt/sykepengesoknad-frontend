@@ -3,10 +3,10 @@ import { useParams } from 'react-router-dom'
 import { Accordion, Heading } from '@navikt/ds-react'
 
 import { tekst } from '../../utils/tekster'
-import { RouteParams } from '../../app'
 import useSoknad from '../../hooks/useSoknad'
 import useSykmelding from '../../hooks/useSykmelding'
 import { logEvent } from '../amplitude/amplitude'
+import { RouteParams } from '../../app'
 
 import ArbeidsgiverInfo from './arbeidsgiver-info'
 import ArbeidssituasjonInfo from './arbeidssituasjon-info'

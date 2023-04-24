@@ -3,8 +3,8 @@ import React from 'react'
 import { useParams } from 'react-router-dom'
 
 import { tekst } from '../../utils/tekster'
-import { RouteParams } from '../../app'
 import useSoknad from '../../hooks/useSoknad'
+import { RouteParams } from '../../app'
 
 import VeilederSVG from './veileder'
 

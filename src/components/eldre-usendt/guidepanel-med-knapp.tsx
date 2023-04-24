@@ -1,6 +1,6 @@
 import { BodyShort, Button, GuidePanel, Heading } from '@navikt/ds-react'
 import React from 'react'
-import { useHistory } from 'react-router-dom'
+import { useNavigate } from 'react-router'
 
 import { logEvent } from '../amplitude/amplitude'
 
@@ -13,7 +13,7 @@ interface GuidepanelMedKnappProps {
 }
 
 export const GuidepanelMedKnapp = ({ heading, innhold, knappeTekst, url, komponent }: GuidepanelMedKnappProps) => {
-    const history = useHistory()
+    const navigate = useNavigate()
 
     logEvent('guidepanel vist', {
         tekst: innhold,
@@ -37,7 +37,7 @@ export const GuidepanelMedKnapp = ({ heading, innhold, knappeTekst, url, kompone
                         komponent: komponent,
                     })
                     if (url.startsWith('/')) {
-                        history.push(url)
+                        navigate(url)
                     } else {
                         window.location.href = url
                     }

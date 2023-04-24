@@ -1,9 +1,9 @@
 import { Back } from '@navikt/ds-icons'
 import { BodyShort, Heading } from '@navikt/ds-react'
 import React, { useEffect } from 'react'
-import { Link, useHistory, useParams } from 'react-router-dom'
+import { Link, useParams } from 'react-router-dom'
+import { useNavigate } from 'react-router'
 
-import { RouteParams } from '../../app'
 import Banner from '../../components/banner/banner'
 import OmReisetilskudd from '../../components/om-reisetilskudd/om-reisetilskudd'
 import Opplysninger from '../../components/opplysninger-fra-sykmelding/opplysninger'
@@ -31,6 +31,7 @@ import { soknadBreadcrumb, useUpdateBreadcrumbs } from '../../hooks/useBreadcrum
 import EgenmeldingsdagerArbeidsgiver from '../egenmeldingsdager-arbeidsgiver/egenmeldingsdager-arbeidsgiver'
 import useSykmeldinger from '../../hooks/useSykmeldinger'
 import useSykmelding from '../../hooks/useSykmelding'
+import { RouteParams } from '../../app'
 
 import { urlTilSoknad } from './soknad-link'
 
@@ -40,9 +41,9 @@ const Soknaden = () => {
     const { data: soknader } = useSoknader()
     const { data: sykmeldinger } = useSykmeldinger()
     const { data: valgtSykmelding } = useSykmelding(valgtSoknad?.sykmeldingId)
+    const navigate = useNavigate()
 
-    const history = useHistory()
-    const stegNo = parseInt(stegId)
+    const stegNo = parseInt(stegId!)
 
     useUpdateBreadcrumbs(() => [{ ...soknadBreadcrumb, handleInApp: true }], [])
 
@@ -52,7 +53,7 @@ const Soknaden = () => {
         if (!valgtSoknad || stegId !== '1') return
 
         // finn posisjon på siste besvarte spørsmål
-        history.replace(urlTilSoknad(valgtSoknad))
+        navigate(urlTilSoknad(valgtSoknad), { replace: true })
         // eslint-disable-next-line
     }, [valgtSoknad?.id])
 
@@ -64,7 +65,7 @@ const Soknaden = () => {
             (valgtSoknad.status !== RSSoknadstatus.NY && valgtSoknad.status !== RSSoknadstatus.UTKAST_TIL_KORRIGERING)
         ) {
             const url = urlTilSoknad(valgtSoknad).replace('/sendt/', '/kvittering/')
-            history.push(url)
+            navigate(url)
             return
         }
 

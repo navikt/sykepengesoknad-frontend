@@ -7,10 +7,10 @@ import { RSSoknadstype } from '../../../types/rs-types/rs-soknadstype'
 import { sendtForMerEnn30DagerSiden } from '../../../utils/dato-utils'
 import { tekst } from '../../../utils/tekster'
 import Vis from '../../vis'
-import { RouteParams } from '../../../app'
 import useSoknad from '../../../hooks/useSoknad'
 import Kontonummer from '../kontonummer/kontonummer'
 import { parserWithReplace } from '../../../utils/html-react-parser-utils'
+import { RouteParams } from '../../../app'
 
 const KvitteringVidere = () => {
     const { id } = useParams<RouteParams>()

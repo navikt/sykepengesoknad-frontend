@@ -4,8 +4,8 @@ import { useParams } from 'react-router-dom'
 
 import { sendtForMerEnn30DagerSiden } from '../../../utils/dato-utils'
 import { tekst } from '../../../utils/tekster'
-import { RouteParams } from '../../../app'
 import useSoknad from '../../../hooks/useSoknad'
+import { RouteParams } from '../../../app'
 
 const KvitteringUtenlands = () => {
     const { id } = useParams<RouteParams>()

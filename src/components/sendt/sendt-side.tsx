@@ -1,8 +1,8 @@
 import { Alert } from '@navikt/ds-react'
 import React, { useEffect, useState } from 'react'
-import { useHistory, useParams } from 'react-router-dom'
+import { useParams } from 'react-router-dom'
+import { useNavigate } from 'react-router'
 
-import { RouteParams } from '../../app'
 import { useAppStore } from '../../data/stores/app-store'
 import { RSSoknadstatus } from '../../types/rs-types/rs-soknadstatus'
 import { RSSoknadstype } from '../../types/rs-types/rs-soknadstype'
@@ -17,15 +17,15 @@ import useSoknad from '../../hooks/useSoknad'
 import { urlTilSoknad } from '../soknad/soknad-link'
 import QueryStatusPanel from '../queryStatusPanel/QueryStatusPanel'
 import { kvitteringBreadcrumb, useUpdateBreadcrumbs } from '../../hooks/useBreadcrumbs'
+import { RouteParams } from '../../app'
 
 const SendtSide = () => {
     const { id } = useParams<RouteParams>()
     const { data: valgtSoknad } = useSoknad(id)
+    const navigate = useNavigate()
 
     const { feilmeldingTekst } = useAppStore()
     const [rerendreKvittering, setRerendrekvittering] = useState<Date>(new Date())
-
-    const history = useHistory()
 
     useUpdateBreadcrumbs(() => [{ ...kvitteringBreadcrumb, handleInApp: true }], [])
 
@@ -33,7 +33,7 @@ const SendtSide = () => {
         if (!valgtSoknad) return
 
         if (valgtSoknad.status !== RSSoknadstatus.SENDT) {
-            history.replace(urlTilSoknad(valgtSoknad))
+            navigate(urlTilSoknad(valgtSoknad), { replace: true })
             return
         }
 

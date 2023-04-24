@@ -1,9 +1,9 @@
 import { BodyShort, Button, Heading, Modal } from '@navikt/ds-react'
 import { logger } from '@navikt/next-logger'
 import React, { useState } from 'react'
-import { useHistory } from 'react-router'
 import { useParams } from 'react-router-dom'
 import { useQueryClient } from '@tanstack/react-query'
+import { useNavigate } from 'react-router'
 
 import { useAppStore } from '../../data/stores/app-store'
 import { Soknad } from '../../types/types'
@@ -11,19 +11,19 @@ import { AuthenticationError, fetchJsonMedRequestId } from '../../utils/fetch'
 import { tekst } from '../../utils/tekster'
 import { logEvent } from '../amplitude/amplitude'
 import { urlTilSoknad } from '../soknad/soknad-link'
-import { RouteParams } from '../../app'
 import useSoknad from '../../hooks/useSoknad'
+import { RouteParams } from '../../app'
 
 const Endreknapp = () => {
     const { id } = useParams<RouteParams>()
     const { data: valgtSoknad } = useSoknad(id)
     const queryClient = useQueryClient()
+    const navigate = useNavigate()
 
     const { setFeilmeldingTekst } = useAppStore()
-    const history = useHistory()
     const [aapen, setAapen] = useState<boolean>(false)
-
     const [korrigerer, setKorrigerer] = useState<boolean>(false)
+
     const endreKnappTekst = tekst('kvittering.knapp.endre')
     const endreSøknadPopup = 'Endre søknad popup'
     if (!valgtSoknad) return null
@@ -58,7 +58,7 @@ const Endreknapp = () => {
         queryClient.setQueriesData(['soknad', soknad.id], soknad)
         queryClient.invalidateQueries(['soknader'])
         setAapen(false)
-        history.push(urlTilSoknad(soknad))
+        navigate(urlTilSoknad(soknad))
     }
 
     return (
