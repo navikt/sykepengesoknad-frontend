@@ -334,15 +334,15 @@ describe('Tester feilmeldinger', () => {
         cy.get('input[value=JA]').click({ force: true })
         gaVidere()
 
-        cy.get('.checkboxgruppe.skjemagruppe--feil').should('exist')
-        cy.get('.skjemaelement__feilmelding').contains('Du må velge et alternativ')
+        cy.get('.navds-error-message').should('exist')
+        cy.get('.navds-error-message').contains('Du må velge minst et alternativ')
         cy.get('.feiloppsummering')
             .should('exist')
             .within(() => {
                 cy.contains('Det er 1 feil i skjemaet')
                 cy.contains('Du må oppgi hvilke inntektskilder du har').click()
             })
-        cy.focused().should('have.attr', 'name', arbeidstakerGradert.sporsmal[8].undersporsmal[0].undersporsmal[0].id)
+        cy.focused().should('have.attr', 'id', arbeidstakerGradert.sporsmal[8].undersporsmal[0].undersporsmal[0].id)
     })
 
     it('CHECKBOX_GRUPPE feilmelding går bort', () => {

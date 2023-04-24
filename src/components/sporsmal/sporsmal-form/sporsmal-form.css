@@ -19,81 +19,6 @@
 .skjemaelement__description {
     margin-bottom: 0.5rem;
 }
-.checkboks {
-    position: absolute;
-    opacity: 0;
-}
-.checkboks + .skjemaelement__label {
-    padding-left: 32px;
-    position: relative;
-    display: inline-block;
-    cursor: pointer;
-    margin-bottom: 0;
-    line-height: 24px;
-}
-.checkboks + .skjemaelement__label::before {
-    content: '';
-    position: absolute;
-    display: block;
-    text-align: center;
-    background-color: #ffffff;
-    background-position: center center;
-    background-repeat: no-repeat;
-    border: 1px solid #707070;
-    color: #707070;
-    width: 24px;
-    height: 24px;
-    left: 0;
-    top: 0;
-}
-.checkboks:hover + .skjemaelement__label {
-    color: #0067c5;
-}
-.checkboks:hover + .skjemaelement__label::before {
-    border-color: #0067c5;
-    background-color: #cce1ff;
-}
-.checkboks:disabled + .skjemaelement__label {
-    color: #707070;
-}
-.checkboks:disabled + .skjemaelement__label:hover {
-    cursor: not-allowed;
-}
-.checkboks:disabled + .skjemaelement__label::before {
-    background-color: #f1f1f1;
-    border-color: #707070;
-    box-shadow: none;
-}
-.checkboks--mork + .skjemaelement__label::before {
-    border-color: #707070;
-}
-.checkboks {
-    position: absolute;
-    opacity: 0;
-}
-.checkboks:focus + .skjemaelement__label::before {
-    box-shadow: 0 0 0 3px #00347d;
-}
-.checkboks + .skjemaelement__label::before {
-    border-radius: 4px;
-}
-.checkboks:checked:disabled + .skjemaelement__label::before {
-    border-color: #b0b0b0;
-    background-color: #b0b0b0;
-}
-.checkboks:checked:focus + .skjemaelement__label::before {
-    background-color: white;
-    background-image: url(data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAxMyAxMCI+ICAgIDxnPiAgICA8cGF0aCBmaWxsPSIjMDA2N0M1IiBkPSJNNCwxMGMtMC40LDAtMC44LTAuMS0xLjEtMC40TDAuNCw3LjFDMC4xLDYuOCwwLDYuNCwwLDZzMC4yLTAuOCwwLjUtMS4xQzEsNC40LDIsNC40LDIuNSw0LjlMNCw2LjRsNi40LTYgICAgQzEwLjgsMC4xLDExLjEsMCwxMS41LDBjMC40LDAsMC44LDAuMiwxLDAuNWMwLjYsMC42LDAuNSwxLjYtMC4xLDIuMXYwTDUsOS42QzQuNyw5LjksNC40LDEwLDQsMTB6IE0xMS44LDEuOUwxMS44LDEuOSAgICBDMTEuOCwxLjksMTEuOCwxLjksMTEuOCwxLjl6IE0xMS4yLDEuMUMxMS4yLDEuMSwxMS4yLDEuMSwxMS4yLDEuMUwxMS4yLDEuMXoiLz4gICAgPC9nPjwvc3ZnPg==);
-}
-.checkboks:checked + .skjemaelement__label::before {
-    background-image: url(data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAxMyAxMCI+ICAgIDxnPiAgICA8cGF0aCBmaWxsPSIjRkZGRkZGIiBkPSJNNCwxMGMtMC40LDAtMC44LTAuMS0xLjEtMC40TDAuNCw3LjFDMC4xLDYuOCwwLDYuNCwwLDZzMC4yLTAuOCwwLjUtMS4xQzEsNC40LDIsNC40LDIuNSw0LjlMNCw2LjRsNi40LTYgICAgQzEwLjgsMC4xLDExLjEsMCwxMS41LDBjMC40LDAsMC44LDAuMiwxLDAuNWMwLjYsMC42LDAuNSwxLjYtMC4xLDIuMXYwTDUsOS42QzQuNyw5LjksNC40LDEwLDQsMTB6IE0xMS44LDEuOUwxMS44LDEuOSAgICBDMTEuOCwxLjksMTEuOCwxLjksMTEuOCwxLjl6IE0xMS4yLDEuMUMxMS4yLDEuMSwxMS4yLDEuMSwxMS4yLDEuMUwxMS4yLDEuMXoiLz4gICAgPC9nPjwvc3ZnPg==);
-    background-position: center center;
-    background-repeat: no-repeat;
-    background-size: 75%;
-    border-color: #0067c5;
-    border-width: 2px;
-    background-color: #0067c5;
-}
 .textarea--medMeta {
     resize: none;
     width: 100%;
@@ -308,21 +233,8 @@
     border-color: #c30000;
     box-shadow: 0 0 0 1px #c30000;
 }
-.skjemagruppe--feil
-    .skjemaelement__input:not(:focus):not(:hover):not(:active):not(:checked).checkboks
-    + .skjemaelement__label::before {
-    border-color: #c30000;
-    box-shadow: 0 0 0 1px #c30000;
-}
 .skjemaelement__input--harFeil:not(:focus):not(:hover):not(:active) .navds-text-field__input,
 .skjemaelement__input--harFeil:not(:focus):not(:hover):not(:active) + .ds-datepicker__calendarButton {
-    border-color: #c30000;
-    box-shadow: 0 0 0 1px #c30000;
-}
-.skjemaelement__input--harFeil:not(:focus):not(:hover):not(:active).checkboks:not(:checked)
-    + .skjemaelement__label::before,
-.skjemaelement__input--harFeil:not(:focus):not(:hover):not(:active).radio:not(:checked)
-    + .skjemaelement__label::before {
     border-color: #c30000;
     box-shadow: 0 0 0 1px #c30000;
 }
@@ -411,10 +323,7 @@
 .skjemagruppe__fieldset .skjemagruppe.inputPanelGruppe,
 .skjemagruppe .skjemagruppe.radiogruppe,
 .skjemagruppe fieldset .skjemagruppe.radiogruppe,
-.skjemagruppe__fieldset .skjemagruppe.radiogruppe,
-.skjemagruppe .skjemagruppe.checkboxgruppe,
-.skjemagruppe fieldset .skjemagruppe.checkboxgruppe,
-.skjemagruppe__fieldset .skjemagruppe.checkboxgruppe {
+.skjemagruppe__fieldset .skjemagruppe.radiogruppe {
     margin-bottom: 1rem;
 }
 .skjemagruppe__description {
@@ -425,15 +334,13 @@
     margin-bottom: 1rem;
 }
 .skjemagruppe.inputPanelGruppe .skjemaelement,
-.skjemagruppe.radiogruppe .skjemaelement,
-.skjemagruppe.checkboxgruppe .skjemaelement {
+.skjemagruppe.radiogruppe .skjemaelement {
     margin-bottom: 1rem;
 }
 .skjemagruppe.inputPanelGruppe legend,
 .skjemagruppe.radiogruppe legend,
 .skjemagruppe.inputPanelGruppe .skjemagruppe__legend,
-.skjemagruppe.radiogruppe .skjemagruppe__legend,
-.skjemagruppe.checkboxgruppe .skjemagruppe__legend {
+.skjemagruppe.radiogruppe .skjemagruppe__legend {
     font-family: 'Source Sans Pro', Arial, sans-serif;
     font-size: 16px;
     line-height: 22px;
@@ -482,9 +389,6 @@
 .sporsmal__form .redaksjonelt-innhold li + li {
     margin-top: 0.7rem;
 }
-.sporsmal__form .checkboksContainer .skjemaelement__label {
-    margin-left: 1rem;
-}
 .sporsmal__form .medHjelpetekst {
     display: flex;
     align-items: center;
@@ -497,9 +401,6 @@
 }
 .sporsmal__form .inputPanelGruppe .skjema__sporsmal {
     margin-bottom: 0.75rem;
-}
-.sporsmal__form .checkboks + .skjemaelement__label {
-    font-size: 1.125rem;
 }
 .sporsmal__form .periodeliste {
     list-style: none;

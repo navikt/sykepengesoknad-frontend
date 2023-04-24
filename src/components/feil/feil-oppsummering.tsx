@@ -51,7 +51,10 @@ const FeilOppsummering = ({
             }
         } else if (detteSpm.svartype === RSSvartype.JA_NEI) {
             elmid = idarr[0] += '_0'
-        } else if (detteSpm.svartype === RSSvartype.RADIO_GRUPPE_TIMER_PROSENT) {
+        } else if (
+            detteSpm.svartype === RSSvartype.RADIO_GRUPPE_TIMER_PROSENT ||
+            detteSpm.svartype === RSSvartype.CHECKBOX_GRUPPE
+        ) {
             elmid = detteSpm.undersporsmal[0].id
         } else if (detteSpm.svartype.includes('CHECK') || detteSpm.svartype.includes('RADIO')) {
             elmid = idarr[0]

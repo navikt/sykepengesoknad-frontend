@@ -86,7 +86,7 @@ describe('Tester frilansersøknad', () => {
         // Svarer JA
         // Underspørsmål nivå 1 - checkbox
         cy.contains('Hvilke inntektskilder har du?')
-        cy.get('.undersporsmal .checkboxgruppe label[for=687440]')
+        cy.get('.undersporsmal .navds-checkbox label[for=687440]')
             .should('include.text', 'arbeidsforhold')
             .click({ force: true })
         // Underspørsmål nivå 2 - radio

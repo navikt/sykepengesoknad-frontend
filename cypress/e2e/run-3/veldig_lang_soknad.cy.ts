@@ -34,7 +34,7 @@ describe('Tester støtte for gamle spørsmål', () => {
     }
 
     function velgCheckbox(gjelder: string) {
-        cy.get('.undersporsmal .checkboxgruppe').contains(gjelder).click({ force: true })
+        cy.get('.undersporsmal .navds-checkbox').contains(gjelder).click({ force: true })
     }
 
     function svarRadio(gjelder: string, svar: 'Ja' | 'Nei' | 'Prosent' | 'Timer') {
