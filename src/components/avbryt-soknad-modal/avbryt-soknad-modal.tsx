@@ -123,7 +123,7 @@ const AvbrytSoknadModal = () => {
                     </Button>
                     <Button
                         variant="secondary"
-                        className="mt-4 ml-auto mr-auto block"
+                        className="ml-auto mr-auto mt-4 block"
                         onClick={() => {
                             setAapen(false)
                             logEvent('knapp klikket', {

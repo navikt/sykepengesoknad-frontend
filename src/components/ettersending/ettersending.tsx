@@ -129,7 +129,7 @@ const Ettersending = ({ gjelder, setRerendrekvittering }: EttersendingProps) => 
                         {hentTekst('kvittering.knapp.bekreft.send-til')}
                     </Button>
                     <Button
-                        className="mt-4 ml-auto mr-auto block"
+                        className="ml-auto mr-auto mt-4 block"
                         variant="tertiary"
                         onClick={() => setVilEttersende(false)}
                     >

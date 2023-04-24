@@ -100,7 +100,7 @@ const Slettknapp = ({ sporsmal, kvittering, updateFilliste }: SlettknappProps) =
                         {tekst('opplasting_modal.vil-slette')}
                     </Heading>
                     <Button
-                        className="mt-4 ml-auto mr-auto block"
+                        className="ml-auto mr-auto mt-4 block"
                         variant="danger"
                         loading={sletter}
                         type="button"

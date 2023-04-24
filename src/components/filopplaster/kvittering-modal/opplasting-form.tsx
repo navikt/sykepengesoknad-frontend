@@ -202,7 +202,7 @@ const OpplastingForm = ({ valgtSoknad, valgtKvittering, setOpenModal, valgtFil, 
                         disabled={formErDisabled}
                     />
 
-                    <div role="alert" aria-live="assertive" className="mt-2 mb-4 text-red-600">
+                    <div role="alert" aria-live="assertive" className="mb-4 mt-2 text-red-600">
                         <Vis
                             hvis={methods.formState.errors['belop_input']?.message}
                             render={() => (
