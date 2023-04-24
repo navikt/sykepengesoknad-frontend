@@ -162,12 +162,11 @@ describe('Tester arbeidstakersøknad - gradert 50%', () => {
         cy.get('.radioGruppe-jaNei input[value=JA]').click({ force: true })
 
         cy.contains('Velg inntektskildene som passer for deg. Finner du ikke noe som passer for deg, svarer du nei')
-        cy.get('.undersporsmal .checkboxgruppe label[for=d9ac4359-5519-34f1-b59d-b5ab24e55821]').should(
+        cy.get('.undersporsmal .navds-checkbox label[for=d9ac4359-5519-34f1-b59d-b5ab24e55821]').should(
             'include.text',
             'ansatt et annet sted enn nevnt over',
         )
-        cy.get('.undersporsmal .checkboxgruppe .checkboks#d9ac4359-5519-34f1-b59d-b5ab24e55821').click({ force: true })
-
+        cy.get('input[type=checkbox]#d9ac4359-5519-34f1-b59d-b5ab24e55821').click({ force: true })
         cy.contains('Gå videre').click()
     })
 

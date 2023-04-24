@@ -62,8 +62,9 @@ describe('Tester behandlingsdagersøknad', () => {
         // Svarer JA
         // Underspørsmål nivå 1 - checkbox
         cy.contains('Hvilke andre inntektskilder har du?')
-        cy.get('.undersporsmal .checkboxgruppe label[for=687382]').should('include.text', 'andre arbeidsforhold')
-        cy.get('.undersporsmal .checkboxgruppe .checkboks#687382').click()
+        cy.get('.undersporsmal .navds-checkbox label[for=687382]').should('include.text', 'andre arbeidsforhold')
+        cy.get('input[type=checkbox]#687382').click({ force: true })
+
         // Underspørsmål nivå 2 - radio
         cy.get('input[type=radio]#687383_0').click({ force: true })
         cy.contains(

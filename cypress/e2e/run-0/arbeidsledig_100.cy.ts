@@ -57,10 +57,8 @@ describe('Tester arbeidsledigsøknad', () => {
         // Svarer JA
         // Underspørsmål nivå 1 - checkbox
         cy.contains('Hvilke inntektskilder har du hatt?')
-        cy.get('.undersporsmal .checkboxgruppe label[for=687404]').should('include.text', 'andre arbeidsforhold')
-        cy.get('.undersporsmal .checkboxgruppe .checkboks#687404').click({
-            force: true,
-        })
+        cy.get('.undersporsmal .navds-checkbox label[for=687404]').should('include.text', 'andre arbeidsforhold')
+        cy.get('input[type=checkbox]#687404').click({ force: true })
         // Underspørsmål nivå 2 - radio
         cy.get('input[type=radio]#687405_0').click({ force: true })
         cy.contains(

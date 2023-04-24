@@ -70,9 +70,7 @@ describe('Teste førsteside i reisetilskuddsøknaden', () => {
 
         it('Tester beløp valget', () => {
             cy.get('.radioGruppe-jaNei input[value=JA]').click({ force: true })
-            cy.get(':nth-child(1) > .skjemaelement__label').click({
-                force: true,
-            })
+            cy.get('input[type=checkbox]#1566426').click({ force: true })
             cy.get('#1566427').focus().type('1000', { delay: 500, force: true })
             cy.get('#1566427').should('have.value', '1000')
             cy.contains('Gå videre').click()
