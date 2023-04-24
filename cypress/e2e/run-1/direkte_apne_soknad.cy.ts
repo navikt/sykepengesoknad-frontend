@@ -51,7 +51,7 @@ describe('Tester å åpne søknaden direkte fra sykefravaer', () => {
 
     it('Hvis vi går til /soknader sendes vi til oversikten', function () {
         cy.visit('/syk/sykepengesoknad/soknader/')
-        cy.url().should('equal', Cypress.config().baseUrl + '/syk/sykepengesoknad/')
+        cy.url().should('equal', Cypress.config().baseUrl + '/syk/sykepengesoknad')
         cy.contains('Søknad om sykepenger').and('be.visible')
     })
 })

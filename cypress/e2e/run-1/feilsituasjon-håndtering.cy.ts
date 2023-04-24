@@ -24,7 +24,7 @@ describe('Tester feilsituasjoner ', () => {
         })
 
         it('Vi havner på feilstate siden', function () {
-            cy.url().should('equal', Cypress.config().baseUrl + '/syk/sykepengesoknad/')
+            cy.url().should('equal', Cypress.config().baseUrl + '/syk/sykepengesoknad')
             cy.contains('Ooops! Her har det skjedd noe rart')
             cy.contains('Du må laste inn siden på nytt for å fortsette')
 
@@ -52,7 +52,7 @@ describe('Tester feilsituasjoner ', () => {
         })
 
         it('Vi havner på feilstate siden pga FEIL_STATUS_FOR_OPPDATER_SPORSMAL', function () {
-            cy.url().should('equal', Cypress.config().baseUrl + '/syk/sykepengesoknad/')
+            cy.url().should('equal', Cypress.config().baseUrl + '/syk/sykepengesoknad')
             cy.contains('Ooops! Her har det skjedd noe rart')
             cy.contains('Du må laste inn siden på nytt for å fortsette')
 

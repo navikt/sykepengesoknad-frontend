@@ -33,18 +33,22 @@ describe('Tester endring uten en endringer', () => {
         cy.url().should('include', '/4')
         cy.contains('Gå videre').click()
 
-        cy.url().should('include', '/')
+        cy.url().should('include', '/5')
         cy.contains('Gå videre').click()
-        cy.get('.navds-checkbox__label').click({ force: true })
-
-        cy.contains('Send endringene').click()
     })
 
     it('Vi ser en popup og lander på listevisninga', function () {
+        cy.url().should('include', '/6')
+        cy.get('.navds-checkbox__label').click({ force: true })
+        cy.contains('Send endringene').click()
+
         cy.get('.navds-modal__content').contains('Du har ikke gjort noen endringer')
         cy.contains('Vi behandler den opprinnelige sykepengesøknaden din.')
 
         cy.contains('OK').click()
-        cy.url().should('equal', Cypress.config().baseUrl + '/syk/sykepengesoknad/')
+
+        cy.log(`url er: ${Cypress.config().baseUrl}`)
+
+        cy.url().should('equal', Cypress.config().baseUrl + '/syk/sykepengesoknad')
     })
 })
