@@ -15,7 +15,7 @@ const Person = () => {
 
     return (
         <div className="person">
-            <div style={{ display: 'none' }} id="listelink" onClick={() => navigate('/syk/sykepengesoknad/')}>
+            <div style={{ display: 'none' }} id="listelink" onClick={() => navigate('/')}>
                 TestLink
             </div>
             <button
