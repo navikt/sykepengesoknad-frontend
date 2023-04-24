@@ -106,6 +106,12 @@ describe('Tester arbeidstakersøknad - gradert 50%', () => {
         cy.get('.radioGruppe-jaNei input[value=JA]').click({ force: true })
 
         // Underspørsmål 1
+        cy.contains(
+            'Hvor mange timer i uken jobber du vanligvis når du er frisk? Varierer det, kan du oppgi gjennomsnittet.',
+        )
+        cy.get('.undersporsmal .navds-text-field__input#495730df-717d-3774-bd19-e6bcf76e3ba2').type('12')
+
+        // Underspørsmål 2
         cy.contains('Hvor mye jobbet du tilsammen 1. - 24. april 2020?')
         cy.contains('Velg timer eller prosent')
         // Svarer prosent
@@ -118,16 +124,9 @@ describe('Tester arbeidstakersøknad - gradert 50%', () => {
         // 12 timer * (9 dager/5) * 0.5 (50% sykefraværsgrad) = 10.8 timer, så vi prøver litt lavere enn det
         cy.get('.undersporsmal .navds-text-field__input#34c3cb3f-1aeb-3095-9ac6-d8f4f4c9e539').type('10.7')
 
-        // Underspørsmål 2
-        cy.contains(
-            'Hvor mange timer i uken jobber du vanligvis når du er frisk? Varierer det, kan du oppgi gjennomsnittet.',
-        )
-        cy.get('.undersporsmal .navds-text-field__input#495730df-717d-3774-bd19-e6bcf76e3ba2').type('12')
-
         cy.contains('Gå videre').click()
 
-        cy.contains('Er prosenten lavere enn du forventet?')
-        cy.get('.undersporsmal .navds-alert--info').should('not.exist')
+        cy.get('.navds-read-more__button').contains('Er prosenten lavere enn du forventet?')
 
         // Feilmelding
         cy.get('.skjemaelement__feilmelding').contains('Timene utgjør mindre enn 50 %.')
@@ -136,6 +135,7 @@ describe('Tester arbeidstakersøknad - gradert 50%', () => {
         )
 
         // Endre timer til 11, som er mer enn 10.8
+        cy.get('.undersporsmal .navds-text-field__input#34c3cb3f-1aeb-3095-9ac6-d8f4f4c9e539').clear()
         cy.get('.undersporsmal .navds-text-field__input#34c3cb3f-1aeb-3095-9ac6-d8f4f4c9e539').type('11')
 
         cy.contains('Gå videre').click()
