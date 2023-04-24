@@ -125,22 +125,22 @@ describe('Tester arbeidstakersøknad', () => {
         // Underspørsmål 1
         cy.contains('Oppgi arbeidsmengde i timer eller prosent')
         // Svarer prosent
-        cy.get('.undersporsmal input[value=Prosent]').focus().click({ force: true })
+        cy.get('.undersporsmal input[value=Prosent]').click({ force: true })
         cy.contains(
             'Oppgi hvor mange prosent av din normale arbeidstid du jobbet hos POSTEN NORGE AS, BÆRUM i perioden 1. - 24. april 2020?',
         )
-        cy.get('.undersporsmal .navds-text-field__input#796cf7ed-8a7e-39de-9cbc-6e789aa5af3f').focus().type('21')
+        cy.get('.undersporsmal .navds-text-field__input#796cf7ed-8a7e-39de-9cbc-6e789aa5af3f').type('21')
         // Velger timer
-        cy.get('.undersporsmal input[value=Timer]').focus().click({ force: true })
+        cy.get('.undersporsmal input[value=Timer]').click({ force: true })
         cy.contains('Oppgi totalt antall timer du jobbet i perioden 1. - 24. april 2020 hos POSTEN NORGE AS, BÆRUM')
         cy.contains('Antall timer du skrev inn, betyr at du har jobbet').should('not.exist')
         // Svarer timer
-        cy.get('.undersporsmal .navds-text-field__input#6cc620d8-d4b0-3e82-a038-2757df6fc311').focus().type('21')
+        cy.get('.undersporsmal .navds-text-field__input#6cc620d8-d4b0-3e82-a038-2757df6fc311').type('21')
         cy.contains('Er prosenten lavere enn du forventet?').should('not.exist')
 
         // Underspørsmål 2
         cy.contains('Jobber du vanligvis 37,5 timer i uka hos POSTEN NORGE AS, BÆRUM?')
-        cy.get('input#af302d17-f35d-38a6-ac23-ccde5db369cb_0').focus().click({ force: true })
+        cy.get('input#af302d17-f35d-38a6-ac23-ccde5db369cb_0').click({ force: true })
 
         cy.contains('Gå videre').click()
     })

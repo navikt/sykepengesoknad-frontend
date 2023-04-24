@@ -25,8 +25,8 @@ describe('Tester støtte for gamle spørsmål', () => {
 
     function velgTimer() {
         const id = soknad.sporsmal[steg - 1].undersporsmal[1].undersporsmal[1].undersporsmal[0].id
-        cy.get('.undersporsmal input[value=timer]').focus().click({ force: true })
-        cy.get(`.undersporsmal .navds-text-field__input#${id}`).focus().type('21')
+        cy.get('.undersporsmal input[value=timer]').click({ force: true })
+        cy.get(`.undersporsmal .navds-text-field__input#${id}`).type('21')
     }
 
     function velgTall(sporsmalstekst: string, verdi: string) {

@@ -66,9 +66,9 @@ describe('Tester frilansersøknad', () => {
         // Underspørsmål 1
         cy.contains('Oppgi arbeidsmengde i timer eller prosent')
         // Svarer prosent
-        cy.get('.undersporsmal input[value=Prosent]').focus().click({ force: true })
+        cy.get('.undersporsmal input[value=Prosent]').click({ force: true })
         cy.contains('Oppgi hvor mange prosent av din normale arbeidstid du jobbet i perioden 1. - 24. april 2020?')
-        cy.get('.undersporsmal .navds-text-field__input#b68db08b-9ad1-38e5-bcdd-2c98963c2b8d').focus().type('21')
+        cy.get('.undersporsmal .navds-text-field__input#b68db08b-9ad1-38e5-bcdd-2c98963c2b8d').type('21')
 
         // Underspørsmål 2
         cy.contains('Jobber du vanligvis 37,5 timer i uka?')

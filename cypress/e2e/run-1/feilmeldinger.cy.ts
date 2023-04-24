@@ -127,7 +127,8 @@ describe('Tester feilmeldinger', () => {
     })
 
     it('DATO større enn max', () => {
-        cy.get('.navds-text-field__input').clear().type('01.01.5000')
+        cy.get('.navds-text-field__input').clear()
+        cy.get('.navds-text-field__input').type('01.01.5000')
         gaVidere()
         feilmeldingHandteringForNyDatepicker(
             'Datoen kan ikke være etter 24.04.2020',
@@ -137,7 +138,8 @@ describe('Tester feilmeldinger', () => {
     })
 
     it('DATO ugyldig format', () => {
-        cy.get('.navds-text-field__input').clear().type('abc')
+        cy.get('.navds-text-field__input').clear()
+        cy.get('.navds-text-field__input').type('abc')
         gaVidere()
         feilmeldingHandteringForNyDatepicker(
             'Datoen følger ikke formatet dd.mm.åååå',
@@ -147,7 +149,8 @@ describe('Tester feilmeldinger', () => {
     })
 
     it('DATO ugyldig format', () => {
-        cy.get('.navds-text-field__input').clear().type('2020')
+        cy.get('.navds-text-field__input').clear()
+        cy.get('.navds-text-field__input').type('2020')
         gaVidere()
         feilmeldingHandteringForNyDatepicker(
             'Datoen følger ikke formatet dd.mm.åååå',
@@ -181,7 +184,8 @@ describe('Tester feilmeldinger', () => {
     })
 
     it('PERIODER ugyldig format', () => {
-        cy.focused().clear().type('abc')
+        cy.focused().clear()
+        cy.focused().type('abc')
         gaVidere()
         feilmeldingHandteringForNyDatepicker(
             'Du må oppgi en til og med dato i formatet dd.mm.åååå',
@@ -191,7 +195,8 @@ describe('Tester feilmeldinger', () => {
     })
 
     it('PERIODER tom før fom', () => {
-        cy.focused().clear().type('10.04.2020')
+        cy.focused().clear()
+        cy.focused().type('10.04.2020')
         gaVidere()
         feilmeldingHandteringForNyDatepicker(
             'Til og med må være etter fra og med',
@@ -257,7 +262,7 @@ describe('Tester feilmeldinger', () => {
         gaTilSoknad(arbeidstakerGradert, '7')
         cy.get('input[value=JA]').click({ force: true })
         cy.get(`input[name=${arbeidstakerGradert.sporsmal[6].undersporsmal[0].id}]`).type('37.5')
-        cy.get('.undersporsmal input[value=Timer]').focus().click({ force: true })
+        cy.get('.undersporsmal input[value=Timer]').click({ force: true })
         cy.get(
             `input[name=${arbeidstakerGradert.sporsmal[6].undersporsmal[1].undersporsmal[1].undersporsmal[0].id}]`,
         ).type('1')
@@ -274,7 +279,7 @@ describe('Tester feilmeldinger', () => {
     it('TALL ingen valg', () => {
         gaTilSoknad(arbeidstakerGradert, '7')
         cy.get('input[value=JA]').click({ force: true })
-        cy.get('.undersporsmal input[value=Prosent]').focus().click({ force: true })
+        cy.get('.undersporsmal input[value=Prosent]').click({ force: true })
         cy.get(`input[name=${arbeidstakerGradert.sporsmal[6].undersporsmal[0].id}]`).type('37.5')
         gaVidere()
 
@@ -296,7 +301,8 @@ describe('Tester feilmeldinger', () => {
     })
 
     it('TALL større enn max', () => {
-        cy.focused().clear().type('1000')
+        cy.focused().clear()
+        cy.focused().type('1000')
         gaVidere()
         feilmeldingHandteringForNyeKomponenter(
             'Må være maksimum 99',
@@ -325,7 +331,8 @@ describe('Tester feilmeldinger', () => {
     })
 
     it('TALL grad feilmelding går bort', () => {
-        cy.focused().clear().type('67.5')
+        cy.focused().clear()
+        cy.focused().type('67.5')
         ingenFeilmeldinger()
     })
 
