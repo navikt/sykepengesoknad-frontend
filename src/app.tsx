@@ -53,9 +53,9 @@ const App = (): any => {
                                     <RefreshHvisFeilState>
                                         <Routes>
                                             <Route path="/" element={<Soknader />} />
-                                            <Route path="soknader/:id" element={<Soknad />}>
-                                                <Route path=":stegId" element={<Soknad />} />
-                                            </Route>
+                                            <Route path="soknader" element={<Soknader />} />
+                                            <Route path="soknader/:id" element={<Soknad />} />
+                                            <Route path="soknader/:id/:stegId" element={<Soknad />} />
                                             <Route path="avbrutt/:id" element={<AvbruttSoknad />} />
                                             <Route path="kvittering/:id" element={<KvitteringSide />} />
                                             <Route path="sendt/:id" element={<SendtSide />} />
