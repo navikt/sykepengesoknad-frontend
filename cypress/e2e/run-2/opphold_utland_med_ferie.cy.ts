@@ -11,11 +11,8 @@ describe('Tester søknad om å beholde sykepenger utenfor EØS', () => {
 
     it('Laster startside', function () {
         cy.get('.navds-heading--xlarge').should('be.visible').and('have.text', 'Søknader')
-        cy.get(`#soknader-list-til-behandling article a[href*=${soknad.id}]`).should(
-            'include.text',
-            'Søknad om å beholde sykepenger utenfor EØS',
-        )
-        cy.get(`#soknader-list-til-behandling article a[href*=${soknad.id}]`).click()
+        cy.get(`a[href*=${soknad.id}]`).should('include.text', 'Søknad om å beholde sykepenger utenfor EØS')
+        cy.get(`a[href*=${soknad.id}]`).click()
     })
 
     it('PERIODEUTLAND - steg 1', function () {
@@ -78,6 +75,6 @@ describe('Tester søknad om å beholde sykepenger utenfor EØS', () => {
         cy.url().should('equal', Cypress.config().baseUrl + '/syk/sykepengesoknad')
 
         cy.get('.navds-heading--xlarge').should('be.visible').and('have.text', 'Søknader')
-        cy.get(`#soknader-list-til-behandling article a[href*=${soknad.id}]`).should('not.exist')
+        cy.get(`a[href*=${soknad.id}]`).should('not.exist')
     })
 })

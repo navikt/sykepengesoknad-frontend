@@ -4,10 +4,10 @@ import React, { useState } from 'react'
 import { useParams } from 'react-router'
 import { useQueryClient } from '@tanstack/react-query'
 
-import fetchMedRequestId, { AuthenticationError } from '../../../utils/fetch'
-import useSoknad from '../../../hooks/useSoknad'
-import { logEvent } from '../../amplitude/amplitude'
-import { RouteParams } from '../../../app'
+import fetchMedRequestId, { AuthenticationError } from '../../utils/fetch'
+import useSoknad from '../../hooks/useSoknad'
+import { logEvent } from '../amplitude/amplitude'
+import { RouteParams } from '../../app'
 
 import styles from './gjenapneknapp.module.css'
 

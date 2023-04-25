@@ -4,7 +4,6 @@ import { useNavigate } from 'react-router'
 
 import { useAppStore } from '../../data/stores/app-store'
 import { tekst } from '../../utils/tekster'
-import { setBodyClass } from '../../utils/utils'
 import { oversiktside } from '../soknad/soknad-link'
 
 export function FeilView() {
@@ -12,7 +11,6 @@ export function FeilView() {
 
     useEffect(() => {
         navigate(oversiktside, { replace: true })
-        setBodyClass('feil-state')
         // eslint-disable-next-line
     }, [])
 

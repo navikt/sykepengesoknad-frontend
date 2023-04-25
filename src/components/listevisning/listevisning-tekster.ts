@@ -1,4 +1,4 @@
-const SoknaderTekster = {
+const ListevisningTekster = {
     'soknader.sidetittel': 'Søknader',
     'soknader.brodsmuler.sidetittel': 'Søknader',
     'soknader.nye.tittel': 'Nye søknader',
@@ -8,4 +8,4 @@ const SoknaderTekster = {
     'landingside.sidetittel': 'Ditt sykefravær',
 }
 
-export default SoknaderTekster
+export default ListevisningTekster

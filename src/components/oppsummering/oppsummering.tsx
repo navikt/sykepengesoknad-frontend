@@ -1,10 +1,10 @@
-import React from 'react'
+import React, { useState } from 'react'
+import { Accordion, Heading } from '@navikt/ds-react'
 
 import { TagTyper } from '../../types/enums'
 import { RSSvartype } from '../../types/rs-types/rs-svartype'
 import { Sporsmal } from '../../types/types'
 import { tekst } from '../../utils/tekster'
-import Utvidbar from '../utvidbar/utvidbar'
 
 import Behandlingsdager from './utdrag/behandlingsdager'
 import CheckboxGruppe from './utdrag/checkbox-gruppe'
@@ -23,35 +23,34 @@ export interface OppsummeringProps {
     sporsmal: Sporsmal
 }
 
-interface EkspanderProps {
-    ekspandert: boolean
-    sporsmal: Sporsmal[]
-}
-
-const Oppsummering = ({ ekspandert, sporsmal }: EkspanderProps) => {
+const Oppsummering = ({ ekspandert, sporsmal }: { ekspandert: boolean; sporsmal: Sporsmal[] }) => {
     const tittel = tekst('sykepengesoknad.oppsummering.tittel')
+    const [erApen, setErApen] = useState<boolean>(ekspandert)
+
     return (
-        <Utvidbar
-            className={'oppsummering lilla' + (ekspandert ? ' apen' : '')}
-            ikon={'/syk/sykepengesoknad/static/sjekkbokser.svg'}
-            ikonHover={'/syk/sykepengesoknad/static/sjekkbokser-hover.svg'}
-            erApen={ekspandert}
-            amplitudeProps={{ component: tittel }}
-            tittel={tittel}
-            ikonAltTekst=""
-        >
-            {sporsmal
-                .filter((sporsmal) => {
-                    return skalVisesIOppsummering(sporsmal)
-                })
-                .map((sporsmal, index) => {
-                    return (
-                        <div className="oppsummering__seksjon" key={index}>
-                            <SporsmalVarianter sporsmal={sporsmal} />
-                        </div>
-                    )
-                })}
-        </Utvidbar>
+        <Accordion className={'oppsummering my-4 border border-gray-400'} data-cy={'oppsummering-fra-søknaden'}>
+            <Accordion.Item open={erApen}>
+                <Accordion.Header onClick={() => setErApen(!erApen)} className={'md:pl-8'}>
+                    <Heading size="small" level="2">
+                        {tittel}
+                    </Heading>
+                </Accordion.Header>
+
+                <Accordion.Content className={'md:pl-8'}>
+                    {sporsmal
+                        .filter((sporsmal) => {
+                            return skalVisesIOppsummering(sporsmal)
+                        })
+                        .map((sporsmal, index) => {
+                            return (
+                                <div className="oppsummering__seksjon" key={index}>
+                                    <SporsmalVarianter sporsmal={sporsmal} />
+                                </div>
+                            )
+                        })}
+                </Accordion.Content>
+            </Accordion.Item>
+        </Accordion>
     )
 }
 

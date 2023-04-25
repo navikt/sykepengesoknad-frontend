@@ -9,7 +9,7 @@ describe('Eldre søknader', () => {
 
         it('Laster startside', function () {
             cy.get('.navds-heading--xlarge').should('be.visible').and('have.text', 'Søknader')
-            cy.get(`#soknader-list-til-behandling article a[href*=${nySoknadSomIkkeKanFyllesUt.id}]`).click()
+            cy.get(`a[href*=${nySoknadSomIkkeKanFyllesUt.id}]`).click()
         })
 
         it('Viser advarsel om at det finnes eldre søknad', function () {
@@ -31,7 +31,7 @@ describe('Eldre søknader', () => {
 
         it('Laster startside', function () {
             cy.get('.navds-heading--xlarge').should('be.visible').and('have.text', 'Søknader')
-            cy.get(`#soknader-list-til-behandling article a[href*=${nySoknadSomIkkeKanFyllesUt.id}]`).click()
+            cy.get(`a[href*=${nySoknadSomIkkeKanFyllesUt.id}]`).click()
         })
 
         it('Viser advarsel om at det finnes eldre søknader', function () {

@@ -10,13 +10,13 @@ describe('Tester avbryting av søknad', () => {
     })
 
     it('Avbrutt søknad har forventa tekst', function () {
-        cy.get(`#soknader-sendt article[aria-labelledby*=${avbruttSoknad.id}]`)
-            .should('include.text', '1. – 24. april')
-            .should('include.text', 'Avbrutt av deg')
+        cy.get(`a[href*=${avbruttSoknad.id}]`)
+            .should('contain.text', '1. – 24. april')
+            .should('contain.text', 'Avbrutt av deg')
     })
 
     it('Ved klikk så åpnes avbrutt søknad visning', function () {
-        cy.get(`#soknader-sendt article[aria-labelledby*=${avbruttSoknad.id}]`).click()
+        cy.get(`a[href*=${avbruttSoknad.id}]`).click()
         cy.url().should('include', `avbrutt/${avbruttSoknad.id}`)
     })
 

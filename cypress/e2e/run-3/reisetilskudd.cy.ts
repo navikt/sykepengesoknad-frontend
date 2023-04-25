@@ -11,14 +11,11 @@ describe('Teste førsteside i reisetilskuddsøknaden', () => {
         })
 
         it('Søknad har forventa tekst', () => {
-            cy.get(`article[aria-labelledby*=${nyttReisetilskudd.id}]`).should(
-                'include.text',
-                'Søknad om reisetilskudd',
-            )
+            cy.get(`a[href*=${nyttReisetilskudd.id}]`).should('include.text', 'Søknad om reisetilskudd')
         })
 
         it('Ved klikk så åpnes søknaden om reisetilskudd', () => {
-            cy.get(`article[aria-labelledby*=${nyttReisetilskudd.id}]`).click()
+            cy.get(`a[href*=${nyttReisetilskudd.id}]`).click()
             cy.url().should(
                 'equal',
                 Cypress.config().baseUrl + `/syk/sykepengesoknad/soknader/${nyttReisetilskudd.id}/1`,
@@ -65,7 +62,7 @@ describe('Teste førsteside i reisetilskuddsøknaden', () => {
     describe('Før du fikk sykmelding - Reisetilskudd', () => {
         it('URL er riktig', () => {
             cy.url().should('include', `/syk/sykepengesoknad/soknader/${nyttReisetilskudd.id}/2`)
-            cy.get('.sporsmal__tittel').should('have.text', 'Før du fikk sykmelding')
+            cy.get('[data-cy="sporsmal-tittel"]').should('have.text', 'Før du fikk sykmelding')
         })
 
         it('Tester beløp valget', () => {
@@ -89,7 +86,7 @@ describe('Teste førsteside i reisetilskuddsøknaden', () => {
     describe('Reise med bil - Reisetilskudd', () => {
         it('URL er riktig', () => {
             cy.url().should('include', `/syk/sykepengesoknad/soknader/${nyttReisetilskudd.id}/3`)
-            cy.get('.sporsmal__tittel').should('have.text', 'Reise med bil')
+            cy.get('[data-cy="sporsmal-tittel"]').should('have.text', 'Reise med bil')
         })
 
         it('Svar ja på hovedspørsmålet', () => {
@@ -268,7 +265,7 @@ describe('Teste førsteside i reisetilskuddsøknaden', () => {
     describe('Utbetaling - Reisetilskudd', () => {
         it('URL er riktig', () => {
             cy.url().should('include', `/soknader/${nyttReisetilskudd.id}/5`)
-            cy.get('.sporsmal__tittel').should('have.text', 'Utbetaling')
+            cy.get('[data-cy="sporsmal-tittel"]').should('have.text', 'Utbetaling')
         })
 
         it('Arbeidsgiveren legger ut for reisene', () => {
@@ -280,7 +277,7 @@ describe('Teste førsteside i reisetilskuddsøknaden', () => {
     describe('Til slutt - Reisetilskudd', () => {
         it('URL er riktig', () => {
             cy.url().should('include', `/soknader/${nyttReisetilskudd.id}/6`)
-            cy.get('.sporsmal__tittel').should('have.text', 'Til slutt')
+            cy.get('[data-cy="sporsmal-tittel"]').should('have.text', 'Til slutt')
         })
 
         it('Oppsummering inneholder riktig informasjon', () => {

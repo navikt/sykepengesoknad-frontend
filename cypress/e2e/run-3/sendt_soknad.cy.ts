@@ -10,13 +10,13 @@ describe('Tester sendt søknad', () => {
     })
 
     it('Sendt søknad har forventa tekst', function () {
-        cy.get(`#soknader-sendt article[aria-labelledby*=${sendtArbeidsledig.id}]`)
+        cy.get(`[data-cy="link-listevisning-${sendtArbeidsledig.id}"]`)
             .should('include.text', '27. mai – 11. juni 2020')
             .should('include.text', 'Sendt til NAV')
     })
 
     it('Ved klikk så åpnes kvittering søknad visning', function () {
-        cy.get(`#soknader-sendt article[aria-labelledby*=${sendtArbeidsledig.id}]`).click()
+        cy.get(`[data-cy="link-listevisning-${sendtArbeidsledig.id}"]`).click()
         cy.url().should(
             'equal',
             Cypress.config().baseUrl + `/syk/sykepengesoknad/sendt/${sendtArbeidsledig.id}?testperson=alle-soknader`,

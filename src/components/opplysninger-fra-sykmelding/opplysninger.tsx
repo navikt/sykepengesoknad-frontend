@@ -14,7 +14,6 @@ import SykmeldingDato from './sykmelding-dato'
 import ForsikringInfo from './sykmelding-forsikring'
 import FravaersperioderInfo from './sykmelding-fravaersperioder'
 import SykmeldingPerioder from './sykmelding-perioder'
-import styles from './opplysninger.module.css'
 import Egenmeldingsdager from './sykmelding-egenmeldingsdager'
 import SykmeldingOppdelt from './sykmelding-oppdelt'
 import SykmeldingOverlapp from './sykmelding-overlapp'
@@ -35,10 +34,10 @@ const Opplysninger = ({ ekspandert, steg }: OpplysningerProps) => {
     if (!valgtSoknad || !valgtSykmelding) return null
 
     return (
-        <Accordion className={styles.accordionWrapper} data-cy="opplysninger-fra-sykmeldingen">
+        <Accordion className={'my-4 border border-gray-400'} data-cy="opplysninger-fra-sykmeldingen">
             <Accordion.Item open={open}>
                 <Accordion.Header
-                    className={styles.contentPadding}
+                    className={'md:pl-8'}
                     onClick={() => {
                         logEvent(open ? 'accordion lukket' : 'accordion åpnet', {
                             component: tittel,
@@ -51,7 +50,8 @@ const Opplysninger = ({ ekspandert, steg }: OpplysningerProps) => {
                         {tittel}
                     </Heading>
                 </Accordion.Header>
-                <Accordion.Content className={styles.contentPadding}>
+
+                <Accordion.Content className={'md:pl-8'}>
                     <SykmeldingPerioder valgtSykmelding={valgtSykmelding} />
                     <SykmeldingOppdelt valgtSykmelding={valgtSykmelding} valgtSoknad={valgtSoknad} />
                     <SykmeldingOverlapp valgtSoknad={valgtSoknad} />

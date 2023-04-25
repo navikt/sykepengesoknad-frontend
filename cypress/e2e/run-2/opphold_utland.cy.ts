@@ -12,11 +12,8 @@ describe('Tester søknad om å beholde sykepenger utenfor EØS', () => {
 
     it('Går til søknad som har påfølgende søknader som må fylles ut', function () {
         cy.get('.navds-heading--xlarge').should('be.visible').and('have.text', 'Søknader')
-        cy.get(`#soknader-list-til-behandling article a[href*=${soknad.id}]`).should(
-            'include.text',
-            'Søknad om å beholde sykepenger utenfor EØS',
-        )
-        cy.get(`#soknader-list-til-behandling article a[href*=${soknad.id}]`).click()
+        cy.get(`a[href*=${soknad.id}]`).should('include.text', 'Søknad om å beholde sykepenger utenfor EØS')
+        cy.get(`a[href*=${soknad.id}]`).click()
     })
 
     it('Velger periode for utenlandsopphold', function () {

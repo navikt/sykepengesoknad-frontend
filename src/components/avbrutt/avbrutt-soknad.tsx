@@ -13,13 +13,14 @@ import FristSykepenger from '../frist-sykepenger/frist-sykepenger'
 import { GjenstaendeSoknader, hentGjenstaendeSoknader } from '../gjenstaende-soknader/gjenstaende-soknader'
 import Opplysninger from '../opplysninger-fra-sykmelding/opplysninger'
 import { urlTilSoknad } from '../soknad/soknad-link'
-import GjenapneSoknad from '../soknader/avbryt/gjenapneknapp'
 import Vis from '../vis'
 import useSoknader from '../../hooks/useSoknader'
 import useSoknad from '../../hooks/useSoknad'
 import QueryStatusPanel from '../queryStatusPanel/QueryStatusPanel'
 import { soknadBreadcrumb, useUpdateBreadcrumbs } from '../../hooks/useBreadcrumbs'
 import { RouteParams } from '../../app'
+
+import GjenapneSoknad from './gjenapneknapp'
 
 const AvbruttSoknad = () => {
     const { id } = useParams<RouteParams>()

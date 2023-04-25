@@ -1,6 +1,5 @@
 /* eslint-disable postcss-modules/no-unused-class */
 import '../style/global.css'
-import '../components/app.css'
 import '../components/banner/banner.css'
 import '../components/person/person.css'
 import '../components/ettersending/ettersending.css'
@@ -15,7 +14,6 @@ import '../components/om-sykepenger/om-sykepenger.css'
 import '../components/oppsummering/oppsummering.css'
 import '../components/soknad-intro/viktig-informasjon.css'
 import '../components/soknad-med-to-deler/soknad-med-to-deler.css'
-import '../components/soknader/inngang/inngangspanel.css'
 import '../components/sporsmal/landvelger/landvelger.css'
 import '../components/sporsmal/sporsmal-form/sporsmal-form.css'
 import '../components/sporsmal/sporsmal-form/sendes-til.css'
@@ -29,8 +27,6 @@ import '../components/sporsmal/typer/tall-komp.css'
 import '../components/sporsmal/undersporsmal/undersporsmal.css'
 import '../components/utvidbar/utvidbar.css'
 import '../components/feil/refresh-hvis-feil-state.css'
-import '../components/soknader/soknader.css'
-import '../components/soknad/soknaden.css'
 import '../components/queryStatusPanel/QueryStatusPanel.css'
 
 import { configureLogger } from '@navikt/next-logger'
@@ -43,6 +39,7 @@ import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
 
 import { useFangHotjarEmotion } from '../hooks/useFangHotjarEmotion'
 import { useHandleDecoratorClicks } from '../hooks/useBreadcrumbs'
+import { LabsWarning } from '../components/labs-warning/LabsWarning'
 
 interface AppProps extends Omit<NextAppProps, 'pageProps'> {
     pageProps: PropsWithChildren<unknown>
@@ -80,7 +77,8 @@ function MyApp({ Component, pageProps }: AppProps): JSX.Element {
                 <meta name="viewport" content="width=device-width, initial-scale=1" />
             </Head>
             <QueryClientProvider client={queryClient}>
-                <div id="root">
+                <div id="root" className="mx-auto max-w-2xl p-4 pb-32">
+                    <LabsWarning />
                     <Component {...pageProps} />
                 </div>
             </QueryClientProvider>
