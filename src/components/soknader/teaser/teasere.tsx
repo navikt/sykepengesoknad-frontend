@@ -1,4 +1,4 @@
-import { Heading, Label } from '@navikt/ds-react'
+import { Heading, Label, Select } from '@navikt/ds-react'
 import React, { useState } from 'react'
 
 import { RSSoknadstatus } from '../../../types/rs-types/rs-soknadstatus'
@@ -10,7 +10,6 @@ import FremtidigeSoknaderTeaser from './fremtidige-soknader-teaser'
 import NyeSoknaderTeaser from './nye-soknader-teaser'
 import TidligereSoknaderTeaser from './tidligere-soknader-teaser'
 import UtgaattSoknaderTeaser from './utgatt-soknader-teaser'
-import styles from './teasere.module.css'
 interface SoknaderTeasereProps {
     soknader: RSSoknadmetadata[]
     className?: string
@@ -48,26 +47,19 @@ const Teasere = ({ soknader, className, tittel, tomListeTekst, id, kanSorteres =
                 <Vis
                     hvis={kanSorteres && sorterteSoknader().length > 0}
                     render={() => (
-                        <div className={styles.sortering}>
-                            <label className="skjemaelement__label" htmlFor="select_sort">
-                                Sorter etter
-                            </label>
-                            <div className="selectContainer input--fullbredde">
-                                <select
-                                    id="select_sort"
-                                    className="skjemaelement__input"
-                                    onChange={(event) => setSortering(event.target.value as Sortering)}
-                                >
-                                    {Object.values(Sortering).map((sort, idx) => {
-                                        return (
-                                            <option value={sort} key={idx}>
-                                                {sort}
-                                            </option>
-                                        )
-                                    })}
-                                </select>
-                            </div>
-                        </div>
+                        <Select
+                            label="Sorter etter"
+                            onChange={(event) => setSortering(event.target.value as Sortering)}
+                            className="float-right"
+                        >
+                            {Object.values(Sortering).map((sort, idx) => {
+                                return (
+                                    <option value={sort} key={idx}>
+                                        {sort}
+                                    </option>
+                                )
+                            })}
+                        </Select>
                     )}
                 />
 
