@@ -1,6 +1,6 @@
 import { Modal } from '@navikt/ds-react'
 import React from 'react'
-import { BrowserRouter, Redirect, Route, Switch } from 'react-router-dom'
+import { BrowserRouter, Route, Routes } from 'react-router-dom'
 import { CSSTransition, TransitionGroup } from 'react-transition-group'
 
 import AvbruttSoknad from './components/avbrutt/avbrutt-soknad'
@@ -17,7 +17,7 @@ import { isMockBackend, vedlikehold } from './utils/environment'
 import { PageWrapper } from './components/PageWrapper/PageWrapper'
 import { LabsWarning } from './components/labs-warning/LabsWarning'
 
-export interface RouteParams {
+export type RouteParams = {
     stegId: string
     id: string
 }
@@ -51,21 +51,16 @@ const App = (): any => {
                                 <PageWrapper>
                                     <LabsWarning />
                                     <RefreshHvisFeilState>
-                                        <Switch>
-                                            <Route exact={true} path="/" component={Soknader} />
-                                            <Route path="/soknader/:id/:stegId" component={Soknad} />
-                                            <Route path="/soknader/:id" component={Soknad} />
-                                            <Route path="/avbrutt/:id" component={AvbruttSoknad} />
-                                            <Route path="/kvittering/:id" component={KvitteringSide} />
-                                            <Route path="/sendt/:id" component={SendtSide} />
-                                            <Route path="/sykepengesoknad-utland" component={OpprettUtland} />
-                                            <Route path="/soknader/">
-                                                <Redirect to="/" />
-                                            </Route>
-                                            <Route path="">
-                                                <Redirect to="/" />
-                                            </Route>
-                                        </Switch>
+                                        <Routes>
+                                            <Route path="/" element={<Soknader />} />
+                                            <Route path="soknader" element={<Soknader />} />
+                                            <Route path="soknader/:id" element={<Soknad />} />
+                                            <Route path="soknader/:id/:stegId" element={<Soknad />} />
+                                            <Route path="avbrutt/:id" element={<AvbruttSoknad />} />
+                                            <Route path="kvittering/:id" element={<KvitteringSide />} />
+                                            <Route path="sendt/:id" element={<SendtSide />} />
+                                            <Route path="sykepengesoknad-utland" element={<OpprettUtland />} />
+                                        </Routes>
                                     </RefreshHvisFeilState>
                                 </PageWrapper>
                             </main>

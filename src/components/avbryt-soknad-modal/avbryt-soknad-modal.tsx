@@ -1,9 +1,9 @@
 import { BodyLong, Button, Heading, Modal } from '@navikt/ds-react'
 import React, { useState } from 'react'
-import { useHistory, useParams } from 'react-router-dom'
+import { useParams } from 'react-router-dom'
 import { useQueryClient } from '@tanstack/react-query'
+import { useNavigate } from 'react-router'
 
-import { RouteParams } from '../../app'
 import { useAppStore } from '../../data/stores/app-store'
 import { RSSoknadstatus } from '../../types/rs-types/rs-soknadstatus'
 import { tekst } from '../../utils/tekster'
@@ -11,6 +11,7 @@ import { logEvent } from '../amplitude/amplitude'
 import { EndringUtenEndringModal } from '../sporsmal/endring-uten-endring/endring-uten-endring-modal'
 import useSoknad from '../../hooks/useSoknad'
 import useSoknader from '../../hooks/useSoknader'
+import { RouteParams } from '../../app'
 
 import { avbrytSoknad } from './avbryt-soknad'
 import styles from './avbryt-soknad.module.css'
@@ -32,7 +33,7 @@ const AvbrytKorrigering = () => {
                     logEvent('modal åpnet', {
                         component: tekst('avbryt.korrigering.knapp'),
                         soknadstype: valgtSoknad.soknadstype,
-                        steg: stegId,
+                        steg: stegId!,
                     })
                     setAapen(true)
                     e.preventDefault()
@@ -50,10 +51,10 @@ const AvbrytSoknadModal = () => {
     const { data: valgtSoknad } = useSoknad(id)
     const { data: soknader } = useSoknader()
     const queryClient = useQueryClient()
+    const navigate = useNavigate()
 
     const [aapen, setAapen] = useState<boolean>(false)
     const { setFeilmeldingTekst } = useAppStore()
-    const history = useHistory()
 
     if (!valgtSoknad || !soknader) {
         return null
@@ -71,7 +72,7 @@ const AvbrytSoknadModal = () => {
                     logEvent('modal åpnet', {
                         component: tekst('avbryt.popup.tittel'),
                         soknadstype: valgtSoknad.soknadstype,
-                        steg: stegId,
+                        steg: stegId!,
                     })
                     setAapen(true)
                     e.preventDefault()
@@ -87,7 +88,7 @@ const AvbrytSoknadModal = () => {
                     logEvent('modal lukket', {
                         component: tekst('avbryt.popup.tittel'),
                         soknadstype: valgtSoknad.soknadstype,
-                        steg: stegId,
+                        steg: stegId!,
                     })
                 }}
             >
@@ -108,13 +109,13 @@ const AvbrytSoknadModal = () => {
                                 tekst: tekst('avbryt.popup.ja'),
                                 soknadstype: valgtSoknad.soknadstype,
                                 component: tekst('avbryt.popup.tittel'),
-                                steg: stegId,
+                                steg: stegId!,
                             })
                             avbrytSoknad({
                                 valgtSoknad: valgtSoknad,
                                 soknader: soknader,
                                 queryClient: queryClient,
-                                history: history,
+                                navigate: navigate,
                                 setFeilmeldingTekst: setFeilmeldingTekst,
                             })
                         }}
@@ -123,14 +124,14 @@ const AvbrytSoknadModal = () => {
                     </Button>
                     <Button
                         variant="secondary"
-                        className="mt-4 ml-auto mr-auto block"
+                        className="ml-auto mr-auto mt-4 block"
                         onClick={() => {
                             setAapen(false)
                             logEvent('knapp klikket', {
                                 tekst: tekst('avbryt.popup.nei'),
                                 soknadstype: valgtSoknad.soknadstype,
                                 component: tekst('avbryt.popup.tittel'),
-                                steg: stegId,
+                                steg: stegId!,
                             })
                         }}
                     >

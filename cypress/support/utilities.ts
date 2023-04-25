@@ -12,7 +12,8 @@ export const setPeriodeFraTil = (fom: number, tom: number, periodeIndex = 0) => 
 }
 
 export function svarFritekst(tag: string, verdi: string) {
-    cy.get(`[data-cy="${tag}"]`).clear().type(verdi)
+    cy.get(`[data-cy="${tag}"]`).clear()
+    cy.get(`[data-cy="${tag}"]`).type(verdi)
 }
 
 export function svarJaHovedsporsmal() {

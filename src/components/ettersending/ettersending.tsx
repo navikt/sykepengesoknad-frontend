@@ -7,9 +7,9 @@ import { useQueryClient } from '@tanstack/react-query'
 import { useAppStore } from '../../data/stores/app-store'
 import fetchMedRequestId, { AuthenticationError } from '../../utils/fetch'
 import { tekst } from '../../utils/tekster'
-import { RouteParams } from '../../app'
 import useSoknad from '../../hooks/useSoknad'
 import { parserWithReplace } from '../../utils/html-react-parser-utils'
+import { RouteParams } from '../../app'
 
 interface EttersendingProps {
     gjelder: 'nav' | 'arbeidsgiver'
@@ -129,7 +129,7 @@ const Ettersending = ({ gjelder, setRerendrekvittering }: EttersendingProps) => 
                         {hentTekst('kvittering.knapp.bekreft.send-til')}
                     </Button>
                     <Button
-                        className="mt-4 ml-auto mr-auto block"
+                        className="ml-auto mr-auto mt-4 block"
                         variant="tertiary"
                         onClick={() => setVilEttersende(false)}
                     >

@@ -79,7 +79,7 @@ export const EkspanderbarHjelp = ({ sporsmal }: SpmProps) => {
 
     return (
         <ReadMore
-            className={'mt-4 mb-8 w-full'}
+            className={'mb-8 mt-4 w-full'}
             header={tittel}
             open={expanded}
             onClick={() => {

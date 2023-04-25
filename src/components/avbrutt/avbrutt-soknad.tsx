@@ -1,9 +1,9 @@
 import { Alert, BodyLong, BodyShort } from '@navikt/ds-react'
 import dayjs from 'dayjs'
 import React, { useEffect } from 'react'
-import { useHistory, useParams } from 'react-router-dom'
+import { useParams } from 'react-router-dom'
+import { useNavigate } from 'react-router'
 
-import { RouteParams } from '../../app'
 import { RSSoknadstatus } from '../../types/rs-types/rs-soknadstatus'
 import { tilLesbarDatoMedArstall } from '../../utils/dato-utils'
 import { tekst } from '../../utils/tekster'
@@ -19,13 +19,13 @@ import useSoknader from '../../hooks/useSoknader'
 import useSoknad from '../../hooks/useSoknad'
 import QueryStatusPanel from '../queryStatusPanel/QueryStatusPanel'
 import { soknadBreadcrumb, useUpdateBreadcrumbs } from '../../hooks/useBreadcrumbs'
+import { RouteParams } from '../../app'
 
 const AvbruttSoknad = () => {
     const { id } = useParams<RouteParams>()
     const { data: soknader } = useSoknader()
     const { data: valgtSoknad } = useSoknad(id)
-
-    const history = useHistory()
+    const navigate = useNavigate()
 
     useUpdateBreadcrumbs(() => [{ ...soknadBreadcrumb, handleInApp: true }], [])
 
@@ -33,7 +33,7 @@ const AvbruttSoknad = () => {
         if (!valgtSoknad) return
 
         if (valgtSoknad.status !== RSSoknadstatus.AVBRUTT) {
-            history.replace(urlTilSoknad(valgtSoknad))
+            navigate(urlTilSoknad(valgtSoknad), { replace: true })
             return
         }
 

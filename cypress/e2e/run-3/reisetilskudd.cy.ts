@@ -71,7 +71,7 @@ describe('Teste førsteside i reisetilskuddsøknaden', () => {
         it('Tester beløp valget', () => {
             cy.get('.radioGruppe-jaNei input[value=JA]').click({ force: true })
             cy.get('input[type=checkbox]#1566426').click({ force: true })
-            cy.get('#1566427').focus().type('1000', { delay: 500, force: true })
+            cy.get('#1566427').type('1000', { delay: 500, force: true })
             cy.get('#1566427').should('have.value', '1000')
             cy.contains('Gå videre').click()
         })
@@ -111,8 +111,8 @@ describe('Teste førsteside i reisetilskuddsøknaden', () => {
             cy.get('[aria-label="6. januar (onsdag)"]').click()
 
             cy.get('input[type=radio]#1566446_0').click({ force: true })
-            cy.get('#1566447').focus().type('1000')
-            cy.get('#1566448').focus().type('42')
+            cy.get('#1566447').type('1000')
+            cy.get('#1566448').type('42')
 
             cy.contains('Gå videre').click()
         })
@@ -218,13 +218,15 @@ describe('Teste førsteside i reisetilskuddsøknaden', () => {
             })
 
             it('Høyere beløp enn maks', () => {
-                cy.get('input[name=belop_input]').clear().type('1000000000')
+                cy.get('input[name=belop_input]').clear()
+                cy.get('input[name=belop_input]').type('1000000000')
                 cy.get('.navds-modal__content').contains('Bekreft').click()
                 cy.get('[data-cy="opplasting-form"]').contains('Beløp kan ikke være større enn 10 000')
             })
 
             it('Kan ikke skrive inn med 3 desimaler', () => {
-                cy.get('input[name=belop_input]').clear().type('100.253')
+                cy.get('input[name=belop_input]').clear()
+                cy.get('input[name=belop_input]').type('100.253')
                 cy.get('.navds-modal__content').contains('Bekreft').click()
                 cy.get('input[name=belop_input]')
                     .invoke('val')
@@ -234,13 +236,15 @@ describe('Teste førsteside i reisetilskuddsøknaden', () => {
             })
 
             it('Gyldig beløp med 2 desimaler', () => {
-                cy.get('input[name=belop_input]').clear().type('100.30')
+                cy.get('input[name=belop_input]').clear()
+                cy.get('input[name=belop_input]').type('100.30')
                 cy.get('.navds-modal__content').contains('Bekreft').click()
                 cy.get('input[name=belop_input]').should('not.have.class', 'skjemaelement__input--harFeil')
             })
 
             it('Gyldig beløp uten desimaler', () => {
-                cy.get('input[name=belop_input]').clear().type('99')
+                cy.get('input[name=belop_input]').clear()
+                cy.get('input[name=belop_input]').type('99')
                 cy.get('.navds-modal__content').contains('Bekreft').click()
                 cy.get('input[name=belop_input]').should('not.have.class', 'skjemaelement__input--harFeil')
             })

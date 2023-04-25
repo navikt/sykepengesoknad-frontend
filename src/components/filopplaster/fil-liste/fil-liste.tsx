@@ -8,8 +8,8 @@ import { getLedetekst, tekst } from '../../../utils/tekster'
 import { formatterTall } from '../../../utils/utils'
 import { hentSvar } from '../../sporsmal/hent-svar'
 import Vis from '../../vis'
-import { RouteParams } from '../../../app'
 import useSoknad from '../../../hooks/useSoknad'
+import { RouteParams } from '../../../app'
 
 import KvitteringListeVisning from './kvittering-listevisning'
 

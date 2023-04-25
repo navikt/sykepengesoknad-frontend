@@ -2,8 +2,8 @@ import { useMutation, useQueryClient } from '@tanstack/react-query'
 import { useParams } from 'react-router-dom'
 
 import { FetchError } from '../utils/fetch'
-import { RouteParams } from '../app'
 import fetchMedRequestId from '../utils/fetch'
+import { RouteParams } from '../app'
 
 import useSoknad from './useSoknad'
 

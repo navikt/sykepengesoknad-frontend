@@ -1,10 +1,10 @@
 import { logger } from '@navikt/next-logger'
 import React, { useCallback, useEffect, useState } from 'react'
 import { FormProvider, useForm } from 'react-hook-form'
-import { useHistory, useParams } from 'react-router-dom'
+import { useLocation, useParams } from 'react-router-dom'
 import { useQueryClient } from '@tanstack/react-query'
+import { useNavigate } from 'react-router'
 
-import { RouteParams } from '../../../app'
 import { useAppStore } from '../../../data/stores/app-store'
 import { TagTyper } from '../../../types/enums'
 import { RSOppdaterSporsmalResponse } from '../../../types/rs-types/rest-response/rs-oppdatersporsmalresponse'
@@ -31,6 +31,7 @@ import useSoknad from '../../../hooks/useSoknad'
 import { RSSoknadstatus } from '../../../types/rs-types/rs-soknadstatus'
 import { harLikeSvar } from '../endring-uten-endring/har-like-svar'
 import { useSendSoknad } from '../../../hooks/useSendSoknad'
+import { RouteParams } from '../../../app'
 
 import Knapperad from './knapperad'
 import SendesTil from './sendes-til'
@@ -46,14 +47,15 @@ const SporsmalForm = () => {
     const { mutate: sendSoknadMutation, isLoading: senderSoknad, error: sendError } = useSendSoknad()
     const { data: korrigerer } = useSoknad(valgtSoknad?.korrigerer, valgtSoknad?.korrigerer !== undefined)
     const queryClient = useQueryClient()
+    const navigate = useNavigate()
+    const location = useLocation()
 
     const { setMottaker, setFeilState } = useAppStore()
 
     const [erSiste, setErSiste] = useState<boolean>(false)
     const [poster, setPoster] = useState<boolean>(false)
     const [endringUtenEndringAapen, setEndringUtenEndringAapen] = useState<boolean>(false)
-    const history = useHistory()
-    const spmIndex = parseInt(stegId) - 1
+    const spmIndex = parseInt(stegId!) - 1
     const methods = useForm({
         mode: 'onSubmit',
         reValidateMode: 'onChange',
@@ -220,9 +222,7 @@ const SporsmalForm = () => {
                 sporsmal = valgtSoknad!.sporsmal[spmIndex]
             } else {
                 methods.clearErrors()
-                history.push(
-                    pathUtenSteg(history.location.pathname) + SEPARATOR + (spmIndex + 2) + window.location.search,
-                )
+                navigate(pathUtenSteg(location.pathname) + SEPARATOR + (spmIndex + 2) + location.search)
             }
         } finally {
             setPoster(false)

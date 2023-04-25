@@ -2,13 +2,13 @@ import { BodyShort } from '@navikt/ds-react'
 import React from 'react'
 import { useParams } from 'react-router-dom'
 
-import { RouteParams } from '../../../app'
 import { TagTyper } from '../../../types/enums'
 import { Sporsmal } from '../../../types/types'
 import { tekst } from '../../../utils/tekster'
 import { hentNokkel } from '../sporsmal-utils'
 import useSoknad from '../../../hooks/useSoknad'
 import { parserWithReplace } from '../../../utils/html-react-parser-utils'
+import { RouteParams } from '../../../app'
 
 import Steg from './steg'
 
@@ -18,7 +18,7 @@ interface FremdriftsbarProps {
 
 const Fremdriftsbar = ({ antallSteg }: FremdriftsbarProps) => {
     const { stegId } = useParams<RouteParams>()
-    const stegNo = parseInt(stegId)
+    const stegNo = parseInt(stegId!)
     const style = {
         width: `${(100 / antallSteg) * stegNo}%`,
     }
@@ -38,7 +38,7 @@ const SporsmalSteg = () => {
     const { id, stegId } = useParams<RouteParams>()
     const { data: valgtSoknad } = useSoknad(id)
 
-    const aktivtSteg = parseInt(stegId)
+    const aktivtSteg = parseInt(stegId!)
     const steg = valgtSoknad!.sporsmal.filter((s) => s.tag !== TagTyper.VAER_KLAR_OVER_AT)
 
     return (

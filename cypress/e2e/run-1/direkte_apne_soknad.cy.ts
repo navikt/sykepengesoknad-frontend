@@ -49,9 +49,9 @@ describe('Tester å åpne søknaden direkte fra sykefravaer', () => {
         cy.contains('Du får sykepengene fra arbeidsgiveren din')
     })
 
-    it('Hvis vi går til /soknader sendes vi til oversikten', function () {
+    it('Hvis vi går til /soknader sendes vi til listevisning', function () {
         cy.visit('/syk/sykepengesoknad/soknader/')
-        cy.url().should('equal', Cypress.config().baseUrl + '/syk/sykepengesoknad/')
-        cy.contains('Søknad om sykepenger').and('be.visible')
+        cy.url().should('equal', Cypress.config().baseUrl + '/syk/sykepengesoknad/soknader')
+        cy.contains('Nye søknader').and('be.visible')
     })
 })

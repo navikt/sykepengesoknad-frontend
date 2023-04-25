@@ -1,15 +1,16 @@
 import { BodyShort, Button, Heading, Modal } from '@navikt/ds-react'
 import React from 'react'
-import { useHistory, useParams } from 'react-router-dom'
+import { useParams } from 'react-router-dom'
 import { useQueryClient } from '@tanstack/react-query'
+import { useNavigate } from 'react-router'
 
 import { useAppStore } from '../../../data/stores/app-store'
 import { tekst } from '../../../utils/tekster'
 import { avbrytSoknad } from '../../avbryt-soknad-modal/avbryt-soknad'
 import useSoknad from '../../../hooks/useSoknad'
-import { RouteParams } from '../../../app'
 import useSoknader from '../../../hooks/useSoknader'
 import { logEvent } from '../../amplitude/amplitude'
+import { RouteParams } from '../../../app'
 
 interface EndringUtenEndringModalProps {
     aapen: boolean
@@ -21,10 +22,9 @@ export const EndringUtenEndringModal = (props: EndringUtenEndringModalProps) => 
     const { data: valgtSoknad } = useSoknad(id)
     const { data: soknader } = useSoknader()
     const queryClient = useQueryClient()
+    const navigate = useNavigate()
 
     const { setFeilmeldingTekst } = useAppStore()
-
-    const history = useHistory()
 
     if (!valgtSoknad || !soknader) return null
 
@@ -59,7 +59,7 @@ export const EndringUtenEndringModal = (props: EndringUtenEndringModalProps) => 
                                 valgtSoknad: valgtSoknad,
                                 soknader: soknader,
                                 queryClient: queryClient,
-                                history: history,
+                                navigate: navigate,
                                 setFeilmeldingTekst: setFeilmeldingTekst,
                             })
                         }}

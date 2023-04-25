@@ -7,10 +7,10 @@ import FilListe from '../../../filopplaster/fil-liste/fil-liste'
 import OpplastingForm from '../../../filopplaster/kvittering-modal/opplasting-form'
 import { SpmProps } from '../../sporsmal-form/sporsmal-form'
 import { Kvittering } from '../../../../types/types'
-import { RouteParams } from '../../../../app'
 import useSoknad from '../../../../hooks/useSoknad'
 import { useAppStore } from '../../../../data/stores/app-store'
 import OpplastingTekster from '../../../filopplaster/kvittering-modal/opplasting-tekster'
+import { RouteParams } from '../../../../app'
 
 const Opplasting = ({ sporsmal }: SpmProps) => {
     const { id } = useParams<RouteParams>()

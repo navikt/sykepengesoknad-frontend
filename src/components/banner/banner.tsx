@@ -6,9 +6,9 @@ import { RSSoknadstype } from '../../types/rs-types/rs-soknadstype'
 import { tilLesbarPeriodeMedArstall } from '../../utils/dato-utils'
 import { tekst } from '../../utils/tekster'
 import Vis from '../vis'
-import { RouteParams } from '../../app'
 import useSoknad from '../../hooks/useSoknad'
 import Person from '../person/Person'
+import { RouteParams } from '../../app'
 
 interface BannerProps {
     overskrift?: string

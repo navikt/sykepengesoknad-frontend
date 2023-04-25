@@ -5,10 +5,10 @@ describe('Tester at riktig antall desimaler sendes til backend', () => {
         cy.visit(`/syk/sykepengesoknad/soknader/${gradertReisetilskudd.id}/7`)
         cy.get('.radioGruppe-jaNei input[value=JA]').click({ force: true })
 
-        cy.get('input#495730df-717d-3774-bd19-e6bcf76e3ba2').focus().type('37.321') // maks 2 desimaler tas med på TALL
+        cy.get('input#495730df-717d-3774-bd19-e6bcf76e3ba2').type('37.321') // maks 2 desimaler tas med på TALL
 
         cy.get('label[for=0e368ffc-1840-35e5-bbb5-b994cbaa8ef1]').click()
-        cy.get('input#13acfccb-3f39-3893-8054-058270add6ab').focus().type('50.321') // ingen desimaler tas med på PROSENT
+        cy.get('input#13acfccb-3f39-3893-8054-058270add6ab').type('50.321') // ingen desimaler tas med på PROSENT
 
         cy.contains('Gå videre').click()
         cy.contains('Tilbake').click()
@@ -25,9 +25,9 @@ describe('Tester at riktig antall desimaler sendes til backend', () => {
         cy.get('[aria-label="8. april (onsdag)"]').click()
 
         cy.get('input[type=radio]#1547263_0').click()
-        cy.get('input#1547264').focus().type('500.321') // maks 2 desimaler tas med på BELOP
+        cy.get('input#1547264').type('500.321') // maks 2 desimaler tas med på BELOP
 
-        cy.get('input#1547265').focus().type('12.321') // maks 1 desimal tas med på KILOMETER
+        cy.get('input#1547265').type('12.321') // maks 1 desimal tas med på KILOMETER
 
         cy.contains('Gå videre').click()
         cy.contains('Tilbake').click()
@@ -40,10 +40,10 @@ describe('Tester at riktig antall desimaler sendes til backend', () => {
         cy.visit(`/syk/sykepengesoknad/soknader/${gradertReisetilskudd.id}/7`)
         cy.get('.radioGruppe-jaNei input[value=JA]').click({ force: true })
 
-        cy.get('input#495730df-717d-3774-bd19-e6bcf76e3ba2').focus().type('36,99') // maks 2 desimaler tas med på TALL
+        cy.get('input#495730df-717d-3774-bd19-e6bcf76e3ba2').type('36,99') // maks 2 desimaler tas med på TALL
 
         cy.get('label[for=0e368ffc-1840-35e5-bbb5-b994cbaa8ef1]').click()
-        cy.get('input#13acfccb-3f39-3893-8054-058270add6ab').focus().type('50.321wsergergwegr') // ingen desimaler tas med på PROSENT
+        cy.get('input#13acfccb-3f39-3893-8054-058270add6ab').type('50.321wsergergwegr') // ingen desimaler tas med på PROSENT
 
         cy.contains('Gå videre').click()
         cy.contains('Tilbake').click()
@@ -56,10 +56,10 @@ describe('Tester at riktig antall desimaler sendes til backend', () => {
         cy.visit(`/syk/sykepengesoknad/soknader/${gradertReisetilskudd.id}/7`)
         cy.get('.radioGruppe-jaNei input[value=JA]').click({ force: true })
 
-        cy.get('input#495730df-717d-3774-bd19-e6bcf76e3ba2').focus().type('36') // ingen desimaler i input
+        cy.get('input#495730df-717d-3774-bd19-e6bcf76e3ba2').type('36') // ingen desimaler i input
 
         cy.get('label[for=0e368ffc-1840-35e5-bbb5-b994cbaa8ef1]').click()
-        cy.get('input#13acfccb-3f39-3893-8054-058270add6ab').focus().type('50.321wsergergwegr') // ingen desimaler tas med på PROSENT
+        cy.get('input#13acfccb-3f39-3893-8054-058270add6ab').type('50.321wsergergwegr') // ingen desimaler tas med på PROSENT
 
         cy.contains('Gå videre').click()
         cy.contains('Tilbake').click()
