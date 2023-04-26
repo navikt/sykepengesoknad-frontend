@@ -1,4 +1,4 @@
-import { BodyShort } from '@navikt/ds-react'
+import { BodyShort, ReadMore } from '@navikt/ds-react'
 import { logger } from '@navikt/next-logger'
 import React, { useCallback, useEffect, useState } from 'react'
 import { useDropzone } from 'react-dropzone'
@@ -13,7 +13,6 @@ import {
     tillatteFiltyper,
 } from '../../../utils/fil-utils'
 import { getLedetekst, tekst } from '../../../utils/tekster'
-import Utvidbar from '../../utvidbar/utvidbar'
 import Vis from '../../vis'
 import { Kvittering } from '../../../types/types'
 
@@ -92,13 +91,9 @@ const DragAndDrop = ({ valgtFil, setValgtFil, valgtKvittering }: DragAndDropProp
             <Vis
                 hvis={valgtFil}
                 render={() => (
-                    <Utvidbar
-                        erApen={formErDisabled}
-                        tittel={customTruncet(valgtFil?.name || 'Kvittering.png', 20)}
-                        type="intern"
-                    >
+                    <ReadMore className={'mb-4'} header={customTruncet(valgtFil?.name || 'Kvittering.png', 20)}>
                         {valgtFil ? <img alt="" src={URL.createObjectURL(valgtFil)} /> : null}
-                    </Utvidbar>
+                    </ReadMore>
                 )}
             />
 

@@ -1,10 +1,9 @@
-import { BodyLong, Heading, Label, Modal } from '@navikt/ds-react'
+import { BodyLong, Heading, Label, Modal, ReadMore } from '@navikt/ds-react'
 import dayjs from 'dayjs'
 import React, { useState } from 'react'
 
 import { tilLesbarDatoMedArstall } from '../../utils/dato-utils'
 import { getLedetekst, tekst } from '../../utils/tekster'
-import Utvidbar from '../utvidbar/utvidbar'
 
 import { SykepengesoknadTeaserProps } from './teaser-util'
 import { ListevisningLenkepanel } from './listevisning-lenkepanel'
@@ -38,13 +37,9 @@ const FremtidigeSoknaderTeaser = ({ soknad }: SykepengesoknadTeaserProps) => {
                     </BodyLong>
                     <BodyLong spacing>{tekst('soknader.teaser.fremtidig.modal.tekst2')}</BodyLong>
 
-                    <Utvidbar
-                        erApen={false}
-                        type="intern"
-                        tittel={<Label>{tekst('soknader.teaser.fremtidig.modal.utvidbar.tittel')}</Label>}
-                    >
+                    <ReadMore header={<Label>{tekst('soknader.teaser.fremtidig.modal.utvidbar.tittel')}</Label>}>
                         <BodyLong spacing>{tekst('soknader.teaser.fremtidig.modal.utvidbar.tekst')}</BodyLong>
-                    </Utvidbar>
+                    </ReadMore>
                 </Modal.Content>
             </Modal>
         </>
