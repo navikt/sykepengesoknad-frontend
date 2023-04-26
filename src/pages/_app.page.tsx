@@ -25,7 +25,6 @@ import '../components/sporsmal/typer/periode-komp.css'
 import '../components/sporsmal/typer/dato-komp.css'
 import '../components/sporsmal/typer/tall-komp.css'
 import '../components/sporsmal/undersporsmal/undersporsmal.css'
-import '../components/utvidbar/utvidbar.css'
 import '../components/feil/refresh-hvis-feil-state.css'
 import '../components/queryStatusPanel/QueryStatusPanel.css'
 

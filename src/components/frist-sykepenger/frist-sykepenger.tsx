@@ -1,9 +1,8 @@
-import { Accordion, BodyLong, BodyShort, Heading } from '@navikt/ds-react'
+import { Accordion, BodyLong, BodyShort, Heading, ReadMore } from '@navikt/ds-react'
 import React, { useState } from 'react'
 
 import { tekst } from '../../utils/tekster'
 import { logEvent } from '../amplitude/amplitude'
-import Utvidbar from '../utvidbar/utvidbar'
 import { Soknad } from '../../types/types'
 import { parserWithReplace } from '../../utils/html-react-parser-utils'
 
@@ -36,13 +35,8 @@ const FristSykepenger = ({ soknad }: { soknad: Soknad }) => {
                     <BodyLong>{parserWithReplace(tekst('frist-sykepenger.hovedregel'))}</BodyLong>
                     <BodyLong>{parserWithReplace(tekst('frist-sykepenger.ulike.måneder'))}</BodyLong>
 
-                    <Utvidbar
-                        erApen={false}
-                        type="intern"
-                        tittel="Vis eksempler"
-                        amplitudeProps={{ component: 'Eksempel' }}
-                    >
-                        <Heading size="xsmall" level="3">
+                    <ReadMore header={'Vis eksempler'}>
+                        <Heading size="xsmall" level="3" className={'pt-4'}>
                             {tekst('frist-sykepenger.eksempel.en.tittel')}
                         </Heading>
                         <BodyShort>{tekst('frist-sykepenger.eksempel.en.tekst')}</BodyShort>
@@ -75,7 +69,7 @@ const FristSykepenger = ({ soknad }: { soknad: Soknad }) => {
                             mndTre="April"
                             mndFire="Mai"
                         />
-                    </Utvidbar>
+                    </ReadMore>
 
                     <BodyLong spacing>{tekst('frist-sykepenger.husk')}</BodyLong>
 

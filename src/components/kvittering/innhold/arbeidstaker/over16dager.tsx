@@ -1,9 +1,8 @@
-import { BodyLong, BodyShort, Label, Link } from '@navikt/ds-react'
+import { BodyLong, BodyShort, Label, Link, ReadMore } from '@navikt/ds-react'
 import React from 'react'
 
 import { parserWithReplace } from '../../../../utils/html-react-parser-utils'
 import { tekst } from '../../../../utils/tekster'
-import Utvidbar from '../../../utvidbar/utvidbar'
 import Kontonummer from '../../kontonummer/kontonummer'
 
 interface gradertReisetilskuddProps {
@@ -21,20 +20,16 @@ const Over16dager = ({ erGradert }: gradertReisetilskuddProps) => {
                     ? tekst('kvittering.arbeidstaker.over16.gradertreisetilskudd.brodtekst')
                     : tekst('kvittering.arbeidstaker.over16.brodtekst')}
             </BodyLong>
-            <Utvidbar
-                erApen={false}
-                type="intern"
-                tittel={tekst('kvittering.arbeidstaker.hvorfor-skille-ved-16-dager')}
-            >
+            <ReadMore className={'mt-2'} header={tekst('kvittering.arbeidstaker.hvorfor-skille-ved-16-dager')}>
                 <BodyLong spacing>
                     {erGradert
                         ? tekst('kvittering.arbeidsgiveren-skal-betale-gradertreisetilskudd')
                         : tekst('kvittering.arbeidsgiveren-skal-betale')}
                 </BodyLong>
-            </Utvidbar>
-            <Utvidbar erApen={false} type="intern" tittel={tekst('kvittering.hva-er-inntektsmelding')}>
+            </ReadMore>
+            <ReadMore className={'mt-2'} header={tekst('kvittering.hva-er-inntektsmelding')}>
                 <BodyLong spacing>{tekst('kvittering.arbeidstaker.over16.inntektsmelding.brodtekst')}</BodyLong>
-            </Utvidbar>
+            </ReadMore>
             <div className="avsnitt hva-skjer">
                 <Label as="h2" className="arbeidstaker-tittel">
                     {tekst('kvittering.nav-behandler-soknaden')}
