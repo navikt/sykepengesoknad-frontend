@@ -25,6 +25,7 @@ import { ArbeidUtenforNorgeBody } from './arbeid-utenfor-norge-body'
 import { FravarForSykmeldingenBody } from './fravar-for-sykmeldingen-body'
 import { JobbetDuGradertArbeidstakerBody } from './jobbet-gradert-arbeidstaker'
 import { BrukteReisetilskuddetBody } from './brukte-reisetilskuddet-body'
+import { KvitteringerBody } from './kvitteringer-body'
 
 export const EkspanderbarHjelp = ({ sporsmal }: SpmProps) => {
     const { id } = useParams<RouteParams>()
@@ -88,6 +89,8 @@ export const EkspanderbarHjelp = ({ sporsmal }: SpmProps) => {
                 return <JobbetDuGradertArbeidstakerBody />
             case TagTyper.BRUKTE_REISETILSKUDDET:
                 return <BrukteReisetilskuddetBody />
+            case TagTyper.KVITTERINGER:
+                return <KvitteringerBody />
             default:
                 if (harInnhold) {
                     return <BodyLong>{parserWithReplace(tekst(`ekspanderbarhjelp.${nokkel}.innhold` as any))}</BodyLong>

@@ -25,12 +25,6 @@ const OpplastingTekster = {
     'opplasting_modal.type-utgift.label': 'Type utgift',
     'opplasting_modal.endre-utlegg.hjelpetekst':
         'Du kan foreløpig ikke redigere utgifter som du har lagt til. Men du kan slette den som er feil, og legge inn på nytt.',
-    'soknad.info.kvitteringer-del1': 'Du må laste opp kvitteringer hvis du har hatt ekstra utgifter til:',
-    'soknad.info.kvitteringer-del2-kulepunkt1': 'taxi',
-    'soknad.info.kvitteringer-del2-kulepunkt2': 'offentlig transport',
-    'soknad.info.kvitteringer-del2-kulepunkt3': 'parkering',
-    'soknad.info.kvitteringer-del3':
-        'Kvitteringene må kunne leses av en saksbehandler. Det tryggeste er å laste opp én kvittering om gangen.',
     'soknad.info.kvitteringer-PDF-tittel': 'Fikk du kvitteringen som PDF?',
     'soknad.info.kvitteringer-PDF-tekst':
         'Vi klarer dessverre ikke å ta imot PDF, men du kan gjøre den om til et bilde. Du kan enten ta en skjermdump, eller du kan ta bilde av kvitteringen med telefonen. ',
