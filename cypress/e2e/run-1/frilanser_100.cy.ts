@@ -29,9 +29,9 @@ describe('Tester frilansersøknad', () => {
         cy.contains('Har ikke forsikring som gjelder de første 16 dagene av sykefraværet').should('not.be.visible')
 
         // Viktig informasjon grunnet tilbakedatering
-        cy.get('.viktig-informasjon > .navds-guide-panel').should('be.visible')
-        cy.get('.viktig-informasjon > .navds-guide-panel').contains('Viktig informasjon')
-        cy.get('.viktig-informasjon > .navds-guide-panel').contains(
+        cy.get('.navds-guide-panel').should('be.visible')
+        cy.get('.navds-guide-panel').contains('Viktig informasjon')
+        cy.get('.navds-guide-panel').contains(
             'Vanligvis starter sykmeldingen den dagen du er hos legen. I ditt tilfelle har legen skrevet at den startet tidligere.',
         )
 

@@ -6,8 +6,6 @@ import { tekst } from '../../utils/tekster'
 import useSoknad from '../../hooks/useSoknad'
 import { RouteParams } from '../../app'
 
-import VeilederSVG from './veileder'
-
 export const ViktigInformasjon = () => {
     const { id } = useParams<RouteParams>()
     const { data: valgtSoknad } = useSoknad(id)
@@ -20,15 +18,25 @@ export const ViktigInformasjon = () => {
 
     if (valgtSoknad.merknaderFraSykmelding?.some((a) => merknadsTyperSomVarsles.includes(a.type))) {
         return (
-            <div className="viktig-informasjon">
-                <GuidePanel poster illustration={VeilederSVG}>
-                    <Label as="h2">{tekst('viktig-informasjon.overskrift')}</Label>
-                    <BodyLong spacing>{tekst('viktig-informasjon.avsnitt.1')}</BodyLong>
-                    <BodyLong spacing>{tekst('viktig-informasjon.avsnitt.2')}</BodyLong>
-                    <Label as="h3">{tekst('viktig-informasjon.under-overskrift')}</Label>
-                    <BodyLong spacing>{tekst('viktig-informasjon.avsnitt.3')}</BodyLong>
-                </GuidePanel>
-            </div>
+            <GuidePanel
+                poster
+                style={
+                    {
+                        '--ac-guide-panel-border': 'var(--a-orange-400)',
+                        '--ac-guide-panel-illustration-bg': 'var(--a-orange-200)',
+                    } as React.CSSProperties
+                }
+            >
+                <Label as="h2" spacing>
+                    {tekst('viktig-informasjon.overskrift')}
+                </Label>
+                <BodyLong spacing>{tekst('viktig-informasjon.avsnitt.1')}</BodyLong>
+                <BodyLong spacing>{tekst('viktig-informasjon.avsnitt.2')}</BodyLong>
+                <Label as="h3" spacing>
+                    {tekst('viktig-informasjon.under-overskrift')}
+                </Label>
+                <BodyLong spacing>{tekst('viktig-informasjon.avsnitt.3')}</BodyLong>
+            </GuidePanel>
         )
     }
     return null
