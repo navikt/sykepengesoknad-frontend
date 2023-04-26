@@ -1,7 +1,6 @@
-import { Back } from '@navikt/ds-icons'
-import { BodyShort, Heading } from '@navikt/ds-react'
+import { Heading } from '@navikt/ds-react'
 import React, { useEffect } from 'react'
-import { Link, useParams } from 'react-router-dom'
+import { useParams } from 'react-router-dom'
 import { useNavigate } from 'react-router'
 
 import Banner from '../../components/banner/banner'
@@ -12,7 +11,6 @@ import SporsmalForm from '../../components/sporsmal/sporsmal-form/sporsmal-form'
 import Fremdriftsbar from '../sporsmal/fremdriftsbar/fremdriftsbar'
 import { RSSoknadstatus } from '../../types/rs-types/rs-soknadstatus'
 import { RSSoknadstype } from '../../types/rs-types/rs-soknadstype'
-import { SEPARATOR } from '../../utils/constants'
 import { tekst } from '../../utils/tekster'
 import { logEvent } from '../amplitude/amplitude'
 import { EldreUsendtSoknad, harEldreUsendtSoknad } from '../eldre-usendt/eldre-usendt-soknad'
@@ -101,28 +99,6 @@ const Soknaden = () => {
             <HotjarTrigger jsTrigger={hentHotjarJsTrigger(valgtSoknad.soknadstype, 'soknad')}>
                 <>
                     <Vis hvis={stegNo > 1 || erUtlandssoknad} render={() => <Fremdriftsbar />} />
-
-                    <Vis
-                        hvis={stegNo > 1}
-                        render={() => (
-                            <Link
-                                to={`/soknader/${valgtSoknad.id}${SEPARATOR}${stegNo - 1}${window.location.search}`}
-                                className="navds-link tilbakelenke"
-                                onClick={() => {
-                                    logEvent('navigere', {
-                                        lenketekst: tekst('soknad.tilbakeknapp'),
-                                        fra: valgtSoknad!.sporsmal[stegNo - 1].tag,
-                                        til: valgtSoknad!.sporsmal[stegNo - 2].tag,
-                                        soknadstype: valgtSoknad?.soknadstype,
-                                        stegId: stegId,
-                                    })
-                                }}
-                            >
-                                <Back className="chevron--venstre" />
-                                <BodyShort as="span">{tekst('soknad.tilbakeknapp')}</BodyShort>
-                            </Link>
-                        )}
-                    />
 
                     <Vis hvis={stegNo === 1 && !erUtlandssoknad} render={() => <ViktigInformasjon />} />
 
