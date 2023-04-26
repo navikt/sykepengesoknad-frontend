@@ -13,19 +13,19 @@ import useSoknad from '../../../hooks/useSoknad'
 import { logEvent } from '../../amplitude/amplitude'
 import { parserWithReplace } from '../../../utils/html-react-parser-utils'
 
-import { AndreInntektskilderBody } from './andre-inntektskilder-body'
+import { AndreInntektskilderHjelpBody } from './andre-inntektskilder-hjelp-body'
 import { EkspanderbarHjelpTekster } from './ekspanderbar-hjelp-tekst'
-import { TilbakeIArbeidBody } from './tilbake-i-arbeid-body'
-import { YrkesskadeBody } from './yrkesskad-body'
-import { FerieBody } from './ferie-body'
-import { PermisjonBody } from './permisjon-body'
-import { UtlandBody } from './utland-body'
-import { ArbeidUnderveisBody } from './arbeid-underveis-body'
-import { ArbeidUtenforNorgeBody } from './arbeid-utenfor-norge-body'
-import { FravarForSykmeldingenBody } from './fravar-for-sykmeldingen-body'
-import { JobbetDuGradertArbeidstakerBody } from './jobbet-gradert-arbeidstaker'
-import { BrukteReisetilskuddetBody } from './brukte-reisetilskuddet-body'
-import { KvitteringerBody } from './kvitteringer-body'
+import { TilbakeIArbeidHjelpBody } from './tilbake-i-arbeid-hjelp-body'
+import { YrkesskadeHjelpBody } from './yrkesskade-hjelp-body'
+import { FerieHjelpBody } from './ferie-hjelp-body'
+import { PermisjonHjelpBody } from './permisjon-hjelp-body'
+import { UtlandHjelpBody } from './utland-hjelp-body'
+import { ArbeidUnderveisHjelpBody } from './arbeid-underveis-hjelp-body'
+import { ArbeidUtenforNorgeHjelpBody } from './arbeid-utenfor-norge-hjelp-body'
+import { FravarForSykmeldingenHjelpBody } from './fravar-for-sykmeldingen-hjelp-body'
+import { JobbetDuGradertArbeidstakerHjelpBody } from './jobbet-du-gradert-arbeidstaker-hjelp'
+import { BrukteReisetilskuddetHjelpBody } from './brukte-reisetilskuddet-hjelp-body'
+import { KvitteringerHjelpBody } from './kvitteringer-hjelp-body'
 
 export const EkspanderbarHjelp = ({ sporsmal }: SpmProps) => {
     const { id } = useParams<RouteParams>()
@@ -68,29 +68,29 @@ export const EkspanderbarHjelp = ({ sporsmal }: SpmProps) => {
     const EkspanderbarInnhold = () => {
         switch (sporsmal.tag) {
             case TagTyper.TILBAKE_I_ARBEID:
-                return <TilbakeIArbeidBody />
+                return <TilbakeIArbeidHjelpBody />
             case TagTyper.YRKESSKADE:
-                return <YrkesskadeBody />
+                return <YrkesskadeHjelpBody />
             case TagTyper.FERIE_V2:
-                return <FerieBody />
+                return <FerieHjelpBody />
             case TagTyper.ANDRE_INNTEKTSKILDER_V2:
-                return <AndreInntektskilderBody />
+                return <AndreInntektskilderHjelpBody />
             case TagTyper.PERMISJON_V2:
-                return <PermisjonBody />
+                return <PermisjonHjelpBody />
             case TagTyper.UTLAND_V2:
-                return <UtlandBody />
+                return <UtlandHjelpBody />
             case TagTyper.ARBEID_UNDERVEIS_100_PROSENT:
-                return <ArbeidUnderveisBody />
+                return <ArbeidUnderveisHjelpBody />
             case TagTyper.ARBEID_UTENFOR_NORGE:
-                return <ArbeidUtenforNorgeBody />
+                return <ArbeidUtenforNorgeHjelpBody />
             case TagTyper.FRAVAR_FOR_SYKMELDINGEN:
-                return <FravarForSykmeldingenBody />
+                return <FravarForSykmeldingenHjelpBody />
             case TagTyper.JOBBET_DU_GRADERT:
-                return <JobbetDuGradertArbeidstakerBody />
+                return <JobbetDuGradertArbeidstakerHjelpBody />
             case TagTyper.BRUKTE_REISETILSKUDDET:
-                return <BrukteReisetilskuddetBody />
+                return <BrukteReisetilskuddetHjelpBody />
             case TagTyper.KVITTERINGER:
-                return <KvitteringerBody />
+                return <KvitteringerHjelpBody />
             default:
                 if (harInnhold) {
                     return <BodyLong>{parserWithReplace(tekst(`ekspanderbarhjelp.${nokkel}.innhold` as any))}</BodyLong>

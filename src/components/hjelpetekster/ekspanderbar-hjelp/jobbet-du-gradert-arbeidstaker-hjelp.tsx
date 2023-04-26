@@ -1,6 +1,6 @@
 import { BodyLong } from '@navikt/ds-react'
 
-export const JobbetDuGradertArbeidstakerBody = () => {
+export const JobbetDuGradertArbeidstakerHjelpBody = () => {
     return (
         <>
             <BodyLong>

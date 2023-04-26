@@ -3,7 +3,7 @@ import { BodyShort } from '@navikt/ds-react'
 import { HjelpetekstModal } from './hjelpetekst-modal'
 import { AndreInntektskilderHjelpTekster } from './andre-inntektskilder-hjelp-tekst'
 
-export const AndreInntektskilderBody = () => {
+export const AndreInntektskilderHjelpBody = () => {
     return (
         <>
             <BodyShort spacing>{AndreInntektskilderHjelpTekster['hjelpetekst.del1']}</BodyShort>

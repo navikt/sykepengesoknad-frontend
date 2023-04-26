@@ -1,6 +1,6 @@
 import { BodyLong } from '@navikt/ds-react'
 
-export const ArbeidUnderveisBody = () => {
+export const ArbeidUnderveisHjelpBody = () => {
     return (
         <>
             <BodyLong>
