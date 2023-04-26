@@ -1,31 +1,20 @@
-import { BodyShort, Link } from '@navikt/ds-react'
+import { BodyShort } from '@navikt/ds-react'
 import React from 'react'
-import { useParams } from 'react-router'
 
 import { TagTyper } from '../../../types/enums'
-import { RSSoknadstatus } from '../../../types/rs-types/rs-soknadstatus'
 import { tekst } from '../../../utils/tekster'
 import Vis from '../../vis'
 import { SpmProps } from '../sporsmal-form/sporsmal-form'
 import { fjernIndexFraTag } from '../sporsmal-utils'
-import { RouteParams } from '../../../app'
-import useSoknad from '../../../hooks/useSoknad'
 import { ProgressivtGuidePanel } from '../../guidepanel/ProgressivtGuidePanel'
-import { logEvent } from '../../amplitude/amplitude'
 import { parserWithReplace } from '../../../utils/html-react-parser-utils'
 
 import styles from './GuidepanelUnderSporsmalstekst.module.css'
 
 const GuidepanelUnderSporsmalstekst = ({ sporsmal }: SpmProps) => {
-    const { id } = useParams<RouteParams>()
-    const { data: valgtSoknad } = useSoknad(id)
-
     const bjornTekst = `soknad.bjorn.${fjernIndexFraTag(sporsmal.tag).toLowerCase()}`
 
     const bjornVeileder = (tag: TagTyper) => tag === TagTyper.ENKELTSTAENDE_BEHANDLINGSDAGER
-
-    const bjornVeilederOgMaaler = (tag: TagTyper) =>
-        tag === TagTyper.FERIE_V2 && valgtSoknad?.status === RSSoknadstatus.NY
 
     return (
         <>
@@ -34,27 +23,6 @@ const GuidepanelUnderSporsmalstekst = ({ sporsmal }: SpmProps) => {
                 render={() => (
                     <ProgressivtGuidePanel className={styles.guidepanelWrapper}>
                         <BodyShort>{parserWithReplace(tekst(bjornTekst as any))}</BodyShort>
-                    </ProgressivtGuidePanel>
-                )}
-            />
-            <Vis
-                hvis={bjornVeilederOgMaaler(sporsmal.tag)}
-                render={() => (
-                    <ProgressivtGuidePanel className={styles.guidepanelWrapper}>
-                        <BodyShort>
-                            {tekst(bjornTekst as any)}
-                            <Link
-                                href={tekst((bjornTekst + '_lenke') as any)}
-                                onClick={() => {
-                                    logEvent('navigere', {
-                                        lenketekst: tekst((bjornTekst + '_lenketekst') as any),
-                                    })
-                                }}
-                                target="_blank"
-                            >
-                                {tekst((bjornTekst + '_lenketekst') as any)}
-                            </Link>
-                        </BodyShort>
                     </ProgressivtGuidePanel>
                 )}
             />
