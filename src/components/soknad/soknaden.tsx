@@ -9,7 +9,7 @@ import OmReisetilskudd from '../../components/om-reisetilskudd/om-reisetilskudd'
 import Opplysninger from '../../components/opplysninger-fra-sykmelding/opplysninger'
 import SoknadMedToDeler from '../../components/soknad-med-to-deler/soknad-med-to-deler'
 import SporsmalForm from '../../components/sporsmal/sporsmal-form/sporsmal-form'
-import SporsmalSteg from '../../components/sporsmal/sporsmal-steg/sporsmal-steg'
+import Fremdriftsbar from '../sporsmal/fremdriftsbar/fremdriftsbar'
 import { RSSoknadstatus } from '../../types/rs-types/rs-soknadstatus'
 import { RSSoknadstype } from '../../types/rs-types/rs-soknadstype'
 import { SEPARATOR } from '../../utils/constants'
@@ -100,7 +100,7 @@ const Soknaden = () => {
 
             <HotjarTrigger jsTrigger={hentHotjarJsTrigger(valgtSoknad.soknadstype, 'soknad')}>
                 <>
-                    <Vis hvis={stegNo > 1 || erUtlandssoknad} render={() => <SporsmalSteg />} />
+                    <Vis hvis={stegNo > 1 || erUtlandssoknad} render={() => <Fremdriftsbar />} />
 
                     <Vis
                         hvis={stegNo > 1}
