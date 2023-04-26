@@ -1,6 +1,6 @@
 import { BodyLong, Link } from '@navikt/ds-react'
 
-export const FerieBody = () => {
+export const FerieHjelpBody = () => {
     return (
         <>
             <BodyLong>Som arbeidstaker har du krav på lovbestemt ferie hvert år.</BodyLong>

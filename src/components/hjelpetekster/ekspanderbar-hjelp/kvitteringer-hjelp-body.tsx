@@ -1,7 +1,7 @@
 import { BodyLong, BodyShort } from '@navikt/ds-react'
 import React from 'react'
 
-export const KvitteringerBody = () => {
+export const KvitteringerHjelpBody = () => {
     return (
         <>
             <BodyLong>Du må laste opp kvitteringer hvis du har hatt ekstra utgifter til:</BodyLong>

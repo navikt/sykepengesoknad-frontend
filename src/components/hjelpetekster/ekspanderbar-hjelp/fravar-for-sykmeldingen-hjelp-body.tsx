@@ -1,6 +1,6 @@
 import { BodyLong } from '@navikt/ds-react'
 
-export const FravarForSykmeldingenBody = () => {
+export const FravarForSykmeldingenHjelpBody = () => {
     return (
         <>
             <BodyLong>

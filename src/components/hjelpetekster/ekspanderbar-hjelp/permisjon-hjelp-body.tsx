@@ -1,6 +1,6 @@
 import { BodyLong } from '@navikt/ds-react'
 
-export const PermisjonBody = () => {
+export const PermisjonHjelpBody = () => {
     return (
         <>
             <BodyLong>
