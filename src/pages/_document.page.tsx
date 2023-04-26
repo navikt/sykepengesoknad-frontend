@@ -26,6 +26,7 @@ class MyDocument extends Document<Props> {
         const Decorator = await fetchDecoratorReact({
             env: serverRuntimeConfig.decoratorEnv,
             params: {
+                simple: true,
                 chatbot: false,
                 feedback: false,
                 urlLookupTable: false,
