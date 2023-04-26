@@ -13,10 +13,7 @@ import styles from './GuidepanelOverSporsmalstekst.module.css'
 const GuidepanelOverSporsmalstekst = ({ sporsmal }: SpmProps) => {
     const bjornTekst = `soknad.bjorn.${fjernIndexFraTag(sporsmal.tag).toLowerCase()}`
 
-    const bjornVeileder = (tag: TagTyper) =>
-        tag === TagTyper.BRUKTE_REISETILSKUDDET ||
-        tag === TagTyper.FRAVER_FOR_BEHANDLING ||
-        tag === TagTyper.PERIODEUTLAND
+    const bjornVeileder = (tag: TagTyper) => tag === TagTyper.FRAVER_FOR_BEHANDLING || tag === TagTyper.PERIODEUTLAND
     if (!bjornVeileder(sporsmal.tag)) return null
 
     return (

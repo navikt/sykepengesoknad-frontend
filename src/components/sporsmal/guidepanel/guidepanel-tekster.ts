@@ -1,12 +1,6 @@
 const GuidepanelTekster = {
-    'soknad.bjorn.brukte_reisetilskuddet':
-        'Takk for svarene du har gitt om selve sykefraværet. <br /><br />Nå skal vi spørre deg om utgifter du har hatt til reiser til og fra jobben. Har du ikke hatt noen ekstrautgifter, svarer du bare nei og sender søknaden.',
     'soknad.bjorn.enkeltstaende_behandlingsdager':
         'Du kan bare få én behandlingsdag i løpet av en uke. Trenger du flere slike dager, ber du legen om en gradert sykmelding i stedet.',
-    'soknad.bjorn.ferie_v2':
-        'Et lite tips! Syns du det er vanskelig å svare på om du har tatt ut ferie eller ikke, finnes det en ',
-    'soknad.bjorn.ferie_v2_lenketekst': 'veiledning på nav.no',
-    'soknad.bjorn.ferie_v2_lenke': 'https://www.nav.no/sykepenger#ferie',
     'soknad.bjorn.fraver_for_behandling':
         'Vi trenger å vite om du har brukt egenmeldinger eller en papirsykmelding noen dager før denne sykmeldingen. Det er for å kunne beregne sykepengene dine riktig.',
     'soknad.bjorn.periodeutland':
