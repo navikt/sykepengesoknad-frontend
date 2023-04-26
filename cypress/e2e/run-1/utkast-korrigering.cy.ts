@@ -13,13 +13,11 @@ describe('Tester utkast til korrigerte søknader', () => {
     })
 
     it('En søknad til korringeringer markert som til korrigering', () => {
-        cy.get(`#soknader-list-til-behandling article a[href*=${tilKorrigering.id}] .inngangspanel__status`).contains(
-            tekst('soknad.teaser.utkast-korrigering.tekst'),
-        )
+        cy.get(`a[href*=${tilKorrigering.id}]`).contains(tekst('soknad.teaser.utkast-korrigering.tekst'))
     })
 
     it('Korrigert første spørsmål er ubesvart', () => {
-        cy.get(`#soknader-list-til-behandling article a[href*=${tilKorrigering.id}]`).click()
+        cy.get(`a[href*=${tilKorrigering.id}]`).click()
         cy.url().should('include', `${tilKorrigering.id}/1`)
         cy.get('.navds-checkbox__input').should('not.be.checked')
     })

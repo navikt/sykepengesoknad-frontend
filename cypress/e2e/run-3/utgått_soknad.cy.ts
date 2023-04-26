@@ -10,13 +10,13 @@ describe('Tester utgått søknad', () => {
     })
 
     it('Utgått søknad har forventa tekst', function () {
-        cy.get(`#soknader-sendt article[aria-labelledby*=${utgattSoknad.id}]`)
+        cy.get(`[data-cy="button-listevisning-${utgattSoknad.id}"]`)
             .should('include.text', '23. mai – 7. juni 2020')
             .should('include.text', 'Utgått')
     })
 
     it('Ved klikk så åpnes popup', function () {
-        cy.get(`#soknader-sendt article[aria-labelledby*=${utgattSoknad.id}]`).click()
+        cy.get(`[data-cy="button-listevisning-${utgattSoknad.id}"]`).click()
         cy.get('.navds-modal__content')
             .should('include.text', 'Søknaden er utgått')
             .get('.navds-alert .navds-body-long')

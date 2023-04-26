@@ -21,8 +21,8 @@ import SoknadenTekster from '../components/soknad/soknaden-tekster'
 import PersonvernLesMerTekster from '../components/soknad-intro/personvern-les-mer-tekster'
 import ViktigInformasjonTekster from '../components/soknad-intro/viktig-informasjon-tekster'
 import SoknadMedToDelerTekster from '../components/soknad-med-to-deler/soknad-med-to-deler-tekster'
-import SoknaderTekster from '../components/soknader/soknader-tekster'
-import TeaserTekster from '../components/soknader/teaser/teaser-tekster'
+import ListevisningTekster from '../components/listevisning/listevisning-tekster'
+import TeaserTekster from '../components/listevisning/teaser-tekster'
 import GuidepanelTekster from '../components/sporsmal/guidepanel/guidepanel-tekster'
 import { EkspanderbarHjelpTekster } from '../components/hjelpetekster/ekspanderbar-hjelp/ekspanderbar-hjelp-tekst'
 import { EndringUtenEndringTekster } from '../components/sporsmal/endring-uten-endring/endring-uten-endring-tekster'
@@ -34,7 +34,7 @@ const tekster = {
     ...OpplysningerTekster,
     ...KvitteringTekster,
     ...PersonvernLesMerTekster,
-    ...SoknaderTekster,
+    ...ListevisningTekster,
     ...BannerTekster,
     ...GuidepanelTekster,
     ...KnapperadTekster,

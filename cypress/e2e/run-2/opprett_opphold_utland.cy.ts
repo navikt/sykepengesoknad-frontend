@@ -8,9 +8,7 @@ describe('Tester opprettelse av søknad om å beholde sykepenger utenfor EØS', 
 
     it('Laster startside', function () {
         cy.get('.navds-heading--xlarge').should('be.visible').and('have.text', 'Søknader')
-        cy.get(
-            `#soknader-list-til-behandling article a[href*=${arbeidstakersoknadMedUtenlandsoppholdSoktSykepenger.id}]`,
-        ).click()
+        cy.get(`a[href*=${arbeidstakersoknadMedUtenlandsoppholdSoktSykepenger.id}]`).click()
     })
 
     it('Søknad ANSVARSERKLARING - steg 1', function () {
@@ -30,7 +28,7 @@ describe('Tester opprettelse av søknad om å beholde sykepenger utenfor EØS', 
         cy.url().should('include', `${arbeidstakersoknadMedUtenlandsoppholdSoktSykepenger.id}/2`)
 
         // Test spørsmål
-        cy.get('.sporsmal__tittel').should('have.text', 'Sykepenger utenfor EØS')
+        cy.get('[data-cy="sporsmal-tittel"]').should('have.text', 'Sykepenger utenfor EØS')
         cy.contains('Har du søkt om å beholde sykepengene for de dagene du var utenfor EØS?')
         cy.get('.radioGruppe-jaNei input[value=JA]').click({ force: true })
 

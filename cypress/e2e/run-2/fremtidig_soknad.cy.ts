@@ -10,13 +10,13 @@ describe('Tester fremtidig søknad', () => {
     })
 
     it('Fremtidig søknad har forventa tekst', function () {
-        cy.get(`#soknader-list-til-behandling article[aria-labelledby*=${fremtidigSoknad.id}]`)
+        cy.get(`[data-cy="button-listevisning-${fremtidigSoknad.id}"]`)
             .should('include.text', '23. mai – 7. juni 3020')
             .and('include.text', 'Aktiveres 8. juni 3020')
     })
 
     it('Ved klikk så åpnes popup', function () {
-        cy.get(`#soknader-list-til-behandling article[aria-labelledby*=${fremtidigSoknad.id}]`).click()
+        cy.get(`[data-cy="button-listevisning-${fremtidigSoknad.id}"]`).click()
         cy.get('.navds-modal__content')
             .should('include.text', 'Søknaden er ikke klar')
             .get('.utvidbar .navds-label')

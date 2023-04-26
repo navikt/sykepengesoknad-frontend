@@ -14,7 +14,6 @@ import { RSSoknadstatus } from '../../types/rs-types/rs-soknadstatus'
 import { RSSoknadstype } from '../../types/rs-types/rs-soknadstype'
 import { SEPARATOR } from '../../utils/constants'
 import { tekst } from '../../utils/tekster'
-import { setBodyClass } from '../../utils/utils'
 import { logEvent } from '../amplitude/amplitude'
 import { EldreUsendtSoknad, harEldreUsendtSoknad } from '../eldre-usendt/eldre-usendt-soknad'
 import { EldreUsendtSykmelding } from '../eldre-usendt/eldre-usendt-sykmelding'
@@ -48,8 +47,6 @@ const Soknaden = () => {
     useUpdateBreadcrumbs(() => [{ ...soknadBreadcrumb, handleInApp: true }], [])
 
     useEffect(() => {
-        setBodyClass('soknaden')
-
         if (!valgtSoknad || stegId !== '1') return
 
         // finn posisjon på siste besvarte spørsmål
@@ -154,7 +151,7 @@ const Soknaden = () => {
                     <Vis
                         hvis={tittel && stegNo !== 1 && !erUtlandssoknad}
                         render={() => (
-                            <Heading data-cy="sporsmal-tittel" level="2" size="medium" className="sporsmal__tittel">
+                            <Heading data-cy="sporsmal-tittel" level="2" size="medium" className="mb-2 mt-8">
                                 {tittel}
                             </Heading>
                         )}

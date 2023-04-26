@@ -13,7 +13,7 @@ describe('Tester behandlingsdagersøknad', () => {
 
     it('Laster startside', function () {
         cy.get('.navds-heading--xlarge').should('be.visible').and('have.text', 'Søknader')
-        cy.get(`#soknader-list-til-behandling article a[href*=${soknad.id}]`).click()
+        cy.get(`a[href*=${soknad.id}]`).click()
     })
 
     it('Søknad ANSVARSERKLARING - steg 1', function () {

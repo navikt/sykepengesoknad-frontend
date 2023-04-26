@@ -9,7 +9,7 @@ describe('Tester ettersending og korrigering', () => {
 
     it('Laster startside', function () {
         cy.get('.navds-heading--xlarge').should('be.visible').and('have.text', 'Søknader')
-        cy.get(`#soknader-list-til-behandling article a[href*=${soknad.id}]`).click()
+        cy.get(`a[href*=${soknad.id}]`).click()
     })
 
     it('Svar på søknad', function () {
@@ -71,7 +71,8 @@ describe('Tester ettersending og korrigering', () => {
         cy.get('#listelink').click({
             force: true,
         })
-        cy.get(`#soknader-sendt article a[href*=${soknad.id}]`).click({
+        cy.get(`[data-cy="Tidligere søknader"]`).children().should('have.length', 2)
+        cy.get(`[data-cy="Tidligere søknader"] > a[href*=${soknad.id}]`).click({
             force: true,
         })
 
@@ -124,8 +125,7 @@ describe('Tester ettersending og korrigering', () => {
         })
         cy.get('.navds-heading--xlarge').should('be.visible').and('have.text', 'Søknader')
 
-        cy.get(`#soknader-list-til-behandling article a[href*=${soknad.id}]`).should('not.exist')
-        cy.get(`#soknader-sendt article a[href*=${soknad.id}]`)
+        cy.get(`a[href*=${soknad.id}]`)
             .should('contain', '1. – 24. april 2020')
             .and('contain', 'Sendt til arbeidsgiver og NAV')
     })

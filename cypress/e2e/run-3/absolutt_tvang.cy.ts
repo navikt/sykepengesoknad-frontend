@@ -5,7 +5,7 @@ describe('Tester at åpne sykmeldinger må sendes inn', () => {
         it('Laster søknader ', function () {
             cy.visit('/syk/sykepengesoknad?testperson=en-usendt-sykmelding')
 
-            cy.get(`#soknader-list-til-behandling article a[href*=${arbeidstaker.id}]`).click()
+            cy.get(`a[href*=${arbeidstaker.id}]`).click()
         })
 
         it('Viser advarsel om at det finnes sykmelding', function () {
@@ -21,7 +21,7 @@ describe('Tester at åpne sykmeldinger må sendes inn', () => {
         it('Laster søknader ', function () {
             cy.visit('/syk/sykepengesoknad?testperson=to-usendte-sykmeldinger')
 
-            cy.get(`#soknader-list-til-behandling article a[href*=${arbeidstaker.id}]`).click()
+            cy.get(`a[href*=${arbeidstaker.id}]`).click()
         })
 
         it('Viser advarsel om at det finnes sykmeldinger', function () {

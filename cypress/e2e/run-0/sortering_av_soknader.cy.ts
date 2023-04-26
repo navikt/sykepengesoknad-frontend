@@ -5,7 +5,7 @@ import { soknaderIntegration, soknaderOpplaering } from '../../../src/data/mock/
 const articleTilSoknad = (articles: any) => {
     const soknader: Soknad[] = []
     articles.map((idx: any) => {
-        const id = articles[idx].attributes['aria-labelledby'].value.split('soknader-header-')[1]
+        const id = articles[idx].attributes['data-cy']?.value.split('-listevisning-')[1]
         const rsSoknad = soknaderIntegration.find((s) => s.id === id) || soknaderOpplaering.find((s) => s.id === id)
         if (rsSoknad) soknader.push(new Soknad(rsSoknad))
     })
@@ -19,7 +19,7 @@ describe('Tester sortering av søknader', () => {
     })
 
     it('Nye søknader sorteres etter tidligste tom dato', function () {
-        cy.get('#soknader-list-til-behandling article').then((articles: any) => {
+        cy.get('[data-cy="Nye søknader"] a').then((articles: any) => {
             const soknader = articleTilSoknad(articles)
             let forrigeSoknad = soknader[0]
             soknader.forEach((sok: Soknad) => {
@@ -31,7 +31,7 @@ describe('Tester sortering av søknader', () => {
 
     it('Sorter etter Status', function () {
         cy.get('select').select('Status')
-        cy.get('#soknader-sendt article').then((articles: any) => {
+        cy.get('[data-cy="Tidligere søknader"] a, [data-cy="Tidligere søknader"] button').then((articles: any) => {
             const soknader = articleTilSoknad(articles)
             let forrigeSoknad = soknader[0]
             soknader.forEach((sok: Soknad) => {
@@ -43,7 +43,7 @@ describe('Tester sortering av søknader', () => {
 
     it('Sorter etter Dato', function () {
         cy.get('select').select('Dato')
-        cy.get('#soknader-sendt article').then((articles: any) => {
+        cy.get('[data-cy="Tidligere søknader"] a, [data-cy="Tidligere søknader"] button').then((articles: any) => {
             const soknader = articleTilSoknad(articles)
             let forrigeSoknad = soknader[0]
             soknader.forEach((sok: Soknad) => {
@@ -55,15 +55,23 @@ describe('Tester sortering av søknader', () => {
 
     it('Sorter etter Sendt', function () {
         cy.get('select').contains('Dato')
-        cy.get('#soknader-sendt article').eq(0).contains('27. mai – 11. juni 2020')
-        cy.get('#soknader-sendt article').eq(1).contains('23. mai – 7. juni 2020')
+        cy.get('[data-cy="Tidligere søknader"] a, [data-cy="Tidligere søknader"] button')
+            .eq(0)
+            .contains('27. mai – 11. juni 2020')
+        cy.get('[data-cy="Tidligere søknader"] a, [data-cy="Tidligere søknader"] button')
+            .eq(2)
+            .contains('23. mai – 7. juni 2020')
 
         cy.get('select').select('Sendt')
         cy.get('select').contains('Sendt')
 
-        cy.get('#soknader-sendt article').eq(0).contains('27. mai – 11. juni 2020')
-        cy.get('#soknader-sendt article').eq(1).contains('25. – 27. mars 2020')
-        cy.get('#soknader-sendt article').then((articles: any) => {
+        cy.get('[data-cy="Tidligere søknader"] a, [data-cy="Tidligere søknader"] button')
+            .eq(0)
+            .contains('27. mai – 11. juni 2020')
+        cy.get('[data-cy="Tidligere søknader"] a, [data-cy="Tidligere søknader"] button')
+            .eq(2)
+            .contains('25. – 27. mars 2020')
+        cy.get('[data-cy="Tidligere søknader"] a, [data-cy="Tidligere søknader"] button').then((articles: any) => {
             const soknader = articleTilSoknad(articles)
             let forrigeSoknad = soknader[0]
             soknader.forEach((sok: Soknad) => {

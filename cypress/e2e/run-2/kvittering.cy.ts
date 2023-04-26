@@ -19,7 +19,7 @@ describe('Tester kvittering', () => {
             // Velg søknad
             cy.visit('/syk/sykepengesoknad?testperson=alle-soknader')
 
-            cy.get(`#soknader-list-til-behandling article a[href*=${arbeidsledigKvittering.id}]`).click()
+            cy.get(`a[href*=${arbeidsledigKvittering.id}]`).click()
 
             // Svar og send
             cy.contains(
@@ -54,7 +54,7 @@ describe('Tester kvittering', () => {
                 )
 
             // Oppsummering minimert
-            cy.get('.utvidbar.oppsummering.lilla .navds-accordion__header')
+            cy.get('[data-cy="oppsummering-fra-søknaden"]  .navds-accordion__header')
                 .should('contain', 'Oppsummering fra søknaden')
                 .and('have.attr', 'aria-expanded', 'false')
 
@@ -70,9 +70,7 @@ describe('Tester kvittering', () => {
         it('Etter 30 dager', () => {
             cy.visit('/syk/sykepengesoknad?testperson=alle-soknader')
 
-            cy.get(
-                `#soknader-sendt [aria-labelledby="soknader-header-${sendtArbeidsledigKvittering.id}"] > .inngangspanel > .inngangspanel__ytre > .inngangspanel__del1 > .inngangspanel__ikon--normal > img`,
-            ).click({ force: true })
+            cy.get(`[data-cy="Tidligere søknader"]  a[href*=${sendtArbeidsledigKvittering.id}]`).click({ force: true })
             cy.url().should('include', `/sendt/${sendtArbeidsledigKvittering.id}`)
 
             // Sendt datoer
@@ -85,7 +83,7 @@ describe('Tester kvittering', () => {
             cy.get('[data-cy="kvittering-alert"]').should('not.exist')
 
             // Oppsummering ekspandert
-            cy.get('.utvidbar.oppsummering.lilla.apen .navds-accordion__header').should(
+            cy.get('[data-cy="oppsummering-fra-søknaden"]  .navds-accordion__header').should(
                 'contain',
                 'Oppsummering fra søknaden',
             )
@@ -106,7 +104,7 @@ describe('Tester kvittering', () => {
             cy.visit('/syk/sykepengesoknad?testperson=alle-soknader')
 
             // Velg søknad
-            cy.get(`#soknader-list-til-behandling article a[href*=${oppholdUtlandKvittering.id}]`).click({
+            cy.get(`a[href*=${oppholdUtlandKvittering.id}]`).click({
                 force: true,
             })
 
@@ -160,7 +158,7 @@ describe('Tester kvittering', () => {
                 )
 
             // Oppsummering minimert
-            cy.get('.utvidbar.oppsummering.lilla .navds-accordion__header')
+            cy.get('[data-cy="oppsummering-fra-søknaden"]  .navds-accordion__header')
                 .should('contain', 'Oppsummering fra søknaden')
                 .and('have.attr', 'aria-expanded', 'false')
 
@@ -179,7 +177,7 @@ describe('Tester kvittering', () => {
             cy.visit('/syk/sykepengesoknad?testperson=alle-soknader')
 
             // Velg søknad
-            cy.get(`#soknader-list-til-behandling article a[href*=${selvstendigKvittering.id}]`).click()
+            cy.get(`a[href*=${selvstendigKvittering.id}]`).click()
 
             // Svar og send
             cy.contains(
@@ -217,7 +215,7 @@ describe('Tester kvittering', () => {
                 )
 
             // Oppsummering minimert
-            cy.get('.utvidbar.oppsummering.lilla .navds-accordion__header')
+            cy.get('[data-cy="oppsummering-fra-søknaden"]  .navds-accordion__header')
                 .should('contain', 'Oppsummering fra søknaden')
                 .and('have.attr', 'aria-expanded', 'false')
 
@@ -236,9 +234,7 @@ describe('Tester kvittering', () => {
     context('Arbeidstaker', () => {
         it('Innenfor arbeidsgiverperiode', () => {
             cy.visit('/syk/sykepengesoknad?testperson=alle-soknader')
-            cy.get(
-                `#soknader-list-til-behandling article a[href*=${arbeidstakerInnenforArbeidsgiverperiodeKvittering.id}]`,
-            ).click({ force: true })
+            cy.get(`a[href*=${arbeidstakerInnenforArbeidsgiverperiodeKvittering.id}]`).click({ force: true })
             besvarSoknad()
 
             const kvitteringURL = `/kvittering/${arbeidstakerInnenforArbeidsgiverperiodeKvittering.id}`
@@ -254,7 +250,7 @@ describe('Tester kvittering', () => {
             cy.get('#listelink').click({
                 force: true,
             })
-            cy.get(`#soknader-sendt article a[href*=${arbeidstakerInnenforArbeidsgiverperiodeKvittering.id}]`).click({
+            cy.get(`a[href*=${arbeidstakerInnenforArbeidsgiverperiodeKvittering.id}]`).click({
                 force: true,
             })
             cy.url().should('include', `/sendt/${arbeidstakerInnenforArbeidsgiverperiodeKvittering.id}`)
@@ -324,9 +320,7 @@ describe('Tester kvittering', () => {
         it('Utenfor arbeidsgiverperiode', () => {
             cy.visit('/syk/sykepengesoknad?testperson=alle-soknader')
             cy.location('pathname').should('include', '/syk/sykepengesoknad')
-            cy.get(
-                `#soknader-list-til-behandling article a[href*=${arbeidstakerUtenforArbeidsgiverperiodeKvittering.id}]`,
-            ).click({ force: true })
+            cy.get(`a[href*=${arbeidstakerUtenforArbeidsgiverperiodeKvittering.id}]`).click({ force: true })
             besvarSoknad()
 
             const kvitteringURL = `/kvittering/${arbeidstakerUtenforArbeidsgiverperiodeKvittering.id}`
@@ -342,9 +336,9 @@ describe('Tester kvittering', () => {
             cy.visit('/syk/sykepengesoknad?testperson=alle-soknader')
             cy.location('pathname').should('include', '/syk/sykepengesoknad')
 
-            cy.get(
-                `#soknader-list-til-behandling article a[href*=${arbeidstakerDeltPeriodeForsteUtenforArbeidsgiverperiodeKvittering.id}]`,
-            ).click({ force: true })
+            cy.get(`a[href*=${arbeidstakerDeltPeriodeForsteUtenforArbeidsgiverperiodeKvittering.id}]`).click({
+                force: true,
+            })
             besvarSoknad()
 
             const kvitteringURL = `/kvittering/${arbeidstakerDeltPeriodeForsteUtenforArbeidsgiverperiodeKvittering.id}`
@@ -360,9 +354,9 @@ describe('Tester kvittering', () => {
             cy.visit('/syk/sykepengesoknad?testperson=alle-soknader')
             cy.location('pathname').should('include', '/syk/sykepengesoknad')
 
-            cy.get(
-                `#soknader-list-til-behandling article a[href*=${arbeidstakerUtenOppholdForsteUtenforArbeidsgiverperiodeKvittering.id}]`,
-            ).click({ force: true })
+            cy.get(`a[href*=${arbeidstakerUtenOppholdForsteUtenforArbeidsgiverperiodeKvittering.id}]`).click({
+                force: true,
+            })
             besvarSoknad()
             cy.location('pathname').should(
                 'include',
@@ -380,7 +374,7 @@ describe('Tester kvittering', () => {
             cy.visit('/syk/sykepengesoknad?testperson=alle-soknader')
             cy.location('pathname').should('include', '/syk/sykepengesoknad')
 
-            cy.get(`#soknader-list-til-behandling article a[href*=${arbeidstakerUtenOppholdKvittering.id}]`).click({
+            cy.get(`a[href*=${arbeidstakerUtenOppholdKvittering.id}]`).click({
                 force: true,
             })
             besvarSoknad()
@@ -395,9 +389,7 @@ describe('Tester kvittering', () => {
             cy.visit('/syk/sykepengesoknad?testperson=alle-soknader')
             cy.location('pathname').should('include', '/syk/sykepengesoknad')
 
-            cy.get(
-                `#soknader-list-til-behandling article a[href*=${arbeidstakerMedOppholdForsteUtenforArbeidsgiverperiodeKvittering.id}]`,
-            ).click()
+            cy.get(`a[href*=${arbeidstakerMedOppholdForsteUtenforArbeidsgiverperiodeKvittering.id}]`).click()
             besvarSoknad()
 
             const kvitteringURL = `/kvittering/${arbeidstakerMedOppholdForsteUtenforArbeidsgiverperiodeKvittering.id}`
@@ -413,7 +405,7 @@ describe('Tester kvittering', () => {
             cy.visit('/syk/sykepengesoknad?testperson=alle-soknader')
             cy.location('pathname').should('include', '/syk/sykepengesoknad')
 
-            cy.get(`#soknader-list-til-behandling article a[href*=${arbeidstakerMedOppholdKvittering.id}]`).click({
+            cy.get(`a[href*=${arbeidstakerMedOppholdKvittering.id}]`).click({
                 force: true,
             })
             besvarSoknad()
@@ -453,7 +445,7 @@ const inntil16dagerKvittering = () => {
         .and('not.contain', 'Når blir pengene utbetalt')
 
     // Oppsummering minimert
-    cy.get('.utvidbar.oppsummering.lilla .navds-accordion__header')
+    cy.get('[data-cy="oppsummering-fra-søknaden"]  .navds-accordion__header')
         .should('contain', 'Oppsummering fra søknaden')
         .and('have.attr', 'aria-expanded', 'false')
 
@@ -523,7 +515,7 @@ const over16dagerKvittering = () => {
     )
 
     // Oppsummering minimert
-    cy.get('.utvidbar.oppsummering.lilla .navds-accordion__header')
+    cy.get('[data-cy="oppsummering-fra-søknaden"]  .navds-accordion__header')
         .should('contain', 'Oppsummering fra søknaden')
         .and('have.attr', 'aria-expanded', 'false')
 
@@ -571,7 +563,7 @@ const utenOppholdKvittering = () => {
     )
 
     // Oppsummering minimert
-    cy.get('.utvidbar.oppsummering.lilla .navds-accordion__header')
+    cy.get('[data-cy="oppsummering-fra-søknaden"]  .navds-accordion__header')
         .should('contain', 'Oppsummering fra søknaden')
         .and('have.attr', 'aria-expanded', 'false')
 
@@ -633,7 +625,7 @@ const medOppholdKvittering = () => {
     )
 
     // Oppsummering minimert
-    cy.get('.utvidbar.oppsummering.lilla .navds-accordion__header')
+    cy.get('[data-cy="oppsummering-fra-søknaden"]  .navds-accordion__header')
         .should('contain', 'Oppsummering fra søknaden')
         .and('have.attr', 'aria-expanded', 'false')
 

@@ -1,7 +1,6 @@
 import { Modal } from '@navikt/ds-react'
 import React from 'react'
 import { BrowserRouter, Route, Routes } from 'react-router-dom'
-import { CSSTransition, TransitionGroup } from 'react-transition-group'
 
 import AvbruttSoknad from './components/avbrutt/avbrutt-soknad'
 import { RefreshHvisFeilState } from './components/feil/refresh-hvis-feil-state'
@@ -10,12 +9,10 @@ import OpprettUtland from './components/opprett-utland/opprett-utland'
 import OnUrlChange from './components/react-router-utils/OnUrlChange'
 import SendtSide from './components/sendt/sendt-side'
 import Soknad from './components/soknad/soknaden'
-import Soknader from './components/soknader/soknader'
+import Listevisning from './components/listevisning/listevisning'
 import Vedlikehold from './components/vedlikehold/vedlikehold'
 import StoreProvider from './data/stores/store-provider'
 import { isMockBackend, vedlikehold } from './utils/environment'
-import { PageWrapper } from './components/PageWrapper/PageWrapper'
-import { LabsWarning } from './components/labs-warning/LabsWarning'
 
 export type RouteParams = {
     stegId: string
@@ -45,27 +42,20 @@ const App = (): any => {
         <BrowserRouter basename="/syk/sykepengesoknad">
             <OnUrlChange>
                 <StoreProvider>
-                    <TransitionGroup component={null}>
-                        <CSSTransition timeout={{ enter: 500, exit: 0 }} classNames="fade">
-                            <main id="maincontent" role="main" tabIndex={-1}>
-                                <PageWrapper>
-                                    <LabsWarning />
-                                    <RefreshHvisFeilState>
-                                        <Routes>
-                                            <Route path="/" element={<Soknader />} />
-                                            <Route path="soknader" element={<Soknader />} />
-                                            <Route path="soknader/:id" element={<Soknad />} />
-                                            <Route path="soknader/:id/:stegId" element={<Soknad />} />
-                                            <Route path="avbrutt/:id" element={<AvbruttSoknad />} />
-                                            <Route path="kvittering/:id" element={<KvitteringSide />} />
-                                            <Route path="sendt/:id" element={<SendtSide />} />
-                                            <Route path="sykepengesoknad-utland" element={<OpprettUtland />} />
-                                        </Routes>
-                                    </RefreshHvisFeilState>
-                                </PageWrapper>
-                            </main>
-                        </CSSTransition>
-                    </TransitionGroup>
+                    <main id="maincontent" role="main" tabIndex={-1}>
+                        <RefreshHvisFeilState>
+                            <Routes>
+                                <Route path="/" element={<Listevisning />} />
+                                <Route path="soknader" element={<Listevisning />} />
+                                <Route path="soknader/:id" element={<Soknad />} />
+                                <Route path="soknader/:id/:stegId" element={<Soknad />} />
+                                <Route path="avbrutt/:id" element={<AvbruttSoknad />} />
+                                <Route path="kvittering/:id" element={<KvitteringSide />} />
+                                <Route path="sendt/:id" element={<SendtSide />} />
+                                <Route path="sykepengesoknad-utland" element={<OpprettUtland />} />
+                            </Routes>
+                        </RefreshHvisFeilState>
+                    </main>
                 </StoreProvider>
             </OnUrlChange>
         </BrowserRouter>
