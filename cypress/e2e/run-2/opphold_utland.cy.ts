@@ -19,6 +19,7 @@ describe('Tester søknad om å beholde sykepenger utenfor EØS', () => {
     it('Velger periode for utenlandsopphold', function () {
         cy.url().should('include', `${soknad.id}/1`)
 
+        cy.contains('Tilbake').should('not.exist')
         cy.contains('Opplysninger fra sykmeldingen').should('not.exist')
         cy.contains('Når skal du reise?')
 
@@ -29,6 +30,8 @@ describe('Tester søknad om å beholde sykepenger utenfor EØS', () => {
 
     it('Velger land', function () {
         cy.url().should('include', `${soknad.id}/2`)
+        cy.contains('Tilbake').should('exist')
+
         cy.get('.skjemaelement__input').click({ force: true })
         cy.contains('Afghanistan').click({ force: true })
         cy.contains('Albania').should('not.exist')

@@ -1,7 +1,7 @@
 import { BodyShort } from '@navikt/ds-react'
 import React from 'react'
 import { Link, useParams } from 'react-router-dom'
-import { Back } from '@navikt/ds-icons'
+import { ArrowLeftIcon } from '@navikt/aksel-icons'
 
 import { TagTyper } from '../../../types/enums'
 import useSoknad from '../../../hooks/useSoknad'
@@ -10,6 +10,32 @@ import { RouteParams } from '../../../app'
 import { SEPARATOR } from '../../../utils/constants'
 import { logEvent } from '../../amplitude/amplitude'
 import { tekst } from '../../../utils/tekster'
+import { Soknad } from '../../../types/types'
+
+const TilbakeKnapp = ({ soknad, stegNo }: { soknad: Soknad; stegNo: number }) => {
+    if (stegNo == 1) {
+        return <div></div> //Tom div pga flex justify-between på parent
+    }
+
+    return (
+        <Link
+            to={`/soknader/${soknad.id}${SEPARATOR}${stegNo - 1}${window.location.search}`}
+            className="navds-link tilbakelenke"
+            onClick={() => {
+                logEvent('navigere', {
+                    lenketekst: tekst('soknad.tilbakeknapp'),
+                    fra: soknad!.sporsmal[stegNo - 1].tag,
+                    til: soknad!.sporsmal[stegNo - 2].tag,
+                    soknadstype: soknad?.soknadstype,
+                    stegId: `${stegNo}`,
+                })
+            }}
+        >
+            <ArrowLeftIcon />
+            <BodyShort as="span">{tekst('soknad.tilbakeknapp')}</BodyShort>
+        </Link>
+    )
+}
 
 const Fremdriftsbar = () => {
     const { id, stegId } = useParams<RouteParams>()
@@ -37,22 +63,7 @@ const Fremdriftsbar = () => {
                 <div className="-mt-1.5 h-1.5 rounded-lg bg-deepblue-500 md:-mt-4 md:h-4" style={style} />
             </div>
             <div className={'mt-4 flex justify-between'}>
-                <Link
-                    to={`/soknader/${valgtSoknad.id}${SEPARATOR}${stegNo - 1}${window.location.search}`}
-                    className="navds-link tilbakelenke"
-                    onClick={() => {
-                        logEvent('navigere', {
-                            lenketekst: tekst('soknad.tilbakeknapp'),
-                            fra: valgtSoknad!.sporsmal[stegNo - 1].tag,
-                            til: valgtSoknad!.sporsmal[stegNo - 2].tag,
-                            soknadstype: valgtSoknad?.soknadstype,
-                            stegId: stegId,
-                        })
-                    }}
-                >
-                    <Back className="chevron--venstre" />
-                    <BodyShort as="span">{tekst('soknad.tilbakeknapp')}</BodyShort>
-                </Link>
+                <TilbakeKnapp soknad={valgtSoknad} stegNo={stegNo} />
                 <BodyShort as="span">
                     {parserWithReplace(`${stegId}&nbsp;av&nbsp;${antallSteg}`) + ' spørsmål'}
                 </BodyShort>
