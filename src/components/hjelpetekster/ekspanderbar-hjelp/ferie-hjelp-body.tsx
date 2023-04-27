@@ -20,7 +20,7 @@ export const FerieHjelpBody = () => {
             </BodyLong>
             <BodyLong className={'mt-4'}>
                 Svar ja, hvis du har hatt ferie mens du er sykmeldt. Legg deretter inn dato for perioden du hadde ferie.
-                Merk at helligdager ikke går under lovbestemt ferie.
+                Merk at røde dager ikke går under lovbestemt ferie.
             </BodyLong>
             <BodyLong className={'mt-4'}>
                 Svar nei, dersom du ikke har hatt ferie, eller hvis du har blitt syk rett før eller under den planlagte
