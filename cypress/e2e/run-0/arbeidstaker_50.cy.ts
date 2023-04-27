@@ -30,6 +30,7 @@ describe('Tester arbeidstakersøknad - gradert 50%', () => {
         })
 
         cy.contains('Gå videre').click()
+        cy.url().should('include', `${soknad.id}/2`)
     })
 
     it('Tilbake til ANSVARSERKLARING og frem igjen', function () {
