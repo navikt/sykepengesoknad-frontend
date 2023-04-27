@@ -1,6 +1,6 @@
 import 'node-fetch'
 
-import { Components, fetchDecoratorReact } from '@navikt/nav-dekoratoren-moduler/ssr'
+import { DecoratorComponents, fetchDecoratorReact } from '@navikt/nav-dekoratoren-moduler/ssr'
 import getConfig from 'next/config'
 import Document, { DocumentContext, DocumentInitialProps, Head, Html, Main, NextScript } from 'next/document'
 import React from 'react'
@@ -15,7 +15,7 @@ const getDocumentParameter = (initialProps: DocumentInitialProps, name: string) 
 }
 
 interface Props {
-    Decorator: Components
+    Decorator: DecoratorComponents
     language: string
 }
 
@@ -25,11 +25,13 @@ class MyDocument extends Document<Props> {
 
         const Decorator = await fetchDecoratorReact({
             env: serverRuntimeConfig.decoratorEnv,
-            simple: true,
-            chatbot: false,
-            feedback: false,
-            urlLookupTable: false,
-            breadcrumbs: createInitialServerSideBreadcrumbs(ctx.pathname, ctx.query),
+            params: {
+                simple: true,
+                chatbot: false,
+                feedback: false,
+                urlLookupTable: false,
+                breadcrumbs: createInitialServerSideBreadcrumbs(ctx.pathname, ctx.query),
+            },
         })
 
         const language = getDocumentParameter(initialProps, 'lang')
