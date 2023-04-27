@@ -51,8 +51,6 @@ spec:
           namespace: teamsykmelding
         - application: nav-dekoratoren
           namespace: personbruker
-      external:
-        - host: www.nav.no                      # for prod
   env:
   {{#each env}}
      - name: {{@key}}
