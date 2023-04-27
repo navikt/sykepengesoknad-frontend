@@ -4,11 +4,11 @@ export const ArbeidUtenforNorgeHjelpBody = () => {
     return (
         <>
             <BodyLong>
-                Du kan ha rettigheter i flere land enn Norge, derfor trenger NAV opplysninger om du har jobbet i
-                utlandet de siste 12 månedene.
+                Du må være medlem av folketrygden for å ha rett til sykepenger fra NAV. Et ledd i vår vurdering av dette
+                er om du har utført arbeid utenfor Norge. Vi vet ikke alltid dette og må derfor spørre deg.
             </BodyLong>
             <BodyLong className={'mt-4'}>
-                Svar nei, dersom du har vært på en kort tjenestereise eller konferanse i utlandet.
+                Svar nei, hvis du har deltatt på korte kurs, konferanser eller møter.
             </BodyLong>
         </>
     )
