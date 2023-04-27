@@ -1,6 +1,6 @@
 ingress: https://www.ekstern.dev.nav.no/syk/sykepengesoknad
 cpu: 200m
-memory: 128Mi
+memory: 256Mi
 env:
   AMPLITUDE_ENABLED: true
   ENVIRONMENT: q1
