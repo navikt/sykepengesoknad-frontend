@@ -22,7 +22,6 @@ import Vis from '../../vis'
 import GuidepanelOverSporsmalstekst from '../guidepanel/GuidepanelOverSporsmalstekst'
 import { EndringUtenEndringModal } from '../endring-uten-endring/endring-uten-endring-modal'
 import { hentFormState } from '../hent-svar'
-import InfotekstOverSubmit from '../infotekst-over-submit'
 import { settSvar } from '../sett-svar'
 import SporsmalSwitch from '../sporsmal-switch'
 import { pathUtenSteg } from '../sporsmal-utils'
@@ -278,8 +277,6 @@ const SporsmalForm = () => {
                             <FeilOppsummering valgtSoknad={valgtSoknad} sporsmal={sporsmal} sendError={sendError} />
                         )}
                     />
-
-                    <InfotekstOverSubmit soknad={valgtSoknad} sporsmal={sporsmal} />
 
                     <Vis
                         hvis={skalViseKnapperad(valgtSoknad, sporsmal, methods.getValues())}

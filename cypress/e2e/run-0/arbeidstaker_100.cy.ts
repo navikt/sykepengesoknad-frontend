@@ -85,12 +85,10 @@ describe('Tester arbeidstakersøknad', () => {
     it('Søknad PERMISJON_V2', function () {
         cy.url().should('include', `${soknad.id}/4`)
 
-        cy.contains('Hva mener vi med permisjon')
-        cy.contains('Med permisjon mener vi dager du var borte fra jobben av andre grunner enn sykdom').should(
-            'not.be.visible',
-        )
-        cy.contains('Hva mener vi med permisjon').click()
-        cy.contains('Med permisjon mener vi dager du var borte fra jobben av andre grunner enn sykdom').should('exist')
+        cy.contains('Spørsmålet forklart')
+        cy.contains('Permisjon er dager du var borte fra jobb av andre grunner enn sykdom').should('not.be.visible')
+        cy.contains('Spørsmålet forklart').click()
+        cy.contains('Permisjon er dager du var borte fra jobb av andre grunner enn sykdom').should('exist')
 
         // Test spørsmål
         cy.get('.radioGruppe-jaNei input[value=JA]').click({ force: true })

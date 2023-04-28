@@ -13,10 +13,19 @@ import useSoknad from '../../../hooks/useSoknad'
 import { logEvent } from '../../amplitude/amplitude'
 import { parserWithReplace } from '../../../utils/html-react-parser-utils'
 
-import { AndreInntektskilderBody } from './andre-inntektskilder-body'
+import { AndreInntektskilderHjelpBody } from './andre-inntektskilder-hjelp-body'
 import { EkspanderbarHjelpTekster } from './ekspanderbar-hjelp-tekst'
 import { TilbakeIArbeidHjelpBody } from './tilbake-i-arbeid-hjelp-body'
-import { YrkesskadeBody } from './yrkesskad-body'
+import { YrkesskadeHjelpBody } from './yrkesskade-hjelp-body'
+import { FerieHjelpBody } from './ferie-hjelp-body'
+import { PermisjonHjelpBody } from './permisjon-hjelp-body'
+import { UtlandHjelpBody } from './utland-hjelp-body'
+import { ArbeidUnderveisHjelpBody } from './arbeid-underveis-hjelp-body'
+import { ArbeidUtenforNorgeHjelpBody } from './arbeid-utenfor-norge-hjelp-body'
+import { FravarForSykmeldingenHjelpBody } from './fravar-for-sykmeldingen-hjelp-body'
+import { JobbetDuGradertArbeidstakerHjelpBody } from './jobbet-du-gradert-arbeidstaker-hjelp'
+import { BrukteReisetilskuddetHjelpBody } from './brukte-reisetilskuddet-hjelp-body'
+import { KvitteringerHjelpBody } from './kvitteringer-hjelp-body'
 
 export const EkspanderbarHjelp = ({ sporsmal }: SpmProps) => {
     const { id } = useParams<RouteParams>()
@@ -54,28 +63,50 @@ export const EkspanderbarHjelp = ({ sporsmal }: SpmProps) => {
     }
 
     const nokkel = skapNokkel()
-
-    const harTekst = `ekspanderbarhjelp.${nokkel}.tittel` in EkspanderbarHjelpTekster
-
-    if (!(nokkel && harTekst)) {
-        return null
-    }
-    const tittel = tekst(`ekspanderbarhjelp.${nokkel}.tittel` as any)
+    const harInnhold = `ekspanderbarhjelp.${nokkel}.innhold` in EkspanderbarHjelpTekster
 
     const EkspanderbarInnhold = () => {
-        if (sporsmal.tag == TagTyper.TILBAKE_I_ARBEID) {
-            return <TilbakeIArbeidHjelpBody />
+        switch (sporsmal.tag) {
+            case TagTyper.TILBAKE_I_ARBEID:
+                return <TilbakeIArbeidHjelpBody />
+            case TagTyper.YRKESSKADE:
+                return <YrkesskadeHjelpBody />
+            case TagTyper.FERIE_V2:
+                return <FerieHjelpBody />
+            case TagTyper.ANDRE_INNTEKTSKILDER_V2:
+                return <AndreInntektskilderHjelpBody />
+            case TagTyper.PERMISJON_V2:
+                return <PermisjonHjelpBody />
+            case TagTyper.UTLAND_V2:
+                return <UtlandHjelpBody />
+            case TagTyper.ARBEID_UNDERVEIS_100_PROSENT:
+                return <ArbeidUnderveisHjelpBody />
+            case TagTyper.ARBEID_UTENFOR_NORGE:
+                return <ArbeidUtenforNorgeHjelpBody />
+            case TagTyper.FRAVAR_FOR_SYKMELDINGEN:
+                return <FravarForSykmeldingenHjelpBody />
+            case TagTyper.JOBBET_DU_GRADERT:
+                return <JobbetDuGradertArbeidstakerHjelpBody />
+            case TagTyper.BRUKTE_REISETILSKUDDET:
+                return <BrukteReisetilskuddetHjelpBody />
+            case TagTyper.KVITTERINGER:
+                return <KvitteringerHjelpBody />
+            default:
+                if (harInnhold) {
+                    return <BodyLong>{parserWithReplace(tekst(`ekspanderbarhjelp.${nokkel}.innhold` as any))}</BodyLong>
+                }
         }
-        if (sporsmal.tag == TagTyper.YRKESSKADE) {
-            return <YrkesskadeBody />
-        }
-
-        if (sporsmal.tag == TagTyper.ANDRE_INNTEKTSKILDER_V2) {
-            return <AndreInntektskilderBody />
-        }
-
-        return <BodyLong>{parserWithReplace(tekst(`ekspanderbarhjelp.${nokkel}.innhold` as any))}</BodyLong>
     }
+
+    const ekspanderbarInnhold = EkspanderbarInnhold()
+
+    if (!nokkel || !ekspanderbarInnhold) {
+        return null
+    }
+
+    const tittel =
+        EkspanderbarHjelpTekster[`ekspanderbarhjelp.${nokkel}.tittel` as keyof typeof EkspanderbarHjelpTekster] ||
+        'Spørsmålet forklart'
 
     return (
         <ReadMore
@@ -92,9 +123,7 @@ export const EkspanderbarHjelp = ({ sporsmal }: SpmProps) => {
                 setExpanded((prev) => !prev)
             }}
         >
-            <div className={'mt-4'}>
-                <EkspanderbarInnhold />
-            </div>
+            <div className={'mt-4'}>{ekspanderbarInnhold}</div>
         </ReadMore>
     )
 }
