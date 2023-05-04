@@ -10,7 +10,7 @@ const PerioderUtenOpphold = () => {
     return (
         <div className="avsnitt">
             <div className="avsnitt">
-                <Label as="h2" className="arbeidstaker-tittel">
+                <Label spacing as="h2">
                     {tekst('kvittering.nav-behandler-soknaden')}
                 </Label>
                 <BodyLong spacing as="span">
@@ -23,7 +23,7 @@ const PerioderUtenOpphold = () => {
                 .
             </div>
             <div className="avsnitt">
-                <Label as="h2" className="arbeidstaker-tittel">
+                <Label spacing as="h2">
                     {tekst('kvittering.naar-blir-pengene')}
                 </Label>
                 <BodyLong spacing>
