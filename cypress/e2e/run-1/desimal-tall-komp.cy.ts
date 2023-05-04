@@ -8,7 +8,6 @@ describe('Tester at riktig antall desimaler sendes til backend', () => {
         //data-cy="tall-input"
         //cy.get('input#495730df-717d-3774-bd19-e6bcf76e3ba2').type('37.321') // maks 2 desimaler tas med på TALL
 
-
         //cy.get('label[for=0e368ffc-1840-35e5-bbb5-b994cbaa8ef1]').click()
         //cy.get('input#13acfccb-3f39-3893-8054-058270add6ab').type('50.321') // ingen desimaler tas med på PROSENT
 
