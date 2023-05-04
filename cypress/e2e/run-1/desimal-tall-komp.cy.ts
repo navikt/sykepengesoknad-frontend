@@ -3,12 +3,17 @@ import { gradertReisetilskudd } from '../../../src/data/mock/data/reisetilskudd'
 describe('Tester at riktig antall desimaler sendes til backend', () => {
     it('Oppgir desimaler på svartype TALL og PROSENT', () => {
         cy.visit(`/syk/sykepengesoknad/soknader/${gradertReisetilskudd.id}/7`)
-        cy.get('.radioGruppe-jaNei input[value=JA]').click({ force: true })
+        cy.get('.radioGruppe-jaNei input[value=JA]').click()
+        cy.get('[data-cy="tall-input"]').type('37.321')
+        //data-cy="tall-input"
+        //cy.get('input#495730df-717d-3774-bd19-e6bcf76e3ba2').type('37.321') // maks 2 desimaler tas med på TALL
 
-        cy.get('input#495730df-717d-3774-bd19-e6bcf76e3ba2').type('37.321') // maks 2 desimaler tas med på TALL
 
-        cy.get('label[for=0e368ffc-1840-35e5-bbb5-b994cbaa8ef1]').click()
-        cy.get('input#13acfccb-3f39-3893-8054-058270add6ab').type('50.321') // ingen desimaler tas med på PROSENT
+        //cy.get('label[for=0e368ffc-1840-35e5-bbb5-b994cbaa8ef1]').click()
+        //cy.get('input#13acfccb-3f39-3893-8054-058270add6ab').type('50.321') // ingen desimaler tas med på PROSENT
+
+        cy.contains('Prosent').click()
+        cy.get('[data-cy="tall-input"]').eq(1).type('50.321')
 
         cy.contains('Gå videre').click()
         cy.contains('Tilbake').click()

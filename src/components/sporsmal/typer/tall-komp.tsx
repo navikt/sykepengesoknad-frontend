@@ -100,6 +100,7 @@ const TallKomp = ({ sporsmal }: SpmProps) => {
                 description={description}
                 className={`${inputSize()} ${labels()}`}
                 type="text"
+                data-cy="tall-input"
                 id={sporsmal.id}
                 min={sporsmal.min!}
                 max={sporsmal.max!}
