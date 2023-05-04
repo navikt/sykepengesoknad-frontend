@@ -1,4 +1,5 @@
-import { BodyLong, Link } from '@navikt/ds-react'
+import { BodyLong } from '@navikt/ds-react'
+import { LenkeMedBilde } from '../../lenke-med-bilde/LenkeMedBilde'
 
 export const YrkesskadeHjelpBody = () => {
     return (
@@ -17,9 +18,11 @@ export const YrkesskadeHjelpBody = () => {
                 Svar ja, hvis du er sykmeldt for en godkjent yrkesskade, yrkessykdom eller du mener det er årsaken til
                 sykefraværet ditt.
             </BodyLong>
-            <Link className={'mt-4'} href={'https://www.nav.no/yrkesskade'} target={'_blank'}>
-                Du kan lese mer om yrkesskade og sykepenger her.
-            </Link>
+            <LenkeMedBilde
+                className={'mt-4'}
+                href={'https://www.nav.no/yrkesskade'}
+                text={'Du kan lese mer om yrkesskade og sykepenger her.'}
+            />
         </>
     )
 }

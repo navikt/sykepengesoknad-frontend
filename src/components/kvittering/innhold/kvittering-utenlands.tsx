@@ -1,4 +1,4 @@
-import { Alert, BodyLong, BodyShort, Heading, Label, Link } from '@navikt/ds-react'
+import { Alert, BodyLong, Heading, Label } from '@navikt/ds-react'
 import React from 'react'
 import { useParams } from 'react-router-dom'
 
@@ -6,6 +6,7 @@ import { sendtForMerEnn30DagerSiden } from '../../../utils/dato-utils'
 import { tekst } from '../../../utils/tekster'
 import useSoknad from '../../../hooks/useSoknad'
 import { RouteParams } from '../../../app'
+import { LenkeMedBilde } from '../../lenke-med-bilde/LenkeMedBilde'
 
 const KvitteringUtenlands = () => {
     const { id } = useParams<RouteParams>()
@@ -36,10 +37,11 @@ const KvitteringUtenlands = () => {
                     <li>{tekst('kvittering.utenlands.liste3')}</li>
                 </BodyLong>
             </div>
-            <div className="avsnitt">
-                <Link target="_blank" href={tekst('kvittering.utenlands.lenke.url')}>
-                    <BodyShort as="span">{tekst('kvittering.utenlands.lenke')}</BodyShort>
-                </Link>
+            <div className="my-6">
+                <LenkeMedBilde
+                    href={tekst('kvittering.utenlands.lenke.url')}
+                    text={tekst('kvittering.utenlands.lenke')}
+                />
                 .
             </div>
             <div className="avsnitt">

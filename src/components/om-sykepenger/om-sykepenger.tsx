@@ -1,9 +1,10 @@
-import { Accordion, Alert, BodyLong, BodyShort, Heading, Label, Link } from '@navikt/ds-react'
+import { Accordion, Alert, BodyLong, Heading, Label } from '@navikt/ds-react'
 import React, { useState } from 'react'
 
 import { parserWithReplace } from '../../utils/html-react-parser-utils'
 import { tekst } from '../../utils/tekster'
 import { logEvent } from '../amplitude/amplitude'
+import { LenkeMedBilde } from '../lenke-med-bilde/LenkeMedBilde'
 
 const OmSykepenger = () => {
     const [open1, setOpen1] = useState<boolean>(false)
@@ -81,13 +82,9 @@ const OmSykepenger = () => {
                     </Accordion>
 
                     <Label as="h3">{tekst('om.sykepenger.tittel2')}</Label>
-                    <Link href={tekst('om.sykepenger.lenke1.url')} target="_blank" rel="noopener">
-                        <BodyShort>{tekst('om.sykepenger.lenke1')}</BodyShort>
-                    </Link>
+                    <LenkeMedBilde href={tekst('om.sykepenger.lenke1.url')} text={tekst('om.sykepenger.lenke1')} />
 
-                    <Link href={tekst('om.sykepenger.lenke2.url')} target="_blank" rel="noopener">
-                        <BodyShort>{tekst('om.sykepenger.lenke2')}</BodyShort>
-                    </Link>
+                    <LenkeMedBilde href={tekst('om.sykepenger.lenke2.url')} text={tekst('om.sykepenger.lenke2')} />
                 </Accordion.Content>
             </Accordion.Item>
         </Accordion>

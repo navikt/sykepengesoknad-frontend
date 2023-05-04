@@ -1,9 +1,10 @@
-import { BodyLong, Label, Link, ReadMore } from '@navikt/ds-react'
+import { BodyLong, Label, ReadMore } from '@navikt/ds-react'
 import React from 'react'
 
 import { parserWithReplace } from '../../../../utils/html-react-parser-utils'
 import { tekst } from '../../../../utils/tekster'
 import Kontonummer from '../../kontonummer/kontonummer'
+import { LenkeMedBilde } from '../../../lenke-med-bilde/LenkeMedBilde'
 
 const PerioderMedOpphold = () => {
     return (
@@ -24,11 +25,10 @@ const PerioderMedOpphold = () => {
                 <BodyLong spacing as="span">
                     {tekst('kvittering.arbeidstaker.saksbehandlingstid')}{' '}
                 </BodyLong>
-                <Link target="_blank" href={tekst('kvittering.arbeidstaker.saksbehandlingstid.lenke.url')}>
-                    <BodyLong spacing as="span">
-                        {tekst('kvittering.arbeidstaker.saksbehandlingstid.lenke')}
-                    </BodyLong>
-                </Link>
+                <LenkeMedBilde
+                    href={tekst('kvittering.arbeidstaker.saksbehandlingstid.lenke.url')}
+                    text={tekst('kvittering.arbeidstaker.saksbehandlingstid.lenke')}
+                />
                 .
             </div>
             <div className="avsnitt">

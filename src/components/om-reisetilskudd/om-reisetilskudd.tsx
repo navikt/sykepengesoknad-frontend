@@ -1,9 +1,10 @@
-import { Accordion, BodyLong, Heading, Label, Link } from '@navikt/ds-react'
+import { Accordion, BodyLong, Heading, Label } from '@navikt/ds-react'
 import React, { useState } from 'react'
 
 import { parserWithReplace } from '../../utils/html-react-parser-utils'
 import { tekst } from '../../utils/tekster'
 import { logEvent } from '../amplitude/amplitude'
+import { LenkeMedBilde } from '../lenke-med-bilde/LenkeMedBilde'
 
 const OmReisetilskudd = () => {
     const [open, setOpen] = useState<boolean>(false)
@@ -32,9 +33,10 @@ const OmReisetilskudd = () => {
                     <BodyLong spacing>{tekst('tilskudd.start.legg-ved-tekst')}</BodyLong>
 
                     <BodyLong spacing>
-                        <Link href="https://nav.no/reisetilskudd" target="_blank" rel="noopener">
-                            {tekst('tilskudd.start.les-mer-reisetilskudd')}
-                        </Link>
+                        <LenkeMedBilde
+                            href={'https://nav.no/reisetilskudd'}
+                            text={tekst('tilskudd.start.les-mer-reisetilskudd')}
+                        />
                         .
                     </BodyLong>
                 </Accordion.Content>
