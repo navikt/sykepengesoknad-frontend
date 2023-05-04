@@ -1,9 +1,10 @@
-import { BodyLong, BodyShort, Label, Link, ReadMore } from '@navikt/ds-react'
+import { BodyLong, Label, ReadMore } from '@navikt/ds-react'
 import React from 'react'
 
 import { parserWithReplace } from '../../../../utils/html-react-parser-utils'
 import { tekst } from '../../../../utils/tekster'
 import Kontonummer from '../../kontonummer/kontonummer'
+import { LenkeMedIkon } from '../../../lenke-med-ikon/LenkeMedIkon'
 
 interface gradertReisetilskuddProps {
     erGradert: boolean
@@ -12,7 +13,7 @@ interface gradertReisetilskuddProps {
 const Over16dager = ({ erGradert }: gradertReisetilskuddProps) => {
     return (
         <div className="avsnitt">
-            <Label as="h2" className="arbeidstaker-tittel">
+            <Label spacing as="h2">
                 {tekst('kvittering.naeringsdrivende.tittel')}
             </Label>
             <BodyLong spacing as="span">
@@ -31,19 +32,20 @@ const Over16dager = ({ erGradert }: gradertReisetilskuddProps) => {
                 <BodyLong spacing>{tekst('kvittering.arbeidstaker.over16.inntektsmelding.brodtekst')}</BodyLong>
             </ReadMore>
             <div className="avsnitt hva-skjer">
-                <Label as="h2" className="arbeidstaker-tittel">
+                <Label spacing as="h2">
                     {tekst('kvittering.nav-behandler-soknaden')}
                 </Label>
                 <BodyLong spacing as="span">
                     {tekst('kvittering.arbeidstaker.saksbehandlingstid')}{' '}
                 </BodyLong>
-                <Link target="_blank" href={tekst('kvittering.arbeidstaker.saksbehandlingstid.lenke.url')}>
-                    <BodyShort as="span">{tekst('kvittering.arbeidstaker.saksbehandlingstid.lenke')}</BodyShort>
-                </Link>
+                <LenkeMedIkon
+                    href={tekst('kvittering.arbeidstaker.saksbehandlingstid.lenke.url')}
+                    text={tekst('kvittering.arbeidstaker.saksbehandlingstid.lenke')}
+                />
                 .
             </div>
             <div className="avsnitt">
-                <Label as="h2" className="arbeidstaker-tittel">
+                <Label spacing as="h2">
                     {tekst('kvittering.naar-blir-pengene')}
                 </Label>
                 <BodyLong spacing>

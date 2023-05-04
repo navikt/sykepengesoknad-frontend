@@ -1,29 +1,29 @@
-import { BodyLong, Label, Link } from '@navikt/ds-react'
+import { BodyLong, Label } from '@navikt/ds-react'
 import React from 'react'
 
 import { parserWithReplace } from '../../../../utils/html-react-parser-utils'
 import { tekst } from '../../../../utils/tekster'
 import Kontonummer from '../../kontonummer/kontonummer'
+import { LenkeMedIkon } from '../../../lenke-med-ikon/LenkeMedIkon'
 
 const PerioderUtenOpphold = () => {
     return (
         <div className="avsnitt">
             <div className="avsnitt">
-                <Label as="h2" className="arbeidstaker-tittel">
+                <Label spacing as="h2">
                     {tekst('kvittering.nav-behandler-soknaden')}
                 </Label>
                 <BodyLong spacing as="span">
                     {tekst('kvittering.arbeidstaker.saksbehandlingstid')}{' '}
                 </BodyLong>
-                <Link target="_blank" href={tekst('kvittering.arbeidstaker.saksbehandlingstid.lenke.url')}>
-                    <BodyLong spacing as="span">
-                        {tekst('kvittering.arbeidstaker.saksbehandlingstid.lenke')}
-                    </BodyLong>
-                </Link>
+                <LenkeMedIkon
+                    href={tekst('kvittering.arbeidstaker.saksbehandlingstid.lenke.url')}
+                    text={tekst('kvittering.arbeidstaker.saksbehandlingstid.lenke')}
+                />
                 .
             </div>
             <div className="avsnitt">
-                <Label as="h2" className="arbeidstaker-tittel">
+                <Label spacing as="h2">
                     {tekst('kvittering.naar-blir-pengene')}
                 </Label>
                 <BodyLong spacing>

@@ -1,4 +1,4 @@
-import { Alert, BodyLong, Heading, Label, Link } from '@navikt/ds-react'
+import { Alert, BodyLong, Heading, Label } from '@navikt/ds-react'
 import React from 'react'
 import { useParams } from 'react-router-dom'
 
@@ -11,6 +11,7 @@ import useSoknad from '../../../hooks/useSoknad'
 import Kontonummer from '../kontonummer/kontonummer'
 import { parserWithReplace } from '../../../utils/html-react-parser-utils'
 import { RouteParams } from '../../../app'
+import { LenkeMedIkon } from '../../lenke-med-ikon/LenkeMedIkon'
 
 const KvitteringVidere = () => {
     const { id } = useParams<RouteParams>()
@@ -35,11 +36,10 @@ const KvitteringVidere = () => {
                         <BodyLong spacing as="span">
                             {tekst('kvittering.naeringsdrivende.brodtekst')}{' '}
                         </BodyLong>
-                        <Link target="_blank" href={tekst('kvittering.naeringsdrivende.lenke.url')}>
-                            <BodyLong spacing as="span">
-                                {tekst('kvittering.naeringsdrivende.lenke')}
-                            </BodyLong>
-                        </Link>
+                        <LenkeMedIkon
+                            href={tekst('kvittering.naeringsdrivende.lenke.url')}
+                            text={tekst('kvittering.naeringsdrivende.lenke')}
+                        />
                         .
                     </div>
                 )}
@@ -49,11 +49,10 @@ const KvitteringVidere = () => {
                 <BodyLong spacing as="span">
                     {tekst('kvittering.arbeidstaker.saksbehandlingstid')}{' '}
                 </BodyLong>
-                <Link target="_blank" href={tekst('kvittering.arbeidstaker.saksbehandlingstid.lenke.url')}>
-                    <BodyLong spacing as="span">
-                        {tekst('kvittering.arbeidstaker.saksbehandlingstid.lenke')}
-                    </BodyLong>
-                </Link>
+                <LenkeMedIkon
+                    href={tekst('kvittering.arbeidstaker.saksbehandlingstid.lenke.url')}
+                    text={tekst('kvittering.arbeidstaker.saksbehandlingstid.lenke')}
+                />
             </div>
 
             <Vis

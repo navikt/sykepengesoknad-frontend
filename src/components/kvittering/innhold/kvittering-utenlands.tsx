@@ -1,4 +1,4 @@
-import { Alert, BodyLong, BodyShort, Heading, Label, Link } from '@navikt/ds-react'
+import { Alert, BodyLong, Heading, Label } from '@navikt/ds-react'
 import React from 'react'
 import { useParams } from 'react-router-dom'
 
@@ -6,6 +6,7 @@ import { sendtForMerEnn30DagerSiden } from '../../../utils/dato-utils'
 import { tekst } from '../../../utils/tekster'
 import useSoknad from '../../../hooks/useSoknad'
 import { RouteParams } from '../../../app'
+import { LenkeMedIkon } from '../../lenke-med-ikon/LenkeMedIkon'
 
 const KvitteringUtenlands = () => {
     const { id } = useParams<RouteParams>()
@@ -22,27 +23,22 @@ const KvitteringUtenlands = () => {
             <Heading size="small" level="3">
                 {tekst('kvittering.hva-skjer-videre')}
             </Heading>
-            <div className="avsnitt">
+            <div className="my-6">
                 <Label as="h2">{tekst('kvittering.utenlands.overskrift1')}</Label>
                 <BodyLong spacing as="span">
                     {tekst('kvittering.utenlands.brodtekst1')}{' '}
                 </BodyLong>
             </div>
-            <div className="avsnitt">
+            <div className="my-6">
                 <Label as="h2">{tekst('kvittering.utenlands.overskrift2')}</Label>
-                <BodyLong spacing as="ul">
+                <BodyLong as="ul">
                     <li>{tekst('kvittering.utenlands.liste1')}</li>
                     <li>{tekst('kvittering.utenlands.liste2')}</li>
                     <li>{tekst('kvittering.utenlands.liste3')}</li>
                 </BodyLong>
             </div>
-            <div className="avsnitt">
-                <Link target="_blank" href={tekst('kvittering.utenlands.lenke.url')}>
-                    <BodyShort as="span">{tekst('kvittering.utenlands.lenke')}</BodyShort>
-                </Link>
-                .
-            </div>
-            <div className="avsnitt">
+            <LenkeMedIkon href={tekst('kvittering.utenlands.lenke.url')} text={tekst('kvittering.utenlands.lenke')} />.
+            <div className="my-6">
                 <Label as="h2">{tekst('kvittering.utenlands.overskrift3')}</Label>
                 <BodyLong spacing as="span">
                     {tekst('kvittering.utenlands.brodtekst3')}{' '}
