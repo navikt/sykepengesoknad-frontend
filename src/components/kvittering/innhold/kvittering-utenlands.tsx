@@ -23,28 +23,26 @@ const KvitteringUtenlands = () => {
             <Heading size="small" level="3">
                 {tekst('kvittering.hva-skjer-videre')}
             </Heading>
-            <div className="avsnitt">
+            <div className="my-6">
                 <Label as="h2">{tekst('kvittering.utenlands.overskrift1')}</Label>
                 <BodyLong spacing as="span">
                     {tekst('kvittering.utenlands.brodtekst1')}{' '}
                 </BodyLong>
             </div>
-            <div className="avsnitt">
+            <div className="my-6">
                 <Label as="h2">{tekst('kvittering.utenlands.overskrift2')}</Label>
-                <BodyLong spacing as="ul">
+                <BodyLong as="ul">
                     <li>{tekst('kvittering.utenlands.liste1')}</li>
                     <li>{tekst('kvittering.utenlands.liste2')}</li>
                     <li>{tekst('kvittering.utenlands.liste3')}</li>
                 </BodyLong>
             </div>
+            <LenkeMedIkon
+                href={tekst('kvittering.utenlands.lenke.url')}
+                text={tekst('kvittering.utenlands.lenke')}
+            />
+            .
             <div className="my-6">
-                <LenkeMedIkon
-                    href={tekst('kvittering.utenlands.lenke.url')}
-                    text={tekst('kvittering.utenlands.lenke')}
-                />
-                .
-            </div>
-            <div className="avsnitt">
                 <Label as="h2">{tekst('kvittering.utenlands.overskrift3')}</Label>
                 <BodyLong spacing as="span">
                     {tekst('kvittering.utenlands.brodtekst3')}{' '}
