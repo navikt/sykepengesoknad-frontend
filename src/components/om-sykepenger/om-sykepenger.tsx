@@ -4,7 +4,7 @@ import React, { useState } from 'react'
 import { parserWithReplace } from '../../utils/html-react-parser-utils'
 import { tekst } from '../../utils/tekster'
 import { logEvent } from '../amplitude/amplitude'
-import { LenkeMedBilde } from '../lenke-med-bilde/LenkeMedBilde'
+import { LenkeMedIkon } from '../lenke-med-ikon/LenkeMedIkon'
 
 const OmSykepenger = () => {
     const [open1, setOpen1] = useState<boolean>(false)
@@ -82,9 +82,9 @@ const OmSykepenger = () => {
                     </Accordion>
 
                     <Label as="h3">{tekst('om.sykepenger.tittel2')}</Label>
-                    <LenkeMedBilde href={tekst('om.sykepenger.lenke1.url')} text={tekst('om.sykepenger.lenke1')} />
+                    <LenkeMedIkon href={tekst('om.sykepenger.lenke1.url')} text={tekst('om.sykepenger.lenke1')} />
 
-                    <LenkeMedBilde href={tekst('om.sykepenger.lenke2.url')} text={tekst('om.sykepenger.lenke2')} />
+                    <LenkeMedIkon href={tekst('om.sykepenger.lenke2.url')} text={tekst('om.sykepenger.lenke2')} />
                 </Accordion.Content>
             </Accordion.Item>
         </Accordion>

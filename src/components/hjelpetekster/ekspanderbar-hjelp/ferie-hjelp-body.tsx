@@ -1,6 +1,6 @@
 import { BodyLong } from '@navikt/ds-react'
 import React from 'react'
-import { LenkeMedBilde } from '../../lenke-med-bilde/LenkeMedBilde'
+import { LenkeMedIkon } from '../../lenke-med-ikon/LenkeMedIkon'
 
 export const FerieHjelpBody = () => {
     return (
@@ -28,7 +28,7 @@ export const FerieHjelpBody = () => {
                 Svar nei, dersom du ikke har hatt ferie, eller hvis du har blitt syk rett før eller under den planlagte
                 ferien og dermed ikke hatt glede av den. Da kan du ha rett til å utsette ferien din.
             </BodyLong>
-            <LenkeMedBilde
+            <LenkeMedIkon
                 className={'mt-4'}
                 href={'https://www.nav.no/sykepenger#ferie'}
                 text={'Les mer om ferie og sykepenger her.'}

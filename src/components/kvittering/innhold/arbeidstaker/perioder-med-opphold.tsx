@@ -4,7 +4,7 @@ import React from 'react'
 import { parserWithReplace } from '../../../../utils/html-react-parser-utils'
 import { tekst } from '../../../../utils/tekster'
 import Kontonummer from '../../kontonummer/kontonummer'
-import { LenkeMedBilde } from '../../../lenke-med-bilde/LenkeMedBilde'
+import { LenkeMedIkon } from '../../../lenke-med-ikon/LenkeMedIkon'
 
 const PerioderMedOpphold = () => {
     return (
@@ -25,7 +25,7 @@ const PerioderMedOpphold = () => {
                 <BodyLong spacing as="span">
                     {tekst('kvittering.arbeidstaker.saksbehandlingstid')}{' '}
                 </BodyLong>
-                <LenkeMedBilde
+                <LenkeMedIkon
                     href={tekst('kvittering.arbeidstaker.saksbehandlingstid.lenke.url')}
                     text={tekst('kvittering.arbeidstaker.saksbehandlingstid.lenke')}
                 />

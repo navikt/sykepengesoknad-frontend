@@ -11,7 +11,7 @@ import useSoknad from '../../../hooks/useSoknad'
 import Kontonummer from '../kontonummer/kontonummer'
 import { parserWithReplace } from '../../../utils/html-react-parser-utils'
 import { RouteParams } from '../../../app'
-import { LenkeMedBilde } from '../../lenke-med-bilde/LenkeMedBilde'
+import { LenkeMedIkon } from '../../lenke-med-ikon/LenkeMedIkon'
 
 const KvitteringVidere = () => {
     const { id } = useParams<RouteParams>()
@@ -36,7 +36,7 @@ const KvitteringVidere = () => {
                         <BodyLong spacing as="span">
                             {tekst('kvittering.naeringsdrivende.brodtekst')}{' '}
                         </BodyLong>
-                        <LenkeMedBilde
+                        <LenkeMedIkon
                             href={tekst('kvittering.naeringsdrivende.lenke.url')}
                             text={tekst('kvittering.naeringsdrivende.lenke')}
                         />
@@ -49,7 +49,7 @@ const KvitteringVidere = () => {
                 <BodyLong spacing as="span">
                     {tekst('kvittering.arbeidstaker.saksbehandlingstid')}{' '}
                 </BodyLong>
-                <LenkeMedBilde
+                <LenkeMedIkon
                     href={tekst('kvittering.arbeidstaker.saksbehandlingstid.lenke.url')}
                     text={tekst('kvittering.arbeidstaker.saksbehandlingstid.lenke')}
                 />

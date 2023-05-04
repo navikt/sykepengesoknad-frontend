@@ -7,7 +7,7 @@ interface LenkeProps {
     text: string
     className?: string
 }
-export function LenkeMedBilde(props: LenkeProps) {
+export function LenkeMedIkon(props: LenkeProps) {
     return (
         <Link className={props.className} target="_blank" rel="noopener" href={props.href}>
             <BodyShort as="span">{props.text}</BodyShort>

@@ -6,7 +6,7 @@ import { sendtForMerEnn30DagerSiden } from '../../../utils/dato-utils'
 import { tekst } from '../../../utils/tekster'
 import useSoknad from '../../../hooks/useSoknad'
 import { RouteParams } from '../../../app'
-import { LenkeMedBilde } from '../../lenke-med-bilde/LenkeMedBilde'
+import { LenkeMedIkon } from '../../lenke-med-ikon/LenkeMedIkon'
 
 const KvitteringUtenlands = () => {
     const { id } = useParams<RouteParams>()
@@ -38,7 +38,7 @@ const KvitteringUtenlands = () => {
                 </BodyLong>
             </div>
             <div className="my-6">
-                <LenkeMedBilde
+                <LenkeMedIkon
                     href={tekst('kvittering.utenlands.lenke.url')}
                     text={tekst('kvittering.utenlands.lenke')}
                 />
