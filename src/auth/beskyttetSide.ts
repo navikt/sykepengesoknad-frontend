@@ -3,6 +3,7 @@ import { NextPageContext } from 'next'
 
 import metrics, { cleanPathForMetric, shouldLogMetricForPath } from '../metrics'
 import { isMockBackend } from '../utils/environment'
+import { AuthenticationError } from '../utils/fetch'
 
 import { verifyIdportenAccessToken } from './verifyIdportenAccessToken'
 
@@ -44,7 +45,9 @@ function beskyttetSide(handler: PageHandler) {
             if (shouldLogMetricForPath(cleanPath)) {
                 metrics.wonderwallRedirect.inc({ path: cleanPath }, 1)
             }
-            logger.warn(`Kunne ikke validere token fra ID-porten i beskyttetSide. Error: ${e}.`)
+            if (!(e instanceof AuthenticationError)) {
+                logger.warn(`Kunne ikke validere token fra ID-porten i beskyttetSide. Error: ${e}.`)
+            }
             return wonderwallRedirect
         }
         return handler(context)
