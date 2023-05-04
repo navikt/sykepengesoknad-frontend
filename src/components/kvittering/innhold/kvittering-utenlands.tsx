@@ -37,11 +37,7 @@ const KvitteringUtenlands = () => {
                     <li>{tekst('kvittering.utenlands.liste3')}</li>
                 </BodyLong>
             </div>
-            <LenkeMedIkon
-                href={tekst('kvittering.utenlands.lenke.url')}
-                text={tekst('kvittering.utenlands.lenke')}
-            />
-            .
+            <LenkeMedIkon href={tekst('kvittering.utenlands.lenke.url')} text={tekst('kvittering.utenlands.lenke')} />.
             <div className="my-6">
                 <Label as="h2">{tekst('kvittering.utenlands.overskrift3')}</Label>
                 <BodyLong spacing as="span">
