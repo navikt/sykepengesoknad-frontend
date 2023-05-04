@@ -6,10 +6,6 @@ on:
 jobs:
   felles-workflow:
     uses: navikt/flex-github-actions-workflows/.github/workflows/next-js.yml@master
-    permissions:
-      packages: 'write'
-      contents: 'read'
-      id-token: 'write'
     secrets: inherit
     with:
       app: sykepengesoknad
