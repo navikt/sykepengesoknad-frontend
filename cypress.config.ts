@@ -13,7 +13,7 @@ export default defineConfig({
         setupNodeEvents(on, config) {
             return require('./cypress/plugins/index.js')(on, config)
         },
-        baseUrl: 'http://localhost:8080',
+        baseUrl: 'https://sykepengesoknad-demo-testing2.ekstern.dev.nav.no',
         testIsolation: false,
     },
 })
