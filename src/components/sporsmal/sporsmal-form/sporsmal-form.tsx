@@ -31,6 +31,7 @@ import { RSSoknadstatus } from '../../../types/rs-types/rs-soknadstatus'
 import { harLikeSvar } from '../endring-uten-endring/har-like-svar'
 import { useSendSoknad } from '../../../hooks/useSendSoknad'
 import { RouteParams } from '../../../app'
+import VaerKlarOverAt from '../../vaer-klar-over-at/vaer-klar-over-at'
 
 import Knapperad from './knapperad'
 import SendesTil from './sendes-til'
@@ -249,6 +250,7 @@ const SporsmalForm = () => {
                         hvis={erSiste && !erUtlandssoknad}
                         render={() => (
                             <>
+                                <VaerKlarOverAt soknad={valgtSoknad} />
                                 <Oppsummering ekspandert={false} sporsmal={valgtSoknad.sporsmal} />
                                 <Opplysninger ekspandert={false} steg={sporsmal.tag} />
                                 <CheckboxPanel sporsmal={nesteSporsmal} />
