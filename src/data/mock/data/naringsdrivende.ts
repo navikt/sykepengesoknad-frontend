@@ -3,7 +3,6 @@ import { jsonDeepCopy } from '../../../utils/json-deep-copy'
 import { Persona } from '../personas'
 
 import { frilanser100Syk } from './sykmeldinger'
-import { værKlarOverAt } from './sporsmal/vaer-klar-over-at'
 import { bekreftOpplysninger } from './sporsmal/bekreft-opplysninger'
 
 export const naringsdrivende100syk = jsonDeepCopy(frilanser100Syk)
@@ -366,7 +365,6 @@ export const naringsdrivendeSoknad: RSSoknad = {
             svar: [],
             undersporsmal: [],
         },
-        værKlarOverAt(),
         bekreftOpplysninger(),
     ],
     egenmeldtSykmelding: false,

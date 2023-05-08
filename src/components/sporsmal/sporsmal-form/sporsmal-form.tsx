@@ -86,12 +86,11 @@ const SporsmalForm = () => {
     }, [methods.formState.isSubmitSuccessful])
 
     const erSisteSpm = () => {
-        const snartSlutt =
-            sporsmal.svartype === RSSvartype.IKKE_RELEVANT || sporsmal.svartype === RSSvartype.CHECKBOX_PANEL
+        const snartSlutt = sporsmal.svartype === RSSvartype.CHECKBOX_PANEL
         if (erUtlandssoknad) {
             return sporsmal.tag === TagTyper.BEKREFT_OPPLYSNINGER_UTLAND_INFO
         }
-        return snartSlutt && spmIndex === valgtSoknad!.sporsmal.length - 2
+        return snartSlutt && spmIndex === valgtSoknad!.sporsmal.length - 1
     }
 
     const sendOppdaterSporsmal = async (): Promise<boolean> => {
@@ -191,8 +190,7 @@ const SporsmalForm = () => {
             settSvar(sporsmal, data)
             if (erSiste) {
                 if (!erUtlandssoknad) {
-                    settSvar(nesteSporsmal, data)
-                    sporsmal = nesteSporsmal
+                    settSvar(sporsmal, data)
                 }
                 const oppdatertOk = await sendOppdaterSporsmal()
                 if (!oppdatertOk) {
@@ -244,8 +242,10 @@ const SporsmalForm = () => {
                 >
                     <GuidepanelOverSporsmalstekst sporsmal={sporsmal} />
 
-                    <SporsmalSwitch sporsmal={sporsmal} />
-
+                    <Vis
+                        hvis={!erSiste || (erSiste && erUtlandssoknad)}
+                        render={() => <SporsmalSwitch sporsmal={sporsmal} />}
+                    />
                     <Vis
                         hvis={erSiste && !erUtlandssoknad}
                         render={() => (
@@ -253,7 +253,7 @@ const SporsmalForm = () => {
                                 <VaerKlarOverAt soknad={valgtSoknad} />
                                 <Oppsummering ekspandert={false} sporsmal={valgtSoknad.sporsmal} />
                                 <Opplysninger ekspandert={false} steg={sporsmal.tag} />
-                                <CheckboxPanel sporsmal={nesteSporsmal} />
+                                <CheckboxPanel sporsmal={sporsmal} />
                                 <SendesTil soknad={valgtSoknad} />
                             </>
                         )}
@@ -279,7 +279,6 @@ const SporsmalForm = () => {
                             <FeilOppsummering valgtSoknad={valgtSoknad} sporsmal={sporsmal} sendError={sendError} />
                         )}
                     />
-
                     <Vis
                         hvis={skalViseKnapperad(valgtSoknad, sporsmal, methods.getValues())}
                         render={() => <Knapperad soknad={valgtSoknad} poster={poster || senderSoknad} />}

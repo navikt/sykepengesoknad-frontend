@@ -2,7 +2,6 @@ import { RSSoknad } from '../../../types/rs-types/rs-soknad'
 import { jsonDeepCopy } from '../../../utils/json-deep-copy'
 
 import { arbeidstaker100Syk } from './sykmeldinger'
-import { værKlarOverAt } from './sporsmal/vaer-klar-over-at'
 import { bekreftOpplysninger } from './sporsmal/bekreft-opplysninger'
 
 export const kortArbeidstakerSoknad: RSSoknad = {
@@ -48,7 +47,6 @@ export const kortArbeidstakerSoknad: RSSoknad = {
             svar: [],
             undersporsmal: [],
         },
-        værKlarOverAt(),
         bekreftOpplysninger(),
     ],
     egenmeldtSykmelding: false,

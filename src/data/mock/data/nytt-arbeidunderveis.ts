@@ -2,7 +2,6 @@ import { RSSoknad } from '../../../types/rs-types/rs-soknad'
 import { Persona } from '../personas'
 
 import { brukertestSykmelding } from './brukertest'
-import { værKlarOverAt } from './sporsmal/vaer-klar-over-at'
 import { bekreftOpplysninger } from './sporsmal/bekreft-opplysninger'
 
 export const nyArbeidUnderveisSoknad: RSSoknad = {
@@ -444,7 +443,6 @@ export const nyArbeidUnderveisSoknad: RSSoknad = {
             ],
         },
 
-        værKlarOverAt(),
         bekreftOpplysninger(),
     ],
     egenmeldtSykmelding: false,

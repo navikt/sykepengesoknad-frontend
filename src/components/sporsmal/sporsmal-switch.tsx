@@ -7,7 +7,6 @@ import CheckboxKomp from './typer/checkbox-komp'
 import CheckboxPanel from './typer/checkbox-panel'
 import DagerKomp from './typer/dager-komp'
 import DatoInput from './typer/dato-komp'
-import IkkeRelevant from './typer/ikke-relevant'
 import JaNeiStor from './typer/ja-nei-stor'
 import JaNeiLiten from './typer/ja-nei-liten'
 import Land from './typer/land'
@@ -18,6 +17,7 @@ import TallKomp from './typer/tall-komp'
 import UkjentSporsmal from './typer/ukjent-sporsmal'
 import { SpmProps } from './sporsmal-form/sporsmal-form'
 import { Fritekst } from './typer/fritekst'
+import IkkeRelevant from "./typer/ikke-relevant";
 
 const SporsmalSwitch = ({ sporsmal }: SpmProps) => {
     switch (sporsmal.svartype) {

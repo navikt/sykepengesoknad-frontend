@@ -1,4 +1,4 @@
-import { TextField, Textarea } from '@navikt/ds-react'
+import { Textarea, TextField } from '@navikt/ds-react'
 import React from 'react'
 import { useFormContext } from 'react-hook-form'
 

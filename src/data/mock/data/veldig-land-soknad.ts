@@ -3,7 +3,6 @@ import { RSSoknad } from '../../../types/rs-types/rs-soknad'
 import { arbeidstaker100Syk } from './sykmeldinger'
 import { yrkesskadeSporsmalet } from './yrkesskade'
 import { utenlandskSykmeldingSporsmalene } from './utenlandsk-sykmelding'
-import { værKlarOverAt } from './sporsmal/vaer-klar-over-at'
 import { bekreftOpplysninger } from './sporsmal/bekreft-opplysninger'
 
 export const veldigLangSoknad: RSSoknad = {
@@ -2070,7 +2069,6 @@ export const veldigLangSoknad: RSSoknad = {
             ],
         },
         ...utenlandskSykmeldingSporsmalene,
-        værKlarOverAt(),
         bekreftOpplysninger(),
     ],
     egenmeldtSykmelding: false,

@@ -1,5 +1,5 @@
-import { BodyLong, RadioGroup, Radio } from '@navikt/ds-react'
-import { useFormContext, Controller } from 'react-hook-form'
+import { BodyLong, Radio, RadioGroup } from '@navikt/ds-react'
+import { Controller, useFormContext } from 'react-hook-form'
 
 import { TagTyper } from '../../../types/enums'
 import { getLedetekst, tekst } from '../../../utils/tekster'

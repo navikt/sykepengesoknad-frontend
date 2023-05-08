@@ -5,7 +5,6 @@ import { Sykmelding } from '../../../types/sykmelding'
 import { Persona } from '../personas'
 import { tilLesbarPeriodeMedArstall } from '../../../utils/dato-utils'
 
-import { værKlarOverAt } from './sporsmal/vaer-klar-over-at'
 import { bekreftOpplysninger } from './sporsmal/bekreft-opplysninger'
 
 function hentUrl() {
@@ -580,7 +579,6 @@ export const brukertestSoknad: RSSoknad = {
                 },
             ],
         },
-        værKlarOverAt(),
         bekreftOpplysninger(),
     ],
     egenmeldtSykmelding: false,

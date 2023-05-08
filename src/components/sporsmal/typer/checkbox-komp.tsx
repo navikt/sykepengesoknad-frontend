@@ -1,6 +1,6 @@
-import { CheckboxGroup, Checkbox } from '@navikt/ds-react'
+import { Checkbox, CheckboxGroup } from '@navikt/ds-react'
 import React from 'react'
-import { useFormContext, Controller } from 'react-hook-form'
+import { Controller, useFormContext } from 'react-hook-form'
 
 import { SpmProps } from '../sporsmal-form/sporsmal-form'
 import { hentFeilmelding } from '../sporsmal-utils'

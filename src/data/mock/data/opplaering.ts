@@ -6,7 +6,6 @@ import {
     arbeidstaker100Syk,
     arbeidstakerBehandlingsdagSyk,
 } from './sykmeldinger'
-import { værKlarOverAt, værKlarOverAtBehandlingsdager } from './sporsmal/vaer-klar-over-at'
 import { bekreftOpplysninger } from './sporsmal/bekreft-opplysninger'
 
 export const behandlingsdager: RSSoknad = {
@@ -295,7 +294,6 @@ export const behandlingsdager: RSSoknad = {
                 },
             ],
         },
-        værKlarOverAtBehandlingsdager(),
         bekreftOpplysninger(),
     ],
     egenmeldtSykmelding: false,
@@ -699,7 +697,6 @@ export const arbeidstaker: RSSoknad = {
                 },
             ],
         },
-        værKlarOverAt(),
         bekreftOpplysninger(),
     ],
     egenmeldtSykmelding: false,
@@ -1128,7 +1125,6 @@ export const arbeidstakerGradert: RSSoknad = {
                 },
             ],
         },
-        værKlarOverAt(),
         bekreftOpplysninger(),
     ],
     egenmeldtSykmelding: false,
@@ -1473,7 +1469,6 @@ export const arbeidsledig: RSSoknad = {
                 },
             ],
         },
-        værKlarOverAt(),
         bekreftOpplysninger(),
     ],
     egenmeldtSykmelding: false,
