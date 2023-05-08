@@ -25,8 +25,7 @@ const Knapperad = ({ soknad, poster }: KnapperadProps) => {
     const erUtlandssoknad = soknad.soknadstype === RSSoknadstype.OPPHOLD_UTLAND
 
     const nokkel = () => {
-        const erSisteSteg =
-            spmIndex === soknad.sporsmal.length - (soknad.soknadstype === RSSoknadstype.OPPHOLD_UTLAND ? 2 : 3)
+        const erSisteSteg = spmIndex === soknad.sporsmal.length - 2
         if (erSisteSteg) {
             if (soknad.status === RSSoknadstatus.UTKAST_TIL_KORRIGERING) {
                 return 'sykepengesoknad.send.endringene'

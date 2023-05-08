@@ -25,8 +25,8 @@ const UndersporsmalListe = ({ oversporsmal, oversporsmalSvar }: UndersporsmalLis
                 </Label>
             )}
             {oversporsmal.undersporsmal
-                .map((underspm: Sporsmal, idx: number) => <SporsmalSwitch key={idx} sporsmal={underspm} />)
-                .filter((underspm: any) => underspm !== null)}
+                .map((undersporsmal: Sporsmal, idx: number) => <SporsmalSwitch key={idx} sporsmal={undersporsmal} />)
+                .filter((undersporsmal: any) => undersporsmal !== null)}
         </div>
     )
 }

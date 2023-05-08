@@ -1,7 +1,6 @@
 import { RSSoknad } from '../../../types/rs-types/rs-soknad'
 
 import { frilanser100Syk } from './sykmeldinger'
-import { værKlarOverAt } from './sporsmal/vaer-klar-over-at'
 import { bekreftOpplysninger } from './sporsmal/bekreft-opplysninger'
 
 export const frilanser: RSSoknad = {
@@ -359,7 +358,6 @@ export const frilanser: RSSoknad = {
             svar: [],
             undersporsmal: [],
         },
-        værKlarOverAt(),
         bekreftOpplysninger(),
     ],
     egenmeldtSykmelding: false,

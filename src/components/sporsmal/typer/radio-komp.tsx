@@ -1,6 +1,6 @@
-import { Alert, BodyLong, BodyShort, ReadMore, RadioGroup, Radio } from '@navikt/ds-react'
+import { Alert, BodyLong, BodyShort, Radio, RadioGroup, ReadMore } from '@navikt/ds-react'
 import React from 'react'
-import { useFormContext, Controller } from 'react-hook-form'
+import { Controller, useFormContext } from 'react-hook-form'
 import { useParams } from 'react-router'
 
 import { TagTyper } from '../../../types/enums'

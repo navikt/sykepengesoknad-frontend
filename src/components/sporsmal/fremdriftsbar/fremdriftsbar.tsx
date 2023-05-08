@@ -3,7 +3,6 @@ import React from 'react'
 import { Link, useParams } from 'react-router-dom'
 import { ArrowLeftIcon } from '@navikt/aksel-icons'
 
-import { TagTyper } from '../../../types/enums'
 import useSoknad from '../../../hooks/useSoknad'
 import { parserWithReplace } from '../../../utils/html-react-parser-utils'
 import { RouteParams } from '../../../app'
@@ -40,22 +39,20 @@ const TilbakeKnapp = ({ soknad, stegNo }: { soknad: Soknad; stegNo: number }) =>
 const Fremdriftsbar = () => {
     const { id, stegId } = useParams<RouteParams>()
     const { data: valgtSoknad } = useSoknad(id)
-    const stegNo = parseInt(stegId!)
-
-    const aktivtSteg = parseInt(stegId!)
-    const steg = valgtSoknad!.sporsmal.filter((s) => s.tag !== TagTyper.VAER_KLAR_OVER_AT)
-    const antallSteg = steg.length
+    const stegNummer = parseInt(stegId!)
+    const sporsmal = valgtSoknad!.sporsmal
+    const antallSteg = sporsmal.length
     const style = {
-        width: `${(100 / antallSteg) * stegNo}%`,
+        width: `${(100 / antallSteg) * stegNummer}%`,
     }
     if (!valgtSoknad || !stegId) return null
     return (
         <div
             className="my-4 md:my-6"
             role="progressbar"
-            aria-valuenow={aktivtSteg}
+            aria-valuenow={stegNummer}
             aria-valuemin={1}
-            aria-valuemax={steg.length}
+            aria-valuemax={sporsmal.length}
             aria-label="Søknadssteg"
         >
             <div className="relative mx-auto mt-4">
@@ -63,7 +60,7 @@ const Fremdriftsbar = () => {
                 <div className="-mt-3 h-3 rounded-lg bg-gray-900" style={style} />
             </div>
             <div className="mt-4 flex justify-between">
-                <TilbakeKnapp soknad={valgtSoknad} stegNo={stegNo} />
+                <TilbakeKnapp soknad={valgtSoknad} stegNo={stegNummer} />
                 <BodyShort as="span">
                     {parserWithReplace(`${stegId}&nbsp;av&nbsp;${antallSteg}`) + ' spørsmål'}
                 </BodyShort>

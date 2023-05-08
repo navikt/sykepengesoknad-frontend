@@ -7,6 +7,7 @@ import { RSSoknad } from '../../types/rs-types/rs-soknad'
 import { RSSoknadstatus } from '../../types/rs-types/rs-soknadstatus'
 import { RSSoknadstype } from '../../types/rs-types/rs-soknadstype'
 import { jsonDeepCopy } from '../../utils/json-deep-copy'
+import { TagTyper } from '../../types/enums'
 
 import { arbeidstaker, arbeidstakerGradert } from './data/opplaering'
 import { feilVedSlettingAvKvittering } from './data/reisetilskudd'
@@ -99,7 +100,11 @@ const setUpMock = (person: Persona) => {
         soknad.status = 'UTKAST_TIL_KORRIGERING'
         soknad.sendtTilArbeidsgiverDato = null
         soknad.sendtTilNAVDato = null
-        soknad.sporsmal[0].svar = []
+        soknad.sporsmal.map((spm) => {
+            if (spm.tag === TagTyper.ANSVARSERKLARING || spm.tag === TagTyper.BEKREFT_OPPLYSNINGER) {
+                spm.svar = []
+            }
+        })
 
         person.soknader.push(soknad)
 

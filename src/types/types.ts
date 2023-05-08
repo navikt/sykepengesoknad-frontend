@@ -129,27 +129,18 @@ export class Sporsmal {
     }
 }
 
-function rsToSporsmal(spms: RSSporsmal[], kriterie: RSVisningskriterieType | null, erHovedsporsmal: boolean) {
+function rsToSporsmal(rsSporsmal: RSSporsmal[], kriterie: RSVisningskriterieType | null, erHovedsporsmal: boolean) {
     const sporsmals: Sporsmal[] = []
-    if (spms === undefined) {
+    if (rsSporsmal === undefined) {
         return sporsmals
     }
-    spms.forEach((rssp) => {
-        const spm: Sporsmal = new Sporsmal(rssp, kriterie, erHovedsporsmal)
-        sporsmals.push(spm)
+    rsSporsmal.forEach((rssp) => {
+        const sporsmal: Sporsmal = new Sporsmal(rssp, kriterie, erHovedsporsmal)
+        // Filtrerer bort VAER_KLAR_OVER_AT siden det rendres frontend men kan fortsatt finnes i gamle søknader.
+        if (sporsmal.tag !== TagTyper.VAER_KLAR_OVER_AT) {
+            sporsmals.push(sporsmal)
+        }
     })
-
-    if (
-        sporsmals.length >= 2 &&
-        sporsmals[sporsmals.length - 1].tag === TagTyper.VAER_KLAR_OVER_AT &&
-        sporsmals[sporsmals.length - 2].tag === TagTyper.BEKREFT_OPPLYSNINGER
-    ) {
-        // Det finnes tilfeller opprettet i db før 15 Mai 2020 hvor disse er i "feil rekkefølge" Dette fikser sorteringa
-        // Se også https://github.com/navikt/syfosoknad/commit/1983d32f3a7fb28bbf17126ea227d91589ad5f35
-        const tmp = sporsmals[sporsmals.length - 1]
-        sporsmals[sporsmals.length - 1] = sporsmals[sporsmals.length - 2]
-        sporsmals[sporsmals.length - 2] = tmp
-    }
     return sporsmals
 }
 

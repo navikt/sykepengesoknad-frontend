@@ -9,8 +9,7 @@ import { tekst } from '../../utils/tekster'
 
 export const erSisteSide = (soknad: Soknad, sidenummer: number) => {
     const sporsmal = soknad.sporsmal[sidenummer - 1]
-    const tag = sporsmal.tag
-    return [TagTyper.VAER_KLAR_OVER_AT, TagTyper.BEKREFT_OPPLYSNINGER].indexOf(tag) > -1
+    return [TagTyper.BEKREFT_OPPLYSNINGER].indexOf(sporsmal.tag) > -1
 }
 
 export const hentNokkel = (soknad: Soknad, sidenummer: number) => {

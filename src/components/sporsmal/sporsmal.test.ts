@@ -12,12 +12,13 @@ test('Alle tags har global feilmelding', () => {
     let manglerFeilmelding = false
 
     tags = tags.filter((skipTag) => {
+        // Spørsmål som har svartype IKKE_RELEVANT. Disse har ikke feilmelding.
         return (
-            skipTag !== TagTyper.VAER_KLAR_OVER_AT && // Svartype: IKKE_RELEVANT
-            skipTag !== TagTyper.IKKE_SOKT_UTENLANDSOPPHOLD_INFORMASJON && // Svartype: IKKE_RELEVANT
-            skipTag !== TagTyper.BEKREFT_OPPLYSNINGER_UTLAND_INFO && // Svartype: IKKE_RELEVANT
+            skipTag !== TagTyper.VAER_KLAR_OVER_AT &&
+            skipTag !== TagTyper.IKKE_SOKT_UTENLANDSOPPHOLD_INFORMASJON &&
+            skipTag !== TagTyper.BEKREFT_OPPLYSNINGER_UTLAND_INFO &&
             skipTag !== TagTyper.ENKELTSTAENDE_BEHANDLINGSDAGER
-        ) // Svartype: INFO_BEHANDLINGSDAGER
+        )
     })
 
     tags.forEach((tag) => {
@@ -50,13 +51,14 @@ test('Alle sporsmal tag ligger i veldigLangSoknad', () => {
     const soknad: Soknad = new Soknad(veldigLangSoknad as any)
     const sporsmalTagsUtenIndex = hentAlleTagsUtenIndex(soknad.sporsmal)
     const tagsSomSkalStottes = Object.values(TagTyper).filter((skipTag) => {
-        // TODO: Sjekk at disse tagene fortsatt er i bruk, legg de inn i søknaden
         return (
-            skipTag !== 'BETALER_ARBEIDSGIVER' && // Kan fjernes?
-            skipTag !== 'HVOR_MANGE_TIMER' && // Finnes i syfosoknad, men brukes ikke
-            skipTag !== 'BEKREFT_OPPLYSNINGER_UTLAND' && // Kan bare inneholde en sisteside, dekkes av andre tester
+            // VAER_KLAR_OVER_AT kan fortsatt returners fra backend, men filtrerers bort.
+            skipTag !== 'VAER_KLAR_OVER_AT' &&
+            skipTag !== 'BETALER_ARBEIDSGIVER' &&
+            skipTag !== 'HVOR_MANGE_TIMER' &&
+            skipTag !== 'BEKREFT_OPPLYSNINGER_UTLAND' &&
             skipTag !== 'BEKREFT_OPPLYSNINGER_UTLAND_INFO'
-        ) // Kan bare inneholde en sisteside
+        )
     })
     let manglerTagsISoknad = false
     let manglerTagsIKoden = false
