@@ -36,6 +36,7 @@ import VaerKlarOverAt from '../../vaer-klar-over-at/vaer-klar-over-at'
 import Knapperad from './knapperad'
 import SendesTil from './sendes-til'
 import skalViseKnapperad from './skal-vise-knapperad'
+import soknaden from '../../soknad/soknaden'
 
 export interface SpmProps {
     sporsmal: Sporsmal
@@ -229,8 +230,25 @@ const SporsmalForm = () => {
 
     if (!valgtSoknad) return null
 
+    const debug = {
+        'valgtSoknad.sporsmal.length': valgtSoknad.sporsmal.length,
+        'valgtSoknad.tags': valgtSoknad.sporsmal.map((obj) => obj.tag),
+        'korrigerer.sporsmal.length': korrigerer?.sporsmal.length,
+        'korrigerer.tags': korrigerer?.sporsmal.map((obj) => obj.tag),
+        'sporsmal.tag': sporsmal.tag,
+        'sporsmal.svartype': sporsmal.svartype,
+        'nesteSporsmal.tag': nesteSporsmal?.tag,
+        'nesteSporsmal.svartype': nesteSporsmal?.svartype,
+        'sporsmal.svar': sporsmal.svarliste.svar,
+        'nesteSporsmal.svar': nesteSporsmal?.svarliste.svar,
+        'korrigerer.svar': korrigerer?.sporsmal[spmIndex].svarliste.svar,
+        erSiste: erSiste,
+    }
+
     return (
         <>
+            <pre>{JSON.stringify(debug, null, 2)}</pre>
+
             <EndringUtenEndringModal aapen={endringUtenEndringAapen} setAapen={setEndringUtenEndringAapen} />
 
             <FormProvider {...methods}>
