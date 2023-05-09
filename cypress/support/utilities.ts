@@ -39,3 +39,7 @@ export function velgDato(dato = 10) {
     cy.get(className).click()
     cy.get('.rdp-day').contains(dato).first().click()
 }
+
+export function klikkGaVidere() {
+    cy.contains('Gå videre').click({ force: true })
+}

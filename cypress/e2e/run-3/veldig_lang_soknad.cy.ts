@@ -7,6 +7,7 @@ import {
     svarCheckboxPanel,
     velgLand,
     velgDato,
+    klikkGaVidere,
 } from '../../support/utilities'
 import 'cypress-file-upload'
 import { veldigLangSoknad } from '../../../src/data/mock/data/veldig-land-soknad'
@@ -59,7 +60,7 @@ describe('Tester støtte for gamle spørsmål', () => {
     }
 
     function gaVidere() {
-        cy.contains('Gå videre').click({ force: true })
+        klikkGaVidere()
         cy.url().should('include', `${soknad.id}/${++steg}`)
     }
 
