@@ -1,5 +1,4 @@
 import { BodyLong } from '@navikt/ds-react'
-
 import { LenkeMedIkon } from '../../lenke-med-ikon/LenkeMedIkon'
 
 export const YrkesskadeHjelpBody = () => {
