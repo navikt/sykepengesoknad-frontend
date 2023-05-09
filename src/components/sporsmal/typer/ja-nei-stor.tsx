@@ -1,5 +1,6 @@
 import { BodyLong, RadioGroup, Radio, Alert } from '@navikt/ds-react'
 import { useFormContext, Controller } from 'react-hook-form'
+import { useParams } from 'react-router-dom'
 
 import { TagTyper } from '../../../types/enums'
 import { getLedetekst, tekst } from '../../../utils/tekster'
@@ -16,6 +17,7 @@ import { parserWithReplace } from '../../../utils/html-react-parser-utils'
 import { PaskeferieInfo } from '../../hjelpetekster/paaskeferie/paskeferie-info'
 import useSoknad from '../../../hooks/useSoknad'
 import { RSSoknadstatus } from '../../../types/rs-types/rs-soknadstatus'
+import { RouteParams } from '../../../app'
 
 const JaNeiStor = ({ sporsmal }: SpmProps) => {
     const {
@@ -24,15 +26,13 @@ const JaNeiStor = ({ sporsmal }: SpmProps) => {
         watch,
         getValues,
     } = useFormContext()
-    const { data: valgtSoknad } = useSoknad(sporsmal.id)
+    const { id } = useParams<RouteParams>()
+    const { data: valgtSoknad } = useSoknad(id)
     const feilmelding = hentFeilmelding(sporsmal, errors[sporsmal.id])
     let watchJaNei = watch(sporsmal.id)
     if (watchJaNei === undefined) {
         watchJaNei = getValues(sporsmal.id)
     }
-
-    //TODO: fjerne
-    console.log('tester', valgtSoknad?.status, sporsmal.tag, watchJaNei) // eslint-disable-line
 
     const valider = (value: any) => {
         if (value === 'JA' || value === 'NEI') {
