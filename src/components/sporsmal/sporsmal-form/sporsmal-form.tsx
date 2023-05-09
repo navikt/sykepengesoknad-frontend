@@ -260,10 +260,7 @@ const SporsmalForm = () => {
                 >
                     <GuidepanelOverSporsmalstekst sporsmal={sporsmal} />
 
-                    <Vis
-                        hvis={!erSiste || (erSiste && erUtlandssoknad)}
-                        render={() => <SporsmalSwitch sporsmal={sporsmal} />}
-                    />
+                    <Vis hvis={!erSiste} render={() => <SporsmalSwitch sporsmal={sporsmal} />} />
                     <Vis
                         hvis={erSiste && !erUtlandssoknad}
                         render={() => (

@@ -24,6 +24,7 @@ import {
 import { opplaering, Persona, soknaderOpplaering } from './personas'
 import { personas } from './testperson'
 import { kortFomTomArbeidstakerSoknad } from './data/kort-soknad'
+import { TagTyper } from '../../types/enums'
 
 const mottaker = (soknadId: string): RSMottaker => {
     if (
@@ -99,7 +100,11 @@ const setUpMock = (person: Persona) => {
         soknad.status = 'UTKAST_TIL_KORRIGERING'
         soknad.sendtTilArbeidsgiverDato = null
         soknad.sendtTilNAVDato = null
-        soknad.sporsmal[0].svar = []
+        soknad.sporsmal.map((spm) => {
+            if (spm.tag === TagTyper.ANSVARSERKLARING || spm.tag === TagTyper.BEKREFT_OPPLYSNINGER) {
+                spm.svar = []
+            }
+        })
 
         person.soknader.push(soknad)
 
