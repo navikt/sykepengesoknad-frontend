@@ -51,7 +51,7 @@ const Fremdriftsbar = () => {
     if (!valgtSoknad || !stegId) return null
     return (
         <div
-            className="my-4 md:my-8"
+            className="my-4 md:my-6"
             role="progressbar"
             aria-valuenow={aktivtSteg}
             aria-valuemin={1}
@@ -59,8 +59,8 @@ const Fremdriftsbar = () => {
             aria-label="Søknadssteg"
         >
             <div className="relative mx-auto mt-4">
-                <div className="h-1.5 rounded-lg bg-gray-200 md:h-4" />
-                <div className="-mt-1.5 h-1.5 rounded-lg bg-deepblue-500 md:-mt-4 md:h-4" style={style} />
+                <div className="h-3 rounded-lg bg-gray-200" />
+                <div className="-mt-3 h-3 rounded-lg bg-gray-900" style={style} />
             </div>
             <div className={'mt-4 flex justify-between'}>
                 <TilbakeKnapp soknad={valgtSoknad} stegNo={stegNo} />

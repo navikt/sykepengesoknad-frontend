@@ -35,12 +35,12 @@ const Banner = ({ overskrift }: BannerProps) => {
 
     return (
         <header className="sidebanner">
-            <Heading size="xlarge" level="1" className="sidebanner__tittel">
+            <Heading size="large" level="1" className="sidebanner__tittel">
                 {overskrift === undefined ? tittel() : overskrift}
                 <Vis
                     hvis={valgtSoknad && valgtSoknad.fom && valgtSoknad.tom}
                     render={() => (
-                        <Heading size="medium" as="span">
+                        <Heading size="small" as="span" className={'mt-2'}>
                             {tilLesbarPeriodeMedArstall(valgtSoknad!.fom, valgtSoknad!.tom)}
                         </Heading>
                     )}
