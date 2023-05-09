@@ -12,6 +12,7 @@ import { RouteParams } from '../../../app'
 import useSoknad from '../../../hooks/useSoknad'
 import { logEvent } from '../../amplitude/amplitude'
 import { parserWithReplace } from '../../../utils/html-react-parser-utils'
+import { Feedback } from '../../feedback/feedback'
 
 import { AndreInntektskilderHjelpBody } from './andre-inntektskilder-hjelp-body'
 import { EkspanderbarHjelpTekster } from './ekspanderbar-hjelp-tekst'
@@ -123,7 +124,10 @@ export const EkspanderbarHjelp = ({ sporsmal }: SpmProps) => {
                 setExpanded((prev) => !prev)
             }}
         >
-            <div className={'mt-4'}>{ekspanderbarInnhold}</div>
+            <div className={'mt-4'}>
+                {ekspanderbarInnhold}
+                <Feedback sporsmal={sporsmal} />
+            </div>
         </ReadMore>
     )
 }
