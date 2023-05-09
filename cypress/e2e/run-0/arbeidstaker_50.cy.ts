@@ -9,7 +9,7 @@ describe('Tester arbeidstakersøknad - gradert 50%', () => {
     })
 
     it('Laster startside', function () {
-        cy.get('.navds-heading--xlarge').should('be.visible').and('have.text', 'Søknader')
+        cy.get('.navds-heading--large').should('be.visible').and('have.text', 'Søknader')
         cy.get(`a[href*=${soknad.id}]`).click()
     })
 

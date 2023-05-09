@@ -8,7 +8,7 @@ describe('Tester ettersending og korrigering', () => {
     })
 
     it('Laster startside', function () {
-        cy.get('.navds-heading--xlarge').should('be.visible').and('have.text', 'Søknader')
+        cy.get('.navds-heading--large').should('be.visible').and('have.text', 'Søknader')
         cy.get(`a[href*=${soknad.id}]`).click()
     })
 
@@ -123,7 +123,7 @@ describe('Tester ettersending og korrigering', () => {
         cy.get('#listelink').click({
             force: true,
         })
-        cy.get('.navds-heading--xlarge').should('be.visible').and('have.text', 'Søknader')
+        cy.get('.navds-heading--large').should('be.visible').and('have.text', 'Søknader')
 
         cy.get(`a[href*=${soknad.id}]`)
             .should('contain', '1. – 24. april 2020')

@@ -6,7 +6,7 @@ describe('Tester avbryting av søknad', () => {
     })
 
     it('Laster startside', function () {
-        cy.get('.navds-heading--xlarge').should('be.visible').and('have.text', 'Søknader')
+        cy.get('.navds-heading--large').should('be.visible').and('have.text', 'Søknader')
     })
 
     it('Avbrutt søknad har forventa tekst', function () {

@@ -10,7 +10,7 @@ describe('Tester feilsituasjoner ', () => {
         })
 
         it('Laster startside og åpner søknad', function () {
-            cy.get('.navds-heading--xlarge').should('be.visible').and('have.text', 'Søknader')
+            cy.get('.navds-heading--large').should('be.visible').and('have.text', 'Søknader')
             cy.get(`a[href*=${soknadSomTriggerSporsmalFinnesIkkeISoknad.id}]`).click()
         })
 
@@ -27,7 +27,7 @@ describe('Tester feilsituasjoner ', () => {
             cy.contains('Du må laste inn siden på nytt for å fortsette')
 
             cy.contains('Last inn siden på nytt').click()
-            cy.get('.navds-heading--xlarge').should('be.visible').and('have.text', 'Søknader')
+            cy.get('.navds-heading--large').should('be.visible').and('have.text', 'Søknader')
         })
     })
 
@@ -53,7 +53,7 @@ describe('Tester feilsituasjoner ', () => {
             cy.contains('Du må laste inn siden på nytt for å fortsette')
 
             cy.contains('Last inn siden på nytt').click()
-            cy.get('.navds-heading--xlarge').should('be.visible').and('have.text', 'Søknader')
+            cy.get('.navds-heading--large').should('be.visible').and('have.text', 'Søknader')
         })
     })
     describe('Tester 400 ved send søknad', () => {
