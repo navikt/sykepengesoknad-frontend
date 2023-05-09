@@ -54,6 +54,7 @@ export const Feedback = ({ sporsmal }: { sporsmal: Sporsmal }) => {
             <Button
                 data-cy={'feedback-' + props.feedbacktype}
                 variant={'secondary-neutral'}
+                size={'small'}
                 className={cn({
                     'bg-surface-neutral-active text-text-on-inverted hover:bg-surface-neutral-active':
                         activeState === props.feedbacktype,
@@ -97,15 +98,14 @@ export const Feedback = ({ sporsmal }: { sporsmal: Sporsmal }) => {
     }
 
     return (
-        <div className={'toc-ignore mb-4 mt-16'}>
+        <div className={'toc-ignore mb-16 mt-16'}>
             <div className={'flex w-full flex-col gap-4'}>
-                <Heading size="small" level="2">
+                <Heading size="xsmall" level="2">
                     Var forklaringen til hjelp?
                 </Heading>
-                <div className={'flex w-full gap-4'}>
+                <div className={'flex w-full gap-2'}>
                     <FeedbackButton feedbacktype={Feedbacktype.JA}>Ja</FeedbackButton>
                     <FeedbackButton feedbacktype={Feedbacktype.NEI}>Nei</FeedbackButton>
-                    <FeedbackButton feedbacktype={Feedbacktype.FORBEDRING}>Foreslå forbedring</FeedbackButton>
                 </div>
                 {activeState !== null && (
                     <form className={'animate-fadeIn mt-4 flex w-full max-w-sm flex-col gap-4'}>
@@ -126,6 +126,7 @@ export const Feedback = ({ sporsmal }: { sporsmal: Sporsmal }) => {
                         <Button
                             data-cy="send-feedback"
                             className="mr-auto"
+                            size={'small'}
                             variant={'secondary-neutral'}
                             onClick={handleSend}
                         >
