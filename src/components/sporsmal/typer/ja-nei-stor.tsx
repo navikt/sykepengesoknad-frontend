@@ -31,6 +31,9 @@ const JaNeiStor = ({ sporsmal }: SpmProps) => {
         watchJaNei = getValues(sporsmal.id)
     }
 
+    //TODO: fjerne
+    console.log('tester', valgtSoknad?.status, sporsmal.tag, watchJaNei) // eslint-disable-line
+
     const valider = (value: any) => {
         if (value === 'JA' || value === 'NEI') {
             if (sporsmal.erHovedsporsmal) {
