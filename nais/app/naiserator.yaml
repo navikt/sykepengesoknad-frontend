@@ -45,6 +45,7 @@ spec:
         - application: sykepengesoknad-backend
         - application: sykepengesoknad-kvitteringer
         - application: flex-hotjar-emotions
+        - application: flexjar-backend
         - application: sokos-kontoregister-person
           namespace: okonomi
         - application: sykmeldinger-backend

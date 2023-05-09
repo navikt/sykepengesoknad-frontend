@@ -52,6 +52,7 @@ const nextConfig = {
         idportenClientId: process.env.IDPORTEN_CLIENT_ID,
         idportenWellKnownUrl: process.env.IDPORTEN_WELL_KNOWN_URL,
         sykmeldingerBackendClientId: process.env.SYKMELDINGER_BACKEND_CLIENT_ID,
+        flexjarBackendClientId: process.env.FLEXJAR_BACKEND_CLIENT_ID,
         sykepengesoknadBackendClientId: process.env.SYKEPENGESOKNAD_BACKEND_CLIENT_ID,
         sykepengesoknadKvitteringerClientId: process.env.SYKEPENGESOKNAD_KVITTERINGER_CLIENT_ID,
         sokosKontoregisterPersonClientId: process.env.SOKOS_KONTOREGISTER_PERSON_CLIENT_ID,

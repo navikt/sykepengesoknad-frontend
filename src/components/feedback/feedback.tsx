@@ -3,6 +3,7 @@ import { useEffect, useRef, useState, MouseEvent } from 'react'
 
 import { cn } from '../../utils/tw-utils'
 import { Sporsmal } from '../../types/types'
+import UseFlexjarFeedback from '../../hooks/useFlexjarFeedback'
 
 enum Feedbacktype {
     'JA' = 'JA',
@@ -20,6 +21,7 @@ export const Feedback = ({ sporsmal }: { sporsmal: Sporsmal }) => {
     const [errorMsg, setErrorMsg] = useState<string | null>(null)
     const [thanksFeedback, setThanksFeedback] = useState<boolean>(false)
     const textAreaRef = useRef(null)
+    const { mutate: giFeedback } = UseFlexjarFeedback()
 
     useEffect(() => {
         textValue && errorMsg && setErrorMsg(null)
@@ -43,10 +45,7 @@ export const Feedback = ({ sporsmal }: { sporsmal: Sporsmal }) => {
             sporsmal: sporsmal.tag,
         }
 
-        await fetch('/syk/sykepengesoknad/api/flexjar-backend/api/v1/feedback', {
-            method: 'POST',
-            body: JSON.stringify(body),
-        })
+        await giFeedback(body)
     }
 
     const FeedbackButton = (props: FeedbackButtonProps) => {
@@ -121,7 +120,7 @@ export const Feedback = ({ sporsmal }: { sporsmal: Sporsmal }) => {
                             }}
                             maxLength={600}
                             minRows={3}
-                            description="Ikke skriv inn navn eller andre personopplysninger"
+                            description="Ikke skriv inn navn eller andre personopplysninger. Svaret ditt blir brukt til å forbedre søknaden og vil ikke påvirke eller saksbehandle saken din."
                         />
                         <Button
                             data-cy="send-feedback"
