@@ -110,7 +110,7 @@ const JaNeiStor = ({ sporsmal }: SpmProps) => {
 
                         <Vis
                             hvis={
-                                valgtSoknad?.status === RSSoknadstatus.AVBRUTT &&
+                                valgtSoknad?.status === RSSoknadstatus.UTKAST_TIL_KORRIGERING &&
                                 sporsmal.tag === TagTyper.FERIE_V2 &&
                                 watchJaNei === 'JA'
                             }
