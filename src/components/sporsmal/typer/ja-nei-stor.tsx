@@ -118,7 +118,7 @@ const JaNeiStor = ({ sporsmal }: SpmProps) => {
                                 watchJaNei === 'JA'
                             }
                             render={() => (
-                                <Alert className="mt-8" variant="info">
+                                <Alert data-cy={'feriekorrigeringvarsel'} className="mt-8" variant="info">
                                     Du kan dra på ferie mens du er sykmeldt, men du får ikke utbetalt sykepenger når du
                                     har ferie.
                                 </Alert>
