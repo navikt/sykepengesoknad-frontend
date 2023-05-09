@@ -38,7 +38,7 @@
         "uuid": "^9.0.0"
     },
     "devDependencies": {
-        "@cypress/webpack-preprocessor": "^5.16.3",
+        "@cypress/webpack-preprocessor": "^5.17.1",
         "@navikt/eslint-config-teamsykmelding": "^1.6.0",
         "@types/classnames": "^2.3.0",
         "@types/jest": "^29.4.0",
