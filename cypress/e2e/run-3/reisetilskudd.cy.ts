@@ -7,7 +7,7 @@ describe('Teste førsteside i reisetilskuddsøknaden', () => {
 
     describe('Landingside og listevisning', () => {
         it('Laster startside', () => {
-            cy.get('.navds-heading--xlarge').should('be.visible').and('have.text', 'Søknader')
+            cy.get('.navds-heading--large').should('be.visible').and('have.text', 'Søknader')
         })
 
         it('Søknad har forventa tekst', () => {

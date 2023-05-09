@@ -9,7 +9,7 @@ describe('Tester utkast til korrigerte søknader', () => {
     })
 
     it('Henter liste med søknader', () => {
-        cy.get('.navds-heading--xlarge').should('be.visible').and('have.text', 'Søknader')
+        cy.get('.navds-heading--large').should('be.visible').and('have.text', 'Søknader')
     })
 
     it('En søknad til korringeringer markert som til korrigering', () => {

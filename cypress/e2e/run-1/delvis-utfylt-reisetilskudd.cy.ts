@@ -8,7 +8,7 @@ describe('Tester delvis utfylt søknad med reisetilskudd', () => {
     })
 
     it('Henter liste med søknader', () => {
-        cy.get('.navds-heading--xlarge').should('be.visible').and('have.text', 'Søknader')
+        cy.get('.navds-heading--large').should('be.visible').and('have.text', 'Søknader')
     })
 
     it('Går til første ubesvarte spørsmål', () => {

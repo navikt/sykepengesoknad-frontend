@@ -10,7 +10,7 @@ describe('Tester søknad om å beholde sykepenger utenfor EØS', () => {
     })
 
     it('Laster startside', function () {
-        cy.get('.navds-heading--xlarge').should('be.visible').and('have.text', 'Søknader')
+        cy.get('.navds-heading--large').should('be.visible').and('have.text', 'Søknader')
         cy.get(`a[href*=${soknad.id}]`).should('include.text', 'Søknad om å beholde sykepenger utenfor EØS')
         cy.get(`a[href*=${soknad.id}]`).click()
     })
@@ -74,7 +74,7 @@ describe('Tester søknad om å beholde sykepenger utenfor EØS', () => {
 
         cy.url().should('equal', Cypress.config().baseUrl + '/syk/sykepengesoknad')
 
-        cy.get('.navds-heading--xlarge').should('be.visible').and('have.text', 'Søknader')
+        cy.get('.navds-heading--large').should('be.visible').and('have.text', 'Søknader')
         cy.get(`a[href*=${soknad.id}]`).should('not.exist')
     })
 })

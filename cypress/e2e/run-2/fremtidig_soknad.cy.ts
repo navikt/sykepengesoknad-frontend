@@ -6,7 +6,7 @@ describe('Tester fremtidig søknad', () => {
     })
 
     it('Laster startside', function () {
-        cy.get('.navds-heading--xlarge').should('be.visible').and('have.text', 'Søknader')
+        cy.get('.navds-heading--large').should('be.visible').and('have.text', 'Søknader')
     })
 
     it('Fremtidig søknad har forventa tekst', function () {

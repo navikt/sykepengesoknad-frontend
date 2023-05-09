@@ -15,7 +15,7 @@ const articleTilSoknad = (articles: any) => {
 describe('Tester sortering av søknader', () => {
     it('Laster startside', function () {
         cy.visit('/syk/sykepengesoknad?testperson=alle-soknader')
-        cy.get('.navds-heading--xlarge').should('be.visible').and('have.text', 'Søknader')
+        cy.get('.navds-heading--large').should('be.visible').and('have.text', 'Søknader')
     })
 
     it('Nye søknader sorteres etter tidligste tom dato', function () {
