@@ -88,7 +88,7 @@ export const Feedback = ({ sporsmal }: { sporsmal: Sporsmal }) => {
             case Feedbacktype.JA:
                 return 'Er det noe du vil trekke frem? (valgfritt)'
             case Feedbacktype.NEI:
-                return 'Hva er det du ikke liker? (valgfritt)'
+                return 'Fortell om utfordringen din med dette spørsmålet? (valgfritt)'
             case Feedbacktype.FORBEDRING:
                 return 'Hva kan forbedres?'
             default:
