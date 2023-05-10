@@ -1,10 +1,4 @@
-.radioGruppe-jaNei {
-    width: 100%;
-}
-.radioGruppe-jaNei .navds-radio-buttons {
-    display: flex;
-    justify-content: space-between;
-    flex-wrap: wrap;
+.navds-radio-buttons {
 }
 .radioGruppe-jaNei .navds-radio-buttons .navds-accordion {
     margin-right: auto;
@@ -25,10 +19,7 @@
     background-color: #cce1ff;
 }
 @media (min-width: 768px) {
-    .radioGruppe-jaNei .navds-radio-buttons .radio-input {
+    .navds-radio-buttons .radio-input {
         width: 48.7%;
-    }
-    .radioGruppe-jaNei .navds-radio-buttons .radio-input:not(:last-child) {
-        margin-bottom: 0;
     }
 }

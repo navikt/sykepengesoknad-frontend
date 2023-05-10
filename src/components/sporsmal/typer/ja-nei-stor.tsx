@@ -18,6 +18,7 @@ import { PaskeferieInfo } from '../../hjelpetekster/paaskeferie/paskeferie-info'
 import useSoknad from '../../../hooks/useSoknad'
 import { RSSoknadstatus } from '../../../types/rs-types/rs-soknadstatus'
 import { RouteParams } from '../../../app'
+import { cn } from '../../../utils/tw-utils'
 import { YrkesskadeInfo } from '../../hjelpetekster/yrkesskade-info'
 
 const JaNeiStor = ({ sporsmal }: SpmProps) => {
@@ -47,6 +48,23 @@ const JaNeiStor = ({ sporsmal }: SpmProps) => {
         return false
     }
 
+    function RadioStylet({ id, value }: { id: string; value: string }) {
+        return (
+            <Radio
+                id={id}
+                value={value}
+                className={cn(
+                    'mb-2 block w-full rounded border border-gray-600 px-4 py-1 hover:bg-blue-100 md:mb-0 md:w-[48.7%]',
+                    {
+                        'border-blue-500 bg-blue-50': watchJaNei === value,
+                    },
+                )}
+            >
+                Ja
+            </Radio>
+        )
+    }
+
     return (
         <>
             <div className={'inputPanelGruppe' + (errors[sporsmal.id] ? ' skjemagruppe--feil' : '')}>
@@ -57,27 +75,15 @@ const JaNeiStor = ({ sporsmal }: SpmProps) => {
                         <RadioGroup
                             {...field}
                             legend={sporsmal.sporsmalstekst}
-                            className="radioGruppe-jaNei"
+                            className="w-full [&>div]:flex [&>div]:flex-wrap [&>div]:justify-between"
                             key={sporsmal.id}
                         >
                             <GuidepanelUnderSporsmalstekst sporsmal={sporsmal} />
 
                             <EkspanderbarHjelp sporsmal={sporsmal} />
 
-                            <Radio
-                                id={field.name + '_' + '0'}
-                                value="JA"
-                                className={'radio-input' + (watchJaNei === 'JA' ? ' radio-checked' : '')}
-                            >
-                                Ja
-                            </Radio>
-                            <Radio
-                                id={field.name + '_' + '1'}
-                                value="NEI"
-                                className={'radio-input' + (watchJaNei === 'NEI' ? ' radio-checked' : '')}
-                            >
-                                Nei
-                            </Radio>
+                            <RadioStylet value={'JA'} id={`${field.name}_0`}></RadioStylet>
+                            <RadioStylet value={'NEI'} id={`${field.name}_1`}></RadioStylet>
                         </RadioGroup>
                     )}
                 />
