@@ -4,6 +4,7 @@ import { useEffect, useRef, useState, MouseEvent } from 'react'
 import { cn } from '../../utils/tw-utils'
 import { Sporsmal } from '../../types/types'
 import UseFlexjarFeedback from '../../hooks/useFlexjarFeedback'
+import { isProd } from '../../utils/environment'
 
 enum Feedbacktype {
     'JA' = 'JA',
@@ -31,6 +32,10 @@ export const Feedback = ({ sporsmal }: { sporsmal: Sporsmal }) => {
         activeState && textAreaRef.current && (textAreaRef.current as any).focus()
         setErrorMsg(null)
     }, [activeState])
+
+    if (isProd()) {
+        return null
+    }
 
     const fetchFeedback = async (): Promise<void> => {
         if (activeState === null) {
