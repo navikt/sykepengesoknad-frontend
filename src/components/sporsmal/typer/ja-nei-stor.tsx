@@ -1,5 +1,6 @@
-import { BodyLong, RadioGroup, Radio } from '@navikt/ds-react'
+import { BodyLong, RadioGroup, Radio, Alert } from '@navikt/ds-react'
 import { useFormContext, Controller } from 'react-hook-form'
+import { useParams } from 'react-router-dom'
 
 import { TagTyper } from '../../../types/enums'
 import { getLedetekst, tekst } from '../../../utils/tekster'
@@ -14,6 +15,9 @@ import UndersporsmalListe from '../undersporsmal/undersporsmal-liste'
 import { SpmProps } from '../sporsmal-form/sporsmal-form'
 import { parserWithReplace } from '../../../utils/html-react-parser-utils'
 import { PaskeferieInfo } from '../../hjelpetekster/paaskeferie/paskeferie-info'
+import useSoknad from '../../../hooks/useSoknad'
+import { RSSoknadstatus } from '../../../types/rs-types/rs-soknadstatus'
+import { RouteParams } from '../../../app'
 
 const JaNeiStor = ({ sporsmal }: SpmProps) => {
     const {
@@ -22,6 +26,8 @@ const JaNeiStor = ({ sporsmal }: SpmProps) => {
         watch,
         getValues,
     } = useFormContext()
+    const { id } = useParams<RouteParams>()
+    const { data: valgtSoknad } = useSoknad(id)
     const feilmelding = hentFeilmelding(sporsmal, errors[sporsmal.id])
     let watchJaNei = watch(sporsmal.id)
     if (watchJaNei === undefined) {
@@ -104,6 +110,20 @@ const JaNeiStor = ({ sporsmal }: SpmProps) => {
                 >
                     <>
                         <UndersporsmalListe oversporsmal={sporsmal} oversporsmalSvar={watchJaNei} />
+
+                        <Vis
+                            hvis={
+                                valgtSoknad?.status === RSSoknadstatus.UTKAST_TIL_KORRIGERING &&
+                                sporsmal.tag === TagTyper.FERIE_V2 &&
+                                watchJaNei === 'JA'
+                            }
+                            render={() => (
+                                <Alert data-cy={'feriekorrigeringvarsel'} className="mt-8" variant="info">
+                                    Du kan dra på ferie mens du er sykmeldt, men du får ikke utbetalt sykepenger når du
+                                    har ferie.
+                                </Alert>
+                            )}
+                        />
 
                         <PaskeferieInfo sporsmal={sporsmal} jaNeiSvar={watchJaNei} />
                     </>
