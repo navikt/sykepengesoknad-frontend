@@ -5,7 +5,7 @@
     "dependencies": {
         "@navikt/aksel-icons": "^2.9.0",
         "@navikt/ds-css": "^2.9.8",
-        "@navikt/ds-react": "^2.9.8",
+        "@navikt/ds-react": "^3.0.0",
         "@navikt/ds-tailwind": "^2.9.8",
         "@navikt/ds-tokens": "^2.9.8",
         "@navikt/nav-dekoratoren-moduler": "^2.0.1",
