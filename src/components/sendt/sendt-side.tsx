@@ -66,41 +66,39 @@ const SendtSide = () => {
         <>
             <Banner />
 
-            <div className="limit sendt-side">
-                <HotjarTrigger jsTrigger={hentHotjarJsTrigger(valgtSoknad.soknadstype, 'sendt')}>
-                    <Kvittering />
+            <HotjarTrigger jsTrigger={hentHotjarJsTrigger(valgtSoknad.soknadstype, 'sendt')}>
+                <Kvittering />
 
-                    <Vis
-                        hvis={skalViseKnapperad}
-                        render={() => (
-                            <div className="knapperad">
-                                <Vis hvis={skalViseEndre} render={() => <Endreknapp />} />
+                <Vis
+                    hvis={skalViseKnapperad}
+                    render={() => (
+                        <>
+                            <Vis hvis={skalViseEndre} render={() => <Endreknapp />} />
 
-                                <Vis
-                                    hvis={!erSendtTilNav}
-                                    render={() => (
-                                        <Ettersending gjelder="nav" setRerendrekvittering={setRerendrekvittering} />
-                                    )}
-                                />
+                            <Vis
+                                hvis={!erSendtTilNav}
+                                render={() => (
+                                    <Ettersending gjelder="nav" setRerendrekvittering={setRerendrekvittering} />
+                                )}
+                            />
 
-                                <Vis
-                                    hvis={skalViseSendTilArbeidsgiver}
-                                    render={() => (
-                                        <Ettersending
-                                            gjelder="arbeidsgiver"
-                                            setRerendrekvittering={setRerendrekvittering}
-                                        />
-                                    )}
-                                />
-                            </div>
-                        )}
-                    />
+                            <Vis
+                                hvis={skalViseSendTilArbeidsgiver}
+                                render={() => (
+                                    <Ettersending
+                                        gjelder="arbeidsgiver"
+                                        setRerendrekvittering={setRerendrekvittering}
+                                    />
+                                )}
+                            />
+                        </>
+                    )}
+                />
 
-                    <div aria-live="polite">
-                        <Vis hvis={feilmeldingTekst} render={() => <Alert variant="error">{feilmeldingTekst}</Alert>} />
-                    </div>
-                </HotjarTrigger>
-            </div>
+                <div aria-live="polite">
+                    <Vis hvis={feilmeldingTekst} render={() => <Alert variant="error">{feilmeldingTekst}</Alert>} />
+                </div>
+            </HotjarTrigger>
         </>
     )
 }

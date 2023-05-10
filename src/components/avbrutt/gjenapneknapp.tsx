@@ -9,8 +9,6 @@ import useSoknad from '../../hooks/useSoknad'
 import { logEvent } from '../amplitude/amplitude'
 import { RouteParams } from '../../app'
 
-import styles from './gjenapneknapp.module.css'
-
 const GjenapneSoknad = () => {
     const { id } = useParams<RouteParams>()
     const { data: valgtSoknad } = useSoknad(id)
@@ -55,11 +53,9 @@ const GjenapneSoknad = () => {
     }
 
     return (
-        <div className={styles.knapperad}>
-            <Button variant="tertiary" loading={gjenapner} onClick={gjenapneSoknad}>
-                Jeg vil bruke denne søknaden likevel
-            </Button>
-        </div>
+        <Button variant="tertiary" className={'px-0'} loading={gjenapner} onClick={gjenapneSoknad}>
+            Jeg vil bruke denne søknaden likevel
+        </Button>
     )
 }
 

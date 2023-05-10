@@ -106,6 +106,7 @@ const Ettersending = ({ gjelder, setRerendrekvittering }: EttersendingProps) => 
         <>
             <Button
                 variant="tertiary"
+                className={'block px-0'}
                 onClick={() => {
                     setVilEttersende(true)
                 }}

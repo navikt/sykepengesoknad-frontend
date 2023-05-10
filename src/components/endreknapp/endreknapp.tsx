@@ -65,6 +65,7 @@ const Endreknapp = () => {
         <>
             <Button
                 variant="tertiary"
+                className={'block px-0'}
                 loading={korrigerer}
                 onClick={() => {
                     logEvent('knapp klikket', {

@@ -31,7 +31,7 @@ const PersonvernLesMer = ({ soknadstype }: PersonvernLesMerProps) => {
 
     return (
         <>
-            <Button variant="tertiary" onClick={handleAapen}>
+            <Button variant="tertiary" onClick={handleAapen} className={'px-0'}>
                 {tekst('sykepengesoknad.soknad-intro.personvern-les-mer')}
             </Button>
             <Modal

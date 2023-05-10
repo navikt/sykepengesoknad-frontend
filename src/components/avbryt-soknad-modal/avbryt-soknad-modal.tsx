@@ -14,7 +14,6 @@ import useSoknader from '../../hooks/useSoknader'
 import { RouteParams } from '../../app'
 
 import { avbrytSoknad } from './avbryt-soknad'
-import styles from './avbryt-soknad.module.css'
 
 const AvbrytKorrigering = () => {
     const { id, stegId } = useParams<RouteParams>()
@@ -28,7 +27,7 @@ const AvbrytKorrigering = () => {
         <div>
             <Button
                 variant="tertiary"
-                className={styles.avbryt_rodknapp}
+                className={'px-0 text-surface-danger'}
                 onClick={(e) => {
                     logEvent('modal åpnet', {
                         component: tekst('avbryt.korrigering.knapp'),
@@ -67,7 +66,7 @@ const AvbrytSoknadModal = () => {
         <div>
             <Button
                 variant="tertiary"
-                className={styles.avbryt_rodknapp}
+                className={'px-0 text-surface-danger'}
                 onClick={(e) => {
                     logEvent('modal åpnet', {
                         component: tekst('avbryt.popup.tittel'),

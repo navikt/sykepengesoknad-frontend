@@ -37,23 +37,22 @@ const Knapperad = ({ soknad, poster }: KnapperadProps) => {
     }
 
     return (
-        <div className="knapperad" data-cy="knapperad">
-            <Button variant="primary" type="submit" loading={poster}>
+        <div className="my-8" data-cy="knapperad">
+            <Button variant="primary" type="submit" loading={poster} className={'mb-4'}>
                 {tekst(nokkel())}
             </Button>
-            <div className="avbrytDialog blokk-l">
-                <AvsluttOgFortsettSenere />
-                <AvbrytSoknadModal />
-                <Vis
-                    hvis={stegNo === 1 && !erUtlandssoknad}
-                    render={() => (
-                        <>
-                            <hr />
-                            <PersonvernLesMer soknadstype={soknad.soknadstype} />
-                        </>
-                    )}
-                />
-            </div>
+
+            <AvsluttOgFortsettSenere />
+            <AvbrytSoknadModal />
+            <Vis
+                hvis={stegNo === 1 && !erUtlandssoknad}
+                render={() => (
+                    <>
+                        <hr className={'my-4'} />
+                        <PersonvernLesMer soknadstype={soknad.soknadstype} />
+                    </>
+                )}
+            />
         </div>
     )
 }

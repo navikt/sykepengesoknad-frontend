@@ -20,6 +20,7 @@ const AvsluttOgFortsettSenere = () => {
         <>
             <Button
                 variant="tertiary"
+                className="block px-0"
                 onClick={(e) => {
                     logEvent('modal åpnet', {
                         component: tekst('avslutt.popup.tittel'),
