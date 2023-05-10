@@ -7,6 +7,7 @@ import { RSSoknad } from '../../types/rs-types/rs-soknad'
 import { RSSoknadstatus } from '../../types/rs-types/rs-soknadstatus'
 import { RSSoknadstype } from '../../types/rs-types/rs-soknadstype'
 import { jsonDeepCopy } from '../../utils/json-deep-copy'
+import { TagTyper } from '../../types/enums'
 
 import { arbeidstaker, arbeidstakerGradert } from './data/opplaering'
 import { feilVedSlettingAvKvittering } from './data/reisetilskudd'
@@ -24,7 +25,6 @@ import {
 import { opplaering, Persona, soknaderOpplaering } from './personas'
 import { personas } from './testperson'
 import { kortFomTomArbeidstakerSoknad } from './data/kort-soknad'
-import { TagTyper } from '../../types/enums'
 
 const mottaker = (soknadId: string): RSMottaker => {
     if (

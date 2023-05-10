@@ -13,7 +13,6 @@ test('Alle tags har global feilmelding', () => {
 
     tags = tags.filter((skipTag) => {
         return (
-            skipTag !== TagTyper.VAER_KLAR_OVER_AT && // Svartype: IKKE_RELEVANT
             skipTag !== TagTyper.IKKE_SOKT_UTENLANDSOPPHOLD_INFORMASJON && // Svartype: IKKE_RELEVANT
             skipTag !== TagTyper.BEKREFT_OPPLYSNINGER_UTLAND_INFO && // Svartype: IKKE_RELEVANT
             skipTag !== TagTyper.ENKELTSTAENDE_BEHANDLINGSDAGER

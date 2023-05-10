@@ -3,7 +3,6 @@ import React from 'react'
 import { Link, useParams } from 'react-router-dom'
 import { ArrowLeftIcon } from '@navikt/aksel-icons'
 
-import { TagTyper } from '../../../types/enums'
 import useSoknad from '../../../hooks/useSoknad'
 import { parserWithReplace } from '../../../utils/html-react-parser-utils'
 import { RouteParams } from '../../../app'
@@ -43,7 +42,7 @@ const Fremdriftsbar = () => {
     const stegNo = parseInt(stegId!)
 
     const aktivtSteg = parseInt(stegId!)
-    const steg = valgtSoknad!.sporsmal.filter((s) => s.tag !== TagTyper.VAER_KLAR_OVER_AT)
+    const steg = valgtSoknad!.sporsmal
     const antallSteg = steg.length
     const style = {
         width: `${(100 / antallSteg) * stegNo}%`,

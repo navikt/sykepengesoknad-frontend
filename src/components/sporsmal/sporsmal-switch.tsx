@@ -17,7 +17,7 @@ import TallKomp from './typer/tall-komp'
 import UkjentSporsmal from './typer/ukjent-sporsmal'
 import { SpmProps } from './sporsmal-form/sporsmal-form'
 import { Fritekst } from './typer/fritekst'
-import IkkeRelevant from "./typer/ikke-relevant";
+import IkkeRelevant from './typer/ikke-relevant'
 
 const SporsmalSwitch = ({ sporsmal }: SpmProps) => {
     switch (sporsmal.svartype) {

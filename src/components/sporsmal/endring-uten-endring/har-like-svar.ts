@@ -2,13 +2,6 @@ import { RSSvar } from '../../../types/rs-types/rs-svar'
 import { Soknad, Sporsmal } from '../../../types/types'
 
 export function harLikeSvar(a: Soknad, b: Soknad) {
-    console.log(`NJM: a.sporsmal.length: ${a.sporsmal.length}, b.sporsmal.length: ${b.sporsmal.length}`)
-
-
-    b.sporsmal.map((sporsmal) => {
-        console.log('NJM b:' + sporsmal.id)
-    })
-
     if (a.sporsmal.length != b.sporsmal.length) {
         return false
     }

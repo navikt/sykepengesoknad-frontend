@@ -139,11 +139,7 @@ function rsToSporsmal(spms: RSSporsmal[], kriterie: RSVisningskriterieType | nul
         sporsmals.push(spm)
     })
 
-    if (
-        sporsmals.length >= 2 &&
-        sporsmals[sporsmals.length - 1].tag === TagTyper.VAER_KLAR_OVER_AT &&
-        sporsmals[sporsmals.length - 2].tag === TagTyper.BEKREFT_OPPLYSNINGER
-    ) {
+    if (sporsmals.length >= 2 && sporsmals[sporsmals.length - 1].tag === TagTyper.BEKREFT_OPPLYSNINGER) {
         // Det finnes tilfeller opprettet i db før 15 Mai 2020 hvor disse er i "feil rekkefølge" Dette fikser sorteringa
         // Se også https://github.com/navikt/syfosoknad/commit/1983d32f3a7fb28bbf17126ea227d91589ad5f35
         const tmp = sporsmals[sporsmals.length - 1]

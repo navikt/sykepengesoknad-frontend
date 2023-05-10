@@ -36,7 +36,6 @@ import VaerKlarOverAt from '../../vaer-klar-over-at/vaer-klar-over-at'
 import Knapperad from './knapperad'
 import SendesTil from './sendes-til'
 import skalViseKnapperad from './skal-vise-knapperad'
-import soknaden from '../../soknad/soknaden'
 
 export interface SpmProps {
     sporsmal: Sporsmal
@@ -132,10 +131,8 @@ const SporsmalForm = () => {
         if (rsOppdaterSporsmalResponse.mutertSoknad) {
             soknad = new Soknad(rsOppdaterSporsmalResponse.mutertSoknad)
         } else {
-            const spm = rsOppdaterSporsmalResponse.oppdatertSporsmal
-            erSiste
-                ? (soknad!.sporsmal[spmIndex + 1] = new Sporsmal(spm, undefined as any, true))
-                : (soknad!.sporsmal[spmIndex] = new Sporsmal(spm, undefined as any, true))
+            const oppdatertSporsmal = rsOppdaterSporsmalResponse.oppdatertSporsmal
+            soknad!.sporsmal[spmIndex] = new Sporsmal(oppdatertSporsmal, undefined as any, true)
         }
 
         queryClient.setQueriesData(['soknad', id], soknad)
@@ -184,28 +181,25 @@ const SporsmalForm = () => {
     }
 
     const onSubmit = async (data: any) => {
-        if (poster || senderSoknad) return
         setPoster(true)
         restFeilet = false
+
         try {
             settSvar(sporsmal, data)
+            const oppdatertOk = await sendOppdaterSporsmal()
+            if (!oppdatertOk) {
+                return
+            }
+
             if (erSiste) {
-                if (!erUtlandssoknad) {
-                    settSvar(sporsmal, data)
-                }
-                const oppdatertOk = await sendOppdaterSporsmal()
-                if (!oppdatertOk) {
-                    return
-                }
                 await sendSoknad()
                 logEvent('skjema fullført', {
                     soknadstype: valgtSoknad!.soknadstype,
                     skjemanavn: 'sykepengesoknad',
                 })
-
                 return
             }
-            await sendOppdaterSporsmal()
+
             logEvent('skjema spørsmål besvart', {
                 soknadstype: valgtSoknad!.soknadstype,
                 skjemanavn: 'sykepengesoknad',
@@ -228,29 +222,13 @@ const SporsmalForm = () => {
         }
     }
 
-    if (!valgtSoknad) return null
-
-    const debug = {
-        'valgtSoknad.sporsmal.length': valgtSoknad.sporsmal.length,
-        'valgtSoknad.tags': valgtSoknad.sporsmal.map((obj) => obj.tag),
-        'korrigerer.sporsmal.length': korrigerer?.sporsmal.length,
-        'korrigerer.tags': korrigerer?.sporsmal.map((obj) => obj.tag),
-        'sporsmal.tag': sporsmal.tag,
-        'sporsmal.svartype': sporsmal.svartype,
-        'nesteSporsmal.tag': nesteSporsmal?.tag,
-        'nesteSporsmal.svartype': nesteSporsmal?.svartype,
-        'sporsmal.svar': sporsmal.svarliste.svar,
-        'nesteSporsmal.svar': nesteSporsmal?.svarliste.svar,
-        'korrigerer.svar': korrigerer?.sporsmal[spmIndex].svarliste.svar,
-        erSiste: erSiste,
+    if (!valgtSoknad) {
+        return null
     }
 
     return (
         <>
-            <pre>{JSON.stringify(debug, null, 2)}</pre>
-
             <EndringUtenEndringModal aapen={endringUtenEndringAapen} setAapen={setEndringUtenEndringAapen} />
-
             <FormProvider {...methods}>
                 <form
                     onSubmit={methods.handleSubmit(onSubmit)}
