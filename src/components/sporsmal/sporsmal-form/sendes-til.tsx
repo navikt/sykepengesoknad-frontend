@@ -34,17 +34,15 @@ const SendesTil = ({ soknad }: SendesTilProps) => {
     }
 
     return (
-        <div className="bottom_line">
-            <BodyShort as="div">
-                {soknad.arbeidsgiver !== undefined
-                    ? parserWithReplace(
-                          getLedetekst(tekst(nokkel as any), {
-                              '%ARBEIDSGIVER%': soknad.arbeidsgiver.navn,
-                          }),
-                      )
-                    : parserWithReplace(tekst(nokkel as any))}
-            </BodyShort>
-        </div>
+        <BodyShort as="div" className={'mt-8 border-t border-gray-400 py-8 text-left'}>
+            {soknad.arbeidsgiver !== undefined
+                ? parserWithReplace(
+                      getLedetekst(tekst(nokkel as any), {
+                          '%ARBEIDSGIVER%': soknad.arbeidsgiver.navn,
+                      }),
+                  )
+                : parserWithReplace(tekst(nokkel as any))}
+        </BodyShort>
     )
 }
 
