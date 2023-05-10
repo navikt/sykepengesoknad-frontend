@@ -13,8 +13,7 @@ export const PermisjonHjelpBody = () => {
                 foreldrepermisjon.
             </BodyLong>
             <BodyLong className={'mt-4'}>
-                Svar nei, hvis du blir syk før en planlagt permisjon, har foreldrepermisjon, ferie, er permittert eller
-                har seniordager.
+                Svar nei, hvis du blir syk før en planlagt permisjon, har ferie, er permittert eller har seniordager.
             </BodyLong>
         </>
     )
