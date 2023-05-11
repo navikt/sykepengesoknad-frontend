@@ -29,6 +29,7 @@ import EgenmeldingsdagerArbeidsgiver from '../egenmeldingsdager-arbeidsgiver/ege
 import useSykmeldinger from '../../hooks/useSykmeldinger'
 import useSykmelding from '../../hooks/useSykmelding'
 import { RouteParams } from '../../app'
+import { Feedback } from '../feedback/feedback'
 
 import { urlTilSoknad } from './soknad-link'
 
@@ -134,6 +135,7 @@ const Soknaden = () => {
                     />
 
                     <SporsmalForm />
+                    <Feedback soknad={valgtSoknad} steg={stegNo} />
                 </>
             </HotjarTrigger>
         </>
