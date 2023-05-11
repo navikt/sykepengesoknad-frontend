@@ -8,7 +8,6 @@ import { parserWithReplace } from '../../utils/html-react-parser-utils'
 
 import EksempelFrist from './eksempel-frist'
 import HvorforSoknadSykepenger from './hvorfor-soknad-sykepenger'
-import styles from './frist-sykepenger.module.css'
 
 const FristSykepenger = ({ soknad }: { soknad: Soknad }) => {
     const [open, setOpen] = useState<boolean>(false)
@@ -16,7 +15,7 @@ const FristSykepenger = ({ soknad }: { soknad: Soknad }) => {
         return null
     }
     return (
-        <Accordion className={styles.accordionWrapper}>
+        <Accordion className={'mb-4 border border-gray-400'}>
             <Accordion.Item open={open} className="frist-sykepenger">
                 <Accordion.Header
                     onClick={() => {

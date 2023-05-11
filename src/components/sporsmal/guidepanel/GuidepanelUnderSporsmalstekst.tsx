@@ -9,8 +9,6 @@ import { fjernIndexFraTag } from '../sporsmal-utils'
 import { ProgressivtGuidePanel } from '../../guidepanel/ProgressivtGuidePanel'
 import { parserWithReplace } from '../../../utils/html-react-parser-utils'
 
-import styles from './GuidepanelUnderSporsmalstekst.module.css'
-
 const GuidepanelUnderSporsmalstekst = ({ sporsmal }: SpmProps) => {
     const bjornTekst = `soknad.bjorn.${fjernIndexFraTag(sporsmal.tag).toLowerCase()}`
 
@@ -21,7 +19,7 @@ const GuidepanelUnderSporsmalstekst = ({ sporsmal }: SpmProps) => {
             <Vis
                 hvis={bjornVeileder(sporsmal.tag)}
                 render={() => (
-                    <ProgressivtGuidePanel className={styles.guidepanelWrapper}>
+                    <ProgressivtGuidePanel className={'my-8'}>
                         <BodyShort>{parserWithReplace(tekst(bjornTekst as any))}</BodyShort>
                     </ProgressivtGuidePanel>
                 )}

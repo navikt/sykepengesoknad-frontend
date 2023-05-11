@@ -8,8 +8,6 @@ import { tekst } from '../../../utils/tekster'
 import { ProgressivtGuidePanel } from '../../guidepanel/ProgressivtGuidePanel'
 import { parserWithReplace } from '../../../utils/html-react-parser-utils'
 
-import styles from './GuidepanelOverSporsmalstekst.module.css'
-
 const GuidepanelOverSporsmalstekst = ({ sporsmal }: SpmProps) => {
     const bjornTekst = `soknad.bjorn.${fjernIndexFraTag(sporsmal.tag).toLowerCase()}`
 
@@ -17,11 +15,9 @@ const GuidepanelOverSporsmalstekst = ({ sporsmal }: SpmProps) => {
     if (!bjornVeileder(sporsmal.tag)) return null
 
     return (
-        <div className={styles.wrapper}>
-            <ProgressivtGuidePanel>
-                <BodyShort>{parserWithReplace(tekst(bjornTekst as any))}</BodyShort>
-            </ProgressivtGuidePanel>
-        </div>
+        <ProgressivtGuidePanel className={'my-8'}>
+            <BodyShort>{parserWithReplace(tekst(bjornTekst as any))}</BodyShort>
+        </ProgressivtGuidePanel>
     )
 }
 

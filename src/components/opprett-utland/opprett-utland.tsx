@@ -12,8 +12,7 @@ import { urlTilSoknad } from '../soknad/soknad-link'
 import Vis from '../vis'
 import { useUpdateBreadcrumbs } from '../../hooks/useBreadcrumbs'
 import { parserWithReplace } from '../../utils/html-react-parser-utils'
-
-import styles from './OpprettUtland.module.css'
+import { LenkeMedIkon } from '../lenke-med-ikon/LenkeMedIkon'
 
 const OpprettUtland = () => {
     const queryClient = useQueryClient()
@@ -53,30 +52,26 @@ const OpprettUtland = () => {
         <>
             <GuidePanel poster={true}>{parserWithReplace(tekst('opprett-utland.bjorn'))}</GuidePanel>
 
-            <Panel border className={styles.panel}>
+            <Panel border className={'mt-16'}>
                 <Heading spacing size="medium" level="1">
                     {tekst('opprett-utland.tittel')}
                 </Heading>
 
                 <BodyLong>{parserWithReplace(tekst('opprett-utland.trenger-ikke-soke'))}</BodyLong>
             </Panel>
-            <div className={styles.sentrerteDeler}>
-                <Button variant="primary" type="button" onClick={opprett} className={styles.fortsettKnapp}>
-                    {tekst('opprett-utland.fortsett')}
-                </Button>
 
-                <div aria-live="polite">
-                    <Vis hvis={feilmeldingTekst} render={() => <Alert variant="error">{feilmeldingTekst}</Alert>} />
-                </div>
-                <a
-                    className="blokk"
-                    href="https://www.nav.no/no/NAV+og+samfunn/Om+NAV/personvern-i-arbeids-og-velferdsetaten"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                >
-                    {tekst('opprett-utland.personvern')}
-                </a>
+            <Button variant="primary" type="button" onClick={opprett} className={'mb-8 mt-16'}>
+                {tekst('opprett-utland.fortsett')}
+            </Button>
+
+            <div aria-live="polite">
+                <Vis hvis={feilmeldingTekst} render={() => <Alert variant="error">{feilmeldingTekst}</Alert>} />
             </div>
+            <LenkeMedIkon
+                className="mt-8"
+                href="https://www.nav.no/no/NAV+og+samfunn/Om+NAV/personvern-i-arbeids-og-velferdsetaten"
+                text={tekst('opprett-utland.personvern')}
+            />
         </>
     )
 }
