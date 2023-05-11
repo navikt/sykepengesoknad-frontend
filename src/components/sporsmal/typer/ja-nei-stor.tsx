@@ -20,6 +20,7 @@ import { RSSoknadstatus } from '../../../types/rs-types/rs-soknadstatus'
 import { RouteParams } from '../../../app'
 import { cn } from '../../../utils/tw-utils'
 import { YrkesskadeInfo } from '../../hjelpetekster/yrkesskade-info'
+import React from "react";
 
 const JaNeiStor = ({ sporsmal }: SpmProps) => {
     const {
@@ -77,6 +78,15 @@ const JaNeiStor = ({ sporsmal }: SpmProps) => {
                             legend={sporsmal.sporsmalstekst}
                             className="w-full [&>div]:flex [&>div]:flex-wrap [&>div]:justify-between"
                             key={sporsmal.id}
+                            style={
+                                {
+                                    '--ac-radio-checkbox-bg': 'var(--a-red-400)',
+                                    '--ac-radio-checkbox-border': 'var(--a-orange-200)',
+                                    '--ac-radio-checkbox-action': 'var(--a-red-200)',
+                                    '--ac-radio-checkbox-action-bg': 'var(--a-red-900)',
+                                    '--ac-radio-checkbox-action-hover-bg': 'var(--a-green-200)',
+                                } as React.CSSProperties
+                            }
                         >
                             <GuidepanelUnderSporsmalstekst sporsmal={sporsmal} />
 
