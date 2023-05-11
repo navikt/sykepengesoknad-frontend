@@ -15,7 +15,7 @@ export const HjelpetekstModal = (props: HjelpetekstPopupProps) => {
         <>
             <span
                 role={'button'}
-                className={'border-b border-dotted bg-gray-100'}
+                className={'border-b-2 border-dotted border-border-action hover:bg-gray-100'}
                 onClick={(e) => {
                     e.preventDefault()
                     setOpen(true)
