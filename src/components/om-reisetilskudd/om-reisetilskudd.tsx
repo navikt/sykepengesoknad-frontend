@@ -11,7 +11,7 @@ const OmReisetilskudd = () => {
 
     return (
         <Accordion>
-            <Accordion.Item open={open} className="my-4 rounded-md border border-gray-300">
+            <Accordion.Item open={open} data-cy="om-reisetilskudd" className="my-4 rounded-md border border-gray-300">
                 <Accordion.Header
                     onClick={() => {
                         logEvent(open ? 'accordion lukket' : 'accordion åpnet', {
