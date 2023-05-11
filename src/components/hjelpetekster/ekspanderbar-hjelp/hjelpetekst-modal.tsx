@@ -1,7 +1,6 @@
 import { Button, Heading, Modal } from '@navikt/ds-react'
 import { useState } from 'react'
 
-import styles from './hjelpetekst-modal.module.css'
 interface HjelpetekstPopupProps {
     inlinetekst: React.ReactNode
     tittel: string
@@ -14,9 +13,16 @@ export const HjelpetekstModal = (props: HjelpetekstPopupProps) => {
 
     return (
         <>
-            <a onClick={() => setOpen(true)} className={styles.lenkeknapp}>
+            <span
+                role={'button'}
+                className={'border-b-2 border-dotted border-border-action hover:bg-gray-100'}
+                onClick={(e) => {
+                    e.preventDefault()
+                    setOpen(true)
+                }}
+            >
                 {inlinetekst}
-            </a>
+            </span>
 
             <Modal open={open} onClose={() => setOpen((x) => !x)} aria-labelledby="modal-heading">
                 <Modal.Content style={{ maxWidth: '360px' }}>
