@@ -1,15 +1,7 @@
 .frist-sykepenger p {
     margin: 0.5rem 0 1rem;
 }
-.frist-sykepenger .navds-accordion__content .intern button {
-    flex-flow: row-reverse;
-    padding-right: 1rem;
-}
-.frist-sykepenger .navds-accordion__content .intern .navds-accordion__content {
-    border-left: 3px solid #707070;
-    margin-left: -3px;
-    padding-right: 0;
-}
+
 .frist-sykepenger .navds-accordion__content .eksempel-container {
     background-color: #f7f7f7;
     padding: 1rem;
