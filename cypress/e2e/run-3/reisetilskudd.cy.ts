@@ -36,10 +36,7 @@ describe('Teste førsteside i reisetilskuddsøknaden', () => {
         })
 
         it('Laster inn hvem kan få reisetilskudd', () => {
-            cy.get('.om-reisetilskudd .navds-accordion__header')
-                .should('be.visible')
-                .and('have.text', 'Om reisetilskudd')
-                .click()
+            cy.get('[data-cy="om-reisetilskudd"]').should('be.visible').click()
 
             cy.get('.navds-label').contains('Hva dekker reisetilskuddet')
             cy.get('.navds-body-long').contains(

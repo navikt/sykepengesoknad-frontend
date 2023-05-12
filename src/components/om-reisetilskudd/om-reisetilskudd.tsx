@@ -11,7 +11,7 @@ const OmReisetilskudd = () => {
 
     return (
         <Accordion>
-            <Accordion.Item open={open} className="om-reisetilskudd">
+            <Accordion.Item open={open} data-cy="om-reisetilskudd" className="my-4 rounded-md border border-gray-300">
                 <Accordion.Header
                     onClick={() => {
                         logEvent(open ? 'accordion lukket' : 'accordion åpnet', {
@@ -20,16 +20,24 @@ const OmReisetilskudd = () => {
                         setOpen(!open)
                     }}
                 >
-                    <Heading size="small">{tekst('tilskudd.start.om-reisetilskudd')}</Heading>
+                    <Heading size="small" className="ml-4">
+                        {tekst('tilskudd.start.om-reisetilskudd')}
+                    </Heading>
                 </Accordion.Header>
                 <Accordion.Content>
-                    <Label as="h3">{tekst('tilskudd.start.hva-dekker')}</Label>
+                    <Label as="h3" spacing>
+                        {tekst('tilskudd.start.hva-dekker')}
+                    </Label>
                     <BodyLong spacing>{parserWithReplace(tekst('tilskudd.start.hva-dekker-tekst'))}</BodyLong>
 
-                    <Label as="h3">{tekst('tilskudd.start.forste-16')}</Label>
+                    <Label as="h3" spacing>
+                        {tekst('tilskudd.start.forste-16')}
+                    </Label>
                     <BodyLong spacing>{tekst('tilskudd.start.forste-16-tekst')}</BodyLong>
 
-                    <Label as="h3">{tekst('tilskudd.start.legg-ved')}</Label>
+                    <Label as="h3" spacing>
+                        {tekst('tilskudd.start.legg-ved')}
+                    </Label>
                     <BodyLong spacing>{tekst('tilskudd.start.legg-ved-tekst')}</BodyLong>
 
                     <BodyLong spacing>

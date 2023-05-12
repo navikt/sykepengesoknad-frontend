@@ -54,7 +54,6 @@ describe('Tester feilmeldinger', () => {
 
     function ingenFeilmeldinger() {
         cy.get('.skjemaelement__input--harFeil').should('not.exist')
-        cy.get('.feiloppsummering').should('not.exist')
     }
 
     function resetAllePeriodeDateFelter() {
@@ -78,7 +77,7 @@ describe('Tester feilmeldinger', () => {
         cy.get('.navds-error-message').contains(
             'Du må bekrefte at du har lest og forstått informasjonen før du kan gå videre',
         )
-        cy.get('.feiloppsummering')
+        cy.get('[data-cy="feil-oppsumering"]')
             .should('exist')
             .within(() => {
                 cy.contains('Det er 1 feil i skjemaet')
@@ -96,7 +95,7 @@ describe('Tester feilmeldinger', () => {
 
         cy.get('.skjemagruppe--feil').should('exist')
         cy.get('.skjemaelement__feilmelding').contains('Du må velge et alternativ')
-        cy.get('.feiloppsummering')
+        cy.get('[data-cy="feil-oppsumering"]')
             .should('exist')
             .within(() => {
                 cy.contains('Det er 1 feil i skjemaet')
@@ -267,7 +266,6 @@ describe('Tester feilmeldinger', () => {
             `input[name=${arbeidstakerGradert.sporsmal[6].undersporsmal[1].undersporsmal[1].undersporsmal[0].id}]`,
         ).type('1')
         cy.get('.skjemaelement__feilmelding').should('not.exist')
-        cy.get('.feiloppsummering').should('not.exist')
         gaVidere()
         feilmeldingHandteringForNyeKomponenter(
             'Timene utgjør mindre enn 50 %.',
@@ -343,7 +341,7 @@ describe('Tester feilmeldinger', () => {
 
         cy.get('.navds-error-message').should('exist')
         cy.get('.navds-error-message').contains('Du må velge minst et alternativ')
-        cy.get('.feiloppsummering')
+        cy.get('[data-cy="feil-oppsumering"]')
             .should('exist')
             .within(() => {
                 cy.contains('Det er 1 feil i skjemaet')
