@@ -1,5 +1,0 @@
-.skjemaelement__input--harFeil:not(:focus):not(:hover):not(:active) .navds-text-field__input,
-.skjemaelement__input--harFeil:not(:focus):not(:hover):not(:active) + .ds-datepicker__calendarButton {
-    border-color: #c30000;
-    box-shadow: 0 0 0 1px #c30000;
-}
