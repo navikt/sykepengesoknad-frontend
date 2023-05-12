@@ -48,8 +48,10 @@ const QueryStatusPanel = ({ valgSoknadId, valgSykmeldingId }: QueryStatusPanelPr
             <Vis
                 hvis={isFetching > 0}
                 render={() => (
-                    <div className="query-status-panel">
-                        <Heading size="small">Henter dine data</Heading>
+                    <div className="text-center">
+                        <Heading size="small" spacing>
+                            Henter dine data
+                        </Heading>
                         <Loader />
                     </div>
                 )}
@@ -57,7 +59,7 @@ const QueryStatusPanel = ({ valgSoknadId, valgSykmeldingId }: QueryStatusPanelPr
             <Vis
                 hvis={errorQueries.length > 0}
                 render={() => (
-                    <Alert variant="warning" className="query-status-error">
+                    <Alert variant="warning">
                         <strong>Ai ai ai!</strong>
                         <span> Vi har problemer med noen av baksystemene nå. </span>
                         <ul>
@@ -67,6 +69,7 @@ const QueryStatusPanel = ({ valgSoknadId, valgSykmeldingId }: QueryStatusPanelPr
                         </ul>
 
                         <Button
+                            className={'mt-4'}
                             onClick={() => {
                                 errorQueries.forEach((a) => a.query.refetch())
                             }}
