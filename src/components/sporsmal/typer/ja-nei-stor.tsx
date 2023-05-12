@@ -18,6 +18,7 @@ import { PaskeferieInfo } from '../../hjelpetekster/paaskeferie/paskeferie-info'
 import useSoknad from '../../../hooks/useSoknad'
 import { RSSoknadstatus } from '../../../types/rs-types/rs-soknadstatus'
 import { RouteParams } from '../../../app'
+import { YrkesskadeInfo } from '../../hjelpetekster/yrkesskade-info'
 
 const JaNeiStor = ({ sporsmal }: SpmProps) => {
     const {
@@ -97,6 +98,8 @@ const JaNeiStor = ({ sporsmal }: SpmProps) => {
                         </BodyLong>
                     )}
                 />
+
+                <YrkesskadeInfo sporsmal={sporsmal} jaNeiSvar={watchJaNei} />
             </div>
 
             <FeilLokal sporsmal={sporsmal} />

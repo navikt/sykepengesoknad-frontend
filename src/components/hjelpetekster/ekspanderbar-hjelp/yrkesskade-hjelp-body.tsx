@@ -6,18 +6,20 @@ export const YrkesskadeHjelpBody = () => {
     return (
         <>
             <BodyLong>
-                Yrkesskade er en personskade som skjedde mens du var på jobb. En sykdom kan godkjennes som en
-                yrkessykdom hvis årsaken er skadelig påvirkning fra arbeidet. Utbrenthet er som hovedregel ikke en
-                yrkessykdom.{' '}
+                Yrkesskade er en personskade eller sykdom som oppstår under arbeid. En sykdom kan kategoriseres som
+                yrkessykdom hvis årsaken er skadelig påvirkning fra arbeidet. Utbrenthet anses imidlertid vanligvis ikke
+                som en yrkessykdom.
             </BodyLong>
             <BodyLong className={'mt-4'}>
-                Hvis du er sykmeldt for en godkjent yrkesskade eller yrkessykdom kan det gi deg fordeler som påvirker
-                utbetalingen av sykepenger, hvor lenge sykepenger blir utbetalt og noen ganger også størrelsen på
-                utbetalingen.
+                Dersom du er sykmeldt grunnet en godkjent yrkesskade eller yrkessykdom, kan det gi deg visse fordeler.
+                Disse fordelene kan påvirke sykepengeutbetalingen din ved å øke varigheten og/eller størrelsen på
+                utbetalingene.
             </BodyLong>
             <BodyLong className={'mt-4'}>
-                Svar ja, hvis du er sykmeldt for en godkjent yrkesskade, yrkessykdom eller du mener det er årsaken til
-                sykefraværet ditt.
+                Svar ja, hvis du er sykmeldt på grunn av en godkjent yrkesskade eller yrkessykdom.
+            </BodyLong>
+            <BodyLong className={'mt-4'}>
+                Svar ja, hvis det er påbegynt eller sendt inn en skademelding til NAV.
             </BodyLong>
             <LenkeMedIkon
                 className={'mt-4'}
