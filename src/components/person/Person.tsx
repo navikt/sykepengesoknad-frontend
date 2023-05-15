@@ -1,6 +1,7 @@
 import { Link, Popover } from '@navikt/ds-react'
 import React, { useRef, useState } from 'react'
 import { PersonCircleIcon } from '@navikt/aksel-icons'
+import { useNavigate } from 'react-router'
 
 import { isMockBackend, isOpplaering } from '../../utils/environment'
 import { personas } from '../../data/mock/testperson'
@@ -9,11 +10,15 @@ const Person = () => {
     const [open, setOpen] = useState<boolean>(false)
     const person = useRef<HTMLButtonElement>(null)
     const kanVelgePerson = isMockBackend() || isOpplaering()
+    const navigate = useNavigate()
 
     if (!kanVelgePerson) return null
 
     return (
         <div className="hidden cursor-pointer md:block">
+            <div className={'hidden'} id="listelink" onClick={() => navigate('/')}>
+                TestLink
+            </div>
             <button aria-label="Velg testperson" ref={person}>
                 <PersonCircleIcon
                     onClick={() => {
