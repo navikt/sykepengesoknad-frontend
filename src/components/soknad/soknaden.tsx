@@ -60,7 +60,7 @@ const Soknaden = () => {
             (valgtSoknad.status !== RSSoknadstatus.NY && valgtSoknad.status !== RSSoknadstatus.UTKAST_TIL_KORRIGERING)
         ) {
             const url = urlTilSoknad(valgtSoknad).replace('/sendt/', '/kvittering/')
-            navigate(url)
+            navigate(url, { replace: true })
             return
         }
 
