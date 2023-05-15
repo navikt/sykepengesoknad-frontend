@@ -21,7 +21,6 @@ import { RSSoknadstatus } from '../../../types/rs-types/rs-soknadstatus'
 import { RouteParams } from '../../../app'
 import { cn } from '../../../utils/tw-utils'
 import { YrkesskadeInfo } from '../../hjelpetekster/yrkesskade-info'
-import React from "react";
 
 const JaNeiStor = ({ sporsmal }: SpmProps) => {
     const {
@@ -52,7 +51,7 @@ const JaNeiStor = ({ sporsmal }: SpmProps) => {
 
     function radioClassName(value: 'JA' | 'NEI') {
         return cn(
-            'mb-2 block w-full rounded border-2 border-b-border-action px-4 py-1 text-text-action hover:bg-surface-action-subtle-hover md:mb-0 md:w-[48.7%]',
+            'focus-within:outline mb-2 block w-full rounded border-2 border-b-border-action px-4 py-1 text-text-action hover:bg-surface-action-subtle-hover md:mb-0 md:w-[48.7%]',
             {
                 'bg-surface-action-subtle': watchJaNei === value,
             },
@@ -70,7 +69,7 @@ const JaNeiStor = ({ sporsmal }: SpmProps) => {
                             {...field}
                             legend={sporsmal.sporsmalstekst}
                             data-cy={'ja-nei-stor'}
-                            className="w-full [&>div]:flex [&>div]:flex-wrap [&>div]:justify-between"
+                            className="w-full"
                             key={sporsmal.id}
                             style={
                                 {
@@ -83,12 +82,22 @@ const JaNeiStor = ({ sporsmal }: SpmProps) => {
                             <GuidepanelUnderSporsmalstekst sporsmal={sporsmal} />
 
                             <EkspanderbarHjelp sporsmal={sporsmal} />
-                            <Radio id={`${field.name}_0`} value={'JA'} className={radioClassName('JA')}>
-                                Ja
-                            </Radio>
-                            <Radio id={`${field.name}_1`} value={'NEI'} className={radioClassName('NEI')}>
-                                Nei
-                            </Radio>
+
+                            <div
+                                style={
+                                    {
+                                        '--a-shadow-focus': '0 0 0 0',
+                                    } as React.CSSProperties
+                                }
+                                className="flex w-full flex-wrap justify-between"
+                            >
+                                <Radio id={`${field.name}_0`} value={'JA'} className={radioClassName('JA')}>
+                                    Ja
+                                </Radio>
+                                <Radio id={`${field.name}_1`} value={'NEI'} className={radioClassName('NEI')}>
+                                    Nei
+                                </Radio>
+                            </div>
                         </RadioGroup>
                     )}
                 />
