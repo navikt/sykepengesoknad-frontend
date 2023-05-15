@@ -54,7 +54,7 @@ const JaNeiStor = ({ sporsmal }: SpmProps) => {
         return cn(
             'mb-2 block w-full rounded border-2 border-b-border-action px-4 py-1 text-text-action hover:bg-surface-action-subtle-hover md:mb-0 md:w-[48.7%]',
             {
-                'border-b-border-action-selected bg-surface-action-subtle': watchJaNei === value,
+                'bg-surface-action-subtle': watchJaNei === value,
             },
         )
     }
@@ -76,6 +76,7 @@ const JaNeiStor = ({ sporsmal }: SpmProps) => {
                                 {
                                     '--ac-radio-checkbox-border': 'var(--a-border-action)',
                                     '--ac-radio-checkbox-action': 'var(--a-border-action)',
+                                    '--ac-radio-checkbox-action-hover-bg': 'white',
                                 } as React.CSSProperties
                             }
                         >
