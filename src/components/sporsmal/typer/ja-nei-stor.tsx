@@ -78,6 +78,7 @@ const JaNeiStor = ({ sporsmal }: SpmProps) => {
                         <RadioGroup
                             {...field}
                             legend={sporsmal.sporsmalstekst}
+                            data-cy={'ja-nei-stor'}
                             className="w-full [&>div]:flex [&>div]:flex-wrap [&>div]:justify-between"
                             key={sporsmal.id}
                             style={

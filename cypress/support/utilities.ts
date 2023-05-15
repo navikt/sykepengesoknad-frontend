@@ -17,11 +17,11 @@ export function svarFritekst(tag: string, verdi: string) {
 }
 
 export function svarJaHovedsporsmal() {
-    cy.get('.radioGruppe-jaNei input[value=JA]').click({ force: true })
+    cy.get('[data-cy="ja-nei-stor"] input[value=JA]').click({ force: true })
 }
 
 export function svarNeiHovedsporsmal() {
-    cy.get('.radioGruppe-jaNei input[value=NEI]').click({ force: true })
+    cy.get('[data-cy="ja-nei-stor"] input[value=NEI]').click({ force: true })
 }
 
 export function velgLand(land: string) {

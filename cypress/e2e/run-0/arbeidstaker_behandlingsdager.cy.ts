@@ -57,7 +57,7 @@ describe('Tester behandlingsdagersøknad', () => {
         cy.url().should('include', `${soknad.id}/3`)
 
         // Test spørsmål
-        cy.get('.radioGruppe-jaNei input[value=JA]').click({ force: true })
+        cy.get('[data-cy="ja-nei-stor"] input[value=JA]').click({ force: true })
 
         // Svarer JA
         // Underspørsmål nivå 1 - checkbox
