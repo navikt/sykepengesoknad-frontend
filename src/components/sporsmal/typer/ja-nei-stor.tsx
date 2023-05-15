@@ -59,7 +59,7 @@ const JaNeiStor = ({ sporsmal }: SpmProps) => {
                 className={cn(
                     'mb-2 block w-full rounded border-2 border-b-border-action px-4 py-1 text-text-action hover:bg-surface-action-subtle-hover md:mb-0 md:w-[48.7%]',
                     {
-                        'border-b-border-action-selected bg-blue-50': watchJaNei === value,
+                        'border-b-border-action-selected bg-surface-action-subtle': watchJaNei === value,
                     },
                 )}
             >
