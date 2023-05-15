@@ -50,21 +50,12 @@ const JaNeiStor = ({ sporsmal }: SpmProps) => {
         return false
     }
 
-    function RadioStylet({ id, value }: { id: string; value: 'JA' | 'NEI' }) {
-        const valueTilVisning = value === 'JA' ? 'Ja' : 'Nei'
-        return (
-            <Radio
-                id={id}
-                value={value}
-                className={cn(
-                    'mb-2 block w-full rounded border-2 border-b-border-action px-4 py-1 text-text-action hover:bg-surface-action-subtle-hover md:mb-0 md:w-[48.7%]',
-                    {
-                        'border-b-border-action-selected bg-surface-action-subtle': watchJaNei === value,
-                    },
-                )}
-            >
-                {valueTilVisning}
-            </Radio>
+    function radioClassName(value: 'JA' | 'NEI') {
+        return cn(
+            'mb-2 block w-full rounded border-2 border-b-border-action px-4 py-1 text-text-action hover:bg-surface-action-subtle-hover md:mb-0 md:w-[48.7%]',
+            {
+                'border-b-border-action-selected bg-surface-action-subtle': watchJaNei === value,
+            },
         )
     }
 
@@ -91,9 +82,12 @@ const JaNeiStor = ({ sporsmal }: SpmProps) => {
                             <GuidepanelUnderSporsmalstekst sporsmal={sporsmal} />
 
                             <EkspanderbarHjelp sporsmal={sporsmal} />
-
-                            <RadioStylet value={'JA'} id={`${field.name}_0`}></RadioStylet>
-                            <RadioStylet value={'NEI'} id={`${field.name}_1`}></RadioStylet>
+                            <Radio id={`${field.name}_0`} value={'JA'} className={radioClassName('JA')}>
+                                Ja
+                            </Radio>
+                            <Radio id={`${field.name}_1`} value={'NEI'} className={radioClassName('NEI')}>
+                                Nei
+                            </Radio>
                         </RadioGroup>
                     )}
                 />
