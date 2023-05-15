@@ -1,6 +1,5 @@
 /* eslint-disable postcss-modules/no-unused-class */
 import '../style/global.css'
-import '../components/person/person.css'
 import '../components/filopplaster/drag-and-drop/drag-and-drop.css'
 import '../components/frist-sykepenger/frist-sykepenger.css'
 import '../components/kvittering/kvittering.css'
@@ -11,10 +10,7 @@ import '../components/sporsmal/sporsmal-form/sporsmal-form.css'
 import '../components/sporsmal/typer/ja-nei-stor.css'
 import '../components/sporsmal/typer/beh.dager.css'
 import '../components/sporsmal/typer/periode-komp.css'
-import '../components/sporsmal/typer/dato-komp.css'
-import '../components/sporsmal/typer/tall-komp.css'
 import '../components/sporsmal/undersporsmal/undersporsmal.css'
-import '../components/queryStatusPanel/QueryStatusPanel.css'
 
 import { configureLogger } from '@navikt/next-logger'
 import dayjs from 'dayjs'

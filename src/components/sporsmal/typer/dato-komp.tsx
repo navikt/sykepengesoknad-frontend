@@ -58,7 +58,7 @@ function DatoInput(props: SpmProps) {
     })
 
     return (
-        <div className="dato-komp" data-cy="dato-komp">
+        <div className="mt-8" data-cy="dato-komp">
             <div className="axe-exclude">
                 <UNSAFE_DatePicker
                     {...datepickerProps}

@@ -1,5 +1,6 @@
-import { BodyShort, Link, Popover } from '@navikt/ds-react'
+import { Link, Popover } from '@navikt/ds-react'
 import React, { useRef, useState } from 'react'
+import { PersonCircleIcon } from '@navikt/aksel-icons'
 import { useNavigate } from 'react-router'
 
 import { isMockBackend, isOpplaering } from '../../utils/environment'
@@ -14,19 +15,18 @@ const Person = () => {
     if (!kanVelgePerson) return null
 
     return (
-        <div className="person">
-            <div style={{ display: 'none' }} id="listelink" onClick={() => navigate('/')}>
+        <div className="hidden cursor-pointer md:block">
+            <div className={'hidden'} id="listelink" onClick={() => navigate('/')}>
                 TestLink
             </div>
-            <button
-                aria-label="Velg person"
-                className="lenkeknapp"
-                ref={person}
-                onClick={() => {
-                    setOpen(true)
-                }}
-            >
-                <img src="/syk/sykepengesoknad/static/person.svg" className="person__ikon" alt="" />
+            <button aria-label="Velg testperson" ref={person}>
+                <PersonCircleIcon
+                    onClick={() => {
+                        setOpen(!open)
+                    }}
+                    aria-label="Velg testperson"
+                    className="h-12 w-12"
+                />
             </button>
             <Popover
                 open={open}
@@ -36,13 +36,11 @@ const Person = () => {
             >
                 <Popover.Content>
                     <ul>
-                        {Object.keys(personas)
-                            .sort()
-                            .map((p, idx) => (
-                                <BodyShort size="medium" as="li" key={idx}>
-                                    <Link href={`/syk/sykepengesoknad/?testperson=${p}`}>{p}</Link>
-                                </BodyShort>
-                            ))}
+                        {Object.keys(personas).map((p, idx) => (
+                            <li key={idx}>
+                                <Link href={`/syk/sykepengesoknad/?testperson=${p}`}>{p}</Link>
+                            </li>
+                        ))}
                     </ul>
                 </Popover.Content>
             </Popover>
