@@ -1,6 +1,7 @@
 import { BodyLong, RadioGroup, Radio, Alert } from '@navikt/ds-react'
 import { useFormContext, Controller } from 'react-hook-form'
 import { useParams } from 'react-router-dom'
+import React from 'react'
 
 import { TagTyper } from '../../../types/enums'
 import { getLedetekst, tekst } from '../../../utils/tekster'
@@ -49,19 +50,20 @@ const JaNeiStor = ({ sporsmal }: SpmProps) => {
         return false
     }
 
-    function RadioStylet({ id, value }: { id: string; value: string }) {
+    function RadioStylet({ id, value }: { id: string; value: 'JA' | 'NEI' }) {
+        const valueTilVisning = value === 'JA' ? 'Ja' : 'Nei'
         return (
             <Radio
                 id={id}
                 value={value}
                 className={cn(
-                    'mb-2 block w-full rounded border border-gray-600 px-4 py-1 hover:bg-blue-100 md:mb-0 md:w-[48.7%]',
+                    'mb-2 block w-full rounded border-2 border-b-border-action px-4 py-1 text-text-action hover:bg-surface-action-subtle-hover md:mb-0 md:w-[48.7%]',
                     {
-                        'border-blue-500 bg-blue-50': watchJaNei === value,
+                        'border-b-border-action-selected bg-blue-50': watchJaNei === value,
                     },
                 )}
             >
-                Ja
+                {valueTilVisning}
             </Radio>
         )
     }
@@ -80,11 +82,8 @@ const JaNeiStor = ({ sporsmal }: SpmProps) => {
                             key={sporsmal.id}
                             style={
                                 {
-                                    '--ac-radio-checkbox-bg': 'var(--a-red-400)',
-                                    '--ac-radio-checkbox-border': 'var(--a-orange-200)',
-                                    '--ac-radio-checkbox-action': 'var(--a-red-200)',
-                                    '--ac-radio-checkbox-action-bg': 'var(--a-red-900)',
-                                    '--ac-radio-checkbox-action-hover-bg': 'var(--a-green-200)',
+                                    '--ac-radio-checkbox-border': 'var(--a-border-action)',
+                                    '--ac-radio-checkbox-action': 'var(--a-border-action)',
                                 } as React.CSSProperties
                             }
                         >
