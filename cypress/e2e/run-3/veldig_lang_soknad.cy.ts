@@ -78,7 +78,10 @@ describe('Tester støtte for gamle spørsmål', () => {
     })
 
     it('YRKESSKADE', () => {
+        svarJaHovedsporsmal()
+        cy.get('[data-cy="yrkesskade-info"]').should('exist')
         svarNeiHovedsporsmal()
+        cy.get('[data-cy="yrkesskade-info"]').should('not.exist')
         gaVidere()
     })
     it('ARBEID_UNDERVEIS_100_PROSENT_0', () => {

@@ -15,7 +15,21 @@ export const yrkesskadeSporsmalet: RSSporsmal = {
     pavirkerAndreSporsmal: false,
     kriterieForVisningAvUndersporsmal: 'JA',
     svar: [],
-    undersporsmal: [],
+    undersporsmal: [
+        {
+            id: 'fawef2352342d323r',
+            tag: 'YRKESSKADE_SAMMENHENG',
+            sporsmalstekst: `Er det en sammenheng mellom dette sykefraværet og tidligere yrkesskade?`,
+            undertekst: null,
+            svartype: 'JA_NEI',
+            min: null,
+            max: null,
+            pavirkerAndreSporsmal: false,
+            kriterieForVisningAvUndersporsmal: null,
+            svar: [],
+            undersporsmal: [],
+        },
+    ],
 }
 
 const yrkesskadeSoknad = jsonDeepCopy(brukertestSoknad)
