@@ -51,7 +51,7 @@ const JaNeiStor = ({ sporsmal }: SpmProps) => {
 
     function radioClassName(value: 'JA' | 'NEI') {
         return cn(
-            'focus-within:outline mb-2 block w-full rounded border-2 border-b-border-action px-4 py-1 text-text-action hover:bg-surface-action-subtle-hover md:mb-0 md:w-[48.7%]',
+            'focus-within:shadow-focus mb-2 block w-full rounded border-2 border-b-border-action px-4 py-1 text-text-action hover:bg-surface-action-subtle-hover md:mb-0 md:w-[48.7%]',
             {
                 'bg-surface-action-subtle': watchJaNei === value,
             },
