@@ -7,9 +7,12 @@ import { tekst } from '../../../utils/tekster'
 import Vis from '../../vis'
 import { SpmProps } from '../sporsmal-form/sporsmal-form'
 import { hentFeilmelding } from '../sporsmal-utils'
+import { useCheckbockNavigation } from '../../../utils/keyboard-navigation'
 
 const CheckboxInput = ({ sporsmal }: SpmProps) => {
     const spm = sporsmal.tag === TagTyper.BEKREFT_OPPLYSNINGER_UTLAND_INFO ? sporsmal.undersporsmal[0] : sporsmal
+
+    useCheckbockNavigation(sporsmal)
 
     const feilmelding = hentFeilmelding(spm)
     return (

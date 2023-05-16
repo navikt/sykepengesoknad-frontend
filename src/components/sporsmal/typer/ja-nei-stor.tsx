@@ -1,5 +1,5 @@
-import { BodyLong, RadioGroup, Radio, Alert } from '@navikt/ds-react'
-import { useFormContext, Controller } from 'react-hook-form'
+import { Alert, BodyLong, Radio, RadioGroup } from '@navikt/ds-react'
+import { Controller, useFormContext } from 'react-hook-form'
 import { useParams } from 'react-router-dom'
 import React from 'react'
 
@@ -21,6 +21,7 @@ import { RSSoknadstatus } from '../../../types/rs-types/rs-soknadstatus'
 import { RouteParams } from '../../../app'
 import { cn } from '../../../utils/tw-utils'
 import { YrkesskadeInfo } from '../../hjelpetekster/yrkesskade-info'
+import { useJaNeiKeyboardNavigation } from '../../../utils/keyboard-navigation'
 
 const JaNeiStor = ({ sporsmal }: SpmProps) => {
     const {
@@ -36,6 +37,8 @@ const JaNeiStor = ({ sporsmal }: SpmProps) => {
     if (watchJaNei === undefined) {
         watchJaNei = getValues(sporsmal.id)
     }
+
+    useJaNeiKeyboardNavigation(sporsmal)
 
     const valider = (value: any) => {
         if (value === 'JA' || value === 'NEI') {
