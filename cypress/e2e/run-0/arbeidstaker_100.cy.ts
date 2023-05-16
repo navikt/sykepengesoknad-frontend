@@ -56,7 +56,7 @@ describe('Tester arbeidstakersøknad', () => {
         cy.url().should('include', `${soknad.id}/2`)
 
         // Test spørsmål
-        cy.get('.radioGruppe-jaNei input[value=JA]').click({ force: true })
+        cy.get('[data-cy="ja-nei-stor"] input[value=JA]').click({ force: true })
         cy.contains('Når begynte du å jobbe igjen?')
         cy.get('.navds-date__field-button').click()
         cy.get('.rdp-day').contains('20').click()
@@ -74,7 +74,7 @@ describe('Tester arbeidstakersøknad', () => {
         cy.url().should('include', `${soknad.id}/3`)
 
         // Test spørsmål
-        cy.get('.radioGruppe-jaNei input[value=JA]').click({ force: true })
+        cy.get('[data-cy="ja-nei-stor"] input[value=JA]').click({ force: true })
         cy.contains('Når tok du ut feriedager?')
 
         setPeriodeFraTil(16, 23)
@@ -91,7 +91,7 @@ describe('Tester arbeidstakersøknad', () => {
         cy.contains('Permisjon er dager du var borte fra jobb av andre grunner enn sykdom').should('exist')
 
         // Test spørsmål
-        cy.get('.radioGruppe-jaNei input[value=JA]').click({ force: true })
+        cy.get('[data-cy="ja-nei-stor"] input[value=JA]').click({ force: true })
         cy.contains('Når tok du permisjon?')
 
         setPeriodeFraTil(14, 22)
@@ -103,7 +103,7 @@ describe('Tester arbeidstakersøknad', () => {
         cy.url().should('include', `${soknad.id}/5`)
 
         // Test spørsmål
-        cy.get('.radioGruppe-jaNei input[value=JA]').click({ force: true })
+        cy.get('[data-cy="ja-nei-stor"] input[value=JA]').click({ force: true })
         cy.contains('Når var du utenfor EØS?')
 
         setPeriodeFraTil(14, 22)
@@ -118,7 +118,7 @@ describe('Tester arbeidstakersøknad', () => {
         cy.contains(
             'I perioden 1. - 24. april 2020 var du 100 % sykmeldt fra POSTEN NORGE AS, BÆRUM. Jobbet du noe hos POSTEN NORGE AS, BÆRUM i denne perioden?',
         )
-        cy.get('.radioGruppe-jaNei input[value=JA]').click({ force: true })
+        cy.get('[data-cy="ja-nei-stor"] input[value=JA]').click({ force: true })
 
         // Underspørsmål 1
         cy.contains('Oppgi arbeidsmengde i timer eller prosent')
@@ -148,7 +148,7 @@ describe('Tester arbeidstakersøknad', () => {
 
         cy.contains('Har du andre inntektskilder enn Posten Norge AS, Bærum?')
 
-        cy.get('.radioGruppe-jaNei input[value=JA]').click({ force: true })
+        cy.get('[data-cy="ja-nei-stor"] input[value=JA]').click({ force: true })
 
         cy.contains('Velg inntektskildene som passer for deg. Finner du ikke noe som passer for deg, svarer du nei')
         cy.get('.undersporsmal .navds-checkbox label[for=d9ac4359-5519-34f1-b59d-b5ab24e55821]')

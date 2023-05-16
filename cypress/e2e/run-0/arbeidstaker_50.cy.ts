@@ -43,7 +43,7 @@ describe('Tester arbeidstakersøknad - gradert 50%', () => {
         cy.url().should('include', `${soknad.id}/2`)
 
         // Test spørsmål
-        cy.get('.radioGruppe-jaNei input[value=JA]').click({ force: true })
+        cy.get('[data-cy="ja-nei-stor"] input[value=JA]').click({ force: true })
 
         cy.contains(
             'Hvilke dager var du syk og borte fra jobb, før du ble sykmeldt? Du trenger bare oppgi dager før 1. april 2020.',
@@ -56,7 +56,7 @@ describe('Tester arbeidstakersøknad - gradert 50%', () => {
         cy.url().should('include', `${soknad.id}/3`)
 
         // Test spørsmål
-        cy.get('.radioGruppe-jaNei input[value=JA]').click({ force: true })
+        cy.get('[data-cy="ja-nei-stor"] input[value=JA]').click({ force: true })
         cy.contains('Når begynte du å jobbe igjen?')
         cy.get('.navds-date__field-button').click()
         cy.get('.rdp-day').contains('20').click()
@@ -68,7 +68,7 @@ describe('Tester arbeidstakersøknad - gradert 50%', () => {
         cy.url().should('include', `${soknad.id}/4`)
 
         // Test spørsmål
-        cy.get('.radioGruppe-jaNei input[value=JA]').click({ force: true })
+        cy.get('[data-cy="ja-nei-stor"] input[value=JA]').click({ force: true })
         cy.contains('Når tok du ut feriedager?')
 
         setPeriodeFraTil(16, 23)
@@ -80,7 +80,7 @@ describe('Tester arbeidstakersøknad - gradert 50%', () => {
         cy.url().should('include', `${soknad.id}/5`)
 
         // Test spørsmål
-        cy.get('.radioGruppe-jaNei input[value=JA]').click({ force: true })
+        cy.get('[data-cy="ja-nei-stor"] input[value=JA]').click({ force: true })
         cy.contains('Når tok du permisjon?')
 
         setPeriodeFraTil(14, 22)
@@ -92,7 +92,7 @@ describe('Tester arbeidstakersøknad - gradert 50%', () => {
         cy.url().should('include', `${soknad.id}/6`)
 
         // Test spørsmål
-        cy.get('.radioGruppe-jaNei input[value=JA]').click({ force: true })
+        cy.get('[data-cy="ja-nei-stor"] input[value=JA]').click({ force: true })
         cy.contains('Når var du utenfor EØS?')
 
         setPeriodeFraTil(14, 22)
@@ -103,7 +103,7 @@ describe('Tester arbeidstakersøknad - gradert 50%', () => {
         cy.url().should('include', `${soknad.id}/7`)
 
         // Test spørsmål
-        cy.get('.radioGruppe-jaNei input[value=JA]').click({ force: true })
+        cy.get('[data-cy="ja-nei-stor"] input[value=JA]').click({ force: true })
 
         // Underspørsmål 1
         cy.contains(
@@ -145,7 +145,7 @@ describe('Tester arbeidstakersøknad - gradert 50%', () => {
         cy.url().should('include', `${soknad.id}/8`)
 
         // Test spørsmål
-        cy.get('.radioGruppe-jaNei input[value=JA]').click({ force: true })
+        cy.get('[data-cy="ja-nei-stor"] input[value=JA]').click({ force: true })
         cy.contains('Har du arbeidet i utlandet i løpet av de siste 12 månedene?')
 
         cy.contains('Gå videre').click()
@@ -156,7 +156,7 @@ describe('Tester arbeidstakersøknad - gradert 50%', () => {
 
         cy.contains('Har du andre inntektskilder enn Posten Norge AS, Bærum?')
 
-        cy.get('.radioGruppe-jaNei input[value=JA]').click({ force: true })
+        cy.get('[data-cy="ja-nei-stor"] input[value=JA]').click({ force: true })
 
         cy.contains('Velg inntektskildene som passer for deg. Finner du ikke noe som passer for deg, svarer du nei')
         cy.get('.undersporsmal .navds-checkbox label[for=d9ac4359-5519-34f1-b59d-b5ab24e55821]').should(

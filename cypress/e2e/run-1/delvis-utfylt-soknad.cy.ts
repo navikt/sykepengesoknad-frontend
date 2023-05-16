@@ -14,13 +14,13 @@ describe('Tester delvis utfylt søknad', () => {
     it('Går til første ubesvarte spørsmål', () => {
         cy.get(`a[href*=${delvisUtfyltSoknad.id}]`).click()
         cy.url().should('include', `${delvisUtfyltSoknad.id}/3`)
-        cy.get('.radioGruppe-jaNei').should('not.be.checked')
+        cy.get('[data-cy="ja-nei-stor"]').should('not.be.checked')
     })
 
     it('Forrige spørsmål er besvart', () => {
         cy.contains('Tilbake').click()
         cy.url().should('include', `${delvisUtfyltSoknad.id}/2`)
         cy.contains('Arbeid utenfor Norge')
-        cy.get('.radioGruppe-jaNei input[value=NEI]').should('be.checked')
+        cy.get('[data-cy="ja-nei-stor"] input[value=NEI]').should('be.checked')
     })
 })

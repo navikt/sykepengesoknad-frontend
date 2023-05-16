@@ -18,35 +18,35 @@ describe('Tester ettersending og korrigering', () => {
         cy.contains('Gå videre').click()
 
         cy.url().should('include', `${soknad.id}/2`)
-        cy.get('.radioGruppe-jaNei input[value=NEI]').click({ force: true })
+        cy.get('[data-cy="ja-nei-stor"] input[value=NEI]').click({ force: true })
         cy.contains('Gå videre').click()
 
         cy.url().should('include', `${soknad.id}/3`)
-        cy.get('.radioGruppe-jaNei input[value=NEI]').click({ force: true })
+        cy.get('[data-cy="ja-nei-stor"] input[value=NEI]').click({ force: true })
         cy.contains('Gå videre').click()
 
         cy.url().should('include', `${soknad.id}/4`)
-        cy.get('.radioGruppe-jaNei input[value=NEI]').click({ force: true })
+        cy.get('[data-cy="ja-nei-stor"] input[value=NEI]').click({ force: true })
         cy.contains('Gå videre').click()
 
         cy.url().should('include', `${soknad.id}/5`)
-        cy.get('.radioGruppe-jaNei input[value=NEI]').click({ force: true })
+        cy.get('[data-cy="ja-nei-stor"] input[value=NEI]').click({ force: true })
         cy.contains('Gå videre').click()
 
         cy.url().should('include', `${soknad.id}/6`)
-        cy.get('.radioGruppe-jaNei input[value=NEI]').click({ force: true })
+        cy.get('[data-cy="ja-nei-stor"] input[value=NEI]').click({ force: true })
         cy.contains('Gå videre').click()
 
         cy.url().should('include', `${soknad.id}/7`)
-        cy.get('.radioGruppe-jaNei input[value=NEI]').click({ force: true })
+        cy.get('[data-cy="ja-nei-stor"] input[value=NEI]').click({ force: true })
         cy.contains('Gå videre').click()
 
         cy.url().should('include', `${soknad.id}/8`)
-        cy.get('.radioGruppe-jaNei input[value=NEI]').click({ force: true })
+        cy.get('[data-cy="ja-nei-stor"] input[value=NEI]').click({ force: true })
         cy.contains('Gå videre').click()
 
         cy.url().should('include', `${soknad.id}/9`)
-        cy.get('.radioGruppe-jaNei input[value=NEI]').click({ force: true })
+        cy.get('[data-cy="ja-nei-stor"] input[value=NEI]').click({ force: true })
         cy.contains('Gå videre').click()
 
         cy.url().should('include', `${soknad.id}/10`)
@@ -110,7 +110,7 @@ describe('Tester ettersending og korrigering', () => {
         cy.contains('Gå videre').click()
         cy.contains('Gå videre').click()
         cy.contains('Gå videre').click()
-        cy.get('.radioGruppe-jaNei input[value=JA]').click({ force: true })
+        cy.get('[data-cy="ja-nei-stor"] input[value=JA]').click({ force: true })
         cy.contains('Gå videre').click()
         cy.contains('Gå videre').click()
         cy.get('.navds-checkbox__label').click({ force: true })

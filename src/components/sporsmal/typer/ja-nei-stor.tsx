@@ -1,6 +1,7 @@
 import { BodyLong, RadioGroup, Radio, Alert } from '@navikt/ds-react'
 import { useFormContext, Controller } from 'react-hook-form'
 import { useParams } from 'react-router-dom'
+import React from 'react'
 
 import { TagTyper } from '../../../types/enums'
 import { getLedetekst, tekst } from '../../../utils/tekster'
@@ -18,6 +19,7 @@ import { PaskeferieInfo } from '../../hjelpetekster/paaskeferie/paskeferie-info'
 import useSoknad from '../../../hooks/useSoknad'
 import { RSSoknadstatus } from '../../../types/rs-types/rs-soknadstatus'
 import { RouteParams } from '../../../app'
+import { cn } from '../../../utils/tw-utils'
 import { YrkesskadeInfo } from '../../hjelpetekster/yrkesskade-info'
 
 const JaNeiStor = ({ sporsmal }: SpmProps) => {
@@ -47,6 +49,15 @@ const JaNeiStor = ({ sporsmal }: SpmProps) => {
         return false
     }
 
+    function radioClassName(value: 'JA' | 'NEI') {
+        return cn(
+            'focus-within:shadow-focus mb-2 block w-full rounded border-2 border-b-border-action px-4 py-1 text-text-action hover:bg-surface-action-subtle-hover md:mb-0 md:w-[48.7%]',
+            {
+                'bg-surface-action-subtle': watchJaNei === value,
+            },
+        )
+    }
+
     return (
         <>
             <div className={'inputPanelGruppe' + (errors[sporsmal.id] ? ' skjemagruppe--feil' : '')}>
@@ -57,27 +68,36 @@ const JaNeiStor = ({ sporsmal }: SpmProps) => {
                         <RadioGroup
                             {...field}
                             legend={sporsmal.sporsmalstekst}
-                            className="radioGruppe-jaNei"
+                            data-cy={'ja-nei-stor'}
+                            className="w-full"
                             key={sporsmal.id}
+                            style={
+                                {
+                                    '--ac-radio-checkbox-border': 'var(--a-border-action)',
+                                    '--ac-radio-checkbox-action': 'var(--a-border-action)',
+                                    '--ac-radio-checkbox-action-hover-bg': 'white',
+                                } as React.CSSProperties
+                            }
                         >
                             <GuidepanelUnderSporsmalstekst sporsmal={sporsmal} />
 
                             <EkspanderbarHjelp sporsmal={sporsmal} />
 
-                            <Radio
-                                id={field.name + '_' + '0'}
-                                value="JA"
-                                className={'radio-input' + (watchJaNei === 'JA' ? ' radio-checked' : '')}
+                            <div
+                                style={
+                                    {
+                                        '--a-shadow-focus': '0 0 0 0',
+                                    } as React.CSSProperties
+                                }
+                                className="flex w-full flex-wrap justify-between"
                             >
-                                Ja
-                            </Radio>
-                            <Radio
-                                id={field.name + '_' + '1'}
-                                value="NEI"
-                                className={'radio-input' + (watchJaNei === 'NEI' ? ' radio-checked' : '')}
-                            >
-                                Nei
-                            </Radio>
+                                <Radio id={`${field.name}_0`} value={'JA'} className={radioClassName('JA')}>
+                                    Ja
+                                </Radio>
+                                <Radio id={`${field.name}_1`} value={'NEI'} className={radioClassName('NEI')}>
+                                    Nei
+                                </Radio>
+                            </div>
                         </RadioGroup>
                     )}
                 />
