@@ -1,5 +1,6 @@
 import { BodyShort, Button, ButtonProps, Heading, Textarea } from '@navikt/ds-react'
 import { useEffect, useRef, useState } from 'react'
+import { FaceSmileIcon } from '@navikt/aksel-icons'
 
 import { cn } from '../../utils/tw-utils'
 import { Soknad } from '../../types/types'
@@ -111,13 +112,15 @@ export const Feedback = ({ soknad, steg }: { soknad: Soknad; steg: number }) => 
     }
 
     return (
-        <div className={'mb-16 mt-16'} data-cy={'feedback-wrapper'}>
-            <div>
+        <div className={'w:full mb-16 mt-16 md:w-3/4'} data-cy={'feedback-wrapper'}>
+            <div className={'rounded-t-xl bg-gray-200 p-6'}>
                 <Heading size="xsmall" level="2">
-                    Opplever du at du har nok informasjon til å svare på dette spørsmålet?
+                    Hjelp oss med å gjøre søknaden bedre (valgfritt)
                 </Heading>
-                <BodyShort size={'small'} className={'mb-4 mt-2'}>
-                    (Valgfritt å svare på)
+            </div>
+            <div className={'mt-1 rounded-b-xl bg-surface-subtle p-6'}>
+                <BodyShort className={'mb-4'}>
+                    Opplever du at du har nok informasjon til å svare på dette spørsmålet?
                 </BodyShort>
                 <div className={'flex w-full gap-2'}>
                     <FeedbackButton feedbacktype={Feedbacktype.JA}>Ja</FeedbackButton>
@@ -144,7 +147,7 @@ export const Feedback = ({ soknad, steg }: { soknad: Soknad; steg: number }) => 
                             }}
                             maxLength={600}
                             minRows={3}
-                            description="Ikke skriv inn navn eller andre personopplysninger. Svaret ditt blir brukt til å forbedre søknaden og vil ikke påvirke eller saksbehandle saken din."
+                            description="Ikke skriv inn navn eller andre personopplysninger. Svaret ditt blir brukt til å forbedre søknaden og vil ikke påvirke eller saksbehandle søknaden din."
                         />
                         <Button
                             data-cy="send-feedback"
@@ -156,16 +159,18 @@ export const Feedback = ({ soknad, steg }: { soknad: Soknad; steg: number }) => 
                                 await handleSend()
                             }}
                         >
-                            Send inn tilbakemelding
+                            Send tilbakemelding
                         </Button>
                     </form>
                 )}
             </div>
             <div aria-live="polite">
                 {thanksFeedback && (
-                    <Heading size="small" as="p" className="mt-8">
-                        Takk for tilbakemeldingen!
-                    </Heading>
+                    <div className={'mt-2 rounded-xl bg-green-50  p-6 md:px-4'}>
+                        <Heading size="small" as="p" className={'flex'}>
+                            Takk for tilbakemeldingen din! <FaceSmileIcon></FaceSmileIcon>
+                        </Heading>
+                    </div>
                 )}
             </div>
         </div>
