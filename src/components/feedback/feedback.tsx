@@ -111,7 +111,7 @@ export const Feedback = ({ soknad, steg }: { soknad: Soknad; steg: number }) => 
     }
 
     return (
-        <div className={'mb-16 mt-16'}>
+        <div className={'mb-16 mt-16'} data-cy={'feedback-wrapper'}>
             <div>
                 <Heading size="xsmall" level="2">
                     Opplever du at du har nok informasjon til å svare på dette spørsmålet?
