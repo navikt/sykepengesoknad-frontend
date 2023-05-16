@@ -96,7 +96,7 @@ describe('Teste førsteside i reisetilskuddsøknaden', () => {
 
         it('Minst en dag må velges', () => {
             cy.contains('Gå videre').click()
-            cy.get('.skjemaelement__feilmelding').contains('Du må oppgi minst en dag')
+            cy.get('[data-cy="feil-lokal"]').contains('Du må oppgi minst en dag')
         })
 
         it('Fyller ut', () => {

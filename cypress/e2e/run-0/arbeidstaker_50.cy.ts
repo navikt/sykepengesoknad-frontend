@@ -129,7 +129,7 @@ describe('Tester arbeidstakersøknad - gradert 50%', () => {
         cy.get('.navds-read-more__button').contains('Er prosenten lavere enn du forventet?')
 
         // Feilmelding
-        cy.get('.skjemaelement__feilmelding').contains('Timene utgjør mindre enn 50 %.')
+        cy.get('[data-cy="feil-lokal"]').contains('Timene utgjør mindre enn 50 %.')
         cy.contains(
             'Antall timer du skrev inn, betyr at du har jobbet 49 % av det du gjør når du er frisk. Du må enten svare nei på øverste spørsmålet eller endre antall timer totalt.',
         )

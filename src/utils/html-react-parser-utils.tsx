@@ -16,6 +16,13 @@ const htmlParserOptionsWithReplace: HTMLReactParserOptions = {
                     </Link>
                 )
             }
+            if (domNode.name === 'li') {
+                return (
+                    <li className={'mt-2'} {...domNode.attribs}>
+                        {domToReact(domNode.children, htmlParserOptionsWithReplace)}
+                    </li>
+                )
+            }
         }
     },
 }

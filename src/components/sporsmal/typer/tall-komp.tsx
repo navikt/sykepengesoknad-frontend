@@ -41,9 +41,9 @@ const TallKomp = ({ sporsmal }: SpmProps) => {
     const className = () => {
         if (!sporsmal.parentKriterie) return ''
         if (sporsmal.tag === TagTyper.KM_HJEM_JOBB || sporsmal.tag === TagTyper.OFFENTLIG_TRANSPORT_BELOP) {
-            return `kriterie--${sporsmal.parentKriterie.toLowerCase()} skjemaelement`
+            return `kriterie--${sporsmal.parentKriterie.toLowerCase()} skjemaelement mt-8`
         }
-        return 'skjemaelement'
+        return 'skjemaelement mt-8'
     }
 
     const inputSize = () => {
@@ -157,7 +157,11 @@ const TallKomp = ({ sporsmal }: SpmProps) => {
                             <Vis
                                 hvis={errors[sporsmal.id]?.type !== 'validate'}
                                 render={() => (
-                                    <BodyShort as="span" className="skjemaelement__feilmelding">
+                                    <BodyShort
+                                        as="span"
+                                        className="mt-2 block font-bold text-surface-danger"
+                                        data-cy="feil-lokal"
+                                    >
                                         {feilmelding.lokal}
                                     </BodyShort>
                                 )}
@@ -168,7 +172,11 @@ const TallKomp = ({ sporsmal }: SpmProps) => {
                                     sporsmal.tag === TagTyper.HVOR_MYE_TIMER_VERDI
                                 }
                                 render={() => (
-                                    <BodyShort as="span" className="skjemaelement__feilmelding">
+                                    <BodyShort
+                                        as="span"
+                                        className="mt-2 block font-bold text-surface-danger"
+                                        data-cy="feil-lokal"
+                                    >
                                         {getLedetekst(tekst('soknad.feilmelding.MINDRE_TIMER_ENN_FORVENTET.lokal'), {
                                             '%GRAD%': 100 - periode!.grad,
                                         })}

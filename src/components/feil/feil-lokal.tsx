@@ -21,7 +21,7 @@ const FeilLokal = ({ sporsmal }: FeilProps) => {
             <Vis
                 hvis={errors[sporsmal.id]}
                 render={() => (
-                    <BodyShort as="span" className="skjemaelement__feilmelding" data-cy="feil-lokal">
+                    <BodyShort as="span" className="mt-2 block font-bold text-surface-danger" data-cy="feil-lokal">
                         {feilmelding.lokal}
                     </BodyShort>
                 )}
