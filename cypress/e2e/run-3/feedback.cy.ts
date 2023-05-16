@@ -29,8 +29,8 @@ describe('Tester feedback', () => {
         cy.get('[data-cy="feedback-JA"]').should('have.css', 'background-color', 'rgb(38, 38, 38)')
         cy.get('[data-cy="feedback-textarea"]').type('Dette er en test')
 
-        cy.get('[data-cy="send-feedback"]').contains('Send inn tilbakemelding').click()
-        cy.contains('Takk for tilbakemeldingen!')
+        cy.get('[data-cy="send-feedback"]').contains('Send tilbakemelding').click()
+        cy.contains('Takk for tilbakemeldingen din!')
     })
 
     it('Har ikke feedback på siste sidene', function () {
