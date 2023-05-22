@@ -4,7 +4,9 @@ import React from 'react'
 export const KvitteringerHjelpBody = () => {
     return (
         <>
-            <BodyLong>Du må laste opp kvitteringer hvis du har hatt ekstra utgifter til:</BodyLong>
+            <BodyLong>
+                Du må laste opp kvitteringer, faktura eller annen dokumentasjon hvis du har hatt ekstra utgifter til:
+            </BodyLong>
             <ul>
                 <BodyShort as="li">taxi</BodyShort>
                 <BodyShort as="li">offentlig transport</BodyShort>
