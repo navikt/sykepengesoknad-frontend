@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { Accordion, Heading } from '@navikt/ds-react'
+import { ExpansionCard, Heading } from '@navikt/ds-react'
 
 import { TagTyper } from '../../types/enums'
 import { RSSvartype } from '../../types/rs-types/rs-svartype'
@@ -28,29 +28,32 @@ const Oppsummering = ({ ekspandert, sporsmal }: { ekspandert: boolean; sporsmal:
     const [erApen, setErApen] = useState<boolean>(ekspandert)
 
     return (
-        <Accordion className={'oppsummering my-4 border border-gray-400'} data-cy={'oppsummering-fra-søknaden'}>
-            <Accordion.Item open={erApen}>
-                <Accordion.Header onClick={() => setErApen(!erApen)} className={'md:pl-8'}>
-                    <Heading size="small" level="2">
-                        {tittel}
-                    </Heading>
-                </Accordion.Header>
+        <ExpansionCard
+            open={erApen}
+            className={'oppsummering my-8'}
+            data-cy={'oppsummering-fra-søknaden'}
+            aria-label={tittel}
+        >
+            <ExpansionCard.Header onClick={() => setErApen(!erApen)}>
+                <Heading size="small" level="2" className={'flex h-full items-center'}>
+                    {tittel}
+                </Heading>
+            </ExpansionCard.Header>
 
-                <Accordion.Content className={'md:pl-8'}>
-                    {sporsmal
-                        .filter((sporsmal) => {
-                            return skalVisesIOppsummering(sporsmal)
-                        })
-                        .map((sporsmal, index) => {
-                            return (
-                                <div className="oppsummering__seksjon" key={index}>
-                                    <SporsmalVarianter sporsmal={sporsmal} />
-                                </div>
-                            )
-                        })}
-                </Accordion.Content>
-            </Accordion.Item>
-        </Accordion>
+            <ExpansionCard.Content>
+                {sporsmal
+                    .filter((sporsmal) => {
+                        return skalVisesIOppsummering(sporsmal)
+                    })
+                    .map((sporsmal, index) => {
+                        return (
+                            <div className="oppsummering__seksjon" key={index}>
+                                <SporsmalVarianter sporsmal={sporsmal} />
+                            </div>
+                        )
+                    })}
+            </ExpansionCard.Content>
+        </ExpansionCard>
     )
 }
 
