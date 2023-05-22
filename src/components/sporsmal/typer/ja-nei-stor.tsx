@@ -52,18 +52,21 @@ const JaNeiStor = ({ sporsmal }: SpmProps) => {
         return false
     }
 
+    const error = errors[sporsmal.id] !== undefined
+
     function radioClassName(value: 'JA' | 'NEI') {
         return cn(
             'focus-within:shadow-focus mb-2 block w-full rounded border-2 border-b-border-action px-4 py-1 text-text-action hover:bg-surface-action-subtle-hover md:mb-0 md:w-[48.7%]',
             {
                 'bg-surface-action-subtle': watchJaNei === value,
+                'border-b-border-danger border-border-danger text-text-danger': error,
             },
         )
     }
 
     return (
         <>
-            <div className={'inputPanelGruppe' + (errors[sporsmal.id] ? ' skjemagruppe--feil' : '')}>
+            <div>
                 <Controller
                     name={sporsmal.id}
                     rules={{ validate: (value) => valider(value), required: feilmelding.global }}
@@ -76,7 +79,9 @@ const JaNeiStor = ({ sporsmal }: SpmProps) => {
                             key={sporsmal.id}
                             style={
                                 {
-                                    '--ac-radio-checkbox-border': 'var(--a-border-action)',
+                                    '--ac-radio-checkbox-border': error
+                                        ? 'var(--a-border-danger)'
+                                        : 'var(--a-border-action)',
                                     '--ac-radio-checkbox-action': 'var(--a-border-action)',
                                     '--ac-radio-checkbox-action-hover-bg': 'white',
                                 } as React.CSSProperties

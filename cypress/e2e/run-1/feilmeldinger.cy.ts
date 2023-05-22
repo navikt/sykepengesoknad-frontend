@@ -42,7 +42,7 @@ describe('Tester feilmeldinger', () => {
         focusTarget: string,
     ) {
         cy.get('.navds-form-field__error').should('exist')
-        cy.get('.skjemaelement__feilmelding').contains(lokalFeilmelding)
+        cy.get('[data-cy="feil-lokal"]').contains(lokalFeilmelding)
         cy.get('[data-cy="feil-oppsumering"]')
             .should('exist')
             .within(() => {
@@ -93,8 +93,7 @@ describe('Tester feilmeldinger', () => {
         gaTilSoknad(arbeidstakerGradert, '3')
         gaVidere()
 
-        cy.get('.skjemagruppe--feil').should('exist')
-        cy.get('.skjemaelement__feilmelding').contains('Du må velge et alternativ')
+        cy.get('[data-cy="feil-lokal"]').contains('Du må velge et alternativ')
         cy.get('[data-cy="feil-oppsumering"]')
             .should('exist')
             .within(() => {
@@ -265,7 +264,7 @@ describe('Tester feilmeldinger', () => {
         cy.get(
             `input[name=${arbeidstakerGradert.sporsmal[6].undersporsmal[1].undersporsmal[1].undersporsmal[0].id}]`,
         ).type('1')
-        cy.get('.skjemaelement__feilmelding').should('not.exist')
+        cy.get('[data-cy="feil-lokal"]').should('not.exist')
         gaVidere()
         feilmeldingHandteringForNyeKomponenter(
             'Timene utgjør mindre enn 50 %.',

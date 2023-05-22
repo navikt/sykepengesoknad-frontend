@@ -110,7 +110,7 @@ const PeriodeKomp = ({ sporsmal, index, slettPeriode }: AllProps) => {
                     }}
                     render={() => (
                         <div>
-                            <fieldset className="skjemagruppe axe-exclude ">
+                            <fieldset className="skjemagruppe axe-exclude p-0">
                                 <UNSAFE_DatePicker {...datepickerProps}>
                                     <div className={styles.displayasrow}>
                                         <UNSAFE_DatePicker.Input
@@ -159,7 +159,7 @@ const PeriodeKomp = ({ sporsmal, index, slettPeriode }: AllProps) => {
                 <Vis
                     hvis={errors[id]}
                     render={() => (
-                        <BodyShort as="span" className="skjemaelement__feilmelding" data-cy="feil-lokal">
+                        <BodyShort as="span" className="mt-2 block font-bold text-surface-danger" data-cy="feil-lokal">
                             {feilmelding.lokal}
                         </BodyShort>
                     )}

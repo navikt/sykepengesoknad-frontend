@@ -46,7 +46,7 @@ const Perioder = ({ sporsmal }: SpmProps) => {
                 {sporsmal.sporsmalstekst}
             </Label>
 
-            <ul className="periodeliste" ref={periodeliste}>
+            <ul className={'list-none'} ref={periodeliste}>
                 {lokal.map((idx) => {
                     return (
                         <PeriodeKomp

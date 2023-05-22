@@ -2,23 +2,6 @@
 @import '@navikt/ds-css';
 @import 'tailwindcss/components';
 @import 'tailwindcss/utilities';
-:root {
-    --screen-sm: '768px';
-}
-
-#root {
-    min-height: 65vh;
-}
-
-@media (min-width: var(--screen-sm)) {
-    #root {
-        min-height: 75vh;
-    }
-}
-
-html {
-    --desktop-limit-width: 672px;
-}
 
 @layer base {
     ul {
