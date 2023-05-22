@@ -112,7 +112,7 @@ export const Feedback = ({ soknad, steg }: { soknad: Soknad; steg: number }) => 
     }
 
     return (
-        <div className={'w:full mb-16 mt-16 md:w-3/4'} data-cy={'feedback-wrapper'}>
+        <div className={'w:full mt-16 md:w-3/4'} data-cy={'feedback-wrapper'}>
             <div className={'rounded-t-xl bg-gray-200 p-6'}>
                 <Heading size="xsmall" level="2">
                     Hjelp oss med å gjøre søknaden bedre (valgfritt)
