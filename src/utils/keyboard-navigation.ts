@@ -4,12 +4,31 @@ import { Sporsmal } from '../types/types'
 
 import { isProd } from './environment'
 
+function aktivtElementErInputEllerTextarea() {
+    const aktivtElement = document.activeElement
+    if (!aktivtElement) {
+        return false
+    }
+
+    if (aktivtElement.tagName.toLowerCase() === 'input' && aktivtElement.getAttribute('type') !== 'radio') {
+        return true
+    }
+    if (aktivtElement.tagName.toLowerCase() === 'textarea') {
+        return true
+    }
+    return false
+}
+
 export function useJaNeiKeyboardNavigation(sporsmal: Sporsmal) {
     useEffect(() => {
         if (isProd()) {
             return
         }
         const handleKeyDown = (event: KeyboardEvent) => {
+            if (aktivtElementErInputEllerTextarea()) {
+                return
+            }
+
             if (event.key === 'j') {
                 document.getElementById(`${sporsmal.id}_0`)?.click()
                 document.getElementById(`${sporsmal.id}_0`)?.focus()
@@ -31,6 +50,9 @@ export function useCheckbockNavigation(sporsmal: Sporsmal) {
             return
         }
         const handleKeyDown = (event: KeyboardEvent) => {
+            if (aktivtElementErInputEllerTextarea()) {
+                return
+            }
             if (event.key === 'c') {
                 document.getElementById(sporsmal.id)?.click()
                 document.getElementById(sporsmal.id)?.focus()
