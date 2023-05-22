@@ -191,7 +191,7 @@ const SporsmalTekster = {
     'soknad.infotekst.utlandsopphold_sokt_sykepenger.nei':
         'I utgangspunktet kan du bare få sykepenger mens du er i et land innenfor EØS. Du kan likevel <a href="%URL%" target="_blank">søke NAV om å få reise ut av EØS</a> og beholde sykepengene i en begrenset periode.',
 
-    'sykepengesoknad.periodevelger.legg-til-ekstra': '+ Legg til ekstra periode',
+    'sykepengesoknad.periodevelger.legg-til-ekstra': 'Legg til ekstra periode',
     'sykepengesoknad.periodevelger.slett': 'Slett periode',
     'sykepengesoknad.periodevelger.fom': 'Fra og med',
     'sykepengesoknad.periodevelger.tom': 'Til og med',
