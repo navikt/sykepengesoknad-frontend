@@ -6,8 +6,6 @@ import '../components/kvittering/kvittering.css'
 import '../components/om-sykepenger/om-sykepenger.css'
 import '../components/oppsummering/oppsummering.css'
 import '../components/sporsmal/landvelger/landvelger.css'
-import '../components/sporsmal/typer/beh.dager.css'
-import '../components/sporsmal/typer/periode-komp.css'
 import '../components/sporsmal/undersporsmal/undersporsmal.css'
 
 import { configureLogger } from '@navikt/next-logger'

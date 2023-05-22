@@ -1,4 +1,4 @@
-import { BodyShort, RangeValidationT, UNSAFE_DatePicker, UNSAFE_useRangeDatepicker } from '@navikt/ds-react'
+import { BodyShort, RangeValidationT, UNSAFE_DatePicker, UNSAFE_useRangeDatepicker, Button } from '@navikt/ds-react'
 import dayjs from 'dayjs'
 import React, { useEffect, useState } from 'react'
 import { Controller, useFormContext } from 'react-hook-form'
@@ -132,21 +132,19 @@ const PeriodeKomp = ({ sporsmal, index, slettPeriode }: AllProps) => {
                                                 periode.tom ? backendStrengTilFrontendFormat(periode.tom) : undefined
                                             }
                                         />
-                                        <div className={styles.toppadding}>
-                                            <Vis
-                                                hvis={index > 0}
-                                                render={() => (
-                                                    <button
-                                                        role="link"
-                                                        id={'btn_' + id}
-                                                        className="lenkeknapp navds-link linkatbottom"
-                                                        onClick={(e) => slettPeriode(e, index)}
-                                                    >
-                                                        {tekst('sykepengesoknad.periodevelger.slett')}
-                                                    </button>
-                                                )}
-                                            />
-                                        </div>
+                                        <Vis
+                                            hvis={index > 0}
+                                            render={() => (
+                                                <Button
+                                                    variant="tertiary"
+                                                    size="small"
+                                                    id={'btn_' + id}
+                                                    onClick={(e) => slettPeriode(e, index)}
+                                                >
+                                                    {tekst('sykepengesoknad.periodevelger.slett')}
+                                                </Button>
+                                            )}
+                                        />
                                     </div>
                                 </UNSAFE_DatePicker>
                             </fieldset>

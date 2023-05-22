@@ -1,7 +1,8 @@
-import { Label } from '@navikt/ds-react'
+import { Label, Button } from '@navikt/ds-react'
 import React, { useEffect, useRef, useState } from 'react'
 import { useFormContext } from 'react-hook-form'
 import useForceUpdate from 'use-force-update'
+import { PlusIcon } from '@navikt/aksel-icons'
 
 import { tekst } from '../../../utils/tekster'
 import { hentPerioder } from '../hent-svar'
@@ -59,9 +60,9 @@ const Perioder = ({ sporsmal }: SpmProps) => {
                 })}
             </ul>
 
-            <button role="link" type="button" className="lenkeknapp navds-link" onClick={leggTilPeriode}>
+            <Button icon={<PlusIcon />} size="small" variant="tertiary" className="mt-4" onClick={leggTilPeriode}>
                 {tekst('sykepengesoknad.periodevelger.legg-til-ekstra')}
-            </button>
+            </Button>
 
             <div aria-live="assertive" className="undersporsmal">
                 <UndersporsmalListe oversporsmal={sporsmal} />

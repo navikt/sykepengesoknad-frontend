@@ -206,7 +206,7 @@ describe('Tester feilmeldinger', () => {
     it('PERIODER legges til uten å besvares', () => {
         resetAllePeriodeDateFelter()
         setPeriodeDateFieldMedIndex(1, '01.04.2020')
-        cy.contains('+ Legg til ekstra periode').click()
+        cy.contains('Legg til ekstra periode').click()
         gaVidere()
         feilmeldingHandteringForNyDatepicker(
             'Du må oppgi en fra og med dato i formatet dd.mm.åååå',
