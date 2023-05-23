@@ -9,18 +9,19 @@ import { LenkeMedIkon } from '../lenke-med-ikon/LenkeMedIkon'
 const OmReisetilskudd = () => {
     const [open, setOpen] = useState<boolean>(false)
 
+    const tittel = tekst('tilskudd.start.om-reisetilskudd')
     return (
-        <ExpansionCard open={open} data-cy="om-reisetilskudd" aria-label={'sdfsdf'} className={'mb-4'}>
+        <ExpansionCard open={open} data-cy="om-reisetilskudd" aria-label={tittel} className={'mb-4'}>
             <ExpansionCard.Header
                 onClick={() => {
                     logEvent(open ? 'accordion lukket' : 'accordion åpnet', {
-                        component: tekst('tilskudd.start.om-reisetilskudd'),
+                        component: tittel,
                     })
                     setOpen(!open)
                 }}
             >
                 <Heading size="small" level="2" className={'flex h-full items-center'}>
-                    {tekst('tilskudd.start.om-reisetilskudd')}
+                    {tittel}
                 </Heading>
             </ExpansionCard.Header>
             <ExpansionCard.Content>

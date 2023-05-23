@@ -5,6 +5,7 @@ import { TagTyper } from '../../types/enums'
 import { RSSvartype } from '../../types/rs-types/rs-svartype'
 import { Sporsmal } from '../../types/types'
 import { tekst } from '../../utils/tekster'
+import { cn } from '../../utils/tw-utils'
 
 import Behandlingsdager from './utdrag/behandlingsdager'
 import CheckboxGruppe from './utdrag/checkbox-gruppe'
@@ -45,10 +46,18 @@ const Oppsummering = ({ ekspandert, sporsmal }: { ekspandert: boolean; sporsmal:
                     .filter((sporsmal) => {
                         return skalVisesIOppsummering(sporsmal)
                     })
-                    .map((sporsmal, index) => {
+                    .map((sporsmal, index, array) => {
+                        const isLastSection = index === array.length - 1
+
                         return (
-                            <div className="oppsummering__seksjon" key={index}>
-                                <SporsmalVarianter sporsmal={sporsmal} />
+                            <div key={index}>
+                                <div
+                                    className={cn('mb-2 pb-0', {
+                                        'mb-8 border-b border-gray-300 pb-8': !isLastSection,
+                                    })}
+                                >
+                                    <SporsmalVarianter sporsmal={sporsmal} />
+                                </div>
                             </div>
                         )
                     })}

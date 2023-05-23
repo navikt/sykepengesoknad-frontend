@@ -90,20 +90,17 @@ describe('Tester søknad om å beholde sykepenger utenfor EØS', () => {
     it('Oppsummering fra søknaden', function () {
         cy.url().should('include', `${soknad.id}/4`)
 
-        cy.contains('Oppsummering fra søknaden').click()
+        cy.contains('Oppsummering fra søknaden').click({ force: true })
 
-        cy.get('.oppsummering .oppsummering__seksjon')
-            .contains('Når skal du reise?')
-            .siblings()
-            .should('contain', '17. – 24. desember 2020')
+        cy.get('.oppsummering').contains('Når skal du reise?').siblings().should('contain', '17. – 24. desember 2020')
 
-        cy.get('.oppsummering .oppsummering__seksjon')
+        cy.get('.oppsummering')
             .contains('Hvilket land skal du reise til?')
             .siblings()
             .should('contain', 'Søre franske territorier')
             .and('contain', 'De okkuperte palestinske områdene')
 
-        cy.get('.oppsummering .oppsummering__seksjon')
+        cy.get('.oppsummering')
             .contains('Har du arbeidsgiver?')
             .siblings()
             .should('contain', 'Ja')

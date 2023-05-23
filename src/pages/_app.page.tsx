@@ -3,7 +3,6 @@ import '../style/global.css'
 import '../components/filopplaster/drag-and-drop/drag-and-drop.css'
 import '../components/frist-sykepenger/frist-sykepenger.css'
 import '../components/kvittering/kvittering.css'
-import '../components/oppsummering/oppsummering.css'
 import '../components/sporsmal/landvelger/landvelger.css'
 
 import { configureLogger } from '@navikt/next-logger'
