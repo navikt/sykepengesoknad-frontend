@@ -1,8 +1,9 @@
-import { BodyShort, ReadMore } from '@navikt/ds-react'
+import { BodyShort, Button, ReadMore } from '@navikt/ds-react'
 import { logger } from '@navikt/next-logger'
 import React, { useCallback, useEffect, useState } from 'react'
 import { useDropzone } from 'react-dropzone'
 import { useFormContext } from 'react-hook-form'
+import { ReceiptIcon } from '@navikt/aksel-icons'
 
 import fetchMedRequestId, { AuthenticationError } from '../../../utils/fetch'
 import {
@@ -103,9 +104,14 @@ const DragAndDrop = ({ valgtFil, setValgtFil, valgtKvittering }: DragAndDropProp
                     <>
                         <div data-cy="filopplasteren" {...getRootProps()}>
                             <input {...getInputProps()} accept={tillatteFiltyper} id="ddfil" type="file" />
-                            <input
-                                type="hidden"
-                                id="fil_input"
+                            <Button
+                                className="w-full p-6"
+                                variant="secondary"
+                                aria-hidden
+                                icon={<ReceiptIcon aria-hidden />}
+                                onClick={(e) => {
+                                    e.preventDefault()
+                                }}
                                 {...register('fil_input', {
                                     validate: {
                                         fil_valgt: () => {
@@ -138,20 +144,13 @@ const DragAndDrop = ({ valgtFil, setValgtFil, valgtKvittering }: DragAndDropProp
                                         },
                                     },
                                 })}
-                            />
-                            <img
-                                src="/syk/sykepengesoknad/static/binders.svg"
-                                className="opplastingsikon"
-                                alt="Opplastingsikon"
-                                aria-hidden={true}
-                            />
-                            <BodyShort as="span">
+                            >
                                 {isDragActive
                                     ? tekst('drag_and_drop.dragtekst.aktiv')
                                     : valgtFil
                                     ? tekst('drag_and_drop.dragtekst.endre')
                                     : tekst('drag_and_drop.dragtekst')}
-                            </BodyShort>
+                            </Button>
                         </div>
 
                         <div role="alert" aria-live="assertive">
