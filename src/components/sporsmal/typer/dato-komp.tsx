@@ -86,7 +86,7 @@ function DatoInput(props: SpmProps) {
 
             <FeilLokal sporsmal={sporsmal} />
 
-            <div aria-live="assertive" className="undersporsmal">
+            <div aria-live="assertive">
                 <UndersporsmalListe oversporsmal={sporsmal} />
             </div>
         </div>

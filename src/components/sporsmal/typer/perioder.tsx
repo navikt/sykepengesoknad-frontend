@@ -43,9 +43,7 @@ const Perioder = ({ sporsmal }: SpmProps) => {
             className={sporsmal.parentKriterie ? 'kriterie--' + sporsmal.parentKriterie.toLowerCase() : ''}
             data-cy="perioder"
         >
-            <Label as="h3" className="skjema__sporsmal">
-                {sporsmal.sporsmalstekst}
-            </Label>
+            <Label as="h3">{sporsmal.sporsmalstekst}</Label>
 
             <ul className={'list-none'} ref={periodeliste}>
                 {lokal.map((idx) => {
@@ -64,7 +62,7 @@ const Perioder = ({ sporsmal }: SpmProps) => {
                 {tekst('sykepengesoknad.periodevelger.legg-til-ekstra')}
             </Button>
 
-            <div aria-live="assertive" className="undersporsmal">
+            <div aria-live="assertive">
                 <UndersporsmalListe oversporsmal={sporsmal} />
             </div>
         </div>
