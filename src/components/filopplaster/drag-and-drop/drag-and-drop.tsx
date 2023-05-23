@@ -154,10 +154,19 @@ const DragAndDrop = ({ valgtFil, setValgtFil, valgtKvittering }: DragAndDropProp
                             </BodyShort>
                         </div>
 
-                        <div role="alert" aria-live="assertive" className="mt-2 text-red-600">
-                            <BodyShort as="span">
-                                <Vis hvis={errors.fil_input} render={() => <>{errors.fil_input?.message}</>} />
-                            </BodyShort>
+                        <div role="alert" aria-live="assertive">
+                            <Vis
+                                hvis={errors.fil_input}
+                                render={() => (
+                                    <BodyShort
+                                        as="span"
+                                        className="mt-2 flex gap-2 font-bold text-surface-danger before:content-['•']"
+                                        data-cy="feil-lokal"
+                                    >
+                                        <>{errors.fil_input?.message}</>
+                                    </BodyShort>
+                                )}
+                            />
                         </div>
                     </>
                 )}

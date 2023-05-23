@@ -149,6 +149,7 @@ const OpplastingForm = ({ valgtSoknad, valgtKvittering, setOpenModal, valgtFil, 
                         id="transportmiddel"
                         name="transportmiddel"
                         defaultValue={valgtKvittering?.typeUtgift}
+                        error={methods.formState.errors['transportmiddel']?.message?.toString()}
                     >
                         <option value="">Velg</option>
                         {Object.entries(UtgiftTyper).map((keyval, idx) => {
@@ -159,15 +160,6 @@ const OpplastingForm = ({ valgtSoknad, valgtKvittering, setOpenModal, valgtFil, 
                             )
                         })}
                     </Select>
-
-                    <div role="alert" aria-live="assertive" className=" mt-2 text-red-600">
-                        <BodyLong as="span">
-                            <Vis
-                                hvis={methods.formState.errors['transportmiddel']}
-                                render={() => <>{methods.formState.errors['transportmiddel']?.message}</>}
-                            />
-                        </BodyLong>
-                    </div>
                 </div>
 
                 <div>
@@ -196,22 +188,12 @@ const OpplastingForm = ({ valgtSoknad, valgtKvittering, setOpenModal, valgtFil, 
                             },
                         })}
                         defaultValue={valgtKvittering?.belop ? valgtKvittering.belop / 100 : ''}
+                        error={methods.formState.errors['belop_input']?.message?.toString()}
                         inputMode="decimal"
                         step={0.01}
                         autoComplete="off"
                         disabled={formErDisabled}
                     />
-
-                    <div role="alert" aria-live="assertive" className="mb-4 mt-2 text-red-600">
-                        <Vis
-                            hvis={methods.formState.errors['belop_input']?.message}
-                            render={() => (
-                                <BodyShort as="span">
-                                    <>{methods.formState.errors['belop_input']?.message}</>
-                                </BodyShort>
-                            )}
-                        />
-                    </div>
                 </div>
 
                 <Label>{tekst('drag_and_drop.label')}</Label>
