@@ -134,71 +134,69 @@ const OpplastingForm = ({ valgtSoknad, valgtKvittering, setOpenModal, valgtFil, 
                         '%MAKSFILSTR%': maks,
                     })}
                 </BodyShort>
+
                 <ReadMore className="mt-4" header={OpplastingTekster['soknad.info.kvitteringer-PDF-tittel']}>
                     <BodyLong>{OpplastingTekster['soknad.info.kvitteringer-PDF-tekst']}</BodyLong>
                 </ReadMore>
 
-                <div>
-                    <Select
-                        className="mt-4"
-                        label={tekst('opplasting_modal.type-utgift.label')}
-                        disabled={formErDisabled}
-                        {...methods.register('transportmiddel', {
-                            required: tekst('opplasting_modal.transportmiddel.feilmelding'),
-                        })}
-                        id="transportmiddel"
-                        name="transportmiddel"
-                        defaultValue={valgtKvittering?.typeUtgift}
-                        error={methods.formState.errors['transportmiddel']?.message?.toString()}
-                    >
-                        <option value="">Velg</option>
-                        {Object.entries(UtgiftTyper).map((keyval, idx) => {
-                            return (
-                                <option value={keyval[0]} id={keyval[0]} key={idx}>
-                                    {keyval[1]}
-                                </option>
-                            )
-                        })}
-                    </Select>
+                <Select
+                    className="mt-4"
+                    label={tekst('opplasting_modal.type-utgift.label')}
+                    disabled={formErDisabled}
+                    {...methods.register('transportmiddel', {
+                        required: tekst('opplasting_modal.transportmiddel.feilmelding'),
+                    })}
+                    id="transportmiddel"
+                    name="transportmiddel"
+                    defaultValue={valgtKvittering?.typeUtgift}
+                    error={methods.formState.errors['transportmiddel']?.message?.toString()}
+                >
+                    <option value="">Velg</option>
+                    {Object.entries(UtgiftTyper).map((keyval, idx) => {
+                        return (
+                            <option value={keyval[0]} id={keyval[0]} key={idx}>
+                                {keyval[1]}
+                            </option>
+                        )
+                    })}
+                </Select>
+
+                <TextField
+                    className="mt-4"
+                    label={tekst('opplasting_modal.tittel')}
+                    description={tekst('soknad.undertekst.OFFENTLIG_TRANSPORT_BELOP')}
+                    type="number"
+                    id="belop_input"
+                    {...methods.register('belop_input', {
+                        required: tekst('opplasting_modal.belop.feilmelding'),
+                        min: {
+                            value: 0,
+                            message: 'Beløp kan ikke være negativt',
+                        },
+                        max: {
+                            value: 10000,
+                            message: 'Beløp kan ikke være større enn 10 000',
+                        },
+                        validate: (val) => {
+                            let belop = val.toString()
+                            belop = Number(belop.replace(',', '.').replace(/ /g, ''))
+                            belop = Math.round(belop * 100) / 100
+                            methods.setValue('belop_input', belop)
+                            return true
+                        },
+                    })}
+                    defaultValue={valgtKvittering?.belop ? valgtKvittering.belop / 100 : ''}
+                    error={methods.formState.errors['belop_input']?.message?.toString()}
+                    inputMode="decimal"
+                    step={0.01}
+                    autoComplete="off"
+                    disabled={formErDisabled}
+                />
+
+                <div className="mt-4">
+                    <Label>{tekst('drag_and_drop.label')}</Label>
+                    <DragAndDrop valgtFil={valgtFil} setValgtFil={setValgtFil} valgtKvittering={valgtKvittering} />
                 </div>
-
-                <div>
-                    <TextField
-                        className="mt-4"
-                        label={tekst('opplasting_modal.tittel')}
-                        description={tekst('soknad.undertekst.OFFENTLIG_TRANSPORT_BELOP')}
-                        type="number"
-                        id="belop_input"
-                        {...methods.register('belop_input', {
-                            required: tekst('opplasting_modal.belop.feilmelding'),
-                            min: {
-                                value: 0,
-                                message: 'Beløp kan ikke være negativt',
-                            },
-                            max: {
-                                value: 10000,
-                                message: 'Beløp kan ikke være større enn 10 000',
-                            },
-                            validate: (val) => {
-                                let belop = val.toString()
-                                belop = Number(belop.replace(',', '.').replace(/ /g, ''))
-                                belop = Math.round(belop * 100) / 100
-                                methods.setValue('belop_input', belop)
-                                return true
-                            },
-                        })}
-                        defaultValue={valgtKvittering?.belop ? valgtKvittering.belop / 100 : ''}
-                        error={methods.formState.errors['belop_input']?.message?.toString()}
-                        inputMode="decimal"
-                        step={0.01}
-                        autoComplete="off"
-                        disabled={formErDisabled}
-                    />
-                </div>
-
-                <Label>{tekst('drag_and_drop.label')}</Label>
-
-                <DragAndDrop valgtFil={valgtFil} setValgtFil={setValgtFil} valgtKvittering={valgtKvittering} />
 
                 <div className="mt-8">
                     <Vis
@@ -209,6 +207,7 @@ const OpplastingForm = ({ valgtSoknad, valgtKvittering, setOpenModal, valgtFil, 
                             </Alert>
                         )}
                     />
+
                     <Button variant="primary" type="button" className="mr-4" onClick={onSubmit} loading={laster}>
                         {tekst('opplasting_modal.bekreft')}
                     </Button>
