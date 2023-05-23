@@ -24,16 +24,15 @@ interface OpplastetKvittering {
 export interface OpplastingFromProps {
     valgtSoknad?: Soknad
     setOpenModal: (arg0: boolean) => void
-    valgtFil?: File
-    setValgtFil: (arg0?: File) => void
 }
 
-const OpplastingForm = ({ valgtSoknad, setOpenModal, valgtFil, setValgtFil }: OpplastingFromProps) => {
+const OpplastingForm = ({ valgtSoknad, setOpenModal }: OpplastingFromProps) => {
     const { stegId } = useParams<RouteParams>()
     const queryClient = useQueryClient()
 
     const [laster, setLaster] = useState<boolean>(false)
     const [feilmelding, setFeilmelding] = useState<string>()
+    const [valgtFil, setValgtFil] = useState<File>()
 
     const methods = useForm({
         mode: 'onBlur',

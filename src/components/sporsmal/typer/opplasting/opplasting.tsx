@@ -17,11 +17,9 @@ const Opplasting = ({ sporsmal }: SpmProps) => {
 
     const { setFeilmeldingTekst } = useAppStore()
     const [openModal, setOpenModal] = useState<boolean>(false)
-    const [valgtFil, setValgtFil] = useState<File>()
 
     const aktiverModal = () => {
         setOpenModal(true)
-        setValgtFil(undefined)
         setFeilmeldingTekst('')
     }
 
@@ -41,12 +39,7 @@ const Opplasting = ({ sporsmal }: SpmProps) => {
 
             <Modal open={openModal} onClose={lukkModal} closeButton aria-labelledby="opplasting-modal" className="w-96">
                 <Modal.Content>
-                    <OpplastingForm
-                        valgtSoknad={valgtSoknad}
-                        setOpenModal={setOpenModal}
-                        valgtFil={valgtFil}
-                        setValgtFil={setValgtFil}
-                    />
+                    <OpplastingForm valgtSoknad={valgtSoknad} setOpenModal={setOpenModal} />
                 </Modal.Content>
             </Modal>
 
