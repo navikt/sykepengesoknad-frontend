@@ -55,7 +55,7 @@ describe('Tester støtte for gamle spørsmål', () => {
         cy.get('button').contains('Legg til reiseutgift').click()
         cy.get('select[name=transportmiddel]').select('TAXI')
         cy.get('input[name=belop_input]').type('1234')
-        cy.get('.filopplasteren input[type=file]').attachFile('kvittering.jpg')
+        cy.get('[data-cy="filopplasteren"] input[type=file]').attachFile('kvittering.jpg')
         cy.get('button').contains('Bekreft').click()
     }
 
