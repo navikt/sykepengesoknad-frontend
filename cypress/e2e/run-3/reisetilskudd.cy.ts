@@ -140,10 +140,7 @@ describe('Teste førsteside i reisetilskuddsøknaden', () => {
             cy.get('button').contains('Legg til reiseutgift').click()
             cy.get('select[name=transportmiddel]').select('TAXI')
             cy.get('input[name=belop_input]').type('1234')
-
-            cy.get('[data-cy="opplasting-form"]')
-                .find('input[type=file]')
-                .selectFile({ contents: 'cypress/fixtures/kvittering.jpg' }, { force: true })
+            cy.get('[data-cy="filopplasteren"] input[type=file]').attachFile('kvittering.jpg')
             cy.get('button').contains('Bekreft').click()
         })
 

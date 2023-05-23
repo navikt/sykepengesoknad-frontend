@@ -54,11 +54,15 @@ const DragAndDrop = ({ valgtFil, setValgtFil }: DragAndDropProps) => {
             />
 
             <div data-cy="filopplasteren" {...getRootProps()}>
-                <input
-                    {...getInputProps()}
-                    accept={tillatteFiltyper}
-                    id="ddfil"
-                    type="file"
+                <input {...getInputProps()} accept={tillatteFiltyper} id="ddfil" type="file" />
+                <Button
+                    className="w-full p-6"
+                    variant="secondary"
+                    aria-hidden
+                    icon={<ReceiptIcon aria-hidden />}
+                    onClick={(e) => {
+                        e.preventDefault()
+                    }}
                     {...register('fil_input', {
                         validate: {
                             fil_valgt: () => {
@@ -84,15 +88,6 @@ const DragAndDrop = ({ valgtFil, setValgtFil }: DragAndDropProps) => {
                             },
                         },
                     })}
-                />
-                <Button
-                    className="w-full p-6"
-                    variant="secondary"
-                    aria-hidden
-                    icon={<ReceiptIcon aria-hidden />}
-                    onClick={(e) => {
-                        e.preventDefault()
-                    }}
                 >
                     {isDragActive
                         ? tekst('drag_and_drop.dragtekst.aktiv')
