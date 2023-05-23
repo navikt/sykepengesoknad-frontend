@@ -41,7 +41,7 @@ const Opplasting = ({ sporsmal }: SpmProps) => {
 
             <EkspanderbarHjelp sporsmal={sporsmal} />
 
-            <Button type="button" variant="secondary" className="mt-6 w-full p-8" onClick={aktiverModal}>
+            <Button type="button" variant="secondary" className="w-full p-8" onClick={aktiverModal}>
                 <BodyShort>{tekst('opplasting.legg-til')}</BodyShort>
             </Button>
 
