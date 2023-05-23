@@ -1,6 +1,5 @@
 /* eslint-disable postcss-modules/no-unused-class */
 import '../style/global.css'
-import '../components/filopplaster/drag-and-drop/drag-and-drop.css'
 import '../components/frist-sykepenger/frist-sykepenger.css'
 import '../components/kvittering/kvittering.css'
 import '../components/om-sykepenger/om-sykepenger.css'
