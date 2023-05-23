@@ -31,7 +31,7 @@ const KvitteringVidere = () => {
             <Vis
                 hvis={valgtSoknad.arbeidssituasjon === RSArbeidssituasjon.NAERINGSDRIVENDE}
                 render={() => (
-                    <div className="avsnitt">
+                    <div>
                         <Label as="h2">{tekst('kvittering.naeringsdrivende.tittel')}</Label>
                         <BodyLong spacing as="span">
                             {tekst('kvittering.naeringsdrivende.brodtekst')}{' '}
@@ -44,7 +44,7 @@ const KvitteringVidere = () => {
                     </div>
                 )}
             />
-            <div className="avsnitt hva-skjer">
+            <div>
                 <Label as="h2">{tekst('kvittering.nav-behandler-soknaden')}</Label>
                 <BodyLong spacing as="span">
                     {tekst('kvittering.arbeidstaker.saksbehandlingstid')}{' '}
@@ -58,7 +58,7 @@ const KvitteringVidere = () => {
             <Vis
                 hvis={valgtSoknad.soknadstype !== RSSoknadstype.REISETILSKUDD}
                 render={() => (
-                    <div className="avsnitt">
+                    <div>
                         <Label as="h2">{tekst('kvittering.naar-blir-pengene')}</Label>
                         <BodyLong spacing as="span">
                             {parserWithReplace(tekst('kvittering.arbeidstaker.over16.utbetaling'))}
@@ -67,7 +67,7 @@ const KvitteringVidere = () => {
                 )}
             />
 
-            <div className="avsnitt kontonummer">
+            <div data-cy="kontonummer">
                 <Kontonummer />
             </div>
         </Alert>

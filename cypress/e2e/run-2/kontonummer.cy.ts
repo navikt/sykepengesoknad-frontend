@@ -12,7 +12,7 @@ describe('Tester kontonummer i kvittering', () => {
         cy.location('pathname').should('include', `/kvittering/`)
         cy.url().should('include', `/kvittering/`)
         cy.contains('Kontonummer for utbetaling')
-        cy.get('.kontonummer')
+        cy.get('[data-cy="kontonummer"]')
             .should('contain', '1234 00 12345')
             .and(
                 'contain',
@@ -29,7 +29,7 @@ describe('Tester kontonummer i kvittering', () => {
         besvarSoknad()
         cy.url().should('include', `/kvittering/`)
         cy.contains('Kontonummer for utbetaling')
-        cy.get('.kontonummer').should(
+        cy.get('[data-cy="kontonummer"]').should(
             'contain',
             'Vi har ikke registrert noe kontonummer på deg, og anbefaler at du legger det inn på Min side',
         )

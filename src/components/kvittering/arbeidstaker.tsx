@@ -165,7 +165,7 @@ const Arbeidstaker = () => {
                     }
                     render={() => {
                         return (
-                            <div className="hva-skjer">
+                            <>
                                 <Alert variant="info" size="small">
                                     <Vis
                                         hvis={kvitteringTekst === 'medOpphold'}
@@ -185,10 +185,8 @@ const Arbeidstaker = () => {
                                     />
                                 </Alert>
 
-                                <div className="avsnitt">
-                                    <div className="sendt-inner">{kvitteringInnhold()}</div>
-                                </div>
-                            </div>
+                                {kvitteringInnhold()}
+                            </>
                         )
                     }}
                 />

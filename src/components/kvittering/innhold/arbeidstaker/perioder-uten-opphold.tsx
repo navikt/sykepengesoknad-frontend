@@ -8,8 +8,8 @@ import { LenkeMedIkon } from '../../../lenke-med-ikon/LenkeMedIkon'
 
 const PerioderUtenOpphold = () => {
     return (
-        <div className="avsnitt">
-            <div className="avsnitt">
+        <div>
+            <div>
                 <Label spacing as="h2">
                     {tekst('kvittering.nav-behandler-soknaden')}
                 </Label>
@@ -22,7 +22,7 @@ const PerioderUtenOpphold = () => {
                 />
                 .
             </div>
-            <div className="avsnitt">
+            <div>
                 <Label spacing as="h2">
                     {tekst('kvittering.naar-blir-pengene')}
                 </Label>
@@ -33,7 +33,7 @@ const PerioderUtenOpphold = () => {
                     {parserWithReplace(tekst('kvittering.arbeidstaker.over16.utbetaling-NAV'))}{' '}
                 </BodyLong>
             </div>
-            <div className="avsnitt kontonummer">
+            <div>
                 <Kontonummer />
             </div>
         </div>

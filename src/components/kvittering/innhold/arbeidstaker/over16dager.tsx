@@ -12,7 +12,7 @@ interface gradertReisetilskuddProps {
 
 const Over16dager = ({ erGradert }: gradertReisetilskuddProps) => {
     return (
-        <div className="avsnitt">
+        <div>
             <Label spacing as="h2">
                 {tekst('kvittering.naeringsdrivende.tittel')}
             </Label>
@@ -31,7 +31,7 @@ const Over16dager = ({ erGradert }: gradertReisetilskuddProps) => {
             <ReadMore className="mt-2" header={tekst('kvittering.hva-er-inntektsmelding')}>
                 <BodyLong spacing>{tekst('kvittering.arbeidstaker.over16.inntektsmelding.brodtekst')}</BodyLong>
             </ReadMore>
-            <div className="avsnitt hva-skjer">
+            <div>
                 <Label spacing as="h2">
                     {tekst('kvittering.nav-behandler-soknaden')}
                 </Label>
@@ -44,7 +44,7 @@ const Over16dager = ({ erGradert }: gradertReisetilskuddProps) => {
                 />
                 .
             </div>
-            <div className="avsnitt">
+            <div>
                 <Label spacing as="h2">
                     {tekst('kvittering.naar-blir-pengene')}
                 </Label>
@@ -55,7 +55,7 @@ const Over16dager = ({ erGradert }: gradertReisetilskuddProps) => {
                     {parserWithReplace(tekst('kvittering.arbeidstaker.over16.utbetaling-NAV'))}{' '}
                 </BodyLong>
             </div>
-            <div className="avsnitt kontonummer">
+            <div>
                 <Kontonummer />
             </div>
         </div>

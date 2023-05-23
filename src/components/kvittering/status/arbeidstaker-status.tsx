@@ -44,14 +44,12 @@ const ArbeidstakerStatus = () => {
         <Vis
             hvis={valgtSoknad.sendtTilArbeidsgiverDato || valgtSoknad.sendtTilNAVDato}
             render={() => (
-                <div className="sendt-inner">
+                <div>
                     <Vis
                         hvis={valgtSoknad.sendtTilArbeidsgiverDato}
                         render={() => (
                             <>
-                                <Label as="h3" className="sendt-tittel">
-                                    {tekst('kvittering.sendt-til')}
-                                </Label>
+                                <Label as="h3">{tekst('kvittering.sendt-til')}</Label>
                                 <Avkrysset tekst={`${tilArbNavn()} ${tilOrg()}${medKopi}`} />
                                 <Detail size="small">{tilArbDato()}</Detail>
                             </>

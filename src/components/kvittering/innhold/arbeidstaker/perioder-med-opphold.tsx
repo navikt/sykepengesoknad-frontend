@@ -8,7 +8,7 @@ import { LenkeMedIkon } from '../../../lenke-med-ikon/LenkeMedIkon'
 
 const PerioderMedOpphold = () => {
     return (
-        <div className="avsnitt">
+        <div>
             <Label spacing as="h2">
                 {tekst('kvittering.naeringsdrivende.tittel')}
             </Label>
@@ -18,7 +18,7 @@ const PerioderMedOpphold = () => {
             <ReadMore className="mt-4" header={tekst('kvittering.arbeidstaker.hvorfor-inntektsmelding-pa-nytt')}>
                 <BodyLong spacing>{tekst('kvittering.arbeidstaker.hvorfor-inntektsmelding-pa-nytt.tekst')}</BodyLong>
             </ReadMore>
-            <div className="avsnitt hva-skjer">
+            <div>
                 <Label spacing as="h2">
                     {tekst('kvittering.nav-behandler-soknaden')}
                 </Label>
@@ -31,7 +31,7 @@ const PerioderMedOpphold = () => {
                 />
                 .
             </div>
-            <div className="avsnitt">
+            <div>
                 <Label spacing as="h2">
                     {tekst('kvittering.naar-blir-pengene')}
                 </Label>
@@ -42,7 +42,7 @@ const PerioderMedOpphold = () => {
                     {parserWithReplace(tekst('kvittering.arbeidstaker.over16.utbetaling-NAV'))}{' '}
                 </BodyLong>
             </div>
-            <div className="avsnitt kontonummer">
+            <div>
                 <Kontonummer />
             </div>
         </div>
