@@ -37,9 +37,7 @@ const Opplasting = ({ sporsmal }: SpmProps) => {
 
     return (
         <>
-            <Label as="h2" className="skjema__sporsmal">
-                {sporsmal.sporsmalstekst}
-            </Label>
+            <Label as="h2">{sporsmal.sporsmalstekst}</Label>
 
             <EkspanderbarHjelp sporsmal={sporsmal} />
 

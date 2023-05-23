@@ -10,9 +10,7 @@ const DagerKomp = ({ sporsmal }: SpmProps) => {
     const labelen = 'dager-kalender-label'
     return (
         <>
-            <Label as="h3" className="skjema__sporsmal">
-                {sporsmal.sporsmalstekst}
-            </Label>
+            <Label as="h3">{sporsmal.sporsmalstekst}</Label>
 
             <div className={'dagerKalender'}>
                 <Controller
