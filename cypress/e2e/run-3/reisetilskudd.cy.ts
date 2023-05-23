@@ -133,7 +133,7 @@ describe('Teste førsteside i reisetilskuddsøknaden', () => {
         })
 
         it('Laster bjørn med info', () => {
-            cy.contains('Du må laste opp kvitteringer hvis du har hatt ekstra utgifter til')
+            cy.contains('Du må laste opp kvittering')
         })
 
         it('Legger inn taxi kvittering', () => {
@@ -285,7 +285,7 @@ describe('Teste førsteside i reisetilskuddsøknaden', () => {
             )
             cy.get('.navds-accordion__content > :nth-child(4)').should(
                 'include.text',
-                'Du lastet opp 1 utgift på 99 kr',
+                'Du lastet opp 1 kvittering på 99 kr',
             )
             cy.get('.navds-checkbox__label').should(
                 'contain',
