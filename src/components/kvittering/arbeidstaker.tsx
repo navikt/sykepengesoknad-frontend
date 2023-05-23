@@ -150,47 +150,36 @@ const Arbeidstaker = () => {
 
     return (
         <>
-            <Alert variant="success">
-                <Heading size="small" level="2">
-                    {tekst('kvittering.soknaden-er-sendt')}
-                </Heading>
-            </Alert>
+            <ArbeidstakerStatus />
 
-            <div className="sendt-info">
-                <ArbeidstakerStatus />
+            <Vis
+                hvis={!sendtForMerEnn30DagerSiden(valgtSoknad.sendtTilArbeidsgiverDato, valgtSoknad.sendtTilNAVDato)}
+                render={() => {
+                    return (
+                        <Alert variant="info" className="bg-white">
+                            <Vis
+                                hvis={kvitteringTekst === 'medOpphold'}
+                                render={() => (
+                                    <Heading size="small" level="3">
+                                        {tekst('kvittering.viktig-informasjon')}
+                                    </Heading>
+                                )}
+                            />
 
-                <Vis
-                    hvis={
-                        !sendtForMerEnn30DagerSiden(valgtSoknad.sendtTilArbeidsgiverDato, valgtSoknad.sendtTilNAVDato)
-                    }
-                    render={() => {
-                        return (
-                            <>
-                                <Alert variant="info" size="small">
-                                    <Vis
-                                        hvis={kvitteringTekst === 'medOpphold'}
-                                        render={() => (
-                                            <Heading size="small" level="3">
-                                                {tekst('kvittering.viktig-informasjon')}
-                                            </Heading>
-                                        )}
-                                    />
-                                    <Vis
-                                        hvis={kvitteringTekst !== 'medOpphold'}
-                                        render={() => (
-                                            <Heading size="small" level="3">
-                                                {tekst('kvittering.hva-skjer-videre')}
-                                            </Heading>
-                                        )}
-                                    />
-                                </Alert>
+                            <Vis
+                                hvis={kvitteringTekst !== 'medOpphold'}
+                                render={() => (
+                                    <Heading size="small" level="3">
+                                        {tekst('kvittering.hva-skjer-videre')}
+                                    </Heading>
+                                )}
+                            />
 
-                                {kvitteringInnhold()}
-                            </>
-                        )
-                    }}
-                />
-            </div>
+                            {kvitteringInnhold()}
+                        </Alert>
+                    )
+                }}
+            />
         </>
     )
 }

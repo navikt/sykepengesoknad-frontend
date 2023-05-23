@@ -31,11 +31,9 @@ const KvitteringVidere = () => {
             <Vis
                 hvis={valgtSoknad.arbeidssituasjon === RSArbeidssituasjon.NAERINGSDRIVENDE}
                 render={() => (
-                    <div>
+                    <div className="mt-4">
                         <Label as="h2">{tekst('kvittering.naeringsdrivende.tittel')}</Label>
-                        <BodyLong spacing as="span">
-                            {tekst('kvittering.naeringsdrivende.brodtekst')}{' '}
-                        </BodyLong>
+                        <BodyLong as="span">{tekst('kvittering.naeringsdrivende.brodtekst')} </BodyLong>
                         <LenkeMedIkon
                             href={tekst('kvittering.naeringsdrivende.lenke.url')}
                             text={tekst('kvittering.naeringsdrivende.lenke')}
@@ -44,11 +42,9 @@ const KvitteringVidere = () => {
                     </div>
                 )}
             />
-            <div>
+            <div className="mt-4">
                 <Label as="h2">{tekst('kvittering.nav-behandler-soknaden')}</Label>
-                <BodyLong spacing as="span">
-                    {tekst('kvittering.arbeidstaker.saksbehandlingstid')}{' '}
-                </BodyLong>
+                <BodyLong as="span">{tekst('kvittering.arbeidstaker.saksbehandlingstid')} </BodyLong>
                 <LenkeMedIkon
                     href={tekst('kvittering.arbeidstaker.saksbehandlingstid.lenke.url')}
                     text={tekst('kvittering.arbeidstaker.saksbehandlingstid.lenke')}
@@ -58,16 +54,16 @@ const KvitteringVidere = () => {
             <Vis
                 hvis={valgtSoknad.soknadstype !== RSSoknadstype.REISETILSKUDD}
                 render={() => (
-                    <div>
+                    <div className="mt-4">
                         <Label as="h2">{tekst('kvittering.naar-blir-pengene')}</Label>
-                        <BodyLong spacing as="span">
+                        <BodyLong as="span">
                             {parserWithReplace(tekst('kvittering.arbeidstaker.over16.utbetaling'))}
                         </BodyLong>
                     </div>
                 )}
             />
 
-            <div data-cy="kontonummer">
+            <div className="mt-4" data-cy="kontonummer">
                 <Kontonummer />
             </div>
         </Alert>

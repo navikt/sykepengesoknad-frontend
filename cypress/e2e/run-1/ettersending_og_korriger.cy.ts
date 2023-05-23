@@ -58,7 +58,10 @@ describe('Tester ettersending og korrigering', () => {
         cy.url().should('include', `/kvittering/${soknad.id}`)
 
         // Sendt til
-        cy.get('.sendt-info').should('contain', 'POSTEN NORGE AS, BÆRUM (Org.nr. 974654458), med kopi til NAV')
+        cy.get('[data-cy="kvittering"]').should(
+            'contain',
+            'POSTEN NORGE AS, BÆRUM (Org.nr. 974654458), med kopi til NAV',
+        )
 
         cy.contains('Du får sykepengene fra arbeidsgiveren din')
         cy.contains('Arbeidsgiveren din betaler de første 16 kalenderdagene av sykefraværet.')

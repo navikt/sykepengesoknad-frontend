@@ -1,4 +1,4 @@
-import { BodyLong, Label, ReadMore } from '@navikt/ds-react'
+import { BodyLong, BodyShort, Label, ReadMore } from '@navikt/ds-react'
 import React from 'react'
 
 import { parserWithReplace } from '../../../../utils/html-react-parser-utils'
@@ -9,42 +9,37 @@ import { LenkeMedIkon } from '../../../lenke-med-ikon/LenkeMedIkon'
 const PerioderMedOpphold = () => {
     return (
         <div>
-            <Label spacing as="h2">
-                {tekst('kvittering.naeringsdrivende.tittel')}
-            </Label>
-            <BodyLong spacing as="span">
-                {tekst('kvittering.arbeidstaker.med-opphold')}{' '}
-            </BodyLong>
-            <ReadMore className="mt-4" header={tekst('kvittering.arbeidstaker.hvorfor-inntektsmelding-pa-nytt')}>
-                <BodyLong spacing>{tekst('kvittering.arbeidstaker.hvorfor-inntektsmelding-pa-nytt.tekst')}</BodyLong>
-            </ReadMore>
-            <div>
-                <Label spacing as="h2">
-                    {tekst('kvittering.nav-behandler-soknaden')}
-                </Label>
-                <BodyLong spacing as="span">
-                    {tekst('kvittering.arbeidstaker.saksbehandlingstid')}{' '}
-                </BodyLong>
+            <div className="mt-4">
+                <Label as="h2">{tekst('kvittering.naeringsdrivende.tittel')}</Label>
+                <BodyShort spacing>{tekst('kvittering.arbeidstaker.med-opphold')} </BodyShort>
+                <ReadMore className="mt-2" header={tekst('kvittering.arbeidstaker.hvorfor-inntektsmelding-pa-nytt')}>
+                    <BodyLong spacing>
+                        {tekst('kvittering.arbeidstaker.hvorfor-inntektsmelding-pa-nytt.tekst')}
+                    </BodyLong>
+                </ReadMore>
+            </div>
+
+            <div className="mt-4">
+                <Label as="h2">{tekst('kvittering.nav-behandler-soknaden')}</Label>
+                <BodyShort as="span">{tekst('kvittering.arbeidstaker.saksbehandlingstid')} </BodyShort>
                 <LenkeMedIkon
                     href={tekst('kvittering.arbeidstaker.saksbehandlingstid.lenke.url')}
                     text={tekst('kvittering.arbeidstaker.saksbehandlingstid.lenke')}
                 />
                 .
             </div>
-            <div>
-                <Label spacing as="h2">
-                    {tekst('kvittering.naar-blir-pengene')}
-                </Label>
-                <BodyLong spacing>
+
+            <div className="mt-4">
+                <Label as="h2">{tekst('kvittering.naar-blir-pengene')}</Label>
+                <BodyShort spacing>
                     {parserWithReplace(tekst('kvittering.arbeidstaker.over16.utbetaling-arbeidsgiver'))}{' '}
-                </BodyLong>
-                <BodyLong spacing as="span">
+                </BodyShort>
+                <BodyShort spacing>
                     {parserWithReplace(tekst('kvittering.arbeidstaker.over16.utbetaling-NAV'))}{' '}
-                </BodyLong>
+                </BodyShort>
             </div>
-            <div>
-                <Kontonummer />
-            </div>
+
+            <Kontonummer />
         </div>
     )
 }

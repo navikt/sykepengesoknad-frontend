@@ -21,7 +21,7 @@ const KvitteringTekster = {
 
     'kvittering.soknaden-er-sendt-til': 'Søknaden er sendt til',
     'kvittering.soknaden-er-sendt': 'Søknaden er sendt',
-    'kvittering.sendt-til': 'Sendt til:',
+    'kvittering.sendt-til': 'Søknaden er sendt til:',
     'kvittering.med-kopi-til-nav': ', med kopi til NAV.',
     'kvittering.mottatt': 'Mottatt',
     'kvittering.hva-skjer-videre': 'Hva skjer videre?',

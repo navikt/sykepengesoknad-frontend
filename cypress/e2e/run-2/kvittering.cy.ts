@@ -270,8 +270,7 @@ describe('Tester kvittering', () => {
             cy.contains('Jeg vil at søknaden skal behandles av NAV').should('not.exist')
 
             // Sendt datoer
-            cy.get('.navds-alert--success').should('contain', 'Søknaden er sendt')
-            cy.get('.sendt-info .oppsummering__avkrysset').should('contain', 'arb')
+            cy.get('.navds-alert--success').should('contain', 'Søknaden er sendt').and('contain', 'arb')
 
             // Hva skjer videre
             cy.get('[data-cy="kvittering"]')
@@ -435,8 +434,7 @@ const besvarSoknad = () => {
 
 const inntil16dagerKvittering = () => {
     // Sendt datoer
-    cy.get('.navds-alert--success').should('contain', 'Søknaden er sendt')
-    cy.get('.sendt-info .oppsummering__avkrysset').should('contain', 'arb')
+    cy.get('.navds-alert--success').should('contain', 'Søknaden er sendt').and('contain', 'arb')
 
     // Hva skjer videre
     cy.get('[data-cy="kvittering"]')
@@ -472,8 +470,7 @@ const inntil16dagerKvittering = () => {
 
 const over16dagerKvittering = () => {
     // Sendt datoer
-    cy.get('.navds-alert--success').should('contain', 'Søknaden er sendt')
-    cy.get('.sendt-info .oppsummering__avkrysset').should('contain', 'arb')
+    cy.get('.navds-alert--success').should('contain', 'Søknaden er sendt').and('contain', 'arb')
 
     // Hva skjer videre
     cy.get('[data-cy="kvittering"]')
@@ -546,8 +543,7 @@ const over16dagerKvittering = () => {
 
 const utenOppholdKvittering = () => {
     // Sendt datoer
-    cy.get('.navds-alert--success').should('contain', 'Søknaden er sendt')
-    cy.get('.sendt-info .oppsummering__avkrysset').should('not.contain', 'arb')
+    cy.get('.navds-alert--success').should('contain', 'Søknaden er sendt').and('not.contain', 'arb')
 
     // Hva skjer videre
     cy.get('[data-cy="kvittering"]')
@@ -598,8 +594,7 @@ const utenOppholdKvittering = () => {
 
 const medOppholdKvittering = () => {
     // Sendt datoer
-    cy.get('.navds-alert--success').should('contain', 'Søknaden er sendt')
-    cy.get('.sendt-info .oppsummering__avkrysset').should('not.contain', 'arb')
+    cy.get('.navds-alert--success').should('contain', 'Søknaden er sendt').and('not.contain', 'arb')
 
     // Hva skjer videre
     cy.get('[data-cy="kvittering"]')

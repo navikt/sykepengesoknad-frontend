@@ -1,10 +1,9 @@
-import { Detail, Label } from '@navikt/ds-react'
+import { Alert, BodyShort, Detail, Heading } from '@navikt/ds-react'
 import dayjs from 'dayjs'
 import React from 'react'
 import { useParams } from 'react-router-dom'
 
 import { tekst } from '../../../utils/tekster'
-import Avkrysset from '../../oppsummering/utdrag/avkrysset'
 import Vis from '../../vis'
 import useSoknad from '../../../hooks/useSoknad'
 import { RouteParams } from '../../../app'
@@ -41,32 +40,29 @@ const ArbeidstakerStatus = () => {
     if (!valgtSoknad) return null
 
     return (
-        <Vis
-            hvis={valgtSoknad.sendtTilArbeidsgiverDato || valgtSoknad.sendtTilNAVDato}
-            render={() => (
-                <div>
-                    <Vis
-                        hvis={valgtSoknad.sendtTilArbeidsgiverDato}
-                        render={() => (
-                            <>
-                                <Label as="h3">{tekst('kvittering.sendt-til')}</Label>
-                                <Avkrysset tekst={`${tilArbNavn()} ${tilOrg()}${medKopi}`} />
-                                <Detail size="small">{tilArbDato()}</Detail>
-                            </>
-                        )}
-                    />
-                    <Vis
-                        hvis={valgtSoknad.sendtTilNAVDato}
-                        render={() => (
-                            <>
-                                <Avkrysset tekst={Mottaker.NAV} />
-                                <Detail size="small">{tilNavDato()}</Detail>
-                            </>
-                        )}
-                    />
-                </div>
-            )}
-        />
+        <Alert variant="success">
+            <Heading size="small" level="2">
+                {tekst('kvittering.sendt-til')}
+            </Heading>
+            <Vis
+                hvis={valgtSoknad.sendtTilArbeidsgiverDato}
+                render={() => (
+                    <div className="mb-4">
+                        <BodyShort>{`${tilArbNavn()} ${tilOrg()}${medKopi}`}</BodyShort>
+                        <Detail>{tilArbDato()}</Detail>
+                    </div>
+                )}
+            />
+            <Vis
+                hvis={valgtSoknad.sendtTilNAVDato}
+                render={() => (
+                    <div className="mb-4">
+                        <BodyShort>{Mottaker.NAV}</BodyShort>
+                        <Detail>{tilNavDato()}</Detail>
+                    </div>
+                )}
+            />
+        </Alert>
     )
 }
 
