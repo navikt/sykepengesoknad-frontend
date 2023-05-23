@@ -23,13 +23,12 @@ interface OpplastetKvittering {
 
 export interface OpplastingFromProps {
     valgtSoknad?: Soknad
-    valgtKvittering?: Kvittering
     setOpenModal: (arg0: boolean) => void
     valgtFil?: File
     setValgtFil: (arg0?: File) => void
 }
 
-const OpplastingForm = ({ valgtSoknad, valgtKvittering, setOpenModal, valgtFil, setValgtFil }: OpplastingFromProps) => {
+const OpplastingForm = ({ valgtSoknad, setOpenModal, valgtFil, setValgtFil }: OpplastingFromProps) => {
     const { stegId } = useParams<RouteParams>()
     const queryClient = useQueryClient()
 
@@ -48,7 +47,6 @@ const OpplastingForm = ({ valgtSoknad, valgtKvittering, setOpenModal, valgtFil, 
     const stegNum = Number(stegId)
     const spmIndex = stegNum - 1
     const sporsmal = valgtSoknad.sporsmal[spmIndex]
-    const formErDisabled = valgtKvittering !== undefined
 
     const onSubmit = async () => {
         try {
@@ -142,13 +140,11 @@ const OpplastingForm = ({ valgtSoknad, valgtKvittering, setOpenModal, valgtFil, 
                 <Select
                     className="mt-4"
                     label={tekst('opplasting_modal.type-utgift.label')}
-                    disabled={formErDisabled}
                     {...methods.register('transportmiddel', {
                         required: tekst('opplasting_modal.transportmiddel.feilmelding'),
                     })}
                     id="transportmiddel"
                     name="transportmiddel"
-                    defaultValue={valgtKvittering?.typeUtgift}
                     error={methods.formState.errors['transportmiddel']?.message?.toString()}
                 >
                     <option value="">Velg</option>
@@ -185,17 +181,15 @@ const OpplastingForm = ({ valgtSoknad, valgtKvittering, setOpenModal, valgtFil, 
                             return true
                         },
                     })}
-                    defaultValue={valgtKvittering?.belop ? valgtKvittering.belop / 100 : ''}
                     error={methods.formState.errors['belop_input']?.message?.toString()}
                     inputMode="decimal"
                     step={0.01}
                     autoComplete="off"
-                    disabled={formErDisabled}
                 />
 
                 <div className="mt-4">
                     <Label>{tekst('drag_and_drop.label')}</Label>
-                    <DragAndDrop valgtFil={valgtFil} setValgtFil={setValgtFil} valgtKvittering={valgtKvittering} />
+                    <DragAndDrop valgtFil={valgtFil} setValgtFil={setValgtFil} />
                 </div>
 
                 <div className="mt-8">
