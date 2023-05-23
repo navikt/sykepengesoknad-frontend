@@ -19,10 +19,6 @@ const Opplasting = ({ sporsmal }: SpmProps) => {
     const [openModal, setOpenModal] = useState<boolean>(false)
     const [valgtFil, setValgtFil] = useState<File>()
 
-    // eslint-disable-next-line
-    // @ts-ignore
-    Modal.setAppElement('#maincontent')
-
     const aktiverModal = () => {
         setOpenModal(true)
         setValgtFil(undefined)
