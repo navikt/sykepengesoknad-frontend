@@ -74,18 +74,10 @@ const DragAndDrop = ({ valgtFil, setValgtFil, valgtKvittering }: DragAndDropProp
         [],
     )
 
-    const { getRootProps, getInputProps, isDragActive, rootRef } = useDropzone({
+    const { getRootProps, getInputProps, isDragActive } = useDropzone({
         onDrop: onDropCallback,
         multiple: false,
     })
-
-    const settInputHarFeil = () => {
-        rootRef.current?.classList.add('skjemaelement__input--harFeil')
-    }
-
-    const fjernInputHarFeil = () => {
-        rootRef.current?.classList.remove('skjemaelement__input--harFeil')
-    }
 
     return (
         <div className="mt-2">
@@ -103,26 +95,20 @@ const DragAndDrop = ({ valgtFil, setValgtFil, valgtKvittering }: DragAndDropProp
                 render={() => (
                     <>
                         <div data-cy="filopplasteren" {...getRootProps()}>
-                            <input {...getInputProps()} accept={tillatteFiltyper} id="ddfil" type="file" />
-                            <Button
-                                className="w-full p-6"
-                                variant="secondary"
-                                aria-hidden
-                                icon={<ReceiptIcon aria-hidden />}
-                                onClick={(e) => {
-                                    e.preventDefault()
-                                }}
+                            <input
+                                {...getInputProps()}
+                                accept={tillatteFiltyper}
+                                id="ddfil"
+                                type="file"
                                 {...register('fil_input', {
                                     validate: {
                                         fil_valgt: () => {
                                             if (!valgtFil) {
-                                                settInputHarFeil()
                                                 return tekst('opplasting_modal.filopplasting.feilmelding')
                                             }
                                         },
                                         fil_type: () => {
                                             if (valgtFil && !tillatteFiltyper.split(',').includes(valgtFil.type)) {
-                                                settInputHarFeil()
                                                 return getLedetekst(tekst('drag_and_drop.filtype'), {
                                                     '%FILNAVN%': valgtFil.name,
                                                     '%TILLATTEFILTYPER%': formattertFiltyper,
@@ -131,19 +117,23 @@ const DragAndDrop = ({ valgtFil, setValgtFil, valgtKvittering }: DragAndDropProp
                                         },
                                         fil_storrelse: () => {
                                             if (valgtFil && valgtFil.size > maxFilstørrelse) {
-                                                settInputHarFeil()
                                                 return getLedetekst(tekst('drag_and_drop.maks'), {
                                                     '%FILNAVN%': valgtFil.name,
                                                     '%MAKSSTOR%': maks,
                                                 })
                                             }
                                         },
-                                        fjern_styling_hvis_ok: () => {
-                                            fjernInputHarFeil()
-                                            return true
-                                        },
                                     },
                                 })}
+                            />
+                            <Button
+                                className="w-full p-6"
+                                variant="secondary"
+                                aria-hidden
+                                icon={<ReceiptIcon aria-hidden />}
+                                onClick={(e) => {
+                                    e.preventDefault()
+                                }}
                             >
                                 {isDragActive
                                     ? tekst('drag_and_drop.dragtekst.aktiv')
