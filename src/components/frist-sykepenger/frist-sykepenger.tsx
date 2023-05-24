@@ -1,4 +1,4 @@
-import { BodyLong, BodyShort, ExpansionCard, Heading, ReadMore } from '@navikt/ds-react'
+import { BodyShort, ExpansionCard, Heading, ReadMore } from '@navikt/ds-react'
 import React, { useState } from 'react'
 
 import { tekst } from '../../utils/tekster'
@@ -30,15 +30,16 @@ const FristSykepenger = ({ soknad }: { soknad: Soknad }) => {
                 </Heading>
             </ExpansionCard.Header>
             <ExpansionCard.Content>
-                <BodyLong>{tekst('frist-sykepenger.innsending')}</BodyLong>
-                <BodyLong>{parserWithReplace(tekst('frist-sykepenger.hovedregel'))}</BodyLong>
-                <BodyLong>{parserWithReplace(tekst('frist-sykepenger.ulike.måneder'))}</BodyLong>
+                <BodyShort spacing>{tekst('frist-sykepenger.innsending')}</BodyShort>
+                <BodyShort spacing>{parserWithReplace(tekst('frist-sykepenger.hovedregel'))}</BodyShort>
+                <BodyShort spacing>{parserWithReplace(tekst('frist-sykepenger.ulike.måneder'))}</BodyShort>
+                <BodyShort>{tekst('frist-sykepenger.husk')}</BodyShort>
 
-                <ReadMore header={'Vis eksempler'}>
-                    <Heading size="xsmall" level="3" className={'pt-4'}>
+                <ReadMore header={'Vis eksempler'} className="my-4">
+                    <Heading spacing size="xsmall" level="3" className="pt-4">
                         {tekst('frist-sykepenger.eksempel.en.tittel')}
                     </Heading>
-                    <BodyShort>{tekst('frist-sykepenger.eksempel.en.tekst')}</BodyShort>
+                    <BodyShort spacing>{tekst('frist-sykepenger.eksempel.en.tekst')}</BodyShort>
                     <EksempelFrist
                         normalTekst="Frist for sykedager i mai: "
                         boldTekst="31.august"
@@ -48,10 +49,10 @@ const FristSykepenger = ({ soknad }: { soknad: Soknad }) => {
                         mndFire="August"
                     />
 
-                    <Heading size="xsmall" level="3">
+                    <Heading spacing size="xsmall" level="3">
                         {tekst('frist-sykepenger.eksempel.to.tittel')}
                     </Heading>
-                    <BodyShort>{tekst('frist-sykepenger.eksempel.to.tekst')}</BodyShort>
+                    <BodyShort spacing>{tekst('frist-sykepenger.eksempel.to.tekst')}</BodyShort>
                     <EksempelFrist
                         normalTekst="Frist for sykedager i januar: "
                         boldTekst="30.april"
@@ -69,8 +70,6 @@ const FristSykepenger = ({ soknad }: { soknad: Soknad }) => {
                         mndFire="Mai"
                     />
                 </ReadMore>
-
-                <BodyLong spacing>{tekst('frist-sykepenger.husk')}</BodyLong>
 
                 <HvorforSoknadSykepenger soknadstype={soknad.soknadstype} />
             </ExpansionCard.Content>
