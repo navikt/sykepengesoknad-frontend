@@ -63,7 +63,7 @@ const KvitteringVidere = () => {
                 )}
             />
 
-            <div className="mt-4" data-cy="kontonummer">
+            <div className="mt-4">
                 <Kontonummer />
             </div>
         </Alert>
