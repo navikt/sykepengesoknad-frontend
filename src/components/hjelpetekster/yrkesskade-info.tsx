@@ -7,7 +7,7 @@ import { TagTyper } from '../../types/enums'
 export function YrkesskadeInfo({ sporsmal, jaNeiSvar }: { sporsmal: Sporsmal; jaNeiSvar: any }) {
     if (sporsmal.tag == TagTyper.YRKESSKADE && jaNeiSvar == 'JA') {
         return (
-            <Alert variant={'info'} data-cy={'yrkesskade-info'} className="mt-8">
+            <Alert variant="info" data-cy="yrkesskade-info" className="mt-8">
                 Dette betyr at du har en godkjent yrkesskade, har en påbegynt eller kommende skademelding til
                 behandling.
             </Alert>

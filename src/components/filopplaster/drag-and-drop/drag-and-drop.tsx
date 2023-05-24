@@ -47,7 +47,7 @@ const DragAndDrop = ({ valgtFil, setValgtFil }: DragAndDropProps) => {
             <Vis
                 hvis={valgtFil}
                 render={() => (
-                    <ReadMore className={'mb-4'} header={customTruncet(valgtFil?.name || 'Kvittering.png', 20)}>
+                    <ReadMore className="mb-4" header={customTruncet(valgtFil?.name || 'Kvittering.png', 20)}>
                         {valgtFil ? <img alt="" src={URL.createObjectURL(valgtFil)} /> : null}
                     </ReadMore>
                 )}

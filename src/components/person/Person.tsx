@@ -15,8 +15,8 @@ const Person = () => {
     if (!kanVelgePerson) return null
 
     return (
-        <div className={'hidden cursor-pointer md:block'}>
-            <div className={'hidden'} id="listelink" onClick={() => navigate('/')}>
+        <div className="hidden cursor-pointer md:block">
+            <div className="hidden" id="listelink" onClick={() => navigate('/')}>
                 TestLink
             </div>
             <button aria-label="Velg testperson" ref={person}>
@@ -25,7 +25,7 @@ const Person = () => {
                         setOpen(!open)
                     }}
                     aria-label="Velg testperson"
-                    className={'h-12 w-12'}
+                    className="h-12 w-12"
                 />
             </button>
             <Popover

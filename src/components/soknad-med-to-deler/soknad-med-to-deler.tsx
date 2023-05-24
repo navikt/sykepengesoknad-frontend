@@ -6,7 +6,7 @@ import { tekst } from '../../utils/tekster'
 const SoknadMedToDeler = () => {
     return (
         <GuidePanel poster>
-            <Heading size="small" level="2" spacing className={'text-center'}>
+            <Heading size="small" level="2" spacing className="text-center">
                 {tekst('to-deler.overskrift')}
             </Heading>
             <BodyLong spacing>{tekst('to-deler.avsnitt.1')}</BodyLong>

@@ -30,7 +30,7 @@ const CheckboxKomp = ({ sporsmal }: SpmProps) => {
                         legend={sporsmal.sporsmalstekst}
                         error={errors[sporsmal.id] !== undefined && feilmelding.lokal}
                         key={sporsmal.id}
-                        className={'mt-8'}
+                        className="mt-8"
                     >
                         {sporsmal.undersporsmal.map((uspm) => {
                             return (
@@ -42,7 +42,7 @@ const CheckboxKomp = ({ sporsmal }: SpmProps) => {
                                         hvis={watchCheckbox?.includes(uspm.sporsmalstekst)}
                                         render={() => (
                                             <div aria-live="assertive" key={uspm.id + 'under'}>
-                                                <UndersporsmalListe oversporsmal={uspm} oversporsmalSvar={'CHECKED'} />
+                                                <UndersporsmalListe oversporsmal={uspm} oversporsmalSvar="CHECKED" />
                                             </div>
                                         )}
                                     />

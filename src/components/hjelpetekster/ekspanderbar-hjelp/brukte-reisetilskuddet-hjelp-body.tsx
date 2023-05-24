@@ -8,7 +8,7 @@ export const BrukteReisetilskuddetHjelpBody = () => {
                 reisetilskudd dersom det gjør at du kan være i arbeid helt eller delvis. Du kan også få reisetilskudd
                 sammen med graderte sykepenger.
             </BodyLong>
-            <BodyLong className={'mt-4'}>
+            <BodyLong className="mt-4">
                 Svar nei, dersom du ikke har hatt noen ekstra utgifter i forbindelse med reise til og fra jobben.
             </BodyLong>
         </>

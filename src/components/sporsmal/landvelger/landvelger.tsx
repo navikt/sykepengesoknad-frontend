@@ -49,7 +49,7 @@ const LandvelgerComponent = ({ verdierInn, sporsmalId, onChange, tag }: Landvelg
                 sporsmalId={sporsmalId}
                 forslagsliste={tilForslagsliste(landListe(), verdier)}
             />
-            <Chips className={'mt-4'} aria-live="polite">
+            <Chips className="mt-4" aria-live="polite">
                 {verdier.map((verdi, index) => (
                     <Chips.Removable
                         key={verdi}

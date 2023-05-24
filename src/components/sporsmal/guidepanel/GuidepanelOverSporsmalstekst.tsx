@@ -15,7 +15,7 @@ const GuidepanelOverSporsmalstekst = ({ sporsmal }: SpmProps) => {
     if (!bjornVeileder(sporsmal.tag)) return null
 
     return (
-        <ProgressivtGuidePanel className={'my-8'}>
+        <ProgressivtGuidePanel className="my-8">
             <BodyShort>{parserWithReplace(tekst(bjornTekst as any))}</BodyShort>
         </ProgressivtGuidePanel>
     )

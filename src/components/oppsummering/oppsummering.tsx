@@ -31,12 +31,12 @@ const Oppsummering = ({ ekspandert, sporsmal }: { ekspandert: boolean; sporsmal:
     return (
         <ExpansionCard
             open={erApen}
-            className={'oppsummering my-8'}
-            data-cy={'oppsummering-fra-søknaden'}
+            className="oppsummering my-8"
+            data-cy="oppsummering-fra-søknaden"
             aria-label={tittel}
         >
             <ExpansionCard.Header onClick={() => setErApen(!erApen)}>
-                <Heading size="small" level="2" className={'flex h-full items-center'}>
+                <Heading size="small" level="2" className="flex h-full items-center">
                     {tittel}
                 </Heading>
             </ExpansionCard.Header>

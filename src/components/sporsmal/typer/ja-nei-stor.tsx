@@ -75,8 +75,8 @@ const JaNeiStor = ({ sporsmal }: SpmProps) => {
                         <RadioGroup
                             {...field}
                             legend={sporsmal.sporsmalstekst}
-                            data-cy={'ja-nei-stor'}
-                            className={'w-full'}
+                            data-cy="ja-nei-stor"
+                            className="w-full"
                             key={sporsmal.id}
                             style={
                                 {
@@ -98,12 +98,12 @@ const JaNeiStor = ({ sporsmal }: SpmProps) => {
                                         '--a-shadow-focus': '0 0 0 0',
                                     } as React.CSSProperties
                                 }
-                                className={'flex w-full flex-wrap justify-between'}
+                                className="flex w-full flex-wrap justify-between"
                             >
-                                <Radio id={`${field.name}_0`} value={'JA'} className={radioClassName('JA')}>
+                                <Radio id={`${field.name}_0`} value="JA" className={radioClassName('JA')}>
                                     Ja
                                 </Radio>
-                                <Radio id={`${field.name}_1`} value={'NEI'} className={radioClassName('NEI')}>
+                                <Radio id={`${field.name}_1`} value="NEI" className={radioClassName('NEI')}>
                                     Nei
                                 </Radio>
                             </div>
@@ -150,7 +150,7 @@ const JaNeiStor = ({ sporsmal }: SpmProps) => {
                                 watchJaNei === 'JA'
                             }
                             render={() => (
-                                <Alert data-cy={'feriekorrigeringvarsel'} className="mt-8" variant="info">
+                                <Alert data-cy="feriekorrigeringvarsel" className="mt-8" variant="info">
                                     Du kan dra på ferie mens du er sykmeldt, men du får ikke utbetalt sykepenger når du
                                     har ferie.
                                 </Alert>

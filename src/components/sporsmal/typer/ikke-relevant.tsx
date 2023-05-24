@@ -10,8 +10,8 @@ const IkkeRelevant = ({ sporsmal }: SpmProps) => {
         <Vis
             hvis={sporsmal.sporsmalstekst}
             render={() => (
-                <div className={'mt-4 rounded-md border border-gray-600 p-4'}>
-                    <Label as="h2" className={'mb-4'}>
+                <div className="mt-4 rounded-md border border-gray-600 p-4">
+                    <Label as="h2" className="mb-4">
                         {sporsmal.sporsmalstekst}
                     </Label>
                     {sporsmal.undertekst && <BodyLong as="div">{parserWithReplace(sporsmal.undertekst)}</BodyLong>}

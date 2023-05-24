@@ -21,14 +21,14 @@ const Over16dager = ({ erGradert }: gradertReisetilskuddProps) => {
                     ? tekst('kvittering.arbeidstaker.over16.gradertreisetilskudd.brodtekst')
                     : tekst('kvittering.arbeidstaker.over16.brodtekst')}
             </BodyLong>
-            <ReadMore className={'mt-2'} header={tekst('kvittering.arbeidstaker.hvorfor-skille-ved-16-dager')}>
+            <ReadMore className="mt-2" header={tekst('kvittering.arbeidstaker.hvorfor-skille-ved-16-dager')}>
                 <BodyLong spacing>
                     {erGradert
                         ? tekst('kvittering.arbeidsgiveren-skal-betale-gradertreisetilskudd')
                         : tekst('kvittering.arbeidsgiveren-skal-betale')}
                 </BodyLong>
             </ReadMore>
-            <ReadMore className={'mt-2'} header={tekst('kvittering.hva-er-inntektsmelding')}>
+            <ReadMore className="mt-2" header={tekst('kvittering.hva-er-inntektsmelding')}>
                 <BodyLong spacing>{tekst('kvittering.arbeidstaker.over16.inntektsmelding.brodtekst')}</BodyLong>
             </ReadMore>
             <div className="avsnitt hva-skjer">

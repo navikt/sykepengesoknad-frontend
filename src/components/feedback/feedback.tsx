@@ -69,8 +69,8 @@ export const Feedback = ({ soknad, steg }: { soknad: Soknad; steg: number }) => 
         return (
             <Button
                 data-cy={'feedback-' + props.feedbacktype}
-                variant={'secondary-neutral'}
-                size={'small'}
+                variant="secondary-neutral"
+                size="small"
                 className={cn({
                     'bg-surface-neutral-active text-text-on-inverted hover:bg-surface-neutral-active':
                         activeState === props.feedbacktype,
@@ -112,17 +112,17 @@ export const Feedback = ({ soknad, steg }: { soknad: Soknad; steg: number }) => 
     }
 
     return (
-        <div className={'w:full mt-16 md:w-3/4'} data-cy={'feedback-wrapper'}>
-            <div className={'rounded-t-xl bg-gray-200 p-6'}>
+        <div className="w:full mt-16 md:w-3/4" data-cy="feedback-wrapper">
+            <div className="rounded-t-xl bg-gray-200 p-6">
                 <Heading size="xsmall" level="2">
                     Hjelp oss med å gjøre søknaden bedre (valgfritt)
                 </Heading>
             </div>
-            <div className={'mt-1 rounded-b-xl bg-surface-subtle p-6'}>
-                <BodyShort className={'mb-6'}>
+            <div className="mt-1 rounded-b-xl bg-surface-subtle p-6">
+                <BodyShort className="mb-6">
                     Opplever du at du har nok informasjon til å svare på dette spørsmålet?
                 </BodyShort>
-                <div className={'flex w-full gap-2'}>
+                <div className="flex w-full gap-2">
                     <FeedbackButton feedbacktype={Feedbacktype.JA}>Ja</FeedbackButton>
                     <FeedbackButton feedbacktype={Feedbacktype.NEI}>Nei</FeedbackButton>
                     <FeedbackButton feedbacktype={Feedbacktype.FORBEDRING}>Foreslå forbedring</FeedbackButton>
@@ -130,7 +130,7 @@ export const Feedback = ({ soknad, steg }: { soknad: Soknad; steg: number }) => 
                 {activeState !== null && (
                     <form className="mt-6 flex w-full flex-col gap-4">
                         <Textarea
-                            data-cy={'feedback-textarea'}
+                            data-cy="feedback-textarea"
                             ref={textAreaRef}
                             error={errorMsg}
                             label={getPlaceholder()}

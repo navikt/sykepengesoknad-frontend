@@ -52,7 +52,7 @@ const OpprettUtland = () => {
         <>
             <GuidePanel poster={true}>{parserWithReplace(tekst('opprett-utland.bjorn'))}</GuidePanel>
 
-            <Panel border className={'mt-16'}>
+            <Panel border className="mt-16">
                 <Heading spacing size="medium" level="1">
                     {tekst('opprett-utland.tittel')}
                 </Heading>
@@ -60,7 +60,7 @@ const OpprettUtland = () => {
                 <BodyLong>{parserWithReplace(tekst('opprett-utland.trenger-ikke-soke'))}</BodyLong>
             </Panel>
 
-            <Button variant="primary" type="button" onClick={opprett} className={'mb-8 mt-16'}>
+            <Button variant="primary" type="button" onClick={opprett} className="mb-8 mt-16">
                 {tekst('opprett-utland.fortsett')}
             </Button>
 

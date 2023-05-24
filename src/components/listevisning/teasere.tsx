@@ -40,8 +40,8 @@ const Teasere = ({ soknader, tittel, tomListeTekst, kanSorteres = false }: Sokna
     }
 
     return (
-        <div data-cy={tittel} className={'mb-12'}>
-            <div className={'mb-3 flex justify-between'}>
+        <div data-cy={tittel} className="mb-12">
+            <div className="mb-3 flex justify-between">
                 <Vis
                     hvis={sorterteSoknader().length > 0 || tomListeTekst}
                     render={() => (
@@ -54,8 +54,8 @@ const Teasere = ({ soknader, tittel, tomListeTekst, kanSorteres = false }: Sokna
                     hvis={kanSorteres && sorterteSoknader().length > 0}
                     render={() => (
                         <Select
-                            size={'small'}
-                            label={'Sorter etter'}
+                            size="small"
+                            label="Sorter etter"
                             onChange={(event) => setSortering(event.target.value as Sortering)}
                         >
                             {Object.values(Sortering).map((sort, idx) => {

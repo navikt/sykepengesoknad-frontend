@@ -97,7 +97,7 @@ const JaNeiLiten = ({ sporsmal }: SpmProps) => {
             <Vis
                 hvis={sporsmal.tag === TagTyper.SYKMELDINGSGRAD && watchJaNei === 'NEI'}
                 render={() => (
-                    <ProgressivtGuidePanel className={'mb-8'}>
+                    <ProgressivtGuidePanel className="mb-8">
                         <BodyShort>{parserWithReplace(tekst('sykepengesoknad-utland.skjema.bjorn'))}</BodyShort>
                     </ProgressivtGuidePanel>
                 )}
@@ -107,7 +107,7 @@ const JaNeiLiten = ({ sporsmal }: SpmProps) => {
                 hvis={sporsmal.tag === TagTyper.FERIE && watchJaNei === 'JA'}
                 render={() => (
                     <>
-                        <ProgressivtGuidePanel className={'mb-8'}>
+                        <ProgressivtGuidePanel className="mb-8">
                             <BodyShort>
                                 {parserWithReplace(tekst('sykepengesoknad-utland.skjema.ferie-sporsmal-bjorn'))}
                             </BodyShort>

@@ -30,7 +30,7 @@ export const GuidepanelMedKnapp = ({ heading, innhold, knappeTekst, url, kompone
                 {innhold}
             </BodyShort>
             <Button
-                variant={'primary'}
+                variant="primary"
                 onClick={() => {
                     logEvent('knapp klikket', {
                         tekst: knappeTekst,

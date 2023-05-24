@@ -88,7 +88,7 @@ const KvitteringSide = () => {
                         hvis={gjenstaendeSoknader.length === 0}
                         render={() => (
                             <Button
-                                className={'mt-8'}
+                                className="mt-8"
                                 onClick={() => {
                                     logEvent('knapp klikket', {
                                         tekst: tekst('kvittering.ferdig'),

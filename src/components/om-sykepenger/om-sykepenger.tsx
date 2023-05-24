@@ -13,7 +13,7 @@ const OmSykepenger = () => {
 
     const tittel = tekst('om.sykepenger.tittel')
     return (
-        <ExpansionCard open={open1} aria-label={tittel} className={'mb-8'}>
+        <ExpansionCard open={open1} aria-label={tittel} className="mb-8">
             <ExpansionCard.Header
                 onClick={() => {
                     logEvent(open1 ? 'accordion lukket' : 'accordion åpnet', {
@@ -23,7 +23,7 @@ const OmSykepenger = () => {
                     setOpen1(!open1)
                 }}
             >
-                <Heading size="small" level="2" className={'flex h-full items-center'}>
+                <Heading size="small" level="2" className="flex h-full items-center">
                     {tittel}
                 </Heading>
             </ExpansionCard.Header>
@@ -32,7 +32,7 @@ const OmSykepenger = () => {
                 <Label as="h3">{tekst('om.sykepenger.hvorfor')}</Label>
                 <BodyLong spacing>{tekst('om.sykepenger.tekst3')}</BodyLong>
 
-                <Accordion className={'mb-8'}>
+                <Accordion className="mb-8">
                     <Accordion.Item open={open2}>
                         <Accordion.Header
                             onClick={() => {
@@ -77,7 +77,7 @@ const OmSykepenger = () => {
                     </Accordion.Item>
                 </Accordion>
 
-                <Label as="h3" className={'mb-4'}>
+                <Label as="h3" className="mb-4">
                     {tekst('om.sykepenger.tittel2')}
                 </Label>
                 <LenkeMedIkon href={tekst('om.sykepenger.lenke1.url')} text={tekst('om.sykepenger.lenke1')} />

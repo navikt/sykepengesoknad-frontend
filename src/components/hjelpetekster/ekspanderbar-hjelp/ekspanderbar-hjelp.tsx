@@ -110,7 +110,7 @@ export const EkspanderbarHjelp = ({ sporsmal }: SpmProps) => {
 
     return (
         <ReadMore
-            className={'mb-8 mt-4 w-full'}
+            className="mb-8 mt-4 w-full"
             header={tittel}
             open={expanded}
             onClick={() => {
@@ -123,7 +123,7 @@ export const EkspanderbarHjelp = ({ sporsmal }: SpmProps) => {
                 setExpanded((prev) => !prev)
             }}
         >
-            <div className={'mt-4'}>{ekspanderbarInnhold}</div>
+            <div className="mt-4">{ekspanderbarInnhold}</div>
         </ReadMore>
     )
 }

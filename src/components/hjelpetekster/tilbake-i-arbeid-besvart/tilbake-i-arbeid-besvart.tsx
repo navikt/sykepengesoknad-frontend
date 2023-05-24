@@ -12,11 +12,11 @@ export function TilbakeIArbeidBesvart({ sporsmal, fieldValue }: { sporsmal: Spor
         return null
     }
     return (
-        <Alert variant="info" className={'mt-4'}>
+        <Alert variant="info" className="mt-4">
             {TilbakeIArbeidBesvartHjeletekstTekster.del1}
             {tilLesbarPeriodeMedArstall(fieldValue, sporsmal.max)}
             {TilbakeIArbeidBesvartHjeletekstTekster.del2}
-            <span className={'mt-4 block text-gray-700'}>{TilbakeIArbeidBesvartHjeletekstTekster.span}</span>
+            <span className="mt-4 block text-gray-700">{TilbakeIArbeidBesvartHjeletekstTekster.span}</span>
         </Alert>
     )
 }

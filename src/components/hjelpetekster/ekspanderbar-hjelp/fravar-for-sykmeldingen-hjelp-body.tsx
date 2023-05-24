@@ -8,7 +8,7 @@ export const FravarForSykmeldingenHjelpBody = () => {
                 sykefraværet.
             </BodyLong>
 
-            <BodyLong className={'mt-4'}>
+            <BodyLong className="mt-4">
                 NAV trenger å vite om du var syk og borte fra jobb med egenmelding noen av disse dagene før du ble
                 sykmeldt for å beregne riktig utbetaling av sykepenger.
             </BodyLong>

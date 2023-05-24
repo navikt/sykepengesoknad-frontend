@@ -18,7 +18,7 @@ const htmlParserOptionsWithReplace: HTMLReactParserOptions = {
             }
             if (domNode.name === 'li') {
                 return (
-                    <li className={'mt-2'} {...domNode.attribs}>
+                    <li className="mt-2" {...domNode.attribs}>
                         {domToReact(domNode.children, htmlParserOptionsWithReplace)}
                     </li>
                 )

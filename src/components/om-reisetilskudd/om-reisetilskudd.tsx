@@ -11,7 +11,7 @@ const OmReisetilskudd = () => {
 
     const tittel = tekst('tilskudd.start.om-reisetilskudd')
     return (
-        <ExpansionCard open={open} data-cy="om-reisetilskudd" aria-label={tittel} className={'mb-4'}>
+        <ExpansionCard open={open} data-cy="om-reisetilskudd" aria-label={tittel} className="mb-4">
             <ExpansionCard.Header
                 onClick={() => {
                     logEvent(open ? 'accordion lukket' : 'accordion åpnet', {
@@ -20,7 +20,7 @@ const OmReisetilskudd = () => {
                     setOpen(!open)
                 }}
             >
-                <Heading size="small" level="2" className={'flex h-full items-center'}>
+                <Heading size="small" level="2" className="flex h-full items-center">
                     {tittel}
                 </Heading>
             </ExpansionCard.Header>
@@ -42,7 +42,7 @@ const OmReisetilskudd = () => {
 
                 <BodyLong spacing>
                     <LenkeMedIkon
-                        href={'https://nav.no/reisetilskudd'}
+                        href="https://nav.no/reisetilskudd"
                         text={tekst('tilskudd.start.les-mer-reisetilskudd')}
                     />
                     .
