@@ -11,22 +11,22 @@ import { logEvent } from '../../amplitude/amplitude'
 import { tekst } from '../../../utils/tekster'
 import { Soknad } from '../../../types/types'
 
-const TilbakeKnapp = ({ soknad, stegNo }: { soknad: Soknad; stegNo: number }) => {
-    if (stegNo == 1) {
+const TilbakeKnapp = ({ soknad, stegNummer }: { soknad: Soknad; stegNummer: number }) => {
+    if (stegNummer == 1) {
         return <div></div> //Tom div pga flex justify-between på parent
     }
 
     return (
         <Link
-            to={`/soknader/${soknad.id}${SEPARATOR}${stegNo - 1}${window.location.search}`}
+            to={`/soknader/${soknad.id}${SEPARATOR}${stegNummer - 1}${window.location.search}`}
             className="navds-link"
             onClick={() => {
                 logEvent('navigere', {
                     lenketekst: tekst('soknad.tilbakeknapp'),
-                    fra: soknad!.sporsmal[stegNo - 1].tag,
-                    til: soknad!.sporsmal[stegNo - 2].tag,
+                    fra: soknad!.sporsmal[stegNummer - 1].tag,
+                    til: soknad!.sporsmal[stegNummer - 2].tag,
                     soknadstype: soknad?.soknadstype,
-                    stegId: `${stegNo}`,
+                    stegId: `${stegNummer}`,
                 })
             }}
         >
@@ -60,7 +60,7 @@ const Fremdriftsbar = () => {
                 <div className="-mt-3 h-3 rounded-lg bg-gray-900" style={style} />
             </div>
             <div className="mt-4 flex justify-between">
-                <TilbakeKnapp soknad={valgtSoknad} stegNo={stegNummer} />
+                <TilbakeKnapp soknad={valgtSoknad} stegNummer={stegNummer} />
                 <BodyShort as="span">
                     {parserWithReplace(`${stegId}&nbsp;av&nbsp;${antallSteg}`) + ' spørsmål'}
                 </BodyShort>

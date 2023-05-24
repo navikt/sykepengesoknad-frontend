@@ -69,10 +69,10 @@ const SporsmalForm = () => {
     useEffect(() => {
         methods.reset(hentFormState(sporsmal), { keepValues: false })
 
-        const sisteSide = erSisteSporsmal()
-        setErSiste(sisteSide)
+        const sisteSporsmal = erSisteSporsmal()
+        setErSiste(sisteSporsmal)
 
-        if (sisteSide) {
+        if (sisteSporsmal) {
             hentMottaker().catch((e: Error) => logger.error(e))
         }
         // eslint-disable-next-line
@@ -273,7 +273,9 @@ const SporsmalForm = () => {
                     />
                     <Vis
                         hvis={skalViseKnapperad(valgtSoknad, sporsmal, methods.getValues())}
-                        render={() => <Knapperad soknad={valgtSoknad} poster={poster || senderSoknad} />}
+                        render={() => (
+                            <Knapperad soknad={valgtSoknad} poster={poster || senderSoknad} erSisteSporsmal={erSiste} />
+                        )}
                     />
                 </form>
             </FormProvider>

@@ -15,18 +15,17 @@ import { RouteParams } from '../../../app'
 interface KnapperadProps {
     soknad: Soknad
     poster: boolean
+    erSisteSporsmal: boolean
 }
 
-const Knapperad = ({ soknad, poster }: KnapperadProps) => {
+const Knapperad = ({ soknad, poster, erSisteSporsmal }: KnapperadProps) => {
     const { stegId } = useParams<RouteParams>()
 
     const stegNo = parseInt(stegId!)
-    const spmIndex = stegNo - 2
     const erUtlandssoknad = soknad.soknadstype === RSSoknadstype.OPPHOLD_UTLAND
 
     const nokkel = () => {
-        const erSisteSteg = spmIndex === soknad.sporsmal.length - 2
-        if (erSisteSteg) {
+        if (erSisteSporsmal) {
             if (soknad.status === RSSoknadstatus.UTKAST_TIL_KORRIGERING) {
                 return 'sykepengesoknad.send.endringene'
             }

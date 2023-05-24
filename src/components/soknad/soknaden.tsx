@@ -41,7 +41,7 @@ const Soknaden = () => {
     const { data: valgtSykmelding } = useSykmelding(valgtSoknad?.sykmeldingId)
     const navigate = useNavigate()
 
-    const stegNo = parseInt(stegId!)
+    const stegNummer = parseInt(stegId!)
 
     useUpdateBreadcrumbs(() => [{ ...soknadBreadcrumb, handleInApp: true }], [])
 
@@ -77,16 +77,16 @@ const Soknaden = () => {
         return <QueryStatusPanel valgSoknadId={id} valgSykmeldingId={valgtSoknad?.sykmeldingId} />
     }
 
-    const tittel = tekst(hentNokkel(valgtSoknad!, stegNo) as any)
+    const tittel = tekst(hentNokkel(valgtSoknad!, stegNummer) as any)
     const erUtlandssoknad = valgtSoknad.soknadstype === RSSoknadstype.OPPHOLD_UTLAND && !valgtSykmelding
     const erReisetilskuddsoknad = valgtSoknad.soknadstype === RSSoknadstype.REISETILSKUDD
     const erGradertReisetilskuddsoknad = valgtSoknad.soknadstype === RSSoknadstype.GRADERT_REISETILSKUDD
 
     if (!erUtlandssoknad) {
         const eldreUsendtSoknad = harEldreUsendtSoknad(valgtSoknad, soknader)
-        const usendteSm = eldreUsendteSykmeldinger(sykmeldinger, valgtSoknad.tom!)
-        if (usendteSm.length > 0) {
-            return <EldreUsendtSykmelding usendteSykmeldinger={usendteSm} />
+        const usendteSykmeldinger = eldreUsendteSykmeldinger(sykmeldinger, valgtSoknad.tom!)
+        if (usendteSykmeldinger.length > 0) {
+            return <EldreUsendtSykmelding usendteSykmeldinger={usendteSykmeldinger} />
         }
         if (eldreUsendtSoknad.eldsteSoknad) {
             return <EldreUsendtSoknad eldreSoknad={eldreUsendtSoknad.eldsteSoknad} antall={eldreUsendtSoknad.antall} />
@@ -99,34 +99,36 @@ const Soknaden = () => {
 
             <HotjarTrigger jsTrigger={hentHotjarJsTrigger(valgtSoknad.soknadstype, 'soknad')}>
                 <>
-                    <Vis hvis={stegNo > 1 || erUtlandssoknad} render={() => <Fremdriftsbar />} />
+                    <Vis hvis={stegNummer > 1 || erUtlandssoknad} render={() => <Fremdriftsbar />} />
 
-                    <Vis hvis={stegNo === 1 && !erUtlandssoknad} render={() => <ViktigInformasjon />} />
+                    <Vis hvis={stegNummer === 1 && !erUtlandssoknad} render={() => <ViktigInformasjon />} />
 
-                    <Vis hvis={stegNo === 1 && erGradertReisetilskuddsoknad} render={() => <SoknadMedToDeler />} />
+                    <Vis hvis={stegNummer === 1 && erGradertReisetilskuddsoknad} render={() => <SoknadMedToDeler />} />
 
                     <Vis
-                        hvis={stegNo === 1 && valgtSoknad.opprettetAvInntektsmelding}
+                        hvis={stegNummer === 1 && valgtSoknad.opprettetAvInntektsmelding}
                         render={() => <EgenmeldingsdagerArbeidsgiver />}
                     />
 
                     <Vis
-                        hvis={stegNo === 1 && !erUtlandssoknad}
-                        render={() => <Opplysninger ekspandert={true} steg={valgtSoknad.sporsmal[stegNo - 1].tag} />}
+                        hvis={stegNummer === 1 && !erUtlandssoknad}
+                        render={() => (
+                            <Opplysninger ekspandert={true} steg={valgtSoknad.sporsmal[stegNummer - 1].tag} />
+                        )}
                     />
 
                     <Vis
-                        hvis={stegNo === 1 && !erUtlandssoknad}
+                        hvis={stegNummer === 1 && !erUtlandssoknad}
                         render={() => <FristSykepenger soknad={valgtSoknad} />}
                     />
 
                     <Vis
-                        hvis={stegNo === 1 && (erReisetilskuddsoknad || erGradertReisetilskuddsoknad)}
+                        hvis={stegNummer === 1 && (erReisetilskuddsoknad || erGradertReisetilskuddsoknad)}
                         render={() => <OmReisetilskudd />}
                     />
 
                     <Vis
-                        hvis={tittel && stegNo !== 1 && !erUtlandssoknad}
+                        hvis={tittel && stegNummer !== 1 && !erUtlandssoknad}
                         render={() => (
                             <Heading data-cy="sporsmal-tittel" level="2" size="medium" className="mb-4 mt-16">
                                 {tittel}
@@ -135,7 +137,7 @@ const Soknaden = () => {
                     />
 
                     <SporsmalForm />
-                    <Feedback soknad={valgtSoknad} steg={stegNo} />
+                    <Feedback soknad={valgtSoknad} steg={stegNummer} />
                 </>
             </HotjarTrigger>
         </>
