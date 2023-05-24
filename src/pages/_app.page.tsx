@@ -2,6 +2,8 @@
 import '../style/global.css'
 import '../components/frist-sykepenger/frist-sykepenger.css'
 import '../components/kvittering/kvittering.css'
+import '../components/om-sykepenger/om-sykepenger.css'
+import '../components/oppsummering/oppsummering.css'
 import '../components/sporsmal/landvelger/landvelger.css'
 
 import { configureLogger } from '@navikt/next-logger'

@@ -105,8 +105,16 @@ const NavAutosuggest = (props: NavAutosuggestProps) => {
                 onChange: onChange,
                 onKeyPress: onKeypress,
                 onBlur: onBlur,
-                className: cn('skjemaelement__input input--l input--autocomplete'),
+                className: cn('p-2 border rounded-md leading-relaxed w-full max-w-xs'),
                 'aria-labelledby': 'landvelger-label',
+            }}
+            theme={{
+                suggestionsContainerOpen: cn(
+                    'mt-1 rounded-md border bg-white absolute w-full max-w-xs max-h-80 sm:max-h-120 overflow-y-auto z-1',
+                ),
+                suggestionsList: cn('list-none'),
+                suggestion: cn('p-4 border-b border-gray-400 underline text-text-action bg-transparent font-medium'),
+                suggestionHighlighted: cn('cursor-pointer bg-gray-100'),
             }}
         />
     )
