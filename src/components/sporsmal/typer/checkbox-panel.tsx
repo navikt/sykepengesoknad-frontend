@@ -24,7 +24,6 @@ const CheckboxInput = ({ sporsmal }: SpmProps) => {
                 render={({ field, fieldState }) => (
                     <ConfirmationPanel
                         {...field}
-                        className={'bekreftCheckboksPanel'}
                         checked={field.value}
                         id={field.name}
                         label={spm.sporsmalstekst}

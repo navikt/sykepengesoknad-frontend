@@ -47,12 +47,12 @@ const FilListe = () => {
                         <Table.Header>
                             <Table.Row>
                                 <Table.HeaderCell scope="col">
-                                    <span className="sr-only">Ekspander for å se kvitteringen</span>
+                                    <span className={'sr-only'}>Ekspander for å se kvitteringen</span>
                                 </Table.HeaderCell>
                                 <Table.HeaderCell scope="col">Utgift</Table.HeaderCell>
                                 <Table.HeaderCell scope="col">Beløp</Table.HeaderCell>
                                 <Table.HeaderCell scope="col">
-                                    <span className="sr-only">Slett kvitteringen</span>
+                                    <span className={'sr-only'}>Slett kvitteringen</span>
                                 </Table.HeaderCell>
                             </Table.Row>
                         </Table.Header>
@@ -68,13 +68,13 @@ const FilListe = () => {
                                 )
                             })}
                             <Table.Row>
-                                <Table.DataCell colSpan={2} className="border-b-0 font-bold">
+                                <Table.DataCell colSpan={2} className={'border-b-0 font-bold'}>
                                     {getLedetekst(tekst('fil_liste.utlegg.sum'), {
                                         '%ANTALL_BILAG%': kvitteringer.length,
                                         '%FLERTALL%': kvitteringer.length > 1 ? 'er' : '',
                                     })}
                                 </Table.DataCell>
-                                <Table.DataCell colSpan={2} className="border-b-0 font-bold">
+                                <Table.DataCell colSpan={2} className={'border-b-0 font-bold'}>
                                     {formatterTall(totaltBeløp())} kr
                                 </Table.DataCell>
                             </Table.Row>

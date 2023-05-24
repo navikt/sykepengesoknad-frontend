@@ -128,7 +128,7 @@ const Soknaden = () => {
                     <Vis
                         hvis={tittel && stegNo !== 1 && !erUtlandssoknad}
                         render={() => (
-                            <Heading data-cy="sporsmal-tittel" level="2" size="medium" className="mb-4 mt-16">
+                            <Heading data-cy="sporsmal-tittel" level="2" size="medium" className={'mb-4 mt-16'}>
                                 {tittel}
                             </Heading>
                         )}
