@@ -118,9 +118,7 @@ const PeriodeKomp = ({ sporsmal, index, slettPeriode }: AllProps) => {
                                             label={tekst('sykepengesoknad.periodevelger.fom')}
                                             id={sporsmal.id + '_' + index + '_fom'}
                                             className={styles.doubletoppadding}
-                                            value={
-                                                periode.fom ? backendStrengTilFrontendFormat(periode.fom) : undefined
-                                            }
+                                            value={periode.fom ? backendStrengTilFrontendFormat(periode.fom) : ''}
                                         />
 
                                         <UNSAFE_DatePicker.Input
@@ -128,9 +126,7 @@ const PeriodeKomp = ({ sporsmal, index, slettPeriode }: AllProps) => {
                                             label={tekst('sykepengesoknad.periodevelger.tom')}
                                             id={sporsmal.id + '_' + index + '_tom'}
                                             className={styles.toppadding}
-                                            value={
-                                                periode.tom ? backendStrengTilFrontendFormat(periode.tom) : undefined
-                                            }
+                                            value={periode.tom ? backendStrengTilFrontendFormat(periode.tom) : ''}
                                         />
                                         <Vis
                                             hvis={index > 0}

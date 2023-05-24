@@ -42,6 +42,7 @@ const RadioKomp = ({ sporsmal }: SpmProps) => {
             <Controller
                 name={sporsmal.id}
                 rules={{ required: feilmelding.global }}
+                defaultValue=""
                 render={({ field }) => (
                     <RadioGroup
                         {...field}
