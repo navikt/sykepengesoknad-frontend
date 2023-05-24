@@ -76,7 +76,6 @@ const PeriodeKomp = ({ sporsmal, index, slettPeriode }: AllProps) => {
                         validate: {
                             fom: () => {
                                 const validert = validerFom(sporsmal, id, getValues(), rangeValidation)
-
                                 const div: HTMLElement | null = document.getElementById(id + '_fom')!.parentElement
                                 if (validert !== true) {
                                     div?.classList.add('skjemaelement__input--harFeil')
@@ -86,7 +85,6 @@ const PeriodeKomp = ({ sporsmal, index, slettPeriode }: AllProps) => {
                                 return validert
                             },
                             tom: () => {
-                                // return true
                                 const validert = validerTom(sporsmal, id, getValues(), rangeValidation)
                                 const div: HTMLElement | null = document.getElementById(id + '_tom')!.parentElement
                                 if (validert !== true) {
@@ -118,7 +116,9 @@ const PeriodeKomp = ({ sporsmal, index, slettPeriode }: AllProps) => {
                                             label={tekst('sykepengesoknad.periodevelger.fom')}
                                             id={sporsmal.id + '_' + index + '_fom'}
                                             className={styles.doubletoppadding}
-                                            value={periode.fom ? backendStrengTilFrontendFormat(periode.fom) : ''}
+                                            value={
+                                                periode.fom ? backendStrengTilFrontendFormat(periode.fom) : undefined
+                                            }
                                         />
 
                                         <UNSAFE_DatePicker.Input
@@ -126,7 +126,9 @@ const PeriodeKomp = ({ sporsmal, index, slettPeriode }: AllProps) => {
                                             label={tekst('sykepengesoknad.periodevelger.tom')}
                                             id={sporsmal.id + '_' + index + '_tom'}
                                             className={styles.toppadding}
-                                            value={periode.tom ? backendStrengTilFrontendFormat(periode.tom) : ''}
+                                            value={
+                                                periode.tom ? backendStrengTilFrontendFormat(periode.tom) : undefined
+                                            }
                                         />
                                         <Vis
                                             hvis={index > 0}
