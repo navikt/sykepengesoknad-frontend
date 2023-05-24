@@ -10,8 +10,6 @@ import { hentPeriode } from '../hent-svar'
 import { SpmProps } from '../sporsmal-form/sporsmal-form'
 import { hentFeilmelding } from '../sporsmal-utils'
 
-import styles from './periode-komp.module.css'
-
 interface PeriodeProps {
     index: number
     slettPeriode: (e: any, idx: number) => void
@@ -112,12 +110,12 @@ const PeriodeKomp = ({ sporsmal, index, slettPeriode }: AllProps) => {
                         <div>
                             <fieldset className="skjemagruppe axe-exclude p-0">
                                 <UNSAFE_DatePicker {...datepickerProps}>
-                                    <div className={styles.displayasrow}>
+                                    <div className="flex-row items-end gap-4 md:flex">
                                         <UNSAFE_DatePicker.Input
                                             {...fromInputProps}
                                             label={tekst('sykepengesoknad.periodevelger.fom')}
                                             id={sporsmal.id + '_' + index + '_fom'}
-                                            className={styles.doubletoppadding}
+                                            className="mt-6"
                                             value={
                                                 periode.fom ? backendStrengTilFrontendFormat(periode.fom) : undefined
                                             }
@@ -127,7 +125,7 @@ const PeriodeKomp = ({ sporsmal, index, slettPeriode }: AllProps) => {
                                             {...toInputProps}
                                             label={tekst('sykepengesoknad.periodevelger.tom')}
                                             id={sporsmal.id + '_' + index + '_tom'}
-                                            className={styles.toppadding}
+                                            className="mt-2 md:mt-0"
                                             value={
                                                 periode.tom ? backendStrengTilFrontendFormat(periode.tom) : undefined
                                             }
