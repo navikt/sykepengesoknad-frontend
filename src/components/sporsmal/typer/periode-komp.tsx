@@ -74,7 +74,6 @@ const PeriodeKomp = ({ sporsmal, index, slettPeriode }: AllProps) => {
                         validate: {
                             fom: () => {
                                 const validert = validerFom(sporsmal, id, getValues(), rangeValidation)
-
                                 const div: HTMLElement | null = document.getElementById(id + '_fom')!.parentElement
                                 if (validert !== true) {
                                     div?.classList.add('skjemaelement__input--harFeil')
@@ -84,7 +83,6 @@ const PeriodeKomp = ({ sporsmal, index, slettPeriode }: AllProps) => {
                                 return validert
                             },
                             tom: () => {
-                                // return true
                                 const validert = validerTom(sporsmal, id, getValues(), rangeValidation)
                                 const div: HTMLElement | null = document.getElementById(id + '_tom')!.parentElement
                                 if (validert !== true) {

@@ -19,7 +19,7 @@ describe('Tester sortering av søknader', () => {
     })
 
     it('Nye søknader sorteres etter tidligste tom dato', function () {
-        cy.get('[data-cy="Nye søknader"] a').then((articles: any) => {
+        cy.get('[data-cy="Nye søknader"] .navds-link-panel').then((articles: any) => {
             const soknader = articleTilSoknad(articles)
             let forrigeSoknad = soknader[0]
             soknader.forEach((sok: Soknad) => {
@@ -31,7 +31,7 @@ describe('Tester sortering av søknader', () => {
 
     it('Sorter etter Status', function () {
         cy.get('select').select('Status')
-        cy.get('[data-cy="Tidligere søknader"] a, [data-cy="Tidligere søknader"] button').then((articles: any) => {
+        cy.get('[data-cy="Tidligere søknader"] .navds-link-panel').then((articles: any) => {
             const soknader = articleTilSoknad(articles)
             let forrigeSoknad = soknader[0]
             soknader.forEach((sok: Soknad) => {
@@ -43,7 +43,7 @@ describe('Tester sortering av søknader', () => {
 
     it('Sorter etter Dato', function () {
         cy.get('select').select('Dato')
-        cy.get('[data-cy="Tidligere søknader"] a, [data-cy="Tidligere søknader"] button').then((articles: any) => {
+        cy.get('[data-cy="Tidligere søknader"] .navds-link-panel').then((articles: any) => {
             const soknader = articleTilSoknad(articles)
             let forrigeSoknad = soknader[0]
             soknader.forEach((sok: Soknad) => {
@@ -51,27 +51,19 @@ describe('Tester sortering av søknader', () => {
                 forrigeSoknad = sok
             })
         })
+
+        cy.get('select').contains('Dato')
+        cy.get('[data-cy="Tidligere søknader"] .navds-link-panel').eq(0).contains('27. mai – 11. juni 2020')
+        cy.get('[data-cy="Tidligere søknader"] .navds-link-panel').eq(1).contains('23. mai – 7. juni 2020')
     })
 
     it('Sorter etter Sendt', function () {
-        cy.get('select').contains('Dato')
-        cy.get('[data-cy="Tidligere søknader"] a, [data-cy="Tidligere søknader"] button')
-            .eq(0)
-            .contains('27. mai – 11. juni 2020')
-        cy.get('[data-cy="Tidligere søknader"] a, [data-cy="Tidligere søknader"] button')
-            .eq(2)
-            .contains('23. mai – 7. juni 2020')
-
         cy.get('select').select('Sendt')
         cy.get('select').contains('Sendt')
 
-        cy.get('[data-cy="Tidligere søknader"] a, [data-cy="Tidligere søknader"] button')
-            .eq(0)
-            .contains('27. mai – 11. juni 2020')
-        cy.get('[data-cy="Tidligere søknader"] a, [data-cy="Tidligere søknader"] button')
-            .eq(2)
-            .contains('25. – 27. mars 2020')
-        cy.get('[data-cy="Tidligere søknader"] a, [data-cy="Tidligere søknader"] button').then((articles: any) => {
+        cy.get('[data-cy="Tidligere søknader"] .navds-link-panel').eq(0).contains('27. mai – 11. juni 2020')
+        cy.get('[data-cy="Tidligere søknader"] .navds-link-panel').eq(1).contains('25. – 27. mars 2020')
+        cy.get('[data-cy="Tidligere søknader"] .navds-link-panel').then((articles: any) => {
             const soknader = articleTilSoknad(articles)
             let forrigeSoknad = soknader[0]
             soknader.forEach((sok: Soknad) => {
