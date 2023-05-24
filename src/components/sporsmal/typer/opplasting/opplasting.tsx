@@ -33,11 +33,17 @@ const Opplasting = ({ sporsmal }: SpmProps) => {
 
             <EkspanderbarHjelp sporsmal={sporsmal} />
 
-            <Button type="button" variant="secondary" className="w-full p-8" onClick={aktiverModal}>
+            <Button type="button" variant="secondary" className={'w-full p-8'} onClick={aktiverModal}>
                 <BodyShort>{tekst('opplasting.legg-til')}</BodyShort>
             </Button>
 
-            <Modal open={openModal} onClose={lukkModal} closeButton aria-labelledby="opplasting-modal" className="w-96">
+            <Modal
+                open={openModal}
+                onClose={lukkModal}
+                closeButton
+                aria-labelledby="opplasting-modal"
+                className={'w-96'}
+            >
                 <Modal.Content>
                     <OpplastingForm valgtSoknad={valgtSoknad} setOpenModal={setOpenModal} />
                 </Modal.Content>

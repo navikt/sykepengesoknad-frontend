@@ -30,7 +30,7 @@ const CheckboxKomp = ({ sporsmal }: SpmProps) => {
                         legend={sporsmal.sporsmalstekst}
                         error={errors[sporsmal.id] !== undefined && feilmelding.lokal}
                         key={sporsmal.id}
-                        className="mt-8"
+                        className={'mt-8'}
                     >
                         {sporsmal.undersporsmal.map((uspm) => {
                             return (

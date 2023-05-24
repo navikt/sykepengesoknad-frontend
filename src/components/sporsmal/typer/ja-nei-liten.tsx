@@ -49,17 +49,13 @@ const JaNeiLiten = ({ sporsmal }: SpmProps) => {
             }
             if (spm.tag === 'INNTEKTSKILDE_SELVSTENDIG_ER_DU_SYKMELDT' && watchJaNei === 'NEI') {
                 return (
-                    <div className="presisering">
-                        <BodyShort as="span">
-                            {parserWithReplace(
-                                getLedetekst(tekst(('soknad.presisering.' + spm.tag + '_NEI') as any), {
-                                    '%URL%': tekst(
-                                        'soknad.presisering.INNTEKTSKILDE_SELVSTENDIG_ER_DU_SYKMELDT_NEI.url',
-                                    ),
-                                }),
-                            )}
-                        </BodyShort>
-                    </div>
+                    <BodyShort as="span">
+                        {parserWithReplace(
+                            getLedetekst(tekst(('soknad.presisering.' + spm.tag + '_NEI') as any), {
+                                '%URL%': tekst('soknad.presisering.INNTEKTSKILDE_SELVSTENDIG_ER_DU_SYKMELDT_NEI.url'),
+                            }),
+                        )}
+                    </BodyShort>
                 )
             }
         } else return <></>
@@ -101,7 +97,7 @@ const JaNeiLiten = ({ sporsmal }: SpmProps) => {
             <Vis
                 hvis={sporsmal.tag === TagTyper.SYKMELDINGSGRAD && watchJaNei === 'NEI'}
                 render={() => (
-                    <ProgressivtGuidePanel className="mb-8">
+                    <ProgressivtGuidePanel className={'mb-8'}>
                         <BodyShort>{parserWithReplace(tekst('sykepengesoknad-utland.skjema.bjorn'))}</BodyShort>
                     </ProgressivtGuidePanel>
                 )}
@@ -111,7 +107,7 @@ const JaNeiLiten = ({ sporsmal }: SpmProps) => {
                 hvis={sporsmal.tag === TagTyper.FERIE && watchJaNei === 'JA'}
                 render={() => (
                     <>
-                        <ProgressivtGuidePanel className="mb-8">
+                        <ProgressivtGuidePanel className={'mb-8'}>
                             <BodyShort>
                                 {parserWithReplace(tekst('sykepengesoknad-utland.skjema.ferie-sporsmal-bjorn'))}
                             </BodyShort>

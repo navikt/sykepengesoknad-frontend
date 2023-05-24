@@ -8,9 +8,7 @@ const UndertekstSum = ({ sporsmal }: OppsummeringProps) => {
     return (
         <div className="oppsummering__VisUndertekst">
             <Label as="h4">{sporsmal.sporsmalstekst}</Label>
-            <BodyLong spacing className="redaksjonelt-innhold">
-                {parserWithReplace(sporsmal.undertekst ?? '')}
-            </BodyLong>
+            <BodyLong spacing>{parserWithReplace(sporsmal.undertekst ?? '')}</BodyLong>
         </div>
     )
 }

@@ -20,7 +20,7 @@ const TilbakeKnapp = ({ soknad, stegNo }: { soknad: Soknad; stegNo: number }) =>
     return (
         <Link
             to={`/soknader/${soknad.id}${SEPARATOR}${stegNo - 1}${window.location.search}`}
-            className="navds-link tilbakelenke"
+            className="navds-link"
             onClick={() => {
                 logEvent('navigere', {
                     lenketekst: tekst('soknad.tilbakeknapp'),
@@ -51,16 +51,16 @@ const Fremdriftsbar = () => {
     if (!valgtSoknad || !stegId) return null
     return (
         <div
-            className="my-4 md:my-6"
+            className={'my-4 md:my-6'}
             role="progressbar"
             aria-valuenow={aktivtSteg}
             aria-valuemin={1}
             aria-valuemax={steg.length}
             aria-label="Søknadssteg"
         >
-            <div className="relative mx-auto mt-4">
-                <div className="h-3 rounded-lg bg-gray-200" />
-                <div className="-mt-3 h-3 rounded-lg bg-gray-900" style={style} />
+            <div className={'relative mx-auto mt-4'}>
+                <div className={'h-3 rounded-lg bg-gray-200'} />
+                <div className={'-mt-3 h-3 rounded-lg bg-gray-900'} style={style} />
             </div>
             <div className={'mt-4 flex justify-between'}>
                 <TilbakeKnapp soknad={valgtSoknad} stegNo={stegNo} />

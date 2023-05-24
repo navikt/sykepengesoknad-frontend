@@ -76,7 +76,7 @@ const JaNeiStor = ({ sporsmal }: SpmProps) => {
                             {...field}
                             legend={sporsmal.sporsmalstekst}
                             data-cy={'ja-nei-stor'}
-                            className="w-full"
+                            className={'w-full'}
                             key={sporsmal.id}
                             style={
                                 {
@@ -98,7 +98,7 @@ const JaNeiStor = ({ sporsmal }: SpmProps) => {
                                         '--a-shadow-focus': '0 0 0 0',
                                     } as React.CSSProperties
                                 }
-                                className="flex w-full flex-wrap justify-between"
+                                className={'flex w-full flex-wrap justify-between'}
                             >
                                 <Radio id={`${field.name}_0`} value={'JA'} className={radioClassName('JA')}>
                                     Ja

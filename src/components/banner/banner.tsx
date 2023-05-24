@@ -34,8 +34,8 @@ const Banner = ({ overskrift }: BannerProps) => {
     }
 
     return (
-        <header className="m-auto mt-4 flex items-center justify-between py-4">
-            <Heading size="large" level="1" className="inline md:mr-2">
+        <header className={'m-auto mt-4 flex items-center justify-between py-4'}>
+            <Heading size="large" level="1" className={'inline md:mr-2'}>
                 {overskrift === undefined ? tittel() : overskrift}
                 <Vis
                     hvis={valgtSoknad && valgtSoknad.fom && valgtSoknad.tom}
