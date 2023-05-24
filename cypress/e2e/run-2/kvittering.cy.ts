@@ -54,14 +54,18 @@ describe('Tester kvittering', () => {
                 )
 
             // Oppsummering minimert
-            cy.get('[data-cy="oppsummering-fra-søknaden"]  .navds-accordion__header')
-                .should('contain', 'Oppsummering fra søknaden')
-                .and('have.attr', 'aria-expanded', 'false')
+            cy.get('[data-cy="oppsummering-fra-søknaden"]  .navds-expansioncard__header-button').should(
+                'have.attr',
+                'aria-expanded',
+                'false',
+            )
 
             // Opplysninger minimert
-            cy.get('[data-cy="opplysninger-fra-sykmeldingen"] .navds-accordion__header')
-                .should('contain', 'Opplysninger fra sykmeldingen')
-                .and('have.attr', 'aria-expanded', 'false')
+            cy.get('[data-cy="opplysninger-fra-sykmeldingen"] .navds-expansioncard__header-button').should(
+                'have.attr',
+                'aria-expanded',
+                'false',
+            )
 
             // Knapperad ( Endre, Ettersend)
             cy.contains('Jeg vil endre svarene i søknaden').should('exist')
@@ -83,16 +87,18 @@ describe('Tester kvittering', () => {
             cy.get('[data-cy="kvittering-alert"]').should('not.exist')
 
             // Oppsummering ekspandert
-            cy.get('[data-cy="oppsummering-fra-søknaden"]  .navds-accordion__header').should(
-                'contain',
-                'Oppsummering fra søknaden',
+            cy.get('[data-cy="oppsummering-fra-søknaden"]  .navds-expansioncard__header-button').should(
+                'have.attr',
+                'aria-expanded',
+                'true',
             )
-
             // Opplysninger minimert
 
-            cy.get('[data-cy="opplysninger-fra-sykmeldingen"] .navds-accordion__header')
-                .should('contain', 'Opplysninger fra sykmeldingen')
-                .and('have.attr', 'aria-expanded', 'false')
+            cy.get('[data-cy="opplysninger-fra-sykmeldingen"] .navds-expansioncard__header-button').should(
+                'have.attr',
+                'aria-expanded',
+                'false',
+            )
 
             // Knapperad ( Endre, Ettersend)
             cy.contains('Jeg vil endre svarene i søknaden').should('exist')
@@ -158,9 +164,11 @@ describe('Tester kvittering', () => {
                 )
 
             // Oppsummering minimert
-            cy.get('[data-cy="oppsummering-fra-søknaden"]  .navds-accordion__header')
-                .should('contain', 'Oppsummering fra søknaden')
-                .and('have.attr', 'aria-expanded', 'false')
+            cy.get('[data-cy="oppsummering-fra-søknaden"]  .navds-expansioncard__header-button').should(
+                'have.attr',
+                'aria-expanded',
+                'false',
+            )
 
             // Opplysninger finnes ikke
             cy.contains('Opplysninger fra sykmeldingen').should('not.exist')
@@ -215,14 +223,18 @@ describe('Tester kvittering', () => {
                 )
 
             // Oppsummering minimert
-            cy.get('[data-cy="oppsummering-fra-søknaden"]  .navds-accordion__header')
-                .should('contain', 'Oppsummering fra søknaden')
-                .and('have.attr', 'aria-expanded', 'false')
+            cy.get('[data-cy="oppsummering-fra-søknaden"]  .navds-expansioncard__header-button').should(
+                'have.attr',
+                'aria-expanded',
+                'false',
+            )
 
             // Opplysninger minimert
-            cy.get('[data-cy="opplysninger-fra-sykmeldingen"] .navds-accordion__header')
-                .should('contain', 'Opplysninger fra sykmeldingen')
-                .and('have.attr', 'aria-expanded', 'false')
+            cy.get('[data-cy="opplysninger-fra-sykmeldingen"] .navds-expansioncard__header-button').should(
+                'have.attr',
+                'aria-expanded',
+                'false',
+            )
 
             // Knapperad ( Endre, Ettersend)
             cy.contains('Jeg vil endre svarene i søknaden').should('exist')
@@ -445,14 +457,18 @@ const inntil16dagerKvittering = () => {
         .and('not.contain', 'Når blir pengene utbetalt')
 
     // Oppsummering minimert
-    cy.get('[data-cy="oppsummering-fra-søknaden"]  .navds-accordion__header')
-        .should('contain', 'Oppsummering fra søknaden')
-        .and('have.attr', 'aria-expanded', 'false')
+    cy.get('[data-cy="oppsummering-fra-søknaden"]  .navds-expansioncard__header-button').should(
+        'have.attr',
+        'aria-expanded',
+        'false',
+    )
 
     // Opplysninger minimert
-    cy.get('[data-cy="opplysninger-fra-sykmeldingen"] .navds-accordion__header')
-        .should('contain', 'Opplysninger fra sykmeldingen')
-        .and('have.attr', 'aria-expanded', 'false')
+    cy.get('[data-cy="opplysninger-fra-sykmeldingen"] .navds-expansioncard__header-button').should(
+        'have.attr',
+        'aria-expanded',
+        'false',
+    )
 
     // Knapperad ( Endre, Ettersend)
     cy.contains('Jeg vil endre svarene i søknaden').should('exist')
@@ -515,14 +531,18 @@ const over16dagerKvittering = () => {
     )
 
     // Oppsummering minimert
-    cy.get('[data-cy="oppsummering-fra-søknaden"]  .navds-accordion__header')
-        .should('contain', 'Oppsummering fra søknaden')
-        .and('have.attr', 'aria-expanded', 'false')
+    cy.get('[data-cy="oppsummering-fra-søknaden"]  .navds-expansioncard__header-button').should(
+        'have.attr',
+        'aria-expanded',
+        'false',
+    )
 
     // Opplysninger minimert
-    cy.get('[data-cy="opplysninger-fra-sykmeldingen"] .navds-accordion__header')
-        .should('contain', 'Opplysninger fra sykmeldingen')
-        .and('have.attr', 'aria-expanded', 'false')
+    cy.get('[data-cy="opplysninger-fra-sykmeldingen"] .navds-expansioncard__header-button').should(
+        'have.attr',
+        'aria-expanded',
+        'false',
+    )
 
     // Knapperad ( Endre, Ettersend)
     cy.contains('Jeg vil endre svarene i søknaden').should('exist')
@@ -563,14 +583,18 @@ const utenOppholdKvittering = () => {
     )
 
     // Oppsummering minimert
-    cy.get('[data-cy="oppsummering-fra-søknaden"]  .navds-accordion__header')
-        .should('contain', 'Oppsummering fra søknaden')
-        .and('have.attr', 'aria-expanded', 'false')
+    cy.get('[data-cy="oppsummering-fra-søknaden"]  .navds-expansioncard__header-button').should(
+        'have.attr',
+        'aria-expanded',
+        'false',
+    )
 
     // Opplysninger minimert
-    cy.get('[data-cy="opplysninger-fra-sykmeldingen"] .navds-accordion__header')
-        .should('contain', 'Opplysninger fra sykmeldingen')
-        .and('have.attr', 'aria-expanded', 'false')
+    cy.get('[data-cy="opplysninger-fra-sykmeldingen"] .navds-expansioncard__header-button').should(
+        'have.attr',
+        'aria-expanded',
+        'false',
+    )
 
     // Knapperad ( Endre, Ettersend)
     cy.contains('Jeg vil endre svarene i søknaden').should('exist')
@@ -625,14 +649,18 @@ const medOppholdKvittering = () => {
     )
 
     // Oppsummering minimert
-    cy.get('[data-cy="oppsummering-fra-søknaden"]  .navds-accordion__header')
-        .should('contain', 'Oppsummering fra søknaden')
-        .and('have.attr', 'aria-expanded', 'false')
+    cy.get('[data-cy="oppsummering-fra-søknaden"]  .navds-expansioncard__header-button').should(
+        'have.attr',
+        'aria-expanded',
+        'false',
+    )
 
     // Opplysninger minimert
-    cy.get('[data-cy="opplysninger-fra-sykmeldingen"] .navds-accordion__header')
-        .should('contain', 'Opplysninger fra sykmeldingen')
-        .and('have.attr', 'aria-expanded', 'false')
+    cy.get('[data-cy="opplysninger-fra-sykmeldingen"] .navds-expansioncard__header-button').should(
+        'have.attr',
+        'aria-expanded',
+        'false',
+    )
 
     // Knapperad ( Endre, Ettersend)
     cy.contains('Jeg vil endre svarene i søknaden').should('exist')

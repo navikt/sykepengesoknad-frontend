@@ -33,7 +33,7 @@ describe('Tester avbryting av søknad', () => {
         )
 
         // Sykmelding
-        cy.contains('Opplysninger fra sykmeldingen').click()
+        cy.contains('Opplysninger fra sykmeldingen').click({ force: true })
         cy.contains('1. april - 24. april 2020 (24 dager)')
         cy.contains('Frist for å søke')
     })

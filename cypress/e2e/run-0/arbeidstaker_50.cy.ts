@@ -20,7 +20,7 @@ describe('Tester arbeidstakersøknad - gradert 50%', () => {
         cy.contains('1. april - 24. april 2020 (24 dager)')
         cy.contains('POSTEN NORGE AS, BÆRUM')
         cy.contains('50% sykmeldt')
-        cy.contains('Opplysninger fra sykmeldingen').click()
+        cy.contains('Opplysninger fra sykmeldingen').click({ force: true })
 
         // Godkjenne ANSVARSERKLARING
         cy.contains(

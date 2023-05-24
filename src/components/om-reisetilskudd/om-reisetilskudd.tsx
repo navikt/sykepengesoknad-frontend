@@ -1,4 +1,4 @@
-import { Accordion, BodyLong, Heading, Label } from '@navikt/ds-react'
+import { BodyLong, ExpansionCard, Heading, Label } from '@navikt/ds-react'
 import React, { useState } from 'react'
 
 import { parserWithReplace } from '../../utils/html-react-parser-utils'
@@ -9,47 +9,46 @@ import { LenkeMedIkon } from '../lenke-med-ikon/LenkeMedIkon'
 const OmReisetilskudd = () => {
     const [open, setOpen] = useState<boolean>(false)
 
+    const tittel = tekst('tilskudd.start.om-reisetilskudd')
     return (
-        <Accordion>
-            <Accordion.Item open={open} data-cy="om-reisetilskudd" className="my-4 rounded-md border border-gray-300">
-                <Accordion.Header
-                    onClick={() => {
-                        logEvent(open ? 'accordion lukket' : 'accordion åpnet', {
-                            component: tekst('tilskudd.start.om-reisetilskudd'),
-                        })
-                        setOpen(!open)
-                    }}
-                >
-                    <Heading size="small" className="ml-4">
-                        {tekst('tilskudd.start.om-reisetilskudd')}
-                    </Heading>
-                </Accordion.Header>
-                <Accordion.Content>
-                    <Label as="h3" spacing>
-                        {tekst('tilskudd.start.hva-dekker')}
-                    </Label>
-                    <BodyLong spacing>{parserWithReplace(tekst('tilskudd.start.hva-dekker-tekst'))}</BodyLong>
+        <ExpansionCard open={open} data-cy="om-reisetilskudd" aria-label={tittel} className={'mb-4'}>
+            <ExpansionCard.Header
+                onClick={() => {
+                    logEvent(open ? 'accordion lukket' : 'accordion åpnet', {
+                        component: tittel,
+                    })
+                    setOpen(!open)
+                }}
+            >
+                <Heading size="small" level="2" className={'flex h-full items-center'}>
+                    {tittel}
+                </Heading>
+            </ExpansionCard.Header>
+            <ExpansionCard.Content>
+                <Label as="h3" spacing>
+                    {tekst('tilskudd.start.hva-dekker')}
+                </Label>
+                <BodyLong spacing>{parserWithReplace(tekst('tilskudd.start.hva-dekker-tekst'))}</BodyLong>
 
-                    <Label as="h3" spacing>
-                        {tekst('tilskudd.start.forste-16')}
-                    </Label>
-                    <BodyLong spacing>{tekst('tilskudd.start.forste-16-tekst')}</BodyLong>
+                <Label as="h3" spacing>
+                    {tekst('tilskudd.start.forste-16')}
+                </Label>
+                <BodyLong spacing>{tekst('tilskudd.start.forste-16-tekst')}</BodyLong>
 
-                    <Label as="h3" spacing>
-                        {tekst('tilskudd.start.legg-ved')}
-                    </Label>
-                    <BodyLong spacing>{tekst('tilskudd.start.legg-ved-tekst')}</BodyLong>
+                <Label as="h3" spacing>
+                    {tekst('tilskudd.start.legg-ved')}
+                </Label>
+                <BodyLong spacing>{tekst('tilskudd.start.legg-ved-tekst')}</BodyLong>
 
-                    <BodyLong spacing>
-                        <LenkeMedIkon
-                            href={'https://nav.no/reisetilskudd'}
-                            text={tekst('tilskudd.start.les-mer-reisetilskudd')}
-                        />
-                        .
-                    </BodyLong>
-                </Accordion.Content>
-            </Accordion.Item>
-        </Accordion>
+                <BodyLong spacing>
+                    <LenkeMedIkon
+                        href={'https://nav.no/reisetilskudd'}
+                        text={tekst('tilskudd.start.les-mer-reisetilskudd')}
+                    />
+                    .
+                </BodyLong>
+            </ExpansionCard.Content>
+        </ExpansionCard>
     )
 }
 

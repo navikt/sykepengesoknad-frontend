@@ -2,17 +2,17 @@
     margin: 0.5rem 0 1rem;
 }
 
-.frist-sykepenger .navds-accordion__content .eksempel-container {
+.frist-sykepenger .eksempel-container {
     background-color: #f7f7f7;
     padding: 1rem;
 }
-.frist-sykepenger .navds-accordion__content .eksempel-container .maned-container {
+.frist-sykepenger .eksempel-container .maned-container {
     display: inline-flex;
     border-top: 1px solid #707070;
     padding-top: 1rem;
     position: relative;
 }
-.frist-sykepenger .navds-accordion__content .eksempel-container .maned-container::before {
+.frist-sykepenger .eksempel-container .maned-container::before {
     position: absolute;
     content: '';
     height: 0;
@@ -23,41 +23,31 @@
     border-bottom: 5px solid transparent;
     border-left: 10px solid #707070;
 }
-.frist-sykepenger .navds-accordion__content .eksempel-container .maned-container div {
+.frist-sykepenger .eksempel-container .maned-container div {
     margin: 0 0.25rem;
     padding: 0.5rem;
     border-radius: 4px;
     box-shadow: #b0b0b0 0 2px 1px 0;
 }
-.frist-sykepenger .navds-accordion__content .eksempel-container .maned-container div:nth-child(1) {
+.frist-sykepenger .eksempel-container .maned-container div:nth-child(1) {
     background-color: #e6f0ff;
     margin-left: 0;
 }
-.frist-sykepenger .navds-accordion__content .eksempel-container .maned-container div:nth-child(2) {
+.frist-sykepenger .eksempel-container .maned-container div:nth-child(2) {
     background-color: #fff9f0;
 }
-.frist-sykepenger .navds-accordion__content .eksempel-container .maned-container div:nth-child(3) {
+.frist-sykepenger .eksempel-container .maned-container div:nth-child(3) {
     background-color: #ffeccc;
 }
-.frist-sykepenger .navds-accordion__content .eksempel-container .maned-container div:nth-child(4) {
+.frist-sykepenger .eksempel-container .maned-container div:nth-child(4) {
     background-color: #ffd799;
     margin-right: 0;
 }
-.frist-sykepenger .navds-accordion__content .eksempel-container + h3.navds-heading {
+.frist-sykepenger .eksempel-container + h3.navds-heading {
     margin-top: 1rem;
 }
 @media (min-width: 768px) {
-    .frist-sykepenger .navds-accordion__header {
-        padding-left: 2rem;
-    }
-    .frist-sykepenger .navds-accordion__content {
-        padding-left: 2rem;
-    }
-    .frist-sykepenger .navds-accordion__content .intern .navds-accordion__content {
-        margin-left: 0.75rem;
-        padding: 1rem;
-    }
-    .frist-sykepenger .navds-accordion__content .eksempel-container .maned-container div {
+    .frist-sykepenger .eksempel-container .maned-container div {
         text-align: center;
         width: 6rem;
     }

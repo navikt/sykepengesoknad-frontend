@@ -88,7 +88,7 @@ describe('Teste førsteside i reisetilskuddsøknaden', () => {
 
         it('Svar ja på hovedspørsmålet', () => {
             cy.get('[data-cy="ja-nei-stor"] input[value=JA]').click({ force: true })
-            cy.get('.undersporsmal > :nth-child(1)').should(
+            cy.get('.undersporsmal > :nth-child(1) > :nth-child(1)').should(
                 'have.text',
                 'Hvilke dager reiste du med bil i perioden 23. desember 2020 - 7. januar 2021?',
             )
@@ -276,11 +276,11 @@ describe('Teste førsteside i reisetilskuddsøknaden', () => {
 
         it('Oppsummering inneholder riktig informasjon', () => {
             cy.get('.oppsummering').click()
-            cy.get('.navds-accordion__content > :nth-child(4)').should(
+            cy.get('.navds-expansioncard__content-inner > :nth-child(4)').should(
                 'include.text',
                 'Last opp kvitteringer for reiser til og fra jobben mellom 1. - 24. april 2020.',
             )
-            cy.get('.navds-accordion__content > :nth-child(4)').should(
+            cy.get('.navds-expansioncard__content-inner > :nth-child(4)').should(
                 'include.text',
                 'Du lastet opp 1 kvittering på 99 kr',
             )
