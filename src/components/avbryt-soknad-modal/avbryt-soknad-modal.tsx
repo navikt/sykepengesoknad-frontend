@@ -27,7 +27,7 @@ const AvbrytKorrigering = () => {
         <div>
             <Button
                 variant="tertiary"
-                className={'px-0 text-surface-danger'}
+                className="px-0 text-surface-danger"
                 onClick={(e) => {
                     logEvent('modal åpnet', {
                         component: tekst('avbryt.korrigering.knapp'),
@@ -66,7 +66,7 @@ const AvbrytSoknadModal = () => {
         <div>
             <Button
                 variant="tertiary"
-                className={'px-0 text-surface-danger'}
+                className="px-0 text-surface-danger"
                 onClick={(e) => {
                     logEvent('modal åpnet', {
                         component: tekst('avbryt.popup.tittel'),

@@ -51,7 +51,7 @@ function MyApp({ Component, pageProps }: AppProps): JSX.Element {
                 <meta name="viewport" content="width=device-width, initial-scale=1" />
             </Head>
             <QueryClientProvider client={queryClient}>
-                <div id="root" className={'mx-auto max-w-2xl p-4 pb-32'}>
+                <div id="root" className="mx-auto max-w-2xl p-4 pb-32">
                     <LabsWarning />
                     <Component {...pageProps} />
                 </div>

@@ -65,7 +65,7 @@ const Endreknapp = () => {
         <>
             <Button
                 variant="tertiary"
-                className={'mt-4 block px-0'}
+                className="mt-4 block px-0"
                 loading={korrigerer}
                 onClick={() => {
                     logEvent('knapp klikket', {

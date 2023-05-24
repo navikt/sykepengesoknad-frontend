@@ -106,14 +106,14 @@ const PeriodeKomp = ({ sporsmal, index, slettPeriode }: AllProps) => {
                     }}
                     render={() => (
                         <div>
-                            <fieldset className={'axe-exclude p-0'}>
+                            <fieldset className="axe-exclude p-0">
                                 <UNSAFE_DatePicker {...datepickerProps}>
-                                    <div className={'flex-row items-end gap-4 md:flex'}>
+                                    <div className="flex-row items-end gap-4 md:flex">
                                         <UNSAFE_DatePicker.Input
                                             {...fromInputProps}
                                             label={tekst('sykepengesoknad.periodevelger.fom')}
                                             id={sporsmal.id + '_' + index + '_fom'}
-                                            className={'mt-6'}
+                                            className="mt-6"
                                             value={
                                                 periode.fom ? backendStrengTilFrontendFormat(periode.fom) : undefined
                                             }
@@ -123,7 +123,7 @@ const PeriodeKomp = ({ sporsmal, index, slettPeriode }: AllProps) => {
                                             {...toInputProps}
                                             label={tekst('sykepengesoknad.periodevelger.tom')}
                                             id={sporsmal.id + '_' + index + '_tom'}
-                                            className={'mt-2 md:mt-0'}
+                                            className="mt-2 md:mt-0"
                                             value={
                                                 periode.tom ? backendStrengTilFrontendFormat(periode.tom) : undefined
                                             }
@@ -153,11 +153,7 @@ const PeriodeKomp = ({ sporsmal, index, slettPeriode }: AllProps) => {
                 <Vis
                     hvis={errors[id]}
                     render={() => (
-                        <BodyShort
-                            as="span"
-                            className={'mt-2 block font-bold text-surface-danger'}
-                            data-cy="feil-lokal"
-                        >
+                        <BodyShort as="span" className="mt-2 block font-bold text-surface-danger" data-cy="feil-lokal">
                             {feilmelding.lokal}
                         </BodyShort>
                     )}

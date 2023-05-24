@@ -69,7 +69,7 @@ const QueryStatusPanel = ({ valgSoknadId, valgSykmeldingId }: QueryStatusPanelPr
                         </ul>
 
                         <Button
-                            className={'mt-4'}
+                            className="mt-4"
                             onClick={() => {
                                 errorQueries.forEach((a) => a.query.refetch())
                             }}

@@ -50,7 +50,7 @@ const RadioKomp = ({ sporsmal }: SpmProps) => {
                         description={sporsmal.undertekst}
                         error={errors[sporsmal.id] !== undefined && feilmelding.lokal}
                         key={sporsmal.id}
-                        className={'mt-8'}
+                        className="mt-8"
                     >
                         {sporsmal.undersporsmal.map((uspm) => (
                             <Radio key={uspm.id} id={uspm.id} value={uspm.sporsmalstekst}>

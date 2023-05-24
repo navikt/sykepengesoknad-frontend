@@ -12,7 +12,7 @@ export const KvitteringerHjelpBody = () => {
                 <BodyShort as="li">offentlig transport</BodyShort>
                 <BodyShort as="li">parkering</BodyShort>
             </ul>
-            <BodyLong className={'mt-4'}>
+            <BodyLong className="mt-4">
                 Kvitteringene må kunne leses av en saksbehandler. Det tryggeste er å laste opp én kvittering om gangen.
             </BodyLong>
         </>

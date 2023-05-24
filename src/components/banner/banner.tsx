@@ -34,13 +34,13 @@ const Banner = ({ overskrift }: BannerProps) => {
     }
 
     return (
-        <header className={'m-auto mt-4 flex items-center justify-between py-4'}>
-            <Heading size="large" level="1" className={'inline md:mr-2'}>
+        <header className="m-auto mt-4 flex items-center justify-between py-4">
+            <Heading size="large" level="1" className="inline md:mr-2">
                 {overskrift === undefined ? tittel() : overskrift}
                 <Vis
                     hvis={valgtSoknad && valgtSoknad.fom && valgtSoknad.tom}
                     render={() => (
-                        <Heading size="small" as="span" className={'mt-2 block'}>
+                        <Heading size="small" as="span" className="mt-2 block">
                             {tilLesbarPeriodeMedArstall(valgtSoknad!.fom, valgtSoknad!.tom)}
                         </Heading>
                     )}

@@ -8,5 +8,5 @@ export const LabsWarning = () => {
         return null
     }
 
-    return <Alert variant={'warning'}>Dette er en demoside og inneholder ikke dine personlige data.</Alert>
+    return <Alert variant="warning">Dette er en demoside og inneholder ikke dine personlige data.</Alert>
 }

@@ -30,8 +30,8 @@ const KvitteringListeVisning = ({ kvittering, sporsmal, updateFilliste }: Kvitte
             <Table.DataCell>
                 <Label as="h2">{UtgiftTyper[kvittering.typeUtgift]}</Label>
             </Table.DataCell>
-            <Table.DataCell className={'whitespace-nowrap'}>{formatterTall(kvittering.belop! / 100)} kr</Table.DataCell>
-            <Table.DataCell className={'text-right'}>
+            <Table.DataCell className="whitespace-nowrap">{formatterTall(kvittering.belop! / 100)} kr</Table.DataCell>
+            <Table.DataCell className="text-right">
                 <Slettknapp sporsmal={sporsmal} kvittering={kvittering} updateFilliste={updateFilliste} />
             </Table.DataCell>
         </Table.ExpandableRow>

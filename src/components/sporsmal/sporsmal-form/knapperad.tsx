@@ -37,8 +37,8 @@ const Knapperad = ({ soknad, poster }: KnapperadProps) => {
     }
 
     return (
-        <div className={'my-8'} data-cy="knapperad">
-            <Button variant="primary" type="submit" loading={poster} className={'mb-12 mt-6'}>
+        <div className="my-8" data-cy="knapperad">
+            <Button variant="primary" type="submit" loading={poster} className="mb-12 mt-6">
                 {tekst(nokkel())}
             </Button>
 
@@ -48,7 +48,7 @@ const Knapperad = ({ soknad, poster }: KnapperadProps) => {
                 hvis={stegNo === 1 && !erUtlandssoknad}
                 render={() => (
                     <>
-                        <hr className={'my-4'} />
+                        <hr className="my-4" />
                         <PersonvernLesMer soknadstype={soknad.soknadstype} />
                     </>
                 )}

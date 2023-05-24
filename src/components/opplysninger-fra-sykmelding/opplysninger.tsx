@@ -34,7 +34,7 @@ const Opplysninger = ({ ekspandert, steg }: OpplysningerProps) => {
     if (!valgtSoknad || !valgtSykmelding) return null
 
     return (
-        <ExpansionCard className={'my-8'} data-cy="opplysninger-fra-sykmeldingen" open={open} aria-label={tittel}>
+        <ExpansionCard className="my-8" data-cy="opplysninger-fra-sykmeldingen" open={open} aria-label={tittel}>
             <ExpansionCard.Header
                 onClick={() => {
                     logEvent(open ? 'accordion lukket' : 'accordion åpnet', {
@@ -44,7 +44,7 @@ const Opplysninger = ({ ekspandert, steg }: OpplysningerProps) => {
                     setOpen(!open)
                 }}
             >
-                <Heading size="small" level="2" className={'flex h-full items-center'}>
+                <Heading size="small" level="2" className="flex h-full items-center">
                     {tittel}
                 </Heading>
             </ExpansionCard.Header>

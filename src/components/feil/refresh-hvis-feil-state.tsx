@@ -15,7 +15,7 @@ export function FeilView() {
     }, [])
 
     return (
-        <div className={'bg-white'}>
+        <div className="bg-white">
             <div aria-live="polite">
                 <Alert variant="error">
                     <Heading level="1" size="small">
@@ -24,8 +24,8 @@ export function FeilView() {
                     <BodyShort>{tekst('feilstate.alert')}</BodyShort>
                 </Alert>
             </div>
-            <div className={'flex justify-center'}>
-                <Button className={'mt-4'} variant="secondary" onClick={() => window.location.reload()}>
+            <div className="flex justify-center">
+                <Button className="mt-4" variant="secondary" onClick={() => window.location.reload()}>
                     {tekst('feilstate.refresh')}
                 </Button>
             </div>

@@ -58,7 +58,7 @@ const SykmeldingPerioder = ({ valgtSykmelding }: SykmeldingPerioderProps) => {
                                 <>
                                     <img
                                         style={{ width: 16, height: 16 }}
-                                        src={'/syk/sykepengesoknad/static/check-box-1.png'}
+                                        src="/syk/sykepengesoknad/static/check-box-1.png"
                                         alt="Avkrysset"
                                         aria-hidden={true}
                                         className="mb-1 mr-2 inline"

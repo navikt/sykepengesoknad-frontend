@@ -42,7 +42,7 @@ const Perioder = ({ sporsmal }: SpmProps) => {
         <div data-cy="perioder">
             <Label as="h3">{sporsmal.sporsmalstekst}</Label>
 
-            <ul className={'list-none'} ref={periodeliste}>
+            <ul className="list-none" ref={periodeliste}>
                 {lokal.map((idx) => {
                     return (
                         <PeriodeKomp
@@ -55,7 +55,7 @@ const Perioder = ({ sporsmal }: SpmProps) => {
                 })}
             </ul>
 
-            <Button icon={<PlusIcon />} size="small" variant="tertiary" className={'mt-4'} onClick={leggTilPeriode}>
+            <Button icon={<PlusIcon />} size="small" variant="tertiary" className="mt-4" onClick={leggTilPeriode}>
                 {tekst('sykepengesoknad.periodevelger.legg-til-ekstra')}
             </Button>
 

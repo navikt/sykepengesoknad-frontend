@@ -24,7 +24,7 @@ const KvitteringVidere = () => {
     if (!valgtSoknad) return null
 
     return (
-        <Alert variant="info" className={'bg-white'} data-cy={'kvittering-alert'}>
+        <Alert variant="info" className="bg-white" data-cy="kvittering-alert">
             <Heading size="small" level="3">
                 {tekst('kvittering.hva-skjer-videre')}
             </Heading>

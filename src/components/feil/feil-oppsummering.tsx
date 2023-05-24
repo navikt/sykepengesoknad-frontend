@@ -124,7 +124,7 @@ const FeilOppsummering = ({
                         ? 'Beklager, det oppstod en feil'
                         : 'Det er ' + antall + ' feil i skjemaet'
                     return (
-                        <ErrorSummary ref={oppsummering} size="medium" heading={heading} className={'mt-8'}>
+                        <ErrorSummary ref={oppsummering} size="medium" heading={heading} className="mt-8">
                             {elements}
                         </ErrorSummary>
                     )
