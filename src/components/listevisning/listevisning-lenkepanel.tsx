@@ -1,4 +1,4 @@
-import { BodyLong, Button, Detail, Heading, LinkPanel, Tag } from '@navikt/ds-react'
+import { Button, Detail, Heading, LinkPanel, Tag } from '@navikt/ds-react'
 import React from 'react'
 import { Link } from 'react-router-dom'
 import dayjs from 'dayjs'
@@ -26,15 +26,15 @@ export const ListevisningLenkepanel = ({ soknad, onClick }: { soknad: RSSoknadme
         }
         return false
     }
-    const StyletLinkPanel = ({ paddingBottom, href }: { paddingBottom: boolean; href?: string }) => {
+    const StyletLinkPanel = ({ paddingBottom }: { paddingBottom: boolean }) => {
         return (
             <LinkPanel
                 className={cn('p-6 [&>div]:w-full', {
                     'mb-4': paddingBottom,
                     'border-orange-300 bg-orange-50 hover:border-orange-500': orange(),
                 })}
+                as="div"
                 border
-                href={href}
             >
                 <div className={'flex gap-3 max-[560px]:flex-col'}>
                     <div className="grow">
