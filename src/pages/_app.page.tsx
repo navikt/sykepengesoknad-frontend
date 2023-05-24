@@ -1,6 +1,6 @@
 /* eslint-disable postcss-modules/no-unused-class */
 import '../style/global.css'
-import '../components/frist-sykepenger/frist-sykepenger.css'
+//import '../components/frist-sykepenger/frist-sykepenger.css'
 import '../components/kvittering/kvittering.css'
 
 import { configureLogger } from '@navikt/next-logger'
