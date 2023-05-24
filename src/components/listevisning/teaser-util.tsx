@@ -79,13 +79,13 @@ export const periodeListevisning = (soknad: RSSoknadmetadata) => {
     return perioder.length === 0 ? (
         ''
     ) : (
-        <ul className="list-none">
+        <BodyShort as="ul" className="list-none">
             {perioder.map((p, i) => (
                 <BodyShort as="li" key={i}>
                     {p}
                 </BodyShort>
             ))}
-        </ul>
+        </BodyShort>
     )
 }
 

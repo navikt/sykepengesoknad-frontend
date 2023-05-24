@@ -48,7 +48,7 @@ export const ListevisningLenkepanel = ({ soknad, onClick }: { soknad: RSSoknadme
                                     {teaserTittel(soknad)}
                                 </Heading>
                             </header>
-                            <BodyLong>{periodeListevisning(soknad)}</BodyLong>
+                            {periodeListevisning(soknad)}
                             <Vis hvis={isOpplaering()} render={() => leggTilSoknadstypeForDemoside(soknad)} />
                         </>
                     </div>
