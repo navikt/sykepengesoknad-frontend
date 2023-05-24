@@ -51,9 +51,7 @@ describe('Tester sortering av søknader', () => {
                 forrigeSoknad = sok
             })
         })
-    })
 
-    it('Sorter etter Sendt', function () {
         cy.get('select').contains('Dato')
         cy.get('[data-cy="Tidligere søknader"] a, [data-cy="Tidligere søknader"] button')
             .eq(0)
@@ -61,7 +59,9 @@ describe('Tester sortering av søknader', () => {
         cy.get('[data-cy="Tidligere søknader"] a, [data-cy="Tidligere søknader"] button')
             .eq(2)
             .contains('23. mai – 7. juni 2020')
+    })
 
+    it('Sorter etter Sendt', function () {
         cy.get('select').select('Sendt')
         cy.get('select').contains('Sendt')
 
