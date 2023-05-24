@@ -32,7 +32,7 @@ describe('Tester søknad om å beholde sykepenger utenfor EØS', () => {
         cy.url().should('include', `${soknad.id}/2`)
         cy.contains('Tilbake').should('exist')
 
-        cy.get('.skjemaelement__input').click({ force: true })
+        cy.get('[data-cy="landvelger"] input[type="text"]').click({ force: true })
         cy.contains('Afghanistan').click({ force: true })
         cy.contains('Albania').should('not.exist')
         cy.get('.navds-chips__removable-icon').click({ force: true })
@@ -43,22 +43,22 @@ describe('Tester søknad om å beholde sykepenger utenfor EØS', () => {
         cy.contains('Du må oppgi et land utenfor EØS. Innenfor EØS trenger du ikke søke.')
 
         cy.contains('Hvilket land skal du reise til?')
-        cy.get('.skjemaelement__input').type('Fransk', { force: true })
+        cy.get('[data-cy="landvelger"] input[type="text"]').type('Fransk', { force: true })
         cy.contains('Fransk Polynesia')
         cy.contains('Søre franske territorier').click({ force: true })
         cy.get('.navds-chips__removable-icon').click({ force: true })
         cy.contains('Du må velge ett land')
         cy.contains('Det er 1 feil i skjemaet')
 
-        cy.get('.skjemaelement__input').type('Fransk', { force: true })
+        cy.get('[data-cy="landvelger"] input[type="text"]').type('Fransk', { force: true })
         cy.contains('Fransk Polynesia')
         cy.contains('Søre franske territorier').click({ force: true })
 
-        cy.get('.skjemaelement__input').type('De')
+        cy.get('[data-cy="landvelger"] input[type="text"]').type('De')
         cy.contains('De forente arabiske emirater')
         cy.contains('De okkuperte palestinske områdene').click({ force: true })
 
-        cy.get('.skjemaelement__input').type('R')
+        cy.get('[data-cy="landvelger"] input[type="text"]').type('R')
         cy.contains('Amerikansk Samoa').click({ force: true })
         cy.contains('Amerikansk Samoa').find('.navds-chips__removable-icon').click({ force: true })
         cy.contains('Amerikansk Samoa').should('not.exist')

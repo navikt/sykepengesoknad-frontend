@@ -118,7 +118,7 @@ describe('Tester kvittering', () => {
             setPeriodeFraTil(14, 22)
 
             cy.contains('Gå videre').click()
-            cy.get('.skjemaelement__input').type('Fransk')
+            cy.get('[data-cy="landvelger"] input[type="text"]').type('Fransk')
             cy.contains('Søre franske territorier').click({ force: true })
             cy.contains('Gå videre').click({ force: true })
             cy.contains('Nei').click({ force: true })

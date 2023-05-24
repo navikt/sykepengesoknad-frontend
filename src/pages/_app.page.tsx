@@ -2,7 +2,6 @@
 import '../style/global.css'
 import '../components/frist-sykepenger/frist-sykepenger.css'
 import '../components/kvittering/kvittering.css'
-import '../components/sporsmal/landvelger/landvelger.css'
 
 import { configureLogger } from '@navikt/next-logger'
 import dayjs from 'dayjs'

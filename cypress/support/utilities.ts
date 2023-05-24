@@ -25,7 +25,7 @@ export function svarNeiHovedsporsmal() {
 }
 
 export function velgLand(land: string) {
-    cy.get('.skjemaelement__input').type(land)
+    cy.get('[data-cy="landvelger"] input[type="text"]').type(land)
     cy.contains(land).click({ force: true })
 }
 

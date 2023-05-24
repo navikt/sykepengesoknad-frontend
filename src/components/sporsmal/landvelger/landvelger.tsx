@@ -43,13 +43,13 @@ const LandvelgerComponent = ({ verdierInn, sporsmalId, onChange, tag }: Landvelg
     }
 
     return (
-        <div className="landvelger">
+        <div data-cy="landvelger">
             <NavAutosuggest
                 onAdd={onAdd}
                 sporsmalId={sporsmalId}
                 forslagsliste={tilForslagsliste(landListe(), verdier)}
             />
-            <Chips aria-live="polite">
+            <Chips className="mt-4" aria-live="polite">
                 {verdier.map((verdi, index) => (
                     <Chips.Removable
                         key={verdi}
