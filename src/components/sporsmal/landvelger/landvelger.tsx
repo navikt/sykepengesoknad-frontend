@@ -43,7 +43,7 @@ const LandvelgerComponent = ({ verdierInn, sporsmalId, onChange, tag }: Landvelg
     }
 
     return (
-        <>
+        <div data-cy="landvelger">
             <NavAutosuggest
                 onAdd={onAdd}
                 sporsmalId={sporsmalId}
@@ -61,7 +61,7 @@ const LandvelgerComponent = ({ verdierInn, sporsmalId, onChange, tag }: Landvelg
                     </Chips.Removable>
                 ))}
             </Chips>
-        </>
+        </div>
     )
 }
 
