@@ -1,4 +1,4 @@
-import { BodyLong, Heading } from '@navikt/ds-react'
+import { BodyShort, Heading } from '@navikt/ds-react'
 import React from 'react'
 
 import { RSSoknadstype } from '../../types/rs-types/rs-soknadstype'
@@ -12,21 +12,21 @@ interface HvorforSoknadSykepengerProps {
 const HvorforSoknadSykepenger = ({ soknadstype }: HvorforSoknadSykepengerProps) => {
     return (
         <>
-            <Heading size="small" level="3">
+            <Heading size="small" level="3" spacing>
                 {tekst('hvorfor-soknad-sykepenger.overskrift')}
             </Heading>
 
             <Vis
                 hvis={soknadstype === RSSoknadstype.REISETILSKUDD}
-                render={() => <BodyLong spacing>{tekst('hvorfor-soknad-reisetilskudd')}</BodyLong>}
+                render={() => <BodyShort>{tekst('hvorfor-soknad-reisetilskudd')}</BodyShort>}
             />
 
             <Vis
                 hvis={soknadstype === RSSoknadstype.GRADERT_REISETILSKUDD}
                 render={() => (
                     <>
-                        <BodyLong spacing>{tekst('hvorfor-soknad-gradertreisetilskudd')}</BodyLong>
-                        <BodyLong spacing>{tekst('hvorfor-soknad-sykepenger.jobba')}</BodyLong>
+                        <BodyShort spacing>{tekst('hvorfor-soknad-gradertreisetilskudd')}</BodyShort>
+                        <BodyShort>{tekst('hvorfor-soknad-sykepenger.jobba')}</BodyShort>
                     </>
                 )}
             />
@@ -37,8 +37,8 @@ const HvorforSoknadSykepenger = ({ soknadstype }: HvorforSoknadSykepengerProps) 
                 }
                 render={() => (
                     <>
-                        <BodyLong spacing>{tekst('hvorfor-soknad-sykepenger')}</BodyLong>
-                        <BodyLong spacing>{tekst('hvorfor-soknad-sykepenger.jobba')}</BodyLong>
+                        <BodyShort spacing>{tekst('hvorfor-soknad-sykepenger')}</BodyShort>
+                        <BodyShort>{tekst('hvorfor-soknad-sykepenger.jobba')}</BodyShort>
                     </>
                 )}
             />
