@@ -20,7 +20,7 @@ const TilbakeKnapp = ({ soknad, stegNo }: { soknad: Soknad; stegNo: number }) =>
     return (
         <Link
             to={`/soknader/${soknad.id}${SEPARATOR}${stegNo - 1}${window.location.search}`}
-            className="navds-link tilbakelenke"
+            className="navds-link"
             onClick={() => {
                 logEvent('navigere', {
                     lenketekst: tekst('soknad.tilbakeknapp'),
@@ -62,7 +62,7 @@ const Fremdriftsbar = () => {
                 <div className="h-3 rounded-lg bg-gray-200" />
                 <div className="-mt-3 h-3 rounded-lg bg-gray-900" style={style} />
             </div>
-            <div className={'mt-4 flex justify-between'}>
+            <div className="mt-4 flex justify-between">
                 <TilbakeKnapp soknad={valgtSoknad} stegNo={stegNo} />
                 <BodyShort as="span">
                     {parserWithReplace(`${stegId}&nbsp;av&nbsp;${antallSteg}`) + ' spørsmål'}

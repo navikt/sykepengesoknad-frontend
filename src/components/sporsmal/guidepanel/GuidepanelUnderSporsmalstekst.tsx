@@ -19,7 +19,7 @@ const GuidepanelUnderSporsmalstekst = ({ sporsmal }: SpmProps) => {
             <Vis
                 hvis={bjornVeileder(sporsmal.tag)}
                 render={() => (
-                    <ProgressivtGuidePanel className={'my-8'}>
+                    <ProgressivtGuidePanel className="my-8">
                         <BodyShort>{parserWithReplace(tekst(bjornTekst as any))}</BodyShort>
                     </ProgressivtGuidePanel>
                 )}

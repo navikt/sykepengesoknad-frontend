@@ -10,21 +10,19 @@ export const YrkesskadeHjelpBody = () => {
                 yrkessykdom hvis årsaken er skadelig påvirkning fra arbeidet. Utbrenthet anses imidlertid vanligvis ikke
                 som en yrkessykdom.
             </BodyLong>
-            <BodyLong className={'mt-4'}>
+            <BodyLong className="mt-4">
                 Dersom du er sykmeldt grunnet en godkjent yrkesskade eller yrkessykdom, kan det gi deg visse fordeler.
                 Disse fordelene kan påvirke sykepengeutbetalingen din ved å øke varigheten og/eller størrelsen på
                 utbetalingene.
             </BodyLong>
-            <BodyLong className={'mt-4'}>
+            <BodyLong className="mt-4">
                 Svar ja, hvis du er sykmeldt på grunn av en godkjent yrkesskade eller yrkessykdom.
             </BodyLong>
-            <BodyLong className={'mt-4'}>
-                Svar ja, hvis det er påbegynt eller sendt inn en skademelding til NAV.
-            </BodyLong>
+            <BodyLong className="mt-4">Svar ja, hvis det er påbegynt eller sendt inn en skademelding til NAV.</BodyLong>
             <LenkeMedIkon
-                className={'mt-4'}
-                href={'https://www.nav.no/yrkesskade'}
-                text={'Du kan lese mer om yrkesskade og sykepenger her.'}
+                className="mt-4"
+                href="https://www.nav.no/yrkesskade"
+                text="Du kan lese mer om yrkesskade og sykepenger her."
             />
         </>
     )

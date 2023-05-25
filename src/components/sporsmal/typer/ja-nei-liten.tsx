@@ -49,17 +49,13 @@ const JaNeiLiten = ({ sporsmal }: SpmProps) => {
             }
             if (spm.tag === 'INNTEKTSKILDE_SELVSTENDIG_ER_DU_SYKMELDT' && watchJaNei === 'NEI') {
                 return (
-                    <div className="presisering">
-                        <BodyShort as="span">
-                            {parserWithReplace(
-                                getLedetekst(tekst(('soknad.presisering.' + spm.tag + '_NEI') as any), {
-                                    '%URL%': tekst(
-                                        'soknad.presisering.INNTEKTSKILDE_SELVSTENDIG_ER_DU_SYKMELDT_NEI.url',
-                                    ),
-                                }),
-                            )}
-                        </BodyShort>
-                    </div>
+                    <BodyShort as="span">
+                        {parserWithReplace(
+                            getLedetekst(tekst(('soknad.presisering.' + spm.tag + '_NEI') as any), {
+                                '%URL%': tekst('soknad.presisering.INNTEKTSKILDE_SELVSTENDIG_ER_DU_SYKMELDT_NEI.url'),
+                            }),
+                        )}
+                    </BodyShort>
                 )
             }
         } else return <></>

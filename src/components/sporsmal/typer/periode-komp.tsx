@@ -106,7 +106,7 @@ const PeriodeKomp = ({ sporsmal, index, slettPeriode }: AllProps) => {
                     }}
                     render={() => (
                         <div>
-                            <fieldset className="skjemagruppe axe-exclude p-0">
+                            <fieldset className="axe-exclude p-0">
                                 <UNSAFE_DatePicker {...datepickerProps}>
                                     <div className="flex-row items-end gap-4 md:flex">
                                         <UNSAFE_DatePicker.Input

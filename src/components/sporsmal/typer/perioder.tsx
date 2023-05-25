@@ -39,13 +39,10 @@ const Perioder = ({ sporsmal }: SpmProps) => {
     }
 
     return (
-        <div
-            className={sporsmal.parentKriterie ? 'kriterie--' + sporsmal.parentKriterie.toLowerCase() : ''}
-            data-cy="perioder"
-        >
+        <div data-cy="perioder">
             <Label as="h3">{sporsmal.sporsmalstekst}</Label>
 
-            <ul className={'list-none'} ref={periodeliste}>
+            <ul className="list-none" ref={periodeliste}>
                 {lokal.map((idx) => {
                     return (
                         <PeriodeKomp

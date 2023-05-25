@@ -15,7 +15,7 @@ const PerioderMedOpphold = () => {
             <BodyLong spacing as="span">
                 {tekst('kvittering.arbeidstaker.med-opphold')}{' '}
             </BodyLong>
-            <ReadMore className={'mt-4'} header={tekst('kvittering.arbeidstaker.hvorfor-inntektsmelding-pa-nytt')}>
+            <ReadMore className="mt-4" header={tekst('kvittering.arbeidstaker.hvorfor-inntektsmelding-pa-nytt')}>
                 <BodyLong spacing>{tekst('kvittering.arbeidstaker.hvorfor-inntektsmelding-pa-nytt.tekst')}</BodyLong>
             </ReadMore>
             <div className="avsnitt hva-skjer">

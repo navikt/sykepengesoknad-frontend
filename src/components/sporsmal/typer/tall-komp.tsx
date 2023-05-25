@@ -38,36 +38,8 @@ const TallKomp = ({ sporsmal }: SpmProps) => {
         }
     }
 
-    const className = () => {
-        if (!sporsmal.parentKriterie) return ''
-        if (sporsmal.tag === TagTyper.KM_HJEM_JOBB || sporsmal.tag === TagTyper.OFFENTLIG_TRANSPORT_BELOP) {
-            return `kriterie--${sporsmal.parentKriterie.toLowerCase()} skjemaelement mt-8`
-        }
-        return 'skjemaelement mt-8'
-    }
-
-    const inputSize = () => {
-        switch (sporsmal.svartype) {
-            case RSSvartype.PROSENT:
-            case RSSvartype.TALL:
-                return ' input--xs'
-            default:
-                return ' input--s'
-        }
-    }
-
     const manglerSporsmalsTekst = sporsmal.sporsmalstekst === ''
     const harUndertekst = !!sporsmal.undertekst
-
-    const labels = () => {
-        if (sporsmal.tag === TagTyper.HVOR_MANGE_TIMER_PER_UKE || sporsmal.tag === TagTyper.KM_HJEM_JOBB) {
-            return ' undersporsmalSpacing'
-        }
-        if (manglerSporsmalsTekst) {
-            return ' normalFont'
-        }
-        return ''
-    }
 
     const antallDesimaler = (() => {
         switch (sporsmal.svartype) {
@@ -90,7 +62,7 @@ const TallKomp = ({ sporsmal }: SpmProps) => {
         ? ''
         : tekst(('soknad.undertekst.' + sporsmal.tag) as any)
     return (
-        <div className={className()}>
+        <div className={!sporsmal.parentKriterie ? '' : 'mt-8'}>
             <TextField
                 label={
                     manglerSporsmalsTekst
@@ -98,7 +70,6 @@ const TallKomp = ({ sporsmal }: SpmProps) => {
                         : sporsmal.sporsmalstekst
                 }
                 description={description}
-                className={`${inputSize()} ${labels()}`}
                 type="text"
                 id={sporsmal.id}
                 min={sporsmal.min!}

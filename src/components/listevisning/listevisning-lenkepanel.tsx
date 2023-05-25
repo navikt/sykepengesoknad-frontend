@@ -36,7 +36,7 @@ export const ListevisningLenkepanel = ({ soknad, onClick }: { soknad: RSSoknadme
                 as="div"
                 border
             >
-                <div className={'flex gap-3 max-[560px]:flex-col'}>
+                <div className="flex gap-3 max-[560px]:flex-col">
                     <div className="grow">
                         <>
                             <header>
@@ -44,7 +44,7 @@ export const ListevisningLenkepanel = ({ soknad, onClick }: { soknad: RSSoknadme
                                     hvis={soknad.soknadstype !== RSSoknadstype.OPPHOLD_UTLAND}
                                     render={() => <Detail>{tilLesbarPeriodeMedArstall(soknad.fom, soknad.tom)}</Detail>}
                                 />
-                                <Heading size="small" level="3" className={'my-1'}>
+                                <Heading size="small" level="3" className="my-1">
                                     {teaserTittel(soknad)}
                                 </Heading>
                             </header>
@@ -64,7 +64,7 @@ export const ListevisningLenkepanel = ({ soknad, onClick }: { soknad: RSSoknadme
         return (
             <Button
                 data-cy={`button-listevisning-${soknad.id}`}
-                className={'mb-4 w-full p-0  text-left [&>span]:w-full'}
+                className="mb-4 w-full p-0  text-left [&>span]:w-full"
                 onClick={() => {
                     onClick()
                 }}

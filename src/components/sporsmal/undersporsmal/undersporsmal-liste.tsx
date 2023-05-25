@@ -18,7 +18,7 @@ const UndersporsmalListe = ({ oversporsmal, oversporsmalSvar }: UndersporsmalLis
         oversporsmal.kriterieForVisningAvUndersporsmal === oversporsmalSvar
     if (!skalVise) return null
     return (
-        <div className={'mt-4'}>
+        <div className="mt-4">
             {oversporsmal.tag == TagTyper.UTENLANDSK_SYKMELDING_BOSTED && (
                 <Label as="h2" className="mt-8">
                     {UndersporsmalTekster['undersporsmal.UTENLANDSK_SYKMELDING_BOSTED']}

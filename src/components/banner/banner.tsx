@@ -40,7 +40,7 @@ const Banner = ({ overskrift }: BannerProps) => {
                 <Vis
                     hvis={valgtSoknad && valgtSoknad.fom && valgtSoknad.tom}
                     render={() => (
-                        <Heading size="small" as="span" className={'mt-2 block'}>
+                        <Heading size="small" as="span" className="mt-2 block">
                             {tilLesbarPeriodeMedArstall(valgtSoknad!.fom, valgtSoknad!.tom)}
                         </Heading>
                     )}

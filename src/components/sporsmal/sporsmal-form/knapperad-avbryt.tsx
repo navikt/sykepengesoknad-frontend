@@ -37,11 +37,9 @@ const KnapperadAvbryt = () => {
     }
 
     return (
-        <div className="knapperad">
-            <Button variant="danger" type="button" onClick={handleAvbryt}>
-                {tekst('sykepengesoknad.avbryt.simpel')}
-            </Button>
-        </div>
+        <Button variant="danger" type="button" onClick={handleAvbryt}>
+            {tekst('sykepengesoknad.avbryt.simpel')}
+        </Button>
     )
 }
 

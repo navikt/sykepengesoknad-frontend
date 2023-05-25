@@ -14,11 +14,7 @@ const IkkeRelevant = ({ sporsmal }: SpmProps) => {
                     <Label as="h2" className="mb-4">
                         {sporsmal.sporsmalstekst}
                     </Label>
-                    {sporsmal.undertekst && (
-                        <BodyLong as="div" className="redaksjonelt-innhold">
-                            {parserWithReplace(sporsmal.undertekst)}
-                        </BodyLong>
-                    )}
+                    {sporsmal.undertekst && <BodyLong as="div">{parserWithReplace(sporsmal.undertekst)}</BodyLong>}
                 </div>
             )}
         />

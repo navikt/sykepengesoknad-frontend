@@ -16,7 +16,7 @@ const FristSykepenger = ({ soknad }: { soknad: Soknad }) => {
     }
     const tittel = tekst('frist-sykepenger.overskrift')
     return (
-        <ExpansionCard className={'frist-sykepenger mb-4'} open={open} aria-label={tittel}>
+        <ExpansionCard className="frist-sykepenger mb-4" open={open} aria-label={tittel}>
             <ExpansionCard.Header
                 onClick={() => {
                     logEvent(open ? 'accordion lukket' : 'accordion åpnet', {
@@ -25,7 +25,7 @@ const FristSykepenger = ({ soknad }: { soknad: Soknad }) => {
                     setOpen(!open)
                 }}
             >
-                <Heading size="small" level="2" className={'flex h-full items-center'}>
+                <Heading size="small" level="2" className="flex h-full items-center">
                     {tittel}
                 </Heading>
             </ExpansionCard.Header>
@@ -35,7 +35,7 @@ const FristSykepenger = ({ soknad }: { soknad: Soknad }) => {
                 <BodyShort spacing>{parserWithReplace(tekst('frist-sykepenger.ulike.måneder'))}</BodyShort>
                 <BodyShort>{tekst('frist-sykepenger.husk')}</BodyShort>
 
-                <ReadMore header={'Vis eksempler'} className="my-4">
+                <ReadMore header="Vis eksempler" className="my-4">
                     <Heading spacing size="xsmall" level="3" className="pt-4">
                         {tekst('frist-sykepenger.eksempel.en.tittel')}
                     </Heading>

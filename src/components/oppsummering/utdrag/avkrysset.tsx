@@ -12,7 +12,7 @@ const Avkrysset = ({ tekst }: AvkryssetProps) => {
                 src="/syk/sykepengesoknad/static/check-box-1.png"
                 alt="Avkrysset"
                 aria-hidden={true}
-                className={'min-h-4 mr-2 mt-0.5 flex h-4 max-h-4 w-4'}
+                className="min-h-4 mr-2 mt-0.5 flex h-4 max-h-4 w-4"
             />
             <BodyShort>{tekst}</BodyShort>
         </div>

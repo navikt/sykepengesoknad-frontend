@@ -16,7 +16,7 @@ const Person = () => {
 
     return (
         <div className="hidden cursor-pointer md:block">
-            <div className={'hidden'} id="listelink" onClick={() => navigate('/')}>
+            <div className="hidden" id="listelink" onClick={() => navigate('/')}>
                 TestLink
             </div>
             <button aria-label="Velg testperson" ref={person}>
