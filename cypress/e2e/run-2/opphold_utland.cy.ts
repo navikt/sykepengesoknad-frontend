@@ -32,12 +32,12 @@ describe('Tester søknad om å beholde sykepenger utenfor EØS', () => {
         cy.url().should('include', `${soknad.id}/2`)
         cy.contains('Tilbake').should('exist')
 
-        cy.get('[data-cy="landvelger"] input[type="text"]').click({ force: true })
-        cy.contains('Afghanistan').click({ force: true })
+        cy.get('[data-cy="landvelger"] input[type="text"]').click()
+        cy.contains('Afghanistan').click()
         cy.contains('Albania').should('not.exist')
-        cy.get('.navds-chips__removable-icon').click({ force: true })
+        cy.get('.navds-chips__removable-icon').click()
 
-        cy.contains('Gå videre').click({ force: true })
+        cy.contains('Gå videre').click()
         cy.contains('Du må velge ett land')
         cy.contains('Det er 1 feil i skjemaet')
         cy.contains('Du må oppgi et land utenfor EØS. Innenfor EØS trenger du ikke søke.')
@@ -45,52 +45,58 @@ describe('Tester søknad om å beholde sykepenger utenfor EØS', () => {
         cy.contains('Hvilket land skal du reise til?')
         cy.get('[data-cy="landvelger"] input[type="text"]').type('Fransk', { force: true })
         cy.contains('Fransk Polynesia')
-        cy.contains('Søre franske territorier').click({ force: true })
-        cy.get('.navds-chips__removable-icon').click({ force: true })
+        cy.contains('Søre franske territorier').click()
+        cy.get('.navds-chips__removable-icon').click()
         cy.contains('Du må velge ett land')
         cy.contains('Det er 1 feil i skjemaet')
 
         cy.get('[data-cy="landvelger"] input[type="text"]').type('Fransk', { force: true })
         cy.contains('Fransk Polynesia')
-        cy.contains('Søre franske territorier').click({ force: true })
+        cy.contains('Søre franske territorier').click()
 
         cy.get('[data-cy="landvelger"] input[type="text"]').type('De')
         cy.contains('De forente arabiske emirater')
-        cy.contains('De okkuperte palestinske områdene').click({ force: true })
+        cy.contains('De okkuperte palestinske områdene').click()
 
         cy.get('[data-cy="landvelger"] input[type="text"]').type('R')
-        cy.contains('Amerikansk Samoa').click({ force: true })
-        cy.contains('Amerikansk Samoa').find('.navds-chips__removable-icon').click({ force: true })
+        cy.contains('Amerikansk Samoa').click()
+        cy.contains('Amerikansk Samoa').find('.navds-chips__removable-icon').click()
         cy.contains('Amerikansk Samoa').should('not.exist')
 
-        cy.contains('Gå videre').click({ force: true })
+        cy.contains('Gå videre').click()
     })
 
     it('Går tilbake og frem', function () {
-        cy.contains('Tilbake').click({ force: true })
-        cy.contains('Gå videre').click({ force: true })
+        cy.contains('Tilbake').click()
+        cy.contains('Gå videre').click()
     })
 
     it('Oppgir arbeidsgiver', function () {
         cy.url().should('include', `${soknad.id}/3`)
 
-        cy.contains('Har du arbeidsgiver?')
-        cy.contains('Ja').click({ force: true })
+        cy.contains('Har du arbeidsgiver?').get('[data-cy="ja-nei-stor"] input[value=JA]').click()
 
-        cy.contains('Er du 100 % sykmeldt?').siblings().contains('Ja').click({ force: true })
+        cy.contains('Er du 100 % sykmeldt?')
+            .siblings()
+            .eq(0)
+            .within(() => {
+                cy.get('input[value="JA"]').click()
+            })
 
         cy.contains('Har du avtalt med arbeidsgiveren din at du skal ta ut feriedager i hele perioden?')
             .siblings()
-            .contains('Nei')
-            .click({ force: true })
+            .eq(0)
+            .within(() => {
+                cy.get('input[value="NEI"]').click()
+            })
 
-        cy.contains('Gå videre').click({ force: true })
+        cy.contains('Gå videre').click()
     })
 
     it('Oppsummering fra søknaden', function () {
         cy.url().should('include', `${soknad.id}/4`)
 
-        cy.contains('Oppsummering fra søknaden').click({ force: true })
+        cy.get('section[aria-label="Oppsummering fra søknaden"] button').click()
 
         cy.get('.oppsummering').contains('Når skal du reise?').siblings().should('contain', '17. – 24. desember 2020')
 
@@ -118,11 +124,9 @@ describe('Tester søknad om å beholde sykepenger utenfor EØS', () => {
         cy.url().should('include', `${soknad.id}/4`)
 
         cy.contains('Før du reiser ber vi deg bekrefte')
-        cy.contains('Jeg bekrefter de to punktene ovenfor').click({
-            force: true,
-        })
+        cy.contains('Jeg bekrefter de to punktene ovenfor').click()
 
-        cy.contains('Send søknaden').click({ force: true })
+        cy.contains('Send søknaden').click()
     })
 
     it('Viser kvittering med knapp til neste søknad', function () {
@@ -142,10 +146,8 @@ describe('Tester søknad om å beholde sykepenger utenfor EØS', () => {
         cy.visit(`/syk/sykepengesoknad/soknader/${soknad.id}/4?testperson=bare-utland`)
 
         cy.url().should('include', `${soknad.id}/4`)
-        cy.contains('Jeg bekrefter de to punktene ovenfor').click({
-            force: true,
-        })
-        cy.contains('Send søknaden').click({ force: true })
+        cy.contains('Jeg bekrefter de to punktene ovenfor').click()
+        cy.contains('Send søknaden').click()
     })
 
     it('Viser kvittering med Ferdig-knapp', function () {

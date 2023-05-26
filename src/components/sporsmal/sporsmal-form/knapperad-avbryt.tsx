@@ -37,7 +37,7 @@ const KnapperadAvbryt = () => {
     }
 
     return (
-        <Button variant="danger" type="button" onClick={handleAvbryt}>
+        <Button variant="danger" type="button" onClick={handleAvbryt} data-cy="avbryt-soknad">
             {tekst('sykepengesoknad.avbryt.simpel')}
         </Button>
     )

@@ -1,7 +1,7 @@
 import { svarJaHovedsporsmal, svarNeiHovedsporsmal, svarCheckboxPanel } from '../../support/utilities'
 describe('Tester korrigering av ferie', () => {
     function gaVidere() {
-        cy.contains('Gå videre').click({ force: true })
+        cy.contains('Gå videre').click()
     }
 
     it('Korrigerer ferie spørsmålet fra NEI til JA', () => {
@@ -23,9 +23,7 @@ describe('Tester korrigering av ferie', () => {
 
         cy.contains(
             'Jeg vet at jeg kan miste retten til sykepenger hvis opplysningene jeg gir ikke er riktige eller fullstendige. Jeg vet også at NAV kan holde igjen eller kreve tilbake penger, og at å gi feil opplysninger kan være straffbart.',
-        ).click({
-            force: true,
-        })
+        ).click()
         gaVidere()
 
         svarNeiHovedsporsmal()

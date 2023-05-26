@@ -35,7 +35,7 @@ describe('Tester arbeidstakersøknad', () => {
         cy.contains('POSTEN NORGE AS, BÆRUM')
         cy.contains('100% sykmeldt')
 
-        cy.contains('Opplysninger fra sykmeldingen').click({ force: true })
+        cy.get('section[aria-label="Opplysninger fra sykmeldingen"] button').click()
 
         // Avbryt dialog vises
         cy.contains('Jeg vil ikke bruke denne søknaden').click()
@@ -47,7 +47,7 @@ describe('Tester arbeidstakersøknad', () => {
         cy.contains('Det er 1 feil i skjemaet')
         cy.get('.navds-confirmation-panel__inner').should('exist')
         cy.contains('Du må bekrefte at du har lest og forstått informasjonen før du kan gå videre')
-        cy.get('.navds-checkbox__label').click({ force: true })
+        cy.get('.navds-checkbox__label').click()
 
         cy.contains('Gå videre').click()
     })
@@ -56,7 +56,7 @@ describe('Tester arbeidstakersøknad', () => {
         cy.url().should('include', `${soknad.id}/2`)
 
         // Test spørsmål
-        cy.get('[data-cy="ja-nei-stor"] input[value=JA]').click({ force: true })
+        cy.get('[data-cy="ja-nei-stor"] input[value=JA]').click()
         cy.contains('Når begynte du å jobbe igjen?')
         cy.get('.navds-date__field-button').click()
         cy.get('.rdp-day').contains('20').click()
@@ -74,7 +74,7 @@ describe('Tester arbeidstakersøknad', () => {
         cy.url().should('include', `${soknad.id}/3`)
 
         // Test spørsmål
-        cy.get('[data-cy="ja-nei-stor"] input[value=JA]').click({ force: true })
+        cy.get('[data-cy="ja-nei-stor"] input[value=JA]').click()
         cy.contains('Når tok du ut feriedager?')
 
         setPeriodeFraTil(16, 23)
@@ -91,7 +91,7 @@ describe('Tester arbeidstakersøknad', () => {
         cy.contains('Permisjon er dager du var borte fra jobb av andre grunner enn sykdom').should('exist')
 
         // Test spørsmål
-        cy.get('[data-cy="ja-nei-stor"] input[value=JA]').click({ force: true })
+        cy.get('[data-cy="ja-nei-stor"] input[value=JA]').click()
         cy.contains('Når tok du permisjon?')
 
         setPeriodeFraTil(14, 22)
@@ -103,7 +103,7 @@ describe('Tester arbeidstakersøknad', () => {
         cy.url().should('include', `${soknad.id}/5`)
 
         // Test spørsmål
-        cy.get('[data-cy="ja-nei-stor"] input[value=JA]').click({ force: true })
+        cy.get('[data-cy="ja-nei-stor"] input[value=JA]').click()
         cy.contains('Når var du utenfor EØS?')
 
         setPeriodeFraTil(14, 22)
@@ -118,18 +118,18 @@ describe('Tester arbeidstakersøknad', () => {
         cy.contains(
             'I perioden 1. - 24. april 2020 var du 100 % sykmeldt fra POSTEN NORGE AS, BÆRUM. Jobbet du noe hos POSTEN NORGE AS, BÆRUM i denne perioden?',
         )
-        cy.get('[data-cy="ja-nei-stor"] input[value=JA]').click({ force: true })
+        cy.get('[data-cy="ja-nei-stor"] input[value=JA]').click()
 
         // Underspørsmål 1
         cy.contains('Oppgi arbeidsmengde i timer eller prosent')
         // Svarer prosent
-        cy.get('.undersporsmal input[value=Prosent]').click({ force: true })
+        cy.get('.undersporsmal input[value=Prosent]').click()
         cy.contains(
             'Oppgi hvor mange prosent av din normale arbeidstid du jobbet hos POSTEN NORGE AS, BÆRUM i perioden 1. - 24. april 2020?',
         )
         cy.get('.undersporsmal .navds-text-field__input#796cf7ed-8a7e-39de-9cbc-6e789aa5af3f').type('21')
         // Velger timer
-        cy.get('.undersporsmal input[value=Timer]').click({ force: true })
+        cy.get('.undersporsmal input[value=Timer]').click()
         cy.contains('Oppgi totalt antall timer du jobbet i perioden 1. - 24. april 2020 hos POSTEN NORGE AS, BÆRUM')
         cy.contains('Antall timer du skrev inn, betyr at du har jobbet').should('not.exist')
         // Svarer timer
@@ -138,7 +138,7 @@ describe('Tester arbeidstakersøknad', () => {
 
         // Underspørsmål 2
         cy.contains('Jobber du vanligvis 37,5 timer i uka hos POSTEN NORGE AS, BÆRUM?')
-        cy.get('input#af302d17-f35d-38a6-ac23-ccde5db369cb_0').click({ force: true })
+        cy.get('input#af302d17-f35d-38a6-ac23-ccde5db369cb_0').click()
 
         cy.contains('Gå videre').click()
     })
@@ -148,18 +148,18 @@ describe('Tester arbeidstakersøknad', () => {
 
         cy.contains('Har du andre inntektskilder enn Posten Norge AS, Bærum?')
 
-        cy.get('[data-cy="ja-nei-stor"] input[value=JA]').click({ force: true })
+        cy.get('[data-cy="ja-nei-stor"] input[value=JA]').click()
 
         cy.contains('Velg inntektskildene som passer for deg. Finner du ikke noe som passer for deg, svarer du nei')
         cy.get('.undersporsmal .navds-checkbox label[for=d9ac4359-5519-34f1-b59d-b5ab24e55821]')
             .should('include.text', 'ansatt et annet sted enn nevnt over')
-            .click({ force: true })
+            .click()
 
         cy.get('.undersporsmal .navds-checkbox label[for=989711be-5362-3f24-a02a-f1b3e3c31f99]').should(
             'include.text',
             'selvstendig næringsdrivende',
         )
-        cy.get('input[type=checkbox]#989711be-5362-3f24-a02a-f1b3e3c31f99').click({ force: true })
+        cy.get('input[type=checkbox]#989711be-5362-3f24-a02a-f1b3e3c31f99').click()
 
         cy.contains('Gå videre').click()
     })
@@ -167,7 +167,7 @@ describe('Tester arbeidstakersøknad', () => {
     it('Søknad ANSVARSERKLARING', function () {
         cy.url().should('include', `${soknad.id}/8`)
 
-        cy.contains('Oppsummering fra søknaden').click({ force: true })
+        cy.get('section[aria-label="Oppsummering fra søknaden"] button').click()
         cy.contains(
             'Jeg vet at jeg kan miste retten til sykepenger hvis opplysningene jeg gir ikke er riktige eller fullstendige. Jeg vet også at NAV kan holde igjen eller kreve tilbake penger, og at å gi feil opplysninger kan være straffbart.',
         )
@@ -179,7 +179,7 @@ describe('Tester arbeidstakersøknad', () => {
 
         cy.contains('Det er 1 feil i skjemaet').should('not.exist')
 
-        cy.get('.navds-checkbox__label').click({ force: true })
+        cy.get('.navds-checkbox__label').click()
         cy.contains(
             'Jeg har lest all informasjonen jeg har fått i søknaden og bekrefter at opplysningene jeg har gitt er korrekte.',
         )

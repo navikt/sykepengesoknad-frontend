@@ -20,14 +20,12 @@ describe('Tester arbeidstakersøknad - gradert 50%', () => {
         cy.contains('1. april - 24. april 2020 (24 dager)')
         cy.contains('POSTEN NORGE AS, BÆRUM')
         cy.contains('50% sykmeldt')
-        cy.contains('Opplysninger fra sykmeldingen').click({ force: true })
+        cy.get('section[aria-label="Opplysninger fra sykmeldingen"] button').click()
 
         // Godkjenne ANSVARSERKLARING
         cy.contains(
             'Jeg vet at jeg kan miste retten til sykepenger hvis opplysningene jeg gir ikke er riktige eller fullstendige. Jeg vet også at NAV kan holde igjen eller kreve tilbake penger, og at å gi feil opplysninger kan være straffbart.',
-        ).click({
-            force: true,
-        })
+        ).click()
 
         cy.contains('Gå videre').click()
     })
@@ -43,7 +41,7 @@ describe('Tester arbeidstakersøknad - gradert 50%', () => {
         cy.url().should('include', `${soknad.id}/2`)
 
         // Test spørsmål
-        cy.get('[data-cy="ja-nei-stor"] input[value=JA]').click({ force: true })
+        cy.get('[data-cy="ja-nei-stor"] input[value=JA]').click()
 
         cy.contains(
             'Hvilke dager var du syk og borte fra jobb, før du ble sykmeldt? Du trenger bare oppgi dager før 1. april 2020.',
@@ -56,7 +54,7 @@ describe('Tester arbeidstakersøknad - gradert 50%', () => {
         cy.url().should('include', `${soknad.id}/3`)
 
         // Test spørsmål
-        cy.get('[data-cy="ja-nei-stor"] input[value=JA]').click({ force: true })
+        cy.get('[data-cy="ja-nei-stor"] input[value=JA]').click()
         cy.contains('Når begynte du å jobbe igjen?')
         cy.get('.navds-date__field-button').click()
         cy.get('.rdp-day').contains('20').click()
@@ -68,7 +66,7 @@ describe('Tester arbeidstakersøknad - gradert 50%', () => {
         cy.url().should('include', `${soknad.id}/4`)
 
         // Test spørsmål
-        cy.get('[data-cy="ja-nei-stor"] input[value=JA]').click({ force: true })
+        cy.get('[data-cy="ja-nei-stor"] input[value=JA]').click()
         cy.contains('Når tok du ut feriedager?')
 
         setPeriodeFraTil(16, 23)
@@ -80,7 +78,7 @@ describe('Tester arbeidstakersøknad - gradert 50%', () => {
         cy.url().should('include', `${soknad.id}/5`)
 
         // Test spørsmål
-        cy.get('[data-cy="ja-nei-stor"] input[value=JA]').click({ force: true })
+        cy.get('[data-cy="ja-nei-stor"] input[value=JA]').click()
         cy.contains('Når tok du permisjon?')
 
         setPeriodeFraTil(14, 22)
@@ -92,7 +90,7 @@ describe('Tester arbeidstakersøknad - gradert 50%', () => {
         cy.url().should('include', `${soknad.id}/6`)
 
         // Test spørsmål
-        cy.get('[data-cy="ja-nei-stor"] input[value=JA]').click({ force: true })
+        cy.get('[data-cy="ja-nei-stor"] input[value=JA]').click()
         cy.contains('Når var du utenfor EØS?')
 
         setPeriodeFraTil(14, 22)
@@ -103,7 +101,7 @@ describe('Tester arbeidstakersøknad - gradert 50%', () => {
         cy.url().should('include', `${soknad.id}/7`)
 
         // Test spørsmål
-        cy.get('[data-cy="ja-nei-stor"] input[value=JA]').click({ force: true })
+        cy.get('[data-cy="ja-nei-stor"] input[value=JA]').click()
 
         // Underspørsmål 1
         cy.contains(
@@ -115,10 +113,10 @@ describe('Tester arbeidstakersøknad - gradert 50%', () => {
         cy.contains('Hvor mye jobbet du tilsammen 1. - 24. april 2020?')
         cy.contains('Velg timer eller prosent')
         // Svarer prosent
-        cy.get('.undersporsmal input[value=Prosent]').click({ force: true })
+        cy.get('.undersporsmal input[value=Prosent]').click()
         cy.get('.undersporsmal .navds-text-field__input#13acfccb-3f39-3893-8054-058270add6ab').type('51')
         // Svarer timer
-        cy.get('.undersporsmal input[value=Timer]').click({ force: true })
+        cy.get('.undersporsmal input[value=Timer]').click()
         // Ferie/permisjon/tilbake i arbeid dekker alle datoer fra dag 14.
         // Gradkalkulatoren dermed vil regne ut at man har hatt 9 arbeidsdager i denne perioden
         // 12 timer * (9 dager/5) * 0.5 (50% sykefraværsgrad) = 10.8 timer, så vi prøver litt lavere enn det
@@ -145,7 +143,7 @@ describe('Tester arbeidstakersøknad - gradert 50%', () => {
         cy.url().should('include', `${soknad.id}/8`)
 
         // Test spørsmål
-        cy.get('[data-cy="ja-nei-stor"] input[value=JA]').click({ force: true })
+        cy.get('[data-cy="ja-nei-stor"] input[value=JA]').click()
         cy.contains('Har du arbeidet i utlandet i løpet av de siste 12 månedene?')
 
         cy.contains('Gå videre').click()
@@ -156,20 +154,20 @@ describe('Tester arbeidstakersøknad - gradert 50%', () => {
 
         cy.contains('Har du andre inntektskilder enn Posten Norge AS, Bærum?')
 
-        cy.get('[data-cy="ja-nei-stor"] input[value=JA]').click({ force: true })
+        cy.get('[data-cy="ja-nei-stor"] input[value=JA]').click()
 
         cy.contains('Velg inntektskildene som passer for deg. Finner du ikke noe som passer for deg, svarer du nei')
         cy.get('.undersporsmal .navds-checkbox label[for=d9ac4359-5519-34f1-b59d-b5ab24e55821]').should(
             'include.text',
             'ansatt et annet sted enn nevnt over',
         )
-        cy.get('input[type=checkbox]#d9ac4359-5519-34f1-b59d-b5ab24e55821').click({ force: true })
+        cy.get('input[type=checkbox]#d9ac4359-5519-34f1-b59d-b5ab24e55821').click()
         cy.contains('Gå videre').click()
     })
 
     it('Søknad ANSVARSERKLARING ', function () {
         cy.url().should('include', `${soknad.id}/10`)
-        cy.get('.navds-checkbox__label').click({ force: true })
+        cy.get('.navds-checkbox__label').click()
         cy.contains(
             'Jeg har lest all informasjonen jeg har fått i søknaden og bekrefter at opplysningene jeg har gitt er korrekte.',
         )

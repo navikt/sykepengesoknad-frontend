@@ -7,7 +7,7 @@ describe('Tester feilmeldinger', () => {
     }
 
     function gaVidere() {
-        cy.contains('Gå videre').click({ force: true })
+        cy.contains('Gå videre').click()
     }
 
     function feilmeldingHandteringForNyDatepicker(
@@ -84,7 +84,7 @@ describe('Tester feilmeldinger', () => {
                 cy.contains('Du må bekrefte at du har lest og forstått informasjonen før du kan gå videre').click()
             })
         cy.focused().should('have.attr', 'name', arbeidstakerGradert.sporsmal[0].id)
-        cy.focused().click({ force: true })
+        cy.focused().click()
 
         ingenFeilmeldinger()
     })
@@ -100,7 +100,7 @@ describe('Tester feilmeldinger', () => {
                 cy.contains('Det er 1 feil i skjemaet')
                 cy.contains('Du må oppgi om du var tilbake i arbeid før friskmeldingsperioden utløp').click()
             })
-        cy.focused().should('have.attr', 'name', arbeidstakerGradert.sporsmal[2].id).click({ force: true })
+        cy.focused().should('have.attr', 'name', arbeidstakerGradert.sporsmal[2].id).click()
 
         ingenFeilmeldinger()
     })
@@ -159,7 +159,7 @@ describe('Tester feilmeldinger', () => {
 
     it('PERIODER ingen fom', () => {
         gaTilSoknad(arbeidstakerGradert, '4')
-        cy.get('input[value=JA]').click({ force: true })
+        cy.get('input[value=JA]').click()
         gaVidere()
 
         feilmeldingHandteringForNyDatepicker(
@@ -258,9 +258,9 @@ describe('Tester feilmeldinger', () => {
 
     it('TALL validering på onSubmit og onChange', function () {
         gaTilSoknad(arbeidstakerGradert, '7')
-        cy.get('input[value=JA]').click({ force: true })
+        cy.get('input[value=JA]').click()
         cy.get(`input[name=${arbeidstakerGradert.sporsmal[6].undersporsmal[0].id}]`).type('37.5')
-        cy.get('.undersporsmal input[value=Timer]').click({ force: true })
+        cy.get('.undersporsmal input[value=Timer]').click()
         cy.get(
             `input[name=${arbeidstakerGradert.sporsmal[6].undersporsmal[1].undersporsmal[1].undersporsmal[0].id}]`,
         ).type('1')
@@ -275,8 +275,8 @@ describe('Tester feilmeldinger', () => {
 
     it('TALL ingen valg', () => {
         gaTilSoknad(arbeidstakerGradert, '7')
-        cy.get('input[value=JA]').click({ force: true })
-        cy.get('.undersporsmal input[value=Prosent]').click({ force: true })
+        cy.get('input[value=JA]').click()
+        cy.get('.undersporsmal input[value=Prosent]').click()
         cy.get(`input[name=${arbeidstakerGradert.sporsmal[6].undersporsmal[0].id}]`).type('37.5')
         gaVidere()
 
@@ -309,9 +309,7 @@ describe('Tester feilmeldinger', () => {
     })
 
     it('TALL grad mindre enn sykmeldingsgrad', () => {
-        cy.get(`input[id=${arbeidstakerGradert.sporsmal[6].undersporsmal[1].undersporsmal[1].id}]`).click({
-            force: true,
-        })
+        cy.get(`input[id=${arbeidstakerGradert.sporsmal[6].undersporsmal[1].undersporsmal[1].id}]`).click()
         gaVidere()
         feilmeldingHandteringForNyeKomponenter(
             'Du må oppgi en verdi',
@@ -335,7 +333,7 @@ describe('Tester feilmeldinger', () => {
 
     it('CHECKBOX_GRUPPE ingen valgt', () => {
         gaTilSoknad(arbeidstakerGradert, '9')
-        cy.get('input[value=JA]').click({ force: true })
+        cy.get('input[value=JA]').click()
         gaVidere()
 
         cy.get('.navds-error-message').should('exist')
@@ -350,7 +348,7 @@ describe('Tester feilmeldinger', () => {
     })
 
     it('CHECKBOX_GRUPPE feilmelding går bort', () => {
-        cy.focused().click({ force: true })
+        cy.focused().click()
         ingenFeilmeldinger()
     })
 })

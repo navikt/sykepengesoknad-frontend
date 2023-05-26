@@ -17,7 +17,7 @@ describe('Tester søknad til utenlandsk sykmelding', () => {
         cy.url().should('include', `${soknad.id}/1`)
 
         cy.contains('Frist for å søke').should('not.exist')
-        cy.contains('Jeg vet at jeg kan miste retten til sykepenger hvis opplysningene ').click({ force: true })
+        cy.contains('Jeg vet at jeg kan miste retten til sykepenger hvis opplysningene ').click()
         cy.contains('Gå videre').click()
     })
 
@@ -100,7 +100,7 @@ describe('Tester søknad til utenlandsk sykmelding', () => {
     it('Vær klar over at', function () {
         cy.url().should('include', `${soknad.id}/13`)
         cy.contains('Til slutt')
-        cy.contains('Oppsummering fra søknaden').click({ force: true })
+        cy.get('section[aria-label="Oppsummering fra søknaden"] button').click()
         cy.contains('Danmark')
         cy.contains('Statsminister i UK')
         cy.contains('Downing Street 10')

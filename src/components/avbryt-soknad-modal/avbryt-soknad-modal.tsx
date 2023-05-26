@@ -67,6 +67,7 @@ const AvbrytSoknadModal = () => {
             <Button
                 variant="tertiary"
                 className="px-0 text-surface-danger"
+                data-cy="avbryt-soknad"
                 onClick={(e) => {
                     logEvent('modal åpnet', {
                         component: tekst('avbryt.popup.tittel'),

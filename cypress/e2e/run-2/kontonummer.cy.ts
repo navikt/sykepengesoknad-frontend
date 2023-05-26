@@ -5,9 +5,7 @@ describe('Tester kontonummer i kvittering', () => {
 
     it('Har kontonumer', () => {
         cy.visit('/syk/sykepengesoknad?testperson=har%20kontonummer')
-        cy.get(`a[href*=${soknad.id}]`).click({
-            force: true,
-        })
+        cy.get(`a[href*=${soknad.id}]`).click()
         besvarSoknad()
         cy.location('pathname').should('include', `/kvittering/`)
         cy.url().should('include', `/kvittering/`)
@@ -23,9 +21,7 @@ describe('Tester kontonummer i kvittering', () => {
     it('Har ikke kontonumer', () => {
         cy.visit('/syk/sykepengesoknad?testperson=har%20ikke%20kontonummer')
 
-        cy.get(`a[href*=${soknad.id}]`).click({
-            force: true,
-        })
+        cy.get(`a[href*=${soknad.id}]`).click()
         besvarSoknad()
         cy.url().should('include', `/kvittering/`)
         cy.contains('Kontonummer for utbetaling')
@@ -39,8 +35,8 @@ describe('Tester kontonummer i kvittering', () => {
 const besvarSoknad = () => {
     cy.contains(
         'Jeg vet at jeg kan miste retten til sykepenger hvis opplysningene jeg gir ikke er riktige eller fullstendige. Jeg vet også at NAV kan holde igjen eller kreve tilbake penger, og at å gi feil opplysninger kan være straffbart.',
-    ).click({ force: true })
-    cy.contains('Gå videre').click({ force: true })
-    cy.get('.navds-checkbox__label').click({ force: true })
-    cy.contains('Send søknaden').click({ force: true })
+    ).click()
+    cy.contains('Gå videre').click()
+    cy.get('.navds-checkbox__label').click()
+    cy.contains('Send søknaden').click()
 }

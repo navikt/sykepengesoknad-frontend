@@ -21,6 +21,7 @@ const AvsluttOgFortsettSenere = () => {
             <Button
                 variant="tertiary"
                 className="block px-0"
+                data-cy="avslutt-og-fortsett-senere"
                 onClick={(e) => {
                     logEvent('modal åpnet', {
                         component: tekst('avslutt.popup.tittel'),

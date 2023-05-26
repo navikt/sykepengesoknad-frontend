@@ -24,9 +24,7 @@ describe('Tester kvittering', () => {
             // Svar og send
             cy.contains(
                 'Jeg vet at jeg kan miste retten til sykepenger hvis opplysningene jeg gir ikke er riktige eller fullstendige. Jeg vet også at NAV kan holde igjen eller kreve tilbake penger, og at å gi feil opplysninger kan være straffbart.',
-            ).click({
-                force: true,
-            })
+            ).click()
             cy.contains('Gå videre').click()
 
             cy.get('[data-cy="bekreftCheckboksPanel"]').click()
@@ -73,7 +71,7 @@ describe('Tester kvittering', () => {
         it('Etter 30 dager', () => {
             cy.visit('/syk/sykepengesoknad?testperson=alle-soknader')
 
-            cy.get(`[data-cy="Tidligere søknader"]  a[href*=${sendtArbeidsledigKvittering.id}]`).click({ force: true })
+            cy.get(`[data-cy="Tidligere søknader"]  a[href*=${sendtArbeidsledigKvittering.id}]`).click()
             cy.url().should('include', `/sendt/${sendtArbeidsledigKvittering.id}`)
 
             // Sendt datoer
@@ -107,23 +105,19 @@ describe('Tester kvittering', () => {
             cy.visit('/syk/sykepengesoknad?testperson=alle-soknader')
 
             // Velg søknad
-            cy.get(`a[href*=${oppholdUtlandKvittering.id}]`).click({
-                force: true,
-            })
+            cy.get(`a[href*=${oppholdUtlandKvittering.id}]`).click()
 
             // Svar og send
             setPeriodeFraTil(14, 22)
 
             cy.contains('Gå videre').click()
             cy.get('[data-cy="landvelger"] input[type="text"]').type('Fransk')
-            cy.contains('Søre franske territorier').click({ force: true })
-            cy.contains('Gå videre').click({ force: true })
-            cy.contains('Nei').click({ force: true })
-            cy.contains('Gå videre').click({ force: true })
-            cy.contains('Jeg bekrefter de to punktene ovenfor').click({
-                force: true,
-            })
-            cy.contains('Send søknaden').click({ force: true })
+            cy.contains('Søre franske territorier').click()
+            cy.contains('Gå videre').click()
+            cy.contains('Nei').click()
+            cy.contains('Gå videre').click()
+            cy.contains('Jeg bekrefter de to punktene ovenfor').click()
+            cy.contains('Send søknaden').click()
 
             const kvitteringURL = `/kvittering/${oppholdUtlandKvittering.id}`
 
@@ -186,9 +180,7 @@ describe('Tester kvittering', () => {
             // Svar og send
             cy.contains(
                 'Jeg vet at jeg kan miste retten til sykepenger hvis opplysningene jeg gir ikke er riktige eller fullstendige. Jeg vet også at NAV kan holde igjen eller kreve tilbake penger, og at å gi feil opplysninger kan være straffbart.',
-            ).click({
-                force: true,
-            })
+            ).click()
             cy.contains('Gå videre').click()
             cy.get('[data-cy="bekreftCheckboksPanel"]').click()
             cy.contains('Send søknaden').click()
@@ -241,7 +233,7 @@ describe('Tester kvittering', () => {
     context('Arbeidstaker', () => {
         it('Innenfor arbeidsgiverperiode', () => {
             cy.visit('/syk/sykepengesoknad?testperson=alle-soknader')
-            cy.get(`a[href*=${arbeidstakerInnenforArbeidsgiverperiodeKvittering.id}]`).click({ force: true })
+            cy.get(`a[href*=${arbeidstakerInnenforArbeidsgiverperiodeKvittering.id}]`).click()
             besvarSoknad()
 
             const kvitteringURL = `/kvittering/${arbeidstakerInnenforArbeidsgiverperiodeKvittering.id}`
@@ -254,12 +246,8 @@ describe('Tester kvittering', () => {
 
             // Ettersending til nav vises ikke i kvittering
             cy.contains('Jeg vil at søknaden skal behandles av NAV').should('not.exist')
-            cy.get('#listelink').click({
-                force: true,
-            })
-            cy.get(`a[href*=${arbeidstakerInnenforArbeidsgiverperiodeKvittering.id}]`).click({
-                force: true,
-            })
+            cy.get('#listelink').click({ force: true })
+            cy.get(`a[href*=${arbeidstakerInnenforArbeidsgiverperiodeKvittering.id}]`).click()
             cy.url().should('include', `/sendt/${arbeidstakerInnenforArbeidsgiverperiodeKvittering.id}`)
 
             // Ettersend
@@ -308,16 +296,14 @@ describe('Tester kvittering', () => {
             )
 
             // Arbeidsgiverperiode tekst
-            cy.contains('Hvorfor går det et skille ved 16 dager?').click({
-                force: true,
-            })
+            cy.contains('Hvorfor går det et skille ved 16 dager?').click()
             cy.get('.navds-body-long').should(
                 'contain',
                 'Arbeidsgiveren skal betale sykepenger i en periode på opptil 16 kalenderdager, også kalt arbeidsgiverperioden. NAV overtar sykepengeutbetalingen fra og med 17. kalenderdag.',
             )
 
             // Inntektsmelding
-            cy.contains('Hva er en inntektsmelding').click({ force: true })
+            cy.contains('Hva er en inntektsmelding').click()
             cy.get('.navds-body-long').should(
                 'contain',
                 'Arbeidsplassen din sender inntektsopplysninger og annen informasjon som NAV trenger for å behandle søkaden din. Inntektsmeldingen sendes digitalt fra arbeidsplassens lønns- og personalsystem eller fra Altinn.no.',
@@ -327,7 +313,7 @@ describe('Tester kvittering', () => {
         it('Utenfor arbeidsgiverperiode', () => {
             cy.visit('/syk/sykepengesoknad?testperson=alle-soknader')
             cy.location('pathname').should('include', '/syk/sykepengesoknad')
-            cy.get(`a[href*=${arbeidstakerUtenforArbeidsgiverperiodeKvittering.id}]`).click({ force: true })
+            cy.get(`a[href*=${arbeidstakerUtenforArbeidsgiverperiodeKvittering.id}]`).click()
             besvarSoknad()
 
             const kvitteringURL = `/kvittering/${arbeidstakerUtenforArbeidsgiverperiodeKvittering.id}`
@@ -343,9 +329,7 @@ describe('Tester kvittering', () => {
             cy.visit('/syk/sykepengesoknad?testperson=alle-soknader')
             cy.location('pathname').should('include', '/syk/sykepengesoknad')
 
-            cy.get(`a[href*=${arbeidstakerDeltPeriodeForsteUtenforArbeidsgiverperiodeKvittering.id}]`).click({
-                force: true,
-            })
+            cy.get(`a[href*=${arbeidstakerDeltPeriodeForsteUtenforArbeidsgiverperiodeKvittering.id}]`).click()
             besvarSoknad()
 
             const kvitteringURL = `/kvittering/${arbeidstakerDeltPeriodeForsteUtenforArbeidsgiverperiodeKvittering.id}`
@@ -361,9 +345,7 @@ describe('Tester kvittering', () => {
             cy.visit('/syk/sykepengesoknad?testperson=alle-soknader')
             cy.location('pathname').should('include', '/syk/sykepengesoknad')
 
-            cy.get(`a[href*=${arbeidstakerUtenOppholdForsteUtenforArbeidsgiverperiodeKvittering.id}]`).click({
-                force: true,
-            })
+            cy.get(`a[href*=${arbeidstakerUtenOppholdForsteUtenforArbeidsgiverperiodeKvittering.id}]`).click()
             besvarSoknad()
             cy.location('pathname').should(
                 'include',
@@ -381,9 +363,7 @@ describe('Tester kvittering', () => {
             cy.visit('/syk/sykepengesoknad?testperson=alle-soknader')
             cy.location('pathname').should('include', '/syk/sykepengesoknad')
 
-            cy.get(`a[href*=${arbeidstakerUtenOppholdKvittering.id}]`).click({
-                force: true,
-            })
+            cy.get(`a[href*=${arbeidstakerUtenOppholdKvittering.id}]`).click()
             besvarSoknad()
             const kvitteringURL = `/kvittering/${arbeidstakerUtenOppholdKvittering.id}`
             utenOppholdKvittering()
@@ -412,9 +392,7 @@ describe('Tester kvittering', () => {
             cy.visit('/syk/sykepengesoknad?testperson=alle-soknader')
             cy.location('pathname').should('include', '/syk/sykepengesoknad')
 
-            cy.get(`a[href*=${arbeidstakerMedOppholdKvittering.id}]`).click({
-                force: true,
-            })
+            cy.get(`a[href*=${arbeidstakerMedOppholdKvittering.id}]`).click()
             besvarSoknad()
 
             const forventetUrl = `/kvittering/${arbeidstakerMedOppholdKvittering.id}`
@@ -428,10 +406,10 @@ describe('Tester kvittering', () => {
 const besvarSoknad = () => {
     cy.contains(
         'Jeg vet at jeg kan miste retten til sykepenger hvis opplysningene jeg gir ikke er riktige eller fullstendige. Jeg vet også at NAV kan holde igjen eller kreve tilbake penger, og at å gi feil opplysninger kan være straffbart.',
-    ).click({ force: true })
-    cy.contains('Gå videre').click({ force: true })
+    ).click()
+    cy.contains('Gå videre').click()
     cy.get('[data-cy="bekreftCheckboksPanel"]').click()
-    cy.contains('Send søknaden').click({ force: true })
+    cy.contains('Send søknaden').click()
 }
 
 const inntil16dagerKvittering = () => {
@@ -510,16 +488,14 @@ const over16dagerKvittering = () => {
     )
 
     // Arbeidsgiverperiode tekst
-    cy.contains('Hvorfor går det et skille ved 16 dager?').click({
-        force: true,
-    })
+    cy.contains('Hvorfor går det et skille ved 16 dager?').click()
     cy.get('.navds-body-long').should(
         'contain',
         'Arbeidsgiveren skal betale sykepenger i en periode på opptil 16 kalenderdager, også kalt arbeidsgiverperioden. NAV overtar sykepengeutbetalingen fra og med 17. kalenderdag.',
     )
 
     // Inntektsmelding
-    cy.contains('Hva er en inntektsmelding').click({ force: true })
+    cy.contains('Hva er en inntektsmelding').click()
     cy.get('.navds-body-long').should(
         'contain',
         'Arbeidsplassen din sender inntektsopplysninger og annen informasjon som NAV trenger for å behandle søkaden din. Inntektsmeldingen sendes digitalt fra arbeidsplassens lønns- og personalsystem eller fra Altinn.no.',
@@ -628,9 +604,7 @@ const medOppholdKvittering = () => {
         .and('not.contain', 'Du får sykepengene fra arbeidsgiveren din')
 
     // Inntekstmelding
-    cy.contains('Hvorfor inntektsmeldingen må sendes på nytt?').click({
-        force: true,
-    })
+    cy.contains('Hvorfor inntektsmeldingen må sendes på nytt?').click()
     cy.get('.navds-body-long').should(
         'contain',
         'Lønn eller arbeidstid kan ha endret seg siden du var syk forrige gang. Dette får vi bare informasjon om gjennom inntektsmeldingen.',

@@ -23,14 +23,12 @@ describe('Tester behandlingsdagersøknad', () => {
         cy.contains('1. april - 24. april 2020 (24 dager)')
         cy.contains('POSTEN NORGE AS, BÆRUM')
         cy.contains('1 behandlingsdag')
-        cy.contains('Opplysninger fra sykmeldingen').click({ force: true })
+        cy.get('section[aria-label="Opplysninger fra sykmeldingen"] button').click()
 
         // Godkjenne ANSVARSERKLARING
         cy.contains(
             'Jeg vet at jeg kan miste retten til sykepenger hvis opplysningene jeg gir ikke er riktige eller fullstendige. Jeg vet også at NAV kan holde igjen eller kreve tilbake penger, og at å gi feil opplysninger kan være straffbart.',
-        ).click({
-            force: true,
-        })
+        ).click()
 
         cy.contains('Gå videre').click()
     })
@@ -44,11 +42,11 @@ describe('Tester behandlingsdagersøknad', () => {
         cy.contains(
             'Hvilke dager måtte du være helt borte fra jobben på grunn av behandling mellom 1. - 24. april 2020?',
         )
-        cy.get('.rdp-day').contains('1').click({ force: true })
-        cy.get('.rdp-day').contains('10').click({ force: true })
-        cy.get('.rdp-day').contains('16').click({ force: true })
-        cy.get('.rdp-day').contains('15').click({ force: true })
-        cy.get('.rdp-day').contains('1').click({ force: true })
+        cy.get('button[aria-label="1. april (onsdag)"]').click()
+        cy.get('button[aria-label="10. april (fredag)"]').click()
+        cy.get('button[aria-label="16. april (torsdag)"]').click()
+        cy.get('button[aria-label="15. april (onsdag)"]').click()
+        cy.get('button[aria-label="1. april (onsdag)"]').click()
 
         cy.contains('Gå videre').click()
     })
@@ -57,16 +55,16 @@ describe('Tester behandlingsdagersøknad', () => {
         cy.url().should('include', `${soknad.id}/3`)
 
         // Test spørsmål
-        cy.get('[data-cy="ja-nei-stor"] input[value=JA]').click({ force: true })
+        cy.get('[data-cy="ja-nei-stor"] input[value=JA]').click()
 
         // Svarer JA
         // Underspørsmål nivå 1 - checkbox
         cy.contains('Hvilke andre inntektskilder har du?')
         cy.get('.undersporsmal .navds-checkbox label[for=687382]').should('include.text', 'andre arbeidsforhold')
-        cy.get('input[type=checkbox]#687382').click({ force: true })
+        cy.get('input[type=checkbox]#687382').click()
 
         // Underspørsmål nivå 2 - radio
-        cy.get('input[type=radio]#687383_0').click({ force: true })
+        cy.get('input[type=radio]#687383_0').click()
         cy.contains(
             'Du må sende egen sykepengesøknad for dette. ' +
                 'Det betyr også at legen må skrive en sykmelding for hvert arbeidsforhold du er sykmeldt fra.',
@@ -76,14 +74,14 @@ describe('Tester behandlingsdagersøknad', () => {
     })
 
     it('Tilbake og videre', function () {
-        cy.contains('Tilbake').click({ force: true })
+        cy.contains('Tilbake').click()
 
         cy.contains('Gå videre').click()
     })
 
     it('Søknad VAER_KLAR_OVER_AT - steg 4', function () {
         cy.url().should('include', `${soknad.id}/4`)
-        cy.get('.navds-checkbox__label').click({ force: true })
+        cy.get('.navds-checkbox__label').click()
         cy.contains(
             'Jeg har lest all informasjonen jeg har fått i søknaden og bekrefter at opplysningene jeg har gitt er korrekte.',
         )
