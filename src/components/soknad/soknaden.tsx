@@ -67,7 +67,7 @@ const Soknaden = () => {
             return
         }
 
-        logEvent('søknad åpnet', {
+        logEvent('skjema åpnet', {
             skjemanavn: 'sykepengesoknad',
             soknadstype: valgtSoknad.soknadstype,
             soknadstatus: valgtSoknad.status,
@@ -96,7 +96,7 @@ const Soknaden = () => {
     }
 
     if (stegNo > 1) {
-        logEvent('spørsmål åpnet', {
+        logEvent('skjema spørsmål åpnet', {
             soknadstype: valgtSoknad!.soknadstype,
             skjemanavn: 'sykepengesoknad',
             sporsmaltag: sporsmal!.tag,

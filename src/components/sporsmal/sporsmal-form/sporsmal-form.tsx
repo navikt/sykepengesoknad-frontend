@@ -198,7 +198,7 @@ const SporsmalForm = () => {
                     return
                 }
                 await sendSoknad()
-                logEvent('søknad fullført', {
+                logEvent('skjema fullført', {
                     soknadstype: valgtSoknad!.soknadstype,
                     skjemanavn: 'sykepengesoknad',
                 })
@@ -206,7 +206,7 @@ const SporsmalForm = () => {
                 return
             }
             await sendOppdaterSporsmal()
-            logEvent('spørsmål besvart', {
+            logEvent('skjema spørsmål besvart', {
                 soknadstype: valgtSoknad!.soknadstype,
                 skjemanavn: 'sykepengesoknad',
                 sporsmaltag: sporsmal.tag,

@@ -16,10 +16,10 @@ type validEventNames =
     | 'accordion åpnet'
     | 'accordion lukket'
     | 'knapp klikket'
-    | 'søknad åpnet'
-    | 'søknad fullført'
-    | 'spørsmål åpnet'
-    | 'spørsmål besvart'
+    | 'skjema åpnet'
+    | 'skjema fullført'
+    | 'skjema spørsmål åpnet'
+    | 'skjema spørsmål besvart'
     | 'modal åpnet'
     | 'modal lukket' //Bruk kun navn fra taksonomien
 
