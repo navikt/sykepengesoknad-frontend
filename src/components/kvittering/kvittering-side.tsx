@@ -78,7 +78,7 @@ const KvitteringSide = () => {
         <>
             <Banner />
 
-            <div className="kvittering-side">
+            <div>
                 <HotjarTrigger jsTrigger={hentHotjarJsTrigger(valgtSoknad.soknadstype, 'kvittering')}>
                     <Kvittering />
 

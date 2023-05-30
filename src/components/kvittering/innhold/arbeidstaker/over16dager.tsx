@@ -1,4 +1,4 @@
-import { BodyLong, Label, ReadMore } from '@navikt/ds-react'
+import { BodyLong, BodyShort, Label, ReadMore } from '@navikt/ds-react'
 import React from 'react'
 
 import { parserWithReplace } from '../../../../utils/html-react-parser-utils'
@@ -12,52 +12,53 @@ interface gradertReisetilskuddProps {
 
 const Over16dager = ({ erGradert }: gradertReisetilskuddProps) => {
     return (
-        <div className="avsnitt">
-            <Label spacing as="h2">
+        <div className="mt-4">
+            <Label as="h2" spacing>
                 {tekst('kvittering.naeringsdrivende.tittel')}
             </Label>
-            <BodyLong spacing as="span">
+            <BodyShort>
                 {erGradert
                     ? tekst('kvittering.arbeidstaker.over16.gradertreisetilskudd.brodtekst')
                     : tekst('kvittering.arbeidstaker.over16.brodtekst')}
-            </BodyLong>
-            <ReadMore className="mt-2" header={tekst('kvittering.arbeidstaker.hvorfor-skille-ved-16-dager')}>
-                <BodyLong spacing>
+            </BodyShort>
+
+            <ReadMore className="mt-4" header={tekst('kvittering.arbeidstaker.hvorfor-skille-ved-16-dager')}>
+                <BodyLong>
                     {erGradert
                         ? tekst('kvittering.arbeidsgiveren-skal-betale-gradertreisetilskudd')
                         : tekst('kvittering.arbeidsgiveren-skal-betale')}
                 </BodyLong>
             </ReadMore>
-            <ReadMore className="mt-2" header={tekst('kvittering.hva-er-inntektsmelding')}>
-                <BodyLong spacing>{tekst('kvittering.arbeidstaker.over16.inntektsmelding.brodtekst')}</BodyLong>
+
+            <ReadMore className="mt-4" header={tekst('kvittering.hva-er-inntektsmelding')}>
+                <BodyLong>{tekst('kvittering.arbeidstaker.over16.inntektsmelding.brodtekst')}</BodyLong>
             </ReadMore>
-            <div className="avsnitt hva-skjer">
-                <Label spacing as="h2">
+
+            <div className="mt-8">
+                <Label as="h2" spacing>
                     {tekst('kvittering.nav-behandler-soknaden')}
                 </Label>
-                <BodyLong spacing as="span">
-                    {tekst('kvittering.arbeidstaker.saksbehandlingstid')}{' '}
-                </BodyLong>
+                <BodyShort as="span">{tekst('kvittering.arbeidstaker.saksbehandlingstid')} </BodyShort>
                 <LenkeMedIkon
                     href={tekst('kvittering.arbeidstaker.saksbehandlingstid.lenke.url')}
                     text={tekst('kvittering.arbeidstaker.saksbehandlingstid.lenke')}
                 />
                 .
             </div>
-            <div className="avsnitt">
-                <Label spacing as="h2">
+
+            <div className="mt-8">
+                <Label as="h2" spacing>
                     {tekst('kvittering.naar-blir-pengene')}
                 </Label>
-                <BodyLong spacing>
-                    {parserWithReplace(tekst('kvittering.arbeidstaker.over16.utbetaling-arbeidsgiver'))}{' '}
-                </BodyLong>
-                <BodyLong spacing as="span">
-                    {parserWithReplace(tekst('kvittering.arbeidstaker.over16.utbetaling-NAV'))}{' '}
-                </BodyLong>
+                <BodyShort spacing>
+                    {parserWithReplace(tekst('kvittering.arbeidstaker.over16.utbetaling-arbeidsgiver'))}
+                </BodyShort>
+                <BodyShort spacing>
+                    {parserWithReplace(tekst('kvittering.arbeidstaker.over16.utbetaling-NAV'))}
+                </BodyShort>
             </div>
-            <div className="avsnitt kontonummer">
-                <Kontonummer />
-            </div>
+
+            <Kontonummer />
         </div>
     )
 }

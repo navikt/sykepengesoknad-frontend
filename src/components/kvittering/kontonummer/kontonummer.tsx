@@ -17,8 +17,10 @@ const Kontonummer = () => {
         kontonummer.length === 11 ? kontonummer.replace(/^(.{4})(.{2})(.*)$/, '$1 $2 $3') : kontonummer
 
     return (
-        <>
-            <Label as="h2">{tekst('kvittering.kontonummer.tittel')}</Label>
+        <div data-cy="kontonummer" className="mt-8">
+            <Label as="h2" spacing>
+                {tekst('kvittering.kontonummer.tittel')}
+            </Label>
 
             <Vis
                 hvis={!kontonummer}
@@ -36,7 +38,7 @@ const Kontonummer = () => {
                     </>
                 )}
             />
-        </>
+        </div>
     )
 }
 

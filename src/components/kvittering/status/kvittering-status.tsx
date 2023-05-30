@@ -28,7 +28,7 @@ const KvitteringStatus = () => {
         <Vis
             hvis={valgtSoknad.sendtTilNAVDato}
             render={() => (
-                <Alert variant="success">
+                <Alert variant="success" data-cy="sendt-nav">
                     <Heading size="small" level="2">
                         {tekst('kvittering.soknaden-er-sendt-til')} {Mottaker.NAV}
                     </Heading>

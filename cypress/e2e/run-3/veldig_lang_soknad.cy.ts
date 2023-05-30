@@ -278,7 +278,7 @@ describe('Tester støtte for gamle spørsmål', () => {
     })
     it('Søknad kvittering', () => {
         cy.url().should('include', `/kvittering/${soknad.id}`)
-        cy.get('.hva-skjer')
+        cy.get('[data-cy="kvittering"]')
             .should('contain', 'Hva skjer videre?')
             .and('contain', 'Før NAV kan behandle søknaden')
             .and('contain', 'Hvorfor går det et skille ved 16 dager?')

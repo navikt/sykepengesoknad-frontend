@@ -35,7 +35,7 @@ const Kvittering = () => {
     if (!valgtSoknad) return null
 
     return (
-        <div className="kvittering">
+        <div data-cy="kvittering">
             <KvitteringType />
 
             <Oppsummering

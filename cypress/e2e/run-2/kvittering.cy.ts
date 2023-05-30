@@ -35,9 +35,8 @@ describe('Tester kvittering', () => {
             cy.url().should('include', `/kvittering/${arbeidsledigKvittering.id}`)
 
             // Sendt datoer
-            cy.get('.kvittering .navds-alert--success')
-                .should('contain', 'Søknaden er sendt til NAV')
-                .and('not.contain', 'Org.nr')
+            cy.get('[data-cy="sendt-nav"]')
+            cy.get('[data-cy="sendt-arbeidsgiver"]').should('not.exist')
 
             // Hva skjer videre
             cy.get('[data-cy="kvittering-alert"]')
@@ -78,10 +77,8 @@ describe('Tester kvittering', () => {
             cy.url().should('include', `/sendt/${sendtArbeidsledigKvittering.id}`)
 
             // Sendt datoer
-            cy.get('.kvittering .navds-alert--success')
-                .should('contain', 'Søknaden er sendt til NAV')
-                .and('contain', 'Mottatt: Torsdag 23. april, kl 11:56')
-                .and('not.contain', 'Org.nr')
+            cy.get('[data-cy="sendt-nav"]').contains('Mottatt: Torsdag 23. april, kl 11:56')
+            cy.get('[data-cy="sendt-arbeidsgiver"]').should('not.exist')
 
             // Hva skjer videre skal ikke finnes
             cy.get('[data-cy="kvittering-alert"]').should('not.exist')
@@ -135,9 +132,8 @@ describe('Tester kvittering', () => {
             cy.url().should('include', kvitteringURL)
 
             // Sendt datoer
-            cy.get('.kvittering .navds-alert--success')
-                .should('contain', 'Søknaden er sendt til NAV')
-                .and('not.contain', 'Org.nr')
+            cy.get('[data-cy="sendt-nav"]')
+            cy.get('[data-cy="sendt-arbeidsgiver"]').should('not.exist')
 
             // Hva skjer videre
             cy.get('[data-cy="kvittering-alert"]')
@@ -204,9 +200,8 @@ describe('Tester kvittering', () => {
             cy.url().should('include', kvitteringURL)
 
             // Sendt datoer
-            cy.get('.kvittering .navds-alert--success')
-                .should('contain', 'Søknaden er sendt til NAV')
-                .and('not.contain', 'Org.nr')
+            cy.get('[data-cy="sendt-nav"]')
+            cy.get('[data-cy="sendt-arbeidsgiver"]').should('not.exist')
 
             // Hva skjer videre
             cy.get('[data-cy="kvittering-alert"]')
@@ -276,11 +271,11 @@ describe('Tester kvittering', () => {
             cy.contains('Jeg vil at søknaden skal behandles av NAV').should('not.exist')
 
             // Sendt datoer
-            cy.get('.kvittering .navds-alert--success').should('contain', 'Søknaden er sendt')
-            cy.get('.sendt-info .oppsummering__avkrysset').should('contain', 'arb')
+            cy.get('[data-cy="sendt-nav"]')
+            cy.get('[data-cy="sendt-arbeidsgiver"]')
 
             // Hva skjer videre
-            cy.get('.hva-skjer')
+            cy.get('[data-cy="kvittering"]')
                 .should('contain', 'Hva skjer videre?')
                 .and('contain', 'Før NAV kan behandle søknaden')
                 .and(
@@ -441,11 +436,11 @@ const besvarSoknad = () => {
 
 const inntil16dagerKvittering = () => {
     // Sendt datoer
-    cy.get('.kvittering .navds-alert--success').should('contain', 'Søknaden er sendt')
-    cy.get('.sendt-info .oppsummering__avkrysset').should('contain', 'arb')
+    cy.get('[data-cy="sendt-nav"]').should('not.exist')
+    cy.get('[data-cy="sendt-arbeidsgiver"]')
 
     // Hva skjer videre
-    cy.get('.hva-skjer')
+    cy.get('[data-cy="kvittering"]')
         .should('contain', 'Hva skjer videre?')
         .and('contain', 'Du får sykepengene fra arbeidsgiveren din')
         .and(
@@ -478,11 +473,11 @@ const inntil16dagerKvittering = () => {
 
 const over16dagerKvittering = () => {
     // Sendt datoer
-    cy.get('.kvittering .navds-alert--success').should('contain', 'Søknaden er sendt')
-    cy.get('.sendt-info .oppsummering__avkrysset').should('contain', 'arb')
+    cy.get('[data-cy="sendt-nav"]')
+    cy.get('[data-cy="sendt-arbeidsgiver"]')
 
     // Hva skjer videre
-    cy.get('.hva-skjer')
+    cy.get('[data-cy="kvittering"]')
         .should('contain', 'Hva skjer videre?')
         .and('contain', 'Før NAV kan behandle søknaden')
         .and(
@@ -552,11 +547,11 @@ const over16dagerKvittering = () => {
 
 const utenOppholdKvittering = () => {
     // Sendt datoer
-    cy.get('.kvittering .navds-alert--success').should('contain', 'Søknaden er sendt')
-    cy.get('.sendt-info .oppsummering__avkrysset').should('not.contain', 'arb')
+    cy.get('[data-cy="sendt-nav"]')
+    cy.get('[data-cy="sendt-arbeidsgiver"]').should('not.exist')
 
     // Hva skjer videre
-    cy.get('.hva-skjer')
+    cy.get('[data-cy="kvittering"]')
         .should('contain', 'Hva skjer videre?')
         .and('contain', 'NAV behandler søknaden')
         .and(
@@ -604,11 +599,11 @@ const utenOppholdKvittering = () => {
 
 const medOppholdKvittering = () => {
     // Sendt datoer
-    cy.get('.kvittering .navds-alert--success').should('contain', 'Søknaden er sendt')
-    cy.get('.sendt-info .oppsummering__avkrysset').should('not.contain', 'arb')
+    cy.get('[data-cy="sendt-nav"]')
+    cy.get('[data-cy="sendt-arbeidsgiver"]').should('not.exist')
 
     // Hva skjer videre
-    cy.get('.hva-skjer')
+    cy.get('[data-cy="kvittering"]')
         .should('contain', 'Viktig informasjon')
         .and('contain', 'Før NAV kan behandle søknaden')
         .and(

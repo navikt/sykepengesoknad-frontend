@@ -1,13 +1,13 @@
-import { Detail, Label } from '@navikt/ds-react'
+import { Detail } from '@navikt/ds-react'
 import dayjs from 'dayjs'
 import React from 'react'
 import { useParams } from 'react-router-dom'
 
 import { tekst } from '../../../utils/tekster'
-import Avkrysset from '../../oppsummering/utdrag/avkrysset'
 import Vis from '../../vis'
 import useSoknad from '../../../hooks/useSoknad'
 import { RouteParams } from '../../../app'
+import Avkrysset from '../../oppsummering/utdrag/avkrysset'
 
 import { Mottaker } from './kvittering-status'
 
@@ -41,34 +41,32 @@ const ArbeidstakerStatus = () => {
     if (!valgtSoknad) return null
 
     return (
-        <Vis
-            hvis={valgtSoknad.sendtTilArbeidsgiverDato || valgtSoknad.sendtTilNAVDato}
-            render={() => (
-                <div className="sendt-inner">
-                    <Vis
-                        hvis={valgtSoknad.sendtTilArbeidsgiverDato}
-                        render={() => (
-                            <>
-                                <Label as="h3" className="sendt-tittel">
-                                    {tekst('kvittering.sendt-til')}
-                                </Label>
-                                <Avkrysset tekst={`${tilArbNavn()} ${tilOrg()}${medKopi}`} />
-                                <Detail size="small">{tilArbDato()}</Detail>
-                            </>
-                        )}
-                    />
-                    <Vis
-                        hvis={valgtSoknad.sendtTilNAVDato}
-                        render={() => (
-                            <>
-                                <Avkrysset tekst={Mottaker.NAV} />
-                                <Detail size="small">{tilNavDato()}</Detail>
-                            </>
-                        )}
-                    />
-                </div>
-            )}
-        />
+        <>
+            <Vis
+                hvis={valgtSoknad.sendtTilArbeidsgiverDato}
+                render={() => (
+                    <>
+                        <div className="col-span-1" />
+                        <div data-cy="sendt-arbeidsgiver" className="col-span-11">
+                            <Avkrysset tekst={`${tilArbNavn()} ${tilOrg()}${medKopi}`} />
+                            <Detail className="pl-6">{tilArbDato()}</Detail>
+                        </div>
+                    </>
+                )}
+            />
+            <Vis
+                hvis={valgtSoknad.sendtTilNAVDato}
+                render={() => (
+                    <>
+                        <div className="col-span-1" />
+                        <div data-cy="sendt-nav" className="col-span-11">
+                            <Avkrysset tekst={Mottaker.NAV} />
+                            <Detail className="pl-6">{tilNavDato()}</Detail>
+                        </div>
+                    </>
+                )}
+            />
+        </>
     )
 }
 

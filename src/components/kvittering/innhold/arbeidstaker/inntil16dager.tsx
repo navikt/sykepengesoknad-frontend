@@ -1,17 +1,15 @@
-import { BodyLong, Label } from '@navikt/ds-react'
+import { BodyShort, Label } from '@navikt/ds-react'
 import React from 'react'
 
 import { tekst } from '../../../../utils/tekster'
 
 const Inntil16dager = () => {
     return (
-        <div className="avsnitt">
-            <Label spacing as="h4">
+        <div className="mt-4">
+            <Label as="h4" spacing>
                 {tekst('kvittering.arbeidstaker.tittel')}
             </Label>
-            <BodyLong spacing as="span">
-                {tekst('kvittering.arbeidstaker.brodtekst')}{' '}
-            </BodyLong>
+            <BodyShort as="span">{tekst('kvittering.arbeidstaker.brodtekst')} </BodyShort>
         </div>
     )
 }
