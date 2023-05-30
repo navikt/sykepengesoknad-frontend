@@ -54,11 +54,12 @@ const JaNeiStor = ({ sporsmal }: SpmProps) => {
 
     const error = errors[sporsmal.id] !== undefined
 
-    function radioClassName(value: 'JA' | 'NEI') {
+    function radioClassName(value: 'JA' | 'NEI', mt = false) {
         return cn(
-            'focus-within:shadow-focus mb-2 block w-full rounded border-2 border-b-border-action px-4 py-1 text-text-action hover:bg-surface-action-subtle-hover md:mb-0 md:w-[48.7%]',
+            'focus-within:shadow-focus mb-2 block w-full rounded border-2  border-border-default px-4 py-1 text-text-default hover:bg-surface-action-subtle-hover md:mb-0 md:w-1/2',
             {
-                'bg-surface-action-subtle': watchJaNei === value,
+                'bg-surface-action-subtle border-border-selected': watchJaNei === value,
+                'mt-4': mt,
                 'border-b-border-danger border-border-danger text-text-danger': error,
             },
         )
@@ -82,8 +83,7 @@ const JaNeiStor = ({ sporsmal }: SpmProps) => {
                                 {
                                     '--ac-radio-checkbox-border': error
                                         ? 'var(--a-border-danger)'
-                                        : 'var(--a-border-action)',
-                                    '--ac-radio-checkbox-action': 'var(--a-border-action)',
+                                        : 'var(--a-border-default)',
                                     '--ac-radio-checkbox-action-hover-bg': 'white',
                                 } as React.CSSProperties
                             }
@@ -98,12 +98,11 @@ const JaNeiStor = ({ sporsmal }: SpmProps) => {
                                         '--a-shadow-focus': '0 0 0 0',
                                     } as React.CSSProperties
                                 }
-                                className="flex w-full flex-wrap justify-between"
                             >
                                 <Radio id={`${field.name}_0`} value="JA" className={radioClassName('JA')}>
                                     Ja
                                 </Radio>
-                                <Radio id={`${field.name}_1`} value="NEI" className={radioClassName('NEI')}>
+                                <Radio id={`${field.name}_1`} value="NEI" className={radioClassName('NEI', true)}>
                                     Nei
                                 </Radio>
                             </div>
