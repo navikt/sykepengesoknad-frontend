@@ -7,6 +7,7 @@ import { Soknad } from '../../types/types'
 import UseFlexjarFeedback from '../../hooks/useFlexjarFeedback'
 import { RSSoknadstype } from '../../types/rs-types/rs-soknadstype'
 import { TagTyper } from '../../types/enums'
+import { isMockBackend } from '../../utils/environment'
 
 enum Feedbacktype {
     'JA' = 'JA',
@@ -47,6 +48,10 @@ export const Feedback = ({ soknad, steg }: { soknad: Soknad; steg: number }) => 
     }
 
     if (steg == soknad.sporsmal.filter((s) => s.tag !== TagTyper.VAER_KLAR_OVER_AT).length) {
+        return null
+    }
+
+    if (!isMockBackend()) {
         return null
     }
     const fetchFeedback = async (): Promise<void> => {
