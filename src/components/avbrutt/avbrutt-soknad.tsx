@@ -38,7 +38,7 @@ const AvbruttSoknad = () => {
             return
         }
 
-        logEvent('søknad åpnet', {
+        logEvent('skjema åpnet', {
             skjemanavn: 'sykepengesoknad',
             soknadstype: valgtSoknad.soknadstype,
             soknadstatus: valgtSoknad.status,
