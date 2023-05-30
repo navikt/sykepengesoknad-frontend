@@ -1,0 +1,9 @@
+name: designsystem-bump
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: '0 12 * * 1'
+
+jobs:
+  merge-dependabot-pr:
+    uses: navikt/flex-github-actions-workflows/.github/workflows/designsystem-bump.yml@master
