@@ -10,7 +10,9 @@ const PerioderUtenOpphold = () => {
     return (
         <div>
             <div className="mt-4">
-                <Label as="h2">{tekst('kvittering.nav-behandler-soknaden')}</Label>
+                <Label as="h2" spacing>
+                    {tekst('kvittering.nav-behandler-soknaden')}
+                </Label>
                 <BodyShort as="span">{tekst('kvittering.arbeidstaker.saksbehandlingstid')} </BodyShort>
                 <LenkeMedIkon
                     href={tekst('kvittering.arbeidstaker.saksbehandlingstid.lenke.url')}
@@ -20,7 +22,9 @@ const PerioderUtenOpphold = () => {
             </div>
 
             <div className="mt-4">
-                <Label as="h2">{tekst('kvittering.naar-blir-pengene')}</Label>
+                <Label as="h2" spacing>
+                    {tekst('kvittering.naar-blir-pengene')}
+                </Label>
                 <BodyShort spacing>
                     {parserWithReplace(tekst('kvittering.arbeidstaker.over16.utbetaling-arbeidsgiver'))}
                 </BodyShort>

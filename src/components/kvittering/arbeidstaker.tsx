@@ -1,8 +1,9 @@
-import { Alert, Heading } from '@navikt/ds-react'
+import { Heading, Panel } from '@navikt/ds-react'
 import { logger } from '@navikt/next-logger'
 import dayjs from 'dayjs'
 import React, { useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom'
+import { CheckmarkCircleFillIcon, InformationSquareFillIcon } from '@navikt/aksel-icons'
 
 import { RSMottaker } from '../../types/rs-types/rs-mottaker'
 import { RSSoknadstatus } from '../../types/rs-types/rs-soknadstatus'
@@ -149,38 +150,49 @@ const Arbeidstaker = () => {
     if (!valgtSoknad || !soknader) return null
 
     return (
-        <>
+        <Panel border className="mt-2 grid grid-cols-12 gap-y-2 p-0 pb-8">
+            <div className="col-span-1 flex items-center justify-center border-b border-b-border-default bg-surface-success-subtle py-4">
+                <CheckmarkCircleFillIcon title="" fontSize="1.5rem" className="text-icon-success" />
+            </div>
+            <Heading
+                size="small"
+                level="2"
+                className="col-span-11 border-b border-b-border-default bg-surface-success-subtle py-4"
+            >
+                {tekst('kvittering.sendt-til')}
+            </Heading>
+
             <ArbeidstakerStatus />
+
+            <div className="col-span-12 mx-4 mb-2 border-b-2 border-b-gray-200 pb-2" />
 
             <Vis
                 hvis={!sendtForMerEnn30DagerSiden(valgtSoknad.sendtTilArbeidsgiverDato, valgtSoknad.sendtTilNAVDato)}
                 render={() => {
                     return (
-                        <Alert variant="info" className="bg-white">
-                            <Vis
-                                hvis={kvitteringTekst === 'medOpphold'}
-                                render={() => (
+                        <>
+                            <div className="flex items-center justify-center">
+                                <InformationSquareFillIcon title="" fontSize="1.5rem" className="text-icon-info" />
+                            </div>
+                            <div className="col-span-11">
+                                {kvitteringTekst === 'medOpphold' ? (
                                     <Heading size="small" level="3">
                                         {tekst('kvittering.viktig-informasjon')}
                                     </Heading>
-                                )}
-                            />
-
-                            <Vis
-                                hvis={kvitteringTekst !== 'medOpphold'}
-                                render={() => (
+                                ) : (
                                     <Heading size="small" level="3">
                                         {tekst('kvittering.hva-skjer-videre')}
                                     </Heading>
                                 )}
-                            />
+                            </div>
 
-                            {kvitteringInnhold()}
-                        </Alert>
+                            <div className="col-span-1" />
+                            <div className="col-span-11">{kvitteringInnhold()}</div>
+                        </>
                     )
                 }}
             />
-        </>
+        </Panel>
     )
 }
 

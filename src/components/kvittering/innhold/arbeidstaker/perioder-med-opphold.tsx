@@ -10,7 +10,9 @@ const PerioderMedOpphold = () => {
     return (
         <div>
             <div className="mt-4">
-                <Label as="h2">{tekst('kvittering.naeringsdrivende.tittel')}</Label>
+                <Label as="h2" spacing>
+                    {tekst('kvittering.naeringsdrivende.tittel')}
+                </Label>
                 <BodyShort spacing>{tekst('kvittering.arbeidstaker.med-opphold')} </BodyShort>
                 <ReadMore className="mt-2" header={tekst('kvittering.arbeidstaker.hvorfor-inntektsmelding-pa-nytt')}>
                     <BodyLong spacing>
@@ -20,7 +22,9 @@ const PerioderMedOpphold = () => {
             </div>
 
             <div className="mt-4">
-                <Label as="h2">{tekst('kvittering.nav-behandler-soknaden')}</Label>
+                <Label as="h2" spacing>
+                    {tekst('kvittering.nav-behandler-soknaden')}
+                </Label>
                 <BodyShort as="span">{tekst('kvittering.arbeidstaker.saksbehandlingstid')} </BodyShort>
                 <LenkeMedIkon
                     href={tekst('kvittering.arbeidstaker.saksbehandlingstid.lenke.url')}
@@ -30,7 +34,9 @@ const PerioderMedOpphold = () => {
             </div>
 
             <div className="mt-4">
-                <Label as="h2">{tekst('kvittering.naar-blir-pengene')}</Label>
+                <Label as="h2" spacing>
+                    {tekst('kvittering.naar-blir-pengene')}
+                </Label>
                 <BodyShort spacing>
                     {parserWithReplace(tekst('kvittering.arbeidstaker.over16.utbetaling-arbeidsgiver'))}{' '}
                 </BodyShort>

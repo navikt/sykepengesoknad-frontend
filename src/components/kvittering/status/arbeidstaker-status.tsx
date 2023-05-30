@@ -1,4 +1,4 @@
-import { Alert, BodyShort, Detail, Heading } from '@navikt/ds-react'
+import { Detail } from '@navikt/ds-react'
 import dayjs from 'dayjs'
 import React from 'react'
 import { useParams } from 'react-router-dom'
@@ -7,6 +7,7 @@ import { tekst } from '../../../utils/tekster'
 import Vis from '../../vis'
 import useSoknad from '../../../hooks/useSoknad'
 import { RouteParams } from '../../../app'
+import Avkrysset from '../../oppsummering/utdrag/avkrysset'
 
 import { Mottaker } from './kvittering-status'
 
@@ -40,29 +41,32 @@ const ArbeidstakerStatus = () => {
     if (!valgtSoknad) return null
 
     return (
-        <Alert variant="success">
-            <Heading size="small" level="2">
-                {tekst('kvittering.sendt-til')}
-            </Heading>
+        <>
             <Vis
                 hvis={valgtSoknad.sendtTilArbeidsgiverDato}
                 render={() => (
-                    <div className="mb-4">
-                        <BodyShort>{`${tilArbNavn()} ${tilOrg()}${medKopi}`}</BodyShort>
-                        <Detail>{tilArbDato()}</Detail>
-                    </div>
+                    <>
+                        <div className="col-span-1" />
+                        <div className="col-span-11">
+                            <Avkrysset tekst={`${tilArbNavn()} ${tilOrg()}${medKopi}`} />
+                            <Detail className="pl-6">{tilArbDato()}</Detail>
+                        </div>
+                    </>
                 )}
             />
             <Vis
                 hvis={valgtSoknad.sendtTilNAVDato}
                 render={() => (
-                    <div className="mb-4">
-                        <BodyShort>{Mottaker.NAV}</BodyShort>
-                        <Detail>{tilNavDato()}</Detail>
-                    </div>
+                    <>
+                        <div className="col-span-1" />
+                        <div className="col-span-11">
+                            <Avkrysset tekst={Mottaker.NAV} />
+                            <Detail className="pl-6">{tilNavDato()}</Detail>
+                        </div>
+                    </>
                 )}
             />
-        </Alert>
+        </>
     )
 }
 

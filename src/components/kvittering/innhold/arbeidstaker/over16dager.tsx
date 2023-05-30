@@ -13,8 +13,9 @@ interface gradertReisetilskuddProps {
 const Over16dager = ({ erGradert }: gradertReisetilskuddProps) => {
     return (
         <div className="mt-4">
-            <Label as="h2">{tekst('kvittering.naeringsdrivende.tittel')}</Label>
-
+            <Label as="h2" spacing>
+                {tekst('kvittering.naeringsdrivende.tittel')}
+            </Label>
             <BodyShort>
                 {erGradert
                     ? tekst('kvittering.arbeidstaker.over16.gradertreisetilskudd.brodtekst')
@@ -34,7 +35,9 @@ const Over16dager = ({ erGradert }: gradertReisetilskuddProps) => {
             </ReadMore>
 
             <div className="mt-4">
-                <Label as="h2">{tekst('kvittering.nav-behandler-soknaden')}</Label>
+                <Label as="h2" spacing>
+                    {tekst('kvittering.nav-behandler-soknaden')}
+                </Label>
                 <BodyShort as="span">{tekst('kvittering.arbeidstaker.saksbehandlingstid')} </BodyShort>
                 <LenkeMedIkon
                     href={tekst('kvittering.arbeidstaker.saksbehandlingstid.lenke.url')}
@@ -44,7 +47,9 @@ const Over16dager = ({ erGradert }: gradertReisetilskuddProps) => {
             </div>
 
             <div className="mt-4">
-                <Label as="h2">{tekst('kvittering.naar-blir-pengene')}</Label>
+                <Label as="h2" spacing>
+                    {tekst('kvittering.naar-blir-pengene')}
+                </Label>
                 <BodyShort spacing>
                     {parserWithReplace(tekst('kvittering.arbeidstaker.over16.utbetaling-arbeidsgiver'))}
                 </BodyShort>

@@ -18,7 +18,9 @@ const Kontonummer = () => {
 
     return (
         <div data-cy="kontonummer">
-            <Label as="h2">{tekst('kvittering.kontonummer.tittel')}</Label>
+            <Label as="h2" spacing>
+                {tekst('kvittering.kontonummer.tittel')}
+            </Label>
 
             <Vis
                 hvis={!kontonummer}

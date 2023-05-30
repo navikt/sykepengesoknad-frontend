@@ -6,7 +6,9 @@ import { tekst } from '../../../../utils/tekster'
 const Inntil16dager = () => {
     return (
         <div className="mt-4">
-            <Label as="h4">{tekst('kvittering.arbeidstaker.tittel')}</Label>
+            <Label as="h4" spacing>
+                {tekst('kvittering.arbeidstaker.tittel')}
+            </Label>
             <BodyShort as="span">{tekst('kvittering.arbeidstaker.brodtekst')} </BodyShort>
         </div>
     )
