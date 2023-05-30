@@ -22,7 +22,7 @@ const Over16dager = ({ erGradert }: gradertReisetilskuddProps) => {
                     : tekst('kvittering.arbeidstaker.over16.brodtekst')}
             </BodyShort>
 
-            <ReadMore className="mt-2" header={tekst('kvittering.arbeidstaker.hvorfor-skille-ved-16-dager')}>
+            <ReadMore className="mt-4" header={tekst('kvittering.arbeidstaker.hvorfor-skille-ved-16-dager')}>
                 <BodyLong>
                     {erGradert
                         ? tekst('kvittering.arbeidsgiveren-skal-betale-gradertreisetilskudd')
@@ -30,11 +30,11 @@ const Over16dager = ({ erGradert }: gradertReisetilskuddProps) => {
                 </BodyLong>
             </ReadMore>
 
-            <ReadMore className="mt-2" header={tekst('kvittering.hva-er-inntektsmelding')}>
+            <ReadMore className="mt-4" header={tekst('kvittering.hva-er-inntektsmelding')}>
                 <BodyLong>{tekst('kvittering.arbeidstaker.over16.inntektsmelding.brodtekst')}</BodyLong>
             </ReadMore>
 
-            <div className="mt-4">
+            <div className="mt-8">
                 <Label as="h2" spacing>
                     {tekst('kvittering.nav-behandler-soknaden')}
                 </Label>
@@ -46,7 +46,7 @@ const Over16dager = ({ erGradert }: gradertReisetilskuddProps) => {
                 .
             </div>
 
-            <div className="mt-4">
+            <div className="mt-8">
                 <Label as="h2" spacing>
                     {tekst('kvittering.naar-blir-pengene')}
                 </Label>

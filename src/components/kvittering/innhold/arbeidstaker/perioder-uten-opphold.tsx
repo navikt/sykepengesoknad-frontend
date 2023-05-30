@@ -21,7 +21,7 @@ const PerioderUtenOpphold = () => {
                 .
             </div>
 
-            <div className="mt-4">
+            <div className="mt-8">
                 <Label as="h2" spacing>
                     {tekst('kvittering.naar-blir-pengene')}
                 </Label>

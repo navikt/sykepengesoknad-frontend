@@ -187,7 +187,8 @@ const Arbeidstaker = () => {
                             </div>
 
                             <div className="col-span-1" />
-                            <div className="col-span-11">{kvitteringInnhold()}</div>
+                            <div className="col-span-10">{kvitteringInnhold()}</div>
+                            <div className="col-span-1" />
                         </>
                     )
                 }}
