@@ -198,7 +198,7 @@ const SporsmalForm = () => {
                     return
                 }
                 await sendSoknad()
-                logEvent('skjema fullført', {
+                logEvent('søknad fullført', {
                     soknadstype: valgtSoknad!.soknadstype,
                     skjemanavn: 'sykepengesoknad',
                 })
@@ -206,10 +206,10 @@ const SporsmalForm = () => {
                 return
             }
             await sendOppdaterSporsmal()
-            logEvent('skjema spørsmål besvart', {
+            logEvent('spørsmål besvart', {
                 soknadstype: valgtSoknad!.soknadstype,
                 skjemanavn: 'sykepengesoknad',
-                spørsmål: sporsmal.tag,
+                sporsmaltag: sporsmal.tag,
                 svar: hentAnnonymisertSvar(sporsmal),
             })
 
@@ -239,7 +239,6 @@ const SporsmalForm = () => {
                     onSubmit={methods.handleSubmit(onSubmit)}
                     onSubmitCapture={preSubmit}
                     noValidate={true} // Ikke native validation
-                    className={'sporsmal__form ' + nesteSporsmal?.tag?.toLowerCase()}
                 >
                     <GuidepanelOverSporsmalstekst sporsmal={sporsmal} />
 

@@ -42,6 +42,8 @@ const Soknaden = () => {
     const navigate = useNavigate()
 
     const stegNo = parseInt(stegId!)
+    const spmIndex = stegNo - 1
+    const sporsmal = valgtSoknad?.sporsmal[spmIndex]
 
     useUpdateBreadcrumbs(() => [{ ...soknadBreadcrumb, handleInApp: true }], [])
 
@@ -65,7 +67,7 @@ const Soknaden = () => {
             return
         }
 
-        logEvent('skjema åpnet', {
+        logEvent('søknad åpnet', {
             skjemanavn: 'sykepengesoknad',
             soknadstype: valgtSoknad.soknadstype,
             soknadstatus: valgtSoknad.status,
@@ -91,6 +93,14 @@ const Soknaden = () => {
         if (eldreUsendtSoknad.eldsteSoknad) {
             return <EldreUsendtSoknad eldreSoknad={eldreUsendtSoknad.eldsteSoknad} antall={eldreUsendtSoknad.antall} />
         }
+    }
+
+    if (stegNo > 1) {
+        logEvent('spørsmål åpnet', {
+            soknadstype: valgtSoknad!.soknadstype,
+            skjemanavn: 'sykepengesoknad',
+            sporsmaltag: sporsmal!.tag,
+        })
     }
 
     return (

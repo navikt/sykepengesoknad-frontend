@@ -44,13 +44,13 @@ export const EkspanderbarHjelp = ({ sporsmal }: SpmProps) => {
             sporsmal.tag == TagTyper.TILBAKE_I_ARBEID &&
             valgtSoknad.soknadstype == RSSoknadstype.GRADERT_REISETILSKUDD
         ) {
-            return 'tilbake_i_arbeid_gradert_reisetilskudd'
+            return 'TILBAKE_I_ARBEID_GRADERT_REISETILSKUDD'
         }
         if (
             fjernIndexFraTag(sporsmal.tag) == TagTyper.JOBBET_DU_GRADERT &&
             valgtSoknad.arbeidssituasjon == RSArbeidssituasjon.ARBEIDSTAKER
         ) {
-            return 'jobbet_du_gradert_arbeidstaker'
+            return 'JOBBET_DU_GRADERT_ARBEIDSTAKER'
         }
         if (
             sporsmal.tag == TagTyper.ANDRE_INNTEKTSKILDER &&
@@ -59,11 +59,11 @@ export const EkspanderbarHjelp = ({ sporsmal }: SpmProps) => {
             // Hjelpeteksten er ikke kompatibel med svaralternativene for frilanser
             return null
         }
-        return fjernIndexFraTag(sporsmal.tag).toLowerCase()
+        return fjernIndexFraTag(sporsmal.tag)
     }
 
     const nokkel = skapNokkel()
-    const harInnhold = `ekspanderbarhjelp.${nokkel}.innhold` in EkspanderbarHjelpTekster
+    const harInnhold = `ekspanderbarhjelp.${nokkel?.toLowerCase()}.innhold` in EkspanderbarHjelpTekster
 
     const EkspanderbarInnhold = () => {
         switch (sporsmal.tag) {
@@ -93,7 +93,11 @@ export const EkspanderbarHjelp = ({ sporsmal }: SpmProps) => {
                 return <KvitteringerHjelpBody />
             default:
                 if (harInnhold) {
-                    return <BodyLong>{parserWithReplace(tekst(`ekspanderbarhjelp.${nokkel}.innhold` as any))}</BodyLong>
+                    return (
+                        <BodyLong>
+                            {parserWithReplace(tekst(`ekspanderbarhjelp.${nokkel?.toLowerCase()}.innhold` as any))}
+                        </BodyLong>
+                    )
                 }
         }
     }
@@ -105,8 +109,9 @@ export const EkspanderbarHjelp = ({ sporsmal }: SpmProps) => {
     }
 
     const tittel =
-        EkspanderbarHjelpTekster[`ekspanderbarhjelp.${nokkel}.tittel` as keyof typeof EkspanderbarHjelpTekster] ||
-        'Spørsmålet forklart'
+        EkspanderbarHjelpTekster[
+            `ekspanderbarhjelp.${nokkel.toLowerCase()}.tittel` as keyof typeof EkspanderbarHjelpTekster
+        ] || 'Spørsmålet forklart'
 
     return (
         <ReadMore

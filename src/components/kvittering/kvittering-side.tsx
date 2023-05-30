@@ -49,7 +49,7 @@ const KvitteringSide = () => {
             return
         }
 
-        logEvent('skjema åpnet', {
+        logEvent('søknad åpnet', {
             skjemanavn: 'sykepengesoknad',
             soknadstype: valgtSoknad.soknadstype,
             soknadstatus: valgtSoknad.status,
