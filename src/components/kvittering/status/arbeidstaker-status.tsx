@@ -47,7 +47,7 @@ const ArbeidstakerStatus = () => {
                 render={() => (
                     <>
                         <div className="col-span-1" />
-                        <div className="col-span-11">
+                        <div data-cy="sendt-arbeidsgiver" className="col-span-11">
                             <Avkrysset tekst={`${tilArbNavn()} ${tilOrg()}${medKopi}`} />
                             <Detail className="pl-6">{tilArbDato()}</Detail>
                         </div>
@@ -59,7 +59,7 @@ const ArbeidstakerStatus = () => {
                 render={() => (
                     <>
                         <div className="col-span-1" />
-                        <div className="col-span-11">
+                        <div data-cy="sendt-nav" className="col-span-11">
                             <Avkrysset tekst={Mottaker.NAV} />
                             <Detail className="pl-6">{tilNavDato()}</Detail>
                         </div>
