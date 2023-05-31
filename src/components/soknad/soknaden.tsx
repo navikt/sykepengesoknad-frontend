@@ -99,7 +99,7 @@ const Soknaden = () => {
         logEvent('skjema spørsmål åpnet', {
             soknadstype: valgtSoknad!.soknadstype,
             skjemanavn: 'sykepengesoknad',
-            sporsmaltag: sporsmal!.tag,
+            spørsmål: sporsmal!.tag,
         })
     }
 

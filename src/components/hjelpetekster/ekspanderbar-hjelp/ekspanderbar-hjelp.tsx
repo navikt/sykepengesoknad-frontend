@@ -122,7 +122,7 @@ export const EkspanderbarHjelp = ({ sporsmal }: SpmProps) => {
                 logEvent(expanded ? 'readmore lukket' : 'readmore åpnet', {
                     tittel: tittel,
                     component: 'hjelpetekst',
-                    sporsmaltag: nokkel,
+                    spørsmål: nokkel,
                 })
 
                 setExpanded((prev) => !prev)

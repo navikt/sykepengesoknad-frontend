@@ -26,7 +26,7 @@ const FeilOppsummering = ({
         setEntries(Object.entries(formState.errors))
         if (Object.entries(formState.errors).length > 0) {
             logEvent('skjema validering feilet', {
-                sporsmaltag: sporsmal.tag,
+                spørsmål: sporsmal.tag,
                 skjemanavn: 'sykepengesoknad',
             })
         }

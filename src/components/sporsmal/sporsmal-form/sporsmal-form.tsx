@@ -209,7 +209,7 @@ const SporsmalForm = () => {
             logEvent('skjema spørsmål besvart', {
                 soknadstype: valgtSoknad!.soknadstype,
                 skjemanavn: 'sykepengesoknad',
-                sporsmaltag: sporsmal.tag,
+                spørsmål: sporsmal.tag,
                 svar: hentAnnonymisertSvar(sporsmal),
             })
 
