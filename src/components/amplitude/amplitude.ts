@@ -18,6 +18,7 @@ type validEventNames =
     | 'knapp klikket'
     | 'skjema åpnet'
     | 'skjema fullført'
+    | 'skjema spørsmål åpnet'
     | 'skjema spørsmål besvart'
     | 'modal åpnet'
     | 'modal lukket' //Bruk kun navn fra taksonomien
