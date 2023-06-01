@@ -14,8 +14,9 @@ interface UndersporsmalListeProps {
 
 const UndersporsmalListe = ({ oversporsmal, oversporsmalSvar }: UndersporsmalListeProps) => {
     const skalVise =
-        !oversporsmal.kriterieForVisningAvUndersporsmal ||
-        oversporsmal.kriterieForVisningAvUndersporsmal === oversporsmalSvar
+        (!oversporsmal.kriterieForVisningAvUndersporsmal ||
+            oversporsmal.kriterieForVisningAvUndersporsmal === oversporsmalSvar) &&
+        oversporsmal.undersporsmal.length > 0
     if (!skalVise) return null
     return (
         <div className="mt-4">
