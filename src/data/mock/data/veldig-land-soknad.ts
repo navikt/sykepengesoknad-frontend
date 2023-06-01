@@ -20,7 +20,7 @@ export const veldigLangSoknad: RSSoknad = {
     startSykeforlop: '2020-04-01',
     sykmeldingUtskrevet: '2020-03-31',
     arbeidsgiver: {
-        navn: 'POSTEN NORGE AS, BÆRUM',
+        navn: 'Posten Norge AS, Bærum',
         orgnummer: '974654458',
     },
     korrigerer: null,
@@ -165,7 +165,7 @@ export const veldigLangSoknad: RSSoknad = {
         {
             id: '687356',
             tag: 'ANDRE_INNTEKTSKILDER',
-            sporsmalstekst: 'Har du andre inntektskilder enn POSTEN NORGE AS, BÆRUM?',
+            sporsmalstekst: 'Har du andre inntektskilder enn Posten Norge AS, Bærum?',
             undertekst: null,
             svartype: 'JA_NEI',
             min: null,
@@ -1334,7 +1334,7 @@ export const veldigLangSoknad: RSSoknad = {
             id: '687349',
             tag: 'JOBBET_DU_100_PROSENT_0',
             sporsmalstekst:
-                'I perioden 1. - 24. april 2020 var du 100 % sykmeldt fra POSTEN NORGE AS, BÆRUM. Jobbet du noe i denne perioden?',
+                'I perioden 1. - 24. april 2020 var du 100 % sykmeldt fra Posten Norge AS, Bærum. Jobbet du noe i denne perioden?',
             undertekst: null,
             svartype: 'JA_NEI',
             min: null,
@@ -1360,7 +1360,7 @@ export const veldigLangSoknad: RSSoknad = {
                 {
                     id: '687351',
                     tag: 'HVOR_MYE_HAR_DU_JOBBET_0',
-                    sporsmalstekst: 'Hvor mye jobbet du totalt 1. - 24. april 2020 hos POSTEN NORGE AS, BÆRUM?',
+                    sporsmalstekst: 'Hvor mye jobbet du totalt 1. - 24. april 2020 hos Posten Norge AS, Bærum?',
                     undertekst: null,
                     svartype: 'RADIO_GRUPPE_TIMER_PROSENT',
                     min: null,
@@ -1636,7 +1636,7 @@ export const veldigLangSoknad: RSSoknad = {
             id: '687341',
             tag: 'TILBAKE_I_ARBEID',
             sporsmalstekst:
-                'Var du tilbake i fullt arbeid hos POSTEN NORGE AS, BÆRUM i løpet av perioden 1. - 24. april 2020?',
+                'Var du tilbake i fullt arbeid hos Posten Norge AS, Bærum i løpet av perioden 1. - 24. april 2020?',
             undertekst: null,
             svartype: 'JA_NEI',
             min: null,
@@ -1961,7 +1961,7 @@ export const veldigLangSoknad: RSSoknad = {
             id: '63448066-fa24-3d9b-bf38-fb2ea23a353f',
             tag: 'ARBEID_UNDERVEIS_100_PROSENT_0',
             sporsmalstekst:
-                'I perioden 1. - 24. april 2020 var du 100 % sykmeldt fra POSTEN NORGE AS, BÆRUM. Jobbet du noe hos POSTEN NORGE AS, BÆRUM i denne perioden?',
+                'I perioden 1. - 24. april 2020 var du 100 % sykmeldt fra Posten Norge AS, Bærum. Jobbet du noe hos Posten Norge AS, Bærum i denne perioden?',
             undertekst: null,
             svartype: 'JA_NEI',
             min: null,
@@ -1998,7 +1998,7 @@ export const veldigLangSoknad: RSSoknad = {
                                     id: '796cf7ed-8a7e-39de-9cbc-6e789aa5af3f',
                                     tag: 'HVOR_MYE_PROSENT_VERDI_0',
                                     sporsmalstekst:
-                                        'Oppgi hvor mange prosent av din normale arbeidstid du jobbet hos POSTEN NORGE AS, BÆRUM i perioden 1. - 24. april 2020?',
+                                        'Oppgi hvor mange prosent av din normale arbeidstid du jobbet hos Posten Norge AS, Bærum i perioden 1. - 24. april 2020?',
                                     undertekst: 'Oppgi i prosent. Eksempel: 40',
                                     svartype: 'PROSENT',
                                     min: '1',
@@ -2026,7 +2026,7 @@ export const veldigLangSoknad: RSSoknad = {
                                     id: '6cc620d8-d4b0-3e82-a038-2757df6fc311',
                                     tag: 'HVOR_MYE_TIMER_VERDI_0',
                                     sporsmalstekst:
-                                        'Oppgi totalt antall timer du jobbet i perioden 1. - 24. april 2020 hos POSTEN NORGE AS, BÆRUM',
+                                        'Oppgi totalt antall timer du jobbet i perioden 1. - 24. april 2020 hos Posten Norge AS, Bærum',
                                     undertekst: 'Oppgi i timer. Eksempel: 12',
                                     svartype: 'TIMER',
                                     min: '1',
@@ -2043,7 +2043,7 @@ export const veldigLangSoknad: RSSoknad = {
                 {
                     id: 'af302d17-f35d-38a6-ac23-ccde5db369cb',
                     tag: 'JOBBER_DU_NORMAL_ARBEIDSUKE_0',
-                    sporsmalstekst: 'Jobber du vanligvis 37,5 timer i uka hos POSTEN NORGE AS, BÆRUM?',
+                    sporsmalstekst: 'Jobber du vanligvis 37,5 timer i uka hos Posten Norge AS, Bærum?',
                     undertekst: null,
                     svartype: 'JA_NEI',
                     min: null,

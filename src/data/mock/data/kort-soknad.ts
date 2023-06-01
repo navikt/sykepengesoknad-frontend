@@ -19,7 +19,7 @@ export const kortArbeidstakerSoknad: RSSoknad = {
     startSykeforlop: '2022-04-01',
     sykmeldingUtskrevet: '2022-03-31',
     arbeidsgiver: {
-        navn: 'POSTEN NORGE AS, BÆRUM',
+        navn: 'Posten Norge AS, Bærum',
         orgnummer: '974654458',
     },
     korrigerer: null,

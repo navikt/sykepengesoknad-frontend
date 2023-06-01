@@ -60,7 +60,7 @@ describe('Tester ettersending og korrigering', () => {
         // Sendt til
         cy.get('[data-cy="kvittering"]').should(
             'contain',
-            'POSTEN NORGE AS, BÆRUM (Org.nr. 974654458), med kopi til NAV',
+            'Posten Norge AS, Bærum (Org.nr. 974654458), med kopi til NAV',
         )
 
         cy.contains('Du får sykepengene fra arbeidsgiveren din')

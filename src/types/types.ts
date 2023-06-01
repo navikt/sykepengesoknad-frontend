@@ -11,6 +11,7 @@ import { RSSporsmal } from './rs-types/rs-sporsmal'
 import { RSSvarliste } from './rs-types/rs-svarliste'
 import { RSSvartype } from './rs-types/rs-svartype'
 import { RSVisningskriterieType } from './rs-types/rs-visningskriterie'
+import { ArbeidsforholdFraInntektskomponenten } from './rs-types/rs-arbeidsforholdfrainntektskomponenten'
 
 export interface TidsPeriode {
     fom: Date
@@ -42,6 +43,7 @@ export class Soknad {
     merknaderFraSykmelding?: RSMerknad[]
     opprettetAvInntektsmelding: boolean
     klippet: boolean
+    inntektskilderDataFraInntektskomponenten?: ArbeidsforholdFraInntektskomponenten[]
 
     constructor(soknad: RSSoknad) {
         this.id = soknad.id
@@ -70,6 +72,7 @@ export class Soknad {
         this.merknaderFraSykmelding = soknad.merknaderFraSykmelding
         this.opprettetAvInntektsmelding = soknad.opprettetAvInntektsmelding
         this.klippet = soknad.klippet
+        this.inntektskilderDataFraInntektskomponenten = soknad.inntektskilderDataFraInntektskomponenten
     }
 }
 

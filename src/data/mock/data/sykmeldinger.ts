@@ -11,7 +11,7 @@ export const arbeidstaker100Syk = new Sykmelding({
     },
     legekontorOrgnummer: '223456789',
     arbeidsgiver: {
-        navn: 'POSTEN NORGE AS, BÆRUM',
+        navn: 'Posten Norge AS, Bærum',
         stillingsprosent: 100,
     },
     sykmeldingsperioder: [
@@ -148,7 +148,7 @@ export const arbeidstaker50Syk = new Sykmelding({
     },
     legekontorOrgnummer: '223456789',
     arbeidsgiver: {
-        navn: 'POSTEN NORGE AS, BÆRUM',
+        navn: 'Posten Norge AS, Bærum',
         stillingsprosent: 100,
     },
     sykmeldingsperioder: [
@@ -279,7 +279,7 @@ export const arbeidsledig100Syk = new Sykmelding({
     },
     legekontorOrgnummer: '223456789',
     arbeidsgiver: {
-        navn: 'POSTEN NORGE AS, BÆRUM',
+        navn: 'Posten Norge AS, Bærum',
         stillingsprosent: 100,
     },
     sykmeldingsperioder: [
@@ -569,7 +569,7 @@ export const arbeidstakerBehandlingsdagSyk = new Sykmelding({
     },
     legekontorOrgnummer: '223456789',
     arbeidsgiver: {
-        navn: 'POSTEN NORGE AS, BÆRUM',
+        navn: 'Posten Norge AS, Bærum',
         stillingsprosent: 100,
     },
     sykmeldingsperioder: [

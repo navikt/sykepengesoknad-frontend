@@ -13,7 +13,7 @@ describe('Tester å åpne søknaden direkte fra sykefravaer', () => {
 
         cy.contains('Opplysninger fra sykmelding').and('be.visible')
         cy.contains('1. april - 24. april 2020 (24 dager)')
-        cy.contains('POSTEN NORGE AS, BÆRUM')
+        cy.contains('Posten Norge AS, Bærum')
         cy.contains('100% sykmeldt')
     })
 
