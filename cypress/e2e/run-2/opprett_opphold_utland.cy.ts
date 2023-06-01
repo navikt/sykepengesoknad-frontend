@@ -17,9 +17,7 @@ describe('Tester opprettelse av søknad om å beholde sykepenger utenfor EØS', 
         // Godkjenne ANSVARSERKLARING
         cy.contains(
             'Jeg vet at jeg kan miste retten til sykepenger hvis opplysningene jeg gir ikke er riktige eller fullstendige. Jeg vet også at NAV kan holde igjen eller kreve tilbake penger, og at å gi feil opplysninger kan være straffbart.',
-        ).click({
-            force: true,
-        })
+        ).click()
 
         cy.contains('Gå videre').click()
     })
@@ -30,7 +28,7 @@ describe('Tester opprettelse av søknad om å beholde sykepenger utenfor EØS', 
         // Test spørsmål
         cy.get('[data-cy="sporsmal-tittel"]').should('have.text', 'Sykepenger utenfor EØS')
         cy.contains('Har du søkt om å beholde sykepengene for de dagene du var utenfor EØS?')
-        cy.get('[data-cy="ja-nei-stor"] input[value=JA]').click({ force: true })
+        cy.get('[data-cy="ja-nei-stor"] input[value=JA]').click()
 
         cy.get('.utland_infotekst')
             .should(
@@ -40,7 +38,7 @@ describe('Tester opprettelse av søknad om å beholde sykepenger utenfor EØS', 
             .find('a')
             .should('have.attr', 'href', '/syk/sykepengesoknad/sykepengesoknad-utland')
 
-        cy.get('[data-cy="ja-nei-stor"] input[value=NEI]').click({ force: true })
+        cy.get('[data-cy="ja-nei-stor"] input[value=NEI]').click()
 
         cy.get('.utland_infotekst')
             .should(

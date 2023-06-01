@@ -25,7 +25,7 @@ describe('Tester frilansersøknad', () => {
         cy.contains('Har ikke forsikring som gjelder de første 16 dagene av sykefraværet')
         cy.contains('Egenmelding og/eller sykmelding på papir')
         cy.contains('1. januar – 13. mars 2020')
-        cy.contains('Opplysninger fra sykmeldingen').click({ force: true })
+        cy.get('section[aria-label="Opplysninger fra sykmeldingen"] button').click()
         cy.contains('Har ikke forsikring som gjelder de første 16 dagene av sykefraværet').should('not.be.visible')
 
         // Viktig informasjon grunnet tilbakedatering
@@ -38,9 +38,7 @@ describe('Tester frilansersøknad', () => {
         // Godkjenne ANSVARSERKLARING
         cy.contains(
             'Jeg vet at jeg kan miste retten til sykepenger hvis opplysningene jeg gir ikke er riktige eller fullstendige. Jeg vet også at NAV kan holde igjen eller kreve tilbake penger, og at å gi feil opplysninger kan være straffbart.',
-        ).click({
-            force: true,
-        })
+        ).click()
 
         cy.contains('Gå videre').click()
     })
@@ -49,30 +47,30 @@ describe('Tester frilansersøknad', () => {
         cy.url().should('include', `${soknad.id}/2`)
 
         // Test spørsmål
-        cy.get('[data-cy="ja-nei-stor"] input[value=JA]').click({ force: true })
+        cy.get('[data-cy="ja-nei-stor"] input[value=JA]').click()
         cy.contains('Når begynte du å jobbe igjen?')
         cy.get('.navds-date__field-button').click()
         cy.get('.rdp-day').contains('20').click()
 
-        cy.contains('Gå videre').click({ force: true })
+        cy.contains('Gå videre').click()
     })
 
     it('Søknad ARBEID_UNDERVEIS_100_PROSENT - steg 3', function () {
         cy.url().should('include', `${soknad.id}/3`)
 
         // Test spørsmål
-        cy.get('[data-cy="ja-nei-stor"] input[value=JA]').click({ force: true })
+        cy.get('[data-cy="ja-nei-stor"] input[value=JA]').click()
 
         // Underspørsmål 1
         cy.contains('Oppgi arbeidsmengde i timer eller prosent')
         // Svarer prosent
-        cy.get('.undersporsmal input[value=Prosent]').click({ force: true })
+        cy.get('.undersporsmal input[value=Prosent]').click()
         cy.contains('Oppgi hvor mange prosent av din normale arbeidstid du jobbet i perioden 1. - 24. april 2020?')
         cy.get('.undersporsmal .navds-text-field__input#b68db08b-9ad1-38e5-bcdd-2c98963c2b8d').type('21')
 
         // Underspørsmål 2
         cy.contains('Jobber du vanligvis 37,5 timer i uka?')
-        cy.get('input[type=radio]#9163fd91-7e4f-3474-ae32-405f18004af0_0').click({ force: true })
+        cy.get('input[type=radio]#9163fd91-7e4f-3474-ae32-405f18004af0_0').click()
 
         cy.contains('Gå videre').click()
     })
@@ -81,16 +79,14 @@ describe('Tester frilansersøknad', () => {
         cy.url().should('include', `${soknad.id}/4`)
 
         // Test spørsmål
-        cy.get('[data-cy="ja-nei-stor"] input[value=JA]').click({ force: true })
+        cy.get('[data-cy="ja-nei-stor"] input[value=JA]').click()
 
         // Svarer JA
         // Underspørsmål nivå 1 - checkbox
         cy.contains('Hvilke inntektskilder har du?')
-        cy.get('.undersporsmal .navds-checkbox label[for=687440]')
-            .should('include.text', 'arbeidsforhold')
-            .click({ force: true })
+        cy.get('.undersporsmal .navds-checkbox label[for=687440]').should('include.text', 'arbeidsforhold').click()
         // Underspørsmål nivå 2 - radio
-        cy.get('input[type=radio]#687441_0').click({ force: true })
+        cy.get('input[type=radio]#687441_0').click()
         cy.contains(
             'Du må sende egen sykepengesøknad for dette. ' +
                 'Det betyr også at legen må skrive en sykmelding for hvert arbeidsforhold du er sykmeldt fra.',
@@ -104,7 +100,7 @@ describe('Tester frilansersøknad', () => {
 
         // Test spørsmål
         cy.contains('Har du vært utenfor EØS mens du var sykmeldt 1. - 24. april 2020?')
-        cy.get('[data-cy="ja-nei-stor"] input[value=JA]').click({ force: true })
+        cy.get('[data-cy="ja-nei-stor"] input[value=JA]').click()
 
         // Underspørsmål 1
         cy.contains('Når var du utenfor EØS?')
@@ -113,9 +109,7 @@ describe('Tester frilansersøknad', () => {
 
         // Underspørsmål 2 - Ja
         cy.contains('Har du søkt om å beholde sykepengene for disse dagene?')
-        cy.get('input[type=radio]#687449_0').click({
-            force: true,
-        })
+        cy.get('input[type=radio]#687449_0').click()
         cy.contains(
             'Du må ha sendt en egen utenlandssøknad for å svare ja på dette spørsmålet. Husk at du også må fullføre denne søknaden om sykepenger.',
         )
@@ -123,7 +117,7 @@ describe('Tester frilansersøknad', () => {
             .should('have.attr', 'href', '/syk/sykepengesoknad/sykepengesoknad-utland')
 
         // Underspørsmål 2 - Nei
-        cy.get('input[type=radio]#687449_1').click({ force: true })
+        cy.get('input[type=radio]#687449_1').click()
         cy.contains(
             'I utgangspunktet kan du bare få sykepenger mens du er i et land innenfor EØS. Du kan likevel søke NAV om å få reise ut av EØS og beholde sykepengene i en begrenset periode.',
         )
@@ -137,7 +131,7 @@ describe('Tester frilansersøknad', () => {
         cy.url().should('include', `${soknad.id}/6`)
 
         // Test spørsmål
-        cy.get('[data-cy="ja-nei-stor"] input[value=JA]').click({ force: true })
+        cy.get('[data-cy="ja-nei-stor"] input[value=JA]').click()
         cy.contains('Har du arbeidet i utlandet i løpet av de siste 12 månedene?')
 
         cy.contains('Gå videre').click()
@@ -145,7 +139,7 @@ describe('Tester frilansersøknad', () => {
 
     it('Søknad VAER_KLAR_OVER_AT - steg 7', function () {
         cy.url().should('include', `${soknad.id}/7`)
-        cy.get('.navds-checkbox__label').click({ force: true })
+        cy.get('.navds-checkbox__label').click()
         cy.contains(
             'Jeg har lest all informasjonen jeg har fått i søknaden og bekrefter at opplysningene jeg har gitt er korrekte.',
         )

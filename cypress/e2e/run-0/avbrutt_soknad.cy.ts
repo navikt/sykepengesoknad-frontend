@@ -33,19 +33,19 @@ describe('Tester avbryting av søknad', () => {
         )
 
         // Sykmelding
-        cy.contains('Opplysninger fra sykmeldingen').click({ force: true })
+        cy.get('section[aria-label="Opplysninger fra sykmeldingen"] button').click()
         cy.contains('1. april - 24. april 2020 (24 dager)')
         cy.contains('Frist for å søke')
     })
 
     it('Søknad kan gjenåpnes', function () {
-        cy.contains('Jeg vil bruke denne søknaden likevel').click()
+        cy.get('button[data-cy="bruk-soknad-likevel"]').click()
         cy.url().should('include', `${avbruttSoknad.id}/1`)
         cy.contains('Gå videre')
     })
 
     it('Søknad kan avsluttes og fortsette senere ', function () {
-        cy.contains('Avslutt og fortsett senere').click()
+        cy.get('button[data-cy="avslutt-og-fortsett-senere"]').click()
         cy.contains('Vi lagrer søknaden din på Ditt sykefravær i listen med søknader om sykepenger.')
         cy.contains('Ja, fortsett senere')
         cy.contains('Nei').click()

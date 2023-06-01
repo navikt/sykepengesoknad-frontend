@@ -72,9 +72,7 @@ function fyllUtSoknad() {
     it('Fyller ut søknaden', () => {
         cy.contains(
             'Jeg vet at jeg kan miste retten til sykepenger hvis opplysningene jeg gir ikke er riktige eller fullstendige. Jeg vet også at NAV kan holde igjen eller kreve tilbake penger, og at å gi feil opplysninger kan være straffbart.',
-        ).click({
-            force: true,
-        })
+        ).click()
 
         cy.contains('Gå videre').click()
         cy.contains(

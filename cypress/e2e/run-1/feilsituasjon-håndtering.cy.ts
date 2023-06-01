@@ -7,17 +7,17 @@ describe('Tester feilsituasjoner ', () => {
     describe('Tester SPORSMAL_FINNES_IKKE_I_SOKNAD ', () => {
         before(() => {
             cy.visit('/syk/sykepengesoknad?testperson=alle-soknader')
+            cy.get('.navds-heading--large').should('be.visible').and('have.text', 'Søknader')
         })
 
         it('Laster startside og åpner søknad', function () {
-            cy.get('.navds-heading--large').should('be.visible').and('have.text', 'Søknader')
             cy.get(`a[href*=${soknadSomTriggerSporsmalFinnesIkkeISoknad.id}]`).click()
         })
 
         it('Ved svar på første spørsmål får vi en SPORSMAL_FINNES_IKKE_I_SOKNAD feil fra backend som gir oss refresh mulighet', function () {
             cy.url().should('include', `${soknadSomTriggerSporsmalFinnesIkkeISoknad.id}/1`)
 
-            cy.get('.navds-checkbox__label').click({ force: true })
+            cy.get('.navds-checkbox__label').click()
             cy.contains('Gå videre').click()
         })
 
@@ -34,6 +34,7 @@ describe('Tester feilsituasjoner ', () => {
     describe('Tester FEIL_STATUS_FOR_OPPDATER_SPORSMAL ', () => {
         before(() => {
             cy.visit('/syk/sykepengesoknad?testperson=alle-soknader')
+            cy.get('.navds-heading--large').should('be.visible').and('have.text', 'Søknader')
         })
 
         it('Vi går inn på en annen søknad som gir en annen feil', function () {
@@ -43,8 +44,9 @@ describe('Tester feilsituasjoner ', () => {
         it('Ved svar på første spørsmål får vi en FEIL_STATUS_FOR_OPPDATER_SPORSMAL feil fra backend som gir oss refresh mulighet', function () {
             cy.url().should('include', `${soknadSomTriggerFeilStatusForOppdaterSporsmal.id}/1`)
 
-            cy.get('.navds-checkbox__label').click({ force: true })
+            cy.get('.navds-checkbox__label').click()
             cy.contains('Gå videre').click()
+            cy.contains('Ooops! Her har det skjedd noe rart')
         })
 
         it('Vi havner på feilstate siden pga FEIL_STATUS_FOR_OPPDATER_SPORSMAL', function () {
@@ -63,7 +65,7 @@ describe('Tester feilsituasjoner ', () => {
         it('Når vi sender søknad som får 400 får vi en feilmelding som lar oss refreshe', function () {
             cy.contains(
                 'Jeg har lest all informasjonen jeg har fått i søknaden og bekrefter at opplysningene jeg har gitt er korrekte.',
-            ).click({ force: true })
+            ).click()
             cy.contains('Send søknaden').click()
             cy.contains(
                 'Vi har lagret dine svar, men du må laste inn siden på nytt før du kan sende søknaden. Klikk her for å laste inn siden på nytt.',
@@ -83,7 +85,7 @@ describe('Tester feilsituasjoner ', () => {
         it('Når vi sender søknad som får 500 får vi en feilmelding', function () {
             cy.contains(
                 'Jeg har lest all informasjonen jeg har fått i søknaden og bekrefter at opplysningene jeg har gitt er korrekte.',
-            ).click({ force: true })
+            ).click()
             cy.contains('Send søknaden').click()
             cy.contains('Beklager, det oppstod en teknisk feil.').click()
             cy.url().should(

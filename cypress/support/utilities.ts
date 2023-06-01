@@ -17,20 +17,20 @@ export function svarFritekst(tag: string, verdi: string) {
 }
 
 export function svarJaHovedsporsmal() {
-    cy.get('[data-cy="ja-nei-stor"] input[value=JA]').click({ force: true })
+    cy.get('[data-cy="ja-nei-stor"] input[value=JA]').click()
 }
 
 export function svarNeiHovedsporsmal() {
-    cy.get('[data-cy="ja-nei-stor"] input[value=NEI]').click({ force: true })
+    cy.get('[data-cy="ja-nei-stor"] input[value=NEI]').click()
 }
 
 export function velgLand(land: string) {
     cy.get('[data-cy="landvelger"] input[type="text"]').type(land)
-    cy.contains(land).click({ force: true })
+    cy.contains(land).click()
 }
 
 export function svarCheckboxPanel() {
-    cy.get('.navds-checkbox__label').click({ force: true })
+    cy.get('.navds-checkbox__label').click()
 }
 
 export function velgDato(dato = 10) {
@@ -41,5 +41,5 @@ export function velgDato(dato = 10) {
 }
 
 export function klikkGaVidere() {
-    cy.contains('Gå videre').click({ force: true })
+    cy.contains('Gå videre').click()
 }

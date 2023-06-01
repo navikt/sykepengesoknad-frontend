@@ -19,14 +19,12 @@ describe('Tester arbeidsledigsøknad', () => {
         // Sykmelding
         cy.contains('1. april - 24. april 2020 (24 dager)')
         cy.contains('100% sykmeldt')
-        cy.contains('Opplysninger fra sykmeldingen').click({ force: true })
+        cy.get('section[aria-label="Opplysninger fra sykmeldingen"] button').click()
 
         // Godkjenne ANSVARSERKLARING
         cy.contains(
             'Jeg vet at jeg kan miste retten til sykepenger hvis opplysningene jeg gir ikke er riktige eller fullstendige. Jeg vet også at NAV kan holde igjen eller kreve tilbake penger, og at å gi feil opplysninger kan være straffbart.',
-        ).click({
-            force: true,
-        })
+        ).click()
 
         cy.contains('Gå videre').click()
     })
@@ -35,7 +33,7 @@ describe('Tester arbeidsledigsøknad', () => {
         cy.url().should('include', `${soknad.id}/2`)
 
         // Test spørsmål
-        cy.get('[data-cy="ja-nei-stor"] input[value=NEI]').click({ force: true })
+        cy.get('[data-cy="ja-nei-stor"] input[value=NEI]').click()
         cy.contains('Fra hvilken dato trengte du ikke lenger sykmeldingen?')
         cy.get('.navds-date__field-button').click()
         cy.get('.rdp-day').contains('10').click()
@@ -47,7 +45,7 @@ describe('Tester arbeidsledigsøknad', () => {
 
         // Test spørsmål
         cy.contains('Har du hatt inntekt mens du har vært sykmeldt i perioden 1. - 24. april 2020?')
-        cy.get('[data-cy="ja-nei-stor"] input[value=JA]').click({ force: true })
+        cy.get('[data-cy="ja-nei-stor"] input[value=JA]').click()
 
         // Når ingen velges så dukker bare 1 feilmelding opp
         cy.contains('Gå videre').click()
@@ -58,9 +56,9 @@ describe('Tester arbeidsledigsøknad', () => {
         // Underspørsmål nivå 1 - checkbox
         cy.contains('Hvilke inntektskilder har du hatt?')
         cy.get('.undersporsmal .navds-checkbox label[for=687404]').should('include.text', 'andre arbeidsforhold')
-        cy.get('input[type=checkbox]#687404').click({ force: true })
+        cy.get('input[type=checkbox]#687404').click()
         // Underspørsmål nivå 2 - radio
-        cy.get('input[type=radio]#687405_0').click({ force: true })
+        cy.get('input[type=radio]#687405_0').click()
         cy.contains(
             'Du må sende egen sykepengesøknad for dette. ' +
                 'Det betyr også at legen må skrive en sykmelding for hvert arbeidsforhold du er sykmeldt fra.',
@@ -74,7 +72,7 @@ describe('Tester arbeidsledigsøknad', () => {
 
         // Test spørsmål
         cy.contains('Var du på reise utenfor EØS mens du var sykmeldt 1. - 24. april 2020?')
-        cy.get('[data-cy="ja-nei-stor"] input[value=JA]').click({ force: true })
+        cy.get('[data-cy="ja-nei-stor"] input[value=JA]').click()
 
         // Underspørsmål 1
         cy.contains('Når var du utenfor EØS?')
@@ -82,14 +80,14 @@ describe('Tester arbeidsledigsøknad', () => {
 
         // Underspørsmål 2
         cy.contains('Har du søkt om å beholde sykepengene for disse dagene?')
-        cy.get('input[type=radio]#687424_0').click({ force: true })
+        cy.get('input[type=radio]#687424_0').click()
 
         cy.contains('Gå videre').click()
     })
 
     it('Søknad VAER_KLAR_OVER_AT', () => {
         cy.url().should('include', `${soknad.id}/5`)
-        cy.get('.navds-checkbox__label').click({ force: true })
+        cy.get('.navds-checkbox__label').click()
         cy.contains(
             'Jeg har lest all informasjonen jeg har fått i søknaden og bekrefter at opplysningene jeg har gitt er korrekte.',
         )

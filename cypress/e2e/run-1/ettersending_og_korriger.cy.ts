@@ -14,43 +14,43 @@ describe('Tester ettersending og korrigering', () => {
 
     it('Svar på søknad', function () {
         cy.url().should('include', `${soknad.id}/1`)
-        cy.get('.navds-checkbox__label').click({ force: true })
+        cy.get('.navds-checkbox__label').click()
         cy.contains('Gå videre').click()
 
         cy.url().should('include', `${soknad.id}/2`)
-        cy.get('[data-cy="ja-nei-stor"] input[value=NEI]').click({ force: true })
+        cy.get('[data-cy="ja-nei-stor"] input[value=NEI]').click()
         cy.contains('Gå videre').click()
 
         cy.url().should('include', `${soknad.id}/3`)
-        cy.get('[data-cy="ja-nei-stor"] input[value=NEI]').click({ force: true })
+        cy.get('[data-cy="ja-nei-stor"] input[value=NEI]').click()
         cy.contains('Gå videre').click()
 
         cy.url().should('include', `${soknad.id}/4`)
-        cy.get('[data-cy="ja-nei-stor"] input[value=NEI]').click({ force: true })
+        cy.get('[data-cy="ja-nei-stor"] input[value=NEI]').click()
         cy.contains('Gå videre').click()
 
         cy.url().should('include', `${soknad.id}/5`)
-        cy.get('[data-cy="ja-nei-stor"] input[value=NEI]').click({ force: true })
+        cy.get('[data-cy="ja-nei-stor"] input[value=NEI]').click()
         cy.contains('Gå videre').click()
 
         cy.url().should('include', `${soknad.id}/6`)
-        cy.get('[data-cy="ja-nei-stor"] input[value=NEI]').click({ force: true })
+        cy.get('[data-cy="ja-nei-stor"] input[value=NEI]').click()
         cy.contains('Gå videre').click()
 
         cy.url().should('include', `${soknad.id}/7`)
-        cy.get('[data-cy="ja-nei-stor"] input[value=NEI]').click({ force: true })
+        cy.get('[data-cy="ja-nei-stor"] input[value=NEI]').click()
         cy.contains('Gå videre').click()
 
         cy.url().should('include', `${soknad.id}/8`)
-        cy.get('[data-cy="ja-nei-stor"] input[value=NEI]').click({ force: true })
+        cy.get('[data-cy="ja-nei-stor"] input[value=NEI]').click()
         cy.contains('Gå videre').click()
 
         cy.url().should('include', `${soknad.id}/9`)
-        cy.get('[data-cy="ja-nei-stor"] input[value=NEI]').click({ force: true })
+        cy.get('[data-cy="ja-nei-stor"] input[value=NEI]').click()
         cy.contains('Gå videre').click()
 
         cy.url().should('include', `${soknad.id}/10`)
-        cy.get('.navds-checkbox__label').click({ force: true })
+        cy.get('.navds-checkbox__label').click()
         cy.contains('Send søknaden').click()
     })
 
@@ -71,13 +71,9 @@ describe('Tester ettersending og korrigering', () => {
     })
 
     it('Ettersend', () => {
-        cy.get('#listelink').click({
-            force: true,
-        })
+        cy.get('#listelink').click({ force: true })
         cy.get(`[data-cy="Tidligere søknader"]`).children().should('have.length', 2)
-        cy.get(`[data-cy="Tidligere søknader"] > a[href*=${soknad.id}]`).click({
-            force: true,
-        })
+        cy.get(`[data-cy="Tidligere søknader"] > a[href*=${soknad.id}]`).click()
 
         cy.contains('Jeg vil at søknaden skal behandles av NAV').click()
         cy.contains(
@@ -103,7 +99,7 @@ describe('Tester ettersending og korrigering', () => {
 
         // ANSVARSERKLARING er resatt
         cy.get('.navds-checkbox__input[type=checkbox]').should('not.be.checked')
-        cy.get('.navds-checkbox__label').click({ force: true })
+        cy.get('.navds-checkbox__label').click()
         cy.get('.navds-checkbox__input[type=checkbox]').should('be.checked')
         cy.contains('Gå videre').click()
 
@@ -113,19 +109,17 @@ describe('Tester ettersending og korrigering', () => {
         cy.contains('Gå videre').click()
         cy.contains('Gå videre').click()
         cy.contains('Gå videre').click()
-        cy.get('[data-cy="ja-nei-stor"] input[value=JA]').click({ force: true })
+        cy.get('[data-cy="ja-nei-stor"] input[value=JA]').click()
         cy.contains('Gå videre').click()
         cy.contains('Gå videre').click()
-        cy.get('.navds-checkbox__label').click({ force: true })
+        cy.get('.navds-checkbox__label').click()
         cy.contains('Send endringene').click()
 
         cy.url().should('include', `/kvittering/`)
     })
 
     it('Søknad har teaser', () => {
-        cy.get('#listelink').click({
-            force: true,
-        })
+        cy.get('#listelink').click({ force: true })
         cy.get('.navds-heading--large').should('be.visible').and('have.text', 'Søknader')
 
         cy.get(`a[href*=${soknad.id}]`)

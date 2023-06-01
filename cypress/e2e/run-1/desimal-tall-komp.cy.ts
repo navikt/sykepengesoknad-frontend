@@ -3,7 +3,7 @@ import { gradertReisetilskudd } from '../../../src/data/mock/data/reisetilskudd'
 describe('Tester at riktig antall desimaler sendes til backend', () => {
     it('Oppgir desimaler på svartype TALL og PROSENT', () => {
         cy.visit(`/syk/sykepengesoknad/soknader/${gradertReisetilskudd.id}/7`)
-        cy.get('[data-cy="ja-nei-stor"] input[value=JA]').click({ force: true })
+        cy.get('[data-cy="ja-nei-stor"] input[value=JA]').click()
 
         cy.get('input#495730df-717d-3774-bd19-e6bcf76e3ba2').type('37.321') // maks 2 desimaler tas med på TALL
 
@@ -20,7 +20,7 @@ describe('Tester at riktig antall desimaler sendes til backend', () => {
     it('Oppgir desimaler på svartype BELOP og KILOMETER', () => {
         cy.visit(`/syk/sykepengesoknad/soknader/${gradertReisetilskudd.id}/12`)
 
-        cy.get('[data-cy="ja-nei-stor"] input[value=JA]').click({ force: true })
+        cy.get('[data-cy="ja-nei-stor"] input[value=JA]').click()
 
         cy.get('[aria-label="8. april (onsdag)"]').click()
 
@@ -38,7 +38,7 @@ describe('Tester at riktig antall desimaler sendes til backend', () => {
 
     it('Håndterer at man bruker komma istedenfor punktum', () => {
         cy.visit(`/syk/sykepengesoknad/soknader/${gradertReisetilskudd.id}/7`)
-        cy.get('[data-cy="ja-nei-stor"] input[value=JA]').click({ force: true })
+        cy.get('[data-cy="ja-nei-stor"] input[value=JA]').click()
 
         cy.get('input#495730df-717d-3774-bd19-e6bcf76e3ba2').type('36,99') // maks 2 desimaler tas med på TALL
 
@@ -54,7 +54,7 @@ describe('Tester at riktig antall desimaler sendes til backend', () => {
 
     it('Legger ikke til desimaler', () => {
         cy.visit(`/syk/sykepengesoknad/soknader/${gradertReisetilskudd.id}/7`)
-        cy.get('[data-cy="ja-nei-stor"] input[value=JA]').click({ force: true })
+        cy.get('[data-cy="ja-nei-stor"] input[value=JA]').click()
 
         cy.get('input#495730df-717d-3774-bd19-e6bcf76e3ba2').type('36') // ingen desimaler i input
 

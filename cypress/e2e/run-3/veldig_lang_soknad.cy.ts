@@ -26,7 +26,7 @@ describe('Tester støtte for gamle spørsmål', () => {
 
     function velgTimer() {
         const id = soknad.sporsmal[steg - 1].undersporsmal[1].undersporsmal[1].undersporsmal[0].id
-        cy.get('.undersporsmal input[value=timer]').click({ force: true })
+        cy.get('.undersporsmal input[value=timer]').click()
         cy.get(`.undersporsmal .navds-text-field__input#${id}`).type('21')
     }
 
@@ -35,20 +35,25 @@ describe('Tester støtte for gamle spørsmål', () => {
     }
 
     function velgCheckbox(gjelder: string) {
-        cy.get('.undersporsmal .navds-checkbox').contains(gjelder).click({ force: true })
+        cy.get('.undersporsmal .navds-checkbox').contains(gjelder).click()
     }
 
-    function svarRadio(gjelder: string, svar: 'Ja' | 'Nei' | 'Prosent' | 'Timer') {
-        cy.contains(gjelder).siblings().contains(svar).click({ force: true })
+    function svarRadio(gjelder: string, svar: 'JA' | 'NEI' | 'Prosent' | 'Timer') {
+        cy.contains(gjelder)
+            .siblings()
+            .eq(0)
+            .within(() => {
+                cy.get(`input[value="${svar}"]`).click()
+            })
     }
 
     function svarSykMedEgenmelding() {
-        cy.contains('Jeg var syk med egenmelding').click({ force: true })
+        cy.contains('Jeg var syk med egenmelding').click()
     }
 
     function velgBehandlingsdager() {
-        cy.get('.rdp-day').contains('10').click({ force: true })
-        cy.get('.rdp-day').contains('16').click({ force: true })
+        cy.get('.rdp-day').contains('10').click()
+        cy.get('.rdp-day').contains('16').click()
     }
 
     function lastOppKvittering() {
@@ -92,14 +97,14 @@ describe('Tester støtte for gamle spørsmål', () => {
     it('ANDRE_INNTEKTSKILDER', () => {
         svarJaHovedsporsmal()
         velgCheckbox('dagmamma')
-        svarRadio('Er du sykmeldt fra dette?', 'Ja')
+        svarRadio('Er du sykmeldt fra dette?', 'JA')
         gaVidere()
     })
 
     it('ANDRE_INNTEKTSKILDER', () => {
         svarJaHovedsporsmal()
         velgCheckbox('frilanser')
-        svarRadio('Er du sykmeldt fra dette?', 'Ja')
+        svarRadio('Er du sykmeldt fra dette?', 'JA')
         gaVidere()
     })
     it('ANDRE_INNTEKTSKILDER_V2', () => {
@@ -113,14 +118,14 @@ describe('Tester støtte for gamle spørsmål', () => {
     })
     it('ARBEIDSGIVER', () => {
         svarJaHovedsporsmal()
-        svarRadio('Er du 100 % sykmeldt?', 'Ja')
-        svarRadio('Har du avtalt med arbeidsgiveren din at du skal ta ut feriedager i hele perioden?', 'Ja')
+        svarRadio('Er du 100 % sykmeldt?', 'JA')
+        svarRadio('Har du avtalt med arbeidsgiveren din at du skal ta ut feriedager i hele perioden?', 'JA')
         gaVidere()
     })
     it('ARBEIDSLEDIG_UTLAND', () => {
         svarJaHovedsporsmal()
         setPeriodeFraTil(12, 15)
-        svarRadio('Har du søkt om å beholde sykepengene for disse dagene?', 'Ja')
+        svarRadio('Har du søkt om å beholde sykepengene for disse dagene?', 'JA')
         gaVidere()
     })
     it('EGENMELDINGER', () => {
@@ -208,13 +213,13 @@ describe('Tester støtte for gamle spørsmål', () => {
     it('UTDANNING', () => {
         svarJaHovedsporsmal()
         velgDato()
-        svarRadio('Er utdanningen et fulltidsstudium?', 'Ja')
+        svarRadio('Er utdanningen et fulltidsstudium?', 'JA')
         gaVidere()
     })
     it('UTLAND', () => {
         svarJaHovedsporsmal()
         setPeriodeFraTil(12, 15)
-        svarRadio('Har du søkt om å beholde sykepengene for disse dagene?', 'Ja')
+        svarRadio('Har du søkt om å beholde sykepengene for disse dagene?', 'JA')
         gaVidere()
     })
     it('UTLAND_V2', () => {
@@ -235,7 +240,7 @@ describe('Tester støtte for gamle spørsmål', () => {
     it('REISE_MED_BIL', () => {
         svarJaHovedsporsmal()
         velgKalenderdag()
-        svarRadio('Hadde du utgifter til bompenger?', 'Nei')
+        svarRadio('Hadde du utgifter til bompenger?', 'NEI')
         gaVidere()
     })
     it('KVITTERINGER', () => {
@@ -250,7 +255,7 @@ describe('Tester støtte for gamle spørsmål', () => {
         svarJaHovedsporsmal()
         svarRadio('Oppgi arbeidsmengde i timer eller prosent:', 'Timer')
         velgTall('Oppgi totalt antall timer du jobbet i perioden 1. - 24. april 2020 hos POSTEN NORGE AS, BÆRUM', '12')
-        svarRadio('Jobber du vanligvis 37,5 timer i uka hos POSTEN NORGE AS, BÆRUM?', 'Ja')
+        svarRadio('Jobber du vanligvis 37,5 timer i uka hos POSTEN NORGE AS, BÆRUM?', 'JA')
         gaVidere()
     })
 

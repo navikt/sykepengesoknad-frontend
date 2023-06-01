@@ -32,7 +32,7 @@ describe('Tester søknad om å beholde sykepenger utenfor EØS', () => {
         cy.contains('Hvilket land skal du reise til?')
         cy.get('[data-cy="landvelger"] input[type="text"]').type('Fransk')
         cy.contains('Fransk Polynesia')
-        cy.contains('Søre franske territorier').click({ force: true })
+        cy.contains('Søre franske territorier').click()
 
         cy.contains('Gå videre').click()
     })
@@ -40,28 +40,28 @@ describe('Tester søknad om å beholde sykepenger utenfor EØS', () => {
     it('Vi svarer Ja på arbeidsgiverspørsmålet', function () {
         cy.url().should('include', `${soknad.id}/3`)
         cy.contains('Har du arbeidsgiver?')
-        cy.get('#3_0').click({ force: true })
+        cy.get('#3_0').click()
         cy.contains('Er du 100 % sykmeldt?')
     })
 
     it('Vi svarer Nei på 100% sykmeldt spørsmålet og får en bjørn', function () {
-        cy.get('#4_1').click({ force: true })
+        cy.get('#4_1').click()
         cy.contains(
             'Det er ikke mulig å ta ut ferie de dagene eller timene du skulle arbeidet og få utbetalt sykepenger for de andre. Men har du spart opp fleksitid, kan du avspasere dagene eller timene du skulle jobbet og få sykepenger for de andre dagene. Eksempel: Er du 50 prosent sykmeldt og ønsker å reise til utlandet noen dager, kan du avspasere halvparten av dagene. Har du ikke nok fleksitid å avspasere, må du ta ut hele feriedager.',
         )
     })
 
     it('Sykmeldt sporsmalet forsvinner når vi klikker nei', function () {
-        cy.get('#3_1').click({ force: true })
+        cy.get('#3_1').click()
         cy.contains('Er du 100 % sykmeldt?').should('not.exist')
-        cy.get('#3_0').click({ force: true })
+        cy.get('#3_0').click()
     })
 
     it('Gå videre forsvinner og bjørn vises når man har avtalt ferie', function () {
         cy.contains('Har du avtalt med arbeidsgiveren din at du skal ta ut feriedager i hele perioden?')
         cy.contains('Gå videre')
 
-        cy.get('#5_0').click({ force: true })
+        cy.get('#5_0').click()
         cy.contains(
             'Du får ikke sykepenger mens du har ferie. Det betyr at du ikke trenger å sende denne søknaden. God tur!',
         )
@@ -70,7 +70,7 @@ describe('Tester søknad om å beholde sykepenger utenfor EØS', () => {
     })
 
     it('Vi avbryter søknaden og havner på forsiden, søknaden er borte', function () {
-        cy.contains('Avbryt søknad').click()
+        cy.get('button[data-cy="avbryt-soknad"]').click()
 
         cy.url().should('equal', Cypress.config().baseUrl + '/syk/sykepengesoknad')
 
