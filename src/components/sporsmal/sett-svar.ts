@@ -20,6 +20,9 @@ const hentVerdier = (sporsmal: Sporsmal, verdier: Record<string, any>) => {
 
 export const settSvar = (sporsmal: Sporsmal, verdier: Record<string, any>): void => {
     const verdi = hentVerdier(sporsmal, verdier)
+
+    console.log('verdi', verdi, sporsmal.svarliste) // eslint-disable-line
+
     if (
         verdi === undefined &&
         sporsmal.svartype !== RSSvartype.IKKE_RELEVANT &&

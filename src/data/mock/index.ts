@@ -79,6 +79,8 @@ const setUpMock = (person: Persona) => {
         const spmIdx = soknad.sporsmal.findIndex((spm) => spm.id === sporsmalId)
         soknad.sporsmal.splice(spmIdx, 1, req.body)
 
+        console.log('req.body', req.body) // eslint-disable-line
+
         return Promise.resolve({
             status: 200,
             body: JSON.stringify({ oppdatertSporsmal: req.body }),
@@ -220,6 +222,9 @@ const setUpMock = (person: Persona) => {
         (req) => {
             const sok = person.soknader.find((r) => r.id === req.pathParams.soknad)!
             const spm = sok.sporsmal.find((spm) => spm.id === req.pathParams.spmid)
+
+            console.log('req.body', req.body) // eslint-disable-line
+
             spm!.svar.push(req.body)
 
             return Promise.resolve({

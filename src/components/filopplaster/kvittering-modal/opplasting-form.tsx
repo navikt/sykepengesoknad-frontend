@@ -61,6 +61,8 @@ const OpplastingForm = ({ valgtSoknad, setOpenModal }: OpplastingFromProps) => {
             const rsOppdaterSporsmalResponse: RSOppdaterSporsmalResponse = await lagreSvar(opplastingResponse)
             if (!rsOppdaterSporsmalResponse) return
 
+            console.log('rsOppdaterSporsmalResponse.oppdatertSporsmal', rsOppdaterSporsmalResponse.oppdatertSporsmal) // eslint-disable-line
+
             valgtSoknad.sporsmal[spmIndex] = new Sporsmal(rsOppdaterSporsmalResponse.oppdatertSporsmal, null, true)
             queryClient.setQueriesData(['soknad', valgtSoknad!.id], valgtSoknad)
 
