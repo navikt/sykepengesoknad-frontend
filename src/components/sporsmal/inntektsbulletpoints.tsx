@@ -1,4 +1,4 @@
-import { Heading } from '@navikt/ds-react'
+import { BodyShort, Label } from '@navikt/ds-react'
 import React from 'react'
 
 import { TagTyper } from '../../types/enums'
@@ -8,21 +8,28 @@ export const Inntektsbulletpoints = ({ sporsmal, soknad }: { sporsmal: Sporsmal;
     if (!skalHaInntektsbulletpoints(sporsmal, soknad)) return null
 
     return (
-        <div className="mb-10 mt-10">
-            <Heading level="3" size="small" className="mb-4">
-                Arbeidsforhold vi har registrert på deg:
-            </Heading>
-            <ul data-cy="inntektskilder--fra-inntektskomponenten-liste">
-                <li className="mb-4">{soknad.arbeidsgiver?.navn}</li>
-                {soknad.inntektskilderDataFraInntektskomponenten?.map((inntektskilde, index) => {
-                    return (
-                        <li className="mb-4" key={index}>
-                            {inntektskilde.navn}
-                        </li>
-                    )
-                })}
-            </ul>
-        </div>
+        <>
+            <div className="mb-10 mt-4">
+                <Label as="p" className="mb-4">
+                    Arbeidsforhold vi har registrert på deg:
+                </Label>
+                <ul data-cy="inntektskilder--fra-inntektskomponenten-liste">
+                    <BodyShort as="li" className="mb-4">
+                        {soknad.arbeidsgiver?.navn}
+                    </BodyShort>
+                    {soknad.inntektskilderDataFraInntektskomponenten?.map((inntektskilde, index) => {
+                        return (
+                            <BodyShort as="li" className="mb-4" key={index}>
+                                {inntektskilde.navn}
+                            </BodyShort>
+                        )
+                    })}
+                </ul>
+            </div>
+            <Label as="span" className="mb-4">
+                Har du andre inntektskilder enn nevnt over?
+            </Label>
+        </>
     )
 }
 
