@@ -22,6 +22,7 @@ import { RouteParams } from '../../../app'
 import { cn } from '../../../utils/tw-utils'
 import { YrkesskadeInfo } from '../../hjelpetekster/yrkesskade-info'
 import { useJaNeiKeyboardNavigation } from '../../../utils/keyboard-navigation'
+import { Inntektsbulletpoints, skalHaInntektsbulletpoints } from '../inntektsbulletpoints'
 
 const JaNeiStor = ({ sporsmal }: SpmProps) => {
     const {
@@ -32,6 +33,7 @@ const JaNeiStor = ({ sporsmal }: SpmProps) => {
     } = useFormContext()
     const { id } = useParams<RouteParams>()
     const { data: valgtSoknad } = useSoknad(id)
+
     const feilmelding = hentFeilmelding(sporsmal, errors[sporsmal.id])
     let watchJaNei = watch(sporsmal.id)
     if (watchJaNei === undefined) {
@@ -39,6 +41,7 @@ const JaNeiStor = ({ sporsmal }: SpmProps) => {
     }
 
     useJaNeiKeyboardNavigation(sporsmal)
+    if (!valgtSoknad) return null
 
     const valider = (value: any) => {
         if (value === 'JA' || value === 'NEI') {
@@ -65,9 +68,17 @@ const JaNeiStor = ({ sporsmal }: SpmProps) => {
         )
     }
 
+    function sporsmalstekst() {
+        if (skalHaInntektsbulletpoints(sporsmal, valgtSoknad!)) {
+            return 'Har du andre inntektskilder enn nevnt over?'
+        }
+        return sporsmal.sporsmalstekst
+    }
+
     return (
         <>
             <div>
+                <Inntektsbulletpoints sporsmal={sporsmal} soknad={valgtSoknad} />
                 <Controller
                     name={sporsmal.id}
                     rules={{ validate: (value) => valider(value), required: feilmelding.global }}
@@ -75,7 +86,7 @@ const JaNeiStor = ({ sporsmal }: SpmProps) => {
                     render={({ field }) => (
                         <RadioGroup
                             {...field}
-                            legend={sporsmal.sporsmalstekst}
+                            legend={sporsmalstekst()}
                             data-cy="ja-nei-stor"
                             className="w-full"
                             key={sporsmal.id}

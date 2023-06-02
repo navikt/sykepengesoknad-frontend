@@ -32,7 +32,7 @@ describe('Tester arbeidstakersøknad', () => {
 
         // Sykmelding
         cy.contains('1. april - 24. april 2020 (24 dager)')
-        cy.contains('POSTEN NORGE AS, BÆRUM')
+        cy.contains('Posten Norge AS, Bærum')
         cy.contains('100% sykmeldt')
 
         cy.get('section[aria-label="Opplysninger fra sykmeldingen"] button').click()
@@ -116,7 +116,7 @@ describe('Tester arbeidstakersøknad', () => {
 
         // Test spørsmål
         cy.contains(
-            'I perioden 1. - 24. april 2020 var du 100 % sykmeldt fra POSTEN NORGE AS, BÆRUM. Jobbet du noe hos POSTEN NORGE AS, BÆRUM i denne perioden?',
+            'I perioden 1. - 24. april 2020 var du 100 % sykmeldt fra Posten Norge AS, Bærum. Jobbet du noe hos Posten Norge AS, Bærum i denne perioden?',
         )
         cy.get('[data-cy="ja-nei-stor"] input[value=JA]').click()
 
@@ -125,19 +125,19 @@ describe('Tester arbeidstakersøknad', () => {
         // Svarer prosent
         cy.get('.undersporsmal input[value=Prosent]').click()
         cy.contains(
-            'Oppgi hvor mange prosent av din normale arbeidstid du jobbet hos POSTEN NORGE AS, BÆRUM i perioden 1. - 24. april 2020?',
+            'Oppgi hvor mange prosent av din normale arbeidstid du jobbet hos Posten Norge AS, Bærum i perioden 1. - 24. april 2020?',
         )
         cy.get('.undersporsmal .navds-text-field__input#796cf7ed-8a7e-39de-9cbc-6e789aa5af3f').type('21')
         // Velger timer
         cy.get('.undersporsmal input[value=Timer]').click()
-        cy.contains('Oppgi totalt antall timer du jobbet i perioden 1. - 24. april 2020 hos POSTEN NORGE AS, BÆRUM')
+        cy.contains('Oppgi totalt antall timer du jobbet i perioden 1. - 24. april 2020 hos Posten Norge AS, Bærum')
         cy.contains('Antall timer du skrev inn, betyr at du har jobbet').should('not.exist')
         // Svarer timer
         cy.get('.undersporsmal .navds-text-field__input#6cc620d8-d4b0-3e82-a038-2757df6fc311').type('21')
         cy.contains('Er prosenten lavere enn du forventet?').should('not.exist')
 
         // Underspørsmål 2
-        cy.contains('Jobber du vanligvis 37,5 timer i uka hos POSTEN NORGE AS, BÆRUM?')
+        cy.contains('Jobber du vanligvis 37,5 timer i uka hos Posten Norge AS, Bærum?')
         cy.get('input#af302d17-f35d-38a6-ac23-ccde5db369cb_0').click()
 
         cy.contains('Gå videre').click()
@@ -146,7 +146,7 @@ describe('Tester arbeidstakersøknad', () => {
     it('Søknad ANDRE_INNTEKTSKILDER_V2', function () {
         cy.url().should('include', `${soknad.id}/7`)
 
-        cy.contains('Har du andre inntektskilder enn Posten Norge AS, Bærum?')
+        cy.contains('Har du andre inntektskilder enn nevnt over?')
 
         cy.get('[data-cy="ja-nei-stor"] input[value=JA]').click()
 
@@ -183,7 +183,7 @@ describe('Tester arbeidstakersøknad', () => {
         cy.contains(
             'Jeg har lest all informasjonen jeg har fått i søknaden og bekrefter at opplysningene jeg har gitt er korrekte.',
         )
-        cy.contains('Søknaden sendes til NAV. Kopi av søknaden sendes til POSTEN NORGE AS, BÆRUM.')
+        cy.contains('Søknaden sendes til NAV. Kopi av søknaden sendes til Posten Norge AS, Bærum.')
 
         cy.contains('Send søknaden').click()
     })

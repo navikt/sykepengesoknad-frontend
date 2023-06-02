@@ -254,8 +254,8 @@ describe('Tester støtte for gamle spørsmål', () => {
     it('ARBEID_UNDERVEIS_100_PROSENT', () => {
         svarJaHovedsporsmal()
         svarRadio('Oppgi arbeidsmengde i timer eller prosent:', 'Timer')
-        velgTall('Oppgi totalt antall timer du jobbet i perioden 1. - 24. april 2020 hos POSTEN NORGE AS, BÆRUM', '12')
-        svarRadio('Jobber du vanligvis 37,5 timer i uka hos POSTEN NORGE AS, BÆRUM?', 'JA')
+        velgTall('Oppgi totalt antall timer du jobbet i perioden 1. - 24. april 2020 hos Posten Norge AS, Bærum', '12')
+        svarRadio('Jobber du vanligvis 37,5 timer i uka hos Posten Norge AS, Bærum?', 'JA')
         gaVidere()
     })
 

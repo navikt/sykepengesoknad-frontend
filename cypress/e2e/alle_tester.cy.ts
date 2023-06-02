@@ -1,6 +1,7 @@
 import './run-0/arbeidsledig_100.cy'
 import './run-0/arbeidstaker_50.cy'
 import './run-0/arbeidstaker_100.cy'
+import './run-0/andre_inntektskilder-bulletpoints.cy'
 import './run-0/arbeidstaker_behandlingsdager.cy'
 import './run-0/avbrutt_soknad.cy'
 import './run-0/slett_kvittering_feiler.cy'

@@ -6,6 +6,7 @@ import { RSSoknadsperiode } from './rs-soknadsperiode'
 import { RSSoknadstatusType } from './rs-soknadstatus'
 import { RSSoknadstypeType } from './rs-soknadstype'
 import { RSSporsmal } from './rs-sporsmal'
+import { ArbeidsforholdFraInntektskomponenten } from './rs-arbeidsforholdfrainntektskomponenten'
 
 export interface RSSoknad {
     id: string
@@ -31,4 +32,5 @@ export interface RSSoknad {
     merknaderFraSykmelding?: RSMerknad[]
     opprettetAvInntektsmelding: boolean
     klippet: boolean
+    inntektskilderDataFraInntektskomponenten?: ArbeidsforholdFraInntektskomponenten[]
 }

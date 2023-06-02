@@ -18,7 +18,7 @@ describe('Tester arbeidstakersøknad - gradert 50%', () => {
 
         // Sykmelding
         cy.contains('1. april - 24. april 2020 (24 dager)')
-        cy.contains('POSTEN NORGE AS, BÆRUM')
+        cy.contains('Posten Norge AS, Bærum')
         cy.contains('50% sykmeldt')
         cy.get('section[aria-label="Opplysninger fra sykmeldingen"] button').click()
 
@@ -152,7 +152,7 @@ describe('Tester arbeidstakersøknad - gradert 50%', () => {
     it('Søknad ANDRE_INNTEKTSKILDER_V2', function () {
         cy.url().should('include', `${soknad.id}/9`)
 
-        cy.contains('Har du andre inntektskilder enn Posten Norge AS, Bærum?')
+        cy.contains('Har du andre inntektskilder enn nevnt over?')
 
         cy.get('[data-cy="ja-nei-stor"] input[value=JA]').click()
 
@@ -171,7 +171,7 @@ describe('Tester arbeidstakersøknad - gradert 50%', () => {
         cy.contains(
             'Jeg har lest all informasjonen jeg har fått i søknaden og bekrefter at opplysningene jeg har gitt er korrekte.',
         )
-        cy.contains('Søknaden sendes til POSTEN NORGE AS, BÆRUM med kopi til NAV.')
+        cy.contains('Søknaden sendes til Posten Norge AS, Bærum med kopi til NAV.')
 
         cy.contains('Send søknaden').click()
     })

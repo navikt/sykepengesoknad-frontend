@@ -154,6 +154,23 @@ export const brukertestSoknad: RSSoknad = {
     sykmeldingId: 'abc5acf2-a44f-42e5-87b2-02c9d0b39ce8',
     soknadstype: 'ARBEIDSTAKERE',
     status: 'NY',
+    inntektskilderDataFraInntektskomponenten: [
+        {
+            navn: 'Ruter',
+            orgnummer: '222',
+            arbeidsforholdstype: 'ARBEIDSTAKER',
+        },
+        {
+            navn: 'Kebabsjappa',
+            orgnummer: '111',
+            arbeidsforholdstype: 'ARBEIDSTAKER',
+        },
+        {
+            navn: 'Bensinstasjonen',
+            orgnummer: '333',
+            arbeidsforholdstype: 'ARBEIDSTAKER',
+        },
+    ],
     fom: fom,
     tom: tom,
     opprettetDato: '2022-11-17',
