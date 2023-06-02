@@ -33,7 +33,7 @@
         "react-router-dom": "^6.11.2",
         "react-router-hash-link": "^2.4.3",
         "smoothscroll-polyfill": "^0.4.4",
-        "tailwind-merge": "^1.12.0",
+        "tailwind-merge": "^1.13.0",
         "use-force-update": "^1.0.11",
         "uuid": "^9.0.0"
     },
