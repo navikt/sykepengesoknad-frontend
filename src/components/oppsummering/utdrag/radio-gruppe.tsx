@@ -17,13 +17,13 @@ const RadioGruppe = ({ sporsmal }: OppsummeringProps) => {
         <Vis
             hvis={besvartUndersporsmal}
             render={() => (
-                <div className="oppsummering__sporsmal">
-                    <Label as="h3" className="oppsummering__overskrift">
+                <>
+                    <Label as="h3" className="mb-2">
                         {sporsmal.sporsmalstekst}
                     </Label>
                     <Avkrysset tekst={besvartUndersporsmal.sporsmalstekst} />
                     <UndersporsmalSum sporsmalsliste={besvartUndersporsmal.undersporsmal} />
-                </div>
+                </>
             )}
         />
     )

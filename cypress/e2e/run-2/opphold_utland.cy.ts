@@ -106,18 +106,14 @@ describe('Tester søknad om å beholde sykepenger utenfor EØS', () => {
             .should('contain', 'Søre franske territorier')
             .and('contain', 'De okkuperte palestinske områdene')
 
-        cy.get('.oppsummering')
-            .contains('Har du arbeidsgiver?')
-            .siblings()
-            .should('contain', 'Ja')
-            .get('.oppsummering__undersporsmalsliste')
-            .within(() => {
-                cy.contains('Er du 100 % sykmeldt?').siblings().should('contain', 'Ja')
+        cy.get('.oppsummering').contains('Har du arbeidsgiver?').siblings().should('contain', 'Ja')
+        cy.get('.oppsummering').within(() => {
+            cy.contains('Er du 100 % sykmeldt?').siblings().should('contain', 'Ja')
 
-                cy.contains('Har du avtalt med arbeidsgiveren din at du skal ta ut feriedager i hele perioden?')
-                    .siblings()
-                    .should('contain', 'Nei')
-            })
+            cy.contains('Har du avtalt med arbeidsgiveren din at du skal ta ut feriedager i hele perioden?')
+                .siblings()
+                .should('contain', 'Nei')
+        })
     })
 
     it('Sender søknaden', function () {

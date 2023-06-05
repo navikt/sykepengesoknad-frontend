@@ -21,28 +21,28 @@ const Behandlingsdager = ({ sporsmal }: OppsummeringProps) => {
             <Vis
                 hvis={sporsmal.undersporsmal}
                 render={() => (
-                    <div className="oppsummering__sporsmal">
-                        <Label as="h3">{sporsmal.sporsmalstekst}</Label>
+                    <>
+                        <Label as="h3" className="mb-2">
+                            {sporsmal.sporsmalstekst}
+                        </Label>
                         <Vis
                             hvis={sporsmal.undersporsmal.length > 0}
                             render={() => (
-                                <div className="oppsummering__undersporsmalsliste">
+                                <>
                                     {sporsmal.undersporsmal.map((uspm, idx) => {
                                         return (
-                                            <div className="oppsummering__sporsmal" key={idx}>
-                                                <Label as="h3">{tilLesbarPeriodeUtenArstall(uspm.min, uspm.max)}</Label>
-                                                <div className="oppsummering__tekstsvar oppsummering__dato">
-                                                    <Avkrysset
-                                                        tekst={datoEllerIkkeTilBehandling(uspm.svarliste.svar[0])}
-                                                    />
-                                                </div>
+                                            <div data-cy="oppsummering__behandlingsdager" key={idx}>
+                                                <Label as="h3" className="mb-2">
+                                                    {tilLesbarPeriodeUtenArstall(uspm.min, uspm.max)}
+                                                </Label>
+                                                <Avkrysset tekst={datoEllerIkkeTilBehandling(uspm.svarliste.svar[0])} />
                                             </div>
                                         )
                                     })}
-                                </div>
+                                </>
                             )}
                         />
-                    </div>
+                    </>
                 )}
             />
         </>

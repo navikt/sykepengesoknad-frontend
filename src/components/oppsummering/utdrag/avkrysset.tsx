@@ -7,7 +7,7 @@ interface AvkryssetProps {
 
 const Avkrysset = ({ tekst }: AvkryssetProps) => {
     return (
-        <div className="oppsummering__avkrysset mt-2 flex">
+        <div className="mt-2 flex">
             <img
                 src="/syk/sykepengesoknad/static/check-box-1.png"
                 alt="Avkrysset"
