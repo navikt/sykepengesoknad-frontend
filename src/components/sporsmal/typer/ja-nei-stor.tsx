@@ -70,7 +70,7 @@ const JaNeiStor = ({ sporsmal }: SpmProps) => {
 
     function sporsmalstekst() {
         if (skalHaInntektsbulletpoints(sporsmal, valgtSoknad!)) {
-            return <Inntektsbulletpoints sporsmal={sporsmal} soknad={valgtSoknad!} />
+            return 'Har du andre inntektskilder enn nevnt over?'
         }
         return sporsmal.sporsmalstekst
     }
@@ -78,6 +78,7 @@ const JaNeiStor = ({ sporsmal }: SpmProps) => {
     return (
         <>
             <div>
+                <Inntektsbulletpoints sporsmal={sporsmal} soknad={valgtSoknad} />
                 <Controller
                     name={sporsmal.id}
                     rules={{ validate: (value) => valider(value), required: feilmelding.global }}
