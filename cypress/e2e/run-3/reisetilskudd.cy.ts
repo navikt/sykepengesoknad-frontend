@@ -139,6 +139,8 @@ describe('Teste førsteside i reisetilskuddsøknaden', () => {
         it('Legger inn taxi kvittering', () => {
             cy.get('button').contains('Legg til reiseutgift').click()
             cy.get('select[name=transportmiddel]').select('TAXI')
+            cy.get('#transportmiddel').contains('Taxi')
+
             cy.get('input[name=belop_input]').type('1234')
             cy.get('[data-cy="filopplasteren"] input[type=file]').attachFile('kvittering.jpg')
             cy.get('button').contains('Bekreft').click()
@@ -193,9 +195,10 @@ describe('Teste førsteside i reisetilskuddsøknaden', () => {
                 cy.get('[data-cy="opplasting-form"]').contains('Du må velge transportmiddel')
             })
 
-            it('Velger egen bil', () => {
+            it('Velger parkering', () => {
                 cy.get('[data-cy="opplasting-form"]').contains('Du må velge transportmiddel')
-                cy.get('select[name=transportmiddel]').select('TAXI')
+                cy.get('select[name=transportmiddel]').select('PARKERING')
+                cy.get('#transportmiddel').contains('Parkering')
                 cy.get('.navds-modal__content').contains('Bekreft').click()
                 cy.get('[data-cy="opplasting-form"]').contains('Du må velge transportmiddel').should('not.exist')
             })
@@ -252,13 +255,30 @@ describe('Teste førsteside i reisetilskuddsøknaden', () => {
                 cy.get('button').contains('Bekreft').click()
 
                 cy.get('.navds-table').within(() => {
-                    cy.contains('Taxi')
+                    cy.contains('Parkering')
                     cy.contains('99 kr')
                     cy.contains('1 utgift på til sammen')
                 })
             })
 
             it('Går videre', () => {
+                cy.contains('Gå videre').click()
+            })
+        })
+
+        describe('Beholder verdier når vi går frem og tilbake', () => {
+            it('Går frem og tilbake', () => {
+                cy.contains('Gå videre').click()
+                cy.url().should('include', `/soknader/${nyttReisetilskudd.id}/5`)
+
+                cy.contains('Tilbake').click()
+                cy.url().should('include', `/soknader/${nyttReisetilskudd.id}/4`)
+                cy.get('.navds-table').within(() => {
+                    cy.contains('Parkering')
+                    cy.contains('99 kr')
+                    cy.contains('1 utgift på til sammen')
+                })
+
                 cy.contains('Gå videre').click()
             })
         })
