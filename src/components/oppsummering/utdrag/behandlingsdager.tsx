@@ -28,7 +28,7 @@ const Behandlingsdager = ({ sporsmal }: OppsummeringProps) => {
                         <Vis
                             hvis={sporsmal.undersporsmal.length > 0}
                             render={() => (
-                                <div data-cy="oppsummering-undersporsmal-behandlingsdager">
+                                <>
                                     {sporsmal.undersporsmal.map((uspm, idx) => {
                                         return (
                                             <div data-cy="oppsummering__behandlingsdager" key={idx}>
@@ -39,7 +39,7 @@ const Behandlingsdager = ({ sporsmal }: OppsummeringProps) => {
                                             </div>
                                         )
                                     })}
-                                </div>
+                                </>
                             )}
                         />
                     </>
