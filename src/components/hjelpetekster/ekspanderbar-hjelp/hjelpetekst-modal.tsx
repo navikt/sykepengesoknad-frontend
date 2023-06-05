@@ -1,4 +1,4 @@
-import { Button, Heading, Modal } from '@navikt/ds-react'
+import { BodyShort, Button, Heading, Modal } from '@navikt/ds-react'
 import { useState } from 'react'
 
 interface HjelpetekstPopupProps {
@@ -13,8 +13,8 @@ export const HjelpetekstModal = (props: HjelpetekstPopupProps) => {
 
     return (
         <>
-            <span
-                role="button"
+            <BodyShort
+                as="button"
                 className="border-b-2 border-dotted border-border-action hover:bg-gray-100"
                 onClick={(e) => {
                     e.preventDefault()
@@ -22,7 +22,7 @@ export const HjelpetekstModal = (props: HjelpetekstPopupProps) => {
                 }}
             >
                 {inlinetekst}
-            </span>
+            </BodyShort>
 
             <Modal open={open} onClose={() => setOpen((x) => !x)} aria-labelledby="modal-heading">
                 <Modal.Content style={{ maxWidth: '360px' }}>
