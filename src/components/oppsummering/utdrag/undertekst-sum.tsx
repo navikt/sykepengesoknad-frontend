@@ -6,10 +6,12 @@ import { OppsummeringProps } from '../oppsummering'
 
 const UndertekstSum = ({ sporsmal }: OppsummeringProps) => {
     return (
-        <div className="oppsummering__VisUndertekst">
-            <Label as="h4">{sporsmal.sporsmalstekst}</Label>
+        <>
+            <Label as="h4" className="mb-2">
+                {sporsmal.sporsmalstekst}
+            </Label>
             <BodyLong spacing>{parserWithReplace(sporsmal.undertekst ?? '')}</BodyLong>
-        </div>
+        </>
     )
 }
 

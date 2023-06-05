@@ -31,12 +31,12 @@ const OpplastingSum = ({ sporsmal }: OppsummeringProps) => {
     }
 
     return (
-        <div className="oppsummering__sporsmal">
-            <Label as="h3">{sporsmal.sporsmalstekst}</Label>
-            <div className="oppsummering__svar">
-                <Avkrysset tekst={svartekst} />
-            </div>
-        </div>
+        <>
+            <Label as="h3" className="mb-2">
+                {sporsmal.sporsmalstekst}
+            </Label>
+            <Avkrysset tekst={svartekst} />
+        </>
     )
 }
 

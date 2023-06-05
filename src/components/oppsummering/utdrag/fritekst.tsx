@@ -7,10 +7,12 @@ const Fritekst = ({ sporsmal }: OppsummeringProps) => {
     if (sporsmal.svarliste.svar.length === 0) return null
     if (!sporsmal.svarliste.svar[0].verdi) return null
     return (
-        <div className="oppsummering__fritekst">
-            <Label as="h3">{sporsmal.sporsmalstekst}</Label>
+        <>
+            <Label as="h3" className="mb-2">
+                {sporsmal.sporsmalstekst}
+            </Label>
             <BodyShort className="sist">{sporsmal.svarliste.svar[0].verdi}</BodyShort>
-        </div>
+        </>
     )
 }
 

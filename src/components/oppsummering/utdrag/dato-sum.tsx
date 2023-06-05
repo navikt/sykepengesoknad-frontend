@@ -7,24 +7,24 @@ import { OppsummeringProps } from '../oppsummering'
 
 const DatoSum = ({ sporsmal }: OppsummeringProps) => {
     return (
-        <div className="oppsummering__sporsmal">
-            <Label as="h3">{sporsmal.sporsmalstekst}</Label>
-            <div className="oppsummering__tekstsvar">
+        <>
+            <Label as="h3" className="mb-2">
+                {sporsmal.sporsmalstekst}
+            </Label>
+            <>
                 {sporsmal.svarliste.svar.map((svarverdi, index) => {
                     return (
                         <Vis
                             hvis={svarverdi.verdi}
                             key={index}
                             render={() => (
-                                <BodyShort className="oppsummering__dato">
-                                    {dayjs(svarverdi.verdi.toString()).format('DD.MM.YYYY')}
-                                </BodyShort>
+                                <BodyShort>{dayjs(svarverdi.verdi.toString()).format('DD.MM.YYYY')}</BodyShort>
                             )}
                         />
                     )
                 })}
-            </div>
-        </div>
+            </>
+        </>
     )
 }
 

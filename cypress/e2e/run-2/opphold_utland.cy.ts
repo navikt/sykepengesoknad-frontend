@@ -110,7 +110,7 @@ describe('Tester søknad om å beholde sykepenger utenfor EØS', () => {
             .contains('Har du arbeidsgiver?')
             .siblings()
             .should('contain', 'Ja')
-            .get('.oppsummering__undersporsmalsliste')
+            .get('[data-cy="oppsummering-undersporsmal-behandlingsdager"]')
             .within(() => {
                 cy.contains('Er du 100 % sykmeldt?').siblings().should('contain', 'Ja')
 

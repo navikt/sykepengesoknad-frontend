@@ -33,24 +33,26 @@ const TallSum = ({ sporsmal }: OppsummeringProps) => {
     const label = undertekst || tekst(labelnokkel as any)
 
     return (
-        <div className="oppsummering__sporsmal">
-            <Label as="h3">{sporsmal.sporsmalstekst}</Label>
-            <div className="oppsummering__svar">
+        <>
+            <Label as="h3" className="mb-2">
+                {sporsmal.sporsmalstekst}
+            </Label>
+            <>
                 {sporsmal.svarliste.svar.map((svarverdi, index) => {
                     return (
                         <Vis
                             hvis={svarverdi.verdi}
                             key={index}
                             render={() => (
-                                <BodyShort className="oppsummering__tekst">
+                                <BodyShort spacing>
                                     {svarverdi.verdi} {label}
                                 </BodyShort>
                             )}
                         />
                     )
                 })}
-            </div>
-        </div>
+            </>
+        </>
     )
 }
 
