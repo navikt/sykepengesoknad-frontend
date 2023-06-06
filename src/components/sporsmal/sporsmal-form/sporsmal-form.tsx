@@ -66,8 +66,6 @@ const SporsmalForm = () => {
     const nesteSporsmal = valgtSoknad!.sporsmal[spmIndex + 1]
 
     useEffect(() => {
-        console.log('useEffect sporsmal ' + sporsmal.tag) // eslint-disable-line
-
         methods.reset(hentFormState(sporsmal), { keepValues: false })
 
         const sisteSide = erSisteSpm()
@@ -80,7 +78,6 @@ const SporsmalForm = () => {
     }, [sporsmal])
 
     useEffect(() => {
-        console.log('useEffect methods.formState.isSubmitSuccessful', methods.formState.isSubmitSuccessful) // eslint-disable-line
         if (methods.formState.isSubmitSuccessful) {
             methods.reset(hentFormState(sporsmal), { keepValues: false })
         }
@@ -186,14 +183,10 @@ const SporsmalForm = () => {
     }
 
     const onSubmit = async (data: any) => {
-        console.log('data', data) // eslint-disable-line
-        console.log('methods.getValues()', methods.getValues()) // eslint-disable-line
-        console.log('sporsmal onSubmit', sporsmal.svarliste) // eslint-disable-line
-
         if (poster || senderSoknad) return
         setPoster(true)
         restFeilet = false
-        //sporsmal = valgtSoknad!.sporsmal[spmIndex]
+
         try {
             settSvar(sporsmal, data)
             if (erSiste) {
@@ -237,8 +230,6 @@ const SporsmalForm = () => {
     }
 
     if (!valgtSoknad) return null
-
-    console.log('sporsmal', sporsmal.svarliste) // eslint-disable-line
 
     return (
         <>

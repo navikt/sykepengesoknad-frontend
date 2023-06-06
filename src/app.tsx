@@ -1,7 +1,6 @@
 import { Modal } from '@navikt/ds-react'
-import React, { useEffect } from 'react'
+import React from 'react'
 import { BrowserRouter, Route, Routes } from 'react-router-dom'
-import { logger } from '@navikt/next-logger'
 
 import AvbruttSoknad from './components/avbrutt/avbrutt-soknad'
 import { RefreshHvisFeilState } from './components/feil/refresh-hvis-feil-state'
@@ -34,14 +33,6 @@ const App = (): any => {
     // eslint-disable-next-line
     // @ts-ignore
     Modal.setAppElement('#root')
-
-    useEffect(() => {
-        logger.info('Setter opp App')
-
-        return () => {
-            logger.info('Tar ned App')
-        }
-    }, [])
 
     if (vedlikehold() && !erFlex()) {
         return <Vedlikehold />

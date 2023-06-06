@@ -28,7 +28,6 @@ const KvitteringListeVisning = ({ kvittering, sporsmal }: KvitteringListeVisning
         >
             <Table.DataCell>
                 <Label as="h2">{UtgiftTyper[kvittering.typeUtgift]}</Label>
-                <Label>{kvittering.blobId}</Label>
             </Table.DataCell>
             <Table.DataCell className="whitespace-nowrap">{formatterTall(kvittering.belop! / 100)} kr</Table.DataCell>
             <Table.DataCell className="text-right">

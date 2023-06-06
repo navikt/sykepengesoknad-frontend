@@ -7,9 +7,8 @@ import { useParams } from 'react-router-dom'
 import { useQueryClient } from '@tanstack/react-query'
 
 import { RouteParams } from '../../../app'
-import { RSOppdaterSporsmalResponse } from '../../../types/rs-types/rest-response/rs-oppdatersporsmalresponse'
 import { RSSvar } from '../../../types/rs-types/rs-svar'
-import { Kvittering, Soknad, Sporsmal, UtgiftTyper } from '../../../types/types'
+import { Kvittering, Soknad, UtgiftTyper } from '../../../types/types'
 import { AuthenticationError, fetchJsonMedRequestId } from '../../../utils/fetch'
 import { formaterFilstørrelse, formattertFiltyper, maxFilstørrelse } from '../../../utils/fil-utils'
 import { getLedetekst, tekst } from '../../../utils/tekster'
@@ -58,12 +57,8 @@ const OpplastingForm = ({ valgtSoknad, setOpenModal }: OpplastingFromProps) => {
             const opplastingResponse: OpplastetKvittering = await lastOppKvittering()
             if (!opplastingResponse) return
 
-            const rsOppdaterSporsmalResponse: RSOppdaterSporsmalResponse = await lagreSvar(opplastingResponse)
-            if (!rsOppdaterSporsmalResponse) return
+            await lagreSvar(opplastingResponse)
 
-            console.log('rsOppdaterSporsmalResponse.oppdatertSporsmal', rsOppdaterSporsmalResponse.oppdatertSporsmal) // eslint-disable-line
-
-            valgtSoknad.sporsmal[spmIndex] = new Sporsmal(rsOppdaterSporsmalResponse.oppdatertSporsmal, null, true)
             await queryClient.invalidateQueries(['soknad', valgtSoknad.id])
 
             setOpenModal(false)

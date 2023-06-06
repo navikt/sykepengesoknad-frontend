@@ -38,8 +38,6 @@ const Slettknapp = ({ sporsmal, kvittering }: SlettknappProps) => {
             setSletter(true)
         }
 
-        console.log('kvittering.blobId', kvittering.blobId) // eslint-disable-line
-
         const svar = sporsmal?.svarliste.svar.find(
             (svar) => svarverdiToKvittering(svar?.verdi).blobId === kvittering?.blobId,
         )
