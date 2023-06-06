@@ -1,8 +1,8 @@
-import { Alert, Heading, Modal } from '@navikt/ds-react'
+import { BodyShort } from '@navikt/ds-react'
 import React, { useState } from 'react'
 
 import { tekst } from '../../utils/tekster'
-import { parserWithReplace } from '../../utils/html-react-parser-utils'
+import { FlexModal } from '../flex-modal'
 
 import { SykepengesoknadTeaserProps } from './teaser-util'
 import { ListevisningLenkepanel } from './listevisning-lenkepanel'
@@ -18,19 +18,19 @@ const UtgaattSoknaderTeaser = ({ soknad }: SykepengesoknadTeaserProps) => {
                     setAapen(!aapen)
                 }}
             />
-            <Modal
-                onClose={() => setAapen(false)}
+            <FlexModal
                 open={aapen}
-                aria-labelledby="utgått-soknad-modal"
-                shouldCloseOnOverlayClick={false}
+                lukkKnapp={true}
+                headerId="utgått-soknad-modal"
+                setOpen={setAapen}
+                header={tekst('soknad.teaser.utgaatt.popup.header')}
             >
-                <Modal.Content>
-                    <Heading size="medium" id="utgått-soknad-modal" level="1" className="mr-10 mt-1" spacing>
-                        {tekst('soknad.teaser.utgaatt.popup.header')}
-                    </Heading>
-                    <Alert variant="info">{parserWithReplace(tekst('soknad.teaser.utgaatt.popup.innhold'))}</Alert>
-                </Modal.Content>
-            </Modal>
+                <BodyShort spacing>Du får ikke åpnet denne søknaden fordi den ikke ble sendt innen fristen.</BodyShort>
+                <BodyShort spacing>
+                    Det kan gjøres unntak fra fristen dersom du ikke har vært i stand til å søke, eller dersom NAV har
+                    gitt misvisende opplysninger. Hvis du mener dette gjelder deg, ber vi deg kontakte NAV.
+                </BodyShort>
+            </FlexModal>
         </>
     )
 }

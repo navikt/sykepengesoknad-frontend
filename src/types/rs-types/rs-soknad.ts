@@ -33,4 +33,5 @@ export interface RSSoknad {
     opprettetAvInntektsmelding: boolean
     klippet: boolean
     inntektskilderDataFraInntektskomponenten?: ArbeidsforholdFraInntektskomponenten[]
+    korrigeringsfristUtlopt?: boolean
 }

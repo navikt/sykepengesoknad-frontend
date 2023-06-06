@@ -4,7 +4,7 @@ import AvbrytSoknadModalTekster from '../components/avbryt-soknad-modal/avbryt-s
 import AvsluttOgFortsettSenereTekster from '../components/avslutt-og-fortsett-senere/avslutt-og-fortsett-senere-tekster'
 import BannerTekster from '../components/banner/banner-tekster'
 import { EldreUsendtTekster } from '../components/eldre-usendt/eldre-usendt-tekster'
-import { EndreSoknadModalTekster } from '../components/endreknapp/endre-soknad-modal-tekster'
+import { EndreknappTekster } from '../components/endreknapp/endreknapp-tekster'
 import RefreshHvisFeilStateTekster from '../components/feil/refresh-hvis-feil-state-tekster'
 import DragAndDropTekster from '../components/filopplaster/drag-and-drop/drag-and-drop-tekster'
 import FilListeTekster from '../components/filopplaster/fil-liste/fil-liste-tekster'
@@ -42,7 +42,7 @@ const tekster = {
     ...SporsmalTekster,
     ...TeaserTekster,
     ...AvbrytSoknadModalTekster,
-    ...EndreSoknadModalTekster,
+    ...EndreknappTekster,
     ...EkspanderbarHjelpTekster,
     ...EndringUtenEndringTekster,
     ...OmSykepengerTekster,

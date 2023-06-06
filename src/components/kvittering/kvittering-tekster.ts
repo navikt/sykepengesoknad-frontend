@@ -2,12 +2,11 @@ const KvitteringTekster = {
     'kvittering.sidetittel': 'Kvittering',
     'kvittering.status': 'Status',
     'kvittering.utbetaling.tittel': 'Utbetaling av sykepenger',
-    'kvittering.knapp.endre': 'Jeg vil endre svarene i søknaden',
+
     'kvittering.knapp.send-nav': 'Jeg vil at søknaden skal behandles av NAV',
     'kvittering.knapp.send-arbeidsgiver': 'Jeg vil sende en kopi av søknaden til arbeidsgiveren min',
 
     'kvittering.knapp.angre': 'Angre',
-    'kvittering.korrigering.feilet': 'Beklager, søknaden kunne ikke endres',
     'kvittering.ettersending.feilet': 'Beklager, søknaden kunne ikke ettersendes',
 
     'kvittering.info.send-til-arbeidsgiver':

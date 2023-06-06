@@ -7,7 +7,11 @@ module.exports = {
     presets: [naviktTailwindPreset],
     content: ['./src/**/*.{js,ts,jsx,tsx}'],
     theme: {
-        extend: {},
+        extend: {
+            spacing: {
+                '2xl': '42rem',
+            },
+        },
     },
     plugins: [],
 }

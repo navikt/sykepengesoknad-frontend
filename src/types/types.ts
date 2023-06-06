@@ -44,6 +44,7 @@ export class Soknad {
     opprettetAvInntektsmelding: boolean
     klippet: boolean
     inntektskilderDataFraInntektskomponenten?: ArbeidsforholdFraInntektskomponenten[]
+    korrigeringsfristUtlopt?: boolean
 
     constructor(soknad: RSSoknad) {
         this.id = soknad.id
@@ -73,6 +74,7 @@ export class Soknad {
         this.opprettetAvInntektsmelding = soknad.opprettetAvInntektsmelding
         this.klippet = soknad.klippet
         this.inntektskilderDataFraInntektskomponenten = soknad.inntektskilderDataFraInntektskomponenten
+        this.korrigeringsfristUtlopt = soknad.korrigeringsfristUtlopt
     }
 }
 

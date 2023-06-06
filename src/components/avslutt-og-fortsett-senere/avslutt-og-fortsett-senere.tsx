@@ -1,4 +1,4 @@
-import { BodyShort, Button, Heading, Modal } from '@navikt/ds-react'
+import { BodyShort, Button } from '@navikt/ds-react'
 import React, { useState } from 'react'
 import { useParams } from 'react-router-dom'
 
@@ -7,6 +7,7 @@ import { tekst } from '../../utils/tekster'
 import { logEvent } from '../amplitude/amplitude'
 import useSoknad from '../../hooks/useSoknad'
 import { RouteParams } from '../../app'
+import { FlexModal } from '../flex-modal'
 
 const AvsluttOgFortsettSenere = () => {
     const { id, stegId } = useParams<RouteParams>()
@@ -34,11 +35,13 @@ const AvsluttOgFortsettSenere = () => {
             >
                 {tekst('avslutt.popup.tittel')}
             </Button>
-            <Modal
+
+            <FlexModal
                 open={aapen}
-                aria-labelledby="avslutt-og-fortsett-senere"
+                setOpen={setAapen}
+                headerId="avslutt-og-fortsett-senere"
+                header={tekst('avslutt.popup.tittel')}
                 onClose={() => {
-                    setAapen(false)
                     logEvent('modal lukket', {
                         component: tekst('avslutt.popup.tittel'),
                         soknadstype: valgtSoknad.soknadstype,
@@ -46,47 +49,40 @@ const AvsluttOgFortsettSenere = () => {
                     })
                 }}
             >
-                <Modal.Content>
-                    <Heading size="small" id="avslutt-og-fortsett-senere" level="1" className="mr-10 mt-1" spacing>
-                        {tekst('avslutt.popup.tittel')}
-                    </Heading>
-                    <BodyShort spacing>{tekst('avslutt.popup.innhold')}</BodyShort>
-                    <BodyShort spacing>{tekst('avslutt.popup.sporsmal')}</BodyShort>
-                    <Button
-                        variant="primary"
-                        className="ml-auto mr-auto block"
-                        onClick={() => {
-                            logEvent('knapp klikket', {
-                                tekst: tekst('avslutt.popup.ja'),
-                                soknadstype: valgtSoknad.soknadstype,
-                                component: tekst('avslutt.popup.tittel'),
-                                steg: stegId!,
-                            })
-                            // Må sikre at amplitude får logget ferdig
-                            window.setTimeout(() => {
-                                window.location.href = minSideUrl()
-                            }, 200)
-                        }}
-                    >
-                        {tekst('avslutt.popup.ja')}
-                    </Button>
-                    <Button
-                        variant="secondary"
-                        className="ml-auto mr-auto mt-4 block"
-                        onClick={() => {
-                            setAapen(false)
-                            logEvent('knapp klikket', {
-                                tekst: tekst('avslutt.popup.nei'),
-                                soknadstype: valgtSoknad.soknadstype,
-                                component: tekst('avslutt.popup.tittel'),
-                                steg: stegId!,
-                            })
-                        }}
-                    >
-                        {tekst('avslutt.popup.nei')}
-                    </Button>
-                </Modal.Content>
-            </Modal>
+                <BodyShort spacing>{tekst('avslutt.popup.innhold')}</BodyShort>
+                <BodyShort spacing>{tekst('avslutt.popup.sporsmal')}</BodyShort>
+                <Button
+                    variant="primary"
+                    className="mt-4"
+                    onClick={() => {
+                        logEvent('knapp klikket', {
+                            tekst: tekst('avslutt.popup.ja'),
+                            soknadstype: valgtSoknad.soknadstype,
+                            component: tekst('avslutt.popup.tittel'),
+                            steg: stegId!,
+                        })
+
+                        window.location.href = minSideUrl()
+                    }}
+                >
+                    {tekst('avslutt.popup.ja')}
+                </Button>
+                <Button
+                    variant="secondary"
+                    className="mt-4 block"
+                    onClick={() => {
+                        setAapen(false)
+                        logEvent('knapp klikket', {
+                            tekst: tekst('avslutt.popup.nei'),
+                            soknadstype: valgtSoknad.soknadstype,
+                            component: tekst('avslutt.popup.tittel'),
+                            steg: stegId!,
+                        })
+                    }}
+                >
+                    {tekst('avslutt.popup.nei')}
+                </Button>
+            </FlexModal>
         </>
     )
 }

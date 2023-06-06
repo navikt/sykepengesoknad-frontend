@@ -1,9 +1,10 @@
-import { BodyLong, Heading, Label, Modal, ReadMore } from '@navikt/ds-react'
+import { BodyShort, Label, ReadMore } from '@navikt/ds-react'
 import dayjs from 'dayjs'
 import React, { useState } from 'react'
 
 import { tilLesbarDatoMedArstall } from '../../utils/dato-utils'
 import { getLedetekst, tekst } from '../../utils/tekster'
+import { FlexModal } from '../flex-modal'
 
 import { SykepengesoknadTeaserProps } from './teaser-util'
 import { ListevisningLenkepanel } from './listevisning-lenkepanel'
@@ -20,28 +21,24 @@ const FremtidigeSoknaderTeaser = ({ soknad }: SykepengesoknadTeaserProps) => {
                 }}
             />
 
-            <Modal
-                onClose={() => setAapen(false)}
+            <FlexModal
                 open={aapen}
-                aria-labelledby="fremtidige-soknader-modal"
-                shouldCloseOnOverlayClick={true}
+                lukkKnapp={true}
+                headerId="fremtidige-soknader-modal"
+                setOpen={setAapen}
+                header={tekst('soknader.teaser.fremtidig.modal.tittel')}
             >
-                <Modal.Content>
-                    <Heading size="small" id="fremtidige-soknader-modal" level="1" className="mr-10 mt-1" spacing>
-                        {tekst('soknader.teaser.fremtidig.modal.tittel')}
-                    </Heading>
-                    <BodyLong spacing>
-                        {getLedetekst(tekst('soknader.teaser.fremtidig.modal.tekst'), {
-                            '%DATO%': tilLesbarDatoMedArstall(dayjs(soknad.tom).add(1, 'day')),
-                        })}
-                    </BodyLong>
-                    <BodyLong spacing>{tekst('soknader.teaser.fremtidig.modal.tekst2')}</BodyLong>
+                <BodyShort spacing>
+                    {getLedetekst(tekst('soknader.teaser.fremtidig.modal.tekst'), {
+                        '%DATO%': tilLesbarDatoMedArstall(dayjs(soknad.tom).add(1, 'day')),
+                    })}
+                </BodyShort>
+                <BodyShort spacing>{tekst('soknader.teaser.fremtidig.modal.tekst2')}</BodyShort>
 
-                    <ReadMore header={<Label>{tekst('soknader.teaser.fremtidig.modal.utvidbar.tittel')}</Label>}>
-                        <BodyLong spacing>{tekst('soknader.teaser.fremtidig.modal.utvidbar.tekst')}</BodyLong>
-                    </ReadMore>
-                </Modal.Content>
-            </Modal>
+                <ReadMore header={<Label>{tekst('soknader.teaser.fremtidig.modal.utvidbar.tittel')}</Label>}>
+                    <BodyShort spacing>{tekst('soknader.teaser.fremtidig.modal.utvidbar.tekst')}</BodyShort>
+                </ReadMore>
+            </FlexModal>
         </>
     )
 }
