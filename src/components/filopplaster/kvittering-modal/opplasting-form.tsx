@@ -64,7 +64,7 @@ const OpplastingForm = ({ valgtSoknad, setOpenModal }: OpplastingFromProps) => {
             console.log('rsOppdaterSporsmalResponse.oppdatertSporsmal', rsOppdaterSporsmalResponse.oppdatertSporsmal) // eslint-disable-line
 
             valgtSoknad.sporsmal[spmIndex] = new Sporsmal(rsOppdaterSporsmalResponse.oppdatertSporsmal, null, true)
-            queryClient.setQueriesData(['soknad', valgtSoknad!.id], valgtSoknad)
+            queryClient.setQueriesData(['soknad', valgtSoknad!.id], { ...valgtSoknad })
 
             setOpenModal(false)
         } catch (e: any) {
