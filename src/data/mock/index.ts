@@ -225,7 +225,10 @@ const setUpMock = (person: Persona) => {
 
             console.log('req.body', req.body) // eslint-disable-line
 
-            spm!.svar.push(req.body)
+            spm!.svar.push({
+                id: uuid.v4(),
+                ...req.body,
+            })
 
             return Promise.resolve({
                 status: 201,

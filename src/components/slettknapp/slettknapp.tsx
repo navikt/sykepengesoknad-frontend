@@ -40,9 +40,6 @@ const Slettknapp = ({ sporsmal, kvittering }: SlettknappProps) => {
 
         console.log('kvittering.blobId', kvittering.blobId) // eslint-disable-line
 
-        const idx = sporsmal!.svarliste.svar.findIndex(
-            (svar) => svarverdiToKvittering(svar?.verdi).blobId === kvittering?.blobId,
-        )
         const svar = sporsmal?.svarliste.svar.find(
             (svar) => svarverdiToKvittering(svar?.verdi).blobId === kvittering?.blobId,
         )
@@ -63,11 +60,6 @@ const Slettknapp = ({ sporsmal, kvittering }: SlettknappProps) => {
             setSletter(false)
             return
         }
-
-        console.log('sporsmal.svarliste før', sporsmal.svarliste) // eslint-disable-line
-        sporsmal.svarliste.svar.splice(idx, 1)
-        console.log('sporsmal.svarliste etter', sporsmal.svarliste) // eslint-disable-line
-        valgtSoknad!.sporsmal[valgtSoknad!.sporsmal.findIndex((spm) => spm.id === sporsmal.id)] = sporsmal
         await queryClient.invalidateQueries(['soknad', valgtSoknad!.id])
 
         setSletter(false)
