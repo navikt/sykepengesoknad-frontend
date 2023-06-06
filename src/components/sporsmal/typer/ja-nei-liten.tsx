@@ -1,5 +1,5 @@
 import { Alert, BodyShort, Radio, RadioGroup } from '@navikt/ds-react'
-import React from 'react'
+import React, { Fragment } from 'react'
 import { Controller, useFormContext } from 'react-hook-form'
 
 import { SvarEnums, TagTyper } from '../../../types/enums'
@@ -79,16 +79,17 @@ const JaNeiLiten = ({ sporsmal }: SpmProps) => {
                             {...field}
                             legend={sporsmal.sporsmalstekst}
                             error={errors[sporsmal.id] !== undefined && feilmelding.lokal}
-                            key={sporsmal.id}
                         >
-                            <Radio id={field.name + '_' + '0'} value="JA">
-                                Ja
-                            </Radio>
-                            {presisering(field.value === 'JA')}
-                            <Radio id={field.name + '_' + '1'} value="NEI">
-                                Nei
-                            </Radio>
-                            {presisering(field.value === 'NEI')}
+                            <Fragment key={sporsmal.id}>
+                                <Radio id={field.name + '_0'} value="JA">
+                                    Ja
+                                </Radio>
+                                {presisering(field.value === 'JA')}
+                                <Radio id={field.name + '_1'} value="NEI">
+                                    Nei
+                                </Radio>
+                                {presisering(field.value === 'NEI')}
+                            </Fragment>
                         </RadioGroup>
                     )}
                 />
