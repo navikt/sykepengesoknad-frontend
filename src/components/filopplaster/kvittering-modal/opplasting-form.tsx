@@ -144,13 +144,11 @@ const OpplastingForm = ({ valgtSoknad, setOpenModal }: OpplastingFromProps) => {
                     error={methods.formState.errors['transportmiddel']?.message?.toString()}
                 >
                     <option value="">Velg</option>
-                    {Object.entries(UtgiftTyper).map((keyval, idx) => {
-                        return (
-                            <option value={keyval[0]} id={keyval[0]} key={idx}>
-                                {keyval[1]}
-                            </option>
-                        )
-                    })}
+                    {Object.entries(UtgiftTyper).map((keyval) => (
+                        <option value={keyval[0]} id={keyval[0]} key={keyval[0]}>
+                            {keyval[1]}
+                        </option>
+                    ))}
                 </Select>
 
                 <TextField

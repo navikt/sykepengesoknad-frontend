@@ -58,13 +58,11 @@ const Teasere = ({ soknader, tittel, tomListeTekst, kanSorteres = false }: Sokna
                             label="Sorter etter"
                             onChange={(event) => setSortering(event.target.value as Sortering)}
                         >
-                            {Object.values(Sortering).map((sort, idx) => {
-                                return (
-                                    <option value={sort} key={idx}>
-                                        {sort}
-                                    </option>
-                                )
-                            })}
+                            {Object.values(Sortering).map((sort) => (
+                                <option value={sort} key={sort}>
+                                    {sort}
+                                </option>
+                            ))}
                         </Select>
                     )}
                 />

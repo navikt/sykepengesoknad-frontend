@@ -1,4 +1,4 @@
-import { Label } from '@navikt/ds-react'
+import { BodyShort, Label } from '@navikt/ds-react'
 import React from 'react'
 
 import { TagTyper } from '../../types/enums'
@@ -13,14 +13,14 @@ export const Inntektsbulletpoints = ({ sporsmal, soknad }: { sporsmal: Sporsmal;
                 Arbeidsforhold vi har registrert på deg:
             </Label>
             <ul data-cy="inntektskilder--fra-inntektskomponenten-liste" className="mb-10">
-                <li className="mb-4">{soknad.arbeidsgiver?.navn}</li>
-                {soknad.inntektskilderDataFraInntektskomponenten?.map((inntektskilde, index) => {
-                    return (
-                        <li className="mb-4" key={index}>
-                            {inntektskilde.navn}
-                        </li>
-                    )
-                })}
+                <BodyShort as="li" className="mb-4">
+                    {soknad.arbeidsgiver?.navn}
+                </BodyShort>
+                {soknad.inntektskilderDataFraInntektskomponenten?.map((inntektskilde, index) => (
+                    <BodyShort as="li" className="mb-4" key={index}>
+                        {inntektskilde.navn}
+                    </BodyShort>
+                ))}
             </ul>
         </>
     )

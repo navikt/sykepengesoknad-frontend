@@ -10,9 +10,9 @@ const CheckboxGruppe = ({ sporsmal }: OppsummeringProps) => {
             <Label as="h3" className="mb-2">
                 {sporsmal.sporsmalstekst}
             </Label>
-            {sporsmal.undersporsmal.map((s: Sporsmal, idx) => {
-                return <SporsmalVarianter sporsmal={s} key={idx} />
-            })}
+            {sporsmal.undersporsmal.map((s: Sporsmal, idx) => (
+                <SporsmalVarianter sporsmal={s} key={idx} />
+            ))}
         </>
     )
 }

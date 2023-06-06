@@ -38,19 +38,17 @@ const TallSum = ({ sporsmal }: OppsummeringProps) => {
                 {sporsmal.sporsmalstekst}
             </Label>
             <>
-                {sporsmal.svarliste.svar.map((svarverdi, index) => {
-                    return (
-                        <Vis
-                            hvis={svarverdi.verdi}
-                            key={index}
-                            render={() => (
-                                <BodyShort spacing>
-                                    {svarverdi.verdi} {label}
-                                </BodyShort>
-                            )}
-                        />
-                    )
-                })}
+                {sporsmal.svarliste.svar.map((svarverdi, index) => (
+                    <Vis
+                        hvis={svarverdi.verdi}
+                        key={index}
+                        render={() => (
+                            <BodyShort spacing>
+                                {svarverdi.verdi} {label}
+                            </BodyShort>
+                        )}
+                    />
+                ))}
             </>
         </>
     )

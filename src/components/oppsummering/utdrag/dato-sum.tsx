@@ -12,17 +12,13 @@ const DatoSum = ({ sporsmal }: OppsummeringProps) => {
                 {sporsmal.sporsmalstekst}
             </Label>
             <>
-                {sporsmal.svarliste.svar.map((svarverdi, index) => {
-                    return (
-                        <Vis
-                            hvis={svarverdi.verdi}
-                            key={index}
-                            render={() => (
-                                <BodyShort>{dayjs(svarverdi.verdi.toString()).format('DD.MM.YYYY')}</BodyShort>
-                            )}
-                        />
-                    )
-                })}
+                {sporsmal.svarliste.svar.map((svarverdi, index) => (
+                    <Vis
+                        hvis={svarverdi.verdi}
+                        key={index}
+                        render={() => <BodyShort>{dayjs(svarverdi.verdi.toString()).format('DD.MM.YYYY')}</BodyShort>}
+                    />
+                ))}
             </>
         </>
     )
