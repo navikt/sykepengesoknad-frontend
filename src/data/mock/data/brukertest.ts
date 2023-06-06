@@ -22,7 +22,6 @@ const fom = url.searchParams.get('fom') ?? '2022-09-08'
 const tom = url.searchParams.get('tom') ?? '2022-09-21'
 
 const periodeTekst = tilLesbarPeriodeMedArstall(dayjs(fom), dayjs(tom))
-const fravaerFoerTekst = tilLesbarPeriodeMedArstall(dayjs(fom).subtract(16, 'days'), dayjs(fom).subtract(1, 'day'))
 export const brukertestSykmelding = new Sykmelding({
     id: 'abc5acf2-a44f-42e5-87b2-02c9d0b39ce8',
     pasient: {
@@ -205,34 +204,6 @@ export const brukertestSoknad: RSSoknad = {
             kriterieForVisningAvUndersporsmal: null,
             svar: [],
             undersporsmal: [],
-        },
-        {
-            id: '1623834',
-            tag: 'FRAVAR_FOR_SYKMELDINGEN',
-            sporsmalstekst: `Var du syk og borte fra jobb før du ble sykmeldt, i perioden ${fravaerFoerTekst}?`,
-            undertekst: null,
-            svartype: 'JA_NEI',
-            min: null,
-            max: null,
-            pavirkerAndreSporsmal: false,
-            kriterieForVisningAvUndersporsmal: 'JA',
-            svar: [],
-            undersporsmal: [
-                {
-                    id: '1623835',
-                    tag: 'FRAVAR_FOR_SYKMELDINGEN_NAR',
-                    sporsmalstekst:
-                        'Hvilke dager var du syk og borte fra jobb, før du ble sykmeldt? Du trenger bare oppgi dager før 8. september 2022.',
-                    undertekst: null,
-                    svartype: 'PERIODER',
-                    min: '2022-08-08',
-                    max: '2022-09-07',
-                    pavirkerAndreSporsmal: false,
-                    kriterieForVisningAvUndersporsmal: null,
-                    svar: [],
-                    undersporsmal: [],
-                },
-            ],
         },
         {
             id: '1623808',

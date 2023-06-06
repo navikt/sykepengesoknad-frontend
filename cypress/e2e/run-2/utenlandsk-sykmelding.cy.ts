@@ -90,7 +90,7 @@ describe('Tester søknad til utenlandsk sykmelding', () => {
     })
 
     it('Svar nei på resten', function () {
-        for (let i = 5; i <= 12; i++) {
+        for (let i = 5; i <= 11; i++) {
             cy.url().should('include', `${soknad.id}/${i}`)
             svarNeiHovedsporsmal()
             cy.contains('Gå videre').click()
@@ -98,7 +98,7 @@ describe('Tester søknad til utenlandsk sykmelding', () => {
     })
 
     it('Vær klar over at', function () {
-        cy.url().should('include', `${soknad.id}/13`)
+        cy.url().should('include', `${soknad.id}/12`)
         cy.contains('Til slutt')
         cy.get('section[aria-label="Oppsummering fra søknaden"] button').click()
         cy.contains('Danmark')
