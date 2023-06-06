@@ -19,6 +19,7 @@ import { utenlandskSykmelding } from './data/utenlandsk-sykmelding'
 import { yrkesskadePerson } from './data/yrkesskade'
 import { egenmeldingSykmeldingaPerson } from './data/egenmeldingsdager-i-sykmeldingen'
 import { selvstendigNaringsdrivende } from './data/naringsdrivende'
+import { korrigeringsfristUtloptPerson } from './data/korrigeringsfrist-utlopt'
 
 export interface StringFunctionMap {
     [index: string]: () => Persona
@@ -45,6 +46,7 @@ export const personas: StringFunctionMap = {
     'sykmelding med egenmeldingsdager': () => egenmeldingSykmeldingaPerson,
     'http 400 ved send soknad': () => får400vedSendSoknad,
     'http 500 ved send soknad': () => får500vedSendSoknad,
+    'korrigeringsfrist-utlopt': () => korrigeringsfristUtloptPerson,
 }
 
 export function hentTestperson(url?: string): Persona | null {

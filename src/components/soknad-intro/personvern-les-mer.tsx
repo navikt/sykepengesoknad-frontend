@@ -1,10 +1,11 @@
-import { Button, Heading, Modal } from '@navikt/ds-react'
+import { Button } from '@navikt/ds-react'
 import React, { MouseEvent, useState } from 'react'
 
 import { tekst } from '../../utils/tekster'
 import { logEvent } from '../amplitude/amplitude'
 import { RSSoknadstypeType } from '../../types/rs-types/rs-soknadstype'
 import { parserWithReplace } from '../../utils/html-react-parser-utils'
+import { FlexModal } from '../flex-modal'
 
 type Event = MouseEvent<HTMLAnchorElement | HTMLButtonElement>
 
@@ -34,21 +35,18 @@ const PersonvernLesMer = ({ soknadstype }: PersonvernLesMerProps) => {
             <Button variant="tertiary" onClick={handleAapen} className="px-0 text-left">
                 {tekst('sykepengesoknad.soknad-intro.personvern-les-mer')}
             </Button>
-            <Modal
+            <FlexModal
                 open={aapen}
-                aria-labelledby="Personvern-modal"
+                setOpen={setAapen}
+                headerId="Personvern-modal"
+                header={tekst('sykepengesoknad.soknad-intro.personvern-modal-header')}
                 onClose={() => {
-                    setAapen(false)
                     amplitudeLukketPopup()
                 }}
+                lukkKnapp={true}
             >
-                <Modal.Content>
-                    <Heading size="medium" id="Personvern-modal" level="1" spacing>
-                        {tekst('sykepengesoknad.soknad-intro.personvern-modal-header')}
-                    </Heading>
-                    {parserWithReplace(tekst('sykepengesoknad.soknad-intro.personvern-modal-innhold'))}
-                </Modal.Content>
-            </Modal>
+                {parserWithReplace(tekst('sykepengesoknad.soknad-intro.personvern-modal-innhold'))}
+            </FlexModal>
         </>
     )
 }

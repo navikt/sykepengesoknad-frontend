@@ -1,4 +1,4 @@
-import { BodyLong, Button, Heading, Modal } from '@navikt/ds-react'
+import { BodyLong, Button } from '@navikt/ds-react'
 import React, { useState } from 'react'
 import { useParams } from 'react-router-dom'
 import { useQueryClient } from '@tanstack/react-query'
@@ -12,6 +12,7 @@ import { EndringUtenEndringModal } from '../sporsmal/endring-uten-endring/endrin
 import useSoknad from '../../hooks/useSoknad'
 import useSoknader from '../../hooks/useSoknader'
 import { RouteParams } from '../../app'
+import { FlexModal } from '../flex-modal'
 
 import { avbrytSoknad } from './avbryt-soknad'
 
@@ -24,7 +25,7 @@ const AvbrytKorrigering = () => {
     if (!valgtSoknad) return null
 
     return (
-        <div>
+        <>
             <Button
                 variant="tertiary"
                 className="px-0 text-surface-danger"
@@ -41,7 +42,7 @@ const AvbrytKorrigering = () => {
                 {tekst('avbryt.korrigering.knapp')}
             </Button>
             <EndringUtenEndringModal aapen={aapen} setAapen={setAapen} />
-        </div>
+        </>
     )
 }
 
@@ -63,7 +64,7 @@ const AvbrytSoknadModal = () => {
     }
 
     return (
-        <div>
+        <>
             <Button
                 variant="tertiary"
                 className="px-0 text-surface-danger"
@@ -80,11 +81,12 @@ const AvbrytSoknadModal = () => {
             >
                 {tekst('avbryt.popup.tittel')}
             </Button>
-            <Modal
+            <FlexModal
                 open={aapen}
-                aria-labelledby="avbryt-soknad"
+                setOpen={setAapen}
+                headerId="avbryt-soknad"
+                header={tekst('avbryt.popup.tittel')}
                 onClose={() => {
-                    setAapen(false)
                     logEvent('modal lukket', {
                         component: tekst('avbryt.popup.tittel'),
                         soknadstype: valgtSoknad.soknadstype,
@@ -92,54 +94,48 @@ const AvbrytSoknadModal = () => {
                     })
                 }}
             >
-                <Modal.Content>
-                    <Heading size="small" id="avbryt-soknad" level="1" className="mr-10 mt-1" spacing>
-                        {tekst('avbryt.popup.tittel')}
-                    </Heading>
+                <BodyLong spacing size="medium">
+                    {tekst('avbryt.popup.sporsmal')}
+                </BodyLong>
 
-                    <BodyLong spacing size="medium">
-                        {tekst('avbryt.popup.sporsmal')}
-                    </BodyLong>
-
-                    <Button
-                        variant="danger"
-                        className="ml-auto mr-auto block"
-                        onClick={() => {
-                            logEvent('knapp klikket', {
-                                tekst: tekst('avbryt.popup.ja'),
-                                soknadstype: valgtSoknad.soknadstype,
-                                component: tekst('avbryt.popup.tittel'),
-                                steg: stegId!,
-                            })
-                            avbrytSoknad({
-                                valgtSoknad: valgtSoknad,
-                                soknader: soknader,
-                                queryClient: queryClient,
-                                navigate: navigate,
-                                setFeilmeldingTekst: setFeilmeldingTekst,
-                            })
-                        }}
-                    >
-                        {tekst('avbryt.popup.ja')}
-                    </Button>
-                    <Button
-                        variant="secondary"
-                        className="ml-auto mr-auto mt-4 block"
-                        onClick={() => {
-                            setAapen(false)
-                            logEvent('knapp klikket', {
-                                tekst: tekst('avbryt.popup.nei'),
-                                soknadstype: valgtSoknad.soknadstype,
-                                component: tekst('avbryt.popup.tittel'),
-                                steg: stegId!,
-                            })
-                        }}
-                    >
-                        {tekst('avbryt.popup.nei')}
-                    </Button>
-                </Modal.Content>
-            </Modal>
-        </div>
+                <Button
+                    variant="danger"
+                    className="mt-4"
+                    onClick={() => {
+                        logEvent('knapp klikket', {
+                            tekst: tekst('avbryt.popup.ja'),
+                            soknadstype: valgtSoknad.soknadstype,
+                            component: tekst('avbryt.popup.tittel'),
+                            steg: stegId!,
+                        })
+                        avbrytSoknad({
+                            valgtSoknad: valgtSoknad,
+                            soknader: soknader,
+                            queryClient: queryClient,
+                            navigate: navigate,
+                            setFeilmeldingTekst: setFeilmeldingTekst,
+                        })
+                    }}
+                >
+                    {tekst('avbryt.popup.ja')}
+                </Button>
+                <Button
+                    variant="secondary"
+                    className="mt-4 block"
+                    onClick={() => {
+                        setAapen(false)
+                        logEvent('knapp klikket', {
+                            tekst: tekst('avbryt.popup.nei'),
+                            soknadstype: valgtSoknad.soknadstype,
+                            component: tekst('avbryt.popup.tittel'),
+                            steg: stegId!,
+                        })
+                    }}
+                >
+                    {tekst('avbryt.popup.nei')}
+                </Button>
+            </FlexModal>
+        </>
     )
 }
 
