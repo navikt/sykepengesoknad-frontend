@@ -69,7 +69,7 @@ const Endreknapp = () => {
             return (
                 <BodyShort spacing>
                     {EndreknappTekster.utlopt}
-                    <LenkeMedIkon href="https://www.nav.no/skriv-til-oss" text={EndreknappTekster.sto} />
+                    <LenkeMedIkon href="https://www.nav.no/skriv-til-oss" text={EndreknappTekster.sto} />.
                 </BodyShort>
             )
         }
@@ -119,6 +119,7 @@ const Endreknapp = () => {
                 setOpen={setAapen}
                 headerId="endre-modal"
                 header={endreKnappTekst}
+                lukkKnapp={valgtSoknad.korrigeringsfristUtlopt}
                 onClose={() => {
                     logEvent('modal lukket', {
                         component: endreSøknadPopup,

@@ -46,7 +46,7 @@ export const personas: StringFunctionMap = {
     'sykmelding med egenmeldingsdager': () => egenmeldingSykmeldingaPerson,
     'http 400 ved send soknad': () => får400vedSendSoknad,
     'http 500 ved send soknad': () => får500vedSendSoknad,
-    'koirrigeringsfrist-utlopt': () => korrigeringsfristUtloptPerson,
+    'korrigeringsfrist-utlopt': () => korrigeringsfristUtloptPerson,
 }
 
 export function hentTestperson(url?: string): Persona | null {
