@@ -1,5 +1,4 @@
 import React from 'react'
-import useForceUpdate from 'use-force-update'
 import { useParams } from 'react-router-dom'
 import { Table } from '@navikt/ds-react'
 
@@ -19,16 +18,11 @@ const FilListe = () => {
 
     const stegNum = Number(stegId)
     const spmIndex = stegNum - 1
-    const forceUpdate = useForceUpdate()
 
     if (!valgtSoknad) return null
 
     const sporsmal = valgtSoknad.sporsmal[spmIndex]
     const kvitteringer = hentSvar(sporsmal)
-
-    const updateFilliste = () => {
-        forceUpdate()
-    }
 
     const totaltBeløp = (): number =>
         (kvitteringer
@@ -62,7 +56,6 @@ const FilListe = () => {
                                     <KvitteringListeVisning
                                         key={kvittering.blobId}
                                         kvittering={kvittering}
-                                        updateFilliste={updateFilliste}
                                         sporsmal={sporsmal}
                                     />
                                 )

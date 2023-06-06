@@ -9,9 +9,8 @@ import useKvittering from '../../../hooks/useKvittering'
 export interface KvitteringListeVisningProps {
     kvittering: Kvittering
     sporsmal: Sporsmal
-    updateFilliste: () => void
 }
-const KvitteringListeVisning = ({ kvittering, sporsmal, updateFilliste }: KvitteringListeVisningProps) => {
+const KvitteringListeVisning = ({ kvittering, sporsmal }: KvitteringListeVisningProps) => {
     const { data: fil } = useKvittering(kvittering.blobId)
 
     return (
@@ -29,10 +28,11 @@ const KvitteringListeVisning = ({ kvittering, sporsmal, updateFilliste }: Kvitte
         >
             <Table.DataCell>
                 <Label as="h2">{UtgiftTyper[kvittering.typeUtgift]}</Label>
+                <Label>{kvittering.blobId}</Label>
             </Table.DataCell>
             <Table.DataCell className="whitespace-nowrap">{formatterTall(kvittering.belop! / 100)} kr</Table.DataCell>
             <Table.DataCell className="text-right">
-                <Slettknapp sporsmal={sporsmal} kvittering={kvittering} updateFilliste={updateFilliste} />
+                <Slettknapp sporsmal={sporsmal} kvittering={kvittering} />
             </Table.DataCell>
         </Table.ExpandableRow>
     )

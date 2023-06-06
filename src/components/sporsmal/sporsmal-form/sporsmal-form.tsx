@@ -188,6 +188,7 @@ const SporsmalForm = () => {
     const onSubmit = async (data: any) => {
         console.log('data', data) // eslint-disable-line
         console.log('methods.getValues()', methods.getValues()) // eslint-disable-line
+        console.log('sporsmal onSubmit', sporsmal.svarliste) // eslint-disable-line
 
         if (poster || senderSoknad) return
         setPoster(true)
