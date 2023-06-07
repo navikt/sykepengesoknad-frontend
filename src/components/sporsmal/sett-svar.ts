@@ -20,6 +20,7 @@ const hentVerdier = (sporsmal: Sporsmal, verdier: Record<string, any>) => {
 
 export const settSvar = (sporsmal: Sporsmal, verdier: Record<string, any>): void => {
     const verdi = hentVerdier(sporsmal, verdier)
+
     if (
         verdi === undefined &&
         sporsmal.svartype !== RSSvartype.IKKE_RELEVANT &&

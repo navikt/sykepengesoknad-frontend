@@ -16,10 +16,9 @@ import { RouteParams } from '../../app'
 interface SlettknappProps {
     sporsmal: Sporsmal
     kvittering: Kvittering
-    updateFilliste: () => void
 }
 
-const Slettknapp = ({ sporsmal, kvittering, updateFilliste }: SlettknappProps) => {
+const Slettknapp = ({ sporsmal, kvittering }: SlettknappProps) => {
     const { id } = useParams<RouteParams>()
     const { data: valgtSoknad } = useSoknad(id)
     const queryClient = useQueryClient()
@@ -39,9 +38,6 @@ const Slettknapp = ({ sporsmal, kvittering, updateFilliste }: SlettknappProps) =
             setSletter(true)
         }
 
-        const idx = sporsmal!.svarliste.svar.findIndex(
-            (svar) => svarverdiToKvittering(svar?.verdi).blobId === kvittering?.blobId,
-        )
         const svar = sporsmal?.svarliste.svar.find(
             (svar) => svarverdiToKvittering(svar?.verdi).blobId === kvittering?.blobId,
         )
@@ -62,37 +58,26 @@ const Slettknapp = ({ sporsmal, kvittering, updateFilliste }: SlettknappProps) =
             setSletter(false)
             return
         }
-
-        sporsmal.svarliste.svar.splice(idx, 1)
-        valgtSoknad!.sporsmal[valgtSoknad!.sporsmal.findIndex((spm) => spm.id === sporsmal.id)] = sporsmal
-        queryClient.setQueriesData(['soknad', valgtSoknad!.id], valgtSoknad)
+        await queryClient.invalidateQueries(['soknad', valgtSoknad!.id])
 
         setSletter(false)
         setVilSlette(false)
-        updateFilliste()
     }
 
     return (
         <>
-            <Vis
-                hvis={updateFilliste}
-                render={() => (
-                    <>
-                        <Button
-                            variant="tertiary"
-                            icon={<TrashIcon />}
-                            iconPosition="right"
-                            onClick={(e) => {
-                                setVilSlette(true)
-                                nullstillFeilmelding()
-                                e.preventDefault()
-                            }}
-                        >
-                            {tekst('opplasting_modal.slett')}
-                        </Button>
-                    </>
-                )}
-            />
+            <Button
+                variant="tertiary"
+                icon={<TrashIcon />}
+                iconPosition="right"
+                onClick={(e) => {
+                    setVilSlette(true)
+                    nullstillFeilmelding()
+                    e.preventDefault()
+                }}
+            >
+                {tekst('opplasting_modal.slett')}
+            </Button>
 
             <Modal onClose={() => setVilSlette(false)} open={vilSlette} aria-labelledby="slett-modal">
                 <Modal.Content>

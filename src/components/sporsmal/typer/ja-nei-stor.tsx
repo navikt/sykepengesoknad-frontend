@@ -99,11 +99,12 @@ const JaNeiStor = ({ sporsmal }: SpmProps) => {
                                 } as React.CSSProperties
                             }
                         >
-                            <GuidepanelUnderSporsmalstekst sporsmal={sporsmal} />
+                            <GuidepanelUnderSporsmalstekst sporsmal={sporsmal} key="ja-nei-stor-guidepanel" />
 
-                            <EkspanderbarHjelp sporsmal={sporsmal} />
+                            <EkspanderbarHjelp sporsmal={sporsmal} key="ja-nei-stor-hjelp" />
 
                             <div
+                                key="ja-nei-stor-style"
                                 style={
                                     {
                                         '--a-shadow-focus': '0 0 0 0',

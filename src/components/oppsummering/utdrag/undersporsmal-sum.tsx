@@ -14,9 +14,9 @@ const UndersporsmalSum = ({ sporsmalsliste = [] }: UndersporsmalProps) => {
             hvis={sporsmalsliste.length > 0}
             render={() => (
                 <div className="mt-4 pl-4">
-                    {sporsmalsliste.map((sporsmal, idx) => {
-                        return <SporsmalVarianter sporsmal={sporsmal} key={idx} />
-                    })}
+                    {sporsmalsliste.map((sporsmal, idx) => (
+                        <SporsmalVarianter sporsmal={sporsmal} key={idx} />
+                    ))}
                 </div>
             )}
         />

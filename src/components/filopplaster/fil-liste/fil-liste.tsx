@@ -1,5 +1,4 @@
 import React from 'react'
-import useForceUpdate from 'use-force-update'
 import { useParams } from 'react-router-dom'
 import { Table } from '@navikt/ds-react'
 
@@ -19,16 +18,11 @@ const FilListe = () => {
 
     const stegNum = Number(stegId)
     const spmIndex = stegNum - 1
-    const forceUpdate = useForceUpdate()
 
     if (!valgtSoknad) return null
 
     const sporsmal = valgtSoknad.sporsmal[spmIndex]
     const kvitteringer = hentSvar(sporsmal)
-
-    const updateFilliste = () => {
-        forceUpdate()
-    }
 
     const totaltBeløp = (): number =>
         (kvitteringer
@@ -57,16 +51,13 @@ const FilListe = () => {
                             </Table.Row>
                         </Table.Header>
                         <Table.Body>
-                            {kvitteringer.reverse().map((kvittering: Kvittering) => {
-                                return (
-                                    <KvitteringListeVisning
-                                        key={kvittering.blobId}
-                                        kvittering={kvittering}
-                                        updateFilliste={updateFilliste}
-                                        sporsmal={sporsmal}
-                                    />
-                                )
-                            })}
+                            {kvitteringer.reverse().map((kvittering: Kvittering) => (
+                                <KvitteringListeVisning
+                                    key={kvittering.blobId}
+                                    kvittering={kvittering}
+                                    sporsmal={sporsmal}
+                                />
+                            ))}
                             <Table.Row>
                                 <Table.DataCell colSpan={2} className="border-b-0 font-bold">
                                     {getLedetekst(tekst('fil_liste.utlegg.sum'), {

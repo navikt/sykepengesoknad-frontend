@@ -186,6 +186,7 @@ const SporsmalForm = () => {
         if (poster || senderSoknad) return
         setPoster(true)
         restFeilet = false
+
         try {
             settSvar(sporsmal, data)
             if (erSiste) {

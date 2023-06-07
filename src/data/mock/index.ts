@@ -220,7 +220,11 @@ const setUpMock = (person: Persona) => {
         (req) => {
             const sok = person.soknader.find((r) => r.id === req.pathParams.soknad)!
             const spm = sok.sporsmal.find((spm) => spm.id === req.pathParams.spmid)
-            spm!.svar.push(req.body)
+
+            spm!.svar.push({
+                id: uuid.v4(),
+                ...req.body,
+            })
 
             return Promise.resolve({
                 status: 201,

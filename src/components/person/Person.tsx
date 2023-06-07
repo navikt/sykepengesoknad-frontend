@@ -1,4 +1,4 @@
-import { Link, Popover } from '@navikt/ds-react'
+import { BodyShort, Link, Popover } from '@navikt/ds-react'
 import React, { useRef, useState } from 'react'
 import { PersonCircleIcon } from '@navikt/aksel-icons'
 import { useNavigate } from 'react-router'
@@ -44,9 +44,9 @@ const Person = () => {
                 <Popover.Content>
                     <ul>
                         {Object.keys(personas).map((p, idx) => (
-                            <li key={idx}>
+                            <BodyShort as="li" key={idx}>
                                 <Link href={`/syk/sykepengesoknad/?testperson=${p}`}>{p}</Link>
-                            </li>
+                            </BodyShort>
                         ))}
                     </ul>
                 </Popover.Content>

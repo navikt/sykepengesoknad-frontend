@@ -101,9 +101,9 @@ const FeilOppsummering = ({
                 render={() => {
                     const elements = entries
                         .sort((list) => list[0][0])
-                        .map((list, index) => (
+                        .map((list) => (
                             <ErrorSummary.Item
-                                key={index}
+                                key={list[1].message}
                                 tabIndex={0}
                                 onKeyDown={(e) => handleKeyDown(e, list)}
                                 onClick={() => handleClick(list)}

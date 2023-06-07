@@ -7,9 +7,8 @@ import { useParams } from 'react-router-dom'
 import { useQueryClient } from '@tanstack/react-query'
 
 import { RouteParams } from '../../../app'
-import { RSOppdaterSporsmalResponse } from '../../../types/rs-types/rest-response/rs-oppdatersporsmalresponse'
 import { RSSvar } from '../../../types/rs-types/rs-svar'
-import { Kvittering, Soknad, Sporsmal, UtgiftTyper } from '../../../types/types'
+import { Kvittering, Soknad, UtgiftTyper } from '../../../types/types'
 import { AuthenticationError, fetchJsonMedRequestId } from '../../../utils/fetch'
 import { formaterFilstørrelse, formattertFiltyper, maxFilstørrelse } from '../../../utils/fil-utils'
 import { getLedetekst, tekst } from '../../../utils/tekster'
@@ -58,11 +57,9 @@ const OpplastingForm = ({ valgtSoknad, setOpenModal }: OpplastingFromProps) => {
             const opplastingResponse: OpplastetKvittering = await lastOppKvittering()
             if (!opplastingResponse) return
 
-            const rsOppdaterSporsmalResponse: RSOppdaterSporsmalResponse = await lagreSvar(opplastingResponse)
-            if (!rsOppdaterSporsmalResponse) return
+            await lagreSvar(opplastingResponse)
 
-            valgtSoknad.sporsmal[spmIndex] = new Sporsmal(rsOppdaterSporsmalResponse.oppdatertSporsmal, null, true)
-            queryClient.setQueriesData(['soknad', valgtSoknad!.id], valgtSoknad)
+            await queryClient.invalidateQueries(['soknad', valgtSoknad.id])
 
             setOpenModal(false)
         } catch (e: any) {
@@ -147,13 +144,11 @@ const OpplastingForm = ({ valgtSoknad, setOpenModal }: OpplastingFromProps) => {
                     error={methods.formState.errors['transportmiddel']?.message?.toString()}
                 >
                     <option value="">Velg</option>
-                    {Object.entries(UtgiftTyper).map((keyval, idx) => {
-                        return (
-                            <option value={keyval[0]} id={keyval[0]} key={idx}>
-                                {keyval[1]}
-                            </option>
-                        )
-                    })}
+                    {Object.entries(UtgiftTyper).map((keyval) => (
+                        <option value={keyval[0]} id={keyval[0]} key={keyval[0]}>
+                            {keyval[1]}
+                        </option>
+                    ))}
                 </Select>
 
                 <TextField

@@ -43,16 +43,14 @@ const Perioder = ({ sporsmal }: SpmProps) => {
             <Label as="h3">{sporsmal.sporsmalstekst}</Label>
 
             <ul className="list-none" ref={periodeliste}>
-                {lokal.map((idx) => {
-                    return (
-                        <PeriodeKomp
-                            sporsmal={sporsmal}
-                            index={idx}
-                            slettPeriode={slettPeriode}
-                            key={sporsmal.id + '_' + idx}
-                        />
-                    )
-                })}
+                {lokal.map((idx) => (
+                    <PeriodeKomp
+                        sporsmal={sporsmal}
+                        index={idx}
+                        slettPeriode={slettPeriode}
+                        key={sporsmal.id + '_' + idx}
+                    />
+                ))}
             </ul>
 
             <Button icon={<PlusIcon />} size="small" variant="tertiary" className="mt-4" onClick={leggTilPeriode}>

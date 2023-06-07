@@ -260,10 +260,6 @@ describe('Teste førsteside i reisetilskuddsøknaden', () => {
                     cy.contains('1 utgift på til sammen')
                 })
             })
-
-            it('Går videre', () => {
-                cy.contains('Gå videre').click()
-            })
         })
 
         describe('Beholder verdier når vi går frem og tilbake', () => {

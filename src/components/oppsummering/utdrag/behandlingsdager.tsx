@@ -29,16 +29,14 @@ const Behandlingsdager = ({ sporsmal }: OppsummeringProps) => {
                             hvis={sporsmal.undersporsmal.length > 0}
                             render={() => (
                                 <>
-                                    {sporsmal.undersporsmal.map((uspm, idx) => {
-                                        return (
-                                            <div data-cy="oppsummering__behandlingsdager" key={idx}>
-                                                <Label as="h3" className="mb-2">
-                                                    {tilLesbarPeriodeUtenArstall(uspm.min, uspm.max)}
-                                                </Label>
-                                                <Avkrysset tekst={datoEllerIkkeTilBehandling(uspm.svarliste.svar[0])} />
-                                            </div>
-                                        )
-                                    })}
+                                    {sporsmal.undersporsmal.map((uspm, idx) => (
+                                        <div data-cy="oppsummering__behandlingsdager" key={idx}>
+                                            <Label as="h3" className="mb-2">
+                                                {tilLesbarPeriodeUtenArstall(uspm.min, uspm.max)}
+                                            </Label>
+                                            <Avkrysset tekst={datoEllerIkkeTilBehandling(uspm.svarliste.svar[0])} />
+                                        </div>
+                                    ))}
                                 </>
                             )}
                         />
