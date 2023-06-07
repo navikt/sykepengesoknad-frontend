@@ -1,4 +1,4 @@
-import { BodyShort, RangeValidationT, UNSAFE_DatePicker, UNSAFE_useRangeDatepicker, Button } from '@navikt/ds-react'
+import { BodyShort, RangeValidationT, DatePicker, useRangeDatepicker, Button } from '@navikt/ds-react'
 import dayjs from 'dayjs'
 import React, { useEffect, useState } from 'react'
 import { Controller, useFormContext } from 'react-hook-form'
@@ -40,7 +40,7 @@ const PeriodeKomp = ({ sporsmal, index, slettPeriode }: AllProps) => {
         // eslint-disable-next-line
     }, [sporsmal])
 
-    const { datepickerProps, toInputProps, fromInputProps } = UNSAFE_useRangeDatepicker({
+    const { datepickerProps, toInputProps, fromInputProps } = useRangeDatepicker({
         fromDate: sporsmal.min ? new Date(sporsmal.min) : new Date('1900'),
         toDate: sporsmal.max ? new Date(sporsmal.max) : new Date(),
         defaultMonth: sporsmal.max ? new Date(sporsmal.max) : new Date(),
@@ -107,9 +107,9 @@ const PeriodeKomp = ({ sporsmal, index, slettPeriode }: AllProps) => {
                     render={() => (
                         <div>
                             <fieldset className="axe-exclude p-0">
-                                <UNSAFE_DatePicker {...datepickerProps}>
+                                <DatePicker {...datepickerProps}>
                                     <div className="flex-row items-end gap-4 md:flex">
-                                        <UNSAFE_DatePicker.Input
+                                        <DatePicker.Input
                                             {...fromInputProps}
                                             label={tekst('sykepengesoknad.periodevelger.fom')}
                                             id={sporsmal.id + '_' + index + '_fom'}
@@ -119,7 +119,7 @@ const PeriodeKomp = ({ sporsmal, index, slettPeriode }: AllProps) => {
                                             }
                                         />
 
-                                        <UNSAFE_DatePicker.Input
+                                        <DatePicker.Input
                                             {...toInputProps}
                                             label={tekst('sykepengesoknad.periodevelger.tom')}
                                             id={sporsmal.id + '_' + index + '_tom'}
@@ -142,7 +142,7 @@ const PeriodeKomp = ({ sporsmal, index, slettPeriode }: AllProps) => {
                                             )}
                                         />
                                     </div>
-                                </UNSAFE_DatePicker>
+                                </DatePicker>
                             </fieldset>
                         </div>
                     )}

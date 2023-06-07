@@ -1,6 +1,6 @@
 import React from 'react'
 import { useController, useFormContext } from 'react-hook-form'
-import { BodyShort, UNSAFE_DatePicker, UNSAFE_useDatepicker } from '@navikt/ds-react'
+import { BodyShort, DatePicker, useDatepicker } from '@navikt/ds-react'
 import dayjs from 'dayjs'
 
 import FeilLokal from '../../feil/feil-lokal'
@@ -49,7 +49,7 @@ function DatoInput(props: SpmProps) {
         },
     })
 
-    const { datepickerProps, inputProps } = UNSAFE_useDatepicker({
+    const { datepickerProps, inputProps } = useDatepicker({
         ...field,
         onDateChange: field.onChange,
         defaultSelected: field.value,
@@ -60,14 +60,14 @@ function DatoInput(props: SpmProps) {
     return (
         <div className="mt-8" data-cy="dato-komp">
             <div className="axe-exclude">
-                <UNSAFE_DatePicker
+                <DatePicker
                     {...datepickerProps}
                     {...finnMinOgMax()}
                     dropdownCaption={true}
                     locale="nb"
                     data-cy-sporsmalid={sporsmal.id}
                 >
-                    <UNSAFE_DatePicker.Input
+                    <DatePicker.Input
                         {...inputProps}
                         id={sporsmal.id}
                         label={
@@ -79,7 +79,7 @@ function DatoInput(props: SpmProps) {
                         error={errors[field.name] !== undefined}
                         data-cy={sporsmal.id}
                     />
-                </UNSAFE_DatePicker>
+                </DatePicker>
             </div>
 
             <TilbakeIArbeidBesvart sporsmal={sporsmal} fieldValue={field.value} />
