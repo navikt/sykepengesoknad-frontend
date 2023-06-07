@@ -1,4 +1,4 @@
-import { Label, UNSAFE_DatePicker, UNSAFE_useDatepicker } from '@navikt/ds-react'
+import { Label, DatePicker, useDatepicker } from '@navikt/ds-react'
 import React from 'react'
 import dayjs from 'dayjs'
 import weekOfYear from 'dayjs/plugin/weekOfYear'
@@ -13,7 +13,7 @@ const BehDager = ({ sporsmal }: SpmProps) => {
     const minDate = dayjs(sporsmal.undersporsmal[0].min).toDate()
     const maxDate = dayjs(sporsmal.undersporsmal[sporsmal.undersporsmal.length - 1].max).toDate()
 
-    const { inputProps } = UNSAFE_useDatepicker({
+    const { inputProps } = useDatepicker({
         openOnFocus: false,
     })
 
@@ -27,7 +27,7 @@ const BehDager = ({ sporsmal }: SpmProps) => {
                 name={sporsmal.id}
                 render={({ field }) => (
                     <>
-                        <UNSAFE_DatePicker.Standalone
+                        <DatePicker.Standalone
                             {...inputProps}
                             locale="nb"
                             selected={field.value}
@@ -58,7 +58,7 @@ const BehDager = ({ sporsmal }: SpmProps) => {
                                     }
                                 }
                             }}
-                        ></UNSAFE_DatePicker.Standalone>
+                        ></DatePicker.Standalone>
                     </>
                 )}
             />

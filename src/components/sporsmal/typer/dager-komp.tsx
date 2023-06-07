@@ -1,4 +1,4 @@
-import { Label, UNSAFE_DatePicker as DatePicker } from '@navikt/ds-react'
+import { Label, DatePicker } from '@navikt/ds-react'
 import dayjs from 'dayjs'
 import React from 'react'
 import { Controller } from 'react-hook-form'
