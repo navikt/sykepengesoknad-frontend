@@ -25,3 +25,23 @@
 // Cypress.Commands.overwrite("visit", (originalFn, url, options) => { ... })
 
 import 'cypress-file-upload'
+
+function disableAnimations(win: Cypress.AUTWindow) {
+    const injectedStyleEl = win.document.getElementById('__cy_disable_animations__')
+    if (injectedStyleEl) {
+        return
+    }
+    win.document.head.insertAdjacentHTML(
+        'beforeend',
+        `
+    <style id="__cy_disable_animations__">
+      *, *::before, *::after { transition: none !important; }
+      *, *::before, *::after { animation: none !important; }
+    </style>
+  `.trim(),
+    )
+}
+
+Cypress.on('window:before:load', (cyWindow) => {
+    disableAnimations(cyWindow)
+})
