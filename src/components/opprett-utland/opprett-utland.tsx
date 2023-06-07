@@ -2,7 +2,6 @@ import { Alert, BodyLong, Button, GuidePanel, Heading, Panel } from '@navikt/ds-
 import { logger } from '@navikt/next-logger'
 import React, { useState } from 'react'
 import { useQueryClient } from '@tanstack/react-query'
-import { useNavigate } from 'react-router'
 
 import { Soknad } from '../../types/types'
 import { AuthenticationError, fetchJsonMedRequestId } from '../../utils/fetch'
@@ -12,11 +11,12 @@ import Vis from '../vis'
 import { useUpdateBreadcrumbs } from '../../hooks/useBreadcrumbs'
 import { parserWithReplace } from '../../utils/html-react-parser-utils'
 import { LenkeMedIkon } from '../lenke-med-ikon/LenkeMedIkon'
+import {useRouter} from "next/router";
 
 const OpprettUtland = () => {
     const queryClient = useQueryClient()
     const [feilmeldingTekst, setFeilmeldingTekst] = useState<string>()
-    const navigate = useNavigate()
+    const router = useRouter()
 
     useUpdateBreadcrumbs(() => [{ ...{ title: tekst('opprett-utland.tittel') }, handleInApp: true }], [])
 
@@ -44,7 +44,7 @@ const OpprettUtland = () => {
         const soknad = new Soknad(data)
         queryClient.setQueriesData(['soknad', soknad.id], soknad)
         queryClient.invalidateQueries(['soknader'])
-        navigate(urlTilSoknad(soknad))
+        router.push(urlTilSoknad(soknad))
     }
 
     return (
