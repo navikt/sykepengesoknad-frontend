@@ -5,7 +5,6 @@ import { useParams } from 'react-router-dom'
 import { useQueryClient } from '@tanstack/react-query'
 import { useNavigate } from 'react-router'
 
-import { useAppStore } from '../../data/stores/app-store'
 import { Soknad } from '../../types/types'
 import { AuthenticationError, fetchJsonMedRequestId } from '../../utils/fetch'
 import { logEvent } from '../amplitude/amplitude'
@@ -23,7 +22,6 @@ const Endreknapp = () => {
     const queryClient = useQueryClient()
     const navigate = useNavigate()
 
-    const { setFeilmeldingTekst } = useAppStore()
     const [aapen, setAapen] = useState<boolean>(false)
     const [korrigerer, setKorrigerer] = useState<boolean>(false)
 
@@ -35,7 +33,6 @@ const Endreknapp = () => {
             return
         }
         setKorrigerer(true)
-        setFeilmeldingTekst('')
 
         let data
         try {
@@ -49,12 +46,10 @@ const Endreknapp = () => {
             )
         } catch (e: any) {
             if (!(e instanceof AuthenticationError)) {
-                setFeilmeldingTekst(EndreknappTekster['kvittering.korrigering.feilet'])
+                //TODO ble aldri vist, bruk mutation setFeilmeldingTekst(EndreknappTekster['kvittering.korrigering.feilet'])
                 logger.warn(e)
             }
             return
-        } finally {
-            setFeilmeldingTekst('')
         }
 
         const soknad = new Soknad(data)

@@ -7,7 +7,6 @@ import FilListe from '../../../filopplaster/fil-liste/fil-liste'
 import OpplastingForm from '../../../filopplaster/kvittering-modal/opplasting-form'
 import { SpmProps } from '../../sporsmal-form/sporsmal-form'
 import useSoknad from '../../../../hooks/useSoknad'
-import { useAppStore } from '../../../../data/stores/app-store'
 import { RouteParams } from '../../../../app'
 import { EkspanderbarHjelp } from '../../../hjelpetekster/ekspanderbar-hjelp/ekspanderbar-hjelp'
 
@@ -15,12 +14,10 @@ const Opplasting = ({ sporsmal }: SpmProps) => {
     const { id } = useParams<RouteParams>()
     const { data: valgtSoknad } = useSoknad(id)
 
-    const { setFeilmeldingTekst } = useAppStore()
     const [openModal, setOpenModal] = useState<boolean>(false)
 
     const aktiverModal = () => {
         setOpenModal(true)
-        setFeilmeldingTekst('')
     }
 
     const lukkModal = () => {
