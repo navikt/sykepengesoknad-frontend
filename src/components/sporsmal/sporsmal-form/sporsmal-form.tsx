@@ -5,7 +5,6 @@ import { useLocation, useParams } from 'react-router-dom'
 import { useQueryClient } from '@tanstack/react-query'
 import { useNavigate } from 'react-router'
 
-import { useAppStore } from '../../../data/stores/app-store'
 import { TagTyper } from '../../../types/enums'
 import { RSOppdaterSporsmalResponse } from '../../../types/rs-types/rest-response/rs-oppdatersporsmalresponse'
 import { RSSoknadstype } from '../../../types/rs-types/rs-soknadstype'
@@ -31,6 +30,7 @@ import { RSSoknadstatus } from '../../../types/rs-types/rs-soknadstatus'
 import { harLikeSvar } from '../endring-uten-endring/har-like-svar'
 import { useSendSoknad } from '../../../hooks/useSendSoknad'
 import { RouteParams } from '../../../app'
+import { RSMottaker } from '../../../types/rs-types/rs-mottaker'
 
 import Knapperad from './knapperad'
 import SendesTil from './sendes-til'
@@ -48,8 +48,7 @@ const SporsmalForm = () => {
     const queryClient = useQueryClient()
     const navigate = useNavigate()
     const location = useLocation()
-
-    const { setMottaker, setFeilState } = useAppStore()
+    const [mottaker, setMottaker] = useState<RSMottaker>()
 
     const [erSiste, setErSiste] = useState<boolean>(false)
     const [poster, setPoster] = useState<boolean>(false)
@@ -112,7 +111,7 @@ const SporsmalForm = () => {
                 (response, requestId, defaultErrorHandler) => {
                     if (response.status === 400) {
                         fikk400 = true
-                        setFeilState(true)
+                        navigate('/feil-state')
                     }
                     restFeilet = true
                     defaultErrorHandler()
@@ -252,7 +251,7 @@ const SporsmalForm = () => {
                                 <Oppsummering ekspandert={false} sporsmal={valgtSoknad.sporsmal} />
                                 <Opplysninger ekspandert={false} steg={sporsmal.tag} />
                                 <CheckboxPanel sporsmal={nesteSporsmal} />
-                                <SendesTil soknad={valgtSoknad} />
+                                <SendesTil soknad={valgtSoknad} mottaker={mottaker} />
                             </>
                         )}
                     />

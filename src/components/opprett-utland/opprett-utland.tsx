@@ -1,10 +1,9 @@
 import { Alert, BodyLong, Button, GuidePanel, Heading, Panel } from '@navikt/ds-react'
 import { logger } from '@navikt/next-logger'
-import React from 'react'
+import React, { useState } from 'react'
 import { useQueryClient } from '@tanstack/react-query'
 import { useNavigate } from 'react-router'
 
-import { useAppStore } from '../../data/stores/app-store'
 import { Soknad } from '../../types/types'
 import { AuthenticationError, fetchJsonMedRequestId } from '../../utils/fetch'
 import { tekst } from '../../utils/tekster'
@@ -16,7 +15,7 @@ import { LenkeMedIkon } from '../lenke-med-ikon/LenkeMedIkon'
 
 const OpprettUtland = () => {
     const queryClient = useQueryClient()
-    const { setFeilmeldingTekst, feilmeldingTekst } = useAppStore()
+    const [feilmeldingTekst, setFeilmeldingTekst] = useState<string>()
     const navigate = useNavigate()
 
     useUpdateBreadcrumbs(() => [{ ...{ title: tekst('opprett-utland.tittel') }, handleInApp: true }], [])
