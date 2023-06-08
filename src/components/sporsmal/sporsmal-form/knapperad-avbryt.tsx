@@ -1,10 +1,9 @@
-import { Button } from '@navikt/ds-react'
-import React, { MouseEvent } from 'react'
+import { Alert, Button } from '@navikt/ds-react'
+import React, { MouseEvent, useState } from 'react'
 import { useParams } from 'react-router-dom'
 import { useQueryClient } from '@tanstack/react-query'
 import { useNavigate } from 'react-router'
 
-import { useAppStore } from '../../../data/stores/app-store'
 import { tekst } from '../../../utils/tekster'
 import { avbrytSoknad } from '../../avbryt-soknad-modal/avbryt-soknad'
 import useSoknad from '../../../hooks/useSoknad'
@@ -20,12 +19,13 @@ const KnapperadAvbryt = () => {
     const queryClient = useQueryClient()
     const navigate = useNavigate()
 
-    const { setFeilmeldingTekst } = useAppStore()
+    const [feilmeldingTekst, setFeilmeldingTekst] = useState<string>()
 
     if (!valgtSoknad || !soknader) return null
 
     const handleAvbryt = (event: Event) => {
         event.preventDefault()
+        setFeilmeldingTekst(undefined)
 
         avbrytSoknad({
             valgtSoknad: valgtSoknad,
@@ -37,9 +37,16 @@ const KnapperadAvbryt = () => {
     }
 
     return (
-        <Button variant="danger" type="button" onClick={handleAvbryt} data-cy="avbryt-soknad">
-            {tekst('sykepengesoknad.avbryt.simpel')}
-        </Button>
+        <>
+            <Button variant="danger" type="button" onClick={handleAvbryt} data-cy="avbryt-soknad">
+                {tekst('sykepengesoknad.avbryt.simpel')}
+            </Button>
+            {feilmeldingTekst && (
+                <Alert variant="error" className="mt-4">
+                    {feilmeldingTekst}
+                </Alert>
+            )}
+        </>
     )
 }
 

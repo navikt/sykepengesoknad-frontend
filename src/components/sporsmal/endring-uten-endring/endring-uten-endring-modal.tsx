@@ -1,10 +1,9 @@
-import { BodyShort, Button, Heading, Modal } from '@navikt/ds-react'
-import React from 'react'
+import { Alert, BodyShort, Button, Heading, Modal } from '@navikt/ds-react'
+import React, { useState } from 'react'
 import { useParams } from 'react-router-dom'
 import { useQueryClient } from '@tanstack/react-query'
 import { useNavigate } from 'react-router'
 
-import { useAppStore } from '../../../data/stores/app-store'
 import { tekst } from '../../../utils/tekster'
 import { avbrytSoknad } from '../../avbryt-soknad-modal/avbryt-soknad'
 import useSoknad from '../../../hooks/useSoknad'
@@ -24,7 +23,7 @@ export const EndringUtenEndringModal = (props: EndringUtenEndringModalProps) => 
     const queryClient = useQueryClient()
     const navigate = useNavigate()
 
-    const { setFeilmeldingTekst } = useAppStore()
+    const [feilmeldingTekst, setFeilmeldingTekst] = useState<string>()
 
     if (!valgtSoknad || !soknader) return null
 
@@ -49,7 +48,7 @@ export const EndringUtenEndringModal = (props: EndringUtenEndringModalProps) => 
                         variant="primary"
                         className="ml-auto mr-auto block"
                         onClick={() => {
-                            props.setAapen(false)
+                            setFeilmeldingTekst(undefined)
                             logEvent('knapp klikket', {
                                 tekst: tekst('endring-uten-endring.popup.ok'),
                                 soknadstype: valgtSoknad.soknadstype,
@@ -60,12 +59,20 @@ export const EndringUtenEndringModal = (props: EndringUtenEndringModalProps) => 
                                 soknader: soknader,
                                 queryClient: queryClient,
                                 navigate: navigate,
-                                setFeilmeldingTekst: setFeilmeldingTekst,
+                                setFeilmeldingTekst,
+                                onSuccess: () => {
+                                    props.setAapen(false)
+                                },
                             })
                         }}
                     >
                         {tekst('endring-uten-endring.popup.ok')}
                     </Button>
+                    {feilmeldingTekst && (
+                        <Alert variant="error" className="mt-4">
+                            {feilmeldingTekst}
+                        </Alert>
+                    )}
                 </Modal.Content>
             </Modal>
         </>

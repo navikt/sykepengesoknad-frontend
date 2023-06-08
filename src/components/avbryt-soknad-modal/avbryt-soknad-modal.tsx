@@ -1,10 +1,9 @@
-import { BodyLong, Button } from '@navikt/ds-react'
+import { Alert, BodyLong, Button } from '@navikt/ds-react'
 import React, { useState } from 'react'
 import { useParams } from 'react-router-dom'
 import { useQueryClient } from '@tanstack/react-query'
 import { useNavigate } from 'react-router'
 
-import { useAppStore } from '../../data/stores/app-store'
 import { RSSoknadstatus } from '../../types/rs-types/rs-soknadstatus'
 import { tekst } from '../../utils/tekster'
 import { logEvent } from '../amplitude/amplitude'
@@ -54,7 +53,7 @@ const AvbrytSoknadModal = () => {
     const navigate = useNavigate()
 
     const [aapen, setAapen] = useState<boolean>(false)
-    const { setFeilmeldingTekst } = useAppStore()
+    const [feilmeldingTekst, setFeilmeldingTekst] = useState<string>()
 
     if (!valgtSoknad || !soknader) {
         return null
@@ -87,6 +86,8 @@ const AvbrytSoknadModal = () => {
                 headerId="avbryt-soknad"
                 header={tekst('avbryt.popup.tittel')}
                 onClose={() => {
+                    setFeilmeldingTekst(undefined)
+
                     logEvent('modal lukket', {
                         component: tekst('avbryt.popup.tittel'),
                         soknadstype: valgtSoknad.soknadstype,
@@ -102,6 +103,8 @@ const AvbrytSoknadModal = () => {
                     variant="danger"
                     className="mt-4"
                     onClick={() => {
+                        setFeilmeldingTekst(undefined)
+
                         logEvent('knapp klikket', {
                             tekst: tekst('avbryt.popup.ja'),
                             soknadstype: valgtSoknad.soknadstype,
@@ -123,6 +126,8 @@ const AvbrytSoknadModal = () => {
                     variant="secondary"
                     className="mt-4 block"
                     onClick={() => {
+                        setFeilmeldingTekst(undefined)
+
                         setAapen(false)
                         logEvent('knapp klikket', {
                             tekst: tekst('avbryt.popup.nei'),
@@ -134,6 +139,11 @@ const AvbrytSoknadModal = () => {
                 >
                     {tekst('avbryt.popup.nei')}
                 </Button>
+                {feilmeldingTekst && (
+                    <Alert variant="error" className="mt-4">
+                        {feilmeldingTekst}
+                    </Alert>
+                )}
             </FlexModal>
         </>
     )

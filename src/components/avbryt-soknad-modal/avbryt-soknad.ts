@@ -16,7 +16,8 @@ interface AvbrytSoknadRequest {
     soknader: RSSoknadmetadata[]
     queryClient: QueryClient
     navigate: NavigateFunction
-    setFeilmeldingTekst: React.Dispatch<React.SetStateAction<string>>
+    setFeilmeldingTekst: React.Dispatch<React.SetStateAction<string | undefined>>
+    onSuccess?: () => void
 }
 
 export async function avbrytSoknad({
@@ -25,6 +26,7 @@ export async function avbrytSoknad({
     queryClient,
     navigate,
     setFeilmeldingTekst,
+    onSuccess,
 }: AvbrytSoknadRequest) {
     try {
         await fetchMedRequestId(
@@ -40,10 +42,10 @@ export async function avbrytSoknad({
             logger.warn(e)
         }
         return
-    } finally {
-        setFeilmeldingTekst('')
     }
-
+    if (onSuccess) {
+        onSuccess()
+    }
     if (
         valgtSoknad.soknadstype === RSSoknadstype.OPPHOLD_UTLAND ||
         valgtSoknad.status === RSSoknadstatus.UTKAST_TIL_KORRIGERING
