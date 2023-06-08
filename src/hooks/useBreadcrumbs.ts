@@ -91,6 +91,7 @@ export enum SsrPathVariants {
     NotFound = '/404',
     ServerError = '/500',
     App = '/[[...app]]',
+    SykepengesoknadUtland = '/sykepengesoknad-utland',
 }
 
 export function createInitialServerSideBreadcrumbs(
@@ -101,6 +102,7 @@ export function createInitialServerSideBreadcrumbs(
         case SsrPathVariants.Root:
         case SsrPathVariants.NotFound:
         case SsrPathVariants.ServerError:
+        case SsrPathVariants.SykepengesoknadUtland:
         case SsrPathVariants.App:
             return createCompleteCrumbs([], skapTestpersonQuery(query))
         default:
