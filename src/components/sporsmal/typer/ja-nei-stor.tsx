@@ -1,7 +1,7 @@
 import { Alert, BodyLong, Radio, RadioGroup } from '@navikt/ds-react'
 import { Controller, useFormContext } from 'react-hook-form'
-import { useParams } from 'react-router-dom'
 import React from 'react'
+import { useRouter } from 'next/router'
 
 import { TagTyper } from '../../../types/enums'
 import { getLedetekst, tekst } from '../../../utils/tekster'
@@ -18,7 +18,6 @@ import { parserWithReplace } from '../../../utils/html-react-parser-utils'
 import { PaskeferieInfo } from '../../hjelpetekster/paaskeferie/paskeferie-info'
 import useSoknad from '../../../hooks/useSoknad'
 import { RSSoknadstatus } from '../../../types/rs-types/rs-soknadstatus'
-import { RouteParams } from '../../../app'
 import { cn } from '../../../utils/tw-utils'
 import { YrkesskadeInfo } from '../../hjelpetekster/yrkesskade-info'
 import { useJaNeiKeyboardNavigation } from '../../../utils/keyboard-navigation'
@@ -31,7 +30,8 @@ const JaNeiStor = ({ sporsmal }: SpmProps) => {
         watch,
         getValues,
     } = useFormContext()
-    const { id } = useParams<RouteParams>()
+    const router = useRouter()
+    const { id } = router.query as { id: string }
     const { data: valgtSoknad } = useSoknad(id)
 
     const feilmelding = hentFeilmelding(sporsmal, errors[sporsmal.id])

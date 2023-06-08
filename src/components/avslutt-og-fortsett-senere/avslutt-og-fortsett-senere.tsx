@@ -1,18 +1,17 @@
 import { BodyShort, Button } from '@navikt/ds-react'
 import React, { useState } from 'react'
-import { useParams } from 'react-router-dom'
+import { useRouter } from 'next/router'
 
 import { minSideUrl } from '../../utils/environment'
 import { tekst } from '../../utils/tekster'
 import { logEvent } from '../amplitude/amplitude'
 import useSoknad from '../../hooks/useSoknad'
-import { RouteParams } from '../../app'
 import { FlexModal } from '../flex-modal'
 
 const AvsluttOgFortsettSenere = () => {
-    const { id, stegId } = useParams<RouteParams>()
+    const router = useRouter()
+    const { id, stegId } = router.query as { id: string; stegId: string }
     const { data: valgtSoknad } = useSoknad(id)
-
     const [aapen, setAapen] = useState<boolean>(false)
 
     if (!valgtSoknad) return null

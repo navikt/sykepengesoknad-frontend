@@ -1,6 +1,6 @@
 import { Button } from '@navikt/ds-react'
 import React from 'react'
-import { useParams } from 'react-router-dom'
+import { useRouter } from 'next/router'
 
 import { RSSoknadstatus } from '../../../types/rs-types/rs-soknadstatus'
 import { RSSoknadstype } from '../../../types/rs-types/rs-soknadstype'
@@ -10,7 +10,6 @@ import AvsluttOgFortsettSenere from '../../avslutt-og-fortsett-senere/avslutt-og
 import PersonvernLesMer from '../../soknad-intro/personvern-les-mer'
 import Vis from '../../vis'
 import { Soknad } from '../../../types/types'
-import { RouteParams } from '../../../app'
 
 interface KnapperadProps {
     soknad: Soknad
@@ -18,8 +17,8 @@ interface KnapperadProps {
 }
 
 const Knapperad = ({ soknad, poster }: KnapperadProps) => {
-    const { stegId } = useParams<RouteParams>()
-
+    const router = useRouter()
+    const { stegId } = router.query as { id: string; stegId: string }
     const stegNo = parseInt(stegId!)
     const spmIndex = stegNo - 2
     const erUtlandssoknad = soknad.soknadstype === RSSoknadstype.OPPHOLD_UTLAND

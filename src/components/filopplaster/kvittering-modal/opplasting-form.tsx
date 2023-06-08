@@ -3,10 +3,9 @@ import { logger } from '@navikt/next-logger'
 import dayjs from 'dayjs'
 import React, { useState } from 'react'
 import { FormProvider, useForm } from 'react-hook-form'
-import { useParams } from 'react-router-dom'
 import { useQueryClient } from '@tanstack/react-query'
+import { useRouter } from 'next/router'
 
-import { RouteParams } from '../../../app'
 import { RSSvar } from '../../../types/rs-types/rs-svar'
 import { Kvittering, Soknad, UtgiftTyper } from '../../../types/types'
 import { AuthenticationError, fetchJsonMedRequestId } from '../../../utils/fetch'
@@ -16,6 +15,7 @@ import Vis from '../../vis'
 import DragAndDrop from '../drag-and-drop/drag-and-drop'
 
 import OpplastingTekster from './opplasting-tekster'
+
 interface OpplastetKvittering {
     id: string
 }
@@ -26,7 +26,8 @@ export interface OpplastingFromProps {
 }
 
 const OpplastingForm = ({ valgtSoknad, setOpenModal }: OpplastingFromProps) => {
-    const { stegId } = useParams<RouteParams>()
+    const router = useRouter()
+    const { stegId } = router.query as { id: string; stegId: string }
     const queryClient = useQueryClient()
 
     const [laster, setLaster] = useState<boolean>(false)

@@ -1,7 +1,7 @@
 import { Alert, BodyLong, BodyShort, ReadMore, RadioGroup, Radio } from '@navikt/ds-react'
 import React from 'react'
 import { useFormContext, Controller } from 'react-hook-form'
-import { useParams } from 'react-router'
+import { useRouter } from 'next/router'
 
 import { TagTyper } from '../../../types/enums'
 import { rodeUkeDagerIPerioden } from '../../../utils/helligdager-utils'
@@ -12,7 +12,6 @@ import Vis from '../../vis'
 import { SpmProps } from '../sporsmal-form/sporsmal-form'
 import { hentFeilmelding } from '../sporsmal-utils'
 import UndersporsmalListe from '../undersporsmal/undersporsmal-liste'
-import { RouteParams } from '../../../app'
 import useSoknad from '../../../hooks/useSoknad'
 
 const RadioKomp = ({ sporsmal }: SpmProps) => {
@@ -32,7 +31,8 @@ const RadioKomp = ({ sporsmal }: SpmProps) => {
     const errorTimer = errors[hentUndersporsmal(sporsmal!, TagTyper.HVOR_MYE_TIMER_VERDI)!.id]
 
     const feilmelding = hentFeilmelding(sporsmal)
-    const { id } = useParams<RouteParams>()
+    const router = useRouter()
+    const { id } = router.query as { id: string }
     const { data: valgtSoknad } = useSoknad(id)
     const { validerGrad, beregnGrad } = validerArbeidsgrad(sporsmal)
 

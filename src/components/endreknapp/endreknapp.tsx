@@ -1,26 +1,24 @@
 import { BodyShort, Button } from '@navikt/ds-react'
 import { logger } from '@navikt/next-logger'
 import React, { useState } from 'react'
-import { useParams } from 'react-router-dom'
 import { useQueryClient } from '@tanstack/react-query'
-import { useNavigate } from 'react-router'
+import { useRouter } from 'next/router'
 
 import { Soknad } from '../../types/types'
 import { AuthenticationError, fetchJsonMedRequestId } from '../../utils/fetch'
 import { logEvent } from '../amplitude/amplitude'
 import { urlTilSoknad } from '../soknad/soknad-link'
 import useSoknad from '../../hooks/useSoknad'
-import { RouteParams } from '../../app'
 import { LenkeMedIkon } from '../lenke-med-ikon/LenkeMedIkon'
 import { FlexModal } from '../flex-modal'
 
 import { EndreknappTekster } from './endreknapp-tekster'
 
 const Endreknapp = () => {
-    const { id } = useParams<RouteParams>()
+    const router = useRouter()
+    const { id } = router.query as { id: string; stegId: string }
     const { data: valgtSoknad } = useSoknad(id)
     const queryClient = useQueryClient()
-    const navigate = useNavigate()
 
     const [aapen, setAapen] = useState<boolean>(false)
     const [korrigerer, setKorrigerer] = useState<boolean>(false)
@@ -56,7 +54,7 @@ const Endreknapp = () => {
         queryClient.setQueriesData(['soknad', soknad.id], soknad)
         queryClient.invalidateQueries(['soknader'])
         setAapen(false)
-        navigate(urlTilSoknad(soknad))
+        await router.push(urlTilSoknad(soknad))
     }
 
     const ModalInnhold = () => {

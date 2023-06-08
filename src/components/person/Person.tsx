@@ -1,7 +1,7 @@
 import { BodyShort, Button, Link, Popover } from '@navikt/ds-react'
 import React, { useRef, useState } from 'react'
 import { PersonCircleIcon } from '@navikt/aksel-icons'
-import { useNavigate } from 'react-router'
+import { useRouter } from 'next/router'
 
 import { isMockBackend, isOpplaering } from '../../utils/environment'
 import { PersonaKeys } from '../../data/mock/testperson'
@@ -10,7 +10,8 @@ const Person = () => {
     const [open, setOpen] = useState<boolean>(false)
     const person = useRef<HTMLButtonElement>(null)
     const kanVelgePerson = isMockBackend() || isOpplaering()
-    const navigate = useNavigate()
+    const router = useRouter()
+
     if (!kanVelgePerson) return null
 
     return (
@@ -20,7 +21,8 @@ const Person = () => {
                 className="hidden"
                 onClick={(e) => {
                     e.preventDefault()
-                    navigate('/')
+
+                    router.push('/')
                 }}
             >
                 TestLink
