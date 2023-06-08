@@ -1,8 +1,8 @@
-import { BodyShort } from '@navikt/ds-react'
+import { BodyShort, Link } from '@navikt/ds-react'
 import React from 'react'
 import { ArrowLeftIcon } from '@navikt/aksel-icons'
 import { useRouter } from 'next/router'
-import Link from 'next/link'
+import NextLink from 'next/link'
 
 import { TagTyper } from '../../../types/enums'
 import useSoknad from '../../../hooks/useSoknad'
@@ -18,9 +18,8 @@ const TilbakeKnapp = ({ soknad, stegNo }: { soknad: Soknad; stegNo: number }) =>
     }
 
     return (
-        <Link href={`/soknader/${soknad.id}${SEPARATOR}${stegNo - 1}${window.location.search}`}>
-            <a
-                className="navds-link"
+        <NextLink legacyBehavior href={`/soknader/${soknad.id}${SEPARATOR}${stegNo - 1}${window.location.search}`}>
+            <Link
                 onClick={() => {
                     logEvent('navigere', {
                         lenketekst: tekst('soknad.tilbakeknapp'),
@@ -33,8 +32,8 @@ const TilbakeKnapp = ({ soknad, stegNo }: { soknad: Soknad; stegNo: number }) =>
             >
                 <ArrowLeftIcon />
                 <BodyShort as="span">{tekst('soknad.tilbakeknapp')}</BodyShort>
-            </a>
-        </Link>
+            </Link>
+        </NextLink>
     )
 }
 
@@ -43,6 +42,7 @@ const Fremdriftsbar = () => {
     const { id, stegId } = router.query as { id: string; stegId: string }
     const { data: valgtSoknad } = useSoknad(id)
     const stegNo = parseInt(stegId!)
+    if (!valgtSoknad || !stegId) return null
 
     const aktivtSteg = parseInt(stegId!)
     const steg = valgtSoknad!.sporsmal.filter((s) => s.tag !== TagTyper.VAER_KLAR_OVER_AT)
@@ -50,7 +50,6 @@ const Fremdriftsbar = () => {
     const style = {
         width: `${(100 / antallSteg) * stegNo}%`,
     }
-    if (!valgtSoknad || !stegId) return null
     return (
         <div
             className="my-4 md:my-6"

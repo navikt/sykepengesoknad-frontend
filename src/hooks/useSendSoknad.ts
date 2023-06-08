@@ -5,6 +5,7 @@ import { FetchError } from '../utils/fetch'
 import fetchMedRequestId from '../utils/fetch'
 
 import useSoknad from './useSoknad'
+import {urlTilSoknad} from "../components/soknad/soknad-link";
 
 export function useSendSoknad() {
     const router = useRouter()
@@ -36,6 +37,7 @@ export function useSendSoknad() {
             if (valgtSoknad.korrigerer !== undefined) {
                 queryClient.invalidateQueries(['soknad', valgtSoknad.korrigerer]).catch()
             }
+            router.push(`/kvittering/${valgtSoknad.id}${window.location.search}`, undefined, { shallow: true })
         },
     })
 }

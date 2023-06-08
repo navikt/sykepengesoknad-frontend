@@ -219,7 +219,7 @@ const SporsmalForm = () => {
                 sporsmal = valgtSoknad!.sporsmal[spmIndex]
             } else {
                 methods.clearErrors()
-                await router.push(pathUtenSteg(router.pathname) + SEPARATOR + (spmIndex + 2))
+                await router.push(pathUtenSteg(router.asPath) + SEPARATOR + (spmIndex + 2))
             }
         } finally {
             setPoster(false)
