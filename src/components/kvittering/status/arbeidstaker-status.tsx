@@ -1,18 +1,18 @@
 import { Detail } from '@navikt/ds-react'
 import dayjs from 'dayjs'
 import React from 'react'
-import { useParams } from 'react-router-dom'
+import { useRouter } from 'next/router'
 
 import { tekst } from '../../../utils/tekster'
 import Vis from '../../vis'
 import useSoknad from '../../../hooks/useSoknad'
-import { RouteParams } from '../../../app'
 import Avkrysset from '../../oppsummering/utdrag/avkrysset'
 
 import { Mottaker } from './kvittering-status'
 
 const ArbeidstakerStatus = () => {
-    const { id } = useParams<RouteParams>()
+    const router = useRouter()
+    const { id } = router.query as { id: string; stegId: string }
     const { data: valgtSoknad } = useSoknad(id)
 
     let medKopi = tekst('kvittering.med-kopi-til-nav')

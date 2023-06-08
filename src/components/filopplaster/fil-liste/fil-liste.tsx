@@ -1,6 +1,6 @@
 import React from 'react'
-import { useParams } from 'react-router-dom'
 import { Table } from '@navikt/ds-react'
+import { useRouter } from 'next/router'
 
 import { Kvittering } from '../../../types/types'
 import { getLedetekst, tekst } from '../../../utils/tekster'
@@ -8,12 +8,12 @@ import { formatterTall } from '../../../utils/utils'
 import { hentSvar } from '../../sporsmal/hent-svar'
 import Vis from '../../vis'
 import useSoknad from '../../../hooks/useSoknad'
-import { RouteParams } from '../../../app'
 
 import KvitteringListeVisning from './kvittering-listevisning'
 
 const FilListe = () => {
-    const { id, stegId } = useParams<RouteParams>()
+    const router = useRouter()
+    const { id, stegId } = router.query as { id: string; stegId: string }
     const { data: valgtSoknad } = useSoknad(id)
 
     const stegNum = Number(stegId)

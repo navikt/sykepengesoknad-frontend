@@ -19,6 +19,7 @@ const RadioKomp = ({ sporsmal }: SpmProps) => {
 
     const feilmelding = hentFeilmelding(sporsmal)
 
+
     return (
         <>
             <Controller

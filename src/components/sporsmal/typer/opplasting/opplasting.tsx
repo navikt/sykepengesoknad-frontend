@@ -1,17 +1,17 @@
 import { BodyShort, Button, Label, Modal } from '@navikt/ds-react'
 import React, { useState } from 'react'
-import { useParams } from 'react-router-dom'
+import { useRouter } from 'next/router'
 
 import { tekst } from '../../../../utils/tekster'
 import FilListe from '../../../filopplaster/fil-liste/fil-liste'
 import OpplastingForm from '../../../filopplaster/kvittering-modal/opplasting-form'
 import { SpmProps } from '../../sporsmal-form/sporsmal-form'
 import useSoknad from '../../../../hooks/useSoknad'
-import { RouteParams } from '../../../../app'
 import { EkspanderbarHjelp } from '../../../hjelpetekster/ekspanderbar-hjelp/ekspanderbar-hjelp'
 
 const Opplasting = ({ sporsmal }: SpmProps) => {
-    const { id } = useParams<RouteParams>()
+    const router = useRouter()
+    const { id } = router.query as { id: string }
     const { data: valgtSoknad } = useSoknad(id)
 
     const [openModal, setOpenModal] = useState<boolean>(false)

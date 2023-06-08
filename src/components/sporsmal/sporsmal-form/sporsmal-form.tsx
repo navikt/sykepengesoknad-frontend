@@ -1,9 +1,8 @@
 import { logger } from '@navikt/next-logger'
 import React, { useCallback, useEffect, useState } from 'react'
 import { FormProvider, useForm } from 'react-hook-form'
-import { useLocation, useParams } from 'react-router-dom'
 import { useQueryClient } from '@tanstack/react-query'
-import { useNavigate } from 'react-router'
+import { useRouter } from 'next/router'
 
 import { TagTyper } from '../../../types/enums'
 import { RSOppdaterSporsmalResponse } from '../../../types/rs-types/rest-response/rs-oppdatersporsmalresponse'
@@ -29,7 +28,6 @@ import useSoknad from '../../../hooks/useSoknad'
 import { RSSoknadstatus } from '../../../types/rs-types/rs-soknadstatus'
 import { harLikeSvar } from '../endring-uten-endring/har-like-svar'
 import { useSendSoknad } from '../../../hooks/useSendSoknad'
-import { RouteParams } from '../../../app'
 import { RSMottaker } from '../../../types/rs-types/rs-mottaker'
 
 import Knapperad from './knapperad'
@@ -41,13 +39,13 @@ export interface SpmProps {
 }
 
 const SporsmalForm = () => {
-    const { id, stegId } = useParams<RouteParams>()
+    const router = useRouter()
+    const { id, stegId } = router.query as { id: string; stegId: string }
     const { data: valgtSoknad } = useSoknad(id)
     const { mutate: sendSoknadMutation, isLoading: senderSoknad, error: sendError } = useSendSoknad()
     const { data: korrigerer } = useSoknad(valgtSoknad?.korrigerer, valgtSoknad?.korrigerer !== undefined)
     const queryClient = useQueryClient()
-    const navigate = useNavigate()
-    const location = useLocation()
+
     const [mottaker, setMottaker] = useState<RSMottaker>()
 
     const [erSiste, setErSiste] = useState<boolean>(false)
@@ -111,7 +109,7 @@ const SporsmalForm = () => {
                 (response, requestId, defaultErrorHandler) => {
                     if (response.status === 400) {
                         fikk400 = true
-                        navigate('/feil-state')
+                        router.push('/feil-state')
                     }
                     restFeilet = true
                     defaultErrorHandler()
@@ -221,7 +219,7 @@ const SporsmalForm = () => {
                 sporsmal = valgtSoknad!.sporsmal[spmIndex]
             } else {
                 methods.clearErrors()
-                navigate(pathUtenSteg(location.pathname) + SEPARATOR + (spmIndex + 2) + location.search)
+                await router.push(pathUtenSteg(router.pathname) + SEPARATOR + (spmIndex + 2))
             }
         } finally {
             setPoster(false)

@@ -1,6 +1,6 @@
 import { Button, GuidePanel, Heading } from '@navikt/ds-react'
 import React, { CSSProperties } from 'react'
-import { useNavigate } from 'react-router'
+import { useRouter } from 'next/router'
 
 import { RSSoknadstatus } from '../../types/rs-types/rs-soknadstatus'
 import { RSSoknadstype } from '../../types/rs-types/rs-soknadstype'
@@ -17,7 +17,7 @@ interface Props {
 }
 
 export const GjenstaendeSoknader = ({ soknader, style }: Props) => {
-    const navigate = useNavigate()
+    const router = useRouter()
 
     if (soknader.length == 0) {
         return null
@@ -54,12 +54,12 @@ export const GjenstaendeSoknader = ({ soknader, style }: Props) => {
             {innhold}
             <Button
                 style={{ display: 'block', marginTop: '1em' }}
-                onClick={() => {
+                onClick={async () => {
                     logEvent('knapp klikket', {
                         tekst: knappetekst(),
                         komponent,
                     })
-                    navigate(urlTilSoknad(soknader[0]))
+                    await router.push(urlTilSoknad(soknader[0]))
                 }}
             >
                 {knappetekst()}

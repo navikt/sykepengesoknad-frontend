@@ -1,4 +1,3 @@
-/* eslint-disable postcss-modules/no-unused-class */
 import '../style/global.css'
 
 import { configureLogger } from '@navikt/next-logger'
@@ -6,14 +5,15 @@ import dayjs from 'dayjs'
 import nb from 'dayjs/locale/nb'
 import type { AppProps as NextAppProps } from 'next/app'
 import Head from 'next/head'
-import React, { PropsWithChildren } from 'react'
+import React, { PropsWithChildren, useEffect } from 'react'
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
+import { Modal } from '@navikt/ds-react'
 
 import { useFangHotjarEmotion } from '../hooks/useFangHotjarEmotion'
 import { useHandleDecoratorClicks } from '../hooks/useBreadcrumbs'
 import { LabsWarning } from '../components/labs-warning/LabsWarning'
+import { isMockBackend, basePath } from '../utils/environment'
 import { getFaro, initInstrumentation, pinoLevelToFaroLevel } from '../faro/faro'
-import { basePath } from '../utils/environment'
 
 interface AppProps extends Omit<NextAppProps, 'pageProps'> {
     pageProps: PropsWithChildren<unknown>
@@ -37,6 +37,12 @@ function MyApp({ Component, pageProps }: AppProps): JSX.Element {
     useHandleDecoratorClicks()
     useFangHotjarEmotion()
 
+    useEffect(() => {
+        if (isMockBackend()) {
+            require('../data/mock/mocksetup')
+        }
+    })
+
     const queryClient = new QueryClient({
         defaultOptions: {
             queries: {
@@ -47,6 +53,8 @@ function MyApp({ Component, pageProps }: AppProps): JSX.Element {
             },
         },
     })
+
+    Modal.setAppElement('#root')
 
     return (
         <>
