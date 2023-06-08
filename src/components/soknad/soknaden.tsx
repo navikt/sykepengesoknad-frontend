@@ -70,7 +70,7 @@ export const Soknaden = () => {
             soknadstype: valgtSoknad.soknadstype,
             soknadstatus: valgtSoknad.status,
         })
-    }, [])
+    }, [router, stegId, valgtSoknad])
 
     if (!valgtSoknad || !soknader || !sykmeldinger || !stegId) {
         return <QueryStatusPanel valgSoknadId={id} valgSykmeldingId={valgtSoknad?.sykmeldingId} />
