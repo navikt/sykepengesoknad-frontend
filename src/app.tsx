@@ -11,7 +11,6 @@ import SendtSide from './components/sendt/sendt-side'
 import Soknad from './components/soknad/soknaden'
 import Listevisning from './components/listevisning/listevisning'
 import Vedlikehold from './components/vedlikehold/vedlikehold'
-import StoreProvider from './data/stores/store-provider'
 import { isMockBackend, vedlikehold } from './utils/environment'
 
 export type RouteParams = {
@@ -41,21 +40,19 @@ const App = (): any => {
     return (
         <BrowserRouter basename="/syk/sykepengesoknad">
             <OnUrlChange>
-                <StoreProvider>
-                    <main id="maincontent" role="main" tabIndex={-1}>
-                        <Routes>
-                            <Route path="/" element={<Listevisning />} />
-                            <Route path="soknader" element={<Listevisning />} />
-                            <Route path="soknader/:id" element={<Soknad />} />
-                            <Route path="soknader/:id/:stegId" element={<Soknad />} />
-                            <Route path="avbrutt/:id" element={<AvbruttSoknad />} />
-                            <Route path="kvittering/:id" element={<KvitteringSide />} />
-                            <Route path="sendt/:id" element={<SendtSide />} />
-                            <Route path="sykepengesoknad-utland" element={<OpprettUtland />} />
-                            <Route path="feil-state" element={<FeilStateView />} />
-                        </Routes>
-                    </main>
-                </StoreProvider>
+                <main id="maincontent" role="main" tabIndex={-1}>
+                    <Routes>
+                        <Route path="/" element={<Listevisning />} />
+                        <Route path="soknader" element={<Listevisning />} />
+                        <Route path="soknader/:id" element={<Soknad />} />
+                        <Route path="soknader/:id/:stegId" element={<Soknad />} />
+                        <Route path="avbrutt/:id" element={<AvbruttSoknad />} />
+                        <Route path="kvittering/:id" element={<KvitteringSide />} />
+                        <Route path="sendt/:id" element={<SendtSide />} />
+                        <Route path="sykepengesoknad-utland" element={<OpprettUtland />} />
+                        <Route path="feil-state" element={<FeilStateView />} />
+                    </Routes>
+                </main>
             </OnUrlChange>
         </BrowserRouter>
     )

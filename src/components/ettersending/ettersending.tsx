@@ -4,7 +4,6 @@ import React, { useState } from 'react'
 import { useParams } from 'react-router-dom'
 import { useQueryClient } from '@tanstack/react-query'
 
-import { useAppStore } from '../../data/stores/app-store'
 import fetchMedRequestId, { AuthenticationError } from '../../utils/fetch'
 import { tekst } from '../../utils/tekster'
 import useSoknad from '../../hooks/useSoknad'
@@ -21,7 +20,6 @@ const Ettersending = ({ gjelder, setRerendrekvittering }: EttersendingProps) => 
     const { data: valgtSoknad } = useSoknad(id)
     const queryClient = useQueryClient()
 
-    const { setFeilmeldingTekst } = useAppStore()
     const [vilEttersende, setVilEttersende] = useState<boolean>(false)
     const [ettersender, setEttersender] = useState<boolean>(false)
     const knappeTekst = tekst(`kvittering.knapp.send-${gjelder}` as any)
@@ -35,7 +33,6 @@ const Ettersending = ({ gjelder, setRerendrekvittering }: EttersendingProps) => 
         queryClient.invalidateQueries(['soknad', valgtSoknad!.id])
         queryClient.invalidateQueries(['soknader'])
 
-        setFeilmeldingTekst('')
         setRerendrekvittering(new Date())
     }
 
@@ -66,12 +63,10 @@ const Ettersending = ({ gjelder, setRerendrekvittering }: EttersendingProps) => 
             )
         } catch (e: any) {
             if (!(e instanceof AuthenticationError)) {
-                setFeilmeldingTekst(tekst('kvittering.ettersending.feilet'))
+                // TODO fix denne med mutation setFeilmeldingTekst(tekst('kvittering.ettersending.feilet'))
                 logger.warn(e)
             }
             return
-        } finally {
-            setFeilmeldingTekst('')
         }
 
         oppdaterSoknad()
@@ -91,14 +86,12 @@ const Ettersending = ({ gjelder, setRerendrekvittering }: EttersendingProps) => 
             )
         } catch (e: any) {
             if (!(e instanceof AuthenticationError)) {
-                setFeilmeldingTekst(tekst('kvittering.ettersending.feilet'))
+                // TODO fix denne med mutation setFeilmeldingTekst(tekst('kvittering.ettersending.feilet'))
+
                 logger.warn(e)
             }
             return
-        } finally {
-            setFeilmeldingTekst('')
         }
-
         oppdaterSoknad()
     }
 

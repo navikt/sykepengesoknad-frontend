@@ -1,9 +1,7 @@
-import { Alert } from '@navikt/ds-react'
 import React, { useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom'
 import { useNavigate } from 'react-router'
 
-import { useAppStore } from '../../data/stores/app-store'
 import { RSSoknadstatus } from '../../types/rs-types/rs-soknadstatus'
 import { RSSoknadstype } from '../../types/rs-types/rs-soknadstype'
 import { logEvent } from '../amplitude/amplitude'
@@ -24,7 +22,6 @@ const SendtSide = () => {
     const { data: valgtSoknad } = useSoknad(id)
     const navigate = useNavigate()
 
-    const { feilmeldingTekst } = useAppStore()
     const [rerendreKvittering, setRerendrekvittering] = useState<Date>(new Date())
 
     useUpdateBreadcrumbs(() => [{ ...kvitteringBreadcrumb, handleInApp: true }], [])
@@ -94,10 +91,6 @@ const SendtSide = () => {
                         </>
                     )}
                 />
-
-                <div aria-live="polite">
-                    <Vis hvis={feilmeldingTekst} render={() => <Alert variant="error">{feilmeldingTekst}</Alert>} />
-                </div>
             </HotjarTrigger>
         </>
     )
