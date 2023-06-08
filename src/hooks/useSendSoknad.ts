@@ -5,7 +5,6 @@ import { FetchError } from '../utils/fetch'
 import fetchMedRequestId from '../utils/fetch'
 
 import useSoknad from './useSoknad'
-import {urlTilSoknad} from "../components/soknad/soknad-link";
 
 export function useSendSoknad() {
     const router = useRouter()
