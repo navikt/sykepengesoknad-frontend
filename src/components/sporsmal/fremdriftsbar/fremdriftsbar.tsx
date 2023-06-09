@@ -18,7 +18,7 @@ const TilbakeKnapp = ({ soknad, stegNo }: { soknad: Soknad; stegNo: number }) =>
     }
 
     return (
-        <NextLink legacyBehavior href={`/soknader/${soknad.id}${SEPARATOR}${stegNo - 1}${window.location.search}`}>
+        <NextLink href={`/soknader/${soknad.id}${SEPARATOR}${stegNo - 1}${window.location.search}`}>
             <Link
                 onClick={() => {
                     logEvent('navigere', {

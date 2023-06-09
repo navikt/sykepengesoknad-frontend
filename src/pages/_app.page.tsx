@@ -8,6 +8,7 @@ import Head from 'next/head'
 import React, { PropsWithChildren, useEffect } from 'react'
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
 import { Modal } from '@navikt/ds-react'
+import { useRouter } from 'next/router'
 
 import { useFangHotjarEmotion } from '../hooks/useFangHotjarEmotion'
 import { useHandleDecoratorClicks } from '../hooks/useBreadcrumbs'
@@ -42,6 +43,12 @@ function MyApp({ Component, pageProps }: AppProps): JSX.Element {
             require('../data/mock/mocksetup')
         }
     })
+    const router = useRouter()
+
+    useEffect(() => {
+        // Dette kjøres hver gang ruten endres
+        document.getElementById('maincontent')?.focus()
+    }, [router.asPath])
 
     const queryClient = new QueryClient({
         defaultOptions: {
