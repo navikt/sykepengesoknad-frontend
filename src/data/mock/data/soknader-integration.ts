@@ -1388,7 +1388,7 @@ export const sendtArbeidsledigKvittering: RSSoknad = {
     klippet: false,
 }
 export const delvisUtfylltArbeidsledig: RSSoknad = {
-    id: '162b42d7-2600-44ea-905e-d3bae7f234047',
+    id: '99c14afb-f654-4df5-8612-085fe235536f',
     sykmeldingId: arbeidsledig100Syk.id,
     soknadstype: 'ARBEIDSLEDIG',
     status: 'NY',
