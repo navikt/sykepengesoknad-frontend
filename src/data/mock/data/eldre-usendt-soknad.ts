@@ -1,6 +1,7 @@
 import { RSSoknad } from '../../../types/rs-types/rs-soknad'
 import { jsonDeepCopy } from '../../../utils/json-deep-copy'
 import { Persona } from '../personas'
+import { deepcopyMedNyId } from '../deepcopyMedNyId'
 
 import { kortArbeidstakerSoknad } from './kort-soknad'
 import { sykmeldinger } from './sykmeldinger'
@@ -16,11 +17,11 @@ endaEnNySoknadSomIkkeKanFyllesUt.fom = '2022-04-23'
 endaEnNySoknadSomIkkeKanFyllesUt.tom = '2022-04-30'
 
 export const flereEldreUsendteSoknader: Persona = {
-    soknader: [kortArbeidstakerSoknad, nySoknadSomIkkeKanFyllesUt, endaEnNySoknadSomIkkeKanFyllesUt],
+    soknader: [deepcopyMedNyId(kortArbeidstakerSoknad), nySoknadSomIkkeKanFyllesUt, endaEnNySoknadSomIkkeKanFyllesUt],
     sykmeldinger: sykmeldinger,
 }
 
 export const eldreUsendtSoknad: Persona = {
-    soknader: [kortArbeidstakerSoknad, nySoknadSomIkkeKanFyllesUt],
+    soknader: [deepcopyMedNyId(kortArbeidstakerSoknad), deepcopyMedNyId(nySoknadSomIkkeKanFyllesUt)],
     sykmeldinger: sykmeldinger,
 }

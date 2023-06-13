@@ -2,8 +2,8 @@ import { RSSoknad } from '../../../types/rs-types/rs-soknad'
 
 import {
     arbeidsledig100Syk,
-    arbeidstaker50Syk,
     arbeidstaker100Syk,
+    arbeidstaker50Syk,
     arbeidstakerBehandlingsdagSyk,
 } from './sykmeldinger'
 import { værKlarOverAt, værKlarOverAtBehandlingsdager } from './sporsmal/vaer-klar-over-at'

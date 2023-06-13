@@ -1,23 +1,18 @@
 import { useQuery } from '@tanstack/react-query'
-import { useRouter } from 'next/router'
 
 import fetchMedRequestId from '../utils/fetch'
 
-export function UseKontonummer() {
-    const router = useRouter()
-    const testpersonQuery = router.query['testperson']
+import { UseTestpersonQuery } from './useTestpersonQuery'
 
-    const query = () => {
-        if (testpersonQuery) {
-            return `?testperson=${testpersonQuery}`
-        }
-        return ''
-    }
+export function UseKontonummer() {
+    const testpersonQuery = UseTestpersonQuery()
+
     return useQuery<string | null, Error>({
         queryKey: ['kontonummer'],
         queryFn: async () => {
             const fetchResult = await fetchMedRequestId(
-                '/syk/sykepengesoknad/api/sokos-kontoregister-person/api/borger/v1/hent-aktiv-konto' + query(),
+                '/syk/sykepengesoknad/api/sokos-kontoregister-person/api/borger/v1/hent-aktiv-konto' +
+                    testpersonQuery.query(),
                 {},
                 (response, _, defaultErrorHandler) => {
                     if (response.status == 404) {

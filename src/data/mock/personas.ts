@@ -3,7 +3,7 @@ import { Sykmelding } from '../../types/sykmelding'
 import { jsonDeepCopy } from '../../utils/json-deep-copy'
 
 import { arbeidsledig, arbeidstaker, arbeidstakerGradert, behandlingsdager, fremtidigSoknad } from './data/opplaering'
-import { gradertReisetilskudd, nyttReisetilskudd, soknaderReisetilskudd } from './data/reisetilskudd'
+import { gradertReisetilskudd, nyttReisetilskudd } from './data/reisetilskudd'
 import {
     arbeidsledigKvittering,
     arbeidstakerDeltPeriodeForsteUtenforArbeidsgiverperiodeKvittering,
@@ -28,10 +28,10 @@ import {
     utgattSoknad,
 } from './data/soknader-integration'
 import { syk7, sykmeldinger } from './data/sykmeldinger'
-import { brukertestSoknad } from './data/brukertest'
 import { veldigLangSoknad } from './data/veldig-land-soknad'
 import { oppholdUtland } from './data/opphold-utland'
 import { frilanser } from './data/frilanser'
+import { deepcopyMedNyId } from './deepcopyMedNyId'
 
 export interface Persona {
     soknader: RSSoknad[]
@@ -60,13 +60,13 @@ export const får500vedSendSoknad: Persona = {
 }
 
 export const harKontonummer: Persona = {
-    soknader: [arbeidstakerMedOppholdForsteUtenforArbeidsgiverperiodeKvittering],
+    soknader: [deepcopyMedNyId(arbeidstakerMedOppholdForsteUtenforArbeidsgiverperiodeKvittering)],
     sykmeldinger: [syk7],
     kontonummer: '12340012345',
 }
 
 export const harIkkeKontonummer: Persona = {
-    soknader: [arbeidstakerMedOppholdForsteUtenforArbeidsgiverperiodeKvittering],
+    soknader: [deepcopyMedNyId(arbeidstakerMedOppholdForsteUtenforArbeidsgiverperiodeKvittering)],
     sykmeldinger: [syk7],
     kontonummer: undefined,
 }
@@ -94,7 +94,6 @@ export const soknaderIntegration = [
     arbeidstakerMedOppholdKvittering,
     soknadSomTriggerSporsmalFinnesIkkeISoknad,
     soknadSomTriggerFeilStatusForOppdaterSporsmal,
-    brukertestSoknad,
 ] as RSSoknad[]
 
 export const soknaderOpplaering = [
@@ -114,10 +113,7 @@ export const opplaering: Persona = {
     sykmeldinger: sykmeldinger,
 }
 
-export const alleData: Persona = {
-    // Alle søknader filtrert på unik id
-    soknader: [...soknaderIntegration, ...soknaderOpplaering, ...soknaderReisetilskudd].filter(
-        (value, index, array) => array.findIndex((a) => a.id === value.id) === index,
-    ),
+export const integration: Persona = {
+    soknader: soknaderIntegration,
     sykmeldinger: sykmeldinger,
 }

@@ -1055,12 +1055,7 @@ export const delvisUtfyltReisetilskudd: RSSoknad = {
 export const feilVedSlettingAvKvittering: RSSoknad = jsonDeepCopy(nyttReisetilskudd)
 feilVedSlettingAvKvittering.id = 'd4ce1c57-1f91-411b-ab64-beabbba29b65'
 
-export const soknaderReisetilskudd = [
-    nyttReisetilskudd,
-    gradertReisetilskudd,
-    delvisUtfyltReisetilskudd,
-    feilVedSlettingAvKvittering,
-]
+export const soknaderReisetilskudd = [delvisUtfyltReisetilskudd, feilVedSlettingAvKvittering]
 
 export const reisetilskudd: Persona = {
     soknader: [...soknaderReisetilskudd],

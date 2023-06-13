@@ -4,6 +4,7 @@ import { NextApiRequest, NextApiResponse } from 'next'
 import { cleanPathForMetric } from '../metrics'
 import metrics from '../metrics'
 import { isMockBackend } from '../utils/environment'
+import { mockApi } from '../data/mock/mock-api'
 
 import { verifyIdportenAccessToken } from './verifyIdportenAccessToken'
 
@@ -20,7 +21,7 @@ export function beskyttetApi(handler: ApiHandler): ApiHandler {
         }
 
         if (isMockBackend()) {
-            return handler(req, res)
+            return mockApi(req, res)
         }
 
         const bearerToken: string | null | undefined = req.headers['authorization']

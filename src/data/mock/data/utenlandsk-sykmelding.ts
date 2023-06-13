@@ -1,3 +1,5 @@
+import * as uuid from 'uuid'
+
 import { Persona } from '../personas'
 import { RSSporsmal } from '../../../types/rs-types/rs-sporsmal'
 import { jsonDeepCopy } from '../../../utils/json-deep-copy'
@@ -179,6 +181,7 @@ export const utenlandskSykmeldingSporsmalene: RSSporsmal[] = [
     },
 ]
 export const soknadTilUtenlandskSykmelding = jsonDeepCopy(brukertestSoknad)
+soknadTilUtenlandskSykmelding.id = uuid.v4()
 soknadTilUtenlandskSykmelding.utenlandskSykmelding = true
 const sporsmalene: RSSporsmal[] = []
 sporsmalene.push(soknadTilUtenlandskSykmelding.sporsmal[0])

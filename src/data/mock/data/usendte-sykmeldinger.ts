@@ -1,5 +1,6 @@
 import { jsonDeepCopy } from '../../../utils/json-deep-copy'
 import { Persona } from '../personas'
+import { deepcopyMedNyId } from '../deepcopyMedNyId'
 
 import { arbeidstaker } from './opplaering'
 import { arbeidstaker100Syk } from './sykmeldinger'
@@ -10,7 +11,7 @@ enUsendt.mottattTidspunkt = new Date()
 enUsendt.id = 'APEN'
 
 export const enUsendtSykmelding: Persona = {
-    soknader: [arbeidstaker],
+    soknader: [deepcopyMedNyId(arbeidstaker)],
     sykmeldinger: [arbeidstaker100Syk, enUsendt],
 }
 
@@ -26,6 +27,6 @@ eldsteUsendte.id = 'APEN'
 eldsteUsendte.sykmeldingsperioder[0].fom = '2018-04-01' as any
 
 export const toUsendteSykmeldinger: Persona = {
-    soknader: [arbeidstaker],
+    soknader: [deepcopyMedNyId(arbeidstaker)],
     sykmeldinger: [arbeidstaker100Syk, usendt, eldsteUsendte],
 }
