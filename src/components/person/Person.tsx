@@ -44,7 +44,7 @@ const Person = () => {
                     <ul>
                         {Object.keys(PersonaKeys).map((p, idx) => (
                             <BodyShort as="li" key={idx}>
-                                <Link href={`/syk/sykepengesoknad/?testperson=${p}`}>{p}</Link>
+                                <Link href={`/syk/sykepengesoknad/?testperson=${p.valueOf()}`}>{p}</Link>
                             </BodyShort>
                         ))}
                     </ul>
