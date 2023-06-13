@@ -25,63 +25,60 @@ import { egenmeldingSykmeldingaPerson } from './data/egenmeldingsdager-i-sykmeld
 import { selvstendigNaringsdrivende } from './data/naringsdrivende'
 import { korrigeringsfristUtloptPerson } from './data/korrigeringsfrist-utlopt'
 
-export interface StringFunctionMap {
-    [index: string]: () => Persona
+export enum PersonaKeys {
+    'UtenData' = 'uten-data',
+    'Reisetilskudd' = 'reisetilskudd',
+    'UtenlandskSykmelding' = 'utenlandsk sykmelding',
+    'Yrkesskade' = 'yrkesskade',
+    'Opplaering' = 'opplaering',
+    'NyttArbeidUnderveis' = 'nytt-arbeid-underveis',
+    'AlleSoknader' = 'alle-soknader',
+    'EnUsendtSykmelding' = 'en-usendt-sykmelding',
+    'ToUsendteSykmeldinger' = 'to-usendte-sykmeldinger',
+    'EnEldreUsendtSoknad' = 'en-eldre-usendt-soknad',
+    'ToEldreUsendteSoknader' = 'to-eldre-usendte-soknader',
+    'BareUtland' = 'bare-utland',
+    'SelvstendigNaringsdrivende' = 'selvstendig-naringsdrivende',
+    'Brukertest' = 'brukertest',
+    'HarKontonummer' = 'har kontonummer',
+    'HarIkkeKontonummer' = 'har ikke kontonummer',
+    'EgenmeldingsdagerArbeidsgiver' = 'egenmeldingsdager arbeidsgiver',
+    'SykmeldingMedEgenmeldingsdager' = 'sykmelding med egenmeldingsdager',
+    'Http400VedSendSoknad' = 'http 400 ved send soknad',
+    'Http500VedSendSoknad' = 'http 500 ved send soknad',
+    'KorrigeringsfristUtlopt' = 'korrigeringsfrist-utlopt',
 }
+type PersonaData = Record<PersonaKeys, Persona>
 
-export const personas: StringFunctionMap = {
-    'uten-data': () => utenData,
-    reisetilskudd: () => reisetilskudd,
-    'utenlandsk sykmelding': () => utenlandskSykmelding,
-    yrkesskade: () => yrkesskadePerson,
-    opplaering: () => opplaering,
-    'nytt-arbeid-underveis': () => nyttArbeidUnderveisPerson,
-    'alle-soknader': () => integration,
-    'en-usendt-sykmelding': () => enUsendtSykmelding,
-    'to-usendte-sykmeldinger': () => toUsendteSykmeldinger,
-    'en-eldre-usendt-soknad': () => eldreUsendtSoknad,
-    'to-eldre-usendte-soknader': () => flereEldreUsendteSoknader,
-    'bare-utland': () => bareUtland,
-    'selvstendig-naringsdrivende': () => selvstendigNaringsdrivende,
-    brukertest: () => brukertest,
-    'har kontonummer': () => harKontonummer,
-    'har ikke kontonummer': () => harIkkeKontonummer,
-    'egenmeldingsdager arbeidsgiver': () => egenmeldingsdagerArbeidsgiver,
-    'sykmelding med egenmeldingsdager': () => egenmeldingSykmeldingaPerson,
-    'http 400 ved send soknad': () => får400vedSendSoknad,
-    'http 500 ved send soknad': () => får500vedSendSoknad,
-    'korrigeringsfrist-utlopt': () => korrigeringsfristUtloptPerson,
-}
-
-export function testpersoner(): { [index: string]: Persona } {
-    const data: { [index: string]: Persona } = {
-        'uten-data': jsonDeepCopy(utenData),
-        reisetilskudd: jsonDeepCopy(reisetilskudd),
-        'utenlandsk sykmelding': jsonDeepCopy(utenlandskSykmelding),
-        yrkesskade: jsonDeepCopy(yrkesskadePerson),
-        opplaering: jsonDeepCopy(opplaering),
-        'nytt-arbeid-underveis': jsonDeepCopy(nyttArbeidUnderveisPerson),
-        'alle-soknader': jsonDeepCopy(integration),
-        'en-usendt-sykmelding': jsonDeepCopy(enUsendtSykmelding),
-        'to-usendte-sykmeldinger': jsonDeepCopy(toUsendteSykmeldinger),
-        'en-eldre-usendt-soknad': jsonDeepCopy(eldreUsendtSoknad),
-        'to-eldre-usendte-soknader': jsonDeepCopy(flereEldreUsendteSoknader),
-        'bare-utland': jsonDeepCopy(bareUtland),
-        'selvstendig-naringsdrivende': jsonDeepCopy(selvstendigNaringsdrivende),
-        brukertest: jsonDeepCopy(brukertest),
-        'har kontonummer': jsonDeepCopy(harKontonummer),
-        'har ikke kontonummer': jsonDeepCopy(harIkkeKontonummer),
-        'egenmeldingsdager arbeidsgiver': jsonDeepCopy(egenmeldingsdagerArbeidsgiver),
-        'sykmelding med egenmeldingsdager': jsonDeepCopy(egenmeldingSykmeldingaPerson),
-        'http 400 ved send soknad': jsonDeepCopy(får400vedSendSoknad),
-        'http 500 ved send soknad': jsonDeepCopy(får500vedSendSoknad),
-        'korrigeringsfrist-utlopt': jsonDeepCopy(korrigeringsfristUtloptPerson),
+export function testpersoner(): PersonaData {
+    const data: PersonaData = {
+        [PersonaKeys.UtenData]: jsonDeepCopy(utenData),
+        [PersonaKeys.Reisetilskudd]: jsonDeepCopy(reisetilskudd),
+        [PersonaKeys.UtenlandskSykmelding]: jsonDeepCopy(utenlandskSykmelding),
+        [PersonaKeys.Yrkesskade]: jsonDeepCopy(yrkesskadePerson),
+        [PersonaKeys.Opplaering]: jsonDeepCopy(opplaering),
+        [PersonaKeys.NyttArbeidUnderveis]: jsonDeepCopy(nyttArbeidUnderveisPerson),
+        [PersonaKeys.AlleSoknader]: jsonDeepCopy(integration),
+        [PersonaKeys.EnUsendtSykmelding]: jsonDeepCopy(enUsendtSykmelding),
+        [PersonaKeys.ToUsendteSykmeldinger]: jsonDeepCopy(toUsendteSykmeldinger),
+        [PersonaKeys.EnEldreUsendtSoknad]: jsonDeepCopy(eldreUsendtSoknad),
+        [PersonaKeys.ToEldreUsendteSoknader]: jsonDeepCopy(flereEldreUsendteSoknader),
+        [PersonaKeys.BareUtland]: jsonDeepCopy(bareUtland),
+        [PersonaKeys.SelvstendigNaringsdrivende]: jsonDeepCopy(selvstendigNaringsdrivende),
+        [PersonaKeys.Brukertest]: jsonDeepCopy(brukertest),
+        [PersonaKeys.HarKontonummer]: jsonDeepCopy(harKontonummer),
+        [PersonaKeys.HarIkkeKontonummer]: jsonDeepCopy(harIkkeKontonummer),
+        [PersonaKeys.EgenmeldingsdagerArbeidsgiver]: jsonDeepCopy(egenmeldingsdagerArbeidsgiver),
+        [PersonaKeys.SykmeldingMedEgenmeldingsdager]: jsonDeepCopy(egenmeldingSykmeldingaPerson),
+        [PersonaKeys.Http400VedSendSoknad]: jsonDeepCopy(får400vedSendSoknad),
+        [PersonaKeys.Http500VedSendSoknad]: jsonDeepCopy(får500vedSendSoknad),
+        [PersonaKeys.KorrigeringsfristUtlopt]: jsonDeepCopy(korrigeringsfristUtloptPerson),
     }
 
     // Valider at alle søknader har unik ID, det gjør logikken i API mye lettere da vi kan anta at alle søknadsider er unike per sesjon
     const soknadsIder = new Set<string>()
     Object.keys(data).forEach((key) => {
-        const person = data[key]
+        const person = data[key as PersonaKeys]
         person.soknader.forEach((soknad) => {
             if (soknadsIder.has(soknad.id)) {
                 const message = `Søknad med id ${soknad.id} finnes flere ganger. sist funnet i ${key}`
@@ -92,14 +89,4 @@ export function testpersoner(): { [index: string]: Persona } {
         })
     })
     return data
-}
-
-export function hentTestperson(url?: string): Persona | null {
-    const parsetUrl = new URL(`https://test${url}`)
-
-    const testperson = parsetUrl.searchParams.get('testperson')
-    if (!testperson) {
-        return null
-    }
-    return personas[testperson]()
 }

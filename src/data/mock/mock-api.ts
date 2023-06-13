@@ -123,6 +123,24 @@ export async function mockApi(req: NextApiRequest, res: NextApiResponse) {
     switch (url) {
         case 'GET /api/sykepengesoknad-backend/api/v2/soknader/metadata':
             return sendJson(testperson.soknader)
+        case 'GET /apikontoregistertodo': {
+            /*
+                if (isMockBackend()) {
+        const testperson = hentTestperson(req.url)
+        if (testperson && testperson.kontonummer) {
+            res.json({ kontonummer: testperson.kontonummer })
+            res.end()
+            return
+        }
+
+        res.status(404)
+        res.end()
+        return
+    }
+             */
+
+            return sendJson(testperson.soknader)
+        }
         case 'GET /api/sykmeldinger-backend/api/v2/sykmeldinger':
             return sendJson(testperson.sykmeldinger)
 
