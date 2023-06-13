@@ -85,7 +85,7 @@ const Slettknapp = ({ sporsmal, kvittering }: SlettknappProps) => {
                         {tekst('opplasting_modal.vil-slette')}
                     </Heading>
                     <Button
-                        className="ml-auto mr-auto mt-4 block"
+                        className="mt-4 block"
                         variant="danger"
                         loading={sletter}
                         type="button"
@@ -94,7 +94,14 @@ const Slettknapp = ({ sporsmal, kvittering }: SlettknappProps) => {
                         {tekst('opplasting_modal.vil-slette.ja')}
                     </Button>
                     <div aria-live="polite">
-                        <Vis hvis={feilmelding} render={() => <Alert variant="error">{feilmelding}</Alert>} />
+                        <Vis
+                            hvis={feilmelding}
+                            render={() => (
+                                <Alert className="mt-4" variant="error">
+                                    {feilmelding}
+                                </Alert>
+                            )}
+                        />
                     </div>
                 </Modal.Content>
             </Modal>

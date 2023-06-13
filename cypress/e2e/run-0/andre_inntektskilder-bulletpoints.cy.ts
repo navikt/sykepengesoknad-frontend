@@ -1,5 +1,6 @@
 describe('Tester andre inntektskilder bulletpoints', () => {
     it('Viser liste med flere hvis vi har data fra inntektskomponenten', () => {
+        cy.clearCookies()
         cy.visit(`/syk/sykepengesoknad/soknader/5b769c04-e171-47c9-b79b-23ab8fce331e/9`)
 
         cy.contains('Arbeidsforhold vi har registrert på deg:').and('be.visible')

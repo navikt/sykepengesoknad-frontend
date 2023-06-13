@@ -15,6 +15,7 @@ import { RSSoknad } from '../../types/rs-types/rs-soknad'
 import { jsonDeepCopy } from '../../utils/json-deep-copy'
 import { RSSoknadstype } from '../../types/rs-types/rs-soknadstype'
 import { RSSoknadstatus } from '../../types/rs-types/rs-soknadstatus'
+import { RSSvar } from '../../types/rs-types/rs-svar'
 
 import { arbeidstaker, arbeidstakerGradert } from './data/opplaering'
 import { kortFomTomArbeidstakerSoknad } from './data/kort-soknad'
@@ -291,6 +292,30 @@ export async function mockApi(req: NextApiRequest, res: NextApiResponse) {
 
             return sendJson({ status: 200 }, 200)
         }
+        case 'POST /api/sykepengesoknad-kvitteringer/api/v2/opplasting': {
+            return sendJson({
+                id: uuid.v4(),
+                melding: 'opprettet',
+            })
+        }
+        case 'POST /api/sykepengesoknad-backend/api/v2/soknader/[uuid]/sporsmal/[uuid]/svar': {
+            const soknaden = alleSoknader.find((soknad) => soknad.id === soknadId)
+            if (!soknaden) {
+                return sendJson({}, 404)
+            }
+            const spm = soknaden.sporsmal.find((spm) => spm.id === sporsmalId)
+            if (!spm) {
+                return sendJson({}, 404)
+            }
+            const body = await parseRequest<RSSvar>(req)
+
+            spm.svar.push({
+                id: uuid.v4(),
+                ...body,
+            })
+
+            return sendJson({ oppdatertSporsmal: spm }, 201)
+        }
         default:
             logger.error(`Ukjent api ${url}`)
 
@@ -323,29 +348,10 @@ reisetilskudd stuff
     mock.post(
         '/syk/sykepengesoknad/api/sykepengesoknad-backend/api/v2/soknader/:soknad/sporsmal/:spmid/svar',
         (req) => {
-            const sok = person.soknader.find((r) => r.id === req.pathParams.soknad)!
-            const spm = sok.sporsmal.find((spm) => spm.id === req.pathParams.spmid)
 
-            spm!.svar.push({
-                id: uuid.v4(),
-                ...req.body,
-            })
-
-            return Promise.resolve({
-                status: 201,
-                body: JSON.stringify({ oppdatertSporsmal: spm }),
-            })
         },
     )
 
-    mock.post('/syk/sykepengesoknad/api/sykepengesoknad-kvitteringer/api/v2/opplasting', (req, res, ctx) =>
-        res(
-            ctx.json({
-                id: uuid.v4(),
-                melding: 'opprettet',
-            }),
-        ),
-    )
 
     mock.get('/syk/sykepengesoknad/api/sykepengesoknad-kvitteringer/api/v2/kvittering/:blob', () =>
         fetch('/syk/sykepengesoknad/static/kvittering.jpg'),
