@@ -60,13 +60,23 @@ export const får500vedSendSoknad: Persona = {
 }
 
 export const harKontonummer: Persona = {
-    soknader: [deepcopyMedNyId(arbeidstakerMedOppholdForsteUtenforArbeidsgiverperiodeKvittering)],
+    soknader: [
+        deepcopyMedNyId(
+            arbeidstakerMedOppholdForsteUtenforArbeidsgiverperiodeKvittering,
+            '6dd1c260-d47a-469f-b878-b9912b2a6982',
+        ),
+    ],
     sykmeldinger: [syk7],
     kontonummer: '12340012345',
 }
 
 export const harIkkeKontonummer: Persona = {
-    soknader: [deepcopyMedNyId(arbeidstakerMedOppholdForsteUtenforArbeidsgiverperiodeKvittering)],
+    soknader: [
+        deepcopyMedNyId(
+            arbeidstakerMedOppholdForsteUtenforArbeidsgiverperiodeKvittering,
+            '540b6488-1c4a-458b-9f46-679e26fa3663',
+        ),
+    ],
     sykmeldinger: [syk7],
     kontonummer: undefined,
 }

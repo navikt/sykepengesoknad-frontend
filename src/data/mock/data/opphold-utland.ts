@@ -122,6 +122,6 @@ export const oppholdUtland: RSSoknad = {
 }
 
 export const bareUtland: Persona = {
-    soknader: [deepcopyMedNyId(oppholdUtland)],
+    soknader: [deepcopyMedNyId(oppholdUtland, 'e6e53c43-3b64-48be-b9d1-39d95198e524')],
     sykmeldinger: [],
 }
