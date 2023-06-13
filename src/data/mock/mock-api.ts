@@ -13,10 +13,12 @@ import { RSSporsmal } from '../../types/rs-types/rs-sporsmal'
 import { RSMottaker } from '../../types/rs-types/rs-mottaker'
 import { RSSoknad } from '../../types/rs-types/rs-soknad'
 import { jsonDeepCopy } from '../../utils/json-deep-copy'
+import { RSSoknadstype } from '../../types/rs-types/rs-soknadstype'
+import { RSSoknadstatus } from '../../types/rs-types/rs-soknadstatus'
 
 import { arbeidstaker, arbeidstakerGradert } from './data/opplaering'
 import { kortFomTomArbeidstakerSoknad } from './data/kort-soknad'
-import { Persona } from './personas'
+import { Persona, soknaderOpplaering } from './personas'
 import { testpersoner } from './testperson'
 import {
     arbeidstakerDeltPeriodeForsteUtenforArbeidsgiverperiodeKvittering,
@@ -103,7 +105,7 @@ export async function mockApi(req: NextApiRequest, res: NextApiResponse) {
     const testperson = hentTestperson(req, res)
     const alleSoknader = hentSoknader(req, res)
 
-    function sendJson(json: any, status = 200) {
+    function sendJson(json = {}, status = 200) {
         res.writeHead(status, { 'Content-Type': 'application/json' })
         res.end(JSON.stringify(json))
     }
@@ -155,6 +157,42 @@ export async function mockApi(req: NextApiRequest, res: NextApiResponse) {
 
             return sendJson(soknad, 200)
         }
+        case 'POST /api/sykepengesoknad-backend/api/v2/soknader/[uuid]/ettersendTilNav': {
+            const soknad = alleSoknader.find((soknad) => soknad.id === soknadId)
+            if (!soknad) {
+                return sendJson({}, 404)
+            }
+            soknad.sendtTilNAVDato = dayjs().toJSON()
+
+            return sendJson()
+        }
+        case 'POST /api/sykepengesoknad-backend/api/v2/soknader/[uuid]/ettersendTilArbeidsgiver': {
+            const soknad = alleSoknader.find((soknad) => soknad.id === soknadId)
+            if (!soknad) {
+                return sendJson({}, 404)
+            }
+            soknad.sendtTilArbeidsgiverDato = dayjs().toJSON()
+
+            return sendJson()
+        }
+        case 'POST /api/sykepengesoknad-backend/api/v2/soknader/[uuid]/avbryt': {
+            const soknad = alleSoknader.find((soknad) => soknad.id === soknadId)
+            if (!soknad) {
+                return sendJson({}, 404)
+            }
+            soknad.status = 'AVBRUTT'
+            soknad.avbruttDato = dayjs().toJSON()
+            return sendJson()
+        }
+        case 'POST /api/sykepengesoknad-backend/api/v2/soknader/[uuid]/gjenapne': {
+            const soknad = alleSoknader.find((soknad) => soknad.id === soknadId)
+            if (!soknad) {
+                return sendJson({}, 404)
+            }
+            soknad.status = 'NY'
+            soknad.avbruttDato = null
+            return sendJson()
+        }
         case 'PUT /api/sykepengesoknad-backend/api/v2/soknader/[uuid]/sporsmal/[uuid]': {
             const soknaden = alleSoknader.find((soknad) => soknad.id === soknadId)
             if (!soknaden) {
@@ -192,6 +230,25 @@ export async function mockApi(req: NextApiRequest, res: NextApiResponse) {
             const skalSendesTil = mottaker(soknadId!)
             return sendJson({ mottaker: skalSendesTil })
         }
+        case 'POST /api/sykepengesoknad-backend/api/v2/opprettSoknadUtland': {
+            const soknad = testperson.soknader.find(
+                (sok: RSSoknad) => sok.soknadstype === RSSoknadstype.OPPHOLD_UTLAND && sok.status === RSSoknadstatus.NY,
+            )
+            if (soknad) {
+                return sendJson(soknad)
+            }
+            const soknadOriginal = jsonDeepCopy(
+                soknaderOpplaering.find(
+                    (sok: RSSoknad) =>
+                        sok.soknadstype === RSSoknadstype.OPPHOLD_UTLAND && sok.status === RSSoknadstatus.NY,
+                )!,
+            )
+            soknadOriginal.id = uuid.v4()
+            soknadOriginal.status = RSSoknadstatus.NY
+            testperson.soknader.push(soknadOriginal)
+
+            return sendJson(soknadOriginal)
+        }
         case 'POST /api/sykepengesoknad-backend/api/v2/soknader/[uuid]/send': {
             if (soknadId == '400-ved-send-soknad') {
                 return sendJson({ status: 400 }, 400)
@@ -224,6 +281,59 @@ export async function mockApi(req: NextApiRequest, res: NextApiResponse) {
             break
     }
 }
+
+/*
+
+reisetilskudd stuff
+
+
+    mock.delete(
+        '/syk/sykepengesoknad/api/sykepengesoknad-backend/api/v2/soknader/:soknad/sporsmal/:spmid/svar/:svarid',
+        (req) => {
+            if (req.pathParams.soknad === feilVedSlettingAvKvittering.id) {
+                return Promise.resolve({ status: 500 })
+            }
+            const sok = person.soknader.find((s) => s.id === req.pathParams.soknad)!
+            const spm = sok.sporsmal.find((s) => s.id === req.pathParams.spmid)!
+            const svarIdx = spm.svar.findIndex((s) => s.id === req.pathParams.svarid)!
+            spm.svar.splice(svarIdx, 1)
+
+            return Promise.resolve({ status: 204 })
+        },
+    )
+
+    mock.post(
+        '/syk/sykepengesoknad/api/sykepengesoknad-backend/api/v2/soknader/:soknad/sporsmal/:spmid/svar',
+        (req) => {
+            const sok = person.soknader.find((r) => r.id === req.pathParams.soknad)!
+            const spm = sok.sporsmal.find((spm) => spm.id === req.pathParams.spmid)
+
+            spm!.svar.push({
+                id: uuid.v4(),
+                ...req.body,
+            })
+
+            return Promise.resolve({
+                status: 201,
+                body: JSON.stringify({ oppdatertSporsmal: spm }),
+            })
+        },
+    )
+
+    mock.post('/syk/sykepengesoknad/api/sykepengesoknad-kvitteringer/api/v2/opplasting', (req, res, ctx) =>
+        res(
+            ctx.json({
+                id: uuid.v4(),
+                melding: 'opprettet',
+            }),
+        ),
+    )
+
+    mock.get('/syk/sykepengesoknad/api/sykepengesoknad-kvitteringer/api/v2/kvittering/:blob', () =>
+        fetch('/syk/sykepengesoknad/static/kvittering.jpg'),
+    )
+
+ */
 
 const mottaker = (soknadId: string): RSMottaker => {
     if (
