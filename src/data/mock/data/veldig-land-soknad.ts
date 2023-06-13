@@ -7,7 +7,7 @@ import { værKlarOverAt } from './sporsmal/vaer-klar-over-at'
 import { bekreftOpplysninger } from './sporsmal/bekreft-opplysninger'
 
 export const veldigLangSoknad: RSSoknad = {
-    id: 'faba11f5-123-abc-8c8a-58b28ce2f3ef',
+    id: '214f6e73-8150-4261-8ce5-e2b41907fa58',
     sykmeldingId: arbeidstaker100Syk.id,
     soknadstype: 'ARBEIDSTAKERE',
     status: 'NY',
