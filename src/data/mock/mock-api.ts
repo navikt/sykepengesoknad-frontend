@@ -1,6 +1,7 @@
 import { Readable } from 'stream'
 import fs from 'fs'
 import path from 'path'
+
 import { serialize } from 'cookie'
 import * as uuid from 'uuid'
 import { v4 as uuidv4 } from 'uuid'
@@ -33,7 +34,7 @@ import {
     soknadSomTriggerFeilStatusForOppdaterSporsmal,
     soknadSomTriggerSporsmalFinnesIkkeISoknad,
 } from './data/soknader-integration'
-import {feilVedSlettingAvKvittering} from "./data/reisetilskudd";
+import { feilVedSlettingAvKvittering } from './data/reisetilskudd'
 
 type session = {
     expires: dayjs.Dayjs
@@ -311,7 +312,7 @@ export async function mockApi(req: NextApiRequest, res: NextApiResponse) {
             if (!soknaden) {
                 return sendJson({}, 404)
             }
-            if(soknadId === feilVedSlettingAvKvittering.id){
+            if (soknadId === feilVedSlettingAvKvittering.id) {
                 return sendJson({}, 500)
             }
             const spm = soknaden.sporsmal.find((spm) => spm.id === sporsmalId)
