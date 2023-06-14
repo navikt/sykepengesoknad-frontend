@@ -5,6 +5,7 @@ import { RSSporsmal } from '../../../types/rs-types/rs-sporsmal'
 import { jsonDeepCopy } from '../../../utils/json-deep-copy'
 
 import { brukertestSoknad, brukertestSykmelding } from './brukertest'
+import {deepcopyMedNyId} from "../deepcopyMedNyId";
 
 export const utenlandskSykmeldingSporsmalene: RSSporsmal[] = [
     {
@@ -180,8 +181,7 @@ export const utenlandskSykmeldingSporsmalene: RSSporsmal[] = [
         ],
     },
 ]
-export const soknadTilUtenlandskSykmelding = jsonDeepCopy(brukertestSoknad)
-soknadTilUtenlandskSykmelding.id = uuid.v4()
+export const soknadTilUtenlandskSykmelding = deepcopyMedNyId(brukertestSoknad, "3708c4de-d16c-4835-841b-a6716b6d39e9")
 soknadTilUtenlandskSykmelding.utenlandskSykmelding = true
 const sporsmalene: RSSporsmal[] = []
 sporsmalene.push(soknadTilUtenlandskSykmelding.sporsmal[0])
