@@ -1,11 +1,7 @@
-import { arbeidstakerMedOppholdForsteUtenforArbeidsgiverperiodeKvittering } from '../../../src/data/mock/data/soknader-integration'
-
 describe('Tester kontonummer i kvittering', () => {
-    const soknad = arbeidstakerMedOppholdForsteUtenforArbeidsgiverperiodeKvittering
-
     it('Har kontonumer', () => {
-        cy.visit('/syk/sykepengesoknad?testperson=har%20kontonummer')
-        cy.get(`a[href*=${soknad.id}]`).click()
+        cy.visit('/syk/sykepengesoknad?testperson=har-kontonummer')
+        cy.get('a[data-cy^="link-listevisning"]').first().click()
         besvarSoknad()
         cy.location('pathname').should('include', `/kvittering/`)
         cy.url().should('include', `/kvittering/`)
@@ -19,9 +15,8 @@ describe('Tester kontonummer i kvittering', () => {
     })
 
     it('Har ikke kontonumer', () => {
-        cy.visit('/syk/sykepengesoknad?testperson=har%20ikke%20kontonummer')
-
-        cy.get(`a[href*=${soknad.id}]`).click()
+        cy.visit('/syk/sykepengesoknad?testperson=har-ikke-kontonummer')
+        cy.get('a[data-cy^="link-listevisning"]').first().click()
         besvarSoknad()
         cy.url().should('include', `/kvittering/`)
         cy.contains('Kontonummer for utbetaling')
@@ -40,3 +35,5 @@ const besvarSoknad = () => {
     cy.get('.navds-checkbox__label').click()
     cy.contains('Send søknaden').click()
 }
+
+export {}

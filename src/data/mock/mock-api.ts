@@ -124,23 +124,11 @@ export async function mockApi(req: NextApiRequest, res: NextApiResponse) {
     switch (url) {
         case 'GET /api/sykepengesoknad-backend/api/v2/soknader/metadata':
             return sendJson(testperson.soknader)
-        case 'GET /apikontoregistertodo': {
-            /*
-                if (isMockBackend()) {
-        const testperson = hentTestperson(req.url)
-        if (testperson && testperson.kontonummer) {
-            res.json({ kontonummer: testperson.kontonummer })
-            res.end()
-            return
-        }
-
-        res.status(404)
-        res.end()
-        return
-    }
-             */
-
-            return sendJson(testperson.soknader)
+        case 'GET /api/sokos-kontoregister-person/api/borger/v1/hent-aktiv-konto': {
+            if (testperson && testperson.kontonummer) {
+                return sendJson({ kontonummer: testperson.kontonummer })
+            }
+            return sendJson({}, 404)
         }
         case 'GET /api/sykmeldinger-backend/api/v2/sykmeldinger':
             return sendJson(testperson.sykmeldinger)
@@ -275,7 +263,7 @@ export async function mockApi(req: NextApiRequest, res: NextApiResponse) {
             if (soknadId == '2a9196c7-306f-4b4f-afdc-891d8a564e42') {
                 return sendJson({ status: 500 }, 500)
             }
-            const soknaden = testperson.soknader.find((soknad) => soknad.id === soknadId)
+            const soknaden = alleSoknader.find((soknad) => soknad.id === soknadId)
             if (!soknaden) {
                 return sendJson({}, 404)
             }
