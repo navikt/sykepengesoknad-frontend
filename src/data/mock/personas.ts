@@ -50,12 +50,12 @@ const kortSoknadMedID = (id: string) => {
     return soknad
 }
 export const får400vedSendSoknad: Persona = {
-    soknader: [kortSoknadMedID('400-ved-send-soknad')],
+    soknader: [kortSoknadMedID('9157b65a-0372-4657-864c-195037349df5')],
     sykmeldinger: [syk7],
 }
 
 export const får500vedSendSoknad: Persona = {
-    soknader: [kortSoknadMedID('500-ved-send-soknad')],
+    soknader: [kortSoknadMedID('2a9196c7-306f-4b4f-afdc-891d8a564e42')],
     sykmeldinger: [syk7],
 }
 
