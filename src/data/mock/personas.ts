@@ -3,7 +3,7 @@ import { Sykmelding } from '../../types/sykmelding'
 import { jsonDeepCopy } from '../../utils/json-deep-copy'
 
 import { arbeidsledig, arbeidstaker, arbeidstakerGradert, behandlingsdager, fremtidigSoknad } from './data/opplaering'
-import { gradertReisetilskudd, nyttReisetilskudd, soknaderReisetilskudd } from './data/reisetilskudd'
+import { gradertReisetilskudd, nyttReisetilskudd } from './data/reisetilskudd'
 import {
     arbeidsledigKvittering,
     arbeidstakerDeltPeriodeForsteUtenforArbeidsgiverperiodeKvittering,
@@ -28,10 +28,10 @@ import {
     utgattSoknad,
 } from './data/soknader-integration'
 import { syk7, sykmeldinger } from './data/sykmeldinger'
-import { brukertestSoknad } from './data/brukertest'
 import { veldigLangSoknad } from './data/veldig-land-soknad'
 import { oppholdUtland } from './data/opphold-utland'
 import { frilanser } from './data/frilanser'
+import { deepcopyMedNyId } from './deepcopyMedNyId'
 
 export interface Persona {
     soknader: RSSoknad[]
@@ -50,23 +50,33 @@ const kortSoknadMedID = (id: string) => {
     return soknad
 }
 export const får400vedSendSoknad: Persona = {
-    soknader: [kortSoknadMedID('400-ved-send-soknad')],
+    soknader: [kortSoknadMedID('9157b65a-0372-4657-864c-195037349df5')],
     sykmeldinger: [syk7],
 }
 
 export const får500vedSendSoknad: Persona = {
-    soknader: [kortSoknadMedID('500-ved-send-soknad')],
+    soknader: [kortSoknadMedID('2a9196c7-306f-4b4f-afdc-891d8a564e42')],
     sykmeldinger: [syk7],
 }
 
 export const harKontonummer: Persona = {
-    soknader: [arbeidstakerMedOppholdForsteUtenforArbeidsgiverperiodeKvittering],
+    soknader: [
+        deepcopyMedNyId(
+            arbeidstakerMedOppholdForsteUtenforArbeidsgiverperiodeKvittering,
+            '6dd1c260-d47a-469f-b878-b9912b2a6982',
+        ),
+    ],
     sykmeldinger: [syk7],
     kontonummer: '12340012345',
 }
 
 export const harIkkeKontonummer: Persona = {
-    soknader: [arbeidstakerMedOppholdForsteUtenforArbeidsgiverperiodeKvittering],
+    soknader: [
+        deepcopyMedNyId(
+            arbeidstakerMedOppholdForsteUtenforArbeidsgiverperiodeKvittering,
+            '540b6488-1c4a-458b-9f46-679e26fa3663',
+        ),
+    ],
     sykmeldinger: [syk7],
     kontonummer: undefined,
 }
@@ -94,7 +104,6 @@ export const soknaderIntegration = [
     arbeidstakerMedOppholdKvittering,
     soknadSomTriggerSporsmalFinnesIkkeISoknad,
     soknadSomTriggerFeilStatusForOppdaterSporsmal,
-    brukertestSoknad,
 ] as RSSoknad[]
 
 export const soknaderOpplaering = [
@@ -114,10 +123,7 @@ export const opplaering: Persona = {
     sykmeldinger: sykmeldinger,
 }
 
-export const alleData: Persona = {
-    // Alle søknader filtrert på unik id
-    soknader: [...soknaderIntegration, ...soknaderOpplaering, ...soknaderReisetilskudd].filter(
-        (value, index, array) => array.findIndex((a) => a.id === value.id) === index,
-    ),
+export const integration: Persona = {
+    soknader: soknaderIntegration,
     sykmeldinger: sykmeldinger,
 }

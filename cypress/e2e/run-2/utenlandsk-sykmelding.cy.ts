@@ -1,4 +1,3 @@
-import { soknadTilUtenlandskSykmelding as soknad } from '../../../src/data/mock/data/utenlandsk-sykmelding'
 import {
     svarCheckboxPanel,
     svarFritekst,
@@ -9,12 +8,14 @@ import {
 } from '../../support/utilities'
 
 describe('Tester søknad til utenlandsk sykmelding', () => {
+    const id = '3708c4de-d16c-4835-841b-a6716b6d39e9'
+
     before(() => {
-        cy.visit(`/syk/sykepengesoknad/soknader/${soknad.id}/1?testperson=utenlandsk%20sykmelding`)
+        cy.visit(`/syk/sykepengesoknad/soknader/${id}/1?testperson=utenlandsk-sykmelding`)
     })
 
     it('Ansvarserklæring', function () {
-        cy.url().should('include', `${soknad.id}/1`)
+        cy.url().should('include', `${id}/1`)
 
         cy.contains('Frist for å søke').should('not.exist')
         cy.contains('Jeg vet at jeg kan miste retten til sykepenger hvis opplysningene ').click()
@@ -22,7 +23,7 @@ describe('Tester søknad til utenlandsk sykmelding', () => {
     })
 
     it('Bosted', function () {
-        cy.url().should('include', `${soknad.id}/2`)
+        cy.url().should('include', `${id}/2`)
 
         cy.contains('Bosted')
         cy.contains('Bor du i utlandet?')
@@ -47,7 +48,7 @@ describe('Tester søknad til utenlandsk sykmelding', () => {
     })
 
     it('Lønnet arbeid utenfor Norge', function () {
-        cy.url().should('include', `${soknad.id}/3`)
+        cy.url().should('include', `${id}/3`)
 
         cy.contains('Lønnet arbeid utenfor Norge')
         cy.contains('Utfører du lønnet arbeid utenfor Norge?')
@@ -75,7 +76,7 @@ describe('Tester søknad til utenlandsk sykmelding', () => {
     })
 
     it('Sykepenger i andre EØS-land', function () {
-        cy.url().should('include', `${soknad.id}/4`)
+        cy.url().should('include', `${id}/4`)
         cy.contains('Sykepenger i andre EØS-land')
         cy.contains('Har du mottatt sykepenger eller lignende i andre EØS-land i løpet av de siste tre årene?')
 
@@ -91,14 +92,14 @@ describe('Tester søknad til utenlandsk sykmelding', () => {
 
     it('Svar nei på resten', function () {
         for (let i = 5; i <= 11; i++) {
-            cy.url().should('include', `${soknad.id}/${i}`)
+            cy.url().should('include', `${id}/${i}`)
             svarNeiHovedsporsmal()
             cy.contains('Gå videre').click()
         }
     })
 
     it('Vær klar over at', function () {
-        cy.url().should('include', `${soknad.id}/12`)
+        cy.url().should('include', `${id}/12`)
         cy.contains('Til slutt')
         cy.get('section[aria-label="Oppsummering fra søknaden"] button').click()
         cy.contains('Danmark')

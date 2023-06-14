@@ -1,17 +1,16 @@
-import { BodyShort, Link, Popover } from '@navikt/ds-react'
+import { BodyShort, Button, Link, Popover } from '@navikt/ds-react'
 import React, { useRef, useState } from 'react'
 import { PersonCircleIcon } from '@navikt/aksel-icons'
 import { useNavigate } from 'react-router'
 
 import { isMockBackend, isOpplaering } from '../../utils/environment'
-import { personas } from '../../data/mock/testperson'
+import { PersonaKeys } from '../../data/mock/testperson'
 
 const Person = () => {
     const [open, setOpen] = useState<boolean>(false)
     const person = useRef<HTMLButtonElement>(null)
     const kanVelgePerson = isMockBackend() || isOpplaering()
     const navigate = useNavigate()
-
     if (!kanVelgePerson) return null
 
     return (
@@ -43,12 +42,22 @@ const Person = () => {
             >
                 <Popover.Content>
                     <ul>
-                        {Object.keys(personas).map((p, idx) => (
+                        {Object.keys(PersonaKeys).map((p, idx) => (
                             <BodyShort as="li" key={idx}>
-                                <Link href={`/syk/sykepengesoknad/?testperson=${p}`}>{p}</Link>
+                                <Link href={`/syk/sykepengesoknad/?testperson=${p.valueOf()}`}>{p}</Link>
                             </BodyShort>
                         ))}
                     </ul>
+                    <Button
+                        type="button"
+                        variant="secondary"
+                        onClick={() => {
+                            document.cookie = 'mock-session= ; expires = Thu, 01 Jan 1970 00:00:00 GMT; path=/'
+                            window.location.reload()
+                        }}
+                    >
+                        Reset testdata
+                    </Button>
                 </Popover.Content>
             </Popover>
         </div>

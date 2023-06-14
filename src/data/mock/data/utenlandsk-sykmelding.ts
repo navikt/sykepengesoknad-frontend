@@ -1,6 +1,6 @@
 import { Persona } from '../personas'
 import { RSSporsmal } from '../../../types/rs-types/rs-sporsmal'
-import { jsonDeepCopy } from '../../../utils/json-deep-copy'
+import { deepcopyMedNyId } from '../deepcopyMedNyId'
 
 import { brukertestSoknad, brukertestSykmelding } from './brukertest'
 
@@ -178,7 +178,7 @@ export const utenlandskSykmeldingSporsmalene: RSSporsmal[] = [
         ],
     },
 ]
-export const soknadTilUtenlandskSykmelding = jsonDeepCopy(brukertestSoknad)
+export const soknadTilUtenlandskSykmelding = deepcopyMedNyId(brukertestSoknad, '3708c4de-d16c-4835-841b-a6716b6d39e9')
 soknadTilUtenlandskSykmelding.utenlandskSykmelding = true
 const sporsmalene: RSSporsmal[] = []
 sporsmalene.push(soknadTilUtenlandskSykmelding.sporsmal[0])

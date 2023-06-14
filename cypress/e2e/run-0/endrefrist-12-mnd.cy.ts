@@ -1,6 +1,6 @@
 describe('Tester endrefrist 12 måneder', () => {
     it('Viser popup med info om at endrefristen er ute', () => {
-        cy.visit(`/syk/sykepengesoknad/sendt/3848e75e-4069-4076-95c0-3f9f0b63e498?testperson=korrigeringsfrist-utlopt`)
+        cy.visit(`/syk/sykepengesoknad/sendt/46cd957d-0d62-4091-81ec-7bac2bf6a628?testperson=korrigeringsfrist-utlopt`)
 
         cy.contains('Jeg vil endre svarene i søknaden').and('be.visible').click()
         cy.contains(

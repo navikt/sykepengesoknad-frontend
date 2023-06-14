@@ -11,15 +11,11 @@ import SendtSide from './components/sendt/sendt-side'
 import Soknad from './components/soknad/soknaden'
 import Listevisning from './components/listevisning/listevisning'
 import Vedlikehold from './components/vedlikehold/vedlikehold'
-import { isMockBackend, vedlikehold } from './utils/environment'
+import { vedlikehold } from './utils/environment'
 
 export type RouteParams = {
     stegId: string
     id: string
-}
-
-if (isMockBackend()) {
-    require('./data/mock')
 }
 
 function erFlex(): boolean {

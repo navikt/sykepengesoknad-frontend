@@ -2,6 +2,7 @@ import { gradertReisetilskudd } from '../../../src/data/mock/data/reisetilskudd'
 
 describe('Tester at riktig antall desimaler sendes til backend', () => {
     it('Oppgir desimaler på svartype TALL og PROSENT', () => {
+        cy.clearCookies()
         cy.visit(`/syk/sykepengesoknad/soknader/${gradertReisetilskudd.id}/7`)
         cy.get('[data-cy="ja-nei-stor"] input[value=JA]').click()
 
@@ -18,6 +19,7 @@ describe('Tester at riktig antall desimaler sendes til backend', () => {
     })
 
     it('Oppgir desimaler på svartype BELOP og KILOMETER', () => {
+        cy.clearCookies()
         cy.visit(`/syk/sykepengesoknad/soknader/${gradertReisetilskudd.id}/12`)
 
         cy.get('[data-cy="ja-nei-stor"] input[value=JA]').click()
@@ -37,6 +39,7 @@ describe('Tester at riktig antall desimaler sendes til backend', () => {
     })
 
     it('Håndterer at man bruker komma istedenfor punktum', () => {
+        cy.clearCookies()
         cy.visit(`/syk/sykepengesoknad/soknader/${gradertReisetilskudd.id}/7`)
         cy.get('[data-cy="ja-nei-stor"] input[value=JA]').click()
 
@@ -53,6 +56,7 @@ describe('Tester at riktig antall desimaler sendes til backend', () => {
     })
 
     it('Legger ikke til desimaler', () => {
+        cy.clearCookies()
         cy.visit(`/syk/sykepengesoknad/soknader/${gradertReisetilskudd.id}/7`)
         cy.get('[data-cy="ja-nei-stor"] input[value=JA]').click()
 

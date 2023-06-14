@@ -15,7 +15,7 @@ import { veldigLangSoknad } from '../../../src/data/mock/data/veldig-land-soknad
 describe('Tester støtte for gamle spørsmål', () => {
     //-----
     // Sykmelding: 7e90121c-b64b-4a1c-b7a5-93c9d95aba47, arbeidstaker - 100%
-    // Søknad: faba11f5-123-abc-8c8a-58b28ce2f3ef, fom: 1.4.20, tom: 24.4.20
+    // Søknad: 214f6e73-8150-4261-8ce5-e2b41907fa58, fom: 1.4.20, tom: 24.4.20
     //-----
     const soknad = new Soknad(veldigLangSoknad as any) as Soknad
     let steg = 1
@@ -70,6 +70,7 @@ describe('Tester støtte for gamle spørsmål', () => {
     }
 
     before(() => {
+        cy.clearCookies()
         cy.visit('/syk/sykepengesoknad?testperson=alle-soknader')
     })
 

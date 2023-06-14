@@ -7,6 +7,7 @@ describe('Tester søknad om å beholde sykepenger utenfor EØS', () => {
     const soknad = soknaderOpplaering.find((sok: RSSoknad) => sok.id === oppholdUtland.id)!
 
     before(() => {
+        cy.clearCookies()
         cy.visit('/syk/sykepengesoknad')
     })
 
@@ -139,15 +140,15 @@ describe('Tester søknad om å beholde sykepenger utenfor EØS', () => {
     })
 
     it('Sender inn søknad som ikke har påfølgende søknader', function () {
-        cy.visit(`/syk/sykepengesoknad/soknader/${soknad.id}/4?testperson=bare-utland`)
+        cy.visit(`/syk/sykepengesoknad/soknader/e6e53c43-3b64-48be-b9d1-39d95198e524/4?testperson=bare-utland`)
 
-        cy.url().should('include', `${soknad.id}/4`)
+        cy.url().should('include', `e6e53c43-3b64-48be-b9d1-39d95198e524/4`)
         cy.contains('Jeg bekrefter de to punktene ovenfor').click()
         cy.contains('Send søknaden').click()
     })
 
     it('Viser kvittering med Ferdig-knapp', function () {
-        cy.url().should('include', `kvittering/${soknad.id}`)
+        cy.url().should('include', `kvittering/e6e53c43-3b64-48be-b9d1-39d95198e524`)
         cy.contains('Ferdig')
     })
 })

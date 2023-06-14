@@ -7,9 +7,9 @@ declare global {
 }
 const PUBLIC_FILE = /\.(.*)$/
 const UUID = /\b[0-9a-f]{8}\b-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-\b[0-9a-f]{12}\b/g
-const ORGNR = /\b[0-9a-f]{9}\b/g
+const NUMBER = /\b[0-9]+\b/g //TODO testdata med sporsmålid som number er feil
 export function cleanPathForMetric(value: string): string {
-    return value?.replace(UUID, '[uuid]').replace(ORGNR, '[orgnr]')
+    return value?.replace(UUID, '[uuid]').replace(NUMBER, '[uuid]')
 }
 
 export function shouldLogMetricForPath(cleanPath: string | undefined): boolean {

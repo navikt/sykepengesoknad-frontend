@@ -3,6 +3,7 @@ import { arbeidstakersoknadMedUtenlandsoppholdSoktSykepenger } from '../../../sr
 
 describe('Tester opprettelse av søknad om å beholde sykepenger utenfor EØS', () => {
     before(() => {
+        cy.clearCookies()
         cy.visit('/syk/sykepengesoknad?testperson=alle-soknader')
     })
 

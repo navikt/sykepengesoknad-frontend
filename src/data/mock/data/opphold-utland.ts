@@ -1,7 +1,6 @@
 import { RSSoknad } from '../../../types/rs-types/rs-soknad'
 import { Persona } from '../personas'
-
-import { arbeidstaker100Syk } from './sykmeldinger'
+import { deepcopyMedNyId } from '../deepcopyMedNyId'
 
 export const oppholdUtland: RSSoknad = {
     id: 'b9d67b0d-b1f8-44a5-bcbd-6010b60b90ce',
@@ -123,6 +122,6 @@ export const oppholdUtland: RSSoknad = {
 }
 
 export const bareUtland: Persona = {
-    soknader: [oppholdUtland],
-    sykmeldinger: [arbeidstaker100Syk],
+    soknader: [deepcopyMedNyId(oppholdUtland, 'e6e53c43-3b64-48be-b9d1-39d95198e524')],
+    sykmeldinger: [],
 }

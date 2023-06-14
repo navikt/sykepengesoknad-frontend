@@ -1,10 +1,13 @@
 import { RSSoknad } from '../../../types/rs-types/rs-soknad'
-import { jsonDeepCopy } from '../../../utils/json-deep-copy'
+import { deepcopyMedNyId } from '../deepcopyMedNyId'
 
 import { arbeidstaker100Syk } from './sykmeldinger'
 import { sendtArbeidsledig } from './soknader-integration'
 
-export const korrigeringsfristUtloptSoknad: RSSoknad = jsonDeepCopy(sendtArbeidsledig)
+export const korrigeringsfristUtloptSoknad: RSSoknad = deepcopyMedNyId(
+    sendtArbeidsledig,
+    '46cd957d-0d62-4091-81ec-7bac2bf6a628',
+)
 korrigeringsfristUtloptSoknad.korrigeringsfristUtlopt = true
 
 export const korrigeringsfristUtloptPerson = {

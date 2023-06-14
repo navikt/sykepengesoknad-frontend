@@ -820,7 +820,7 @@ export const gradertReisetilskudd: RSSoknad = {
 }
 
 export const delvisUtfyltReisetilskudd: RSSoknad = {
-    id: '3232aber-98y6-5d2b-1129-1fcaf6cf306b',
+    id: 'a992fd26-3452-41e6-b76e-8bc6d352a0fa',
     sykmeldingId: arbeidstakerReisetilskuddSyk.id,
     soknadstype: 'REISETILSKUDD',
     status: 'NY',
@@ -1055,12 +1055,7 @@ export const delvisUtfyltReisetilskudd: RSSoknad = {
 export const feilVedSlettingAvKvittering: RSSoknad = jsonDeepCopy(nyttReisetilskudd)
 feilVedSlettingAvKvittering.id = 'd4ce1c57-1f91-411b-ab64-beabbba29b65'
 
-export const soknaderReisetilskudd = [
-    nyttReisetilskudd,
-    gradertReisetilskudd,
-    delvisUtfyltReisetilskudd,
-    feilVedSlettingAvKvittering,
-]
+export const soknaderReisetilskudd = [delvisUtfyltReisetilskudd, feilVedSlettingAvKvittering]
 
 export const reisetilskudd: Persona = {
     soknader: [...soknaderReisetilskudd],
