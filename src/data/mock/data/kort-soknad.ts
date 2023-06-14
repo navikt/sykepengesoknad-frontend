@@ -57,6 +57,7 @@ export const kortArbeidstakerSoknad: RSSoknad = {
 }
 
 export const kortFomTomArbeidstakerSoknad = jsonDeepCopy(kortArbeidstakerSoknad)
+kortFomTomArbeidstakerSoknad.id = '2e432fef-9a47-4e7d-bf9d-602f22af7e84'
 kortFomTomArbeidstakerSoknad.fom = '2022-04-01'
 kortFomTomArbeidstakerSoknad.tom = '2022-04-10'
 kortFomTomArbeidstakerSoknad.opprettetDato = '2022-04-01'
