@@ -16,6 +16,7 @@ import { setPeriodeFraTil } from '../../support/utilities'
 describe('Tester kvittering', () => {
     context('Arbeidsledig', () => {
         it('Nylig sendt', () => {
+            cy.clearCookies()
             // Velg søknad
             cy.visit('/syk/sykepengesoknad?testperson=alle-soknader')
 

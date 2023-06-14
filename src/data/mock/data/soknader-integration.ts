@@ -1471,7 +1471,7 @@ export const delvisUtfylltArbeidsledig: RSSoknad = {
     klippet: false,
 }
 export const oppholdUtlandKvittering: RSSoknad = {
-    id: 'b9d67b0d-b1f8-44a5-bcbd-6010111122',
+    id: 'f01cbf75-c7e6-4733-bee3-ecb8396ba1f1',
     sykmeldingId: null,
     soknadstype: 'OPPHOLD_UTLAND',
     status: 'NY',
@@ -1637,7 +1637,7 @@ export const selvstendigKvittering: RSSoknad = {
 }
 
 export const arbeidstakerInnenforArbeidsgiverperiodeKvittering: RSSoknad = {
-    id: 'sok1',
+    id: '08a516f1-62be-45ee-8ce3-4ba0294728b0',
     sykmeldingId: syk1.id,
     soknadstype: 'ARBEIDSTAKERE',
     status: 'NY',
@@ -1687,7 +1687,7 @@ export const arbeidstakerInnenforArbeidsgiverperiodeKvittering: RSSoknad = {
     klippet: false,
 }
 export const arbeidstakerUtenforArbeidsgiverperiodeKvittering: RSSoknad = {
-    id: 'sok2',
+    id: '08a516f1-62be-45ee-8ce3-4ba0294728b1',
     sykmeldingId: syk2.id,
     soknadstype: 'ARBEIDSTAKERE',
     status: 'NY',
@@ -1737,7 +1737,7 @@ export const arbeidstakerUtenforArbeidsgiverperiodeKvittering: RSSoknad = {
     klippet: false,
 }
 export const arbeidstakerDeltPeriodeForsteUtenforArbeidsgiverperiodeKvittering: RSSoknad = {
-    id: 'sok3',
+    id: '08a516f1-62be-45ee-8ce3-4ba0294728b2',
     sykmeldingId: syk3.id,
     soknadstype: 'ARBEIDSTAKERE',
     status: 'NY',
@@ -1787,7 +1787,7 @@ export const arbeidstakerDeltPeriodeForsteUtenforArbeidsgiverperiodeKvittering: 
     klippet: false,
 }
 export const arbeidstakerUtenOppholdForsteUtenforArbeidsgiverperiodeKvittering: RSSoknad = {
-    id: 'sok4',
+    id: '08a516f1-62be-45ee-8ce3-4ba0294728b3',
     sykmeldingId: syk4.id,
     soknadstype: 'ARBEIDSTAKERE',
     status: 'NY',
@@ -1837,7 +1837,7 @@ export const arbeidstakerUtenOppholdForsteUtenforArbeidsgiverperiodeKvittering: 
     klippet: false,
 }
 export const arbeidstakerUtenOppholdKvittering: RSSoknad = {
-    id: 'sok5',
+    id: '08a516f1-62be-45ee-8ce3-4ba0294728b4',
     sykmeldingId: syk5.id,
     soknadstype: 'ARBEIDSTAKERE',
     status: 'NY',
@@ -1887,7 +1887,7 @@ export const arbeidstakerUtenOppholdKvittering: RSSoknad = {
     klippet: false,
 }
 export const sok6: RSSoknad = {
-    id: 'sok6',
+    id: '08a516f1-62be-45ee-8ce3-4ba0294728b5',
     sykmeldingId: 'trengs for sok7',
     soknadstype: 'ARBEIDSTAKERE',
     status: 'SENDT',
@@ -1937,7 +1937,7 @@ export const sok6: RSSoknad = {
     klippet: false,
 }
 export const arbeidstakerMedOppholdForsteUtenforArbeidsgiverperiodeKvittering: RSSoknad = {
-    id: 'sok7',
+    id: '08a516f1-62be-45ee-8ce3-4ba0294728b6',
     sykmeldingId: syk7.id,
     soknadstype: 'ARBEIDSTAKERE',
     status: 'NY',
@@ -1987,7 +1987,7 @@ export const arbeidstakerMedOppholdForsteUtenforArbeidsgiverperiodeKvittering: R
     klippet: false,
 }
 export const arbeidstakerMedOppholdKvittering: RSSoknad = {
-    id: 'sok8',
+    id: '08a516f1-62be-45ee-8ce3-4ba0294728b7',
     sykmeldingId: syk8.id,
     soknadstype: 'ARBEIDSTAKERE',
     status: 'NY',
