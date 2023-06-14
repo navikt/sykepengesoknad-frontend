@@ -1,19 +1,17 @@
-import { nySoknadSomIkkeKanFyllesUt } from '../../../src/data/mock/data/eldre-usendt-soknad'
-import { kortArbeidstakerSoknad } from '../../../src/data/mock/data/kort-soknad'
-
 describe('Eldre søknader', () => {
     describe('soknad med en eldre søknad', () => {
         before(() => {
+            cy.clearCookies()
             cy.visit('/syk/sykepengesoknad?testperson=en-eldre-usendt-soknad')
         })
 
         it('Laster startside', function () {
             cy.get('.navds-heading--large').should('be.visible').and('have.text', 'Søknader')
-            cy.get(`a[href*=${nySoknadSomIkkeKanFyllesUt.id}]`).click()
+            cy.get(`a[href*=e6e53c43-3b64-48be-b9d1-39d95198e528]`).click()
         })
 
         it('Viser advarsel om at det finnes eldre søknad', function () {
-            cy.url().should('include', `${nySoknadSomIkkeKanFyllesUt.id}/1`)
+            cy.url().should('include', `e6e53c43-3b64-48be-b9d1-39d95198e528/1`)
 
             cy.contains('Du har en eldre søknad du må velge om du skal bruke, før du kan begynne på denne.')
 
@@ -21,21 +19,22 @@ describe('Eldre søknader', () => {
         })
 
         it('Vi ender på den eldste søknaden', function () {
-            cy.url().should('include', `${kortArbeidstakerSoknad.id}/1`)
+            cy.url().should('include', `e6e53c43-3b64-48be-b9d1-39d95198e523/1`)
         })
     })
     describe('soknad med to eldre søknad', () => {
         before(() => {
+            cy.clearCookies()
             cy.visit('/syk/sykepengesoknad?testperson=to-eldre-usendte-soknader')
         })
 
         it('Laster startside', function () {
             cy.get('.navds-heading--large').should('be.visible').and('have.text', 'Søknader')
-            cy.get(`a[href*=${nySoknadSomIkkeKanFyllesUt.id}]`).click()
+            cy.get(`a[href*=e6e53c43-3b64-48be-b9d1-39d95198e521]`).click()
         })
 
         it('Viser advarsel om at det finnes eldre søknader', function () {
-            cy.url().should('include', `${nySoknadSomIkkeKanFyllesUt.id}/1`)
+            cy.url().should('include', `e6e53c43-3b64-48be-b9d1-39d95198e521/1`)
 
             cy.contains('Du har to eldre søknader du må velge om du skal bruke, før du kan begynne på denne.')
 
@@ -43,7 +42,7 @@ describe('Eldre søknader', () => {
         })
 
         it('Vi ender på den eldste søknaden', function () {
-            cy.url().should('include', `${kortArbeidstakerSoknad.id}/1`)
+            cy.url().should('include', `e6e53c43-3b64-48be-b9d1-39d95198e529/1`)
         })
 
         fyllUtSoknad()
@@ -82,3 +81,5 @@ function fyllUtSoknad() {
         cy.contains('Send søknaden').click()
     })
 }
+
+export {}
