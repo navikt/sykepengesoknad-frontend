@@ -33,6 +33,7 @@ import {
     soknadSomTriggerFeilStatusForOppdaterSporsmal,
     soknadSomTriggerSporsmalFinnesIkkeISoknad,
 } from './data/soknader-integration'
+import {feilVedSlettingAvKvittering} from "./data/reisetilskudd";
 
 type session = {
     expires: dayjs.Dayjs
@@ -309,6 +310,9 @@ export async function mockApi(req: NextApiRequest, res: NextApiResponse) {
             const soknaden = alleSoknader.find((soknad) => soknad.id === soknadId)
             if (!soknaden) {
                 return sendJson({}, 404)
+            }
+            if(soknadId === feilVedSlettingAvKvittering.id){
+                return sendJson({}, 500)
             }
             const spm = soknaden.sporsmal.find((spm) => spm.id === sporsmalId)
             if (!spm) {
