@@ -1,5 +1,6 @@
 import { Readable } from 'stream'
-
+import fs from 'fs'
+import path from 'path'
 import { serialize } from 'cookie'
 import * as uuid from 'uuid'
 import { v4 as uuidv4 } from 'uuid'
@@ -304,6 +305,37 @@ export async function mockApi(req: NextApiRequest, res: NextApiResponse) {
 
             return sendJson({ oppdatertSporsmal: spm }, 201)
         }
+        case 'DELETE /api/sykepengesoknad-backend/api/v2/soknader/[uuid]/sporsmal/[uuid]/svar/[uuid]': {
+            const soknaden = alleSoknader.find((soknad) => soknad.id === soknadId)
+            if (!soknaden) {
+                return sendJson({}, 404)
+            }
+            const spm = soknaden.sporsmal.find((spm) => spm.id === sporsmalId)
+            if (!spm) {
+                return sendJson({}, 404)
+            }
+            const svarId = pathNumber(7)
+
+            const svarIdx = spm.svar.findIndex((s) => s.id === svarId)
+            if (svarIdx != -1) {
+                spm.svar.splice(svarIdx, 1)
+            }
+
+            return sendJson({ status: 204 }, 204)
+        }
+        case 'GET /api/sykepengesoknad-kvitteringer/api/v2/kvittering/[uuid]': {
+            const filePath = path.join(process.cwd(), 'public', 'static', `kvittering.jpg`)
+            fs.readFile(filePath, function (err, data) {
+                if (err) {
+                    res.status(500).send('Feil ved lesing av filen.')
+                } else {
+                    res.setHeader('Content-Type', 'image/jpeg')
+                    res.end(data)
+                }
+            })
+            return
+        }
+
         default:
             logger.error(`Ukjent api ${url}`)
 
@@ -312,40 +344,6 @@ export async function mockApi(req: NextApiRequest, res: NextApiResponse) {
             break
     }
 }
-
-/*
-
-reisetilskudd stuff
-
-
-    mock.delete(
-        '/syk/sykepengesoknad/api/sykepengesoknad-backend/api/v2/soknader/:soknad/sporsmal/:spmid/svar/:svarid',
-        (req) => {
-            if (req.pathParams.soknad === feilVedSlettingAvKvittering.id) {
-                return Promise.resolve({ status: 500 })
-            }
-            const sok = person.soknader.find((s) => s.id === req.pathParams.soknad)!
-            const spm = sok.sporsmal.find((s) => s.id === req.pathParams.spmid)!
-            const svarIdx = spm.svar.findIndex((s) => s.id === req.pathParams.svarid)!
-            spm.svar.splice(svarIdx, 1)
-
-            return Promise.resolve({ status: 204 })
-        },
-    )
-
-    mock.post(
-        '/syk/sykepengesoknad/api/sykepengesoknad-backend/api/v2/soknader/:soknad/sporsmal/:spmid/svar',
-        (req) => {
-
-        },
-    )
-
-
-    mock.get('/syk/sykepengesoknad/api/sykepengesoknad-kvitteringer/api/v2/kvittering/:blob', () =>
-        fetch('/syk/sykepengesoknad/static/kvittering.jpg'),
-    )
-
- */
 
 const mottaker = (soknadId: string): RSMottaker => {
     if (

@@ -2,6 +2,7 @@ import { nyttReisetilskudd } from '../../../src/data/mock/data/reisetilskudd'
 
 describe('Teste førsteside i reisetilskuddsøknaden', () => {
     before(() => {
+        cy.clearCookies()
         cy.visit('/syk/sykepengesoknad')
     })
 
