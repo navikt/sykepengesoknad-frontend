@@ -38,10 +38,13 @@ export interface SpmProps {
     sporsmal: Sporsmal
 }
 
-const SporsmalForm = () => {
+export interface SpmFormProps {
+    valgtSoknad: Soknad
+    spmIndex: number
+    sporsmal: Sporsmal
+}
+const SporsmalForm = ({ valgtSoknad, spmIndex, sporsmal }: SpmFormProps) => {
     const router = useRouter()
-    const { id, stegId } = router.query as { id: string; stegId: string }
-    const { data: valgtSoknad } = useSoknad(id)
     const { mutate: sendSoknadMutation, isLoading: senderSoknad, error: sendError } = useSendSoknad()
     const { data: korrigerer } = useSoknad(valgtSoknad?.korrigerer, valgtSoknad?.korrigerer !== undefined)
     const queryClient = useQueryClient()
@@ -51,7 +54,6 @@ const SporsmalForm = () => {
     const [erSiste, setErSiste] = useState<boolean>(false)
     const [poster, setPoster] = useState<boolean>(false)
     const [endringUtenEndringAapen, setEndringUtenEndringAapen] = useState<boolean>(false)
-    const spmIndex = parseInt(stegId!) - 1
     const methods = useForm({
         mode: 'onSubmit',
         reValidateMode: 'onChange',
@@ -59,7 +61,6 @@ const SporsmalForm = () => {
     })
     const erUtlandssoknad = valgtSoknad!.soknadstype === RSSoknadstype.OPPHOLD_UTLAND
     let restFeilet = false
-    let sporsmal = valgtSoknad!.sporsmal[spmIndex]
     const nesteSporsmal = valgtSoknad!.sporsmal[spmIndex + 1]
 
     useEffect(() => {
@@ -134,7 +135,7 @@ const SporsmalForm = () => {
                 : (soknad!.sporsmal[spmIndex] = new Sporsmal(spm, undefined as any, true))
         }
 
-        queryClient.setQueriesData(['soknad', id], soknad)
+        queryClient.setQueriesData(['soknad', soknad.id], soknad)
         return true
     }
 

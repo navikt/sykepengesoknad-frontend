@@ -13,7 +13,7 @@ import { useRouter } from 'next/router'
 import { useFangHotjarEmotion } from '../hooks/useFangHotjarEmotion'
 import { useHandleDecoratorClicks } from '../hooks/useBreadcrumbs'
 import { LabsWarning } from '../components/labs-warning/LabsWarning'
-import { isMockBackend, basePath } from '../utils/environment'
+import { basePath } from '../utils/environment'
 import { getFaro, initInstrumentation, pinoLevelToFaroLevel } from '../faro/faro'
 
 interface AppProps extends Omit<NextAppProps, 'pageProps'> {
@@ -38,11 +38,6 @@ function MyApp({ Component, pageProps }: AppProps): JSX.Element {
     useHandleDecoratorClicks()
     useFangHotjarEmotion()
 
-    useEffect(() => {
-        if (isMockBackend()) {
-            require('../data/mock/mocksetup')
-        }
-    })
     const router = useRouter()
 
     useEffect(() => {

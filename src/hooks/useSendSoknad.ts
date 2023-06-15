@@ -13,22 +13,26 @@ export function useSendSoknad() {
 
     const queryClient = useQueryClient()
 
-    if (!valgtSoknad) {
-        throw Error('Skal ha valgt søknad')
-    }
     return useMutation<unknown, FetchError>({
-        mutationFn: async () =>
-            fetchMedRequestId(
-                `/syk/sykepengesoknad/api/sykepengesoknad-backend/api/v2/soknader/${valgtSoknad!.id}/send`,
+        mutationFn: async () => {
+            if (!valgtSoknad) {
+                throw Error('Skal ha valgt søknad')
+            }
+            return fetchMedRequestId(
+                `/syk/sykepengesoknad/api/sykepengesoknad-backend/api/v2/soknader/${valgtSoknad.id}/send`,
                 {
                     method: 'POST',
                     credentials: 'include',
                     headers: { 'Content-Type': 'application/json' },
                 },
-            ),
+            )
+        },
         mutationKey: ['sendsoknad'],
 
         onSuccess: async () => {
+            if (!valgtSoknad) {
+                throw Error('Skal ha valgt søknad')
+            }
             await queryClient.invalidateQueries(['soknad', valgtSoknad.id])
 
             queryClient.invalidateQueries(['soknader']).catch()
@@ -36,7 +40,7 @@ export function useSendSoknad() {
             if (valgtSoknad.korrigerer !== undefined) {
                 queryClient.invalidateQueries(['soknad', valgtSoknad.korrigerer]).catch()
             }
-            router.push(`/kvittering/${valgtSoknad.id}${window.location.search}`, undefined, { shallow: true })
+            router.push(`/kvittering/${valgtSoknad.id}${window.location.search}`, undefined, { shallow: false })
         },
     })
 }
