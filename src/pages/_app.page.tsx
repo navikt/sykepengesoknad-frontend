@@ -13,7 +13,6 @@ import { useRouter } from 'next/router'
 import { useFangHotjarEmotion } from '../hooks/useFangHotjarEmotion'
 import { useHandleDecoratorClicks } from '../hooks/useBreadcrumbs'
 import { LabsWarning } from '../components/labs-warning/LabsWarning'
-import { isMockBackend } from '../utils/environment'
 
 interface AppProps extends Omit<NextAppProps, 'pageProps'> {
     pageProps: PropsWithChildren<unknown>
@@ -32,11 +31,6 @@ function MyApp({ Component, pageProps }: AppProps): JSX.Element {
     useHandleDecoratorClicks()
     useFangHotjarEmotion()
 
-    useEffect(() => {
-        if (isMockBackend()) {
-            require('../data/mock/mocksetup')
-        }
-    })
     const router = useRouter()
 
     useEffect(() => {

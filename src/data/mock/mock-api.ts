@@ -9,6 +9,7 @@ import { NextApiRequest, NextApiResponse } from 'next'
 import dayjs from 'dayjs'
 import { stream2buffer } from '@navikt/next-api-proxy/dist/proxyUtils'
 import { logger } from '@navikt/next-logger'
+import { nextleton } from 'nextleton'
 
 import { cleanPathForMetric } from '../../metrics'
 import { RSSporsmal } from '../../types/rs-types/rs-sporsmal'
@@ -40,7 +41,9 @@ type session = {
     expires: dayjs.Dayjs
     testpersoner: { [index: string]: Persona }
 }
-const sessionStore = {} as Record<string, session>
+export const sessionStore = nextleton('sessionStore', () => {
+    return {} as Record<string, session>
+})
 
 export function getSession(req: NextApiRequest, res: NextApiResponse): session {
     function getSessionId(): string {
@@ -280,7 +283,6 @@ export async function mockApi(req: NextApiRequest, res: NextApiResponse) {
                 soknaden.sendtTilNAVDato = tidspunkt
             }
             soknaden.status = 'SENDT'
-
             return sendJson({ status: 200 }, 200)
         }
         case 'POST /api/sykepengesoknad-kvitteringer/api/v2/opplasting': {

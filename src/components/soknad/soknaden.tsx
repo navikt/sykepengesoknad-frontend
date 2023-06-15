@@ -41,7 +41,6 @@ export const Soknaden = () => {
 
     const stegNo = parseInt(stegId!)
     const spmIndex = stegNo - 1
-    const sporsmal = valgtSoknad?.sporsmal[spmIndex]
 
     useUpdateBreadcrumbs(() => [{ ...soknadBreadcrumb, handleInApp: true }], [])
 
@@ -75,6 +74,7 @@ export const Soknaden = () => {
     if (!valgtSoknad || !soknader || !sykmeldinger || !stegId) {
         return <QueryStatusPanel valgSoknadId={id} valgSykmeldingId={valgtSoknad?.sykmeldingId} />
     }
+    const sporsmal = valgtSoknad.sporsmal[spmIndex]
 
     const tittel = tekst(hentNokkel(valgtSoknad!, stegNo) as any)
     const erUtlandssoknad = valgtSoknad.soknadstype === RSSoknadstype.OPPHOLD_UTLAND && !valgtSykmelding
@@ -141,7 +141,7 @@ export const Soknaden = () => {
                         )}
                     />
 
-                    <SporsmalForm />
+                    <SporsmalForm valgtSoknad={valgtSoknad} sporsmal={sporsmal} spmIndex={spmIndex} />
                     <Feedback soknad={valgtSoknad} steg={stegNo} />
                 </>
             </HotjarTrigger>
