@@ -57,7 +57,7 @@ const KvitteringTekster = {
         'Vi trenger inntektsopplysninger fra deg som du sender inn på eget skjema. Du trenger bare å sende inn skjemaet én gang, selv om sykmeldingen eventuelt blir forlenget.',
     'kvittering.naeringsdrivende.lenke': 'Gå til skjema for inntekstopplysninger her',
     'kvittering.naeringsdrivende.lenke.url':
-        'https://www.nav.no/soknader/nb/bedrift/inntekt-og-trekk/inntektsopplysninger-sykepenger',
+        'https://www.nav.no/fyllut/nav083501',
 
     'kvittering.utenlands.overskrift1': 'Du får svar på om du kan reise',
     'kvittering.utenlands.brodtekst1':
