@@ -16,9 +16,13 @@ export const YrkesskadeHjelpBody = () => {
                 utbetalingene.
             </BodyLong>
             <BodyLong className="mt-4">
-                Svar ja, hvis du er sykmeldt på grunn av en godkjent yrkesskade eller yrkessykdom.
+                Svar ja, hvis du er sykmeldt på grunn av en godkjent yrkesskade du ser i lista.
             </BodyLong>
-            <BodyLong className="mt-4">Svar ja, hvis det er påbegynt eller sendt inn en skademelding til NAV.</BodyLong>
+            <BodyLong className="mt-4">
+                Svar nei, hvis du ikke er sykmeldt på grunn av en godkjent yrkesskade du ser i lista eller har en
+                pågående yrkesskadesak. Hvis skademelding ikke er sendt inn må arbeidsgiveren din gjøre dette før vi kan
+                vurdere saken
+            </BodyLong>
             <LenkeMedIkon
                 className="mt-4"
                 href="https://www.nav.no/yrkesskade"

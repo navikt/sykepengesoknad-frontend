@@ -109,7 +109,7 @@ const SoknadenTekster = {
     'sykepengesoknad.utenlandsk_sykmelding_bosted.tittel': 'Bosted',
     'sykepengesoknad.utenlandsk_sykmelding_lonnet_arbeid_utenfor_norge.tittel': 'Lønnet arbeid utenfor Norge',
     'sykepengesoknad.utenlandsk_sykmelding_trygd_utenfor_norge.tittel': 'Sykepenger i andre EØS-land',
-    'sykepengesoknad.yrkesskade.tittel': 'Yrkesskade',
+    'sykepengesoknad.yrkesskade.tittel': 'Godkjent Yrkesskade',
 }
 
 export default SoknadenTekster
