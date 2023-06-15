@@ -1,8 +1,6 @@
-import * as uuid from 'uuid'
-
 import { Persona } from '../personas'
 import { RSSporsmal } from '../../../types/rs-types/rs-sporsmal'
-import { jsonDeepCopy } from '../../../utils/json-deep-copy'
+import { deepcopyMedNyId } from '../deepcopyMedNyId'
 
 import { brukertestSoknad, brukertestSykmelding } from './brukertest'
 
@@ -34,18 +32,18 @@ export const yrkesskadeSporsmalet: RSSporsmal = {
     ],
 }
 
-const yrkesskadeSoknad = jsonDeepCopy(brukertestSoknad)
-yrkesskadeSoknad.id = uuid.v4()
-const sporsmalene: RSSporsmal[] = []
-const splittSted = 9
-sporsmalene.push(...yrkesskadeSoknad.sporsmal.slice(0, splittSted))
-sporsmalene.push(yrkesskadeSporsmalet)
-sporsmalene.push(...yrkesskadeSoknad.sporsmal.slice(splittSted))
+export function yrkesskadePerson(): Persona {
+    const yrkesskadeSoknad = deepcopyMedNyId(brukertestSoknad, '04247ad5-9c15-4b7d-ae55-f238003db1af')
+    const sporsmalene: RSSporsmal[] = []
+    const splittSted = 8
+    sporsmalene.push(...yrkesskadeSoknad.sporsmal.slice(0, splittSted))
+    sporsmalene.push(yrkesskadeSporsmalet)
+    sporsmalene.push(...yrkesskadeSoknad.sporsmal.slice(splittSted))
 
-yrkesskadeSoknad.sporsmal = sporsmalene
-
-export const yrkesskadePerson: Persona = {
-    soknader: [yrkesskadeSoknad],
-    sykmeldinger: [brukertestSykmelding],
-    kontonummer: '12340000000',
+    yrkesskadeSoknad.sporsmal = sporsmalene
+    return {
+        soknader: [yrkesskadeSoknad],
+        sykmeldinger: [brukertestSykmelding],
+        kontonummer: '12340000000',
+    }
 }
