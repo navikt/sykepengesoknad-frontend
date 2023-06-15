@@ -56,7 +56,7 @@ export function testpersoner(): PersonaData {
         [PersonaKeys['uten-data']]: jsonDeepCopy(utenData),
         [PersonaKeys['reisetilskudd']]: jsonDeepCopy(reisetilskudd),
         [PersonaKeys['utenlandsk-sykmelding']]: jsonDeepCopy(utenlandskSykmelding),
-        [PersonaKeys['yrkesskade']]: jsonDeepCopy(yrkesskadePerson),
+        [PersonaKeys['yrkesskade']]: jsonDeepCopy(yrkesskadePerson()),
         [PersonaKeys['opplaering']]: jsonDeepCopy(opplaering),
         [PersonaKeys['nytt-arbeid-underveis']]: jsonDeepCopy(nyttArbeidUnderveisPerson),
         [PersonaKeys['alle-soknader']]: jsonDeepCopy(integration),
