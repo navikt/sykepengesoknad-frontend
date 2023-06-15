@@ -28,6 +28,6 @@ export function skalHaYrkessakdebullet(sporsmal: Sporsmal, soknad: Soknad) {
 }
 
 export const ysdatoer = [
-    'Skadedato 11. September 1999, Vedtakssdato 13. Mars 2000',
-    'Skadedato 15. Januar 1995, Vedtakssdato 13. Mars 1996',
+    'Skadedato 11. September 1999 (Vedtaksdato 13. Mars 2000)',
+    'Skadedato 15. Januar 1995 (Vedtaksdato 13. Mars 1996)',
 ]
