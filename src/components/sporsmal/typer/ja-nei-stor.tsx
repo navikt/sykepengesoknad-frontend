@@ -23,7 +23,7 @@ import { cn } from '../../../utils/tw-utils'
 import { YrkesskadeInfo } from '../../hjelpetekster/yrkesskade-info'
 import { useJaNeiKeyboardNavigation } from '../../../utils/keyboard-navigation'
 import { Inntektsbulletpoints, skalHaInntektsbulletpoints } from '../inntektsbulletpoints'
-import {Yrkesskadebullet} from "../yrkesskadebulletpoints";
+import { Yrkesskadebullet } from '../yrkesskadebulletpoints'
 
 const JaNeiStor = ({ sporsmal }: SpmProps) => {
     const {

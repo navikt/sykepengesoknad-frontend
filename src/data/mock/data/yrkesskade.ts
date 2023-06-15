@@ -1,6 +1,7 @@
 import { Persona } from '../personas'
 import { RSSporsmal } from '../../../types/rs-types/rs-sporsmal'
 import { deepcopyMedNyId } from '../deepcopyMedNyId'
+import { ysdatoer } from '../../../components/sporsmal/yrkesskadebulletpoints'
 
 import { brukertestSoknad, brukertestSykmelding } from './brukertest'
 
@@ -27,34 +28,21 @@ export const yrkesskadeSporsmalet: RSSporsmal = {
             pavirkerAndreSporsmal: false,
             kriterieForVisningAvUndersporsmal: null,
             svar: [],
-            undersporsmal: [
-                {
-                    id: '687382',
+            undersporsmal: ysdatoer.map((d, i) => {
+                return {
+                    id: '3242323324' + i,
                     tag: 'INNTEKTSKILDE_ANDRE_ARBEIDSFORHOLD',
-                    sporsmalstekst: '2001-11-09  (vedtakssdato 2022-02-03)',
+                    sporsmalstekst: d,
                     undertekst: null,
                     svartype: 'CHECKBOX',
                     min: null,
                     max: null,
                     pavirkerAndreSporsmal: false,
-                    kriterieForVisningAvUndersporsmal: 'CHECKED',
+                    kriterieForVisningAvUndersporsmal: null,
                     svar: [],
                     undersporsmal: [],
-                },
-                {
-                    id: '3242323324',
-                    tag: 'INNTEKTSKILDE_ANDRE_ARBEIDSFORHOLD',
-                    sporsmalstekst: '1995-01-15  (vedtakssdato 2022-02-03)',
-                    undertekst: null,
-                    svartype: 'CHECKBOX',
-                    min: null,
-                    max: null,
-                    pavirkerAndreSporsmal: false,
-                    kriterieForVisningAvUndersporsmal: 'CHECKED',
-                    svar: [],
-                    undersporsmal: [],
-                },
-            ],
+                }
+            }),
         },
     ],
 }
