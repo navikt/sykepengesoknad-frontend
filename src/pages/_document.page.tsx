@@ -48,9 +48,7 @@ class MyDocument extends Document<Props> {
                 <Head>{showDecorator && <Decorator.Styles />}</Head>
                 <body>
                     {showDecorator && <Decorator.Header />}
-                    <main id="maincontent" role="main" tabIndex={-1}>
-                        <Main />
-                    </main>
+                    <Main />
                     {showDecorator && (
                         <>
                             <Decorator.Footer />

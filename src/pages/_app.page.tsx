@@ -68,7 +68,9 @@ function MyApp({ Component, pageProps }: AppProps): JSX.Element {
             <QueryClientProvider client={queryClient}>
                 <div id="root" className="mx-auto max-w-2xl p-4 pb-32">
                     <LabsWarning />
-                    <Component {...pageProps} />
+                    <main id="maincontent" role="main" tabIndex={-1} className="outline-none">
+                        <Component {...pageProps} />
+                    </main>
                 </div>
             </QueryClientProvider>
         </>
