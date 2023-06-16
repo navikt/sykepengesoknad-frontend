@@ -6,12 +6,10 @@ export const YrkesskadeHjelpBody = () => {
     return (
         <>
             <BodyLong>
-                Yrkesskade er en personskade eller sykdom som oppstår under arbeid. En sykdom kan kategoriseres som
-                yrkessykdom hvis årsaken er skadelig påvirkning fra arbeidet. Utbrenthet anses imidlertid vanligvis ikke
-                som en yrkessykdom.
+                Yrkesskade er en personskade eller sykdom som oppstår under arbeid.
             </BodyLong>
             <BodyLong className="mt-4">
-                Dersom du er sykmeldt grunnet en godkjent yrkesskade eller yrkessykdom, kan det gi deg visse fordeler.
+                En godkjent yrkesskade eller yrkessykdom kan gi deg visse fordeler hvis den er årsaken til sykefraværet ditt.
                 Disse fordelene kan påvirke sykepengeutbetalingen din ved å øke varigheten og/eller størrelsen på
                 utbetalingene.
             </BodyLong>

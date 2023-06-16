@@ -20,7 +20,7 @@ export const yrkesskadeSporsmalet: RSSporsmal = {
         {
             id: '687381',
             tag: 'HVILKE_ANDRE_INNTEKTSKILDER',
-            sporsmalstekst: 'Velg hvilke skadedatoer dette sykefraværet har sammenheng med?',
+            sporsmalstekst: 'Velg hvilken skadedato dette sykefraværet har sammenheng med',
             undertekst: null,
             svartype: 'CHECKBOX_GRUPPE',
             min: null,
