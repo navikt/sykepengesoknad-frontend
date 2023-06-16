@@ -44,19 +44,18 @@ export function klikkGaVidere() {
     // Få nåværende URL
     cy.url().then((currentUrl) => {
         // Trekke ut det nåværende path parameteret
-        const currentPathParam = parseInt(currentUrl.split('/').slice(0, -1).pop()!);
+        const currentPathParam = parseInt(currentUrl.split('/').pop()!)
 
         // Klikke "Gå videre"-knappen
-        cy.contains('Gå videre').click();
+        cy.contains('Gå videre').click()
 
         // Vent til URL har endret seg
-        cy.url().should('not.eq', currentUrl);
+        cy.url().should('not.eq', currentUrl)
 
         // Sjekke om path parameteret er økt med 1
         cy.url().then((newUrl) => {
-            const newPathParam = parseInt(newUrl.split('/').slice(0, -1).pop()!);
-            expect(newPathParam).to.eq(currentPathParam + 1);
-        });
-    });
+            const newPathParam = parseInt(newUrl.split('/').pop()!)
+            expect(newPathParam).to.eq(currentPathParam + 1)
+        })
+    })
 }
-

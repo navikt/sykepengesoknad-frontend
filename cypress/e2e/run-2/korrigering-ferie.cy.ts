@@ -1,8 +1,12 @@
-import { svarJaHovedsporsmal, svarNeiHovedsporsmal, svarCheckboxPanel, setPeriodeFraTil, klikkGaVidere } from '../../support/utilities'
+import {
+    svarJaHovedsporsmal,
+    svarNeiHovedsporsmal,
+    svarCheckboxPanel,
+    setPeriodeFraTil,
+    klikkGaVidere,
+} from '../../support/utilities'
 
 describe('Tester korrigering av ferie', () => {
-
-
     it('Sender inn søknad med ja på ferie spørsmålet', () => {
         cy.clearCookies()
         cy.visit('/syk/sykepengesoknad/soknader/5b769c04-e171-47c9-b79b-23ab8fce331e')
