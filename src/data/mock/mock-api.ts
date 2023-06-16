@@ -284,6 +284,9 @@ export async function mockApi(req: NextApiRequest, res: NextApiResponse) {
             return sendJson({ status: 200 }, 200)
         }
         case 'POST /api/sykepengesoknad-kvitteringer/api/v2/opplasting': {
+            const stream = Readable.from(req)
+            await stream2buffer(stream)
+
             return sendJson({
                 id: uuid.v4(),
                 melding: 'opprettet',
