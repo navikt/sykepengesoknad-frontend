@@ -5,7 +5,7 @@ import { TagTyper } from '../../types/enums'
 import { Soknad, Sporsmal } from '../../types/types'
 
 export const Yrkesskadebullet = ({ sporsmal, soknad }: { sporsmal: Sporsmal; soknad: Soknad }) => {
-    if (!skalHaYrkessakdebullet(sporsmal, soknad)) return null
+    if (!skalHaYrkessakdebullet(sporsmal)) return null
 
     return (
         <>
@@ -23,7 +23,7 @@ export const Yrkesskadebullet = ({ sporsmal, soknad }: { sporsmal: Sporsmal; sok
     )
 }
 
-export function skalHaYrkessakdebullet(sporsmal: Sporsmal, soknad: Soknad) {
+function skalHaYrkessakdebullet(sporsmal: Sporsmal) {
     return sporsmal.tag === TagTyper.YRKESSKADE
 }
 
