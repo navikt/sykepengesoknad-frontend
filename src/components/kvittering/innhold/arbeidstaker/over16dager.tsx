@@ -34,7 +34,7 @@ const Over16dager = ({ erGradert }: gradertReisetilskuddProps) => {
                             ),
                         },
                         {
-                            inlinetekst: 'lengre enn 16 kalenderdager',
+                            inlinetekst: '16 kalenderdager',
                             tittel: tekst('kvittering.arbeidstaker.hvorfor-skille-ved-16-dager'),
                             children: (
                                 <BodyLong>
