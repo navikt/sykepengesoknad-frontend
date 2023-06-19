@@ -25,6 +25,7 @@ const KvitteringVidere = () => {
 
     return (
         <Alert variant="info" className="bg-white" data-cy="kvittering-alert">
+            {/* TODO Fjern overrides med !text-text-action hvis Alerten fjernes */}
             <Heading size="small" level="3">
                 {tekst('kvittering.hva-skjer-videre')}
             </Heading>
