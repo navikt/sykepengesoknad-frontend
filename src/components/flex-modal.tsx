@@ -4,7 +4,7 @@ import { Button, Heading, Modal } from '@navikt/ds-react'
 interface FlexModalProps {
     open: boolean
     setOpen: (open: boolean) => void
-    headerId: string
+    headerId?: string
     header: string
     children: React.ReactNode
     onClose?: () => void
@@ -12,17 +12,23 @@ interface FlexModalProps {
 }
 
 export const FlexModal = ({ open, setOpen, headerId, header, children, onClose, lukkKnapp }: FlexModalProps) => {
+    const faktiskHeaderId =
+        headerId ||
+        header
+            .replace(/[^a-zA-Z\s]/g, '')
+            .replace(/\s+/g, '_')
+            .toLowerCase()
     return (
         <Modal
             open={open}
-            aria-labelledby={headerId}
+            aria-labelledby={faktiskHeaderId}
             onClose={() => {
                 setOpen(false)
                 onClose && onClose()
             }}
         >
-            <Modal.Content className="m-4 md:w-2xl">
-                <Heading size="small" level="1" id={headerId} spacing>
+            <Modal.Content className="m-4 md:w-2xl" data-cy="modal-content">
+                <Heading size="small" level="1" id={faktiskHeaderId} spacing>
                     {header}
                 </Heading>
                 {children}

@@ -11,7 +11,7 @@ const PerioderMedOpphold = () => {
         <div>
             <div className="mt-4">
                 <Label as="h2" spacing>
-                    {tekst('kvittering.naeringsdrivende.tittel')}
+                    {tekst('kvittering.før.nav.behandler')}
                 </Label>
                 <BodyShort spacing>{tekst('kvittering.arbeidstaker.med-opphold')} </BodyShort>
                 <ReadMore className="mt-2" header={tekst('kvittering.arbeidstaker.hvorfor-inntektsmelding-pa-nytt')}>

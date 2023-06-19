@@ -12,6 +12,7 @@ import {
     sendtArbeidsledigKvittering,
 } from '../../../src/data/mock/data/soknader-integration'
 import { setPeriodeFraTil } from '../../support/utilities'
+import { inlineForklaringer } from '../../support/sjekkInlineForklaringKvittering'
 
 describe('Tester kvittering', () => {
     context('Arbeidsledig', () => {
@@ -271,8 +272,6 @@ describe('Tester kvittering', () => {
                     'contain',
                     'Når sykefraværet ditt er lengre enn 16 kalenderdager, betyr det at du får sykepenger utbetalt av NAV. Noen arbeidsplasser fortsetter å utbetale sykepenger fra dag 17, men da får de penger tilbake fra NAV senere.  Arbeidsgiveren din må derfor sende oss inntektsmelding så fort som mulig.',
                 )
-                .and('contain', 'Hvorfor går det et skille ved 16 dager?')
-                .and('contain', 'Hva er en inntektsmelding')
                 .and('contain', 'NAV behandler søknaden')
                 .and(
                     'contain',
@@ -288,26 +287,13 @@ describe('Tester kvittering', () => {
                     'Hvis du får sykepenger utbetalt fra NAV, får du vanligvis utbetalt sykepengene enten innen den 25. i måneden, eller innen fem dager etter at vi har sendt deg svar på søknaden din. Hvis søknaden din gjelder dager i to ulike kalendermåneder, kan utbetalingen bli delt i to. Les mer om når du kan forvente å få pengene.',
                 )
                 .and('not.contain', 'Du får sykepengene fra arbeidsgiveren din')
+            inlineForklaringer()
 
             // Behandlingstider lenke
             cy.contains('Sjekk saksbehandlingstidene').should(
                 'have.attr',
                 'href',
                 'https://www.nav.no/saksbehandlingstider#sykepenger',
-            )
-
-            // Arbeidsgiverperiode tekst
-            cy.contains('Hvorfor går det et skille ved 16 dager?').click()
-            cy.get('.navds-body-long').should(
-                'contain',
-                'Arbeidsgiveren skal betale sykepenger i en periode på opptil 16 kalenderdager, også kalt arbeidsgiverperioden. NAV overtar sykepengeutbetalingen fra og med 17. kalenderdag.',
-            )
-
-            // Inntektsmelding
-            cy.contains('Hva er en inntektsmelding').click()
-            cy.get('.navds-body-long').should(
-                'contain',
-                'Arbeidsplassen din sender inntektsopplysninger og annen informasjon som NAV trenger for å behandle søkaden din. Inntektsmeldingen sendes digitalt fra arbeidsplassens lønns- og personalsystem eller fra Altinn.no.',
             )
         })
 
@@ -463,8 +449,6 @@ const over16dagerKvittering = () => {
             'contain',
             'Når sykefraværet ditt er lengre enn 16 kalenderdager, betyr det at du får sykepenger utbetalt av NAV. Noen arbeidsplasser fortsetter å utbetale sykepenger fra dag 17, men da får de penger tilbake fra NAV senere.  Arbeidsgiveren din må derfor sende oss inntektsmelding så fort som mulig.',
         )
-        .and('contain', 'Hvorfor går det et skille ved 16 dager?')
-        .and('contain', 'Hva er en inntektsmelding')
         .and('contain', 'NAV behandler søknaden')
         .and(
             'contain',
@@ -488,20 +472,7 @@ const over16dagerKvittering = () => {
         'https://www.nav.no/saksbehandlingstider#sykepenger',
     )
 
-    // Arbeidsgiverperiode tekst
-    cy.contains('Hvorfor går det et skille ved 16 dager?').click()
-    cy.get('.navds-body-long').should(
-        'contain',
-        'Arbeidsgiveren skal betale sykepenger i en periode på opptil 16 kalenderdager, også kalt arbeidsgiverperioden. NAV overtar sykepengeutbetalingen fra og med 17. kalenderdag.',
-    )
-
-    // Inntektsmelding
-    cy.contains('Hva er en inntektsmelding').click()
-    cy.get('.navds-body-long').should(
-        'contain',
-        'Arbeidsplassen din sender inntektsopplysninger og annen informasjon som NAV trenger for å behandle søkaden din. Inntektsmeldingen sendes digitalt fra arbeidsplassens lønns- og personalsystem eller fra Altinn.no.',
-    )
-
+    inlineForklaringer()
     // Oppsummering minimert
     cy.get('[data-cy="oppsummering-fra-søknaden"]  .navds-expansioncard__header-button').should(
         'have.attr',

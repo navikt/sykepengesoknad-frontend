@@ -1,5 +1,6 @@
 import { arbeidstaker } from '../../../src/data/mock/data/opplaering'
 import { setPeriodeFraTil } from '../../support/utilities'
+import { inlineForklaringer } from '../../support/sjekkInlineForklaringKvittering'
 
 describe('Tester arbeidstakersøknad', () => {
     //-----
@@ -9,6 +10,7 @@ describe('Tester arbeidstakersøknad', () => {
     const soknad = arbeidstaker
 
     before(() => {
+        cy.clearCookies()
         cy.visit('/syk/sykepengesoknad')
     })
 
@@ -193,9 +195,11 @@ describe('Tester arbeidstakersøknad', () => {
         cy.get('[data-cy="kvittering"]')
             .should('contain', 'Hva skjer videre?')
             .and('contain', 'Før NAV kan behandle søknaden')
-            .and('contain', 'Hvorfor går det et skille ved 16 dager?')
-            .and('contain', 'Hva er en inntektsmelding')
+            .and('not.contain', 'Hvorfor går det et skille ved 16 dager?')
+            .and('not.contain', 'Hva er en inntektsmelding')
             .and('contain', 'NAV behandler søknaden')
             .and('contain', 'Når blir pengene utbetalt')
+
+        inlineForklaringer()
     })
 })

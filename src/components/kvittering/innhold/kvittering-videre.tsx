@@ -33,7 +33,7 @@ const KvitteringVidere = () => {
                 hvis={valgtSoknad.arbeidssituasjon === RSArbeidssituasjon.NAERINGSDRIVENDE}
                 render={() => (
                     <div className="mt-4">
-                        <Label as="h2">{tekst('kvittering.naeringsdrivende.tittel')}</Label>
+                        <Label as="h2">{tekst('kvittering.før.nav.behandler')}</Label>
                         <BodyLong as="span">{tekst('kvittering.naeringsdrivende.brodtekst')} </BodyLong>
                         <LenkeMedIkon
                             href={tekst('kvittering.naeringsdrivende.lenke.url')}
