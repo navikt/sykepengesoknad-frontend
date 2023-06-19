@@ -27,7 +27,6 @@
 import 'cypress-file-upload'
 import '@testing-library/cypress/add-commands'
 
-
 function disableAnimations(win: Cypress.AUTWindow) {
     const injectedStyleEl = win.document.getElementById('__cy_disable_animations__')
     if (injectedStyleEl) {

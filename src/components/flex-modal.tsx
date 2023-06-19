@@ -27,7 +27,7 @@ export const FlexModal = ({ open, setOpen, headerId, header, children, onClose, 
                 onClose && onClose()
             }}
         >
-            <Modal.Content className="m-4 md:w-2xl" data-cy={'modal-content'}>
+            <Modal.Content className="m-4 md:w-2xl" data-cy="modal-content">
                 <Heading size="small" level="1" id={faktiskHeaderId} spacing>
                     {header}
                 </Heading>
