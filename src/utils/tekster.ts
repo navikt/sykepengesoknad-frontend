@@ -11,7 +11,7 @@ import FilListeTekster from '../components/filopplaster/fil-liste/fil-liste-teks
 import OpplastingTekster from '../components/filopplaster/kvittering-modal/opplasting-tekster'
 import FristSykepengerTekster from '../components/frist-sykepenger/frist-sykepenger-tekster'
 import { GjenstaendeSoknaderTekster } from '../components/gjenstaende-soknader/gjenstaende-soknader-tekster'
-import KvitteringTekster from '../components/kvittering/kvittering-tekster'
+import { KvitteringTekster } from '../components/kvittering/kvittering-tekster'
 import OmReisetilskuddTekster from '../components/om-reisetilskudd/om-reisetilskudd-tekster'
 import OmSykepengerTekster from '../components/om-sykepenger/om-sykepenger-tekster'
 import OpplysningerTekster from '../components/opplysninger-fra-sykmelding/opplysninger-tekster'

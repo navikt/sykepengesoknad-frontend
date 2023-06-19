@@ -1,4 +1,4 @@
-const KvitteringTekster = {
+export const KvitteringTekster = {
     'kvittering.sidetittel': 'Kvittering',
     'kvittering.status': 'Status',
     'kvittering.utbetaling.tittel': 'Utbetaling av sykepenger',
@@ -52,7 +52,7 @@ const KvitteringTekster = {
     'kvittering.digital-inntektsmelding':
         'Digital inntektsmelding sendes fra arbeidsgivers eget lønns- og personalsystem eller fra altinn.no. Meldingen inneholder inntektsopplysninger og annen informasjon NAV må ha for å behandle søknaden arbeidstaker har sendt.',
 
-    'kvittering.naeringsdrivende.tittel': 'Før NAV kan behandle søknaden',
+    'kvittering.før.nav.behandler': 'Før NAV kan behandle søknaden',
     'kvittering.naeringsdrivende.brodtekst':
         'Vi trenger inntektsopplysninger fra deg som du sender inn på eget skjema. Du trenger bare å sende inn skjemaet én gang, selv om sykmeldingen eventuelt blir forlenget.',
     'kvittering.naeringsdrivende.lenke': 'Gå til skjema for inntekstopplysninger her',
@@ -106,5 +106,3 @@ const KvitteringTekster = {
         'Dersom du vil benytte et annet kontonummer for utbetaling fra NAV, kan du endre det på <a target="_blank" href="https://www.nav.no/person/personopplysninger/#utbetaling">Min side</a>',
     'kvittering.ferdig': 'Ferdig',
 }
-
-export default KvitteringTekster
