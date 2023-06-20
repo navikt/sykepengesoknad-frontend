@@ -1,10 +1,14 @@
 import { Persona } from '../personas'
 import { RSSporsmal } from '../../../types/rs-types/rs-sporsmal'
 import { deepcopyMedNyId } from '../deepcopyMedNyId'
-import { skapSkadedatoTekst } from '../../../components/sporsmal/yrkesskade-bulletpoints'
-import { mapYrkesskadedatoer } from '../../../types/types'
+import { mapYrkesskadedatoer, Yrkesskadedato } from '../../../types/types'
+import { tilLesbarDatoMedArstall } from '../../../utils/dato-utils'
 
 import { brukertestSoknad, brukertestSykmelding } from './brukertest'
+
+function skapSkadedatoTekst(y: Yrkesskadedato) {
+    return `Skadedato ${tilLesbarDatoMedArstall(y.skadedato)} (Vedtaksdato ${tilLesbarDatoMedArstall(y.vedtaksdato)})`
+}
 
 export const yrkesskadeV1Sporsmal: RSSporsmal = {
     id: '234234234234',

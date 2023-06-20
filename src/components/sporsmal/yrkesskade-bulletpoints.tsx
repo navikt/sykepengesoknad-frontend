@@ -26,6 +26,6 @@ export const Yrkesskadebulletpoints = ({ sporsmal, soknad }: { sporsmal: Sporsma
     )
 }
 
-export function skapSkadedatoTekst(y: Yrkesskadedato) {
+function skapSkadedatoTekst(y: Yrkesskadedato) {
     return `Skadedato ${tilLesbarDatoMedArstall(y.skadedato)} (Vedtaksdato ${tilLesbarDatoMedArstall(y.vedtaksdato)})`
 }

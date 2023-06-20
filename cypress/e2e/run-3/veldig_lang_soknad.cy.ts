@@ -90,6 +90,10 @@ describe('Tester støtte for gamle spørsmål', () => {
         cy.get('[data-cy="yrkesskade-info"]').should('not.exist')
         gaVidere()
     })
+    it('YRKESSKADE_V2', () => {
+        svarNeiHovedsporsmal()
+        gaVidere()
+    })
     it('ARBEID_UNDERVEIS_100_PROSENT_0', () => {
         svarNeiHovedsporsmal()
         gaVidere()

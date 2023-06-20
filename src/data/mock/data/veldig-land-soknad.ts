@@ -1,7 +1,7 @@
 import { RSSoknad } from '../../../types/rs-types/rs-soknad'
 
 import { arbeidstaker100Syk } from './sykmeldinger'
-import { yrkesskadeV1Sporsmal } from './yrkesskade'
+import { yrkesskadeV1Sporsmal, yrkesskadeV2Sporsmal } from './yrkesskade'
 import { utenlandskSykmeldingSporsmalene } from './utenlandsk-sykmelding'
 import { værKlarOverAt } from './sporsmal/vaer-klar-over-at'
 import { bekreftOpplysninger } from './sporsmal/bekreft-opplysninger'
@@ -50,6 +50,7 @@ export const veldigLangSoknad: RSSoknad = {
             undersporsmal: [],
         },
         yrkesskadeV1Sporsmal,
+        yrkesskadeV2Sporsmal,
         {
             id: 'f085f79a-ced7-36b0-9259-0806aa57da5f',
             tag: 'ARBEID_UNDERVEIS_100_PROSENT_0',
