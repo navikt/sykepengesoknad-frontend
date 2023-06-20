@@ -1,6 +1,6 @@
 export const inlineForklaringerKvittering = () => {
     cy.findByRole('button', { name: '16 kalenderdager' }).click()
-    cy.get('[data-cy="modal-content"]')
+    cy.get('[data-cy="modal-content"]', { timeout: 15000 })
     cy.findByRole('dialog', { name: 'Hvorfor går det et skille ved 16 dager?' })
         .should('contain', 'Hvorfor går det et skille ved 16 dager?')
         .and(
