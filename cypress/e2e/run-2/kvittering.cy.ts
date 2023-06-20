@@ -12,6 +12,7 @@ import {
     sendtArbeidsledigKvittering,
 } from '../../../src/data/mock/data/soknader-integration'
 import { setPeriodeFraTil } from '../../support/utilities'
+import { inlineForklaringerKvittering } from '../../support/inlineForklaringKvittering'
 
 describe('Tester kvittering', () => {
     context('Arbeidsledig', () => {
@@ -287,21 +288,8 @@ describe('Tester kvittering', () => {
                     'Hvis du får sykepenger utbetalt fra NAV, får du vanligvis utbetalt sykepengene enten innen den 25. i måneden, eller innen fem dager etter at vi har sendt deg svar på søknaden din. Hvis søknaden din gjelder dager i to ulike kalendermåneder, kan utbetalingen bli delt i to. Les mer om når du kan forvente å få pengene.',
                 )
                 .and('not.contain', 'Du får sykepengene fra arbeidsgiveren din')
-            cy.findByRole('button', { name: '16 kalenderdager' }).click()
-            cy.findByRole('dialog', { name: 'Hvorfor går det et skille ved 16 dager?' })
-                .should('contain', 'Hvorfor går det et skille ved 16 dager?')
-                .and(
-                    'contain',
-                    'Arbeidsgiveren skal betale sykepenger i en periode på opptil 16 kalenderdager, også kalt arbeidsgiverperioden. ',
-                )
-                .findByRole('button', { name: 'Lukk' })
-                .click()
 
-            cy.findByRole('button', { name: 'inntektsmelding' }).click()
-            cy.findByRole('dialog', { name: 'Hva er en inntektsmelding?' })
-                .should('contain', 'Hva er en inntektsmelding')
-                .findByRole('button', { name: 'Lukk' })
-                .click()
+            inlineForklaringerKvittering()
 
             // Behandlingstider lenke
             cy.contains('Sjekk saksbehandlingstidene').should(
@@ -493,21 +481,7 @@ const over16dagerKvittering = () => {
         'https://www.nav.no/saksbehandlingstider#sykepenger',
     )
 
-    cy.findByRole('button', { name: '16 kalenderdager' }).click()
-    cy.findByRole('dialog', { name: 'Hvorfor går det et skille ved 16 dager?' })
-        .should('contain', 'Hvorfor går det et skille ved 16 dager?')
-        .and(
-            'contain',
-            'Arbeidsgiveren skal betale sykepenger i en periode på opptil 16 kalenderdager, også kalt arbeidsgiverperioden. ',
-        )
-        .findByRole('button', { name: 'Lukk' })
-        .click()
-
-    cy.findByRole('button', { name: 'inntektsmelding' }).click()
-    cy.findByRole('dialog', { name: 'Hva er en inntektsmelding?' })
-        .should('contain', 'Hva er en inntektsmelding')
-        .findByRole('button', { name: 'Lukk' })
-        .click()
+    inlineForklaringerKvittering()
     // Oppsummering minimert
     cy.get('[data-cy="oppsummering-fra-søknaden"]  .navds-expansioncard__header-button').should(
         'have.attr',
