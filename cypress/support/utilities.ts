@@ -33,6 +33,12 @@ export function svarCheckboxPanel() {
     cy.get('.navds-checkbox__label').click()
 }
 
+export function checkViStolerPåDeg() {
+    cy.findByRole('checkbox', {
+        name: 'Jeg vet at jeg kan miste retten til sykepenger hvis opplysningene jeg gir ikke er riktige eller fullstendige. Jeg vet også at NAV kan holde igjen eller kreve tilbake penger, og at å gi feil opplysninger kan være straffbart.',
+    }).click()
+}
+
 export function velgDato(dato = 10) {
     const className = '.navds-date__field-button'
 
@@ -48,6 +54,7 @@ export function klikkGaVidere() {
 
         // Klikke "Gå videre"-knappen
         cy.contains('Gå videre').click()
+        cy.findByRole('button', { name: 'Gå videre' }).click()
 
         // Vent til URL har endret seg
         cy.url().should('not.eq', currentUrl)
