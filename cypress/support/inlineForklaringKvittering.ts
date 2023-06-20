@@ -1,6 +1,8 @@
 export const inlineForklaringerKvittering = () => {
+    // eslint-disable-next-line cypress/no-unnecessary-waiting
+    cy.wait(1000)
     cy.findByRole('button', { name: '16 kalenderdager' }).click()
-    cy.get('[data-cy="modal-content"]', { timeout: 15000 })
+    cy.get('[data-cy="modal-content"]')
     cy.findByRole('dialog', { name: 'Hvorfor går det et skille ved 16 dager?' })
         .should('contain', 'Hvorfor går det et skille ved 16 dager?')
         .and(
