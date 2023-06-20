@@ -1,5 +1,6 @@
 export const inlineForklaringer = () => {
-    cy.contains('button', '16 kalenderdager').click()
+    cy.findByRole('button', { name: '16 kalenderdager' }).click()
+    cy.get('[data-cy="modal-content"]')
     cy.findByRole('dialog', { name: 'Hvorfor går det et skille ved 16 dager?' })
         .should('contain', 'Hvorfor går det et skille ved 16 dager?')
         .and(
@@ -9,7 +10,7 @@ export const inlineForklaringer = () => {
         .findByRole('button', { name: 'Lukk' })
         .click()
 
-    cy.contains('button', 'inntektsmelding').click()
+    cy.findByRole('button', { name: 'inntektsmelding' }).click()
     cy.findByRole('dialog', { name: 'Hva er en inntektsmelding?' })
         .should('contain', 'Hva er en inntektsmelding')
         .findByRole('button', { name: 'Lukk' })
