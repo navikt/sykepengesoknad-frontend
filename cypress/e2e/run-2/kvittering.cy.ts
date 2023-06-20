@@ -311,6 +311,7 @@ describe('Tester kvittering', () => {
         })
 
         it('Utenfor arbeidsgiverperiode', () => {
+            cy.clearCookies()
             cy.visit('/syk/sykepengesoknad?testperson=alle-soknader')
             cy.location('pathname').should('include', '/syk/sykepengesoknad')
             cy.get(`a[href*=${arbeidstakerUtenforArbeidsgiverperiodeKvittering.id}]`).click()
@@ -326,6 +327,7 @@ describe('Tester kvittering', () => {
         })
 
         it('Delt periode og første utenfor arbeidsgiverperiode', () => {
+            cy.clearCookies()
             cy.visit('/syk/sykepengesoknad?testperson=alle-soknader')
             cy.location('pathname').should('include', '/syk/sykepengesoknad')
 
