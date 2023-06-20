@@ -103,6 +103,7 @@ describe('Tester kvittering', () => {
 
     context('Utland', () => {
         it('Nylig sendt', () => {
+            cy.clearCookies()
             cy.visit('/syk/sykepengesoknad?testperson=alle-soknader')
 
             // Velg søknad
