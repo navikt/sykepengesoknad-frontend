@@ -31,12 +31,12 @@ describe('Tester kvittering', () => {
 
             cy.get('[data-cy="bekreftCheckboksPanel"]').click()
             cy.contains('Send søknaden').click()
-            cy.location('pathname').should('include', `/kvittering/${arbeidsledigKvittering.id}`)
-            cy.url().should('include', `/kvittering/${arbeidsledigKvittering.id}`)
 
             // Sendt datoer
             cy.get('[data-cy="sendt-nav"]')
             cy.get('[data-cy="sendt-arbeidsgiver"]').should('not.exist')
+
+            cy.url().should('include', `/kvittering/${arbeidsledigKvittering.id}`)
 
             // Hva skjer videre
             cy.get('[data-cy="kvittering-alert"]')
@@ -74,12 +74,12 @@ describe('Tester kvittering', () => {
             cy.visit('/syk/sykepengesoknad?testperson=alle-soknader')
 
             cy.get(`[data-cy="Tidligere søknader"]  a[href*=${sendtArbeidsledigKvittering.id}]`).click()
-            cy.url().should('include', `/sendt/${sendtArbeidsledigKvittering.id}`)
 
             // Sendt datoer
             cy.get('[data-cy="sendt-nav"]').contains('Mottatt: Torsdag 23. april, kl 11:56')
             cy.get('[data-cy="sendt-arbeidsgiver"]').should('not.exist')
 
+            cy.url().should('include', `/sendt/${sendtArbeidsledigKvittering.id}`)
             // Hva skjer videre skal ikke finnes
             cy.get('[data-cy="kvittering-alert"]').should('not.exist')
 
@@ -120,12 +120,6 @@ describe('Tester kvittering', () => {
             cy.contains('Gå videre').click()
             cy.contains('Jeg bekrefter de to punktene ovenfor').click()
             cy.contains('Send søknaden').click()
-
-            const kvitteringURL = `/kvittering/${oppholdUtlandKvittering.id}`
-
-            cy.location('pathname').should('include', kvitteringURL)
-
-            cy.url().should('include', kvitteringURL)
 
             // Sendt datoer
             cy.get('[data-cy="sendt-nav"]')
@@ -187,15 +181,12 @@ describe('Tester kvittering', () => {
             cy.get('[data-cy="bekreftCheckboksPanel"]').click()
             cy.contains('Send søknaden').click()
 
-            const kvitteringURL = `/kvittering/${selvstendigKvittering.id}`
-
-            cy.location('pathname').should('include', kvitteringURL)
-
-            cy.url().should('include', kvitteringURL)
-
             // Sendt datoer
             cy.get('[data-cy="sendt-nav"]')
             cy.get('[data-cy="sendt-arbeidsgiver"]').should('not.exist')
+
+            const kvitteringURL = `/kvittering/${selvstendigKvittering.id}`
+            cy.url().should('include', kvitteringURL)
 
             // Hva skjer videre
             cy.get('[data-cy="kvittering-alert"]')
@@ -361,29 +352,23 @@ describe('Tester kvittering', () => {
 
         it('Oppfølgende periode 16 eller mindre dager og første utenfor arbeidsgiverperiode', () => {
             cy.visit('/syk/sykepengesoknad?testperson=alle-soknader')
-            cy.location('pathname').should('include', '/syk/sykepengesoknad')
 
             cy.get(`a[href*=${arbeidstakerMedOppholdForsteUtenforArbeidsgiverperiodeKvittering.id}]`).click()
             besvarSoknad()
 
-            const kvitteringURL = `/kvittering/${arbeidstakerMedOppholdForsteUtenforArbeidsgiverperiodeKvittering.id}`
-
-            cy.location('pathname').should('include', kvitteringURL)
-
-            cy.url().should('include', kvitteringURL)
-
             over16dagerKvittering()
+            const kvitteringURL = `/kvittering/${arbeidstakerMedOppholdForsteUtenforArbeidsgiverperiodeKvittering.id}`
+            cy.url().should('include', kvitteringURL)
         })
 
         it('Oppfølgende periode 16 eller mindre dager', () => {
+            cy.clearCookies()
             cy.visit('/syk/sykepengesoknad?testperson=alle-soknader')
-            cy.location('pathname').should('include', '/syk/sykepengesoknad')
 
             cy.get(`a[href*=${arbeidstakerMedOppholdKvittering.id}]`).click()
             besvarSoknad()
 
             const forventetUrl = `/kvittering/${arbeidstakerMedOppholdKvittering.id}`
-            cy.location('pathname').should('include', forventetUrl)
             cy.url().should('include', forventetUrl)
             medOppholdKvittering()
         })
@@ -397,6 +382,7 @@ const besvarSoknad = () => {
     cy.contains('Gå videre').click()
     cy.get('[data-cy="bekreftCheckboksPanel"]').click()
     cy.contains('Send søknaden').click()
+    cy.get('[data-cy="kvittering"]')
 }
 
 const inntil16dagerKvittering = () => {
