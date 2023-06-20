@@ -12,6 +12,7 @@ import { RSSvarliste } from './rs-types/rs-svarliste'
 import { RSSvartype } from './rs-types/rs-svartype'
 import { RSVisningskriterieType } from './rs-types/rs-visningskriterie'
 import { ArbeidsforholdFraInntektskomponenten } from './rs-types/rs-arbeidsforholdfrainntektskomponenten'
+import { RsYrkseskadedato } from './rs-types/rs-yrkesskadedato'
 
 export interface TidsPeriode {
     fom: Date
@@ -21,6 +22,11 @@ export interface TidsPeriode {
 export interface Arbeidsgiver {
     navn: string
     orgnummer: string
+}
+
+export interface Yrkesskadedato {
+    skadedato: Date
+    vedtaksdato: Date
 }
 
 export class Soknad {
@@ -44,6 +50,7 @@ export class Soknad {
     opprettetAvInntektsmelding: boolean
     klippet: boolean
     inntektskilderDataFraInntektskomponenten?: ArbeidsforholdFraInntektskomponenten[]
+    yrkesskadedatoer?: Yrkesskadedato[]
     korrigeringsfristUtlopt?: boolean
 
     constructor(soknad: RSSoknad) {
@@ -75,9 +82,16 @@ export class Soknad {
         this.klippet = soknad.klippet
         this.inntektskilderDataFraInntektskomponenten = soknad.inntektskilderDataFraInntektskomponenten
         this.korrigeringsfristUtlopt = soknad.korrigeringsfristUtlopt
+
+        this.yrkesskadedatoer = soknad.yrkesskadedatoer?.map(mapYrkesskadedatoer)
     }
 }
-
+export const mapYrkesskadedatoer = (dato: RsYrkseskadedato) => {
+    return {
+        skadedato: dayjsToDate(dato.skadedato)!,
+        vedtaksdato: dayjsToDate(dato.vedtaksdato)!,
+    }
+}
 export class Sporsmal {
     id: string
     tag: TagTyper

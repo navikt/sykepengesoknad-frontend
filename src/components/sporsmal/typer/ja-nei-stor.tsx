@@ -23,6 +23,7 @@ import { cn } from '../../../utils/tw-utils'
 import { YrkesskadeInfo } from '../../hjelpetekster/yrkesskade-info'
 import { useJaNeiKeyboardNavigation } from '../../../utils/keyboard-navigation'
 import { Inntektsbulletpoints, skalHaInntektsbulletpoints } from '../inntektsbulletpoints'
+import { Yrkesskadebulletpoints } from '../yrkesskade-bulletpoints'
 
 const JaNeiStor = ({ sporsmal }: SpmProps) => {
     const {
@@ -79,6 +80,7 @@ const JaNeiStor = ({ sporsmal }: SpmProps) => {
         <>
             <div>
                 <Inntektsbulletpoints sporsmal={sporsmal} soknad={valgtSoknad} />
+                <Yrkesskadebulletpoints sporsmal={sporsmal} soknad={valgtSoknad} />
                 <Controller
                     name={sporsmal.id}
                     rules={{ validate: (value) => valider(value), required: feilmelding.global }}
