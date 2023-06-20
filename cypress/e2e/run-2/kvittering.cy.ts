@@ -363,6 +363,8 @@ describe('Tester kvittering', () => {
         })
 
         it('Oppfølgende periode uten opphold', () => {
+            cy.clearCookies()
+
             cy.visit('/syk/sykepengesoknad?testperson=alle-soknader')
             cy.location('pathname').should('include', '/syk/sykepengesoknad')
 
@@ -376,6 +378,7 @@ describe('Tester kvittering', () => {
         })
 
         it('Oppfølgende periode 16 eller mindre dager og første utenfor arbeidsgiverperiode', () => {
+            cy.clearCookies()
             cy.visit('/syk/sykepengesoknad?testperson=alle-soknader')
             cy.location('pathname').should('include', '/syk/sykepengesoknad')
 
@@ -392,6 +395,8 @@ describe('Tester kvittering', () => {
         })
 
         it('Oppfølgende periode 16 eller mindre dager', () => {
+            cy.clearCookies()
+
             cy.visit('/syk/sykepengesoknad?testperson=alle-soknader')
             cy.location('pathname').should('include', '/syk/sykepengesoknad')
 
