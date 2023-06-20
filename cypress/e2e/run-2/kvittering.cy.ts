@@ -382,6 +382,8 @@ const besvarSoknad = () => {
     cy.contains('Gå videre').click()
     cy.get('[data-cy="bekreftCheckboksPanel"]').click()
     cy.contains('Send søknaden').click()
+    // eslint-disable-next-line cypress/no-unnecessary-waiting
+    cy.wait(1000)
     cy.get('[data-cy="kvittering"]')
 }
 
