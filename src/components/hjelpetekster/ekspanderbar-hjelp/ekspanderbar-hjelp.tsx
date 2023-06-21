@@ -16,7 +16,7 @@ import { parserWithReplace } from '../../../utils/html-react-parser-utils'
 import { AndreInntektskilderHjelpBody } from './andre-inntektskilder-hjelp-body'
 import { EkspanderbarHjelpTekster } from './ekspanderbar-hjelp-tekst'
 import { TilbakeIArbeidHjelpBody } from './tilbake-i-arbeid-hjelp-body'
-import { YrkesskadeHjelpBody } from './yrkesskade-hjelp-body'
+import { DeprecatedYrkesskadeHjelpBody, YrkesskadeHjelpBody } from './yrkesskade-hjelp-body'
 import { FerieHjelpBody } from './ferie-hjelp-body'
 import { PermisjonHjelpBody } from './permisjon-hjelp-body'
 import { UtlandHjelpBody } from './utland-hjelp-body'
@@ -70,6 +70,8 @@ export const EkspanderbarHjelp = ({ sporsmal }: SpmProps) => {
             case TagTyper.TILBAKE_I_ARBEID:
                 return <TilbakeIArbeidHjelpBody />
             case TagTyper.YRKESSKADE:
+                return <DeprecatedYrkesskadeHjelpBody />
+            case TagTyper.YRKESSKADE_V2:
                 return <YrkesskadeHjelpBody />
             case TagTyper.FERIE_V2:
                 return <FerieHjelpBody />

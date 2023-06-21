@@ -17,11 +17,11 @@ export function svarFritekst(tag: string, verdi: string) {
 }
 
 export function svarJaHovedsporsmal() {
-    cy.get('[data-cy="ja-nei-stor"] input[value=JA]').click()
+    cy.get('form').findAllByRole('radio', { name: 'Ja' }).first().click()
 }
 
 export function svarNeiHovedsporsmal() {
-    cy.get('[data-cy="ja-nei-stor"] input[value=NEI]').click()
+    cy.get('form').findAllByRole('radio', { name: 'Nei' }).first().click()
 }
 
 export function velgLand(land: string) {
@@ -33,6 +33,24 @@ export function svarCheckboxPanel() {
     cy.get('.navds-checkbox__label').click()
 }
 
+export function checkViStolerPåDeg(gåVidere = true) {
+    cy.get('form')
+        .findByRole('checkbox', {
+            name: 'Jeg vet at jeg kan miste retten til sykepenger hvis opplysningene jeg gir ikke er riktige eller fullstendige. Jeg vet også at NAV kan holde igjen eller kreve tilbake penger, og at å gi feil opplysninger kan være straffbart.',
+        })
+        .click()
+    if (gåVidere) {
+        klikkGaVidere()
+    }
+}
+
+export function neiOgVidere({ antall }: { antall: number }) {
+    for (let i = 0; i < antall; i++) {
+        svarNeiHovedsporsmal()
+        klikkGaVidere()
+    }
+}
+
 export function velgDato(dato = 10) {
     const className = '.navds-date__field-button'
 
@@ -40,15 +58,15 @@ export function velgDato(dato = 10) {
     cy.get('.rdp-day').contains(dato).first().click()
 }
 
-export function klikkGaVidere() {
+export function klikkGaVidere(forventFeil = false) {
     // Få nåværende URL
     cy.url().then((currentUrl) => {
         // Trekke ut det nåværende path parameteret
         const currentPathParam = parseInt(currentUrl.split('/').pop()!)
 
         // Klikke "Gå videre"-knappen
-        cy.contains('Gå videre').click()
-
+        cy.findByRole('button', { name: 'Gå videre' }).click()
+        if (forventFeil) return
         // Vent til URL har endret seg
         cy.url().should('not.eq', currentUrl)
 

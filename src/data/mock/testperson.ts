@@ -20,7 +20,7 @@ import {
 import { egenmeldingsdagerArbeidsgiver } from './data/kort-soknad'
 import { nyttArbeidUnderveisPerson } from './data/nytt-arbeidunderveis'
 import { utenlandskSykmelding } from './data/utenlandsk-sykmelding'
-import { yrkesskadePerson } from './data/yrkesskade'
+import { yrkesskadePerson, yrkesskadeV2Person } from './data/yrkesskade'
 import { egenmeldingSykmeldingaPerson } from './data/egenmeldingsdager-i-sykmeldingen'
 import { selvstendigNaringsdrivende } from './data/naringsdrivende'
 import { korrigeringsfristUtloptPerson } from './data/korrigeringsfrist-utlopt'
@@ -30,6 +30,7 @@ export enum PersonaKeys {
     'reisetilskudd' = 'reisetilskudd',
     'utenlandsk-sykmelding' = 'utenlandsk-sykmelding',
     'yrkesskade' = 'yrkesskade',
+    'yrkesskade-v2' = 'yrkesskade-v2',
     'opplaering' = 'opplaering',
     'nytt-arbeid-underveis' = 'nytt-arbeid-underveis',
     'alle-soknader' = 'alle-soknader',
@@ -57,6 +58,7 @@ export function testpersoner(): PersonaData {
         [PersonaKeys['reisetilskudd']]: jsonDeepCopy(reisetilskudd),
         [PersonaKeys['utenlandsk-sykmelding']]: jsonDeepCopy(utenlandskSykmelding),
         [PersonaKeys['yrkesskade']]: jsonDeepCopy(yrkesskadePerson()),
+        [PersonaKeys['yrkesskade-v2']]: jsonDeepCopy(yrkesskadeV2Person()),
         [PersonaKeys['opplaering']]: jsonDeepCopy(opplaering),
         [PersonaKeys['nytt-arbeid-underveis']]: jsonDeepCopy(nyttArbeidUnderveisPerson),
         [PersonaKeys['alle-soknader']]: jsonDeepCopy(integration),
