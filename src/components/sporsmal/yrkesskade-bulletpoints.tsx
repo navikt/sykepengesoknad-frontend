@@ -8,12 +8,18 @@ import { tilLesbarDatoMedArstall } from '../../utils/dato-utils'
 export const Yrkesskadebulletpoints = ({ sporsmal, soknad }: { sporsmal: Sporsmal; soknad: Soknad }) => {
     if (sporsmal.tag !== TagTyper.YRKESSKADE_V2) return null
 
+    function skapSkadedatoTekst(y: Yrkesskadedato) {
+        return `Skadedato ${tilLesbarDatoMedArstall(y.skadedato)} (Vedtaksdato ${tilLesbarDatoMedArstall(
+            y.vedtaksdato,
+        )})`
+    }
+
     return (
         <>
             <Label as="p" className="mb-4 mt-10">
                 Godkjente yrkesskader vi har registrert på deg:
             </Label>
-            <ul data-cy="inntektskilder--fra-inntektskomponenten-liste" className="mb-10">
+            <ul className="mb-10">
                 {soknad.yrkesskadedatoer?.map((y, index) => {
                     return (
                         <BodyShort as="li" className="mb-4" key={index}>
@@ -24,8 +30,4 @@ export const Yrkesskadebulletpoints = ({ sporsmal, soknad }: { sporsmal: Sporsma
             </ul>
         </>
     )
-}
-
-function skapSkadedatoTekst(y: Yrkesskadedato) {
-    return `Skadedato ${tilLesbarDatoMedArstall(y.skadedato)} (Vedtaksdato ${tilLesbarDatoMedArstall(y.vedtaksdato)})`
 }

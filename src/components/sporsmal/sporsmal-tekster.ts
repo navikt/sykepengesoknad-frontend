@@ -182,7 +182,7 @@ const SporsmalTekster = {
     'soknad.feilmelding.UTENLANDSK_SYKMELDING_TRYGD_HVILKET_LAND': '',
     'soknad.feilmelding.YRKESSKADE': 'Du må svare på om sykdommen er relatert til en yrkesskade',
     'soknad.feilmelding.YRKESSKADE_V2': 'Du må svare på om sykdommen er relatert til en godkjent yrkesskade',
-    'soknad.feilmelding.YRKESSKADE_V2_VELG_DATO': 'Du må velge en dato',
+    'soknad.feilmelding.YRKESSKADE_V2_VELG_DATO': 'Du må velge minst en skadedato',
     'soknad.feilmelding.YRKESSKADE_V2_DATO': '',
     'soknad.feilmelding.YRKESSKADE_SAMMENHENG':
         'Du må svare på det er en sammenheng mellom dette sykefraværet og tidligere yrkesskade',

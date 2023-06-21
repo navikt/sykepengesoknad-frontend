@@ -60,7 +60,7 @@ const yrkesskadeDatoer = [
 ]
 
 export const yrkesskadeV2Sporsmal: RSSporsmal = {
-    id: '345345345',
+    id: '123123654612312',
     tag: 'YRKESSKADE_V2',
     sporsmalstekst: `Skyldes dette sykefraværet en eller flere av disse godkjente yrkesskadene?`,
     undertekst: null,
@@ -72,7 +72,7 @@ export const yrkesskadeV2Sporsmal: RSSporsmal = {
     svar: [],
     undersporsmal: [
         {
-            id: '687381',
+            id: '12312317654657231',
             tag: 'YRKESSKADE_V2_VELG_DATO',
             sporsmalstekst: 'Velg hvilken skadedato dette sykefraværet har sammenheng med',
             undertekst: null,
@@ -85,7 +85,7 @@ export const yrkesskadeV2Sporsmal: RSSporsmal = {
             undersporsmal: yrkesskadeDatoer.map((d, i) => {
                 return {
                     id: '3242323324' + i,
-                    tag: 'YRKESSKADE_V2_DATO_' + i,
+                    tag: 'YRKESSKADE_V2_DATO',
                     sporsmalstekst: skapSkadedatoTekst(mapYrkesskadedatoer(d)),
                     undertekst: null,
                     svartype: 'CHECKBOX',

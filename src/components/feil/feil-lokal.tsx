@@ -17,16 +17,16 @@ const FeilLokal = ({ sporsmal }: FeilProps) => {
     const feilmelding = hentFeilmelding(sporsmal, errors[sporsmal.id])
 
     return (
-        <div role="alert" aria-live="assertive">
-            <Vis
-                hvis={errors[sporsmal.id]}
-                render={() => (
+        <Vis
+            hvis={errors[sporsmal.id]}
+            render={() => (
+                <div role="alert" aria-live="assertive">
                     <BodyShort as="span" className="mt-2 block font-bold text-surface-danger" data-cy="feil-lokal">
                         {feilmelding.lokal}
                     </BodyShort>
-                )}
-            />
-        </div>
+                </div>
+            )}
+        />
     )
 }
 
