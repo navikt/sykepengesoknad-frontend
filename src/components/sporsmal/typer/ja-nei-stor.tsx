@@ -80,7 +80,7 @@ const JaNeiStor = ({ sporsmal }: SpmProps) => {
         <>
             <div>
                 <Inntektsbulletpoints sporsmal={sporsmal} soknad={valgtSoknad} />
-                <Yrkesskadebulletpoints sporsmal={sporsmal} soknad={valgtSoknad} />
+                <Yrkesskadebulletpoints sporsmal={sporsmal} />
                 <Controller
                     name={sporsmal.id}
                     rules={{ validate: (value) => valider(value), required: feilmelding.global }}

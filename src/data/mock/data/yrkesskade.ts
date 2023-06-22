@@ -1,12 +1,11 @@
 import { Persona } from '../personas'
 import { RSSporsmal } from '../../../types/rs-types/rs-sporsmal'
 import { deepcopyMedNyId } from '../deepcopyMedNyId'
-import { mapYrkesskadedatoer, Yrkesskadedato } from '../../../types/types'
 import { tilLesbarDatoMedArstall } from '../../../utils/dato-utils'
 
 import { brukertestSoknad, brukertestSykmelding } from './brukertest'
 
-function skapSkadedatoTekst(y: Yrkesskadedato) {
+function skapSkadedatoTekst(y: { skadedato: string; vedtaksdato: string }) {
     return `Skadedato ${tilLesbarDatoMedArstall(y.skadedato)} (Vedtaksdato ${tilLesbarDatoMedArstall(y.vedtaksdato)})`
 }
 
@@ -86,7 +85,7 @@ export const yrkesskadeV2Sporsmal: RSSporsmal = {
                 return {
                     id: '3242323324' + i,
                     tag: 'YRKESSKADE_V2_DATO',
-                    sporsmalstekst: skapSkadedatoTekst(mapYrkesskadedatoer(d)),
+                    sporsmalstekst: skapSkadedatoTekst(d),
                     undertekst: null,
                     svartype: 'CHECKBOX',
                     min: null,
@@ -108,7 +107,6 @@ export function yrkesskadeV2Person(): Persona {
     sporsmalene.push(...yrkesskadeSoknad.sporsmal.slice(0, splittSted))
     sporsmalene.push(yrkesskadeV2Sporsmal)
     sporsmalene.push(...yrkesskadeSoknad.sporsmal.slice(splittSted))
-    yrkesskadeSoknad.yrkesskadedatoer = yrkesskadeDatoer
     yrkesskadeSoknad.sporsmal = sporsmalene
     return {
         soknader: [yrkesskadeSoknad],
