@@ -7,7 +7,6 @@ import { RSSoknadstatusType } from './rs-soknadstatus'
 import { RSSoknadstypeType } from './rs-soknadstype'
 import { RSSporsmal } from './rs-sporsmal'
 import { ArbeidsforholdFraInntektskomponenten } from './rs-arbeidsforholdfrainntektskomponenten'
-import { RsYrkseskadedato } from './rs-yrkesskadedato'
 
 export interface RSSoknad {
     id: string
@@ -35,5 +34,4 @@ export interface RSSoknad {
     klippet: boolean
     inntektskilderDataFraInntektskomponenten?: ArbeidsforholdFraInntektskomponenten[]
     korrigeringsfristUtlopt?: boolean
-    yrkesskadedatoer?: RsYrkseskadedato[]
 }
