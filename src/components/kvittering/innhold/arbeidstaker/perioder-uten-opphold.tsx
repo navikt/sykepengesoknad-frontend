@@ -1,10 +1,12 @@
 import { BodyShort, Label } from '@navikt/ds-react'
 import React from 'react'
 
-import { parserWithReplace } from '../../../../utils/html-react-parser-utils'
 import { tekst } from '../../../../utils/tekster'
 import Kontonummer from '../../kontonummer/kontonummer'
 import { LenkeMedIkon } from '../../../lenke-med-ikon/LenkeMedIkon'
+
+import UtbetalingAvPenger from './gjentagende-segmenter/UtbetalingAvPenger'
+
 
 const PerioderUtenOpphold = () => {
     return (
@@ -21,17 +23,8 @@ const PerioderUtenOpphold = () => {
                 .
             </div>
 
-            <div className="mt-8">
-                <Label as="h2" spacing>
-                    {tekst('kvittering.naar-blir-pengene')}
-                </Label>
-                <BodyShort spacing>
-                    {parserWithReplace(tekst('kvittering.arbeidstaker.over16.utbetaling-arbeidsgiver'))}
-                </BodyShort>
-                <BodyShort spacing>
-                    {parserWithReplace(tekst('kvittering.arbeidstaker.over16.utbetaling-NAV'))}
-                </BodyShort>
-            </div>
+
+            <UtbetalingAvPenger />
 
             <Kontonummer />
         </div>

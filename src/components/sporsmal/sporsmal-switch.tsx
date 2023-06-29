@@ -13,11 +13,12 @@ import JaNeiLiten from './typer/ja-nei-liten'
 import Land from './typer/land'
 import Opplasting from './typer/opplasting/opplasting'
 import Perioder from './typer/perioder'
-import RadioKomp from './typer/radio-komp'
+import RadioTimerProsent from './typer/radio-timer-prosent'
 import TallKomp from './typer/tall-komp'
 import UkjentSporsmal from './typer/ukjent-sporsmal'
 import { SpmProps } from './sporsmal-form/sporsmal-form'
 import { Fritekst } from './typer/fritekst'
+import RadioKomp from './typer/radio-komp'
 
 const SporsmalSwitch = ({ sporsmal }: SpmProps) => {
     switch (sporsmal.svartype) {
@@ -55,8 +56,9 @@ const SporsmalSwitch = ({ sporsmal }: SpmProps) => {
             return <TallKomp sporsmal={sporsmal} />
 
         case RSSvartype.RADIO_GRUPPE:
-        case RSSvartype.RADIO_GRUPPE_TIMER_PROSENT:
             return <RadioKomp sporsmal={sporsmal} />
+        case RSSvartype.RADIO_GRUPPE_TIMER_PROSENT:
+            return <RadioTimerProsent sporsmal={sporsmal} />
 
         case RSSvartype.INFO_BEHANDLINGSDAGER:
             return <BehDager sporsmal={sporsmal} />
