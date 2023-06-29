@@ -53,7 +53,7 @@ const AvsluttOgFortsettSenere = () => {
                 <BodyShort spacing>{tekst('avslutt.popup.sporsmal')}</BodyShort>
                 <Button
                     variant="primary"
-                    className="mt-4"
+                    className="mr-4 mt-4"
                     onClick={() => {
                         logEvent('knapp klikket', {
                             tekst: tekst('avslutt.popup.ja'),
@@ -69,7 +69,7 @@ const AvsluttOgFortsettSenere = () => {
                 </Button>
                 <Button
                     variant="secondary"
-                    className="mt-4 block"
+                    className="mt-4"
                     onClick={() => {
                         setAapen(false)
                         logEvent('knapp klikket', {
