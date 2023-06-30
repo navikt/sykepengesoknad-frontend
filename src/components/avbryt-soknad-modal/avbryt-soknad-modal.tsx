@@ -101,7 +101,7 @@ const AvbrytSoknadModal = () => {
 
                 <Button
                     variant="danger"
-                    className="mt-4"
+                    className="mr-4 mt-4"
                     onClick={() => {
                         setFeilmeldingTekst(undefined)
 
@@ -124,7 +124,7 @@ const AvbrytSoknadModal = () => {
                 </Button>
                 <Button
                     variant="secondary"
-                    className="mt-4 block"
+                    className="mt-4"
                     onClick={() => {
                         setFeilmeldingTekst(undefined)
 
