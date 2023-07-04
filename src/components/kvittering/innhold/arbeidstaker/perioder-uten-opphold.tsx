@@ -7,7 +7,6 @@ import { LenkeMedIkon } from '../../../lenke-med-ikon/LenkeMedIkon'
 
 import UtbetalingAvPenger from './gjentagende-segmenter/UtbetalingAvPenger'
 
-
 const PerioderUtenOpphold = () => {
     return (
         <div>
@@ -22,7 +21,6 @@ const PerioderUtenOpphold = () => {
                 />
                 .
             </div>
-
 
             <UtbetalingAvPenger />
 
