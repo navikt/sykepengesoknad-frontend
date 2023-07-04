@@ -73,7 +73,7 @@ export const yrkesskadeV2Sporsmal: RSSporsmal = {
         {
             id: '12312317654657231',
             tag: 'YRKESSKADE_V2_VELG_DATO',
-            sporsmalstekst: 'Velg hvilken skadedato dette sykefraværet har sammenheng med',
+            sporsmalstekst: 'Hvilken skadedato skyldes dette sykefraværet? Du kan velge flere.',
             undertekst: null,
             svartype: 'CHECKBOX_GRUPPE',
             min: null,
