@@ -44,18 +44,18 @@ const JaNeiLiten = ({ sporsmal }: SpmProps) => {
                     </Alert>
                 )
             }
-            if (spm.tag.startsWith('INNTEKTSKILDE_') && watchJaNei === 'JA') {
+            if (spm.tag.endsWith('_ER_DU_SYKMELDT') && watchJaNei === 'JA') {
                 return <Alert variant="info">{tekst(('soknad.presisering.' + spm.tag) as any)}</Alert>
             }
             if (spm.tag === 'INNTEKTSKILDE_SELVSTENDIG_ER_DU_SYKMELDT' && watchJaNei === 'NEI') {
                 return (
-                    <BodyShort as="span">
+                    <Alert variant="info">
                         {parserWithReplace(
                             getLedetekst(tekst(('soknad.presisering.' + spm.tag + '_NEI') as any), {
                                 '%URL%': tekst('soknad.presisering.INNTEKTSKILDE_SELVSTENDIG_ER_DU_SYKMELDT_NEI.url'),
                             }),
                         )}
-                    </BodyShort>
+                    </Alert>
                 )
             }
         } else return <></>
