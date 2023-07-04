@@ -99,7 +99,7 @@ const Ettersending = ({ gjelder, setRerendrekvittering }: EttersendingProps) => 
         <>
             <Button
                 variant="tertiary"
-                className="mt-4 block px-0"
+                className="-ml-5 mt-4 block"
                 onClick={() => {
                     setVilEttersende(true)
                 }}

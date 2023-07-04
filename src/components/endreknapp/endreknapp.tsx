@@ -98,7 +98,7 @@ const Endreknapp = () => {
         <>
             <Button
                 variant="tertiary"
-                className="mt-4 block px-0"
+                className="-ml-5 mt-4 block"
                 loading={korrigerer}
                 onClick={() => {
                     logEvent('knapp klikket', {
