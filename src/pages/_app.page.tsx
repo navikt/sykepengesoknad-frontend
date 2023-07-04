@@ -12,6 +12,8 @@ import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
 import { useFangHotjarEmotion } from '../hooks/useFangHotjarEmotion'
 import { useHandleDecoratorClicks } from '../hooks/useBreadcrumbs'
 import { LabsWarning } from '../components/labs-warning/LabsWarning'
+import { getFaro, initInstrumentation, pinoLevelToFaroLevel } from '../faro/faro'
+import { basePath } from '../utils/environment'
 
 interface AppProps extends Omit<NextAppProps, 'pageProps'> {
     pageProps: PropsWithChildren<unknown>
@@ -22,8 +24,13 @@ dayjs.locale({
     weekStart: 1,
 })
 
+initInstrumentation()
 configureLogger({
-    basePath: '/syk/sykepengesoknad',
+    basePath: basePath(),
+    onLog: (log) =>
+        getFaro()?.api.pushLog(log.messages, {
+            level: pinoLevelToFaroLevel(log.level.label),
+        }),
 })
 
 function MyApp({ Component, pageProps }: AppProps): JSX.Element {

@@ -59,7 +59,7 @@ const nextConfig = {
     },
     publicRuntimeConfig: {
         // Will be available on both server and client
-        publicPath: '/syk/sykepengesoknad',
+        basePath: '/syk/sykepengesoknad',
         mockBackend: process.env.MOCK_BACKEND,
         opplaering: process.env.OPPLAERING,
         sykefravaerUrl: process.env.SYKEFRAVAER_URL,
@@ -69,6 +69,9 @@ const nextConfig = {
         amplitudeEnabled: process.env.AMPLITUDE_ENABLED,
         environment: process.env.ENVIRONMENT,
         vedlikehold: process.env.VEDLIKEHOLD,
+        telemetryCollectorURL: process.env.NAIS_FRONTEND_TELEMETRY_COLLECTOR_URL,
+        naisAppImage: process.env.NAIS_APP_IMAGE,
+        naisAppName: process.env.NAIS_APP_NAME,
     },
 }
 
