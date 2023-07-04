@@ -8,12 +8,14 @@ import { KvitteringTekster } from '../../kvittering-tekster'
 import { BegrepsforklarerReplacer } from '../../../begrepsforklarer/begrepsforklarer-inserter'
 
 import UtbetalingAvPenger from './gjentagende-segmenter/UtbetalingAvPenger'
+import InntektSN from './gjentagende-segmenter/InntektSN'
 
 interface gradertReisetilskuddProps {
     erGradert: boolean
+    skalSendeInntektsmelding: boolean
 }
 
-const Over16dager = ({ erGradert }: gradertReisetilskuddProps) => {
+const Over16dager = ({ erGradert, skalSendeInntektsmelding }: gradertReisetilskuddProps) => {
     return (
         <div className="mt-4">
             <Label as="h2" spacing>
@@ -48,6 +50,8 @@ const Over16dager = ({ erGradert }: gradertReisetilskuddProps) => {
                     ]}
                 ></BegrepsforklarerReplacer>
             </BodyShort>
+
+            <InntektSN skalSendeInntektsmelding={skalSendeInntektsmelding} />
 
             <div className="mt-8">
                 <Label as="h2" spacing>

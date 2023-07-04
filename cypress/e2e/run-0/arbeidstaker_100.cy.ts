@@ -134,7 +134,7 @@ describe('Tester arbeidstakersøknad', () => {
         cy.get('.undersporsmal input[value=Timer]').click()
         cy.contains('Oppgi totalt antall timer du jobbet i perioden 1. - 24. april 2020 hos Posten Norge AS, Bærum')
         cy.contains('Antall timer du skrev inn, betyr at du har jobbet').should('not.exist')
-        // Svarer timer
+        // Svarer <timer></timer>
         cy.get('.undersporsmal .navds-text-field__input#6cc620d8-d4b0-3e82-a038-2757df6fc311').type('21')
         cy.contains('Er prosenten lavere enn du forventet?').should('not.exist')
 
@@ -153,15 +153,16 @@ describe('Tester arbeidstakersøknad', () => {
         cy.get('[data-cy="ja-nei-stor"] input[value=JA]').click()
 
         cy.contains('Velg inntektskildene som passer for deg. Finner du ikke noe som passer for deg, svarer du nei')
-        cy.get('.undersporsmal .navds-checkbox label[for=d9ac4359-5519-34f1-b59d-b5ab24e55821]')
-            .should('include.text', 'ansatt et annet sted enn nevnt over')
+            .parent()
+            .contains('selvstendig næringsdrivende')
+            .parent()
+            .parent()
+            .parent()
             .click()
-
-        cy.get('.undersporsmal .navds-checkbox label[for=989711be-5362-3f24-a02a-f1b3e3c31f99]').should(
-            'include.text',
-            'selvstendig næringsdrivende',
-        )
-        cy.get('input[type=checkbox]#989711be-5362-3f24-a02a-f1b3e3c31f99').click()
+        cy.contains('Velg inntektskildene som passer for deg. Finner du ikke noe som passer for deg, svarer du nei')
+            .parent()
+            .contains('ansatt et annet sted enn nevnt over')
+            .click()
 
         cy.contains('Gå videre').click()
     })

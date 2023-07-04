@@ -1,6 +1,6 @@
-import { CheckboxGroup, Checkbox } from '@navikt/ds-react'
+import { Checkbox, CheckboxGroup } from '@navikt/ds-react'
 import React, { Fragment } from 'react'
-import { useFormContext, Controller } from 'react-hook-form'
+import { Controller, useFormContext } from 'react-hook-form'
 
 import { SpmProps } from '../sporsmal-form/sporsmal-form'
 import { hentFeilmelding } from '../sporsmal-utils'
@@ -32,13 +32,18 @@ const CheckboxKomp = ({ sporsmal }: SpmProps) => {
                 >
                     {sporsmal.undersporsmal.map((uspm) => (
                         <Fragment key={uspm.id + '_fragment'}>
-                            <Checkbox id={uspm.id} value={uspm.sporsmalstekst}>
-                                {uspm.sporsmalstekst}
-                            </Checkbox>
+                            <div className="flex items-center gap-4">
+                                <Checkbox id={uspm.id} value={uspm.sporsmalstekst}>
+                                    {uspm.sporsmalstekst}
+                                </Checkbox>
+                            </div>
                             <Vis
                                 hvis={watchCheckbox?.includes(uspm.sporsmalstekst)}
                                 render={() => (
-                                    <div aria-live="assertive">
+                                    <div
+                                        aria-live="assertive"
+                                        className="600 ml-3 border-l-2 border-grayalpha-300 pl-4"
+                                    >
                                         <UndersporsmalListe oversporsmal={uspm} oversporsmalSvar="CHECKED" />
                                     </div>
                                 )}

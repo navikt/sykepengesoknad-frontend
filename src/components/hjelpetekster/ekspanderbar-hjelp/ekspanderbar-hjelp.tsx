@@ -26,6 +26,7 @@ import { FravarForSykmeldingenHjelpBody } from './fravar-for-sykmeldingen-hjelp-
 import { JobbetDuGradertArbeidstakerHjelpBody } from './jobbet-du-gradert-arbeidstaker-hjelp'
 import { BrukteReisetilskuddetHjelpBody } from './brukte-reisetilskuddet-hjelp-body'
 import { KvitteringerHjelpBody } from './kvitteringer-hjelp-body'
+import { EndringSNHjelpBody } from './endring-sn-hjelp-body'
 
 export const EkspanderbarHjelp = ({ sporsmal }: SpmProps) => {
     const { id } = useParams<RouteParams>()
@@ -93,6 +94,8 @@ export const EkspanderbarHjelp = ({ sporsmal }: SpmProps) => {
                 return <BrukteReisetilskuddetHjelpBody />
             case TagTyper.KVITTERINGER:
                 return <KvitteringerHjelpBody />
+            case TagTyper.INNTEKTSKILDE_SELVSTENDIG_VARIG_ENDRING_GRUPPE:
+                return <EndringSNHjelpBody />
             default:
                 if (harInnhold) {
                     return (
