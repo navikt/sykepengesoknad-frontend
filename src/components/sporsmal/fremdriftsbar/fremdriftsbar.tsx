@@ -40,13 +40,12 @@ const TilbakeKnapp = ({ soknad, stegNo }: { soknad: Soknad; stegNo: number }) =>
 const Fremdriftsbar = () => {
     const { id, stegId } = useParams<RouteParams>()
     const { data: valgtSoknad } = useSoknad(id)
-    const stegNo = parseInt(stegId!)
 
-    const aktivtSteg = parseInt(stegId!)
+    const aktivtSteg = parseInt(stegId!) - 1
     const steg = valgtSoknad!.sporsmal.filter((s) => s.tag !== TagTyper.VAER_KLAR_OVER_AT)
     const antallSteg = steg.length
     const style = {
-        width: `${(100 / antallSteg) * stegNo}%`,
+        width: `${(100 / antallSteg) * aktivtSteg}%`,
     }
     if (!valgtSoknad || !stegId) return null
     return (
@@ -63,9 +62,9 @@ const Fremdriftsbar = () => {
                 <div className="-mt-3 h-3 rounded-lg bg-gray-900" style={style} />
             </div>
             <div className="mt-4 flex justify-between">
-                <TilbakeKnapp soknad={valgtSoknad} stegNo={stegNo} />
+                <TilbakeKnapp soknad={valgtSoknad} stegNo={parseInt(stegId!)} />
                 <BodyShort as="span">
-                    {parserWithReplace(`${stegId}&nbsp;av&nbsp;${antallSteg}`) + ' spørsmål'}
+                    {parserWithReplace(`${aktivtSteg}&nbsp;av&nbsp;${antallSteg}`) + ' steg'}
                 </BodyShort>
             </div>
         </div>
