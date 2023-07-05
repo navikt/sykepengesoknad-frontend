@@ -20,6 +20,12 @@ describe('Tester søknad om å beholde sykepenger utenfor EØS', () => {
     it('Velger periode for utenlandsopphold', function () {
         cy.url().should('include', `${soknad.id}/1`)
 
+        cy.findByRole('progressbar', { name: 'Søknadssteg' })
+            .should('have.attr', 'aria-valuenow', '1')
+            .and('have.attr', 'aria-valuemin', '1')
+            .and('have.attr', 'aria-valuemax', '5')
+            .and('have.attr', 'aria-valuetext', '1 av 5 steg')
+
         cy.contains('Tilbake').should('not.exist')
         cy.contains('Opplysninger fra sykmeldingen').should('not.exist')
         cy.contains('Når skal du reise?')
@@ -119,6 +125,12 @@ describe('Tester søknad om å beholde sykepenger utenfor EØS', () => {
 
     it('Sender søknaden', function () {
         cy.url().should('include', `${soknad.id}/4`)
+
+        cy.findByRole('progressbar', { name: 'Søknadssteg' })
+            .should('have.attr', 'aria-valuenow', '4')
+            .and('have.attr', 'aria-valuemin', '1')
+            .and('have.attr', 'aria-valuemax', '5')
+            .and('have.attr', 'aria-valuetext', '4 av 5 steg')
 
         cy.contains('Før du reiser ber vi deg bekrefte')
         cy.contains('Jeg bekrefter de to punktene ovenfor').click()
