@@ -5,12 +5,12 @@ import { ArrowLeftIcon } from '@navikt/aksel-icons'
 
 import { TagTyper } from '../../../types/enums'
 import useSoknad from '../../../hooks/useSoknad'
-import { parserWithReplace } from '../../../utils/html-react-parser-utils'
 import { RouteParams } from '../../../app'
 import { SEPARATOR } from '../../../utils/constants'
 import { logEvent } from '../../amplitude/amplitude'
 import { tekst } from '../../../utils/tekster'
 import { Soknad } from '../../../types/types'
+import { RSSoknadstype } from '../../../types/rs-types/rs-soknadstype'
 
 const TilbakeKnapp = ({ soknad, stegNo }: { soknad: Soknad; stegNo: number }) => {
     if (stegNo == 1) {
@@ -40,32 +40,39 @@ const TilbakeKnapp = ({ soknad, stegNo }: { soknad: Soknad; stegNo: number }) =>
 const Fremdriftsbar = () => {
     const { id, stegId } = useParams<RouteParams>()
     const { data: valgtSoknad } = useSoknad(id)
-
-    const aktivtSteg = parseInt(stegId!) - 1
-    const steg = valgtSoknad!.sporsmal.filter((s) => s.tag !== TagTyper.VAER_KLAR_OVER_AT)
-    const antallSteg = steg.length
-    const style = {
-        width: `${(100 / antallSteg) * aktivtSteg}%`,
-    }
     if (!valgtSoknad || !stegId) return null
+
+    const parsetSteg = parseInt(stegId)
+    const oppholdUtland = valgtSoknad.soknadstype == RSSoknadstype.OPPHOLD_UTLAND
+    const aktivtSteg = oppholdUtland ? parsetSteg : parsetSteg - 1
+    const antallSporsmål = valgtSoknad.sporsmal.filter((s) => s.tag !== TagTyper.VAER_KLAR_OVER_AT).length
+    const antallSteg = oppholdUtland ? antallSporsmål + 1 : antallSporsmål
+
+    const bredde = (100 / antallSteg) * aktivtSteg
+
+    const valueText = `${aktivtSteg} av ${antallSteg} steg`
     return (
         <div
             className="my-4 md:my-6"
             role="progressbar"
             aria-valuenow={aktivtSteg}
             aria-valuemin={1}
-            aria-valuemax={steg.length}
+            aria-valuemax={antallSteg}
+            aria-valuetext={valueText}
             aria-label="Søknadssteg"
         >
             <div className="relative mx-auto mt-4">
                 <div className="h-3 rounded-lg bg-gray-200" />
-                <div className="-mt-3 h-3 rounded-lg bg-gray-900" style={style} />
+                <div
+                    className="-mt-3 h-3 rounded-lg bg-gray-900"
+                    style={{
+                        width: `${bredde}%`,
+                    }}
+                />
             </div>
             <div className="mt-4 flex justify-between">
-                <TilbakeKnapp soknad={valgtSoknad} stegNo={parseInt(stegId!)} />
-                <BodyShort as="span">
-                    {parserWithReplace(`${aktivtSteg}&nbsp;av&nbsp;${antallSteg}`) + ' steg'}
-                </BodyShort>
+                <TilbakeKnapp soknad={valgtSoknad} stegNo={parsetSteg} />
+                <BodyShort as="span">{valueText}</BodyShort>
             </div>
         </div>
     )
