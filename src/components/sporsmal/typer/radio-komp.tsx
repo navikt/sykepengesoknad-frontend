@@ -5,7 +5,6 @@ import { useFormContext, Controller } from 'react-hook-form'
 import { SpmProps } from '../sporsmal-form/sporsmal-form'
 import { hentFeilmelding } from '../sporsmal-utils'
 import UndersporsmalListe from '../undersporsmal/undersporsmal-liste'
-import { RouteParams } from '../../../app'
 
 const RadioKomp = ({ sporsmal }: SpmProps) => {
     const {
