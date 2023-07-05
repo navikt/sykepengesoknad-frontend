@@ -37,14 +37,26 @@ export function sykefravaerUrl() {
     return publicRuntimeConfig.sykefravaerUrl
 }
 
-export function publicPath() {
-    return publicRuntimeConfig.publicPath
-}
-
 export function minSideUrl() {
     return publicRuntimeConfig.minSideUrl
 }
 
 export function vedlikehold(): boolean {
     return publicRuntimeConfig.vedlikehold === 'true'
+}
+
+export function telemetryCollectorURL() {
+    return publicRuntimeConfig.telemetryCollectorURL
+}
+
+export function naisAppImage() {
+    return publicRuntimeConfig.naisAppImage
+}
+
+export function naisAppName() {
+    return publicRuntimeConfig.naisAppName
+}
+
+export function basePath() {
+    return publicRuntimeConfig.basePath
 }

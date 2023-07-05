@@ -19,6 +19,7 @@ spec:
   readiness:
     path: syk/sykepengesoknad/api/internal/isReady
   accessPolicy:
+    outbound:
       rules:
         - application: nav-dekoratoren
           namespace: personbruker

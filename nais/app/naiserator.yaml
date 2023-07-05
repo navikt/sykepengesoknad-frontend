@@ -39,6 +39,9 @@ spec:
   prometheus:
     enabled: true
     path: /syk/sykepengesoknad/api/internal/prometheus
+  frontend:
+    generatedConfig:
+      mountPath: /usr/share/nginx/html/js/nais.js
   accessPolicy:
     outbound:
       rules:
