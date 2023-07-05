@@ -56,7 +56,7 @@ const GjenapneSoknad = () => {
         <Button
             data-cy="bruk-soknad-likevel"
             variant="tertiary"
-            className="px-0"
+            className="-ml-5"
             loading={gjenapner}
             onClick={gjenapneSoknad}
         >

@@ -32,7 +32,7 @@ const PersonvernLesMer = ({ soknadstype }: PersonvernLesMerProps) => {
 
     return (
         <>
-            <Button variant="tertiary" onClick={handleAapen} className="px-0 text-left">
+            <Button variant="tertiary" onClick={handleAapen} className="-ml-5 text-left">
                 {tekst('sykepengesoknad.soknad-intro.personvern-les-mer')}
             </Button>
             <FlexModal

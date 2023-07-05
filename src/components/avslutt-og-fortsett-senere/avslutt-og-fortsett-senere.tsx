@@ -21,7 +21,7 @@ const AvsluttOgFortsettSenere = () => {
         <>
             <Button
                 variant="tertiary"
-                className="block px-0"
+                className="-ml-5 block"
                 data-cy="avslutt-og-fortsett-senere"
                 onClick={(e) => {
                     logEvent('modal åpnet', {
