@@ -110,6 +110,8 @@ describe('Tester ettersending og korrigering', () => {
         cy.contains('Gå videre').click()
         cy.contains('Gå videre').click()
         cy.get('[data-cy="ja-nei-stor"] input[value=JA]').click()
+        // eslint-disable-next-line cypress/no-unnecessary-waiting
+        cy.wait(200)
         cy.contains('Gå videre').click()
         cy.contains('Gå videre').click()
         cy.get('.navds-checkbox__label').click()
