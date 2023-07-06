@@ -29,6 +29,7 @@ import { RSSoknadstatus } from '../../../types/rs-types/rs-soknadstatus'
 import { harLikeSvar } from '../endring-uten-endring/har-like-svar'
 import { useSendSoknad } from '../../../hooks/useSendSoknad'
 import { RSMottaker } from '../../../types/rs-types/rs-mottaker'
+import { UseTestpersonQuery } from '../../../hooks/useTestpersonQuery'
 
 import Knapperad from './knapperad'
 import SendesTil from './sendes-til'
@@ -45,6 +46,8 @@ export interface SpmFormProps {
 }
 const SporsmalForm = ({ valgtSoknad, spmIndex, sporsmal }: SpmFormProps) => {
     const router = useRouter()
+    const testpersonQuery = UseTestpersonQuery()
+
     const { mutate: sendSoknadMutation, isLoading: senderSoknad, error: sendError } = useSendSoknad()
     const { data: korrigerer } = useSoknad(valgtSoknad?.korrigerer, valgtSoknad?.korrigerer !== undefined)
     const queryClient = useQueryClient()
@@ -220,7 +223,7 @@ const SporsmalForm = ({ valgtSoknad, spmIndex, sporsmal }: SpmFormProps) => {
                 sporsmal = valgtSoknad!.sporsmal[spmIndex]
             } else {
                 methods.clearErrors()
-                await router.push(pathUtenSteg(router.asPath) + SEPARATOR + (spmIndex + 2))
+                await router.push(pathUtenSteg(router.asPath) + SEPARATOR + (spmIndex + 2) + testpersonQuery.query())
             }
         } finally {
             setPoster(false)

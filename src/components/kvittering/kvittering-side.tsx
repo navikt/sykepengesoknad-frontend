@@ -41,7 +41,6 @@ const KvitteringSide = () => {
         if (!valgtSoknad) return
 
         if (valgtSoknad.status !== RSSoknadstatus.SENDT) {
-            window.alert("valg soknad ikke 'SENDT'")
             const url = urlTilSoknad(valgtSoknad)
             router.push(url).catch((e) => {
                 logger.error(e, 'feil ved redirect tilbake til søknad')
