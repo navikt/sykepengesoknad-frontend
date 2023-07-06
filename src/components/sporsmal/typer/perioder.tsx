@@ -55,7 +55,7 @@ const Perioder = ({ sporsmal }: SpmProps) => {
                 ))}
             </ul>
             <Vis
-                hvis={!TagTyper.MEDLEMSKAP_UTFORT_ARBEID_UTENFOR_NORGE_HVOR}
+                hvis={!sporsmal.tag.startsWith('MEDLEMSKAP')}
                 render={() => (
                     <Button
                         icon={<PlusIcon />}
