@@ -16,7 +16,10 @@ test('Alle tags har global feilmelding', () => {
             skipTag !== TagTyper.VAER_KLAR_OVER_AT && // Svartype: IKKE_RELEVANT
             skipTag !== TagTyper.IKKE_SOKT_UTENLANDSOPPHOLD_INFORMASJON && // Svartype: IKKE_RELEVANT
             skipTag !== TagTyper.BEKREFT_OPPLYSNINGER_UTLAND_INFO && // Svartype: IKKE_RELEVANT
-            skipTag !== TagTyper.ENKELTSTAENDE_BEHANDLINGSDAGER
+            skipTag !== TagTyper.ENKELTSTAENDE_BEHANDLINGSDAGER &&
+            skipTag !== TagTyper.INNTEKTSKILDE_SELVSTENDIG_VARIG_ENDRING_JA &&
+            skipTag !== TagTyper.INNTEKTSKILDE_SELVSTENDIG_VARIG_ENDRING_NEI &&
+            skipTag !== TagTyper.INNTEKTSKILDE_SELVSTENDIG_VARIG_ENDRING_VET_IKKE
         ) // Svartype: INFO_BEHANDLINGSDAGER
     })
 

@@ -17,6 +17,7 @@ import useSoknader from '../../hooks/useSoknader'
 import { RSSoknadmetadata } from '../../types/rs-types/rs-soknadmetadata'
 import useSykmelding from '../../hooks/useSykmelding'
 import { RouteParams } from '../../app'
+import { TagTyper } from '../../types/enums'
 
 import Inntil16dager from './innhold/arbeidstaker/inntil16dager'
 import Over16dager from './innhold/arbeidstaker/over16dager'
@@ -32,6 +33,23 @@ const Arbeidstaker = () => {
     const { data: valgtSoknad } = useSoknad(id)
     const { data: valgtSykmelding } = useSykmelding(valgtSoknad?.sykmeldingId)
     const [kvitteringTekst, setKvitteringTekst] = useState<ArbeidstakerKvitteringTekst>()
+
+    const harSvartAndreInntektskilderSN =
+        valgtSoknad?.sporsmal
+            ?.find((spm) => spm.tag === TagTyper.ANDRE_INNTEKTSKILDER_V2 && spm.svarliste.svar[0].verdi === 'JA')
+            ?.undersporsmal?.find((spm) => spm.tag === TagTyper.HVILKE_ANDRE_INNTEKTSKILDER)
+            ?.undersporsmal?.find(
+                (spm) => spm.tag === TagTyper.INNTEKTSKILDE_SELVSTENDIG && spm.svarliste.svar[0].verdi === 'CHECKED',
+            )
+            ?.undersporsmal?.find(
+                (spm) => spm.tag === TagTyper.INNTEKTSKILDE_SELVSTENDIG_4_AR && spm.svarliste.svar[0].verdi === 'JA',
+            )
+            ?.undersporsmal?.find((spm) => spm.tag === TagTyper.INNTEKTSKILDE_SELVSTENDIG_VARIG_ENDRING_GRUPPE)
+            ?.undersporsmal?.find(
+                (spm) =>
+                    spm.tag === TagTyper.INNTEKTSKILDE_SELVSTENDIG_VARIG_ENDRING_JA &&
+                    spm.svarliste.svar[0].verdi === 'CHECKED',
+            ) !== undefined
 
     const erInnenforArbeidsgiverperiode = () => {
         if (!valgtSoknad) return
@@ -104,11 +122,16 @@ const Arbeidstaker = () => {
             case 'inntil16dager':
                 return <Inntil16dager />
             case 'over16dager':
-                return <Over16dager erGradert={valgtSoknad?.soknadstype === RSSoknadstype.GRADERT_REISETILSKUDD} />
+                return (
+                    <Over16dager
+                        erGradert={valgtSoknad?.soknadstype === RSSoknadstype.GRADERT_REISETILSKUDD}
+                        skalSendeInntektsmelding={harSvartAndreInntektskilderSN}
+                    />
+                )
             case 'utenOpphold':
-                return <PerioderUtenOpphold />
+                return <PerioderUtenOpphold skalSendeInntektsmelding={harSvartAndreInntektskilderSN} />
             case 'medOpphold':
-                return <PerioderMedOpphold />
+                return <PerioderMedOpphold skalSendeInntektsmelding={harSvartAndreInntektskilderSN} />
             default:
                 return null
         }
