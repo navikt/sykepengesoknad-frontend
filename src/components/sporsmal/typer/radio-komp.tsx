@@ -12,9 +12,9 @@ const RadioKomp = ({ sporsmal }: SpmProps) => {
         watch,
         getValues,
     } = useFormContext()
-    let watchRadio = watch(sporsmal.id)
+    let watchRadio = watch(sporsmal?.id)
     if (watchRadio === undefined) {
-        watchRadio = getValues(sporsmal.id)
+        watchRadio = getValues(sporsmal?.id)
     }
 
     const feilmelding = hentFeilmelding(sporsmal)

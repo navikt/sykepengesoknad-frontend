@@ -8,6 +8,8 @@ import { tekst } from '../../../utils/tekster'
 import { hentPerioder } from '../hent-svar'
 import { SpmProps } from '../sporsmal-form/sporsmal-form'
 import UndersporsmalListe from '../undersporsmal/undersporsmal-liste'
+import Vis from '../../vis'
+import { TagTyper } from '../../../types/enums'
 
 import PeriodeKomp from './periode-komp'
 
@@ -52,10 +54,20 @@ const Perioder = ({ sporsmal }: SpmProps) => {
                     />
                 ))}
             </ul>
-
-            <Button icon={<PlusIcon />} size="small" variant="tertiary" className="mt-4" onClick={leggTilPeriode}>
-                {tekst('sykepengesoknad.periodevelger.legg-til-ekstra')}
-            </Button>
+            <Vis
+                hvis={!TagTyper.MEDLEMSKAP_UTFORT_ARBEID_UTENFOR_NORGE_HVOR}
+                render={() => (
+                    <Button
+                        icon={<PlusIcon />}
+                        size="small"
+                        variant="tertiary"
+                        className="mt-4"
+                        onClick={leggTilPeriode}
+                    >
+                        {tekst('sykepengesoknad.periodevelger.legg-til-ekstra')}
+                    </Button>
+                )}
+            ></Vis>
 
             <div aria-live="assertive">
                 <UndersporsmalListe oversporsmal={sporsmal} />
