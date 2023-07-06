@@ -99,6 +99,19 @@ describe('Tester støtte for gamle spørsmål', () => {
         gaVidere()
     })
 
+    it('MEDLEMSKAP_OPPHOLDSTILLATELSE', () => {
+        svarNeiHovedsporsmal()
+        gaVidere()
+    })
+    it('MEDLEMSKAP_OPPHOLD_UTENFOR_EOS', () => {
+        svarNeiHovedsporsmal()
+        gaVidere()
+    })
+    it('MEDLEMSKAP_UTFORT_ARBEID_UTENFOR_NORGE', () => {
+        svarNeiHovedsporsmal()
+        gaVidere()
+    })
+
     it('ANDRE_INNTEKTSKILDER', () => {
         svarJaHovedsporsmal()
         velgCheckbox('dagmamma')
