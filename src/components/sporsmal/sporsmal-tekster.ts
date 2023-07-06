@@ -93,6 +93,10 @@ const SporsmalTekster = {
         'Du må svare på om du er sykmeldt fra dette',
     'soknad.feilmelding.INNTEKTSKILDE_JORDBRUKER_ER_DU_SYKMELDT': 'Du må svare på om du er sykmeldt som jordbruker',
     'soknad.feilmelding.INNTEKTSKILDE_JORDBRUKER_ER_DU_SYKMELDT.lokal': 'Du må svare på om du er sykmeldt fra dette',
+    'soknad.feilmelding.INNTEKTSKILDE_SELVSTENDIG_4_AR':
+        'Du må svare på om du har vært selvstendig næringsdrivende i mer enn fire år',
+    'soknad.feilmelding.INNTEKTSKILDE_SELVSTENDIG_VARIG_ENDRING_GRUPPE':
+        'Du må svare på om du har hatt varig endring i inntekten din fra næringen',
     'soknad.feilmelding.INNTEKTSKILDE_SELVSTENDIG_DAGMAMMA_ER_DU_SYKMELDT':
         'Du må svare på om du er sykmeldt som dagmamma',
     'soknad.feilmelding.INNTEKTSKILDE_SELVSTENDIG_DAGMAMMA_ER_DU_SYKMELDT.lokal':

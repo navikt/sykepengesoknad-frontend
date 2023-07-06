@@ -117,6 +117,11 @@ describe('Tester støtte for gamle spørsmål', () => {
         velgCheckbox('dagmamma')
         gaVidere()
     })
+    it('ANDRE_INNTEKTSKILDER_V2_SI_NEI_HOVEDSPORSMAL', () => {
+        // todo, dette er en hack
+        svarNeiHovedsporsmal()
+        gaVidere()
+    })
     it('ARBEID_UTENFOR_NORGE', () => {
         svarNeiHovedsporsmal()
         gaVidere()

@@ -6,8 +6,9 @@ import Kontonummer from '../../kontonummer/kontonummer'
 import { LenkeMedIkon } from '../../../lenke-med-ikon/LenkeMedIkon'
 
 import UtbetalingAvPenger from './gjentagende-segmenter/UtbetalingAvPenger'
+import InntektSN from './gjentagende-segmenter/InntektSN'
 
-const PerioderUtenOpphold = () => {
+const PerioderUtenOpphold = ({ skalSendeInntektsmelding }: { skalSendeInntektsmelding: boolean }) => {
     return (
         <div>
             <div className="mt-4">
@@ -21,6 +22,8 @@ const PerioderUtenOpphold = () => {
                 />
                 .
             </div>
+
+            <InntektSN skalSendeInntektsmelding={skalSendeInntektsmelding} />
 
             <UtbetalingAvPenger />
 
