@@ -5,12 +5,14 @@ import { useRouter } from 'next/router'
 
 import { isMockBackend, isOpplaering } from '../../utils/environment'
 import { PersonaKeys } from '../../data/mock/testperson'
+import { UseTestpersonQuery } from '../../hooks/useTestpersonQuery'
 
 const Person = () => {
     const [open, setOpen] = useState<boolean>(false)
     const person = useRef<HTMLButtonElement>(null)
     const kanVelgePerson = isMockBackend() || isOpplaering()
     const router = useRouter()
+    const testpersonQuery = UseTestpersonQuery()
 
     if (!kanVelgePerson) return null
 
@@ -22,7 +24,7 @@ const Person = () => {
                 onClick={(e) => {
                     e.preventDefault()
 
-                    router.push('/')
+                    router.push(`/${testpersonQuery.query()}`)
                 }}
             >
                 TestLink
