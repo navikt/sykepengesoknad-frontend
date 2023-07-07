@@ -193,6 +193,10 @@ export async function mockApi(req: NextApiRequest, res: NextApiResponse) {
             if (!soknad) {
                 return sendJson({}, 404)
             }
+            if (soknad.soknadstype == 'OPPHOLD_UTLAND' || soknad.status == 'UTKAST_TIL_KORRIGERING') {
+                testperson.soknader.splice(testperson.soknader.indexOf(soknad), 1)
+                return sendJson()
+            }
             soknad.status = 'AVBRUTT'
             soknad.avbruttDato = dayjs().toJSON()
             return sendJson()

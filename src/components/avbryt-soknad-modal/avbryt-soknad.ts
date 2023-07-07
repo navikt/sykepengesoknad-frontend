@@ -50,10 +50,7 @@ export async function avbrytSoknad({
         valgtSoknad.soknadstype === RSSoknadstype.OPPHOLD_UTLAND ||
         valgtSoknad.status === RSSoknadstatus.UTKAST_TIL_KORRIGERING
     ) {
-        const nyeSoknader = soknader.filter((s) => s.id !== valgtSoknad.id)
-        queryClient.removeQueries(['soknad', valgtSoknad.id])
-        queryClient.setQueriesData(['soknader'], nyeSoknader)
-
+        await queryClient.invalidateQueries(['soknader'])
         await router.push('/')
     } else {
         const nySoknad = {

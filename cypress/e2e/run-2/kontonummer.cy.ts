@@ -1,4 +1,4 @@
-import {checkViStolerPåDeg, klikkGaVidere, svarCheckboxPanel} from "../../support/utilities";
+import { checkViStolerPåDeg, svarCheckboxPanel } from '../../support/utilities'
 
 describe('Tester kontonummer i kvittering', () => {
     it('Har kontonumer', () => {
