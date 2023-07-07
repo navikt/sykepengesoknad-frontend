@@ -95,6 +95,10 @@ const SporsmalForm = ({ valgtSoknad, spmIndex, sporsmal }: SpmFormProps) => {
     }
 
     const sendOppdaterSporsmal = async (): Promise<boolean> => {
+        if (sporsmal.tag == TagTyper.KVITTERINGER) {
+            // Denne oppdateres med put av svar
+            return true
+        }
         let soknad = valgtSoknad
 
         let data

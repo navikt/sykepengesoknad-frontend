@@ -1,4 +1,5 @@
 import { nyttReisetilskudd } from '../../../src/data/mock/data/reisetilskudd'
+import { klikkGaVidere, sjekkMainContentFokus } from '../../support/utilities'
 
 describe('Teste førsteside i reisetilskuddsøknaden', () => {
     before(() => {
@@ -265,10 +266,10 @@ describe('Teste førsteside i reisetilskuddsøknaden', () => {
 
         describe('Beholder verdier når vi går frem og tilbake', () => {
             it('Går frem og tilbake', () => {
-                cy.contains('Gå videre').click()
-                cy.url().should('include', `/soknader/${nyttReisetilskudd.id}/5`)
+                klikkGaVidere()
 
                 cy.contains('Tilbake').click()
+                sjekkMainContentFokus()
                 cy.url().should('include', `/soknader/${nyttReisetilskudd.id}/4`)
                 cy.get('.navds-table').within(() => {
                     cy.contains('Parkering')
