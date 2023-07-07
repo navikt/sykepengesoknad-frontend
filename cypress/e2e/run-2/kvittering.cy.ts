@@ -16,7 +16,7 @@ import {
     klikkGaVidere,
     setPeriodeFraTil,
     sjekkMainContentFokus,
-    svarCheckboxPanel,
+    svarCheckboxPanel, svarNeiHovedsporsmal,
 } from '../../support/utilities'
 import { inlineForklaringer } from '../../support/sjekkInlineForklaringKvittering'
 
@@ -122,7 +122,7 @@ describe('Tester kvittering', () => {
             cy.get('[data-cy="landvelger"] input[type="text"]').type('Fransk')
             cy.contains('Søre franske territorier').click()
             klikkGaVidere()
-            cy.contains('Nei').click()
+            svarNeiHovedsporsmal()
             klikkGaVidere()
             cy.contains('Jeg bekrefter de to punktene ovenfor').click()
             cy.contains('Send søknaden').click()

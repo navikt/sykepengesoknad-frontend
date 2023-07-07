@@ -90,7 +90,6 @@ export enum SsrPathVariants {
     Root = '/',
     NotFound = '/404',
     ServerError = '/500',
-    App = '/[[...app]]',
     SykepengesoknadUtland = '/sykepengesoknad-utland',
 }
 
@@ -103,10 +102,9 @@ export function createInitialServerSideBreadcrumbs(
         case SsrPathVariants.NotFound:
         case SsrPathVariants.ServerError:
         case SsrPathVariants.SykepengesoknadUtland:
-        case SsrPathVariants.App:
             return createCompleteCrumbs([], skapTestpersonQuery(query))
         default:
-            logger.error(`Unknown initial path (${pathname}), defaulting to just base breadcrumb`)
+            logger.error(`Unknown initial path (${pathname}), defaulting to just base breadcrumb`) //TODO fiks ssr breadcrumbs
             return createCompleteCrumbs([], skapTestpersonQuery(query))
     }
 }
