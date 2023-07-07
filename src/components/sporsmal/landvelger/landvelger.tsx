@@ -53,7 +53,8 @@ const LandvelgerComponent = ({ verdierInn, sporsmalId, onChange, tag }: Landvelg
                 {verdier.map((verdi, index) => (
                     <Chips.Removable
                         key={verdi}
-                        onClick={() => {
+                        onClick={(e) => {
+                            e.preventDefault()
                             onDelete(index)
                         }}
                     >
