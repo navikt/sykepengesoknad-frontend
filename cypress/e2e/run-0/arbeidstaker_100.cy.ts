@@ -161,9 +161,26 @@ describe('Tester arbeidstakersøknad', () => {
             .parent()
             .contains('selvstendig næringsdrivende')
             .parent()
-            .parent()
-            .parent()
             .click()
+
+            // cy.contains('Har du vært næringsdrivende i mer enn 4 år?')
+            // .parent()
+            // .contains('Ja')
+            // .click({force: true})
+
+            cy.contains('Har du vært næringsdrivende i mer enn 4 år?')
+  .parent()
+  .find('input[type="radio"][value="JA"]')
+  .click();
+
+
+            cy.contains('Har det vært endring i din arbeidssituasjon eller virksomhet?')    
+            .parent()
+            .contains('Ja')
+            .click({force: true})
+
+
+
         cy.contains('Velg inntektskildene som passer for deg. Finner du ikke noe som passer for deg, svarer du nei')
             .parent()
             .contains('ansatt et annet sted enn nevnt over')
@@ -211,6 +228,8 @@ describe('Tester arbeidstakersøknad', () => {
             .and('not.contain', 'Hva er en inntektsmelding')
             .and('contain', 'NAV behandler søknaden')
             .and('contain', 'Når blir pengene utbetalt')
+            .and('contain', 'Vi trenger inntektsopplysninger fra deg som selvstendig næringsdrivende')
+
 
         inlineForklaringer()
     })
