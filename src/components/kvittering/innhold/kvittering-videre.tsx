@@ -1,6 +1,7 @@
-import { Alert, BodyLong, Heading, Label } from '@navikt/ds-react'
+import { Alert, BodyLong, Button, Heading, Label } from '@navikt/ds-react'
 import React from 'react'
 import { useParams } from 'react-router-dom'
+import { ExternalLinkIcon } from '@navikt/aksel-icons'
 
 import { RSArbeidssituasjon } from '../../../types/rs-types/rs-arbeidssituasjon'
 import { RSSoknadstype } from '../../../types/rs-types/rs-soknadstype'
@@ -32,15 +33,23 @@ const KvitteringVidere = () => {
             <Vis
                 hvis={valgtSoknad.arbeidssituasjon === RSArbeidssituasjon.NAERINGSDRIVENDE}
                 render={() => (
+                    <>
                     <div className="mt-4">
                         <Label as="h2">{tekst('kvittering.før.nav.behandler')}</Label>
                         <BodyLong as="span">{tekst('kvittering.naeringsdrivende.brodtekst')} </BodyLong>
-                        <LenkeMedIkon
-                            href={tekst('kvittering.naeringsdrivende.lenke.url')}
-                            text={tekst('kvittering.naeringsdrivende.lenke')}
-                        />
-                        .
                     </div>
+                    <div>
+                         <Button
+                            iconPosition="right"
+                            variant="secondary"
+                            icon={<ExternalLinkIcon aria-hidden />}
+                            as="a"
+                            href={tekst('kvittering.naeringsdrivende.lenke.url')}
+                        >
+                            {tekst('kvittering.naeringsdrivende.lenke')}
+                        </Button>
+                    </div>
+                    </>
                 )}
             />
             <div className="mt-4">
