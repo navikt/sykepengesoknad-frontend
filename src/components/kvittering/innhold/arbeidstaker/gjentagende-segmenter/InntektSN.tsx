@@ -21,7 +21,11 @@ function InntektSN({ skalSendeInntektsmelding }: { skalSendeInntektsmelding: boo
                     <Button iconPosition="right" variant="secondary" icon={<ExternalLinkIcon aria-hidden />} as="a" href={tekst('kvittering.naeringsdrivende.lenke.url')}>{tekst('kvittering.naeringsdrivende.lenke')}</Button>
                     <br />
                     <br />
-                    <Button iconPosition="right" variant="secondary" icon={<ExternalLinkIcon aria-hidden />} as="a" href={tekst('kvittering.naeringsdrivende.lenke.url')}>Send inn skjema</Button>
+                    <Button iconPosition="right" variant="secondary" icon={<ExternalLinkIcon aria-hidden />} as="a" href={tekst('kvittering.naeringsdrivende.lenke.url')}>Gå til inntektsmelding for selvstendig næringsdrivende</Button>
+                    <br />
+                    <br />
+                    <Button iconPosition="right" variant="secondary" icon={<ExternalLinkIcon aria-hidden />} as="a" href={tekst('kvittering.naeringsdrivende.lenke.url')}>Send inntektsmelding</Button>
+                    
 
                      {/* <LenkeMedIkon
                         href={tekst('kvittering.naeringsdrivende.lenke.url')}
