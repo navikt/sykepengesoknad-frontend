@@ -1,3 +1,5 @@
+import {checkViStolerPåDeg, klikkGaVidere, svarCheckboxPanel} from "../../support/utilities";
+
 describe('Tester kontonummer i kvittering', () => {
     it('Har kontonumer', () => {
         cy.clearCookies()
@@ -29,11 +31,8 @@ describe('Tester kontonummer i kvittering', () => {
 })
 
 const besvarSoknad = () => {
-    cy.contains(
-        'Jeg vet at jeg kan miste retten til sykepenger hvis opplysningene jeg gir ikke er riktige eller fullstendige. Jeg vet også at NAV kan holde igjen eller kreve tilbake penger, og at å gi feil opplysninger kan være straffbart.',
-    ).click()
-    cy.contains('Gå videre').click()
-    cy.get('.navds-checkbox__label').click()
+    checkViStolerPåDeg()
+    svarCheckboxPanel()
     cy.contains('Send søknaden').click()
 }
 
