@@ -163,23 +163,20 @@ describe('Tester arbeidstakersøknad', () => {
             .parent()
             .click()
 
-            // cy.contains('Har du vært næringsdrivende i mer enn 4 år?')
-            // .parent()
-            // .contains('Ja')
-            // .click({force: true})
+        // cy.contains('Har du vært næringsdrivende i mer enn 4 år?')
+        // .parent()
+        // .contains('Ja')
+        // .click({force: true})
 
-            cy.contains('Har du vært næringsdrivende i mer enn 4 år?')
-  .parent()
-  .find('input[type="radio"][value="JA"]')
-  .click();
+        cy.contains('Har du vært næringsdrivende i mer enn 4 år?')
+            .parent()
+            .find('input[type="radio"][value="JA"]')
+            .click()
 
-
-            cy.contains('Har det vært endring i din arbeidssituasjon eller virksomhet?')    
+        cy.contains('Har det vært endring i din arbeidssituasjon eller virksomhet?')
             .parent()
             .contains('Ja')
-            .click({force: true})
-
-
+            .click({ force: true })
 
         cy.contains('Velg inntektskildene som passer for deg. Finner du ikke noe som passer for deg, svarer du nei')
             .parent()
@@ -229,7 +226,6 @@ describe('Tester arbeidstakersøknad', () => {
             .and('contain', 'NAV behandler søknaden')
             .and('contain', 'Når blir pengene utbetalt')
             .and('contain', 'Vi trenger inntektsopplysninger fra deg som selvstendig næringsdrivende')
-
 
         inlineForklaringer()
     })
