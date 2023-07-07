@@ -32,6 +32,7 @@ describe('Tester arbeidsledigsøknad', () => {
         sjekkMainContentFokus()
 
         cy.contains('Friskmeldt')
+        cy.get('form').findAllByRole('radio', { name: 'Nei' }).should('have.length', 1)
         cy.realPress('Tab')
         cy.realPress('Tab')
         cy.realPress('Tab')
@@ -42,6 +43,7 @@ describe('Tester arbeidsledigsøknad', () => {
         sjekkMainContentFokus()
 
         cy.contains('Andre inntektskilder')
+        cy.contains('Hva mener vi med andre inntektskilder?')
         cy.realPress('Tab')
         cy.realPress('Tab')
         cy.realPress('Tab')
