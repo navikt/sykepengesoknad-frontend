@@ -122,7 +122,7 @@ export const medlemskapOppholdUtenforEøsSporsmal: RSSporsmal = {
                 },
                 {
                     id: '9d72773d-ce43-44b0-85bf-1f0dbb2a6e5a',
-                    tag: 'MEDLEMSKAP_OPPHOLD_UTENFOR_EOS_BEGRUNNELSE_FORSØRG',
+                    tag: 'MEDLEMSKAP_OPPHOLD_UTENFOR_EOS_BEGRUNNELSE_FORSORG',
                     sporsmalstekst: 'Forsørget medfølgende familiemedlem',
                     undertekst: null,
                     svartype: 'RADIO',
