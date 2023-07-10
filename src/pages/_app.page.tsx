@@ -34,6 +34,17 @@ configureLogger({
         }),
 })
 
+const queryClient = new QueryClient({
+    defaultOptions: {
+        queries: {
+            // Setting this to true causes query request after initial
+            // mount even if the query was hydrated from the server side.
+            refetchOnMount: false,
+            refetchOnWindowFocus: false,
+        },
+    },
+})
+
 function MyApp({ Component, pageProps }: AppProps): JSX.Element {
     useHandleDecoratorClicks()
     useFangHotjarEmotion()
@@ -44,17 +55,6 @@ function MyApp({ Component, pageProps }: AppProps): JSX.Element {
         // Dette kjøres hver gang ruten endres
         document.getElementById('maincontent')?.focus()
     }, [router.asPath])
-
-    const queryClient = new QueryClient({
-        defaultOptions: {
-            queries: {
-                // Setting this to true causes query request after initial
-                // mount even if the query was hydrated from the server side.
-                refetchOnMount: false,
-                refetchOnWindowFocus: false,
-            },
-        },
-    })
 
     Modal.setAppElement('#root')
 
