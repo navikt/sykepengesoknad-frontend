@@ -1,7 +1,7 @@
 import { Button } from '@navikt/ds-react'
 import React, { useEffect, useState } from 'react'
-import { useParams } from 'react-router-dom'
-import { useNavigate } from 'react-router'
+import { useRouter } from 'next/router'
+import { logger } from '@navikt/next-logger'
 
 import Endreknapp from '../../components/endreknapp/endreknapp'
 import { RSSoknadstatus } from '../../types/rs-types/rs-soknadstatus'
@@ -21,18 +21,17 @@ import { urlTilSoknad } from '../soknad/soknad-link'
 import QueryStatusPanel from '../queryStatusPanel/QueryStatusPanel'
 import { kvitteringBreadcrumb, useUpdateBreadcrumbs } from '../../hooks/useBreadcrumbs'
 import { useStudyStatus } from '../../hooks/useStudyStatus'
-import { RouteParams } from '../../app'
 
 import Kvittering from './kvittering'
 import { harKorrigertArbeidstakersoknadIDetSiste } from './harSvartJa'
 
 const KvitteringSide = () => {
-    const { id } = useParams<RouteParams>()
-    const { data: soknader } = useSoknader()
+    const router = useRouter()
+    const { id } = router.query as { id: string }
     const { data: valgtSoknad } = useSoknad(id)
+    const { data: soknader } = useSoknader()
     const korrigertSøknadStudy = 'study-zeh32lhqyb'
     const { data: korrigertStudyActive } = useStudyStatus(korrigertSøknadStudy)
-    const navigate = useNavigate()
 
     const [rerendreKvittering, setRerendrekvittering] = useState<Date>(new Date())
 
@@ -43,7 +42,9 @@ const KvitteringSide = () => {
 
         if (valgtSoknad.status !== RSSoknadstatus.SENDT) {
             const url = urlTilSoknad(valgtSoknad)
-            navigate(url)
+            router.push(url).catch((e) => {
+                logger.error(e, 'feil ved redirect tilbake til søknad')
+            })
             return
         }
 

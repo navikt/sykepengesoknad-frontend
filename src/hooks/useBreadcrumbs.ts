@@ -90,7 +90,13 @@ export enum SsrPathVariants {
     Root = '/',
     NotFound = '/404',
     ServerError = '/500',
-    App = '/[[...app]]',
+    SykepengesoknadUtland = '/sykepengesoknad-utland',
+    Soknader = '/soknader',
+    Soknad = '/soknader/[id]',
+    SoknadSteg = '/soknader/[id]/[stegId]',
+    Avbrutt = '/avbrutt/[id]',
+    Kvittering = '/kvittering/[id]',
+    Sendt = '/sendt/[id]',
 }
 
 export function createInitialServerSideBreadcrumbs(
@@ -101,8 +107,16 @@ export function createInitialServerSideBreadcrumbs(
         case SsrPathVariants.Root:
         case SsrPathVariants.NotFound:
         case SsrPathVariants.ServerError:
-        case SsrPathVariants.App:
+        case SsrPathVariants.SykepengesoknadUtland:
+        case SsrPathVariants.Soknader:
             return createCompleteCrumbs([], skapTestpersonQuery(query))
+        case SsrPathVariants.Soknad:
+        case SsrPathVariants.SoknadSteg:
+        case SsrPathVariants.Avbrutt:
+            return createCompleteCrumbs([soknadBreadcrumb], skapTestpersonQuery(query))
+        case SsrPathVariants.Kvittering:
+        case SsrPathVariants.Sendt:
+            return createCompleteCrumbs([kvitteringBreadcrumb], skapTestpersonQuery(query))
         default:
             logger.error(`Unknown initial path (${pathname}), defaulting to just base breadcrumb`)
             return createCompleteCrumbs([], skapTestpersonQuery(query))

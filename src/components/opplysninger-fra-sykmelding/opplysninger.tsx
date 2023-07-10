@@ -1,12 +1,11 @@
 import React, { useState } from 'react'
-import { useParams } from 'react-router-dom'
 import { ExpansionCard, Heading } from '@navikt/ds-react'
+import { useRouter } from 'next/router'
 
 import { tekst } from '../../utils/tekster'
 import useSoknad from '../../hooks/useSoknad'
 import useSykmelding from '../../hooks/useSykmelding'
 import { logEvent } from '../amplitude/amplitude'
-import { RouteParams } from '../../app'
 
 import ArbeidsgiverInfo from './arbeidsgiver-info'
 import ArbeidssituasjonInfo from './arbeidssituasjon-info'
@@ -24,7 +23,8 @@ interface OpplysningerProps {
 }
 
 const Opplysninger = ({ ekspandert, steg }: OpplysningerProps) => {
-    const { id } = useParams<RouteParams>()
+    const router = useRouter()
+    const { id } = router.query as { id: string }
     const { data: valgtSoknad } = useSoknad(id)
     const { data: valgtSykmelding } = useSykmelding(valgtSoknad?.sykmeldingId)
     const [open, setOpen] = useState<boolean>(ekspandert)

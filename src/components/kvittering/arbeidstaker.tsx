@@ -2,8 +2,8 @@ import { Heading, Panel } from '@navikt/ds-react'
 import { logger } from '@navikt/next-logger'
 import dayjs from 'dayjs'
 import React, { useEffect, useState } from 'react'
-import { useParams } from 'react-router-dom'
 import { CheckmarkCircleFillIcon, InformationSquareFillIcon } from '@navikt/aksel-icons'
+import { useRouter } from 'next/router'
 
 import { RSMottaker } from '../../types/rs-types/rs-mottaker'
 import { RSSoknadstatus } from '../../types/rs-types/rs-soknadstatus'
@@ -16,7 +16,6 @@ import useSoknad from '../../hooks/useSoknad'
 import useSoknader from '../../hooks/useSoknader'
 import { RSSoknadmetadata } from '../../types/rs-types/rs-soknadmetadata'
 import useSykmelding from '../../hooks/useSykmelding'
-import { RouteParams } from '../../app'
 
 import Inntil16dager from './innhold/arbeidstaker/inntil16dager'
 import Over16dager from './innhold/arbeidstaker/over16dager'
@@ -27,9 +26,10 @@ import ArbeidstakerStatus from './status/arbeidstaker-status'
 type ArbeidstakerKvitteringTekst = 'inntil16dager' | 'over16dager' | 'utenOpphold' | 'medOpphold' | undefined
 
 const Arbeidstaker = () => {
-    const { id } = useParams<RouteParams>()
-    const { data: soknader } = useSoknader()
+    const router = useRouter()
+    const { id } = router.query as { id: string; stegId: string }
     const { data: valgtSoknad } = useSoknad(id)
+    const { data: soknader } = useSoknader()
     const { data: valgtSykmelding } = useSykmelding(valgtSoknad?.sykmeldingId)
     const [kvitteringTekst, setKvitteringTekst] = useState<ArbeidstakerKvitteringTekst>()
 

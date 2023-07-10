@@ -1,11 +1,11 @@
-import { BodyShort } from '@navikt/ds-react'
+import { BodyShort, Link } from '@navikt/ds-react'
 import React from 'react'
-import { Link, useParams } from 'react-router-dom'
 import { ArrowLeftIcon } from '@navikt/aksel-icons'
+import { useRouter } from 'next/router'
+import NextLink from 'next/link'
 
 import { TagTyper } from '../../../types/enums'
 import useSoknad from '../../../hooks/useSoknad'
-import { RouteParams } from '../../../app'
 import { SEPARATOR } from '../../../utils/constants'
 import { logEvent } from '../../amplitude/amplitude'
 import { tekst } from '../../../utils/tekster'
@@ -18,27 +18,33 @@ const TilbakeKnapp = ({ soknad, stegNo }: { soknad: Soknad; stegNo: number }) =>
     }
 
     return (
-        <Link
-            to={`/soknader/${soknad.id}${SEPARATOR}${stegNo - 1}${window.location.search}`}
-            className="navds-link"
-            onClick={() => {
-                logEvent('navigere', {
-                    lenketekst: tekst('soknad.tilbakeknapp'),
-                    fra: soknad!.sporsmal[stegNo - 1].tag,
-                    til: soknad!.sporsmal[stegNo - 2].tag,
-                    soknadstype: soknad?.soknadstype,
-                    stegId: `${stegNo}`,
-                })
-            }}
+        <NextLink
+            legacyBehavior
+            passHref
+            href={`/soknader/${soknad.id}${SEPARATOR}${stegNo - 1}${window.location.search}`}
         >
-            <ArrowLeftIcon />
-            <BodyShort as="span">{tekst('soknad.tilbakeknapp')}</BodyShort>
-        </Link>
+            <Link
+                className="cursor-pointer"
+                onClick={() => {
+                    logEvent('navigere', {
+                        lenketekst: tekst('soknad.tilbakeknapp'),
+                        fra: soknad!.sporsmal[stegNo - 1].tag,
+                        til: soknad!.sporsmal[stegNo - 2].tag,
+                        soknadstype: soknad?.soknadstype,
+                        stegId: `${stegNo}`,
+                    })
+                }}
+            >
+                <ArrowLeftIcon />
+                <BodyShort as="span">{tekst('soknad.tilbakeknapp')}</BodyShort>
+            </Link>
+        </NextLink>
     )
 }
 
 const Fremdriftsbar = () => {
-    const { id, stegId } = useParams<RouteParams>()
+    const router = useRouter()
+    const { id, stegId } = router.query as { id: string; stegId: string }
     const { data: valgtSoknad } = useSoknad(id)
     if (!valgtSoknad || !stegId) return null
 

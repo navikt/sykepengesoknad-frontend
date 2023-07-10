@@ -1,9 +1,8 @@
 import React from 'react'
-import { useParams } from 'react-router-dom'
+import { useRouter } from 'next/router'
 
 import { RSSoknadstype } from '../../types/rs-types/rs-soknadstype'
 import Vis from '../vis'
-import { RouteParams } from '../../app'
 import useSoknad from '../../hooks/useSoknad'
 
 import KvitteringUtenlands from './innhold/kvittering-utenlands'
@@ -11,7 +10,8 @@ import KvitteringVidere from './innhold/kvittering-videre'
 import KvitteringStatus from './status/kvittering-status'
 
 const AlleAndre = () => {
-    const { id } = useParams<RouteParams>()
+    const router = useRouter()
+    const { id } = router.query as { id: string }
     const { data: valgtSoknad } = useSoknad(id)
 
     if (!valgtSoknad) return null

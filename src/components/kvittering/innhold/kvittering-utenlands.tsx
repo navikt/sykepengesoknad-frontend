@@ -1,15 +1,15 @@
 import { Alert, BodyLong, Heading, Label } from '@navikt/ds-react'
 import React from 'react'
-import { useParams } from 'react-router-dom'
+import { useRouter } from 'next/router'
 
 import { sendtForMerEnn30DagerSiden } from '../../../utils/dato-utils'
 import { tekst } from '../../../utils/tekster'
 import useSoknad from '../../../hooks/useSoknad'
-import { RouteParams } from '../../../app'
 import { LenkeMedIkon } from '../../lenke-med-ikon/LenkeMedIkon'
 
 const KvitteringUtenlands = () => {
-    const { id } = useParams<RouteParams>()
+    const router = useRouter()
+    const { id } = router.query as { id: string; stegId: string }
     const { data: valgtSoknad } = useSoknad(id)
 
     if (!valgtSoknad) return null

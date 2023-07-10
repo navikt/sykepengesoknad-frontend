@@ -1,4 +1,3 @@
-/* eslint-disable postcss-modules/no-unused-class */
 import '../style/global.css'
 
 import { configureLogger } from '@navikt/next-logger'
@@ -6,14 +5,16 @@ import dayjs from 'dayjs'
 import nb from 'dayjs/locale/nb'
 import type { AppProps as NextAppProps } from 'next/app'
 import Head from 'next/head'
-import React, { PropsWithChildren } from 'react'
+import React, { PropsWithChildren, useEffect } from 'react'
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
+import { Modal } from '@navikt/ds-react'
+import { useRouter } from 'next/router'
 
 import { useFangHotjarEmotion } from '../hooks/useFangHotjarEmotion'
 import { useHandleDecoratorClicks } from '../hooks/useBreadcrumbs'
 import { LabsWarning } from '../components/labs-warning/LabsWarning'
-import { getFaro, initInstrumentation, pinoLevelToFaroLevel } from '../faro/faro'
 import { basePath } from '../utils/environment'
+import { getFaro, initInstrumentation, pinoLevelToFaroLevel } from '../faro/faro'
 
 interface AppProps extends Omit<NextAppProps, 'pageProps'> {
     pageProps: PropsWithChildren<unknown>
@@ -33,20 +34,31 @@ configureLogger({
         }),
 })
 
+const queryClient = new QueryClient({
+    defaultOptions: {
+        queries: {
+            // Setting this to true causes query request after initial
+            // mount even if the query was hydrated from the server side.
+            refetchOnMount: false,
+            refetchOnWindowFocus: false,
+        },
+    },
+})
+
 function MyApp({ Component, pageProps }: AppProps): JSX.Element {
     useHandleDecoratorClicks()
     useFangHotjarEmotion()
 
-    const queryClient = new QueryClient({
-        defaultOptions: {
-            queries: {
-                // Setting this to true causes query request after initial
-                // mount even if the query was hydrated from the server side.
-                refetchOnMount: false,
-                refetchOnWindowFocus: false,
-            },
-        },
-    })
+    const router = useRouter()
+
+    useEffect(() => {
+        if (router.asPath !== '/') {
+            // Ikke fokuser når man går tilbake til listevisninga
+            document.getElementById('maincontent')?.focus()
+            document.getElementById('maincontent')?.scrollIntoView()
+        }
+    }, [router.asPath])
+    Modal.setAppElement('#root')
 
     return (
         <>
@@ -58,7 +70,9 @@ function MyApp({ Component, pageProps }: AppProps): JSX.Element {
             <QueryClientProvider client={queryClient}>
                 <div id="root" className="mx-auto max-w-2xl p-4 pb-32">
                     <LabsWarning />
-                    <Component {...pageProps} />
+                    <main id="maincontent" role="main" tabIndex={-1} className="outline-none">
+                        <Component {...pageProps} />
+                    </main>
                 </div>
             </QueryClientProvider>
         </>

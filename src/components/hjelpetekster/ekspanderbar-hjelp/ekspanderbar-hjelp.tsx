@@ -1,6 +1,6 @@
 import { BodyLong, ReadMore } from '@navikt/ds-react'
 import React, { useEffect, useState } from 'react'
-import { useParams } from 'react-router'
+import { useRouter } from 'next/router'
 
 import { TagTyper } from '../../../types/enums'
 import { RSArbeidssituasjon } from '../../../types/rs-types/rs-arbeidssituasjon'
@@ -8,7 +8,6 @@ import { RSSoknadstype } from '../../../types/rs-types/rs-soknadstype'
 import { tekst } from '../../../utils/tekster'
 import { SpmProps } from '../../sporsmal/sporsmal-form/sporsmal-form'
 import { fjernIndexFraTag } from '../../sporsmal/sporsmal-utils'
-import { RouteParams } from '../../../app'
 import useSoknad from '../../../hooks/useSoknad'
 import { logEvent } from '../../amplitude/amplitude'
 import { parserWithReplace } from '../../../utils/html-react-parser-utils'
@@ -28,7 +27,8 @@ import { BrukteReisetilskuddetHjelpBody } from './brukte-reisetilskuddet-hjelp-b
 import { KvitteringerHjelpBody } from './kvitteringer-hjelp-body'
 
 export const EkspanderbarHjelp = ({ sporsmal }: SpmProps) => {
-    const { id } = useParams<RouteParams>()
+    const router = useRouter()
+    const { id } = router.query as { id: string }
     const { data: valgtSoknad } = useSoknad(id)
     const [expanded, setExpanded] = useState<boolean>(false)
 

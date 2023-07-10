@@ -11,7 +11,14 @@ import {
     selvstendigKvittering,
     sendtArbeidsledigKvittering,
 } from '../../../src/data/mock/data/soknader-integration'
-import { setPeriodeFraTil } from '../../support/utilities'
+import {
+    checkViStolerPåDeg,
+    klikkGaVidere,
+    setPeriodeFraTil,
+    sjekkMainContentFokus,
+    svarCheckboxPanel,
+    svarNeiHovedsporsmal,
+} from '../../support/utilities'
 import { inlineForklaringer } from '../../support/sjekkInlineForklaringKvittering'
 
 describe('Tester kvittering', () => {
@@ -27,7 +34,7 @@ describe('Tester kvittering', () => {
             cy.contains(
                 'Jeg vet at jeg kan miste retten til sykepenger hvis opplysningene jeg gir ikke er riktige eller fullstendige. Jeg vet også at NAV kan holde igjen eller kreve tilbake penger, og at å gi feil opplysninger kan være straffbart.',
             ).click()
-            cy.contains('Gå videre').click()
+            klikkGaVidere()
 
             cy.get('[data-cy="bekreftCheckboksPanel"]').click()
             cy.contains('Send søknaden').click()
@@ -112,12 +119,12 @@ describe('Tester kvittering', () => {
             // Svar og send
             setPeriodeFraTil(14, 22)
 
-            cy.contains('Gå videre').click()
+            klikkGaVidere()
             cy.get('[data-cy="landvelger"] input[type="text"]').type('Fransk')
             cy.contains('Søre franske territorier').click()
-            cy.contains('Gå videre').click()
-            cy.contains('Nei').click()
-            cy.contains('Gå videre').click()
+            klikkGaVidere()
+            svarNeiHovedsporsmal()
+            klikkGaVidere()
             cy.contains('Jeg bekrefter de to punktene ovenfor').click()
             cy.contains('Send søknaden').click()
 
@@ -177,7 +184,7 @@ describe('Tester kvittering', () => {
             cy.contains(
                 'Jeg vet at jeg kan miste retten til sykepenger hvis opplysningene jeg gir ikke er riktige eller fullstendige. Jeg vet også at NAV kan holde igjen eller kreve tilbake penger, og at å gi feil opplysninger kan være straffbart.',
             ).click()
-            cy.contains('Gå videre').click()
+            klikkGaVidere()
             cy.get('[data-cy="bekreftCheckboksPanel"]').click()
             cy.contains('Send søknaden').click()
 
@@ -376,14 +383,11 @@ describe('Tester kvittering', () => {
 })
 
 const besvarSoknad = () => {
-    cy.contains(
-        'Jeg vet at jeg kan miste retten til sykepenger hvis opplysningene jeg gir ikke er riktige eller fullstendige. Jeg vet også at NAV kan holde igjen eller kreve tilbake penger, og at å gi feil opplysninger kan være straffbart.',
-    ).click()
-    cy.contains('Gå videre').click()
-    cy.get('[data-cy="bekreftCheckboksPanel"]').click()
+    checkViStolerPåDeg()
+
+    svarCheckboxPanel()
     cy.contains('Send søknaden').click()
-    // eslint-disable-next-line cypress/no-unnecessary-waiting
-    cy.wait(1500)
+    sjekkMainContentFokus()
     cy.get('[data-cy="kvittering"]')
 }
 

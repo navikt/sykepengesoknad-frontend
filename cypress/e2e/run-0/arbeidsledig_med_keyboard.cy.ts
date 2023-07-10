@@ -1,5 +1,6 @@
 import { arbeidsledig } from '../../../src/data/mock/data/opplaering'
 import 'cypress-real-events'
+import { sjekkMainContentFokus } from '../../support/utilities'
 
 describe('Tester arbeidsledigsøknad', () => {
     const soknad = arbeidsledig
@@ -28,7 +29,10 @@ describe('Tester arbeidsledigsøknad', () => {
         cy.realPress('Tab')
         cy.focused().contains('Gå videre').should('have.css', 'box-shadow')
         cy.realPress('Enter')
+        sjekkMainContentFokus()
+
         cy.contains('Friskmeldt')
+        cy.get('form').findAllByRole('radio', { name: 'Nei' }).should('have.length', 1)
         cy.realPress('Tab')
         cy.realPress('Tab')
         cy.realPress('Tab')
@@ -36,7 +40,10 @@ describe('Tester arbeidsledigsøknad', () => {
         cy.realPress('Tab')
         cy.focused().contains('Gå videre').should('have.css', 'box-shadow')
         cy.realPress('Enter')
+        sjekkMainContentFokus()
+
         cy.contains('Andre inntektskilder')
+        cy.contains('Hva mener vi med andre inntektskilder?')
         cy.realPress('Tab')
         cy.realPress('Tab')
         cy.realPress('Tab')
@@ -45,6 +52,8 @@ describe('Tester arbeidsledigsøknad', () => {
         cy.realPress('Tab')
         cy.focused().contains('Gå videre').should('have.css', 'box-shadow')
         cy.realPress('Enter')
+        sjekkMainContentFokus()
+
         cy.contains('Reise')
         cy.realPress('Tab')
         cy.realPress('Tab')
@@ -53,6 +62,8 @@ describe('Tester arbeidsledigsøknad', () => {
         cy.realPress('Tab')
         cy.focused().contains('Gå videre').should('have.css', 'box-shadow')
         cy.realPress('Enter')
+        sjekkMainContentFokus()
+
         cy.contains('Til slutt')
         cy.realPress('Tab')
         cy.realPress('Tab')
@@ -72,6 +83,8 @@ describe('Tester arbeidsledigsøknad', () => {
         cy.realPress('Tab')
         cy.focused().contains('Send søknaden').should('have.css', 'box-shadow')
         cy.realPress('Enter')
+        sjekkMainContentFokus()
+
         cy.contains('Søknaden er sendt til NAV')
         cy.contains('Mottatt')
     })

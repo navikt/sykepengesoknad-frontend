@@ -1,9 +1,8 @@
 import { logger } from '@navikt/next-logger'
 import React, { useCallback, useEffect, useState } from 'react'
 import { FormProvider, useForm } from 'react-hook-form'
-import { useLocation, useParams } from 'react-router-dom'
 import { useQueryClient } from '@tanstack/react-query'
-import { useNavigate } from 'react-router'
+import { useRouter } from 'next/router'
 
 import { TagTyper } from '../../../types/enums'
 import { RSOppdaterSporsmalResponse } from '../../../types/rs-types/rest-response/rs-oppdatersporsmalresponse'
@@ -29,8 +28,8 @@ import useSoknad from '../../../hooks/useSoknad'
 import { RSSoknadstatus } from '../../../types/rs-types/rs-soknadstatus'
 import { harLikeSvar } from '../endring-uten-endring/har-like-svar'
 import { useSendSoknad } from '../../../hooks/useSendSoknad'
-import { RouteParams } from '../../../app'
 import { RSMottaker } from '../../../types/rs-types/rs-mottaker'
+import { UseTestpersonQuery } from '../../../hooks/useTestpersonQuery'
 
 import Knapperad from './knapperad'
 import SendesTil from './sendes-til'
@@ -40,20 +39,24 @@ export interface SpmProps {
     sporsmal: Sporsmal
 }
 
-const SporsmalForm = () => {
-    const { id, stegId } = useParams<RouteParams>()
-    const { data: valgtSoknad } = useSoknad(id)
+export interface SpmFormProps {
+    valgtSoknad: Soknad
+    spmIndex: number
+    sporsmal: Sporsmal
+}
+const SporsmalForm = ({ valgtSoknad, spmIndex, sporsmal }: SpmFormProps) => {
+    const router = useRouter()
+    const testpersonQuery = UseTestpersonQuery()
+
     const { mutate: sendSoknadMutation, isLoading: senderSoknad, error: sendError } = useSendSoknad()
     const { data: korrigerer } = useSoknad(valgtSoknad?.korrigerer, valgtSoknad?.korrigerer !== undefined)
     const queryClient = useQueryClient()
-    const navigate = useNavigate()
-    const location = useLocation()
+
     const [mottaker, setMottaker] = useState<RSMottaker>()
 
     const [erSiste, setErSiste] = useState<boolean>(false)
     const [poster, setPoster] = useState<boolean>(false)
     const [endringUtenEndringAapen, setEndringUtenEndringAapen] = useState<boolean>(false)
-    const spmIndex = parseInt(stegId!) - 1
     const methods = useForm({
         mode: 'onSubmit',
         reValidateMode: 'onChange',
@@ -61,7 +64,6 @@ const SporsmalForm = () => {
     })
     const erUtlandssoknad = valgtSoknad!.soknadstype === RSSoknadstype.OPPHOLD_UTLAND
     let restFeilet = false
-    let sporsmal = valgtSoknad!.sporsmal[spmIndex]
     const nesteSporsmal = valgtSoknad!.sporsmal[spmIndex + 1]
 
     useEffect(() => {
@@ -111,7 +113,7 @@ const SporsmalForm = () => {
                 (response, requestId, defaultErrorHandler) => {
                     if (response.status === 400) {
                         fikk400 = true
-                        navigate('/feil-state')
+                        router.push('/feil-state')
                     }
                     restFeilet = true
                     defaultErrorHandler()
@@ -136,7 +138,7 @@ const SporsmalForm = () => {
                 : (soknad!.sporsmal[spmIndex] = new Sporsmal(spm, undefined as any, true))
         }
 
-        queryClient.setQueriesData(['soknad', id], soknad)
+        queryClient.setQueriesData(['soknad', soknad.id], soknad)
         return true
     }
 
@@ -221,7 +223,7 @@ const SporsmalForm = () => {
                 sporsmal = valgtSoknad!.sporsmal[spmIndex]
             } else {
                 methods.clearErrors()
-                navigate(pathUtenSteg(location.pathname) + SEPARATOR + (spmIndex + 2) + location.search)
+                await router.push(pathUtenSteg(router.asPath) + SEPARATOR + (spmIndex + 2) + testpersonQuery.query())
             }
         } finally {
             setPoster(false)
