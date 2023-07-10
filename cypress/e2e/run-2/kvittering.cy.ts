@@ -16,7 +16,8 @@ import {
     klikkGaVidere,
     setPeriodeFraTil,
     sjekkMainContentFokus,
-    svarCheckboxPanel, svarNeiHovedsporsmal,
+    svarCheckboxPanel,
+    svarNeiHovedsporsmal,
 } from '../../support/utilities'
 import { inlineForklaringer } from '../../support/sjekkInlineForklaringKvittering'
 
