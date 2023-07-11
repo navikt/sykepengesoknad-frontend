@@ -1,7 +1,7 @@
 import { Button, Detail, Heading, LinkPanel, Tag } from '@navikt/ds-react'
 import React from 'react'
-import { Link } from 'react-router-dom'
 import dayjs from 'dayjs'
+import Link from 'next/link'
 
 import { cn } from '../../utils/tw-utils'
 import { RSSoknadstatus, RSSoknadstatusType } from '../../types/rs-types/rs-soknadstatus'
@@ -74,7 +74,7 @@ export const ListevisningLenkepanel = ({ soknad, onClick }: { soknad: RSSoknadme
         )
     }
     return (
-        <Link to={urlTilSoknad(soknad)} data-cy={`link-listevisning-${soknad.id}`}>
+        <Link href={urlTilSoknad(soknad)} data-cy={`link-listevisning-${soknad.id}`}>
             <StyletLinkPanel paddingBottom={true}></StyletLinkPanel>
         </Link>
     )

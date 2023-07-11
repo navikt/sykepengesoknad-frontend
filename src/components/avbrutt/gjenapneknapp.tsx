@@ -1,16 +1,16 @@
 import { Button } from '@navikt/ds-react'
 import { logger } from '@navikt/next-logger'
 import React, { useState } from 'react'
-import { useParams } from 'react-router'
 import { useQueryClient } from '@tanstack/react-query'
+import { useRouter } from 'next/router'
 
 import fetchMedRequestId, { AuthenticationError } from '../../utils/fetch'
 import useSoknad from '../../hooks/useSoknad'
 import { logEvent } from '../amplitude/amplitude'
-import { RouteParams } from '../../app'
 
 const GjenapneSoknad = () => {
-    const { id } = useParams<RouteParams>()
+    const router = useRouter()
+    const { id } = router.query as { id: string }
     const { data: valgtSoknad } = useSoknad(id)
     const queryClient = useQueryClient()
 

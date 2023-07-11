@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { useParams } from 'react-router-dom'
-import { useNavigate } from 'react-router'
+import { useRouter } from 'next/router'
 
 import { RSSoknadstatus } from '../../types/rs-types/rs-soknadstatus'
 import { RSSoknadstype } from '../../types/rs-types/rs-soknadstype'
@@ -15,12 +14,11 @@ import useSoknad from '../../hooks/useSoknad'
 import { urlTilSoknad } from '../soknad/soknad-link'
 import QueryStatusPanel from '../queryStatusPanel/QueryStatusPanel'
 import { kvitteringBreadcrumb, useUpdateBreadcrumbs } from '../../hooks/useBreadcrumbs'
-import { RouteParams } from '../../app'
 
 const SendtSide = () => {
-    const { id } = useParams<RouteParams>()
+    const router = useRouter()
+    const { id } = router.query as { id: string }
     const { data: valgtSoknad } = useSoknad(id)
-    const navigate = useNavigate()
 
     const [rerendreKvittering, setRerendrekvittering] = useState<Date>(new Date())
 
@@ -30,7 +28,7 @@ const SendtSide = () => {
         if (!valgtSoknad) return
 
         if (valgtSoknad.status !== RSSoknadstatus.SENDT) {
-            navigate(urlTilSoknad(valgtSoknad), { replace: true })
+            router.push(urlTilSoknad(valgtSoknad), undefined, { shallow: true })
             return
         }
 

@@ -1,9 +1,11 @@
 import { arbeidstakerGradert } from '../../../src/data/mock/data/opplaering'
+import { klikkGaVidere } from '../../support/utilities'
 
 describe('Tester ettersending og korrigering', () => {
     const soknad = arbeidstakerGradert
 
     before(() => {
+        cy.clearCookies()
         cy.visit('/syk/sykepengesoknad')
     })
 
@@ -15,39 +17,39 @@ describe('Tester ettersending og korrigering', () => {
     it('Svar på søknad', function () {
         cy.url().should('include', `${soknad.id}/1`)
         cy.get('.navds-checkbox__label').click()
-        cy.contains('Gå videre').click()
+        klikkGaVidere()
 
         cy.url().should('include', `${soknad.id}/2`)
         cy.get('[data-cy="ja-nei-stor"] input[value=NEI]').click()
-        cy.contains('Gå videre').click()
+        klikkGaVidere()
 
         cy.url().should('include', `${soknad.id}/3`)
         cy.get('[data-cy="ja-nei-stor"] input[value=NEI]').click()
-        cy.contains('Gå videre').click()
+        klikkGaVidere()
 
         cy.url().should('include', `${soknad.id}/4`)
         cy.get('[data-cy="ja-nei-stor"] input[value=NEI]').click()
-        cy.contains('Gå videre').click()
+        klikkGaVidere()
 
         cy.url().should('include', `${soknad.id}/5`)
         cy.get('[data-cy="ja-nei-stor"] input[value=NEI]').click()
-        cy.contains('Gå videre').click()
+        klikkGaVidere()
 
         cy.url().should('include', `${soknad.id}/6`)
         cy.get('[data-cy="ja-nei-stor"] input[value=NEI]').click()
-        cy.contains('Gå videre').click()
+        klikkGaVidere()
 
         cy.url().should('include', `${soknad.id}/7`)
         cy.get('[data-cy="ja-nei-stor"] input[value=NEI]').click()
-        cy.contains('Gå videre').click()
+        klikkGaVidere()
 
         cy.url().should('include', `${soknad.id}/8`)
         cy.get('[data-cy="ja-nei-stor"] input[value=NEI]').click()
-        cy.contains('Gå videre').click()
+        klikkGaVidere()
 
         cy.url().should('include', `${soknad.id}/9`)
         cy.get('[data-cy="ja-nei-stor"] input[value=NEI]').click()
-        cy.contains('Gå videre').click()
+        klikkGaVidere()
 
         cy.url().should('include', `${soknad.id}/10`)
         cy.get('.navds-checkbox__label').click()
@@ -101,17 +103,19 @@ describe('Tester ettersending og korrigering', () => {
         cy.get('.navds-checkbox__input[type=checkbox]').should('not.be.checked')
         cy.get('.navds-checkbox__label').click()
         cy.get('.navds-checkbox__input[type=checkbox]').should('be.checked')
-        cy.contains('Gå videre').click()
+        klikkGaVidere()
 
-        cy.contains('Gå videre').click()
-        cy.contains('Gå videre').click()
-        cy.contains('Gå videre').click()
-        cy.contains('Gå videre').click()
-        cy.contains('Gå videre').click()
-        cy.contains('Gå videre').click()
+        klikkGaVidere()
+        klikkGaVidere()
+        klikkGaVidere()
+        klikkGaVidere()
+        klikkGaVidere()
+        klikkGaVidere()
         cy.get('[data-cy="ja-nei-stor"] input[value=JA]').click()
-        cy.contains('Gå videre').click()
-        cy.contains('Gå videre').click()
+        // eslint-disable-next-line cypress/no-unnecessary-waiting
+        cy.wait(200)
+        klikkGaVidere()
+        klikkGaVidere()
         cy.get('.navds-checkbox__label').click()
         cy.contains('Send endringene').click()
 

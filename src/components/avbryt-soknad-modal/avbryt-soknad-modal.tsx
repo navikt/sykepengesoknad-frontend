@@ -1,8 +1,7 @@
 import { Alert, BodyLong, Button } from '@navikt/ds-react'
 import React, { useState } from 'react'
-import { useParams } from 'react-router-dom'
 import { useQueryClient } from '@tanstack/react-query'
-import { useNavigate } from 'react-router'
+import { useRouter } from 'next/router'
 
 import { RSSoknadstatus } from '../../types/rs-types/rs-soknadstatus'
 import { tekst } from '../../utils/tekster'
@@ -10,15 +9,14 @@ import { logEvent } from '../amplitude/amplitude'
 import { EndringUtenEndringModal } from '../sporsmal/endring-uten-endring/endring-uten-endring-modal'
 import useSoknad from '../../hooks/useSoknad'
 import useSoknader from '../../hooks/useSoknader'
-import { RouteParams } from '../../app'
 import { FlexModal } from '../flex-modal'
 
 import { avbrytSoknad } from './avbryt-soknad'
 
 const AvbrytKorrigering = () => {
-    const { id, stegId } = useParams<RouteParams>()
+    const router = useRouter()
+    const { id, stegId } = router.query as { id: string; stegId: string }
     const { data: valgtSoknad } = useSoknad(id)
-
     const [aapen, setAapen] = useState<boolean>(false)
 
     if (!valgtSoknad) return null
@@ -46,11 +44,11 @@ const AvbrytKorrigering = () => {
 }
 
 const AvbrytSoknadModal = () => {
-    const { id, stegId } = useParams<RouteParams>()
+    const router = useRouter()
+    const { id, stegId } = router.query as { id: string; stegId: string }
     const { data: valgtSoknad } = useSoknad(id)
     const { data: soknader } = useSoknader()
     const queryClient = useQueryClient()
-    const navigate = useNavigate()
 
     const [aapen, setAapen] = useState<boolean>(false)
     const [feilmeldingTekst, setFeilmeldingTekst] = useState<string>()
@@ -115,7 +113,7 @@ const AvbrytSoknadModal = () => {
                             valgtSoknad: valgtSoknad,
                             soknader: soknader,
                             queryClient: queryClient,
-                            navigate: navigate,
+                            router: router,
                             setFeilmeldingTekst: setFeilmeldingTekst,
                         })
                     }}

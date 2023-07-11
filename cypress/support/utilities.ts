@@ -75,5 +75,10 @@ export function klikkGaVidere(forventFeil = false) {
             const newPathParam = parseInt(newUrl.split('/').pop()!)
             expect(newPathParam).to.eq(currentPathParam + 1)
         })
+        sjekkMainContentFokus()
     })
+}
+
+export function sjekkMainContentFokus() {
+    cy.focused().should('have.id', 'maincontent')
 }

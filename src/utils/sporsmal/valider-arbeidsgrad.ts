@@ -1,6 +1,6 @@
 import dayjs from 'dayjs'
 import { useFormContext } from 'react-hook-form'
-import { useParams } from 'react-router-dom'
+import { useRouter } from 'next/router'
 
 import { hentPeriodeListe, hentSvar } from '../../components/sporsmal/hent-svar'
 import { TagTyper } from '../../types/enums'
@@ -10,10 +10,10 @@ import { ukeDatoListe } from '../dato-utils'
 import { finnHovedSporsmal, hentSporsmal, hentUndersporsmal } from '../soknad-utils'
 import { getLedetekst, tekst } from '../tekster'
 import useSoknad from '../../hooks/useSoknad'
-import { RouteParams } from '../../app'
 
 const useValiderArbeidsgrad = (sporsmal: Sporsmal) => {
-    const { id } = useParams<RouteParams>()
+    const router = useRouter()
+    const { id } = router.query as { id: string; stegId: string }
     const { data: valgtSoknad } = useSoknad(id)
     const { getValues } = useFormContext()
     if (

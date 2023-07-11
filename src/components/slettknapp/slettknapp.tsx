@@ -3,15 +3,14 @@ import { Alert, Button, Heading, Modal } from '@navikt/ds-react'
 import { logger } from '@navikt/next-logger'
 import { TrashIcon } from '@navikt/aksel-icons'
 import React, { useState } from 'react'
-import { useParams } from 'react-router-dom'
 import { useQueryClient } from '@tanstack/react-query'
+import { useRouter } from 'next/router'
 
 import { Kvittering, Sporsmal, svarverdiToKvittering } from '../../types/types'
 import fetchMedRequestId, { AuthenticationError } from '../../utils/fetch'
 import { tekst } from '../../utils/tekster'
 import Vis from '../vis'
 import useSoknad from '../../hooks/useSoknad'
-import { RouteParams } from '../../app'
 
 interface SlettknappProps {
     sporsmal: Sporsmal
@@ -19,7 +18,8 @@ interface SlettknappProps {
 }
 
 const Slettknapp = ({ sporsmal, kvittering }: SlettknappProps) => {
-    const { id } = useParams<RouteParams>()
+    const router = useRouter()
+    const { id } = router.query as { id: string }
     const { data: valgtSoknad } = useSoknad(id)
     const queryClient = useQueryClient()
 

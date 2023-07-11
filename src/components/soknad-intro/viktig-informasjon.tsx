@@ -1,13 +1,13 @@
 import { BodyLong, GuidePanel, Label } from '@navikt/ds-react'
 import React from 'react'
-import { useParams } from 'react-router-dom'
+import { useRouter } from 'next/router'
 
 import { tekst } from '../../utils/tekster'
 import useSoknad from '../../hooks/useSoknad'
-import { RouteParams } from '../../app'
 
 export const ViktigInformasjon = () => {
-    const { id } = useParams<RouteParams>()
+    const router = useRouter()
+    const { id } = router.query as { id: string }
     const { data: valgtSoknad } = useSoknad(id)
 
     if (!valgtSoknad) {

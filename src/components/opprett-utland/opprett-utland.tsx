@@ -1,8 +1,8 @@
-import { Alert, BodyLong, Button, GuidePanel, Heading, Panel } from '@navikt/ds-react'
+import { Alert, BodyShort, Button, GuidePanel, Heading, Panel } from '@navikt/ds-react'
 import { logger } from '@navikt/next-logger'
 import React, { useState } from 'react'
 import { useQueryClient } from '@tanstack/react-query'
-import { useNavigate } from 'react-router'
+import { useRouter } from 'next/router'
 
 import { Soknad } from '../../types/types'
 import { AuthenticationError, fetchJsonMedRequestId } from '../../utils/fetch'
@@ -10,13 +10,12 @@ import { tekst } from '../../utils/tekster'
 import { urlTilSoknad } from '../soknad/soknad-link'
 import Vis from '../vis'
 import { useUpdateBreadcrumbs } from '../../hooks/useBreadcrumbs'
-import { parserWithReplace } from '../../utils/html-react-parser-utils'
 import { LenkeMedIkon } from '../lenke-med-ikon/LenkeMedIkon'
 
 const OpprettUtland = () => {
     const queryClient = useQueryClient()
     const [feilmeldingTekst, setFeilmeldingTekst] = useState<string>()
-    const navigate = useNavigate()
+    const router = useRouter()
 
     useUpdateBreadcrumbs(() => [{ ...{ title: tekst('opprett-utland.tittel') }, handleInApp: true }], [])
 
@@ -44,19 +43,48 @@ const OpprettUtland = () => {
         const soknad = new Soknad(data)
         queryClient.setQueriesData(['soknad', soknad.id], soknad)
         queryClient.invalidateQueries(['soknader'])
-        navigate(urlTilSoknad(soknad))
+        router.push(urlTilSoknad(soknad))
     }
 
     return (
         <>
-            <GuidePanel poster={true}>{parserWithReplace(tekst('opprett-utland.bjorn'))}</GuidePanel>
+            <GuidePanel poster={true}>
+                <BodyShort spacing>Er du statsborger i et land utenfor EU/EØS?</BodyShort>
+
+                <ul>
+                    <BodyShort as="li" spacing>
+                        Skal du reise innenfor Norden, trenger du ikke å søke.
+                    </BodyShort>
+                    <BodyShort as="li" spacing>
+                        Skal du reise til et annet land innenfor EU/EØS, må du benytte{' '}
+                        <LenkeMedIkon
+                            href="https://www.nav.no/soknader/nb/person/til-eller-fra-norge/opphold-eller-arbeid-utenfor-norge/NAV%2008-09.07/brev"
+                            text="søknaden på papir."
+                        ></LenkeMedIkon>
+                    </BodyShort>
+                </ul>
+            </GuidePanel>
 
             <Panel border className="mt-16">
                 <Heading spacing size="medium" level="1">
                     {tekst('opprett-utland.tittel')}
                 </Heading>
+                <BodyShort spacing>Du trenger ikke søke hvis du enten</BodyShort>
 
-                <BodyLong>{parserWithReplace(tekst('opprett-utland.trenger-ikke-soke'))}</BodyLong>
+                <ul>
+                    <BodyShort spacing as="li">
+                        har avtalt med arbeidsgiveren din at du tar ut lovbestemt ferie
+                    </BodyShort>
+                    <BodyShort spacing as="li">
+                        er sykmeldt på grunn av godkjent yrkesskade
+                    </BodyShort>
+                </ul>
+                <BodyShort>
+                    <LenkeMedIkon
+                        href="https://www.nav.no/no/Person/Arbeid/Sykmeldt%2C+arbeidsavklaringspenger+og+yrkesskade/Sykepenger/sykepenger-ved-utenlandsopphold"
+                        text="Se regler om sykepenger når du er på reise."
+                    />
+                </BodyShort>
             </Panel>
 
             <Button variant="primary" type="button" onClick={opprett} className="mb-8 mt-16">

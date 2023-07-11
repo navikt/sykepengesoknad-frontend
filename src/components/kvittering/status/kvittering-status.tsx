@@ -1,12 +1,11 @@
 import { Alert, BodyShort, Heading } from '@navikt/ds-react'
 import dayjs from 'dayjs'
 import React from 'react'
-import { useParams } from 'react-router-dom'
+import { useRouter } from 'next/router'
 
 import { tekst } from '../../../utils/tekster'
 import Vis from '../../vis'
 import useSoknad from '../../../hooks/useSoknad'
-import { RouteParams } from '../../../app'
 
 export enum Mottaker {
     NAV = 'NAV',
@@ -14,7 +13,8 @@ export enum Mottaker {
 }
 
 const KvitteringStatus = () => {
-    const { id } = useParams<RouteParams>()
+    const router = useRouter()
+    const { id } = router.query as { id: string; stegId: string }
     const { data: valgtSoknad } = useSoknad(id)
 
     const tilNavDato = () => {

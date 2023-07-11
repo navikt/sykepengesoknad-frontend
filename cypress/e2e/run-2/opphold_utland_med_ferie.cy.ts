@@ -1,5 +1,5 @@
 import { RSSoknad } from '../../../src/types/rs-types/rs-soknad'
-import { setPeriodeFraTil } from '../../support/utilities'
+import { klikkGaVidere, setPeriodeFraTil } from '../../support/utilities'
 import { soknaderOpplaering } from '../../../src/data/mock/personas'
 
 describe('Tester søknad om å beholde sykepenger utenfor EØS', () => {
@@ -24,7 +24,7 @@ describe('Tester søknad om å beholde sykepenger utenfor EØS', () => {
 
         setPeriodeFraTil(17, 24)
 
-        cy.contains('Gå videre').click()
+        klikkGaVidere()
     })
 
     it('LAND - steg 2', function () {
@@ -35,7 +35,7 @@ describe('Tester søknad om å beholde sykepenger utenfor EØS', () => {
         cy.contains('Fransk Polynesia')
         cy.contains('Søre franske territorier').click()
 
-        cy.contains('Gå videre').click()
+        klikkGaVidere()
     })
 
     it('Vi svarer Ja på arbeidsgiverspørsmålet', function () {

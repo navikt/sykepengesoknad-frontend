@@ -1,6 +1,6 @@
 import { oppholdUtland } from '../../../src/data/mock/data/opphold-utland'
 import { RSSoknad } from '../../../src/types/rs-types/rs-soknad'
-import { setPeriodeFraTil } from '../../support/utilities'
+import { klikkGaVidere, setPeriodeFraTil, sjekkMainContentFokus } from '../../support/utilities'
 import { soknaderOpplaering } from '../../../src/data/mock/personas'
 
 describe('Tester søknad om å beholde sykepenger utenfor EØS', () => {
@@ -32,7 +32,7 @@ describe('Tester søknad om å beholde sykepenger utenfor EØS', () => {
 
         setPeriodeFraTil(17, 24)
 
-        cy.contains('Gå videre').click()
+        klikkGaVidere()
     })
 
     it('Velger land', function () {
@@ -44,7 +44,7 @@ describe('Tester søknad om å beholde sykepenger utenfor EØS', () => {
         cy.contains('Albania').should('not.exist')
         cy.get('.navds-chips__removable-icon').click()
 
-        cy.contains('Gå videre').click()
+        klikkGaVidere(true)
         cy.contains('Du må velge ett land')
         cy.contains('Det er 1 feil i skjemaet')
         cy.contains('Du må oppgi et land utenfor EØS. Innenfor EØS trenger du ikke søke.')
@@ -70,12 +70,13 @@ describe('Tester søknad om å beholde sykepenger utenfor EØS', () => {
         cy.contains('Amerikansk Samoa').find('.navds-chips__removable-icon').click()
         cy.contains('Amerikansk Samoa').should('not.exist')
 
-        cy.contains('Gå videre').click()
+        klikkGaVidere()
     })
 
     it('Går tilbake og frem', function () {
         cy.contains('Tilbake').click()
-        cy.contains('Gå videre').click()
+        sjekkMainContentFokus()
+        klikkGaVidere()
     })
 
     it('Oppgir arbeidsgiver', function () {
@@ -97,7 +98,7 @@ describe('Tester søknad om å beholde sykepenger utenfor EØS', () => {
                 cy.get('input[value="NEI"]').click()
             })
 
-        cy.contains('Gå videre').click()
+        klikkGaVidere()
     })
 
     it('Oppsummering fra søknaden', function () {

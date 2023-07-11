@@ -1,7 +1,6 @@
 import { Heading } from '@navikt/ds-react'
 import React, { useEffect } from 'react'
-import { useParams } from 'react-router-dom'
-import { useNavigate } from 'react-router'
+import { useRouter } from 'next/router'
 
 import Banner from '../../components/banner/banner'
 import OmReisetilskudd from '../../components/om-reisetilskudd/om-reisetilskudd'
@@ -28,22 +27,20 @@ import { soknadBreadcrumb, useUpdateBreadcrumbs } from '../../hooks/useBreadcrum
 import EgenmeldingsdagerArbeidsgiver from '../egenmeldingsdager-arbeidsgiver/egenmeldingsdager-arbeidsgiver'
 import useSykmeldinger from '../../hooks/useSykmeldinger'
 import useSykmelding from '../../hooks/useSykmelding'
-import { RouteParams } from '../../app'
 import { Feedback } from '../feedback/feedback'
 
 import { urlTilSoknad } from './soknad-link'
 
-const Soknaden = () => {
-    const { id, stegId } = useParams<RouteParams>()
+export const Soknaden = () => {
+    const router = useRouter()
+    const { id, stegId } = router.query as { id: string; stegId: string }
     const { data: valgtSoknad } = useSoknad(id)
     const { data: soknader } = useSoknader()
     const { data: sykmeldinger } = useSykmeldinger()
     const { data: valgtSykmelding } = useSykmelding(valgtSoknad?.sykmeldingId)
-    const navigate = useNavigate()
 
     const stegNo = parseInt(stegId!)
     const spmIndex = stegNo - 1
-    const sporsmal = valgtSoknad?.sporsmal[spmIndex]
 
     useUpdateBreadcrumbs(() => [{ ...soknadBreadcrumb, handleInApp: true }], [])
 
@@ -51,7 +48,7 @@ const Soknaden = () => {
         if (!valgtSoknad || stegId !== '1') return
 
         // finn posisjon på siste besvarte spørsmål
-        navigate(urlTilSoknad(valgtSoknad), { replace: true })
+        router.push(urlTilSoknad(valgtSoknad), undefined, { shallow: true })
         // eslint-disable-next-line
     }, [valgtSoknad?.id])
 
@@ -63,7 +60,7 @@ const Soknaden = () => {
             (valgtSoknad.status !== RSSoknadstatus.NY && valgtSoknad.status !== RSSoknadstatus.UTKAST_TIL_KORRIGERING)
         ) {
             const url = urlTilSoknad(valgtSoknad).replace('/sendt/', '/kvittering/')
-            navigate(url, { replace: true })
+            router.push(url, undefined, { shallow: true })
             return
         }
 
@@ -72,12 +69,12 @@ const Soknaden = () => {
             soknadstype: valgtSoknad.soknadstype,
             soknadstatus: valgtSoknad.status,
         })
-        // eslint-disable-next-line
-    }, [valgtSoknad])
+    }, [router, stegId, valgtSoknad])
 
     if (!valgtSoknad || !soknader || !sykmeldinger || !stegId) {
         return <QueryStatusPanel valgSoknadId={id} valgSykmeldingId={valgtSoknad?.sykmeldingId} />
     }
+    const sporsmal = valgtSoknad.sporsmal[spmIndex]
 
     const tittel = tekst(hentNokkel(valgtSoknad!, stegNo) as any)
     const erUtlandssoknad = valgtSoknad.soknadstype === RSSoknadstype.OPPHOLD_UTLAND && !valgtSykmelding
@@ -144,12 +141,10 @@ const Soknaden = () => {
                         )}
                     />
 
-                    <SporsmalForm />
+                    <SporsmalForm valgtSoknad={valgtSoknad} sporsmal={sporsmal} spmIndex={spmIndex} />
                     <Feedback soknad={valgtSoknad} steg={stegNo} />
                 </>
             </HotjarTrigger>
         </>
     )
 }
-
-export default Soknaden

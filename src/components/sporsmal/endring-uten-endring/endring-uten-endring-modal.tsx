@@ -1,15 +1,13 @@
 import { Alert, BodyShort, Button, Heading, Modal } from '@navikt/ds-react'
 import React, { useState } from 'react'
-import { useParams } from 'react-router-dom'
 import { useQueryClient } from '@tanstack/react-query'
-import { useNavigate } from 'react-router'
+import { useRouter } from 'next/router'
 
 import { tekst } from '../../../utils/tekster'
 import { avbrytSoknad } from '../../avbryt-soknad-modal/avbryt-soknad'
 import useSoknad from '../../../hooks/useSoknad'
 import useSoknader from '../../../hooks/useSoknader'
 import { logEvent } from '../../amplitude/amplitude'
-import { RouteParams } from '../../../app'
 
 interface EndringUtenEndringModalProps {
     aapen: boolean
@@ -17,11 +15,11 @@ interface EndringUtenEndringModalProps {
 }
 
 export const EndringUtenEndringModal = (props: EndringUtenEndringModalProps) => {
-    const { id } = useParams<RouteParams>()
+    const router = useRouter()
+    const { id } = router.query as { id: string }
     const { data: valgtSoknad } = useSoknad(id)
     const { data: soknader } = useSoknader()
     const queryClient = useQueryClient()
-    const navigate = useNavigate()
 
     const [feilmeldingTekst, setFeilmeldingTekst] = useState<string>()
 
@@ -58,7 +56,7 @@ export const EndringUtenEndringModal = (props: EndringUtenEndringModalProps) => 
                                 valgtSoknad: valgtSoknad,
                                 soknader: soknader,
                                 queryClient: queryClient,
-                                navigate: navigate,
+                                router: router,
                                 setFeilmeldingTekst,
                                 onSuccess: () => {
                                     props.setAapen(false)

@@ -1,5 +1,5 @@
 import React from 'react'
-import { Link } from 'react-router-dom'
+import Link from 'next/link'
 
 import { RSSoknadstatus } from '../../types/rs-types/rs-soknadstatus'
 import { RSSvartype } from '../../types/rs-types/rs-svartype'
@@ -56,7 +56,7 @@ const SoknadLink = ({ soknad, children, className }: SoknadLinkProps) => {
     const url = urlTilSoknad(soknad)
 
     return (
-        <Link to={url} className={`${className}`}>
+        <Link href={url} className={`${className}`}>
             {children}
         </Link>
     )
