@@ -8,6 +8,7 @@ import { bekreftOpplysninger } from './sporsmal/bekreft-opplysninger'
 import {
     medlemskapOppholdstillatelseSporsmal,
     medlemskapOppholdUtenforEøsSporsmal,
+    medlemskapOppholdUtenforNorgeSporsmal,
     medlemskapUtførtArbeidUtenforNorgeSporsmal,
 } from './medlemskap'
 
@@ -58,6 +59,7 @@ export const veldigLangSoknad: RSSoknad = {
         yrkesskadeV2Sporsmal,
         medlemskapOppholdstillatelseSporsmal,
         medlemskapOppholdUtenforEøsSporsmal,
+        medlemskapOppholdUtenforNorgeSporsmal,
         medlemskapUtførtArbeidUtenforNorgeSporsmal,
         {
             id: 'f085f79a-ced7-36b0-9259-0806aa57da5f',

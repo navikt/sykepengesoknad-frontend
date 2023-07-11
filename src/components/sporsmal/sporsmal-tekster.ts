@@ -202,6 +202,16 @@ const SporsmalTekster = {
     'soknad.feilmelding.MEDLEMSKAP_OPPHOLD_UTENFOR_EOS_BEGRUNNELSE_FERIE': '',
     'soknad.feilmelding.MEDLEMSKAP_OPPHOLD_UTENFOR_EOS_BEGRUNNELSE_FORSORG': '',
     'soknad.feilmelding.MEDLEMSKAP_OPPHOLD_UTENFOR_EOS_NAAR': 'Du må oppgi perioden du har oppholdt deg utenfor EØS',
+    'soknad.feilmelding.MEDLEMSKAP_OPPHOLD_UTENFOR_NORGE':
+        'Du må svare på om du har oppholdt deg utenfor Norge i de siste 12 månedene',
+    'soknad.feilmelding.MEDLEMSKAP_OPPHOLD_UTENFOR_NORGE_HVOR': 'Du må oppgi landet du har oppholdt deg i',
+    'soknad.feilmelding.MEDLEMSKAP_OPPHOLD_UTENFOR_NORGE_BEGRUNNELSE':
+        'Du må oppgi grunn for ditt opphold utenfor NORGE',
+    'soknad.feilmelding.MEDLEMSKAP_OPPHOLD_UTENFOR_NORGE_BEGRUNNELSE_STUDIE': '',
+    'soknad.feilmelding.MEDLEMSKAP_OPPHOLD_UTENFOR_NORGE_BEGRUNNELSE_FERIE': '',
+    'soknad.feilmelding.MEDLEMSKAP_OPPHOLD_UTENFOR_NORGE_BEGRUNNELSE_FORSORG': '',
+    'soknad.feilmelding.MEDLEMSKAP_OPPHOLD_UTENFOR_NORGE_NAAR':
+        'Du må oppgi perioden du har oppholdt deg utenfor Norge',
     'soknad.feilmelding.MEDLEMSKAP_UTFORT_ARBEID_UTENFOR_NORGE':
         'Du må oppgi om du har utført arbeid utenfor Norge i det siste 12 månedene',
     'soknad.feilmelding.MEDLEMSKAP_UTFORT_ARBEID_UTENFOR_NORGE_ARBEIDSGIVER':
