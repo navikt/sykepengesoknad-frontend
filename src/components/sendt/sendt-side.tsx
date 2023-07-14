@@ -7,7 +7,6 @@ import { logEvent } from '../amplitude/amplitude'
 import Banner from '../banner/banner'
 import Endreknapp from '../endreknapp/endreknapp'
 import Ettersending from '../ettersending/ettersending'
-import { hentHotjarJsTrigger, HotjarTrigger } from '../hotjar-trigger'
 import Kvittering from '../kvittering/kvittering'
 import Vis from '../vis'
 import useSoknad from '../../hooks/useSoknad'
@@ -61,35 +60,28 @@ const SendtSide = () => {
         <>
             <Banner />
 
-            <HotjarTrigger jsTrigger={hentHotjarJsTrigger(valgtSoknad.soknadstype, 'sendt')}>
-                <Kvittering />
+            <Kvittering />
 
-                <Vis
-                    hvis={skalViseKnapperad}
-                    render={() => (
-                        <>
-                            <Vis hvis={skalViseEndre} render={() => <Endreknapp />} />
+            <Vis
+                hvis={skalViseKnapperad}
+                render={() => (
+                    <>
+                        <Vis hvis={skalViseEndre} render={() => <Endreknapp />} />
 
-                            <Vis
-                                hvis={!erSendtTilNav}
-                                render={() => (
-                                    <Ettersending gjelder="nav" setRerendrekvittering={setRerendrekvittering} />
-                                )}
-                            />
+                        <Vis
+                            hvis={!erSendtTilNav}
+                            render={() => <Ettersending gjelder="nav" setRerendrekvittering={setRerendrekvittering} />}
+                        />
 
-                            <Vis
-                                hvis={skalViseSendTilArbeidsgiver}
-                                render={() => (
-                                    <Ettersending
-                                        gjelder="arbeidsgiver"
-                                        setRerendrekvittering={setRerendrekvittering}
-                                    />
-                                )}
-                            />
-                        </>
-                    )}
-                />
-            </HotjarTrigger>
+                        <Vis
+                            hvis={skalViseSendTilArbeidsgiver}
+                            render={() => (
+                                <Ettersending gjelder="arbeidsgiver" setRerendrekvittering={setRerendrekvittering} />
+                            )}
+                        />
+                    </>
+                )}
+            />
         </>
     )
 }

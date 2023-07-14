@@ -16,7 +16,6 @@ import { EldreUsendtSoknad, harEldreUsendtSoknad } from '../eldre-usendt/eldre-u
 import { EldreUsendtSykmelding } from '../eldre-usendt/eldre-usendt-sykmelding'
 import { eldreUsendteSykmeldinger } from '../eldre-usendt/eldreUsendteSykmeldinger'
 import FristSykepenger from '../frist-sykepenger/frist-sykepenger'
-import { hentHotjarJsTrigger, HotjarTrigger } from '../hotjar-trigger'
 import { ViktigInformasjon } from '../soknad-intro/viktig-informasjon'
 import { hentNokkel } from '../sporsmal/sporsmal-utils'
 import Vis from '../vis'
@@ -104,47 +103,40 @@ export const Soknaden = () => {
         <>
             <Banner />
 
-            <HotjarTrigger jsTrigger={hentHotjarJsTrigger(valgtSoknad.soknadstype, 'soknad')}>
-                <>
-                    <Vis hvis={stegNo > 1 || erUtlandssoknad} render={() => <Fremdriftsbar />} />
+            <Vis hvis={stegNo > 1 || erUtlandssoknad} render={() => <Fremdriftsbar />} />
 
-                    <Vis hvis={stegNo === 1 && !erUtlandssoknad} render={() => <ViktigInformasjon />} />
+            <Vis hvis={stegNo === 1 && !erUtlandssoknad} render={() => <ViktigInformasjon />} />
 
-                    <Vis hvis={stegNo === 1 && erGradertReisetilskuddsoknad} render={() => <SoknadMedToDeler />} />
+            <Vis hvis={stegNo === 1 && erGradertReisetilskuddsoknad} render={() => <SoknadMedToDeler />} />
 
-                    <Vis
-                        hvis={stegNo === 1 && valgtSoknad.opprettetAvInntektsmelding}
-                        render={() => <EgenmeldingsdagerArbeidsgiver />}
-                    />
+            <Vis
+                hvis={stegNo === 1 && valgtSoknad.opprettetAvInntektsmelding}
+                render={() => <EgenmeldingsdagerArbeidsgiver />}
+            />
 
-                    <Vis
-                        hvis={stegNo === 1 && !erUtlandssoknad}
-                        render={() => <Opplysninger ekspandert={true} steg={valgtSoknad.sporsmal[stegNo - 1].tag} />}
-                    />
+            <Vis
+                hvis={stegNo === 1 && !erUtlandssoknad}
+                render={() => <Opplysninger ekspandert={true} steg={valgtSoknad.sporsmal[stegNo - 1].tag} />}
+            />
 
-                    <Vis
-                        hvis={stegNo === 1 && !erUtlandssoknad}
-                        render={() => <FristSykepenger soknad={valgtSoknad} />}
-                    />
+            <Vis hvis={stegNo === 1 && !erUtlandssoknad} render={() => <FristSykepenger soknad={valgtSoknad} />} />
 
-                    <Vis
-                        hvis={stegNo === 1 && (erReisetilskuddsoknad || erGradertReisetilskuddsoknad)}
-                        render={() => <OmReisetilskudd />}
-                    />
+            <Vis
+                hvis={stegNo === 1 && (erReisetilskuddsoknad || erGradertReisetilskuddsoknad)}
+                render={() => <OmReisetilskudd />}
+            />
 
-                    <Vis
-                        hvis={tittel && stegNo !== 1 && !erUtlandssoknad}
-                        render={() => (
-                            <Heading data-cy="sporsmal-tittel" level="2" size="medium" className="mb-4 mt-16">
-                                {tittel}
-                            </Heading>
-                        )}
-                    />
+            <Vis
+                hvis={tittel && stegNo !== 1 && !erUtlandssoknad}
+                render={() => (
+                    <Heading data-cy="sporsmal-tittel" level="2" size="medium" className="mb-4 mt-16">
+                        {tittel}
+                    </Heading>
+                )}
+            />
 
-                    <SporsmalForm valgtSoknad={valgtSoknad} sporsmal={sporsmal} spmIndex={spmIndex} />
-                    <Feedback soknad={valgtSoknad} steg={stegNo} />
-                </>
-            </HotjarTrigger>
+            <SporsmalForm valgtSoknad={valgtSoknad} sporsmal={sporsmal} spmIndex={spmIndex} />
+            <Feedback soknad={valgtSoknad} steg={stegNo} />
         </>
     )
 }

@@ -10,7 +10,6 @@ import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
 import { Modal } from '@navikt/ds-react'
 import { useRouter } from 'next/router'
 
-import { useFangHotjarEmotion } from '../hooks/useFangHotjarEmotion'
 import { useHandleDecoratorClicks } from '../hooks/useBreadcrumbs'
 import { LabsWarning } from '../components/labs-warning/LabsWarning'
 import { basePath } from '../utils/environment'
@@ -47,7 +46,6 @@ const queryClient = new QueryClient({
 
 function MyApp({ Component, pageProps }: AppProps): JSX.Element {
     useHandleDecoratorClicks()
-    useFangHotjarEmotion()
 
     const router = useRouter()
 
