@@ -232,7 +232,6 @@ const SporsmalTekster = {
     'reisetilskudd.datoer.egen-bil.kalender.hjelp': ' Velg dager fra %FRA% - %TIL%',
     'sporsmal.egen-bil.kalender.ukedager': 'Velg alle ukedager',
     'sporsmal.egen-bil.kalender.fjern': 'Fjern valgte',
-    'sporsmal.riktige-opplysninger-tittel': 'Vi stoler på deg',
 }
 
 export default SporsmalTekster
