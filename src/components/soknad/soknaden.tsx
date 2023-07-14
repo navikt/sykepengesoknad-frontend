@@ -13,7 +13,6 @@ import { EldreUsendtSoknad, harEldreUsendtSoknad } from '../eldre-usendt/eldre-u
 import { EldreUsendtSykmelding } from '../eldre-usendt/eldre-usendt-sykmelding'
 import { eldreUsendteSykmeldinger } from '../eldre-usendt/eldreUsendteSykmeldinger'
 import FristSykepenger from '../frist-sykepenger/frist-sykepenger'
-import { hentHotjarJsTrigger, HotjarTrigger } from '../hotjar-trigger'
 import { ViktigInformasjon } from '../soknad-intro/viktig-informasjon'
 import { soknadBreadcrumb, useUpdateBreadcrumbs } from '../../hooks/useBreadcrumbs'
 import EgenmeldingsdagerArbeidsgiver from '../egenmeldingsdager-arbeidsgiver/egenmeldingsdager-arbeidsgiver'
@@ -85,20 +84,16 @@ export const Soknaden = () => {
         <>
             <SoknadHeader />
 
-            <HotjarTrigger jsTrigger={hentHotjarJsTrigger(valgtSoknad?.soknadstype, 'soknad')}>
-                <>
-                    {!erForstesiden && <Fremdriftsbar />}
-                    {erForstesiden && <ViktigInformasjon />}
-                    {erForstesiden && erGradertReisetilskuddsoknad && <SoknadMedToDeler />}
-                    {erForstesiden && valgtSoknad?.opprettetAvInntektsmelding && <EgenmeldingsdagerArbeidsgiver />}
-                    {erForstesiden && <Opplysninger ekspandert={true} />}
-                    {erForstesiden && <FristSykepenger />}
-                    {erForstesidenMedReisetilskudd && <OmReisetilskudd />}
-                    {!erForstesiden && <SporsmalTittel />}
-                    <SporsmalForm />
-                    <Feedback soknad={valgtSoknad} steg={stegNo} />
-                </>
-            </HotjarTrigger>
+            {!erForstesiden && <Fremdriftsbar />}
+            {erForstesiden && <ViktigInformasjon />}
+            {erForstesiden && erGradertReisetilskuddsoknad && <SoknadMedToDeler />}
+            {erForstesiden && valgtSoknad?.opprettetAvInntektsmelding && <EgenmeldingsdagerArbeidsgiver />}
+            {erForstesiden && <Opplysninger ekspandert={true} />}
+            {erForstesiden && <FristSykepenger />}
+            {erForstesidenMedReisetilskudd && <OmReisetilskudd />}
+            {!erForstesiden && <SporsmalTittel />}
+            <SporsmalForm />
+            <Feedback soknad={valgtSoknad} steg={stegNo} />
         </>
     )
 }
