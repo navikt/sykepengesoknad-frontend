@@ -90,6 +90,7 @@ export enum SsrPathVariants {
     Root = '/',
     NotFound = '/404',
     ServerError = '/500',
+    FeilState = '/feil-state',
     SykepengesoknadUtland = '/sykepengesoknad-utland',
     Soknader = '/soknader',
     Soknad = '/soknader/[id]',
@@ -109,6 +110,7 @@ export function createInitialServerSideBreadcrumbs(
         case SsrPathVariants.ServerError:
         case SsrPathVariants.SykepengesoknadUtland:
         case SsrPathVariants.Soknader:
+        case SsrPathVariants.FeilState:
             return createCompleteCrumbs([], skapTestpersonQuery(query))
         case SsrPathVariants.Soknad:
         case SsrPathVariants.SoknadSteg:
