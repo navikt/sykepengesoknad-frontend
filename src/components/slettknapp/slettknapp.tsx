@@ -1,4 +1,3 @@
-/* eslint-disable no-console */
 import { Alert, Button, Heading, Modal } from '@navikt/ds-react'
 import { TrashIcon } from '@navikt/aksel-icons'
 import React, { useState } from 'react'

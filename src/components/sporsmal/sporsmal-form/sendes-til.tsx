@@ -19,8 +19,6 @@ const SendesTil = ({ soknad, mottaker }: { soknad?: Soknad; mottaker: RSMottaker
         if (mottaker === RSMottaker.ARBEIDSGIVER_OG_NAV) {
             setNokkel('sykepengesoknad.oppsummering.nav-arbeidsgiver-som-mottaker')
         }
-
-        // eslint-disable-next-line
     }, [mottaker])
 
     if (!mottaker || !nokkel || soknad?.arbeidssituasjon !== 'ARBEIDSTAKER') {

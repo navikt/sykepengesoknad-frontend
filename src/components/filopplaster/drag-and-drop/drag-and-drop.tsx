@@ -27,15 +27,12 @@ const DragAndDrop = ({ valgtFil, setValgtFil }: DragAndDropProps) => {
         register,
     } = useFormContext()
 
-    const onDropCallback = useCallback(
-        (filer: File[]) => {
-            filer.forEach((fil: File) => {
-                setValgtFil(fil)
-            })
-        },
+    const onDropCallback = useCallback((filer: File[]) => {
+        filer.forEach((fil: File) => {
+            setValgtFil(fil)
+        })
         // eslint-disable-next-line
-        [],
-    )
+    }, [])
 
     const { getRootProps, getInputProps, isDragActive } = useDropzone({
         onDrop: onDropCallback,
