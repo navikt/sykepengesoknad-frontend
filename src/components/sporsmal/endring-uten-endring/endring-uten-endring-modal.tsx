@@ -1,13 +1,12 @@
 import { Alert, BodyShort, Button, Heading, Modal } from '@navikt/ds-react'
-import React, { useState } from 'react'
-import { useQueryClient } from '@tanstack/react-query'
+import React from 'react'
 import { useRouter } from 'next/router'
 
 import { tekst } from '../../../utils/tekster'
-import { avbrytSoknad } from '../../avbryt-soknad-modal/avbryt-soknad'
 import useSoknad from '../../../hooks/useSoknad'
 import useSoknader from '../../../hooks/useSoknader'
 import { logEvent } from '../../amplitude/amplitude'
+import { useAvbryt } from '../../../hooks/useAvbryt'
 
 interface EndringUtenEndringModalProps {
     aapen: boolean
@@ -19,9 +18,7 @@ export const EndringUtenEndringModal = (props: EndringUtenEndringModalProps) => 
     const { id } = router.query as { id: string }
     const { data: valgtSoknad } = useSoknad(id)
     const { data: soknader } = useSoknader()
-    const queryClient = useQueryClient()
-
-    const [feilmeldingTekst, setFeilmeldingTekst] = useState<string>()
+    const { mutate: avbrytMutation, isLoading: avbryter, error: avbrytError } = useAvbryt()
 
     if (!valgtSoknad || !soknader) return null
 
@@ -45,19 +42,15 @@ export const EndringUtenEndringModal = (props: EndringUtenEndringModalProps) => 
                     <Button
                         variant="primary"
                         className="ml-auto mr-auto block"
+                        loading={avbryter}
                         onClick={() => {
-                            setFeilmeldingTekst(undefined)
                             logEvent('knapp klikket', {
                                 tekst: tekst('endring-uten-endring.popup.ok'),
                                 soknadstype: valgtSoknad.soknadstype,
                                 component: 'endring-uten-endring-modal',
                             })
-                            avbrytSoknad({
+                            avbrytMutation({
                                 valgtSoknad: valgtSoknad,
-                                soknader: soknader,
-                                queryClient: queryClient,
-                                router: router,
-                                setFeilmeldingTekst,
                                 onSuccess: () => {
                                     props.setAapen(false)
                                 },
@@ -66,9 +59,9 @@ export const EndringUtenEndringModal = (props: EndringUtenEndringModalProps) => 
                     >
                         {tekst('endring-uten-endring.popup.ok')}
                     </Button>
-                    {feilmeldingTekst && (
+                    {avbrytError && (
                         <Alert variant="error" className="mt-4">
-                            {feilmeldingTekst}
+                            {tekst('avbryt.feilet')}
                         </Alert>
                     )}
                 </Modal.Content>

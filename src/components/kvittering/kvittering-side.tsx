@@ -1,5 +1,5 @@
 import { Button } from '@navikt/ds-react'
-import React, { useEffect, useState } from 'react'
+import React, { useEffect } from 'react'
 import { useRouter } from 'next/router'
 import { logger } from '@navikt/next-logger'
 
@@ -33,8 +33,6 @@ const KvitteringSide = () => {
     const korrigertSøknadStudy = 'study-zeh32lhqyb'
     const { data: korrigertStudyActive } = useStudyStatus(korrigertSøknadStudy)
 
-    const [rerendreKvittering, setRerendrekvittering] = useState<Date>(new Date())
-
     useUpdateBreadcrumbs(() => [{ ...kvitteringBreadcrumb, handleInApp: true }], [])
 
     useEffect(() => {
@@ -55,9 +53,6 @@ const KvitteringSide = () => {
         })
         // eslint-disable-next-line
     }, [valgtSoknad])
-
-    // eslint-disable-next-line @typescript-eslint/no-empty-function
-    useEffect(() => {}, [rerendreKvittering])
 
     if (!valgtSoknad || !soknader) return <QueryStatusPanel valgSoknadId={id} />
 
@@ -116,12 +111,7 @@ const KvitteringSide = () => {
                                 <Vis hvis={skalViseEndre} render={() => <Endreknapp />} />
                                 <Vis
                                     hvis={skalViseSendTilArbeidsgiver}
-                                    render={() => (
-                                        <Ettersending
-                                            gjelder="arbeidsgiver"
-                                            setRerendrekvittering={setRerendrekvittering}
-                                        />
-                                    )}
+                                    render={() => <Ettersending gjelder="arbeidsgiver" />}
                                 />
                             </>
                         )}
