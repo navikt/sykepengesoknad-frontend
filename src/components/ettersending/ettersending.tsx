@@ -1,27 +1,28 @@
-import { BodyShort, Button, Heading, Modal } from '@navikt/ds-react'
-import { logger } from '@navikt/next-logger'
+import { Alert, BodyShort, Button, Heading, Modal } from '@navikt/ds-react'
 import React, { useState } from 'react'
-import { useQueryClient } from '@tanstack/react-query'
 import { useRouter } from 'next/router'
 
-import fetchMedRequestId, { AuthenticationError } from '../../utils/fetch'
 import { tekst } from '../../utils/tekster'
-import useSoknad from '../../hooks/useSoknad'
 import { parserWithReplace } from '../../utils/html-react-parser-utils'
+import { useEttersendNav } from '../../hooks/useEttersendNav'
+import Vis from '../vis'
+import { useEttersendArbeidsgiver } from '../../hooks/useEttersendArbeidsgiver'
 
 interface EttersendingProps {
     gjelder: 'nav' | 'arbeidsgiver'
-    setRerendrekvittering: (d: Date) => void
 }
 
-const Ettersending = ({ gjelder, setRerendrekvittering }: EttersendingProps) => {
+const Ettersending = ({ gjelder }: EttersendingProps) => {
     const router = useRouter()
     const { id } = router.query as { id: string }
-    const { data: valgtSoknad } = useSoknad(id)
-    const queryClient = useQueryClient()
+    const { mutate: ettersendNavMutation, isLoading: ettersenderNav, error: ettersendNavError } = useEttersendNav()
+    const {
+        mutate: ettersendArbeidsgiverMutation,
+        isLoading: ettersenderArbeidsgiver,
+        error: ettersendArbeidsgiverError,
+    } = useEttersendArbeidsgiver()
 
     const [vilEttersende, setVilEttersende] = useState<boolean>(false)
-    const [ettersender, setEttersender] = useState<boolean>(false)
     const knappeTekst = tekst(`kvittering.knapp.send-${gjelder}` as any)
 
     const hentTekst = (text: string) => {
@@ -29,70 +30,26 @@ const Ettersending = ({ gjelder, setRerendrekvittering }: EttersendingProps) => 
         return tekst(`${text}${tilSuffix}` as any)
     }
 
-    const oppdaterSoknad = async () => {
-        queryClient.invalidateQueries(['soknad', valgtSoknad!.id])
-        queryClient.invalidateQueries(['soknader'])
-
-        setRerendrekvittering(new Date())
-    }
-
-    const ettersend = async () => {
-        if (ettersender) return
-        setEttersender(true)
-        try {
-            if (gjelder === 'nav') {
-                await ettersendNav()
-            } else if (gjelder === 'arbeidsgiver') {
-                await ettersendArbeidsgiver()
-            }
-        } finally {
-            setVilEttersende(false)
-            setEttersender(false)
-        }
-    }
-
-    const ettersendNav = async () => {
-        try {
-            await fetchMedRequestId(
-                `/syk/sykepengesoknad/api/sykepengesoknad-backend/api/v2/soknader/${valgtSoknad!.id}/ettersendTilNav`,
-                {
-                    method: 'POST',
-                    credentials: 'include',
-                    headers: { 'Content-Type': 'application/json' },
-                },
-            )
-        } catch (e: any) {
-            if (!(e instanceof AuthenticationError)) {
-                // TODO fix denne med mutation setFeilmeldingTekst(tekst('kvittering.ettersending.feilet'))
-                logger.warn(e)
-            }
+    const ettersend = () => {
+        if (ettersenderNav || ettersenderArbeidsgiver) {
             return
         }
 
-        oppdaterSoknad()
-    }
-
-    const ettersendArbeidsgiver = async () => {
-        try {
-            await fetchMedRequestId(
-                `/syk/sykepengesoknad/api/sykepengesoknad-backend/api/v2/soknader/${
-                    valgtSoknad!.id
-                }/ettersendTilArbeidsgiver`,
-                {
-                    method: 'POST',
-                    credentials: 'include',
-                    headers: { 'Content-Type': 'application/json' },
+        if (gjelder === 'nav') {
+            ettersendNavMutation({
+                id: id,
+                onSuccess: () => {
+                    setVilEttersende(false)
                 },
-            )
-        } catch (e: any) {
-            if (!(e instanceof AuthenticationError)) {
-                // TODO fix denne med mutation setFeilmeldingTekst(tekst('kvittering.ettersending.feilet'))
-
-                logger.warn(e)
-            }
-            return
+            })
+        } else if (gjelder === 'arbeidsgiver') {
+            ettersendArbeidsgiverMutation({
+                id: id,
+                onSuccess: () => {
+                    setVilEttersende(false)
+                },
+            })
         }
-        oppdaterSoknad()
     }
 
     return (
@@ -118,10 +75,14 @@ const Ettersending = ({ gjelder, setRerendrekvittering }: EttersendingProps) => 
                         {knappeTekst}
                     </Heading>
                     <BodyShort spacing>{parserWithReplace(hentTekst('kvittering.info.send-til'))}</BodyShort>
+                    <Vis
+                        hvis={ettersendNavError || ettersendArbeidsgiverError}
+                        render={() => <Alert variant="error">Beklager, klarte ikke ettersende søknaden din</Alert>}
+                    />
                     <Button
                         size="small"
                         variant="primary"
-                        loading={ettersender}
+                        loading={ettersenderNav || ettersenderArbeidsgiver}
                         onClick={ettersend}
                         className="ml-auto mr-auto mt-8 block"
                     >

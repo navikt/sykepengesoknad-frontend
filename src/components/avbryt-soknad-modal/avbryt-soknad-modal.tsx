@@ -1,6 +1,5 @@
 import { Alert, BodyLong, Button } from '@navikt/ds-react'
 import React, { useState } from 'react'
-import { useQueryClient } from '@tanstack/react-query'
 import { useRouter } from 'next/router'
 
 import { RSSoknadstatus } from '../../types/rs-types/rs-soknadstatus'
@@ -10,8 +9,7 @@ import { EndringUtenEndringModal } from '../sporsmal/endring-uten-endring/endrin
 import useSoknad from '../../hooks/useSoknad'
 import useSoknader from '../../hooks/useSoknader'
 import { FlexModal } from '../flex-modal'
-
-import { avbrytSoknad } from './avbryt-soknad'
+import { useAvbryt } from '../../hooks/useAvbryt'
 
 const AvbrytKorrigering = () => {
     const router = useRouter()
@@ -48,10 +46,9 @@ const AvbrytSoknadModal = () => {
     const { id, stegId } = router.query as { id: string; stegId: string }
     const { data: valgtSoknad } = useSoknad(id)
     const { data: soknader } = useSoknader()
-    const queryClient = useQueryClient()
+    const { mutate: avbrytMutation, isLoading: avbryter, error: avbrytError } = useAvbryt()
 
     const [aapen, setAapen] = useState<boolean>(false)
-    const [feilmeldingTekst, setFeilmeldingTekst] = useState<string>()
 
     if (!valgtSoknad || !soknader) {
         return null
@@ -78,14 +75,13 @@ const AvbrytSoknadModal = () => {
             >
                 {tekst('avbryt.popup.tittel')}
             </Button>
+
             <FlexModal
                 open={aapen}
                 setOpen={setAapen}
                 headerId="avbryt-soknad"
                 header={tekst('avbryt.popup.tittel')}
                 onClose={() => {
-                    setFeilmeldingTekst(undefined)
-
                     logEvent('modal lukket', {
                         component: tekst('avbryt.popup.tittel'),
                         soknadstype: valgtSoknad.soknadstype,
@@ -100,21 +96,20 @@ const AvbrytSoknadModal = () => {
                 <Button
                     variant="danger"
                     className="mr-4 mt-4"
+                    loading={avbryter}
                     onClick={() => {
-                        setFeilmeldingTekst(undefined)
-
                         logEvent('knapp klikket', {
                             tekst: tekst('avbryt.popup.ja'),
                             soknadstype: valgtSoknad.soknadstype,
                             component: tekst('avbryt.popup.tittel'),
                             steg: stegId!,
                         })
-                        avbrytSoknad({
+
+                        avbrytMutation({
                             valgtSoknad: valgtSoknad,
-                            soknader: soknader,
-                            queryClient: queryClient,
-                            router: router,
-                            setFeilmeldingTekst: setFeilmeldingTekst,
+                            onSuccess: () => {
+                                setAapen(false)
+                            },
                         })
                     }}
                 >
@@ -124,22 +119,20 @@ const AvbrytSoknadModal = () => {
                     variant="secondary"
                     className="mt-4"
                     onClick={() => {
-                        setFeilmeldingTekst(undefined)
-
-                        setAapen(false)
                         logEvent('knapp klikket', {
                             tekst: tekst('avbryt.popup.nei'),
                             soknadstype: valgtSoknad.soknadstype,
                             component: tekst('avbryt.popup.tittel'),
                             steg: stegId!,
                         })
+                        setAapen(false)
                     }}
                 >
                     {tekst('avbryt.popup.nei')}
                 </Button>
-                {feilmeldingTekst && (
+                {avbrytError && (
                     <Alert variant="error" className="mt-4">
-                        {feilmeldingTekst}
+                        {tekst('avbryt.feilet')}
                     </Alert>
                 )}
             </FlexModal>

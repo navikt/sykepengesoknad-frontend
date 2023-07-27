@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect } from 'react'
 import { useRouter } from 'next/router'
 
 import { RSSoknadstatus } from '../../types/rs-types/rs-soknadstatus'
@@ -20,8 +20,6 @@ const SendtSide = () => {
     const { id } = router.query as { id: string }
     const { data: valgtSoknad } = useSoknad(id)
 
-    const [rerendreKvittering, setRerendrekvittering] = useState<Date>(new Date())
-
     useUpdateBreadcrumbs(() => [{ ...kvitteringBreadcrumb, handleInApp: true }], [])
 
     useEffect(() => {
@@ -39,9 +37,6 @@ const SendtSide = () => {
         })
         // eslint-disable-next-line
     }, [valgtSoknad])
-
-    // eslint-disable-next-line @typescript-eslint/no-empty-function
-    useEffect(() => {}, [rerendreKvittering])
 
     if (!valgtSoknad) return <QueryStatusPanel valgSoknadId={id} />
 
@@ -70,21 +65,11 @@ const SendtSide = () => {
                         <>
                             <Vis hvis={skalViseEndre} render={() => <Endreknapp />} />
 
-                            <Vis
-                                hvis={!erSendtTilNav}
-                                render={() => (
-                                    <Ettersending gjelder="nav" setRerendrekvittering={setRerendrekvittering} />
-                                )}
-                            />
+                            <Vis hvis={!erSendtTilNav} render={() => <Ettersending gjelder="nav" />} />
 
                             <Vis
                                 hvis={skalViseSendTilArbeidsgiver}
-                                render={() => (
-                                    <Ettersending
-                                        gjelder="arbeidsgiver"
-                                        setRerendrekvittering={setRerendrekvittering}
-                                    />
-                                )}
+                                render={() => <Ettersending gjelder="arbeidsgiver" />}
                             />
                         </>
                     )}
