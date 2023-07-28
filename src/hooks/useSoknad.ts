@@ -1,7 +1,6 @@
 import { useQuery } from '@tanstack/react-query'
-import { logger } from '@navikt/next-logger'
 
-import { AuthenticationError, fetchJsonMedRequestId } from '../utils/fetch'
+import { fetchJsonMedRequestId } from '../utils/fetch'
 import { Soknad } from '../types/types'
 
 export default function useSoknad(id: string | undefined, enabled = true) {
@@ -17,10 +16,5 @@ export default function useSoknad(id: string | undefined, enabled = true) {
             }).then((json) => new Soknad(json))
         },
         enabled: enabled,
-        onError: (e) => {
-            if (!(e instanceof AuthenticationError)) {
-                logger.warn(e)
-            }
-        },
     })
 }
