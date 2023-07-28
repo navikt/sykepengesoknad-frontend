@@ -1,12 +1,12 @@
 import '../style/global.css'
 
-import { configureLogger } from '@navikt/next-logger'
+import { configureLogger, logger } from '@navikt/next-logger'
 import dayjs from 'dayjs'
 import nb from 'dayjs/locale/nb'
 import type { AppProps as NextAppProps } from 'next/app'
 import Head from 'next/head'
 import React, { PropsWithChildren, useEffect } from 'react'
-import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
+import { QueryCache, QueryClient, QueryClientProvider } from '@tanstack/react-query'
 import { Modal } from '@navikt/ds-react'
 import { useRouter } from 'next/router'
 
@@ -15,6 +15,7 @@ import { useHandleDecoratorClicks } from '../hooks/useBreadcrumbs'
 import { LabsWarning } from '../components/labs-warning/LabsWarning'
 import { basePath } from '../utils/environment'
 import { getFaro, initInstrumentation, pinoLevelToFaroLevel } from '../faro/faro'
+import { AuthenticationError } from '../utils/fetch'
 
 interface AppProps extends Omit<NextAppProps, 'pageProps'> {
     pageProps: PropsWithChildren<unknown>
@@ -43,6 +44,15 @@ const queryClient = new QueryClient({
             refetchOnWindowFocus: false,
         },
     },
+    queryCache: new QueryCache({
+        onError: (error) => {
+            // kjøres en gang for hver queryKey i useQuery etter at retries er brukt opp
+            // hvorfor dette ikke plasseres sammen med useQuery: https://tkdodo.eu/blog/breaking-react-querys-api-on-purpose
+            if (!(error instanceof AuthenticationError)) {
+                logger.warn(error)
+            }
+        },
+    }),
 })
 
 function MyApp({ Component, pageProps }: AppProps): JSX.Element {

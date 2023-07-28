@@ -1,5 +1,4 @@
 import { useQuery } from '@tanstack/react-query'
-import { logger } from '@navikt/next-logger'
 
 import { Sykmelding } from '../types/sykmelding'
 
@@ -14,8 +13,5 @@ export default function useSykmelding(id: string | undefined) {
             return Promise.resolve(sykmeldinger?.find((s) => s.id === id))
         },
         enabled: sykmeldingerLastet && id !== undefined,
-        onError: (e: any) => {
-            logger.warn(e)
-        },
     })
 }

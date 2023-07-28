@@ -1,8 +1,7 @@
 import { useQuery } from '@tanstack/react-query'
-import { logger } from '@navikt/next-logger'
 
 import { RSSoknadmetadata } from '../types/rs-types/rs-soknadmetadata'
-import { AuthenticationError, fetchJsonMedRequestId } from '../utils/fetch'
+import { fetchJsonMedRequestId } from '../utils/fetch'
 
 import { UseTestpersonQuery } from './useTestpersonQuery'
 
@@ -19,10 +18,5 @@ export default function useSoknader() {
                     credentials: 'include',
                 },
             ).then((json) => json.map((soknadMetadata: any) => new RSSoknadmetadata(soknadMetadata))),
-        onError: (e) => {
-            if (!(e instanceof AuthenticationError)) {
-                logger.warn(e)
-            }
-        },
     })
 }
