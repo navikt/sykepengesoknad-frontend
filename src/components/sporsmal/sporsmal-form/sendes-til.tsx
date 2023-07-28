@@ -5,9 +5,11 @@ import { RSMottaker } from '../../../types/rs-types/rs-mottaker'
 import { getLedetekst, tekst } from '../../../utils/tekster'
 import { Soknad } from '../../../types/types'
 import { parserWithReplace } from '../../../utils/html-react-parser-utils'
+import useMottakerSoknad from '../../../hooks/useMottakerSoknad'
 
-const SendesTil = ({ soknad, mottaker }: { soknad?: Soknad; mottaker: RSMottaker | undefined }) => {
+export default function SendesTil({ soknad }: { soknad: Soknad }) {
     const [nokkel, setNokkel] = useState<string>()
+    const { data: mottaker } = useMottakerSoknad(soknad.id)
 
     useEffect(() => {
         if (mottaker === RSMottaker.ARBEIDSGIVER) {
@@ -21,7 +23,7 @@ const SendesTil = ({ soknad, mottaker }: { soknad?: Soknad; mottaker: RSMottaker
         }
     }, [mottaker])
 
-    if (!mottaker || !nokkel || soknad?.arbeidssituasjon !== 'ARBEIDSTAKER') {
+    if (!mottaker || !nokkel || soknad.arbeidssituasjon !== 'ARBEIDSTAKER') {
         return null
     }
 
@@ -37,5 +39,3 @@ const SendesTil = ({ soknad, mottaker }: { soknad?: Soknad; mottaker: RSMottaker
         </BodyShort>
     )
 }
-
-export default SendesTil

@@ -25,6 +25,7 @@ export function useEttersendArbeidsgiver() {
         },
         onSuccess: async (data, variables) => {
             await queryClient.invalidateQueries(['soknad', variables.id])
+            queryClient.invalidateQueries(['mottaker', variables.id]).catch()
             queryClient.invalidateQueries(['soknader']).catch()
             variables.onSuccess()
         },
