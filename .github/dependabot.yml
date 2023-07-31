@@ -32,3 +32,9 @@ updates:
         patterns:
           - '@navikt/aksel*'
           - '@navikt/ds*'
+      react-dependencies:
+        patterns:
+          - 'react'
+          - 'react-dom'
+          - '@types/react'
+          - '@types/react-dom'
