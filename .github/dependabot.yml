@@ -27,6 +27,8 @@ updates:
       time: '03:00'
     open-pull-requests-limit: 20
     registries: '*'
-    ignore:
-      - dependency-name: '@navikt/ds*'
-      - dependency-name: '@navikt/aksel*'
+    groups:
+      aksel-dependencies:
+        patterns:
+          - '@navikt/aksel*'
+          - '@navikt/ds*'
