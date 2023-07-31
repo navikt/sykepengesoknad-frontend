@@ -4,18 +4,19 @@ import dayjs from 'dayjs'
 import React, { useEffect, useState } from 'react'
 import { CheckmarkCircleFillIcon, InformationSquareFillIcon } from '@navikt/aksel-icons'
 import { useRouter } from 'next/router'
+import { useQueryClient } from '@tanstack/react-query'
 
 import { RSMottaker } from '../../types/rs-types/rs-mottaker'
 import { RSSoknadstatus } from '../../types/rs-types/rs-soknadstatus'
 import { RSSoknadstype } from '../../types/rs-types/rs-soknadstype'
 import { sendtForMerEnn30DagerSiden } from '../../utils/dato-utils'
-import { AuthenticationError, fetchJsonMedRequestId } from '../../utils/fetch'
 import { tekst } from '../../utils/tekster'
 import Vis from '../vis'
 import useSoknad from '../../hooks/useSoknad'
 import useSoknader from '../../hooks/useSoknader'
 import { RSSoknadmetadata } from '../../types/rs-types/rs-soknadmetadata'
 import useSykmelding from '../../hooks/useSykmelding'
+import { mottakerSoknadQueryFn } from '../../hooks/useMottakerSoknad'
 
 import Inntil16dager from './innhold/arbeidstaker/inntil16dager'
 import Over16dager from './innhold/arbeidstaker/over16dager'
@@ -32,6 +33,7 @@ const Arbeidstaker = () => {
     const { data: soknader } = useSoknader()
     const { data: valgtSykmelding } = useSykmelding(valgtSoknad?.sykmeldingId)
     const [kvitteringTekst, setKvitteringTekst] = useState<ArbeidstakerKvitteringTekst>()
+    const queryClient = useQueryClient()
 
     const erInnenforArbeidsgiverperiode = () => {
         if (!valgtSoknad) return
@@ -75,28 +77,15 @@ const Arbeidstaker = () => {
         }
     }
 
-    async function erForsteSoknadUtenforArbeidsgiverperiode(id?: string) {
-        if (id === undefined) {
+    async function erForsteSoknadUtenforArbeidsgiverperiode(forrigeSoknadId?: string) {
+        if (forrigeSoknadId === undefined) {
             return true
         }
+        const mottakerAvForrigeSoknad = await queryClient.fetchQuery(['mottaker', forrigeSoknadId], () =>
+            mottakerSoknadQueryFn(forrigeSoknadId),
+        )
 
-        let data
-        try {
-            data = await fetchJsonMedRequestId(
-                `/syk/sykepengesoknad/api/sykepengesoknad-backend/api/v2/soknader/${id}/mottaker`,
-                {
-                    method: 'GET',
-                    credentials: 'include',
-                    headers: { 'Content-Type': 'application/json' },
-                },
-            )
-        } catch (e: any) {
-            if (!(e instanceof AuthenticationError)) {
-                logger.warn(e)
-            }
-            return
-        }
-        return data.mottaker === RSMottaker.ARBEIDSGIVER
+        return mottakerAvForrigeSoknad === RSMottaker.ARBEIDSGIVER
     }
 
     const kvitteringInnhold = () => {

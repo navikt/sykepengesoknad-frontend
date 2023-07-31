@@ -1,5 +1,5 @@
 import { logger } from '@navikt/next-logger'
-import React, { useCallback, useEffect, useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { FormProvider, useForm } from 'react-hook-form'
 import { useQueryClient } from '@tanstack/react-query'
 import { useRouter } from 'next/router'
@@ -28,7 +28,6 @@ import useSoknad from '../../../hooks/useSoknad'
 import { RSSoknadstatus } from '../../../types/rs-types/rs-soknadstatus'
 import { harLikeSvar } from '../endring-uten-endring/har-like-svar'
 import { useSendSoknad } from '../../../hooks/useSendSoknad'
-import { RSMottaker } from '../../../types/rs-types/rs-mottaker'
 import { UseTestpersonQuery } from '../../../hooks/useTestpersonQuery'
 
 import Knapperad from './knapperad'
@@ -49,10 +48,8 @@ const SporsmalForm = ({ valgtSoknad, spmIndex, sporsmal }: SpmFormProps) => {
     const testpersonQuery = UseTestpersonQuery()
 
     const { mutate: sendSoknadMutation, isLoading: senderSoknad, error: sendError } = useSendSoknad()
-    const { data: korrigerer } = useSoknad(valgtSoknad?.korrigerer, valgtSoknad?.korrigerer !== undefined)
+    const { data: korrigerer } = useSoknad(valgtSoknad.korrigerer, valgtSoknad.korrigerer !== undefined)
     const queryClient = useQueryClient()
-
-    const [mottaker, setMottaker] = useState<RSMottaker>()
 
     const [erSiste, setErSiste] = useState<boolean>(false)
     const [poster, setPoster] = useState<boolean>(false)
@@ -62,19 +59,15 @@ const SporsmalForm = ({ valgtSoknad, spmIndex, sporsmal }: SpmFormProps) => {
         reValidateMode: 'onChange',
         shouldUnregister: true,
     })
-    const erUtlandssoknad = valgtSoknad!.soknadstype === RSSoknadstype.OPPHOLD_UTLAND
+    const erUtlandssoknad = valgtSoknad.soknadstype === RSSoknadstype.OPPHOLD_UTLAND
     let restFeilet = false
-    const nesteSporsmal = valgtSoknad!.sporsmal[spmIndex + 1]
+    const nesteSporsmal = valgtSoknad.sporsmal[spmIndex + 1]
 
     useEffect(() => {
         methods.reset(hentFormState(sporsmal), { keepValues: false })
 
         const sisteSide = erSisteSpm()
         setErSiste(sisteSide)
-
-        if (sisteSide) {
-            hentMottaker().catch((e: Error) => logger.error(e))
-        }
         // eslint-disable-next-line
     }, [sporsmal])
 
@@ -91,7 +84,7 @@ const SporsmalForm = ({ valgtSoknad, spmIndex, sporsmal }: SpmFormProps) => {
         if (erUtlandssoknad) {
             return sporsmal.tag === TagTyper.BEKREFT_OPPLYSNINGER_UTLAND_INFO
         }
-        return snartSlutt && spmIndex === valgtSoknad!.sporsmal.length - 2
+        return snartSlutt && spmIndex === valgtSoknad.sporsmal.length - 2
     }
 
     const sendOppdaterSporsmal = async (): Promise<boolean> => {
@@ -142,34 +135,7 @@ const SporsmalForm = ({ valgtSoknad, spmIndex, sporsmal }: SpmFormProps) => {
         return true
     }
 
-    const hentMottaker = useCallback(async () => {
-        let data
-        try {
-            data = await fetchJsonMedRequestId(
-                `/syk/sykepengesoknad/api/sykepengesoknad-backend/api/v2/soknader/${valgtSoknad!.id}/mottaker`,
-                {
-                    method: 'GET',
-                    credentials: 'include',
-                    headers: { 'Content-Type': 'application/json' },
-                },
-            )
-        } catch (e: any) {
-            if (!(e instanceof AuthenticationError)) {
-                logger.warn(e)
-            }
-            return
-        }
-
-        setMottaker(data.mottaker)
-
-        // eslint-disable-next-line
-    }, [])
-
     const sendSoknad = async () => {
-        if (!valgtSoknad) {
-            return
-        }
-
         if (valgtSoknad.status == RSSoknadstatus.UTKAST_TIL_KORRIGERING) {
             if (korrigerer && harLikeSvar(korrigerer, valgtSoknad)) {
                 setEndringUtenEndringAapen(true)
@@ -201,7 +167,7 @@ const SporsmalForm = ({ valgtSoknad, spmIndex, sporsmal }: SpmFormProps) => {
                 }
                 await sendSoknad()
                 logEvent('skjema fullført', {
-                    soknadstype: valgtSoknad!.soknadstype,
+                    soknadstype: valgtSoknad.soknadstype,
                     skjemanavn: 'sykepengesoknad',
                 })
 
@@ -209,7 +175,7 @@ const SporsmalForm = ({ valgtSoknad, spmIndex, sporsmal }: SpmFormProps) => {
             }
             await sendOppdaterSporsmal()
             logEvent('skjema spørsmål besvart', {
-                soknadstype: valgtSoknad!.soknadstype,
+                soknadstype: valgtSoknad.soknadstype,
                 skjemanavn: 'sykepengesoknad',
                 spørsmål: sporsmal.tag,
                 svar: hentAnnonymisertSvar(sporsmal),
@@ -220,7 +186,7 @@ const SporsmalForm = ({ valgtSoknad, spmIndex, sporsmal }: SpmFormProps) => {
                     type: 'rest-feilet',
                     message: 'Beklager, det oppstod en feil',
                 })
-                sporsmal = valgtSoknad!.sporsmal[spmIndex]
+                sporsmal = valgtSoknad.sporsmal[spmIndex]
             } else {
                 methods.clearErrors()
                 await router.push(pathUtenSteg(router.asPath) + SEPARATOR + (spmIndex + 2) + testpersonQuery.query())
@@ -229,8 +195,6 @@ const SporsmalForm = ({ valgtSoknad, spmIndex, sporsmal }: SpmFormProps) => {
             setPoster(false)
         }
     }
-
-    if (!valgtSoknad) return null
 
     return (
         <>
@@ -253,7 +217,7 @@ const SporsmalForm = ({ valgtSoknad, spmIndex, sporsmal }: SpmFormProps) => {
                                 <Oppsummering ekspandert={false} sporsmal={valgtSoknad.sporsmal} />
                                 <Opplysninger ekspandert={false} steg={sporsmal.tag} />
                                 <CheckboxPanel sporsmal={nesteSporsmal} />
-                                <SendesTil soknad={valgtSoknad} mottaker={mottaker} />
+                                <SendesTil soknad={valgtSoknad} />
                             </>
                         )}
                     />

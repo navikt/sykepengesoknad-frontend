@@ -6,6 +6,7 @@ import { Soknad } from '../types/types'
 export default function useSoknad(id: string | undefined, enabled = true) {
     return useQuery<Soknad, Error>({
         queryKey: ['soknad', id],
+        enabled: enabled,
         queryFn: () => {
             if (id === undefined && enabled) {
                 throw new Error(`Søknad id [${id}] kan ikke være undefined`)
@@ -15,6 +16,5 @@ export default function useSoknad(id: string | undefined, enabled = true) {
                 credentials: 'include',
             }).then((json) => new Soknad(json))
         },
-        enabled: enabled,
     })
 }
