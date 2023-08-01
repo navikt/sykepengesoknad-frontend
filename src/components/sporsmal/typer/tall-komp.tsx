@@ -62,7 +62,7 @@ const TallKomp = ({ sporsmal }: SpmProps) => {
         ? ''
         : tekst(('soknad.undertekst.' + sporsmal.tag) as any)
     return (
-        <div className={!sporsmal.parentKriterie ? '' : 'mt-8'}>
+        <div className={!sporsmal.parentKriterie ? '' : 'mt-8 w-full md:w-1/2'}>
             <TextField
                 label={
                     manglerSporsmalsTekst
