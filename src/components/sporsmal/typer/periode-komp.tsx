@@ -108,7 +108,7 @@ const PeriodeKomp = ({ sporsmal, index, slettPeriode }: AllProps) => {
                         <div>
                             <fieldset className="axe-exclude p-0">
                                 <DatePicker {...datepickerProps}>
-                                    <div className="flex-row items-end gap-4 md:flex">
+                                    <div>
                                         <DatePicker.Input
                                             {...fromInputProps}
                                             label={tekst('sykepengesoknad.periodevelger.fom')}
@@ -123,7 +123,7 @@ const PeriodeKomp = ({ sporsmal, index, slettPeriode }: AllProps) => {
                                             {...toInputProps}
                                             label={tekst('sykepengesoknad.periodevelger.tom')}
                                             id={sporsmal.id + '_' + index + '_tom'}
-                                            className="mt-2 md:mt-0"
+                                            className="mt-4"
                                             value={
                                                 periode.tom ? backendStrengTilFrontendFormat(periode.tom) : undefined
                                             }
