@@ -17,7 +17,6 @@ import useSoknader from '../../hooks/useSoknader'
 import { RSSoknadmetadata } from '../../types/rs-types/rs-soknadmetadata'
 import useSykmelding from '../../hooks/useSykmelding'
 import { mottakerSoknadQueryFn } from '../../hooks/useMottakerSoknad'
-import { RouteParams } from '../../app'
 import { TagTyper } from '../../types/enums'
 
 import Inntil16dager from './innhold/arbeidstaker/inntil16dager'
