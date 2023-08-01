@@ -113,6 +113,7 @@ const SoknadenTekster = {
     'sykepengesoknad.yrkesskade_v2.tittel': 'Godkjent yrkesskade',
     'sykepengesoknad.medlemskap_oppholdstillatelse.tittel': 'Medlemskap i folketrygden',
     'sykepengesoknad.medlemskap_opphold_utenfor_eos.tittel': 'Medlemskap i folketrygden',
+    'sykepengesoknad.medlemskap_opphold_utenfor_norge.tittel': 'Medlemskap i folketrygden',
     'sykepengesoknad.medlemskap_utfort_arbeid_utenfor_norge.tittel': 'Medlemskap i folketrygden',
 }
 
