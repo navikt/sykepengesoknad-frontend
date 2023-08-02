@@ -139,7 +139,7 @@ describe('Tester arbeidstakersøknad', () => {
         cy.get('.undersporsmal input[value=Timer]').click()
         cy.contains('Oppgi totalt antall timer du jobbet i perioden 1. - 24. april 2020 hos Posten Norge AS, Bærum')
         cy.contains('Antall timer du skrev inn, betyr at du har jobbet').should('not.exist')
-        // Svarer
+        // Svarer timer
         cy.get('.undersporsmal .navds-text-field__input#6cc620d8-d4b0-3e82-a038-2757df6fc311').type('21')
         cy.contains('Er prosenten lavere enn du forventet?').should('not.exist')
 
