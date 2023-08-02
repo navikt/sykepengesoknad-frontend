@@ -57,7 +57,7 @@ export const medlemskapOppholdUtenforNorgeSporsmal: RSSporsmal = {
                 {
                     id: '942ad53b-8c5b-4dca-be07-4ba9dfdb20f4',
                     tag: 'MEDLEMSKAP_OPPHOLD_UTENFOR_NORGE_BEGRUNNELSE_FERIE',
-                    sporsmalstekst: 'Ferie mer enn 5 uker',
+                    sporsmalstekst: 'Ferie',
                     undertekst: null,
                     svartype: 'RADIO',
                     min: null,
@@ -203,7 +203,7 @@ export const medlemskapOppholdUtenforEøsSporsmal: RSSporsmal = {
                 {
                     id: 'e6acecab-1ac2-4e8b-825a-226aef510778',
                     tag: 'MEDLEMSKAP_OPPHOLD_UTENFOR_EOS_BEGRUNNELSE_FERIE',
-                    sporsmalstekst: 'Ferie mer enn 5 uker',
+                    sporsmalstekst: 'Ferie',
                     undertekst: null,
                     svartype: 'RADIO',
                     min: null,
