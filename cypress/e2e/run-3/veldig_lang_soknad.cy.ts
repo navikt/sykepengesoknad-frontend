@@ -119,7 +119,10 @@ describe('Tester støtte for gamle spørsmål', () => {
     })
     it('ANDRE_INNTEKTSKILDER_V2_SI_NEI_HOVEDSPORSMAL', () => {
         // todo, dette er en hack
-        svarNeiHovedsporsmal()
+        // svarNeiHovedsporsmal()
+        // gaVidere()
+        svarJaHovedsporsmal()
+        velgCheckbox('dagmamma')
         gaVidere()
     })
     it('ARBEID_UTENFOR_NORGE', () => {
