@@ -15,7 +15,7 @@ export enum RSSvartype {
     RADIO = 'RADIO',
     RADIO_GRUPPE = 'RADIO_GRUPPE',
     RADIO_GRUPPE_TIMER_PROSENT = 'RADIO_GRUPPE_TIMER_PROSENT',
-    NEDTREKKSMENY = 'NEDTREKKSMENY',
+    SELECT = 'SELECT',
     TALL = 'TALL',
     TIMER = 'TIMER',
     KILOMETER = 'KILOMETER',
@@ -41,7 +41,7 @@ export type RSSvartypeType =
     | 'RADIO'
     | 'RADIO_GRUPPE'
     | 'RADIO_GRUPPE_TIMER_PROSENT'
-    | 'NEDTREKKSMENY'
+    | 'SELECT'
     | 'TALL'
     | 'TIMER'
     | 'KILOMETER'
