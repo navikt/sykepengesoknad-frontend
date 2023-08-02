@@ -20,6 +20,7 @@ function InntektSN({ skalSendeInntektsmelding }: { skalSendeInntektsmelding: boo
                     {/* TODO velg en versjon av disse og rydd opp */}
 
                     {/* How can I make this button behave us a <link rel="stylesheet" href="" /> */}
+
                     <Button
                         iconPosition="right"
                         variant="secondary"

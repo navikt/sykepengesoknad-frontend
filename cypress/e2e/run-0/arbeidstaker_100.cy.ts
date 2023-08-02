@@ -162,12 +162,7 @@ describe('Tester arbeidstakersøknad', () => {
             .contains('selvstendig næringsdrivende')
             .parent()
             .click()
-
-        // cy.contains('Har du vært næringsdrivende i mer enn 4 år?')
-        // .parent()
-        // .contains('Ja')
-        // .click({force: true})
-
+        
         cy.contains('Har du vært næringsdrivende i mer enn 4 år?')
             .parent()
             .find('input[type="radio"][value="JA"]')
@@ -175,8 +170,8 @@ describe('Tester arbeidstakersøknad', () => {
 
         cy.contains('Har det vært endring i din arbeidssituasjon eller virksomhet?')
             .parent()
-            .contains('Ja')
-            .click({ force: true })
+            .find('input[type="radio"][value="Ja"]')
+            .click()
 
         cy.contains('Velg inntektskildene som passer for deg. Finner du ikke noe som passer for deg, svarer du nei')
             .parent()
