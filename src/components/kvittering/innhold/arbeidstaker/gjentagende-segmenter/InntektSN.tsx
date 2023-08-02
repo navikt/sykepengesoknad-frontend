@@ -16,46 +16,17 @@ function InntektSN({ skalSendeInntektsmelding }: { skalSendeInntektsmelding: boo
                     <Label as="h2">TODO Vi trenger inntektsopplysninger fra deg som selvstendig næringsdrivende</Label>
                     <BodyLong as="span">{tekst('kvittering.naeringsdrivende.brodtekst')} </BodyLong>
 
-                    {/* TODO velg en versjon av disse og rydd opp */}
-
-                    {/* How can I make this button behave us a <link rel="stylesheet" href="" /> */}
-
-                    <Button
-                        iconPosition="right"
-                        variant="secondary"
-                        icon={<ExternalLinkIcon aria-hidden />}
-                        as="a"
-                        href={tekst('kvittering.naeringsdrivende.lenke.url')}
-                    >
-                        {tekst('kvittering.naeringsdrivende.lenke')}
-                    </Button>
-                    <br />
-                    <br />
-                    <Button
-                        iconPosition="right"
-                        variant="secondary"
-                        icon={<ExternalLinkIcon aria-hidden />}
-                        as="a"
-                        href={tekst('kvittering.naeringsdrivende.lenke.url')}
-                    >
-                        Gå til inntektsmelding for selvstendig næringsdrivende
-                    </Button>
-                    <br />
-                    <br />
-                    <Button
-                        iconPosition="right"
-                        variant="secondary"
-                        icon={<ExternalLinkIcon aria-hidden />}
-                        as="a"
-                        href={tekst('kvittering.naeringsdrivende.lenke.url')}
-                    >
-                        Send inntektsmelding
-                    </Button>
-
-                    {/* <LenkeMedIkon
-                        href={tekst('kvittering.naeringsdrivende.lenke.url')}
-                        text={tekst('kvittering.naeringsdrivende.lenke')}
-                    />  */}
+                    <div>
+                        <Button
+                            iconPosition="right"
+                            variant="secondary"
+                            icon={<ExternalLinkIcon aria-hidden />}
+                            as="a"
+                            href={tekst('kvittering.naeringsdrivende.lenke.url')}
+                        >
+                            {tekst('kvittering.naeringsdrivende.lenke')}
+                        </Button>
+                    </div>
                 </div>
             )}
         />
