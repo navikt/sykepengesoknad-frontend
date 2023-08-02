@@ -6,7 +6,6 @@ import { tekst } from '../../../../../utils/tekster'
 import Vis from '../../../../vis'
 
 function InntektSN({ skalSendeInntektsmelding }: { skalSendeInntektsmelding: boolean }) {
-    // TODO Fikse label i kvittering
 
     return (
         <Vis
