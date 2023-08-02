@@ -13,10 +13,10 @@ function InntektSN({ skalSendeInntektsmelding }: { skalSendeInntektsmelding: boo
             hvis={skalSendeInntektsmelding}
             render={() => (
                 <div className="mt-8">
-                    <Label as="h2">TODO Vi trenger inntektsopplysninger fra deg som selvstendig næringsdrivende</Label>
+                    <Label as="h2">{tekst('kvittering.naeringsdrivende.overskrift')}</Label>
                     <BodyLong as="span">{tekst('kvittering.naeringsdrivende.brodtekst')} </BodyLong>
 
-                    <div>
+                    <div className="mt-2">
                         <Button
                             iconPosition="right"
                             variant="secondary"
