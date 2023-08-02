@@ -88,7 +88,6 @@ const UndersporsmalListe = ({ oversporsmal, oversporsmalSvar }: UndersporsmalLis
                     {UndersporsmalTekster['undersporsmal.UTENLANDSK_SYKMELDING_BOSTED']}
                 </Label>
             )}
-            {ForklaringAvValgtCheckbox(oversporsmal)}
             {oversporsmal.undersporsmal
                 .map((underspm: Sporsmal, idx: number) => <SporsmalSwitch key={idx} sporsmal={underspm} />)
                 .filter((underspm: any) => underspm !== null)}
