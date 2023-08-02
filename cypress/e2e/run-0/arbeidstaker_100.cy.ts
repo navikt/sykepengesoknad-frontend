@@ -162,7 +162,7 @@ describe('Tester arbeidstakersøknad', () => {
             .contains('selvstendig næringsdrivende')
             .parent()
             .click()
-        
+
         cy.contains('Har du vært næringsdrivende i mer enn 4 år?')
             .parent()
             .find('input[type="radio"][value="JA"]')
