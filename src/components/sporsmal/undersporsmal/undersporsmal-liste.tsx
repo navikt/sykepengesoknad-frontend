@@ -1,3 +1,5 @@
+import { Label } from '@navikt/ds-react'
+
 import { Sporsmal } from '../../../types/types'
 import SporsmalSwitch from '../sporsmal-switch'
 import { TagTyper } from '../../../types/enums'

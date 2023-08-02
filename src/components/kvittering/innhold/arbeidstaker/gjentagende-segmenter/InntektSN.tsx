@@ -3,7 +3,6 @@ import React from 'react'
 import { ExternalLinkIcon } from '@navikt/aksel-icons'
 
 import { tekst } from '../../../../../utils/tekster'
-import { LenkeMedIkon } from '../../../../lenke-med-ikon/LenkeMedIkon'
 import Vis from '../../../../vis'
 
 function InntektSN({ skalSendeInntektsmelding }: { skalSendeInntektsmelding: boolean }) {
