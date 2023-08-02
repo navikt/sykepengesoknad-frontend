@@ -1,6 +1,3 @@
-import React, { Fragment } from 'react'
-import { BodyShort, Label } from '@navikt/ds-react'
-
 import { Sporsmal } from '../../../types/types'
 import SporsmalSwitch from '../sporsmal-switch'
 import { TagTyper } from '../../../types/enums'
@@ -18,6 +15,7 @@ const UndersporsmalListe = ({ oversporsmal, oversporsmalSvar }: UndersporsmalLis
             oversporsmal.kriterieForVisningAvUndersporsmal === oversporsmalSvar) &&
         oversporsmal.undersporsmal.length > 0
 
+    /*
     const ForklaringAvValgtCheckbox = (svaralternativ: Sporsmal) => {
         // TODO: Tekstene er ikke helt ferdig og de vises bare dersom det finnes underspørsmål inni en checkbox
         if (svaralternativ.tag === TagTyper.INNTEKTSKILDE_ANDRE_ARBEIDSFORHOLD) {
@@ -78,6 +76,7 @@ const UndersporsmalListe = ({ oversporsmal, oversporsmalSvar }: UndersporsmalLis
 
         return <Fragment />
     }
+    */
 
     if (!skalVise) return null
 
@@ -88,6 +87,7 @@ const UndersporsmalListe = ({ oversporsmal, oversporsmalSvar }: UndersporsmalLis
                     {UndersporsmalTekster['undersporsmal.UTENLANDSK_SYKMELDING_BOSTED']}
                 </Label>
             )}
+
             {oversporsmal.undersporsmal
                 .map((underspm: Sporsmal, idx: number) => <SporsmalSwitch key={idx} sporsmal={underspm} />)
                 .filter((underspm: any) => underspm !== null)}
