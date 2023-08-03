@@ -11,6 +11,8 @@ import InntektSN from './gjentagende-segmenter/InntektSN'
 const PerioderUtenOpphold = ({ skalSendeInntektsmelding }: { skalSendeInntektsmelding: boolean }) => {
     return (
         <div>
+            <InntektSN skalSendeInntektsmelding={skalSendeInntektsmelding} />
+
             <div className="mt-4">
                 <Label as="h2" spacing>
                     {tekst('kvittering.nav-behandler-soknaden')}
@@ -22,8 +24,6 @@ const PerioderUtenOpphold = ({ skalSendeInntektsmelding }: { skalSendeInntektsme
                 />
                 .
             </div>
-
-            <InntektSN skalSendeInntektsmelding={skalSendeInntektsmelding} />
 
             <UtbetalingAvPenger />
 

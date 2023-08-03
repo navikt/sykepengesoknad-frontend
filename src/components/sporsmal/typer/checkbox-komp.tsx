@@ -100,12 +100,10 @@ const CheckboxKomp = ({ sporsmal }: SpmProps) => {
                                 </Checkbox>
                             </div>
                             <Vis
-                                hvis={watchCheckbox?.includes(uspm.sporsmalstekst)}
+                                hvis={watchCheckbox?.includes(uspm.sporsmalstekst) && uspm.undersporsmal.length > 0}
                                 render={() => (
-                                    <div
-                                        aria-live="assertive"
-                                        className="600 ml-3 border-l-2 border-grayalpha-300 pl-4"
-                                    >
+                                    
+                                    <div aria-live="assertive" className="my-4 pl-8">
                                         {ForklaringAvValgtCheckbox(uspm)}
                                         <UndersporsmalListe oversporsmal={uspm} oversporsmalSvar="CHECKED" />
                                     </div>
@@ -113,6 +111,11 @@ const CheckboxKomp = ({ sporsmal }: SpmProps) => {
                             />
                         </Fragment>
                     ))}
+                    <div className="flex gap-2 pl-1 pt-8">
+                        <BodyShort className="text-gray-700">
+                            Finner du ikke noe som passer for deg, velger du nei øverst
+                        </BodyShort>
+                    </div>
                 </CheckboxGroup>
             )}
         />

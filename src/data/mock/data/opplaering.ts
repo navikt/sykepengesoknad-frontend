@@ -582,8 +582,7 @@ export const arbeidstaker: RSSoknad = {
                 {
                     id: '5a0fc81f-cac3-3809-bfc0-21ee89b4ac1e',
                     tag: 'HVILKE_ANDRE_INNTEKTSKILDER',
-                    sporsmalstekst:
-                        'Velg inntektskildene som passer for deg. Finner du ikke noe som passer for deg, svarer du nei',
+                    sporsmalstekst: 'Velg inntektskildene som passer for deg:',
                     undertekst: null,
                     svartype: 'CHECKBOX_GRUPPE',
                     min: null,

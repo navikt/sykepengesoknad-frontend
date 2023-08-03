@@ -18,40 +18,44 @@ interface gradertReisetilskuddProps {
 const Over16dager = ({ erGradert, skalSendeInntektsmelding }: gradertReisetilskuddProps) => {
     return (
         <div className="mt-4">
-            <Label as="h2" spacing>
-                {KvitteringTekster['kvittering.før.nav.behandler']}
-            </Label>
-            <BodyShort>
-                <BegrepsforklarerReplacer
-                    text={
-                        erGradert
-                            ? tekst('kvittering.arbeidstaker.over16.gradertreisetilskudd.brodtekst')
-                            : tekst('kvittering.arbeidstaker.over16.brodtekst')
-                    }
-                    replacements={[
-                        {
-                            inlinetekst: 'inntektsmelding',
-                            tittel: tekst('kvittering.hva-er-inntektsmelding'),
-                            children: (
-                                <BodyLong>{tekst('kvittering.arbeidstaker.over16.inntektsmelding.brodtekst')}</BodyLong>
-                            ),
-                        },
-                        {
-                            inlinetekst: '16 kalenderdager',
-                            tittel: tekst('kvittering.arbeidstaker.hvorfor-skille-ved-16-dager'),
-                            children: (
-                                <BodyLong>
-                                    {erGradert
-                                        ? tekst('kvittering.arbeidsgiveren-skal-betale-gradertreisetilskudd')
-                                        : tekst('kvittering.arbeidsgiveren-skal-betale')}
-                                </BodyLong>
-                            ),
-                        },
-                    ]}
-                ></BegrepsforklarerReplacer>
-            </BodyShort>
-
             <InntektSN skalSendeInntektsmelding={skalSendeInntektsmelding} />
+
+            <div className="mt-8">
+                <Label as="h2" spacing>
+                    {KvitteringTekster['kvittering.før.nav.behandler']}
+                </Label>
+                <BodyShort>
+                    <BegrepsforklarerReplacer
+                        text={
+                            erGradert
+                                ? tekst('kvittering.arbeidstaker.over16.gradertreisetilskudd.brodtekst')
+                                : tekst('kvittering.arbeidstaker.over16.brodtekst')
+                        }
+                        replacements={[
+                            {
+                                inlinetekst: 'inntektsmelding',
+                                tittel: tekst('kvittering.hva-er-inntektsmelding'),
+                                children: (
+                                    <BodyLong>
+                                        {tekst('kvittering.arbeidstaker.over16.inntektsmelding.brodtekst')}
+                                    </BodyLong>
+                                ),
+                            },
+                            {
+                                inlinetekst: '16 kalenderdager',
+                                tittel: tekst('kvittering.arbeidstaker.hvorfor-skille-ved-16-dager'),
+                                children: (
+                                    <BodyLong>
+                                        {erGradert
+                                            ? tekst('kvittering.arbeidsgiveren-skal-betale-gradertreisetilskudd')
+                                            : tekst('kvittering.arbeidsgiveren-skal-betale')}
+                                    </BodyLong>
+                                ),
+                            },
+                        ]}
+                    ></BegrepsforklarerReplacer>
+                </BodyShort>
+            </div>
 
             <div className="mt-8">
                 <Label as="h2" spacing>
