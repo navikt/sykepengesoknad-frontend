@@ -22,9 +22,9 @@ const UndersporsmalListe = ({ oversporsmal, oversporsmalSvar }: UndersporsmalLis
         if (svaralternativ.tag === TagTyper.INNTEKTSKILDE_SELVSTENDIG) {
             return (
                 <BodyShort>
-                    Dette betyr at du er selvstendig næringsdrivende. Du driver en bedrift for egen regning og risiko;
-                    leverer skattemelding for næringsdrivende, og fakturerer kunder og (ofte) lever av overskuddet. Du
-                    er følgelig din egen sjef, og ikke ansatt av andre i et arbeidsforhold.
+                    Dette betyr at du er selvstendig næringsdrivende. Du driver en bedrift for egen regning og risiko,
+                    leverer skattemelding for næringsdrivende, fakturerer kunder og (ofte) lever av overskuddet. Du er
+                    din egen sjef og ikke ansatt av andre i et arbeidsforhold.
                 </BodyShort>
             )
         }
