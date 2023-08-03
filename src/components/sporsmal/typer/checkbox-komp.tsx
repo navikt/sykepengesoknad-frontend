@@ -1,4 +1,4 @@
-import { Checkbox, CheckboxGroup } from '@navikt/ds-react'
+import { BodyShort, Checkbox, CheckboxGroup } from '@navikt/ds-react'
 import React, { Fragment } from 'react'
 import { Controller, useFormContext } from 'react-hook-form'
 
@@ -47,6 +47,11 @@ const CheckboxKomp = ({ sporsmal }: SpmProps) => {
                             />
                         </Fragment>
                     ))}
+                    <div className="flex gap-2 pl-1 pt-8">
+                        <BodyShort className="text-gray-700">
+                            Finner du ikke noe som passer for deg, velger du nei øverst
+                        </BodyShort>
+                    </div>
                 </CheckboxGroup>
             )}
         />
