@@ -38,7 +38,7 @@ const CheckboxKomp = ({ sporsmal }: SpmProps) => {
                                 </Checkbox>
                             </div>
                             <Vis
-                                hvis={watchCheckbox?.includes(uspm.sporsmalstekst)}
+                                hvis={watchCheckbox?.includes(uspm.sporsmalstekst) && uspm.undersporsmal.length > 0}
                                 render={() => (
                                     <div aria-live="assertive" className="my-4 pl-8">
                                         <UndersporsmalListe oversporsmal={uspm} oversporsmalSvar="CHECKED" />
