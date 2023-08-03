@@ -156,7 +156,7 @@ describe('Tester arbeidstakersøknad - gradert 50%', () => {
 
         cy.get('[data-cy="ja-nei-stor"] input[value=JA]').click()
 
-        cy.contains('Velg inntektskildene som passer for deg. Finner du ikke noe som passer for deg, svarer du nei')
+        cy.contains('Velg inntektskildene som passer for deg:')
         cy.get('.undersporsmal .navds-checkbox label[for=d9ac4359-5519-34f1-b59d-b5ab24e55821]').should(
             'include.text',
             'ansatt et annet sted enn nevnt over',

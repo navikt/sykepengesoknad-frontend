@@ -157,7 +157,7 @@ describe('Tester arbeidstakersøknad', () => {
 
         cy.get('[data-cy="ja-nei-stor"] input[value=JA]').click()
 
-        cy.contains('Velg inntektskildene som passer for deg. Finner du ikke noe som passer for deg, svarer du nei')
+        cy.contains('Velg inntektskildene som passer for deg:')
             .parent()
             .contains('selvstendig næringsdrivende')
             .parent()
@@ -173,7 +173,7 @@ describe('Tester arbeidstakersøknad', () => {
             .find('input[type="radio"][value="Ja"]')
             .click()
 
-        cy.contains('Velg inntektskildene som passer for deg. Finner du ikke noe som passer for deg, svarer du nei')
+        cy.contains('Velg inntektskildene som passer for deg:')
             .parent()
             .contains('ansatt et annet sted enn nevnt over')
             .click()
