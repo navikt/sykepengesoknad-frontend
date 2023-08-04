@@ -49,14 +49,14 @@ const CheckboxKomp = ({ sporsmal }: SpmProps) => {
                     error={errors[sporsmal.id] !== undefined && feilmelding.lokal}
                     className="mt-8"
                 >
-                    <div className="flex gap-4 py-6">
+                    <div className="flex gap-4 py-6 bg-gray-50 p-4 max-w-sm rounded-lg">
                         <InformationIcon
                             title="informasjon"
                             className="flex-shrink-0 rounded-full bg-gray-200 font-bold text-xl m-width-[37px] m-height-[37px]"
                             height={37}
                             width={37}
                         />
-                        <BodyShort size="small">Informasjon om andre arbeidsforhold blir behandlet konfidensielt, og blir ikke delt med arbeidsgiveren din.</BodyShort>
+                        <BodyShort size="small">Informasjon om andre arbeidsforhold blir behandlet konfidensielt, og blir ikke delt med arbeidsgiver</BodyShort>
                     </div>
 
                     {sporsmal.undersporsmal.map((uspm) => (
