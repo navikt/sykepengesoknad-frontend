@@ -8,7 +8,9 @@ import UndersporsmalListe from '../undersporsmal/undersporsmal-liste'
 import Vis from '../../vis'
 import { Sporsmal } from '../../../types/types'
 import { TagTyper } from '../../../types/enums'
-
+import {
+    InformationIcon
+} from '@navikt/aksel-icons';
 const ForklaringAvValgtCheckbox = (svaralternativ: Sporsmal) => {
     if (svaralternativ.tag === TagTyper.INNTEKTSKILDE_SELVSTENDIG) {
         return (
@@ -35,10 +37,11 @@ const CheckboxKomp = ({ sporsmal }: SpmProps) => {
     }
     const feilmelding = hentFeilmelding(sporsmal)
 
+
+
     return (
         <Controller
             name={sporsmal.id}
-            rules={{ required: feilmelding.global }}
             render={({ field }) => (
                 <CheckboxGroup
                     {...field}
@@ -46,6 +49,9 @@ const CheckboxKomp = ({ sporsmal }: SpmProps) => {
                     error={errors[sporsmal.id] !== undefined && feilmelding.lokal}
                     className="mt-8"
                 >
+                    <div className="flex">
+                        <InformationIcon title="informasjon" className="rounded-full bg-gray-300 font-bold text-xl   m-width-[37px] m-height-[37px]" height={37} width={37}/> <BodyShort> Informasjon om andre arbeidsforhold blir behandlet konfidensielt, og blir ikke delt med arbeidsgiveren din.</BodyShort>
+                    </div>
                     {sporsmal.undersporsmal.map((uspm) => (
                         <Fragment key={uspm.id + '_fragment'}>
                             <div className="flex items-center gap-4">
@@ -74,6 +80,7 @@ const CheckboxKomp = ({ sporsmal }: SpmProps) => {
                     </div>
                 </CheckboxGroup>
             )}
+            rules={{ required: feilmelding.global }}
         />
     )
 }
