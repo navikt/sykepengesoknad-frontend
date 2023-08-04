@@ -49,14 +49,17 @@ const CheckboxKomp = ({ sporsmal }: SpmProps) => {
                     {sporsmal.undersporsmal.map((uspm) => (
                         <Fragment key={uspm.id + '_fragment'}>
                             <div className="flex items-center gap-4">
-                                <Checkbox id={uspm.id} value={uspm.sporsmalstekst}>
+                                <Checkbox id={uspm.id} value={uspm.sporsmalstekst} >
+
+                                    <BodyShort className={watchCheckbox?.includes(uspm.sporsmalstekst) ? "font-bold" : ""}>
                                     {uspm.sporsmalstekst}
+                                </BodyShort>
                                 </Checkbox>
                             </div>
                             <Vis
                                 hvis={watchCheckbox?.includes(uspm.sporsmalstekst) && uspm.undersporsmal.length > 0}
                                 render={() => (
-                                    <div aria-live="assertive" className="my-4 pl-8">
+                                    <div aria-live="assertive" className="my-4">
                                         {ForklaringAvValgtCheckbox(uspm)}
                                         <UndersporsmalListe oversporsmal={uspm} oversporsmalSvar="CHECKED" />
                                     </div>
