@@ -1,6 +1,7 @@
 import { BodyShort, Checkbox, CheckboxGroup } from '@navikt/ds-react'
 import React, { Fragment } from 'react'
 import { Controller, useFormContext } from 'react-hook-form'
+import { InformationIcon } from '@navikt/aksel-icons'
 
 import { SpmProps } from '../sporsmal-form/sporsmal-form'
 import { hentFeilmelding } from '../sporsmal-utils'
@@ -8,16 +9,13 @@ import UndersporsmalListe from '../undersporsmal/undersporsmal-liste'
 import Vis from '../../vis'
 import { Sporsmal } from '../../../types/types'
 import { TagTyper } from '../../../types/enums'
-import {
-    InformationIcon
-} from '@navikt/aksel-icons';
 const ForklaringAvValgtCheckbox = (svaralternativ: Sporsmal) => {
     if (svaralternativ.tag === TagTyper.INNTEKTSKILDE_SELVSTENDIG) {
         return (
             <BodyShort>
                 Dette betyr at du er selvstendig næringsdrivende. Du driver en bedrift for egen regning og risiko,
-                leverer skattemelding for næringsdrivende, fakturerer kunder og (ofte) lever av overskuddet. Du er
-                din egen sjef og ikke ansatt av andre i et arbeidsforhold.
+                leverer skattemelding for næringsdrivende, fakturerer kunder og (ofte) lever av overskuddet. Du er din
+                egen sjef og ikke ansatt av andre i et arbeidsforhold.
             </BodyShort>
         )
     }
@@ -37,8 +35,6 @@ const CheckboxKomp = ({ sporsmal }: SpmProps) => {
     }
     const feilmelding = hentFeilmelding(sporsmal)
 
-
-
     return (
         <Controller
             name={sporsmal.id}
@@ -49,24 +45,28 @@ const CheckboxKomp = ({ sporsmal }: SpmProps) => {
                     error={errors[sporsmal.id] !== undefined && feilmelding.lokal}
                     className="mt-8"
                 >
-                    <div className="flex gap-4 py-6 bg-gray-50 p-4 max-w-sm rounded-lg">
+                    <div className="flex max-w-sm gap-4 rounded-lg bg-gray-50 p-4 py-6">
                         <InformationIcon
                             title="informasjon"
-                            className="flex-shrink-0 rounded-full bg-gray-200 font-bold text-xl m-width-[37px] m-height-[37px]"
+                            className="m-width-[37px] m-height-[37px] flex-shrink-0 rounded-full bg-gray-200 text-xl font-bold"
                             height={37}
                             width={37}
                         />
-                        <BodyShort size="small">Informasjon om andre arbeidsforhold blir behandlet konfidensielt, og blir ikke delt med arbeidsgiver</BodyShort>
+                        <BodyShort size="small">
+                            Informasjon om andre arbeidsforhold blir behandlet konfidensielt, og blir ikke delt med
+                            arbeidsgiver
+                        </BodyShort>
                     </div>
 
                     {sporsmal.undersporsmal.map((uspm) => (
                         <Fragment key={uspm.id + '_fragment'}>
                             <div className="flex items-center gap-4">
-                                <Checkbox id={uspm.id} value={uspm.sporsmalstekst} >
-
-                                    <BodyShort className={watchCheckbox?.includes(uspm.sporsmalstekst) ? "font-bold" : ""}>
-                                    {uspm.sporsmalstekst}
-                                </BodyShort>
+                                <Checkbox id={uspm.id} value={uspm.sporsmalstekst}>
+                                    <BodyShort
+                                        className={watchCheckbox?.includes(uspm.sporsmalstekst) ? 'font-bold' : ''}
+                                    >
+                                        {uspm.sporsmalstekst}
+                                    </BodyShort>
                                 </Checkbox>
                             </div>
                             <Vis
