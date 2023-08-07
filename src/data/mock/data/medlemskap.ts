@@ -7,7 +7,7 @@ import { brukertestSoknad, brukertestSykmelding } from './brukertest'
 export const medlemskapOppholdUtenforNorgeSporsmal: RSSporsmal = {
     id: '8b3e7e78-9bf7-47f7-8e60-279097dadfb0',
     tag: 'MEDLEMSKAP_OPPHOLD_UTENFOR_NORGE',
-    sporsmalstekst: `Har du oppholdt deg utenfor Norge i de siste 12 månedene?`,
+    sporsmalstekst: `Har du oppholdt deg utenfor Norge i løpet av de siste 12 månedene?`,
     undertekst: null,
     svartype: 'JA_NEI',
     min: null,
@@ -100,7 +100,7 @@ export const medlemskapOppholdUtenforNorgeSporsmal: RSSporsmal = {
 export const medlemskapUtførtArbeidUtenforNorgeSporsmal: RSSporsmal = {
     id: '45ed8403-943c-49c6-b77a-eb55362930bb',
     tag: 'MEDLEMSKAP_UTFORT_ARBEID_UTENFOR_NORGE',
-    sporsmalstekst: `Har du utført arbeid utenfor Norge i det siste 12 månedene?`,
+    sporsmalstekst: `Har du utført arbeid utenfor Norge i løpet av de siste 12 månedene?`,
     undertekst: null,
     svartype: 'JA_NEI',
     min: null,
@@ -153,7 +153,7 @@ export const medlemskapUtførtArbeidUtenforNorgeSporsmal: RSSporsmal = {
 export const medlemskapOppholdUtenforEøsSporsmal: RSSporsmal = {
     id: '4f27f7b6-9415-44a2-919e-32da0df05c4a',
     tag: 'MEDLEMSKAP_OPPHOLD_UTENFOR_EOS',
-    sporsmalstekst: `Har du oppholdt deg utenfor EØS-området i de siste 12 månedene?`,
+    sporsmalstekst: `Har du oppholdt deg utenfor EØS-området i løpet av de siste 12 månedene?`,
     undertekst: null,
     svartype: 'JA_NEI',
     min: null,
