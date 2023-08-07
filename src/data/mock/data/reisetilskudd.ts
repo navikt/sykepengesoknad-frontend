@@ -520,7 +520,7 @@ export const gradertReisetilskudd: RSSoknad = {
                     id: 'd25b338d-9a9a-379f-b474-517738a9523b',
                     tag: 'HVILKE_ANDRE_INNTEKTSKILDER',
                     sporsmalstekst: 'Velg inntektskildene som passer for deg:',
-                    undertekst: null,
+                    undertekst: 'Finner du ikke noe som passer for deg, velger du nei øverst',
                     svartype: 'CHECKBOX_GRUPPE',
                     min: null,
                     max: null,
