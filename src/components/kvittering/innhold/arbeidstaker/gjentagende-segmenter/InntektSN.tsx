@@ -2,7 +2,6 @@ import { Button, BodyLong } from '@navikt/ds-react'
 import React from 'react'
 import { ExternalLinkIcon } from '@navikt/aksel-icons'
 
-import { tekst } from '../../../../../utils/tekster'
 import { logEvent } from '../../../../amplitude/amplitude'
 
 function InntektSN() {
@@ -18,7 +17,7 @@ function InntektSN() {
                 variant="secondary"
                 icon={<ExternalLinkIcon aria-hidden />}
                 as="a"
-                href={tekst('kvittering.naeringsdrivende.lenke.url')}
+                href="https://www.nav.no/fyllut/nav083501"
                 className="mb-8 mt-4"
                 onClick={() => {
                     logEvent('knapp klikket', {
