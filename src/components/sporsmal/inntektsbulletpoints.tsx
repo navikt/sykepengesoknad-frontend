@@ -1,6 +1,5 @@
 import { BodyShort, Label } from '@navikt/ds-react'
 import React from 'react'
-import { InformationIcon } from '@navikt/aksel-icons'
 import { CheckmarkCircleIcon } from '@navikt/aksel-icons'
 
 import { TagTyper } from '../../types/enums'
@@ -9,9 +8,8 @@ import { Soknad, Sporsmal } from '../../types/types'
 export const Inntektsbulletpoints = ({ sporsmal, soknad }: { sporsmal: Sporsmal; soknad: Soknad }) => {
     if (!skalHaInntektsbulletpoints(sporsmal, soknad)) return null
 
-
     interface ListItemWithIconProps {
-        content: string | null | undefined;
+        content: string | null | undefined
     }
 
     const ListItemWithIcon = ({ content }: ListItemWithIconProps) => (
@@ -24,13 +22,10 @@ export const Inntektsbulletpoints = ({ sporsmal, soknad }: { sporsmal: Sporsmal;
             />
             <BodyShort className="">{content}</BodyShort>
         </li>
-    );
-
-
+    )
 
     return (
         <>
-
             <Label as="p" className="mb-4 mt-10">
                 Arbeidsforhold vi har registrert på deg:
             </Label>
@@ -41,7 +36,6 @@ export const Inntektsbulletpoints = ({ sporsmal, soknad }: { sporsmal: Sporsmal;
                     <ListItemWithIcon key={index} content={inntektskilde.navn} />
                 ))}
             </ul>
-
         </>
     )
 }
