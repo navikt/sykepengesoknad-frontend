@@ -111,10 +111,10 @@ const SoknadenTekster = {
     'sykepengesoknad.utenlandsk_sykmelding_trygd_utenfor_norge.tittel': 'Sykepenger i andre EØS-land',
     'sykepengesoknad.yrkesskade.tittel': 'Yrkesskade',
     'sykepengesoknad.yrkesskade_v2.tittel': 'Godkjent yrkesskade',
-    'sykepengesoknad.medlemskap_oppholdstillatelse.tittel': 'Medlemskap i folketrygden - Oppholdstillatelse',
-    'sykepengesoknad.medlemskap_opphold_utenfor_eos.tittel': 'Medlemskap i folketrygden - Opphold utenfor EØS',
-    'sykepengesoknad.medlemskap_opphold_utenfor_norge.tittel': 'Medlemskap i folketrygden - Opphold utenfor Norge',
-    'sykepengesoknad.medlemskap_utfort_arbeid_utenfor_norge.tittel': 'Medlemskap i folketrygden - Arbeid utenfor Norge',
+    'sykepengesoknad.medlemskap_oppholdstillatelse.tittel': 'Oppholdstillatelse',
+    'sykepengesoknad.medlemskap_opphold_utenfor_eos.tittel': 'Opphold utenfor EØS',
+    'sykepengesoknad.medlemskap_opphold_utenfor_norge.tittel': 'Opphold utenfor Norge',
+    'sykepengesoknad.medlemskap_utfort_arbeid_utenfor_norge.tittel': 'Arbeid utenfor Norge',
 }
 
 export default SoknadenTekster
