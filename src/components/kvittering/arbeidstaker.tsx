@@ -152,7 +152,6 @@ const Arbeidstaker = () => {
 
     useEffect(() => {
         settRiktigKvitteringTekst().catch((e: Error) => logger.error(e))
-        setKvitteringTekst('over16dager')
         // eslint-disable-next-line
     }, [valgtSoknad?.sendtTilNAVDato, valgtSykmelding])
 
