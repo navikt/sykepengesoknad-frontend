@@ -6,13 +6,10 @@ import Kontonummer from '../../kontonummer/kontonummer'
 import { LenkeMedIkon } from '../../../lenke-med-ikon/LenkeMedIkon'
 
 import UtbetalingAvPenger from './gjentagende-segmenter/UtbetalingAvPenger'
-import InntektSN from './gjentagende-segmenter/InntektSN'
 
-const PerioderMedOpphold = ({ skalSendeInntektsmelding }: { skalSendeInntektsmelding: boolean }) => {
+const PerioderMedOpphold = () => {
     return (
         <div>
-            <InntektSN skalSendeInntektsmelding={skalSendeInntektsmelding} />
-
             <div className="mt-4">
                 <Label as="h2" spacing>
                     {tekst('kvittering.før.nav.behandler')}

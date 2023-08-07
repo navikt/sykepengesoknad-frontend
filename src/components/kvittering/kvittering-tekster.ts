@@ -54,8 +54,6 @@ export const KvitteringTekster = {
 
     'kvittering.før.nav.behandler': 'Før NAV kan behandle søknaden',
     'kvittering.naeringsdrivende.overskrift': 'Vi trenger inntektsopplysninger fra deg som selvstendig næringsdrivende',
-    'kvittering.naeringsdrivende.brodtekst':
-        'Vi trenger inntektsopplysninger fra deg som du sender inn på eget skjema. Du trenger bare å sende inn skjemaet én gang, selv om sykmeldingen eventuelt blir forlenget.',
     'kvittering.naeringsdrivende.lenke': 'Send inntektsmelding',
     'kvittering.naeringsdrivende.lenke.url': 'https://www.nav.no/fyllut/nav083501',
 

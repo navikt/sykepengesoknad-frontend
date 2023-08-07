@@ -2,7 +2,7 @@ import { Heading, Panel } from '@navikt/ds-react'
 import { logger } from '@navikt/next-logger'
 import dayjs from 'dayjs'
 import React, { Fragment, ReactNode, useEffect, useState } from 'react'
-import { CheckmarkCircleFillIcon, InformationSquareFillIcon } from '@navikt/aksel-icons'
+import { CheckmarkCircleFillIcon, ExclamationmarkTriangleIcon } from '@navikt/aksel-icons'
 import { useRouter } from 'next/router'
 import { useQueryClient } from '@tanstack/react-query'
 
@@ -24,6 +24,7 @@ import Over16dager from './innhold/arbeidstaker/over16dager'
 import PerioderMedOpphold from './innhold/arbeidstaker/perioder-med-opphold'
 import PerioderUtenOpphold from './innhold/arbeidstaker/perioder-uten-opphold'
 import ArbeidstakerStatus from './status/arbeidstaker-status'
+import InntektSN from './innhold/arbeidstaker/gjentagende-segmenter/InntektSN'
 
 type ArbeidstakerKvitteringTekst = 'inntil16dager' | 'over16dager' | 'utenOpphold' | 'medOpphold' | undefined
 
@@ -111,16 +112,11 @@ const Arbeidstaker = () => {
             case 'inntil16dager':
                 return <Inntil16dager />
             case 'over16dager':
-                return (
-                    <Over16dager
-                        erGradert={valgtSoknad?.soknadstype === RSSoknadstype.GRADERT_REISETILSKUDD}
-                        skalSendeInntektsmelding={harSvartAndreInntektskilderSN}
-                    />
-                )
+                return <Over16dager erGradert={valgtSoknad?.soknadstype === RSSoknadstype.GRADERT_REISETILSKUDD} />
             case 'utenOpphold':
-                return <PerioderUtenOpphold skalSendeInntektsmelding={harSvartAndreInntektskilderSN} />
+                return <PerioderUtenOpphold />
             case 'medOpphold':
-                return <PerioderMedOpphold skalSendeInntektsmelding={harSvartAndreInntektskilderSN} />
+                return <PerioderMedOpphold />
             default:
                 return null
         }
@@ -156,6 +152,7 @@ const Arbeidstaker = () => {
 
     useEffect(() => {
         settRiktigKvitteringTekst().catch((e: Error) => logger.error(e))
+        setKvitteringTekst('over16dager')
         // eslint-disable-next-line
     }, [valgtSoknad?.sendtTilNAVDato, valgtSykmelding])
 
@@ -192,7 +189,34 @@ const Arbeidstaker = () => {
             />
             <GridItems venstre={<Fragment />} midt={<ArbeidstakerStatus />} hoyre={<Fragment />} />
 
-            <div className="col-span-12 mx-4 mb-2 border-b-2 border-b-gray-200 pb-2" />
+            <div className="col-span-12 mx-4 mb-8 border-b-2 border-b-gray-200 pb-2" />
+
+            <Vis
+                hvis={harSvartAndreInntektskilderSN && kvitteringTekst !== 'inntil16dager'}
+                render={() => (
+                    <>
+                        <GridItems
+                            venstre={
+                                <div className="flex items-center justify-center">
+                                    <ExclamationmarkTriangleIcon
+                                        title=""
+                                        fontSize="1.5rem"
+                                        className="text-icon-warning"
+                                    />
+                                </div>
+                            }
+                            midt={
+                                <Heading size="small" level="3">
+                                    Vi trenger inntektsopplysninger fra deg
+                                </Heading>
+                            }
+                            hoyre={<Fragment />}
+                        />
+                        <GridItems venstre={<Fragment />} midt={<InntektSN />} hoyre={<Fragment />} />
+                        <div className="col-span-12 mx-4 mb-8 border-b-2 border-b-gray-200 pb-2" />
+                    </>
+                )}
+            />
 
             <Vis
                 hvis={!sendtForMerEnn30DagerSiden(valgtSoknad.sendtTilArbeidsgiverDato, valgtSoknad.sendtTilNAVDato)}
@@ -200,15 +224,7 @@ const Arbeidstaker = () => {
                     return (
                         <>
                             <GridItems
-                                venstre={
-                                    <div className="flex items-center justify-center">
-                                        <InformationSquareFillIcon
-                                            title=""
-                                            fontSize="1.5rem"
-                                            className="text-icon-info"
-                                        />
-                                    </div>
-                                }
+                                venstre={<Fragment />}
                                 midt={
                                     kvitteringTekst === 'medOpphold' ? (
                                         <Heading size="small" level="3">
