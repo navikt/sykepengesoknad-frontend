@@ -3,6 +3,7 @@ import React from 'react'
 import { ExternalLinkIcon } from '@navikt/aksel-icons'
 
 import { tekst } from '../../../../../utils/tekster'
+import { logEvent } from '../../../../amplitude/amplitude'
 
 function InntektSN() {
     return (
@@ -19,6 +20,12 @@ function InntektSN() {
                 as="a"
                 href={tekst('kvittering.naeringsdrivende.lenke.url')}
                 className="mb-8 mt-4"
+                onClick={() => {
+                    logEvent('knapp klikket', {
+                        tekst: 'Send inntektsopplysninger',
+                        component: 'Send inntektsopplysninger knapp',
+                    })
+                }}
             >
                 Send inn inntektsopplysninger
             </Button>
