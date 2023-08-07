@@ -285,8 +285,9 @@ export const soknadUtenEgenmeldingSporsmal: RSSoknad = {
                 {
                     id: '367ff713-470b-3fc7-8e47-05f841bd1171',
                     tag: 'HVILKE_ANDRE_INNTEKTSKILDER',
-                    sporsmalstekst: 'Velg inntektskildene som passer for deg:',
-                    undertekst: 'Finner du ikke noe som passer for deg, velger du nei øverst',
+                    sporsmalstekst:
+                        'Velg inntektskildene som passer for deg. Finner du ikke noe som passer for deg, svarer du nei',
+                    undertekst: null,
                     svartype: 'CHECKBOX_GRUPPE',
                     min: null,
                     max: null,
