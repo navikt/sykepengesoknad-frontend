@@ -181,5 +181,6 @@ describe('Tester arbeidstakersøknad - gradert 50%', () => {
         cy.get('[data-cy="kvittering"]')
             .should('contain', 'Hva skjer videre?')
             .and('contain', 'Du får sykepengene fra arbeidsgiveren din')
+            .and('not.contain', 'Vi trenger inntektsopplysninger fra deg')
     })
 })

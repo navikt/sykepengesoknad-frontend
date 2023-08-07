@@ -159,7 +159,7 @@ describe('Tester arbeidstakersøknad', () => {
 
         cy.contains('Velg inntektskildene som passer for deg:')
             .parent()
-            .contains('selvstendig næringsdrivende')
+            .contains('Selvstendig næringsdrivende')
             .parent()
             .click()
 
@@ -175,7 +175,7 @@ describe('Tester arbeidstakersøknad', () => {
 
         cy.contains('Velg inntektskildene som passer for deg:')
             .parent()
-            .contains('ansatt et annet sted enn nevnt over')
+            .contains('Ansatt et annet sted enn nevnt over')
             .click()
 
         cy.contains('Gå videre').click()
@@ -214,13 +214,13 @@ describe('Tester arbeidstakersøknad', () => {
     it('Søknad kvittering', () => {
         cy.url().should('include', `/kvittering/${soknad.id}`)
         cy.get('[data-cy="kvittering"]')
-            .should('contain', 'Hva skjer videre?')
+            .should('contain', 'Vi trenger inntektsopplysninger fra deg')
+            .and('contain', 'Hva skjer videre?')
             .and('contain', 'Før NAV kan behandle søknaden')
             .and('not.contain', 'Hvorfor går det et skille ved 16 dager?')
             .and('not.contain', 'Hva er en inntektsmelding')
             .and('contain', 'NAV behandler søknaden')
             .and('contain', 'Når blir pengene utbetalt')
-            .and('contain', 'Vi trenger inntektsopplysninger fra deg som selvstendig næringsdrivende')
 
         inlineForklaringer()
     })
