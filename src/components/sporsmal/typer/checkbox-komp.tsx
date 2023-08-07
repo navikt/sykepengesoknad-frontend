@@ -38,6 +38,7 @@ const CheckboxKomp = ({ sporsmal }: SpmProps) => {
     return (
         <Controller
             name={sporsmal.id}
+            rules={{ required: feilmelding.global }}
             render={({ field }) => (
                 <CheckboxGroup
                     {...field}
@@ -80,14 +81,15 @@ const CheckboxKomp = ({ sporsmal }: SpmProps) => {
                             />
                         </Fragment>
                     ))}
-                    <div className="flex gap-2 pl-1 pt-8">
+                    {/* TODO denne legger ikke til teksten når søknader med teksten nedenfor i spørsmålets legend her ikke lenger kan redigeres pga for høy alder, vi slutter å lage spørsmål med den teksten ca august 2023 */}
+                    {!sporsmal.sporsmalstekst.endsWith("Finner du ikke noe som passer for deg, svarer du nei") && <div className="flex gap-2 pl-1 pt-8">
                         <BodyShort className="text-gray-700">
                             Finner du ikke noe som passer for deg, velger du nei øverst
-                        </BodyShort>
-                    </div>
+                            </BodyShort>
+
+                    </div> }
                 </CheckboxGroup>
             )}
-            rules={{ required: feilmelding.global }}
         />
     )
 }

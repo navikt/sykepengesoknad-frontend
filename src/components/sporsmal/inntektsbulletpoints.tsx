@@ -30,7 +30,7 @@ export const Inntektsbulletpoints = ({ sporsmal, soknad }: { sporsmal: Sporsmal;
 
     return (
         <>
-            
+
             <Label as="p" className="mb-4 mt-10">
                 Arbeidsforhold vi har registrert på deg:
             </Label>
