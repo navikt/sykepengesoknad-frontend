@@ -39,19 +39,19 @@ const Arbeidstaker = () => {
 
     const harSvartAndreInntektskilderSN =
         valgtSoknad?.sporsmal
-            ?.find((spm) => spm.tag === TagTyper.ANDRE_INNTEKTSKILDER_V2 && spm.svarliste.svar[0].verdi === 'JA')
+            ?.find((spm) => spm.tag === TagTyper.ANDRE_INNTEKTSKILDER_V2 && spm.svarliste.svar[0]?.verdi === 'JA')
             ?.undersporsmal?.find((spm) => spm.tag === TagTyper.HVILKE_ANDRE_INNTEKTSKILDER)
             ?.undersporsmal?.find(
-                (spm) => spm.tag === TagTyper.INNTEKTSKILDE_SELVSTENDIG && spm.svarliste.svar[0].verdi === 'CHECKED',
+                (spm) => spm.tag === TagTyper.INNTEKTSKILDE_SELVSTENDIG && spm.svarliste.svar[0]?.verdi === 'CHECKED',
             )
             ?.undersporsmal?.find(
-                (spm) => spm.tag === TagTyper.INNTEKTSKILDE_SELVSTENDIG_4_AR && spm.svarliste.svar[0].verdi === 'JA',
+                (spm) => spm.tag === TagTyper.INNTEKTSKILDE_SELVSTENDIG_4_AR && spm.svarliste.svar[0]?.verdi === 'JA',
             )
             ?.undersporsmal?.find((spm) => spm.tag === TagTyper.INNTEKTSKILDE_SELVSTENDIG_VARIG_ENDRING_GRUPPE)
             ?.undersporsmal?.find(
                 (spm) =>
                     spm.tag === TagTyper.INNTEKTSKILDE_SELVSTENDIG_VARIG_ENDRING_JA &&
-                    spm.svarliste.svar[0].verdi === 'CHECKED',
+                    spm.svarliste.svar[0]?.verdi === 'CHECKED',
             ) !== undefined
 
     const erInnenforArbeidsgiverperiode = () => {
