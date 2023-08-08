@@ -22,6 +22,7 @@ import { SoknadHeader } from '../soknad/soknad-header'
 
 import Kvittering from './kvittering'
 import { harKorrigertArbeidstakersoknadIDetSiste } from './harSvartJa'
+import {KvitteringFeedback} from "../feedback/kvittering-feedback";
 
 const KvitteringSide = () => {
     const router = useRouter()
@@ -91,6 +92,7 @@ const KvitteringSide = () => {
                     )}
                 </>
             )}
+            <KvitteringFeedback />
 
             {skalViseEndre && <Endreknapp />}
             {skalViseSendTilArbeidsgiver && (
