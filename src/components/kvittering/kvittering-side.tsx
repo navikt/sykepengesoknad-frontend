@@ -22,6 +22,7 @@ import { useStudyStatus } from '../../hooks/useStudyStatus'
 
 import Kvittering from './kvittering'
 import { harKorrigertArbeidstakersoknadIDetSiste } from './harSvartJa'
+import {KvitteringFeedback} from "../feedback/kvittering-feedback";
 
 const KvitteringSide = () => {
     const router = useRouter()
@@ -96,6 +97,7 @@ const KvitteringSide = () => {
                     )}
                 </>
             )}
+            <KvitteringFeedback />
 
             {skalViseEndre && <Endreknapp />}
             {skalViseSendTilArbeidsgiver && (
