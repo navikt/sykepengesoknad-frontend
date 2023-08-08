@@ -43,15 +43,6 @@ const Arbeidstaker = () => {
             ?.undersporsmal?.find((spm) => spm.tag === TagTyper.HVILKE_ANDRE_INNTEKTSKILDER)
             ?.undersporsmal?.find(
                 (spm) => spm.tag === TagTyper.INNTEKTSKILDE_SELVSTENDIG && spm.svarliste.svar[0]?.verdi === 'CHECKED',
-            )
-            ?.undersporsmal?.find(
-                (spm) => spm.tag === TagTyper.INNTEKTSKILDE_SELVSTENDIG_4_AR && spm.svarliste.svar[0]?.verdi === 'JA',
-            )
-            ?.undersporsmal?.find((spm) => spm.tag === TagTyper.INNTEKTSKILDE_SELVSTENDIG_VARIG_ENDRING_GRUPPE)
-            ?.undersporsmal?.find(
-                (spm) =>
-                    spm.tag === TagTyper.INNTEKTSKILDE_SELVSTENDIG_VARIG_ENDRING_JA &&
-                    spm.svarliste.svar[0]?.verdi === 'CHECKED',
             ) !== undefined
 
     const erInnenforArbeidsgiverperiode = () => {
