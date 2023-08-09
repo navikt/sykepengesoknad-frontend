@@ -43,6 +43,7 @@ export interface SpmFormProps {
     spmIndex: number
     sporsmal: Sporsmal
 }
+
 const SporsmalForm = ({ valgtSoknad, spmIndex, sporsmal }: SpmFormProps) => {
     const router = useRouter()
     const testpersonQuery = UseTestpersonQuery()
@@ -60,7 +61,6 @@ const SporsmalForm = ({ valgtSoknad, spmIndex, sporsmal }: SpmFormProps) => {
         shouldUnregister: true,
     })
     const erUtlandssoknad = valgtSoknad.soknadstype === RSSoknadstype.OPPHOLD_UTLAND
-    let restFeilet = false
     const nesteSporsmal = valgtSoknad.sporsmal[spmIndex + 1]
 
     useEffect(() => {
@@ -108,7 +108,6 @@ const SporsmalForm = ({ valgtSoknad, spmIndex, sporsmal }: SpmFormProps) => {
                         fikk400 = true
                         router.push('/feil-state')
                     }
-                    restFeilet = true
                     defaultErrorHandler()
                 },
             )
@@ -152,7 +151,7 @@ const SporsmalForm = ({ valgtSoknad, spmIndex, sporsmal }: SpmFormProps) => {
     const onSubmit = async (data: any) => {
         if (poster || senderSoknad) return
         setPoster(true)
-        restFeilet = false
+        let oppdatertOk = false
 
         try {
             settSvar(sporsmal, data)
@@ -161,7 +160,7 @@ const SporsmalForm = ({ valgtSoknad, spmIndex, sporsmal }: SpmFormProps) => {
                     settSvar(nesteSporsmal, data)
                     sporsmal = nesteSporsmal
                 }
-                const oppdatertOk = await sendOppdaterSporsmal()
+                oppdatertOk = await sendOppdaterSporsmal()
                 if (!oppdatertOk) {
                     return
                 }
@@ -173,21 +172,22 @@ const SporsmalForm = ({ valgtSoknad, spmIndex, sporsmal }: SpmFormProps) => {
 
                 return
             }
-            await sendOppdaterSporsmal()
-            logEvent('skjema spørsmål besvart', {
-                soknadstype: valgtSoknad.soknadstype,
-                skjemanavn: 'sykepengesoknad',
-                spørsmål: sporsmal.tag,
-                svar: hentAnnonymisertSvar(sporsmal),
-            })
+            oppdatertOk = await sendOppdaterSporsmal()
 
-            if (restFeilet) {
+            if (!oppdatertOk) {
                 methods.setError('syfosoknad', {
                     type: 'rest-feilet',
                     message: 'Beklager, det oppstod en feil',
                 })
                 sporsmal = valgtSoknad.sporsmal[spmIndex]
             } else {
+                logEvent('skjema spørsmål besvart', {
+                    soknadstype: valgtSoknad.soknadstype,
+                    skjemanavn: 'sykepengesoknad',
+                    spørsmål: sporsmal.tag,
+                    svar: hentAnnonymisertSvar(sporsmal),
+                })
+
                 methods.clearErrors()
                 await router.push(pathUtenSteg(router.asPath) + SEPARATOR + (spmIndex + 2) + testpersonQuery.query())
             }
