@@ -5,7 +5,6 @@ import { useFormContext, Controller } from 'react-hook-form'
 import { SpmProps } from '../sporsmal-form/sporsmal-form'
 import { hentFeilmelding } from '../sporsmal-utils'
 import UndersporsmalListe from '../undersporsmal/undersporsmal-liste'
-import { EkspanderbarHjelp } from '../../hjelpetekster/ekspanderbar-hjelp/ekspanderbar-hjelp'
 
 const RadioKomp = ({ sporsmal }: SpmProps) => {
     const {
@@ -30,7 +29,7 @@ const RadioKomp = ({ sporsmal }: SpmProps) => {
                     <RadioGroup
                         {...field}
                         legend={sporsmal.sporsmalstekst}
-                        description={<EkspanderbarHjelp sporsmal={sporsmal} />}
+                        description={sporsmal.undertekst}
                         error={errors[sporsmal.id] !== undefined && feilmelding.lokal}
                         key={sporsmal.id}
                         className="mt-8"
@@ -43,6 +42,7 @@ const RadioKomp = ({ sporsmal }: SpmProps) => {
                     </RadioGroup>
                 )}
             />
+
             {sporsmal.undersporsmal.map((uspm, idx) => {
                 const checked = watchRadio === uspm.sporsmalstekst
                 return (
