@@ -1,6 +1,5 @@
 export const inlineForklaringer = () => {
     cy.findByRole('button', { name: '16 kalenderdager' }).click()
-    cy.contains('Hvorfor går det et skille ved 16 dager?') // Er ikke alltid modal vises i GHA
     cy.findByRole('dialog', { name: 'Hvorfor går det et skille ved 16 dager?' })
         .should('contain', 'Hvorfor går det et skille ved 16 dager?')
         .and(
