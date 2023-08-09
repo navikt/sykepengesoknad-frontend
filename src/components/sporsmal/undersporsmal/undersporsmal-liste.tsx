@@ -1,4 +1,3 @@
-import React from 'react'
 import { Label } from '@navikt/ds-react'
 
 import { Sporsmal } from '../../../types/types'
@@ -17,7 +16,9 @@ const UndersporsmalListe = ({ oversporsmal, oversporsmalSvar }: UndersporsmalLis
         (!oversporsmal.kriterieForVisningAvUndersporsmal ||
             oversporsmal.kriterieForVisningAvUndersporsmal === oversporsmalSvar) &&
         oversporsmal.undersporsmal.length > 0
+
     if (!skalVise) return null
+
     return (
         <div className="mt-4">
             {oversporsmal.tag == TagTyper.UTENLANDSK_SYKMELDING_BOSTED && (
@@ -25,6 +26,7 @@ const UndersporsmalListe = ({ oversporsmal, oversporsmalSvar }: UndersporsmalLis
                     {UndersporsmalTekster['undersporsmal.UTENLANDSK_SYKMELDING_BOSTED']}
                 </Label>
             )}
+
             {oversporsmal.undersporsmal
                 .map((underspm: Sporsmal, idx: number) => <SporsmalSwitch key={idx} sporsmal={underspm} />)
                 .filter((underspm: any) => underspm !== null)}

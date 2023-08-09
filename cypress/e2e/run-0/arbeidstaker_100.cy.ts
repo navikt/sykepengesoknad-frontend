@@ -157,16 +157,26 @@ describe('Tester arbeidstakersøknad', () => {
 
         cy.get('[data-cy="ja-nei-stor"] input[value=JA]').click()
 
-        cy.contains('Velg inntektskildene som passer for deg. Finner du ikke noe som passer for deg, svarer du nei')
-        cy.get('.undersporsmal .navds-checkbox label[for=d9ac4359-5519-34f1-b59d-b5ab24e55821]')
-            .should('include.text', 'ansatt et annet sted enn nevnt over')
+        cy.contains('Velg inntektskildene som passer for deg:')
+            .parent()
+            .contains('Selvstendig næringsdrivende')
+            .parent()
             .click()
 
-        cy.get('.undersporsmal .navds-checkbox label[for=989711be-5362-3f24-a02a-f1b3e3c31f99]').should(
-            'include.text',
-            'selvstendig næringsdrivende',
-        )
-        cy.get('input[type=checkbox]#989711be-5362-3f24-a02a-f1b3e3c31f99').click()
+        cy.contains('Har du vært næringsdrivende i mer enn 4 år?')
+            .parent()
+            .find('input[type="radio"][value="JA"]')
+            .click()
+
+        cy.contains('Har det vært endring i din arbeidssituasjon eller virksomhet?')
+            .parent()
+            .find('input[type="radio"][value="Ja"]')
+            .click()
+
+        cy.contains('Velg inntektskildene som passer for deg:')
+            .parent()
+            .contains('Ansatt et annet sted enn nevnt over')
+            .click()
 
         cy.contains('Gå videre').click()
     })
@@ -204,7 +214,8 @@ describe('Tester arbeidstakersøknad', () => {
     it('Søknad kvittering', () => {
         cy.url().should('include', `/kvittering/${soknad.id}`)
         cy.get('[data-cy="kvittering"]')
-            .should('contain', 'Hva skjer videre?')
+            .should('contain', 'Vi trenger inntektsopplysninger fra deg')
+            .and('contain', 'Hva skjer videre?')
             .and('contain', 'Før NAV kan behandle søknaden')
             .and('not.contain', 'Hvorfor går det et skille ved 16 dager?')
             .and('not.contain', 'Hva er en inntektsmelding')

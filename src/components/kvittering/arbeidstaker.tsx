@@ -1,8 +1,8 @@
 import { Heading, Panel } from '@navikt/ds-react'
 import { logger } from '@navikt/next-logger'
 import dayjs from 'dayjs'
-import React, { useEffect, useState } from 'react'
-import { CheckmarkCircleFillIcon, InformationSquareFillIcon } from '@navikt/aksel-icons'
+import React, { Fragment, ReactNode, useEffect, useState } from 'react'
+import { CheckmarkCircleFillIcon, ExclamationmarkTriangleIcon } from '@navikt/aksel-icons'
 import { useRouter } from 'next/router'
 import { useQueryClient } from '@tanstack/react-query'
 
@@ -17,12 +17,14 @@ import useSoknader from '../../hooks/useSoknader'
 import { RSSoknadmetadata } from '../../types/rs-types/rs-soknadmetadata'
 import useSykmelding from '../../hooks/useSykmelding'
 import { mottakerSoknadQueryFn } from '../../hooks/useMottakerSoknad'
+import { TagTyper } from '../../types/enums'
 
 import Inntil16dager from './innhold/arbeidstaker/inntil16dager'
 import Over16dager from './innhold/arbeidstaker/over16dager'
 import PerioderMedOpphold from './innhold/arbeidstaker/perioder-med-opphold'
 import PerioderUtenOpphold from './innhold/arbeidstaker/perioder-uten-opphold'
 import ArbeidstakerStatus from './status/arbeidstaker-status'
+import InntektSN from './innhold/arbeidstaker/gjentagende-segmenter/InntektSN'
 
 type ArbeidstakerKvitteringTekst = 'inntil16dager' | 'over16dager' | 'utenOpphold' | 'medOpphold' | undefined
 
@@ -34,6 +36,14 @@ const Arbeidstaker = () => {
     const { data: valgtSykmelding } = useSykmelding(valgtSoknad?.sykmeldingId)
     const [kvitteringTekst, setKvitteringTekst] = useState<ArbeidstakerKvitteringTekst>()
     const queryClient = useQueryClient()
+
+    const harSvartAndreInntektskilderSN =
+        valgtSoknad?.sporsmal
+            ?.find((spm) => spm.tag === TagTyper.ANDRE_INNTEKTSKILDER_V2 && spm.svarliste.svar[0]?.verdi === 'JA')
+            ?.undersporsmal?.find((spm) => spm.tag === TagTyper.HVILKE_ANDRE_INNTEKTSKILDER)
+            ?.undersporsmal?.find(
+                (spm) => spm.tag === TagTyper.INNTEKTSKILDE_SELVSTENDIG && spm.svarliste.svar[0]?.verdi === 'CHECKED',
+            ) !== undefined
 
     const erInnenforArbeidsgiverperiode = () => {
         if (!valgtSoknad) return
@@ -138,46 +148,88 @@ const Arbeidstaker = () => {
 
     if (!valgtSoknad || !soknader) return null
 
+    function GridItems({ venstre, midt, hoyre }: { venstre: ReactNode; midt: ReactNode; hoyre: ReactNode }) {
+        return (
+            <>
+                <div className="col-span-1">{venstre}</div>
+                <div className="col-span-10">{midt}</div>
+                <div className="col-span-1">{hoyre}</div>
+            </>
+        )
+    }
+
     return (
         <Panel border className="mt-2 grid grid-cols-12 gap-y-2 p-0 pb-8">
-            <div className="col-span-1 flex items-center justify-center border-b border-b-border-default bg-surface-success-subtle py-4">
-                <CheckmarkCircleFillIcon title="" fontSize="1.5rem" className="text-icon-success" />
-            </div>
-            <Heading
-                size="small"
-                level="2"
-                className="col-span-11 border-b border-b-border-default bg-surface-success-subtle py-4"
-            >
-                {tekst('kvittering.sendt-til')}
-            </Heading>
+            <GridItems
+                venstre={
+                    <div className="flex h-full items-center justify-center border-b border-b-border-default bg-surface-success-subtle">
+                        <CheckmarkCircleFillIcon title="" fontSize="1.5rem" className="text-icon-success" />
+                    </div>
+                }
+                midt={
+                    <Heading
+                        size="small"
+                        level="2"
+                        className="border-b border-b-border-default bg-surface-success-subtle py-4"
+                    >
+                        {tekst('kvittering.sendt-til')}
+                    </Heading>
+                }
+                hoyre={<div className="h-full border-b border-b-border-default bg-surface-success-subtle" />}
+            />
+            <GridItems venstre={<Fragment />} midt={<ArbeidstakerStatus />} hoyre={<Fragment />} />
 
-            <ArbeidstakerStatus />
+            <div className="col-span-12 mx-4 mb-8 border-b-2 border-b-gray-200 pb-2" />
 
-            <div className="col-span-12 mx-4 mb-2 border-b-2 border-b-gray-200 pb-2" />
+            <Vis
+                hvis={harSvartAndreInntektskilderSN && kvitteringTekst !== 'inntil16dager'}
+                render={() => (
+                    <>
+                        <GridItems
+                            venstre={
+                                <div className="flex items-center justify-center">
+                                    <ExclamationmarkTriangleIcon
+                                        title=""
+                                        fontSize="1.5rem"
+                                        className="text-icon-warning"
+                                    />
+                                </div>
+                            }
+                            midt={
+                                <Heading size="small" level="3">
+                                    Vi trenger inntektsopplysninger fra deg
+                                </Heading>
+                            }
+                            hoyre={<Fragment />}
+                        />
+                        <GridItems venstre={<Fragment />} midt={<InntektSN />} hoyre={<Fragment />} />
+                        <div className="col-span-12 mx-4 mb-8 border-b-2 border-b-gray-200 pb-2" />
+                    </>
+                )}
+            />
 
             <Vis
                 hvis={!sendtForMerEnn30DagerSiden(valgtSoknad.sendtTilArbeidsgiverDato, valgtSoknad.sendtTilNAVDato)}
                 render={() => {
                     return (
                         <>
-                            <div className="flex items-center justify-center">
-                                <InformationSquareFillIcon title="" fontSize="1.5rem" className="text-icon-info" />
-                            </div>
-                            <div className="col-span-11">
-                                {kvitteringTekst === 'medOpphold' ? (
-                                    <Heading size="small" level="3">
-                                        {tekst('kvittering.viktig-informasjon')}
-                                    </Heading>
-                                ) : (
-                                    <Heading size="small" level="3">
-                                        {tekst('kvittering.hva-skjer-videre')}
-                                    </Heading>
-                                )}
-                            </div>
+                            <GridItems
+                                venstre={<Fragment />}
+                                midt={
+                                    kvitteringTekst === 'medOpphold' ? (
+                                        <Heading size="small" level="3">
+                                            {tekst('kvittering.viktig-informasjon')}
+                                        </Heading>
+                                    ) : (
+                                        <Heading size="small" level="3">
+                                            {tekst('kvittering.hva-skjer-videre')}
+                                        </Heading>
+                                    )
+                                }
+                                hoyre={<Fragment />}
+                            />
 
-                            <div className="col-span-1" />
-                            <div className="col-span-10">{kvitteringInnhold()}</div>
-                            <div className="col-span-1" />
+                            <GridItems venstre={<Fragment />} midt={kvitteringInnhold()} hoyre={<Fragment />} />
                         </>
                     )
                 }}

@@ -45,25 +45,19 @@ const ArbeidstakerStatus = () => {
             <Vis
                 hvis={valgtSoknad.sendtTilArbeidsgiverDato}
                 render={() => (
-                    <>
-                        <div className="col-span-1" />
-                        <div data-cy="sendt-arbeidsgiver" className="col-span-11">
-                            <Avkrysset tekst={`${tilArbNavn()} ${tilOrg()}${medKopi}`} />
-                            <Detail className="pl-6">{tilArbDato()}</Detail>
-                        </div>
-                    </>
+                    <div data-cy="sendt-arbeidsgiver">
+                        <Avkrysset tekst={`${tilArbNavn()} ${tilOrg()}${medKopi}`} />
+                        <Detail className="pl-6">{tilArbDato()}</Detail>
+                    </div>
                 )}
             />
             <Vis
                 hvis={valgtSoknad.sendtTilNAVDato}
                 render={() => (
-                    <>
-                        <div className="col-span-1" />
-                        <div data-cy="sendt-nav" className="col-span-11">
-                            <Avkrysset tekst={Mottaker.NAV} />
-                            <Detail className="pl-6">{tilNavDato()}</Detail>
-                        </div>
-                    </>
+                    <div data-cy="sendt-nav">
+                        <Avkrysset tekst={Mottaker.NAV} />
+                        <Detail className="pl-6">{tilNavDato()}</Detail>
+                    </div>
                 )}
             />
         </>
