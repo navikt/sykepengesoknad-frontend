@@ -4,6 +4,7 @@ import { Soknad, Sporsmal } from '../../types/types'
 import { flattenSporsmal } from '../../utils/soknad-utils'
 import { tekst } from '../../utils/tekster'
 import { veldigLangSoknad } from '../../data/mock/data/veldig-land-soknad'
+import { rsToSoknad } from '../../types/mapping'
 
 import { fjernIndexFraTag, hentGeneriskFeilmelding } from './sporsmal-utils'
 
@@ -50,7 +51,7 @@ test('Alle svartyper har generiskfeilmelding', () => {
 })
 
 test('Alle sporsmal tag ligger i veldigLangSoknad', () => {
-    const soknad: Soknad = new Soknad(veldigLangSoknad as any)
+    const soknad: Soknad = rsToSoknad(veldigLangSoknad)
     const sporsmalTagsUtenIndex = hentAlleTagsUtenIndex(soknad.sporsmal)
     const tagsSomSkalStottes = Object.values(TagTyper).filter((skipTag) => {
         // TODO: Sjekk at disse tagene fortsatt er i bruk, legg de inn i søknaden
@@ -85,7 +86,7 @@ test('Alle sporsmal tag ligger i veldigLangSoknad', () => {
     expect(manglerTagsIKoden).toBeFalsy()
 })
 
-const hentAlleTagsUtenIndex = (sporsmal: Sporsmal[]) => {
+const hentAlleTagsUtenIndex = (sporsmal: ReadonlyArray<Sporsmal>) => {
     const flatSoknad = flattenSporsmal(sporsmal)
     const tags = new Set()
     flatSoknad.forEach((spm) => {

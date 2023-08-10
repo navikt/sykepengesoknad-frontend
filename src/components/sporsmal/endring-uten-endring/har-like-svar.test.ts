@@ -1,21 +1,21 @@
 import { sendtArbeidsledig, sok6 } from '../../../data/mock/data/soknader-integration'
-import { Soknad } from '../../../types/types'
+import { rsToSoknad } from '../../../types/mapping'
 
 import { harLikeSvar } from './har-like-svar'
 
 test('Har helt like svar', () => {
-    const like = harLikeSvar(new Soknad(sendtArbeidsledig), new Soknad(sendtArbeidsledig))
+    const like = harLikeSvar(rsToSoknad(sendtArbeidsledig), rsToSoknad(sendtArbeidsledig))
     expect(like).toBeTruthy()
 })
 
 test('Har hvertfall ikke like svar', () => {
-    const like = harLikeSvar(new Soknad(sok6), new Soknad(sendtArbeidsledig))
+    const like = harLikeSvar(rsToSoknad(sok6), rsToSoknad(sendtArbeidsledig))
     expect(like).toBeFalsy()
 })
 
 test('Har et ulikt svar', () => {
-    const soknad1 = new Soknad(sendtArbeidsledig)
-    const soknad2 = new Soknad(sendtArbeidsledig)
+    const soknad1 = rsToSoknad(sendtArbeidsledig)
+    const soknad2 = rsToSoknad(sendtArbeidsledig)
     soknad2.sporsmal[0].svarliste.svar = []
 
     const like = harLikeSvar(soknad1, soknad2)
@@ -23,8 +23,8 @@ test('Har et ulikt svar', () => {
 })
 
 test('Har et annet ulikt svar', () => {
-    const soknad1 = new Soknad(sendtArbeidsledig)
-    const soknad2 = new Soknad(sendtArbeidsledig)
+    const soknad1 = rsToSoknad(sendtArbeidsledig)
+    const soknad2 = rsToSoknad(sendtArbeidsledig)
     soknad2.sporsmal[0].svarliste.svar = [{ verdi: '42' }]
 
     const like = harLikeSvar(soknad1, soknad2)
