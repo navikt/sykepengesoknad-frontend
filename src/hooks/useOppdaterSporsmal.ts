@@ -13,18 +13,17 @@ interface OppdaterSporsmalVariables {
 
 interface OppdaterSporsmalProps {
     soknad: Soknad
-    sporsmalId: string
     spmIndex: number
 }
 
 export function useOppdaterSporsmal(props: OppdaterSporsmalProps) {
-    const { soknad, sporsmalId, spmIndex } = props
+    const { soknad, spmIndex } = props
     const queryClient = useQueryClient()
 
     return useMutation<RSOppdaterSporsmalResponse, unknown, OppdaterSporsmalVariables>({
         mutationFn: async (variables) => {
             return fetchJsonMedRequestId(
-                `/syk/sykepengesoknad/api/sykepengesoknad-backend/api/v2/soknader/${soknad.id}/sporsmal/${sporsmalId}`,
+                `/syk/sykepengesoknad/api/sykepengesoknad-backend/api/v2/soknader/${soknad.id}/sporsmal/${variables.sporsmal.id}`,
                 {
                     method: 'PUT',
                     credentials: 'include',
@@ -33,7 +32,7 @@ export function useOppdaterSporsmal(props: OppdaterSporsmalProps) {
                 },
             )
         },
-        mutationKey: ['oppdaterSporsmal', soknad.id, sporsmalId],
+        mutationKey: ['oppdaterSporsmal', soknad.id, spmIndex],
 
         onSuccess: async (data, variables) => {
             const oppdatertSoknad = () => {

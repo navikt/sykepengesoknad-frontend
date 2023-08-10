@@ -58,7 +58,6 @@ export const settSvar = (sporsmal: Sporsmal, verdier: Record<string, any>): Spor
             // Skal ikke ha svarverdi
             return sporsmal
         default:
-            console.log('Default verdi for  ' + sporsmal.svartype)
             const svarliste = {
                 sporsmalId: sporsmal.id,
                 svar: [{ verdi: verdi ? verdi.toString() : '' }],
@@ -93,10 +92,7 @@ const behandlingsdagerSvar = (sporsmal: Sporsmal, verdi: Date[]): Sporsmal => {
         })
         .map((spm) => {
             for (const date of selectedDays) {
-                if (
-                    date <= dayjs(spm.max).toDate() &&
-                    date >= dayjs(spm.min).toDate()
-                ) {
+                if (date <= dayjs(spm.max).toDate() && date >= dayjs(spm.min).toDate()) {
                     return spm.copyWith({
                         svarliste: {
                             svar: [{ verdi: dayjs(date).format('YYYY-MM-DD') }],

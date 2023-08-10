@@ -1,7 +1,6 @@
 import { Soknad } from '../../../src/types/types'
 import { soknaderIntegration, soknaderOpplaering } from '../../../src/data/mock/personas'
-import {rsToSoknad} from "../../../src/types/mapping";
-import {RSSoknadmetadata} from "../../../src/types/rs-types/rs-soknadmetadata";
+import { rsToSoknad } from '../../../src/types/mapping'
 
 const articleTilSoknad = (articles: any) => {
     const soknader: Soknad[] = []

@@ -55,6 +55,7 @@ const SporsmalForm = ({ valgtSoknad, spmIndex, sporsmal }: SpmFormProps) => {
     }
 
     const { mutate: sendSoknadMutation, isLoading: senderSoknad, error: sendError } = useSendSoknad(valgtSoknad)
+
     const {
         mutate: oppdaterSporsmalMutation,
         isLoading: oppdatererSporsmal,
@@ -62,7 +63,6 @@ const SporsmalForm = ({ valgtSoknad, spmIndex, sporsmal }: SpmFormProps) => {
         error: oppdaterError, //TODO vis dette et eller annet sted
     } = useOppdaterSporsmal({
         soknad: valgtSoknad,
-        sporsmalId: sporsmal.id,
         spmIndex: erSisteSpm() ? spmIndex + 1 : spmIndex,
     })
 
