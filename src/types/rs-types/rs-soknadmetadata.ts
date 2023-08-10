@@ -21,7 +21,7 @@ export class RSSoknadmetadata {
     readonly avbruttDato?: Date
     readonly sykmeldingUtskrevet?: Date
     readonly startSykeforlop?: Date
-    readonly opprettetDato?: Date
+    readonly opprettetDato: Date
     readonly sendtTilNAVDato?: Date
     readonly sendtTilArbeidsgiverDato?: Date
     readonly arbeidsgiver?: Arbeidsgiver
