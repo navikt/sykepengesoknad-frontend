@@ -94,8 +94,8 @@ const behandlingsdagerSvar = (sporsmal: Sporsmal, verdi: Date[]): Sporsmal => {
         .map((spm) => {
             for (const date of selectedDays) {
                 if (
-                    date <= dayjs(sporsmal.undersporsmal[i].max).toDate() &&
-                    date >= dayjs(sporsmal.undersporsmal[i].min).toDate()
+                    date <= dayjs(spm.max).toDate() &&
+                    date >= dayjs(spm.min).toDate()
                 ) {
                     return spm.copyWith({
                         svarliste: {
