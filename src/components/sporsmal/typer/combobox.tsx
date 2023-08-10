@@ -25,7 +25,7 @@ const Combobox = ({ sporsmal }: SpmProps) => {
                         label={sporsmal.sporsmalstekst}
                         error={errors[sporsmal.id] !== undefined && feilmelding.lokal}
                         options={alleLand}
-                        onKeyPress={(e) => {
+                        onKeyDown={(e) => {
                             e.key === 'Enter' && e.preventDefault()
                         }}
                         className="mt-4 w-full md:w-1/2"
