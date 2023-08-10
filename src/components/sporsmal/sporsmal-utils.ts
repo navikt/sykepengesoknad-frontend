@@ -130,7 +130,7 @@ export const hentGeneriskFeilmelding = (
         case RSSvartype.INFO_BEHANDLINGSDAGER: {
             return ''
         }
-        case RSSvartype.SELECT: {
+        case RSSvartype.COMBOBOX_SINGLE: {
             return 'Du må velge et alternativ fra menyen'
         }
         default: {

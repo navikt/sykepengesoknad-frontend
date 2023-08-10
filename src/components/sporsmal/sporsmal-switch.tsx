@@ -61,7 +61,7 @@ const SporsmalSwitch = ({ sporsmal }: SpmProps) => {
         case RSSvartype.RADIO_GRUPPE_TIMER_PROSENT:
             return <RadioTimerProsent sporsmal={sporsmal} />
 
-        case RSSvartype.SELECT:
+        case RSSvartype.COMBOBOX_SINGLE:
             return <Combobox sporsmal={sporsmal} />
 
         case RSSvartype.INFO_BEHANDLINGSDAGER:
