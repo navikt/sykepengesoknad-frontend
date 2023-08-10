@@ -5,7 +5,7 @@ import Vis from '../../vis'
 import { SporsmalVarianter } from '../oppsummering'
 
 interface UndersporsmalProps {
-    sporsmalsliste: Sporsmal[]
+    sporsmalsliste: ReadonlyArray<Sporsmal>
 }
 
 const UndersporsmalSum = ({ sporsmalsliste = [] }: UndersporsmalProps) => {

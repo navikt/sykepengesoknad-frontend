@@ -5,6 +5,7 @@ import { RSSvar } from '../../types/rs-types/rs-svar'
 import { RSSvartype } from '../../types/rs-types/rs-svartype'
 import { Sporsmal } from '../../types/types'
 import { empty } from '../../utils/constants'
+import { jsonDeepCopy } from '../../utils/json-deep-copy'
 
 const hentVerdier = (sporsmal: Sporsmal, verdier: Record<string, any>) => {
     let verdi = verdier[sporsmal.id]
@@ -18,68 +19,67 @@ const hentVerdier = (sporsmal: Sporsmal, verdier: Record<string, any>) => {
     return verdi
 }
 
-export const settSvar = (sporsmal: Sporsmal, verdier: Record<string, any>): void => {
+export const settSvar = (sporsmal: Sporsmal, verdier: Record<string, any>): Sporsmal => {
     const verdi = hentVerdier(sporsmal, verdier)
-
+    const mutertSporsmal = sporsmal.copyWith({})
     if (
         verdi === undefined &&
-        sporsmal.svartype !== RSSvartype.IKKE_RELEVANT &&
-        sporsmal.svartype !== RSSvartype.RADIO &&
-        sporsmal.svartype !== RSSvartype.CHECKBOX &&
-        sporsmal.svartype !== RSSvartype.INFO_BEHANDLINGSDAGER
+        mutertSporsmal.svartype !== RSSvartype.IKKE_RELEVANT &&
+        mutertSporsmal.svartype !== RSSvartype.RADIO &&
+        mutertSporsmal.svartype !== RSSvartype.CHECKBOX &&
+        mutertSporsmal.svartype !== RSSvartype.INFO_BEHANDLINGSDAGER
     ) {
-        return
+        return sporsmal
     }
-
-    switch (sporsmal.svartype) {
-        case RSSvartype.CHECKBOX_PANEL:
-            checkboxSvar(sporsmal, verdi)
-            break
-        case RSSvartype.CHECKBOX_GRUPPE:
-            checkboksGruppeSvar(sporsmal, verdi)
-            break
-        case RSSvartype.RADIO_GRUPPE:
-        case RSSvartype.RADIO_GRUPPE_TIMER_PROSENT:
-            radiogruppeSvar(sporsmal, verdi)
-            break
-        case RSSvartype.INFO_BEHANDLINGSDAGER:
-            behandlingsdagerSvar(sporsmal, verdi)
-            break
-        case RSSvartype.LAND:
-            landSvar(sporsmal, verdi)
-            break
-        case RSSvartype.DATO:
-            datoSvar(sporsmal, verdi)
-            break
-        case RSSvartype.DATOER:
-            datoerSvar(sporsmal, verdi)
-            break
-        case RSSvartype.PERIODE:
-        case RSSvartype.PERIODER:
-            periodeSvar(sporsmal, verdi)
-            break
-        case RSSvartype.KVITTERING:
-            // Denne settes i opplasting-form
-            return
-        case RSSvartype.RADIO:
-        case RSSvartype.IKKE_RELEVANT:
-        case RSSvartype.CHECKBOX:
-            // Skal ikke ha svarverdi
-            break
-        default:
-            sporsmal.svarliste = {
-                sporsmalId: sporsmal.id,
-                svar: [{ verdi: verdi ? verdi.toString() : '' }],
-            }
-    }
-
-    sporsmal.undersporsmal.forEach((spm) => {
-        settSvar(spm, verdier)
-    })
+    /*
+        switch (mutertSporsmal.svartype) {
+            case RSSvartype.CHECKBOX_PANEL:
+                return checkboxSvar(mutertSporsmal, verdi)
+            case RSSvartype.CHECKBOX_GRUPPE:
+                checkboksGruppeSvar(mutertSporsmal, verdi)
+                break
+            case RSSvartype.RADIO_GRUPPE:
+            case RSSvartype.RADIO_GRUPPE_TIMER_PROSENT:
+                radiogruppeSvar(mutertSporsmal, verdi)
+                break
+            case RSSvartype.INFO_BEHANDLINGSDAGER:
+                behandlingsdagerSvar(mutertSporsmal, verdi)
+                break
+            case RSSvartype.LAND:
+                landSvar(mutertSporsmal, verdi)
+                break
+            case RSSvartype.DATO:
+                datoSvar(mutertSporsmal, verdi)
+                break
+            case RSSvartype.DATOER:
+                datoerSvar(mutertSporsmal, verdi)
+                break
+            case RSSvartype.PERIODE:
+            case RSSvartype.PERIODER:
+                periodeSvar(mutertSporsmal, verdi)
+                break
+            case RSSvartype.KVITTERING:
+                // Denne settes i opplasting-form
+                return mutertSporsmal
+            case RSSvartype.RADIO:
+            case RSSvartype.IKKE_RELEVANT:
+            case RSSvartype.CHECKBOX:
+                console.log('Breaker fra checkbox')
+                // Skal ikke ha svarverdi
+                break
+            default:
+                mutertSporsmal.svarliste = {
+                    sporsmalId: mutertSporsmal.id,
+                    svar: [{ verdi: verdi ? verdi.toString() : '' }],
+                }
+        }
+    */
+    mutertSporsmal.undersporsmal.map((spm) => settSvar(spm, verdier))
+    return mutertSporsmal
 }
-
+/*
 const checkboxSvar = (sporsmal: Sporsmal, verdi: any) => {
-    sporsmal.svarliste = {
+    const svarliste = {
         sporsmalId: sporsmal.id,
         svar: [
             {
@@ -87,6 +87,7 @@ const checkboxSvar = (sporsmal: Sporsmal, verdi: any) => {
             },
         ],
     }
+    return sporsmal.copyWith({ svarliste: svarliste })
 }
 
 const behandlingsdagerSvar = (sporsmal: Sporsmal, verdi: Date[]) => {
@@ -176,3 +177,4 @@ const datoerSvar = (sporsmal: Sporsmal, verdi: any) => {
         svar: svar,
     }
 }
+*/

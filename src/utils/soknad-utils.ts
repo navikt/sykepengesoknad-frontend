@@ -26,7 +26,7 @@ export const getRiktigDato = (soknad: Soknad): Date | string => {
     return ''
 }
 
-export const flattenSporsmal = (sporsmal: Sporsmal[]) => {
+export const flattenSporsmal = (sporsmal: ReadonlyArray<Sporsmal>) => {
     let flatArr: Sporsmal[] = []
     for (let i = 0; i < sporsmal.length; i++) {
         flatArr.push(sporsmal[i])

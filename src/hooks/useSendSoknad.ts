@@ -1,23 +1,14 @@
 import { useMutation, useQueryClient } from '@tanstack/react-query'
-import { useRouter } from 'next/router'
 
 import { FetchError } from '../utils/fetch'
 import fetchMedRequestId from '../utils/fetch'
+import { Soknad } from '../types/types'
 
-import useSoknad from './useSoknad'
-
-export function useSendSoknad() {
-    const router = useRouter()
-    const { id } = router.query as { id: string }
-    const { data: valgtSoknad } = useSoknad(id)
-
+export function useSendSoknad(valgtSoknad: Soknad) {
     const queryClient = useQueryClient()
 
     return useMutation<unknown, FetchError>({
         mutationFn: async () => {
-            if (!valgtSoknad) {
-                throw Error('Skal ha valgt søknad')
-            }
             return fetchMedRequestId(
                 `/syk/sykepengesoknad/api/sykepengesoknad-backend/api/v2/soknader/${valgtSoknad.id}/send`,
                 {
@@ -30,9 +21,6 @@ export function useSendSoknad() {
         mutationKey: ['sendsoknad'],
 
         onSuccess: async () => {
-            if (!valgtSoknad) {
-                throw Error('Skal ha valgt søknad')
-            }
             await queryClient.invalidateQueries(['soknad', valgtSoknad.id])
 
             queryClient.invalidateQueries(['soknader']).catch()

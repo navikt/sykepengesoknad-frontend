@@ -12,6 +12,8 @@ import { RSSvarliste } from './rs-types/rs-svarliste'
 import { RSSvartype } from './rs-types/rs-svartype'
 import { RSVisningskriterieType } from './rs-types/rs-visningskriterie'
 import { ArbeidsforholdFraInntektskomponenten } from './rs-types/rs-arbeidsforholdfrainntektskomponenten'
+import { ObjectCopier } from './object-copier'
+import { rsToSporsmal } from './mapping'
 
 export interface TidsPeriode {
     fom: Date
@@ -23,138 +25,53 @@ export interface Arbeidsgiver {
     orgnummer: string
 }
 
-export class Soknad {
-    id: string
-    sykmeldingId?: string
-    soknadstype: RSSoknadstype
-    status: RSSoknadstatus
-    arbeidssituasjon?: RSArbeidssituasjon
-    fom?: Date
-    tom?: Date
-    avbruttDato?: Date
-    opprettetDato: Date
-    sendtTilNAVDato?: Date
-    sendtTilArbeidsgiverDato?: Date
-    utenlandskSykmelding?: boolean
-    arbeidsgiver?: Arbeidsgiver
-    sporsmal: Sporsmal[]
-    soknadPerioder: RSSoknadsperiode[]
-    korrigerer?: string
-    merknaderFraSykmelding?: RSMerknad[]
-    opprettetAvInntektsmelding: boolean
-    klippet: boolean
-    inntektskilderDataFraInntektskomponenten?: ArbeidsforholdFraInntektskomponenten[]
-    korrigeringsfristUtlopt?: boolean
-
-    constructor(soknad: RSSoknad) {
-        this.id = soknad.id
-        this.sykmeldingId = soknad.sykmeldingId || undefined
-        const type = soknad.soknadstype as keyof typeof RSSoknadstype
-        this.soknadstype = RSSoknadstype[type]
-        const stat = soknad.status as keyof typeof RSSoknadstatus
-        this.status = RSSoknadstatus[stat]
-        this.utenlandskSykmelding = soknad.utenlandskSykmelding
-        this.fom = dayjsToDate(soknad.fom!)!
-        this.tom = dayjsToDate(soknad.tom!)!
-        this.korrigerer = soknad.korrigerer || undefined
-        this.avbruttDato = dayjsToDate(soknad.avbruttDato!)!
-        this.opprettetDato = dayjsToDate(soknad.opprettetDato!)!
-        this.sendtTilNAVDato = dayjsToDate(soknad.sendtTilNAVDato!)!
-        this.sendtTilArbeidsgiverDato = dayjsToDate(soknad.sendtTilArbeidsgiverDato!)!
-        if (soknad.arbeidsgiver) {
-            this.arbeidsgiver = {
-                navn: soknad.arbeidsgiver.navn,
-                orgnummer: soknad.arbeidsgiver.orgnummer,
-            }
-        }
-        this.arbeidssituasjon = soknad.arbeidssituasjon ? RSArbeidssituasjon[soknad.arbeidssituasjon] : undefined
-        this.sporsmal = rsToSporsmal(soknad.sporsmal, undefined as any, true)
-        this.soknadPerioder = soknad.soknadPerioder
-        this.merknaderFraSykmelding = soknad.merknaderFraSykmelding
-        this.opprettetAvInntektsmelding = soknad.opprettetAvInntektsmelding
-        this.klippet = soknad.klippet
-        this.inntektskilderDataFraInntektskomponenten = soknad.inntektskilderDataFraInntektskomponenten
-        this.korrigeringsfristUtlopt = soknad.korrigeringsfristUtlopt
-    }
-}
-export class Sporsmal {
-    id: string
-    tag: TagTyper
-    tagIndex?: number
-    sporsmalstekst: string
-    undertekst: string | null
-    svartype: RSSvartype
-    min: string | null
-    max: string | null
-    pavirkerAndreSporsmal: boolean
-    kriterieForVisningAvUndersporsmal: string
-    svarliste: RSSvarliste
-    undersporsmal: Sporsmal[]
-    parentKriterie: RSVisningskriterieType | null
-    erHovedsporsmal: boolean
-
-    constructor(spm: RSSporsmal, kriterie: RSVisningskriterieType | null, erHovedsporsmal: boolean) {
-        this.id = spm.id
-        const orgarr: string[] = spm.tag.split('_')
-        const numtag: number = parseInt(orgarr.pop() as any)
-        let tag = spm.tag
-        if (!isNaN(numtag)) {
-            this.tagIndex = numtag
-            tag = orgarr.join('_')
-        }
-        const idtag = tag as keyof typeof TagTyper
-        this.tag = TagTyper[idtag]
-        this.sporsmalstekst = spm.sporsmalstekst === null ? '' : spm.sporsmalstekst
-        this.undertekst = spm.undertekst
-        this.svartype = spm.svartype as any as RSSvartype
-        this.min = spm.min
-        this.max = spm.max
-        this.pavirkerAndreSporsmal = spm.pavirkerAndreSporsmal
-        this.kriterieForVisningAvUndersporsmal = spm.kriterieForVisningAvUndersporsmal as any
-        this.svarliste = {
-            sporsmalId: spm.id,
-            svar: spm.svar.map((svar) => {
-                const hentVerdi = () => {
-                    if (spm.svartype == RSSvartype.BELOP) {
-                        return (Number(svar.verdi) / 100).toString()
-                    }
-                    return svar.verdi
-                }
-                return {
-                    id: svar.id,
-                    verdi: hentVerdi(),
-                    avgittAv: svar.avgittAv,
-                }
-            }),
-        }
-        this.undersporsmal = rsToSporsmal(spm.undersporsmal, spm.kriterieForVisningAvUndersporsmal, false)
-        this.parentKriterie = kriterie
-        this.erHovedsporsmal = erHovedsporsmal
-    }
-}
-
-function rsToSporsmal(spms: RSSporsmal[], kriterie: RSVisningskriterieType | null, erHovedsporsmal: boolean) {
-    const sporsmals: Sporsmal[] = []
-    if (spms === undefined) {
-        return sporsmals
-    }
-    spms.forEach((rssp) => {
-        const spm: Sporsmal = new Sporsmal(rssp, kriterie, erHovedsporsmal)
-        sporsmals.push(spm)
-    })
-
-    if (
-        sporsmals.length >= 2 &&
-        sporsmals[sporsmals.length - 1].tag === TagTyper.VAER_KLAR_OVER_AT &&
-        sporsmals[sporsmals.length - 2].tag === TagTyper.BEKREFT_OPPLYSNINGER
+export class Soknad extends ObjectCopier {
+    constructor(
+        readonly id: string,
+        readonly sykmeldingId: string | undefined,
+        readonly soknadstype: RSSoknadstype,
+        readonly status: RSSoknadstatus,
+        readonly arbeidssituasjon: RSArbeidssituasjon | undefined,
+        readonly fom: Date | undefined,
+        readonly tom: Date | undefined,
+        readonly avbruttDato: Date | undefined,
+        readonly opprettetDato: Date | undefined,
+        readonly sendtTilNAVDato: Date | undefined,
+        readonly sendtTilArbeidsgiverDato: Date | undefined,
+        readonly utenlandskSykmelding: boolean | undefined,
+        readonly arbeidsgiver: Arbeidsgiver | undefined,
+        readonly sporsmal: ReadonlyArray<Sporsmal>,
+        readonly soknadPerioder: ReadonlyArray<RSSoknadsperiode>,
+        readonly korrigerer: string | undefined,
+        readonly merknaderFraSykmelding: ReadonlyArray<RSMerknad> | undefined,
+        readonly opprettetAvInntektsmelding: boolean,
+        readonly klippet: boolean,
+        readonly inntektskilderDataFraInntektskomponenten?: ReadonlyArray<ArbeidsforholdFraInntektskomponenten>,
+        readonly korrigeringsfristUtlopt?: boolean,
     ) {
-        // Det finnes tilfeller opprettet i db før 15 Mai 2020 hvor disse er i "feil rekkefølge" Dette fikser sorteringa
-        // Se også https://github.com/navikt/syfosoknad/commit/1983d32f3a7fb28bbf17126ea227d91589ad5f35
-        const tmp = sporsmals[sporsmals.length - 1]
-        sporsmals[sporsmals.length - 1] = sporsmals[sporsmals.length - 2]
-        sporsmals[sporsmals.length - 2] = tmp
+        super()
     }
-    return sporsmals
+}
+
+export class Sporsmal extends ObjectCopier {
+    constructor(
+        readonly id: string,
+        readonly tag: TagTyper,
+        readonly tagIndex: number | undefined,
+        readonly sporsmalstekst: string,
+        readonly undertekst: string | null,
+        readonly svartype: RSSvartype,
+        readonly min: string | null,
+        readonly max: string | null,
+        readonly pavirkerAndreSporsmal: boolean,
+        readonly kriterieForVisningAvUndersporsmal: string,
+        readonly svarliste: RSSvarliste,
+        readonly undersporsmal: ReadonlyArray<Sporsmal>,
+        readonly parentKriterie: RSVisningskriterieType | null,
+        readonly erHovedsporsmal: boolean,
+    ) {
+        super()
+    }
 }
 
 export interface Ettersend {
