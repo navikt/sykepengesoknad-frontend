@@ -1,11 +1,10 @@
 import dayjs from 'dayjs'
 
-import { SvarEnums } from '../../types/enums'
-import { RSSvar } from '../../types/rs-types/rs-svar'
 import { RSSvartype } from '../../types/rs-types/rs-svartype'
 import { Sporsmal } from '../../types/types'
 import { empty } from '../../utils/constants'
-import { jsonDeepCopy } from '../../utils/json-deep-copy'
+import { SvarEnums } from '../../types/enums'
+import { RSSvar } from '../../types/rs-types/rs-svar'
 
 const hentVerdier = (sporsmal: Sporsmal, verdier: Record<string, any>) => {
     let verdi = verdier[sporsmal.id]
@@ -21,64 +20,55 @@ const hentVerdier = (sporsmal: Sporsmal, verdier: Record<string, any>) => {
 
 export const settSvar = (sporsmal: Sporsmal, verdier: Record<string, any>): Sporsmal => {
     const verdi = hentVerdier(sporsmal, verdier)
-    const mutertSporsmal = sporsmal.copyWith({})
     if (
         verdi === undefined &&
-        mutertSporsmal.svartype !== RSSvartype.IKKE_RELEVANT &&
-        mutertSporsmal.svartype !== RSSvartype.RADIO &&
-        mutertSporsmal.svartype !== RSSvartype.CHECKBOX &&
-        mutertSporsmal.svartype !== RSSvartype.INFO_BEHANDLINGSDAGER
+        sporsmal.svartype !== RSSvartype.IKKE_RELEVANT &&
+        sporsmal.svartype !== RSSvartype.RADIO &&
+        sporsmal.svartype !== RSSvartype.CHECKBOX &&
+        sporsmal.svartype !== RSSvartype.INFO_BEHANDLINGSDAGER
     ) {
         return sporsmal
     }
-    /*
-        switch (mutertSporsmal.svartype) {
-            case RSSvartype.CHECKBOX_PANEL:
-                return checkboxSvar(mutertSporsmal, verdi)
-            case RSSvartype.CHECKBOX_GRUPPE:
-                checkboksGruppeSvar(mutertSporsmal, verdi)
-                break
-            case RSSvartype.RADIO_GRUPPE:
-            case RSSvartype.RADIO_GRUPPE_TIMER_PROSENT:
-                radiogruppeSvar(mutertSporsmal, verdi)
-                break
-            case RSSvartype.INFO_BEHANDLINGSDAGER:
-                behandlingsdagerSvar(mutertSporsmal, verdi)
-                break
-            case RSSvartype.LAND:
-                landSvar(mutertSporsmal, verdi)
-                break
-            case RSSvartype.DATO:
-                datoSvar(mutertSporsmal, verdi)
-                break
-            case RSSvartype.DATOER:
-                datoerSvar(mutertSporsmal, verdi)
-                break
-            case RSSvartype.PERIODE:
-            case RSSvartype.PERIODER:
-                periodeSvar(mutertSporsmal, verdi)
-                break
-            case RSSvartype.KVITTERING:
-                // Denne settes i opplasting-form
-                return mutertSporsmal
-            case RSSvartype.RADIO:
-            case RSSvartype.IKKE_RELEVANT:
-            case RSSvartype.CHECKBOX:
-                console.log('Breaker fra checkbox')
-                // Skal ikke ha svarverdi
-                break
-            default:
-                mutertSporsmal.svarliste = {
-                    sporsmalId: mutertSporsmal.id,
-                    svar: [{ verdi: verdi ? verdi.toString() : '' }],
-                }
-        }
-    */
-    mutertSporsmal.undersporsmal.map((spm) => settSvar(spm, verdier))
-    return mutertSporsmal
+
+    switch (sporsmal.svartype) {
+        case RSSvartype.CHECKBOX_PANEL:
+            return checkboxPanelSvar(sporsmal, verdi)
+        case RSSvartype.CHECKBOX_GRUPPE:
+            return checkboksGruppeSvar(sporsmal, verdi)
+        case RSSvartype.RADIO_GRUPPE:
+        case RSSvartype.RADIO_GRUPPE_TIMER_PROSENT:
+            return radiogruppeSvar(sporsmal, verdi)
+        case RSSvartype.INFO_BEHANDLINGSDAGER:
+            return behandlingsdagerSvar(sporsmal, verdi)
+        case RSSvartype.LAND:
+            return landSvar(sporsmal, verdi)
+        case RSSvartype.DATO:
+            return datoSvar(sporsmal, verdi)
+        case RSSvartype.DATOER:
+            return datoerSvar(sporsmal, verdi)
+        case RSSvartype.PERIODE:
+        case RSSvartype.PERIODER:
+            return periodeSvar(sporsmal, verdi)
+        case RSSvartype.KVITTERING:
+            // Denne settes i opplasting-form
+            return sporsmal
+        case RSSvartype.RADIO:
+        case RSSvartype.IKKE_RELEVANT:
+        case RSSvartype.CHECKBOX:
+            // Skal ikke ha svarverdi
+            return sporsmal
+        default:
+            console.log('Default verdi for  ' + sporsmal.svartype)
+            const svarliste = {
+                sporsmalId: sporsmal.id,
+                svar: [{ verdi: verdi ? verdi.toString() : '' }],
+            }
+            const undersporsmal: ReadonlyArray<Sporsmal> = sporsmal.undersporsmal.map((spm) => settSvar(spm, verdier))
+            return sporsmal.copyWith({ svarliste: svarliste, undersporsmal: undersporsmal })
+    }
 }
-/*
-const checkboxSvar = (sporsmal: Sporsmal, verdi: any) => {
+
+const checkboxPanelSvar = (sporsmal: Sporsmal, verdi: any) => {
     const svarliste = {
         sporsmalId: sporsmal.id,
         svar: [
@@ -90,63 +80,80 @@ const checkboxSvar = (sporsmal: Sporsmal, verdi: any) => {
     return sporsmal.copyWith({ svarliste: svarliste })
 }
 
-const behandlingsdagerSvar = (sporsmal: Sporsmal, verdi: Date[]) => {
+const behandlingsdagerSvar = (sporsmal: Sporsmal, verdi: Date[]): Sporsmal => {
     const selectedDays = verdi
 
-    for (let i = 0; i < sporsmal.undersporsmal.length; i++) {
-        sporsmal.undersporsmal[i].svarliste.svar[0] = { verdi: 'Ikke til behandling' }
-    }
-
-    for (let i = 0; i < sporsmal.undersporsmal.length; i++) {
-        for (const date of selectedDays) {
-            if (
-                date <= dayjs(sporsmal.undersporsmal[i].max).toDate() &&
-                date >= dayjs(sporsmal.undersporsmal[i].min).toDate()
-            ) {
-                sporsmal.undersporsmal[i].svarliste.svar[0] = { verdi: dayjs(date).format('YYYY-MM-DD') }
+    const undersporsmal = sporsmal.undersporsmal
+        .map((spm) => {
+            return spm.copyWith({
+                svarliste: {
+                    svar: [{ verdi: 'Ikke til behandling' }],
+                },
+            })
+        })
+        .map((spm) => {
+            for (const date of selectedDays) {
+                if (
+                    date <= dayjs(sporsmal.undersporsmal[i].max).toDate() &&
+                    date >= dayjs(sporsmal.undersporsmal[i].min).toDate()
+                ) {
+                    return spm.copyWith({
+                        svarliste: {
+                            svar: [{ verdi: dayjs(date).format('YYYY-MM-DD') }],
+                        },
+                    })
+                }
             }
-        }
-    }
+            return spm
+        })
+    return sporsmal.copyWith({ undersporsmal: undersporsmal })
 }
 
 const landSvar = (sporsmal: Sporsmal, verdi: string[]) => {
-    sporsmal.svarliste = {
+    const svarliste = {
         sporsmalId: sporsmal.id,
         svar: verdi.map((a) => {
             return { verdi: a }
         }),
     }
+    return sporsmal.copyWith({ svarliste: svarliste })
 }
 
 const radiogruppeSvar = (sporsmal: Sporsmal, verdi: any) => {
-    sporsmal.undersporsmal.forEach((uspm) => {
+    const undersporsmal = sporsmal.undersporsmal.map((uspm) => {
         const erValgt = uspm.sporsmalstekst === verdi
-        uspm.svarliste = {
+        const svarliste = {
             sporsmalId: uspm.id,
             svar: [{ verdi: erValgt ? SvarEnums.CHECKED : '' }],
         }
+        return uspm.copyWith({ svarliste: svarliste })
     })
+    return sporsmal.copyWith({ undersporsmal: undersporsmal })
 }
 
 const checkboksGruppeSvar = (sporsmal: Sporsmal, verdi: string[]) => {
-    sporsmal.undersporsmal.forEach((uspm) => {
+    const undersporsmal = sporsmal.undersporsmal.map((uspm) => {
         const erValgt = verdi.includes(uspm.sporsmalstekst)
-        uspm.svarliste = {
+        const svarliste = {
             sporsmalId: uspm.id,
             svar: [{ verdi: erValgt ? SvarEnums.CHECKED : '' }],
         }
+        return uspm.copyWith({ svarliste: svarliste })
     })
+    return sporsmal.copyWith({ undersporsmal: undersporsmal })
 }
 
 const periodeSvar = (sporsmal: Sporsmal, verdi: any) => {
     if (Array.isArray(verdi)) {
-        sporsmal.svarliste = {
+        const svarliste = {
             sporsmalId: sporsmal.id,
             svar: verdi.map((periode) => {
                 return { verdi: JSON.stringify(periode) }
             }),
         }
+        return sporsmal.copyWith({ svarliste: svarliste })
     }
+    return sporsmal
 }
 
 const datoSvar = (sporsmal: Sporsmal, verdi: any) => {
@@ -156,10 +163,11 @@ const datoSvar = (sporsmal: Sporsmal, verdi: any) => {
             verdi: dayjs(verdi).format('YYYY-MM-DD'),
         })
     }
-    sporsmal.svarliste = {
+    const svarliste = {
         sporsmalId: sporsmal.id,
         svar: svar,
     }
+    return sporsmal.copyWith({ svarliste: svarliste })
 }
 
 const datoerSvar = (sporsmal: Sporsmal, verdi: any) => {
@@ -172,9 +180,9 @@ const datoerSvar = (sporsmal: Sporsmal, verdi: any) => {
         )
     }
 
-    sporsmal.svarliste = {
+    const svarliste = {
         sporsmalId: sporsmal.id,
         svar: svar,
     }
+    return sporsmal.copyWith({ svarliste: svarliste })
 }
-*/

@@ -1,8 +1,7 @@
 import { logger } from '@navikt/next-logger'
 import { NextApiRequest, NextApiResponse } from 'next'
 
-import { cleanPathForMetric } from '../metrics'
-import metrics from '../metrics'
+import metrics, { cleanPathForMetric } from '../metrics'
 import { isMockBackend } from '../utils/environment'
 import { mockApi } from '../data/mock/mock-api'
 

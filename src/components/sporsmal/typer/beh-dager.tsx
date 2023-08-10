@@ -1,4 +1,4 @@
-import { Label, DatePicker, useDatepicker } from '@navikt/ds-react'
+import { DatePicker, Label, useDatepicker } from '@navikt/ds-react'
 import React from 'react'
 import dayjs from 'dayjs'
 import weekOfYear from 'dayjs/plugin/weekOfYear'

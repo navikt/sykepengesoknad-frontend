@@ -8,26 +8,26 @@ import { RSSoknadstatusType } from './rs-soknadstatus'
 import { RSSoknadstypeType } from './rs-soknadstype'
 
 export class RSSoknadmetadata {
-    id: string
-    sykmeldingId?: string
-    soknadstype: RSSoknadstypeType
-    status: RSSoknadstatusType
-    arbeidssituasjon?: RSArbeidssituasjonType
-    fom?: Date
-    tom?: Date
-    korrigerer?: string
-    korrigertAv?: string
-    egenmeldtSykmelding?: boolean
-    avbruttDato?: Date
-    sykmeldingUtskrevet?: Date
-    startSykeforlop?: Date
-    opprettetDato: Date
-    sendtTilNAVDato?: Date
-    sendtTilArbeidsgiverDato?: Date
-    arbeidsgiver?: Arbeidsgiver
-    soknadPerioder: RSSoknadsperiode[]
-    merknaderFraSykmelding?: RSMerknad[]
-    opprettetAvInntektsmelding: boolean
+    readonly id: string
+    readonly sykmeldingId?: string
+    readonly soknadstype: RSSoknadstypeType
+    readonly status: RSSoknadstatusType
+    readonly arbeidssituasjon?: RSArbeidssituasjonType
+    readonly fom?: Date
+    readonly tom?: Date
+    readonly korrigerer?: string
+    readonly korrigertAv?: string
+    readonly egenmeldtSykmelding?: boolean
+    readonly avbruttDato?: Date
+    readonly sykmeldingUtskrevet?: Date
+    readonly startSykeforlop?: Date
+    readonly opprettetDato?: Date
+    readonly sendtTilNAVDato?: Date
+    readonly sendtTilArbeidsgiverDato?: Date
+    readonly arbeidsgiver?: Arbeidsgiver
+    readonly soknadPerioder: RSSoknadsperiode[]
+    readonly merknaderFraSykmelding?: RSMerknad[]
+    readonly opprettetAvInntektsmelding: boolean
 
     constructor(json: any) {
         this.id = json.id

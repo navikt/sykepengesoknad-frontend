@@ -1,7 +1,7 @@
-import { Table, Loader, Label } from '@navikt/ds-react'
+import { Label, Loader, Table } from '@navikt/ds-react'
 import React from 'react'
 
-import { UtgiftTyper, Kvittering, Sporsmal } from '../../../types/types'
+import { Kvittering, Sporsmal, UtgiftTyper } from '../../../types/types'
 import { formatterTall } from '../../../utils/utils'
 import Slettknapp from '../../slettknapp/slettknapp'
 import useKvittering from '../../../hooks/useKvittering'

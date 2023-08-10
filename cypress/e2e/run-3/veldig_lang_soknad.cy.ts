@@ -11,13 +11,14 @@ import {
 } from '../../support/utilities'
 import 'cypress-file-upload'
 import { veldigLangSoknad } from '../../../src/data/mock/data/veldig-land-soknad'
+import {rsToSoknad} from "../../../src/types/mapping";
 
 describe('Tester støtte for gamle spørsmål', () => {
     //-----
     // Sykmelding: 7e90121c-b64b-4a1c-b7a5-93c9d95aba47, arbeidstaker - 100%
     // Søknad: 214f6e73-8150-4261-8ce5-e2b41907fa58, fom: 1.4.20, tom: 24.4.20
     //-----
-    const soknad = new Soknad(veldigLangSoknad as any) as Soknad
+    const soknad = rsToSoknad(veldigLangSoknad )
     let steg = 1
 
     function velgKalenderdag() {

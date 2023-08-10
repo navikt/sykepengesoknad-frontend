@@ -4,7 +4,6 @@ import { useRouter } from 'next/router'
 
 import { AuthenticationError, FetchError, fetchJsonMedRequestId } from '../utils/fetch'
 import { urlTilSoknad } from '../components/soknad/soknad-link'
-import { Soknad } from '../types/types'
 import { RSSoknad } from '../types/rs-types/rs-soknad'
 import { rsToSoknad } from '../types/mapping'
 

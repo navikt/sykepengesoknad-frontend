@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { FieldValues, FormProvider, useForm } from 'react-hook-form'
+import { FormProvider, useForm } from 'react-hook-form'
 import { useRouter } from 'next/router'
 
 import { TagTyper } from '../../../types/enums'
@@ -58,7 +58,8 @@ const SporsmalForm = ({ valgtSoknad, spmIndex, sporsmal }: SpmFormProps) => {
     const {
         mutate: oppdaterSporsmalMutation,
         isLoading: oppdatererSporsmal,
-        error: oppdaterError,
+        // eslint-disable-next-line @typescript-eslint/no-unused-vars
+        error: oppdaterError, //TODO vis dette et eller annet sted
     } = useOppdaterSporsmal({
         soknad: valgtSoknad,
         sporsmalId: sporsmal.id,

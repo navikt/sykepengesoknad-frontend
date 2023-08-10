@@ -1,4 +1,4 @@
-import { Button, BodyLong } from '@navikt/ds-react'
+import { BodyLong, Button } from '@navikt/ds-react'
 import React from 'react'
 import { ExternalLinkIcon } from '@navikt/aksel-icons'
 

@@ -1,5 +1,5 @@
 import { Link } from '@navikt/ds-react'
-import parser, { HTMLReactParserOptions, Element, domToReact } from 'html-react-parser'
+import parser, { domToReact, Element, HTMLReactParserOptions } from 'html-react-parser'
 import React from 'react'
 import { ExternalLinkIcon } from '@navikt/aksel-icons'
 

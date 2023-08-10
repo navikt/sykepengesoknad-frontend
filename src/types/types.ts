@@ -1,19 +1,14 @@
-import { dayjsToDate } from '../utils/dato-utils'
-
 import { TagTyper } from './enums'
 import { RSArbeidssituasjon } from './rs-types/rs-arbeidssituasjon'
 import { RSMerknad } from './rs-types/rs-merknad'
-import { RSSoknad } from './rs-types/rs-soknad'
 import { RSSoknadsperiode } from './rs-types/rs-soknadsperiode'
 import { RSSoknadstatus } from './rs-types/rs-soknadstatus'
 import { RSSoknadstype } from './rs-types/rs-soknadstype'
-import { RSSporsmal } from './rs-types/rs-sporsmal'
 import { RSSvarliste } from './rs-types/rs-svarliste'
 import { RSSvartype } from './rs-types/rs-svartype'
 import { RSVisningskriterieType } from './rs-types/rs-visningskriterie'
 import { ArbeidsforholdFraInntektskomponenten } from './rs-types/rs-arbeidsforholdfrainntektskomponenten'
 import { ObjectCopier } from './object-copier'
-import { rsToSporsmal } from './mapping'
 
 export interface TidsPeriode {
     fom: Date

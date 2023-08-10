@@ -4,7 +4,7 @@ import { fetchJsonMedRequestId } from '../utils/fetch'
 import { Soknad, Sporsmal } from '../types/types'
 import { sporsmalToRS } from '../types/rs-types/rs-sporsmal'
 import { RSOppdaterSporsmalResponse } from '../types/rs-types/rest-response/rs-oppdatersporsmalresponse'
-import { rsToSoknad } from '../types/mapping'
+import { rsToSoknad, skapSporsmal } from '../types/mapping'
 
 interface OppdaterSporsmalVariables {
     sporsmal: Sporsmal
@@ -23,7 +23,6 @@ export function useOppdaterSporsmal(props: OppdaterSporsmalProps) {
 
     return useMutation<RSOppdaterSporsmalResponse, unknown, OppdaterSporsmalVariables>({
         mutationFn: async (variables) => {
-            console.log(variables.sporsmal)
             return fetchJsonMedRequestId(
                 `/syk/sykepengesoknad/api/sykepengesoknad-backend/api/v2/soknader/${soknad.id}/sporsmal/${sporsmalId}`,
                 {
@@ -42,9 +41,14 @@ export function useOppdaterSporsmal(props: OppdaterSporsmalProps) {
                     return rsToSoknad(data.mutertSoknad)
                 } else {
                     const spm = data.oppdatertSporsmal
-                    // TODO ikke muter props. Det er ikke anbefalt av react
-                    // soknad.sporsmal[spmIndex] = new Sporsmal(spm, undefined as any, true)
-                    return soknad
+
+                    const oppdaterteSporsmal = soknad.sporsmal.map((sporsmal, index) => {
+                        if (index == spmIndex) {
+                            return skapSporsmal(spm, null, true)
+                        }
+                        return sporsmal
+                    })
+                    return soknad.copyWith({ sporsmal: oppdaterteSporsmal })
                 }
             }
 

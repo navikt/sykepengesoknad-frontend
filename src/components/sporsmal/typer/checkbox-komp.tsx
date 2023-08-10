@@ -9,6 +9,7 @@ import UndersporsmalListe from '../undersporsmal/undersporsmal-liste'
 import Vis from '../../vis'
 import { Sporsmal } from '../../../types/types'
 import { TagTyper } from '../../../types/enums'
+
 const ForklaringAvValgtCheckbox = (svaralternativ: Sporsmal) => {
     if (svaralternativ.tag === TagTyper.INNTEKTSKILDE_SELVSTENDIG) {
         return (

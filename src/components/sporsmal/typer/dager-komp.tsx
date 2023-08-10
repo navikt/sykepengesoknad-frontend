@@ -1,4 +1,4 @@
-import { Label, DatePicker } from '@navikt/ds-react'
+import { DatePicker, Label } from '@navikt/ds-react'
 import dayjs from 'dayjs'
 import React from 'react'
 import { Controller } from 'react-hook-form'

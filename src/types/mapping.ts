@@ -20,7 +20,6 @@ export function skapSporsmal(spm: RSSporsmal, kriterie: RSVisningskriterieType |
         tag = orgarr.join('_')
     }
     const svarliste = {
-        sporsmalId: spm.id,
         svar: spm.svar.map((svar) => {
             const hentVerdi = () => {
                 if (spm.svartype == RSSvartype.BELOP) {

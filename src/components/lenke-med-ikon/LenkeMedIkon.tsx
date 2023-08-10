@@ -1,4 +1,4 @@
-import { Link, BodyShort } from '@navikt/ds-react'
+import { BodyShort, Link } from '@navikt/ds-react'
 import { ExternalLinkIcon } from '@navikt/aksel-icons'
 import React from 'react'
 
