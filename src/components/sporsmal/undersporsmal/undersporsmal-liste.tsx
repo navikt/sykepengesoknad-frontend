@@ -2,8 +2,9 @@ import { Label } from '@navikt/ds-react'
 
 import { Sporsmal } from '../../../types/types'
 import SporsmalSwitch from '../sporsmal-switch'
+import { TagTyper } from '../../../types/enums'
 
-import { tekstMap } from './undersporsmal-tekster'
+import { UndersporsmalTekster } from './undersporsmal-tekster'
 
 interface UndersporsmalListeProps {
     oversporsmal: Sporsmal
@@ -11,25 +12,22 @@ interface UndersporsmalListeProps {
 }
 
 const UndersporsmalListe = ({ oversporsmal, oversporsmalSvar }: UndersporsmalListeProps) => {
-    const { kriterieForVisningAvUndersporsmal, undersporsmal, tag } = oversporsmal
     const skalVise =
-        (!kriterieForVisningAvUndersporsmal || kriterieForVisningAvUndersporsmal === oversporsmalSvar) &&
-        undersporsmal.length > 0
+        (!oversporsmal.kriterieForVisningAvUndersporsmal ||
+            oversporsmal.kriterieForVisningAvUndersporsmal === oversporsmalSvar) &&
+        oversporsmal.undersporsmal.length > 0
     if (!skalVise) return null
-
-    const validUndersporsmal = undersporsmal
-        .filter((underspm: any) => underspm !== null)
-        .map((underspm: Sporsmal, idx: number) => <SporsmalSwitch key={idx} sporsmal={underspm} />)
-
     return (
         <div className="mt-4">
-            {tekstMap[tag] && (
+            {oversporsmal.tag == TagTyper.UTENLANDSK_SYKMELDING_BOSTED && (
                 <Label as="h2" className="mt-8">
-                    {tekstMap[tag]}
+                    {UndersporsmalTekster['undersporsmal.UTENLANDSK_SYKMELDING_BOSTED']}
                 </Label>
             )}
 
-            {validUndersporsmal}
+            {oversporsmal.undersporsmal
+                .map((underspm: Sporsmal, idx: number) => <SporsmalSwitch key={idx} sporsmal={underspm} />)
+                .filter((underspm: any) => underspm !== null)}
         </div>
     )
 }

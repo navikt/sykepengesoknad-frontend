@@ -6,12 +6,13 @@ import { SpmProps } from '../sporsmal-form/sporsmal-form'
 import { TagTyper } from '../../../types/enums'
 import UndersporsmalListe from '../undersporsmal/undersporsmal-liste'
 
-const skalHaUndersporsmal = [
-    TagTyper.MEDLEMSKAP_OPPHOLD_UTENFOR_EOS_PERIODE,
-    TagTyper.MEDLEMSKAP_OPPHOLD_UTENFOR_NORGE_PERIODE,
-    TagTyper.MEDLEMSKAP_UTFORT_ARBEID_UTENFOR_NORGE_PERIODE,
-]
 const IkkeRelevant = ({ sporsmal }: SpmProps) => {
+    const skalHaUndersporsmal = [
+        TagTyper.MEDLEMSKAP_OPPHOLD_UTENFOR_EOS_GRUPPERING,
+        TagTyper.MEDLEMSKAP_OPPHOLD_UTENFOR_NORGE_GRUPPERING,
+        TagTyper.MEDLEMSKAP_UTFORT_ARBEID_UTENFOR_NORGE_GRUPPERING,
+    ]
+
     if (!skalHaUndersporsmal.includes(sporsmal.tag)) {
         return (
             <div className="mt-4 rounded-md border border-gray-600 p-4">
@@ -23,7 +24,7 @@ const IkkeRelevant = ({ sporsmal }: SpmProps) => {
         )
     }
     return (
-        <div aria-live="assertive">
+        <div className="mt-8 border-t border-dashed border-gray-400" aria-live="assertive">
             <UndersporsmalListe oversporsmal={sporsmal} />
         </div>
     )

@@ -18,7 +18,7 @@ export const medlemskapOppholdUtenforNorgeSporsmal: RSSporsmal = {
     undersporsmal: [
         {
             id: '339de089-086a-4e01-bb85-468d5101f2d3',
-            tag: 'MEDLEMSKAP_OPPHOLD_UTENFOR_NORGE_PERIODE',
+            tag: 'MEDLEMSKAP_OPPHOLD_UTENFOR_NORGE_GRUPPERING',
             sporsmalstekst: '',
             undertekst: null,
             svartype: 'IKKE_RELEVANT',
@@ -125,7 +125,7 @@ export const medlemskapUtførtArbeidUtenforNorgeSporsmal: RSSporsmal = {
     undersporsmal: [
         {
             id: '52efe9cf-5425-4d3f-b3a9-6e191576fd0d',
-            tag: 'MEDLEMSKAP_UTFORT_ARBEID_UTENFOR_NORGE_PERIODE',
+            tag: 'MEDLEMSKAP_UTFORT_ARBEID_UTENFOR_NORGE_GRUPPERING',
             sporsmalstekst: '',
             undertekst: null,
             svartype: 'IKKE_RELEVANT',
@@ -192,7 +192,7 @@ export const medlemskapOppholdUtenforEøsSporsmal: RSSporsmal = {
     undersporsmal: [
         {
             id: '9e4beb3d-b64d-43bd-9433-e6591f8ad9b6',
-            tag: 'MEDLEMSKAP_OPPHOLD_UTENFOR_EOS_PERIODE',
+            tag: 'MEDLEMSKAP_OPPHOLD_UTENFOR_EOS_GRUPPERING',
             sporsmalstekst: '',
             undertekst: null,
             svartype: 'IKKE_RELEVANT',

@@ -19,6 +19,7 @@ const tillatteApier = [
     'POST /api/v2/soknader/[uuid]/ettersendTilArbeidsgiver',
     'PUT /api/v2/soknader/[uuid]/sporsmal/[uuid]',
     'POST /api/v2/soknader/[uuid]/sporsmal/[uuid]/svar',
+    'POST /api/v2/soknader/{soknadId}/sporsmal/{sporsmalId}/undersporsmal',
     'DELETE /api/v2/soknader/[uuid]/sporsmal/[uuid]/svar/[uuid]',
 ]
 
