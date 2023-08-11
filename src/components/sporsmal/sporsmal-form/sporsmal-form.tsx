@@ -79,15 +79,19 @@ const SporsmalForm = ({ valgtSoknad, spmIndex, sporsmal }: SpmFormProps) => {
 
     useEffect(() => {
         methods.reset(hentFormState(sporsmal), { keepValues: false })
-    }, [methods, sporsmal])
+        // Resetter formen når spørsmålet endrer seg
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [sporsmal])
 
     useEffect(() => {
         if (methods.formState.isSubmitSuccessful) {
             methods.reset(hentFormState(sporsmal), { keepValues: false })
         }
-    }, [methods, methods.formState.isSubmitSuccessful, sporsmal])
+        // resetter formen når den har blitt submittet
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [methods.formState.isSubmitSuccessful])
 
-    const sendSoknad = async () => {
+    const sendSoknad = () => {
         if (valgtSoknad.status == RSSoknadstatus.UTKAST_TIL_KORRIGERING) {
             if (korrigerer && harLikeSvar(korrigerer, valgtSoknad)) {
                 setEndringUtenEndringAapen(true)
@@ -97,30 +101,26 @@ const SporsmalForm = ({ valgtSoknad, spmIndex, sporsmal }: SpmFormProps) => {
         sendSoknadMutation()
     }
 
-    const onSubmit = async (data: Record<string, any>) => {
-        if (oppdatererSporsmal || senderSoknad) return
+    const onSubmit = (data: Record<string, any>) => {
+        if (oppdatererSporsmal || senderSoknad)
+            return Promise.reject(new Error('Spørsmål oppdateres eller søknad sendes allerede'))
 
-        const oppdatertSporsmalMedSvar = () => {
-            if (erSiste && !erUtlandssoknad) {
-                return settSvar(nesteSporsmal, data)
+        return new Promise<void>(async (resolve) => {
+            const oppdatertSporsmalMedSvar = () => {
+                if (erSiste && !erUtlandssoknad) {
+                    return settSvar(nesteSporsmal, data)
+                }
+                return settSvar(sporsmal, data)
             }
-            return settSvar(sporsmal, data)
-        }
-        if (erSiste) {
-            oppdaterSporsmalMutation({
-                sporsmal: oppdatertSporsmalMedSvar(),
-                onSuccess: async () => {
-                    await sendSoknad()
+
+            const onSuccessLogic = async (isLast: boolean) => {
+                if (isLast) {
                     logEvent('skjema fullført', {
                         soknadstype: valgtSoknad.soknadstype,
                         skjemanavn: 'sykepengesoknad',
                     })
-                },
-            })
-        } else {
-            oppdaterSporsmalMutation({
-                sporsmal: oppdatertSporsmalMedSvar(),
-                onSuccess: async () => {
+                    sendSoknad()
+                } else {
                     logEvent('skjema spørsmål besvart', {
                         soknadstype: valgtSoknad.soknadstype,
                         skjemanavn: 'sykepengesoknad',
@@ -132,9 +132,16 @@ const SporsmalForm = ({ valgtSoknad, spmIndex, sporsmal }: SpmFormProps) => {
                     await router.push(
                         pathUtenSteg(router.asPath) + SEPARATOR + (spmIndex + 2) + testpersonQuery.query(),
                     )
-                },
+                    resolve() // Resolver promise her når alt ovenfor er utført
+                }
+            }
+
+            oppdaterSporsmalMutation({
+                sporsmal: oppdatertSporsmalMedSvar(),
+                onSuccess: () => onSuccessLogic(erSiste),
+                //TODO trenger jeg noe her   onError: reject, // Avviser promise dersom mutation feiler
             })
-        }
+        })
     }
 
     return (
