@@ -34,10 +34,10 @@ export const settSvar = (sporsmal: Sporsmal, verdier: Record<string, any>): Spor
         case RSSvartype.CHECKBOX_PANEL:
             return checkboxPanelSvar(sporsmal, verdi)
         case RSSvartype.CHECKBOX_GRUPPE:
-            return checkboksGruppeSvar(sporsmal, verdi)
+            return checkboksGruppeSvar(sporsmal, verdi, verdier)
         case RSSvartype.RADIO_GRUPPE:
         case RSSvartype.RADIO_GRUPPE_TIMER_PROSENT:
-            return radiogruppeSvar(sporsmal, verdi)
+            return radiogruppeSvar(sporsmal, verdi, verdier)
         case RSSvartype.INFO_BEHANDLINGSDAGER:
             return behandlingsdagerSvar(sporsmal, verdi)
         case RSSvartype.LAND:
@@ -52,11 +52,14 @@ export const settSvar = (sporsmal: Sporsmal, verdier: Record<string, any>): Spor
         case RSSvartype.KVITTERING:
             // Denne settes i opplasting-form
             return sporsmal
-        case RSSvartype.RADIO:
         case RSSvartype.IKKE_RELEVANT:
-        case RSSvartype.CHECKBOX:
-            // Skal ikke ha svarverdi
-            return sporsmal
+        case RSSvartype.RADIO:
+        case RSSvartype.CHECKBOX: {
+            const undersporsmal: ReadonlyArray<Sporsmal> = sporsmal.undersporsmal.map((spm) => settSvar(spm, verdier))
+            // svarliste settes i gruppe fro radio og checkbox
+            return sporsmal.copyWith({ undersporsmal: undersporsmal })
+        }
+
         default:
             const svarliste = {
                 sporsmalId: sporsmal.id,
@@ -115,27 +118,31 @@ const landSvar = (sporsmal: Sporsmal, verdi: string[]) => {
     return sporsmal.copyWith({ svarliste: svarliste })
 }
 
-const radiogruppeSvar = (sporsmal: Sporsmal, verdi: any) => {
-    const undersporsmal = sporsmal.undersporsmal.map((uspm) => {
-        const erValgt = uspm.sporsmalstekst === verdi
-        const svarliste = {
-            sporsmalId: uspm.id,
-            svar: [{ verdi: erValgt ? SvarEnums.CHECKED : '' }],
-        }
-        return uspm.copyWith({ svarliste: svarliste })
-    })
+const radiogruppeSvar = (sporsmal: Sporsmal, verdi: any, verdier: Record<string, any>) => {
+    const undersporsmal = sporsmal.undersporsmal
+        .map((uspm) => {
+            const erValgt = uspm.sporsmalstekst === verdi
+            const svarliste = {
+                sporsmalId: uspm.id,
+                svar: [{ verdi: erValgt ? SvarEnums.CHECKED : '' }],
+            }
+            return uspm.copyWith({ svarliste: svarliste })
+        })
+        .map((spm) => settSvar(spm, verdier))
     return sporsmal.copyWith({ undersporsmal: undersporsmal })
 }
 
-const checkboksGruppeSvar = (sporsmal: Sporsmal, verdi: string[]) => {
-    const undersporsmal = sporsmal.undersporsmal.map((uspm) => {
-        const erValgt = verdi.includes(uspm.sporsmalstekst)
-        const svarliste = {
-            sporsmalId: uspm.id,
-            svar: [{ verdi: erValgt ? SvarEnums.CHECKED : '' }],
-        }
-        return uspm.copyWith({ svarliste: svarliste })
-    })
+const checkboksGruppeSvar = (sporsmal: Sporsmal, verdi: string[], verdier: Record<string, any>) => {
+    const undersporsmal = sporsmal.undersporsmal
+        .map((uspm) => {
+            const erValgt = verdi.includes(uspm.sporsmalstekst)
+            const svarliste = {
+                sporsmalId: uspm.id,
+                svar: [{ verdi: erValgt ? SvarEnums.CHECKED : '' }],
+            }
+            return uspm.copyWith({ svarliste: svarliste })
+        })
+        .map((spm) => settSvar(spm, verdier))
     return sporsmal.copyWith({ undersporsmal: undersporsmal })
 }
 
