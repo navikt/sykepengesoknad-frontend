@@ -1,4 +1,5 @@
 import {
+    soknadSomTrigger401ForOppdaterSporsmal,
     soknadSomTriggerFeilStatusForOppdaterSporsmal,
     soknadSomTriggerSporsmalFinnesIkkeISoknad,
 } from '../../../src/data/mock/data/soknader-integration'
@@ -56,6 +57,28 @@ describe('Tester feilsituasjoner ', () => {
             cy.get('.navds-heading--large').should('be.visible').and('have.text', 'Søknader')
         })
     })
+
+    describe('Tester 401 ved oppdatersporsmal ', () => {
+        before(() => {
+            cy.visit(
+                `/syk/sykepengesoknad/soknader/${soknadSomTrigger401ForOppdaterSporsmal.id}/1?testperson=alle-soknader`,
+            )
+        })
+
+        it('Ved svar og 401 gjør appen en refresh', function () {
+            cy.url().should('include', `${soknadSomTrigger401ForOppdaterSporsmal.id}/1`)
+            cy.get('[data-cy="bekreftCheckboksPanel"]').should('not.be.checked')
+
+            cy.get('.navds-checkbox__label').click()
+            cy.get('[data-cy="bekreftCheckboksPanel"]').should('be.checked')
+            cy.contains('Gå videre').click()
+            cy.url().should('include', `${soknadSomTrigger401ForOppdaterSporsmal.id}/1`)
+            cy.get('form').should('not.contain', 'Ooops! Her har det skjedd noe rart')
+            cy.get('[data-cy="bekreftCheckboksPanel"]').should('not.be.checked')
+            cy.url().should('include', `${soknadSomTrigger401ForOppdaterSporsmal.id}/1`)
+        })
+    })
+
     describe('Tester 400 ved send søknad', () => {
         before(() => {
             cy.visit(
