@@ -1,6 +1,6 @@
 const RefreshHvisFeilStateTekster = {
     'feilstate.tittel': 'Ooops! Her har det skjedd noe rart',
-    'feilstate.alert': 'Du må laste inn siden på nytt for å fortsette',
+    'feilstate.alert': 'Vennligst prøv igjen eller forsøk å laste inn siden på nytt',
     'feilstate.refresh': 'Last inn siden på nytt',
 }
 

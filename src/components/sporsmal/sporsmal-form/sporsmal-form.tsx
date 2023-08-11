@@ -25,6 +25,7 @@ import { harLikeSvar } from '../endring-uten-endring/har-like-svar'
 import { useSendSoknad } from '../../../hooks/useSendSoknad'
 import { UseTestpersonQuery } from '../../../hooks/useTestpersonQuery'
 import { useOppdaterSporsmal } from '../../../hooks/useOppdaterSporsmal'
+import { FeilStateView } from '../../feil/refresh-hvis-feil-state'
 
 import Knapperad from './knapperad'
 import SendesTil from './sendes-til'
@@ -59,8 +60,7 @@ const SporsmalForm = ({ valgtSoknad, spmIndex, sporsmal }: SpmFormProps) => {
     const {
         mutate: oppdaterSporsmalMutation,
         isLoading: oppdatererSporsmal,
-        // eslint-disable-next-line @typescript-eslint/no-unused-vars
-        error: oppdaterError, //TODO vis dette et eller annet sted
+        error: oppdaterError,
     } = useOppdaterSporsmal({
         soknad: valgtSoknad,
         spmIndex: erSisteSpm() ? spmIndex + 1 : spmIndex,
@@ -183,6 +183,7 @@ const SporsmalForm = ({ valgtSoknad, spmIndex, sporsmal }: SpmFormProps) => {
                         )}
                     />
 
+                    {oppdaterError && !oppdatererSporsmal && <FeilStateView></FeilStateView>}
                     <Vis
                         hvis={skalViseKnapperad(valgtSoknad, sporsmal, methods.getValues())}
                         render={() => <Knapperad soknad={valgtSoknad} poster={oppdatererSporsmal || senderSoknad} />}

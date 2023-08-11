@@ -20,7 +20,7 @@ export function useOppdaterSporsmal(props: OppdaterSporsmalProps) {
     const { soknad, spmIndex } = props
     const queryClient = useQueryClient()
 
-    return useMutation<RSOppdaterSporsmalResponse, unknown, OppdaterSporsmalVariables>({
+    return useMutation<RSOppdaterSporsmalResponse, any, OppdaterSporsmalVariables>({
         mutationFn: async (variables) => {
             return fetchJsonMedRequestId(
                 `/syk/sykepengesoknad/api/sykepengesoknad-backend/api/v2/soknader/${soknad.id}/sporsmal/${variables.sporsmal.id}`,

@@ -5,24 +5,22 @@ import { tekst } from '../../utils/tekster'
 
 export function FeilStateView() {
     return (
-        <div className="bg-white">
-            <div aria-live="polite">
-                <Alert variant="error">
-                    <Heading level="1" size="small">
-                        {tekst('feilstate.tittel')}
-                    </Heading>
-                    <BodyShort>{tekst('feilstate.alert')}</BodyShort>
-                </Alert>
-            </div>
-            <div className="flex justify-center">
+        <div aria-live="polite">
+            <Alert variant="error" className="mt-4">
+                <Heading level="1" size="small">
+                    {tekst('feilstate.tittel')}
+                </Heading>
+                <BodyShort>{tekst('feilstate.alert')}</BodyShort>
                 <Button
-                    className="mt-4"
+                    className="mt-4 bg-white"
                     variant="secondary"
+                    type="button"
+                    size="small"
                     onClick={() => (window.location.href = '/syk/sykepengesoknad')}
                 >
                     {tekst('feilstate.refresh')}
                 </Button>
-            </div>
+            </Alert>
         </div>
     )
 }
