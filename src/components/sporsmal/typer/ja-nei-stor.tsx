@@ -29,7 +29,6 @@ import { fetchJsonMedRequestId, AuthenticationError } from '../../../utils/fetch
 import { sporsmalToRS } from '../../../types/rs-types/rs-sporsmal'
 import { settSvar } from '../sett-svar'
 import { useLeggTilArbeid } from '../../../hooks/useLeggTilArbeid'
-import { UndersporsmalTekster } from '../undersporsmal/undersporsmal-tekster'
 
 const JaNeiStor = ({ sporsmal }: SpmProps) => {
     const {
@@ -49,7 +48,7 @@ const JaNeiStor = ({ sporsmal }: SpmProps) => {
         watchJaNei = getValues(sporsmal.id)
     }
 
-    const tagsMedKnapp = new Set([
+    const tagsMedKnapp: Set<TagTyper> = new Set([
         TagTyper.MEDLEMSKAP_OPPHOLD_UTENFOR_EOS,
         TagTyper.MEDLEMSKAP_OPPHOLD_UTENFOR_NORGE,
         TagTyper.MEDLEMSKAP_UTFORT_ARBEID_UTENFOR_NORGE,
@@ -215,7 +214,9 @@ const JaNeiStor = ({ sporsmal }: SpmProps) => {
                             hvis={undersporsmalMedLeggTilKnapp}
                             render={() => (
                                 <Label as="h2" className="mt-8">
-                                    Hei og hå spørsmål
+                                    {sporsmal.tag === TagTyper.MEDLEMSKAP_UTFORT_ARBEID_UTENFOR_NORGE
+                                        ? 'Hvor og når har du utført arbeid i utlandet?'
+                                        : 'Hvor og når har du oppholdt deg i utlandet?'}
                                 </Label>
                             )}
                         />
