@@ -18,7 +18,6 @@ import OpplysningerTekster from '../components/opplysninger-fra-sykmelding/opply
 import OpprettUtlandTekster from '../components/opprett-utland/opprett-utland-tekster'
 import OppsummeringTekster from '../components/oppsummering/oppsummering-tekster'
 import SoknadenTekster from '../components/soknad/soknaden-tekster'
-import PersonvernLesMerTekster from '../components/soknad-intro/personvern-les-mer-tekster'
 import ViktigInformasjonTekster from '../components/soknad-intro/viktig-informasjon-tekster'
 import SoknadMedToDelerTekster from '../components/soknad-med-to-deler/soknad-med-to-deler-tekster'
 import ListevisningTekster from '../components/listevisning/listevisning-tekster'
@@ -33,7 +32,6 @@ import EgenmeldingsdagerArbeidsgiverTekster from '../components/egenmeldingsdage
 const tekster = {
     ...OpplysningerTekster,
     ...KvitteringTekster,
-    ...PersonvernLesMerTekster,
     ...ListevisningTekster,
     ...BannerTekster,
     ...GuidepanelTekster,
