@@ -18,8 +18,8 @@ function DatoInput(props: SpmProps) {
     const finnMinOgMax = () => {
         if (!sporsmal.min && !sporsmal.max) {
             return {
-                fromDate: undefined,
-                toDate: undefined,
+                fromDate: dayjs('01.01.1900').toDate(),
+                toDate: dayjs('01.01.2100').toDate(),
             }
         }
         if (!sporsmal.min && sporsmal.max !== undefined) {
