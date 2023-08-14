@@ -19,13 +19,13 @@ const CheckboxInput = ({ sporsmal }: SpmProps) => {
                 defaultValue={false}
                 name={spm.id}
                 rules={{ required: feilmelding.global }}
-                render={({ field }) => (
+                render={({ field, fieldState }) => (
                     <ConfirmationPanel
                         {...field}
                         checked={field.value}
                         id={field.name}
                         label={spm.sporsmalstekst}
-                        error={feilmelding.lokal}
+                        error={fieldState.error && feilmelding.lokal}
                         data-cy="bekreftCheckboksPanel"
                     />
                 )}
