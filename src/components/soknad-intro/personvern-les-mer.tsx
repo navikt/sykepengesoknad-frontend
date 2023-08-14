@@ -1,4 +1,4 @@
-import { BodyLong, BodyShort, Button, List } from '@navikt/ds-react'
+import { BodyLong, BodyShort, Button, Label, List } from '@navikt/ds-react'
 import React, { MouseEvent, useState } from 'react'
 
 import { logEvent } from '../amplitude/amplitude'
@@ -30,26 +30,18 @@ export const PersonvernLesMer = ({ soknadstype }: PersonvernLesMerProps) => {
         })
     }
 
-    const ListItemMedBold = ({
-        tittel,
-        children,
-        classname,
-    }: {
-        tittel: string
-        children: string
-        classname?: string
-    }) => {
+    const ListItemMedBold = ({ tittel, children }: { tittel: string; children: string }) => {
         return (
-            <List.Item className={classname}>
+            <List.Item>
                 <BodyShort>
-                    <span className="font-bold">{tittel}</span>: {children}
+                    <Label as="span">{tittel}</Label>: {children}
                 </BodyShort>
             </List.Item>
         )
     }
-    const PlainListItem = ({ children, classname }: { children: string; classname?: string }) => {
+    const PlainListItem = ({ children }: { children: string; classname?: string }) => {
         return (
-            <List.Item className={classname}>
+            <List.Item>
                 <BodyShort>{children}</BodyShort>
             </List.Item>
         )
@@ -93,8 +85,11 @@ export const PersonvernLesMer = ({ soknadstype }: PersonvernLesMerProps) => {
                     beslutninger som krever menneskelig skjønn, med mindre resultatet er veldig åpenbart og lett å
                     forstå.
                 </BodyLong>
-                <List as="ul" title="Automatisk behandling baserer seg på disse opplysningene:" headingTag="h2">
-                    <ListItemMedBold tittel="Folkeregisteret" classname="pt-4">
+                <Label spacing as="p">
+                    Automatisk behandling baserer seg på disse opplysningene:
+                </Label>
+                <List as="ul">
+                    <ListItemMedBold tittel="Folkeregisteret">
                         navn, fødselsnummer, adresse, familie o.l.
                     </ListItemMedBold>
                     <ListItemMedBold tittel="Arbeidstaker- arbeidsgiver-, Enhets-, og aksjonærregisteret">
@@ -108,25 +103,23 @@ export const PersonvernLesMer = ({ soknadstype }: PersonvernLesMerProps) => {
                     <ListItemMedBold tittel="Andre land">trygdeordninger du kan ha rett til</ListItemMedBold>
                 </List>
 
-                <List
-                    as="ul"
-                    title="For at en sak skal kunne håndteres automatisk, trenger NAV følgende tre dokumenter:"
-                    headingTag="h2"
-                >
-                    <PlainListItem classname="pt-4">
+                <Label spacing as="p">
+                    For at en sak skal kunne håndteres automatisk, trenger NAV følgende tre dokumenter:
+                </Label>
+                <List as="ul">
+                    <PlainListItem>
                         Sykmelding fra legen din som inneholder informasjon om hvor mye du ikke kan jobbe, hvor lenge du
                         trenger å være borte fra jobben og hvorfor, samt en diagnose som viser hva som er galt.
                     </PlainListItem>
                     <PlainListItem>Søknad om sykepenger fra deg</PlainListItem>
                     <PlainListItem>Inntektsmelding som oversendes fra arbeidsgiver</PlainListItem>
                 </List>
+                <Label spacing as="p">
+                    Når disse tre dokumentene er mottatt vurderer saksbehandlingsmaskinen følgende:
+                </Label>
 
-                <List
-                    as="ul"
-                    title="Når disse tre dokumentene er mottatt vurderer saksbehandlingsmaskinen følgende:"
-                    headingTag="h2"
-                >
-                    <PlainListItem classname="pt-4">
+                <List as="ul">
+                    <PlainListItem>
                         Om krav til minste inntektsgrunnlag er oppfylt (jf. Folketrygdloven § 8-3.) Kravet er som
                         hovedregel at du har et sykepengegrunnlag tilsvarende minst et halvt grunnbeløp.
                     </PlainListItem>
@@ -137,7 +130,7 @@ export const PersonvernLesMer = ({ soknadstype }: PersonvernLesMerProps) => {
                     <PlainListItem>
                         Om det er mer enn 25 prosent avvik mellom innrapportert inntekt i a-ordningen og inntekt oppgitt
                         i inntektsmelding fra arbeidsgiver. (jf. Folketrygdloven § 8-30.) Dette er en del av beregning
-                        av hva sykegrunnlaget skal være når NAV betaler sykepenger. (lenke til §8-30)
+                        av hva sykegrunnlaget skal være når NAV betaler sykepenger.
                     </PlainListItem>
                     <PlainListItem>
                         Om det mottas andre trygdeytelser, som omsorgspenger, foreldrepenger, opplæringspenger,
@@ -164,10 +157,12 @@ export const PersonvernLesMer = ({ soknadstype }: PersonvernLesMerProps) => {
                     <LenkeMedIkon href="https://nav.no/syk/sykepenger" text="nav.no/syk/sykepenger" />.
                 </BodyLong>
 
-                {/*   TODO skal denne virkerlig bort <BodyLong spacing>Vi kan også sende opplysninger om deg til trygdeordninger i andre land.</BodyLong> */}
+                <Label spacing as="p">
+                    Ved automatisering har du rett til:
+                </Label>
 
-                <List as="ul" title="Ved automatisering har du rett til:" headingTag="h2">
-                    <ListItemMedBold tittel="Rett til informasjon" classname="pt-4">
+                <List as="ul">
+                    <ListItemMedBold tittel="Rett til informasjon">
                         Som sykemeldt har du rett til å få tilstrekkelig informasjon om automatiseringssystemet som
                         brukes til å behandle søknaden. Dette omfatter hvordan systemet fungerer, hvilke kriterier som
                         brukes for å vurdere søknaden, og hvilken rolle automatisering spiller i beslutningsprosessen.
@@ -188,6 +183,7 @@ export const PersonvernLesMer = ({ soknadstype }: PersonvernLesMerProps) => {
                         klager behandles manuelt i Arbeids- og velferdsetaten.
                     </ListItemMedBold>
                 </List>
+               <BodyLong spacing>Vi kan også sende opplysninger om deg til trygdeordninger i andre land.</BodyLong>
 
                 <BodyLong spacing>
                     Du kan lese mer om hvordan NAV behandler personopplysninger i Arbeids- og velferdsetatens
