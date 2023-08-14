@@ -25,7 +25,7 @@ const CheckboxInput = ({ sporsmal }: SpmProps) => {
                         checked={field.value}
                         id={field.name}
                         label={spm.sporsmalstekst}
-                        error={fieldState.error?.message}
+                        error={fieldState.error && feilmelding.lokal}
                         data-cy="bekreftCheckboksPanel"
                     />
                 )}

@@ -95,7 +95,7 @@ const FeilOppsummering = ({
         }
     }
     return (
-        <div aria-live="polite" role="alert" data-cy="feil-oppsumering">
+        <div aria-live="polite" role="alert">
             <Vis
                 hvis={antall > 0}
                 render={() => {
@@ -125,7 +125,13 @@ const FeilOppsummering = ({
                         ? 'Beklager, det oppstod en feil'
                         : 'Det er ' + antall + ' feil i skjemaet'
                     return (
-                        <ErrorSummary ref={oppsummering} size="medium" heading={heading} className="mt-8">
+                        <ErrorSummary
+                            ref={oppsummering}
+                            size="medium"
+                            heading={heading}
+                            className="mt-8"
+                            data-cy="feil-oppsumering"
+                        >
                             {elements}
                         </ErrorSummary>
                     )

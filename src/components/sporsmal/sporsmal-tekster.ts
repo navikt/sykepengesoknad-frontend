@@ -8,8 +8,6 @@ const SporsmalTekster = {
 
     'soknad.feilmelding.ANSVARSERKLARING':
         'Du må bekrefte at du har lest og forstått informasjonen før du kan gå videre',
-    'soknad.feilmelding.ANSVARSERKLARING.lokal':
-        'Du må bekrefte at du har lest og forstått informasjonen før du kan gå videre',
     'soknad.feilmelding.ANDRE_INNTEKTSKILDER': 'Du må svare på om du har andre inntektskilder eller arbeidsforhold',
     'soknad.feilmelding.ANDRE_INNTEKTSKILDER_V2': 'Du må svare på om du har andre inntektskilder eller arbeidsforhold',
     'soknad.feilmelding.ARBEID_UTENFOR_NORGE.lokal': 'Du må svare på om du har jobbet utenfor Norge',
@@ -18,11 +16,7 @@ const SporsmalTekster = {
         'Du må svare på om du har arbeidet i utlandet i løpet av de siste 12 månedene.',
     'soknad.feilmelding.BEKREFT_OPPLYSNINGER':
         'Du må bekrefte at du har lest informasjonen du har fått i søknaden og at opplysningene du har gitt er korrekte.',
-    'soknad.feilmelding.BEKREFT_OPPLYSNINGER.lokal':
-        'Du må bekrefte at du har lest informasjonen du har fått i søknaden og at opplysningene du har gitt er korrekte.',
     'soknad.feilmelding.BEKREFT_OPPLYSNINGER_UTLAND':
-        'Du må bekrefte at du oppfyller punktene over for å søke om å beholde sykepenger utenfor EØS',
-    'soknad.feilmelding.BEKREFT_OPPLYSNINGER_UTLAND.lokal':
         'Du må bekrefte at du oppfyller punktene over for å søke om å beholde sykepenger utenfor EØS',
     'soknad.feilmelding.BETALER_ARBEIDSGIVER': 'Du må svare på om arbeidsgiveren betaler lønnen din når du er syk',
     'soknad.feilmelding.FRAVER_FOR_BEHANDLING':

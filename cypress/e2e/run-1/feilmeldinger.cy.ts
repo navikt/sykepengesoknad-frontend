@@ -54,6 +54,9 @@ describe('Tester feilmeldinger', () => {
 
     function ingenFeilmeldinger() {
         cy.get('.skjemaelement__input--harFeil').should('not.exist')
+        cy.get('.navds-error-message').should('not.exist')
+        cy.get('[data-cy="feil-lokal"]').should('not.exist')
+        cy.get('[data-cy="feil-oppsumering"]').should('not.exist')
     }
 
     function resetAllePeriodeDateFelter() {
@@ -75,9 +78,7 @@ describe('Tester feilmeldinger', () => {
         gaVidere()
 
         cy.get('.navds-confirmation-panel__inner').should('exist')
-        cy.get('.navds-error-message').contains(
-            'Du må bekrefte at du har lest og forstått informasjonen før du kan gå videre',
-        )
+        cy.get('.navds-error-message').contains('Du må bekrefte dette')
         cy.get('[data-cy="feil-oppsumering"]')
             .should('exist')
             .within(() => {
