@@ -3,7 +3,6 @@ import { Controller, useFormContext } from 'react-hook-form'
 import React from 'react'
 import { useRouter } from 'next/router'
 import { PlusIcon } from '@navikt/aksel-icons'
-import { logger } from '@navikt/next-logger'
 
 import { TagTyper } from '../../../types/enums'
 import { getLedetekst, tekst } from '../../../utils/tekster'
@@ -25,10 +24,9 @@ import { YrkesskadeInfo } from '../../hjelpetekster/yrkesskade-info'
 import { useJaNeiKeyboardNavigation } from '../../../utils/keyboard-navigation'
 import { Inntektsbulletpoints } from '../inntektsbulletpoints'
 import { Yrkesskadebulletpoints } from '../yrkesskade-bulletpoints'
-import { fetchJsonMedRequestId, AuthenticationError } from '../../../utils/fetch'
-import { sporsmalToRS } from '../../../types/rs-types/rs-sporsmal'
 import { settSvar } from '../sett-svar'
 import { useLeggTilArbeid } from '../../../hooks/useLeggTilArbeid'
+import { useOppdaterSporsmal } from '../../../hooks/useOppdaterSporsmal'
 
 const JaNeiStor = ({ sporsmal }: SpmProps) => {
     const {
@@ -38,9 +36,17 @@ const JaNeiStor = ({ sporsmal }: SpmProps) => {
         getValues,
     } = useFormContext()
     const router = useRouter()
-    const { id } = router.query as { id: string }
+    const { id, stegId } = router.query as { id: string; stegId: string }
+
+    const stegNo = parseInt(stegId!)
+    const spmIndex = stegNo - 1
+
     const { data: valgtSoknad } = useSoknad(id)
     const { mutate: leggTilNyttUndersporsmal } = useLeggTilArbeid()
+    const { mutate: oppdaterSporsmal } = useOppdaterSporsmal({
+        soknad: valgtSoknad!,
+        spmIndex: spmIndex,
+    })
 
     const feilmelding = hentFeilmelding(sporsmal, errors[sporsmal.id])
     let watchJaNei = watch(sporsmal.id)
@@ -55,42 +61,17 @@ const JaNeiStor = ({ sporsmal }: SpmProps) => {
     ])
 
     const undersporsmalMedLeggTilKnapp = tagsMedKnapp.has(sporsmal.tag)
-    const sendOppdaterSporsmal = async (): Promise<boolean> => {
-        let fikk400 = false
-        try {
-            await fetchJsonMedRequestId(
-                `/syk/sykepengesoknad/api/sykepengesoknad-backend/api/v2/soknader/${valgtSoknad!.id}/sporsmal/${
-                    sporsmal.id
-                }`,
-                {
-                    method: 'PUT',
-                    credentials: 'include',
-                    body: JSON.stringify(sporsmalToRS(sporsmal)),
-                    headers: { 'Content-Type': 'application/json' },
-                },
-                (response, requestId, defaultErrorHandler) => {
-                    if (response.status === 400) {
-                        fikk400 = true
-                        router.push('/feil-state')
-                    }
-                    defaultErrorHandler()
-                },
-            )
-        } catch (e: any) {
-            if (!(e instanceof AuthenticationError)) {
-                logger.warn(e)
-            }
-            return false
-        }
-        return !fikk400
-    }
     const leggTilArbeid = async (e: any) => {
         e.preventDefault()
-        settSvar(sporsmal, getValues())
-        await sendOppdaterSporsmal()
-        leggTilNyttUndersporsmal({
-            soknadId: valgtSoknad!.id,
-            sporsmalId: sporsmal.id,
+        const svar = settSvar(sporsmal, getValues())
+        oppdaterSporsmal({
+            sporsmal: svar,
+            onSuccess: () => {
+                leggTilNyttUndersporsmal({
+                    soknadId: valgtSoknad!.id,
+                    sporsmalId: sporsmal.id,
+                })
+            },
         })
     }
 
@@ -225,6 +206,7 @@ const JaNeiStor = ({ sporsmal }: SpmProps) => {
                         {undersporsmalMedLeggTilKnapp && (
                             <Button
                                 icon={<PlusIcon />}
+                                type="button"
                                 size="small"
                                 variant="tertiary"
                                 className="mt-8"
