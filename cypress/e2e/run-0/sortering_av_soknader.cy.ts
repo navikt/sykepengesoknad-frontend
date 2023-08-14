@@ -1,17 +1,25 @@
 import { Soknad } from '../../../src/types/types'
-import { getFomFraSoknad, senesteSendtDato } from '../../../src/utils/sorter-soknader'
 import { soknaderIntegration, soknaderOpplaering } from '../../../src/data/mock/personas'
+import { rsToSoknad } from '../../../src/types/mapping'
 
 const articleTilSoknad = (articles: any) => {
     const soknader: Soknad[] = []
     articles.map((idx: any) => {
         const id = articles[idx].attributes['data-cy']?.value.split('-listevisning-')[1]
         const rsSoknad = soknaderIntegration.find((s) => s.id === id) || soknaderOpplaering.find((s) => s.id === id)
-        if (rsSoknad) soknader.push(new Soknad(rsSoknad))
+        if (rsSoknad) soknader.push(rsToSoknad(rsSoknad))
     })
     return soknader
 }
+const getFomFraSoknad = (soknad: Soknad): Date => {
+    return soknad.fom! || soknad.opprettetDato
+}
 
+const senesteSendtDato = (soknad: Soknad) => {
+    const arb = soknad.sendtTilArbeidsgiverDato?.getTime() || 0
+    const nav = soknad.sendtTilNAVDato?.getTime() || 0
+    return arb > nav ? arb : nav
+}
 describe('Tester sortering av søknader', () => {
     it('Laster startside', function () {
         cy.visit('/syk/sykepengesoknad?testperson=alle-soknader')

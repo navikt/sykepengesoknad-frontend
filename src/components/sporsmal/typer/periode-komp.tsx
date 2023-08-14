@@ -1,4 +1,4 @@
-import { BodyShort, RangeValidationT, DatePicker, useRangeDatepicker, Button } from '@navikt/ds-react'
+import { BodyShort, Button, DatePicker, RangeValidationT, useRangeDatepicker } from '@navikt/ds-react'
 import dayjs from 'dayjs'
 import React, { useEffect, useState } from 'react'
 import { Controller, useFormContext } from 'react-hook-form'

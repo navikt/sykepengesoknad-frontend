@@ -24,7 +24,7 @@ export interface OppsummeringProps {
     sporsmal: Sporsmal
 }
 
-const Oppsummering = ({ ekspandert, sporsmal }: { ekspandert: boolean; sporsmal: Sporsmal[] }) => {
+const Oppsummering = ({ ekspandert, sporsmal }: { ekspandert: boolean; sporsmal: ReadonlyArray<Sporsmal> }) => {
     const tittel = tekst('sykepengesoknad.oppsummering.tittel')
     const [erApen, setErApen] = useState<boolean>(ekspandert)
 

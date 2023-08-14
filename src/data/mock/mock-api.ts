@@ -32,6 +32,7 @@ import {
     arbeidstakerUtenOppholdForsteUtenforArbeidsgiverperiodeKvittering,
     foranArbeidstakerMedOppholdKvittering,
     sok6,
+    soknadSomTrigger401ForOppdaterSporsmal,
     soknadSomTriggerFeilStatusForOppdaterSporsmal,
     soknadSomTriggerSporsmalFinnesIkkeISoknad,
 } from './data/soknader-integration'
@@ -235,6 +236,9 @@ export async function mockApi(req: NextApiRequest, res: NextApiResponse) {
                     },
                     400,
                 )
+            }
+            if (soknadId === soknadSomTrigger401ForOppdaterSporsmal.id) {
+                return sendJson({}, 401)
             }
             const body = await parseRequest<RSSporsmal>(req)
 

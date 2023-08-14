@@ -1,6 +1,5 @@
 import { RSSvar } from './rs-svar'
 
 export interface RSSvarliste {
-    sporsmalId: string
-    svar: RSSvar[]
+    svar: ReadonlyArray<RSSvar>
 }

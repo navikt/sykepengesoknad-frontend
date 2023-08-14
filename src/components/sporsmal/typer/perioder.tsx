@@ -1,4 +1,4 @@
-import { Label, Button } from '@navikt/ds-react'
+import { Button, Label } from '@navikt/ds-react'
 import React, { useEffect, useRef, useState } from 'react'
 import { useFormContext } from 'react-hook-form'
 import useForceUpdate from 'use-force-update'

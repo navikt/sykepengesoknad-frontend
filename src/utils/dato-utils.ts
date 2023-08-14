@@ -1,6 +1,7 @@
 import dayjs from 'dayjs'
 
 import { Sporsmal } from '../types/types'
+
 export const fraInputdatoTilJSDato = (inputDato: any) => {
     const datoSplit = inputDato.split('.')
     let ar = datoSplit[2]

@@ -54,7 +54,7 @@ function harLikeSvarPaUnderSporsmal(a: Sporsmal, b: Sporsmal) {
     return true
 }
 
-function svarErLike(a: RSSvar[], b: RSSvar[]) {
+function svarErLike(a: ReadonlyArray<RSSvar>, b: ReadonlyArray<RSSvar>) {
     const predicate = (a: RSSvar) => {
         return a.verdi
     }

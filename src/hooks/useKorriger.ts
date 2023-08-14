@@ -4,8 +4,8 @@ import { useRouter } from 'next/router'
 
 import { AuthenticationError, FetchError, fetchJsonMedRequestId } from '../utils/fetch'
 import { urlTilSoknad } from '../components/soknad/soknad-link'
-import { Soknad } from '../types/types'
 import { RSSoknad } from '../types/rs-types/rs-soknad'
+import { rsToSoknad } from '../types/mapping'
 
 interface KorrigeringProp {
     id: string
@@ -28,7 +28,7 @@ export function useKorriger() {
             )
         },
         onSuccess: async (data, variables) => {
-            const soknad = new Soknad(data as RSSoknad)
+            const soknad = rsToSoknad(data as RSSoknad)
             queryClient.setQueriesData(['soknad', soknad.id], soknad)
             queryClient.invalidateQueries(['soknader']).catch()
             variables.onSuccess()

@@ -4,13 +4,13 @@ import React, { useState } from 'react'
 import { useQueryClient } from '@tanstack/react-query'
 import { useRouter } from 'next/router'
 
-import { Soknad } from '../../types/types'
 import { AuthenticationError, fetchJsonMedRequestId } from '../../utils/fetch'
 import { tekst } from '../../utils/tekster'
 import { urlTilSoknad } from '../soknad/soknad-link'
 import Vis from '../vis'
 import { useUpdateBreadcrumbs } from '../../hooks/useBreadcrumbs'
 import { LenkeMedIkon } from '../lenke-med-ikon/LenkeMedIkon'
+import { rsToSoknad } from '../../types/mapping'
 
 const OpprettUtland = () => {
     const queryClient = useQueryClient()
@@ -40,7 +40,7 @@ const OpprettUtland = () => {
             setFeilmeldingTekst('')
         }
 
-        const soknad = new Soknad(data)
+        const soknad = rsToSoknad(data)
         queryClient.setQueriesData(['soknad', soknad.id], soknad)
         queryClient.invalidateQueries(['soknader'])
         router.push(urlTilSoknad(soknad))

@@ -5,7 +5,7 @@ import { logger } from '@navikt/next-logger'
 import { useRouter } from 'next/router'
 import { DependencyList, useCallback, useEffect, useRef } from 'react'
 
-import { minSideUrl, basePath, sykefravaerUrl } from '../utils/environment'
+import { basePath, minSideUrl, sykefravaerUrl } from '../utils/environment'
 import { tekst } from '../utils/tekster'
 
 type Breadcrumb = { title: string; url: string }

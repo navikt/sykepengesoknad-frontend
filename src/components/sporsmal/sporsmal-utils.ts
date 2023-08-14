@@ -41,7 +41,7 @@ export const fjernIndexFraTag = (tag: TagTyper): TagTyper => {
     return TagTyper[stringtag as keyof typeof TagTyper]
 }
 
-export const sporsmalIdListe = (sporsmal: Sporsmal[]) => {
+export const sporsmalIdListe = (sporsmal: ReadonlyArray<Sporsmal>) => {
     let svar: any = []
     sporsmal.forEach((spm) => {
         svar.push(spm.id)
