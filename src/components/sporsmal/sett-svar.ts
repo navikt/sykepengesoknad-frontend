@@ -56,7 +56,7 @@ export const settSvar = (sporsmal: Sporsmal, verdier: Record<string, any>): Spor
         case RSSvartype.RADIO:
         case RSSvartype.CHECKBOX: {
             const undersporsmal: ReadonlyArray<Sporsmal> = sporsmal.undersporsmal.map((spm) => settSvar(spm, verdier))
-            // svarliste settes i gruppe fro radio og checkbox
+            // svarliste settes i gruppe fra radio og checkbox
             return sporsmal.copyWith({ undersporsmal: undersporsmal })
         }
 

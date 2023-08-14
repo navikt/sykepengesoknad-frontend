@@ -139,7 +139,6 @@ const SporsmalForm = ({ valgtSoknad, spmIndex, sporsmal }: SpmFormProps) => {
             oppdaterSporsmalMutation({
                 sporsmal: oppdatertSporsmalMedSvar(),
                 onSuccess: () => onSuccessLogic(erSiste),
-                //TODO trenger jeg noe her   onError: reject, // Avviser promise dersom mutation feiler
             })
         })
     }
