@@ -167,10 +167,11 @@ describe('Tester arbeidstakersøknad - gradert 50%', () => {
 
     it('Søknad ANSVARSERKLARING ', function () {
         cy.url().should('include', `${soknad.id}/10`)
-        cy.get('.navds-checkbox__label').click()
+        cy.contains('Til slutt')
         cy.contains(
             'Jeg har lest all informasjonen jeg har fått i søknaden og bekrefter at opplysningene jeg har gitt er korrekte.',
         )
+        cy.get('.navds-checkbox__label').click()
         cy.contains('Søknaden sendes til Posten Norge AS, Bærum med kopi til NAV.')
 
         cy.contains('Send søknaden').click()

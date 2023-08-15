@@ -1,4 +1,7 @@
 export const inlineForklaringer = () => {
+    // TODO fix at vi ikke har state i kvittering komponenten
+    // eslint-disable-next-line cypress/no-unnecessary-waiting
+    cy.wait(1000)
     cy.findByRole('button', { name: '16 kalenderdager' }).click()
     cy.findByRole('dialog', { name: 'Hvorfor går det et skille ved 16 dager?' })
         .should('contain', 'Hvorfor går det et skille ved 16 dager?')
