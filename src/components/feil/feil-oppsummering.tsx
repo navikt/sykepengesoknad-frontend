@@ -33,7 +33,8 @@ const FeilOppsummering = ({
         // eslint-disable-next-line
     }, [formState])
 
-    const handleClick = (list: any) => {
+    const handleClick = (e: any, list: any) => {
+        e.preventDefault()
         const id = `${list[0]}`
         const idarr = id.split('_')
 
@@ -78,7 +79,7 @@ const FeilOppsummering = ({
 
     const handleKeyDown = (e: any, list: any) => {
         if (e.key === 'Enter') {
-            handleClick(list)
+            handleClick(e, list)
         }
     }
 
@@ -103,11 +104,10 @@ const FeilOppsummering = ({
                         .sort((list) => list[0][0])
                         .map((list) => (
                             <ErrorSummary.Item
-                                href="#"
                                 key={list[1].message}
                                 tabIndex={0}
                                 onKeyDown={(e) => handleKeyDown(e, list)}
-                                onClick={() => handleClick(list)}
+                                onClick={(e) => handleClick(e, list)}
                             >
                                 {list[1].message}
                             </ErrorSummary.Item>
