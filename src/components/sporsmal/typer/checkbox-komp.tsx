@@ -48,7 +48,7 @@ const CheckboxKomp = ({ sporsmal }: SpmProps) => {
                     error={errors[sporsmal.id] !== undefined && feilmelding.lokal}
                     className="mt-8"
                 >
-                    <div className="flex max-w-sm gap-4 rounded-lg bg-gray-50 p-4 py-6">
+                    <div className="mt-8 flex max-w-sm gap-4 rounded-lg bg-gray-50 p-4 py-6">
                         <InformationIcon
                             title="informasjon"
                             className="m-width-[37px] m-height-[37px] flex-shrink-0 rounded-full bg-gray-200 text-xl font-bold"
@@ -60,29 +60,30 @@ const CheckboxKomp = ({ sporsmal }: SpmProps) => {
                             arbeidsgiver
                         </BodyShort>
                     </div>
-
-                    {sporsmal.undersporsmal.map((uspm) => (
-                        <Fragment key={uspm.id + '_fragment'}>
-                            <div className="flex items-center gap-4">
-                                <Checkbox id={uspm.id} value={uspm.sporsmalstekst}>
-                                    <BodyShort
-                                        className={watchCheckbox?.includes(uspm.sporsmalstekst) ? 'font-bold' : ''}
-                                    >
-                                        {uspm.sporsmalstekst}
-                                    </BodyShort>
-                                </Checkbox>
-                            </div>
-                            <Vis
-                                hvis={watchCheckbox?.includes(uspm.sporsmalstekst) && uspm.undersporsmal.length > 0}
-                                render={() => (
-                                    <div aria-live="assertive" className="my-4">
-                                        {ForklaringAvValgtCheckbox(uspm)}
-                                        <UndersporsmalListe oversporsmal={uspm} oversporsmalSvar="CHECKED" />
-                                    </div>
-                                )}
-                            />
-                        </Fragment>
-                    ))}
+                    <div className="mt-8">
+                        {sporsmal.undersporsmal.map((uspm) => (
+                            <Fragment key={uspm.id + '_fragment'}>
+                                <div className="flex items-center gap-4">
+                                    <Checkbox id={uspm.id} value={uspm.sporsmalstekst}>
+                                        <BodyShort
+                                            className={watchCheckbox?.includes(uspm.sporsmalstekst) ? 'font-bold' : ''}
+                                        >
+                                            {uspm.sporsmalstekst}
+                                        </BodyShort>
+                                    </Checkbox>
+                                </div>
+                                <Vis
+                                    hvis={watchCheckbox?.includes(uspm.sporsmalstekst) && uspm.undersporsmal.length > 0}
+                                    render={() => (
+                                        <div aria-live="assertive" className="my-4">
+                                            {ForklaringAvValgtCheckbox(uspm)}
+                                            <UndersporsmalListe oversporsmal={uspm} oversporsmalSvar="CHECKED" />
+                                        </div>
+                                    )}
+                                />
+                            </Fragment>
+                        ))}
+                    </div>
                 </CheckboxGroup>
             )}
         />
