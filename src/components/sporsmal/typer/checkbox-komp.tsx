@@ -42,11 +42,10 @@ const CheckboxKomp = ({ sporsmal }: SpmProps) => {
             rules={{ required: feilmelding.global }}
             render={({ field }) => (
                 <>
-
                     <div className="mt-4 flex max-w-sm gap-4 rounded-lg py-6">
                         <InformationIcon
                             title="informasjon"
-                            className="flex-shrink-0 rounded-full bg-gray-200 text-sm font-bold p-2"
+                            className="flex-shrink-0 rounded-full bg-gray-200 p-2 text-sm font-bold"
                             height={37}
                             width={37}
                         />
@@ -56,14 +55,13 @@ const CheckboxKomp = ({ sporsmal }: SpmProps) => {
                         </BodyShort>
                     </div>
 
-                <CheckboxGroup
-                    {...field}
-                    legend={sporsmal.sporsmalstekst}
-                    description={sporsmal.undertekst}
-                    error={errors[sporsmal.id] !== undefined && feilmelding.lokal}
-                    className="mt-4"
-                >
-
+                    <CheckboxGroup
+                        {...field}
+                        legend={sporsmal.sporsmalstekst}
+                        description={sporsmal.undertekst}
+                        error={errors[sporsmal.id] !== undefined && feilmelding.lokal}
+                        className="mt-4"
+                    >
                         {sporsmal.undersporsmal.map((uspm) => (
                             <Fragment key={uspm.id + '_fragment'}>
                                 <div className="flex items-center gap-4">
@@ -86,7 +84,7 @@ const CheckboxKomp = ({ sporsmal }: SpmProps) => {
                                 />
                             </Fragment>
                         ))}
-                </CheckboxGroup>
+                    </CheckboxGroup>
                 </>
             )}
         />
