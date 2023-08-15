@@ -46,7 +46,7 @@ const FeilOppsummering = ({
         let elmid
         if (id.includes('_')) {
             if (list[1].type === 'periode') {
-                elmid = id + '_fom'
+                elmid = id + '_tom'
             } else {
                 elmid = id + '_' + list[1].type
             }
@@ -104,7 +104,6 @@ const FeilOppsummering = ({
                         .sort((list) => list[0][0])
                         .map((list) => (
                             <ErrorSummary.Item
-                                href="#"
                                 key={list[1].message}
                                 tabIndex={0}
                                 onKeyDown={(e) => handleKeyDown(e, list)}
