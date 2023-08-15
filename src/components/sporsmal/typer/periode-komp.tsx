@@ -42,7 +42,7 @@ const PeriodeKomp = ({ sporsmal, index, slettPeriode }: AllProps) => {
 
     const { datepickerProps, toInputProps, fromInputProps } = useRangeDatepicker({
         fromDate: sporsmal.min ? new Date(sporsmal.min) : new Date('1900'),
-        toDate: sporsmal.max ? new Date(sporsmal.max) : new Date(),
+        toDate: sporsmal.max ? new Date(sporsmal.max) : new Date('2100'),
         defaultMonth: sporsmal.max ? new Date(sporsmal.max) : new Date(),
         onRangeChange: (range) => {
             const fom = range?.from ? dayjs(range?.from).format('YYYY-MM-DD') : ''
@@ -61,6 +61,7 @@ const PeriodeKomp = ({ sporsmal, index, slettPeriode }: AllProps) => {
         },
     })
 
+    const captionSkalVises = !sporsmal.max && !sporsmal.min
     const backendStrengTilFrontendFormat = (backendDate: string) => {
         return dayjs(backendDate).format('DD.MM.YYYY')
     }
@@ -107,7 +108,7 @@ const PeriodeKomp = ({ sporsmal, index, slettPeriode }: AllProps) => {
                     render={() => (
                         <div>
                             <fieldset className="axe-exclude p-0">
-                                <DatePicker {...datepickerProps}>
+                                <DatePicker {...datepickerProps} dropdownCaption={captionSkalVises}>
                                     <div>
                                         <DatePicker.Input
                                             {...fromInputProps}
