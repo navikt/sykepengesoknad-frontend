@@ -50,7 +50,7 @@ const CheckboxKomp = ({ sporsmal }: SpmProps) => {
                             width={37}
                         />
                         <BodyShort size="small">
-                            Informasjon om andre arbeidsforhold blir behandlet konfidensielt, og blir ikke delt med
+                            Informasjon om andre inntektskilder blir behandlet konfidensielt, og blir ikke delt med
                             arbeidsgiver
                         </BodyShort>
                     </div>
