@@ -4,6 +4,7 @@ describe('Tester endring uten en endringer', () => {
     const soknad = sendtArbeidsledigKvittering
 
     before(() => {
+        cy.clearCookies()
         cy.visit(`/syk/sykepengesoknad/sendt/${soknad.id}?testperson=alle-soknader`)
     })
 
@@ -20,21 +21,22 @@ describe('Tester endring uten en endringer', () => {
     it('Svarer det samme søknaden', function () {
         cy.contains('kan være straffbart').click()
         cy.contains('Gå videre').click()
+        cy.contains('Friskmeldt')
 
-        cy.url().should('include', '/2')
         cy.contains('Gå videre').click()
+        cy.contains('Andre inntektskilder')
 
         cy.contains('Avslutt uten å endre søknaden')
         cy.contains('Jeg vil ikke bruke denne søknaden').should('not.exist')
 
-        cy.url().should('include', '/3')
         cy.contains('Gå videre').click()
+        cy.contains('Reise')
 
-        cy.url().should('include', '/4')
         cy.contains('Gå videre').click()
+        cy.contains('Arbeid utenfor Norge')
 
-        cy.url().should('include', '/5')
         cy.contains('Gå videre').click()
+        cy.contains('Til slutt')
     })
 
     it('Vi ser en popup og lander på listevisninga', function () {
