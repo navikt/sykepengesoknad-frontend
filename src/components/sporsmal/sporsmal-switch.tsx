@@ -19,7 +19,7 @@ import UkjentSporsmal from './typer/ukjent-sporsmal'
 import { SpmProps } from './sporsmal-form/sporsmal-form'
 import { Fritekst } from './typer/fritekst'
 import RadioKomp from './typer/radio-komp'
-import Combobox from './typer/combobox'
+import ComboboxSingle from './typer/combobox-single'
 
 const SporsmalSwitch = ({ sporsmal }: SpmProps) => {
     switch (sporsmal.svartype) {
@@ -62,7 +62,7 @@ const SporsmalSwitch = ({ sporsmal }: SpmProps) => {
             return <RadioTimerProsent sporsmal={sporsmal} />
 
         case RSSvartype.COMBOBOX_SINGLE:
-            return <Combobox sporsmal={sporsmal} />
+            return <ComboboxSingle sporsmal={sporsmal} />
 
         case RSSvartype.INFO_BEHANDLINGSDAGER:
             return <BehDager sporsmal={sporsmal} />
