@@ -71,30 +71,35 @@ const CheckboxKomp = ({ sporsmal }: SpmProps) => {
                         legend={sporsmal.sporsmalstekst}
                         description={sporsmal.undertekst}
                         error={errors[sporsmal.id] !== undefined && feilmelding.lokal}
-                        className="mt-4"
+                        className="mt-4 space-y-2"
                     >
-                        {sporsmal.undersporsmal.map((uspm) => (
-                            <Fragment key={uspm.id + '_fragment'}>
-                                <div className="flex items-center gap-4">
-                                    <Checkbox id={uspm.id} value={uspm.sporsmalstekst}>
-                                        <BodyShort
-                                            className={watchCheckbox?.includes(uspm.sporsmalstekst) ? 'font-bold' : ''}
-                                        >
-                                            {uspm.sporsmalstekst}
-                                        </BodyShort>
-                                    </Checkbox>
-                                </div>
-                                <Vis
-                                    hvis={watchCheckbox?.includes(uspm.sporsmalstekst) && uspm.undersporsmal.length > 0}
-                                    render={() => (
-                                        <div aria-live="assertive" className="my-4">
-                                            {ForklaringAvValgtCheckbox(uspm)}
-                                            <UndersporsmalListe oversporsmal={uspm} oversporsmalSvar="CHECKED" />
-                                        </div>
-                                    )}
-                                />
-                            </Fragment>
-                        ))}
+                            {sporsmal.undersporsmal.map((uspm) => (
+                                <Fragment key={uspm.id + '_fragment'}>
+                                    <div className="bx-4 flex max-w-sm items-center gap-4 rounded-lg bg-gray-50">
+                                        <Checkbox id={uspm.id} value={uspm.sporsmalstekst} className="pl-3">
+                                            <BodyShort
+                                                className={
+                                                    watchCheckbox?.includes(uspm.sporsmalstekst) ? 'font-bold' : ''
+                                                }
+                                            >
+                                                {uspm.sporsmalstekst}
+                                            </BodyShort>
+                                        </Checkbox>
+                                    </div>
+                                    <Vis
+                                        hvis={
+                                            watchCheckbox?.includes(uspm.sporsmalstekst) &&
+                                            uspm.undersporsmal.length > 0
+                                        }
+                                        render={() => (
+                                            <div aria-live="assertive" className="my-4 pl-3">
+                                                {ForklaringAvValgtCheckbox(uspm)}
+                                                <UndersporsmalListe oversporsmal={uspm} oversporsmalSvar="CHECKED" />
+                                            </div>
+                                        )}
+                                    />
+                                </Fragment>
+                            ))}
                     </CheckboxGroup>
                 </>
             )}
