@@ -104,6 +104,7 @@ const FeilOppsummering = ({
                         .sort((list) => list[0][0])
                         .map((list) => (
                             <ErrorSummary.Item
+                                href="#"
                                 key={list[1].message}
                                 tabIndex={0}
                                 onKeyDown={(e) => handleKeyDown(e, list)}
