@@ -21,6 +21,15 @@ const ForklaringAvValgtCheckbox = (svaralternativ: Sporsmal) => {
         )
     }
 
+    if (svaralternativ.tag === TagTyper.INNTEKTSKILDE_ANDRE_ARBEIDSFORHOLD) {
+        return (
+            <BodyShort>
+                Dette betyr at du er ansatt hos en eller flere arbeidsgiverne som ikke er kjent for oss enda og derfor
+                ikke ligger i listen ovenfor.
+            </BodyShort>
+        )
+    }
+
     return <Fragment />
 }
 
