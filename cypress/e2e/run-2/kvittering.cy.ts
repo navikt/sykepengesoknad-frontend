@@ -268,7 +268,7 @@ describe('Tester kvittering', () => {
                 .and('contain', 'Før NAV kan behandle søknaden')
                 .and(
                     'contain',
-                    'Når sykefraværet ditt er lengre enn 16 kalenderdager, betyr det at du får sykepenger utbetalt av NAV. Noen arbeidsplasser fortsetter å utbetale sykepenger fra dag 17, men da får de penger tilbake fra NAV senere.  Arbeidsgiveren din må derfor sende oss inntektsmelding så fort som mulig.',
+                    'Når sykefraværet ditt er lengre enn 16 kalenderdager, betyr det at du får sykepenger utbetalt av NAV. Noen arbeidsplasser fortsetter å utbetale sykepenger fra dag 17, men da får de penger tilbake fra NAV senere. Arbeidsgiveren din må derfor sende oss inntektsmelding så fort som mulig.',
                 )
                 .and('contain', 'NAV behandler søknaden')
                 .and(
@@ -439,7 +439,7 @@ const over16dagerKvittering = () => {
         .and('contain', 'Før NAV kan behandle søknaden')
         .and(
             'contain',
-            'Når sykefraværet ditt er lengre enn 16 kalenderdager, betyr det at du får sykepenger utbetalt av NAV. Noen arbeidsplasser fortsetter å utbetale sykepenger fra dag 17, men da får de penger tilbake fra NAV senere.  Arbeidsgiveren din må derfor sende oss inntektsmelding så fort som mulig.',
+            'Når sykefraværet ditt er lengre enn 16 kalenderdager, betyr det at du får sykepenger utbetalt av NAV. Noen arbeidsplasser fortsetter å utbetale sykepenger fra dag 17, men da får de penger tilbake fra NAV senere. Arbeidsgiveren din må derfor sende oss inntektsmelding så fort som mulig.',
         )
         .and('contain', 'NAV behandler søknaden')
         .and(
