@@ -1,6 +1,7 @@
 import React from 'react'
 
 import { RSSvartype } from '../../types/rs-types/rs-svartype'
+import { Sporsmal } from '../../types/types'
 
 import BehDager from './typer/beh-dager'
 import CheckboxKomp from './typer/checkbox-komp'
@@ -16,12 +17,15 @@ import Perioder from './typer/perioder'
 import RadioTimerProsent from './typer/radio-timer-prosent'
 import TallKomp from './typer/tall-komp'
 import UkjentSporsmal from './typer/ukjent-sporsmal'
-import { SpmProps } from './sporsmal-form/sporsmal-form'
 import { Fritekst } from './typer/fritekst'
 import RadioKomp from './typer/radio-komp'
 import ComboboxSingle from './typer/combobox-single'
 
-const SporsmalSwitch = ({ sporsmal }: SpmProps) => {
+interface SporsmalSwitchProps {
+    sporsmal: Sporsmal
+    sporsmalIndex: number
+}
+const SporsmalSwitch = ({ sporsmal, sporsmalIndex }: SporsmalSwitchProps) => {
     switch (sporsmal.svartype) {
         case RSSvartype.CHECKBOX_PANEL:
             return <CheckboxPanel sporsmal={sporsmal} />
@@ -77,7 +81,7 @@ const SporsmalSwitch = ({ sporsmal }: SpmProps) => {
             return <Opplasting sporsmal={sporsmal} />
 
         case RSSvartype.IKKE_RELEVANT:
-            return <IkkeRelevant sporsmal={sporsmal} />
+            return <IkkeRelevant sporsmalIndex={sporsmalIndex} sporsmal={sporsmal} />
 
         default:
             return <UkjentSporsmal sporsmal={sporsmal} />
