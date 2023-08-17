@@ -258,41 +258,7 @@ describe('Tester kvittering', () => {
             cy.contains('Send søknaden til NAV').click()
             cy.contains('Jeg vil at søknaden skal behandles av NAV').should('not.exist')
 
-            // Sendt datoer
-            cy.get('[data-cy="sendt-nav"]')
-            cy.get('[data-cy="sendt-arbeidsgiver"]')
-
-            // Hva skjer videre
-            cy.get('[data-cy="kvittering"]')
-                .should('contain', 'Hva skjer videre?')
-                .and('contain', 'Før NAV kan behandle søknaden')
-                .and(
-                    'contain',
-                    'Når sykefraværet ditt er lengre enn 16 kalenderdager, betyr det at du får sykepenger utbetalt av NAV. Noen arbeidsplasser fortsetter å utbetale sykepenger fra dag 17, men da får de penger tilbake fra NAV senere. Arbeidsgiveren din må derfor sende oss inntektsmelding så fort som mulig.',
-                )
-                .and('contain', 'NAV behandler søknaden')
-                .and(
-                    'contain',
-                    'Saksbehandlingstiden regnes fra NAV har mottatt all nødvendig dokumentasjon. Etter dette må du regne med å vente minst fire uker før søknaden er behandlet. Sjekk saksbehandlingstidene',
-                )
-                .and('contain', 'Når blir pengene utbetalt')
-                .and(
-                    'contain',
-                    'Hvis du får sykepenger fra arbeidsgiveren din, vil du vanligvis få sykepenger til samme tid som du ellers får lønn.',
-                )
-                .and(
-                    'contain',
-                    'Hvis du får sykepenger utbetalt fra NAV, får du vanligvis utbetalt sykepengene enten innen den 25. i måneden, eller innen fem dager etter at vi har sendt deg svar på søknaden din. Hvis søknaden din gjelder dager i to ulike kalendermåneder, kan utbetalingen bli delt i to. Les mer om når du kan forvente å få pengene.',
-                )
-                .and('not.contain', 'Du får sykepengene fra arbeidsgiveren din')
-            inlineForklaringer()
-
-            // Behandlingstider lenke
-            cy.contains('Sjekk saksbehandlingstidene').should(
-                'have.attr',
-                'href',
-                'https://www.nav.no/saksbehandlingstider#sykepenger',
-            )
+            over16dagerKvittering()
         })
 
         it('Utenfor arbeidsgiverperiode', () => {
