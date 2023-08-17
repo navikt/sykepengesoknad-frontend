@@ -212,7 +212,9 @@ const JaNeiStor = ({ sporsmal }: SpmProps) => {
                                 className="mt-8"
                                 onClick={leggTilArbeid}
                             >
-                                Legg til ny arbeidsgiver
+                                {sporsmal.tag === TagTyper.MEDLEMSKAP_UTFORT_ARBEID_UTENFOR_NORGE
+                                    ? 'Legg til arbeid i utlandet'
+                                    : 'Legg til ny opphold'}
                             </Button>
                         )}
 
