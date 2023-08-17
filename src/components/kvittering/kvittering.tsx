@@ -17,26 +17,15 @@ const Kvittering = () => {
     const { id } = router.query as { id: string }
     const { data: valgtSoknad } = useSoknad(id)
 
-    const KvitteringType = () => {
-        if (
-            valgtSoknad!.soknadstype === RSSoknadstype.OPPHOLD_UTLAND ||
-            valgtSoknad!.soknadstype === RSSoknadstype.REISETILSKUDD
-        ) {
-            return <AlleAndre />
-        }
-        switch (valgtSoknad!.arbeidssituasjon) {
-            case RSArbeidssituasjon.ARBEIDSTAKER:
-                return <Arbeidstaker />
-            default:
-                return <AlleAndre />
-        }
-    }
-
     if (!valgtSoknad) return null
+
+    const arbeidstakerKvittering =
+        valgtSoknad.arbeidssituasjon === RSArbeidssituasjon.ARBEIDSTAKER &&
+        valgtSoknad.soknadstype !== RSSoknadstype.REISETILSKUDD
 
     return (
         <div data-cy="kvittering">
-            <KvitteringType />
+            {arbeidstakerKvittering ? <Arbeidstaker /> : <AlleAndre />}
 
             <Oppsummering
                 ekspandert={sendtForMerEnn30DagerSiden(
