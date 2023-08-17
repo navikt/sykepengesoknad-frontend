@@ -1,5 +1,6 @@
 import { BodyLong, Label, Button } from '@navikt/ds-react'
 import React from 'react'
+import { TrashIcon } from '@navikt/aksel-icons'
 
 import { parserWithReplace } from '../../../utils/html-react-parser-utils'
 import { TagTyper } from '../../../types/enums'
@@ -29,6 +30,9 @@ const IkkeRelevant = ({ sporsmal, sporsmalIndex }: IkkeRelevantProps) => {
                     hvis={sporsmalIndex}
                     render={() => (
                         <Button
+                            size="small"
+                            icon={<TrashIcon />}
+                            variant="danger"
                             className="mt-4"
                             onClick={(e) => {
                                 e.preventDefault()
