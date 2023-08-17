@@ -1,10 +1,11 @@
-import { BodyLong, Label } from '@navikt/ds-react'
+import { BodyLong, Label, Button } from '@navikt/ds-react'
 import React from 'react'
 
 import { parserWithReplace } from '../../../utils/html-react-parser-utils'
 import { TagTyper } from '../../../types/enums'
 import UndersporsmalListe from '../undersporsmal/undersporsmal-liste'
 import { Sporsmal } from '../../../types/types'
+import Vis from '../../vis'
 
 interface IkkeRelevantProps {
     sporsmal: Sporsmal
@@ -24,6 +25,19 @@ const IkkeRelevant = ({ sporsmal, sporsmalIndex }: IkkeRelevantProps) => {
                 aria-live="assertive"
             >
                 <UndersporsmalListe oversporsmal={sporsmal} />
+                <Vis
+                    hvis={sporsmalIndex}
+                    render={() => (
+                        <Button
+                            className="mt-4"
+                            onClick={(e) => {
+                                e.preventDefault()
+                            }}
+                        >
+                            Slett
+                        </Button>
+                    )}
+                />
             </div>
         )
     }

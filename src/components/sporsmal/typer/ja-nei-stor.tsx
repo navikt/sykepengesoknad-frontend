@@ -25,8 +25,8 @@ import { useJaNeiKeyboardNavigation } from '../../../utils/keyboard-navigation'
 import { Inntektsbulletpoints } from '../inntektsbulletpoints'
 import { Yrkesskadebulletpoints } from '../yrkesskade-bulletpoints'
 import { settSvar } from '../sett-svar'
-import { useLeggTilArbeid } from '../../../hooks/useLeggTilArbeid'
 import { useOppdaterSporsmal } from '../../../hooks/useOppdaterSporsmal'
+import { useLeggTilUndersporsmal } from '../../../hooks/useLeggTilUndersporsmal'
 
 const JaNeiStor = ({ sporsmal }: SpmProps) => {
     const {
@@ -42,7 +42,7 @@ const JaNeiStor = ({ sporsmal }: SpmProps) => {
     const spmIndex = stegNo - 1
 
     const { data: valgtSoknad } = useSoknad(id)
-    const { mutate: leggTilNyttUndersporsmal } = useLeggTilArbeid()
+    const { mutate: leggTilNyttUndersporsmal } = useLeggTilUndersporsmal()
     const { mutate: oppdaterSporsmal } = useOppdaterSporsmal({
         soknad: valgtSoknad!,
         spmIndex: spmIndex,

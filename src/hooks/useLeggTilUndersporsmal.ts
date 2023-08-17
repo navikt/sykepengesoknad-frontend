@@ -8,7 +8,7 @@ interface LeggTilUndesporsmalProp {
     soknadId: string
     sporsmalId: string
 }
-export function useLeggTilArbeid() {
+export function useLeggTilUndersporsmal() {
     const queryClient = useQueryClient()
 
     return useMutation<unknown, FetchError, LeggTilUndesporsmalProp>({
