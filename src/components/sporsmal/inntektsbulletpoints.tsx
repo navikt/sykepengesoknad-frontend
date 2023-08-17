@@ -2,12 +2,9 @@ import { BodyShort, Label } from '@navikt/ds-react'
 import React from 'react'
 import { CheckmarkCircleIcon } from '@navikt/aksel-icons'
 
-import { TagTyper } from '../../types/enums'
-import { Soknad, Sporsmal } from '../../types/types'
+import { Soknad } from '../../types/types'
 
-export const Inntektsbulletpoints = ({ sporsmal, soknad }: { sporsmal: Sporsmal; soknad: Soknad }) => {
-    if (!skalHaInntektsbulletpoints(sporsmal, soknad)) return null
-
+export const Inntektsbulletpoints = ({ soknad }: { soknad: Soknad }) => {
     interface ListItemWithIconProps {
         content: string | null | undefined
     }
@@ -37,13 +34,5 @@ export const Inntektsbulletpoints = ({ sporsmal, soknad }: { sporsmal: Sporsmal;
                 ))}
             </ul>
         </>
-    )
-}
-
-export function skalHaInntektsbulletpoints(sporsmal: Sporsmal, soknad: Soknad) {
-    return (
-        sporsmal.tag === TagTyper.ANDRE_INNTEKTSKILDER_V2 &&
-        typeof soknad.inntektskilderDataFraInntektskomponenten !== 'undefined' &&
-        soknad.inntektskilderDataFraInntektskomponenten !== null
     )
 }
