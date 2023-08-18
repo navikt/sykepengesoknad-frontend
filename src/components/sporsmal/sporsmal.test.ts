@@ -24,7 +24,9 @@ test('Alle tags har global feilmelding', () => {
             skipTag !== TagTyper.INNTEKTSKILDE_SELVSTENDIG_VARIG_ENDRING_JA &&
             skipTag !== TagTyper.INNTEKTSKILDE_SELVSTENDIG_VARIG_ENDRING_NEI &&
             skipTag !== TagTyper.INNTEKTSKILDE_SELVSTENDIG_VARIG_ENDRING_VET_IKKE &&
-            skipTag !== TagTyper.INNTEKTSKILDE_ANDRE_ARBEIDSFORHOLD
+            skipTag !== TagTyper.INNTEKTSKILDE_ANDRE_ARBEIDSFORHOLD &&
+            skipTag !== TagTyper.INNTEKTSKILDE_ANDRE_ARBEIDSFORHOLD_JOBBET_SISTE_14_DAGER
+
         ) // Svartype: INFO_BEHANDLINGSDAGER
     })
 
