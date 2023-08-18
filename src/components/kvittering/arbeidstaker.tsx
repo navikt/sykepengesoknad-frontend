@@ -1,7 +1,7 @@
 import { Heading, Panel } from '@navikt/ds-react'
 import { logger } from '@navikt/next-logger'
 import dayjs from 'dayjs'
-import React, { Fragment, ReactNode, useEffect, useState } from 'react'
+import React, { Fragment, useEffect, useState } from 'react'
 import { CheckmarkCircleFillIcon, ExclamationmarkTriangleIcon } from '@navikt/aksel-icons'
 import { useRouter } from 'next/router'
 import { useQueryClient } from '@tanstack/react-query'
@@ -25,6 +25,7 @@ import PerioderMedOpphold from './innhold/arbeidstaker/perioder-med-opphold'
 import PerioderUtenOpphold from './innhold/arbeidstaker/perioder-uten-opphold'
 import ArbeidstakerStatus from './status/arbeidstaker-status'
 import InntektSN from './innhold/arbeidstaker/gjentagende-segmenter/InntektSN'
+import GridItems from './grid-items'
 
 type ArbeidstakerKvitteringTekst = 'inntil16dager' | 'over16dager' | 'utenOpphold' | 'medOpphold' | undefined
 
@@ -147,16 +148,6 @@ const Arbeidstaker = () => {
     }, [valgtSoknad?.sendtTilNAVDato, valgtSykmelding])
 
     if (!valgtSoknad || !soknader) return null
-
-    function GridItems({ venstre, midt, hoyre }: { venstre: ReactNode; midt: ReactNode; hoyre: ReactNode }) {
-        return (
-            <>
-                <div className="col-span-1">{venstre}</div>
-                <div className="col-span-10">{midt}</div>
-                <div className="col-span-1">{hoyre}</div>
-            </>
-        )
-    }
 
     return (
         <Panel border className="mt-2 grid grid-cols-12 gap-y-2 p-0 pb-8">

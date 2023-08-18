@@ -5,7 +5,8 @@ import { tekst } from '../../../../utils/tekster'
 import Kontonummer from '../../kontonummer/kontonummer'
 import { LenkeMedIkon } from '../../../lenke-med-ikon/LenkeMedIkon'
 import { KvitteringTekster } from '../../kvittering-tekster'
-import { BegrepsforklarerReplacer } from '../../../begrepsforklarer/begrepsforklarer-inserter'
+import { Begrepsforklarer } from '../../../begrepsforklarer/begrepsforklarer'
+import Vis from '../../../vis'
 
 import UtbetalingAvPenger from './gjentagende-segmenter/UtbetalingAvPenger'
 
@@ -14,43 +15,59 @@ interface gradertReisetilskuddProps {
 }
 
 const Over16dager = ({ erGradert }: gradertReisetilskuddProps) => {
+    const begrepsForklaringInntektsmelding = (
+        <Begrepsforklarer inlinetekst="inntektsmelding" tittel={tekst('kvittering.hva-er-inntektsmelding')}>
+            <BodyLong>{tekst('kvittering.arbeidstaker.over16.inntektsmelding.brodtekst')}</BodyLong>
+        </Begrepsforklarer>
+    )
+
+    const begrepsForklaring16Kalenderdager = (
+        <Begrepsforklarer
+            inlinetekst="16 kalenderdager"
+            tittel={tekst('kvittering.arbeidstaker.hvorfor-skille-ved-16-dager')}
+        >
+            <BodyLong>{tekst('kvittering.arbeidsgiveren-skal-betale')}</BodyLong>
+        </Begrepsforklarer>
+    )
+
+    const begrepsForklaring16KalenderdagerGradertReisetilskudd = (
+        <Begrepsforklarer
+            inlinetekst="16 kalenderdager"
+            tittel={tekst('kvittering.arbeidstaker.hvorfor-skille-ved-16-dager')}
+        >
+            <BodyLong>{tekst('kvittering.arbeidsgiveren-skal-betale-gradertreisetilskudd')}</BodyLong>
+        </Begrepsforklarer>
+    )
+
     return (
         <div className="mt-4">
             <div>
                 <Label as="h2" spacing>
                     {KvitteringTekster['kvittering.før.nav.behandler']}
                 </Label>
-                <BodyShort>
-                    <BegrepsforklarerReplacer
-                        text={
-                            erGradert
-                                ? tekst('kvittering.arbeidstaker.over16.gradertreisetilskudd.brodtekst')
-                                : tekst('kvittering.arbeidstaker.over16.brodtekst')
-                        }
-                        replacements={[
-                            {
-                                inlinetekst: 'inntektsmelding',
-                                tittel: tekst('kvittering.hva-er-inntektsmelding'),
-                                children: (
-                                    <BodyLong>
-                                        {tekst('kvittering.arbeidstaker.over16.inntektsmelding.brodtekst')}
-                                    </BodyLong>
-                                ),
-                            },
-                            {
-                                inlinetekst: '16 kalenderdager',
-                                tittel: tekst('kvittering.arbeidstaker.hvorfor-skille-ved-16-dager'),
-                                children: (
-                                    <BodyLong>
-                                        {erGradert
-                                            ? tekst('kvittering.arbeidsgiveren-skal-betale-gradertreisetilskudd')
-                                            : tekst('kvittering.arbeidsgiveren-skal-betale')}
-                                    </BodyLong>
-                                ),
-                            },
-                        ]}
-                    ></BegrepsforklarerReplacer>
-                </BodyShort>
+                <Vis
+                    hvis={erGradert}
+                    render={() => (
+                        <BodyShort>
+                            Når sykefraværet ditt er lengre enn {begrepsForklaring16KalenderdagerGradertReisetilskudd},
+                            betyr det at du får sykepenger og reisetilskudd utbetalt av NAV. Noen arbeidsplasser
+                            fortsetter å utbetale sykepenger og reisetilskudd fra dag 17, men da får de penger tilbake
+                            fra NAV senere. Arbeidsgiveren din må derfor sende oss {begrepsForklaringInntektsmelding}så
+                            fort som mulig.
+                        </BodyShort>
+                    )}
+                />
+                <Vis
+                    hvis={!erGradert}
+                    render={() => (
+                        <BodyShort>
+                            Når sykefraværet ditt er lengre enn {begrepsForklaring16Kalenderdager}, betyr det at du får
+                            sykepenger utbetalt av NAV. Noen arbeidsplasser fortsetter å utbetale sykepenger fra dag 17,
+                            men da får de penger tilbake fra NAV senere. Arbeidsgiveren din må derfor sende oss{' '}
+                            {begrepsForklaringInntektsmelding} så fort som mulig.
+                        </BodyShort>
+                    )}
+                />
             </div>
 
             <div className="mt-8">

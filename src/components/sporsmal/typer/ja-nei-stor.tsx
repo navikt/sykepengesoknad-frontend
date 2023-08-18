@@ -21,7 +21,7 @@ import { RSSoknadstatus } from '../../../types/rs-types/rs-soknadstatus'
 import { cn } from '../../../utils/tw-utils'
 import { YrkesskadeInfo } from '../../hjelpetekster/yrkesskade-info'
 import { useJaNeiKeyboardNavigation } from '../../../utils/keyboard-navigation'
-import { Inntektsbulletpoints, skalHaInntektsbulletpoints } from '../inntektsbulletpoints'
+import { Inntektsbulletpoints } from '../inntektsbulletpoints'
 import { Yrkesskadebulletpoints } from '../yrkesskade-bulletpoints'
 
 const JaNeiStor = ({ sporsmal }: SpmProps) => {
@@ -69,8 +69,11 @@ const JaNeiStor = ({ sporsmal }: SpmProps) => {
         )
     }
 
+    const skalHaInntektsbulletpoints =
+        sporsmal.tag === TagTyper.ANDRE_INNTEKTSKILDER_V2 && valgtSoknad.inntektskilderDataFraInntektskomponenten
+
     function sporsmalstekst() {
-        if (skalHaInntektsbulletpoints(sporsmal, valgtSoknad!)) {
+        if (skalHaInntektsbulletpoints) {
             return 'Har du andre inntektskilder enn nevnt over?'
         }
         return sporsmal.sporsmalstekst
@@ -79,7 +82,7 @@ const JaNeiStor = ({ sporsmal }: SpmProps) => {
     return (
         <>
             <div>
-                <Inntektsbulletpoints sporsmal={sporsmal} soknad={valgtSoknad} />
+                {skalHaInntektsbulletpoints && <Inntektsbulletpoints soknad={valgtSoknad} />}
                 <Yrkesskadebulletpoints sporsmal={sporsmal} />
                 <Controller
                     name={sporsmal.id}

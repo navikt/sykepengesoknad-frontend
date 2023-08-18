@@ -80,10 +80,6 @@ export const KvitteringTekster = {
     'kvittering.arbeidstaker.saksbehandlingstid.lenke.url': 'https://www.nav.no/saksbehandlingstider#sykepenger',
     'kvittering.arbeidstaker.brodtekst':
         'Arbeidsgiveren din betaler de første 16 kalenderdagene av sykefraværet. Hvis du mener sykefraværet har vart lenger enn det, kan du sende søknaden til NAV. Noen arbeidsplasser fortsetter å utbetale sykepenger fra dag 17, men da får de penger tilbake fra NAV.',
-    'kvittering.arbeidstaker.over16.brodtekst':
-        'Når sykefraværet ditt er lengre enn 16 kalenderdager, betyr det at du får sykepenger utbetalt av NAV. Noen arbeidsplasser fortsetter å utbetale sykepenger fra dag 17, men da får de penger tilbake fra NAV senere.  Arbeidsgiveren din må derfor sende oss inntektsmelding så fort som mulig.',
-    'kvittering.arbeidstaker.over16.gradertreisetilskudd.brodtekst':
-        'Når sykefraværet ditt er lengre enn 16 kalenderdager, betyr det at du får sykepenger og reisetilskudd utbetalt av NAV. Noen arbeidsplasser fortsetter å utbetale sykepenger og reisetilskudd fra dag 17, men da får de penger tilbake fra NAV senere.  Arbeidsgiveren din må derfor sende oss inntektsmelding så fort som mulig.',
     'kvittering.arbeidstaker.over16.inntektsmelding.brodtekst':
         'Arbeidsplassen din sender inntektsopplysninger og annen informasjon som NAV trenger for å behandle søkaden din. Inntektsmeldingen sendes digitalt fra arbeidsplassens lønns- og personalsystem eller fra Altinn.no.',
     'kvittering.arbeidstaker.over16.utbetaling':
