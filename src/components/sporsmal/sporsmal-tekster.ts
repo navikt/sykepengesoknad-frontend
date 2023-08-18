@@ -106,7 +106,7 @@ const SporsmalTekster = {
     'soknad.feilmelding.INNTEKTSKILDE_FOSTERHJEM_ER_DU_SYKMELDT':
         'Du må svare på om du er sykmeldt med fosterhjemgodtgjørelse',
     'soknad.feilmelding.INNTEKTSKILDE_FOSTERHJEM_ER_DU_SYKMELDT.lokal': 'Du må svare på om du er sykmeldt fra dette',
-
+    'soknad.feilmelding.INNTEKTSKILDE_ANDRE_ARBEIDSFORHOLD_JOBBET_SISTE_14_DAGER': 'Du må svare på om du har jobbet eller mottatt inntekt de siste 14 dagene',
     'soknad.feilmelding.INNTEKTSKILDE_ARBEIDSFORHOLD': 'Du må svare på om du er sykmeldt fra arbeidsforhold',
     'soknad.feilmelding.INNTEKTSKILDE_ANDRE_ARBEIDSFORHOLD':
         'Du må svare på om du er sykmeldt fra andre arbeidsforhold',
