@@ -117,67 +117,64 @@ export const Feedback = ({ soknad, steg }: { soknad: Soknad; steg: number }) => 
     }
 
     return (
-        <div className="w:full mt-16 md:w-3/4" data-cy="feedback-wrapper">
-            <div className="rounded-t-xl bg-gray-200 p-6">
-                <Heading size="xsmall" level="2">
-                    Hjelp oss med å gjøre søknaden bedre (valgfritt)
-                </Heading>
-            </div>
-            <div className="mt-1 rounded-b-xl bg-surface-subtle p-6">
-                <BodyShort className="mb-6">
-                    Opplever du at du har nok informasjon til å svare på dette spørsmålet?
-                </BodyShort>
-                <div className="flex w-full gap-2">
-                    <FeedbackButton feedbacktype={Feedbacktype.JA}>Ja</FeedbackButton>
-                    <FeedbackButton feedbacktype={Feedbacktype.NEI}>Nei</FeedbackButton>
-                    <FeedbackButton feedbacktype={Feedbacktype.FORBEDRING}>Foreslå forbedring</FeedbackButton>
-                </div>
-                {activeState !== null && (
-                    <form className="mt-6 flex w-full flex-col gap-4">
-                        <Textarea
-                            data-cy="feedback-textarea"
-                            ref={textAreaRef}
-                            error={errorMsg}
-                            label={getPlaceholder()}
-                            onKeyDown={async (e) => {
-                                if (e.key === 'Enter' && !e.shiftKey) {
+        <section aria-label="Tilbakemelding på søknaden">
+            <div className="w:full mt-16 md:w-3/4" data-cy="feedback-wrapper">
+                <div className="mt-1 rounded-xl bg-surface-subtle p-6">
+                    <BodyShort className="mb-6">
+                        Opplever du at du har nok informasjon til å svare på dette spørsmålet?
+                    </BodyShort>
+                    <div className="flex w-full gap-2">
+                        <FeedbackButton feedbacktype={Feedbacktype.JA}>Ja</FeedbackButton>
+                        <FeedbackButton feedbacktype={Feedbacktype.NEI}>Nei</FeedbackButton>
+                        <FeedbackButton feedbacktype={Feedbacktype.FORBEDRING}>Foreslå forbedring</FeedbackButton>
+                    </div>
+                    {activeState !== null && (
+                        <form className="mt-6 flex w-full flex-col gap-4">
+                            <Textarea
+                                data-cy="feedback-textarea"
+                                ref={textAreaRef}
+                                error={errorMsg}
+                                label={getPlaceholder()}
+                                onKeyDown={async (e) => {
+                                    if (e.key === 'Enter' && !e.shiftKey) {
+                                        e.preventDefault()
+                                        await handleSend()
+                                    }
+                                }}
+                                value={textValue}
+                                onChange={(e) => {
+                                    setThanksFeedback(false)
+                                    setTextValue(e.target.value)
+                                }}
+                                maxLength={600}
+                                minRows={3}
+                                description="Ikke skriv inn navn eller andre personopplysninger. Svaret ditt blir brukt til å forbedre søknaden og vil ikke påvirke søknaden din."
+                            />
+                            <Button
+                                data-cy="send-feedback"
+                                className="mr-auto"
+                                size="small"
+                                variant="secondary-neutral"
+                                onClick={async (e) => {
                                     e.preventDefault()
                                     await handleSend()
-                                }
-                            }}
-                            value={textValue}
-                            onChange={(e) => {
-                                setThanksFeedback(false)
-                                setTextValue(e.target.value)
-                            }}
-                            maxLength={600}
-                            minRows={3}
-                            description="Ikke skriv inn navn eller andre personopplysninger. Svaret ditt blir brukt til å forbedre søknaden og vil ikke påvirke søknaden din."
-                        />
-                        <Button
-                            data-cy="send-feedback"
-                            className="mr-auto"
-                            size="small"
-                            variant="secondary-neutral"
-                            onClick={async (e) => {
-                                e.preventDefault()
-                                await handleSend()
-                            }}
-                        >
-                            Send tilbakemelding
-                        </Button>
-                    </form>
-                )}
+                                }}
+                            >
+                                Send tilbakemelding
+                            </Button>
+                        </form>
+                    )}
+                </div>
+                <div aria-live="polite">
+                    {thanksFeedback && (
+                        <div className="mt-2 rounded-xl bg-green-50 p-6">
+                            <Heading size="small" as="p" className="flex items-center">
+                                Takk for tilbakemeldingen din! <FaceSmileIcon></FaceSmileIcon>
+                            </Heading>
+                        </div>
+                    )}
+                </div>
             </div>
-            <div aria-live="polite">
-                {thanksFeedback && (
-                    <div className="mt-2 rounded-xl bg-green-50 p-6">
-                        <Heading size="small" as="p" className="flex items-center">
-                            Takk for tilbakemeldingen din! <FaceSmileIcon></FaceSmileIcon>
-                        </Heading>
-                    </div>
-                )}
-            </div>
-        </div>
+        </section>
     )
 }
