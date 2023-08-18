@@ -157,14 +157,15 @@ describe('Tester arbeidstakersøknad', () => {
 
         cy.get('[data-cy="ja-nei-stor"] input[value=JA]').click()
 
-
         cy.contains('Velg inntektskildene som passer for deg:')
             .parent()
             .contains('Ansatt andre steder enn nevnt over')
             .parent()
             .click()
 
-        cy.contains('Har du jobbet for eller mottatt inntekt fra én eller flere av disse arbeidsgiverne de siste 14 dagene før du ble sykmeldt?')
+        cy.contains(
+            'Har du jobbet for eller mottatt inntekt fra én eller flere av disse arbeidsgiverne de siste 14 dagene før du ble sykmeldt?',
+        )
             .parent()
             .find('input[type="radio"][value="JA"]')
             .click()
