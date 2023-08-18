@@ -16,6 +16,7 @@ type validEventNames =
     | 'accordion åpnet'
     | 'accordion lukket'
     | 'knapp klikket'
+    | 'knapp vist'
     | 'skjema åpnet'
     | 'skjema fullført'
     | 'skjema spørsmål åpnet'

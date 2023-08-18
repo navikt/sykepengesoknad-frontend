@@ -1,10 +1,16 @@
 import { BodyLong, Button } from '@navikt/ds-react'
-import React from 'react'
+import React, { useEffect } from 'react'
 import { ExternalLinkIcon } from '@navikt/aksel-icons'
 
 import { logEvent } from '../../../../amplitude/amplitude'
 
 function InntektSN() {
+    useEffect(() => {
+        logEvent('knapp vist', {
+            tekst: 'Send inntektsopplysninger',
+            component: 'Send inntektsopplysninger knapp',
+        })
+    }, [])
     return (
         <>
             <BodyLong>
