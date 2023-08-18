@@ -1,8 +1,7 @@
-import { Alert, BodyLong, Radio, RadioGroup, Button, Label } from '@navikt/ds-react'
+import { Alert, BodyLong, Radio, RadioGroup } from '@navikt/ds-react'
 import { Controller, useFormContext } from 'react-hook-form'
 import React from 'react'
 import { useRouter } from 'next/router'
-import { PlusIcon } from '@navikt/aksel-icons'
 
 import { TagTyper } from '../../../types/enums'
 import { getLedetekst, tekst } from '../../../utils/tekster'
@@ -24,9 +23,6 @@ import { YrkesskadeInfo } from '../../hjelpetekster/yrkesskade-info'
 import { useJaNeiKeyboardNavigation } from '../../../utils/keyboard-navigation'
 import { Inntektsbulletpoints } from '../inntektsbulletpoints'
 import { Yrkesskadebulletpoints } from '../yrkesskade-bulletpoints'
-import { settSvar } from '../sett-svar'
-import { useOppdaterSporsmal } from '../../../hooks/useOppdaterSporsmal'
-import { useLeggTilUndersporsmal } from '../../../hooks/useLeggTilUndersporsmal'
 
 const JaNeiStor = ({ sporsmal }: SpmProps) => {
     const {
@@ -36,43 +32,14 @@ const JaNeiStor = ({ sporsmal }: SpmProps) => {
         getValues,
     } = useFormContext()
     const router = useRouter()
-    const { id, stegId } = router.query as { id: string; stegId: string }
-
-    const stegNo = parseInt(stegId!)
-    const spmIndex = stegNo - 1
+    const { id } = router.query as { id: string; stegId: string }
 
     const { data: valgtSoknad } = useSoknad(id)
-    const { mutate: leggTilNyttUndersporsmal } = useLeggTilUndersporsmal()
-    const { mutate: oppdaterSporsmal } = useOppdaterSporsmal({
-        soknad: valgtSoknad!,
-        spmIndex: spmIndex,
-    })
 
     const feilmelding = hentFeilmelding(sporsmal, errors[sporsmal.id])
     let watchJaNei = watch(sporsmal.id)
     if (watchJaNei === undefined) {
         watchJaNei = getValues(sporsmal.id)
-    }
-
-    const tagsMedKnapp: Set<TagTyper> = new Set([
-        TagTyper.MEDLEMSKAP_OPPHOLD_UTENFOR_EOS,
-        TagTyper.MEDLEMSKAP_OPPHOLD_UTENFOR_NORGE,
-        TagTyper.MEDLEMSKAP_UTFORT_ARBEID_UTENFOR_NORGE,
-    ])
-
-    const undersporsmalMedLeggTilKnapp = tagsMedKnapp.has(sporsmal.tag)
-    const leggTilArbeid = async (e: any) => {
-        e.preventDefault()
-        const svar = settSvar(sporsmal, getValues())
-        oppdaterSporsmal({
-            sporsmal: svar,
-            onSuccess: () => {
-                leggTilNyttUndersporsmal({
-                    soknadId: valgtSoknad!.id,
-                    sporsmalId: sporsmal.id,
-                })
-            },
-        })
     }
 
     useJaNeiKeyboardNavigation(sporsmal)
@@ -191,32 +158,7 @@ const JaNeiStor = ({ sporsmal }: SpmProps) => {
                     start="undersporsmal"
                 >
                     <>
-                        <Vis
-                            hvis={undersporsmalMedLeggTilKnapp}
-                            render={() => (
-                                <Label as="h2" className="mt-8">
-                                    {sporsmal.tag === TagTyper.MEDLEMSKAP_UTFORT_ARBEID_UTENFOR_NORGE
-                                        ? 'Hvor og når har du utført arbeid i utlandet?'
-                                        : 'Hvor og når har du oppholdt deg i utlandet?'}
-                                </Label>
-                            )}
-                        />
                         <UndersporsmalListe oversporsmal={sporsmal} oversporsmalSvar={watchJaNei} />
-
-                        {undersporsmalMedLeggTilKnapp && (
-                            <Button
-                                icon={<PlusIcon />}
-                                type="button"
-                                size="small"
-                                variant="tertiary"
-                                className="mt-8"
-                                onClick={leggTilArbeid}
-                            >
-                                {sporsmal.tag === TagTyper.MEDLEMSKAP_UTFORT_ARBEID_UTENFOR_NORGE
-                                    ? 'Legg til arbeid i utlandet'
-                                    : 'Legg til ny opphold'}
-                            </Button>
-                        )}
 
                         <Vis
                             hvis={
