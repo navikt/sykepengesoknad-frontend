@@ -175,7 +175,7 @@ describe('Tester arbeidstakersøknad', () => {
 
         cy.contains('Velg inntektskildene som passer for deg:')
             .parent()
-            .contains('Ansatt et annet sted enn nevnt over')
+            .contains('Ansatt andre steder enn nevnt over')
             .click()
 
         cy.contains('Gå videre').click()
