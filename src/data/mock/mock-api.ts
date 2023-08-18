@@ -368,6 +368,21 @@ export async function mockApi(req: NextApiRequest, res: NextApiResponse) {
             spm.undersporsmal.push(nyttUnderspm)
             return sendJson({ oppdatertSporsmal: spm }, 200)
         },
+        [ENDPOINTS.SLETT_UNDERSPORSMAL]: async () => {
+            const soknaden = getSoknadOr404(soknadId)
+            if (!soknaden) return
+            const spm = findSporsmalById(soknaden, sporsmalId)
+            if (!spm) {
+                return sendJson({}, 404)
+            }
+            const undersporsmalId = pathNumber(7)
+            const undersporsmalIndex = spm.undersporsmal.findIndex((s) => s.id !== undersporsmalId)
+            if (undersporsmalIndex !== -1) {
+                spm.undersporsmal.splice(undersporsmalIndex, 1)
+            }
+
+            return sendJson({ oppdatertSporsmal: spm }, 204)
+        },
         [ENDPOINTS.HENT_KVITTERING]: () => {
             const filePath = path.join(process.cwd(), 'public', 'static', `kvittering.jpg`)
             fs.readFile(filePath, function (err, data) {

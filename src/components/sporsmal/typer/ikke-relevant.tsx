@@ -12,6 +12,7 @@ import { settSvar } from '../sett-svar'
 import { useLeggTilUndersporsmal } from '../../../hooks/useLeggTilUndersporsmal'
 import { useOppdaterSporsmal } from '../../../hooks/useOppdaterSporsmal'
 import useSoknad from '../../../hooks/useSoknad'
+import { useSlettUndersporsmal } from '../../../hooks/useSlettUndersporsmal'
 
 interface IkkeRelevantProps {
     sporsmal: Sporsmal
@@ -31,6 +32,7 @@ const IkkeRelevant = ({ sporsmal, sporsmalIndex, erSisteSporsmal }: IkkeRelevant
         spmIndex: spmIndex,
     })
     const { mutate: leggTilNyttUndersporsmal } = useLeggTilUndersporsmal()
+    const { mutate: slettundersporsmal } = useSlettUndersporsmal()
 
     const skalHaUndersporsmal = [
         TagTyper.MEDLEMSKAP_OPPHOLD_UTENFOR_EOS_GRUPPERING,
@@ -38,8 +40,7 @@ const IkkeRelevant = ({ sporsmal, sporsmalIndex, erSisteSporsmal }: IkkeRelevant
         TagTyper.MEDLEMSKAP_UTFORT_ARBEID_UTENFOR_NORGE_GRUPPERING,
     ]
 
-    const leggTilArbeid = async (e: any) => {
-        e.preventDefault()
+    const leggTil = () => {
         const hovedSpm = settSvar(valgtSoknad!.sporsmal[spmIndex], getValues())
         oppdaterSporsmal({
             sporsmal: hovedSpm,
@@ -49,6 +50,14 @@ const IkkeRelevant = ({ sporsmal, sporsmalIndex, erSisteSporsmal }: IkkeRelevant
                     sporsmalId: hovedSpm.id,
                 })
             },
+        })
+    }
+
+    const slett = () => {
+        slettundersporsmal({
+            soknadId: valgtSoknad!.id,
+            sporsmalId: valgtSoknad!.sporsmal[spmIndex].id,
+            undersporsmalId: sporsmal.id,
         })
     }
 
@@ -75,9 +84,7 @@ const IkkeRelevant = ({ sporsmal, sporsmalIndex, erSisteSporsmal }: IkkeRelevant
                         variant="danger"
                         className="my-4 flex"
                         type="button"
-                        onClick={(e) => {
-                            e.preventDefault()
-                        }}
+                        onClick={slett}
                     >
                         Slett
                     </Button>
@@ -90,7 +97,7 @@ const IkkeRelevant = ({ sporsmal, sporsmalIndex, erSisteSporsmal }: IkkeRelevant
                         size="small"
                         variant="tertiary"
                         className="my-8 flex"
-                        onClick={leggTilArbeid}
+                        onClick={leggTil}
                     >
                         {sporsmal.tag === TagTyper.MEDLEMSKAP_UTFORT_ARBEID_UTENFOR_NORGE
                             ? 'Legg til arbeid i utlandet'
