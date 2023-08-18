@@ -25,7 +25,7 @@ const IkkeRelevant = ({ sporsmal, sporsmalIndex, erSisteSporsmal }: IkkeRelevant
     const stegNo = parseInt(stegId)
     const spmIndex = stegNo - 1
 
-    const { getValues } = useFormContext()
+    const { getValues, trigger } = useFormContext()
     const { data: valgtSoknad } = useSoknad(id)
     const { mutate: oppdaterSporsmal, isLoading: oppdatererSporsmal } = useOppdaterSporsmal({
         soknad: valgtSoknad!,
@@ -40,12 +40,18 @@ const IkkeRelevant = ({ sporsmal, sporsmalIndex, erSisteSporsmal }: IkkeRelevant
         TagTyper.MEDLEMSKAP_UTFORT_ARBEID_UTENFOR_NORGE_GRUPPERING,
     ]
 
-    const leggTil = () => {
+    const leggTil = async () => {
         if (oppdatererSporsmal || leggerTil) {
             return
         }
 
+        const formValidert = await trigger()
+        if (!formValidert) {
+            return
+        }
+
         const hovedSpm = settSvar(valgtSoknad!.sporsmal[spmIndex], getValues())
+
         oppdaterSporsmal({
             sporsmal: hovedSpm,
             onSuccess: () => {
