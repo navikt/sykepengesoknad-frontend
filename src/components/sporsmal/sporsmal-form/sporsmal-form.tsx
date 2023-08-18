@@ -154,7 +154,7 @@ const SporsmalForm = ({ valgtSoknad, spmIndex, sporsmal }: SpmFormProps) => {
                 >
                     <GuidepanelOverSporsmalstekst sporsmal={sporsmal} />
 
-                    <SporsmalSwitch sporsmalIndex={0} sporsmal={sporsmal} />
+                    <SporsmalSwitch sporsmal={sporsmal} sporsmalIndex={0} erSisteSporsmal={erSiste} />
 
                     <Vis
                         hvis={erSiste && !erUtlandssoknad}

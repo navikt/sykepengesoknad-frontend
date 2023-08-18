@@ -24,8 +24,9 @@ import ComboboxSingle from './typer/combobox-single'
 interface SporsmalSwitchProps {
     sporsmal: Sporsmal
     sporsmalIndex: number
+    erSisteSporsmal: boolean
 }
-const SporsmalSwitch = ({ sporsmal, sporsmalIndex }: SporsmalSwitchProps) => {
+const SporsmalSwitch = ({ sporsmal, sporsmalIndex, erSisteSporsmal }: SporsmalSwitchProps) => {
     switch (sporsmal.svartype) {
         case RSSvartype.CHECKBOX_PANEL:
             return <CheckboxPanel sporsmal={sporsmal} />
@@ -81,7 +82,7 @@ const SporsmalSwitch = ({ sporsmal, sporsmalIndex }: SporsmalSwitchProps) => {
             return <Opplasting sporsmal={sporsmal} />
 
         case RSSvartype.IKKE_RELEVANT:
-            return <IkkeRelevant sporsmalIndex={sporsmalIndex} sporsmal={sporsmal} />
+            return <IkkeRelevant sporsmal={sporsmal} sporsmalIndex={sporsmalIndex} erSisteSporsmal={erSisteSporsmal} />
 
         default:
             return <UkjentSporsmal sporsmal={sporsmal} />

@@ -11,8 +11,9 @@ import Vis from '../../vis'
 interface IkkeRelevantProps {
     sporsmal: Sporsmal
     sporsmalIndex: number
+    erSisteSporsmal: boolean
 }
-const IkkeRelevant = ({ sporsmal, sporsmalIndex }: IkkeRelevantProps) => {
+const IkkeRelevant = ({ sporsmal, sporsmalIndex, erSisteSporsmal }: IkkeRelevantProps) => {
     const skalHaUndersporsmal = [
         TagTyper.MEDLEMSKAP_OPPHOLD_UTENFOR_EOS_GRUPPERING,
         TagTyper.MEDLEMSKAP_OPPHOLD_UTENFOR_NORGE_GRUPPERING,
@@ -22,12 +23,12 @@ const IkkeRelevant = ({ sporsmal, sporsmalIndex }: IkkeRelevantProps) => {
     if (skalHaUndersporsmal.includes(sporsmal.tag)) {
         return (
             <div
-                className={sporsmalIndex! > 0 ? 'mt-8 border-t border-dashed border-gray-400' : ''}
+                className={!erSisteSporsmal ? 'mb-8 border-b border-dashed border-gray-400' : ''}
                 aria-live="assertive"
             >
                 <UndersporsmalListe oversporsmal={sporsmal} />
                 <Vis
-                    hvis={sporsmalIndex}
+                    hvis={sporsmalIndex > 0 || !erSisteSporsmal}
                     render={() => (
                         <Button
                             size="small"

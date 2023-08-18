@@ -27,7 +27,12 @@ const UndersporsmalListe = ({ oversporsmal, oversporsmalSvar }: UndersporsmalLis
 
             {oversporsmal.undersporsmal
                 .map((underspm: Sporsmal, idx: number) => (
-                    <SporsmalSwitch key={idx} sporsmal={underspm} sporsmalIndex={idx} />
+                    <SporsmalSwitch
+                        key={idx}
+                        sporsmal={underspm}
+                        sporsmalIndex={idx}
+                        erSisteSporsmal={idx === oversporsmal.undersporsmal.length - 1}
+                    />
                 ))
                 .filter((underspm: any) => underspm !== null)}
         </div>
