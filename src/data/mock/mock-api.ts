@@ -118,6 +118,29 @@ export async function mockApi(req: NextApiRequest, res: NextApiResponse) {
         res.end(JSON.stringify(json))
     }
 
+    const ENDPOINTS = {
+        HENT_METADATA: 'GET /api/sykepengesoknad-backend/api/v2/soknader/metadata',
+        HENT_AKTIV_KONTO: 'GET /api/sokos-kontoregister-person/api/borger/v1/hent-aktiv-konto',
+        HENT_SYKMELDINGER: 'GET /api/sykmeldinger-backend/api/v2/sykmeldinger',
+        GET_SOKNAD: 'GET /api/sykepengesoknad-backend/api/v2/soknad/[uuid]',
+        KORRIGER_SOKNAD: 'POST /api/sykepengesoknad-backend/api/v2/soknader/[uuid]/korriger',
+        ETTERSEND_TIL_NAV: 'POST /api/sykepengesoknad-backend/api/v2/soknader/[uuid]/ettersendTilNav',
+        ETTERSEND_TIL_ARBEIDSGIVER: 'POST /api/sykepengesoknad-backend/api/v2/soknader/[uuid]/ettersendTilArbeidsgiver',
+        AVBRYT_SOKNAD: 'POST /api/sykepengesoknad-backend/api/v2/soknader/[uuid]/avbryt',
+        GJENAPNE_SOKNAD: 'POST /api/sykepengesoknad-backend/api/v2/soknader/[uuid]/gjenapne',
+        UPDATE_SPORSMAL: 'PUT /api/sykepengesoknad-backend/api/v2/soknader/[uuid]/sporsmal/[uuid]',
+        GET_MOTTAKER: 'GET /api/sykepengesoknad-backend/api/v2/soknader/[uuid]/mottaker',
+        OPPRETT_SOKNAD_UTLAND: 'POST /api/sykepengesoknad-backend/api/v2/opprettSoknadUtland',
+        SEND_SOKNAD: 'POST /api/sykepengesoknad-backend/api/v2/soknader/[uuid]/send',
+        OPPLASTING: 'POST /api/sykepengesoknad-kvitteringer/api/v2/opplasting',
+        SVAR_SPORSMAL: 'POST /api/sykepengesoknad-backend/api/v2/soknader/[uuid]/sporsmal/[uuid]/svar',
+        SLETT_SVAR: 'DELETE /api/sykepengesoknad-backend/api/v2/soknader/[uuid]/sporsmal/[uuid]/svar/[uuid]',
+        OPPRETT_UNDERSPORSMAL: 'POST /api/sykepengesoknad-backend/api/v2/soknader/[uuid]/sporsmal/[uuid]/undersporsmal',
+        SLETT_UNDERSPORSMAL:
+            'DELETE /api/sykepengesoknad-backend/api/v2/soknader/[uuid]/sporsmal/[uuid]/undersporsmal/[uuid]',
+        HENT_KVITTERING: 'GET /api/sykepengesoknad-kvitteringer/api/v2/kvittering/[uuid]',
+    }
+
     function pathNumber(n: number): string | null {
         if (req.query['path'] && req.query['path']![n]) {
             return req.query['path']![n]
@@ -127,38 +150,44 @@ export async function mockApi(req: NextApiRequest, res: NextApiResponse) {
 
     const soknadId = pathNumber(3)
     const sporsmalId = pathNumber(5)
+    function findSoknadById(soknadId: string | null): RSSoknad | undefined {
+        return alleSoknader.find((soknad) => soknad.id === soknadId)
+    }
+    function findSporsmalById(soknaden: RSSoknad, sporsmalId: string | null): RSSporsmal | undefined {
+        return soknaden.sporsmal.find((spm) => spm.id === sporsmalId)
+    }
 
-    switch (url) {
-        case 'GET /api/sykepengesoknad-backend/api/v2/soknader/metadata':
-            return sendJson(testperson.soknader)
-        case 'GET /api/sokos-kontoregister-person/api/borger/v1/hent-aktiv-konto': {
+    function getSoknadOr404(soknadId: string | null) {
+        const soknad = findSoknadById(soknadId)
+        if (!soknad) {
+            return sendJson({}, 404)
+        }
+        return soknad
+    }
+
+    const handlers = {
+        [ENDPOINTS.HENT_METADATA]: () => sendJson(testperson.soknader),
+        [ENDPOINTS.HENT_AKTIV_KONTO]: () => {
             if (testperson && testperson.kontonummer) {
                 return sendJson({ kontonummer: testperson.kontonummer })
             }
             return sendJson({}, 404)
-        }
-        case 'GET /api/sykmeldinger-backend/api/v2/sykmeldinger':
-            return sendJson(testperson.sykmeldinger)
-
-        case 'GET /api/sykepengesoknad-backend/api/v2/soknad/[uuid]': {
-            const soknaden = alleSoknader.find((soknad) => soknad.id === soknadId)
-            if (soknaden) {
-                return sendJson(soknaden)
-            } else {
-                return sendJson({}, 404)
-            }
-        }
-        case 'POST /api/sykepengesoknad-backend/api/v2/soknader/[uuid]/korriger': {
-            const original = alleSoknader.find((soknad) => soknad.id === soknadId)
+        },
+        [ENDPOINTS.HENT_SYKMELDINGER]: () => sendJson(testperson.sykmeldinger),
+        [ENDPOINTS.GET_SOKNAD]: async () => {
+            const soknaden = await getSoknadOr404(soknadId)
+            if (!soknaden) return
+            return sendJson(soknaden)
+        },
+        [ENDPOINTS.KORRIGER_SOKNAD]: async () => {
+            const original = findSoknadById(soknadId)
             if (!original) {
                 return sendJson({}, 404)
             }
-
             const eksisterendeUtkast = alleSoknader.find((sok: RSSoknad) => sok.korrigerer === original.id)
             if (eksisterendeUtkast) {
                 return sendJson(eksisterendeUtkast, 200)
             }
-
             const soknad = jsonDeepCopy(original)
             soknad.id = uuid.v4()
             soknad.korrigerer = original.id
@@ -170,30 +199,22 @@ export async function mockApi(req: NextApiRequest, res: NextApiResponse) {
             testperson.soknader.push(soknad)
 
             return sendJson(soknad, 200)
-        }
-        case 'POST /api/sykepengesoknad-backend/api/v2/soknader/[uuid]/ettersendTilNav': {
-            const soknad = alleSoknader.find((soknad) => soknad.id === soknadId)
-            if (!soknad) {
-                return sendJson({}, 404)
-            }
+        },
+        [ENDPOINTS.ETTERSEND_TIL_NAV]: async () => {
+            const soknad = await getSoknadOr404(soknadId)
+            if (!soknad) return
             soknad.sendtTilNAVDato = dayjs().toJSON()
-
             return sendJson()
-        }
-        case 'POST /api/sykepengesoknad-backend/api/v2/soknader/[uuid]/ettersendTilArbeidsgiver': {
-            const soknad = alleSoknader.find((soknad) => soknad.id === soknadId)
-            if (!soknad) {
-                return sendJson({}, 404)
-            }
+        },
+        [ENDPOINTS.ETTERSEND_TIL_ARBEIDSGIVER]: async () => {
+            const soknad = await getSoknadOr404(soknadId)
+            if (!soknad) return
             soknad.sendtTilArbeidsgiverDato = dayjs().toJSON()
-
             return sendJson()
-        }
-        case 'POST /api/sykepengesoknad-backend/api/v2/soknader/[uuid]/avbryt': {
-            const soknad = alleSoknader.find((soknad) => soknad.id === soknadId)
-            if (!soknad) {
-                return sendJson({}, 404)
-            }
+        },
+        [ENDPOINTS.AVBRYT_SOKNAD]: async () => {
+            const soknad = await getSoknadOr404(soknadId)
+            if (!soknad) return
             if (soknad.soknadstype == 'OPPHOLD_UTLAND' || soknad.status == 'UTKAST_TIL_KORRIGERING') {
                 testperson.soknader.splice(testperson.soknader.indexOf(soknad), 1)
                 return sendJson()
@@ -201,22 +222,18 @@ export async function mockApi(req: NextApiRequest, res: NextApiResponse) {
             soknad.status = 'AVBRUTT'
             soknad.avbruttDato = dayjs().toJSON()
             return sendJson()
-        }
-        case 'POST /api/sykepengesoknad-backend/api/v2/soknader/[uuid]/gjenapne': {
-            const soknad = alleSoknader.find((soknad) => soknad.id === soknadId)
-            if (!soknad) {
-                return sendJson({}, 404)
-            }
+        },
+        [ENDPOINTS.GJENAPNE_SOKNAD]: async () => {
+            const soknad = await getSoknadOr404(soknadId)
+            if (!soknad) return
             soknad.status = 'NY'
             soknad.avbruttDato = null
             return sendJson()
-        }
-        case 'PUT /api/sykepengesoknad-backend/api/v2/soknader/[uuid]/sporsmal/[uuid]': {
-            const soknaden = alleSoknader.find((soknad) => soknad.id === soknadId)
-            if (!soknaden) {
-                return sendJson({}, 404)
-            }
-            const spm = soknaden.sporsmal.find((spm) => spm.id === sporsmalId)
+        },
+        [ENDPOINTS.UPDATE_SPORSMAL]: async () => {
+            const soknaden = await getSoknadOr404(soknadId)
+            if (!soknaden) return
+            const spm = findSporsmalById(soknaden, sporsmalId)
             if (!spm) {
                 return sendJson({}, 404)
             }
@@ -246,12 +263,12 @@ export async function mockApi(req: NextApiRequest, res: NextApiResponse) {
             soknaden.sporsmal.splice(spmIdx, 1, body)
 
             return sendJson({ oppdatertSporsmal: body }, 200)
-        }
-        case 'GET /api/sykepengesoknad-backend/api/v2/soknader/[uuid]/mottaker': {
+        },
+        [ENDPOINTS.GET_MOTTAKER]: () => {
             const skalSendesTil = mottaker(soknadId!)
             return sendJson({ mottaker: skalSendesTil })
-        }
-        case 'POST /api/sykepengesoknad-backend/api/v2/opprettSoknadUtland': {
+        },
+        [ENDPOINTS.OPPRETT_SOKNAD_UTLAND]: () => {
             const soknad = testperson.soknader.find(
                 (sok: RSSoknad) => sok.soknadstype === RSSoknadstype.OPPHOLD_UTLAND && sok.status === RSSoknadstatus.NY,
             )
@@ -267,23 +284,19 @@ export async function mockApi(req: NextApiRequest, res: NextApiResponse) {
             soknadOriginal.id = uuid.v4()
             soknadOriginal.status = RSSoknadstatus.NY
             testperson.soknader.push(soknadOriginal)
-
             return sendJson(soknadOriginal)
-        }
-        case 'POST /api/sykepengesoknad-backend/api/v2/soknader/[uuid]/send': {
-            if (soknadId == '9157b65a-0372-4657-864c-195037349df5') {
+        },
+        [ENDPOINTS.SEND_SOKNAD]: async () => {
+            if (soknadId === '9157b65a-0372-4657-864c-195037349df5') {
                 return sendJson({ status: 400 }, 400)
             }
-            if (soknadId == '2a9196c7-306f-4b4f-afdc-891d8a564e42') {
+            if (soknadId === '2a9196c7-306f-4b4f-afdc-891d8a564e42') {
                 return sendJson({ status: 500 }, 500)
             }
-            const soknaden = alleSoknader.find((soknad) => soknad.id === soknadId)
-            if (!soknaden) {
-                return sendJson({}, 404)
-            }
+            const soknaden = await getSoknadOr404(soknadId)
+            if (!soknaden) return
             const sendesTil = mottaker(soknadId!)
             const tidspunkt = dayjs().toJSON()
-
             if ([RSMottaker.ARBEIDSGIVER_OG_NAV, RSMottaker.ARBEIDSGIVER].includes(sendesTil)) {
                 soknaden.sendtTilArbeidsgiverDato = tidspunkt
             }
@@ -292,56 +305,70 @@ export async function mockApi(req: NextApiRequest, res: NextApiResponse) {
             }
             soknaden.status = 'SENDT'
             return sendJson({ status: 200 }, 200)
-        }
-        case 'POST /api/sykepengesoknad-kvitteringer/api/v2/opplasting': {
+        },
+        [ENDPOINTS.OPPLASTING]: async () => {
             const stream = Readable.from(req)
             await stream2buffer(stream)
-
             return sendJson({
                 id: uuid.v4(),
                 melding: 'opprettet',
             })
-        }
-        case 'POST /api/sykepengesoknad-backend/api/v2/soknader/[uuid]/sporsmal/[uuid]/svar': {
-            const soknaden = alleSoknader.find((soknad) => soknad.id === soknadId)
+        },
+        [ENDPOINTS.SVAR_SPORSMAL]: async () => {
+            const soknaden = findSoknadById(soknadId)
             if (!soknaden) {
                 return sendJson({}, 404)
             }
-            const spm = soknaden.sporsmal.find((spm) => spm.id === sporsmalId)
+            const spm = findSporsmalById(soknaden, sporsmalId)
             if (!spm) {
                 return sendJson({}, 404)
             }
             const body = await parseRequest<RSSvar>(req)
-
             spm.svar.push({
                 id: uuid.v4(),
                 ...body,
             })
-
             return sendJson({ oppdatertSporsmal: spm }, 201)
-        }
-        case 'DELETE /api/sykepengesoknad-backend/api/v2/soknader/[uuid]/sporsmal/[uuid]/svar/[uuid]': {
-            const soknaden = alleSoknader.find((soknad) => soknad.id === soknadId)
-            if (!soknaden) {
-                return sendJson({}, 404)
-            }
+        },
+        [ENDPOINTS.SLETT_SVAR]: async () => {
+            const soknad = await getSoknadOr404(soknadId)
+            if (!soknad) return
             if (soknadId === feilVedSlettingAvKvittering.id) {
                 return sendJson({}, 500)
             }
-            const spm = soknaden.sporsmal.find((spm) => spm.id === sporsmalId)
+            const spm = findSporsmalById(soknad, sporsmalId)
             if (!spm) {
                 return sendJson({}, 404)
             }
             const svarId = pathNumber(7)
-
             const svarIdx = spm.svar.findIndex((s) => s.id === svarId)
-            if (svarIdx != -1) {
+            if (svarIdx !== -1) {
                 spm.svar.splice(svarIdx, 1)
             }
-
             return sendJson({ status: 204 }, 204)
-        }
-        case 'GET /api/sykepengesoknad-kvitteringer/api/v2/kvittering/[uuid]': {
+        },
+        [ENDPOINTS.OPPRETT_UNDERSPORSMAL]: async () => {
+            const soknaden = await getSoknadOr404(soknadId)
+            if (!soknaden) return
+            const spm = findSporsmalById(soknaden, sporsmalId)
+            if (!spm) {
+                return sendJson({}, 404)
+            }
+            const nyttUnderspm = jsonDeepCopy(spm.undersporsmal[0])
+            nyttUnderspm.id = uuid.v4()
+            nyttUnderspm.svar = []
+            nyttUnderspm.undersporsmal.forEach((underspm) => {
+                underspm.id = uuid.v4()
+                underspm.svar = []
+                underspm.undersporsmal.forEach((subUnderspm) => {
+                    subUnderspm.id = uuid.v4()
+                    subUnderspm.svar = []
+                })
+            })
+            spm.undersporsmal.push(nyttUnderspm)
+            return sendJson({ oppdatertSporsmal: spm }, 200)
+        },
+        [ENDPOINTS.HENT_KVITTERING]: () => {
             const filePath = path.join(process.cwd(), 'public', 'static', `kvittering.jpg`)
             fs.readFile(filePath, function (err, data) {
                 if (err) {
@@ -352,14 +379,17 @@ export async function mockApi(req: NextApiRequest, res: NextApiResponse) {
                 }
             })
             return
-        }
+        },
+    }
 
-        default:
-            logger.error(`Ukjent api ${url}`)
+    const handler = handlers[url]
 
-            res.status(404)
-            res.end('Ukjent api')
-            break
+    if (handler) {
+        return handler()
+    } else {
+        logger.error(`Ukjent api ${url}`)
+        res.status(404)
+        res.end('Ukjent api')
     }
 }
 
