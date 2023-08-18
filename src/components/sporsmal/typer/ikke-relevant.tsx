@@ -27,12 +27,12 @@ const IkkeRelevant = ({ sporsmal, sporsmalIndex, erSisteSporsmal }: IkkeRelevant
 
     const { getValues } = useFormContext()
     const { data: valgtSoknad } = useSoknad(id)
-    const { mutate: oppdaterSporsmal } = useOppdaterSporsmal({
+    const { mutate: oppdaterSporsmal, isLoading: oppdatererSporsmal } = useOppdaterSporsmal({
         soknad: valgtSoknad!,
         spmIndex: spmIndex,
     })
-    const { mutate: leggTilNyttUndersporsmal } = useLeggTilUndersporsmal()
-    const { mutate: slettundersporsmal } = useSlettUndersporsmal()
+    const { mutate: leggTilNyttUndersporsmal, isLoading: leggerTil } = useLeggTilUndersporsmal()
+    const { mutate: slettundersporsmal, isLoading: sletter } = useSlettUndersporsmal()
 
     const skalHaUndersporsmal = [
         TagTyper.MEDLEMSKAP_OPPHOLD_UTENFOR_EOS_GRUPPERING,
@@ -41,6 +41,10 @@ const IkkeRelevant = ({ sporsmal, sporsmalIndex, erSisteSporsmal }: IkkeRelevant
     ]
 
     const leggTil = () => {
+        if (oppdatererSporsmal || leggerTil) {
+            return
+        }
+
         const hovedSpm = settSvar(valgtSoknad!.sporsmal[spmIndex], getValues())
         oppdaterSporsmal({
             sporsmal: hovedSpm,
@@ -54,6 +58,10 @@ const IkkeRelevant = ({ sporsmal, sporsmalIndex, erSisteSporsmal }: IkkeRelevant
     }
 
     const slett = () => {
+        if (sletter) {
+            return
+        }
+
         slettundersporsmal({
             soknadId: valgtSoknad!.id,
             sporsmalId: valgtSoknad!.sporsmal[spmIndex].id,
@@ -85,6 +93,7 @@ const IkkeRelevant = ({ sporsmal, sporsmalIndex, erSisteSporsmal }: IkkeRelevant
                         className="my-4 flex"
                         type="button"
                         onClick={slett}
+                        loading={sletter}
                     >
                         Slett
                     </Button>
@@ -98,6 +107,7 @@ const IkkeRelevant = ({ sporsmal, sporsmalIndex, erSisteSporsmal }: IkkeRelevant
                         variant="tertiary"
                         className="my-8 flex"
                         onClick={leggTil}
+                        loading={oppdatererSporsmal || leggerTil}
                     >
                         {sporsmal.tag === TagTyper.MEDLEMSKAP_UTFORT_ARBEID_UTENFOR_NORGE
                             ? 'Legg til arbeid i utlandet'
