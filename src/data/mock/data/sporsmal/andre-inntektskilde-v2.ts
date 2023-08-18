@@ -38,7 +38,7 @@ export const andreInntektskilderV2 = (): RSSporsmal => {
                         svar: [],
                         undersporsmal: [
                             {
-                                id: 'dffc1170-d02c-3328-b58e-3ef11f11aefc',
+                                id: 'defc1170-d02c-3328-b58e-3ef11f11oifc',
                                 tag: 'INNTEKTSKILDE_ANDRE_ARBEIDSFORHOLD_JOBBET_SISTE_14_DAGER',
                                 sporsmalstekst:
                                     'Har du jobbet for eller mottatt inntekt fra én eller flere av disse arbeidsgiverne de siste 14 dagene før du ble sykmeldt?',
@@ -47,7 +47,7 @@ export const andreInntektskilderV2 = (): RSSporsmal => {
                                 min: null,
                                 max: null,
                                 pavirkerAndreSporsmal: false,
-                                kriterieForVisningAvUndersporsmal: 'JA',
+                                kriterieForVisningAvUndersporsmal: null,
                                 svar: [],
                                 undersporsmal: [],
                             },
