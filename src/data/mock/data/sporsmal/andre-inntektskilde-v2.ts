@@ -34,7 +34,7 @@ export const andreInntektskilderV2 = (): RSSporsmal => {
                         min: null,
                         max: null,
                         pavirkerAndreSporsmal: false,
-                        kriterieForVisningAvUndersporsmal: null,
+                        kriterieForVisningAvUndersporsmal: 'CHECKED',
                         svar: [],
                         undersporsmal: [
                             {
