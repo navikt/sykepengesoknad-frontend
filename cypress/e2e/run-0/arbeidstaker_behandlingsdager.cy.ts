@@ -74,13 +74,16 @@ describe('Tester behandlingsdagersøknad', () => {
     })
 
     it('Tilbake og videre', function () {
+        cy.contains('Til slutt')
         cy.contains('Tilbake').click()
 
+        cy.contains('Andre inntektskilder')
         cy.contains('Gå videre').click()
     })
 
     it('Søknad VAER_KLAR_OVER_AT - steg 4', function () {
         cy.url().should('include', `${soknad.id}/4`)
+        cy.contains('Til slutt')
         cy.get('.navds-checkbox__label').click()
         cy.contains(
             'Jeg har lest all informasjonen jeg har fått i søknaden og bekrefter at opplysningene jeg har gitt er korrekte.',
