@@ -1,6 +1,6 @@
-import { Alert, Button, Heading, Loader } from '@navikt/ds-react'
+import { Alert, Button } from '@navikt/ds-react'
 import React from 'react'
-import { useIsFetching, UseQueryResult } from '@tanstack/react-query'
+import { UseQueryResult } from '@tanstack/react-query'
 
 import useSoknader from '../../hooks/useSoknader'
 import Vis from '../vis'
@@ -19,8 +19,6 @@ interface QueryOgFeilmelding {
 }
 
 const QueryStatusPanel = ({ valgSoknadId, valgSykmeldingId }: QueryStatusPanelProps) => {
-    const isFetching = useIsFetching()
-
     const sykmeldinger: QueryOgFeilmelding = {
         query: useSykmeldinger(),
         message: 'Kunne ikke hente dine sykmeldinger',
@@ -45,17 +43,6 @@ const QueryStatusPanel = ({ valgSoknadId, valgSykmeldingId }: QueryStatusPanelPr
 
     return (
         <>
-            <Vis
-                hvis={isFetching > 0}
-                render={() => (
-                    <div className="text-center">
-                        <Heading size="small" spacing>
-                            Henter dine data
-                        </Heading>
-                        <Loader />
-                    </div>
-                )}
-            />
             <Vis
                 hvis={errorQueries.length > 0}
                 render={() => (
