@@ -13,18 +13,6 @@ export const erSisteSide = (soknad: Soknad, sidenummer: number) => {
     return [TagTyper.VAER_KLAR_OVER_AT, TagTyper.BEKREFT_OPPLYSNINGER].indexOf(sporsmal.tag) > -1
 }
 
-export const hentNokkel = (soknad: Soknad, sidenummer: number) => {
-    const sporsmal = soknad.sporsmal[sidenummer - 1]
-    if (sporsmal === undefined) {
-        return ''
-    }
-    if (sidenummer === 1 && soknad.soknadstype !== RSSoknadstype.OPPHOLD_UTLAND) {
-        return 'sykepengesoknad.start.tittel'
-    }
-    const nokkel = fjernIndexFraTag(sporsmal.tag).toLowerCase()
-    return erSisteSide(soknad, sidenummer) ? 'sykepengesoknad.til-slutt.tittel' : `sykepengesoknad.${nokkel}.tittel`
-}
-
 export const pathUtenSteg = (pathname: string) => {
     const arr: string[] = pathname.split(SEPARATOR)
     arr.pop()

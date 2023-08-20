@@ -1,4 +1,4 @@
-import { BodyShort, Button, ButtonProps, Heading, Textarea } from '@navikt/ds-react'
+import { BodyShort, Button, ButtonProps, Heading, Skeleton, Textarea } from '@navikt/ds-react'
 import { useEffect, useRef, useState } from 'react'
 import { FaceSmileIcon } from '@navikt/aksel-icons'
 
@@ -19,8 +19,7 @@ interface FeedbackButtonProps extends ButtonProps {
     feedbacktype: Feedbacktype
 }
 
-export const Feedback = ({ soknad, steg }: { soknad: Soknad; steg: number }) => {
-    const sporsmal = soknad.sporsmal[steg - 1]
+export const Feedback = ({ soknad, steg }: { soknad: Soknad | undefined; steg: number }) => {
     const [textValue, setTextValue] = useState('')
     const [activeState, setActiveState] = useState<Feedbacktype | null>(null)
     const [errorMsg, setErrorMsg] = useState<string | null>(null)
@@ -42,6 +41,10 @@ export const Feedback = ({ soknad, steg }: { soknad: Soknad; steg: number }) => 
         activeState && textAreaRef.current && (textAreaRef.current as any).focus()
         setErrorMsg(null)
     }, [activeState])
+    if (!soknad) {
+        return <Skeleton variant="rectangle" />
+    }
+    const sporsmal = soknad?.sporsmal[steg - 1]
 
     if (steg <= 1 && soknad.soknadstype !== RSSoknadstype.OPPHOLD_UTLAND) {
         return null

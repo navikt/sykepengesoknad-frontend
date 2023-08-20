@@ -19,12 +19,14 @@ import SykmeldingOverlapp from './sykmelding-overlapp'
 
 interface OpplysningerProps {
     ekspandert: boolean
-    steg: string
+    steg?: string
 }
 
-const Opplysninger = ({ ekspandert, steg }: OpplysningerProps) => {
+const Opplysninger = ({ ekspandert }: OpplysningerProps) => {
     const router = useRouter()
-    const { id } = router.query as { id: string }
+    const { id, stegId } = router.query as { id: string; stegId: string }
+    const stegNo = parseInt(stegId)
+
     const { data: valgtSoknad } = useSoknad(id)
     const { data: valgtSykmelding } = useSykmelding(valgtSoknad?.sykmeldingId)
     const [open, setOpen] = useState<boolean>(ekspandert)
@@ -32,7 +34,7 @@ const Opplysninger = ({ ekspandert, steg }: OpplysningerProps) => {
     const tittel = tekst('sykepengesoknad.sykmelding-utdrag.tittel')
 
     if (!valgtSoknad || !valgtSykmelding) return null
-
+    const steg = valgtSoknad.sporsmal[stegNo - 1].tag
     return (
         <ExpansionCard className="my-8" data-cy="opplysninger-fra-sykmeldingen" open={open} aria-label={tittel}>
             <ExpansionCard.Header

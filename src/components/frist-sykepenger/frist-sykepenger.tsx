@@ -9,8 +9,9 @@ import { parserWithReplace } from '../../utils/html-react-parser-utils'
 import EksempelFrist from './eksempel-frist'
 import HvorforSoknadSykepenger from './hvorfor-soknad-sykepenger'
 
-const FristSykepenger = ({ soknad }: { soknad: Soknad }) => {
+const FristSykepenger = ({ soknad }: { soknad: Soknad | undefined }) => {
     const [open, setOpen] = useState<boolean>(false)
+    if (!soknad) return null
     if (soknad.utenlandskSykmelding) {
         return null
     }

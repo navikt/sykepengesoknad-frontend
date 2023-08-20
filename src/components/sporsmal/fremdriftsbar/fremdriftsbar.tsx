@@ -1,4 +1,4 @@
-import { BodyShort, Link } from '@navikt/ds-react'
+import { BodyShort, Link, Skeleton } from '@navikt/ds-react'
 import React from 'react'
 import { ArrowLeftIcon } from '@navikt/aksel-icons'
 import { useRouter } from 'next/router'
@@ -11,6 +11,7 @@ import { logEvent } from '../../amplitude/amplitude'
 import { tekst } from '../../../utils/tekster'
 import { Soknad } from '../../../types/types'
 import { RSSoknadstype } from '../../../types/rs-types/rs-soknadstype'
+import { UseSoknadMedDetaljer } from '../../../hooks/useSoknadMedDetaljer'
 
 const TilbakeKnapp = ({ soknad, stegNo }: { soknad: Soknad; stegNo: number }) => {
     if (stegNo == 1) {
@@ -43,20 +44,27 @@ const TilbakeKnapp = ({ soknad, stegNo }: { soknad: Soknad; stegNo: number }) =>
 }
 
 const Fremdriftsbar = () => {
-    const router = useRouter()
-    const { id, stegId } = router.query as { id: string; stegId: string }
-    const { data: valgtSoknad } = useSoknad(id)
-    if (!valgtSoknad || !stegId) return null
+    const { valgtSoknad, valgtSoknadLaster, stegNo } = UseSoknadMedDetaljer()
 
-    const parsetSteg = parseInt(stegId)
-    const oppholdUtland = valgtSoknad.soknadstype == RSSoknadstype.OPPHOLD_UTLAND
-    const aktivtSteg = oppholdUtland ? parsetSteg : parsetSteg - 1
+    const oppholdUtland = valgtSoknad?.soknadstype == RSSoknadstype.OPPHOLD_UTLAND
+
+    const aktivtSteg = oppholdUtland ? stegNo : stegNo - 1
+    if (valgtSoknad && aktivtSteg == 0) return null
+    if (!valgtSoknad) {
+        if (aktivtSteg == 0) {
+            // ingen progressbar på første side
+            return null
+        }
+        return <Skeleton variant="rectangle" height="70px" className="rounded bg-red-200" />
+    }
+
     const antallSporsmål = valgtSoknad.sporsmal.filter((s) => s.tag !== TagTyper.VAER_KLAR_OVER_AT).length
     const antallSteg = oppholdUtland ? antallSporsmål + 1 : antallSporsmål
 
     const bredde = (100 / antallSteg) * aktivtSteg
 
     const valueText = `${aktivtSteg} av ${antallSteg} steg`
+
     return (
         <div
             className="my-4 md:my-6"
@@ -77,7 +85,7 @@ const Fremdriftsbar = () => {
                 />
             </div>
             <div className="mt-4 flex justify-between">
-                <TilbakeKnapp soknad={valgtSoknad} stegNo={parsetSteg} />
+                <TilbakeKnapp soknad={valgtSoknad} stegNo={stegNo} />
                 <BodyShort as="span">{valueText}</BodyShort>
             </div>
         </div>

@@ -161,7 +161,7 @@ const SporsmalForm = ({ valgtSoknad, spmIndex, sporsmal }: SpmFormProps) => {
                         render={() => (
                             <>
                                 <Oppsummering ekspandert={false} sporsmal={valgtSoknad.sporsmal} />
-                                <Opplysninger ekspandert={false} steg={sporsmal.tag} />
+                                <Opplysninger ekspandert={false} />
                                 <CheckboxPanel sporsmal={nesteSporsmal} />
                                 <SendesTil soknad={valgtSoknad} />
                             </>

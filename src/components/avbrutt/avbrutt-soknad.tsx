@@ -7,7 +7,6 @@ import { RSSoknadstatus } from '../../types/rs-types/rs-soknadstatus'
 import { tilLesbarDatoMedArstall } from '../../utils/dato-utils'
 import { tekst } from '../../utils/tekster'
 import { logEvent } from '../amplitude/amplitude'
-import Banner from '../banner/banner'
 import FristSykepenger from '../frist-sykepenger/frist-sykepenger'
 import { GjenstaendeSoknader, hentGjenstaendeSoknader } from '../gjenstaende-soknader/gjenstaende-soknader'
 import Opplysninger from '../opplysninger-fra-sykmelding/opplysninger'
@@ -17,6 +16,7 @@ import useSoknader from '../../hooks/useSoknader'
 import useSoknad from '../../hooks/useSoknad'
 import QueryStatusPanel from '../queryStatusPanel/QueryStatusPanel'
 import { soknadBreadcrumb, useUpdateBreadcrumbs } from '../../hooks/useBreadcrumbs'
+import { Banner } from '../banner/banner'
 
 import GjenapneSoknad from './gjenapneknapp'
 
@@ -62,7 +62,7 @@ const AvbruttSoknad = () => {
             <BodyLong spacing>{tekst('sykepengesoknad.avbrutt.informasjon-innhold-3')}</BodyLong>
             <BodyLong spacing>{tekst('sykepengesoknad.avbrutt.informasjon-innhold-4')}</BodyLong>
 
-            <Opplysninger ekspandert={false} steg="avbrutt-søknad" />
+            <Opplysninger ekspandert={false} />
             <FristSykepenger soknad={valgtSoknad} />
 
             <Vis

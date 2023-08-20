@@ -1,8 +1,7 @@
-import { Heading } from '@navikt/ds-react'
+import { Heading, Skeleton } from '@navikt/ds-react'
 import React, { useEffect } from 'react'
 import { useRouter } from 'next/router'
 
-import Banner from '../../components/banner/banner'
 import OmReisetilskudd from '../../components/om-reisetilskudd/om-reisetilskudd'
 import Opplysninger from '../../components/opplysninger-fra-sykmelding/opplysninger'
 import SoknadMedToDeler from '../../components/soknad-med-to-deler/soknad-med-to-deler'
@@ -18,7 +17,6 @@ import { eldreUsendteSykmeldinger } from '../eldre-usendt/eldreUsendteSykmelding
 import FristSykepenger from '../frist-sykepenger/frist-sykepenger'
 import { hentHotjarJsTrigger, HotjarTrigger } from '../hotjar-trigger'
 import { ViktigInformasjon } from '../soknad-intro/viktig-informasjon'
-import { hentNokkel } from '../sporsmal/sporsmal-utils'
 import Vis from '../vis'
 import useSoknad from '../../hooks/useSoknad'
 import useSoknader from '../../hooks/useSoknader'
@@ -28,8 +26,11 @@ import EgenmeldingsdagerArbeidsgiver from '../egenmeldingsdager-arbeidsgiver/ege
 import useSykmeldinger from '../../hooks/useSykmeldinger'
 import useSykmelding from '../../hooks/useSykmelding'
 import { Feedback } from '../feedback/feedback'
+import SkalViseKnapperad from '../sporsmal/sporsmal-form/skal-vise-knapperad'
+import { Banner } from '../banner/banner'
 
 import { urlTilSoknad } from './soknad-link'
+import { SporsmalTittel } from './sporsmal-tittel'
 
 export const Soknaden = () => {
     const router = useRouter()
@@ -39,7 +40,7 @@ export const Soknaden = () => {
     const { data: sykmeldinger } = useSykmeldinger()
     const { data: valgtSykmelding } = useSykmelding(valgtSoknad?.sykmeldingId)
 
-    const stegNo = parseInt(stegId!)
+    const stegNo = parseInt(stegId)
     const spmIndex = stegNo - 1
 
     useUpdateBreadcrumbs(() => [{ ...soknadBreadcrumb, handleInApp: true }], [])
@@ -71,19 +72,13 @@ export const Soknaden = () => {
         })
     }, [router, stegId, valgtSoknad])
 
-    if (!valgtSoknad || !soknader || !sykmeldinger || !stegId) {
-        return <QueryStatusPanel valgSoknadId={id} valgSykmeldingId={valgtSoknad?.sykmeldingId} />
-    }
-    const sporsmal = valgtSoknad.sporsmal[spmIndex]
-
-    const tittel = tekst(hentNokkel(valgtSoknad!, stegNo) as any)
-    const erUtlandssoknad = valgtSoknad.soknadstype === RSSoknadstype.OPPHOLD_UTLAND && !valgtSykmelding
-    const erReisetilskuddsoknad = valgtSoknad.soknadstype === RSSoknadstype.REISETILSKUDD
-    const erGradertReisetilskuddsoknad = valgtSoknad.soknadstype === RSSoknadstype.GRADERT_REISETILSKUDD
+    const erUtlandssoknad = valgtSoknad?.soknadstype === RSSoknadstype.OPPHOLD_UTLAND && !valgtSykmelding
+    const erReisetilskuddsoknad = valgtSoknad?.soknadstype === RSSoknadstype.REISETILSKUDD
+    const erGradertReisetilskuddsoknad = valgtSoknad?.soknadstype === RSSoknadstype.GRADERT_REISETILSKUDD
 
     if (!erUtlandssoknad) {
         const eldreUsendtSoknad = harEldreUsendtSoknad(valgtSoknad, soknader)
-        const usendteSm = eldreUsendteSykmeldinger(sykmeldinger, valgtSoknad.tom!)
+        const usendteSm = eldreUsendteSykmeldinger(sykmeldinger, valgtSoknad?.tom)
         if (usendteSm.length > 0) {
             return <EldreUsendtSykmelding usendteSykmeldinger={usendteSm} />
         }
@@ -91,20 +86,20 @@ export const Soknaden = () => {
             return <EldreUsendtSoknad eldreSoknad={eldreUsendtSoknad.eldsteSoknad} antall={eldreUsendtSoknad.antall} />
         }
     }
+    const sporsmal = valgtSoknad?.sporsmal[spmIndex]
 
-    if (stegNo > 1) {
+    if (valgtSoknad && stegNo > 1) {
         logEvent('skjema spørsmål åpnet', {
             soknadstype: valgtSoknad!.soknadstype,
             skjemanavn: 'sykepengesoknad',
-            spørsmål: sporsmal!.tag,
+            spørsmål: sporsmal?.tag || '',
         })
     }
-
     return (
         <>
             <Banner />
 
-            <HotjarTrigger jsTrigger={hentHotjarJsTrigger(valgtSoknad.soknadstype, 'soknad')}>
+            <HotjarTrigger jsTrigger={hentHotjarJsTrigger(valgtSoknad?.soknadstype, 'soknad')}>
                 <>
                     <Vis hvis={stegNo > 1 || erUtlandssoknad} render={() => <Fremdriftsbar />} />
 
@@ -113,14 +108,11 @@ export const Soknaden = () => {
                     <Vis hvis={stegNo === 1 && erGradertReisetilskuddsoknad} render={() => <SoknadMedToDeler />} />
 
                     <Vis
-                        hvis={stegNo === 1 && valgtSoknad.opprettetAvInntektsmelding}
+                        hvis={stegNo === 1 && valgtSoknad?.opprettetAvInntektsmelding}
                         render={() => <EgenmeldingsdagerArbeidsgiver />}
                     />
 
-                    <Vis
-                        hvis={stegNo === 1 && !erUtlandssoknad}
-                        render={() => <Opplysninger ekspandert={true} steg={valgtSoknad.sporsmal[stegNo - 1].tag} />}
-                    />
+                    <Vis hvis={stegNo === 1 && !erUtlandssoknad} render={() => <Opplysninger ekspandert={true} />} />
 
                     <Vis
                         hvis={stegNo === 1 && !erUtlandssoknad}
@@ -132,16 +124,11 @@ export const Soknaden = () => {
                         render={() => <OmReisetilskudd />}
                     />
 
-                    <Vis
-                        hvis={tittel && stegNo !== 1 && !erUtlandssoknad}
-                        render={() => (
-                            <Heading data-cy="sporsmal-tittel" level="2" size="medium" className="mb-4 mt-16">
-                                {tittel}
-                            </Heading>
-                        )}
-                    />
+                    <SporsmalTittel />
 
-                    <SporsmalForm valgtSoknad={valgtSoknad} sporsmal={sporsmal} spmIndex={spmIndex} />
+                    {valgtSoknad && sporsmal && (
+                        <SporsmalForm valgtSoknad={valgtSoknad} sporsmal={sporsmal} spmIndex={spmIndex} />
+                    )}
                     <Feedback soknad={valgtSoknad} steg={stegNo} />
                 </>
             </HotjarTrigger>

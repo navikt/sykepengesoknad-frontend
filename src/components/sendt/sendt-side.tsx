@@ -4,7 +4,6 @@ import { useRouter } from 'next/router'
 import { RSSoknadstatus } from '../../types/rs-types/rs-soknadstatus'
 import { RSSoknadstype } from '../../types/rs-types/rs-soknadstype'
 import { logEvent } from '../amplitude/amplitude'
-import Banner from '../banner/banner'
 import Endreknapp from '../endreknapp/endreknapp'
 import Ettersending from '../ettersending/ettersending'
 import { hentHotjarJsTrigger, HotjarTrigger } from '../hotjar-trigger'
@@ -14,6 +13,7 @@ import useSoknad from '../../hooks/useSoknad'
 import { urlTilSoknad } from '../soknad/soknad-link'
 import QueryStatusPanel from '../queryStatusPanel/QueryStatusPanel'
 import { kvitteringBreadcrumb, useUpdateBreadcrumbs } from '../../hooks/useBreadcrumbs'
+import { Banner } from '../banner/banner'
 
 const SendtSide = () => {
     const router = useRouter()
