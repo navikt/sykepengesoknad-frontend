@@ -57,6 +57,7 @@ const Perioder = ({ sporsmal }: SpmProps) => {
                 hvis={!sporsmal.tag.startsWith('MEDLEMSKAP')}
                 render={() => (
                     <Button
+                        type="button"
                         icon={<PlusIcon />}
                         size="small"
                         variant="tertiary"

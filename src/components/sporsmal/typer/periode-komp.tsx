@@ -1,12 +1,11 @@
 import { Button, DatePicker, RangeValidationT, useRangeDatepicker } from '@navikt/ds-react'
 import dayjs from 'dayjs'
-import React, { useEffect, useState } from 'react'
-import { Controller, useFormContext } from 'react-hook-form'
+import React, { useState } from 'react'
+import { useController, useFormContext } from 'react-hook-form'
 
 import { validerFom, validerPeriode, validerTom } from '../../../utils/sporsmal/valider-periode'
 import { tekst } from '../../../utils/tekster'
 import Vis from '../../vis'
-import { hentPeriode } from '../hent-svar'
 import { SpmProps } from '../sporsmal-form/sporsmal-form'
 import { maanedKalenderApnesPa } from '../sporsmal-utils'
 
@@ -22,22 +21,21 @@ export interface FormPeriode {
 type AllProps = SpmProps & PeriodeProps
 
 const PeriodeKomp = ({ sporsmal, index, slettPeriode }: AllProps) => {
-    const {
-        setValue,
-        getValues,
-        formState: { isSubmitted },
-        trigger,
-    } = useFormContext()
+    const { getValues } = useFormContext()
+    const [rangeValidation, setRangeValidation] = useState<RangeValidationT | undefined>(undefined)
 
-    const [periode, setPeriode] = useState<FormPeriode>({ fom: '', tom: '' })
     const id = sporsmal.id + '_' + index
-    const [rangeValidation, setRangeValidation] = useState<RangeValidationT | null>(null)
 
-    useEffect(() => {
-        const periode = hentPeriode(sporsmal, index)
-        setPeriode(periode)
-        // eslint-disable-next-line
-    }, [sporsmal])
+    const { field, fieldState } = useController({
+        name: id,
+        rules: {
+            validate: {
+                fom: (value) => validerFom(sporsmal, value, rangeValidation),
+                tom: (value) => validerTom(sporsmal, value, rangeValidation),
+                periode: () => validerPeriode(sporsmal, id, getValues()),
+            },
+        },
+    })
 
     const { datepickerProps, toInputProps, fromInputProps } = useRangeDatepicker({
         fromDate: sporsmal.min ? new Date(sporsmal.min) : new Date('1900'),
@@ -45,77 +43,60 @@ const PeriodeKomp = ({ sporsmal, index, slettPeriode }: AllProps) => {
         defaultMonth: maanedKalenderApnesPa(sporsmal.min, sporsmal.max),
         openOnFocus: false,
         allowTwoDigitYear: false,
+        defaultSelected: field.value
+            ? {
+                  from: dayjs(field.value.fom).toDate(),
+                  to: dayjs(field.value.tom).toDate(),
+              }
+            : undefined,
         onRangeChange: (range) => {
-            const fom = range?.from ? dayjs(range?.from).format('YYYY-MM-DD') : ''
-            const tom = range?.to ? dayjs(range?.to).format('YYYY-MM-DD') : ''
+            const fom = range?.from ? dayjs(range.from).format('YYYY-MM-DD') : ''
+            const tom = range?.to ? dayjs(range.to).format('YYYY-MM-DD') : ''
             const nyPeriode = { fom: fom, tom: tom }
-            setPeriode(nyPeriode)
-            setValue(id, nyPeriode)
+            field.onChange(nyPeriode)
         },
-        onValidate: (val) => {
-            setRangeValidation(val)
-            if (isSubmitted) {
-                trigger(id)
-            }
+        onValidate: (validate) => {
+            setRangeValidation(validate)
         },
     })
 
-    const captionSkalVises = !sporsmal.max && !sporsmal.min
-    const backendStrengTilFrontendFormat = (backendDate: string) => {
-        return dayjs(backendDate).format('DD.MM.YYYY')
-    }
-
     return (
         <li id={id} data-cy="periode">
-            <Controller
-                name={id}
-                rules={{
-                    validate: {
-                        fom: () => validerFom(sporsmal, id, getValues(), rangeValidation),
-                        tom: () => validerTom(sporsmal, id, getValues(), rangeValidation),
-                        periode: () => validerPeriode(sporsmal, id, getValues()),
-                    },
-                }}
-                render={({ fieldState }) => (
-                    <fieldset className="axe-exclude p-0">
-                        <DatePicker {...datepickerProps} locale="nb" dropdownCaption={captionSkalVises}>
-                            <div>
-                                <DatePicker.Input
-                                    {...fromInputProps}
-                                    label={tekst('sykepengesoknad.periodevelger.fom')}
-                                    id={sporsmal.id + '_' + index + '_fom'}
-                                    className="mt-6"
-                                    error={fieldState.error?.type === 'fom' && fieldState.error.message}
-                                    value={periode.fom ? backendStrengTilFrontendFormat(periode.fom) : undefined}
-                                />
-
-                                <DatePicker.Input
-                                    {...toInputProps}
-                                    label={tekst('sykepengesoknad.periodevelger.tom')}
-                                    id={sporsmal.id + '_' + index + '_tom'}
-                                    className="mt-4"
-                                    error={
-                                        (fieldState.error?.type === 'tom' || fieldState.error?.type === 'periode') &&
-                                        fieldState.error.message
-                                    }
-                                    value={periode.tom ? backendStrengTilFrontendFormat(periode.tom) : undefined}
-                                />
-                                <Vis
-                                    hvis={index > 0}
-                                    render={() => (
-                                        <Button
-                                            variant="tertiary"
-                                            size="small"
-                                            id={'btn_' + id}
-                                            onClick={(e) => slettPeriode(e, index)}
-                                        >
-                                            {tekst('sykepengesoknad.periodevelger.slett')}
-                                        </Button>
-                                    )}
-                                />
-                            </div>
-                        </DatePicker>
-                    </fieldset>
+            <fieldset className="axe-exclude p-0">
+                <DatePicker {...datepickerProps} locale="nb" dropdownCaption={!sporsmal.max && !sporsmal.min}>
+                    <div>
+                        <DatePicker.Input
+                            {...fromInputProps}
+                            label={tekst('sykepengesoknad.periodevelger.fom')}
+                            id={sporsmal.id + '_' + index + '_fom'}
+                            className="mt-6"
+                            error={fieldState.error?.type === 'fom' && fieldState.error.message}
+                        />
+                        <DatePicker.Input
+                            {...toInputProps}
+                            label={tekst('sykepengesoknad.periodevelger.tom')}
+                            id={sporsmal.id + '_' + index + '_tom'}
+                            className="mt-4"
+                            error={
+                                (fieldState.error?.type === 'tom' || fieldState.error?.type === 'periode') &&
+                                fieldState.error.message
+                            }
+                        />
+                    </div>
+                </DatePicker>
+            </fieldset>
+            <Vis
+                hvis={index > 0}
+                render={() => (
+                    <Button
+                        type="button"
+                        variant="tertiary"
+                        size="small"
+                        id={'btn_' + id}
+                        onClick={(e) => slettPeriode(e, index)}
+                    >
+                        {tekst('sykepengesoknad.periodevelger.slett')}
+                    </Button>
                 )}
             />
         </li>

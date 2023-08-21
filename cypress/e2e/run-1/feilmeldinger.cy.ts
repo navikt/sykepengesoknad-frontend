@@ -175,6 +175,32 @@ describe('Tester feilmeldinger', () => {
         )
     })
 
+    it('PERIODER mindre enn fom', () => {
+        resetAllePeriodeDateFelter()
+        setPeriodeDateFieldMedIndex(0, '01.01.2000')
+        setPeriodeDateFieldMedIndex(1, '10.04.2020')
+
+        gaVidere()
+        feilmeldingHandtering(
+            'Fra og med kan ikke være før 01.04.2020',
+            'Fra og med kan ikke være før 01.04.2020',
+            arbeidstakerGradert.sporsmal[3].undersporsmal[0].id + '_0_fom',
+        )
+    })
+
+    it('PERIODER større enn tom', () => {
+        resetAllePeriodeDateFelter()
+        setPeriodeDateFieldMedIndex(0, '01.04.2020')
+        setPeriodeDateFieldMedIndex(1, '30.12.2050')
+
+        gaVidere()
+        feilmeldingHandtering(
+            'Til og med kan ikke være etter 24.04.2020',
+            'Til og med kan ikke være etter 24.04.2020',
+            arbeidstakerGradert.sporsmal[3].undersporsmal[0].id + '_0_tom',
+        )
+    })
+
     it('PERIODER ugyldig format', () => {
         cy.focused().clear()
         cy.focused().type('abc')
@@ -247,24 +273,8 @@ describe('Tester feilmeldinger', () => {
         ingenFeilmeldinger()
 
         cy.contains('Slett periode').click()
-        ingenFeilmeldinger()
-    })
-
-    it('TALL validering på onSubmit og onChange', function () {
-        gaTilSoknad(arbeidstakerGradert, '7')
-        cy.get('input[value=JA]').click()
-        cy.get(`input[name=${arbeidstakerGradert.sporsmal[6].undersporsmal[0].id}]`).type('37.5')
-        cy.get('.undersporsmal input[value=Timer]').click()
-        cy.get(
-            `input[name=${arbeidstakerGradert.sporsmal[6].undersporsmal[1].undersporsmal[1].undersporsmal[0].id}]`,
-        ).type('1')
-        cy.get('[data-cy="feil-lokal"]').should('not.exist')
         gaVidere()
-        feilmeldingHandteringMedLokalFeilmelding(
-            'Timene utgjør mindre enn 50 %.',
-            'Antall timer du skrev inn, betyr at du har jobbet 0 % av det du gjør når du er frisk. Du må enten svare nei på øverste spørsmålet eller endre antall timer totalt.',
-            arbeidstakerGradert.sporsmal[6].undersporsmal[1].undersporsmal[1].undersporsmal[0].id,
-        )
+        ingenFeilmeldinger()
     })
 
     it('TALL ingen valg', () => {
@@ -303,18 +313,14 @@ describe('Tester feilmeldinger', () => {
     })
 
     it('TALL grad mindre enn sykmeldingsgrad', () => {
-        cy.get(`input[id=${arbeidstakerGradert.sporsmal[6].undersporsmal[1].undersporsmal[1].id}]`).click()
-        gaVidere()
-        feilmeldingHandteringMedLokalFeilmelding(
-            'Du må oppgi en verdi',
-            'Du må svare på hvor mye du jobbet totalt',
-            arbeidstakerGradert.sporsmal[6].undersporsmal[1].undersporsmal[1].undersporsmal[0].id,
-        )
-        cy.focused().type('1')
+        cy.get('.undersporsmal input[value=Timer]').click()
+        cy.get(
+            `input[name=${arbeidstakerGradert.sporsmal[6].undersporsmal[1].undersporsmal[1].undersporsmal[0].id}]`,
+        ).type('1')
         gaVidere()
         feilmeldingHandteringMedLokalFeilmelding(
             'Timene utgjør mindre enn 50 %.',
-            'Antall timer du skrev inn, betyr at du har jobbet 0 % av det du gjør når du er frisk. Du må enten svare nei på øverste spørsmålet eller endre antall timer totalt.',
+            'Antall timer du skrev inn, betyr at du har jobbet 2 % av det du gjør når du er frisk. Du må enten svare nei på øverste spørsmålet eller endre antall timer totalt.',
             arbeidstakerGradert.sporsmal[6].undersporsmal[1].undersporsmal[1].undersporsmal[0].id,
         )
     })
@@ -329,16 +335,11 @@ describe('Tester feilmeldinger', () => {
         gaTilSoknad(arbeidstakerGradert, '9')
         cy.get('input[value=JA]').click()
         gaVidere()
-
-        cy.get('.navds-error-message').should('exist')
-        cy.get('.navds-error-message').contains('Du må velge minst et alternativ')
-        cy.get('[data-cy="feil-oppsumering"]')
-            .should('exist')
-            .within(() => {
-                cy.contains('Det er 1 feil i skjemaet')
-                cy.contains('Du må oppgi hvilke inntektskilder du har').click()
-            })
-        cy.focused().should('have.attr', 'id', arbeidstakerGradert.sporsmal[8].undersporsmal[0].undersporsmal[0].id)
+        feilmeldingHandtering(
+            'Du må velge minst et alternativ',
+            'Du må oppgi hvilke inntektskilder du har',
+            arbeidstakerGradert.sporsmal[8].undersporsmal[0].undersporsmal[0].id,
+        )
     })
 
     it('CHECKBOX_GRUPPE feilmelding går bort', () => {
