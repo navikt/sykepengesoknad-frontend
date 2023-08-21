@@ -10,20 +10,22 @@ import Vis from '../vis'
 
 export const SporsmalTittel = () => {
     const { valgtSoknad, erUtenlandssoknad, stegNo } = UseSoknadMedDetaljer()
-    if (!valgtSoknad)
-        return (
-            <>
-                <Skeleton variant="rectangle" />
-                <strong>sdfgsdf</strong>
-            </>
-        )
 
-    const tittel = tekst(hentNokkel(valgtSoknad!, stegNo) as any)
+    function tittel() {
+        if (valgtSoknad) return tekst(hentNokkel(valgtSoknad!, stegNo) as any)
+        return 'placeholder'
+    }
 
-    if (tittel && stegNo !== 1 && !erUtenlandssoknad)
+    if (stegNo !== 1 && !erUtenlandssoknad)
         return (
-            <Heading data-cy="sporsmal-tittel" level="2" size="medium" className="mb-4 mt-16">
-                {tittel}
+            <Heading
+                as={valgtSoknad ? Heading : Skeleton}
+                data-cy="sporsmal-tittel"
+                level="2"
+                size="medium"
+                className="mb-4 mt-16"
+            >
+                {tittel()}
             </Heading>
         )
 }

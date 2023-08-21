@@ -41,16 +41,14 @@ export const Feedback = ({ soknad, steg }: { soknad: Soknad | undefined; steg: n
         activeState && textAreaRef.current && (textAreaRef.current as any).focus()
         setErrorMsg(null)
     }, [activeState])
-    if (!soknad) {
-        return <Skeleton variant="rectangle" />
-    }
+
     const sporsmal = soknad?.sporsmal[steg - 1]
 
-    if (steg <= 1 && soknad.soknadstype !== RSSoknadstype.OPPHOLD_UTLAND) {
+    if (steg <= 1 && soknad?.soknadstype !== RSSoknadstype.OPPHOLD_UTLAND) {
         return null
     }
 
-    if (steg == soknad.sporsmal.filter((s) => s.tag !== TagTyper.VAER_KLAR_OVER_AT).length) {
+    if (steg == soknad?.sporsmal.filter((s) => s.tag !== TagTyper.VAER_KLAR_OVER_AT).length) {
         return null
     }
 
@@ -67,7 +65,7 @@ export const Feedback = ({ soknad, steg }: { soknad: Soknad | undefined; steg: n
             feedbackId: 'sykepengesoknad-sporsmal',
             svar: activeState,
             app: 'sykepengesoknad-frontend',
-            sporsmal: sporsmal.tag,
+            sporsmal: sporsmal?.tag,
         }
 
         await giFeedback(body)
@@ -79,6 +77,7 @@ export const Feedback = ({ soknad, steg }: { soknad: Soknad | undefined; steg: n
                 data-cy={'feedback-' + props.feedbacktype}
                 variant="secondary-neutral"
                 size="small"
+                as={soknad ? Button : Skeleton}
                 className={cn({
                     'bg-surface-neutral-active text-text-on-inverted hover:bg-surface-neutral-active':
                         activeState === props.feedbacktype,
@@ -123,7 +122,7 @@ export const Feedback = ({ soknad, steg }: { soknad: Soknad | undefined; steg: n
         <section aria-label="Tilbakemelding på søknaden">
             <div className="w:full mt-16 md:w-3/4" data-cy="feedback-wrapper">
                 <div className="mt-1 rounded-xl bg-surface-subtle p-6">
-                    <BodyShort className="mb-6">
+                    <BodyShort className="mb-6" as={soknad ? BodyShort : Skeleton}>
                         Opplever du at du har nok informasjon til å svare på dette spørsmålet?
                     </BodyShort>
                     <div className="flex w-full gap-2">

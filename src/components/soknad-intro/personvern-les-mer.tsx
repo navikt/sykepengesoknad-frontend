@@ -9,11 +9,7 @@ import { FlexModal } from '../flex-modal'
 
 type Event = MouseEvent<HTMLAnchorElement | HTMLButtonElement>
 
-export interface PersonvernLesMerProps {
-    soknadstype: RSSoknadstypeType
-}
-
-const PersonvernLesMer = ({ soknadstype }: PersonvernLesMerProps) => {
+const PersonvernLesMer = () => {
     const [aapen, setAapen] = useState<boolean>(false)
 
     const handleAapen = (event: Event) => {
@@ -21,7 +17,6 @@ const PersonvernLesMer = ({ soknadstype }: PersonvernLesMerProps) => {
         setAapen(true)
         logEvent('knapp klikket', {
             tekst: tekst('sykepengesoknad.soknad-intro.personvern-les-mer'),
-            soknadstype: soknadstype,
         })
     }
     const amplitudeLukketPopup = () => {

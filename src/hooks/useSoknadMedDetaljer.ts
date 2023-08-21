@@ -9,8 +9,8 @@ import useSykmelding from './useSykmelding'
 
 export function UseSoknadMedDetaljer() {
     const router = useRouter()
-    const { id, stegId } = router.query as { id?: string; stegId: string }
-    const { data: valgtSoknad, isLoading: valgtSoknadLaster } = useSoknad(id, id !== undefined)
+    const { id: soknadId, stegId } = router.query as { id?: string; stegId: string }
+    const { data: valgtSoknad, isLoading: valgtSoknadLaster } = useSoknad(soknadId, soknadId !== undefined)
     const { data: soknader, isLoading: soknaderLaster } = useSoknader()
     const { data: sykmeldinger, isLoading: sykmeldingerLaster } = useSykmeldinger()
     const { data: valgtSykmelding } = useSykmelding(valgtSoknad?.sykmeldingId)
@@ -21,6 +21,7 @@ export function UseSoknadMedDetaljer() {
     const erUtenlandssoknad = valgtSoknad?.soknadstype === RSSoknadstype.OPPHOLD_UTLAND && !valgtSykmelding
     return {
         valgtSoknad,
+        soknadId,
         sykmeldinger,
         valgtSykmelding,
         stegNo,
@@ -31,5 +32,6 @@ export function UseSoknadMedDetaljer() {
         sykmeldingerLaster,
         valgtSoknadLaster,
         erUtenlandssoknad,
+        stegId,
     }
 }

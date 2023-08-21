@@ -3,13 +3,13 @@ import { useMutation, useQueryClient } from '@tanstack/react-query'
 import fetchMedRequestId, { FetchError } from '../utils/fetch'
 import { Soknad } from '../types/types'
 
-export function useSendSoknad(valgtSoknad: Soknad) {
+export function useSendSoknad(valgtSoknad: Soknad | undefined) {
     const queryClient = useQueryClient()
 
     return useMutation<unknown, FetchError>({
         mutationFn: async () => {
             return fetchMedRequestId(
-                `/syk/sykepengesoknad/api/sykepengesoknad-backend/api/v2/soknader/${valgtSoknad.id}/send`,
+                `/syk/sykepengesoknad/api/sykepengesoknad-backend/api/v2/soknader/${valgtSoknad?.id}/send`,
                 {
                     method: 'POST',
                     credentials: 'include',
@@ -20,12 +20,12 @@ export function useSendSoknad(valgtSoknad: Soknad) {
         mutationKey: ['sendsoknad'],
 
         onSuccess: async () => {
-            await queryClient.invalidateQueries(['soknad', valgtSoknad.id])
+            await queryClient.invalidateQueries(['soknad', valgtSoknad?.id])
 
             queryClient.invalidateQueries(['soknader']).catch()
 
-            if (valgtSoknad.korrigerer !== undefined) {
-                queryClient.invalidateQueries(['soknad', valgtSoknad.korrigerer]).catch()
+            if (valgtSoknad?.korrigerer !== undefined) {
+                queryClient.invalidateQueries(['soknad', valgtSoknad?.korrigerer]).catch()
             }
         },
     })

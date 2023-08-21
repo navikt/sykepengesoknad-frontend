@@ -11,9 +11,8 @@ import Person from '../person/Person'
 import { UseSoknadMedDetaljer } from '../../hooks/useSoknadMedDetaljer'
 
 export const Banner = () => {
-    const { valgtSoknad, valgtSoknadLaster } = UseSoknadMedDetaljer()
+    const { valgtSoknad } = UseSoknadMedDetaljer()
 
-    const asSkeleton = valgtSoknadLaster ? Heading : Skeleton
     const tittel = () => {
         if (valgtSoknad) {
             if (valgtSoknad.soknadstype === RSSoknadstype.OPPHOLD_UTLAND) {
@@ -28,23 +27,15 @@ export const Banner = () => {
         }
         return tekst('sykepengesoknad.sidetittel')
     }
+    if (!valgtSoknad) return <Header overskrift={tittel()} underoverskrift="placeholder tekst" skeleton={true} />
 
-    return (
-        <header className="m-auto mt-4 flex items-center justify-between py-4">
-            <Heading as={asSkeleton} size="large" level="1" className="inline md:mr-2">
-                {tittel()}
-                <Vis
-                    hvis={valgtSoknad && valgtSoknad.fom && valgtSoknad.tom}
-                    render={() => (
-                        <Heading size="small" as="span" className="mt-2 block">
-                            {tilLesbarPeriodeMedArstall(valgtSoknad!.fom, valgtSoknad!.tom)}
-                        </Heading>
-                    )}
-                />
-            </Heading>
-            <Person />
-        </header>
-    )
+    function underoverskrift() {
+        if (valgtSoknad && valgtSoknad.fom && valgtSoknad.tom) {
+            return tilLesbarPeriodeMedArstall(valgtSoknad.fom, valgtSoknad.tom)
+        }
+    }
+
+    return <Header overskrift={tittel()} underoverskrift={underoverskrift()} />
 }
 
 export const Header = ({

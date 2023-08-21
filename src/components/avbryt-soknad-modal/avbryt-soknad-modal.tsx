@@ -1,4 +1,4 @@
-import { Alert, BodyLong, Button } from '@navikt/ds-react'
+import { Alert, BodyLong, Button, Skeleton } from '@navikt/ds-react'
 import React, { useState } from 'react'
 import { useRouter } from 'next/router'
 
@@ -10,6 +10,8 @@ import useSoknad from '../../hooks/useSoknad'
 import useSoknader from '../../hooks/useSoknader'
 import { FlexModal } from '../flex-modal'
 import { useAvbryt } from '../../hooks/useAvbryt'
+import { UseSoknadMedDetaljer } from '../../hooks/useSoknadMedDetaljer'
+import { cn } from '../../utils/tw-utils'
 
 const AvbrytKorrigering = () => {
     const router = useRouter()
@@ -23,7 +25,10 @@ const AvbrytKorrigering = () => {
         <>
             <Button
                 variant="tertiary"
-                className="-ml-5 text-surface-danger hover:bg-red-50 hover:text-surface-danger"
+                as={valgtSoknad ? Button : Skeleton}
+                className={cn('text-surface-danger hover:bg-red-50 hover:text-surface-danger', {
+                    '-ml-5': valgtSoknad,
+                })}
                 onClick={(e) => {
                     logEvent('modal åpnet', {
                         component: tekst('avbryt.korrigering.knapp'),
@@ -42,18 +47,13 @@ const AvbrytKorrigering = () => {
 }
 
 const AvbrytSoknadModal = () => {
-    const router = useRouter()
-    const { id, stegId } = router.query as { id: string; stegId: string }
-    const { data: valgtSoknad } = useSoknad(id)
-    const { data: soknader } = useSoknader()
+    const { valgtSoknad, stegId } = UseSoknadMedDetaljer()
+
     const { mutate: avbrytMutation, isLoading: avbryter, error: avbrytError } = useAvbryt()
 
     const [aapen, setAapen] = useState<boolean>(false)
 
-    if (!valgtSoknad || !soknader) {
-        return null
-    }
-    if (valgtSoknad.status == RSSoknadstatus.UTKAST_TIL_KORRIGERING) {
+    if (valgtSoknad?.status == RSSoknadstatus.UTKAST_TIL_KORRIGERING) {
         return <AvbrytKorrigering />
     }
 
@@ -61,13 +61,16 @@ const AvbrytSoknadModal = () => {
         <>
             <Button
                 variant="tertiary"
-                className="-ml-5 text-surface-danger hover:bg-red-50 hover:text-surface-danger"
+                as={valgtSoknad ? Button : Skeleton}
+                className={cn('text-surface-danger hover:bg-red-50 hover:text-surface-danger', {
+                    '-ml-5': valgtSoknad,
+                })}
                 data-cy="avbryt-soknad"
                 onClick={(e) => {
                     logEvent('modal åpnet', {
                         component: tekst('avbryt.popup.tittel'),
-                        soknadstype: valgtSoknad.soknadstype,
-                        steg: stegId!,
+                        soknadstype: valgtSoknad?.soknadstype,
+                        steg: stegId,
                     })
                     setAapen(true)
                     e.preventDefault()
@@ -84,7 +87,7 @@ const AvbrytSoknadModal = () => {
                 onClose={() => {
                     logEvent('modal lukket', {
                         component: tekst('avbryt.popup.tittel'),
-                        soknadstype: valgtSoknad.soknadstype,
+                        soknadstype: valgtSoknad?.soknadstype,
                         steg: stegId!,
                     })
                 }}
@@ -100,17 +103,17 @@ const AvbrytSoknadModal = () => {
                     onClick={() => {
                         logEvent('knapp klikket', {
                             tekst: tekst('avbryt.popup.ja'),
-                            soknadstype: valgtSoknad.soknadstype,
+                            soknadstype: valgtSoknad?.soknadstype,
                             component: tekst('avbryt.popup.tittel'),
-                            steg: stegId!,
+                            steg: stegId,
                         })
-
-                        avbrytMutation({
-                            valgtSoknad: valgtSoknad,
-                            onSuccess: () => {
-                                setAapen(false)
-                            },
-                        })
+                        if (valgtSoknad)
+                            avbrytMutation({
+                                valgtSoknad: valgtSoknad,
+                                onSuccess: () => {
+                                    setAapen(false)
+                                },
+                            })
                     }}
                 >
                     {tekst('avbryt.popup.ja')}
@@ -121,7 +124,7 @@ const AvbrytSoknadModal = () => {
                     onClick={() => {
                         logEvent('knapp klikket', {
                             tekst: tekst('avbryt.popup.nei'),
-                            soknadstype: valgtSoknad.soknadstype,
+                            soknadstype: valgtSoknad?.soknadstype,
                             component: tekst('avbryt.popup.tittel'),
                             steg: stegId!,
                         })

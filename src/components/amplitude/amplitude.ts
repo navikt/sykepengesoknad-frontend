@@ -24,9 +24,10 @@ type validEventNames =
     | 'modal åpnet'
     | 'modal lukket' //Bruk kun navn fra taksonomien
 
-export const logEvent = (eventName: validEventNames, eventData: Record<string, string | boolean>) => {
+export const logEvent = (eventName: validEventNames, eventData: Record<string, string | boolean | undefined>) => {
     if (window) {
         if (amplitudeEnabled()) {
+            //TODO fjern de med undefined fra eventdata
             logAmplitudeEvent({
                 origin: 'sykepengesoknad-frontend',
                 eventName,

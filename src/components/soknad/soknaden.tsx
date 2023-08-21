@@ -126,9 +126,8 @@ export const Soknaden = () => {
 
                     <SporsmalTittel />
 
-                    {valgtSoknad && sporsmal && (
-                        <SporsmalForm valgtSoknad={valgtSoknad} sporsmal={sporsmal} spmIndex={spmIndex} />
-                    )}
+                    <SporsmalForm valgtSoknad={valgtSoknad} sporsmal={sporsmal} spmIndex={spmIndex} />
+
                     <Feedback soknad={valgtSoknad} steg={stegNo} />
                 </>
             </HotjarTrigger>

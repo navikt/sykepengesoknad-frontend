@@ -1,6 +1,6 @@
-import { Button } from '@navikt/ds-react'
+import { Button, Skeleton } from '@navikt/ds-react'
 import React from 'react'
-import { useRouter } from 'next/router'
+import { useFormContext } from 'react-hook-form'
 
 import { RSSoknadstatus } from '../../../types/rs-types/rs-soknadstatus'
 import { RSSoknadstype } from '../../../types/rs-types/rs-soknadstype'
@@ -9,46 +9,67 @@ import AvbrytSoknadModal from '../../avbryt-soknad-modal/avbryt-soknad-modal'
 import AvsluttOgFortsettSenere from '../../avslutt-og-fortsett-senere/avslutt-og-fortsett-senere'
 import PersonvernLesMer from '../../soknad-intro/personvern-les-mer'
 import Vis from '../../vis'
-import { Soknad } from '../../../types/types'
+import { TagTyper } from '../../../types/enums'
+import { hentSporsmal } from '../../../utils/soknad-utils'
+import { UseSoknadMedDetaljer } from '../../../hooks/useSoknadMedDetaljer'
 
-interface KnapperadProps {
-    soknad: Soknad
-    poster: boolean
-}
+const Knapperad = ({ poster }: { poster: boolean }) => {
+    const { erUtenlandssoknad, valgtSoknad: soknad, stegNo, sporsmal, spmIndex } = UseSoknadMedDetaljer()
 
-const Knapperad = ({ soknad, poster }: KnapperadProps) => {
-    const router = useRouter()
-    const { stegId } = router.query as { id: string; stegId: string }
-    const stegNo = parseInt(stegId!)
-    const spmIndex = stegNo - 2
-    const erUtlandssoknad = soknad.soknadstype === RSSoknadstype.OPPHOLD_UTLAND
+    const { getValues } = useFormContext()
+    const skalSkjuleKnapperad = () => {
+        if (!soknad || !sporsmal) return false
+        if (soknad.soknadstype === RSSoknadstype.OPPHOLD_UTLAND && sporsmal.tag === TagTyper.ARBEIDSGIVER) {
+            const formValues = getValues()
 
-    const nokkel = () => {
+            const arbiedsgiverId = hentSporsmal(soknad, TagTyper.ARBEIDSGIVER)!.id
+            const ferieId = hentSporsmal(soknad, TagTyper.FERIE)!.id
+
+            const harFerie = formValues[ferieId] === 'JA'
+            const harArbeidsgiver = formValues[arbiedsgiverId] === 'JA'
+
+            if (harArbeidsgiver && harFerie) {
+                return true
+            }
+        }
+
+        return false
+    }
+    if (skalSkjuleKnapperad()) return null
+
+    const knappetekst = () => {
+        if (!soknad) return 'placeholder'
         const erSisteSteg =
             spmIndex === soknad.sporsmal.length - (soknad.soknadstype === RSSoknadstype.OPPHOLD_UTLAND ? 2 : 3)
         if (erSisteSteg) {
             if (soknad.status === RSSoknadstatus.UTKAST_TIL_KORRIGERING) {
-                return 'sykepengesoknad.send.endringene'
+                return tekst('sykepengesoknad.send.endringene')
             }
-            return 'sykepengesoknad.send'
+            return tekst('sykepengesoknad.send')
         }
-        return 'sykepengesoknad.ga-videre'
+        return tekst('sykepengesoknad.ga-videre')
     }
 
     return (
         <div className="my-8" data-cy="knapperad">
-            <Button variant="primary" type="submit" loading={poster} className="mb-12 mt-6">
-                {tekst(nokkel())}
+            <Button
+                as={soknad ? Button : Skeleton}
+                variant="primary"
+                type="submit"
+                loading={poster}
+                className="mb-12 mt-6"
+            >
+                {knappetekst()}
             </Button>
 
             <AvsluttOgFortsettSenere />
             <AvbrytSoknadModal />
             <Vis
-                hvis={stegNo === 1 && !erUtlandssoknad}
+                hvis={stegNo === 1 && !erUtenlandssoknad}
                 render={() => (
                     <>
                         <hr className="my-4" />
-                        <PersonvernLesMer soknadstype={soknad.soknadstype} />
+                        <PersonvernLesMer />
                     </>
                 )}
             />

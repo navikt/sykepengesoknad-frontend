@@ -12,25 +12,25 @@ import { tekst } from '../../../utils/tekster'
 import { Soknad } from '../../../types/types'
 import { RSSoknadstype } from '../../../types/rs-types/rs-soknadstype'
 import { UseSoknadMedDetaljer } from '../../../hooks/useSoknadMedDetaljer'
+import { UseTestpersonQuery } from '../../../hooks/useTestpersonQuery'
 
-const TilbakeKnapp = ({ soknad, stegNo }: { soknad: Soknad; stegNo: number }) => {
-    if (stegNo == 1) {
+const TilbakeKnapp = () => {
+    const { valgtSoknad: soknad, stegNo, soknadId } = UseSoknadMedDetaljer()
+    const testperson = UseTestpersonQuery()
+    if (stegNo == 1 || !soknad) {
         return <div></div> //Tom div pga flex justify-between på parent
     }
 
     return (
-        <NextLink
-            legacyBehavior
-            passHref
-            href={`/soknader/${soknad.id}${SEPARATOR}${stegNo - 1}${window.location.search}`}
-        >
+        <NextLink legacyBehavior passHref href={`/soknader/${soknadId}${SEPARATOR}${stegNo - 1}${testperson.query()}`}>
             <Link
                 className="cursor-pointer"
                 onClick={() => {
+                    if (!soknad) return
                     logEvent('navigere', {
                         lenketekst: tekst('soknad.tilbakeknapp'),
-                        fra: soknad!.sporsmal[stegNo - 1].tag,
-                        til: soknad!.sporsmal[stegNo - 2].tag,
+                        fra: soknad.sporsmal[stegNo - 1].tag,
+                        til: soknad.sporsmal[stegNo - 2].tag,
                         soknadstype: soknad?.soknadstype,
                         stegId: `${stegNo}`,
                     })
@@ -44,24 +44,22 @@ const TilbakeKnapp = ({ soknad, stegNo }: { soknad: Soknad; stegNo: number }) =>
 }
 
 const Fremdriftsbar = () => {
-    const { valgtSoknad, valgtSoknadLaster, stegNo } = UseSoknadMedDetaljer()
+    const { valgtSoknad, stegNo } = UseSoknadMedDetaljer()
 
     const oppholdUtland = valgtSoknad?.soknadstype == RSSoknadstype.OPPHOLD_UTLAND
 
     const aktivtSteg = oppholdUtland ? stegNo : stegNo - 1
     if (valgtSoknad && aktivtSteg == 0) return null
-    if (!valgtSoknad) {
-        if (aktivtSteg == 0) {
-            // ingen progressbar på første side
-            return null
-        }
-        return <Skeleton variant="rectangle" height="70px" className="rounded bg-red-200" />
+
+    if (aktivtSteg == 0) {
+        // ingen progressbar på første side
+        return null
     }
 
-    const antallSporsmål = valgtSoknad.sporsmal.filter((s) => s.tag !== TagTyper.VAER_KLAR_OVER_AT).length
+    const antallSporsmål = valgtSoknad?.sporsmal.filter((s) => s.tag !== TagTyper.VAER_KLAR_OVER_AT).length || 9
     const antallSteg = oppholdUtland ? antallSporsmål + 1 : antallSporsmål
 
-    const bredde = (100 / antallSteg) * aktivtSteg
+    const bredde = valgtSoknad ? (100 / antallSteg) * aktivtSteg : 0
 
     const valueText = `${aktivtSteg} av ${antallSteg} steg`
 
@@ -85,8 +83,8 @@ const Fremdriftsbar = () => {
                 />
             </div>
             <div className="mt-4 flex justify-between">
-                <TilbakeKnapp soknad={valgtSoknad} stegNo={stegNo} />
-                <BodyShort as="span">{valueText}</BodyShort>
+                <TilbakeKnapp />
+                <BodyShort as={valgtSoknad ? 'span' : Skeleton}>{valueText}</BodyShort>
             </div>
         </div>
     )
