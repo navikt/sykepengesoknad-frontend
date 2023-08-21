@@ -40,7 +40,7 @@ const Knapperad = ({ poster }: { poster: boolean }) => {
     const knappetekst = () => {
         if (!soknad) return 'placeholder'
         const erSisteSteg =
-            spmIndex === soknad.sporsmal.length - (soknad.soknadstype === RSSoknadstype.OPPHOLD_UTLAND ? 2 : 3)
+            spmIndex === soknad.sporsmal.length - (soknad.soknadstype === RSSoknadstype.OPPHOLD_UTLAND ? 1 : 2)
         if (erSisteSteg) {
             if (soknad.status === RSSoknadstatus.UTKAST_TIL_KORRIGERING) {
                 return tekst('sykepengesoknad.send.endringene')

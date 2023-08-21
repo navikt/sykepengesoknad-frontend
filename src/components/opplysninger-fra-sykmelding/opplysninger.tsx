@@ -1,11 +1,9 @@
 import React, { useState } from 'react'
 import { ExpansionCard, Heading } from '@navikt/ds-react'
-import { useRouter } from 'next/router'
 
 import { tekst } from '../../utils/tekster'
-import useSoknad from '../../hooks/useSoknad'
-import useSykmelding from '../../hooks/useSykmelding'
 import { logEvent } from '../amplitude/amplitude'
+import { UseSoknadMedDetaljer } from '../../hooks/useSoknadMedDetaljer'
 
 import ArbeidsgiverInfo from './arbeidsgiver-info'
 import ArbeidssituasjonInfo from './arbeidssituasjon-info'
@@ -23,25 +21,20 @@ interface OpplysningerProps {
 }
 
 const Opplysninger = ({ ekspandert }: OpplysningerProps) => {
-    const router = useRouter()
-    const { id, stegId } = router.query as { id: string; stegId: string }
-    const stegNo = parseInt(stegId)
+    const { valgtSykmelding, valgtSoknad, sporsmal } = UseSoknadMedDetaljer()
 
-    const { data: valgtSoknad } = useSoknad(id)
-    const { data: valgtSykmelding } = useSykmelding(valgtSoknad?.sykmeldingId)
     const [open, setOpen] = useState<boolean>(ekspandert)
 
     const tittel = tekst('sykepengesoknad.sykmelding-utdrag.tittel')
 
     if (!valgtSoknad || !valgtSykmelding) return null
-    const steg = valgtSoknad.sporsmal[stegNo - 1].tag
     return (
         <ExpansionCard className="my-8" data-cy="opplysninger-fra-sykmeldingen" open={open} aria-label={tittel}>
             <ExpansionCard.Header
                 onClick={() => {
                     logEvent(open ? 'accordion lukket' : 'accordion åpnet', {
                         component: tittel,
-                        steg: steg,
+                        steg: sporsmal?.tag,
                     })
                     setOpen(!open)
                 }}
