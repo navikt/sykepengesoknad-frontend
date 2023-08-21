@@ -8,6 +8,7 @@ import { tekst } from '../../../utils/tekster'
 import Vis from '../../vis'
 import { hentPeriode } from '../hent-svar'
 import { SpmProps } from '../sporsmal-form/sporsmal-form'
+import { maanedKalenderApnesPa } from '../sporsmal-utils'
 
 interface PeriodeProps {
     index: number
@@ -41,7 +42,9 @@ const PeriodeKomp = ({ sporsmal, index, slettPeriode }: AllProps) => {
     const { datepickerProps, toInputProps, fromInputProps } = useRangeDatepicker({
         fromDate: sporsmal.min ? new Date(sporsmal.min) : new Date('1900'),
         toDate: sporsmal.max ? new Date(sporsmal.max) : new Date('2100'),
-        defaultMonth: sporsmal.max ? new Date(sporsmal.max) : new Date(),
+        defaultMonth: maanedKalenderApnesPa(sporsmal.min, sporsmal.max),
+        openOnFocus: false,
+        allowTwoDigitYear: false,
         onRangeChange: (range) => {
             const fom = range?.from ? dayjs(range?.from).format('YYYY-MM-DD') : ''
             const tom = range?.to ? dayjs(range?.to).format('YYYY-MM-DD') : ''
@@ -49,8 +52,6 @@ const PeriodeKomp = ({ sporsmal, index, slettPeriode }: AllProps) => {
             setPeriode(nyPeriode)
             setValue(id, nyPeriode)
         },
-        openOnFocus: false,
-        allowTwoDigitYear: false,
         onValidate: (val) => {
             setRangeValidation(val)
             if (isSubmitted) {
@@ -77,7 +78,7 @@ const PeriodeKomp = ({ sporsmal, index, slettPeriode }: AllProps) => {
                 }}
                 render={({ fieldState }) => (
                     <fieldset className="axe-exclude p-0">
-                        <DatePicker {...datepickerProps} dropdownCaption={captionSkalVises}>
+                        <DatePicker {...datepickerProps} locale="nb" dropdownCaption={captionSkalVises}>
                             <div>
                                 <DatePicker.Input
                                     {...fromInputProps}
