@@ -1,4 +1,4 @@
-import { BodyShort, GuidePanel, Heading, Skeleton } from '@navikt/ds-react'
+import { Heading, Skeleton } from '@navikt/ds-react'
 import React from 'react'
 
 import { tekst } from '../../utils/tekster'
@@ -6,7 +6,6 @@ import { UseSoknadMedDetaljer } from '../../hooks/useSoknadMedDetaljer'
 import { Soknad } from '../../types/types'
 import { RSSoknadstype } from '../../types/rs-types/rs-soknadstype'
 import { erSisteSide, fjernIndexFraTag } from '../sporsmal/sporsmal-utils'
-import Vis from '../vis'
 
 export const SporsmalTittel = () => {
     const { valgtSoknad, erUtenlandssoknad, stegNo } = UseSoknadMedDetaljer()

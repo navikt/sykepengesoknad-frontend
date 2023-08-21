@@ -1,12 +1,9 @@
 import { Heading, Skeleton } from '@navikt/ds-react'
 import React from 'react'
-import { useRouter } from 'next/router'
 
 import { RSSoknadstype } from '../../types/rs-types/rs-soknadstype'
 import { tilLesbarPeriodeMedArstall } from '../../utils/dato-utils'
 import { tekst } from '../../utils/tekster'
-import Vis from '../vis'
-import useSoknad from '../../hooks/useSoknad'
 import Person from '../person/Person'
 import { UseSoknadMedDetaljer } from '../../hooks/useSoknadMedDetaljer'
 

@@ -1,11 +1,9 @@
 import { BodyShort, Button, Skeleton } from '@navikt/ds-react'
 import React, { useState } from 'react'
-import { useRouter } from 'next/router'
 
 import { minSideUrl } from '../../utils/environment'
 import { tekst } from '../../utils/tekster'
 import { logEvent } from '../amplitude/amplitude'
-import useSoknad from '../../hooks/useSoknad'
 import { FlexModal } from '../flex-modal'
 import { UseSoknadMedDetaljer } from '../../hooks/useSoknadMedDetaljer'
 import { cn } from '../../utils/tw-utils'

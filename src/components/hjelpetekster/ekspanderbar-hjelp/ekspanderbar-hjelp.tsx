@@ -1,4 +1,4 @@
-import { BodyLong, ReadMore, Skeleton } from '@navikt/ds-react'
+import { BodyLong, ReadMore } from '@navikt/ds-react'
 import React, { useEffect, useState } from 'react'
 import { useRouter } from 'next/router'
 

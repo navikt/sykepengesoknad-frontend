@@ -2,7 +2,6 @@ import { FieldError, FieldErrorsImpl, Merge } from 'react-hook-form'
 import dayjs from 'dayjs'
 
 import { TagTyper } from '../../types/enums'
-import { RSSoknadstype } from '../../types/rs-types/rs-soknadstype'
 import { RSSvartype } from '../../types/rs-types/rs-svartype'
 import { Soknad, Sporsmal } from '../../types/types'
 import { SEPARATOR } from '../../utils/constants'

@@ -1,4 +1,3 @@
-import { Heading, Skeleton } from '@navikt/ds-react'
 import React, { useEffect } from 'react'
 import { useRouter } from 'next/router'
 
@@ -9,7 +8,6 @@ import SporsmalForm from '../../components/sporsmal/sporsmal-form/sporsmal-form'
 import Fremdriftsbar from '../sporsmal/fremdriftsbar/fremdriftsbar'
 import { RSSoknadstatus } from '../../types/rs-types/rs-soknadstatus'
 import { RSSoknadstype } from '../../types/rs-types/rs-soknadstype'
-import { tekst } from '../../utils/tekster'
 import { logEvent } from '../amplitude/amplitude'
 import { EldreUsendtSoknad, harEldreUsendtSoknad } from '../eldre-usendt/eldre-usendt-soknad'
 import { EldreUsendtSykmelding } from '../eldre-usendt/eldre-usendt-sykmelding'
@@ -20,13 +18,11 @@ import { ViktigInformasjon } from '../soknad-intro/viktig-informasjon'
 import Vis from '../vis'
 import useSoknad from '../../hooks/useSoknad'
 import useSoknader from '../../hooks/useSoknader'
-import QueryStatusPanel from '../queryStatusPanel/QueryStatusPanel'
 import { soknadBreadcrumb, useUpdateBreadcrumbs } from '../../hooks/useBreadcrumbs'
 import EgenmeldingsdagerArbeidsgiver from '../egenmeldingsdager-arbeidsgiver/egenmeldingsdager-arbeidsgiver'
 import useSykmeldinger from '../../hooks/useSykmeldinger'
 import useSykmelding from '../../hooks/useSykmelding'
 import { Feedback } from '../feedback/feedback'
-import SkalViseKnapperad from '../sporsmal/sporsmal-form/skal-vise-knapperad'
 import { Banner } from '../banner/banner'
 
 import { urlTilSoknad } from './soknad-link'
@@ -126,7 +122,7 @@ export const Soknaden = () => {
 
                     <SporsmalTittel />
 
-                    <SporsmalForm valgtSoknad={valgtSoknad} sporsmal={sporsmal} spmIndex={spmIndex} />
+                    <SporsmalForm />
 
                     <Feedback soknad={valgtSoknad} steg={stegNo} />
                 </>

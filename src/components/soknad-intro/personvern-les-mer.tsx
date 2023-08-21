@@ -3,7 +3,6 @@ import React, { MouseEvent, useState } from 'react'
 
 import { tekst } from '../../utils/tekster'
 import { logEvent } from '../amplitude/amplitude'
-import { RSSoknadstypeType } from '../../types/rs-types/rs-soknadstype'
 import { parserWithReplace } from '../../utils/html-react-parser-utils'
 import { FlexModal } from '../flex-modal'
 

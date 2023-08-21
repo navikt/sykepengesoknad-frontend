@@ -2,7 +2,6 @@ import React from 'react'
 import { BodyShort } from '@navikt/ds-react'
 
 import { TagTyper } from '../../../types/enums'
-import { SpmProps } from '../sporsmal-form/sporsmal-form'
 import { fjernIndexFraTag } from '../sporsmal-utils'
 import { tekst } from '../../../utils/tekster'
 import { ProgressivtGuidePanel } from '../../guidepanel/ProgressivtGuidePanel'
