@@ -101,7 +101,7 @@ describe('Tester feilmeldinger', () => {
 
     it('DATO ingen dato', () => {
         gaVidere()
-        feilmeldingHandteringMedLokalFeilmelding(
+        feilmeldingHandtering(
             'Datoen følger ikke formatet dd.mm.åååå',
             'Datoen følger ikke formatet dd.mm.åååå',
             arbeidstakerGradert.sporsmal[2].undersporsmal[0].id,
@@ -111,7 +111,7 @@ describe('Tester feilmeldinger', () => {
     it('DATO mindre enn min', () => {
         cy.get('.navds-text-field__input').type('01.01.1900')
         gaVidere()
-        feilmeldingHandteringMedLokalFeilmelding(
+        feilmeldingHandtering(
             'Datoen kan ikke være før 01.04.2020',
             'Datoen kan ikke være før 01.04.2020',
             arbeidstakerGradert.sporsmal[2].undersporsmal[0].id,
@@ -122,7 +122,7 @@ describe('Tester feilmeldinger', () => {
         cy.get('.navds-text-field__input').clear()
         cy.get('.navds-text-field__input').type('01.01.5000')
         gaVidere()
-        feilmeldingHandteringMedLokalFeilmelding(
+        feilmeldingHandtering(
             'Datoen kan ikke være etter 24.04.2020',
             'Datoen kan ikke være etter 24.04.2020',
             arbeidstakerGradert.sporsmal[2].undersporsmal[0].id,
@@ -133,7 +133,7 @@ describe('Tester feilmeldinger', () => {
         cy.get('.navds-text-field__input').clear()
         cy.get('.navds-text-field__input').type('abc')
         gaVidere()
-        feilmeldingHandteringMedLokalFeilmelding(
+        feilmeldingHandtering(
             'Datoen følger ikke formatet dd.mm.åååå',
             'Datoen følger ikke formatet dd.mm.åååå',
             arbeidstakerGradert.sporsmal[2].undersporsmal[0].id,
@@ -144,7 +144,7 @@ describe('Tester feilmeldinger', () => {
         cy.get('.navds-text-field__input').clear()
         cy.get('.navds-text-field__input').type('2020')
         gaVidere()
-        feilmeldingHandteringMedLokalFeilmelding(
+        feilmeldingHandtering(
             'Datoen følger ikke formatet dd.mm.åååå',
             'Datoen følger ikke formatet dd.mm.åååå',
             arbeidstakerGradert.sporsmal[2].undersporsmal[0].id,
@@ -154,8 +154,8 @@ describe('Tester feilmeldinger', () => {
     it('PERIODER ingen fom', () => {
         gaTilSoknad(arbeidstakerGradert, '4')
         cy.get('input[value=JA]').click()
-        gaVidere()
 
+        gaVidere()
         feilmeldingHandtering(
             'Du må oppgi en fra og med dato i formatet dd.mm.åååå',
             'Du må oppgi en fra og med dato i formatet dd.mm.åååå',
@@ -166,7 +166,7 @@ describe('Tester feilmeldinger', () => {
     it('PERIODER ingen tom', () => {
         resetAllePeriodeDateFelter()
         setPeriodeDateFieldMedIndex(0, '15.04.2020')
-        // cy.focused().type('15.04.2020')
+
         gaVidere()
         feilmeldingHandtering(
             'Du må oppgi en til og med dato i formatet dd.mm.åååå',
@@ -202,8 +202,10 @@ describe('Tester feilmeldinger', () => {
     })
 
     it('PERIODER ugyldig format', () => {
-        cy.focused().clear()
-        cy.focused().type('abc')
+        resetAllePeriodeDateFelter()
+        setPeriodeDateFieldMedIndex(0, '15.04.2020')
+        setPeriodeDateFieldMedIndex(1, 'abc')
+
         gaVidere()
         feilmeldingHandtering(
             'Du må oppgi en til og med dato i formatet dd.mm.åååå',
@@ -213,8 +215,10 @@ describe('Tester feilmeldinger', () => {
     })
 
     it('PERIODER tom før fom', () => {
-        cy.focused().clear()
-        cy.focused().type('10.04.2020')
+        resetAllePeriodeDateFelter()
+        setPeriodeDateFieldMedIndex(0, '15.04.2020')
+        setPeriodeDateFieldMedIndex(1, '10.04.2020')
+
         gaVidere()
         feilmeldingHandtering(
             'Til og med må være etter fra og med',
@@ -225,53 +229,34 @@ describe('Tester feilmeldinger', () => {
 
     it('PERIODER legges til uten å besvares', () => {
         resetAllePeriodeDateFelter()
-        setPeriodeDateFieldMedIndex(1, '01.04.2020')
+        setPeriodeDateFieldMedIndex(0, '15.04.2020')
+        setPeriodeDateFieldMedIndex(1, '20.04.2020')
         cy.contains('Legg til ekstra periode').click()
+
         gaVidere()
         feilmeldingHandtering(
             'Du må oppgi en fra og med dato i formatet dd.mm.åååå',
             'Du må oppgi en fra og med dato i formatet dd.mm.åååå',
-            arbeidstakerGradert.sporsmal[3].undersporsmal[0].id + '_0_fom',
-            2,
+            arbeidstakerGradert.sporsmal[3].undersporsmal[0].id + '_1_fom',
         )
     })
 
     it('PERIODER overlapper', () => {
         resetAllePeriodeDateFelter()
-        setPeriodeDateFieldMedIndex(0, '05.04.2020')
-        setPeriodeDateFieldMedIndex(1, '20.04.2020')
-        setPeriodeDateFieldMedIndex(2, '21.04.2020')
-        cy.focused().blur()
-        feilmeldingHandtering(
-            'Du må oppgi en til og med dato i formatet dd.mm.åååå',
-            'Du må oppgi en til og med dato i formatet dd.mm.åååå',
-            arbeidstakerGradert.sporsmal[3].undersporsmal[0].id + '_1_tom',
-        )
-
-        resetAllePeriodeDateFelter()
         setPeriodeDateFieldMedIndex(0, '04.04.2020')
         setPeriodeDateFieldMedIndex(1, '21.04.2020')
         setPeriodeDateFieldMedIndex(2, '20.04.2020')
         setPeriodeDateFieldMedIndex(3, '24.04.2020')
-        cy.focused().blur()
+
+        gaVidere()
         feilmeldingHandtering(
             'Du kan ikke legge inn perioder som overlapper med hverandre',
             'Du kan ikke legge inn perioder som overlapper med hverandre',
             arbeidstakerGradert.sporsmal[3].undersporsmal[0].id + '_1_tom',
-            1,
         )
     })
 
     it('PERIODER slett', () => {
-        resetAllePeriodeDateFelter()
-        setPeriodeDateFieldMedIndex(0, '04.04.2020')
-        setPeriodeDateFieldMedIndex(1, '19.04.2020')
-        setPeriodeDateFieldMedIndex(2, '20.04.2020')
-        setPeriodeDateFieldMedIndex(3, '24.04.2020')
-        cy.focused().blur()
-
-        ingenFeilmeldinger()
-
         cy.contains('Slett periode').click()
         gaVidere()
         ingenFeilmeldinger()
