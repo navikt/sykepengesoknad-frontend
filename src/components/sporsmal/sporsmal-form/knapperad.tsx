@@ -57,7 +57,7 @@ const Knapperad = ({ poster }: { poster: boolean }) => {
                 variant="primary"
                 type="submit"
                 loading={poster}
-                className="mb-12 mt-6"
+                className="mb-12 mt-6 inline-flex"
             >
                 {knappetekst()}
             </Button>
