@@ -151,7 +151,7 @@ const SporsmalForm = () => {
                 >
                     <GuidepanelOverSporsmalstekst />
 
-                    {sporsmal &&  <SporsmalSwitch sporsmal={sporsmal} sporsmalIndex={0} erSisteSporsmal={erSiste} />/>}
+                    {sporsmal && <SporsmalSwitch sporsmal={sporsmal} sporsmalIndex={0} erSisteSporsmal={erSiste} />}
                     {!sporsmal && <SkeletonSporsmal />}
 
                     {erSiste && !erUtenlandssoknad && valgtSoknad && nesteSporsmal && (
