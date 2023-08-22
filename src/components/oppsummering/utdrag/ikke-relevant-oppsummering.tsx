@@ -5,7 +5,7 @@ import { parserWithReplace } from '../../../utils/html-react-parser-utils'
 import { OppsummeringProps, SporsmalVarianter } from '../oppsummering'
 import { Sporsmal } from '../../../types/types'
 
-const UndertekstSum = ({ sporsmal }: OppsummeringProps) => {
+const IkkeRelevantOppsummering = ({ sporsmal }: OppsummeringProps) => {
     return (
         <>
             <Label as="h4" className="mb-2">
@@ -19,4 +19,4 @@ const UndertekstSum = ({ sporsmal }: OppsummeringProps) => {
     )
 }
 
-export default UndertekstSum
+export default IkkeRelevantOppsummering

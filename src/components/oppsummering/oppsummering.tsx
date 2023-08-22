@@ -18,7 +18,7 @@ import OpplastingSum from './utdrag/opplasting-sum'
 import PerioderSum from './utdrag/perioder-sum'
 import RadioGruppe from './utdrag/radio-gruppe'
 import TallSum from './utdrag/tall-sum'
-import UndertekstSum from './utdrag/undertekst-sum'
+import IkkeRelevantOppsummering from './utdrag/ikke-relevant-oppsummering'
 
 export interface OppsummeringProps {
     sporsmal: Sporsmal
@@ -98,7 +98,7 @@ export const SporsmalVarianter = ({ sporsmal }: OppsummeringProps) => {
         }
 
         case RSSvartype.IKKE_RELEVANT: {
-            return <UndertekstSum sporsmal={sporsmal} />
+            return <IkkeRelevantOppsummering sporsmal={sporsmal} />
         }
 
         case RSSvartype.CHECKBOX_GRUPPE: {
