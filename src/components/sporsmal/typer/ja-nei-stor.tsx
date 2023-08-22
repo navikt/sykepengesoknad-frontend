@@ -1,7 +1,8 @@
-import { Alert, BodyLong, Radio, RadioGroup } from '@navikt/ds-react'
+import { Alert, BodyLong, BodyShort, Radio, RadioGroup } from '@navikt/ds-react'
 import { Controller, useFormContext } from 'react-hook-form'
 import React from 'react'
 import { useRouter } from 'next/router'
+import { InformationIcon } from '@navikt/aksel-icons'
 
 import { TagTyper } from '../../../types/enums'
 import { getLedetekst, tekst } from '../../../utils/tekster'
@@ -83,6 +84,7 @@ const JaNeiStor = ({ sporsmal }: SpmProps) => {
         <>
             <div>
                 {skalHaInntektsbulletpoints && <Inntektsbulletpoints soknad={valgtSoknad} />}
+
                 <Yrkesskadebulletpoints sporsmal={sporsmal} />
                 <Controller
                     name={sporsmal.id}
@@ -124,6 +126,21 @@ const JaNeiStor = ({ sporsmal }: SpmProps) => {
                                     Nei
                                 </Radio>
                             </div>
+
+                            {sporsmal.tag === TagTyper.ANDRE_INNTEKTSKILDER_V2 && (
+                                <div className="mt-4 flex max-w-sm gap-4 rounded-lg py-6">
+                                    <InformationIcon
+                                        title="informasjon"
+                                        className="flex-shrink-0 rounded-full bg-gray-200 p-2 text-sm font-bold"
+                                        height={37}
+                                        width={37}
+                                    />
+                                    <BodyShort size="small">
+                                        Informasjon om andre inntektskilder blir behandlet konfidensielt, og blir ikke
+                                        delt med arbeidsgiver
+                                    </BodyShort>
+                                </div>
+                            )}
                         </RadioGroup>
                     )}
                 />

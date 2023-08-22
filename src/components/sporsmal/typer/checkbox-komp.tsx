@@ -1,7 +1,6 @@
 import { BodyShort, Checkbox, CheckboxGroup } from '@navikt/ds-react'
 import React, { Fragment } from 'react'
 import { Controller, useFormContext } from 'react-hook-form'
-import { InformationIcon } from '@navikt/aksel-icons'
 
 import { SpmProps } from '../sporsmal-form/sporsmal-form'
 import { hentFeilmelding } from '../sporsmal-utils'
