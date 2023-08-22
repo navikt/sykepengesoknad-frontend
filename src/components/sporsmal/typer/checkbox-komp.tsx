@@ -8,6 +8,7 @@ import UndersporsmalListe from '../undersporsmal/undersporsmal-liste'
 import Vis from '../../vis'
 import { Sporsmal } from '../../../types/types'
 import { TagTyper } from '../../../types/enums'
+import cn from "classnames";
 
 const ForklaringAvValgtCheckbox = (svaralternativ: Sporsmal) => {
     if (svaralternativ.tag === TagTyper.INNTEKTSKILDE_SELVSTENDIG) {
@@ -47,12 +48,15 @@ const CheckboxKomp = ({ sporsmal }: SpmProps) => {
     }
     const feilmelding = hentFeilmelding(sporsmal)
 
+    const checkboxesSkalHaSpesiellStyling = (sporsmalTag : TagTyper) => sporsmalTag == TagTyper.HVILKE_ANDRE_INNTEKTSKILDER
+
     return (
         <Controller
             name={sporsmal.id}
             rules={{ required: feilmelding.global }}
             render={({ field }) => (
-                <>
+               
+            
                     {sporsmal.tag === TagTyper.HVILKE_ANDRE_INNTEKTSKILDER && (
                         <div className="mt-4 flex max-w-sm gap-4 rounded-lg py-6">
                             <InformationIcon
@@ -67,20 +71,26 @@ const CheckboxKomp = ({ sporsmal }: SpmProps) => {
                             </BodyShort>
                         </div>
                     )}
+                    
+                     <div
+                     className={cn('', {
+                         'max-w-sm': checkboxesSkalHaSpesiellStyling(sporsmal.tag),
+                     })}
+                >
 
                     <CheckboxGroup
                         {...field}
                         legend={sporsmal.sporsmalstekst}
-                        // description={<BodyShort size={"small"}>{  (sporsmal && sporsmal.undertekst) ? sporsmal.undertekst : ""}</BodyShort> }
                         description={undertekst(sporsmal.undertekst)}
-                        //description={sporsmal.undertekst}
                         error={errors[sporsmal.id] !== undefined && feilmelding.lokal}
                     >
                         <div className="mt-4 space-y-2">
                             {sporsmal.undersporsmal.map((uspm) => (
                                 <Fragment key={uspm.id + '_fragment'}>
-                                    <div className="bx-4 flex max-w-sm items-center gap-4 rounded-lg bg-gray-50">
-                                        <Checkbox id={uspm.id} value={uspm.sporsmalstekst} className="pl-3">
+                                    <div className={cn("flex items-center gap-4", {
+                                        'bx-4 max-w-sm rounded-lg bg-gray-50': checkboxesSkalHaSpesiellStyling(sporsmal.tag),
+                                    })}>
+                                    <Checkbox id={uspm.id} value={uspm.sporsmalstekst} className="pl-3">
                                             <BodyShort
                                                 className={
                                                     watchCheckbox?.includes(uspm.sporsmalstekst) ? 'font-bold' : ''
