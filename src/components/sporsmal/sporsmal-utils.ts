@@ -150,3 +150,10 @@ export const maanedKalenderApnesPa = (sporsmalMin: string | null, sporsmalMax: s
 
     return max.toDate()
 }
+
+export const kalenderMedDropdownCaption = (sporsmalMin: string | null, sporsmalMax: string | null) => {
+    if (!sporsmalMin || !sporsmalMax) {
+        return false
+    }
+    return dayjs(sporsmalMax).diff(dayjs(sporsmalMin), 'years') >= 1
+}
