@@ -1,6 +1,6 @@
 import { BodyShort } from '@navikt/ds-react'
 import React from 'react'
-import { InformationIcon } from "@navikt/aksel-icons";
+import { InformationIcon } from '@navikt/aksel-icons'
 
 export const InntektsopplysningerErKonfidensielleInfo = () => {
     return (
@@ -13,8 +13,7 @@ export const InntektsopplysningerErKonfidensielleInfo = () => {
                     width={37}
                 />
                 <BodyShort size="small">
-                    Informasjon om andre inntektskilder blir behandlet konfidensielt, og blir ikke
-                    delt med arbeidsgiver
+                    Informasjon om andre inntektskilder blir behandlet konfidensielt, og blir ikke delt med arbeidsgiver
                 </BodyShort>
             </div>
         </>
