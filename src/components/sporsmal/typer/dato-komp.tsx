@@ -1,72 +1,42 @@
-import React from 'react'
-import { useController, useFormContext } from 'react-hook-form'
-import { BodyShort, DatePicker, useDatepicker } from '@navikt/ds-react'
-import dayjs from 'dayjs'
+import React, { useState } from 'react'
+import { useController } from 'react-hook-form'
+import { BodyShort, DatePicker, DateValidationT, useDatepicker } from '@navikt/ds-react'
 
-import FeilLokal from '../../feil/feil-lokal'
 import { SpmProps } from '../sporsmal-form/sporsmal-form'
 import UndersporsmalListe from '../undersporsmal/undersporsmal-liste'
 import validerDato from '../../../utils/sporsmal/valider-dato'
 import { TilbakeIArbeidBesvart } from '../../hjelpetekster/tilbake-i-arbeid-besvart/tilbake-i-arbeid-besvart'
+import { maanedKalenderApnesPa } from '../sporsmal-utils'
 
 function DatoInput(props: SpmProps) {
     const { sporsmal } = props
-    const {
-        formState: { errors },
-    } = useFormContext()
+    const [dateValidation, setDateValidation] = useState<DateValidationT | undefined>(undefined)
 
-    const finnMinOgMax = () => {
-        if (!sporsmal.min && !sporsmal.max) {
-            return {
-                fromDate: undefined,
-                toDate: undefined,
-            }
-        }
-        if (!sporsmal.min && sporsmal.max !== undefined) {
-            return {
-                fromDate: dayjs('01.01.1900').toDate(),
-                toDate: dayjs(sporsmal.max).toDate(),
-            }
-        }
-        if (sporsmal.min !== undefined && !sporsmal.max) {
-            return {
-                fromDate: dayjs(sporsmal.min).toDate(),
-                toDate: dayjs('01.01.2100').toDate(),
-            }
-        }
-        return {
-            fromDate: dayjs(sporsmal.min).toDate(),
-            toDate: dayjs(sporsmal.max).toDate(),
-        }
-    }
-
-    const { field } = useController({
+    const { field, fieldState } = useController({
         name: sporsmal.id,
         rules: {
-            validate: (value) => {
-                return validerDato(sporsmal, value)
-            },
+            validate: (value) => validerDato(sporsmal, value, dateValidation),
         },
     })
 
     const { datepickerProps, inputProps } = useDatepicker({
-        ...field,
-        onDateChange: field.onChange,
-        defaultSelected: field.value,
-        defaultMonth: dayjs(sporsmal.max).toDate(),
+        fromDate: sporsmal.min ? new Date(sporsmal.min) : new Date('1900'),
+        toDate: sporsmal.max ? new Date(sporsmal.max) : new Date('2100'),
+        defaultMonth: maanedKalenderApnesPa(sporsmal.min, sporsmal.max),
         openOnFocus: false,
+        allowTwoDigitYear: false,
+        defaultSelected: field.value,
+        onDateChange: field.onChange,
+        required: true,
+        onValidate: (validate) => {
+            setDateValidation(validate)
+        },
     })
 
     return (
         <div className="mt-8" data-cy="dato-komp">
             <div className="axe-exclude">
-                <DatePicker
-                    {...datepickerProps}
-                    {...finnMinOgMax()}
-                    dropdownCaption={true}
-                    locale="nb"
-                    data-cy-sporsmalid={sporsmal.id}
-                >
+                <DatePicker {...datepickerProps} dropdownCaption={true} locale="nb" data-cy-sporsmalid={sporsmal.id}>
                     <DatePicker.Input
                         {...inputProps}
                         id={sporsmal.id}
@@ -76,15 +46,13 @@ function DatoInput(props: SpmProps) {
                                 {sporsmal.undertekst && <BodyShort as="div"> {sporsmal.undertekst} </BodyShort>}
                             </>
                         }
-                        error={errors[field.name] !== undefined}
+                        error={fieldState.error && fieldState.error.message}
                         data-cy={sporsmal.id}
                     />
                 </DatePicker>
             </div>
 
             <TilbakeIArbeidBesvart sporsmal={sporsmal} fieldValue={field.value} />
-
-            <FeilLokal sporsmal={sporsmal} />
 
             <div aria-live="assertive">
                 <UndersporsmalListe oversporsmal={sporsmal} />

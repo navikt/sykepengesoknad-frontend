@@ -186,7 +186,39 @@ const SporsmalTekster = {
         'Du må svare på det er en sammenheng mellom dette sykefraværet og tidligere yrkesskade',
     'soknad.feilmelding.YRKESSKADE_SAMMENHENG.lokal':
         'Du må svare på det er en sammenheng mellom dette sykefraværet og tidligere yrkesskade',
-
+    'soknad.feilmelding.MEDLEMSKAP_OPPHOLDSTILLATELSE':
+        'Du må svare på om du har oppholdstillatelse fra utlendingsdirektoratet',
+    'soknad.feilmelding.MEDLEMSKAP_OPPHOLDSTILLATELSE_VEDTAKSDATO':
+        'Du må oppgi vedtaksdato for din oppholdstillatelse',
+    'soknad.feilmelding.MEDLEMSKAP_OPPHOLDSTILLATELSE_PERMANENT':
+        'Du må svare på om du har fått permanent oppholdstillatelse',
+    'soknad.feilmelding.MEDLEMSKAP_OPPHOLDSTILLATELSE_PERIODE':
+        'Du må oppgi hvilken periode du fått oppholdstillatelse for',
+    'soknad.feilmelding.MEDLEMSKAP_OPPHOLD_UTENFOR_EOS':
+        'Du må svare på om du har oppholdt deg utenfor EØS-området i løpet av de siste 12 månedene',
+    'soknad.feilmelding.MEDLEMSKAP_OPPHOLD_UTENFOR_EOS_HVOR': 'Du må oppgi landet du har oppholdt deg i',
+    'soknad.feilmelding.MEDLEMSKAP_OPPHOLD_UTENFOR_EOS_BEGRUNNELSE': 'Du må oppgi grunn for ditt opphold utenfor EØS',
+    'soknad.feilmelding.MEDLEMSKAP_OPPHOLD_UTENFOR_EOS_BEGRUNNELSE_STUDIE': '',
+    'soknad.feilmelding.MEDLEMSKAP_OPPHOLD_UTENFOR_EOS_BEGRUNNELSE_FERIE': '',
+    'soknad.feilmelding.MEDLEMSKAP_OPPHOLD_UTENFOR_EOS_BEGRUNNELSE_FORSORG': '',
+    'soknad.feilmelding.MEDLEMSKAP_OPPHOLD_UTENFOR_EOS_NAAR': 'Du må oppgi perioden du har oppholdt deg utenfor EØS',
+    'soknad.feilmelding.MEDLEMSKAP_OPPHOLD_UTENFOR_NORGE':
+        'Du må svare på om du har oppholdt deg utenfor Norge i løpet av de siste 12 månedene',
+    'soknad.feilmelding.MEDLEMSKAP_OPPHOLD_UTENFOR_NORGE_HVOR': 'Du må oppgi landet du har oppholdt deg i',
+    'soknad.feilmelding.MEDLEMSKAP_OPPHOLD_UTENFOR_NORGE_BEGRUNNELSE':
+        'Du må oppgi grunn for ditt opphold utenfor NORGE',
+    'soknad.feilmelding.MEDLEMSKAP_OPPHOLD_UTENFOR_NORGE_BEGRUNNELSE_STUDIE': '',
+    'soknad.feilmelding.MEDLEMSKAP_OPPHOLD_UTENFOR_NORGE_BEGRUNNELSE_FERIE': '',
+    'soknad.feilmelding.MEDLEMSKAP_OPPHOLD_UTENFOR_NORGE_BEGRUNNELSE_FORSORG': '',
+    'soknad.feilmelding.MEDLEMSKAP_OPPHOLD_UTENFOR_NORGE_NAAR':
+        'Du må oppgi perioden du har oppholdt deg utenfor Norge',
+    'soknad.feilmelding.MEDLEMSKAP_UTFORT_ARBEID_UTENFOR_NORGE':
+        'Du må oppgi om du har utført arbeid utenfor Norge i løpet av de siste 12 månedene',
+    'soknad.feilmelding.MEDLEMSKAP_UTFORT_ARBEID_UTENFOR_NORGE_ARBEIDSGIVER':
+        'Du må oppgi arbeidsgiveren du har jobbet hos utenfor Norge',
+    'soknad.feilmelding.MEDLEMSKAP_UTFORT_ARBEID_UTENFOR_NORGE_HVOR': 'Du må oppgi i hvilket land du har jobbet',
+    'soknad.feilmelding.MEDLEMSKAP_UTFORT_ARBEID_UTENFOR_NORGE_NAAR':
+        'Du må oppgi perioden du har jobbet utenfor Norge',
     'soknad.infotekst.utlandsopphold_sokt_sykepenger.ja':
         'Du må ha sendt en egen <a target="_blank" href="%URL%">utenlandssøknad</a> for å svare ja på dette spørsmålet. Husk at du også må fullføre denne søknaden om sykepenger.',
     'soknad.infotekst.utlandsopphold_sokt_sykepenger.nei':

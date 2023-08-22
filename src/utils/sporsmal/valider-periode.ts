@@ -1,5 +1,5 @@
-import { RangeValidationT } from '@navikt/ds-react'
 import dayjs from 'dayjs'
+import { RangeValidationT } from '@navikt/ds-react'
 
 import { FormPeriode } from '../../components/sporsmal/typer/periode-komp'
 import { Sporsmal } from '../../types/types'
@@ -44,59 +44,42 @@ export const validerPeriode = (sporsmal: Sporsmal, id: string, values: Record<st
     return overlapper ? 'Du kan ikke legge inn perioder som overlapper med hverandre' : true
 }
 
-export const validerFom = (
-    sporsmal: Sporsmal,
-    id: string,
-    values: Record<string, any>,
-    rangeValidation: RangeValidationT | null,
-) => {
-    const formPeriode = values[id] as FormPeriode
-
-    // Grenseverdier
-    if (rangeValidation && rangeValidation.from.isBefore) {
+export const validerFom = (sporsmal: Sporsmal, value?: FormPeriode, rangeValidation?: RangeValidationT) => {
+    if (!rangeValidation && value) {
+        // Vi må bruke rangeValidation fordi Datepicker ikke returnerer noe verdi når de er utenfor min/max
+        // Men Datepicker validering skjer ikke når vi laster inn et tidligere svar
+        return true
+    }
+    if (rangeValidation?.from === undefined || rangeValidation.from.isEmpty || rangeValidation.from.isInvalid) {
+        return 'Du må oppgi en fra og med dato i formatet dd.mm.åååå'
+    }
+    if (sporsmal.min && rangeValidation.from.isBefore) {
         return 'Fra og med kan ikke være før ' + dayjs(sporsmal.min).format('DD.MM.YYYY')
     }
-    if (rangeValidation && rangeValidation.from.isBefore) return 'Fra og med må være før til og med'
-
-    if (!formPeriode?.fom) return 'Du må oppgi en fra og med dato i formatet dd.mm.åååå'
-
-    const valgtPeriode = {
-        fom: fraBackendTilDate(formPeriode.fom),
-        tom: fraBackendTilDate(formPeriode.tom),
-    } as Periode
-
-    // skriv om til generelt gyldig
-    if (!valgtPeriode.fom) return 'Du må oppgi en fra og med dato i formatet dd.mm.åååå' // 'Fra og med følger ikke formatet dd.mm.åååå'
+    if (!rangeValidation.from.isValidDate) {
+        return 'Du må oppgi en fra og med dato i formatet dd.mm.åååå'
+    }
 
     return true
 }
-export const validerTom = (
-    sporsmal: Sporsmal,
-    id: string,
-    values: Record<string, any>,
-    rangeValidation: RangeValidationT | null,
-) => {
-    const formPeriode = values[id] as FormPeriode
-
-    // Grenseverdier
-    if (rangeValidation && rangeValidation.to.isAfter) {
+export const validerTom = (sporsmal: Sporsmal, value?: FormPeriode, rangeValidation?: RangeValidationT) => {
+    if (!rangeValidation && value) {
+        // Vi må bruke rangeValidation fordi Datepicker ikke returnerer noe verdi når de er utenfor min/max
+        // Men Datepicker validering skjer ikke når vi laster inn et tidligere svar
+        return true
+    }
+    if (rangeValidation?.to === undefined || rangeValidation.to.isEmpty || rangeValidation.to.isInvalid) {
+        return 'Du må oppgi en til og med dato i formatet dd.mm.åååå'
+    }
+    if (sporsmal.max && rangeValidation.to.isAfter) {
         return 'Til og med kan ikke være etter ' + dayjs(sporsmal.max).format('DD.MM.YYYY')
     }
-    if (rangeValidation && rangeValidation?.to.isBeforeFrom) return 'Til og med må være etter fra og med'
-
-    // Grenseverdier
-
-    if (formPeriode?.tom === undefined || formPeriode?.tom === '')
+    if (rangeValidation.to.isBeforeFrom) {
+        return 'Til og med må være etter fra og med'
+    }
+    if (!rangeValidation.to.isValidDate) {
         return 'Du må oppgi en til og med dato i formatet dd.mm.åååå'
-
-    const valgtPeriode = {
-        fom: fraBackendTilDate(formPeriode.fom),
-        tom: fraBackendTilDate(formPeriode.tom),
-    } as Periode
-    // Formattering er riktig når dato er skrevet inn manuelt
-
-    // skriv om til generelt gyldig
-    if (!valgtPeriode.tom) return 'Du må oppgi en til og med dato i formatet dd.mm.åååå' // 'Til og med følger ikke formatet dd.mm.åååå'
+    }
 
     return true
 }

@@ -5,6 +5,12 @@ import { yrkesskadeV1Sporsmal, yrkesskadeV2Sporsmal } from './yrkesskade'
 import { utenlandskSykmeldingSporsmalene } from './utenlandsk-sykmelding'
 import { værKlarOverAt } from './sporsmal/vaer-klar-over-at'
 import { bekreftOpplysninger } from './sporsmal/bekreft-opplysninger'
+import {
+    medlemskapOppholdstillatelseSporsmal,
+    medlemskapOppholdUtenforEøsSporsmal,
+    medlemskapOppholdUtenforNorgeSporsmal,
+    medlemskapUtførtArbeidUtenforNorgeSporsmal,
+} from './medlemskap'
 
 export const veldigLangSoknad: RSSoknad = {
     id: '214f6e73-8150-4261-8ce5-e2b41907fa58',
@@ -51,6 +57,10 @@ export const veldigLangSoknad: RSSoknad = {
         },
         yrkesskadeV1Sporsmal,
         yrkesskadeV2Sporsmal,
+        medlemskapOppholdstillatelseSporsmal,
+        medlemskapOppholdUtenforEøsSporsmal,
+        medlemskapOppholdUtenforNorgeSporsmal,
+        medlemskapUtførtArbeidUtenforNorgeSporsmal,
         {
             id: 'f085f79a-ced7-36b0-9259-0806aa57da5f',
             tag: 'ARBEID_UNDERVEIS_100_PROSENT_0',

@@ -99,6 +99,22 @@ describe('Tester støtte for gamle spørsmål', () => {
         gaVidere()
     })
 
+    it('MEDLEMSKAP_OPPHOLDSTILLATELSE', () => {
+        svarNeiHovedsporsmal()
+        gaVidere()
+    })
+    it('MEDLEMSKAP_OPPHOLD_UTENFOR_EOS', () => {
+        svarNeiHovedsporsmal()
+        gaVidere()
+    })
+    it('MEDLEMSKAP_OPPHOLD_UTENFOR_NORGE', () => {
+        svarNeiHovedsporsmal()
+        gaVidere()
+    })
+    it('MEDLEMSKAP_UTFORT_ARBEID_UTENFOR_NORGE', () => {
+        svarNeiHovedsporsmal()
+        gaVidere()
+    })
     it('ANDRE_INNTEKTSKILDER', () => {
         svarJaHovedsporsmal()
         velgCheckbox('dagmamma')
@@ -274,7 +290,7 @@ describe('Tester støtte for gamle spørsmål', () => {
         svarFritekst('UTENLANDSK_SYKMELDING_VEGNAVN', 'Downing Street 10')
         svarFritekst('UTENLANDSK_SYKMELDING_LAND', 'UK')
         svarFritekst('UTENLANDSK_SYKMELDING_TELEFONNUMMER', '81549300')
-        velgDato(1)
+        velgDato(4)
 
         gaVidere()
     })

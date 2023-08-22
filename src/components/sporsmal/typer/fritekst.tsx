@@ -27,7 +27,7 @@ export const Fritekst = ({ sporsmal }: SpmProps) => {
     const props = {
         label: sporsmal.sporsmalstekst,
         description: description(),
-        className: 'mt-8',
+        className: 'mt-8 w-full md:w-1/2',
         'data-cy': sporsmal.tag,
         id: sporsmal.id,
         error: errors[sporsmal.id] !== undefined && (errors[sporsmal.id]!.message as string),

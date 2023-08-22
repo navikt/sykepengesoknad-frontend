@@ -33,6 +33,7 @@ const JaNeiStor = ({ sporsmal }: SpmProps) => {
     } = useFormContext()
     const router = useRouter()
     const { id } = router.query as { id: string }
+
     const { data: valgtSoknad } = useSoknad(id)
 
     const feilmelding = hentFeilmelding(sporsmal, errors[sporsmal.id])
