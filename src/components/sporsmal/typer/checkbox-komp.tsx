@@ -32,6 +32,9 @@ const ForklaringAvValgtCheckbox = (svaralternativ: Sporsmal) => {
     return <Fragment />
 }
 
+const undertekst = (tekst: string | null) => {
+    return <BodyShort size="small">{tekst}</BodyShort>
+}
 const CheckboxKomp = ({ sporsmal }: SpmProps) => {
     const {
         formState: { errors },
@@ -68,7 +71,9 @@ const CheckboxKomp = ({ sporsmal }: SpmProps) => {
                     <CheckboxGroup
                         {...field}
                         legend={sporsmal.sporsmalstekst}
-                        description={sporsmal.undertekst}
+                        // description={<BodyShort size={"small"}>{  (sporsmal && sporsmal.undertekst) ? sporsmal.undertekst : ""}</BodyShort> }
+                        description={undertekst(sporsmal.undertekst)}
+                        //description={sporsmal.undertekst}
                         error={errors[sporsmal.id] !== undefined && feilmelding.lokal}
                     >
                         <div className="mt-4 space-y-2">
@@ -91,7 +96,7 @@ const CheckboxKomp = ({ sporsmal }: SpmProps) => {
                                             uspm.undersporsmal.length > 0
                                         }
                                         render={() => (
-                                            <div aria-live="assertive" className="my-4 pl-3">
+                                            <div aria-live="assertive" className="my-4 max-w-sm pl-3">
                                                 {ForklaringAvValgtCheckbox(uspm)}
                                                 <UndersporsmalListe oversporsmal={uspm} oversporsmalSvar="CHECKED" />
                                             </div>
@@ -101,7 +106,7 @@ const CheckboxKomp = ({ sporsmal }: SpmProps) => {
                             ))}
                         </div>
                     </CheckboxGroup>
-                </>
+                </div>
             )}
         />
     )
