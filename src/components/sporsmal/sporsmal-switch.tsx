@@ -37,6 +37,7 @@ const SporsmalSwitch = ({ sporsmal, sporsmalIndex, erSisteSporsmal }: SporsmalSw
         case RSSvartype.DATO:
             return <DatoInput sporsmal={sporsmal} />
 
+        case RSSvartype.PERIODE:
         case RSSvartype.PERIODER:
             return <Perioder sporsmal={sporsmal} />
 

@@ -9,6 +9,7 @@ import { hentPerioder } from '../hent-svar'
 import { SpmProps } from '../sporsmal-form/sporsmal-form'
 import UndersporsmalListe from '../undersporsmal/undersporsmal-liste'
 import Vis from '../../vis'
+import { RSSvartype } from '../../../types/rs-types/rs-svartype'
 
 import PeriodeKomp from './periode-komp'
 
@@ -54,8 +55,7 @@ const Perioder = ({ sporsmal }: SpmProps) => {
                 ))}
             </ul>
             <Vis
-                // TODO: Endre denne og sett svartype til PERIODE
-                hvis={!sporsmal.tag.startsWith('MEDLEMSKAP')}
+                hvis={sporsmal.svartype === RSSvartype.PERIODER}
                 render={() => (
                     <Button
                         type="button"
