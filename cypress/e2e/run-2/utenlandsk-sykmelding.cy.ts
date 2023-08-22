@@ -11,6 +11,7 @@ describe('Tester søknad til utenlandsk sykmelding', () => {
     const id = '3708c4de-d16c-4835-841b-a6716b6d39e9'
 
     before(() => {
+        cy.clearCookies()
         cy.visit(`/syk/sykepengesoknad/soknader/${id}/1?testperson=utenlandsk-sykmelding`)
     })
 
@@ -42,7 +43,7 @@ describe('Tester søknad til utenlandsk sykmelding', () => {
         svarFritekst('UTENLANDSK_SYKMELDING_VEGNAVN', 'Downing Street 10')
         svarFritekst('UTENLANDSK_SYKMELDING_LAND', 'UK')
         svarFritekst('UTENLANDSK_SYKMELDING_TELEFONNUMMER', '81549300')
-        velgDato(1)
+        velgDato(4)
 
         cy.contains('Gå videre').click()
     })

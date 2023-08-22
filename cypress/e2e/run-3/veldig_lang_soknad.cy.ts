@@ -290,7 +290,7 @@ describe('Tester støtte for gamle spørsmål', () => {
         svarFritekst('UTENLANDSK_SYKMELDING_VEGNAVN', 'Downing Street 10')
         svarFritekst('UTENLANDSK_SYKMELDING_LAND', 'UK')
         svarFritekst('UTENLANDSK_SYKMELDING_TELEFONNUMMER', '81549300')
-        velgDato(1)
+        velgDato(4)
 
         gaVidere()
     })
