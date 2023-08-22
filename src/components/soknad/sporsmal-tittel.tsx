@@ -10,23 +10,20 @@ import { erSisteSide, fjernIndexFraTag } from '../sporsmal/sporsmal-utils'
 export const SporsmalTittel = () => {
     const { valgtSoknad, erUtenlandssoknad, stegNo } = UseSoknadMedDetaljer()
 
-    function tittel() {
-        if (valgtSoknad) return tekst(hentNokkel(valgtSoknad!, stegNo) as any)
-        return 'placeholder'
-    }
-
-    if (stegNo !== 1 && !erUtenlandssoknad)
+    if (stegNo !== 1 && !erUtenlandssoknad) {
+        const props = {
+            level: '2',
+            size: 'medium',
+            className: 'mb-4 mt-16',
+            'data-cy': 'sporsmal-tittel',
+        } as any
+        if (valgtSoknad) return <Heading {...props}>{tekst(hentNokkel(valgtSoknad, stegNo) as any)}</Heading>
         return (
-            <Heading
-                as={valgtSoknad ? Heading : Skeleton}
-                data-cy="sporsmal-tittel"
-                level="2"
-                size="medium"
-                className="mb-4 mt-16"
-            >
-                {tittel()}
+            <Heading as={Skeleton} {...props}>
+                Placeholder
             </Heading>
         )
+    }
 }
 
 export const hentNokkel = (soknad: Soknad, sidenummer: number) => {
