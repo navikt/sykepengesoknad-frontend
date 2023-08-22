@@ -102,8 +102,8 @@ export const hentGeneriskFeilmelding = (
             }
             return error?.message
         }
-        case RSSvartype.PERIODER:
-        case RSSvartype.PERIODE: {
+        case RSSvartype.PERIODE:
+        case RSSvartype.PERIODER: {
             if (type === 'fom' || type === 'tom') {
                 return error?.message
             } else if (type === 'periode') {
