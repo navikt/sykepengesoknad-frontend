@@ -32,7 +32,7 @@ const JaNeiStor = ({ sporsmal }: SpmProps) => {
         getValues,
     } = useFormContext()
     const router = useRouter()
-    const { id } = router.query as { id: string; stegId: string }
+    const { id } = router.query as { id: string }
 
     const { data: valgtSoknad } = useSoknad(id)
 

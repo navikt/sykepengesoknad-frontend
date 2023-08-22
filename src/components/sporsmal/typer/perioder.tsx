@@ -54,6 +54,7 @@ const Perioder = ({ sporsmal }: SpmProps) => {
                 ))}
             </ul>
             <Vis
+                // TODO: Endre denne og sett svartype til PERIODE
                 hvis={!sporsmal.tag.startsWith('MEDLEMSKAP')}
                 render={() => (
                     <Button
