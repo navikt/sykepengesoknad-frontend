@@ -98,13 +98,13 @@ const SporsmalForm = () => {
     const onSubmit = (data: Record<string, any>) => {
         if (oppdatererSporsmal || senderSoknad)
             return Promise.reject(new Error('Spørsmål oppdateres eller søknad sendes allerede'))
-        if (!nesteSporsmal || !sporsmal) {
+        if ((!nesteSporsmal && !erUtenlandssoknad) || !sporsmal) {
             return Promise.reject(new Error('Spørsmål skal være lastet for at vi kan submitte'))
         }
 
         return new Promise<void>(async (resolve) => {
             const oppdatertSporsmalMedSvar = () => {
-                if (erSiste && !erUtenlandssoknad) {
+                if (erSiste && !erUtenlandssoknad && nesteSporsmal) {
                     return settSvar(nesteSporsmal, data)
                 }
                 return settSvar(sporsmal, data)
@@ -113,13 +113,13 @@ const SporsmalForm = () => {
             const onSuccessLogic = async (isLast: boolean) => {
                 if (isLast) {
                     logEvent('skjema fullført', {
-                        soknadstype: valgtSoknad.soknadstype,
+                        soknadstype: valgtSoknad?.soknadstype,
                         skjemanavn: 'sykepengesoknad',
                     })
                     sendSoknad()
                 } else {
                     logEvent('skjema spørsmål besvart', {
-                        soknadstype: valgtSoknad.soknadstype,
+                        soknadstype: valgtSoknad?.soknadstype,
                         skjemanavn: 'sykepengesoknad',
                         spørsmål: sporsmal.tag,
                         svar: hentAnnonymisertSvar(sporsmal),
