@@ -11,9 +11,24 @@ export const setPeriodeFraTil = (fom: number, tom: number, periodeIndex = 0) => 
     cy.get('.rdp-day').contains(tom.toString()).click()
 }
 
-export function svarFritekst(tag: string, verdi: string) {
-    cy.get(`[data-cy="${tag}"]`).clear()
-    cy.get(`[data-cy="${tag}"]`).type(verdi)
+export function svarFritekst(name: string, verdi: string) {
+    cy.findByRole('textbox', { name: name }).clear()
+    cy.findByRole('textbox', { name: name }).type(verdi)
+}
+
+export function svarComboboxSingle(name: string, verdi: string, autocompleteVerdi: string = verdi) {
+    // Autocomplete
+    cy.findByRole('combobox', { name: name }).type(verdi)
+    cy.findByRole('combobox', { name: name }).should('have.value', autocompleteVerdi)
+
+    // Valgt land vises
+    cy.findByRole('combobox', { name: name }).realPress('Enter')
+    cy.findByRole('combobox', { name: name }).should('have.value', '')
+    cy.get('.navds-combobox__selected-options').contains(autocompleteVerdi)
+}
+
+export function svarRadioGruppe(groupName: string, radioName: string) {
+    cy.findByRole('group', { name: groupName }).findByRole('radio', { name: radioName }).check()
 }
 
 export function svarJaHovedsporsmal() {

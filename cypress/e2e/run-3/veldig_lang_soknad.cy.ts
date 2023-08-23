@@ -292,16 +292,16 @@ describe('Tester støtte for gamle spørsmål', () => {
 
     it('BOSTED', () => {
         svarJaHovedsporsmal()
-        svarFritekst('UTENLANDSK_SYKMELDING_VEGNAVN', 'Downing Street 10')
-        svarFritekst('UTENLANDSK_SYKMELDING_LAND', 'UK')
-        svarFritekst('UTENLANDSK_SYKMELDING_TELEFONNUMMER', '81549300')
+        svarFritekst('Vegnavn og husnummer, evt. postboks', 'Downing Street 10')
+        svarFritekst('Land', 'UK')
+        svarFritekst('Telefonnummer', '81549300')
         velgDato(4)
 
         gaVidere()
     })
     it('LØNNET ARBEID', () => {
         svarJaHovedsporsmal()
-        svarFritekst('UTENLANDSK_SYKMELDING_LONNET_ARBEID_UTENFOR_NORGE_FRITEKST', 'Britiske staten')
+        svarFritekst('Oppgi nærmere opplysninger om arbeid/virksomhet utenfor Norge', 'Britiske staten')
         gaVidere()
     })
     it('Sykepenger i andre EØS-land', () => {
