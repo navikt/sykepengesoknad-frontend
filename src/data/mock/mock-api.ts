@@ -120,8 +120,7 @@ export async function mockApi(req: NextApiRequest, res: NextApiResponse) {
 
     const erClsTestperson = nokkelKey === 'cummulative-layout-shift'
     if (erClsTestperson) {
-        // sov mellom 0,5 og 1 sekund
-        const ms = Math.floor(Math.random() * 500) + 500
+        const ms = Math.floor(Math.random() * 500) + 2000
         await sleep(ms)
     }
 
