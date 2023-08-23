@@ -81,14 +81,6 @@ const IkkeRelevant = ({ sporsmal, sporsmalIndex, erSisteSporsmal }: IkkeRelevant
                 className={!erSisteSporsmal ? 'mb-8 border-b border-dashed border-gray-400' : ''}
                 aria-live="assertive"
             >
-                {sporsmalIndex === 0 && (
-                    <Label as="h2" className="mt-8">
-                        {sporsmal.tag === TagTyper.MEDLEMSKAP_UTFORT_ARBEID_UTENFOR_NORGE
-                            ? 'Hvor og når har du utført arbeid i utlandet?'
-                            : 'Hvor og når har du oppholdt deg i utlandet?'}
-                    </Label>
-                )}
-
                 <UndersporsmalListe oversporsmal={sporsmal} />
 
                 {(sporsmalIndex > 0 || !erSisteSporsmal) && (

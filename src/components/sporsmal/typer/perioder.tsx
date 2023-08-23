@@ -41,7 +41,7 @@ const Perioder = ({ sporsmal }: SpmProps) => {
     }
 
     return (
-        <div data-cy="perioder">
+        <div data-cy="perioder" className="mt-8">
             <Label as="h3">{sporsmal.sporsmalstekst}</Label>
 
             <ul className="list-none" ref={periodeliste}>

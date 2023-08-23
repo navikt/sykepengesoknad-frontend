@@ -5,7 +5,7 @@ import { deepcopyMedNyId } from '../deepcopyMedNyId'
 import { brukertestSoknad, brukertestSykmelding } from './brukertest'
 
 export const medlemskapOppholdUtenforNorgeSporsmal: RSSporsmal = {
-    id: 'fb5b6d00-bb67-31a1-b8f5-448c7d512efb',
+    id: '38bac721-93cc-3826-93aa-109c87b6f4b9',
     tag: 'MEDLEMSKAP_OPPHOLD_UTENFOR_NORGE',
     sporsmalstekst: 'Har du oppholdt deg utenfor Norge i løpet av de siste 12 månedene?',
     undertekst: null,
@@ -17,7 +17,7 @@ export const medlemskapOppholdUtenforNorgeSporsmal: RSSporsmal = {
     svar: [],
     undersporsmal: [
         {
-            id: '8552bc8b-333e-355c-84f8-9f2de44dba94',
+            id: '07db05c4-604a-3175-8908-84bb63771e12',
             tag: 'MEDLEMSKAP_OPPHOLD_UTENFOR_NORGE_GRUPPERING_0',
             sporsmalstekst: null,
             undertekst: null,
@@ -29,9 +29,9 @@ export const medlemskapOppholdUtenforNorgeSporsmal: RSSporsmal = {
             svar: [],
             undersporsmal: [
                 {
-                    id: '67dc14c1-2b32-32f9-a053-14ef2ac18f20',
+                    id: 'f0680855-bca6-34e9-b448-c24729d1c3fb',
                     tag: 'MEDLEMSKAP_OPPHOLD_UTENFOR_NORGE_HVOR_0',
-                    sporsmalstekst: 'Velg land',
+                    sporsmalstekst: 'I hvilket land utenfor Norge har du oppholdt deg?',
                     undertekst: null,
                     svartype: 'COMBOBOX_SINGLE',
                     min: null,
@@ -42,9 +42,9 @@ export const medlemskapOppholdUtenforNorgeSporsmal: RSSporsmal = {
                     undersporsmal: [],
                 },
                 {
-                    id: '5483399f-4643-33fd-990a-755e5cc92ddc',
+                    id: '60e87c19-5c58-3c87-8ab8-3b51c721622c',
                     tag: 'MEDLEMSKAP_OPPHOLD_UTENFOR_NORGE_BEGRUNNELSE_0',
-                    sporsmalstekst: 'Grunn for opphold',
+                    sporsmalstekst: 'Hva var årsaken til oppholdet?',
                     undertekst: null,
                     svartype: 'RADIO_GRUPPE',
                     min: null,
@@ -54,7 +54,7 @@ export const medlemskapOppholdUtenforNorgeSporsmal: RSSporsmal = {
                     svar: [],
                     undersporsmal: [
                         {
-                            id: '5041d361-ca85-3184-afda-d28f5b37e50d',
+                            id: 'aaacd04c-3cf2-3c8b-96bb-bf2ca113c0b1',
                             tag: 'MEDLEMSKAP_OPPHOLD_UTENFOR_NORGE_BEGRUNNELSE_STUDIE_0',
                             sporsmalstekst: 'Studier',
                             undertekst: null,
@@ -67,7 +67,7 @@ export const medlemskapOppholdUtenforNorgeSporsmal: RSSporsmal = {
                             undersporsmal: [],
                         },
                         {
-                            id: '4b720825-f411-3dbc-b7d6-05e020071d00',
+                            id: '790bdb06-d1bc-37cc-8eae-bf07cf505351',
                             tag: 'MEDLEMSKAP_OPPHOLD_UTENFOR_NORGE_BEGRUNNELSE_FERIE_0',
                             sporsmalstekst: 'Ferie',
                             undertekst: null,
@@ -80,7 +80,7 @@ export const medlemskapOppholdUtenforNorgeSporsmal: RSSporsmal = {
                             undersporsmal: [],
                         },
                         {
-                            id: 'b06d2621-5ff8-32dd-9e32-c984879e5def',
+                            id: 'd8a899c8-0f48-35f7-871e-36364fee5395',
                             tag: 'MEDLEMSKAP_OPPHOLD_UTENFOR_NORGE_BEGRUNNELSE_FORSORG_0',
                             sporsmalstekst: 'Forsørget medfølgende familiemedlem',
                             undertekst: null,
@@ -95,13 +95,13 @@ export const medlemskapOppholdUtenforNorgeSporsmal: RSSporsmal = {
                     ],
                 },
                 {
-                    id: 'c867c95d-2f28-318e-ac7f-3c87e2c30233',
+                    id: '9123697b-3298-3723-a903-610badd31bb0',
                     tag: 'MEDLEMSKAP_OPPHOLD_UTENFOR_NORGE_NAAR_0',
-                    sporsmalstekst: null,
+                    sporsmalstekst: 'I hvilken periode oppholdt du deg i dette landet?',
                     undertekst: null,
                     svartype: 'PERIODE',
-                    min: '2021-08-22',
-                    max: '2023-08-22',
+                    min: '2021-08-23',
+                    max: '2023-08-23',
                     pavirkerAndreSporsmal: false,
                     kriterieForVisningAvUndersporsmal: null,
                     svar: [],
@@ -112,9 +112,9 @@ export const medlemskapOppholdUtenforNorgeSporsmal: RSSporsmal = {
     ],
 }
 export const medlemskapUtførtArbeidUtenforNorgeSporsmal: RSSporsmal = {
-    id: '02e1f6be-28fc-3553-a44f-826c9eb83236',
+    id: '4d2fffab-165b-3aac-b981-ea759a20acd2',
     tag: 'MEDLEMSKAP_UTFORT_ARBEID_UTENFOR_NORGE',
-    sporsmalstekst: 'Har du utført arbeid utenfor Norge i det siste 12 månedene?',
+    sporsmalstekst: 'Har du utført arbeid utenfor Norge i de siste 12 månedene?',
     undertekst: null,
     svartype: 'JA_NEI',
     min: null,
@@ -124,7 +124,7 @@ export const medlemskapUtførtArbeidUtenforNorgeSporsmal: RSSporsmal = {
     svar: [],
     undersporsmal: [
         {
-            id: 'f8d6e123-c4f1-3ece-800a-6dd46f5d6e12',
+            id: '2a7028ca-42b2-36f3-9b91-682879357b1d',
             tag: 'MEDLEMSKAP_UTFORT_ARBEID_UTENFOR_NORGE_GRUPPERING_0',
             sporsmalstekst: null,
             undertekst: null,
@@ -136,22 +136,9 @@ export const medlemskapUtførtArbeidUtenforNorgeSporsmal: RSSporsmal = {
             svar: [],
             undersporsmal: [
                 {
-                    id: '3d8554e1-b121-373b-98c4-f4755a8d6c32',
-                    tag: 'MEDLEMSKAP_UTFORT_ARBEID_UTENFOR_NORGE_ARBEIDSGIVER_0',
-                    sporsmalstekst: 'Arbeidsgiver',
-                    undertekst: null,
-                    svartype: 'FRITEKST',
-                    min: '1',
-                    max: '200',
-                    pavirkerAndreSporsmal: false,
-                    kriterieForVisningAvUndersporsmal: null,
-                    svar: [],
-                    undersporsmal: [],
-                },
-                {
-                    id: '4c0149b3-7458-3697-acf2-a6cc975062ac',
+                    id: 'f95a08e0-baba-3208-9c4f-74a21ecf06f9',
                     tag: 'MEDLEMSKAP_UTFORT_ARBEID_UTENFOR_NORGE_HVOR_0',
-                    sporsmalstekst: 'Velg land',
+                    sporsmalstekst: 'I hvilket land utførte du arbeidet?',
                     undertekst: null,
                     svartype: 'COMBOBOX_SINGLE',
                     min: null,
@@ -162,13 +149,26 @@ export const medlemskapUtførtArbeidUtenforNorgeSporsmal: RSSporsmal = {
                     undersporsmal: [],
                 },
                 {
-                    id: '2932df18-0c02-3c9c-85a9-01b80d437639',
+                    id: 'e0bd8beb-61b2-3f58-8837-18e15d901ec4',
+                    tag: 'MEDLEMSKAP_UTFORT_ARBEID_UTENFOR_NORGE_ARBEIDSGIVER_0',
+                    sporsmalstekst: 'Hvilken arbeidsgiver jobbet du for?',
+                    undertekst: null,
+                    svartype: 'FRITEKST',
+                    min: '1',
+                    max: '200',
+                    pavirkerAndreSporsmal: false,
+                    kriterieForVisningAvUndersporsmal: null,
+                    svar: [],
+                    undersporsmal: [],
+                },
+                {
+                    id: 'abe7fbff-bb1e-30b2-a1e4-4e1fe483a49e',
                     tag: 'MEDLEMSKAP_UTFORT_ARBEID_UTENFOR_NORGE_NAAR_0',
-                    sporsmalstekst: null,
+                    sporsmalstekst: 'I hvilken periode ble arbeidet utført?',
                     undertekst: null,
                     svartype: 'PERIODE',
-                    min: '2013-08-22',
-                    max: '2024-08-22',
+                    min: '2013-08-23',
+                    max: '2024-08-23',
                     pavirkerAndreSporsmal: false,
                     kriterieForVisningAvUndersporsmal: null,
                     svar: [],
@@ -179,7 +179,7 @@ export const medlemskapUtførtArbeidUtenforNorgeSporsmal: RSSporsmal = {
     ],
 }
 export const medlemskapOppholdUtenforEøsSporsmal: RSSporsmal = {
-    id: '5a65aa3c-20e4-383c-bc39-943fb346df4f',
+    id: '9edb831f-4ce2-3ded-9fd7-34eba2e80246',
     tag: 'MEDLEMSKAP_OPPHOLD_UTENFOR_EOS',
     sporsmalstekst: 'Har du oppholdt deg utenfor EØS i løpet av de siste 12 månedene?',
     undertekst: null,
@@ -191,7 +191,7 @@ export const medlemskapOppholdUtenforEøsSporsmal: RSSporsmal = {
     svar: [],
     undersporsmal: [
         {
-            id: '1dc0e827-2e4b-3611-9b81-d005707c7b9a',
+            id: '036c810a-0c01-3ed8-aef4-06b27619e15e',
             tag: 'MEDLEMSKAP_OPPHOLD_UTENFOR_EOS_GRUPPERING_0',
             sporsmalstekst: null,
             undertekst: null,
@@ -203,9 +203,9 @@ export const medlemskapOppholdUtenforEøsSporsmal: RSSporsmal = {
             svar: [],
             undersporsmal: [
                 {
-                    id: '55fe024d-a0ef-33ff-a022-dae62c3eefd5',
+                    id: '0483b89a-adae-38de-a480-9f63f2d761ab',
                     tag: 'MEDLEMSKAP_OPPHOLD_UTENFOR_EOS_HVOR_0',
-                    sporsmalstekst: 'Velg land',
+                    sporsmalstekst: 'I hvilket land utenfor EØS har du oppholdt deg?',
                     undertekst: null,
                     svartype: 'COMBOBOX_SINGLE',
                     min: null,
@@ -216,9 +216,9 @@ export const medlemskapOppholdUtenforEøsSporsmal: RSSporsmal = {
                     undersporsmal: [],
                 },
                 {
-                    id: '1452d416-7ebc-38b8-a8cf-7892f7be2cb5',
+                    id: '7a94fd54-4085-30b0-8af3-f9e2d4cc5f5c',
                     tag: 'MEDLEMSKAP_OPPHOLD_UTENFOR_EOS_BEGRUNNELSE_0',
-                    sporsmalstekst: 'Grunn for opphold',
+                    sporsmalstekst: 'Hva var årsaken til oppholdet?',
                     undertekst: null,
                     svartype: 'RADIO_GRUPPE',
                     min: null,
@@ -228,7 +228,7 @@ export const medlemskapOppholdUtenforEøsSporsmal: RSSporsmal = {
                     svar: [],
                     undersporsmal: [
                         {
-                            id: '27ea3082-259e-30ea-9fd7-c8e2ebd22d67',
+                            id: '66e5e5a1-aad3-3297-a775-a98db1aa42bc',
                             tag: 'MEDLEMSKAP_OPPHOLD_UTENFOR_EOS_BEGRUNNELSE_STUDIE_0',
                             sporsmalstekst: 'Studier',
                             undertekst: null,
@@ -241,7 +241,7 @@ export const medlemskapOppholdUtenforEøsSporsmal: RSSporsmal = {
                             undersporsmal: [],
                         },
                         {
-                            id: '14e7a5d3-4102-3fee-9670-3efcec0c91de',
+                            id: '00a6de46-c114-3468-bf1e-20f0b94ed712',
                             tag: 'MEDLEMSKAP_OPPHOLD_UTENFOR_EOS_BEGRUNNELSE_FERIE_0',
                             sporsmalstekst: 'Ferie',
                             undertekst: null,
@@ -254,7 +254,7 @@ export const medlemskapOppholdUtenforEøsSporsmal: RSSporsmal = {
                             undersporsmal: [],
                         },
                         {
-                            id: '2d6f9596-29f7-3133-a0ff-3ea50a4fe0e3',
+                            id: '4cc7d57b-7016-30f0-8ddb-c7dafcd57ea1',
                             tag: 'MEDLEMSKAP_OPPHOLD_UTENFOR_EOS_BEGRUNNELSE_FORSORG_0',
                             sporsmalstekst: 'Forsørget medfølgende familiemedlem',
                             undertekst: null,
@@ -269,13 +269,13 @@ export const medlemskapOppholdUtenforEøsSporsmal: RSSporsmal = {
                     ],
                 },
                 {
-                    id: '622ec5d0-50ec-3051-a0a5-3e4c53726e95',
+                    id: '8cf01768-b8f4-3000-a94c-319ffcd4fefb',
                     tag: 'MEDLEMSKAP_OPPHOLD_UTENFOR_EOS_NAAR_0',
-                    sporsmalstekst: null,
+                    sporsmalstekst: 'I hvilken periode oppholdt du deg i dette landet?',
                     undertekst: null,
                     svartype: 'PERIODE',
-                    min: '2021-08-22',
-                    max: '2023-08-22',
+                    min: '2021-08-23',
+                    max: '2023-08-23',
                     pavirkerAndreSporsmal: false,
                     kriterieForVisningAvUndersporsmal: null,
                     svar: [],
@@ -286,7 +286,7 @@ export const medlemskapOppholdUtenforEøsSporsmal: RSSporsmal = {
     ],
 }
 export const medlemskapOppholdstillatelseSporsmal: RSSporsmal = {
-    id: 'b349d69b-cd1a-3565-808c-52cb68dd5077',
+    id: '508c4c01-befe-3fc3-bd48-f11d331b5ec7',
     tag: 'MEDLEMSKAP_OPPHOLDSTILLATELSE',
     sporsmalstekst: 'Har du oppholdstillatelse fra utlendingsdirektoratet?',
     undertekst: null,
@@ -298,20 +298,20 @@ export const medlemskapOppholdstillatelseSporsmal: RSSporsmal = {
     svar: [],
     undersporsmal: [
         {
-            id: '7ab61517-0c86-3322-b4d4-e8194dbbf083',
+            id: 'b9115f19-2abf-3161-8579-ff3212e10c96',
             tag: 'MEDLEMSKAP_OPPHOLDSTILLATELSE_VEDTAKSDATO',
-            sporsmalstekst: 'Oppgi vedtaksdato om oppholdstillatelse:',
+            sporsmalstekst: 'Når fikk du vedtak om oppholdstillatelse?',
             undertekst: null,
             svartype: 'DATO',
-            min: '2013-08-22',
-            max: '2023-08-22',
+            min: '2013-08-23',
+            max: '2023-08-23',
             pavirkerAndreSporsmal: false,
             kriterieForVisningAvUndersporsmal: null,
             svar: [],
             undersporsmal: [],
         },
         {
-            id: '6261bc2f-e84b-3b5f-97bc-7f5db6d6aeda',
+            id: '40dc5725-0716-34cb-b46e-3eec6c3ca337',
             tag: 'MEDLEMSKAP_OPPHOLDSTILLATELSE_PERMANENT',
             sporsmalstekst: 'Har du fått permanent oppholdstillatelse?',
             undertekst: null,
@@ -323,13 +323,13 @@ export const medlemskapOppholdstillatelseSporsmal: RSSporsmal = {
             svar: [],
             undersporsmal: [
                 {
-                    id: '2f9ca2d4-09c6-3d96-9b6a-a1f63e4f7751',
+                    id: 'a32d4745-80ae-31a8-9614-9c79855c3442',
                     tag: 'MEDLEMSKAP_OPPHOLDSTILLATELSE_PERIODE',
                     sporsmalstekst: 'Hvilken periode har du fått oppholdstillatelse?',
                     undertekst: null,
                     svartype: 'PERIODE',
-                    min: '2013-08-22',
-                    max: '2033-08-22',
+                    min: '2013-08-23',
+                    max: '2033-08-23',
                     pavirkerAndreSporsmal: false,
                     kriterieForVisningAvUndersporsmal: null,
                     svar: [],
@@ -339,7 +339,6 @@ export const medlemskapOppholdstillatelseSporsmal: RSSporsmal = {
         },
     ],
 }
-
 export function medlemskapPerson(): Persona {
     const medlemskapSoknad = deepcopyMedNyId(brukertestSoknad, '7fdc72b9-30a9-435c-9eb1-f7cc68a8b429')
     const sporsmalene: RSSporsmal[] = []
