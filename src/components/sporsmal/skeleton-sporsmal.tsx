@@ -7,12 +7,8 @@ export const SkeletonSporsmal = () => {
     const { stegNo } = useSoknadMedDetaljer()
 
     if (stegNo == 1) {
-        // Chackboxpanel
-        return (
-
-                <Skeleton variant="rectangle" className="rounded" height="130px"></Skeleton>
-
-        )
+        // Checkboxpanel
+        return <Skeleton variant="rectangle" className="rounded" height="130px"></Skeleton>
     }
     return (
         // Ja Nei med en tekstlinje
