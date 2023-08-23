@@ -18,9 +18,7 @@ const RadioGruppe = ({ sporsmal }: OppsummeringProps) => {
             hvis={besvartUndersporsmal}
             render={() => (
                 <>
-                    <Label as="h3" className="mb-2">
-                        {sporsmal.sporsmalstekst}
-                    </Label>
+                    <Label as="h3">{sporsmal.sporsmalstekst}</Label>
                     <Avkrysset tekst={besvartUndersporsmal.sporsmalstekst} />
                     <UndersporsmalSum sporsmalsliste={besvartUndersporsmal.undersporsmal} />
                 </>

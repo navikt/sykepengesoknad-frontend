@@ -22,18 +22,14 @@ const Behandlingsdager = ({ sporsmal }: OppsummeringProps) => {
                 hvis={sporsmal.undersporsmal}
                 render={() => (
                     <>
-                        <Label as="h3" className="mb-2">
-                            {sporsmal.sporsmalstekst}
-                        </Label>
+                        <Label as="h3">{sporsmal.sporsmalstekst}</Label>
                         <Vis
                             hvis={sporsmal.undersporsmal.length > 0}
                             render={() => (
                                 <>
                                     {sporsmal.undersporsmal.map((uspm, idx) => (
                                         <div data-cy="oppsummering__behandlingsdager" key={idx}>
-                                            <Label as="h3" className="mb-2">
-                                                {tilLesbarPeriodeUtenArstall(uspm.min, uspm.max)}
-                                            </Label>
+                                            <Label as="h3">{tilLesbarPeriodeUtenArstall(uspm.min, uspm.max)}</Label>
                                             <Avkrysset tekst={datoEllerIkkeTilBehandling(uspm.svarliste.svar[0])} />
                                         </div>
                                     ))}

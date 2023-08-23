@@ -11,7 +11,7 @@ const LandSum = ({ sporsmal }: OppsummeringProps) => {
 
     const svarliste =
         svar.length === 1 ? (
-            <BodyShort className="sist">{svar[0].verdi}</BodyShort>
+            <BodyShort>{svar[0].verdi}</BodyShort>
         ) : (
             <ul>
                 {sporsmal.svarliste.svar.map((s) => (
@@ -23,10 +23,8 @@ const LandSum = ({ sporsmal }: OppsummeringProps) => {
         )
     return (
         <>
-            <Label as="h3" className="mb-2">
-                {sporsmal.sporsmalstekst}
-            </Label>
-            <div>{svarliste}</div>
+            <Label as="h3">{sporsmal.sporsmalstekst}</Label>
+            {svarliste}
         </>
     )
 }
