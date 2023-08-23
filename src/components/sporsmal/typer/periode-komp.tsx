@@ -7,7 +7,7 @@ import { validerFom, validerPeriode, validerTom } from '../../../utils/sporsmal/
 import { tekst } from '../../../utils/tekster'
 import Vis from '../../vis'
 import { SpmProps } from '../sporsmal-form/sporsmal-form'
-import { maanedKalenderApnesPa } from '../sporsmal-utils'
+import { kalenderMedDropdownCaption, maanedKalenderApnesPa } from '../sporsmal-utils'
 
 interface PeriodeProps {
     index: number
@@ -63,7 +63,11 @@ const PeriodeKomp = ({ sporsmal, index, slettPeriode }: AllProps) => {
     return (
         <li id={id} data-cy="periode">
             <fieldset className="axe-exclude p-0">
-                <DatePicker {...datepickerProps} locale="nb" dropdownCaption={!sporsmal.max && !sporsmal.min}>
+                <DatePicker
+                    {...datepickerProps}
+                    locale="nb"
+                    dropdownCaption={kalenderMedDropdownCaption(sporsmal.min, sporsmal.max)}
+                >
                     <div>
                         <DatePicker.Input
                             {...fromInputProps}

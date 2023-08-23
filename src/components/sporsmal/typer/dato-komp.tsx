@@ -6,7 +6,7 @@ import { SpmProps } from '../sporsmal-form/sporsmal-form'
 import UndersporsmalListe from '../undersporsmal/undersporsmal-liste'
 import validerDato from '../../../utils/sporsmal/valider-dato'
 import { TilbakeIArbeidBesvart } from '../../hjelpetekster/tilbake-i-arbeid-besvart/tilbake-i-arbeid-besvart'
-import { maanedKalenderApnesPa } from '../sporsmal-utils'
+import { kalenderMedDropdownCaption, maanedKalenderApnesPa } from '../sporsmal-utils'
 
 function DatoInput(props: SpmProps) {
     const { sporsmal } = props
@@ -36,7 +36,12 @@ function DatoInput(props: SpmProps) {
     return (
         <div className="mt-8" data-cy="dato-komp">
             <div className="axe-exclude">
-                <DatePicker {...datepickerProps} dropdownCaption={true} locale="nb" data-cy-sporsmalid={sporsmal.id}>
+                <DatePicker
+                    {...datepickerProps}
+                    locale="nb"
+                    dropdownCaption={kalenderMedDropdownCaption(sporsmal.min, sporsmal.max)}
+                    data-cy-sporsmalid={sporsmal.id}
+                >
                     <DatePicker.Input
                         {...inputProps}
                         id={sporsmal.id}

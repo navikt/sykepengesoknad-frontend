@@ -87,13 +87,11 @@ describe('Tester feilmeldinger', () => {
         gaTilSoknad(arbeidstakerGradert, '3')
         gaVidere()
 
-        cy.get('[data-cy="feil-lokal"]').contains('Du må velge et alternativ')
-        cy.get('[data-cy="feil-oppsumering"]')
-            .should('exist')
-            .within(() => {
-                cy.contains('Det er 1 feil i skjemaet')
-                cy.contains('Du må oppgi om du var tilbake i arbeid før friskmeldingsperioden utløp').click()
-            })
+        feilmeldingHandtering(
+            'Du må velge et alternativ',
+            'Du må oppgi om du var tilbake i arbeid før friskmeldingsperioden utløp',
+            arbeidstakerGradert.sporsmal[2].id + '_0',
+        )
         cy.focused().should('have.attr', 'name', arbeidstakerGradert.sporsmal[2].id).click()
 
         ingenFeilmeldinger()
