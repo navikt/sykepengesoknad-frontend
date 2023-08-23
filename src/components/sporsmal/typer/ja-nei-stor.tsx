@@ -6,7 +6,6 @@ import { useRouter } from 'next/router'
 import { TagTyper } from '../../../types/enums'
 import { getLedetekst, tekst } from '../../../utils/tekster'
 import AnimateOnMount from '../../animate-on-mount'
-import FeilLokal from '../../feil/feil-lokal'
 import { utlandssoknadUrl } from '../../soknad/soknad-link'
 import Vis from '../../vis'
 import GuidepanelUnderSporsmalstekst from '../guidepanel/GuidepanelUnderSporsmalstekst'
@@ -89,13 +88,14 @@ const JaNeiStor = ({ sporsmal }: SpmProps) => {
                     name={sporsmal.id}
                     rules={{ validate: (value) => valider(value), required: feilmelding.global }}
                     defaultValue=""
-                    render={({ field }) => (
+                    render={({ field, fieldState }) => (
                         <RadioGroup
                             {...field}
                             legend={sporsmalstekst()}
                             data-cy="ja-nei-stor"
                             className="w-full"
                             key={sporsmal.id}
+                            error={fieldState.error && feilmelding.lokal}
                             style={
                                 {
                                     '--ac-radio-checkbox-border': error
@@ -147,8 +147,6 @@ const JaNeiStor = ({ sporsmal }: SpmProps) => {
 
                 <YrkesskadeInfo sporsmal={sporsmal} jaNeiSvar={watchJaNei} />
             </div>
-
-            <FeilLokal sporsmal={sporsmal} />
 
             <div aria-live="assertive">
                 <AnimateOnMount
