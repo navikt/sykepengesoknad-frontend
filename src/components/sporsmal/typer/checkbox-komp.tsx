@@ -42,7 +42,8 @@ const CheckboxKomp = ({ sporsmal }: SpmProps) => {
             rules={{ required: feilmelding.global }}
             render={({ field }) => (
                 <>
-                    <div className="mt-4 flex max-w-sm gap-4 rounded-lg py-6">
+
+                    {sporsmal.tag === TagTyper.ANDRE_INNTEKTSKILDER_V2 && <div className="mt-4 flex max-w-sm gap-4 rounded-lg py-6">
                         <InformationIcon
                             title="informasjon"
                             className="flex-shrink-0 rounded-full bg-gray-200 p-2 text-sm font-bold"
@@ -53,7 +54,8 @@ const CheckboxKomp = ({ sporsmal }: SpmProps) => {
                             Informasjon om andre inntektskilder blir behandlet konfidensielt, og blir ikke delt med
                             arbeidsgiver
                         </BodyShort>
-                    </div>
+                    </div>}
+
 
                     <CheckboxGroup
                         {...field}
