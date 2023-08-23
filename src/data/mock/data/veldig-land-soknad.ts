@@ -855,8 +855,8 @@ export const veldigLangSoknad: RSSoknad = {
                             undersporsmal: [
                                 {
                                     id: 'dffc1170-d02c-3328-b58e-3ef11f11aefc',
-                                    tag: 'INNTEKTSKILDE_SELVSTENDIG_4_AR',
-                                    sporsmalstekst: 'Har du vært næringsdrivende i mer enn 4 år?',
+                                    tag: 'INNTEKTSKILDE_SELVSTENDIG_N_AR',
+                                    sporsmalstekst: 'Har du vært næringsdrivende i mer enn 5 år?',
                                     undertekst: null,
                                     svartype: 'JA_NEI',
                                     min: null,
