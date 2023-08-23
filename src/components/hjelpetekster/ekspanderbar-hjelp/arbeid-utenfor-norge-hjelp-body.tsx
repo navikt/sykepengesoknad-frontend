@@ -1,5 +1,6 @@
 import { BodyLong } from '@navikt/ds-react'
 
+//TODO: fjern dette nåt medlemskap spørsmålet er prodsatt
 export const ArbeidUtenforNorgeHjelpBody = () => {
     return (
         <>
