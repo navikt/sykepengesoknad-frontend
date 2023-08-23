@@ -12,7 +12,7 @@ interface OppdaterSporsmalVariables {
 }
 
 interface OppdaterSporsmalProps {
-    soknad: Soknad
+    soknad: Soknad | undefined
     spmIndex: number
 }
 
@@ -23,7 +23,7 @@ export function useOppdaterSporsmal(props: OppdaterSporsmalProps) {
     return useMutation<RSOppdaterSporsmalResponse, any, OppdaterSporsmalVariables>({
         mutationFn: async (variables) => {
             return fetchJsonMedRequestId(
-                `/syk/sykepengesoknad/api/sykepengesoknad-backend/api/v2/soknader/${soknad.id}/sporsmal/${variables.sporsmal.id}`,
+                `/syk/sykepengesoknad/api/sykepengesoknad-backend/api/v2/soknader/${soknad?.id}/sporsmal/${variables.sporsmal.id}`,
                 {
                     method: 'PUT',
                     credentials: 'include',
@@ -32,7 +32,7 @@ export function useOppdaterSporsmal(props: OppdaterSporsmalProps) {
                 },
             )
         },
-        mutationKey: ['oppdaterSporsmal', soknad.id, spmIndex],
+        mutationKey: ['oppdaterSporsmal', soknad?.id, spmIndex],
 
         onSuccess: async (data, variables) => {
             const oppdatertSoknad = () => {
@@ -41,17 +41,17 @@ export function useOppdaterSporsmal(props: OppdaterSporsmalProps) {
                 } else {
                     const spm = data.oppdatertSporsmal
 
-                    const oppdaterteSporsmal = soknad.sporsmal.map((sporsmal, index) => {
+                    const oppdaterteSporsmal = soknad?.sporsmal.map((sporsmal, index) => {
                         if (index == spmIndex) {
                             return skapSporsmal(spm, null, true)
                         }
                         return sporsmal
                     })
-                    return soknad.copyWith({ sporsmal: oppdaterteSporsmal })
+                    return soknad?.copyWith({ sporsmal: oppdaterteSporsmal })
                 }
             }
 
-            queryClient.setQueriesData(['soknad', soknad.id], oppdatertSoknad())
+            queryClient.setQueriesData(['soknad', soknad?.id], oppdatertSoknad())
 
             if (variables.onSuccess) variables.onSuccess()
         },

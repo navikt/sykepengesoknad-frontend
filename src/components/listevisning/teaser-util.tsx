@@ -4,7 +4,6 @@ import React from 'react'
 import { arbeidstakerGradert } from '../../data/mock/data/opplaering'
 import { RSArbeidssituasjon } from '../../types/rs-types/rs-arbeidssituasjon'
 import { RSSoknadstype } from '../../types/rs-types/rs-soknadstype'
-import { isOpplaering } from '../../utils/environment'
 import { getLedetekst, tekst } from '../../utils/tekster'
 import { RSSoknadmetadata } from '../../types/rs-types/rs-soknadmetadata'
 
@@ -27,11 +26,7 @@ export const finnArbeidsgivernavn = (soknad: RSSoknadmetadata) => {
 }
 
 export const leggTilSoknadstypeForDemoside = (soknad: RSSoknadmetadata) => {
-    if (
-        isOpplaering() &&
-        soknad.soknadstype !== RSSoknadstype.OPPHOLD_UTLAND &&
-        soknad.soknadstype !== RSSoknadstype.REISETILSKUDD
-    ) {
+    if (soknad.soknadstype !== RSSoknadstype.OPPHOLD_UTLAND && soknad.soknadstype !== RSSoknadstype.REISETILSKUDD) {
         const forste = soknad.id === arbeidstakerGradert.id ? 'førstegangssøknad' : ''
         const arbeidssituasjon = soknad.arbeidssituasjon?.toLowerCase()
         const soknadstype =

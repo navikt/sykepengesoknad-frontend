@@ -2,7 +2,12 @@ import dayjs from 'dayjs'
 
 import { getSykmeldingStartDate, Sykmelding } from '../../types/sykmelding'
 
-export function eldreUsendteSykmeldinger(sykmeldinger: Sykmelding[], soknadTom: Date): Sykmelding[] {
+export function eldreUsendteSykmeldinger(
+    sykmeldinger: Sykmelding[] | undefined,
+    soknadTom: Date | undefined,
+): Sykmelding[] {
+    if (!sykmeldinger || !soknadTom) return []
+
     return sykmeldinger
         .filter((sykmelding) => {
             return sykmelding.sykmeldingStatus.statusEvent == 'APEN'

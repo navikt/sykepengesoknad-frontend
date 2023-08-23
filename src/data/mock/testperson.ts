@@ -24,6 +24,7 @@ import { yrkesskadePerson, yrkesskadeV2Person } from './data/yrkesskade'
 import { egenmeldingSykmeldingaPerson } from './data/egenmeldingsdager-i-sykmeldingen'
 import { selvstendigNaringsdrivende } from './data/naringsdrivende'
 import { korrigeringsfristUtloptPerson } from './data/korrigeringsfrist-utlopt'
+import { clsPerson } from './data/cls'
 import { medlemskapPerson } from './data/medlemskap'
 
 export enum PersonaKeys {
@@ -50,6 +51,7 @@ export enum PersonaKeys {
     'http-400-ved-send-soknad' = 'http-400-ved-send-soknad',
     'http-500-ved-send-soknad' = 'http-500-ved-send-soknad',
     'korrigeringsfrist-utlopt' = 'korrigeringsfrist-utlopt',
+    'cummulative-layout-shift' = 'cummulative-layout-shift',
 }
 
 type PersonaData = Record<PersonaKeys, Persona>
@@ -79,6 +81,7 @@ export function testpersoner(): PersonaData {
         [PersonaKeys['http-400-ved-send-soknad']]: jsonDeepCopy(får400vedSendSoknad),
         [PersonaKeys['http-500-ved-send-soknad']]: jsonDeepCopy(får500vedSendSoknad),
         [PersonaKeys['korrigeringsfrist-utlopt']]: jsonDeepCopy(korrigeringsfristUtloptPerson),
+        [PersonaKeys['cummulative-layout-shift']]: jsonDeepCopy(clsPerson),
     }
 
     // Valider at alle søknader har unik ID, det gjør logikken i API mye lettere da vi kan anta at alle søknadsider er unike per sesjon

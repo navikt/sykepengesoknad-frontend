@@ -1,8 +1,6 @@
-import { Heading } from '@navikt/ds-react'
 import React, { useEffect } from 'react'
 import { useRouter } from 'next/router'
 
-import Banner from '../../components/banner/banner'
 import OmReisetilskudd from '../../components/om-reisetilskudd/om-reisetilskudd'
 import Opplysninger from '../../components/opplysninger-fra-sykmelding/opplysninger'
 import SoknadMedToDeler from '../../components/soknad-med-to-deler/soknad-med-to-deler'
@@ -10,7 +8,6 @@ import SporsmalForm from '../../components/sporsmal/sporsmal-form/sporsmal-form'
 import Fremdriftsbar from '../sporsmal/fremdriftsbar/fremdriftsbar'
 import { RSSoknadstatus } from '../../types/rs-types/rs-soknadstatus'
 import { RSSoknadstype } from '../../types/rs-types/rs-soknadstype'
-import { tekst } from '../../utils/tekster'
 import { logEvent } from '../amplitude/amplitude'
 import { EldreUsendtSoknad, harEldreUsendtSoknad } from '../eldre-usendt/eldre-usendt-soknad'
 import { EldreUsendtSykmelding } from '../eldre-usendt/eldre-usendt-sykmelding'
@@ -18,29 +15,18 @@ import { eldreUsendteSykmeldinger } from '../eldre-usendt/eldreUsendteSykmelding
 import FristSykepenger from '../frist-sykepenger/frist-sykepenger'
 import { hentHotjarJsTrigger, HotjarTrigger } from '../hotjar-trigger'
 import { ViktigInformasjon } from '../soknad-intro/viktig-informasjon'
-import { hentNokkel } from '../sporsmal/sporsmal-utils'
-import Vis from '../vis'
-import useSoknad from '../../hooks/useSoknad'
-import useSoknader from '../../hooks/useSoknader'
-import QueryStatusPanel from '../queryStatusPanel/QueryStatusPanel'
 import { soknadBreadcrumb, useUpdateBreadcrumbs } from '../../hooks/useBreadcrumbs'
 import EgenmeldingsdagerArbeidsgiver from '../egenmeldingsdager-arbeidsgiver/egenmeldingsdager-arbeidsgiver'
-import useSykmeldinger from '../../hooks/useSykmeldinger'
-import useSykmelding from '../../hooks/useSykmelding'
 import { Feedback } from '../feedback/feedback'
+import { Banner } from '../banner/banner'
+import { useSoknadMedDetaljer } from '../../hooks/useSoknadMedDetaljer'
 
 import { urlTilSoknad } from './soknad-link'
+import { SporsmalTittel } from './sporsmal-tittel'
 
 export const Soknaden = () => {
     const router = useRouter()
-    const { id, stegId } = router.query as { id: string; stegId: string }
-    const { data: valgtSoknad } = useSoknad(id)
-    const { data: soknader } = useSoknader()
-    const { data: sykmeldinger } = useSykmeldinger()
-    const { data: valgtSykmelding } = useSykmelding(valgtSoknad?.sykmeldingId)
-
-    const stegNo = parseInt(stegId!)
-    const spmIndex = stegNo - 1
+    const { erUtenlandssoknad, stegId, stegNo, valgtSoknad, soknader, sykmeldinger, spmIndex } = useSoknadMedDetaljer()
 
     useUpdateBreadcrumbs(() => [{ ...soknadBreadcrumb, handleInApp: true }], [])
 
@@ -71,19 +57,12 @@ export const Soknaden = () => {
         })
     }, [router, stegId, valgtSoknad])
 
-    if (!valgtSoknad || !soknader || !sykmeldinger || !stegId) {
-        return <QueryStatusPanel valgSoknadId={id} valgSykmeldingId={valgtSoknad?.sykmeldingId} />
-    }
-    const sporsmal = valgtSoknad.sporsmal[spmIndex]
+    const erReisetilskuddsoknad = valgtSoknad?.soknadstype === RSSoknadstype.REISETILSKUDD
+    const erGradertReisetilskuddsoknad = valgtSoknad?.soknadstype === RSSoknadstype.GRADERT_REISETILSKUDD
 
-    const tittel = tekst(hentNokkel(valgtSoknad!, stegNo) as any)
-    const erUtlandssoknad = valgtSoknad.soknadstype === RSSoknadstype.OPPHOLD_UTLAND && !valgtSykmelding
-    const erReisetilskuddsoknad = valgtSoknad.soknadstype === RSSoknadstype.REISETILSKUDD
-    const erGradertReisetilskuddsoknad = valgtSoknad.soknadstype === RSSoknadstype.GRADERT_REISETILSKUDD
-
-    if (!erUtlandssoknad) {
+    if (!erUtenlandssoknad) {
         const eldreUsendtSoknad = harEldreUsendtSoknad(valgtSoknad, soknader)
-        const usendteSm = eldreUsendteSykmeldinger(sykmeldinger, valgtSoknad.tom!)
+        const usendteSm = eldreUsendteSykmeldinger(sykmeldinger, valgtSoknad?.tom)
         if (usendteSm.length > 0) {
             return <EldreUsendtSykmelding usendteSykmeldinger={usendteSm} />
         }
@@ -91,57 +70,32 @@ export const Soknaden = () => {
             return <EldreUsendtSoknad eldreSoknad={eldreUsendtSoknad.eldsteSoknad} antall={eldreUsendtSoknad.antall} />
         }
     }
+    const sporsmal = valgtSoknad?.sporsmal[spmIndex]
 
-    if (stegNo > 1) {
+    if (valgtSoknad && stegNo > 1) {
         logEvent('skjema spørsmål åpnet', {
-            soknadstype: valgtSoknad!.soknadstype,
+            soknadstype: valgtSoknad.soknadstype,
             skjemanavn: 'sykepengesoknad',
-            spørsmål: sporsmal!.tag,
+            spørsmål: sporsmal?.tag,
         })
     }
-
+    const erForstesiden = stegNo === 1 && !erUtenlandssoknad
+    const erForstesidenMedReisetilskudd = stegNo === 1 && (erReisetilskuddsoknad || erGradertReisetilskuddsoknad)
     return (
         <>
             <Banner />
 
-            <HotjarTrigger jsTrigger={hentHotjarJsTrigger(valgtSoknad.soknadstype, 'soknad')}>
+            <HotjarTrigger jsTrigger={hentHotjarJsTrigger(valgtSoknad?.soknadstype, 'soknad')}>
                 <>
-                    <Vis hvis={stegNo > 1 || erUtlandssoknad} render={() => <Fremdriftsbar />} />
-
-                    <Vis hvis={stegNo === 1 && !erUtlandssoknad} render={() => <ViktigInformasjon />} />
-
-                    <Vis hvis={stegNo === 1 && erGradertReisetilskuddsoknad} render={() => <SoknadMedToDeler />} />
-
-                    <Vis
-                        hvis={stegNo === 1 && valgtSoknad.opprettetAvInntektsmelding}
-                        render={() => <EgenmeldingsdagerArbeidsgiver />}
-                    />
-
-                    <Vis
-                        hvis={stegNo === 1 && !erUtlandssoknad}
-                        render={() => <Opplysninger ekspandert={true} steg={valgtSoknad.sporsmal[stegNo - 1].tag} />}
-                    />
-
-                    <Vis
-                        hvis={stegNo === 1 && !erUtlandssoknad}
-                        render={() => <FristSykepenger soknad={valgtSoknad} />}
-                    />
-
-                    <Vis
-                        hvis={stegNo === 1 && (erReisetilskuddsoknad || erGradertReisetilskuddsoknad)}
-                        render={() => <OmReisetilskudd />}
-                    />
-
-                    <Vis
-                        hvis={tittel && stegNo !== 1 && !erUtlandssoknad}
-                        render={() => (
-                            <Heading data-cy="sporsmal-tittel" level="2" size="medium" className="mb-4 mt-16">
-                                {tittel}
-                            </Heading>
-                        )}
-                    />
-
-                    <SporsmalForm valgtSoknad={valgtSoknad} sporsmal={sporsmal} spmIndex={spmIndex} />
+                    {!erForstesiden && <Fremdriftsbar />}
+                    {erForstesiden && <ViktigInformasjon />}
+                    {erForstesiden && erGradertReisetilskuddsoknad && <SoknadMedToDeler />}
+                    {erForstesiden && valgtSoknad?.opprettetAvInntektsmelding && <EgenmeldingsdagerArbeidsgiver />}
+                    {erForstesiden && <Opplysninger ekspandert={true} />}
+                    {erForstesiden && <FristSykepenger />}
+                    {erForstesidenMedReisetilskudd && <OmReisetilskudd />}
+                    {!erForstesiden && <SporsmalTittel />}
+                    <SporsmalForm />
                     <Feedback soknad={valgtSoknad} steg={stegNo} />
                 </>
             </HotjarTrigger>

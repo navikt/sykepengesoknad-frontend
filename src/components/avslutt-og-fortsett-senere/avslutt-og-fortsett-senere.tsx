@@ -1,31 +1,29 @@
-import { BodyShort, Button } from '@navikt/ds-react'
+import { BodyShort, Button, Skeleton } from '@navikt/ds-react'
 import React, { useState } from 'react'
-import { useRouter } from 'next/router'
 
 import { minSideUrl } from '../../utils/environment'
 import { tekst } from '../../utils/tekster'
 import { logEvent } from '../amplitude/amplitude'
-import useSoknad from '../../hooks/useSoknad'
 import { FlexModal } from '../flex-modal'
+import { useSoknadMedDetaljer } from '../../hooks/useSoknadMedDetaljer'
+import { cn } from '../../utils/tw-utils'
 
 const AvsluttOgFortsettSenere = () => {
-    const router = useRouter()
-    const { id, stegId } = router.query as { id: string; stegId: string }
-    const { data: valgtSoknad } = useSoknad(id)
-    const [aapen, setAapen] = useState<boolean>(false)
+    const { valgtSoknad, stegId } = useSoknadMedDetaljer()
 
-    if (!valgtSoknad) return null
+    const [aapen, setAapen] = useState<boolean>(false)
 
     return (
         <>
             <Button
+                className={cn('block', { '-ml-5': valgtSoknad })}
                 variant="tertiary"
-                className="-ml-5 block"
+                as={valgtSoknad ? Button : Skeleton}
                 data-cy="avslutt-og-fortsett-senere"
                 onClick={(e) => {
                     logEvent('modal åpnet', {
                         component: tekst('avslutt.popup.tittel'),
-                        soknadstype: valgtSoknad.soknadstype,
+                        soknadstype: valgtSoknad?.soknadstype,
                         steg: stegId!,
                     })
                     setAapen(true)
@@ -43,7 +41,7 @@ const AvsluttOgFortsettSenere = () => {
                 onClose={() => {
                     logEvent('modal lukket', {
                         component: tekst('avslutt.popup.tittel'),
-                        soknadstype: valgtSoknad.soknadstype,
+                        soknadstype: valgtSoknad?.soknadstype,
                         steg: stegId!,
                     })
                 }}
@@ -54,13 +52,14 @@ const AvsluttOgFortsettSenere = () => {
                     variant="primary"
                     className="mr-4 mt-4"
                     onClick={() => {
-                        logEvent('knapp klikket', {
-                            tekst: tekst('avslutt.popup.ja'),
-                            soknadstype: valgtSoknad.soknadstype,
-                            component: tekst('avslutt.popup.tittel'),
-                            steg: stegId!,
-                        })
-
+                        if (valgtSoknad) {
+                            logEvent('knapp klikket', {
+                                tekst: tekst('avslutt.popup.ja'),
+                                soknadstype: valgtSoknad.soknadstype,
+                                component: tekst('avslutt.popup.tittel'),
+                                steg: stegId!,
+                            })
+                        }
                         window.location.href = minSideUrl()
                     }}
                 >
@@ -73,7 +72,7 @@ const AvsluttOgFortsettSenere = () => {
                         setAapen(false)
                         logEvent('knapp klikket', {
                             tekst: tekst('avslutt.popup.nei'),
-                            soknadstype: valgtSoknad.soknadstype,
+                            soknadstype: valgtSoknad?.soknadstype,
                             component: tekst('avslutt.popup.tittel'),
                             steg: stegId!,
                         })

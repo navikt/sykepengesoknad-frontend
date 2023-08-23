@@ -5,10 +5,11 @@ import dayjs from 'dayjs'
 import nb from 'dayjs/locale/nb'
 import type { AppProps as NextAppProps } from 'next/app'
 import Head from 'next/head'
-import React, { PropsWithChildren, useEffect } from 'react'
+import React, { PropsWithChildren, useEffect, useRef } from 'react'
 import { QueryCache, QueryClient, QueryClientProvider } from '@tanstack/react-query'
 import { Modal } from '@navikt/ds-react'
 import { useRouter } from 'next/router'
+import { ReactQueryDevtools } from '@tanstack/react-query-devtools'
 
 import { useFangHotjarEmotion } from '../hooks/useFangHotjarEmotion'
 import { useHandleDecoratorClicks } from '../hooks/useBreadcrumbs'
@@ -60,8 +61,13 @@ function MyApp({ Component, pageProps }: AppProps): JSX.Element {
     useFangHotjarEmotion()
 
     const router = useRouter()
+    const isFirst = useRef(true)
 
     useEffect(() => {
+        if (isFirst.current) {
+            isFirst.current = false
+            return
+        }
         if (router.asPath !== '/') {
             // Ikke fokuser når man går tilbake til listevisninga
             document.getElementById('maincontent')?.focus()
@@ -84,6 +90,7 @@ function MyApp({ Component, pageProps }: AppProps): JSX.Element {
                         <Component {...pageProps} />
                     </main>
                 </div>
+                <ReactQueryDevtools initialIsOpen={false} />
             </QueryClientProvider>
         </>
     )

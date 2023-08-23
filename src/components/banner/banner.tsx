@@ -1,22 +1,14 @@
-import { Heading } from '@navikt/ds-react'
+import { Heading, Skeleton } from '@navikt/ds-react'
 import React from 'react'
-import { useRouter } from 'next/router'
 
 import { RSSoknadstype } from '../../types/rs-types/rs-soknadstype'
 import { tilLesbarPeriodeMedArstall } from '../../utils/dato-utils'
 import { tekst } from '../../utils/tekster'
-import Vis from '../vis'
-import useSoknad from '../../hooks/useSoknad'
 import Person from '../person/Person'
+import { useSoknadMedDetaljer } from '../../hooks/useSoknadMedDetaljer'
 
-interface BannerProps {
-    overskrift?: string
-}
-
-const Banner = ({ overskrift }: BannerProps) => {
-    const router = useRouter()
-    const { id } = router.query as { id: string }
-    const { data: valgtSoknad } = useSoknad(id, id !== undefined)
+export const Banner = () => {
+    const { valgtSoknad } = useSoknadMedDetaljer()
 
     const tittel = () => {
         if (valgtSoknad) {
@@ -32,23 +24,37 @@ const Banner = ({ overskrift }: BannerProps) => {
         }
         return tekst('sykepengesoknad.sidetittel')
     }
+    if (!valgtSoknad) return <Header overskrift={tittel()} underoverskrift="placeholder tekst" skeleton={true} />
 
+    function underoverskrift() {
+        if (valgtSoknad && valgtSoknad.fom && valgtSoknad.tom) {
+            return tilLesbarPeriodeMedArstall(valgtSoknad.fom, valgtSoknad.tom)
+        }
+    }
+
+    return <Header overskrift={tittel()} underoverskrift={underoverskrift()} />
+}
+
+export const Header = ({
+    overskrift,
+    underoverskrift,
+    skeleton,
+}: {
+    overskrift: string
+    underoverskrift?: string
+    skeleton?: boolean
+}) => {
     return (
         <header className="m-auto mt-4 flex items-center justify-between py-4">
-            <Heading size="large" level="1" className="inline md:mr-2">
-                {overskrift === undefined ? tittel() : overskrift}
-                <Vis
-                    hvis={valgtSoknad && valgtSoknad.fom && valgtSoknad.tom}
-                    render={() => (
-                        <Heading size="small" as="span" className="mt-2 block">
-                            {tilLesbarPeriodeMedArstall(valgtSoknad!.fom, valgtSoknad!.tom)}
-                        </Heading>
-                    )}
-                />
+            <Heading {...(skeleton ? { as: Skeleton } : {})} size="large" level="1" className="inline md:mr-2">
+                {overskrift}
+                {underoverskrift && (
+                    <Heading as={skeleton ? Skeleton : 'span'} size="small" className="mt-2 block">
+                        {underoverskrift}
+                    </Heading>
+                )}
             </Heading>
             <Person />
         </header>
     )
 }
-
-export default Banner
