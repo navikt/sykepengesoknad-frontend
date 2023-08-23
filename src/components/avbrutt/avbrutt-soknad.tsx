@@ -63,7 +63,7 @@ const AvbruttSoknad = () => {
             <BodyLong spacing>{tekst('sykepengesoknad.avbrutt.informasjon-innhold-4')}</BodyLong>
 
             <Opplysninger ekspandert={false} />
-            <FristSykepenger soknad={valgtSoknad} />
+            <FristSykepenger />
 
             <Vis
                 hvis={dayjs(valgtSoknad.avbruttDato).isAfter(dayjs().subtract(2, 'seconds'))}
