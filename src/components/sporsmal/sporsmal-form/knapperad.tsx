@@ -38,7 +38,7 @@ const Knapperad = ({ poster }: { poster: boolean }) => {
     if (skalSkjuleKnapperad()) return null
 
     const knappetekst = () => {
-        if (!soknad) return 'placeholder'
+        if (!soknad) return tekst('sykepengesoknad.ga-videre')
         const erSisteSteg =
             spmIndex === soknad.sporsmal.length - (soknad.soknadstype === RSSoknadstype.OPPHOLD_UTLAND ? 1 : 2)
         if (erSisteSteg) {
