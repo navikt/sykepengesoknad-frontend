@@ -26,8 +26,9 @@ import { JobbetDuGradertArbeidstakerHjelpBody } from './jobbet-du-gradert-arbeid
 import { BrukteReisetilskuddetHjelpBody } from './brukte-reisetilskuddet-hjelp-body'
 import { KvitteringerHjelpBody } from './kvitteringer-hjelp-body'
 import { EndringSNHjelpBody } from './endring-sn-hjelp-body'
-import { MedlemskapOppholdUtenforEOSHjelpBody } from './medlemskap-opphold-utenfor-eos-hjelp-body'
 import { MedlemskapArbeidUtenforNorgeHjelpBody } from './medlemskap-arbeid-utenfor-norge-hjelp-body'
+import { MedlemskapOppholdUtenforEOSHjelpBody } from './medlemskap-opphold-utenfor-eos-hjelp-body'
+import { MedlemskapOppholdUtenforNorgeHjelpBody } from './medlemskap-opphold-utenfor-Norge-hjelp-body'
 
 export const EkspanderbarHjelp = ({ sporsmal }: SpmProps) => {
     const router = useRouter()
@@ -100,6 +101,8 @@ export const EkspanderbarHjelp = ({ sporsmal }: SpmProps) => {
                 return <EndringSNHjelpBody />
             case TagTyper.MEDLEMSKAP_OPPHOLD_UTENFOR_EOS:
                 return <MedlemskapOppholdUtenforEOSHjelpBody />
+            case TagTyper.MEDLEMSKAP_OPPHOLD_UTENFOR_NORGE:
+                return <MedlemskapOppholdUtenforNorgeHjelpBody />
             case TagTyper.MEDLEMSKAP_UTFORT_ARBEID_UTENFOR_NORGE:
                 return <MedlemskapArbeidUtenforNorgeHjelpBody />
             default:
