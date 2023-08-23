@@ -20,7 +20,7 @@ interface OpplysningerProps {
     steg?: string
 }
 
-const Opplysninger = ({ ekspandert }: OpplysningerProps) => {
+const Opplysninger = ({ ekspandert, steg }: OpplysningerProps) => {
     const { valgtSykmelding, valgtSoknad, sporsmal } = useSoknadMedDetaljer()
 
     const [open, setOpen] = useState<boolean>(ekspandert)
@@ -36,7 +36,7 @@ const Opplysninger = ({ ekspandert }: OpplysningerProps) => {
                 onClick={() => {
                     logEvent(open ? 'accordion lukket' : 'accordion åpnet', {
                         component: tittel,
-                        steg: sporsmal?.tag,
+                        steg: steg || sporsmal?.tag,
                     })
                     setOpen(!open)
                 }}

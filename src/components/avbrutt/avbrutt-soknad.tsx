@@ -62,7 +62,7 @@ const AvbruttSoknad = () => {
             <BodyLong spacing>{tekst('sykepengesoknad.avbrutt.informasjon-innhold-3')}</BodyLong>
             <BodyLong spacing>{tekst('sykepengesoknad.avbrutt.informasjon-innhold-4')}</BodyLong>
 
-            <Opplysninger ekspandert={false} />
+            <Opplysninger ekspandert={false} steg="avbrutt-søknad" />
             <FristSykepenger />
 
             <Vis

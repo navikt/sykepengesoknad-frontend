@@ -46,7 +46,7 @@ export const Header = ({
 }) => {
     return (
         <header className="m-auto mt-4 flex items-center justify-between py-4">
-            <Heading as={skeleton ? Skeleton : Heading} size="large" level="1" className="inline md:mr-2">
+            <Heading {...(skeleton ? { as: Skeleton } : {})} size="large" level="1" className="inline md:mr-2">
                 {overskrift}
                 {underoverskrift && (
                     <Heading as={skeleton ? Skeleton : 'span'} size="small" className="mt-2 block">
