@@ -6,10 +6,10 @@ import { fjernIndexFraTag } from '../sporsmal-utils'
 import { tekst } from '../../../utils/tekster'
 import { ProgressivtGuidePanel } from '../../guidepanel/ProgressivtGuidePanel'
 import { parserWithReplace } from '../../../utils/html-react-parser-utils'
-import { UseSoknadMedDetaljer } from '../../../hooks/useSoknadMedDetaljer'
+import { useSoknadMedDetaljer } from '../../../hooks/useSoknadMedDetaljer'
 
 const GuidepanelOverSporsmalstekst = () => {
-    const { sporsmal } = UseSoknadMedDetaljer()
+    const { sporsmal } = useSoknadMedDetaljer()
     if (!sporsmal) return null
     const bjornTekst = `soknad.bjorn.${fjernIndexFraTag(sporsmal.tag).toLowerCase()}`
 

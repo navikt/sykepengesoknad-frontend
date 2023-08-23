@@ -4,10 +4,10 @@ import { fetchJsonMedRequestId } from '../utils/fetch'
 import { Soknad } from '../types/types'
 import { rsToSoknad } from '../types/mapping'
 
-import { UseTestpersonQuery } from './useTestpersonQuery'
+import { useTestpersonQuery } from './useTestpersonQuery'
 
 export default function useSoknad(id: string | undefined, enabled = true) {
-    const testpersonQuery = UseTestpersonQuery()
+    const testpersonQuery = useTestpersonQuery()
 
     return useQuery<Soknad, Error>({
         queryKey: ['soknad', id],

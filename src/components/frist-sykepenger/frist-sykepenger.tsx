@@ -1,20 +1,24 @@
-import { BodyShort, ExpansionCard, Heading, ReadMore } from '@navikt/ds-react'
+import { BodyShort, ExpansionCard, Heading, ReadMore, Skeleton } from '@navikt/ds-react'
 import React, { useState } from 'react'
 
 import { tekst } from '../../utils/tekster'
 import { logEvent } from '../amplitude/amplitude'
-import { Soknad } from '../../types/types'
 import { parserWithReplace } from '../../utils/html-react-parser-utils'
+import { useSoknadMedDetaljer } from '../../hooks/useSoknadMedDetaljer'
 
 import EksempelFrist from './eksempel-frist'
 import HvorforSoknadSykepenger from './hvorfor-soknad-sykepenger'
 
-const FristSykepenger = ({ soknad }: { soknad: Soknad | undefined }) => {
+const FristSykepenger = () => {
+    const { valgtSoknad } = useSoknadMedDetaljer()
     const [open, setOpen] = useState<boolean>(false)
-    if (!soknad) return null
-    if (soknad.utenlandskSykmelding) {
+
+    if (!valgtSoknad) return <Skeleton variant="rectangle" className="mb-4 rounded-xl" height="82px"></Skeleton>
+
+    if (valgtSoknad.utenlandskSykmelding) {
         return null
     }
+
     const tittel = tekst('frist-sykepenger.overskrift')
     return (
         <ExpansionCard className="frist-sykepenger mb-4" open={open} aria-label={tittel}>
@@ -72,7 +76,7 @@ const FristSykepenger = ({ soknad }: { soknad: Soknad | undefined }) => {
                     />
                 </ReadMore>
 
-                <HvorforSoknadSykepenger soknadstype={soknad.soknadstype} />
+                <HvorforSoknadSykepenger soknadstype={valgtSoknad.soknadstype} />
             </ExpansionCard.Content>
         </ExpansionCard>
     )

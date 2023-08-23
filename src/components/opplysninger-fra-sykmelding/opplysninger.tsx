@@ -1,9 +1,9 @@
 import React, { useState } from 'react'
-import { ExpansionCard, Heading } from '@navikt/ds-react'
+import { ExpansionCard, Heading, Skeleton } from '@navikt/ds-react'
 
 import { tekst } from '../../utils/tekster'
 import { logEvent } from '../amplitude/amplitude'
-import { UseSoknadMedDetaljer } from '../../hooks/useSoknadMedDetaljer'
+import { useSoknadMedDetaljer } from '../../hooks/useSoknadMedDetaljer'
 
 import ArbeidsgiverInfo from './arbeidsgiver-info'
 import ArbeidssituasjonInfo from './arbeidssituasjon-info'
@@ -21,13 +21,15 @@ interface OpplysningerProps {
 }
 
 const Opplysninger = ({ ekspandert }: OpplysningerProps) => {
-    const { valgtSykmelding, valgtSoknad, sporsmal } = UseSoknadMedDetaljer()
+    const { valgtSykmelding, valgtSoknad, sporsmal } = useSoknadMedDetaljer()
 
     const [open, setOpen] = useState<boolean>(ekspandert)
 
     const tittel = tekst('sykepengesoknad.sykmelding-utdrag.tittel')
 
-    if (!valgtSoknad || !valgtSykmelding) return null
+    if (!valgtSoknad || !valgtSykmelding)
+        return <Skeleton variant="rectangle" className="my-8 rounded-xl" height="418px"></Skeleton>
+
     return (
         <ExpansionCard className="my-8" data-cy="opplysninger-fra-sykmeldingen" open={open} aria-label={tittel}>
             <ExpansionCard.Header

@@ -5,14 +5,14 @@ import { useRouter } from 'next/router'
 
 import { isMockBackend, isOpplaering } from '../../utils/environment'
 import { PersonaKeys } from '../../data/mock/testperson'
-import { UseTestpersonQuery } from '../../hooks/useTestpersonQuery'
+import { useTestpersonQuery } from '../../hooks/useTestpersonQuery'
 
 const Person = () => {
     const [open, setOpen] = useState<boolean>(false)
     const person = useRef<HTMLButtonElement>(null)
     const kanVelgePerson = isMockBackend() || isOpplaering()
     const router = useRouter()
-    const testpersonQuery = UseTestpersonQuery()
+    const testpersonQuery = useTestpersonQuery()
 
     if (!kanVelgePerson) return null
 

@@ -11,10 +11,10 @@ import PersonvernLesMer from '../../soknad-intro/personvern-les-mer'
 import Vis from '../../vis'
 import { TagTyper } from '../../../types/enums'
 import { hentSporsmal } from '../../../utils/soknad-utils'
-import { UseSoknadMedDetaljer } from '../../../hooks/useSoknadMedDetaljer'
+import { useSoknadMedDetaljer } from '../../../hooks/useSoknadMedDetaljer'
 
 const Knapperad = ({ poster }: { poster: boolean }) => {
-    const { erUtenlandssoknad, valgtSoknad: soknad, stegNo, sporsmal, spmIndex } = UseSoknadMedDetaljer()
+    const { erUtenlandssoknad, valgtSoknad: soknad, stegNo, sporsmal, spmIndex } = useSoknadMedDetaljer()
 
     const { getValues } = useFormContext()
     const skalSkjuleKnapperad = () => {

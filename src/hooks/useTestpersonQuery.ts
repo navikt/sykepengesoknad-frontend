@@ -1,6 +1,6 @@
 import { useRouter } from 'next/router'
 
-export function UseTestpersonQuery() {
+export function useTestpersonQuery() {
     const router = useRouter()
     const testpersonQuery = router.query['testperson']
 

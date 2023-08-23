@@ -7,9 +7,10 @@ import useSoknader from './useSoknader'
 import useSykmeldinger from './useSykmeldinger'
 import useSykmelding from './useSykmelding'
 
-export function UseSoknadMedDetaljer() {
+export function useSoknadMedDetaljer() {
     const router = useRouter()
     const { id: soknadId, stegId } = router.query as { id?: string; stegId: string }
+
     const { data: valgtSoknad, isLoading: valgtSoknadLaster } = useSoknad(soknadId, soknadId !== undefined)
     const { data: soknader, isLoading: soknaderLaster } = useSoknader()
     const { data: sykmeldinger, isLoading: sykmeldingerLaster } = useSykmeldinger()

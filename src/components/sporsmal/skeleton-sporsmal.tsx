@@ -1,8 +1,21 @@
 import { Label, Skeleton } from '@navikt/ds-react'
 import React from 'react'
 
+import { useSoknadMedDetaljer } from '../../hooks/useSoknadMedDetaljer'
+
 export const SkeletonSporsmal = () => {
+    const { stegNo } = useSoknadMedDetaljer()
+
+    if (stegNo == 1) {
+        // Chackboxpanel
+        return (
+
+                <Skeleton variant="rectangle" className="rounded" height="130px"></Skeleton>
+
+        )
+    }
     return (
+        // Ja Nei med en tekstlinje
         <>
             <Label as={Skeleton} className="mb-4">
                 En placeholder for lengden på et typisk spørsmål. Litt mer

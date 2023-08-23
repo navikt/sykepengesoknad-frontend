@@ -5,10 +5,10 @@ import { RSSoknadstype } from '../../types/rs-types/rs-soknadstype'
 import { tilLesbarPeriodeMedArstall } from '../../utils/dato-utils'
 import { tekst } from '../../utils/tekster'
 import Person from '../person/Person'
-import { UseSoknadMedDetaljer } from '../../hooks/useSoknadMedDetaljer'
+import { useSoknadMedDetaljer } from '../../hooks/useSoknadMedDetaljer'
 
 export const Banner = () => {
-    const { valgtSoknad } = UseSoknadMedDetaljer()
+    const { valgtSoknad } = useSoknadMedDetaljer()
 
     const tittel = () => {
         if (valgtSoknad) {

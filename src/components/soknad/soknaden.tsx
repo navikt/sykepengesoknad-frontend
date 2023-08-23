@@ -15,29 +15,18 @@ import { eldreUsendteSykmeldinger } from '../eldre-usendt/eldreUsendteSykmelding
 import FristSykepenger from '../frist-sykepenger/frist-sykepenger'
 import { hentHotjarJsTrigger, HotjarTrigger } from '../hotjar-trigger'
 import { ViktigInformasjon } from '../soknad-intro/viktig-informasjon'
-import Vis from '../vis'
-import useSoknad from '../../hooks/useSoknad'
-import useSoknader from '../../hooks/useSoknader'
 import { soknadBreadcrumb, useUpdateBreadcrumbs } from '../../hooks/useBreadcrumbs'
 import EgenmeldingsdagerArbeidsgiver from '../egenmeldingsdager-arbeidsgiver/egenmeldingsdager-arbeidsgiver'
-import useSykmeldinger from '../../hooks/useSykmeldinger'
-import useSykmelding from '../../hooks/useSykmelding'
 import { Feedback } from '../feedback/feedback'
 import { Banner } from '../banner/banner'
+import { useSoknadMedDetaljer } from '../../hooks/useSoknadMedDetaljer'
 
 import { urlTilSoknad } from './soknad-link'
 import { SporsmalTittel } from './sporsmal-tittel'
 
 export const Soknaden = () => {
     const router = useRouter()
-    const { id, stegId } = router.query as { id: string; stegId: string }
-    const { data: valgtSoknad } = useSoknad(id)
-    const { data: soknader } = useSoknader()
-    const { data: sykmeldinger } = useSykmeldinger()
-    const { data: valgtSykmelding } = useSykmelding(valgtSoknad?.sykmeldingId)
-
-    const stegNo = parseInt(stegId)
-    const spmIndex = stegNo - 1
+    const { erUtenlandssoknad, stegId, stegNo, valgtSoknad, soknader, sykmeldinger, spmIndex } = useSoknadMedDetaljer()
 
     useUpdateBreadcrumbs(() => [{ ...soknadBreadcrumb, handleInApp: true }], [])
 
@@ -68,11 +57,10 @@ export const Soknaden = () => {
         })
     }, [router, stegId, valgtSoknad])
 
-    const erUtlandssoknad = valgtSoknad?.soknadstype === RSSoknadstype.OPPHOLD_UTLAND && !valgtSykmelding
     const erReisetilskuddsoknad = valgtSoknad?.soknadstype === RSSoknadstype.REISETILSKUDD
     const erGradertReisetilskuddsoknad = valgtSoknad?.soknadstype === RSSoknadstype.GRADERT_REISETILSKUDD
 
-    if (!erUtlandssoknad) {
+    if (!erUtenlandssoknad) {
         const eldreUsendtSoknad = harEldreUsendtSoknad(valgtSoknad, soknader)
         const usendteSm = eldreUsendteSykmeldinger(sykmeldinger, valgtSoknad?.tom)
         if (usendteSm.length > 0) {
@@ -86,44 +74,28 @@ export const Soknaden = () => {
 
     if (valgtSoknad && stegNo > 1) {
         logEvent('skjema spørsmål åpnet', {
-            soknadstype: valgtSoknad!.soknadstype,
+            soknadstype: valgtSoknad.soknadstype,
             skjemanavn: 'sykepengesoknad',
-            spørsmål: sporsmal?.tag || '',
+            spørsmål: sporsmal?.tag,
         })
     }
+    const erForstesiden = stegNo === 1 && !erUtenlandssoknad
+    const erForstesidenMedReisetilskudd = stegNo === 1 && (erReisetilskuddsoknad || erGradertReisetilskuddsoknad)
     return (
         <>
             <Banner />
 
             <HotjarTrigger jsTrigger={hentHotjarJsTrigger(valgtSoknad?.soknadstype, 'soknad')}>
                 <>
-                    <Vis hvis={stegNo > 1 || erUtlandssoknad} render={() => <Fremdriftsbar />} />
-
-                    <Vis hvis={stegNo === 1 && !erUtlandssoknad} render={() => <ViktigInformasjon />} />
-
-                    <Vis hvis={stegNo === 1 && erGradertReisetilskuddsoknad} render={() => <SoknadMedToDeler />} />
-
-                    <Vis
-                        hvis={stegNo === 1 && valgtSoknad?.opprettetAvInntektsmelding}
-                        render={() => <EgenmeldingsdagerArbeidsgiver />}
-                    />
-
-                    <Vis hvis={stegNo === 1 && !erUtlandssoknad} render={() => <Opplysninger ekspandert={true} />} />
-
-                    <Vis
-                        hvis={stegNo === 1 && !erUtlandssoknad}
-                        render={() => <FristSykepenger soknad={valgtSoknad} />}
-                    />
-
-                    <Vis
-                        hvis={stegNo === 1 && (erReisetilskuddsoknad || erGradertReisetilskuddsoknad)}
-                        render={() => <OmReisetilskudd />}
-                    />
-
-                    <SporsmalTittel />
-
+                    {!erForstesiden && <Fremdriftsbar />}
+                    {erForstesiden && <ViktigInformasjon />}
+                    {erForstesiden && erGradertReisetilskuddsoknad && <SoknadMedToDeler />}
+                    {erForstesiden && valgtSoknad?.opprettetAvInntektsmelding && <EgenmeldingsdagerArbeidsgiver />}
+                    {erForstesiden && <Opplysninger ekspandert={true} />}
+                    {erForstesiden && <FristSykepenger />}
+                    {erForstesidenMedReisetilskudd && <OmReisetilskudd />}
+                    {!erForstesiden && <SporsmalTittel />}
                     <SporsmalForm />
-
                     <Feedback soknad={valgtSoknad} steg={stegNo} />
                 </>
             </HotjarTrigger>

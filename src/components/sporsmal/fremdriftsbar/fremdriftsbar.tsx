@@ -8,12 +8,12 @@ import { SEPARATOR } from '../../../utils/constants'
 import { logEvent } from '../../amplitude/amplitude'
 import { tekst } from '../../../utils/tekster'
 import { RSSoknadstype } from '../../../types/rs-types/rs-soknadstype'
-import { UseSoknadMedDetaljer } from '../../../hooks/useSoknadMedDetaljer'
-import { UseTestpersonQuery } from '../../../hooks/useTestpersonQuery'
+import { useSoknadMedDetaljer } from '../../../hooks/useSoknadMedDetaljer'
+import { useTestpersonQuery } from '../../../hooks/useTestpersonQuery'
 
 const TilbakeKnapp = () => {
-    const { valgtSoknad: soknad, stegNo, soknadId } = UseSoknadMedDetaljer()
-    const testperson = UseTestpersonQuery()
+    const { valgtSoknad: soknad, stegNo, soknadId } = useSoknadMedDetaljer()
+    const testperson = useTestpersonQuery()
     if (stegNo == 1 || !soknad) {
         return <div></div> //Tom div pga flex justify-between på parent
     }
@@ -41,7 +41,7 @@ const TilbakeKnapp = () => {
 }
 
 const Fremdriftsbar = () => {
-    const { valgtSoknad, stegNo } = UseSoknadMedDetaljer()
+    const { valgtSoknad, stegNo } = useSoknadMedDetaljer()
 
     const oppholdUtland = valgtSoknad?.soknadstype == RSSoknadstype.OPPHOLD_UTLAND
 

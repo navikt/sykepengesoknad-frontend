@@ -35,6 +35,25 @@ describe('Tester cummulative-layout-shift ', () => {
 
         cy.get('main').should('have.css', 'height', expectedHeight)
     })
+
+    it('Høyden endres ikke i første spørsmålet etter at dataene er lastet', () => {
+        cy.clearCookies()
+
+        cy.visit(
+            'http://localhost:8080/syk/sykepengesoknad/soknader/04247ad5-9c15-4b7d-ae55-f23807777777/1?testperson=cummulative-layout-shift',
+        )
+        // Sjekk mains høyde
+        const expectedHeight = '1000px'
+        cy.get('main').should('have.css', 'height', expectedHeight)
+        cy.get('.navds-skeleton').should('have.length', 15)
+
+        // Venter på at alle dataene er fetchet og rendret
+
+        cy.contains('Ferie').should('be.visible')
+        cy.get('.navds-skeleton').should('have.length', 0)
+
+        cy.get('main').should('have.css', 'height', expectedHeight)
+    })
 })
 
 export {}

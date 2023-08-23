@@ -5,11 +5,11 @@ import { minSideUrl } from '../../utils/environment'
 import { tekst } from '../../utils/tekster'
 import { logEvent } from '../amplitude/amplitude'
 import { FlexModal } from '../flex-modal'
-import { UseSoknadMedDetaljer } from '../../hooks/useSoknadMedDetaljer'
+import { useSoknadMedDetaljer } from '../../hooks/useSoknadMedDetaljer'
 import { cn } from '../../utils/tw-utils'
 
 const AvsluttOgFortsettSenere = () => {
-    const { valgtSoknad, stegId } = UseSoknadMedDetaljer()
+    const { valgtSoknad, stegId } = useSoknadMedDetaljer()
 
     const [aapen, setAapen] = useState<boolean>(false)
 

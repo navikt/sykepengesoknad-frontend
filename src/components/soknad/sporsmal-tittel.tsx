@@ -2,30 +2,28 @@ import { Heading, Skeleton } from '@navikt/ds-react'
 import React from 'react'
 
 import { tekst } from '../../utils/tekster'
-import { UseSoknadMedDetaljer } from '../../hooks/useSoknadMedDetaljer'
+import { useSoknadMedDetaljer } from '../../hooks/useSoknadMedDetaljer'
 import { Soknad } from '../../types/types'
 import { RSSoknadstype } from '../../types/rs-types/rs-soknadstype'
 import { erSisteSide, fjernIndexFraTag } from '../sporsmal/sporsmal-utils'
 
 export const SporsmalTittel = () => {
-    const { valgtSoknad, erUtenlandssoknad, stegNo } = UseSoknadMedDetaljer()
+    const { valgtSoknad, stegNo } = useSoknadMedDetaljer()
 
-    if (stegNo !== 1 && !erUtenlandssoknad) {
-        return (
-            <Heading
-                {...(valgtSoknad ? {} : { as: Skeleton })}
-                level="2"
-                size="medium"
-                data-cy="sporsmal-tittel"
-                className="mb-4 mt-16"
-            >
-                {valgtSoknad ? tekst(hentNokkel(valgtSoknad, stegNo) as any) : 'Placeholder'}
-            </Heading>
-        )
-    }
+    return (
+        <Heading
+            {...(valgtSoknad ? {} : { as: Skeleton })}
+            level="2"
+            size="medium"
+            data-cy="sporsmal-tittel"
+            className="mb-4 mt-16"
+        >
+            {valgtSoknad ? tekst(hentNokkel(valgtSoknad, stegNo) as any) : 'Placeholder'}
+        </Heading>
+    )
 }
 
-export const hentNokkel = (soknad: Soknad, sidenummer: number) => {
+const hentNokkel = (soknad: Soknad, sidenummer: number) => {
     const sporsmal = soknad.sporsmal[sidenummer - 1]
     if (sporsmal === undefined) {
         return ''

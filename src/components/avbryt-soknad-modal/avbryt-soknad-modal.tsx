@@ -9,7 +9,7 @@ import { EndringUtenEndringModal } from '../sporsmal/endring-uten-endring/endrin
 import useSoknad from '../../hooks/useSoknad'
 import { FlexModal } from '../flex-modal'
 import { useAvbryt } from '../../hooks/useAvbryt'
-import { UseSoknadMedDetaljer } from '../../hooks/useSoknadMedDetaljer'
+import { useSoknadMedDetaljer } from '../../hooks/useSoknadMedDetaljer'
 import { cn } from '../../utils/tw-utils'
 
 const AvbrytKorrigering = () => {
@@ -46,7 +46,7 @@ const AvbrytKorrigering = () => {
 }
 
 const AvbrytSoknadModal = () => {
-    const { valgtSoknad, stegId } = UseSoknadMedDetaljer()
+    const { valgtSoknad, stegId } = useSoknadMedDetaljer()
 
     const { mutate: avbrytMutation, isLoading: avbryter, error: avbrytError } = useAvbryt()
 

@@ -22,10 +22,10 @@ import useSoknad from '../../../hooks/useSoknad'
 import { RSSoknadstatus } from '../../../types/rs-types/rs-soknadstatus'
 import { harLikeSvar } from '../endring-uten-endring/har-like-svar'
 import { useSendSoknad } from '../../../hooks/useSendSoknad'
-import { UseTestpersonQuery } from '../../../hooks/useTestpersonQuery'
+import { useTestpersonQuery } from '../../../hooks/useTestpersonQuery'
 import { useOppdaterSporsmal } from '../../../hooks/useOppdaterSporsmal'
 import { FeilStateView } from '../../feil/refresh-hvis-feil-state'
-import { UseSoknadMedDetaljer } from '../../../hooks/useSoknadMedDetaljer'
+import { useSoknadMedDetaljer } from '../../../hooks/useSoknadMedDetaljer'
 import { SkeletonSporsmal } from '../skeleton-sporsmal'
 
 import Knapperad from './knapperad'
@@ -37,8 +37,8 @@ export interface SpmProps {
 
 const SporsmalForm = () => {
     const router = useRouter()
-    const { erUtenlandssoknad, valgtSoknad, sporsmal, spmIndex } = UseSoknadMedDetaljer()
-    const testpersonQuery = UseTestpersonQuery()
+    const { erUtenlandssoknad, valgtSoknad, sporsmal, spmIndex } = useSoknadMedDetaljer()
+    const testpersonQuery = useTestpersonQuery()
 
     const erSisteSpm = () => {
         const snartSlutt =
