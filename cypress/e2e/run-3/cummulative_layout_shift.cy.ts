@@ -1,5 +1,5 @@
 describe('Tester cummulative-layout-shift ', () => {
-    xit('Høyden endres ikke i happy case i listevisninga etter at dataene er lastet', () => {
+    it('Høyden endres ikke i happy case i listevisninga etter at dataene er lastet', () => {
         cy.clearCookies()
 
         cy.visit('http://localhost:8080/syk/sykepengesoknad?testperson=cummulative-layout-shift')
@@ -43,13 +43,13 @@ describe('Tester cummulative-layout-shift ', () => {
             'http://localhost:8080/syk/sykepengesoknad/soknader/04247ad5-9c15-4b7d-ae55-f23807777777/1?testperson=cummulative-layout-shift',
         )
         // Sjekk mains høyde
-        const expectedHeight = '1000px'
+        const expectedHeight = '1147px'
         cy.get('main').should('have.css', 'height', expectedHeight)
-        cy.get('.navds-skeleton').should('have.length', 15)
+        cy.get('.navds-skeleton').should('have.length', 8)
 
         // Venter på at alle dataene er fetchet og rendret
 
-        cy.contains('Ferie').should('be.visible')
+        cy.contains('Jeg vet at jeg kan miste retten').should('be.visible')
         cy.get('.navds-skeleton').should('have.length', 0)
 
         cy.get('main').should('have.css', 'height', expectedHeight)

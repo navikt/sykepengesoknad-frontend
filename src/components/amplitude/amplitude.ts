@@ -26,16 +26,18 @@ type validEventNames =
 
 export const logEvent = (eventName: validEventNames, eventData: Record<string, string | boolean | undefined>) => {
     if (window) {
+        // Fjern nøkkel-verdi par med verdien undefined fra eventData
+        const cleanedEventData = Object.fromEntries(Object.entries(eventData).filter((event) => event[1] !== undefined))
+
         if (amplitudeEnabled()) {
-            //TODO fjern de med undefined fra eventdata
             logAmplitudeEvent({
                 origin: 'sykepengesoknad-frontend',
                 eventName,
-                eventData,
+                eventData: cleanedEventData,
             }).catch((e) => logger.warn(`Feil ved amplitude logging`, e))
         } else {
             // eslint-disable-next-line no-console
-            console.log(`Logger ${eventName} - Event properties: ${JSON.stringify(eventData)}!`)
+            console.log(`Logger ${eventName} - Event properties: ${JSON.stringify(cleanedEventData)}`)
         }
     }
 }
