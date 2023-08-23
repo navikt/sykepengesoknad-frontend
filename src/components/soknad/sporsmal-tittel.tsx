@@ -13,7 +13,7 @@ export const SporsmalTittel = () => {
     if (stegNo !== 1 && !erUtenlandssoknad) {
         return (
             <Heading
-                {...(valgtSoknad ? { as: Skeleton } : {})}
+                {...(valgtSoknad ? {} : { as: Skeleton })}
                 level="2"
                 size="medium"
                 data-cy="sporsmal-tittel"
