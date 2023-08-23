@@ -11,16 +11,15 @@ export const SporsmalTittel = () => {
     const { valgtSoknad, erUtenlandssoknad, stegNo } = UseSoknadMedDetaljer()
 
     if (stegNo !== 1 && !erUtenlandssoknad) {
-        const props = {
-            level: '2',
-            size: 'medium',
-            className: 'mb-4 mt-16',
-            'data-cy': 'sporsmal-tittel',
-        } as any
-        if (valgtSoknad) return <Heading {...props}>{tekst(hentNokkel(valgtSoknad, stegNo) as any)}</Heading>
         return (
-            <Heading as={Skeleton} {...props}>
-                Placeholder
+            <Heading
+                {...(valgtSoknad ? { as: Skeleton } : {})}
+                level="2"
+                size="medium"
+                data-cy="sporsmal-tittel"
+                className="mb-4 mt-16"
+            >
+                {valgtSoknad ? tekst(hentNokkel(valgtSoknad, stegNo) as any) : 'Placeholder'}
             </Heading>
         )
     }
