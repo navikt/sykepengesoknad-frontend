@@ -1,14 +1,12 @@
-import { BodyShort, List, Radio, RadioGroup } from '@navikt/ds-react'
-import React, { Fragment } from 'react'
+import { Radio, RadioGroup } from '@navikt/ds-react'
+import React from 'react'
 import { Controller, useFormContext } from 'react-hook-form'
 
 import { SpmProps } from '../sporsmal-form/sporsmal-form'
 import { hentFeilmelding } from '../sporsmal-utils'
 import UndersporsmalListe from '../undersporsmal/undersporsmal-liste'
-import { Sporsmal } from '../../../types/types'
 import { TagTyper } from '../../../types/enums'
-import { Begrepsforklarer } from '../../begrepsforklarer/begrepsforklarer'
-import { AndreInntektskilderHjelpTekster } from '../../hjelpetekster/ekspanderbar-hjelp/andre-inntektskilder-hjelp-tekst'
+import { ForklaringAvVarigEndringSporsmal } from '../forklaring-av-varig-endring-sporsmal'
 
 const RadioKomp = ({ sporsmal }: SpmProps) => {
     const {
@@ -22,27 +20,6 @@ const RadioKomp = ({ sporsmal }: SpmProps) => {
     }
 
     const feilmelding = hentFeilmelding(sporsmal)
-
-    const forklaringAvSporsmal = (sporsmal: Sporsmal) => {
-        if (sporsmal.tag == TagTyper.INNTEKTSKILDE_SELVSTENDIG_VARIG_ENDRING_GRUPPE) {
-            return (
-                <BodyShort>
-                    Varig endring av arbeidssituasjon eller virksomhet kan være at:
-                    <List as="ul" size="small" className="ml-4">
-                        <List.Item>
-                            <BodyShort>tidligere virksomhet er lagt ned</BodyShort>
-                        </List.Item>
-                        <List.Item>
-                            <BodyShort>det har vært en omlegging av virksomheten</BodyShort>
-                        </List.Item>
-                        <List.Item>
-                            <BodyShort>den næringsdrivende har økt eller redusert arbeidsinnsatsen</BodyShort>
-                        </List.Item>
-                    </List>
-                </BodyShort>
-            )
-        }
-    }
 
     return (
         <>
@@ -60,7 +37,9 @@ const RadioKomp = ({ sporsmal }: SpmProps) => {
                         className="mt-8"
                         data-cy="radio-komp"
                     >
-                        {forklaringAvSporsmal(sporsmal)}
+                        {sporsmal.tag == TagTyper.INNTEKTSKILDE_SELVSTENDIG_VARIG_ENDRING_GRUPPE && (
+                            <ForklaringAvVarigEndringSporsmal />
+                        )}
 
                         {sporsmal.undersporsmal.map((uspm) => (
                             <Radio key={uspm.id} id={uspm.id} value={uspm.sporsmalstekst}>
