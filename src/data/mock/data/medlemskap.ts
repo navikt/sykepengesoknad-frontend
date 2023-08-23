@@ -114,7 +114,7 @@ export const medlemskapOppholdUtenforNorgeSporsmal: RSSporsmal = {
 export const medlemskapUtførtArbeidUtenforNorgeSporsmal: RSSporsmal = {
     id: '4d2fffab-165b-3aac-b981-ea759a20acd2',
     tag: 'MEDLEMSKAP_UTFORT_ARBEID_UTENFOR_NORGE',
-    sporsmalstekst: 'Har du utført arbeid utenfor Norge i de siste 12 månedene?',
+    sporsmalstekst: 'Har du utført arbeid utenfor Norge i løpet av de siste 12 månedene?',
     undertekst: null,
     svartype: 'JA_NEI',
     min: null,
