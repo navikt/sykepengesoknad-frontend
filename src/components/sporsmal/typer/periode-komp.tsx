@@ -73,7 +73,7 @@ const PeriodeKomp = ({ sporsmal, index, slettPeriode }: AllProps) => {
                             {...fromInputProps}
                             label={tekst('sykepengesoknad.periodevelger.fom')}
                             id={sporsmal.id + '_' + index + '_fom'}
-                            className="mt-6"
+                            className="mt-4"
                             error={fieldState.error?.type === 'fom' && fieldState.error.message}
                         />
                         <DatePicker.Input
