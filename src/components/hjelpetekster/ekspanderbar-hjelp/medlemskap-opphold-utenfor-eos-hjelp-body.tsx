@@ -1,21 +1,21 @@
-import { BodyLong } from '@navikt/ds-react'
+import { BodyShort } from '@navikt/ds-react'
 
 export const MedlemskapOppholdUtenforEOSHjelpBody = () => {
     return (
         <>
-            <BodyLong>Du må være medlem av folketrygden for å ha rett til sykepenger fra NAV.</BodyLong>
+            <BodyShort spacing>Du må være medlem av folketrygden for å ha rett til sykepenger fra NAV.</BodyShort>
 
-            <BodyLong className="mt-4">
+            <BodyShort spacing>
                 Et ledd i vår vurdering av dette er om du har oppholdt deg utenfor EØS området. Vi vet ikke alltid dette
                 og må derfor spørre deg.
-            </BodyLong>
-            <BodyLong className="mt-4">
+            </BodyShort>
+            <BodyShort spacing>
                 Svar ja, hvis du har vært i utlandet utenfor EØS, men ikke utført arbeid. Eller hvis du har hatt
                 ferieopphold mer enn 5 uker hvert kalenderår.
-            </BodyLong>
-            <BodyLong className="mt-4">
+            </BodyShort>
+            <BodyShort>
                 Svar nei, hvis du ikke har oppholdt deg utenfor EØS, eller hatt ferie opptil 5 uker utenfor EØS.
-            </BodyLong>
+            </BodyShort>
         </>
     )
 }
