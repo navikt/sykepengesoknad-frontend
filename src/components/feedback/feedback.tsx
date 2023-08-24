@@ -190,7 +190,11 @@ const FeedbackButton = (props: FeedbackButtonProps) => {
             })}
             onClick={() => {
                 props.setThanksFeedback(false)
-                props.setActiveState((x) => (x === props.feedbacktype ? null : props.feedbacktype))
+                if (props.activeState === props.feedbacktype) {
+                    props.setActiveState(null)
+                } else {
+                    props.setActiveState(props.feedbacktype)
+                }
             }}
             {...props}
         >
