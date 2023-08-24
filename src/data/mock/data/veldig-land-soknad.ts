@@ -671,7 +671,7 @@ export const veldigLangSoknad: RSSoknad = {
                             undersporsmal: [
                                 {
                                     id: 'defc1170-d02c-3328-b58e-3ef11f11oifc',
-                                    tag: 'INNTEKTSKILDE_ANDRE_ARBEIDSFORHOLD_JOBBET_SISTE_14_DAGER',
+                                    tag: 'INNTEKTSKILDE_ANDRE_ARBEIDSFORHOLD_JOBBET_I_DET_SISTE',
                                     sporsmalstekst:
                                         'Har du jobbet for eller mottatt inntekt fra én eller flere av disse arbeidsgiverne de siste 14 dagene før du ble sykmeldt?',
                                     undertekst: null,
