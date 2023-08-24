@@ -1,3 +1,4 @@
+/* eslint-disable cypress/unsafe-to-chain-command */
 import { arbeidsledig } from '../../../src/data/mock/data/opplaering'
 import 'cypress-real-events'
 import { sjekkMainContentFokus } from '../../support/utilities'
