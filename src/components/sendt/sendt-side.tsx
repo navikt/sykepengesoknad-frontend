@@ -13,7 +13,7 @@ import useSoknad from '../../hooks/useSoknad'
 import { urlTilSoknad } from '../soknad/soknad-link'
 import QueryStatusPanel from '../queryStatusPanel/QueryStatusPanel'
 import { kvitteringBreadcrumb, useUpdateBreadcrumbs } from '../../hooks/useBreadcrumbs'
-import { Banner } from '../banner/banner'
+import { SoknadHeader } from '../soknad/soknad-header'
 
 const SendtSide = () => {
     const router = useRouter()
@@ -54,7 +54,7 @@ const SendtSide = () => {
 
     return (
         <>
-            <Banner />
+            <SoknadHeader />
 
             <HotjarTrigger jsTrigger={hentHotjarJsTrigger(valgtSoknad.soknadstype, 'sendt')}>
                 <Kvittering />

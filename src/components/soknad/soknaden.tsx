@@ -18,11 +18,11 @@ import { ViktigInformasjon } from '../soknad-intro/viktig-informasjon'
 import { soknadBreadcrumb, useUpdateBreadcrumbs } from '../../hooks/useBreadcrumbs'
 import EgenmeldingsdagerArbeidsgiver from '../egenmeldingsdager-arbeidsgiver/egenmeldingsdager-arbeidsgiver'
 import { Feedback } from '../feedback/feedback'
-import { Banner } from '../banner/banner'
 import { useSoknadMedDetaljer } from '../../hooks/useSoknadMedDetaljer'
 
 import { urlTilSoknad } from './soknad-link'
 import { SporsmalTittel } from './sporsmal-tittel'
+import { SoknadHeader } from './soknad-header'
 
 export const Soknaden = () => {
     const router = useRouter()
@@ -83,7 +83,7 @@ export const Soknaden = () => {
     const erForstesidenMedReisetilskudd = stegNo === 1 && (erReisetilskuddsoknad || erGradertReisetilskuddsoknad)
     return (
         <>
-            <Banner />
+            <SoknadHeader />
 
             <HotjarTrigger jsTrigger={hentHotjarJsTrigger(valgtSoknad?.soknadstype, 'soknad')}>
                 <>

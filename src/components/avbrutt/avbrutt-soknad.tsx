@@ -16,7 +16,7 @@ import useSoknader from '../../hooks/useSoknader'
 import useSoknad from '../../hooks/useSoknad'
 import QueryStatusPanel from '../queryStatusPanel/QueryStatusPanel'
 import { soknadBreadcrumb, useUpdateBreadcrumbs } from '../../hooks/useBreadcrumbs'
-import { Banner } from '../banner/banner'
+import { SoknadHeader } from '../soknad/soknad-header'
 
 import GjenapneSoknad from './gjenapneknapp'
 
@@ -50,7 +50,7 @@ const AvbruttSoknad = () => {
 
     return (
         <>
-            <Banner />
+            <SoknadHeader />
 
             <Alert variant="warning" style={{ marginBottom: '1rem' }}>
                 <BodyShort>

@@ -20,7 +20,7 @@ import { urlTilSoknad } from '../soknad/soknad-link'
 import QueryStatusPanel from '../queryStatusPanel/QueryStatusPanel'
 import { kvitteringBreadcrumb, useUpdateBreadcrumbs } from '../../hooks/useBreadcrumbs'
 import { useStudyStatus } from '../../hooks/useStudyStatus'
-import { Banner } from '../banner/banner'
+import { SoknadHeader } from '../soknad/soknad-header'
 
 import Kvittering from './kvittering'
 import { harKorrigertArbeidstakersoknadIDetSiste } from './harSvartJa'
@@ -70,7 +70,7 @@ const KvitteringSide = () => {
 
     return (
         <>
-            <Banner />
+            <SoknadHeader />
 
             <div>
                 <HotjarTrigger jsTrigger={hentHotjarJsTrigger(valgtSoknad.soknadstype, 'kvittering')}>

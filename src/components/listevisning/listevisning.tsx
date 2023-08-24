@@ -4,7 +4,7 @@ import { Skeleton } from '@navikt/ds-react'
 import { RSSoknadstatus } from '../../types/rs-types/rs-soknadstatus'
 import { sorterEtterNyesteFom } from '../../utils/sorter-soknader'
 import { tekst } from '../../utils/tekster'
-import { Header } from '../banner/banner'
+import { Banner } from '../banner/banner'
 import OmSykepenger from '../om-sykepenger/om-sykepenger'
 import useSoknader from '../../hooks/useSoknader'
 import QueryStatusPanel from '../queryStatusPanel/QueryStatusPanel'
@@ -38,7 +38,7 @@ const Listevisning = () => {
 
     return (
         <>
-            <Header overskrift={tekst('soknader.sidetittel')} />
+            <Banner overskrift={tekst('soknader.sidetittel')} />
 
             <OmSykepenger />
 
