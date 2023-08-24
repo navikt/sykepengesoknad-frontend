@@ -46,3 +46,5 @@ spec:
       value: "false"
     - name: ASSET_PREFIX
       value: "https://cdn.nav.no/flex/sykepengesoknad-frontend"
+    - name: TZ
+      value: "Europe/Oslo"
