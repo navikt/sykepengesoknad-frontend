@@ -49,7 +49,7 @@ const CheckboxKomp = ({ sporsmal }: SpmProps) => {
                                 <Fragment key={uspm.id + '_fragment'}>
                                     <div
                                         className={cn('flex items-center gap-4', {
-                                            'bx-4 max-w-sm rounded-lg bg-gray-50': checkboxesSkalHaSpesiellStyling(
+                                            'bx-4 rounded-lg bg-gray-50': checkboxesSkalHaSpesiellStyling(
                                                 sporsmal.tag,
                                             ),
                                         })}
@@ -70,7 +70,7 @@ const CheckboxKomp = ({ sporsmal }: SpmProps) => {
                                             uspm.undersporsmal.length > 0
                                         }
                                         render={() => (
-                                            <div aria-live="assertive" className="my-4 max-w-sm pl-3">
+                                            <div aria-live="assertive" className="my-4 pl-3">
                                                 <SvaralternativCheckboxForklaring svaralternativTag={uspm.tag} />
                                                 <UndersporsmalListe oversporsmal={uspm} oversporsmalSvar="CHECKED" />
                                             </div>
