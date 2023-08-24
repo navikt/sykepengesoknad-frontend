@@ -1,35 +1,33 @@
-import { BodyShort, Link } from '@navikt/ds-react'
+import { BodyShort, Link, Skeleton } from '@navikt/ds-react'
 import React from 'react'
 import { ArrowLeftIcon } from '@navikt/aksel-icons'
-import { useRouter } from 'next/router'
 import NextLink from 'next/link'
 
 import { TagTyper } from '../../../types/enums'
-import useSoknad from '../../../hooks/useSoknad'
 import { SEPARATOR } from '../../../utils/constants'
 import { logEvent } from '../../amplitude/amplitude'
 import { tekst } from '../../../utils/tekster'
-import { Soknad } from '../../../types/types'
 import { RSSoknadstype } from '../../../types/rs-types/rs-soknadstype'
+import { useSoknadMedDetaljer } from '../../../hooks/useSoknadMedDetaljer'
+import { useTestpersonQuery } from '../../../hooks/useTestpersonQuery'
 
-const TilbakeKnapp = ({ soknad, stegNo }: { soknad: Soknad; stegNo: number }) => {
-    if (stegNo == 1) {
+const TilbakeKnapp = () => {
+    const { valgtSoknad: soknad, stegNo, soknadId } = useSoknadMedDetaljer()
+    const testperson = useTestpersonQuery()
+    if (stegNo == 1 || !soknad) {
         return <div></div> //Tom div pga flex justify-between på parent
     }
 
     return (
-        <NextLink
-            legacyBehavior
-            passHref
-            href={`/soknader/${soknad.id}${SEPARATOR}${stegNo - 1}${window.location.search}`}
-        >
+        <NextLink legacyBehavior passHref href={`/soknader/${soknadId}${SEPARATOR}${stegNo - 1}${testperson.query()}`}>
             <Link
                 className="cursor-pointer"
                 onClick={() => {
+                    if (!soknad) return
                     logEvent('navigere', {
                         lenketekst: tekst('soknad.tilbakeknapp'),
-                        fra: soknad!.sporsmal[stegNo - 1].tag,
-                        til: soknad!.sporsmal[stegNo - 2].tag,
+                        fra: soknad.sporsmal[stegNo - 1].tag,
+                        til: soknad.sporsmal[stegNo - 2].tag,
                         soknadstype: soknad?.soknadstype,
                         stegId: `${stegNo}`,
                     })
@@ -43,20 +41,25 @@ const TilbakeKnapp = ({ soknad, stegNo }: { soknad: Soknad; stegNo: number }) =>
 }
 
 const Fremdriftsbar = () => {
-    const router = useRouter()
-    const { id, stegId } = router.query as { id: string; stegId: string }
-    const { data: valgtSoknad } = useSoknad(id)
-    if (!valgtSoknad || !stegId) return null
+    const { valgtSoknad, stegNo } = useSoknadMedDetaljer()
 
-    const parsetSteg = parseInt(stegId)
-    const oppholdUtland = valgtSoknad.soknadstype == RSSoknadstype.OPPHOLD_UTLAND
-    const aktivtSteg = oppholdUtland ? parsetSteg : parsetSteg - 1
-    const antallSporsmål = valgtSoknad.sporsmal.filter((s) => s.tag !== TagTyper.VAER_KLAR_OVER_AT).length
+    const oppholdUtland = valgtSoknad?.soknadstype == RSSoknadstype.OPPHOLD_UTLAND
+
+    const aktivtSteg = oppholdUtland ? stegNo : stegNo - 1
+    if (valgtSoknad && aktivtSteg == 0) return null
+
+    if (aktivtSteg == 0) {
+        // ingen progressbar på første side
+        return null
+    }
+
+    const antallSporsmål = valgtSoknad?.sporsmal.filter((s) => s.tag !== TagTyper.VAER_KLAR_OVER_AT).length || 9
     const antallSteg = oppholdUtland ? antallSporsmål + 1 : antallSporsmål
 
-    const bredde = (100 / antallSteg) * aktivtSteg
+    const bredde = valgtSoknad ? (100 / antallSteg) * aktivtSteg : 0
 
     const valueText = `${aktivtSteg} av ${antallSteg} steg`
+
     return (
         <div
             className="my-4 md:my-6"
@@ -77,8 +80,8 @@ const Fremdriftsbar = () => {
                 />
             </div>
             <div className="mt-4 flex justify-between">
-                <TilbakeKnapp soknad={valgtSoknad} stegNo={parsetSteg} />
-                <BodyShort as="span">{valueText}</BodyShort>
+                <TilbakeKnapp />
+                <BodyShort as={valgtSoknad ? 'span' : Skeleton}>{valueText}</BodyShort>
             </div>
         </div>
     )

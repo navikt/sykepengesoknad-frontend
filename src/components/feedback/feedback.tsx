@@ -1,4 +1,4 @@
-import { BodyShort, Button, ButtonProps, Heading, Textarea } from '@navikt/ds-react'
+import { BodyShort, Button, ButtonProps, Heading, Skeleton, Textarea } from '@navikt/ds-react'
 import { useEffect, useRef, useState } from 'react'
 import { FaceSmileIcon } from '@navikt/aksel-icons'
 
@@ -17,10 +17,13 @@ enum Feedbacktype {
 
 interface FeedbackButtonProps extends ButtonProps {
     feedbacktype: Feedbacktype
+    soknad: Soknad | undefined
+    activeState: Feedbacktype | null
+    setThanksFeedback: (b: boolean) => void
+    setActiveState: (s: Feedbacktype | null) => void
 }
 
-export const Feedback = ({ soknad, steg }: { soknad: Soknad; steg: number }) => {
-    const sporsmal = soknad.sporsmal[steg - 1]
+export const Feedback = ({ soknad, steg }: { soknad: Soknad | undefined; steg: number }) => {
     const [textValue, setTextValue] = useState('')
     const [activeState, setActiveState] = useState<Feedbacktype | null>(null)
     const [errorMsg, setErrorMsg] = useState<string | null>(null)
@@ -43,11 +46,13 @@ export const Feedback = ({ soknad, steg }: { soknad: Soknad; steg: number }) => 
         setErrorMsg(null)
     }, [activeState])
 
-    if (steg <= 1 && soknad.soknadstype !== RSSoknadstype.OPPHOLD_UTLAND) {
+    const sporsmal = soknad?.sporsmal[steg - 1]
+
+    if (steg <= 1 && soknad?.soknadstype !== RSSoknadstype.OPPHOLD_UTLAND) {
         return null
     }
 
-    if (steg == soknad.sporsmal.filter((s) => s.tag !== TagTyper.VAER_KLAR_OVER_AT).length) {
+    if (steg == soknad?.sporsmal.filter((s) => s.tag !== TagTyper.VAER_KLAR_OVER_AT).length) {
         return null
     }
 
@@ -64,32 +69,12 @@ export const Feedback = ({ soknad, steg }: { soknad: Soknad; steg: number }) => 
             feedbackId: 'sykepengesoknad-sporsmal',
             svar: activeState,
             app: 'sykepengesoknad-frontend',
-            sporsmal: sporsmal.tag,
+            sporsmal: sporsmal?.tag,
         }
 
         await giFeedback(body)
     }
 
-    const FeedbackButton = (props: FeedbackButtonProps) => {
-        return (
-            <Button
-                data-cy={'feedback-' + props.feedbacktype}
-                variant="secondary-neutral"
-                size="small"
-                className={cn({
-                    'bg-surface-neutral-active text-text-on-inverted hover:bg-surface-neutral-active':
-                        activeState === props.feedbacktype,
-                })}
-                onClick={() => {
-                    setThanksFeedback(false)
-                    setActiveState((x) => (x === props.feedbacktype ? null : props.feedbacktype))
-                }}
-                {...props}
-            >
-                {props.children}
-            </Button>
-        )
-    }
     const handleSend = async () => {
         if ((activeState === Feedbacktype.FORBEDRING || activeState === Feedbacktype.NEI) && textValue === '') {
             setErrorMsg('Tilbakemeldingen kan ikke være tom. Legg til tekst i feltet.')
@@ -116,17 +101,30 @@ export const Feedback = ({ soknad, steg }: { soknad: Soknad; steg: number }) => 
         }
     }
 
+    const buttonProps = {
+        soknad,
+        activeState,
+        setThanksFeedback,
+        setActiveState,
+    }
+
     return (
         <section aria-label="Tilbakemelding på søknaden">
             <div className="w:full mt-16 md:w-3/4" data-cy="feedback-wrapper">
                 <div className="mt-1 rounded-xl bg-surface-subtle p-6">
-                    <BodyShort className="mb-6">
+                    <BodyShort className="mb-6" as={soknad ? BodyShort : Skeleton}>
                         Opplever du at du har nok informasjon til å svare på dette spørsmålet?
                     </BodyShort>
                     <div className="flex w-full gap-2">
-                        <FeedbackButton feedbacktype={Feedbacktype.JA}>Ja</FeedbackButton>
-                        <FeedbackButton feedbacktype={Feedbacktype.NEI}>Nei</FeedbackButton>
-                        <FeedbackButton feedbacktype={Feedbacktype.FORBEDRING}>Foreslå forbedring</FeedbackButton>
+                        <FeedbackButton feedbacktype={Feedbacktype.JA} {...buttonProps}>
+                            Ja
+                        </FeedbackButton>
+                        <FeedbackButton feedbacktype={Feedbacktype.NEI} {...buttonProps}>
+                            Nei
+                        </FeedbackButton>
+                        <FeedbackButton feedbacktype={Feedbacktype.FORBEDRING} {...buttonProps}>
+                            Foreslå forbedring
+                        </FeedbackButton>
                     </div>
                     {activeState !== null && (
                         <form className="mt-6 flex w-full flex-col gap-4">
@@ -176,5 +174,31 @@ export const Feedback = ({ soknad, steg }: { soknad: Soknad; steg: number }) => 
                 </div>
             </div>
         </section>
+    )
+}
+
+const FeedbackButton = (props: FeedbackButtonProps) => {
+    return (
+        <Button
+            data-cy={'feedback-' + props.feedbacktype}
+            variant="secondary-neutral"
+            size="small"
+            as={props.soknad ? Button : Skeleton}
+            className={cn({
+                'bg-surface-neutral-active text-text-on-inverted hover:bg-surface-neutral-active':
+                    props.activeState === props.feedbacktype,
+            })}
+            onClick={() => {
+                props.setThanksFeedback(false)
+                if (props.activeState === props.feedbacktype) {
+                    props.setActiveState(null)
+                } else {
+                    props.setActiveState(props.feedbacktype)
+                }
+            }}
+            {...props}
+        >
+            {props.children}
+        </Button>
     )
 }

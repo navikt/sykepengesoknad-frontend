@@ -7,7 +7,6 @@ import { RSSoknadstatus } from '../../types/rs-types/rs-soknadstatus'
 import { tilLesbarDatoMedArstall } from '../../utils/dato-utils'
 import { tekst } from '../../utils/tekster'
 import { logEvent } from '../amplitude/amplitude'
-import Banner from '../banner/banner'
 import FristSykepenger from '../frist-sykepenger/frist-sykepenger'
 import { GjenstaendeSoknader, hentGjenstaendeSoknader } from '../gjenstaende-soknader/gjenstaende-soknader'
 import Opplysninger from '../opplysninger-fra-sykmelding/opplysninger'
@@ -17,6 +16,7 @@ import useSoknader from '../../hooks/useSoknader'
 import useSoknad from '../../hooks/useSoknad'
 import QueryStatusPanel from '../queryStatusPanel/QueryStatusPanel'
 import { soknadBreadcrumb, useUpdateBreadcrumbs } from '../../hooks/useBreadcrumbs'
+import { SoknadHeader } from '../soknad/soknad-header'
 
 import GjenapneSoknad from './gjenapneknapp'
 
@@ -50,7 +50,7 @@ const AvbruttSoknad = () => {
 
     return (
         <>
-            <Banner />
+            <SoknadHeader />
 
             <Alert variant="warning" style={{ marginBottom: '1rem' }}>
                 <BodyShort>
@@ -63,7 +63,7 @@ const AvbruttSoknad = () => {
             <BodyLong spacing>{tekst('sykepengesoknad.avbrutt.informasjon-innhold-4')}</BodyLong>
 
             <Opplysninger ekspandert={false} steg="avbrutt-søknad" />
-            <FristSykepenger soknad={valgtSoknad} />
+            <FristSykepenger />
 
             <Vis
                 hvis={dayjs(valgtSoknad.avbruttDato).isAfter(dayjs().subtract(2, 'seconds'))}

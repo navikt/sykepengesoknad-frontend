@@ -12,6 +12,7 @@ import { RSSoknadstype } from '../../types/rs-types/rs-soknadstype'
 import { tilLesbarDatoMedArstall, tilLesbarPeriodeMedArstall } from '../../utils/dato-utils'
 import { isOpplaering } from '../../utils/environment'
 import { getLedetekst, tekst } from '../../utils/tekster'
+import { useTestpersonQuery } from '../../hooks/useTestpersonQuery'
 
 import { leggTilSoknadstypeForDemoside, periodeListevisning, teaserTittel } from './teaser-util'
 
@@ -26,7 +27,13 @@ export const ListevisningLenkepanel = ({ soknad, onClick }: { soknad: RSSoknadme
         }
         return false
     }
+    const testperson = useTestpersonQuery()
     const StyletLinkPanel = ({ paddingBottom }: { paddingBottom: boolean }) => {
+        const skalViseSoknadstype =
+            isOpplaering() &&
+            typeof testperson.testperson === 'string' &&
+            ['opplaering', 'alle-soknader', ''].includes(testperson.testperson || '')
+
         return (
             <LinkPanel
                 className={cn('p-6 [&>div]:w-full', {
@@ -49,7 +56,7 @@ export const ListevisningLenkepanel = ({ soknad, onClick }: { soknad: RSSoknadme
                                 </Heading>
                             </header>
                             {periodeListevisning(soknad)}
-                            <Vis hvis={isOpplaering()} render={() => leggTilSoknadstypeForDemoside(soknad)} />
+                            {skalViseSoknadstype && leggTilSoknadstypeForDemoside(soknad)}
                         </>
                     </div>
                     <div className="flex shrink-0 items-center">

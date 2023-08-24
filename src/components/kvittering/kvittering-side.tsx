@@ -9,7 +9,6 @@ import { RSSoknadstype } from '../../types/rs-types/rs-soknadstype'
 import { isProd, sykefravaerUrl } from '../../utils/environment'
 import { tekst } from '../../utils/tekster'
 import { logEvent } from '../amplitude/amplitude'
-import Banner from '../banner/banner'
 import Ettersending from '../ettersending/ettersending'
 import { GjenstaendeSoknader, hentGjenstaendeSoknader } from '../gjenstaende-soknader/gjenstaende-soknader'
 import { hentHotjarJsTrigger, HotjarTrigger } from '../hotjar-trigger'
@@ -21,6 +20,7 @@ import { urlTilSoknad } from '../soknad/soknad-link'
 import QueryStatusPanel from '../queryStatusPanel/QueryStatusPanel'
 import { kvitteringBreadcrumb, useUpdateBreadcrumbs } from '../../hooks/useBreadcrumbs'
 import { useStudyStatus } from '../../hooks/useStudyStatus'
+import { SoknadHeader } from '../soknad/soknad-header'
 
 import Kvittering from './kvittering'
 import { harKorrigertArbeidstakersoknadIDetSiste } from './harSvartJa'
@@ -70,7 +70,7 @@ const KvitteringSide = () => {
 
     return (
         <>
-            <Banner />
+            <SoknadHeader />
 
             <div>
                 <HotjarTrigger jsTrigger={hentHotjarJsTrigger(valgtSoknad.soknadstype, 'kvittering')}>

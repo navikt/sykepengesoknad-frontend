@@ -2,10 +2,10 @@ import { useQuery } from '@tanstack/react-query'
 
 import fetchMedRequestId from '../utils/fetch'
 
-import { UseTestpersonQuery } from './useTestpersonQuery'
+import { useTestpersonQuery } from './useTestpersonQuery'
 
 export function UseKontonummer() {
-    const testpersonQuery = UseTestpersonQuery()
+    const testpersonQuery = useTestpersonQuery()
 
     return useQuery<string | null, Error>({
         queryKey: ['kontonummer'],

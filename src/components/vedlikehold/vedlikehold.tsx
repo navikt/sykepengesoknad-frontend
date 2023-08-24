@@ -2,7 +2,7 @@ import { Alert } from '@navikt/ds-react'
 import React from 'react'
 
 import { tekst } from '../../utils/tekster'
-import Banner from '../banner/banner'
+import { Banner } from '../banner/banner'
 import { useUpdateBreadcrumbs } from '../../hooks/useBreadcrumbs'
 
 const Vedlikehold = () => {

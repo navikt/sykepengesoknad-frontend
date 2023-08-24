@@ -75,14 +75,14 @@ export function getSession(req: NextApiRequest, res: NextApiResponse): session {
     return sessionStore[sessionId]
 }
 
-export function hentTestperson(req: NextApiRequest, res: NextApiResponse): Persona {
-    function nokkel(): string {
-        const query = req.query['testperson']
-        if (query) return query.toString()
-        return 'opplaering'
-    }
+function nokkel(req: NextApiRequest): string {
+    const query = req.query['testperson']
+    if (query) return query.toString()
+    return 'opplaering'
+}
 
-    return getSession(req, res).testpersoner[nokkel()]
+export function hentTestperson(req: NextApiRequest, res: NextApiResponse): Persona {
+    return getSession(req, res).testpersoner[nokkel(req)]
 }
 
 export function hentSoknader(req: NextApiRequest, res: NextApiResponse): RSSoknad[] {
@@ -108,10 +108,21 @@ async function parseRequest<T>(req: NextApiRequest): Promise<T> {
     return JSON.parse(jsonString)
 }
 
+async function sleep(ms: number): Promise<void> {
+    return new Promise((resolve) => setTimeout(resolve, ms))
+}
+
 export async function mockApi(req: NextApiRequest, res: NextApiResponse) {
     const url = `${req.method} ${cleanPathForMetric(req.url!).split('?')[0]}`
     const testperson = hentTestperson(req, res)
     const alleSoknader = hentSoknader(req, res)
+    const nokkelKey = nokkel(req)
+
+    const erClsTestperson = nokkelKey === 'cummulative-layout-shift'
+    if (erClsTestperson) {
+        const ms = Math.floor(Math.random() * 500) + 2000
+        await sleep(ms)
+    }
 
     function sendJson(json = {}, status = 200) {
         res.writeHead(status, { 'Content-Type': 'application/json' })
@@ -150,9 +161,11 @@ export async function mockApi(req: NextApiRequest, res: NextApiResponse) {
 
     const soknadId = pathNumber(3)
     const sporsmalId = pathNumber(5)
+
     function findSoknadById(soknadId: string | null): RSSoknad | undefined {
         return alleSoknader.find((soknad) => soknad.id === soknadId)
     }
+
     function findSporsmalById(soknaden: RSSoknad, sporsmalId: string | null): RSSporsmal | undefined {
         return soknaden.sporsmal.find((spm) => spm.id === sporsmalId)
     }

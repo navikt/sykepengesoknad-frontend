@@ -3,10 +3,10 @@ import { useQuery } from '@tanstack/react-query'
 import { RSSoknadmetadata } from '../types/rs-types/rs-soknadmetadata'
 import { fetchJsonMedRequestId } from '../utils/fetch'
 
-import { UseTestpersonQuery } from './useTestpersonQuery'
+import { useTestpersonQuery } from './useTestpersonQuery'
 
 export default function useSoknader() {
-    const testpersonQuery = UseTestpersonQuery()
+    const testpersonQuery = useTestpersonQuery()
 
     return useQuery<RSSoknadmetadata[], Error>({
         queryKey: ['soknader'],

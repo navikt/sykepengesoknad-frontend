@@ -1,11 +1,11 @@
 import React from 'react'
+import { Skeleton } from '@navikt/ds-react'
 
 import { RSSoknadstatus } from '../../types/rs-types/rs-soknadstatus'
 import { sorterEtterNyesteFom } from '../../utils/sorter-soknader'
 import { tekst } from '../../utils/tekster'
-import Banner from '../banner/banner'
+import { Banner } from '../banner/banner'
 import OmSykepenger from '../om-sykepenger/om-sykepenger'
-import Vis from '../vis'
 import useSoknader from '../../hooks/useSoknader'
 import QueryStatusPanel from '../queryStatusPanel/QueryStatusPanel'
 import { useUpdateBreadcrumbs } from '../../hooks/useBreadcrumbs'
@@ -13,13 +13,11 @@ import { useUpdateBreadcrumbs } from '../../hooks/useBreadcrumbs'
 import Teasere from './teasere'
 
 const Listevisning = () => {
-    const { data: soknader } = useSoknader()
+    const { data: soknader, isLoading } = useSoknader()
 
     useUpdateBreadcrumbs(() => [], [])
 
-    if (!soknader) return <QueryStatusPanel />
-
-    const nyeSoknader = soknader
+    const nyeSoknader = (soknader || [])
         .filter(
             (soknad) =>
                 soknad.status === RSSoknadstatus.NY ||
@@ -29,7 +27,7 @@ const Listevisning = () => {
         .sort(sorterEtterNyesteFom)
         .reverse()
 
-    const tidligereSoknader = soknader
+    const tidligereSoknader = (soknader || [])
         .filter(
             (soknad) =>
                 soknad.status === RSSoknadstatus.SENDT ||
@@ -44,18 +42,32 @@ const Listevisning = () => {
 
             <OmSykepenger />
 
-            <Teasere
-                soknader={nyeSoknader}
-                tittel={tekst('soknader.nye.tittel')}
-                tomListeTekst={tekst('soknader.nye.ingen-soknader')}
-            />
+            <QueryStatusPanel />
+            {isLoading && (
+                <>
+                    <div className="mb-12">
+                        <Skeleton variant="rectangle" className="mb-6" width="25%" height="32px" />
+                        <Skeleton variant="rectangle" className="h-[130px] max-[560px]:h-[142px]" />
+                    </div>
+                </>
+            )}
+            {soknader && (
+                <>
+                    <Teasere
+                        soknader={nyeSoknader}
+                        tittel={tekst('soknader.nye.tittel')}
+                        tomListeTekst={tekst('soknader.nye.ingen-soknader')}
+                    />
 
-            <Vis
-                hvis={tidligereSoknader.length > 0}
-                render={() => (
-                    <Teasere soknader={tidligereSoknader} tittel={tekst('soknader.sendt.tittel')} kanSorteres={true} />
-                )}
-            />
+                    {tidligereSoknader.length > 0 && (
+                        <Teasere
+                            soknader={tidligereSoknader}
+                            tittel={tekst('soknader.sendt.tittel')}
+                            kanSorteres={true}
+                        />
+                    )}
+                </>
+            )}
         </>
     )
 }

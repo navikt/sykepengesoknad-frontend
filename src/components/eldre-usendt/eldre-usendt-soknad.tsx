@@ -34,7 +34,13 @@ interface EldreUsendteSoknader {
     antall: number
 }
 
-export function harEldreUsendtSoknad(valgtSoknad: Soknad, soknader: RSSoknadmetadata[]): EldreUsendteSoknader {
+export function harEldreUsendtSoknad(
+    valgtSoknad: Soknad | undefined,
+    soknader: RSSoknadmetadata[] | undefined,
+): EldreUsendteSoknader {
+    if (!valgtSoknad || !soknader) {
+        return { antall: 0 }
+    }
     if (!valgtSoknad.fom) {
         return { antall: 0 }
     }

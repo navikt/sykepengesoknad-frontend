@@ -2,7 +2,6 @@ import { FieldError, FieldErrorsImpl, Merge } from 'react-hook-form'
 import dayjs from 'dayjs'
 
 import { TagTyper } from '../../types/enums'
-import { RSSoknadstype } from '../../types/rs-types/rs-soknadstype'
 import { RSSvartype } from '../../types/rs-types/rs-svartype'
 import { Soknad, Sporsmal } from '../../types/types'
 import { SEPARATOR } from '../../utils/constants'
@@ -11,18 +10,6 @@ import { tekst } from '../../utils/tekster'
 export const erSisteSide = (soknad: Soknad, sidenummer: number) => {
     const sporsmal = soknad.sporsmal[sidenummer - 1]
     return [TagTyper.VAER_KLAR_OVER_AT, TagTyper.BEKREFT_OPPLYSNINGER].indexOf(sporsmal.tag) > -1
-}
-
-export const hentNokkel = (soknad: Soknad, sidenummer: number) => {
-    const sporsmal = soknad.sporsmal[sidenummer - 1]
-    if (sporsmal === undefined) {
-        return ''
-    }
-    if (sidenummer === 1 && soknad.soknadstype !== RSSoknadstype.OPPHOLD_UTLAND) {
-        return 'sykepengesoknad.start.tittel'
-    }
-    const nokkel = fjernIndexFraTag(sporsmal.tag).toLowerCase()
-    return erSisteSide(soknad, sidenummer) ? 'sykepengesoknad.til-slutt.tittel' : `sykepengesoknad.${nokkel}.tittel`
 }
 
 export const pathUtenSteg = (pathname: string) => {
