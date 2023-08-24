@@ -6,7 +6,6 @@ import { sorterEtterNyesteFom } from '../../utils/sorter-soknader'
 import { tekst } from '../../utils/tekster'
 import { Header } from '../banner/banner'
 import OmSykepenger from '../om-sykepenger/om-sykepenger'
-import Vis from '../vis'
 import useSoknader from '../../hooks/useSoknader'
 import QueryStatusPanel from '../queryStatusPanel/QueryStatusPanel'
 import { useUpdateBreadcrumbs } from '../../hooks/useBreadcrumbs'
@@ -60,16 +59,13 @@ const Listevisning = () => {
                         tomListeTekst={tekst('soknader.nye.ingen-soknader')}
                     />
 
-                    <Vis
-                        hvis={tidligereSoknader.length > 0}
-                        render={() => (
-                            <Teasere
-                                soknader={tidligereSoknader}
-                                tittel={tekst('soknader.sendt.tittel')}
-                                kanSorteres={true}
-                            />
-                        )}
-                    />
+                    {tidligereSoknader.length > 0 && (
+                        <Teasere
+                            soknader={tidligereSoknader}
+                            tittel={tekst('soknader.sendt.tittel')}
+                            kanSorteres={true}
+                        />
+                    )}
                 </>
             )}
         </>
