@@ -9,6 +9,7 @@ import UndersporsmalListe from '../undersporsmal/undersporsmal-liste'
 import Vis from '../../vis'
 import { Sporsmal } from '../../../types/types'
 import { TagTyper } from '../../../types/enums'
+import { SvaralternativCheckboxForklaring } from "../svaralternativ-checkbox-forklaring";
 
 const ForklaringAvValgtCheckbox = (svaralternativ: Sporsmal) => {
     if (svaralternativ.tag === TagTyper.INNTEKTSKILDE_SELVSTENDIG) {
@@ -94,7 +95,7 @@ const CheckboxKomp = ({ sporsmal }: SpmProps) => {
                                         }
                                         render={() => (
                                             <div aria-live="assertive" className="my-4 max-w-sm pl-3">
-                                                {ForklaringAvValgtCheckbox(uspm)}
+                                                <SvaralternativCheckboxForklaring svaralternativTag={uspm.tag} />
                                                 <UndersporsmalListe oversporsmal={uspm} oversporsmalSvar="CHECKED" />
                                             </div>
                                         )}

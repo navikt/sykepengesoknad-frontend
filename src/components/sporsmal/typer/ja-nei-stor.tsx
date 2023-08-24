@@ -22,7 +22,7 @@ import { YrkesskadeInfo } from '../../hjelpetekster/yrkesskade-info'
 import { useJaNeiKeyboardNavigation } from '../../../utils/keyboard-navigation'
 import { Inntektsbulletpoints } from '../inntektsbulletpoints'
 import { Yrkesskadebulletpoints } from '../yrkesskade-bulletpoints'
-import { InntektsopplysningerErKonfidensielleInfo } from '../inntektsopplysningerErKonfidensielleInfo'
+import { InntektsopplysningerErKonfidensielleInfo } from '../inntektsopplysninger-er-konfidensielle-info'
 
 const JaNeiStor = ({ sporsmal }: SpmProps) => {
     const {
