@@ -163,7 +163,7 @@ describe('Tester arbeidstakersøknad', () => {
             .parent()
             .click()
 
-        cy.contains('Har du vært næringsdrivende i mer enn 4 år?')
+        cy.contains('Har du vært næringsdrivende i mer enn 5 år?')
             .parent()
             .find('input[type="radio"][value="JA"]')
             .click()
