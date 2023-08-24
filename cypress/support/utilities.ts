@@ -80,5 +80,6 @@ export function klikkGaVidere(forventFeil = false) {
 }
 
 export function sjekkMainContentFokus() {
+    // eslint-disable-next-line cypress/unsafe-to-chain-command
     cy.focused().should('have.id', 'maincontent')
 }
