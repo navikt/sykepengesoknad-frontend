@@ -49,7 +49,7 @@ const SporsmalForm = () => {
         return snartSlutt && spmIndex + 2 === valgtSoknad?.sporsmal?.length
     }
 
-    const { mutate: sendSoknadMutation, isLoading: senderSoknad, error: sendError } = useSendSoknad(valgtSoknad)
+    const { mutate: sendSoknadMutation, isLoading: senderSoknad, error: sendError } = useSendSoknad()
 
     const {
         mutate: oppdaterSporsmalMutation,
@@ -69,13 +69,13 @@ const SporsmalForm = () => {
     const nesteSporsmal = valgtSoknad?.sporsmal[spmIndex + 1]
 
     useEffect(() => {
-        methods.reset(hentFormState(sporsmal), { keepValues: false })
+        if (sporsmal) methods.reset(hentFormState(sporsmal), { keepValues: false })
         // Resetter formen når spørsmålet endrer seg
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [sporsmal])
 
     useEffect(() => {
-        if (methods.formState.isSubmitSuccessful) {
+        if (methods.formState.isSubmitSuccessful && sporsmal) {
             methods.reset(hentFormState(sporsmal), { keepValues: false })
         }
         // resetter formen når den har blitt submittet
@@ -83,13 +83,14 @@ const SporsmalForm = () => {
     }, [methods.formState.isSubmitSuccessful])
 
     const sendSoknad = () => {
-        if (valgtSoknad?.status == RSSoknadstatus.UTKAST_TIL_KORRIGERING) {
+        if (!valgtSoknad) return
+        if (valgtSoknad.status == RSSoknadstatus.UTKAST_TIL_KORRIGERING) {
             if (korrigerer && harLikeSvar(korrigerer, valgtSoknad)) {
                 setEndringUtenEndringAapen(true)
                 return
             }
         }
-        sendSoknadMutation()
+        sendSoknadMutation(valgtSoknad)
     }
 
     const onSubmit = (data: Record<string, any>) => {

@@ -12,7 +12,7 @@ export const SporsmalTittel = () => {
 
     return (
         <Heading
-            {...(valgtSoknad ? {} : { as: Skeleton })}
+            as={valgtSoknad ? 'h2' : Skeleton}
             level="2"
             size="medium"
             data-cy="sporsmal-tittel"
