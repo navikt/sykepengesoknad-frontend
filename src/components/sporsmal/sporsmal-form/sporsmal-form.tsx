@@ -55,10 +55,7 @@ const SporsmalForm = () => {
         mutate: oppdaterSporsmalMutation,
         isLoading: oppdatererSporsmal,
         error: oppdaterError,
-    } = useOppdaterSporsmal({
-        soknad: valgtSoknad,
-        spmIndex: erSisteSpm() ? spmIndex + 1 : spmIndex,
-    })
+    } = useOppdaterSporsmal()
 
     const { data: korrigerer } = useSoknad(valgtSoknad?.korrigerer, valgtSoknad?.korrigerer !== undefined)
 
@@ -101,6 +98,9 @@ const SporsmalForm = () => {
         if ((!nesteSporsmal && !erUtenlandssoknad) || !sporsmal) {
             return Promise.reject(new Error('Spørsmål skal være lastet for at vi kan submitte'))
         }
+        if (!valgtSoknad) {
+            return Promise.reject(new Error('Søknad skal være lastet for at vi kan submitte'))
+        }
 
         return new Promise<void>(async (resolve) => {
             const oppdatertSporsmalMedSvar = () => {
@@ -136,6 +136,8 @@ const SporsmalForm = () => {
             oppdaterSporsmalMutation({
                 sporsmal: oppdatertSporsmalMedSvar(),
                 onSuccess: () => onSuccessLogic(erSiste),
+                soknad: valgtSoknad,
+                spmIndex: erSisteSpm() ? spmIndex + 1 : spmIndex,
             })
         })
     }

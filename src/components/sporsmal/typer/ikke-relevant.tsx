@@ -19,6 +19,7 @@ interface IkkeRelevantProps {
     sporsmalIndex: number
     erSisteSporsmal: boolean
 }
+
 const IkkeRelevant = ({ sporsmal, sporsmalIndex, erSisteSporsmal }: IkkeRelevantProps) => {
     const router = useRouter()
     const { id, stegId } = router.query as { id: string; stegId: string }
@@ -27,10 +28,7 @@ const IkkeRelevant = ({ sporsmal, sporsmalIndex, erSisteSporsmal }: IkkeRelevant
 
     const { getValues, trigger } = useFormContext()
     const { data: valgtSoknad } = useSoknad(id)
-    const { mutate: oppdaterSporsmal, isLoading: oppdatererSporsmal } = useOppdaterSporsmal({
-        soknad: valgtSoknad!,
-        spmIndex: spmIndex,
-    })
+    const { mutate: oppdaterSporsmal, isLoading: oppdatererSporsmal } = useOppdaterSporsmal()
     const { mutate: leggTilNyttUndersporsmal, isLoading: leggerTil } = useLeggTilUndersporsmal()
     const { mutate: slettundersporsmal, isLoading: sletter } = useSlettUndersporsmal()
 
@@ -54,6 +52,8 @@ const IkkeRelevant = ({ sporsmal, sporsmalIndex, erSisteSporsmal }: IkkeRelevant
 
         oppdaterSporsmal({
             sporsmal: hovedSpm,
+            soknad: valgtSoknad!,
+            spmIndex: spmIndex,
             onSuccess: () => {
                 leggTilNyttUndersporsmal({
                     soknadId: valgtSoknad!.id,

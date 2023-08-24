@@ -8,22 +8,18 @@ import { rsToSoknad, skapSporsmal } from '../types/mapping'
 
 interface OppdaterSporsmalVariables {
     sporsmal: Sporsmal
+    soknad: Soknad
+    spmIndex: number
     onSuccess?: () => void
 }
 
-interface OppdaterSporsmalProps {
-    soknad: Soknad | undefined
-    spmIndex: number
-}
-
-export function useOppdaterSporsmal(props: OppdaterSporsmalProps) {
-    const { soknad, spmIndex } = props
+export function useOppdaterSporsmal() {
     const queryClient = useQueryClient()
 
     return useMutation<RSOppdaterSporsmalResponse, any, OppdaterSporsmalVariables>({
         mutationFn: async (variables) => {
             return fetchJsonMedRequestId(
-                `/syk/sykepengesoknad/api/sykepengesoknad-backend/api/v2/soknader/${soknad?.id}/sporsmal/${variables.sporsmal.id}`,
+                `/syk/sykepengesoknad/api/sykepengesoknad-backend/api/v2/soknader/${variables.soknad.id}/sporsmal/${variables.sporsmal.id}`,
                 {
                     method: 'PUT',
                     credentials: 'include',
@@ -32,7 +28,6 @@ export function useOppdaterSporsmal(props: OppdaterSporsmalProps) {
                 },
             )
         },
-        mutationKey: ['oppdaterSporsmal', soknad?.id, spmIndex],
 
         onSuccess: async (data, variables) => {
             const oppdatertSoknad = () => {
@@ -41,17 +36,17 @@ export function useOppdaterSporsmal(props: OppdaterSporsmalProps) {
                 } else {
                     const spm = data.oppdatertSporsmal
 
-                    const oppdaterteSporsmal = soknad?.sporsmal.map((sporsmal, index) => {
-                        if (index == spmIndex) {
+                    const oppdaterteSporsmal = variables.soknad.sporsmal.map((sporsmal, index) => {
+                        if (index == variables.spmIndex) {
                             return skapSporsmal(spm, null, true)
                         }
                         return sporsmal
                     })
-                    return soknad?.copyWith({ sporsmal: oppdaterteSporsmal })
+                    return variables.soknad.copyWith({ sporsmal: oppdaterteSporsmal })
                 }
             }
 
-            queryClient.setQueriesData(['soknad', soknad?.id], oppdatertSoknad())
+            queryClient.setQueriesData(['soknad', variables.soknad.id], oppdatertSoknad())
 
             if (variables.onSuccess) variables.onSuccess()
         },
