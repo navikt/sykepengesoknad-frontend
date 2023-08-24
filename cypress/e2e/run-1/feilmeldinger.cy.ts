@@ -1,6 +1,8 @@
 /* eslint-disable cypress/unsafe-to-chain-command */
 import { arbeidstakerGradert } from '../../../src/data/mock/data/opplaering'
 import { RSSoknad } from '../../../src/types/rs-types/rs-soknad'
+import { svarComboboxSingle, svarFritekst } from '../../support/utilities'
+import 'cypress-real-events'
 
 describe('Tester feilmeldinger', () => {
     function gaTilSoknad(soknad: RSSoknad, steg: string) {
@@ -70,16 +72,12 @@ describe('Tester feilmeldinger', () => {
         gaTilSoknad(arbeidstakerGradert, '1')
         gaVidere()
 
-        cy.get('.navds-confirmation-panel__inner').should('exist')
-        cy.get('.navds-error-message').contains('Du må bekrefte dette')
-        cy.get('[data-cy="feil-oppsumering"]')
-            .should('exist')
-            .within(() => {
-                cy.contains('Det er 1 feil i skjemaet')
-                cy.contains('Du må bekrefte at du har lest og forstått informasjonen før du kan gå videre').click()
-            })
-        cy.focused().should('have.attr', 'name', arbeidstakerGradert.sporsmal[0].id)
-        cy.focused().click()
+        feilmeldingHandtering(
+            'Du må bekrefte dette',
+            'Du må bekrefte at du har lest og forstått informasjonen før du kan gå videre',
+            arbeidstakerGradert.sporsmal[0].id,
+        )
+        cy.focused().should('have.attr', 'name', arbeidstakerGradert.sporsmal[0].id).click()
 
         ingenFeilmeldinger()
     })
@@ -328,6 +326,37 @@ describe('Tester feilmeldinger', () => {
 
     it('CHECKBOX_GRUPPE feilmelding går bort', () => {
         cy.focused().click()
+        ingenFeilmeldinger()
+    })
+
+    it('COMBOBOX_SINGLE ingen valg', () => {
+        cy.visit(`/syk/sykepengesoknad/soknader/7fdc72b9-30a9-435c-9eb1-f7cc68a8b429/9?testperson=medlemskap`)
+        cy.get('input[value=JA]').click()
+        svarFritekst('Hvilken arbeidsgiver jobbet du for?', 'jobben')
+        setPeriodeDateFieldMedIndex(0, '01.04.2020')
+        setPeriodeDateFieldMedIndex(1, '24.04.2020')
+
+        gaVidere()
+        feilmeldingHandtering(
+            'Du må velge et alternativ fra menyen',
+            'Du må oppgi i hvilket land du har jobbet',
+            'f95a08e0-baba-3208-9c4f-74a21ecf06f9',
+        )
+
+        svarComboboxSingle('I hvilket land utførte du arbeidet?', 'Fra', 'Frankrike')
+        ingenFeilmeldinger()
+    })
+
+    it('COMBOBOX_SINGLE legg til og slett', () => {
+        cy.contains('Legg til nytt opphold').click()
+
+        gaVidere()
+        cy.get('.navds-error-message').contains('Du må velge et alternativ fra menyen')
+        cy.get('.navds-error-message').contains('Du må oppgi arbeidsgiveren du har jobbet hos utenfor Norge')
+        cy.get('.navds-error-message').contains('Du må oppgi en fra og med dato i formatet dd.mm.åååå')
+        cy.get('[data-cy="feil-oppsumering"]').contains(`Det er 3 feil i skjemaet`)
+
+        cy.findAllByRole('button', { name: 'Slett' }).should('have.length', 2).last().click()
         ingenFeilmeldinger()
     })
 })
