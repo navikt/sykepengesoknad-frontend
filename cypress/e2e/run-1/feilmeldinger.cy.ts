@@ -1,4 +1,4 @@
-/* eslint-disable */
+/* eslint-disable cypress/unsafe-to-chain-command */
 import { arbeidstakerGradert } from '../../../src/data/mock/data/opplaering'
 import { RSSoknad } from '../../../src/types/rs-types/rs-soknad'
 
