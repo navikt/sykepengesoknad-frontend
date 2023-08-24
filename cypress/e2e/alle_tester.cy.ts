@@ -35,6 +35,7 @@ import './run-2/korrigering-ferie.cy'
 import './run-2/paaskeferie.cy'
 
 import './run-3/absolutt_tvang.cy'
+import './run-3/cummulative_layout_shift.cy'
 import './run-3/feedback.cy'
 import './run-3/reisetilskudd.cy'
 import './run-3/sendt_soknad.cy'
