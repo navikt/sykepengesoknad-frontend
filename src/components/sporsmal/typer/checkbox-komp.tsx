@@ -7,32 +7,8 @@ import { SpmProps } from '../sporsmal-form/sporsmal-form'
 import { hentFeilmelding } from '../sporsmal-utils'
 import UndersporsmalListe from '../undersporsmal/undersporsmal-liste'
 import Vis from '../../vis'
-import { Sporsmal } from '../../../types/types'
 import { TagTyper } from '../../../types/enums'
-import { SvaralternativCheckboxForklaring } from "../svaralternativ-checkbox-forklaring";
-
-const ForklaringAvValgtCheckbox = (svaralternativ: Sporsmal) => {
-    if (svaralternativ.tag === TagTyper.INNTEKTSKILDE_SELVSTENDIG) {
-        return (
-            <BodyShort>
-                Dette betyr at du er selvstendig næringsdrivende. Du driver en bedrift for egen regning og risiko,
-                leverer skattemelding for næringsdrivende, fakturerer kunder og (ofte) lever av overskuddet. Du er din
-                egen sjef og ikke ansatt av andre i et arbeidsforhold.
-            </BodyShort>
-        )
-    }
-
-    if (svaralternativ.tag === TagTyper.INNTEKTSKILDE_ANDRE_ARBEIDSFORHOLD) {
-        return (
-            <BodyShort>
-                Dette betyr at du er ansatt hos en eller flere arbeidsgiverne som ikke er kjent for oss enda og derfor
-                ikke ligger i listen ovenfor.
-            </BodyShort>
-        )
-    }
-
-    return <Fragment />
-}
+import { SvaralternativCheckboxForklaring } from '../svaralternativ-checkbox-forklaring'
 
 const undertekst = (tekst: string | null) => {
     return <BodyShort size="small">{tekst}</BodyShort>
