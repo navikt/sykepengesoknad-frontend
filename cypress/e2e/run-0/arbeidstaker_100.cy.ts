@@ -159,6 +159,19 @@ describe('Tester arbeidstakersøknad', () => {
 
         cy.contains('Velg inntektskildene som passer for deg:')
             .parent()
+            .contains('Ansatt andre steder enn nevnt over')
+            .parent()
+            .click()
+
+        cy.contains(
+            'Har du jobbet for eller mottatt inntekt fra én eller flere av disse arbeidsgiverne de siste 14 dagene før du ble sykmeldt?',
+        )
+            .parent()
+            .find('input[type="radio"][value="JA"]')
+            .click()
+
+        cy.contains('Velg inntektskildene som passer for deg:')
+            .parent()
             .contains('Selvstendig næringsdrivende')
             .parent()
             .click()
@@ -171,11 +184,6 @@ describe('Tester arbeidstakersøknad', () => {
         cy.contains('Har det vært endring i din arbeidssituasjon eller virksomhet?')
             .parent()
             .find('input[type="radio"][value="Ja"]')
-            .click()
-
-        cy.contains('Velg inntektskildene som passer for deg:')
-            .parent()
-            .contains('Ansatt et annet sted enn nevnt over')
             .click()
 
         cy.contains('Gå videre').click()

@@ -22,6 +22,7 @@ import { YrkesskadeInfo } from '../../hjelpetekster/yrkesskade-info'
 import { useJaNeiKeyboardNavigation } from '../../../utils/keyboard-navigation'
 import { Inntektsbulletpoints } from '../inntektsbulletpoints'
 import { Yrkesskadebulletpoints } from '../yrkesskade-bulletpoints'
+import { InntektsopplysningerErKonfidensielleInfo } from '../inntektsopplysninger-er-konfidensielle-info'
 
 const JaNeiStor = ({ sporsmal }: SpmProps) => {
     const {
@@ -83,6 +84,7 @@ const JaNeiStor = ({ sporsmal }: SpmProps) => {
         <>
             <div>
                 {skalHaInntektsbulletpoints && <Inntektsbulletpoints soknad={valgtSoknad} />}
+
                 <Yrkesskadebulletpoints sporsmal={sporsmal} />
                 <Controller
                     name={sporsmal.id}
@@ -124,6 +126,10 @@ const JaNeiStor = ({ sporsmal }: SpmProps) => {
                                     Nei
                                 </Radio>
                             </div>
+
+                            {sporsmal.tag === TagTyper.ANDRE_INNTEKTSKILDER_V2 && (
+                                <InntektsopplysningerErKonfidensielleInfo />
+                            )}
                         </RadioGroup>
                     )}
                 />

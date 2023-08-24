@@ -660,7 +660,7 @@ export const veldigLangSoknad: RSSoknad = {
                         {
                             id: '99951',
                             tag: 'INNTEKTSKILDE_ANDRE_ARBEIDSFORHOLD',
-                            sporsmalstekst: 'andre arbeidsforhold',
+                            sporsmalstekst: 'Ansatt andre steder enn nevnt over',
                             undertekst: null,
                             svartype: 'CHECKBOX',
                             min: null,
@@ -668,7 +668,22 @@ export const veldigLangSoknad: RSSoknad = {
                             pavirkerAndreSporsmal: false,
                             kriterieForVisningAvUndersporsmal: 'CHECKED',
                             svar: [],
-                            undersporsmal: [],
+                            undersporsmal: [
+                                {
+                                    id: 'defc1170-d02c-3328-b58e-3ef11f11oifc',
+                                    tag: 'INNTEKTSKILDE_ANDRE_ARBEIDSFORHOLD_JOBBET_I_DET_SISTE',
+                                    sporsmalstekst:
+                                        'Har du jobbet for eller mottatt inntekt fra én eller flere av disse arbeidsgiverne de siste 14 dagene før du ble sykmeldt?',
+                                    undertekst: null,
+                                    svartype: 'JA_NEI',
+                                    min: null,
+                                    max: null,
+                                    pavirkerAndreSporsmal: false,
+                                    kriterieForVisningAvUndersporsmal: null,
+                                    svar: [],
+                                    undersporsmal: [],
+                                },
+                            ],
                         },
                         {
                             id: '99953',
