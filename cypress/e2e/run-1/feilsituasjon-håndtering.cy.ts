@@ -63,6 +63,7 @@ describe('Tester feilsituasjoner ', () => {
             cy.visit(
                 `/syk/sykepengesoknad/soknader/${soknadSomTrigger401ForOppdaterSporsmal.id}/1?testperson=alle-soknader`,
             )
+            cy.get('.navds-heading--large').should('be.visible').and('contain.text', 'Søknad om sykepenger')
         })
 
         it('Ved svar og 401 gjør appen en refresh', function () {
@@ -84,6 +85,7 @@ describe('Tester feilsituasjoner ', () => {
             cy.visit(
                 '/syk/sykepengesoknad/soknader/9157b65a-0372-4657-864c-195037349df5/2?testperson=http-400-ved-send-soknad',
             )
+            cy.get('.navds-heading--large').should('be.visible').and('contain.text', 'Søknad om sykepenger')
         })
         it('Når vi sender søknad som får 400 får vi en feilmelding som lar oss refreshe', function () {
             cy.contains(
@@ -106,6 +108,7 @@ describe('Tester feilsituasjoner ', () => {
             cy.visit(
                 '/syk/sykepengesoknad/soknader/2a9196c7-306f-4b4f-afdc-891d8a564e42/2?testperson=http-500-ved-send-soknad',
             )
+            cy.get('.navds-heading--large').should('be.visible').and('contain.text', 'Søknad om sykepenger')
         })
         it('Når vi sender søknad som får 500 får vi en feilmelding', function () {
             cy.contains(

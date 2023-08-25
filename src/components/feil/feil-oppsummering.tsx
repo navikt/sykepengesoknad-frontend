@@ -87,7 +87,7 @@ const FeilOppsummering = ({
 
     const klikk = () => {
         if (sendError?.status == 400) {
-            window.location.href = `/syk/sykepengesoknad/soknader/${valgtSoknad.id}${window.location.search}`
+            window.location.href = `/syk/sykepengesoknad/soknader/${valgtSoknad.id}/1${window.location.search}`
         }
     }
     const handleKeyDownSendError = (e: any) => {
