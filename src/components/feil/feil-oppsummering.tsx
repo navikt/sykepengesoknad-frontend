@@ -115,7 +115,11 @@ const FeilOppsummering = ({
                         ))
                     if (sendError) {
                         elements.push(
-                            <ErrorSummary.Item onKeyDown={(e) => handleKeyDownSendError(e)} onClick={() => klikk()}>
+                            <ErrorSummary.Item
+                                onKeyDown={(e) => handleKeyDownSendError(e)}
+                                onClick={() => klikk()}
+                                key="send-error"
+                            >
                                 {sendError?.status == 400
                                     ? 'Vi har lagret dine svar, men du må laste inn siden på nytt før du kan sende søknaden. Klikk her for å laste inn siden på nytt.'
                                     : 'Beklager, det oppstod en teknisk feil.'}
