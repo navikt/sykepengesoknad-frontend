@@ -349,6 +349,7 @@ describe('Tester feilmeldinger', () => {
 
     it('COMBOBOX_SINGLE legg til og slett', () => {
         cy.contains('Legg til nytt opphold').click()
+        cy.findAllByRole('button', { name: 'Slett' }).should('have.length', 2)
 
         gaVidere()
         cy.get('.navds-error-message').contains('Du må velge et alternativ fra menyen')
