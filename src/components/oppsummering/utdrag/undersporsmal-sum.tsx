@@ -1,7 +1,6 @@
 import React from 'react'
 
 import { Sporsmal } from '../../../types/types'
-import Vis from '../../vis'
 import { SporsmalVarianter } from '../oppsummering'
 
 interface UndersporsmalProps {
@@ -9,18 +8,15 @@ interface UndersporsmalProps {
 }
 
 const UndersporsmalSum = ({ sporsmalsliste = [] }: UndersporsmalProps) => {
-    return (
-        <Vis
-            hvis={sporsmalsliste.length > 0}
-            render={() => (
-                <div className="mt-4 pl-4">
-                    {sporsmalsliste.map((sporsmal, idx) => (
-                        <SporsmalVarianter sporsmal={sporsmal} key={idx} />
-                    ))}
-                </div>
-            )}
-        />
-    )
+    if (sporsmalsliste.length === 0) {
+        return undefined
+    }
+
+    return sporsmalsliste.map((sporsmal, idx) => (
+        <div className="pl-4 pt-4" key={idx}>
+            <SporsmalVarianter sporsmal={sporsmal} />
+        </div>
+    ))
 }
 
 export default UndersporsmalSum

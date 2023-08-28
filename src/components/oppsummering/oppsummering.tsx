@@ -5,7 +5,6 @@ import { TagTyper } from '../../types/enums'
 import { RSSvartype } from '../../types/rs-types/rs-svartype'
 import { Sporsmal } from '../../types/types'
 import { tekst } from '../../utils/tekster'
-import { cn } from '../../utils/tw-utils'
 
 import Behandlingsdager from './utdrag/behandlingsdager'
 import CheckboxGruppe from './utdrag/checkbox-gruppe'
@@ -42,25 +41,15 @@ const Oppsummering = ({ ekspandert, sporsmal }: { ekspandert: boolean; sporsmal:
             </ExpansionCard.Header>
 
             <ExpansionCard.Content>
-                {sporsmal
-                    .filter((sporsmal) => {
-                        return skalVisesIOppsummering(sporsmal)
-                    })
-                    .map((sporsmal, index, array) => {
-                        const isLastSection = index === array.length - 1
+                {sporsmal.filter(skalVisesIOppsummering).map((sporsmal, index) => {
+                    const isFirstSection = index === 0
 
-                        return (
-                            <div key={index}>
-                                <div
-                                    className={cn('mb-2 pb-0', {
-                                        'mb-8 border-b border-gray-300 pb-8': !isLastSection,
-                                    })}
-                                >
-                                    <SporsmalVarianter sporsmal={sporsmal} />
-                                </div>
-                            </div>
-                        )
-                    })}
+                    return (
+                        <section key={index} className={isFirstSection ? '' : 'mt-8 border-t border-gray-300 pt-8'}>
+                            <SporsmalVarianter sporsmal={sporsmal} />
+                        </section>
+                    )
+                })}
             </ExpansionCard.Content>
         </ExpansionCard>
     )

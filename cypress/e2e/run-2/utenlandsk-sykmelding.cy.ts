@@ -40,9 +40,9 @@ describe('Tester søknad til utenlandsk sykmelding', () => {
         cy.contains('Du må oppgi et land')
         cy.contains('Du må oppgi et telefonnummer')
 
-        svarFritekst('UTENLANDSK_SYKMELDING_VEGNAVN', 'Downing Street 10')
-        svarFritekst('UTENLANDSK_SYKMELDING_LAND', 'UK')
-        svarFritekst('UTENLANDSK_SYKMELDING_TELEFONNUMMER', '81549300')
+        svarFritekst('Vegnavn og husnummer, evt. postboks', 'Downing Street 10')
+        svarFritekst('Land', 'UK')
+        svarFritekst('Telefonnummer', '81549300')
         velgDato(4)
 
         cy.contains('Gå videre').click()
@@ -63,7 +63,7 @@ describe('Tester søknad til utenlandsk sykmelding', () => {
         cy.contains('Du må oppgi oppgi nærmere opplysninger om arbeidet')
 
         svarFritekst(
-            'UTENLANDSK_SYKMELDING_LONNET_ARBEID_UTENFOR_NORGE_FRITEKST',
+            'Oppgi nærmere opplysninger om arbeid/virksomhet utenfor Norge',
             'Veldig lang tekstteksttekstteksttekstteksttekstteksttekstteksttekstteksttekstteksttekstteksttekstteksttekstteksttekstteksttekstteksttekstteksttekstteksttekstteksttekstteksttekstteksttekstteksttekstteksttekstteksttekstteksttekstteksttekstteksttekstteksttekstteksttekstteksttekstteksttekstteksttekstteksttekstteksttekstteksttekstteksttekstteksttekstteksttekst',
         )
         cy.get(`[data-cy="UTENLANDSK_SYKMELDING_LONNET_ARBEID_UTENFOR_NORGE_FRITEKST"]`)
@@ -71,7 +71,7 @@ describe('Tester søknad til utenlandsk sykmelding', () => {
             .parent()
             .contains('Du kan skrive maks 200 tegn')
         cy.get(`[data-cy="feil-oppsumering"]`).contains('Du kan skrive maks 200 tegn')
-        svarFritekst('UTENLANDSK_SYKMELDING_LONNET_ARBEID_UTENFOR_NORGE_FRITEKST', 'Statsminister i UK')
+        svarFritekst('Oppgi nærmere opplysninger om arbeid/virksomhet utenfor Norge', 'Statsminister i UK')
 
         cy.contains('Gå videre').click()
     })

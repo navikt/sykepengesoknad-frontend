@@ -87,7 +87,7 @@ const FeilOppsummering = ({
 
     const klikk = () => {
         if (sendError?.status == 400) {
-            window.location.href = `/syk/sykepengesoknad/soknader/${valgtSoknad.id}${window.location.search}`
+            window.location.href = `/syk/sykepengesoknad/soknader/${valgtSoknad.id}/1${window.location.search}`
         }
     }
     const handleKeyDownSendError = (e: any) => {
@@ -115,7 +115,11 @@ const FeilOppsummering = ({
                         ))
                     if (sendError) {
                         elements.push(
-                            <ErrorSummary.Item onKeyDown={(e) => handleKeyDownSendError(e)} onClick={() => klikk()}>
+                            <ErrorSummary.Item
+                                onKeyDown={(e) => handleKeyDownSendError(e)}
+                                onClick={() => klikk()}
+                                key="send-error"
+                            >
                                 {sendError?.status == 400
                                     ? 'Vi har lagret dine svar, men du må laste inn siden på nytt før du kan sende søknaden. Klikk her for å laste inn siden på nytt.'
                                     : 'Beklager, det oppstod en teknisk feil.'}

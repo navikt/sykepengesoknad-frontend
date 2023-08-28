@@ -8,9 +8,7 @@ import { OppsummeringProps } from '../oppsummering'
 const DatoSum = ({ sporsmal }: OppsummeringProps) => {
     return (
         <>
-            <Label as="h3" className="mb-2">
-                {sporsmal.sporsmalstekst}
-            </Label>
+            <Label as="h3">{sporsmal.sporsmalstekst}</Label>
             <>
                 {sporsmal.svarliste.svar.map((svarverdi, index) => (
                     <Vis

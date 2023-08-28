@@ -1,5 +1,5 @@
-import { BodyShort, Button, ButtonProps, Heading, Skeleton, Textarea } from '@navikt/ds-react'
-import { useEffect, useRef, useState } from 'react'
+import { BodyShort, Button, Heading, Skeleton, Textarea } from '@navikt/ds-react'
+import React, { useEffect, useRef, useState } from 'react'
 import { FaceSmileIcon } from '@navikt/aksel-icons'
 
 import { cn } from '../../utils/tw-utils'
@@ -15,7 +15,8 @@ enum Feedbacktype {
     'FORBEDRING' = 'FORBEDRING',
 }
 
-interface FeedbackButtonProps extends ButtonProps {
+interface FeedbackButtonProps {
+    children: React.ReactNode
     feedbacktype: Feedbacktype
     soknad: Soknad | undefined
     activeState: Feedbacktype | null
@@ -101,7 +102,7 @@ export const Feedback = ({ soknad, steg }: { soknad: Soknad | undefined; steg: n
         }
     }
 
-    const buttonProps = {
+    const feedbackButtonProps = {
         soknad,
         activeState,
         setThanksFeedback,
@@ -116,13 +117,13 @@ export const Feedback = ({ soknad, steg }: { soknad: Soknad | undefined; steg: n
                         Opplever du at du har nok informasjon til å svare på dette spørsmålet?
                     </BodyShort>
                     <div className="flex w-full gap-2">
-                        <FeedbackButton feedbacktype={Feedbacktype.JA} {...buttonProps}>
+                        <FeedbackButton feedbacktype={Feedbacktype.JA} {...feedbackButtonProps}>
                             Ja
                         </FeedbackButton>
-                        <FeedbackButton feedbacktype={Feedbacktype.NEI} {...buttonProps}>
+                        <FeedbackButton feedbacktype={Feedbacktype.NEI} {...feedbackButtonProps}>
                             Nei
                         </FeedbackButton>
-                        <FeedbackButton feedbacktype={Feedbacktype.FORBEDRING} {...buttonProps}>
+                        <FeedbackButton feedbacktype={Feedbacktype.FORBEDRING} {...feedbackButtonProps}>
                             Foreslå forbedring
                         </FeedbackButton>
                     </div>
@@ -196,7 +197,6 @@ const FeedbackButton = (props: FeedbackButtonProps) => {
                     props.setActiveState(props.feedbacktype)
                 }
             }}
-            {...props}
         >
             {props.children}
         </Button>

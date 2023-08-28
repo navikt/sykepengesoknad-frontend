@@ -8,10 +8,8 @@ const Fritekst = ({ sporsmal }: OppsummeringProps) => {
     if (!sporsmal.svarliste.svar[0].verdi) return null
     return (
         <>
-            <Label as="h3" className="mb-2">
-                {sporsmal.sporsmalstekst}
-            </Label>
-            <BodyShort className="sist">{sporsmal.svarliste.svar[0].verdi}</BodyShort>
+            <Label as="h3">{sporsmal.sporsmalstekst}</Label>
+            <BodyShort>{sporsmal.svarliste.svar[0].verdi}</BodyShort>
         </>
     )
 }
