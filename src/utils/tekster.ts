@@ -65,6 +65,8 @@ const tekster = {
 export const tekst = (tekst: keyof typeof tekster): string => {
     const verdi = tekster[tekst]
     if (verdi === undefined && !tekst.includes('soknad.feilmelding')) {
+        debugger
+        window.alert('Mangler tekst: ' + tekst)
         logger.error(`Mangler teksten [ ${tekst} ].`)
         return undefined as any
     }
