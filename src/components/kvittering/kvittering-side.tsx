@@ -19,10 +19,10 @@ import QueryStatusPanel from '../queryStatusPanel/QueryStatusPanel'
 import { kvitteringBreadcrumb, useUpdateBreadcrumbs } from '../../hooks/useBreadcrumbs'
 import { useStudyStatus } from '../../hooks/useStudyStatus'
 import { SoknadHeader } from '../soknad/soknad-header'
+import { KvitteringFeedback } from '../feedback/kvittering-feedback'
 
 import Kvittering from './kvittering'
 import { harKorrigertArbeidstakersoknadIDetSiste } from './harSvartJa'
-import {KvitteringFeedback} from "../feedback/kvittering-feedback";
 
 const KvitteringSide = () => {
     const router = useRouter()
@@ -95,9 +95,7 @@ const KvitteringSide = () => {
             <KvitteringFeedback />
 
             {skalViseEndre && <Endreknapp />}
-            {skalViseSendTilArbeidsgiver && (
-                <Ettersending gjelder="arbeidsgiver" setRerendrekvittering={setRerendrekvittering} />
-            )}
+            {skalViseSendTilArbeidsgiver && <Ettersending gjelder="arbeidsgiver" />}
         </>
     )
 }
