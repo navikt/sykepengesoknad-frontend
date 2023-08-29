@@ -27,9 +27,10 @@ describe('Tester arbeidstakersøknad', () => {
 
         // Personvern erklæring
         cy.get('.frist-sykepenger').click()
-        cy.contains('Les mer om hvordan NAV behandler personopplysninger').click()
-        cy.contains('Slik behandler NAV personopplysningene dine')
-        cy.contains('Søknaden din vil bli behandlet automatisk hvis NAV har tilstrekkelige opplysninger')
+        cy.contains('Slik behandler NAV personopplysningene dine').click()
+        cy.contains(
+            'NAV innhenter opplysninger om deg når du sender inn en søknad. Det er nødvendig for at du skal kunne få det du har krav på. For å behandle søknaden din henter vi inn opplysninger både fra deg og fra offentlige registre.',
+        )
         cy.get('.navds-modal__button').click()
 
         // Sykmelding
