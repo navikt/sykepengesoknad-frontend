@@ -1,4 +1,4 @@
-import { useFormContext, Controller } from 'react-hook-form'
+import { Controller } from 'react-hook-form'
 import { UNSAFE_Combobox } from '@navikt/ds-react'
 import { useMemo } from 'react'
 
@@ -8,10 +8,6 @@ import { hentFeilmelding } from '../sporsmal-utils'
 import { TagTyper } from '../../../types/enums'
 
 const ComboboxSingle = ({ sporsmal }: SpmProps) => {
-    const {
-        formState: { errors },
-    } = useFormContext()
-
     const feilmelding = hentFeilmelding(sporsmal)
 
     const options = useMemo(() => {
@@ -27,35 +23,33 @@ const ComboboxSingle = ({ sporsmal }: SpmProps) => {
             defaultValue=""
             name={sporsmal.id}
             rules={{ required: feilmelding.global }}
-            render={({ field }) => (
-                <>
-                    <UNSAFE_Combobox
-                        id={sporsmal.id}
-                        label={sporsmal.sporsmalstekst}
-                        error={errors[sporsmal.id] !== undefined && feilmelding.lokal}
-                        options={options}
-                        className="mt-4 w-full md:w-1/2"
-                        selectedOptions={[field.value]}
-                        shouldShowSelectedOptions={true}
-                        shouldAutocomplete={true}
-                        onKeyDownCapture={(event) => {
-                            if (event.key === 'Enter') {
-                                event.preventDefault()
+            render={({ field, fieldState }) => (
+                <UNSAFE_Combobox
+                    id={sporsmal.id}
+                    label={sporsmal.sporsmalstekst}
+                    error={fieldState.error && feilmelding.lokal}
+                    options={options}
+                    className="mt-4 w-full md:w-1/2"
+                    selectedOptions={[field.value]}
+                    shouldShowSelectedOptions={true}
+                    shouldAutocomplete={true}
+                    onKeyDownCapture={(event) => {
+                        if (event.key === 'Enter') {
+                            event.preventDefault()
+                        }
+                    }}
+                    onToggleSelected={(option, isSelected) => {
+                        if (isSelected) {
+                            const optionLowerCase = option.toLowerCase()
+                            const valgtLand = options.find((land) => optionLowerCase === land.toLowerCase())
+                            if (valgtLand) {
+                                field.onChange(valgtLand)
                             }
-                        }}
-                        onToggleSelected={(option, isSelected) => {
-                            if (isSelected) {
-                                const optionLowerCase = option.toLowerCase()
-                                const valgtLand = options.find((land) => optionLowerCase === land.toLowerCase())
-                                if (valgtLand) {
-                                    field.onChange(valgtLand)
-                                }
-                            } else {
-                                field.onChange('')
-                            }
-                        }}
-                    />
-                </>
+                        } else {
+                            field.onChange('')
+                        }
+                    }}
+                />
             )}
         />
     )

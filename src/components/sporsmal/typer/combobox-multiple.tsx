@@ -1,4 +1,4 @@
-import { useFormContext, Controller } from 'react-hook-form'
+import { Controller } from 'react-hook-form'
 import { UNSAFE_Combobox } from '@navikt/ds-react'
 import { useMemo } from 'react'
 
@@ -8,10 +8,6 @@ import { hentFeilmelding } from '../sporsmal-utils'
 import { TagTyper } from '../../../types/enums'
 
 const ComboboxMultiple = ({ sporsmal }: SpmProps) => {
-    const {
-        formState: { errors },
-    } = useFormContext()
-
     const feilmelding = hentFeilmelding(sporsmal)
 
     const options = useMemo(() => {
@@ -28,37 +24,34 @@ const ComboboxMultiple = ({ sporsmal }: SpmProps) => {
         <Controller
             name={sporsmal.id}
             rules={{ required: feilmelding.global }}
-            render={({ field }) => (
-                <>
-                    <UNSAFE_Combobox
-                        id={sporsmal.id}
-                        isMultiSelect
-                        label={sporsmal.sporsmalstekst}
-                        error={errors[sporsmal.id] !== undefined && feilmelding.lokal}
-                        options={options}
-                        className="mt-4 w-full md:w-1/2"
-                        shouldShowSelectedOptions={true}
-                        shouldAutocomplete={true}
-                        selectedOptions={Array.isArray(field.value) ? field.value : []}
-                        onToggleSelected={(option, isSelected) => {
-                            const currentValues = Array.isArray(field.value) ? field.value : []
-                            if (isSelected) {
-                                const optionLowerCase = option.toLowerCase()
-                                const valgtLand = options.find((land) => optionLowerCase === land.toLowerCase())
-                                if (valgtLand) {
-                                    field.onChange([...currentValues, valgtLand])
-                                }
-                            } else {
-                                field.onChange(currentValues.filter((item) => item !== option))
+            render={({ field, fieldState }) => (
+                <UNSAFE_Combobox
+                    id={sporsmal.id}
+                    isMultiSelect
+                    label={sporsmal.sporsmalstekst}
+                    error={fieldState.error && feilmelding.lokal}
+                    options={options}
+                    className="mt-4 w-full md:w-1/2"
+                    shouldShowSelectedOptions={true}
+                    shouldAutocomplete={true}
+                    selectedOptions={field.value}
+                    onKeyDownCapture={(event) => {
+                        if (event.key === 'Enter') {
+                            event.preventDefault()
+                        }
+                    }}
+                    onToggleSelected={(option, isSelected) => {
+                        if (isSelected) {
+                            const optionLowerCase = option.toLowerCase()
+                            const valgtLand = options.find((land) => optionLowerCase === land.toLowerCase())
+                            if (valgtLand) {
+                                field.onChange([...field.value, valgtLand])
                             }
-                        }}
-                        onKeyDownCapture={(event) => {
-                            if (event.key === 'Enter') {
-                                event.preventDefault()
-                            }
-                        }}
-                    />
-                </>
+                        } else {
+                            field.onChange(field.value.filter((item: string) => item !== option))
+                        }
+                    }}
+                />
             )}
         />
     )
