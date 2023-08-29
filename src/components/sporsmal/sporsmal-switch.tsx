@@ -11,7 +11,6 @@ import DatoInput from './typer/dato-komp'
 import IkkeRelevant from './typer/ikke-relevant'
 import JaNeiStor from './typer/ja-nei-stor'
 import JaNeiLiten from './typer/ja-nei-liten'
-import Land from './typer/land'
 import Opplasting from './typer/opplasting/opplasting'
 import Perioder from './typer/perioder'
 import RadioTimerProsent from './typer/radio-timer-prosent'
@@ -20,6 +19,7 @@ import UkjentSporsmal from './typer/ukjent-sporsmal'
 import { Fritekst } from './typer/fritekst'
 import RadioKomp from './typer/radio-komp'
 import ComboboxSingle from './typer/combobox-single'
+import ComboboxMultiple from './typer/combobox-multiple'
 
 interface SporsmalSwitchProps {
     sporsmal: Sporsmal
@@ -74,7 +74,8 @@ const SporsmalSwitch = ({ sporsmal, sporsmalIndex, erSisteSporsmal }: SporsmalSw
             return <BehDager sporsmal={sporsmal} />
 
         case RSSvartype.LAND:
-            return <Land sporsmal={sporsmal} />
+        case RSSvartype.COMBOBOX_MULTIPLE:
+            return <ComboboxMultiple sporsmal={sporsmal} />
 
         case RSSvartype.FRITEKST:
             return <Fritekst sporsmal={sporsmal} />
