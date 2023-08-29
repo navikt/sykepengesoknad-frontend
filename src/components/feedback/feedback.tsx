@@ -7,7 +7,6 @@ import { Soknad } from '../../types/types'
 import UseFlexjarFeedback from '../../hooks/useFlexjarFeedback'
 import { RSSoknadstype } from '../../types/rs-types/rs-soknadstype'
 import { TagTyper } from '../../types/enums'
-import { isMockBackend } from '../../utils/environment'
 
 enum Feedbacktype {
     'JA' = 'JA',
@@ -57,9 +56,6 @@ export const Feedback = ({ soknad, steg }: { soknad: Soknad | undefined; steg: n
         return null
     }
 
-    if (!isMockBackend()) {
-        return null
-    }
     const fetchFeedback = async (): Promise<void> => {
         if (activeState === null) {
             return

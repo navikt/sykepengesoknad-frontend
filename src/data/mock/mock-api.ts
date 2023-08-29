@@ -150,6 +150,7 @@ export async function mockApi(req: NextApiRequest, res: NextApiResponse) {
         SLETT_UNDERSPORSMAL:
             'DELETE /api/sykepengesoknad-backend/api/v2/soknader/[uuid]/sporsmal/[uuid]/undersporsmal/[uuid]',
         HENT_KVITTERING: 'GET /api/sykepengesoknad-kvitteringer/api/v2/kvittering/[uuid]',
+        FEEDBACK: 'POST /api/flexjar-backend/api/v1/feedback',
     }
 
     function pathNumber(n: number): string | null {
@@ -342,6 +343,9 @@ export async function mockApi(req: NextApiRequest, res: NextApiResponse) {
                 ...body,
             })
             return sendJson({ oppdatertSporsmal: spm }, 201)
+        },
+        [ENDPOINTS.FEEDBACK]: async () => {
+            return sendJson({}, 202)
         },
         [ENDPOINTS.SLETT_SVAR]: async () => {
             const soknad = await getSoknadOr404(soknadId)
