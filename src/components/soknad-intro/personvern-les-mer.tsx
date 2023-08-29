@@ -61,8 +61,9 @@ export const PersonvernLesMer = () => {
                 lukkKnapp={true}
             >
                 <BodyLong spacing>
-                    Du har valgt å søke om sykepenger fra NAV. Det er penger du kan få hvis du fyller kravene. Du kan
-                    lese om kravene på <LenkeMedIkon href="https://nav.no/sykepenger" text="nav.no/sykepenger" />.
+                    Når du har blitt syk eller skadet og ikke kan jobbe, kan du ha rett til sykepenger. Du må oppfylle
+                    noen generelle vilkår for å få sykepenger. Du kan lese om vilkårene på{' '}
+                    <LenkeMedIkon href="https://nav.no/sykepenger" text="nav.no/sykepenger" />.
                 </BodyLong>
                 <BodyLong spacing>
                     NAV innhenter opplysninger om deg når du sender inn en søknad. Det er nødvendig for at du skal kunne
@@ -74,17 +75,16 @@ export const PersonvernLesMer = () => {
                     en saksbehandler i NAV og benyttes i fremtidig saksbehandling.
                 </BodyLong>
                 <BodyLong spacing>
-                    Ved hjelp av kategoriserte personvernopplysninger nevnt i personvernforordningen, kan NAV beslutte
-                    vedtak basert på automatisk behandling av personopplysninger (Jf, NAV, § 4a).
+                    Ved hjelp av kategoriserte personvernopplysninger nevnt i personvernforordningen, kan NAV fatte et
+                    vedtak i din sak basert på automatisk behandling av personopplysninger (Jf. NAV-loven § 4a).
                 </BodyLong>
                 <BodyLong spacing>
                     Når NAV behandler disse opplysningene, må etaten sikre at reglene for forsvarlig saksbehandling
                     følges og ivaretar personvernrettighetene. En automatisk behandling følger klare regler og tar ikke
-                    beslutninger som krever menneskelig skjønn, med mindre resultatet er veldig åpenbart og lett å
-                    forstå.
+                    beslutninger som krever en vurdering av en saksbehandler.
                 </BodyLong>
                 <Label spacing as="p">
-                    Automatisk behandling baserer seg på disse opplysningene:
+                    En automatisk behandling av en sykepengesak baserer seg på følgende opplysninger:
                 </Label>
                 <List as="ul">
                     <ListItemMedBold tittel="Folkeregisteret">
@@ -102,18 +102,18 @@ export const PersonvernLesMer = () => {
                 </List>
 
                 <Label spacing as="p">
-                    For at en sak skal kunne håndteres automatisk, trenger NAV følgende tre dokumenter:
+                    For at en sak skal kunne håndteres automatisk, trenger NAV disse tre dokumenter:
                 </Label>
                 <List as="ul">
                     <PlainListItem>
-                        Sykmelding fra legen din som inneholder informasjon om hvor mye du ikke kan jobbe, hvor lenge du
-                        trenger å være borte fra jobben og hvorfor, samt en diagnose som viser hva som er galt.
+                        Sykmeldingen fra legen din, som inneholder informasjon om hvor mye du ikke kan jobbe, hvor lenge
+                        du trenger å være borte fra jobben og hvorfor, og en diagnose som viser hva som er galt.
                     </PlainListItem>
-                    <PlainListItem>Søknad om sykepenger fra deg</PlainListItem>
-                    <PlainListItem>Inntektsmelding som oversendes fra arbeidsgiver</PlainListItem>
+                    <PlainListItem>Søknaden om sykepenger fra deg.</PlainListItem>
+                    <PlainListItem>Inntektsmeldingen som oversendes fra arbeidsgiver.</PlainListItem>
                 </List>
                 <Label spacing as="p">
-                    Når disse tre dokumentene er mottatt vurderer saksbehandlingsmaskinen følgende:
+                    Når disse tre dokumentene er mottatt vurderer saksbehandlingssystemet følgende:
                 </Label>
 
                 <List as="ul">
@@ -128,7 +128,7 @@ export const PersonvernLesMer = () => {
                     <PlainListItem>
                         Om det er mer enn 25 prosent avvik mellom innrapportert inntekt i a-ordningen og inntekt oppgitt
                         i inntektsmelding fra arbeidsgiver. (jf. Folketrygdloven § 8-30.) Dette er en del av beregning
-                        av hva sykegrunnlaget skal være når NAV betaler sykepenger.
+                        av hva sykegrunnlaget skal være når NAV betaler sykepenger. (Jf. Folketrygdloven §8-30)
                     </PlainListItem>
                     <PlainListItem>
                         Om det mottas andre trygdeytelser, som omsorgspenger, foreldrepenger, opplæringspenger,
@@ -143,16 +143,13 @@ export const PersonvernLesMer = () => {
                 </List>
 
                 <BodyLong spacing>
-                    Deretter blir den informasjonen som er samlet inn nøye vurdert for å se om den passer med reglene
-                    som gjelder for sykepenger. Dette betyr at vi ser på den innsamlede informasjonen sammen med de
-                    reglene som allerede finnes for å bestemme om du kan få sykepenger eller ikke. Vi sjekker om
-                    opplysningene vi har samlet inn oppfyller kravene som er satt i reglene for å kunne motta
-                    sykepenger.
+                    NAV sjekker om opplysningene som er samlet inn oppfyller kravene som er satt i reglene for å kunne
+                    motta sykepenger.
                 </BodyLong>
                 <BodyLong spacing>Dersom vilkårene er oppfylt, går saken til utbetaling.</BodyLong>
                 <BodyLong spacing>
-                    Den automatiske beslutningen vil du kunne se på{' '}
-                    <LenkeMedIkon href="https://nav.no/syk/sykepenger" text="nav.no/syk/sykepenger" />.
+                    Den automatiske beslutningen vil du kunne se på innloggede sider. Gå til “Ditt sykefravær” og
+                    deretter til “Svar på søknader”.
                 </BodyLong>
 
                 <Label spacing as="p">
@@ -168,14 +165,14 @@ export const PersonvernLesMer = () => {
                     <ListItemMedBold tittel="Protest">
                         Som sykemeldt kan du protestere mot den automatiske behandlingen av personopplysningene dine.
                     </ListItemMedBold>
-                    <ListItemMedBold tittel="Menneskelig inngripen">
-                        Selv om behandlingen er automatisert, har du rett til menneskelig inngripen i saken din når det
-                        er nødvendig. Dette betyr at en saksbehandler skal være tilgjengelig for å vurdere og ta
-                        beslutninger i tilfeller der automatiseringssystemet ikke kan håndtere situasjonen adekvat, samt
-                        ved spesielle behov eller spørsmål.
+                    <ListItemMedBold tittel="Vurdering av saksbehandler">
+                        Selv om behandlingen er automatisert, har du rett til å få saksbehandler til å se på saken din
+                        om det er nødvendig. Dette betyr at en saksbehandler skal være tilgjengelig for å vurdere og ta
+                        beslutninger i tilfeller der automatiseringssystemet ikke kan håndtere situasjonen
+                        tilstrekkelig, samt ved spesielle behov eller spørsmål.
                     </ListItemMedBold>
                     <ListItemMedBold tittel="Manuell overprøving av avgjørelsen">
-                        Som sykemeldt har du rett til å be om en manuell overprøving av en avgjørelse som er tatt av
+                        Som sykemeldt har du rett til å be om en manuell overprøving av en avjørelse som er tatt av
                         automatiseringssystemet. For enkeltvedtak vil retten til menneskelig inngripen og retten til å
                         bestride avgjørelsen i utgangspunktet ivaretas av forvaltningslovens regler om klage, ettersom
                         klager behandles manuelt i Arbeids- og velferdsetaten.
