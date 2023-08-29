@@ -11,7 +11,7 @@ import Vis from '../../vis'
 import { TagTyper } from '../../../types/enums'
 import { hentSporsmal } from '../../../utils/soknad-utils'
 import { useSoknadMedDetaljer } from '../../../hooks/useSoknadMedDetaljer'
-import { PersonvernLesMer } from '../../soknad-intro/personvern-les-mer'
+import { SlikBehandlerNavPersonopplysningene } from '../../soknad-intro/slik-behandler-nav-personopplysningene'
 
 const Knapperad = ({ poster }: { poster: boolean }) => {
     const { erUtenlandssoknad, valgtSoknad: soknad, stegNo, sporsmal, spmIndex } = useSoknadMedDetaljer()
@@ -69,7 +69,7 @@ const Knapperad = ({ poster }: { poster: boolean }) => {
                 render={() => (
                     <>
                         <hr className="my-4" />
-                        <PersonvernLesMer />
+                        <SlikBehandlerNavPersonopplysningene />
                     </>
                 )}
             />

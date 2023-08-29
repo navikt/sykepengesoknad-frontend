@@ -27,7 +27,7 @@ describe('Tester arbeidstakersøknad', () => {
 
         // Personvern erklæring
         cy.get('.frist-sykepenger').click()
-        cy.contains('Les mer om hvordan NAV behandler personopplysninger').click()
+        cy.contains('Slik behandler NAV personopplysningene dine').click()
         cy.contains('Slik behandler NAV personopplysningene dine')
         cy.contains(
             'Ved hjelp av kategoriserte personvernopplysninger nevnt i personvernforordningen, kan NAV beslutte vedtak basert på automatisk behandling av personopplysninger',

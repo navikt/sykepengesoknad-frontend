@@ -8,23 +8,23 @@ import { useSoknadMedDetaljer } from '../../hooks/useSoknadMedDetaljer'
 
 type Event = MouseEvent<HTMLAnchorElement | HTMLButtonElement>
 
-export const PersonvernLesMer = () => {
+export const SlikBehandlerNavPersonopplysningene = () => {
     const [aapen, setAapen] = useState<boolean>(false)
 
     const { valgtSoknad } = useSoknadMedDetaljer()
 
-    const personvernLesMerKnapp = 'Les mer om hvordan NAV behandler personopplysninger'
+    const slikBehandlerNavPersonoppl = 'Slik behandler NAV personopplysningene dine'
     const handleAapen = (event: Event) => {
         event.preventDefault()
         setAapen(true)
         logEvent('knapp klikket', {
-            tekst: personvernLesMerKnapp,
+            tekst: slikBehandlerNavPersonoppl,
             soknadstype: valgtSoknad?.soknadstype,
         })
     }
     const amplitudeLukketPopup = () => {
         logEvent('modal lukket', {
-            component: personvernLesMerKnapp,
+            component: slikBehandlerNavPersonoppl,
         })
     }
 
@@ -48,13 +48,13 @@ export const PersonvernLesMer = () => {
     return (
         <>
             <Button variant="tertiary" onClick={handleAapen} className="-ml-5 text-left">
-                {personvernLesMerKnapp}
+                {slikBehandlerNavPersonoppl}
             </Button>
             <FlexModal
                 open={aapen}
                 setOpen={setAapen}
                 headerId="Personvern-modal"
-                header="Slik behandler NAV personopplysningene dine"
+                header={slikBehandlerNavPersonoppl}
                 onClose={() => {
                     amplitudeLukketPopup()
                 }}
