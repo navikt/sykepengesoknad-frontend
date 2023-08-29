@@ -18,8 +18,10 @@ import {
     sjekkMainContentFokus,
     svarCheckboxPanel,
     svarNeiHovedsporsmal,
+    svarCombobox,
 } from '../../support/utilities'
 import { inlineForklaringer } from '../../support/sjekkInlineForklaringKvittering'
+import 'cypress-real-events'
 
 describe('Tester kvittering', () => {
     context('Arbeidsledig', () => {
@@ -119,8 +121,8 @@ describe('Tester kvittering', () => {
             setPeriodeFraTil(14, 22)
 
             klikkGaVidere()
-            cy.get('[data-cy="landvelger"] input[type="text"]').type('Fransk')
-            cy.contains('Søre franske territorier').click()
+            svarCombobox('Hvilket land skal du reise til?', 'Søre', 'Søre franske territorier')
+            cy.get('.navds-combobox__button-toggle-list').click()
             klikkGaVidere()
             svarNeiHovedsporsmal()
             klikkGaVidere()

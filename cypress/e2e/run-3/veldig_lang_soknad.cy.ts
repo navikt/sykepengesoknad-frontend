@@ -4,9 +4,9 @@ import {
     svarJaHovedsporsmal,
     svarNeiHovedsporsmal,
     svarCheckboxPanel,
-    velgLand,
     velgDato,
     klikkGaVidere,
+    svarCombobox,
 } from '../../support/utilities'
 import 'cypress-file-upload'
 import { veldigLangSoknad } from '../../../src/data/mock/data/soknad/veldig-land-soknad'
@@ -213,7 +213,7 @@ describe('Tester støtte for gamle spørsmål', () => {
         gaVidere()
     })
     it('LAND', () => {
-        velgLand('franske')
+        svarCombobox('I hvilket land?', 'Fra', 'Søre franske territorier')
         gaVidere()
     })
     it('PERIODEUTLAND', () => {

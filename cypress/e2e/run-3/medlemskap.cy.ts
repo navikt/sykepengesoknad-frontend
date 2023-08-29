@@ -3,7 +3,7 @@ import 'cypress-real-events'
 import {
     klikkGaVidere,
     setPeriodeFraTil,
-    svarComboboxSingle,
+    svarCombobox,
     svarFritekst,
     svarJaHovedsporsmal,
     svarRadioGruppe,
@@ -22,7 +22,7 @@ describe('Tester medlemskap spørsmål', () => {
 
     it('Arbeid utenfor Norge', () => {
         svarJaHovedsporsmal()
-        svarComboboxSingle('I hvilket land utførte du arbeidet?', 'Fra', 'Frankrike')
+        svarCombobox('I hvilket land utførte du arbeidet?', 'Fra', 'Frankrike')
         svarFritekst('Hvilken arbeidsgiver jobbet du for?', 'Croissant AS')
         setPeriodeFraTil(12, 20)
     })
@@ -31,7 +31,7 @@ describe('Tester medlemskap spørsmål', () => {
         klikkGaVidere()
 
         svarJaHovedsporsmal()
-        svarComboboxSingle('I hvilket land utenfor EØS har du oppholdt deg?', 'Fra', 'Fransk Polynesia')
+        svarCombobox('I hvilket land utenfor EØS har du oppholdt deg?', 'Fra', 'Fransk Polynesia')
         svarRadioGruppe('Hva var årsaken til oppholdet?', 'Ferie')
         setPeriodeFraTil(12, 20, 0)
 
@@ -56,7 +56,7 @@ describe('Tester medlemskap spørsmål', () => {
         klikkGaVidere()
 
         svarJaHovedsporsmal()
-        svarComboboxSingle('I hvilket land utenfor Norge har du oppholdt deg?', 'Sve', 'Sveits')
+        svarCombobox('I hvilket land utenfor Norge har du oppholdt deg?', 'Sve', 'Sveits')
         svarRadioGruppe('Hva var årsaken til oppholdet?', 'Studier')
         setPeriodeFraTil(12, 20)
     })

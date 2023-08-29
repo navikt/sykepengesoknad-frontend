@@ -4,8 +4,9 @@ import {
     svarJaHovedsporsmal,
     svarNeiHovedsporsmal,
     velgDato,
-    velgLand,
+    svarCombobox,
 } from '../../support/utilities'
+import 'cypress-real-events'
 
 describe('Tester søknad til utenlandsk sykmelding', () => {
     const id = '3708c4de-d16c-4835-841b-a6716b6d39e9'
@@ -85,8 +86,11 @@ describe('Tester søknad til utenlandsk sykmelding', () => {
         svarJaHovedsporsmal()
         cy.contains('I hvilket land?')
         cy.contains('Gå videre').click()
-        cy.contains('Du må oppgi hvilket land du har mottatt sykepenger eller lignende i')
-        velgLand('Danmark')
+        cy.contains(
+            'Du må velge alle andre EØS-land bortsett fra Norge hvor du har mottatt sykepenger eller lignende i løpet av de siste tre årene',
+        )
+        svarCombobox('I hvilket land?', 'Dan', 'Danmark')
+        cy.get('.navds-combobox__button-toggle-list').click()
         cy.contains('Gå videre').click()
     })
 

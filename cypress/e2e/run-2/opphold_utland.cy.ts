@@ -36,36 +36,20 @@ describe('Tester søknad om å beholde sykepenger utenfor EØS', () => {
         cy.url().should('include', `${soknad.id}/2`)
         cy.contains('Tilbake').should('exist')
 
-        cy.get('[data-cy="landvelger"] input[type="text"]').click()
-        cy.contains('Afghanistan').click()
-        cy.contains('Albania').should('not.exist')
-        cy.get('.navds-chips__removable-icon').click()
-
         klikkGaVidere(true)
-        cy.contains('Du må velge ett land')
+        cy.contains('Du må velge minst et alternativ fra menyen')
         cy.contains('Det er 1 feil i skjemaet')
-        cy.contains('Du må oppgi et land utenfor EØS. Innenfor EØS trenger du ikke søke.')
+        cy.contains('Du må oppgi hvilket land du skal reise til')
 
-        cy.contains('Hvilket land skal du reise til?')
-        cy.get('[data-cy="landvelger"] input[type="text"]').type('Fransk', { force: true })
-        cy.contains('Fransk Polynesia')
-        cy.contains('Søre franske territorier').click()
-        cy.get('.navds-chips__removable-icon').click()
-        cy.contains('Du må velge ett land')
-        cy.contains('Det er 1 feil i skjemaet')
+        svarCombobox('Hvilket land skal du reise til?', 'Afg', 'Afghanistan')
 
-        cy.get('[data-cy="landvelger"] input[type="text"]').type('Fransk', { force: true })
-        cy.contains('Fransk Polynesia')
-        cy.contains('Søre franske territorier').click()
+        svarCombobox('Hvilket land skal du reise til?', 'Fransk', 'Fransk Polynesia')
+        cy.contains('.navds-chips__chip-text', 'Fransk Polynesia').parent('button').click()
 
-        cy.get('[data-cy="landvelger"] input[type="text"]').type('De')
-        cy.contains('De forente arabiske emirater')
-        cy.contains('De okkuperte palestinske områdene').click()
+        cy.findAllByRole('combobox', { name: 'Hvilket land skal du reise til?' }).type('Sør-')
+        cy.findByRole('option', { name: 'Sør-Korea' }).click()
 
-        cy.get('[data-cy="landvelger"] input[type="text"]').type('R')
-        cy.contains('Amerikansk Samoa').click()
-        cy.contains('Amerikansk Samoa').find('.navds-chips__removable-icon').click()
-        cy.contains('Amerikansk Samoa').should('not.exist')
+        cy.get('.navds-combobox__button-toggle-list').click()
 
         klikkGaVidere()
     })
@@ -108,8 +92,8 @@ describe('Tester søknad om å beholde sykepenger utenfor EØS', () => {
         cy.get('.oppsummering')
             .contains('Hvilket land skal du reise til?')
             .siblings()
-            .should('contain', 'Søre franske territorier')
-            .and('contain', 'De okkuperte palestinske områdene')
+            .should('contain', 'Afghanistan')
+            .and('contain', 'Sør-Korea')
 
         cy.get('.oppsummering').contains('Har du arbeidsgiver?').siblings().should('contain', 'Ja')
         cy.get('.oppsummering').within(() => {

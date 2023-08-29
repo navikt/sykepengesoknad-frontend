@@ -16,7 +16,7 @@ export function svarFritekst(name: string, verdi: string) {
     cy.findByRole('textbox', { name: name }).type(verdi)
 }
 
-export function svarComboboxSingle(name: string, verdi: string, autocompleteVerdi: string = verdi) {
+export function svarCombobox(name: string, verdi: string, autocompleteVerdi: string = verdi) {
     // Autocomplete
     cy.findByRole('combobox', { name: name }).type(verdi)
     cy.findByRole('combobox', { name: name }).should('have.value', autocompleteVerdi)
@@ -37,11 +37,6 @@ export function svarJaHovedsporsmal() {
 
 export function svarNeiHovedsporsmal() {
     cy.get('form').findAllByRole('radio', { name: 'Nei' }).first().click()
-}
-
-export function velgLand(land: string) {
-    cy.get('[data-cy="landvelger"] input[type="text"]').type(land)
-    cy.contains(land).click()
 }
 
 export function svarCheckboxPanel() {
