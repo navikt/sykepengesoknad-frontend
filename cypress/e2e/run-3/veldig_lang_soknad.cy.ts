@@ -11,6 +11,7 @@ import {
 import 'cypress-file-upload'
 import { veldigLangSoknad } from '../../../src/data/mock/data/soknad/veldig-land-soknad'
 import { rsToSoknad } from '../../../src/types/mapping'
+import 'cypress-real-events'
 
 describe('Tester støtte for gamle spørsmål', () => {
     //-----
@@ -213,7 +214,8 @@ describe('Tester støtte for gamle spørsmål', () => {
         gaVidere()
     })
     it('LAND', () => {
-        svarCombobox('I hvilket land?', 'Fra', 'Søre franske territorier')
+        svarCombobox('Hvilket land skal du reise til?', 'Søre', 'Søre franske territorier')
+        cy.get('.navds-combobox__button-toggle-list').click()
         gaVidere()
     })
     it('PERIODEUTLAND', () => {
