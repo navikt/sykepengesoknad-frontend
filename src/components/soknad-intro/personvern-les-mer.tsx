@@ -2,18 +2,16 @@ import { BodyLong, BodyShort, Button, Label, List } from '@navikt/ds-react'
 import React, { MouseEvent, useState } from 'react'
 
 import { logEvent } from '../amplitude/amplitude'
-import { RSSoknadstypeType } from '../../types/rs-types/rs-soknadstype'
 import { FlexModal } from '../flex-modal'
 import { LenkeMedIkon } from '../lenke-med-ikon/LenkeMedIkon'
+import { useSoknadMedDetaljer } from '../../hooks/useSoknadMedDetaljer'
 
 type Event = MouseEvent<HTMLAnchorElement | HTMLButtonElement>
 
-export interface PersonvernLesMerProps {
-    soknadstype: RSSoknadstypeType
-}
-
-export const PersonvernLesMer = ({ soknadstype }: PersonvernLesMerProps) => {
+export const PersonvernLesMer = () => {
     const [aapen, setAapen] = useState<boolean>(false)
+
+    const { valgtSoknad } = useSoknadMedDetaljer()
 
     const personvernLesMerKnapp = 'Les mer om hvordan NAV behandler personopplysninger'
     const handleAapen = (event: Event) => {
@@ -21,7 +19,7 @@ export const PersonvernLesMer = ({ soknadstype }: PersonvernLesMerProps) => {
         setAapen(true)
         logEvent('knapp klikket', {
             tekst: personvernLesMerKnapp,
-            soknadstype: soknadstype,
+            soknadstype: valgtSoknad?.soknadstype,
         })
     }
     const amplitudeLukketPopup = () => {
@@ -183,7 +181,7 @@ export const PersonvernLesMer = ({ soknadstype }: PersonvernLesMerProps) => {
                         klager behandles manuelt i Arbeids- og velferdsetaten.
                     </ListItemMedBold>
                 </List>
-               <BodyLong spacing>Vi kan også sende opplysninger om deg til trygdeordninger i andre land.</BodyLong>
+                <BodyLong spacing>Vi kan også sende opplysninger om deg til trygdeordninger i andre land.</BodyLong>
 
                 <BodyLong spacing>
                     Du kan lese mer om hvordan NAV behandler personopplysninger i Arbeids- og velferdsetatens

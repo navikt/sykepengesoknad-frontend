@@ -11,6 +11,7 @@ import Vis from '../../vis'
 import { TagTyper } from '../../../types/enums'
 import { hentSporsmal } from '../../../utils/soknad-utils'
 import { useSoknadMedDetaljer } from '../../../hooks/useSoknadMedDetaljer'
+import { PersonvernLesMer } from '../../soknad-intro/personvern-les-mer'
 
 const Knapperad = ({ poster }: { poster: boolean }) => {
     const { erUtenlandssoknad, valgtSoknad: soknad, stegNo, sporsmal, spmIndex } = useSoknadMedDetaljer()
