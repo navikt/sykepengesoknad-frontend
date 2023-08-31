@@ -74,7 +74,7 @@ const SporsmalSwitch = ({ sporsmal, sporsmalIndex, erSisteSporsmal }: SporsmalSw
             return <BehDager sporsmal={sporsmal} />
 
         case RSSvartype.LAND:
-        case RSSvartype.COMBOBOX_MULTIPLE:
+        case RSSvartype.COMBOBOX_MULTI:
             return <ComboboxMultiple sporsmal={sporsmal} />
 
         case RSSvartype.FRITEKST:
