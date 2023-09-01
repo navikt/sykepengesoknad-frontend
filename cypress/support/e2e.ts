@@ -15,6 +15,11 @@
 import './commands'
 import 'cypress-axe'
 
+before(() => {
+    // Skjuler hint så den ikke ligger over andre elementer
+    localStorage.setItem('devtools-hint', 'false')
+})
+
 afterEach(() => {
     setupAxe()
 })
