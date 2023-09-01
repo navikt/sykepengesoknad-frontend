@@ -1,16 +1,16 @@
-import { RSSoknad } from '../../../types/rs-types/rs-soknad'
-
-import { arbeidstaker100Syk } from './sykmeldinger'
-import { yrkesskadeV1Sporsmal, yrkesskadeV2Sporsmal } from './yrkesskade'
-import { utenlandskSykmeldingSporsmalene } from './utenlandsk-sykmelding'
-import { værKlarOverAt } from './sporsmal/vaer-klar-over-at'
-import { bekreftOpplysninger } from './sporsmal/bekreft-opplysninger'
+import { RSSoknad } from '../../../../types/rs-types/rs-soknad'
+import { arbeidstaker100Syk } from '../sykmeldinger'
+import { værKlarOverAt } from '../sporsmal/vaer-klar-over-at'
+import { bekreftOpplysninger } from '../sporsmal/bekreft-opplysninger'
 import {
     medlemskapOppholdstillatelseSporsmal,
     medlemskapOppholdUtenforEøsSporsmal,
     medlemskapOppholdUtenforNorgeSporsmal,
     medlemskapUtførtArbeidUtenforNorgeSporsmal,
-} from './medlemskap'
+} from '../sporsmal/medlemskap'
+import { utenlandskSykmeldingSporsmalene } from '../sporsmal/utenlandsk-sykmelding-sporsmalene'
+import { yrkesskadeV2Sporsmal } from '../sporsmal/yrkesskade-v2'
+import { yrkesskadeV1Sporsmal } from '../sporsmal/yrkesskade-v1'
 
 export const veldigLangSoknad: RSSoknad = {
     id: '214f6e73-8150-4261-8ce5-e2b41907fa58',

@@ -1,12 +1,11 @@
-import { RSSoknad } from '../../../types/rs-types/rs-soknad'
+import { RSSoknad } from '../../../../types/rs-types/rs-soknad'
+import { værKlarOverAt } from '../sporsmal/vaer-klar-over-at'
+import { bekreftOpplysninger } from '../sporsmal/bekreft-opplysninger'
+import { naringsdrivende100syk } from '../sykmeldinger'
 
-import { frilanser100Syk } from './sykmeldinger'
-import { værKlarOverAt } from './sporsmal/vaer-klar-over-at'
-import { bekreftOpplysninger } from './sporsmal/bekreft-opplysninger'
-
-export const frilanser: RSSoknad = {
-    id: 'a8e40578-682b-4a04-bfda-b7768af2ae13',
-    sykmeldingId: frilanser100Syk.id,
+export const naringsdrivendeSoknad: RSSoknad = {
+    id: 'a8e40578-682b-4a04-bfda-b7768af2ae55',
+    sykmeldingId: naringsdrivende100syk.id,
     soknadstype: 'SELVSTENDIGE_OG_FRILANSERE',
     status: 'NY',
     fom: '2020-04-01',
@@ -20,8 +19,8 @@ export const frilanser: RSSoknad = {
     arbeidsgiver: null,
     korrigerer: null,
     korrigertAv: null,
-    arbeidssituasjon: 'FRILANSER',
-    merknaderFraSykmelding: [{ type: 'UGYLDIG_TILBAKEDATERING' }],
+    arbeidssituasjon: 'NAERINGSDRIVENDE',
+    merknaderFraSykmelding: [],
     soknadPerioder: [
         {
             fom: '2020-04-01',
@@ -48,7 +47,8 @@ export const frilanser: RSSoknad = {
         {
             id: '687429',
             tag: 'TILBAKE_I_ARBEID',
-            sporsmalstekst: 'Var du tilbake i fullt arbeid som frilanser før sykmeldingsperioden utløp 24. april 2020?',
+            sporsmalstekst:
+                'Var du tilbake i fullt arbeid som selvstendig næringsdrivende før sykmeldingsperioden utløp 24. april 2020?',
             undertekst: null,
             svartype: 'JA_NEI',
             min: null,
@@ -76,7 +76,7 @@ export const frilanser: RSSoknad = {
             id: 'bb8d0465-331d-39bd-b605-d75c42cddee6',
             tag: 'ARBEID_UNDERVEIS_100_PROSENT_0',
             sporsmalstekst:
-                'I perioden 1. - 24. april 2020 var du 100% sykmeldt som frilanser. Jobbet du noe i denne perioden?',
+                'I perioden 1. - 24. april 2020 var du 100% sykmeldt som selvstendig næringsdrivende. Jobbet du noe i denne perioden?',
             undertekst: null,
             svartype: 'JA_NEI',
             min: null,
@@ -265,7 +265,7 @@ export const frilanser: RSSoknad = {
                         {
                             id: '687444',
                             tag: 'INNTEKTSKILDE_FRILANSER_SELVSTENDIG',
-                            sporsmalstekst: 'selvstendig næringsdrivende',
+                            sporsmalstekst: 'frilanser',
                             undertekst: null,
                             svartype: 'CHECKBOX',
                             min: null,

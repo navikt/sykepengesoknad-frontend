@@ -1,30 +1,56 @@
-import { RSSoknad } from '../../../types/rs-types/rs-soknad'
-import { Persona } from '../personas'
+import { RSSoknad } from '../../../../types/rs-types/rs-soknad'
+import { arbeidstaker50Syk } from '../sykmeldinger'
+import { værKlarOverAt } from '../sporsmal/vaer-klar-over-at'
+import { bekreftOpplysninger } from '../sporsmal/bekreft-opplysninger'
 
-import { sykmeldingMedEgenmeldingsdager } from './sykmeldinger'
-import { værKlarOverAt } from './sporsmal/vaer-klar-over-at'
-
-export const soknadUtenEgenmeldingSporsmal: RSSoknad = {
-    id: '82baf0be-5568-3062-b9c7-f03eab7993be',
-    sykmeldingId: sykmeldingMedEgenmeldingsdager.id,
+export const arbeidstakerGradert: RSSoknad = {
+    id: '5b769c04-e171-47c9-b79b-23ab8fce331e',
+    sykmeldingId: arbeidstaker50Syk.id,
     soknadstype: 'ARBEIDSTAKERE',
     status: 'NY',
-    fom: '2023-03-17',
-    tom: '2023-03-23',
-    opprettetDato: '2023-03-24',
+    fom: '2020-04-01',
+    tom: '2020-04-24',
+    opprettetDato: '2020-05-13',
+    inntektskilderDataFraInntektskomponenten: [
+        {
+            navn: 'Ruter',
+            orgnummer: '222',
+            arbeidsforholdstype: 'ARBEIDSTAKER',
+        },
+        {
+            navn: 'Kebabsjappa',
+            orgnummer: '111',
+            arbeidsforholdstype: 'ARBEIDSTAKER',
+        },
+        {
+            navn: 'Bensinstasjonen',
+            orgnummer: '333',
+            arbeidsforholdstype: 'ARBEIDSTAKER',
+        },
+    ],
     sendtTilNAVDato: null,
     sendtTilArbeidsgiverDato: null,
     avbruttDato: null,
-    startSykeforlop: '2023-03-17',
-    sykmeldingUtskrevet: '2023-03-17',
-    arbeidsgiver: { navn: 'Sauefabrikk', orgnummer: '896929119' },
+    startSykeforlop: '2020-04-01',
+    sykmeldingUtskrevet: '2020-03-31',
+    arbeidsgiver: {
+        navn: 'Posten Norge AS, Bærum',
+        orgnummer: '974654458',
+    },
     korrigerer: null,
     korrigertAv: null,
     arbeidssituasjon: 'ARBEIDSTAKER',
-    soknadPerioder: [{ fom: '2023-03-17', tom: '2023-03-23', grad: 100, sykmeldingstype: 'AKTIVITET_IKKE_MULIG' }],
+    soknadPerioder: [
+        {
+            fom: '2020-04-01',
+            tom: '2020-04-24',
+            grad: 50,
+            sykmeldingstype: 'GRADERT',
+        },
+    ],
     sporsmal: [
         {
-            id: '8464d59d-db1a-35b7-ab2e-d983163e7ed2',
+            id: '687291',
             tag: 'ANSVARSERKLARING',
             sporsmalstekst:
                 'Jeg vet at jeg kan miste retten til sykepenger hvis opplysningene jeg gir ikke er riktige eller fullstendige. Jeg vet også at NAV kan holde igjen eller kreve tilbake penger, og at å gi feil opplysninger kan være straffbart.',
@@ -38,9 +64,9 @@ export const soknadUtenEgenmeldingSporsmal: RSSoknad = {
             undersporsmal: [],
         },
         {
-            id: '41922ee2-35d5-3fdd-b999-26cb2c43ee8a',
-            tag: 'TILBAKE_I_ARBEID',
-            sporsmalstekst: 'Var du tilbake i fullt arbeid hos Sauefabrikk i løpet av perioden 17. - 23. mars 2023?',
+            id: '687296',
+            tag: 'FRAVAR_FOR_SYKMELDINGEN',
+            sporsmalstekst: 'Var du syk og borte fra jobb før du ble sykmeldt, i perioden 16. - 31. mars 2020?',
             undertekst: null,
             svartype: 'JA_NEI',
             min: null,
@@ -50,14 +76,43 @@ export const soknadUtenEgenmeldingSporsmal: RSSoknad = {
             svar: [],
             undersporsmal: [
                 {
-                    id: '04886f39-fc09-3650-adf3-157479d382e0',
+                    id: '687299',
+                    tag: 'FRAVAR_FOR_SYKMELDINGEN_NAR',
+                    sporsmalstekst:
+                        'Hvilke dager var du syk og borte fra jobb, før du ble sykmeldt? Du trenger bare oppgi dager før 1. april 2020.',
+                    undertekst: null,
+                    svartype: 'PERIODER',
+                    min: '2019-10-01',
+                    max: '2020-03-31',
+                    pavirkerAndreSporsmal: false,
+                    kriterieForVisningAvUndersporsmal: null,
+                    svar: [],
+                    undersporsmal: [],
+                },
+            ],
+        },
+        {
+            id: '687302',
+            tag: 'TILBAKE_I_ARBEID',
+            sporsmalstekst:
+                'Var du tilbake i fullt arbeid hos Posten Norge AS, Bærum i løpet av perioden 1. - 24. april 2020?',
+            undertekst: null,
+            svartype: 'JA_NEI',
+            min: null,
+            max: null,
+            pavirkerAndreSporsmal: true,
+            kriterieForVisningAvUndersporsmal: 'JA',
+            svar: [],
+            undersporsmal: [
+                {
+                    id: '687303',
                     tag: 'TILBAKE_NAR',
                     sporsmalstekst: 'Når begynte du å jobbe igjen?',
                     undertekst: null,
                     svartype: 'DATO',
-                    min: '2023-03-17',
-                    max: '2023-03-23',
-                    pavirkerAndreSporsmal: false,
+                    min: '2020-04-01',
+                    max: '2020-04-24',
+                    pavirkerAndreSporsmal: true,
                     kriterieForVisningAvUndersporsmal: null,
                     svar: [],
                     undersporsmal: [],
@@ -65,9 +120,9 @@ export const soknadUtenEgenmeldingSporsmal: RSSoknad = {
             ],
         },
         {
-            id: '35140c57-86b8-3c72-9f68-d9cc7dfb70b9',
+            id: '687304',
             tag: 'FERIE_V2',
-            sporsmalstekst: 'Tok du ut feriedager i tidsrommet 17. - 23. mars 2023?',
+            sporsmalstekst: 'Tok du ut feriedager i tidsrommet 1. - 24. april 2020?',
             undertekst: null,
             svartype: 'JA_NEI',
             min: null,
@@ -77,13 +132,13 @@ export const soknadUtenEgenmeldingSporsmal: RSSoknad = {
             svar: [],
             undersporsmal: [
                 {
-                    id: 'b7ccd302-d566-3ce1-a0e2-d9d9acdb9462',
+                    id: '687305',
                     tag: 'FERIE_NAR_V2',
                     sporsmalstekst: 'Når tok du ut feriedager?',
                     undertekst: null,
                     svartype: 'PERIODER',
-                    min: '2023-03-17',
-                    max: '2023-03-23',
+                    min: '2020-04-01',
+                    max: '2020-04-24',
                     pavirkerAndreSporsmal: false,
                     kriterieForVisningAvUndersporsmal: null,
                     svar: [],
@@ -92,9 +147,9 @@ export const soknadUtenEgenmeldingSporsmal: RSSoknad = {
             ],
         },
         {
-            id: '5e771931-2979-3312-a0e6-24f00f1562b9',
+            id: '687306',
             tag: 'PERMISJON_V2',
-            sporsmalstekst: 'Tok du permisjon mens du var sykmeldt 17. - 23. mars 2023?',
+            sporsmalstekst: 'Tok du permisjon mens du var sykmeldt 1. - 24. april 2020?',
             undertekst: null,
             svartype: 'JA_NEI',
             min: null,
@@ -104,13 +159,13 @@ export const soknadUtenEgenmeldingSporsmal: RSSoknad = {
             svar: [],
             undersporsmal: [
                 {
-                    id: '08ed4fa4-2cf3-357c-bdef-83a878739daf',
+                    id: '687307',
                     tag: 'PERMISJON_NAR_V2',
                     sporsmalstekst: 'Når tok du permisjon?',
                     undertekst: null,
                     svartype: 'PERIODER',
-                    min: '2023-03-17',
-                    max: '2023-03-23',
+                    min: '2020-04-01',
+                    max: '2020-04-24',
                     pavirkerAndreSporsmal: false,
                     kriterieForVisningAvUndersporsmal: null,
                     svar: [],
@@ -119,9 +174,9 @@ export const soknadUtenEgenmeldingSporsmal: RSSoknad = {
             ],
         },
         {
-            id: '9f5ead98-b8ef-3ed0-8804-1ba1b8c9c4ac',
+            id: '687308',
             tag: 'UTLAND_V2',
-            sporsmalstekst: 'Var du på reise utenfor EØS mens du var sykmeldt 17. - 23. mars 2023?',
+            sporsmalstekst: 'Var du på reise utenfor EØS mens du var sykmeldt 1. - 24. april 2020?',
             undertekst: null,
             svartype: 'JA_NEI',
             min: null,
@@ -131,13 +186,13 @@ export const soknadUtenEgenmeldingSporsmal: RSSoknad = {
             svar: [],
             undersporsmal: [
                 {
-                    id: '5339c2a7-ba97-3a2c-bb2a-2df2acad56b5',
+                    id: '687309',
                     tag: 'UTLAND_NAR_V2',
                     sporsmalstekst: 'Når var du utenfor EØS?',
                     undertekst: null,
                     svartype: 'PERIODER',
-                    min: '2023-03-17',
-                    max: '2023-03-23',
+                    min: '2020-04-01',
+                    max: '2020-04-24',
                     pavirkerAndreSporsmal: false,
                     kriterieForVisningAvUndersporsmal: null,
                     svar: [],
@@ -146,10 +201,9 @@ export const soknadUtenEgenmeldingSporsmal: RSSoknad = {
             ],
         },
         {
-            id: 'd5e80e71-1000-360b-b355-51c8295f82c2',
-            tag: 'ARBEID_UNDERVEIS_100_PROSENT_0',
-            sporsmalstekst:
-                'I perioden 17. - 23. mars 2023 var du 100 % sykmeldt fra Sauefabrikk. Jobbet du noe hos Sauefabrikk i denne perioden?',
+            id: 'd146b1c5-661f-35ed-b72f-172fc17ead5d',
+            tag: 'JOBBET_DU_GRADERT_0',
+            sporsmalstekst: 'Sykmeldingen sier du kunne jobbe 50 % i jobben din hos Kebabbiten. Jobbet du mer enn det?',
             undertekst: null,
             svartype: 'JA_NEI',
             min: null,
@@ -159,10 +213,24 @@ export const soknadUtenEgenmeldingSporsmal: RSSoknad = {
             svar: [],
             undersporsmal: [
                 {
-                    id: 'a1cc73a9-905a-3f9c-98bd-fdeee0c274d6',
-                    tag: 'HVOR_MYE_HAR_DU_JOBBET_0',
-                    sporsmalstekst: 'Oppgi arbeidsmengde i timer eller prosent:',
+                    id: '495730df-717d-3774-bd19-e6bcf76e3ba2',
+                    tag: 'HVOR_MANGE_TIMER_PER_UKE_0',
+                    sporsmalstekst:
+                        'Hvor mange timer i uken jobber du vanligvis når du er frisk? Varierer det, kan du oppgi gjennomsnittet.',
                     undertekst: null,
+                    svartype: 'TALL',
+                    min: '1',
+                    max: '150',
+                    pavirkerAndreSporsmal: false,
+                    kriterieForVisningAvUndersporsmal: null,
+                    svar: [],
+                    undersporsmal: [],
+                },
+                {
+                    id: 'e3a6bd7d-8f10-381c-8cd3-cdab3e410c95',
+                    tag: 'HVOR_MYE_HAR_DU_JOBBET_0',
+                    sporsmalstekst: 'Hvor mye jobbet du tilsammen 1. - 24. april 2020?',
+                    undertekst: 'Velg timer eller prosent',
                     svartype: 'RADIO_GRUPPE_TIMER_PROSENT',
                     min: null,
                     max: null,
@@ -171,7 +239,7 @@ export const soknadUtenEgenmeldingSporsmal: RSSoknad = {
                     svar: [],
                     undersporsmal: [
                         {
-                            id: 'a704c2b0-4c40-3f0a-89f1-dd68ca0d2e1b',
+                            id: '0e368ffc-1840-35e5-bbb5-b994cbaa8ef1',
                             tag: 'HVOR_MYE_PROSENT_0',
                             sporsmalstekst: 'Prosent',
                             undertekst: null,
@@ -183,13 +251,12 @@ export const soknadUtenEgenmeldingSporsmal: RSSoknad = {
                             svar: [],
                             undersporsmal: [
                                 {
-                                    id: '8a3fa97a-1a94-3784-80d7-093dff8ce172',
+                                    id: '13acfccb-3f39-3893-8054-058270add6ab',
                                     tag: 'HVOR_MYE_PROSENT_VERDI_0',
-                                    sporsmalstekst:
-                                        'Oppgi hvor mange prosent av din normale arbeidstid du jobbet hos Sauefabrikk i perioden 17. - 23. mars 2023?',
-                                    undertekst: 'Oppgi i prosent. Eksempel: 40',
+                                    sporsmalstekst: null,
+                                    undertekst: null,
                                     svartype: 'PROSENT',
-                                    min: '1',
+                                    min: '51',
                                     max: '99',
                                     pavirkerAndreSporsmal: false,
                                     kriterieForVisningAvUndersporsmal: null,
@@ -199,7 +266,7 @@ export const soknadUtenEgenmeldingSporsmal: RSSoknad = {
                             ],
                         },
                         {
-                            id: '2d8a2c66-8985-3284-9b74-5182980882e1',
+                            id: '348f75cd-a87d-397b-8428-cbcb9e50a5d7',
                             tag: 'HVOR_MYE_TIMER_0',
                             sporsmalstekst: 'Timer',
                             undertekst: null,
@@ -211,14 +278,13 @@ export const soknadUtenEgenmeldingSporsmal: RSSoknad = {
                             svar: [],
                             undersporsmal: [
                                 {
-                                    id: 'e6b7bfb6-71bc-3a3a-ac07-abc8fb3210b9',
+                                    id: '34c3cb3f-1aeb-3095-9ac6-d8f4f4c9e539',
                                     tag: 'HVOR_MYE_TIMER_VERDI_0',
-                                    sporsmalstekst:
-                                        'Oppgi totalt antall timer du jobbet i perioden 17. - 23. mars 2023 hos Sauefabrikk',
-                                    undertekst: 'Oppgi i timer. Eksempel: 12',
+                                    sporsmalstekst: null,
+                                    undertekst: null,
                                     svartype: 'TIMER',
                                     min: '1',
-                                    max: '150',
+                                    max: '364',
                                     pavirkerAndreSporsmal: false,
                                     kriterieForVisningAvUndersporsmal: null,
                                     svar: [],
@@ -228,37 +294,10 @@ export const soknadUtenEgenmeldingSporsmal: RSSoknad = {
                         },
                     ],
                 },
-                {
-                    id: '38f26938-65ed-313c-9e2e-39403a390695',
-                    tag: 'JOBBER_DU_NORMAL_ARBEIDSUKE_0',
-                    sporsmalstekst: 'Jobber du vanligvis 37,5 timer i uka hos Sauefabrikk?',
-                    undertekst: null,
-                    svartype: 'JA_NEI',
-                    min: null,
-                    max: null,
-                    pavirkerAndreSporsmal: false,
-                    kriterieForVisningAvUndersporsmal: 'NEI',
-                    svar: [],
-                    undersporsmal: [
-                        {
-                            id: '4317b16c-3560-3d0b-bf56-4bfb95c7b578',
-                            tag: 'HVOR_MANGE_TIMER_PER_UKE_0',
-                            sporsmalstekst: 'Oppgi timer per uke',
-                            undertekst: null,
-                            svartype: 'TIMER',
-                            min: '1',
-                            max: '150',
-                            pavirkerAndreSporsmal: false,
-                            kriterieForVisningAvUndersporsmal: null,
-                            svar: [],
-                            undersporsmal: [],
-                        },
-                    ],
-                },
             ],
         },
         {
-            id: 'cc6a9361-e27f-365a-9851-64217814f7e0',
+            id: '687310',
             tag: 'ARBEID_UTENFOR_NORGE',
             sporsmalstekst: 'Har du arbeidet i utlandet i løpet av de siste 12 månedene?',
             undertekst: null,
@@ -271,9 +310,9 @@ export const soknadUtenEgenmeldingSporsmal: RSSoknad = {
             undersporsmal: [],
         },
         {
-            id: '590d4485-3a1d-3980-bbbe-eb739409852d',
+            id: 'ed62a3b3-4203-3b61-a684-2300bea2ffac',
             tag: 'ANDRE_INNTEKTSKILDER_V2',
-            sporsmalstekst: 'Har du andre inntektskilder enn Sauefabrikk?',
+            sporsmalstekst: 'Har du andre inntektskilder enn Posten Norge AS, Bærum?',
             undertekst: null,
             svartype: 'JA_NEI',
             min: null,
@@ -283,7 +322,7 @@ export const soknadUtenEgenmeldingSporsmal: RSSoknad = {
             svar: [],
             undersporsmal: [
                 {
-                    id: '367ff713-470b-3fc7-8e47-05f841bd1171',
+                    id: 'd25b338d-9a9a-379f-b474-517738a9523b',
                     tag: 'HVILKE_ANDRE_INNTEKTSKILDER',
                     sporsmalstekst:
                         'Velg inntektskildene som passer for deg. Finner du ikke noe som passer for deg, svarer du nei',
@@ -296,7 +335,7 @@ export const soknadUtenEgenmeldingSporsmal: RSSoknad = {
                     svar: [],
                     undersporsmal: [
                         {
-                            id: 'd006eb6d-e942-304f-b1d2-bc3827048bf2',
+                            id: 'd9ac4359-5519-34f1-b59d-b5ab24e55821',
                             tag: 'INNTEKTSKILDE_ANDRE_ARBEIDSFORHOLD',
                             sporsmalstekst: 'ansatt et annet sted enn nevnt over',
                             undertekst: null,
@@ -309,7 +348,7 @@ export const soknadUtenEgenmeldingSporsmal: RSSoknad = {
                             undersporsmal: [],
                         },
                         {
-                            id: 'f6cdb086-7412-3735-ae74-1bbe1fbb5378',
+                            id: '989711be-5362-3f24-a02a-f1b3e3c31f99',
                             tag: 'INNTEKTSKILDE_SELVSTENDIG',
                             sporsmalstekst: 'selvstendig næringsdrivende',
                             undertekst: null,
@@ -322,7 +361,7 @@ export const soknadUtenEgenmeldingSporsmal: RSSoknad = {
                             undersporsmal: [],
                         },
                         {
-                            id: 'd77ca260-f916-36bf-a753-a3d93ccbb074',
+                            id: '3e710b2b-1e91-3d62-8d5d-55cb5eef120f',
                             tag: 'INNTEKTSKILDE_SELVSTENDIG_DAGMAMMA',
                             sporsmalstekst: 'dagmamma',
                             undertekst: null,
@@ -335,7 +374,7 @@ export const soknadUtenEgenmeldingSporsmal: RSSoknad = {
                             undersporsmal: [],
                         },
                         {
-                            id: 'c8ba280e-6850-363d-b72a-70f070771894',
+                            id: 'c1a746d9-bd9f-396a-99b9-18feece3b9cc',
                             tag: 'INNTEKTSKILDE_JORDBRUKER',
                             sporsmalstekst: 'jordbruk / fiske / reindrift',
                             undertekst: null,
@@ -348,7 +387,7 @@ export const soknadUtenEgenmeldingSporsmal: RSSoknad = {
                             undersporsmal: [],
                         },
                         {
-                            id: '72bf9752-3a64-3890-81e0-83715c7e9dc4',
+                            id: 'ab377350-e3fe-3e46-8eb7-d3bb38d6506d',
                             tag: 'INNTEKTSKILDE_FRILANSER',
                             sporsmalstekst: 'frilanser',
                             undertekst: null,
@@ -361,7 +400,7 @@ export const soknadUtenEgenmeldingSporsmal: RSSoknad = {
                             undersporsmal: [],
                         },
                         {
-                            id: '3cf7833a-f9f3-3515-8966-646b08421017',
+                            id: '7b4d4adc-de4f-38fd-a997-e5337fbb9777',
                             tag: 'INNTEKTSKILDE_OMSORGSLONN',
                             sporsmalstekst: 'kommunal omsorgstønad',
                             undertekst: null,
@@ -374,7 +413,7 @@ export const soknadUtenEgenmeldingSporsmal: RSSoknad = {
                             undersporsmal: [],
                         },
                         {
-                            id: '78721ba1-222d-3706-a2c8-0912d1690e68',
+                            id: '7b4d4adc-de4f-38fd-a997-e5337fbb9a5c',
                             tag: 'INNTEKTSKILDE_FOSTERHJEM',
                             sporsmalstekst: 'fosterhjemsgodtgjørelse',
                             undertekst: null,
@@ -387,7 +426,7 @@ export const soknadUtenEgenmeldingSporsmal: RSSoknad = {
                             undersporsmal: [],
                         },
                         {
-                            id: '415d9fdf-d668-3282-b914-23d88a726617',
+                            id: 'bb9418bf-8b6a-3472-9ae6-ecd464e86b7a',
                             tag: 'INNTEKTSKILDE_STYREVERV',
                             sporsmalstekst: 'styreverv',
                             undertekst: null,
@@ -404,29 +443,9 @@ export const soknadUtenEgenmeldingSporsmal: RSSoknad = {
             ],
         },
         værKlarOverAt(),
-        {
-            id: '95d9e5f3-4bd7-34da-bc55-6050ebbeea86',
-            tag: 'BEKREFT_OPPLYSNINGER',
-            sporsmalstekst:
-                'Jeg har lest all informasjonen jeg har fått i søknaden og bekrefter at opplysningene jeg har gitt er korrekte.',
-            undertekst: null,
-            svartype: 'CHECKBOX_PANEL',
-            min: null,
-            max: null,
-            pavirkerAndreSporsmal: false,
-            kriterieForVisningAvUndersporsmal: null,
-            svar: [],
-            undersporsmal: [],
-        },
+        bekreftOpplysninger(),
     ],
     egenmeldtSykmelding: false,
     opprettetAvInntektsmelding: false,
-    utenlandskSykmelding: false,
     klippet: false,
-}
-
-export const egenmeldingSykmeldingaPerson: Persona = {
-    soknader: [soknadUtenEgenmeldingSporsmal],
-    sykmeldinger: [sykmeldingMedEgenmeldingsdager],
-    kontonummer: '12340000000',
 }

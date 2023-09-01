@@ -20,9 +20,8 @@ import { RSSoknadstype } from '../../types/rs-types/rs-soknadstype'
 import { RSSoknadstatus } from '../../types/rs-types/rs-soknadstatus'
 import { RSSvar } from '../../types/rs-types/rs-svar'
 
-import { arbeidstaker, arbeidstakerGradert } from './data/opplaering'
-import { kortFomTomArbeidstakerSoknad } from './data/kort-soknad'
-import { Persona, soknaderOpplaering } from './personas'
+import { arbeidstakerSoknadOpprettetAvInntektsmelding } from './data/personas/opprettet-av-inntektsmelding'
+import { Persona } from './data/personas/personas'
 import { testpersoner } from './testperson'
 import {
     arbeidstakerDeltPeriodeForsteUtenforArbeidsgiverperiodeKvittering,
@@ -35,8 +34,12 @@ import {
     soknadSomTrigger401ForOppdaterSporsmal,
     soknadSomTriggerFeilStatusForOppdaterSporsmal,
     soknadSomTriggerSporsmalFinnesIkkeISoknad,
-} from './data/soknader-integration'
-import { feilVedSlettingAvKvittering } from './data/reisetilskudd'
+} from './data/soknad/soknader-integration'
+import { feilVedSlettingAvKvittering } from './data/personas/reisetilskuddTestPerson'
+import { arbeidstaker } from './data/soknad/arbeidstaker'
+import { arbeidstakerGradert } from './data/soknad/arbeidstaker-gradert'
+import { oppholdUtland } from './data/soknad/opphold-utland'
+import { deepcopyMedNyId } from './deepcopyMedNyId'
 
 type session = {
     expires: dayjs.Dayjs
@@ -78,7 +81,7 @@ export function getSession(req: NextApiRequest, res: NextApiResponse): session {
 function nokkel(req: NextApiRequest): string {
     const query = req.query['testperson']
     if (query) return query.toString()
-    return 'opplaering'
+    return 'arbeidstaker'
 }
 
 export function hentTestperson(req: NextApiRequest, res: NextApiResponse): Persona {
@@ -289,13 +292,7 @@ export async function mockApi(req: NextApiRequest, res: NextApiResponse) {
             if (soknad) {
                 return sendJson(soknad)
             }
-            const soknadOriginal = jsonDeepCopy(
-                soknaderOpplaering.find(
-                    (sok: RSSoknad) =>
-                        sok.soknadstype === RSSoknadstype.OPPHOLD_UTLAND && sok.status === RSSoknadstatus.NY,
-                )!,
-            )
-            soknadOriginal.id = uuid.v4()
+            const soknadOriginal = deepcopyMedNyId(oppholdUtland, uuid.v4())
             soknadOriginal.status = RSSoknadstatus.NY
             testperson.soknader.push(soknadOriginal)
             return sendJson(soknadOriginal)
@@ -433,7 +430,7 @@ const mottaker = (soknadId: string): RSMottaker => {
         soknadId === arbeidstakerUtenOppholdForsteUtenforArbeidsgiverperiodeKvittering.id ||
         soknadId === foranArbeidstakerMedOppholdKvittering.id ||
         soknadId === arbeidstakerMedOppholdForsteUtenforArbeidsgiverperiodeKvittering.id ||
-        soknadId === kortFomTomArbeidstakerSoknad.id
+        soknadId === arbeidstakerSoknadOpprettetAvInntektsmelding.id
     ) {
         return RSMottaker.ARBEIDSGIVER_OG_NAV
     }

@@ -1,19 +1,12 @@
-import { RSSoknad } from '../../../types/rs-types/rs-soknad'
-import { jsonDeepCopy } from '../../../utils/json-deep-copy'
-import { Persona } from '../personas'
+import { RSSoknad } from '../../../../types/rs-types/rs-soknad'
+import { arbeidsledig100Syk } from '../sykmeldinger'
+import { værKlarOverAt } from '../sporsmal/vaer-klar-over-at'
+import { bekreftOpplysninger } from '../sporsmal/bekreft-opplysninger'
 
-import { frilanser100Syk } from './sykmeldinger'
-import { værKlarOverAt } from './sporsmal/vaer-klar-over-at'
-import { bekreftOpplysninger } from './sporsmal/bekreft-opplysninger'
-
-export const naringsdrivende100syk = jsonDeepCopy(frilanser100Syk)
-naringsdrivende100syk.id = 'a8e40578-682b-4a04-bfda-b7768af2ae99'
-naringsdrivende100syk.sykmeldingStatus.sporsmalOgSvarListe.find((a) => a.shortName == 'ARBEIDSSITUASJON')!.svar.svar =
-    'NAERINGSDRIVENDE'
-export const naringsdrivendeSoknad: RSSoknad = {
-    id: 'a8e40578-682b-4a04-bfda-b7768af2ae55',
-    sykmeldingId: naringsdrivende100syk.id,
-    soknadstype: 'SELVSTENDIGE_OG_FRILANSERE',
+export const arbeidsledig: RSSoknad = {
+    id: '934f39f4-cb47-459f-8209-0dbef6d36059',
+    sykmeldingId: arbeidsledig100Syk.id,
+    soknadstype: 'ARBEIDSLEDIG',
     status: 'NY',
     fom: '2020-04-01',
     tom: '2020-04-24',
@@ -26,8 +19,7 @@ export const naringsdrivendeSoknad: RSSoknad = {
     arbeidsgiver: null,
     korrigerer: null,
     korrigertAv: null,
-    arbeidssituasjon: 'NAERINGSDRIVENDE',
-    merknaderFraSykmelding: [],
+    arbeidssituasjon: 'ARBEIDSLEDIG',
     soknadPerioder: [
         {
             fom: '2020-04-01',
@@ -38,7 +30,7 @@ export const naringsdrivendeSoknad: RSSoknad = {
     ],
     sporsmal: [
         {
-            id: '687428',
+            id: '687395',
             tag: 'ANSVARSERKLARING',
             sporsmalstekst:
                 'Jeg vet at jeg kan miste retten til sykepenger hvis opplysningene jeg gir ikke er riktige eller fullstendige. Jeg vet også at NAV kan holde igjen eller kreve tilbake penger, og at å gi feil opplysninger kan være straffbart.',
@@ -52,27 +44,26 @@ export const naringsdrivendeSoknad: RSSoknad = {
             undersporsmal: [],
         },
         {
-            id: '687429',
-            tag: 'TILBAKE_I_ARBEID',
-            sporsmalstekst:
-                'Var du tilbake i fullt arbeid som selvstendig næringsdrivende før sykmeldingsperioden utløp 24. april 2020?',
+            id: '687400',
+            tag: 'FRISKMELDT',
+            sporsmalstekst: 'Brukte du hele sykmeldingen fram til 24. april 2020?',
             undertekst: null,
             svartype: 'JA_NEI',
             min: null,
             max: null,
-            pavirkerAndreSporsmal: true,
-            kriterieForVisningAvUndersporsmal: 'JA',
+            pavirkerAndreSporsmal: false,
+            kriterieForVisningAvUndersporsmal: 'NEI',
             svar: [],
             undersporsmal: [
                 {
-                    id: '687430',
-                    tag: 'TILBAKE_NAR',
-                    sporsmalstekst: 'Når begynte du å jobbe igjen?',
+                    id: '687401',
+                    tag: 'FRISKMELDT_START',
+                    sporsmalstekst: 'Fra hvilken dato trengte du ikke lenger sykmeldingen?',
                     undertekst: null,
                     svartype: 'DATO',
                     min: '2020-04-01',
                     max: '2020-04-24',
-                    pavirkerAndreSporsmal: true,
+                    pavirkerAndreSporsmal: false,
                     kriterieForVisningAvUndersporsmal: null,
                     svar: [],
                     undersporsmal: [],
@@ -80,121 +71,9 @@ export const naringsdrivendeSoknad: RSSoknad = {
             ],
         },
         {
-            id: 'bb8d0465-331d-39bd-b605-d75c42cddee6',
-            tag: 'ARBEID_UNDERVEIS_100_PROSENT_0',
-            sporsmalstekst:
-                'I perioden 1. - 24. april 2020 var du 100% sykmeldt som selvstendig næringsdrivende. Jobbet du noe i denne perioden?',
-            undertekst: null,
-            svartype: 'JA_NEI',
-            min: null,
-            max: null,
-            pavirkerAndreSporsmal: false,
-            kriterieForVisningAvUndersporsmal: 'JA',
-            svar: [],
-            undersporsmal: [
-                {
-                    id: '38a44e52-3acd-35dc-9ca3-756e61d278aa',
-                    tag: 'HVOR_MYE_HAR_DU_JOBBET_0',
-                    sporsmalstekst: 'Oppgi arbeidsmengde i timer eller prosent:',
-                    undertekst: null,
-                    svartype: 'RADIO_GRUPPE_TIMER_PROSENT',
-                    min: null,
-                    max: null,
-                    pavirkerAndreSporsmal: false,
-                    kriterieForVisningAvUndersporsmal: null,
-                    svar: [],
-                    undersporsmal: [
-                        {
-                            id: 'cab6856f-a255-38ba-bf40-fc947fc615de',
-                            tag: 'HVOR_MYE_PROSENT_0',
-                            sporsmalstekst: 'Prosent',
-                            undertekst: null,
-                            svartype: 'RADIO',
-                            min: null,
-                            max: null,
-                            pavirkerAndreSporsmal: false,
-                            kriterieForVisningAvUndersporsmal: 'CHECKED',
-                            svar: [],
-                            undersporsmal: [
-                                {
-                                    id: 'b68db08b-9ad1-38e5-bcdd-2c98963c2b8d',
-                                    tag: 'HVOR_MYE_PROSENT_VERDI_0',
-                                    sporsmalstekst:
-                                        'Oppgi hvor mange prosent av din normale arbeidstid du jobbet i perioden 1. - 24. april 2020?',
-                                    undertekst: 'Oppgi i prosent. Eksempel: 40',
-                                    svartype: 'PROSENT',
-                                    min: '1',
-                                    max: '99',
-                                    pavirkerAndreSporsmal: false,
-                                    kriterieForVisningAvUndersporsmal: null,
-                                    svar: [],
-                                    undersporsmal: [],
-                                },
-                            ],
-                        },
-                        {
-                            id: '00b89c61-dcda-3708-b02d-6cb8516da64f',
-                            tag: 'HVOR_MYE_TIMER_0',
-                            sporsmalstekst: 'Timer',
-                            undertekst: null,
-                            svartype: 'RADIO',
-                            min: null,
-                            max: null,
-                            pavirkerAndreSporsmal: false,
-                            kriterieForVisningAvUndersporsmal: 'CHECKED',
-                            svar: [],
-                            undersporsmal: [
-                                {
-                                    id: '1211c1f5-44e8-328b-8ce9-cc06ee63f1e0',
-                                    tag: 'HVOR_MYE_TIMER_VERDI_0',
-                                    sporsmalstekst:
-                                        'Oppgi totalt antall timer du jobbet i perioden 1. - 24. april 2020',
-                                    undertekst: 'Oppgi i timer. Eksempel: 12',
-                                    svartype: 'TIMER',
-                                    min: '1',
-                                    max: '214',
-                                    pavirkerAndreSporsmal: false,
-                                    kriterieForVisningAvUndersporsmal: null,
-                                    svar: [],
-                                    undersporsmal: [],
-                                },
-                            ],
-                        },
-                    ],
-                },
-                {
-                    id: '9163fd91-7e4f-3474-ae32-405f18004af0',
-                    tag: 'JOBBER_DU_NORMAL_ARBEIDSUKE_0',
-                    sporsmalstekst: 'Jobber du vanligvis 37,5 timer i uka?',
-                    undertekst: null,
-                    svartype: 'JA_NEI',
-                    min: null,
-                    max: null,
-                    pavirkerAndreSporsmal: false,
-                    kriterieForVisningAvUndersporsmal: 'NEI',
-                    svar: [],
-                    undersporsmal: [
-                        {
-                            id: '480f1f44-7e14-3467-be6b-a98253085245',
-                            tag: 'HVOR_MANGE_TIMER_PER_UKE_0',
-                            sporsmalstekst: 'Oppgi timer per uke',
-                            undertekst: null,
-                            svartype: 'TIMER',
-                            min: '1',
-                            max: '150',
-                            pavirkerAndreSporsmal: false,
-                            kriterieForVisningAvUndersporsmal: null,
-                            svar: [],
-                            undersporsmal: [],
-                        },
-                    ],
-                },
-            ],
-        },
-        {
-            id: '687438',
+            id: '687402',
             tag: 'ANDRE_INNTEKTSKILDER',
-            sporsmalstekst: 'Har du annen inntekt? Du trenger ikke oppgi penger fra NAV.',
+            sporsmalstekst: 'Har du hatt inntekt mens du har vært sykmeldt i perioden 1. - 24. april 2020?',
             undertekst: null,
             svartype: 'JA_NEI',
             min: null,
@@ -204,9 +83,9 @@ export const naringsdrivendeSoknad: RSSoknad = {
             svar: [],
             undersporsmal: [
                 {
-                    id: '687439',
+                    id: '687403',
                     tag: 'HVILKE_ANDRE_INNTEKTSKILDER',
-                    sporsmalstekst: 'Hvilke inntektskilder har du?',
+                    sporsmalstekst: 'Hvilke inntektskilder har du hatt?',
                     undertekst: null,
                     svartype: 'CHECKBOX_GRUPPE',
                     min: null,
@@ -216,9 +95,9 @@ export const naringsdrivendeSoknad: RSSoknad = {
                     svar: [],
                     undersporsmal: [
                         {
-                            id: '687440',
-                            tag: 'INNTEKTSKILDE_ARBEIDSFORHOLD',
-                            sporsmalstekst: 'arbeidsforhold',
+                            id: '687404',
+                            tag: 'INNTEKTSKILDE_ANDRE_ARBEIDSFORHOLD',
+                            sporsmalstekst: 'andre arbeidsforhold',
                             undertekst: null,
                             svartype: 'CHECKBOX',
                             min: null,
@@ -228,8 +107,8 @@ export const naringsdrivendeSoknad: RSSoknad = {
                             svar: [],
                             undersporsmal: [
                                 {
-                                    id: '687441',
-                                    tag: 'INNTEKTSKILDE_ARBEIDSFORHOLD_ER_DU_SYKMELDT',
+                                    id: '687405',
+                                    tag: 'INNTEKTSKILDE_ANDRE_ARBEIDSFORHOLD_ER_DU_SYKMELDT',
                                     sporsmalstekst: 'Er du sykmeldt fra dette?',
                                     undertekst: null,
                                     svartype: 'JA_NEI',
@@ -243,7 +122,61 @@ export const naringsdrivendeSoknad: RSSoknad = {
                             ],
                         },
                         {
-                            id: '687442',
+                            id: '687406',
+                            tag: 'INNTEKTSKILDE_SELVSTENDIG',
+                            sporsmalstekst: 'selvstendig næringsdrivende',
+                            undertekst: null,
+                            svartype: 'CHECKBOX',
+                            min: null,
+                            max: null,
+                            pavirkerAndreSporsmal: false,
+                            kriterieForVisningAvUndersporsmal: 'CHECKED',
+                            svar: [],
+                            undersporsmal: [
+                                {
+                                    id: '687407',
+                                    tag: 'INNTEKTSKILDE_SELVSTENDIG_ER_DU_SYKMELDT',
+                                    sporsmalstekst: 'Er du sykmeldt fra dette?',
+                                    undertekst: null,
+                                    svartype: 'JA_NEI',
+                                    min: null,
+                                    max: null,
+                                    pavirkerAndreSporsmal: false,
+                                    kriterieForVisningAvUndersporsmal: null,
+                                    svar: [],
+                                    undersporsmal: [],
+                                },
+                            ],
+                        },
+                        {
+                            id: '687408',
+                            tag: 'INNTEKTSKILDE_SELVSTENDIG_DAGMAMMA',
+                            sporsmalstekst: 'dagmamma',
+                            undertekst: null,
+                            svartype: 'CHECKBOX',
+                            min: null,
+                            max: null,
+                            pavirkerAndreSporsmal: false,
+                            kriterieForVisningAvUndersporsmal: 'CHECKED',
+                            svar: [],
+                            undersporsmal: [
+                                {
+                                    id: '687409',
+                                    tag: 'INNTEKTSKILDE_SELVSTENDIG_DAGMAMMA_ER_DU_SYKMELDT',
+                                    sporsmalstekst: 'Er du sykmeldt fra dette?',
+                                    undertekst: null,
+                                    svartype: 'JA_NEI',
+                                    min: null,
+                                    max: null,
+                                    pavirkerAndreSporsmal: false,
+                                    kriterieForVisningAvUndersporsmal: null,
+                                    svar: [],
+                                    undersporsmal: [],
+                                },
+                            ],
+                        },
+                        {
+                            id: '687410',
                             tag: 'INNTEKTSKILDE_JORDBRUKER',
                             sporsmalstekst: 'jordbruk / fiske / reindrift',
                             undertekst: null,
@@ -255,7 +188,7 @@ export const naringsdrivendeSoknad: RSSoknad = {
                             svar: [],
                             undersporsmal: [
                                 {
-                                    id: '687443',
+                                    id: '687411',
                                     tag: 'INNTEKTSKILDE_JORDBRUKER_ER_DU_SYKMELDT',
                                     sporsmalstekst: 'Er du sykmeldt fra dette?',
                                     undertekst: null,
@@ -270,8 +203,8 @@ export const naringsdrivendeSoknad: RSSoknad = {
                             ],
                         },
                         {
-                            id: '687444',
-                            tag: 'INNTEKTSKILDE_FRILANSER_SELVSTENDIG',
+                            id: '687412',
+                            tag: 'INNTEKTSKILDE_FRILANSER',
                             sporsmalstekst: 'frilanser',
                             undertekst: null,
                             svartype: 'CHECKBOX',
@@ -282,8 +215,8 @@ export const naringsdrivendeSoknad: RSSoknad = {
                             svar: [],
                             undersporsmal: [
                                 {
-                                    id: '687445',
-                                    tag: 'INNTEKTSKILDE_FRILANSER_SELVSTENDIG_ER_DU_SYKMELDT',
+                                    id: '687413',
+                                    tag: 'INNTEKTSKILDE_FRILANSER_ER_DU_SYKMELDT',
                                     sporsmalstekst: 'Er du sykmeldt fra dette?',
                                     undertekst: null,
                                     svartype: 'JA_NEI',
@@ -297,7 +230,61 @@ export const naringsdrivendeSoknad: RSSoknad = {
                             ],
                         },
                         {
-                            id: '687446',
+                            id: '687414',
+                            tag: 'INNTEKTSKILDE_OMSORGSLONN',
+                            sporsmalstekst: 'kommunal omsorgstønad',
+                            undertekst: null,
+                            svartype: 'CHECKBOX',
+                            min: null,
+                            max: null,
+                            pavirkerAndreSporsmal: false,
+                            kriterieForVisningAvUndersporsmal: 'CHECKED',
+                            svar: [],
+                            undersporsmal: [
+                                {
+                                    id: '687415',
+                                    tag: 'INNTEKTSKILDE_OMSORGSLONN_ER_DU_SYKMELDT',
+                                    sporsmalstekst: 'Er du sykmeldt fra dette?',
+                                    undertekst: null,
+                                    svartype: 'JA_NEI',
+                                    min: null,
+                                    max: null,
+                                    pavirkerAndreSporsmal: false,
+                                    kriterieForVisningAvUndersporsmal: null,
+                                    svar: [],
+                                    undersporsmal: [],
+                                },
+                            ],
+                        },
+                        {
+                            id: '687416',
+                            tag: 'INNTEKTSKILDE_FOSTERHJEM',
+                            sporsmalstekst: 'fosterhjemgodtgjørelse',
+                            undertekst: null,
+                            svartype: 'CHECKBOX',
+                            min: null,
+                            max: null,
+                            pavirkerAndreSporsmal: false,
+                            kriterieForVisningAvUndersporsmal: 'CHECKED',
+                            svar: [],
+                            undersporsmal: [
+                                {
+                                    id: '687417',
+                                    tag: 'INNTEKTSKILDE_FOSTERHJEM_ER_DU_SYKMELDT',
+                                    sporsmalstekst: 'Er du sykmeldt fra dette?',
+                                    undertekst: null,
+                                    svartype: 'JA_NEI',
+                                    min: null,
+                                    max: null,
+                                    pavirkerAndreSporsmal: false,
+                                    kriterieForVisningAvUndersporsmal: null,
+                                    svar: [],
+                                    undersporsmal: [],
+                                },
+                            ],
+                        },
+                        {
+                            id: '687418',
                             tag: 'INNTEKTSKILDE_ANNET',
                             sporsmalstekst: 'annet',
                             undertekst: null,
@@ -313,10 +300,11 @@ export const naringsdrivendeSoknad: RSSoknad = {
                 },
             ],
         },
+
         {
-            id: '687447',
-            tag: 'UTLAND',
-            sporsmalstekst: 'Har du vært utenfor EØS mens du var sykmeldt 1. - 24. april 2020?',
+            id: '687422',
+            tag: 'ARBEIDSLEDIG_UTLAND',
+            sporsmalstekst: 'Var du på reise utenfor EØS mens du var sykmeldt 1. - 24. april 2020?',
             undertekst: null,
             svartype: 'JA_NEI',
             min: null,
@@ -326,8 +314,8 @@ export const naringsdrivendeSoknad: RSSoknad = {
             svar: [],
             undersporsmal: [
                 {
-                    id: '687448',
-                    tag: 'PERIODER',
+                    id: '687423',
+                    tag: 'UTLAND_NAR',
                     sporsmalstekst: 'Når var du utenfor EØS?',
                     undertekst: null,
                     svartype: 'PERIODER',
@@ -339,7 +327,7 @@ export const naringsdrivendeSoknad: RSSoknad = {
                     undersporsmal: [],
                 },
                 {
-                    id: '687449',
+                    id: '687424',
                     tag: 'UTLANDSOPPHOLD_SOKT_SYKEPENGER',
                     sporsmalstekst: 'Har du søkt om å beholde sykepengene for disse dagene?',
                     undertekst: null,
@@ -353,28 +341,10 @@ export const naringsdrivendeSoknad: RSSoknad = {
                 },
             ],
         },
-        {
-            id: '687451',
-            tag: 'ARBEID_UTENFOR_NORGE',
-            sporsmalstekst: 'Har du arbeidet i utlandet i løpet av de siste 12 månedene?',
-            undertekst: null,
-            svartype: 'JA_NEI',
-            min: null,
-            max: null,
-            pavirkerAndreSporsmal: false,
-            kriterieForVisningAvUndersporsmal: null,
-            svar: [],
-            undersporsmal: [],
-        },
         værKlarOverAt(),
         bekreftOpplysninger(),
     ],
     egenmeldtSykmelding: false,
     opprettetAvInntektsmelding: false,
     klippet: false,
-}
-
-export const selvstendigNaringsdrivende: Persona = {
-    soknader: [naringsdrivendeSoknad],
-    sykmeldinger: [naringsdrivende100syk],
 }

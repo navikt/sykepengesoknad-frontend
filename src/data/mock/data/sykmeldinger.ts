@@ -1,6 +1,7 @@
 import { Sykmelding } from '../../../types/sykmelding'
+import { jsonDeepCopy } from '../../../utils/json-deep-copy'
 
-import { brukertestSykmelding } from './brukertest'
+import { brukertestSykmelding } from './personas/brukertest'
 
 export const arbeidstaker100Syk = new Sykmelding({
     id: '61e04c94-a4be-45f5-8dbd-5c0b7a8707ea',
@@ -560,6 +561,10 @@ export const frilanser100Syk = new Sykmelding({
     harRedusertArbeidsgiverperiode: false,
     merknader: null,
 })
+export const naringsdrivende100syk = jsonDeepCopy(frilanser100Syk)
+naringsdrivende100syk.id = 'a8e40578-682b-4a04-bfda-b7768af2ae99'
+naringsdrivende100syk.sykmeldingStatus.sporsmalOgSvarListe.find((a) => a.shortName == 'ARBEIDSSITUASJON')!.svar.svar =
+    'NAERINGSDRIVENDE'
 export const arbeidstakerBehandlingsdagSyk = new Sykmelding({
     id: '9acc8456-ef38-45a3-a3b7-efb4dac24f93',
     mottattTidspunkt: '2020-04-01T20:00:00Z',

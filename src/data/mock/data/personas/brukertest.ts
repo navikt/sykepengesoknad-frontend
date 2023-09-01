@@ -1,38 +1,191 @@
-import { RSSoknad } from '../../../types/rs-types/rs-soknad'
-import { Persona } from '../personas'
+import dayjs from 'dayjs'
 
-import { brukertestSykmelding } from './brukertest'
-import { værKlarOverAt } from './sporsmal/vaer-klar-over-at'
-import { bekreftOpplysninger } from './sporsmal/bekreft-opplysninger'
+import { RSSoknad } from '../../../../types/rs-types/rs-soknad'
+import { Sykmelding } from '../../../../types/sykmelding'
+import { tilLesbarPeriodeMedArstall } from '../../../../utils/dato-utils'
+import { værKlarOverAt } from '../sporsmal/vaer-klar-over-at'
+import { bekreftOpplysninger } from '../sporsmal/bekreft-opplysninger'
 
-export const nyArbeidUnderveisSoknad: RSSoknad = {
-    id: 'de3214f3-ed55-3fdc-beb8-d3418f3b682c',
-    sykmeldingId: brukertestSykmelding.id,
+import { Persona } from './personas'
+
+const url = typeof window === 'undefined' ? new URL('http://test') : new URL(window.location.href)
+
+const hovedjobb = url.searchParams.get('hovedjobb') ?? 'MATBUTIKKEN AS'
+const fom = url.searchParams.get('fom') ?? '2022-09-08'
+const tom = url.searchParams.get('tom') ?? '2022-09-21'
+
+const periodeTekst = tilLesbarPeriodeMedArstall(dayjs(fom), dayjs(tom))
+export const brukertestSykmelding = new Sykmelding({
+    id: 'abc5acf2-a44f-42e5-87b2-02c9d0b39ce8',
+    pasient: {
+        fnr: '08089404496',
+        fornavn: 'TYKKMAGET',
+        mellomnavn: null,
+        etternavn: 'BOLLE',
+    },
+    mottattTidspunkt: fom + 'T22:00:00Z',
+    behandlingsutfall: { status: 'MANUAL_PROCESSING', ruleHits: [] },
+    legekontorOrgnummer: '223456789',
+    arbeidsgiver: { navn: hovedjobb, stillingsprosent: 100 },
+    sykmeldingsperioder: [
+        {
+            fom: fom,
+            tom: tom,
+            gradert: null,
+            behandlingsdager: null,
+            innspillTilArbeidsgiver: null,
+            type: 'AKTIVITET_IKKE_MULIG',
+            aktivitetIkkeMulig: {
+                medisinskArsak: {
+                    beskrivelse: 'andre årsaker til sykefravær',
+                    arsak: ['AKTIVITET_FORHINDRER_BEDRING'],
+                },
+                arbeidsrelatertArsak: {
+                    beskrivelse: 'andre årsaker til sykefravær',
+                    arsak: ['ANNET'],
+                },
+            },
+            reisetilskudd: false,
+        },
+    ],
+    sykmeldingStatus: {
+        statusEvent: 'SENDT',
+        timestamp: fom + 'T15:45:33.551189Z',
+        arbeidsgiver: {
+            orgnummer: '967170232',
+            juridiskOrgnummer: '928497704',
+            orgNavn: `${hovedjobb}`,
+        },
+        sporsmalOgSvarListe: [
+            {
+                tekst: 'Jeg er sykmeldt som',
+                shortName: 'ARBEIDSSITUASJON',
+                svar: { svarType: 'ARBEIDSSITUASJON', svar: 'ARBEIDSTAKER' },
+            },
+        ],
+    },
+    medisinskVurdering: {
+        hovedDiagnose: {
+            kode: 'L87',
+            system: 'ICPC-2',
+            tekst: 'TENDINITT INA',
+        },
+        biDiagnoser: [{ kode: 'L87', system: 'ICPC-2', tekst: 'GANGLION SENE' }],
+        annenFraversArsak: null,
+        svangerskap: false,
+        yrkesskade: false,
+        yrkesskadeDato: fom,
+    },
+    skjermesForPasient: false,
+    prognose: {
+        arbeidsforEtterPeriode: true,
+        hensynArbeidsplassen: 'Må ta det pent',
+        erIArbeid: {
+            egetArbeidPaSikt: true,
+            annetArbeidPaSikt: true,
+            arbeidFOM: fom,
+            vurderingsdato: fom,
+        },
+        erIkkeIArbeid: null,
+    },
+    tiltakArbeidsplassen: 'Fortsett som sist.',
+    tiltakNAV:
+        'Pasienten har plager som er kommet tilbake etter operasjon. Det er nylig tatt MR bildet som viser forandringer i hånd som mulig må opereres. Venter på time. Det er mulig sykemledingen vil vare utover aktuell sm periode. ',
+    andreTiltak: null,
+    meldingTilNAV: null,
+    meldingTilArbeidsgiver: null,
+    kontaktMedPasient: { kontaktDato: null, begrunnelseIkkeKontakt: null },
+    behandletTidspunkt: fom + 'T00:00:00Z',
+    behandler: {
+        fornavn: 'Frida',
+        mellomnavn: 'Perma',
+        etternavn: 'Frost',
+        adresse: {
+            gate: 'Kirkegårdsveien 3',
+            postnummer: 1348,
+            kommune: 'Rykkinn',
+            postboks: null,
+            land: 'Country',
+        },
+        tlf: 'tel:94431152',
+    },
+    syketilfelleStartDato: fom,
+    navnFastlege: 'Victor Frankenstein',
+    egenmeldt: false,
+    papirsykmelding: false,
+    harRedusertArbeidsgiverperiode: false,
+    merknader: null,
+    utdypendeOpplysninger: {
+        '6.2': {
+            '6.2.1': {
+                sporsmal: 'Beskriv kort sykehistorie, symptomer og funn i dagens situasjon.',
+                svar: 'Langvarig korsryggsmerter. Ømhet og smerte',
+                restriksjoner: ['SKJERMET_FOR_ARBEIDSGIVER'],
+            },
+            '6.2.2': {
+                sporsmal: 'Hvordan påvirker sykdommen arbeidsevnen',
+                svar: 'Kan ikke utføre arbeidsoppgaver 100% som kreves fra yrket. Duplikatbuster: d79c75bb-af99-4357-8b7d-b0d5cbfd8f1b',
+                restriksjoner: ['SKJERMET_FOR_ARBEIDSGIVER'],
+            },
+            '6.2.3': {
+                sporsmal: 'Har behandlingen frem til nå bedret arbeidsevnen?',
+                svar: 'Nei',
+                restriksjoner: ['SKJERMET_FOR_ARBEIDSGIVER'],
+            },
+            '6.2.4': {
+                sporsmal: 'Beskriv Pågående og planlagt henvisning, utredning og/eller behandling',
+                svar: 'Henvist til fysio',
+                restriksjoner: ['SKJERMET_FOR_ARBEIDSGIVER'],
+            },
+        },
+    },
+})
+
+export const brukertestSoknad: RSSoknad = {
+    id: '963e816f-7b3c-4513-818b-95595d84dd91',
+    sykmeldingId: 'abc5acf2-a44f-42e5-87b2-02c9d0b39ce8',
     soknadstype: 'ARBEIDSTAKERE',
     status: 'NY',
-    fom: '2021-08-12',
-    tom: '2021-08-29',
-    opprettetDato: '2022-12-13',
+    inntektskilderDataFraInntektskomponenten: [
+        {
+            navn: 'Ruter',
+            orgnummer: '222',
+            arbeidsforholdstype: 'ARBEIDSTAKER',
+        },
+        {
+            navn: 'Kebabsjappa',
+            orgnummer: '111',
+            arbeidsforholdstype: 'ARBEIDSTAKER',
+        },
+        {
+            navn: 'Bensinstasjonen',
+            orgnummer: '333',
+            arbeidsforholdstype: 'ARBEIDSTAKER',
+        },
+    ],
+    fom: fom,
+    tom: tom,
+    opprettetDato: '2022-11-17',
     sendtTilNAVDato: null,
     sendtTilArbeidsgiverDato: null,
     avbruttDato: null,
-    startSykeforlop: '2021-08-12',
-    sykmeldingUtskrevet: '2022-12-13',
-    arbeidsgiver: { navn: 'Butikken', orgnummer: '123454543' },
+    startSykeforlop: fom,
+    sykmeldingUtskrevet: fom,
+    arbeidsgiver: { navn: `${hovedjobb}`, orgnummer: '967170232' },
     korrigerer: null,
     korrigertAv: null,
     arbeidssituasjon: 'ARBEIDSTAKER',
     soknadPerioder: [
         {
-            fom: '2021-08-12',
-            tom: '2021-08-29',
+            fom: fom,
+            tom: tom,
             grad: 100,
             sykmeldingstype: 'AKTIVITET_IKKE_MULIG',
         },
     ],
     sporsmal: [
         {
-            id: 'c52d3cbd-c3dc-36ef-ba57-068a8b5d6c99',
+            id: '1623807',
             tag: 'ANSVARSERKLARING',
             sporsmalstekst:
                 'Jeg vet at jeg kan miste retten til sykepenger hvis opplysningene jeg gir ikke er riktige eller fullstendige. Jeg vet også at NAV kan holde igjen eller kreve tilbake penger, og at å gi feil opplysninger kan være straffbart.',
@@ -46,54 +199,26 @@ export const nyArbeidUnderveisSoknad: RSSoknad = {
             undersporsmal: [],
         },
         {
-            id: 'cd34faf4-6dfa-306c-8df6-9ba1b8a4df7e',
-            tag: 'FRAVAR_FOR_SYKMELDINGEN',
-            sporsmalstekst: 'Var du syk og borte fra jobb før du ble sykmeldt, i perioden 27. juli - 11. august 2021?',
-            undertekst: null,
-            svartype: 'JA_NEI',
-            min: null,
-            max: null,
-            pavirkerAndreSporsmal: false,
-            kriterieForVisningAvUndersporsmal: 'JA',
-            svar: [],
-            undersporsmal: [
-                {
-                    id: 'ef52ead7-810c-3448-8584-873cdc8115fc',
-                    tag: 'FRAVAR_FOR_SYKMELDINGEN_NAR',
-                    sporsmalstekst:
-                        'Hvilke dager var du syk og borte fra jobb, før du ble sykmeldt? Du trenger bare oppgi dager før 12. august 2021.',
-                    undertekst: null,
-                    svartype: 'PERIODER',
-                    min: '2021-02-12',
-                    max: '2021-08-11',
-                    pavirkerAndreSporsmal: false,
-                    kriterieForVisningAvUndersporsmal: null,
-                    svar: [],
-                    undersporsmal: [],
-                },
-            ],
-        },
-        {
-            id: 'dc9b4b0e-3d5e-3509-ae83-bff3571a8638',
+            id: '1623808',
             tag: 'TILBAKE_I_ARBEID',
-            sporsmalstekst: 'Var du tilbake i fullt arbeid hos Butikken i løpet av perioden 12. - 29. august 2021?',
+            sporsmalstekst: `Var du tilbake i fullt arbeid hos ${hovedjobb} i løpet av perioden ${periodeTekst}?`,
             undertekst: null,
             svartype: 'JA_NEI',
             min: null,
             max: null,
-            pavirkerAndreSporsmal: false,
+            pavirkerAndreSporsmal: true,
             kriterieForVisningAvUndersporsmal: 'JA',
             svar: [],
             undersporsmal: [
                 {
-                    id: '4447bb19-b297-32d2-99b2-36164ca4575b',
+                    id: '1623809',
                     tag: 'TILBAKE_NAR',
                     sporsmalstekst: 'Når begynte du å jobbe igjen?',
                     undertekst: null,
                     svartype: 'DATO',
-                    min: '2021-08-12',
-                    max: '2021-08-29',
-                    pavirkerAndreSporsmal: false,
+                    min: fom,
+                    max: tom,
+                    pavirkerAndreSporsmal: true,
                     kriterieForVisningAvUndersporsmal: null,
                     svar: [],
                     undersporsmal: [],
@@ -101,9 +226,9 @@ export const nyArbeidUnderveisSoknad: RSSoknad = {
             ],
         },
         {
-            id: '36d8c3c0-ff4b-3fc8-bc1d-13e9642bce17',
+            id: '1623810',
             tag: 'FERIE_V2',
-            sporsmalstekst: 'Tok du ut feriedager i tidsrommet 12. - 29. august 2021?',
+            sporsmalstekst: `Tok du ut feriedager i tidsrommet ${periodeTekst}?`,
             undertekst: null,
             svartype: 'JA_NEI',
             min: null,
@@ -113,13 +238,13 @@ export const nyArbeidUnderveisSoknad: RSSoknad = {
             svar: [],
             undersporsmal: [
                 {
-                    id: '00aca026-b7ae-3711-8759-bb2620d95120',
+                    id: '1623811',
                     tag: 'FERIE_NAR_V2',
                     sporsmalstekst: 'Når tok du ut feriedager?',
                     undertekst: null,
                     svartype: 'PERIODER',
-                    min: '2021-08-12',
-                    max: '2021-08-29',
+                    min: fom,
+                    max: tom,
                     pavirkerAndreSporsmal: false,
                     kriterieForVisningAvUndersporsmal: null,
                     svar: [],
@@ -128,9 +253,9 @@ export const nyArbeidUnderveisSoknad: RSSoknad = {
             ],
         },
         {
-            id: '5d7a5bc7-e990-34d5-b89c-9b8731ab4c5b',
+            id: '1623812',
             tag: 'PERMISJON_V2',
-            sporsmalstekst: 'Tok du permisjon mens du var sykmeldt 12. - 29. august 2021?',
+            sporsmalstekst: `Tok du permisjon mens du var sykmeldt ${periodeTekst}?`,
             undertekst: null,
             svartype: 'JA_NEI',
             min: null,
@@ -140,13 +265,13 @@ export const nyArbeidUnderveisSoknad: RSSoknad = {
             svar: [],
             undersporsmal: [
                 {
-                    id: 'f5e824ad-afca-3a50-a0d3-5b86a49dd9d6',
+                    id: '1623813',
                     tag: 'PERMISJON_NAR_V2',
                     sporsmalstekst: 'Når tok du permisjon?',
                     undertekst: null,
                     svartype: 'PERIODER',
-                    min: '2021-08-12',
-                    max: '2021-08-29',
+                    min: fom,
+                    max: tom,
                     pavirkerAndreSporsmal: false,
                     kriterieForVisningAvUndersporsmal: null,
                     svar: [],
@@ -155,9 +280,9 @@ export const nyArbeidUnderveisSoknad: RSSoknad = {
             ],
         },
         {
-            id: 'f33fafca-4bc5-3f8c-a32d-854ee1f2befa',
+            id: '1623814',
             tag: 'UTLAND_V2',
-            sporsmalstekst: 'Var du på reise utenfor EØS mens du var sykmeldt 12. - 29. august 2021?',
+            sporsmalstekst: `Var du på reise utenfor EØS mens du var sykmeldt ${periodeTekst}?`,
             undertekst: null,
             svartype: 'JA_NEI',
             min: null,
@@ -167,13 +292,13 @@ export const nyArbeidUnderveisSoknad: RSSoknad = {
             svar: [],
             undersporsmal: [
                 {
-                    id: '5959f72f-102c-356f-883d-deab08864136',
+                    id: '1623815',
                     tag: 'UTLAND_NAR_V2',
                     sporsmalstekst: 'Når var du utenfor EØS?',
                     undertekst: null,
                     svartype: 'PERIODER',
-                    min: '2021-08-12',
-                    max: '2021-08-29',
+                    min: fom,
+                    max: tom,
                     pavirkerAndreSporsmal: false,
                     kriterieForVisningAvUndersporsmal: null,
                     svar: [],
@@ -182,10 +307,9 @@ export const nyArbeidUnderveisSoknad: RSSoknad = {
             ],
         },
         {
-            id: 'f085f79a-ced7-36b0-9259-0806aa57da5f',
+            id: '63448066-fa24-3d9b-bf38-fb2ea23a353f',
             tag: 'ARBEID_UNDERVEIS_100_PROSENT_0',
-            sporsmalstekst:
-                'I perioden 12. - 29. august 2021 var du 100 % sykmeldt fra Butikken. Jobbet du noe hos Butikken i denne perioden?',
+            sporsmalstekst: `I perioden ${periodeTekst} var du 100 % sykmeldt fra ${hovedjobb}. Jobbet du noe hos ${hovedjobb} i denne perioden?`,
             undertekst: null,
             svartype: 'JA_NEI',
             min: null,
@@ -195,7 +319,7 @@ export const nyArbeidUnderveisSoknad: RSSoknad = {
             svar: [],
             undersporsmal: [
                 {
-                    id: '15b9f776-b61b-3187-9087-4b5be9ac0ac0',
+                    id: '9f5b48c7-f461-359d-a27c-a0ad42ab6c22',
                     tag: 'HVOR_MYE_HAR_DU_JOBBET_0',
                     sporsmalstekst: 'Oppgi arbeidsmengde i timer eller prosent:',
                     undertekst: null,
@@ -207,39 +331,7 @@ export const nyArbeidUnderveisSoknad: RSSoknad = {
                     svar: [],
                     undersporsmal: [
                         {
-                            id: '07e8f791-8d86-363f-bfca-b85b743e5f66',
-                            tag: 'HVOR_MYE_TIMER_0',
-                            sporsmalstekst: 'Timer',
-                            undertekst: null,
-                            svartype: 'RADIO',
-                            min: null,
-                            max: null,
-                            pavirkerAndreSporsmal: false,
-                            kriterieForVisningAvUndersporsmal: 'CHECKED',
-                            svar: [
-                                {
-                                    verdi: 'CHECKED',
-                                },
-                            ],
-                            undersporsmal: [
-                                {
-                                    id: '5d8e54ed-85af-3481-b7b9-435138d3441a',
-                                    tag: 'HVOR_MYE_TIMER_VERDI_0',
-                                    sporsmalstekst:
-                                        'Oppgi totalt antall timer du jobbet hos Butikken i perioden 12. - 29. august 2021',
-                                    undertekst: 'Oppgi i timer. Eksempel: 12',
-                                    svartype: 'TIMER',
-                                    min: '1',
-                                    max: '386',
-                                    pavirkerAndreSporsmal: false,
-                                    kriterieForVisningAvUndersporsmal: null,
-                                    svar: [],
-                                    undersporsmal: [],
-                                },
-                            ],
-                        },
-                        {
-                            id: 'eb033fe0-5a52-3a36-8bbc-5e0e9a795202',
+                            id: '8ba29062-f412-30ad-8851-33577d8034ab',
                             tag: 'HVOR_MYE_PROSENT_0',
                             sporsmalstekst: 'Prosent',
                             undertekst: null,
@@ -251,10 +343,9 @@ export const nyArbeidUnderveisSoknad: RSSoknad = {
                             svar: [],
                             undersporsmal: [
                                 {
-                                    id: 'a16a854c-c822-3526-8654-159dc2eb6fb0',
+                                    id: '796cf7ed-8a7e-39de-9cbc-6e789aa5af3f',
                                     tag: 'HVOR_MYE_PROSENT_VERDI_0',
-                                    sporsmalstekst:
-                                        'Oppgi hvor mange prosent av din normale arbeidstid du jobbet hos Butikken i perioden 12. - 29. august. 2021',
+                                    sporsmalstekst: `Oppgi hvor mange prosent av din normale arbeidstid du jobbet hos ${hovedjobb} i perioden ${periodeTekst}?`,
                                     undertekst: 'Oppgi i prosent. Eksempel: 40',
                                     svartype: 'PROSENT',
                                     min: '1',
@@ -266,12 +357,39 @@ export const nyArbeidUnderveisSoknad: RSSoknad = {
                                 },
                             ],
                         },
+                        {
+                            id: '27d3d9f1-d31f-3c0e-a1ec-3246c3b48b0a',
+                            tag: 'HVOR_MYE_TIMER_0',
+                            sporsmalstekst: 'Timer',
+                            undertekst: null,
+                            svartype: 'RADIO',
+                            min: null,
+                            max: null,
+                            pavirkerAndreSporsmal: false,
+                            kriterieForVisningAvUndersporsmal: 'CHECKED',
+                            svar: [],
+                            undersporsmal: [
+                                {
+                                    id: '6cc620d8-d4b0-3e82-a038-2757df6fc311',
+                                    tag: 'HVOR_MYE_TIMER_VERDI_0',
+                                    sporsmalstekst: `Oppgi totalt antall timer du jobbet i perioden ${periodeTekst} hos ${hovedjobb}`,
+                                    undertekst: 'Oppgi i timer. Eksempel: 12',
+                                    svartype: 'TIMER',
+                                    min: '1',
+                                    max: '364',
+                                    pavirkerAndreSporsmal: false,
+                                    kriterieForVisningAvUndersporsmal: null,
+                                    svar: [],
+                                    undersporsmal: [],
+                                },
+                            ],
+                        },
                     ],
                 },
                 {
-                    id: 'b0cae879-89ec-316c-8560-ebeaedf11755',
+                    id: 'af302d17-f35d-38a6-ac23-ccde5db369cb',
                     tag: 'JOBBER_DU_NORMAL_ARBEIDSUKE_0',
-                    sporsmalstekst: 'Jobber du vanligvis 37,5 timer i uka hos Butikken?',
+                    sporsmalstekst: `Jobber du vanligvis 37,5 timer i uka hos ${hovedjobb}?`,
                     undertekst: null,
                     svartype: 'JA_NEI',
                     min: null,
@@ -281,9 +399,9 @@ export const nyArbeidUnderveisSoknad: RSSoknad = {
                     svar: [],
                     undersporsmal: [
                         {
-                            id: '67e95c02-f1b9-3033-88ef-0805ffe239b5',
+                            id: 'ecc14b80-402a-32e6-9f93-e832ff0560d6',
                             tag: 'HVOR_MANGE_TIMER_PER_UKE_0',
-                            sporsmalstekst: null,
+                            sporsmalstekst: 'Oppgi timer per uke',
                             undertekst: null,
                             svartype: 'TIMER',
                             min: '1',
@@ -298,7 +416,7 @@ export const nyArbeidUnderveisSoknad: RSSoknad = {
             ],
         },
         {
-            id: '933fb673-ea34-3a96-914f-cdb866c37458',
+            id: '1623836',
             tag: 'ARBEID_UTENFOR_NORGE',
             sporsmalstekst: 'Har du arbeidet i utlandet i løpet av de siste 12 månedene?',
             undertekst: null,
@@ -311,9 +429,9 @@ export const nyArbeidUnderveisSoknad: RSSoknad = {
             undersporsmal: [],
         },
         {
-            id: '7e27e45e-e2ff-30ba-96df-03c595a62d2e',
+            id: 'ed62a3b3-4203-3b61-a684-2300bea2ffac',
             tag: 'ANDRE_INNTEKTSKILDER_V2',
-            sporsmalstekst: 'Har du andre inntektskilder enn Butikken?',
+            sporsmalstekst: `Har du andre inntektskilder enn ${hovedjobb}?`,
             undertekst: null,
             svartype: 'JA_NEI',
             min: null,
@@ -323,7 +441,7 @@ export const nyArbeidUnderveisSoknad: RSSoknad = {
             svar: [],
             undersporsmal: [
                 {
-                    id: '38c1e24d-5605-3b79-97db-910860166db7',
+                    id: 'd25b338d-9a9a-379f-b474-517738a9523b',
                     tag: 'HVILKE_ANDRE_INNTEKTSKILDER',
                     sporsmalstekst:
                         'Velg inntektskildene som passer for deg. Finner du ikke noe som passer for deg, svarer du nei',
@@ -336,7 +454,7 @@ export const nyArbeidUnderveisSoknad: RSSoknad = {
                     svar: [],
                     undersporsmal: [
                         {
-                            id: '4a422374-4912-37ce-888f-fdfa28471a17',
+                            id: 'd9ac4359-5519-34f1-b59d-b5ab24e55821',
                             tag: 'INNTEKTSKILDE_ANDRE_ARBEIDSFORHOLD',
                             sporsmalstekst: 'ansatt et annet sted enn nevnt over',
                             undertekst: null,
@@ -349,7 +467,7 @@ export const nyArbeidUnderveisSoknad: RSSoknad = {
                             undersporsmal: [],
                         },
                         {
-                            id: '51b83876-1f5d-38b5-a58a-be919261d571',
+                            id: '989711be-5362-3f24-a02a-f1b3e3c31f99',
                             tag: 'INNTEKTSKILDE_SELVSTENDIG',
                             sporsmalstekst: 'selvstendig næringsdrivende',
                             undertekst: null,
@@ -362,7 +480,7 @@ export const nyArbeidUnderveisSoknad: RSSoknad = {
                             undersporsmal: [],
                         },
                         {
-                            id: 'd0a670e1-4428-324d-9638-ddaecea2a1b1',
+                            id: '3e710b2b-1e91-3d62-8d5d-55cb5eef120f',
                             tag: 'INNTEKTSKILDE_SELVSTENDIG_DAGMAMMA',
                             sporsmalstekst: 'dagmamma',
                             undertekst: null,
@@ -375,7 +493,7 @@ export const nyArbeidUnderveisSoknad: RSSoknad = {
                             undersporsmal: [],
                         },
                         {
-                            id: '0d5e7aa4-a12d-3bf6-a567-75bdb3135526',
+                            id: 'c1a746d9-bd9f-396a-99b9-18feece3b9cc',
                             tag: 'INNTEKTSKILDE_JORDBRUKER',
                             sporsmalstekst: 'jordbruk / fiske / reindrift',
                             undertekst: null,
@@ -388,7 +506,7 @@ export const nyArbeidUnderveisSoknad: RSSoknad = {
                             undersporsmal: [],
                         },
                         {
-                            id: '7f29e80c-6446-3d20-9eaf-a8506b051bcd',
+                            id: 'ab377350-e3fe-3e46-8eb7-d3bb38d6506d',
                             tag: 'INNTEKTSKILDE_FRILANSER',
                             sporsmalstekst: 'frilanser',
                             undertekst: null,
@@ -401,7 +519,7 @@ export const nyArbeidUnderveisSoknad: RSSoknad = {
                             undersporsmal: [],
                         },
                         {
-                            id: 'fed7904d-ecca-338b-9fbc-2edfa5298457',
+                            id: '7b4d4adc-de4f-38fd-a997-e5337fbb9555',
                             tag: 'INNTEKTSKILDE_OMSORGSLONN',
                             sporsmalstekst: 'kommunal omsorgstønad',
                             undertekst: null,
@@ -414,7 +532,7 @@ export const nyArbeidUnderveisSoknad: RSSoknad = {
                             undersporsmal: [],
                         },
                         {
-                            id: '13e89e46-864c-38fb-85e9-e4b04a14decc',
+                            id: '7b4d4adc-de4f-38fd-a997-e5337fbb9a5c',
                             tag: 'INNTEKTSKILDE_FOSTERHJEM',
                             sporsmalstekst: 'fosterhjemsgodtgjørelse',
                             undertekst: null,
@@ -427,7 +545,7 @@ export const nyArbeidUnderveisSoknad: RSSoknad = {
                             undersporsmal: [],
                         },
                         {
-                            id: 'd0302edf-a487-316c-bb07-ae75301c52a5',
+                            id: 'bb9418bf-8b6a-3472-9ae6-ecd464e86b7a',
                             tag: 'INNTEKTSKILDE_STYREVERV',
                             sporsmalstekst: 'styreverv',
                             undertekst: null,
@@ -443,18 +561,17 @@ export const nyArbeidUnderveisSoknad: RSSoknad = {
                 },
             ],
         },
-
         værKlarOverAt(),
         bekreftOpplysninger(),
     ],
     egenmeldtSykmelding: false,
-    merknaderFraSykmelding: [],
     opprettetAvInntektsmelding: false,
     klippet: false,
 }
 
-export const nyttArbeidUnderveisPerson: Persona = {
-    soknader: [nyArbeidUnderveisSoknad],
+export const brukertest: Persona = {
+    soknader: [brukertestSoknad],
     sykmeldinger: [brukertestSykmelding],
     kontonummer: '12340000000',
+    beskrivelse: 'Brukertest',
 }

@@ -1,18 +1,21 @@
-import { RSSoknad } from '../../../types/rs-types/rs-soknad'
-import { jsonDeepCopy } from '../../../utils/json-deep-copy'
-import { Persona } from '../personas'
-import { deepcopyMedNyId } from '../deepcopyMedNyId'
+import { RSSoknad } from '../../../../types/rs-types/rs-soknad'
+import { deepcopyMedNyId } from '../../deepcopyMedNyId'
+import { sykmeldinger } from '../sykmeldinger'
+import { kortArbeidstakerSoknad } from '../soknad/arbeidstaker-kort'
 
-import { kortArbeidstakerSoknad } from './kort-soknad'
-import { sykmeldinger } from './sykmeldinger'
+import { Persona } from './personas'
 
-export const nySoknadSomIkkeKanFyllesUt: RSSoknad = jsonDeepCopy(kortArbeidstakerSoknad)
-nySoknadSomIkkeKanFyllesUt.id = 'e6e53c43-3b64-48be-b9d1-39d95198e521'
+const nySoknadSomIkkeKanFyllesUt: RSSoknad = deepcopyMedNyId(
+    kortArbeidstakerSoknad,
+    'e6e53c43-3b64-48be-b9d1-39d95198e521',
+)
 nySoknadSomIkkeKanFyllesUt.fom = '2022-04-25'
 nySoknadSomIkkeKanFyllesUt.tom = '2022-04-30'
 
-export const endaEnNySoknadSomIkkeKanFyllesUt: RSSoknad = jsonDeepCopy(kortArbeidstakerSoknad)
-endaEnNySoknadSomIkkeKanFyllesUt.id = 'e6e53c43-3b64-48be-b9d1-39d95198e522'
+const endaEnNySoknadSomIkkeKanFyllesUt: RSSoknad = deepcopyMedNyId(
+    kortArbeidstakerSoknad,
+    'e6e53c43-3b64-48be-b9d1-39d95198e522',
+)
 endaEnNySoknadSomIkkeKanFyllesUt.fom = '2022-04-23'
 endaEnNySoknadSomIkkeKanFyllesUt.tom = '2022-04-30'
 
@@ -23,6 +26,7 @@ export const flereEldreUsendteSoknader: Persona = {
         endaEnNySoknadSomIkkeKanFyllesUt,
     ],
     sykmeldinger: sykmeldinger,
+    beskrivelse: 'To eldre søknader som ikke kan sendes inn',
 }
 
 export const eldreUsendtSoknad: Persona = {
@@ -31,4 +35,5 @@ export const eldreUsendtSoknad: Persona = {
         deepcopyMedNyId(nySoknadSomIkkeKanFyllesUt, 'e6e53c43-3b64-48be-b9d1-39d95198e528'),
     ],
     sykmeldinger: sykmeldinger,
+    beskrivelse: 'En eldre søknad som ikke kan sendes inn',
 }
