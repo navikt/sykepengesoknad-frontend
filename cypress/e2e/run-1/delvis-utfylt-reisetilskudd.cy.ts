@@ -1,11 +1,11 @@
-import { delvisUtfyltReisetilskudd } from '../../../src/data/mock/data/reisetilskudd'
+import { delvisUtfyltReisetilskudd } from '../../../src/data/mock/data/personas/reisetilskuddTestPerson'
 
 describe('Tester delvis utfylt søknad med reisetilskudd', () => {
     const delvisUtfyltSoknad = delvisUtfyltReisetilskudd
 
     before(() => {
         cy.clearCookies()
-        cy.visit('/syk/sykepengesoknad?testperson=reisetilskudd')
+        cy.visit('/syk/sykepengesoknad?testperson=reisetilskudd-test')
     })
 
     it('Henter liste med søknader', () => {

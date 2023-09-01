@@ -1,9 +1,9 @@
-import { feilVedSlettingAvKvittering } from '../../../src/data/mock/data/reisetilskudd'
+import { feilVedSlettingAvKvittering } from '../../../src/data/mock/data/personas/reisetilskuddTestPerson'
 
 describe('Test sletting av kvittering som feiler', () => {
     before(() => {
         cy.clearCookies()
-        cy.visit(`syk/sykepengesoknad/soknader/${feilVedSlettingAvKvittering.id}/4?testperson=reisetilskudd`)
+        cy.visit(`syk/sykepengesoknad/soknader/${feilVedSlettingAvKvittering.id}/4?testperson=reisetilskudd-test`)
     })
 
     describe('Sletting', () => {

@@ -30,7 +30,7 @@ describe('Tester andre inntektskilder bulletpoints', () => {
     })
 
     it('Viser ikke liste vi ikke har data fra inntektskomponenten', () => {
-        cy.visit(`/syk/sykepengesoknad/soknader/214f6e73-8150-4261-8ce5-e2b41907fa58/9?testperson=alle-soknader`)
+        cy.visit(`/syk/sykepengesoknad/soknader/214f6e73-8150-4261-8ce5-e2b41907fa58/9?testperson=integrasjon-soknader`)
 
         cy.contains('Har du andre inntektskilder enn nevnt over?').should('not.exist')
 
@@ -38,5 +38,3 @@ describe('Tester andre inntektskilder bulletpoints', () => {
         cy.get('[data-cy="inntektskilder--fra-inntektskomponenten-liste"]').should('not.exist')
     })
 })
-
-export {}

@@ -1,13 +1,12 @@
-import { RSSoknad } from '../../../src/types/rs-types/rs-soknad'
 import { klikkGaVidere, setPeriodeFraTil } from '../../support/utilities'
-import { soknaderOpplaering } from '../../../src/data/mock/personas'
+import { oppholdUtland } from '../../../src/data/mock/data/soknad/opphold-utland'
 
 describe('Tester søknad om å beholde sykepenger utenfor EØS', () => {
-    const soknad = soknaderOpplaering.find((sok: RSSoknad) => sok.id === 'b9d67b0d-b1f8-44a5-bcbd-6010b60b90ce')!
+    const soknad = oppholdUtland
 
     before(() => {
         cy.clearCookies()
-        cy.visit('/syk/sykepengesoknad')
+        cy.visit('/syk/sykepengesoknad?testperson=bare-utland')
     })
 
     it('Laster startside', function () {

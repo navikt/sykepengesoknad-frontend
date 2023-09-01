@@ -1,10 +1,10 @@
-import { nyttReisetilskudd } from '../../../src/data/mock/data/reisetilskudd'
 import { klikkGaVidere, sjekkMainContentFokus } from '../../support/utilities'
+import { nyttReisetilskudd } from '../../../src/data/mock/data/soknad/arbeidstaker-reisetilskudd'
 
 describe('Teste førsteside i reisetilskuddsøknaden', () => {
     before(() => {
         cy.clearCookies()
-        cy.visit('/syk/sykepengesoknad')
+        cy.visit('/syk/sykepengesoknad?testperson=reisetilskudd')
     })
 
     describe('Landingside og listevisning', () => {
@@ -19,7 +19,7 @@ describe('Teste førsteside i reisetilskuddsøknaden', () => {
         it('Ved klikk så åpnes søknaden om reisetilskudd', () => {
             cy.get(`a[href*=${nyttReisetilskudd.id}]`).click()
             cy.url().should(
-                'equal',
+                'contain',
                 Cypress.config().baseUrl + `/syk/sykepengesoknad/soknader/${nyttReisetilskudd.id}/1`,
             )
         })

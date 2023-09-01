@@ -1,11 +1,11 @@
-import { arbeidstakerTilKorrigering } from '../../../src/data/mock/data/soknader-integration'
+import { arbeidstakerTilKorrigering } from '../../../src/data/mock/data/soknad/soknader-integration'
 import { tekst } from '../../../src/utils/tekster'
 
 describe('Tester utkast til korrigerte søknader', () => {
     const tilKorrigering = arbeidstakerTilKorrigering
 
     before(() => {
-        cy.visit('/syk/sykepengesoknad?testperson=alle-soknader')
+        cy.visit('/syk/sykepengesoknad?testperson=integrasjon-soknader')
     })
 
     it('Henter liste med søknader', () => {

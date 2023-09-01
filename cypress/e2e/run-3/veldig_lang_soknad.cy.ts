@@ -9,7 +9,7 @@ import {
     klikkGaVidere,
 } from '../../support/utilities'
 import 'cypress-file-upload'
-import { veldigLangSoknad } from '../../../src/data/mock/data/veldig-land-soknad'
+import { veldigLangSoknad } from '../../../src/data/mock/data/soknad/veldig-land-soknad'
 import { rsToSoknad } from '../../../src/types/mapping'
 
 describe('Tester støtte for gamle spørsmål', () => {
@@ -71,7 +71,7 @@ describe('Tester støtte for gamle spørsmål', () => {
 
     before(() => {
         cy.clearCookies()
-        cy.visit('/syk/sykepengesoknad?testperson=alle-soknader')
+        cy.visit('/syk/sykepengesoknad?testperson=integrasjon-soknader')
     })
 
     it('Laster startside', () => {

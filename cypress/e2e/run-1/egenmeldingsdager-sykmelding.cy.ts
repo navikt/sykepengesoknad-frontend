@@ -1,4 +1,4 @@
-import { soknadUtenEgenmeldingSporsmal } from '../../../src/data/mock/data/egenmeldingsdager-i-sykmeldingen'
+import { soknadUtenEgenmeldingSporsmal } from '../../../src/data/mock/data/personas/egenmeldingsdager-i-sykmeldingen'
 
 describe('Tester egenmeldingsdager i fra sykmelding', () => {
     const soknad = soknadUtenEgenmeldingSporsmal

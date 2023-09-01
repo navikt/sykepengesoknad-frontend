@@ -1,6 +1,6 @@
-import { arbeidstaker } from '../../../src/data/mock/data/opplaering'
 import { setPeriodeFraTil } from '../../support/utilities'
 import { inlineForklaringer } from '../../support/sjekkInlineForklaringKvittering'
+import { arbeidstaker } from '../../../src/data/mock/data/soknad/arbeidstaker'
 
 describe('Tester arbeidstakersøknad', () => {
     //-----

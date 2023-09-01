@@ -1,5 +1,5 @@
-import { arbeidstakerGradert } from '../../../src/data/mock/data/opplaering'
 import { klikkGaVidere } from '../../support/utilities'
+import { arbeidstakerGradert } from '../../../src/data/mock/data/soknad/arbeidstaker-gradert'
 
 describe('Tester ettersending og korrigering', () => {
     const soknad = arbeidstakerGradert
@@ -73,7 +73,7 @@ describe('Tester ettersending og korrigering', () => {
     })
 
     it('Ettersend', () => {
-        cy.get('#listelink').click({ force: true })
+        cy.visit('/syk/sykepengesoknad')
         cy.get(`[data-cy="Tidligere søknader"]`).children().should('have.length', 2)
         cy.get(`[data-cy="Tidligere søknader"] > a[href*=${soknad.id}]`).click()
 
@@ -121,7 +121,7 @@ describe('Tester ettersending og korrigering', () => {
     })
 
     it('Søknad har teaser', () => {
-        cy.get('#listelink').click({ force: true })
+        cy.visit('/syk/sykepengesoknad')
         cy.get('.navds-heading--large').should('be.visible').and('have.text', 'Søknader')
 
         cy.get(`a[href*=${soknad.id}]`)

@@ -1,4 +1,4 @@
-import { medlemskapPerson } from '../../../src/data/mock/data/medlemskap'
+import { medlemskapPerson } from '../../../src/data/mock/data/personas/medlemskap'
 import 'cypress-real-events'
 import {
     klikkGaVidere,
@@ -11,7 +11,7 @@ import {
 } from '../../support/utilities'
 
 describe('Tester medlemskap spørsmål', () => {
-    const soknad = medlemskapPerson().soknader[0]
+    const soknad = medlemskapPerson.soknader[0]
 
     before(() => {
         cy.clearCookies()

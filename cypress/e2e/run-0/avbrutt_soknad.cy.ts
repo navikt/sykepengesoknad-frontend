@@ -1,8 +1,8 @@
-import { avbruttSoknad } from '../../../src/data/mock/data/soknader-integration'
+import { avbruttSoknad } from '../../../src/data/mock/data/soknad/arbeidstaker-avbrutt'
 
 describe('Tester avbryting av søknad', () => {
     before(() => {
-        cy.visit('/syk/sykepengesoknad?testperson=alle-soknader')
+        cy.visit('/syk/sykepengesoknad?testperson=integrasjon-soknader')
     })
 
     it('Laster startside', function () {

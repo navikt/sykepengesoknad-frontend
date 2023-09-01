@@ -1,5 +1,5 @@
 import { setPeriodeFraTil } from '../../support/utilities'
-import { frilanser } from '../../../src/data/mock/data/frilanser'
+import { frilanser } from '../../../src/data/mock/data/soknad/frilanser'
 
 describe('Tester frilansersøknad', () => {
     //-----
@@ -9,7 +9,8 @@ describe('Tester frilansersøknad', () => {
     const soknad = frilanser
 
     before(() => {
-        cy.visit('/syk/sykepengesoknad')
+        cy.clearCookies()
+        cy.visit('/syk/sykepengesoknad?testperson=frilanser')
     })
 
     it('Laster startside', function () {

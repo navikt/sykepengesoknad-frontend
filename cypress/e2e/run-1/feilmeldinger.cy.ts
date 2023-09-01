@@ -1,8 +1,8 @@
 /* eslint-disable cypress/unsafe-to-chain-command */
-import { arbeidstakerGradert } from '../../../src/data/mock/data/opplaering'
 import { RSSoknad } from '../../../src/types/rs-types/rs-soknad'
 import { svarComboboxSingle, svarFritekst } from '../../support/utilities'
 import 'cypress-real-events'
+import { arbeidstakerGradert } from '../../../src/data/mock/data/soknad/arbeidstaker-gradert'
 
 describe('Tester feilmeldinger', () => {
     function gaTilSoknad(soknad: RSSoknad, steg: string) {

@@ -1,4 +1,4 @@
-import { behandlingsdager } from '../../../src/data/mock/data/opplaering'
+import { behandlingsdager } from '../../../src/data/mock/data/soknad/behandlingsdager'
 
 describe('Tester behandlingsdagersøknad', () => {
     //-----
@@ -8,7 +8,7 @@ describe('Tester behandlingsdagersøknad', () => {
     const soknad = behandlingsdager
 
     before(() => {
-        cy.visit('/syk/sykepengesoknad')
+        cy.visit('/syk/sykepengesoknad?testperson=behandlingsdager')
     })
 
     it('Laster startside', function () {
