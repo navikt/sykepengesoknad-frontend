@@ -5,6 +5,11 @@ on:
 
 jobs:
   felles-workflow:
+    permissions:
+      packages: write
+      contents: read
+      id-token: write
+      security-events: write
     uses: navikt/flex-github-actions-workflows/.github/workflows/next-js.yml@master
     secrets: inherit
     with:

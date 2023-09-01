@@ -3,8 +3,6 @@ import { GetKeyFunction } from 'jose/dist/types/types'
 import getConfig from 'next/config'
 import { Client, Issuer } from 'openid-client'
 
-import { AuthenticationError } from '../utils/fetch'
-
 const { serverRuntimeConfig } = getConfig()
 
 let _issuer: Issuer<Client>
@@ -41,9 +39,5 @@ export async function verifyIdportenAccessToken(bearerToken: string) {
 
     if (verified.payload.client_id !== serverRuntimeConfig.idportenClientId) {
         throw new Error('client_id matcher ikke servers clientId.')
-    }
-
-    if (verified.payload.acr !== 'Level4') {
-        throw new AuthenticationError('Har ikke ACR Level4.')
     }
 }
