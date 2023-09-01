@@ -10,7 +10,6 @@ describe('Tester arbeidstakersøknad', () => {
     const soknad = arbeidstaker
 
     before(() => {
-        cy.clearCookies()
         cy.visit('/syk/sykepengesoknad')
     })
 

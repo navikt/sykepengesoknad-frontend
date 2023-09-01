@@ -2,7 +2,6 @@ import { feilVedSlettingAvKvittering } from '../../../src/data/mock/data/persona
 
 describe('Test sletting av kvittering som feiler', () => {
     before(() => {
-        cy.clearCookies()
         cy.visit(`syk/sykepengesoknad/soknader/${feilVedSlettingAvKvittering.id}/4?testperson=reisetilskudd-test`)
     })
 

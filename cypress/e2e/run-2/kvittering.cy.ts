@@ -24,7 +24,6 @@ import { inlineForklaringer } from '../../support/sjekkInlineForklaringKvitterin
 describe('Tester kvittering', () => {
     context('Arbeidsledig', () => {
         it('Nylig sendt', () => {
-            cy.clearCookies()
             // Velg søknad
             cy.visit('/syk/sykepengesoknad?testperson=integrasjon-soknader')
 

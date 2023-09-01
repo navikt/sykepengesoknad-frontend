@@ -9,7 +9,6 @@ describe('Tester frilansersøknad', () => {
     const soknad = frilanser
 
     before(() => {
-        cy.clearCookies()
         cy.visit('/syk/sykepengesoknad?testperson=frilanser')
     })
 

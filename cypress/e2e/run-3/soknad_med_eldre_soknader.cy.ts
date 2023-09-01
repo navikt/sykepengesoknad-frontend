@@ -1,7 +1,6 @@
 describe('Eldre søknader', () => {
     describe('soknad med en eldre søknad', () => {
         before(() => {
-            cy.clearCookies()
             cy.visit('/syk/sykepengesoknad?testperson=en-eldre-usendt-soknad')
         })
 
@@ -24,7 +23,6 @@ describe('Eldre søknader', () => {
     })
     describe('soknad med to eldre søknad', () => {
         before(() => {
-            cy.clearCookies()
             cy.visit('/syk/sykepengesoknad?testperson=to-eldre-usendte-soknader')
         })
 

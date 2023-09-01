@@ -5,7 +5,6 @@ describe('Tester ettersending og korrigering', () => {
     const soknad = arbeidstakerGradert
 
     before(() => {
-        cy.clearCookies()
         cy.visit('/syk/sykepengesoknad')
     })
 

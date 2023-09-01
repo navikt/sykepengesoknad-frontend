@@ -5,7 +5,6 @@ describe('Tester arbeidsledigsøknad', () => {
     const soknad = arbeidsledig
 
     before(() => {
-        cy.clearCookies()
         cy.visit('/syk/sykepengesoknad?testperson=arbeidsledig')
     })
 

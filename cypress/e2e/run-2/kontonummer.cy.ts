@@ -2,7 +2,6 @@ import { checkViStolerPåDeg, svarCheckboxPanel } from '../../support/utilities'
 
 describe('Tester kontonummer i kvittering', () => {
     it('Har kontonumer', () => {
-        cy.clearCookies()
         cy.visit('/syk/sykepengesoknad?testperson=har-kontonummer')
         cy.get('a[data-cy^="link-listevisning"]').first().click()
         besvarSoknad()

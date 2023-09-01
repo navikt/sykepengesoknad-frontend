@@ -6,7 +6,6 @@ describe('Tester å åpne søknaden direkte fra sykefravaer', () => {
     const soknad = arbeidstaker
 
     it('Vi kan gå direkte til søknaden fra sykefravaer', function () {
-        cy.clearCookies()
         cy.visit(`/syk/sykepengesoknad/soknader/${soknad.id}`)
         cy.url().should('equal', Cypress.config().baseUrl + `/syk/sykepengesoknad/soknader/${soknad.id}/1`)
 

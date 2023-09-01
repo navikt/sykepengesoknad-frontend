@@ -5,7 +5,6 @@ describe('Tester søknad om å beholde sykepenger utenfor EØS', () => {
     const soknad = oppholdUtland
 
     before(() => {
-        cy.clearCookies()
         cy.visit('/syk/sykepengesoknad?testperson=bare-utland')
     })
 

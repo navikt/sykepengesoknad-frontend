@@ -4,7 +4,6 @@ describe('Tester endring uten en endringer', () => {
     const soknad = sendtArbeidsledigKvittering
 
     before(() => {
-        cy.clearCookies()
         cy.visit(`/syk/sykepengesoknad/sendt/${soknad.id}?testperson=integrasjon-soknader`)
     })
 

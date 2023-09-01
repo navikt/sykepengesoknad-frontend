@@ -4,7 +4,6 @@ describe('Tester delvis utfylt søknad med reisetilskudd', () => {
     const delvisUtfyltSoknad = delvisUtfyltReisetilskudd
 
     before(() => {
-        cy.clearCookies()
         cy.visit('/syk/sykepengesoknad?testperson=reisetilskudd-test')
     })
 

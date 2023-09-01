@@ -68,7 +68,6 @@ describe('Tester feilmeldinger', () => {
     }
 
     it('CHECKBOX_PANEL ingen valg', () => {
-        cy.clearCookies()
         gaTilSoknad(arbeidstakerGradert, '1')
         gaVidere()
 

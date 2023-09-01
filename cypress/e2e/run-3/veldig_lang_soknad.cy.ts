@@ -70,7 +70,6 @@ describe('Tester støtte for gamle spørsmål', () => {
     }
 
     before(() => {
-        cy.clearCookies()
         cy.visit('/syk/sykepengesoknad?testperson=integrasjon-soknader')
     })
 
