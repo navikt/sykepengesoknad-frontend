@@ -38,7 +38,7 @@ const RadioKomp = ({ sporsmal }: SpmProps) => {
                         data-cy="radio-komp"
                     >
                         {sporsmal.tag == TagTyper.INNTEKTSKILDE_SELVSTENDIG_VARIG_ENDRING_GRUPPE && (
-                            <ForklaringAvVarigEndringSporsmal />
+                            <ForklaringAvVarigEndringSporsmal key="forklaring-varig-endring" />
                         )}
 
                         {sporsmal.undersporsmal.map((uspm) => (
