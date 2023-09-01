@@ -7,6 +7,8 @@ import { Soknad } from '../types/types'
 import { RSSoknadstype } from '../types/rs-types/rs-soknadstype'
 import { RSSoknadstatus } from '../types/rs-types/rs-soknadstatus'
 
+import { useTestpersonQuery } from './useTestpersonQuery'
+
 interface AvbrytProp {
     valgtSoknad: Soknad
     onSuccess?: () => void
@@ -15,11 +17,14 @@ interface AvbrytProp {
 export function useAvbryt() {
     const queryClient = useQueryClient()
     const router = useRouter()
+    const testpersonQuery = useTestpersonQuery()
 
     return useMutation<unknown, FetchError, AvbrytProp>({
         mutationFn: (prop) => {
             return fetchMedRequestId(
-                `/syk/sykepengesoknad/api/sykepengesoknad-backend/api/v2/soknader/${prop.valgtSoknad.id}/avbryt`,
+                `/syk/sykepengesoknad/api/sykepengesoknad-backend/api/v2/soknader/${
+                    prop.valgtSoknad.id
+                }/avbryt${testpersonQuery.query()}`,
                 {
                     method: 'POST',
                     credentials: 'include',

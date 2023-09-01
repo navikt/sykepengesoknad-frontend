@@ -167,7 +167,8 @@ export async function mockApi(req: NextApiRequest, res: NextApiResponse) {
     const sporsmalId = pathNumber(5)
 
     function findSoknadById(soknadId: string | null): RSSoknad | undefined {
-        return alleSoknader.find((soknad) => soknad.id === soknadId)
+        // TODO: Henter bare søknader fra testperson for å kunne rydde opp i cypress tester
+        return testperson.soknader.find((soknad) => soknad.id === soknadId)
     }
 
     function findSporsmalById(soknaden: RSSoknad, sporsmalId: string | null): RSSporsmal | undefined {

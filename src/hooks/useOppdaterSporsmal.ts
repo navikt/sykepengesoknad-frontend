@@ -6,6 +6,8 @@ import { sporsmalToRS } from '../types/rs-types/rs-sporsmal'
 import { RSOppdaterSporsmalResponse } from '../types/rs-types/rest-response/rs-oppdatersporsmalresponse'
 import { rsToSoknad, skapSporsmal } from '../types/mapping'
 
+import { useTestpersonQuery } from './useTestpersonQuery'
+
 interface OppdaterSporsmalVariables {
     sporsmal: Sporsmal
     soknad: Soknad
@@ -15,11 +17,14 @@ interface OppdaterSporsmalVariables {
 
 export function useOppdaterSporsmal() {
     const queryClient = useQueryClient()
+    const testpersonQuery = useTestpersonQuery()
 
     return useMutation<RSOppdaterSporsmalResponse, any, OppdaterSporsmalVariables>({
         mutationFn: async (variables) => {
             return fetchJsonMedRequestId(
-                `/syk/sykepengesoknad/api/sykepengesoknad-backend/api/v2/soknader/${variables.soknad.id}/sporsmal/${variables.sporsmal.id}`,
+                `/syk/sykepengesoknad/api/sykepengesoknad-backend/api/v2/soknader/${variables.soknad.id}/sporsmal/${
+                    variables.sporsmal.id
+                }${testpersonQuery.query()}`,
                 {
                     method: 'PUT',
                     credentials: 'include',

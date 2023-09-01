@@ -4,17 +4,22 @@ import { logger } from '@navikt/next-logger'
 import { FetchError, AuthenticationError } from '../utils/fetch'
 import fetchMedRequestId from '../utils/fetch'
 
+import { useTestpersonQuery } from './useTestpersonQuery'
+
 interface LeggTilUndesporsmalProp {
     soknadId: string
     sporsmalId: string
 }
 export function useLeggTilUndersporsmal() {
     const queryClient = useQueryClient()
+    const testpersonQuery = useTestpersonQuery()
 
     return useMutation<unknown, FetchError, LeggTilUndesporsmalProp>({
         mutationFn: (prop) => {
             return fetchMedRequestId(
-                `/syk/sykepengesoknad/api/sykepengesoknad-backend/api/v2/soknader/${prop.soknadId}/sporsmal/${prop.sporsmalId}/undersporsmal`,
+                `/syk/sykepengesoknad/api/sykepengesoknad-backend/api/v2/soknader/${prop.soknadId}/sporsmal/${
+                    prop.sporsmalId
+                }/undersporsmal${testpersonQuery.query()}`,
                 {
                     method: 'POST',
                     credentials: 'include',

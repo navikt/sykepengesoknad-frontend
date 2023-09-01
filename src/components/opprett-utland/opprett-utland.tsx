@@ -11,19 +11,22 @@ import Vis from '../vis'
 import { useUpdateBreadcrumbs } from '../../hooks/useBreadcrumbs'
 import { LenkeMedIkon } from '../lenke-med-ikon/LenkeMedIkon'
 import { rsToSoknad } from '../../types/mapping'
+import { useTestpersonQuery } from '../../hooks/useTestpersonQuery'
 
 const OpprettUtland = () => {
     const queryClient = useQueryClient()
     const [feilmeldingTekst, setFeilmeldingTekst] = useState<string>()
     const router = useRouter()
+    const testpersonQuery = useTestpersonQuery()
 
     useUpdateBreadcrumbs(() => [{ ...{ title: tekst('opprett-utland.tittel') }, handleInApp: true }], [])
 
     const opprett = async () => {
+        // TODO: Gjør om til mutation
         let data
         try {
             data = await fetchJsonMedRequestId(
-                '/syk/sykepengesoknad/api/sykepengesoknad-backend/api/v2/opprettSoknadUtland',
+                `/syk/sykepengesoknad/api/sykepengesoknad-backend/api/v2/opprettSoknadUtland${testpersonQuery.query()}`,
                 {
                     method: 'POST',
                     credentials: 'include',

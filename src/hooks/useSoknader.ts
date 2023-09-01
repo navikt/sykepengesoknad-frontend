@@ -12,7 +12,7 @@ export default function useSoknader() {
         queryKey: ['soknader'],
         queryFn: () =>
             fetchJsonMedRequestId(
-                '/syk/sykepengesoknad/api/sykepengesoknad-backend/api/v2/soknader/metadata' + testpersonQuery.query(),
+                `/syk/sykepengesoknad/api/sykepengesoknad-backend/api/v2/soknader/metadata${testpersonQuery.query()}`,
                 {
                     method: 'GET',
                     credentials: 'include',

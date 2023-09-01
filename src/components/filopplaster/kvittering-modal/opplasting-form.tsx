@@ -13,6 +13,7 @@ import { formaterFilstørrelse, formattertFiltyper, maxFilstørrelse } from '../
 import { getLedetekst, tekst } from '../../../utils/tekster'
 import Vis from '../../vis'
 import DragAndDrop from '../drag-and-drop/drag-and-drop'
+import { useTestpersonQuery } from '../../../hooks/useTestpersonQuery'
 
 import OpplastingTekster from './opplasting-tekster'
 
@@ -29,6 +30,7 @@ const OpplastingForm = ({ valgtSoknad, setOpenModal }: OpplastingFromProps) => {
     const router = useRouter()
     const { stegId } = router.query as { id: string; stegId: string }
     const queryClient = useQueryClient()
+    const testpersonQuery = useTestpersonQuery()
 
     const [laster, setLaster] = useState<boolean>(false)
     const [feilmelding, setFeilmelding] = useState<string>()
@@ -77,8 +79,9 @@ const OpplastingForm = ({ valgtSoknad, setOpenModal }: OpplastingFromProps) => {
         const requestData = new FormData()
         requestData.append('file', valgtFil as Blob)
 
+        // TODO: Gjør om til mutation
         return await fetchJsonMedRequestId(
-            '/syk/sykepengesoknad/api/sykepengesoknad-kvitteringer/api/v2/opplasting',
+            `/syk/sykepengesoknad/api/sykepengesoknad-kvitteringer/api/v2/opplasting`,
             {
                 method: 'POST',
                 body: requestData,
@@ -103,8 +106,11 @@ const OpplastingForm = ({ valgtSoknad, setOpenModal }: OpplastingFromProps) => {
         }
         const svar: RSSvar = { verdi: JSON.stringify(kvittering) }
 
+        // TODO: Gjør om til mutation
         return await fetchJsonMedRequestId(
-            `/syk/sykepengesoknad/api/sykepengesoknad-backend/api/v2/soknader/${valgtSoknad.id}/sporsmal/${sporsmal.id}/svar`,
+            `/syk/sykepengesoknad/api/sykepengesoknad-backend/api/v2/soknader/${valgtSoknad.id}/sporsmal/${
+                sporsmal.id
+            }/svar${testpersonQuery.query()}`,
             {
                 method: 'POST',
                 body: JSON.stringify(svar),
