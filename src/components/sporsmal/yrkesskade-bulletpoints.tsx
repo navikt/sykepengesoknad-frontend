@@ -1,12 +1,9 @@
 import { BodyShort, Label } from '@navikt/ds-react'
 import React from 'react'
 
-import { TagTyper } from '../../types/enums'
 import { Sporsmal } from '../../types/types'
 
 export const Yrkesskadebulletpoints = ({ sporsmal }: { sporsmal: Sporsmal }) => {
-    if (sporsmal.tag !== TagTyper.YRKESSKADE_V2) return null
-
     return (
         <>
             <Label as="p" className="mb-4 mt-10">
