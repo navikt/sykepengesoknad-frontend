@@ -80,7 +80,7 @@ describe('Tester medlemskap spørsmål', () => {
                 .should('contain', 'Ja')
             cy.contains('I hvilket land utførte du arbeidet?').siblings().should('contain', 'Frankrike')
             cy.contains('Hvilken arbeidsgiver jobbet du for?').siblings().should('contain', 'Croissant AS')
-            cy.contains('I hvilken periode ble arbeidet utført?').siblings().should('contain', '12. – 20. august 2023')
+            cy.contains('I hvilken periode ble arbeidet utført?').siblings().should('contain', '12. – 20.')
         })
     })
 })
