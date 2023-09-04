@@ -43,7 +43,7 @@ export async function verifyIdportenAccessToken(bearerToken: string) {
         throw new Error('client_id matcher ikke servers clientId.')
     }
 
-    if (verified.payload.acr !== 'Level4') {
-        throw new AuthenticationError('Har ikke ACR Level4.')
+    if (!['Level4', 'idporten-loa-high'].includes(verified.payload.acr as string)) {
+        throw new AuthenticationError('Har ikke ACR Level4 eller idporten-loa-high.')
     }
 }
