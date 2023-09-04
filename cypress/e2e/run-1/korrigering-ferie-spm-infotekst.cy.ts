@@ -1,13 +1,13 @@
-import { arbeidstakerTilKorrigering } from '../../../src/data/mock/data/soknader-integration'
+import { arbeidstakerTilKorrigering } from '../../../src/data/mock/data/soknad/soknader-integration'
 
 describe('Ved korrigering av ferie forsvinner Bjørn', () => {
     const soknad = arbeidstakerTilKorrigering
 
     it('Vi kan gå direkte til søknaden fra sykefravaer', function () {
-        cy.visit(`/syk/sykepengesoknad/soknader/${soknad.id}/3?testperson=alle-soknader`)
+        cy.visit(`/syk/sykepengesoknad/soknader/${soknad.id}/3?testperson=integrasjon-soknader`)
         cy.url().should(
             'equal',
-            Cypress.config().baseUrl + `/syk/sykepengesoknad/soknader/${soknad.id}/3?testperson=alle-soknader`,
+            Cypress.config().baseUrl + `/syk/sykepengesoknad/soknader/${soknad.id}/3?testperson=integrasjon-soknader`,
         )
 
         cy.contains('Tok du ut feriedager i tidsrommet 1. - 24. april 2020?')

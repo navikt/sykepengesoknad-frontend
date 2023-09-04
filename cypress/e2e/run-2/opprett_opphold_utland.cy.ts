@@ -1,10 +1,8 @@
-import { oppholdUtland } from '../../../src/data/mock/data/opphold-utland'
-import { arbeidstakersoknadMedUtenlandsoppholdSoktSykepenger } from '../../../src/data/mock/data/soknader-integration'
+import { arbeidstakersoknadMedUtenlandsoppholdSoktSykepenger } from '../../../src/data/mock/data/soknad/soknader-integration'
 
 describe('Tester opprettelse av søknad om å beholde sykepenger utenfor EØS', () => {
     before(() => {
-        cy.clearCookies()
-        cy.visit('/syk/sykepengesoknad?testperson=alle-soknader')
+        cy.visit('/syk/sykepengesoknad?testperson=integrasjon-soknader')
     })
 
     it('Laster startside', function () {
@@ -57,8 +55,9 @@ describe('Tester opprettelse av søknad om å beholde sykepenger utenfor EØS', 
     })
 
     it('Vi er på søknaden for å beholde søknader', function () {
-        cy.url().should('include', `${oppholdUtland.id}/1`)
         cy.contains('Søknad om å beholde sykepenger utenfor EØS')
+        cy.url().should('not.include', arbeidstakersoknadMedUtenlandsoppholdSoktSykepenger.id)
+        cy.url().should('include', `/1`)
         cy.contains('Når skal du reise?')
         cy.contains('Gå videre')
     })

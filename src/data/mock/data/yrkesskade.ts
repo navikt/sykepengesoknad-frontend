@@ -1,116 +1,37 @@
-import { Persona } from '../personas'
 import { RSSporsmal } from '../../../types/rs-types/rs-sporsmal'
 import { deepcopyMedNyId } from '../deepcopyMedNyId'
-import { tilLesbarDatoMedArstall } from '../../../utils/dato-utils'
 
-import { brukertestSoknad, brukertestSykmelding } from './brukertest'
+import { Persona } from './personas/personas'
+import { brukertestSoknad, brukertestSykmelding } from './personas/brukertest'
+import { yrkesskadeV2Sporsmal } from './sporsmal/yrkesskade-v2'
+import { yrkesskadeV1Sporsmal } from './sporsmal/yrkesskade-v1'
 
-function skapSkadedatoTekst(y: { skadedato: string; vedtaksdato: string }) {
-    return `Skadedato ${tilLesbarDatoMedArstall(y.skadedato)} (Vedtaksdato ${tilLesbarDatoMedArstall(y.vedtaksdato)})`
+const yrkesskadeSoknadV1 = deepcopyMedNyId(brukertestSoknad, '04247ad5-9c15-4b7d-ae55-f238003db1af')
+const sporsmaleneV1: RSSporsmal[] = []
+const splittStedV1 = 8
+sporsmaleneV1.push(...yrkesskadeSoknadV1.sporsmal.slice(0, splittStedV1))
+sporsmaleneV1.push(yrkesskadeV1Sporsmal)
+sporsmaleneV1.push(...yrkesskadeSoknadV1.sporsmal.slice(splittStedV1))
+yrkesskadeSoknadV1.sporsmal = sporsmaleneV1
+
+export const yrkesskadePerson: Persona = {
+    soknader: [yrkesskadeSoknadV1],
+    sykmeldinger: [brukertestSykmelding],
+    kontonummer: '12340000000',
+    beskrivelse: 'Yrkesskade v1',
 }
 
-export const yrkesskadeV1Sporsmal: RSSporsmal = {
-    id: '234234234234',
-    tag: 'YRKESSKADE',
-    sporsmalstekst: `Er du sykmeldt på grunn av en yrkesskade eller yrkessykdom?`,
-    undertekst: null,
-    svartype: 'JA_NEI',
-    min: null,
-    max: null,
-    pavirkerAndreSporsmal: false,
-    kriterieForVisningAvUndersporsmal: 'JA',
-    svar: [],
-    undersporsmal: [
-        {
-            id: 'fawef2352342d323r',
-            tag: 'YRKESSKADE_SAMMENHENG',
-            sporsmalstekst: `Er det en sammenheng mellom dette sykefraværet og tidligere yrkesskade?`,
-            undertekst: null,
-            svartype: 'JA_NEI',
-            min: null,
-            max: null,
-            pavirkerAndreSporsmal: false,
-            kriterieForVisningAvUndersporsmal: null,
-            svar: [],
-            undersporsmal: [],
-        },
-    ],
-}
+const yrkesskadeSoknad = deepcopyMedNyId(brukertestSoknad, '04247ad5-9c15-4b7d-ae55-f238003db133')
+const sporsmalene: RSSporsmal[] = []
+const splittSted = 8
+sporsmalene.push(...yrkesskadeSoknad.sporsmal.slice(0, splittSted))
+sporsmalene.push(yrkesskadeV2Sporsmal)
+sporsmalene.push(...yrkesskadeSoknad.sporsmal.slice(splittSted))
+yrkesskadeSoknad.sporsmal = sporsmalene
 
-export function yrkesskadePerson(): Persona {
-    const yrkesskadeSoknad = deepcopyMedNyId(brukertestSoknad, '04247ad5-9c15-4b7d-ae55-f238003db1af')
-    const sporsmalene: RSSporsmal[] = []
-    const splittSted = 8
-    sporsmalene.push(...yrkesskadeSoknad.sporsmal.slice(0, splittSted))
-    sporsmalene.push(yrkesskadeV1Sporsmal)
-    sporsmalene.push(...yrkesskadeSoknad.sporsmal.slice(splittSted))
-
-    yrkesskadeSoknad.sporsmal = sporsmalene
-    return {
-        soknader: [yrkesskadeSoknad],
-        sykmeldinger: [brukertestSykmelding],
-        kontonummer: '12340000000',
-    }
-}
-
-const yrkesskadeDatoer = [
-    { skadedato: '2020-01-01', vedtaksdato: '2021-04-05' },
-    { skadedato: '1997-04-02', vedtaksdato: '1999-12-03' },
-]
-
-export const yrkesskadeV2Sporsmal: RSSporsmal = {
-    id: '123123654612312',
-    tag: 'YRKESSKADE_V2',
-    sporsmalstekst: `Skyldes dette sykefraværet en eller flere av disse godkjente yrkesskadene?`,
-    undertekst: null,
-    svartype: 'JA_NEI',
-    min: null,
-    max: null,
-    pavirkerAndreSporsmal: false,
-    kriterieForVisningAvUndersporsmal: 'JA',
-    svar: [],
-    undersporsmal: [
-        {
-            id: '12312317654657231',
-            tag: 'YRKESSKADE_V2_VELG_DATO',
-            sporsmalstekst: 'Hvilken skadedato skyldes dette sykefraværet? Du kan velge flere.',
-            undertekst: null,
-            svartype: 'CHECKBOX_GRUPPE',
-            min: null,
-            max: null,
-            pavirkerAndreSporsmal: false,
-            kriterieForVisningAvUndersporsmal: null,
-            svar: [],
-            undersporsmal: yrkesskadeDatoer.map((d, i) => {
-                return {
-                    id: '3242323324' + i,
-                    tag: 'YRKESSKADE_V2_DATO',
-                    sporsmalstekst: skapSkadedatoTekst(d),
-                    undertekst: null,
-                    svartype: 'CHECKBOX',
-                    min: null,
-                    max: null,
-                    pavirkerAndreSporsmal: false,
-                    kriterieForVisningAvUndersporsmal: null,
-                    svar: [],
-                    undersporsmal: [],
-                }
-            }),
-        },
-    ],
-}
-
-export function yrkesskadeV2Person(): Persona {
-    const yrkesskadeSoknad = deepcopyMedNyId(brukertestSoknad, '04247ad5-9c15-4b7d-ae55-f238003db133')
-    const sporsmalene: RSSporsmal[] = []
-    const splittSted = 8
-    sporsmalene.push(...yrkesskadeSoknad.sporsmal.slice(0, splittSted))
-    sporsmalene.push(yrkesskadeV2Sporsmal)
-    sporsmalene.push(...yrkesskadeSoknad.sporsmal.slice(splittSted))
-    yrkesskadeSoknad.sporsmal = sporsmalene
-    return {
-        soknader: [yrkesskadeSoknad],
-        sykmeldinger: [brukertestSykmelding],
-        kontonummer: '12340000000',
-    }
+export const yrkesskadeV2Person: Persona = {
+    soknader: [yrkesskadeSoknad],
+    sykmeldinger: [brukertestSykmelding],
+    kontonummer: '12340000000',
+    beskrivelse: 'Yrkesskade v2',
 }

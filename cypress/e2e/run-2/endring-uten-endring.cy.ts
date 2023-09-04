@@ -1,17 +1,16 @@
-import { sendtArbeidsledigKvittering } from '../../../src/data/mock/data/soknader-integration'
+import { sendtArbeidsledigKvittering } from '../../../src/data/mock/data/soknad/soknader-integration'
 
 describe('Tester endring uten en endringer', () => {
     const soknad = sendtArbeidsledigKvittering
 
     before(() => {
-        cy.clearCookies()
-        cy.visit(`/syk/sykepengesoknad/sendt/${soknad.id}?testperson=alle-soknader`)
+        cy.visit(`/syk/sykepengesoknad/sendt/${soknad.id}?testperson=integrasjon-soknader`)
     })
 
     it('Jeg vil endre svarene i søknaden', () => {
         // Endre søknaden
         cy.contains('Jeg vil endre svarene i søknaden').click()
-        cy.contains('Ok').click()
+        cy.findByRole('button', { name: 'Ok' }).click()
 
         // Ny søknad
         cy.url().should('not.include', `/sendt/${soknad.id}`)
@@ -47,9 +46,7 @@ describe('Tester endring uten en endringer', () => {
         cy.get('.navds-modal__content').contains('Du har ikke gjort noen endringer')
         cy.contains('Vi behandler den opprinnelige sykepengesøknaden din.')
 
-        cy.contains('OK').click()
-
-        cy.log(`url er: ${Cypress.config().baseUrl}`)
+        cy.findByRole('button', { name: 'Ok' }).click()
 
         cy.url().should('equal', Cypress.config().baseUrl + '/syk/sykepengesoknad')
     })

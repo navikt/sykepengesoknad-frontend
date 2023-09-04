@@ -1,10 +1,10 @@
-import { delvisUtfylltArbeidsledig } from '../../../src/data/mock/data/soknader-integration'
+import { delvisUtfylltArbeidsledig } from '../../../src/data/mock/data/soknad/soknader-integration'
 
 describe('Tester delvis utfylt søknad', () => {
     const delvisUtfyltSoknad = delvisUtfylltArbeidsledig
 
     before(() => {
-        cy.visit('/syk/sykepengesoknad?testperson=alle-soknader')
+        cy.visit('/syk/sykepengesoknad?testperson=integrasjon-soknader')
     })
 
     it('Henter liste med søknader', () => {

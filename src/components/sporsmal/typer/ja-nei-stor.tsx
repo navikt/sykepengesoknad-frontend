@@ -7,7 +7,6 @@ import { TagTyper } from '../../../types/enums'
 import { getLedetekst, tekst } from '../../../utils/tekster'
 import AnimateOnMount from '../../animate-on-mount'
 import { utlandssoknadUrl } from '../../soknad/soknad-link'
-import Vis from '../../vis'
 import GuidepanelUnderSporsmalstekst from '../guidepanel/GuidepanelUnderSporsmalstekst'
 import { EkspanderbarHjelp } from '../../hjelpetekster/ekspanderbar-hjelp/ekspanderbar-hjelp'
 import { hentFeilmelding, sporsmalIdListe } from '../sporsmal-utils'
@@ -84,8 +83,8 @@ const JaNeiStor = ({ sporsmal }: SpmProps) => {
         <>
             <div>
                 {skalHaInntektsbulletpoints && <Inntektsbulletpoints soknad={valgtSoknad} />}
+                {sporsmal.tag === TagTyper.YRKESSKADE_V2 && <Yrkesskadebulletpoints sporsmal={sporsmal} />}
 
-                <Yrkesskadebulletpoints sporsmal={sporsmal} />
                 <Controller
                     name={sporsmal.id}
                     rules={{ validate: (value) => valider(value), required: feilmelding.global }}
@@ -126,30 +125,25 @@ const JaNeiStor = ({ sporsmal }: SpmProps) => {
                                     Nei
                                 </Radio>
                             </div>
-
-                            {sporsmal.tag === TagTyper.ANDRE_INNTEKTSKILDER_V2 && (
-                                <InntektsopplysningerErKonfidensielleInfo />
-                            )}
                         </RadioGroup>
                     )}
                 />
 
-                <Vis
-                    hvis={sporsmal?.tag === TagTyper.UTLANDSOPPHOLD_SOKT_SYKEPENGER && watchJaNei}
-                    render={() => (
-                        <BodyLong spacing className="utland_infotekst">
-                            {parserWithReplace(
-                                getLedetekst(
-                                    tekst(
-                                        ('soknad.infotekst.utlandsopphold_sokt_sykepenger.' +
-                                            watchJaNei?.toLowerCase()) as any,
-                                    ),
-                                    { '%URL%': utlandssoknadUrl },
+                {sporsmal.tag === TagTyper.ANDRE_INNTEKTSKILDER_V2 && <InntektsopplysningerErKonfidensielleInfo />}
+
+                {sporsmal?.tag === TagTyper.UTLANDSOPPHOLD_SOKT_SYKEPENGER && watchJaNei && (
+                    <BodyLong spacing className="utland_infotekst">
+                        {parserWithReplace(
+                            getLedetekst(
+                                tekst(
+                                    ('soknad.infotekst.utlandsopphold_sokt_sykepenger.' +
+                                        watchJaNei?.toLowerCase()) as any,
                                 ),
-                            )}
-                        </BodyLong>
-                    )}
-                />
+                                { '%URL%': utlandssoknadUrl },
+                            ),
+                        )}
+                    </BodyLong>
+                )}
 
                 <YrkesskadeInfo sporsmal={sporsmal} jaNeiSvar={watchJaNei} />
             </div>
@@ -164,19 +158,14 @@ const JaNeiStor = ({ sporsmal }: SpmProps) => {
                     <>
                         <UndersporsmalListe oversporsmal={sporsmal} oversporsmalSvar={watchJaNei} />
 
-                        <Vis
-                            hvis={
-                                valgtSoknad?.status === RSSoknadstatus.UTKAST_TIL_KORRIGERING &&
-                                sporsmal.tag === TagTyper.FERIE_V2 &&
-                                watchJaNei === 'JA'
-                            }
-                            render={() => (
+                        {valgtSoknad?.status === RSSoknadstatus.UTKAST_TIL_KORRIGERING &&
+                            sporsmal.tag === TagTyper.FERIE_V2 &&
+                            watchJaNei === 'JA' && (
                                 <Alert data-cy="feriekorrigeringvarsel" className="mt-8" variant="info">
                                     Du kan dra på ferie mens du er sykmeldt, men du får ikke utbetalt sykepenger når du
                                     har ferie.
                                 </Alert>
                             )}
-                        />
 
                         <PaskeferieInfo sporsmal={sporsmal} jaNeiSvar={watchJaNei} />
                     </>

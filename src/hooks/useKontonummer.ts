@@ -11,8 +11,7 @@ export function UseKontonummer() {
         queryKey: ['kontonummer'],
         queryFn: async () => {
             const fetchResult = await fetchMedRequestId(
-                '/syk/sykepengesoknad/api/sokos-kontoregister-person/api/borger/v1/hent-aktiv-konto' +
-                    testpersonQuery.query(),
+                `/syk/sykepengesoknad/api/sokos-kontoregister-person/api/borger/v1/hent-aktiv-konto${testpersonQuery.query()}`,
                 {},
                 (response, _, defaultErrorHandler) => {
                     if (response.status == 404) {

@@ -3,6 +3,8 @@ import { logger } from '@navikt/next-logger'
 
 import fetchMedRequestId, { AuthenticationError, FetchError } from '../utils/fetch'
 
+import { useTestpersonQuery } from './useTestpersonQuery'
+
 interface EttersendtNavProp {
     id: string
     onSuccess: () => void
@@ -10,11 +12,14 @@ interface EttersendtNavProp {
 
 export function useEttersendNav() {
     const queryClient = useQueryClient()
+    const testpersonQuery = useTestpersonQuery()
 
     return useMutation<unknown, FetchError, EttersendtNavProp>({
         mutationFn: (prop) => {
             return fetchMedRequestId(
-                `/syk/sykepengesoknad/api/sykepengesoknad-backend/api/v2/soknader/${prop.id}/ettersendTilNav`,
+                `/syk/sykepengesoknad/api/sykepengesoknad-backend/api/v2/soknader/${
+                    prop.id
+                }/ettersendTilNav${testpersonQuery.query()}`,
                 {
                     method: 'POST',
                     credentials: 'include',

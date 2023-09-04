@@ -3,7 +3,6 @@ import 'cypress-real-events'
 
 describe('Tester yrkesskadesspørsmål', () => {
     before(() => {
-        cy.clearCookies()
         cy.visit('/syk/sykepengesoknad?testperson=yrkesskade-v2')
     })
     it('Laster listevisng', function () {

@@ -1,8 +1,4 @@
-import { Persona } from '../personas'
-import { RSSporsmal } from '../../../types/rs-types/rs-sporsmal'
-import { deepcopyMedNyId } from '../deepcopyMedNyId'
-
-import { brukertestSoknad, brukertestSykmelding } from './brukertest'
+import { RSSporsmal } from '../../../../types/rs-types/rs-sporsmal'
 
 export const medlemskapOppholdUtenforNorgeSporsmal: RSSporsmal = {
     id: '38bac721-93cc-3826-93aa-109c87b6f4b9',
@@ -338,23 +334,4 @@ export const medlemskapOppholdstillatelseSporsmal: RSSporsmal = {
             ],
         },
     ],
-}
-export function medlemskapPerson(): Persona {
-    const medlemskapSoknad = deepcopyMedNyId(brukertestSoknad, '7fdc72b9-30a9-435c-9eb1-f7cc68a8b429')
-    const sporsmalene: RSSporsmal[] = []
-    const splittSted = 8
-    sporsmalene.push(...medlemskapSoknad.sporsmal.slice(0, splittSted))
-    sporsmalene.push(
-        medlemskapUtførtArbeidUtenforNorgeSporsmal,
-        medlemskapOppholdUtenforEøsSporsmal,
-        medlemskapOppholdUtenforNorgeSporsmal,
-        medlemskapOppholdstillatelseSporsmal,
-    )
-    sporsmalene.push(...medlemskapSoknad.sporsmal.slice(splittSted))
-    medlemskapSoknad.sporsmal = sporsmalene
-    return {
-        soknader: [medlemskapSoknad],
-        sykmeldinger: [brukertestSykmelding],
-        kontonummer: '12340000000',
-    }
 }

@@ -1,7 +1,6 @@
 import { BodyShort } from '@navikt/ds-react'
 import React from 'react'
 
-import { arbeidstakerGradert } from '../../data/mock/data/opplaering'
 import { RSArbeidssituasjon } from '../../types/rs-types/rs-arbeidssituasjon'
 import { RSSoknadstype } from '../../types/rs-types/rs-soknadstype'
 import { getLedetekst, tekst } from '../../utils/tekster'
@@ -23,22 +22,6 @@ export const teaserTittel = (soknad: RSSoknadmetadata) => {
 
 export const finnArbeidsgivernavn = (soknad: RSSoknadmetadata) => {
     return soknad.arbeidsgiver && soknad.arbeidsgiver.navn ? soknad.arbeidsgiver.navn : ''
-}
-
-export const leggTilSoknadstypeForDemoside = (soknad: RSSoknadmetadata) => {
-    if (soknad.soknadstype !== RSSoknadstype.OPPHOLD_UTLAND && soknad.soknadstype !== RSSoknadstype.REISETILSKUDD) {
-        const forste = soknad.id === arbeidstakerGradert.id ? 'førstegangssøknad' : ''
-        const arbeidssituasjon = soknad.arbeidssituasjon?.toLowerCase()
-        const soknadstype =
-            soknad.soknadstype === RSSoknadstype.BEHANDLINGSDAGER ? soknad.soknadstype.toLowerCase() : ''
-        const grad = soknad.soknadPerioder.map((periode) => periode.grad + '%')
-        return (
-            <BodyShort className="inngangspanel__undertekst__demo">
-                {`${arbeidssituasjon} ${forste} ${soknadstype}, ${grad} sykmeldt`}
-            </BodyShort>
-        )
-    }
-    return <></>
 }
 
 export const periodeListevisning = (soknad: RSSoknadmetadata) => {

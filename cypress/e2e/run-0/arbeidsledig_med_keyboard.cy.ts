@@ -1,14 +1,13 @@
 /* eslint-disable cypress/unsafe-to-chain-command */
-import { arbeidsledig } from '../../../src/data/mock/data/opplaering'
 import 'cypress-real-events'
 import { sjekkMainContentFokus } from '../../support/utilities'
+import { arbeidsledig } from '../../../src/data/mock/data/soknad/arbeidsledig'
 
 describe('Tester arbeidsledigsøknad', () => {
     const soknad = arbeidsledig
 
     before(() => {
-        cy.clearCookies()
-        cy.visit('/syk/sykepengesoknad')
+        cy.visit('/syk/sykepengesoknad?testperson=arbeidsledig')
     })
 
     it('Laster startside', () => {

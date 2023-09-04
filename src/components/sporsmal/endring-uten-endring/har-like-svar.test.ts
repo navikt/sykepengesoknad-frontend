@@ -1,5 +1,6 @@
-import { sendtArbeidsledig, sok6 } from '../../../data/mock/data/soknader-integration'
+import { sok6 } from '../../../data/mock/data/soknad/soknader-integration'
 import { rsToSoknad } from '../../../types/mapping'
+import { sendtArbeidsledig } from '../../../data/mock/data/soknad/arbeidsledig-sendt'
 
 import { harLikeSvar } from './har-like-svar'
 

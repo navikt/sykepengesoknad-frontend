@@ -3,6 +3,8 @@ import { logger } from '@navikt/next-logger'
 
 import fetchMedRequestId, { AuthenticationError, FetchError } from '../utils/fetch'
 
+import { useTestpersonQuery } from './useTestpersonQuery'
+
 interface SlettUndersporsmalProp {
     soknadId: string
     sporsmalId: string
@@ -11,11 +13,14 @@ interface SlettUndersporsmalProp {
 
 export function useSlettUndersporsmal() {
     const queryClient = useQueryClient()
+    const testpersonQuery = useTestpersonQuery()
 
     return useMutation<unknown, FetchError, SlettUndersporsmalProp>({
         mutationFn: (prop) => {
             return fetchMedRequestId(
-                `/syk/sykepengesoknad/api/sykepengesoknad-backend/api/v2/soknader/${prop.soknadId}/sporsmal/${prop.sporsmalId}/undersporsmal/${prop.undersporsmalId}`,
+                `/syk/sykepengesoknad/api/sykepengesoknad-backend/api/v2/soknader/${prop.soknadId}/sporsmal/${
+                    prop.sporsmalId
+                }/undersporsmal/${prop.undersporsmalId}${testpersonQuery.query()}`,
                 {
                     method: 'DELETE',
                     credentials: 'include',

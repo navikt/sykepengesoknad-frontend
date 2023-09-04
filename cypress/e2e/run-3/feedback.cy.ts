@@ -1,11 +1,10 @@
-import { arbeidstakerGradert } from '../../../src/data/mock/data/opplaering'
 import { klikkGaVidere, svarCheckboxPanel, svarNeiHovedsporsmal } from '../../support/utilities'
+import { arbeidstakerGradert } from '../../../src/data/mock/data/soknad/arbeidstaker-gradert'
 
 describe('Tester feedback', () => {
     const soknad = arbeidstakerGradert
 
     before(() => {
-        cy.clearCookies()
         cy.visit('/syk/sykepengesoknad')
     })
 

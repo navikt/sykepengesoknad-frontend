@@ -2,12 +2,12 @@ import {
     soknadSomTrigger401ForOppdaterSporsmal,
     soknadSomTriggerFeilStatusForOppdaterSporsmal,
     soknadSomTriggerSporsmalFinnesIkkeISoknad,
-} from '../../../src/data/mock/data/soknader-integration'
+} from '../../../src/data/mock/data/soknad/soknader-integration'
 
 describe('Tester feilsituasjoner ', () => {
     describe('Tester SPORSMAL_FINNES_IKKE_I_SOKNAD ', () => {
         before(() => {
-            cy.visit('/syk/sykepengesoknad?testperson=alle-soknader')
+            cy.visit('/syk/sykepengesoknad?testperson=integrasjon-soknader')
             cy.get('.navds-heading--large').should('be.visible').and('have.text', 'Søknader')
         })
 
@@ -33,7 +33,7 @@ describe('Tester feilsituasjoner ', () => {
 
     describe('Tester FEIL_STATUS_FOR_OPPDATER_SPORSMAL ', () => {
         before(() => {
-            cy.visit('/syk/sykepengesoknad?testperson=alle-soknader')
+            cy.visit('/syk/sykepengesoknad?testperson=integrasjon-soknader')
             cy.get('.navds-heading--large').should('be.visible').and('have.text', 'Søknader')
         })
 
@@ -61,7 +61,7 @@ describe('Tester feilsituasjoner ', () => {
     describe('Tester 401 ved oppdatersporsmal ', () => {
         before(() => {
             cy.visit(
-                `/syk/sykepengesoknad/soknader/${soknadSomTrigger401ForOppdaterSporsmal.id}/1?testperson=alle-soknader`,
+                `/syk/sykepengesoknad/soknader/${soknadSomTrigger401ForOppdaterSporsmal.id}/1?testperson=integrasjon-soknader`,
             )
             cy.get('.navds-heading--large').should('be.visible').and('contain.text', 'Søknad om sykepenger')
         })

@@ -1,8 +1,8 @@
-import { utgattSoknad } from '../../../src/data/mock/data/soknader-integration'
+import { utgattSoknad } from '../../../src/data/mock/data/soknad/arbeidstaker-utgatt'
 
 describe('Tester utgått søknad', () => {
     before(() => {
-        cy.visit('/syk/sykepengesoknad?testperson=alle-soknader')
+        cy.visit('/syk/sykepengesoknad?testperson=integrasjon-soknader')
     })
 
     it('Laster startside', function () {

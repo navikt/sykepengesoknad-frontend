@@ -1,12 +1,12 @@
 import { Soknad } from '../../../src/types/types'
-import { soknaderIntegration, soknaderOpplaering } from '../../../src/data/mock/personas'
 import { rsToSoknad } from '../../../src/types/mapping'
+import { soknaderIntegration } from '../../../src/data/mock/data/soknad/soknader-integration'
 
 const articleTilSoknad = (articles: any) => {
     const soknader: Soknad[] = []
     articles.map((idx: any) => {
         const id = articles[idx].attributes['data-cy']?.value.split('-listevisning-')[1]
-        const rsSoknad = soknaderIntegration.find((s) => s.id === id) || soknaderOpplaering.find((s) => s.id === id)
+        const rsSoknad = soknaderIntegration.find((s) => s.id === id)
         if (rsSoknad) soknader.push(rsToSoknad(rsSoknad))
     })
     return soknader
@@ -22,7 +22,7 @@ const senesteSendtDato = (soknad: Soknad) => {
 }
 describe('Tester sortering av søknader', () => {
     it('Laster startside', function () {
-        cy.visit('/syk/sykepengesoknad?testperson=alle-soknader')
+        cy.visit('/syk/sykepengesoknad?testperson=integrasjon-soknader')
         cy.get('.navds-heading--large').should('be.visible').and('have.text', 'Søknader')
     })
 

@@ -7,6 +7,8 @@ import { urlTilSoknad } from '../components/soknad/soknad-link'
 import { RSSoknad } from '../types/rs-types/rs-soknad'
 import { rsToSoknad } from '../types/mapping'
 
+import { useTestpersonQuery } from './useTestpersonQuery'
+
 interface KorrigeringProp {
     id: string
     onSuccess: () => void
@@ -15,11 +17,14 @@ interface KorrigeringProp {
 export function useKorriger() {
     const queryClient = useQueryClient()
     const router = useRouter()
+    const testpersonQuery = useTestpersonQuery()
 
     return useMutation<unknown, FetchError, KorrigeringProp>({
         mutationFn: (prop) => {
             return fetchJsonMedRequestId(
-                `/syk/sykepengesoknad/api/sykepengesoknad-backend/api/v2/soknader/${prop.id}/korriger`,
+                `/syk/sykepengesoknad/api/sykepengesoknad-backend/api/v2/soknader/${
+                    prop.id
+                }/korriger${testpersonQuery.query()}`,
                 {
                     method: 'POST',
                     credentials: 'include',

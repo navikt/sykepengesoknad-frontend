@@ -1,10 +1,9 @@
-import { gradertReisetilskudd } from '../../../src/data/mock/data/reisetilskudd'
 import { klikkGaVidere, sjekkMainContentFokus } from '../../support/utilities'
+import { gradertReisetilskudd } from '../../../src/data/mock/data/soknad/arbeidstaker-reisetilskudd-gradert'
 
 describe('Tester at riktig antall desimaler sendes til backend', () => {
     it('Oppgir desimaler på svartype TALL og PROSENT', () => {
-        cy.clearCookies()
-        cy.visit(`/syk/sykepengesoknad/soknader/${gradertReisetilskudd.id}/7`)
+        cy.visit(`/syk/sykepengesoknad/soknader/${gradertReisetilskudd.id}/7?testperson=reisetilskudd`)
         cy.get('[data-cy="ja-nei-stor"] input[value=JA]').click()
 
         cy.get('input#495730df-717d-3774-bd19-e6bcf76e3ba2').type('37.321') // maks 2 desimaler tas med på TALL
@@ -24,8 +23,7 @@ describe('Tester at riktig antall desimaler sendes til backend', () => {
     })
 
     it('Oppgir desimaler på svartype BELOP og KILOMETER', () => {
-        cy.clearCookies()
-        cy.visit(`/syk/sykepengesoknad/soknader/${gradertReisetilskudd.id}/12`)
+        cy.visit(`/syk/sykepengesoknad/soknader/${gradertReisetilskudd.id}/12?testperson=reisetilskudd`)
 
         cy.get('[data-cy="ja-nei-stor"] input[value=JA]').click()
 
@@ -49,7 +47,7 @@ describe('Tester at riktig antall desimaler sendes til backend', () => {
 
     it('Håndterer at man bruker komma istedenfor punktum', () => {
         cy.clearCookies()
-        cy.visit(`/syk/sykepengesoknad/soknader/${gradertReisetilskudd.id}/7`)
+        cy.visit(`/syk/sykepengesoknad/soknader/${gradertReisetilskudd.id}/7?testperson=reisetilskudd`)
         cy.get('[data-cy="ja-nei-stor"] input[value=JA]').click()
 
         cy.get('input#495730df-717d-3774-bd19-e6bcf76e3ba2').type('36,99') // maks 2 desimaler tas med på TALL
@@ -70,7 +68,7 @@ describe('Tester at riktig antall desimaler sendes til backend', () => {
 
     it('Legger ikke til desimaler', () => {
         cy.clearCookies()
-        cy.visit(`/syk/sykepengesoknad/soknader/${gradertReisetilskudd.id}/7`)
+        cy.visit(`/syk/sykepengesoknad/soknader/${gradertReisetilskudd.id}/7?testperson=reisetilskudd`)
         cy.get('[data-cy="ja-nei-stor"] input[value=JA]').click()
 
         cy.get('input#495730df-717d-3774-bd19-e6bcf76e3ba2').type('36') // ingen desimaler i input

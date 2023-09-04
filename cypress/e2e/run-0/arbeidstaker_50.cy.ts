@@ -1,5 +1,5 @@
-import { arbeidstakerGradert } from '../../../src/data/mock/data/opplaering'
 import { setPeriodeFraTil } from '../../support/utilities'
+import { arbeidstakerGradert } from '../../../src/data/mock/data/soknad/arbeidstaker-gradert'
 
 describe('Tester arbeidstakersøknad - gradert 50%', () => {
     const soknad = arbeidstakerGradert

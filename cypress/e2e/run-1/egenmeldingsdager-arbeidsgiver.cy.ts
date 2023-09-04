@@ -1,7 +1,7 @@
-import { kortFomTomArbeidstakerSoknad } from '../../../src/data/mock/data/kort-soknad'
+import { arbeidstakerSoknadOpprettetAvInntektsmelding } from '../../../src/data/mock/data/personas/opprettet-av-inntektsmelding'
 
 describe('Tester søknad som er opprettet fra egenmeldingsdager i inntektsmeldingen', () => {
-    const soknad = kortFomTomArbeidstakerSoknad
+    const soknad = arbeidstakerSoknadOpprettetAvInntektsmelding
 
     it('Viser guidepanel på førsteside', function () {
         cy.visit(`/syk/sykepengesoknad/soknader/${soknad.id}?testperson=egenmeldingsdager-arbeidsgiver`)

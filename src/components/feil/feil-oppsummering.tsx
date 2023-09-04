@@ -100,19 +100,17 @@ const FeilOppsummering = ({
             <Vis
                 hvis={antall > 0}
                 render={() => {
-                    const elements = entries
-                        .sort((list) => list[0][0])
-                        .map((list) => (
-                            <ErrorSummary.Item
-                                href="#"
-                                key={list[1].message}
-                                tabIndex={0}
-                                onKeyDown={(e) => handleKeyDown(e, list)}
-                                onClick={(e) => handleClick(e, list)}
-                            >
-                                {list[1].message}
-                            </ErrorSummary.Item>
-                        ))
+                    const elements = entries.map((list) => (
+                        <ErrorSummary.Item
+                            href="#"
+                            key={list[1].message + list[0]}
+                            tabIndex={0}
+                            onKeyDown={(e) => handleKeyDown(e, list)}
+                            onClick={(e) => handleClick(e, list)}
+                        >
+                            {list[1].message}
+                        </ErrorSummary.Item>
+                    ))
                     if (sendError) {
                         elements.push(
                             <ErrorSummary.Item

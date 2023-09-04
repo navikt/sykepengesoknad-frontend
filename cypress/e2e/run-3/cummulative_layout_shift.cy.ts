@@ -1,11 +1,9 @@
 describe('Tester cummulative-layout-shift ', () => {
     it('Høyden endres ikke i happy case i listevisninga etter at dataene er lastet', () => {
-        cy.clearCookies()
-
         cy.visit('http://localhost:8080/syk/sykepengesoknad?testperson=cummulative-layout-shift')
         cy.get('h1').should('be.visible')
         // Sjekk mains høyde
-        const expectedHeight = '386.984375px'
+        const expectedHeight = '380px'
         cy.get('main').should('have.css', 'height', expectedHeight)
         cy.get('.navds-skeleton').should('have.length', 2)
 
@@ -18,8 +16,6 @@ describe('Tester cummulative-layout-shift ', () => {
     })
 
     it('Høyden endres ikke i happy case i et vanlig spørsmål etter at dataene er lastet', () => {
-        cy.clearCookies()
-
         cy.visit(
             'http://localhost:8080/syk/sykepengesoknad/soknader/04247ad5-9c15-4b7d-ae55-f23807777777/3?testperson=cummulative-layout-shift',
         )
@@ -37,8 +33,6 @@ describe('Tester cummulative-layout-shift ', () => {
     })
 
     it('Høyden endres ikke i første spørsmålet etter at dataene er lastet', () => {
-        cy.clearCookies()
-
         cy.visit(
             'http://localhost:8080/syk/sykepengesoknad/soknader/04247ad5-9c15-4b7d-ae55-f23807777777/1?testperson=cummulative-layout-shift',
         )

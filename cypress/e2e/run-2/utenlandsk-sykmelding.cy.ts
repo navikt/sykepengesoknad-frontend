@@ -11,7 +11,6 @@ describe('Tester søknad til utenlandsk sykmelding', () => {
     const id = '3708c4de-d16c-4835-841b-a6716b6d39e9'
 
     before(() => {
-        cy.clearCookies()
         cy.visit(`/syk/sykepengesoknad/soknader/${id}/1?testperson=utenlandsk-sykmelding`)
     })
 

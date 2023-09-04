@@ -1,12 +1,11 @@
-import { arbeidsledig } from '../../../src/data/mock/data/opplaering'
 import { setPeriodeFraTil } from '../../support/utilities'
+import { arbeidsledig } from '../../../src/data/mock/data/soknad/arbeidsledig'
 
 describe('Tester arbeidsledigsøknad', () => {
     const soknad = arbeidsledig
 
     before(() => {
-        cy.clearCookies()
-        cy.visit('/syk/sykepengesoknad')
+        cy.visit('/syk/sykepengesoknad?testperson=arbeidsledig')
     })
 
     it('Laster startside', () => {
