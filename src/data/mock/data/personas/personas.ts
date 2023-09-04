@@ -63,7 +63,7 @@ export const harKontonummer: Persona = {
     ],
     sykmeldinger: [syk7],
     kontonummer: '12340012345',
-    beskrivelse: 'Arbeidstaker søkand med kontonummer',
+    beskrivelse: 'Arbeidstaker søknad med kontonummer',
 }
 
 export const harIkkeKontonummer: Persona = {
