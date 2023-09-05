@@ -1,5 +1,6 @@
 import { klikkGaVidere, setPeriodeFraTil, sjekkMainContentFokus, svarCombobox } from '../../support/utilities'
 import { oppholdUtland } from '../../../src/data/mock/data/soknad/opphold-utland'
+import 'cypress-real-events'
 
 describe('Tester søknad om å beholde sykepenger utenfor EØS', () => {
     const soknad = oppholdUtland
