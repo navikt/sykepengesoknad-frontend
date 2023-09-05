@@ -1,4 +1,4 @@
-import { klikkGaVidere, setPeriodeFraTil, sjekkMainContentFokus } from '../../support/utilities'
+import { klikkGaVidere, setPeriodeFraTil, sjekkMainContentFokus, svarCombobox } from '../../support/utilities'
 import { oppholdUtland } from '../../../src/data/mock/data/soknad/opphold-utland'
 
 describe('Tester søknad om å beholde sykepenger utenfor EØS', () => {
