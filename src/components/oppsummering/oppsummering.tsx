@@ -82,6 +82,7 @@ export const SporsmalVarianter = ({ sporsmal }: OppsummeringProps) => {
             return <Fritekst sporsmal={sporsmal} />
         }
 
+        case RSSvartype.COMBOBOX_MULTI:
         case RSSvartype.COMBOBOX_SINGLE:
         case RSSvartype.LAND: {
             return <LandSum sporsmal={sporsmal} />

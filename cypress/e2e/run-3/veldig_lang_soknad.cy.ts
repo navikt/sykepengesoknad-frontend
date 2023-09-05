@@ -4,13 +4,14 @@ import {
     svarJaHovedsporsmal,
     svarNeiHovedsporsmal,
     svarCheckboxPanel,
-    velgLand,
     velgDato,
     klikkGaVidere,
+    svarCombobox,
 } from '../../support/utilities'
 import 'cypress-file-upload'
 import { veldigLangSoknad } from '../../../src/data/mock/data/soknad/veldig-land-soknad'
 import { rsToSoknad } from '../../../src/types/mapping'
+import 'cypress-real-events'
 
 describe('Tester støtte for gamle spørsmål', () => {
     //-----
@@ -213,7 +214,17 @@ describe('Tester støtte for gamle spørsmål', () => {
         gaVidere()
     })
     it('LAND', () => {
-        velgLand('franske')
+        cy.contains('Hvilket land skal du reise til?')
+        cy.findByRole('combobox', { name: 'Hvilket land skal du reise til?' }).type('Sør')
+        cy.findByRole('option', { name: 'Søre franske territorier' }).click()
+
+        cy.get('.navds-combobox__button-toggle-list').click()
+        gaVidere()
+    })
+    it('LAND_COMBOBOX', () => {
+        cy.contains('Hvilket land skal du reise til?')
+        svarCombobox('Hvilket land skal du reise til?', 'Søre', 'Søre franske territorier')
+        cy.get('.navds-combobox__button-toggle-list').click()
         gaVidere()
     })
     it('PERIODEUTLAND', () => {

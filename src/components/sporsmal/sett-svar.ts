@@ -41,6 +41,7 @@ export const settSvar = (sporsmal: Sporsmal, verdier: Record<string, any>): Spor
         case RSSvartype.INFO_BEHANDLINGSDAGER:
             return behandlingsdagerSvar(sporsmal, verdi)
         case RSSvartype.LAND:
+        case RSSvartype.COMBOBOX_MULTI:
             return landSvar(sporsmal, verdi)
         case RSSvartype.DATO:
             return datoSvar(sporsmal, verdi)

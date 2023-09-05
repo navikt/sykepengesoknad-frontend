@@ -29,10 +29,10 @@ describe('Tester søknad om å beholde sykepenger utenfor EØS', () => {
         cy.url().should('include', `${soknad.id}/2`)
 
         cy.contains('Hvilket land skal du reise til?')
-        cy.get('[data-cy="landvelger"] input[type="text"]').type('Fransk')
-        cy.contains('Fransk Polynesia')
-        cy.contains('Søre franske territorier').click()
+        cy.findAllByRole('combobox', { name: 'Hvilket land skal du reise til?' }).type('Sør')
+        cy.findByRole('option', { name: 'Søre franske territorier' }).click()
 
+        cy.get('.navds-combobox__button-toggle-list').click()
         klikkGaVidere()
     })
 

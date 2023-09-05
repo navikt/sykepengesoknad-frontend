@@ -1,6 +1,6 @@
 /* eslint-disable cypress/unsafe-to-chain-command */
 import { RSSoknad } from '../../../src/types/rs-types/rs-soknad'
-import { svarComboboxSingle, svarFritekst } from '../../support/utilities'
+import { svarCombobox, svarFritekst } from '../../support/utilities'
 import 'cypress-real-events'
 import { arbeidstakerGradert } from '../../../src/data/mock/data/soknad/arbeidstaker-gradert'
 
@@ -342,7 +342,7 @@ describe('Tester feilmeldinger', () => {
             'f95a08e0-baba-3208-9c4f-74a21ecf06f9',
         )
 
-        svarComboboxSingle('I hvilket land utførte du arbeidet?', 'Fra', 'Frankrike')
+        svarCombobox('I hvilket land utførte du arbeidet?', 'Fra', 'Frankrike')
         ingenFeilmeldinger()
     })
 
