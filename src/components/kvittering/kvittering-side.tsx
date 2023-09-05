@@ -11,9 +11,7 @@ import { tekst } from '../../utils/tekster'
 import { logEvent } from '../amplitude/amplitude'
 import Ettersending from '../ettersending/ettersending'
 import { GjenstaendeSoknader, hentGjenstaendeSoknader } from '../gjenstaende-soknader/gjenstaende-soknader'
-import { hentHotjarJsTrigger, HotjarTrigger } from '../hotjar-trigger'
 import { UxSignalsWidget } from '../ux-signals/UxSignalsWidget'
-import Vis from '../vis'
 import useSoknad from '../../hooks/useSoknad'
 import useSoknader from '../../hooks/useSoknader'
 import { urlTilSoknad } from '../soknad/soknad-link'
@@ -58,13 +56,13 @@ const KvitteringSide = () => {
 
     const erSendtTilArbeidsgiver = valgtSoknad.sendtTilArbeidsgiverDato !== undefined
 
-    const skalViseEndre = valgtSoknad.status !== RSSoknadstatus.KORRIGERT
+    const skalViseEndre =
+        valgtSoknad.status !== RSSoknadstatus.KORRIGERT && valgtSoknad.soknadstype !== RSSoknadstype.OPPHOLD_UTLAND
     const skalViseSendTilArbeidsgiver =
         valgtSoknad.arbeidsgiver !== undefined &&
         !erSendtTilArbeidsgiver &&
-        valgtSoknad.soknadstype !== RSSoknadstype.REISETILSKUDD
-    const skalViseEndreEllerEttersend =
-        valgtSoknad.soknadstype !== RSSoknadstype.OPPHOLD_UTLAND && (skalViseEndre || skalViseSendTilArbeidsgiver)
+        valgtSoknad.soknadstype !== RSSoknadstype.REISETILSKUDD &&
+        valgtSoknad.soknadstype !== RSSoknadstype.OPPHOLD_UTLAND
 
     const gjenstaendeSoknader = hentGjenstaendeSoknader(soknader, valgtSoknad)
 
@@ -72,52 +70,32 @@ const KvitteringSide = () => {
         <>
             <SoknadHeader />
 
-            <div>
-                <HotjarTrigger jsTrigger={hentHotjarJsTrigger(valgtSoknad.soknadstype, 'kvittering')}>
-                    <Kvittering />
+            <Kvittering />
 
-                    <GjenstaendeSoknader soknader={gjenstaendeSoknader} />
+            <GjenstaendeSoknader soknader={gjenstaendeSoknader} />
 
-                    <Vis
-                        hvis={gjenstaendeSoknader.length === 0}
-                        render={() => (
-                            <Button
-                                className="mt-8"
-                                onClick={() => {
-                                    logEvent('knapp klikket', {
-                                        tekst: tekst('kvittering.ferdig'),
-                                        soknadstype: valgtSoknad.soknadstype,
-                                    })
-                                    window.location.href = sykefravaerUrl()
-                                }}
-                            >
-                                {tekst('kvittering.ferdig')}
-                            </Button>
-                        )}
-                    ></Vis>
-                    <Vis
-                        hvis={gjenstaendeSoknader.length === 0}
-                        render={() => {
-                            if (harKorrigertArbeidstakersoknadIDetSiste(soknader) && korrigertStudyActive) {
-                                return <UxSignalsWidget study={korrigertSøknadStudy} demo={!isProd()} />
-                            }
-                            return null
+            {gjenstaendeSoknader.length === 0 && (
+                <>
+                    <Button
+                        className="mt-8"
+                        onClick={() => {
+                            logEvent('knapp klikket', {
+                                tekst: tekst('kvittering.ferdig'),
+                                soknadstype: valgtSoknad.soknadstype,
+                            })
+                            window.location.href = sykefravaerUrl()
                         }}
-                    />
-                    <Vis
-                        hvis={skalViseEndreEllerEttersend}
-                        render={() => (
-                            <>
-                                <Vis hvis={skalViseEndre} render={() => <Endreknapp />} />
-                                <Vis
-                                    hvis={skalViseSendTilArbeidsgiver}
-                                    render={() => <Ettersending gjelder="arbeidsgiver" />}
-                                />
-                            </>
-                        )}
-                    />
-                </HotjarTrigger>
-            </div>
+                    >
+                        {tekst('kvittering.ferdig')}
+                    </Button>
+                    {harKorrigertArbeidstakersoknadIDetSiste(soknader) && korrigertStudyActive && (
+                        <UxSignalsWidget study={korrigertSøknadStudy} demo={!isProd()} />
+                    )}
+                </>
+            )}
+
+            {skalViseEndre && <Endreknapp />}
+            {skalViseSendTilArbeidsgiver && <Ettersending gjelder="arbeidsgiver" />}
         </>
     )
 }

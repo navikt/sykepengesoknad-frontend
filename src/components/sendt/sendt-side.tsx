@@ -6,7 +6,6 @@ import { RSSoknadstype } from '../../types/rs-types/rs-soknadstype'
 import { logEvent } from '../amplitude/amplitude'
 import Endreknapp from '../endreknapp/endreknapp'
 import Ettersending from '../ettersending/ettersending'
-import { hentHotjarJsTrigger, HotjarTrigger } from '../hotjar-trigger'
 import Kvittering from '../kvittering/kvittering'
 import Vis from '../vis'
 import useSoknad from '../../hooks/useSoknad'
@@ -56,25 +55,23 @@ const SendtSide = () => {
         <>
             <SoknadHeader />
 
-            <HotjarTrigger jsTrigger={hentHotjarJsTrigger(valgtSoknad.soknadstype, 'sendt')}>
-                <Kvittering />
+            <Kvittering />
 
-                <Vis
-                    hvis={skalViseKnapperad}
-                    render={() => (
-                        <>
-                            <Vis hvis={skalViseEndre} render={() => <Endreknapp />} />
+            <Vis
+                hvis={skalViseKnapperad}
+                render={() => (
+                    <>
+                        <Vis hvis={skalViseEndre} render={() => <Endreknapp />} />
 
-                            <Vis hvis={!erSendtTilNav} render={() => <Ettersending gjelder="nav" />} />
+                        <Vis hvis={!erSendtTilNav} render={() => <Ettersending gjelder="nav" />} />
 
-                            <Vis
-                                hvis={skalViseSendTilArbeidsgiver}
-                                render={() => <Ettersending gjelder="arbeidsgiver" />}
-                            />
-                        </>
-                    )}
-                />
-            </HotjarTrigger>
+                        <Vis
+                            hvis={skalViseSendTilArbeidsgiver}
+                            render={() => <Ettersending gjelder="arbeidsgiver" />}
+                        />
+                    </>
+                )}
+            />
         </>
     )
 }
