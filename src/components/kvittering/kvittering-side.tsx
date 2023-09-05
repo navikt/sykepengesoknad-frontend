@@ -56,11 +56,13 @@ const KvitteringSide = () => {
 
     const erSendtTilArbeidsgiver = valgtSoknad.sendtTilArbeidsgiverDato !== undefined
 
-    const skalViseEndre = valgtSoknad.status !== RSSoknadstatus.KORRIGERT
+    const skalViseEndre =
+        valgtSoknad.status !== RSSoknadstatus.KORRIGERT && valgtSoknad.soknadstype !== RSSoknadstype.OPPHOLD_UTLAND
     const skalViseSendTilArbeidsgiver =
         valgtSoknad.arbeidsgiver !== undefined &&
         !erSendtTilArbeidsgiver &&
-        valgtSoknad.soknadstype !== RSSoknadstype.REISETILSKUDD
+        valgtSoknad.soknadstype !== RSSoknadstype.REISETILSKUDD &&
+        valgtSoknad.soknadstype !== RSSoknadstype.OPPHOLD_UTLAND
 
     const gjenstaendeSoknader = hentGjenstaendeSoknader(soknader, valgtSoknad)
 
