@@ -66,7 +66,7 @@
         "next": "^13.4.19",
         "postcss": "^8.4.29",
         "prettier": "^3.0.3",
-        "prettier-plugin-tailwindcss": "^0.5.3",
+        "prettier-plugin-tailwindcss": "^0.5.4",
         "start-server-and-test": "^2.0.0",
         "tailwindcss": "^3.3.3",
         "ts-loader": "^9.4.4",
