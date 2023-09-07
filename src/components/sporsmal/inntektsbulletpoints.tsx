@@ -4,6 +4,7 @@ import { CheckmarkCircleIcon } from '@navikt/aksel-icons'
 
 import { Soknad } from '../../types/types'
 
+/*max-h-[48px]*/
 export const Inntektsbulletpoints = ({ soknad }: { soknad: Soknad }) => {
     return (
         <>
@@ -22,7 +23,7 @@ export const Inntektsbulletpoints = ({ soknad }: { soknad: Soknad }) => {
 }
 
 const ListItemWithIcon = ({ content }: { content: string }) => (
-    <li className="mb-4 flex max-w-[320px] gap-4 rounded-lg bg-gray-50 p-4 py-5 ">
+    <li className="mb-4 flex max-w-[320px]  gap-4 rounded-lg bg-gray-50 p-4 py-5 ">
         <CheckmarkCircleIcon
             title="a11y-title"
             className="m-width-[24px] m-height-[24px] pt1 flex-shrink-0 text-xl font-bold"
