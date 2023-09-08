@@ -14,14 +14,13 @@ export function InntektSN() {
     return (
         <>
             <BodyLong spacing>
-                Som selvstendig næringsdrivende må du sende inn inntektsopplysningere selv. Søknaden blir ikke behandlet
+                Som selvstendig næringsdrivende må du sende inn inntektsopplysninger selv. Søknaden blir ikke behandlet
                 før inntektsopplysningene er sendt inn.
             </BodyLong>
+            <BodyLong spacing>Du trenger bare å sende inn skjemaet én gang per sykefravær.</BodyLong>
             <BodyLong spacing>
-                Har du allerede sendt inn inntektsopplysninger kan du se bort fra denne meldingen.
-            </BodyLong>
-            <BodyLong spacing>
-                Du trenger bare å sende inn skjemaet én gang, selv om sykmeldingen eventuelt blir forlenget.
+                Har du allerede sendt inn inntektsopplysninger for dette sykefraværet kan du se bort fra denne
+                meldingen.
             </BodyLong>
 
             <Button
@@ -38,7 +37,7 @@ export function InntektSN() {
                     })
                 }}
             >
-                Send inn inntektsopplysninger
+                Send inntektsopplysninger
             </Button>
         </>
     )
