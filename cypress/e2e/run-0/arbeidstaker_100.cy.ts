@@ -222,7 +222,7 @@ describe('Tester arbeidstakersøknad', () => {
     it('Søknad kvittering', () => {
         cy.url().should('include', `/kvittering/${soknad.id}`)
         cy.get('[data-cy="kvittering"]')
-            .should('contain', 'Vi trenger inntektsopplysninger fra deg')
+            .should('contain', 'Innsending av inntektsopplysninger')
             .and('contain', 'Hva skjer videre?')
             .and('contain', 'Før NAV kan behandle søknaden')
             .and('not.contain', 'Hvorfor går det et skille ved 16 dager?')
