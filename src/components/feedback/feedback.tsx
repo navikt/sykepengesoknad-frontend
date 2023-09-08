@@ -1,4 +1,4 @@
-import { BodyShort, Button, Heading, Skeleton, Textarea } from '@navikt/ds-react'
+import { Button, Heading, Label, Skeleton, Textarea } from '@navikt/ds-react'
 import React, { useEffect, useRef, useState } from 'react'
 import { FaceSmileIcon } from '@navikt/aksel-icons'
 
@@ -109,9 +109,9 @@ export const Feedback = ({ soknad, steg }: { soknad: Soknad | undefined; steg: n
         <section aria-label="Tilbakemelding på søknaden">
             <div className="w:full mt-16 md:w-3/4" data-cy="feedback-wrapper">
                 <div className="mt-1 rounded-xl bg-surface-subtle p-6">
-                    <BodyShort className="mb-6" as={soknad ? BodyShort : Skeleton}>
+                    <Label className="mb-6" as={soknad ? 'p' : Skeleton}>
                         Opplever du at du har nok informasjon til å svare på dette spørsmålet?
-                    </BodyShort>
+                    </Label>
                     <div className="flex w-full gap-2">
                         <FeedbackButton feedbacktype={Feedbacktype.JA} {...feedbackButtonProps}>
                             Ja
