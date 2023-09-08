@@ -2,7 +2,7 @@ import { Heading, Panel } from '@navikt/ds-react'
 import { logger } from '@navikt/next-logger'
 import dayjs from 'dayjs'
 import React, { Fragment, useEffect, useState } from 'react'
-import { CheckmarkCircleFillIcon, ExclamationmarkTriangleIcon } from '@navikt/aksel-icons'
+import { CheckmarkCircleFillIcon } from '@navikt/aksel-icons'
 import { useRouter } from 'next/router'
 import { useQueryClient } from '@tanstack/react-query'
 
@@ -24,7 +24,7 @@ import Over16dager from './innhold/arbeidstaker/over16dager'
 import PerioderMedOpphold from './innhold/arbeidstaker/perioder-med-opphold'
 import PerioderUtenOpphold from './innhold/arbeidstaker/perioder-uten-opphold'
 import ArbeidstakerStatus from './status/arbeidstaker-status'
-import InntektSN from './innhold/arbeidstaker/gjentagende-segmenter/InntektSN'
+import { InntektSN } from './innhold/arbeidstaker/gjentagende-segmenter/InntektSN'
 import GridItems from './grid-items'
 
 type ArbeidstakerKvitteringTekst = 'inntil16dager' | 'over16dager' | 'utenOpphold' | 'medOpphold' | undefined
@@ -177,18 +177,10 @@ const Arbeidstaker = () => {
                 render={() => (
                     <>
                         <GridItems
-                            venstre={
-                                <div className="flex items-center justify-center">
-                                    <ExclamationmarkTriangleIcon
-                                        title=""
-                                        fontSize="1.5rem"
-                                        className="text-icon-warning"
-                                    />
-                                </div>
-                            }
+                            venstre={<Fragment />}
                             midt={
                                 <Heading size="small" level="3">
-                                    Vi trenger inntektsopplysninger fra deg
+                                    Innsending av inntektsopplysninger
                                 </Heading>
                             }
                             hoyre={<Fragment />}

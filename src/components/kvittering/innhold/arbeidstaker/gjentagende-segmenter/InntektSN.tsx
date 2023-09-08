@@ -4,7 +4,7 @@ import { ExternalLinkIcon } from '@navikt/aksel-icons'
 
 import { logEvent } from '../../../../amplitude/amplitude'
 
-function InntektSN() {
+export function InntektSN() {
     useEffect(() => {
         logEvent('knapp vist', {
             tekst: 'Send inntektsopplysninger',
@@ -13,9 +13,14 @@ function InntektSN() {
     }, [])
     return (
         <>
-            <BodyLong>
-                Som selvstendig næringsdrivende må du sende inntektsopplysninger selv. Søknaden blir ikke behandlet før
-                inntektsopplysningene er sendt inn.
+            <BodyLong spacing>
+                Som selvstendig næringsdrivende må du sende inn inntektsopplysninger selv. Søknaden blir ikke behandlet
+                før inntektsopplysningene er sendt inn.
+            </BodyLong>
+            <BodyLong spacing>Du trenger bare å sende inn skjemaet én gang per sykefravær.</BodyLong>
+            <BodyLong spacing>
+                Har du allerede sendt inn inntektsopplysninger for dette sykefraværet kan du se bort fra denne
+                meldingen.
             </BodyLong>
 
             <Button
@@ -24,7 +29,7 @@ function InntektSN() {
                 icon={<ExternalLinkIcon aria-hidden />}
                 as="a"
                 href="https://www.nav.no/fyllut/nav083501"
-                className="mb-8 mt-4"
+                className="mb-8"
                 onClick={() => {
                     logEvent('knapp klikket', {
                         tekst: 'Send inntektsopplysninger',
@@ -32,10 +37,8 @@ function InntektSN() {
                     })
                 }}
             >
-                Send inn inntektsopplysninger
+                Send inntektsopplysninger
             </Button>
         </>
     )
 }
-
-export default InntektSN
