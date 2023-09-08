@@ -131,8 +131,9 @@ export const FeedbackKvittering = ({ soknad }: { soknad: Soknad | undefined }) =
         </section>
     )
 }
+
 interface FeedbackConfig {
-    emoji: (fp: FillProps) => JSX.Element
+    emoji: (fp: FillProps) => React.JSX.Element
     text: string
     color: string
     hoverColor: string
@@ -186,7 +187,7 @@ const FeedbackButton = (props: FeedbackButtonProps) => {
 
     return (
         <button
-            type={"button"}
+            type={'button'}
             className={cn(
                 'rounded-xl flex flex-col items-center py-2 gap-y-2 text-gray-900 w-[78px] h-[128px] hover:bg-gray-100',
                 feedback.hoverColor,
