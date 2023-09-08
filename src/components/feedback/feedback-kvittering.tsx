@@ -131,82 +131,73 @@ export const FeedbackKvittering = ({ soknad }: { soknad: Soknad | undefined }) =
         </section>
     )
 }
+interface FeedbackConfig {
+    emoji: (fp: FillProps) => JSX.Element
+    text: string
+    color: string
+    hoverColor: string
+}
+
+const feedbackConfigs: Record<number, FeedbackConfig> = {
+    1: {
+        emoji: sinna,
+        text: 'Veldig dårlig',
+        color: 'var(--a-red-100)',
+        hoverColor: 'hover:text-red-500',
+    },
+    2: {
+        emoji: lei,
+        text: 'Dårlig',
+        color: 'var(--a-orange-100)',
+        hoverColor: 'hover:text-orange-500',
+    },
+    3: {
+        emoji: noytral,
+        text: 'Nøytral',
+        color: 'var(--a-blue-100)',
+        hoverColor: 'hover:text-blue-500',
+    },
+    4: {
+        emoji: glad,
+        text: 'Bra',
+        color: 'var(--a-green-100)',
+        hoverColor: 'hover:text-green-400',
+    },
+    5: {
+        emoji: veldigGlad,
+        text: 'Veldig bra',
+        color: 'var(--a-green-200)',
+        hoverColor: 'hover:text-green-700',
+    },
+}
 
 const FeedbackButton = (props: FeedbackButtonProps) => {
-    const Emoji = (fp: FillProps) => {
-        switch (props.feedbacktype) {
-            case 1:
-                return sinna(fp)
-            case 2:
-                return lei(fp)
-            case 3:
-                return noytral(fp)
-            case 4:
-                return glad(fp)
-            case 5:
-                return veldigGlad(fp)
-        }
-    }
-    const tekst = () => {
-        switch (props.feedbacktype) {
-            case 1:
-                return 'Veldig dårlig'
-            case 2:
-                return 'Dårlig'
-            case 3:
-                return 'Nøytral'
-            case 4:
-                return 'Bra'
-            case 5:
-                return 'Veldig bra'
+    const feedback = feedbackConfigs[props.feedbacktype]
+    const isActive = props.activeState === props.feedbacktype
+
+    const handleOnClick = () => {
+        props.setThanksFeedback(false)
+        if (isActive) {
+            props.setActiveState(null)
+        } else {
+            props.setActiveState(props.feedbacktype)
         }
     }
 
-    const fill = () => {
-        if (props.activeState === props.feedbacktype) {
-            switch (props.feedbacktype) {
-                case 1:
-                    return 'var(--a-red-100)'
-                case 2:
-                    return 'var(--a-orange-100)'
-                case 3:
-                    return 'var(--a-blue-100)'
-                case 4:
-                    return 'var(--a-green-100)'
-                case 5:
-                    return 'var(--a-green-200)'
-            }
-        }
-        return undefined
-    }
     return (
         <button
+            type={"button"}
             className={cn(
                 'rounded-xl flex flex-col items-center py-2 gap-y-2 text-gray-900 w-[78px] h-[128px] hover:bg-gray-100',
+                feedback.hoverColor,
                 {
-                    'hover:text-red-500': props.feedbacktype === 1,
-                    'hover:text-orange-500': props.feedbacktype === 2,
-                    'hover:text-blue-500': props.feedbacktype === 3,
-                    'hover:text-green-400': props.feedbacktype === 4,
-                    'hover:text-green-700': props.feedbacktype === 5,
-                    'text-red-500 bg-gray-100': props.activeState === props.feedbacktype && props.feedbacktype === 1,
-                    'text-orange-500 bg-gray-100': props.activeState === props.feedbacktype && props.feedbacktype === 2,
-                    'text-blue-500 bg-gray-100': props.activeState === props.feedbacktype && props.feedbacktype === 3,
-                    'text-green-400 bg-gray-100': props.activeState === props.feedbacktype && props.feedbacktype === 4,
-                    'text-green-700 bg-gray-100': props.activeState === props.feedbacktype && props.feedbacktype === 5,
+                    [`${feedback.hoverColor.split(':')[1]} bg-gray-100`]: isActive,
                 },
             )}
-            onClick={() => {
-                props.setThanksFeedback(false)
-                if (props.activeState === props.feedbacktype) {
-                    props.setActiveState(null)
-                } else {
-                    props.setActiveState(props.feedbacktype)
-                }
-            }}
+            onClick={handleOnClick}
         >
-            <Emoji fill={fill()} />
-            <Label className="cursor-pointer">{tekst()}</Label>
+            <feedback.emoji fill={isActive ? feedback.color : undefined} />
+            <Label className="cursor-pointer">{feedback.text}</Label>
         </button>
     )
 }
