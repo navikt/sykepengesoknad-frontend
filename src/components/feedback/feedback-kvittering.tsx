@@ -42,9 +42,10 @@ export const FeedbackKvittering = ({ soknad }: { soknad: Soknad | undefined }) =
 
         const body = {
             feedback: textValue,
-            feedbackId: 'sykepengesoknad-sporsmal',
+            feedbackId: 'sykepengesoknad-kvittering',
             svar: activeState,
             app: 'sykepengesoknad-frontend',
+            soknadstype: soknad?.soknadstype,
         }
 
         await giFeedback(body)
@@ -187,7 +188,7 @@ const FeedbackButton = (props: FeedbackButtonProps) => {
 
     return (
         <button
-            type={'button'}
+            type="button"
             className={cn(
                 'rounded-xl flex flex-col items-center py-2 gap-y-2 text-gray-900 w-[78px] h-[128px] hover:bg-gray-100',
                 feedback.hoverColor,

@@ -4,7 +4,15 @@ export interface FillProps {
     fill?: string
 }
 export const sinna = (props: FillProps) => (
-    <svg width="48" height="47" viewBox="0 0 48 47" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <svg
+        aria-hidden
+        role="img"
+        width="48"
+        height="47"
+        viewBox="0 0 48 47"
+        fill="none"
+        xmlns="http://www.w3.org/2000/svg"
+    >
         <circle cx="23.873" cy="23.6172" r="21.8613" stroke="currentColor" strokeWidth="3" {...props} />
         <circle cx="15.9584" cy="20.9896" r="2.62828" fill="currentColor" />
         <circle cx="31.7884" cy="20.9896" r="2.62828" fill="currentColor" />
@@ -39,7 +47,15 @@ export const sinna = (props: FillProps) => (
 )
 
 export const lei = (props: FillProps) => (
-    <svg width="48" height="47" viewBox="0 0 48 47" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <svg
+        aria-hidden
+        role="img"
+        width="48"
+        height="47"
+        viewBox="0 0 48 47"
+        fill="none"
+        xmlns="http://www.w3.org/2000/svg"
+    >
         <circle cx="24.1582" cy="23.6172" r="21.8613" stroke="currentColor" strokeWidth="3" {...props} />
         <circle cx="16.4134" cy="20.1205" r="2.62828" fill="currentColor" />
         <circle cx="32.2435" cy="20.1205" r="2.62828" fill="currentColor" />
@@ -53,7 +69,15 @@ export const lei = (props: FillProps) => (
 )
 
 export const noytral = (props: FillProps) => (
-    <svg width="48" height="47" viewBox="0 0 48 47" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <svg
+        aria-hidden
+        role="img"
+        width="48"
+        height="47"
+        viewBox="0 0 48 47"
+        fill="none"
+        xmlns="http://www.w3.org/2000/svg"
+    >
         <circle cx="24.2051" cy="23.6211" r="21.8613" stroke="currentColor" strokeWidth="3" {...props} />
         <circle cx="16.2904" cy="20.1244" r="2.62828" fill="currentColor" />
         <circle cx="32.1205" cy="20.1244" r="2.62828" fill="currentColor" />
@@ -70,7 +94,15 @@ export const noytral = (props: FillProps) => (
 )
 
 export const glad = (props: FillProps) => (
-    <svg width="48" height="47" viewBox="0 0 48 47" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <svg
+        aria-hidden
+        role="img"
+        width="48"
+        height="47"
+        viewBox="0 0 48 47"
+        fill="none"
+        xmlns="http://www.w3.org/2000/svg"
+    >
         <circle cx="24.2754" cy="23.6191" r="21.8613" stroke="currentColor" strokeWidth="3" {...props} />
         <circle cx="16.3607" cy="20.1224" r="2.62828" fill="currentColor" />
         <circle cx="32.1908" cy="20.1224" r="2.62828" fill="currentColor" />
@@ -86,7 +118,15 @@ export const glad = (props: FillProps) => (
 )
 
 export const veldigGlad = (props: FillProps) => (
-    <svg width="48" height="47" viewBox="0 0 48 47" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <svg
+        aria-hidden
+        role="img"
+        width="48"
+        height="47"
+        viewBox="0 0 48 47"
+        fill="none"
+        xmlns="http://www.w3.org/2000/svg"
+    >
         <circle cx="24.1933" cy="23.6191" r="21.8613" stroke="currentColor" strokeWidth="3" {...props} />
         <path
             d="M24.1699 37.2824C18.55 37.2824 16.0586 30.5039 16.0586 30.5039H32.3277C32.3277 30.5039 29.7899 37.2824 24.1699 37.2824Z"
