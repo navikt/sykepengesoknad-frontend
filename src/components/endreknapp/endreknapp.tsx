@@ -24,8 +24,8 @@ const Endreknapp = () => {
     return (
         <>
             <Button
-                variant="tertiary"
-                className="-ml-5 mt-4 block"
+                variant="secondary"
+                className="mt-4 block"
                 onClick={() => {
                     logEvent('knapp klikket', {
                         tekst: endreKnappTekst,
