@@ -27,7 +27,7 @@ export const FlexModal = ({ open, setOpen, headerId, header, children, onClose, 
                 onClose && onClose()
             }}
         >
-            <Modal.Content className="flex flex-col items-start md:w-2xl" data-cy="modal-content">
+            <Modal.Body className="flex flex-col items-start md:w-2xl" data-cy="modal-content">
                 <div>
                     <Heading size="small" level="1" id={faktiskHeaderId} className="pr-8" spacing>
                         {header}
@@ -47,7 +47,7 @@ export const FlexModal = ({ open, setOpen, headerId, header, children, onClose, 
                         Lukk
                     </Button>
                 )}
-            </Modal.Content>
+            </Modal.Body>
         </Modal>
     )
 }

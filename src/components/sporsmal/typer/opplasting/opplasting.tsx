@@ -34,10 +34,10 @@ const Opplasting = ({ sporsmal }: SpmProps) => {
                 <BodyShort>{tekst('opplasting.legg-til')}</BodyShort>
             </Button>
 
-            <Modal open={openModal} onClose={lukkModal} closeButton aria-labelledby="opplasting-modal" className="w-96">
-                <Modal.Content>
+            <Modal open={openModal} onClose={lukkModal} aria-labelledby="opplasting-modal" className="w-96">
+                <Modal.Body>
                     <OpplastingForm valgtSoknad={valgtSoknad} setOpenModal={setOpenModal} />
-                </Modal.Content>
+                </Modal.Body>
             </Modal>
 
             <FilListe />

@@ -70,7 +70,7 @@ const Ettersending = ({ gjelder }: EttersendingProps) => {
                 aria-labelledby="ettersending-modal"
                 className="w-96"
             >
-                <Modal.Content>
+                <Modal.Body>
                     <Heading size="small" id="ettersending-modal" level="1" className="mr-10 mt-1" spacing>
                         {knappeTekst}
                     </Heading>
@@ -95,7 +95,7 @@ const Ettersending = ({ gjelder }: EttersendingProps) => {
                     >
                         {tekst('kvittering.knapp.angre')}
                     </Button>
-                </Modal.Content>
+                </Modal.Body>
             </Modal>
         </>
     )
