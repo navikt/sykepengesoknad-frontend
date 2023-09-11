@@ -31,7 +31,6 @@ export const FeedbackKvittering = ({ soknad }: { soknad: Soknad | undefined }) =
     }, [textValue, errorMsg])
 
     useEffect(() => {
-        activeState && textAreaRef.current && (textAreaRef.current as any).focus()
         setErrorMsg(null)
     }, [activeState])
 

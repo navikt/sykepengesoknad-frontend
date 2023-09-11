@@ -42,7 +42,6 @@ export const Feedback = ({ soknad, steg }: { soknad: Soknad | undefined; steg: n
     }, [steg])
 
     useEffect(() => {
-        activeState && textAreaRef.current && (textAreaRef.current as any).focus()
         setErrorMsg(null)
     }, [activeState])
 
