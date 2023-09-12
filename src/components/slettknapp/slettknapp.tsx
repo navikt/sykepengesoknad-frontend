@@ -42,6 +42,7 @@ const Slettknapp = ({ sporsmal, kvittering }: SlettknappProps) => {
     return (
         <>
             <Button
+                type="button"
                 variant="tertiary"
                 icon={<TrashIcon />}
                 iconPosition="right"

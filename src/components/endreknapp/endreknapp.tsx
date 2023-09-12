@@ -24,6 +24,7 @@ const Endreknapp = () => {
     return (
         <>
             <Button
+                type="button"
                 variant="secondary"
                 className="mt-4 block"
                 onClick={() => {
@@ -77,6 +78,7 @@ const ModalInnhold = ({
 
             <Button
                 variant="primary"
+                type="button"
                 className="mt-4"
                 loading={korrigerer}
                 onClick={(e) => {

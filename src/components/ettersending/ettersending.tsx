@@ -55,6 +55,7 @@ const Ettersending = ({ gjelder }: EttersendingProps) => {
     return (
         <>
             <Button
+                type="button"
                 variant="tertiary"
                 className="-ml-5 mt-4 block"
                 onClick={() => {
@@ -80,6 +81,7 @@ const Ettersending = ({ gjelder }: EttersendingProps) => {
                         render={() => <Alert variant="error">Beklager, klarte ikke ettersende søknaden din</Alert>}
                     />
                     <Button
+                        type="button"
                         size="small"
                         variant="primary"
                         loading={ettersenderNav || ettersenderArbeidsgiver}
@@ -89,6 +91,7 @@ const Ettersending = ({ gjelder }: EttersendingProps) => {
                         {hentTekst('kvittering.knapp.bekreft.send-til')}
                     </Button>
                     <Button
+                        type="button"
                         className="ml-auto mr-auto mt-4 block"
                         variant="tertiary"
                         onClick={() => setVilEttersende(false)}

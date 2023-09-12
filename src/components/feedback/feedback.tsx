@@ -146,6 +146,7 @@ export const Feedback = ({ soknad, steg }: { soknad: Soknad | undefined; steg: n
                                 description="Ikke skriv inn navn eller andre personopplysninger. Svaret ditt blir brukt til å forbedre søknaden og vil ikke påvirke søknaden din."
                             />
                             <Button
+                                type="button"
                                 data-cy="send-feedback"
                                 className="mr-auto"
                                 size="small"
@@ -180,6 +181,7 @@ const FeedbackButton = (props: FeedbackButtonProps) => {
             data-cy={'feedback-' + props.feedbacktype}
             variant="secondary-neutral"
             size="small"
+            type="button"
             as={props.soknad ? Button : Skeleton}
             className={cn({
                 'bg-surface-neutral-active text-text-on-inverted hover:bg-surface-neutral-active':

@@ -18,6 +18,7 @@ const AvsluttOgFortsettSenere = () => {
             <Button
                 className={cn('block', { '-ml-5': valgtSoknad })}
                 variant="tertiary"
+                type="button"
                 as={valgtSoknad ? Button : Skeleton}
                 data-cy="avslutt-og-fortsett-senere"
                 onClick={(e) => {
@@ -50,6 +51,7 @@ const AvsluttOgFortsettSenere = () => {
                 <BodyShort spacing>{tekst('avslutt.popup.sporsmal')}</BodyShort>
                 <Button
                     variant="primary"
+                    type="button"
                     className="mr-4 mt-4"
                     onClick={() => {
                         if (valgtSoknad) {
@@ -67,6 +69,7 @@ const AvsluttOgFortsettSenere = () => {
                 </Button>
                 <Button
                     variant="secondary"
+                    type="button"
                     className="mt-4"
                     onClick={() => {
                         setAapen(false)

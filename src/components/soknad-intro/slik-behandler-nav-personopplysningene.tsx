@@ -47,7 +47,7 @@ export const SlikBehandlerNavPersonopplysningene = () => {
 
     return (
         <>
-            <Button variant="tertiary" onClick={handleAapen} className="-ml-5 text-left">
+            <Button variant="tertiary" onClick={handleAapen} type="button" className="-ml-5 text-left">
                 {slikBehandlerNavPersonoppl}
             </Button>
             <FlexModal

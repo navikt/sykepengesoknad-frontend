@@ -31,6 +31,7 @@ export default function Person() {
             <div hidden={openState}>
                 <Tooltip content="Verktøy for testing">
                     <Button
+                        type="button"
                         ref={buttonRef}
                         onClick={() => setOpenState((b) => !b)}
                         icon={<SandboxIcon title="Åpne testdataverktøy" />}
@@ -53,7 +54,13 @@ export default function Person() {
                             <div className="w-[220px]">
                                 Her finner du verktøy for å endre mellom forskjellige brukere
                             </div>
-                            <Button onClick={dismissHint} className="mt-2" variant="secondary-neutral" size="small">
+                            <Button
+                                type="button"
+                                onClick={dismissHint}
+                                className="mt-2"
+                                variant="secondary-neutral"
+                                size="small"
+                            >
                                 OK!
                             </Button>
                         </Popover.Content>

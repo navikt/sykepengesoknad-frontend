@@ -24,6 +24,7 @@ const AvbrytKorrigering = () => {
         <>
             <Button
                 variant="tertiary"
+                type="button"
                 as={valgtSoknad ? Button : Skeleton}
                 className={cn('text-surface-danger hover:bg-red-50 hover:text-surface-danger', {
                     '-ml-5': valgtSoknad,
@@ -60,6 +61,7 @@ const AvbrytSoknadModal = () => {
         <>
             <Button
                 variant="tertiary"
+                type="button"
                 as={valgtSoknad ? Button : Skeleton}
                 className={cn('text-surface-danger hover:bg-red-50 hover:text-surface-danger', {
                     '-ml-5': valgtSoknad,
@@ -97,6 +99,7 @@ const AvbrytSoknadModal = () => {
 
                 <Button
                     variant="danger"
+                    type="button"
                     className="mr-4 mt-4"
                     loading={avbryter}
                     onClick={() => {
@@ -119,6 +122,7 @@ const AvbrytSoknadModal = () => {
                 </Button>
                 <Button
                     variant="secondary"
+                    type="button"
                     className="mt-4"
                     onClick={() => {
                         logEvent('knapp klikket', {

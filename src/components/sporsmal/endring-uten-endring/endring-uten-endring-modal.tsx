@@ -41,6 +41,7 @@ export const EndringUtenEndringModal = (props: EndringUtenEndringModalProps) => 
 
                     <Button
                         variant="primary"
+                        type="button"
                         className="ml-auto mr-auto block"
                         loading={avbryter}
                         onClick={() => {
