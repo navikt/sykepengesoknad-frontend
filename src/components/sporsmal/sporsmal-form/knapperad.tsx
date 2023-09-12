@@ -56,7 +56,7 @@ const Knapperad = ({ poster }: { poster: boolean }) => {
                 as={soknad ? Button : Skeleton}
                 variant="primary"
                 type="submit"
-                disabled={poster}
+                loading={poster}
                 className="mb-12 mt-6 inline-flex"
             >
                 {knappetekst()}
