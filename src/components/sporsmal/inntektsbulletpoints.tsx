@@ -22,10 +22,10 @@ export const Inntektsbulletpoints = ({ soknad }: { soknad: Soknad }) => {
 }
 
 const ListItemWithIcon = ({ content }: { content: string }) => (
-    <li className="mb-4 flex max-w-sm gap-4 rounded-lg bg-gray-50 p-4 py-6 ">
+    <li className="mb-4 flex max-w-[320px] items-center gap-4 rounded-lg bg-gray-50 p-2 min-h-[48px]">
         <CheckmarkCircleIcon
             title="a11y-title"
-            className="m-width-[24px] m-height-[24px] pt1 flex-shrink-0 text-xl font-bold"
+            className="m-width-[24px] m-height-[24px] pt1  text-xl font-bold shrink-0"
             height={24}
             width={24}
         />
