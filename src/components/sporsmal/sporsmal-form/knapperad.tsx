@@ -53,7 +53,7 @@ const Knapperad = ({ poster }: { poster: boolean }) => {
     return (
         <div className="my-8" data-cy="knapperad">
             <Button
-                as={soknad ? Button : Skeleton}
+                as={soknad ? 'button' : Skeleton}
                 variant="primary"
                 type="submit"
                 loading={poster}
