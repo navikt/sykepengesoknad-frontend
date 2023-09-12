@@ -20,9 +20,9 @@ describe('Tester cummulative-layout-shift ', () => {
             'http://localhost:8080/syk/sykepengesoknad/soknader/04247ad5-9c15-4b7d-ae55-f23807777777/3?testperson=cummulative-layout-shift',
         )
         // Sjekk mains høyde
-        const expectedHeight = '1000px'
+        const expectedHeight = '1016px'
         cy.get('main').should('have.css', 'height', expectedHeight)
-        cy.get('.navds-skeleton').should('have.length', 15)
+        cy.get('.navds-skeleton').should('have.length', 16)
 
         // Venter på at alle dataene er fetchet og rendret
 

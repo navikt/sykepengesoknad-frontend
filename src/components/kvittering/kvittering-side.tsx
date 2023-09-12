@@ -19,6 +19,7 @@ import QueryStatusPanel from '../queryStatusPanel/QueryStatusPanel'
 import { kvitteringBreadcrumb, useUpdateBreadcrumbs } from '../../hooks/useBreadcrumbs'
 import { useStudyStatus } from '../../hooks/useStudyStatus'
 import { SoknadHeader } from '../soknad/soknad-header'
+import { FlexjarKvittering } from '../flexjar/flexjar-kvittering'
 
 import Kvittering from './kvittering'
 import { harKorrigertArbeidstakersoknadIDetSiste } from './harSvartJa'
@@ -93,7 +94,7 @@ const KvitteringSide = () => {
                     )}
                 </>
             )}
-
+            <FlexjarKvittering />
             {skalViseEndre && <Endreknapp />}
             {skalViseSendTilArbeidsgiver && <Ettersending gjelder="arbeidsgiver" />}
         </>

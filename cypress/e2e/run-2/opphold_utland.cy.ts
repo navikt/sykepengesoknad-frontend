@@ -24,7 +24,7 @@ describe('Tester søknad om å beholde sykepenger utenfor EØS', () => {
             .and('have.attr', 'aria-valuemax', '5')
             .and('have.attr', 'aria-valuetext', '1 av 5 steg')
 
-        cy.contains('Tilbake').should('not.exist')
+        cy.get('body').findByRole('link', { name: 'Tilbake' }).should('not.exist')
         cy.contains('Opplysninger fra sykmeldingen').should('not.exist')
         cy.contains('Når skal du reise?')
 
@@ -35,7 +35,7 @@ describe('Tester søknad om å beholde sykepenger utenfor EØS', () => {
 
     it('Velger land', function () {
         cy.url().should('include', `${soknad.id}/2`)
-        cy.contains('Tilbake').should('exist')
+        cy.get('body').findByRole('link', { name: 'Tilbake' }).should('exist')
 
         klikkGaVidere(true)
         cy.contains('Du må velge minst et alternativ fra menyen')
@@ -56,7 +56,7 @@ describe('Tester søknad om å beholde sykepenger utenfor EØS', () => {
     })
 
     it('Går tilbake og frem', function () {
-        cy.contains('Tilbake').click()
+        cy.get('body').findByRole('link', { name: 'Tilbake' }).click()
         sjekkMainContentFokus()
         klikkGaVidere()
     })
