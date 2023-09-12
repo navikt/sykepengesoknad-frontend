@@ -4,7 +4,6 @@ import { CheckmarkCircleIcon } from '@navikt/aksel-icons'
 
 import { Soknad } from '../../types/types'
 
-/*max-h-[48px]*/
 export const Inntektsbulletpoints = ({ soknad }: { soknad: Soknad }) => {
     return (
         <>
