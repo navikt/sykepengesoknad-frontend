@@ -16,7 +16,7 @@ import FristSykepenger from '../frist-sykepenger/frist-sykepenger'
 import { ViktigInformasjon } from '../soknad-intro/viktig-informasjon'
 import { soknadBreadcrumb, useUpdateBreadcrumbs } from '../../hooks/useBreadcrumbs'
 import EgenmeldingsdagerArbeidsgiver from '../egenmeldingsdager-arbeidsgiver/egenmeldingsdager-arbeidsgiver'
-import { Feedback } from '../feedback/feedback'
+import { FlexjarSporsmal } from '../flexjar/flexjar-sporsmal'
 import { useSoknadMedDetaljer } from '../../hooks/useSoknadMedDetaljer'
 
 import { urlTilSoknad } from './soknad-link'
@@ -93,7 +93,7 @@ export const Soknaden = () => {
             {erForstesidenMedReisetilskudd && <OmReisetilskudd />}
             {!erForstesiden && <SporsmalTittel />}
             <SporsmalForm />
-            <Feedback soknad={valgtSoknad} steg={stegNo} />
+            <FlexjarSporsmal soknad={valgtSoknad} steg={stegNo} />
         </>
     )
 }
