@@ -23,7 +23,7 @@ export const arbeidstakerGradert: RSSoknad = {
             arbeidsforholdstype: 'ARBEIDSTAKER',
         },
         {
-            navn: 'Bensinstasjonen',
+            navn: 'Bensinstasjonen med det veldig lange navnet, Stavanger (ved det røde huset som ligger ved Shell)',
             orgnummer: '333',
             arbeidsforholdstype: 'ARBEIDSTAKER',
         },
