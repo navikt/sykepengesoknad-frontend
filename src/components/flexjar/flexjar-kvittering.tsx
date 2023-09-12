@@ -25,6 +25,7 @@ export const FlexjarKvittering = () => {
             thanksFeedback={thanksFeedback}
             setThanksFeedback={setThanksFeedback}
             getPlaceholder={() => 'Fortell oss om din opplevelse (valgfritt)'}
+            flexjarsporsmal="Hvordan opplevde du denne søknaden?"
         >
             <div className="flex w-full gap-2">
                 <div className="flex w-full justify-center gap-4">

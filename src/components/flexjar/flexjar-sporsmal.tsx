@@ -80,6 +80,8 @@ export const FlexjarSporsmal = ({ soknad, steg }: { soknad: Soknad | undefined; 
             setThanksFeedback={setThanksFeedback}
             getPlaceholder={getPlaceholder}
             textRequired={activeState === Feedbacktype.FORBEDRING || activeState === Feedbacktype.NEI}
+            sectionLabel="hm"
+            flexjarsporsmal="Opplever du at du har nok informasjon til å svare på dette spørsmålet?"
         >
             <div className="flex w-full gap-2">
                 <FeedbackButton feedbacktype={Feedbacktype.JA} {...feedbackButtonProps}>
@@ -98,7 +100,6 @@ export const FlexjarSporsmal = ({ soknad, steg }: { soknad: Soknad | undefined; 
 const FeedbackButton = (props: FeedbackButtonProps) => {
     return (
         <Button
-            data-cy={'feedback-' + props.feedbacktype}
             variant="secondary-neutral"
             size="small"
             as={props.soknad ? Button : Skeleton}

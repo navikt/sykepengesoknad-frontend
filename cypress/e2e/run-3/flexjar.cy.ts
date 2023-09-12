@@ -1,7 +1,7 @@
 import { klikkGaVidere, svarCheckboxPanel, svarNeiHovedsporsmal } from '../../support/utilities'
 import { arbeidstakerGradert } from '../../../src/data/mock/data/soknad/arbeidstaker-gradert'
 
-describe('Tester feedback', () => {
+describe('Tester flexjar', () => {
     const soknad = arbeidstakerGradert
 
     before(() => {
@@ -12,12 +12,20 @@ describe('Tester feedback', () => {
         cy.get(`a[href*=${soknad.id}]`).click()
     })
 
+    function heading(heading: string, level = 3) {
+        return cy.findByRole('heading', {
+            name: heading,
+            level,
+        })
+    }
+
     it('Naviger til tilbake i arbeid', function () {
         svarCheckboxPanel()
-        cy.get('[data-cy="feedback-wrapper"]').should('not.exist')
+        heading('Opplever du at du har nok informasjon til å svare på dette spørsmålet?').should('not.exist')
+
         klikkGaVidere()
         svarNeiHovedsporsmal()
-        cy.get('[data-cy="feedback-wrapper"]').should('exist')
+        heading('Opplever du at du har nok informasjon til å svare på dette spørsmålet?').should('exist')
         klikkGaVidere()
     })
 
@@ -25,12 +33,21 @@ describe('Tester feedback', () => {
         cy.contains('Tilbake i fullt arbeid')
         cy.contains('Opplever du at du har nok informasjon til å svare på dette spørsmålet?')
 
-        cy.get('[data-cy="feedback-JA"]').contains('Ja').click()
-        cy.get('[data-cy="feedback-JA"]').should('have.css', 'background-color', 'rgb(38, 38, 38)')
-        cy.get('[data-cy="feedback-textarea"]').type('Dette er en test')
-
-        cy.get('[data-cy="send-feedback"]').contains('Send tilbakemelding').click()
-        cy.contains('Takk for tilbakemeldingen din!')
+        heading('Opplever du at du har nok informasjon til å svare på dette spørsmålet?')
+            .closest('section')
+            .within(() => {
+                cy.findByRole('button', {
+                    name: 'Ja',
+                }).click()
+                cy.findByRole('button', {
+                    name: 'Ja',
+                }).should('have.css', 'background-color', 'rgb(38, 38, 38)')
+                cy.findByRole('textbox').type('Dette er en test')
+                cy.findByRole('button', {
+                    name: 'Send tilbakemelding',
+                }).click()
+                cy.contains('Takk for tilbakemeldingen din!')
+            })
     })
 
     it('Har ikke feedback på siste sidene', function () {
@@ -52,10 +69,10 @@ describe('Tester feedback', () => {
         klikkGaVidere()
         svarNeiHovedsporsmal()
         klikkGaVidere()
-        cy.get('[data-cy="feedback-wrapper"]').should('not.exist')
+        heading('Opplever du at du har nok informasjon til å svare på dette spørsmålet?').should('not.exist')
         svarCheckboxPanel()
         cy.contains('Send søknaden').click()
         cy.contains('Søknaden er sendt')
-        cy.get('[data-cy="feedback-wrapper"]').should('not.exist')
+        heading('Opplever du at du har nok informasjon til å svare på dette spørsmålet?').should('not.exist')
     })
 })

@@ -14,6 +14,7 @@ interface FlexjarFellesProps<T> {
     setThanksFeedback: (b: boolean) => void
     getPlaceholder: () => string
     textRequired?: boolean
+    flexjarsporsmal: string
 }
 
 export function FlexjarFelles<T>({
@@ -25,6 +26,7 @@ export function FlexjarFelles<T>({
     setThanksFeedback,
     children,
     textRequired,
+    flexjarsporsmal,
 }: FlexjarFellesProps<T>) {
     const [textValue, setTextValue] = useState('')
     const [errorMsg, setErrorMsg] = useState<string | null>(null)
@@ -54,7 +56,7 @@ export function FlexjarFelles<T>({
             sporsmal: sporsmal?.tag,
         }
 
-        await giFeedback(body)
+        giFeedback(body)
     }
 
     const handleSend = async () => {
@@ -71,10 +73,10 @@ export function FlexjarFelles<T>({
     }
 
     return (
-        <section aria-label="Tilbakemelding på søknaden">
+        <section>
             <div className="w:full mt-16 md:w-3/4">
                 <div className="mt-1 rounded-xl bg-surface-subtle p-6">
-                    <Label as={valgtSoknad ? 'p' : Skeleton}>Hvordan opplevde du denne søknaden?</Label>
+                    <Label as={valgtSoknad ? 'h3' : Skeleton}>{flexjarsporsmal}</Label>
                     <Label className="mb-4" as={valgtSoknad ? 'p' : Skeleton}>
                         Tilbakemeldingen er anonym
                     </Label>
@@ -82,7 +84,6 @@ export function FlexjarFelles<T>({
                     {activeState !== null && (
                         <form className="mt-6 flex w-full flex-col gap-4">
                             <Textarea
-                                data-cy="feedback-textarea"
                                 ref={textAreaRef}
                                 error={errorMsg}
                                 label={getPlaceholder()}
@@ -102,7 +103,6 @@ export function FlexjarFelles<T>({
                                 description="Ikke skriv inn navn eller andre personopplysninger. Svaret ditt blir brukt til å forbedre søknaden og vil ikke påvirke eller saksbehandle søknaden din."
                             />
                             <Button
-                                data-cy="send-feedback"
                                 className="mr-auto"
                                 size="small"
                                 variant="secondary-neutral"
