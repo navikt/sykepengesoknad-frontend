@@ -27,6 +27,7 @@ import { useOppdaterSporsmal } from '../../../hooks/useOppdaterSporsmal'
 import { FeilStateView } from '../../feil/refresh-hvis-feil-state'
 import { useSoknadMedDetaljer } from '../../../hooks/useSoknadMedDetaljer'
 import { SkeletonSporsmal } from '../skeleton-sporsmal'
+import VaerKlarOverAt from '../../vaer-klar-over-at/om-reisetilskudd'
 
 import Knapperad from './knapperad'
 import SendesTil from './sendes-til'
@@ -159,6 +160,7 @@ const SporsmalForm = () => {
 
                     {erSiste && !erUtenlandssoknad && valgtSoknad && nesteSporsmal && (
                         <>
+                            <VaerKlarOverAt />
                             <Oppsummering ekspandert={false} sporsmal={valgtSoknad.sporsmal} />
                             <Opplysninger ekspandert={false} />
                             <CheckboxPanel sporsmal={nesteSporsmal} />

@@ -28,6 +28,7 @@ import { EndringUtenEndringTekster } from '../components/sporsmal/endring-uten-e
 import KnapperadTekster from '../components/sporsmal/sporsmal-form/knapperad-tekster'
 import SporsmalTekster from '../components/sporsmal/sporsmal-tekster'
 import EgenmeldingsdagerArbeidsgiverTekster from '../components/egenmeldingsdager-arbeidsgiver/egenmeldingsdager-arbeidsgiver-tekster'
+import VaerKlarOverAtTekster from '../components/sporsmal/vaer-klar-over-at-tekster'
 
 const tekster = {
     ...OpplysningerTekster,
@@ -58,6 +59,7 @@ const tekster = {
     ...ViktigInformasjonTekster,
     ...FristSykepengerTekster,
     ...EgenmeldingsdagerArbeidsgiverTekster,
+    ...VaerKlarOverAtTekster,
 }
 
 export const tekst = (tekst: keyof typeof tekster): string => {

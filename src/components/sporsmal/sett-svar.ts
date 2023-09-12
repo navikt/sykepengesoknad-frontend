@@ -6,6 +6,8 @@ import { empty } from '../../utils/constants'
 import { SvarEnums } from '../../types/enums'
 import { RSSvar } from '../../types/rs-types/rs-svar'
 
+import VaerKlarOverAtTekster from './vaer-klar-over-at-tekster'
+
 const hentVerdier = (sporsmal: Sporsmal, verdier: Record<string, any>) => {
     let verdi = verdier[sporsmal.id]
     if (sporsmal.svartype === RSSvartype.PERIODE || sporsmal.svartype === RSSvartype.PERIODER) {
@@ -72,14 +74,23 @@ export const settSvar = (sporsmal: Sporsmal, verdier: Record<string, any>): Spor
 }
 
 const checkboxPanelSvar = (sporsmal: Sporsmal, verdi: any) => {
-    const svarliste = {
-        sporsmalId: sporsmal.id,
-        svar: [
+    let svarArray
+
+    if (sporsmal.tag === 'BEKREFT_OPPLYSNINGER' && (verdi === SvarEnums.CHECKED || verdi === true)) {
+        // Konverter tekster til ønsket format
+        svarArray = Object.values(VaerKlarOverAtTekster).map((str) => ({ verdi: str }))
+    } else {
+        svarArray = [
             {
                 verdi: verdi === SvarEnums.CHECKED || verdi === true ? SvarEnums.CHECKED : '',
             },
-        ],
+        ]
     }
+
+    const svarliste = {
+        svar: svarArray,
+    }
+
     return sporsmal.copyWith({ svarliste: svarliste })
 }
 
