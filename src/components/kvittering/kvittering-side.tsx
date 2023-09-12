@@ -94,7 +94,7 @@ const KvitteringSide = () => {
                     )}
                 </>
             )}
-            <FlexjarKvittering soknad={valgtSoknad} />
+            <FlexjarKvittering />
             {skalViseEndre && <Endreknapp />}
             {skalViseSendTilArbeidsgiver && <Ettersending gjelder="arbeidsgiver" />}
         </>

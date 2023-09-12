@@ -13,7 +13,7 @@ describe('Tester flexjar', () => {
     })
 
     function heading(heading: string, level = 3) {
-        return cy.findByRole('heading', {
+        return cy.get('body').findByRole('heading', {
             name: heading,
             level,
         })
@@ -50,7 +50,7 @@ describe('Tester flexjar', () => {
             })
     })
 
-    it('Har ikke feedback på siste sidene', function () {
+    it('Navigerer til siste side', function () {
         svarNeiHovedsporsmal()
         klikkGaVidere()
 
@@ -69,10 +69,33 @@ describe('Tester flexjar', () => {
         klikkGaVidere()
         svarNeiHovedsporsmal()
         klikkGaVidere()
+    })
+
+    it('Har ikke sporsmål flexjar på de siste sidene', function () {
         heading('Opplever du at du har nok informasjon til å svare på dette spørsmålet?').should('not.exist')
         svarCheckboxPanel()
         cy.contains('Send søknaden').click()
         cy.contains('Søknaden er sendt')
         heading('Opplever du at du har nok informasjon til å svare på dette spørsmålet?').should('not.exist')
+    })
+
+    it('Har kvittering flexjar på kvitteringa', function () {
+        heading('Hvordan opplevde du denne søknaden?')
+            .closest('section')
+            .within(() => {
+                cy.findByRole('button', {
+                    name: 'Bra',
+                })
+                    .should('have.css', 'background-color', 'rgba(0, 0, 0, 0)')
+                    .click()
+                cy.findByRole('button', {
+                    name: 'Bra',
+                }).should('have.css', 'background-color', 'rgb(241, 241, 241)')
+                cy.findByRole('textbox').type('Dette er en test')
+                cy.findByRole('button', {
+                    name: 'Send tilbakemelding',
+                }).click()
+                cy.contains('Takk for tilbakemeldingen din!')
+            })
     })
 })

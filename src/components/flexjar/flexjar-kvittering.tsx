@@ -56,7 +56,7 @@ export const FlexjarKvittering = () => {
                     <EmojiButton
                         feedback={4}
                         Emoji={glad}
-                        text="bra"
+                        text="Bra"
                         color="var(--a-green-100)"
                         hoverColor="hover:text-green-400"
                         {...feedbackButtonProps}
