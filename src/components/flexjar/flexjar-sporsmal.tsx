@@ -80,7 +80,6 @@ export const FlexjarSporsmal = ({ soknad, steg }: { soknad: Soknad | undefined; 
             setThanksFeedback={setThanksFeedback}
             getPlaceholder={getPlaceholder}
             textRequired={activeState === Feedbacktype.FORBEDRING || activeState === Feedbacktype.NEI}
-            sectionLabel="hm"
             flexjarsporsmal="Opplever du at du har nok informasjon til å svare på dette spørsmålet?"
         >
             <div className="flex w-full gap-2">
