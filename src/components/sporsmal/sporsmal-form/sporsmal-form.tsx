@@ -98,6 +98,7 @@ const SporsmalForm = () => {
         if (oppdatererSporsmal || senderSoknad)
             return Promise.reject(new Error('Spørsmål oppdateres eller søknad sendes allerede'))
         if ((!nesteSporsmal && !erUtenlandssoknad) || !sporsmal) {
+            // alert(nesteSporsmal) undefined
             return Promise.reject(new Error('Spørsmål skal være lastet for at vi kan submitte'))
         }
         if (!valgtSoknad) {

@@ -1,25 +1,26 @@
-import React from 'react'
+import React from "react";
 
-import { RSSvartype } from '../../types/rs-types/rs-svartype'
-import { Sporsmal } from '../../types/types'
+import { RSSvartype } from "../../types/rs-types/rs-svartype";
+import { Sporsmal } from "../../types/types";
 
-import BehDager from './typer/beh-dager'
-import CheckboxKomp from './typer/checkbox-komp'
-import CheckboxPanel from './typer/checkbox-panel'
-import DagerKomp from './typer/dager-komp'
-import DatoInput from './typer/dato-komp'
-import IkkeRelevant from './typer/ikke-relevant'
-import JaNeiStor from './typer/ja-nei-stor'
-import JaNeiLiten from './typer/ja-nei-liten'
-import Opplasting from './typer/opplasting/opplasting'
-import Perioder from './typer/perioder'
-import RadioTimerProsent from './typer/radio-timer-prosent'
-import TallKomp from './typer/tall-komp'
-import UkjentSporsmal from './typer/ukjent-sporsmal'
-import { Fritekst } from './typer/fritekst'
-import RadioKomp from './typer/radio-komp'
-import ComboboxSingle from './typer/combobox-single'
-import ComboboxMultiple from './typer/combobox-multiple'
+import BehDager from "./typer/beh-dager";
+import CheckboxKomp from "./typer/checkbox-komp";
+import CheckboxPanel from "./typer/checkbox-panel";
+import DagerKomp from "./typer/dager-komp";
+import DatoInput from "./typer/dato-komp";
+import IkkeRelevant from "./typer/ikke-relevant";
+import JaNeiStor from "./typer/ja-nei-stor";
+import JaNeiLiten from "./typer/ja-nei-liten";
+import Opplasting from "./typer/opplasting/opplasting";
+import Perioder from "./typer/perioder";
+import RadioTimerProsent from "./typer/radio-timer-prosent";
+import TallKomp from "./typer/tall-komp";
+import UkjentSporsmal from "./typer/ukjent-sporsmal";
+import { Fritekst } from "./typer/fritekst";
+import RadioKomp from "./typer/radio-komp";
+import ComboboxSingle from "./typer/combobox-single";
+import ComboboxMultiple from "./typer/combobox-multiple";
+import Kulepunkter from "./typer/kulepunkter";
 
 interface SporsmalSwitchProps {
     sporsmal: Sporsmal
@@ -82,6 +83,11 @@ const SporsmalSwitch = ({ sporsmal, sporsmalIndex, erSisteSporsmal }: SporsmalSw
 
         case RSSvartype.KVITTERING:
             return <Opplasting sporsmal={sporsmal} />
+
+            case RSSvartype.BEKREFTELSESPUNKTER:
+                return <Kulepunkter sporsmal={sporsmal} sporsmalIndex={sporsmalIndex} erSisteSporsmal={erSisteSporsmal}     />
+
+
 
         case RSSvartype.IKKE_RELEVANT:
             return <IkkeRelevant sporsmal={sporsmal} sporsmalIndex={sporsmalIndex} erSisteSporsmal={erSisteSporsmal} />

@@ -3,6 +3,73 @@ import { arbeidstaker100Syk } from '../sykmeldinger'
 import { andreInntektskilderV2 } from '../sporsmal/andre-inntektskilde-v2'
 import { værKlarOverAt } from '../sporsmal/vaer-klar-over-at'
 import { bekreftOpplysninger } from '../sporsmal/bekreft-opplysninger'
+import { RSSporsmal } from "../../../../types/rs-types/rs-sporsmal";
+
+const data: RSSporsmal = {
+    id: "308935",
+    tag: "VAER_KLAR_OVER_AT",
+    sporsmalstekst: "Viktig å være klar over:",
+    undertekst: "",
+    svartype: "BEKREFTELSESPUNKTER",
+    min: null,
+    max: null,
+    pavirkerAndreSporsmal: false,
+    kriterieForVisningAvUndersporsmal: null,
+    svar: [
+        {
+            verdi: "Du kan bare få sykepenger hvis det er din egen sykdom eller skade som hindrer deg i å jobbe. Sosiale eller økonomiske problemer gir ikke rett til sykepenger."
+        },
+        {
+            verdi: "Du kan miste retten til sykepenger hvis du nekter å opplyse om din egen arbeidsevne, eller hvis du ikke tar imot behandling eller tilrettelegging."
+        },
+        {
+            verdi: "Retten til sykepenger gjelder bare inntekt du har mottatt som lønn og betalt skatt av på sykmeldingstidspunktet."
+        },
+        {
+            verdi: "NAV kan innhente opplysninger som er nødvendige for å behandle søknaden."
+        },
+        {
+            verdi: "Fristen for å søke sykepenger er som hovedregel 3 måneder"
+        },
+        {
+            verdi: "Du kan endre svarene i denne søknaden opp til 12 måneder etter du sendte den inn første gangen."
+        },
+        {
+            verdi: "Du må melde fra til NAV hvis du satt i varetekt, sonet straff eller var under forvaring i sykmeldingsperioden. <a href=\"https://www.nav.no/skriv-til-oss\" target=\"_blank\">Meld fra til NAV her.</a>"
+        },
+        {
+            verdi: "Du må melde fra om studier som er påbegynt etter at du ble sykmeldt, og som ikke er avklart med NAV. Det samme gjelder hvis du begynner å studere mer enn du gjorde før du ble sykmeldt. <a href=\"https://www.nav.no/skriv-til-oss\" target=\"_blank\">Meld fra til NAV her.</a>"
+        },
+        {
+            verdi: "Fristen for å søke sykepenger er som hovedregel 3 måneder"
+        },
+        {
+            verdi: "Du kan lese mer om rettigheter og plikter på <a href=\"https://www.nav.no/sykepenger\" target=\"_blank\">nav.no/sykepenger</a>."
+        }
+    ],
+    undersporsmal: [
+        bekreftOpplysninger(),
+
+        // {
+        //     id: "308936",
+        //     tag: "BEKREFT_OPPLYSNINGER",
+        //     sporsmalstekst: "Jeg har lest all informasjonen jeg har fått i søknaden og bekrefter at opplysningene jeg har gitt er korrekte.",
+        //     undertekst: null,
+        //     svartype: "CHECKBOX_PANEL",
+        //     pavirkerAndreSporsmal: false,
+        //     min: null,
+        //     max: null,
+        //     kriterieForVisningAvUndersporsmal: null,
+        //     svar: [
+        //         {
+        //             verdi: "CHECKED"
+        //         }
+        //     ],
+        //     undersporsmal: []
+        // }
+    ]
+};
+
 
 export const arbeidstaker: RSSoknad = {
     id: 'faba11f5-c4f2-4647-8c8a-58b28ce2f3ef',
@@ -267,11 +334,12 @@ export const arbeidstaker: RSSoknad = {
                         },
                     ],
                 },
+
             ],
         },
         andreInntektskilderV2(),
-        værKlarOverAt(),
-        bekreftOpplysninger(),
+        data,
+        // bekreftOpplysninger(),
     ],
     egenmeldtSykmelding: false,
     opprettetAvInntektsmelding: false,

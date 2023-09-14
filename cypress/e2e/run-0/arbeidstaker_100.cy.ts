@@ -7,6 +7,9 @@ describe('Tester arbeidstakersøknad', () => {
     // Sykmelding: 7e90121c-b64b-4a1c-b7a5-93c9d95aba47, arbeidstaker - 100%
     // Søknad: faba11f5-c4f2-4647-8c8a-58b28ce2f3ef, fom: 1.4.20, tom: 24.4.20
     //-----
+
+
+
     const soknad = arbeidstaker
 
     before(() => {
