@@ -1,4 +1,5 @@
 import { behandlingsdager } from '../../../src/data/mock/data/soknad/behandlingsdager'
+import { klikkGaVidere, svarNeiHovedsporsmal } from '../../support/utilities'
 
 describe('Tester behandlingsdagersøknad', () => {
     //-----
@@ -51,8 +52,16 @@ describe('Tester behandlingsdagersøknad', () => {
         cy.contains('Gå videre').click()
     })
 
-    it('Søknad ANDRE_INNTEKTSKILDER - steg 3', function () {
+    it('Søknad FERIE - steg 3', function () {
         cy.url().should('include', `${soknad.id}/3`)
+
+        cy.contains('Ferie')
+        svarNeiHovedsporsmal()
+        klikkGaVidere()
+    })
+
+    it('Søknad ANDRE_INNTEKTSKILDER - steg 4', function () {
+        cy.url().should('include', `${soknad.id}/4`)
 
         // Test spørsmål
         cy.get('[data-cy="ja-nei-stor"] input[value=JA]').click()
@@ -82,7 +91,7 @@ describe('Tester behandlingsdagersøknad', () => {
     })
 
     it('Søknad VAER_KLAR_OVER_AT - steg 4', function () {
-        cy.url().should('include', `${soknad.id}/4`)
+        cy.url().should('include', `${soknad.id}/5`)
         cy.contains('Til slutt')
         cy.get('.navds-checkbox__label').click()
         cy.contains(
