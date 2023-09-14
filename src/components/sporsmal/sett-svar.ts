@@ -1,12 +1,12 @@
-import dayjs from 'dayjs'
+import dayjs from "dayjs";
 
-import { RSSvartype } from '../../types/rs-types/rs-svartype'
-import { Sporsmal } from '../../types/types'
-import { empty } from '../../utils/constants'
-import { SvarEnums } from '../../types/enums'
-import { RSSvar } from '../../types/rs-types/rs-svar'
+import { RSSvartype } from "../../types/rs-types/rs-svartype";
+import { Sporsmal } from "../../types/types";
+import { empty } from "../../utils/constants";
+import { SvarEnums } from "../../types/enums";
+import { RSSvar } from "../../types/rs-types/rs-svar";
 
-import VaerKlarOverAtTekster from './vaer-klar-over-at-tekster'
+import VaerKlarOverAtTekster from "./vaer-klar-over-at-tekster";
 
 const hentVerdier = (sporsmal: Sporsmal, verdier: Record<string, any>) => {
     let verdi = verdier[sporsmal.id]
@@ -43,6 +43,7 @@ export const settSvar = (sporsmal: Sporsmal, verdier: Record<string, any>): Spor
         case RSSvartype.INFO_BEHANDLINGSDAGER:
             return behandlingsdagerSvar(sporsmal, verdi)
         case RSSvartype.LAND:
+        case RSSvartype.BEKREFTELSESPUNKTER:
         case RSSvartype.COMBOBOX_MULTI:
             return landSvar(sporsmal, verdi)
         case RSSvartype.DATO:

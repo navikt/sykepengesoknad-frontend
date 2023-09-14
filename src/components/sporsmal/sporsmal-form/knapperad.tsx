@@ -41,8 +41,8 @@ const Knapperad = ({ poster }: { poster: boolean }) => {
         if (!soknad) return tekst('sykepengesoknad.ga-videre')
         // hmmmmmmmm
         const erSisteSteg =
-            // spmIndex === soknad.sporsmal.length - 1  //  (soknad.soknadstype === RSSoknadstype.OPPHOLD_UTLAND ? 1 : 2)
-            spmIndex === soknad.sporsmal.length - (soknad.soknadstype === RSSoknadstype.OPPHOLD_UTLAND ? 1 : 2)
+            spmIndex === soknad.sporsmal.length - 1  //  (soknad.soknadstype === RSSoknadstype.OPPHOLD_UTLAND ? 1 : 2)
+            // spmIndex === soknad.sporsmal.length - (soknad.soknadstype === RSSoknadstype.OPPHOLD_UTLAND ? 1 : 2)
         if (erSisteSteg) {
             if (soknad.status === RSSoknadstatus.UTKAST_TIL_KORRIGERING) {
                 return tekst('sykepengesoknad.send.endringene')
