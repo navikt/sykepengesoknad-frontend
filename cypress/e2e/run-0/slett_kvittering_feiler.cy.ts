@@ -31,7 +31,7 @@ describe('Test sletting av kvittering som feiler', () => {
             cy.contains('button', 'Slett').click()
             cy.contains('Ja, jeg er sikker').click()
             cy.contains('Det skjedde en feil ved sletting av kvitteringen')
-            cy.contains('Lukk').click()
+            cy.contains('Nei').click()
         })
     })
 })

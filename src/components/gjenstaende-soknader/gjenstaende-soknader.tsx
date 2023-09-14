@@ -53,6 +53,7 @@ export const GjenstaendeSoknader = ({ soknader, style }: Props) => {
             </Heading>
             {innhold}
             <Button
+                type="button"
                 style={{ display: 'block', marginTop: '1em' }}
                 onClick={async () => {
                     logEvent('knapp klikket', {

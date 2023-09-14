@@ -1,7 +1,7 @@
-import { BodyShort } from '@navikt/ds-react'
-import { useState } from 'react'
+import { BodyShort, Modal } from '@navikt/ds-react'
+import React, { useState } from 'react'
 
-import { FlexModal } from '../flex-modal'
+import { ModalFooterMedLukk } from '../modal-footer-med-lukk'
 
 export interface BegrepsforklarerProps {
     inlinetekst: string
@@ -27,9 +27,10 @@ export const Begrepsforklarer = (props: BegrepsforklarerProps) => {
                 {inlinetekst}
             </BodyShort>
 
-            <FlexModal open={open} setOpen={setOpen} header={tittel} lukkKnapp={true}>
-                {children}
-            </FlexModal>
+            <Modal open={open} header={{ heading: tittel, closeButton: true }} onClose={() => setOpen(false)}>
+                <Modal.Body>{children}</Modal.Body>
+                <ModalFooterMedLukk setOpen={setOpen} />
+            </Modal>
         </>
     )
 }

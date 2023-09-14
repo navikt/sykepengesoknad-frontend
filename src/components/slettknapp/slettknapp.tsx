@@ -1,4 +1,4 @@
-import { Alert, Button, Heading, Modal } from '@navikt/ds-react'
+import { Alert, Button, Modal } from '@navikt/ds-react'
 import { TrashIcon } from '@navikt/aksel-icons'
 import React, { useState } from 'react'
 import { useRouter } from 'next/router'
@@ -42,6 +42,7 @@ const Slettknapp = ({ sporsmal, kvittering }: SlettknappProps) => {
     return (
         <>
             <Button
+                type="button"
                 variant="tertiary"
                 icon={<TrashIcon />}
                 iconPosition="right"
@@ -53,20 +54,13 @@ const Slettknapp = ({ sporsmal, kvittering }: SlettknappProps) => {
                 {tekst('opplasting_modal.slett')}
             </Button>
 
-            <Modal onClose={() => setVilSlette(false)} open={vilSlette} aria-labelledby="slett-modal">
-                <Modal.Content>
-                    <Heading size="small" id="slett-modal" level="1" className="mr-10 mt-1" spacing>
-                        {tekst('opplasting_modal.vil-slette')}
-                    </Heading>
-                    <Button
-                        className="mt-4 block"
-                        variant="danger"
-                        loading={sletter}
-                        type="button"
-                        onClick={slettKvittering}
-                    >
-                        {tekst('opplasting_modal.vil-slette.ja')}
-                    </Button>
+            <Modal
+                className="text-left"
+                onClose={() => setVilSlette(false)}
+                open={vilSlette}
+                header={{ heading: tekst('opplasting_modal.vil-slette'), size: 'small', closeButton: false }}
+            >
+                <Modal.Body>
                     <div aria-live="polite">
                         <Vis
                             hvis={slettingError}
@@ -77,7 +71,16 @@ const Slettknapp = ({ sporsmal, kvittering }: SlettknappProps) => {
                             )}
                         />
                     </div>
-                </Modal.Content>
+                </Modal.Body>
+                <Modal.Footer>
+                    <Button variant="danger" loading={sletter} type="button" onClick={slettKvittering}>
+                        {tekst('opplasting_modal.vil-slette.ja')}
+                    </Button>
+
+                    <Button variant="secondary" type="button" onClick={() => setVilSlette(false)}>
+                        Nei
+                    </Button>
+                </Modal.Footer>
             </Modal>
         </>
     )

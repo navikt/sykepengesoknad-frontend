@@ -61,6 +61,7 @@ export const ListevisningLenkepanel = ({ soknad, onClick }: { soknad: RSSoknadme
     if (onClick) {
         return (
             <Button
+                type="button"
                 data-cy={`button-listevisning-${soknad.id}`}
                 className="mb-4 w-full p-0  text-left [&>span]:w-full"
                 onClick={() => {

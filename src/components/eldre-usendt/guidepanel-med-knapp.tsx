@@ -29,6 +29,7 @@ export const GuidepanelMedKnapp = ({ heading, innhold, knappeTekst, url, kompone
                 {innhold}
             </BodyShort>
             <Button
+                type="button"
                 variant="primary"
                 onClick={async () => {
                     logEvent('knapp klikket', {

@@ -1,7 +1,7 @@
-import { Alert, BodyLong, BodyShort, Button, Heading, Label, ReadMore, Select, TextField } from '@navikt/ds-react'
+import { Alert, BodyLong, BodyShort, Button, Label, ReadMore, Select, TextField } from '@navikt/ds-react'
 import { logger } from '@navikt/next-logger'
 import dayjs from 'dayjs'
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { FormProvider, useForm } from 'react-hook-form'
 import { useQueryClient } from '@tanstack/react-query'
 import { useRouter } from 'next/router'
@@ -24,9 +24,10 @@ interface OpplastetKvittering {
 export interface OpplastingFromProps {
     valgtSoknad?: Soknad
     setOpenModal: (arg0: boolean) => void
+    openModal: boolean
 }
 
-const OpplastingForm = ({ valgtSoknad, setOpenModal }: OpplastingFromProps) => {
+const OpplastingForm = ({ valgtSoknad, setOpenModal, openModal }: OpplastingFromProps) => {
     const router = useRouter()
     const { stegId } = router.query as { id: string; stegId: string }
     const queryClient = useQueryClient()
@@ -41,6 +42,12 @@ const OpplastingForm = ({ valgtSoknad, setOpenModal }: OpplastingFromProps) => {
         reValidateMode: 'onChange',
         shouldUnregister: true,
     })
+
+    useEffect(() => {
+        methods.reset()
+        methods.clearErrors()
+        setValgtFil(undefined)
+    }, [openModal, methods])
 
     if (!valgtSoknad) return null
 
@@ -123,9 +130,6 @@ const OpplastingForm = ({ valgtSoknad, setOpenModal }: OpplastingFromProps) => {
     return (
         <FormProvider {...methods}>
             <form key="opplasting_form" data-cy="opplasting-form">
-                <Heading size="medium" id="opplasting-modal" className="mr-10 mt-1" spacing>
-                    {tekst('opplasting_modal.nytt-utlegg.tittel')}
-                </Heading>
                 <BodyShort>
                     {getLedetekst(tekst('opplasting_modal.filtyper'), {
                         '%FILTYPER%': formattertFiltyper,

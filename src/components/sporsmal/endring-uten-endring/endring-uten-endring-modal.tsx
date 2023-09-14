@@ -1,4 +1,4 @@
-import { Alert, BodyShort, Button, Heading, Modal } from '@navikt/ds-react'
+import { Alert, BodyShort, Button, Modal } from '@navikt/ds-react'
 import React from 'react'
 import { useRouter } from 'next/router'
 
@@ -25,22 +25,18 @@ export const EndringUtenEndringModal = (props: EndringUtenEndringModalProps) => 
     return (
         <>
             <Modal
-                className="modal__endring-uten-endring_popup"
                 onClose={() => {
                     props.setAapen(false)
                 }}
                 open={props.aapen}
-                aria-labelledby="endring-uten-endring"
+                header={{ heading: tekst('endring-uten-endring.popup.tittel') }}
             >
-                <Modal.Content>
-                    <Heading size="small" id="endring-uten-endring" level="1" spacing>
-                        {tekst('endring-uten-endring.popup.tittel')}
-                    </Heading>
-
+                <Modal.Body>
                     <BodyShort spacing>{tekst('endring-uten-endring.popup.innhold')}</BodyShort>
 
                     <Button
                         variant="primary"
+                        type="button"
                         className="ml-auto mr-auto block"
                         loading={avbryter}
                         onClick={() => {
@@ -64,7 +60,7 @@ export const EndringUtenEndringModal = (props: EndringUtenEndringModalProps) => 
                             {tekst('avbryt.feilet')}
                         </Alert>
                     )}
-                </Modal.Content>
+                </Modal.Body>
             </Modal>
         </>
     )

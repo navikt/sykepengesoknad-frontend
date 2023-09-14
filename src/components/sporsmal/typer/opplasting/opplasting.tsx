@@ -20,10 +20,6 @@ const Opplasting = ({ sporsmal }: SpmProps) => {
         setOpenModal(true)
     }
 
-    const lukkModal = () => {
-        setOpenModal(false)
-    }
-
     return (
         <>
             <Label as="h2">{sporsmal.sporsmalstekst}</Label>
@@ -33,11 +29,14 @@ const Opplasting = ({ sporsmal }: SpmProps) => {
             <Button type="button" variant="secondary" className="w-full p-8" onClick={aktiverModal}>
                 <BodyShort>{tekst('opplasting.legg-til')}</BodyShort>
             </Button>
-
-            <Modal open={openModal} onClose={lukkModal} closeButton aria-labelledby="opplasting-modal" className="w-96">
-                <Modal.Content>
-                    <OpplastingForm valgtSoknad={valgtSoknad} setOpenModal={setOpenModal} />
-                </Modal.Content>
+            <Modal
+                open={openModal}
+                header={{ heading: tekst('opplasting_modal.nytt-utlegg.tittel'), size: 'medium' }}
+                className="w-96"
+            >
+                <Modal.Body>
+                    <OpplastingForm valgtSoknad={valgtSoknad} setOpenModal={setOpenModal} openModal={openModal} />
+                </Modal.Body>
             </Modal>
 
             <FilListe />

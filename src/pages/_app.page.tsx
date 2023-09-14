@@ -7,7 +7,6 @@ import type { AppProps as NextAppProps } from 'next/app'
 import Head from 'next/head'
 import React, { PropsWithChildren, useEffect, useRef } from 'react'
 import { QueryCache, QueryClient, QueryClientProvider } from '@tanstack/react-query'
-import { Modal } from '@navikt/ds-react'
 import { useRouter } from 'next/router'
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools'
 
@@ -72,7 +71,6 @@ function MyApp({ Component, pageProps }: AppProps): JSX.Element {
             document.getElementById('maincontent')?.scrollIntoView()
         }
     }, [router.asPath])
-    Modal.setAppElement('#root')
 
     return (
         <>

@@ -93,3 +93,10 @@ export function sjekkMainContentFokus() {
     // eslint-disable-next-line cypress/unsafe-to-chain-command
     cy.focused().should('have.id', 'maincontent')
 }
+
+export function modalAktiv() {
+    cy.get('body').should('have.css', 'overflow', 'hidden')
+}
+export function modalIkkeAktiv() {
+    cy.get('body').should('not.have.css', 'overflow', 'hidden')
+}

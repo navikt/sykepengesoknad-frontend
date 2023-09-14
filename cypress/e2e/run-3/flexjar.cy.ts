@@ -41,7 +41,7 @@ describe('Tester flexjar', () => {
                 }).click()
                 cy.findByRole('button', {
                     name: 'Ja',
-                }).should('have.css', 'background-color', 'rgb(38, 38, 38)')
+                }).should('have.css', 'background-color', 'rgb(35, 38, 42)')
                 cy.findByRole('textbox').type('Dette er en test')
                 cy.findByRole('button', {
                     name: 'Send tilbakemelding',
@@ -90,7 +90,7 @@ describe('Tester flexjar', () => {
                     .click()
                 cy.findByRole('button', {
                     name: 'Bra',
-                }).should('have.css', 'background-color', 'rgb(241, 241, 241)')
+                }).should('have.css', 'background-color', 'rgb(236, 238, 240)')
                 cy.findByRole('textbox').type('Dette er en test')
                 cy.findByRole('button', {
                     name: 'Send tilbakemelding',

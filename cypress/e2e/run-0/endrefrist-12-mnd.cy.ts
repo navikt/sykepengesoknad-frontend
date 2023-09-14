@@ -8,8 +8,8 @@ describe('Tester endrefrist 12 måneder', () => {
         )
             .and('be.visible')
             .click()
-        cy.contains('Lukk').and('be.visible').click()
-        cy.get('Lukk').should('not.exist')
+        cy.findByRole('button', { name: 'Lukk' }).and('be.visible').click()
+        cy.findByRole('button', { name: 'Lukk' }).should('not.exist')
     })
 })
 

@@ -1,4 +1,4 @@
-import { Alert, BodyShort, Button, Heading, Modal } from '@navikt/ds-react'
+import { Alert, BodyShort, Button, Modal } from '@navikt/ds-react'
 import React, { useState } from 'react'
 import { useRouter } from 'next/router'
 
@@ -55,6 +55,7 @@ const Ettersending = ({ gjelder }: EttersendingProps) => {
     return (
         <>
             <Button
+                type="button"
                 variant="tertiary"
                 className="-ml-5 mt-4 block"
                 onClick={() => {
@@ -67,19 +68,17 @@ const Ettersending = ({ gjelder }: EttersendingProps) => {
             <Modal
                 onClose={() => setVilEttersende(false)}
                 open={vilEttersende}
-                aria-labelledby="ettersending-modal"
                 className="w-96"
+                header={{ heading: knappeTekst, size: 'small' }}
             >
-                <Modal.Content>
-                    <Heading size="small" id="ettersending-modal" level="1" className="mr-10 mt-1" spacing>
-                        {knappeTekst}
-                    </Heading>
+                <Modal.Body>
                     <BodyShort spacing>{parserWithReplace(hentTekst('kvittering.info.send-til'))}</BodyShort>
                     <Vis
                         hvis={ettersendNavError || ettersendArbeidsgiverError}
                         render={() => <Alert variant="error">Beklager, klarte ikke ettersende søknaden din</Alert>}
                     />
                     <Button
+                        type="button"
                         size="small"
                         variant="primary"
                         loading={ettersenderNav || ettersenderArbeidsgiver}
@@ -89,13 +88,14 @@ const Ettersending = ({ gjelder }: EttersendingProps) => {
                         {hentTekst('kvittering.knapp.bekreft.send-til')}
                     </Button>
                     <Button
+                        type="button"
                         className="ml-auto mr-auto mt-4 block"
                         variant="tertiary"
                         onClick={() => setVilEttersende(false)}
                     >
                         {tekst('kvittering.knapp.angre')}
                     </Button>
-                </Modal.Content>
+                </Modal.Body>
             </Modal>
         </>
     )
