@@ -24,7 +24,7 @@ const AvbrytKorrigering = () => {
         <>
             <Button
                 variant="tertiary"
-                as={valgtSoknad ? Button : Skeleton}
+                as={Button}
                 className={cn('text-surface-danger hover:bg-red-50 hover:text-surface-danger', {
                     '-ml-5': valgtSoknad,
                 })}
