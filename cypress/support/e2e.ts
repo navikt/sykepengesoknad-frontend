@@ -40,8 +40,6 @@ function setupAxe() {
             { id: 'landmark-one-main', enabled: false },
             // Kanskje vi må bytte ut LandvelgerComponent
             { id: 'aria-input-field-name', enabled: false },
-            // Sjekker ikke aria-labelledby på accordion (denne kan fjernes når vi oppgraderer til nyere versjon av ds)
-            { id: 'aria-allowed-attr', enabled: true, selector: '*:not(.navds-accordion__item > div)' },
             // Opphold utland bruker periode komp uten h2 heading, sjekker alt annet
             { id: 'heading-order', enabled: true, selector: '*:not(h3:contains("Når skal du reise?"))' },
             // Feiler på after-each sjekk på om det finnes en h1

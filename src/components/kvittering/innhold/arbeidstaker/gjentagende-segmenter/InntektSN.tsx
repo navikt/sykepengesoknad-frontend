@@ -24,6 +24,7 @@ export function InntektSN() {
             </BodyLong>
 
             <Button
+                type="button"
                 iconPosition="right"
                 variant="secondary"
                 icon={<ExternalLinkIcon aria-hidden />}

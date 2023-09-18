@@ -12,7 +12,7 @@ describe('Tester fremtidig søknad', () => {
             .and('include.text', 'Aktiveres 8. juni 3020')
 
         cy.get(`[data-cy="button-listevisning-${fremtidigSoknad.id}"]`).click()
-        cy.get('.navds-modal__content')
+        cy.get('.navds-modal')
             .should('include.text', 'Søknaden er ikke klar')
             .get('.navds-label')
             .should('include.text', 'Hvorfor kan jeg ikke søke nå?')

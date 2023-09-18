@@ -78,6 +78,7 @@ const KvitteringSide = () => {
             {gjenstaendeSoknader.length === 0 && (
                 <>
                     <Button
+                        type="button"
                         className="mt-8"
                         onClick={() => {
                             logEvent('knapp klikket', {

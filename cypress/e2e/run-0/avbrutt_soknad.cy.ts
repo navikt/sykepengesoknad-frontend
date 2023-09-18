@@ -1,4 +1,5 @@
 import { avbruttSoknad } from '../../../src/data/mock/data/soknad/arbeidstaker-avbrutt'
+import { modalAktiv, modalIkkeAktiv } from '../../support/utilities'
 
 describe('Tester avbryting av søknad', () => {
     before(() => {
@@ -54,11 +55,17 @@ describe('Tester avbryting av søknad', () => {
     it('Søknad kan avbrytes ', function () {
         // Avbryt dialog vises
         cy.contains('Jeg vil ikke bruke denne søknaden').click()
-        cy.get('.navds-modal__content button:contains(Nei, jeg vil bruke søknaden)').click()
-        cy.get('.navds-modal__content button:contains(Nei, jeg vil bruke søknaden)').should('not.exist')
+        modalAktiv()
+        cy.contains('Nei, jeg vil bruke søknaden').should('be.visible')
+        cy.findByRole('button', { name: 'Nei, jeg vil bruke søknaden' }).click()
+        modalIkkeAktiv()
+        cy.contains('Nei, jeg vil bruke søknaden').should('not.be.visible')
+        cy.contains('Jeg vil ikke bruke denne søknaden').should('be.visible').click()
+        modalAktiv()
+        cy.contains('Ja, jeg er sikker').should('be.visible')
 
-        cy.contains('Jeg vil ikke bruke denne søknaden').click()
-        cy.get('.navds-modal__content button:contains(Ja, jeg er sikker)').click()
+        cy.findByRole('button', { name: 'Ja, jeg er sikker' }).click()
+        modalIkkeAktiv()
         cy.url().should('include', `avbrutt/${avbruttSoknad.id}`)
         cy.contains('Jeg vil bruke denne søknaden likevel')
     })

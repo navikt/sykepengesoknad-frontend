@@ -30,7 +30,7 @@ describe('Tester arbeidstakersøknad', () => {
         cy.contains(
             'NAV innhenter opplysninger om deg når du sender inn en søknad. Det er nødvendig for at du skal kunne få det du har krav på. For å behandle søknaden din henter vi inn opplysninger både fra deg og fra offentlige registre.',
         )
-        cy.get('.navds-modal__button').click()
+        cy.findByRole('button', { name: 'Lukk' }).click()
 
         // Sykmelding
         cy.contains('1. april - 24. april 2020 (24 dager)')
@@ -41,8 +41,7 @@ describe('Tester arbeidstakersøknad', () => {
 
         // Avbryt dialog vises
         cy.contains('Jeg vil ikke bruke denne søknaden').click()
-        cy.get('.navds-modal__content button:contains(Nei, jeg vil bruke søknaden)').click()
-        cy.get('.navds-modal__content button:contains(Nei, jeg vil bruke søknaden)').should('not.exist')
+        cy.findByRole('button', { name: 'Nei, jeg vil bruke søknaden' }).click()
 
         // Må godkjenne ANSVARSERKLARING først
         cy.contains('Gå videre').click()
@@ -225,8 +224,6 @@ describe('Tester arbeidstakersøknad', () => {
             .should('contain', 'Innsending av inntektsopplysninger')
             .and('contain', 'Hva skjer videre?')
             .and('contain', 'Før NAV kan behandle søknaden')
-            .and('not.contain', 'Hvorfor går det et skille ved 16 dager?')
-            .and('not.contain', 'Hva er en inntektsmelding')
             .and('contain', 'NAV behandler søknaden')
             .and('contain', 'Når blir pengene utbetalt')
 

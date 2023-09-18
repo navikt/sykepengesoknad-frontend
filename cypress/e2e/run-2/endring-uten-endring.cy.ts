@@ -29,7 +29,7 @@ describe('Tester endring uten en endringer', () => {
         cy.contains('Jeg vil ikke bruke denne søknaden').should('not.exist')
 
         cy.contains('Gå videre').click()
-        cy.contains('Reise')
+        cy.contains('Var du på reise utenfor EØS')
 
         cy.contains('Gå videre').click()
         cy.contains('Arbeid utenfor Norge')
@@ -43,7 +43,7 @@ describe('Tester endring uten en endringer', () => {
         cy.get('.navds-checkbox__label').click()
         cy.contains('Send endringene').click()
 
-        cy.get('.navds-modal__content').contains('Du har ikke gjort noen endringer')
+        cy.get('.navds-modal').contains('Du har ikke gjort noen endringer')
         cy.contains('Vi behandler den opprinnelige sykepengesøknaden din.')
 
         cy.findByRole('button', { name: 'Ok' }).click()

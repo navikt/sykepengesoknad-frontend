@@ -25,6 +25,7 @@ const GjenapneSoknad = () => {
                 data-cy="bruk-soknad-likevel"
                 variant="tertiary"
                 className="-ml-5"
+                type="button"
                 loading={gjenapner}
                 onClick={() => {
                     logEvent('knapp klikket', {

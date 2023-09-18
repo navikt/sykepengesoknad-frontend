@@ -1,20 +1,17 @@
-import { Alert, BodyShort, Button } from '@navikt/ds-react'
+import { Alert, BodyShort, Button, Modal } from '@navikt/ds-react'
 import React, { useState } from 'react'
-import { useRouter } from 'next/router'
 
 import { logEvent } from '../amplitude/amplitude'
-import useSoknad from '../../hooks/useSoknad'
 import { LenkeMedIkon } from '../lenke-med-ikon/LenkeMedIkon'
-import { FlexModal } from '../flex-modal'
 import { useKorriger } from '../../hooks/useKorriger'
-import { Soknad } from '../../types/types'
+import { useSoknadMedDetaljer } from '../../hooks/useSoknadMedDetaljer'
+import { ModalFooterMedLukk } from '../modal-footer-med-lukk'
 
 import { EndreknappTekster } from './endreknapp-tekster'
 
 const Endreknapp = () => {
-    const router = useRouter()
-    const { id } = router.query as { id: string; stegId: string }
-    const { data: valgtSoknad } = useSoknad(id)
+    const { valgtSoknad } = useSoknadMedDetaljer()
+    const { mutate: korrigerMutation, isLoading: korrigerer, error: korrigeringError } = useKorriger()
 
     const [aapen, setAapen] = useState<boolean>(false)
 
@@ -24,6 +21,7 @@ const Endreknapp = () => {
     return (
         <>
             <Button
+                type="button"
                 variant="secondary"
                 className="mt-4 block"
                 onClick={() => {
@@ -35,69 +33,62 @@ const Endreknapp = () => {
             >
                 {endreKnappTekst}
             </Button>
-            <FlexModal
+            <Modal
                 open={aapen}
-                setOpen={setAapen}
-                headerId="endre-modal"
-                header={endreKnappTekst}
-                lukkKnapp={valgtSoknad.korrigeringsfristUtlopt}
+                header={{ heading: endreKnappTekst, closeButton: true }}
                 onClose={() => {
                     logEvent('modal lukket', {
                         component: 'Endre søknad popup',
                         soknadstype: valgtSoknad.soknadstype,
                     })
+                    setAapen(false)
                 }}
             >
-                <ModalInnhold valgtSoknad={valgtSoknad} setAapen={setAapen} />
-            </FlexModal>
-        </>
-    )
-}
+                <Modal.Body>
+                    {valgtSoknad.korrigeringsfristUtlopt && (
+                        <BodyShort spacing>
+                            {EndreknappTekster.utlopt}
+                            <LenkeMedIkon href="https://www.nav.no/skriv-til-oss" text={EndreknappTekster.sto} />.
+                        </BodyShort>
+                    )}
+                    {!valgtSoknad.korrigeringsfristUtlopt && (
+                        <>
+                            <BodyShort spacing>{EndreknappTekster['endre.modal.info']}</BodyShort>
 
-const ModalInnhold = ({
-    valgtSoknad,
-    setAapen,
-}: {
-    valgtSoknad: Soknad
-    setAapen: React.Dispatch<React.SetStateAction<boolean>>
-}) => {
-    const { mutate: korrigerMutation, isLoading: korrigerer, error: korrigeringError } = useKorriger()
-
-    if (valgtSoknad.korrigeringsfristUtlopt) {
-        return (
-            <BodyShort spacing>
-                {EndreknappTekster.utlopt}
-                <LenkeMedIkon href="https://www.nav.no/skriv-til-oss" text={EndreknappTekster.sto} />.
-            </BodyShort>
-        )
-    }
-    return (
-        <>
-            <BodyShort spacing>{EndreknappTekster['endre.modal.info']}</BodyShort>
-
-            <Button
-                variant="primary"
-                className="mt-4"
-                loading={korrigerer}
-                onClick={(e) => {
-                    e.preventDefault()
-                    logEvent('knapp klikket', {
-                        tekst: EndreknappTekster['endre.modal.bekreft'],
-                        soknadstype: valgtSoknad.soknadstype,
-                        component: 'Endre søknad popup',
-                    })
-                    korrigerMutation({
-                        id: valgtSoknad.id,
-                        onSuccess: () => {
-                            setAapen(false)
-                        },
-                    })
-                }}
-            >
-                {EndreknappTekster['endre.modal.bekreft']}
-            </Button>
-
-            {korrigeringError && <Alert variant="error">Beklager, klarte ikke endre søknaden din</Alert>}
+                            {korrigeringError && (
+                                <Alert variant="error">Beklager, klarte ikke endre søknaden din</Alert>
+                            )}
+                        </>
+                    )}
+                </Modal.Body>
+                {!valgtSoknad.korrigeringsfristUtlopt && (
+                    <Modal.Footer>
+                        <Button
+                            variant="primary"
+                            type="button"
+                            className="mt-4"
+                            loading={korrigerer}
+                            onClick={(e) => {
+                                e.preventDefault()
+                                logEvent('knapp klikket', {
+                                    tekst: EndreknappTekster['endre.modal.bekreft'],
+                                    soknadstype: valgtSoknad.soknadstype,
+                                    component: 'Endre søknad popup',
+                                })
+                                korrigerMutation({
+                                    id: valgtSoknad.id,
+                                    onSuccess: () => {
+                                        setAapen(false)
+                                    },
+                                })
+                            }}
+                        >
+                            {EndreknappTekster['endre.modal.bekreft']}
+                        </Button>
+                    </Modal.Footer>
+                )}
+                {valgtSoknad.korrigeringsfristUtlopt && <ModalFooterMedLukk setOpen={setAapen} />}
+            </Modal>
         </>
     )
 }
