@@ -34,7 +34,7 @@
         "smoothscroll-polyfill": "^0.4.4",
         "tailwind-merge": "^1.14.0",
         "use-force-update": "^1.0.11",
-        "uuid": "^9.0.0"
+        "uuid": "^9.0.1"
     },
     "devDependencies": {
         "@cypress/webpack-preprocessor": "^5.17.1",
