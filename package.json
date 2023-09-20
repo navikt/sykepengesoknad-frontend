@@ -17,7 +17,7 @@
         "@types/smoothscroll-polyfill": "^0.3.1",
         "classnames": "^2.3.2",
         "cookie": "^0.5.0",
-        "dayjs": "^1.11.9",
+        "dayjs": "^1.11.10",
         "html-react-parser": "^4.2.2",
         "jose": "^4.14.6",
         "next-logger": "^3.0.2",
