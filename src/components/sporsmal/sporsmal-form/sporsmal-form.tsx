@@ -43,7 +43,9 @@ const SporsmalForm = () => {
 
     const erSisteSpm = () => {
         const snartSlutt =
-            sporsmal?.svartype === RSSvartype.IKKE_RELEVANT || sporsmal?.svartype === RSSvartype.CHECKBOX_PANEL ||  sporsmal?.svartype === RSSvartype.BEKREFTELSESPUNKTER
+            sporsmal?.svartype === RSSvartype.IKKE_RELEVANT ||
+            sporsmal?.svartype === RSSvartype.CHECKBOX_PANEL ||
+            sporsmal?.svartype === RSSvartype.BEKREFTELSESPUNKTER
         if (erUtenlandssoknad) {
             return sporsmal?.tag === TagTyper.BEKREFT_OPPLYSNINGER_UTLAND_INFO
         }
@@ -96,7 +98,7 @@ const SporsmalForm = () => {
 
     const onSubmit = (data: Record<string, any>) => {
         alert(JSON.stringify(sporsmal.undersporsmal[0].svarliste))
-        
+
         if (oppdatererSporsmal || senderSoknad)
             return Promise.reject(new Error('Spørsmål oppdateres eller søknad sendes allerede'))
         if ((!nesteSporsmal && !erUtenlandssoknad) || !sporsmal) {
