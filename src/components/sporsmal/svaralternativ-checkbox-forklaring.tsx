@@ -12,7 +12,7 @@ const JobItem: React.FunctionComponent<JobItemProps> = ({ name, index }) => {
     // className="p-4 bg-gray-300 rounded shadow"
     return (
         <li>
-            <Panel border className="mb-4">
+            <Panel border className="mb-4" key={index}>
                 <span className="block font-semibold mb-2">{name}</span>
 
                 <Checkbox value="ikke_jobbet_i_perioden">Jeg har ikke jobbet der i perioden</Checkbox>
