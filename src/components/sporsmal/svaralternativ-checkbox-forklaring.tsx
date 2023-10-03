@@ -1,4 +1,4 @@
-import { BodyShort } from '@navikt/ds-react'
+import { BodyShort, Checkbox, Panel, TextField } from "@navikt/ds-react";
 import React, { Fragment, ReactElement } from 'react'
 
 import { TagTyper } from '../../types/enums'
@@ -9,21 +9,23 @@ type JobItemProps = {
 };
 
 const JobItem: React.FunctionComponent<JobItemProps> = ({ name, index }) => {
+    // className="p-4 bg-gray-300 rounded shadow"
     return (
-        <li className="p-4 bg-gray-300 rounded shadow">
-            <span className="block font-semibold mb-2">{name}</span>
-            <div className="mb-2">
-                <input type="checkbox" id={`ikkeJobbet${index}`} name={`ikkeJobbet${index}`} className="mr-2" />
-                <label htmlFor={`ikkeJobbet${index}`} className="text-gray-600">ikke jobbet der i perioden</label>
-            </div>
-            <div className="mb-2">
-                <label htmlFor={`timer${index}`} className="block text-gray-600">Timer jobbet:</label>
-                <input type="text" id={`timer${index}`} name={`timer${index}`} placeholder="F.eks: 5 timer" className="p-2 mt-1 w-full border rounded" />
-            </div>
-            <div className="mb-2">
-                <label htmlFor={`lønn${index}`} className="block text-gray-600">Lønn tjent:</label>
-                <input type="text" id={`lønn${index}`} name={`lønn${index}`} placeholder="F.eks: 200 kr" className="p-2 mt-1 w-full border rounded" />
-            </div>
+
+        <li>
+
+            <Panel border className="mb-4">
+                <span className="block font-semibold mb-2">{name}</span>
+
+                <Checkbox value="ikke_jobbet_i_perioden">Jeg har ikke jobbet der i perioden</Checkbox>
+                <Checkbox value="ikke_jobbet_i_perioden_sykmeldt">Jeg er sykmeldt</Checkbox>
+                <Checkbox value="ikke_jobbet_i_perioden_sluttet">Jeg har sluttet</Checkbox>
+
+
+                <TextField label="Timer jobbet i perioden:" placeholder={"F.eks: 5 timer"} />
+                <TextField label="Lønn tjent perioden:" placeholder={"F.eks: 12000 kr"}/>
+
+            </Panel>
         </li>
     );
 }
@@ -44,14 +46,11 @@ const JobList = ({ jobs }: JobListProps) => {
             {jobs.map((job, index) => (
                 <JobItem key={index} name={job.name} index={index} />
             ))}
-            <li>
-                <button className="p-2 bg-blue-600 text-white rounded hover:bg-blue-500">+ legg til en annen jobb</button>
-            </li>
         </ul>
     );
 }
 
-const OtherJobs = ({jobsList} : { jobsList : string[]}) => {
+export const OtherJobs = ({jobsList, plusVisible} : { jobsList : string[], plusVisible : boolean}) => {
     const jobs = jobsList.map((job) => { return { name: job  }});
 
 
@@ -64,11 +63,14 @@ const OtherJobs = ({jobsList} : { jobsList : string[]}) => {
 
             <JobList jobs={jobs} />
 
+
+            { plusVisible &&
             <div className="mt-4">
                 <button className="p-2 bg-blue-600 text-white rounded hover:bg-blue-500">
                     + legg til en annen jobb
                 </button>
-            </div>
+            </div> }
+
         </div>
     );
 }
@@ -96,7 +98,7 @@ export const SvaralternativCheckboxForklaring = ({
             // </BodyShort>
             <div>
 
-                <OtherJobs jobsList={["POSTEN AS, Bærum"]} />
+                <OtherJobs jobsList={["Annen jobb brukeren har lagt til, Bærum"]} plusVisible={true} />
 
                     </div>
         )

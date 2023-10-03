@@ -22,6 +22,7 @@ import { useJaNeiKeyboardNavigation } from '../../../utils/keyboard-navigation'
 import { Inntektsbulletpoints } from '../inntektsbulletpoints'
 import { Yrkesskadebulletpoints } from '../yrkesskade-bulletpoints'
 import { InntektsopplysningerErKonfidensielleInfo } from '../inntektsopplysninger-er-konfidensielle-info'
+import { OtherJobs } from "../svaralternativ-checkbox-forklaring";
 
 const JaNeiStor = ({ sporsmal }: SpmProps) => {
     const {
@@ -184,30 +185,31 @@ const JaNeiStor = ({ sporsmal }: SpmProps) => {
                 <h1 className="text-2xl font-bold mb-6">
                     Arbeid underveis i andre arbeidsforhold
                 </h1>
+                <OtherJobs jobsList={["POSTEN AS, Bærum"]} plusVisible={false} />
 
-                <p className="mb-6 text-gray-700">
-                    Har du jobbet noe i andre arbeidsorhold i perioden 5 september til 11 oktober? Vi har lagt inn andre jobber du har vi kjenner til.
-                </p>
+                {/*<p className="mb-6 text-gray-700">*/}
+                {/*    Har du jobbet noe i andre arbeidsorhold i perioden 5 september til 11 oktober? Vi har lagt inn andre jobber du har vi kjenner til.*/}
+                {/*</p>*/}
 
-                <ul className="space-y-4 list-none">
-                    {/* Example entry 1 */}
-                    <li className="p-4 bg-gray-300 rounded shadow">
-                        <span className="block font-semibold mb-2">Bakeren ved parken</span>
-                        <div className="mb-2">
-                            <input type="checkbox" id="ikkeJobbet1" name="ikkeJobbet1" className="mr-2" />
-                            <label htmlFor="ikkeJobbet1" className="text-gray-600">ikke jobbet der i perioden</label>
-                        </div>
-                        <div className="mb-2">
-                            <label htmlFor="timer1" className="block text-gray-600">Timer jobbet:</label>
-                            <input type="text" id="timer1" name="timer1" placeholder="F.eks: 5 timer" className="p-2 mt-1 w-full border rounded" />
-                        </div>
-                        <div className="mb-2">
-                            <label htmlFor="lønn1" className="block text-gray-600">Lønn tjent:</label>
-                            <input type="text" id="lønn1" name="lønn1" placeholder="F.eks: 200 kr" className="p-2 mt-1 w-full border rounded" />
-                        </div>
-                    </li>
+                {/*<ul className="space-y-4 list-none">*/}
+                {/*    /!* Example entry 1 *!/*/}
+                {/*    <li className="p-4 bg-gray-300 rounded shadow">*/}
+                {/*        <span className="block font-semibold mb-2">Bakeren ved parken</span>*/}
+                {/*        <div className="mb-2">*/}
+                {/*            <input type="checkbox" id="ikkeJobbet1" name="ikkeJobbet1" className="mr-2" />*/}
+                {/*            <label htmlFor="ikkeJobbet1" className="text-gray-600">ikke jobbet der i perioden</label>*/}
+                {/*        </div>*/}
+                {/*        <div className="mb-2">*/}
+                {/*            <label htmlFor="timer1" className="block text-gray-600">Timer jobbet:</label>*/}
+                {/*            <input type="text" id="timer1" name="timer1" placeholder="F.eks: 5 timer" className="p-2 mt-1 w-full border rounded" />*/}
+                {/*        </div>*/}
+                {/*        <div className="mb-2">*/}
+                {/*            <label htmlFor="lønn1" className="block text-gray-600">Lønn tjent:</label>*/}
+                {/*            <input type="text" id="lønn1" name="lønn1" placeholder="F.eks: 200 kr" className="p-2 mt-1 w-full border rounded" />*/}
+                {/*        </div>*/}
+                {/*    </li>*/}
 
-                </ul>
+                {/*</ul>*/}
             </div>
 
                             </>)
