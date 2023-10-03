@@ -61,21 +61,41 @@ const CheckboxKomp = ({ sporsmal }: SpmProps) => {
                                                 }
                                             >
                                                 {uspm.sporsmalstekst}
+
                                             </BodyShort>
                                         </Checkbox>
                                     </div>
+
                                     <Vis
                                         hvis={
-                                            watchCheckbox?.includes(uspm.sporsmalstekst) &&
-                                            uspm.undersporsmal.length > 0
+                                            watchCheckbox?.includes(uspm.sporsmalstekst) && sporsmal.tag === TagTyper.INNTEKTSKILDE_ANDRE_ARBEIDSFORHOLD
                                         }
                                         render={() => (
                                             <div aria-live="assertive" className="my-4 pl-3">
+
                                                 <SvaralternativCheckboxForklaring svaralternativTag={uspm.tag} />
+
+                                                <UndersporsmalListe oversporsmal={uspm} oversporsmalSvar="CHECKED" />
+                                                {sporsmal.tag}
+                                            </div>
+                                        )}
+                                    />
+
+                                    <Vis
+                                        hvis={
+                                            watchCheckbox?.includes(uspm.sporsmalstekst) && true
+                                            //uspm.undersporsmal.length > 0 || sporsmal.tag === TagTyper.INNTEKTSKILDE_ANDRE_ARBEIDSFORHOLD
+                                        }
+                                        render={() => (
+                                            <div aria-live="assertive" className="my-4 pl-3">
+
+                                                <SvaralternativCheckboxForklaring svaralternativTag={uspm.tag} />
+
                                                 <UndersporsmalListe oversporsmal={uspm} oversporsmalSvar="CHECKED" />
                                             </div>
                                         )}
                                     />
+
                                 </Fragment>
                             ))}
                         </div>
