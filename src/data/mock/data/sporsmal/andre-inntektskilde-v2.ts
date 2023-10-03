@@ -25,7 +25,7 @@ export const andreInntektskilderV2 = (): RSSporsmal => {
                 kriterieForVisningAvUndersporsmal: null,
                 svar: [],
                 undersporsmal: [
-         {
+                    {
                         id: 'eb6317b7-a5e2-3576-a5aa-2b47f696b631',
                         tag: 'INNTEKTSKILDE_ANDRE_ARBEIDSFORHOLD',
                         sporsmalstekst: 'Ansatt andre steder enn nevnt over',
