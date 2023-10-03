@@ -7,10 +7,14 @@ import { OppsummeringProps, SporsmalVarianter } from '../oppsummering'
 const CheckboxGruppe = ({ sporsmal }: OppsummeringProps) => {
     return (
         <>
-            <Label as="h3">{sporsmal.sporsmalstekst} {sporsmal.tag} </Label>
+            <Label as="h3">
+                {sporsmal.sporsmalstekst} {sporsmal.tag}{' '}
+            </Label>
             {sporsmal.undersporsmal.map((s: Sporsmal, idx) => (
-
-                <> <SporsmalVarianter sporsmal={s} key={idx} /> </>
+                <>
+                    {' '}
+                    <SporsmalVarianter sporsmal={s} key={idx} />{' '}
+                </>
             ))}
         </>
     )

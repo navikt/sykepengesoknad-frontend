@@ -1,6 +1,6 @@
 import { RSSoknad } from '../../../../types/rs-types/rs-soknad'
 import { arbeidstaker100Syk } from '../sykmeldinger'
-import { andreInntektskilderV2, andreInntektskilderV3 } from "../sporsmal/andre-inntektskilde-v2";
+import { andreInntektskilderV2, andreInntektskilderV3 } from '../sporsmal/andre-inntektskilde-v2'
 import { værKlarOverAt } from '../sporsmal/vaer-klar-over-at'
 import { bekreftOpplysninger } from '../sporsmal/bekreft-opplysninger'
 

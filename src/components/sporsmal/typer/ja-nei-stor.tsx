@@ -22,7 +22,7 @@ import { useJaNeiKeyboardNavigation } from '../../../utils/keyboard-navigation'
 import { Inntektsbulletpoints } from '../inntektsbulletpoints'
 import { Yrkesskadebulletpoints } from '../yrkesskade-bulletpoints'
 import { InntektsopplysningerErKonfidensielleInfo } from '../inntektsopplysninger-er-konfidensielle-info'
-import { OtherJobs } from "../svaralternativ-checkbox-forklaring";
+import { OtherJobs } from '../svaralternativ-checkbox-forklaring'
 
 const JaNeiStor = ({ sporsmal }: SpmProps) => {
     const {
@@ -80,141 +80,135 @@ const JaNeiStor = ({ sporsmal }: SpmProps) => {
         return sporsmal.sporsmalstekst
     }
 
-                        if (sporsmal.tag !== TagTyper.ANDRE_INNTEKTSKILDER_V3) {
-                            return (        <>
+    if (sporsmal.tag !== TagTyper.ANDRE_INNTEKTSKILDER_V3) {
+        return (
+            <>
+                <div>
+                    {skalHaInntektsbulletpoints && <Inntektsbulletpoints soknad={valgtSoknad} />}
+                    {sporsmal.tag === TagTyper.YRKESSKADE_V2 && <Yrkesskadebulletpoints sporsmal={sporsmal} />}
 
-            <div>
-                {skalHaInntektsbulletpoints && <Inntektsbulletpoints soknad={valgtSoknad} />}
-                {sporsmal.tag === TagTyper.YRKESSKADE_V2 && <Yrkesskadebulletpoints sporsmal={sporsmal} />}
-
-                <Controller
-                    name={sporsmal.id}
-                    rules={{ validate: (value) => valider(value), required: feilmelding.global }}
-                    defaultValue=""
-                    render={({ field, fieldState }) => (
-                        <RadioGroup
-                            {...field}
-                            legend={sporsmalstekst()}
-                            data-cy="ja-nei-stor"
-                            className="w-full"
-                            key={sporsmal.id}
-                            error={fieldState.error && feilmelding.lokal}
-                            style={
-                                {
-                                    '--ac-radio-checkbox-border': error
-                                        ? 'var(--a-border-danger)'
-                                        : 'var(--a-border-default)',
-                                    '--ac-radio-checkbox-action-hover-bg': 'white',
-                                } as React.CSSProperties
-                            }
-                        >
-                            <GuidepanelUnderSporsmalstekst sporsmal={sporsmal} key="ja-nei-stor-guidepanel" />
-
-                            <EkspanderbarHjelp sporsmal={sporsmal} key="ja-nei-stor-hjelp" />
-
-                            <div
-                                key="ja-nei-stor-style"
+                    <Controller
+                        name={sporsmal.id}
+                        rules={{ validate: (value) => valider(value), required: feilmelding.global }}
+                        defaultValue=""
+                        render={({ field, fieldState }) => (
+                            <RadioGroup
+                                {...field}
+                                legend={sporsmalstekst()}
+                                data-cy="ja-nei-stor"
+                                className="w-full"
+                                key={sporsmal.id}
+                                error={fieldState.error && feilmelding.lokal}
                                 style={
                                     {
-                                        '--a-shadow-focus': '0 0 0 0',
+                                        '--ac-radio-checkbox-border': error
+                                            ? 'var(--a-border-danger)'
+                                            : 'var(--a-border-default)',
+                                        '--ac-radio-checkbox-action-hover-bg': 'white',
                                     } as React.CSSProperties
                                 }
                             >
-                                <Radio id={`${field.name}_0`} value="JA" className={radioClassName('JA')}>
-                                    Ja
-                                </Radio>
-                                <Radio id={`${field.name}_1`} value="NEI" className={radioClassName('NEI', true)}>
-                                    Nei
-                                </Radio>
-                            </div>
-                        </RadioGroup>
-                    )}
-                />
+                                <GuidepanelUnderSporsmalstekst sporsmal={sporsmal} key="ja-nei-stor-guidepanel" />
 
-                {sporsmal.tag === TagTyper.ANDRE_INNTEKTSKILDER_V2 && <InntektsopplysningerErKonfidensielleInfo />}
+                                <EkspanderbarHjelp sporsmal={sporsmal} key="ja-nei-stor-hjelp" />
 
-                {sporsmal?.tag === TagTyper.UTLANDSOPPHOLD_SOKT_SYKEPENGER && watchJaNei && (
-                    <BodyLong spacing className="utland_infotekst">
-                        {parserWithReplace(
-                            getLedetekst(
-                                tekst(
-                                    ('soknad.infotekst.utlandsopphold_sokt_sykepenger.' +
-                                        watchJaNei?.toLowerCase()) as any,
-                                ),
-                                { '%URL%': utlandssoknadUrl },
-                            ),
+                                <div
+                                    key="ja-nei-stor-style"
+                                    style={
+                                        {
+                                            '--a-shadow-focus': '0 0 0 0',
+                                        } as React.CSSProperties
+                                    }
+                                >
+                                    <Radio id={`${field.name}_0`} value="JA" className={radioClassName('JA')}>
+                                        Ja
+                                    </Radio>
+                                    <Radio id={`${field.name}_1`} value="NEI" className={radioClassName('NEI', true)}>
+                                        Nei
+                                    </Radio>
+                                </div>
+                            </RadioGroup>
                         )}
-                    </BodyLong>
-                )}
+                    />
 
-                <YrkesskadeInfo sporsmal={sporsmal} jaNeiSvar={watchJaNei} />
-            </div>
+                    {sporsmal.tag === TagTyper.ANDRE_INNTEKTSKILDER_V2 && <InntektsopplysningerErKonfidensielleInfo />}
 
-            <div aria-live="assertive">
-                <AnimateOnMount
-                    mounted={watchJaNei === sporsmal.kriterieForVisningAvUndersporsmal}
-                    enter="undersporsmal--vis"
-                    leave="undersporsmal--skjul"
-                    start="undersporsmal"
-                >
-                    <>
-                        <UndersporsmalListe oversporsmal={sporsmal} oversporsmalSvar={watchJaNei} />
-
-                        {valgtSoknad?.status === RSSoknadstatus.UTKAST_TIL_KORRIGERING &&
-                            sporsmal.tag === TagTyper.FERIE_V2 &&
-                            watchJaNei === 'JA' && (
-                                <Alert data-cy="feriekorrigeringvarsel" className="mt-8" variant="info">
-                                    Du kan dra på ferie mens du er sykmeldt, men du får ikke utbetalt sykepenger når du
-                                    har ferie.
-                                </Alert>
+                    {sporsmal?.tag === TagTyper.UTLANDSOPPHOLD_SOKT_SYKEPENGER && watchJaNei && (
+                        <BodyLong spacing className="utland_infotekst">
+                            {parserWithReplace(
+                                getLedetekst(
+                                    tekst(
+                                        ('soknad.infotekst.utlandsopphold_sokt_sykepenger.' +
+                                            watchJaNei?.toLowerCase()) as any,
+                                    ),
+                                    { '%URL%': utlandssoknadUrl },
+                                ),
                             )}
+                        </BodyLong>
+                    )}
 
-                        <PaskeferieInfo sporsmal={sporsmal} jaNeiSvar={watchJaNei} />
-                    </>
-                </AnimateOnMount>
-            </div>
-        </>
-    )
-}
+                    <YrkesskadeInfo sporsmal={sporsmal} jaNeiSvar={watchJaNei} />
+                </div>
 
-                        else {
-                            return (        <>
+                <div aria-live="assertive">
+                    <AnimateOnMount
+                        mounted={watchJaNei === sporsmal.kriterieForVisningAvUndersporsmal}
+                        enter="undersporsmal--vis"
+                        leave="undersporsmal--skjul"
+                        start="undersporsmal"
+                    >
+                        <>
+                            <UndersporsmalListe oversporsmal={sporsmal} oversporsmalSvar={watchJaNei} />
 
+                            {valgtSoknad?.status === RSSoknadstatus.UTKAST_TIL_KORRIGERING &&
+                                sporsmal.tag === TagTyper.FERIE_V2 &&
+                                watchJaNei === 'JA' && (
+                                    <Alert data-cy="feriekorrigeringvarsel" className="mt-8" variant="info">
+                                        Du kan dra på ferie mens du er sykmeldt, men du får ikke utbetalt sykepenger når
+                                        du har ferie.
+                                    </Alert>
+                                )}
 
-            <div className="max-w-4xl mx-auto p-6">
-                <h1 className="text-2xl font-bold mb-6">
-                    Arbeid underveis i andre arbeidsforhold
-                </h1>
-                <OtherJobs jobsList={["POSTEN AS, Bærum"]} plusVisible={false} />
+                            <PaskeferieInfo sporsmal={sporsmal} jaNeiSvar={watchJaNei} />
+                        </>
+                    </AnimateOnMount>
+                </div>
+            </>
+        )
+    } else {
+        return (
+            <>
+                <div className="max-w-4xl mx-auto p-6">
+                    <h1 className="text-2xl font-bold mb-6">Arbeid underveis i andre arbeidsforhold</h1>
+                    <OtherJobs jobsList={['POSTEN AS, Bærum']} plusVisible={false} />
 
-                {/*<p className="mb-6 text-gray-700">*/}
-                {/*    Har du jobbet noe i andre arbeidsorhold i perioden 5 september til 11 oktober? Vi har lagt inn andre jobber du har vi kjenner til.*/}
-                {/*</p>*/}
+                    {/*<p className="mb-6 text-gray-700">*/}
+                    {/*    Har du jobbet noe i andre arbeidsorhold i perioden 5 september til 11 oktober? Vi har lagt inn andre jobber du har vi kjenner til.*/}
+                    {/*</p>*/}
 
-                {/*<ul className="space-y-4 list-none">*/}
-                {/*    /!* Example entry 1 *!/*/}
-                {/*    <li className="p-4 bg-gray-300 rounded shadow">*/}
-                {/*        <span className="block font-semibold mb-2">Bakeren ved parken</span>*/}
-                {/*        <div className="mb-2">*/}
-                {/*            <input type="checkbox" id="ikkeJobbet1" name="ikkeJobbet1" className="mr-2" />*/}
-                {/*            <label htmlFor="ikkeJobbet1" className="text-gray-600">ikke jobbet der i perioden</label>*/}
-                {/*        </div>*/}
-                {/*        <div className="mb-2">*/}
-                {/*            <label htmlFor="timer1" className="block text-gray-600">Timer jobbet:</label>*/}
-                {/*            <input type="text" id="timer1" name="timer1" placeholder="F.eks: 5 timer" className="p-2 mt-1 w-full border rounded" />*/}
-                {/*        </div>*/}
-                {/*        <div className="mb-2">*/}
-                {/*            <label htmlFor="lønn1" className="block text-gray-600">Lønn tjent:</label>*/}
-                {/*            <input type="text" id="lønn1" name="lønn1" placeholder="F.eks: 200 kr" className="p-2 mt-1 w-full border rounded" />*/}
-                {/*        </div>*/}
-                {/*    </li>*/}
+                    {/*<ul className="space-y-4 list-none">*/}
+                    {/*    /!* Example entry 1 *!/*/}
+                    {/*    <li className="p-4 bg-gray-300 rounded shadow">*/}
+                    {/*        <span className="block font-semibold mb-2">Bakeren ved parken</span>*/}
+                    {/*        <div className="mb-2">*/}
+                    {/*            <input type="checkbox" id="ikkeJobbet1" name="ikkeJobbet1" className="mr-2" />*/}
+                    {/*            <label htmlFor="ikkeJobbet1" className="text-gray-600">ikke jobbet der i perioden</label>*/}
+                    {/*        </div>*/}
+                    {/*        <div className="mb-2">*/}
+                    {/*            <label htmlFor="timer1" className="block text-gray-600">Timer jobbet:</label>*/}
+                    {/*            <input type="text" id="timer1" name="timer1" placeholder="F.eks: 5 timer" className="p-2 mt-1 w-full border rounded" />*/}
+                    {/*        </div>*/}
+                    {/*        <div className="mb-2">*/}
+                    {/*            <label htmlFor="lønn1" className="block text-gray-600">Lønn tjent:</label>*/}
+                    {/*            <input type="text" id="lønn1" name="lønn1" placeholder="F.eks: 200 kr" className="p-2 mt-1 w-full border rounded" />*/}
+                    {/*        </div>*/}
+                    {/*    </li>*/}
 
-                {/*</ul>*/}
-            </div>
-
-                            </>)
-                            }
-
+                    {/*</ul>*/}
+                </div>
+            </>
+        )
+    }
 }
 
 export default JaNeiStor
