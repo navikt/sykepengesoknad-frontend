@@ -73,6 +73,9 @@ const nextConfig = {
         naisAppImage: process.env.NAIS_APP_IMAGE,
         naisAppName: process.env.NAIS_APP_NAME,
     },
+    eslint: {
+            ignoreDuringBuilds: true,
+    }
 }
 
 module.exports = nextConfig
