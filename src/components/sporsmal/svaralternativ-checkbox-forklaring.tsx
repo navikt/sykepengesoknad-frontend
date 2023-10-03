@@ -1,4 +1,4 @@
-import { BodyShort, Checkbox, Panel, TextField } from '@navikt/ds-react'
+import { BodyShort, Checkbox, DatePicker, Panel, TextField, useDatepicker } from "@navikt/ds-react";
 import React, { Fragment, ReactElement } from 'react'
 
 import { TagTyper } from '../../types/enums'
@@ -6,15 +6,24 @@ import { TagTyper } from '../../types/enums'
 type JobItemProps = {
     name: string
     index: number
+    unknownJobs: boolean
 }
 
-const JobItem: React.FunctionComponent<JobItemProps> = ({ name, index }) => {
+const JobItem: React.FunctionComponent<JobItemProps> = ({ name, index , unknownJobs}) => {
     // className="p-4 bg-gray-300 rounded shadow"
+      const { datepickerProps, inputProps, selectedDay } = useDatepicker({
+    fromDate: new Date("Aug 23 2019"),
+    onDateChange: console.log,
+  });
+
     return (
         <li>
             <Panel border className="mb-4" key={index}>
                 <span className="block font-semibold mb-2">{name}</span>
-
+                {unknownJobs &&       <DatePicker {...datepickerProps}>
+        <DatePicker.Input {...inputProps} label="Når startet du?    " />
+      </DatePicker>
+}
                 <Checkbox value="ikke_jobbet_i_perioden">Jeg har ikke jobbet der i perioden</Checkbox>
                 <Checkbox value="ikke_jobbet_i_perioden_sykmeldt">Jeg er sykmeldt</Checkbox>
                 <Checkbox value="ikke_jobbet_i_perioden_sluttet">Jeg har sluttet</Checkbox>
@@ -31,14 +40,15 @@ type Job = {
 }
 
 interface JobListProps {
-    jobs: Job[]
+    jobs: Job[],
+    unknownJobs: boolean
 }
 
-const JobList = ({ jobs }: JobListProps) => {
+const JobList = ({ jobs, unknownJobs }: JobListProps) => {
     return (
         <ul className="space-y-4 list-none">
             {jobs.map((job, index) => (
-                <JobItem key={index} name={job.name} index={index} />
+                <JobItem key={index} name={job.name} index={index} unknownJobs={unknownJobs} />
             ))}
         </ul>
     )
@@ -56,7 +66,7 @@ export const OtherJobs = ({ jobsList, plusVisible }: { jobsList: string[]; plusV
                 jobber du har vi kjenner til.
             </p>
 
-            <JobList jobs={jobs} />
+            <JobList jobs={jobs} unknownJobs={plusVisible}/>
 
             {plusVisible && (
                 <div className="mt-4">
