@@ -98,7 +98,7 @@ export const SvaralternativCheckboxForklaring = ({
             // </BodyShort>
             <div>
 
-                <OtherJobs jobsList={["Annen jobb brukeren har lagt til, Bærum"]} plusVisible={true} />
+                {/*<OtherJobs jobsList={["Annen jobb brukeren har lagt til, Bærum"]} plusVisible={true} />*/}
 
                     </div>
         )
