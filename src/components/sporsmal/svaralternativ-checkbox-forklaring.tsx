@@ -27,6 +27,8 @@ const JobItem: React.FunctionComponent<JobItemProps> = ({ name, index , unknownJ
                 <Checkbox value="ikke_jobbet_i_perioden">Jeg har ikke jobbet der i perioden</Checkbox>
                 <Checkbox value="ikke_jobbet_i_perioden_sykmeldt">Jeg er sykmeldt</Checkbox>
                 <Checkbox value="ikke_jobbet_i_perioden_sluttet">Jeg har sluttet</Checkbox>
+                <Checkbox value="ikke_jobbet_i_perioden_sluttet">Jeg har ikke begynt enda</Checkbox>
+
 
                 <TextField label="Timer jobbet i perioden:" placeholder="F.eks: 5 timer" />
                 <TextField label="Lønn tjent perioden:" placeholder="F.eks: 12000 kr" />
