@@ -54,12 +54,17 @@ const SporsmalForm = ({ sporsmal }: SpmProps) => {
     })
 
     const erSisteSpm = () => {
-        const snartSlutt =
-            sporsmal.svartype === RSSvartype.IKKE_RELEVANT || sporsmal.svartype === RSSvartype.CHECKBOX_PANEL
+        const svartype = sporsmal?.svartype
+        const erSnartSlutt =
+            svartype &&
+            [RSSvartype.IKKE_RELEVANT, RSSvartype.CHECKBOX_PANEL, RSSvartype.BEKREFTELSESPUNKTER].includes(svartype)
+
         if (erUtenlandssoknad) {
-            return sporsmal.tag === 'BEKREFT_OPPLYSNINGER_UTLAND_INFO'
+            return sporsmal?.tag === 'BEKREFT_OPPLYSNINGER_UTLAND_INFO'
         }
-        return snartSlutt && spmIndex + 2 === valgtSoknad?.sporsmal?.length
+
+        const expectedIndex = svartype === RSSvartype.BEKREFTELSESPUNKTER ? spmIndex + 1 : spmIndex + 2
+        return erSnartSlutt && expectedIndex === valgtSoknad?.sporsmal?.length
     }
 
     const erSiste = erSisteSpm()
@@ -78,7 +83,10 @@ const SporsmalForm = ({ sporsmal }: SpmProps) => {
     const onSubmit = (data: Record<string, any>) => {
         if (oppdatererSporsmal || senderSoknad)
             return Promise.reject(new Error('Spørsmål oppdateres eller søknad sendes allerede'))
-        if ((!nesteSporsmal && !erUtenlandssoknad) || !sporsmal) {
+        if (
+            (!nesteSporsmal && !erUtenlandssoknad && valgtSoknad?.soknadstype !== RSSoknadstype.ARBEIDSTAKERE) ||
+            !sporsmal
+        ) {
             return Promise.reject(new Error('Spørsmål skal være lastet for at vi kan submitte'))
         }
         if (!valgtSoknad) {

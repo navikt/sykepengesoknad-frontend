@@ -17,6 +17,22 @@ export const værKlarOverAt = (): RSSporsmal => {
     }
 }
 
+export const nyVærKlarOverAt = (): RSSporsmal => {
+    return {
+        id: '1623832',
+        tag: 'VAER_KLAR_OVER_AT',
+        sporsmalstekst: 'Viktig å være klar over:',
+        undertekst: null,
+        svartype: 'BEKREFTELSESPUNKTER',
+        min: null,
+        max: null,
+        pavirkerAndreSporsmal: false,
+        kriterieForVisningAvUndersporsmal: null,
+        svar: [],
+        undersporsmal: [],
+    }
+}
+
 export const værKlarOverAtReisetilskudd = (): RSSporsmal => {
     return {
         id: '1623832',

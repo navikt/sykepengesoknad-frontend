@@ -36,8 +36,12 @@ const Knapperad = ({ poster }: { poster: boolean }) => {
 
     const knappetekst = () => {
         if (!soknad) return tekst('sykepengesoknad.ga-videre')
-        const erSisteSteg =
-            spmIndex === soknad.sporsmal.length - (soknad.soknadstype === RSSoknadstype.OPPHOLD_UTLAND ? 1 : 2)
+        const REDUSER_FOR_OPPHOLD_UTLAND_OG_ARBEIDSTAKER =
+            soknad.soknadstype === RSSoknadstype.OPPHOLD_UTLAND || soknad.soknadstype === RSSoknadstype.ARBEIDSTAKERE
+                ? 1
+                : 2
+        const erSisteSteg = spmIndex === soknad.sporsmal.length - REDUSER_FOR_OPPHOLD_UTLAND_OG_ARBEIDSTAKER
+
         if (erSisteSteg) {
             if (soknad.status === RSSoknadstatus.UTKAST_TIL_KORRIGERING) {
                 return tekst('sykepengesoknad.send.endringene')
