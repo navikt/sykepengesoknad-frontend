@@ -20,6 +20,7 @@ import { Fritekst } from './typer/fritekst'
 import RadioKomp from './typer/radio-komp'
 import ComboboxSingle from './typer/combobox-single'
 import ComboboxMultiple from './typer/combobox-multiple'
+import Kulepunkter from './typer/kulepunkter'
 
 interface SporsmalSwitchProps {
     sporsmal: Sporsmal
@@ -85,6 +86,9 @@ const SporsmalSwitch = ({ sporsmal, sporsmalIndex, erSisteSporsmal }: SporsmalSw
 
         case RSSvartype.IKKE_RELEVANT:
             return <IkkeRelevant sporsmal={sporsmal} sporsmalIndex={sporsmalIndex} erSisteSporsmal={erSisteSporsmal} />
+
+        case RSSvartype.BEKREFTELSESPUNKTER:
+            return <Kulepunkter sporsmal={sporsmal} />
 
         default:
             return <UkjentSporsmal sporsmal={sporsmal} />

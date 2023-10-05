@@ -41,12 +41,17 @@ const SporsmalForm = () => {
     const testpersonQuery = useTestpersonQuery()
 
     const erSisteSpm = () => {
-        const snartSlutt =
-            sporsmal?.svartype === RSSvartype.IKKE_RELEVANT || sporsmal?.svartype === RSSvartype.CHECKBOX_PANEL
+        const svartype = sporsmal?.svartype
+        const erSnartSlutt =
+            svartype &&
+            [RSSvartype.IKKE_RELEVANT, RSSvartype.CHECKBOX_PANEL, RSSvartype.BEKREFTELSESPUNKTER].includes(svartype)
+
         if (erUtenlandssoknad) {
             return sporsmal?.tag === TagTyper.BEKREFT_OPPLYSNINGER_UTLAND_INFO
         }
-        return snartSlutt && spmIndex + 2 === valgtSoknad?.sporsmal?.length
+
+        const expectedIndex = svartype === RSSvartype.BEKREFTELSESPUNKTER ? spmIndex + 1 : spmIndex + 2
+        return erSnartSlutt && expectedIndex === valgtSoknad?.sporsmal?.length
     }
 
     const { mutate: sendSoknadMutation, isLoading: senderSoknad, error: sendError } = useSendSoknad()
@@ -96,7 +101,10 @@ const SporsmalForm = () => {
     const onSubmit = (data: Record<string, any>) => {
         if (oppdatererSporsmal || senderSoknad)
             return Promise.reject(new Error('Spørsmål oppdateres eller søknad sendes allerede'))
-        if ((!nesteSporsmal && !erUtenlandssoknad) || !sporsmal) {
+        if (
+            (!nesteSporsmal && !erUtenlandssoknad && valgtSoknad?.soknadstype !== RSSoknadstype.ARBEIDSTAKERE) ||
+            !sporsmal
+        ) {
             return Promise.reject(new Error('Spørsmål skal være lastet for at vi kan submitte'))
         }
         if (!valgtSoknad) {
@@ -136,7 +144,7 @@ const SporsmalForm = () => {
 
             oppdaterSporsmalMutation({
                 sporsmal: oppdatertSporsmalMedSvar(),
-                onSuccess: () => onSuccessLogic(erSiste),
+                onSuccess: () => onSuccessLogic(erSiste!),
                 soknad: valgtSoknad,
                 spmIndex: erSisteSpm() ? spmIndex + 1 : spmIndex,
             })
@@ -154,7 +162,7 @@ const SporsmalForm = () => {
                 >
                     <GuidepanelOverSporsmalstekst />
 
-                    {sporsmal && <SporsmalSwitch sporsmal={sporsmal} sporsmalIndex={0} erSisteSporsmal={erSiste} />}
+                    {sporsmal && <SporsmalSwitch sporsmal={sporsmal} sporsmalIndex={0} erSisteSporsmal={erSiste!} />}
                     {!sporsmal && <SkeletonSporsmal />}
 
                     {erSiste && !erUtenlandssoknad && valgtSoknad && nesteSporsmal && (
