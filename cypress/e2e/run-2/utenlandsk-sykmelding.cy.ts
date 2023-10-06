@@ -97,6 +97,8 @@ describe('Tester søknad til utenlandsk sykmelding', () => {
     it('Svar nei på resten', function () {
         for (let i = 5; i <= 11; i++) {
             cy.url().should('include', `${id}/${i}`)
+            // eslint-disable-next-line cypress/no-unnecessary-waiting
+            cy.wait(100)
             svarNeiHovedsporsmal()
             cy.contains('Gå videre').click()
         }
