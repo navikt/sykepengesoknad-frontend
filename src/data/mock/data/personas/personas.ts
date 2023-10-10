@@ -132,3 +132,17 @@ export const integration: Persona = {
     sykmeldinger: sykmeldinger,
     beskrivelse: 'God mix med søknader som brukes til integrasjons tester',
 }
+
+export function tilbakedateringer(): Persona {
+    const frilanserUnderBehandling = deepcopyMedNyId(frilanser, '9205cc51-145b-4bda-8e99-aeaade949daf')
+    frilanserUnderBehandling.merknaderFraSykmelding = [
+        {
+            type: 'UNDER_BEHANDLING',
+        },
+    ]
+    return {
+        soknader: [frilanser],
+        sykmeldinger: sykmeldinger,
+        beskrivelse: 'Søknader som tilhører tilbakedaterte sykmeldinger. En under behandling og en ikke godkjent',
+    }
+}

@@ -20,6 +20,7 @@ import {
     integration,
     Persona,
     reisetilskuddPerson,
+    tilbakedateringer,
     utenData,
     utlandPerson,
 } from './data/personas/personas'
@@ -60,6 +61,7 @@ type PersonaKey =
     | 'http-500-ved-send-soknad'
     | 'korrigeringsfrist-utlopt'
     | 'cummulative-layout-shift'
+    | 'tilbakedateringer'
 export type PersonaData = Partial<Record<PersonaKey, Persona>>
 
 export type PersonaGroupKey = 'soknad-typer' | 'soknad-sporsmal' | 'testing'
@@ -95,10 +97,12 @@ export function testpersonerGruppert(): PersonaGroup {
             ['egenmeldingsdager-arbeidsgiver']: jsonDeepCopy(opprettetAvInntektsmelding),
             ['sykmelding-med-egenmeldingsdager']: jsonDeepCopy(egenmeldingSykmeldingaPerson),
         },
+
         ['testing']: {
             ['korrigeringsfrist-utlopt']: jsonDeepCopy(korrigeringsfristUtloptPerson),
             ['har-kontonummer']: jsonDeepCopy(harKontonummer),
             ['har-ikke-kontonummer']: jsonDeepCopy(harIkkeKontonummer),
+            ['tilbakedateringer']: jsonDeepCopy(tilbakedateringer()),
             ['reisetilskudd-test']: jsonDeepCopy(reisetilskuddTestPerson),
             ['en-usendt-sykmelding']: jsonDeepCopy(enUsendtSykmelding),
             ['to-usendte-sykmeldinger']: jsonDeepCopy(toUsendteSykmeldinger),
