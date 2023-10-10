@@ -134,14 +134,20 @@ export const integration: Persona = {
 }
 
 export function tilbakedateringer(): Persona {
-    const frilanserUnderBehandling = deepcopyMedNyId(frilanser, '9205cc51-145b-4bda-8e99-aeaade949daf')
-    frilanserUnderBehandling.merknaderFraSykmelding = [
+    const underBehandling = deepcopyMedNyId(arbeidstaker, '9205cc51-145b-4bda-8e99-aeaade949daf')
+    underBehandling.merknaderFraSykmelding = [
         {
             type: 'UNDER_BEHANDLING',
         },
     ]
+    const ugyldigTilbakedatering = deepcopyMedNyId(arbeidstaker, '9205cc51-145b-4bda-8e99-aeaade949daa')
+    ugyldigTilbakedatering.merknaderFraSykmelding = [
+        {
+            type: 'UGYLDIG_TILBAKEDATERING',
+        },
+    ]
     return {
-        soknader: [frilanser],
+        soknader: [underBehandling, ugyldigTilbakedatering],
         sykmeldinger: sykmeldinger,
         beskrivelse: 'Søknader som tilhører tilbakedaterte sykmeldinger. En under behandling og en ikke godkjent',
     }
