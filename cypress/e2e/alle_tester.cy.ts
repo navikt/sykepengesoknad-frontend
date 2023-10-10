@@ -19,6 +19,7 @@ import './run-1/ettersending_og_korriger.cy'
 import './run-1/feilmeldinger.cy'
 import './run-1/feilsituasjon-håndtering.cy'
 import './run-1/frilanser_100.cy'
+import './run-1/tillbakedatert.cy'
 import './run-1/korrigering-ferie-spm-infotekst.cy'
 import './run-1/utkast-korrigering.cy'
 

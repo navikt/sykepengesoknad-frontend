@@ -28,13 +28,6 @@ describe('Tester frilansersøknad', () => {
         cy.get('section[aria-label="Opplysninger fra sykmeldingen"] button').click()
         cy.contains('Har ikke forsikring som gjelder de første 16 dagene av sykefraværet').should('not.be.visible')
 
-        // Viktig informasjon grunnet tilbakedatering
-        cy.get('.navds-guide-panel').should('be.visible')
-        cy.get('.navds-guide-panel').contains('Viktig informasjon')
-        cy.get('.navds-guide-panel').contains(
-            'Vanligvis starter sykmeldingen den dagen du er hos legen. I ditt tilfelle har legen skrevet at den startet tidligere.',
-        )
-
         // Godkjenne ANSVARSERKLARING
         cy.contains(
             'Jeg vet at jeg kan miste retten til sykepenger hvis opplysningene jeg gir ikke er riktige eller fullstendige. Jeg vet også at NAV kan holde igjen eller kreve tilbake penger, og at å gi feil opplysninger kan være straffbart.',
