@@ -1,4 +1,4 @@
-import { klikkGaVidere, svarCheckboxPanel, svarNeiHovedsporsmal } from '../../support/utilities'
+import { klikkGaVidere, neiOgVidere, svarCheckboxPanel } from '../../support/utilities'
 import { arbeidstakerGradert } from '../../../src/data/mock/data/soknad/arbeidstaker-gradert'
 
 describe('Tester ettersending og korrigering', () => {
@@ -17,37 +17,16 @@ describe('Tester ettersending og korrigering', () => {
         svarCheckboxPanel()
         klikkGaVidere()
 
-        svarNeiHovedsporsmal()
-        cy.contains('Fravær før sykmeldingen')
-        klikkGaVidere()
-
-        cy.contains('Tilbake i fullt arbeid')
-        svarNeiHovedsporsmal()
-        klikkGaVidere()
-
-        cy.contains('Ferie')
-        svarNeiHovedsporsmal()
-        klikkGaVidere()
-
-        cy.contains('Permisjon')
-        svarNeiHovedsporsmal()
-        klikkGaVidere()
-
-        cy.contains('Opphold i utlandet')
-        svarNeiHovedsporsmal()
-        klikkGaVidere()
-
-        cy.contains('Jobb underveis i sykefraværet')
-        svarNeiHovedsporsmal()
-        klikkGaVidere()
-
-        cy.contains('Arbeid utenfor Norge')
-        svarNeiHovedsporsmal()
-        klikkGaVidere()
-
-        cy.contains('Andre inntektskilder')
-        svarNeiHovedsporsmal()
-        klikkGaVidere()
+        neiOgVidere([
+            'Fravær før sykmeldingen',
+            'Tilbake i fullt arbeid',
+            'Ferie',
+            'Permisjon',
+            'Opphold i utlandet',
+            'Jobb underveis i sykefraværet',
+            'Arbeid utenfor Norge',
+            'Andre inntektskilder',
+        ])
 
         cy.contains('Til slutt')
         svarCheckboxPanel()

@@ -12,7 +12,16 @@ describe('Tester yrkesskadesspørsmål', () => {
 
     it('Svarer på spørsmål før yrkesskade', function () {
         checkViStolerPåDeg()
-        neiOgVidere({ antall: 7 })
+
+        neiOgVidere([
+            'Tilbake i fullt arbeid',
+            'Ferie',
+            'Permisjon',
+            'Opphold i utlandet',
+            'Jobb underveis i sykefraværet',
+            'Arbeid utenfor Norge',
+            'Andre inntektskilder',
+        ])
     })
 
     it('Kommer til spørsmål om yrkesskade', function () {
