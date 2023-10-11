@@ -54,8 +54,9 @@ export function checkViStolerPåDeg(gåVidere = true) {
     }
 }
 
-export function neiOgVidere({ antall }: { antall: number }) {
-    for (let i = 0; i < antall; i++) {
+export function neiOgVidere(titler: string[]) {
+    for (let i = 0; i < titler.length; i++) {
+        cy.contains(titler[i]).should('be.visible')
         svarNeiHovedsporsmal()
         klikkGaVidere()
     }
