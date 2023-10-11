@@ -1,20 +1,17 @@
 import { Alert, BodyLong, Button, Modal, Skeleton } from '@navikt/ds-react'
 import React, { useState } from 'react'
-import { useRouter } from 'next/router'
 
 import { RSSoknadstatus } from '../../types/rs-types/rs-soknadstatus'
 import { tekst } from '../../utils/tekster'
 import { logEvent } from '../amplitude/amplitude'
 import { EndringUtenEndringModal } from '../sporsmal/endring-uten-endring/endring-uten-endring-modal'
-import useSoknad from '../../hooks/useSoknad'
 import { useAvbryt } from '../../hooks/useAvbryt'
 import { useSoknadMedDetaljer } from '../../hooks/useSoknadMedDetaljer'
 import { cn } from '../../utils/tw-utils'
 
 const AvbrytKorrigering = () => {
-    const router = useRouter()
-    const { id, stegId } = router.query as { id: string; stegId: string }
-    const { data: valgtSoknad } = useSoknad(id)
+    const { valgtSoknad, stegId } = useSoknadMedDetaljer()
+
     const [aapen, setAapen] = useState<boolean>(false)
 
     if (!valgtSoknad) return null

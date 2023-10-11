@@ -1,12 +1,12 @@
 import { Alert, Button, Modal } from '@navikt/ds-react'
 import { TrashIcon } from '@navikt/aksel-icons'
 import React, { useState } from 'react'
-import { useRouter } from 'next/router'
 
 import { Kvittering, Sporsmal, svarverdiToKvittering } from '../../types/types'
 import { tekst } from '../../utils/tekster'
 import Vis from '../vis'
 import { useSlettKvittering } from '../../hooks/useSlettKvittering'
+import { useSoknadMedDetaljer } from '../../hooks/useSoknadMedDetaljer'
 
 interface SlettknappProps {
     sporsmal: Sporsmal
@@ -14,12 +14,14 @@ interface SlettknappProps {
 }
 
 const Slettknapp = ({ sporsmal, kvittering }: SlettknappProps) => {
-    const router = useRouter()
-    const { id } = router.query as { id: string }
+    const { soknadId } = useSoknadMedDetaljer()
+
     const { mutate: slettKvitteringMutation, isLoading: sletter, error: slettingError } = useSlettKvittering()
 
     const [vilSlette, setVilSlette] = useState<boolean>(false)
-
+    if (!soknadId) {
+        return null
+    }
     const slettKvittering = async () => {
         if (sletter) {
             return
@@ -30,7 +32,7 @@ const Slettknapp = ({ sporsmal, kvittering }: SlettknappProps) => {
         )
 
         slettKvitteringMutation({
-            soknadId: id,
+            soknadId: soknadId,
             sporsmalId: sporsmal.id,
             svarId: svar!.id!,
             onSuccess: () => {

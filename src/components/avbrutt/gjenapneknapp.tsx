@@ -1,16 +1,14 @@
 import { Alert, Button } from '@navikt/ds-react'
 import React from 'react'
-import { useRouter } from 'next/router'
 
-import useSoknad from '../../hooks/useSoknad'
 import { logEvent } from '../amplitude/amplitude'
 import { useGjenapne } from '../../hooks/useGjenapne'
 import Vis from '../vis'
+import { useSoknadMedDetaljer } from '../../hooks/useSoknadMedDetaljer'
 
 const GjenapneSoknad = () => {
-    const router = useRouter()
-    const { id } = router.query as { id: string }
-    const { data: valgtSoknad } = useSoknad(id)
+    const { valgtSoknad } = useSoknadMedDetaljer()
+
     const { mutate: gjenapneMutation, isLoading: gjenapner, error: gjenapneError } = useGjenapne()
 
     if (!valgtSoknad) return null
@@ -33,7 +31,7 @@ const GjenapneSoknad = () => {
                         soknadstype: valgtSoknad.soknadstype,
                         component: 'Avbrutt søknad visning',
                     })
-                    gjenapneMutation(id)
+                    gjenapneMutation(valgtSoknad.id)
                 }}
             >
                 Jeg vil bruke denne søknaden likevel

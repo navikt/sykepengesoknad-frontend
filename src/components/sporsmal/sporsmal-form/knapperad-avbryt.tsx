@@ -1,16 +1,14 @@
 import { Alert, Button } from '@navikt/ds-react'
 import React from 'react'
-import { useRouter } from 'next/router'
 
 import { tekst } from '../../../utils/tekster'
-import useSoknad from '../../../hooks/useSoknad'
 import useSoknader from '../../../hooks/useSoknader'
 import { useAvbryt } from '../../../hooks/useAvbryt'
+import { useSoknadMedDetaljer } from '../../../hooks/useSoknadMedDetaljer'
 
 const KnapperadAvbryt = () => {
-    const router = useRouter()
-    const { id } = router.query as { id: string }
-    const { data: valgtSoknad } = useSoknad(id)
+    const { valgtSoknad } = useSoknadMedDetaljer()
+
     const { data: soknader } = useSoknader()
     const { mutate: avbrytMutation, isLoading: avbryter, error: avbrytError } = useAvbryt()
 

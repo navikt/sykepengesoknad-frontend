@@ -1,21 +1,18 @@
 import { Alert, BodyLong, Heading, Label } from '@navikt/ds-react'
 import React from 'react'
-import { useRouter } from 'next/router'
 
 import { RSArbeidssituasjon } from '../../../types/rs-types/rs-arbeidssituasjon'
 import { RSSoknadstype } from '../../../types/rs-types/rs-soknadstype'
 import { sendtForMerEnn30DagerSiden } from '../../../utils/dato-utils'
 import { tekst } from '../../../utils/tekster'
 import Vis from '../../vis'
-import useSoknad from '../../../hooks/useSoknad'
 import Kontonummer from '../kontonummer/kontonummer'
 import { parserWithReplace } from '../../../utils/html-react-parser-utils'
 import { LenkeMedIkon } from '../../lenke-med-ikon/LenkeMedIkon'
+import { useSoknadMedDetaljer } from '../../../hooks/useSoknadMedDetaljer'
 
 const KvitteringVidere = () => {
-    const router = useRouter()
-    const { id } = router.query as { id: string; stegId: string }
-    const { data: valgtSoknad } = useSoknad(id)
+    const { valgtSoknad } = useSoknadMedDetaljer()
 
     if (sendtForMerEnn30DagerSiden(valgtSoknad?.sendtTilArbeidsgiverDato, valgtSoknad?.sendtTilNAVDato)) {
         return null

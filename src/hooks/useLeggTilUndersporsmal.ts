@@ -1,8 +1,7 @@
 import { useMutation, useQueryClient } from '@tanstack/react-query'
 import { logger } from '@navikt/next-logger'
 
-import { FetchError, AuthenticationError } from '../utils/fetch'
-import fetchMedRequestId from '../utils/fetch'
+import fetchMedRequestId, { AuthenticationError, FetchError } from '../utils/fetch'
 
 import { useTestpersonQuery } from './useTestpersonQuery'
 

@@ -1,20 +1,17 @@
 import React from 'react'
 import { Table } from '@navikt/ds-react'
-import { useRouter } from 'next/router'
 
 import { Kvittering } from '../../../types/types'
 import { getLedetekst, tekst } from '../../../utils/tekster'
 import { formatterTall } from '../../../utils/utils'
 import { hentSvar } from '../../sporsmal/hent-svar'
 import Vis from '../../vis'
-import useSoknad from '../../../hooks/useSoknad'
+import { useSoknadMedDetaljer } from '../../../hooks/useSoknadMedDetaljer'
 
 import KvitteringListeVisning from './kvittering-listevisning'
 
 const FilListe = () => {
-    const router = useRouter()
-    const { id, stegId } = router.query as { id: string; stegId: string }
-    const { data: valgtSoknad } = useSoknad(id)
+    const { valgtSoknad, stegId } = useSoknadMedDetaljer()
 
     const stegNum = Number(stegId)
     const spmIndex = stegNum - 1

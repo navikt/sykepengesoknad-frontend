@@ -8,16 +8,15 @@ import Endreknapp from '../endreknapp/endreknapp'
 import Ettersending from '../ettersending/ettersending'
 import Kvittering from '../kvittering/kvittering'
 import Vis from '../vis'
-import useSoknad from '../../hooks/useSoknad'
 import { urlTilSoknad } from '../soknad/soknad-link'
 import QueryStatusPanel from '../queryStatusPanel/QueryStatusPanel'
 import { kvitteringBreadcrumb, useUpdateBreadcrumbs } from '../../hooks/useBreadcrumbs'
 import { SoknadHeader } from '../soknad/soknad-header'
+import { useSoknadMedDetaljer } from '../../hooks/useSoknadMedDetaljer'
 
 const SendtSide = () => {
+    const { valgtSoknad } = useSoknadMedDetaljer()
     const router = useRouter()
-    const { id } = router.query as { id: string }
-    const { data: valgtSoknad } = useSoknad(id)
 
     useUpdateBreadcrumbs(() => [{ ...kvitteringBreadcrumb, handleInApp: true }], [])
 

@@ -1,5 +1,4 @@
 import React from 'react'
-import { useRouter } from 'next/router'
 
 import { RSArbeidssituasjon } from '../../types/rs-types/rs-arbeidssituasjon'
 import { RSSoknadstype } from '../../types/rs-types/rs-soknadstype'
@@ -7,15 +6,13 @@ import { sendtForMerEnn30DagerSiden } from '../../utils/dato-utils'
 import Opplysninger from '../opplysninger-fra-sykmelding/opplysninger'
 import Oppsummering from '../oppsummering/oppsummering'
 import Vis from '../vis'
-import useSoknad from '../../hooks/useSoknad'
+import { useSoknadMedDetaljer } from '../../hooks/useSoknadMedDetaljer'
 
 import Arbeidstaker from './arbeidstaker'
 import AlleAndre from './alle-andre'
 
 const Kvittering = () => {
-    const router = useRouter()
-    const { id } = router.query as { id: string }
-    const { data: valgtSoknad } = useSoknad(id)
+    const { valgtSoknad } = useSoknadMedDetaljer()
 
     if (!valgtSoknad) return null
 

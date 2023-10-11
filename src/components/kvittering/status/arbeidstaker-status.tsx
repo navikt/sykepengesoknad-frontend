@@ -1,19 +1,16 @@
 import { Detail } from '@navikt/ds-react'
 import dayjs from 'dayjs'
 import React from 'react'
-import { useRouter } from 'next/router'
 
 import { tekst } from '../../../utils/tekster'
 import Vis from '../../vis'
-import useSoknad from '../../../hooks/useSoknad'
 import Avkrysset from '../../oppsummering/utdrag/avkrysset'
+import { useSoknadMedDetaljer } from '../../../hooks/useSoknadMedDetaljer'
 
 import { Mottaker } from './kvittering-status'
 
 const ArbeidstakerStatus = () => {
-    const router = useRouter()
-    const { id } = router.query as { id: string; stegId: string }
-    const { data: valgtSoknad } = useSoknad(id)
+    const { valgtSoknad } = useSoknadMedDetaljer()
 
     let medKopi = tekst('kvittering.med-kopi-til-nav')
     if (valgtSoknad!.sendtTilArbeidsgiverDato && valgtSoknad!.sendtTilNAVDato) {

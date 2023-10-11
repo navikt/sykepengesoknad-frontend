@@ -1,7 +1,6 @@
 import { Alert, BodyLong, BodyShort, Radio, RadioGroup, ReadMore } from '@navikt/ds-react'
 import React from 'react'
 import { Controller, useFormContext } from 'react-hook-form'
-import { useRouter } from 'next/router'
 
 import { TagTyper } from '../../../types/enums'
 import { rodeUkeDagerIPerioden } from '../../../utils/helligdager-utils'
@@ -12,7 +11,7 @@ import Vis from '../../vis'
 import { SpmProps } from '../sporsmal-form/sporsmal-form'
 import { hentFeilmelding } from '../sporsmal-utils'
 import UndersporsmalListe from '../undersporsmal/undersporsmal-liste'
-import useSoknad from '../../../hooks/useSoknad'
+import { useSoknadMedDetaljer } from '../../../hooks/useSoknadMedDetaljer'
 
 const RadioTimerProsent = ({ sporsmal }: SpmProps) => {
     const {
@@ -31,9 +30,8 @@ const RadioTimerProsent = ({ sporsmal }: SpmProps) => {
     const errorTimer = errors[hentUndersporsmal(sporsmal!, TagTyper.HVOR_MYE_TIMER_VERDI)!.id]
 
     const feilmelding = hentFeilmelding(sporsmal)
-    const router = useRouter()
-    const { id } = router.query as { id: string }
-    const { data: valgtSoknad } = useSoknad(id)
+    const { valgtSoknad } = useSoknadMedDetaljer()
+
     const { validerGrad, beregnGrad } = validerArbeidsgrad(sporsmal)
 
     const lavereProsentHjelpTittel = tekst('ekspanderbarhjelp.prosenten_lavere_enn_forventet_arbeidstaker.tittel')
