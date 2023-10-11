@@ -1,4 +1,4 @@
-import { klikkGaVidere } from '../../support/utilities'
+import { klikkGaVidere, svarCheckboxPanel, svarNeiHovedsporsmal } from '../../support/utilities'
 import { arbeidstakerGradert } from '../../../src/data/mock/data/soknad/arbeidstaker-gradert'
 
 describe('Tester ettersending og korrigering', () => {
@@ -14,44 +14,43 @@ describe('Tester ettersending og korrigering', () => {
     })
 
     it('Svar på søknad', function () {
-        cy.url().should('include', `${soknad.id}/1`)
-        cy.get('.navds-checkbox__label').click()
+        svarCheckboxPanel()
         klikkGaVidere()
 
-        cy.url().should('include', `${soknad.id}/2`)
-        cy.get('[data-cy="ja-nei-stor"] input[value=NEI]').click()
+        svarNeiHovedsporsmal()
+        cy.contains('Fravær før sykmeldingen')
         klikkGaVidere()
 
-        cy.url().should('include', `${soknad.id}/3`)
-        cy.get('[data-cy="ja-nei-stor"] input[value=NEI]').click()
+        cy.contains('Tilbake i fullt arbeid')
+        svarNeiHovedsporsmal()
         klikkGaVidere()
 
-        cy.url().should('include', `${soknad.id}/4`)
-        cy.get('[data-cy="ja-nei-stor"] input[value=NEI]').click()
+        cy.contains('Ferie')
+        svarNeiHovedsporsmal()
         klikkGaVidere()
 
-        cy.url().should('include', `${soknad.id}/5`)
-        cy.get('[data-cy="ja-nei-stor"] input[value=NEI]').click()
+        cy.contains('Permisjon')
+        svarNeiHovedsporsmal()
         klikkGaVidere()
 
-        cy.url().should('include', `${soknad.id}/6`)
-        cy.get('[data-cy="ja-nei-stor"] input[value=NEI]').click()
+        cy.contains('Opphold i utlandet')
+        svarNeiHovedsporsmal()
         klikkGaVidere()
 
-        cy.url().should('include', `${soknad.id}/7`)
-        cy.get('[data-cy="ja-nei-stor"] input[value=NEI]').click()
+        cy.contains('Jobb underveis i sykefraværet')
+        svarNeiHovedsporsmal()
         klikkGaVidere()
 
-        cy.url().should('include', `${soknad.id}/8`)
-        cy.get('[data-cy="ja-nei-stor"] input[value=NEI]').click()
+        cy.contains('Arbeid utenfor Norge')
+        svarNeiHovedsporsmal()
         klikkGaVidere()
 
-        cy.url().should('include', `${soknad.id}/9`)
-        cy.get('[data-cy="ja-nei-stor"] input[value=NEI]').click()
+        cy.contains('Andre inntektskilder')
+        svarNeiHovedsporsmal()
         klikkGaVidere()
 
-        cy.url().should('include', `${soknad.id}/10`)
-        cy.get('.navds-checkbox__label').click()
+        cy.contains('Til slutt')
+        svarCheckboxPanel()
         cy.contains('Send søknaden').click()
     })
 
