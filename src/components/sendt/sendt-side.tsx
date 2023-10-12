@@ -15,7 +15,7 @@ import { SoknadHeader } from '../soknad/soknad-header'
 import { useSoknadMedDetaljer } from '../../hooks/useSoknadMedDetaljer'
 
 const SendtSide = () => {
-    const { valgtSoknad } = useSoknadMedDetaljer()
+    const { valgtSoknad, soknadId } = useSoknadMedDetaljer()
     const router = useRouter()
 
     useUpdateBreadcrumbs(() => [{ ...kvitteringBreadcrumb, handleInApp: true }], [])
@@ -36,7 +36,7 @@ const SendtSide = () => {
         // eslint-disable-next-line
     }, [valgtSoknad])
 
-    if (!valgtSoknad) return <QueryStatusPanel valgSoknadId={id} />
+    if (!valgtSoknad) return <QueryStatusPanel valgSoknadId={soknadId} />
 
     const erSendtTilNav = valgtSoknad.sendtTilNAVDato !== undefined
     const erSendtTilArbeidsgiver = valgtSoknad.sendtTilArbeidsgiverDato !== undefined

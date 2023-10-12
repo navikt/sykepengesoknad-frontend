@@ -1,6 +1,7 @@
 import { Button } from '@navikt/ds-react'
 import React, { useEffect } from 'react'
 import { logger } from '@navikt/next-logger'
+import { useRouter } from 'next/router'
 
 import Endreknapp from '../../components/endreknapp/endreknapp'
 import { RSSoknadstatus } from '../../types/rs-types/rs-soknadstatus'
@@ -24,8 +25,8 @@ import Kvittering from './kvittering'
 import { harKorrigertArbeidstakersoknadIDetSiste } from './harSvartJa'
 
 const KvitteringSide = () => {
-    const { valgtSoknad } = useSoknadMedDetaljer()
-
+    const { valgtSoknad, soknadId } = useSoknadMedDetaljer()
+    const router = useRouter()
     const { data: soknader } = useSoknader()
     const korrigertSøknadStudy = 'study-zeh32lhqyb'
     const { data: korrigertStudyActive } = useStudyStatus(korrigertSøknadStudy)
@@ -51,7 +52,7 @@ const KvitteringSide = () => {
         // eslint-disable-next-line
     }, [valgtSoknad])
 
-    if (!valgtSoknad || !soknader) return <QueryStatusPanel valgSoknadId={id} />
+    if (!valgtSoknad || !soknader) return <QueryStatusPanel valgSoknadId={soknadId} />
 
     const erSendtTilArbeidsgiver = valgtSoknad.sendtTilArbeidsgiverDato !== undefined
 
