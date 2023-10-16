@@ -2,8 +2,7 @@ import dayjs from 'dayjs'
 
 import { RSSoknad } from '../../../../types/rs-types/rs-soknad'
 import { arbeidstaker100Syk } from '../sykmeldinger'
-import { værKlarOverAt } from '../sporsmal/vaer-klar-over-at'
-import { bekreftOpplysninger } from '../sporsmal/bekreft-opplysninger'
+import { nyVærKlarOverAt } from '../sporsmal/vaer-klar-over-at'
 
 export const avbruttSoknad: RSSoknad = {
     id: '811d15b2-2a76-4623-9530-1ba55617e0a5',
@@ -484,8 +483,7 @@ export const avbruttSoknad: RSSoknad = {
                 },
             ],
         },
-        værKlarOverAt(),
-        bekreftOpplysninger(),
+        nyVærKlarOverAt(),
     ],
     egenmeldtSykmelding: false,
     opprettetAvInntektsmelding: false,
