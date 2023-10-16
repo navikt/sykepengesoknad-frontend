@@ -31,7 +31,9 @@ describe('Tester kontonummer i kvittering', () => {
 
 const besvarSoknad = () => {
     checkViStolerPåDeg()
-    cy.contains('Send søknaden')
+    cy.contains(
+        'Jeg har lest all informasjonen jeg har fått i søknaden og bekrefter at opplysningene jeg har gitt er korrekte.',
+    )
     svarCheckboxPanel()
     cy.contains('Send søknaden').click()
 }
