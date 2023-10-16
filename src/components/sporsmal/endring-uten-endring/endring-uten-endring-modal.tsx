@@ -1,12 +1,11 @@
 import { Alert, BodyShort, Button, Modal } from '@navikt/ds-react'
 import React from 'react'
-import { useRouter } from 'next/router'
 
 import { tekst } from '../../../utils/tekster'
-import useSoknad from '../../../hooks/useSoknad'
 import useSoknader from '../../../hooks/useSoknader'
 import { logEvent } from '../../amplitude/amplitude'
 import { useAvbryt } from '../../../hooks/useAvbryt'
+import { useSoknadMedDetaljer } from '../../../hooks/useSoknadMedDetaljer'
 
 interface EndringUtenEndringModalProps {
     aapen: boolean
@@ -14,9 +13,8 @@ interface EndringUtenEndringModalProps {
 }
 
 export const EndringUtenEndringModal = (props: EndringUtenEndringModalProps) => {
-    const router = useRouter()
-    const { id } = router.query as { id: string }
-    const { data: valgtSoknad } = useSoknad(id)
+    const { valgtSoknad } = useSoknadMedDetaljer()
+
     const { data: soknader } = useSoknader()
     const { mutate: avbrytMutation, isLoading: avbryter, error: avbrytError } = useAvbryt()
 

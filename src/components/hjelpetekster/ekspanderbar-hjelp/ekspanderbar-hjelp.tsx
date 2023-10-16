@@ -1,6 +1,5 @@
 import { BodyLong, ReadMore } from '@navikt/ds-react'
 import React, { useEffect, useState } from 'react'
-import { useRouter } from 'next/router'
 
 import { TagTyper } from '../../../types/enums'
 import { RSArbeidssituasjon } from '../../../types/rs-types/rs-arbeidssituasjon'
@@ -8,9 +7,9 @@ import { RSSoknadstype } from '../../../types/rs-types/rs-soknadstype'
 import { tekst } from '../../../utils/tekster'
 import { SpmProps } from '../../sporsmal/sporsmal-form/sporsmal-form'
 import { fjernIndexFraTag } from '../../sporsmal/sporsmal-utils'
-import useSoknad from '../../../hooks/useSoknad'
 import { logEvent } from '../../amplitude/amplitude'
 import { parserWithReplace } from '../../../utils/html-react-parser-utils'
+import { useSoknadMedDetaljer } from '../../../hooks/useSoknadMedDetaljer'
 
 import { AndreInntektskilderHjelpBody } from './andre-inntektskilder-hjelp-body'
 import { EkspanderbarHjelpTekster } from './ekspanderbar-hjelp-tekst'
@@ -31,9 +30,8 @@ import { MedlemskapOppholdUtenforEOSHjelpBody } from './medlemskap-opphold-utenf
 import { MedlemskapOppholdUtenforNorgeHjelpBody } from './medlemskap-opphold-utenfor-Norge-hjelp-body'
 
 export const EkspanderbarHjelp = ({ sporsmal }: SpmProps) => {
-    const router = useRouter()
-    const { id } = router.query as { id: string }
-    const { data: valgtSoknad } = useSoknad(id)
+    const { valgtSoknad } = useSoknadMedDetaljer()
+
     const [expanded, setExpanded] = useState<boolean>(false)
 
     // Lukker mellom hvert spørsmål

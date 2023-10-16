@@ -1,13 +1,10 @@
 import { BodyLong, GuidePanel, Label } from '@navikt/ds-react'
 import React from 'react'
-import { useRouter } from 'next/router'
 
-import useSoknad from '../../hooks/useSoknad'
+import { useSoknadMedDetaljer } from '../../hooks/useSoknadMedDetaljer'
 
 export const ViktigInformasjon = () => {
-    const router = useRouter()
-    const { id } = router.query as { id: string }
-    const { data: valgtSoknad } = useSoknad(id)
+    const { valgtSoknad } = useSoknadMedDetaljer()
 
     if (!valgtSoknad) {
         return null

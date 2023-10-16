@@ -13,18 +13,17 @@ import Opplysninger from '../opplysninger-fra-sykmelding/opplysninger'
 import { urlTilSoknad } from '../soknad/soknad-link'
 import Vis from '../vis'
 import useSoknader from '../../hooks/useSoknader'
-import useSoknad from '../../hooks/useSoknad'
 import QueryStatusPanel from '../queryStatusPanel/QueryStatusPanel'
 import { soknadBreadcrumb, useUpdateBreadcrumbs } from '../../hooks/useBreadcrumbs'
 import { SoknadHeader } from '../soknad/soknad-header'
+import { useSoknadMedDetaljer } from '../../hooks/useSoknadMedDetaljer'
 
 import GjenapneSoknad from './gjenapneknapp'
 
 const AvbruttSoknad = () => {
     const router = useRouter()
     const { data: soknader } = useSoknader()
-    const { id } = router.query as { id: string }
-    const { data: valgtSoknad } = useSoknad(id)
+    const { valgtSoknad, soknadId } = useSoknadMedDetaljer()
 
     useUpdateBreadcrumbs(() => [{ ...soknadBreadcrumb, handleInApp: true }], [])
 
@@ -44,7 +43,7 @@ const AvbruttSoknad = () => {
         // eslint-disable-next-line
     }, [valgtSoknad])
 
-    if (!valgtSoknad || !soknader) return <QueryStatusPanel valgSoknadId={id} />
+    if (!valgtSoknad || !soknader) return <QueryStatusPanel valgSoknadId={soknadId} />
 
     const gjenstaendeSoknader = hentGjenstaendeSoknader(soknader, valgtSoknad)
 

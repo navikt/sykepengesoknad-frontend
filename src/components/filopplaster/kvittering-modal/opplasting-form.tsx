@@ -4,7 +4,6 @@ import dayjs from 'dayjs'
 import React, { useEffect, useState } from 'react'
 import { FormProvider, useForm } from 'react-hook-form'
 import { useQueryClient } from '@tanstack/react-query'
-import { useRouter } from 'next/router'
 
 import { RSSvar } from '../../../types/rs-types/rs-svar'
 import { Kvittering, Soknad, UtgiftTyper } from '../../../types/types'
@@ -14,6 +13,7 @@ import { getLedetekst, tekst } from '../../../utils/tekster'
 import Vis from '../../vis'
 import DragAndDrop from '../drag-and-drop/drag-and-drop'
 import { useTestpersonQuery } from '../../../hooks/useTestpersonQuery'
+import { useSoknadMedDetaljer } from '../../../hooks/useSoknadMedDetaljer'
 
 import OpplastingTekster from './opplasting-tekster'
 
@@ -28,8 +28,8 @@ export interface OpplastingFromProps {
 }
 
 const OpplastingForm = ({ valgtSoknad, setOpenModal, openModal }: OpplastingFromProps) => {
-    const router = useRouter()
-    const { stegId } = router.query as { id: string; stegId: string }
+    const { stegId } = useSoknadMedDetaljer()
+
     const queryClient = useQueryClient()
     const testpersonQuery = useTestpersonQuery()
 

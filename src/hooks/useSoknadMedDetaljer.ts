@@ -9,7 +9,9 @@ import useSykmelding from './useSykmelding'
 
 export function useSoknadMedDetaljer() {
     const router = useRouter()
-    const { id: soknadId, stegId } = router.query as { id?: string; stegId: string }
+    const { id: soknadIdUnsafe, stegId } = router.query as { id?: string; stegId: string }
+
+    const soknadId = soknadIdUnsafe ? soknadIdUnsafe.replace(/[^a-zA-Z0-9-]/g, '') : undefined
 
     const { data: valgtSoknad, isLoading: valgtSoknadLaster } = useSoknad(soknadId, soknadId !== undefined)
     const { data: soknader, isLoading: soknaderLaster } = useSoknader()

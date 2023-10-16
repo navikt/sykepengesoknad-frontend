@@ -1,7 +1,6 @@
-import { BodyLong, Label, Button } from '@navikt/ds-react'
+import { BodyLong, Button, Label } from '@navikt/ds-react'
 import React from 'react'
 import { PlusIcon, TrashIcon } from '@navikt/aksel-icons'
-import { useRouter } from 'next/router'
 import { useFormContext } from 'react-hook-form'
 
 import { parserWithReplace } from '../../../utils/html-react-parser-utils'
@@ -11,8 +10,8 @@ import { Sporsmal } from '../../../types/types'
 import { settSvar } from '../sett-svar'
 import { useLeggTilUndersporsmal } from '../../../hooks/useLeggTilUndersporsmal'
 import { useOppdaterSporsmal } from '../../../hooks/useOppdaterSporsmal'
-import useSoknad from '../../../hooks/useSoknad'
 import { useSlettUndersporsmal } from '../../../hooks/useSlettUndersporsmal'
+import { useSoknadMedDetaljer } from '../../../hooks/useSoknadMedDetaljer'
 
 interface IkkeRelevantProps {
     sporsmal: Sporsmal
@@ -21,13 +20,9 @@ interface IkkeRelevantProps {
 }
 
 const IkkeRelevant = ({ sporsmal, sporsmalIndex, erSisteSporsmal }: IkkeRelevantProps) => {
-    const router = useRouter()
-    const { id, stegId } = router.query as { id: string; stegId: string }
-    const stegNo = parseInt(stegId)
-    const spmIndex = stegNo - 1
+    const { valgtSoknad, spmIndex } = useSoknadMedDetaljer()
 
     const { getValues, trigger } = useFormContext()
-    const { data: valgtSoknad } = useSoknad(id)
     const { mutate: oppdaterSporsmal, isLoading: oppdatererSporsmal } = useOppdaterSporsmal()
     const { mutate: leggTilNyttUndersporsmal, isLoading: leggerTil } = useLeggTilUndersporsmal()
     const { mutate: slettundersporsmal, isLoading: sletter } = useSlettUndersporsmal()

@@ -3,7 +3,6 @@ import { logger } from '@navikt/next-logger'
 import dayjs from 'dayjs'
 import React, { Fragment, useEffect, useState } from 'react'
 import { CheckmarkCircleFillIcon } from '@navikt/aksel-icons'
-import { useRouter } from 'next/router'
 import { useQueryClient } from '@tanstack/react-query'
 
 import { RSMottaker } from '../../types/rs-types/rs-mottaker'
@@ -12,12 +11,12 @@ import { RSSoknadstype } from '../../types/rs-types/rs-soknadstype'
 import { sendtForMerEnn30DagerSiden } from '../../utils/dato-utils'
 import { tekst } from '../../utils/tekster'
 import Vis from '../vis'
-import useSoknad from '../../hooks/useSoknad'
 import useSoknader from '../../hooks/useSoknader'
 import { RSSoknadmetadata } from '../../types/rs-types/rs-soknadmetadata'
 import useSykmelding from '../../hooks/useSykmelding'
 import { mottakerSoknadQueryFn } from '../../hooks/useMottakerSoknad'
 import { TagTyper } from '../../types/enums'
+import { useSoknadMedDetaljer } from '../../hooks/useSoknadMedDetaljer'
 
 import Inntil16dager from './innhold/arbeidstaker/inntil16dager'
 import Over16dager from './innhold/arbeidstaker/over16dager'
@@ -30,9 +29,8 @@ import GridItems from './grid-items'
 type ArbeidstakerKvitteringTekst = 'inntil16dager' | 'over16dager' | 'utenOpphold' | 'medOpphold' | undefined
 
 const Arbeidstaker = () => {
-    const router = useRouter()
-    const { id } = router.query as { id: string; stegId: string }
-    const { data: valgtSoknad } = useSoknad(id)
+    const { valgtSoknad } = useSoknadMedDetaljer()
+
     const { data: soknader } = useSoknader()
     const { data: valgtSykmelding } = useSykmelding(valgtSoknad?.sykmeldingId)
     const [kvitteringTekst, setKvitteringTekst] = useState<ArbeidstakerKvitteringTekst>()

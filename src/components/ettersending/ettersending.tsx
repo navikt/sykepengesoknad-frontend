@@ -1,20 +1,19 @@
 import { Alert, BodyShort, Button, Modal } from '@navikt/ds-react'
 import React, { useState } from 'react'
-import { useRouter } from 'next/router'
 
 import { tekst } from '../../utils/tekster'
 import { parserWithReplace } from '../../utils/html-react-parser-utils'
 import { useEttersendNav } from '../../hooks/useEttersendNav'
 import Vis from '../vis'
 import { useEttersendArbeidsgiver } from '../../hooks/useEttersendArbeidsgiver'
+import { useSoknadMedDetaljer } from '../../hooks/useSoknadMedDetaljer'
 
 interface EttersendingProps {
     gjelder: 'nav' | 'arbeidsgiver'
 }
 
 const Ettersending = ({ gjelder }: EttersendingProps) => {
-    const router = useRouter()
-    const { id } = router.query as { id: string }
+    const { soknadId } = useSoknadMedDetaljer()
     const { mutate: ettersendNavMutation, isLoading: ettersenderNav, error: ettersendNavError } = useEttersendNav()
     const {
         mutate: ettersendArbeidsgiverMutation,
@@ -23,6 +22,9 @@ const Ettersending = ({ gjelder }: EttersendingProps) => {
     } = useEttersendArbeidsgiver()
 
     const [vilEttersende, setVilEttersende] = useState<boolean>(false)
+    if (!soknadId) {
+        return null
+    }
     const knappeTekst = tekst(`kvittering.knapp.send-${gjelder}` as any)
 
     const hentTekst = (text: string) => {
@@ -37,14 +39,14 @@ const Ettersending = ({ gjelder }: EttersendingProps) => {
 
         if (gjelder === 'nav') {
             ettersendNavMutation({
-                id: id,
+                id: soknadId,
                 onSuccess: () => {
                     setVilEttersende(false)
                 },
             })
         } else if (gjelder === 'arbeidsgiver') {
             ettersendArbeidsgiverMutation({
-                id: id,
+                id: soknadId,
                 onSuccess: () => {
                     setVilEttersende(false)
                 },

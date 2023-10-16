@@ -1,7 +1,7 @@
 import { Button } from '@navikt/ds-react'
 import React, { useEffect } from 'react'
-import { useRouter } from 'next/router'
 import { logger } from '@navikt/next-logger'
+import { useRouter } from 'next/router'
 
 import Endreknapp from '../../components/endreknapp/endreknapp'
 import { RSSoknadstatus } from '../../types/rs-types/rs-soknadstatus'
@@ -12,7 +12,6 @@ import { logEvent } from '../amplitude/amplitude'
 import Ettersending from '../ettersending/ettersending'
 import { GjenstaendeSoknader, hentGjenstaendeSoknader } from '../gjenstaende-soknader/gjenstaende-soknader'
 import { UxSignalsWidget } from '../ux-signals/UxSignalsWidget'
-import useSoknad from '../../hooks/useSoknad'
 import useSoknader from '../../hooks/useSoknader'
 import { urlTilSoknad } from '../soknad/soknad-link'
 import QueryStatusPanel from '../queryStatusPanel/QueryStatusPanel'
@@ -20,14 +19,14 @@ import { kvitteringBreadcrumb, useUpdateBreadcrumbs } from '../../hooks/useBread
 import { useStudyStatus } from '../../hooks/useStudyStatus'
 import { SoknadHeader } from '../soknad/soknad-header'
 import { FlexjarKvittering } from '../flexjar/flexjar-kvittering'
+import { useSoknadMedDetaljer } from '../../hooks/useSoknadMedDetaljer'
 
 import Kvittering from './kvittering'
 import { harKorrigertArbeidstakersoknadIDetSiste } from './harSvartJa'
 
 const KvitteringSide = () => {
+    const { valgtSoknad, soknadId } = useSoknadMedDetaljer()
     const router = useRouter()
-    const { id } = router.query as { id: string }
-    const { data: valgtSoknad } = useSoknad(id)
     const { data: soknader } = useSoknader()
     const korrigertSøknadStudy = 'study-zeh32lhqyb'
     const { data: korrigertStudyActive } = useStudyStatus(korrigertSøknadStudy)
@@ -53,7 +52,7 @@ const KvitteringSide = () => {
         // eslint-disable-next-line
     }, [valgtSoknad])
 
-    if (!valgtSoknad || !soknader) return <QueryStatusPanel valgSoknadId={id} />
+    if (!valgtSoknad || !soknader) return <QueryStatusPanel valgSoknadId={soknadId} />
 
     const erSendtTilArbeidsgiver = valgtSoknad.sendtTilArbeidsgiverDato !== undefined
 
