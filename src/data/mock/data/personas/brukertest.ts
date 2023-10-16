@@ -3,8 +3,7 @@ import dayjs from 'dayjs'
 import { RSSoknad } from '../../../../types/rs-types/rs-soknad'
 import { Sykmelding } from '../../../../types/sykmelding'
 import { tilLesbarPeriodeMedArstall } from '../../../../utils/dato-utils'
-import { værKlarOverAt } from '../sporsmal/vaer-klar-over-at'
-import { bekreftOpplysninger } from '../sporsmal/bekreft-opplysninger'
+import { nyVærKlarOverAt } from '../sporsmal/vaer-klar-over-at'
 
 import { Persona } from './personas'
 
@@ -561,8 +560,7 @@ export const brukertestSoknad: RSSoknad = {
                 },
             ],
         },
-        værKlarOverAt(),
-        bekreftOpplysninger(),
+        nyVærKlarOverAt(),
     ],
     egenmeldtSykmelding: false,
     opprettetAvInntektsmelding: false,

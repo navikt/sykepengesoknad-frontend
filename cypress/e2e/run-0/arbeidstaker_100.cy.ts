@@ -58,8 +58,8 @@ describe('Tester arbeidstakersøknad', () => {
         cy.findByRole('progressbar', { name: 'Søknadssteg' })
             .should('have.attr', 'aria-valuenow', '1')
             .and('have.attr', 'aria-valuemin', '1')
-            .and('have.attr', 'aria-valuemax', '8')
-            .and('have.attr', 'aria-valuetext', '1 av 8 steg')
+            .and('have.attr', 'aria-valuemax', '7')
+            .and('have.attr', 'aria-valuetext', '1 av 7 steg')
 
         // Test spørsmål
         cy.get('[data-cy="ja-nei-stor"] input[value=JA]').click()
@@ -194,8 +194,8 @@ describe('Tester arbeidstakersøknad', () => {
         cy.findByRole('progressbar', { name: 'Søknadssteg' })
             .should('have.attr', 'aria-valuenow', '7')
             .and('have.attr', 'aria-valuemin', '1')
-            .and('have.attr', 'aria-valuemax', '8')
-            .and('have.attr', 'aria-valuetext', '7 av 8 steg')
+            .and('have.attr', 'aria-valuemax', '7')
+            .and('have.attr', 'aria-valuetext', '7 av 7 steg')
 
         cy.get('section[aria-label="Oppsummering fra søknaden"] button').click()
         cy.contains(

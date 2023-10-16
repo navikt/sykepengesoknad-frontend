@@ -8,7 +8,6 @@ import { Soknad, Sporsmal } from '../../../types/types'
 import { SEPARATOR } from '../../../utils/constants'
 import { hentAnnonymisertSvar, logEvent } from '../../amplitude/amplitude'
 import FeilOppsummering from '../../feil/feil-oppsummering'
-import Opplysninger from '../../opplysninger-fra-sykmelding/opplysninger'
 import Oppsummering from '../../oppsummering/oppsummering'
 import GuidepanelOverSporsmalstekst from '../guidepanel/GuidepanelOverSporsmalstekst'
 import { EndringUtenEndringModal } from '../endring-uten-endring/endring-uten-endring-modal'
@@ -145,14 +144,23 @@ const SporsmalForm = ({ sporsmal }: SpmProps) => {
 
                     <SporsmalSwitch sporsmal={sporsmal} sporsmalIndex={0} erSisteSporsmal={erSiste} />
 
-                    {erSiste && !erUtenlandssoknad && valgtSoknad && nesteSporsmal && (
-                        <>
-                            <Oppsummering ekspandert={false} sporsmal={valgtSoknad.sporsmal} />
-                            <Opplysninger ekspandert={false} />
-                            <CheckboxPanel sporsmal={nesteSporsmal} />
+                    {erSiste &&
+                        !erUtenlandssoknad &&
+                        valgtSoknad &&
+                        (valgtSoknad.soknadstype !== RSSoknadstype.ARBEIDSTAKERE ? (
+                            <>
+                                {nesteSporsmal && (
+                                    <>
+                                        <Oppsummering ekspandert={false} sporsmal={valgtSoknad.sporsmal} />
+                                        <Opplysninger ekspandert={false} />
+                                        <CheckboxPanel sporsmal={nesteSporsmal} />
+                                    </>
+                                )}
+                                <SendesTil soknad={valgtSoknad} />
+                            </>
+                        ) : (
                             <SendesTil soknad={valgtSoknad} />
-                        </>
-                    )}
+                        ))}
 
                     {erSiste && erUtenlandssoknad && valgtSoknad && sporsmal && (
                         <>
