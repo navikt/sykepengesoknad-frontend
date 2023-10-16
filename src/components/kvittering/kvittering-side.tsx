@@ -22,14 +22,14 @@ import { FlexjarKvittering } from '../flexjar/flexjar-kvittering'
 import { useSoknadMedDetaljer } from '../../hooks/useSoknadMedDetaljer'
 
 import Kvittering from './kvittering'
-import { harKorrigertArbeidstakersoknadIDetSiste } from './harSvartJa'
+import { harSvartJaArbeidUtenforNorge } from './harSvartJa'
 
 const KvitteringSide = () => {
     const { valgtSoknad, soknadId } = useSoknadMedDetaljer()
     const router = useRouter()
     const { data: soknader } = useSoknader()
-    const korrigertSøknadStudy = 'study-zeh32lhqyb'
-    const { data: korrigertStudyActive } = useStudyStatus(korrigertSøknadStudy)
+    const arbeidUtenforNorgeStudy = 'panel-yhv7yi5h9q'
+    const { data: arbeidUtenforNorgeStudyActive } = useStudyStatus(arbeidUtenforNorgeStudy)
 
     useUpdateBreadcrumbs(() => [{ ...kvitteringBreadcrumb, handleInApp: true }], [])
 
@@ -54,6 +54,8 @@ const KvitteringSide = () => {
 
     if (!valgtSoknad || !soknader) return <QueryStatusPanel valgSoknadId={soknadId} />
 
+    const skalViseUxSignals = harSvartJaArbeidUtenforNorge(valgtSoknad) && arbeidUtenforNorgeStudyActive
+
     const erSendtTilArbeidsgiver = valgtSoknad.sendtTilArbeidsgiverDato !== undefined
 
     const skalViseEndre =
@@ -72,6 +74,8 @@ const KvitteringSide = () => {
 
             <Kvittering />
 
+            {skalViseUxSignals && <UxSignalsWidget study={arbeidUtenforNorgeStudy} demo={!isProd()} />}
+
             <GjenstaendeSoknader soknader={gjenstaendeSoknader} />
 
             {gjenstaendeSoknader.length === 0 && (
@@ -89,12 +93,9 @@ const KvitteringSide = () => {
                     >
                         {tekst('kvittering.ferdig')}
                     </Button>
-                    {harKorrigertArbeidstakersoknadIDetSiste(soknader) && korrigertStudyActive && (
-                        <UxSignalsWidget study={korrigertSøknadStudy} demo={!isProd()} />
-                    )}
                 </>
             )}
-            <FlexjarKvittering />
+            {!skalViseUxSignals && <FlexjarKvittering />}
             {skalViseEndre && <Endreknapp />}
             {skalViseSendTilArbeidsgiver && <Ettersending gjelder="arbeidsgiver" />}
         </>
