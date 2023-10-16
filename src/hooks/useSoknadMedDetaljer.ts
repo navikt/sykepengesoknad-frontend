@@ -1,4 +1,5 @@
 import { useRouter } from 'next/router'
+import uuid from 'uuid'
 
 import { RSSoknadstype } from '../types/rs-types/rs-soknadstype'
 
@@ -11,7 +12,7 @@ export function useSoknadMedDetaljer() {
     const router = useRouter()
     const { id: soknadIdUnsafe, stegId } = router.query as { id?: string; stegId: string }
 
-    const soknadId = soknadIdUnsafe ? soknadIdUnsafe.replace(/[^a-zA-Z0-9-]/g, '') : undefined
+    const soknadId = soknadIdUnsafe ? uuid.parse(soknadIdUnsafe).toString() : undefined
 
     const { data: valgtSoknad, isLoading: valgtSoknadLaster } = useSoknad(soknadId, soknadId !== undefined)
     const { data: soknader, isLoading: soknaderLaster } = useSoknader()
