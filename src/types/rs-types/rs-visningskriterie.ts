@@ -4,4 +4,4 @@ export enum RSVisningskriterie {
     CHECKED = 'CHECKED',
 }
 
-export type RSVisningskriterieType = 'NEI' | 'JA' | 'CHECKED'
+export type RSVisningskriterieType = keyof typeof RSVisningskriterie

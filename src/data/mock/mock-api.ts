@@ -19,6 +19,7 @@ import { jsonDeepCopy } from '../../utils/json-deep-copy'
 import { RSSoknadstype } from '../../types/rs-types/rs-soknadstype'
 import { RSSoknadstatus } from '../../types/rs-types/rs-soknadstatus'
 import { RSSvar } from '../../types/rs-types/rs-svar'
+import { TagTyper } from '../../types/enums'
 
 import { arbeidstakerSoknadOpprettetAvInntektsmelding } from './data/personas/opprettet-av-inntektsmelding'
 import { Persona } from './data/personas/personas'
@@ -206,12 +207,18 @@ export async function mockApi(req: NextApiRequest, res: NextApiResponse) {
                 return sendJson(eksisterendeUtkast, 200)
             }
             const soknad = jsonDeepCopy(original)
+            const sisteSporsmal = soknad.sporsmal[soknad.sporsmal.length - 1]
             soknad.id = uuid.v4()
             soknad.korrigerer = original.id
             soknad.status = 'UTKAST_TIL_KORRIGERING'
             soknad.sendtTilArbeidsgiverDato = null
             soknad.sendtTilNAVDato = null
             soknad.sporsmal[0].svar = []
+            if (sisteSporsmal.tag === TagTyper.VAER_KLAR_OVER_AT) {
+                sisteSporsmal.undersporsmal[0].svar = []
+            } else {
+                sisteSporsmal.svar = []
+            }
 
             testperson.soknader.push(soknad)
 

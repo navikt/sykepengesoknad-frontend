@@ -14,23 +14,21 @@ const CheckboxInput = ({ sporsmal }: SpmProps) => {
 
     const feilmelding = hentFeilmelding(spm)
     return (
-        <>
-            <Controller
-                defaultValue={false}
-                name={spm.id}
-                rules={{ required: feilmelding.global }}
-                render={({ field, fieldState }) => (
-                    <ConfirmationPanel
-                        {...field}
-                        checked={field.value}
-                        id={field.name}
-                        label={spm.sporsmalstekst}
-                        error={fieldState.error && feilmelding.lokal}
-                        data-cy="bekreftCheckboksPanel"
-                    />
-                )}
-            />
-        </>
+        <Controller
+            defaultValue={false}
+            name={spm.id}
+            rules={{ required: feilmelding.global }}
+            render={({ field, fieldState }) => (
+                <ConfirmationPanel
+                    {...field}
+                    checked={field.value}
+                    id={field.name}
+                    label={spm.sporsmalstekst}
+                    error={fieldState.error && feilmelding.lokal}
+                    data-cy="bekreftCheckboksPanel"
+                />
+            )}
+        />
     )
 }
 

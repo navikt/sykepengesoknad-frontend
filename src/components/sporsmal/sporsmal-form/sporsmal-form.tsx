@@ -9,7 +9,6 @@ import { Sporsmal } from '../../../types/types'
 import { SEPARATOR } from '../../../utils/constants'
 import { hentAnnonymisertSvar, logEvent } from '../../amplitude/amplitude'
 import FeilOppsummering from '../../feil/feil-oppsummering'
-import Opplysninger from '../../opplysninger-fra-sykmelding/opplysninger'
 import Oppsummering from '../../oppsummering/oppsummering'
 import GuidepanelOverSporsmalstekst from '../guidepanel/GuidepanelOverSporsmalstekst'
 import { EndringUtenEndringModal } from '../endring-uten-endring/endring-uten-endring-modal'
@@ -27,6 +26,7 @@ import { useOppdaterSporsmal } from '../../../hooks/useOppdaterSporsmal'
 import { FeilStateView } from '../../feil/refresh-hvis-feil-state'
 import { useSoknadMedDetaljer } from '../../../hooks/useSoknadMedDetaljer'
 import { SkeletonSporsmal } from '../skeleton-sporsmal'
+import Opplysninger from '../../opplysninger-fra-sykmelding/opplysninger'
 
 import Knapperad from './knapperad'
 import SendesTil from './sendes-til'
@@ -165,14 +165,23 @@ const SporsmalForm = () => {
                     {sporsmal && <SporsmalSwitch sporsmal={sporsmal} sporsmalIndex={0} erSisteSporsmal={erSiste!} />}
                     {!sporsmal && <SkeletonSporsmal />}
 
-                    {erSiste && !erUtenlandssoknad && valgtSoknad && nesteSporsmal && (
-                        <>
-                            <Oppsummering ekspandert={false} sporsmal={valgtSoknad.sporsmal} />
-                            <Opplysninger ekspandert={false} />
-                            <CheckboxPanel sporsmal={nesteSporsmal} />
+                    {erSiste &&
+                        !erUtenlandssoknad &&
+                        valgtSoknad &&
+                        (valgtSoknad.soknadstype !== RSSoknadstype.ARBEIDSTAKERE ? (
+                            <>
+                                {nesteSporsmal && (
+                                    <>
+                                        <Oppsummering ekspandert={false} sporsmal={valgtSoknad.sporsmal} />
+                                        <Opplysninger ekspandert={false} />
+                                        <CheckboxPanel sporsmal={nesteSporsmal} />
+                                    </>
+                                )}
+                                <SendesTil soknad={valgtSoknad} />
+                            </>
+                        ) : (
                             <SendesTil soknad={valgtSoknad} />
-                        </>
-                    )}
+                        ))}
 
                     {erSiste && erUtenlandssoknad && valgtSoknad && sporsmal && (
                         <>

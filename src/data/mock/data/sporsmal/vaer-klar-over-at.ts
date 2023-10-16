@@ -1,5 +1,7 @@
 import { RSSporsmal } from '../../../../types/rs-types/rs-sporsmal'
 
+import { bekreftOpplysninger } from './bekreft-opplysninger'
+
 export const værKlarOverAt = (): RSSporsmal => {
     return {
         id: '1623832',
@@ -29,7 +31,7 @@ export const nyVærKlarOverAt = (): RSSporsmal => {
         pavirkerAndreSporsmal: false,
         kriterieForVisningAvUndersporsmal: null,
         svar: [],
-        undersporsmal: [],
+        undersporsmal: [bekreftOpplysninger()],
     }
 }
 
