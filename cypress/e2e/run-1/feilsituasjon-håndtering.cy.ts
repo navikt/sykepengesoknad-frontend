@@ -3,6 +3,7 @@ import {
     soknadSomTriggerFeilStatusForOppdaterSporsmal,
     soknadSomTriggerSporsmalFinnesIkkeISoknad,
 } from '../../../src/data/mock/data/soknad/soknader-integration'
+import { svarNeiHovedsporsmal, klikkGaVidere } from '../../support/utilities'
 
 describe('Tester feilsituasjoner ', () => {
     describe('Tester SPORSMAL_FINNES_IKKE_I_SOKNAD ', () => {
@@ -88,6 +89,8 @@ describe('Tester feilsituasjoner ', () => {
             cy.get('.navds-heading--large').should('be.visible').and('contain.text', 'Søknad om sykepenger')
         })
         it('Når vi sender søknad som får 400 får vi en feilmelding som lar oss refreshe', function () {
+            svarNeiHovedsporsmal()
+            klikkGaVidere()
             cy.contains(
                 'Jeg har lest all informasjonen jeg har fått i søknaden og bekrefter at opplysningene jeg har gitt er korrekte.',
             ).click()
@@ -111,6 +114,8 @@ describe('Tester feilsituasjoner ', () => {
             cy.get('.navds-heading--large').should('be.visible').and('contain.text', 'Søknad om sykepenger')
         })
         it('Når vi sender søknad som får 500 får vi en feilmelding', function () {
+            svarNeiHovedsporsmal()
+            klikkGaVidere()
             cy.contains(
                 'Jeg har lest all informasjonen jeg har fått i søknaden og bekrefter at opplysningene jeg har gitt er korrekte.',
             ).click()
@@ -119,7 +124,7 @@ describe('Tester feilsituasjoner ', () => {
             cy.url().should(
                 'equal',
                 Cypress.config().baseUrl +
-                    '/syk/sykepengesoknad/soknader/2a9196c7-306f-4b4f-afdc-891d8a564e42/2?testperson=http-500-ved-send-soknad',
+                    '/syk/sykepengesoknad/soknader/2a9196c7-306f-4b4f-afdc-891d8a564e42/3?testperson=http-500-ved-send-soknad',
             )
         })
     })
