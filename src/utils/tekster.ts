@@ -27,7 +27,7 @@ import { EndringUtenEndringTekster } from '../components/sporsmal/endring-uten-e
 import KnapperadTekster from '../components/sporsmal/sporsmal-form/knapperad-tekster'
 import SporsmalTekster from '../components/sporsmal/sporsmal-tekster'
 import EgenmeldingsdagerArbeidsgiverTekster from '../components/egenmeldingsdager-arbeidsgiver/egenmeldingsdager-arbeidsgiver-tekster'
-import vaerKlarOverAtTekster from '../components/sporsmal/vaer-klar-over-at-tekster'
+import vaerKlarOverAtTekster from '../components/sporsmal/bekreftelsespunkter/bekreftelsespunkter-arbeidstakere-tekster'
 
 const tekster = {
     ...OpplysningerTekster,

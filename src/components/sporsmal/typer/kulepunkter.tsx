@@ -6,14 +6,14 @@ import { useRouter } from 'next/router'
 import { parserWithReplace } from '../../../utils/html-react-parser-utils'
 import UndersporsmalListe from '../undersporsmal/undersporsmal-liste'
 import { SpmProps } from '../sporsmal-form/sporsmal-form'
-import VaerKlarOverAtTekster from '../vaer-klar-over-at-tekster'
+import BekreftelsespunkterArbeidstakereTekster from '../bekreftelsespunkter/bekreftelsespunkter-arbeidstakere-tekster'
 import Oppsummering from '../../oppsummering/oppsummering'
 import Opplysninger from '../../opplysninger-fra-sykmelding/opplysninger'
 import useSoknad from '../../../hooks/useSoknad'
 
 const Kulepunkter = ({ sporsmal }: SpmProps) => {
     const { setValue } = useFormContext()
-    const kulepunkterTekster = Object.values(VaerKlarOverAtTekster)
+    const kulepunkterTekster = Object.values(BekreftelsespunkterArbeidstakereTekster)
     const router = useRouter()
     const { id } = router.query as { id: string }
     const { data: valgtSoknad } = useSoknad(id)
