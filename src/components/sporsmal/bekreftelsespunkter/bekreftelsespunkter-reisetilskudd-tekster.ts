@@ -11,8 +11,6 @@ const BekreftelsespunkterReisetilskuddTekster = {
         'Du kan endre svarene i denne søknaden opp til 12 måneder etter du sendte den inn første gangen.',
     'vaer-klar-over-at.punkt-8':
         'Du kan lese mer om rettigheter og plikter på <a href="https://www.nav.no/reisetilskudd" target="_blank">nav.no/reisetilskudd</a>.',
-    'vaer-klar-over-at.punkt-9':
-        'Du kan lese mer om rettigheter og plikter på <a href="https://www.nav.no/sykepenger" target="_blank">nav.no/sykepenger</a> og <a href="https://www.nav.no/reisetilskudd" target="_blank">nav.no/reisetilskudd</a>.',
 }
 
 export default BekreftelsespunkterReisetilskuddTekster

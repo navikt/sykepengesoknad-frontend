@@ -314,6 +314,25 @@ describe('Teste førsteside i reisetilskuddsøknaden', () => {
             cy.get('[data-cy="sporsmal-tittel"]').should('have.text', 'Til slutt')
         })
 
+        it('Bekreftelsespunktene er riktige', () => {
+            const bekreftelser = [
+                'Retten til reisetilskudd gjelder bare hvis du trenger midlertidig transport til og fra arbeidsstedet på grunn av helseplager.',
+                'Du kan få reisetilskudd hvis du i utgangspunktet har rett til sykepenger.',
+                'NAV kan innhente flere opplysninger som er nødvendige for å behandle søknaden.',
+                'NAV kan holde igjen eller kreve tilbake penger hvis du gir uriktige eller ufullstendige opplysninger.',
+                'Det å gi feil opplysninger kan være straffbart.',
+                'Fristen for å søke reisetilskudd er som hovedregel 3 måneder.',
+                'Du kan endre svarene i denne søknaden opp til 12 måneder etter du sendte den inn første gangen.',
+            ]
+
+            bekreftelser.forEach((bekreftelse) => {
+                cy.contains(bekreftelse)
+            })
+            cy.contains('Du kan lese mer om rettigheter og plikter på')
+                .find('a')
+                .should('have.attr', 'href', 'https://www.nav.no/reisetilskudd')
+        })
+
         it('Oppsummering inneholder riktig informasjon', () => {
             cy.get('.oppsummering').click()
             cy.get('.navds-expansioncard__content-inner > :nth-child(4)').should(
