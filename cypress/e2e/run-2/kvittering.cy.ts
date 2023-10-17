@@ -351,7 +351,8 @@ describe('Tester kvittering', () => {
 
 const besvarSoknad = () => {
     checkViStolerPåDeg()
-
+    svarNeiHovedsporsmal()
+    klikkGaVidere()
     svarCheckboxPanel()
     cy.contains('Send søknaden').click()
     sjekkMainContentFokus()

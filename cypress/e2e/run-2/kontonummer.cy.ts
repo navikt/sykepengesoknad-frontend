@@ -1,4 +1,4 @@
-import { checkViStolerPåDeg, svarCheckboxPanel } from '../../support/utilities'
+import { checkViStolerPåDeg, svarCheckboxPanel, svarNeiHovedsporsmal, klikkGaVidere } from '../../support/utilities'
 
 describe('Tester kontonummer i kvittering', () => {
     it('Har kontonumer', () => {
@@ -34,6 +34,8 @@ const besvarSoknad = () => {
     cy.contains(
         'Jeg har lest all informasjonen jeg har fått i søknaden og bekrefter at opplysningene jeg har gitt er korrekte.',
     )
+    svarNeiHovedsporsmal()
+    klikkGaVidere()
     svarCheckboxPanel()
     cy.contains('Send søknaden').click()
 }
