@@ -211,21 +211,24 @@ describe('Tester arbeidstakersøknad', () => {
                 cy.contains(bekreftelse)
             })
 
-            cy.contains(
-                'Du må melde fra til NAV hvis du satt i varetekt, sonet straff eller var under forvaring i sykmeldingsperioden.',
-            )
-                .find('a')
-                .should('have.attr', 'href', 'https://www.nav.no/skriv-til-oss')
+            const lenkerMedTekst = [
+                {
+                    tekst: 'Du må melde fra til NAV hvis du satt i varetekt, sonet straff eller var under forvaring i sykmeldingsperioden.',
+                    url: 'https://www.nav.no/skriv-til-oss',
+                },
+                {
+                    tekst: 'Du må melde fra om studier som er påbegynt etter at du ble sykmeldt, og som ikke er avklart med NAV. Det samme gjelder hvis du begynner å studere mer enn du gjorde før du ble sykmeldt.',
+                    url: 'https://www.nav.no/skriv-til-oss',
+                },
+                {
+                    tekst: 'Du kan lese mer om rettigheter og plikter på',
+                    url: 'https://www.nav.no/sykepenger',
+                },
+            ]
 
-            cy.contains(
-                'Du må melde fra om studier som er påbegynt etter at du ble sykmeldt, og som ikke er avklart med NAV. Det samme gjelder hvis du begynner å studere mer enn du gjorde før du ble sykmeldt.',
-            )
-                .find('a')
-                .should('have.attr', 'href', 'https://www.nav.no/skriv-til-oss')
-
-            cy.contains('Du kan lese mer om rettigheter og plikter på')
-                .find('a')
-                .should('have.attr', 'href', 'https://www.nav.no/sykepenger')
+            lenkerMedTekst.forEach(({ tekst, url }) => {
+                cy.contains(tekst).find('a').should('have.attr', 'href', url)
+            })
         })
 
         cy.get('section[aria-label="Oppsummering fra søknaden"] button').click()
