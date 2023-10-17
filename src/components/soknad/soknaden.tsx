@@ -18,6 +18,7 @@ import { soknadBreadcrumb, useUpdateBreadcrumbs } from '../../hooks/useBreadcrum
 import EgenmeldingsdagerArbeidsgiver from '../egenmeldingsdager-arbeidsgiver/egenmeldingsdager-arbeidsgiver'
 import { FlexjarSporsmal } from '../flexjar/flexjar-sporsmal'
 import { useSoknadMedDetaljer } from '../../hooks/useSoknadMedDetaljer'
+import { useToggle } from '../../toggles/context'
 
 import { urlTilSoknad } from './soknad-link'
 import { SporsmalTittel } from './sporsmal-tittel'
@@ -55,6 +56,7 @@ export const Soknaden = () => {
             soknadstatus: valgtSoknad.status,
         })
     }, [router, stegId, valgtSoknad])
+    const flexjarToggle = useToggle('flexjar-sykepengesoknad-frontend-sporsmal')
 
     const erReisetilskuddsoknad = valgtSoknad?.soknadstype === RSSoknadstype.REISETILSKUDD
     const erGradertReisetilskuddsoknad = valgtSoknad?.soknadstype === RSSoknadstype.GRADERT_REISETILSKUDD
@@ -93,7 +95,7 @@ export const Soknaden = () => {
             {erForstesidenMedReisetilskudd && <OmReisetilskudd />}
             {!erForstesiden && <SporsmalTittel />}
             <SporsmalForm />
-            <FlexjarSporsmal soknad={valgtSoknad} steg={stegNo} />
+            {flexjarToggle.enabled && <FlexjarSporsmal soknad={valgtSoknad} steg={stegNo} />}
         </>
     )
 }

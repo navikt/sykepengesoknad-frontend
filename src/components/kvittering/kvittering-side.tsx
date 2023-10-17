@@ -20,6 +20,7 @@ import { useStudyStatus } from '../../hooks/useStudyStatus'
 import { SoknadHeader } from '../soknad/soknad-header'
 import { FlexjarKvittering } from '../flexjar/flexjar-kvittering'
 import { useSoknadMedDetaljer } from '../../hooks/useSoknadMedDetaljer'
+import { useToggle } from '../../toggles/context'
 
 import Kvittering from './kvittering'
 import { harSvartJaArbeidUtenforNorge } from './harSvartJa'
@@ -51,6 +52,7 @@ const KvitteringSide = () => {
         })
         // eslint-disable-next-line
     }, [valgtSoknad])
+    const flexjarToggle = useToggle('flexjar-sykepengesoknad-frontend-kvittering')
 
     if (!valgtSoknad || !soknader) return <QueryStatusPanel valgSoknadId={soknadId} />
 
@@ -95,7 +97,7 @@ const KvitteringSide = () => {
                     </Button>
                 </>
             )}
-            {!skalViseUxSignals && <FlexjarKvittering />}
+            {!skalViseUxSignals && flexjarToggle.enabled && <FlexjarKvittering />}
             {skalViseEndre && <Endreknapp />}
             {skalViseSendTilArbeidsgiver && <Ettersending gjelder="arbeidsgiver" />}
         </>

@@ -15,3 +15,5 @@ env:
   SYKEPENGESOKNAD_KVITTERINGER_CLIENT_ID: prod-gcp:flex:sykepengesoknad-kvitteringer
   SOKOS_KONTOREGISTER_PERSON_CLIENT_ID: prod-gcp:okonomi:sokos-kontoregister-person
   FLEXJAR_BACKEND_CLIENT_ID: prod-gcp:flex:flexjar-backend
+external-host:
+  - flex-unleash-api.nav.cloud.nais.io

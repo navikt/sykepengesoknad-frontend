@@ -54,6 +54,12 @@ spec:
           namespace: teamsykmelding
         - application: nav-dekoratoren
           namespace: personbruker
+      external:
+  {{#each external-host}}
+        - host: {{this}}
+  {{/each}}
+  envFrom:
+    - secret: sykepengesoknad-frontend-unleash-api-token
   env:
   {{#each env}}
      - name: {{@key}}

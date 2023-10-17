@@ -1,0 +1,17 @@
+apiVersion: unleash.nais.io/v1
+kind: ApiToken
+metadata:
+  name: sykepengesoknad-frontend
+  namespace: flex
+  labels:
+    team: flex
+spec:
+  unleashInstance:
+    apiVersion: unleash.nais.io/v1
+    kind: RemoteUnleash
+    name: flex
+  secretName: sykepengesoknad-frontend-unleash-api-token
+
+  # Specify which environment the API token should be created for.
+  # Can be one of: development, or production.
+  environment: {{environment}}
