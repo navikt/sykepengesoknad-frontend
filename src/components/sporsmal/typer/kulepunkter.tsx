@@ -10,13 +10,19 @@ import BekreftelsespunkterArbeidstakereTekster from '../bekreftelsespunkter/bekr
 import Oppsummering from '../../oppsummering/oppsummering'
 import Opplysninger from '../../opplysninger-fra-sykmelding/opplysninger'
 import useSoknad from '../../../hooks/useSoknad'
+import { RSSoknadstype } from '../../../types/rs-types/rs-soknadstype'
+import BekreftelsespunkterReisetilskuddTekster from '../bekreftelsespunkter/bekreftelsespunkter-reisetilskudd-tekster'
 
 const Kulepunkter = ({ sporsmal }: SpmProps) => {
     const { setValue } = useFormContext()
-    const kulepunkterTekster = Object.values(BekreftelsespunkterArbeidstakereTekster)
     const router = useRouter()
     const { id } = router.query as { id: string }
     const { data: valgtSoknad } = useSoknad(id)
+
+    const kulepunkterTekster =
+        valgtSoknad!.soknadstype === RSSoknadstype.ARBEIDSTAKERE
+            ? Object.values(BekreftelsespunkterArbeidstakereTekster)
+            : Object.values(BekreftelsespunkterReisetilskuddTekster)
 
     useEffect(() => {
         setValue(sporsmal.id, kulepunkterTekster)
