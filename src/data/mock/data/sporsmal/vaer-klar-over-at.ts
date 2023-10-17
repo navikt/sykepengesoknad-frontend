@@ -35,23 +35,6 @@ export const nyVærKlarOverAt = (): RSSporsmal => {
     }
 }
 
-export const værKlarOverAtReisetilskudd = (): RSSporsmal => {
-    return {
-        id: '1623832',
-        tag: 'VAER_KLAR_OVER_AT',
-        sporsmalstekst: 'Viktig å være klar over:',
-        undertekst:
-            '<ul><li>Retten til reisetilskudd gjelder bare hvis du trenger midlertidig transport til og fra arbeidsstedet på grunn av helseplager.</li><li>Du kan få reisetilskudd hvis du i utgangspunktet har rett til sykepenger.</li><li>NAV kan innhente flere opplysninger som er nødvendige for å behandle søknaden.</li><li>NAV kan holde igjen eller kreve tilbake penger hvis du gir uriktige eller ufullstendige opplysninger.</li><li>Det å gi feil opplysninger kan være straffbart.</li><li>Fristen for å søke reisetilskudd er som hovedregel 3 måneder.</li><li>Du kan lese mer om rettigheter og plikter på <a href=\\"https://www.nav.no/reisetilskudd\\" target=\\"_blank\\">nav.no/reisetilskudd</a>.</li></ul>',
-        svartype: 'IKKE_RELEVANT',
-        min: null,
-        max: null,
-        pavirkerAndreSporsmal: false,
-        kriterieForVisningAvUndersporsmal: null,
-        svar: [],
-        undersporsmal: [],
-    }
-}
-
 export const værKlarOverAtGradertReisetilskudd = (): RSSporsmal => {
     return {
         id: '1623832',
