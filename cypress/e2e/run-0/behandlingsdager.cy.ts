@@ -93,6 +93,22 @@ describe('Tester behandlingsdagersøknad', () => {
     it('Søknad VAER_KLAR_OVER_AT - steg 4', function () {
         cy.url().should('include', `${soknad.id}/5`)
         cy.contains('Til slutt')
+        it('Bekreftelsespunktene er riktige', () => {
+            const punkter = [
+                'Denne søknaden gjelder hvis selve behandlingen har en slik virkning på deg at du ikke kan jobbe resten av dagen. Grunnen er altså behandlingens effekt, og ikke at du for eksempel måtte bruke arbeidstid.',
+                'NAV kan innhente opplysninger som er nødvendige for å behandle søknaden.',
+                'Fristen for å søke sykepenger er som hovedregel 3 måneder.',
+                'Du kan endre svarene i denne søknaden opp til 12 måneder etter du sendte den inn første gangen.',
+            ]
+
+            punkter.forEach((punkt) => {
+                cy.contains(punkt)
+            })
+
+            cy.contains('Du kan lese mer om rettigheter og plikter på')
+                .find('a')
+                .should('have.attr', 'href', 'https://www.nav.no/sykepenger')
+        })
         cy.get('.navds-checkbox__label').click()
         cy.contains(
             'Jeg har lest all informasjonen jeg har fått i søknaden og bekrefter at opplysningene jeg har gitt er korrekte.',
