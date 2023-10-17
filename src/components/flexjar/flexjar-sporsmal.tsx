@@ -47,7 +47,14 @@ export const FlexjarSporsmal = ({ soknad, steg }: { soknad: Soknad | undefined; 
         return null
     }
 
-    if (steg == soknad?.sporsmal.filter((s) => s.tag !== TagTyper.VAER_KLAR_OVER_AT).length) {
+    if (
+        steg ===
+        soknad?.sporsmal.filter(
+            (s) =>
+                s.tag !== TagTyper.VAER_KLAR_OVER_AT ||
+                (s.tag === TagTyper.VAER_KLAR_OVER_AT && s.undersporsmal.length > 0),
+        ).length
+    ) {
         return null
     }
 
