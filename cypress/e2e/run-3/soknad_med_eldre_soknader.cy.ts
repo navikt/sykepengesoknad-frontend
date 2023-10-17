@@ -1,3 +1,5 @@
+import { svarNeiHovedsporsmal, klikkGaVidere } from '../../support/utilities'
+
 describe('Eldre søknader', () => {
     describe('soknad med en eldre søknad', () => {
         before(() => {
@@ -72,6 +74,10 @@ function fyllUtSoknad() {
         ).click()
 
         cy.contains('Gå videre').click()
+
+        svarNeiHovedsporsmal()
+        klikkGaVidere()
+
         cy.contains(
             'Jeg har lest all informasjonen jeg har fått i søknaden og bekrefter at opplysningene jeg har gitt er korrekte.',
         ).click()
