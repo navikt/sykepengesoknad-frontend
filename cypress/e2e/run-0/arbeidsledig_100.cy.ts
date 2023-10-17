@@ -88,6 +88,39 @@ describe('Tester arbeidsledigsøknad', () => {
     it('Søknad VAER_KLAR_OVER_AT', () => {
         cy.url().should('include', `${soknad.id}/5`)
         cy.get('.navds-checkbox__label').click()
+        it('Bekreftelsespunktene er riktige', () => {
+            const punkter = [
+                'Du kan bare få sykepenger hvis det er din egen sykdom eller skade som hindrer deg i å jobbe. Sosiale eller økonomiske problemer gir ikke rett til sykepenger.',
+                'Du kan miste retten til sykepenger hvis du nekter å opplyse om din egen arbeidsevne, eller hvis du ikke tar imot behandling eller tilrettelegging.',
+                'Retten til sykepenger gjelder bare inntekt du har mottatt som lønn og betalt skatt av på sykmeldingstidspunktet.',
+                'NAV kan innhente opplysninger som er nødvendige for å behandle søknaden.',
+                'Fristen for å søke sykepenger er som hovedregel 3 måneder',
+                'Du kan endre svarene i denne søknaden opp til 12 måneder etter du sendte den inn første gangen.',
+            ]
+
+            const lenkerMedTekst = [
+                {
+                    tekst: 'Du må melde fra til NAV hvis du satt i varetekt, sonet straff eller var under forvaring i sykmeldingsperioden.',
+                    url: 'https://www.nav.no/skriv-til-oss',
+                },
+                {
+                    tekst: 'Du må melde fra om studier som er påbegynt etter at du ble sykmeldt, og som ikke er avklart med NAV. Det samme gjelder hvis du begynner å studere mer enn du gjorde før du ble sykmeldt.',
+                    url: 'https://www.nav.no/skriv-til-oss',
+                },
+                {
+                    tekst: 'Du kan lese mer om rettigheter og plikter på',
+                    url: 'https://www.nav.no/sykepenger',
+                },
+            ]
+
+            punkter.forEach((punkt) => {
+                cy.contains(punkt)
+            })
+
+            lenkerMedTekst.forEach(({ tekst, url }) => {
+                cy.contains(tekst).find('a').should('have.attr', 'href', url)
+            })
+        })
         cy.contains(
             'Jeg har lest all informasjonen jeg har fått i søknaden og bekrefter at opplysningene jeg har gitt er korrekte.',
         )
