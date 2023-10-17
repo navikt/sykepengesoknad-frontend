@@ -40,7 +40,9 @@ const Knapperad = ({ poster }: { poster: boolean }) => {
     const knappetekst = () => {
         if (!soknad) return tekst('sykepengesoknad.ga-videre')
         const REDUSER_FOR_OPPHOLD_UTLAND_OG_ARBEIDSTAKER =
-            soknad.soknadstype === RSSoknadstype.OPPHOLD_UTLAND || soknad.soknadstype === RSSoknadstype.ARBEIDSTAKERE
+            soknad.soknadstype === RSSoknadstype.OPPHOLD_UTLAND ||
+            soknad.soknadstype === RSSoknadstype.ARBEIDSTAKERE ||
+            soknad.soknadstype === RSSoknadstype.REISETILSKUDD
                 ? 1
                 : 2
         const erSisteSteg = spmIndex === soknad.sporsmal.length - REDUSER_FOR_OPPHOLD_UTLAND_OG_ARBEIDSTAKER
