@@ -83,7 +83,10 @@ const SporsmalForm = ({ sporsmal }: SpmProps) => {
         if (oppdatererSporsmal || senderSoknad)
             return Promise.reject(new Error('Spørsmål oppdateres eller søknad sendes allerede'))
         if (
-            (!nesteSporsmal && !erUtenlandssoknad && valgtSoknad?.soknadstype !== RSSoknadstype.ARBEIDSTAKERE) ||
+            (!nesteSporsmal &&
+                !erUtenlandssoknad &&
+                valgtSoknad?.soknadstype !== RSSoknadstype.ARBEIDSTAKERE &&
+                valgtSoknad?.soknadstype !== RSSoknadstype.REISETILSKUDD) ||
             !sporsmal
         ) {
             return Promise.reject(new Error('Spørsmål skal være lastet for at vi kan submitte'))
@@ -147,7 +150,8 @@ const SporsmalForm = ({ sporsmal }: SpmProps) => {
                     {erSiste &&
                         !erUtenlandssoknad &&
                         valgtSoknad &&
-                        (valgtSoknad.soknadstype !== RSSoknadstype.ARBEIDSTAKERE ? (
+                        (valgtSoknad.soknadstype !== RSSoknadstype.ARBEIDSTAKERE &&
+                        valgtSoknad.soknadstype !== RSSoknadstype.REISETILSKUDD ? (
                             <>
                                 {nesteSporsmal && (
                                     <>
