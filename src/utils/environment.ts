@@ -2,10 +2,6 @@ import getConfig from 'next/config'
 
 const { publicRuntimeConfig } = getConfig()
 
-export function isDev() {
-    return publicRuntimeConfig.env === 'dev'
-}
-
 export function isProd() {
     return publicRuntimeConfig.env === 'prod'
 }

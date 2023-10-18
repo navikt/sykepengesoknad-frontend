@@ -33,10 +33,12 @@ export function svarRadioGruppe(groupName: string, radioName: string) {
 
 export function svarJaHovedsporsmal() {
     cy.get('form').findAllByRole('radio', { name: 'Ja' }).first().click()
+    cy.get('form').findAllByRole('radio', { name: 'Ja' }).first().should('be.checked')
 }
 
 export function svarNeiHovedsporsmal() {
     cy.get('form').findAllByRole('radio', { name: 'Nei' }).first().click()
+    cy.get('form').findAllByRole('radio', { name: 'Nei' }).first().should('be.checked')
 }
 
 export function svarCheckboxPanel() {

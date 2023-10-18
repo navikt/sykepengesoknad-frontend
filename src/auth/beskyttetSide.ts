@@ -1,16 +1,24 @@
 import { logger } from '@navikt/next-logger'
-import { NextPageContext } from 'next'
+import { GetServerSidePropsContext, GetServerSidePropsResult } from 'next/types'
+import { IToggle } from '@unleash/nextjs'
 
 import metrics, { cleanPathForMetric, shouldLogMetricForPath } from '../metrics'
 import { isMockBackend } from '../utils/environment'
 import { AuthenticationError } from '../utils/fetch'
+import { getFlagsServerSide } from '../toggles/ssr'
 
 import { verifyIdportenAccessToken } from './verifyIdportenAccessToken'
 
-type PageHandler = (context: NextPageContext) => void | Promise<any>
+type PageHandler = (context: GetServerSidePropsContext) => Promise<GetServerSidePropsResult<ServerSidePropsResult>>
+
+export interface ServerSidePropsResult {
+    toggles: IToggle[]
+}
 
 function beskyttetSide(handler: PageHandler) {
-    return async function withBearerTokenHandler(context: NextPageContext): Promise<ReturnType<typeof handler>> {
+    return async function withBearerTokenHandler(
+        context: GetServerSidePropsContext,
+    ): Promise<ReturnType<typeof handler>> {
         if (isMockBackend()) {
             return handler(context)
         }
@@ -54,8 +62,10 @@ function beskyttetSide(handler: PageHandler) {
     }
 }
 
-export const beskyttetSideUtenProps = beskyttetSide(async (): Promise<any> => {
+export const beskyttetSideUtenProps = beskyttetSide(async (context): Promise<{ props: ServerSidePropsResult }> => {
+    const flags = await getFlagsServerSide(context.req, context.res)
+
     return {
-        props: {},
+        props: { toggles: flags.toggles },
     }
 })

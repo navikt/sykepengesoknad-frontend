@@ -3,9 +3,9 @@ import '../style/global.css'
 import { configureLogger, logger } from '@navikt/next-logger'
 import dayjs from 'dayjs'
 import nb from 'dayjs/locale/nb'
-import type { AppProps as NextAppProps } from 'next/app'
+import { AppProps } from 'next/app'
 import Head from 'next/head'
-import React, { PropsWithChildren, useEffect, useRef } from 'react'
+import React, { ReactElement, useEffect, useRef } from 'react'
 import { QueryCache, QueryClient, QueryClientProvider } from '@tanstack/react-query'
 import { useRouter } from 'next/router'
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools'
@@ -15,10 +15,8 @@ import { LabsWarning } from '../components/labs-warning/LabsWarning'
 import { basePath } from '../utils/environment'
 import { getFaro, initInstrumentation, pinoLevelToFaroLevel } from '../faro/faro'
 import { AuthenticationError } from '../utils/fetch'
-
-interface AppProps extends Omit<NextAppProps, 'pageProps'> {
-    pageProps: PropsWithChildren<unknown>
-}
+import { FlagProvider } from '../toggles/context'
+import { ServerSidePropsResult } from '../auth/beskyttetSide'
 
 dayjs.locale({
     ...nb,
@@ -54,7 +52,7 @@ const queryClient = new QueryClient({
     }),
 })
 
-function MyApp({ Component, pageProps }: AppProps): JSX.Element {
+function MyApp({ Component, pageProps }: AppProps<ServerSidePropsResult>): ReactElement {
     useHandleDecoratorClicks()
 
     const router = useRouter()
@@ -79,15 +77,17 @@ function MyApp({ Component, pageProps }: AppProps): JSX.Element {
                 <meta name="robots" content="noindex" />
                 <meta name="viewport" content="width=device-width, initial-scale=1" />
             </Head>
-            <QueryClientProvider client={queryClient}>
-                <div id="root" className="mx-auto max-w-2xl p-4 pb-32">
-                    <LabsWarning />
-                    <main id="maincontent" role="main" tabIndex={-1} className="outline-none">
-                        <Component {...pageProps} />
-                    </main>
-                </div>
-                <ReactQueryDevtools initialIsOpen={false} />
-            </QueryClientProvider>
+            <FlagProvider toggles={pageProps.toggles}>
+                <QueryClientProvider client={queryClient}>
+                    <div id="root" className="mx-auto max-w-2xl p-4 pb-32">
+                        <LabsWarning />
+                        <main id="maincontent" role="main" tabIndex={-1} className="outline-none">
+                            <Component {...pageProps} />
+                        </main>
+                    </div>
+                    <ReactQueryDevtools initialIsOpen={false} />
+                </QueryClientProvider>
+            </FlagProvider>
         </>
     )
 }
