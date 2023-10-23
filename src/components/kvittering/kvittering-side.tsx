@@ -16,6 +16,7 @@ import useSoknader from '../../hooks/useSoknader'
 import { urlTilSoknad } from '../soknad/soknad-link'
 import QueryStatusPanel from '../queryStatusPanel/QueryStatusPanel'
 import { kvitteringBreadcrumb, useUpdateBreadcrumbs } from '../../hooks/useBreadcrumbs'
+import { useStudyStatus } from '../../hooks/useStudyStatus'
 import { SoknadHeader } from '../soknad/soknad-header'
 import { FlexjarKvittering } from '../flexjar/flexjar-kvittering'
 import { useSoknadMedDetaljer } from '../../hooks/useSoknadMedDetaljer'
@@ -28,6 +29,7 @@ const KvitteringSide = () => {
     const router = useRouter()
     const { data: soknader } = useSoknader()
     const arbeidUtenforNorgeStudy = 'panel-yhv7yi5h9q'
+    const { data: arbeidUtenforNorgeStudyActive } = useStudyStatus(arbeidUtenforNorgeStudy)
 
     useUpdateBreadcrumbs(() => [{ ...kvitteringBreadcrumb, handleInApp: true }], [])
 
@@ -64,7 +66,7 @@ const KvitteringSide = () => {
         valgtSoknad.soknadstype !== RSSoknadstype.OPPHOLD_UTLAND
 
     const gjenstaendeSoknader = hentGjenstaendeSoknader(soknader, valgtSoknad)
-    const skalViseUxSignals = gjenstaendeSoknader.length === 0
+    const skalViseUxSignals = arbeidUtenforNorgeStudyActive && gjenstaendeSoknader.length === 0
 
     return (
         <>
