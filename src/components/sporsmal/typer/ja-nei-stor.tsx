@@ -56,11 +56,11 @@ const JaNeiStor = ({ sporsmal }: SpmProps) => {
 
     function radioClassName(value: 'JA' | 'NEI', mt = false) {
         return cn(
-            'focus-within:shadow-focus mb-2 block w-full rounded border-2  border-border-default px-4 py-1 text-text-default hover:bg-surface-action-subtle-hover md:mb-0 md:w-1/2',
+            'focus-within:shadow-focus mb-2 block w-full [&>label]:rounded [&>label]:border-2 [&>label]:border-border-default [&>label]:px-4 [&>label]:py-4 text-text-default [&>label]:hover:bg-surface-action-subtle-hover md:mb-0 md:w-1/2',
             {
-                'bg-surface-action-subtle border-border-selected': watchJaNei === value,
+                '[&>label]:bg-surface-action-subtle [&>label]:border-border-selected': watchJaNei === value,
                 'mt-4': mt,
-                'border-b-border-danger border-border-danger text-text-danger': error,
+                '[&>label]:border-b-border-danger [&>label]:border-border-danger text-text-danger': error,
             },
         )
     }
