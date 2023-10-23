@@ -26,6 +26,7 @@ import { EndringSNHjelpBody } from './endring-sn-hjelp-body'
 import { MedlemskapArbeidUtenforNorgeHjelpBody } from './medlemskap-arbeid-utenfor-norge-hjelp-body'
 import { MedlemskapOppholdUtenforEOSHjelpBody } from './medlemskap-opphold-utenfor-eos-hjelp-body'
 import { MedlemskapOppholdUtenforNorgeHjelpBody } from './medlemskap-opphold-utenfor-Norge-hjelp-body'
+import { MedlemskapOppholdstillatelseHjelpBody } from './medlemskap-oppholdstillatelse-hjelp-body'
 
 export const EkspanderbarHjelp = ({ sporsmal }: SpmProps) => {
     const { valgtSoknad } = useSoknadMedDetaljer()
@@ -92,6 +93,8 @@ export const EkspanderbarHjelp = ({ sporsmal }: SpmProps) => {
                 return <MedlemskapOppholdUtenforNorgeHjelpBody />
             case 'MEDLEMSKAP_UTFORT_ARBEID_UTENFOR_NORGE':
                 return <MedlemskapArbeidUtenforNorgeHjelpBody />
+            case 'MEDLEMSKAP_OPPHOLDSTILLATELSE':
+                return <MedlemskapOppholdstillatelseHjelpBody />
             default:
                 if (harInnhold) {
                     return (
