@@ -23,7 +23,6 @@ import { useSoknadMedDetaljer } from '../../hooks/useSoknadMedDetaljer'
 import { useToggle } from '../../toggles/context'
 
 import Kvittering from './kvittering'
-import { harSvartJaArbeidUtenforNorge } from './harSvartJa'
 
 const KvitteringSide = () => {
     const { valgtSoknad, soknadId } = useSoknadMedDetaljer()
@@ -56,8 +55,6 @@ const KvitteringSide = () => {
 
     if (!valgtSoknad || !soknader) return <QueryStatusPanel valgSoknadId={soknadId} />
 
-    const skalViseUxSignals = harSvartJaArbeidUtenforNorge(valgtSoknad) && arbeidUtenforNorgeStudyActive
-
     const erSendtTilArbeidsgiver = valgtSoknad.sendtTilArbeidsgiverDato !== undefined
 
     const skalViseEndre =
@@ -69,6 +66,7 @@ const KvitteringSide = () => {
         valgtSoknad.soknadstype !== RSSoknadstype.OPPHOLD_UTLAND
 
     const gjenstaendeSoknader = hentGjenstaendeSoknader(soknader, valgtSoknad)
+    const skalViseUxSignals = arbeidUtenforNorgeStudyActive && gjenstaendeSoknader.length === 0
 
     return (
         <>
@@ -76,27 +74,24 @@ const KvitteringSide = () => {
 
             <Kvittering />
 
-            {skalViseUxSignals && <UxSignalsWidget study={arbeidUtenforNorgeStudy} demo={!isProd()} />}
-
             <GjenstaendeSoknader soknader={gjenstaendeSoknader} />
 
             {gjenstaendeSoknader.length === 0 && (
-                <>
-                    <Button
-                        type="button"
-                        className="mt-8"
-                        onClick={() => {
-                            logEvent('knapp klikket', {
-                                tekst: tekst('kvittering.ferdig'),
-                                soknadstype: valgtSoknad.soknadstype,
-                            })
-                            window.location.href = sykefravaerUrl()
-                        }}
-                    >
-                        {tekst('kvittering.ferdig')}
-                    </Button>
-                </>
+                <Button
+                    type="button"
+                    className="mt-8"
+                    onClick={() => {
+                        logEvent('knapp klikket', {
+                            tekst: tekst('kvittering.ferdig'),
+                            soknadstype: valgtSoknad.soknadstype,
+                        })
+                        window.location.href = sykefravaerUrl()
+                    }}
+                >
+                    {tekst('kvittering.ferdig')}
+                </Button>
             )}
+            {skalViseUxSignals && <UxSignalsWidget study={arbeidUtenforNorgeStudy} demo={!isProd()} />}
             {!skalViseUxSignals && flexjarToggle.enabled && <FlexjarKvittering />}
             {skalViseEndre && <Endreknapp />}
             {skalViseSendTilArbeidsgiver && <Ettersending gjelder="arbeidsgiver" />}
