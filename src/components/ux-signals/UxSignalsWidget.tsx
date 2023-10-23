@@ -1,7 +1,7 @@
 import Script from 'next/script'
 import React from 'react'
 
-export function UxSignalsWidget({ study, demo }: { study: string; demo: boolean }): JSX.Element | null {
+export function UxSignalsWidget({ study, demo }: { study: string; demo: boolean }) {
     // https://app.uxsignals.com/docs
     return (
         <>
