@@ -4,7 +4,7 @@ import { flattenSporsmal } from '../../utils/soknad-utils'
 import { tekst } from '../../utils/tekster'
 import { veldigLangSoknad } from '../../data/mock/data/soknad/veldig-land-soknad'
 import { rsToSoknad } from '../../types/mapping'
-import { testpersonerGruppert } from '../../data/mock/testperson'
+import { testpersoner } from '../../data/mock/testperson'
 
 import { hentGeneriskFeilmelding } from './sporsmal-utils'
 
@@ -82,20 +82,17 @@ test('Alle sporsmal tag fra testdata ligger i kjenteTags', () => {
     let manglerTagsIKoden = false
 
     const testdataTags = new Set<string>()
-    const grupper = testpersonerGruppert()
-    for (const g in grupper) {
-        const grupperElement = grupper[g as keyof typeof grupper]
-        for (const p in grupperElement) {
-            const persona = grupperElement[p as keyof typeof grupperElement]
-            if (persona) {
-                persona.soknader.forEach((soknad) => {
-                    const soknadtags = hentAlleTags(rsToSoknad(soknad).sporsmal)
+    const personer = testpersoner()
+    for (const g in personer) {
+        const persona = personer[g as keyof typeof personer]
+        if (persona) {
+            persona.soknader.forEach((soknad) => {
+                const soknadtags = hentAlleTags(rsToSoknad(soknad).sporsmal)
 
-                    soknadtags.forEach((tag) => {
-                        testdataTags.add(tag)
-                    })
+                soknadtags.forEach((tag) => {
+                    testdataTags.add(tag)
                 })
-            }
+            })
         }
     }
 
