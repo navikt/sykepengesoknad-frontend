@@ -8,7 +8,6 @@ import { tekst } from '../../../utils/tekster'
 import AvbrytSoknadModal from '../../avbryt-soknad-modal/avbryt-soknad-modal'
 import AvsluttOgFortsettSenere from '../../avslutt-og-fortsett-senere/avslutt-og-fortsett-senere'
 import Vis from '../../vis'
-import { TagTyper } from '../../../types/enums'
 import { hentSporsmal } from '../../../utils/soknad-utils'
 import { useSoknadMedDetaljer } from '../../../hooks/useSoknadMedDetaljer'
 import { SlikBehandlerNavPersonopplysningene } from '../../soknad-intro/slik-behandler-nav-personopplysningene'
@@ -19,11 +18,11 @@ const Knapperad = ({ poster }: { poster: boolean }) => {
     const { getValues } = useFormContext()
     const skalSkjuleKnapperad = () => {
         if (!soknad || !sporsmal) return false
-        if (soknad.soknadstype === RSSoknadstype.OPPHOLD_UTLAND && sporsmal.tag === TagTyper.ARBEIDSGIVER) {
+        if (soknad.soknadstype === RSSoknadstype.OPPHOLD_UTLAND && sporsmal.tag === 'ARBEIDSGIVER') {
             const formValues = getValues()
 
-            const arbiedsgiverId = hentSporsmal(soknad, TagTyper.ARBEIDSGIVER)!.id
-            const ferieId = hentSporsmal(soknad, TagTyper.FERIE)!.id
+            const arbiedsgiverId = hentSporsmal(soknad, 'ARBEIDSGIVER')!.id
+            const ferieId = hentSporsmal(soknad, 'FERIE')!.id
 
             const harFerie = formValues[ferieId] === 'JA'
             const harArbeidsgiver = formValues[arbiedsgiverId] === 'JA'

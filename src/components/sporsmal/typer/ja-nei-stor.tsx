@@ -2,7 +2,6 @@ import { Alert, BodyLong, Radio, RadioGroup } from '@navikt/ds-react'
 import { Controller, useFormContext } from 'react-hook-form'
 import React from 'react'
 
-import { TagTyper } from '../../../types/enums'
 import { getLedetekst, tekst } from '../../../utils/tekster'
 import AnimateOnMount from '../../animate-on-mount'
 import { utlandssoknadUrl } from '../../soknad/soknad-link'
@@ -66,7 +65,7 @@ const JaNeiStor = ({ sporsmal }: SpmProps) => {
     }
 
     const skalHaInntektsbulletpoints =
-        sporsmal.tag === TagTyper.ANDRE_INNTEKTSKILDER_V2 && valgtSoknad.inntektskilderDataFraInntektskomponenten
+        sporsmal.tag === 'ANDRE_INNTEKTSKILDER_V2' && valgtSoknad.inntektskilderDataFraInntektskomponenten
 
     function sporsmalstekst() {
         if (skalHaInntektsbulletpoints) {
@@ -79,7 +78,7 @@ const JaNeiStor = ({ sporsmal }: SpmProps) => {
         <>
             <div>
                 {skalHaInntektsbulletpoints && <Inntektsbulletpoints soknad={valgtSoknad} />}
-                {sporsmal.tag === TagTyper.YRKESSKADE_V2 && <Yrkesskadebulletpoints sporsmal={sporsmal} />}
+                {sporsmal.tag === 'YRKESSKADE_V2' && <Yrkesskadebulletpoints sporsmal={sporsmal} />}
 
                 <Controller
                     name={sporsmal.id}
@@ -125,9 +124,9 @@ const JaNeiStor = ({ sporsmal }: SpmProps) => {
                     )}
                 />
 
-                {sporsmal.tag === TagTyper.ANDRE_INNTEKTSKILDER_V2 && <InntektsopplysningerErKonfidensielleInfo />}
+                {sporsmal.tag === 'ANDRE_INNTEKTSKILDER_V2' && <InntektsopplysningerErKonfidensielleInfo />}
 
-                {sporsmal?.tag === TagTyper.UTLANDSOPPHOLD_SOKT_SYKEPENGER && watchJaNei && (
+                {sporsmal?.tag === 'UTLANDSOPPHOLD_SOKT_SYKEPENGER' && watchJaNei && (
                     <BodyLong spacing className="utland_infotekst">
                         {parserWithReplace(
                             getLedetekst(
@@ -155,7 +154,7 @@ const JaNeiStor = ({ sporsmal }: SpmProps) => {
                         <UndersporsmalListe oversporsmal={sporsmal} oversporsmalSvar={watchJaNei} />
 
                         {valgtSoknad?.status === RSSoknadstatus.UTKAST_TIL_KORRIGERING &&
-                            sporsmal.tag === TagTyper.FERIE_V2 &&
+                            sporsmal.tag === 'FERIE_V2' &&
                             watchJaNei === 'JA' && (
                                 <Alert data-cy="feriekorrigeringvarsel" className="mt-8" variant="info">
                                     Du kan dra på ferie mens du er sykmeldt, men du får ikke utbetalt sykepenger når du

@@ -2,7 +2,6 @@ import { BodyShort, TextField } from '@navikt/ds-react'
 import React from 'react'
 import { useFormContext } from 'react-hook-form'
 
-import { TagTyper } from '../../../types/enums'
 import { RSSvartype } from '../../../types/rs-types/rs-svartype'
 import validerArbeidsgrad from '../../../utils/sporsmal/valider-arbeidsgrad'
 import { getLedetekst, tekst } from '../../../utils/tekster'
@@ -25,11 +24,11 @@ const TallKomp = ({ sporsmal }: SpmProps) => {
 
     const valider = () => {
         if (validerGrad) {
-            if (![TagTyper.JOBBET_DU_GRADERT, TagTyper.JOBBET_DU_100_PROSENT].includes(hovedSporsmal!.tag)) {
+            if (!['JOBBET_DU_GRADERT', 'JOBBET_DU_100_PROSENT'].includes(hovedSporsmal!.tag)) {
                 return true // hopp over validering dersom det ikke er spørsmål av denne typen
             }
 
-            if (sporsmal.tag !== TagTyper.HVOR_MYE_TIMER_VERDI) {
+            if (sporsmal.tag !== 'HVOR_MYE_TIMER_VERDI') {
                 return true
             }
             return validerGrad()
@@ -139,8 +138,7 @@ const TallKomp = ({ sporsmal }: SpmProps) => {
                             />
                             <Vis
                                 hvis={
-                                    errors[sporsmal.id]?.type === 'validate' &&
-                                    sporsmal.tag === TagTyper.HVOR_MYE_TIMER_VERDI
+                                    errors[sporsmal.id]?.type === 'validate' && sporsmal.tag === 'HVOR_MYE_TIMER_VERDI'
                                 }
                                 render={() => (
                                     <BodyShort

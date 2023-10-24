@@ -2,7 +2,6 @@ import { Label } from '@navikt/ds-react'
 
 import { Sporsmal } from '../../../types/types'
 import SporsmalSwitch from '../sporsmal-switch'
-import { TagTyper } from '../../../types/enums'
 
 import { UndersporsmalTekster } from './undersporsmal-tekster'
 
@@ -19,7 +18,7 @@ const UndersporsmalListe = ({ oversporsmal, oversporsmalSvar }: UndersporsmalLis
     if (!skalVise) return null
     return (
         <div className="mt-8">
-            {oversporsmal.tag == TagTyper.UTENLANDSK_SYKMELDING_BOSTED && (
+            {oversporsmal.tag == 'UTENLANDSK_SYKMELDING_BOSTED' && (
                 <Label as="h2" className="mt-8">
                     {UndersporsmalTekster['undersporsmal.UTENLANDSK_SYKMELDING_BOSTED']}
                 </Label>

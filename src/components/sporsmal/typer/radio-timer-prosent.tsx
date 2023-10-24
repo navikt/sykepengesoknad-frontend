@@ -2,7 +2,6 @@ import { Alert, BodyLong, BodyShort, Radio, RadioGroup, ReadMore } from '@navikt
 import React from 'react'
 import { Controller, useFormContext } from 'react-hook-form'
 
-import { TagTyper } from '../../../types/enums'
 import { rodeUkeDagerIPerioden } from '../../../utils/helligdager-utils'
 import { hentUndersporsmal } from '../../../utils/soknad-utils'
 import validerArbeidsgrad from '../../../utils/sporsmal/valider-arbeidsgrad'
@@ -26,8 +25,8 @@ const RadioTimerProsent = ({ sporsmal }: SpmProps) => {
 
     // watchTimer er lagt inn for å rendre prosent-alerten
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
-    const watchTimer = watch(hentUndersporsmal(sporsmal!, TagTyper.HVOR_MYE_TIMER_VERDI)!.id)
-    const errorTimer = errors[hentUndersporsmal(sporsmal!, TagTyper.HVOR_MYE_TIMER_VERDI)!.id]
+    const watchTimer = watch(hentUndersporsmal(sporsmal!, 'HVOR_MYE_TIMER_VERDI')!.id)
+    const errorTimer = errors[hentUndersporsmal(sporsmal!, 'HVOR_MYE_TIMER_VERDI')!.id]
 
     const feilmelding = hentFeilmelding(sporsmal)
     const { valgtSoknad } = useSoknadMedDetaljer()

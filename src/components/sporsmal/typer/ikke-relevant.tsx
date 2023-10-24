@@ -4,7 +4,6 @@ import { PlusIcon, TrashIcon } from '@navikt/aksel-icons'
 import { useFormContext } from 'react-hook-form'
 
 import { parserWithReplace } from '../../../utils/html-react-parser-utils'
-import { TagTyper } from '../../../types/enums'
 import UndersporsmalListe from '../undersporsmal/undersporsmal-liste'
 import { Sporsmal } from '../../../types/types'
 import { settSvar } from '../sett-svar'
@@ -28,9 +27,9 @@ const IkkeRelevant = ({ sporsmal, sporsmalIndex, erSisteSporsmal }: IkkeRelevant
     const { mutate: slettundersporsmal, isLoading: sletter } = useSlettUndersporsmal()
 
     const skalHaUndersporsmal = [
-        TagTyper.MEDLEMSKAP_OPPHOLD_UTENFOR_EOS_GRUPPERING,
-        TagTyper.MEDLEMSKAP_OPPHOLD_UTENFOR_NORGE_GRUPPERING,
-        TagTyper.MEDLEMSKAP_UTFORT_ARBEID_UTENFOR_NORGE_GRUPPERING,
+        'MEDLEMSKAP_OPPHOLD_UTENFOR_EOS_GRUPPERING',
+        'MEDLEMSKAP_OPPHOLD_UTENFOR_NORGE_GRUPPERING',
+        'MEDLEMSKAP_UTFORT_ARBEID_UTENFOR_NORGE_GRUPPERING',
     ]
 
     const leggTil = async () => {
@@ -102,7 +101,7 @@ const IkkeRelevant = ({ sporsmal, sporsmalIndex, erSisteSporsmal }: IkkeRelevant
                         onClick={leggTil}
                         loading={oppdatererSporsmal || leggerTil}
                     >
-                        {sporsmal.tag === TagTyper.MEDLEMSKAP_UTFORT_ARBEID_UTENFOR_NORGE
+                        {sporsmal.tag === 'MEDLEMSKAP_UTFORT_ARBEID_UTENFOR_NORGE'
                             ? 'Legg til arbeid i utlandet'
                             : 'Legg til nytt opphold'}
                     </Button>

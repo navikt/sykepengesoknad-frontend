@@ -7,7 +7,6 @@ import { SpmProps } from '../sporsmal-form/sporsmal-form'
 import { hentFeilmelding } from '../sporsmal-utils'
 import UndersporsmalListe from '../undersporsmal/undersporsmal-liste'
 import Vis from '../../vis'
-import { TagTyper } from '../../../types/enums'
 import { SvaralternativCheckboxForklaring } from '../svaralternativ-checkbox-forklaring'
 
 const undertekst = (tekst: string | null) => {
@@ -25,8 +24,7 @@ const CheckboxKomp = ({ sporsmal }: SpmProps) => {
     }
     const feilmelding = hentFeilmelding(sporsmal)
 
-    const checkboxesSkalHaSpesiellStyling = (sporsmalTag: TagTyper) =>
-        sporsmalTag == TagTyper.HVILKE_ANDRE_INNTEKTSKILDER
+    const checkboxesSkalHaSpesiellStyling = (sporsmalTag: string) => sporsmalTag == 'HVILKE_ANDRE_INNTEKTSKILDER'
 
     return (
         <Controller

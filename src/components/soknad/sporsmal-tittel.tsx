@@ -5,7 +5,7 @@ import { tekst } from '../../utils/tekster'
 import { useSoknadMedDetaljer } from '../../hooks/useSoknadMedDetaljer'
 import { Soknad, Sporsmal } from '../../types/types'
 import { RSSoknadstype } from '../../types/rs-types/rs-soknadstype'
-import { erSisteSide, fjernIndexFraTag } from '../sporsmal/sporsmal-utils'
+import { erSisteSide } from '../sporsmal/sporsmal-utils'
 
 export const SporsmalTittel = () => {
     const { valgtSoknad, stegNo, sporsmal } = useSoknadMedDetaljer()
@@ -27,7 +27,7 @@ const hentTekst = (soknad: Soknad, sidenummer: number, sporsmal: Sporsmal) => {
     if (sidenummer === 1 && soknad.soknadstype !== RSSoknadstype.OPPHOLD_UTLAND) {
         return tekst('sykepengesoknad.start.tittel')
     }
-    const nokkel = fjernIndexFraTag(sporsmal.tag).toLowerCase()
+    const nokkel = sporsmal.tag.toLowerCase()
     return erSisteSide(soknad, sidenummer)
         ? tekst('sykepengesoknad.til-slutt.tittel')
         : tekst(`sykepengesoknad.${nokkel}.tittel` as any)

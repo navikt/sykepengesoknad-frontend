@@ -5,13 +5,12 @@ import { useMemo } from 'react'
 import { SpmProps } from '../sporsmal-form/sporsmal-form'
 import { landlisteEøs, landlisteUtenforEøs } from '../landliste'
 import { hentFeilmelding } from '../sporsmal-utils'
-import { TagTyper } from '../../../types/enums'
 
 const ComboboxSingle = ({ sporsmal }: SpmProps) => {
     const feilmelding = hentFeilmelding(sporsmal)
 
     const options = useMemo(() => {
-        if (sporsmal.tag === TagTyper.MEDLEMSKAP_OPPHOLD_UTENFOR_EOS_HVOR) {
+        if (sporsmal.tag === 'MEDLEMSKAP_OPPHOLD_UTENFOR_EOS_HVOR') {
             return landlisteUtenforEøs.sort()
         } else {
             return landlisteUtenforEøs.concat(landlisteEøs).sort()
