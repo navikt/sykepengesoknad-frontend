@@ -10,7 +10,7 @@ export function UxSignalsWidget({ study, demo }: { study: string; demo: boolean 
                 strategy="lazyOnload"
                 src="https://uxsignals-frontend.uxsignals.app.iterate.no/embed.js"
             />
-            <div data-uxsignals-embed={study} className="my-4" data-uxsignals-mode={demo ? '' : ''} />
+            <div data-uxsignals-embed={study} className="my-4" data-uxsignals-mode={demo ? 'demo' : ''} />
         </>
     )
 }
