@@ -23,7 +23,8 @@ export function useSoknadMedDetaljer() {
     const spmIndex = stegNo - 1
     const sporsmal = valgtSoknad?.sporsmal[spmIndex]
     const erUtenlandssoknad = valgtSoknad?.soknadstype === RSSoknadstype.OPPHOLD_UTLAND && !valgtSykmelding
-    const erInntektsopplysningerForNaringsdrivende = valgtSoknad?.soknadstype === RSSoknadstype.INNTEKTSOPPLYSNINGER_FOR_NARINGSDRIVENDE
+    const erInntektsopplysningerForNaringsdrivende =
+        valgtSoknad?.soknadstype === RSSoknadstype.INNTEKTSOPPLYSNINGER_FOR_NARINGSDRIVENDE
     return {
         valgtSoknad,
         soknadId,

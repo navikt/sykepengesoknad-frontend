@@ -26,9 +26,9 @@ import { behandlingsdager } from '../soknad/behandlingsdager'
 import { nyttReisetilskudd } from '../soknad/arbeidstaker-reisetilskudd'
 import { gradertReisetilskudd } from '../soknad/arbeidstaker-reisetilskudd-gradert'
 import { fremtidigSoknad } from '../soknad/arbeidstaker-fremtidig'
+import { inntektsopplysningerNaringsdrivende } from '../soknad/inntektsopplysninger-naringsdrivende'
 
 import { brukertestSoknad, brukertestSykmelding } from './brukertest'
-import {inntektsopplysningerNaringsdrivende} from "../soknad/inntektsopplysninger-naringsdrivende";
 
 export interface Persona {
     soknader: RSSoknad[]

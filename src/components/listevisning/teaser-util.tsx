@@ -11,7 +11,7 @@ export const teaserTittel = (soknad: RSSoknadmetadata) => {
         return tekst('soknad.utland.teaser.tittel')
     }
     if (soknad.soknadstype === RSSoknadstype.INNTEKTSOPPLYSNINGER_FOR_NARINGSDRIVENDE) {
-        return "Inntektsopplysninger for næringsdrivende"
+        return 'Inntektsopplysninger for næringsdrivende'
     }
     if (soknad.soknadstype === RSSoknadstype.REISETILSKUDD) {
         return tekst('soknad.reisetilskudd.teaser.tittel')

@@ -40,7 +40,10 @@ export const ListevisningLenkepanel = ({ soknad, onClick }: { soknad: RSSoknadme
                         <>
                             <header>
                                 <Vis
-                                    hvis={soknad.soknadstype !== RSSoknadstype.OPPHOLD_UTLAND && soknad.soknadstype !== RSSoknadstype.INNTEKTSOPPLYSNINGER_FOR_NARINGSDRIVENDE}
+                                    hvis={
+                                        soknad.soknadstype !== RSSoknadstype.OPPHOLD_UTLAND &&
+                                        soknad.soknadstype !== RSSoknadstype.INNTEKTSOPPLYSNINGER_FOR_NARINGSDRIVENDE
+                                    }
                                     render={() => <Detail>{tilLesbarPeriodeMedArstall(soknad.fom, soknad.tom)}</Detail>}
                                 />
                                 <Heading size="small" level="3" className="my-1">

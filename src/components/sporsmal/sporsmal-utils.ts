@@ -27,14 +27,6 @@ export const sporsmalIdListe = (sporsmal: ReadonlyArray<Sporsmal>) => {
     return svar
 }
 
-function hei(tag: TagTyper) {
-    switch (tag) {
-        case 'TILBAKE_I_ARBEID': {
-            return 'Tilbake i arbeid'
-        }
-    }
-}
-
 interface FeilmeldingProps {
     global: string
     lokal: string
