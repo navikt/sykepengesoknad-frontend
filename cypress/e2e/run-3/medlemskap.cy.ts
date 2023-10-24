@@ -21,14 +21,16 @@ describe('Tester medlemskap spørsmål', () => {
     })
 
     it('Arbeid utenfor Norge', () => {
+        cy.contains('Arbeid utenfor Norge')
         svarJaHovedsporsmal()
         svarCombobox('I hvilket land utførte du arbeidet?', 'Fra', 'Frankrike')
         svarFritekst('Hvilken arbeidsgiver jobbet du for?', 'Croissant AS')
         setPeriodeFraTil(12, 20)
+        klikkGaVidere()
     })
 
     it('Opphold utenfor EØS', () => {
-        klikkGaVidere()
+        cy.contains('Opphold utenfor EØS')
 
         svarJaHovedsporsmal()
         svarCombobox('I hvilket land utenfor EØS har du oppholdt deg?', 'Fra', 'Fransk Polynesia')
@@ -50,27 +52,30 @@ describe('Tester medlemskap spørsmål', () => {
             .check()
 
         setPeriodeFraTil(12, 20, 1)
+        klikkGaVidere()
     })
 
     it('Opphold utenfor Norge', () => {
-        klikkGaVidere()
+        cy.contains('Opphold utenfor Norge')
 
         svarJaHovedsporsmal()
         svarCombobox('I hvilket land utenfor Norge har du oppholdt deg?', 'Sve', 'Sveits')
         svarRadioGruppe('Hva var årsaken til oppholdet?', 'Studier')
         setPeriodeFraTil(12, 20)
+        klikkGaVidere()
     })
 
     it('Oppholdstillatelse', () => {
-        klikkGaVidere()
+        cy.contains('Oppholdstillatelse')
 
         svarJaHovedsporsmal()
         velgDato(22)
         svarRadioGruppe('Har du fått permanent oppholdstillatelse?', 'Ja')
+        klikkGaVidere()
     })
 
     it('Oppsumering av søknad', () => {
-        klikkGaVidere()
+        cy.contains('Til slutt')
 
         cy.findByRole('region', { name: 'Oppsummering fra søknaden' }).click()
         cy.findByRole('region', { name: 'Oppsummering fra søknaden' }).within(() => {
