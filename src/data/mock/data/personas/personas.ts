@@ -28,6 +28,7 @@ import { gradertReisetilskudd } from '../soknad/arbeidstaker-reisetilskudd-grade
 import { fremtidigSoknad } from '../soknad/arbeidstaker-fremtidig'
 
 import { brukertestSoknad, brukertestSykmelding } from './brukertest'
+import {inntektsopplysningerNaringsdrivende} from "../soknad/inntektsopplysninger-naringsdrivende";
 
 export interface Persona {
     soknader: RSSoknad[]
@@ -113,6 +114,11 @@ export const utlandPerson: Persona = {
     soknader: [oppholdUtland],
     sykmeldinger: [],
     beskrivelse: 'Opphold utland søknad',
+}
+export const inntektsopplysninger: Persona = {
+    soknader: [inntektsopplysningerNaringsdrivende],
+    sykmeldinger: [],
+    beskrivelse: 'Inntektsopplysninger for næringsdrivende',
 }
 
 export const reisetilskuddPerson: Persona = {

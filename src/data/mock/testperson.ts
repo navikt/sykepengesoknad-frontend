@@ -16,7 +16,7 @@ import {
     får400vedSendSoknad,
     får500vedSendSoknad,
     harIkkeKontonummer,
-    harKontonummer,
+    harKontonummer, inntektsopplysninger,
     integration,
     Persona,
     reisetilskuddPerson,
@@ -62,6 +62,7 @@ type PersonaKey =
     | 'korrigeringsfrist-utlopt'
     | 'cummulative-layout-shift'
     | 'tilbakedateringer'
+    | 'inntektsopplysninger-naringsdrivende'
 export type PersonaData = Partial<Record<PersonaKey, Persona>>
 
 export type PersonaGroupKey = 'soknad-typer' | 'soknad-sporsmal' | 'testing'
@@ -87,6 +88,7 @@ export function testpersonerGruppert(): PersonaGroup {
             ['bare-utland']: jsonDeepCopy(utlandPerson),
             ['fremtidig']: jsonDeepCopy(fremtidigPerson),
             ['uten-data']: jsonDeepCopy(utenData),
+            ['inntektsopplysninger-naringsdrivende']: jsonDeepCopy(inntektsopplysninger),
         },
         ['soknad-sporsmal']: {
             ['medlemskap']: jsonDeepCopy(medlemskapPerson),

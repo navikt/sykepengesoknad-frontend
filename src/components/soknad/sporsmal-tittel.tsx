@@ -24,8 +24,11 @@ export const SporsmalTittel = () => {
 }
 
 const hentTekst = (soknad: Soknad, sidenummer: number, sporsmal: Sporsmal) => {
-    if (sidenummer === 1 && soknad.soknadstype !== RSSoknadstype.OPPHOLD_UTLAND) {
+    if (sidenummer === 1 && soknad.soknadstype !== RSSoknadstype.OPPHOLD_UTLAND && soknad.soknadstype !== RSSoknadstype.INNTEKTSOPPLYSNINGER_FOR_NARINGSDRIVENDE) {
         return tekst('sykepengesoknad.start.tittel')
+    }
+    if(sporsmal.tittel){
+        return sporsmal.tittel
     }
     const nokkel = sporsmal.tag.toLowerCase()
     return erSisteSide(soknad, sidenummer)

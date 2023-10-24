@@ -54,6 +54,7 @@ export class Sporsmal extends ObjectCopier {
         readonly tagIndex: number | undefined,
         readonly sporsmalstekst: string,
         readonly undertekst: string | null,
+        readonly tittel: string | undefined,
         readonly svartype: RSSvartype,
         readonly min: string | null,
         readonly max: string | null,

@@ -7,6 +7,7 @@ import { RSVisningskriterie, RSVisningskriterieType } from './rs-visningskriteri
 export interface RSSporsmal {
     id: string
     tag: string
+    tittel?: string
     sporsmalstekst: string | null
     undertekst: string | null
     svartype: RSSvartypeType

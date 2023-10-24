@@ -14,6 +14,9 @@ export const SoknadHeader = () => {
             if (valgtSoknad.soknadstype === RSSoknadstype.OPPHOLD_UTLAND) {
                 return tekst('sykepengesoknad-utland.tittel')
             }
+            if (valgtSoknad.soknadstype === RSSoknadstype.INNTEKTSOPPLYSNINGER_FOR_NARINGSDRIVENDE) {
+                return "Inntektsopplysninger for næringsdrivende"
+            }
             if (valgtSoknad.soknadstype === RSSoknadstype.REISETILSKUDD) {
                 return tekst('reisetilskuddsoknad.tittel')
             }

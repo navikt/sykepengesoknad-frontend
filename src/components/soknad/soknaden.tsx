@@ -28,7 +28,16 @@ import { SoknadHeader } from './soknad-header'
 
 export const Soknaden = () => {
     const router = useRouter()
-    const { erUtenlandssoknad, stegId, stegNo, valgtSoknad, soknader, sykmeldinger, spmIndex } = useSoknadMedDetaljer()
+    const {
+        erUtenlandssoknad,
+        erInntektsopplysningerForNaringsdrivende,
+        stegId,
+        stegNo,
+        valgtSoknad,
+        soknader,
+        sykmeldinger,
+        spmIndex,
+    } = useSoknadMedDetaljer()
 
     useUpdateBreadcrumbs(() => [{ ...soknadBreadcrumb, handleInApp: true }], [])
 
@@ -82,7 +91,7 @@ export const Soknaden = () => {
             spørsmål: sporsmal?.tag,
         })
     }
-    const erForstesiden = stegNo === 1 && !erUtenlandssoknad
+    const erForstesiden = stegNo === 1 && !erUtenlandssoknad && !erInntektsopplysningerForNaringsdrivende
     const erForstesidenMedReisetilskudd = stegNo === 1 && (erReisetilskuddsoknad || erGradertReisetilskuddsoknad)
     return (
         <>

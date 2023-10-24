@@ -40,6 +40,7 @@ export function skapSporsmal(spm: RSSporsmal, kriterie: RSVisningskriterieType |
         tagIndex,
         spm.sporsmalstekst === null ? '' : spm.sporsmalstekst,
         spm.undertekst,
+        spm.tittel,
         spm.svartype as any as RSSvartype,
         spm.min,
         spm.max,
