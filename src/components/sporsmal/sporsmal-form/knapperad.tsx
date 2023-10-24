@@ -7,13 +7,11 @@ import { RSSoknadstype } from '../../../types/rs-types/rs-soknadstype'
 import { tekst } from '../../../utils/tekster'
 import AvbrytSoknadModal from '../../avbryt-soknad-modal/avbryt-soknad-modal'
 import AvsluttOgFortsettSenere from '../../avslutt-og-fortsett-senere/avslutt-og-fortsett-senere'
-import Vis from '../../vis'
 import { hentSporsmal } from '../../../utils/soknad-utils'
 import { useSoknadMedDetaljer } from '../../../hooks/useSoknadMedDetaljer'
-import { SlikBehandlerNavPersonopplysningene } from '../../soknad-intro/slik-behandler-nav-personopplysningene'
 
 const Knapperad = ({ poster }: { poster: boolean }) => {
-    const { erUtenlandssoknad, valgtSoknad: soknad, stegNo, sporsmal, spmIndex } = useSoknadMedDetaljer()
+    const { valgtSoknad: soknad, sporsmal, spmIndex } = useSoknadMedDetaljer()
 
     const { getValues } = useFormContext()
     const skalSkjuleKnapperad = () => {
@@ -63,15 +61,6 @@ const Knapperad = ({ poster }: { poster: boolean }) => {
 
             <AvsluttOgFortsettSenere />
             <AvbrytSoknadModal />
-            <Vis
-                hvis={stegNo === 1 && !erUtenlandssoknad}
-                render={() => (
-                    <>
-                        <hr className="my-4" />
-                        <SlikBehandlerNavPersonopplysningene />
-                    </>
-                )}
-            />
         </div>
     )
 }

@@ -20,6 +20,7 @@ import { FlexjarSporsmal } from '../flexjar/flexjar-sporsmal'
 import { useSoknadMedDetaljer } from '../../hooks/useSoknadMedDetaljer'
 import { useToggle } from '../../toggles/context'
 import { SkeletonSporsmalForm } from '../sporsmal/sporsmal-form/skeleton-sporsmal-form'
+import { SlikBehandlerNavPersonopplysningene } from '../soknad-intro/slik-behandler-nav-personopplysningene'
 
 import { urlTilSoknad } from './soknad-link'
 import { SporsmalTittel } from './sporsmal-tittel'
@@ -97,6 +98,7 @@ export const Soknaden = () => {
             {!erForstesiden && <SporsmalTittel />}
             {sporsmal && <SporsmalForm sporsmal={sporsmal} key={sporsmal?.id} />}
             {!sporsmal && <SkeletonSporsmalForm />}
+            {erForstesiden && !erUtenlandssoknad && <SlikBehandlerNavPersonopplysningene />}
             {flexjarToggle.enabled && <FlexjarSporsmal soknad={valgtSoknad} steg={stegNo} />}
         </>
     )
