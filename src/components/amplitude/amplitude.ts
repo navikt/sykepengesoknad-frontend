@@ -1,7 +1,6 @@
 import { logAmplitudeEvent } from '@navikt/nav-dekoratoren-moduler'
 import { logger } from '@navikt/next-logger'
 
-import { TagTyper } from '../../types/enums'
 import { Kvittering, Sporsmal } from '../../types/types'
 import { amplitudeEnabled } from '../../utils/environment'
 import { hentSvar } from '../sporsmal/hent-svar'
@@ -45,7 +44,7 @@ export const logEvent = (eventName: validEventNames, eventData: Record<string, s
 export const hentAnnonymisertSvar = (sporsmal: Sporsmal): any => {
     const hovedSpmSvar = hentSvar(sporsmal)
 
-    if (sporsmal.tag === TagTyper.KVITTERINGER) {
+    if (sporsmal.tag === 'KVITTERINGER') {
         return hovedSpmSvar.map((svar: Kvittering) => svar.typeUtgift)
     }
 

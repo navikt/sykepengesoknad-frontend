@@ -2,7 +2,6 @@ import React, { useEffect, useState } from 'react'
 import { FormProvider, useForm } from 'react-hook-form'
 import { useRouter } from 'next/router'
 
-import { TagTyper } from '../../../types/enums'
 import { RSSoknadstype } from '../../../types/rs-types/rs-soknadstype'
 import { RSSvartype } from '../../../types/rs-types/rs-svartype'
 import { Sporsmal } from '../../../types/types'
@@ -44,7 +43,7 @@ const SporsmalForm = () => {
         const snartSlutt =
             sporsmal?.svartype === RSSvartype.IKKE_RELEVANT || sporsmal?.svartype === RSSvartype.CHECKBOX_PANEL
         if (erUtenlandssoknad) {
-            return sporsmal?.tag === TagTyper.BEKREFT_OPPLYSNINGER_UTLAND_INFO
+            return sporsmal?.tag === 'BEKREFT_OPPLYSNINGER_UTLAND_INFO'
         }
         return snartSlutt && spmIndex + 2 === valgtSoknad?.sporsmal?.length
     }

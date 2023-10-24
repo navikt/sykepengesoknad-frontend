@@ -43,7 +43,6 @@ const rsSporsmalMapping = (sporsmal: Sporsmal): RSSporsmal => {
         return {
             id: svar.id,
             verdi: hentVerdi(),
-            avgittAv: svar.avgittAv,
         }
     })
     if (sporsmal.undersporsmal) {

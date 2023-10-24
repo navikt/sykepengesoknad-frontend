@@ -50,7 +50,6 @@ export const delvisUtfyltReisetilskudd: RSSoknad = {
             svar: [
                 {
                     verdi: 'CHECKED',
-                    avgittAv: null,
                 },
             ],
             undersporsmal: [],
@@ -68,7 +67,6 @@ export const delvisUtfyltReisetilskudd: RSSoknad = {
             svar: [
                 {
                     verdi: 'NEI',
-                    avgittAv: null,
                 },
             ],
             undersporsmal: [
@@ -142,7 +140,6 @@ export const delvisUtfyltReisetilskudd: RSSoknad = {
             svar: [
                 {
                     verdi: 'NEI',
-                    avgittAv: null,
                 },
             ],
             undersporsmal: [
@@ -227,7 +224,6 @@ export const delvisUtfyltReisetilskudd: RSSoknad = {
             svar: [
                 {
                     verdi: 'NEI',
-                    avgittAv: null,
                 },
             ],
             undersporsmal: [],

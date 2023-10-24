@@ -2,7 +2,7 @@ import { Alert, BodyShort, Radio, RadioGroup } from '@navikt/ds-react'
 import React, { Fragment } from 'react'
 import { Controller, useFormContext } from 'react-hook-form'
 
-import { SvarEnums, TagTyper } from '../../../types/enums'
+import { SvarEnums } from '../../../types/enums'
 import { getLedetekst, tekst } from '../../../utils/tekster'
 import AnimateOnMount from '../../animate-on-mount'
 import { utlandssoknadUrl } from '../../soknad/soknad-link'
@@ -29,7 +29,7 @@ const JaNeiLiten = ({ sporsmal }: SpmProps) => {
     const presisering = (valgt: boolean) => {
         const spm = sporsmal
         if (spm.tag && valgt) {
-            if (spm.tag === TagTyper.UTLANDSOPPHOLD_SOKT_SYKEPENGER) {
+            if (spm.tag === 'UTLANDSOPPHOLD_SOKT_SYKEPENGER') {
                 const utenlandsopphold =
                     watchJaNei === SvarEnums.JA
                         ? 'soknad.infotekst.utlandsopphold_sokt_sykepenger.ja'
@@ -96,7 +96,7 @@ const JaNeiLiten = ({ sporsmal }: SpmProps) => {
             </div>
 
             <Vis
-                hvis={sporsmal.tag === TagTyper.SYKMELDINGSGRAD && watchJaNei === 'NEI'}
+                hvis={sporsmal.tag === 'SYKMELDINGSGRAD' && watchJaNei === 'NEI'}
                 render={() => (
                     <ProgressivtGuidePanel className="mb-8">
                         <BodyShort>{parserWithReplace(tekst('sykepengesoknad-utland.skjema.bjorn'))}</BodyShort>
@@ -105,7 +105,7 @@ const JaNeiLiten = ({ sporsmal }: SpmProps) => {
             />
 
             <Vis
-                hvis={sporsmal.tag === TagTyper.FERIE && watchJaNei === 'JA'}
+                hvis={sporsmal.tag === 'FERIE' && watchJaNei === 'JA'}
                 render={() => (
                     <>
                         <ProgressivtGuidePanel className="mb-8">
@@ -123,7 +123,7 @@ const JaNeiLiten = ({ sporsmal }: SpmProps) => {
                 <AnimateOnMount
                     mounted={
                         watchJaNei === sporsmal.kriterieForVisningAvUndersporsmal &&
-                        sporsmal.tag !== TagTyper.UTLANDSOPPHOLD_SOKT_SYKEPENGER
+                        sporsmal.tag !== 'UTLANDSOPPHOLD_SOKT_SYKEPENGER'
                         // TODO: Dette er en fix for å ikke vise underspørsmål, fjern denne etter hvert
                     }
                     enter="undersporsmal--vis"

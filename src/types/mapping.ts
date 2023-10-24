@@ -3,7 +3,6 @@ import { dayjsToDate } from '../utils/dato-utils'
 import { RSSporsmal } from './rs-types/rs-sporsmal'
 import { RSVisningskriterieType } from './rs-types/rs-visningskriterie'
 import { RSSvartype } from './rs-types/rs-svartype'
-import { TagTyper } from './enums'
 import { Soknad, Sporsmal } from './types'
 import { RSSoknad } from './rs-types/rs-soknad'
 import { RSSoknadstype } from './rs-types/rs-soknadstype'
@@ -30,17 +29,14 @@ export function skapSporsmal(spm: RSSporsmal, kriterie: RSVisningskriterieType |
             return {
                 id: svar.id,
                 verdi: hentVerdi(),
-                avgittAv: svar.avgittAv,
             }
         }),
     }
     const undersporsmal = rsToSporsmal(spm.undersporsmal, spm.kriterieForVisningAvUndersporsmal, false)
 
-    const idtag = tag as keyof typeof TagTyper
-
     return new Sporsmal(
         spm.id,
-        TagTyper[idtag],
+        tag,
         tagIndex,
         spm.sporsmalstekst === null ? '' : spm.sporsmalstekst,
         spm.undertekst,
@@ -72,8 +68,8 @@ export function rsToSporsmal(
 
     if (
         sporsmals.length >= 2 &&
-        sporsmals[sporsmals.length - 1].tag === TagTyper.VAER_KLAR_OVER_AT &&
-        sporsmals[sporsmals.length - 2].tag === TagTyper.BEKREFT_OPPLYSNINGER
+        sporsmals[sporsmals.length - 1].tag === 'VAER_KLAR_OVER_AT' &&
+        sporsmals[sporsmals.length - 2].tag === 'BEKREFT_OPPLYSNINGER'
     ) {
         // Det finnes tilfeller opprettet i db før 15 Mai 2020 hvor disse er i "feil rekkefølge" Dette fikser sorteringa
         // Se også https://github.com/navikt/syfosoknad/commit/1983d32f3a7fb28bbf17126ea227d91589ad5f35

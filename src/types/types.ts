@@ -1,4 +1,3 @@
-import { TagTyper } from './enums'
 import { RSArbeidssituasjon } from './rs-types/rs-arbeidssituasjon'
 import { RSMerknad } from './rs-types/rs-merknad'
 import { RSSoknadsperiode } from './rs-types/rs-soknadsperiode'
@@ -51,7 +50,7 @@ export class Soknad extends ObjectCopier {
 export class Sporsmal extends ObjectCopier {
     constructor(
         readonly id: string,
-        readonly tag: TagTyper,
+        readonly tag: string,
         readonly tagIndex: number | undefined,
         readonly sporsmalstekst: string,
         readonly undertekst: string | null,

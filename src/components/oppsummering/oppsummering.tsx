@@ -1,7 +1,6 @@
 import React, { useState } from 'react'
 import { ExpansionCard, Heading } from '@navikt/ds-react'
 
-import { TagTyper } from '../../types/enums'
 import { RSSvartype } from '../../types/rs-types/rs-svartype'
 import { Sporsmal } from '../../types/types'
 import { tekst } from '../../utils/tekster'
@@ -125,10 +124,10 @@ export const SporsmalVarianter = ({ sporsmal }: OppsummeringProps) => {
 
 function skalVisesIOppsummering(sporsmal: Sporsmal) {
     switch (sporsmal.tag) {
-        case TagTyper.BEKREFT_OPPLYSNINGER:
-        case TagTyper.VAER_KLAR_OVER_AT:
-        case TagTyper.BEKREFT_OPPLYSNINGER_UTLAND_INFO:
-        case TagTyper.IKKE_SOKT_UTENLANDSOPPHOLD_INFORMASJON: {
+        case 'BEKREFT_OPPLYSNINGER':
+        case 'VAER_KLAR_OVER_AT':
+        case 'BEKREFT_OPPLYSNINGER_UTLAND_INFO':
+        case 'IKKE_SOKT_UTENLANDSOPPHOLD_INFORMASJON': {
             return false
         }
         default: {

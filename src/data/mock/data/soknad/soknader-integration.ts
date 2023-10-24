@@ -170,7 +170,6 @@ export const sendtArbeidsledigKvittering: RSSoknad = {
             svar: [
                 {
                     verdi: 'CHECKED',
-                    avgittAv: null,
                 },
             ],
             undersporsmal: [],
@@ -188,7 +187,6 @@ export const sendtArbeidsledigKvittering: RSSoknad = {
             svar: [
                 {
                     verdi: 'JA',
-                    avgittAv: null,
                 },
             ],
             undersporsmal: [
@@ -220,7 +218,6 @@ export const sendtArbeidsledigKvittering: RSSoknad = {
             svar: [
                 {
                     verdi: 'NEI',
-                    avgittAv: null,
                 },
             ],
             undersporsmal: [
@@ -455,7 +452,6 @@ export const sendtArbeidsledigKvittering: RSSoknad = {
             svar: [
                 {
                     verdi: 'NEI',
-                    avgittAv: null,
                 },
             ],
             undersporsmal: [
@@ -500,7 +496,6 @@ export const sendtArbeidsledigKvittering: RSSoknad = {
             svar: [
                 {
                     verdi: 'NEI',
-                    avgittAv: null,
                 },
             ],
             undersporsmal: [],
@@ -509,7 +504,6 @@ export const sendtArbeidsledigKvittering: RSSoknad = {
         bekreftOpplysninger([
             {
                 verdi: 'CHECKED',
-                avgittAv: null,
             },
         ]),
     ],
@@ -557,7 +551,6 @@ export const delvisUtfylltArbeidsledig: RSSoknad = {
             svar: [
                 {
                     verdi: 'CHECKED',
-                    avgittAv: null,
                 },
             ],
             undersporsmal: [],
@@ -575,7 +568,6 @@ export const delvisUtfylltArbeidsledig: RSSoknad = {
             svar: [
                 {
                     verdi: 'NEI',
-                    avgittAv: null,
                 },
             ],
             undersporsmal: [],

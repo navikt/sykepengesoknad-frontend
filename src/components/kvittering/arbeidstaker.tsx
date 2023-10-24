@@ -15,7 +15,6 @@ import useSoknader from '../../hooks/useSoknader'
 import { RSSoknadmetadata } from '../../types/rs-types/rs-soknadmetadata'
 import useSykmelding from '../../hooks/useSykmelding'
 import { mottakerSoknadQueryFn } from '../../hooks/useMottakerSoknad'
-import { TagTyper } from '../../types/enums'
 import { useSoknadMedDetaljer } from '../../hooks/useSoknadMedDetaljer'
 
 import Inntil16dager from './innhold/arbeidstaker/inntil16dager'
@@ -38,10 +37,10 @@ const Arbeidstaker = () => {
 
     const harSvartAndreInntektskilderSN =
         valgtSoknad?.sporsmal
-            ?.find((spm) => spm.tag === TagTyper.ANDRE_INNTEKTSKILDER_V2 && spm.svarliste.svar[0]?.verdi === 'JA')
-            ?.undersporsmal?.find((spm) => spm.tag === TagTyper.HVILKE_ANDRE_INNTEKTSKILDER)
+            ?.find((spm) => spm.tag === 'ANDRE_INNTEKTSKILDER_V2' && spm.svarliste.svar[0]?.verdi === 'JA')
+            ?.undersporsmal?.find((spm) => spm.tag === 'HVILKE_ANDRE_INNTEKTSKILDER')
             ?.undersporsmal?.find(
-                (spm) => spm.tag === TagTyper.INNTEKTSKILDE_SELVSTENDIG && spm.svarliste.svar[0]?.verdi === 'CHECKED',
+                (spm) => spm.tag === 'INNTEKTSKILDE_SELVSTENDIG' && spm.svarliste.svar[0]?.verdi === 'CHECKED',
             ) !== undefined
 
     const erInnenforArbeidsgiverperiode = () => {

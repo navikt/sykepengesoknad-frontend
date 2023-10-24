@@ -1,14 +1,13 @@
 import { Alert } from '@navikt/ds-react'
 import React from 'react'
 
-import { TagTyper } from '../../../types/enums'
 import { tilLesbarPeriodeMedArstall } from '../../../utils/dato-utils'
 import { Sporsmal } from '../../../types/types'
 
 import { TilbakeIArbeidBesvartHjeletekstTekster } from './tilbake-i-arbeid-besvart-hjeletekst-tekster'
 
 export function TilbakeIArbeidBesvart({ sporsmal, fieldValue }: { sporsmal: Sporsmal; fieldValue: any }) {
-    if (sporsmal.tag != TagTyper.TILBAKE_NAR || !fieldValue) {
+    if (sporsmal.tag != 'TILBAKE_NAR' || !fieldValue) {
         return null
     }
     return (

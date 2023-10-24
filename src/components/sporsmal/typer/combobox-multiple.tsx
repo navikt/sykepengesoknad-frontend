@@ -5,16 +5,15 @@ import { useMemo } from 'react'
 import { SpmProps } from '../sporsmal-form/sporsmal-form'
 import { landlisteEøs, landlisteUtenforEøs } from '../landliste'
 import { hentFeilmelding } from '../sporsmal-utils'
-import { TagTyper } from '../../../types/enums'
 
 const ComboboxMultiple = ({ sporsmal }: SpmProps) => {
     const feilmelding = hentFeilmelding(sporsmal)
 
     const options = useMemo(() => {
-        if (sporsmal.tag == TagTyper.LAND) {
+        if (sporsmal.tag == 'LAND') {
             return landlisteUtenforEøs
         }
-        if (sporsmal.tag == TagTyper.UTENLANDSK_SYKMELDING_TRYGD_HVILKET_LAND) {
+        if (sporsmal.tag == 'UTENLANDSK_SYKMELDING_TRYGD_HVILKET_LAND') {
             return landlisteEøs
         }
         throw new Error('Ugyldig tag for landvelger: ' + sporsmal.tag)

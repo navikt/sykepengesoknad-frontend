@@ -1,29 +1,29 @@
-import { TagTyper } from '../../types/enums'
 import { RSSvartype } from '../../types/rs-types/rs-svartype'
 import { Soknad, Sporsmal } from '../../types/types'
 import { flattenSporsmal } from '../../utils/soknad-utils'
 import { tekst } from '../../utils/tekster'
 import { veldigLangSoknad } from '../../data/mock/data/soknad/veldig-land-soknad'
 import { rsToSoknad } from '../../types/mapping'
+import { testpersoner } from '../../data/mock/testperson'
 
-import { fjernIndexFraTag, hentGeneriskFeilmelding } from './sporsmal-utils'
+import { hentGeneriskFeilmelding } from './sporsmal-utils'
 
 test('Alle tags har global feilmelding', () => {
-    let tags = Object.values(TagTyper)
+    let tags = kjenteTags
     let manglerFeilmelding = false
 
     tags = tags.filter((skipTag) => {
         return (
-            skipTag !== TagTyper.VAER_KLAR_OVER_AT && // Svartype: IKKE_RELEVANT
-            skipTag !== TagTyper.IKKE_SOKT_UTENLANDSOPPHOLD_INFORMASJON && // Svartype: IKKE_RELEVANT
-            skipTag !== TagTyper.BEKREFT_OPPLYSNINGER_UTLAND_INFO && // Svartype: IKKE_RELEVANT
-            skipTag !== TagTyper.MEDLEMSKAP_UTFORT_ARBEID_UTENFOR_NORGE_GRUPPERING && // Svartype: IKKE_RELEVANT
-            skipTag !== TagTyper.MEDLEMSKAP_OPPHOLD_UTENFOR_EOS_GRUPPERING && // Svartype: IKKE_RELEVANT
-            skipTag !== TagTyper.MEDLEMSKAP_OPPHOLD_UTENFOR_NORGE_GRUPPERING && // Svartype: IKKE_RELEVANT
-            skipTag !== TagTyper.ENKELTSTAENDE_BEHANDLINGSDAGER &&
-            skipTag !== TagTyper.INNTEKTSKILDE_SELVSTENDIG_VARIG_ENDRING_JA &&
-            skipTag !== TagTyper.INNTEKTSKILDE_SELVSTENDIG_VARIG_ENDRING_NEI &&
-            skipTag !== TagTyper.INNTEKTSKILDE_SELVSTENDIG_VARIG_ENDRING_VET_IKKE
+            skipTag !== 'VAER_KLAR_OVER_AT' && // Svartype: IKKE_RELEVANT
+            skipTag !== 'IKKE_SOKT_UTENLANDSOPPHOLD_INFORMASJON' && // Svartype: IKKE_RELEVANT
+            skipTag !== 'BEKREFT_OPPLYSNINGER_UTLAND_INFO' && // Svartype: IKKE_RELEVANT
+            skipTag !== 'MEDLEMSKAP_UTFORT_ARBEID_UTENFOR_NORGE_GRUPPERING' && // Svartype: IKKE_RELEVANT
+            skipTag !== 'MEDLEMSKAP_OPPHOLD_UTENFOR_EOS_GRUPPERING' && // Svartype: IKKE_RELEVANT
+            skipTag !== 'MEDLEMSKAP_OPPHOLD_UTENFOR_NORGE_GRUPPERING' && // Svartype: IKKE_RELEVANT
+            skipTag !== 'ENKELTSTAENDE_BEHANDLINGSDAGER' &&
+            skipTag !== 'INNTEKTSKILDE_SELVSTENDIG_VARIG_ENDRING_JA' &&
+            skipTag !== 'INNTEKTSKILDE_SELVSTENDIG_VARIG_ENDRING_NEI' &&
+            skipTag !== 'INNTEKTSKILDE_SELVSTENDIG_VARIG_ENDRING_VET_IKKE'
         ) // Svartype: INFO_BEHANDLINGSDAGER
     })
 
@@ -55,8 +55,8 @@ test('Alle svartyper har generiskfeilmelding', () => {
 
 test('Alle sporsmal tag ligger i veldigLangSoknad', () => {
     const soknad: Soknad = rsToSoknad(veldigLangSoknad)
-    const sporsmalTagsUtenIndex = hentAlleTagsUtenIndex(soknad.sporsmal)
-    const tagsSomSkalStottes = Object.values(TagTyper).filter((skipTag) => {
+    const sporsmalTagsUtenIndex = hentAlleTags(soknad.sporsmal)
+    const tagsSomSkalStottes = kjenteTags.filter((skipTag) => {
         // TODO: Sjekk at disse tagene fortsatt er i bruk, legg de inn i søknaden
         return (
             skipTag !== 'BETALER_ARBEIDSGIVER' && // Kan fjernes?
@@ -66,7 +66,6 @@ test('Alle sporsmal tag ligger i veldigLangSoknad', () => {
         ) // Kan bare inneholde en sisteside
     })
     let manglerTagsISoknad = false
-    let manglerTagsIKoden = false
 
     // Mangler tags i soknaden
     tagsSomSkalStottes.forEach((tag) => {
@@ -77,23 +76,193 @@ test('Alle sporsmal tag ligger i veldigLangSoknad', () => {
         }
     })
     expect(manglerTagsISoknad).toBeFalsy()
+})
+
+test('Alle sporsmal tag fra testdata ligger i kjenteTags', () => {
+    let manglerTagsIKoden = false
+
+    const testdataTags = new Set<string>()
+    const personer = testpersoner()
+    for (const g in personer) {
+        const persona = personer[g as keyof typeof personer]
+        if (persona) {
+            persona.soknader.forEach((soknad) => {
+                const soknadtags = hentAlleTags(rsToSoknad(soknad).sporsmal)
+
+                soknadtags.forEach((tag) => {
+                    testdataTags.add(tag)
+                })
+            })
+        }
+    }
 
     // Mangler tags i koden
-    sporsmalTagsUtenIndex.forEach((tag: any) => {
-        if (!tagsSomSkalStottes.includes(tag)) {
+    const kjenteTagsSet = new Set(kjenteTags)
+    testdataTags.forEach((tag) => {
+        if (!kjenteTagsSet.has(tag)) {
             // eslint-disable-next-line no-console
-            console.log(`Mangler sporsmal tag i TagTyper [ ${tag} ]`)
+            console.log(`Mangler sporsmal tag i kjenteTags [ ${tag} ]`)
             manglerTagsIKoden = true
         }
     })
     expect(manglerTagsIKoden).toBeFalsy()
 })
-
-const hentAlleTagsUtenIndex = (sporsmal: ReadonlyArray<Sporsmal>) => {
+const hentAlleTags = (sporsmal: ReadonlyArray<Sporsmal>): Set<string> => {
     const flatSoknad = flattenSporsmal(sporsmal)
-    const tags = new Set()
+    const tags = new Set<string>()
     flatSoknad.forEach((spm) => {
-        tags.add(fjernIndexFraTag(spm.tag))
+        tags.add(spm.tag)
     })
     return tags
 }
+
+const kjenteTags = [
+    'ANDRE_INNTEKTSKILDER',
+    'ANDRE_INNTEKTSKILDER_V2',
+    'ANSVARSERKLARING',
+    'ARBEID_UTENFOR_NORGE',
+    'ARBEIDSGIVER',
+    'ARBEIDSLEDIG_UTLAND',
+    'BEKREFT_OPPLYSNINGER',
+    'BEKREFT_OPPLYSNINGER_UTLAND',
+    'BEKREFT_OPPLYSNINGER_UTLAND_INFO',
+    'BETALER_ARBEIDSGIVER',
+    'EGENMELDINGER',
+    'EGENMELDINGER_NAR',
+    'FRAVAR_FOR_SYKMELDINGEN',
+    'FRAVAR_FOR_SYKMELDINGEN_NAR',
+    'ENKELTSTAENDE_BEHANDLINGSDAGER',
+    'ENKELTSTAENDE_BEHANDLINGSDAGER_UKE',
+    'FERIE',
+    'FERIE_NAR',
+    'FERIE_NAR_V2',
+    'FERIE_PERMISJON_UTLAND',
+    'FERIE_PERMISJON_UTLAND_HVA',
+    'FERIE_V2',
+    'FRAVER_FOR_BEHANDLING',
+    'FRISKMELDT',
+    'FRISKMELDT_START',
+    'FULLTIDSSTUDIUM',
+    'HVILKE_ANDRE_INNTEKTSKILDER',
+    'HVOR_MANGE_TIMER',
+    'HVOR_MANGE_TIMER_PER_UKE',
+    'HVOR_MYE_HAR_DU_JOBBET',
+    'HVOR_MYE_PROSENT',
+    'HVOR_MYE_PROSENT_VERDI',
+    'HVOR_MYE_TIMER',
+    'HVOR_MYE_TIMER_VERDI',
+    'IKKE_SOKT_UTENLANDSOPPHOLD_INFORMASJON',
+    'INNTEKTSKILDE_ANDRE_ARBEIDSFORHOLD',
+    'INNTEKTSKILDE_ANDRE_ARBEIDSFORHOLD_JOBBET_I_DET_SISTE',
+    'INNTEKTSKILDE_ANDRE_ARBEIDSFORHOLD_ER_DU_SYKMELDT',
+    'INNTEKTSKILDE_ANNET',
+    'INNTEKTSKILDE_ARBEIDSFORHOLD',
+    'INNTEKTSKILDE_ARBEIDSFORHOLD_ER_DU_SYKMELDT',
+    'INNTEKTSKILDE_FOSTERHJEM',
+    'INNTEKTSKILDE_FOSTERHJEM_ER_DU_SYKMELDT',
+    'INNTEKTSKILDE_FRILANSER',
+    'INNTEKTSKILDE_FRILANSER_ER_DU_SYKMELDT',
+    'INNTEKTSKILDE_FRILANSER_SELVSTENDIG',
+    'INNTEKTSKILDE_FRILANSER_SELVSTENDIG_ER_DU_SYKMELDT',
+    'INNTEKTSKILDE_JORDBRUKER',
+    'INNTEKTSKILDE_JORDBRUKER_ER_DU_SYKMELDT',
+    'INNTEKTSKILDE_OMSORGSLONN',
+    'INNTEKTSKILDE_OMSORGSLONN_ER_DU_SYKMELDT',
+    'INNTEKTSKILDE_SELVSTENDIG',
+    'INNTEKTSKILDE_SELVSTENDIG_4_AR',
+    'INNTEKTSKILDE_SELVSTENDIG_N_AR',
+    'INNTEKTSKILDE_SELVSTENDIG_VARIG_ENDRING_GRUPPE',
+    'INNTEKTSKILDE_SELVSTENDIG_VARIG_ENDRING_JA',
+    'INNTEKTSKILDE_SELVSTENDIG_VARIG_ENDRING_NEI',
+    'INNTEKTSKILDE_SELVSTENDIG_VARIG_ENDRING_VET_IKKE',
+    'INNTEKTSKILDE_SELVSTENDIG_DAGMAMMA',
+    'INNTEKTSKILDE_SELVSTENDIG_DAGMAMMA_ER_DU_SYKMELDT',
+    'INNTEKTSKILDE_SELVSTENDIG_ER_DU_SYKMELDT',
+    'INNTEKTSKILDE_STYREVERV',
+    'JOBBET_DU_100_PROSENT',
+    'ARBEID_UNDERVEIS_100_PROSENT',
+    'JOBBET_DU_GRADERT',
+    'JOBBER_DU_NORMAL_ARBEIDSUKE',
+    'LAND',
+    'PAPIRSYKMELDING_NAR',
+    'PERIODER',
+    'PERIODEUTLAND',
+    'PERMISJON',
+    'PERMISJON_NAR',
+    'PERMISJON_NAR_V2',
+    'PERMISJON_V2',
+    'PERMITTERT_NAA',
+    'PERMITTERT_NAA_NAR',
+    'PERMITTERT_PERIODE',
+    'PERMITTERT_PERIODE_NAR',
+    'SYKMELDINGSGRAD',
+    'TIDLIGERE_EGENMELDING',
+    'TIDLIGERE_PAPIRSYKMELDING',
+    'TIDLIGERE_SYK',
+    'TILBAKE_I_ARBEID',
+    'TILBAKE_NAR',
+    'UTDANNING',
+    'UTDANNING_START',
+    'UTLAND',
+    'UTLANDSOPPHOLD_SOKT_SYKEPENGER',
+    'UTLAND_NAR',
+    'UTLAND_NAR_V2',
+    'UTLAND_V2',
+    'VAER_KLAR_OVER_AT',
+    'BRUKTE_REISETILSKUDDET',
+    'TRANSPORT_TIL_DAGLIG',
+    'TYPE_TRANSPORT',
+    'BIL_TIL_DAGLIG',
+    'KM_HJEM_JOBB',
+    'OFFENTLIG_TRANSPORT_TIL_DAGLIG',
+    'OFFENTLIG_TRANSPORT_BELOP',
+    'REISE_MED_BIL',
+    'BIL_DATOER',
+    'BIL_BOMPENGER',
+    'BIL_BOMPENGER_BELOP',
+    'KVITTERINGER',
+    'UTBETALING',
+    'UTENLANDSK_SYKMELDING_BOSTED',
+    'UTENLANDSK_SYKMELDING_CO',
+    'UTENLANDSK_SYKMELDING_VEGNAVN',
+    'UTENLANDSK_SYKMELDING_BYGNING',
+    'UTENLANDSK_SYKMELDING_BY',
+    'UTENLANDSK_SYKMELDING_REGION',
+    'UTENLANDSK_SYKMELDING_LAND',
+    'UTENLANDSK_SYKMELDING_TELEFONNUMMER',
+    'UTENLANDSK_SYKMELDING_GYLDIGHET_ADRESSE',
+    'UTENLANDSK_SYKMELDING_LONNET_ARBEID_UTENFOR_NORGE',
+    'UTENLANDSK_SYKMELDING_LONNET_ARBEID_UTENFOR_NORGE_FRITEKST',
+    'UTENLANDSK_SYKMELDING_TRYGD_UTENFOR_NORGE',
+    'UTENLANDSK_SYKMELDING_TRYGD_HVILKET_LAND',
+    'YRKESSKADE',
+    'YRKESSKADE_V2',
+    'YRKESSKADE_V2_VELG_DATO',
+    'YRKESSKADE_V2_DATO',
+    'YRKESSKADE_SAMMENHENG',
+    'MEDLEMSKAP_OPPHOLDSTILLATELSE',
+    'MEDLEMSKAP_OPPHOLDSTILLATELSE_VEDTAKSDATO',
+    'MEDLEMSKAP_OPPHOLDSTILLATELSE_PERMANENT',
+    'MEDLEMSKAP_OPPHOLDSTILLATELSE_PERIODE',
+    'MEDLEMSKAP_UTFORT_ARBEID_UTENFOR_NORGE',
+    'MEDLEMSKAP_UTFORT_ARBEID_UTENFOR_NORGE_GRUPPERING',
+    'MEDLEMSKAP_UTFORT_ARBEID_UTENFOR_NORGE_ARBEIDSGIVER',
+    'MEDLEMSKAP_UTFORT_ARBEID_UTENFOR_NORGE_HVOR',
+    'MEDLEMSKAP_UTFORT_ARBEID_UTENFOR_NORGE_NAAR',
+    'MEDLEMSKAP_OPPHOLD_UTENFOR_NORGE',
+    'MEDLEMSKAP_OPPHOLD_UTENFOR_NORGE_GRUPPERING',
+    'MEDLEMSKAP_OPPHOLD_UTENFOR_NORGE_HVOR',
+    'MEDLEMSKAP_OPPHOLD_UTENFOR_NORGE_BEGRUNNELSE',
+    'MEDLEMSKAP_OPPHOLD_UTENFOR_NORGE_BEGRUNNELSE_STUDIE',
+    'MEDLEMSKAP_OPPHOLD_UTENFOR_NORGE_BEGRUNNELSE_FERIE',
+    'MEDLEMSKAP_OPPHOLD_UTENFOR_NORGE_BEGRUNNELSE_FORSORG',
+    'MEDLEMSKAP_OPPHOLD_UTENFOR_NORGE_NAAR',
+    'MEDLEMSKAP_OPPHOLD_UTENFOR_EOS',
+    'MEDLEMSKAP_OPPHOLD_UTENFOR_EOS_GRUPPERING',
+    'MEDLEMSKAP_OPPHOLD_UTENFOR_EOS_HVOR',
+    'MEDLEMSKAP_OPPHOLD_UTENFOR_EOS_BEGRUNNELSE',
+    'MEDLEMSKAP_OPPHOLD_UTENFOR_EOS_BEGRUNNELSE_STUDIE',
+    'MEDLEMSKAP_OPPHOLD_UTENFOR_EOS_BEGRUNNELSE_FERIE',
+    'MEDLEMSKAP_OPPHOLD_UTENFOR_EOS_BEGRUNNELSE_FORSORG',
+    'MEDLEMSKAP_OPPHOLD_UTENFOR_EOS_NAAR',
+]

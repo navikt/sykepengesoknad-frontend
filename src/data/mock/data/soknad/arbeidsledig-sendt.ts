@@ -42,7 +42,7 @@ export const sendtArbeidsledig: RSSoknad = {
             max: null,
             pavirkerAndreSporsmal: false,
             kriterieForVisningAvUndersporsmal: null,
-            svar: [{ verdi: 'CHECKED', avgittAv: null }],
+            svar: [{ verdi: 'CHECKED' }],
             undersporsmal: [],
         },
         {
@@ -55,7 +55,7 @@ export const sendtArbeidsledig: RSSoknad = {
             max: null,
             pavirkerAndreSporsmal: false,
             kriterieForVisningAvUndersporsmal: 'NEI',
-            svar: [{ verdi: 'JA', avgittAv: null }],
+            svar: [{ verdi: 'JA' }],
             undersporsmal: [
                 {
                     id: '48',
@@ -82,7 +82,7 @@ export const sendtArbeidsledig: RSSoknad = {
             max: null,
             pavirkerAndreSporsmal: false,
             kriterieForVisningAvUndersporsmal: 'JA',
-            svar: [{ verdi: 'NEI', avgittAv: null }],
+            svar: [{ verdi: 'NEI' }],
             undersporsmal: [
                 {
                     id: '50',
@@ -312,7 +312,7 @@ export const sendtArbeidsledig: RSSoknad = {
             max: null,
             pavirkerAndreSporsmal: false,
             kriterieForVisningAvUndersporsmal: 'JA',
-            svar: [{ verdi: 'NEI', avgittAv: null }],
+            svar: [{ verdi: 'NEI' }],
             undersporsmal: [
                 {
                     id: '70',
@@ -352,7 +352,7 @@ export const sendtArbeidsledig: RSSoknad = {
             max: null,
             pavirkerAndreSporsmal: false,
             kriterieForVisningAvUndersporsmal: null,
-            svar: [{ verdi: 'NEI', avgittAv: null }],
+            svar: [{ verdi: 'NEI' }],
             undersporsmal: [],
         },
         værKlarOverAt(),

@@ -6,14 +6,13 @@ import { RSSvartype } from '../../../types/rs-types/rs-svartype'
 import { tekst } from '../../../utils/tekster'
 import Vis from '../../vis'
 import { OppsummeringProps } from '../oppsummering'
-import { fjernIndexFraTag } from '../../sporsmal/sporsmal-utils'
 
 const TallSum = ({ sporsmal }: OppsummeringProps) => {
     let labelnokkel = ''
 
-    if (fjernIndexFraTag(sporsmal.tag) === 'HVOR_MANGE_TIMER_PER_UKE') {
+    if (sporsmal.tag === 'HVOR_MANGE_TIMER_PER_UKE') {
         labelnokkel = 'oppsummering.timer'
-    } else if (fjernIndexFraTag(sporsmal.tag) === 'HVOR_MYE_TIMER_VERDI') {
+    } else if (sporsmal.tag === 'HVOR_MYE_TIMER_VERDI') {
         labelnokkel = 'oppsummering.timer-totalt'
     } else {
         switch (sporsmal.svartype) {

@@ -1,12 +1,10 @@
 import { BodyLong, ReadMore } from '@navikt/ds-react'
 import React, { useEffect, useState } from 'react'
 
-import { TagTyper } from '../../../types/enums'
 import { RSArbeidssituasjon } from '../../../types/rs-types/rs-arbeidssituasjon'
 import { RSSoknadstype } from '../../../types/rs-types/rs-soknadstype'
 import { tekst } from '../../../utils/tekster'
 import { SpmProps } from '../../sporsmal/sporsmal-form/sporsmal-form'
-import { fjernIndexFraTag } from '../../sporsmal/sporsmal-utils'
 import { logEvent } from '../../amplitude/amplitude'
 import { parserWithReplace } from '../../../utils/html-react-parser-utils'
 import { useSoknadMedDetaljer } from '../../../hooks/useSoknadMedDetaljer'
@@ -42,26 +40,17 @@ export const EkspanderbarHjelp = ({ sporsmal }: SpmProps) => {
     if (!valgtSoknad) return null
 
     const skapNokkel = () => {
-        if (
-            sporsmal.tag == TagTyper.TILBAKE_I_ARBEID &&
-            valgtSoknad.soknadstype == RSSoknadstype.GRADERT_REISETILSKUDD
-        ) {
+        if (sporsmal.tag == 'TILBAKE_I_ARBEID' && valgtSoknad.soknadstype == RSSoknadstype.GRADERT_REISETILSKUDD) {
             return 'TILBAKE_I_ARBEID_GRADERT_REISETILSKUDD'
         }
-        if (
-            fjernIndexFraTag(sporsmal.tag) == TagTyper.JOBBET_DU_GRADERT &&
-            valgtSoknad.arbeidssituasjon == RSArbeidssituasjon.ARBEIDSTAKER
-        ) {
+        if (sporsmal.tag == 'JOBBET_DU_GRADERT' && valgtSoknad.arbeidssituasjon == RSArbeidssituasjon.ARBEIDSTAKER) {
             return 'JOBBET_DU_GRADERT_ARBEIDSTAKER'
         }
-        if (
-            sporsmal.tag == TagTyper.ANDRE_INNTEKTSKILDER &&
-            valgtSoknad.arbeidssituasjon == RSArbeidssituasjon.FRILANSER
-        ) {
+        if (sporsmal.tag == 'ANDRE_INNTEKTSKILDER' && valgtSoknad.arbeidssituasjon == RSArbeidssituasjon.FRILANSER) {
             // Hjelpeteksten er ikke kompatibel med svaralternativene for frilanser
             return null
         }
-        return fjernIndexFraTag(sporsmal.tag)
+        return sporsmal.tag
     }
 
     const nokkel = skapNokkel()
@@ -69,39 +58,39 @@ export const EkspanderbarHjelp = ({ sporsmal }: SpmProps) => {
 
     const EkspanderbarInnhold = () => {
         switch (sporsmal.tag) {
-            case TagTyper.TILBAKE_I_ARBEID:
+            case 'TILBAKE_I_ARBEID':
                 return <TilbakeIArbeidHjelpBody />
-            case TagTyper.YRKESSKADE:
+            case 'YRKESSKADE':
                 return <DeprecatedYrkesskadeHjelpBody />
-            case TagTyper.YRKESSKADE_V2:
+            case 'YRKESSKADE_V2':
                 return <YrkesskadeHjelpBody />
-            case TagTyper.FERIE_V2:
+            case 'FERIE_V2':
                 return <FerieHjelpBody />
-            case TagTyper.ANDRE_INNTEKTSKILDER_V2:
+            case 'ANDRE_INNTEKTSKILDER_V2':
                 return <AndreInntektskilderHjelpBody />
-            case TagTyper.PERMISJON_V2:
+            case 'PERMISJON_V2':
                 return <PermisjonHjelpBody />
-            case TagTyper.UTLAND_V2:
+            case 'UTLAND_V2':
                 return <UtlandHjelpBody />
-            case TagTyper.ARBEID_UNDERVEIS_100_PROSENT:
+            case 'ARBEID_UNDERVEIS_100_PROSENT':
                 return <ArbeidUnderveisHjelpBody />
-            case TagTyper.ARBEID_UTENFOR_NORGE:
+            case 'ARBEID_UTENFOR_NORGE':
                 return <ArbeidUtenforNorgeHjelpBody />
-            case TagTyper.FRAVAR_FOR_SYKMELDINGEN:
+            case 'FRAVAR_FOR_SYKMELDINGEN':
                 return <FravarForSykmeldingenHjelpBody />
-            case TagTyper.JOBBET_DU_GRADERT:
+            case 'JOBBET_DU_GRADERT':
                 return <JobbetDuGradertArbeidstakerHjelpBody />
-            case TagTyper.BRUKTE_REISETILSKUDDET:
+            case 'BRUKTE_REISETILSKUDDET':
                 return <BrukteReisetilskuddetHjelpBody />
-            case TagTyper.KVITTERINGER:
+            case 'KVITTERINGER':
                 return <KvitteringerHjelpBody />
-            case TagTyper.INNTEKTSKILDE_SELVSTENDIG_VARIG_ENDRING_GRUPPE:
+            case 'INNTEKTSKILDE_SELVSTENDIG_VARIG_ENDRING_GRUPPE':
                 return <EndringSNHjelpBody />
-            case TagTyper.MEDLEMSKAP_OPPHOLD_UTENFOR_EOS:
+            case 'MEDLEMSKAP_OPPHOLD_UTENFOR_EOS':
                 return <MedlemskapOppholdUtenforEOSHjelpBody />
-            case TagTyper.MEDLEMSKAP_OPPHOLD_UTENFOR_NORGE:
+            case 'MEDLEMSKAP_OPPHOLD_UTENFOR_NORGE':
                 return <MedlemskapOppholdUtenforNorgeHjelpBody />
-            case TagTyper.MEDLEMSKAP_UTFORT_ARBEID_UTENFOR_NORGE:
+            case 'MEDLEMSKAP_UTFORT_ARBEID_UTENFOR_NORGE':
                 return <MedlemskapArbeidUtenforNorgeHjelpBody />
             default:
                 if (harInnhold) {
