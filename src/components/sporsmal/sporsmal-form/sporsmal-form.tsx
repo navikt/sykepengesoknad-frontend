@@ -36,8 +36,24 @@ export interface SpmProps {
 
 const SporsmalForm = () => {
     const router = useRouter()
-    const { erUtenlandssoknad, valgtSoknad, sporsmal, spmIndex } = useSoknadMedDetaljer()
     const testpersonQuery = useTestpersonQuery()
+    const { erUtenlandssoknad, valgtSoknad, sporsmal, spmIndex } = useSoknadMedDetaljer()
+    const { data: korrigerer } = useSoknad(valgtSoknad?.korrigerer, valgtSoknad?.korrigerer !== undefined)
+    const { mutate: sendSoknadMutation, isLoading: senderSoknad, error: sendError } = useSendSoknad()
+    const {
+        mutate: oppdaterSporsmalMutation,
+        isLoading: oppdatererSporsmal,
+        error: oppdaterError,
+    } = useOppdaterSporsmal()
+
+    const [endringUtenEndringAapen, setEndringUtenEndringAapen] = useState<boolean>(false)
+    const methods = useForm({
+        mode: 'onSubmit',
+        reValidateMode: 'onChange',
+        shouldUnregister: true,
+        // TODO: Sporsmal kan ikke være undefined
+        defaultValues: hentFormState(sporsmal!),
+    })
 
     const erSisteSpm = () => {
         const snartSlutt =
@@ -48,38 +64,8 @@ const SporsmalForm = () => {
         return snartSlutt && spmIndex + 2 === valgtSoknad?.sporsmal?.length
     }
 
-    const { mutate: sendSoknadMutation, isLoading: senderSoknad, error: sendError } = useSendSoknad()
-
-    const {
-        mutate: oppdaterSporsmalMutation,
-        isLoading: oppdatererSporsmal,
-        error: oppdaterError,
-    } = useOppdaterSporsmal()
-
-    const { data: korrigerer } = useSoknad(valgtSoknad?.korrigerer, valgtSoknad?.korrigerer !== undefined)
-
     const erSiste = erSisteSpm()
-    const [endringUtenEndringAapen, setEndringUtenEndringAapen] = useState<boolean>(false)
-    const methods = useForm({
-        mode: 'onSubmit',
-        reValidateMode: 'onChange',
-        shouldUnregister: true,
-    })
     const nesteSporsmal = valgtSoknad?.sporsmal[spmIndex + 1]
-
-    useEffect(() => {
-        if (sporsmal) methods.reset(hentFormState(sporsmal), { keepValues: false })
-        // Resetter formen når spørsmålet endrer seg
-        // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [sporsmal])
-
-    useEffect(() => {
-        if (methods.formState.isSubmitSuccessful && sporsmal) {
-            methods.reset(hentFormState(sporsmal), { keepValues: false })
-        }
-        // resetter formen når den har blitt submittet
-        // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [methods.formState.isSubmitSuccessful])
 
     const sendSoknad = () => {
         if (!valgtSoknad) return
@@ -141,6 +127,15 @@ const SporsmalForm = () => {
             })
         })
     }
+
+    useEffect(() => {
+        // eslint-disable-next-line no-console
+        console.log('Sporsmal Form mount')
+        return () => {
+            // eslint-disable-next-line no-console
+            console.log('Sporsmal Form un-mount')
+        }
+    }, [])
 
     return (
         <>
