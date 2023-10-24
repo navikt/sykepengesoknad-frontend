@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useState } from 'react'
 import { FormProvider, useForm } from 'react-hook-form'
 import { useRouter } from 'next/router'
 
@@ -25,7 +25,6 @@ import { useTestpersonQuery } from '../../../hooks/useTestpersonQuery'
 import { useOppdaterSporsmal } from '../../../hooks/useOppdaterSporsmal'
 import { FeilStateView } from '../../feil/refresh-hvis-feil-state'
 import { useSoknadMedDetaljer } from '../../../hooks/useSoknadMedDetaljer'
-import { SkeletonSporsmal } from '../skeleton-sporsmal'
 
 import Knapperad from './knapperad'
 import SendesTil from './sendes-til'
@@ -34,10 +33,10 @@ export interface SpmProps {
     sporsmal: Sporsmal
 }
 
-const SporsmalForm = () => {
+const SporsmalForm = ({ sporsmal }: SpmProps) => {
     const router = useRouter()
     const testpersonQuery = useTestpersonQuery()
-    const { erUtenlandssoknad, valgtSoknad, sporsmal, spmIndex } = useSoknadMedDetaljer()
+    const { erUtenlandssoknad, valgtSoknad, spmIndex } = useSoknadMedDetaljer()
     const { data: korrigerer } = useSoknad(valgtSoknad?.korrigerer, valgtSoknad?.korrigerer !== undefined)
     const { mutate: sendSoknadMutation, isLoading: senderSoknad, error: sendError } = useSendSoknad()
     const {
@@ -51,15 +50,14 @@ const SporsmalForm = () => {
         mode: 'onSubmit',
         reValidateMode: 'onChange',
         shouldUnregister: true,
-        // TODO: Sporsmal kan ikke være undefined
-        defaultValues: hentFormState(sporsmal!),
+        defaultValues: hentFormState(sporsmal),
     })
 
     const erSisteSpm = () => {
         const snartSlutt =
-            sporsmal?.svartype === RSSvartype.IKKE_RELEVANT || sporsmal?.svartype === RSSvartype.CHECKBOX_PANEL
+            sporsmal.svartype === RSSvartype.IKKE_RELEVANT || sporsmal.svartype === RSSvartype.CHECKBOX_PANEL
         if (erUtenlandssoknad) {
-            return sporsmal?.tag === 'BEKREFT_OPPLYSNINGER_UTLAND_INFO'
+            return sporsmal.tag === 'BEKREFT_OPPLYSNINGER_UTLAND_INFO'
         }
         return snartSlutt && spmIndex + 2 === valgtSoknad?.sporsmal?.length
     }
@@ -128,15 +126,6 @@ const SporsmalForm = () => {
         })
     }
 
-    useEffect(() => {
-        // eslint-disable-next-line no-console
-        console.log('Sporsmal Form mount')
-        return () => {
-            // eslint-disable-next-line no-console
-            console.log('Sporsmal Form un-mount')
-        }
-    }, [])
-
     return (
         <>
             <EndringUtenEndringModal aapen={endringUtenEndringAapen} setAapen={setEndringUtenEndringAapen} />
@@ -148,8 +137,7 @@ const SporsmalForm = () => {
                 >
                     <GuidepanelOverSporsmalstekst />
 
-                    {sporsmal && <SporsmalSwitch sporsmal={sporsmal} sporsmalIndex={0} erSisteSporsmal={erSiste} />}
-                    {!sporsmal && <SkeletonSporsmal />}
+                    <SporsmalSwitch sporsmal={sporsmal} sporsmalIndex={0} erSisteSporsmal={erSiste} />
 
                     {erSiste && !erUtenlandssoknad && valgtSoknad && nesteSporsmal && (
                         <>
@@ -168,7 +156,7 @@ const SporsmalForm = () => {
                     )}
 
                     {(valgtSoknad?.soknadstype === RSSoknadstype.REISETILSKUDD &&
-                        sporsmal?.svartype !== RSSvartype.KVITTERING) ||
+                        sporsmal.svartype !== RSSvartype.KVITTERING) ||
                         (valgtSoknad?.soknadstype !== RSSoknadstype.REISETILSKUDD && (
                             <FeilOppsummering valgtSoknad={valgtSoknad!} sporsmal={sporsmal!} sendError={sendError} />
                         ))}

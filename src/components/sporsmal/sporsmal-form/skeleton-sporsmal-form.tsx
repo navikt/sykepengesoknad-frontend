@@ -1,9 +1,9 @@
 import { Label, Skeleton } from '@navikt/ds-react'
 import React from 'react'
 
-import { useSoknadMedDetaljer } from '../../hooks/useSoknadMedDetaljer'
+import { useSoknadMedDetaljer } from '../../../hooks/useSoknadMedDetaljer'
 
-export const SkeletonSporsmal = () => {
+export const SkeletonSporsmalForm = () => {
     const { stegNo } = useSoknadMedDetaljer()
 
     if (stegNo == 1) {
