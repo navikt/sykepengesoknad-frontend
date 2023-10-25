@@ -138,7 +138,7 @@ describe('Teste førsteside i reisetilskuddsøknaden', () => {
         })
 
         it('Legger inn taxi kvittering', () => {
-            cy.get('button').contains('Legg til reiseutgift').click()
+            cy.get('button').contains('Legg til dokumentasjon').click()
             cy.get('select[name=transportmiddel]').select('TAXI')
             cy.get('#transportmiddel').contains('Taxi')
 
@@ -176,17 +176,17 @@ describe('Teste førsteside i reisetilskuddsøknaden', () => {
         })
 
         it('Åpner og lukker modal', () => {
-            cy.get('body').findByRole('dialog', { name: 'Legg til reiseutgift' }).should('not.exist')
+            cy.get('body').findByRole('dialog', { name: 'Legg til dokumentasjon' }).should('not.exist')
 
-            cy.get('button').contains('Legg til reiseutgift').click()
-            cy.get('body').findByRole('dialog', { name: 'Legg til reiseutgift' }).should('have.attr', 'open')
+            cy.get('button').contains('Legg til dokumentasjon').click()
+            cy.get('body').findByRole('dialog', { name: 'Legg til dokumentasjon' }).should('have.attr', 'open')
             cy.get('.navds-modal').contains('Tilbake').click()
-            cy.get('body').findByRole('dialog', { name: 'Legg til reiseutgift' }).should('not.exist')
+            cy.get('body').findByRole('dialog', { name: 'Legg til dokumentasjon' }).should('not.exist')
         })
 
         it('Feilmeldinger når ingenting er valgt', () => {
             modalIkkeAktiv()
-            cy.get('button').contains('Legg til reiseutgift').click()
+            cy.get('button').contains('Legg til dokumentasjon').click()
             modalAktiv()
 
             cy.get('.navds-modal').contains('Bekreft').should('be.visible').click()
@@ -201,13 +201,13 @@ describe('Teste førsteside i reisetilskuddsøknaden', () => {
         describe('Transportmiddel feilmeldinger', () => {
             it('Ugyldig valg', () => {
                 modalIkkeAktiv()
-                cy.get('button').should('be.visible').contains('Legg til reiseutgift').click()
+                cy.get('button').should('be.visible').contains('Legg til dokumentasjon').click()
                 modalAktiv()
 
                 cy.get('select[name=transportmiddel]').should('be.visible').select('')
                 cy.get('.navds-modal').contains('Bekreft').should('be.visible').click()
                 modalAktiv()
-                cy.get('body').findByRole('dialog', { name: 'Legg til reiseutgift' }).should('have.attr', 'open')
+                cy.get('body').findByRole('dialog', { name: 'Legg til dokumentasjon' }).should('have.attr', 'open')
                 cy.get('[data-cy="opplasting-form"]').contains('Du må velge transportmiddel').should('be.visible')
             })
 

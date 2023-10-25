@@ -1,4 +1,4 @@
-import { BodyShort, Button, Label, Modal } from '@navikt/ds-react'
+import { Alert, BodyShort, Button, Label, List, Modal } from '@navikt/ds-react'
 import React, { useState } from 'react'
 
 import { tekst } from '../../../utils/tekster'
@@ -22,7 +22,22 @@ const Opplasting = ({ sporsmal }: SpmProps) => {
             <Label as="h2">{sporsmal.sporsmalstekst}</Label>
 
             <EkspanderbarHjelp sporsmal={sporsmal} />
-
+            <Alert variant="info" className="mb-4">
+                Vi trenger dokumentasjon for inntekt etter endringen. Du kan velge å legge ved dokumentene under eller
+                gjøre det senere. Under kan du sende følgende dokumentasjon:
+                <List>
+                    <List.Item>
+                        <BodyShort>Momsregnskap</BodyShort>
+                    </List.Item>
+                    <List.Item>
+                        <BodyShort>Skatteoppgjør</BodyShort>
+                    </List.Item>
+                    <List.Item>
+                        <BodyShort>Regnskap</BodyShort>
+                    </List.Item>
+                </List>
+                Husk på at søknaden ikke blir behandlet før all dokumentasjon er sendt inn.
+            </Alert>
             <Button type="button" variant="secondary" className="w-full p-8" onClick={aktiverModal}>
                 <BodyShort>{tekst('opplasting.legg-til')}</BodyShort>
             </Button>

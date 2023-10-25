@@ -1,10 +1,10 @@
 const OpplastingTekster = {
     'opplasting.her-kan': 'Last opp kvitteringer for reiseutgifter til og fra jobben fra %DATOER%.',
-    'opplasting.legg-til': 'Legg til reiseutgift',
+    'opplasting.legg-til': 'Legg til dokumentasjon',
     'opplasting.hjelpetekst':
         'Her skal du laste opp kvitteringer for transport du har brukt for å komme deg til jobb i  sykmeldingsperioden. Er du usikker på hvilken periode dette gjelder, kan du finne det under "Opplysninger om sykmeldingen" øverst på siden.',
     'opplasting_modal.tittel': 'Beløp',
-    'opplasting_modal.nytt-utlegg.tittel': 'Legg til reiseutgift',
+    'opplasting_modal.nytt-utlegg.tittel': 'Legg til dokumentasjon',
     'opplasting_modal.endre-utlegg.tittel': 'Endre reiseutgift',
     'opplasting_modal.belop.feilmelding': 'Du må skrive inn beløp',
     'opplasting_modal.dato': 'Dato for utgift',
