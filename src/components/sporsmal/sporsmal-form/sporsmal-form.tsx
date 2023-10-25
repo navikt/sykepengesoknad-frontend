@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useState } from 'react'
 import { FormProvider, useForm } from 'react-hook-form'
 import { useRouter } from 'next/router'
 
@@ -25,7 +25,6 @@ import { useTestpersonQuery } from '../../../hooks/useTestpersonQuery'
 import { useOppdaterSporsmal } from '../../../hooks/useOppdaterSporsmal'
 import { FeilStateView } from '../../feil/refresh-hvis-feil-state'
 import { useSoknadMedDetaljer } from '../../../hooks/useSoknadMedDetaljer'
-import { SkeletonSporsmal } from '../skeleton-sporsmal'
 
 import Knapperad from './knapperad'
 import SendesTil from './sendes-til'
@@ -34,52 +33,37 @@ export interface SpmProps {
     sporsmal: Sporsmal
 }
 
-const SporsmalForm = () => {
+const SporsmalForm = ({ sporsmal }: SpmProps) => {
     const router = useRouter()
-    const { erUtenlandssoknad, valgtSoknad, sporsmal, spmIndex } = useSoknadMedDetaljer()
     const testpersonQuery = useTestpersonQuery()
-
-    const erSisteSpm = () => {
-        const snartSlutt =
-            sporsmal?.svartype === RSSvartype.IKKE_RELEVANT || sporsmal?.svartype === RSSvartype.CHECKBOX_PANEL
-        if (erUtenlandssoknad) {
-            return sporsmal?.tag === 'BEKREFT_OPPLYSNINGER_UTLAND_INFO'
-        }
-        return snartSlutt && spmIndex + 2 === valgtSoknad?.sporsmal?.length
-    }
-
+    const { erUtenlandssoknad, valgtSoknad, spmIndex } = useSoknadMedDetaljer()
+    const { data: korrigerer } = useSoknad(valgtSoknad?.korrigerer, valgtSoknad?.korrigerer !== undefined)
     const { mutate: sendSoknadMutation, isLoading: senderSoknad, error: sendError } = useSendSoknad()
-
     const {
         mutate: oppdaterSporsmalMutation,
         isLoading: oppdatererSporsmal,
         error: oppdaterError,
     } = useOppdaterSporsmal()
 
-    const { data: korrigerer } = useSoknad(valgtSoknad?.korrigerer, valgtSoknad?.korrigerer !== undefined)
-
-    const erSiste = erSisteSpm()
     const [endringUtenEndringAapen, setEndringUtenEndringAapen] = useState<boolean>(false)
     const methods = useForm({
         mode: 'onSubmit',
         reValidateMode: 'onChange',
         shouldUnregister: true,
+        defaultValues: hentFormState(sporsmal),
     })
-    const nesteSporsmal = valgtSoknad?.sporsmal[spmIndex + 1]
 
-    useEffect(() => {
-        if (sporsmal) methods.reset(hentFormState(sporsmal), { keepValues: false })
-        // Resetter formen når spørsmålet endrer seg
-        // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [sporsmal])
-
-    useEffect(() => {
-        if (methods.formState.isSubmitSuccessful && sporsmal) {
-            methods.reset(hentFormState(sporsmal), { keepValues: false })
+    const erSisteSpm = () => {
+        const snartSlutt =
+            sporsmal.svartype === RSSvartype.IKKE_RELEVANT || sporsmal.svartype === RSSvartype.CHECKBOX_PANEL
+        if (erUtenlandssoknad) {
+            return sporsmal.tag === 'BEKREFT_OPPLYSNINGER_UTLAND_INFO'
         }
-        // resetter formen når den har blitt submittet
-        // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [methods.formState.isSubmitSuccessful])
+        return snartSlutt && spmIndex + 2 === valgtSoknad?.sporsmal?.length
+    }
+
+    const erSiste = erSisteSpm()
+    const nesteSporsmal = valgtSoknad?.sporsmal[spmIndex + 1]
 
     const sendSoknad = () => {
         if (!valgtSoknad) return
@@ -153,8 +137,7 @@ const SporsmalForm = () => {
                 >
                     <GuidepanelOverSporsmalstekst />
 
-                    {sporsmal && <SporsmalSwitch sporsmal={sporsmal} sporsmalIndex={0} erSisteSporsmal={erSiste} />}
-                    {!sporsmal && <SkeletonSporsmal />}
+                    <SporsmalSwitch sporsmal={sporsmal} sporsmalIndex={0} erSisteSporsmal={erSiste} />
 
                     {erSiste && !erUtenlandssoknad && valgtSoknad && nesteSporsmal && (
                         <>
@@ -173,7 +156,7 @@ const SporsmalForm = () => {
                     )}
 
                     {(valgtSoknad?.soknadstype === RSSoknadstype.REISETILSKUDD &&
-                        sporsmal?.svartype !== RSSvartype.KVITTERING) ||
+                        sporsmal.svartype !== RSSvartype.KVITTERING) ||
                         (valgtSoknad?.soknadstype !== RSSoknadstype.REISETILSKUDD && (
                             <FeilOppsummering valgtSoknad={valgtSoknad!} sporsmal={sporsmal!} sendError={sendError} />
                         ))}

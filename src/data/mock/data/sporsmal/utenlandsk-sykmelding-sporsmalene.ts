@@ -2,7 +2,7 @@ import { RSSporsmal } from '../../../../types/rs-types/rs-sporsmal'
 
 export const utenlandskSykmeldingSporsmalene: RSSporsmal[] = [
     {
-        id: '54352523',
+        id: '78c70268-b618-4b4c-b2d5-3e460d4edb69',
         tag: 'UTENLANDSK_SYKMELDING_BOSTED',
         sporsmalstekst: `Bor du i utlandet?`,
         undertekst: null,
@@ -14,7 +14,7 @@ export const utenlandskSykmeldingSporsmalene: RSSporsmal[] = [
         svar: [],
         undersporsmal: [
             {
-                id: '2543524234234345',
+                id: '1acc8409-5f1a-4fe5-807b-9b593a2c7892',
                 tag: 'UTENLANDSK_SYKMELDING_CO',
                 sporsmalstekst: 'C/O',
                 undertekst: null,
@@ -27,7 +27,7 @@ export const utenlandskSykmeldingSporsmalene: RSSporsmal[] = [
                 undersporsmal: [],
             },
             {
-                id: '254342345234sfd5',
+                id: 'eaeaeee6-339d-4620-95a2-68e2b4166b09',
                 tag: 'UTENLANDSK_SYKMELDING_VEGNAVN',
                 sporsmalstekst: 'Vegnavn og husnummer, evt. postboks',
                 undertekst: null,
@@ -40,7 +40,7 @@ export const utenlandskSykmeldingSporsmalene: RSSporsmal[] = [
                 undersporsmal: [],
             },
             {
-                id: '254223435234sfd5',
+                id: 'd9b05627-b531-4ccd-83aa-741a9b82b2e4',
                 tag: 'UTENLANDSK_SYKMELDING_BYGNING',
                 sporsmalstekst: 'Bygning',
                 undertekst: null,
@@ -53,7 +53,7 @@ export const utenlandskSykmeldingSporsmalene: RSSporsmal[] = [
                 undersporsmal: [],
             },
             {
-                id: '2543523334sfd5',
+                id: '6df264f1-b68e-44d9-b534-f121ba83d16f',
                 tag: 'UTENLANDSK_SYKMELDING_BY',
                 sporsmalstekst: 'By / stedsnavn',
                 undertekst: null,
@@ -66,7 +66,7 @@ export const utenlandskSykmeldingSporsmalene: RSSporsmal[] = [
                 undersporsmal: [],
             },
             {
-                id: '254352323234sfd5',
+                id: '35ce2176-c2b9-4b5b-8f44-04bd6138d855',
                 tag: 'UTENLANDSK_SYKMELDING_REGION',
                 sporsmalstekst: 'Region',
                 undertekst: null,
@@ -79,7 +79,7 @@ export const utenlandskSykmeldingSporsmalene: RSSporsmal[] = [
                 undersporsmal: [],
             },
             {
-                id: '25435234234234sfd5',
+                id: 'e996ecd1-fc34-40ac-be8c-7117c81c30d4',
                 tag: 'UTENLANDSK_SYKMELDING_LAND',
                 sporsmalstekst: 'Land',
                 undertekst: null,
@@ -92,7 +92,7 @@ export const utenlandskSykmeldingSporsmalene: RSSporsmal[] = [
                 undersporsmal: [],
             },
             {
-                id: '2543523423423sdfsdf4sfd5',
+                id: '9f275237-4117-41ea-9f93-9ac0eeb9a9f0',
                 tag: 'UTENLANDSK_SYKMELDING_TELEFONNUMMER',
                 sporsmalstekst: 'Telefonnummer',
                 undertekst: null,
@@ -105,7 +105,7 @@ export const utenlandskSykmeldingSporsmalene: RSSporsmal[] = [
                 undersporsmal: [],
             },
             {
-                id: '25435234sfd2342345',
+                id: '84975208-1db7-46aa-9959-af357e99f7a9',
                 tag: 'UTENLANDSK_SYKMELDING_GYLDIGHET_ADRESSE',
                 sporsmalstekst: 'Hvor lenge skal denne adressen brukes?',
                 undertekst: 'Du velger selv hvor lenge adressen skal være gyldig, maksimalt 1 år.',
@@ -120,7 +120,7 @@ export const utenlandskSykmeldingSporsmalene: RSSporsmal[] = [
         ],
     },
     {
-        id: '54352523',
+        id: '347f5479-26fc-4c89-8d9d-27de181a7e0c',
         tag: 'UTENLANDSK_SYKMELDING_LONNET_ARBEID_UTENFOR_NORGE',
         sporsmalstekst: `Utfører du lønnet arbeid utenfor Norge?`,
         undertekst: null,
@@ -132,7 +132,7 @@ export const utenlandskSykmeldingSporsmalene: RSSporsmal[] = [
         svar: [],
         undersporsmal: [
             {
-                id: '254352345',
+                id: '486c6dc3-f1bf-4934-b082-8c244026f492',
                 tag: 'UTENLANDSK_SYKMELDING_LONNET_ARBEID_UTENFOR_NORGE_FRITEKST',
                 sporsmalstekst: 'Oppgi nærmere opplysninger om arbeid/virksomhet utenfor Norge',
                 undertekst: '(f. eks. navn på arbeidsgivere og nærmere informasjon om din yrkesaktivitet i utlandet)\n',
@@ -147,7 +147,7 @@ export const utenlandskSykmeldingSporsmalene: RSSporsmal[] = [
         ],
     },
     {
-        id: '345435435345345',
+        id: '6371316d-07d3-4819-9f77-da01c9dfea57',
         tag: 'UTENLANDSK_SYKMELDING_TRYGD_UTENFOR_NORGE',
         sporsmalstekst: `Har du mottatt sykepenger eller lignende i andre EØS-land i løpet av de siste tre årene?`,
         undertekst: null,
@@ -159,7 +159,7 @@ export const utenlandskSykmeldingSporsmalene: RSSporsmal[] = [
         svar: [],
         undersporsmal: [
             {
-                id: '345345345345',
+                id: 'e484121e-133b-47f4-b002-cef726ca123f',
                 tag: 'UTENLANDSK_SYKMELDING_TRYGD_HVILKET_LAND',
                 sporsmalstekst: 'I hvilket land?',
                 undertekst: null,

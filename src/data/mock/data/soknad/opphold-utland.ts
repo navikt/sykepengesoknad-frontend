@@ -20,7 +20,7 @@ export const oppholdUtland: RSSoknad = {
     soknadPerioder: [],
     sporsmal: [
         {
-            id: '1',
+            id: 'f1a37307-c8e9-4370-9de1-98845088919c',
             tag: 'PERIODEUTLAND',
             sporsmalstekst: 'Når skal du reise?',
             undertekst: null,
@@ -33,7 +33,7 @@ export const oppholdUtland: RSSoknad = {
             undersporsmal: [],
         },
         {
-            id: '2',
+            id: 'eafa7256-2486-419c-96d9-d077418fa8a2',
             tag: 'LAND',
             sporsmalstekst: 'Hvilket land skal du reise til?',
             undertekst: null,
@@ -46,7 +46,7 @@ export const oppholdUtland: RSSoknad = {
             undersporsmal: [],
         },
         {
-            id: '3',
+            id: 'acd5a489-2624-40c3-8dd1-a651b41b25aa',
             tag: 'ARBEIDSGIVER',
             sporsmalstekst: 'Har du arbeidsgiver?',
             undertekst: null,
@@ -58,7 +58,7 @@ export const oppholdUtland: RSSoknad = {
             svar: [],
             undersporsmal: [
                 {
-                    id: '4',
+                    id: '2c34b905-6aad-4e13-813f-ef3be73eceba',
                     tag: 'SYKMELDINGSGRAD',
                     sporsmalstekst: 'Er du 100 % sykmeldt?',
                     undertekst: null,
@@ -71,7 +71,7 @@ export const oppholdUtland: RSSoknad = {
                     undersporsmal: [],
                 },
                 {
-                    id: '5',
+                    id: '43389c36-d107-4ad2-a06b-26831bd84bdc',
                     tag: 'FERIE',
                     sporsmalstekst: 'Har du avtalt med arbeidsgiveren din at du skal ta ut feriedager i hele perioden?',
                     undertekst: null,
@@ -86,7 +86,7 @@ export const oppholdUtland: RSSoknad = {
             ],
         },
         {
-            id: '6',
+            id: 'de78bacc-4143-4f8b-ba0e-189c997515f2',
             tag: 'BEKREFT_OPPLYSNINGER_UTLAND_INFO',
             sporsmalstekst: 'Før du reiser ber vi deg bekrefte:',
             undertekst:
@@ -99,7 +99,7 @@ export const oppholdUtland: RSSoknad = {
             svar: [],
             undersporsmal: [
                 {
-                    id: '7',
+                    id: '9f4eaeef-2b3c-4ee8-801d-96ad0b56547b',
                     tag: 'BEKREFT_OPPLYSNINGER_UTLAND',
                     sporsmalstekst: 'Jeg bekrefter de to punktene ovenfor',
                     undertekst: null,

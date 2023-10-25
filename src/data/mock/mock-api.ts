@@ -390,7 +390,7 @@ export async function mockApi(req: NextApiRequest, res: NextApiResponse) {
                 return sendJson({}, 404)
             }
             const undersporsmalId = pathNumber(7)
-            const undersporsmalIndex = spm.undersporsmal.findIndex((s) => s.id !== undersporsmalId)
+            const undersporsmalIndex = spm.undersporsmal.findIndex((s) => s.id === undersporsmalId)
             if (undersporsmalIndex !== -1) {
                 spm.undersporsmal.splice(undersporsmalIndex, 1)
             }
