@@ -1,4 +1,4 @@
-import { Textarea, TextField } from '@navikt/ds-react'
+import { Alert, BodyShort, Label, Textarea, TextField } from '@navikt/ds-react'
 import React from 'react'
 import { useFormContext } from 'react-hook-form'
 
@@ -7,10 +7,12 @@ import { hentFeilmelding } from '../sporsmal-utils'
 
 export const Fritekst = ({ sporsmal }: SpmProps) => {
     const {
+        watch,
         register,
         formState: { errors },
     } = useFormContext()
     const feilmelding = hentFeilmelding(sporsmal)
+    const innhold = watch<string>(sporsmal.id)
 
     const description = () => {
         const valgfri = sporsmal.min == null
@@ -59,5 +61,51 @@ export const Fritekst = ({ sporsmal }: SpmProps) => {
     if (parseFloat(sporsmal.max) > 100) {
         return <Textarea {...props} />
     }
-    return <TextField type="text" {...props} />
+    return (
+        <>
+            <TextField type="text" {...props} />
+            {sporsmal.tag == 'INNTEKTSOPPLYSNINGER_ORGNUMMER' && <VirksomhetInfo text={innhold} />}
+        </>
+    )
+}
+
+function VirksomhetInfo({ text }: { text: string | undefined }) {
+    if (!text) return null
+    if (text?.length !== 9) return null
+
+    interface Virksomhet {
+        navn: string
+        type: string
+    }
+
+    let virksomhet: Virksomhet | undefined
+
+    if (text.startsWith('8')) {
+        virksomhet = {
+            navn: 'Dagfinn Runes Rørleggerservice',
+            type: 'Enkeltpersonforetak',
+        }
+    }
+    if (text.startsWith('9')) {
+        virksomhet = {
+            navn: 'Kari og Olas strikkebutikk',
+            type: 'Delt ansvar',
+        }
+    }
+
+    if (!virksomhet)
+        return (
+            <Alert variant="warning" className="mt-4">
+                {'Vi fant ingen virksomhet i enhetsregisteret med orgnummer ' + text}
+            </Alert>
+        )
+    return (
+        <>
+            <Alert variant="info" className="mt-4">
+                <Label as="h3">{'Virksomhetsinfo fra enhetsregisteret for ' + text}</Label>
+                <BodyShort>{virksomhet.navn}</BodyShort>
+                <BodyShort>{virksomhet.type}</BodyShort>
+            </Alert>
+        </>
+    )
 }
