@@ -3,18 +3,13 @@ import { BodyShort } from '@navikt/ds-react'
 export const MedlemskapOppholdUtenforNorgeHjelpBody = () => {
     return (
         <>
-            <BodyShort spacing>Du må være medlem av folketrygden for å ha rett til sykepenger fra NAV.</BodyShort>
-
+            <BodyShort>Dette spørsmålet gjelder opphold i utlandet hvor du ikke har arbeidet.</BodyShort>
             <BodyShort spacing>
-                Et ledd i vår vurdering av dette er om du har oppholdt deg utenfor Norge uten å utføre arbeid. Vi vet
-                ikke alltid dette og må derfor spørre deg.
+                Svar nei, hvis du har oppholdt deg i utlandet i mindre enn 5 uker de siste 12 månedene
             </BodyShort>
             <BodyShort spacing>
-                Svar ja, hvis du har oppholdt deg utenfor Norge, men ikke utført arbeid. Eller hvis du har hatt
-                ferieopphold mer enn 5 uker hvert kalenderår.
-            </BodyShort>
-            <BodyShort>
-                Svar nei, hvis du ikke har oppholdt deg utenfor Norge, eller hatt ferie opptil 5 uker utenfor Norge.
+                Du trenger ikke legge inn perioder med opphold utenfor Norge hvis du allerede har lagt inn perioder med
+                utført arbeid i utlandet i forrige spørsmål
             </BodyShort>
         </>
     )
