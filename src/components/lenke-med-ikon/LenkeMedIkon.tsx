@@ -12,7 +12,7 @@ interface LenkeProps {
 
 export function LenkeMedIkon(props: LenkeProps) {
     return (
-        <Link className={cn('!text-text-action', props.className)} target="_blank" rel="noopener" href={props.href}>
+        <Link className={cn(props.className)} target="_blank" rel="noopener" href={props.href}>
             <BodyShort className="text-text-action" as="span">
                 {props.text}
             </BodyShort>

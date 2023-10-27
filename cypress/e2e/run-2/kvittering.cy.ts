@@ -47,7 +47,7 @@ describe('Tester kvittering', () => {
             cy.url().should('include', `/kvittering/${arbeidsledigKvittering.id}`)
 
             // Hva skjer videre
-            cy.get('[data-cy="kvittering-alert"]')
+            cy.get('[data-cy="kvittering-panel"]')
                 .should('contain', 'Hva skjer videre?')
                 .and('contain', 'NAV behandler søknaden din')
                 .and(
@@ -89,7 +89,7 @@ describe('Tester kvittering', () => {
 
             cy.url().should('include', `/sendt/${sendtArbeidsledigKvittering.id}`)
             // Hva skjer videre skal ikke finnes
-            cy.get('[data-cy="kvittering-alert"]').should('not.exist')
+            cy.get('[data-cy="kvittering-panel"]').should('not.exist')
 
             // Oppsummering ekspandert
             cy.get('[data-cy="oppsummering-fra-søknaden"]  .navds-expansioncard__header-button').should(
@@ -134,7 +134,7 @@ describe('Tester kvittering', () => {
             cy.get('[data-cy="sendt-arbeidsgiver"]').should('not.exist')
 
             // Hva skjer videre
-            cy.get('[data-cy="kvittering-alert"]')
+            cy.get('[data-cy="kvittering-panel"]')
                 .should('contain', 'Hva skjer videre?')
                 .and('contain', 'Du får svar på om du kan reise')
                 .and(
@@ -197,7 +197,7 @@ describe('Tester kvittering', () => {
             cy.url().should('include', kvitteringURL)
 
             // Hva skjer videre
-            cy.get('[data-cy="kvittering-alert"]')
+            cy.get('[data-cy="kvittering-panel"]')
                 .should('contain', 'Hva skjer videre?')
                 .and('contain', 'NAV behandler søknaden din')
                 .and(

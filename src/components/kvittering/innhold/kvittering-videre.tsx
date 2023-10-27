@@ -1,5 +1,6 @@
-import { Alert, BodyLong, Heading, Label } from '@navikt/ds-react'
+import { BodyLong, Heading, Label } from '@navikt/ds-react'
 import React from 'react'
+import { InformationSquareFillIcon } from '@navikt/aksel-icons'
 
 import { RSArbeidssituasjon } from '../../../types/rs-types/rs-arbeidssituasjon'
 import { RSSoknadstype } from '../../../types/rs-types/rs-soknadstype'
@@ -10,6 +11,10 @@ import Kontonummer from '../kontonummer/kontonummer'
 import { parserWithReplace } from '../../../utils/html-react-parser-utils'
 import { LenkeMedIkon } from '../../lenke-med-ikon/LenkeMedIkon'
 import { useSoknadMedDetaljer } from '../../../hooks/useSoknadMedDetaljer'
+import { KvtteringPanel } from '../kvittering-panel'
+import GridItems from '../grid-items'
+
+import { InntektSN } from './arbeidstaker/gjentagende-segmenter/InntektSN'
 
 const KvitteringVidere = () => {
     const { valgtSoknad } = useSoknadMedDetaljer()
@@ -21,50 +26,46 @@ const KvitteringVidere = () => {
     if (!valgtSoknad) return null
 
     return (
-        <Alert variant="info" className="bg-white" data-cy="kvittering-alert">
-            {/* TODO Fjern overrides med !text-text-action hvis Alerten fjernes */}
-            <Heading size="small" level="3">
-                {tekst('kvittering.hva-skjer-videre')}
-            </Heading>
-            <Vis
-                hvis={valgtSoknad.arbeidssituasjon === RSArbeidssituasjon.NAERINGSDRIVENDE}
-                render={() => (
-                    <div className="mt-4">
-                        <Label as="h2">{tekst('kvittering.før.nav.behandler')}</Label>
-                        <BodyLong as="span">{tekst('kvittering.naeringsdrivende.brodtekst')} </BodyLong>
-                        <LenkeMedIkon
-                            href={tekst('kvittering.naeringsdrivende.lenke.url')}
-                            text={tekst('kvittering.naeringsdrivende.lenke')}
-                        />
-                        .
+        <KvtteringPanel data-cy="kvittering-panel">
+            <GridItems
+                venstre={
+                    <div className="flex h-full items-center justify-center">
+                        <InformationSquareFillIcon title="" fontSize="1.5rem" className="text-icon-info" />
                     </div>
-                )}
-            />
-            <div className="mt-4">
-                <Label as="h2">{tekst('kvittering.nav-behandler-soknaden')}</Label>
-                <BodyLong as="span">{tekst('kvittering.arbeidstaker.saksbehandlingstid')} </BodyLong>
-                <LenkeMedIkon
-                    href={tekst('kvittering.arbeidstaker.saksbehandlingstid.lenke.url')}
-                    text={tekst('kvittering.arbeidstaker.saksbehandlingstid.lenke')}
+                }
+            >
+                <Heading size="small" level="3" className="my-4">
+                    {tekst('kvittering.hva-skjer-videre')}
+                </Heading>
+            </GridItems>
+            <GridItems>
+                {valgtSoknad.arbeidssituasjon === RSArbeidssituasjon.NAERINGSDRIVENDE && <InntektSN />}
+                <div className="mb-4">
+                    <Label as="h2">{tekst('kvittering.nav-behandler-soknaden')}</Label>
+                    <BodyLong as="span">{tekst('kvittering.arbeidstaker.saksbehandlingstid')} </BodyLong>
+                    <LenkeMedIkon
+                        href={tekst('kvittering.arbeidstaker.saksbehandlingstid.lenke.url')}
+                        text={tekst('kvittering.arbeidstaker.saksbehandlingstid.lenke')}
+                    />
+                </div>
+
+                <Vis
+                    hvis={valgtSoknad.soknadstype !== RSSoknadstype.REISETILSKUDD}
+                    render={() => (
+                        <div className="mb-4">
+                            <Label as="h2">{tekst('kvittering.naar-blir-pengene')}</Label>
+                            <BodyLong as="span">
+                                {parserWithReplace(tekst('kvittering.arbeidstaker.over16.utbetaling'))}
+                            </BodyLong>
+                        </div>
+                    )}
                 />
-            </div>
 
-            <Vis
-                hvis={valgtSoknad.soknadstype !== RSSoknadstype.REISETILSKUDD}
-                render={() => (
-                    <div className="mt-4">
-                        <Label as="h2">{tekst('kvittering.naar-blir-pengene')}</Label>
-                        <BodyLong as="span">
-                            {parserWithReplace(tekst('kvittering.arbeidstaker.over16.utbetaling'))}
-                        </BodyLong>
-                    </div>
-                )}
-            />
-
-            <div className="mt-4">
-                <Kontonummer />
-            </div>
-        </Alert>
+                <div className="mb-4">
+                    <Kontonummer />
+                </div>
+            </GridItems>
+        </KvtteringPanel>
     )
 }
 

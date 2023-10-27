@@ -124,7 +124,7 @@ describe('Tester søknad om å beholde sykepenger utenfor EØS', () => {
     it('Viser kvittering med Ferdig-knapp', function () {
         cy.url().should('include', `kvittering/${soknad.id}`)
         // Hva skjer videre
-        cy.get('[data-cy="kvittering-alert"]')
+        cy.get('[data-cy="kvittering-panel"]')
             .should('contain', 'Hva skjer videre?')
             .and('contain', 'Du får svar på om du kan reise')
             .and('contain', 'Risiko ved reise før du har mottatt svar')
