@@ -3,13 +3,15 @@ import { BodyShort } from '@navikt/ds-react'
 export const MedlemskapArbeidUtenforNorgeHjelpBody = () => {
     return (
         <>
-            <BodyShort spacing>Du må være medlem av folketrygden for å ha rett til sykepenger fra NAV.</BodyShort>
-
             <BodyShort spacing>
-                Et ledd i vår vurdering av dette er om du har utført arbeid utenfor Norge. Vi vet ikke alltid dette og
-                må derfor spørre deg.
+                For å ha rett til sykepenger, må du være medlem i folketrygden. Hvis du jobber lenge i utlandet og/eller
+                for en utenlandsk arbeidsgiver, kan dette i noen tilfeller ha betydning for om du er medlem i
+                folketrygden. Vi vet ikke alltid dette og må derfor spørre deg.
             </BodyShort>
-            <BodyShort spacing>Svar nei, hvis du har deltatt på korte kurs, konferanser eller møter.</BodyShort>
+            <BodyShort spacing>
+                Du kan svare nei, hvis du har deltatt på tjenestereiser, korte kurs, konferanser eller møter for din
+                norske arbeidsgiver.
+            </BodyShort>
         </>
     )
 }
