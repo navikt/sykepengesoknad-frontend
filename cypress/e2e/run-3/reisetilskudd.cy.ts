@@ -340,7 +340,7 @@ describe('Teste førsteside i reisetilskuddsøknaden', () => {
         })
 
         it('Hva skjer videre', () => {
-            cy.get('.navds-alert--info')
+            cy.get('[data-cy="kvittering-panel"]')
                 .should('contain', 'Hva skjer videre?')
                 .and('contain', 'NAV behandler søknaden din')
                 .and(

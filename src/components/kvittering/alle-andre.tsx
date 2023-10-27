@@ -4,9 +4,9 @@ import { RSSoknadstype } from '../../types/rs-types/rs-soknadstype'
 import Vis from '../vis'
 import { useSoknadMedDetaljer } from '../../hooks/useSoknadMedDetaljer'
 
-import KvitteringUtenlands from './innhold/kvittering-utenlands'
 import KvitteringVidere from './innhold/kvittering-videre'
 import KvitteringStatus from './status/kvittering-status'
+import { KvitteringUtenlands } from './innhold/kvittering-utenlands'
 
 const AlleAndre = () => {
     const { valgtSoknad } = useSoknadMedDetaljer()

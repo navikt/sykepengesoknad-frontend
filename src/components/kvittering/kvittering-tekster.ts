@@ -53,10 +53,6 @@ export const KvitteringTekster = {
         'Digital inntektsmelding sendes fra arbeidsgivers eget lønns- og personalsystem eller fra altinn.no. Meldingen inneholder inntektsopplysninger og annen informasjon NAV må ha for å behandle søknaden arbeidstaker har sendt.',
 
     'kvittering.før.nav.behandler': 'Før NAV kan behandle søknaden',
-    'kvittering.naeringsdrivende.brodtekst':
-        'Vi trenger inntektsopplysninger fra deg som du sender inn på eget skjema. Du trenger bare å sende inn skjemaet én gang, selv om sykmeldingen eventuelt blir forlenget.',
-    'kvittering.naeringsdrivende.lenke': 'Gå til skjema for inntekstopplysninger her',
-    'kvittering.naeringsdrivende.lenke.url': 'https://www.nav.no/fyllut/nav083501',
 
     'kvittering.utenlands.overskrift1': 'Du får svar på om du kan reise',
     'kvittering.utenlands.brodtekst1':

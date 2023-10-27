@@ -10,7 +10,7 @@ const htmlParserOptionsWithReplace: HTMLReactParserOptions = {
         if (domNode instanceof Element && domNode.attribs) {
             if (domNode.name === 'a' && domNode.attribs.href) {
                 return (
-                    <Link {...domNode.attribs} className="!text-text-action">
+                    <Link {...domNode.attribs}>
                         {domToReact(domNode.children, htmlParserOptionsWithReplace)}
                         <ExternalLinkIcon />
                     </Link>

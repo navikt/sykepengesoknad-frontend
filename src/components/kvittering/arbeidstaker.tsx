@@ -1,4 +1,4 @@
-import { Heading, Panel } from '@navikt/ds-react'
+import { Heading } from '@navikt/ds-react'
 import { logger } from '@navikt/next-logger'
 import dayjs from 'dayjs'
 import React, { Fragment, useEffect, useState } from 'react'
@@ -22,8 +22,9 @@ import Over16dager from './innhold/arbeidstaker/over16dager'
 import PerioderMedOpphold from './innhold/arbeidstaker/perioder-med-opphold'
 import PerioderUtenOpphold from './innhold/arbeidstaker/perioder-uten-opphold'
 import ArbeidstakerStatus from './status/arbeidstaker-status'
-import { InntektSN } from './innhold/arbeidstaker/gjentagende-segmenter/InntektSN'
 import GridItems from './grid-items'
+import { KvtteringPanel } from './kvittering-panel'
+import { SendInntektsopplysningerForSelvstendigNæringsdrivende } from './innhold/SendInntektsopplysningerForSelvstendigNaringsdrivende'
 
 type ArbeidstakerKvitteringTekst = 'inntil16dager' | 'over16dager' | 'utenOpphold' | 'medOpphold' | undefined
 
@@ -147,74 +148,55 @@ const Arbeidstaker = () => {
     if (!valgtSoknad || !soknader) return null
 
     return (
-        <Panel border className="mt-2 grid grid-cols-12 gap-y-2 p-0 pb-8">
+        <KvtteringPanel className="mt-2">
             <GridItems
                 venstre={
                     <div className="flex h-full items-center justify-center border-b border-b-border-default bg-surface-success-subtle">
                         <CheckmarkCircleFillIcon title="" fontSize="1.5rem" className="text-icon-success" />
                     </div>
                 }
-                midt={
-                    <Heading
-                        size="small"
-                        level="2"
-                        className="border-b border-b-border-default bg-surface-success-subtle py-4"
-                    >
-                        {tekst('kvittering.sendt-til')}
-                    </Heading>
-                }
                 hoyre={<div className="h-full border-b border-b-border-default bg-surface-success-subtle" />}
-            />
-            <GridItems venstre={<Fragment />} midt={<ArbeidstakerStatus />} hoyre={<Fragment />} />
+            >
+                <Heading
+                    size="small"
+                    level="2"
+                    className="border-b border-b-border-default bg-surface-success-subtle py-4"
+                >
+                    {tekst('kvittering.sendt-til')}
+                </Heading>
+            </GridItems>
+            <GridItems>
+                <ArbeidstakerStatus />
+            </GridItems>
 
             <div className="col-span-12 mx-4 mb-8 border-b-2 border-b-gray-200 pb-2" />
-
-            <Vis
-                hvis={harSvartAndreInntektskilderSN && kvitteringTekst !== 'inntil16dager'}
-                render={() => (
-                    <>
-                        <GridItems
-                            venstre={<Fragment />}
-                            midt={
-                                <Heading size="small" level="3">
-                                    Innsending av inntektsopplysninger
-                                </Heading>
-                            }
-                            hoyre={<Fragment />}
-                        />
-                        <GridItems venstre={<Fragment />} midt={<InntektSN />} hoyre={<Fragment />} />
-                        <div className="col-span-12 mx-4 mb-8 border-b-2 border-b-gray-200 pb-2" />
-                    </>
-                )}
-            />
+            {harSvartAndreInntektskilderSN && kvitteringTekst !== 'inntil16dager' && (
+                <SendInntektsopplysningerForSelvstendigNæringsdrivende />
+            )}
 
             <Vis
                 hvis={!sendtForMerEnn30DagerSiden(valgtSoknad.sendtTilArbeidsgiverDato, valgtSoknad.sendtTilNAVDato)}
                 render={() => {
                     return (
                         <>
-                            <GridItems
-                                venstre={<Fragment />}
-                                midt={
-                                    kvitteringTekst === 'medOpphold' ? (
-                                        <Heading size="small" level="3">
-                                            {tekst('kvittering.viktig-informasjon')}
-                                        </Heading>
-                                    ) : (
-                                        <Heading size="small" level="3">
-                                            {tekst('kvittering.hva-skjer-videre')}
-                                        </Heading>
-                                    )
-                                }
-                                hoyre={<Fragment />}
-                            />
+                            <GridItems>
+                                {kvitteringTekst === 'medOpphold' ? (
+                                    <Heading size="small" level="3">
+                                        {tekst('kvittering.viktig-informasjon')}
+                                    </Heading>
+                                ) : (
+                                    <Heading size="small" level="3">
+                                        {tekst('kvittering.hva-skjer-videre')}
+                                    </Heading>
+                                )}
+                            </GridItems>
 
-                            <GridItems venstre={<Fragment />} midt={kvitteringInnhold()} hoyre={<Fragment />} />
+                            <GridItems>{kvitteringInnhold()}</GridItems>
                         </>
                     )
                 }}
             />
-        </Panel>
+        </KvtteringPanel>
     )
 }
 
