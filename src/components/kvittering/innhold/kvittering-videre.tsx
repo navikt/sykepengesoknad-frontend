@@ -26,7 +26,7 @@ const KvitteringVidere = () => {
     if (!valgtSoknad) return null
 
     return (
-        <KvtteringPanel data-cy="kvittering-panel">
+        <KvtteringPanel>
             <GridItems
                 venstre={
                     <div className="flex h-full items-center justify-center">

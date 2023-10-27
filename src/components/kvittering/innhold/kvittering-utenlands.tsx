@@ -19,7 +19,7 @@ export const KvitteringUtenlands = () => {
     }
 
     return (
-        <KvtteringPanel data-cy="kvittering-panel">
+        <KvtteringPanel>
             <GridItems
                 venstre={
                     <div className="flex h-full items-center justify-center">
