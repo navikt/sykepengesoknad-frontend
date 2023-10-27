@@ -1,6 +1,5 @@
 import { BodyLong, Heading, Label } from '@navikt/ds-react'
 import React from 'react'
-import { InformationSquareFillIcon } from '@navikt/aksel-icons'
 
 import { RSArbeidssituasjon } from '../../../types/rs-types/rs-arbeidssituasjon'
 import { RSSoknadstype } from '../../../types/rs-types/rs-soknadstype'
@@ -28,15 +27,12 @@ const KvitteringVidere = () => {
     return (
         <KvtteringPanel>
             {valgtSoknad.arbeidssituasjon === RSArbeidssituasjon.NAERINGSDRIVENDE && (
-                <SendInntektsopplysningerForSelvstendigNæringsdrivende />
+                <>
+                    <div className="mt-8 col-span-12"></div>
+                    <SendInntektsopplysningerForSelvstendigNæringsdrivende />
+                </>
             )}
-            <GridItems
-                venstre={
-                    <div className="flex h-full items-center justify-center">
-                        <InformationSquareFillIcon title="" fontSize="1.5rem" className="text-icon-info" />
-                    </div>
-                }
-            >
+            <GridItems>
                 <Heading size="small" level="3" className="my-4">
                     {tekst('kvittering.hva-skjer-videre')}
                 </Heading>
