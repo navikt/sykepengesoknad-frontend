@@ -14,7 +14,7 @@ import { useSoknadMedDetaljer } from '../../../hooks/useSoknadMedDetaljer'
 import { KvtteringPanel } from '../kvittering-panel'
 import GridItems from '../grid-items'
 
-import { InntektSN } from './arbeidstaker/gjentagende-segmenter/InntektSN'
+import { SendInntektsopplysningerForSelvstendigNæringsdrivende } from './SendInntektsopplysningerForSelvstendigNaringsdrivende'
 
 const KvitteringVidere = () => {
     const { valgtSoknad } = useSoknadMedDetaljer()
@@ -27,6 +27,9 @@ const KvitteringVidere = () => {
 
     return (
         <KvtteringPanel>
+            {valgtSoknad.arbeidssituasjon === RSArbeidssituasjon.NAERINGSDRIVENDE && (
+                <SendInntektsopplysningerForSelvstendigNæringsdrivende />
+            )}
             <GridItems
                 venstre={
                     <div className="flex h-full items-center justify-center">
@@ -39,7 +42,6 @@ const KvitteringVidere = () => {
                 </Heading>
             </GridItems>
             <GridItems>
-                {valgtSoknad.arbeidssituasjon === RSArbeidssituasjon.NAERINGSDRIVENDE && <InntektSN />}
                 <div className="mb-4">
                     <Label as="h2">{tekst('kvittering.nav-behandler-soknaden')}</Label>
                     <BodyLong as="span">{tekst('kvittering.arbeidstaker.saksbehandlingstid')} </BodyLong>

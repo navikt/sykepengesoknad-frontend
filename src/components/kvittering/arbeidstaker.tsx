@@ -22,9 +22,9 @@ import Over16dager from './innhold/arbeidstaker/over16dager'
 import PerioderMedOpphold from './innhold/arbeidstaker/perioder-med-opphold'
 import PerioderUtenOpphold from './innhold/arbeidstaker/perioder-uten-opphold'
 import ArbeidstakerStatus from './status/arbeidstaker-status'
-import { InntektSN } from './innhold/arbeidstaker/gjentagende-segmenter/InntektSN'
 import GridItems from './grid-items'
 import { KvtteringPanel } from './kvittering-panel'
+import { SendInntektsopplysningerForSelvstendigNæringsdrivende } from './innhold/SendInntektsopplysningerForSelvstendigNaringsdrivende'
 
 type ArbeidstakerKvitteringTekst = 'inntil16dager' | 'over16dager' | 'utenOpphold' | 'medOpphold' | undefined
 
@@ -170,23 +170,9 @@ const Arbeidstaker = () => {
             </GridItems>
 
             <div className="col-span-12 mx-4 mb-8 border-b-2 border-b-gray-200 pb-2" />
-
-            <Vis
-                hvis={harSvartAndreInntektskilderSN && kvitteringTekst !== 'inntil16dager'}
-                render={() => (
-                    <>
-                        <GridItems>
-                            <Heading size="small" level="3">
-                                Innsending av inntektsopplysninger
-                            </Heading>
-                        </GridItems>
-                        <GridItems>
-                            <InntektSN />
-                        </GridItems>
-                        <div className="col-span-12 mx-4 mb-8 border-b-2 border-b-gray-200 pb-2" />
-                    </>
-                )}
-            />
+            {harSvartAndreInntektskilderSN && kvitteringTekst !== 'inntil16dager' && (
+                <SendInntektsopplysningerForSelvstendigNæringsdrivende />
+            )}
 
             <Vis
                 hvis={!sendtForMerEnn30DagerSiden(valgtSoknad.sendtTilArbeidsgiverDato, valgtSoknad.sendtTilNAVDato)}
