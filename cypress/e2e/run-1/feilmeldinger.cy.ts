@@ -339,10 +339,10 @@ describe('Tester feilmeldinger', () => {
         feilmeldingHandtering(
             'Du må velge et alternativ fra menyen',
             'Du må oppgi i hvilket land du har jobbet',
-            'f95a08e0-baba-3208-9c4f-74a21ecf06f9',
+            'e5366d4e-65cf-34a0-bbf6-0e40230f8245',
         )
 
-        svarCombobox('I hvilket land utførte du arbeidet?', 'Fra', 'Frankrike')
+        svarCombobox('I hvilket land arbeidet du?', 'Fra', 'Frankrike')
         ingenFeilmeldinger()
     })
 
