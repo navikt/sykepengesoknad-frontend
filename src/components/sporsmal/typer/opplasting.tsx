@@ -1,12 +1,12 @@
 import { BodyShort, Button, Label, Modal } from '@navikt/ds-react'
 import React, { useState } from 'react'
 
-import { tekst } from '../../../../utils/tekster'
-import FilListe from '../../../filopplaster/fil-liste/fil-liste'
-import OpplastingForm from '../../../filopplaster/kvittering-modal/opplasting-form'
-import { SpmProps } from '../../sporsmal-form/sporsmal-form'
-import { EkspanderbarHjelp } from '../../../hjelpetekster/ekspanderbar-hjelp/ekspanderbar-hjelp'
-import { useSoknadMedDetaljer } from '../../../../hooks/useSoknadMedDetaljer'
+import { tekst } from '../../../utils/tekster'
+import FilListe from '../../filopplaster/fil-liste/fil-liste'
+import OpplastingForm from '../../filopplaster/kvittering-modal/opplasting-form'
+import { SpmProps } from '../sporsmal-form/sporsmal-form'
+import { EkspanderbarHjelp } from '../../hjelpetekster/ekspanderbar-hjelp/ekspanderbar-hjelp'
+import { useSoknadMedDetaljer } from '../../../hooks/useSoknadMedDetaljer'
 
 const Opplasting = ({ sporsmal }: SpmProps) => {
     const { valgtSoknad } = useSoknadMedDetaljer()
