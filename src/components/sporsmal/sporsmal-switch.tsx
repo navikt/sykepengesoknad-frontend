@@ -84,7 +84,7 @@ const SporsmalSwitch = ({ sporsmal, sporsmalIndex, erSisteSporsmal }: SporsmalSw
             return <Opplasting sporsmal={sporsmal} />
 
         case RSSvartype.IKKE_RELEVANT:
-            return <IkkeRelevant sporsmal={sporsmal} sporsmalIndex={sporsmalIndex} erSisteSporsmal={erSisteSporsmal} />
+            return <IkkeRelevant sporsmal={sporsmal} />
 
         default:
             return <UkjentSporsmal sporsmal={sporsmal} />
