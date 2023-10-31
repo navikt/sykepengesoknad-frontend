@@ -9,7 +9,7 @@ import { OppsummeringProps } from '../oppsummering'
 const PerioderSum = ({ sporsmal }: OppsummeringProps) => {
     return (
         <>
-            <Label as="h3">{sporsmal.sporsmalstekst}</Label>
+            {sporsmal.sporsmalstekst && <Label as="h3">{sporsmal.sporsmalstekst}</Label>}
             <>
                 {sporsmal.svarliste.svar.map((p, i) => {
                     const periode = hentPeriode(sporsmal, i)
