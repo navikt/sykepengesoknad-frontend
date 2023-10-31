@@ -15,7 +15,9 @@ const UndersporsmalListe = ({ oversporsmal, oversporsmalSvar }: UndersporsmalLis
         (!oversporsmal.kriterieForVisningAvUndersporsmal ||
             oversporsmal.kriterieForVisningAvUndersporsmal === oversporsmalSvar) &&
         oversporsmal.undersporsmal.length > 0
+
     if (!skalVise) return null
+
     return (
         <div className="mt-8">
             {oversporsmal.tag == 'UTENLANDSK_SYKMELDING_BOSTED' && (
@@ -27,7 +29,7 @@ const UndersporsmalListe = ({ oversporsmal, oversporsmalSvar }: UndersporsmalLis
             {oversporsmal.undersporsmal
                 .map((underspm: Sporsmal, idx: number) => (
                     <SporsmalSwitch
-                        key={idx}
+                        key={underspm.id}
                         sporsmal={underspm}
                         sporsmalIndex={idx}
                         erSisteSporsmal={idx === oversporsmal.undersporsmal.length - 1}
