@@ -1,7 +1,7 @@
 import { Heading } from '@navikt/ds-react'
 import { logger } from '@navikt/next-logger'
 import dayjs from 'dayjs'
-import React, { Fragment, useEffect, useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { CheckmarkCircleFillIcon } from '@navikt/aksel-icons'
 import { useQueryClient } from '@tanstack/react-query'
 
