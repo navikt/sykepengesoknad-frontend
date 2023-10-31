@@ -6,7 +6,7 @@ import { logger } from '@navikt/next-logger'
 import { GetServerSidePropsContext } from 'next/types'
 import * as R from 'remeda'
 
-import { isMockBackend } from '../utils/environment'
+import { isIntegrationtest, isMockBackend } from '../utils/environment'
 
 import { getUnleashEnvironment, localDevelopmentToggles } from './utils'
 import { EXPECTED_TOGGLES } from './toggles'
@@ -16,7 +16,9 @@ export async function getFlagsServerSide(
     res: GetServerSidePropsContext['res'],
 ): Promise<{ toggles: IToggle[] }> {
     if (isMockBackend()) {
-        logger.warn('Running in local or demo mode, falling back to development toggles.')
+        if (!isIntegrationtest()) {
+            logger.warn('Running in local or demo mode, falling back to development toggles.')
+        }
         return { toggles: localDevelopmentToggles() }
     }
 
