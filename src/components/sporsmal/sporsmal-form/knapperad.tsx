@@ -12,6 +12,7 @@ import { TagTyper } from '../../../types/enums'
 import { hentSporsmal } from '../../../utils/soknad-utils'
 import { useSoknadMedDetaljer } from '../../../hooks/useSoknadMedDetaljer'
 import { SlikBehandlerNavPersonopplysningene } from '../../soknad-intro/slik-behandler-nav-personopplysningene'
+import { RSSvartype } from '../../../types/rs-types/rs-svartype'
 
 const Knapperad = ({ poster }: { poster: boolean }) => {
     const { erUtenlandssoknad, valgtSoknad: soknad, stegNo, sporsmal, spmIndex } = useSoknadMedDetaljer()
@@ -39,14 +40,13 @@ const Knapperad = ({ poster }: { poster: boolean }) => {
 
     const knappetekst = () => {
         if (!soknad) return tekst('sykepengesoknad.ga-videre')
-        const REDUSER_FOR_OPPHOLD_UTLAND_OG_ARBEIDSTAKER =
-            soknad.soknadstype === RSSoknadstype.OPPHOLD_UTLAND ||
-            soknad.soknadstype === RSSoknadstype.ARBEIDSTAKERE ||
-            soknad.soknadstype === RSSoknadstype.REISETILSKUDD
-                ? 1
-                : 2
-        const erSisteSteg = spmIndex === soknad.sporsmal.length - REDUSER_FOR_OPPHOLD_UTLAND_OG_ARBEIDSTAKER
-
+        const erSisteSteg =
+            spmIndex ===
+            soknad.sporsmal.length -
+                (soknad.soknadstype === RSSoknadstype.OPPHOLD_UTLAND ||
+                sporsmal?.svartype === RSSvartype.BEKREFTELSESPUNKTER
+                    ? 1
+                    : 2)
         if (erSisteSteg) {
             if (soknad.status === RSSoknadstatus.UTKAST_TIL_KORRIGERING) {
                 return tekst('sykepengesoknad.send.endringene')
