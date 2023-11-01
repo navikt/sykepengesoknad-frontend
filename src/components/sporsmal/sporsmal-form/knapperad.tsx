@@ -9,9 +9,10 @@ import AvbrytSoknadModal from '../../avbryt-soknad-modal/avbryt-soknad-modal'
 import AvsluttOgFortsettSenere from '../../avslutt-og-fortsett-senere/avslutt-og-fortsett-senere'
 import { hentSporsmal } from '../../../utils/soknad-utils'
 import { useSoknadMedDetaljer } from '../../../hooks/useSoknadMedDetaljer'
+import { RSSvartype } from '../../../types/rs-types/rs-svartype'
 
 const Knapperad = ({ poster }: { poster: boolean }) => {
-    const { valgtSoknad: soknad, sporsmal, spmIndex } = useSoknadMedDetaljer()
+    const { valgtSoknad: soknad, sporsmal } = useSoknadMedDetaljer()
 
     const { getValues } = useFormContext()
     const skalSkjuleKnapperad = () => {
@@ -36,13 +37,9 @@ const Knapperad = ({ poster }: { poster: boolean }) => {
 
     const knappetekst = () => {
         if (!soknad) return tekst('sykepengesoknad.ga-videre')
-        const REDUSER_FOR_OPPHOLD_UTLAND_OG_ARBEIDSTAKER =
-            soknad.soknadstype === RSSoknadstype.OPPHOLD_UTLAND ||
-            soknad.soknadstype === RSSoknadstype.ARBEIDSTAKERE ||
-            soknad.soknadstype === RSSoknadstype.REISETILSKUDD
-                ? 1
-                : 2
-        const erSisteSteg = spmIndex === soknad.sporsmal.length - REDUSER_FOR_OPPHOLD_UTLAND_OG_ARBEIDSTAKER
+
+        const erSisteSteg =
+            sporsmal?.tag.includes('BEKREFT_OPPLYSNINGER') || sporsmal?.svartype === RSSvartype.BEKREFTELSESPUNKTER
 
         if (erSisteSteg) {
             if (soknad.status === RSSoknadstatus.UTKAST_TIL_KORRIGERING) {

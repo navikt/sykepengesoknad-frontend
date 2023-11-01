@@ -147,24 +147,19 @@ const SporsmalForm = ({ sporsmal }: SpmProps) => {
 
                     <SporsmalSwitch sporsmal={sporsmal} sporsmalIndex={0} erSisteSporsmal={erSiste} />
 
+                    {erSiste && !erUtenlandssoknad && valgtSoknad && nesteSporsmal && (
+                        <>
+                            <Oppsummering ekspandert={false} sporsmal={valgtSoknad.sporsmal} />
+                            <Opplysninger ekspandert={false} />
+                            <CheckboxPanel sporsmal={nesteSporsmal} />
+                            <SendesTil soknad={valgtSoknad} />
+                        </>
+                    )}
+
                     {erSiste &&
                         !erUtenlandssoknad &&
                         valgtSoknad &&
-                        (valgtSoknad.soknadstype !== RSSoknadstype.ARBEIDSTAKERE &&
-                        valgtSoknad.soknadstype !== RSSoknadstype.REISETILSKUDD ? (
-                            <>
-                                {nesteSporsmal && (
-                                    <>
-                                        <Oppsummering ekspandert={false} sporsmal={valgtSoknad.sporsmal} />
-                                        <Opplysninger ekspandert={false} />
-                                        <CheckboxPanel sporsmal={nesteSporsmal} />
-                                    </>
-                                )}
-                                <SendesTil soknad={valgtSoknad} />
-                            </>
-                        ) : (
-                            <SendesTil soknad={valgtSoknad} />
-                        ))}
+                        sporsmal?.svartype === RSSvartype.BEKREFTELSESPUNKTER && <SendesTil soknad={valgtSoknad} />}
 
                     {erSiste && erUtenlandssoknad && valgtSoknad && sporsmal && (
                         <>

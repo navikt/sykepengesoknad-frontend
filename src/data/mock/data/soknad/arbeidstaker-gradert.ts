@@ -1,6 +1,7 @@
 import { RSSoknad } from '../../../../types/rs-types/rs-soknad'
 import { arbeidstaker50Syk } from '../sykmeldinger'
-import { nyVærKlarOverAt } from '../sporsmal/vaer-klar-over-at'
+import { værKlarOverAt } from '../sporsmal/vaer-klar-over-at'
+import { bekreftOpplysninger } from '../sporsmal/bekreft-opplysninger'
 
 export const arbeidstakerGradert: RSSoknad = {
     id: '5b769c04-e171-47c9-b79b-23ab8fce331e',
@@ -441,7 +442,8 @@ export const arbeidstakerGradert: RSSoknad = {
                 },
             ],
         },
-        nyVærKlarOverAt(),
+        værKlarOverAt(),
+        bekreftOpplysninger(),
     ],
     egenmeldtSykmelding: false,
     opprettetAvInntektsmelding: false,
