@@ -9,7 +9,6 @@ import AvbrytSoknadModal from '../../avbryt-soknad-modal/avbryt-soknad-modal'
 import AvsluttOgFortsettSenere from '../../avslutt-og-fortsett-senere/avslutt-og-fortsett-senere'
 import { hentSporsmal } from '../../../utils/soknad-utils'
 import { useSoknadMedDetaljer } from '../../../hooks/useSoknadMedDetaljer'
-import { RSSvartype } from '../../../types/rs-types/rs-svartype'
 
 const Knapperad = ({ poster }: { poster: boolean }) => {
     const { valgtSoknad: soknad, sporsmal } = useSoknadMedDetaljer()
@@ -38,8 +37,7 @@ const Knapperad = ({ poster }: { poster: boolean }) => {
     const knappetekst = () => {
         if (!soknad) return tekst('sykepengesoknad.ga-videre')
 
-        const erSisteSteg =
-            sporsmal?.tag.includes('BEKREFT_OPPLYSNINGER') || sporsmal?.svartype === RSSvartype.BEKREFTELSESPUNKTER
+        const erSisteSteg = sporsmal?.tag.includes('BEKREFT_OPPLYSNINGER') || sporsmal?.tag === 'VAER_KLAR_OVER_AT'
 
         if (erSisteSteg) {
             if (soknad.status === RSSoknadstatus.UTKAST_TIL_KORRIGERING) {
