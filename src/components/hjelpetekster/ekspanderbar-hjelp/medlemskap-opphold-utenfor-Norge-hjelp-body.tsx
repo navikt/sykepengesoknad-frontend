@@ -8,8 +8,8 @@ export const MedlemskapOppholdUtenforNorgeHjelpBody = () => {
                 Svar nei, hvis du har oppholdt deg i utlandet i mindre enn 5 uker de siste 12 månedene
             </BodyShort>
             <BodyShort spacing>
-                Du trenger ikke legge inn perioder med opphold utenfor Norge hvis du allerede har lagt inn perioder med
-                utført arbeid i utlandet i forrige spørsmål
+                Svar nei, hvis utenlandsperiodene er de samme som de du har oppgitt i forrige spørsmål (arbeidsperioder
+                i utlandet).
             </BodyShort>
         </>
     )
