@@ -105,20 +105,8 @@ describe('Tester arbeidstakersøknad', () => {
         cy.contains('Gå videre').click()
     })
 
-    it('Søknad UTLAND_V2 ', function () {
-        cy.url().should('include', `${soknad.id}/5`)
-
-        // Test spørsmål
-        cy.get('[data-cy="ja-nei-stor"] input[value=JA]').click()
-        cy.contains('Når var du utenfor EØS?')
-
-        setPeriodeFraTil(14, 22)
-
-        cy.contains('Gå videre').click()
-    })
-
     it('Søknad ARBEID_UNDERVEIS_100_PROSENT', function () {
-        cy.url().should('include', `${soknad.id}/6`)
+        cy.url().should('include', `${soknad.id}/5`)
 
         // Test spørsmål
         cy.contains(
@@ -150,7 +138,7 @@ describe('Tester arbeidstakersøknad', () => {
     })
 
     it('Søknad ANDRE_INNTEKTSKILDER_V2', function () {
-        cy.url().should('include', `${soknad.id}/7`)
+        cy.url().should('include', `${soknad.id}/6`)
 
         cy.contains('Har du andre inntektskilder enn nevnt over?')
 
@@ -184,6 +172,18 @@ describe('Tester arbeidstakersøknad', () => {
             .parent()
             .find('input[type="radio"][value="Ja"]')
             .click()
+
+        cy.contains('Gå videre').click()
+    })
+
+    it('Søknad UTLAND_V2 ', function () {
+        cy.url().should('include', `${soknad.id}/7`)
+
+        // Test spørsmål
+        cy.get('[data-cy="ja-nei-stor"] input[value=JA]').click()
+        cy.contains('Når var du utenfor EØS?')
+
+        setPeriodeFraTil(14, 22)
 
         cy.contains('Gå videre').click()
     })

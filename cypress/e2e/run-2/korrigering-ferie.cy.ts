@@ -33,9 +33,7 @@ describe('Tester korrigering av ferie', () => {
 
         svarNeiHovedsporsmal()
         klikkGaVidere()
-        cy.contains('Opphold i utlandet')
-        svarNeiHovedsporsmal()
-        klikkGaVidere()
+
         cy.contains('Jobb underveis')
         svarNeiHovedsporsmal()
         klikkGaVidere()
@@ -46,6 +44,9 @@ describe('Tester korrigering av ferie', () => {
         cy.contains('Har du andre inntektskilder enn nevnt over?')
         cy.contains('Spørsmålet forklart').click()
         cy.contains('NAV trenger å vite om dine inntektskilder')
+        svarNeiHovedsporsmal()
+        klikkGaVidere()
+        cy.contains('Opphold i utlandet')
         svarNeiHovedsporsmal()
         klikkGaVidere()
         cy.contains('Til slutt')
