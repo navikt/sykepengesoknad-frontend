@@ -21,15 +21,6 @@ describe('Tester medlemskap spørsmål', () => {
             .and('have.text', 'Søknad om sykepenger8. – 21. september 2022')
     })
 
-    it('Oppholdstillatelse', () => {
-        cy.contains('Oppholdstillatelse')
-
-        svarJaHovedsporsmal()
-        velgDato(22)
-        svarRadioGruppe('Har du fått permanent oppholdstillatelse?', 'Ja')
-        klikkGaVidere()
-    })
-
     it('Arbeid utenfor Norge', () => {
         cy.contains('Arbeid utenfor Norge')
         svarJaHovedsporsmal()
@@ -42,6 +33,16 @@ describe('Tester medlemskap spørsmål', () => {
     it('Var du på reise utenfor EØS mens du var sykmeldt', () => {
         cy.contains('Var du på reise utenfor EØS mens du var sykmeldt')
         svarNeiHovedsporsmal()
+        klikkGaVidere()
+    })
+
+    it('Opphold utenfor Norge', () => {
+        cy.contains('Opphold utenfor Norge')
+
+        svarJaHovedsporsmal()
+        svarCombobox('I hvilket land utenfor Norge har du oppholdt deg?', 'Sve', 'Sveits')
+        svarRadioGruppe('Hva gjorde du i utlandet?', 'Jeg studerte')
+        setPeriodeFraTil(12, 20)
         klikkGaVidere()
     })
 
@@ -68,16 +69,6 @@ describe('Tester medlemskap spørsmål', () => {
             .check()
 
         setPeriodeFraTil(12, 20, 1)
-        klikkGaVidere()
-    })
-
-    it('Opphold utenfor Norge', () => {
-        cy.contains('Opphold utenfor Norge')
-
-        svarJaHovedsporsmal()
-        svarCombobox('I hvilket land utenfor Norge har du oppholdt deg?', 'Sve', 'Sveits')
-        svarRadioGruppe('Hva gjorde du i utlandet?', 'Jeg studerte')
-        setPeriodeFraTil(12, 20)
         klikkGaVidere()
     })
 
