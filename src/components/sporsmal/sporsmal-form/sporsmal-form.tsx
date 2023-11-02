@@ -24,6 +24,7 @@ import { useTestpersonQuery } from '../../../hooks/useTestpersonQuery'
 import { useOppdaterSporsmal } from '../../../hooks/useOppdaterSporsmal'
 import { FeilStateView } from '../../feil/refresh-hvis-feil-state'
 import { useSoknadMedDetaljer } from '../../../hooks/useSoknadMedDetaljer'
+import Opplysninger from '../../opplysninger-fra-sykmelding/opplysninger'
 
 import Knapperad from './knapperad'
 import SendesTil from './sendes-til'
@@ -35,6 +36,7 @@ export interface SpmProps {
 const SporsmalForm = ({ sporsmal }: SpmProps) => {
     const router = useRouter()
     const testpersonQuery = useTestpersonQuery()
+
     const { erUtenlandssoknad, valgtSoknad, spmIndex } = useSoknadMedDetaljer()
     const { data: korrigerer } = useSoknad(valgtSoknad?.korrigerer, valgtSoknad?.korrigerer !== undefined)
     const { mutate: sendSoknadMutation, isLoading: senderSoknad, error: sendError } = useSendSoknad()
@@ -53,17 +55,16 @@ const SporsmalForm = ({ sporsmal }: SpmProps) => {
     })
 
     const erSisteSpm = () => {
-        const svartype = sporsmal?.svartype
-        const erSnartSlutt =
-            svartype &&
-            [RSSvartype.IKKE_RELEVANT, RSSvartype.CHECKBOX_PANEL, RSSvartype.BEKREFTELSESPUNKTER].includes(svartype)
-
+        const snartSlutt = [
+            RSSvartype.IKKE_RELEVANT,
+            RSSvartype.CHECKBOX_PANEL,
+            RSSvartype.BEKREFTELSESPUNKTER,
+        ].includes(sporsmal.svartype)
         if (erUtenlandssoknad) {
             return sporsmal?.tag === 'BEKREFT_OPPLYSNINGER_UTLAND_INFO'
         }
-
-        const expectedIndex = svartype === RSSvartype.BEKREFTELSESPUNKTER ? spmIndex + 1 : spmIndex + 2
-        return erSnartSlutt && expectedIndex === valgtSoknad?.sporsmal?.length
+        const expectedIndex = sporsmal.svartype === RSSvartype.BEKREFTELSESPUNKTER ? spmIndex + 1 : spmIndex + 2
+        return snartSlutt && expectedIndex === valgtSoknad?.sporsmal?.length
     }
 
     const erSiste = erSisteSpm()
