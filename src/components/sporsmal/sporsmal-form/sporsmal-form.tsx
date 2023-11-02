@@ -4,7 +4,7 @@ import { useRouter } from 'next/router'
 
 import { RSSoknadstype } from '../../../types/rs-types/rs-soknadstype'
 import { RSSvartype } from '../../../types/rs-types/rs-svartype'
-import { Sporsmal } from '../../../types/types'
+import { Soknad, Sporsmal } from '../../../types/types'
 import { SEPARATOR } from '../../../utils/constants'
 import { hentAnnonymisertSvar, logEvent } from '../../amplitude/amplitude'
 import FeilOppsummering from '../../feil/feil-oppsummering'
@@ -65,15 +65,14 @@ const SporsmalForm = ({ sporsmal }: SpmProps) => {
     const erSiste = erSisteSpm()
     const nesteSporsmal = valgtSoknad?.sporsmal[spmIndex + 1]
 
-    const sendSoknad = () => {
-        if (!valgtSoknad) return
-        if (valgtSoknad.status == RSSoknadstatus.UTKAST_TIL_KORRIGERING) {
-            if (korrigerer && harLikeSvar(korrigerer, valgtSoknad)) {
+    const sendSoknad = (oppdatertSoknad: Soknad) => {
+        if (oppdatertSoknad.status == RSSoknadstatus.UTKAST_TIL_KORRIGERING) {
+            if (korrigerer && harLikeSvar(korrigerer, oppdatertSoknad)) {
                 setEndringUtenEndringAapen(true)
                 return
             }
         }
-        sendSoknadMutation(valgtSoknad)
+        sendSoknadMutation(oppdatertSoknad)
     }
 
     const onSubmit = (data: Record<string, any>) => {
@@ -94,22 +93,21 @@ const SporsmalForm = ({ sporsmal }: SpmProps) => {
                 return settSvar(sporsmal, data)
             }
 
-            const onSuccessLogic = async (isLast: boolean) => {
+            const onSuccessLogic = async (isLast: boolean, oppdatertSoknad: Soknad) => {
                 if (isLast) {
                     logEvent('skjema fullført', {
-                        soknadstype: valgtSoknad?.soknadstype,
+                        soknadstype: oppdatertSoknad.soknadstype,
                         skjemanavn: 'sykepengesoknad',
                     })
-                    sendSoknad()
+                    sendSoknad(oppdatertSoknad)
                 } else {
                     logEvent('skjema spørsmål besvart', {
-                        soknadstype: valgtSoknad?.soknadstype,
+                        soknadstype: oppdatertSoknad.soknadstype,
                         skjemanavn: 'sykepengesoknad',
                         spørsmål: sporsmal.tag,
                         svar: hentAnnonymisertSvar(sporsmal),
                     })
 
-                    methods.clearErrors()
                     await router.push(
                         pathUtenSteg(router.asPath) + SEPARATOR + (spmIndex + 2) + testpersonQuery.query(),
                     )
@@ -119,7 +117,7 @@ const SporsmalForm = ({ sporsmal }: SpmProps) => {
 
             oppdaterSporsmalMutation({
                 sporsmal: oppdatertSporsmalMedSvar(),
-                onSuccess: () => onSuccessLogic(erSiste),
+                onSuccess: (oppdatertSoknad) => onSuccessLogic(erSiste, oppdatertSoknad),
                 soknad: valgtSoknad,
                 spmIndex: erSisteSpm() ? spmIndex + 1 : spmIndex,
             })
