@@ -259,16 +259,16 @@ describe('Tester feilmeldinger', () => {
     })
 
     it('TALL ingen valg', () => {
-        gaTilSoknad(arbeidstakerGradert, '7')
+        gaTilSoknad(arbeidstakerGradert, '6')
         cy.get('input[value=JA]').click()
         cy.get('.undersporsmal input[value=Prosent]').click()
-        cy.get(`input[name=${arbeidstakerGradert.sporsmal[6].undersporsmal[0].id}]`).type('37.5')
+        cy.get(`input[name=${arbeidstakerGradert.sporsmal[5].undersporsmal[0].id}]`).type('37.5')
         gaVidere()
 
         feilmeldingHandteringMedLokalFeilmelding(
             'Du må oppgi en verdi',
             'Du må svare på hvor mye du jobbet totalt',
-            arbeidstakerGradert.sporsmal[6].undersporsmal[1].undersporsmal[0].undersporsmal[0].id,
+            arbeidstakerGradert.sporsmal[5].undersporsmal[1].undersporsmal[0].undersporsmal[0].id,
         )
     })
 
@@ -278,7 +278,7 @@ describe('Tester feilmeldinger', () => {
         feilmeldingHandteringMedLokalFeilmelding(
             'Må være minimum 51',
             'Vennligst fyll ut et tall mellom 51 og 99',
-            arbeidstakerGradert.sporsmal[6].undersporsmal[1].undersporsmal[0].undersporsmal[0].id,
+            arbeidstakerGradert.sporsmal[5].undersporsmal[1].undersporsmal[0].undersporsmal[0].id,
         )
     })
 
@@ -289,20 +289,20 @@ describe('Tester feilmeldinger', () => {
         feilmeldingHandteringMedLokalFeilmelding(
             'Må være maksimum 99',
             'Vennligst fyll ut et tall mellom 51 og 99',
-            arbeidstakerGradert.sporsmal[6].undersporsmal[1].undersporsmal[0].undersporsmal[0].id,
+            arbeidstakerGradert.sporsmal[5].undersporsmal[1].undersporsmal[0].undersporsmal[0].id,
         )
     })
 
     it('TALL grad mindre enn sykmeldingsgrad', () => {
         cy.get('.undersporsmal input[value=Timer]').click()
         cy.get(
-            `input[name=${arbeidstakerGradert.sporsmal[6].undersporsmal[1].undersporsmal[1].undersporsmal[0].id}]`,
+            `input[name=${arbeidstakerGradert.sporsmal[5].undersporsmal[1].undersporsmal[1].undersporsmal[0].id}]`,
         ).type('1')
         gaVidere()
         feilmeldingHandteringMedLokalFeilmelding(
             'Timene utgjør mindre enn 50 %.',
             'Antall timer du skrev inn, betyr at du har jobbet 2 % av det du gjør når du er frisk. Du må enten svare nei på øverste spørsmålet eller endre antall timer totalt.',
-            arbeidstakerGradert.sporsmal[6].undersporsmal[1].undersporsmal[1].undersporsmal[0].id,
+            arbeidstakerGradert.sporsmal[5].undersporsmal[1].undersporsmal[1].undersporsmal[0].id,
         )
     })
 
@@ -313,13 +313,13 @@ describe('Tester feilmeldinger', () => {
     })
 
     it('CHECKBOX_GRUPPE ingen valgt', () => {
-        gaTilSoknad(arbeidstakerGradert, '9')
+        gaTilSoknad(arbeidstakerGradert, '8')
         cy.get('input[value=JA]').click()
         gaVidere()
         feilmeldingHandtering(
             'Du må velge minst et alternativ',
             'Du må oppgi hvilke inntektskilder du har',
-            arbeidstakerGradert.sporsmal[8].undersporsmal[0].undersporsmal[0].id,
+            arbeidstakerGradert.sporsmal[7].undersporsmal[0].undersporsmal[0].id,
         )
     })
 

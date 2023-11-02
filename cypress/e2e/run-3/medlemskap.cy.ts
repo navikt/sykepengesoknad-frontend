@@ -6,6 +6,7 @@ import {
     svarCombobox,
     svarFritekst,
     svarJaHovedsporsmal,
+    svarNeiHovedsporsmal,
     svarRadioGruppe,
     velgDato,
 } from '../../support/utilities'
@@ -14,10 +15,19 @@ describe('Tester medlemskap spørsmål', () => {
     const soknad = medlemskapPerson.soknader[0]
 
     before(() => {
-        cy.visit(`/syk/sykepengesoknad/soknader/${soknad.id}/8?testperson=medlemskap`)
+        cy.visit(`/syk/sykepengesoknad/soknader/${soknad.id}/7?testperson=medlemskap`)
         cy.get('.navds-heading--large')
             .should('be.visible')
             .and('have.text', 'Søknad om sykepenger8. – 21. september 2022')
+    })
+
+    it('Oppholdstillatelse', () => {
+        cy.contains('Oppholdstillatelse')
+
+        svarJaHovedsporsmal()
+        velgDato(22)
+        svarRadioGruppe('Har du fått permanent oppholdstillatelse?', 'Ja')
+        klikkGaVidere()
     })
 
     it('Arbeid utenfor Norge', () => {
@@ -25,6 +35,22 @@ describe('Tester medlemskap spørsmål', () => {
         svarJaHovedsporsmal()
         svarCombobox('I hvilket land utførte du arbeidet?', 'Fra', 'Frankrike')
         svarFritekst('Hvilken arbeidsgiver jobbet du for?', 'Croissant AS')
+        setPeriodeFraTil(12, 20)
+        klikkGaVidere()
+    })
+
+    it('Var du på reise utenfor EØS mens du var sykmeldt', () => {
+        cy.contains('Var du på reise utenfor EØS mens du var sykmeldt')
+        svarNeiHovedsporsmal()
+        klikkGaVidere()
+    })
+
+    it('Opphold utenfor Norge', () => {
+        cy.contains('Opphold utenfor Norge')
+
+        svarJaHovedsporsmal()
+        svarCombobox('I hvilket land utenfor Norge har du oppholdt deg?', 'Sve', 'Sveits')
+        svarRadioGruppe('Hva var årsaken til oppholdet?', 'Studier')
         setPeriodeFraTil(12, 20)
         klikkGaVidere()
     })
@@ -52,25 +78,6 @@ describe('Tester medlemskap spørsmål', () => {
             .check()
 
         setPeriodeFraTil(12, 20, 1)
-        klikkGaVidere()
-    })
-
-    it('Opphold utenfor Norge', () => {
-        cy.contains('Opphold utenfor Norge')
-
-        svarJaHovedsporsmal()
-        svarCombobox('I hvilket land utenfor Norge har du oppholdt deg?', 'Sve', 'Sveits')
-        svarRadioGruppe('Hva var årsaken til oppholdet?', 'Studier')
-        setPeriodeFraTil(12, 20)
-        klikkGaVidere()
-    })
-
-    it('Oppholdstillatelse', () => {
-        cy.contains('Oppholdstillatelse')
-
-        svarJaHovedsporsmal()
-        velgDato(22)
-        svarRadioGruppe('Har du fått permanent oppholdstillatelse?', 'Ja')
         klikkGaVidere()
     })
 

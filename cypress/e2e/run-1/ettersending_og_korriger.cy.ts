@@ -22,10 +22,10 @@ describe('Tester ettersending og korrigering', () => {
             'Tilbake i fullt arbeid',
             'Ferie',
             'Permisjon',
-            'Opphold i utlandet',
             'Jobb underveis i sykefraværet',
             'Arbeid utenfor Norge',
             'Andre inntektskilder',
+            'Opphold i utlandet',
         ])
 
         cy.contains('Til slutt')
@@ -87,8 +87,8 @@ describe('Tester ettersending og korrigering', () => {
         klikkGaVidere()
         klikkGaVidere()
         klikkGaVidere()
-        klikkGaVidere()
         cy.get('[data-cy="ja-nei-stor"] input[value=JA]').click()
+        klikkGaVidere()
         klikkGaVidere()
         klikkGaVidere()
         cy.get('.navds-checkbox__label').click()
