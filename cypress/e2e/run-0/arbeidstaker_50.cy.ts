@@ -86,19 +86,8 @@ describe('Tester arbeidstakersøknad - gradert 50%', () => {
         cy.contains('Gå videre').click()
     })
 
-    it('Søknad UTLAND_V2', function () {
-        cy.url().should('include', `${soknad.id}/6`)
-
-        // Test spørsmål
-        cy.get('[data-cy="ja-nei-stor"] input[value=JA]').click()
-        cy.contains('Når var du utenfor EØS?')
-
-        setPeriodeFraTil(14, 22)
-        cy.contains('Gå videre').click()
-    })
-
     it('Søknad JOBBET_DU_GRADERT', function () {
-        cy.url().should('include', `${soknad.id}/7`)
+        cy.url().should('include', `${soknad.id}/6`)
 
         // Test spørsmål
         cy.get('[data-cy="ja-nei-stor"] input[value=JA]').click()
@@ -140,7 +129,7 @@ describe('Tester arbeidstakersøknad - gradert 50%', () => {
     })
 
     it('Søknad ARBEID_UTENFOR_NORGE', function () {
-        cy.url().should('include', `${soknad.id}/8`)
+        cy.url().should('include', `${soknad.id}/7`)
 
         // Test spørsmål
         cy.get('[data-cy="ja-nei-stor"] input[value=JA]').click()
@@ -150,7 +139,7 @@ describe('Tester arbeidstakersøknad - gradert 50%', () => {
     })
 
     it('Søknad ANDRE_INNTEKTSKILDER_V2', function () {
-        cy.url().should('include', `${soknad.id}/9`)
+        cy.url().should('include', `${soknad.id}/8`)
 
         cy.contains('Har du andre inntektskilder enn nevnt over?')
 
@@ -162,6 +151,17 @@ describe('Tester arbeidstakersøknad - gradert 50%', () => {
             'ansatt et annet sted enn nevnt over',
         )
         cy.get('input[type=checkbox]#d9ac4359-5519-34f1-b59d-b5ab24e55821').click()
+        cy.contains('Gå videre').click()
+    })
+
+    it('Søknad UTLAND_V2', function () {
+        cy.url().should('include', `${soknad.id}/9`)
+
+        // Test spørsmål
+        cy.get('[data-cy="ja-nei-stor"] input[value=JA]').click()
+        cy.contains('Når var du utenfor EØS?')
+
+        setPeriodeFraTil(14, 22)
         cy.contains('Gå videre').click()
     })
 

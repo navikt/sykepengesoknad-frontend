@@ -17,10 +17,10 @@ describe('Tester yrkesskadesspørsmål', () => {
             'Tilbake i fullt arbeid',
             'Ferie',
             'Permisjon',
-            'Opphold i utlandet',
             'Jobb underveis i sykefraværet',
             'Arbeid utenfor Norge',
             'Andre inntektskilder',
+            'Opphold i utlandet',
         ])
     })
 
