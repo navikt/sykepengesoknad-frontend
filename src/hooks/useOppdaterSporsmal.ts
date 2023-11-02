@@ -12,7 +12,7 @@ interface OppdaterSporsmalVariables {
     sporsmal: Sporsmal
     soknad: Soknad
     spmIndex: number
-    onSuccess?: () => void
+    onSuccess?: (oppdatertSoknad: Soknad) => void
 }
 
 export function useOppdaterSporsmal() {
@@ -51,9 +51,9 @@ export function useOppdaterSporsmal() {
                 }
             }
 
-            queryClient.setQueriesData(['soknad', variables.soknad.id], oppdatertSoknad())
-
-            if (variables.onSuccess) variables.onSuccess()
+            const soknadMedSvar = oppdatertSoknad()
+            queryClient.setQueriesData(['soknad', variables.soknad.id], soknadMedSvar)
+            if (variables.onSuccess) variables.onSuccess(soknadMedSvar)
         },
     })
 }
