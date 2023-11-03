@@ -15,6 +15,7 @@ test('Alle tags har global feilmelding', () => {
     tags = tags.filter((skipTag) => {
         return (
             skipTag !== 'VAER_KLAR_OVER_AT' && // Svartype: IKKE_RELEVANT
+            skipTag !== 'BEKREFTELSE' && // Svartype: IKKE_RELEVANT
             skipTag !== 'IKKE_SOKT_UTENLANDSOPPHOLD_INFORMASJON' && // Svartype: IKKE_RELEVANT
             skipTag !== 'BEKREFT_OPPLYSNINGER_UTLAND_INFO' && // Svartype: IKKE_RELEVANT
             skipTag !== 'MEDLEMSKAP_UTFORT_ARBEID_UTENFOR_NORGE_GRUPPERING' && // Svartype: GRUPPE_AV_UNDERSPORSMAL
