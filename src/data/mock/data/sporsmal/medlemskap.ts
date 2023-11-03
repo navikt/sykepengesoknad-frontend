@@ -116,7 +116,7 @@ export const medlemskapOppholdUtenforNorgeSporsmal: RSSporsmal = {
                                 {
                                     id: '24c07fc1-2bcd-34ee-a1f0-0fc1a2038fa9',
                                     tag: 'MEDLEMSKAP_OPPHOLD_UTENFOR_NORGE_BEGRUNNELSE_ANNET_FRITEKST_0',
-                                    sporsmalstekst: null,
+                                    sporsmalstekst: 'Beskriv hva du gjorde',
                                     undertekst: null,
                                     svartype: 'FRITEKST',
                                     min: '1',
@@ -332,7 +332,7 @@ export const medlemskapOppholdUtenforEøsSporsmal: RSSporsmal = {
                                 {
                                     id: '8d329d85-6795-3063-9bac-aba64faa4826',
                                     tag: 'MEDLEMSKAP_OPPHOLD_UTENFOR_EOS_BEGRUNNELSE_ANNET_FRITEKST_0',
-                                    sporsmalstekst: null,
+                                    sporsmalstekst: 'Beskriv hva du gjorde',
                                     undertekst: null,
                                     svartype: 'FRITEKST',
                                     min: '1',
