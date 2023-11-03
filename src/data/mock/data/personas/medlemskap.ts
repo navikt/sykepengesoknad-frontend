@@ -24,9 +24,9 @@ if (splittSted === -1) {
 medlemskapSoknad.sporsmal = [
     ...medlemskapSoknad.sporsmal.slice(0, splittSted + 1),
     medlemskapUtførtArbeidUtenforNorgeSporsmal,
-    oppholdUtlandSpm,
     medlemskapOppholdUtenforNorgeSporsmal,
     medlemskapOppholdUtenforEøsSporsmal,
+    oppholdUtlandSpm,
     medlemskapOppholdstillatelseSporsmal,
     ...medlemskapSoknad.sporsmal.slice(splittSted + 1),
 ]

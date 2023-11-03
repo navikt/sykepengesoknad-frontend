@@ -329,7 +329,7 @@ describe('Tester feilmeldinger', () => {
     })
 
     it('COMBOBOX_SINGLE ingen valg', () => {
-        cy.visit(`/syk/sykepengesoknad/soknader/7fdc72b9-30a9-435c-9eb1-f7cc68a8b429/8?testperson=medlemskap`)
+        cy.visit(`/syk/sykepengesoknad/soknader/7fdc72b9-30a9-435c-9eb1-f7cc68a8b429/7?testperson=medlemskap`)
         cy.get('input[value=JA]').click()
         svarFritekst('Hvilken arbeidsgiver jobbet du for?', 'jobben')
         setPeriodeDateFieldMedIndex(0, '01.04.2020')

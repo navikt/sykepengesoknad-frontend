@@ -30,12 +30,6 @@ describe('Tester medlemskap spørsmål', () => {
         klikkGaVidere()
     })
 
-    it('Var du på reise utenfor EØS mens du var sykmeldt', () => {
-        cy.contains('Var du på reise utenfor EØS mens du var sykmeldt')
-        svarNeiHovedsporsmal()
-        klikkGaVidere()
-    })
-
     it('Opphold utenfor Norge', () => {
         cy.contains('Opphold utenfor Norge')
 
@@ -69,6 +63,12 @@ describe('Tester medlemskap spørsmål', () => {
             .check()
 
         setPeriodeFraTil(12, 20, 1)
+        klikkGaVidere()
+    })
+
+    it('Var du på reise utenfor EØS mens du var sykmeldt', () => {
+        cy.contains('Var du på reise utenfor EØS mens du var sykmeldt')
+        svarNeiHovedsporsmal()
         klikkGaVidere()
     })
 
