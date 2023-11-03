@@ -209,6 +209,7 @@ const kjenteTags = [
     'UTLAND_NAR_V2',
     'UTLAND_V2',
     'VAER_KLAR_OVER_AT',
+    'BEKREFTELSE',
     'BRUKTE_REISETILSKUDDET',
     'TRANSPORT_TIL_DAGLIG',
     'TYPE_TRANSPORT',
