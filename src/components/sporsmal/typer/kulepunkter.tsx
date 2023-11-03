@@ -24,6 +24,8 @@ const Kulepunkter = ({ sporsmal }: SpmProps) => {
             ? Object.values(BekreftelsespunkterArbeidstakereTekster)
             : Object.values(BekreftelsespunkterReisetilskuddTekster)
 
+    console.log('sporsmal', sporsmal) // eslint-disable-line
+
     useEffect(() => {
         setValue(sporsmal.id, kulepunkterTekster)
     }, [kulepunkterTekster, setValue, sporsmal.id])

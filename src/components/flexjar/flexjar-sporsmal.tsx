@@ -2,7 +2,7 @@ import { Button, Skeleton } from '@navikt/ds-react'
 import React, { useEffect, useState } from 'react'
 
 import { cn } from '../../utils/tw-utils'
-import { Soknad } from '../../types/types'
+import { Soknad, Sporsmal } from '../../types/types'
 import { RSSoknadstype } from '../../types/rs-types/rs-soknadstype'
 
 import { FlexjarFelles } from './flexjar-felles'
@@ -46,12 +46,14 @@ export const FlexjarSporsmal = ({ soknad, steg }: { soknad: Soknad | undefined; 
         return null
     }
 
-    if (
-        steg ===
-        soknad?.sporsmal.filter(
-            (s) => s.tag !== 'VAER_KLAR_OVER_AT' || (s.tag === 'VAER_KLAR_OVER_AT' && s.undersporsmal.length > 0),
-        ).length
-    ) {
+    const urelevantSporsmal = (s: Sporsmal) => {
+        return (
+            (s.tag !== 'BEKREFTELSE' || (s.tag === 'BEKREFTELSE' && s.undersporsmal.length > 0)) &&
+            s.tag !== 'VAER_KLAR_OVER_AT'
+        )
+    }
+
+    if (steg == soknad?.sporsmal.filter(urelevantSporsmal).length) {
         return null
     }
 

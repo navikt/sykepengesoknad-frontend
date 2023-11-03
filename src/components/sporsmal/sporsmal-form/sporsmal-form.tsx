@@ -55,14 +55,14 @@ const SporsmalForm = ({ sporsmal }: SpmProps) => {
     })
 
     const erSisteSpm = () => {
+        if (erUtenlandssoknad) {
+            return sporsmal.tag === 'BEKREFT_OPPLYSNINGER_UTLAND_INFO'
+        }
         const snartSlutt = [
             RSSvartype.IKKE_RELEVANT,
             RSSvartype.CHECKBOX_PANEL,
             RSSvartype.BEKREFTELSESPUNKTER,
         ].includes(sporsmal.svartype)
-        if (erUtenlandssoknad) {
-            return sporsmal?.tag === 'BEKREFT_OPPLYSNINGER_UTLAND_INFO'
-        }
         const expectedIndex = sporsmal.svartype === RSSvartype.BEKREFTELSESPUNKTER ? spmIndex + 1 : spmIndex + 2
         return snartSlutt && expectedIndex === valgtSoknad?.sporsmal?.length
     }

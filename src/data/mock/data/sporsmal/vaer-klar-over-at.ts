@@ -22,7 +22,7 @@ export const værKlarOverAt = (): RSSporsmal => {
 export const nyVærKlarOverAt = (): RSSporsmal => {
     return {
         id: '1623832',
-        tag: 'VAER_KLAR_OVER_AT',
+        tag: 'BEKREFTELSE',
         sporsmalstekst: 'Viktig å være klar over:',
         undertekst: null,
         svartype: 'BEKREFTELSESPUNKTER',

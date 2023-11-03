@@ -90,7 +90,7 @@ describe('Tester behandlingsdagersøknad', () => {
         cy.contains('Gå videre').click()
     })
 
-    it('Søknad VAER_KLAR_OVER_AT - steg 4', function () {
+    it('Søknad BEKREFTELSE - steg 4', function () {
         cy.url().should('include', `${soknad.id}/5`)
         cy.contains('Til slutt')
         it('Bekreftelsespunktene er riktige', () => {

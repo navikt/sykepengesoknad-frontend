@@ -37,7 +37,7 @@ const Knapperad = ({ poster }: { poster: boolean }) => {
     const knappetekst = () => {
         if (!soknad) return tekst('sykepengesoknad.ga-videre')
 
-        const erSisteSteg = sporsmal?.tag.includes('BEKREFT_OPPLYSNINGER') || sporsmal?.tag === 'VAER_KLAR_OVER_AT'
+        const erSisteSteg = sporsmal?.tag.includes('BEKREFT_OPPLYSNINGER') || sporsmal?.tag === 'BEKREFTELSE'
 
         if (erSisteSteg) {
             if (soknad.status === RSSoknadstatus.UTKAST_TIL_KORRIGERING) {
