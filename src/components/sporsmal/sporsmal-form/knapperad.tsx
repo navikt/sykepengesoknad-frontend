@@ -38,7 +38,7 @@ const Knapperad = ({ poster }: { poster: boolean }) => {
         if (!soknad) return tekst('sykepengesoknad.ga-videre')
 
         const erTagBekreftelse = (tag: string) =>
-            ['BEKREFT_OPPLYSNINGER', 'BEKREFTELSE', 'VAER_KLAR_OVER_AT'].includes(tag)
+            tag.includes('BEKREFT_OPPLYSNINGER') || ['BEKREFTELSE', 'VAER_KLAR_OVER_AT'].includes(tag)
 
         const erSisteSteg = sporsmal && erTagBekreftelse(sporsmal.tag)
 
