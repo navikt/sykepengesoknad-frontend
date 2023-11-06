@@ -28,6 +28,9 @@ export const AndreInntektskilderHjelpBody = () => {
             <BodyShort className="pt-3"> {AndreInntektskilderHjelpTekster['liste.tittel']} </BodyShort>
             <List as="ul" size="small" className="[&>ul]:mt-2">
                 <List.Item>
+                    <BodyShort>{AndreInntektskilderHjelpTekster['liste.listepunkt0']}</BodyShort>
+                </List.Item>
+                <List.Item>
                     <BodyShort>{AndreInntektskilderHjelpTekster['liste.listepunkt1']}</BodyShort>
                 </List.Item>
                 <List.Item>

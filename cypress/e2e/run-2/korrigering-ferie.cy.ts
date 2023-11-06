@@ -43,7 +43,7 @@ describe('Tester korrigering av ferie', () => {
         cy.contains('Andre inntektskilder')
         cy.contains('Har du andre inntektskilder enn nevnt over?')
         cy.contains('Spørsmålet forklart').click()
-        cy.contains('NAV trenger å vite om dine inntektskilder')
+        cy.contains('NAV trenger å vite om din pensjonsgivende inntekt')
         svarNeiHovedsporsmal()
         klikkGaVidere()
         cy.contains('Opphold i utlandet')
