@@ -103,6 +103,7 @@ export const hentGeneriskFeilmelding = (
         }
         case RSSvartype.KVITTERING:
         case RSSvartype.IKKE_RELEVANT:
+        case RSSvartype.GRUPPE_AV_UNDERSPORSMAL:
         case RSSvartype.INFO_BEHANDLINGSDAGER: {
             return ''
         }

@@ -87,6 +87,7 @@ export const SporsmalVarianter = ({ sporsmal }: OppsummeringProps) => {
             return <LandSum sporsmal={sporsmal} />
         }
 
+        case RSSvartype.GRUPPE_AV_UNDERSPORSMAL:
         case RSSvartype.IKKE_RELEVANT: {
             return <IkkeRelevantOppsummering sporsmal={sporsmal} />
         }

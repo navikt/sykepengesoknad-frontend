@@ -23,6 +23,7 @@ export const settSvar = (sporsmal: Sporsmal, verdier: Record<string, any>): Spor
     if (
         verdi === undefined &&
         sporsmal.svartype !== RSSvartype.IKKE_RELEVANT &&
+        sporsmal.svartype !== RSSvartype.GRUPPE_AV_UNDERSPORSMAL &&
         sporsmal.svartype !== RSSvartype.RADIO &&
         sporsmal.svartype !== RSSvartype.CHECKBOX &&
         sporsmal.svartype !== RSSvartype.INFO_BEHANDLINGSDAGER
@@ -53,6 +54,7 @@ export const settSvar = (sporsmal: Sporsmal, verdier: Record<string, any>): Spor
         case RSSvartype.KVITTERING:
             // Denne settes i opplasting-form
             return sporsmal
+        case RSSvartype.GRUPPE_AV_UNDERSPORSMAL:
         case RSSvartype.IKKE_RELEVANT:
         case RSSvartype.RADIO:
         case RSSvartype.CHECKBOX: {

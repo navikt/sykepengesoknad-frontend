@@ -7,6 +7,7 @@ export enum RSSvartype {
     DATO = 'DATO',
     FRITEKST = 'FRITEKST',
     IKKE_RELEVANT = 'IKKE_RELEVANT',
+    GRUPPE_AV_UNDERSPORSMAL = 'GRUPPE_AV_UNDERSPORSMAL',
     JA_NEI = 'JA_NEI',
     LAND = 'LAND',
     PERIODE = 'PERIODE',
@@ -34,6 +35,7 @@ export type RSSvartypeType =
     | 'DATO'
     | 'FRITEKST'
     | 'IKKE_RELEVANT'
+    | 'GRUPPE_AV_UNDERSPORSMAL'
     | 'JA_NEI'
     | 'LAND'
     | 'PERIODE'

@@ -192,11 +192,15 @@ const SporsmalTekster = {
         'Du må svare på det er en sammenheng mellom dette sykefraværet og tidligere yrkesskade',
     'soknad.feilmelding.MEDLEMSKAP_OPPHOLDSTILLATELSE':
         'Du må svare på om du har oppholdstillatelse fra utlendingsdirektoratet',
+    'soknad.feilmelding.MEDLEMSKAP_OPPHOLDSTILLATELSE_GRUPPE':
+        'Du må svare på om du har fått permanent eller midlertidig oppholdstillatelse',
     'soknad.feilmelding.MEDLEMSKAP_OPPHOLDSTILLATELSE_VEDTAKSDATO':
         'Du må oppgi vedtaksdato for din oppholdstillatelse',
-    'soknad.feilmelding.MEDLEMSKAP_OPPHOLDSTILLATELSE_PERMANENT':
-        'Du må svare på om du har fått permanent oppholdstillatelse',
-    'soknad.feilmelding.MEDLEMSKAP_OPPHOLDSTILLATELSE_PERIODE':
+    'soknad.feilmelding.MEDLEMSKAP_OPPHOLDSTILLATELSE_PERMANENT': '',
+    'soknad.feilmelding.MEDLEMSKAP_OPPHOLDSTILLATELSE_PERMANENT_DATO':
+        'Du må oppgi hvilken dato oppholdstillatelse gjelder fra',
+    'soknad.feilmelding.MEDLEMSKAP_OPPHOLDSTILLATELSE_MIDLERTIDIG': '',
+    'soknad.feilmelding.MEDLEMSKAP_OPPHOLDSTILLATELSE_MIDLERTIDIG_PERIODE':
         'Du må oppgi hvilken periode du fått oppholdstillatelse for',
     'soknad.feilmelding.MEDLEMSKAP_OPPHOLD_UTENFOR_EOS':
         'Du må svare på om du har oppholdt deg utenfor EØS-området i løpet av de siste 12 månedene',
@@ -204,7 +208,11 @@ const SporsmalTekster = {
     'soknad.feilmelding.MEDLEMSKAP_OPPHOLD_UTENFOR_EOS_BEGRUNNELSE': 'Du må oppgi grunn for ditt opphold utenfor EØS',
     'soknad.feilmelding.MEDLEMSKAP_OPPHOLD_UTENFOR_EOS_BEGRUNNELSE_STUDIE': '',
     'soknad.feilmelding.MEDLEMSKAP_OPPHOLD_UTENFOR_EOS_BEGRUNNELSE_FERIE': '',
-    'soknad.feilmelding.MEDLEMSKAP_OPPHOLD_UTENFOR_EOS_BEGRUNNELSE_FORSORG': '',
+    'soknad.feilmelding.MEDLEMSKAP_OPPHOLD_UTENFOR_EOS_BEGRUNNELSE_BO': '',
+    'soknad.feilmelding.MEDLEMSKAP_OPPHOLD_UTENFOR_EOS_BEGRUNNELSE_EKTEFELLE': '',
+    'soknad.feilmelding.MEDLEMSKAP_OPPHOLD_UTENFOR_EOS_BEGRUNNELSE_ANNET': '',
+    'soknad.feilmelding.MEDLEMSKAP_OPPHOLD_UTENFOR_EOS_BEGRUNNELSE_ANNET_FRITEKST':
+        'Du må oppgi hva du gjorde i utlandet',
     'soknad.feilmelding.MEDLEMSKAP_OPPHOLD_UTENFOR_EOS_NAAR': 'Du må oppgi perioden du har oppholdt deg utenfor EØS',
     'soknad.feilmelding.MEDLEMSKAP_OPPHOLD_UTENFOR_NORGE':
         'Du må svare på om du har oppholdt deg utenfor Norge i løpet av de siste 12 månedene',
@@ -213,7 +221,11 @@ const SporsmalTekster = {
         'Du må oppgi grunn for ditt opphold utenfor NORGE',
     'soknad.feilmelding.MEDLEMSKAP_OPPHOLD_UTENFOR_NORGE_BEGRUNNELSE_STUDIE': '',
     'soknad.feilmelding.MEDLEMSKAP_OPPHOLD_UTENFOR_NORGE_BEGRUNNELSE_FERIE': '',
-    'soknad.feilmelding.MEDLEMSKAP_OPPHOLD_UTENFOR_NORGE_BEGRUNNELSE_FORSORG': '',
+    'soknad.feilmelding.MEDLEMSKAP_OPPHOLD_UTENFOR_NORGE_BEGRUNNELSE_BO': '',
+    'soknad.feilmelding.MEDLEMSKAP_OPPHOLD_UTENFOR_NORGE_BEGRUNNELSE_EKTEFELLE': '',
+    'soknad.feilmelding.MEDLEMSKAP_OPPHOLD_UTENFOR_NORGE_BEGRUNNELSE_ANNET': '',
+    'soknad.feilmelding.MEDLEMSKAP_OPPHOLD_UTENFOR_NORGE_BEGRUNNELSE_ANNET_FRITEKST':
+        'Du må oppgi hva du gjorde i utlandet',
     'soknad.feilmelding.MEDLEMSKAP_OPPHOLD_UTENFOR_NORGE_NAAR':
         'Du må oppgi perioden du har oppholdt deg utenfor Norge',
     'soknad.feilmelding.MEDLEMSKAP_UTFORT_ARBEID_UTENFOR_NORGE':
