@@ -1,0 +1,8 @@
+.subtleCard {
+    --ac-expansioncard-border-open-color: none;
+    --ac-expansioncard-border-hover-color: none;
+}
+
+.headerStyling {
+    --ac-expansioncard-header-bg: var(--a-gray-50);
+}

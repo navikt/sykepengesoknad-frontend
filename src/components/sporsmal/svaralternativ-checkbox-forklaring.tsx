@@ -1,5 +1,18 @@
-import { BodyShort, Checkbox, DatePicker, Panel, TextField, useDatepicker } from "@navikt/ds-react";
-import React, { Fragment, ReactElement } from 'react'
+import {
+    BodyShort,
+    Checkbox,
+    CheckboxGroup,
+    DatePicker,
+    ExpansionCard,
+    Panel,
+    Radio,
+    RadioGroup,
+    TextField,
+    useDatepicker,
+} from '@navikt/ds-react'
+import React, { Fragment, ReactElement, useState } from 'react'
+import format from 'date-fns/format'
+import nbLocale from 'date-fns/locale/nb'
 
 import { TagTyper } from '../../types/enums'
 
@@ -9,30 +22,89 @@ type JobItemProps = {
     unknownJobs: boolean
 }
 
-const JobItem: React.FunctionComponent<JobItemProps> = ({ name, index , unknownJobs}) => {
+import styles from './svaralternativ-checkbox-forklaring.module.css'
+
+const JobItem: React.FunctionComponent<JobItemProps> = ({ name, index, unknownJobs }) => {
     // className="p-4 bg-gray-300 rounded shadow"
-      const { datepickerProps, inputProps, selectedDay } = useDatepicker({
-    fromDate: new Date("Aug 23 2019"),
-    onDateChange: console.log,
-  });
+
+    const { datepickerProps, inputProps, selectedDay } = useDatepicker({
+        fromDate: new Date('Aug 23 2019'),
+        onDateChange: console.log,
+    })
+    const handleChexboxChange = (val: any[]) => console.log(val)
+
+    const [jobberDerFortsatt, setjobberDerFortsatt] = useState<string | null>(null)
+    const [jobbetDerSiste14Dagene, setJobbetSiste14Dagene] = useState<string | null>(null)
+    // Handle change function to update the selectedValue state
+    const handleJobberDerFortsattChange = (val: string) => {
+        setjobberDerFortsatt(val) // or val.target.value if the event object is passed
+        setJobbetSiste14Dagene(null)
+    }
+
+    const handleJobbetSiste14Dagene = (val: string) => {
+        setJobbetSiste14Dagene(val) // or val.target.value if the event object is passed
+    }
 
     return (
         <li>
-            <Panel border className="mb-4" key={index}>
-                <span className="block font-semibold mb-2">{name}</span>
-                {unknownJobs &&       <DatePicker {...datepickerProps}>
-        <DatePicker.Input {...inputProps} label="Når startet du?    " />
-      </DatePicker>
-}
-                <Checkbox value="ikke_jobbet_i_perioden">Jeg har ikke jobbet der i perioden</Checkbox>
-                <Checkbox value="ikke_jobbet_i_perioden_sykmeldt">Jeg er sykmeldt</Checkbox>
-                <Checkbox value="ikke_jobbet_i_perioden_sluttet">Jeg har sluttet</Checkbox>
-                <Checkbox value="ikke_jobbet_i_perioden_sluttet">Jeg har ikke begynt enda</Checkbox>
+            <div className={styles.subtleCard}>
+                <ExpansionCard aria-label="default-demo" defaultOpen={true}>
+                    <div className={styles.headerStyling}>
+                        <ExpansionCard.Header className="mb-4">
+                            <ExpansionCard.Title>{name}</ExpansionCard.Title>
+                        </ExpansionCard.Header>
+                    </div>
 
+                    <ExpansionCard.Content>
+                        <Fragment>
+                            <RadioGroup
+                                legend={`Jobber du fortsatt ved ${name}?`}
+                                onChange={(val: string) => handleJobberDerFortsattChange(val)}
+                                className="mb-4"
+                            >
+                                <Radio value="JA">Ja</Radio>
+                                <Radio value="NEI">Nei</Radio>
+                            </RadioGroup>
 
-                <TextField label="Timer jobbet i perioden:" placeholder="F.eks: 5 timer" />
-                <TextField label="Lønn tjent perioden:" placeholder="F.eks: 12000 kr" />
-            </Panel>
+                            {jobberDerFortsatt && jobberDerFortsatt === 'NEI' && (
+                                <div className="min-h-96 mb-4">
+                                    <DatePicker {...datepickerProps}>
+                                        <DatePicker.Input {...inputProps} label="Når sluttet du?    " />
+                                    </DatePicker>
+                                </div>
+                            )}
+
+                            {jobberDerFortsatt && jobberDerFortsatt === 'JA' && (
+                                <div className="mb-4">
+                                    <RadioGroup
+                                        legend={`Har du utført arbeid ved ${name} i minst én dag i perioden 5. september til 11. oktober?`}
+                                        onChange={(val: string) => handleJobbetSiste14Dagene(val)}
+                                    >
+                                        <Radio value="JA">Ja</Radio>
+                                        <Radio value="NEI">Nei</Radio>
+                                    </RadioGroup>
+                                </div>
+                            )}
+
+                            {jobbetDerSiste14Dagene && jobbetDerSiste14Dagene === 'NEI' && (
+                                <CheckboxGroup
+                                    legend="Velg en eller flere årsaker til at du ikke har jobbet"
+                                    onChange={(val: any[]) => handleChexboxChange(val)}
+                                    className="mt-4"
+                                >
+                                    <Checkbox value="SYKMELDT">Jeg var sykmeldt</Checkbox>
+                                    <Checkbox value="TURNUS">Jeg jobber turnus</Checkbox>
+                                    <Checkbox value="FERIE">Jeg hadde lovbestemt ferie</Checkbox>
+                                    <Checkbox value="AVSPASERTE">Jeg avspaserte</Checkbox>
+                                    <Checkbox value="PERMITTERT">Jeg var permittert</Checkbox>
+                                    <Checkbox value="PERMISJON">Jeg hadde permisjon</Checkbox>
+                                    <Checkbox value="ANNEN">Annen årsak</Checkbox>
+                                </CheckboxGroup>
+                            )}
+                        </Fragment>
+                    </ExpansionCard.Content>
+                </ExpansionCard>
+            </div>
         </li>
     )
 }
@@ -42,7 +114,7 @@ type Job = {
 }
 
 interface JobListProps {
-    jobs: Job[],
+    jobs: Job[]
     unknownJobs: boolean
 }
 
@@ -64,11 +136,11 @@ export const OtherJobs = ({ jobsList, plusVisible }: { jobsList: string[]; plusV
     return (
         <div>
             <p className="mb-6 text-gray-700">
-                Har du jobbet noe i andre arbeidsorhold i perioden 5 september til 11 oktober? Vi har lagt inn andre
-                jobber du har vi kjenner til.
+                Du er registrert med flere arbeidsforhold i offentlige registre. Vi trenger derfor å vite mer om disse
+                arbeidsforholdene.
             </p>
 
-            <JobList jobs={jobs} unknownJobs={plusVisible}/>
+            <JobList jobs={jobs} unknownJobs={plusVisible} />
 
             {plusVisible && (
                 <div className="mt-4">

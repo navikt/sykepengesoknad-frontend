@@ -179,8 +179,8 @@ const JaNeiStor = ({ sporsmal }: SpmProps) => {
         return (
             <>
                 <div className="max-w-4xl mx-auto p-6">
-                    <h1 className="text-2xl font-bold mb-6">Arbeid underveis i andre arbeidsforhold</h1>
-                    <OtherJobs jobsList={['POSTEN AS, Bærum']} plusVisible={false} />
+                    <h1 className="text-2xl font-bold mb-6">Inntekskilder hentet fra offentlige registre</h1>
+                    <OtherJobs jobsList={['POSTEN AS, Bærum', 'Fiks Frisørsalong']} plusVisible={false} />
 
                     {/*<p className="mb-6 text-gray-700">*/}
                     {/*    Har du jobbet noe i andre arbeidsorhold i perioden 5 september til 11 oktober? Vi har lagt inn andre jobber du har vi kjenner til.*/}
