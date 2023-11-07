@@ -15,7 +15,7 @@ test('Alle tags har global feilmelding', () => {
     tags = tags.filter((skipTag) => {
         return (
             skipTag !== 'VAER_KLAR_OVER_AT' && // Svartype: IKKE_RELEVANT
-            skipTag !== 'BEKREFTELSE' && // Svartype: IKKE_RELEVANT
+            skipTag !== 'TIL_SLUTT' && // Svartype: IKKE_RELEVANT
             skipTag !== 'IKKE_SOKT_UTENLANDSOPPHOLD_INFORMASJON' && // Svartype: IKKE_RELEVANT
             skipTag !== 'BEKREFT_OPPLYSNINGER_UTLAND_INFO' && // Svartype: IKKE_RELEVANT
             skipTag !== 'MEDLEMSKAP_UTFORT_ARBEID_UTENFOR_NORGE_GRUPPERING' && // Svartype: GRUPPE_AV_UNDERSPORSMAL
@@ -211,7 +211,7 @@ const kjenteTags = [
     'UTLAND_NAR_V2',
     'UTLAND_V2',
     'VAER_KLAR_OVER_AT',
-    'BEKREFTELSE',
+    'TIL_SLUTT',
     'BRUKTE_REISETILSKUDDET',
     'TRANSPORT_TIL_DAGLIG',
     'TYPE_TRANSPORT',

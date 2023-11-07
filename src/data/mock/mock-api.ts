@@ -213,7 +213,7 @@ export async function mockApi(req: NextApiRequest, res: NextApiResponse) {
             soknad.sendtTilArbeidsgiverDato = null
             soknad.sendtTilNAVDato = null
             soknad.sporsmal[0].svar = []
-            if (sisteSporsmal.tag === 'BEKREFTELSE') {
+            if (sisteSporsmal.tag === 'TIL_SLUTT') {
                 sisteSporsmal.undersporsmal[0].svar = []
             } else {
                 sisteSporsmal.svar = []

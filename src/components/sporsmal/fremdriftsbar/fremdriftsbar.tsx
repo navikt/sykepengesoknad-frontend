@@ -53,7 +53,7 @@ const Fremdriftsbar = () => {
     }
 
     const antallSporsmål =
-        valgtSoknad?.sporsmal.filter((s) => s.tag !== 'VAER_KLAR_OVER_AT' && s.tag !== 'BEKREFTELSE').length || 9
+        valgtSoknad?.sporsmal.filter((s) => s.tag !== 'VAER_KLAR_OVER_AT' && s.tag !== 'TIL_SLUTT').length || 9
     const antallSteg = oppholdUtland ? antallSporsmål + 1 : antallSporsmål
 
     const bredde = valgtSoknad ? (100 / antallSteg) * aktivtSteg : 0

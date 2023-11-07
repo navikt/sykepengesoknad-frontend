@@ -85,7 +85,7 @@ describe('Tester arbeidsledigsøknad', () => {
         cy.contains('Gå videre').click()
     })
 
-    it('Søknad BEKREFTELSE', () => {
+    it('Søknad TIL_SLUTT', () => {
         cy.url().should('include', `${soknad.id}/5`)
         cy.get('.navds-checkbox__label').click()
         it('Bekreftelsespunktene er riktige', () => {

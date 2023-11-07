@@ -17,8 +17,6 @@ export function harLikeSvar(a: Soknad, b: Soknad) {
 }
 
 function harLikeSvarPaSporsmal(a: Sporsmal, b: Sporsmal) {
-    console.log('a', a) // eslint-disable-line
-    console.log('b', b) // eslint-disable-line
     if (a.tag != b.tag) {
         return false
     }

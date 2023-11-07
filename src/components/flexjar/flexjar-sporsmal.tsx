@@ -22,7 +22,12 @@ interface FeedbackButtonProps {
     setActiveState: (s: Feedbacktype | null) => void
 }
 
-export const FlexjarSporsmal = ({ soknad, steg }: { soknad: Soknad | undefined; steg: number }) => {
+interface FlexjarSporsmalProps {
+    soknad: Soknad | undefined
+    sporsmal: Sporsmal | undefined
+    steg: number
+}
+export const FlexjarSporsmal = ({ soknad, sporsmal, steg }: FlexjarSporsmalProps) => {
     const [textValue, setTextValue] = useState('')
     const [activeState, setActiveState] = useState<Feedbacktype | null>(null)
     const [errorMsg, setErrorMsg] = useState<string | null>(null)
@@ -46,14 +51,7 @@ export const FlexjarSporsmal = ({ soknad, steg }: { soknad: Soknad | undefined; 
         return null
     }
 
-    const urelevantSporsmal = (s: Sporsmal) => {
-        return (
-            (s.tag !== 'BEKREFTELSE' || (s.tag === 'BEKREFTELSE' && s.undersporsmal.length > 0)) &&
-            s.tag !== 'VAER_KLAR_OVER_AT'
-        )
-    }
-
-    if (steg == soknad?.sporsmal.filter(urelevantSporsmal).length) {
+    if (sporsmal?.tag === 'TIL_SLUTT' || sporsmal?.tag === 'VAER_KLAR_OVER_AT') {
         return null
     }
 

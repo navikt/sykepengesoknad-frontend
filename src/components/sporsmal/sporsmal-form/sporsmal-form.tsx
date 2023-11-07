@@ -83,14 +83,16 @@ const SporsmalForm = ({ sporsmal }: SpmProps) => {
     const onSubmit = (data: Record<string, any>) => {
         if (oppdatererSporsmal || senderSoknad)
             return Promise.reject(new Error('Spørsmål oppdateres eller søknad sendes allerede'))
-        if (
-            (!nesteSporsmal &&
-                !erUtenlandssoknad &&
-                valgtSoknad?.soknadstype !== RSSoknadstype.ARBEIDSTAKERE &&
-                valgtSoknad?.soknadstype !== RSSoknadstype.REISETILSKUDD) ||
-            !sporsmal
-        ) {
+        if (!sporsmal) {
             return Promise.reject(new Error('Spørsmål skal være lastet for at vi kan submitte'))
+        }
+        if (
+            !nesteSporsmal &&
+            !erUtenlandssoknad &&
+            valgtSoknad?.soknadstype !== RSSoknadstype.ARBEIDSTAKERE &&
+            valgtSoknad?.soknadstype !== RSSoknadstype.REISETILSKUDD
+        ) {
+            return Promise.reject(new Error('Neste spørsmål skal være lastet for at vi kan submitte'))
         }
         if (!valgtSoknad) {
             return Promise.reject(new Error('Søknad skal være lastet for at vi kan submitte'))
