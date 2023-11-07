@@ -47,9 +47,8 @@ const CheckboxKomp = ({ sporsmal }: SpmProps) => {
                                 <Fragment key={uspm.id + '_fragment'}>
                                     <div
                                         className={cn('flex items-center gap-4', {
-                                            'bx-4 rounded-lg bg-gray-50 max-w-[320px]': checkboxesSkalHaSpesiellStyling(
-                                                sporsmal.tag,
-                                            ),
+                                            'bx-4 rounded-lg bg-gray-50 w-full md:max-w-[320px]':
+                                                checkboxesSkalHaSpesiellStyling(sporsmal.tag),
                                         })}
                                     >
                                         <Checkbox id={uspm.id} value={uspm.sporsmalstekst} className="pl-3">
