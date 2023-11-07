@@ -29,7 +29,7 @@ export const inntektsopplysningerNaringsdrivende: RSSoknad = {
             tittel: 'Din virksomhet',
             sporsmalstekst: null,
             undertekst: null,
-            svartype: 'IKKE_RELEVANT',
+            svartype: 'GRUPPE_AV_UNDERSPORSMAL',
             min: null,
             max: null,
             pavirkerAndreSporsmal: false,

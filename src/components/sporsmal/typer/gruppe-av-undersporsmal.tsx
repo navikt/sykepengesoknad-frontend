@@ -25,8 +25,9 @@ const GruppeAvUndersporsmal = ({ sporsmal, sporsmalIndex, erSisteSporsmal }: Gru
     const { mutate: leggTilNyttUndersporsmal, isLoading: leggerTil } = useLeggTilUndersporsmal()
     const { mutate: slettundersporsmal, isLoading: sletter } = useSlettUndersporsmal()
 
-    const kanSlette = sporsmalIndex > 0 || !erSisteSporsmal
-    const kanLeggeTil = erSisteSporsmal
+    const erMedlemskapssporsmal = sporsmal.tag.includes('MEDLEMSKAP')
+    const kanSlette = sporsmalIndex > 0 || (!erSisteSporsmal && erMedlemskapssporsmal)
+    const kanLeggeTil = erSisteSporsmal && erMedlemskapssporsmal
 
     const leggTil = async () => {
         if (oppdatererSporsmal || leggerTil) {
@@ -64,7 +65,10 @@ const GruppeAvUndersporsmal = ({ sporsmal, sporsmalIndex, erSisteSporsmal }: Gru
     }
 
     return (
-        <div className={!erSisteSporsmal ? 'mb-8 border-b border-dashed border-gray-400' : ''} aria-live="assertive">
+        <div
+            className={!erSisteSporsmal && erMedlemskapssporsmal ? 'mb-8 border-b border-dashed border-gray-400' : ''}
+            aria-live="assertive"
+        >
             <UndersporsmalListe oversporsmal={sporsmal} />
 
             {kanSlette && (
