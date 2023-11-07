@@ -4,15 +4,13 @@ import {
     CheckboxGroup,
     DatePicker,
     ExpansionCard,
-    Panel,
     Radio,
     RadioGroup,
-    TextField,
     useDatepicker,
 } from '@navikt/ds-react'
 import React, { Fragment, ReactElement, useState } from 'react'
-import format from 'date-fns/format'
-import nbLocale from 'date-fns/locale/nb'
+// import format from 'date-fns/format'
+// import nbLocale from 'date-fns/locale/nb'
 
 import { TagTyper } from '../../types/enums'
 
@@ -47,7 +45,7 @@ const JobItem: React.FunctionComponent<JobItemProps> = ({ name, index, unknownJo
 
     return (
         <li>
-            <div className={styles.subtleCard}>
+            <div className={styles.subtleCard} key={index}>
                 <ExpansionCard aria-label="default-demo" defaultOpen={true}>
                     <div className={styles.headerStyling}>
                         <ExpansionCard.Header className="mb-4">

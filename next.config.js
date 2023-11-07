@@ -42,6 +42,9 @@ const nextConfig = {
     pageExtensions: ['page.tsx', 'api.ts'],
     assetPrefix: process.env.ASSET_PREFIX || undefined,
     generateEtags: false, //Disabler etag i pages
+    eslint: {
+        ignoreDuringBuilds: true, // vi linter i bygg stegene i github actions
+    },
     serverRuntimeConfig: {
         // Will only be available on the server side
         decoratorEnv: process.env.DECORATOR_ENV,
