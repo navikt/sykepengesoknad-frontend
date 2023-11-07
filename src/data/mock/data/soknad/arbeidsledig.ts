@@ -300,7 +300,6 @@ export const arbeidsledig: RSSoknad = {
                 },
             ],
         },
-
         {
             id: '687422',
             tag: 'ARBEIDSLEDIG_UTLAND',

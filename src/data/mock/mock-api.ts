@@ -206,12 +206,18 @@ export async function mockApi(req: NextApiRequest, res: NextApiResponse) {
                 return sendJson(eksisterendeUtkast, 200)
             }
             const soknad = jsonDeepCopy(original)
+            const sisteSporsmal = soknad.sporsmal[soknad.sporsmal.length - 1]
             soknad.id = uuid.v4()
             soknad.korrigerer = original.id
             soknad.status = 'UTKAST_TIL_KORRIGERING'
             soknad.sendtTilArbeidsgiverDato = null
             soknad.sendtTilNAVDato = null
             soknad.sporsmal[0].svar = []
+            if (sisteSporsmal.tag === 'TIL_SLUTT') {
+                sisteSporsmal.undersporsmal[0].svar = []
+            } else {
+                sisteSporsmal.svar = []
+            }
 
             testperson.soknader.push(soknad)
 

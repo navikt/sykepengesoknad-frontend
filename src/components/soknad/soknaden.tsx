@@ -99,7 +99,7 @@ export const Soknaden = () => {
             {sporsmal && <SporsmalForm sporsmal={sporsmal} key={sporsmal.id} />}
             {!sporsmal && <SkeletonSporsmalForm />}
             {erForstesiden && !erUtenlandssoknad && <SlikBehandlerNavPersonopplysningene />}
-            {flexjarToggle.enabled && <FlexjarSporsmal soknad={valgtSoknad} steg={stegNo} />}
+            {flexjarToggle.enabled && <FlexjarSporsmal soknad={valgtSoknad} sporsmal={sporsmal} steg={stegNo} />}
         </>
     )
 }

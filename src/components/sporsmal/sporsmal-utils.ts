@@ -8,7 +8,7 @@ import { tekst } from '../../utils/tekster'
 
 export const erSisteSide = (soknad: Soknad, sidenummer: number) => {
     const sporsmal = soknad.sporsmal[sidenummer - 1]
-    return ['VAER_KLAR_OVER_AT', 'BEKREFT_OPPLYSNINGER'].indexOf(sporsmal.tag) > -1
+    return ['VAER_KLAR_OVER_AT', 'BEKREFT_OPPLYSNINGER', 'TIL_SLUTT'].indexOf(sporsmal.tag) > -1
 }
 
 export const pathUtenSteg = (pathname: string) => {
@@ -104,6 +104,7 @@ export const hentGeneriskFeilmelding = (
         case RSSvartype.KVITTERING:
         case RSSvartype.IKKE_RELEVANT:
         case RSSvartype.GRUPPE_AV_UNDERSPORSMAL:
+        case RSSvartype.BEKREFTELSESPUNKTER:
         case RSSvartype.INFO_BEHANDLINGSDAGER: {
             return ''
         }

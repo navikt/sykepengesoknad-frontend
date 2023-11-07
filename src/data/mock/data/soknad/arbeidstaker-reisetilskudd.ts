@@ -1,7 +1,6 @@
 import { RSSoknad } from '../../../../types/rs-types/rs-soknad'
 import { arbeidstakerReisetilskuddSyk } from '../sykmeldinger'
-import { værKlarOverAtReisetilskudd } from '../sporsmal/vaer-klar-over-at'
-import { bekreftOpplysninger } from '../sporsmal/bekreft-opplysninger'
+import { nyVærKlarOverAt } from '../sporsmal/vaer-klar-over-at'
 
 export const nyttReisetilskudd: RSSoknad = {
     id: '5294bdbd-38a2-4d2a-9917-0fcaf6cf205a',
@@ -208,8 +207,7 @@ export const nyttReisetilskudd: RSSoknad = {
             svar: [],
             undersporsmal: [],
         },
-        værKlarOverAtReisetilskudd(),
-        bekreftOpplysninger(),
+        nyVærKlarOverAt(),
     ],
     egenmeldtSykmelding: false,
     opprettetAvInntektsmelding: false,

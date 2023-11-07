@@ -29,6 +29,6 @@ const hentTekst = (soknad: Soknad, sidenummer: number, sporsmal: Sporsmal) => {
     }
     const nokkel = sporsmal.tag.toLowerCase()
     return erSisteSide(soknad, sidenummer)
-        ? tekst('sykepengesoknad.til-slutt.tittel')
+        ? tekst('sykepengesoknad.til_slutt.tittel')
         : tekst(`sykepengesoknad.${nokkel}.tittel` as any)
 }

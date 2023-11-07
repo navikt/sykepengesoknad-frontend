@@ -1,7 +1,6 @@
 import { RSSoknad } from '../../../../types/rs-types/rs-soknad'
 import { arbeidstaker100Syk } from '../sykmeldinger'
-import { værKlarOverAt } from '../sporsmal/vaer-klar-over-at'
-import { bekreftOpplysninger } from '../sporsmal/bekreft-opplysninger'
+import { nyVærKlarOverAt } from '../sporsmal/vaer-klar-over-at'
 
 export const kortArbeidstakerSoknad: RSSoknad = {
     id: 'faba11f5-c4f2-4647-8c8a-347843747',
@@ -46,8 +45,35 @@ export const kortArbeidstakerSoknad: RSSoknad = {
             svar: [],
             undersporsmal: [],
         },
-        værKlarOverAt(),
-        bekreftOpplysninger(),
+        {
+            id: '900',
+            tag: 'TILBAKE_I_ARBEID',
+            sporsmalstekst:
+                'Var du tilbake i fullt arbeid hos Posten Norge AS, Bærum i løpet av perioden 20. mai - 5. juni 2020?',
+            undertekst: null,
+            svartype: 'JA_NEI',
+            min: null,
+            max: null,
+            pavirkerAndreSporsmal: true,
+            kriterieForVisningAvUndersporsmal: 'JA',
+            svar: [],
+            undersporsmal: [
+                {
+                    id: '96',
+                    tag: 'TILBAKE_NAR',
+                    sporsmalstekst: 'Når begynte du å jobbe igjen?',
+                    undertekst: null,
+                    svartype: 'DATO',
+                    min: '2020-05-20',
+                    max: '2020-06-05',
+                    pavirkerAndreSporsmal: true,
+                    kriterieForVisningAvUndersporsmal: null,
+                    svar: [],
+                    undersporsmal: [],
+                },
+            ],
+        },
+        nyVærKlarOverAt(),
     ],
     egenmeldtSykmelding: false,
     opprettetAvInntektsmelding: false,

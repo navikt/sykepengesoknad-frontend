@@ -1,6 +1,6 @@
 import { RSSoknad } from '../../../../types/rs-types/rs-soknad'
 import { sykmeldingMedEgenmeldingsdager } from '../sykmeldinger'
-import { værKlarOverAt } from '../sporsmal/vaer-klar-over-at'
+import { nyVærKlarOverAt } from '../sporsmal/vaer-klar-over-at'
 
 import { Persona } from './personas'
 
@@ -403,21 +403,7 @@ export const soknadUtenEgenmeldingSporsmal: RSSoknad = {
                 },
             ],
         },
-        værKlarOverAt(),
-        {
-            id: '95d9e5f3-4bd7-34da-bc55-6050ebbeea86',
-            tag: 'BEKREFT_OPPLYSNINGER',
-            sporsmalstekst:
-                'Jeg har lest all informasjonen jeg har fått i søknaden og bekrefter at opplysningene jeg har gitt er korrekte.',
-            undertekst: null,
-            svartype: 'CHECKBOX_PANEL',
-            min: null,
-            max: null,
-            pavirkerAndreSporsmal: false,
-            kriterieForVisningAvUndersporsmal: null,
-            svar: [],
-            undersporsmal: [],
-        },
+        nyVærKlarOverAt(),
     ],
     egenmeldtSykmelding: false,
     opprettetAvInntektsmelding: false,

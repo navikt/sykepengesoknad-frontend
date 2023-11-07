@@ -58,8 +58,8 @@ describe('Tester arbeidstakersøknad', () => {
         cy.findByRole('progressbar', { name: 'Søknadssteg' })
             .should('have.attr', 'aria-valuenow', '1')
             .and('have.attr', 'aria-valuemin', '1')
-            .and('have.attr', 'aria-valuemax', '8')
-            .and('have.attr', 'aria-valuetext', '1 av 8 steg')
+            .and('have.attr', 'aria-valuemax', '7')
+            .and('have.attr', 'aria-valuetext', '1 av 7 steg')
 
         // Test spørsmål
         cy.get('[data-cy="ja-nei-stor"] input[value=JA]').click()
@@ -194,8 +194,39 @@ describe('Tester arbeidstakersøknad', () => {
         cy.findByRole('progressbar', { name: 'Søknadssteg' })
             .should('have.attr', 'aria-valuenow', '7')
             .and('have.attr', 'aria-valuemin', '1')
-            .and('have.attr', 'aria-valuemax', '8')
-            .and('have.attr', 'aria-valuetext', '7 av 8 steg')
+            .and('have.attr', 'aria-valuemax', '7')
+            .and('have.attr', 'aria-valuetext', '7 av 7 steg')
+
+        it('Bekreftelsespunktene er riktige', () => {
+            const bekreftelser = [
+                'Du kan bare få sykepenger hvis det er din egen sykdom eller skade som hindrer deg i å jobbe. Sosiale eller økonomiske problemer gir ikke rett til sykepenger.',
+                'Du kan miste retten til sykepenger hvis du nekter å opplyse om din egen arbeidsevne, eller hvis du ikke tar imot behandling eller tilrettelegging.',
+                'Retten til sykepenger gjelder bare inntekt du har mottatt som lønn og betalt skatt av på sykmeldingstidspunktet.',
+                'NAV kan innhente opplysninger som er nødvendige for å behandle søknaden.',
+                'Fristen for å søke sykepenger er som hovedregel 3 måneder',
+                'Du kan endre svarene i denne søknaden opp til 12 måneder etter du sendte den inn første gangen.',
+            ]
+
+            bekreftelser.forEach((bekreftelse) => {
+                cy.contains(bekreftelse)
+            })
+
+            cy.contains(
+                'Du må melde fra til NAV hvis du satt i varetekt, sonet straff eller var under forvaring i sykmeldingsperioden.',
+            )
+                .find('a')
+                .should('have.attr', 'href', 'https://www.nav.no/skriv-til-oss')
+
+            cy.contains(
+                'Du må melde fra om studier som er påbegynt etter at du ble sykmeldt, og som ikke er avklart med NAV. Det samme gjelder hvis du begynner å studere mer enn du gjorde før du ble sykmeldt.',
+            )
+                .find('a')
+                .should('have.attr', 'href', 'https://www.nav.no/skriv-til-oss')
+
+            cy.contains('Du kan lese mer om rettigheter og plikter på')
+                .find('a')
+                .should('have.attr', 'href', 'https://www.nav.no/sykepenger')
+        })
 
         cy.get('section[aria-label="Oppsummering fra søknaden"] button').click()
         cy.contains(

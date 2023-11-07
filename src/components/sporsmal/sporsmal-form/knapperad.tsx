@@ -11,7 +11,7 @@ import { hentSporsmal } from '../../../utils/soknad-utils'
 import { useSoknadMedDetaljer } from '../../../hooks/useSoknadMedDetaljer'
 
 const Knapperad = ({ poster }: { poster: boolean }) => {
-    const { valgtSoknad: soknad, sporsmal, spmIndex } = useSoknadMedDetaljer()
+    const { valgtSoknad: soknad, sporsmal } = useSoknadMedDetaljer()
 
     const { getValues } = useFormContext()
     const skalSkjuleKnapperad = () => {
@@ -36,8 +36,12 @@ const Knapperad = ({ poster }: { poster: boolean }) => {
 
     const knappetekst = () => {
         if (!soknad) return tekst('sykepengesoknad.ga-videre')
-        const erSisteSteg =
-            spmIndex === soknad.sporsmal.length - (soknad.soknadstype === RSSoknadstype.OPPHOLD_UTLAND ? 1 : 2)
+
+        const erTagBekreftelse = (tag: string) =>
+            tag.includes('BEKREFT_OPPLYSNINGER') || ['TIL_SLUTT', 'VAER_KLAR_OVER_AT'].includes(tag)
+
+        const erSisteSteg = sporsmal && erTagBekreftelse(sporsmal.tag)
+
         if (erSisteSteg) {
             if (soknad.status === RSSoknadstatus.UTKAST_TIL_KORRIGERING) {
                 return tekst('sykepengesoknad.send.endringene')

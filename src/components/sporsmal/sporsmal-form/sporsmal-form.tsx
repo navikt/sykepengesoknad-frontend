@@ -8,7 +8,6 @@ import { Soknad, Sporsmal } from '../../../types/types'
 import { SEPARATOR } from '../../../utils/constants'
 import { hentAnnonymisertSvar, logEvent } from '../../amplitude/amplitude'
 import FeilOppsummering from '../../feil/feil-oppsummering'
-import Opplysninger from '../../opplysninger-fra-sykmelding/opplysninger'
 import Oppsummering from '../../oppsummering/oppsummering'
 import GuidepanelOverSporsmalstekst from '../guidepanel/GuidepanelOverSporsmalstekst'
 import { EndringUtenEndringModal } from '../endring-uten-endring/endring-uten-endring-modal'
@@ -25,6 +24,7 @@ import { useTestpersonQuery } from '../../../hooks/useTestpersonQuery'
 import { useOppdaterSporsmal } from '../../../hooks/useOppdaterSporsmal'
 import { FeilStateView } from '../../feil/refresh-hvis-feil-state'
 import { useSoknadMedDetaljer } from '../../../hooks/useSoknadMedDetaljer'
+import Opplysninger from '../../opplysninger-fra-sykmelding/opplysninger'
 
 import Knapperad from './knapperad'
 import SendesTil from './sendes-til'
@@ -36,6 +36,7 @@ export interface SpmProps {
 const SporsmalForm = ({ sporsmal }: SpmProps) => {
     const router = useRouter()
     const testpersonQuery = useTestpersonQuery()
+
     const { erUtenlandssoknad, valgtSoknad, spmIndex } = useSoknadMedDetaljer()
     const { data: korrigerer } = useSoknad(valgtSoknad?.korrigerer, valgtSoknad?.korrigerer !== undefined)
     const { mutate: sendSoknadMutation, isLoading: senderSoknad, error: sendError } = useSendSoknad()
@@ -54,12 +55,16 @@ const SporsmalForm = ({ sporsmal }: SpmProps) => {
     })
 
     const erSisteSpm = () => {
-        const snartSlutt =
-            sporsmal.svartype === RSSvartype.IKKE_RELEVANT || sporsmal.svartype === RSSvartype.CHECKBOX_PANEL
         if (erUtenlandssoknad) {
             return sporsmal.tag === 'BEKREFT_OPPLYSNINGER_UTLAND_INFO'
         }
-        return snartSlutt && spmIndex + 2 === valgtSoknad?.sporsmal?.length
+        const snartSlutt = [
+            RSSvartype.IKKE_RELEVANT,
+            RSSvartype.CHECKBOX_PANEL,
+            RSSvartype.BEKREFTELSESPUNKTER,
+        ].includes(sporsmal.svartype)
+        const expectedIndex = sporsmal.svartype === RSSvartype.BEKREFTELSESPUNKTER ? spmIndex + 1 : spmIndex + 2
+        return snartSlutt && expectedIndex === valgtSoknad?.sporsmal?.length
     }
 
     const erSiste = erSisteSpm()
@@ -78,8 +83,16 @@ const SporsmalForm = ({ sporsmal }: SpmProps) => {
     const onSubmit = (data: Record<string, any>) => {
         if (oppdatererSporsmal || senderSoknad)
             return Promise.reject(new Error('Spørsmål oppdateres eller søknad sendes allerede'))
-        if ((!nesteSporsmal && !erUtenlandssoknad) || !sporsmal) {
+        if (!sporsmal) {
             return Promise.reject(new Error('Spørsmål skal være lastet for at vi kan submitte'))
+        }
+        if (
+            !nesteSporsmal &&
+            !erUtenlandssoknad &&
+            valgtSoknad?.soknadstype !== RSSoknadstype.ARBEIDSTAKERE &&
+            valgtSoknad?.soknadstype !== RSSoknadstype.REISETILSKUDD
+        ) {
+            return Promise.reject(new Error('Neste spørsmål skal være lastet for at vi kan submitte'))
         }
         if (!valgtSoknad) {
             return Promise.reject(new Error('Søknad skal være lastet for at vi kan submitte'))
@@ -145,6 +158,11 @@ const SporsmalForm = ({ sporsmal }: SpmProps) => {
                             <SendesTil soknad={valgtSoknad} />
                         </>
                     )}
+
+                    {erSiste &&
+                        !erUtenlandssoknad &&
+                        valgtSoknad &&
+                        sporsmal?.svartype === RSSvartype.BEKREFTELSESPUNKTER && <SendesTil soknad={valgtSoknad} />}
 
                     {erSiste && erUtenlandssoknad && valgtSoknad && sporsmal && (
                         <>

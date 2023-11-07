@@ -15,6 +15,7 @@ test('Alle tags har global feilmelding', () => {
     tags = tags.filter((skipTag) => {
         return (
             skipTag !== 'VAER_KLAR_OVER_AT' && // Svartype: IKKE_RELEVANT
+            skipTag !== 'TIL_SLUTT' && // Svartype: IKKE_RELEVANT
             skipTag !== 'IKKE_SOKT_UTENLANDSOPPHOLD_INFORMASJON' && // Svartype: IKKE_RELEVANT
             skipTag !== 'BEKREFT_OPPLYSNINGER_UTLAND_INFO' && // Svartype: IKKE_RELEVANT
             skipTag !== 'MEDLEMSKAP_UTFORT_ARBEID_UTENFOR_NORGE_GRUPPERING' && // Svartype: GRUPPE_AV_UNDERSPORSMAL
@@ -62,7 +63,8 @@ test('Alle sporsmal tag ligger i veldigLangSoknad', () => {
             skipTag !== 'BETALER_ARBEIDSGIVER' && // Kan fjernes?
             skipTag !== 'HVOR_MANGE_TIMER' && // Finnes i syfosoknad, men brukes ikke
             skipTag !== 'BEKREFT_OPPLYSNINGER_UTLAND' && // Kan bare inneholde en sisteside, dekkes av andre tester
-            skipTag !== 'BEKREFT_OPPLYSNINGER_UTLAND_INFO'
+            skipTag !== 'BEKREFT_OPPLYSNINGER_UTLAND_INFO' &&
+            skipTag !== 'VAER_KLAR_OVER_AT'
         ) // Kan bare inneholde en sisteside
     })
     let manglerTagsISoknad = false
@@ -209,6 +211,7 @@ const kjenteTags = [
     'UTLAND_NAR_V2',
     'UTLAND_V2',
     'VAER_KLAR_OVER_AT',
+    'TIL_SLUTT',
     'BRUKTE_REISETILSKUDDET',
     'TRANSPORT_TIL_DAGLIG',
     'TYPE_TRANSPORT',

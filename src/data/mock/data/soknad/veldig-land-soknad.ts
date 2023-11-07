@@ -1,7 +1,6 @@
 import { RSSoknad } from '../../../../types/rs-types/rs-soknad'
 import { arbeidstaker100Syk } from '../sykmeldinger'
-import { værKlarOverAt } from '../sporsmal/vaer-klar-over-at'
-import { bekreftOpplysninger } from '../sporsmal/bekreft-opplysninger'
+import { nyVærKlarOverAt } from '../sporsmal/vaer-klar-over-at'
 import {
     medlemskapOppholdstillatelseSporsmal,
     medlemskapOppholdUtenforEøsSporsmal,
@@ -2511,8 +2510,7 @@ export const veldigLangSoknad: RSSoknad = {
             ],
         },
         ...utenlandskSykmeldingSporsmalene,
-        værKlarOverAt(),
-        bekreftOpplysninger(),
+        nyVærKlarOverAt(),
     ],
     egenmeldtSykmelding: false,
     opprettetAvInntektsmelding: false,
