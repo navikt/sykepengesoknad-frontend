@@ -28,6 +28,7 @@ const Opplasting = ({ sporsmal }: SpmProps) => {
             </Button>
             <Modal
                 open={openModal}
+                onClose={() => setOpenModal(false)}
                 header={{ heading: tekst('opplasting_modal.nytt-utlegg.tittel'), size: 'medium' }}
                 className="w-96"
             >
