@@ -134,7 +134,7 @@ export const OtherJobs = ({ jobsList, plusVisible }: { jobsList: string[]; plusV
     return (
         <div>
             <p className="mb-6 text-gray-700">
-                Du er registrert med flere arbeidsforhold i offentlige registre. Vi trenger derfor å vite mer om disse
+                Vi kan se du har hatt inntekt fra noen andre steder enn jobben du er sykmeldt fra. Vi trenger derfor å vite mer om status for disse
                 arbeidsforholdene.
             </p>
 
