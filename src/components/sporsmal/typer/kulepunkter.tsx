@@ -1,7 +1,6 @@
 import { Label, BodyLong, List } from '@navikt/ds-react'
 import React, { useEffect } from 'react'
 import { useFormContext } from 'react-hook-form'
-import { useRouter } from 'next/router'
 
 import { parserWithReplace } from '../../../utils/html-react-parser-utils'
 import UndersporsmalListe from '../undersporsmal/undersporsmal-liste'
@@ -9,15 +8,13 @@ import { SpmProps } from '../sporsmal-form/sporsmal-form'
 import BekreftelsespunkterArbeidstakereTekster from '../bekreftelsespunkter/bekreftelsespunkter-arbeidstakere-tekster'
 import Oppsummering from '../../oppsummering/oppsummering'
 import Opplysninger from '../../opplysninger-fra-sykmelding/opplysninger'
-import useSoknad from '../../../hooks/useSoknad'
 import { RSSoknadstype } from '../../../types/rs-types/rs-soknadstype'
 import BekreftelsespunkterReisetilskuddTekster from '../bekreftelsespunkter/bekreftelsespunkter-reisetilskudd-tekster'
+import { useSoknadMedDetaljer } from '../../../hooks/useSoknadMedDetaljer'
 
 const Kulepunkter = ({ sporsmal }: SpmProps) => {
     const { setValue } = useFormContext()
-    const router = useRouter()
-    const { id } = router.query as { id: string }
-    const { data: valgtSoknad } = useSoknad(id)
+    const { valgtSoknad } = useSoknadMedDetaljer()
 
     const kulepunkterTekster =
         valgtSoknad!.soknadstype === RSSoknadstype.ARBEIDSTAKERE
