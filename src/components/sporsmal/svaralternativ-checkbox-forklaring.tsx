@@ -134,7 +134,8 @@ export const OtherJobs = ({ jobsList, plusVisible }: { jobsList: string[]; plusV
     return (
         <div>
             <p className="mb-6 text-gray-700 ">
-                Du er oppført med flere inntektskilder i dette registeret. Vi trenger mer informasjon om disse.
+                Vi kan se at du har hatt inntekt fra andre steder enn jobben du er sykmeldt fra de siste månedene. Vi
+                har noen spørsmål angående når og om du fortsatt jobber der.
             </p>
 
             <JobList jobs={jobs} unknownJobs={plusVisible} />
