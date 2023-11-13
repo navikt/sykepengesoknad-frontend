@@ -133,9 +133,8 @@ export const OtherJobs = ({ jobsList, plusVisible }: { jobsList: string[]; plusV
 
     return (
         <div>
-            <p className="mb-6 text-gray-700">
-                Vi kan se du har hatt inntekt fra noen andre steder enn jobben du er sykmeldt fra. Vi trenger derfor å vite mer om status for disse
-                arbeidsforholdene.
+            <p className="mb-6 text-gray-700 ">
+                Du er oppført med flere inntektskilder i dette registeret. Vi trenger mer informasjon om disse.
             </p>
 
             <JobList jobs={jobs} unknownJobs={plusVisible} />

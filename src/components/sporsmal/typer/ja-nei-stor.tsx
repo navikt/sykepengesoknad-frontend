@@ -179,7 +179,9 @@ const JaNeiStor = ({ sporsmal }: SpmProps) => {
         return (
             <>
                 <div className="max-w-4xl mx-auto">
-                    <h1 className="text-2xl font-bold mb-6">Arbeidsforhold du har hatt inntekt fra de siste månedene</h1>
+                    <h1 className="text-2xl font-bold mb-6">
+                        Inntekskilder hentet fra Arbeidsgiver- og arbeidstakerregisteret
+                    </h1>
                     <OtherJobs jobsList={['POSTEN AS, Bærum', 'Fiks Frisørsalong']} plusVisible={false} />
 
                     {/*<p className="mb-6 text-gray-700">*/}
