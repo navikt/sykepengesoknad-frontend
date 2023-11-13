@@ -134,7 +134,7 @@ export const OtherJobs = ({ jobsList, plusVisible }: { jobsList: string[]; plusV
     return (
         <div>
             <p className="mb-6 text-gray-700 ">
-                Vi kan se at du har hatt inntekt fra andre steder enn jobben du er sykmeldt fra de siste månedene. Vi
+                Vi kan se at du i løpet av de siste månedene har hatt inntekt fra andre steder enn jobben du er sykmeldt fra. Vi
                 har noen spørsmål angående når og om du fortsatt jobber der.
             </p>
 
