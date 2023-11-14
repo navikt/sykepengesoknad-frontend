@@ -126,7 +126,7 @@ const JobList = ({ jobs, unknownJobs }: JobListProps) => {
     )
 }
 
-export const OtherJobs = ({ jobsList, plusVisible }: { jobsList: string[]; plusVisible: boolean }) => {
+export const OtherJobs = ({ jobsList, plusVisible, mainJob }: { jobsList: string[], plusVisible: boolean, mainJob: string }) => {
     const jobs = jobsList.map((job) => {
         return { name: job }
     })
@@ -134,7 +134,7 @@ export const OtherJobs = ({ jobsList, plusVisible }: { jobsList: string[]; plusV
     return (
         <div>
             <p className="mb-6 text-gray-700 ">
-                Vi kan se at du i løpet av de siste månedene har hatt inntekt fra andre steder enn jobben du er sykmeldt fra. Vi
+                Vi kan se at du i løpet av de siste månedene har hatt inntekt fra andre steder enn {mainJob}. Vi
                 har noen spørsmål angående når og om du fortsatt jobber der.
             </p>
 
@@ -168,13 +168,13 @@ export const SvaralternativCheckboxForklaring = ({
 
     if (svaralternativTag === TagTyper.INNTEKTSKILDE_ANDRE_ARBEIDSFORHOLD) {
         return (
-            // <BodyShort className="text-gray-700">
-            //     Dette betyr at du er ansatt hos en eller flere arbeidsgiverne som ikke er kjent for oss enda og derfor
-            //     ikke ligger i listen ovenfor.
-            // </BodyShort>
-            <div>
-                <OtherJobs jobsList={['Annen jobb brukeren har lagt til, Bærum']} plusVisible={true} />
-            </div>
+            <BodyShort className="text-gray-700">
+                Dette betyr at du er ansatt hos en eller flere arbeidsgiverne som ikke er kjent for oss enda og derfor
+                ikke ligger i listen ovenfor.
+            </BodyShort>
+            // <div>
+            //     <OtherJobs jobsList={['Annen jobb brukeren har lagt til, Bærum']} plusVisible={true} />
+            // </div>
         )
     }
 
