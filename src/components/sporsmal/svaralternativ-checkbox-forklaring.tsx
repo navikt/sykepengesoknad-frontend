@@ -134,7 +134,7 @@ export const OtherJobs = ({ jobsList, plusVisible, mainJob }: { jobsList: string
     return (
         <div>
             <p className="mb-6 text-gray-700 ">
-            Vi kan se at du i løpet av de siste månedene har hatt inntekt fra andre steder enn {mainJob.toString()}. Informasjonen er hentet fra Arbeidsgiver- og arbeidstakerregisteret. Vi har noen spørsmål angående når og om du fortsatt jobber der.
+            Vi kan se at du i løpet av de siste månedene har hatt inntekt fra andre steder enn {mainJob}. Informasjonen er hentet fra Arbeidsgiver- og arbeidstakerregisteret. Vi har noen spørsmål angående når og om du fortsatt jobber der.
             </p>
 
             <JobList jobs={jobs} unknownJobs={plusVisible} />
