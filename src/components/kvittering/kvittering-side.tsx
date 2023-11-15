@@ -23,13 +23,16 @@ import { useSoknadMedDetaljer } from '../../hooks/useSoknadMedDetaljer'
 import { useToggle } from '../../toggles/context'
 
 import Kvittering from './kvittering'
+import { erSelvstendigNaeringsdrivende } from './harSvartJa'
 
 const KvitteringSide = () => {
     const { valgtSoknad, soknadId } = useSoknadMedDetaljer()
     const router = useRouter()
     const { data: soknader } = useSoknader()
-    const arbeidUtenforNorgeStudy = 'panel-yhv7yi5h9q'
-    const { data: arbeidUtenforNorgeStudyActive } = useStudyStatus(arbeidUtenforNorgeStudy)
+    const defaultStudy = 'panel-yhv7yi5h9q'
+    const { data: defaultStudyActive } = useStudyStatus(defaultStudy)
+    const selvstendigNaeringsdrivendeStudy = 'panel-lmrokudo0c'
+    const { data: selvstendigNaeringsdrivendeStudyActive } = useStudyStatus(selvstendigNaeringsdrivendeStudy)
 
     useUpdateBreadcrumbs(() => [{ ...kvitteringBreadcrumb, handleInApp: true }], [])
 
@@ -66,7 +69,14 @@ const KvitteringSide = () => {
         valgtSoknad.soknadstype !== RSSoknadstype.OPPHOLD_UTLAND
 
     const gjenstaendeSoknader = hentGjenstaendeSoknader(soknader, valgtSoknad)
-    const skalViseUxSignals = arbeidUtenforNorgeStudyActive && gjenstaendeSoknader.length === 0
+
+    const skalViseSelvstendigNaeringsdrivendeUxSignals =
+        selvstendigNaeringsdrivendeStudyActive &&
+        gjenstaendeSoknader.length === 0 &&
+        erSelvstendigNaeringsdrivende(valgtSoknad, soknader)
+    const skalViseUxSignals =
+        !skalViseSelvstendigNaeringsdrivendeUxSignals && defaultStudyActive && gjenstaendeSoknader.length === 0
+    const skalViseFlexjar = !skalViseSelvstendigNaeringsdrivendeUxSignals && !skalViseUxSignals && flexjarToggle.enabled
 
     return (
         <>
@@ -91,8 +101,11 @@ const KvitteringSide = () => {
                     {tekst('kvittering.ferdig')}
                 </Button>
             )}
-            {skalViseUxSignals && <UxSignalsWidget study={arbeidUtenforNorgeStudy} demo={!isProd()} />}
-            {!skalViseUxSignals && flexjarToggle.enabled && <FlexjarKvittering />}
+            {skalViseSelvstendigNaeringsdrivendeUxSignals && (
+                <UxSignalsWidget study={selvstendigNaeringsdrivendeStudy} demo={!isProd()} />
+            )}
+            {skalViseUxSignals && <UxSignalsWidget study={defaultStudy} demo={!isProd()} />}
+            {skalViseFlexjar && <FlexjarKvittering />}
             {skalViseEndre && <Endreknapp />}
             {skalViseSendTilArbeidsgiver && <Ettersending gjelder="arbeidsgiver" />}
         </>
