@@ -3,14 +3,13 @@ import React, { useState } from 'react'
 
 import { cn } from '../../utils/tw-utils'
 import { useSoknadMedDetaljer } from '../../hooks/useSoknadMedDetaljer'
+import { logEvent } from '../amplitude/amplitude'
 
 import { FillProps, glad, lei, noytral, sinna, veldigGlad } from './emojies'
 import { FlexjarFelles } from './flexjar-felles'
 
-type Feedbacktype = 1 | 2 | 3 | 4 | 5
-
 export const FlexjarKvittering = () => {
-    const [activeState, setActiveState] = useState<Feedbacktype | null>(null)
+    const [activeState, setActiveState] = useState<number | string | null>(null)
     const [thanksFeedback, setThanksFeedback] = useState<boolean>(false)
     const { valgtSoknad } = useSoknadMedDetaljer()
     const feedbackButtonProps = {
@@ -18,9 +17,10 @@ export const FlexjarKvittering = () => {
         setThanksFeedback,
         setActiveState,
     }
+    const feedbackId = 'sykepengesoknad-kvittering'
     return (
         <FlexjarFelles
-            feedbackId="sykepengesoknad-kvittering"
+            feedbackId={feedbackId}
             setActiveState={setActiveState}
             activeState={activeState}
             thanksFeedback={thanksFeedback}
@@ -36,6 +36,7 @@ export const FlexjarKvittering = () => {
             <div className="flex w-full gap-2">
                 <div className="flex w-full justify-center gap-4">
                     <EmojiButton
+                        feedbackId={feedbackId}
                         feedback={1}
                         Emoji={sinna}
                         text="Veldig dårlig"
@@ -44,6 +45,7 @@ export const FlexjarKvittering = () => {
                         {...feedbackButtonProps}
                     ></EmojiButton>
                     <EmojiButton
+                        feedbackId={feedbackId}
                         feedback={2}
                         Emoji={lei}
                         text="Dårlig"
@@ -52,6 +54,7 @@ export const FlexjarKvittering = () => {
                         {...feedbackButtonProps}
                     ></EmojiButton>
                     <EmojiButton
+                        feedbackId={feedbackId}
                         feedback={3}
                         Emoji={noytral}
                         text="Nøytral"
@@ -60,6 +63,7 @@ export const FlexjarKvittering = () => {
                         {...feedbackButtonProps}
                     ></EmojiButton>
                     <EmojiButton
+                        feedbackId={feedbackId}
                         feedback={4}
                         Emoji={glad}
                         text="Bra"
@@ -68,6 +72,7 @@ export const FlexjarKvittering = () => {
                         {...feedbackButtonProps}
                     ></EmojiButton>
                     <EmojiButton
+                        feedbackId={feedbackId}
                         feedback={5}
                         Emoji={veldigGlad}
                         text="Veldig bra"
@@ -82,20 +87,29 @@ export const FlexjarKvittering = () => {
 }
 
 interface EmojiButtonProps {
-    feedback: Feedbacktype
+    feedback: number
     Emoji: (fp: FillProps) => React.JSX.Element
     text: string
     color: string
     hoverColor: string
-    activeState: Feedbacktype | null
+    activeState: number | string | null
     setThanksFeedback: (b: boolean) => void
-    setActiveState: (s: Feedbacktype | null) => void
+    setActiveState: (s: number | string | null) => void
+    feedbackId: string
 }
 
 const EmojiButton = (props: EmojiButtonProps) => {
     const isActive = props.activeState === props.feedback
 
     const handleOnClick = () => {
+        if (props.activeState) {
+            logEvent('knapp klikket', {
+                komponent: 'flexjar',
+                feedbackId: props.feedbackId,
+                tekst: props.text,
+                svar: props.activeState + '',
+            })
+        }
         props.setThanksFeedback(false)
         if (isActive) {
             props.setActiveState(null)

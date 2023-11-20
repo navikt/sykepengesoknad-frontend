@@ -5,12 +5,13 @@ import { FaceSmileIcon, MagnifyingGlassIcon } from '@navikt/aksel-icons'
 import UseFlexjarFeedback from '../../hooks/useFlexjarFeedback'
 import { Soknad } from '../../types/types'
 import { cn } from '../../utils/tw-utils'
+import { logEvent } from '../amplitude/amplitude'
 
-interface FlexjarFellesProps<T> {
+interface FlexjarFellesProps {
     feedbackId: string
     children: React.ReactNode
-    activeState: T | null
-    setActiveState: (s: T | null) => void
+    activeState: string | number | null
+    setActiveState: (s: string | number | null) => void
     thanksFeedback: boolean
     setThanksFeedback: (b: boolean) => void
     getPlaceholder: () => string
@@ -21,7 +22,7 @@ interface FlexjarFellesProps<T> {
     feedbackProps: Record<string, string | undefined>
 }
 
-export function FlexjarFelles<T>({
+export function FlexjarFelles({
     feedbackId,
     getPlaceholder,
     activeState,
@@ -34,7 +35,7 @@ export function FlexjarFelles<T>({
     textRequired,
     app,
     feedbackProps,
-}: FlexjarFellesProps<T>) {
+}: FlexjarFellesProps) {
     const [textValue, setTextValue] = useState('')
     const [errorMsg, setErrorMsg] = useState<string | null>(null)
     const textAreaRef = useRef(null)
@@ -64,11 +65,19 @@ export function FlexjarFelles<T>({
         giFeedback(body)
     }
 
+    const sendTilbakemelding = 'Send tilbakemelding'
+
     const handleSend = async () => {
         if (textRequired && textValue === '') {
             setErrorMsg('Tilbakemeldingen kan ikke være tom. Legg til tekst i feltet.')
             return
         }
+        logEvent('knapp klikket', {
+            komponent: 'flexjar',
+            feedbackId: feedbackId,
+            svar: activeState + '',
+            tekst: sendTilbakemelding,
+        })
         await fetchFeedback()
         setErrorMsg(null)
 
@@ -133,7 +142,7 @@ export function FlexjarFelles<T>({
                                         await handleSend()
                                     }}
                                 >
-                                    Send tilbakemelding
+                                    {sendTilbakemelding}
                                 </Button>
                             </form>
                         )}
@@ -153,16 +162,17 @@ export function FlexjarFelles<T>({
     )
 }
 
-interface FeedbackButtonProps<T> {
-    children: React.ReactNode
-    feedbacktype: T
+interface FeedbackButtonProps {
+    tekst: string
+    svar: string
     soknad: Soknad | undefined
-    activeState: T | null
+    activeState: string | number | null
     setThanksFeedback: (b: boolean) => void
-    setActiveState: (s: T | null) => void
+    setActiveState: (s: string | null | number) => void
+    feedbackId: string
 }
 
-export function FeedbackButton<T>(props: FeedbackButtonProps<T>) {
+export function FeedbackButton(props: FeedbackButtonProps) {
     return (
         <Button
             variant="secondary-neutral"
@@ -170,18 +180,24 @@ export function FeedbackButton<T>(props: FeedbackButtonProps<T>) {
             as={props.soknad ? Button : Skeleton}
             className={cn({
                 'bg-surface-neutral-active text-text-on-inverted hover:bg-surface-neutral-active':
-                    props.activeState === props.feedbacktype,
+                    props.activeState === props.svar,
             })}
             onClick={() => {
+                logEvent('knapp klikket', {
+                    komponent: 'flexjar',
+                    feedbackId: props.feedbackId,
+                    tekst: props.tekst,
+                    svar: props.svar,
+                })
                 props.setThanksFeedback(false)
-                if (props.activeState === props.feedbacktype) {
+                if (props.activeState === props.svar) {
                     props.setActiveState(null)
                 } else {
-                    props.setActiveState(props.feedbacktype)
+                    props.setActiveState(props.svar)
                 }
             }}
         >
-            {props.children}
+            {props.tekst}
         </Button>
     )
 }
