@@ -2,6 +2,7 @@ import { Label } from '@navikt/ds-react'
 import React, { useState } from 'react'
 
 import { cn } from '../../utils/tw-utils'
+import { useSoknadMedDetaljer } from '../../hooks/useSoknadMedDetaljer'
 
 import { FillProps, glad, lei, noytral, sinna, veldigGlad } from './emojies'
 import { FlexjarFelles } from './flexjar-felles'
@@ -11,7 +12,7 @@ type Feedbacktype = 1 | 2 | 3 | 4 | 5
 export const FlexjarKvittering = () => {
     const [activeState, setActiveState] = useState<Feedbacktype | null>(null)
     const [thanksFeedback, setThanksFeedback] = useState<boolean>(false)
-
+    const { valgtSoknad } = useSoknadMedDetaljer()
     const feedbackButtonProps = {
         activeState,
         setThanksFeedback,
@@ -26,6 +27,11 @@ export const FlexjarKvittering = () => {
             setThanksFeedback={setThanksFeedback}
             getPlaceholder={() => 'Fortell oss om din opplevelse (valgfritt)'}
             flexjarsporsmal="Hvordan opplevde du denne søknaden?"
+            flexjartittel="Hjelp oss med å gjøre søknaden bedre"
+            app="sykepengesoknad-frontend"
+            feedbackProps={{
+                soknadstype: valgtSoknad?.soknadstype.toString(),
+            }}
         >
             <div className="flex w-full gap-2">
                 <div className="flex w-full justify-center gap-4">

@@ -1,11 +1,9 @@
-import { Button, Skeleton } from '@navikt/ds-react'
 import React, { useEffect, useState } from 'react'
 
-import { cn } from '../../utils/tw-utils'
 import { Soknad, Sporsmal } from '../../types/types'
 import { RSSoknadstype } from '../../types/rs-types/rs-soknadstype'
 
-import { FlexjarFelles } from './flexjar-felles'
+import { FeedbackButton, FlexjarFelles } from './flexjar-felles'
 
 enum Feedbacktype {
     'JA' = 'JA',
@@ -13,20 +11,12 @@ enum Feedbacktype {
     'FORBEDRING' = 'FORBEDRING',
 }
 
-interface FeedbackButtonProps {
-    children: React.ReactNode
-    feedbacktype: Feedbacktype
-    soknad: Soknad | undefined
-    activeState: Feedbacktype | null
-    setThanksFeedback: (b: boolean) => void
-    setActiveState: (s: Feedbacktype | null) => void
-}
-
 interface FlexjarSporsmalProps {
     soknad: Soknad | undefined
     sporsmal: Sporsmal | undefined
     steg: number
 }
+
 export const FlexjarSporsmal = ({ soknad, sporsmal, steg }: FlexjarSporsmalProps) => {
     const [textValue, setTextValue] = useState('')
     const [activeState, setActiveState] = useState<Feedbacktype | null>(null)
@@ -83,7 +73,13 @@ export const FlexjarSporsmal = ({ soknad, sporsmal, steg }: FlexjarSporsmalProps
             thanksFeedback={thanksFeedback}
             setThanksFeedback={setThanksFeedback}
             getPlaceholder={getPlaceholder}
+            app="sykepengesoknad-frontend"
+            feedbackProps={{
+                soknadstype: soknad?.soknadstype.toString(),
+                sporsmal: sporsmal?.tag.toString(),
+            }}
             textRequired={activeState === Feedbacktype.FORBEDRING || activeState === Feedbacktype.NEI}
+            flexjartittel="Hjelp oss med å gjøre søknaden bedre"
             flexjarsporsmal="Opplever du at du har nok informasjon til å svare på dette spørsmålet?"
         >
             <div className="flex w-full gap-2">
@@ -98,28 +94,5 @@ export const FlexjarSporsmal = ({ soknad, sporsmal, steg }: FlexjarSporsmalProps
                 </FeedbackButton>
             </div>
         </FlexjarFelles>
-    )
-}
-const FeedbackButton = (props: FeedbackButtonProps) => {
-    return (
-        <Button
-            variant="secondary-neutral"
-            size="small"
-            as={props.soknad ? Button : Skeleton}
-            className={cn({
-                'bg-surface-neutral-active text-text-on-inverted hover:bg-surface-neutral-active':
-                    props.activeState === props.feedbacktype,
-            })}
-            onClick={() => {
-                props.setThanksFeedback(false)
-                if (props.activeState === props.feedbacktype) {
-                    props.setActiveState(null)
-                } else {
-                    props.setActiveState(props.feedbacktype)
-                }
-            }}
-        >
-            {props.children}
-        </Button>
     )
 }

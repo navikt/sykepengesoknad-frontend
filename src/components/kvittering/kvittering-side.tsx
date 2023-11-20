@@ -105,9 +105,9 @@ const KvitteringSide = () => {
                 <UxSignalsWidget study={selvstendigNaeringsdrivendeStudy} demo={!isProd()} />
             )}
             {skalViseUxSignals && <UxSignalsWidget study={defaultStudy} demo={!isProd()} />}
-            {skalViseFlexjar && <FlexjarKvittering />}
             {skalViseEndre && <Endreknapp />}
             {skalViseSendTilArbeidsgiver && <Ettersending gjelder="arbeidsgiver" />}
+            {skalViseFlexjar && <FlexjarKvittering />}
         </>
     )
 }
