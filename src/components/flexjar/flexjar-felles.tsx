@@ -1,9 +1,8 @@
 import React, { useEffect, useRef, useState } from 'react'
-import { Alert, BodyShort, Button, Heading, Label, Skeleton, Textarea } from '@navikt/ds-react'
+import { Alert, BodyShort, Button, Heading, Label, Textarea } from '@navikt/ds-react'
 import { FaceSmileIcon, MagnifyingGlassIcon } from '@navikt/aksel-icons'
 
 import UseFlexjarFeedback from '../../hooks/useFlexjarFeedback'
-import { Soknad } from '../../types/types'
 import { cn } from '../../utils/tw-utils'
 import { logEvent } from '../amplitude/amplitude'
 
@@ -165,7 +164,6 @@ export function FlexjarFelles({
 interface FeedbackButtonProps {
     tekst: string
     svar: string
-    soknad: Soknad | undefined
     activeState: string | number | null
     setThanksFeedback: (b: boolean) => void
     setActiveState: (s: string | null | number) => void
@@ -177,7 +175,6 @@ export function FeedbackButton(props: FeedbackButtonProps) {
         <Button
             variant="secondary-neutral"
             size="medium"
-            as={props.soknad ? Button : Skeleton}
             className={cn({
                 'bg-surface-neutral-active text-text-on-inverted hover:bg-surface-neutral-active':
                     props.activeState === props.svar,
