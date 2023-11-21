@@ -1,38 +1,45 @@
 import React, { useEffect, useRef, useState } from 'react'
-import { Button, Heading, Label, Skeleton, Textarea } from '@navikt/ds-react'
-import { FaceSmileIcon } from '@navikt/aksel-icons'
+import { Alert, BodyShort, Button, Heading, Label, Skeleton, Textarea } from '@navikt/ds-react'
+import { FaceSmileIcon, MagnifyingGlassIcon } from '@navikt/aksel-icons'
 
 import UseFlexjarFeedback from '../../hooks/useFlexjarFeedback'
-import { useSoknadMedDetaljer } from '../../hooks/useSoknadMedDetaljer'
+import { Soknad } from '../../types/types'
+import { cn } from '../../utils/tw-utils'
+import { logEvent } from '../amplitude/amplitude'
 
-interface FlexjarFellesProps<T> {
+interface FlexjarFellesProps {
     feedbackId: string
     children: React.ReactNode
-    activeState: T | null
-    setActiveState: (s: T | null) => void
+    activeState: string | number | null
+    setActiveState: (s: string | number | null) => void
     thanksFeedback: boolean
     setThanksFeedback: (b: boolean) => void
     getPlaceholder: () => string
     textRequired?: boolean
     flexjarsporsmal: string
+    flexjartittel: string
+    app: string
+    feedbackProps: Record<string, string | undefined>
 }
 
-export function FlexjarFelles<T>({
+export function FlexjarFelles({
     feedbackId,
     getPlaceholder,
     activeState,
     setActiveState,
     thanksFeedback,
     setThanksFeedback,
+    flexjartittel,
+    flexjarsporsmal,
     children,
     textRequired,
-    flexjarsporsmal,
-}: FlexjarFellesProps<T>) {
+    app,
+    feedbackProps,
+}: FlexjarFellesProps) {
     const [textValue, setTextValue] = useState('')
     const [errorMsg, setErrorMsg] = useState<string | null>(null)
     const textAreaRef = useRef(null)
     const { mutate: giFeedback } = UseFlexjarFeedback()
-    const { valgtSoknad, sporsmal } = useSoknadMedDetaljer()
 
     useEffect(() => {
         textValue && errorMsg && setErrorMsg(null)
@@ -51,19 +58,26 @@ export function FlexjarFelles<T>({
             feedback: textValue,
             feedbackId: feedbackId,
             svar: activeState,
-            app: 'sykepengesoknad-frontend',
-            soknadstype: valgtSoknad?.soknadstype,
-            sporsmal: sporsmal?.tag,
+            app,
+            ...feedbackProps,
         }
 
         giFeedback(body)
     }
+
+    const sendTilbakemelding = 'Send tilbakemelding'
 
     const handleSend = async () => {
         if (textRequired && textValue === '') {
             setErrorMsg('Tilbakemeldingen kan ikke være tom. Legg til tekst i feltet.')
             return
         }
+        logEvent('knapp klikket', {
+            komponent: 'flexjar',
+            feedbackId: feedbackId,
+            svar: activeState + '',
+            tekst: sendTilbakemelding,
+        })
         await fetchFeedback()
         setErrorMsg(null)
 
@@ -75,57 +89,115 @@ export function FlexjarFelles<T>({
     return (
         <section>
             <div className="w:full mt-16 md:w-3/4">
-                <div className="mt-1 rounded-xl bg-surface-subtle p-6">
-                    <Label as={valgtSoknad ? 'h3' : Skeleton}>{flexjarsporsmal}</Label>
-                    <Label className="mb-4" as={valgtSoknad ? 'p' : Skeleton}>
-                        Tilbakemeldingen er anonym
-                    </Label>
-                    {children}
-                    {activeState !== null && (
-                        <form className="mt-6 flex w-full flex-col gap-4">
-                            <Textarea
-                                ref={textAreaRef}
-                                error={errorMsg}
-                                label={getPlaceholder()}
-                                onKeyDown={async (e) => {
-                                    if (e.key === 'Enter' && !e.shiftKey) {
+                <div className="mt-1 border-4 border-surface-subtle rounded-medium">
+                    <div className="bg-surface-subtle p-6 flex gap-4 items-center">
+                        <div className="bg-gray-900 w-10 h-10 rounded-full flex justify-center items-center">
+                            <MagnifyingGlassIcon className="text-white" title="a11y-title" />
+                        </div>
+                        <div>
+                            <Label as="h3" className="mb-2">
+                                {flexjartittel}
+                            </Label>
+                            <BodyShort>Anonym tilbakemelding</BodyShort>
+                        </div>
+                    </div>
+                    <div className="px-6 py-8">
+                        {flexjarsporsmal && (
+                            <Label as="p" className="mb-8">
+                                {flexjarsporsmal}
+                            </Label>
+                        )}
+
+                        {children}
+                        {activeState !== null && (
+                            <form className="mt-10 w-full">
+                                <Textarea
+                                    ref={textAreaRef}
+                                    error={errorMsg}
+                                    label={getPlaceholder()}
+                                    onKeyDown={async (e) => {
+                                        if (e.key === 'Enter' && !e.shiftKey) {
+                                            e.preventDefault()
+                                            await handleSend()
+                                        }
+                                    }}
+                                    value={textValue}
+                                    onChange={(e) => {
+                                        setThanksFeedback(false)
+                                        setTextValue(e.target.value)
+                                    }}
+                                    maxLength={600}
+                                    minRows={3}
+                                />
+                                <Alert variant="warning" className="mt-4">
+                                    Ikke skriv inn navn eller andre personopplysninger. Dette blir kun brukt til å
+                                    forbedre tjenesten. Du vil ikke få et svar fra oss.
+                                </Alert>
+                                <Button
+                                    className="mr-auto mt-6"
+                                    size="medium"
+                                    variant="secondary-neutral"
+                                    onClick={async (e) => {
                                         e.preventDefault()
                                         await handleSend()
-                                    }
-                                }}
-                                value={textValue}
-                                onChange={(e) => {
-                                    setThanksFeedback(false)
-                                    setTextValue(e.target.value)
-                                }}
-                                maxLength={600}
-                                minRows={3}
-                                description="Ikke skriv inn navn eller andre personopplysninger. Svaret ditt blir brukt til å forbedre søknaden og vil ikke påvirke eller saksbehandle søknaden din."
-                            />
-                            <Button
-                                className="mr-auto"
-                                size="small"
-                                variant="secondary-neutral"
-                                onClick={async (e) => {
-                                    e.preventDefault()
-                                    await handleSend()
-                                }}
-                            >
-                                Send tilbakemelding
-                            </Button>
-                        </form>
-                    )}
+                                    }}
+                                >
+                                    {sendTilbakemelding}
+                                </Button>
+                            </form>
+                        )}
+                    </div>
                 </div>
                 <div aria-live="polite">
                     {thanksFeedback && (
-                        <div className="mt-2 rounded-xl bg-green-50 p-6">
+                        <div className="mt-2 border-4 border-green-100 rounded-medium bg-green-100 p-6">
                             <Heading size="small" as="p" className="flex items-center">
-                                Takk for tilbakemeldingen din! <FaceSmileIcon></FaceSmileIcon>
+                                Takk for tilbakemeldingen din! <FaceSmileIcon className="ml-2"></FaceSmileIcon>
                             </Heading>
                         </div>
                     )}
                 </div>
             </div>
         </section>
+    )
+}
+
+interface FeedbackButtonProps {
+    tekst: string
+    svar: string
+    soknad: Soknad | undefined
+    activeState: string | number | null
+    setThanksFeedback: (b: boolean) => void
+    setActiveState: (s: string | null | number) => void
+    feedbackId: string
+}
+
+export function FeedbackButton(props: FeedbackButtonProps) {
+    return (
+        <Button
+            variant="secondary-neutral"
+            size="medium"
+            as={props.soknad ? Button : Skeleton}
+            className={cn({
+                'bg-surface-neutral-active text-text-on-inverted hover:bg-surface-neutral-active':
+                    props.activeState === props.svar,
+            })}
+            onClick={() => {
+                logEvent('knapp klikket', {
+                    komponent: 'flexjar',
+                    feedbackId: props.feedbackId,
+                    tekst: props.tekst,
+                    svar: props.svar,
+                })
+                props.setThanksFeedback(false)
+                if (props.activeState === props.svar) {
+                    props.setActiveState(null)
+                } else {
+                    props.setActiveState(props.svar)
+                }
+            }}
+        >
+            {props.tekst}
+        </Button>
     )
 }

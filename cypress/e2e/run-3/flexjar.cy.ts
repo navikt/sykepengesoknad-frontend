@@ -21,19 +21,19 @@ describe('Tester flexjar', () => {
 
     it('Naviger til tilbake i arbeid', function () {
         svarCheckboxPanel()
-        heading('Opplever du at du har nok informasjon til å svare på dette spørsmålet?').should('not.exist')
+        heading('Hjelp oss med å gjøre søknaden bedre').should('not.exist')
 
         klikkGaVidere()
         svarNeiHovedsporsmal()
-        heading('Opplever du at du har nok informasjon til å svare på dette spørsmålet?').should('exist')
+        heading('Hjelp oss med å gjøre søknaden bedre').should('exist')
         klikkGaVidere()
     })
 
     it('Test å gi feedback', function () {
         cy.contains('Tilbake i fullt arbeid')
-        cy.contains('Opplever du at du har nok informasjon til å svare på dette spørsmålet?')
+        cy.contains('Hjelp oss med å gjøre søknaden bedre')
 
-        heading('Opplever du at du har nok informasjon til å svare på dette spørsmålet?')
+        heading('Hjelp oss med å gjøre søknaden bedre')
             .closest('section')
             .within(() => {
                 cy.findByRole('button', {
@@ -72,15 +72,16 @@ describe('Tester flexjar', () => {
     })
 
     it('Har ikke sporsmål flexjar på de siste sidene', function () {
-        heading('Opplever du at du har nok informasjon til å svare på dette spørsmålet?').should('not.exist')
+        heading('Hjelp oss med å gjøre søknaden bedre').should('not.exist')
         svarCheckboxPanel()
         cy.contains('Send søknaden').click()
         cy.contains('Søknaden er sendt')
-        heading('Opplever du at du har nok informasjon til å svare på dette spørsmålet?').should('not.exist')
+        heading('Hjelp oss med å gjøre søknaden bedre').should('exist')
     })
 
     it('Har kvittering flexjar på kvitteringa', function () {
-        heading('Hvordan opplevde du denne søknaden?')
+        cy.contains('Hvordan opplevde du denne søknaden')
+        heading('Hjelp oss med å gjøre søknaden bedre')
             .closest('section')
             .within(() => {
                 cy.findByRole('button', {
