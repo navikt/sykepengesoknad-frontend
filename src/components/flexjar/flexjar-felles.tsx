@@ -94,7 +94,7 @@ export function FlexjarFelles({
                 <div className="mt-1 border-4 border-surface-subtle rounded-medium">
                     <div className="bg-surface-subtle p-6 flex gap-4 items-center">
                         <div className="bg-gray-900 w-10 h-10 rounded-full flex justify-center items-center">
-                            <MagnifyingGlassIcon className="text-white" title="a11y-title" />
+                            <MagnifyingGlassIcon className="text-white axe-exclude" />
                         </div>
                         <div>
                             <Label as="h3" className="mb-2">
@@ -155,7 +155,8 @@ export function FlexjarFelles({
                     {thanksFeedback && (
                         <div className="mt-2 border-4 border-green-100 rounded-medium bg-green-100 p-6">
                             <Heading size="small" as="p" className="flex items-center">
-                                Takk for tilbakemeldingen din! <FaceSmileIcon className="ml-2"></FaceSmileIcon>
+                                Takk for tilbakemeldingen din!{' '}
+                                <FaceSmileIcon className="ml-2" aria-label="smilefjes"></FaceSmileIcon>
                             </Heading>
                         </div>
                     )}
