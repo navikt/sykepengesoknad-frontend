@@ -41,12 +41,15 @@ export function FlexjarFelles({
     const { mutate: giFeedback } = UseFlexjarFeedback()
 
     useEffect(() => {
-        textValue && errorMsg && setErrorMsg(null)
-    }, [textValue, errorMsg])
-
-    useEffect(() => {
         setErrorMsg(null)
     }, [activeState])
+
+    const feedbackPropsString = JSON.stringify(feedbackProps)
+    useEffect(() => {
+        setErrorMsg(null)
+        setTextValue('')
+        setActiveState(null)
+    }, [feedbackPropsString, setActiveState, feedbackId])
 
     const fetchFeedback = async (): Promise<void> => {
         if (activeState === null) {
@@ -123,6 +126,7 @@ export function FlexjarFelles({
                                     value={textValue}
                                     onChange={(e) => {
                                         setThanksFeedback(false)
+                                        setErrorMsg(null)
                                         setTextValue(e.target.value)
                                     }}
                                     maxLength={600}
