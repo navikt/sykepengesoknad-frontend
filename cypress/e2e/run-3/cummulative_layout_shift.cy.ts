@@ -22,7 +22,7 @@ describe('Tester cummulative-layout-shift ', () => {
         // Sjekk mains høyde
         const expectedHeight = '1152px'
         cy.get('main').should('have.css', 'height', expectedHeight)
-        cy.get('.navds-skeleton').should('have.length', 14)
+        cy.get('.navds-skeleton').should('have.length', 11)
 
         // Venter på at alle dataene er fetchet og rendret
 
