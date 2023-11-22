@@ -1,7 +1,6 @@
 import { RSSoknad } from '../../../../types/rs-types/rs-soknad'
 import { gradertReisetilskuddSm } from '../sykmeldinger'
-import { værKlarOverAtGradertReisetilskudd } from '../sporsmal/vaer-klar-over-at'
-import { bekreftOpplysninger } from '../sporsmal/bekreft-opplysninger'
+import { nyVærKlarOverAt } from '../sporsmal/vaer-klar-over-at'
 
 export const gradertReisetilskudd: RSSoknad = {
     id: 'bc250797-147c-4050-b193-920c508902aa',
@@ -595,8 +594,7 @@ export const gradertReisetilskudd: RSSoknad = {
             svar: [],
             undersporsmal: [],
         },
-        værKlarOverAtGradertReisetilskudd(),
-        bekreftOpplysninger(),
+        nyVærKlarOverAt(),
     ],
     egenmeldtSykmelding: false,
     opprettetAvInntektsmelding: false,

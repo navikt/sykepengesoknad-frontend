@@ -90,6 +90,7 @@ const SporsmalForm = ({ sporsmal }: SpmProps) => {
             !nesteSporsmal &&
             !erUtenlandssoknad &&
             valgtSoknad?.soknadstype !== RSSoknadstype.ARBEIDSTAKERE &&
+            valgtSoknad?.soknadstype !== RSSoknadstype.GRADERT_REISETILSKUDD &&
             valgtSoknad?.soknadstype !== RSSoknadstype.REISETILSKUDD
         ) {
             return Promise.reject(new Error('Neste spørsmål skal være lastet for at vi kan submitte'))
