@@ -1,6 +1,6 @@
 import React from 'react'
 import { useFormContext } from 'react-hook-form'
-import { Button, Label } from '@navikt/ds-react'
+import { BodyShort, Button } from '@navikt/ds-react'
 import { PlusIcon, TrashIcon } from '@navikt/aksel-icons'
 
 import { Sporsmal } from '../../../types/types'
@@ -69,7 +69,7 @@ const GruppeAvUndersporsmal = ({ sporsmal, sporsmalIndex, erSisteSporsmal }: Gru
             className={!erSisteSporsmal && erMedlemskap ? 'mb-8 border-b border-dashed border-gray-400' : ''}
             aria-live="assertive"
         >
-            <Label>{sporsmal.sporsmalstekst}</Label>
+            {sporsmal.sporsmalstekst && <BodyShort>{sporsmal.sporsmalstekst}</BodyShort>}
             <UndersporsmalListe oversporsmal={sporsmal} />
 
             {kanSlette && (

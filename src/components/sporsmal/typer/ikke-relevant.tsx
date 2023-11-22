@@ -1,15 +1,15 @@
-import { BodyLong, Label } from '@navikt/ds-react'
+import { BodyLong, Heading, Label } from '@navikt/ds-react'
 import React from 'react'
 
 import { parserWithReplace } from '../../../utils/html-react-parser-utils'
 import { SpmProps } from '../sporsmal-form/sporsmal-form'
 
 const IkkeRelevant = ({ sporsmal }: SpmProps) => {
-    if (sporsmal.tag.includes('KJENTE_INNTEKTKILDER_GRUPPE_TITTEL')) {
+    if (sporsmal.tag.includes('KJENTE_INNTEKTSKILDER_GRUPPE_TITTEL')) {
         return (
-            <Label as="h2" className="mb-4">
+            <Heading size="medium" level="3" className="p-4 bg-gray-100 rounded">
                 {sporsmal.sporsmalstekst}
-            </Label>
+            </Heading>
         )
     }
     return (
