@@ -401,12 +401,11 @@ export const brukertestSoknad: RSSoknad = {
             undersporsmal: [],
         },
         {
-            id: 'f725ab9b-5e8c-3944-9e2b-9c5fac449278',
+            id: 'c3fce000-a877-35b2-a092-ee6bc4c983b8',
             tag: 'KJENTE_INNTEKTSKILDER',
             sporsmalstekst:
                 'Du er oppført med flere inntektskilder i Arbeidsgiver- og arbeidstakerregisteret. Vi trenger mer informasjon om disse.',
             undertekst: null,
-
             svartype: 'GRUPPE_AV_UNDERSPORSMAL',
             min: null,
             max: null,
@@ -415,8 +414,8 @@ export const brukertestSoknad: RSSoknad = {
             svar: [],
             undersporsmal: [
                 {
-                    id: '365f95c9-a6e3-3b14-97ac-0c66a9583c98',
-                    tag: 'KJENTE_INNTEKTKILDER_GRUPPE_0',
+                    id: '89b6d924-e49d-3bae-9095-403bcda72d43',
+                    tag: 'KJENTE_INNTEKTSKILDER_GRUPPE_0',
                     sporsmalstekst: null,
                     undertekst: null,
                     svartype: 'GRUPPE_AV_UNDERSPORSMAL',
@@ -427,8 +426,8 @@ export const brukertestSoknad: RSSoknad = {
                     svar: [],
                     undersporsmal: [
                         {
-                            id: '3f49ff9e-9170-3da9-b47f-90738f803727',
-                            tag: 'KJENTE_INNTEKTKILDER_GRUPPE_TITTEL_0',
+                            id: '746c9c7a-cfff-3742-88a5-bbf954bfb3c3',
+                            tag: 'KJENTE_INNTEKTSKILDER_GRUPPE_TITTEL_0',
                             sporsmalstekst: 'Bensinstasjonen AS',
                             undertekst: null,
                             svartype: 'IKKE_RELEVANT',
@@ -440,8 +439,8 @@ export const brukertestSoknad: RSSoknad = {
                             undersporsmal: [],
                         },
                         {
-                            id: '01cb932a-7f0e-37f3-90a2-513aab478905',
-                            tag: 'KJENTE_INNTEKTKILDER_JOBBER_FORTSATT_0',
+                            id: '6b59c5d1-0d09-3bb3-b015-7ff84c2da0a4',
+                            tag: 'KJENTE_INNTEKTSKILDER_JOBBER_FORTSATT_0',
                             sporsmalstekst: 'Jobber du fortsatt ved Bensinstasjonen AS?',
                             undertekst: null,
                             svartype: 'RADIO_GRUPPE',
@@ -452,11 +451,11 @@ export const brukertestSoknad: RSSoknad = {
                             svar: [],
                             undersporsmal: [
                                 {
-                                    id: '9bafb62f-80c0-3768-9317-f73318c62470',
-                                    tag: 'KJENTE_INNTEKTKILDER_JOBBER_FORTSATT_JA_0',
+                                    id: '5b059cd7-477c-3c13-89f1-8048c98f5f9d',
+                                    tag: 'KJENTE_INNTEKTSKILDER_JOBBER_FORTSATT_JA_0',
                                     sporsmalstekst: 'Ja',
                                     undertekst: null,
-                                    svartype: 'GRUPPE_AV_UNDERSPORSMAL',
+                                    svartype: 'RADIO',
                                     min: null,
                                     max: null,
                                     pavirkerAndreSporsmal: false,
@@ -464,10 +463,10 @@ export const brukertestSoknad: RSSoknad = {
                                     svar: [],
                                     undersporsmal: [
                                         {
-                                            id: '59a5db33-70f9-328a-8ce9-2b1a8fb15f76',
-                                            tag: 'KJENTE_INNTEKTKILDER_UTFORT_ARBEID_0',
+                                            id: '49bab3eb-08c7-3f7a-98f9-acd76df57b6b',
+                                            tag: 'KJENTE_INNTEKTSKILDER_UTFORT_ARBEID_0',
                                             sporsmalstekst:
-                                                'Har du utført arbeid ved Bensinstasjonen AS i minst én dag i perioden $ 28. juli - 11. august 2021?',
+                                                'Har du utført arbeid ved Bensinstasjonen AS i minst én dag i perioden 28. juli - 11. august 2021?',
                                             undertekst: null,
                                             svartype: 'JA_NEI',
                                             min: null,
@@ -477,10 +476,10 @@ export const brukertestSoknad: RSSoknad = {
                                             svar: [],
                                             undersporsmal: [
                                                 {
-                                                    id: '0749ac5b-5db3-32bd-b631-6c89d53382d4',
-                                                    tag: 'KJENTE_INNTEKTKILDER_ARSAK_IKKE_JOBBET_0',
+                                                    id: '7ac67ffa-516d-3004-940f-cb8d5536529c',
+                                                    tag: 'KJENTE_INNTEKTSKILDER_ARSAK_IKKE_JOBBET_0',
                                                     sporsmalstekst:
-                                                        'Velg en eller flere årsaker til at du ikke har jobbet\n',
+                                                        'Velg en eller flere årsaker til at du ikke har jobbet',
                                                     undertekst: null,
                                                     svartype: 'CHECKBOX_GRUPPE',
                                                     min: null,
@@ -490,8 +489,8 @@ export const brukertestSoknad: RSSoknad = {
                                                     svar: [],
                                                     undersporsmal: [
                                                         {
-                                                            id: '3622d43b-68a8-3f73-be92-da340b824584',
-                                                            tag: 'KJENTE_INNTEKTKILDER_ARSAK_IKKE_JOBBET_ANNEN_0',
+                                                            id: '76010ba5-b631-35ce-80d9-0472bfadd427',
+                                                            tag: 'KJENTE_INNTEKTSKILDER_ARSAK_IKKE_JOBBET_ANNEN_0',
                                                             sporsmalstekst: 'Annen årsak',
                                                             undertekst: null,
                                                             svartype: 'CHECKBOX',
@@ -503,8 +502,8 @@ export const brukertestSoknad: RSSoknad = {
                                                             undersporsmal: [],
                                                         },
                                                         {
-                                                            id: '8582aa39-a9a1-35d8-895e-5cd6f80b497f',
-                                                            tag: 'KJENTE_INNTEKTKILDER_ARSAK_IKKE_JOBBET_AVSPASERING_0',
+                                                            id: 'a143bf9a-552c-3a94-bb29-22684d9f34ae',
+                                                            tag: 'KJENTE_INNTEKTSKILDER_ARSAK_IKKE_JOBBET_AVSPASERING_0',
                                                             sporsmalstekst: 'Jeg avspaserte',
                                                             undertekst: null,
                                                             svartype: 'CHECKBOX',
@@ -516,8 +515,8 @@ export const brukertestSoknad: RSSoknad = {
                                                             undersporsmal: [],
                                                         },
                                                         {
-                                                            id: '42ec7a01-cf55-391f-afa2-276f67b6f3d4',
-                                                            tag: 'KJENTE_INNTEKTKILDER_ARSAK_IKKE_JOBBET_FERIE_0',
+                                                            id: '80402f6c-8fe3-38bd-af11-956e158ce6fc',
+                                                            tag: 'KJENTE_INNTEKTSKILDER_ARSAK_IKKE_JOBBET_FERIE_0',
                                                             sporsmalstekst: 'Jeg hadde lovbestemt ferie',
                                                             undertekst: null,
                                                             svartype: 'CHECKBOX',
@@ -529,8 +528,8 @@ export const brukertestSoknad: RSSoknad = {
                                                             undersporsmal: [],
                                                         },
                                                         {
-                                                            id: 'accbefe0-6ec7-36af-8f15-c9917fc87584',
-                                                            tag: 'KJENTE_INNTEKTKILDER_ARSAK_IKKE_JOBBET_PERMISJON_0',
+                                                            id: 'd9e9d311-947b-31bc-8fa0-a4436623295d',
+                                                            tag: 'KJENTE_INNTEKTSKILDER_ARSAK_IKKE_JOBBET_PERMISJON_0',
                                                             sporsmalstekst: 'Jeg hadde permisjon',
                                                             undertekst: null,
                                                             svartype: 'CHECKBOX',
@@ -542,8 +541,8 @@ export const brukertestSoknad: RSSoknad = {
                                                             undersporsmal: [],
                                                         },
                                                         {
-                                                            id: 'b9c4cd32-7537-3cd6-89de-0e25229ca5a6',
-                                                            tag: 'KJENTE_INNTEKTKILDER_ARSAK_IKKE_JOBBET_PERMITTERT_0',
+                                                            id: '60dd0651-bab9-3079-9c5b-e216a9fd9c9e',
+                                                            tag: 'KJENTE_INNTEKTSKILDER_ARSAK_IKKE_JOBBET_PERMITTERT_0',
                                                             sporsmalstekst: 'Jeg var permittert',
                                                             undertekst: null,
                                                             svartype: 'CHECKBOX',
@@ -555,8 +554,8 @@ export const brukertestSoknad: RSSoknad = {
                                                             undersporsmal: [],
                                                         },
                                                         {
-                                                            id: '94f9de79-378f-3900-a412-10f5660ed056',
-                                                            tag: 'KJENTE_INNTEKTKILDER_ARSAK_IKKE_JOBBET_SYKMELDT_0',
+                                                            id: '25c3d414-e90d-3e30-8e31-8bbe7bb83a69',
+                                                            tag: 'KJENTE_INNTEKTSKILDER_ARSAK_IKKE_JOBBET_SYKMELDT_0',
                                                             sporsmalstekst: 'Jeg var sykmeldt',
                                                             undertekst: null,
                                                             svartype: 'CHECKBOX',
@@ -568,8 +567,8 @@ export const brukertestSoknad: RSSoknad = {
                                                             undersporsmal: [],
                                                         },
                                                         {
-                                                            id: '8f5cd960-7dc9-36d7-9537-a507f7c794bf',
-                                                            tag: 'KJENTE_INNTEKTKILDER_ARSAK_IKKE_JOBBET_TURNUS_0',
+                                                            id: 'a7483483-6208-3f32-9190-59132e65bf08',
+                                                            tag: 'KJENTE_INNTEKTSKILDER_ARSAK_IKKE_JOBBET_TURNUS_0',
                                                             sporsmalstekst: 'Jeg jobber turnus',
                                                             undertekst: null,
                                                             svartype: 'CHECKBOX',
@@ -587,11 +586,11 @@ export const brukertestSoknad: RSSoknad = {
                                     ],
                                 },
                                 {
-                                    id: 'dbdb42d1-3277-3333-8724-808ddc80fd54',
-                                    tag: 'KJENTE_INNTEKTKILDER_JOBBER_FORTSATT_NEI_0',
+                                    id: '4a00627b-8723-3d8b-90f3-ba594ebf102b',
+                                    tag: 'KJENTE_INNTEKTSKILDER_JOBBER_FORTSATT_NEI_0',
                                     sporsmalstekst: 'Nei',
                                     undertekst: null,
-                                    svartype: 'GRUPPE_AV_UNDERSPORSMAL',
+                                    svartype: 'RADIO',
                                     min: null,
                                     max: null,
                                     pavirkerAndreSporsmal: false,
@@ -599,8 +598,8 @@ export const brukertestSoknad: RSSoknad = {
                                     svar: [],
                                     undersporsmal: [
                                         {
-                                            id: '5aabd092-3c4e-3a3b-8cf2-20de40c0061b',
-                                            tag: 'KJENTE_INNTEKTKILDER_DATO_SLUTTET_0',
+                                            id: '404a34a9-da3a-381c-b636-091c84b531a4',
+                                            tag: 'KJENTE_INNTEKTSKILDER_DATO_SLUTTET_0',
                                             sporsmalstekst: 'Når sluttet du?',
                                             undertekst: null,
                                             svartype: 'DATO',
