@@ -11,15 +11,24 @@ import Opplysninger from '../../opplysninger-fra-sykmelding/opplysninger'
 import { RSSoknadstype } from '../../../types/rs-types/rs-soknadstype'
 import BekreftelsespunkterReisetilskuddTekster from '../bekreftelsespunkter/bekreftelsespunkter-reisetilskudd-tekster'
 import { useSoknadMedDetaljer } from '../../../hooks/useSoknadMedDetaljer'
+import BekreftelsespunkterGradertReisetilskuddTekster from '../bekreftelsespunkter/bekreftelsespunkter-gradert-reisetilskudd-tekster'
 
 const Kulepunkter = ({ sporsmal }: SpmProps) => {
     const { setValue } = useFormContext()
     const { valgtSoknad } = useSoknadMedDetaljer()
 
-    const kulepunkterTekster =
-        valgtSoknad!.soknadstype === RSSoknadstype.ARBEIDSTAKERE
-            ? Object.values(BekreftelsespunkterArbeidstakereTekster)
-            : Object.values(BekreftelsespunkterReisetilskuddTekster)
+    const kulepunkterTekster: string[] = (() => {
+        switch (valgtSoknad!.soknadstype) {
+            case RSSoknadstype.ARBEIDSTAKERE:
+                return Object.values(BekreftelsespunkterArbeidstakereTekster)
+            case RSSoknadstype.GRADERT_REISETILSKUDD:
+                return Object.values(BekreftelsespunkterGradertReisetilskuddTekster)
+            case RSSoknadstype.REISETILSKUDD:
+                return Object.values(BekreftelsespunkterReisetilskuddTekster)
+            default:
+                return []
+        }
+    })()
 
     useEffect(() => {
         setValue(sporsmal.id, kulepunkterTekster)
