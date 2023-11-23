@@ -1,4 +1,4 @@
-import { setPeriodeFraTil, velgDato } from '../../support/utilities'
+import { besvarKjenteInntektskilder, setPeriodeFraTil } from '../../support/utilities'
 import { arbeidstakerGradert } from '../../../src/data/mock/data/soknad/arbeidstaker-gradert'
 
 describe('Tester arbeidstakersøknad - gradert 50%', () => {
@@ -141,20 +141,7 @@ describe('Tester arbeidstakersøknad - gradert 50%', () => {
     it('Kjente inntektskilder', function () {
         cy.url().should('include', `${soknad.id}/8`)
 
-        const utførtTekst = 'Har du utført noe arbeid ved Ruter i perioden 28. juli - 11. august 2021?'
-        cy.contains(utførtTekst).should('not.exist')
-        cy.get('#de67459c-c81b-3fd2-b881-be3031e19850').check()
-        cy.contains(utførtTekst).should('be.visible')
-        cy.get('#350e754c-32ae-315d-963b-9f9dfaad2bd0').check()
-        cy.contains(utførtTekst).should('not.exist')
-        velgDato(2)
-        cy.get('#de67459c-c81b-3fd2-b881-be3031e19851').check()
-        cy.get('#1df39124-4883-3b38-9ddb-52a2ac378031_0').check()
-        cy.get('#de67459c-c81b-3fd2-b881-be3031e19852').click()
-        cy.get('#1df39124-4883-3b38-9ddb-52a2ac378032_1').click()
-        cy.get('#7057edf4-8809-3a3c-9bdf-10f65259f822').click()
-        cy.checkA11y()
-        cy.contains('Gå videre').click()
+        besvarKjenteInntektskilder()
     })
 
     it('Søknad ANDRE_INNTEKTSKILDER_V2', function () {

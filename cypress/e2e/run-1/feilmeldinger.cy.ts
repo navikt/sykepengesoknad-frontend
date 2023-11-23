@@ -313,13 +313,13 @@ describe('Tester feilmeldinger', () => {
     })
 
     it('CHECKBOX_GRUPPE ingen valgt', () => {
-        gaTilSoknad(arbeidstakerGradert, '8')
+        gaTilSoknad(arbeidstakerGradert, '9')
         cy.get('input[value=JA]').click()
         gaVidere()
         feilmeldingHandtering(
             'Du må velge minst et alternativ',
             'Du må oppgi hvilke inntektskilder du har',
-            arbeidstakerGradert.sporsmal[7].undersporsmal[0].undersporsmal[0].id,
+            arbeidstakerGradert.sporsmal[8].undersporsmal[0].undersporsmal[0].id,
         )
     })
 
@@ -329,7 +329,7 @@ describe('Tester feilmeldinger', () => {
     })
 
     it('COMBOBOX_SINGLE ingen valg', () => {
-        cy.visit(`/syk/sykepengesoknad/soknader/7fdc72b9-30a9-435c-9eb1-f7cc68a8b429/7?testperson=medlemskap`)
+        cy.visit(`/syk/sykepengesoknad/soknader/7fdc72b9-30a9-435c-9eb1-f7cc68a8b429/8?testperson=medlemskap`)
         cy.get('input[value=JA]').click()
         svarFritekst('Hvilken arbeidsgiver jobbet du for?', 'jobben')
         setPeriodeDateFieldMedIndex(0, '01.04.2020')

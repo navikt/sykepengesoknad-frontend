@@ -1,10 +1,11 @@
 import {
+    besvarKjenteInntektskilder,
+    neiOgVidere,
     svarCheckboxPanel,
+    svarCombobox,
     svarFritekst,
     svarJaHovedsporsmal,
-    svarNeiHovedsporsmal,
     velgDato,
-    svarCombobox,
 } from '../../support/utilities'
 import 'cypress-real-events'
 
@@ -95,17 +96,19 @@ describe('Tester søknad til utenlandsk sykmelding', () => {
     })
 
     it('Svar nei på resten', function () {
-        for (let i = 5; i <= 11; i++) {
-            cy.url().should('include', `${id}/${i}`)
-            // eslint-disable-next-line cypress/no-unnecessary-waiting
-            cy.wait(100)
-            svarNeiHovedsporsmal()
-            cy.contains('Gå videre').click()
-        }
+        neiOgVidere([
+            'Tilbake i fullt arbeid',
+            'Ferie',
+            'Permisjon',
+            'Jobb underveis i sykefraværet',
+            'Arbeid utenfor Norge',
+        ])
+        besvarKjenteInntektskilder()
+        neiOgVidere(['Andre inntektskilder', 'Opphold i utlandet'])
     })
 
     it('Vær klar over at', function () {
-        cy.url().should('include', `${id}/12`)
+        cy.url().should('include', `${id}/13`)
         cy.contains('Til slutt')
         cy.get('section[aria-label="Oppsummering fra søknaden"] button').click()
         cy.contains('Danmark')

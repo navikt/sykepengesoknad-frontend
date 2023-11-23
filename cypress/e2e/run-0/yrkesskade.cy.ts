@@ -1,4 +1,10 @@
-import { checkViStolerPåDeg, klikkGaVidere, neiOgVidere, svarJaHovedsporsmal } from '../../support/utilities'
+import {
+    besvarKjenteInntektskilder,
+    checkViStolerPåDeg,
+    klikkGaVidere,
+    neiOgVidere,
+    svarJaHovedsporsmal,
+} from '../../support/utilities'
 import 'cypress-real-events'
 
 describe('Tester yrkesskadesspørsmål', () => {
@@ -19,9 +25,9 @@ describe('Tester yrkesskadesspørsmål', () => {
             'Permisjon',
             'Jobb underveis i sykefraværet',
             'Arbeid utenfor Norge',
-            'Andre inntektskilder',
-            'Opphold i utlandet',
         ])
+        besvarKjenteInntektskilder()
+        neiOgVidere(['Andre inntektskilder', 'Opphold i utlandet'])
     })
 
     it('Kommer til spørsmål om yrkesskade', function () {
