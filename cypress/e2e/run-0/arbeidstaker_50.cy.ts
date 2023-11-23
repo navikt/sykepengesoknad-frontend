@@ -1,4 +1,4 @@
-import { setPeriodeFraTil } from '../../support/utilities'
+import { besvarKjenteInntektskilder, setPeriodeFraTil } from '../../support/utilities'
 import { arbeidstakerGradert } from '../../../src/data/mock/data/soknad/arbeidstaker-gradert'
 
 describe('Tester arbeidstakersøknad - gradert 50%', () => {
@@ -138,8 +138,14 @@ describe('Tester arbeidstakersøknad - gradert 50%', () => {
         cy.contains('Gå videre').click()
     })
 
-    it('Søknad ANDRE_INNTEKTSKILDER_V2', function () {
+    it('Kjente inntektskilder', function () {
         cy.url().should('include', `${soknad.id}/8`)
+
+        besvarKjenteInntektskilder()
+    })
+
+    it('Søknad ANDRE_INNTEKTSKILDER_V2', function () {
+        cy.url().should('include', `${soknad.id}/9`)
 
         cy.contains('Har du andre inntektskilder enn nevnt over?')
 
@@ -155,7 +161,7 @@ describe('Tester arbeidstakersøknad - gradert 50%', () => {
     })
 
     it('Søknad UTLAND_V2', function () {
-        cy.url().should('include', `${soknad.id}/9`)
+        cy.url().should('include', `${soknad.id}/10`)
 
         // Test spørsmål
         cy.get('[data-cy="ja-nei-stor"] input[value=JA]').click()
@@ -166,7 +172,7 @@ describe('Tester arbeidstakersøknad - gradert 50%', () => {
     })
 
     it('Søknad ANSVARSERKLARING ', function () {
-        cy.url().should('include', `${soknad.id}/10`)
+        cy.url().should('include', `${soknad.id}/11`)
         cy.contains('Til slutt')
         cy.contains(
             'Jeg har lest all informasjonen jeg har fått i søknaden og bekrefter at opplysningene jeg har gitt er korrekte.',

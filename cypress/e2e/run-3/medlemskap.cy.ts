@@ -15,7 +15,7 @@ describe('Tester medlemskap spørsmål', () => {
     const soknad = medlemskapPerson.soknader[0]
 
     before(() => {
-        cy.visit(`/syk/sykepengesoknad/soknader/${soknad.id}/7?testperson=medlemskap`)
+        cy.visit(`/syk/sykepengesoknad/soknader/${soknad.id}/8?testperson=medlemskap`)
         cy.get('.navds-heading--large')
             .should('be.visible')
             .and('have.text', 'Søknad om sykepenger8. – 21. september 2022')

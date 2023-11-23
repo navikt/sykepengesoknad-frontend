@@ -4,6 +4,8 @@ import { RSSoknad } from '../../../../types/rs-types/rs-soknad'
 import { Sykmelding } from '../../../../types/sykmelding'
 import { tilLesbarPeriodeMedArstall } from '../../../../utils/dato-utils'
 import { nyVærKlarOverAt } from '../sporsmal/vaer-klar-over-at'
+import { ArbeidsforholdFraInntektskomponenten } from '../../../../types/rs-types/rs-arbeidsforholdfrainntektskomponenten'
+import { kjenteInntektskilder } from '../sporsmal/kjente-inntektskilder'
 
 import { Persona } from './personas'
 
@@ -140,28 +142,29 @@ export const brukertestSykmelding = new Sykmelding({
     },
 })
 
+const inntektskilderDataFraInntektskomponenten: ArbeidsforholdFraInntektskomponenten[] = [
+    {
+        navn: 'Ruter',
+        orgnummer: '222',
+        arbeidsforholdstype: 'ARBEIDSTAKER',
+    },
+    {
+        navn: 'Kebabsjappa',
+        orgnummer: '111',
+        arbeidsforholdstype: 'ARBEIDSTAKER',
+    },
+    {
+        navn: 'Bensinstasjonen',
+        orgnummer: '333',
+        arbeidsforholdstype: 'ARBEIDSTAKER',
+    },
+]
 export const brukertestSoknad: RSSoknad = {
     id: '963e816f-7b3c-4513-818b-95595d84dd91',
     sykmeldingId: 'abc5acf2-a44f-42e5-87b2-02c9d0b39ce8',
     soknadstype: 'ARBEIDSTAKERE',
     status: 'NY',
-    inntektskilderDataFraInntektskomponenten: [
-        {
-            navn: 'Ruter',
-            orgnummer: '222',
-            arbeidsforholdstype: 'ARBEIDSTAKER',
-        },
-        {
-            navn: 'Kebabsjappa',
-            orgnummer: '111',
-            arbeidsforholdstype: 'ARBEIDSTAKER',
-        },
-        {
-            navn: 'Bensinstasjonen',
-            orgnummer: '333',
-            arbeidsforholdstype: 'ARBEIDSTAKER',
-        },
-    ],
+    inntektskilderDataFraInntektskomponenten: inntektskilderDataFraInntektskomponenten,
     fom: fom,
     tom: tom,
     opprettetDato: '2022-11-17',
@@ -400,6 +403,7 @@ export const brukertestSoknad: RSSoknad = {
             svar: [],
             undersporsmal: [],
         },
+        kjenteInntektskilder(inntektskilderDataFraInntektskomponenten.map((a) => a.navn)),
         {
             id: 'ed62a3b3-4203-3b61-a684-2300bea2ffac',
             tag: 'ANDRE_INNTEKTSKILDER_V2',

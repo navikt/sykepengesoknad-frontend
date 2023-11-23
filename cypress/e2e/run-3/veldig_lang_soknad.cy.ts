@@ -318,6 +318,12 @@ describe('Tester støtte for gamle spørsmål', () => {
         svarNeiHovedsporsmal()
         gaVidere()
     })
+    it('Kjente inntektskilder', () => {
+        svarJaHovedsporsmal()
+        cy.get('form').findAllByRole('radio', { name: 'Ja' }).last().click()
+        cy.get('form').findAllByRole('radio', { name: 'Ja' }).last().should('be.checked')
+        gaVidere()
+    })
     it('VAER_KLAR_OVER_AT & BEKREFT_OPPLYSNINGER', () => {
         svarCheckboxPanel()
         cy.contains('Send søknaden').click()

@@ -1,4 +1,4 @@
-import { klikkGaVidere, neiOgVidere, svarCheckboxPanel } from '../../support/utilities'
+import { besvarKjenteInntektskilder, klikkGaVidere, neiOgVidere, svarCheckboxPanel } from '../../support/utilities'
 import { arbeidstakerGradert } from '../../../src/data/mock/data/soknad/arbeidstaker-gradert'
 
 describe('Tester ettersending og korrigering', () => {
@@ -24,9 +24,9 @@ describe('Tester ettersending og korrigering', () => {
             'Permisjon',
             'Jobb underveis i sykefraværet',
             'Arbeid utenfor Norge',
-            'Andre inntektskilder',
-            'Opphold i utlandet',
         ])
+        besvarKjenteInntektskilder()
+        neiOgVidere(['Andre inntektskilder', 'Opphold i utlandet'])
 
         cy.contains('Til slutt')
         svarCheckboxPanel()
@@ -88,6 +88,7 @@ describe('Tester ettersending og korrigering', () => {
         klikkGaVidere()
         klikkGaVidere()
         cy.get('[data-cy="ja-nei-stor"] input[value=JA]').click()
+        klikkGaVidere()
         klikkGaVidere()
         klikkGaVidere()
         klikkGaVidere()

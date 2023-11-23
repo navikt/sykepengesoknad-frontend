@@ -1,6 +1,6 @@
 import React from 'react'
 import { useFormContext } from 'react-hook-form'
-import { Button } from '@navikt/ds-react'
+import { BodyShort, Button } from '@navikt/ds-react'
 import { PlusIcon, TrashIcon } from '@navikt/aksel-icons'
 
 import { Sporsmal } from '../../../types/types'
@@ -25,8 +25,9 @@ const GruppeAvUndersporsmal = ({ sporsmal, sporsmalIndex, erSisteSporsmal }: Gru
     const { mutate: leggTilNyttUndersporsmal, isLoading: leggerTil } = useLeggTilUndersporsmal()
     const { mutate: slettundersporsmal, isLoading: sletter } = useSlettUndersporsmal()
 
-    const kanSlette = sporsmalIndex > 0 || !erSisteSporsmal
-    const kanLeggeTil = erSisteSporsmal
+    const erMedlemskap = sporsmal.tag.includes('MEDLEMSKAP')
+    const kanSlette = erMedlemskap && (sporsmalIndex > 0 || !erSisteSporsmal)
+    const kanLeggeTil = erMedlemskap && erSisteSporsmal
 
     const leggTil = async () => {
         if (oppdatererSporsmal || leggerTil) {
@@ -64,7 +65,11 @@ const GruppeAvUndersporsmal = ({ sporsmal, sporsmalIndex, erSisteSporsmal }: Gru
     }
 
     return (
-        <div className={!erSisteSporsmal ? 'mb-8 border-b border-dashed border-gray-400' : ''} aria-live="assertive">
+        <div
+            className={!erSisteSporsmal && erMedlemskap ? 'mb-8 border-b border-dashed border-gray-400' : ''}
+            aria-live="assertive"
+        >
+            {sporsmal.sporsmalstekst && <BodyShort>{sporsmal.sporsmalstekst}</BodyShort>}
             <UndersporsmalListe oversporsmal={sporsmal} />
 
             {kanSlette && (

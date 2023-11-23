@@ -1,4 +1,9 @@
-import { klikkGaVidere, svarCheckboxPanel, svarNeiHovedsporsmal } from '../../support/utilities'
+import {
+    besvarKjenteInntektskilder,
+    klikkGaVidere,
+    svarCheckboxPanel,
+    svarNeiHovedsporsmal,
+} from '../../support/utilities'
 import { arbeidstakerGradert } from '../../../src/data/mock/data/soknad/arbeidstaker-gradert'
 
 describe('Tester flexjar', () => {
@@ -65,6 +70,7 @@ describe('Tester flexjar', () => {
 
         svarNeiHovedsporsmal()
         klikkGaVidere()
+        besvarKjenteInntektskilder()
         svarNeiHovedsporsmal()
         klikkGaVidere()
         svarNeiHovedsporsmal()
