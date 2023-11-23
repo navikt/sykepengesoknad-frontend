@@ -12,6 +12,7 @@ import { RSSoknadstype } from '../../../types/rs-types/rs-soknadstype'
 import BekreftelsespunkterReisetilskuddTekster from '../bekreftelsespunkter/bekreftelsespunkter-reisetilskudd-tekster'
 import { useSoknadMedDetaljer } from '../../../hooks/useSoknadMedDetaljer'
 import BekreftelsespunkterGradertReisetilskuddTekster from '../bekreftelsespunkter/bekreftelsespunkter-gradert-reisetilskudd-tekster'
+import { konverterLenkerTilRenTekst } from '../../../utils/utils'
 
 const Kulepunkter = ({ sporsmal }: SpmProps) => {
     const { setValue } = useFormContext()
@@ -31,7 +32,10 @@ const Kulepunkter = ({ sporsmal }: SpmProps) => {
     })()
 
     useEffect(() => {
-        setValue(sporsmal.id, kulepunkterTekster)
+        const plainTextKulepunkter: string[] = kulepunkterTekster.map((tekst: string) =>
+            konverterLenkerTilRenTekst(tekst),
+        )
+        setValue(sporsmal.id, plainTextKulepunkter)
     }, [kulepunkterTekster, setValue, sporsmal.id])
 
     return (
