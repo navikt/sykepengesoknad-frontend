@@ -149,7 +149,7 @@ const inntektskilderDataFraInntektskomponenten: ArbeidsforholdFraInntektskompone
         arbeidsforholdstype: 'ARBEIDSTAKER',
     },
     {
-        navn: 'Kebabsjappa',
+        navn: 'Blomsterbutikken',
         orgnummer: '111',
         arbeidsforholdstype: 'ARBEIDSTAKER',
     },

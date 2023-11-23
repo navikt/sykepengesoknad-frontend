@@ -10,6 +10,7 @@ import { useLeggTilUndersporsmal } from '../../../hooks/useLeggTilUndersporsmal'
 import { useSlettUndersporsmal } from '../../../hooks/useSlettUndersporsmal'
 import { settSvar } from '../sett-svar'
 import UndersporsmalListe from '../undersporsmal/undersporsmal-liste'
+import { EkspanderbarHjelp } from '../../hjelpetekster/ekspanderbar-hjelp/ekspanderbar-hjelp'
 
 interface GruppeAvUndersporsmalProps {
     sporsmal: Sporsmal
@@ -70,6 +71,7 @@ const GruppeAvUndersporsmal = ({ sporsmal, sporsmalIndex, erSisteSporsmal }: Gru
             aria-live="assertive"
         >
             {sporsmal.sporsmalstekst && <BodyShort>{sporsmal.sporsmalstekst}</BodyShort>}
+            <EkspanderbarHjelp sporsmal={sporsmal} />
             <UndersporsmalListe oversporsmal={sporsmal} />
 
             {kanSlette && (

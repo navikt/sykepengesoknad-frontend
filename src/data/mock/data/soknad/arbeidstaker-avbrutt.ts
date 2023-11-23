@@ -217,7 +217,8 @@ export const avbruttSoknad: RSSoknad = {
         {
             id: 'd146b1c5-661f-35ed-b72f-172fc17ead5d',
             tag: 'JOBBET_DU_GRADERT_0',
-            sporsmalstekst: 'Sykmeldingen sier du kunne jobbe 20 % i jobben din hos Kebabbiten. Jobbet du mer enn det?',
+            sporsmalstekst:
+                'Sykmeldingen sier du kunne jobbe 20 % i jobben din hos Posten Norge AS, Bærum. Jobbet du mer enn det?',
             undertekst: null,
             svartype: 'JA_NEI',
             min: null,
