@@ -26,8 +26,8 @@ const GruppeAvUndersporsmal = ({ sporsmal, sporsmalIndex, erSisteSporsmal }: Gru
     const { mutate: slettundersporsmal, isLoading: sletter } = useSlettUndersporsmal()
 
     const erMedlemskap = sporsmal.tag.includes('MEDLEMSKAP')
-    const kanSlette = sporsmalIndex > 0 || (!erSisteSporsmal && erMedlemskap)
-    const kanLeggeTil = erSisteSporsmal && erMedlemskap
+    const kanSlette = erMedlemskap && (sporsmalIndex > 0 || !erSisteSporsmal)
+    const kanLeggeTil = erMedlemskap && erSisteSporsmal
 
     const leggTil = async () => {
         if (oppdatererSporsmal || leggerTil) {

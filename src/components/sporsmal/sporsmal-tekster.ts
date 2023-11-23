@@ -278,6 +278,23 @@ const SporsmalTekster = {
     'reisetilskudd.datoer.egen-bil.kalender.hjelp': ' Velg dager fra %FRA% - %TIL%',
     'sporsmal.egen-bil.kalender.ukedager': 'Velg alle ukedager',
     'sporsmal.egen-bil.kalender.fjern': 'Fjern valgte',
+
+    'soknad.feilmelding.KJENTE_INNTEKTSKILDER': '',
+    'soknad.feilmelding.KJENTE_INNTEKTSKILDER_GRUPPE': '',
+    'soknad.feilmelding.KJENTE_INNTEKTSKILDER_GRUPPE_TITTEL': '',
+    'soknad.feilmelding.KJENTE_INNTEKTSKILDER_JOBBER_FORTSATT': 'Du må svare på om du fortsatt jobber',
+    'soknad.feilmelding.KJENTE_INNTEKTSKILDER_JOBBER_FORTSATT_JA': '',
+    'soknad.feilmelding.KJENTE_INNTEKTSKILDER_UTFORT_ARBEID': '',
+    'soknad.feilmelding.KJENTE_INNTEKTSKILDER_ARSAK_IKKE_JOBBET': 'Du må velge en årsak',
+    'soknad.feilmelding.KJENTE_INNTEKTSKILDER_JOBBER_FORTSATT_NEI': '',
+    'soknad.feilmelding.KJENTE_INNTEKTSKILDER_DATO_SLUTTET': 'Du må oppgi når du sluttet',
+    'soknad.feilmelding.KJENTE_INNTEKTSKILDER_ARSAK_IKKE_JOBBET_SYKMELDT': '',
+    'soknad.feilmelding.KJENTE_INNTEKTSKILDER_ARSAK_IKKE_JOBBET_TURNUS': '',
+    'soknad.feilmelding.KJENTE_INNTEKTSKILDER_ARSAK_IKKE_JOBBET_FERIE': '',
+    'soknad.feilmelding.KJENTE_INNTEKTSKILDER_ARSAK_IKKE_JOBBET_AVSPASERING': '',
+    'soknad.feilmelding.KJENTE_INNTEKTSKILDER_ARSAK_IKKE_JOBBET_PERMITTERT': '',
+    'soknad.feilmelding.KJENTE_INNTEKTSKILDER_ARSAK_IKKE_JOBBET_PERMISJON': '',
+    'soknad.feilmelding.KJENTE_INNTEKTSKILDER_ARSAK_IKKE_JOBBET_ANNEN': '',
 }
 
 export default SporsmalTekster
