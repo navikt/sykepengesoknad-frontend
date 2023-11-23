@@ -27,6 +27,7 @@ import { MedlemskapArbeidUtenforNorgeHjelpBody } from './medlemskap-arbeid-utenf
 import { MedlemskapOppholdUtenforEOSHjelpBody } from './medlemskap-opphold-utenfor-eos-hjelp-body'
 import { MedlemskapOppholdUtenforNorgeHjelpBody } from './medlemskap-opphold-utenfor-Norge-hjelp-body'
 import { MedlemskapOppholdstillatelseHjelpBody } from './medlemskap-oppholdstillatelse-hjelp-body'
+import { KjenteInntektkilderHjelpBody } from './kjente-inntektkilder'
 
 export const EkspanderbarHjelp = ({ sporsmal }: SpmProps) => {
     const { valgtSoknad } = useSoknadMedDetaljer()
@@ -95,6 +96,8 @@ export const EkspanderbarHjelp = ({ sporsmal }: SpmProps) => {
                 return <MedlemskapArbeidUtenforNorgeHjelpBody />
             case 'MEDLEMSKAP_OPPHOLDSTILLATELSE':
                 return <MedlemskapOppholdstillatelseHjelpBody />
+            case 'KJENTE_INNTEKTSKILDER':
+                return <KjenteInntektkilderHjelpBody />
             default:
                 if (harInnhold) {
                     return (

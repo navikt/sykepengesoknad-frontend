@@ -4,7 +4,7 @@ describe('Tester andre inntektskilder bulletpoints', () => {
 
         cy.contains('Arbeidsforhold vi har registrert på deg:').and('be.visible')
         cy.get('[data-cy="inntektskilder--fra-inntektskomponenten-liste"]').find('li').should('have.length', 4)
-        const expectedValues = ['Posten Norge AS, Bærum', 'Ruter', 'Kebabsjappa', 'Bensinstasjonen']
+        const expectedValues = ['Posten Norge AS, Bærum', 'Ruter', 'Blomsterbutikken', 'Bensinstasjonen']
 
         cy.get('[data-cy="inntektskilder--fra-inntektskomponenten-liste"]')
             .find('li')
