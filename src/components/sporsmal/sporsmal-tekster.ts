@@ -108,18 +108,6 @@ const SporsmalTekster = {
     'soknad.feilmelding.INNTEKTSKILDE_FOSTERHJEM_ER_DU_SYKMELDT.lokal': 'Du må svare på om du er sykmeldt fra dette',
     'soknad.feilmelding.INNTEKTSKILDE_ANDRE_ARBEIDSFORHOLD_JOBBET_I_DET_SISTE':
         'Du må svare på om du har jobbet eller mottatt inntekt de siste 14 dagene',
-    'soknad.feilmelding.INNTEKTSKILDE_ARBEIDSFORHOLD': 'Du må svare på om du er sykmeldt fra arbeidsforhold',
-    'soknad.feilmelding.INNTEKTSKILDE_ANDRE_ARBEIDSFORHOLD':
-        'Du må svare på om du er sykmeldt fra andre arbeidsforhold',
-    'soknad.feilmelding.INNTEKTSKILDE_SELVSTENDIG': 'Du må svare på om du er sykmeldt som selvstendig næringsdrivende',
-    'soknad.feilmelding.INNTEKTSKILDE_SELVSTENDIG_DAGMAMMA': 'Du må svare på om du er sykmeldt som dagmamma',
-    'soknad.feilmelding.INNTEKTSKILDE_JORDBRUKER': 'Du må svare på om du er sykmeldt som jordbruker',
-    'soknad.feilmelding.INNTEKTSKILDE_FRILANSER': 'Du må svare på om du er sykmeldt som frilanser',
-    'soknad.feilmelding.INNTEKTSKILDE_FRILANSER_SELVSTENDIG':
-        'Du må svare på om du er sykmeldt som frilanser eller selvstendig næringsdrivende',
-    'soknad.feilmelding.INNTEKTSKILDE_ANNET': 'Du må svare på om du er sykmeldt fra dette',
-    'soknad.feilmelding.INNTEKTSKILDE_OMSORGSLONN': 'Du må svare på om du er sykmeldt med kommunal omsorgstønad',
-    'soknad.feilmelding.INNTEKTSKILDE_FOSTERHJEM': 'Du må svare på om du er sykmeldt med fosterhjemgodtgjørelse',
 
     'soknad.feilmelding.JOBBET_DU_100_PROSENT': 'Du må svare på om du jobbet noe i denne perioden',
     'soknad.feilmelding.JOBBET_DU_GRADERT': 'Vennligst svar på om du jobbet mer enn sykmeldingen tilsier',
