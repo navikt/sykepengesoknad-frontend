@@ -163,11 +163,12 @@ const SporsmalTekster = {
     'soknad.feilmelding.UTENLANDSK_SYKMELDING_LONNET_ARBEID_UTENFOR_NORGE':
         'Du må svare på om du utfører lønnet arbeid utenfor Norge',
     'soknad.feilmelding.UTENLANDSK_SYKMELDING_LONNET_ARBEID_UTENFOR_NORGE_FRITEKST':
-        'Du må oppgi oppgi nærmere opplysninger om arbeidet',
+        'Du må oppgi nærmere opplysninger om arbeidet',
     'soknad.feilmelding.UTENLANDSK_SYKMELDING_TRYGD_UTENFOR_NORGE':
         'Du må svare på om du har mottatt sykepenger eller lignende i andre EØS-land',
     'soknad.feilmelding.UTENLANDSK_SYKMELDING_TRYGD_HVILKET_LAND':
         'Du må velge alle andre EØS-land bortsett fra Norge hvor du har mottatt sykepenger eller lignende i løpet av de siste tre årene',
+    'soknad.feilmelding.UTENLANDSK_SYKMELDING_GYLDIGHET_ADRESSE': 'Du må oppgi hvor lenge denne adressen skal brukes',
     'soknad.feilmelding.YRKESSKADE': 'Du må svare på om sykdommen er relatert til en yrkesskade',
     'soknad.feilmelding.YRKESSKADE_V2': 'Du må svare på om sykdommen er relatert til en godkjent yrkesskade',
     'soknad.feilmelding.YRKESSKADE_V2_VELG_DATO': 'Du må velge minst en skadedato',
