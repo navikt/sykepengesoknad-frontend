@@ -152,8 +152,12 @@ const SporsmalTekster = {
     'soknad.feilmelding.ARBEID_UNDERVEIS_100_PROSENT': 'Du må svare på om du jobbet noe i denne perioden',
     'soknad.feilmelding.JOBBER_DU_NORMAL_ARBEIDSUKE': 'Du må svare på hvor mye du jobber normalt',
 
+    'soknad.feilmelding.UTENLANDSK_SYKMELDING_CO': 'Du må oppgi en C/O',
     'soknad.feilmelding.UTENLANDSK_SYKMELDING_BOSTED': 'Du må svare på om du bor i utlandet',
     'soknad.feilmelding.UTENLANDSK_SYKMELDING_VEGNAVN': 'Du må oppgi et vegnavn',
+    'soknad.feilmelding.UTENLANDSK_SYKMELDING_BYGNING': 'Du må oppgi en bygning',
+    'soknad.feilmelding.UTENLANDSK_SYKMELDING_BY': 'Du må oppgi en by / stedsnavn',
+    'soknad.feilmelding.UTENLANDSK_SYKMELDING_REGION': 'Du må oppgi en region',
     'soknad.feilmelding.UTENLANDSK_SYKMELDING_LAND': 'Du må oppgi et land',
     'soknad.feilmelding.UTENLANDSK_SYKMELDING_TELEFONNUMMER': 'Du må oppgi et telefonnummer',
     'soknad.feilmelding.UTENLANDSK_SYKMELDING_LONNET_ARBEID_UTENFOR_NORGE':
