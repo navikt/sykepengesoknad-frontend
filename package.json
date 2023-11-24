@@ -8,7 +8,7 @@
         "@navikt/ds-css": "^5.8.0",
         "@navikt/ds-react": "^5.8.0",
         "@navikt/ds-tailwind": "5.8.0",
-        "@navikt/ds-tokens": "^5.10.4",
+        "@navikt/ds-tokens": "^5.11.1",
         "@navikt/nav-dekoratoren-moduler": "^2.1.4",
         "@navikt/next-api-proxy": "^3.4.0",
         "@navikt/next-logger": "^1.21.0",
