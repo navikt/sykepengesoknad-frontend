@@ -284,7 +284,7 @@ const SporsmalTekster = {
     'soknad.feilmelding.KJENTE_INNTEKTSKILDER_GRUPPE_TITTEL': '',
     'soknad.feilmelding.KJENTE_INNTEKTSKILDER_JOBBER_FORTSATT': 'Du må svare på om du fortsatt jobber',
     'soknad.feilmelding.KJENTE_INNTEKTSKILDER_JOBBER_FORTSATT_JA': '',
-    'soknad.feilmelding.KJENTE_INNTEKTSKILDER_UTFORT_ARBEID': '',
+    'soknad.feilmelding.KJENTE_INNTEKTSKILDER_UTFORT_ARBEID': 'Du må svare på om du har utført arbeids i perioden',
     'soknad.feilmelding.KJENTE_INNTEKTSKILDER_ARSAK_IKKE_JOBBET': 'Du må velge en årsak',
     'soknad.feilmelding.KJENTE_INNTEKTSKILDER_JOBBER_FORTSATT_NEI': '',
     'soknad.feilmelding.KJENTE_INNTEKTSKILDER_DATO_SLUTTET': 'Du må oppgi når du sluttet',
