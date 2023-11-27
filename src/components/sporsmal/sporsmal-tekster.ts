@@ -108,19 +108,6 @@ const SporsmalTekster = {
     'soknad.feilmelding.INNTEKTSKILDE_FOSTERHJEM_ER_DU_SYKMELDT.lokal': 'Du må svare på om du er sykmeldt fra dette',
     'soknad.feilmelding.INNTEKTSKILDE_ANDRE_ARBEIDSFORHOLD_JOBBET_I_DET_SISTE':
         'Du må svare på om du har jobbet eller mottatt inntekt de siste 14 dagene',
-    'soknad.feilmelding.INNTEKTSKILDE_ARBEIDSFORHOLD': 'Du må svare på om du er sykmeldt fra arbeidsforhold',
-    'soknad.feilmelding.INNTEKTSKILDE_ANDRE_ARBEIDSFORHOLD':
-        'Du må svare på om du er sykmeldt fra andre arbeidsforhold',
-    'soknad.feilmelding.INNTEKTSKILDE_SELVSTENDIG': 'Du må svare på om du er sykmeldt som selvstendig næringsdrivende',
-    'soknad.feilmelding.INNTEKTSKILDE_SELVSTENDIG_DAGMAMMA': 'Du må svare på om du er sykmeldt som dagmamma',
-    'soknad.feilmelding.INNTEKTSKILDE_JORDBRUKER': 'Du må svare på om du er sykmeldt som jordbruker',
-    'soknad.feilmelding.INNTEKTSKILDE_FRILANSER': 'Du må svare på om du er sykmeldt som frilanser',
-    'soknad.feilmelding.INNTEKTSKILDE_FRILANSER_SELVSTENDIG':
-        'Du må svare på om du er sykmeldt som frilanser eller selvstendig næringsdrivende',
-    'soknad.feilmelding.INNTEKTSKILDE_ANNET': 'Du må svare på om du er sykmeldt fra dette',
-    'soknad.feilmelding.INNTEKTSKILDE_OMSORGSLONN': 'Du må svare på om du er sykmeldt med kommunal omsorgstønad',
-    'soknad.feilmelding.INNTEKTSKILDE_FOSTERHJEM': 'Du må svare på om du er sykmeldt med fosterhjemgodtgjørelse',
-    'soknad.feilmelding.INNTEKTSKILDE_STYREVERV': '',
 
     'soknad.feilmelding.JOBBET_DU_100_PROSENT': 'Du må svare på om du jobbet noe i denne perioden',
     'soknad.feilmelding.JOBBET_DU_GRADERT': 'Vennligst svar på om du jobbet mer enn sykmeldingen tilsier',
@@ -165,27 +152,26 @@ const SporsmalTekster = {
     'soknad.feilmelding.ARBEID_UNDERVEIS_100_PROSENT': 'Du må svare på om du jobbet noe i denne perioden',
     'soknad.feilmelding.JOBBER_DU_NORMAL_ARBEIDSUKE': 'Du må svare på hvor mye du jobber normalt',
 
+    'soknad.feilmelding.UTENLANDSK_SYKMELDING_CO': 'Du må oppgi en C/O',
     'soknad.feilmelding.UTENLANDSK_SYKMELDING_BOSTED': 'Du må svare på om du bor i utlandet',
-    'soknad.feilmelding.UTENLANDSK_SYKMELDING_CO': '',
     'soknad.feilmelding.UTENLANDSK_SYKMELDING_VEGNAVN': 'Du må oppgi et vegnavn',
-    'soknad.feilmelding.UTENLANDSK_SYKMELDING_BYGNING': '',
-    'soknad.feilmelding.UTENLANDSK_SYKMELDING_BY': '',
-    'soknad.feilmelding.UTENLANDSK_SYKMELDING_REGION': '',
+    'soknad.feilmelding.UTENLANDSK_SYKMELDING_BYGNING': 'Du må oppgi en bygning',
+    'soknad.feilmelding.UTENLANDSK_SYKMELDING_BY': 'Du må oppgi en by / stedsnavn',
+    'soknad.feilmelding.UTENLANDSK_SYKMELDING_REGION': 'Du må oppgi en region',
     'soknad.feilmelding.UTENLANDSK_SYKMELDING_LAND': 'Du må oppgi et land',
     'soknad.feilmelding.UTENLANDSK_SYKMELDING_TELEFONNUMMER': 'Du må oppgi et telefonnummer',
-    'soknad.feilmelding.UTENLANDSK_SYKMELDING_GYLDIGHET_ADRESSE': '',
     'soknad.feilmelding.UTENLANDSK_SYKMELDING_LONNET_ARBEID_UTENFOR_NORGE':
         'Du må svare på om du utfører lønnet arbeid utenfor Norge',
     'soknad.feilmelding.UTENLANDSK_SYKMELDING_LONNET_ARBEID_UTENFOR_NORGE_FRITEKST':
-        'Du må oppgi oppgi nærmere opplysninger om arbeidet',
+        'Du må oppgi nærmere opplysninger om arbeidet',
     'soknad.feilmelding.UTENLANDSK_SYKMELDING_TRYGD_UTENFOR_NORGE':
         'Du må svare på om du har mottatt sykepenger eller lignende i andre EØS-land',
     'soknad.feilmelding.UTENLANDSK_SYKMELDING_TRYGD_HVILKET_LAND':
         'Du må velge alle andre EØS-land bortsett fra Norge hvor du har mottatt sykepenger eller lignende i løpet av de siste tre årene',
+    'soknad.feilmelding.UTENLANDSK_SYKMELDING_GYLDIGHET_ADRESSE': 'Du må oppgi hvor lenge denne adressen skal brukes',
     'soknad.feilmelding.YRKESSKADE': 'Du må svare på om sykdommen er relatert til en yrkesskade',
     'soknad.feilmelding.YRKESSKADE_V2': 'Du må svare på om sykdommen er relatert til en godkjent yrkesskade',
     'soknad.feilmelding.YRKESSKADE_V2_VELG_DATO': 'Du må velge minst en skadedato',
-    'soknad.feilmelding.YRKESSKADE_V2_DATO': '',
     'soknad.feilmelding.YRKESSKADE_SAMMENHENG':
         'Du må svare på det er en sammenheng mellom dette sykefraværet og tidligere yrkesskade',
     'soknad.feilmelding.YRKESSKADE_SAMMENHENG.lokal':
@@ -196,21 +182,14 @@ const SporsmalTekster = {
         'Du må svare på om du har fått permanent eller midlertidig oppholdstillatelse',
     'soknad.feilmelding.MEDLEMSKAP_OPPHOLDSTILLATELSE_VEDTAKSDATO':
         'Du må oppgi vedtaksdato for din oppholdstillatelse',
-    'soknad.feilmelding.MEDLEMSKAP_OPPHOLDSTILLATELSE_PERMANENT': '',
     'soknad.feilmelding.MEDLEMSKAP_OPPHOLDSTILLATELSE_PERMANENT_DATO':
         'Du må oppgi hvilken dato oppholdstillatelse gjelder fra',
-    'soknad.feilmelding.MEDLEMSKAP_OPPHOLDSTILLATELSE_MIDLERTIDIG': '',
     'soknad.feilmelding.MEDLEMSKAP_OPPHOLDSTILLATELSE_MIDLERTIDIG_PERIODE':
         'Du må oppgi hvilken periode du fått oppholdstillatelse for',
     'soknad.feilmelding.MEDLEMSKAP_OPPHOLD_UTENFOR_EOS':
         'Du må svare på om du har oppholdt deg utenfor EØS-området i løpet av de siste 12 månedene',
     'soknad.feilmelding.MEDLEMSKAP_OPPHOLD_UTENFOR_EOS_HVOR': 'Du må oppgi landet du har oppholdt deg i',
     'soknad.feilmelding.MEDLEMSKAP_OPPHOLD_UTENFOR_EOS_BEGRUNNELSE': 'Du må oppgi grunn for ditt opphold utenfor EØS',
-    'soknad.feilmelding.MEDLEMSKAP_OPPHOLD_UTENFOR_EOS_BEGRUNNELSE_STUDIE': '',
-    'soknad.feilmelding.MEDLEMSKAP_OPPHOLD_UTENFOR_EOS_BEGRUNNELSE_FERIE': '',
-    'soknad.feilmelding.MEDLEMSKAP_OPPHOLD_UTENFOR_EOS_BEGRUNNELSE_BO': '',
-    'soknad.feilmelding.MEDLEMSKAP_OPPHOLD_UTENFOR_EOS_BEGRUNNELSE_EKTEFELLE': '',
-    'soknad.feilmelding.MEDLEMSKAP_OPPHOLD_UTENFOR_EOS_BEGRUNNELSE_ANNET': '',
     'soknad.feilmelding.MEDLEMSKAP_OPPHOLD_UTENFOR_EOS_BEGRUNNELSE_ANNET_FRITEKST':
         'Du må oppgi hva du gjorde i utlandet',
     'soknad.feilmelding.MEDLEMSKAP_OPPHOLD_UTENFOR_EOS_NAAR': 'Du må oppgi perioden du har oppholdt deg utenfor EØS',
@@ -219,11 +198,6 @@ const SporsmalTekster = {
     'soknad.feilmelding.MEDLEMSKAP_OPPHOLD_UTENFOR_NORGE_HVOR': 'Du må oppgi landet du har oppholdt deg i',
     'soknad.feilmelding.MEDLEMSKAP_OPPHOLD_UTENFOR_NORGE_BEGRUNNELSE':
         'Du må oppgi grunn for ditt opphold utenfor NORGE',
-    'soknad.feilmelding.MEDLEMSKAP_OPPHOLD_UTENFOR_NORGE_BEGRUNNELSE_STUDIE': '',
-    'soknad.feilmelding.MEDLEMSKAP_OPPHOLD_UTENFOR_NORGE_BEGRUNNELSE_FERIE': '',
-    'soknad.feilmelding.MEDLEMSKAP_OPPHOLD_UTENFOR_NORGE_BEGRUNNELSE_BO': '',
-    'soknad.feilmelding.MEDLEMSKAP_OPPHOLD_UTENFOR_NORGE_BEGRUNNELSE_EKTEFELLE': '',
-    'soknad.feilmelding.MEDLEMSKAP_OPPHOLD_UTENFOR_NORGE_BEGRUNNELSE_ANNET': '',
     'soknad.feilmelding.MEDLEMSKAP_OPPHOLD_UTENFOR_NORGE_BEGRUNNELSE_ANNET_FRITEKST':
         'Du må oppgi hva du gjorde i utlandet',
     'soknad.feilmelding.MEDLEMSKAP_OPPHOLD_UTENFOR_NORGE_NAAR':
@@ -279,22 +253,10 @@ const SporsmalTekster = {
     'sporsmal.egen-bil.kalender.ukedager': 'Velg alle ukedager',
     'sporsmal.egen-bil.kalender.fjern': 'Fjern valgte',
 
-    'soknad.feilmelding.KJENTE_INNTEKTSKILDER': '',
-    'soknad.feilmelding.KJENTE_INNTEKTSKILDER_GRUPPE': '',
-    'soknad.feilmelding.KJENTE_INNTEKTSKILDER_GRUPPE_TITTEL': '',
     'soknad.feilmelding.KJENTE_INNTEKTSKILDER_JOBBER_FORTSATT': 'Du må svare på om du fortsatt jobber',
-    'soknad.feilmelding.KJENTE_INNTEKTSKILDER_JOBBER_FORTSATT_JA': '',
-    'soknad.feilmelding.KJENTE_INNTEKTSKILDER_UTFORT_ARBEID': '',
+    'soknad.feilmelding.KJENTE_INNTEKTSKILDER_UTFORT_ARBEID': 'Du må svare på om du har utført arbeid i perioden',
     'soknad.feilmelding.KJENTE_INNTEKTSKILDER_ARSAK_IKKE_JOBBET': 'Du må velge en årsak',
-    'soknad.feilmelding.KJENTE_INNTEKTSKILDER_JOBBER_FORTSATT_NEI': '',
     'soknad.feilmelding.KJENTE_INNTEKTSKILDER_DATO_SLUTTET': 'Du må oppgi når du sluttet',
-    'soknad.feilmelding.KJENTE_INNTEKTSKILDER_ARSAK_IKKE_JOBBET_SYKMELDT': '',
-    'soknad.feilmelding.KJENTE_INNTEKTSKILDER_ARSAK_IKKE_JOBBET_TURNUS': '',
-    'soknad.feilmelding.KJENTE_INNTEKTSKILDER_ARSAK_IKKE_JOBBET_FERIE': '',
-    'soknad.feilmelding.KJENTE_INNTEKTSKILDER_ARSAK_IKKE_JOBBET_AVSPASERING': '',
-    'soknad.feilmelding.KJENTE_INNTEKTSKILDER_ARSAK_IKKE_JOBBET_PERMITTERT': '',
-    'soknad.feilmelding.KJENTE_INNTEKTSKILDER_ARSAK_IKKE_JOBBET_PERMISJON': '',
-    'soknad.feilmelding.KJENTE_INNTEKTSKILDER_ARSAK_IKKE_JOBBET_ANNEN': '',
 }
 
 export default SporsmalTekster

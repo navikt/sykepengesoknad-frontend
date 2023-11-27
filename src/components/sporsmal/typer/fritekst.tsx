@@ -33,22 +33,23 @@ export const Fritekst = ({ sporsmal }: SpmProps) => {
         error: errors[sporsmal.id] !== undefined && (errors[sporsmal.id]!.message as string),
         autoComplete: 'off',
         ...register(sporsmal.id, {
-            validate: (verdien) => {
-                const validerMaxLengde = () => {
-                    const maxLengde = parseFloat(sporsmal.max || '0')
-                    if (verdien.trim().length <= maxLengde) {
-                        return true
+            validate: {
+                minLengde: (verdien) => {
+                    if (sporsmal.min === null) return true
+                    const minLengde = parseFloat(sporsmal.min)
+                    if (verdien.trim().length < minLengde) {
+                        return feilmelding.global
                     }
-                    return `Du kan skrive maks ${maxLengde} tegn`
-                }
-                if (sporsmal.min == null) {
-                    return validerMaxLengde()
-                }
-                const minLengde = parseFloat(sporsmal.min)
-                if (verdien.trim().length >= minLengde) {
-                    return validerMaxLengde()
-                }
-                return feilmelding.global
+                    return true
+                },
+                maxLengde: (verdien) => {
+                    if (sporsmal.max === null) return true
+                    const maxLengde = parseFloat(sporsmal.max)
+                    if (verdien.trim().length > maxLengde) {
+                        return `Du kan skrive maks ${maxLengde} tegn`
+                    }
+                    return true
+                },
             },
         }),
     }

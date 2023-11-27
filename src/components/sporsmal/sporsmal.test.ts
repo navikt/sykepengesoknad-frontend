@@ -18,14 +18,50 @@ test('Alle tags har global feilmelding', () => {
             skipTag !== 'TIL_SLUTT' && // Svartype: IKKE_RELEVANT
             skipTag !== 'IKKE_SOKT_UTENLANDSOPPHOLD_INFORMASJON' && // Svartype: IKKE_RELEVANT
             skipTag !== 'BEKREFT_OPPLYSNINGER_UTLAND_INFO' && // Svartype: IKKE_RELEVANT
+            skipTag !== 'KJENTE_INNTEKTSKILDER_GRUPPE_TITTEL' && // Svartype: IKKE_RELEVANT
+            skipTag !== 'ENKELTSTAENDE_BEHANDLINGSDAGER' && // Svartype: INFO_BEHANDLINGSDAGER
             skipTag !== 'MEDLEMSKAP_UTFORT_ARBEID_UTENFOR_NORGE_GRUPPERING' && // Svartype: GRUPPE_AV_UNDERSPORSMAL
             skipTag !== 'MEDLEMSKAP_OPPHOLD_UTENFOR_EOS_GRUPPERING' && // Svartype: GRUPPE_AV_UNDERSPORSMAL
             skipTag !== 'MEDLEMSKAP_OPPHOLD_UTENFOR_NORGE_GRUPPERING' && // Svartype: GRUPPE_AV_UNDERSPORSMAL
-            skipTag !== 'ENKELTSTAENDE_BEHANDLINGSDAGER' &&
-            skipTag !== 'INNTEKTSKILDE_SELVSTENDIG_VARIG_ENDRING_JA' &&
-            skipTag !== 'INNTEKTSKILDE_SELVSTENDIG_VARIG_ENDRING_NEI' &&
-            skipTag !== 'INNTEKTSKILDE_SELVSTENDIG_VARIG_ENDRING_VET_IKKE'
-        ) // Svartype: INFO_BEHANDLINGSDAGER
+            skipTag !== 'KJENTE_INNTEKTSKILDER' && // Svartype: GRUPPE_AV_UNDERSPORSMAL
+            skipTag !== 'KJENTE_INNTEKTSKILDER_GRUPPE' && // Svartype: GRUPPE_AV_UNDERSPORSMAL
+            skipTag !== 'KJENTE_INNTEKTSKILDER_ARSAK_IKKE_JOBBET_SYKMELDT' && // Svartype: CHECKBOX
+            skipTag !== 'KJENTE_INNTEKTSKILDER_ARSAK_IKKE_JOBBET_TURNUS' && // Svartype: CHECKBOX
+            skipTag !== 'KJENTE_INNTEKTSKILDER_ARSAK_IKKE_JOBBET_FERIE' && // Svartype: CHECKBOX
+            skipTag !== 'KJENTE_INNTEKTSKILDER_ARSAK_IKKE_JOBBET_AVSPASERING' && // Svartype: CHECKBOX
+            skipTag !== 'KJENTE_INNTEKTSKILDER_ARSAK_IKKE_JOBBET_PERMITTERT' && // Svartype: CHECKBOX
+            skipTag !== 'KJENTE_INNTEKTSKILDER_ARSAK_IKKE_JOBBET_PERMISJON' && // Svartype: CHECKBOX
+            skipTag !== 'KJENTE_INNTEKTSKILDER_ARSAK_IKKE_JOBBET_ANNEN' && // Svartype: CHECKBOX
+            skipTag !== 'INNTEKTSKILDE_ANDRE_ARBEIDSFORHOLD' && // Svartype: CHECKBOX
+            skipTag !== 'INNTEKTSKILDE_SELVSTENDIG' && // Svartype: CHECKBOX
+            skipTag !== 'INNTEKTSKILDE_SELVSTENDIG_DAGMAMMA' && // Svartype: CHECKBOX
+            skipTag !== 'INNTEKTSKILDE_JORDBRUKER' && // Svartype: CHECKBOX
+            skipTag !== 'INNTEKTSKILDE_FRILANSER' && // Svartype: CHECKBOX
+            skipTag !== 'INNTEKTSKILDE_OMSORGSLONN' && // Svartype: CHECKBOX
+            skipTag !== 'INNTEKTSKILDE_FOSTERHJEM' && // Svartype: CHECKBOX
+            skipTag !== 'INNTEKTSKILDE_STYREVERV' && // Svartype: CHECKBOX
+            skipTag !== 'INNTEKTSKILDE_FRILANSER_SELVSTENDIG' && // Svartype: CHECKBOX
+            skipTag !== 'INNTEKTSKILDE_ARBEIDSFORHOLD' && // Svartype: CHECKBOX
+            skipTag !== 'INNTEKTSKILDE_ANNET' && // Svartype: CHECKBOX
+            skipTag !== 'YRKESSKADE_V2_DATO' && // Svartype: CHECKBOX
+            skipTag !== 'MEDLEMSKAP_OPPHOLDSTILLATELSE_MIDLERTIDIG' && // Svartype: RADIO
+            skipTag !== 'MEDLEMSKAP_OPPHOLDSTILLATELSE_PERMANENT' && // Svartype: RADIO
+            skipTag !== 'MEDLEMSKAP_OPPHOLD_UTENFOR_EOS_BEGRUNNELSE_STUDIE' && // Svartype: RADIO
+            skipTag !== 'MEDLEMSKAP_OPPHOLD_UTENFOR_EOS_BEGRUNNELSE_FERIE' && // Svartype: RADIO
+            skipTag !== 'MEDLEMSKAP_OPPHOLD_UTENFOR_EOS_BEGRUNNELSE_BO' && // Svartype: RADIO
+            skipTag !== 'MEDLEMSKAP_OPPHOLD_UTENFOR_EOS_BEGRUNNELSE_EKTEFELLE' && // Svartype: RADIO
+            skipTag !== 'MEDLEMSKAP_OPPHOLD_UTENFOR_EOS_BEGRUNNELSE_ANNET' && // Svartype: RADIO
+            skipTag !== 'MEDLEMSKAP_OPPHOLD_UTENFOR_NORGE_BEGRUNNELSE_STUDIE' && // Svartype: RADIO
+            skipTag !== 'MEDLEMSKAP_OPPHOLD_UTENFOR_NORGE_BEGRUNNELSE_FERIE' && // Svartype: RADIO
+            skipTag !== 'MEDLEMSKAP_OPPHOLD_UTENFOR_NORGE_BEGRUNNELSE_BO' && // Svartype: RADIO
+            skipTag !== 'MEDLEMSKAP_OPPHOLD_UTENFOR_NORGE_BEGRUNNELSE_EKTEFELLE' && // Svartype: RADIO
+            skipTag !== 'MEDLEMSKAP_OPPHOLD_UTENFOR_NORGE_BEGRUNNELSE_ANNET' && // Svartype: RADIO
+            skipTag !== 'KJENTE_INNTEKTSKILDER_JOBBER_FORTSATT_NEI' && // Svartype: RADIO
+            skipTag !== 'KJENTE_INNTEKTSKILDER_JOBBER_FORTSATT_JA' && // Svartype: RADIO
+            skipTag !== 'INNTEKTSKILDE_SELVSTENDIG_VARIG_ENDRING_JA' && // Svartype: RADIO
+            skipTag !== 'INNTEKTSKILDE_SELVSTENDIG_VARIG_ENDRING_NEI' && // Svartype: RADIO
+            skipTag !== 'INNTEKTSKILDE_SELVSTENDIG_VARIG_ENDRING_VET_IKKE' // Svartype: RADIO
+        )
     })
 
     tags.forEach((tag) => {

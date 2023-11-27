@@ -15,11 +15,7 @@ import { ProgressivtGuidePanel } from '../../guidepanel/ProgressivtGuidePanel'
 import { parserWithReplace } from '../../../utils/html-react-parser-utils'
 
 const JaNeiLiten = ({ sporsmal }: SpmProps) => {
-    const {
-        formState: { errors },
-        watch,
-        getValues,
-    } = useFormContext()
+    const { watch, getValues } = useFormContext()
     let watchJaNei = watch(sporsmal.id)
     if (watchJaNei === undefined) {
         watchJaNei = getValues(sporsmal.id)
@@ -73,12 +69,11 @@ const JaNeiLiten = ({ sporsmal }: SpmProps) => {
                 <Controller
                     name={sporsmal.id}
                     rules={{ required: feilmelding.global }}
-                    defaultValue=""
-                    render={({ field }) => (
+                    render={({ field, fieldState }) => (
                         <RadioGroup
                             {...field}
                             legend={sporsmal.sporsmalstekst}
-                            error={errors[sporsmal.id] !== undefined && feilmelding.lokal}
+                            error={fieldState.error && feilmelding.lokal}
                         >
                             <Fragment key={sporsmal.id}>
                                 <Radio id={field.name + '_0'} value="JA">

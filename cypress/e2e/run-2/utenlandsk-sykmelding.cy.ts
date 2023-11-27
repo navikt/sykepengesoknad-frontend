@@ -61,7 +61,7 @@ describe('Tester søknad til utenlandsk sykmelding', () => {
         cy.contains('Oppgi nærmere opplysninger om arbeid/virksomhet utenfor Norge')
 
         cy.contains('Gå videre').click()
-        cy.contains('Du må oppgi oppgi nærmere opplysninger om arbeidet')
+        cy.contains('Du må oppgi nærmere opplysninger om arbeidet')
 
         svarFritekst(
             'Oppgi nærmere opplysninger om arbeid/virksomhet utenfor Norge',
