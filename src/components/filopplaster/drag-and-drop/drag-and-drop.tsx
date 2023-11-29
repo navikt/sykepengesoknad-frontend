@@ -89,8 +89,8 @@ const DragAndDrop = ({ valgtFil, setValgtFil }: DragAndDropProps) => {
                     {isDragActive
                         ? tekst('drag_and_drop.dragtekst.aktiv')
                         : valgtFil
-                        ? tekst('drag_and_drop.dragtekst.endre')
-                        : tekst('drag_and_drop.dragtekst')}
+                          ? tekst('drag_and_drop.dragtekst.endre')
+                          : tekst('drag_and_drop.dragtekst')}
                 </Button>
             </div>
 
