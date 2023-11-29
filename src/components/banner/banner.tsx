@@ -16,7 +16,7 @@ export const Banner = ({
     const kanVelgePerson = isMockBackend() || isOpplaering()
 
     return (
-        <header className="m-auto mt-4 flex items-center justify-between py-4">
+        <div className="m-auto mt-4 flex items-center justify-between py-4">
             <Heading as={skeleton ? Skeleton : 'h1'} size="large" className="inline md:mr-2">
                 {overskrift}
                 {underoverskrift && (
@@ -26,6 +26,6 @@ export const Banner = ({
                 )}
             </Heading>
             {kanVelgePerson && <Person />}
-        </header>
+        </div>
     )
 }
