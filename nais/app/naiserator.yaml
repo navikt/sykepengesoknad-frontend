@@ -18,6 +18,10 @@ spec:
     scalingStrategy:
       cpu:
         thresholdPercentage: 50
+  preStopHook:
+    http:
+      path: syk/sykepengesoknad/api/internal/preStop
+      port: 8080
   tokenx:
     enabled: true
   idporten:
