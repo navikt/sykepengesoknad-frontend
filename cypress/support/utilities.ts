@@ -111,7 +111,7 @@ export function besvarKjenteInntektskilder() {
     cy.contains(utførtTekst).should('be.visible')
     cy.get('#350e754c-32ae-315d-963b-9f9dfaad2bd0').check()
     cy.contains(utførtTekst).should('not.exist')
-    velgDato(2)
+    velgDato(10)
     cy.get('#de67459c-c81b-3fd2-b881-be3031e19851').check()
     cy.get('#1df39124-4883-3b38-9ddb-52a2ac378031_0').check()
     cy.get('#de67459c-c81b-3fd2-b881-be3031e19852').click()
