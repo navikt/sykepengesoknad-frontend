@@ -31,7 +31,7 @@ const KvitteringSide = () => {
     const { data: soknader } = useSoknader()
     const defaultStudy = 'panel-yhv7yi5h9q'
     const { data: defaultStudyActive } = useStudyStatus(defaultStudy)
-    const selvstendigNaeringsdrivendeStudy = 'panel-lmrokudo0c'
+    const selvstendigNaeringsdrivendeStudy = 'panel-btpxotvjey'
     const { data: selvstendigNaeringsdrivendeStudyActive } = useStudyStatus(selvstendigNaeringsdrivendeStudy)
 
     useUpdateBreadcrumbs(() => [{ ...kvitteringBreadcrumb, handleInApp: true }], [])
