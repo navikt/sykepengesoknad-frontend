@@ -6,12 +6,11 @@ import { useRouter } from 'next/router'
 import Endreknapp from '../../components/endreknapp/endreknapp'
 import { RSSoknadstatus } from '../../types/rs-types/rs-soknadstatus'
 import { RSSoknadstype } from '../../types/rs-types/rs-soknadstype'
-import { isProd, sykefravaerUrl } from '../../utils/environment'
+import { sykefravaerUrl } from '../../utils/environment'
 import { tekst } from '../../utils/tekster'
 import { logEvent } from '../amplitude/amplitude'
 import Ettersending from '../ettersending/ettersending'
 import { GjenstaendeSoknader, hentGjenstaendeSoknader } from '../gjenstaende-soknader/gjenstaende-soknader'
-import { UxSignalsWidget } from '../ux-signals/UxSignalsWidget'
 import useSoknader from '../../hooks/useSoknader'
 import { urlTilSoknad } from '../soknad/soknad-link'
 import QueryStatusPanel from '../queryStatusPanel/QueryStatusPanel'
@@ -101,10 +100,6 @@ const KvitteringSide = () => {
                     {tekst('kvittering.ferdig')}
                 </Button>
             )}
-            {skalViseSelvstendigNaeringsdrivendeUxSignals && (
-                <UxSignalsWidget study={selvstendigNaeringsdrivendeStudy} demo={!isProd()} />
-            )}
-            {skalViseUxSignals && <UxSignalsWidget study={defaultStudy} demo={!isProd()} />}
             {skalViseEndre && <Endreknapp />}
             {skalViseSendTilArbeidsgiver && <Ettersending gjelder="arbeidsgiver" />}
             {skalViseFlexjar && <FlexjarKvittering />}
