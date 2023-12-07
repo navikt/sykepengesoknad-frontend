@@ -45,7 +45,7 @@ export const kjenteInntektskilder = (arbeidsforhold: string[]): RSSporsmal => {
                     {
                         id: 'f4052ad7-d7ee-30ab-ad7e-0ab4877a6ce' + index,
                         tag: 'KJENTE_INNTEKTSKILDER_JOBBER_FORTSATT_' + index,
-                        sporsmalstekst: `Jobbet du hos ${arbeidsforhold} fram til du ble sykmeldt 28. juli?`,
+                        sporsmalstekst: `Jobbet du hos ${arbeidsforhold} fram til du ble sykmeldt 8. september?`,
                         undertekst: null,
                         svartype: 'RADIO_GRUPPE',
                         min: null,
@@ -69,7 +69,7 @@ export const kjenteInntektskilder = (arbeidsforhold: string[]): RSSporsmal => {
                                     {
                                         id: '1df39124-4883-3b38-9ddb-52a2ac37803' + index,
                                         tag: 'KJENTE_INNTEKTSKILDER_UTFORT_ARBEID_' + index,
-                                        sporsmalstekst: `Har du utført noe arbeid ved ${arbeidsforhold} i perioden 28. juli - 11. august 2021?`,
+                                        sporsmalstekst: `Har du utført noe arbeid ved ${arbeidsforhold} i perioden 8. - 21. september 2022?`,
                                         undertekst: null,
                                         svartype: 'JA_NEI',
                                         min: null,
@@ -213,7 +213,7 @@ export const kjenteInntektskilder = (arbeidsforhold: string[]): RSSporsmal => {
                                         undertekst: null,
                                         svartype: 'DATO',
                                         min: null,
-                                        max: null,
+                                        max: '2022-09-07',
                                         pavirkerAndreSporsmal: false,
                                         kriterieForVisningAvUndersporsmal: null,
                                         svar: [],
