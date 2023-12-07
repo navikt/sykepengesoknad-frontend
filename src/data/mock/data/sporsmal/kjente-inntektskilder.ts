@@ -45,7 +45,7 @@ export const kjenteInntektskilder = (arbeidsforhold: string[]): RSSporsmal => {
                     {
                         id: 'f4052ad7-d7ee-30ab-ad7e-0ab4877a6ce' + index,
                         tag: 'KJENTE_INNTEKTSKILDER_JOBBER_FORTSATT_' + index,
-                        sporsmalstekst: `Jobber du fortsatt ved ${arbeidsforhold}?`,
+                        sporsmalstekst: `Jobbet du hos ${arbeidsforhold} fram til du ble sykmeldt 28. juli?`,
                         undertekst: null,
                         svartype: 'RADIO_GRUPPE',
                         min: null,
