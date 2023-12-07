@@ -31,8 +31,16 @@ export function svarRadioGruppe(groupName: string, radioName: string) {
     cy.findByRole('group', { name: groupName }).findByRole('radio', { name: radioName }).check()
 }
 
-export function svarCheckboxGruppe(groupName: string, radioName: string) {
-    cy.findByRole('group', { name: groupName }).findByRole('checkbox', { name: radioName }).check()
+export function svarCheckboxGruppe(groupName: string, checkboxNames: string | string[]) {
+    cy.findByRole('group', { name: groupName }).within(() => {
+        if (Array.isArray(checkboxNames)) {
+            checkboxNames.forEach((checkboxName) => {
+                cy.findByRole('checkbox', { name: checkboxName }).check()
+            })
+        } else {
+            cy.findByRole('checkbox', { name: checkboxNames }).check()
+        }
+    })
 }
 
 export function svarJaHovedsporsmal() {
@@ -109,7 +117,6 @@ export function modalIkkeAktiv() {
 }
 
 export function besvarKjenteInntektskilder() {
-    svarRadioGruppe('Har du sluttet hos Ruter før du ble sykmeldt 8. september', 'Nei')
     svarRadioGruppe('Har du sluttet hos Ruter før du ble sykmeldt 8. september', 'Ja')
     velgDato(5)
 
@@ -124,7 +131,10 @@ export function besvarKjenteInntektskilder() {
         'Har du utført noe arbeid ved Bensinstasjonen med det veldig lange navnet, Stavanger (ved det røde huset som ligger ved Shell) i perioden 24. august - 7. september 2022?',
         'Nei',
     )
-    svarCheckboxGruppe('Velg en eller flere årsaker til at du ikke har jobbet', 'Jeg jobber turnus')
+    svarCheckboxGruppe('Velg en eller flere årsaker til at du ikke har jobbet', [
+        'Jeg var sykmeldt',
+        'Jeg jobber turnus',
+    ])
 
     cy.contains('Gå videre').click()
 }
