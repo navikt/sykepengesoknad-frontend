@@ -24,7 +24,6 @@ import PerioderUtenOpphold from './innhold/arbeidstaker/perioder-uten-opphold'
 import ArbeidstakerStatus from './status/arbeidstaker-status'
 import GridItems from './grid-items'
 import { KvtteringPanel } from './kvittering-panel'
-import { SendInntektsopplysningerForSelvstendigNæringsdrivende } from './innhold/SendInntektsopplysningerForSelvstendigNaringsdrivende'
 
 type ArbeidstakerKvitteringTekst = 'inntil16dager' | 'over16dager' | 'utenOpphold' | 'medOpphold' | undefined
 
@@ -35,14 +34,6 @@ const Arbeidstaker = () => {
     const { data: valgtSykmelding } = useSykmelding(valgtSoknad?.sykmeldingId)
     const [kvitteringTekst, setKvitteringTekst] = useState<ArbeidstakerKvitteringTekst>()
     const queryClient = useQueryClient()
-
-    const harSvartAndreInntektskilderSN =
-        valgtSoknad?.sporsmal
-            ?.find((spm) => spm.tag === 'ANDRE_INNTEKTSKILDER_V2' && spm.svarliste.svar[0]?.verdi === 'JA')
-            ?.undersporsmal?.find((spm) => spm.tag === 'HVILKE_ANDRE_INNTEKTSKILDER')
-            ?.undersporsmal?.find(
-                (spm) => spm.tag === 'INNTEKTSKILDE_SELVSTENDIG' && spm.svarliste.svar[0]?.verdi === 'CHECKED',
-            ) !== undefined
 
     const erInnenforArbeidsgiverperiode = () => {
         if (!valgtSoknad) return
@@ -170,9 +161,6 @@ const Arbeidstaker = () => {
             </GridItems>
 
             <div className="col-span-12 mx-4 mb-8 border-b-2 border-b-gray-200 pb-2" />
-            {harSvartAndreInntektskilderSN && kvitteringTekst !== 'inntil16dager' && (
-                <SendInntektsopplysningerForSelvstendigNæringsdrivende />
-            )}
 
             <Vis
                 hvis={!sendtForMerEnn30DagerSiden(valgtSoknad.sendtTilArbeidsgiverDato, valgtSoknad.sendtTilNAVDato)}

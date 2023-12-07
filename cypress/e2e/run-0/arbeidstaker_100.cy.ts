@@ -163,16 +163,6 @@ describe('Tester arbeidstakersøknad', () => {
             .parent()
             .click()
 
-        cy.contains('Har du vært næringsdrivende i mer enn 5 år?')
-            .parent()
-            .find('input[type="radio"][value="JA"]')
-            .click()
-
-        cy.contains('Har det vært endring i din arbeidssituasjon eller virksomhet?')
-            .parent()
-            .find('input[type="radio"][value="Ja"]')
-            .click()
-
         cy.contains('Gå videre').click()
     })
 
@@ -252,8 +242,7 @@ describe('Tester arbeidstakersøknad', () => {
     it('Søknad kvittering', () => {
         cy.url().should('include', `/kvittering/${soknad.id}`)
         cy.get('[data-cy="kvittering"]')
-            .should('contain', 'Innsending av inntektsopplysninger')
-            .and('contain', 'Hva skjer videre?')
+            .should('contain', 'Hva skjer videre?')
             .and('contain', 'Før NAV kan behandle søknaden')
             .and('contain', 'NAV behandler søknaden')
             .and('contain', 'Når blir pengene utbetalt')
