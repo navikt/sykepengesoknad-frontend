@@ -141,7 +141,6 @@ describe('Tester arbeidstakersøknad - gradert 50%', () => {
     it('Kjente inntektskilder', function () {
         cy.url().should('include', `${soknad.id}/8`)
         besvarKjenteInntektskilder()
-        cy.contains('Gå videre').click()
     })
 
     it('Søknad ANDRE_INNTEKTSKILDER_V2', function () {
