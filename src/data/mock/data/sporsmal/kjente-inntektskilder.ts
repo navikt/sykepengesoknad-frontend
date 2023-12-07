@@ -69,7 +69,7 @@ export const kjenteInntektskilder = (arbeidsforhold: string[]): RSSporsmal => {
                                     {
                                         id: '1df39124-4883-3b38-9ddb-52a2ac37803' + index,
                                         tag: 'KJENTE_INNTEKTSKILDER_UTFORT_ARBEID_' + index,
-                                        sporsmalstekst: `Har du utført noe arbeid ved ${arbeidsforhold} i perioden 8. - 21. september 2022?`,
+                                        sporsmalstekst: `Har du utført noe arbeid ved ${arbeidsforhold} i perioden 24. august - 7. september 2022?`,
                                         undertekst: null,
                                         svartype: 'JA_NEI',
                                         min: null,
