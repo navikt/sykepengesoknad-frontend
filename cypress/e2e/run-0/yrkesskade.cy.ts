@@ -1,9 +1,9 @@
 import {
-    besvarKjenteInntektskilder,
     checkViStolerPåDeg,
     klikkGaVidere,
     neiOgVidere,
     svarJaHovedsporsmal,
+    svarRadioGruppe,
 } from '../../support/utilities'
 import 'cypress-real-events'
 
@@ -26,7 +26,21 @@ describe('Tester yrkesskadesspørsmål', () => {
             'Jobb underveis i sykefraværet',
             'Arbeid utenfor Norge',
         ])
-        besvarKjenteInntektskilder()
+
+        svarRadioGruppe('Har du sluttet hos Ruter før du ble sykmeldt 8. september', 'Nei')
+        svarRadioGruppe('Har du utført noe arbeid ved Ruter i perioden 24. august - 7. september 2022?', 'Ja')
+
+        svarRadioGruppe('Har du sluttet hos Blomsterbutikken før du ble sykmeldt 8. september', 'Nei')
+        svarRadioGruppe(
+            'Har du utført noe arbeid ved Blomsterbutikken i perioden 24. august - 7. september 2022?',
+            'Ja',
+        )
+
+        svarRadioGruppe('Har du sluttet hos Bensinstasjonen før du ble sykmeldt 8. september', 'Nei')
+        svarRadioGruppe('Har du utført noe arbeid ved Bensinstasjonen i perioden 24. august - 7. september 2022?', 'Ja')
+
+        klikkGaVidere()
+
         neiOgVidere(['Andre inntektskilder', 'Opphold i utlandet'])
     })
 

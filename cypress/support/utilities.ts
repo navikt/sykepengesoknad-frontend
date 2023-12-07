@@ -123,8 +123,14 @@ export function besvarKjenteInntektskilder() {
     svarRadioGruppe('Har du sluttet hos Blomsterbutikken før du ble sykmeldt 8. september', 'Nei')
     svarRadioGruppe('Har du utført noe arbeid ved Blomsterbutikken i perioden 24. august - 7. september 2022?', 'Ja')
 
-    svarRadioGruppe('Har du sluttet hos Bensinstasjonen før du ble sykmeldt 8. september', 'Nei')
-    svarRadioGruppe('Har du utført noe arbeid ved Bensinstasjonen i perioden 24. august - 7. september 2022?', 'Nei')
+    svarRadioGruppe(
+        'Har du sluttet hos Bensinstasjonen med det veldig lange navnet, Stavanger (ved det røde huset som ligger ved Shell) før du ble sykmeldt 8. september',
+        'Nei',
+    )
+    svarRadioGruppe(
+        'Har du utført noe arbeid ved Bensinstasjonen med det veldig lange navnet, Stavanger (ved det røde huset som ligger ved Shell) i perioden 24. august - 7. september 2022?',
+        'Nei',
+    )
     svarCheckboxGruppe('Velg en eller flere årsaker til at du ikke har jobbet', [
         'Jeg var sykmeldt',
         'Jeg jobber turnus',
