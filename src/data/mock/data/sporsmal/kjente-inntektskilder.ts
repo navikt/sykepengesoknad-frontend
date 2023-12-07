@@ -44,7 +44,7 @@ export const kjenteInntektskilder = (arbeidsforhold: string[]): RSSporsmal => {
                     },
                     {
                         id: 'f4052ad7-d7ee-30ab-ad7e-0ab4877a6ce' + index,
-                        tag: 'KJENTE_INNTEKTSKILDER_JOBBER_FORTSATT_' + index,
+                        tag: 'KJENTE_INNTEKTSKILDER_SLUTTET_' + index,
                         sporsmalstekst: `Har du sluttet hos ${arbeidsforhold} før du ble sykmeldt 8. september`,
                         undertekst: null,
                         svartype: 'RADIO_GRUPPE',
@@ -56,7 +56,7 @@ export const kjenteInntektskilder = (arbeidsforhold: string[]): RSSporsmal => {
                         undersporsmal: [
                             {
                                 id: 'de67459c-c81b-3fd2-b881-be3031e1985' + index,
-                                tag: 'KJENTE_INNTEKTSKILDER_JOBBER_FORTSATT_JA_' + index,
+                                tag: 'KJENTE_INNTEKTSKILDER_SLUTTET_JA_' + index,
                                 sporsmalstekst: 'Ja',
                                 undertekst: null,
                                 svartype: 'RADIO',
@@ -83,7 +83,7 @@ export const kjenteInntektskilder = (arbeidsforhold: string[]): RSSporsmal => {
                             },
                             {
                                 id: '350e754c-32ae-315d-963b-9f9dfaad2bd' + index,
-                                tag: 'KJENTE_INNTEKTSKILDER_JOBBER_FORTSATT_NEI_' + index,
+                                tag: 'KJENTE_INNTEKTSKILDER_SLUTTET_NEI_' + index,
                                 sporsmalstekst: 'Nei',
                                 undertekst: null,
                                 svartype: 'RADIO',
