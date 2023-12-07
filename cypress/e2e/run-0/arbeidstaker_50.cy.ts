@@ -1,4 +1,4 @@
-import { besvarKjenteInntektskilder, setPeriodeFraTil } from '../../support/utilities'
+import { setPeriodeFraTil, svarCheckboxGruppe, svarRadioGruppe, velgDato } from '../../support/utilities'
 import { arbeidstakerGradert } from '../../../src/data/mock/data/soknad/arbeidstaker-gradert'
 
 describe('Tester arbeidstakersøknad - gradert 50%', () => {
@@ -141,7 +141,29 @@ describe('Tester arbeidstakersøknad - gradert 50%', () => {
     it('Kjente inntektskilder', function () {
         cy.url().should('include', `${soknad.id}/8`)
 
-        besvarKjenteInntektskilder()
+        svarRadioGruppe('Har du sluttet hos Ruter før du ble sykmeldt 8. september', 'Ja')
+        velgDato(5)
+
+        svarRadioGruppe('Har du sluttet hos Blomsterbutikken før du ble sykmeldt 8. september', 'Nei')
+        svarRadioGruppe(
+            'Har du utført noe arbeid ved Blomsterbutikken i perioden 24. august - 7. september 2022?',
+            'Ja',
+        )
+
+        svarRadioGruppe(
+            'Har du sluttet hos Bensinstasjonen med det veldig lange navnet, Stavanger (ved det røde huset som ligger ved Shell) før du ble sykmeldt 8. september',
+            'Nei',
+        )
+        svarRadioGruppe(
+            'Har du utført noe arbeid ved Bensinstasjonen med det veldig lange navnet, Stavanger (ved det røde huset som ligger ved Shell) i perioden 24. august - 7. september 2022?',
+            'Nei',
+        )
+        svarCheckboxGruppe('Velg en eller flere årsaker til at du ikke har jobbet', [
+            'Jeg var sykmeldt',
+            'Jeg jobber turnus',
+        ])
+
+        cy.contains('Gå videre').click()
     })
 
     it('Søknad ANDRE_INNTEKTSKILDER_V2', function () {
