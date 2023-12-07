@@ -31,6 +31,10 @@ export function svarRadioGruppe(groupName: string, radioName: string) {
     cy.findByRole('group', { name: groupName }).findByRole('radio', { name: radioName }).check()
 }
 
+export function svarCheckboxGruppe(groupName: string, radioName: string) {
+    cy.findByRole('group', { name: groupName }).findByRole('checkbox', { name: radioName }).check()
+}
+
 export function svarJaHovedsporsmal() {
     cy.get('form').findAllByRole('radio', { name: 'Ja' }).first().click()
     cy.get('form').findAllByRole('radio', { name: 'Ja' }).first().should('be.checked')
@@ -105,17 +109,22 @@ export function modalIkkeAktiv() {
 }
 
 export function besvarKjenteInntektskilder() {
-    const utførtTekst = 'Har du utført noe arbeid ved Ruter i perioden 28. juli - 11. august 2021?'
-    cy.contains(utførtTekst).should('not.exist')
-    cy.get('#de67459c-c81b-3fd2-b881-be3031e19850').check()
-    cy.contains(utførtTekst).should('be.visible')
-    cy.get('#350e754c-32ae-315d-963b-9f9dfaad2bd0').check()
-    cy.contains(utførtTekst).should('not.exist')
-    velgDato(10)
-    cy.get('#de67459c-c81b-3fd2-b881-be3031e19851').check()
-    cy.get('#1df39124-4883-3b38-9ddb-52a2ac378031_0').check()
-    cy.get('#de67459c-c81b-3fd2-b881-be3031e19852').click()
-    cy.get('#1df39124-4883-3b38-9ddb-52a2ac378032_1').click()
-    cy.get('#7057edf4-8809-3a3c-9bdf-10f65259f822').click()
+    svarRadioGruppe('Har du sluttet hos Ruter før du ble sykmeldt 8. september', 'Nei')
+    svarRadioGruppe('Har du sluttet hos Ruter før du ble sykmeldt 8. september', 'Ja')
+    velgDato(5)
+
+    svarRadioGruppe('Har du sluttet hos Blomsterbutikken før du ble sykmeldt 8. september', 'Nei')
+    svarRadioGruppe('Har du utført noe arbeid ved Blomsterbutikken i perioden 24. august - 7. september 2022?', 'Ja')
+
+    svarRadioGruppe(
+        'Har du sluttet hos Bensinstasjonen med det veldig lange navnet, Stavanger (ved det røde huset som ligger ved Shell) før du ble sykmeldt 8. september',
+        'Nei',
+    )
+    svarRadioGruppe(
+        'Har du utført noe arbeid ved Bensinstasjonen med det veldig lange navnet, Stavanger (ved det røde huset som ligger ved Shell) i perioden 24. august - 7. september 2022?',
+        'Nei',
+    )
+    svarCheckboxGruppe('Velg en eller flere årsaker til at du ikke har jobbet', 'Jeg jobber turnus')
+
     cy.contains('Gå videre').click()
 }
