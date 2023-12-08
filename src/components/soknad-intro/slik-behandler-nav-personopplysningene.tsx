@@ -156,6 +156,21 @@ export const SlikBehandlerNavPersonopplysningene = () => {
                     </BodyLong>
 
                     <Label spacing as="p">
+                        NAV har en plikt til å utrede saken din
+                    </Label>
+
+                    <BodyLong spacing>
+                        Før vi gjør et vedtak, vurderer vi de opplysningene vi har om deg, arbeidsforholdet ditt og
+                        inntekten din automatisk. Vi vurderer om disse opplysningene inneholder uregelmessigheter, og om
+                        du har stor påvirkningskraft i bedriften du er sykemeldt fra. Et eksempel på dette er at vi
+                        innledningsvis sjekker  om arbeidsforholdet ditt er innrapportert for sent, eller at du har
+                        varierende lønnsinntekt forut for sykmeldingen. Hvis du også er eier av selskapet du er sykmeldt
+                        fra, vil det kunne ha betydning for hvordan vi behandler sykepengesøknaden din. Hvis det er
+                        flere slike uregelmessigheter og du har stor påvirkningskraft i bedriften din, vil vi ta saken
+                        ut til manuell behandling og en saksbehandler vil vurdere den.
+                    </BodyLong>
+
+                    <Label spacing as="p">
                         Ved automatisering har du rett til:
                     </Label>
 
