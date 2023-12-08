@@ -7,6 +7,7 @@ import {
     velgDato,
     klikkGaVidere,
     svarCombobox,
+    svarRadioGruppe,
 } from '../../support/utilities'
 import 'cypress-file-upload'
 import { veldigLangSoknad } from '../../../src/data/mock/data/soknad/veldig-land-soknad'
@@ -319,9 +320,9 @@ describe('Tester støtte for gamle spørsmål', () => {
         gaVidere()
     })
     it('Kjente inntektskilder', () => {
-        svarJaHovedsporsmal()
-        cy.get('form').findAllByRole('radio', { name: 'Ja' }).last().click()
-        cy.get('form').findAllByRole('radio', { name: 'Ja' }).last().should('be.checked')
+        svarRadioGruppe('Har du sluttet hos Rema før du ble sykmeldt 8. september', 'Nei')
+        svarRadioGruppe('Har du utført noe arbeid ved Rema i perioden 24. august - 7. september 2022?', 'Ja')
+
         gaVidere()
     })
     it('VAER_KLAR_OVER_AT & BEKREFT_OPPLYSNINGER', () => {

@@ -140,7 +140,6 @@ describe('Tester arbeidstakersøknad - gradert 50%', () => {
 
     it('Kjente inntektskilder', function () {
         cy.url().should('include', `${soknad.id}/8`)
-
         besvarKjenteInntektskilder()
     })
 
