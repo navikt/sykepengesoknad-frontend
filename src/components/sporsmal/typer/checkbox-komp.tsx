@@ -6,7 +6,6 @@ import cn from 'classnames'
 import { SpmProps } from '../sporsmal-form/sporsmal-form'
 import { hentFeilmelding } from '../sporsmal-utils'
 import UndersporsmalListe from '../undersporsmal/undersporsmal-liste'
-import Vis from '../../vis'
 import { SvaralternativCheckboxForklaring } from '../svaralternativ-checkbox-forklaring'
 
 const undertekst = (tekst: string | null) => {
@@ -43,38 +42,38 @@ const CheckboxKomp = ({ sporsmal }: SpmProps) => {
                         error={errors[sporsmal.id] !== undefined && feilmelding.lokal}
                     >
                         <div className="mt-4 space-y-2">
-                            {sporsmal.undersporsmal.map((uspm) => (
-                                <Fragment key={uspm.id + '_fragment'}>
-                                    <div
-                                        className={cn('flex items-center gap-4', {
-                                            'bx-4 rounded-lg bg-gray-50 w-full md:max-w-[320px]':
-                                                checkboxesSkalHaSpesiellStyling(sporsmal.tag),
-                                        })}
-                                    >
-                                        <Checkbox id={uspm.id} value={uspm.sporsmalstekst} className="pl-3">
-                                            <BodyShort
-                                                className={
-                                                    watchCheckbox?.includes(uspm.sporsmalstekst) ? 'font-bold' : ''
-                                                }
-                                            >
-                                                {uspm.sporsmalstekst}
-                                            </BodyShort>
-                                        </Checkbox>
-                                    </div>
-                                    <Vis
-                                        hvis={
-                                            watchCheckbox?.includes(uspm.sporsmalstekst) &&
-                                            uspm.undersporsmal.length > 0
-                                        }
-                                        render={() => (
-                                            <div aria-live="assertive" className="my-4 pl-3">
+                            {sporsmal.undersporsmal.map((uspm) => {
+                                const erChecked = watchCheckbox?.includes(uspm.sporsmalstekst)
+                                return (
+                                    <Fragment key={uspm.id + '_fragment'}>
+                                        <div
+                                            className={cn('flex items-center gap-4', {
+                                                'bx-4 rounded-lg bg-gray-50 w-full md:max-w-[320px]':
+                                                    checkboxesSkalHaSpesiellStyling(sporsmal.tag),
+                                            })}
+                                        >
+                                            <Checkbox id={uspm.id} value={uspm.sporsmalstekst} className="pl-3">
+                                                <BodyShort className={erChecked ? 'font-bold' : ''}>
+                                                    {uspm.sporsmalstekst}
+                                                </BodyShort>
+                                            </Checkbox>
+                                        </div>
+                                        {erChecked && (
+                                            <div className="pl-3">
                                                 <SvaralternativCheckboxForklaring svaralternativTag={uspm.tag} />
-                                                <UndersporsmalListe oversporsmal={uspm} oversporsmalSvar="CHECKED" />
+                                                {uspm.undersporsmal.length > 0 && (
+                                                    <div aria-live="assertive" className="my-4">
+                                                        <UndersporsmalListe
+                                                            oversporsmal={uspm}
+                                                            oversporsmalSvar="CHECKED"
+                                                        />
+                                                    </div>
+                                                )}
                                             </div>
                                         )}
-                                    />
-                                </Fragment>
-                            ))}
+                                    </Fragment>
+                                )
+                            })}
                         </div>
                     </CheckboxGroup>
                 </div>

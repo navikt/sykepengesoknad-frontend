@@ -5,7 +5,6 @@ import { Controller, useFormContext } from 'react-hook-form'
 import { SpmProps } from '../sporsmal-form/sporsmal-form'
 import { hentFeilmelding } from '../sporsmal-utils'
 import UndersporsmalListe from '../undersporsmal/undersporsmal-liste'
-import { ForklaringAvVarigEndringSporsmal } from '../forklaring-av-varig-endring-sporsmal'
 
 const RadioKomp = ({ sporsmal }: SpmProps) => {
     const {
@@ -36,10 +35,6 @@ const RadioKomp = ({ sporsmal }: SpmProps) => {
                         className="mt-8"
                         data-cy="radio-komp"
                     >
-                        {sporsmal.tag == 'INNTEKTSKILDE_SELVSTENDIG_VARIG_ENDRING_GRUPPE' && (
-                            <ForklaringAvVarigEndringSporsmal key="forklaring-varig-endring" />
-                        )}
-
                         {sporsmal.undersporsmal.map((uspm) => (
                             <Radio key={uspm.id} id={uspm.id} value={uspm.sporsmalstekst}>
                                 {uspm.sporsmalstekst}
