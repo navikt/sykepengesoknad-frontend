@@ -198,7 +198,10 @@ export const SlikBehandlerNavPersonopplysningene = () => {
                             ettersom klager behandles manuelt i Arbeids- og velferdsetaten.
                         </ListItemMedBold>
                     </List>
-                    <BodyLong spacing>Vi kan også sende opplysninger om deg til trygdeordninger i andre land.</BodyLong>
+                    <BodyLong spacing>
+                        Vi kan sende opplysninger om utbetalte sykepenger til offentlige og private pensjonsordninger.
+                        Vi kan også sende opplysninger om deg til trygdeordninger i andre land.
+                    </BodyLong>
 
                     <BodyLong spacing>
                         Du kan lese mer om hvordan NAV behandler personopplysninger i Arbeids- og velferdsetatens
