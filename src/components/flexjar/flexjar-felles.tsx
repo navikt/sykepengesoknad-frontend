@@ -18,7 +18,7 @@ interface FlexjarFellesProps {
     flexjarsporsmal: string
     flexjartittel: string
     app: string
-    feedbackProps: Record<string, string | undefined>
+    feedbackProps: Record<string, string | undefined | boolean>
 }
 
 export function FlexjarFelles({
