@@ -10,7 +10,6 @@ import { Kvittering, Soknad, UtgiftTyper } from '../../../types/types'
 import { AuthenticationError, fetchJsonMedRequestId } from '../../../utils/fetch'
 import { formaterFilstørrelse, formattertFiltyper, maxFilstørrelse } from '../../../utils/fil-utils'
 import { getLedetekst, tekst } from '../../../utils/tekster'
-import Vis from '../../vis'
 import DragAndDrop from '../drag-and-drop/drag-and-drop'
 import { useTestpersonQuery } from '../../../hooks/useTestpersonQuery'
 import { useSoknadMedDetaljer } from '../../../hooks/useSoknadMedDetaljer'
@@ -196,18 +195,14 @@ const OpplastingForm = ({ valgtSoknad, setOpenModal, openModal }: OpplastingFrom
                     <Label>{tekst('drag_and_drop.label')}</Label>
                     <DragAndDrop valgtFil={valgtFil} setValgtFil={setValgtFil} />
                 </div>
+                {feilmelding && (
+                    <Alert variant="warning" className="mt-8">
+                        <BodyShort>{feilmelding}</BodyShort>
+                    </Alert>
+                )}
 
-                <div className="mt-8">
-                    <Vis
-                        hvis={feilmelding}
-                        render={() => (
-                            <Alert variant="warning">
-                                <BodyShort>{feilmelding}</BodyShort>
-                            </Alert>
-                        )}
-                    />
-
-                    <Button variant="primary" type="button" className="mr-4" onClick={onSubmit} loading={laster}>
+                <div className="mt-8 flex gap-4">
+                    <Button variant="primary" type="button" onClick={onSubmit} loading={laster}>
                         {tekst('opplasting_modal.bekreft')}
                     </Button>
 
