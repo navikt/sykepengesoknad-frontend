@@ -121,6 +121,7 @@ const EmojiButton = (props: EmojiButtonProps) => {
     return (
         <button
             type="button"
+            aria-pressed={isActive}
             className={cn(
                 'rounded-xl flex flex-col items-center py-2 gap-y-2 text-gray-900 w-[78px] h-[128px] hover:bg-gray-100',
                 props.hoverColor,

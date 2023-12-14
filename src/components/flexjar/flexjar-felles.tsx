@@ -18,7 +18,7 @@ interface FlexjarFellesProps {
     flexjarsporsmal: string
     flexjartittel: string
     app: string
-    feedbackProps: Record<string, string | undefined>
+    feedbackProps: Record<string, string | undefined | boolean>
 }
 
 export function FlexjarFelles({
@@ -94,7 +94,7 @@ export function FlexjarFelles({
                 <div className="mt-1 border-4 border-surface-subtle rounded-medium">
                     <div className="bg-surface-subtle p-6 flex gap-4 items-center">
                         <div className="bg-gray-900 w-10 h-10 rounded-full flex justify-center items-center">
-                            <MagnifyingGlassIcon className="text-white axe-exclude" />
+                            <MagnifyingGlassIcon aria-hidden={true} className="text-white axe-exclude" />
                         </div>
                         <div>
                             <Label as="h3" className="mb-2">
@@ -184,6 +184,7 @@ export function FeedbackButton(props: FeedbackButtonProps) {
                 'bg-surface-neutral-active text-text-on-inverted hover:bg-surface-neutral-active':
                     props.activeState === props.svar,
             })}
+            aria-pressed={props.activeState === props.svar}
             onClick={() => {
                 logEvent('knapp klikket', {
                     komponent: 'flexjar',
