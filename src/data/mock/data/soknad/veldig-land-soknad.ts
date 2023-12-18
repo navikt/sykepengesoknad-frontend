@@ -11,6 +11,7 @@ import { utenlandskSykmeldingSporsmalene } from '../sporsmal/utenlandsk-sykmeldi
 import { yrkesskadeV2Sporsmal } from '../sporsmal/yrkesskade-v2'
 import { yrkesskadeV1Sporsmal } from '../sporsmal/yrkesskade-v1'
 import { kjenteInntektskilder } from '../sporsmal/kjente-inntektskilder'
+import { inntektsopplysninger } from '../sporsmal/inntektsopplysninger'
 
 export const veldigLangSoknad: RSSoknad = {
     id: '214f6e73-8150-4261-8ce5-e2b41907fa58',
@@ -2512,6 +2513,7 @@ export const veldigLangSoknad: RSSoknad = {
         },
         ...utenlandskSykmeldingSporsmalene,
         kjenteInntektskilder(['Rema']),
+        inntektsopplysninger,
         nyVærKlarOverAt(),
     ],
     egenmeldtSykmelding: false,

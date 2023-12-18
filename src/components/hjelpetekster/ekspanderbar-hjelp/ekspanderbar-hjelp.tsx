@@ -4,10 +4,10 @@ import React, { useEffect, useState } from 'react'
 import { RSArbeidssituasjon } from '../../../types/rs-types/rs-arbeidssituasjon'
 import { RSSoknadstype } from '../../../types/rs-types/rs-soknadstype'
 import { tekst } from '../../../utils/tekster'
-import { SpmProps } from '../../sporsmal/sporsmal-form/sporsmal-form'
 import { logEvent } from '../../amplitude/amplitude'
 import { parserWithReplace } from '../../../utils/html-react-parser-utils'
 import { useSoknadMedDetaljer } from '../../../hooks/useSoknadMedDetaljer'
+import { Sporsmal } from '../../../types/types'
 
 import { AndreInntektskilderHjelpBody } from './andre-inntektskilder-hjelp-body'
 import { EkspanderbarHjelpTekster } from './ekspanderbar-hjelp-tekst'
@@ -29,7 +29,7 @@ import { MedlemskapOppholdUtenforNorgeHjelpBody } from './medlemskap-opphold-ute
 import { MedlemskapOppholdstillatelseHjelpBody } from './medlemskap-oppholdstillatelse-hjelp-body'
 import { KjenteInntektkilderHjelpBody } from './kjente-inntektkilder'
 
-export const EkspanderbarHjelp = ({ sporsmal }: SpmProps) => {
+export const EkspanderbarHjelp = ({ sporsmal, mb }: { sporsmal: Sporsmal; mb?: string }) => {
     const { valgtSoknad } = useSoknadMedDetaljer()
 
     const [expanded, setExpanded] = useState<boolean>(false)
@@ -122,7 +122,7 @@ export const EkspanderbarHjelp = ({ sporsmal }: SpmProps) => {
 
     return (
         <ReadMore
-            className="mb-8 mt-4 w-full"
+            className={`${mb ?? 'mb-8'} mt-4 w-full`}
             header={tittel}
             open={expanded}
             onClick={() => {

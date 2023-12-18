@@ -325,6 +325,12 @@ describe('Tester støtte for gamle spørsmål', () => {
 
         gaVidere()
     })
+
+    it('Ny i arbeidslivet', () => {
+        svarJaHovedsporsmal()
+        velgDato(4)
+        gaVidere()
+    })
     it('VAER_KLAR_OVER_AT & BEKREFT_OPPLYSNINGER', () => {
         svarCheckboxPanel()
         cy.contains('Send søknaden').click()

@@ -257,6 +257,20 @@ const SporsmalTekster = {
     'soknad.feilmelding.KJENTE_INNTEKTSKILDER_UTFORT_ARBEID': 'Du må svare på om du har utført arbeid i perioden',
     'soknad.feilmelding.KJENTE_INNTEKTSKILDER_ARSAK_IKKE_JOBBET': 'Du må velge en årsak',
     'soknad.feilmelding.KJENTE_INNTEKTSKILDER_DATO_SLUTTET': 'Du må oppgi når du sluttet',
+
+    'soknad.feilmelding.INNTEKTSOPPLYSNINGER_NY_I_ARBEIDSLIVET': '',
+    'soknad.feilmelding.INNTEKTSOPPLYSNINGER_NY_I_ARBEIDSLIVET_JA': '',
+    'soknad.feilmelding.INNTEKTSOPPLYSNINGER_NY_I_ARBEIDSLIVET_DATO': '',
+    'soknad.feilmelding.INNTEKTSOPPLYSNINGER_NY_I_ARBEIDSLIVET_NEI': '',
+    'soknad.feilmelding.INNTEKTSOPPLYSNINGER_VARIG_ENDRING': '',
+    'soknad.feilmelding.INNTEKTSOPPLYSNINGER_VARIG_ENDRING_BEGRUNNELSE': '',
+    'soknad.feilmelding.INNTEKTSOPPLYSNINGER_VARIG_ENDRING_BEGRUNNELSE_OPPRETTELSE_NEDLEGGELSE': '',
+    'soknad.feilmelding.INNTEKTSOPPLYSNINGER_VARIG_ENDRING_BEGRUNNELSE_ENDRET_INNSATS': '',
+    'soknad.feilmelding.INNTEKTSOPPLYSNINGER_VARIG_ENDRING_BEGRUNNELSE_OMLEGGING_AV_VIRKSOMHETEN': '',
+    'soknad.feilmelding.INNTEKTSOPPLYSNINGER_VARIG_ENDRING_BEGRUNNELSE_ENDRET_MARKEDSSITUASJON': '',
+    'soknad.feilmelding.INNTEKTSOPPLYSNINGER_VARIG_ENDRING_BEGRUNNELSE_ANNET': '',
+    'soknad.feilmelding.INNTEKTSOPPLYSNINGER_VARIG_ENDRING_25_PROSENT': '',
+    'soknad.feilmelding.INNTEKTSOPPLYSNINGER_VARIG_ENDRING_DATO': '',
 }
 
 export default SporsmalTekster

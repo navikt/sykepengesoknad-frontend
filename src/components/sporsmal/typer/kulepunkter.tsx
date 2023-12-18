@@ -1,4 +1,4 @@
-import { Label, BodyLong, List } from '@navikt/ds-react'
+import { BodyLong, Label, List } from '@navikt/ds-react'
 import React, { useEffect } from 'react'
 import { useFormContext } from 'react-hook-form'
 

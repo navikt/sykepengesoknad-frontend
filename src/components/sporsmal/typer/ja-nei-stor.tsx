@@ -13,13 +13,14 @@ import { SpmProps } from '../sporsmal-form/sporsmal-form'
 import { parserWithReplace } from '../../../utils/html-react-parser-utils'
 import { PaskeferieInfo } from '../../hjelpetekster/paaskeferie/paskeferie-info'
 import { RSSoknadstatus } from '../../../types/rs-types/rs-soknadstatus'
-import { cn } from '../../../utils/tw-utils'
 import { YrkesskadeInfo } from '../../hjelpetekster/yrkesskade-info'
 import { useJaNeiKeyboardNavigation } from '../../../utils/keyboard-navigation'
 import { Inntektsbulletpoints } from '../inntektsbulletpoints'
 import { Yrkesskadebulletpoints } from '../yrkesskade-bulletpoints'
 import { InntektsopplysningerErKonfidensielleInfo } from '../inntektsopplysninger-er-konfidensielle-info'
 import { useSoknadMedDetaljer } from '../../../hooks/useSoknadMedDetaljer'
+
+import { jaNeiStorStyle, JaNeiStyle } from './ja-nei-stor-style'
 
 const JaNeiStor = ({ sporsmal }: SpmProps) => {
     const {
@@ -52,17 +53,6 @@ const JaNeiStor = ({ sporsmal }: SpmProps) => {
     }
 
     const error = errors[sporsmal.id] !== undefined
-
-    function radioClassName(value: 'JA' | 'NEI', mt = false) {
-        return cn(
-            'focus-within:shadow-focus mb-2 block w-full [&>label]:rounded [&>label]:border-2 [&>label]:border-border-default [&>label]:px-4 [&>label]:py-4 text-text-default [&>label]:hover:bg-surface-action-subtle-hover md:mb-0 md:w-1/2',
-            {
-                '[&>label]:bg-surface-action-subtle [&>label]:border-border-selected': watchJaNei === value,
-                'mt-4': mt,
-                '[&>label]:border-b-border-danger [&>label]:border-border-danger text-text-danger': error,
-            },
-        )
-    }
 
     const skalHaInntektsbulletpoints =
         sporsmal.tag === 'ANDRE_INNTEKTSKILDER_V2' && valgtSoknad.inntektskilderDataFraInntektskomponenten
@@ -105,21 +95,24 @@ const JaNeiStor = ({ sporsmal }: SpmProps) => {
 
                             <EkspanderbarHjelp sporsmal={sporsmal} key="ja-nei-stor-hjelp" />
 
-                            <div
-                                key="ja-nei-stor-style"
-                                style={
-                                    {
-                                        '--a-shadow-focus': '0 0 0 0',
-                                    } as React.CSSProperties
-                                }
-                            >
-                                <Radio id={`${field.name}_0`} value="JA" className={radioClassName('JA')}>
+                            <JaNeiStyle>
+                                <Radio
+                                    id={`${field.name}_0`}
+                                    key={`${field.name}_0`}
+                                    value="JA"
+                                    className={jaNeiStorStyle('JA', watchJaNei, error)}
+                                >
                                     Ja
                                 </Radio>
-                                <Radio id={`${field.name}_1`} value="NEI" className={radioClassName('NEI', true)}>
+                                <Radio
+                                    id={`${field.name}_1`}
+                                    key={`${field.name}_1`}
+                                    value="NEI"
+                                    className={jaNeiStorStyle('NEI', watchJaNei, error, true)}
+                                >
                                     Nei
                                 </Radio>
-                            </div>
+                            </JaNeiStyle>
                         </RadioGroup>
                     )}
                 />

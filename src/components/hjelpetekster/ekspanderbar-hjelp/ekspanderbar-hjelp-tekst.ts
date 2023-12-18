@@ -19,4 +19,8 @@ export const EkspanderbarHjelpTekster = {
     'ekspanderbarhjelp.prosenten_lavere_enn_forventet_arbeidstaker.tittel': 'Er prosenten lavere enn du forventet?',
     'ekspanderbarhjelp.prosenten_lavere_enn_forventet_arbeidstaker.innhold1':
         'Grunnen kan være at helligdager eller røde dager som havner på mandag-fredag regnes som sykepengedager hos NAV. Derfor fordeles timene dine også på disse dagene selv om du hadde fri.',
+    'ekspanderbarhjelp.inntektsopplysninger_varig_endring_25_prosent.innhold':
+        'Sykepenger til selvstendig næringsdrivende skal som hovedregel tilsvare den pensjonsgivende årsinntekten som beregnes ut fra gjennomsnittet av pensjonsgivende inntekt de tre siste årene. Det er de ferdiglignede inntektene som foreligger på vedtakstidspunktet som brukes. Det kan likevel gjøres unntak hvis din arbeidssituasjon eller virksomhet er varig endret og den varige endringen har gjort at inntekten din er endret mer enn 25 prosent fra situasjonen før den varige endringen. Det samme gjelder hvis du er ny i yrkeslivet.',
+    'ekspanderbarhjelp.inntektsopplysninger_ny_i_arbeidslivet.innhold':
+        'Dette omfatter personer som nylig har kommet ut i arbeidslivet og i den forbindelse har startet en næringsvirksomhet. Det kan eksempelvis være en student som etter eksamen oppretter et firma.',
 }

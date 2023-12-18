@@ -5,6 +5,11 @@ import { Controller, useFormContext } from 'react-hook-form'
 import { SpmProps } from '../sporsmal-form/sporsmal-form'
 import { hentFeilmelding } from '../sporsmal-utils'
 import UndersporsmalListe from '../undersporsmal/undersporsmal-liste'
+import { EkspanderbarHjelp } from '../../hjelpetekster/ekspanderbar-hjelp/ekspanderbar-hjelp'
+import { NyIArbeidslivertAlert } from '../../hjelpetekster/ny-i-arbeidslivert-alert'
+import { cn } from '../../../utils/tw-utils'
+
+import { jaNeiStorStyle, JaNeiStyle } from './ja-nei-stor-style'
 
 const RadioKomp = ({ sporsmal }: SpmProps) => {
     const {
@@ -18,7 +23,10 @@ const RadioKomp = ({ sporsmal }: SpmProps) => {
     }
 
     const feilmelding = hentFeilmelding(sporsmal)
-
+    const erJaNei =
+        sporsmal.undersporsmal.length == 2 &&
+        sporsmal.undersporsmal.some((uspm) => uspm.sporsmalstekst == 'Ja') &&
+        sporsmal.undersporsmal.some((uspm) => uspm.sporsmalstekst == 'Nei')
     return (
         <>
             <Controller
@@ -32,14 +40,46 @@ const RadioKomp = ({ sporsmal }: SpmProps) => {
                         description={sporsmal.undertekst}
                         error={errors[sporsmal.id] !== undefined && feilmelding.lokal}
                         key={sporsmal.id}
-                        className="mt-8"
+                        className={cn({ 'mt-8': !erJaNei })}
                         data-cy="radio-komp"
                     >
-                        {sporsmal.undersporsmal.map((uspm) => (
-                            <Radio key={uspm.id} id={uspm.id} value={uspm.sporsmalstekst}>
-                                {uspm.sporsmalstekst}
-                            </Radio>
-                        ))}
+                        <EkspanderbarHjelp sporsmal={sporsmal} key="radio-komp-hjelp" />
+
+                        {!erJaNei &&
+                            sporsmal.undersporsmal.map((uspm) => (
+                                <Radio key={uspm.id} id={uspm.id} value={uspm.sporsmalstekst}>
+                                    {uspm.sporsmalstekst}
+                                </Radio>
+                            ))}
+                        {erJaNei && (
+                            <JaNeiStyle>
+                                <Radio
+                                    key={sporsmal.undersporsmal[0].id}
+                                    id={sporsmal.undersporsmal[0].id}
+                                    value={sporsmal.undersporsmal[0].sporsmalstekst}
+                                    className={jaNeiStorStyle(
+                                        sporsmal.undersporsmal[0].sporsmalstekst,
+                                        watchRadio,
+                                        false,
+                                    )}
+                                >
+                                    {sporsmal.undersporsmal[0].sporsmalstekst}
+                                </Radio>
+                                <Radio
+                                    key={sporsmal.undersporsmal[1].id}
+                                    id={sporsmal.undersporsmal[1].id}
+                                    value={sporsmal.undersporsmal[1].sporsmalstekst}
+                                    className={jaNeiStorStyle(
+                                        sporsmal.undersporsmal[1].sporsmalstekst,
+                                        watchRadio,
+                                        false,
+                                        true,
+                                    )}
+                                >
+                                    {sporsmal.undersporsmal[1].sporsmalstekst}
+                                </Radio>
+                            </JaNeiStyle>
+                        )}
                     </RadioGroup>
                 )}
             />
@@ -52,6 +92,9 @@ const RadioKomp = ({ sporsmal }: SpmProps) => {
                     </div>
                 )
             })}
+            {sporsmal.tag === 'INNTEKTSOPPLYSNINGER_NY_I_ARBEIDSLIVET' && watchRadio == 'Ja' && (
+                <NyIArbeidslivertAlert />
+            )}
         </>
     )
 }
