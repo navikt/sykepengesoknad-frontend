@@ -52,14 +52,24 @@ const CheckboxKomp = ({ sporsmal }: SpmProps) => {
                                                     checkboxesSkalHaSpesiellStyling(sporsmal.tag),
                                             })}
                                         >
-                                            <Checkbox id={uspm.id} value={uspm.sporsmalstekst} className="pl-3">
+                                            <Checkbox
+                                                id={uspm.id}
+                                                value={uspm.sporsmalstekst}
+                                                className={cn({
+                                                    'pl-3': checkboxesSkalHaSpesiellStyling(sporsmal.tag),
+                                                })}
+                                            >
                                                 <BodyShort className={erChecked ? 'font-bold' : ''}>
                                                     {uspm.sporsmalstekst}
                                                 </BodyShort>
                                             </Checkbox>
                                         </div>
                                         {erChecked && (
-                                            <div className="pl-3">
+                                            <div
+                                                className={cn({
+                                                    'pl-3': checkboxesSkalHaSpesiellStyling(sporsmal.tag),
+                                                })}
+                                            >
                                                 <SvaralternativCheckboxForklaring svaralternativTag={uspm.tag} />
                                                 {uspm.undersporsmal.length > 0 && (
                                                     <div aria-live="assertive" className="my-4">

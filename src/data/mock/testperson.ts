@@ -28,7 +28,7 @@ import { opprettetAvInntektsmelding } from './data/personas/opprettet-av-inntekt
 import { utenlandskSykmelding } from './data/utenlandsk-sykmelding'
 import { yrkesskadePerson, yrkesskadeV2Person } from './data/yrkesskade'
 import { egenmeldingSykmeldingaPerson } from './data/personas/egenmeldingsdager-i-sykmeldingen'
-import { selvstendigNaringsdrivende } from './data/personas/naringsdrivende'
+import { selvstendigNaringsdrivende, selvstendigNaringsdrivendeSendt } from './data/personas/naringsdrivende'
 import { korrigeringsfristUtloptPerson } from './data/personas/korrigeringsfrist-utlopt'
 import { medlemskapPerson } from './data/personas/medlemskap'
 
@@ -62,6 +62,7 @@ type PersonaKey =
     | 'korrigeringsfrist-utlopt'
     | 'cummulative-layout-shift'
     | 'tilbakedateringer'
+    | 'selvstendig-naringsdrivende-sendt'
 export type PersonaData = Partial<Record<PersonaKey, Persona>>
 
 export type PersonaGroupKey = 'soknad-typer' | 'soknad-sporsmal' | 'testing'
@@ -81,6 +82,7 @@ export function testpersonerGruppert(): PersonaGroup {
             ['arbeidstaker']: jsonDeepCopy(arbeidstakerPerson),
             ['arbeidsledig']: jsonDeepCopy(arbeidsledigPerson),
             ['selvstendig-naringsdrivende']: jsonDeepCopy(selvstendigNaringsdrivende),
+            ['selvstendig-naringsdrivende-sendt']: jsonDeepCopy(selvstendigNaringsdrivendeSendt),
             ['frilanser']: jsonDeepCopy(frilanserPerson),
             ['behandlingsdager']: jsonDeepCopy(behandlingsdagerPerson),
             ['reisetilskudd']: jsonDeepCopy(reisetilskuddPerson),

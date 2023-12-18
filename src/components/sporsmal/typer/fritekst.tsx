@@ -1,5 +1,5 @@
 import { Textarea, TextField } from '@navikt/ds-react'
-import React from 'react'
+import React, { useState } from 'react'
 import { useFormContext } from 'react-hook-form'
 
 import { SpmProps } from '../sporsmal-form/sporsmal-form'
@@ -11,7 +11,7 @@ export const Fritekst = ({ sporsmal }: SpmProps) => {
         formState: { errors },
     } = useFormContext()
     const feilmelding = hentFeilmelding(sporsmal)
-
+    const [lengde, setLengde] = useState(0)
     const description = () => {
         const valgfri = sporsmal.min == null
 
@@ -24,6 +24,7 @@ export const Fritekst = ({ sporsmal }: SpmProps) => {
         return valgfri ? 'Valgfritt' : null
     }
 
+    const maxLengde = parseFloat(sporsmal.max || '0')
     const props = {
         label: sporsmal.sporsmalstekst,
         description: description(),
@@ -33,6 +34,9 @@ export const Fritekst = ({ sporsmal }: SpmProps) => {
         error: errors[sporsmal.id] !== undefined && (errors[sporsmal.id]!.message as string),
         autoComplete: 'off',
         ...register(sporsmal.id, {
+            onChange: (a) => {
+                setLengde(a.target.value.length)
+            },
             validate: {
                 minLengde: (verdien) => {
                     if (sporsmal.min === null) return true
@@ -44,7 +48,6 @@ export const Fritekst = ({ sporsmal }: SpmProps) => {
                 },
                 maxLengde: (verdien) => {
                     if (sporsmal.max === null) return true
-                    const maxLengde = parseFloat(sporsmal.max)
                     if (verdien.trim().length > maxLengde) {
                         return `Du kan skrive maks ${maxLengde} tegn`
                     }
@@ -57,8 +60,9 @@ export const Fritekst = ({ sporsmal }: SpmProps) => {
         throw Error('Fritekst spørsmål skal ha max verdi')
     }
 
-    if (parseFloat(sporsmal.max) > 100) {
-        return <Textarea {...props} />
+    if (maxLengde > 100) {
+        return <Textarea {...props} maxLength={maxLengde - lengde} />
     }
+
     return <TextField type="text" {...props} />
 }

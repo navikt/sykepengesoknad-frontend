@@ -16,6 +16,7 @@ export interface RSSporsmal {
     kriterieForVisningAvUndersporsmal: RSVisningskriterieType | null
     svar: RSSvar[]
     undersporsmal: RSSporsmal[]
+    tittel?: string
 }
 
 export function sporsmalToRS(sporsmal: Sporsmal): RSSporsmal {

@@ -13,6 +13,9 @@ import { hentFeilmelding } from '../sporsmal-utils'
 import UndersporsmalListe from '../undersporsmal/undersporsmal-liste'
 import { ProgressivtGuidePanel } from '../../guidepanel/ProgressivtGuidePanel'
 import { parserWithReplace } from '../../../utils/html-react-parser-utils'
+import { EkspanderbarHjelp } from '../../hjelpetekster/ekspanderbar-hjelp/ekspanderbar-hjelp'
+import { VarigEndringEksempler } from '../../hjelpetekster/varig-endring-eksempler'
+import { VarigEndringAlert } from '../../hjelpetekster/varig-endring-alert'
 
 const JaNeiLiten = ({ sporsmal }: SpmProps) => {
     const { watch, getValues } = useFormContext()
@@ -75,6 +78,9 @@ const JaNeiLiten = ({ sporsmal }: SpmProps) => {
                             legend={sporsmal.sporsmalstekst}
                             error={fieldState.error && feilmelding.lokal}
                         >
+                            <EkspanderbarHjelp sporsmal={sporsmal} mb="mb-4" />
+
+                            {sporsmal.tag === 'INNTEKTSOPPLYSNINGER_VARIG_ENDRING' && <VarigEndringEksempler />}
                             <Fragment key={sporsmal.id}>
                                 <Radio id={field.name + '_0'} value="JA">
                                     Ja
@@ -128,6 +134,9 @@ const JaNeiLiten = ({ sporsmal }: SpmProps) => {
                     <UndersporsmalListe oversporsmal={sporsmal} oversporsmalSvar={watchJaNei} />
                 </AnimateOnMount>
             </div>
+            {sporsmal.tag === 'INNTEKTSOPPLYSNINGER_VARIG_ENDRING_25_PROSENT' && watchJaNei === 'JA' && (
+                <VarigEndringAlert />
+            )}
         </>
     )
 }
