@@ -70,7 +70,7 @@ export const inntektsopplysninger: RSSporsmal = {
                             id: v4().toString(),
                             tag: 'INNTEKTSOPPLYSNINGER_VARIG_ENDRING_BEGRUNNELSE',
                             sporsmalstekst: 'Hvilken endring har skjedd i din arbeidssituasjon eller virksomhet?',
-                            undertekst: null,
+                            undertekst: 'Du kan velge en eller flere alternativer',
                             svartype: 'CHECKBOX_GRUPPE',
                             min: null,
                             max: null,
@@ -161,7 +161,7 @@ export const inntektsopplysninger: RSSporsmal = {
                                 {
                                     id: v4().toString(),
                                     tag: 'INNTEKTSOPPLYSNINGER_VARIG_ENDRING_DATO',
-                                    sporsmalstekst: 'Når skjedde endringen?',
+                                    sporsmalstekst: 'Når skjedde den siste varige endringen?',
                                     undertekst: null,
                                     svartype: 'DATO',
                                     min: null,

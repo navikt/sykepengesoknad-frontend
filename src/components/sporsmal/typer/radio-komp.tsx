@@ -23,6 +23,8 @@ const RadioKomp = ({ sporsmal }: SpmProps) => {
     }
 
     const feilmelding = hentFeilmelding(sporsmal)
+    const error = errors[sporsmal.id] !== undefined
+
     const erJaNei =
         sporsmal.undersporsmal.length == 2 &&
         sporsmal.undersporsmal.some((uspm) => uspm.sporsmalstekst == 'Ja') &&
@@ -60,7 +62,7 @@ const RadioKomp = ({ sporsmal }: SpmProps) => {
                                     className={jaNeiStorStyle(
                                         sporsmal.undersporsmal[0].sporsmalstekst,
                                         watchRadio,
-                                        false,
+                                        error,
                                     )}
                                 >
                                     {sporsmal.undersporsmal[0].sporsmalstekst}
@@ -72,7 +74,7 @@ const RadioKomp = ({ sporsmal }: SpmProps) => {
                                     className={jaNeiStorStyle(
                                         sporsmal.undersporsmal[1].sporsmalstekst,
                                         watchRadio,
-                                        false,
+                                        error,
                                         true,
                                     )}
                                 >
