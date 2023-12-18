@@ -70,7 +70,7 @@ export const inntektsopplysninger: RSSporsmal = {
                             id: v4().toString(),
                             tag: 'INNTEKTSOPPLYSNINGER_VARIG_ENDRING_BEGRUNNELSE',
                             sporsmalstekst: 'Hvilken endring har skjedd i din arbeidssituasjon eller virksomhet?',
-                            undertekst: "Du kan velge en eller flere alternativer",
+                            undertekst: 'Du kan velge en eller flere alternativer',
                             svartype: 'CHECKBOX_GRUPPE',
                             min: null,
                             max: null,

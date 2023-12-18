@@ -263,13 +263,15 @@ const SporsmalTekster = {
     'soknad.feilmelding.INNTEKTSOPPLYSNINGER_NY_I_ARBEIDSLIVET_DATO': '',
     'soknad.feilmelding.INNTEKTSOPPLYSNINGER_NY_I_ARBEIDSLIVET_NEI': '',
     'soknad.feilmelding.INNTEKTSOPPLYSNINGER_VARIG_ENDRING': 'Du må svare på om det har skjedd en varig endring',
-    'soknad.feilmelding.INNTEKTSOPPLYSNINGER_VARIG_ENDRING_BEGRUNNELSE': 'Du må svare på hvilken endring som har skjedd',
+    'soknad.feilmelding.INNTEKTSOPPLYSNINGER_VARIG_ENDRING_BEGRUNNELSE':
+        'Du må svare på hvilken endring som har skjedd',
     'soknad.feilmelding.INNTEKTSOPPLYSNINGER_VARIG_ENDRING_BEGRUNNELSE_OPPRETTELSE_NEDLEGGELSE': '',
     'soknad.feilmelding.INNTEKTSOPPLYSNINGER_VARIG_ENDRING_BEGRUNNELSE_ENDRET_INNSATS': '',
     'soknad.feilmelding.INNTEKTSOPPLYSNINGER_VARIG_ENDRING_BEGRUNNELSE_OMLEGGING_AV_VIRKSOMHETEN': '',
     'soknad.feilmelding.INNTEKTSOPPLYSNINGER_VARIG_ENDRING_BEGRUNNELSE_ENDRET_MARKEDSSITUASJON': '',
     'soknad.feilmelding.INNTEKTSOPPLYSNINGER_VARIG_ENDRING_BEGRUNNELSE_ANNET': '',
-    'soknad.feilmelding.INNTEKTSOPPLYSNINGER_VARIG_ENDRING_25_PROSENT': 'Du må svare på om du har hatt mer enn 25 prosent endring i årsinntekten din',
+    'soknad.feilmelding.INNTEKTSOPPLYSNINGER_VARIG_ENDRING_25_PROSENT':
+        'Du må svare på om du har hatt mer enn 25 prosent endring i årsinntekten din',
     'soknad.feilmelding.INNTEKTSOPPLYSNINGER_VARIG_ENDRING_DATO': '',
 }
 
