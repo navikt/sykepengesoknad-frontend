@@ -8,7 +8,6 @@ export const yrkesskadeV1Sporsmal: RSSporsmal = {
     svartype: 'JA_NEI',
     min: null,
     max: null,
-    pavirkerAndreSporsmal: false,
     kriterieForVisningAvUndersporsmal: 'JA',
     svar: [],
     undersporsmal: [
@@ -20,7 +19,6 @@ export const yrkesskadeV1Sporsmal: RSSporsmal = {
             svartype: 'JA_NEI',
             min: null,
             max: null,
-            pavirkerAndreSporsmal: false,
             kriterieForVisningAvUndersporsmal: null,
             svar: [],
             undersporsmal: [],

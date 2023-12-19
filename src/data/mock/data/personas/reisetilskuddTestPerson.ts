@@ -44,7 +44,6 @@ export const delvisUtfyltReisetilskudd: RSSoknad = {
             svartype: 'CHECKBOX_PANEL',
             min: null,
             max: null,
-            pavirkerAndreSporsmal: false,
             kriterieForVisningAvUndersporsmal: null,
             svar: [
                 {
@@ -61,7 +60,6 @@ export const delvisUtfyltReisetilskudd: RSSoknad = {
             svartype: 'JA_NEI',
             min: null,
             max: null,
-            pavirkerAndreSporsmal: false,
             kriterieForVisningAvUndersporsmal: 'JA',
             svar: [
                 {
@@ -77,7 +75,6 @@ export const delvisUtfyltReisetilskudd: RSSoknad = {
                     svartype: 'CHECKBOX_GRUPPE',
                     min: null,
                     max: null,
-                    pavirkerAndreSporsmal: false,
                     kriterieForVisningAvUndersporsmal: null,
                     svar: [],
                     undersporsmal: [
@@ -89,7 +86,6 @@ export const delvisUtfyltReisetilskudd: RSSoknad = {
                             svartype: 'CHECKBOX',
                             min: null,
                             max: null,
-                            pavirkerAndreSporsmal: false,
                             kriterieForVisningAvUndersporsmal: 'CHECKED',
                             svar: [],
                             undersporsmal: [
@@ -101,7 +97,6 @@ export const delvisUtfyltReisetilskudd: RSSoknad = {
                                     svartype: 'BELOP',
                                     min: '0',
                                     max: null,
-                                    pavirkerAndreSporsmal: false,
                                     kriterieForVisningAvUndersporsmal: null,
                                     svar: [],
                                     undersporsmal: [],
@@ -116,7 +111,6 @@ export const delvisUtfyltReisetilskudd: RSSoknad = {
                             svartype: 'CHECKBOX',
                             min: null,
                             max: null,
-                            pavirkerAndreSporsmal: false,
                             kriterieForVisningAvUndersporsmal: null,
                             svar: [],
                             undersporsmal: [],
@@ -134,7 +128,6 @@ export const delvisUtfyltReisetilskudd: RSSoknad = {
             svartype: 'JA_NEI',
             min: null,
             max: null,
-            pavirkerAndreSporsmal: false,
             kriterieForVisningAvUndersporsmal: 'JA',
             svar: [
                 {
@@ -150,7 +143,6 @@ export const delvisUtfyltReisetilskudd: RSSoknad = {
                     svartype: 'DATOER',
                     min: '2020-12-23',
                     max: '2021-01-07',
-                    pavirkerAndreSporsmal: false,
                     kriterieForVisningAvUndersporsmal: null,
                     svar: [],
                     undersporsmal: [],
@@ -163,7 +155,6 @@ export const delvisUtfyltReisetilskudd: RSSoknad = {
                     svartype: 'JA_NEI',
                     min: null,
                     max: null,
-                    pavirkerAndreSporsmal: false,
                     kriterieForVisningAvUndersporsmal: 'JA',
                     svar: [],
                     undersporsmal: [
@@ -175,7 +166,6 @@ export const delvisUtfyltReisetilskudd: RSSoknad = {
                             svartype: 'BELOP',
                             min: '0',
                             max: null,
-                            pavirkerAndreSporsmal: false,
                             kriterieForVisningAvUndersporsmal: null,
                             svar: [],
                             undersporsmal: [],
@@ -190,7 +180,6 @@ export const delvisUtfyltReisetilskudd: RSSoknad = {
                     svartype: 'KILOMETER',
                     min: '0',
                     max: null,
-                    pavirkerAndreSporsmal: false,
                     kriterieForVisningAvUndersporsmal: null,
                     svar: [],
                     undersporsmal: [],
@@ -205,7 +194,6 @@ export const delvisUtfyltReisetilskudd: RSSoknad = {
             svartype: 'KVITTERING',
             min: null,
             max: null,
-            pavirkerAndreSporsmal: false,
             kriterieForVisningAvUndersporsmal: null,
             svar: [],
             undersporsmal: [],
@@ -218,7 +206,6 @@ export const delvisUtfyltReisetilskudd: RSSoknad = {
             svartype: 'JA_NEI',
             min: null,
             max: null,
-            pavirkerAndreSporsmal: false,
             kriterieForVisningAvUndersporsmal: null,
             svar: [
                 {

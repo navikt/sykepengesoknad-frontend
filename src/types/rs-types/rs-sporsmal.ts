@@ -12,7 +12,6 @@ export interface RSSporsmal {
     svartype: RSSvartypeType
     min: string | null
     max: string | null
-    pavirkerAndreSporsmal: boolean
     kriterieForVisningAvUndersporsmal: RSVisningskriterieType | null
     svar: RSSvar[]
     undersporsmal: RSSporsmal[]
@@ -32,7 +31,6 @@ const rsSporsmalMapping = (sporsmal: Sporsmal): RSSporsmal => {
     rsSporsmal.svartype = sporsmal.svartype
     rsSporsmal.min = sporsmal.min
     rsSporsmal.max = sporsmal.max
-    rsSporsmal.pavirkerAndreSporsmal = sporsmal.pavirkerAndreSporsmal
     rsSporsmal.kriterieForVisningAvUndersporsmal = rsVisningskriterie(sporsmal.kriterieForVisningAvUndersporsmal) as any
     rsSporsmal.svar = sporsmal.svarliste.svar.map((svar: RSSvar) => {
         const hentVerdi = () => {
