@@ -179,7 +179,9 @@ function validerSvarverdi(sporsmal: RSSporsmal, svar: RSSvar): void {
             break
 
         case 'KVITTERING':
-            // Implementer validerKvittering(svar.verdi)
+            // Implementer validerKvittering(svar.verdi) // TODO implementer validering
+            predikat = () => true
+
             break
 
         case 'PERIODE':
