@@ -1,4 +1,4 @@
-import { Button, Detail, Heading, LinkPanel, Tag } from '@navikt/ds-react'
+import { Button, LinkPanel, Tag, BodyShort } from '@navikt/ds-react'
 import React from 'react'
 import dayjs from 'dayjs'
 import Link from 'next/link'
@@ -7,7 +7,6 @@ import { cn } from '../../utils/tw-utils'
 import { RSSoknadstatus, RSSoknadstatusType } from '../../types/rs-types/rs-soknadstatus'
 import { RSSoknadmetadata } from '../../types/rs-types/rs-soknadmetadata'
 import { urlTilSoknad } from '../soknad/soknad-link'
-import Vis from '../vis'
 import { RSSoknadstype } from '../../types/rs-types/rs-soknadstype'
 import { tilLesbarDatoMedArstall, tilLesbarPeriodeMedArstall } from '../../utils/dato-utils'
 import { getLedetekst, tekst } from '../../utils/tekster'
@@ -37,18 +36,15 @@ export const ListevisningLenkepanel = ({ soknad, onClick }: { soknad: RSSoknadme
             >
                 <div className="flex gap-3 max-[560px]:flex-col">
                     <div className="grow">
-                        <>
-                            <header>
-                                <Vis
-                                    hvis={soknad.soknadstype !== RSSoknadstype.OPPHOLD_UTLAND}
-                                    render={() => <Detail>{tilLesbarPeriodeMedArstall(soknad.fom, soknad.tom)}</Detail>}
-                                />
-                                <Heading size="small" level="3" className="my-1">
-                                    {teaserTittel(soknad)}
-                                </Heading>
-                            </header>
-                            {periodeListevisning(soknad)}
-                        </>
+                        <LinkPanel.Title>
+                            {soknad.soknadstype !== RSSoknadstype.OPPHOLD_UTLAND && (
+                                <BodyShort size="small" spacing>
+                                    {tilLesbarPeriodeMedArstall(soknad.fom, soknad.tom)}
+                                </BodyShort>
+                            )}
+                            {teaserTittel(soknad)}
+                        </LinkPanel.Title>
+                        <LinkPanel.Description>{periodeListevisning(soknad)}</LinkPanel.Description>
                     </div>
                     <div className="flex shrink-0 items-center">
                         <SoknadTag soknad={soknad} />
