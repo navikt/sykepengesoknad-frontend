@@ -46,9 +46,9 @@ const SykmeldingPerioder = ({ valgtSykmelding }: SykmeldingPerioderProps) => {
                             {tekst('din-sykmelding.periode.tittel')}
                         </Label>
 
-                        <Label size="small">
+                        <BodyShort weight="semibold" size="small">
                             {fom} - {tom} ({dager} dager)
-                        </Label>
+                        </BodyShort>
 
                         <BodyShort>{hentPeriodeTekst(periode)}</BodyShort>
 
