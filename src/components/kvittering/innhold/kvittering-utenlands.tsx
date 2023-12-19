@@ -23,7 +23,12 @@ export const KvitteringUtenlands = () => {
             <GridItems
                 venstre={
                     <div className="flex h-full items-center justify-center">
-                        <InformationSquareFillIcon title="" fontSize="1.5rem" className="text-icon-info" />
+                        <InformationSquareFillIcon
+                            aria-hidden={true}
+                            title=""
+                            fontSize="1.5rem"
+                            className="text-icon-info"
+                        />
                     </div>
                 }
             >

@@ -1,4 +1,4 @@
-import { BodyShort, Label, Modal, ReadMore } from '@navikt/ds-react'
+import { BodyShort, Modal, ReadMore } from '@navikt/ds-react'
 import dayjs from 'dayjs'
 import React, { useState } from 'react'
 
@@ -36,7 +36,13 @@ const FremtidigeSoknaderTeaser = ({ soknad }: SykepengesoknadTeaserProps) => {
                     </BodyShort>
                     <BodyShort spacing>{tekst('soknader.teaser.fremtidig.modal.tekst2')}</BodyShort>
 
-                    <ReadMore header={<Label>{tekst('soknader.teaser.fremtidig.modal.utvidbar.tittel')}</Label>}>
+                    <ReadMore
+                        header={
+                            <BodyShort weight="semibold">
+                                {tekst('soknader.teaser.fremtidig.modal.utvidbar.tittel')}
+                            </BodyShort>
+                        }
+                    >
                         <BodyShort spacing>{tekst('soknader.teaser.fremtidig.modal.utvidbar.tekst')}</BodyShort>
                     </ReadMore>
                 </Modal.Body>
