@@ -16,7 +16,7 @@ export function LenkeMedIkon(props: LenkeProps) {
             <BodyShort className="text-text-action" as="span">
                 {props.text}
             </BodyShort>
-            <ExternalLinkIcon />
+            <ExternalLinkIcon aria-hidden={true} />
         </Link>
     )
 }
