@@ -151,9 +151,13 @@ const radiogruppeSvar = (sporsmal: Sporsmal, verdi: any, verdier: Record<string,
     const undersporsmal = sporsmal.undersporsmal
         .map((uspm) => {
             const erValgt = uspm.sporsmalstekst === verdi
+            const svar = [] as RSSvar[]
+            if (erValgt) {
+                svar.push({ verdi: SvarEnums.CHECKED })
+            }
             const svarliste = {
                 sporsmalId: uspm.id,
-                svar: [{ verdi: erValgt ? SvarEnums.CHECKED : '' }],
+                svar,
             }
             return uspm.copyWith({ svarliste: svarliste })
         })

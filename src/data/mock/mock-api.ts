@@ -40,6 +40,7 @@ import { arbeidstaker } from './data/soknad/arbeidstaker'
 import { arbeidstakerGradert } from './data/soknad/arbeidstaker-gradert'
 import { oppholdUtland } from './data/soknad/opphold-utland'
 import { deepcopyMedNyId } from './deepcopyMedNyId'
+import { mockApiValiderSporsmal } from './mockApiValiderSporsmal'
 
 type session = {
     expires: dayjs.Dayjs
@@ -260,6 +261,12 @@ export async function mockApi(req: NextApiRequest, res: NextApiResponse) {
             if (!spm) {
                 return sendJson({}, 404)
             }
+            const body = await parseRequest<RSSporsmal>(req)
+
+            const validert = mockApiValiderSporsmal(body)
+            if (!validert) {
+                return sendJson({}, 400)
+            }
 
             if (soknadId === soknadSomTriggerSporsmalFinnesIkkeISoknad.id) {
                 return sendJson(
@@ -280,7 +287,6 @@ export async function mockApi(req: NextApiRequest, res: NextApiResponse) {
             if (soknadId === soknadSomTrigger401ForOppdaterSporsmal.id) {
                 return sendJson({}, 401)
             }
-            const body = await parseRequest<RSSporsmal>(req)
 
             const spmIdx = soknaden.sporsmal.findIndex((body) => body.id === sporsmalId)
             soknaden.sporsmal.splice(spmIdx, 1, body)

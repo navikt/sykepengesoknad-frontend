@@ -46,7 +46,7 @@ export const inntektsopplysninger: RSSporsmal = {
             tag: 'INNTEKTSOPPLYSNINGER_NY_I_ARBEIDSLIVET_NEI',
             sporsmalstekst: 'Nei',
             undertekst: null,
-            svartype: 'RADIO_GRUPPE',
+            svartype: 'RADIO',
             min: null,
             max: null,
             pavirkerAndreSporsmal: false,
