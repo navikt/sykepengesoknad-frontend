@@ -32,6 +32,7 @@ const UndersporsmalListe = ({ oversporsmal, oversporsmalSvar }: UndersporsmalLis
                         key={underspm.id}
                         sporsmal={underspm}
                         sporsmalIndex={idx}
+                        erHovedsporsmal={false}
                         erSisteSporsmal={idx === oversporsmal.undersporsmal.length - 1}
                     />
                 ))

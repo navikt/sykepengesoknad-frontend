@@ -2,16 +2,16 @@ import { Radio, RadioGroup } from '@navikt/ds-react'
 import React from 'react'
 import { Controller, useFormContext } from 'react-hook-form'
 
-import { SpmProps } from '../sporsmal-form/sporsmal-form'
 import { hentFeilmelding } from '../sporsmal-utils'
 import UndersporsmalListe from '../undersporsmal/undersporsmal-liste'
 import { EkspanderbarHjelp } from '../../hjelpetekster/ekspanderbar-hjelp/ekspanderbar-hjelp'
 import { NyIArbeidslivertAlert } from '../../hjelpetekster/ny-i-arbeidslivert-alert'
 import { cn } from '../../../utils/tw-utils'
+import { Sporsmal } from '../../../types/types'
 
 import { jaNeiStorStyle, JaNeiStyle } from './ja-nei-stor-style'
 
-const RadioKomp = ({ sporsmal }: SpmProps) => {
+const RadioKomp = ({ sporsmal, erHovedsporsmal }: { sporsmal: Sporsmal; erHovedsporsmal: boolean }) => {
     const {
         formState: { errors },
         watch,
@@ -25,10 +25,11 @@ const RadioKomp = ({ sporsmal }: SpmProps) => {
     const feilmelding = hentFeilmelding(sporsmal)
     const error = errors[sporsmal.id] !== undefined
 
-    const erJaNei =
+    const erHovedJaNei =
         sporsmal.undersporsmal.length == 2 &&
         sporsmal.undersporsmal.some((uspm) => uspm.sporsmalstekst == 'Ja') &&
-        sporsmal.undersporsmal.some((uspm) => uspm.sporsmalstekst == 'Nei')
+        sporsmal.undersporsmal.some((uspm) => uspm.sporsmalstekst == 'Nei') &&
+        erHovedsporsmal
     return (
         <>
             <Controller
@@ -42,18 +43,18 @@ const RadioKomp = ({ sporsmal }: SpmProps) => {
                         description={sporsmal.undertekst}
                         error={errors[sporsmal.id] !== undefined && feilmelding.lokal}
                         key={sporsmal.id}
-                        className={cn({ 'mt-8': !erJaNei })}
+                        className={cn({ 'mt-8': !erHovedJaNei })}
                         data-cy="radio-komp"
                     >
                         <EkspanderbarHjelp sporsmal={sporsmal} key="radio-komp-hjelp" />
 
-                        {!erJaNei &&
+                        {!erHovedJaNei &&
                             sporsmal.undersporsmal.map((uspm) => (
                                 <Radio key={uspm.id} id={uspm.id} value={uspm.sporsmalstekst}>
                                     {uspm.sporsmalstekst}
                                 </Radio>
                             ))}
-                        {erJaNei && (
+                        {erHovedJaNei && (
                             <JaNeiStyle>
                                 <Radio
                                     key={sporsmal.undersporsmal[0].id}

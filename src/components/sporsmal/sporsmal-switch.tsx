@@ -27,8 +27,9 @@ interface SporsmalSwitchProps {
     sporsmal: Sporsmal
     sporsmalIndex: number
     erSisteSporsmal: boolean
+    erHovedsporsmal: boolean
 }
-const SporsmalSwitch = ({ sporsmal, sporsmalIndex, erSisteSporsmal }: SporsmalSwitchProps) => {
+const SporsmalSwitch = ({ sporsmal, sporsmalIndex, erSisteSporsmal, erHovedsporsmal }: SporsmalSwitchProps) => {
     switch (sporsmal.svartype) {
         case RSSvartype.CHECKBOX_PANEL:
             return <CheckboxPanel sporsmal={sporsmal} />
@@ -65,7 +66,7 @@ const SporsmalSwitch = ({ sporsmal, sporsmalIndex, erSisteSporsmal }: SporsmalSw
             return <TallKomp sporsmal={sporsmal} />
 
         case RSSvartype.RADIO_GRUPPE:
-            return <RadioKomp sporsmal={sporsmal} />
+            return <RadioKomp sporsmal={sporsmal} erHovedsporsmal={erHovedsporsmal} />
         case RSSvartype.RADIO_GRUPPE_TIMER_PROSENT:
             return <RadioTimerProsent sporsmal={sporsmal} />
 
