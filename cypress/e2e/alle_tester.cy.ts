@@ -8,6 +8,7 @@ import './run-0/endrefrist-12-mnd.cy'
 import './run-0/slett_kvittering_feiler.cy'
 import './run-0/sortering_av_soknader.cy'
 import './run-0/yrkesskade.cy'
+import './run-0/selvstendig-naringsdrivende.cy'
 
 import './run-1/delvis-utfylt-reisetilskudd.cy'
 import './run-1/delvis-utfylt-soknad.cy'
