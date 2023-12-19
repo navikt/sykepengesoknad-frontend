@@ -68,6 +68,16 @@ export function checkViStolerPåDeg(gåVidere = true) {
     }
 }
 
+export function checkJegHarLestOgSend() {
+    cy.get('form')
+        .findByRole('checkbox', {
+            name: 'Jeg har lest all informasjonen jeg har fått i søknaden og bekrefter at opplysningene jeg har gitt er korrekte.',
+        })
+        .click()
+
+    cy.findByRole('button', { name: 'Send søknaden' }).click()
+}
+
 export function neiOgVidere(titler: string[]) {
     for (let i = 0; i < titler.length; i++) {
         cy.contains(titler[i]).should('be.visible')
@@ -112,6 +122,7 @@ export function sjekkMainContentFokus() {
 export function modalAktiv() {
     cy.get('body').should('have.css', 'overflow', 'hidden')
 }
+
 export function modalIkkeAktiv() {
     cy.get('body').should('not.have.css', 'overflow', 'hidden')
 }
@@ -137,4 +148,49 @@ export function besvarKjenteInntektskilder() {
     ])
 
     cy.contains('Gå videre').click()
+}
+
+export function harFeilISkjemaet(feilmelding: string) {
+    harFlereFeilISkjemaet(1, [feilmelding])
+}
+
+export function harFlereFeilISkjemaet(antall: number, feilmelding: string[]) {
+    cy.get('form')
+        .findByRole('alert')
+        .within(() => {
+            cy.findByRole('region', { name: `Det er ${antall} feil i skjemaet` })
+                .should('be.visible')
+                .within(() => {
+                    cy.findByRole('heading', { name: `Det er ${antall} feil i skjemaet`, level: 2 }).scrollIntoView()
+                    feilmelding.forEach((melding) => cy.contains(melding).should('be.visible'))
+                })
+        })
+}
+
+export function svarRadioSporsmal(sporsmal: string, svar: string) {
+    cy.get('form').within(() => {
+        cy.findByRole('group', { name: sporsmal })
+            .should('be.visible')
+            .within(() => {
+                cy.findByRole('radio', { name: svar }).scrollIntoView()
+                cy.findByRole('radio', { name: svar }).click()
+            })
+    })
+}
+
+export function svarDato(sporsmal: string, svar: string) {
+    cy.get('form').within(() => {
+        cy.findByRole('textbox', { name: sporsmal }).type(svar)
+    })
+}
+
+export function svarCheckboxSporsmal(sporsmal: string, svar: string) {
+    cy.get('form').within(() => {
+        cy.findByRole('group', { name: sporsmal })
+            .should('be.visible')
+            .within(() => {
+                cy.findByRole('checkbox', { name: svar }).scrollIntoView()
+                cy.findByRole('checkbox', { name: svar }).click()
+            })
+    })
 }
