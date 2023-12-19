@@ -12,7 +12,7 @@ const htmlParserOptionsWithReplace: HTMLReactParserOptions = {
                 return (
                     <Link {...domNode.attribs}>
                         {domToReact(domNode.children, htmlParserOptionsWithReplace)}
-                        <ExternalLinkIcon aria-hidden={true}/>
+                        <ExternalLinkIcon aria-hidden={true} />
                     </Link>
                 )
             }
