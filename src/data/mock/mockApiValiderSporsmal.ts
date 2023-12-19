@@ -84,7 +84,7 @@ function validerUndersporsmal(sporsmal: RSSporsmal): void {
         case 'RADIO_GRUPPE_TIMER_PROSENT':
             if (besvarteUndersporsmal.length !== 1) {
                 throw new Error(
-                    `Spørsmål ${sporsmal.id} av typen ${sporsmal.svartype} må ha eksakt ett besvart underspørsmål`,
+                    `Spørsmål ${sporsmal.id} av typen ${sporsmal.svartype} må ha eksakt ett besvart underspørsmål, men har ${besvarteUndersporsmal.length}`,
                 )
             }
             besvarteUndersporsmal.forEach((usp) => mockApiValiderSporsmal(usp))
