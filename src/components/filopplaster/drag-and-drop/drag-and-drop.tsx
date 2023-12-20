@@ -55,8 +55,7 @@ const DragAndDrop = ({ valgtFil, setValgtFil }: DragAndDropProps) => {
                 <Button
                     className="w-full p-6"
                     variant="secondary"
-                    aria-hidden
-                    icon={<ReceiptIcon aria-hidden />}
+                    icon={<ReceiptIcon aria-hidden={true} />}
                     onClick={(e) => {
                         e.preventDefault()
                     }}
