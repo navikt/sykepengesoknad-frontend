@@ -43,7 +43,6 @@ export function skapSporsmal(spm: RSSporsmal, kriterie: RSVisningskriterieType |
         spm.svartype as any as RSSvartype,
         spm.min,
         spm.max,
-        spm.pavirkerAndreSporsmal,
         spm.kriterieForVisningAvUndersporsmal as any,
         svarliste,
         undersporsmal,

@@ -40,7 +40,6 @@ export const kortArbeidstakerSoknad: RSSoknad = {
             svartype: 'CHECKBOX_PANEL',
             min: null,
             max: null,
-            pavirkerAndreSporsmal: false,
             kriterieForVisningAvUndersporsmal: null,
             svar: [],
             undersporsmal: [],
@@ -54,7 +53,6 @@ export const kortArbeidstakerSoknad: RSSoknad = {
             svartype: 'JA_NEI',
             min: null,
             max: null,
-            pavirkerAndreSporsmal: true,
             kriterieForVisningAvUndersporsmal: 'JA',
             svar: [],
             undersporsmal: [
@@ -66,7 +64,6 @@ export const kortArbeidstakerSoknad: RSSoknad = {
                     svartype: 'DATO',
                     min: '2020-05-20',
                     max: '2020-06-05',
-                    pavirkerAndreSporsmal: true,
                     kriterieForVisningAvUndersporsmal: null,
                     svar: [],
                     undersporsmal: [],

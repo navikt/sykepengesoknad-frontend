@@ -57,7 +57,6 @@ export class Sporsmal extends ObjectCopier {
         readonly svartype: RSSvartype,
         readonly min: string | null,
         readonly max: string | null,
-        readonly pavirkerAndreSporsmal: boolean,
         readonly kriterieForVisningAvUndersporsmal: string,
         readonly svarliste: RSSvarliste,
         readonly undersporsmal: ReadonlyArray<Sporsmal>,

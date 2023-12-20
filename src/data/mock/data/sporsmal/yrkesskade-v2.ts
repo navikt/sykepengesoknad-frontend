@@ -8,7 +8,6 @@ export const yrkesskadeV2Sporsmal: RSSporsmal = {
     svartype: 'JA_NEI',
     min: null,
     max: null,
-    pavirkerAndreSporsmal: false,
     kriterieForVisningAvUndersporsmal: 'JA',
     svar: [],
     undersporsmal: [
@@ -20,7 +19,6 @@ export const yrkesskadeV2Sporsmal: RSSporsmal = {
             svartype: 'CHECKBOX_GRUPPE',
             min: null,
             max: null,
-            pavirkerAndreSporsmal: false,
             kriterieForVisningAvUndersporsmal: null,
             svar: [],
             undersporsmal: [
@@ -32,7 +30,6 @@ export const yrkesskadeV2Sporsmal: RSSporsmal = {
                     svartype: 'CHECKBOX',
                     min: null,
                     max: null,
-                    pavirkerAndreSporsmal: false,
                     kriterieForVisningAvUndersporsmal: null,
                     svar: [],
                     undersporsmal: [],
@@ -45,7 +42,6 @@ export const yrkesskadeV2Sporsmal: RSSporsmal = {
                     svartype: 'CHECKBOX',
                     min: null,
                     max: null,
-                    pavirkerAndreSporsmal: false,
                     kriterieForVisningAvUndersporsmal: null,
                     svar: [],
                     undersporsmal: [],

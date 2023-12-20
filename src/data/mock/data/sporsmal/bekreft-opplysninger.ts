@@ -11,7 +11,6 @@ export const bekreftOpplysninger = (svar: RSSvar[] = []): RSSporsmal => {
         svartype: 'CHECKBOX_PANEL',
         min: null,
         max: null,
-        pavirkerAndreSporsmal: false,
         kriterieForVisningAvUndersporsmal: null,
         svar,
         undersporsmal: [],
