@@ -130,14 +130,14 @@ export const flattenSporsmal = (sporsmal: RSSporsmal[]) => {
 function maaDokumentereInntektsopplysninger(soknad: RSSoknad): boolean {
     const nyIArbeidslivetJa =
         flattenSporsmal(soknad.sporsmal).find((spm) => spm.tag === 'INNTEKTSOPPLYSNINGER_NY_I_ARBEIDSLIVET_JA')?.svar[0]
-            .verdi === 'CHECKED'
+            ?.verdi === 'CHECKED'
     if (nyIArbeidslivetJa) return true
     const nyIArbeidslivetNei =
-        soknad.sporsmal.find((spm) => spm.tag === 'INNTEKTSOPPLYSNINGER_NY_I_ARBEIDSLIVET_NEI')?.svar[0].verdi ===
-        'CHECKED'
+        flattenSporsmal(soknad.sporsmal).find((spm) => spm.tag === 'INNTEKTSOPPLYSNINGER_NY_I_ARBEIDSLIVET_NEI')
+            ?.svar[0]?.verdi === 'CHECKED'
     const varigEndring25ProsentJa =
-        soknad.sporsmal.find((spm) => spm.tag === 'INNTEKTSOPPLYSNINGER_VARIG_ENDRING_25_PROSENT')?.svar[0].verdi ===
-        'JA'
+        flattenSporsmal(soknad.sporsmal).find((spm) => spm.tag === 'INNTEKTSOPPLYSNINGER_VARIG_ENDRING_25_PROSENT')
+            ?.svar[0]?.verdi === 'JA'
     return nyIArbeidslivetNei && varigEndring25ProsentJa
 }
 
