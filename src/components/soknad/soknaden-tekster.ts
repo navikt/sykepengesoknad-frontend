@@ -116,7 +116,7 @@ const SoknadenTekster = {
     'sykepengesoknad.medlemskap_opphold_utenfor_norge.tittel': 'Opphold utenfor Norge',
     'sykepengesoknad.medlemskap_utfort_arbeid_utenfor_norge.tittel': 'Arbeid utenfor Norge',
 
-    'sykepengesoknad.kjente_inntektskilder.tittel': 'Inntekskilder hentet fra Arbeidsgiver- og arbeidstakerregisteret',
+    'sykepengesoknad.kjente_inntektskilder.tittel': 'Inntektskilder hentet fra Arbeidsgiver- og arbeidstakerregisteret',
 
     'sykepengesoknad.inntektsopplysninger_ny_i_arbeidslivet.tittel': 'Ny i arbeidslivet',
 }
