@@ -192,7 +192,7 @@ const OpplastingForm = ({ valgtSoknad, setOpenModal, openModal }: OpplastingFrom
                 />
 
                 <div className="mt-4">
-                    <Label>{tekst('drag_and_drop.label')}</Label>
+                    <Label as="p">{tekst('drag_and_drop.label')}</Label>
                     <DragAndDrop valgtFil={valgtFil} setValgtFil={setValgtFil} />
                 </div>
                 {feilmelding && (

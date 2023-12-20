@@ -77,7 +77,7 @@ const GruppeAvUndersporsmal = ({ sporsmal, sporsmalIndex, erSisteSporsmal }: Gru
             {kanSlette && (
                 <Button
                     size="small"
-                    icon={<TrashIcon />}
+                    icon={<TrashIcon aria-hidden={true} />}
                     variant="danger"
                     className="my-4 flex"
                     type="button"
@@ -90,7 +90,7 @@ const GruppeAvUndersporsmal = ({ sporsmal, sporsmalIndex, erSisteSporsmal }: Gru
 
             {kanLeggeTil && (
                 <Button
-                    icon={<PlusIcon />}
+                    icon={<PlusIcon aria-hidden={true} />}
                     type="button"
                     size="small"
                     variant="tertiary"

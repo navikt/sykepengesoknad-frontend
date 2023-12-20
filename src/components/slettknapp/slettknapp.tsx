@@ -46,7 +46,7 @@ const Slettknapp = ({ sporsmal, kvittering }: SlettknappProps) => {
             <Button
                 type="button"
                 variant="tertiary"
-                icon={<TrashIcon />}
+                icon={<TrashIcon aria-hidden={true} />}
                 iconPosition="right"
                 onClick={(e) => {
                     e.preventDefault()

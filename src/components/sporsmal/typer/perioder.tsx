@@ -59,7 +59,7 @@ const Perioder = ({ sporsmal }: SpmProps) => {
                 render={() => (
                     <Button
                         type="button"
-                        icon={<PlusIcon />}
+                        icon={<PlusIcon aria-hidden={true} />}
                         size="small"
                         variant="tertiary"
                         className="mt-4"

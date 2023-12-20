@@ -32,7 +32,7 @@ const TilbakeKnapp = () => {
                     })
                 }}
             >
-                <ArrowLeftIcon />
+                <ArrowLeftIcon aria-hidden={true} />
                 <BodyShort as="span">{tekst('soknad.tilbakeknapp')}</BodyShort>
             </Link>
         </NextLink>

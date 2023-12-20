@@ -143,7 +143,12 @@ const Arbeidstaker = () => {
             <GridItems
                 venstre={
                     <div className="flex h-full items-center justify-center border-b border-b-border-default bg-surface-success-subtle">
-                        <CheckmarkCircleFillIcon title="" fontSize="1.5rem" className="text-icon-success" />
+                        <CheckmarkCircleFillIcon
+                            aria-hidden={true}
+                            title=""
+                            fontSize="1.5rem"
+                            className="text-icon-success"
+                        />
                     </div>
                 }
                 hoyre={<div className="h-full border-b border-b-border-default bg-surface-success-subtle" />}

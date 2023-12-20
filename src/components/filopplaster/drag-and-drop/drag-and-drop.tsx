@@ -50,13 +50,12 @@ const DragAndDrop = ({ valgtFil, setValgtFil }: DragAndDropProps) => {
                 )}
             />
 
-            <div data-cy="filopplasteren" {...getRootProps()}>
+            <div data-cy="filopplasteren" {...getRootProps()} role="button" tabIndex={0}>
                 <input {...getInputProps()} accept={tillatteFiltyper} id="ddfil" type="file" />
                 <Button
                     className="w-full p-6"
                     variant="secondary"
-                    aria-hidden
-                    icon={<ReceiptIcon aria-hidden />}
+                    icon={<ReceiptIcon aria-hidden={true} />}
                     onClick={(e) => {
                         e.preventDefault()
                     }}

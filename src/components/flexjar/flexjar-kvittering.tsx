@@ -1,4 +1,4 @@
-import { Label } from '@navikt/ds-react'
+import { BodyShort } from '@navikt/ds-react'
 import React, { useState } from 'react'
 
 import { cn } from '../../utils/tw-utils'
@@ -132,7 +132,9 @@ const EmojiButton = (props: EmojiButtonProps) => {
             onClick={handleOnClick}
         >
             <props.Emoji fill={isActive ? props.color : undefined} />
-            <Label className="cursor-pointer">{props.text}</Label>
+            <BodyShort weight="semibold" className="cursor-pointer">
+                {props.text}
+            </BodyShort>
         </button>
     )
 }

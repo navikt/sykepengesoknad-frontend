@@ -1,4 +1,4 @@
-import { Heading, Label, Select } from '@navikt/ds-react'
+import { Heading, Select, BodyShort } from '@navikt/ds-react'
 import React, { useState } from 'react'
 
 import { RSSoknadstatus } from '../../types/rs-types/rs-soknadstatus'
@@ -81,7 +81,7 @@ const Teasere = ({ soknader, tittel, tomListeTekst, kanSorteres = false }: Sokna
                         return <ListevisningLenkepanel key={idx} soknad={soknad} />
                 }
             })}
-            <Vis hvis={soknader.length === 0} render={() => <Label>{tomListeTekst}</Label>} />
+            <Vis hvis={soknader.length === 0} render={() => <BodyShort weight="semibold">{tomListeTekst}</BodyShort>} />
         </div>
     )
 }

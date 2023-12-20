@@ -63,6 +63,7 @@ const PeriodeKomp = ({ sporsmal, index, slettPeriode }: AllProps) => {
     return (
         <li id={id} data-cy="periode">
             <fieldset className="axe-exclude p-0">
+                <legend className="sr-only">Periodevelger</legend>
                 <DatePicker
                     {...datepickerProps}
                     locale="nb"
