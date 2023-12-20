@@ -28,6 +28,7 @@ export class RSSoknadmetadata {
     readonly soknadPerioder: RSSoknadsperiode[]
     readonly merknaderFraSykmelding?: RSMerknad[]
     readonly opprettetAvInntektsmelding: boolean
+    readonly forstegangssoknad?: boolean
 
     constructor(json: any) {
         this.id = json.id
@@ -55,5 +56,6 @@ export class RSSoknadmetadata {
         this.soknadPerioder = json.soknadPerioder
         this.merknaderFraSykmelding = json.merknaderFraSykmelding
         this.opprettetAvInntektsmelding = json.opprettetAvInntektsmelding
+        this.forstegangssoknad = json.forstegangssoknad
     }
 }

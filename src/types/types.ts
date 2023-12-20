@@ -42,6 +42,7 @@ export class Soknad extends ObjectCopier {
         readonly klippet: boolean,
         readonly inntektskilderDataFraInntektskomponenten?: ReadonlyArray<ArbeidsforholdFraInntektskomponenten>,
         readonly korrigeringsfristUtlopt?: boolean,
+        readonly forstegangssoknad?: boolean,
     ) {
         super()
     }

@@ -112,5 +112,6 @@ export function rsToSoknad(soknad: RSSoknad): Soknad {
         soknad.klippet,
         soknad.inntektskilderDataFraInntektskomponenten,
         soknad.korrigeringsfristUtlopt,
+        soknad.forstegangssoknad,
     )
 }
