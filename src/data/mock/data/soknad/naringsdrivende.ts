@@ -20,6 +20,7 @@ export const naringsdrivendeSoknad: RSSoknad = {
     arbeidsgiver: null,
     korrigerer: null,
     korrigertAv: null,
+    forstegangssoknad: true,
     arbeidssituasjon: 'NAERINGSDRIVENDE',
     merknaderFraSykmelding: [],
     soknadPerioder: [
