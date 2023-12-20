@@ -14,6 +14,7 @@ import { KvtteringPanel } from '../kvittering-panel'
 import GridItems from '../grid-items'
 
 import { SendInntektsopplysningerForSelvstendigNæringsdrivende } from './SendInntektsopplysningerForSelvstendigNaringsdrivende'
+import { EttersendDokumenterForSelvstendigNaringsdrivende } from './EttersendDokumenterForSelvstendigNaringsdrivende'
 
 const KvitteringVidere = () => {
     const { valgtSoknad } = useSoknadMedDetaljer()
@@ -26,10 +27,16 @@ const KvitteringVidere = () => {
 
     return (
         <KvtteringPanel>
-            {valgtSoknad.arbeidssituasjon === RSArbeidssituasjon.NAERINGSDRIVENDE && (
+            {valgtSoknad.arbeidssituasjon === RSArbeidssituasjon.NAERINGSDRIVENDE && valgtSoknad.forstegangssoknad && (
                 <>
                     <div className="mt-8 col-span-12"></div>
-                    <SendInntektsopplysningerForSelvstendigNæringsdrivende />
+
+                    {!valgtSoknad.inntektsopplysningerNyKvittering && (
+                        <SendInntektsopplysningerForSelvstendigNæringsdrivende />
+                    )}
+                    {valgtSoknad.inntektsopplysningerNyKvittering && valgtSoknad.inntektsopplysningerInnsendingId && (
+                        <EttersendDokumenterForSelvstendigNaringsdrivende soknad={valgtSoknad} />
+                    )}
                 </>
             )}
             <GridItems>

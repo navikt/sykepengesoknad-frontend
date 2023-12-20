@@ -19,6 +19,8 @@ import { jsonDeepCopy } from '../../utils/json-deep-copy'
 import { RSSoknadstype } from '../../types/rs-types/rs-soknadstype'
 import { RSSoknadstatus } from '../../types/rs-types/rs-soknadstatus'
 import { RSSvar } from '../../types/rs-types/rs-svar'
+import { RSArbeidssituasjon } from '../../types/rs-types/rs-arbeidssituasjon'
+import { InntektsopplysningerDokumentType } from '../../types/rs-types/inntektsopplysninger-dokument-type'
 
 import { arbeidstakerSoknadOpprettetAvInntektsmelding } from './data/personas/opprettet-av-inntektsmelding'
 import { Persona } from './data/personas/personas'
@@ -114,6 +116,48 @@ async function parseRequest<T>(req: NextApiRequest): Promise<T> {
 
 async function sleep(ms: number): Promise<void> {
     return new Promise((resolve) => setTimeout(resolve, ms))
+}
+
+export const flattenSporsmal = (sporsmal: RSSporsmal[]) => {
+    let flatArr: RSSporsmal[] = []
+    for (let i = 0; i < sporsmal.length; i++) {
+        flatArr.push(sporsmal[i])
+        flatArr = flatArr.concat(flattenSporsmal(sporsmal[i].undersporsmal))
+    }
+    return flatArr
+}
+
+function maaDokumentereInntektsopplysninger(soknad: RSSoknad): boolean {
+    const nyIArbeidslivetJa =
+        flattenSporsmal(soknad.sporsmal).find((spm) => spm.tag === 'INNTEKTSOPPLYSNINGER_NY_I_ARBEIDSLIVET_JA')?.svar[0]
+            ?.verdi === 'CHECKED'
+    if (nyIArbeidslivetJa) return true
+    const nyIArbeidslivetNei =
+        flattenSporsmal(soknad.sporsmal).find((spm) => spm.tag === 'INNTEKTSOPPLYSNINGER_NY_I_ARBEIDSLIVET_NEI')
+            ?.svar[0]?.verdi === 'CHECKED'
+    const varigEndring25ProsentJa =
+        flattenSporsmal(soknad.sporsmal).find((spm) => spm.tag === 'INNTEKTSOPPLYSNINGER_VARIG_ENDRING_25_PROSENT')
+            ?.svar[0]?.verdi === 'JA'
+    return nyIArbeidslivetNei && varigEndring25ProsentJa
+}
+
+function handterNaringsdrivendeOpplysninger(soknaden: RSSoknad) {
+    if (soknaden.arbeidssituasjon != RSArbeidssituasjon.NAERINGSDRIVENDE) {
+        return
+    }
+    if (!['SELVSTENDIGE_OG_FRILANSERE', 'GRADERT_REISETILSKUDD'].includes(soknaden.soknadstype)) {
+        return
+    }
+    if (!soknaden.forstegangssoknad) {
+        return
+    }
+    const erNyKvittering = soknaden.sporsmal.some((spm) => spm.tag === 'INNTEKTSOPPLYSNINGER_NY_I_ARBEIDSLIVET')
+    const maaDokumentere = maaDokumentereInntektsopplysninger(soknaden)
+    soknaden.inntektsopplysningerNyKvittering = erNyKvittering
+    soknaden.inntektsopplysningerInnsendingId = maaDokumentere ? uuid.v4() : undefined
+    soknaden.inntektsopplysningerInnsendingDokumenter = maaDokumentere
+        ? [InntektsopplysningerDokumentType.NARINGSSPESIFIKASJON_OPTIONAL]
+        : undefined
 }
 
 export async function mockApi(req: NextApiRequest, res: NextApiResponse) {
@@ -326,6 +370,7 @@ export async function mockApi(req: NextApiRequest, res: NextApiResponse) {
             if ([RSMottaker.ARBEIDSGIVER_OG_NAV, RSMottaker.NAV].includes(sendesTil)) {
                 soknaden.sendtTilNAVDato = tidspunkt
             }
+            handterNaringsdrivendeOpplysninger(soknaden)
             soknaden.status = 'SENDT'
             return sendJson({ status: 200 }, 200)
         },
