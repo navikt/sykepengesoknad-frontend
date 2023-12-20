@@ -47,7 +47,7 @@ const Listevisning = () => {
                 <>
                     <div className="mb-12">
                         <Skeleton variant="rectangle" className="mb-6" width="25%" height="32px" />
-                        <Skeleton variant="rectangle" className="h-[130px] max-[560px]:h-[142px]" />
+                        <Skeleton variant="rectangle" className="h-[138px] max-[560px]:h-[150px]" />
                     </div>
                 </>
             )}
