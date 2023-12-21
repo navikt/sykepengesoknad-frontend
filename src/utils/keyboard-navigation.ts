@@ -82,16 +82,17 @@ export function useGruppeAvundersporsmalKeyboardNavigation(sporsmal: Sporsmal) {
                     const sluttetJa = alleSpm.find((spm) => spm.tag === 'KJENTE_INNTEKTSKILDER_SLUTTET_NEI')
                     if (sluttetJa) {
                         document.getElementById(sluttetJa.id)?.click()
+                        window.setTimeout(() => {
+                            const utfortArbeid = alleSpm.find(
+                                (spm) => spm.tag === 'KJENTE_INNTEKTSKILDER_UTFORT_ARBEID',
+                            )
+                            if (utfortArbeid) {
+                                const inputfelt = document.getElementById(utfortArbeid.id + '_0') as HTMLInputElement
+                                inputfelt.click()
+                                inputfelt.focus()
+                            }
+                        }, 20)
                     }
-
-                    window.setTimeout(() => {
-                        const utfortArbeid = alleSpm.find((spm) => spm.tag === 'KJENTE_INNTEKTSKILDER_UTFORT_ARBEID')
-                        if (utfortArbeid) {
-                            const inputfelt = document.getElementById(utfortArbeid.id + '_0') as HTMLInputElement
-                            inputfelt.click()
-                            inputfelt.focus()
-                        }
-                    }, 20)
                 }
             }
         }
@@ -100,4 +101,49 @@ export function useGruppeAvundersporsmalKeyboardNavigation(sporsmal: Sporsmal) {
             window.removeEventListener('keydown', handleKeyDown)
         }
     }, [sporsmal.id, sporsmal.tag, sporsmal.undersporsmal])
+}
+
+export function useRadiogruppeKeyboardNavigation(sporsmal: Sporsmal, erHovedsporsmal: boolean) {
+    useEffect(() => {
+        if (isProd() || !erHovedsporsmal) {
+            return
+        }
+        const handleKeyDown = (event: KeyboardEvent) => {
+            if (aktivtElementErInputEllerTextarea()) {
+                return
+            }
+
+            if (event.key === 'j') {
+                if (sporsmal.tag === 'INNTEKTSOPPLYSNINGER_NY_I_ARBEIDSLIVET') {
+                    const alleSpm = flattenSporsmal(sporsmal.undersporsmal)
+                    const jaSpm = alleSpm.find((spm) => spm.tag === 'INNTEKTSOPPLYSNINGER_NY_I_ARBEIDSLIVET_JA')
+                    if (jaSpm) {
+                        document.getElementById(jaSpm.id)?.click()
+                    }
+                }
+            }
+            if (event.key === 'n') {
+                if (sporsmal.tag === 'INNTEKTSOPPLYSNINGER_NY_I_ARBEIDSLIVET') {
+                    const alleSpm = flattenSporsmal(sporsmal.undersporsmal)
+                    const neiSpm = alleSpm.find((spm) => spm.tag === 'INNTEKTSOPPLYSNINGER_NY_I_ARBEIDSLIVET_NEI')
+                    if (neiSpm) {
+                        document.getElementById(neiSpm.id)?.click()
+
+                        window.setTimeout(() => {
+                            const varigEndring = alleSpm.find((spm) => spm.tag === 'INNTEKTSOPPLYSNINGER_VARIG_ENDRING')
+                            if (varigEndring) {
+                                const inputfelt = document.getElementById(varigEndring.id + '_1') as HTMLInputElement
+                                inputfelt.click()
+                                inputfelt.focus()
+                            }
+                        }, 20)
+                    }
+                }
+            }
+        }
+        window.addEventListener('keydown', handleKeyDown)
+        return () => {
+            window.removeEventListener('keydown', handleKeyDown)
+        }
+    }, [erHovedsporsmal, sporsmal.id, sporsmal.tag, sporsmal.undersporsmal])
 }
