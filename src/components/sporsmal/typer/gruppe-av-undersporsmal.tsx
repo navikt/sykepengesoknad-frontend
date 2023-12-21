@@ -11,6 +11,7 @@ import { useSlettUndersporsmal } from '../../../hooks/useSlettUndersporsmal'
 import { settSvar } from '../sett-svar'
 import UndersporsmalListe from '../undersporsmal/undersporsmal-liste'
 import { EkspanderbarHjelp } from '../../hjelpetekster/ekspanderbar-hjelp/ekspanderbar-hjelp'
+import { useGruppeAvundersporsmalKeyboardNavigation } from '../../../utils/keyboard-navigation'
 
 interface GruppeAvUndersporsmalProps {
     sporsmal: Sporsmal
@@ -29,7 +30,7 @@ const GruppeAvUndersporsmal = ({ sporsmal, sporsmalIndex, erSisteSporsmal }: Gru
     const erMedlemskap = sporsmal.tag.includes('MEDLEMSKAP')
     const kanSlette = erMedlemskap && (sporsmalIndex > 0 || !erSisteSporsmal)
     const kanLeggeTil = erMedlemskap && erSisteSporsmal
-
+    useGruppeAvundersporsmalKeyboardNavigation(sporsmal)
     const leggTil = async () => {
         if (oppdatererSporsmal || leggerTil) {
             return
