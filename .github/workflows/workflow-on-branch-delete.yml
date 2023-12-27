@@ -3,7 +3,7 @@ on: delete
 
 jobs:
   branch-delete:
-    uses: navikt/flex-github-actions-workflows/.github/workflows/demo-delete.yml@master
+    uses: navikt/flex-github-actions-workflows/.github/workflows/demo-delete.yml@main
     permissions:
       id-token: write
     with:
