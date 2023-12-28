@@ -46,5 +46,5 @@ export const hentEgenmeldingsdager = (valgtSykmelding: Sykmelding) => {
     if (!svar) return undefined
 
     const datoer: string[] = JSON.parse(svar)
-    return datoer.map((d) => tilLesbarDatoUtenAarstall(d))
+    return datoer.sort().map((d) => tilLesbarDatoUtenAarstall(d))
 }
