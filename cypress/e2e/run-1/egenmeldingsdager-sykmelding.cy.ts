@@ -10,8 +10,8 @@ describe('Tester egenmeldingsdager i fra sykmelding', () => {
             .siblings()
             .first()
             .within(() => {
-                cy.get('li').contains('6. mars')
-                cy.get('li').contains('26. februar')
+                cy.get('li').first().contains('20. februar')
+                cy.get('li').last().contains('10. mars')
             })
     })
 })
