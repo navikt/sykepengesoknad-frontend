@@ -41,14 +41,14 @@ const CheckboxKomp = ({ sporsmal }: SpmProps) => {
                         description={undertekst(sporsmal.undertekst)}
                         error={errors[sporsmal.id] !== undefined && feilmelding.lokal}
                     >
-                        <div className="mt-4 space-y-2">
+                        <div className="mt-4">
                             {sporsmal.undersporsmal.map((uspm) => {
                                 const erChecked = watchCheckbox?.includes(uspm.sporsmalstekst)
                                 return (
                                     <Fragment key={uspm.id + '_fragment'}>
                                         <div
                                             className={cn('flex items-center gap-4', {
-                                                'bx-4 rounded-lg bg-gray-50 w-full md:max-w-[320px]':
+                                                'bx-4 mt-2 rounded-lg bg-gray-50 w-full md:max-w-[320px]':
                                                     checkboxesSkalHaSpesiellStyling(sporsmal.tag),
                                             })}
                                         >
