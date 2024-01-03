@@ -1,5 +1,5 @@
 import { Link } from '@navikt/ds-react'
-import parser, { domToReact, Element, HTMLReactParserOptions } from 'html-react-parser'
+import parser, { DOMNode, domToReact, Element, HTMLReactParserOptions } from 'html-react-parser'
 import React from 'react'
 import { ExternalLinkIcon } from '@navikt/aksel-icons'
 
@@ -11,7 +11,7 @@ const htmlParserOptionsWithReplace: HTMLReactParserOptions = {
             if (domNode.name === 'a' && domNode.attribs.href) {
                 return (
                     <Link {...domNode.attribs}>
-                        {domToReact(domNode.children, htmlParserOptionsWithReplace)}
+                        {domToReact(domNode.children as DOMNode[], htmlParserOptionsWithReplace)}
                         <ExternalLinkIcon aria-hidden={true} />
                     </Link>
                 )
@@ -19,7 +19,7 @@ const htmlParserOptionsWithReplace: HTMLReactParserOptions = {
             if (domNode.name === 'li') {
                 return (
                     <li className="mt-2" {...domNode.attribs}>
-                        {domToReact(domNode.children, htmlParserOptionsWithReplace)}
+                        {domToReact(domNode.children as DOMNode[], htmlParserOptionsWithReplace)}
                     </li>
                 )
             }
