@@ -41,6 +41,7 @@ export function useAvbryt() {
                 variables.valgtSoknad.status === RSSoknadstatus.UTKAST_TIL_KORRIGERING
             ) {
                 await queryClient.invalidateQueries(['soknader'])
+                queryClient.removeQueries({ queryKey: ['soknad', variables.valgtSoknad.id] })
                 await router.push('/')
             } else {
                 await queryClient.invalidateQueries(['soknad', variables.valgtSoknad.id])
