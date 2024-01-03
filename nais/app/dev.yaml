@@ -6,7 +6,7 @@ env:
   ENVIRONMENT: q1
   SYKEFRAVAER_URL: https://www.ekstern.dev.nav.no/syk/sykefravaer
   SYKMELDINGER_URL: https://www.ekstern.dev.nav.no/syk/sykmeldinger
-  MINSIDE_URL: https://www.dev.nav.no/minside/
+  MINSIDE_URL: https://www.intern.dev.nav.no/minside/
   DECORATOR_ENV: dev
   ASSET_PREFIX: https://cdn.nav.no/flex/sykepengesoknad-frontend
   VEDLIKEHOLD: false
@@ -15,5 +15,6 @@ env:
   SYKEPENGESOKNAD_KVITTERINGER_CLIENT_ID: dev-gcp:flex:sykepengesoknad-kvitteringer
   SOKOS_KONTOREGISTER_PERSON_CLIENT_ID: dev-gcp:okonomi:sokos-kontoregister-person
   FLEXJAR_BACKEND_CLIENT_ID: dev-gcp:flex:flexjar-backend
+  SEND_INN_URL: https://www.intern.dev.nav.no/sendinn
 external-host:
   - flex-unleash-api.nav.cloud.nais.io

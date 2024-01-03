@@ -56,3 +56,6 @@ export function naisAppName() {
 export function basePath() {
     return publicRuntimeConfig.basePath
 }
+export function sendInnUrl() {
+    return publicRuntimeConfig.sendInnUrl
+}
