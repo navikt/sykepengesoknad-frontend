@@ -5,7 +5,6 @@ import { ExternalLinkIcon } from '@navikt/aksel-icons'
 import { logEvent } from '../../amplitude/amplitude'
 import GridItems from '../grid-items'
 import { Soknad } from '../../../types/types'
-import { InntektsopplysningerDokumentType } from '../../../types/rs-types/inntektsopplysninger-dokument-type'
 
 export function EttersendDokumenterForSelvstendigNaringsdrivende({ soknad }: { soknad: Soknad }) {
     useEffect(() => {
@@ -14,23 +13,6 @@ export function EttersendDokumenterForSelvstendigNaringsdrivende({ soknad }: { s
             component: 'Gå til opplasting av dokumentasjon knapp',
         })
     }, [])
-
-    function dokumenttypeTilTekst(dokumenttype: InntektsopplysningerDokumentType): string {
-        switch (dokumenttype) {
-            case InntektsopplysningerDokumentType.SKATTEMELDING:
-                return 'Skattemelding'
-            case InntektsopplysningerDokumentType.SKATTEMELDING_OPTIONAL:
-                return 'Skattemelding hvis den er klar'
-            case InntektsopplysningerDokumentType.NARINGSSPESIFIKASJON:
-                return 'Næringsoppgave/Næringsspessifikasjon'
-            case InntektsopplysningerDokumentType.NARINGSSPESIFIKASJON_OPTIONAL:
-                return 'Næringsoppgave/Næringsspessifikasjon hvis den er klar'
-            case InntektsopplysningerDokumentType.REGNSKAP_FORRIGE_AAR:
-                return 'Regnskap for siste år'
-            case InntektsopplysningerDokumentType.REGNSKAP_FORELOPIG:
-                return 'Foreløpig regnskap for i år'
-        }
-    }
 
     return (
         <>
@@ -46,7 +28,7 @@ export function EttersendDokumenterForSelvstendigNaringsdrivende({ soknad }: { s
                     </BodyLong>
                     <List title="Vi trenger følgende dokumenter">
                         {soknad.inntektsopplysningerInnsendingDokumenter?.map((dokument) => (
-                            <List.Item key={dokument}>{dokumenttypeTilTekst(dokument)}</List.Item>
+                            <List.Item key={dokument}>{dokument}</List.Item>
                         ))}
                     </List>
 

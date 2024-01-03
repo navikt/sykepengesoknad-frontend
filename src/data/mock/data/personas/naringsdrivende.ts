@@ -1,7 +1,6 @@
 import { naringsdrivendeSoknad } from '../soknad/naringsdrivende'
 import { naringsdrivende100syk } from '../sykmeldinger'
 import { deepcopyMedNyId } from '../../deepcopyMedNyId'
-import { InntektsopplysningerDokumentType } from '../../../../types/rs-types/inntektsopplysninger-dokument-type'
 
 import { Persona } from './personas'
 
@@ -26,8 +25,8 @@ const sendtSoknadNyKvitteringMedDokumenter = deepcopyMedNyId(
 sendtSoknadNyKvitteringMedDokumenter.inntektsopplysningerNyKvittering = true
 sendtSoknadNyKvitteringMedDokumenter.inntektsopplysningerInnsendingId = '1234'
 sendtSoknadNyKvitteringMedDokumenter.inntektsopplysningerInnsendingDokumenter = [
-    InntektsopplysningerDokumentType.SKATTEMELDING,
-    InntektsopplysningerDokumentType.NARINGSSPESIFIKASJON_OPTIONAL,
+    'Skattemelding',
+    'Næringsoppgave/Næringsspessifikasjon hvis den er klar',
 ]
 
 export const selvstendigNaringsdrivendeSendt: Persona = {
