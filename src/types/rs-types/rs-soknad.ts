@@ -7,7 +7,6 @@ import { RSSoknadstatusType } from './rs-soknadstatus'
 import { RSSoknadstypeType } from './rs-soknadstype'
 import { RSSporsmal } from './rs-sporsmal'
 import { ArbeidsforholdFraInntektskomponenten } from './rs-arbeidsforholdfrainntektskomponenten'
-import { InntektsopplysningerDokumentType } from './inntektsopplysninger-dokument-type'
 
 export interface RSSoknad {
     id: string
@@ -38,5 +37,5 @@ export interface RSSoknad {
     forstegangssoknad?: boolean
     inntektsopplysningerNyKvittering?: boolean
     inntektsopplysningerInnsendingId?: string
-    inntektsopplysningerInnsendingDokumenter?: InntektsopplysningerDokumentType[]
+    inntektsopplysningerInnsendingDokumenter?: string[]
 }

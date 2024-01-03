@@ -8,7 +8,6 @@ import { RSSvartype } from './rs-types/rs-svartype'
 import { RSVisningskriterieType } from './rs-types/rs-visningskriterie'
 import { ArbeidsforholdFraInntektskomponenten } from './rs-types/rs-arbeidsforholdfrainntektskomponenten'
 import { ObjectCopier } from './object-copier'
-import { InntektsopplysningerDokumentType } from './rs-types/inntektsopplysninger-dokument-type'
 
 export interface TidsPeriode {
     fom: Date
@@ -46,7 +45,7 @@ export class Soknad extends ObjectCopier {
         readonly forstegangssoknad?: boolean,
         readonly inntektsopplysningerNyKvittering?: boolean,
         readonly inntektsopplysningerInnsendingId?: string,
-        readonly inntektsopplysningerInnsendingDokumenter?: InntektsopplysningerDokumentType[],
+        readonly inntektsopplysningerInnsendingDokumenter?: string[],
     ) {
         super()
     }

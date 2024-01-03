@@ -20,7 +20,6 @@ import { RSSoknadstype } from '../../types/rs-types/rs-soknadstype'
 import { RSSoknadstatus } from '../../types/rs-types/rs-soknadstatus'
 import { RSSvar } from '../../types/rs-types/rs-svar'
 import { RSArbeidssituasjon } from '../../types/rs-types/rs-arbeidssituasjon'
-import { InntektsopplysningerDokumentType } from '../../types/rs-types/inntektsopplysninger-dokument-type'
 
 import { arbeidstakerSoknadOpprettetAvInntektsmelding } from './data/personas/opprettet-av-inntektsmelding'
 import { Persona } from './data/personas/personas'
@@ -156,7 +155,7 @@ function handterNaringsdrivendeOpplysninger(soknaden: RSSoknad) {
     soknaden.inntektsopplysningerNyKvittering = erNyKvittering
     soknaden.inntektsopplysningerInnsendingId = maaDokumentere ? uuid.v4() : undefined
     soknaden.inntektsopplysningerInnsendingDokumenter = maaDokumentere
-        ? [InntektsopplysningerDokumentType.NARINGSSPESIFIKASJON_OPTIONAL]
+        ? ['Næringsoppgave/Næringsspessifikasjon hvis den er klar']
         : undefined
 }
 
