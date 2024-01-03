@@ -5,6 +5,7 @@ import { ExternalLinkIcon } from '@navikt/aksel-icons'
 import { logEvent } from '../../amplitude/amplitude'
 import GridItems from '../grid-items'
 import { Soknad } from '../../../types/types'
+import { sendInnUrl } from '../../../utils/environment'
 
 export function EttersendDokumenterForSelvstendigNaringsdrivende({ soknad }: { soknad: Soknad }) {
     useEffect(() => {
@@ -34,13 +35,14 @@ export function EttersendDokumenterForSelvstendigNaringsdrivende({ soknad }: { s
 
                     <Button
                         type="button"
+                        as="a"
+                        href={`${sendInnUrl()}/${soknad.inntektsopplysningerInnsendingId}`}
+                        rel="noopener"
+                        target="_blank"
                         iconPosition="right"
                         variant="secondary"
                         icon={<ExternalLinkIcon aria-hidden />}
                         className="mb-8"
-                        onClick={() => {
-                            window.alert('TODO: Her kommer en lenke til skjemaet for opplasting av dokumentasjon')
-                        }}
                     >
                         Gå til opplasting av dokumentasjon
                     </Button>

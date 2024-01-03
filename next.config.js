@@ -73,6 +73,7 @@ const nextConfig = {
         telemetryCollectorURL: process.env.NAIS_FRONTEND_TELEMETRY_COLLECTOR_URL,
         naisAppImage: process.env.NAIS_APP_IMAGE,
         naisAppName: process.env.NAIS_APP_NAME,
+        sendInnUrl: process.env.SEND_INN_URL,
     },
 }
 
