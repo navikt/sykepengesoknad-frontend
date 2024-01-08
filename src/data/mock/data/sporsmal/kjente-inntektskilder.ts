@@ -173,12 +173,28 @@ export const kjenteInntektskilder = (arbeidsforhold: string[]): RSSporsmal => {
                                                         svar: [],
                                                         undersporsmal: [],
                                                     },
+
                                                     {
                                                         id: '7c5b684f-f289-362d-98c5-dfe732c3b42' + index,
                                                         tag:
                                                             'KJENTE_INNTEKTSKILDER_ARSAK_IKKE_JOBBET_PERMISJON_' +
                                                             index,
                                                         sporsmalstekst: 'Jeg hadde permisjon',
+                                                        undertekst: null,
+                                                        svartype: 'CHECKBOX',
+                                                        min: null,
+                                                        max: null,
+                                                        kriterieForVisningAvUndersporsmal: null,
+                                                        svar: [],
+                                                        undersporsmal: [],
+                                                    },
+
+                                                    {
+                                                        id: '7c5b684f-f289-362d-98c5-dfe732c3c53' + index,
+                                                        tag:
+                                                            'KJENTE_INNTEKTSKILDER_ARSAK_IKKE_JOBBET_TILKALLINGSVIKAR_' +
+                                                            index,
+                                                        sporsmalstekst: 'Jeg er tilkallingsvikar',
                                                         undertekst: null,
                                                         svartype: 'CHECKBOX',
                                                         min: null,
