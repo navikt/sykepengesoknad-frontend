@@ -14,24 +14,25 @@ import { useSoknadMedDetaljer } from '../../../hooks/useSoknadMedDetaljer'
 import BekreftelsespunkterGradertReisetilskuddTekster from '../bekreftelsespunkter/bekreftelsespunkter-gradert-reisetilskudd-tekster'
 import { konverterLenkerTilRenTekst } from '../../../utils/utils'
 import BekreftelsespunkterBehandlingsdagerTekster from '../bekreftelsespunkter/bekreftelsespunkter-behandlingsdager-tekster'
+import BekreftelsespunkterArbeidsledigTekster from '../bekreftelsespunkter/bekreftelsespunkter-arbeidsledig-tekster'
 
 const Kulepunkter = ({ sporsmal }: SpmProps) => {
     const { setValue } = useFormContext()
     const { valgtSoknad } = useSoknadMedDetaljer()
 
-    const kulepunkterTekster: string[] = (() => {
-        switch (valgtSoknad!.soknadstype) {
-            case RSSoknadstype.ARBEIDSTAKERE:
-                return Object.values(BekreftelsespunkterArbeidstakereTekster)
-            case RSSoknadstype.GRADERT_REISETILSKUDD:
-                return Object.values(BekreftelsespunkterGradertReisetilskuddTekster)
-            case RSSoknadstype.REISETILSKUDD:
-                return Object.values(BekreftelsespunkterReisetilskuddTekster)
-            case RSSoknadstype.BEHANDLINGSDAGER:
-                return Object.values(BekreftelsespunkterBehandlingsdagerTekster)
-            default:
-                return []
+    const bekreftelsespunkterMap: { [key in RSSoknadstype]?: string[] } = {
+        [RSSoknadstype.ARBEIDSTAKERE]: Object.values(BekreftelsespunkterArbeidstakereTekster),
+        [RSSoknadstype.ARBEIDSLEDIG]: Object.values(BekreftelsespunkterArbeidsledigTekster),
+        [RSSoknadstype.BEHANDLINGSDAGER]: Object.values(BekreftelsespunkterBehandlingsdagerTekster),
+        [RSSoknadstype.REISETILSKUDD]: Object.values(BekreftelsespunkterReisetilskuddTekster),
+        [RSSoknadstype.GRADERT_REISETILSKUDD]: Object.values(BekreftelsespunkterGradertReisetilskuddTekster),
+    }
+
+    const kulepunkterTekster = (() => {
+        if (!valgtSoknad || !(valgtSoknad.soknadstype in bekreftelsespunkterMap)) {
+            return []
         }
+        return bekreftelsespunkterMap[valgtSoknad.soknadstype] ?? []
     })()
 
     useEffect(() => {
