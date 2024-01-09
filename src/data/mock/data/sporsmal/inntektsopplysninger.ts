@@ -27,6 +27,18 @@ export const inntektsopplysninger: RSSporsmal = {
             undersporsmal: [
                 {
                     id: v4().toString(),
+                    tag: 'INNTEKTSOPPLYSNINGER_JORBRUKERT',
+                    sporsmalstekst: 'Er du jordbruker?',
+                    undertekst: null,
+                    svartype: 'JA_NEI',
+                    min: null,
+                    max: null,
+                    kriterieForVisningAvUndersporsmal: null,
+                    svar: [],
+                    undersporsmal: [],
+                },
+                {
+                    id: v4().toString(),
                     tag: 'INNTEKTSOPPLYSNINGER_NY_I_ARBEIDSLIVET',
                     sporsmalstekst: 'Er du ny i arbeidslivet etter 1.1.2019?',
                     undertekst: null,
