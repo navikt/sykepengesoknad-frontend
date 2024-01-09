@@ -15,6 +15,7 @@ import BekreftelsespunkterGradertReisetilskuddTekster from '../bekreftelsespunkt
 import { konverterLenkerTilRenTekst } from '../../../utils/utils'
 import BekreftelsespunkterBehandlingsdagerTekster from '../bekreftelsespunkter/bekreftelsespunkter-behandlingsdager-tekster'
 import BekreftelsespunkterArbeidsledigTekster from '../bekreftelsespunkter/bekreftelsespunkter-arbeidsledig-tekster'
+import BekreftelsespunkterSelvstendigNaeringsdrivendeTekster from '../bekreftelsespunkter/bekreftelsespunkter-selvstendig-naeringsdrivende-tekster'
 
 const Kulepunkter = ({ sporsmal }: SpmProps) => {
     const { setValue } = useFormContext()
@@ -26,6 +27,9 @@ const Kulepunkter = ({ sporsmal }: SpmProps) => {
         [RSSoknadstype.BEHANDLINGSDAGER]: Object.values(BekreftelsespunkterBehandlingsdagerTekster),
         [RSSoknadstype.REISETILSKUDD]: Object.values(BekreftelsespunkterReisetilskuddTekster),
         [RSSoknadstype.GRADERT_REISETILSKUDD]: Object.values(BekreftelsespunkterGradertReisetilskuddTekster),
+        [RSSoknadstype.SELVSTENDIGE_OG_FRILANSERE]: Object.values(
+            BekreftelsespunkterSelvstendigNaeringsdrivendeTekster,
+        ),
     }
 
     const kulepunkterTekster = (() => {
