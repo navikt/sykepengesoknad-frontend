@@ -26,7 +26,7 @@ sendtSoknadNyKvitteringMedDokumenter.inntektsopplysningerNyKvittering = true
 sendtSoknadNyKvitteringMedDokumenter.inntektsopplysningerInnsendingId = '1234'
 sendtSoknadNyKvitteringMedDokumenter.inntektsopplysningerInnsendingDokumenter = [
     'Skattemelding',
-    'Næringsoppgave/Næringsspessifikasjon hvis den er klar',
+    'Næringsoppgave/Næringsspesifikasjon hvis den er klar',
 ]
 
 export const selvstendigNaringsdrivendeSendt: Persona = {

@@ -155,7 +155,7 @@ function handterNaringsdrivendeOpplysninger(soknaden: RSSoknad) {
     soknaden.inntektsopplysningerNyKvittering = erNyKvittering
     soknaden.inntektsopplysningerInnsendingId = maaDokumentere ? uuid.v4() : undefined
     soknaden.inntektsopplysningerInnsendingDokumenter = maaDokumentere
-        ? ['Næringsoppgave/Næringsspessifikasjon hvis den er klar']
+        ? ['Næringsoppgave/Næringsspesifikasjon hvis den er klar']
         : undefined
 }
 
