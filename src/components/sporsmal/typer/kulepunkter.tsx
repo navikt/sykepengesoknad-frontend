@@ -13,6 +13,7 @@ import BekreftelsespunkterReisetilskuddTekster from '../bekreftelsespunkter/bekr
 import { useSoknadMedDetaljer } from '../../../hooks/useSoknadMedDetaljer'
 import BekreftelsespunkterGradertReisetilskuddTekster from '../bekreftelsespunkter/bekreftelsespunkter-gradert-reisetilskudd-tekster'
 import { konverterLenkerTilRenTekst } from '../../../utils/utils'
+import BekreftelsespunkterBehandlingsdagerTekster from '../bekreftelsespunkter/bekreftelsespunkter-behandlingsdager-tekster'
 
 const Kulepunkter = ({ sporsmal }: SpmProps) => {
     const { setValue } = useFormContext()
@@ -26,6 +27,8 @@ const Kulepunkter = ({ sporsmal }: SpmProps) => {
                 return Object.values(BekreftelsespunkterGradertReisetilskuddTekster)
             case RSSoknadstype.REISETILSKUDD:
                 return Object.values(BekreftelsespunkterReisetilskuddTekster)
+            case RSSoknadstype.BEHANDLINGSDAGER:
+                return Object.values(BekreftelsespunkterBehandlingsdagerTekster)
             default:
                 return []
         }

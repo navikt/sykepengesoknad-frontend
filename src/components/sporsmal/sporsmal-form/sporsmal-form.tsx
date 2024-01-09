@@ -86,13 +86,7 @@ const SporsmalForm = ({ sporsmal }: SpmProps) => {
         if (!sporsmal) {
             return Promise.reject(new Error('Spørsmål skal være lastet for at vi kan submitte'))
         }
-        if (
-            !nesteSporsmal &&
-            !erUtenlandssoknad &&
-            valgtSoknad?.soknadstype !== RSSoknadstype.ARBEIDSTAKERE &&
-            valgtSoknad?.soknadstype !== RSSoknadstype.GRADERT_REISETILSKUDD &&
-            valgtSoknad?.soknadstype !== RSSoknadstype.REISETILSKUDD
-        ) {
+        if (!nesteSporsmal && !erUtenlandssoknad && sporsmal.tag == 'VAER_KLAR_OVER_AT') {
             return Promise.reject(new Error('Neste spørsmål skal være lastet for at vi kan submitte'))
         }
         if (!valgtSoknad) {
