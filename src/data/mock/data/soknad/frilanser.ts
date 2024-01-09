@@ -1,7 +1,6 @@
 import { RSSoknad } from '../../../../types/rs-types/rs-soknad'
 import { frilanser100Syk } from '../sykmeldinger'
-import { værKlarOverAt } from '../sporsmal/vaer-klar-over-at'
-import { bekreftOpplysninger } from '../sporsmal/bekreft-opplysninger'
+import { nyVærKlarOverAt } from '../sporsmal/vaer-klar-over-at'
 
 export const frilanser: RSSoknad = {
     id: 'a8e40578-682b-4a04-bfda-b7768af2ae13',
@@ -333,8 +332,7 @@ export const frilanser: RSSoknad = {
             svar: [],
             undersporsmal: [],
         },
-        værKlarOverAt(),
-        bekreftOpplysninger(),
+        nyVærKlarOverAt(),
     ],
     egenmeldtSykmelding: false,
     opprettetAvInntektsmelding: false,
