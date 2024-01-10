@@ -30,7 +30,7 @@ const Kulepunkter = ({ sporsmal }: SpmProps) => {
         [RSSoknadstype.REISETILSKUDD]: Object.values(BekreftelsespunkterReisetilskuddTekster),
         [RSSoknadstype.OPPHOLD_UTLAND]: Object.values(
             BekreftelsespunkterOppholdutlandTekster(
-                hentSporsmal(valgtSoknad!, 'ARBEIDSGIVER')?.svarliste?.svar[0].verdi === 'JA',
+                hentSporsmal(valgtSoknad!, 'ARBEIDSGIVER')?.svarliste?.svar[0]?.verdi === 'JA',
             ),
         ),
         [RSSoknadstype.GRADERT_REISETILSKUDD]: Object.values(BekreftelsespunkterGradertReisetilskuddTekster),
@@ -67,7 +67,7 @@ const Kulepunkter = ({ sporsmal }: SpmProps) => {
             </div>
             {sporsmal.undertekst && <BodyLong as="div">{parserWithReplace(sporsmal.undertekst)}</BodyLong>}
             <Oppsummering ekspandert={false} sporsmal={valgtSoknad!.sporsmal} />
-            {!RSSoknadstype.OPPHOLD_UTLAND && <Opplysninger ekspandert={false} />}
+            {valgtSoknad?.soknadstype !== RSSoknadstype.OPPHOLD_UTLAND && <Opplysninger ekspandert={false} />}
             <UndersporsmalListe oversporsmal={sporsmal} />
         </>
     )

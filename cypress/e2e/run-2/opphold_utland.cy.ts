@@ -21,8 +21,8 @@ describe('Tester søknad om å beholde sykepenger utenfor EØS', () => {
         cy.findByRole('progressbar', { name: 'Søknadssteg' })
             .should('have.attr', 'aria-valuenow', '1')
             .and('have.attr', 'aria-valuemin', '1')
-            .and('have.attr', 'aria-valuemax', '5')
-            .and('have.attr', 'aria-valuetext', '1 av 5 steg')
+            .and('have.attr', 'aria-valuemax', '4')
+            .and('have.attr', 'aria-valuetext', '1 av 4 steg')
 
         cy.get('body').findByRole('link', { name: 'Tilbake' }).should('not.exist')
         cy.contains('Opplysninger fra sykmeldingen').should('not.exist')
@@ -85,7 +85,6 @@ describe('Tester søknad om å beholde sykepenger utenfor EØS', () => {
 
     it('Søknad TIL_SLUTT', () => {
         cy.url().should('include', `${soknad.id}/4`)
-        cy.get('.navds-checkbox__label').click()
         it('Bekreftelsespunktene er riktige', () => {
             const punkter = [
                 'Jeg har avklart med legen at reisen ikke vil forlenge sykefraværet',
@@ -128,8 +127,8 @@ describe('Tester søknad om å beholde sykepenger utenfor EØS', () => {
         cy.findByRole('progressbar', { name: 'Søknadssteg' })
             .should('have.attr', 'aria-valuenow', '4')
             .and('have.attr', 'aria-valuemin', '1')
-            .and('have.attr', 'aria-valuemax', '5')
-            .and('have.attr', 'aria-valuetext', '4 av 5 steg')
+            .and('have.attr', 'aria-valuemax', '4')
+            .and('have.attr', 'aria-valuetext', '4 av 4 steg')
 
         cy.contains('Før du reiser ber vi deg bekrefte')
         cy.contains(
