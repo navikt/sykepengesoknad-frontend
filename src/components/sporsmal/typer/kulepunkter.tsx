@@ -23,14 +23,16 @@ const Kulepunkter = ({ sporsmal }: SpmProps) => {
     const { setValue } = useFormContext()
     const { valgtSoknad } = useSoknadMedDetaljer()
 
-    const harArbeidsgiver = hentSporsmal(valgtSoknad!, 'ARBEIDSGIVER')?.svarliste?.svar[0].verdi === 'JA'
-
     const bekreftelsespunkterMap: { [key in RSSoknadstype]?: string[] } = {
         [RSSoknadstype.ARBEIDSTAKERE]: Object.values(BekreftelsespunkterArbeidstakereTekster),
         [RSSoknadstype.ARBEIDSLEDIG]: Object.values(BekreftelsespunkterArbeidsledigTekster),
         [RSSoknadstype.BEHANDLINGSDAGER]: Object.values(BekreftelsespunkterBehandlingsdagerTekster),
         [RSSoknadstype.REISETILSKUDD]: Object.values(BekreftelsespunkterReisetilskuddTekster),
-        [RSSoknadstype.OPPHOLD_UTLAND]: Object.values(BekreftelsespunkterOppholdutlandTekster(harArbeidsgiver)),
+        [RSSoknadstype.OPPHOLD_UTLAND]: Object.values(
+            BekreftelsespunkterOppholdutlandTekster(
+                hentSporsmal(valgtSoknad!, 'ARBEIDSGIVER')?.svarliste?.svar[0].verdi === 'JA',
+            ),
+        ),
         [RSSoknadstype.GRADERT_REISETILSKUDD]: Object.values(BekreftelsespunkterGradertReisetilskuddTekster),
         [RSSoknadstype.SELVSTENDIGE_OG_FRILANSERE]: Object.values(
             BekreftelsespunkterSelvstendigNaeringsdrivendeTekster,
