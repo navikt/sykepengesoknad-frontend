@@ -47,8 +47,8 @@ export function EttersendDokumenterForSelvstendigNaringsdrivende({ soknad }: { s
                         Gå til opplasting av dokumentasjon
                     </Button>
                     <Alert variant="info">
-                        Du kan gjøre dette senere, da finner du skjemaet for opplasting av dine dokumenter ved å logge
-                        inn på nav.no
+                        Du kan laste opp dokumentasjonen senere. Du finner skjemaet for opplasting ved å logge inn på
+                        nav.no.
                     </Alert>
                 </>
             </GridItems>

@@ -273,6 +273,10 @@ const SporsmalTekster = {
     'soknad.feilmelding.INNTEKTSOPPLYSNINGER_VARIG_ENDRING_25_PROSENT':
         'Du må svare på om du har hatt mer enn 25 prosent endring i årsinntekten din',
     'soknad.feilmelding.INNTEKTSOPPLYSNINGER_VARIG_ENDRING_DATO': '',
+    'soknad.feilmelding.INNTEKTSOPPLYSNINGER_DRIFT_VIRKSOMHETEN': 'Du må svare på om det har vært drift i virksomheten',
+    'soknad.feilmelding.INNTEKTSOPPLYSNINGER_DRIFT_VIRKSOMHETEN_JA': '',
+    'soknad.feilmelding.INNTEKTSOPPLYSNINGER_DRIFT_VIRKSOMHETEN_NEI': '',
+    'soknad.feilmelding.INNTEKTSOPPLYSNINGER_DRIFT_VIRKSOMHETEN_OPPHORT': '',
 }
 
 export default SporsmalTekster

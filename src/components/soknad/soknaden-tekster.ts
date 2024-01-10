@@ -118,7 +118,7 @@ const SoknadenTekster = {
 
     'sykepengesoknad.kjente_inntektskilder.tittel': 'Inntektskilder hentet fra Arbeidsgiver- og arbeidstakerregisteret',
 
-    'sykepengesoknad.inntektsopplysninger_ny_i_arbeidslivet.tittel': 'Ny i arbeidslivet',
+    'sykepengesoknad.inntektsopplysninger_drift_virksomheten.tittel': 'Virksomheten din',
 }
 
 export default SoknadenTekster

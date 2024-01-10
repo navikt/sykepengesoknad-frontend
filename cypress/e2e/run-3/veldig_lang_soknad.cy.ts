@@ -326,8 +326,8 @@ describe('Tester støtte for gamle spørsmål', () => {
         gaVidere()
     })
 
-    it('Ny i arbeidslivet', () => {
-        svarJaHovedsporsmal()
+    it('Drift i virksomheten', () => {
+        svarNeiHovedsporsmal()
         velgDato(4)
         gaVidere()
     })
