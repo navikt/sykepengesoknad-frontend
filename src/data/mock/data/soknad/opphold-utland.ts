@@ -81,7 +81,7 @@ export const oppholdUtland: RSSoknad = {
                 },
             ],
         },
-        nyVærKlarOverAt(),
+        nyVærKlarOverAt(true),
     ],
     egenmeldtSykmelding: null,
     opprettetAvInntektsmelding: false,
