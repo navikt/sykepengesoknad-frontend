@@ -1,4 +1,5 @@
 import { RSSoknad } from '../../../../types/rs-types/rs-soknad'
+import { nyVærKlarOverAt } from '../sporsmal/vaer-klar-over-at'
 
 export const oppholdUtland: RSSoknad = {
     id: 'b9d67b0d-b1f8-44a5-bcbd-6010b60b90ce',
@@ -80,32 +81,7 @@ export const oppholdUtland: RSSoknad = {
                 },
             ],
         },
-        {
-            id: 'de78bacc-4143-4f8b-ba0e-189c997515f2',
-            tag: 'BEKREFT_OPPLYSNINGER_UTLAND_INFO',
-            sporsmalstekst: 'Før du reiser ber vi deg bekrefte:',
-            undertekst:
-                '<ul>\n    <li>Jeg har avklart med legen at reisen ikke vil forlenge sykefraværet</li>\n    <li>Reisen hindrer ikke planlagt behandling eller avtaler med NAV</li>\n</ul>',
-            svartype: 'IKKE_RELEVANT',
-            min: null,
-            max: null,
-            kriterieForVisningAvUndersporsmal: null,
-            svar: [],
-            undersporsmal: [
-                {
-                    id: '9f4eaeef-2b3c-4ee8-801d-96ad0b56547b',
-                    tag: 'BEKREFT_OPPLYSNINGER_UTLAND',
-                    sporsmalstekst: 'Jeg bekrefter de to punktene ovenfor',
-                    undertekst: null,
-                    svartype: 'CHECKBOX_PANEL',
-                    min: null,
-                    max: null,
-                    kriterieForVisningAvUndersporsmal: null,
-                    svar: [],
-                    undersporsmal: [],
-                },
-            ],
-        },
+        nyVærKlarOverAt(),
     ],
     egenmeldtSykmelding: null,
     opprettetAvInntektsmelding: false,

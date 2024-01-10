@@ -16,16 +16,21 @@ import { konverterLenkerTilRenTekst } from '../../../utils/utils'
 import BekreftelsespunkterBehandlingsdagerTekster from '../bekreftelsespunkter/bekreftelsespunkter-behandlingsdager-tekster'
 import BekreftelsespunkterArbeidsledigTekster from '../bekreftelsespunkter/bekreftelsespunkter-arbeidsledig-tekster'
 import BekreftelsespunkterSelvstendigNaeringsdrivendeTekster from '../bekreftelsespunkter/bekreftelsespunkter-selvstendig-naeringsdrivende-tekster'
+import BekreftelsespunkterOppholdutlandTekster from '../bekreftelsespunkter/bekreftelsespunkter-opphold-utland-tekster'
+import { hentSporsmal } from '../../../utils/soknad-utils'
 
 const Kulepunkter = ({ sporsmal }: SpmProps) => {
     const { setValue } = useFormContext()
     const { valgtSoknad } = useSoknadMedDetaljer()
+
+    const harArbeidsgiver = hentSporsmal(valgtSoknad!, 'ARBEIDSGIVER')!.svarliste.svar[0].verdi === 'JA'
 
     const bekreftelsespunkterMap: { [key in RSSoknadstype]?: string[] } = {
         [RSSoknadstype.ARBEIDSTAKERE]: Object.values(BekreftelsespunkterArbeidstakereTekster),
         [RSSoknadstype.ARBEIDSLEDIG]: Object.values(BekreftelsespunkterArbeidsledigTekster),
         [RSSoknadstype.BEHANDLINGSDAGER]: Object.values(BekreftelsespunkterBehandlingsdagerTekster),
         [RSSoknadstype.REISETILSKUDD]: Object.values(BekreftelsespunkterReisetilskuddTekster),
+        [RSSoknadstype.OPPHOLD_UTLAND]: Object.values(BekreftelsespunkterOppholdutlandTekster(harArbeidsgiver)),
         [RSSoknadstype.GRADERT_REISETILSKUDD]: Object.values(BekreftelsespunkterGradertReisetilskuddTekster),
         [RSSoknadstype.SELVSTENDIGE_OG_FRILANSERE]: Object.values(
             BekreftelsespunkterSelvstendigNaeringsdrivendeTekster,
@@ -60,7 +65,7 @@ const Kulepunkter = ({ sporsmal }: SpmProps) => {
             </div>
             {sporsmal.undertekst && <BodyLong as="div">{parserWithReplace(sporsmal.undertekst)}</BodyLong>}
             <Oppsummering ekspandert={false} sporsmal={valgtSoknad!.sporsmal} />
-            <Opplysninger ekspandert={false} />
+            {!RSSoknadstype.OPPHOLD_UTLAND && <Opplysninger ekspandert={false} />}
             <UndersporsmalListe oversporsmal={sporsmal} />
         </>
     )
