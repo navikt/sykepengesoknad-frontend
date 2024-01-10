@@ -31,7 +31,7 @@ describe('Tester selvstendig naringsdrivende søknad', () => {
         ])
     })
 
-    it('Virksomehten din', function () {
+    it('Virksomheten din', function () {
         klikkGaVidere(true)
         harFeilISkjemaet('Du må svare på om det har vært drift i virksomheten')
         svarNeiHovedsporsmal()
