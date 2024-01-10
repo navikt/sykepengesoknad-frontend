@@ -150,7 +150,7 @@ function handterNaringsdrivendeOpplysninger(soknaden: RSSoknad) {
     if (!soknaden.forstegangssoknad) {
         return
     }
-    const erNyKvittering = soknaden.sporsmal.some((spm) => spm.tag === 'INNTEKTSOPPLYSNINGER_NY_I_ARBEIDSLIVET')
+    const erNyKvittering = soknaden.sporsmal.some((spm) => spm.tag === 'INNTEKTSOPPLYSNINGER_DRIFT_VIRKSOMHETEN')
     const maaDokumentere = maaDokumentereInntektsopplysninger(soknaden)
     soknaden.inntektsopplysningerNyKvittering = erNyKvittering
     soknaden.inntektsopplysningerInnsendingId = maaDokumentere ? uuid.v4() : undefined
