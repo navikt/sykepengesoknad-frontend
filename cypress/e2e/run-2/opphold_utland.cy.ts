@@ -21,8 +21,8 @@ describe('Tester søknad om å beholde sykepenger utenfor EØS', () => {
         cy.findByRole('progressbar', { name: 'Søknadssteg' })
             .should('have.attr', 'aria-valuenow', '1')
             .and('have.attr', 'aria-valuemin', '1')
-            .and('have.attr', 'aria-valuemax', '5')
-            .and('have.attr', 'aria-valuetext', '1 av 5 steg')
+            .and('have.attr', 'aria-valuemax', '4')
+            .and('have.attr', 'aria-valuetext', '1 av 4 steg')
 
         cy.get('body').findByRole('link', { name: 'Tilbake' }).should('not.exist')
         cy.contains('Opplysninger fra sykmeldingen').should('not.exist')
@@ -83,6 +83,21 @@ describe('Tester søknad om å beholde sykepenger utenfor EØS', () => {
         klikkGaVidere()
     })
 
+    it('Søknad TIL_SLUTT', () => {
+        cy.url().should('include', `${soknad.id}/4`)
+        it('Bekreftelsespunktene er riktige', () => {
+            const punkter = [
+                'Jeg har avklart med legen at reisen ikke vil forlenge sykefraværet',
+                'Reisen hindrer ikke planlagt behandling eller avtaler med NAV',
+                'Reisen er avklart med arbeidsgiveren min',
+            ]
+
+            punkter.forEach((punkt) => {
+                cy.contains(punkt)
+            })
+        })
+    })
+
     it('Oppsummering fra søknaden', function () {
         cy.url().should('include', `${soknad.id}/4`)
 
@@ -112,11 +127,13 @@ describe('Tester søknad om å beholde sykepenger utenfor EØS', () => {
         cy.findByRole('progressbar', { name: 'Søknadssteg' })
             .should('have.attr', 'aria-valuenow', '4')
             .and('have.attr', 'aria-valuemin', '1')
-            .and('have.attr', 'aria-valuemax', '5')
-            .and('have.attr', 'aria-valuetext', '4 av 5 steg')
+            .and('have.attr', 'aria-valuemax', '4')
+            .and('have.attr', 'aria-valuetext', '4 av 4 steg')
 
         cy.contains('Før du reiser ber vi deg bekrefte')
-        cy.contains('Jeg bekrefter de to punktene ovenfor').click()
+        cy.contains(
+            'Jeg har lest all informasjonen jeg har fått i søknaden og bekrefter at opplysningene jeg har gitt er korrekte.',
+        ).click()
 
         cy.contains('Send søknaden').click()
     })

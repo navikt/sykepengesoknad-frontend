@@ -37,7 +37,7 @@ const SporsmalForm = ({ sporsmal }: SpmProps) => {
     const router = useRouter()
     const testpersonQuery = useTestpersonQuery()
 
-    const { erUtenlandssoknad, valgtSoknad, spmIndex } = useSoknadMedDetaljer()
+    const { erUtenlandssoknad, valgtSoknad, spmIndex, stegNo } = useSoknadMedDetaljer()
     const { data: korrigerer } = useSoknad(valgtSoknad?.korrigerer, valgtSoknad?.korrigerer !== undefined)
     const { mutate: sendSoknadMutation, isLoading: senderSoknad, error: sendError } = useSendSoknad()
     const {
@@ -55,16 +55,21 @@ const SporsmalForm = ({ sporsmal }: SpmProps) => {
     })
 
     const erSisteSpm = () => {
-        if (erUtenlandssoknad) {
-            return sporsmal.tag === 'BEKREFT_OPPLYSNINGER_UTLAND_INFO'
-        }
         const snartSlutt = [
             RSSvartype.IKKE_RELEVANT,
             RSSvartype.CHECKBOX_PANEL,
             RSSvartype.BEKREFTELSESPUNKTER,
-        ].includes(sporsmal.svartype)
-        const expectedIndex = sporsmal.svartype === RSSvartype.BEKREFTELSESPUNKTER ? spmIndex + 1 : spmIndex + 2
-        return snartSlutt && expectedIndex === valgtSoknad?.sporsmal?.length
+        ].includes(sporsmal!.svartype)
+        if (!snartSlutt) {
+            return false
+        }
+        if (
+            sporsmal!.svartype === RSSvartype.BEKREFTELSESPUNKTER ||
+            sporsmal!.tag === 'BEKREFT_OPPLYSNINGER_UTLAND_INFO'
+        ) {
+            return valgtSoknad?.sporsmal?.length === stegNo
+        }
+        return valgtSoknad?.sporsmal?.length === stegNo + 1
     }
 
     const erSiste = erSisteSpm()
@@ -127,7 +132,7 @@ const SporsmalForm = ({ sporsmal }: SpmProps) => {
                 sporsmal: oppdatertSporsmalMedSvar(),
                 onSuccess: (oppdatertSoknad) => onSuccessLogic(erSiste, oppdatertSoknad),
                 soknad: valgtSoknad,
-                spmIndex: erSisteSpm() ? spmIndex + 1 : spmIndex,
+                spmIndex: erSiste ? spmIndex + 1 : spmIndex,
             })
         })
     }
@@ -155,16 +160,12 @@ const SporsmalForm = ({ sporsmal }: SpmProps) => {
                             <Oppsummering ekspandert={false} sporsmal={valgtSoknad.sporsmal} />
                             <Opplysninger ekspandert={false} />
                             <CheckboxPanel sporsmal={nesteSporsmal} />
-                            <SendesTil soknad={valgtSoknad} />
                         </>
                     )}
 
-                    {erSiste &&
-                        !erUtenlandssoknad &&
-                        valgtSoknad &&
-                        sporsmal?.svartype === RSSvartype.BEKREFTELSESPUNKTER && <SendesTil soknad={valgtSoknad} />}
+                    {erSiste && !erUtenlandssoknad && valgtSoknad && <SendesTil soknad={valgtSoknad} />}
 
-                    {erSiste && erUtenlandssoknad && valgtSoknad && sporsmal && (
+                    {erSiste && sporsmal.tag === 'BEKREFT_OPPLYSNINGER_UTLAND_INFO' && valgtSoknad && sporsmal && (
                         <>
                             <Oppsummering ekspandert={false} sporsmal={valgtSoknad.sporsmal} />
                             <CheckboxPanel sporsmal={sporsmal} />
