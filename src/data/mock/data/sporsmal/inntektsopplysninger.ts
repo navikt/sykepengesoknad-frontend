@@ -4,9 +4,8 @@ import { RSSporsmal } from '../../../../types/rs-types/rs-sporsmal'
 
 export const inntektsopplysninger: RSSporsmal = {
     id: v4().toString(),
-    tag: 'INNTEKTSOPPLYSNINGER_DRIFT',
+    tag: 'INNTEKTSOPPLYSNINGER_DRIFT_VIRKSOMHETEN',
     sporsmalstekst: 'Har det vært drift i virksomheten frem til du ble sykmeldt?',
-    tittel: 'Virksomheten din',
     undertekst: null,
     svartype: 'RADIO_GRUPPE',
     min: null,
@@ -16,7 +15,7 @@ export const inntektsopplysninger: RSSporsmal = {
     undersporsmal: [
         {
             id: v4().toString(),
-            tag: 'INNTEKTSOPPLYSNINGER_DRIFT_JA',
+            tag: 'INNTEKTSOPPLYSNINGER_DRIFT_VIRKSOMHETEN_JA',
             sporsmalstekst: 'Ja',
             undertekst: null,
             svartype: 'RADIO',
@@ -25,31 +24,6 @@ export const inntektsopplysninger: RSSporsmal = {
             kriterieForVisningAvUndersporsmal: 'CHECKED',
             svar: [],
             undersporsmal: [
-                {
-                    id: v4().toString(),
-                    tag: 'INNTEKTSOPPLYSNINGER_JORBRUKERT',
-                    sporsmalstekst: 'Er du jordbruker?',
-                    undertekst: null,
-                    svartype: 'JA_NEI',
-                    min: null,
-                    max: null,
-                    kriterieForVisningAvUndersporsmal: 'JA',
-                    svar: [],
-                    undersporsmal: [
-                        {
-                            id: v4().toString(),
-                            tag: 'INNTEKTSOPPLYSNINGER_JORBRUKERT_++',
-                            sporsmalstekst: 'Driver du annen næringsvirksomhet enn jordbruk i tillegg?',
-                            undertekst: null,
-                            svartype: 'JA_NEI',
-                            min: null,
-                            max: null,
-                            kriterieForVisningAvUndersporsmal: null,
-                            svar: [],
-                            undersporsmal: [],
-                        },
-                    ],
-                },
                 {
                     id: v4().toString(),
                     tag: 'INNTEKTSOPPLYSNINGER_NY_I_ARBEIDSLIVET',
@@ -220,7 +194,7 @@ export const inntektsopplysninger: RSSporsmal = {
         },
         {
             id: v4().toString(),
-            tag: 'DRIFT_NEI',
+            tag: 'INNTEKTSOPPLYSNINGER_DRIFT_VIRKSOMHETEN_NEI',
             sporsmalstekst: 'Nei',
             undertekst: null,
             svartype: 'RADIO',
@@ -231,7 +205,7 @@ export const inntektsopplysninger: RSSporsmal = {
             undersporsmal: [
                 {
                     id: v4().toString(),
-                    tag: 'DATODRIFT',
+                    tag: 'INNTEKTSOPPLYSNINGER_DRIFT_VIRKSOMHETEN_OPPHORT',
                     sporsmalstekst: 'Når opphørte driften i virksomheten?',
                     undertekst: null,
                     svartype: 'DATO',
