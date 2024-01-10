@@ -23,7 +23,7 @@ const Kulepunkter = ({ sporsmal }: SpmProps) => {
     const { setValue } = useFormContext()
     const { valgtSoknad } = useSoknadMedDetaljer()
 
-    const harArbeidsgiver = hentSporsmal(valgtSoknad!, 'ARBEIDSGIVER')!.svarliste.svar[0].verdi === 'JA'
+    const harArbeidsgiver = hentSporsmal(valgtSoknad!, 'ARBEIDSGIVER')?.svarliste?.svar[0].verdi === 'JA'
 
     const bekreftelsespunkterMap: { [key in RSSoknadstype]?: string[] } = {
         [RSSoknadstype.ARBEIDSTAKERE]: Object.values(BekreftelsespunkterArbeidstakereTekster),
