@@ -25,8 +25,7 @@ const sendtSoknadNyKvitteringMedDokumenter = deepcopyMedNyId(
 sendtSoknadNyKvitteringMedDokumenter.inntektsopplysningerNyKvittering = true
 sendtSoknadNyKvitteringMedDokumenter.inntektsopplysningerInnsendingId = '1234'
 sendtSoknadNyKvitteringMedDokumenter.inntektsopplysningerInnsendingDokumenter = [
-    'Skattemelding',
-    'Næringsoppgave/Næringsspesifikasjon hvis den er klar',
+    'Skattemelding/Næringsspesifikasjon hvis den er klar',
 ]
 
 export const selvstendigNaringsdrivendeSendt: Persona = {

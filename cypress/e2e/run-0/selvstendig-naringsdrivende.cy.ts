@@ -96,6 +96,6 @@ describe('Tester selvstendig naringsdrivende søknad', () => {
     it('Kvittering', function () {
         cy.contains('Søknaden er sendt til NAV')
         cy.contains('Du må sende inn dokumentasjon på inntekten din før vi kan behandle saken.')
-        cy.contains('Næringsoppgave/Næringsspesifikasjon hvis den er klar')
+        cy.contains('Skattemelding/Næringsspesifikasjon hvis den er klar')
     })
 })
