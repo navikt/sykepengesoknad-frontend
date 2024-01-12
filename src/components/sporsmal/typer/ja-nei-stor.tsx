@@ -136,7 +136,7 @@ const JaNeiStor = ({ sporsmal }: SpmProps) => {
                 <YrkesskadeInfo sporsmal={sporsmal} jaNeiSvar={watchJaNei} />
             </div>
 
-            <div aria-live="assertive">
+            <div>
                 <AnimateOnMount
                     mounted={watchJaNei === sporsmal.kriterieForVisningAvUndersporsmal}
                     enter="undersporsmal--vis"

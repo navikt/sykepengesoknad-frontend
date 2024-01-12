@@ -76,6 +76,7 @@ const PeriodeKomp = ({ sporsmal, index, slettPeriode }: AllProps) => {
                             id={sporsmal.id + '_' + index + '_fom'}
                             className="mt-4"
                             error={fieldState.error?.type === 'fom' && fieldState.error.message}
+                            aria-label={`${sporsmal.sporsmalstekst} ${tekst('sykepengesoknad.periodevelger.fom')}`}
                         />
                         <DatePicker.Input
                             {...toInputProps}
@@ -86,6 +87,7 @@ const PeriodeKomp = ({ sporsmal, index, slettPeriode }: AllProps) => {
                                 (fieldState.error?.type === 'tom' || fieldState.error?.type === 'periode') &&
                                 fieldState.error.message
                             }
+                            aria-label={`${sporsmal.sporsmalstekst} ${tekst('sykepengesoknad.periodevelger.tom')}`}
                         />
                     </div>
                 </DatePicker>

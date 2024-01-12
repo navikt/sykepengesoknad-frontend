@@ -69,7 +69,7 @@ const GruppeAvUndersporsmal = ({ sporsmal, sporsmalIndex, erSisteSporsmal }: Gru
     return (
         <div
             className={!erSisteSporsmal && erMedlemskap ? 'mb-8 border-b border-dashed border-gray-400' : ''}
-            aria-live="assertive"
+
         >
             {sporsmal.sporsmalstekst && <BodyShort>{sporsmal.sporsmalstekst}</BodyShort>}
             <EkspanderbarHjelp sporsmal={sporsmal} />
