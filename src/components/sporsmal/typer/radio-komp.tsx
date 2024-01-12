@@ -47,7 +47,11 @@ const RadioKomp = ({ sporsmal, erHovedsporsmal }: { sporsmal: Sporsmal; erHoveds
                         className={cn({ 'mt-8': !erHovedJaNei })}
                         data-cy="radio-komp"
                     >
-                        <EkspanderbarHjelp sporsmal={sporsmal} key="radio-komp-hjelp" />
+                        <EkspanderbarHjelp
+                            sporsmal={sporsmal}
+                            key="radio-komp-hjelp"
+                            mb={!erHovedsporsmal ? 'mb-4' : undefined}
+                        />
 
                         {!erHovedJaNei &&
                             sporsmal.undersporsmal.map((uspm) => (
