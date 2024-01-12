@@ -1,4 +1,4 @@
-const BekreftelsespunkterArbeidsledigTekster = {
+const BekreftelsespunkterAnnetArbeidsforholdTekster = {
     'vaer-klar-over-at.punkt-1':
         'Du kan bare få sykepenger hvis det er din egen sykdom eller skade som hindrer deg i å jobbe. Sosiale eller økonomiske problemer gir ikke rett til sykepenger.',
     'vaer-klar-over-at.punkt-2':
@@ -17,4 +17,4 @@ const BekreftelsespunkterArbeidsledigTekster = {
         'Du kan lese mer om rettigheter og plikter på <a href="https://www.nav.no/sykepenger" target="_blank">nav.no/sykepenger</a>.',
 }
 
-export default BekreftelsespunkterArbeidsledigTekster
+export default BekreftelsespunkterAnnetArbeidsforholdTekster
