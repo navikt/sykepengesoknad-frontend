@@ -18,6 +18,7 @@ import BekreftelsespunkterArbeidsledigTekster from '../bekreftelsespunkter/bekre
 import BekreftelsespunkterSelvstendigNaeringsdrivendeTekster from '../bekreftelsespunkter/bekreftelsespunkter-selvstendig-naeringsdrivende-tekster'
 import BekreftelsespunkterOppholdutlandTekster from '../bekreftelsespunkter/bekreftelsespunkter-opphold-utland-tekster'
 import { hentSporsmal } from '../../../utils/soknad-utils'
+import BekreftelsespunkterAnnetArbeidsforholdTekster from '../bekreftelsespunkter/bekreftelsespunkter-annet-arbeidsforhold-tekster'
 
 const Kulepunkter = ({ sporsmal }: SpmProps) => {
     const { setValue } = useFormContext()
@@ -26,6 +27,7 @@ const Kulepunkter = ({ sporsmal }: SpmProps) => {
     const bekreftelsespunkterMap: { [key in RSSoknadstype]?: string[] } = {
         [RSSoknadstype.ARBEIDSTAKERE]: Object.values(BekreftelsespunkterArbeidstakereTekster),
         [RSSoknadstype.ARBEIDSLEDIG]: Object.values(BekreftelsespunkterArbeidsledigTekster),
+        [RSSoknadstype.ANNET_ARBEIDSFORHOLD]: Object.values(BekreftelsespunkterAnnetArbeidsforholdTekster),
         [RSSoknadstype.BEHANDLINGSDAGER]: Object.values(BekreftelsespunkterBehandlingsdagerTekster),
         [RSSoknadstype.REISETILSKUDD]: Object.values(BekreftelsespunkterReisetilskuddTekster),
         [RSSoknadstype.OPPHOLD_UTLAND]: Object.values(
