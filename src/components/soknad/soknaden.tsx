@@ -101,7 +101,7 @@ export const Soknaden = () => {
             {erForstesiden && !erUtenlandssoknad && <SlikBehandlerNavPersonopplysningene />}
             {(flexjarToggle.enabled ||
                 sporsmal?.tag == 'KJENTE_INNTEKTSKILDER' ||
-                sporsmal?.tag == 'INNTEKTSOPPLYSNINGER_NY_I_ARBEIDSLIVET') && (
+                sporsmal?.tag == 'INNTEKTSOPPLYSNINGER_DRIFT_VIRKSOMHETEN') && (
                 <FlexjarSporsmal soknad={valgtSoknad} sporsmal={sporsmal} steg={stegNo} />
             )}
         </>
