@@ -8,8 +8,9 @@ import { ArbeidsforholdFraInntektskomponenten } from '../../../../types/rs-types
 import { kjenteInntektskilder } from '../sporsmal/kjente-inntektskilder'
 
 const hovedjobb = 'MATBUTIKKEN AS'
-const fom = '2023-12-12'
-const tom = '2024-01-12'
+
+const fom = '2022-09-08'
+const tom = '2022-09-21'
 
 const periodeTekst = tilLesbarPeriodeMedArstall(dayjs(fom), dayjs(tom))
 export const brukertestSykmelding = new Sykmelding({
