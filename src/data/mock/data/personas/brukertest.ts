@@ -12,8 +12,8 @@ import { Persona } from './personas'
 const url = typeof window === 'undefined' ? new URL('http://test') : new URL(window.location.href)
 
 const hovedjobb = url.searchParams.get('hovedjobb') ?? 'MATBUTIKKEN AS'
-const fom = url.searchParams.get('fom') ?? '2022-09-08'
-const tom = url.searchParams.get('tom') ?? '2022-09-21'
+const fom = url.searchParams.get('fom') ?? '2023-12-12'
+const tom = url.searchParams.get('tom') ?? '2024-01-12'
 
 const periodeTekst = tilLesbarPeriodeMedArstall(dayjs(fom), dayjs(tom))
 export const brukertestSykmelding = new Sykmelding({
