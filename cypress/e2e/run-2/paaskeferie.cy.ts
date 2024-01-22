@@ -23,7 +23,7 @@ describe('Tester påskeferiehjelpetekst', () => {
     })
 
     it('Søknaden går ikke over påskeferien', () => {
-        cy.visit('/syk/sykepengesoknad/soknader/963e816f-7b3c-4513-818b-95595d84dd91/3?testperson=brukertest')
+        cy.visit('/syk/sykepengesoknad/soknader/963e816f-7b3c-4513-818b-95595d84dd97/3?testperson=brukertest')
 
         cy.get('[data-cy="sporsmal-tittel"]').should('contain', 'Ferie')
 
