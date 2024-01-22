@@ -7,7 +7,7 @@ import {
 } from '../sporsmal/medlemskap'
 
 import { Persona } from './personas'
-import { brukertestSoknad, brukertestSykmelding } from './brukertest'
+import { brukertestSoknad, brukertestSykmelding } from './brukertestOld'
 
 const medlemskapSoknad = deepcopyMedNyId(brukertestSoknad, '7fdc72b9-30a9-435c-9eb1-f7cc68a8b429')
 const oppholdUtlandSpm = medlemskapSoknad.sporsmal.find((spm) => spm.tag == 'UTLAND_V2')

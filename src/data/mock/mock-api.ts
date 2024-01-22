@@ -73,7 +73,7 @@ export function getSession(req: NextApiRequest, res: NextApiResponse): session {
     if (!sessionStore[sessionId] || sessionStore[sessionId].expires.isBefore(dayjs())) {
         sessionStore[sessionId] = {
             expires: dayjs().add(1, 'hour'),
-            testpersoner: testpersoner(),
+            testpersoner: testpersoner(req),
         }
     }
 

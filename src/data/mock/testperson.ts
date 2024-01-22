@@ -1,8 +1,8 @@
 import { logger } from '@navikt/next-logger'
+import { NextApiRequest } from 'next'
 
 import { jsonDeepCopy } from '../../utils/json-deep-copy'
 
-import { brukertest } from './data/personas/brukertest'
 import { eldreUsendtSoknad, flereEldreUsendteSoknader } from './data/personas/eldre-usendt-soknad'
 import { reisetilskuddTestPerson } from './data/personas/reisetilskuddTestPerson'
 import { enUsendtSykmelding, toUsendteSykmeldinger } from './data/usendte-sykmeldinger'
@@ -31,6 +31,7 @@ import { egenmeldingSykmeldingaPerson } from './data/personas/egenmeldingsdager-
 import { selvstendigNaringsdrivende, selvstendigNaringsdrivendeSendt } from './data/personas/naringsdrivende'
 import { korrigeringsfristUtloptPerson } from './data/personas/korrigeringsfrist-utlopt'
 import { medlemskapPerson } from './data/personas/medlemskap'
+import { brukertest } from './data/personas/brukertest'
 
 type PersonaKey =
     | 'uten-data'
@@ -68,15 +69,15 @@ export type PersonaData = Partial<Record<PersonaKey, Persona>>
 export type PersonaGroupKey = 'soknad-typer' | 'soknad-sporsmal' | 'testing'
 type PersonaGroup = Record<PersonaGroupKey, PersonaData>
 
-export function testpersoner(): PersonaData {
+export function testpersoner(req: NextApiRequest): PersonaData {
     let alle: PersonaData = {}
-    Object.values(testpersonerGruppert()).forEach((group) => {
+    Object.values(testpersonerGruppert(req)).forEach((group) => {
         alle = { ...alle, ...group }
     })
     return alle
 }
 
-export function testpersonerGruppert(): PersonaGroup {
+export function testpersonerGruppert(req?: NextApiRequest): PersonaGroup {
     const data: PersonaGroup = {
         ['soknad-typer']: {
             ['arbeidstaker']: jsonDeepCopy(arbeidstakerPerson),
@@ -95,7 +96,7 @@ export function testpersonerGruppert(): PersonaGroup {
             ['yrkesskade']: jsonDeepCopy(yrkesskadePerson),
             ['yrkesskade-v2']: jsonDeepCopy(yrkesskadeV2Person),
             ['utenlandsk-sykmelding']: jsonDeepCopy(utenlandskSykmelding),
-            ['brukertest']: jsonDeepCopy(brukertest),
+            ['brukertest']: jsonDeepCopy(brukertest(req)),
             ['egenmeldingsdager-arbeidsgiver']: jsonDeepCopy(opprettetAvInntektsmelding),
             ['sykmelding-med-egenmeldingsdager']: jsonDeepCopy(egenmeldingSykmeldingaPerson),
         },

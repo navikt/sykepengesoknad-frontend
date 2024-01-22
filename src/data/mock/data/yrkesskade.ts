@@ -2,7 +2,7 @@ import { RSSporsmal } from '../../../types/rs-types/rs-sporsmal'
 import { deepcopyMedNyId } from '../deepcopyMedNyId'
 
 import { Persona } from './personas/personas'
-import { brukertestSoknad, brukertestSykmelding } from './personas/brukertest'
+import { brukertestSoknad, brukertestSykmelding } from './personas/brukertestOld'
 import { yrkesskadeV2Sporsmal } from './sporsmal/yrkesskade-v2'
 import { yrkesskadeV1Sporsmal } from './sporsmal/yrkesskade-v1'
 
