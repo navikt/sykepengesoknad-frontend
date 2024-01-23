@@ -25,9 +25,15 @@ const KvitteringVidere = () => {
 
     if (!valgtSoknad) return null
 
+    const naringsdrivendeForstegangssoknad =
+        valgtSoknad.arbeidssituasjon &&
+        [RSArbeidssituasjon.NAERINGSDRIVENDE, RSArbeidssituasjon.FISKER, RSArbeidssituasjon.JORDBRUKER].includes(
+            valgtSoknad.arbeidssituasjon,
+        ) &&
+        valgtSoknad.forstegangssoknad
     return (
         <KvtteringPanel>
-            {valgtSoknad.arbeidssituasjon === RSArbeidssituasjon.NAERINGSDRIVENDE && valgtSoknad.forstegangssoknad && (
+            {naringsdrivendeForstegangssoknad && (
                 <>
                     <div className="mt-8 col-span-12"></div>
 
