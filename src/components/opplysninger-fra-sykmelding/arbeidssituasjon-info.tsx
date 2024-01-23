@@ -12,14 +12,17 @@ interface ArbeidssituasjonInfoProps {
 const ArbeidssituasjonInfo = ({ valgtSykmelding }: ArbeidssituasjonInfoProps) => {
     const arbeidssituasjon = hentArbeidssituasjon(valgtSykmelding)
     const erFisker = valgtSykmelding.sykmeldingStatus.brukerSvar?.arbeidssituasjon.svar === 'FISKER'
+    const erJordbruker = valgtSykmelding.sykmeldingStatus.brukerSvar?.arbeidssituasjon.svar === 'JORDBRUKER'
+    const arbeidssituasjonSvar = valgtSykmelding.sykmeldingStatus.brukerSvar?.arbeidssituasjon.svar || ''
+    const svar = arbeidssituasjonSvar?.charAt(0).toUpperCase() + arbeidssituasjonSvar?.slice(1)?.toLowerCase()
 
-    if (erFisker) {
+    if (erFisker || erJordbruker) {
         return (
             <section className="mt-8">
                 <Label size="small" as="h3">
                     Jeg er sykmeldt som
                 </Label>
-                <BodyShort>Fisker</BodyShort>
+                <BodyShort>{svar}</BodyShort>
             </section>
         )
     }
