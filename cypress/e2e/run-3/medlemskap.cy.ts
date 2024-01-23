@@ -62,7 +62,9 @@ describe('Tester medlemskap spørsmål', () => {
             .findByRole('radio', { name: 'Jeg bodde der' })
             .check()
 
-        setPeriodeFraTil(12, 20, 1)
+        cy.get('input.navds-date__field-input').eq(2).type('12.12.2022')
+        cy.get('input.navds-date__field-input').eq(3).type('24.12.2022')
+
         klikkGaVidere()
     })
 
@@ -78,7 +80,8 @@ describe('Tester medlemskap spørsmål', () => {
         svarJaHovedsporsmal()
         velgDato(22)
         svarRadioGruppe('Er oppholdstillatelsen midlertidig eller permanent?', 'Midlertidig')
-        setPeriodeFraTil(12, 20)
+        cy.get('#2daa21bf-20ee-3b5a-97d3-37a90c593fa0_0_fom').type('12.12.2020')
+        cy.get('#2daa21bf-20ee-3b5a-97d3-37a90c593fa0_0_tom').type('24.12.2020')
         klikkGaVidere()
     })
 
