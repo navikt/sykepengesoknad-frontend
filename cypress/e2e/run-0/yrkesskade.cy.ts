@@ -45,9 +45,9 @@ describe('Tester yrkesskadesspørsmål', () => {
     })
 
     it('Kommer til spørsmål om yrkesskade', function () {
-        cy.get('main').findByRole('heading', { name: 'Godkjent yrkesskade', level: 2 }).should('be.visible')
+        cy.get('main').findByRole('heading', { name: 'Yrkesskade', level: 2 }).should('be.visible')
 
-        cy.findByText('Godkjente yrkesskader vi har registrert på deg:')
+        cy.findByText('Registrerte yrkesskader:')
             .should('be.visible')
             .then((p) => {
                 cy.wrap(p).next('ul').should('exist')
@@ -74,7 +74,9 @@ describe('Tester yrkesskadesspørsmål', () => {
             .findByRole('button', { name: 'Spørsmålet forklart' })
             .next()
             .within(() => {
-                cy.findByText('Svar ja, hvis du er sykmeldt på grunn av en godkjent yrkesskade.').should('be.visible')
+                cy.findByText(
+                    'Svar ja, hvis det nylig er sendt inn en skademelding som påvirker dette sykefraværet.',
+                ).should('be.visible')
             })
     })
 
