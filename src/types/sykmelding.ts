@@ -123,7 +123,7 @@ class SykmeldingStatus {
     statusEvent: StatusEvent
     arbeidsgiver?: ArbeidsgiverStatus
     sporsmalOgSvarListe: SporsmalOgSvar[]
-    brukerSvar: BrukerSvar
+    brukerSvar?: BrukerSvar
 
     constructor(sykmeldingStatus: any) {
         this.timestamp = dayjsToDate(sykmeldingStatus.timestamp)!

@@ -11,7 +11,7 @@ interface ArbeidssituasjonInfoProps {
 
 const ArbeidssituasjonInfo = ({ valgtSykmelding }: ArbeidssituasjonInfoProps) => {
     const arbeidssituasjon = hentArbeidssituasjon(valgtSykmelding)
-    const erFisker = valgtSykmelding.sykmeldingStatus.brukerSvar.arbeidssituasjon.svar === 'FISKER'
+    const erFisker = valgtSykmelding.sykmeldingStatus.brukerSvar?.arbeidssituasjon.svar === 'FISKER'
 
     if (erFisker) {
         return (
