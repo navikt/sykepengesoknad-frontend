@@ -3,7 +3,7 @@ import { RSSporsmal } from '../../../../types/rs-types/rs-sporsmal'
 export const yrkesskadeV2Sporsmal: RSSporsmal = {
     id: '123123654612312',
     tag: 'YRKESSKADE_V2',
-    sporsmalstekst: `Skyldes dette sykefraværet en eller flere av disse godkjente yrkesskadene?`,
+    sporsmalstekst: `Skyldes dette sykefraværet en yrkesskade?`,
     undertekst: null,
     svartype: 'JA_NEI',
     min: null,

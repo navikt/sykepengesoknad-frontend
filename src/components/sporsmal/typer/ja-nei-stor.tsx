@@ -68,7 +68,6 @@ const JaNeiStor = ({ sporsmal }: SpmProps) => {
         <>
             <div>
                 {skalHaInntektsbulletpoints && <Inntektsbulletpoints soknad={valgtSoknad} />}
-                {sporsmal.tag === 'YRKESSKADE_V2' && <Yrkesskadebulletpoints sporsmal={sporsmal} />}
 
                 <Controller
                     name={sporsmal.id}
@@ -94,6 +93,7 @@ const JaNeiStor = ({ sporsmal }: SpmProps) => {
                             <GuidepanelUnderSporsmalstekst sporsmal={sporsmal} key="ja-nei-stor-guidepanel" />
 
                             <EkspanderbarHjelp sporsmal={sporsmal} key="ja-nei-stor-hjelp" />
+                            {sporsmal.tag === 'YRKESSKADE_V2' && <Yrkesskadebulletpoints sporsmal={sporsmal} />}
 
                             <JaNeiStyle>
                                 <Radio
@@ -132,8 +132,6 @@ const JaNeiStor = ({ sporsmal }: SpmProps) => {
                         )}
                     </BodyLong>
                 )}
-
-                <YrkesskadeInfo sporsmal={sporsmal} jaNeiSvar={watchJaNei} />
             </div>
 
             <div aria-live="assertive">
@@ -155,6 +153,7 @@ const JaNeiStor = ({ sporsmal }: SpmProps) => {
                                 </Alert>
                             )}
 
+                        <YrkesskadeInfo sporsmal={sporsmal} jaNeiSvar={watchJaNei} />
                         <PaskeferieInfo sporsmal={sporsmal} jaNeiSvar={watchJaNei} />
                     </>
                 </AnimateOnMount>

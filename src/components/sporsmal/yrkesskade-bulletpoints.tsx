@@ -7,7 +7,7 @@ export const Yrkesskadebulletpoints = ({ sporsmal }: { sporsmal: Sporsmal }) => 
     return (
         <>
             <Label as="p" className="mb-4 mt-10">
-                Godkjente yrkesskader vi har registrert på deg:
+                Registrerte yrkesskader:
             </Label>
             <ul className="mb-10">
                 {sporsmal.undersporsmal[0].undersporsmal.map((y, index) => {
