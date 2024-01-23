@@ -111,17 +111,26 @@ interface SporsmalOgSvar {
     shortName: SporsmalShortName
 }
 
+interface ArbeidssituasjonSvar {
+    svar: string
+}
+interface BrukerSvar {
+    arbeidssituasjon: ArbeidssituasjonSvar
+}
+
 class SykmeldingStatus {
     timestamp: Date
     statusEvent: StatusEvent
     arbeidsgiver?: ArbeidsgiverStatus
     sporsmalOgSvarListe: SporsmalOgSvar[]
+    brukerSvar: BrukerSvar
 
     constructor(sykmeldingStatus: any) {
         this.timestamp = dayjsToDate(sykmeldingStatus.timestamp)!
         this.statusEvent = sykmeldingStatus.statusEvent
         this.arbeidsgiver = sykmeldingStatus.arbeidsgiver
         this.sporsmalOgSvarListe = sykmeldingStatus.sporsmalOgSvarListe
+        this.brukerSvar = sykmeldingStatus.brukerSvar
     }
 }
 
