@@ -9,7 +9,7 @@ export function YrkesskadeInfo({ sporsmal, jaNeiSvar }: { sporsmal: Sporsmal; ja
             <Alert variant="info" data-cy="yrkesskade-info" className="mt-8">
                 <BodyShort spacing>
                     Dette betyr at du har en godkjent yrkesskade, eller har en påbegynt / nylig innsendt skademelding
-                    som påvirker dette sykefraværet.
+                    som er årsaken til dette sykefraværet.
                 </BodyShort>
                 <BodyShort>
                     En saksbehandler må gå gjennom saken din og vurdere om sykefraværet ditt er knyttet til en godkjent
