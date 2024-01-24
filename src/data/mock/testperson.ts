@@ -31,6 +31,7 @@ import { egenmeldingSykmeldingaPerson } from './data/personas/egenmeldingsdager-
 import { selvstendigNaringsdrivende, selvstendigNaringsdrivendeSendt } from './data/personas/naringsdrivende'
 import { korrigeringsfristUtloptPerson } from './data/personas/korrigeringsfrist-utlopt'
 import { medlemskapPerson } from './data/personas/medlemskap'
+import { fiskePerson } from './data/personas/fisker'
 
 type PersonaKey =
     | 'uten-data'
@@ -39,6 +40,7 @@ type PersonaKey =
     | 'reisetilskudd'
     | 'reisetilskudd-test'
     | 'frilanser'
+    | 'fisker'
     | 'behandlingsdager'
     | 'fremtidig'
     | 'utenlandsk-sykmelding'
@@ -84,6 +86,7 @@ export function testpersonerGruppert(): PersonaGroup {
             ['selvstendig-naringsdrivende']: jsonDeepCopy(selvstendigNaringsdrivende),
             ['selvstendig-naringsdrivende-sendt']: jsonDeepCopy(selvstendigNaringsdrivendeSendt),
             ['frilanser']: jsonDeepCopy(frilanserPerson),
+            ['fisker']: jsonDeepCopy(fiskePerson),
             ['behandlingsdager']: jsonDeepCopy(behandlingsdagerPerson),
             ['reisetilskudd']: jsonDeepCopy(reisetilskuddPerson),
             ['bare-utland']: jsonDeepCopy(utlandPerson),
