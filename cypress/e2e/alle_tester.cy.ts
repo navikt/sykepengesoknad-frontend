@@ -25,6 +25,7 @@ import './run-1/korrigering-ferie-spm-infotekst.cy'
 import './run-1/utkast-korrigering.cy'
 
 import './run-2/endring-uten-endring.cy'
+import './run-2/fisker.cy'
 import './run-2/fremtidig_soknad.cy'
 import './run-2/kvittering.cy'
 import './run-2/kontonummer.cy'
