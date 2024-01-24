@@ -114,8 +114,17 @@ interface SporsmalOgSvar {
 interface ArbeidssituasjonSvar {
     svar: string
 }
+interface FiskerSvar {
+    sporsmaltekst: string
+    svar: string
+}
+interface Fisker {
+    blad: FiskerSvar
+    lottOgHyre: FiskerSvar
+}
 interface BrukerSvar {
     arbeidssituasjon: ArbeidssituasjonSvar
+    fisker: Fisker
 }
 
 class SykmeldingStatus {

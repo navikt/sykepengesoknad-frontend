@@ -4,6 +4,7 @@ import React from 'react'
 import { hentArbeidssituasjon } from '../../utils/sykmelding-utils'
 import { tekst } from '../../utils/tekster'
 import { Sykmelding } from '../../types/sykmelding'
+import { camelCase } from '../../utils/camelCase'
 
 interface ArbeidssituasjonInfoProps {
     valgtSykmelding: Sykmelding
@@ -14,9 +15,9 @@ const ArbeidssituasjonInfo = ({ valgtSykmelding }: ArbeidssituasjonInfoProps) =>
     const erFisker = valgtSykmelding.sykmeldingStatus.brukerSvar?.arbeidssituasjon.svar === 'FISKER'
     const erJordbruker = valgtSykmelding.sykmeldingStatus.brukerSvar?.arbeidssituasjon.svar === 'JORDBRUKER'
     const arbeidssituasjonSvar = valgtSykmelding.sykmeldingStatus.brukerSvar?.arbeidssituasjon.svar || ''
-    const svar = arbeidssituasjonSvar?.charAt(0).toUpperCase() + arbeidssituasjonSvar?.slice(1)?.toLowerCase()
+    const svar = camelCase(arbeidssituasjonSvar)
 
-    if (erFisker || erJordbruker) {
+    if (erJordbruker) {
         return (
             <section className="mt-8">
                 <Label size="small" as="h3">
@@ -24,6 +25,34 @@ const ArbeidssituasjonInfo = ({ valgtSykmelding }: ArbeidssituasjonInfoProps) =>
                 </Label>
                 <BodyShort>{svar}</BodyShort>
             </section>
+        )
+    }
+    if (erFisker) {
+        return (
+            <>
+                <section className="mt-8">
+                    <Label size="small" as="h3">
+                        Jeg er sykmeldt som
+                    </Label>
+                    <BodyShort>{svar}</BodyShort>
+                </section>
+                <section className="mt-8">
+                    <Label size="small" as="h3">
+                        Valgt blad
+                    </Label>
+                    <BodyShort>
+                        {camelCase(valgtSykmelding.sykmeldingStatus.brukerSvar?.fisker.blad.svar || '')}
+                    </BodyShort>
+                </section>
+                <section className="mt-8">
+                    <Label size="small" as="h3">
+                        {valgtSykmelding.sykmeldingStatus.brukerSvar?.fisker.lottOgHyre.sporsmaltekst}
+                    </Label>
+                    <BodyShort>
+                        {camelCase(valgtSykmelding.sykmeldingStatus.brukerSvar?.fisker.lottOgHyre.svar || '')}
+                    </BodyShort>
+                </section>
+            </>
         )
     }
 
