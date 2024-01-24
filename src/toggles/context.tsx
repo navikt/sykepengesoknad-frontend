@@ -10,7 +10,7 @@ export function FlagProvider({ toggles, children }: PropsWithChildren<{ toggles:
     useEffect(() => {
         if (toggles == null) {
             if (window.location.pathname !== '/') {
-                logger.error("Toggles are not SSR'd, falling back to default toggles.")
+                logger.error(`Toggles are not SSR'd, falling back to default toggles. ${window.location.pathname}`)
             }
         }
     }, [toggles])
