@@ -92,7 +92,7 @@ describe('Tester arbeidsledigsøknad', () => {
             const punkter = [
                 'Du kan bare få sykepenger hvis det er din egen sykdom eller skade som hindrer deg i å jobbe. Sosiale eller økonomiske problemer gir ikke rett til sykepenger.',
                 'Du kan miste retten til sykepenger hvis du nekter å opplyse om din egen arbeidsevne, eller hvis du ikke tar imot behandling eller tilrettelegging.',
-                'Retten til sykepenger gjelder bare inntekt du har mottatt som lønn og betalt skatt av på sykmeldingstidspunktet.',
+                'Retten til sykepenger gjelder bare pensjonsgivende inntekt du har på sykmeldingstidspunktet.',
                 'NAV kan innhente opplysninger som er nødvendige for å behandle søknaden.',
                 'Fristen for å søke sykepenger er som hovedregel 3 måneder',
                 'Du kan endre svarene i denne søknaden opp til 12 måneder etter du sendte den inn første gangen.',
