@@ -28,6 +28,7 @@ import { MedlemskapOppholdUtenforEOSHjelpBody } from './medlemskap-opphold-utenf
 import { MedlemskapOppholdUtenforNorgeHjelpBody } from './medlemskap-opphold-utenfor-Norge-hjelp-body'
 import { MedlemskapOppholdstillatelseHjelpBody } from './medlemskap-oppholdstillatelse-hjelp-body'
 import { KjenteInntektkilderHjelpBody } from './kjente-inntektkilder'
+import { VarigEndring25prosent } from './varig-endring-25prosent'
 
 export const EkspanderbarHjelp = ({ sporsmal, mb }: { sporsmal: Sporsmal; mb?: string }) => {
     const { valgtSoknad } = useSoknadMedDetaljer()
@@ -98,6 +99,8 @@ export const EkspanderbarHjelp = ({ sporsmal, mb }: { sporsmal: Sporsmal; mb?: s
                 return <MedlemskapOppholdstillatelseHjelpBody />
             case 'KJENTE_INNTEKTSKILDER':
                 return <KjenteInntektkilderHjelpBody />
+            case 'INNTEKTSOPPLYSNINGER_VARIG_ENDRING_25_PROSENT':
+                return <VarigEndring25prosent />
             default:
                 if (harInnhold) {
                     return (
