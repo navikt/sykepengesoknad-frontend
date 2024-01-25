@@ -4,7 +4,7 @@ const BekreftelsespunkterArbeidstakereTekster = {
     'vaer-klar-over-at.punkt-2':
         'Du kan miste retten til sykepenger hvis du nekter å opplyse om din egen arbeidsevne, eller hvis du ikke tar imot behandling eller tilrettelegging.',
     'vaer-klar-over-at.punkt-3':
-        'Retten til sykepenger gjelder bare inntekt du har mottatt som lønn og betalt skatt av på sykmeldingstidspunktet.',
+        'Retten til sykepenger gjelder bare pensjonsgivende inntekt du har på sykmeldingstidspunktet.',
     'vaer-klar-over-at.punkt-4': 'NAV kan innhente opplysninger som er nødvendige for å behandle søknaden.',
     'vaer-klar-over-at.punkt-5': 'Fristen for å søke sykepenger er som hovedregel 3 måneder',
     'vaer-klar-over-at.punkt-6':
