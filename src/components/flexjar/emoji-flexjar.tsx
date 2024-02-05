@@ -14,7 +14,6 @@ interface EmojiFlexjarProps {
     textRequired?: boolean
     flexjarsporsmal: string
     flexjartittel: string
-    app: string
     feedbackProps: Record<string, string | undefined | boolean>
 }
 
@@ -27,7 +26,6 @@ export const EmojiFlexjar = ({
     setThanksFeedback,
     flexjartittel,
     flexjarsporsmal,
-    app,
     feedbackProps,
 }: EmojiFlexjarProps) => {
     const feedbackButtonProps = {
@@ -45,7 +43,6 @@ export const EmojiFlexjar = ({
             getPlaceholder={getPlaceholder}
             flexjarsporsmal={flexjarsporsmal}
             flexjartittel={flexjartittel}
-            app={app}
             feedbackProps={feedbackProps}
         >
             <div className="flex w-full gap-2">

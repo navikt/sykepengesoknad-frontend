@@ -1,10 +1,12 @@
-import React, { useEffect, useRef, useState } from 'react'
+import React, { useCallback, useEffect, useRef, useState } from 'react'
 import { Alert, BodyShort, Button, Heading, Label, Textarea } from '@navikt/ds-react'
 import { FaceSmileIcon, MagnifyingGlassIcon } from '@navikt/aksel-icons'
 
-import UseFlexjarFeedback from '../../hooks/useFlexjarFeedback'
 import { cn } from '../../utils/tw-utils'
 import { logEvent } from '../amplitude/amplitude'
+
+import { UseOpprettFlexjarFeedback } from './queryhooks/useOpprettFlexjarFeedback'
+import { UseOppdaterFlexjarFeedback } from './queryhooks/useOppdaterFlexjarFeedback'
 
 interface FlexjarFellesProps {
     feedbackId: string
@@ -17,7 +19,6 @@ interface FlexjarFellesProps {
     textRequired?: boolean
     flexjarsporsmal: string
     flexjartittel: string
-    app: string
     feedbackProps: Record<string, string | undefined | boolean>
 }
 
@@ -32,16 +33,43 @@ export function FlexjarFelles({
     flexjarsporsmal,
     children,
     textRequired,
-    app,
     feedbackProps,
 }: FlexjarFellesProps) {
     const [textValue, setTextValue] = useState('')
     const [errorMsg, setErrorMsg] = useState<string | null>(null)
     const textAreaRef = useRef(null)
-    const { mutate: giFeedback } = UseFlexjarFeedback()
+    const { mutate: giFeedback, data, reset } = UseOpprettFlexjarFeedback()
+    const { mutate: oppdaterFeedback } = UseOppdaterFlexjarFeedback()
+    const fetchFeedback = useCallback(
+        async (knappeklikk?: () => void): Promise<boolean> => {
+            if (activeState === null) {
+                return false
+            }
 
+            const body = {
+                feedback: textValue,
+                feedbackId: feedbackId,
+                svar: activeState,
+                ...feedbackProps,
+            }
+            if (data?.id) {
+                oppdaterFeedback({ body, id: data.id, cb: knappeklikk })
+                return true
+            } else {
+                giFeedback(body)
+                return false
+            }
+        },
+        [activeState, data?.id, feedbackId, feedbackProps, giFeedback, oppdaterFeedback, textValue],
+    )
     useEffect(() => {
         setErrorMsg(null)
+    }, [activeState])
+
+    useEffect(() => {
+        fetchFeedback().catch()
+        // kan ikke bruke fetchFeedback som dependency, da blir det dobble kall
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [activeState])
 
     const feedbackPropsString = JSON.stringify(feedbackProps)
@@ -49,27 +77,12 @@ export function FlexjarFelles({
         setErrorMsg(null)
         setTextValue('')
         setActiveState(null)
-    }, [feedbackPropsString, setActiveState, feedbackId])
-
-    const fetchFeedback = async (): Promise<void> => {
-        if (activeState === null) {
-            return
-        }
-
-        const body = {
-            feedback: textValue,
-            feedbackId: feedbackId,
-            svar: activeState,
-            app,
-            ...feedbackProps,
-        }
-
-        giFeedback(body)
-    }
+        reset()
+    }, [feedbackPropsString, setActiveState, feedbackId, reset])
 
     const sendTilbakemelding = 'Send tilbakemelding'
 
-    const handleSend = async () => {
+    const handleSend = async (p: () => void) => {
         if (textRequired && textValue === '') {
             setErrorMsg('Tilbakemeldingen kan ikke være tom. Legg til tekst i feltet.')
             return
@@ -80,12 +93,14 @@ export function FlexjarFelles({
             svar: activeState + '',
             tekst: sendTilbakemelding,
         })
-        await fetchFeedback()
-        setErrorMsg(null)
+        const oppdatert = await fetchFeedback(p)
+        if (oppdatert) {
+            setErrorMsg(null)
 
-        setActiveState(null)
-        setTextValue('')
-        setThanksFeedback(true)
+            setActiveState(null)
+            setTextValue('')
+            setThanksFeedback(true)
+        }
     }
 
     return (
@@ -118,9 +133,9 @@ export function FlexjarFelles({
                                     error={errorMsg}
                                     label={getPlaceholder()}
                                     onKeyDown={async (e) => {
-                                        if (e.key === 'Enter' && !e.shiftKey) {
+                                        if (e.key === 'Enter' && e.ctrlKey) {
                                             e.preventDefault()
-                                            await handleSend()
+                                            await handleSend(() => reset())
                                         }
                                     }}
                                     value={textValue}
@@ -142,7 +157,7 @@ export function FlexjarFelles({
                                     variant="secondary-neutral"
                                     onClick={async (e) => {
                                         e.preventDefault()
-                                        await handleSend()
+                                        await handleSend(() => reset())
                                     }}
                                 >
                                     {sendTilbakemelding}

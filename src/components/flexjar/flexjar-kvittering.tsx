@@ -20,7 +20,6 @@ export const FlexjarKvittering = () => {
             getPlaceholder={() => 'Fortell oss om din opplevelse (valgfritt)'}
             flexjarsporsmal="Hvordan opplevde du denne søknaden?"
             flexjartittel="Hjelp oss med å gjøre søknaden bedre"
-            app="sykepengesoknad-frontend"
             feedbackProps={{
                 soknadstype: valgtSoknad?.soknadstype.toString(),
             }}
