@@ -52,7 +52,6 @@ export const FlexjarSporsmal = ({ soknad, sporsmal, steg }: FlexjarSporsmalProps
             thanksFeedback={thanksFeedback}
             setThanksFeedback={setThanksFeedback}
             getPlaceholder={getPlaceholder}
-            app="sykepengesoknad-frontend"
             feedbackProps={{
                 soknadstype: soknad?.soknadstype.toString(),
                 sporsmal: sporsmal?.tag.toString(),
