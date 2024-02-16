@@ -25,9 +25,9 @@ describe('Tester feilsituasjoner ', () => {
 
         it('Vi får se en feilmelding', function () {
             cy.contains('Ooops! Her har det skjedd noe rart')
-            cy.contains('Vennligst prøv igjen eller forsøk å laste inn siden på nytt')
+            cy.contains('Vennligst prøv å svare på nytt, eller forsøk å laste inn siden på nytt')
 
-            cy.contains('Last inn siden på nytt').click()
+            cy.contains('Gå tilbake til listen over alle søknader').click()
             cy.get('.navds-heading--large').should('be.visible').and('have.text', 'Søknader')
         })
     })
@@ -52,9 +52,20 @@ describe('Tester feilsituasjoner ', () => {
 
         it('Vi får se en feilmelding', function () {
             cy.contains('Ooops! Her har det skjedd noe rart')
-            cy.contains('Vennligst prøv igjen eller forsøk å laste inn siden på nytt')
+            cy.contains('Vennligst prøv å svare på nytt, eller forsøk å laste inn siden på nytt')
 
             cy.contains('Last inn siden på nytt').click()
+            cy.url().should('include', `${soknadSomTriggerFeilStatusForOppdaterSporsmal.id}/1`)
+        })
+
+        it('Vi får se en feilmelding', function () {
+            cy.get('.navds-checkbox__label').click()
+            cy.contains('Gå videre').click()
+
+            cy.contains('Ooops! Her har det skjedd noe rart')
+            cy.contains('Vennligst prøv å svare på nytt, eller forsøk å laste inn siden på nytt')
+
+            cy.contains('Gå tilbake til listen over alle søknader').click()
             cy.get('.navds-heading--large').should('be.visible').and('have.text', 'Søknader')
         })
     })
@@ -103,6 +114,27 @@ describe('Tester feilsituasjoner ', () => {
                 Cypress.config().baseUrl +
                     '/syk/sykepengesoknad/soknader/9157b65a-0372-4657-864c-195037349df5/1?testperson=http-400-ved-send-soknad',
             )
+        })
+    })
+
+    describe('Tester 404 ved PUT av søknad som ble klippet bort mens brukeren svarte på den', () => {
+        before(() => {
+            cy.visit(
+                `/syk/sykepengesoknad/soknader/3fa85f64-5717-4562-b3fc-2c963f66afa6/2?testperson=http-404-ved-put-soknad`,
+            )
+            cy.get('.navds-heading--large').should('be.visible').and('contain.text', 'Søknad om sykepenger')
+        })
+        it('Når vi oppdaterer søknad som får 404, får de en alert med knapp om å gå tilbake til listen over alle søknader', function () {
+            cy.url().should('include', `3fa85f64-5717-4562-b3fc-2c963f66afa6/2`)
+
+            svarNeiHovedsporsmal()
+            klikkGaVidere(true)
+            cy.contains('Ooops! Her har det skjedd noe rart')
+            cy.contains('Vennligst prøv å svare på nytt, eller forsøk å laste inn siden på nytt')
+
+            cy.contains('Gå tilbake til listen over alle søknader').click()
+            cy.get('.navds-heading--large').should('be.visible').and('have.text', 'Søknader')
+            cy.url().should('include', '/syk/sykepengesoknad')
         })
     })
 
