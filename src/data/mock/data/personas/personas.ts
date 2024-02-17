@@ -47,8 +47,11 @@ export const får400vedSendSoknad: Persona = {
     sykmeldinger: [syk7],
     beskrivelse: 'Gir 400 feil ved sending av søknad',
 }
-export const får404vedPutSoknad: Persona = {
-    soknader: [kortSoknadMedID('3fa85f64-5717-4562-b3fc-2c963f66afa6')],
+export const får404vedPutOgGetSoknad: Persona = {
+    soknader: [
+        kortSoknadMedID('3fa85f64-5717-4562-b3fc-2c963f66afa6'),
+        kortSoknadMedID('5a7d403b-df78-491e-86f0-bf3f25408765'),
+    ],
     sykmeldinger: [syk7],
     beskrivelse: 'Gir 404 feil ved oppdatering av svar på søknad',
 }

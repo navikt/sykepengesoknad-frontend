@@ -224,6 +224,9 @@ export async function mockApi(req: NextApiRequest, res: NextApiResponse) {
         if (!soknad) {
             return sendJson({}, 404)
         }
+        if (soknadId === '5a7d403b-df78-491e-86f0-bf3f25408765') {
+            return sendJson({}, 404)
+        }
         return soknad
     }
 

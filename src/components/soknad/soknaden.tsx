@@ -21,6 +21,7 @@ import { useSoknadMedDetaljer } from '../../hooks/useSoknadMedDetaljer'
 import { useToggle } from '../../toggles/context'
 import { SkeletonSporsmalForm } from '../sporsmal/sporsmal-form/skeleton-sporsmal-form'
 import { SlikBehandlerNavPersonopplysningene } from '../soknad-intro/slik-behandler-nav-personopplysningene'
+import { FeilStateView } from '../feil/refresh-hvis-feil-state'
 
 import { urlTilSoknad } from './soknad-link'
 import { SporsmalTittel } from './sporsmal-tittel'
@@ -28,7 +29,8 @@ import { SoknadHeader } from './soknad-header'
 
 export const Soknaden = () => {
     const router = useRouter()
-    const { erUtenlandssoknad, stegId, stegNo, valgtSoknad, soknader, sykmeldinger, spmIndex } = useSoknadMedDetaljer()
+    const { erUtenlandssoknad, stegId, stegNo, valgtSoknad, soknader, sykmeldinger, spmIndex, valgtSoknadError } =
+        useSoknadMedDetaljer()
 
     useUpdateBreadcrumbs(() => [{ ...soknadBreadcrumb, handleInApp: true }], [])
 
@@ -86,6 +88,7 @@ export const Soknaden = () => {
     const erForstesidenMedReisetilskudd = stegNo === 1 && (erReisetilskuddsoknad || erGradertReisetilskuddsoknad)
     return (
         <>
+            {valgtSoknadError && <FeilStateView></FeilStateView>}
             <SoknadHeader />
 
             {!erForstesiden && <Fremdriftsbar />}

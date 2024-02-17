@@ -25,7 +25,7 @@ describe('Tester feilsituasjoner ', () => {
 
         it('Vi får se en feilmelding', function () {
             cy.contains('Ooops! Her har det skjedd noe rart')
-            cy.contains('Vennligst prøv å svare på nytt, eller forsøk å laste inn siden på nytt')
+            cy.contains('Vennligst last inn siden på nytt eller gå tilbake til listen over aller søknader')
 
             cy.contains('Gå tilbake til listen over alle søknader').click()
             cy.get('.navds-heading--large').should('be.visible').and('have.text', 'Søknader')
@@ -52,7 +52,7 @@ describe('Tester feilsituasjoner ', () => {
 
         it('Vi får se en feilmelding', function () {
             cy.contains('Ooops! Her har det skjedd noe rart')
-            cy.contains('Vennligst prøv å svare på nytt, eller forsøk å laste inn siden på nytt')
+            cy.contains('Vennligst last inn siden på nytt eller gå tilbake til listen over aller søknader')
 
             cy.contains('Last inn siden på nytt').click()
             cy.url().should('include', `${soknadSomTriggerFeilStatusForOppdaterSporsmal.id}/1`)
@@ -63,7 +63,7 @@ describe('Tester feilsituasjoner ', () => {
             cy.contains('Gå videre').click()
 
             cy.contains('Ooops! Her har det skjedd noe rart')
-            cy.contains('Vennligst prøv å svare på nytt, eller forsøk å laste inn siden på nytt')
+            cy.contains('Vennligst last inn siden på nytt eller gå tilbake til listen over aller søknader')
 
             cy.contains('Gå tilbake til listen over alle søknader').click()
             cy.get('.navds-heading--large').should('be.visible').and('have.text', 'Søknader')
@@ -130,7 +130,24 @@ describe('Tester feilsituasjoner ', () => {
             svarNeiHovedsporsmal()
             klikkGaVidere(true)
             cy.contains('Ooops! Her har det skjedd noe rart')
-            cy.contains('Vennligst prøv å svare på nytt, eller forsøk å laste inn siden på nytt')
+            cy.contains('Vennligst last inn siden på nytt eller gå tilbake til listen over aller søknader')
+
+            cy.contains('Gå tilbake til listen over alle søknader').click()
+            cy.get('.navds-heading--large').should('be.visible').and('have.text', 'Søknader')
+            cy.url().should('include', '/syk/sykepengesoknad')
+        })
+    })
+
+    describe('Tester 404 ved GET av søknad som ble klippet bort mens brukeren svarte på den', () => {
+        before(() => {
+            cy.visit(`/syk/sykepengesoknad/soknader?testperson=http-404-ved-put-soknad`)
+        })
+        it('Når vi laster inn søknad som får 404, får de en alert med knapp om å gå tilbake til listen over alle søknader', function () {
+            cy.contains('Nye søknader').parent().parent().find('a').eq(1).click()
+            cy.url().should('include', `5a7d403b-df78-491e-86f0-bf3f25408765/1`)
+
+            cy.contains('Ooops! Her har det skjedd noe rart')
+            cy.contains('Vennligst last inn siden på nytt eller gå tilbake til listen over aller søknader')
 
             cy.contains('Gå tilbake til listen over alle søknader').click()
             cy.get('.navds-heading--large').should('be.visible').and('have.text', 'Søknader')

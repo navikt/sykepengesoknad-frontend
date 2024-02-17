@@ -14,7 +14,11 @@ export function useSoknadMedDetaljer() {
 
     const soknadId = soknadIdUnsafe ? uuid.stringify(uuid.parse(soknadIdUnsafe)) : undefined
 
-    const { data: valgtSoknad, isLoading: valgtSoknadLaster } = useSoknad(soknadId, soknadId !== undefined)
+    const {
+        data: valgtSoknad,
+        isLoading: valgtSoknadLaster,
+        error: valgtSoknadError,
+    } = useSoknad(soknadId, soknadId !== undefined)
     const { data: soknader, isLoading: soknaderLaster } = useSoknader()
     const { data: sykmeldinger, isLoading: sykmeldingerLaster } = useSykmeldinger()
     const { data: valgtSykmelding } = useSykmelding(valgtSoknad?.sykmeldingId)
@@ -37,5 +41,6 @@ export function useSoknadMedDetaljer() {
         valgtSoknadLaster,
         erUtenlandssoknad,
         stegId,
+        valgtSoknadError,
     }
 }
