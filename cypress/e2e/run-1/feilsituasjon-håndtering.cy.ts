@@ -27,8 +27,6 @@ describe('Tester feilsituasjoner ', () => {
             cy.contains('Ooops! Her har det skjedd noe rart')
             cy.contains('Gå tilbake til listen over alle søknader').should('not.exist')
             cy.contains('Last inn siden på nytt').click()
-            //TODO: Tidligere ble brukeren sendt tilbake til alle søknader ved trykk på last inn på nytt knappen, skal det være sånn?
-            // cy.get('.navds-heading--large').should('be.visible').and('have.text', 'Søknader')
             cy.url().should('include', `${soknadSomTriggerSporsmalFinnesIkkeISoknad.id}/1`)
         })
     })
@@ -64,8 +62,6 @@ describe('Tester feilsituasjoner ', () => {
             cy.contains('Ooops! Her har det skjedd noe rart')
             cy.contains('Gå tilbake til listen over alle søknader').should('not.exist')
             cy.contains('Last inn siden på nytt').click()
-            //TODO: Tidligere ble brukeren sendt tilbake til alle søknader ved trykk på last inn på nytt knappen, skal det være sånn?
-            // cy.get('.navds-heading--large').should('be.visible').and('have.text', 'Søknader')
             cy.url().should('include', `${soknadSomTriggerFeilStatusForOppdaterSporsmal.id}/1`)
         })
     })
