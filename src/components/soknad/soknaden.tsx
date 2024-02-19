@@ -88,7 +88,7 @@ export const Soknaden = () => {
     const erForstesidenMedReisetilskudd = stegNo === 1 && (erReisetilskuddsoknad || erGradertReisetilskuddsoknad)
     return (
         <>
-            {valgtSoknadError && <FeilStateView></FeilStateView>}
+            {valgtSoknadError && <FeilStateView feilmelding={valgtSoknadError?.status}></FeilStateView>}
             <SoknadHeader />
 
             {!erForstesiden && <Fremdriftsbar />}

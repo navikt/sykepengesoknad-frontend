@@ -25,10 +25,11 @@ describe('Tester feilsituasjoner ', () => {
 
         it('Vi får se en feilmelding', function () {
             cy.contains('Ooops! Her har det skjedd noe rart')
-            cy.contains('Vennligst last inn siden på nytt eller gå tilbake til listen over aller søknader')
-
-            cy.contains('Gå tilbake til listen over alle søknader').click()
-            cy.get('.navds-heading--large').should('be.visible').and('have.text', 'Søknader')
+            cy.contains('Gå tilbake til listen over alle søknader').should('not.exist')
+            cy.contains('Last inn siden på nytt').click()
+            //TODO: Tidligere ble brukeren sendt tilbake til alle søknader ved trykk på last inn på nytt knappen, skal det være sånn?
+            // cy.get('.navds-heading--large').should('be.visible').and('have.text', 'Søknader')
+            cy.url().should('include', `${soknadSomTriggerSporsmalFinnesIkkeISoknad.id}/1`)
         })
     })
 
@@ -52,8 +53,6 @@ describe('Tester feilsituasjoner ', () => {
 
         it('Vi får se en feilmelding', function () {
             cy.contains('Ooops! Her har det skjedd noe rart')
-            cy.contains('Vennligst last inn siden på nytt eller gå tilbake til listen over aller søknader')
-
             cy.contains('Last inn siden på nytt').click()
             cy.url().should('include', `${soknadSomTriggerFeilStatusForOppdaterSporsmal.id}/1`)
         })
@@ -63,10 +62,11 @@ describe('Tester feilsituasjoner ', () => {
             cy.contains('Gå videre').click()
 
             cy.contains('Ooops! Her har det skjedd noe rart')
-            cy.contains('Vennligst last inn siden på nytt eller gå tilbake til listen over aller søknader')
-
-            cy.contains('Gå tilbake til listen over alle søknader').click()
-            cy.get('.navds-heading--large').should('be.visible').and('have.text', 'Søknader')
+            cy.contains('Gå tilbake til listen over alle søknader').should('not.exist')
+            cy.contains('Last inn siden på nytt').click()
+            //TODO: Tidligere ble brukeren sendt tilbake til alle søknader ved trykk på last inn på nytt knappen, skal det være sånn?
+            // cy.get('.navds-heading--large').should('be.visible').and('have.text', 'Søknader')
+            cy.url().should('include', `${soknadSomTriggerFeilStatusForOppdaterSporsmal.id}/1`)
         })
     })
 
@@ -130,8 +130,6 @@ describe('Tester feilsituasjoner ', () => {
             svarNeiHovedsporsmal()
             klikkGaVidere(true)
             cy.contains('Ooops! Her har det skjedd noe rart')
-            cy.contains('Vennligst last inn siden på nytt eller gå tilbake til listen over aller søknader')
-
             cy.contains('Gå tilbake til listen over alle søknader').click()
             cy.get('.navds-heading--large').should('be.visible').and('have.text', 'Søknader')
             cy.url().should('include', '/syk/sykepengesoknad')
@@ -147,7 +145,7 @@ describe('Tester feilsituasjoner ', () => {
             cy.url().should('include', `5a7d403b-df78-491e-86f0-bf3f25408765/1`)
 
             cy.contains('Ooops! Her har det skjedd noe rart')
-            cy.contains('Vennligst last inn siden på nytt eller gå tilbake til listen over aller søknader')
+            cy.contains('Last inn siden på nytt').should('not.exist')
 
             cy.contains('Gå tilbake til listen over alle søknader').click()
             cy.get('.navds-heading--large').should('be.visible').and('have.text', 'Søknader')

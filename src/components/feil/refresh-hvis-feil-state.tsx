@@ -1,34 +1,33 @@
-import { Alert, BodyShort, Button, Heading } from '@navikt/ds-react'
+import { Alert, Button, Heading } from '@navikt/ds-react'
 import React from 'react'
 
 import { tekst } from '../../utils/tekster'
 
-export function FeilStateView() {
+interface FeilStateProps {
+    feilmelding?: number
+}
+export function FeilStateView({ feilmelding }: FeilStateProps) {
+    const visReload = feilmelding !== 404
     return (
         <div aria-live="polite">
             <Alert variant="error" className="mt-4">
                 <Heading level="1" size="small">
                     {tekst('feilstate.tittel')}
                 </Heading>
-                <BodyShort>{tekst('feilstate.alert')}</BodyShort>
                 <Button
                     className="mt-4 bg-white"
                     variant="secondary"
                     type="button"
                     size="small"
-                    onClick={() => window.location.reload()}
+                    onClick={() => {
+                        if (visReload) {
+                            window.location.reload()
+                        } else {
+                            window.location.href = '/syk/sykepengesoknad'
+                        }
+                    }}
                 >
-                    {tekst('feilstate.refresh')}
-                </Button>
-                <br />
-                <Button
-                    className="mt-4 bg-white"
-                    variant="secondary"
-                    type="button"
-                    size="small"
-                    onClick={() => (window.location.href = '/syk/sykepengesoknad')}
-                >
-                    {tekst('feilstate.tilbake')}
+                    {visReload ? tekst('feilstate.refresh') : tekst('feilstate.tilbake')}
                 </Button>
             </Alert>
         </div>

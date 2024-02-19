@@ -178,7 +178,9 @@ const SporsmalForm = ({ sporsmal }: SpmProps) => {
                             <FeilOppsummering valgtSoknad={valgtSoknad!} sporsmal={sporsmal!} sendError={sendError} />
                         ))}
 
-                    {oppdaterError && !oppdatererSporsmal && <FeilStateView></FeilStateView>}
+                    {oppdaterError && !oppdatererSporsmal && (
+                        <FeilStateView feilmelding={oppdaterError?.status}></FeilStateView>
+                    )}
                     <Knapperad poster={oppdatererSporsmal || senderSoknad} />
                 </form>
             </FormProvider>
