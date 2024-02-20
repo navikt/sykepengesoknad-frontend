@@ -18,11 +18,11 @@ export const værKlarOverAt = (): RSSporsmal => {
     }
 }
 
-export const nyVærKlarOverAt = (utland = false): RSSporsmal => {
+export const nyVærKlarOverAt = (): RSSporsmal => {
     return {
         id: '1623832',
         tag: 'TIL_SLUTT',
-        sporsmalstekst: utland ? 'Før du reiser ber vi deg bekrefte' : 'Viktig å være klar over:',
+        sporsmalstekst: 'Viktig å være klar over:',
         undertekst: null,
         svartype: 'BEKREFTELSESPUNKTER',
         min: null,
