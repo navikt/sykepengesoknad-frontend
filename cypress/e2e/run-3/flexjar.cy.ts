@@ -68,6 +68,7 @@ describe('Tester flexjar', () => {
         svarNeiHovedsporsmal()
         klikkGaVidere()
         besvarKjenteInntektskilder()
+        cy.contains('Har du andre inntektskilder enn nevnt over?')
         svarNeiHovedsporsmal()
         klikkGaVidere()
         svarNeiHovedsporsmal()
